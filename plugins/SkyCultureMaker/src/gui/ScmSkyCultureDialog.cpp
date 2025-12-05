@@ -183,7 +183,7 @@ void ScmSkyCultureDialog::createDialogContent()
 
 	// Geographical Location Tab
 
-	initSkycultureTime();
+	initSkyCultureTime();
 
 	connect(ui->skyCultureTimeSlider, &QSlider::valueChanged, this, &ScmSkyCultureDialog::updateSkyCultureTimeValue);
 	connect(ui->skyCultureCurrentTimeSpinBox, &QSpinBox::valueChanged, this, &ScmSkyCultureDialog::updateSkyCultureTimeValue);
@@ -508,7 +508,7 @@ void ScmSkyCultureDialog::resetDialog()
 		ui->polygonCountValueLabel->setText(QString::number(0));
 		ui->cultureStartTimeValueLabel->setText("");
 		ui->cultureEndTimeValueLabel->setText("");
-		initSkycultureTime(); // reuse init function to set skyCultureTimeSlider / skyCultureCurrentTimeSpinBox
+		initSkyCultureTime(); // reuse init function to set skyCultureTimeSlider / skyCultureCurrentTimeSpinBox
 		ui->polygonInfoTreeWidget->clear(); // reset the location list
 		ui->scmGeoLocGraphicsView->reset(); // reset the map used for digitizing
 		updateRemovePolygonButton();
@@ -546,7 +546,7 @@ void ScmSkyCultureDialog::hideAddPolygon()
 	ui->scmGeoLocGraphicsView->setFocus();
 }
 
-void ScmSkyCultureDialog::initSkycultureTime()
+void ScmSkyCultureDialog::initSkyCultureTime()
 {
 	int minYear = -6500; // should be small enough so that new cultures can always be added (who knows what will be discovered in the future)
 	int maxYear = QDateTime::currentDateTime().date().year();
@@ -603,7 +603,7 @@ void ScmSkyCultureDialog::removeLocation()
 		// remove polygon from map (scmGeoLocGraphicsView)
 		ui->scmGeoLocGraphicsView->removePolygon(polygonInfoItem->getId());
 
-		// remove polygon from skyculture in maker
+		// remove polygon from skyCulture in maker
 		maker->removeSkyCultureLocation(polygonInfoItem->getId());
 
 		// remove polygon from list (polygonInfoTreeWidget)
@@ -645,7 +645,7 @@ void ScmSkyCultureDialog::removeLocation()
 		ui->cultureStartTimeValueLabel->setText(QString::number(startTime));
 		ui->cultureEndTimeValueLabel->setText(endTime);
 
-		// update the start/ end time of the skyculture
+		// update the startTime / endTime of the skyCulture
 		maker->setSkyCultureStartTime(ui->cultureStartTimeValueLabel->text().toInt());
 		maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text());
 	}
@@ -656,7 +656,7 @@ void ScmSkyCultureDialog::removeLocation()
 	}
 }
 
-void ScmSkyCultureDialog::selectLocation(QTreeWidgetItem *item, int column)
+void ScmSkyCultureDialog::selectLocation(QTreeWidgetItem *item)
 {
 	ScmPolygonInfoTreeItem *polygonInfoItem = static_cast<ScmPolygonInfoTreeItem *>(item);
 	ui->scmGeoLocGraphicsView->selectPolygon(polygonInfoItem->getId());
@@ -723,7 +723,7 @@ void ScmSkyCultureDialog::confirmAddPolygon()
 		}
 	}
 
-	// update the startTime / endTime of the skyculture
+	// update the startTime / endTime of the skyCulture
 	maker->setSkyCultureStartTime(ui->cultureStartTimeValueLabel->text().toInt());
 	maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text());
 

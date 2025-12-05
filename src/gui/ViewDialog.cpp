@@ -220,10 +220,10 @@ void ViewDialog::createDialogContent()
 		ui->skyCultureMapGraphicsView->selectCulture(text, startTime);
 	});
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureNameI18(QString)));
-	connect(ui->skyCultureMapGraphicsView, &SkycultureMapGraphicsView::cultureSelected, &StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::setCurrentSkyCultureNameI18);
+	connect(ui->skyCultureMapGraphicsView, &SkyCultureMapGraphicsView::cultureSelected, &StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::setCurrentSkyCultureNameI18);
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &ViewDialog::skyCultureChanged);
 
-	// skyculture list search bar
+	// skyCulture list search bar
 	connect(ui->culturesListSearchLineEdit, &QLineEdit::textChanged, this, &ViewDialog::filterSkyCultures);
 
 	// Connect and initialize checkboxes and other widgets
@@ -593,18 +593,18 @@ void ViewDialog::createDialogContent()
 	        this, &ViewDialog::updateDefaultSkyCulture);
 	updateDefaultSkyCulture();
 
-	initSkycultureTime();
+	initSkyCultureTime();
 
 	connect(ui->skyCultureTimeSlider, &QSlider::valueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
 	connect(ui->skyCultureCurrentTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
-	connect(ui->skyCultureMapGraphicsView, &SkycultureMapGraphicsView::timeValueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
+	connect(ui->skyCultureMapGraphicsView, &SkyCultureMapGraphicsView::timeValueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
 
 	connect(ui->skyCultureMinTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::changeMinTime);
 	connect(ui->skyCultureMaxTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::changeMaxTime);
 
 	connect(ui->applyTimeOnListCheckBox, &QCheckBox::toggled, this, &ViewDialog::filterSkyCultures);
-	connect(ui->useLocationForRotationCheckBox, &QCheckBox::toggled, this, &ViewDialog::initiateSkycultureMapRotation);
-	connect(StelApp::getInstance().getCore(), &StelCore::locationChanged, this, &ViewDialog::initiateSkycultureMapRotation);
+	connect(ui->useLocationForRotationCheckBox, &QCheckBox::toggled, this, &ViewDialog::initiateSkyCultureMapRotation);
+	connect(StelApp::getInstance().getCore(), &StelCore::locationChanged, this, &ViewDialog::initiateSkyCultureMapRotation);
 
 
 	configureSkyCultureCheckboxes();
@@ -1809,7 +1809,7 @@ void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
 
-void ViewDialog::initSkycultureTime()
+void ViewDialog::initSkyCultureTime()
 {
 	int minYear = ui->skyCultureCurrentTimeSpinBox->minimum();
 	int maxYear = QDateTime::currentDateTime().date().year();
@@ -2024,7 +2024,7 @@ int ViewDialog::modifiedDamerauLevenshteinDistance(const QString &source, const 
 	return d[sourceLength + (sourceLength + 1) * targetLength];
 }
 
-void ViewDialog::initiateSkycultureMapRotation()
+void ViewDialog::initiateSkyCultureMapRotation()
 {
 	ui->skyCultureMapGraphicsView->rotateMap(ui->useLocationForRotationCheckBox->isChecked());
 }

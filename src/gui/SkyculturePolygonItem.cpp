@@ -17,21 +17,21 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "SkyculturePolygonItem.hpp"
+#include "SkyCulturePolygonItem.hpp"
 #include <qgraphicsscene.h>
 #include <qpen.h>
 #include <qstyleoption.h>
 
-SkyculturePolygonItem::SkyculturePolygonItem(QString scId, int startTime, int endTime)
+SkyCulturePolygonItem::SkyCulturePolygonItem(QString scId, int startTime, int endTime)
 	: QGraphicsPolygonItem()
-	, skycultureId(scId)
+	, skyCultureId(scId)
 	, startTime(startTime)
 	, endTime(endTime)
-	, isHovered(false)
 	, lastSelectedState(false)
+	, isHovered(false)
 {
 	setFlag(QGraphicsItem::ItemIsSelectable);
-	setToolTip(skycultureId);
+	setToolTip(skyCultureId);
 	setAcceptHoverEvents(true);
 
 	defaultBrushColor = QColor(255, 0, 0, 100);
@@ -41,30 +41,30 @@ SkyculturePolygonItem::SkyculturePolygonItem(QString scId, int startTime, int en
 	selectedPenColor = QColor(255, 206, 27, 50);
 }
 
-void SkyculturePolygonItem::setSelectionState(bool newSelectionState)
+void SkyCulturePolygonItem::setSelectionState(bool newSelectionState)
 {
 	lastSelectedState = newSelectionState;
 	setSelected(newSelectionState);
 }
 
-bool SkyculturePolygonItem::existsAtPointInTime(int year) const
+bool SkyCulturePolygonItem::existsAtPointInTime(int year) const
 {
 	return startTime <= year and endTime >= year;
 }
 
-void SkyculturePolygonItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+void SkyCulturePolygonItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
 	isHovered = true;
 	QGraphicsPolygonItem::hoverEnterEvent(event);
 }
 
-void SkyculturePolygonItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+void SkyCulturePolygonItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
 	isHovered = false;
 	QGraphicsPolygonItem::hoverLeaveEvent(event);
 }
 
-QVariant SkyculturePolygonItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant SkyCulturePolygonItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
 	// prevent de-selection when hiding the item
 
@@ -76,7 +76,7 @@ QVariant SkyculturePolygonItem::itemChange(QGraphicsItem::GraphicsItemChange cha
 	return QGraphicsPolygonItem::itemChange(change, value);
 }
 
-void SkyculturePolygonItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void SkyCulturePolygonItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	QStyleOptionGraphicsItem opt = *option;
 

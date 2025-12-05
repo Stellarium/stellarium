@@ -25,21 +25,21 @@
 
 //! @class SkyCultureMapGraphicsView
 //! Special GraphicsView that shows a world map and several (culture) polygons
-class SkycultureMapGraphicsView : public QGraphicsView
+class SkyCultureMapGraphicsView : public QGraphicsView
 {
 	Q_OBJECT
 
 public:
-	SkycultureMapGraphicsView(QWidget *parent = nullptr);
+	SkyCultureMapGraphicsView(QWidget *parent = nullptr);
 
 public slots:
 	/**
 	 * @brief Selects a culture on the map and sets the current time if necessary.
 	 *
-	 * @param skycultureId Name of the skyculture.
-	 * @param startTime Start time of the skyculture.
+	 * @param skyCultureId Name of the skyCulture.
+	 * @param startTime Start time of the skyCulture.
 	 */
-	void selectCulture(const QString &skycultureId, int startTime);
+	void selectCulture(const QString &skyCultureId, int startTime);
 
 	/**
 	 * @brief Update the current time and visibility of all polygons.
@@ -56,7 +56,7 @@ public slots:
 	void rotateMap(bool applyRotation);
 
 signals:
-	void cultureSelected(const QString &skycultureId);
+	void cultureSelected(const QString &skyCultureId);
 	void timeValueChanged(int year);
 
 protected:
@@ -86,7 +86,7 @@ private:
 	/// Last position of the cursor.
 	QPoint mouseLastXY;
 
-	/// Name of the previously selected skyculture.
+	/// Name of the previously selected skyCulture.
 	QString oldSkyCulture;
 
 	/// Timeline for smooth zoom to the full extent of the base map.
@@ -146,7 +146,7 @@ private:
 	 *
 	 * @param Name of the culture to select.
 	 */
-	void selectAllCulturePolygon(const QString &skycultureId);
+	void selectAllCulturePolygon(const QString &skyCultureId);
 
 	/**
 	 * @brief Draws the basemap and all culture polygons.

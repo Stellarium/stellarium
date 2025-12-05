@@ -128,14 +128,11 @@ QStringList ScmMultiselectionComboBox::checkedItems() const
 {
 	QStringList items;
 
-	if (auto *currentModel = model)
+	const QModelIndex index = model->index(0, modelColumn(), rootModelIndex());
+	const QModelIndexList indexes = model->match(index, Qt::CheckStateRole, Qt::Checked, -1, Qt::MatchExactly);
+	for (const QModelIndex &index : indexes)
 	{
-		const QModelIndex index = model->index(0, modelColumn(), rootModelIndex());
-		const QModelIndexList indexes = model->match(index, Qt::CheckStateRole, Qt::Checked, -1, Qt::MatchExactly);
-		for (const QModelIndex &index : indexes)
-		{
-			items.append(index.data().toString());
-		}
+		items.append(index.data().toString());
 	}
 
 	return items;
@@ -145,14 +142,11 @@ QVariantList ScmMultiselectionComboBox::checkedItemsData() const
 {
 	QVariantList data;
 
-	if (auto *lModel = model)
+	const QModelIndex index = model->index(0, modelColumn(), rootModelIndex());
+	const QModelIndexList indexes = model->match(index, Qt::CheckStateRole, Qt::Checked, -1, Qt::MatchExactly);
+	for (const QModelIndex &index : indexes)
 	{
-		const QModelIndex index = lModel->index(0, modelColumn(), rootModelIndex());
-		const QModelIndexList indexes = lModel->match(index, Qt::CheckStateRole, Qt::Checked, -1, Qt::MatchExactly);
-		for (const QModelIndex &index : indexes)
-		{
-			data.append(index.data(Qt::UserRole));
-		}
+		data.append(index.data(Qt::UserRole));
 	}
 
 	return data;

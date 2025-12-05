@@ -22,15 +22,15 @@
 
 #include <QGraphicsPolygonItem>
 
-//! @class SkyculturePolygonItem
+//! @class SkyCulturePolygonItem
 //! Simple QGraphicsPolygonItem defined by a polygon, startTime and EndTime.
-class SkyculturePolygonItem : public QGraphicsPolygonItem
+class SkyCulturePolygonItem : public QGraphicsPolygonItem
 {
 
 public:
-	SkyculturePolygonItem(QString skycultureId, int startTime, int endTime);
+	SkyCulturePolygonItem(QString skyCultureId, int startTime, int endTime);
 
-	const QString& getSkycultureId() const { return skycultureId; }
+	const QString& getSkyCultureId() const { return skyCultureId; }
 
 	int getStartTime() const {return startTime;}
 	int getEndTime() const {return endTime;}
@@ -54,7 +54,7 @@ protected:
 	QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
 
 private:
-	QString skycultureId;
+	QString skyCultureId;
 	int startTime;
 	int endTime;
 	bool lastSelectedState;

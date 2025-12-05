@@ -93,7 +93,7 @@ private slots:
 	void updateSkyCultureTimeValue(int year);
 	void addLocation(const scm::CulturePolygon polygon);
 	void removeLocation();
-	void selectLocation(QTreeWidgetItem *item, int column);
+	void selectLocation(QTreeWidgetItem *item);
 	void showAddPolygon();
 	void hideAddPolygon();
 	void confirmAddPolygon();
@@ -153,7 +153,7 @@ private:
 	 * @brief Initialize the time of the map, slider and spinboxes.
 	 *
 	 */
-	void initSkycultureTime();
+	void initSkyCultureTime();
   
   /**
 	 * @brief Opens the constellation dialog with data for a given constellation.

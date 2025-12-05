@@ -80,7 +80,7 @@ private slots:
 	void changeMaxTime(int maxYear);
 	void updateSkyCultureTimeRange(int minYear, int maxYear);
 	void filterSkyCultures();
-	void initiateSkycultureMapRotation();
+	void initiateSkyCultureMapRotation();
 
 	void showAddRemoveLandscapesDialog();
 	// GZ I make this public to have it on a hotkey...
@@ -124,7 +124,7 @@ private slots:
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
-	void initSkycultureTime();
+	void initSkyCultureTime();
 	int modifiedDamerauLevenshteinDistance(const QString &source, const QString &target);
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.

@@ -17,18 +17,18 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "SkycultureMapGraphicsView.hpp"
-#include "SkyculturePolygonItem.hpp"
+#include "SkyCultureMapGraphicsView.hpp"
+#include "SkyCulturePolygonItem.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include <qjsonarray.h>
-#include <qgraphicssvgitem.h>
+#include <QGraphicsSvgItem>
 #include <qscrollbar.h>
 
 #include <QJsonObject>
 #include <QJsonDocument>
 
-SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
+SkyCultureMapGraphicsView::SkyCultureMapGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
 	, viewScrolling(false)
 	, mapMoved(false)
@@ -58,15 +58,15 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	zoomToDefaultTimer.setUpdateInterval(20);
 	zoomOnTargetTimer.setUpdateInterval(20);
 
-	connect(&zoomToDefaultTimer, &QTimeLine::valueChanged, this, &SkycultureMapGraphicsView::zoomToDefault);
+	connect(&zoomToDefaultTimer, &QTimeLine::valueChanged, this, &SkyCultureMapGraphicsView::zoomToDefault);
 	connect(&zoomToDefaultTimer, &QTimeLine::finished, &zoomOnTargetTimer, &QTimeLine::start);
-	connect(&zoomOnTargetTimer, &QTimeLine::valueChanged, this, &SkycultureMapGraphicsView::zoomOnTarget);
+	connect(&zoomOnTargetTimer, &QTimeLine::valueChanged, this, &SkyCultureMapGraphicsView::zoomOnTarget);
 
 	// draw basemap and culture polygons
 	drawMapContent();
 }
 
-void SkycultureMapGraphicsView::drawMapContent()
+void SkyCultureMapGraphicsView::drawMapContent()
 {
 	// delete all items
 	scene()->clear();
@@ -81,9 +81,9 @@ void SkycultureMapGraphicsView::drawMapContent()
 	loadCulturePolygons();
 }
 
-void SkycultureMapGraphicsView::loadCulturePolygons()
+void SkyCultureMapGraphicsView::loadCulturePolygons()
 {
-	// loop over all skycultures
+	// loop over all skyCultures
 	StelApp& app = StelApp::getInstance();
 	QMap<QString, QString> cultureIdToTranslationMap = app.getSkyCultureMgr().getDirToI18Map();
 	const QStringList cultureIds = cultureIdToTranslationMap.keys();
@@ -91,7 +91,7 @@ void SkycultureMapGraphicsView::loadCulturePolygons()
 	for (const auto &currentCulture : cultureIds)
 	{
 		// find path of file
-		const QString filePath = StelFileMgr::findFile("skycultures/" + currentCulture + "/territory.json");
+		const QString filePath = StelFileMgr::findFile("skyCultures/" + currentCulture + "/territory.json");
 		if (filePath.isEmpty())
 		{
 			qCritical() << "Failed to * find * [ " << currentCulture << " ] territory file in sky culture directory";
@@ -152,7 +152,7 @@ void SkycultureMapGraphicsView::loadCulturePolygons()
 					geometry.append(QPointF(pointArray[0].toDouble(), pointArray[1].toDouble()));
 				}
 
-				SkyculturePolygonItem *item = new SkyculturePolygonItem(cultureIdToTranslationMap.value(currentCulture), startTime, endTime);
+				SkyCulturePolygonItem *item = new SkyCulturePolygonItem(cultureIdToTranslationMap.value(currentCulture), startTime, endTime);
 				item->setPolygon(convertLatLonToMeter(geometry));
 				scene()->addItem(item);
 			}
@@ -160,7 +160,7 @@ void SkycultureMapGraphicsView::loadCulturePolygons()
 	}
 }
 
-void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *e)
+void SkyCultureMapGraphicsView::wheelEvent(QWheelEvent *e)
 {
 	qreal zoomFactor = pow(2.0, e->angleDelta().y() / 240.0);
 	qreal ctrZoomFactor = 0.0;
@@ -175,7 +175,7 @@ void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *e)
 	scaleView(zoomFactor);
 }
 
-void SkycultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
+void SkyCultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
 {
 	// reimplementation of default ScrollHandDrag in QGraphicsView
 	if (viewScrolling) {
@@ -195,7 +195,7 @@ void SkycultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
 	QGraphicsView::mouseMoveEvent(e);
 }
 
-void SkycultureMapGraphicsView::mousePressEvent(QMouseEvent *e)
+void SkyCultureMapGraphicsView::mousePressEvent(QMouseEvent *e)
 {
 	if ( e->button() == Qt::LeftButton )
 	{
@@ -206,7 +206,7 @@ void SkycultureMapGraphicsView::mousePressEvent(QMouseEvent *e)
 	e->setAccepted(true);
 }
 
-void SkycultureMapGraphicsView::mouseReleaseEvent( QMouseEvent *e )
+void SkyCultureMapGraphicsView::mouseReleaseEvent( QMouseEvent *e )
 {
 	setFocus();
 	QGraphicsView::mouseReleaseEvent(e);
@@ -214,11 +214,11 @@ void SkycultureMapGraphicsView::mouseReleaseEvent( QMouseEvent *e )
 	if (!mapMoved)
 	{
 		QGraphicsItem *currentTopmostMouseGrabberItem = itemAt(e->pos());
-		// the item is either SkyculturePolygonItem or QGraphicsSvgItem (background) ---> try to cast it to SkyculturePolygonItem
-		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(currentTopmostMouseGrabberItem);
+		// the item is either SkyCulturePolygonItem or QGraphicsSvgItem (background) ---> try to cast it to SkyCulturePolygonItem
+		SkyCulturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyCulturePolygonItem *>(currentTopmostMouseGrabberItem);
 		if (scPolyItem)
 		{
-			const QString currentSkyCulture = scPolyItem->getSkycultureId();
+			const QString currentSkyCulture = scPolyItem->getSkyCultureId();
 			// determine if a new culture is being selected
 			if (oldSkyCulture != currentSkyCulture)
 			{
@@ -241,7 +241,7 @@ void SkycultureMapGraphicsView::mouseReleaseEvent( QMouseEvent *e )
 	}
 }
 
-void SkycultureMapGraphicsView::showEvent(QShowEvent *e)
+void SkyCultureMapGraphicsView::showEvent(QShowEvent *e)
 {
 	// fit the base map to the current view when the widget is first shown
 	// (This cannot be done beforehand because the calculation is based on the current size of the viewPort.
@@ -258,7 +258,7 @@ void SkycultureMapGraphicsView::showEvent(QShowEvent *e)
 	QGraphicsView::showEvent(e);
 }
 
-void SkycultureMapGraphicsView::scaleView(double factor)
+void SkyCultureMapGraphicsView::scaleView(double factor)
 {
 	// calculate requested zoom before executing the zoom operation to limit the min / max zoom level
 	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
@@ -269,7 +269,7 @@ void SkycultureMapGraphicsView::scaleView(double factor)
 	scale(factor, factor);
 }
 
-QList<QPointF> SkycultureMapGraphicsView::convertLatLonToMeter(const QList<QPointF> &latLonCoordinates)
+QList<QPointF> SkyCultureMapGraphicsView::convertLatLonToMeter(const QList<QPointF> &latLonCoordinates)
 {
 	QList<QPointF> meter_coords;
 
@@ -283,7 +283,7 @@ QList<QPointF> SkycultureMapGraphicsView::convertLatLonToMeter(const QList<QPoin
 	return convertMeterToView(meter_coords);
 }
 
-QList<QPointF> SkycultureMapGraphicsView::convertMeterToView(const QList<QPointF> &meterCoordinates)
+QList<QPointF> SkyCultureMapGraphicsView::convertMeterToView(const QList<QPointF> &meterCoordinates)
 {
 	QList<QPointF> view_coords;
 
@@ -301,13 +301,13 @@ QList<QPointF> SkycultureMapGraphicsView::convertMeterToView(const QList<QPointF
 	return view_coords;
 }
 
-void SkycultureMapGraphicsView::selectAllCulturePolygon(const QString &skycultureId)
+void SkyCultureMapGraphicsView::selectAllCulturePolygon(const QString &skyCultureId)
 {
 	const auto itemList = scene()->items();
 	for (const auto &item : itemList)
 	{
-		// make sure the current item is a SkyculturePolygonItem
-		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
+		// make sure the current item is a SkyCulturePolygonItem
+		SkyCulturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyCulturePolygonItem *>(item);
 		if (!scPolyItem)
 		{
 			continue;
@@ -316,7 +316,7 @@ void SkycultureMapGraphicsView::selectAllCulturePolygon(const QString &skycultur
 		// by default set selection to false
 		scPolyItem->setSelectionState(false);
 
-		if (skycultureId == scPolyItem->getSkycultureId())
+		if (skyCultureId == scPolyItem->getSkyCultureId())
 		{
 			// items can't be selected when hidden
 			if (!scPolyItem->isVisible())
@@ -333,7 +333,7 @@ void SkycultureMapGraphicsView::selectAllCulturePolygon(const QString &skycultur
 	}
 }
 
-void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId, int startTime)
+void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int startTime)
 {
 	QList<QGraphicsItem *> currentTimeItems = QList<QGraphicsItem *>();
 	QList<QGraphicsItem *> startTimeItems = QList<QGraphicsItem *>();
@@ -341,14 +341,14 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId, int s
 	const auto itemList = scene()->items();
 	for(const auto &item : itemList)
 	{
-		// cast QGraphicsItem to SkyculturePolygonItem --> if the item is not a SkyculturePolygonItem: skip it to prevent errors
-		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
+		// cast QGraphicsItem to SkyCulturePolygonItem --> if the item is not a SkyCulturePolygonItem: skip it to prevent errors
+		SkyCulturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyCulturePolygonItem *>(item);
 		if(!scPolyItem)
 		{
 			continue;
 		}
 
-		if(skycultureId == scPolyItem->getSkycultureId())
+		if(skyCultureId == scPolyItem->getSkyCultureId())
 		{
 			if (scPolyItem->existsAtPointInTime(currentYear))
 			{
@@ -360,8 +360,8 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId, int s
 			}
 		}
 	}
-	// if no polygon with the specified skycultureId exists, this function simply clears the selection
-	selectAllCulturePolygon(skycultureId);
+	// if no polygon with the specified skyCultureId exists, this function simply clears the selection
+	selectAllCulturePolygon(skyCultureId);
 
 	if (!currentTimeItems.empty())
 	{
@@ -374,18 +374,18 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId, int s
 	}
 	else
 	{
-		qInfo() << "couldn't find any polygon with name [" << skycultureId << "]!";
+		qInfo() << "couldn't find any polygon with name [" << skyCultureId << "]!";
 		return;
 	}
 }
 
-void SkycultureMapGraphicsView::updateTime(int year)
+void SkyCultureMapGraphicsView::updateTime(int year)
 {
 	currentYear = year;
 	updateCultureVisibility();
 }
 
-void SkycultureMapGraphicsView::rotateMap(bool applyRotation)
+void SkyCultureMapGraphicsView::rotateMap(bool applyRotation)
 {
 	if (applyRotation)
 	{
@@ -417,14 +417,14 @@ void SkycultureMapGraphicsView::rotateMap(bool applyRotation)
 	}
 }
 
-void SkycultureMapGraphicsView::updateCultureVisibility()
+void SkyCultureMapGraphicsView::updateCultureVisibility()
 {
 	// iterate over all polygons --> if currentTime is between startTime and endTime: show polygon (else hide it)
 	const auto itemList = scene()->items();
 	for(const auto &item : itemList) {
-		// cast generic QGraphicsItem to subclass SkyculturePolygonItem
-		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
-		// if cast was unsuccessful (item is not an SkyculturePolygonItem) --> look at the next item
+		// cast generic QGraphicsItem to subclass SkyCulturePolygonItem
+		SkyCulturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyCulturePolygonItem *>(item);
+		// if cast was unsuccessful (item is not an SkyCulturePolygonItem) --> look at the next item
 		if(!scPolyItem)
 			continue;
 
@@ -440,7 +440,7 @@ void SkycultureMapGraphicsView::updateCultureVisibility()
 	}
 }
 
-void SkycultureMapGraphicsView::smoothFitInView(QRectF targetRect)
+void SkyCultureMapGraphicsView::smoothFitInView(QRectF targetRect)
 {
 	// zoomOnTargetTimer must be stopped if the user selects a different culture (starts a new zoom operation) while the old one is still in progress
 	zoomOnTargetTimer.stop();
@@ -452,7 +452,6 @@ void SkycultureMapGraphicsView::smoothFitInView(QRectF targetRect)
 	qreal maxDuration = 2000;
 	qreal threshold = 1200;
 	QEasingCurve factor(QEasingCurve::OutQuad);
-	//qreal factor = maxDuration / pow(threshold, 2.0);
 
 	zoomToDefaultTimer.start();
 	qreal deviation = qMax((qFabs(startingRect.center().x() - defaultRect.center().x()) + qFabs(startingRect.center().y() - defaultRect.center().y())) / 2,
@@ -460,10 +459,10 @@ void SkycultureMapGraphicsView::smoothFitInView(QRectF targetRect)
 
 	// if value > threshold --> result > 1.0
 	// valueForProgress returns 1.0 for all values greater than 1.0 (which equals maxDuration)
-	zoomToDefaultTimer.setDuration(2000 * factor.valueForProgress(deviation * (1 / threshold)));
+	zoomToDefaultTimer.setDuration(maxDuration * factor.valueForProgress(deviation * (1 / threshold)));
 }
 
-void SkycultureMapGraphicsView::zoomToDefault(qreal zoomFactor)
+void SkyCultureMapGraphicsView::zoomToDefault(qreal zoomFactor)
 {
 	// transform the scene (scaling) to fit the current timestep
 	qreal width = startingRect.width() + (defaultRect.width() - startingRect.width()) * zoomFactor;
@@ -477,7 +476,7 @@ void SkycultureMapGraphicsView::zoomToDefault(qreal zoomFactor)
 	centerOn(startingRect.center() - (startingRect.center() - defaultRect.center()) * centerEasing.valueForProgress(zoomFactor));
 }
 
-void SkycultureMapGraphicsView::zoomOnTarget(qreal zoomFactor)
+void SkyCultureMapGraphicsView::zoomOnTarget(qreal zoomFactor)
 {
 	// transform the scene (scaling) to fit the current timestep
 	qreal width = defaultRect.width() - (defaultRect.width() - targetRect.width()) * zoomFactor;
@@ -491,7 +490,7 @@ void SkycultureMapGraphicsView::zoomOnTarget(qreal zoomFactor)
 	centerOn(defaultRect.center() - (defaultRect.center() - targetRect.center()) * centerEasing.valueForProgress(zoomFactor));
 }
 
-qreal SkycultureMapGraphicsView::calculateScaleRatio(qreal width, qreal height)
+qreal SkyCultureMapGraphicsView::calculateScaleRatio(qreal width, qreal height)
 {
 	// Rect of the current view with a margin of 2
 	QRectF viewRect = viewport()->rect().adjusted(2, 2, - 2, - 2);
@@ -516,7 +515,7 @@ qreal SkycultureMapGraphicsView::calculateScaleRatio(qreal width, qreal height)
 	return qMin(xratio, yratio);
 }
 
-QRectF SkycultureMapGraphicsView::calculateBoundingBox(const QList<QGraphicsItem *> graphicsItemList)
+QRectF SkyCultureMapGraphicsView::calculateBoundingBox(const QList<QGraphicsItem *> graphicsItemList)
 {
 	QRectF boundingBox = QRectF();
 

@@ -21,7 +21,7 @@
 #include <qevent.h>
 #include <qguiapplication.h>
 #include <qjsonarray.h>
-#include <qgraphicssvgitem.h>
+#include <QGraphicsSvgItem>
 #include <qscrollbar.h>
 #include <QFileDialog>
 
@@ -260,7 +260,7 @@ void ScmGeoLocGraphicsView::updateCultureVisibility()
 	for(const auto &item : itemList) {
 		ScmPreviewPolygonItem *previewPItem = qgraphicsitem_cast<ScmPreviewPolygonItem *>(item);
 
-		// if cast was unsuccessful (item is not an SkyculturePolygonItem) --> look at the next item
+		// if cast was unsuccessful (item is not an SkyCulturePolygonItem) --> look at the next item
 		if(!previewPItem)
 			continue;
 
