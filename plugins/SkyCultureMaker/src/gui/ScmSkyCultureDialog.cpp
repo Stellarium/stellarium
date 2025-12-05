@@ -77,7 +77,22 @@ void ScmSkyCultureDialog::retranslate()
 
 void ScmSkyCultureDialog::close()
 {
-	maker->setHideOrAbortMakerDialogVisibility(true);
+	maker->setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, true);
+}
+
+bool ScmSkyCultureDialog::eventFilter(QObject *obj, QEvent *event)
+{
+	if (obj == dialog && event->type() == QEvent::KeyPress)
+	{
+		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+		if (keyEvent->key() == Qt::Key_Escape)
+		{
+			// escape should not close the dialog directly
+			maker->setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, true);
+			return true;
+		}
+	}
+	return StelDialogSeparate::eventFilter(obj, event);
 }
 
 void ScmSkyCultureDialog::createDialogContent()
@@ -273,7 +288,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	}
 
 	// open export dialog
-	maker->setSkyCultureExportDialogVisibility(true);
+	maker->setDialogVisibility(scm::DialogID::SkyCultureExportDialog, true);
 }
 
 void ScmSkyCultureDialog::editSelectedConstellation()
@@ -297,7 +312,7 @@ void ScmSkyCultureDialog::editSelectedConstellation()
 			}
 		}
 
-		maker->openConstellationDialog(selectedConstellationId);
+		openConstellationDialog(selectedConstellationId);
 	}
 }
 
@@ -334,8 +349,33 @@ void ScmSkyCultureDialog::removeSelectedConstellation()
 
 void ScmSkyCultureDialog::openConstellationDialog(bool isDarkConstellation)
 {
-	maker->setConstellationDialogVisibility(true);
+	maker->setDialogVisibility(scm::DialogID::ConstellationDialog, true);
 	maker->setConstellationDialogIsDarkConstellation(isDarkConstellation);
+	maker->setIsLineDrawEnabled(true);
+	updateAddConstellationButtons(false);
+}
+
+void ScmSkyCultureDialog::openConstellationDialog(const QString &constellationId)
+{
+	scm::ScmSkyCulture *skyCulture = maker->getCurrentSkyCulture();
+	if (skyCulture == nullptr)
+	{
+		qDebug() << "SkyCultureMaker: Current Sky Culture is not initialized.";
+		return;
+	}
+
+	scm::ScmConstellation *constellation = skyCulture->getConstellation(constellationId);
+	if (constellation != nullptr)
+	{
+		maker->loadDialogFromConstellation(constellation);
+		maker->setDialogVisibility(scm::DialogID::ConstellationDialog, true);
+		maker->setIsLineDrawEnabled(true);
+		updateAddConstellationButtons(false);
+	}
+	else
+	{
+		qWarning() << "SkyCultureMaker: Constellation with ID" << constellationId << "not found.";
+	}
 }
 
 void ScmSkyCultureDialog::setIdFromName(QString &name)
@@ -346,8 +386,11 @@ void ScmSkyCultureDialog::setIdFromName(QString &name)
 
 void ScmSkyCultureDialog::updateAddConstellationButtons(bool enabled)
 {
-	ui->AddConstellationBtn->setEnabled(enabled);
-	ui->AddDarkConstellationBtn->setEnabled(enabled);
+	if(ui && dialog)
+	{
+		ui->AddConstellationBtn->setEnabled(enabled);
+		ui->AddDarkConstellationBtn->setEnabled(enabled);
+	}
 }
 
 void ScmSkyCultureDialog::updateEditConstellationButton()
@@ -470,6 +513,9 @@ void ScmSkyCultureDialog::resetDialog()
 		setIdFromName(name);
 		resetConstellations();
 		maker->setSkyCultureDescription(getDescriptionFromTextEdit());
+
+		updateAddConstellationButtons(true);
+		updateEditConstellationButton();
 		updateRemoveConstellationButton();
 
 		ui->polygonCountValueLabel->setText(QString::number(0));

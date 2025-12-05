@@ -44,6 +44,7 @@ class ScmSkyCultureDialog : public StelDialogSeparate
 {
 protected:
 	void createDialogContent() override;
+	bool eventFilter(QObject *obj, QEvent *event) override;
 
 public:
 	ScmSkyCultureDialog(SkyCultureMaker *maker);
@@ -154,6 +155,12 @@ private:
 	 *
 	 */
 	void initSkycultureTime();
+  
+  /**
+	 * @brief Opens the constellation dialog with data for a given constellation.
+	 * @param constellationId The ID of the constellation to open the dialog for.
+	 */
+	void openConstellationDialog(const QString &constellationId);
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP
