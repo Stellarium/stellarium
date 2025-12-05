@@ -84,7 +84,7 @@
 
 \usepackage{avant} % Use the Avantgarde font for headings
 
-\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Symbol, Chancery and Computer Modern fonts
 
 \usepackage{microtype} % Improve typography
 
