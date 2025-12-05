@@ -67,7 +67,7 @@ public:
 									   const std::vector<ConstellationLine> &lines, 
 									   const bool isDarkConstellation);
 
-	/// Adds a constellation to the sky culture
+	/// Adds a location to the sky culture
 	void addLocation(const scm::CulturePolygon &polygon);
 
 	/// Removes a constellation from the sky culture by its ID

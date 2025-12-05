@@ -69,13 +69,9 @@ void scm::ScmSkyCulture::removeConstellation(const QString &id)
 
 void scm::ScmSkyCulture::removeLocation(int id)
 {
-	for (auto i = locations.begin(), end = locations.end(); i != end; i++)
-	{
-		if (i->id == id)
-		{
-			locations.erase(i);
-		}
-	}
+	locations.erase(std::remove_if(std::begin(locations), std::end(locations),
+							  [id](const CulturePolygon &p) { return p.id == id; }),
+					std::end(locations));
 }
 
 scm::ScmConstellation *scm::ScmSkyCulture::getConstellation(const QString &id)
