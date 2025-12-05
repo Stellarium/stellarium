@@ -1,10 +1,11 @@
 # Chinese (Journey to the West)
 
 ## Introduction
-<p><em>Journey to the West is a classic of Chinese God and devil novels. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.</em></p>
-<p><em>This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from Journey to the West, creating an entirely new constellation world imbued with the rich hues of Chinese mythology.</em></p>
+<p> Journey to the West is a classic of Chinese God and devil novels. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.</p>
+<p>This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from Journey to the West, creating an entirely new constellation world imbued with the rich hues of Chinese mythology.</p>
 
 ### A Guide to the Constellations in Journey to the West 
+
 |<notr>#</notr>|</notr>Constellation</notr>|Journey to the West Figure|Description|
 |-----------------------------------------------------------------------------|-----------------|-------|--------|-------------|
 |<notr>1</notr>| </notr>Ursa Minor</notr>| Yellow Wind Monster|A golden-furred marten spirit who captured Tang Monk and wounded Sun Wukong's eyes with his Samadhi Wind. Lingji Bodhisattva later subdued him.|
