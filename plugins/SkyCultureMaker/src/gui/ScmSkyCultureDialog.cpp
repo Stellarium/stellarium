@@ -233,19 +233,6 @@ void ScmSkyCultureDialog::createDialogContent()
 	hideAddPolygon();
 }
 
-bool ScmSkyCultureDialog::eventFilter(QObject* object, QEvent* event)
-{
-	if (object != dialog || event->type() != QEvent::KeyPress)
-	{
-		return false;
-	}
-	if (static_cast<QKeyEvent*>(event)->key() == Qt::Key_Escape)
-	{
-		return true;
-	}
-	return false;
-}
-
 void ScmSkyCultureDialog::handleFontChanged()
 {
 	QFont headlineFont = QApplication::font();

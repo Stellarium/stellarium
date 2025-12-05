@@ -79,7 +79,6 @@ public slots:
 	void close() override;
 
 protected slots:
-	bool eventFilter(QObject* object, QEvent* event) override;
 	void handleFontChanged();
 
 private slots:
