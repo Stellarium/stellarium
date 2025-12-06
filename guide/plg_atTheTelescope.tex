@@ -94,7 +94,7 @@ While the Telrad finder is active, you can not activate a CCD with the popup men
 \end{figure}
 
 \noindent This is a great way to get an idea of what a particular camera will be able to capture when attached to a particular telescope or lens. 
-For using camera lenses, you must describe them as telescope with the appropriate values for the lens. 
+For using camera lenses, describe them as telescope with the appropriate values for the lens. 
 When active, this feature will display a red bounding box of the area that will be captured, 
 as well as zoom in to give a better view of the surroundings. You can manually zoom in or out from there.
 
@@ -146,29 +146,31 @@ It is a great way to compare different eyepiece/telescope combinations, to see h
 And it is easy to do so with binoculars too. 
 To show this, let us use the M37 cluster as target. Through a pair of Celestron 15x70 binoculars, it would look like in fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37Binos}.
 
-\begin{figure}[h]\centering
+\begin{figure}[p]\centering
 \includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37binos.png}
 \caption{The M37 cluster through a Celestron 15x70 binocular.}
 \label{fig:plugins:Oculars:Usage:Ocular:M37Binos}
 \end{figure}
 
-\noindent A very pretty sight. Now, what would it look like through a Celestron 80\,mm EDF finder 'scope, with an Explore Scientific 14\,mm $100\degree$ eyepiece? See fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37EDF}!
-
-\begin{figure}[h]\centering
+\begin{figure}[p]\centering
 \includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37edf.png}
 \caption{The M37 cluster through a Celestron 80\,mm EDF with Explore Scientific 14\,mm eyepiece.}
 \label{fig:plugins:Oculars:Usage:Ocular:M37EDF}
 \end{figure}
 
-\noindent Not bad at all. But we like to see more! So we move the eyepiece to a C1400. See fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37C1400} for the resulting view.
-
-%%%%%%%%%%% MISSING CONTEXT SWITCH!! Here might be a paragraph with comparing the 14mm eyepiece with a 31mm Nagler!
-
-\begin{figure}[ht]\centering
+\begin{figure}[p]\centering
 \includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37c1400.png}
 \caption{The M37 cluster through a Celestron C1400 with Tele Vue Nagler 31\,mm eyepiece.}
 \label{fig:plugins:Oculars:Usage:Ocular:M37C1400}
 \end{figure}
+
+A very pretty sight. Now, what would it look like through a Celestron 80\,mm EDF finder 'scope, with an Explore Scientific 14\,mm $100\degree$ eyepiece? See fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37EDF}!
+
+
+Not bad at all. But we like to see more! So we move the eyepiece to a C1400. See fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37C1400} for the resulting view.
+
+%%%%%%%%%%% MISSING CONTEXT SWITCH!! Here might be a paragraph with comparing the 14mm eyepiece with a 31mm Nagler!
+
 
 Very nice indeed! So for this target, the C1400 is going to be the best bet. However, if my target was the Pleiades, the C1400 with that eyepiece would not be good --- the 80EDF would do much better!
 
@@ -269,13 +271,13 @@ This is the tab used to enter your own eyepieces (see figures~\ref{fig:plugins:O
 By default, a few sample ones have been added; feel free to delete those once you've entered your own.
 
 \begin{figure}[p]\centering
-\includegraphics[trim=0 200 0 0,clip,width=.75\textwidth]{oculars_gui_eyepieces.png}
+\includegraphics[trim=0 200 0 0,clip,width=.85\textwidth]{oculars_gui_eyepieces.png}
 \caption{Eyepieces tab of Oculars plugin configuration dialog.}
 \label{fig:plugins:Oculars:Gui:Eyepieces}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=0.75\textwidth]{oculars_gui_eyepieces_binos.png}
+\includegraphics[width=0.85\textwidth]{oculars_gui_eyepieces_binos.png}
 \caption{Eyepieces tab of Oculars plugin configuration dialog (settings for binocular).}
 \label{fig:plugins:Oculars:Gui:Eyepieces_binos}
 \end{figure}
@@ -632,11 +634,11 @@ Telescope controlled by:
 This section is active only for DIRECT connections (see above).
 
 \begin{description}
-\item[Serial port] sets the serial port used by the telescope.  There
-  is a pop-up box that suggests some default values:
+\item[Serial port] sets the serial port used by the telescope.  
+  A pop-up box suggests some default values:
   \begin{itemize}
   \item On Windows, serial ports \texttt{COM1} to \texttt{COM10}
-  \item On Linux, serial ports \texttt{/dev/ttyS0} to
+  \item On Linux, serial ports are labelled \texttt{/dev/ttyS0} to
     \texttt{/dev/ttyS3} and USB ports \texttt{/dev/ttyUSB0} to
     \texttt{/dev/ttyUSB3}. Make sure you have read/write access to the \texttt{tty} device. 
 	Depending on your flavour of Linux, this may e.g.\ require some group membership.
@@ -984,7 +986,7 @@ The original \program{StellariumScope} program was designed and implemented by S
 % and is still available for download\footnote{\url{http://www.bytearts.com/stellarium/}}.
 but is no longer available. 
 It is now maintained by and available for download from Welsh Dragon Computing
-\footnote{\url{http://welshdragoncomputing.ca/x/index.php/home/stellariumscope/about-stellariumscope}}.
+\footnote{\url{https://welshdragoncomputing.ca/x/index.php/home/stellariumscope/about-stellariumscope}}.
 
 \paragraph{Features}
 \begin{itemize}
@@ -996,7 +998,7 @@ It is now maintained by and available for download from Welsh Dragon Computing
   control computer that hosts the telescope driver.
 \item The installation program will automatically install the
   documentation, but the link to the documentation is provided
-  by the developer\footnote{\program{StellariumScope} User's Guide --- \url{http://welshdragoncomputing.ca/x/st/misc/stellariumscope_user_guide.2016.03.05.pdf}} so you can read it before installation.
+  by the developer\footnote{\program{StellariumScope} User's Guide --- \url{https://welshdragoncomputing.ca/x/st/misc/stellariumscope_user_guide.2016.03.05.pdf}} so you can read it before installation.
 \end{itemize}
 
 %Figure~\ref{fig:StellariumScopeFullWindow} shows the interface and
@@ -1055,7 +1057,7 @@ For you DIYers out there, figure~\ref{fig:plugins:TelescopeControl:Other:Protoco
 
 \begin{figure}[bp]
 \begin{center}
-\VerbatimInput[fontsize=\scriptsize]{pictures/Stellarium_telescope_protocol.txt}
+\VerbatimInput[fontsize=\scriptsize]{Images/Stellarium_telescope_protocol.txt}
 \end{center}
 \caption{The Stellarium Telescope Protocol, version 1.0}
 \label{fig:plugins:TelescopeControl:Other:Protocol}
@@ -1085,8 +1087,7 @@ parallax effects are taken into account.
   at astronomical twilight ranges usually between -12 and -18
   degrees. This parameter is only used for the estimate of the range
   of observable epochs (see below).
-\item[Horizon altitude] Minimum observable altitude (due to mountains,
-  buildings, or just a limited telescope mount).
+\item[Horizon altitude] Minimum observable altitude (due to obstructions or just a limited telescope mount).
 %% TODO: This should be replaced by the direct interaction with / evaluation of the landscape!!!
 %\item[Today ephemeris] Self-explanatory. The program will show the
 %  rise, set, and culmination (transit) times. The exact times for
@@ -1095,10 +1096,10 @@ parallax effects are taken into account.
 \item[Acronychal/Cosmical/Heliacal rise/set] The days of Cosmical
   rise/set of an object are estimated as the days when the object
   rises (or sets) together with the rise/set of the Sun. The exact
-  dates of these ephemeris depend on the Observer's location. On the
-  contrary, the Acronycal rise (or set) happens when the star
+  dates of these events depend on the Observer's location. 
+  In contrast, the Acronychal rise (or set) happens when the star
   rises/sets with the setting/rising of the Sun (i.e., opposite to the
-  Sun). On the one hand, it is obvious that the source is hardly
+  Sun). It is obvious that the source is hardly
   observable (or not observable at all) in the dates between Cosmical
   set and Cosmical rise. On the other hand, the dates around the
   Acronychal set and rise are those when the altitude of the celestial
@@ -1237,7 +1238,7 @@ The Euclid Space Telescope's focal plane. See more at \url{https://www.euclid-ec
 
 \subsubsection{Adding a Camera}
 \label{sec:plugins:MosaicCamera:cameras:add}
-When the Mosaic Camera plugin is first enabled, it checks for the existence of a directory \file{<USERDATA>/modules/MosaicCamera/}.
+When the Mosaic Camera plugin is first enabled, it checks the user data directory for the existence of a directory \file{<USERDATA>/modules/MosaicCamera/}.
 If this directory does not exist, it will be created and populated with JSON files for each of the default cameras, and one JSON file \file{camera\_order.json} which specifies the order in which the cameras are displayed.
 
 To add a new camera, create a new JSON file inside this directory, and add a reference to it in the \file{camera\_order.json} file.
@@ -1283,7 +1284,7 @@ Each camera is defined via a JSON file with the structure:
 
 See the default camera JSON files for examples.
 
-If you ever need to reset the plugin to its default state, simply delete the \file{<USERDATA>/modules/MosaicCamera/} directory.
+To reset the plugin to its default state, simply delete the \file{<USERDATA>/modules/MosaicCamera/} directory.
 
 \subsection{Control}
 \label{sec:plugins:MosaicCamera:control}

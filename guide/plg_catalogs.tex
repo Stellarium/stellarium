@@ -219,7 +219,6 @@ updates\_enable         & bool   & Enable updates of bright novae catalog from I
 url                     & string & URL of bright novae catalog \\\bottomrule
 \end{tabularx}
 
-\newpage
 \subsection{Format of historical supernovae catalog}
 \label{sec:plugins:HistoricalSupernovae:format}
 
@@ -596,7 +595,7 @@ All names with asterix mark (*) are modified based on the original proposals, to
 \subsection{Section \big[Exoplanets\big] in config.ini file}
 %\label{sec:plugins:Exoplanets:configuration}
 
-You can edit \file{config.ini} file by yourself for changes of the
+You can edit \file{config.ini} file to change the
 settings for the Exoplanets plugin -- just make it carefully!
 
 \noindent%
@@ -627,59 +626,56 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 \begin{configfile}[\footnotesize]
 "Star designation":
 {
-	"exoplanets":
-	[
-	{
-		"mass": mass of exoplanet (M jup),
-		"radius": radius of exoplanet (R jup),
-		"period": period of exoplanet (days),
-		"semiAxis": semi-major axis (AU),
-		"eccentricity": orbit's eccentricity,
-		"inclination": orbit's inclination (degree),
-		"angleDistance": angle distance from star 
-						(arcseconds),
-		"discovered": exoplanet discovered year,
-		"detectionMethod": "exoplanet detection method",
-		"pclass": "planetary class",
-		"EqTemp": equilibrium temperature (K),
-		"conservative": conservative or optimistic 
-				habitability of the exoplanet,
-		"ESI": Earth Similarity Index (*100),
-		"planetProperName": "proper name of planet",
-		"planetName": "designation of planet"
-	},
-	{
-		"mass": mass of exoplanet (M jup),
-		"radius": radius of exoplanet (R jup),
-		"period": period of exoplanet (days),
-		"semiAxis": semi-major axis (AU),
-		"eccentricity": orbit's eccentricity,
-		"inclination": orbit's inclination (degree),
-		"angleDistance": angle distance from star 
-						(arcseconds),
-		"discovered": exoplanet discovered year,
-		"detectionMethod": "exoplanet detection method",
-		"pclass": "planetary class",
-		"EqTemp": equilibrium temperature (K),
-		"conservative": conservative or optimistic 
-				habitability of the exoplanet,
-		"ESI": Earth Similarity Index (*100),
-		"planetProperName": "proper name of planet",
-		"planetName": "designation of planet"
-	}
-	],
-	"distance": value of distance to star (pc),
-	"stype": "spectral type of star",
-	"smass": value of mass of star (M sun),
-	"smetal": value of metallicity of star,
-	"Vmag": value of visual magnitude of star,
-	"sradius": value of radius of star (R sun),
-	"effectiveTemp": value of effective temperature 
-	                 of star (K),
-	"starProperName": "proper name of the star",
-	"hasHP": boolean (has potential habitable planets),
-	"RA": "Right ascension (J2000)",
-	"DE": "Declination (J2000)"
+   "exoplanets":
+   [
+   {
+      "mass": mass of exoplanet (M jup),
+      "radius": radius of exoplanet (R jup),
+      "period": period of exoplanet (days),
+      "semiAxis": semi-major axis (AU),
+      "eccentricity": orbit's eccentricity,
+      "inclination": orbit's inclination (degree),
+      "angleDistance": angle distance from star (arcseconds),
+      "discovered": exoplanet discovered year,
+      "detectionMethod": "exoplanet detection method",
+      "pclass": "planetary class",
+      "EqTemp": equilibrium temperature (K),
+      "conservative": conservative or optimistic 
+      		habitability of the exoplanet,
+      "ESI": Earth Similarity Index (*100),
+      "planetProperName": "proper name of planet",
+      "planetName": "designation of planet"
+   },
+   {
+      "mass": mass of exoplanet (M jup),
+      "radius": radius of exoplanet (R jup),
+      "period": period of exoplanet (days),
+      "semiAxis": semi-major axis (AU),
+      "eccentricity": orbit's eccentricity,
+      "inclination": orbit's inclination (degree),
+      "angleDistance": angle distance from star (arcseconds),
+      "discovered": exoplanet discovered year,
+      "detectionMethod": "exoplanet detection method",
+      "pclass": "planetary class",
+      "EqTemp": equilibrium temperature (K),
+      "conservative": conservative or optimistic habitability of the 
+                      exoplanet,
+      "ESI": Earth Similarity Index (*100),
+      "planetProperName": "proper name of planet",
+      "planetName": "designation of planet"
+   }
+   ],
+   "distance": value of distance to star (pc),
+   "stype": "spectral type of star",
+   "smass": value of mass of star (M sun),
+   "smetal": value of metallicity of star,
+   "Vmag": value of visual magnitude of star,
+   "sradius": value of radius of star (R sun),
+   "effectiveTemp": value of effective temperature of star (K),
+   "starProperName": "proper name of the star",
+   "hasHP": boolean (has potential habitable planets),
+   "RA": "Right ascension (J2000)",
+   "DE": "Declination (J2000)"
 },
 \end{configfile}
 
@@ -687,36 +683,36 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 \begin{configfile}[\footnotesize]
 "24 Sex":
 {
-		"exoplanets":
-		[
-		{
-			"mass": 1.99,
-			"period": 452.8,
-			"semiAxis": 1.333,
-			"eccentricity": 0.09,
-			"angleDistance": 0.017821,
-			"discovered": 2010,
-			"planetName": "b"
-		},
-		{
-			"mass": 0.86,
-			"period": 883.0,
-			"semiAxis": 2.08,
-			"eccentricity": 0.29,
-			"angleDistance": 0.027807,
-			"discovered": 2010,
-			"planetName": "c"
-		}
-		],
-		"distance": 74.8,
-		"stype": "G5",
-		"smass": 1.54,
-		"smetal": -0.03,
-		"Vmag": 7.38,
-		"sradius": 4.9,
-		"effectiveTemp": 5098,
-		"RA": "10h23m28s",
-		"DE": "-00d54m08s"
+    "exoplanets":
+    [
+    {
+        "mass": 1.99,
+        "period": 452.8,
+        "semiAxis": 1.333,
+        "eccentricity": 0.09,
+        "angleDistance": 0.017821,
+        "discovered": 2010,
+        "planetName": "b"
+    },
+    {
+        "mass": 0.86,
+        "period": 883.0,
+        "semiAxis": 2.08,
+        "eccentricity": 0.29,
+        "angleDistance": 0.027807,
+        "discovered": 2010,
+        "planetName": "c"
+    }
+    ],
+    "distance": 74.8,
+    "stype": "G5",
+    "smass": 1.54,
+    "smetal": -0.03,
+    "Vmag": 7.38,
+    "sradius": 4.9,
+    "effectiveTemp": 5098,
+    "RA": "10h23m28s",
+    "DE": "-00d54m08s"
 },
 \end{configfile}
 
@@ -849,37 +845,55 @@ flag\_show\_quasars\_button & bool   & Enable displaying quasars button on toolb
 marker\_color               & R,G,B  & Color for marker of the quasars \\\bottomrule
 \end{tabularx}
 
-\newpage
 \subsection{Format of quasars catalog}
 \label{sec:plugins:Quasars:format}
 
-To add a new quasar, open a new line after line 5 and paste the following, note commas and brackets, they are important:
+%To add a new quasar, open a new line after line 5 and paste the following, note commas and brackets, 
+%they are important:
+
+%\begin{configfile}
+%"Quasar designation":
+%{
+%    "RA":   "Right ascension (J2000)",
+%    "DE":   "Declination (J2000)",
+%    "Amag": value of absolute magnitude,
+%    "Vmag": value of visual magnitude,
+%    "z":    value of Z (redshift),
+%    "bV":   value of B-V colour
+%},
+%\end{configfile}
+%
+%%\newpage
+%\noindent For example, the record for \textbf{3C 249.1} looks like:
+%\begin{configfile}
+%"3C 249.1":
+%{
+%    "RA": "11h04m13.8s",
+%    "DE": "+76d58m58s",
+%    "Amag": -25.1,
+%    "Vmag": 15.72,
+%    "z": 0.313,
+%    "bV": -0.02
+%},
+%\end{configfile}
+
+To add a new quasar, open a new line after line 5 and create a new section. 
+For example, the record for \textbf{3C 249.1} looks like (note commas and brackets -- 
+they are important!):
+
 
 \begin{configfile}
-"Quasar designation":
+"3C 249.1":                  // Quasar designation
 {
-    "RA": "Right ascension (J2000)",
-    "DE": "Declination (J2000)",
-    "Amag": value of absolute magnitude,
-    "Vmag": value of visual magnitude,
-    "z": value of Z (redshift),
-    "bV": value of B-V colour
+    "RA": "11h04m13.8s",     // Right ascension (J2000)
+    "DE": "+76d58m58s",      // Declination (J2000)
+    "Amag": -25.1,           // value of absolute magnitude
+    "Vmag": 15.72,           // value of visual magnitude
+    "z": 0.313,              // value of Z (redshift)
+    "bV": -0.02              // value of B-V colour
 },
 \end{configfile}
 
-%\newpage
-\noindent For example, the record for \textbf{3C 249.1} looks like:
-\begin{configfile}
-"3C 249.1":
-{
-    "RA": "11h04m13.8s",
-    "DE": "+76d58m58s",
-    "Amag": -25.1,
-    "Vmag": 15.72,
-    "z": 0.313,
-    "bV": -0.02
-},
-\end{configfile}
 
 
 \newpage
@@ -1308,7 +1322,7 @@ of satellites, e.g., selecting the filter ``[LEO]'' will show all
 low-orbital satellites.
 
 \begin{figure}[t]
-	\centering\includegraphics[width=0.6\textwidth]{satellites_plugin_filters.jpg}
+	\centering\includegraphics[width=0.57\textwidth]{satellites_plugin_filters.jpg}
 	\caption{Configuration of the Satellites plugin: satellites custom filter}
 	\label{fig:plugins:Satellites:Configuration:SatellitesFilter}
 \end{figure}
@@ -1321,7 +1335,7 @@ settings of this filter are available through the button
 the drop-down list.
 
 \begin{figure}[tb]
-	\centering\includegraphics[width=0.6\textwidth]{satellites_plugin_comms.jpg}
+	\centering\includegraphics[width=0.57\textwidth]{satellites_plugin_comms.jpg}
 	\caption{Configuration of the Satellites plugin: satellite communication data}
 	\label{fig:plugins:Satellites:Configuration:SatellitesComms}
 \end{figure}

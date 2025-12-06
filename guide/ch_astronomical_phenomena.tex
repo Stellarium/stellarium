@@ -128,38 +128,6 @@ remains.
 \end{figure}
 
 
-Stellarium can draw both constellation diagrams and artistic
-representations of the constellations. Multiple sky cultures are
-supported: Western, Polynesian, Egyptian, Chinese, and several other sky cultures are
-available, although at time of writing the non-Western constellations
-are not complete, and as yet there are no artistic representations of
-these sky-cultures.
-
-Aside from historical and mythological value, to the modern astronomer
-the constellations provide a way to segment the sky for the purposes
-of describing locations of objects, indeed one of the first tasks for
-an amateur observer is \emph{learning the constellations} --- the
-process of becoming familiar with the relative positions of the
-constellations, at what time of year a constellation is visible, and
-in which constellations observationally interesting objects reside.
-The International Astronomical Union\index{IAU} has adopted 88 ``Western''
-constellations as a common system for segmenting the sky (Table~\ref{tab:IAUConstellations}). They are
-based on Greek/Roman mythology, but with several additions from
-Renaissance and later centuries.  As such some formalisation has been
-adopted, each constellation having a \emph{proper name}, which is in
-Latin, and a three letter abbreviation of that name.  For example,
-Ursa Major has the abbreviation UMa. Also, the ``Western''
-constellation have clearly defined boundaries \citep{Delporte:1930}, which you can draw in
-Stellarium when you press the \key{B} key\footnote{These boundaries or
-  borders have been drawn using star maps from 1875. Due to the effect
-  of \emph{precession}, these borders are no longer parallel to
-  today's coordinates.}. The IAU constellation a selected object is placed in 
-is also available in the object information data \citep{1987PASP...99..695R}, 
-regardless of the currently active sky culture.  On the other hand, the shapes 
-of mythological figures, and also stick figures, have not been canonized, so 
-you will find deviations between Stellarium and printed atlases.
-
-
 \begin{table}[p]
     \footnotesize\centering
   \begin{tabular}{lll||lll}
@@ -223,6 +191,51 @@ Ind & Indus                & Indi                  & Vul & Vulpecula            
   \label{tab:IAUConstellations}
 \end{table}
 
+\begin{table}[p]
+  \centering
+  \begin{tabular}{>{$}c<{$}l>{$}c<{$}l>{$}c<{$}l>{$}c<{$}l>{$}c<{$}l>{$}c<{$}l}
+    \toprule
+    \alpha    & alpha   & \epsilon  & epsilon & \iota     & iota    & \nu       & nu       & \rho     & rho       & \varphi  & phi    \\ 
+    \beta     & beta    & \zeta     & zeta    & \kappa    & kappa   & \xi       & xi       & \sigma   & sigma     & \chi     & chi    \\ 
+    \gamma    & gamma   & \eta      & eta     & \lambda   & lambda  & \omicron  & omicron  & \tau     & tau       & \psi     & psi    \\ 
+    \delta    & delta   & \theta    & theta   & \mu       & mu      & \pi       & pi       & \upsilon & upsilon   & \omega   & omega  \\ 
+     \bottomrule
+ \end{tabular}
+  \caption{The Greek alphabet used by Bayer}
+  \label{tab:Phenomena:StarNames:BayerLetters}
+\end{table}
+
+
+Stellarium can draw both constellation diagrams and artistic
+representations of the constellations. Multiple sky cultures are
+supported: Western, Polynesian, Egyptian, Chinese, and several other sky cultures are
+available, although at time of writing the non-Western constellations
+are not complete, and as yet there are no artistic representations of
+these sky-cultures.
+
+Aside from historical and mythological value, to the modern astronomer
+the constellations provide a way to segment the sky for the purposes
+of describing locations of objects, indeed one of the first tasks for
+an amateur observer is \emph{learning the constellations} --- the
+process of becoming familiar with the relative positions of the
+constellations, at what time of year a constellation is visible, and
+in which constellations observationally interesting objects reside.
+The International Astronomical Union\index{IAU} has adopted 88 ``Western''
+constellations as a common system for segmenting the sky (Table~\ref{tab:IAUConstellations}). They are
+based on Greek/Roman mythology, but with several additions from
+Renaissance and later centuries.  As such some formalisation has been
+adopted, each constellation having a \emph{proper name}, which is in
+Latin, and a three letter abbreviation of that name.  For example,
+Ursa Major has the abbreviation UMa. Also, the ``Western''
+constellation have clearly defined boundaries \citep{Delporte:1930}, which you can draw in
+Stellarium when you press the \key{B} key\footnote{These boundaries or
+  borders have been drawn using star maps from 1875. Due to the effect
+  of \emph{precession}, these borders are no longer parallel to
+  today's coordinates.}. The IAU constellation a selected object is placed in 
+is also available in the object information data \citep{1987PASP...99..695R}, 
+regardless of the currently active sky culture.  On the other hand, the shapes 
+of mythological figures, and also stick figures, have not been canonized, so 
+you will find deviations between Stellarium and printed atlases.
 
 
 \subsection{Star Names}
@@ -274,22 +287,6 @@ ordering, and some multiple stars (both real and optical) are named
 with a numerical superscript after the Greek letter, e.g.\ $\pi^1$...
 $\pi^6$ Orionis.
 
-
-\begin{table}[htb]
-  \centering
-  \begin{tabular}{>{$}c<{$}l>{$}c<{$}l>{$}c<{$}l>{$}c<{$}l}
-    \toprule
-    \alpha    & alpha   &  \eta      & eta     & \nu       & nu       & \tau     & tau     \\ 
-    \beta     & beta    &  \theta    & theta   & \xi       & xi       & \upsilon & upsilon \\ 
-    \gamma    & gamma   &  \iota     & iota    & \omicron  & omicron  & \varphi  & phi     \\ 
-    \delta    & delta   &  \kappa    & kappa   & \pi       & pi       & \chi     & chi     \\ 
-    \epsilon  & epsilon &  \lambda   & lambda  & \rho     & rho       & \psi     & psi     \\ 
-    \zeta     & zeta    &  \mu       & mu      & \sigma   & sigma     & \omega   & omega   \\
-    \bottomrule
- \end{tabular}
-  \caption{The Greek alphabet used by Bayer}
-  \label{tab:Phenomena:StarNames:BayerLetters}
-\end{table}
 
 \subsubsection{Flamsteed Designation}
 \label{sec:Phenomena:StarNames:Flamsteed}
@@ -544,12 +541,13 @@ extrapolated from measurements when the phase angle $|\alpha|<7^\circ$.
 Of course, just at Full Moon when the opposition is near-perfect, the
 Moon will also move through Earth's shadow during a Lunar eclipse.
 
-The Moon is a large reflective body which reflects not only sunlight
+The Moon %is a large reflective body which 
+reflects not only sunlight
 which directly hits it, but also sunlight reflected from Earth to the
 Moon \citep{Agrawal:2016}. This \indexterm{earthshine}, also known as
-\indexterm{ashen glow}, is brightest when Earth is most strongly
-illuminated for the Moon, i.e., when the Moon as seen from Earth shows
-only a thin crescent. Therefore in these days around the New Moon, the
+\indexterm{ashen glow}, is brightest when the Moon is most strongly
+illuminated by the Earth, i.e., when the Moon as seen from Earth shows
+only a thin crescent. In these days around the New Moon, the
 thin crescent can often be seen complemented into a softly glowing
 full disk. \newFeature{0.21.0} Stellarium's estimate for visual
 magnitude is based on the mentioned references and a new standard 
@@ -601,7 +599,7 @@ See figure~\ref{fig:planets}.
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[width=0.9\linewidth]{pictures/the_planets.jpg}
+  \includegraphics[width=0.9\linewidth]{the_planets.jpg}
   \caption{The Planets}
   \label{fig:planets}
 \end{figure}

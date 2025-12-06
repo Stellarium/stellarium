@@ -137,7 +137,7 @@ endings''.\footnote{This is a very confusing default setting and in fact
   \file{/boot/system/data/stellarium/} sub-directory.
 \item[user directory] This is in the user's home directory, i.e., 
   \file{\textasciitilde{}/config/settings/Stellarium/} 
-  or \file{/boot/home/config/settings/Stellarium/} sub-directory.
+  or the sub-directory \file{/boot/home/config/settings/Stellarium/}.
 \item[screenshot save directory] Screenshots are saved to the user's
   home directory.
 \end{description}
@@ -771,7 +771,7 @@ To go back to Stellarium's default, just use
 \end{script}
 
 If link colors in text panels are now difficult to read, copy
-\file{normalHtml.css} from Github to
+\file{normalHtml.css} from Github to your own 
 \file{MyOwnGreatStyleHtml.css} and modify to your taste.
 
 Note that, as Stellarium evolves, these files also may change from
@@ -791,7 +791,7 @@ The default name of the \program{Spout} sender is \texttt{Stellarium}. If you ne
 you can use option \texttt{-\/-spout-name=StelSpout2} in addition to create another \program{Spout} sender without a name conflict. 
 In such cases, it may be useful to also have separate user data directories and use option \texttt{-\/-user-dir}. 
 
-This mode does not work in ANGLE mode and requires modern graphics hardware with the \texttt{WGL\_NV\_DX\_interop} 
+This mode does not work in ANGLE mode and requires reasonably modern graphics hardware with the \texttt{WGL\_NV\_DX\_interop} 
 driver extension running in OpenGL mode. Some Nvidia GPUs work without this extension listed explicitly. 
 On a notebook with Nvidia Optimus technology, make sure to launch Stellarium \emph{and} \program{SpoutReceiver} 
 (or your target application) on the Nvidia hardware. 
