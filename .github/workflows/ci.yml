@@ -255,7 +255,7 @@ jobs:
         target: 'desktop'
         cache: true
         arch: 'win64_msvc2017_64'
-        modules: 'debug_info qtcharts qtscript qtvirtualkeyboard qtwebengine qtsvg'
+        modules: 'debug_info qtcharts qtscript qtvirtualkeyboard qtwebengine'
 
     # Packages should be automatically downloaded using vcpkg through the toolchain
     - name: Configure CMake
@@ -296,7 +296,7 @@ jobs:
         target: 'desktop'
         cache: true
         arch: 'win64_msvc2022_64'
-        modules: 'qtcharts qtimageformats qtlocation qtmultimedia qtpositioning qtscxml qtsensors qtserialbus qtserialport qtvirtualkeyboard qtwebchannel qtwebengine qtwebsockets qtwebview debug_info qt5compat qtquicktimeline qtshadertools qtsvg'
+        modules: 'qtcharts qtimageformats qtlocation qtmultimedia qtpositioning qtscxml qtsensors qtserialbus qtserialport qtvirtualkeyboard qtwebchannel qtwebengine qtwebsockets qtwebview debug_info qt5compat qtquicktimeline qtshadertools'
 
     # Packages should be automatically downloaded using vcpkg through the toolchain
     - name: Configure CMake
