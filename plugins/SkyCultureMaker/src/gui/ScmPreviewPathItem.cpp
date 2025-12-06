@@ -58,6 +58,7 @@ void ScmPreviewPathItem::setLastPoint(QPointF point)
 
 void ScmPreviewPathItem::reset()
 {
-	currentPath.clear();
+	// clear() does not exist before Qt5.13
+	currentPath = QPainterPath();
 	setPath(currentPath);
 }
