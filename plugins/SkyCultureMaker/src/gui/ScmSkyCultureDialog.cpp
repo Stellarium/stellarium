@@ -24,7 +24,26 @@
 #include "ScmSkyCultureDialog.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
+#include <QStyledItemDelegate>
 #include <QDebug>
+
+namespace
+{
+
+class NoEditDelegate : public QStyledItemDelegate
+{
+public:
+	NoEditDelegate(QObject* parent = nullptr)
+		: QStyledItemDelegate(parent)
+	{
+	}
+	QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override
+	{
+		return nullptr;
+	}
+};
+
+}
 
 ScmSkyCultureDialog::ScmSkyCultureDialog(SkyCultureMaker *maker)
 	: StelDialogSeparate("ScmSkyCultureDialog")
@@ -169,6 +188,14 @@ void ScmSkyCultureDialog::createDialogContent()
 			ui->classificationCB->setCurrentIndex(index);
 		}
 	}
+
+	resetReferences();
+	ui->referencesList->setItemDelegateForColumn(0, new NoEditDelegate(ui->referencesList));
+	connect(ui->addRefBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::addNewReference);
+	connect(ui->removeRefBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::removeReference);
+	connect(ui->moveRefUpBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::moveCurrentReferenceUp);
+	connect(ui->moveRefDownBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::moveCurrentReferenceDown);
+	connect(ui->referencesList, &QTreeWidget::currentItemChanged, this, &ScmSkyCultureDialog::updateReferencesButtons);
 }
 
 void ScmSkyCultureDialog::handleFontChanged()
@@ -340,6 +367,111 @@ QString ScmSkyCultureDialog::getDisplayNameFromConstellation(const scm::ScmConst
 	return constellation.getEnglishName() + " (" + constellation.getId() + ")";
 }
 
+void ScmSkyCultureDialog::resetReferences()
+{
+	if (ui && dialog)
+	{
+		ui->referencesList->clear();
+		ui->moveRefUpBtn->setEnabled(false);
+		ui->moveRefDownBtn->setEnabled(false);
+		ui->removeRefBtn->setEnabled(false);
+	}
+}
+
+void ScmSkyCultureDialog::updateReferencesButtons()
+{
+	const auto count = ui->referencesList->topLevelItemCount();
+	const auto currentItem = ui->referencesList->currentItem();
+
+	ui->removeRefBtn->setDisabled(count == 0 || !currentItem);
+
+	if (count <= 1 || !currentItem)
+	{
+		ui->moveRefUpBtn->setDisabled(true);
+		ui->moveRefDownBtn->setDisabled(true);
+		return;
+	}
+	const auto rootItem = ui->referencesList->invisibleRootItem();
+	Q_ASSERT(rootItem);
+	const auto row = rootItem->indexOfChild(currentItem);
+	ui->moveRefUpBtn->setDisabled(row == 0);
+	ui->moveRefDownBtn->setDisabled(row == count - 1);
+}
+
+void ScmSkyCultureDialog::updateReferencesNumeration()
+{
+	for (int row = 0; row < ui->referencesList->topLevelItemCount(); ++row)
+	{
+		ui->referencesList->topLevelItem(row)->setText(0, QString("#%1").arg(row + 1));
+	}
+}
+
+void ScmSkyCultureDialog::addNewReference()
+{
+	const auto num = ui->referencesList->topLevelItemCount() + 1;
+	const QStringList labels{QString("#%1").arg(num), ""};
+	const auto item = new QTreeWidgetItem(labels);
+	item->setFlags(item->flags() | Qt::ItemIsEditable);
+	ui->referencesList->addTopLevelItem(item);
+	ui->referencesList->setCurrentItem(item, 1);
+	ui->referencesList->resizeColumnToContents(0);
+	ui->referencesList->editItem(item, 1);
+
+	updateReferencesButtons();
+}
+
+void ScmSkyCultureDialog::removeReference()
+{
+	const auto currentItem = ui->referencesList->currentItem();
+	if (!currentItem) return;
+	const auto rootItem = ui->referencesList->invisibleRootItem();
+	Q_ASSERT(rootItem);
+	const auto row = rootItem->indexOfChild(currentItem);
+	const auto itemToRemove = ui->referencesList->takeTopLevelItem(row);
+	Q_ASSERT(itemToRemove == currentItem); Q_UNUSED(itemToRemove);
+	updateReferencesNumeration();
+	updateReferencesButtons();
+}
+
+void ScmSkyCultureDialog::moveCurrentReferenceUp()
+{
+	const auto currentItem = ui->referencesList->currentItem();
+	if (!currentItem) return;
+
+	const auto rootItem = ui->referencesList->invisibleRootItem();
+	Q_ASSERT(rootItem);
+	const auto row = rootItem->indexOfChild(currentItem);
+	if (row == 0) return;
+
+	const auto itemToMove = ui->referencesList->takeTopLevelItem(row);
+	Q_ASSERT(itemToMove == currentItem);
+	ui->referencesList->insertTopLevelItem(row-1, itemToMove);
+	ui->referencesList->setCurrentItem(itemToMove, 1);
+
+	updateReferencesNumeration();
+	updateReferencesButtons();
+}
+
+void ScmSkyCultureDialog::moveCurrentReferenceDown()
+{
+	const auto currentItem = ui->referencesList->currentItem();
+	if (!currentItem) return;
+
+	const auto rootItem = ui->referencesList->invisibleRootItem();
+	Q_ASSERT(rootItem);
+	const auto row = rootItem->indexOfChild(currentItem);
+	const auto count = ui->referencesList->topLevelItemCount();
+	if (row == count - 1) return;
+
+	const auto itemToMove = ui->referencesList->takeTopLevelItem(row);
+	Q_ASSERT(itemToMove == currentItem);
+	ui->referencesList->insertTopLevelItem(row+1, itemToMove);
+	ui->referencesList->setCurrentItem(itemToMove, 1);
+
+	updateReferencesNumeration();
+	updateReferencesButtons();
+}
+
 QString ScmSkyCultureDialog::makeConstellationsSection() const
 {
 	if (!constellations) return {};
@@ -359,6 +491,19 @@ QString ScmSkyCultureDialog::makeConstellationsSection() const
 	return text.trimmed();
 }
 
+QString ScmSkyCultureDialog::makeReferencesSection() const
+{
+	QString refs;
+	for (int row = 0; row < ui->referencesList->topLevelItemCount(); ++row)
+	{
+		const auto text = ui->referencesList->topLevelItem(row)->text(1);
+		refs += QString(" - [#%1]: %2\n").arg(row + 1).arg(text.trimmed());
+	}
+	if (!refs.isEmpty())
+		refs.chop(1); // remove the final newline char
+	return refs;
+}
+
 scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 {
 	scm::Description desc;
@@ -375,7 +520,7 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 
 	desc.constellations = makeConstellationsSection();
 
-	desc.references       = ui->referencesTE->toPlainText();
+	desc.references       = makeReferencesSection();
 
 	desc.authors            = ui->authorsTE->toPlainText();
 	desc.about              = ui->aboutTE->toPlainText();
@@ -401,7 +546,7 @@ void ScmSkyCultureDialog::resetDialog()
 		ui->zodiacTE->clear();
 		ui->milkyWayTE->clear();
 		ui->otherObjectsTE->clear();
-		ui->referencesTE->clear();
+		resetReferences();
 		ui->acknowledgementsTE->clear();
 
 		ui->licenseCB->setCurrentIndex(0);
