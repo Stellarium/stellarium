@@ -27,6 +27,7 @@
 
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QtMath>
 
 SkyCultureMapGraphicsView::SkyCultureMapGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)

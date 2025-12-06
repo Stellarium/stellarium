@@ -27,6 +27,8 @@
 
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QtMath>
+#include <cmath> // for M_PI
 
 ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
@@ -59,7 +61,7 @@ ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
 
 void ScmGeoLocGraphicsView::wheelEvent(QWheelEvent *event)
 {
-	qreal zoomFactor = pow(2.0, event->angleDelta().y() / 240.0);
+	qreal zoomFactor = qPow(2.0, event->angleDelta().y() / 240.0);
 	qreal ctrZoomFactor = 0.0;
 	if ( event->modifiers() & Qt::ControlModifier )
 	{
@@ -358,7 +360,7 @@ void ScmGeoLocGraphicsView::removePolygon(int id)
 
 QPolygonF ScmGeoLocGraphicsView::convertViewToWGS84(const QPolygonF &viewCoordinatePolygon)
 {
-	QList<QPointF> result;
+	QPolygonF result;
 
 	// convert view coordinates to native coordinate system of the current map (EPSG: 3857)
 	for (const auto &point : viewCoordinatePolygon)

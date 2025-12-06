@@ -49,7 +49,7 @@ void SkyCulturePolygonItem::setSelectionState(bool newSelectionState)
 
 bool SkyCulturePolygonItem::existsAtPointInTime(int year) const
 {
-	return startTime <= year and endTime >= year;
+	return (startTime <= year) && (endTime >= year);
 }
 
 void SkyCulturePolygonItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)

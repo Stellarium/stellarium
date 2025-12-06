@@ -86,6 +86,6 @@ bool ScmPreviewPolygonItem::existsAtPointInTime(int year) const
 	}
 	else
 	{
-		return (startTime <= year) and (endTime >= year);
+		return (startTime <= year) && (endTime >= year);
 	}
 }
