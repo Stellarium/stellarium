@@ -232,13 +232,14 @@
 \titleformat
 	{name=\section, numberless} % Section type being modified
 	[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-	{\bfseries\sffamily\Large} % Format of the whole section
-	{#1} % Format of the section label
+	{\bfseries\sffamily\Large} % Format of the whole section title (label and text)
+	{#1} % the actual label (number)
 	{0cm} % Space between the title and label
 	{} % Code before the label
 	[] % Code after the label
 
-\titlespacing*{\section}{0pt}{12pt}{6pt} % Spacing around section titles, the order is: left, before and after
+%\titlespacing*{\section}{0pt}{12pt}{6pt} % Spacing around section titles, the order is: left, before and after
+\titlespacing*{\section}{0pt}{2ex \@plus 1ex \@minus -.4ex}{1ex \@plus.2ex} % GZ: A bit more flexible.
 
 %-------------------------------------------
 
@@ -260,7 +261,8 @@
 	{} % Code before the label
 	[] % Code after the label
 
-\titlespacing*{\subsection}{0pt}{12pt}{4pt} % Spacing around section titles, the order is: left, before and after
+%\titlespacing*{\subsection}{0pt}{12pt}{4pt} % Spacing around section titles, the order is: left, before and after
+\titlespacing*{\subsection}{0pt}{1ex \@plus 0.1ex \@minus -.4ex}{0.5ex \@plus.2ex} % GZ: A bit more flexible.
 
 %-------------------------------------------
 
@@ -282,20 +284,23 @@
 	{} % Code before the label
 	[] % Code after the label
 
-\titlespacing*{\subsubsection}{0pt}{8pt}{4pt} % Spacing around section titles, the order is: left, before and after
+%\titlespacing*{\subsubsection}{0pt}{8pt}{4pt} % Spacing around section titles, the order is: left, before and after
+\titlespacing*{\subsubsection}{0pt}{0.5ex \@plus-.2ex \@minus .2ex}{.1ex} % GZ: A bit more flexible.
 
 %-------------------------------------------
 
 \titleformat
 	{\paragraph} % Section type being modified
-	[runin] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+%	[runin] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+	[block] % GZ: lets the text begin on a newline 
 	{\bfseries\sffamily} % Format of the whole section
 	{} % Format of the section label
 	{0cm} % Space between the title and label
 	{#1} % Code before the label
 	[] % Code after the label
 
-\titlespacing*{\paragraph}{0pt}{0pt}{6pt} % Spacing around section titles, the order is: left, before and after
+%\titlespacing*{\paragraph}{0pt}{0pt}{6pt} % Spacing around section titles, the order is: left, before and after
+\titlespacing*{\paragraph}{0pt}{0.5ex \@plus-.2ex \@minus .2ex}{.1ex} % GZ: A bit more flexible.
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS

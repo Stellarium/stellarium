@@ -469,35 +469,9 @@ linewidth=1pt]{wBox}
 \newenvironment{config}{\begin{wBox}}{\end{wBox}}
 
 
-%----------------------------------------------------------------------------------------
-%	SECTION NUMBERING IN THE MARGIN
-%----------------------------------------------------------------------------------------
-
-\makeatletter
-\renewcommand{\@seccntformat}[1]{\llap{\textcolor{ocre}{\csname the#1\endcsname}\hspace{1em}}}                    
-\renewcommand{\section}{\@startsection{section}{1}{\z@}
-{-4ex \@plus -1ex \@minus -.4ex}
-{1ex \@plus.2ex }
-{\normalfont\large\sffamily\bfseries}}
-\renewcommand{\subsection}{\@startsection {subsection}{2}{\z@}
-{-3ex \@plus -0.1ex \@minus -.4ex}
-{0.5ex \@plus.2ex }
-{\normalfont\sffamily\bfseries}}
-\renewcommand{\subsubsection}{\@startsection {subsubsection}{3}{\z@}
-{-2ex \@plus -0.1ex \@minus -.2ex}
-{.2ex \@plus.2ex }
-{\normalfont\small\sffamily\bfseries}}                        
-\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}
-{-2ex \@plus-.2ex \@minus .2ex}
-{.1ex}
-{\normalfont\small\sffamily\bfseries}}
-
-
-\makeatother
-
 \usepackage{marvosym}% For the Zodiac symbols, \Aries etc.
 \usepackage{wasysym}% For \diameter etc.
-\usepackage{tocvsec2} % Allows fine-tuning TOC depth. (to suppress GPL sections in TOC but have them still numbered)
+
 %\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
 %\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
 %\lstnewenvironment{commands}{\begin{wBox}\lstset{basicstyle=\ttfamily}\begin{lstlisting}}{\end{lstlisting}\end{wBox}}
