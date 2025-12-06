@@ -35,6 +35,13 @@
 
 namespace scm
 {
+/**
+ * @brief Class that represents a constellation artwork.
+ * 
+ * Due to the lambda capture of 'this' in QObject::connect,
+ * the address of a ScmConstellationArtwork instance must
+ * not change during its lifetime!
+ */
 class ScmConstellationArtwork
 {
 public:
@@ -129,6 +136,11 @@ private:
      */
 	void drawOptimized(StelPainter &sPainter, const SphericalRegion &region, const Vec3d &obsVelocity) const;
 
+	/**
+	 * @brief Initializes the artwork values from the ConstellationMgr.
+	 */
+	void initValues();
+
 	/// Holds the anchors of the artwork.
 	std::array<Anchor, 3> anchors;
 
@@ -147,8 +159,8 @@ private:
 	/// Holds the intensity scale based on the Field of View.
 	float artIntensityFovScale = 1.0f;
 
-	/// Holds the opacity of the art.
-	float artOpacity = 0.42;
+	/// Holds the intensity of the art.
+	float artIntensity = 0.42;
 
 	/// Indicates if the artwork has an image that can be drawn.
 	bool hasArt = false;
