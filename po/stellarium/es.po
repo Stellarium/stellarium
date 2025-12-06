@@ -5010,7 +5010,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:128 src/ui_configurationDialog.h:1911
 msgid "Plugins"
-msgstr "Plugins"
+msgstr "Complementos"
 
 #: src/gui/ConfigurationDialog.cpp:785
 msgid "Select screenshot directory"
@@ -13180,8 +13180,8 @@ msgstr "Posición"
 #: src/ui_searchDialogGui.h:866
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
-"Algunos objetos se pueden encontrar después de activar los respectivos plug-"
-"ins"
+"Algunos objetos se pueden encontrar después de activar los complementos "
+"respectivos"
 
 #: src/ui_searchDialogGui.h:868
 msgid "names in English"
@@ -17719,7 +17719,7 @@ msgstr "AP="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 msgid "Angle Measure Plug-in"
-msgstr "Plugin de Medición de Ángulos"
+msgstr "Complemento de Medición de Ángulos"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 msgid ""
@@ -17760,7 +17760,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:285
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:286
 msgid "Angle Measure Plug-in Configuration"
-msgstr "Configuración del plugin de Medición de Ángulos"
+msgstr "Configuración del complemento Medición de Ángulos"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:287
 msgid "Show in Equatorial Coordinates"
@@ -18504,7 +18504,7 @@ msgstr "Número f:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:625
 msgid "Oculars Plug-in"
-msgstr "Plugin de Oculares"
+msgstr "Complemento de Oculares"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:633
 msgid "Barlow lens feature"
@@ -20228,15 +20228,15 @@ msgstr "satélite artificial"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:775
 msgid "Stellarium Satellites Plugin"
-msgstr "Plugin de observacion satelites de Stellarium"
+msgstr "Complemento de Observación de satélites de Stellarium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:786
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
-"El plugin de Satélites predice las posiciones de los satélites artificiales "
-"en órbita terrestre."
+"El complemento de satélites predice las posiciones de los satélites "
+"artificiales en la órbita terrestre."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:788
 msgid "Notes for users"
@@ -20295,8 +20295,8 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"El plugin de satélites está en desarrollo. Algunas características están "
-"incompletas, inexistentes o erróneas."
+"El complemento de satélites aún está en desarrollo. Algunas características "
+"están incompletas, faltan o presentan errores."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:801
 msgid "Altitude classifications for geocentric orbits"
@@ -21440,8 +21440,8 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a"
 " computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"Este plug-in permite que Stellarium envíe comandos \"slew\" a un telescopio "
-"en un soporte computarizado (un \"telescopio GoTo\")."
+"Este complemento permite que Stellarium envíe comandos \"slew\" a un "
+"telescopio en un soporte computarizado (un \"telescopio GoTo\")."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:174
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:242
@@ -21721,11 +21721,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
 msgid "Telescope Control plug-in"
-msgstr "Plugin controlador de telescopio"
+msgstr "Complemento controlador de telescopios"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
 msgid "Plug-in and GUI programming"
-msgstr "Plug-in de interfaz gráfica de usuario y programación"
+msgstr "Complemento de Interfaz gráfica de usuario y programación"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 msgid "ASCOM Telescope Client"
@@ -21744,8 +21744,8 @@ msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
 msgstr ""
-"Este plug-in se basa y reutiliza una gran cantidad de código bajo la GNU "
-"General Public License:"
+"Este complemento se basa y reutiliza una gran cantidad de código bajo la GNU"
+" General Public License:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 msgid ""
@@ -21818,7 +21818,7 @@ msgstr "La función de control del telescopio original"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "Using this plug-in"
-msgstr "Usar este plug-in"
+msgstr "Usar este complemento"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:352
@@ -21885,19 +21885,20 @@ msgid ""
 "collisions and similar situations. (To abort a slew, you can start another "
 "one to a safe position.)"
 msgstr ""
-"Este plug-in le permite a Stellarium enviar solamente comandos '<b>slew</b>'"
-" ('go to') al dispositivo y recibir su posición actual. No puede emitir "
-"otros comandos, por lo que los usuarios deben ser conscientes de la "
-"posibilidad de colisiones de montaje y situaciones similares. (Para abortar "
-"una matanza, puede iniciar otra a una posición segura.)"
+"Este complemento le permite a Stellarium enviar solamente comandos "
+"«<b>slew</b>» («ir a») al dispositivo y recibir su posición actual. No puede"
+" emitir otros comandos, por lo que los usuarios deben ser conscientes de la "
+"posibilidad de colisiones de montaje y situaciones similares (para abortar "
+"un comando, puede iniciar otro en una ubicación segura)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
-"A partir de la versión actual, este plug-in no permite el seguimiento por "
-"satélite, y no es muy adecuado para las observaciones lunares y planetarias."
+"A partir de la versión actual, este complemento no permite el seguimiento "
+"por satélite, y no es muy adecuado para las observaciones lunares y "
+"planetarias."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
 msgid ""
@@ -21953,7 +21954,7 @@ msgid ""
 msgstr ""
 "A partir de Stellarium 0.10.5, la función de control del telescopio original"
 " ha sido eliminado. Ya no hay una manera de controlar un telescopio con "
-"Stellarium sin este plug-in."
+"Stellarium sin este complemento."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
 msgid ""
@@ -22021,17 +22022,17 @@ msgid ""
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
-"En Linux y Mac OS X ambos casos se manejan de forma idéntica con el plug-in."
-" En Windows Una Conexión USB PUEDE requerir software de un 'puerto serie "
-"virtual \", si no se suministra con el cable o el telescopio."
+"En Linux y Mac OS X ambos casos se manejan de forma idéntica con el "
+"complemento. En Windows, una conexión USB puede requerir software de un "
+"\"puerto serie virtual\", si no se suministra con el cable o el telescopio."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
 msgstr ""
-"Este software crea un puerto COM virtual ('falso') que se corresponde con el"
-" puerto USB real así que puede ser utilizada por el plug-in."
+"Este software crea un puerto COM virtual («falso») que corresponde con el "
+"puerto USB real. así que puede ser utilizado por el complemento."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
@@ -22054,7 +22055,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
 msgid "The plug-in's main window can be opened:"
-msgstr "El plug-in ventana principal se puede abrir:"
+msgstr "La ventana principal del complemento se puede abrir:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
 msgid ""
@@ -22355,7 +22356,7 @@ msgid ""
 msgstr ""
 "Una serie de círculos que representan diferentes campos de visión se pueden "
 "añadir alrededor del marcador del telescopio. Esta es una reliquia de los "
-"tiempos antes de que existía el plug-in<strong>Oculares </strong>."
+"tiempos antes de que existiera el complemento<strong>Oculares </strong>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
 msgid ""
@@ -22443,7 +22444,7 @@ msgid ""
 "of the plug-in."
 msgstr ""
 "Presionar <b>Configurar telescopios...</b> abre la {ventana principal} del "
-"plugin."
+"complemento."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
 msgid "Sending commands"
@@ -22589,7 +22590,7 @@ msgstr ""
 "<b>SynScan</b> es también el nombre del controlador de mano utilizado en "
 "otras monturas de Sky-Watcher GoTo, y parece que cualquier montaje que "
 "utiliza un SynScan controlador versión 3.0 o superior es compatible con el "
-"plug-in, que utiliza el protocolo básico."
+"complemento, que utiliza el protocolo básico."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
@@ -22623,11 +22624,11 @@ msgid ""
 "that will react in the same way as the reticle of a real telescope "
 "controlled by the plug-in."
 msgstr ""
-"Si desea probar este plug-in sin un dispositivo conectado a la computadora, "
-"elija <b> Nada, solo simular una (retícula móvil) </b> en el campo <b> "
-"Telescopio controlado por: </b>. Se mostrará un retículo de telescopio que "
-"reaccionará de la misma manera que el retículo de un telescopio real "
-"controlado por el plug-in."
+"Si desea probar este complemento sin un dispositivo conectado a la "
+"computadora, elija <b> Nada, solo simular una (retícula móvil) </b> en el "
+"campo <b> Telescopio controlado por: </b>. Se mostrará un retículo de "
+"telescopio que reaccionará de la misma manera que el retículo de un "
+"telescopio real controlado por el complemento."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:504
@@ -23085,8 +23086,8 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Plugin de Implementación de la interfaz de usuario de texto (TUI) de la "
-"serie 0.9.x, utilizada en sistemas planetarios"
+"Complemento de implementación de la interfaz de usuario de texto (TUI) de la"
+" serie 0.9.x, utilizada en sistemas planetarios"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:152
 msgid "Altitude:"
@@ -23582,7 +23583,8 @@ msgstr "Supernovas Históricas"
 
 #: plugins/Supernovae/src/Supernovae.cpp:75
 msgid "This plugin allows you to see some bright historical supernovae."
-msgstr "Este plugin le permite ver algunas supernovas históricas brillantes."
+msgstr ""
+"Este complemento le permite ver algunas supernovas históricas brillantes."
 
 #: plugins/Supernovae/src/Supernovae.cpp:151
 msgid "Historical Supernovae configuration window"
@@ -23602,11 +23604,12 @@ msgstr "supernova"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 msgid "Historical Supernovae Plug-in"
-msgstr "Plugin de Supernovas Históricas"
+msgstr "Complemento de Supernovas Históricas"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
 msgid "This plugin allows you to see some bright historical supernovae: "
-msgstr "Este plugin permite ver algunas supernovas históricas brillantes: "
+msgstr ""
+"Este complemento le permite ver algunas supernovas históricas brillantes: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 #: plugins/Novae/src/gui/NovaeDialog.cpp:124
@@ -23674,7 +23677,7 @@ msgstr "Configuración de Supernovas Históricas"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:198
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr "Plugin del complemento de Supernovas Históricas"
+msgstr "Configuración del complemento Supernovas Históricas"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:199
 #: plugins/Novae/src/ui_novaeDialog.h:202
@@ -23715,7 +23718,8 @@ msgstr "Estrellas Náuticas"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:303
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
-"Este plugin marca estrellas de navegación desde un conjunto seleccionado."
+"Este complemento marca estrellas de navegación desde un conjunto "
+"seleccionado."
 
 #: plugins/NavStars/src/NavStars.cpp:119
 msgid "Mark the navigational stars"
@@ -24037,7 +24041,7 @@ msgstr "Programa espacial Apolo"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:296
 msgid "Navigational Stars Plug-in"
-msgstr "Plug-in de  estrellas de navegación"
+msgstr "Complemento de Estrellas de Navegación"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:307
 msgid ""
@@ -24265,7 +24269,8 @@ msgstr "Novas Brillantes"
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:119
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr ""
-"Un plugin que muestra algunas novas brillantes en la galaxia Vía Láctea."
+"Un complemento que muestra algunas novas brillantes en la galaxia de la Vía "
+"Láctea."
 
 #: plugins/Novae/src/Novae.cpp:145
 msgid "Bright Novae configuration window"
@@ -24277,7 +24282,7 @@ msgstr "nova"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:113
 msgid "Bright Novae Plug-in"
-msgstr "Plugin de Novas Brillantes"
+msgstr "Complemento de Novas Brillantes"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 msgid ""
@@ -24332,7 +24337,7 @@ msgstr "Configuración de Novas Brillantes"
 
 #: plugins/Novae/src/ui_novaeDialog.h:201
 msgid "Bright Novae Plug-in Configuration"
-msgstr "Configuración de plugin de Novas Brillantes"
+msgstr "Configuración del complemento Novas Brillantes"
 
 #: plugins/Quasars/src/Quasars.cpp:76
 msgid ""
@@ -24374,7 +24379,7 @@ msgstr "Densidad de flujo de radio alrededor de 1.4 GHz (21 cm)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
 msgid "Quasars Plug-in"
-msgstr "Plugin de Cuásares"
+msgstr "Complemento de Cuásares"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 msgid ""
@@ -24405,7 +24410,7 @@ msgstr "Configuración de Cuásares"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 msgid "Quasars Plug-in Configuration"
-msgstr "Configuración del Plugin de Cuásares"
+msgstr "Configuración del complemento Cuásares"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 msgid "Settings for quasars"
@@ -24577,7 +24582,7 @@ msgstr "púlsar con interferencias"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Pulsars Plug-in"
-msgstr "Plugin de Púlsares"
+msgstr "Complemento de Púlsares"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
 #, qt-format
@@ -24626,7 +24631,7 @@ msgstr "Los púlsares están actualizados"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:290
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:291
 msgid "Pulsars Plug-in Configuration"
-msgstr "Configuración del Plugin de Púlsares"
+msgstr "Configuración del complemento Púlsares"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:298
 msgid "Settings for pulsars"
@@ -24691,7 +24696,7 @@ msgstr "Config. de control remoto"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
 msgid "Remote Control Plug-in"
-msgstr "Plugin de control remoto"
+msgstr "Complemento de control remoto"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:143
 msgid ""
@@ -24716,12 +24721,13 @@ msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
 msgid "This plugin was developed during ESA SoCiS 2015."
-msgstr "Este plugin fue desarrollado durante ESA SoCiS 2015."
+msgstr "Este complemento fue desarrollado durante ESA SoCiS 2015."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
-msgstr "Este plugin utiliza el {servidor QtWebApp HTTP} por Stefan Frings."
+msgstr ""
+"Este complemento utiliza el {servidor QtWebApp HTTP} por Stefan Frings."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
@@ -24753,7 +24759,7 @@ msgstr "Configuración de Control remoto"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:231
 msgid "Remote Control Plug-in Configuration"
-msgstr "Configuración del plug-in de Control remoto"
+msgstr "Configuración del complemento Control remoto"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:232
 msgid "Port Number:"
@@ -24892,7 +24898,7 @@ msgstr "Conectado a %1:%2"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 msgid "Remote Sync Plug-in"
-msgstr "Plug-in de sincronización remota"
+msgstr "Complemento de Sincronización Remota"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:215
 msgid ""
@@ -24924,7 +24930,7 @@ msgstr "Consulte el manual para obtener una descripción detallada."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:219
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
-msgstr "Este plugin se desarrolló durante la ESA SoCiS 2015&amp;2016."
+msgstr "Este complemento se desarrolló durante la ESA SoCiS 2015&amp;2016."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:248
 msgid "Server Name"
@@ -24936,7 +24942,7 @@ msgstr "Servidor no está activo."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:422
 msgid "Remote Sync Plug-in Configuration"
-msgstr "Configuración de plugin de sincronización remota"
+msgstr "Configuración del complemento Sincronización Remota"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:423
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
@@ -25304,7 +25310,7 @@ msgstr "Método de detección del exoplaneta"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
 msgid "Exoplanets Plug-in"
-msgstr "Plugin de Exoplanetas"
+msgstr "Complemento de Exoplanetas"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 #, qt-format
@@ -28164,7 +28170,7 @@ msgstr "Observabilidad"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Observability Plug-in"
-msgstr "Plugin de Observabilidad"
+msgstr "Complemento de Observabilidad"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 msgid ""
@@ -28177,15 +28183,15 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti"
 " for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
-"Plugin que analiza la observabilidad del objeto seleccionado (o el centro de"
-" la pantalla, si no se selecciona ningún objeto). El plugin puede mostrar "
-"tiempos de subida, tránsito y fijación, así como la mejor época del año (es "
-"decir, la mayor separación angular del Sol), el intervalo de fechas cuando "
-"la fuente está por encima del horizonte en la noche oscura y las fechas de "
-"Acronychal y Cosmic suben / set. <br> Efemérides de los objetos del Sistema "
-"Solar y efectos de paralaje. <br> <br> El autor agradece Alexander Wolf y "
-"Georg Zotti por su consejo. <br> <br> Ivan Marti-Vidal (Observatorio "
-"Espacial Onsala)"
+"Complemento que analiza la observabilidad de la fuente seleccionada (o el "
+"centro de la pantalla, si no se ha seleccionado ninguna). El complemento "
+"puede mostrar las horas de salida, tránsito y puesta, así como la mejor "
+"época del año (es decir, la mayor separación angular del Sol), el rango de "
+"fechas en que la fuente se encuentra sobre el horizonte en la noche oscura y"
+" las fechas de salida y puesta acrónimas y cósmicas. Se tienen en cuenta las"
+" <br>efemérides de los objetos del Sistema Solar y los efectos de paralaje. "
+"<br><br>El autor agradece a Alexander Wolf y Georg Zotti por sus consejos. "
+"<br><br>Ivan Marti-Vidal (Observatorio Espacial de Onsala)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:154
 msgid "Explanation of some parameters"
@@ -28369,7 +28375,7 @@ msgstr "Configuración de Observabilidad"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:294
 msgid "Observability Plug-in Configuration"
-msgstr "Configuración del Plugin de Observabilidad"
+msgstr "Configuración del complemento Observabilidad"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:295
 msgid "Font color and size"
@@ -28432,7 +28438,7 @@ msgstr "Ecuación de Tiempo"
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:52
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
 msgid "This plugin shows the value of the equation of time."
-msgstr "Este plugin muestra el valor de la ecuación de tiempo."
+msgstr "Este complemento muestra el valor de la ecuación de tiempo."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:91
 msgid "Show value of the equation of time"
@@ -28440,7 +28446,7 @@ msgstr "Mostrar valor de la ecuación del tiempo"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:85
 msgid "Equation of Time plug-in"
-msgstr "Plugin de Ecuación de Tiempo"
+msgstr "Complemento de Ecuación de Tiempo"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:209
 msgid ""
@@ -28467,7 +28473,7 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:211
 msgid "Show plug-ins button on toolbar"
-msgstr "Mostrar botones de plugin en la barra de herramentas"
+msgstr "Mostrar botón de complemento en la barra de herramientas"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:212
 msgid "Use minutes and seconds"
@@ -29119,7 +29125,7 @@ msgstr "Actualización exitosa"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:192
 msgid "Meteor Showers Plug-in"
-msgstr "Plugin de Lluvia de Meteoros"
+msgstr "Complemento de Lluvia de Meteoros"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:202
 msgid ""
@@ -29403,11 +29409,11 @@ msgstr "Configuración general"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:397
 msgid "Enable plugin at startup"
-msgstr "Activar plugin al inicar"
+msgstr "Activar complemento al inicar"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:398
 msgid "Show a button to enable/disable the plugin"
-msgstr "Mostrar un botón para activar/desactivar el plugin"
+msgstr "Mostrar un botón para activar/desactivar el complemento"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:399
 msgid "Show a button to open the search panel"
@@ -29554,7 +29560,7 @@ msgstr "Configuración de Cámara Mosaico"
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:247
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:268
 msgid "Show plug-in button on toolbar"
-msgstr "Mostrar botón del plugin en la barra de herramientas"
+msgstr "Mostrar botón de complemento en barra de herramientas"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:251
 msgid "Right Ascension:"
@@ -29693,7 +29699,7 @@ msgstr "Coordenadas del Raton"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:58
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr "Este plugin muestra las coordenadas del puntero del ratón."
+msgstr "Este complemento muestra las coordenadas del puntero del ratón."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:101
 msgid "Show coordinates of the mouse pointer"
@@ -29751,7 +29757,7 @@ msgstr "AH/Dec"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
 msgid "Pointer Coordinates plug-in"
-msgstr "Plugin de Coordenadas del Raton"
+msgstr "Complemento de Coordenadas del Ratón"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
 msgid "Show coordinates of the mouse cursor on the screen."
@@ -29863,7 +29869,7 @@ msgstr "Coordenada Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:278
 msgid "Scenery3d plugin loaded!"
-msgstr "¡Plugin Scenery3d cargado!"
+msgstr "¡Complemento Scenery3d cargado!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:336
 msgid "Scenery3d: 3D landscapes"
@@ -30492,7 +30498,7 @@ msgstr ""
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:64
 msgid "Plugin to draw and export sky cultures in Stellarium."
-msgstr "Plugin para dibujar y exportar culturas del cielo en Stellarium."
+msgstr "Complemento para dibujar y exportar culturas del cielo en Stellarium."
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:479
 msgid "INFO"
@@ -31210,7 +31216,7 @@ msgstr "error si puede leer esto"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 msgid "ArchaeoLines Plug-in"
-msgstr "Plugin ArchaeoLines"
+msgstr "Complemento ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:219
 msgid ""
@@ -31321,7 +31327,7 @@ msgstr "Configuración de ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:682
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr "Configuración del plugin ArchaeoLines"
+msgstr "Configuración del complemento ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:683
 msgid "Crossquarter Lines"
@@ -35827,15 +35833,15 @@ msgstr "Menor"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
 msgid "Calendars Plug-in"
-msgstr "Plugin de Calendarios"
+msgstr "Complemento de Calendarios"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
 msgid ""
 "The Calendars plugin provides an interface to various calendars used around "
 "the world."
 msgstr ""
-"El plugin Calendarios proporciona una interfaz a varios calendarios usados "
-"alrededor del mundo."
+"El complemento de calendarios proporciona una interfaz a varios calendarios "
+"utilizados alrededor del mundo."
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
 msgid "Julian Calendar"
@@ -35983,7 +35989,7 @@ msgstr "Referencias"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:237
 msgid "This plugin is based on:"
-msgstr "El plugin está basado en:"
+msgstr "El complemento está basado en:"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:902
 msgid "Calendars Configuration"
@@ -35991,7 +35997,7 @@ msgstr "Configuración de calendarios"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:903
 msgid "Calendars Plug-in Configuration"
-msgstr "Configuración del plugin de calendarios"
+msgstr "Configuración del complemento Calendarios"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:912
 msgctxt "calendar"
