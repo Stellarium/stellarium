@@ -26,7 +26,6 @@
 //! Custom QGraphicsPathItem that allows to display a path defined by 3 points.
 class ScmPreviewPathItem : public QGraphicsPathItem
 {
-
 public:
 	ScmPreviewPathItem();
 

@@ -26,7 +26,6 @@
 //! Simple QGraphicsPolygonItem defined by a polygon, startTime and EndTime.
 class ScmPreviewPolygonItem : public QGraphicsPolygonItem
 {
-
 public:
 	ScmPreviewPolygonItem(bool isTemporary);
 	ScmPreviewPolygonItem(int startTime, int endTime);

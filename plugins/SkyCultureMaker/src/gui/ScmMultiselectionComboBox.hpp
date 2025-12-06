@@ -34,7 +34,6 @@ class ScmMultiselectionComboBox : public QComboBox
 	Q_OBJECT
 
 public:
-
 	ScmMultiselectionComboBox(QWidget *parent);
 	~ScmMultiselectionComboBox();
 

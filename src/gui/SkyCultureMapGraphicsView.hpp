@@ -110,7 +110,7 @@ private:
 	 * @param A list of points in lat / lon coordinates.
 	 * @return A list of points in meter coordinates.
 	 */
-	QList<QPointF> convertLatLonToMeter(const QList<QPointF> &latLonCoordinates);
+	QPolygonF convertLatLonToMeter(const QPolygonF &latLonCoordinates);
 
 	/**
 	 * @brief Convert the points in the given list from EPSG 3857 to view coordinates.
@@ -118,7 +118,7 @@ private:
 	 * @param A list of points in real-world coordinates.
 	 * @return A list of points in view coordinates.
 	 */
-	QList<QPointF> convertMeterToView(const QList<QPointF> &meterCoordinates);
+	QPolygonF convertMeterToView(const QPolygonF &meterCoordinates);
 
 	/**
 	 * @brief Calculate a bounding box that contains all given items.

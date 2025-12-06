@@ -37,8 +37,11 @@ void ScmPreviewPathItem::setFirstPoint(QPointF point)
 {
 	// init path (path is required to have 3 elements by setMousePoint and setLastPoint)
 	currentPath.moveTo(point);
+	// points are not added to path via lineTo when using the same point
+	// ---> add point(1, 1) and then set pos back to correct position
 	currentPath.lineTo(point + QPointF(1, 1));
 	currentPath.lineTo(point);
+	currentPath.setElementPositionAt(1, point.x(), point.y());
 	setPath(currentPath);
 }
 

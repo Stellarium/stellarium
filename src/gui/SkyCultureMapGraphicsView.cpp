@@ -144,13 +144,13 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 				{
 					endTime = polygonObject.value("endTime").toString().toInt();
 				}
-				QList<QPointF> geometry;
+				QPolygonF geometry;
 
 				const auto geometryArray = polygonObject.value("geometry").toArray();
 				for (const auto &point : geometryArray)
 				{
 					auto pointArray = point.toArray();
-					geometry.append(QPointF(pointArray[0].toDouble(), pointArray[1].toDouble()));
+					geometry << QPointF(pointArray[0].toDouble(), pointArray[1].toDouble());
 				}
 
 				SkyCulturePolygonItem *item = new SkyCulturePolygonItem(cultureIdToTranslationMap.value(currentCulture), startTime, endTime);
@@ -270,23 +270,23 @@ void SkyCultureMapGraphicsView::scaleView(double factor)
 	scale(factor, factor);
 }
 
-QList<QPointF> SkyCultureMapGraphicsView::convertLatLonToMeter(const QList<QPointF> &latLonCoordinates)
+QPolygonF SkyCultureMapGraphicsView::convertLatLonToMeter(const QPolygonF &latLonCoordinates)
 {
-	QList<QPointF> meter_coords;
+	QPolygonF meterCoordinates;
 
 	for(auto point : latLonCoordinates)
 	{
-		qreal xMeter = (point.x() * 20037508.3427892439067363739014) / 180.0;;
+		qreal xMeter = (point.x() * 20037508.3427892439067363739014) / 180.0;
 		qreal yMeter = ((qLn(qTan(((90.0 + point.y())* M_PI) / 360.0)) / (M_PI / 180.0)) * 20037508.3427892439067363739014) / 180.0;
-		meter_coords.append(QPointF(xMeter, yMeter));
+		meterCoordinates << QPointF(xMeter, yMeter);
 	}
 
-	return convertMeterToView(meter_coords);
+	return convertMeterToView(meterCoordinates);
 }
 
-QList<QPointF> SkyCultureMapGraphicsView::convertMeterToView(const QList<QPointF> &meterCoordinates)
+QPolygonF SkyCultureMapGraphicsView::convertMeterToView(const QPolygonF &meterCoordinates)
 {
-	QList<QPointF> view_coords;
+	QPolygonF viewCoordinates;
 
 	// cropped map (EPSG: 3857) extent:
 	// x / lon: -20037507.0671618431806564 | 20037507.0671618431806564 ---> sum(abs) = 40075014.1343236863613128
@@ -296,10 +296,10 @@ QList<QPointF> SkyCultureMapGraphicsView::convertMeterToView(const QList<QPointF
 		// used map is cropped ---> project points (in meter) from full extent to smaller / cropped extent
 		qreal xView = ((point.x() + 20037507.0671618431806564) / 40075014.1343236863613128) * defaultRect.width();
 		qreal yView = ((point.y() - 18418386.3090785145759583) / -37620870.87264694646000862) * defaultRect.height();
-		view_coords.append(QPointF(xView, yView));
+		viewCoordinates << QPointF(xView, yView);
 	}
 
-	return view_coords;
+	return viewCoordinates;
 }
 
 void SkyCultureMapGraphicsView::selectAllCulturePolygon(const QString &skyCultureId)
