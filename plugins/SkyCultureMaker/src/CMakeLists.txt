@@ -35,6 +35,18 @@ SET( SkyCultureMaker_SRCS
      gui/ScmSkyCultureExportDialog.cpp
      gui/ScmStartDialog.hpp
      gui/ScmStartDialog.cpp
+     gui/ScmGeoLocGraphicsView.hpp
+     gui/ScmGeoLocGraphicsView.cpp
+     gui/ScmPreviewPathItem.hpp
+     gui/ScmPreviewPathItem.cpp
+     gui/ScmPreviewPolygonItem.hpp
+     gui/ScmPreviewPolygonItem.cpp
+     gui/ScmPolygonInfoTreeItem.hpp
+     gui/ScmPolygonInfoTreeItem.cpp
+     gui/ScmMultiselectionComboBox.hpp
+     gui/ScmMultiselectionComboBox.cpp
+     gui/ScmAdvancedSpinBox.hpp
+     gui/ScmAdvancedSpinBox.cpp
 
      types/Anchor.hpp
      types/Classification.hpp
@@ -80,6 +92,12 @@ ADD_LIBRARY(SkyCultureMaker-static STATIC ${SkyCultureMaker_SRCS} ${SkyCultureMa
 SET_TARGET_PROPERTIES(SkyCultureMaker-static PROPERTIES OUTPUT_NAME "SkyCultureMaker")
 
 list(APPEND SKY_CULTURE_MAKER_PLUGIN_LINK_LIBS Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     list(APPEND SKY_CULTURE_MAKER_PLUGIN_LINK_LIBS Qt${QT_VERSION_MAJOR}::Svg)
+ELSE()
+     list(APPEND SKY_CULTURE_MAKER_PLUGIN_LINK_LIBS Qt${QT_VERSION_MAJOR}::SvgWidgets)
+ENDIF()
+
 # SCM_CONVERTER_ENABLED is inherited from the parent CMakeLists.txt scope
 if(SCM_CONVERTER_ENABLED)
   list(APPEND SKY_CULTURE_MAKER_PLUGIN_LINK_LIBS libskycultureconverter unarr)

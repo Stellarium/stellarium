@@ -37,6 +37,16 @@ void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 	ScmSkyCulture::fallbackToInternationalNames = fallback;
 }
 
+void scm::ScmSkyCulture::setStartTime(int startTime)
+{
+	ScmSkyCulture::startTime = startTime;
+}
+
+void scm::ScmSkyCulture::setEndTime(const QString &endTime)
+{
+	ScmSkyCulture::endTime = endTime;
+}
+
 scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
                                                             const std::vector<ConstellationLine> &lines,
                                                             const bool isDarkConstellation)
@@ -45,11 +55,23 @@ scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
 	return *constellations.back();
 }
 
+void scm::ScmSkyCulture::addLocation(const scm::CulturePolygon &polygon)
+{
+	locations.push_back(polygon);
+}
+
 void scm::ScmSkyCulture::removeConstellation(const QString &id)
 {
 	constellations.erase(remove_if(begin(constellations), end(constellations),
 	                               [id](const std::unique_ptr<ScmConstellation> &c) { return c->getId() == id; }),
 	                     end(constellations));
+}
+
+void scm::ScmSkyCulture::removeLocation(int id)
+{
+	locations.erase(std::remove_if(std::begin(locations), std::end(locations),
+							  [id](const CulturePolygon &p) { return p.id == id; }),
+					std::end(locations));
 }
 
 scm::ScmConstellation *scm::ScmSkyCulture::getConstellation(const QString &id)
@@ -67,12 +89,25 @@ std::vector<std::unique_ptr<scm::ScmConstellation>> *scm::ScmSkyCulture::getCons
 QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 {
 	QJsonObject scJsonObj;
+
 	scJsonObj["id"] = id;
+
+	QJsonArray regionArray;
+	for (const auto &currentRegion : description.region)
+	{
+		regionArray.append(REGIONS.at(currentRegion).name);
+	}
+	scJsonObj["region"] = regionArray;
+
+	scJsonObj["startTime"] = startTime;
+	scJsonObj["endTime"] = endTime;
+
 	// for some reason, the classification is inside an array, eg. ["historical"]
 	QJsonArray classificationArray = QJsonArray::fromStringList(
 		QStringList() << classificationTypeToString(description.classification));
 	scJsonObj["classification"]                  = classificationArray;
 	scJsonObj["fallback_to_international_names"] = fallbackToInternationalNames;
+
 	QJsonArray constellationsArray;
 	for (const auto &constellation : constellations)
 	{
@@ -81,6 +116,21 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 	scJsonObj["constellations"] = constellationsArray;
 
 	return scJsonObj;
+}
+
+QJsonObject scm::ScmSkyCulture::getTerritoryJson() const
+{
+	QJsonObject locJsonObj;
+
+	QJsonArray locationsArray;
+	for (const auto &culturePolygon : locations)
+	{
+		locationsArray.append(culturePolygon.toJson());
+	}
+
+	locJsonObj["polygons"] = locationsArray;
+
+	return locJsonObj;
 }
 
 void scm::ScmSkyCulture::draw(StelCore *core) const

@@ -190,6 +190,15 @@ void ScmConstellationDialog::createDialogContent()
 		});
 	imageItem->setAnchorPositionChangedCallback([this]() { this->updateArtwork(); });
 
+	// artwork tool tip
+  updateTranslatableStrings();
+	ui->tooltipLabel->setText(artworkToolTip);
+	ui->tooltipLabel->raise();
+	ui->tooltipLabel->hide();
+	connect(ui->tooltipBtn, &QToolButton::clicked, this, [this]() {
+		ui->tooltipLabel->show();
+	});
+	connect(ui->tooltipLabel, &QPushButton::clicked, this, [this]() { ui->tooltipLabel->hide(); });
 	updateTranslatableStrings();
 	ui->tooltipBtn->setToolTip(artworkToolTip);
 

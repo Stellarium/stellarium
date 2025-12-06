@@ -20,6 +20,7 @@
 
 
 #include "ViewDialog.hpp"
+#include "SeparatorListWidgetItem.hpp"
 #include "ui_viewDialog.h"
 #include <QMessageBox>
 #include "AddRemoveLandscapesDialog.hpp"
@@ -71,7 +72,8 @@ struct Page
 		DSO,
 		Markings,
 		Landscape,
-		SkyCulture,
+		SkyCultureMap,
+		SkyCultureDescription,
 		Surveys,
 
 		COUNT
@@ -213,8 +215,16 @@ void ViewDialog::createDialogContent()
 
 	// TODOs after properties merge:
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
-	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
+	connect(ui->culturesListWidget, &QListWidget::currentTextChanged, this, [this](const QString &text) {
+		int startTime = ui->culturesListWidget->currentItem()->data(Qt::UserRole).toInt(); // Qt::UserRole = startTime
+		ui->skyCultureMapGraphicsView->selectCulture(text, startTime);
+	});
+	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureNameI18(QString)));
+	connect(ui->skyCultureMapGraphicsView, &SkyCultureMapGraphicsView::cultureSelected, &StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::setCurrentSkyCultureNameI18);
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &ViewDialog::skyCultureChanged);
+
+	// skyCulture list search bar
+	connect(ui->culturesListSearchLineEdit, &QLineEdit::textChanged, this, &ViewDialog::filterSkyCultures);
 
 	// Connect and initialize checkboxes and other widgets
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
@@ -582,6 +592,20 @@ void ViewDialog::createDialogContent()
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::defaultSkyCultureIDChanged,
 	        this, &ViewDialog::updateDefaultSkyCulture);
 	updateDefaultSkyCulture();
+
+	initSkyCultureTime();
+
+	connect(ui->skyCultureTimeSlider, &QSlider::valueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
+	connect(ui->skyCultureCurrentTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
+	connect(ui->skyCultureMapGraphicsView, &SkyCultureMapGraphicsView::timeValueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
+
+	connect(ui->skyCultureMinTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::changeMinTime);
+	connect(ui->skyCultureMaxTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::changeMaxTime);
+
+	connect(ui->applyTimeOnListCheckBox, &QCheckBox::toggled, this, &ViewDialog::filterSkyCultures);
+	connect(ui->useLocationForRotationCheckBox, &QCheckBox::toggled, this, &ViewDialog::initiateSkyCultureMapRotation);
+	connect(StelApp::getInstance().getCore(), &StelCore::locationChanged, this, &ViewDialog::initiateSkyCultureMapRotation);
+
 
 	configureSkyCultureCheckboxes();
 	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
@@ -1361,12 +1385,60 @@ void ViewDialog::populateLists()
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	const QStringList &skycultures = app.getSkyCultureMgr().getSkyCultureListI18();
-	for ( const auto& s : skycultures  )
+
+	// hard coded sequence of UN-regions to maintain thematic proximity (e.g. eastern, northern, southern, western europe)
+	const QStringList sortedRegions =
+		{"Global",
+		 "Eastern Europe", "Northern Europe", "Southern Europe", "Western Europe",
+		 "Eastern Africa", "Middle Africa", "Northern Africa", "Southern Africa", "Western Africa",
+		 "Caribbean", "Central America", "Northern America", "South America",
+		 "Central Asia", "Eastern Asia", "South-eastern Asia", "Southern Asia", "Western Asia",
+		 "Australasia", "Melanesia", "Micronesia", "Polynesia"};
+
+	const QMultiMap<QString, QString> &cultureRegionMap = app.getSkyCultureMgr().getSkyCultureRegionMapI18();
+	const QMap<QString, QPair<int, QString>> &cultureTimeLimitMap = app.getSkyCultureMgr().getSkyCultureTimeLimitMapI18();
+
+	// remove duplicates in list of occuring regions (optional)
+	QList<QString> occuringRegions = cultureRegionMap.values();
+	std::sort(occuringRegions.begin(), occuringRegions.end());
+	occuringRegions.erase(std::unique(occuringRegions.begin(), occuringRegions.end()));
+
+	QStringList sortedOccuringRegions;
+	for (const auto& region : sortedRegions)
 	{
-		l->addItem(s);
-		l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);
+		if (occuringRegions.contains(region))
+		{
+			sortedOccuringRegions.append(region);
+		}
 	}
+
+	// add regions to list as custom QListWidgetItem
+	for (const auto &region : sortedOccuringRegions)
+	{
+		l->addItem(new SeparatorListWidgetItem(region));
+	}
+
+	QMultiMapIterator<QString, QString> cultureRegionIterator(cultureRegionMap);
+	// find the earliest startTime of all cultures (needed in initSkyCultureTime) ---> evaluate it here so we don't need to iterate over all cultures multiple times
+	int globalStartTime = QDateTime::currentDateTime().date().year();
+
+	cultureRegionIterator.toBack(); // reverse iteration to preserve alphabetical order
+	while (cultureRegionIterator.hasPrevious())
+	{
+		cultureRegionIterator.previous();
+		QListWidgetItem* item = new QListWidgetItem(cultureRegionIterator.key());
+		item->setData(Qt::UserRole, cultureTimeLimitMap.value(cultureRegionIterator.key()).first); // startTime
+		item->setData(Qt::UserRole + 1, cultureTimeLimitMap.value(cultureRegionIterator.key()).second); // endTime
+
+		if (cultureTimeLimitMap.value(cultureRegionIterator.key()).first < globalStartTime)
+		{
+			globalStartTime = cultureTimeLimitMap.value(cultureRegionIterator.key()).first;
+		}
+
+		l->insertItem(l->row(l->findItems(cultureRegionIterator.value(), Qt::MatchContains).at(0)) + 1, item);
+	}
+	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalStartTime);
+
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
@@ -1536,7 +1608,11 @@ void ViewDialog::setLunarSystemLabelStyle(int index)
 void ViewDialog::skyCultureChanged()
 {
 	QListWidget* l = ui->culturesListWidget;
+
+	l->blockSignals(true); // block signals needed so the currentTextChanged signals doesnt loop with the selectCulture slot
 	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
+	l->blockSignals(false);
+
 	updateSkyCultureText();
 	updateDefaultSkyCulture();
 	configureSkyCultureCheckboxes();
@@ -1695,10 +1771,15 @@ void ViewDialog::setCurrentCultureAsDefault(void)
 
 void ViewDialog::updateDefaultSkyCulture()
 {
+	// set Labels to the Min / Max time of the current selected culture (UserRole == startTime, UserRole + 1 == endTime)
+	ui->selectedCultureMinTimeValueLabel->setText(ui->culturesListWidget->currentItem()->data(Qt::UserRole).toString());
+	ui->selectedCultureMaxTimeValueLabel->setText(ui->culturesListWidget->currentItem()->data(Qt::UserRole + 1).toString());
+
 	// Check that the useAsDefaultSkyCultureCheckBox needs to be updated
 	bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+
 	// Check that ray helpers and asterism lines are defined
 	b = GETSTELMODULE(AsterismMgr)->isLinesDefined();
 	ui->showAsterismLinesCheckBox->setEnabled(b);
@@ -1726,6 +1807,226 @@ void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 	if (!current)
 		current = previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+}
+
+void ViewDialog::initSkyCultureTime()
+{
+	int minYear = ui->skyCultureCurrentTimeSpinBox->minimum();
+	int maxYear = QDateTime::currentDateTime().date().year();
+	int currentYear = maxYear;
+
+	// set properties of involved components
+	ui->skyCultureMinTimeSpinBox->setMinimum(minYear);
+	ui->skyCultureMinTimeSpinBox->setMaximum(maxYear);
+	ui->skyCultureMinTimeSpinBox->setValue(minYear);
+
+	ui->skyCultureMaxTimeSpinBox->setMinimum(minYear);
+	ui->skyCultureMaxTimeSpinBox->setMaximum(maxYear);
+	ui->skyCultureMaxTimeSpinBox->setValue(maxYear);
+
+	ui->skyCultureTimeSlider->setMinimum(minYear);
+	ui->skyCultureTimeSlider->setMaximum(maxYear);
+
+	ui->skyCultureCurrentTimeSpinBox->setMaximum(maxYear);
+
+	// reuse function to set Value of timeSlider, currentTimeSpinBox and MapGraphicsView
+	updateSkyCultureTimeValue(currentYear);
+}
+
+void ViewDialog::updateSkyCultureTimeValue(int year)
+{
+	// set timeSlider, currentTimeSpinBox and MapGraphicsView Value to year (block Signals to prevent unwanted functions calls through previous connection)
+	ui->skyCultureTimeSlider->blockSignals(true);
+	ui->skyCultureCurrentTimeSpinBox->blockSignals(true);
+
+	ui->skyCultureTimeSlider->setValue(year);
+	ui->skyCultureCurrentTimeSpinBox->setValue(year);
+
+	ui->skyCultureTimeSlider->blockSignals(false);
+	ui->skyCultureCurrentTimeSpinBox->blockSignals(false);
+
+	ui->skyCultureMapGraphicsView->updateTime(year);
+}
+
+void ViewDialog::changeMinTime(int minYear)
+{
+	int maxYear = ui->skyCultureMaxTimeSpinBox->value();
+
+	if (minYear <= maxYear)
+	{
+		updateSkyCultureTimeRange(minYear, maxYear);
+	}
+	else
+	{
+		ui->skyCultureMinTimeSpinBox->blockSignals(true);
+		ui->skyCultureMinTimeSpinBox->setValue(maxYear);
+		ui->skyCultureMinTimeSpinBox->blockSignals(false);
+
+		updateSkyCultureTimeRange(maxYear, maxYear);
+	}
+}
+
+void ViewDialog::changeMaxTime(int maxYear)
+{
+	int minYear = ui->skyCultureMinTimeSpinBox->value();
+
+	if (maxYear >= minYear)
+	{
+		updateSkyCultureTimeRange(minYear, maxYear);
+	}
+	else
+	{
+		ui->skyCultureMaxTimeSpinBox->blockSignals(true);
+		ui->skyCultureMaxTimeSpinBox->setValue(minYear);
+		ui->skyCultureMaxTimeSpinBox->blockSignals(false);
+
+		updateSkyCultureTimeRange(minYear, minYear);
+	}
+}
+
+void ViewDialog::updateSkyCultureTimeRange(int minYear, int maxYear)
+{
+	// set the new limits for the timeSlider and currentTimeSpinBox component
+	// in case of new min > value --> value is automatically increased by the component
+	// (the connection between valueChanged (SIGNAL) and updateSkyCultureTimeValue (SLOT) takes care of the other components value)
+	ui->skyCultureTimeSlider->setMinimum(minYear);
+	ui->skyCultureTimeSlider->setMaximum(maxYear);
+
+	ui->skyCultureCurrentTimeSpinBox->setMinimum(minYear);
+	ui->skyCultureCurrentTimeSpinBox->setMaximum(maxYear);
+
+	// filter the list accordingly (if checkbox is ticked)
+	if (ui->applyTimeOnListCheckBox->isChecked())
+	{
+		filterSkyCultures();
+	}
+}
+
+void ViewDialog::filterSkyCultures()
+{
+	const QString filter = ui->culturesListSearchLineEdit->text();
+	int minYear = ui->skyCultureMinTimeSpinBox->value();
+	int maxYear = ui->skyCultureMaxTimeSpinBox->value();
+
+	bool applyTimeFilter = ui->applyTimeOnListCheckBox->isChecked();
+	// assume all cultureItems associated with a region are hidden --> hide regions (separatorItems) if no culture is visible
+	bool allHidden = true;
+
+	// reverse iteration --> hide / show all items of a region first so that the visibility of the region can be set correctly
+	for (int row = ui->culturesListWidget->count() - 1; row >= 0; row--)
+	{
+		QListWidgetItem* item = ui->culturesListWidget->item(row);
+		if (item->type() == 1318) // type value for SeparatorListWidgetItem
+		{
+			item->setHidden(allHidden);
+			allHidden = true;
+		}
+		else
+		{
+			// hide items if they do not match the filter string
+			QString target = item->text();
+			// check wether the filter string appears in the target string
+			if (target.contains(filter, Qt::CaseInsensitive))
+			{
+				item->setHidden(false);
+			}
+			// if the filter string in not contained in the target string:
+			// calculate the string similarity (maybe there was a typo)
+			else if (filter.size() > 1)
+			{
+				if (modifiedDamerauLevenshteinDistance(filter.toLower(), target.toLower()) > 1)
+				{
+					item->setHidden(true);
+				}
+				else
+				{
+					item->setHidden(false);
+				}
+			}
+			else
+			{
+				item->setHidden(true);
+			}
+
+			// if checkBox is ticked ---> apply additional filter operation
+			if (applyTimeFilter)
+			{
+				// hide items that are not within the time limits (UserRole = startTime, UserRole + 1 = endTime)
+				int endTime;
+				if (item->data(Qt::UserRole + 1).toString() == "∞")
+				{
+					endTime = ui->skyCultureCurrentTimeSpinBox->maximum();
+				}
+				else
+				{
+					endTime = item->data(Qt::UserRole + 1).toInt();
+				}
+
+				if (item->data(Qt::UserRole).toInt() > maxYear || endTime < minYear)
+				{
+					item->setHidden((true));
+				}
+			}
+
+			if (!item->isHidden())
+			{
+				allHidden = false;
+			}
+		}
+	}
+}
+
+// simple implementation of damerau-levenshtein distance that does not penalize insertions
+int ViewDialog::modifiedDamerauLevenshteinDistance(const QString &source, const QString &target)
+{
+	int sourceLength = source.length();
+	int targetLength = target.length();
+	int cost;
+	// 2 dim matrix ---> flat 1 dim strided vector
+	QVector<int> d((sourceLength + 1) * (targetLength + 1));
+
+	// initialize matrix
+	for (int i = 0; i <= sourceLength; i++)
+	{
+		d[i + (sourceLength + 1) * 0] = i;
+	}
+	for(int j = 0; j <= targetLength; j++)
+	{
+		d[0 + (sourceLength + 1) * j] = j;
+	}
+	// calculate distance
+	for (int i = 1; i <= sourceLength; i++)
+	{
+		for(int j = 1; j<= targetLength; j++)
+		{
+			if(source[i - 1] == target[j - 1])
+			{
+				cost = 0;
+			}
+			else
+			{
+				cost = 1;
+			}
+			d[i + (sourceLength + 1) * j] = std::min(
+				d[i - 1 + (sourceLength + 1) * j] + 1, // delete
+				std::min(d[i + (sourceLength + 1) * (j - 1)] + 0, // insert
+						 d[i - 1 + (sourceLength + 1) * (j - 1)] + cost) // substitution
+				);
+			if((i > 1) && (j > 1) && (source[i - 1] == target[j - 2]) && (source[i - 2] == target[j - 1]))
+			{
+				d[i + (sourceLength + 1) * j] = std::min(
+					d[i + (sourceLength + 1) * j],
+					d[i - 2 + (sourceLength + 1) * (j - 2)] + cost // transposition
+					);
+			}
+		}
+	}
+	return d[sourceLength + (sourceLength + 1) * targetLength];
+}
+
+void ViewDialog::initiateSkyCultureMapRotation()
+{
+	ui->skyCultureMapGraphicsView->rotateMap(ui->useLocationForRotationCheckBox->isChecked());
 }
 
 void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
