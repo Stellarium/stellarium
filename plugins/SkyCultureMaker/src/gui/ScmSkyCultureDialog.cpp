@@ -186,7 +186,7 @@ void ScmSkyCultureDialog::createDialogContent()
 	initSkyCultureTime();
 
 	connect(ui->skyCultureTimeSlider, &QSlider::valueChanged, this, &ScmSkyCultureDialog::updateSkyCultureTimeValue);
-	connect(ui->skyCultureCurrentTimeSpinBox, &QSpinBox::valueChanged, this, &ScmSkyCultureDialog::updateSkyCultureTimeValue);
+	connect(ui->skyCultureCurrentTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &ScmSkyCultureDialog::updateSkyCultureTimeValue);
 	connect(ui->scmGeoLocGraphicsView, &ScmGeoLocGraphicsView::timeValueChanged, this, &ScmSkyCultureDialog::updateSkyCultureTimeValue);
 
 	connect(ui->scmGeoLocGraphicsView, &ScmGeoLocGraphicsView::showAddPolyDialog, this, &ScmSkyCultureDialog::showAddPolygon);
@@ -223,9 +223,10 @@ void ScmSkyCultureDialog::createDialogContent()
 	// dialog popup for time limits
 
 	// prevent startTimeSpinBox value to be greater than endTimeSpinBox and vice versa
-	connect(ui->startTimeSpinBox, &QSpinBox::valueChanged, ui->endTimeSpinBox, &ScmAdvancedSpinBox::setMinimum);
-	connect(ui->endTimeSpinBox, &QSpinBox::valueChanged, ui->startTimeSpinBox, &ScmAdvancedSpinBox::setMaximum);
-
+	connect(ui->startTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), ui->endTimeSpinBox,
+	        &ScmAdvancedSpinBox::setMinimum);
+	connect(ui->endTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), ui->startTimeSpinBox,
+	        &ScmAdvancedSpinBox::setMaximum);
 
 	connect(ui->addPolygonDialogButtonBox, &QDialogButtonBox::accepted, this, &ScmSkyCultureDialog::confirmAddPolygon);
 	connect(ui->addPolygonDialogButtonBox, &QDialogButtonBox::rejected, this, &ScmSkyCultureDialog::cancelAddPolygon);
