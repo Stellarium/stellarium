@@ -118,7 +118,7 @@
 %----------------------------------------------------------------------------------------
 %	SECTION STYLING
 %----------------------------------------------------------------------------------------
-
+\newcommand{\StelTOCdepth}{1}% reset this to 0 before appendix!
 \setcounter{secnumdepth}{3} % Number sections down to subsubsections, a value of 2 will number to subsections only and 1 to sections only
 
 \usepackage[
@@ -136,7 +136,7 @@
 		\node[anchor=north east, inner sep=0pt, xshift=-\Gm@rmargin, yshift=-\Gm@tmargin] at (current page.north east) {\fontsize{30pt}{30pt}\selectfont\sffamily\bfseries\textcolor{white}{\strut #2}}; % Part title
 		\node[anchor=south east, inner sep=0pt, xshift=-\Gm@rmargin, yshift=\Gm@bmargin] at (current page.south east) { % Mini table of contents
 			\parbox[t][][t]{8.5cm}{ % Width of box holding the mini ToC
-				\printcontents[part]{l}{0}{\setcounter{tocdepth}{1}} % Display the mini table of contents showing chapters and sections, change tocdepth to 2 to also show subsections or 0 to only show chapters
+				\printcontents[part]{l}{0}{\setcounter{tocdepth}{\StelTOCdepth}} % Display the mini table of contents showing chapters and sections, change tocdepth to 2 to also show subsections or 0 to only show chapters
 			}
 		};
 	\end{tikzpicture}
