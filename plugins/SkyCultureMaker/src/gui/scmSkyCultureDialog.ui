@@ -237,9 +237,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1317</y>
+               <y>-1481</y>
                <width>800</width>
-               <height>2235</height>
+               <height>2342</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="descriptionLayout">
@@ -526,17 +526,69 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QTextEdit" name="referencesTE">
-                   <property name="sizeAdjustPolicy">
-                    <enum>QAbstractScrollArea::AdjustToContents</enum>
-                   </property>
-                   <property name="acceptRichText">
-                    <bool>false</bool>
-                   </property>
-                   <property name="placeholderText">
-                    <string notr="true"> - [#1]: Author: Title, (Journal, ...), Publisher, Location, Year</string>
-                   </property>
-                  </widget>
+                  <layout class="QGridLayout" name="referencesLayout">
+                   <item row="2" column="0">
+                    <widget class="QPushButton" name="addRefBtn">
+                     <property name="text">
+                      <string>Add</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QPushButton" name="moveRefUpBtn">
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../../../../data/gui/guiRes.qrc">
+                       <normaloff>:/graphicGui/uibtUp.png</normaloff>
+                       <disabledoff>:/graphicGui/uibtUp-disabled.png</disabledoff>:/graphicGui/uibtUp.png</iconset>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="2">
+                    <widget class="QPushButton" name="moveRefDownBtn">
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../../../../data/gui/guiRes.qrc">
+                       <normaloff>:/graphicGui/uibtDown.png</normaloff>
+                       <disabledoff>:/graphicGui/uibtDown-disabled.png</disabledoff>:/graphicGui/uibtDown.png</iconset>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="3">
+                    <widget class="QPushButton" name="removeRefBtn">
+                     <property name="text">
+                      <string>Remove</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0" colspan="4">
+                    <widget class="QTreeWidget" name="referencesList">
+                     <property name="rootIsDecorated">
+                      <bool>false</bool>
+                     </property>
+                     <property name="uniformRowHeights">
+                      <bool>true</bool>
+                     </property>
+                     <property name="headerHidden">
+                      <bool>true</bool>
+                     </property>
+                     <column>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </column>
+                     <column>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </column>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                  <item>
                   <widget class="QLabel" name="authorsLbl">
@@ -635,6 +687,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>
