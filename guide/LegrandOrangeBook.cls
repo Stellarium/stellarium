@@ -516,7 +516,7 @@
 %----------------------------------------------------------------------------------------
 %	LINKS
 %----------------------------------------------------------------------------------------
-\AtBeginDocument{% %% GZ: Hyperref needs to be last...
+\AtEndPreamble{% %% GZ: Hyperref needs to be last...
 
 \ifpdf             %% GZ
 \usepackage{xurl}% will break long URLs also with pdflatex.
