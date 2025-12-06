@@ -517,12 +517,18 @@ void StelSkyCultureSkyPartition::updateI18n()
 QString StelSkyCultureSkyPartition::getCulturalName() const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
-	return scMgr->createCulturalLabel(name, scMgr->getScreenLabelStyle(), names.length()==12 ? q_("Zodiac") : q_("Lunar Station"));
+	return scMgr->createCulturalLabel(name, StelObject::CulturalDisplayStyle::Pronounce, names.length()==12 ? q_("Zodiac") : q_("Lunar Station"));
 }
 
-QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const
+QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos, bool narration) const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	const QString sDegrees=qc_("degrees", "object narration");
+	const QString sMinutes=qc_("minutes", "object narration");
+	const QString sAnd=qc_("and", "object narration");
+	const QString sSeconds=qc_("seconds", "object narration");
+	const QString sPada=qc_("pada", "object narration; quarter part of nakshatra");
+
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, eqPos);
 	if (frameType==StelCore::FrameObservercentricEclipticOfDate)
@@ -539,13 +545,20 @@ QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const
 		if (partitions.at(0)==12)
 		{
 			double minuteInSign=(degreeInSign-floor(degreeInSign))*60.;
-			return QString("%1 %2°%3'").arg(symbols.at(sign), QString::number(int(floor(degreeInSign))), QString::number(int(floor(minuteInSign))));
+			if (narration)
+				return QString("%1, %2 %3, %4 %5 %6").arg(names.at(sign).getOneIdentifier(narration), QString::number(int(floor(degreeInSign))), sDegrees,
+									sAnd, QString::number(int(floor(minuteInSign))), sMinutes );
+			else
+				return QString("%1 %2°%3'").arg(symbols.at(sign), QString::number(int(floor(degreeInSign))), QString::number(int(floor(minuteInSign))));
 		}
 		else if (partitions.at(0)==27)
 		{
 			// Indian Nakshatras
 			int padaInSign=int(floor((degreeInSign/widthOfSign)*4.));
-			return QString("%1: %2").arg(symbols.at(sign), QString::number(padaInSign+1));
+			if (narration)
+				return QString("%1, %2 %3").arg(names.at(sign).getOneIdentifier(narration), sPada, QString::number(padaInSign+1));
+			else
+				return QString("%1: %2").arg(symbols.at(sign), QString::number(padaInSign+1));
 		}
 		else if (partitions.at(0)==28)
 		{
@@ -553,7 +566,13 @@ QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const
 			static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 
 			int thirdInSign=int(floor((degreeInSign/widthOfSign)*3.));
-			return QString("%1: %2").arg(scMgr->createCulturalLabel(names.at(sign), scMgr->getScreenLabelStyle(), QString()), QString::number(thirdInSign+1));
+			if (narration)
+			{
+				const QStringList thirds({qc_("Begin of", "object narration"), qc_("Center of", "object narration"), qc_("End of", "object narration")});
+				return QString("%1, %2").arg(thirds[thirdInSign], names.at(sign).getOneIdentifier(narration));
+			}
+			else
+				return QString("%1: %2").arg(scMgr->createCulturalLabel(names.at(sign), scMgr->getScreenLabelStyle(), QString()), QString::number(thirdInSign+1));
 		}
 		else
 		{
@@ -591,9 +610,11 @@ QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const
 				break;
 			++mansion;
 		}
-		QString mnName=scMgr->createCulturalLabel(names.at(mansion), scMgr->getScreenLabelStyle(), names.at(mansion).pronounceI18n);
+		QString mnName=scMgr->createCulturalLabel(names.at(mansion), scMgr->getScreenLabelStyle(), names.at(mansion).getOneIdentifier(narration));
 
-
-		return QString("%1 - %2").arg(symbols.at(mansion), mnName);
+		if (narration)
+			return names.at(mansion).getOneIdentifier(narration);
+		else
+			return QString("%1 - %2").arg(symbols.at(mansion), mnName);
 	}
 }
