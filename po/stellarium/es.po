@@ -3268,7 +3268,7 @@ msgstr "Establecer dirección inversa del tiempo"
 
 #: src/core/StelCore.cpp:320
 msgid "Set time to now"
-msgstr "Establecer tiempo en ahora"
+msgstr "Establecer tiempo como actual"
 
 #: src/core/StelCore.cpp:321
 msgid "Add 1 solar minute"
@@ -12918,7 +12918,7 @@ msgstr "Restablecer Lista de Ubicaciones"
 
 #: src/ui_locationDialogGui.h:423
 msgid "Current location information"
-msgstr "Información ubicación actual"
+msgstr "Información de ubicación actual"
 
 #: src/ui_locationDialogGui.h:424
 msgid "Add to list"
@@ -17727,9 +17727,9 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
-"El plugin de medición del ángulo es una herramienta pequeña que se utiliza "
-"para medir la distancia angular entre dos puntos en el cielo (y el cálculo "
-"del ángulo de posición entre esos dos puntos)."
+"El complemento de medición de ángulos es una herramienta pequeña que se "
+"utiliza para medir la distancia angular entre dos puntos en el cielo (y el "
+"cálculo del ángulo de posición entre esos dos puntos)."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
 msgid ""
@@ -20516,9 +20516,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more"
 " than 72 hours old. "
 msgstr ""
-"El plugin de satélites puede descargar automáticamente datos TLE de "
-"locaciones en Internet, y por defecto hará esto si los datos son de más de "
-"72 horas. "
+"El complemento Satélites puede descargar automáticamente datos TLE de "
+"fuentes de Internet y, de forma predeterminada, el complemento lo hará si "
+"los datos existentes tienen más de 72 horas de antigüedad."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:847
 #, qt-format
@@ -21486,8 +21486,8 @@ msgid ""
 "The existing version of the configuration data for telescopes in the "
 "Telescope Control plugin is obsolete."
 msgstr ""
-"‎La versión existente de los datos de configuración de los telescopios en el"
-" plugin ‎‎Control de telescopios‎‎ está obsoleta.‎"
+"La versión existente de los datos de configuración de los telescopios en el "
+"complemento Control de telescopios‎‎ está obsoleta."
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1821
@@ -21973,8 +21973,8 @@ msgid ""
 "A {device supported by the plug-in} is connected with a cable to the "
 "computer running Stellarium;"
 msgstr ""
-"Un {dispositivo compatible con el plugin} está conectado con un cable a la "
-"computadora ejecutando Stellarium;"
+"Un {dispositivo compatible con el complemento} se conecta con un cable a la "
+"computadora que ejecuta Stellarium;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
 msgid "INDIRECT CONNECTION"
@@ -22062,9 +22062,9 @@ msgid ""
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
 "respective button in the left toolbar)."
 msgstr ""
-"Pulsando el botón 'configurar' para el plug-in en la pestaña 'Plugins' en la"
-" ventana Stellarium Configuración  (se abrea pulsando <b> F2 </b> o el "
-"respectivo botón en la barra de herramientas izquierda)."
+"Al presionar el botón «configurar» para el complemento en la pestaña "
+"«Complementos» en la ventana Configuración de Stellarium (se abre pulsando "
+"<b> F2 </b> o el respectivo botón en la barra de herramientas izquierda)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
@@ -22181,8 +22181,8 @@ msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a {virtual "
 "telescope} (no connection)"
 msgstr ""
-"<b>Nada, solo simula una (una retícula en movimiento)</b> es un {telescopio "
-"virtual} (sin conexión)"
+"<b>Nada, solo simular una (retícula móvil)\n"
+"</b> es un {telescopio virtual} (sin conexión)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
@@ -22624,10 +22624,10 @@ msgid ""
 "controlled by the plug-in."
 msgstr ""
 "Si desea probar este plug-in sin un dispositivo conectado a la computadora, "
-"elija <b> Nada, simplemente simule uno (una retícula en movimiento) </b> en "
-"el campo <b> Telescopio controlado por: </b>. Se mostrará un retículo de "
-"telescopio que reaccionará de la misma manera que el retículo de un "
-"telescopio real controlado por el plug-in."
+"elija <b> Nada, solo simular una (retícula móvil) </b> en el campo <b> "
+"Telescopio controlado por: </b>. Se mostrará un retículo de telescopio que "
+"reaccionará de la misma manera que el retículo de un telescopio real "
+"controlado por el plug-in."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:504
@@ -22916,7 +22916,7 @@ msgstr "Telescopio RTS2"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:557
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr "Nada, sólo simular (reticula móvil)"
+msgstr "Nada, solo simular una (retícula móvil)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:560
 msgid "Connection delay:"
@@ -24011,7 +24011,7 @@ msgstr "Británicas (siglo XIX)"
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
 msgid "Russian"
-msgstr "ruso"
+msgstr "Ruso"
 
 #. TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
@@ -24290,7 +24290,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:122
 msgid "This plugin allows you to see recent bright novae: "
-msgstr "Este Plugin te permite ver las novas brillantes recientes: "
+msgstr "Este complemento le permite ver las novas brillantes recientes: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
 #, qt-format
@@ -24302,8 +24302,8 @@ msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
-"Este plugin usa un modelo muy simple para el cálculo de curvas de luz para "
-"las estrellas novas."
+"Este complemento usa un modelo muy simple para el cálculo de curvas de luz "
+"para las estrellas novas."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #, qt-format
@@ -24319,8 +24319,8 @@ msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
-"Si una nova no tiene valores para el decaimiento de magnitud entonces este "
-"plugin usará valores generalizados para éste."
+"Si una nova no tiene valores para el decaimiento de magnitud, este "
+"complemento usará valores generalizados para éste."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:211
 msgid "Novae is updated"
@@ -24340,9 +24340,9 @@ msgid ""
 "catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
-"Un plugin que muestra algunos quásares más brillantes que una magnitud "
-"visual 18. El catálogo de quásares fue compilado de 'Quasars and Active "
-"Galactic Nuclei' (13th Ed.) (Veron+ 2010)"
+"Un complemento que muestra algunos quásares más brillantes que una magnitud "
+"visual 18. El catálogo de quásares fue compilado de \"Quasars and Active "
+"Galactic Nuclei\" (13th Ed.) (Veron+ 2010)"
 
 #: plugins/Quasars/src/Quasars.cpp:173
 msgid "Show quasars"
@@ -24382,7 +24382,7 @@ msgid ""
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
-"El plugin de Cuásares provee visualización de algunos cuásares más "
+"El complemento de cuásares provee visualización de algunos cuásares más "
 "brillantes que una magnitud visual de 18. El catálogo de cuásares se compiló"
 " de \"Quasars and Active Galactic Nuclei\" (13a ed.)"
 
@@ -24429,8 +24429,8 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
-"Este plugin traza la posición de varios pulsares, con información de objeto "
-"sobre cada uno."
+"Este complemento traza la posición de varios pulsares, con información de "
+"objeto sobre cada uno."
 
 #: plugins/Pulsars/src/Pulsars.cpp:171
 msgid "Show pulsars"
@@ -24698,9 +24698,9 @@ msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
-"El plugin de Control remoto proporciona una interfaz web para permitir los "
-"cambios de estado y activación de secuencias de comandos mediante un "
-"navegador Web conectado."
+"El complemento de control remoto proporciona una interfaz web para permitir "
+"los cambios de estado y activar secuencias de comandos mediante un navegador"
+" web conectado."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:149
 msgid "It is also possible to send commands via command line, e.g.."
@@ -24899,8 +24899,8 @@ msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
-"El plugin de sincronización remota proporciona sincronización de estado para"
-" varias instancias de Stellarium que se ejecutan en una red."
+"El complemento de sincronización remota proporciona sincronización de estado"
+" para varias instancias de Stellarium que se ejecutan en una red."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:216
 msgid ""
@@ -25039,9 +25039,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
-"Este plugin traza la posición de las estrellas con exoplanetas. Los datos de"
-" los exoplanetas se derivan de la \"Enciclopedia de Planetas Extrasolares\" "
-"de exoplanet.eu"
+"Este complemento traza la posición de las estrellas con exoplanetas. Los "
+"datos de los exoplanetas provienen de la \"Enciclopedia de Planetas "
+"Extrasolares\" de exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:175
 msgid "Show exoplanets"
@@ -25312,8 +25312,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
-"Este plugin traza la posición de las estrellas con exoplanetas. Los datos de"
-" los exoplanetas se derivan de \"%1The Extrasolar Planets Encyclopaedia%2\""
+"Este complemento traza la posición de las estrellas con exoplanetas. Los "
+"datos de los exoplanetas provienen de la \"%1 Enciclopedia de los Planetas "
+"Extrasolares%2\""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 #, qt-format
@@ -25353,8 +25354,8 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
-"Este plugin puede mostrar exoplanetas potencialmente habitables (marcador "
-"naranja) y alguna información acerca de estos planetas."
+"Este complemento puede mostrar exoplanetas potencialmente habitables "
+"(marcador naranja) y alguna información acerca de estos planetas."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:320
 msgid ""
@@ -29125,8 +29126,8 @@ msgid ""
 "This plugin enables you to simulate and predict periodic meteor showers and "
 "to display a marker for each active and inactive radiant."
 msgstr ""
-"Este plugin permite simular y predecir las lluvias de meteoros periódicas y "
-"para mostrar un marcador para cada radiante activo e inactivo."
+"Este complemento permite simular y predecir las lluvias de meteoros "
+"periódicas y para mostrar un marcador para cada radiante activo e inactivo."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:208
 msgid ""
@@ -29332,8 +29333,8 @@ msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
-"Este plugin fue creado inicialmente como un proyecto de la ESA Summer of "
-"Code en Space 2013."
+"Este complemento fue creado inicialmente como un proyecto de la ESA Summer "
+"of Code en Space 2013."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:297
 msgid "Info"
@@ -31216,8 +31217,9 @@ msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
-"El plugin ArchaeoLines muestra cualquier combinación de declinación de arcos"
-" más relevantes para estudios arqueo- o etnoastronómicos."
+"El complemento ArchaeoLines muestra cualquier combinación de arcos de "
+"declinación más relevantes para estudios arqueoastronómicos o "
+"etnoastronómicos."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:220
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
