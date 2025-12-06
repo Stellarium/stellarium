@@ -644,7 +644,7 @@ void StelPainter::drawTextGravity180(const float x, const float y, const QString
 	else
 	{
 		// We manage our RTL by ourselves.
-		for (int i = 0; i < label32.length(); ++i)
+		for (unsigned i = 0; i < label32.length(); ++i)
 		{
 			uint32_t chr32=label32[i];
 			if (chr32==FSI32)
