@@ -608,7 +608,7 @@ ELSE()
      MESSAGE(STATUS "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found suitable version ${QT_VERSION})")
 ENDIF()
 FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS
-     Concurrent Gui Network Widgets Charts Positioning SvgWidgets)
+     Concurrent Gui Network Widgets Charts Positioning Svg)
 SET(USE_BUNDLED_QTCOMPRESS 1 CACHE BOOL "Use bundled version of qtcompress")
 # Qt 6.10 split off FooPrivate from Foo.
 # https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.10.0/release-note.md
