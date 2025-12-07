@@ -37,7 +37,7 @@ public:
 		: QStyledItemDelegate(parent)
 	{
 	}
-	QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override
+	QWidget* createEditor(QWidget*, const QStyleOptionViewItem&, const QModelIndex&) const override
 	{
 		return nullptr;
 	}
