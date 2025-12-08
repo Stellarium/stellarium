@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-01 14:32+0700\n"
+"POT-Creation-Date: 2025-12-06 21:26+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales.gr@gmail.com>, 2025\n"
 "Language-Team: Galician (https://app.transifex.com/stellarium/teams/80998/gl/)\n"
@@ -11197,7 +11197,6 @@ msgstr "Es&coller"
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
-#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
 msgstr "Cancelar"
@@ -11253,7 +11252,6 @@ msgid "Copy &Link Location"
 msgstr "Copiar e &Ligar a localización"
 
 #: src/translations.h:860
-#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
 msgid "Abort"
 msgstr "Interromper"
 
@@ -30283,8 +30281,8 @@ msgid "Title:"
 msgstr "Título:"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:157
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:162
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:236
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:473
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
@@ -30303,26 +30301,26 @@ msgstr ""
 msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr "Plugin para debuxar e exportar culturas do ceo en Stellarium."
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:575
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:479
 msgid "INFO"
 msgstr "INFO"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:582
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:486
 msgid "WARNING"
 msgstr "ATENCIÓN"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:589
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:493
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"
 msgstr "ERRO"
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:70
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:138
 msgid "Welcome to the Sky Culture Maker!"
 msgstr "Benvidos ó Creador de Cultura do Ceo!"
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:70
 msgid ""
 "Note: Test only. The result does not yet comply to Stellarium's formatting "
 "rules."
@@ -30330,17 +30328,17 @@ msgstr ""
 "Nota: Só proba. O resultado aínda non cumpre coas regras de formato de "
 "Stellarium."
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:92
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:91
 msgid ""
 "Convert sky cultures from the legacy (fab) format to the new (json) format"
 msgstr ""
 "Converter as culturas do ceo do formato antigo (fab) ó novo formato (json)"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:179
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:195
 msgid "Please select a license for the sky culture."
 msgstr "Selecciona unha licenza para a cultura do ceo."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:185
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:201
 msgid ""
 "The sky culture description is not complete. Please fill in all required "
 "fields correctly."
@@ -30396,81 +30394,64 @@ msgstr "Escolle o cartafol de exportación"
 msgid "The selected directory is not valid"
 msgstr "O cartafol seleccionado non é válido"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
-msgid "SCM: Dark Constellation Editor"
-msgstr "SCM: Editor de constelacións escuras"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
-msgid "SCM: Constellation Editor"
-msgstr "SCM: Editor de constelacións"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:147
-msgid "Please name your Dark Constellation"
-msgstr "Por favor, dálle nome á túa constelación escura"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:148
-msgid "Please name your Constellation"
-msgstr "Por favor, dálle nome á túa constelación"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:297
 msgid "Open Artwork"
 msgstr "Abrir Artwork"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:299
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
 msgid "Images (*.png *.jpg *.jpeg)"
 msgstr "Imaxes (*.png *.jpg *.jpeg)"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:306
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:305
 msgid "Chosen path is not a valid file:\n"
 msgstr "A ruta escollida non é un arquivo válido:\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:315
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:314
 msgid "Chosen file is not a PNG, JPG or JPEG image:\n"
 msgstr "O arquivo escollido non é unha imaxe PNG, JPG ou JPEG:\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:342
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:373
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:341
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:372
 msgid "No anchor was selected. Please select an anchor to bind to."
 msgstr ""
 "Non se seleccionou ningunha áncora. Seleccione unha áncora á que vincular."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:353
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:352
 msgid "No star was selected to bind to the current selected anchor."
 msgstr ""
 "Non se seleccionou ningunha estrela para vincularse á áncora seleccionada "
 "actualmente."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:364
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:363
 msgid "The selected object must be of type Star or Nebula."
 msgstr "O obxecto seleccionado debe ser do tipo Estrela ou Nebulosa."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:382
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:381
 msgid "The selected object must contain a HIP number."
 msgstr "O obxecto seleccionado debe conter un número HIP."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:405
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:404
 msgid "Could not save: Sky Culture is not set"
 msgstr "Non se puido gardar: Cultura do Ceo non está configurada"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:413
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:412
 msgid "Could not save: English name is empty"
 msgstr "Non se puido gardar: o nome en inglés está baleiro"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:423
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:422
 msgid "Could not save: Constellation ID is empty"
 msgstr "Non se puido gardar: o ID da constelación está baleiro"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:432
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:442
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:431
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:441
 msgid "Could not save: Constellation with this ID already exists"
 msgstr "Non se puido gardar: unha constelación con este ID xa existe"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:453
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:452
 msgid "Could not save: The constellation does not contain any drawings"
 msgstr "Non se puido gardar: a constelación non contén ningún debuxo"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:464
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:463
 msgid ""
 "Could not save: An artwork is attached, but not all anchors have a star "
 "bound."
@@ -30478,7 +30459,7 @@ msgstr ""
 "Non se puido gardar: Hai unha ilustración adxunta, pero non todas as áncoras"
 " teñen un límite de estrela."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:98
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:597
 msgid ""
 "Use RightClick or Control + Click to draw a connected line.\n"
 "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
@@ -30488,14 +30469,14 @@ msgstr ""
 "Usa o dobre clic dereito ou Control + dobre clic para deter o debuxo da liña.\n"
 "Usa Comando + F para buscar e conectar estrelas."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:103
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:600
 msgid ""
 "Hold RightClick or Control + Click to delete the line under the cursor.\n"
 msgstr ""
 "Mantén premido o botón dereito ou Control + clic para eliminar a liña "
 "debaixo do cursor.\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:106
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:602
 msgid ""
 "Use RightClick to draw a connected line.\n"
 "Use Double-RightClick to stop drawing the line.\n"
@@ -30505,11 +30486,11 @@ msgstr ""
 "Usa o dobre clic co botón dereito para deter o debuxo da liña.\n"
 "Usa CTRL + F para buscar e conectar estrelas."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:110
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:605
 msgid "Hold RightClick to delete the line under the cursor.\n"
 msgstr "Mantén premido o botón dereito para eliminar a liña baixo o cursor.\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:115
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:608
 msgid ""
 "Usage:\n"
 "1. Upload an image\n"
@@ -30530,6 +30511,23 @@ msgstr ""
 "5. A áncora móstrase nunha cor máis brillante cando está vinculada a unha estrela\n"
 "- A estrela vinculada correspondente selecciónase automaticamente cando se selecciona unha áncora\n"
 "- \"Vincular estrela\" sobrescribirá a vinculación actual se xa existe"
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:619
+msgid "SCM: Dark Constellation Editor"
+msgstr "SCM: Editor de constelacións escuras"
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+msgid "SCM: Constellation Editor"
+msgstr "SCM: Editor de constelacións"
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:621
+msgid "Please name your Dark Constellation"
+msgstr "Por favor, dálle nome á túa constelación escura"
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:622
+msgid "Please name your Constellation"
+msgstr "Por favor, dálle nome á túa constelación"
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:140
 msgid "Create a new sky culture"
@@ -30854,12 +30852,21 @@ msgid "Export and Exit"
 msgstr "Exportar e Saír"
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:128
-msgid "Hide the plugin to resume later or abort the process?"
-msgstr "Ocultar o plugin para retomalo máis tarde ou abortar o proceso?"
+msgid ""
+"Hide the plugin to resume later or close it without saving the sky culture?"
+msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:129
-msgid "Hide"
-msgstr "Ocultar"
+msgid "Hide editor"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
+msgid "Close without saving"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
+msgid "Don't close"
+msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:57
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:270
