@@ -2584,6 +2584,7 @@ void ConfigurationDialog::populateVoiceCombo()
 
 		int idx=ui->comboBox_Voice->findData(currentVoice);
 		ui->comboBox_Voice->setCurrentIndex(qMax(idx, 0));
+		ui->comboBox_Voice->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 	}
 }
 
