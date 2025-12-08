@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-11-11 11:07+0700\n"
+"POT-Creation-Date: 2025-12-06 21:26+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Mukhammad Reza, 2025\n"
 "Language-Team: Indonesian (https://app.transifex.com/stellarium/teams/80998/id/)\n"
@@ -54,7 +54,7 @@ msgstr "objek khusus"
 #: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:2456
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3080
 #: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7688
-#: src/gui/ObsListDialog.cpp:291 src/ui_configurationDialog.h:2021
+#: src/gui/ObsListDialog.cpp:297 src/ui_configurationDialog.h:2021
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
@@ -81,10 +81,10 @@ msgstr "asterisma"
 #: src/core/modules/NomenclatureMgr.cpp:90 src/core/modules/NebulaMgr.cpp:469
 #: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:348
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
-#: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:156
-#: src/core/modules/HipsMgr.cpp:157 src/core/StelApp.cpp:699
+#: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:158
+#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:699
 #: src/core/StelCore.cpp:310 src/core/StelSkyLayerMgr.cpp:83
-#: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:966
+#: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:969
 msgid "Display Options"
 msgstr "Opsi Tampilan"
 
@@ -859,7 +859,7 @@ msgid "Author"
 msgstr "Pembuat"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1533 src/gui/StelGuiItems.cpp:954
+#: src/core/modules/LandscapeMgr.cpp:1533 src/gui/StelGuiItems.cpp:950
 #: plugins/Satellites/src/Satellite.cpp:436
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -867,7 +867,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1536 src/gui/ObsListDialog.cpp:297
+#: src/core/modules/LandscapeMgr.cpp:1536 src/gui/ObsListDialog.cpp:303
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:416
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -959,7 +959,7 @@ msgstr "Diameter"
 #: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:709
 #: src/core/modules/Planet.cpp:730 src/core/modules/Planet.cpp:854
 #: src/core/modules/Planet.cpp:1370 src/core/modules/Comet.cpp:191
-#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:982
+#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:978
 #: src/gui/AstroCalcDialog.cpp:3199 src/gui/AstroCalcDialog.cpp:3747
 #: src/gui/AstroCalcDialog.cpp:8506 plugins/Satellites/src/Satellites.cpp:3020
 #: plugins/Satellites/src/Satellite.cpp:359
@@ -1846,7 +1846,7 @@ msgstr "objek yang belum diketahui"
 #: src/core/modules/Nebula.cpp:179 src/core/StelObject.cpp:350
 #: src/gui/AstroCalcChart.cpp:97 src/gui/AstroCalcChart.cpp:107
 #: src/gui/AstroCalcChart.cpp:437 src/gui/AstroCalcChart.cpp:463
-#: src/gui/ObsListDialog.cpp:294 plugins/Supernovae/src/Supernova.cpp:128
+#: src/gui/ObsListDialog.cpp:300 plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
 msgstr "Magnitudo"
 
@@ -2287,7 +2287,7 @@ msgid "Toggle DSO type filter"
 msgstr "Jungkitkan filter tipe DSO"
 
 #: src/core/modules/NebulaMgr.cpp:1572 src/gui/StelDialog.cpp:336
-#: src/gui/ObsListDialog.cpp:588 src/StelMainView.cpp:1063
+#: src/gui/ObsListDialog.cpp:597 src/StelMainView.cpp:1067
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid "Attention!"
 msgstr "Perhatian!"
@@ -2909,11 +2909,11 @@ msgstr "Cahaya Zodiak"
 msgid "Digitized Sky Survey (TOAST)"
 msgstr "Survey Langit Digital (SLD)"
 
-#: src/core/modules/HipsMgr.cpp:156
+#: src/core/modules/HipsMgr.cpp:158
 msgid "Toggle Hierarchical Progressive Surveys"
 msgstr "Alihkan Survei Progresif Hierarkis"
 
-#: src/core/modules/HipsMgr.cpp:157
+#: src/core/modules/HipsMgr.cpp:159
 msgid "Toggle HiPS dialog"
 msgstr "Alihkan dialog HiPS"
 
@@ -3886,12 +3886,12 @@ msgstr ""
 "ditentukan oleh pengguna."
 
 #: src/core/StelCore.cpp:2795 src/core/SimbadSearcher.cpp:187
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:972
-#: src/gui/ObsListDialog.cpp:996 src/gui/ObsListDialog.cpp:1045
-#: src/gui/ObsListDialog.cpp:1061 src/gui/ObsListDialog.cpp:1102
-#: src/gui/ObsListDialog.cpp:1114 src/gui/ObsListDialog.cpp:1123
-#: src/gui/ObsListDialog.cpp:1141 src/gui/ObsListDialog.cpp:1161
-#: src/gui/ObsListDialog.cpp:1324 src/gui/ObsListDialog.cpp:1329
+#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:981
+#: src/gui/ObsListDialog.cpp:1005 src/gui/ObsListDialog.cpp:1054
+#: src/gui/ObsListDialog.cpp:1070 src/gui/ObsListDialog.cpp:1111
+#: src/gui/ObsListDialog.cpp:1123 src/gui/ObsListDialog.cpp:1132
+#: src/gui/ObsListDialog.cpp:1150 src/gui/ObsListDialog.cpp:1170
+#: src/gui/ObsListDialog.cpp:1333 src/gui/ObsListDialog.cpp:1338
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Kesalahan"
@@ -4280,7 +4280,7 @@ msgid "Lunar Az./Alt."
 msgstr "Az./Alt. Lunar"
 
 #: src/core/StelObjectMgr.cpp:50 src/core/StelMovementMgr.cpp:194
-#: src/gui/StelGui.cpp:274 src/StelMainView.cpp:964 src/StelMainView.cpp:965
+#: src/gui/StelGui.cpp:274 src/StelMainView.cpp:967 src/StelMainView.cpp:968
 msgid "Miscellaneous"
 msgstr "Lain-lain"
 
@@ -4550,7 +4550,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:256
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:296
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:298
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
@@ -5042,7 +5042,7 @@ msgstr "Ucapan Terima Kasih"
 #: src/gui/ConfigurationDialog.cpp:1369
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 msgid "Authors"
@@ -5060,7 +5060,7 @@ msgstr "Kontak"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
@@ -5317,7 +5317,7 @@ msgid "Custom equation of %1T"
 msgstr "Persamaan khusus %1T"
 
 #: src/gui/ConfigurationDialog.cpp:2040 src/gui/ConfigurationDialog.cpp:2079
-#: src/gui/StelGuiItems.cpp:876 src/gui/LocationDialog.cpp:557
+#: src/gui/StelGuiItems.cpp:872 src/gui/LocationDialog.cpp:557
 msgid "System default"
 msgstr "Baku sistem"
 
@@ -5533,8 +5533,8 @@ msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
 msgstr ""
-"Semua hotkey ini tersedia secara lokal untuk dijalankan saat jendela atau "
-"tab tertentu dibuka."
+"Semua tombol pintas ini tersedia secara lokal untuk dijalankan saat jendela "
+"atau tab tertentu dibuka."
 
 #: src/gui/HelpDialog.cpp:403 src/ui_scriptConsole.h:345
 msgid "Script console"
@@ -5898,91 +5898,91 @@ msgstr "Tidak ada info"
 msgid "Custom info"
 msgstr "Info ubahan"
 
-#: src/gui/StelGuiItems.cpp:493 src/gui/StelGuiItems.cpp:1121
+#: src/gui/StelGuiItems.cpp:489 src/gui/StelGuiItems.cpp:1117
 msgid "Space"
 msgstr "Antariksa"
 
-#: src/gui/StelGuiItems.cpp:878
+#: src/gui/StelGuiItems.cpp:874
 msgid "Time zone"
 msgstr "Zona waktu"
 
-#: src/gui/StelGuiItems.cpp:881 src/gui/LocationDialog.cpp:555
+#: src/gui/StelGuiItems.cpp:877 src/gui/LocationDialog.cpp:555
 msgid "Local Mean Solar Time"
 msgstr "Waktu Matahari Rata-rata Lokal"
 
-#: src/gui/StelGuiItems.cpp:884 src/gui/LocationDialog.cpp:556
+#: src/gui/StelGuiItems.cpp:880 src/gui/LocationDialog.cpp:556
 msgid "Local True Solar Time"
 msgstr "Waktu Matahari Sejati Lokal"
 
 #. TRANSLATORS: unit of measurement: minutes per second
-#: src/gui/StelGuiItems.cpp:887
+#: src/gui/StelGuiItems.cpp:883
 msgctxt "unit of measurement"
 msgid "min/s"
 msgstr "min/s"
 
 #. TRANSLATORS: unit of measurement: hours per second
-#: src/gui/StelGuiItems.cpp:895
+#: src/gui/StelGuiItems.cpp:891
 msgctxt "unit of measurement"
 msgid "hr/s"
 msgstr "hr/s"
 
 #. TRANSLATORS: unit of measurement: days per second
-#: src/gui/StelGuiItems.cpp:901
+#: src/gui/StelGuiItems.cpp:897
 msgctxt "unit of measurement"
 msgid "d/s"
 msgstr "d/s"
 
 #. TRANSLATORS: unit of measurement: years per second
-#: src/gui/StelGuiItems.cpp:907
+#: src/gui/StelGuiItems.cpp:903
 msgctxt "unit of measurement"
 msgid "yr/s"
 msgstr "yr/s"
 
-#: src/gui/StelGuiItems.cpp:909 src/gui/StelGuiItems.cpp:911
+#: src/gui/StelGuiItems.cpp:905 src/gui/StelGuiItems.cpp:907
 msgid "Simulation speed"
 msgstr "Kecepatan simulasi"
 
-#: src/gui/StelGuiItems.cpp:951
+#: src/gui/StelGuiItems.cpp:947
 msgid "flight"
 msgstr "penerbangan"
 
-#: src/gui/StelGuiItems.cpp:982
+#: src/gui/StelGuiItems.cpp:978
 msgid "planetocentric distance"
 msgstr "jarak planetosentris"
 
-#: src/gui/StelGuiItems.cpp:984
+#: src/gui/StelGuiItems.cpp:980
 msgid "planetocentric observer"
 msgstr "pengamat planetosentris"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgid "Atmospheric pressure"
 msgstr "Tekanan atmosfer"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgctxt "pressure unit"
 msgid "mbar"
 msgstr "mbar"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgid "temperature"
 msgstr "temperatur"
 
-#: src/gui/StelGuiItems.cpp:1008 src/gui/StelGuiItems.cpp:1010
+#: src/gui/StelGuiItems.cpp:1004 src/gui/StelGuiItems.cpp:1006
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr "FOV"
 
-#: src/gui/StelGuiItems.cpp:1018
+#: src/gui/StelGuiItems.cpp:1014
 msgid "Field of view"
 msgstr "Medan pandang"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:1029 src/gui/StelGuiItems.cpp:1050
+#: src/gui/StelGuiItems.cpp:1025 src/gui/StelGuiItems.cpp:1046
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr "FPS"
 
-#: src/gui/StelGuiItems.cpp:1036
+#: src/gui/StelGuiItems.cpp:1032
 msgid "Frames per second"
 msgstr "Frame per detik"
 
@@ -6453,7 +6453,7 @@ msgid "Ecliptic (J2000.0)"
 msgstr "Ekliptika (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:369 src/gui/AstroCalcChart.cpp:445
-#: src/gui/AstroCalcChart.cpp:471 src/gui/ObsListDialog.cpp:292
+#: src/gui/AstroCalcChart.cpp:471 src/gui/ObsListDialog.cpp:298
 msgid "Right ascension"
 msgstr "Asensio Rekta"
 
@@ -6463,7 +6463,7 @@ msgstr "Jarak kutub"
 
 #: src/gui/SearchDialog.cpp:372 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:428
-#: src/gui/AstroCalcChart.cpp:454 src/gui/ObsListDialog.cpp:293
+#: src/gui/AstroCalcChart.cpp:454 src/gui/ObsListDialog.cpp:299
 msgid "Declination"
 msgstr "Deklinasi"
 
@@ -7136,7 +7136,7 @@ msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "Durasi fase total atau cincin pada gerhana terbesar"
 
 #: src/gui/AstroCalcDialog.cpp:3403 src/gui/AstroCalcChart.cpp:380
-#: src/gui/ObsListDialog.cpp:296 src/ui_obsListDialog.h:412
+#: src/gui/ObsListDialog.cpp:302 src/ui_obsListDialog.h:412
 msgid "Date"
 msgstr "Tanggal"
 
@@ -8447,91 +8447,88 @@ msgstr "m"
 msgid "Today"
 msgstr "Hari ini"
 
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1123
+#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:1132
 msgid "Cannot open observingLists.json to write"
 msgstr "Tidak dapat membuka observingLists.json untuk ditulis"
 
-#: src/gui/ObsListDialog.cpp:182
+#: src/gui/ObsListDialog.cpp:186
 msgctxt "default name for observing list if none is available"
 msgid "new list"
 msgstr "daftar baru"
 
-#: src/gui/ObsListDialog.cpp:222
+#: src/gui/ObsListDialog.cpp:228
 msgid "Select observing lists directory"
 msgstr "Pilih direktori daftar pengamatan"
 
-#: src/gui/ObsListDialog.cpp:289
+#: src/gui/ObsListDialog.cpp:295
 msgid "Object designation"
 msgstr "Penamaan objek"
 
-#: src/gui/ObsListDialog.cpp:290
+#: src/gui/ObsListDialog.cpp:296
 msgid "Object name"
 msgstr "Nama objek"
 
-#: src/gui/ObsListDialog.cpp:295 src/ui_configurationDialog.h:2030
+#: src/gui/ObsListDialog.cpp:301 src/ui_configurationDialog.h:2030
 msgid "Constellation"
 msgstr "Rasi bintang"
 
-#: src/gui/ObsListDialog.cpp:298 src/ui_viewDialog.h:3878
+#: src/gui/ObsListDialog.cpp:304 src/ui_viewDialog.h:3878
 #: src/ui_obsListDialog.h:420
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Landscape"
 msgstr "Lanskap"
 
-#: src/gui/ObsListDialog.cpp:588
+#: src/gui/ObsListDialog.cpp:597
 msgid "Error during conversion. Please see logfile for details."
 msgstr "Kesalahan selama konversi. Silakan lihat logfile untuk detail."
 
-#: src/gui/ObsListDialog.cpp:700
+#: src/gui/ObsListDialog.cpp:709
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:225
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Note"
 msgstr "Catatan"
 
-#: src/gui/ObsListDialog.cpp:700
+#: src/gui/ObsListDialog.cpp:709
 msgid "Some bookmarked objects were not found. See logfile for details."
-msgstr ""
-"Beberapa objek yang ditandai tidak ditemukan. Lihat logfile untuk "
-"detail.Beberapa objek yang ditandai tidak ditemukan. Lihat logfile untuk "
-"detail."
+msgstr "Beberapa objek markah tidak ditemukan. Lihat logfile untuk rincian."
 
-#: src/gui/ObsListDialog.cpp:950
+#: src/gui/ObsListDialog.cpp:959
 msgid "New Observation List"
 msgstr "Daftar Pengamatan Baru"
 
-#: src/gui/ObsListDialog.cpp:951
+#: src/gui/ObsListDialog.cpp:960
 msgid "Observing list creation mode"
 msgstr "Mode pembuatan daftar pengamatan"
 
-#: src/gui/ObsListDialog.cpp:967
+#: src/gui/ObsListDialog.cpp:976
 msgid "Observing list editor mode"
 msgstr "Mode editor daftar pengamatan"
 
-#: src/gui/ObsListDialog.cpp:972
+#: src/gui/ObsListDialog.cpp:981
 msgid "selectedOlud empty. This is a bug"
 msgstr "selectedOlud kosong. Ini adalah bug."
 
-#: src/gui/ObsListDialog.cpp:984
+#: src/gui/ObsListDialog.cpp:993
 msgid "Export observing list as..."
 msgstr "Ekspor daftar pengamatan sebagai..."
 
-#: src/gui/ObsListDialog.cpp:996
+#: src/gui/ObsListDialog.cpp:1005
 msgid "Cannot export. See logfile for details."
 msgstr "Tidak dapat mengekspor. Lihat logfile untuk detail."
 
-#: src/gui/ObsListDialog.cpp:1033
+#: src/gui/ObsListDialog.cpp:1042
 msgid "Import observing list"
 msgstr "Impor daftar pengamatan"
 
-#: src/gui/ObsListDialog.cpp:1045
+#: src/gui/ObsListDialog.cpp:1054
 msgid "Cannot open selected file for import"
 msgstr "Tidak dapat membuka berkas yang dipilih untuk diimpor"
 
-#: src/gui/ObsListDialog.cpp:1061
+#: src/gui/ObsListDialog.cpp:1070
 msgid "Empty list."
 msgstr "Daftar kosong."
 
-#: src/gui/ObsListDialog.cpp:1083
+#: src/gui/ObsListDialog.cpp:1092
 #, qt-format
 msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
@@ -8541,44 +8538,44 @@ msgstr ""
 " menimpa daftar Anda '%4' yang ada, bertanggal %5 dan terakhir dimodifikasi "
 "%6. Terima?"
 
-#: src/gui/ObsListDialog.cpp:1102
+#: src/gui/ObsListDialog.cpp:1111
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "Berkas kosong atau tidak berisi markah lama."
 
-#: src/gui/ObsListDialog.cpp:1114
+#: src/gui/ObsListDialog.cpp:1123
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr "Berkas tidak berisi daftar pengamatan atau markah lama"
 
-#: src/gui/ObsListDialog.cpp:1141
+#: src/gui/ObsListDialog.cpp:1150
 msgid "File format is wrong!"
 msgstr "Format berkas salah!"
 
-#: src/gui/ObsListDialog.cpp:1161
+#: src/gui/ObsListDialog.cpp:1170
 msgid "Cannot open JSON output file. Will not delete."
 msgstr "Tidak dapat membuka berkas keluaran JSON. Tidak akan dihapus."
 
-#: src/gui/ObsListDialog.cpp:1185 src/ui_configurationDialog.h:1895
+#: src/gui/ObsListDialog.cpp:1194 src/ui_configurationDialog.h:1895
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Information"
 msgstr "Informasi"
 
-#: src/gui/ObsListDialog.cpp:1185
+#: src/gui/ObsListDialog.cpp:1194
 msgid "You cannot delete the default or the last list."
 msgstr "Anda tidak dapat menghapus daftar bawaan atau daftar terakhir."
 
-#: src/gui/ObsListDialog.cpp:1241
+#: src/gui/ObsListDialog.cpp:1250
 msgid "Unnamed object"
 msgstr "Objek tak bernama"
 
-#: src/gui/ObsListDialog.cpp:1324
+#: src/gui/ObsListDialog.cpp:1333
 msgid "Empty name"
 msgstr "Nama kosong"
 
-#: src/gui/ObsListDialog.cpp:1329
+#: src/gui/ObsListDialog.cpp:1338
 msgid "List name already exists"
 msgstr "Nama daftar sudah ada"
 
-#: src/gui/ObsListDialog.cpp:1394 src/ui_configurationDialog.h:2095
+#: src/gui/ObsListDialog.cpp:1403 src/ui_configurationDialog.h:2095
 #: src/ui_obsListDialog.h:361
 msgid "Observing lists"
 msgstr "Daftar pengamatan"
@@ -8650,19 +8647,19 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Jalan Pintas"
 
-#: src/StelMainView.cpp:964
+#: src/StelMainView.cpp:967
 msgid "Save screenshot"
 msgstr "Simpan tangkapan layar"
 
-#: src/StelMainView.cpp:965
+#: src/StelMainView.cpp:968
 msgid "Reload shaders (for development)"
 msgstr "Muat ulang shaders (untuk pengembangan)"
 
-#: src/StelMainView.cpp:966
+#: src/StelMainView.cpp:969
 msgid "Full-screen mode"
 msgstr "Modus layar-penuh"
 
-#: src/StelMainView.cpp:1063
+#: src/StelMainView.cpp:1067
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8670,7 +8667,7 @@ msgstr ""
 "Jalan pintas memiliki konflik! Silakan tekan F7 setelah program dimulai dan "
 "periksa penetapan ganda berikut"
 
-#: src/StelMainView.cpp:1146
+#: src/StelMainView.cpp:1152
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8678,7 +8675,7 @@ msgstr ""
 "Versi OpenGL tidak memadai. Silakan perbarui driver, perangkat keras grafis,"
 " atau gunakan opsi --angle-mode (atau --mesa-mode)."
 
-#: src/StelMainView.cpp:1148
+#: src/StelMainView.cpp:1154
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8686,14 +8683,14 @@ msgstr ""
 "Versi OpenGL tidak memadai. Silakan perbarui driver, perangkat keras grafis,"
 " atau gunakan opsi --mesa-mode."
 
-#: src/StelMainView.cpp:1152
+#: src/StelMainView.cpp:1158
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Versi OpenGL tidak memadai. Silakan perbarui driver atau perangkat keras "
 "grafis."
 
-#: src/StelMainView.cpp:1195
+#: src/StelMainView.cpp:1201
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8701,7 +8698,7 @@ msgstr ""
 "Subsistem DirectX/OpenGL ES Anda bermasalah. Lihat log untuk detail.\n"
 "Abaikan dan sembunyikan pemberitahuan ini di masa mendatang dan coba lanjutkan dalam mode terdegradasi?"
 
-#: src/StelMainView.cpp:1246
+#: src/StelMainView.cpp:1252
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8709,7 +8706,7 @@ msgstr ""
 "Subsistem OpenGL/Mesa Anda bermasalah. Lihat log untuk detail.\n"
 "Abaikan dan sembunyikan pemberitahuan ini di masa mendatang dan coba lanjutkan dalam mode terdegradasi?"
 
-#: src/StelMainView.cpp:1306
+#: src/StelMainView.cpp:1312
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8717,7 +8714,7 @@ msgstr ""
 "Subsistem OpenGL Anda bermasalah. Lihat log untuk detail.\n"
 "Abaikan dan sembunyikan pemberitahuan ini di masa mendatang dan coba lanjutkan dalam mode terdegradasi?"
 
-#: src/StelMainView.cpp:1347
+#: src/StelMainView.cpp:1353
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -10394,7 +10391,7 @@ msgstr ""
 #: src/translations.h:651
 msgctxt "SIMBAD object type"
 msgid "Hot Subdwarf"
-msgstr ""
+msgstr "Sub-katai Panas"
 
 #: src/translations.h:652
 msgctxt "SIMBAD object type"
@@ -11084,7 +11081,7 @@ msgstr ""
 #: src/translations.h:789
 msgctxt "SIMBAD object type"
 msgid "Region defined in the Sky"
-msgstr ""
+msgstr "Wilayah yang ditentukan di Langit"
 
 #. TRANSLATORS: This is a filter checkbox meaning "include penumbral lunar
 #. eclipses", so the adjective should be in plural (if applicable)
@@ -11225,7 +11222,6 @@ msgstr "Batal"
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
-#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
 msgstr "Batal"
@@ -11281,7 +11277,6 @@ msgid "Copy &Link Location"
 msgstr "Salin Lokasi &Tautan"
 
 #: src/translations.h:860
-#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
 msgid "Abort"
 msgstr "Batalkan"
 
@@ -13154,7 +13149,7 @@ msgstr "Posisi"
 #: src/ui_searchDialogGui.h:866
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
-"Beberapa objek mungkin ditemukan setelah mengaktifkan plug-in yang terkait"
+"Beberapa objek mungkin ditemukan setelah mengaktifkan plugin yang terkait"
 
 #: src/ui_searchDialogGui.h:868
 msgid "names in English"
@@ -17616,22 +17611,22 @@ msgid "Angle measure settings"
 msgstr "Pengaturan pengukuran sudut"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:680
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:677
 msgid "The Angle Measure is enabled:"
 msgstr "Pengukuran Sudut diaktifkan:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:682
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:679
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "Seret dengan tombol kiri untuk mengukur, klik kiri untuk menghapus."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:684
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:681
 msgid "Right-clicking changes the end point only."
 msgstr "Klik kanan hanya mengubah titik akhir."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:686
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:683
 msgid "PA="
 msgstr "PA="
 
@@ -17899,42 +17894,42 @@ msgid "Toggle Oculars button bar"
 msgstr "Alihkan bilah tombol Okuler"
 
 #: plugins/Oculars/src/Oculars.cpp:1528
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:173
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Select next telescope"
 msgstr "Pilih teleskop berikutnya"
 
 #: plugins/Oculars/src/Oculars.cpp:1530
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:171
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
 msgid "Select previous telescope"
 msgstr "Pilih teleskop sebelumnya"
 
 #: plugins/Oculars/src/Oculars.cpp:1532
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:161
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
 msgid "Select next eyepiece"
 msgstr "Pilih lensa mata berikutnya"
 
 #: plugins/Oculars/src/Oculars.cpp:1534
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:159
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Select previous eyepiece"
 msgstr "Pilih lensa mata sebelumnya"
 
 #: plugins/Oculars/src/Oculars.cpp:1536
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:165
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Select next lens"
 msgstr "Pilih lensa berikutnya"
 
 #: plugins/Oculars/src/Oculars.cpp:1538
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:163
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Select previous lens"
 msgstr "Pilih lensa sebelumnya"
 
 #: plugins/Oculars/src/Oculars.cpp:1540
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:169
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Select next CCD frame"
 msgstr "Pilih bingkai sensor CCD berikutnya"
 
 #: plugins/Oculars/src/Oculars.cpp:1542
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:167
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Select previous CCD frame"
 msgstr "Pilih bingkai sensor CCD sebelumnya"
 
@@ -17959,12 +17954,12 @@ msgid "Toggle focuser overlay"
 msgstr "Alihkan hamparan pemfokus"
 
 #: plugins/Oculars/src/Oculars.cpp:1550
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1242
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1289
 msgid "Reset the sensor frame rotation"
 msgstr "Reset pemutaran bingkai sensor"
 
 #: plugins/Oculars/src/Oculars.cpp:1551
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1245
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1292
 msgid "Reset the prism rotation"
 msgstr "Atur ulang rotasi prisma"
 
@@ -17980,8 +17975,8 @@ msgstr "RA/Dek (J2000.0) bidik silang"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 #: plugins/Oculars/src/Oculars.cpp:2008
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:515
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:562
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 msgid "\"/px"
 msgstr "\"/px"
 
@@ -18001,37 +17996,37 @@ msgid "s"
 msgstr "d"
 
 #: plugins/Oculars/src/Oculars.cpp:2292
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:305
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:352
 msgid "Binocular"
 msgstr "Binokuler"
 
 #: plugins/Oculars/src/Oculars.cpp:2292
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:303
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
 msgid "Ocular"
 msgstr "Lensa Mata"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:2312
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:348
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:395
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Jarak Fokus Lensa Mata: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:2319
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:357
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:404
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Bidang Pandang Tampak Lensa Mata: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2330
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:387
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:434
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lensa #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2334
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:391
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:438
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lensa #%1: %2"
@@ -18041,19 +18036,19 @@ msgid "Lens: none"
 msgstr "Lensa: tidak ada"
 
 #: plugins/Oculars/src/Oculars.cpp:2354 plugins/Oculars/src/Oculars.cpp:2415
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:651
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2363
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:764
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Pembesaran: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2370
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:773
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Pupil keluar: %1 mm"
@@ -18064,32 +18059,32 @@ msgid "FOV: %1"
 msgstr "FOV: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2398
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensi: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2399
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:509
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 msgid "Binning"
 msgstr "Penjumlahan Piksel"
 
 #: plugins/Oculars/src/Oculars.cpp:2403
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:463
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:510
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensor #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2407
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:467
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2420
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:655
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
@@ -18122,252 +18117,252 @@ msgstr "&Teleskop sebelumnya"
 msgid "&Next telescope"
 msgstr "&Teleskop selanjutnya"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:397
 msgid "Effective focal length of the ocular"
 msgstr "Jarak fokus efektif lensa mata"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:360
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:407
 msgid "Apparent field of view of the ocular"
 msgstr "Bidang pandang tampak lensa mata"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:393
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:440
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "Multiplisitas: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:398
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:445
 msgid "Lens: None"
 msgstr "Lensa: Tidak ada"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:399
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:446
 msgid "Multiplicity: N/A"
 msgstr "Multiplisitas: T/A"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:403
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:450
 msgid "Focal length of eyepiece"
 msgstr "Jarak fokus lensa mata"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
 msgid "Dimensions field of view"
 msgstr "Dimensi bidang pandang"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:563
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:751
 msgid "X scale"
 msgstr "Skala X"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:517
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:705
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:752
 msgid "Horizontal scale"
 msgstr "Skala horizontal"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:521
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
 msgid "Y scale"
 msgstr "Skala Y"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:707
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:569
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 msgid "Vertical scale"
 msgstr "Skala vertikal"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:528
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:575
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Rotasi: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:572
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:619
 #, qt-format
 msgid "PA of prism: %1"
 msgstr "Sudut Posisi prisma: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:575
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:622
 msgid "Position angle of the off-axis guider' prism"
 msgstr "Sudut posisi prisma pandu luar sumbu"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:787
 msgid "Magnification provided by these binoculars"
 msgstr "Pembesaran yang disediakan oleh binokuler ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:741
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:788
 msgid "Actual field of view provided by these binoculars"
 msgstr "Medan pandang sebenarnya dari binokular"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:789
 msgid "Exit pupil provided by these binoculars"
 msgstr "Pupil keluar yang disediakan oleh binokuler ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:743
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:790
 msgid "Twilight factor (or dusk index) provided by these binoculars"
 msgstr "Faktor senja (atau indeks senja) yang disediakan oleh binokuler ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:791
 msgid "Relative brightness provided by these binoculars"
 msgstr "Kecerahan relatif yang disediakan oleh binokuler ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:745
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
 msgid "Alan Adler's Index (or Astro Index) provided by these binoculars"
 msgstr ""
 "Alan Adler's Index (atau Astro Index) yang disediakan oleh binokuler ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
 msgid "Roy Bishop's Index (or Visibility Factor) provided by these binoculars"
 msgstr ""
 "Roy Bishop's Index (atau Visibility Factor) yang disediakan oleh binokuler "
 "ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "Pembesaran yang disediakan oleh kombinasi okuler/lensa/teleskop ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:755
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 "Bidang pandang aktual yang disediakan oleh kombinasi okuler/lensa/teleskop "
 "ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:756
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:803
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "Pupil keluar yang disediakan oleh kombinasi okuler/lensa/teleskop ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:781
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:828
 msgid "Twilight factor"
 msgstr "Faktor senja"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:787
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
 msgid "Relative brightness"
 msgstr "Kecerahan relatif"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:840
 msgid "Adler index"
 msgstr "Indeks Adler"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:799
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
 msgid "Bishop index"
 msgstr "Indeks Bishop"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:809
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
 msgctxt "field of view"
 msgid "FOV"
 msgstr "FOV"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:877
 msgid "Rayleigh criterion"
 msgstr "Kriteria Rayleigh"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
 msgid "The Rayleigh resolution criterion"
 msgstr "Kriteria resolusi Rayleigh"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:837
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:884
 msgid "Dawes' limit"
 msgstr "Batas Dawes"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:886
 msgid "Dawes' resolution criterion"
 msgstr "Kriteria resolusi Dawes"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
 msgid "Abbe's limit"
 msgstr "Batas Abbe"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:893
 msgid "Abbe’s diffraction resolution limit"
 msgstr "Batas resolusi difraksi Abbe"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Sparrow's limit"
 msgstr "Batas Sparrow"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:853
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:900
 msgid "Sparrow's resolution limit"
 msgstr "Batas resolusi Sparrow"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Visual resolution"
 msgstr "Resolusi visual"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:881
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "Resolusi visual didasarkan pada sifat mata dan perbesaran"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:895
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:942
 msgctxt "Limiting magnitude of device"
 msgid "Limiting magnitude"
 msgstr "Magnitudo batas"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:945
 msgid "Approximate limiting magnitude of this binocular"
 msgstr "Perkiraan magnitudo batas binokuler ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:900
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:947
 msgid ""
 "Approximate limiting magnitude of this ocular/lens/telescope combination"
 msgstr "Perkiraan magnitudo batas kombinasi okuler/lensa/teleskop ini"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1194
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1241
 msgid "Rotate the sensor frame 90 degrees counterclockwise"
 msgstr "Putar bingkai sensor 90 derajat berlawanan arah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1244
 msgid "Rotate the prism 90 degrees counterclockwise"
 msgstr "Putar prisma 90 derajat berlawanan arah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1206
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1253
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "Putar bingkai sensor 15 derajat berlawanan arah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1209
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1256
 msgid "Rotate the prism 15 degrees counterclockwise"
 msgstr "Putar prisma 15 derajat berlawanan arah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1218
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1265
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "Putar bingkai sensor 5 derajat berlawanan arah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1221
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1268
 msgid "Rotate the prism 5 degrees counterclockwise"
 msgstr "Putar prisma 5 derajat berlawanan arah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1230
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1277
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "Putar bingkai sensor 1 derajat berlawanan arah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1233
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1280
 msgid "Rotate the prism 1 degree counterclockwise"
 msgstr "Putar prisma 1 derajat berlawanan arah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1254
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1301
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "Putar bingkai sensor 1 derajat searah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1257
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1304
 msgid "Rotate the prism 1 degree clockwise"
 msgstr "Putar prisma 1 derajat searah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1266
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1313
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "Putar bingkai sensor 5 derajat searah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1269
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1316
 msgid "Rotate the prism 5 degrees clockwise"
 msgstr "Putar prisma 5 derajat searah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1278
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1325
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "Putar bingkai sensor 15 derajat searah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1281
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1328
 msgid "Rotate the prism 15 degrees clockwise"
 msgstr "Putar prisma 15 derajat searah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1290
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1337
 msgid "Rotate the sensor frame 90 degrees clockwise"
 msgstr "Putar bingkai sensor 90 derajat searah jarum jam"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1293
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1340
 msgid "Rotate the prism 90 degrees clockwise"
 msgstr "Putar prisma 90 derajat searah jarum jam"
 
@@ -22799,37 +22794,39 @@ msgstr "Tidak ada, hanya simulasikan satu (reticle bergerak)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:560
 msgid "Connection delay:"
-msgstr ""
+msgstr "Jeda koneksi:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:565
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 (default)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:566
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "Ekuinoks tanggal (JNow)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:568
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"Secara otomatis mencoba memulai teleskop atau membuat sambungan saat "
+"Stellarium dimulai"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:570
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Mulai/sambungkan saat startup"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:572
 msgid "Serial port:"
-msgstr ""
+msgstr "Port serial:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:573
 msgid "Device model:"
-msgstr ""
+msgstr "Model perangkat:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:580
 msgid "RTS2 telescope settings"
-msgstr ""
+msgstr "Pengaturan teleskop RTS2"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:581
 msgid "URL:"
@@ -22853,7 +22850,7 @@ msgstr "Kata sandi RTS2"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:591
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
-msgstr ""
+msgstr "URL mesin yang meng-host server JSON RTS2 (httpd)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:593
 msgid "Refresh every:"
@@ -22861,23 +22858,25 @@ msgstr "Segarkan setiap:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:597
 msgid "User interface settings"
-msgstr ""
+msgstr "Pengaturan antarmuka pengguna"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:599
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
+"Tampilkan lingkaran dengan ukuran sudut tetap di sekitar reticle teleskop"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:601
 msgid "Use field of view indicators"
-msgstr ""
+msgstr "Gunakan indikator bidang pandang"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:602
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Ukuran (atau ukuran-ukuran) lingkaran:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:604
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr ""
+"Hingga sepuluh nilai desimal dalam derajat busur, dipisahkan dengan koma"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:607
 msgid "OK"
@@ -22885,19 +22884,19 @@ msgstr "OK"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:396
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "Teleskop yang Dikontrol"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:398
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "Konfigurasi teleskop yang dipilih"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:401
 msgid "Add a new telescope"
-msgstr ""
+msgstr "Tambah teleskop baru"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:404
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "Hapus teleskop yang dipilih"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:407
 msgid "GUI"
@@ -22905,15 +22904,15 @@ msgstr "GUI"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:408
 msgid "Show telescope labels"
-msgstr ""
+msgstr "Tampilkan label teleskop"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:409
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "Tampilkan indikator bidang pandang"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:410
 msgid "Show telescope reticles"
-msgstr ""
+msgstr "Tampilkan reticle teleskop"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:414
 msgid "Files"
@@ -22921,43 +22920,45 @@ msgstr "Berkas"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "Catat pesan driver teleskop ke berkas"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:416
 msgid "Use telescope server executables (override built-in drivers)"
-msgstr ""
+msgstr "Gunakan executable server teleskop (override driver bawaan)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:417
 msgid "Executables directory:"
-msgstr ""
+msgstr "Direktori executable:"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:200
 msgid "Points"
-msgstr ""
+msgstr "Titik"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:206
 msgid "Add point"
-msgstr ""
+msgstr "Tambah titik"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:207
 msgid "Remove selected"
-msgstr ""
+msgstr "Hapus yang dipilih"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:208
 msgid "Clear list"
-msgstr ""
+msgstr "Bersihkan daftar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:87
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:573
 msgid "Text User Interface"
-msgstr "Antar Muka Teks"
+msgstr "Antarmuka Pengguna Teks"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:90
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
+"Implementasi plugin dari Antarmuka Pengguna Teks (TUI) seri 0.9.x, digunakan"
+" dalam sistem planetarium"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:152
 msgid "Altitude:"
@@ -22965,33 +22966,33 @@ msgstr "Ketinggian:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:160
 msgid "Solar System body"
-msgstr ""
+msgstr "Benda Tata Surya"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Current date/time"
-msgstr ""
+msgstr "Tanggal/waktu saat ini"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Set time zone"
-msgstr ""
+msgstr "Atur zona waktu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:181
 msgid "Day keys"
-msgstr ""
+msgstr "Kunci hari"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "Prasetel tanggal/waktu startup"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:189
 msgid "system"
-msgstr ""
+msgstr "sistem"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "preset"
-msgstr ""
+msgstr "prasetel"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "mmddyyyy"
@@ -23007,7 +23008,7 @@ msgstr "yyyymmdd"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:200
 msgid "Date display format"
-msgstr ""
+msgstr "Format tampilan tanggal"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:208
@@ -23021,23 +23022,23 @@ msgstr "24j"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "Time display format"
-msgstr ""
+msgstr "Format tampilan waktu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "App Language"
-msgstr ""
+msgstr "Bahasa Aplikasi"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:251
 msgid "Show stars"
-msgstr ""
+msgstr "Tampilkan bintang"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Mag limit:"
-msgstr ""
+msgstr "Batas magnitudo:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:277
 msgid "Use mag limit"
-msgstr ""
+msgstr "Gunakan batas magnitudo"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Colors"
@@ -23046,39 +23047,39 @@ msgstr "Warna"
 #. TRANSLATORS: Refers to constellation art
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Art brightness:"
-msgstr "Kecerahan gambar:"
+msgstr "Kecerahan seni:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:384
 msgid "Ecliptic line (J2000)"
-msgstr ""
+msgstr "Garis ekliptika (J2000)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:391
 msgid "Nebula names"
-msgstr ""
+msgstr "Nama nebula"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Nebula hints"
-msgstr ""
+msgstr "Petunjuk nebula"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Galaxy hints"
-msgstr ""
+msgstr "Petunjuk galaksi"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:403
 msgid "Dark nebulae hints"
-msgstr ""
+msgstr "Petunjuk nebula gelap"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:407
 msgid "Clusters hints"
-msgstr ""
+msgstr "Petunjuk gugus"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:421
 msgid "Galactic equator line"
-msgstr ""
+msgstr "Garis ekuator Galaksi"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:432
 msgid "Sky Background (default: black)"
-msgstr ""
+msgstr "Latar Belakang Langit (default: hitam)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:465
 msgid "Effects"
@@ -23086,88 +23087,88 @@ msgstr "Efek"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:479
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "Mengatur lanskap mengatur lokasi"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:485
 msgid "Auto zoom out returns to initial direction of view"
-msgstr "Pengecilan otomatis mengembalikan ke arah pandang awal"
+msgstr "Pengecilan skala otomatis kembali ke arah pandangan semula."
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:490
 msgid "Zoom duration:"
-msgstr ""
+msgstr "Durasi zoom:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:496
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "Intensitas Bima Sakti:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:502
 msgid "Milky Way saturation:"
-msgstr ""
+msgstr "Saturasi Bima Sakti:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:508
 msgid "Zodiacal light intensity:"
-msgstr ""
+msgstr "Intensitas cahaya Zodiak:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:530
 msgid "Run local script"
-msgstr ""
+msgstr "Jalankan skrip lokal"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:536
 msgid "Stop running script"
-msgstr ""
+msgstr "Hentikan skrip yang sedang berjalan"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:547
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:551
 msgid "Administration"
-msgstr ""
+msgstr "Administrasi"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:557
 msgid "Load default configuration"
-msgstr ""
+msgstr "Muat konfigurasi default"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:558
 msgid "Save current configuration"
-msgstr ""
+msgstr "Simpan konfigurasi saat ini"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:561
 msgid "Shut down"
-msgstr ""
+msgstr "Matikan"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:572
 msgid "Toggle TUI date&time"
-msgstr ""
+msgstr "Alihkan tanggal&waktu TUI"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:573
 msgid "Toggle TUI object info"
-msgstr ""
+msgstr "Alihkan info objek TUI"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:644
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[tanpa node TUI]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr "Hidup"
+msgstr "Aktif"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Off"
-msgstr "Mati"
+msgstr "Nonaktif"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "kesalahan, bagian warna tidak diketahui \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
-msgstr ""
+msgstr "[ENTER untuk mengaktifkan]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:60
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:151
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:254
 msgid "Solar System Editor"
-msgstr "Penyunting Sistem Surya"
+msgstr "Editor Sistem Surya"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:63
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:262
@@ -23176,32 +23177,37 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database."
 msgstr ""
+"Antarmuka untuk menambahkan asteroid dan komet ke Stellarium. Fitur ini "
+"dapat mengunduh daftar objek dari situs web Minor Planet Center dan "
+"melakukan pencarian di basis data daringnya."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:151
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:238
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "Impor elemen orbital dalam format MPC..."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:766
 msgid "Anonymous"
-msgstr ""
+msgstr "Anonim"
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris
 #. Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:150
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "Kueri %1 milik MPC:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:153
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "Hanya satu hasil yang akan dikembalikan jika kueri berhasil."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:154
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or IAU designation."
 msgstr ""
+"Baik komet maupun asteroid dapat diidentifikasi dengan nomor, nama (dalam "
+"bahasa Inggris), atau penamaan IAU-nya."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:161
 #, qt-format
@@ -23211,6 +23217,10 @@ msgid ""
 "searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\""
 " will return the asteroid %6."
 msgstr ""
+"<i>Nama</i> komet harus diawali dengan %1 atau %2. Jika lebih dari satu "
+"komet cocok dengan suatu nama, hanya hasil pertama yang akan dikembalikan. "
+"Misalnya, mencari \"%3\" akan mengembalikan %4, Komet Halley, tetapi "
+"pencarian untuk \"%5\" akan mengembalikan asteroid %6."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:200
 msgid "Select bookmark..."
@@ -23218,7 +23228,7 @@ msgstr "Pilih markah..."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:337
 msgid "Plain Text File"
-msgstr "Berkas Teks Polos"
+msgstr "Berkas Teks Biasa"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:339
 msgid "All Files"
@@ -23230,11 +23240,11 @@ msgstr "Pilih berkas"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:378
 msgid "Total objects in selected source"
-msgstr ""
+msgstr "Total objek di sumber yang dipilih"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:726
 msgid "Searching..."
-msgstr ""
+msgstr "Mencari..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:107
@@ -23250,26 +23260,31 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"Anda dapat mengimpor data komet dan asteroid yang diformat dalam format "
+"ekspor Minor Planet Center IAU (%1). Anda dapat mengimpor berkas dengan "
+"daftar objek, mengunduh daftar tersebut dari Internet, atau mencari di "
+"Layanan Efemeris Planet dan Komet Minor Daring (MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:213
 msgid "Save the minor Solar System bodies as..."
-msgstr "Simpan benda-benda kecil Tata Surya sebagai..."
+msgstr "Simpan benda Tata Surya minor sebagai..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:224
 msgid "Cannot overwrite"
-msgstr ""
+msgstr "Tidak dapat menimpa"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
 msgid "Cannot remove existing file. Do you have permissions?"
 msgstr ""
+"Tidak dapat menghapus berkas yang sudah ada. Apakah Anda memiliki izin?"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:231
 msgid "Cannot store"
-msgstr ""
+msgstr "Tidak dapat menyimpan"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:232
 msgid "File cannot be written. Do you have permissions?"
-msgstr ""
+msgstr "Berkas tidak dapat ditulis. Apakah Anda memiliki izin?"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:245
@@ -23278,15 +23293,15 @@ msgstr "Berkas konfigurasi"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
 msgid "Select a file to replace the Solar System minor bodies"
-msgstr ""
+msgstr "Pilih berkas untuk menggantikan benda minor Tata Surya"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:247
 msgid "Select a file to add the Solar System minor bodies"
-msgstr ""
+msgstr "Pilih berkas untuk menambahkan benda minor Tata Surya"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:479
 msgid "Select the type"
-msgstr "Pilih tipe"
+msgstr "Pilih jenis"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:482
 msgid "Select the source"
@@ -23335,75 +23350,85 @@ msgid ""
 "with names matching those of already loaded objects. <br/><br/>Note that "
 "adding a large number of objects may cause Stellarium to run slowly."
 msgstr ""
+"Tandai objek yang ingin Anda impor. <i>Tulisan miring</i> menunjukkan objek "
+"dengan nama yang cocok dengan objek yang sudah dimuat. <br/><br/>Catatan: "
+"menambahkan sejumlah besar objek dapat menyebabkan Stellarium berjalan "
+"lambat."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:497
 msgid "This will update existing objects only."
-msgstr ""
+msgstr "Ini hanya akan memperbarui objek yang sudah ada."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:499
 msgid "Overwrite existing objects only"
-msgstr ""
+msgstr "Timpa objek yang sudah ada saja"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:501
 msgid "This will add new objects AND update existing ones."
-msgstr ""
+msgstr "Ini akan menambah objek baru DAN memperbarui objek yang sudah ada."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:503
 msgid "Add new and update existing objects"
-msgstr ""
+msgstr "Tambah baru dan perbarui objek yang sudah ada"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:505
 msgid ""
 "If not checked, also update the type (comet, asteroid, ...) and magnitude "
 "data."
 msgstr ""
+"Jika tidak dicentang, perbarui juga jenisnya (komet, asteroid, ...) dan data"
+" magnitudo."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:507
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Perbarui hanya elemen orbital"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Add objects"
-msgstr ""
+msgstr "Tambah objek"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:224
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:235
 msgid "Minor Solar System objects"
-msgstr ""
+msgstr "Objek Tata Surya Minor"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:226
 msgid ""
 "This plug-in edits a custom Solar System configuration file for the minor "
 "bodies. If something goes wrong and Stellarium crashes and/or doesn't start,"
-" you can delete manually that file from:"
+" you can manually delete that file from:"
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:227
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"Anda juga dapat mengatur ulang semua perubahan dan kembali ke konfigurasi "
+"default:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:229
 msgid "Export/replace the Solar System minor objects file"
-msgstr ""
+msgstr "Ekspor/ganti berkas objek minor Tata Surya"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:230
 msgid ""
 "You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Anda dapat membuat salinan cadangan berkas konfigurasi Tata Surya khusus "
+"Anda di lokasi yang nyaman, atau menggantinya dengan salinan tersebut."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:231
 msgid "Export the Solar System minor objects to file..."
-msgstr ""
+msgstr "Ekspor objek minor Tata Surya ke berkas..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:232
 msgid "Import and replace the Solar System minor objects from file..."
-msgstr ""
+msgstr "Impor dan ganti objek minor Tata Surya dari berkas..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:233
 msgid "Import and add Solar System minor objects from file..."
-msgstr ""
+msgstr "Impor dan tambah objek minor Tata Surya dari berkas..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:234
 msgid "Configuration file"
@@ -23411,20 +23436,21 @@ msgstr "Berkas konfigurasi"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:237
 msgid "Add new Minor Solar System objects"
-msgstr ""
+msgstr "Tambah objek Tata Surya Minor baru"
 
 #: plugins/Supernovae/src/Supernovae.cpp:72
 #: plugins/Supernovae/src/Supernovae.cpp:151
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Supernova Sejarah"
 
 #: plugins/Supernovae/src/Supernovae.cpp:75
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
+"Plugin ini memungkinkan Anda melihat beberapa supernova sejarah yang terang."
 
 #: plugins/Supernovae/src/Supernovae.cpp:151
 msgid "Historical Supernovae configuration window"
-msgstr "Jendela pengaturan supernova historis"
+msgstr "Jendela konfigurasi Supernova Sejarah"
 
 #: plugins/Supernovae/src/Supernova.cpp:154
 msgid "Type of supernova"
@@ -23440,27 +23466,28 @@ msgstr "supernova"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "Plugin Supernova Sejarah"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
+"Plugin ini memungkinkan Anda melihat beberapa supernova sejarah yang terang:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 #: plugins/Novae/src/gui/NovaeDialog.cpp:124
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "Daftar ini secara keseluruhan berisi %1 bintang."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
-msgstr ""
+msgstr "Semua supernova tersebut lebih terang dari %1 pada puncak kecerahan."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 msgid "Light curves"
-msgstr ""
+msgstr "Kurva cahaya"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 msgid ""
@@ -23468,6 +23495,9 @@ msgid ""
 " supernovae. Figures and a description of the model can be found in the "
 "Stellarium User Guide."
 msgstr ""
+"Plugin ini mengimplementasikan model sederhana kurva cahaya untuk supernova "
+"tipe I dan tipe II. Gambar dan deskripsi model dapat ditemukan di Panduan "
+"Pengguna Stellarium."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
@@ -23483,7 +23513,7 @@ msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 msgid "Institute for Theoretical and Experimental Physics"
-msgstr "Institut Fisika Teoretis dan Eksperimental"
+msgstr "Institute for Theoretical and Experimental Physics"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
@@ -23501,15 +23531,15 @@ msgstr "h"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:216
 msgid "Historical supernovae is updated"
-msgstr "Supernova historis diperbarui"
+msgstr "Supernova sejarah diperbarui"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:197
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "Konfigurasi Supernova Sejarah"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:198
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "Konfigurasi Plugin Supernova Sejarah"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:199
 #: plugins/Novae/src/ui_novaeDialog.h:202
@@ -23539,21 +23569,21 @@ msgstr "Frekuensi pembaruan (hari):"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:296
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:533
 msgid "[next update info]"
-msgstr "[info pembaruan selanjutnya]"
+msgstr "[info pembaruan berikutnya]"
 
 #: plugins/NavStars/src/NavStars.cpp:55 plugins/NavStars/src/NavStars.cpp:119
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Bintang Navigasi"
 
 #: plugins/NavStars/src/NavStars.cpp:58
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:301
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:303
 msgid "This plugin marks navigational stars from a selected set."
-msgstr ""
+msgstr "Plugin ini menandai bintang navigasi dari set yang dipilih."
 
 #: plugins/NavStars/src/NavStars.cpp:119
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "Tandai bintang navigasi"
 
 #. TRANSLATORS: The emphasis tags mark a title.
 #: plugins/NavStars/src/NavStars.cpp:391
@@ -23564,12 +23594,19 @@ msgid ""
 "navigational aids such as the <em>2102D Star Finder</em> and "
 "<em>Identifier</em>."
 msgstr ""
+"57 \"bintang terpilih\" yang tercantum dalam <em>The Nautical Almanac</em> "
+"yang diterbitkan bersama oleh Her Majesty's Nautical Almanac Office dan US "
+"Naval Observatory sejak 1958; akibatnya, bintang-bintang ini juga digunakan "
+"dalam alat bantu navigasi seperti <em>2102D Star Finder</em> and "
+"<em>Identifier</em>."
 
 #: plugins/NavStars/src/NavStars.cpp:392
 msgid ""
 "The 81 stars that are listed in the French Nautical Almanac published by the"
 " French Bureau des Longitudes."
 msgstr ""
+"81 bintang yang tercantum dalam French Nautical Almanac yang diterbitkan "
+"oleh rench Bureau des Longitudes."
 
 #. TRANSLATORS: The emphasis tags mark a title.
 #: plugins/NavStars/src/NavStars.cpp:394
@@ -23577,184 +23614,219 @@ msgid ""
 "The 47 navigational stars that are listed in the Nevil Maskelyne's <em>The "
 "British Mariner's Guide</em> published in 1764."
 msgstr ""
+"47 bintang navigasi yang tercantum dalam <em>The British Mariner's "
+"Guide</em> karya Nevil Maskelyne yang diterbitkan pada tahun 1764."
 
-#: plugins/NavStars/src/NavStars.cpp:395
+#. TRANSLATORS: The emphasis tags mark a title.
+#: plugins/NavStars/src/NavStars.cpp:396
+msgid ""
+"The 47 navigational stars that are listed in the Thornton S. Lecky's "
+"<em>Wrinkles in practical navigation</em> published in 1884."
+msgstr ""
+"47 bintang navigasi yang tercantum dalam <em>Wrinkles in practical "
+"navigation</em> karya Thornton S. Lecky, yang diterbitkan pada tahun 1884."
+
+#: plugins/NavStars/src/NavStars.cpp:397
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac published by the"
 " Federal Maritime and Hydrographic Agency of Germany."
 msgstr ""
+"80 bintang yang tercantum dalam German Nautical Almanac yang diterbitkan "
+"oleh Federal Maritime dan Hydrographic Agency of Germany."
 
-#: plugins/NavStars/src/NavStars.cpp:396
+#: plugins/NavStars/src/NavStars.cpp:398
 msgid "The 160 stars that are listed in the Russian Nautical Almanac."
-msgstr ""
+msgstr "160 bintang yang tercantum dalam Russian Nautical Almanac."
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:398
+#: plugins/NavStars/src/NavStars.cpp:400
 msgid ""
 "The typical set of navigational stars which was used by aviation of the "
 "Soviet Union. These stars can be found in books like <em>Aviation "
 "Astronomy</em> or <em>Aviation handbook</em>."
 msgstr ""
+"Set bintang navigasi tipikal yang digunakan oleh penerbangan Soviet Union. "
+"Bintang-bintang ini dapat ditemukan di buku-buku seperti <em>Aviation "
+"Astronomy</em> atau <em>Aviation handbook</em>."
 
-#: plugins/NavStars/src/NavStars.cpp:399
+#: plugins/NavStars/src/NavStars.cpp:401
 msgid ""
 "These 151 stars were used in the Voskhod (Soviet) and Soyuz (Soviet and "
 "Russian) manned space programs to navigate in space."
 msgstr ""
+"151 bintang ini digunakan dalam program luar angkasa berawak Voskhod "
+"(Soviet) dan Soyuz (Soviet dan Rusia) untuk bernavigasi di ruang angkasa."
 
-#: plugins/NavStars/src/NavStars.cpp:400
+#: plugins/NavStars/src/NavStars.cpp:402
 msgid ""
 "These 37 stars were used by the Apollo space program to navigate to the Moon"
 " from 1969-1972, Apollo 11 through Apollo 17."
 msgstr ""
+"37 bintang ini digunakan oleh program luar angkasa Apollo untuk bernavigasi "
+"ke Bulan dari tahun 1969-1972, Apollo 11 hingga Apollo 17."
 
-#: plugins/NavStars/src/NavStars.cpp:401
+#: plugins/NavStars/src/NavStars.cpp:403
 msgid ""
 "Alignment stars from the Gemini Astronomical Positioning System, a "
 "professional level computerized device for controlling small to medium "
 "German equatorial telescope mounts."
 msgstr ""
+"Bintang penyelarasan dari Gemini Astronomical Positioning System, perangkat "
+"terkomputerisasi tingkat profesional untuk mengontrol dudukan teleskop "
+"ekuatorial Jerman ukuran kecil hingga sedang."
 
-#: plugins/NavStars/src/NavStars.cpp:402
+#: plugins/NavStars/src/NavStars.cpp:404
 msgid ""
 "The Meade LX200 utilizes 33 bright and well known stars to calibrate the "
 "telescope’s Object Library in the ALTAZ and POLAR alignments. These stars "
 "were selected to allow observers from anywhere in the world on any given "
 "night, to be able to easily and quickly make precision alignments."
 msgstr ""
+"Meade LX200 menggunakan 33 bintang terang dan terkenal untuk mengkalibrasi "
+"Pustaka Objek teleskop dalam penyelarasan ALTAZ dan POLAR. Bintang-bintang "
+"ini dipilih untuk memungkinkan pengamat dari mana saja di dunia pada malam "
+"tertentu, daObject Library pat dengan mudah dan cepat melakukan penyelarasan"
+" presisi."
 
-#: plugins/NavStars/src/NavStars.cpp:403
+#: plugins/NavStars/src/NavStars.cpp:405
 msgid ""
 "This list from Meade ETX mount will aid the observer to find alignment stars"
 " at various times of the year."
 msgstr ""
-
-#: plugins/NavStars/src/NavStars.cpp:404
-msgid "Alignment stars for the Meade Autostar #494 handset (ETX60AT)."
-msgstr ""
-
-#: plugins/NavStars/src/NavStars.cpp:405
-msgid "Alignment stars for the Meade Autostar #497 handset."
-msgstr ""
+"Daftar dari mount Meade ETX ini akan membantu pengamat menemukan bintang "
+"penyelarasan di berbagai waktu dalam setahun."
 
 #: plugins/NavStars/src/NavStars.cpp:406
+msgid "Alignment stars for the Meade Autostar #494 handset (ETX60AT)."
+msgstr "Bintang penyelarasan untuk handset Meade Autostar #494 (ETX60AT)."
+
+#: plugins/NavStars/src/NavStars.cpp:407
+msgid "Alignment stars for the Meade Autostar #497 handset."
+msgstr "Bintang penyelarasan untuk handset Meade Autostar #497."
+
+#: plugins/NavStars/src/NavStars.cpp:408
 msgid ""
 "Even though there are about 250 named stars in the hand control database, "
 "only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
 "alignment and related tasks."
 msgstr ""
+"Meskipun terdapat sekitar 250 bintang bernama dalam basis data kontrol "
+"tangan, hanya 82 (bintang yang lebih terang dari atau sama dengan magnitudo "
+"2.5) yang dapat digunakan untuk penyelarasan dan tugas terkait."
 
-#: plugins/NavStars/src/NavStars.cpp:407
+#: plugins/NavStars/src/NavStars.cpp:409
 msgid ""
 "Alignment stars for the Skywatcher SynScan hand controller and SynScan Pro "
 "App."
 msgstr ""
-
-#: plugins/NavStars/src/NavStars.cpp:408
-msgid "Alignment stars for Vixen Starbook mounts."
-msgstr ""
-
-#: plugins/NavStars/src/NavStars.cpp:409
-msgid "Alignment stars for Argo Navis digital setting circles."
-msgstr ""
+"Bintang penyelarasan untuk hand controller Skywatcher SynScan dan Aplikasi "
+"SynScan Pro."
 
 #: plugins/NavStars/src/NavStars.cpp:410
-msgid "Alignment stars for Orion Intelliscope mounts."
-msgstr ""
+msgid "Alignment stars for Vixen Starbook mounts."
+msgstr "Bintang penyelarasan untuk mount Vixen Starbook."
 
 #: plugins/NavStars/src/NavStars.cpp:411
+msgid "Alignment stars for Argo Navis digital setting circles."
+msgstr "Bintang penyelarasan untuk digital setting circles Argo Navis."
+
+#: plugins/NavStars/src/NavStars.cpp:412
+msgid "Alignment stars for Orion Intelliscope mounts."
+msgstr "Bintang penyelarasan untuk mount Orion Intelliscope."
+
+#: plugins/NavStars/src/NavStars.cpp:413
 msgid "Alignment stars for Sky Commander digital setting circles."
-msgstr ""
+msgstr "Bintang penyelarasan untuk digital setting circles Sky Commander."
 
 #. TRANSLATORS: The full phrase: The original almanac title is
 #. NAME_OF_THE_ALMANAC
-#: plugins/NavStars/src/NavStars.cpp:430
+#: plugins/NavStars/src/NavStars.cpp:432
 msgid "The original almanac title is"
-msgstr ""
+msgstr "Judul almanak aslinya adalah"
 
-#: plugins/NavStars/src/NavStars.cpp:850
+#: plugins/NavStars/src/NavStars.cpp:838
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
-msgstr ""
+msgstr "tepi atas"
 
-#: plugins/NavStars/src/NavStars.cpp:851
+#: plugins/NavStars/src/NavStars.cpp:839
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
-msgstr ""
+msgstr "tepi bawah"
 
-#: plugins/NavStars/src/NavStars.cpp:866 plugins/NavStars/src/NavStars.cpp:894
-#: plugins/NavStars/src/NavStars.cpp:900
+#: plugins/NavStars/src/NavStars.cpp:854 plugins/NavStars/src/NavStars.cpp:882
+#: plugins/NavStars/src/NavStars.cpp:888
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "GHA"
 
-#: plugins/NavStars/src/NavStars.cpp:868 plugins/NavStars/src/NavStars.cpp:898
+#: plugins/NavStars/src/NavStars.cpp:856 plugins/NavStars/src/NavStars.cpp:886
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "SHA"
 
-#: plugins/NavStars/src/NavStars.cpp:870 plugins/NavStars/src/NavStars.cpp:904
+#: plugins/NavStars/src/NavStars.cpp:858 plugins/NavStars/src/NavStars.cpp:892
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "LHA"
 
-#: plugins/NavStars/src/NavStars.cpp:873
+#: plugins/NavStars/src/NavStars.cpp:861
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "GP: GHA/DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:876
+#: plugins/NavStars/src/NavStars.cpp:864
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
-msgstr ""
+msgstr "GP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:879
+#: plugins/NavStars/src/NavStars.cpp:867
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
-msgstr ""
+msgstr "AP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:882
+#: plugins/NavStars/src/NavStars.cpp:870
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:889
+#: plugins/NavStars/src/NavStars.cpp:877
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:892
+#: plugins/NavStars/src/NavStars.cpp:880
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:896
+#: plugins/NavStars/src/NavStars.cpp:884
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "LMST"
 
-#: plugins/NavStars/src/NavStars.cpp:902
+#: plugins/NavStars/src/NavStars.cpp:890
 msgctxt "Declination"
 msgid "DEC"
-msgstr ""
+msgstr "DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:906
+#: plugins/NavStars/src/NavStars.cpp:894
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
-msgstr ""
+msgstr "LAT"
 
-#: plugins/NavStars/src/NavStars.cpp:908
+#: plugins/NavStars/src/NavStars.cpp:896
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
-msgstr ""
+msgstr "LON"
 
-#: plugins/NavStars/src/NavStars.cpp:910
+#: plugins/NavStars/src/NavStars.cpp:898
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:912
+#: plugins/NavStars/src/NavStars.cpp:900
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
@@ -23762,13 +23834,13 @@ msgstr "Zn"
 #. TRANSLATORS: full phrase is "XX° below the horizon"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:221
 msgid "below the horizon"
-msgstr ""
+msgstr "di bawah cakrawala"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:225
 msgid ""
 "The sum of the daytime duration and duration of morning and evening "
 "twilights"
-msgstr ""
+msgstr "Jumlah durasi siang hari dan durasi senja pagi dan petang"
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:244
@@ -23784,160 +23856,182 @@ msgstr "Perancis"
 #. navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
 msgid "British (XVIII century)"
-msgstr ""
+msgstr "Inggris (abad ke-XVIII)"
+
+#. TRANSLATORS: Part of full phrase: British (XIX century) set of navigational
+#. stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
+msgid "British (XIX century)"
+msgstr "Inggris (abad ke-XIX)"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
 msgid "Russian"
 msgstr "Rusia"
 
 #. TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
 msgid "Soviet aviation"
-msgstr ""
+msgstr "Penerbangan Soviet"
 
 #. TRANSLATORS: Part of full phrase: German set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:256
 msgid "German"
 msgstr "Jerman"
 
 #. TRANSLATORS: Part of full phrase: Voskhod and Soyuz manned space programs
 #. set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:257
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:259
 msgid "Voskhod and Soyuz manned space programs"
-msgstr ""
+msgstr "Program luar angkasa berawak Voskhod dan Soyuz"
 
 #. TRANSLATORS: Part of full phrase: Apollo space program set of navigational
 #. stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:259
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:261
 msgid "Apollo space program"
-msgstr ""
+msgstr "Program luar angkasa Apollo"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:294
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:296
 msgid "Navigational Stars Plug-in"
-msgstr ""
+msgstr "Plugin Bintang Navigasi"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:307
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
 msgstr ""
-
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
-msgid "These fields are:"
-msgstr ""
+"Bidang informasi tambahan dapat ditampilkan dengan memilih \"Informasi > "
+"Koordinat tambahan (dari plugin)\""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:311
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:332
-#, qt-format
-msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
-msgstr ""
-
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
-msgid "SHA: Sidereal Hour Angle of the navigation star."
-msgstr ""
+msgid "These fields are:"
+msgstr "Bidang-bidang ini adalah:"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:338
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:334
+#, qt-format
+msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
+msgstr "GHA%1: Sudut Jam Greenwich dari titik pertama Aries."
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:314
+msgid "SHA: Sidereal Hour Angle of the navigation star."
+msgstr "SHA: Sudut Jam Sideris bintang navigasi."
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:340
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
-msgstr ""
+msgstr "LHA: Sudut Jam Lokal pengamat ke bintang navigasi."
 
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
 #. star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:317
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
 msgstr ""
+"GP: GHA/DEC: Titik dasar bintang navigasi sebagai Sudut Jam Greenwich dan "
+"Deklinasi."
 
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
 #. reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:317
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
 msgstr ""
+"AP: LAT/LON: Posisi yang Diasumsikan pengamat sebagai garis lintang dan "
+"garis bujur geodesik."
 
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the
 #. Nautical Almanac where "height" is altitude. Likewise, Zn is computed
 #. azimuth, as seen from the AP.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:321
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
 msgstr ""
+"Hc/Zn: Ketinggian (ketinggian) terhitung dan azimut terhitung dari bintang "
+"navigasi, dilihat dari AP."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:323
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:325
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
 msgstr ""
+"Pengguna memiliki dua opsi tampilan berbeda yang dipilih dengan \"Tampilkan "
+"informasi sebagai daftar bertabel\"."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:327
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:329
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The"
 " Nautical Almanac</em> format:"
 msgstr ""
+"Ketika 'daftar bertabel' dipilih, bidang-bidang tersebut lebih dekat "
+"mengikuti format The Nautical Almanac:"
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers
 #. would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:331
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
+"Ho: Ketinggian teramati yang disimulasikan dari bintang navigasi menggunakan"
+" sekstan."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:335
 msgid "LMST: Local mean sidereal time."
-msgstr ""
+msgstr "LMST: Waktu sideris rata-rata lokal."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:334
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:336
 msgid "SHA: Sidereal Hour Angle of navigation star."
-msgstr ""
+msgstr "SHA: Sudut Jam Sideris bintang navigasi."
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:336
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:338
 msgid "DEC: The navigation star's declination."
-msgstr ""
+msgstr "DEC: Deklinasi bintang navigasi."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:337
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:339
 msgid "GHA: The navigation star's Greenwich Hour Angle."
-msgstr ""
+msgstr "GHA: Sudut Jam Greenwich bintang navigasi."
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:340
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:342
 msgid "LAT: The observer's geodetic latitude."
-msgstr ""
+msgstr "LAT: Garis lintang geodesik pengamat."
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:342
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:344
 msgid "LON: The observer's geodetic longitude."
-msgstr ""
+msgstr "LON: Garis bujur geodesik pengamat."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc
 #. computed height (altitude) for the AP
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:344
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:346
 msgid "Hc: The AP calculated height (altitude) of navigation star."
-msgstr ""
+msgstr "Hc: Ketinggian (ketinggian) terhitung AP bintang navigasi."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn
 #. computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:346
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:348
 msgid "Zn: The AP calculated azimuth of navigation star."
-msgstr ""
+msgstr "Zn: Azimut terhitung AP bintang navigasi."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:350
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:352
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr ""
+"Untuk informasi lebih lanjut, silakan merujuk ke Panduan Pengguna "
+"Stellarium."
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:490
 #: plugins/NavStars/src/ui_navStarsWindow.h:505
 msgid "Navigational stars"
-msgstr ""
+msgstr "Bintang Navigasi"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:491
 msgid "Set of navigational stars"
-msgstr ""
+msgstr "Set bintang navigasi"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:492
 msgid "Note:"
@@ -23945,7 +24039,7 @@ msgstr "Catatan:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:493
 msgid "Current set:"
-msgstr ""
+msgstr "Set saat ini:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:496
 #: plugins/Quasars/src/ui_quasarsDialog.h:267
@@ -23953,83 +24047,83 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:550
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:210
 msgid "Enable display at startup"
-msgstr ""
+msgstr "Aktifkan tampilan saat startup"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:497
 msgid "Only highlight when visible"
-msgstr ""
+msgstr "Hanya sorot saat terlihat"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:498
 msgid "Only show extra information for marked Navigation Stars"
-msgstr ""
+msgstr "Hanya tunjukkan informasi ekstra untuk Bintang Navigasi yang ditandai\""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:499
 msgid "Show information as a tabulated list"
-msgstr ""
+msgstr "Tampilkan informasi sebagai daftar bertabel"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:500
 msgid "Show extra decimals in info"
-msgstr ""
+msgstr "Tampilkan desimal ekstra dalam info"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:501
 msgid "Use upper limb for Sun and Moon"
-msgstr ""
+msgstr "Gunakan tepi atas untuk Matahari dan Bulan"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:502
 msgid "Use UTC time when navigational stars are displayed"
-msgstr ""
+msgstr "Gunakan waktu UTC saat bintang navigasi ditampilkan"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:506
 msgid "Today in the current location"
-msgstr ""
+msgstr "Hari ini di lokasi saat ini"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:507
 msgid "Today:"
-msgstr ""
+msgstr "Hari ini:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:510
 msgid "Duration of nautical twilight (including daytime)"
-msgstr ""
+msgstr "Durasi senja nautika (termasuk siang hari)"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:516
 msgid "Duration of astronomical twilight (including daytime)"
-msgstr ""
+msgstr "Durasi senja astronomis (termasuk siang hari)"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:520
 msgid "Duration of civil twilight (including daytime)"
-msgstr ""
+msgstr "Durasi senja sipil (termasuk siang hari)"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:527
 msgid "Moonrise"
-msgstr ""
+msgstr "Terbit Bulan"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:529
 msgid "End"
-msgstr ""
+msgstr "Akhir"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:534
 msgid "Moonset"
-msgstr ""
+msgstr "Terbenam Bulan"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:537
 msgid "Duration of daytime"
-msgstr ""
+msgstr "Durasi siang hari"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:544
 msgid "Begin"
-msgstr ""
+msgstr "Mulai"
 
 #: plugins/Novae/src/Novae.cpp:72 plugins/Novae/src/Novae.cpp:145
 msgid "Bright Novae"
-msgstr ""
+msgstr "Nova Terang"
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:119
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
+msgstr "Plugin yang menampilkan beberapa nova terang di galaksi Bima Sakti."
 
 #: plugins/Novae/src/Novae.cpp:145
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "Jendela konfigurasi Nova Terang"
 
 #: plugins/Novae/src/Nova.hpp:59
 msgid "nova"
@@ -24037,28 +24131,32 @@ msgstr "nova"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:113
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Plugin Nova Terang"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
+"Anda dapat menemukan nova melalui alat pencarian dengan memasukkan penamaan "
+"nova atau nama umumnya (misalnya 'Nova Cygni 1975' atau 'V1500 Cyg')."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:122
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "Plugin ini memungkinkan Anda melihat nova terang terbaru:"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
-msgstr ""
+msgstr "Semua nova tersebut lebih terang dari %1 pada puncak kecerahan."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:127
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
+"Plugin ini menggunakan model yang sangat sederhana untuk perhitungan kurva "
+"cahaya untuk bintang nova."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #, qt-format
@@ -24066,24 +24164,28 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
+"Model ini didasarkan pada waktu peluruhan dengan magnitudo %1 dari nilai "
+"maksimum, di mana %1 adalah 2, 3, 6, dan 9."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:129
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
+"Jika suatu nova tidak memiliki nilai untuk peluruhan magnitudo, maka plugin "
+"ini akan menggunakan nilai umum untuk itu."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:211
 msgid "Novae is updated"
-msgstr ""
+msgstr "Nova diperbarui"
 
 #: plugins/Novae/src/ui_novaeDialog.h:200
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Konfigurasi Nova Terang"
 
 #: plugins/Novae/src/ui_novaeDialog.h:201
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Konfigurasi Plugin Nova Terang"
 
 #: plugins/Quasars/src/Quasars.cpp:76
 msgid ""
@@ -24091,38 +24193,41 @@ msgid ""
 "catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
+"Plugin yang menampilkan beberapa quasar yang lebih terang dari magnitudo "
+"visual 18. Katalog quasar disusun dari 'Quasars and Active Galactic Nuclei' "
+"(Edisi ke-13) (Veron+ 2010)."
 
 #: plugins/Quasars/src/Quasars.cpp:173
 msgid "Show quasars"
-msgstr ""
+msgstr "Tampilkan quasar"
 
 #: plugins/Quasars/src/Quasars.cpp:176
 #: plugins/Quasars/src/ui_quasarsDialog.h:266
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Aktifkan tampilan distribusi untuk quasar"
 
 #: plugins/Quasars/src/Quasars.cpp:177
 #: plugins/Quasars/src/ui_quasarsDialog.h:269
 msgid "Use markers for quasars"
-msgstr ""
+msgstr "Gunakan penanda untuk quasar"
 
 #. TRANSLATORS: Jy is Jansky(10-26W/m2/Hz)
 #: plugins/Quasars/src/Quasar.cpp:144
 msgctxt "radio flux density"
 msgid "Jy"
-msgstr ""
+msgstr "Jy"
 
 #: plugins/Quasars/src/Quasar.cpp:148
 msgid "Radio flux density around 5GHz (6cm)"
-msgstr ""
+msgstr "Kepadatan fluks radio sekitar 5GHz (6cm)"
 
 #: plugins/Quasars/src/Quasar.cpp:150
 msgid "Radio flux density around 1.4GHz (21cm)"
-msgstr ""
+msgstr "Kepadatan fluks radio sekitar 1.4GHz (21cm)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "Plugin Quasar"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 msgid ""
@@ -24130,6 +24235,9 @@ msgid ""
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Plugin Quasar menyediakan visualisasi beberapa quasar yang lebih terang dari"
+" magnitudo visual 18. Katalog quasar disusun dari \"Quasars and Active "
+"Galactic Nuclei\" (Edisi ke-13)."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 msgid "Veron+ 2010"
@@ -24138,35 +24246,35 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "Katalog saat ini berisi informasi tentang %1 quasar."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:232
 msgid "Quasars is updated"
-msgstr ""
+msgstr "Quasar diperbarui"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:254
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "Konfigurasi Quasar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "Konfigurasi Plugin Quasar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 msgid "Settings for quasars"
-msgstr ""
+msgstr "Pengaturan untuk quasar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
 msgid "Plot all quasars without labels"
-msgstr ""
+msgstr "Plot semua quasar tanpa label"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:268
 msgid "Show quasars button on toolbar"
-msgstr ""
+msgstr "Tampilkan tombol quasar di toolbar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:270
 msgid "Quasars marker color"
-msgstr ""
+msgstr "Warna penanda quasar"
 
 #: plugins/Pulsars/src/Pulsars.cpp:75
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
@@ -24174,28 +24282,30 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"Plugin ini memplot posisi berbagai pulsar, dengan informasi objek tentang "
+"masing-masing."
 
 #: plugins/Pulsars/src/Pulsars.cpp:171
 msgid "Show pulsars"
-msgstr ""
+msgstr "Tampilkan pulsar"
 
 #: plugins/Pulsars/src/Pulsars.cpp:174
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:302
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Aktifkan tampilan distribusi untuk pulsar"
 
 #: plugins/Pulsars/src/Pulsars.cpp:175
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:309
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "Gunakan warna terpisah untuk pulsar dengan glitch"
 
 #: plugins/Pulsars/src/Pulsar.cpp:191
 msgid "registered glitches"
-msgstr ""
+msgstr "glitch terdaftar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:213
 msgid "Barycentric period"
-msgstr ""
+msgstr "Periode barisentral"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:216
@@ -24205,44 +24315,44 @@ msgstr "d"
 
 #: plugins/Pulsars/src/Pulsar.cpp:219
 msgid "Time derivative of barycentric period"
-msgstr ""
+msgstr "Turunan waktu periode barisentral"
 
 #: plugins/Pulsars/src/Pulsar.cpp:224
 msgid "Dispersion measure"
-msgstr ""
+msgstr "Pengukuran dispersi"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:227
 msgctxt "distance"
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:229
 msgctxt "distance"
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: plugins/Pulsars/src/Pulsar.cpp:235
 msgid "Spin down energy loss rate"
-msgstr ""
+msgstr "Laju kehilangan energi spin down"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
 #: plugins/Pulsars/src/Pulsar.cpp:238
 msgctxt "power"
 msgid "ergs/s"
-msgstr ""
+msgstr "erg/d"
 
 #: plugins/Pulsars/src/Pulsar.cpp:243
 msgid "Binary period of pulsar"
-msgstr ""
+msgstr "Periode biner pulsar"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: plugins/Pulsars/src/Pulsar.cpp:246 plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgctxt "time period"
 msgid "days"
-msgstr ""
+msgstr "dinten"
 
 #: plugins/Pulsars/src/Pulsar.cpp:254
 msgid "Annual parallax"
@@ -24250,61 +24360,69 @@ msgstr "Paralaks tahunan"
 
 #: plugins/Pulsars/src/Pulsar.cpp:262
 msgid "Distance based on electron density model"
-msgstr ""
+msgstr "Jarak berdasarkan model kepadatan elektron"
 
 #: plugins/Pulsars/src/Pulsar.cpp:274
 #, no-c-format
 msgid "Profile width at 50% of peak"
-msgstr ""
+msgstr "Lebar profil pada 50% puncak"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
 #: plugins/Pulsars/src/Pulsar.cpp:277
 msgctxt "time"
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:281
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "Kepadatan fluks rata-rata waktu pada"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:285
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:314
 msgctxt "spectral flux density"
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:386
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
+"pulsar sinar-X anomali atau soft gamma-ray repeater dengan pulsasi terdeteksi\n"
+" "
 
 #: plugins/Pulsars/src/Pulsar.cpp:391
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "memiliki satu atau lebih pasangan biner"
 
 #: plugins/Pulsars/src/Pulsar.cpp:396
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
+"inggildengan emisi berdenyut dari radio ke inframerah atau frekuensi yang "
+"lebih tinggi"
 
 #: plugins/Pulsars/src/Pulsar.cpp:401
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
+"dengan emisi berdenyut hanya pada frekuensi inframerah atau yang lebih "
+"tinggi"
 
 #: plugins/Pulsars/src/Pulsar.cpp:406
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "dengan emisi berdenyut pada pita radio"
 
 #: plugins/Pulsars/src/Pulsar.cpp:411
 msgid "with intermittently pulsed radio emission"
-msgstr ""
+msgstr "Dengan emisi radio berdenyut terputus-putus"
 
 #: plugins/Pulsars/src/Pulsar.cpp:416
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr ""
+"bintang neutron terisolasi dengan emisi sinar-X termal berdenyut tetapi "
+"tanpa emisi radio yang terdeteksi"
 
 #: plugins/Pulsars/src/Pulsar.hpp:84
 msgid "pulsar"
@@ -24312,11 +24430,11 @@ msgstr "pulsar"
 
 #: plugins/Pulsars/src/Pulsar.hpp:84
 msgid "pulsar with glitches"
-msgstr ""
+msgstr "pulsar dengan glitch"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Plugin Pulsar"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
 #, qt-format
@@ -24325,7 +24443,7 @@ msgid ""
 " Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
-"Data pulsar berasal dari 'The ATNF Pulsar Catalogue' (Manchester, R. N., "
+"Data pulsar diambil dari 'The ATNF Pulsar Catalogue' (Manchester, R. N., "
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 
@@ -24336,7 +24454,7 @@ msgstr "Katalog saat ini berisi info tentang %1 pulsar."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "pengidentifikasi pulsar memiliki awalan 'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
 msgid "Vladimir Samodourov"
@@ -24360,94 +24478,104 @@ msgstr "di Perancis"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:269
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Pulsar diperbarui"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:290
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:291
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Konfigurasi Plugin Pulsar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:298
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "Pengaturan untuk pulsar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:300
 msgid "Plot all pulsars without labels"
-msgstr ""
+msgstr "Plot semua pulsar tanpa label"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:304
 msgid "Show pulsars button on toolbar"
-msgstr ""
+msgstr "Tampilkan tombol pulsar di toolbar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:305
 msgid "Pulsars marker color"
-msgstr ""
+msgstr "Warna penanda pulsar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:307
 msgid "Marker Color for pulsars"
-msgstr ""
+msgstr "Warna Penanda untuk pulsar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:311
 msgid "Marker Color for pulsars with glitches"
-msgstr ""
+msgstr "Warna Penanda untuk pulsar dengan glitch"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:313
 msgid "Only show pulsars with Time average flux density at 400 MHz above"
 msgstr ""
+"Hanya tampilkan pulsar dengan Kepadatan fluks rata-rata waktu pada 400 MHz "
+"di atas"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:54
 #: plugins/RemoteControl/src/RemoteControl.cpp:148
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:245
 msgid "Remote Control"
-msgstr ""
+msgstr "Kontrol Jarak Jauh"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:57
 msgid ""
 "Provides remote control functionality using a webserver interface. See "
 "manual for detailed description."
 msgstr ""
+"Menyediakan fungsionalitas kontrol jarak jauh menggunakan antarmuka "
+"webserver. Lihat manual untuk deskripsi rinci."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
 msgid ""
 "This plugin was created in the 2015 campaign of the ESA Summer of Code in "
 "Space programme."
 msgstr ""
+"Plugin ini dibuat pada kampanye 2015 dari program ESA Summer of Code in "
+"Space."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:148
 msgid "Remote control"
-msgstr ""
+msgstr "Kontrol jarak jauh"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
 msgid "Remote control config"
-msgstr ""
+msgstr "Konfigurasi kontrol jarak jauh"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "Plugin Kontrol Jarak Jauh"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:143
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
+"Plugin Kontrol Jarak Jauh menyediakan antarmuka web untuk memungkinkan "
+"perubahan status dan memicu script menggunakan webbrowser yang terhubung."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:149
 msgid "It is also possible to send commands via command line, e.g.."
 msgstr ""
+"Dimungkinkan juga untuk mengirim perintah melalui baris perintah, misalnya:"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:155
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
+"Ini memungkinkan pemicuan pengaturan pertunjukan otomatis untuk museum, dll."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
 msgid "This plugin was developed during ESA SoCiS 2015."
-msgstr ""
+msgstr "Plugin ini dikembangkan selama ESA SoCiS 2015."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
-msgstr ""
+msgstr "Plugin ini menggunakan {server HTTP QtWebApp} oleh Stefan Frings."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
@@ -24461,37 +24589,37 @@ msgstr "Publikasi"
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:230
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:197
 msgid "If you use this plugin in your publications, please cite:"
-msgstr ""
+msgstr "Jika Anda menggunakan plugin ini dalam publikasi Anda, harap kutip:"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:206
 #, qt-format
 msgid "Listening on %1, IP: "
-msgstr ""
+msgstr "Mendengarkan pada %1, IP:"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:211
 msgid "Not active."
-msgstr ""
+msgstr "Tidak aktif."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:230
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:421
 msgid "Remote Control Configuration"
-msgstr ""
+msgstr "Konfigurasi Kontrol Jarak Jauh"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:231
 msgid "Remote Control Plug-in Configuration"
-msgstr ""
+msgstr "Konfigurasi Plugin Kontrol Jarak Jauh"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:232
 msgid "Port Number:"
-msgstr ""
+msgstr "Nomor Porta:"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:235
 msgid "Access requires authentication"
-msgstr ""
+msgstr "Akses memerlukan autentikasi"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:236
 msgid "Password"
-msgstr ""
+msgstr "Kata Sandi"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:237
 msgid ""
@@ -24499,10 +24627,13 @@ msgid ""
 "empty. </p><p>The password is transmitted over an insecure "
 "channel.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Catatan: Kolom nama pengguna di peramban harus "
+"dikosongkan. </p><p>Kata sandi dikirim melalui saluran yang tidak "
+"aman.</p></body></html>"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:238
 msgid "Enable CORS for the following origin"
-msgstr ""
+msgstr "Aktifkan CORS untuk origin berikut"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:239
 msgid ""
@@ -24510,26 +24641,31 @@ msgid ""
 "your Stellarium.<br/>Specify \"*\" to let any website take control - do this"
 " at your own risk."
 msgstr ""
+"Cross-Origin Resource Sharing mengizinkan situs web yang ditentukan "
+"mengakses dan mengontrol Stellarium Anda. <br/>Tentukan \"*\" untuk "
+"mengizinkan situs web mana pun mengambil kendali - lakukan ini atas risiko "
+"Anda sendiri."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:240
 msgid "Your changes require a restart of the server."
-msgstr ""
+msgstr "Perubahan Anda memerlukan restart server"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:241
 msgid "Restart server"
-msgstr ""
+msgstr "Mulai ulang server"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:242
 msgid "Server enabled"
-msgstr ""
+msgstr "Server diaktifkan"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:243
 msgid "Enable automatically on startup"
-msgstr ""
+msgstr "Aktifkan otomatis saat startup"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:244
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr ""
+"Server dinonaktifkan - atau Server mendengarkan pada IP: aaa.bbb.ccc.ddd"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:439
@@ -24541,12 +24677,16 @@ msgid ""
 "Provides state synchronization for multiple Stellarium instances running in "
 "a network. See manual for detailed description."
 msgstr ""
+"Menyediakan fungsionalitas sinkronisasi status untuk beberapa instance "
+"Stellarium yang berjalan dalam jaringan. Lihat manual untuk deskripsi rinci."
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:55
 msgid ""
 "This plugin was created in the 2015/2016 campaigns of the ESA Summer of Code"
 " in Space programme."
 msgstr ""
+"Plugin ini dibuat pada kampanye 2015/2016 dari program ESA Summer of Code in"
+" Space."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:132
 #, qt-format
@@ -24561,7 +24701,7 @@ msgstr "Mulai server"
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:154
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:429
 msgid "Connect to server"
-msgstr "Menyambung ke server"
+msgstr "Hubungkan ke server"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:157
 msgid "Not running"
@@ -24594,11 +24734,11 @@ msgstr "Mencoba kembali koneksi ke %1: %2..."
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
 msgid "Disconnecting..."
-msgstr "Memutus..."
+msgstr "Memutus sambungan..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
 msgid "Disconnect from server"
-msgstr "Terputus dari server"
+msgstr "Putuskan hubungan dari server"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 #, qt-format
@@ -24607,25 +24747,31 @@ msgstr "Tersambung ke %1: %2"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 msgid "Remote Sync Plug-in"
-msgstr ""
+msgstr "Plugin Sinkronisasi Jarak Jauh"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:215
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
+"Plugin Sinkronisasi Jarak Jauh menyediakan sinkronisasi status untuk "
+"beberapa instance Stellarium yang berjalan dalam jaringan."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:216
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
+"Ini dapat digunakan, misalnya, untuk membuat pengaturan multi-layar "
+"menggunakan beberapa PC fisik."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:217
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr ""
+"Sinkronisasi parsial memungkinkan pengaturan paralel, misalnya, tampilan "
+"ikhtisar dan detail."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:218
 msgid "See manual for detailed description."
@@ -24633,7 +24779,7 @@ msgstr "Lihat manual untuk penjelasan rinci"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:219
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
-msgstr ""
+msgstr "Plugin ini dikembangkan selama ESA SoCiS 2015&amp;2016."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:248
 msgid "Server Name"
@@ -24675,23 +24821,23 @@ msgstr "127.0.0.1"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:433
 msgid "When connection is lost"
-msgstr "Ketika sambungan terputus"
+msgstr "Ketika sambungan hilang"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:434
 msgid "Do nothing"
-msgstr "Tidak lakukan apa pun"
+msgstr "Jangan lakukan apa pun"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:435
 msgid "Try reconnecting"
-msgstr "Coba menyambung ulang"
+msgstr "Coba sambungkan kembali"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:438
 msgid "When server quits"
-msgstr "Ketika server keluar"
+msgstr "Ketika server berhenti"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:440
 msgid "Changes on this page require a re-connection to the server"
-msgstr "Perubahan pada halaman ini membutuhkan koneksi ulang ke server"
+msgstr "Perubahan pada halaman ini memerlukan penyambungan kembali ke server"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:441
 msgid "Settings applied on this client"
@@ -24703,7 +24849,7 @@ msgstr "Pilihan"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:445
 msgid "View direction"
-msgstr "Arah melihat"
+msgstr "Arah pandang"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:446
 msgid "Property filters"
@@ -24711,27 +24857,27 @@ msgstr "Filter properti"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:447
 msgid "Exclude GUI-related properties"
-msgstr ""
+msgstr "Kecualikan properti terkait GUI"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:449
 msgid "These are all available properties."
-msgstr "Ini semua adalah properti yang tersedia."
+msgstr "Ini adalah semua properti yang tersedia."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:452
 msgid "These are the properties currently excluded from synchronisation."
-msgstr ""
+msgstr "Ini adalah properti yang saat ini dikecualikan dari sinkronisasi."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:454
 msgid "Excluded Properties"
-msgstr ""
+msgstr "Properti yang Dikecualikan"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:455
 msgid "Synchronized Properties"
-msgstr "Properti yang Tersinkronisasi"
+msgstr "Properti yang Disinkronkan"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:456
 msgid "Additional excluded properties:"
-msgstr ""
+msgstr "Properti tambahan yang dikecualikan:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:457
 msgid "Client settings"
@@ -24740,154 +24886,156 @@ msgstr "Pengaturan klien"
 #: plugins/Exoplanets/src/Exoplanets.cpp:77
 #: plugins/Exoplanets/src/Exoplanets.cpp:174
 msgid "Exoplanets"
-msgstr ""
+msgstr "Eksoplanet"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:80
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"Plugin ini memplot posisi bintang dengan eksoplanet. Data eksoplanet diambil"
+" dari 'Extrasolar Planets Encyclopaedia' di exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:175
 msgid "Show exoplanets"
-msgstr "Perlihatkan eksoplanet"
+msgstr "Tampilkan eksoplanet"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:178
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "Aktifkan tampilan distribusi untuk eksoplanet"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:179
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "Aktifkan penemuan linimasa eksoplanet"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:180
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
+msgstr "Aktifkan tampilan hanya eksoplanet yang berpotensi layak huni"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:181
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:548
 msgid "Enable display of designations for exoplanets"
-msgstr ""
+msgstr "Aktifkan tampilan penamaan untuk eksoplanet"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:182
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:549
 msgid "Enable display number of exoplanets in the system"
-msgstr ""
+msgstr "Aktifkan tampilan jumlah eksoplanet dalam sistem"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1054
 msgctxt "Habitable zone"
 msgid "Hot"
-msgstr ""
+msgstr "Panas"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1056
 msgctxt "Habitable zone"
 msgid "Warm"
-msgstr ""
+msgstr "Hangat"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1058
 msgctxt "Habitable zone"
 msgid "Cold"
-msgstr ""
+msgstr "Dingin"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1061
 msgctxt "Exoplanet size"
 msgid "Miniterran"
-msgstr ""
+msgstr "Miniterran"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1063
 msgctxt "Exoplanet size"
 msgid "Subterran"
-msgstr ""
+msgstr "Subterran"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1065
 msgctxt "Exoplanet size"
 msgid "Terran"
-msgstr ""
+msgstr "Terran"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1067
 msgctxt "Exoplanet size"
 msgid "Superterran"
-msgstr ""
+msgstr "Superterran"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1069
 msgctxt "Exoplanet size"
 msgid "Jovian"
-msgstr ""
+msgstr "Jovian"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1071
 msgctxt "Exoplanet size"
 msgid "Neptunian"
-msgstr ""
+msgstr "Neptunian"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1074
 msgctxt "Exoplanet detection method"
 msgid "Astrometry"
-msgstr ""
+msgstr "Astrometri"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1076
 msgctxt "Exoplanet detection method"
 msgid "Imaging"
-msgstr ""
+msgstr "Pencitraan"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1078
 msgctxt "Exoplanet detection method"
 msgid "Kinematic"
-msgstr ""
+msgstr "Kinematik"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1080
 msgctxt "Exoplanet detection method"
 msgid "Microlensing"
-msgstr ""
+msgstr "Lensa mikro"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1082
 msgctxt "Exoplanet detection method"
 msgid "Other"
-msgstr ""
+msgstr "Lainnya"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1084
 msgctxt "Exoplanet detection method"
 msgid "Primary Transit"
-msgstr ""
+msgstr "Transit Utama"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1086
 msgctxt "Exoplanet detection method"
 msgid "Radial Velocity"
-msgstr ""
+msgstr "Kecepatan Radial"
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
 #: plugins/Exoplanets/src/Exoplanets.cpp:1088
 msgctxt "Exoplanet detection method"
 msgid "TTV"
-msgstr ""
+msgstr "TTV"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1090
 msgctxt "Exoplanet detection method"
 msgid "Timing"
-msgstr ""
+msgstr "Penentuan Waktu"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:342
 msgid "Metallicity"
-msgstr ""
+msgstr "Metalitas"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
 #: plugins/Exoplanets/src/Exoplanet.cpp:362
@@ -24918,7 +25066,7 @@ msgstr "Eksoplanet"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
 msgid "Semi-Major Axis"
-msgstr ""
+msgstr "Sumbu Semi-Mayor"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:367
 msgid "Angle Distance"
@@ -24939,13 +25087,13 @@ msgstr "Kelas planet"
 #. TRANSLATORS: Full phrase is "Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:372
 msgid "Surface temp."
-msgstr ""
+msgstr "Suhu permukaan"
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:374
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
 msgid "Flux"
-msgstr ""
+msgstr "Fluks"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:376
@@ -24954,61 +25102,61 @@ msgstr "ESI"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:507
 msgid "Surface temperature on Earth"
-msgstr ""
+msgstr "Suhu permukaan di Bumi"
 
 #: plugins/Exoplanets/src/Exoplanet.hpp:85
 msgid "planetary system"
-msgstr ""
+msgstr "sistem keplanetan"
 
 #. TRANSLATORS: angular distance
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Ang. dist."
-msgstr ""
+msgstr "Ang. dist."
 
 #. TRANSLATORS: detection method
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid "D. M."
-msgstr ""
+msgstr "D. M."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid "Mass of exoplanet in Jovian masses"
-msgstr ""
+msgstr "Massa eksoplanet dalam massa Jovian"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid "Radius of exoplanet in Jovian radii"
-msgstr ""
+msgstr "Radius eksoplanet dalam radius Jovian"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Orbital period of exoplanet in days"
-msgstr ""
+msgstr "Periode orbit eksoplanet dalam hari"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "Semi-major axis of orbit in astronomical units"
-msgstr ""
+msgstr "Sumbu semi-mayor orbit dalam satuan astronomi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid "Eccentricity of orbit"
-msgstr ""
+msgstr "Eksentrisitas orbit"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid "Inclination of orbit in degrees"
-msgstr ""
+msgstr "Inklinasi orbit dalam derajat"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid "Angular distance from host star in arcseconds"
-msgstr ""
+msgstr "Jarak sudut dari bintang induk dalam detik busur"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid "Radius of star in solar radii"
-msgstr ""
+msgstr "Radius bintang dalam radius matahari"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid "Detection method of exoplanet"
-msgstr ""
+msgstr "Metode deteksi eksoplanet"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "Plugin Eksoplanet"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 #, qt-format
@@ -25016,6 +25164,8 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"Plugin ini memplot posisi bintang dengan eksoplanet. Data eksoplanet diambil"
+" dari \"%1The Extrasolar Planets Encyclopaedia%2\""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 #, qt-format
@@ -25024,6 +25174,8 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Daftar eksoplanet berpotensi layak huni dan datanya diambil dari \"%1The "
+"Habitable Exoplanets Catalog%3\" oleh %2Planetary Habitability Laboratory%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 #, qt-format
@@ -25032,29 +25184,36 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"Katalog saat ini berisi info tentang %1 sistem keplanetan, yang secara "
+"keseluruhan memiliki %2 eksoplanet (termasuk %3 eksoplanet berpotensi layak "
+"huni)."
 
 #. TRANSLATORS: duration
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:315
 msgctxt "time unit"
 msgid " h"
-msgstr ""
+msgstr "j"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:317
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "Eksoplanet berpotensi layak huni"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Plugin ini dapat menampilkan eksoplanet berpotensi layak huni (penanda "
+"oranye) dan beberapa informasi tentang planet-planet tersebut."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:320
 msgid ""
 "Extra info for the optimistic samples of potentially habitable planets mark "
 "by italic text."
 msgstr ""
+"Info tambahan untuk sampel optimistik planet berpotensi layak huni ditandai "
+"dengan teks miring."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:322
 msgid "Planetary Class"
@@ -25066,6 +25225,9 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
 " jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"Klasifikasi planet dari tipe spektral bintang induk (F, G, K, M), zona layak"
+" huni (panas, hangat, dingin) dan ukuran (miniterran, subterran, terran, "
+"superterran, jovian, neptunian) (Bumi = G-Hangat Terran)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
 msgid "Equilibrium Temperature"
@@ -25078,6 +25240,10 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"Suhu ekuilibrium planet adalah suhu teoretis dalam (°C) yang akan dicapai "
+"planet jika hanya dianggap sebagai benda hitam yang dipanaskan hanya oleh "
+"bintang induknya (dengan asumsi albedo ikat 0.3). Sebagai contoh, suhu "
+"ekuilibrium planet Bumi adalah -18.15°C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:327
 msgid ""
@@ -25085,32 +25251,40 @@ msgid ""
 "temperature depending on the atmosphere of the planets, which are currently "
 "unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
 msgstr ""
+"Suhu permukaan aktual diperkirakan lebih besar dari suhu ekuilibrium "
+"tergantung pada atmosfer planet, yang saat ini tidak diketahui (misalnya "
+"suhu permukaan global rata-rata Bumi adalah sekitar 288 K atau 15°C)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:329
 msgid "Surface Temperature"
-msgstr ""
+msgstr "Suhu Permukaan"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:330
 msgid ""
 "The estimated surface temperature in Kelvins (K) assuming an Earth-like "
 "atmosphere (i.e., same bond albedo and greenhouse)."
 msgstr ""
+"Perkiraan suhu permukaan dalam Kelvin (K) dengan asumsi atmosfer mirip Bumi "
+"(yaitu, albedo ikat dan efek rumah kaca yang sama)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
 msgid ""
 "Temperatures could be much larger for thicker atmospheres (Earth = 288 K or "
 "15°C)."
 msgstr ""
+"Suhu bisa jauh lebih besar untuk atmosfer yang lebih tebal (Bumi = 288 K "
+"atau 15°C)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:334
 msgid ""
 "Average stellar flux of the planet in Earth fluxes (Earth = 1.0 "
 "S<sub>E</sub>)."
 msgstr ""
+"Fluks bintang rata-rata planet dalam fluks Bumi (Bumi = 1.0 S<sub>E</sub>)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:336
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Indeks Kemiripan Bumi (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:337
 msgid ""
@@ -25118,10 +25292,13 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Kemiripan dengan Bumi pada skala 0 hingga 1, dengan 1 menjadi yang paling "
+"mirip Bumi. ESI bergantung pada radius, kepadatan, kecepatan lepas, dan suhu"
+" permukaan planet."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:339
 msgid "Conservative Sample"
-msgstr ""
+msgstr "Sampel Konservatif"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:340
 msgid ""
@@ -25130,10 +25307,14 @@ msgid ""
 "that might be rocky and support surface liquid water. They are also known as"
 " warm terrans."
 msgstr ""
+"Planet di zona layak huni dengan radius kurang dari 1.5 radius Bumi atau "
+"massa minimum kurang dari 5 massa Bumi. Ini adalah kandidat terbaik untuk "
+"planet yang mungkin berbatu dan mendukung air cair di permukaan. Mereka juga"
+" dikenal sebagai terran hangat."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:342
 msgid "Optimistic Sample"
-msgstr ""
+msgstr "Sampel Optimistik"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:343
 msgid ""
@@ -25142,10 +25323,14 @@ msgid ""
 "be rocky or support surface liquid water. Some might be mini-Neptunes "
 "instead. They are also known as warm superterrans."
 msgstr ""
+"Planet di zona layak huni dengan radius antara 1.5 hingga 2.5 radius Bumi "
+"atau antara 5 hingga 10 massa Bumi. Ini adalah planet yang kecil "
+"kemungkinannya berbatu atau mendukung air cair di permukaan. Beberapa "
+"mungkin adalah mini-Neptune. Mereka juga dikenal sebagai superterran hangat."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:344
 msgid "Proper names"
-msgstr ""
+msgstr "Nama-nama baku"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:345
 msgid ""
@@ -25153,24 +25338,29 @@ msgid ""
 "(IAU) has officially approved names for several exoplanets after a public "
 "vote."
 msgstr ""
+"Pada Desember 2015 dan pada Desember 2019, International Astronomical Union "
+"(IAU) telah secara resmi menyetujui nama-nama untuk beberapa eksoplanet "
+"setelah pemungutan suara publik."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:346
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
-"Dari kata Latin <em>Veritas</em>, kebenaran.  Bentuk ablatifnya berarti "
-"<em>dimana ada kebenaran</em>."
+"Dari bahasa Latin <em>Veritas</em>, kebenaran. Bentuk ablative berarti "
+"<em>di mana ada kebenaran</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:347
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
+"Dari bahasa Latin <em>Spes</em>, harapan. Bentuk ablative berarti <em>di "
+"mana ada harapan</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:348
 msgid "Musica is Latin for <em>music</em>."
-msgstr ""
+msgstr "Musica adalah bahasa Latin untuk musik."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:349
 msgid ""
@@ -25191,12 +25381,12 @@ msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
-"Orbitar adalah kata yang dibuat-buat untuk menghormati peluncuran luar "
-"angkasa dan operasi orbit NASA."
+"Orbitar adalah kata buatan yang memberikan penghormatan kepada peluncuran "
+"ruang angkasa dan operasi orbit NASA."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:352
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
-msgstr "Chalawan adalah sebuah raja buaya dari cerita rakyat mitos Thai"
+msgstr "Chalawan adalah raja buaya mitologis dari cerita rakyat Thailand."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:353
 msgid ""
@@ -25219,12 +25409,16 @@ msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
+"Helvetios adalah bahasa Celtic untuk <em>Helvetian</em> dan merujuk pada "
+"suku Celtic yang tinggal di Swiss selama masa antikuitas."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:356
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr ""
+"Dimidium adalah bahasa Latin untuk <em>setengah</em>, merujuk pada massa "
+"planet setidaknya setengah dari massa Jupiter."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:357
 msgid ""
@@ -25232,6 +25426,9 @@ msgid ""
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
+"Nicolaus Copernicus atau Mikolaj Kopernik (1473-1543) adalah seorang "
+"astronom Polandia yang mengusulkan model heliosentris tata surya dalam "
+"bukunya <em>De revolutionibus orbium coelestium</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:358
 msgid ""
@@ -25241,6 +25438,11 @@ msgid ""
 "satellites of Jupiter, and the reported the first telescopic observations of"
 " the phases of Venus, among other discoveries."
 msgstr ""
+"Galileo Galilei (1564-1642) adalah seorang astronom dan fisikawan Italia "
+"yang sering disebut <em>bapak astronomi observasional</em> dan <em>bapak "
+"fisika modern</em>. Menggunakan teleskop, ia menemukan empat satelit "
+"terbesar Jupiter, dan melaporkan pengamatan teleskopik pertama fase-fase "
+"Venus, di antara penemuan lainnya."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:359
 msgid ""
@@ -25251,8 +25453,8 @@ msgid ""
 msgstr ""
 "Tycho Brahe (1546-1601) adalah seorang astronom dan bangsawan Denmark yang "
 "mencatat pengamatan astronomi yang akurat terhadap bintang dan planet. "
-"Pengamatan ini sangat penting untuk perumusan Kepler tentang tiga hukum "
-"gerak planetnya."
+"Pengamatan ini sangat penting bagi perumusan tiga hukum gerakan planet "
+"Kepler."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:360
 msgid ""
@@ -25260,9 +25462,9 @@ msgid ""
 "maker who is often attributed with the invention of the refracting telescope"
 " in 1608."
 msgstr ""
-"Hans Lipperhey (1570-1619) adalah seorang pembuat kacamata dan penggosok "
-"lensa Jerman-Belanda yang sering dikaitkan dengan penemuan teleskop refraksi"
-" pada tahun 1608."
+"Hans Lipperhey (1570-1619) adalah sseorang pengasah lensa dan pembuat "
+"kacamata Jerman-Belanda yang sering dikaitkan dengan penemuan teleskop "
+"refraksi pada tahun 1608."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:361
 msgid ""
@@ -25270,9 +25472,9 @@ msgid ""
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
-"Jacharias Janssen (1580s-1630s) adalah seorang pembuat kacamata dari Belanda"
-" yang sering dikaitkan dengan penemuan mikroskop, dan lebih kontroversial "
-"lagi, dengan penemuan teleskop."
+"Jacharias Janssen (1580s-1630s) adalah seorang pembuat kacamata Belanda yang"
+" sering dikaitkan dengan penemuan mikroskop, dan lebih kontroversial lagi, "
+"dengan penemuan teleskop."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:362
 msgid ""
@@ -25280,8 +25482,8 @@ msgid ""
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
-"Thomas Harriot (ca. 1560-1621) adalah seorang astronom, matematikawan, ahli "
-"etnografi, dan penerjemah Inggris, yang dikaitkan dengan gambar pertama "
+"Thomas Harriot (ca. 1560-1621) adalah seorang astronom, matematikawan, "
+"etnografer, dan penerjemah Inggris, yang dikaitkan dengan gambar pertama "
 "Bulan melalui pengamatan teleskopik."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:363
@@ -25291,7 +25493,7 @@ msgid ""
 " the god Izanagi."
 msgstr ""
 "<em>Amateru</em> adalah sebutan umum Jepang untuk tempat suci ketika mereka "
-"mengabadikan Amaterasu, dewi Matahari Shinto, yang lahir dari mata kiri dewa"
+"mengabadikan Amaterasu, dewi Shinto Matahari, yang lahir dari mata kiri dewa"
 " Izanagi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:364
@@ -25302,7 +25504,7 @@ msgid ""
 msgstr ""
 "Hypatia adalah seorang astronom, matematikawan, dan filsuf Yunani yang "
 "terkenal. Dia adalah kepala sekolah Neo-Platonis di Alexandria pada awal "
-"abad ke-5, sampai dibunuh oleh massa Kristen pada tahun 415."
+"abad ke-5, hingga dibunuh oleh massa Kristen pada tahun 415."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:365
 msgid ""
@@ -25318,9 +25520,9 @@ msgid ""
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
-"AEgir adalah suami Ran, personifikasi dewa lautan. <em>AEgir</em> dan "
-"<em>Ran</em> mewakili <em>Jotun</em> yang memerintah di Alam Semesta luar; "
-"bersama-sama mereka memiliki sembilan anak perempuan."
+"AEgir adalah suami Ran, dewa samudra yang dipersonifikasikan. <em>AEgir</em>"
+" dan <em>Ran</em> keduanya mewakili <em>Jotun</em> yang berkuasa di Semesta "
+"luar; bersama-sama mereka memiliki sembilan anak perempuan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:367
 msgid ""
@@ -25333,8 +25535,8 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:368
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
-"Dagon adalah dewa Semit, sering kali digambarkan sebagai setengah manusia, "
-"setengah ikan."
+"Dagon adalah dewa Semitik, sering direpresentasikan sebagai setengah "
+"manusia, setengah ikan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:369
 msgid "Tonatiuh was the Aztec god of the Sun."
@@ -25350,13 +25552,13 @@ msgid ""
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
-"Ogma adalah dewa kefasihan, tulisan, dan kekuatan fisik yang hebat dalam "
+"Ogma adalah dewa kefasihan, penulisan, dan kekuatan fisik yang hebat dalam "
 "mitologi Celtic di Irlandia dan Skotlandia, dan mungkin terkait dengan dewa "
 "Gallo-Romawi <em>Ogmios</em> ."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:372
 msgid "Smertrios was a Gallic deity of war."
-msgstr ""
+msgstr "Smertrios adalah dewa perang Gallic."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:373
 msgid ""
@@ -25416,35 +25618,37 @@ msgid ""
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
 "and of Helen and Clytemnestra."
 msgstr ""
-"Thestias adalah pelindung Leda dan saudara perempuannya Althaea, putri-putri"
-" Thestius. Leda adalah seorang ratu Yunani, ibu dari Pollux dan saudara "
-"kembarnya dari Castor, dan dari Helen dan Clytemnestra."
+"Thestias adalah patronim Leda dan saudara perempuannya Althaea, putri-putri "
+"Thestius. Leda adalah ratu Yunani, ibu dari Pollux dan saudara kembarnya "
+"Castor, serta dari Helen dan Clytemnestra."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:381
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr ""
+"Lich adalah makhluk undead fiksi yang dikenal karena mengendalikan makhluk "
+"undead lainnya dengan sihir."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:382
 msgid "Draugr refers to undead creatures in Norse mythology."
-msgstr ""
+msgstr "Draugr mengacu pada makhluk undead dalam mitologi Norse."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:383
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
-"Poltergeist adalah sebutan untuk makhluk supernatural yang membuat gangguan "
-"fisik, dari bahasa Jerman untuk <em>hantu yang berisik</em> ."
+"Poltergeist adalah nama untuk makhluk supernatural yang menciptakan gangguan"
+" fisik, dari bahasa Jerman yang berarti <em>hantu berisik</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:384
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
-"Phobetor adalah dewa mimpi buruk mitologi Yunani, putra Nyx, dewa primordial"
-" malam."
+"Phobetor adalah dewa mitologis Yunani mimpi buruk, putra Nyx, dewa purba "
+"malam."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:385
 msgid ""
@@ -25453,8 +25657,8 @@ msgid ""
 "point of contact between two civilizations (Spanish and Arab) and two "
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
-"Titawin (juga dikenal sebagai Medina of Tetouan) adalah sebuah pemukiman di "
-"Maroko utara dan Situs Warisan Dunia UNESCO. Secara historis, itu adalah "
+"Titawin (juga dikenal sebagai Medina dari Tetouan) adalah permukiman di "
+"Maroko utara dan Situs Warisan Dunia UNESCO. Secara historis itu adalah "
 "titik kontak penting antara dua peradaban (Spanyol dan Arab) dan dua benua "
 "(Eropa dan Afrika) setelah abad ke-8."
 
@@ -25465,10 +25669,10 @@ msgid ""
 "century Cordova in Andalusia (modern Spain), and wrote an influential "
 "treatise on the uses of the astrolabe."
 msgstr ""
-"Saffar dinamai untuk Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
-"Ibn-al-Saffar, yang mengajar aritmatika, geometri, dan astronomi di Kordoba "
-"abad ke-11 di Andalusia (Spanyol modern), dan menulis sebuah risalah yang "
-"berpengaruh di penggunaan astrolabe."
+"Saffar dinamai dari Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
+"Ibn-al-Saffar, yang mengajarkan aritmatika, geometri, dan astronomi pada "
+"abad ke-11 di Cordova di Andalusia (Spanyol modern), dan menulis risalah "
+"berpengaruh tentang penggunaan astrolabe."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:387
 msgid ""
@@ -25476,6 +25680,10 @@ msgid ""
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
 " the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
+"Samh dinamai dari Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri "
+"(atau <em>Ibn al-Samh</em>), seorang astronom dan matematikawan terkemuka "
+"abad ke-11 di sekolah al Majriti di Cordova (Andalusia, kini Spanyol "
+"modern)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:388
 msgid ""
@@ -25483,6 +25691,9 @@ msgid ""
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
+"Majriti dinamai dari Abu al-Qasim al-Qurtubi al-Majriti, seorang "
+"matematikawan, astronom, cendekiawan, dan guru terkemuka pada abad ke-10 dan"
+" awal abad ke-11 di Andalusia (Spanyol modern)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:389
 msgid ""
@@ -25491,6 +25702,10 @@ msgid ""
 " in the world even today. The constellation Aquila represents an eagle - a "
 "popular symbol of liberty."
 msgstr ""
+"Libertas adalah bahasa Latin untuk <em>kebebasan</em>. Kebebasan mengacu "
+"pada kebebasan sosial dan politik, dan sebagai pengingat bahwa masih ada "
+"orang yang dirampas kebebasannya di dunia bahkan hingga hari ini. Konstelasi"
+" Aquila melambangkan seekor elang—simbol kebebasan yang populer."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:390
 msgid ""
@@ -29380,8 +29595,8 @@ msgid "Title:"
 msgstr "Judul:"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:157
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:162
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:236
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:473
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
@@ -29398,41 +29613,41 @@ msgstr ""
 msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:575
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:479
 msgid "INFO"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:582
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:486
 msgid "WARNING"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:589
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:493
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"
 msgstr "KESALAHAN"
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:70
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:138
 msgid "Welcome to the Sky Culture Maker!"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:70
 msgid ""
 "Note: Test only. The result does not yet comply to Stellarium's formatting "
 "rules."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:92
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:91
 msgid ""
 "Convert sky cultures from the legacy (fab) format to the new (json) format"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:179
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:195
 msgid "Please select a license for the sky culture."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:185
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:201
 msgid ""
 "The sky culture description is not complete. Please fill in all required "
 "fields correctly."
@@ -29486,107 +29701,90 @@ msgstr ""
 msgid "The selected directory is not valid"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
-msgid "SCM: Dark Constellation Editor"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
-msgid "SCM: Constellation Editor"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:147
-msgid "Please name your Dark Constellation"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:148
-msgid "Please name your Constellation"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:297
 msgid "Open Artwork"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:299
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
 msgid "Images (*.png *.jpg *.jpeg)"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:306
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:305
 msgid "Chosen path is not a valid file:\n"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:315
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:314
 msgid "Chosen file is not a PNG, JPG or JPEG image:\n"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:342
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:373
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:341
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:372
 msgid "No anchor was selected. Please select an anchor to bind to."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:353
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:352
 msgid "No star was selected to bind to the current selected anchor."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:364
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:363
 msgid "The selected object must be of type Star or Nebula."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:382
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:381
 msgid "The selected object must contain a HIP number."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:405
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:404
 msgid "Could not save: Sky Culture is not set"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:413
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:412
 msgid "Could not save: English name is empty"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:423
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:422
 msgid "Could not save: Constellation ID is empty"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:432
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:442
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:431
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:441
 msgid "Could not save: Constellation with this ID already exists"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:453
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:452
 msgid "Could not save: The constellation does not contain any drawings"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:464
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:463
 msgid ""
 "Could not save: An artwork is attached, but not all anchors have a star "
 "bound."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:98
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:597
 msgid ""
 "Use RightClick or Control + Click to draw a connected line.\n"
 "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
 "Use Command + F to search and connect stars."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:103
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:600
 msgid ""
 "Hold RightClick or Control + Click to delete the line under the cursor.\n"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:106
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:602
 msgid ""
 "Use RightClick to draw a connected line.\n"
 "Use Double-RightClick to stop drawing the line.\n"
 "Use CTRL + F to search and connect stars."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:110
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:605
 msgid "Hold RightClick to delete the line under the cursor.\n"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:115
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:608
 msgid ""
 "Usage:\n"
 "1. Upload an image\n"
@@ -29597,6 +29795,23 @@ msgid ""
 "5. The anchor is shown in a brighter color when bound to a star\n"
 "   - The corresponding bound star is automatically selected when an anchor is selected\n"
 "   - 'Bind Star' will overwrite the current binding if it already exists"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:619
+msgid "SCM: Dark Constellation Editor"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+msgid "SCM: Constellation Editor"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:621
+msgid "Please name your Dark Constellation"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:622
+msgid "Please name your Constellation"
 msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:140
@@ -29879,11 +30094,20 @@ msgid "Export and Exit"
 msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:128
-msgid "Hide the plugin to resume later or abort the process?"
+msgid ""
+"Hide the plugin to resume later or close it without saving the sky culture?"
 msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:129
-msgid "Hide"
+msgid "Hide editor"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
+msgid "Close without saving"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
+msgid "Don't close"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:57
