@@ -39,7 +39,7 @@ Due to the limitations of observational technology and potential errors in trans
 
 ### The Milky Way
 
-The Chinese imagine the Milky Way as a river. During the Song Dynasty in China, the official name for the Milky Way was "天汉" (pinyin: Tiānhàn), meaning "river in the heavens." It was also referred to as "银河" (pinyin: Yínhé)—which remains the modern Chinese official name for the Milky Way—meaning "silver river." In traditional Chinese culture, the Milky Way has also been referred to as "天河" (Tiānhé), similarly meaning "river in the heavens"; "银汉" (Yínhàn), also meaning "silvery river"; "河汉" (Héhàn), meaning "river in the sky"; "星河" (Xīnghé) or "星汉" (Xīnghàn), meaning "river of stars"; and "云汉" (Yúnhàn), meaning "cloud-like river."
+The Chinese imagine the Milky Way as a river. During the Song Dynasty in China, the official name for the Milky Way was "天汉" (pinyin: Tiānhàn), meaning "river in the heavens." It was also referred to as "银河" (pinyin: Yínhé)—which remains the modern Chinese official name for the Milky Way—meaning "silver river." In traditional Chinese culture, the Milky Way has also been referred to as "天河" (pinyin: Tiānhé), similarly meaning "river in the heavens"; "银汉" (pinyin: Yínhàn), also meaning "silvery river"; "河汉" (pinyin: Héhàn), meaning "river in the sky"; "星河" (pinyin: Xīnghé) or "星汉" (pinyin: Xīnghàn), meaning "river of stars"; and "云汉" (pinyin: Yúnhàn), meaning "cloud-like river."
 
 ### Seven Luminaries
 
