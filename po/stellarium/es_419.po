@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-06 21:26+0700\n"
+"POT-Creation-Date: 2025-12-10 07:28+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2025\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/stellarium/teams/80998/es_419/)\n"
@@ -1247,7 +1247,7 @@ msgstr "regio"
 #: src/core/modules/NomenclatureItem.cpp:685
 msgctxt "landform"
 msgid "reticulum"
-msgstr "reticulum"
+msgstr "retículo"
 
 #. TRANSLATORS: Fissure
 #: src/core/modules/NomenclatureItem.cpp:687
@@ -1692,15 +1692,15 @@ msgstr "galaxia activa"
 
 #: src/core/modules/Nebula.cpp:72
 msgid "radio galaxy"
-msgstr "radio galaxia"
+msgstr "radiogalaxia"
 
 #: src/core/modules/Nebula.cpp:73
 msgid "interacting galaxy"
-msgstr "interacción galaxias"
+msgstr "galaxia en interacción"
 
 #: src/core/modules/Nebula.cpp:74 plugins/Quasars/src/Quasar.hpp:70
 msgid "quasar"
-msgstr "quásar"
+msgstr "cuásar"
 
 #: src/core/modules/Nebula.cpp:75
 msgid "star cluster"
@@ -1810,11 +1810,11 @@ msgstr "estrella de línea de emisión"
 
 #: src/core/modules/Nebula.cpp:101
 msgid "supernova candidate"
-msgstr "candidata supernova"
+msgstr "candidata a supernova"
 
 #: src/core/modules/Nebula.cpp:102
 msgid "supernova remnant candidate"
-msgstr "candidata remanente supernova"
+msgstr "candidato a resto de supernova"
 
 #: src/core/modules/Nebula.cpp:103
 msgid "cluster of galaxies"
@@ -4251,7 +4251,7 @@ msgstr "Constelación UAI"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/StelObject.cpp:995 src/translations.h:59
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:475
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:518
 msgid "Constellations"
 msgstr "Constelaciones"
 
@@ -8065,19 +8065,19 @@ msgstr "Estrellas brillantes con alto movimiento propio"
 #: src/gui/AstroCalcDialog.cpp:7527 src/translations.h:320
 #: src/ui_dsoColorsDialog.h:584
 msgid "Supernova candidates"
-msgstr "Supernovas candidatas"
+msgstr "Candidatos a supernovas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7528 src/translations.h:322
 #: src/ui_dsoColorsDialog.h:622
 msgid "Supernova remnant candidates"
-msgstr "Supernova candidatos remanentes"
+msgstr "Candidatos a resto de supernova"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7529 src/translations.h:318
 #: src/ui_viewDialog.h:4206 src/ui_dsoColorsDialog.h:529
 msgid "Supernova remnants"
-msgstr "Remanentes de supernova"
+msgstr "Restos de supernova"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7530 src/translations.h:346
@@ -9343,12 +9343,12 @@ msgstr "Nebulosas de reflexión"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:302 src/ui_dsoColorsDialog.h:512
 msgid "Radio galaxies"
-msgstr "Radio galaxias"
+msgstr "Radiogalaxias"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:306
 msgid "Bright quasars"
-msgstr "Quásares brillantes"
+msgstr "Cuásares brillantes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:308 src/ui_dsoColorsDialog.h:517
@@ -9363,7 +9363,7 @@ msgstr "Asociaciones estelares"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:312 src/ui_dsoColorsDialog.h:620
 msgid "Star clouds"
-msgstr "Nubes de estrellas"
+msgstr "Nubes estelares"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:314 src/ui_dsoColorsDialog.h:558
@@ -9408,7 +9408,7 @@ msgstr "Objetos Estelares Jóvenes"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:336
 msgid "Possible Quasars"
-msgstr "Posibles Quásares"
+msgstr "Posibles cuásares"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:338
@@ -9508,7 +9508,7 @@ msgstr "Catalogo Strasbourg-ESO de Nebulosas Planetarias Galácticas"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:384
 msgid "A catalogue of Galactic supernova remnants"
-msgstr "Catálogo de restos de supernova galáctica"
+msgstr "Un catálogo de restos de supernovas galácticas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:386
@@ -10771,7 +10771,7 @@ msgstr "Burbuja"
 #: src/translations.h:722
 msgctxt "SIMBAD object type"
 msgid "SuperNova Remnant"
-msgstr "Remanente de Supernova"
+msgstr "Resto de supernova"
 
 #: src/translations.h:723
 msgctxt "SIMBAD object type"
@@ -11441,6 +11441,706 @@ msgstr "Mostrar archivos &ocultos"
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:141
 msgid "Search"
 msgstr "Buscar"
+
+#: src/translations.h:895
+msgctxt "IAU constellation name"
+msgid "Andromeda"
+msgstr "Andrómeda"
+
+#: src/translations.h:896
+msgctxt "IAU constellation name"
+msgid "Antlia"
+msgstr "Antlia"
+
+#: src/translations.h:897
+msgctxt "IAU constellation name"
+msgid "Apus"
+msgstr "Ave del Paraíso"
+
+#: src/translations.h:898
+msgctxt "IAU constellation name"
+msgid "Aquila"
+msgstr "Aquila"
+
+#: src/translations.h:899
+msgctxt "IAU constellation name"
+msgid "Aquarius"
+msgstr "Acuario"
+
+#: src/translations.h:900
+msgctxt "IAU constellation name"
+msgid "Ara"
+msgstr "Ara"
+
+#: src/translations.h:901
+msgctxt "IAU constellation name"
+msgid "Aries"
+msgstr "Aries"
+
+#: src/translations.h:902
+msgctxt "IAU constellation name"
+msgid "Auriga"
+msgstr "Auriga"
+
+#: src/translations.h:903
+msgctxt "IAU constellation name"
+msgid "Bootes"
+msgstr "Boyero"
+
+#: src/translations.h:904
+msgctxt "IAU constellation name"
+msgid "Canis Major"
+msgstr "Can Mayor"
+
+#: src/translations.h:905
+msgctxt "IAU constellation name"
+msgid "Canis Minor"
+msgstr "Can Menor"
+
+#: src/translations.h:906
+msgctxt "IAU constellation name"
+msgid "Caelum"
+msgstr "Cincel"
+
+#: src/translations.h:907
+msgctxt "IAU constellation name"
+msgid "Camelopardalis"
+msgstr "Jirafa"
+
+#: src/translations.h:908
+msgctxt "IAU constellation name"
+msgid "Capricornus"
+msgstr "Capricornio"
+
+#: src/translations.h:909
+msgctxt "IAU constellation name"
+msgid "Carina"
+msgstr "Carina"
+
+#: src/translations.h:910
+msgctxt "IAU constellation name"
+msgid "Cassiopeia"
+msgstr "Casiopea"
+
+#: src/translations.h:911
+msgctxt "IAU constellation name"
+msgid "Centaurus"
+msgstr "Centauro"
+
+#: src/translations.h:912
+msgctxt "IAU constellation name"
+msgid "Cepheus"
+msgstr "Cefeo"
+
+#: src/translations.h:913
+msgctxt "IAU constellation name"
+msgid "Cetus"
+msgstr "Ceto"
+
+#: src/translations.h:914
+msgctxt "IAU constellation name"
+msgid "Chamaeleon"
+msgstr "Camaleón"
+
+#: src/translations.h:915
+msgctxt "IAU constellation name"
+msgid "Circinus"
+msgstr "Compás"
+
+#: src/translations.h:916
+msgctxt "IAU constellation name"
+msgid "Cancer"
+msgstr "Cáncer"
+
+#: src/translations.h:917
+msgctxt "IAU constellation name"
+msgid "Columba"
+msgstr "Paloma"
+
+#: src/translations.h:918
+msgctxt "IAU constellation name"
+msgid "Coma Berenices"
+msgstr "Cabellera de Berenice"
+
+#: src/translations.h:919
+msgctxt "IAU constellation name"
+msgid "Corona Australis"
+msgstr "Corona Austral"
+
+#: src/translations.h:920
+msgctxt "IAU constellation name"
+msgid "Corona Borealis"
+msgstr "Corona Boreal"
+
+#: src/translations.h:921
+msgctxt "IAU constellation name"
+msgid "Crater"
+msgstr "Cráter"
+
+#: src/translations.h:922
+msgctxt "IAU constellation name"
+msgid "Crux"
+msgstr "Cruz"
+
+#: src/translations.h:923
+msgctxt "IAU constellation name"
+msgid "Corvus"
+msgstr "Cuervo"
+
+#: src/translations.h:924
+msgctxt "IAU constellation name"
+msgid "Canes Venatici"
+msgstr "Perros de Caza"
+
+#: src/translations.h:925
+msgctxt "IAU constellation name"
+msgid "Cygnus"
+msgstr "Cisne"
+
+#: src/translations.h:926
+msgctxt "IAU constellation name"
+msgid "Delphinus"
+msgstr "Delfín"
+
+#: src/translations.h:927
+msgctxt "IAU constellation name"
+msgid "Dorado"
+msgstr "Dorado"
+
+#: src/translations.h:928
+msgctxt "IAU constellation name"
+msgid "Draco"
+msgstr "Dragón"
+
+#: src/translations.h:929
+msgctxt "IAU constellation name"
+msgid "Equuleus"
+msgstr "Potro"
+
+#: src/translations.h:930
+msgctxt "IAU constellation name"
+msgid "Eridanus"
+msgstr "Erídano"
+
+#: src/translations.h:931
+msgctxt "IAU constellation name"
+msgid "Fornax"
+msgstr "Horno"
+
+#: src/translations.h:932
+msgctxt "IAU constellation name"
+msgid "Gemini"
+msgstr "Géminis"
+
+#: src/translations.h:933
+msgctxt "IAU constellation name"
+msgid "Grus"
+msgstr "Grulla"
+
+#: src/translations.h:934
+msgctxt "IAU constellation name"
+msgid "Hercules"
+msgstr "Hércules"
+
+#: src/translations.h:935
+msgctxt "IAU constellation name"
+msgid "Horologium"
+msgstr "Reloj"
+
+#: src/translations.h:936
+msgctxt "IAU constellation name"
+msgid "Hydra"
+msgstr "Hidra"
+
+#: src/translations.h:937
+msgctxt "IAU constellation name"
+msgid "Hydrus"
+msgstr "Hidra"
+
+#: src/translations.h:938
+msgctxt "IAU constellation name"
+msgid "Indus"
+msgstr "Indígena"
+
+#: src/translations.h:939
+msgctxt "IAU constellation name"
+msgid "Leo Minor"
+msgstr "Leo Menor"
+
+#: src/translations.h:940
+msgctxt "IAU constellation name"
+msgid "Lacerta"
+msgstr "Lagarto"
+
+#: src/translations.h:941
+msgctxt "IAU constellation name"
+msgid "Leo"
+msgstr "Leo"
+
+#: src/translations.h:942
+msgctxt "IAU constellation name"
+msgid "Lepus"
+msgstr "Lepus"
+
+#: src/translations.h:943
+msgctxt "IAU constellation name"
+msgid "Libra"
+msgstr "Libra"
+
+#: src/translations.h:944
+msgctxt "IAU constellation name"
+msgid "Lupus"
+msgstr "Lobo"
+
+#: src/translations.h:945
+msgctxt "IAU constellation name"
+msgid "Lynx"
+msgstr "Lince"
+
+#: src/translations.h:946
+msgctxt "IAU constellation name"
+msgid "Lyra"
+msgstr "Lira"
+
+#: src/translations.h:947
+msgctxt "IAU constellation name"
+msgid "Mensa"
+msgstr "Mesa"
+
+#: src/translations.h:948
+msgctxt "IAU constellation name"
+msgid "Microscopium"
+msgstr "Microscopio"
+
+#: src/translations.h:949
+msgctxt "IAU constellation name"
+msgid "Monoceros"
+msgstr "Unicornio"
+
+#: src/translations.h:950
+msgctxt "IAU constellation name"
+msgid "Musca"
+msgstr "Mosca"
+
+#: src/translations.h:951
+msgctxt "IAU constellation name"
+msgid "Norma"
+msgstr "Norma"
+
+#: src/translations.h:952
+msgctxt "IAU constellation name"
+msgid "Octans"
+msgstr "Octante"
+
+#: src/translations.h:953
+msgctxt "IAU constellation name"
+msgid "Ophiuchus"
+msgstr "Ofiuco"
+
+#: src/translations.h:954
+msgctxt "IAU constellation name"
+msgid "Orion"
+msgstr "Orión"
+
+#: src/translations.h:955
+msgctxt "IAU constellation name"
+msgid "Pavo"
+msgstr "Pavo"
+
+#: src/translations.h:956
+msgctxt "IAU constellation name"
+msgid "Pegasus"
+msgstr "Pegaso"
+
+#: src/translations.h:957
+msgctxt "IAU constellation name"
+msgid "Perseus"
+msgstr "Perseo"
+
+#: src/translations.h:958
+msgctxt "IAU constellation name"
+msgid "Phoenix"
+msgstr "Fénix"
+
+#: src/translations.h:959
+msgctxt "IAU constellation name"
+msgid "Pictor"
+msgstr "Caballete del Pintor"
+
+#: src/translations.h:960
+msgctxt "IAU constellation name"
+msgid "Piscis Austrinus"
+msgstr "Pez Austral"
+
+#: src/translations.h:961
+msgctxt "IAU constellation name"
+msgid "Pisces"
+msgstr "Piscis"
+
+#: src/translations.h:962
+msgctxt "IAU constellation name"
+msgid "Puppis"
+msgstr "Popa"
+
+#: src/translations.h:963
+msgctxt "IAU constellation name"
+msgid "Pyxis"
+msgstr "Brújula"
+
+#: src/translations.h:964
+msgctxt "IAU constellation name"
+msgid "Reticulum"
+msgstr "Retículo"
+
+#: src/translations.h:965
+msgctxt "IAU constellation name"
+msgid "Sculptor"
+msgstr "Escultor"
+
+#: src/translations.h:966
+msgctxt "IAU constellation name"
+msgid "Scorpius"
+msgstr "Escorpio"
+
+#: src/translations.h:967
+msgctxt "IAU constellation name"
+msgid "Scutum"
+msgstr "Escudo"
+
+#: src/translations.h:968
+msgctxt "IAU constellation name"
+msgid "Serpens"
+msgstr "Serpiente"
+
+#: src/translations.h:969
+msgctxt "IAU constellation name"
+msgid "Sextans"
+msgstr "Sextante"
+
+#: src/translations.h:970
+msgctxt "IAU constellation name"
+msgid "Sagitta"
+msgstr "Flecha"
+
+#: src/translations.h:971
+msgctxt "IAU constellation name"
+msgid "Sagittarius"
+msgstr "Sagitario"
+
+#: src/translations.h:972
+msgctxt "IAU constellation name"
+msgid "Taurus"
+msgstr "Tauro"
+
+#: src/translations.h:973
+msgctxt "IAU constellation name"
+msgid "Telescopium"
+msgstr "Telescopio"
+
+#: src/translations.h:974
+msgctxt "IAU constellation name"
+msgid "Triangulum Australe"
+msgstr "Triángulo Austral"
+
+#: src/translations.h:975
+msgctxt "IAU constellation name"
+msgid "Triangulum"
+msgstr "Triángulo"
+
+#: src/translations.h:976
+msgctxt "IAU constellation name"
+msgid "Tucana"
+msgstr "Tucán"
+
+#: src/translations.h:977
+msgctxt "IAU constellation name"
+msgid "Ursa Major"
+msgstr "Osa Mayor"
+
+#: src/translations.h:978
+msgctxt "IAU constellation name"
+msgid "Ursa Minor"
+msgstr "Osa Menor"
+
+#: src/translations.h:979
+msgctxt "IAU constellation name"
+msgid "Vela"
+msgstr "Vela"
+
+#: src/translations.h:980
+msgctxt "IAU constellation name"
+msgid "Virgo"
+msgstr "Virgo"
+
+#: src/translations.h:981
+msgctxt "IAU constellation name"
+msgid "Volans"
+msgstr "Pez volador"
+
+#: src/translations.h:982
+msgctxt "IAU constellation name"
+msgid "Vulpecula"
+msgstr "Zorrilla"
+
+#: src/translations.h:983
+msgctxt "Nebula narration"
+msgid "a Galaxy"
+msgstr "una galaxia"
+
+#: src/translations.h:984
+msgctxt "Nebula narration"
+msgid "an Active galaxy"
+msgstr "una galaxia activa"
+
+#: src/translations.h:985
+msgctxt "Nebula narration"
+msgid "a Radio galaxy"
+msgstr "una radiogalaxia"
+
+#: src/translations.h:986
+msgctxt "Nebula narration"
+msgid "an Interacting galaxy"
+msgstr "una galaxia en interacción"
+
+#: src/translations.h:987
+msgctxt "Nebula narration"
+msgid "a Quasar"
+msgstr "un cuásar"
+
+#: src/translations.h:988
+msgctxt "Nebula narration"
+msgid "a Star cluster"
+msgstr "un cúmulo de estrellas"
+
+#: src/translations.h:989
+msgctxt "Nebula narration"
+msgid "an Open star cluster"
+msgstr "un cúmulo estelar abierto"
+
+#: src/translations.h:990
+msgctxt "Nebula narration"
+msgid "a Globular star cluster"
+msgstr "un cúmulo estelar globular"
+
+#: src/translations.h:991
+msgctxt "Nebula narration"
+msgid "a Stellar association"
+msgstr "una asociación estelar"
+
+#: src/translations.h:992
+msgctxt "Nebula narration"
+msgid "a Star cloud"
+msgstr "una nube estelar"
+
+#: src/translations.h:993
+msgctxt "Nebula narration"
+msgid "A nebula"
+msgstr "una nebulosa"
+
+#: src/translations.h:994
+msgctxt "Nebula narration"
+msgid "a Planetary nebula"
+msgstr "una nebulosa planetaria"
+
+#: src/translations.h:995
+msgctxt "Nebula narration"
+msgid "a Dark Nebula"
+msgstr "una nebulosa oscura"
+
+#: src/translations.h:996
+msgctxt "Nebula narration"
+msgid "a Reflection nebula"
+msgstr "una nebulosa de reflexión"
+
+#: src/translations.h:997
+msgctxt "Nebula narration"
+msgid "a Bipolar nebula"
+msgstr "una nebulosa bipolar"
+
+#: src/translations.h:998
+msgctxt "Nebula narration"
+msgid "an emission nebula"
+msgstr "una nebulosa de emisión"
+
+#: src/translations.h:999
+msgctxt "Nebula narration"
+msgid "a cluster associated with nebulosity"
+msgstr "un cúmulo asociado con nebulosidad"
+
+#: src/translations.h:1000
+msgctxt "Nebula narration"
+msgid "an H two region"
+msgstr "Una región H II"
+
+#: src/translations.h:1001
+msgctxt "Nebula narration"
+msgid "a Supernova remnant"
+msgstr "un resto de supernova"
+
+#: src/translations.h:1002
+msgctxt "Nebula narration"
+msgid "Interstellar matter"
+msgstr "Materia interestelar"
+
+#: src/translations.h:1003
+msgctxt "Nebula narration"
+msgid "an Emission object"
+msgstr "un objeto de emisión"
+
+#: src/translations.h:1004
+msgctxt "Nebula narration"
+msgid "a BL Lacertae object"
+msgstr "un objeto BL Lacertae"
+
+#: src/translations.h:1005
+msgctxt "Nebula narration"
+msgid "a Blazar"
+msgstr "un blazar"
+
+#: src/translations.h:1006
+msgctxt "Nebula narration"
+msgid "a Molecular Cloud"
+msgstr "una nube molecular"
+
+#: src/translations.h:1007
+msgctxt "Nebula narration"
+msgid "a Young Stellar Object"
+msgstr "un objeto estelar joven"
+
+#: src/translations.h:1008
+msgctxt "Nebula narration"
+msgid "a Possible Quasar"
+msgstr "un posible cuásar"
+
+#: src/translations.h:1009
+msgctxt "Nebula narration"
+msgid "a Possible Planetary Nebula"
+msgstr "una posible nebulosa planetaria"
+
+#: src/translations.h:1010
+msgctxt "Nebula narration"
+msgid "a Protoplanetary Nebula"
+msgstr "una nebulosa protoplanetaria"
+
+#: src/translations.h:1011
+msgctxt "Nebula narration"
+msgid "a Star"
+msgstr "una estrella"
+
+#: src/translations.h:1012
+msgctxt "Nebula narration"
+msgid "a Symbiotic Star"
+msgstr "una estrella simbiótica"
+
+#: src/translations.h:1013
+msgctxt "Nebula narration"
+msgid "an Emission-line Star"
+msgstr "una estrella de línea de emisión"
+
+#: src/translations.h:1014
+msgctxt "Nebula narration"
+msgid "a Supernova Candidate"
+msgstr "un candidato a supernova"
+
+#: src/translations.h:1015
+msgctxt "Nebula narration"
+msgid "a Supernova Remnant Candidate"
+msgstr "un candidato a resto de supernova"
+
+#: src/translations.h:1016
+msgctxt "Nebula narration"
+msgid "a cluster of Galaxies"
+msgstr "un cúmulo de galaxias"
+
+#: src/translations.h:1017
+msgctxt "Nebula narration"
+msgid "a part of a Galaxy"
+msgstr "una parte de una galaxia"
+
+#: src/translations.h:1018
+msgctxt "Nebula narration"
+msgid "a region of the sky"
+msgstr "una región del cielo"
+
+#: src/translations.h:1019
+msgctxt "Nebula narration"
+msgid "an object of unknown type"
+msgstr "un objeto de tipo desconocido"
+
+#: src/translations.h:1020
+msgctxt "object narration"
+msgid "a star"
+msgstr "una estrella"
+
+#: src/translations.h:1021
+msgctxt "object narration"
+msgid "a major planet"
+msgstr "un planeta mayor"
+
+#: src/translations.h:1022
+msgctxt "object narration"
+msgid "a planet moon"
+msgstr "una luna planetaria"
+
+#: src/translations.h:1023
+msgctxt "object narration"
+msgid "an observer"
+msgstr "un observador"
+
+#: src/translations.h:1024
+msgctxt "object narration"
+msgid "an artificial object"
+msgstr "un objeto artificial"
+
+#: src/translations.h:1025
+msgctxt "object narration"
+msgid "an asteroid"
+msgstr "un asteroide"
+
+#: src/translations.h:1026
+msgctxt "object narration"
+msgid "a plutino"
+msgstr "un plutino"
+
+#: src/translations.h:1027
+msgctxt "object narration"
+msgid "a comet"
+msgstr "un cometa"
+
+#: src/translations.h:1028
+msgctxt "object narration"
+msgid "a dwarf planet"
+msgstr "un planeta enano"
+
+#: src/translations.h:1029
+msgctxt "object narration"
+msgid "a cubewano"
+msgstr "un cubewano"
+
+#: src/translations.h:1030
+msgctxt "object narration"
+msgid "a scattered disc object"
+msgstr "un objeto del disco disperso"
+
+#: src/translations.h:1031
+msgctxt "object narration"
+msgid "an Oort Cloud Object"
+msgstr "un objeto de la nube de Oort"
+
+#: src/translations.h:1032
+msgctxt "object narration"
+msgid "a sednoid"
+msgstr "un sednoide"
+
+#: src/translations.h:1033
+msgctxt "object narration"
+msgid "an interstellar object"
+msgstr "un objeto interestelar"
+
+#: src/translations.h:1034
+msgctxt "object narration"
+msgid "an object of undefined type"
+msgstr "un objeto de tipo indefinido"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Africa
@@ -13254,7 +13954,7 @@ msgid "View"
 msgstr "Vista"
 
 #: src/ui_viewDialog.h:3864 src/ui_viewDialog.h:3885
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:492
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:535
 msgid "Sky"
 msgstr "Cielo"
 
@@ -13864,7 +14564,7 @@ msgstr "Estudio ESO/Uppsala del ESO(b) Atlas (Lauberts, 1982)"
 
 #: src/ui_viewDialog.h:4167
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
-msgstr "Un catálogo de remanentes de supernova galáctica (Verde, 2014)"
+msgstr "Un catálogo de restos de supernovas galácticas (Green, 2014)"
 
 #: src/ui_viewDialog.h:4170
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
@@ -13968,7 +14668,7 @@ msgstr "Usar brillo superficial"
 
 #: src/ui_viewDialog.h:4234
 msgid "Configure colors of markers"
-msgstr "Configurar los colores de los marcadores"
+msgstr "Configurar colores de los marcadores"
 
 #: src/ui_viewDialog.h:4240
 msgid "Maximum angular size in arcminutes for visible DSO"
@@ -15820,7 +16520,8 @@ msgstr "Cambiar al nuevo paisaje despues de su instalación"
 
 #: src/ui_addRemoveLandscapesDialog.h:234
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:236
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:479
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:522
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:552
 msgid "Remove"
 msgstr "Eliminar"
 
@@ -17077,15 +17778,15 @@ msgstr "Colores de etiquetas y marcadores de objetos del cielo profundo"
 
 #: src/ui_dsoColorsDialog.h:497
 msgid "Color of markers of BL Lac objects"
-msgstr "Color de los marcadores de los objetos BL Lac"
+msgstr "Color de marcadores de objetos BL Lac"
 
 #: src/ui_dsoColorsDialog.h:499
 msgid "Possible quasars"
-msgstr "Posibles quásares"
+msgstr "Posibles cuásares"
 
 #: src/ui_dsoColorsDialog.h:501
 msgid "Color of markers of stars"
-msgstr "Color de los marcadores de estrellas"
+msgstr "Color de marcadores de estrellas"
 
 #: src/ui_dsoColorsDialog.h:504
 msgid "Possible planetary nebulae"
@@ -17097,39 +17798,39 @@ msgstr "Posibles nebulosas Pl."
 
 #: src/ui_dsoColorsDialog.h:509
 msgid "Color of markers of emission-line stars"
-msgstr "Color de los marcadores de las estrellas de la línea de emisión"
+msgstr "Color de marcadores de estrellas de la línea de emisión"
 
 #: src/ui_dsoColorsDialog.h:515
 msgid "Color of markers of blazars"
-msgstr "Color de los marcadores de blázares"
+msgstr "Color de marcadores de blázares"
 
 #: src/ui_dsoColorsDialog.h:520
 msgid "Color of markers of interacting galaxies"
-msgstr "Color de los marcadores de las galaxias que interactúan"
+msgstr "Color de marcadores de galaxias que interactúan"
 
 #: src/ui_dsoColorsDialog.h:524
 msgid "Color of markers of young stellar objects"
-msgstr "Color de los marcadores de objetos estelares jóvenes"
+msgstr "Color de marcadores de objetos estelares jóvenes"
 
 #: src/ui_dsoColorsDialog.h:527
 msgid "Color of markers of star clouds"
-msgstr "Color de los marcadores de las nubes estelares"
+msgstr "Color de marcadores de nubes estelares"
 
 #: src/ui_dsoColorsDialog.h:531
 msgid "Color of markers of bipolar nebulae"
-msgstr "Color de los marcadores de las nebulosas bipolares"
+msgstr "Color de marcadores de nebulosas bipolares"
 
 #: src/ui_dsoColorsDialog.h:534
 msgid "Color of markers of supernova candidates"
-msgstr "Color marcador de estrellas supernova"
+msgstr "Color de marcadores de candidatos a supernova"
 
 #: src/ui_dsoColorsDialog.h:538
 msgid "Color of markers of interstellar matter"
-msgstr "Color de los marcadores de materia interestelar"
+msgstr "Color de marcadores de materia interestelar"
 
 #: src/ui_dsoColorsDialog.h:541
 msgid "Color of markers of galaxies"
-msgstr "Color de los marcadores de galaxias"
+msgstr "Color de marcadores de galaxias"
 
 #: src/ui_dsoColorsDialog.h:545
 msgid "Color of markers of stellar associations"
@@ -17137,15 +17838,15 @@ msgstr "Color de marcadores de asociaciones estelares"
 
 #: src/ui_dsoColorsDialog.h:550
 msgid "Color of markers of dark nebulae"
-msgstr "Color de los marcadores de nebulosas oscuras"
+msgstr "Color de marcadores de nebulosas oscuras"
 
 #: src/ui_dsoColorsDialog.h:553
 msgid "Color of markers of emission nebulae"
-msgstr "Color de los marcadores de las nebulosas de emisión"
+msgstr "Color de marcadores de nebulosas de emisión"
 
 #: src/ui_dsoColorsDialog.h:556
 msgid "Color of markers of active galaxies"
-msgstr "Color de los marcadores de galaxias activas"
+msgstr "Color de marcadores de galaxias activas"
 
 #: src/ui_dsoColorsDialog.h:560
 msgid "Color of labels of deep-sky objects"
@@ -17153,19 +17854,19 @@ msgstr "Color de las etiquetas de los objetos del cielo profundo"
 
 #: src/ui_dsoColorsDialog.h:563
 msgid "Color of markers of molecular clouds"
-msgstr "Color de los marcadores de las nubes moleculares"
+msgstr "Color de marcadores de nubes moleculares"
 
 #: src/ui_dsoColorsDialog.h:567
 msgid "Color of markers of star clusters"
-msgstr "Color de los marcadores de los cúmulos estelares"
+msgstr "Color de marcadores de cúmulos estelares"
 
 #: src/ui_dsoColorsDialog.h:571
 msgid "Color of markers of globular star clusters"
-msgstr "Color de los marcadores de los cúmulos estelares globulares"
+msgstr "Color de marcadores de cúmulos estelares globulares"
 
 #: src/ui_dsoColorsDialog.h:574
 msgid "Color of markers of possible planetary nebulae"
-msgstr "Color de los marcadores de posibles nebulosas planetarias"
+msgstr "Color de marcadores de posibles nebulosas planetarias"
 
 #: src/ui_dsoColorsDialog.h:579
 msgid "Young stellar objects"
@@ -17173,27 +17874,27 @@ msgstr "Objetos estelares jóvenes"
 
 #: src/ui_dsoColorsDialog.h:582
 msgid "Color of markers of nebulae"
-msgstr "Color de los marcadores de nebulosas"
+msgstr "Color de marcadores de nebulosas"
 
 #: src/ui_dsoColorsDialog.h:586
 msgid "Color of markers of planetary nebulae"
-msgstr "Color de los marcadores de las nebulosas planetarias"
+msgstr "Color de marcadores de nebulosas planetarias"
 
 #: src/ui_dsoColorsDialog.h:589
 msgid "Color of markers of supernova remnant candidates"
-msgstr "Color de los marcadores de candidatas a remanentes de supernova"
+msgstr "Color de marcadores de candidatos a restos de supernova"
 
 #: src/ui_dsoColorsDialog.h:592
 msgid "Color of markers of possible quasars"
-msgstr "Color de los marcadores de posibles quásares"
+msgstr "Color de marcadores de posibles quásares"
 
 #: src/ui_dsoColorsDialog.h:596 plugins/Quasars/src/ui_quasarsDialog.h:272
 msgid "Color of markers of quasars"
-msgstr "Color de los marcadores de cuásares"
+msgstr "Color de marcadores de cuásares"
 
 #: src/ui_dsoColorsDialog.h:599
 msgid "Color of markers of reflection nebulae"
-msgstr "Color de los marcadores de las nebulosas de reflexión"
+msgstr "Color de marcadores de nebulosas de reflexión"
 
 #: src/ui_dsoColorsDialog.h:602
 msgid "Protoplanetary nebulae"
@@ -17209,20 +17910,20 @@ msgstr "Marcadores de DSOs"
 
 #: src/ui_dsoColorsDialog.h:609
 msgid "Color of markers of deep-sky objects"
-msgstr "Color de los marcadores de objetos del cielo profundo"
+msgstr "Color de marcadores de objetos del cielo profundo"
 
 #: src/ui_dsoColorsDialog.h:613
 msgid "Color of markers of radio galaxies"
-msgstr "Color de los marcadores de radio galaxias"
+msgstr "Color de marcadores de radiogalaxias"
 
 #: src/ui_dsoColorsDialog.h:616 plugins/Quasars/src/Quasars.cpp:73
 #: plugins/Quasars/src/Quasars.cpp:172
 msgid "Quasars"
-msgstr "Quásares"
+msgstr "Cuásares"
 
 #: src/ui_dsoColorsDialog.h:618
 msgid "Color of markers of emission objects"
-msgstr "Color de los marcadores de los objetos de emisión"
+msgstr "Color de marcadores de objetos de emisión"
 
 #: src/ui_dsoColorsDialog.h:621
 msgid "Molecular clouds"
@@ -17230,23 +17931,23 @@ msgstr "Nubes moleculares"
 
 #: src/ui_dsoColorsDialog.h:624
 msgid "Color of markers of open star clusters"
-msgstr "Color de los marcadores de cúmulos estelares abiertos"
+msgstr "Color de marcadores de cúmulos estelares abiertos"
 
 #: src/ui_dsoColorsDialog.h:627
 msgid "Color of markers of symbiotic stars"
-msgstr "Color marcadores de estrellas simbióticas"
+msgstr "Color de marcadores de estrellas simbióticas"
 
 #: src/ui_dsoColorsDialog.h:630
 msgid "Color of markers of protoplanetary nebulae"
-msgstr "Color de los marcadores de las nebulosas protoplanetarias"
+msgstr "Color de marcadores de nebulosas protoplanetarias"
 
 #: src/ui_dsoColorsDialog.h:633
 msgid "Color of markers of hydrogen regions"
-msgstr "Color de los marcadores de regiones de hidrógeno"
+msgstr "Color de marcadores de regiones de hidrógeno"
 
 #: src/ui_dsoColorsDialog.h:638
 msgid "Color of markers of supernova remnants"
-msgstr "Color de los marcadores de los restos de supernova"
+msgstr "Color de marcadores de restos de supernova"
 
 #: src/ui_dsoColorsDialog.h:641
 msgid "Labels of deep-sky objects"
@@ -17258,11 +17959,11 @@ msgstr "Etiquetas de DSOs"
 
 #: src/ui_dsoColorsDialog.h:646
 msgid "Color of markers for clusters of galaxies"
-msgstr "Color de marcadores para cúmulos de galaxias"
+msgstr "Color de marcadores de cúmulos de galaxias"
 
 #: src/ui_dsoColorsDialog.h:650
 msgid "Color of markers of regions of the sky"
-msgstr "Color de los marcadores de las regiones del cielo"
+msgstr "Color de marcadores de regiones del cielo"
 
 #: src/ui_orbitColorsDialog.h:359
 msgid "Style of orbit colors"
@@ -18519,7 +19220,7 @@ msgid "Pixel grid feature"
 msgstr "Función de cuadrícula de píxeles"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:639
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:482
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:525
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "Visión general"
@@ -18921,6 +19622,7 @@ msgstr "General"
 #: plugins/Oculars/src/ui_ocularDialog.h:1544
 #: plugins/Oculars/src/ui_ocularDialog.h:1563
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:549
 msgid "Add"
 msgstr "Añadir"
 
@@ -21016,7 +21718,7 @@ msgid "Add communication data"
 msgstr "Añadir datos de comunicación"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:126
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:512
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:559
 msgid "Description"
 msgstr "Descripción"
 
@@ -21138,7 +21840,7 @@ msgstr "Mostrar satélites como marcadores"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1248
 msgid "Color of satellite markers in transit through the Sun or the Moon"
-msgstr "Color de los marcadores de satélite en tránsito por el Sol o la Luna"
+msgstr "Color de marcadores de satélite en tránsito por el Sol o la Luna"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1250
 msgid "Hide invisible satellites"
@@ -24347,8 +25049,8 @@ msgid ""
 "catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
-"Un complemento que muestra algunos quásares más brillantes que una magnitud "
-"visual 18. El catálogo de quásares fue compilado de \"Quasars and Active "
+"Un complemento que muestra algunos cuásares más brillantes que una magnitud "
+"visual 18. El catálogo de cuásares fue compilado de \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.) (Veron+ 2010)"
 
 #: plugins/Quasars/src/Quasars.cpp:173
@@ -28660,7 +29362,7 @@ msgstr "Junio Bootidas"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:45
 msgid "Piscis Austrinids"
-msgstr "Piscis Austrínidas"
+msgstr "Pez Austral"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:47
@@ -30484,7 +31186,7 @@ msgstr "Título:"
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:162
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:236
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:473
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:516
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
 msgid "Sky Culture Maker"
 msgstr "Creador de Culturas Estelares"
@@ -30536,11 +31238,11 @@ msgstr ""
 "Convertir culturas celestes del formato heredado (fab) al nuevo formato "
 "(json)"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:195
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:222
 msgid "Please select a license for the sky culture."
 msgstr "Por favor, seleccione una licencia para la cultura estelar."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:201
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:228
 msgid ""
 "The sky culture description is not complete. Please fill in all required "
 "fields correctly."
@@ -30748,7 +31450,7 @@ msgid "Not implemented yet."
 msgstr "Aún no implementado."
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:146
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:478
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:521
 msgid "Edit"
 msgstr "Editar"
 
@@ -30816,61 +31518,61 @@ msgstr "Borrar imagen"
 msgid "Artwork"
 msgstr "Ilustración"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:474
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:517
 msgid "Name of the Sky Culture"
 msgstr "Nombre de cultura estelar"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:476
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:519
 msgid "Add Constellation"
 msgstr "Añadir constelación"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:477
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:520
 msgid "Add Dark Constellation"
 msgstr "Añadir constelación oscura"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:480
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:523
 msgid "License of the Sky Culture"
 msgstr "Licencia de cultura estelar"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:481
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:524
 msgid "Export Sky Culture"
 msgstr "Exportar cultura estelar"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:483
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:526
 msgid "Please describe the Sky Culture"
 msgstr "Por favor describa la cultura estelar"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:484
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:527
 msgid "Mandatory fields are marked with an asterisk (*)."
 msgstr "Los campos obligatorios se marcan con un asterisco (*)."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:485
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:528
 msgid "General Information"
 msgstr "Información general"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:486
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:529
 msgid "Classification of the Sky Culture*"
 msgstr "Clasificación de cultura estelar*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:530
 msgid "Introduction:*"
 msgstr "Introducción:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:488
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:531
 msgid " A summary that could ideally be shown on a small screen entirely."
 msgstr ""
 " Un resumen que idealmente podría mostrarse en una pantalla pequeña por "
 "completo."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:489
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:532
 msgid "Description (What can the user see here?)"
 msgstr "Descripción (¿qué puede ver el usuario aquí?)"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:490
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:533
 msgid "Culture Description:*"
 msgstr "Descripción de la cultura:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:491
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:534
 msgid ""
 "Give a short introduction about the culture: time, location, circumstances "
 "of life. Please describe specifics of the source (book/clay "
@@ -30891,7 +31593,7 @@ msgstr ""
 "¿Existen conexiones con otras culturas? ¿Es esta versión una reducción "
 "didáctica o se deriva de otra fuente específica?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:493
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:536
 msgid ""
 "What special features did/does this culture use, what shall the user watch "
 "out for? Is it worthwhile to click a specific button rather than others - "
@@ -30912,30 +31614,30 @@ msgstr ""
 "(o simplemente usaron nombres de estrellas)?¿Usaron estrellas en absoluto o "
 "prefirieron nubes oscuras/brillantes de la Vía Láctea?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:494
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:537
 msgid "Moon & Sun:"
 msgstr "Luna y Sol:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:495
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:538
 msgid "How did they determine their calendar? Did they observe phases?"
 msgstr "¿Cómo determinaron su calendario? ¿Observaron fases?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:496
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:539
 msgid "Planets:"
 msgstr "Planetas:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:497
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:540
 msgid ""
 "Were the planets deified? What deities connect, what meaning do they have?"
 msgstr ""
 "¿Fueron deificados los planetas? ¿Qué deidades se conectan, qué significado "
 "tienen?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:498
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:541
 msgid "Zodiac/ Lunar System:"
 msgstr "Zodiaco/sistema lunar:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:499
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:542
 msgid ""
 "Did they have the (Bab.) zodiac system or any other division of the \"path "
 "of the Moon\"? If so, was it a (equal or unequal) division of the ecliptic "
@@ -30945,19 +31647,19 @@ msgstr ""
 "la Luna»? Si es así, ¿era una división (igual o desigual) de la eclíptica o "
 "de cualquier otro tipo?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:500
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:543
 msgid "Milky Way:"
 msgstr "Vía Láctea:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:501
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:544
 msgid "Was the Milky Way deified? What meaning did it have?"
 msgstr "¿Fue deificada la Vía Láctea? ¿Qué significado tuvo?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:502
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:545
 msgid "Other Celestial Objects:"
 msgstr "Otros objetos celestes:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:503
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:546
 msgid ""
 "What other celestial objects were significant? E.g what about shooting "
 "stars, aurorae? Did they observe stellar transients, e.g. supernovae, that "
@@ -30968,19 +31670,19 @@ msgstr ""
 "transitorios, por ejemplo, supernovas, que fueron visibles solo en un año "
 "específico?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:504
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:547
 msgid "Credits and References"
 msgstr "Créditos y referencias"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:505
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:548
 msgid "References:*"
 msgstr "Referencias:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:506
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:553
 msgid "Authors:*"
 msgstr "Autores:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:507
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:554
 msgid ""
 "Who are you and what is your background (native person, researcher, ...)? "
 "Ideally, please provide an email-address as well."
@@ -30988,11 +31690,11 @@ msgstr ""
 "¿Quién es usted y cuáles son sus antecedentes (persona nativa, investigador,"
 " ...)? Idealmente, proporcione también una dirección de correo electrónico."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:508
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:555
 msgid "About:*"
 msgstr "Acerca de:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:509
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:556
 msgid ""
 "How do you know about this Sky Culture? Is this contribution based on your "
 "own or other people's research? Is it based on interviews with Elders or "
@@ -31002,11 +31704,11 @@ msgstr ""
 "investigación o en la de otras personas? ¿Se basa en entrevistas con "
 "ancianos o en la lectura de textos antiguos, etc.?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:510
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:557
 msgid "Acknowledgements:"
 msgstr "Agradecimientos:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:511
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:558
 msgid ""
 "What acknowledgements would you like to make? E.g. to interviewed people, "
 "organizations, or resources that helped you?"
