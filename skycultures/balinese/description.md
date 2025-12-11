@@ -125,7 +125,7 @@ Tangis is tears of mourning person because a loved one died.
 
 ##### Elephantfish
 
-Gajahmina is an elephantfish. A sea-creature that have elephant head and fish body. It is a supranatural creature and helps the inhabitants. 
+Gajahmina is an elephantfish. A sea-creature that has elephant head and fish body. It is a supranatural creature and helps the inhabitants. 
 
 <img width="255" src="illustrations/descr_pics/Bu_Pa.png"/>
 
