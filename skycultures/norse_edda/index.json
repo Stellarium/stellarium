@@ -1,11 +1,13 @@
 {
     "classification": [
-        "Historical"
+        "historical"
     ],
     "constellations": [
         {
             "common_name": {
-                "english": "Bifrǫst"
+                "native": "Bifrǫst",
+				"english": "Bifröst", 
+				"ipa": "ˈbiv.rɔst"}
             },
             "id": "CON norse_(edda) 09",
             "lines": [
@@ -33,7 +35,7 @@
         },
         {
             "common_name": {
-                "english": "Heimdalls castle",
+                "english": "Heimdalls Castle",
                 "native": "Himinbjörg"
             },
             "id": "CON norse_(edda) 08",
@@ -85,7 +87,7 @@
 		
         {
             "common_name": {
-                "english": "Thor's chariot",
+                "english": "Thor's Chariot",
                 "native": "Þórs vagn"
             },
             "id": "CON norse_(edda) 02",
@@ -122,7 +124,7 @@
         },
         {
             "common_name": {
-                "english": "Freyja's chariot",
+                "english": "Freyja's Chariot",
                 "native": "Freyju vagn"
             },
             "id": "CON norse_(edda) 01",
@@ -159,7 +161,7 @@
         },
         {
             "common_name": {
-                "english": "Thiazi's eyes",
+                "english": "Thiazi's Eyes",
                 "native": "Þjázis augu"
             },
             "id": "CON norse_(edda) Thiaz",
@@ -174,7 +176,7 @@
 		
         {
             "common_name": {
-                "english": "jaw of the wolf",
+                "english": "Jaw of the Wolf",
                 "native": "Ulf's Keptr"
             },
             "id": "CON norse_(edda) Jaw",
@@ -232,7 +234,7 @@
         },
 		{
             "common_name": {
-                "english": "fishermen",
+                "english": "Fishermen",
                 "native": "Fiskikarlar"
             },
             "id": "CON norse_(edda) 03",
@@ -250,7 +252,7 @@
         
         {
             "common_name": {
-                "english": "ox's head",
+                "english": "Ox's Head",
                 "native": "Himinhrjóðr"
             },
             "id": "CON norse_(edda) Ox",
@@ -373,7 +375,7 @@
         },
         {
             "common_name": {
-                "english": "thor",
+                "english": "Thor",
                 "native": "Þórr"
             },
             "id": "CON norse_(edda) Thor",
@@ -456,7 +458,7 @@
 		
         {
             "common_name": {
-                "english": "Freyr's sickle",
+                "english": "Freyr's Sickle",
                 "native": "Freyjar sigð"
             },
             "id": "CON norse_(edda) Freyr",
@@ -477,7 +479,7 @@
         },
         {
             "common_name": {
-                "english": "Ván",
+                "english": "Van",
                 "native": "Ván"
             },
             "id": "CON norse_(edda) Ván",
@@ -591,7 +593,7 @@
         },
         {
             "common_name": {
-                "english": "Mimir's well",
+                "english": "Mimir's Well",
                 "native": "Mímisbrunnr"
             },
             "id": "CON norse_(edda) Mimir",
@@ -865,7 +867,7 @@
 		
         {
             "common_name": {
-                "english": "Aurwandill's toe",
+                "english": "Aurwandill's Toe",
                 "native": "Aurvandils tá"
             },
             "id": "CON norse_(edda) Toe",
@@ -901,3 +903,4 @@
     "fallback_to_international_names": false,
     "id": "norse_(edda)"
 }
+
