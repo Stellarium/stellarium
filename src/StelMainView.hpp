@@ -30,6 +30,7 @@ class QOpenGLDebugLogger;
 class QOpenGLDebugMessage;
 #endif
 #include "VecMath.hpp"
+#include "TopMost.hpp"
 #include "StelApp.hpp"
 
 class StelGLWidget;
@@ -45,6 +46,7 @@ class QSettings;
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
 class StelMainView : public QGraphicsView
 {
+	friend class StelGui;
 	friend class StelGuiItem;
 	friend class StelRootItem;
 	friend class StelGraphicsScene;
@@ -304,6 +306,7 @@ private slots:
 	void updateNightModeProperty(bool b);
 
 	void reloadShaders();
+	void fullScreenExclusive();
 
 private:
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
@@ -362,6 +365,7 @@ private:
 	//! The minimum desired time between frames, in milliseconds.
 	int minTimeBetweenFrames;
 	QTimer* fpsTimer;
+	TopMost *topMost=Q_NULLPTR;
 
 	//! A timer that resets the screensaver when CLI option --no-screensaver (or -F) is given.
 	QTimer* screensaverInhibitorTimer;
