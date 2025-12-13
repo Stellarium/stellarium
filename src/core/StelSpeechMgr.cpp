@@ -124,7 +124,7 @@ void StelSpeechMgr::say(const QString &narration) const
 {
 	qCDebug(Speech) << "StelSpeechMgr::say(): " << narration;
 #ifdef ENABLE_SPEECH
-	if (enabled())
+	if (enabled() && m_speech->voice().name().length()>0)
 		m_speech->say(narration);
 	else
 		qCCritical(Speech) << "Available Engines:" << QTextToSpeech::availableEngines();
@@ -135,7 +135,7 @@ void StelSpeechMgr::stop() const
 {
 	qCDebug(Speech) << "StelSpeechMgr::stop() ";
 #ifdef ENABLE_SPEECH
-	if (enabled())
+	if (enabled() && m_speech->voice().name().length()>0)
 	{
 		m_speech->stop(QTextToSpeech::BoundaryHint::Word);
 
