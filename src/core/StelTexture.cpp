@@ -177,11 +177,20 @@ StelTexture::GLData StelTexture::loadFromPath(const QString &path, const int dec
 	}
 }
 
-StelTexture::GLData StelTexture::loadFromData(const QByteArray& data, const int decimateBy)
+StelTexture::GLData StelTexture::loadFromData(const QByteArray& data, const QString& path, const int decimateBy)
 {
 	try
 	{
-		return imageToGLData(QImage::fromData(data), decimateBy);
+		auto data_ = data;
+		QBuffer buf(&data_);
+		QImageReader reader(&buf);
+		const auto img = reader.read();
+		if (img.isNull())
+		{
+			qCritical().noquote().nospace() << "Failed to read texture image "
+			                                << path << ": " << reader.errorString();
+		}
+		return imageToGLData(img, decimateBy);
 	}
 	catch(std::exception& ex)  //this catches out-of-memory errors from file conversion
 	{
@@ -301,8 +310,7 @@ void StelTexture::onNetworkReply()
 		if(data.isEmpty()) //prevent starting the loader when there is nothing to load
 			reportError(QString("Empty result received for URL: %1").arg(networkReply->url().toString()));
 		else
-			startAsyncLoader(static_cast<GLData(*)(const QByteArray&, const int)>(loadFromData),
-			                 data, loadParams.decimation);
+			startAsyncLoader(&StelTexture::loadFromData, data, fullPath, loadParams.decimation);
 	}
 	else
 		reportError(networkReply->errorString());
