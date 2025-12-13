@@ -212,7 +212,9 @@ public slots:
 	//! Get whether a pointer is to be drawn over selected object.
 	bool getFlagSelectedObjectPointer(void) { return objectPointerVisibility; }
 
-	//! Play a narration for the currently selected object
+	//! Play a narration for the currently selected object.
+	//! This is linked to a StelAction that can be assigned to a keyboard shortcut.
+	//! Calling this while speech output is active will stop speech output instead.
 	void narrate();
 
 signals:
