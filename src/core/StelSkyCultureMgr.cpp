@@ -44,8 +44,6 @@
 #include <QRegularExpression>
 #include <QMetaEnum>
 
-namespace
-{
 
 #if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 constexpr auto SkipEmptyParts = Qt::SkipEmptyParts;
@@ -53,7 +51,7 @@ constexpr auto SkipEmptyParts = Qt::SkipEmptyParts;
 constexpr auto SkipEmptyParts = QString::SkipEmptyParts;
 #endif
 
-void applyStyleToMarkdown(QString& string)
+void StelSkyCultureMgr::applyStyleToMarkdown(QString& string)
 {
 	static const auto pPattern = []{
 		// Locates any paragraph. This will make sure we get the smallest paragraphs. If
@@ -98,7 +96,7 @@ void applyStyleToMarkdown(QString& string)
 	} while(replaced);
 }
 
-QString markdownToHTML(QString input)
+QString StelSkyCultureMgr::markdownToHTML(QString input)
 {
 	const auto inputUTF8 = input.toStdString();
 
@@ -113,14 +111,12 @@ QString markdownToHTML(QString input)
 	return result;
 }
 
-QString convertReferenceLinks(QString text)
+QString StelSkyCultureMgr::convertReferenceLinks(QString text)
 {
 	static const QRegularExpression re(" ?\\[#([0-9]+)\\]", QRegularExpression::MultilineOption);
 	text.replace(re,
 	             "<sup><a href=\"#cite_\\1\">[\\1]</a></sup>");
 	return text;
-}
-
 }
 
 QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) const
@@ -665,7 +661,7 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
                                                         const qsizetype bodyStartPos, const qsizetype bodyEndPos,
                                                         const StelTranslator& trans)
 {
-	qDebug() << "=========convertMarkdownLevel2Section: " << sectionName;
+	//qDebug() << "=========convertMarkdownLevel2Section: " << sectionName;
 
 	auto textEng = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
 	static const QRegularExpression re("^\n*|\n*$");

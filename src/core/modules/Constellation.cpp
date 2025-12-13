@@ -24,6 +24,7 @@
 #include "StelModuleMgr.hpp"
 #include "NebulaMgr.hpp"
 
+#include "StelSpeechMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -353,8 +354,16 @@ void Constellation::setNarration(const QString &narration)
 QString Constellation::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
 	Q_UNUSED(flags)
-	qDebug() << "Constellation name " << getEnglishName() << "narration:" << narration;
-	return narration;
+	QString toBeSpoken=narration;
+	// Strip away markdown elements like underscores or stars.
+	static const QRegularExpression latin("_([^_]{0,50})_");
+	static const QRegularExpression star("\\*([^\\*]{0,50})\\*");
+	QString stripped=toBeSpoken.replace(latin, "\\1").replace(star, "\\1");
+
+	qCDebug(Speech) << "Constellation name" << getEnglishName() << "narration:" << stripped;
+
+	// Try to get a little break between title and story.
+	return getNameI18n() + ". . . " + stripped;
 }
 
 QString Constellation::getCultureLabel(StelObject::CulturalDisplayStyle style) const
@@ -576,6 +585,9 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
 	oss << getSolarLunarInfoString(core, flags);
+
+	if (flags&Extra && !narration.isEmpty())
+		oss << QString("%1: ").arg(qc_("Legend", "constellation origin")) << StelUtils::wrapText(StelSkyCultureMgr::markdownToHTML(narration));
 	postProcessInfoString(str, flags);
 
 	return str;
