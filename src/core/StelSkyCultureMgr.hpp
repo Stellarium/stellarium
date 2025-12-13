@@ -371,6 +371,15 @@ private:
 	//! Replace any detailed cultural label by the short label (from constellation ID)
 	//! This should be a short string, some skycultures still have numerical IDs here.
 	bool flagUseAbbreviatedNames;
+
+public:
+	//! Convert input in Markdown style to formatted HTML
+	static QString markdownToHTML(QString input);
+private:
+	//! Restyle a few style annotations
+	static void applyStyleToMarkdown(QString& string);
+	//! convert numerical citations from [#n] style to HTML superscript style
+	static QString convertReferenceLinks(QString text);
 };
 
 #endif // STELSKYCULTUREMGR_HPP
