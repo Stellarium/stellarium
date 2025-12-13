@@ -153,7 +153,8 @@ StelTexture::GLData StelTexture::loadFromPath(const QString &path, const int dec
 		if (img.isNull())
 		{
 			QImageReader::ImageReaderError error=imgReader.error();
-			qCritical() << "Error reading image file " << path << ":" << imgReader.errorString();
+			qCritical().noquote().nospace() << "Failed to read texture image "
+			                                << path << ": " << imgReader.errorString();
 
 			if (error==QImageReader::InvalidDataError)
 				qCritical() << "This may also indicate an out-of-memory error.";
