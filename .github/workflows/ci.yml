@@ -74,7 +74,9 @@ jobs:
                             qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
                             libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin \
                             libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev \
-                            libgps-dev libmd4c-dev libmd4c-html0-dev cmake gettext libgettextpo-dev libtidy-dev libunarr-dev
+                            libgps-dev libmd4c-dev libmd4c-html0-dev cmake gettext libgettextpo-dev libtidy-dev libunarr-dev \
+                            libqt6texttospeech6 qt6-speech-dev qt6-speech-speechd-plugin qt6-speech-flite-plugin \
+                            flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
       uses: actions/checkout@v5
@@ -117,7 +119,9 @@ jobs:
         sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins \
                             qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev \
                             libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev \
-                            zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev libmd4c-dev libmd4c-html0-dev
+                            zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev libmd4c-dev libmd4c-html0-dev \
+                            libqt6texttospeech6 qt6-speech-dev qt6-speech-speechd-plugin qt6-speech-flite-plugin \
+                            flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
       uses: actions/checkout@v5
@@ -296,7 +300,7 @@ jobs:
         target: 'desktop'
         cache: true
         arch: 'win64_msvc2022_64'
-        modules: 'qtcharts qtimageformats qtlocation qtmultimedia qtpositioning qtscxml qtsensors qtserialbus qtserialport qtvirtualkeyboard qtwebchannel qtwebengine qtwebsockets qtwebview debug_info qt5compat qtquicktimeline qtshadertools'
+        modules: 'qtcharts qtimageformats qtlocation qtmultimedia qtpositioning qtscxml qtsensors qtserialbus qtserialport qtvirtualkeyboard qtwebchannel qtwebengine qtwebsockets qtwebview debug_info qt5compat qtquicktimeline qtshadertools qtspeech'
 
     # Packages should be automatically downloaded using vcpkg through the toolchain
     - name: Configure CMake
