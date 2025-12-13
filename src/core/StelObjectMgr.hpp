@@ -168,6 +168,10 @@ public:
 	//! If obj is Q_NULLPTR, returns a 1-element map [["found", false]]
 	static QVariantMap getObjectInfo(const StelObjectP obj);
 
+	//! Return a QString of narrative information about the object (calls obj->getNarration()).
+	//! If obj is Q_NULLPTR, returns an empty string.
+	static QString getObjectNarration(const StelObjectP obj);
+
 	//! Return a list of enabled fields (custom info strings)
 	StelObject::InfoStringGroup getCustomInfoStrings();
 
@@ -176,7 +180,6 @@ public:
 	QStringList getExtraInfoStrings(const StelObject::InfoStringGroup& flags) const;
 
 public slots:
-
 	//! @note These functions were copied over from StelObject. Given that setExtraInfoString is non-const and some functions where these methods are useful are const, we can use the StelObjectMgr as "carrier object".
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
@@ -208,6 +211,11 @@ public slots:
 	}
 	//! Get whether a pointer is to be drawn over selected object.
 	bool getFlagSelectedObjectPointer(void) { return objectPointerVisibility; }
+
+	//! Play a narration for the currently selected object.
+	//! This is linked to a StelAction that can be assigned to a keyboard shortcut.
+	//! Calling this while speech output is active will stop speech output instead.
+	void narrate();
 
 signals:
 	//! Indicate that the selected StelObjects has changed.

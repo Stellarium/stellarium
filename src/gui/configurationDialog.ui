@@ -161,6 +161,17 @@
         </item>
         <item>
          <property name="text">
+          <string>Speech</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabTools.png</normalon>
+           <selectedon>:/graphicGui/tabTools-selected.png</selectedon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Scripts</string>
          </property>
          <property name="icon">
@@ -533,7 +544,7 @@
          </layout>
         </widget>
         <widget class="QWidget" name="page_Info">
-         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <layout class="QVBoxLayout" name="verticalLayout_Info">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -558,7 +569,7 @@
              </sizepolicy>
             </property>
             <property name="title">
-             <string>Selected object information</string>
+             <string>Selected object information for display</string>
             </property>
             <layout class="QGridLayout" name="gridLayoutSelectedObjInfo">
              <property name="leftMargin">
@@ -573,16 +584,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="4">
-              <widget class="QRadioButton" name="customSelectedInfoRadio">
-               <property name="toolTip">
-                <string>Display user customized information</string>
-               </property>
-               <property name="text">
-                <string comment="info group name">Customized</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QRadioButton" name="allSelectedInfoRadio">
                <property name="toolTip">
@@ -593,13 +594,13 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="3">
-              <widget class="QRadioButton" name="noSelectedInfoRadio">
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="defaultSelectedInfoRadio">
                <property name="toolTip">
-                <string>Display no information</string>
+                <string>Display a preconfigured set of information</string>
                </property>
                <property name="text">
-                <string comment="info group name">None</string>
+                <string comment="info group name">Default</string>
                </property>
               </widget>
              </item>
@@ -613,13 +614,23 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QRadioButton" name="defaultSelectedInfoRadio">
+             <item row="0" column="3">
+              <widget class="QRadioButton" name="noSelectedInfoRadio">
                <property name="toolTip">
-                <string>Display a preconfigured set of information</string>
+                <string>Display no information</string>
                </property>
                <property name="text">
-                <string comment="info group name">Default</string>
+                <string comment="info group name">None</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QRadioButton" name="customSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display user customized information</string>
+               </property>
+               <property name="text">
+                <string comment="info group name">Customized</string>
                </property>
               </widget>
              </item>
@@ -635,7 +646,7 @@
              </sizepolicy>
             </property>
             <property name="title">
-             <string>Displayed fields</string>
+             <string>Displayed fields/narrated items</string>
             </property>
             <layout class="QGridLayout" name="gridLayoutDisplayedFields">
              <property name="leftMargin">
@@ -650,200 +661,10 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="checkBoxHourAngle">
-               <property name="toolTip">
-                <string comment="hour angle">Equatorial coordinates, equinox of date</string>
-               </property>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxName">
                <property name="text">
-                <string>Hour angle/Declination</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="checkBoxEclipticCoordsOfDate">
-               <property name="toolTip">
-                <string>Ecliptic coordinates, equinox of date (only for Earth)</string>
-               </property>
-               <property name="text">
-                <string>Ecliptic coordinates (of date)</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="checkBoxRaDecJ2000">
-               <property name="toolTip">
-                <string>Equatorial coordinates, equinox of J2000.0</string>
-               </property>
-               <property name="text">
-                <string>Right ascension/Declination (J2000)</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="checkBoxAbsoluteMag">
-               <property name="text">
-                <string>Absolute magnitude</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QCheckBox" name="checkBoxSupergalacticCoordinates">
-               <property name="text">
-                <string>Supergalactic coordinates</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="checkBoxEclipticCoordsJ2000">
-               <property name="toolTip">
-                <string>Ecliptic coordinates, equinox J2000.0</string>
-               </property>
-               <property name="text">
-                <string>Ecliptic coordinates (J2000)</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="7" column="1">
-              <widget class="QCheckBox" name="checkBoxDistance">
-               <property name="text">
-                <string>Distance</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="checkBoxVelocity">
-               <property name="text">
-                <string>Velocity</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="checkBoxRaDecOfDate">
-               <property name="toolTip">
-                <string comment="right ascension">Equatorial coordinates, equinox of date</string>
-               </property>
-               <property name="text">
-                <string>Right ascension/Declination (of date)</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="8" column="1">
-              <widget class="QCheckBox" name="checkBoxSiderealTime">
-               <property name="text">
-                <string>Sidereal time</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="checkBoxProperMotion">
-               <property name="toolTip">
                 <string/>
-               </property>
-               <property name="text">
-                <string>Proper Motion</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QCheckBox" name="checkBoxGalacticCoordinates">
-               <property name="text">
-                <string>Galactic coordinates</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="checkBoxType">
-               <property name="toolTip">
-                <string>The type of the object (star, planet, etc.)</string>
-               </property>
-               <property name="text">
-                <string>Type</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="12" column="0">
-              <widget class="QCheckBox" name="checkBoxOtherCoords">
-               <property name="text">
-                <string>Additional coordinates (from plugins)</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="11" column="1">
-              <widget class="QCheckBox" name="checkBoxRTSTime">
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="text">
-                <string>Risings, Transits, and Settings</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="9" column="1">
-              <widget class="QCheckBox" name="checkBoxConstellation">
-               <property name="toolTip">
-                <string>3-letter IAU constellation abbreviation</string>
-               </property>
-               <property name="text">
-                <string>Constellation</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="checkBoxSize">
-               <property name="toolTip">
-                <string>Angular or physical size</string>
-               </property>
-               <property name="text">
-                <string>Size</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -851,85 +672,663 @@
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QCheckBox" name="checkBoxVisualMag">
-               <property name="text">
-                <string>Visual magnitude</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
+              <widget class="QCheckBox" name="checkBoxName_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
                </attribute>
-              </widget>
+	      </widget>
              </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBoxAltAz">
-               <property name="toolTip">
-                <string>Horizontal coordinates</string>
-               </property>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_infoName">
                <property name="text">
-                <string>Azimuth/Altitude</string>
+                <string>Name</string>
                </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
               </widget>
              </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="checkBoxCatalogNumbers">
                <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBoxCatalogNumbers_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="label_infoCat">
+               <property name="text">
                 <string>Catalog number(s)</string>
                </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxName">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxRaDecJ2000">
+               <property name="toolTip">
+                <string>Equatorial coordinates, equinox of J2000.0</string>
+               </property>
                <property name="text">
-                <string>Name</string>
+                <string/>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
-             <item row="13" column="0">
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="checkBoxRaDecJ2000_Narrate">
+               <property name="toolTip">
+                <string>Equatorial coordinates, equinox of J2000.0</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLabel" name="label_infoRaDec2000">
+               <property name="text">
+                <string>Right ascension/Declination (J2000)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBoxRaDecOfDate">
+               <property name="toolTip">
+                <string comment="right ascension">Equatorial coordinates, equinox of date</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="checkBoxRaDecOfDate_Narrate">
+               <property name="toolTip">
+                <string comment="right ascension">Equatorial coordinates, equinox of date</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QLabel" name="label_infoRaDec">
+               <property name="text">
+                <string>Right ascension/Declination (of date)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxHourAngle">
+               <property name="toolTip">
+                <string comment="hour angle">Equatorial coordinates, equinox of date</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBoxHourAngle_Narrate">
+               <property name="toolTip">
+                <string comment="hour angle">Equatorial coordinates, equinox of date</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QLabel" name="label_infoHADec">
+               <property name="text">
+                <string>Hour angle/Declination</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBoxAltAz">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="checkBoxAltAz_Narrate">
+               <property name="toolTip">
+                <string>Horizontal coordinates</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="5" column="2">
+              <widget class="QLabel" name="label_infoAltAz">
+               <property name="text">
+                <string>Azimuth/Altitude</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxEclipticCoordsJ2000">
+               <property name="toolTip">
+                <string>Ecliptic coordinates, equinox J2000.0</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxEclipticCoordsJ2000_Narrate">
+               <property name="toolTip">
+                <string>Ecliptic coordinates, equinox J2000.0</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="6" column="2">
+              <widget class="QLabel" name="label_infoEcl2000">
+               <property name="text">
+                <string>Ecliptic coordinates (J2000)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBoxEclipticCoordsOfDate">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="checkBoxEclipticCoordsOfDate_Narrate">
+               <property name="toolTip">
+                <string>Ecliptic coordinates, equinox of date (only for Earth)</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="7" column="2">
+              <widget class="QLabel" name="label_infoEcl">
+               <property name="text">
+                <string>Ecliptic coordinates (of date)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="checkBoxGalacticCoordinates">
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QCheckBox" name="checkBoxGalacticCoordinates_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="8" column="2">
+              <widget class="QLabel" name="label_infoGalCoords">
+               <property name="text">
+                <string>Galactic coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QCheckBox" name="checkBoxSupergalacticCoordinates">
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QCheckBox" name="checkBoxSupergalacticCoordinates_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="9" column="2">
+              <widget class="QLabel" name="label_infoSGalCoords">
+               <property name="text">
+                <string>Supergalactic coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QCheckBox" name="checkBoxOtherCoords">
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="10" column="1">
+              <widget class="QCheckBox" name="checkBoxOtherCoords_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="10" column="2">
+              <widget class="QLabel" name="label_infoOtherCoords">
+               <property name="text">
+                <string>Additional coordinates (from plugins)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
               <widget class="QCheckBox" name="checkBoxElongation">
                <property name="toolTip">
                 <string>Elongation and phase angle</string>
                </property>
                <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QCheckBox" name="checkBoxElongation_Narrate">
+               <property name="toolTip">
+                <string>Elongation and phase angle</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="11" column="2">
+              <widget class="QLabel" name="label_infoElongation">
+               <property name="text">
                 <string>Elongation</string>
                </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <spacer name="horizontalSpacer_info">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>15</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="0" column="4">
+              <widget class="QCheckBox" name="checkBoxVisualMag">
+               <property name="text">
+                <string/>
+               </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
-             <item row="13" column="1">
-              <widget class="QCheckBox" name="checkBoxExtra">
+             <item row="0" column="5">
+              <widget class="QCheckBox" name="checkBoxVisualMag_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="0" column="6">
+              <widget class="QLabel" name="label_infoVisualMag">
+               <property name="text">
+                <string>Visual magnitude</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QCheckBox" name="checkBoxAbsoluteMag">
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="5">
+              <widget class="QCheckBox" name="checkBoxAbsoluteMag_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="1" column="6">
+              <widget class="QLabel" name="label_infoAbsoluteMag">
+               <property name="text">
+                <string>Absolute magnitude</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="4">
+              <widget class="QCheckBox" name="checkBoxType">
                <property name="toolTip">
-                <string>Spectral class, nebula type, etc.</string>
+                <string>The type of the object (star, planet, etc.)</string>
                </property>
                <property name="text">
-                <string>Additional information</string>
+                <string/>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
-             <item row="12" column="1">
+             <item row="2" column="5">
+              <widget class="QCheckBox" name="checkBoxType_Narrate">
+               <property name="toolTip">
+                <string>The type of the object (star, planet, etc.)</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="2" column="6">
+              <widget class="QLabel" name="label_infoType">
+               <property name="text">
+                <string>Type</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="4">
+              <widget class="QCheckBox" name="checkBoxSize">
+               <property name="toolTip">
+                <string>Angular or physical size</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="3" column="5">
+              <widget class="QCheckBox" name="checkBoxSize_Narrate">
+               <property name="toolTip">
+                <string>Angular or physical size</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="3" column="6">
+              <widget class="QLabel" name="label_infoSize">
+               <property name="text">
+                <string>Size</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="4">
+              <widget class="QCheckBox" name="checkBoxVelocity">
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="5">
+              <widget class="QCheckBox" name="checkBoxVelocity_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="4" column="6">
+              <widget class="QLabel" name="label_infoVelocity">
+               <property name="text">
+                <string>Velocity</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="4">
+              <widget class="QCheckBox" name="checkBoxProperMotion">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="5">
+              <widget class="QCheckBox" name="checkBoxProperMotion_Narrate">
+               <property name="toolTip">
+                <string/>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="5" column="6">
+              <widget class="QLabel" name="label_infoProperMotion">
+               <property name="text">
+                <string>Proper Motion</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="4">
+              <widget class="QCheckBox" name="checkBoxDistance">
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="5">
+              <widget class="QCheckBox" name="checkBoxDistance_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="6" column="6">
+              <widget class="QLabel" name="label_infoDistance">
+               <property name="text">
+                <string>Distance</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="4">
+              <widget class="QCheckBox" name="checkBoxSiderealTime">
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="5">
+              <widget class="QCheckBox" name="checkBoxSiderealTime_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="7" column="6">
+              <widget class="QLabel" name="label_infoSiderealTime">
+               <property name="text">
+                <string>Sidereal time</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="4">
+              <widget class="QCheckBox" name="checkBoxConstellation">
+               <property name="toolTip">
+                <string>3-letter IAU constellation abbreviation</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="8" column="5">
+              <widget class="QCheckBox" name="checkBoxConstellation_Narrate">
+               <property name="toolTip">
+                <string>Voice output of constellation</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="8" column="6">
+              <widget class="QLabel" name="label_infoConstellation">
+               <property name="text">
+                <string>Constellation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="4">
+              <widget class="QCheckBox" name="checkBoxRTSTime">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="9" column="5">
+              <widget class="QCheckBox" name="checkBoxRTSTime_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="9" column="6">
+              <widget class="QLabel" name="label_infoRTS">
+               <property name="text">
+                <string>Risings, Transits, and Settings</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="4">
               <widget class="QCheckBox" name="checkBoxSolarLunarPosition">
                <property name="toolTip">
                 <string>Show Solar and Lunar positions if observed from Earth</string>
                </property>
                <property name="text">
-                <string>Solar and Lunar position</string>
+                <string/>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
+              </widget>
+             </item>
+             <item row="10" column="5">
+              <widget class="QCheckBox" name="checkBoxSolarLunarPosition_Narrate">
+               <property name="toolTip">
+                <string>Voice output of Solar and Lunar positions if observed from Earth</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="10" column="6">
+              <widget class="QLabel" name="label_infoSolarLunarPosition">
+               <property name="text">
+                <string>Solar and Lunar position</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="4">
+              <widget class="QCheckBox" name="checkBoxExtra">
+               <property name="toolTip">
+                <string>Spectral class, nebula type, etc.</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="11" column="5">
+              <widget class="QCheckBox" name="checkBoxExtra_Narrate">
+               <property name="toolTip">
+                <string>Spectral class, nebula type, etc.</string>
+               </property>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
+             </item>
+             <item row="11" column="6">
+              <widget class="QLabel" name="label_infoExtra">
+               <property name="text">
+                <string>Additional information</string>
+               </property>
               </widget>
              </item>
             </layout>
@@ -2565,6 +2964,222 @@
           </item>
          </layout>
         </widget>
+	<widget class="QWidget" name="page_Speech">
+         <layout class="QVBoxLayout" name="verticalLayout_Narration">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QGroupBox" name="groupBox_Narration">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="title">
+             <string>Speech Output</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayoutSpeechSettings">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_TestText">
+               <property name="text">
+                <string>Test text:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" colspan="5">
+              <widget class="QPlainTextEdit" name="speechTextEdit"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_engine">
+               <property name="text">
+                <string>Speech Engine:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="comboBox_Engine"/>
+             </item>
+
+		<item row="1" column="4">
+                  <widget class="QPushButton" name="pushButton_SpeechSay">
+                   <property name="toolTip">
+                    <string>Emit speech synthesis of text from text box</string>
+                   </property>
+                   <property name="text">
+                    <string>Say</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtStart.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="5">
+                  <widget class="QPushButton" name="pushButton_SpeechStop">
+                   <property name="toolTip">
+                    <string>Stop a running speech</string>
+                   </property>
+                   <property name="text">
+                    <string>Stop</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtStop.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+
+
+
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_Voice">
+               <property name="text">
+                <string>Voice:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" colspan="3">
+              <widget class="QComboBox" name="comboBox_Voice">
+               <property name="toolTip">
+                <string>Voice in program language.</string>
+               </property>
+               <property name="maxVisibleItems">
+                <number>7</number>
+               </property>
+              </widget>
+             </item>
+	     
+
+	     
+	     
+	     
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_Pitch">
+               <property name="text">
+                <string>Pitch:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QDoubleSpinBox" name="spinBox_Pitch">
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+
+               <property name="minimum">
+                <double>-1.0</double>
+               </property>
+               <property name="maximum">
+                <double>1.0</double>
+               </property>
+               <property name="singleStep">
+                    <double>0.1</double>
+                   </property>
+                   <property name="value">
+                    <double>0.0</double>
+                   </property>
+              </widget>
+             </item>
+
+             <item row="3" column="2">
+              <widget class="QLabel" name="label_Rate">
+               <property name="text">
+                <string>Rate:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="3">
+              <widget class="QDoubleSpinBox" name="spinBox_Rate">
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+
+               <property name="minimum">
+                <double>-1.0</double>
+               </property>
+               <property name="maximum">
+                <double>1.0</double>
+               </property>
+               <property name="singleStep">
+                    <double>0.1</double>
+                   </property>
+                   <property name="value">
+                    <double>0.0</double>
+                   </property>
+              </widget>
+             </item>
+
+
+             <item row="3" column="4">
+              <widget class="QLabel" name="label_Volume">
+               <property name="text">
+                <string>Volume:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="5">
+              <widget class="QDoubleSpinBox" name="spinBox_Volume">
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+
+               <property name="minimum">
+                <double>0.0</double>
+               </property>
+               <property name="maximum">
+                <double>1.0</double>
+               </property>
+               <property name="singleStep">
+                    <double>0.1</double>
+                   </property>
+                   <property name="value">
+                    <double>0.0</double>
+                   </property>
+              </widget>
+             </item>
+	     
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
         <widget class="QWidget" name="page_Scripts">
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <property name="spacing">
@@ -2930,6 +3545,11 @@
  </connections>
  <buttongroups>
   <buttongroup name="buttonGroupDisplayedFields">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="buttonGroupNarrateFields">
    <property name="exclusive">
     <bool>false</bool>
    </property>

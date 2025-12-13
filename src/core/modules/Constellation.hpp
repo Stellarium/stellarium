@@ -56,7 +56,8 @@ private:
 	Constellation();
 	~Constellation() override;
 
-	// StelObject method to override
+	// StelObject methods to override
+public:
 	//! Get a string with data about the Constellation.
 	//! Constellations support the following InfoStringGroup flags:
 	//! - Name
@@ -119,11 +120,15 @@ private:
 	QString getNamePronounce() const override {return (culturalName.pronounceI18n.isEmpty() ? culturalName.native : culturalName.pronounceI18n);}
 	//! Get the short name for the Constellation (returns the translated version of abbreviation).
 	QString getShortName() const {return abbreviationI18n;}
-public:
+
 	//! Combine screen label from various components, depending on settings in SkyCultureMgr
 	QString getScreenLabel() const override;
 	//! Combine InfoString label from various components, depending on settings in SkyCultureMgr
 	QString getInfoLabel() const override;
+	//! set narration text. narration may contain Markdown syntax.
+	void setNarration(const QString &narration);
+	//! retrieve narration text, i.e. the text from description.md. @param flags is ignored.
+	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
 private:
 	//! Underlying worker
 	QString getCultureLabel(StelObject::CulturalDisplayStyle style) const;
@@ -204,6 +209,8 @@ private:
 	QString abbreviationI18n;
 	//! The context for English name of constellation (used for correct translation via gettext)
 	QString context;
+	//! narration text from the respective section in description.md
+	QString narration;
 	//! Direction vectors pointing on constellation name drawing position (J2000.0 coordinates)
 	//! Usually a single position is computed from averaging star positions forming the constellation, but we can override with an entry in index.json,
 	//! and even give more positions (e.g. for long or split-up constellations like Serpens.

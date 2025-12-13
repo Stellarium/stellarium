@@ -142,7 +142,9 @@ void ConstellationMgr::init()
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	// Loading is a ping-pong. First we set the new skyculture, this triggers loading of constellation descriptions, but then we feed the constellation narration texts.
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &ConstellationMgr::updateSkyCulture);
+	connect(this, &ConstellationMgr::hasUpdatedSkyCulture, &app->getSkyCultureMgr(), &StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Constellation_Lines", displayGroup, N_("Constellation lines"), "linesDisplayed", "C");
@@ -211,6 +213,7 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 			i++;
 		}
 	}
+	emit hasUpdatedSkyCulture();
 }
 
 void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)
@@ -840,6 +843,98 @@ void ConstellationMgr::updateI18n()
 		zodiac->updateI18n();
 	if (lunarSystem)
 		lunarSystem->updateI18n();
+
+	// Update the IAU name map of full names which we need for narration.
+	iauConstellationNames={
+		{ "And", qc_("Andromeda"          , "IAU constellation name") },
+		{ "Ant", qc_("Antlia"             , "IAU constellation name") },
+		{ "Aps", qc_("Apus"               , "IAU constellation name") },
+		{ "Aql", qc_("Aquila"             , "IAU constellation name") },
+		{ "Aqr", qc_("Aquarius"           , "IAU constellation name") },
+		{ "Ara", qc_("Ara"                , "IAU constellation name") },
+		{ "Ari", qc_("Aries"              , "IAU constellation name") },
+		{ "Aur", qc_("Auriga"             , "IAU constellation name") },
+		{ "Boo", qc_("Bootes"             , "IAU constellation name") },
+		{ "CMa", qc_("Canis Major"        , "IAU constellation name") },
+		{ "CMi", qc_("Canis Minor"        , "IAU constellation name") },
+		{ "Cae", qc_("Caelum"             , "IAU constellation name") },
+		{ "Cam", qc_("Camelopardalis"     , "IAU constellation name") },
+		{ "Cap", qc_("Capricornus"        , "IAU constellation name") },
+		{ "Car", qc_("Carina"             , "IAU constellation name") },
+		{ "Cas", qc_("Cassiopeia"         , "IAU constellation name") },
+		{ "Cen", qc_("Centaurus"          , "IAU constellation name") },
+		{ "Cep", qc_("Cepheus"            , "IAU constellation name") },
+		{ "Cet", qc_("Cetus"              , "IAU constellation name") },
+		{ "Cha", qc_("Chamaeleon"         , "IAU constellation name") },
+		{ "Cir", qc_("Circinus"           , "IAU constellation name") },
+		{ "Cnc", qc_("Cancer"             , "IAU constellation name") },
+		{ "Col", qc_("Columba"            , "IAU constellation name") },
+		{ "Com", qc_("Coma Berenices"     , "IAU constellation name") },
+		{ "CrA", qc_("Corona Australis"   , "IAU constellation name") },
+		{ "CrB", qc_("Corona Borealis"    , "IAU constellation name") },
+		{ "Crt", qc_("Crater"             , "IAU constellation name") },
+		{ "Cru", qc_("Crux"               , "IAU constellation name") },
+		{ "Crv", qc_("Corvus"             , "IAU constellation name") },
+		{ "Cvn", qc_("Canes Venatici"     , "IAU constellation name") },
+		{ "Cyg", qc_("Cygnus"             , "IAU constellation name") },
+		{ "Del", qc_("Delphinus"          , "IAU constellation name") },
+		{ "Dor", qc_("Dorado"             , "IAU constellation name") },
+		{ "Dra", qc_("Draco"              , "IAU constellation name") },
+		{ "Equ", qc_("Equuleus"           , "IAU constellation name") },
+		{ "Eri", qc_("Eridanus"           , "IAU constellation name") },
+		{ "For", qc_("Fornax"             , "IAU constellation name") },
+		{ "Gem", qc_("Gemini"             , "IAU constellation name") },
+		{ "Gru", qc_("Grus"               , "IAU constellation name") },
+		{ "Her", qc_("Hercules"           , "IAU constellation name") },
+		{ "Hor", qc_("Horologium"         , "IAU constellation name") },
+		{ "Hya", qc_("Hydra"              , "IAU constellation name") },
+		{ "Hyi", qc_("Hydrus"             , "IAU constellation name") },
+		{ "Ind", qc_("Indus"              , "IAU constellation name") },
+		{ "LMi", qc_("Leo Minor"          , "IAU constellation name") },
+		{ "Lac", qc_("Lacerta"            , "IAU constellation name") },
+		{ "Leo", qc_("Leo"                , "IAU constellation name") },
+		{ "Lep", qc_("Lepus"              , "IAU constellation name") },
+		{ "Lib", qc_("Libra"              , "IAU constellation name") },
+		{ "Lup", qc_("Lupus"              , "IAU constellation name") },
+		{ "Lyn", qc_("Lynx"               , "IAU constellation name") },
+		{ "Lyr", qc_("Lyra"               , "IAU constellation name") },
+		{ "Men", qc_("Mensa"              , "IAU constellation name") },
+		{ "Mic", qc_("Microscopium"       , "IAU constellation name") },
+		{ "Mon", qc_("Monoceros"          , "IAU constellation name") },
+		{ "Mus", qc_("Musca"              , "IAU constellation name") },
+		{ "Nor", qc_("Norma"              , "IAU constellation name") },
+		{ "Oct", qc_("Octans"             , "IAU constellation name") },
+		{ "Oph", qc_("Ophiuchus"          , "IAU constellation name") },
+		{ "Ori", qc_("Orion"              , "IAU constellation name") },
+		{ "Pav", qc_("Pavo"               , "IAU constellation name") },
+		{ "Peg", qc_("Pegasus"            , "IAU constellation name") },
+		{ "Per", qc_("Perseus"            , "IAU constellation name") },
+		{ "Phe", qc_("Phoenix"            , "IAU constellation name") },
+		{ "Pic", qc_("Pictor"             , "IAU constellation name") },
+		{ "PsA", qc_("Piscis Austrinus"   , "IAU constellation name") },
+		{ "Psc", qc_("Pisces"             , "IAU constellation name") },
+		{ "Pup", qc_("Puppis"             , "IAU constellation name") },
+		{ "Pyx", qc_("Pyxis"              , "IAU constellation name") },
+		{ "Ret", qc_("Reticulum"          , "IAU constellation name") },
+		{ "Scl", qc_("Sculptor"           , "IAU constellation name") },
+		{ "Sco", qc_("Scorpius"           , "IAU constellation name") },
+		{ "Sct", qc_("Scutum"             , "IAU constellation name") },
+		{ "Ser", qc_("Serpens"            , "IAU constellation name") },
+		{ "Sex", qc_("Sextans"            , "IAU constellation name") },
+		{ "Sge", qc_("Sagitta"            , "IAU constellation name") },
+		{ "Sgr", qc_("Sagittarius"        , "IAU constellation name") },
+		{ "Tau", qc_("Taurus"             , "IAU constellation name") },
+		{ "Tel", qc_("Telescopium"        , "IAU constellation name") },
+		{ "Tra", qc_("Triangulum Australe", "IAU constellation name") },
+		{ "Tri", qc_("Triangulum"         , "IAU constellation name") },
+		{ "Tuc", qc_("Tucana"             , "IAU constellation name") },
+		{ "UMa", qc_("Ursa Major"         , "IAU constellation name") },
+		{ "UMi", qc_("Ursa Minor"         , "IAU constellation name") },
+		{ "Vel", qc_("Vela"               , "IAU constellation name") },
+		{ "Vir", qc_("Virgo"              , "IAU constellation name") },
+		{ "Vol", qc_("Volans"             , "IAU constellation name") },
+		{ "Vul", qc_("Vulpecula"          , "IAU constellation name") }
+	};
 }
 
 // update faders
@@ -1678,18 +1773,18 @@ QString ConstellationMgr::getLunarSystemName() const
 		return QString();
 }
 //! Return longitude in the culture's zodiacal longitudes
-QString ConstellationMgr::getZodiacCoordinate(Vec3d eqNow) const
+QString ConstellationMgr::getZodiacCoordinate(Vec3d eqNow, bool narration) const
 {
 	if (zodiac)
-		return zodiac->getLongitudeCoordinate(eqNow);
+		return zodiac->getLongitudeCoordinate(eqNow, narration);
 	else
 		return QString();
 }
 //! Return lunar station in the culture's Lunar system
-QString ConstellationMgr::getLunarSystemCoordinate(Vec3d eqNow) const
+QString ConstellationMgr::getLunarSystemCoordinate(Vec3d eqNow, bool narration) const
 {
 	if (lunarSystem)
-		return lunarSystem->getLongitudeCoordinate(eqNow);
+		return lunarSystem->getLongitudeCoordinate(eqNow, narration);
 	else
 		return QString();
 }
@@ -1984,4 +2079,10 @@ void ConstellationMgr::recreateHulls()
 {
 	for (auto* constellation : std::as_const(constellations))
 		constellation->makeConvexHull();
+}
+
+QMap<QString, QString> ConstellationMgr::iauConstellationNames; //!< maps abbreviation to full (translated) name
+QString ConstellationMgr::getIAUconstellationName(const QString &cst)
+{
+	return iauConstellationNames.value(cst);
 }

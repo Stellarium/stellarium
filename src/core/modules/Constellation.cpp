@@ -345,6 +345,18 @@ QString Constellation::getInfoLabel() const
 	return getCultureLabel(scMgr->getInfoLabelStyle());
 }
 
+void Constellation::setNarration(const QString &narration)
+{
+	this->narration=narration;
+}
+
+QString Constellation::getNarration(const StelCore *core, const InfoStringGroup &flags) const
+{
+	Q_UNUSED(flags)
+	qDebug() << "Constellation name " << getEnglishName() << "narration:" << narration;
+	return narration;
+}
+
 QString Constellation::getCultureLabel(StelObject::CulturalDisplayStyle style) const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
@@ -564,6 +576,9 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
 	oss << getSolarLunarInfoString(core, flags);
+
+	if (flags&Extra && !narration.isEmpty())
+		oss << QString("%1: ").arg(qc_("Legend", "constellation origin")) << StelUtils::wrapText(StelSkyCultureMgr::markdownToHTML(narration));
 	postProcessInfoString(str, flags);
 
 	return str;
