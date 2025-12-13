@@ -736,13 +736,20 @@ void StelObjectMgr::removeExtraInfoStrings(const StelObject::InfoStringGroup& fl
 
 void StelObjectMgr::narrate()
 {
+#ifdef ENABLE_SPEECH
 	qDebug() << "Narration...";
 	static const StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
 	StelCore*core=StelApp::getInstance().getCore();
 	if (lastSelectedObject && speechMgr->enabled())
 	{
-		QString narration=lastSelectedObject->getNarration(core, speechMgr->getNarrationTextFilters());
-		//qDebug() << "Narration:" << narration;
-		speechMgr->say(narration);
+		if (speechMgr->getState()==QTextToSpeech::Speaking)
+			speechMgr->stop();
+		else
+		{
+			QString narration=lastSelectedObject->getNarration(core, speechMgr->getNarrationTextFilters());
+			//qDebug() << "Narration:" << narration;
+			speechMgr->say(narration);
+		}
 	}
+#endif
 }
