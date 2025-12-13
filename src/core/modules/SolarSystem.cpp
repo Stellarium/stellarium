@@ -742,7 +742,7 @@ unsigned char SolarSystem::BvToColorIndex(double bV)
 bool SolarSystem::loadPlanets(const QString& filePath)
 {
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
-	qInfo().noquote() << "Loading from:"  << filePath;
+	qInfo().noquote() << "Loading from:"  << QDir::toNativeSeparators(filePath);
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
@@ -1033,7 +1033,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if (coordFuncName==L1S("kepler_orbit") || coordFuncName==L1S("comet_orbit") || coordFuncName==L1S("ell_orbit")) // ell_orbit used for planet moons. TBD in V1.0: remove non-kepler_orbit!
 		{
 			if (coordFuncName!=L1S("kepler_orbit"))
-				qDebug() << "Old-fashioned entry" << coordFuncName << "found. Please delete line from " << filePath << "section" << secname;
+				qDebug().noquote().nospace() << "Old-fashioned entry " << coordFuncName << " found. Please delete line from \"" << QDir::toNativeSeparators(filePath) << "\" section " << secname;
 			// ell_orbit was used for planet moons, comet_orbit for minor bodies. The only difference is that pericenter distance for moons is given in km, not AU.
 			// Read the orbital elements			
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity", 0.0).toDouble();
@@ -1500,7 +1500,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	if (readOk==0)
 		qWarning().noquote() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
 	else
-		qInfo().noquote() << "Loaded" << readOk << "Solar System bodies from " << filePath;
+		qInfo().noquote() << "Loaded" << readOk << "Solar System bodies from " << QDir::toNativeSeparators(filePath);
 	qInfo().noquote() << "Solar System now has" << systemPlanets.count() << "entries.";
 	return readOk>0;
 }
