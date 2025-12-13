@@ -302,6 +302,7 @@ void TelescopeControl::draw(StelCore* core)
 	reticleTexture->bind();
 	for (const auto& telescope : std::as_const(telescopeClients))
 	{
+		// FIXME: This seems to flood IP telescopes with excessive network traffic.
 		if (telescope->isConnected() && telescope->hasKnownPosition())
 		{
 			Vec3f XY;
