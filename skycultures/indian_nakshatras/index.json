@@ -1,7 +1,38 @@
 {
-    "classification": [
-        "Historical"
-    ],
+    "classification": ["historical"],
+     "lunar_system":  { "name": { "native": "नक्षत्र-चक्रम्", "pronounce": "Naksatra", "english": "Nakshatras"},
+	"partitions": [ 27, 4],
+	"extent": 5,
+	"context": "indian lunar mansion",
+	"link": { "star": 65474, "offset": 180},
+	"names": [ { "symbol":  "१", "native": "अश्विनी", "pronounce": "Aśvinī",    "english": "Physician to the Gods"},
+			 { "symbol":  "२", "native": "भरणी", "pronounce": "Bharaṇī",    "english": "Bearer"},
+			 { "symbol":  "३", "native": "कृत्तिकाः", "pronounce": "Kr̥ttikā",    "english": "Pleiades"},
+			 { "symbol":  "४", "native": "रोहिणी", "pronounce": "Rohiṇī",     "english": "Red"},
+			 { "symbol":  "५", "native": "मृगशिराः", "pronounce": "Mr̥gaśiras", "english": "Deer's Head"},
+			 { "symbol":  "६", "native": "आर्द्रा", "pronounce": "Ārdrā",      "english": "Wet"},
+			 { "symbol":  "७", "native": "पुनर्वसू", "pronounce": "Punarvasū",  "english": "Two Restorers of Goods"},
+			 { "symbol":  "८", "native": "पुष्यम्", "pronounce": "Puśya",    "english": "Nourisher"},
+			 { "symbol":  "९", "native": "आश्लेषा", "pronounce": "Āshleshā",   "english": "Embrace"},
+			 { "symbol": "१०", "native": "मघाः", "pronounce": "Maghā",     "english": "Bountiful"},
+			 { "symbol": "११", "native": "पूर्वफाल्गुनी", "pronounce": "Pūrva phālgunī", "english": "Former Fruitful"},
+			 { "symbol": "१२", "native": "उत्तरफाल्गुनी", "pronounce": "Uttara phālgunī", "english": "Latter Fruitful"},
+			 { "symbol": "१३", "native": "हस्तः", "pronounce": "Hasta",     "english": "Hand"},
+			 { "symbol": "१४", "native": "चित्रा", "pronounce": "Chitrā",    "english": "Bright One"},
+			 { "symbol": "१५", "native": "स्वाती", "pronounce": "Svātī",     "english": "Self mover"},
+			 { "symbol": "१६", "native": "विशाखे", "pronounce": "Viśākhā",   "english": "Forked, having branches"},
+			 { "symbol": "१७", "native": "अनुराधाः", "pronounce": "Anurādhā",    "english": "Following rādhā"},
+			 { "symbol": "१८", "native": "ज्येष्ठा", "pronounce": "Jyeṣṭhā",   "english": "Eldest, most excellent"},
+			 { "symbol": "१९", "native": "मूलम्", "pronounce": "Mūla",       "english": "Root"},
+			 { "symbol": "२०", "native": "पूर्वाषाढा","pronounce": "Purva Ashadha",  "english": "First Invincible"},
+			 { "symbol": "२१", "native": "उत्तराषाढा", "pronounce": "Uttarāṣāḍhā", "english": "Later Invincible"},
+			 { "symbol": "२२", "native": "श्रवणः", "pronounce": "Śravaṇa",       "english": "Ear"},
+			 { "symbol": "२३", "native": "श्रविष्ठाः", "pronounce": "Śraviṣṭhā", "english": "Most Famous"},
+			 { "symbol": "२४", "native": "शतभिषक्", "pronounce": "Śatabhiṣak", "english": "Requiring a hundred Physicians"},
+			 { "symbol": "२५", "native": "पूर्वप्रोष्ठपदाः", "pronounce": "Pūrva-bhādrapadā",  "english": "Prior Blessed Feet"},
+			 { "symbol": "२६", "native": "उत्तरप्रोष्ठपदाः", "pronounce": "Uttara-bhādrapadā", "english": "Latter Blessed Feet"},
+			 { "symbol": "२७", "native": "रेवती", "pronounce": "Revatī", "english": "Wealthy"},
+			 { "symbol": "Abh (Unused)", "native": "अभिजित्", "pronounce": "Abhijit",           "english": "Invincible"}]},
     "constellations": [
         {
             "common_name": {
@@ -1596,4 +1627,5 @@
     ],
     "startTime": -1200
 }
+
 
