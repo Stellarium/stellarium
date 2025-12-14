@@ -359,7 +359,7 @@ msgstr "km/s"
 
 #: src/core/modules/GridLinesMgr.cpp:2042
 msgid "Grids and lines"
-msgstr "Líneas y cuadrículas"
+msgstr "Cuadrículas y líneas"
 
 #: src/core/modules/GridLinesMgr.cpp:2043
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:364
@@ -426,7 +426,7 @@ msgstr "Cuadrícula eclíptica de J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:2057 src/ui_configurationDialog.h:2109
 msgid "Ecliptic grid"
-msgstr "Cuadrícula ecuatorial"
+msgstr "Cuadrícula eclíptica"
 
 #: src/core/modules/GridLinesMgr.cpp:2058 src/ui_viewDialog.h:4293
 #: src/ui_configurationDialog.h:2099
@@ -493,11 +493,11 @@ msgstr "Zenit y nadir"
 
 #: src/core/modules/GridLinesMgr.cpp:2074
 msgid "Ecliptic J2000 poles"
-msgstr "Polos eclípticos de J2000"
+msgstr "Polos J2000 de la eclíptica"
 
 #: src/core/modules/GridLinesMgr.cpp:2075
 msgid "Ecliptic poles"
-msgstr "Polos eclípticos"
+msgstr "Polos de la eclíptica"
 
 #: src/core/modules/GridLinesMgr.cpp:2076 src/ui_viewDialog.h:4615
 msgid "Galactic poles"
@@ -809,7 +809,7 @@ msgstr "Iluminación de paisaje"
 
 #: src/core/modules/LandscapeMgr.cpp:892 src/ui_viewDialog.h:4809
 msgid "Landscape labels"
-msgstr "Etiqueta de paisajes"
+msgstr "Etiqueta de paisaje"
 
 #: src/core/modules/LandscapeMgr.cpp:893
 msgid "Light pollution data from locations database"
@@ -2456,7 +2456,7 @@ msgstr "Velocidad heliocéntrica"
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
-"NOTA: los elementos para la época %1 probablemente están desactualizados. "
+"NOTA: Los elementos para la época %1 probablemente están desactualizados. "
 "¡Considere actualizar los datos!"
 
 #: src/core/modules/Planet.cpp:821
@@ -4084,7 +4084,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:1068
 msgid "Miller cylindrical"
-msgstr "Cilíndrica de MIller"
+msgstr "Cilíndrica de Miller"
 
 #: src/core/StelProjectorClasses.cpp:1073
 msgid ""
@@ -5000,7 +5000,7 @@ msgstr ""
 #: src/core/StelModuleMgr.cpp:324
 msgid "Further information can be found in the {developer documentation}."
 msgstr ""
-"Puede consultar más información en la {documentación del desarrollador}."
+"Puede obtener más información en la {documentación del desarrollador}."
 
 #: src/gui/ConfigurationDialog.cpp:128 src/ui_configurationDialog.h:1911
 msgid "Plugins"
@@ -5301,7 +5301,7 @@ msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1980
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
+msgstr "Islam, Sadiq y Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1981
 msgid "Khalid, Sultana & Zaidi (2014)"
@@ -5781,7 +5781,7 @@ msgid ""
 "citation format."
 msgstr ""
 "O puede {descargar el archivo BibTeX del documento} para crear otro formato "
-"de cita."
+"de citas."
 
 #: src/gui/StelGui.cpp:249 src/scripting/StelScriptMgr.cpp:520
 #: src/ui_configurationDialog.h:1909
@@ -6038,9 +6038,9 @@ msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
-"Utiliza un &quot;mapa sombra&quot; para simular auto-sombras de objetos del "
-"sistema solar no convexos. Puede reducir la calidad de penumbra de sombra en"
-" algunos objetos."
+"Utilice un &quot;mapa de sombras&quot; para simular sombras propias de "
+"objetos del sistema solar no convexos. Puede reducir la calidad de penumbra "
+"de sombras en algunos objetos."
 
 #. TRANSLATORS: duration in seconds
 #: src/gui/ViewDialog.cpp:1344
@@ -6406,7 +6406,7 @@ msgstr "¿Está seguro de que desea borrar el script?"
 
 #: src/gui/ScriptConsole.cpp:369
 msgid "Select Script Include Directory"
-msgstr "Seleccionar directorio de archivos de órdenes a incluir"
+msgstr "Seleccione el directorio de scripts a incluir"
 
 #. TRANSLATORS: The first letter of word "Row"
 #: src/gui/ScriptConsole.cpp:403
@@ -6447,7 +6447,7 @@ msgstr "Galáctico"
 #: src/gui/SearchDialog.cpp:331
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr "Supergaláctica [sistemas de coordenadas}"
+msgstr "Supergaláctico"
 
 #: src/gui/SearchDialog.cpp:332
 msgctxt "coordinate system"
@@ -14710,11 +14710,11 @@ msgstr "Cenit y nadir"
 
 #: src/ui_viewDialog.h:4264
 msgid "Show ecliptic poles of J2000.0"
-msgstr "Muestran los polos de la eclíptica de J2000.0"
+msgstr "Mostrar polos eclípticos de J2000.0"
 
 #: src/ui_viewDialog.h:4266
 msgid "Ecliptic poles (J2000)"
-msgstr "Polos eclíptica J2000"
+msgstr "Polos de la eclíptica (J2000)"
 
 #: src/ui_viewDialog.h:4268
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
@@ -14753,7 +14753,7 @@ msgstr "Ecuador fijo"
 
 #: src/ui_viewDialog.h:4288
 msgid "Color of ecliptic poles (of date)"
-msgstr "Color de los polos eclípticos (de fecha)"
+msgstr "Color de polos de la elíptica (de fecha)"
 
 #: src/ui_viewDialog.h:4291
 msgid "Galactic Coordinates, System II (IAU 1958)."
@@ -15134,11 +15134,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:4656
 msgid "Show ecliptic poles of current date."
-msgstr "Mostrar polos eclíptica fecha actual."
+msgstr "Mostrar polos de la eclíptica en la fecha actual."
 
 #: src/ui_viewDialog.h:4658
 msgid "Ecliptic poles (of date)"
-msgstr "Polos eclíptica (de fecha)"
+msgstr "Polos de la eclíptica (de fecha)"
 
 #: src/ui_viewDialog.h:4664
 msgid ""
@@ -26407,11 +26407,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:369
 msgid "Tonatiuh was the Aztec god of the Sun."
-msgstr "Tonatiuh era el dios azteca del Sol."
+msgstr "Tonatiuh era el dios mexica del Sol."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:370
 msgid "Meztli was the Aztec goddess of the Moon."
-msgstr "Meztli era la diosa azteca de la Luna."
+msgstr "Meztli era la diosa mexica de la Luna."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:371
 msgid ""
@@ -27660,7 +27660,7 @@ msgid ""
 "Xólotl means animal in the native Nahuatl language and was an Aztec deity "
 "associated with the evening star (Venus)."
 msgstr ""
-"Xólotl significa animal en el idioma náhuatl nativo y era una deidad azteca "
+"Xólotl significa animal en el idioma náhuatl nativo y era una deidad me "
 "asociada con la estrella de la tarde (Venus)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
@@ -30772,7 +30772,7 @@ msgstr ""
 #: plugins/Scenery3d/src/S3DRenderer.cpp:396
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
-"Error en Scenery3d shader, no se puede dibujar. Revise la salida de "
+"Error de shader de Scenery3d, no se puede dibujar. Revise la salida de "
 "depuración para detalles."
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:1784
@@ -31148,7 +31148,7 @@ msgstr "Intervalo:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
 msgid "Only update dominant face when moving"
-msgstr "Ac cara dominante solo cuando se mueve"
+msgstr "Actualizar cara dominante solo cuando se mueve."
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:512
 msgid "Also update second-most dominant face"
@@ -31947,7 +31947,7 @@ msgstr "Declinaciones de las principales paradas lunares"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr "Declinaciones de las menores paradas lunares"
+msgstr "Declinaciones de las paradas lunares menores"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
 msgid "Declination of the Polar circles"
@@ -32073,7 +32073,7 @@ msgstr "Las Principales Lineas de Paradas Lunares"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:695
 msgid "Minor Lunar Standstill lines"
-msgstr "Menores Lineas de Paradas Lunares"
+msgstr "Líneas de paradas lunares menores"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:696
 msgid "Equinox line (Equator)"
@@ -32443,13 +32443,13 @@ msgstr "Tzolkin Maya"
 #: plugins/Calendars/src/ui_calendarsDialog.h:936
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
-msgstr "Xihuitl Azteca"
+msgstr "Xihuitl mexica"
 
 #: plugins/Calendars/src/Calendars.cpp:420
 #: plugins/Calendars/src/ui_calendarsDialog.h:924
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
-msgstr "Tonalpohualli Azteca"
+msgstr "Tonalpohualli mexica"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:40
 msgctxt "Armenian month name"
@@ -35418,7 +35418,7 @@ msgstr ""
 #: plugins/Calendars/src/ChineseCalendar.cpp:43
 msgctxt "Chinese calendar major Solar term"
 msgid "Yŭshuĭ (Rain Water)"
-msgstr "Yŭshuĭ (Agua de lluvia)"
+msgstr "Yŭshuĭ (agua de lluvia)"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:44
 msgctxt "Chinese calendar major Solar term"
@@ -35825,7 +35825,7 @@ msgstr "Menor"
 #: plugins/Calendars/src/JapaneseCalendar.cpp:43
 msgctxt "Japanese calendar major Solar term"
 msgid "Usui (Rain Water)"
-msgstr "Usui (Agua de lluvia)"
+msgstr "Usui (agua de lluvia)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:44
 msgctxt "Japanese calendar major Solar term"
@@ -35962,7 +35962,7 @@ msgstr "Menor"
 #: plugins/Calendars/src/KoreanCalendar.cpp:43
 msgctxt "Korean calendar major Solar term"
 msgid "Woo-Soo (Rain Water)"
-msgstr "Woo-Soo (Agua de lluvia)"
+msgstr "Woo-Soo (agua de lluvia)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:44
 msgctxt "Korean calendar major Solar term"
@@ -36269,7 +36269,7 @@ msgstr "Tháng Chạp"
 #: plugins/Calendars/src/VietnameseCalendar.cpp:56
 msgctxt "Vietnamese calendar major Solar term"
 msgid "Vũ thủy (Rain Water)"
-msgstr "Vũ thủy (Agua de lluvia)"
+msgstr "Vũ thủy (agua de lluvia)"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:57
 msgctxt "Vietnamese calendar major Solar term"
@@ -36667,7 +36667,7 @@ msgstr "Calendarios mayas"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:224
 msgid "Aztec calendars"
-msgstr "Calendarios aztecas"
+msgstr "Calendarios mexicas"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:226
 msgid ""
@@ -36830,7 +36830,7 @@ msgstr "Retroceder"
 #: plugins/Calendars/src/ui_calendarsDialog.h:979
 msgctxt "calendar"
 msgid "Aztec"
-msgstr "Azteca"
+msgstr "Mexica"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:980
 msgctxt "calendar"
