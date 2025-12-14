@@ -148,7 +148,25 @@ QString daysFloatToDHMS(float days)
 
 	return r;
 }
+QString daysFloatToDHMSnarration(float days)
+{
+	float remain = days;
 
+	int d = static_cast<int> (remain); remain -= d;
+	remain *= 24.0f;
+	int h = static_cast<int> (remain); remain -= h;
+	remain *= 60.0f;
+	int m = static_cast<int> (remain); remain -= m;
+	remain *= 60.0f;
+
+	auto r = QString("%1%2 %3%4 %5%6 %7 %8%9 ").arg(
+			QString::number(d),        qc_("days", "duration"),
+			QString::number(h),        qc_("hours", "duration"),
+			QString::number(m),        qc_("minutes", "duration"), qc_("and", "object narration"),
+			narrateDecimal(remain, 0), qc_("seconds", "duration"));
+
+	return r;
+}
 
 /*************************************************************************
  Convert an angle in radian to hms
@@ -209,7 +227,7 @@ QString radToDecDegNarration(const double angle, const int precision, const bool
 	const QString degsign = qc_("degrees", "object narration");
 	double deg = (positive ? fmodpos(angle, 2.0*M_PI) : std::fmod(angle, 2.0*M_PI)) * M_180_PI;
 
-	return QString("%1%2").arg(QString::number(deg, 'f', precision), degsign);
+	return QString("%1%2").arg(narrateDecimal(deg, precision), degsign);
 }
 
 /*************************************************************************
@@ -327,7 +345,7 @@ QString radToHmsNarration(const double angle, const bool decimal)
 	const QString andStr=qc_("and", "object narration");
 	const QString seconds=qc_("seconds", "object narration");
 
-	return QString("%1 %2, %3 %4, %5 %6 %7").arg(QString::number(h), hours, QString::number(m), minutes, andStr, QString::number(s, 'f', 1), seconds);
+	return QString("%1 %2, %3 %4, %5 %6 %7").arg(QString::number(h), hours, QString::number(m), minutes, andStr, narrateDecimal(s, 1), seconds);
 }
 
 /*************************************************************************
@@ -416,14 +434,14 @@ QString radToDmsPNarration(const double angle, const int precision, const bool u
 	StelUtils::radToDms(angle, sign, d, m, s);
 	QString str;
 	QTextStream os(&str);
-	os << (sign ? "" : qc_("minus", "object narration")) << " ";
+	os << (sign ? "" : q_("minus")) << " ";
 	if (d>0)
 		os << d << " " << degsign << " ";
 	if (m>0)
 		os << m << " " << qc_("arc minutes", "object narration") << " " << qc_("and", "object narration") << " ";
 
 	int width = (precision>0) ? 3 + precision : 2;
-	os << QString::number(s, 'f', width) << " " << qc_("arc seconds", "object narration") ;
+	os << narrateDecimal(s, width) << " " << qc_("arc seconds", "object narration") ;
 	return str;
 }
 
@@ -461,6 +479,21 @@ QString decDegToDmsStr(const double angle)
 	decDegToDms(angle, sign, d, m, s);
 	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(static_cast<unsigned int>(s),2,10,QLatin1Char('0'));
 }
+// Convert an angle in decimal degrees to a dms formatted string for narration
+QString decDegToDmsNarration(const double angle, bool sayPlus)
+{
+	bool sign;
+	double s;
+	unsigned int d, m;
+	decDegToDms(angle, sign, d, m, s);
+	return QString("%1 %2 %3, %4 %5, %6 %7 %8").arg(sign ? (sayPlus ? q_("plus") : "") : q_("minus"),
+			QString::number(d),
+			q_("degrees"),
+			QString::number(m),
+			q_("minutes"), q_("and"),
+			QString::number(static_cast<unsigned int>(s)),
+			q_("seconds"));
+}
 
 // Convert latitude in decimal degrees to a dms formatted string.
 QString decDegToLatitudeStr(const double latitude, bool dms)
@@ -490,9 +523,9 @@ QString decDegToLatitudeNarration(const double latitude, bool dms)
 	unsigned int d, m;
 	decDegToDms(latitude, sign, d, m, s);
 	if (dms)
-		return QString("%1: %2 %3, %4 %5, %6 %7 %8").arg((sign ? qc_("North", "object narration") : qc_("South", "object narration")), QString::number(d), degreesStr, QString::number(m), minutesStr, andStr, QString::number(round(s), 'f', 0), secondsStr);
+		return QString("%1: %2 %3, %4 %5, %6 %7 %8").arg((sign ? qc_("North", "object narration") : qc_("South", "object narration")), QString::number(d), degreesStr, QString::number(m), minutesStr, andStr, narrateDecimal(round(s), 0), secondsStr);
 	else
-		return QString("%1: %2 %3").arg((sign ? qc_("North", "object narration") : qc_("South", "object narration")), QString::number(fabs(latitude), 'f', 2), qc_("degrees", "object narration"));
+		return QString("%1: %2 %3").arg((sign ? qc_("North", "object narration") : qc_("South", "object narration")), narrateDecimal(fabs(latitude), 2), qc_("degrees", "object narration"));
 }
 
 
@@ -557,7 +590,7 @@ QString decDegToLongitudeNarration(const double longitude, bool eastPositive, bo
 	if (dms)
 		return QString("%1: %2 %3, %4 %5, %6 %7 %8").arg((sign ? positive : negative), QString::number(d), degreesStr, QString::number(m), minutesStr, andStr, QString::number(round(s)), secondsStr);
 	else
-		return QString("%1: %2 %3").arg((sign ? positive : negative), QString::number(fabs(longMod), 'f', 2), degreesStr);
+		return QString("%1: %2 %3").arg((sign ? positive : negative), narrateDecimal(fabs(longMod), 2), degreesStr);
 }
 
 
@@ -1503,8 +1536,6 @@ QString hoursToHmsNarration(const double hours, const bool minutesOnly, const bo
 	const QString sAndStr=qc_("and", "object narration");
 	const QString sSeconds=qc_("seconds", "object narration");
 
-
-
 	int h = static_cast<int>(hours);
 	double minutes = (qAbs(hours)-qAbs(double(h)))*60.;
 	if (minutesOnly)
@@ -1531,7 +1562,7 @@ QString hoursToHmsNarration(const double hours, const bool minutesOnly, const bo
 			h += 1;
 			m = 0;
 		}
-		return QString("%1 %2, %3 %4, %5 %6 %7").arg(QString::number(h), sHours, QString::number(m), sMinutes, sAndStr, QString::number(s, 'f', 1), sSeconds);
+		return QString("%1 %2, %3 %4, %5 %6 %7").arg(QString::number(h), sHours, QString::number(m), sMinutes, sAndStr, narrateDecimal(s, 1), sSeconds);
 	}
 }
 
@@ -1602,6 +1633,26 @@ QString hoursToNarration(const float hours, const bool minutesOnly)
 	return hoursToHmsStr(static_cast<double>(hours), minutesOnly);
 }
 */
+
+QString narrateDecimal(double num, int decimals)
+{
+	bool isNegative = (num<0);
+	QString numStr=QString::number(fabs(num), 'f', decimals);
+	QStringList numList = numStr.split('.');
+	Q_ASSERT(numList.length()<3);
+	QString res;
+	if (isNegative)
+		res.append(q_("minus") + " ");
+	res.append(numList.constFirst());
+	if (numList.length()>1)
+	{
+		res.append(" " + qc_("point", "decimal separator") + " ");
+		for (QChar c: numList.at(1))
+			res.append(QString(c) + " ");
+	}
+	return res;
+}
+
 
 //! The method to splitting the text by substrings by some limit of string length
 QString wrapText(const QString& s, const int limit)

@@ -189,6 +189,9 @@ public:
 			   const Star3 *star) : StarWrapper<Star3>(array,zone,star) {}
 	QString getID(void) const override;
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
+#endif
 	QString getObjectType() const override;
 	QString getObjectTypeI18n() const override;
 };

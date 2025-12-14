@@ -255,6 +255,9 @@ namespace StelUtils
 	//! Convert an angle in decimal degrees to a dms formatted string.
 	//! @param angle input angle in decimal degrees
 	QString decDegToDmsStr(const double angle);
+	//! Convert an angle in decimal degrees to a dms formatted string for narration.
+	//! @param sayPlus true if the positivw sign really should be spoken
+	QString decDegToDmsNarration(const double angle, bool sayPlus=false);
 
 	//! Convert latitude in decimal degrees to a dms formatted string or use decimal values.
 	//! @param latitude in decimal degrees
@@ -667,6 +670,11 @@ namespace StelUtils
 	//QString hoursToNarration(const double hours, const bool minutesOnly = false); // OBSOLETE? TOO CONFUSE NAME.
 	//QString hoursToNarration(const float hours, const bool minutesOnly = false);
 
+	//! Construct a speech-ready wording for ordinary floating point numbers.
+	//! Accounts for
+	//! - Minus sign
+	//! - dot versus comma
+	QString narrateDecimal(double num, int decimals=2);
 
 	//! Convert JD to hours and minutes
 	QString getHoursMinutesFromJulianDay(const double julianDay);
@@ -676,6 +684,8 @@ namespace StelUtils
 
 	//! Convert days (float) to a time string
 	QString daysFloatToDHMS(float days);
+	//! Convert days (float) to a time string ready for speech output
+	QString daysFloatToDHMSnarration(float days);
 
 	//! The method to splitting the text by substrings by some limit of string length
 	QString wrapText(const QString& s, const int limit = 52);
