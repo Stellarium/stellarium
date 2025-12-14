@@ -33,10 +33,10 @@ In this model, the Milky Way serves as the embodiment of the world tree Yggdrasi
 
 Although many Eddic constellations are based on on many assumptions and guesses, those that are also mentioned in the Rimtöl-gloss (Úlfs Keptr, Asar Bardagi, Fiskikarlar) are described with more certainty. The only constellations the Edda specifically describes as stars are Aurvandils tá and Þjaza augu. 
 
-##### Aurwandill’s toe
+##### Aurwandill's Toe
 Aurvandils tá (Aurwandill’s toe) is the toe of the hero Aurwandill, which froze when he was carried by Thor across the icy river Eliwagar. Thor broke off the toe, cast it into the sky, and thereby transformed it into an asterism (Sturluson 2017, p. 111). Persson (2017) suggests Corona Borealis as the corresponding constellation. On the one hand, its shape resembles that of a toe; on the other, as a spring constellation, it allows an interpretation of the toe as a symbol of the victory of spring over winter (Persson 2017).
 
-##### Thiazi’s Eyes
+##### Thiazi's Eyes
 Þjaza augu (Thiazi’s eyes) are the eyes of the giant Thiazi, who abducted the goddess Idun. The Æsir fought and killed Thiazi, and when his daughter sought revenge, Odin, as a sign of respect, cast Thiazi’s eyes into the sky, transforming them into stars (Sturluson 2017, p. 83). There is no concrete evidence as to which stars these might be, but the two bright and closely positioned stars Castor and Pollux are obvious candidates.
 
 ##### Bifröst
@@ -51,19 +51,19 @@ Himinbjǫrg (Heimdall’s castle) is the structure standing on Bifröst and inha
 ##### Thor's Chariot
 Þórs vagn (Thor’s chariot) is the chariot of the thunder god Thor, drawn by two goats (Sturluson 2017, p. 35). Thor, alongside Odin, was one of the principal deities in Old Norse mythology. Due to his strong connection to weather, he was crucial not only for seafaring but also for agriculture (Lorenz 1984, p. 308). The shape of a chariot formed by the brightest stars of the Big Dipper lends itself well to association with Thor’s chariot. The Rimtöl gloss also records the constellation under the name Karlvagn or “man’s chariot” (Persson, 2017).
 
-##### Freyja's chariot
+##### Freyja's Chariot
 Freyju vagn (Freyja’s chariot) is the chariot of the fertility goddess Freyja, drawn by cats. When Freyja rides to a battlefield, she receives half of the slain warriors, the other half going to Odin (Sturluson 2017, p. 38). In the Rimtöl gloss, the small chariot in Ursa Minor is referred to as Kvennavagn, or “woman’s chariot” (Persson, 2017).
 
 ##### Freyr's Sickle
 Freys sigð (Freyr’s sickle) belongs to the god Freyr, who governs rain and sunshine and thus the fertility of the earth. He is invoked for a good harvest (Sturluson 2017, p. 37). The star Spica (“ear of grain”) served as a calendar star for sowing and harvest in various cultures and periods. A constellation corresponding to a sickle located around Spica fits into Old Norse mythology, as Freyr is depicted on an 11th-century runestone (Gotland Runic Inscription 181). The depicted shape is an approximation, but it can be traced through the brightness of the stars forming the sickle.
 
-##### Thor (God)
+##### Thor
 Þórr (Thor) was, alongside Odin, a central deity in Norse mythology. The two objects associated with him in the Edda are his hammer Mjöllnir and his belt, which doubles his strength (Sturluson 2017, p. 35). The constellation Orion was well known in the Middle Ages, and in various cultures figures holding objects were interpreted within it. The three bright belt stars are particularly prominent and could represent Thor’s belt of strength. Objects interpreted elsewhere as a shepherd’s staff (Babylonian) or a piece of leather (Greek) could here symbolize Thor’s hammer.
 
 ##### River Van
 Ván is the river that flows from the mouth of Fenris after the Æsir bound him and inserted a sword into his jaws (Sturluson 2017, p. 44). Its proximity to Thor in this model is notable, as wading through rivers is a typical Thor motif (Lorenz, 1984, p. 253).
 
-##### Battlefield of the Æsir
+##### The Asar Battlefield
 Asar Bardagi (battlefield of the Æsir) is mentioned in the Rimtöl gloss and equated with the constellation Auriga. The Edda recounts multiple battles involving the Æsir and daily skirmishes among Odin’s warriors, the einherjar, in Valhalla (Sturluson 2017, p. 51). Holmberg (2022, p. 21) suggests possible references to the early 9th-century Rök Runestone, which also describes a battlefield, supporting the celestial interpretation.
 
 ##### Fishermen
@@ -75,7 +75,7 @@ Jormungandr (Midgard Serpent) is the serpent that spans the world in Eddic myths
 ##### Ox Head
 Himinhjǫrð (ox’s head) is the largest ox in Hymir’s herd, which Thor beheads to use as bait for fishing the Midgard Serpent (Sturluson 2017, p. 65). The bright star Procyon, situated between Thor and the Midgard Serpent, provides a suitable reference point.
 
-##### Squirrel
+##### Ratatosk
 Rátatǫskr is the squirrel that scurries along the World Tree, carrying messages between Nidhögg, the serpent, and the eagle (Sturluson 2017, p. 30). Cassiopeia lies on the Milky Way between the constellations representing the eagle and the serpent.
 
 ##### Eagle Giant (Hraesvelgr)
@@ -84,10 +84,10 @@ Hræsvélgr (Hraesvelgr) is the giant in eagle form sitting at the edge of the s
 ##### Boiling Well
 Hvergelmir (the boiling well) is one of the springs under Yggdrasil’s three roots. Nidhögg also dwells there, gnawing at the root (Sturluson 2017, p. 28). The wells are represented by gaps in the bright band of the Milky Way, with a larger dark area near Alhena corresponding to the serpent’s proximity.
 
-#####  Well of Mimir
+#####  Mimir's Well
 Mímis brunnr (Mímir’s well) is the source of wisdom, from which Odin sacrificed his eye to drink (Sturluson 2017, p. 28). The wells are depicted by gaps in the bright band of the Milky Way, with the dark area near Vega serving as Mímir’s well, and Vega representing Odin’s sacrificed eye.
 
-##### Well of Urda
+##### Well of Urd
 Urðarbrunnr (well of Urðr) is the spring at which the Æsir hold daily council. To reach it, they ride across Bifröst (Sturluson 2017, p. 28). The wells are again represented by gaps in the Milky Way, with a larger dark spot at the end of Bifröst near Daneb representing the spring beneath Yggdrasil’s root. 
 
 
@@ -121,6 +121,7 @@ Sophie Marshall and Susanne M. Hoffmann served as mentors during the research pr
 ## License
 
 CC BY 4.0
+
 
 
 
