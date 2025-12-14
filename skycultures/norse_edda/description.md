@@ -32,43 +32,62 @@ In this model, the Milky Way serves as the embodiment of the world tree Yggdrasi
 ## Constellations
 
 Although many Eddic constellations are based on on many assumptions and guesses, those that are also mentioned in the Rimtöl-gloss (Úlfs Keptr, Asar Bardagi, Fiskikarlar) are described with more certainty. The only constellations the Edda specifically describes as stars are Aurvandils tá and Þjaza augu. 
- 
+
+##### Aurwandill’s toe
 Aurvandils tá (Aurwandill’s toe) is the toe of the hero Aurwandill, which froze when he was carried by Thor across the icy river Eliwagar. Thor broke off the toe, cast it into the sky, and thereby transformed it into an asterism (Sturluson 2017, p. 111). Persson (2017) suggests Corona Borealis as the corresponding constellation. On the one hand, its shape resembles that of a toe; on the other, as a spring constellation, it allows an interpretation of the toe as a symbol of the victory of spring over winter (Persson 2017).
 
+##### Thiazi’s Eyes
 Þjaza augu (Thiazi’s eyes) are the eyes of the giant Thiazi, who abducted the goddess Idun. The Æsir fought and killed Thiazi, and when his daughter sought revenge, Odin, as a sign of respect, cast Thiazi’s eyes into the sky, transforming them into stars (Sturluson 2017, p. 83). There is no concrete evidence as to which stars these might be, but the two bright and closely positioned stars Castor and Pollux are obvious candidates.
 
+##### Bifröst
 Bifrǫst (bifrost) is the bridge that extends from the Earth to the heavens (Edda, 1997/2017, p. 26). The Æsir ride across Bifrǫst daily to the well of Urðr at the World Tree and hold council there (Sturluson 2017, p. 29). In literary scholarship, Bifrǫst is identified as a rainbow by day and as the Milky Way by night (Persson, 2017). However, the Milky Way is already well represented by Yggdrasil, and the translation of Bifrǫst as “shimmering road” (Persson, 2017) could equally well be interpreted as a stellar formation. The arc-shaped group of stars from Pegasus to Deneb in the Milky Way closely resembles a bridge leading the Æsir to the well of Urðr at Yggdrasil. 
 
+##### Heimdall’s Castle
 Himinbjǫrg (Heimdall’s castle) is the structure standing on Bifröst and inhabited by the Æsir Heimdall, who has keen eyesight and guards the bridge against giants (Sturluson 2017, p. 39). The quadrilateral formed by Algenib, Markab, Alpheratz, and Scheat at the long arc conveys a clear image of a structure atop a bridge.
 
+##### Jaw of the Wolf
 Úlfs Keptr (jaw of the wolf) is a constellation mentioned in the Rimtöl glosses and identified with the Hyades (Sigurðsson 2022, p. 241). Wolves play a significant role in Old Norse mythology, as they are foretold to devour the sun and moon at Ragnarök (Sturluson 2017, p. 25). The Hyades lie along the moon’s path, and their V-shaped arrangement naturally invites comparison with a jaw snapping at the moon. Holmberg (2022, p. 18) further proposes that this wolf-jaw constellation may already have been recorded on the Rök Runestone in the early 9th century.
 
+##### Thor's Chariot
 Þórs vagn (Thor’s chariot) is the chariot of the thunder god Thor, drawn by two goats (Sturluson 2017, p. 35). Thor, alongside Odin, was one of the principal deities in Old Norse mythology. Due to his strong connection to weather, he was crucial not only for seafaring but also for agriculture (Lorenz 1984, p. 308). The shape of a chariot formed by the brightest stars of the Big Dipper lends itself well to association with Thor’s chariot. The Rimtöl gloss also records the constellation under the name Karlvagn or “man’s chariot” (Persson, 2017).
 
+##### Freyja's chariot
 Freyju vagn (Freyja’s chariot) is the chariot of the fertility goddess Freyja, drawn by cats. When Freyja rides to a battlefield, she receives half of the slain warriors, the other half going to Odin (Sturluson 2017, p. 38). In the Rimtöl gloss, the small chariot in Ursa Minor is referred to as Kvennavagn, or “woman’s chariot” (Persson, 2017).
 
+##### Freyr's Sickle
 Freys sigð (Freyr’s sickle) belongs to the god Freyr, who governs rain and sunshine and thus the fertility of the earth. He is invoked for a good harvest (Sturluson 2017, p. 37). The star Spica (“ear of grain”) served as a calendar star for sowing and harvest in various cultures and periods. A constellation corresponding to a sickle located around Spica fits into Old Norse mythology, as Freyr is depicted on an 11th-century runestone (Gotland Runic Inscription 181). The depicted shape is an approximation, but it can be traced through the brightness of the stars forming the sickle.
 
+##### Thor (God)
 Þórr (Thor) was, alongside Odin, a central deity in Norse mythology. The two objects associated with him in the Edda are his hammer Mjöllnir and his belt, which doubles his strength (Sturluson 2017, p. 35). The constellation Orion was well known in the Middle Ages, and in various cultures figures holding objects were interpreted within it. The three bright belt stars are particularly prominent and could represent Thor’s belt of strength. Objects interpreted elsewhere as a shepherd’s staff (Babylonian) or a piece of leather (Greek) could here symbolize Thor’s hammer.
 
+##### River Van
 Ván is the river that flows from the mouth of Fenris after the Æsir bound him and inserted a sword into his jaws (Sturluson 2017, p. 44). Its proximity to Thor in this model is notable, as wading through rivers is a typical Thor motif (Lorenz, 1984, p. 253).
 
+##### Battlefield of the Æsir
 Asar Bardagi (battlefield of the Æsir) is mentioned in the Rimtöl gloss and equated with the constellation Auriga. The Edda recounts multiple battles involving the Æsir and daily skirmishes among Odin’s warriors, the einherjar, in Valhalla (Sturluson 2017, p. 51). Holmberg (2022, p. 21) suggests possible references to the early 9th-century Rök Runestone, which also describes a battlefield, supporting the celestial interpretation.
 
+##### Fishermen
 Fiskikarlar (the fishermen) is a constellation preserved in the Rimtöl gloss. The name “fishermen” likely refers to the fishing episode in the Edda, where Thor and the giant Hymir fish for the Midgard Serpent using the head of the ox Himinhjǫrð (Sturluson 2017, p. 66). The legend predates the Rimtöl gloss, recorded already in the 10th century (Krause 2010, p. 133). The identification of the constellation with Orion’s three belt stars fits the stellar culture, as Thor is both part of the fishermen in the myth and represented by the Orion constellation. Positioning the fishermen next to the Midgard Serpent and the ox’s head is consistent with representing the fishing episode in the sky.
 
+##### Midgard Serpent
 Jormungandr (Midgard Serpent) is the serpent that spans the world in Eddic myths. As Thor’s adversary, it appears in the fishing episode (Sturluson 2017, p. 66). It can be associated with a constellation similar to Hydra, but in this model, stars visible from Iceland are used. The position along the Milky Way is notable, as the dragon or snake Nidhögg lies beneath a root of Yggdrasil and gnaws at it (Sturluson 2017, p. 28). In this model, where the Milky Way represents Yggdrasil, Jormungandr could assume Nidhögg’s role.
 
+##### Ox Head
 Himinhjǫrð (ox’s head) is the largest ox in Hymir’s herd, which Thor beheads to use as bait for fishing the Midgard Serpent (Sturluson 2017, p. 65). The bright star Procyon, situated between Thor and the Midgard Serpent, provides a suitable reference point.
 
+##### Squirrel
 Rátatǫskr is the squirrel that scurries along the World Tree, carrying messages between Nidhögg, the serpent, and the eagle (Sturluson 2017, p. 30). Cassiopeia lies on the Milky Way between the constellations representing the eagle and the serpent.
 
+##### Eagle Giant (Hraesvelgr)
 Hræsvélgr (Hraesvelgr) is the giant in eagle form sitting at the edge of the sky, generating wind through the beating of his wings (Sturluson 2017, p. 33). The Edda also mentions an eagle perched in Yggdrasil (Sturluson 2017, p. 30). The constellation’s shape and position on the Milky Way fit this model, and the eagle is visible in the early evening during autumn, assigning Hraesvelgr a role as a sign of autumnal storms.
 
+##### Boiling Well
 Hvergelmir (the boiling well) is one of the springs under Yggdrasil’s three roots. Nidhögg also dwells there, gnawing at the root (Sturluson 2017, p. 28). The wells are represented by gaps in the bright band of the Milky Way, with a larger dark area near Alhena corresponding to the serpent’s proximity.
 
+#####  Well of Mimir
 Mímis brunnr (Mímir’s well) is the source of wisdom, from which Odin sacrificed his eye to drink (Sturluson 2017, p. 28). The wells are depicted by gaps in the bright band of the Milky Way, with the dark area near Vega serving as Mímir’s well, and Vega representing Odin’s sacrificed eye.
 
+##### Well of Urda
 Urðarbrunnr (well of Urðr) is the spring at which the Æsir hold daily council. To reach it, they ride across Bifröst (Sturluson 2017, p. 28). The wells are again represented by gaps in the Milky Way, with a larger dark spot at the end of Bifröst near Daneb representing the spring beneath Yggdrasil’s root. 
 
 
@@ -102,5 +121,6 @@ Sophie Marshall and Susanne M. Hoffmann served as mentors during the research pr
 ## License
 
 CC BY 4.0
+
 
 
