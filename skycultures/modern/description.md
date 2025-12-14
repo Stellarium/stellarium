@@ -64,7 +64,7 @@ The IAU is the only scientifically accepted authority to assign new names to sta
 
 ##### Andromeda
 
-Princess Andromeda, daughter of Queen Cassiopeia and King Kepheus, was chained to a rock on the coast or Ethiopia to prepare her as sacrifice to Cetus, the Sea Monster. She was rescued by Perseus.  
+Princess Andromeda, daughter of Queen Cassiopeia and King Kepheus, was chained to a rock on the coast of Ethiopia to prepare her as sacrifice to Cetus, the Sea Monster. She was rescued by Perseus.  
 
 In this constellation you find the nearest large galaxy, the Great Andromeda Galaxy. It is barely visible with the unaided eye in a dark rural sky. 
 
