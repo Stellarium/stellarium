@@ -31,33 +31,84 @@ The Milky Way is not incorporated in this set.
 
 ## Constellations
 
-##### Constellations
-* Ashvini. Horse Head 
-* Bharani, Bearer
-* Krittika (Pleiades) 
-* Rohini, The Red One (Aldebaran and Hyades) 
-* Mrigashira, Deer's Head
-* Ardra, Wetness (Betelgeuse) 
-* Punarvasu, Twin-Restorer (in Gemini)
-* Pushya, Nourisher
-* Ashlesha, Embrace
-* Magha, Bountiful 
-* Purva Phalguni , First Reddish
-* Uttara Phalguni, Second Reddish 
-* Hasta, Hand 
-* Chitra, Bright One (here, interestingly, depicted as two stars and not only as one as it used to be the tradition)
-* Svati (a goddess)
-* Vishakha, Forked 
-* Jyeshtha, Eldest 
-* Mula, Root
-* Purva Ashadha, First Invincible
-* Uttara Ashadha, Second Invincible 
-* Shravana, Listening 
-* Dhanishta, Most Famous 
-* Shatabhisha, Hundred Physicians 
-* Purva Bhadrapada, First Blessed Feet 
-* Uttara Bhadrapada, Second Blessed Feet 
-* Revati, Prosperous
+##### Ashvini. 
+meaning "Horse Head", is the first nakshatra since the canonisation in the first millennium CE. 
+
+#####  Bharani, 
+meaning "Bearer" 
+
+#####  Krittika 
+a name for the Pleiades, mythologically represented by seven damsels 
+
+#####  Rohini 
+meaning "The Red One", a name for reddish Aldebaran and the Hyades
+
+#####  Mrigashira
+meaning "Deer's Head"
+
+#####  Ardra
+meaning "Wetness", name for Betelgeuse
+
+#####  Punarvasu
+meaning "Twin-Restorer" in Gemini
+
+#####  Pushya
+meaning "Nourisher", a name for the open star cluster M44 and the box of stars surrounding it. 
+
+#####  Ashlesha
+meaning "Embrace" 
+
+#####  Magha
+meaning "Bountiful" 
+
+#####  Purva Phalguni 
+meaning "First Reddish" 
+
+#####  Uttara Phalguni
+meaning "Second Reddish" 
+
+#####  Hasta
+meaning "Hand" 
+
+#####  Chitra
+meaning "Bright One"
+In this specific engraving in the temple, interestingly, this single star-asterism is drawn as two stars and not only as one as it used to be the tradition. The companion is called "Apamvatsa" in later star catalogues and also bears this name in the IAU-Catalogue of Star Names. 
+
+#####  Svati 
+Svati is a goddess
+
+#####  Vishakha
+meaning "Forked" 
+
+#####  Jyeshtha
+meaning "Eldest"
+
+#####  Mula
+meaning "Root"
+
+#####  Purva Ashadha
+meaning "First Invincible"
+
+#####  Uttara Ashadha
+meaning "Second Invincible"
+
+#####  Shravana 
+meaning "Listening"
+
+#####  Dhanishta 
+meaning "Most Famous" 
+
+#####  Shatabhisha
+meaning "Hundred Physicians" 
+
+#####  Purva Bhadrapada
+meaning "First Blessed Feet" 
+
+#####  Uttara Bhadrapada
+meaning "Second Blessed Feet"
+
+#####  Revati
+meaning "Prosperous"
 
 
 ## References
@@ -85,6 +136,7 @@ Students of the University of Jena, Germany: Vincent Gerlach, Fabian Hofer, Luca
 ## License
 
 CC BY 4.0
+
 
 
 
