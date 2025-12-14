@@ -363,11 +363,13 @@ QString StelObject::getMagnitudeNarration(const StelCore *core, const InfoString
 {
 	if (flags&Magnitude)
 	{
-		float mag = getVMagnitude(core);
-		QString str = QString("%1 %2").arg(q_("The object's visual magnitude is"), QString::number(getVMagnitude(core) + magoffset, 'f', decimals));
+		const float mag = getVMagnitude(core);
+		QString str = QString("%1 %2").arg(q_("The object's visual magnitude is"), StelUtils::narrateDecimal(mag + magoffset, decimals));
 		const float airmass = getAirmass(core);
 		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
-			str += QString(", %1 %2 %3 %4 %5. ").arg(qc_("reduced to", "object narration: reduced magnitude by extinction"), QString::number(getVMagnitudeWithExtinction(core, mag, magoffset), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), qc_("Airmasses of atmospheric extinction", "object narration"));
+			str += QString(", %1 %2 %3 %4 %5. ").arg(qc_("reduced to", "object narration: reduced magnitude by extinction"),
+								 StelUtils::narrateDecimal(getVMagnitudeWithExtinction(core, mag, magoffset), decimals), q_("by"),
+								 StelUtils::narrateDecimal(airmass, 2), qc_("Airmasses of atmospheric extinction", "object narration"));
 		str += getExtraInfoStrings(Magnitude).join("");
 		return str;
 	}
@@ -1079,8 +1081,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 			dec_j2000 = M_PI_2 - dec_j2000;
 		if (withDecimalDegree)
 		{
-			firstCoordinate  = StelUtils::radToDecDegNarration(ra_j2000,2,false,true);
-			secondCoordinate = StelUtils::radToDecDegNarration(dec_j2000);
+			firstCoordinate  = StelUtils::narrateDecimal(ra_j2000*M_180_PI, 2);
+			secondCoordinate = StelUtils::narrateDecimal(dec_j2000*M_180_PI, 2);
 		}
 		else
 		{
@@ -1104,8 +1106,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 			dec_equ = M_PI_2 - dec_equ;
 		if (withDecimalDegree)
 		{
-			firstCoordinate  = StelUtils::radToDecDegNarration(ra_equ,2,false,true);
-			secondCoordinate = StelUtils::radToDecDegNarration(dec_equ);
+			firstCoordinate  = StelUtils::narrateDecimal(ra_equ*M_180_PI, 2);
+			secondCoordinate = StelUtils::narrateDecimal(dec_equ*M_180_PI, 2);
 		}
 		else
 		{
@@ -1140,8 +1142,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		if (withDecimalDegree)
 		{
 			//firstCoordinate  = QString("%1h").arg(ra_sidereal*12/M_PI, 0, 'f', 5); // Decimal hours
-			firstCoordinate  = QString("%1°").arg(QString::number(ra_sidereal*M_180_PI, 'f', 2)); // Decimal degrees
-			secondCoordinate = StelUtils::radToDecDegNarration(dec_sidereal);
+			firstCoordinate  = QString("%1°").arg(StelUtils::narrateDecimal(ra_sidereal*M_180_PI, 2)); // Decimal degrees
+			secondCoordinate = StelUtils::narrateDecimal(dec_sidereal*M_180_PI, 2);
 		}
 		else
 		{
@@ -1176,8 +1178,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		{
 			if (withDecimalDegree)
 			{
-				firstCoordinate  = StelUtils::radToDecDegNarration(az);
-				secondCoordinate = StelUtils::radToDecDegNarration(alt_app);
+				firstCoordinate  = StelUtils::narrateDecimal(az*M_180_PI, 2);
+				secondCoordinate = StelUtils::narrateDecimal(alt_app*M_180_PI, 2);
 			}
 			else
 			{
@@ -1189,8 +1191,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		{
 			if (withDecimalDegree)
 			{
-				firstCoordinate  = StelUtils::radToDecDegNarration(az);
-				secondCoordinate = StelUtils::radToDecDegNarration(alt);
+				firstCoordinate  = StelUtils::narrateDecimal(az*M_180_PI, 2);
+				secondCoordinate = StelUtils::narrateDecimal(alt*M_180_PI, 2);
 			}
 			else
 			{
@@ -1213,8 +1215,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		if (glong<0.) glong += 2.0*M_PI;
 		if (withDecimalDegree)
 		{
-			firstCoordinate  = StelUtils::radToDecDegNarration(glong);
-			secondCoordinate = StelUtils::radToDecDegNarration(glat);
+			firstCoordinate  = StelUtils::narrateDecimal(glong*M_180_PI, 2);
+			secondCoordinate = StelUtils::narrateDecimal(glat*M_180_PI, 2);
 		}
 		else
 		{
@@ -1236,8 +1238,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		if (sglong<0.) sglong += 2.0*M_PI;
 		if (withDecimalDegree)
 		{
-			firstCoordinate  = StelUtils::radToDecDegNarration(sglong);
-			secondCoordinate = StelUtils::radToDecDegNarration(sglat);
+			firstCoordinate  = StelUtils::narrateDecimal(sglong*M_180_PI, 2);
+			secondCoordinate = StelUtils::narrateDecimal(sglat*M_180_PI, 2);
 		}
 		else
 		{
@@ -1267,8 +1269,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		if (lambda<0) lambda+=2.0*M_PI;
 		if (withDecimalDegree)
 		{
-			firstCoordinate  = StelUtils::radToDecDegNarration(lambda);
-			secondCoordinate = StelUtils::radToDecDegNarration(beta);
+			firstCoordinate  = StelUtils::narrateDecimal(lambda*M_180_PI, 2);
+			secondCoordinate = StelUtils::narrateDecimal(beta*M_180_PI, 2);
 		}
 		else
 		{
@@ -1294,8 +1296,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
 		if (withDecimalDegree)
 		{
-			firstCoordinate  = StelUtils::radToDecDegNarration(lambdaJDE);
-			secondCoordinate = StelUtils::radToDecDegNarration(betaJDE);
+			firstCoordinate  = StelUtils::narrateDecimal(lambdaJDE*M_180_PI, 2);
+			secondCoordinate = StelUtils::narrateDecimal(betaJDE*M_180_PI, 2);
 		}
 		else
 		{
@@ -1311,7 +1313,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 
 		// report epsilon_A, angle between Earth's Axis and ecl. of date.
 		res += qc_("The Ecliptic obliquity of date is", "object narration") + " ";
-		res += withDecimalDegree ? StelUtils::radToDecDegNarration(eclJDE) : StelUtils::radToDmsNarration(eclJDE, false) + ". ";
+		res += withDecimalDegree ? StelUtils::narrateDecimal(eclJDE*M_180_PI, 2) : StelUtils::radToDmsNarration(eclJDE, false) + ". ";
 	}
 
 	// Specialized plugins (e.g. Astro Navigation or ethno-astronomical specialties) may want to provide additional types of coordinates here.
@@ -1479,34 +1481,34 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 
 			if (withDecimalDegree)
 			{
-				firstCoordinate  = StelUtils::radToDecDegStr(az,2,false,true);
-				secondCoordinate = StelUtils::radToDecDegStr(-theta);
+				firstCoordinate  = StelUtils::narrateDecimal(az*M_180_PI, 2);
+				secondCoordinate = StelUtils::narrateDecimal(-theta*M_180_PI, 2);
 			}
 			else
 			{
-				firstCoordinate  = StelUtils::radToDmsStr(az,true);
-				secondCoordinate = StelUtils::radToHmsStr(-theta,true);
+				firstCoordinate  = StelUtils::radToDmsNarration(az,true);
+				secondCoordinate = StelUtils::radToHmsNarration(-theta,true);
 			}
 
-			res += QString("%1: %2 %3, %4 %5<br/>").arg(event,  azStr,  firstCoordinate, haStr, secondCoordinate);
+			res += QString("%1: %2 %3, %4 %5. ").arg(event,  azStr,  firstCoordinate, haStr, secondCoordinate);
 
 			// TRANSLATORS: Greatest Western Digression is the maximum western azimuth for stars with upper culmination between pole and zenith
 			event=qc_("Greatest Western Digression is at", "object narration");
 			if (withDecimalDegree)
 			{
-				firstCoordinate  = StelUtils::radToDecDegStr(StelUtils::fmodpos(-az, 2.*M_PI),2,false,true);
-				secondCoordinate = StelUtils::radToDecDegStr(theta);
+				firstCoordinate  = StelUtils::narrateDecimal(StelUtils::fmodpos(-az, 2.*M_PI)*M_180_PI, 2);
+				secondCoordinate = StelUtils::narrateDecimal(theta*M_180_PI, 2);
 			}
 			else
 			{
-				firstCoordinate  = StelUtils::radToDmsStr(StelUtils::fmodpos(-az, 2.*M_PI),true);
-				secondCoordinate = StelUtils::radToHmsStr(theta,true);
+				firstCoordinate  = StelUtils::radToDmsNarration(StelUtils::fmodpos(-az, 2.*M_PI),true);
+				secondCoordinate = StelUtils::radToHmsNarration(theta,true);
 			}
 
-			res += QString("%1: %2=%3, %4=%5<br/>").arg(event, azStr,  firstCoordinate, haStr, secondCoordinate);
+			res += QString("%1: %2=%3, %4=%5. ").arg(event, azStr,  firstCoordinate, haStr, secondCoordinate);
 		}
-		res += getExtraInfoStrings(flags&RTSTime).join(' ');
-		res += omgr->getExtraInfoStrings(flags&RTSTime).join(' ');
+		res += getExtraInfoStrings(flags&RTSTime).join(". ");
+		res += omgr->getExtraInfoStrings(flags&RTSTime).join(". ");
 
 		prevObjStr = currentObjStr;
 		prevYear = currentYear;
@@ -1534,7 +1536,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		//res += omgr->getExtraInfoStrings(Extra).join("");
 	}
 
-	// Subclasses may want to exclude this by better wording sequence. For this, call with a moified flags mask that excludes what should not be repeated.
+	// Subclasses may want to exclude this by better wording sequence. For this, call with a modified flags mask that excludes what should not be repeated.
 	if (flags&IAUConstellation)
 	{
 		QString constel = (fuzzyEquals(eqNow.normSquared(),0.) ? QString() : ConstellationMgr::getIAUconstellationName(core->getIAUConstellation(eqNow)));
@@ -2015,8 +2017,8 @@ QString StelObject::getSolarLunarNarration(const StelCore *core, const InfoStrin
 			az = (useSouthAzimuth? 2. : 3.)*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;
-			azStr  = (withDecimalDegree ? StelUtils::radToDecDegStr(az, 2)  : StelUtils::radToDmsStr(az,false));
-			altStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt, 2) : StelUtils::radToDmsStr(alt,false));
+			azStr  = (withDecimalDegree ? StelUtils::narrateDecimal(az*M_180_PI, 2)  : StelUtils::radToDmsNarration(az,false));
+			altStr = (withDecimalDegree ? StelUtils::narrateDecimal(alt*M_180_PI, 2) : StelUtils::radToDmsNarration(alt,false));
 
 			// TRANSLATORS: Azimuth/Altitude
 			const QString SolarAz  = (qc_("The sun's azimuth is ", "object narration"));
@@ -2029,8 +2031,8 @@ QString StelObject::getSolarLunarNarration(const StelCore *core, const InfoStrin
 			az = (useSouthAzimuth? 2. : 3.)*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;
-			azStr  = (withDecimalDegree ? StelUtils::radToDecDegStr(az, 2)  : StelUtils::radToDmsStr(az,false));
-			altStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt, 2) : StelUtils::radToDmsStr(alt,false));
+			azStr  = (withDecimalDegree ? StelUtils::narrateDecimal(az*M_180_PI, 2)  : StelUtils::radToDmsNarration(az,false));
+			altStr = (withDecimalDegree ? StelUtils::narrateDecimal(alt*M_180_PI, 2) : StelUtils::radToDmsNarration(alt,false));
 
 			// TRANSLATORS: Azimuth/Altitude
 			const QString LunarAz  = (qc_("The Moon's azimuth is ", "object narration"));

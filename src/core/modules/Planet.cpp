@@ -1631,12 +1631,14 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&Magnitude)
 	{
-		float mag = getVMagnitude(core);
-		res += QString("%1 %2, ").arg(qc_("currently at visual magnitude of", "object narration"), QString::number(mag, 'f', 1));
+		const float mag = getVMagnitude(core);
+		res += QString("%1 %2, ").arg(qc_("currently at visual magnitude of", "object narration"), StelUtils::narrateDecimal(mag, 1));
 		const float airmass = getAirmass(core);
 		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
-			res += QString("%1 %2 %3 %4 %5, ").arg(qc_("reduced to", "object narration: reduced magnitude by extinction"), QString::number(getVMagnitudeWithExtinction(core, mag), 'f', 1), q_("by"), QString::number(airmass, 'f', 2), qc_("Airmasses of atmospheric extinction", "object narration"));
-		res += getExtraInfoStrings(Magnitude).join("");
+			res += QString("%1 %2 %3 %4 %5, ").arg(qc_("reduced to", "object narration: reduced magnitude by extinction"),
+							       StelUtils::narrateDecimal(getVMagnitudeWithExtinction(core, mag), 1), qc_("by", "narration: extinction by XX airmasses"),
+							       StelUtils::narrateDecimal(airmass, 2), qc_("Airmasses of atmospheric extinction", "object narration"));
+		res += getExtraInfoStrings(Magnitude).join(". ");
 	}
 
 	if (flags&IAUConstellation)
@@ -1644,7 +1646,6 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		// IAU Constellation
 		const QString iauConstellation = ConstellationMgr::getIAUconstellationName(core->getIAUConstellation(pos));
 		res.append(" " + qc_("in the constellation of", "object narration") + " " + iauConstellation);
-
 	}
 	res.append(". ");
 	if (flags&CulturalConstellation)
@@ -1705,15 +1706,15 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		{
 			if (hdistanceAu < 0.1)
 			{
-				distAU = QString::number(hdistanceAu, 'f', 6);
-				distKM = QString::number(hdistanceKm, 'f', 3);
+				distAU = StelUtils::narrateDecimal(hdistanceAu, 6);
+				distKM = StelUtils::narrateDecimal(hdistanceKm, 3);
 				// TRANSLATORS: Unit of measure for distance - kilometers
 				km = qc_("kilometers", "distance");
 			}
 			else
 			{
-				distAU = QString::number(hdistanceAu, 'f', 3);
-				distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
+				distAU = StelUtils::narrateDecimal(hdistanceAu, 3);
+				distKM = StelUtils::narrateDecimal(hdistanceKm / 1.0e6, 3);
 				// TRANSLATORS: Unit of measure for distance - millions of kilometers
 				km = qc_("Million kilometers", "distance");
 			}
@@ -1728,15 +1729,15 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		const double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
-			distAU = QString::number(distanceAu, 'f', 6);
-			distKM = QString::number(distanceKm, 'f', 3);
+			distAU = StelUtils::narrateDecimal(distanceAu, 6);
+			distKM = StelUtils::narrateDecimal(distanceKm, 3);
 			// TRANSLATORS: Unit of measure for distance - kilometers
 			km = qc_("kilometers", "distance");
 		}
 		else
 		{
-			distAU = QString::number(distanceAu, 'f', 3);
-			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
+			distAU = StelUtils::narrateDecimal(distanceAu, 3);
+			distKM = StelUtils::narrateDecimal(distanceKm / 1.0e6, 3);
 			// TRANSLATORS: Unit of measure for distance - millions of kilometers
 			km = qc_("Million kilometers", "distance");
 		}
@@ -1764,8 +1765,8 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 				const double withoutRings = 2.*getSpheroidAngularRadius(core)*M_PI/180.;
 				if (withDecimalDegree)
 				{
-					s1 = StelUtils::radToDecDegNarration(withoutRings, 1, false, true);
-					s2 = StelUtils::radToDecDegNarration(angularSize, 1, false, true);
+					s1 = StelUtils::narrateDecimal(withoutRings * M_180_PI, 1) + "°";
+					s2 = StelUtils::narrateDecimal(angularSize * M_180_PI, 1) + "°";
 				}
 				else
 				{
@@ -1781,7 +1782,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 				{
 					if (withDecimalDegree)
 					{
-						s1 = StelUtils::radToDecDegNarration(angularSize / sphereScale, 1, false, true);
+						s1 = StelUtils::narrateDecimal(angularSize / sphereScale * M_180_PI, 1) + "°";
 						//s2 = StelUtils::radToDecDegStr(angularSize, 5, false, true);
 					}
 					else
@@ -1795,7 +1796,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 				else
 				{
 					if (withDecimalDegree)
-						sizeStr = StelUtils::radToDecDegNarration(angularSize, 1, false, true);
+						sizeStr = StelUtils::narrateDecimal(angularSize * M_180_PI, 1) + "°";
 					else
 						sizeStr = StelUtils::radToDmsPNarration(angularSize, 2);
 				}
@@ -1804,7 +1805,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		}
 
 		QString diam = (getPlanetType()==isPlanet ? qc_("The equatorial diameter is", "object narration") : qc_("Its diameter is", "object narration")); // Many asteroids have irregular shape (Currently unhandled)
-		res.append(QString("%1 %2 %3. ").arg(diam, QString::number(AU * getEquatorialRadius() * 2.0, 'f', 1) , qc_("kilometers", "distance")));
+		res.append(QString("%1 %2 %3. ").arg(diam, StelUtils::narrateDecimal(AU * getEquatorialRadius() * 2.0, 1) , qc_("kilometers", "distance")));
 	}
 
 	return res;
