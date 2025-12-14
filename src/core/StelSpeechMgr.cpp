@@ -22,14 +22,14 @@
 
 #ifdef ENABLE_SPEECH
 
-#include <random>
-#include <chrono>
+//#include <random>
+//#include <chrono>
 #include <QVoice>
 #include "StelLocaleMgr.hpp"
-#include "StelTranslator.hpp"
+//#include "StelTranslator.hpp"
 #endif
 
-Q_LOGGING_CATEGORY(Speech,"stel.Speech", QtDebugMsg) // TODO: Before merge, demote to QtInfoMsg
+Q_LOGGING_CATEGORY(Speech,"stel.Speech", QtInfoMsg)
 
 
 StelSpeechMgr::StelSpeechMgr(): StelModule()
@@ -86,6 +86,7 @@ void StelSpeechMgr::init()
 	std::reverse(availableEngines.begin(), availableEngines.end());
 #endif
 	// TODO decide what to do on various Linux flavours (any preferrable engine?)
+	// It seems flite works for English but has issues with Russian (crash!)
 
 	// Only change from default engine if the configured is available.
 	const QString candEngine=conf->value("speech/engine", availableEngines.constFirst()).toString();
@@ -116,6 +117,7 @@ QTextToSpeech::State StelSpeechMgr::getState() const
 {
 	if (m_speech)
 		return m_speech->state();
+	qCCritical(Speech) << "StelSpeechMgr::getState: no m_speech engine!";
 	return QTextToSpeech::State::Error;
 }
 #endif
@@ -124,10 +126,30 @@ void StelSpeechMgr::say(const QString &narration) const
 {
 	qCDebug(Speech) << "StelSpeechMgr::say(): " << narration;
 #ifdef ENABLE_SPEECH
-	if (enabled() && m_speech->voice().name().length()>0)
+	if (enabled() && !m_speech->voice().name().isEmpty())
+	{
+		// when flite's voice should start emitting speech in a language/script system it was not designed for (e.g. Russian), it reportedly crashes.
+		// This can be mitigated by first saying something in Latin characters.
+		// (It must be some utterance, not just silence!)
+		if (m_speech->engine() == "flite")
+		{
+			m_speech->setVolume(0.01);
+			m_speech->say("a ");
+			m_speech->setVolume(m_volume);
+		}
 		m_speech->say(narration);
+	}
 	else
-		qCCritical(Speech) << "Available Engines:" << QTextToSpeech::availableEngines();
+	{
+		qCWarning(Speech) << "Speech problem! Status:" << getState();
+		qCWarning(Speech) << "  Available Engines:" << QTextToSpeech::availableEngines();
+		qCWarning(Speech) << "  Engine:" << getEngine();
+		QVoice voice = m_speech->voice();
+		if (voice.name().isEmpty())
+			qCCritical(Speech) << "  No Voice!";
+		else
+			qCCritical(Speech) << "  Voice:" << m_speech->voice().name();
+	}
 #endif
 }
 
@@ -137,25 +159,29 @@ void StelSpeechMgr::stop() const
 #ifdef ENABLE_SPEECH
 	if (enabled() && m_speech->voice().name().length()>0)
 	{
-		m_speech->stop(QTextToSpeech::BoundaryHint::Word);
+		// sapi occasionally crashes when stopping
+		if (m_speech->engine()=="sapi")
+			m_speech->say(".   ");
+		else
+			m_speech->stop(QTextToSpeech::BoundaryHint::Word);
 
-		// Easter egg... Allow occasional argument :-)
-		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-		std::default_random_engine generator(seed);
-		std::uniform_int_distribution<int> distribution(0,15);
-		int mood = distribution(generator);
+		// // Easter egg... Allow occasional argument :-)
+		// unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		// std::default_random_engine generator(seed);
+		// std::uniform_int_distribution<int> distribution(0,15);
+		// int mood = distribution(generator);
 
-		const QStringList answers={
-			qc_("Why? You asked for it!",     "Object narration"),
-			qc_("OK, I shut up.",             "Object narration"),
-			qc_("Come on!",                   "Object narration"),
-			qc_("Naaah!",                     "Object narration"),
-			qc_("Sir Yes Sir, Silence, Sir!", "Object narration")
-		};
-		if (mood<answers.length())
-		{
-			m_speech->say(answers.at(mood)); // Just testing ... ;-)
-		}
+		// const QStringList answers={
+		// 	qc_("Why? You asked for it!",     "Object narration"),
+		// 	qc_("OK, I shut up.",             "Object narration"),
+		// 	qc_("Come on!",                   "Object narration"),
+		// 	qc_("Naaah!",                     "Object narration"),
+		// 	qc_("Sir Yes Sir, Silence, Sir!", "Object narration")
+		// };
+		// if (mood<answers.length())
+		// {
+		// 	m_speech->say(answers.at(mood)); // Just testing ... ;-)
+		// }
 	}
 #endif
 }
@@ -236,6 +262,12 @@ void StelSpeechMgr::onEngineReady()
 	m_speech->setPitch(m_pitch);
 	m_speech->setVolume(m_volume);
 
+#ifdef ENABLE_SPEECH
+	qCDebug(Speech) << "onEngineReady(): New engine" << m_speech->engine() << ", now connecting.";
+	connect(m_speech, &QTextToSpeech::stateChanged, this, &StelSpeechMgr::reportStateChanged);
+	connect(m_speech, &QTextToSpeech::errorOccurred, this, &StelSpeechMgr::reportError);
+#endif
+
 	qCDebug(Speech) << "StelSpeechMgr::onEngineReady(): current engine name" << m_speech->engine();
 
 	// To check available locales, we act as if language was changed.
@@ -312,7 +344,7 @@ void StelSpeechMgr::onAppLanguageChanged()
 
 	m_voices=m_speech->availableVoices();
 
-	qCDebug(Speech) << "StelSpeechMgr: available voices for app language" << appLanguage;
+	qCDebug(Speech) << "StelSpeechMgr: available voices for app language" << StelApp::getInstance().getLocaleMgr().getAppLanguage();;
 	QStringList voiceNames;
 	for (const QVoice &v: std::as_const(m_voices))
 	{
@@ -333,8 +365,15 @@ void StelSpeechMgr::onAppLanguageChanged()
 #endif
 	}
 	else
-		m_speech->setVoice(m_voices.constFirst());
-
+	{
+		if (!m_voices.isEmpty())
+			m_speech->setVoice(m_voices.constFirst());
+		else
+		{
+			qCWarning(Speech) << "No voice found. Setting empty.";
+			m_speech->setVoice(QVoice());
+		}
+	}
 
 	qCDebug(Speech) << "StelSpeechMgr: current voice name"  << m_speech->voice().name();
 	qCDebug(Speech) << "StelSpeechMgr: with params pitch:" << m_speech->pitch()
@@ -416,3 +455,32 @@ void StelSpeechMgr::initNarrationFlagsFromConfig(QSettings *conf)
 
 	setNarrationTextFilters(flags);
 }
+
+#ifdef ENABLE_SPEECH
+void StelSpeechMgr::reportStateChanged(QTextToSpeech::State state) const
+{
+	switch (state)
+	{
+		case QTextToSpeech::Ready:
+			qCDebug(Speech) << "Speech ready";
+			break;
+		case QTextToSpeech::Speaking:
+			qCDebug(Speech) << "Speech started";
+			break;
+		//case QTextToSpeech::Synthesizing:
+		//	qCDebug(Speech) << "Speech synthesizing";
+		//	break;
+		case QTextToSpeech::Paused:
+			qCDebug(Speech) << "Speech paused";
+			break;
+		default:
+			qCDebug(Speech) << "Speech error:" <<  m_speech->errorString();
+			break;
+	}
+}
+
+void StelSpeechMgr::reportError(QTextToSpeech::ErrorReason reason, const QString &errorString) const
+{
+	qCWarning(Speech) << "Speech error:" << reason << "=" <<  m_speech->errorString();
+}
+#endif
