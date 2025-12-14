@@ -1,11 +1,10 @@
-# Chinese (Journey to the West)
+# Modern_Journey to the West
 
 ## Introduction
-<p> Journey to the West is a classic of Chinese God and devil novels. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.</p>
-<p>This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from Journey to the West, creating an entirely new constellation world imbued with the rich hues of Chinese mythology.</p>
+<p><em>Journey to the West is a classic of Chinese God and devil novels. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.</em></p>
+<p><em>This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from Journey to the West, creating an entirely new constellation world imbued with the rich hues of Chinese mythology.</em></p>
 
 ### A Guide to the Constellations in Journey to the West 
- 
 |<notr>#</notr>|</notr>Constellation</notr>|Journey to the West Figure|Description|
 |-----------------------------------------------------------------------------|-----------------|-------|--------|-------------|
 |<notr>1</notr>| </notr>Ursa Minor</notr>| Yellow Wind Monster|A golden-furred marten spirit who captured Tang Monk and wounded Sun Wukong's eyes with his Samadhi Wind. Lingji Bodhisattva later subdued him.|
@@ -20,8 +19,8 @@
 |<notr>10</notr>|Cassiopeia| Queen Mother of the West|The head of all female divinities. She hosts the Peach Banquet at the Jade Pool, which Sun Wukong famously disrupted.|
 |<notr>11</notr>|Perseus| Zhu Bajie|In Chapter 79, Zhu Bajie kills a white-faced fox demon and drags it by the tail to present to the King of Bhīṣaṇa.|
 |<notr>12</notr>|Auriga| Keeper of the Heavenly Horses|The lowly official title given to Sun Wukong when he was tricked into ascending to Heaven, tasked with tending horses.|
-|<notr>13</notr>|Ophiuchus| Heavenly King Virūpākṣa |One of the Four Heavenly Kings, a divine general who guards the Heavenly Gate. His sacred treasure is the snake he holds.|
-|<notr>14</notr>|Serpens|  ||
+|<notr>13</notr>|Ophiuchus| Heavenly King Virūpākṣa|One of the Four Heavenly Kings, a divine general who guards the Heavenly Gate. His sacred treasure is the snake he holds.|
+|<notr>14</notr>|Serpens| Divine Serpent |The magical implement of Virūpākṣa is a serpent imbued with immense spiritual power.|
 |<notr>15</notr>|Sagitta| Fire Arrow|One of the fire tools of the Fire Virtue Star Officer, used to assist Sun Wukong in a fire attack.|
 |<notr>16</notr>|Aquila| Golden-Winged Great Peng|A mighty demon who established himself as king in the Kingdom of Lion-Camel. He allied with the Lion and Elephant demons to capture Tang Monk and was finally subdued by Buddha.|
 |<notr>17</notr>|Delphinus| Zhu Bajie Transformed into a Catfish|Zhu Bajie transforms into a catfish and swims into the Hot-Filth Spring to harass the seven spider spirits.|
