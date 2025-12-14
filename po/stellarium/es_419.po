@@ -112,7 +112,7 @@ msgstr "Arte de constelaciones"
 #: src/core/modules/ConstellationMgr.cpp:150 src/ui_viewDialog.h:4877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Constellation labels"
-msgstr "Etiqueta de constelaciones"
+msgstr "Etiquetas de constelaciones"
 
 #: src/core/modules/ConstellationMgr.cpp:151 src/ui_viewDialog.h:4918
 #: src/ui_configurationDialog.h:2100
@@ -139,7 +139,7 @@ msgstr "Seleccionar una sola constelación"
 
 #: src/core/modules/ConstellationMgr.cpp:158
 msgid "Remove selection of constellations"
-msgstr "Eliminar la selección de constelaciones"
+msgstr "Eliminar selección de constelaciones"
 
 #: src/core/modules/ConstellationMgr.cpp:159
 msgid "Select all constellations"
@@ -813,19 +813,19 @@ msgstr "Etiqueta de paisaje"
 
 #: src/core/modules/LandscapeMgr.cpp:893
 msgid "Light pollution data from locations database"
-msgstr "Datos de contaminación luminosa del lugar desde base de datos"
+msgstr "Datos de contaminación lumínica del lugar desde base de datos"
 
 #: src/core/modules/LandscapeMgr.cpp:895
 msgid "Increase light pollution"
-msgstr "Incrementar contaminación luminosa"
+msgstr "Incrementar contaminación lumínica"
 
 #: src/core/modules/LandscapeMgr.cpp:896
 msgid "Reduce light pollution"
-msgstr "Reducir contaminación luminosa"
+msgstr "Reducir contaminación lumínica"
 
 #: src/core/modules/LandscapeMgr.cpp:897
 msgid "Cyclic change in light pollution"
-msgstr "Cambio cíclico en la contaminación luminosa"
+msgstr "Cambio cíclico en la contaminación lumínica"
 
 #: src/core/modules/LandscapeMgr.cpp:1527 src/scripting/StelScriptMgr.cpp:646
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
@@ -4577,8 +4577,8 @@ msgstr "desconocido"
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr ""
-"La región indica el área geográfica de origen de una determinada cultura del"
-" cielo."
+"La región indica el área geográfica de origen de una determinada cultura "
+"estelar."
 
 #: src/core/StelSkyCultureMgr.cpp:572
 msgid "World"
@@ -9663,7 +9663,7 @@ msgstr "Horizonte cero"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:469
 msgid "Vienna Sterngarten"
-msgstr "Viena Sterngarten"
+msgstr "Sterngarten de Viena"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:471
@@ -9797,7 +9797,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:526
 msgid "Tycho's Supernova"
-msgstr "Supernova Tycho"
+msgstr "Supernova de Tycho"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:528
@@ -9832,7 +9832,7 @@ msgstr "Recorrido Herschel 400"
 #. TRANSLATORS: Name of script
 #: src/translations.h:540
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr "Binosky: objetos de cielo profundo para los binoculares"
+msgstr "Binosky: Objetos de cielo profundo para binoculares"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:542
@@ -9842,7 +9842,7 @@ msgstr "El Catálogo de Jack Bennett"
 #. TRANSLATORS: Name of script
 #: src/translations.h:544
 msgid "Best objects in the New General Catalog"
-msgstr "El Catálogo de Jack Bennett"
+msgstr "Mejores objetos en el Nuevo Catálogo General"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:546
@@ -9934,7 +9934,7 @@ msgstr "Script para demostrar un eclipse lunar parcial."
 
 #: src/translations.h:580
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr "Script para demostrar un eclipse total de luna."
+msgstr "Script para demostrar un eclipse lunar total."
 
 #: src/translations.h:581
 msgid "A slow, infinite tour of the sky, looking at random objects."
@@ -14031,7 +14031,7 @@ msgstr ""
 #: src/ui_viewDialog.h:3911
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
 msgid "Light pollution:"
-msgstr "Contaminación luminosa:"
+msgstr "Contaminación lumínica:"
 
 #: src/ui_viewDialog.h:3912
 msgid "Zodiacal Light brightness:"
@@ -15307,7 +15307,7 @@ msgstr "Desde paisaje, si se proporciona"
 #: src/ui_viewDialog.h:4791
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
-"Mostrar capa de iluminación (ventanas brillantes, contaminación luminosa, "
+"Mostrar capa de iluminación (ventanas brillantes, contaminación lumínica, "
 "etc.)"
 
 #: src/ui_viewDialog.h:4793
@@ -21035,7 +21035,7 @@ msgstr ""
 "con una inclinación de órbitas por debajo de los 25 grados, excentricidad "
 "por debajo de 0.25 y un período en el rango de 1100-2000 minutos (órbitas "
 "alrededor de la Tierra que coinciden con el período de rotación sideral de "
-"la Tierra). "
+"la Tierra)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
 msgid ""
@@ -22500,7 +22500,7 @@ msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "in the Stellarium User Guide."
 msgstr ""
-"Puede encontrar documentación más completa y actualizada para este "
+"Puede encontrar una documentación más completa y actualizada para este "
 "complemento en la Guía del usuario de Stellarium."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
@@ -23934,7 +23934,7 @@ msgstr "Duración zoom:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:496
 msgid "Milky Way intensity:"
-msgstr "Intensidad de la vía lactea:"
+msgstr "Intensidad de la Vía Láctea:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:502
 msgid "Milky Way saturation:"
@@ -23942,7 +23942,7 @@ msgstr "Saturación de Vía Láctea:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:508
 msgid "Zodiacal light intensity:"
-msgstr "Intensidad del luz zodiacal:"
+msgstr "Intensidad de luz zodiacal:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:530
 msgid "Run local script"
@@ -27660,7 +27660,7 @@ msgid ""
 "Xólotl means animal in the native Nahuatl language and was an Aztec deity "
 "associated with the evening star (Venus)."
 msgstr ""
-"Xólotl significa animal en el idioma náhuatl nativo y era una deidad me "
+"Xólotl significa animal en el idioma náhuatl nativo y era una deidad mexica "
 "asociada con la estrella de la tarde (Venus)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
@@ -29284,7 +29284,7 @@ msgstr "Velocidad meteórica geocéntrica"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:589
 msgid "The population index"
-msgstr "El índice de población"
+msgstr "El índice poblacional"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:592
 msgid "Parent body"
@@ -29687,7 +29687,7 @@ msgstr "δ-Aurígidas"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:175
 msgid "γ-Ursae Minorids"
-msgstr "γ-Ursae Minorids"
+msgstr "Minóridas γ-Ursae"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:177
@@ -30018,11 +30018,11 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the"
 " share of faint meteors is larger than usual."
 msgstr ""
-"El índice de la población indica la distribución de magnitud de las lluvias "
-"de meteoros. Los valores debajo de 2.5 corresponden a las distribuciones "
-"donde los meteoros brillantes son más frecuentes del promedio, mientras que "
-"los valores por encima de 3.0 significan que la participación de meteoros "
-"tenues es mayor de lo usual."
+"El índice poblacional indica la distribución de magnitud de las lluvias de "
+"meteoros. Los valores debajo de 2.5 corresponden a las distribuciones donde "
+"los meteoros brillantes son más frecuentes del promedio, mientras que los "
+"valores por encima de 3.0 significan que la participación de meteoros tenues"
+" es mayor de lo usual."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:291
 msgid "Solar longitude"
@@ -31067,7 +31067,7 @@ msgid ""
 "Do no use the configured direction and field of view. This may be helpful in"
 " a planetarium environment."
 msgstr ""
-"No usar la dirección configurada y el campo de visión. Esto podría ser de "
+"No usar la dirección y campo de visión configurados. Esto podría ser de "
 "ayuda en un entorno planetario."
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
