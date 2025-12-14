@@ -137,11 +137,19 @@ private:
 #if defined(ENABLE_SPEECH)
 	//! Set necessary things after engine change. This is triggered by setEngine()
 	void onEngineReady();
-	//! Set necessary things after language change:
+	//! Set necessary things after application language change:
 	//! m_voices is reconfigured.
 	//! This is called by onEngineChanged() and triggered by subsequent StelApp::languageChanged()
 	void onAppLanguageChanged();
 
+#ifdef ENABLE_SPEECH
+private slots:
+	//! Debugging aid: Report any state changes
+	void reportStateChanged(QTextToSpeech::State state) const;
+	void reportError(QTextToSpeech::ErrorReason reason, const QString &errorString) const;
+#endif
+
+private:
 	//! Replicates some functionality of Qt6.6's findVoices, but just finds the voive of a particular name.
 	QVoice findVoice(QString &name) const;
 
