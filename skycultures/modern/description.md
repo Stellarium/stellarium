@@ -489,7 +489,7 @@ French astronomer Abbé Nicolas-Louis de la Caille created 14 new constellations
 
 ##### Telescope
 
-Next to the Microscope, French astronomer Abbé Nicolas-Louis de la Caille placed _Telescopium_ in his mid-17th century map which introduced 14 new constellations, mostly commemorating scientific instruments. In his own imagination it was a long-focal-length aerial telescope, but later the constellation was cut back to its present size. It has only seven stars brighter than magnitude 5.
+Next to the Microscope, French astronomer Abbé Nicolas-Louis de la Caille placed _Telescopium_ in his mid-18th century maps which introduced 14 new constellations, mostly commemorating scientific instruments. In his own imagination it was a long-focal-length aerial telescope, but later the constellation was cut back to its present size. It has only seven stars brighter than magnitude 5.
 
 ##### Table Mountain
 
