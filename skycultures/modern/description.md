@@ -182,7 +182,7 @@ Gemini is host to a fine open cluster (M35) and the Eskimo planetary nebula.
 
 ##### Crab
 
-The zodiacal constellation of _Cancer_, the crab, used to stand along the northernmost part of the ecliptic which defines the Tropic of Cancer. Precession has meanwhile moved it a full sign to the west. 
+The zodiacal constellation of _Cancer_, the crab, used to stand along the northernmost part of the ecliptic which defines the Tropic of Cancer. Precession has meanwhile moved it a full sign to the east. 
 
 When Hercules was wrestling the Lernaean Hydra, the Crab appeared and bit him in the foot. Hercules killed it, but Hera, always opposing Hercules, placed it among the stars. 
 
