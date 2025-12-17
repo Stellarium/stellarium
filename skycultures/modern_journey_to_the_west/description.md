@@ -123,7 +123,7 @@ Paintings & Text: Xu Gang（徐刚）xg0205@163.com
 
 Stellarium Integration: He Yuan（何原）heyuan9965@126.com
 
-Revisions and Pinyin Transliteration: Sun Shuwei（孙殳玮） sunshuwei.hi@foxmail.com
+Revision and Pinyin Transliteration: Sun Shuwei（孙殳玮） sunshuwei.hi@foxmail.com
 
 ## License
 
