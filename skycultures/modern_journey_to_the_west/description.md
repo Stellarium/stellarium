@@ -1,10 +1,13 @@
 # Modern Journey to the West
 
 ## Introduction
-<p><em>Journey to the West is a classic of Chinese God and devil novels. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.</em></p>
-<p><em>This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from Journey to the West, creating an entirely new constellation world imbued with the rich hues of Chinese mythology.</em></p>
 
-### A Guide to the Constellations in Journey to the West 
+*Journey to the West* is a classic of Chinese God and devil novels. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.
+
+This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from *Journey to the West*, creating an entirely new constellation world imbued with the rich hues of Chinese mythology.
+
+### A Guide to the Constellations in *Journey to the West*
+
 |<notr>#</notr>|</notr>Constellation</notr>|Journey to the West Figure|Description|
 |-----------------------------------------------------------------------------|-----------------|-------|--------|-------------|
 |<notr>1</notr>| </notr>Ursa Minor</notr>| Yellow Wind Monster|A golden-furred marten spirit who captured Tang Monk and wounded Sun Wukong's eyes with his Samadhi Wind. Lingji Bodhisattva later subdued him.|
@@ -98,45 +101,29 @@
 
 ## Description
 
-
 ![](illustrations/chart.png)
 
-
-<p><em>If you wish to learn more about the Journey to the West sky culture or to own a beautifully illustrated constellation map based on the story, we highly recommend the books and celestial charts authored and illustrated by Xu Gang.
-
-
-
+If you wish to learn more about the Journey to the West sky culture or to own a beautifully illustrated constellation map based on the story, we highly recommend the books and celestial charts authored and illustrated by **Xu Gang**.
 
 https://item.jd.com/14924220.html
 
-
-
-
-
 https://item.jd.com/14406961.html
-
-
-
-
 
 ## References
 
-- [1]:Xu Gang. (2025). Monkey King Star Quest: A Guide to the Constellations（《大闹星空：读西游识星座》 ）. Beijing: Posts & Telecom Press. ISBN 9787115653604. 
+- [1]:Xu Gang. (2025). Monkey King Star Quest: A Guide to the Constellations（《大闹星空：读西游识星座》 ）. Beijing: Posts & Telecom Press. ISBN 9787115653604.
+ 
 - [2]:Xu Gang. (2025). Monkey King Star Quest: Celestial Chart（《大闹星空：西游星座图》）. Beijing: Posts & Telecom Press. ISBN：9787115658395.
 
 ## Author
-<p><em>This sky culture was contributed to Stellarium by Xu Gang, He Yuan.</em></p>
+
+This sky culture was contributed to Stellarium by **Xu Gang, He Yuan and Sun Shuwei**.
 
 Paintings & Text: Xu Gang（徐刚）xg0205@163.com
 
-
 Stellarium Integration: He Yuan（何原）heyuan9965@126.com
 
-
-
-
-
-
+Revisions and Pinyin Transliteration: Sun Shuwei（孙殳玮） sunshuwei.hi@foxmail.com
 
 ## License
 
