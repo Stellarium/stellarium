@@ -119,11 +119,11 @@ https://item.jd.com/14406961.html
 
 This sky culture was contributed to Stellarium by **Xu Gang, He Yuan and Sun Shuwei**.
 
-Paintings & Text: Xu Gang（徐刚）xg0205@163.com
+Paintings & Text: Xu Gang（徐刚）, xg0205@163.com
 
-Stellarium Integration: He Yuan（何原）heyuan9965@126.com
+Stellarium Integration: He Yuan（何原）, heyuan9965@126.com
 
-Revision and Pinyin Transliteration: Sun Shuwei（孙殳玮）sunshuwei.hi@foxmail.com
+Revision and Pinyin Transliteration: Sun Shuwei（孙殳玮）, sunshuwei.hi@foxmail.com
 
 ## License
 
