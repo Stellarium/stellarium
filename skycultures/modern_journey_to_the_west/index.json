@@ -2,10 +2,10 @@
   "id": "modern_Journey_to_the_West",
   "region": "Eastern Asia",
   "classification": ["single"],
-  "fallback_to_international_names": false,
+  "fallback_to_international_names": true,
   "constellations": [
     {
-      "id": "CON xugang_xiyouji Aql",
+      "id": "CON modern_Journey_to_the_West Aql",
       "lines": [[99473, 98036, 97649, 97278, 93747, 93244], [97649, 98103, 99742], [97649, 96229, 95501, 93805]],
       "image": {
         "file": "illustrations/aquila.png",
@@ -19,7 +19,7 @@
       "common_name": {"english": "Golden-Winged Great Peng", "native": "金翅大鹏", "pronounce": "Jīn Chì Dà Péng", "byname": "Aquila"}
     },
     {
-      "id": "CON xugang_xiyouji And",
+      "id": "CON modern_Journey_to_the_West And",
       "lines": [[677, 3092, 5447], [9640, 5447, 4436, 3881]],
       "image": {
         "file": "illustrations/andromeda.png",
@@ -33,7 +33,7 @@
       "common_name": {"english": "Chang'e", "native": "嫦娥", "pronounce": "Cháng É", "byname": "Andromeda"}
     },
     {
-      "id": "CON xugang_xiyouji Scl",
+      "id": "CON modern_Journey_to_the_West Scl",
       "lines": [[116231, 4577, 115102, 116231]],
       "image": {
         "file": "illustrations/sculptor.png",
@@ -47,7 +47,7 @@
       "common_name": {"english": "Jade Seal of Passage", "native": "通行宝印", "pronounce": "Tōng Xíng Bǎo Yìn", "byname": "Sculptor"}
     },
     {
-      "id": "CON xugang_xiyouji Ara",
+      "id": "CON modern_Journey_to_the_West Ara",
       "lines": [[88714, 85258, 83081, 82363, 85727], [85792, 83153, 83081]],
       "image": {
         "file": "illustrations/ara.png",
@@ -61,7 +61,7 @@
       "common_name": {"english": "Flaming Mountains", "native": "火焰山", "pronounce": "Huǒ Yàn Shān", "byname": "Ara"}
     },
     {
-      "id": "CON xugang_xiyouji Lib",
+      "id": "CON modern_Journey_to_the_West Lib",
       "lines": [[76333, 74785, 72622, 73714]],
       "image": {
         "file": "illustrations/libra.png",
@@ -75,7 +75,7 @@
       "common_name": {"english": "Luggage Pole", "native": "行李担", "pronounce": "Xíng Li Dān", "byname": "Libra"}
     },
     {
-      "id": "CON xugang_xiyouji Cet",
+      "id": "CON modern_Journey_to_the_West Cet",
       "lines": [[3419, 5364, 6537], [12770, 8645, 6537, 1562], [9347, 8102, 8645, 10826, 10324, 11484, 12093, 12706, 14135, 13954, 12828, 11484]],
       "image": {
         "file": "illustrations/cetus.png",
@@ -89,7 +89,7 @@
       "common_name": {"english": "Water-Avoiding Golden-Eyed Beast", "native": "辟水金睛兽", "pronounce": "Pì Shuǐ Jīn Jīng Shòu", "byname": "Cetus"}
     },
     {
-      "id": "CON xugang_xiyouji Ari",
+      "id": "CON modern_Journey_to_the_West Ari",
       "lines": [[13209, 9884, 8903, 8832]],
       "image": {
         "file": "illustrations/aries.png",
@@ -103,7 +103,7 @@
       "common_name": {"english": "Great Immortal Antelope", "native": "羊力大仙", "pronounce": "Yáng Lì Dà Xiān", "byname": "Aries"}
     },
     {
-      "id": "CON xugang_xiyouji Sct",
+      "id": "CON modern_Journey_to_the_West Sct",
       "lines": [[92175, 92202, 92814, 90595, 91117, 92175]],
       "image": {
         "file": "illustrations/scutum.png",
@@ -117,12 +117,12 @@
       "common_name": {"english": "Round Shield", "native": "团牌", "pronounce": "Tuán Pái", "byname": "Scutum"}
     },
     {
-      "id": "CON modern Pyx",
+      "id": "CON modern_Journey_to_the_West Pyx",
       "lines": [[42828, 42828]],
       "common_name": {"byname": "Pyxis"}
     },
     {
-      "id": "CON xugang_xiyouji Boo",
+      "id": "CON modern_Journey_to_the_West Boo",
       "lines": [[69673, 72105, 74666, 73555, 71075, 71053, 69673], [71075, 69732, 70497]],
       "image": {
         "file": "illustrations/bootes.png",
@@ -136,7 +136,7 @@
       "common_name": {"english": "Erlang Shen (Yang Jian)", "native": "二郎神杨戬", "pronounce": "Èr Láng Shén (Yáng Jiǎn)", "byname": "Bootes"}
     },
     {
-      "id": "CON xugang_xiyouji Cae",
+      "id": " Cae",
       "lines": [[21060, 21770, 21861]],
       "image": {
         "file": "illustrations/caelum.png",
@@ -150,7 +150,7 @@
       "common_name": {"english": "Thunder God's Wedge", "native": "雷公捎", "pronounce": "Léi Gōng Shāo", "byname": "Caelum"}
     },
     {
-      "id": "CON xugang_xiyouji Cha",
+      "id": "CON modern_Journey_to_the_West Cha",
       "lines": [[40702, 51839, 60000]],
       "image": {
         "file": "illustrations/chamaeleon.png",
@@ -164,7 +164,7 @@
       "common_name": {"english": "Alligator Minister", "native": "鼍丞相", "pronounce": "Tuó Chéng Xiàng", "byname": "Chamaeleon"}
     },
     {
-      "id": "CON xugang_xiyouji Cnc",
+      "id": "CON modern_Journey_to_the_West Cnc",
       "lines": [[43103, 42806, 40843], [42806, 42911, 40526], [42911, 44066]],
       "image": {
         "file": "illustrations/cancer.png",
@@ -178,7 +178,7 @@
       "common_name": {"english": "Crab General", "native": "蟹将军", "pronounce": "Xiè Jiāng Jūn", "byname": "Cancer"}
     },
     {
-      "id": "CON xugang_xiyouji Cap",
+      "id": "CON modern_Journey_to_the_West Cap",
       "lines": [[100064, 100345, 104139, 105515, 106985, 107556], [100345, 102485, 102978, 104234, 105881, 106985]],
       "image": {
         "file": "illustrations/capricornus.png",
@@ -192,7 +192,7 @@
       "common_name": {"english": "Jade Dragon Transforming into a White Horse", "native": "玉龙化白马", "pronounce": "Yù Lóng Huà Bái Mǎ", "byname": "Capricornus"}
     },
     {
-      "id": "CON xugang_xiyouji Car",
+      "id": "CON modern_Journey_to_the_West Car",
       "lines": [[50371, 52370, 50099, 45238], [41037, 30438], [34834, 31685]],
       "image": {
         "file": "illustrations/argonavis.png",
@@ -206,7 +206,7 @@
       "common_name": {"byname": "Carina"}
     },
     {
-      "id": "CON xugang_xiyouji Cas",
+      "id": "CON modern_Journey_to_the_West Cas",
       "lines": [[8886, 6686, 4427, 3179, 746]],
       "image": {
         "file": "illustrations/cassiopeia.png",
@@ -220,7 +220,7 @@
       "common_name": {"english": "Queen Mother of the West", "native": "王母娘娘", "pronounce": "Wáng Mǔ Niáng Niáng", "byname": "Cassiopeia"}
     },
     {
-      "id": "CON xugang_xiyouji Cen",
+      "id": "CON modern_Journey_to_the_West Cen",
       "lines": [[71683, 66657, 68702], [73334, 71352, 68933, 65109, 65936, 67464, 67472, 68002, 66657, 61932, 59196, 56480, 56561]],
       "image": {
         "file": "illustrations/centaurus.png",
@@ -234,7 +234,7 @@
       "common_name": {"english": "Wooden Dragon (Jiao)", "native": "角木蛟", "pronounce": "Jiǎo Mù Jiāo", "byname": "Centaurus"}
     },
     {
-      "id": "CON xugang_xiyouji Cep",
+      "id": "CON modern_Journey_to_the_West Cep",
       "lines": [[109492, 112724, 106032, 105199, 109492], [112724, 116727, 106032]],
       "image": {
         "file": "illustrations/cepheus.png",
@@ -248,7 +248,7 @@
       "common_name": {"english": "Jade Emperor", "native": "玉皇大帝", "pronounce": "Yù Huáng Dà Dì", "byname": "Cepheus"}
     },
     {
-      "id": "CON xugang_xiyouji Com",
+      "id": "CON modern_Journey_to_the_West Com",
       "lines": [[64241, 64394, 60742]],
       "image": {
         "file": "illustrations/coma-berenices.png",
@@ -262,7 +262,7 @@
       "common_name": {"english": "Hair of the Queen of Dharma-Defying Kingdom", "native": "灭法国皇后的头发", "pronounce": "Miè Fǎ Guó Huáng Hòu de Tóu Fà", "byname": "Coma Berenices"}
     },
     {
-      "id": "CON xugang_xiyouji CVn",
+      "id": "CON modern_Journey_to_the_West CVn",
       "lines": [[61317, 63125]],
       "image": {
         "file": "illustrations/canes-venatici.png",
@@ -276,7 +276,7 @@
       "common_name": {"english": "Howling Celestial Hound", "native": "哮天犬", "pronounce": "Xiào Tiān Quǎn", "byname": "Canes Venatici"}
     },
     {
-      "id": "CON xugang_xiyouji Aur",
+      "id": "CON modern_Journey_to_the_West Aur",
       "lines": [[28380, 28360, 24608, 23453, 23015], [25428, 23015], [25428, 28380]],
       "image": {
         "file": "illustrations/auriga.png",
@@ -290,7 +290,7 @@
       "common_name": {"english": "Keeper of the Heavenly Horses", "native": "弼马温", "pronounce": "Bì Mǎ Wēn", "byname": "Auriga"}
     },
     {
-      "id": "CON xugang_xiyouji Col",
+      "id": "CON modern_Journey_to_the_West Col",
       "lines": [[30277, 29807, 28199, 27628, 28328], [27628, 26634, 25859]],
       "image": {
         "file": "illustrations/columba.png",
@@ -304,7 +304,7 @@
       "common_name": {"english": "Parrot", "native": "鹦哥", "pronounce": "Yīng Gē", "byname": "Columba"}
     },
     {
-      "id": "CON xugang_xiyouji Crt",
+      "id": "CON modern_Journey_to_the_West Crt",
       "lines": [[53740, 54682, 55705, 55282, 53740], [55282, 55687, 56633, 58188, 57283, 55705]],
       "image": {
         "file": "illustrations/crater.png",
@@ -318,7 +318,7 @@
       "common_name": {"english": "Crystal Cup", "native": "琉璃盏", "pronounce": "Liú Li Zhǎn", "byname": "Crater"}
     },
     {
-      "id": "CON xugang_xiyouji CrA",
+      "id": "CON modern_Journey_to_the_West CrA",
       "lines": [[91875, 92989, 93174, 93825, 94114, 94160, 94005, 93542, 92953], [91875, 90887]],
       "image": {
         "file": "illustrations/corona-australis.png",
@@ -332,7 +332,7 @@
       "common_name": {"english": "Tight-Fillet", "native": "紧箍儿", "pronounce": "Jǐn Gū Ér", "byname": "Corona Australis"}
     },
     {
-      "id": "CON xugang_xiyouji CrB",
+      "id": "CON modern_Journey_to_the_West CrB",
       "lines": [[76127, 75695, 76267, 76952, 77512, 78159, 78493]],
       "image": {
         "file": "illustrations/corona-borealis.png",
@@ -346,7 +346,7 @@
       "common_name": {"english": "Vairocana Hat", "native": "毗卢帽", "pronounce": "Pí Lú Mào", "byname": "Corona Borealis"}
     },
     {
-      "id": "CON xugang_xiyouji Crv",
+      "id": "CON modern_Journey_to_the_West Crv",
       "lines": [[61174, 60965, 59803, 59316, 59199], [59316, 61359, 60965]],
       "image": {
         "file": "illustrations/corvus.png",
@@ -360,7 +360,7 @@
       "common_name": {"english": "Fire Crow", "native": "火鸦", "pronounce": "Huǒ Yā", "byname": "Corvus"}
     },
     {
-      "id": "CON xugang_xiyouji Cru",
+      "id": "CON modern_Journey_to_the_West Cru",
       "lines": [[61084, 60718], [62434, 59747]],
       "image": {
         "file": "illustrations/crux.png",
@@ -374,7 +374,7 @@
       "common_name": {"english": "Demon-Subduing Pestle", "native": "降妖杵", "pronounce": "Xiáng Yāo Chǔ", "byname": "Crux"}
     },
     {
-      "id": "CON xugang_xiyouji Cyg",
+      "id": "CON modern_Journey_to_the_West Cyg",
       "lines": [[94779, 95853, 97165, 100453, 102098], [100453, 102488, 104732, 107310], [100453, 98110, 95947]],
       "image": {
         "file": "illustrations/cygnus.png",
@@ -388,7 +388,7 @@
       "common_name": {"english": "Mythical Azure Bird", "native": "青鸾", "pronounce": "Qīng Luán", "byname": "Cygnus"}
     },
     {
-      "id": "CON xugang_xiyouji Del",
+      "id": "CON modern_Journey_to_the_West Del",
       "lines": [[101421, 101769, 101958, 102532, 102281, 101769]],
       "image": {
         "file": "illustrations/delphinus.png",
@@ -402,7 +402,7 @@
       "common_name": {"english": "Zhu Bajie Transformed into a Catfish", "native": "八戒鲇鱼", "pronounce": "Bā Jiè Nián Yú", "byname": "Delphinus"}
     },
     {
-      "id": "CON xugang_xiyouji Dor",
+      "id": "CON modern_Journey_to_the_West Dor",
       "lines": [[27100, 27890, 26069, 27100], [26069, 21281, 19893]],
       "image": {
         "file": "illustrations/dorado.png",
@@ -416,7 +416,7 @@
       "common_name": {"english": "Mandarin Fish Matron", "native": "斑衣鳜婆", "pronounce": "Bān Yī Guì Pó", "byname": "Dorado"}
     },
     {
-      "id": "CON xugang_xiyouji Dra",
+      "id": "CON modern_Journey_to_the_West Dra",
       "lines": [[87585, 87833, 85670, 85829, 87585, 94376, 97433, 94648, 89937, 83895, 80331, 78527, 75458, 68756, 61281, 56211]],
       "image": {
         "file": "illustrations/draco.png",
@@ -430,7 +430,7 @@
       "common_name": {"english": "Dragon King of the Eastern Sea", "native": "东海龙王敖广", "pronounce": "Dōng Hǎi Lóng Wáng Áo Guǎng", "byname": "Draco"}
     },
     {
-      "id": "CON xugang_xiyouji Nor",
+      "id": "CON modern_Journey_to_the_West Nor",
       "lines": [[80000, 80582, 78914, 78639]],
       "image": {
         "file": "illustrations/norma.png",
@@ -444,7 +444,7 @@
       "common_name": {"english": "Ferule", "native": "戒尺", "pronounce": "Jiè Chǐ", "byname": "Norma"}
     },
     {
-      "id": "CON xugang_xiyouji Eri",
+      "id": "CON modern_Journey_to_the_West Eri",
       "lines": [[7588, 9007, 10602, 11407, 12413, 13847, 15510, 17797, 17874, 20042, 20535, 21393, 17651, 16611, 15474, 14146, 12843, 13701, 15197, 16537, 17378, 21444, 22109, 22701, 23875]],
       "image": {
         "file": "illustrations/eridanus.png",
@@ -458,7 +458,7 @@
       "common_name": {"english": "Flowing-Sand River", "native": "流沙河", "pronounce": "Liú Shā Hé", "byname": "Eridanus"}
     },
     {
-      "id": "CON xugang_xiyouji Sge",
+      "id": "CON modern_Journey_to_the_West Sge",
       "lines": [[96837, 97365, 96757], [97365, 98337, 98920]],
       "image": {
         "file": "illustrations/sagitta.png",
@@ -472,7 +472,7 @@
       "common_name": {"english": "Fire Arrow", "native": "火箭", "pronounce": "Huǒ Jiàn", "byname": "Sagitta"}
     },
     {
-      "id": "CON xugang_xiyouji For",
+      "id": "CON modern_Journey_to_the_West For",
       "lines": [[13147, 14879]],
       "image": {
         "file": "illustrations/fornax.png",
@@ -486,7 +486,7 @@
       "common_name": {"english": "Eight-Trigram Furnace", "native": "八卦炉", "pronounce": "Bā Guà Lú", "byname": "Fornax"}
     },
     {
-      "id": "CON xugang_xiyouji Gem",
+      "id": "CON modern_Journey_to_the_West Gem",
       "lines": [[31681, 34088, 35550, 35350, 32362], [35550, 36962], [36962, 37826], [36962, 36046, 34693, 36850], [34693, 32246, 30883], [32246, 30343, 29655, 28734]],
       "image": {
         "file": "illustrations/gemini.png",
@@ -500,7 +500,7 @@
       "common_name": {"english": "Golden Horn King & The Silver Horn King", "native": "金角大王、银角大王", "pronounce": "Jīn Jiǎo Dà Wáng, Yín Jiǎo Dà Wáng", "byname": "Gemini"}
     },
     {
-      "id": "CON xugang_xiyouji Cam",
+      "id": "CON modern_Journey_to_the_West Cam",
       "lines": [[16228, 17884, 17959, 22783, 29997, 33694], [22783, 23522, 23040]],
       "image": {
         "file": "illustrations/camelopardalis.png",
@@ -514,7 +514,7 @@
       "common_name": {"english": "White Deer", "native": "白鹿", "pronounce": "Bái Lù", "byname": "Camelopardalis"}
     },
     {
-      "id": "CON xugang_xiyouji CMa",
+      "id": "CON modern_Journey_to_the_West CMa",
       "lines": [[34045, 32349, 33160, 34045, 33347, 33977, 34444, 35904], [30788, 32759, 33579, 33856, 34444], [33579, 33152, 31592, 30324], [31592, 33347], [33579, 31125, 30122]],
       "image": {
         "file": "illustrations/canis-major.png",
@@ -528,7 +528,7 @@
       "common_name": {"english": "Yellow Robe Monster", "native": "黄袍怪", "pronounce": "Huáng Páo Guài", "byname": "Canis Major"}
     },
     {
-      "id": "CON xugang_xiyouji UMa",
+      "id": "CON modern_Journey_to_the_West UMa",
       "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774], [58001, 54539, 55219], [46853, 50372, 50801], [53910, 46853, 44127], [46733, 48319, 46853, 41704, 46733, 54061]],
       "image": {
         "file": "illustrations/ursa-major.png",
@@ -542,7 +542,7 @@
       "common_name": {"english": "Black Bear Spirit", "native": "黑熊怪", "pronounce": "Hēi Xióng Guài", "byname": "Ursa Major"}
     },
     {
-      "id": "CON xugang_xiyouji Gru",
+      "id": "CON modern_Journey_to_the_West Gru",
       "lines": [[108085, 109111, 109908, 109973, 110997, 111043, 112122], [109268, 112122, 114421, 114131], [112122, 113638], [112122, 112623]],
       "image": {
         "file": "illustrations/grus.png",
@@ -556,7 +556,7 @@
       "common_name": {"english": "Red-Crowned White Crane", "native": "朱顶白鹤", "pronounce": "Zhū Dǐng Bái Hè", "byname": "Grus"}
     },
     {
-      "id": "CON xugang_xiyouji Her",
+      "id": "CON modern_Journey_to_the_West Her",
       "lines": [[86414, 87808, 84380, 81833, 81126, 79992, 79101, 77760], [81833, 81693, 80816, 80170, 80463, 81008], [88886, 88794, 87933, 86974, 85693, 84379, 84345, 80816], [84379, 83207, 84380], [81693, 83207]],
       "image": {
         "file": "illustrations/hercules.png",
@@ -570,7 +570,7 @@
       "common_name": {"english": "Great Sage Equalling Heaven (Sun Wukong)", "native": "齐天大圣", "pronounce": "Qí Tiān Dà Shèng (Sūn Wù Kōng)", "byname": "Hercules"}
     },
     {
-      "id": "CON xugang_xiyouji Hor",
+      "id": "CON modern_Journey_to_the_West Hor",
       "lines": [[19747, 12225, 12484, 13884, 19747]],
       "image": {
         "file": "illustrations/horlogium.png",
@@ -584,7 +584,7 @@
       "common_name": {"english": "Watchman's Clapper (Bangzi)", "native": "梆子", "pronounce": "Bāng Zi", "byname": "Horologium"}
     },
     {
-      "id": "CON xugang_xiyouji Hya",
+      "id": "CON modern_Journey_to_the_West Hya",
       "lines": [[42799, 42402, 42313, 43109, 43234, 42799], [43234, 43813, 45336, 46776, 46509, 46390, 48356, 49841, 51069, 52943, 56343, 57936, 64166, 64962]],
       "image": {
         "file": "illustrations/hydra.png",
@@ -598,7 +598,7 @@
       "common_name": {"english": "Giant Red-Scaled Python", "native": "红鳞大蟒", "pronounce": "Hóng Lín Dà Mǎng", "byname": "Hydra"}
     },
     {
-      "id": "CON xugang_xiyouji Hyi",
+      "id": "CON modern_Journey_to_the_West Hyi",
       "lines": [[17678, 2021, 3781, 12394, 11001, 8928, 9236]],
       "image": {
         "file": "illustrations/hydrus.png",
@@ -612,7 +612,7 @@
       "common_name": {"english": "White-Spotted Snake Monster", "native": "白花蛇怪", "pronounce": "Bái Huā Shé Guài", "byname": "Hydrus"}
     },
     {
-      "id": "CON xugang_xiyouji Ind",
+      "id": "CON modern_Journey_to_the_West Ind",
       "lines": [[105319, 101772, 103227, 105319]],
       "image": {
         "file": "illustrations/indus.png",
@@ -626,7 +626,7 @@
       "common_name": {"english": "King of Purpuria", "native": "朱紫国国王", "pronounce": "Zhū Zǐ Guó Guó Wáng", "byname": "Indus"}
     },
     {
-      "id": "CON xugang_xiyouji Lac",
+      "id": "CON modern_Journey_to_the_West Lac",
       "lines": [[109937, 111104, 111022, 110609, 110538, 111169, 111022]],
       "image": {
         "file": "illustrations/lacerta.png",
@@ -640,7 +640,7 @@
       "common_name": {"english": "Dragon Alligator", "native": "鼍龙", "pronounce": "Tuó Lóng", "byname": "Lacerta"}
     },
     {
-      "id": "CON xugang_xiyouji Mon",
+      "id": "CON modern_Journey_to_the_West Mon",
       "lines": [[29651, 30867, 34769, 32578, 30419, 31216, 31978], [31216, 32578], [34769, 39863, 37447]],
       "image": {
         "file": "illustrations/monoceros.png",
@@ -654,7 +654,7 @@
       "common_name": {"english": "Great King One-Horned Rhinoceros", "native": "独角兕大王", "pronounce": "Dú Jiǎo Sì Dà Wáng", "byname": "Monoceros"}
     },
     {
-      "id": "CON xugang_xiyouji Lep",
+      "id": "CON modern_Journey_to_the_West Lep",
       "lines": [[28103, 27288, 25985, 24305], [25985, 27654, 27072], [25606, 23685], [25985, 25606], [24305, 24845], [24305, 24327], [27288, 27654]],
       "image": {
         "file": "illustrations/lepus.png",
@@ -668,7 +668,7 @@
       "common_name": {"english": "Jade Hare", "native": "玉兔", "pronounce": "Yù Tù", "byname": "Lepus"}
     },
     {
-      "id": "CON xugang_xiyouji Leo",
+      "id": "CON modern_Journey_to_the_West Leo",
       "lines": [[57632, 54879, 49669, 49583, 50583, 54872, 57632], [50583, 50335, 48455, 47908], [54872, 54879]],
       "image": {
         "file": "illustrations/leo.png",
@@ -682,7 +682,7 @@
       "common_name": {"english": "Nine-Headed Lion", "native": "九头狮子", "pronounce": "Jiǔ Tóu Shī Zi", "byname": "Leo"}
     },
     {
-      "id": "CON xugang_xiyouji Lup",
+      "id": "CON modern_Journey_to_the_West Lup",
       "lines": [[77634, 78918, 78384, 77634], [78384, 76297, 75141, 75177], [75141, 73273, 71860, 74395], [76297, 75264, 74395, 71536, 69996]],
       "image": {
         "file": "illustrations/lupus.png",
@@ -696,7 +696,7 @@
       "common_name": {"english": "Iron-Backed Grey Wolf Fiend", "native": "铁背苍狼怪", "pronounce": "Tiě Bèi Cāng Láng Guài", "byname": "Lupus"}
     },
     {
-      "id": "CON xugang_xiyouji Lyn",
+      "id": "CON modern_Journey_to_the_West Lyn",
       "lines": [[45860, 45688, 44700, 44248, 41075, 36145, 33449, 30060]],
       "image": {
         "file": "illustrations/lynx.png",
@@ -710,7 +710,7 @@
       "common_name": {"english": "South Mountain King", "native": "南山大王", "pronounce": "Nán Shān Dà Wáng", "byname": "Lynx"}
     },
     {
-      "id": "CON xugang_xiyouji Lyr",
+      "id": "CON modern_Journey_to_the_West Lyr",
       "lines": [[91262, 91971, 92420, 93194, 92791, 91971]],
       "image": {
         "file": "illustrations/lyra.png",
@@ -724,7 +724,7 @@
       "common_name": {"english": "Lute of the Heavenly King", "native": "天王琵琶", "pronounce": "Tiān Wáng Pí Pá", "byname": "Lyra"}
     },
     {
-      "id": "CON xugang_xiyouji Ant",
+      "id": "CON modern_Journey_to_the_West Ant",
       "lines": [[51172, 48926]],
       "image": {
         "file": "illustrations/antlia.png",
@@ -738,7 +738,7 @@
       "common_name": {"english": "Wind Bag", "native": "风口袋", "pronounce": "Fēng Kǒu Dài", "byname": "Antlia"}
     },
     {
-      "id": "CON xugang_xiyouji Mic",
+      "id": "CON modern_Journey_to_the_West Mic",
       "lines": [[105140, 103738, 102831]],
       "image": {
         "file": "illustrations/microscopium.png",
@@ -752,7 +752,7 @@
       "common_name": {"english": "Demon-Revealing Mirror", "native": "照妖镜", "pronounce": "Zhào Yāo Jìng", "byname": "Microscopium"}
     },
     {
-      "id": "CON xugang_xiyouji Mus",
+      "id": "CON modern_Journey_to_the_West Mus",
       "lines": [[62322, 57363, 61199, 61585, 62322]],
       "image": {
         "file": "illustrations/musca.png",
@@ -766,7 +766,7 @@
       "common_name": {"english": "Sleep-Inducing Insect", "native": "瞌睡虫", "pronounce": "Kē Shuì Chóng", "byname": "Musca"}
     },
     {
-      "id": "CON xugang_xiyouji Oct",
+      "id": "CON modern_Journey_to_the_West Oct",
       "lines": [[107089, 112405, 70638, 107089]],
       "image": {
         "file": "illustrations/octans.png",
@@ -780,7 +780,7 @@
       "common_name": {"english": "Old Man of the South Pole", "native": "南极老寿星", "pronounce": "Nán Jí Lǎo Shòu Xīng", "byname": "Octans"}
     },
     {
-      "id": "CON xugang_xiyouji Aps",
+      "id": "CON modern_Journey_to_the_West Aps",
       "lines": [[72370, 81065, 81852]],
       "image": {
         "file": "illustrations/apus.png",
@@ -794,7 +794,7 @@
       "common_name": {"english": "Moon Swallow (Wei)", "native": "危月燕", "pronounce": "Wēi Yuè Yàn", "byname": "Apus"}
     },
     {
-      "id": "CON xugang_xiyouji Oph",
+      "id": "CON modern_Journey_to_the_West Oph",
       "lines": [[86032, 86742], [84012, 86742], [86032, 83000, 79882, 81377, 84012, 85755]],
       "image": {
         "file": "illustrations/ophiuchus.png",
@@ -808,7 +808,7 @@
       "common_name": {"english": "Heavenly King Virūpākṣa ", "native": "西方广目天王", "pronounce": "Xī Fāng Guǎng Mù Tiān Wáng", "byname": "Ophiuchus"}
     },
     {
-      "id": "CON xugang_xiyouji Ori",
+      "id": "CON modern_Journey_to_the_West Ori",
       "lines": [[26727, 26311, 25930], [27989, 26727, 27366, 24436, 25930, 25336, 26207, 27989]],
       "image": {
         "file": "illustrations/orion.png",
@@ -822,7 +822,7 @@
       "common_name": {"english": "Nezha", "native": "哪吒", "pronounce": "Né Zhā", "byname": "Orion"}
     },
     {
-      "id": "CON xugang_xiyouji Pav",
+      "id": "CON modern_Journey_to_the_West Pav",
       "lines": [[100751, 105858, 98495, 91792, 86929, 88866, 90098, 92609, 99240, 102395, 100751]],
       "image": {
         "file": "illustrations/pavo.png",
@@ -836,7 +836,7 @@
       "common_name": {"english": "Male Peacock", "native": "雄孔雀", "pronounce": "Xióng Kǒng Què", "byname": "Pavo"}
     },
     {
-      "id": "CON xugang_xiyouji Peg",
+      "id": "CON modern_Journey_to_the_West Peg",
       "lines": [[1067, 113963], [113881, 112158, 109352], [113881, 112748, 112440, 109176, 107354], [113963, 112447, 112029, 109427, 107315], [677, 113881], [677, 1067], [113881, 113963]],
       "image": {
         "file": "illustrations/pegasus.png",
@@ -850,7 +850,7 @@
       "common_name": {"english": "Heavenly Steeds", "native": "天马", "pronounce": "Tiān Mǎ", "byname": "Pegasus"}
     },
     {
-      "id": "CON xugang_xiyouji Per",
+      "id": "CON modern_Journey_to_the_West Per",
       "lines": [[17448, 18246, 18614, 18532, 17358, 15863, 14328, 13268], [15863, 14576, 14354, 13254]],
       "image": {
         "file": "illustrations/perseus.png",
@@ -864,22 +864,22 @@
       "common_name": {"english": "Zhu Bajie", "native": "猪八戒", "pronounce": "Zhū Bā Jiè", "byname": "Perseus"}
     },
     {
-      "id": "CON modern Pic",
+      "id": "CON modern_Journey_to_the_West Pic",
       "lines": [[32607, 32607]],
       "common_name": {"byname": "Pictor"}
     },
     {
-      "id": "CON modern Cir",
+      "id": "CON modern_Journey_to_the_West Cir",
       "lines": [[71908, 71908]],
       "common_name": {"byname": "Circinus"}
     },
     {
-      "id": "CON modern Tel",
+      "id": "CON modern_Journey_to_the_West Tel",
       "lines": [[90422, 90422]],
       "common_name": {"byname": "Telescopium"}
     },
     {
-      "id": "CON xugang_xiyouji Equ",
+      "id": "CON modern_Journey_to_the_West Equ",
       "lines": [[104521, 104858, 105570, 104987, 104521]],
       "image": {
         "file": "illustrations/equuleus.png",
@@ -893,7 +893,7 @@
       "common_name": {"english": "Horse-Face", "native": "马面", "pronounce": "Mǎ Miàn", "byname": "Equuleus"}
     },
     {
-      "id": "CON xugang_xiyouji CMi",
+      "id": "CON modern_Journey_to_the_West CMi",
       "lines": [[37279, 36188]],
       "image": {
         "file": "illustrations/canis-minor.png",
@@ -907,7 +907,7 @@
       "common_name": {"english": "Metal Dog (Lou)", "native": "娄金狗", "pronounce": "Lóu Jīn Gǒu", "byname": "Canis Minor"}
     },
     {
-      "id": "CON xugang_xiyouji LMi",
+      "id": "CON modern_Journey_to_the_West LMi",
       "lines": [[53229, 51233, 49593, 46952], [49593, 53229]],
       "image": {
         "file": "illustrations/leo-minor.png",
@@ -921,7 +921,7 @@
       "common_name": {"english": "Yellow Lion Spirit", "native": "黄狮精", "pronounce": "Huáng Shī Jīng", "byname": "Leo Minor"}
     },
     {
-      "id": "CON xugang_xiyouji Vul",
+      "id": "CON modern_Journey_to_the_West Vul",
       "lines": [[95771, 97886, 103004]],
       "image": {
         "file": "illustrations/vulpecula.png",
@@ -935,7 +935,7 @@
       "common_name": {"english": "Nine-Tailed Vixen", "native": "九尾狐狸", "pronounce": "Jiǔ Wěi Hú Li", "byname": "Vulpecula"}
     },
     {
-      "id": "CON xugang_xiyouji UMi",
+      "id": "CON modern_Journey_to_the_West UMi",
       "lines": [[11767, 85822, 82080, 77055, 79822, 75097, 72607, 77055]],
       "image": {
         "file": "illustrations/ursa-minor.png",
@@ -949,7 +949,7 @@
       "common_name": {"english": "Yellow Wind Monster", "native": "黄风怪", "pronounce": "Huáng Fēng Guài", "byname": "Ursa Minor"}
     },
     {
-      "id": "CON xugang_xiyouji Phe",
+      "id": "CON modern_Journey_to_the_West Phe",
       "lines": [[5348, 5165, 2072], [765, 2072, 2081], [5165, 6867, 8837], [3405, 765, 116389, 116602, 118234]],
       "image": {
         "file": "illustrations/phoenix.png",
@@ -963,7 +963,7 @@
       "common_name": {"english": "Nine-Headed Monstrous Bird", "native": "九头虫", "pronounce": "Jiǔ Tóu Chóng", "byname": "Phoenix"}
     },
     {
-      "id": "CON xugang_xiyouji Psc",
+      "id": "CON modern_Journey_to_the_West Psc",
       "lines": [[4889, 5742], [4889, 6193, 5742, 7097, 8198, 9487, 8833, 7884, 7007, 4906, 3760, 1645, 118268, 116771, 116928, 115738, 114971, 115830, 116771]],
       "image": {
         "file": "illustrations/pisces.png",
@@ -977,7 +977,7 @@
       "common_name": {"english": "Benborba & Babonber", "native": "奔波儿灞、灞波儿奔", "pronounce": "Bēn Bōr Bà, Bà Bōr Bēn", "byname": "Pisces"}
     },
     {
-      "id": "CON xugang_xiyouji PsA",
+      "id": "CON modern_Journey_to_the_West PsA",
       "lines": [[113368, 111954, 109422, 107608, 107380, 109285, 111188, 113246, 113368]],
       "image": {
         "file": "illustrations/piscis-austrinus.png",
@@ -991,7 +991,7 @@
       "common_name": {"english": "Goldfish Monster", "native": "灵感大王", "pronounce": "Líng Gǎn Dà Wáng", "byname": "Piscis Austrinus"}
     },
     {
-      "id": "CON xugang_xiyouji Vol",
+      "id": "CON modern_Journey_to_the_West Vol",
       "lines": [[41312, 35228, 34481, 37504, 39794, 41312], [44382, 41312]],
       "image": {
         "file": "illustrations/volans.png",
@@ -1005,12 +1005,12 @@
       "common_name": {"english": "Carp Commander", "native": "鲤总兵", "pronounce": "Lǐ Zǒng Bīng", "byname": "Volans"}
     },
     {
-      "id": "CON xugang_xiyouji Pup",
+      "id": "CON modern_Journey_to_the_West Pup",
       "lines": [[34834, 35264, 38170, 39757]],
       "common_name": {"byname": "Puppis"}
     },
     {
-      "id": "CON xugang_xiyouji Ret",
+      "id": "CON modern_Journey_to_the_West Ret",
       "lines": [[19780, 19921, 18597, 17440, 19780]],
       "image": {
         "file": "illustrations/reticulum.png",
@@ -1024,7 +1024,7 @@
       "common_name": {"english": "Spider Web", "native": "蜘蛛网", "pronounce": "Zhī Zhū Wǎng", "byname": "Reticulum"}
     },
     {
-      "id": "CON xugang_xiyouji Sgr",
+      "id": "CON modern_Journey_to_the_West Sgr",
       "lines": [[89931, 90496], [89642, 90185, 88635, 89341], [88635, 89931, 90185, 93506, 92041, 89931], [92041, 90496], [93506, 93864, 92855, 92041], [92855, 93085, 93683, 94141, 95168]],
       "image": {
         "file": "illustrations/sagittarius.png",
@@ -1038,7 +1038,7 @@
       "common_name": {"english": "Wooden Unicorn (Dou)", "native": "斗木獬", "pronounce": "Dǒu Mù Xiè", "byname": "Sagittarius"}
     },
     {
-      "id": "CON xugang_xiyouji Sco",
+      "id": "CON modern_Journey_to_the_West Sco",
       "lines": [[85927, 86670, 87073, 86228, 84143, 82671, 82514, 82396, 81266, 80763, 80112, 78401, 78104], [78401, 78820]],
       "image": {
         "file": "illustrations/scorpius.png",
@@ -1052,12 +1052,12 @@
       "common_name": {"english": "Scorpion Spirit", "native": "蝎子精", "pronounce": "Xiē Zi Jīng", "byname": "Scorpius"}
     },
     {
-      "id": "CON xugang_xiyouji Ser",
+      "id": "CON modern_Journey_to_the_West Ser",
       "lines": [[77516, 77622, 77070, 76276, 77233, 78072, 77450, 77233], [92946, 89962, 86565, 86263, 84880]],
       "common_name": {"english": "Divine Serpent", "native": "灵蛇", "pronounce": "Líng Shé", "byname": "Serpens"}
     },
     {
-      "id": "CON xugang_xiyouji Sex",
+      "id": "CON modern_Journey_to_the_West Sex",
       "lines": [[51437, 49641]],
       "image": {
         "file": "illustrations/sextans.png",
@@ -1071,7 +1071,7 @@
       "common_name": {"english": "Siming Spade", "native": "四明铲", "pronounce": "Sì Míng Chǎn", "byname": "Sextans"}
     },
     {
-      "id": "CON xugang_xiyouji Men",
+      "id": "CON modern_Journey_to_the_West Men",
       "lines": [[25918, 21949]],
       "image": {
         "file": "illustrations/mensa.png",
@@ -1085,7 +1085,7 @@
       "common_name": {"english": "Ling Sacred Mountain", "native": "灵山", "pronounce": "Líng Shān", "byname": "Mensa"}
     },
     {
-      "id": "CON xugang_xiyouji Tau",
+      "id": "CON modern_Journey_to_the_West Tau",
       "lines": [[25428, 21881, 20889, 20648, 20455, 20205, 18724, 15900, 18907, 16852], [18724, 21589, 21402, 19860], [26451, 21421, 20885, 20205], [20889, 20635, 19038, 17573, 16369, 15900]],
       "image": {
         "file": "illustrations/taurus.png",
@@ -1099,7 +1099,7 @@
       "common_name": {"english": "Bull Demon King", "native": "牛魔王", "pronounce": "Niú Mó Wáng", "byname": "Taurus"}
     },
     {
-      "id": "CON xugang_xiyouji Tuc",
+      "id": "CON modern_Journey_to_the_West Tuc",
       "lines": [[110130, 114996, 2484, 1599, 118322, 110838, 110130]],
       "image": {
         "file": "illustrations/tucana.png",
@@ -1113,7 +1113,7 @@
       "common_name": {"english": "Thunder God", "native": "雷公", "pronounce": "Léi Gōng", "byname": "Tucana"}
     },
     {
-      "id": "CON xugang_xiyouji Tri",
+      "id": "CON modern_Journey_to_the_West Tri",
       "lines": [[10670, 10064, 8796, 10670]],
       "image": {
         "file": "illustrations/triangulum.png",
@@ -1127,7 +1127,7 @@
       "common_name": {"english": "Black Vulture Flag", "native": "皂雕旗", "pronounce": "Zào Diāo Qí", "byname": "Triangulum"}
     },
     {
-      "id": "CON xugang_xiyouji TrA",
+      "id": "CON modern_Journey_to_the_West TrA",
       "lines": [[82273, 74946, 77952, 82273]],
       "image": {
         "file": "illustrations/triangulum-australe.png",
@@ -1141,7 +1141,7 @@
       "common_name": {"english": "Command Flag", "native": "令字旗", "pronounce": "Lìng Zì Qí", "byname": "Triangulum Australe"}
     },
     {
-      "id": "CON xugang_xiyouji Aqr",
+      "id": "CON modern_Journey_to_the_West Aqr",
       "lines": [[106278, 109074, 110395, 112961, 114855, 116971, 115669, 114119, 113368], [109074, 110003, 109139], [110003, 111123, 112716, 113136]],
       "image": {
         "file": "illustrations/aquarius.png",
@@ -1155,7 +1155,7 @@
       "common_name": {"english": "Guanyin (Avalokiteśvara)", "native": "观音菩萨", "pronounce": "Guān Yīn Pú Sà", "byname": "Aquarius"}
     },
     {
-      "id": "CON xugang_xiyouji Vir",
+      "id": "CON modern_Journey_to_the_West Vir",
       "lines": [[57380, 57757, 60129, 63090, 66249, 68520, 72220], [68520, 71957], [63090, 63608], [60129, 61941, 65474]],
       "image": {
         "file": "illustrations/virgo.png",
@@ -1169,7 +1169,7 @@
       "common_name": {"english": "Queen of the Womanland", "native": "女儿国国王", "pronounce": "Nǚ Ér Guó Guó Wáng", "byname": "Virgo"}
     },
     {
-      "id": "CON xugang_xiyouji Vel",
+      "id": "CON modern_Journey_to_the_West Vel",
       "lines": [[51986, 50191, 46651, 51986, 52727, 44816, 39429, 36377, 34834, 41037, 45080, 45556, 50371, 51232, 52727]],
       "common_name": {"english": "Giant Soft-Shelled Turtle", "native": "老鼋", "pronounce": "Lǎo Yuán", "byname": "Vela"}
     }
