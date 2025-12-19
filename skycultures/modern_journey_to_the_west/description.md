@@ -2,9 +2,9 @@
 
 ## Introduction
 
-*Journey to the West* is a classic of Chinese God and devil novels. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.
+*Journey to the West* is a classic of Chinese God and devil novel. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.
 
-This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from *Journey to the West*, creating an entirely new constellation world imbued with the rich hues of Chinese mythology.(The *Journey to the West* sky culture includes 84 of the 88 IAU standard constellations. The four constellations Circinus, Pictor, Pyxis and Telescopium have no corresponding figures or elements in the story.)
+This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from *Journey to the West*, creating an entirely new constellation world imbued with the rich hues of Chinese mythology. (The *Journey to the West* sky culture includes 84 of the 88 IAU standard constellations. The four constellations Circinus, Pictor, Pyxis and Telescopium have no corresponding figures or elements in the story.)
 
 ## Constellations
 
