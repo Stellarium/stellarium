@@ -4,7 +4,7 @@
 
 *Journey to the West* is a classic of Chinese God and devil novels. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.
 
-This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from *Journey to the West*, creating an entirely new constellation world imbued with the rich hues of Chinese mythology.
+This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from *Journey to the West*, creating an entirely new constellation world imbued with the rich hues of Chinese mythology.(The Journey to the West sky culture includes 84 of the 88 IAU standard constellations. The four constellations Circinus, Pictor, Pyxis and Telescopium have no corresponding figures or elements in the story.)
 
 ## Constellations
 
@@ -162,7 +162,7 @@ A general serving under the Dragon King.
 
 Corresponding to the modern constellation *Leo*.
 
-The mount of the Savior, Celestial Honored One. He descended to the mortal world and was worshipped as a patriarch by other lions.
+The mount of the Savior Celestial Honored One. He descended to the mortal world and was worshipped as a patriarch by other lions.
 
 ##### Queen of the Womanland
 
@@ -200,7 +200,7 @@ Corresponding to the modern constellation *Aquarius*.
 
 The Bodhisattva who inspired the pilgrimage and frequently aided the team. Her vase can hold an entire ocean's worth of water.
 
-##### Benborba & Babonber
+##### Benborba & Baborben
 
 Corresponding to the modern constellation *Pisces*.
 
@@ -342,7 +342,7 @@ A strategist who advised freezing the Tongtian River to capture Tang Monk.
 
 Corresponding to the modern constellation *Grus*.
 
-The mount of the Great White Planet.
+The crane mount of Tai Bai Jin Xing, the Chinese deity of Venus.
 
 ##### White-Spotted Snake Monster
 
@@ -366,7 +366,7 @@ A small insect that causes drowsiness.
 
 Corresponding to the modern constellation *Pavo*.
 
-The wounded offspring of the Peacock Buddha Mother, shot by the prince who would become the King of Purpuria.
+The offspring of the Peacock Buddha Mother, shot by the prince who would become the King of Purpuria.
 
 ##### Nine-Headed Monstrous Bird
 
@@ -480,7 +480,7 @@ Used by the Patriarch Bodhi to hit Sun Wukong three times, hinting at a secret m
 
 Corresponding to the modern constellation *Octans*.
 
-The God of Longevity, whose identity is fused with the star Canopus. It is also known as the "South Pole Star" because Canopus was the southernmost bright star observable in ancient China.
+The Star of Longevity, whose identity is fused with the star Canopus. It is also known as the "South Pole Star" because Canopus was the southernmost bright star observable in ancient China.
 
 ##### Spider Web
 
