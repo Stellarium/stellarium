@@ -500,8 +500,6 @@ Corresponding to the modern constellations *Carina, Puppis, Vela*.
 
 A 1,300-year-old turtle that carried the pilgrims across the Tongtian River.
 
-**Note**: Circinus, Pictor, Pyxis and Telescopium have no corresponding figures in Journey to the West.
-
 ## Description
 
 ![](illustrations/chart.png)
