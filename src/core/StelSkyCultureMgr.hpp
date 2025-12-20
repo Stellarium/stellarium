@@ -227,7 +227,13 @@ public slots:
 	//! Returns a localized HTML description for the current sky culture.
 	//! @return a HTML description of the current sky culture, suitable for display
 	QString getCurrentSkyCultureHtmlDescription();
-	
+	//! Returns a localized narration text for the current sky culture.
+	//! @return a plaintext description of the current sky culture, suitable for narration
+	//! This only includes the text before section "## Constellations".
+	//! The Constellation texts are narrated one-by-one when selected,
+	//! and references/authors/license are likely nothing of so great interest.
+	QString getCurrentSkyCultureNarration();
+
 	//! Get the default sky culture ID
 	QString getDefaultSkyCultureID() {return defaultSkyCultureID;}
 	//! Set the default sky culture from the ID.
@@ -353,10 +359,13 @@ private:
 	QString skyCultureI18ToDirectory(const QString& cultureName) const;
 
 	QString descriptionMarkdownToHTML(const QString& markdown, const QString& descrPath);
+	QString descriptionMarkdownToNarration(const QString& markdown, const QString& descrPath);
 	// We don't use QHash/QMap because we want to preserve order of constellations as listed in the description file
 	std::vector<std::pair<QString/*constellation*/, QString/*description*/>> getConstellationsDescriptions(QString consSection) const;
 	QString convertMarkdownLevel2Section(const QString& markdown, const QString& sectionName,
 	                                     qsizetype bodyStartPos, qsizetype bodyEndPos, const StelTranslator& trans);
+	QString convertMarkdownLevel2SectionNarration(const QString& markdown, const QString& sectionName,
+					     qsizetype bodyStartPos, qsizetype bodyEndPos, const StelTranslator& trans);
 	std::pair<QString/*color*/,QString/*info*/> getLicenseDescription(const QString& license, const bool singleLicenseForAll) const;
 
 	QMap<QString, StelSkyCulture> dirToNameEnglish;

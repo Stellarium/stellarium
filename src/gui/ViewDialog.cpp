@@ -709,11 +709,25 @@ void ViewDialog::createDialogContent()
 	if (GETSTELMODULE(StelSpeechMgr)->enabled())
 	{
 		connect(ui->pushButtonLandscapes_say, &QPushButton::clicked, this, [this](){
-			GETSTELMODULE(StelSpeechMgr)->say(ui->landscapeTextBrowser->toPlainText());});
+			static LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
+
+			QString pureContent=lmgr->getDescription();
+			static const QRegularExpression htmlbegin("<.*>");
+			static const QRegularExpression htmlend("</.*>");
+			static const QRegularExpression htmlendH("</[Hh][1-4]>");
+			static const QRegularExpression html1("<.*/>");
+			QString stripped=pureContent.replace(htmlendH, ". . . ").remove(html1).remove(htmlend).remove(htmlbegin);
+
+			GETSTELMODULE(StelSpeechMgr)->say(stripped);});
 		connect(ui->pushButtonLandscapes_stop, &QPushButton::clicked, this, [this](){
 			GETSTELMODULE(StelSpeechMgr)->stop();});
 		connect(ui->pushButtonSkyculture_say, &QPushButton::clicked, this, [this](){
-			GETSTELMODULE(StelSpeechMgr)->say(ui->skyCultureTextBrowser->toPlainText());});
+			StelApp& app = StelApp::getInstance();
+			QString md = app.getSkyCultureMgr().getCurrentSkyCultureNarration();
+			qDebug() << "MD as received: " << md;
+
+			GETSTELMODULE(StelSpeechMgr)->say(md);
+		});
 		connect(ui->pushButtonSkyculture_stop, &QPushButton::clicked, this, [this](){
 			GETSTELMODULE(StelSpeechMgr)->stop();});
 	}
