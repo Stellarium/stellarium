@@ -223,9 +223,13 @@ void ScmSkyCultureDialog::saveSkyCulture()
 		return;
 	}
 	// check if description is complete
-	if (!desc.isComplete())
+	const auto incompFieldsList = desc.getIncompleteFieldsList();
+	if (!incompFieldsList.isEmpty())
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The sky culture description is not complete. Please fill in all required fields correctly."));
+		auto msg = q_("The sky culture description is not complete. The following fields are not filled correctly:\n");
+		for (const auto& field : incompFieldsList)
+			msg += u8" \u2022 " + field + "\n";
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(), msg);
 		return;
 	}
 
