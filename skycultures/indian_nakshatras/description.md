@@ -33,108 +33,107 @@ The Milky Way is not incorporated in this set.
 
 ##### Ashvini
 
-meaning "Horse Head", is the first nakshatra since the canonisation in the first millennium CE.
+The meaning is "Horse Head", is the first nakshatra since the canonisation in the first millennium CE.
 
 #####  Bharani
 
-meaning "Bearer" 
+The meaning is "Bearer".
 
 #####  Krittika
 
-a name for the Pleiades, mythologically represented by seven damsels 
+The meaning of the name is uncertain, but it's a name for the Pleiades, mythologically represented by seven damsels. 
 
 #####  Rohini
 
-meaning "The Red One", a name for reddish Aldebaran and the Hyades
+Literally, the meaning is "The Red One", a name for reddish Aldebaran and the Hyades.
 
 #####  Mrigashira
 
-meaning "Deer's Head"
+The term's literal meaning is "Deer's Head". It is an asterism of three faint stars that seem to form a nebulous patch. 
 
 #####  Ardra
 
-meaning "Wetness", name for Betelgeuse
+The sixth nakshatra has the name "Wetness". It is identified with Betelgeuse as a single star-asterism.
 
 #####  Punarvasu
 
-meaning "Twin-Restorer" in Gemini
+The term means "Twin-Restorer" and refers to a deity.
 
 #####  Pushya
 
-meaning "Nourisher", a name for the open star cluster M44 and the box of stars surrounding it. 
+Pushya means "Nourisher" and is a name for the open star cluster M44 which is surrounded by four stars forming a box-like quadrilateral. 
 
 #####  Ashlesha
 
-meaning "Embrace" 
+Ashlesha means "Embrace".
 
 #####  Magha
 
-meaning "Bountiful" 
+This name sometimes refers to the single star-asterism Regulus and sometimes to a group of four stars in a zigzag pattern. The literal translation means "Bountiful".
 
 #####  Purva Phalguni
 
-meaning "First Reddish" 
+Likely, there used to be a constellation "Phalguni", the Reddish, in very old times that was later split into two sections to obtain a number of 27 units in the path of the moon; Purva Phalguni is the "First Reddish".
 
 #####  Uttara Phalguni
 
-meaning "Second Reddish" 
+Uttara Phalguni is the "Second Reddish", the second half of the Phalguni-asterism, in the direction of monthly lunar motion.
 
 #####  Hasta
 
-meaning "Hand" 
+Hasta means "Hand" and refers to a group of five stars.
 
 #####  Chitra
 
-meaning "Bright One"
-In this specific engraving in the temple, interestingly, this single star-asterism is drawn as two stars and not only as one as it used to be the tradition. The companion is called "Apamvatsa" in later star catalogues and also bears this name in the IAU-Catalogue of Star Names. 
+Chitra, the "Bright One", used to be a star name for most of historical sources. However, in this specific engraving in the temple, interestingly, this single star-asterism is drawn as two stars and not only as one as it used to be the tradition. The companion is called "Apamvatsa" in later star catalogues and also bears this name in the IAU-Catalogue of Star Names. 
 
 #####  Svati
 
-Svati is a goddess
+Svati is the name of a goddess.
 
 #####  Vishakha
 
-meaning "Forked" 
+The literal meaning is "Forked"; it is the name of an asterims in Libra, but only the identification of alpha and beta Librae is certain. 
 
 #####  Jyeshtha
 
-meaning "Eldest"
+The name means "Eldest" but it is unknown what it signifies.
 
 #####  Mula
 
-meaning "Root"
+Mula, the "Root", is located in the area of Sco which contains some of the brightest clouds of the Milky Way with a significant dark stripe in the middle, and also many bright stars. Hence, it is uncertain if the name refers to a group of (up to ten) stars or to a pattern of bright or dark clouds. 
 
 #####  Purva Ashadha
 
-meaning "First Invincible"
+Ashadha, the Invincible, was the name of a larger constellation that was split into two parts, the first of which is the "First Invincible".
 
 #####  Uttara Ashadha
 
-meaning "Second Invincible"
+The "Second Invincible" is the second half of the formerly larger constellation of Ashadha, the Invincible, in the direction of the monthly motion of the moon.
 
 #####  Shravana
 
-meaning "Listening"
+Shravana means "Listening".
 
 #####  Dhanishta
 
-meaning "Most Famous" 
+Dhanishta, the "Most Famous", is the name of an easily recognisable pattern of stars; it appears as a group even to inexperienced observers. 
 
 #####  Shatabhisha
 
-meaning "Hundred Physicians" 
+Literally, the term Shatabhisha means "Hundred Physicians" and some historical depictions really display 100 stars. Here, it is just represented as a group of many. 
 
 #####  Purva Bhadrapada
 
-meaning "First Blessed Feet" 
+From the Blessed Feed, here we see the "First Blessed Feet".
 
 #####  Uttara Bhadrapada
 
-meaning "Second Blessed Feet"
+As the Moon on its monthly path moves from west to east, the eastern part of the constellation of the Blessed Feet is called "Second Blessed Feet".
 
 #####  Revati
 
-meaning "Prosperous"
+Revati means the "Prosperous". In the canonical counting the last nakshatra, harbinger of the new cycle. 
 
 
 ## References
