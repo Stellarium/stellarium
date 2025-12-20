@@ -523,7 +523,7 @@ https://item.jd.com/14406961.html
  
 - [2]: Xu Gang. (2025). Monkey King Star Quest: Celestial Chart（《大闹星空：西游星座图》）. Beijing: Posts & Telecom Press. ISBN：9787115658395.
 
-## Author
+## Authors
 
 This sky culture was contributed to Stellarium by **Xu Gang, He Yuan and Sun Shuwei**.
 
