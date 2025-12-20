@@ -32,8 +32,8 @@ The Milky Way is not incorporated in this set.
 ## Constellations
 
 ##### Ashvini
- 
-meaning "Horse Head", is the first nakshatra since the canonisation in the first millennium CE. 
+
+meaning "Horse Head", is the first nakshatra since the canonisation in the first millennium CE.
 
 #####  Bharani
 
