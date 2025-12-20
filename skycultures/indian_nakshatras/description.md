@@ -31,94 +31,120 @@ The Milky Way is not incorporated in this set.
 
 ## Constellations
 
-##### Ashvini. 
+##### Ashvini
+ 
 meaning "Horse Head", is the first nakshatra since the canonisation in the first millennium CE. 
 
-#####  Bharani, 
+#####  Bharani
+
 meaning "Bearer" 
 
-#####  Krittika 
+#####  Krittika
+
 a name for the Pleiades, mythologically represented by seven damsels 
 
-#####  Rohini 
+#####  Rohini
+
 meaning "The Red One", a name for reddish Aldebaran and the Hyades
 
 #####  Mrigashira
+
 meaning "Deer's Head"
 
 #####  Ardra
+
 meaning "Wetness", name for Betelgeuse
 
 #####  Punarvasu
+
 meaning "Twin-Restorer" in Gemini
 
 #####  Pushya
+
 meaning "Nourisher", a name for the open star cluster M44 and the box of stars surrounding it. 
 
 #####  Ashlesha
+
 meaning "Embrace" 
 
 #####  Magha
+
 meaning "Bountiful" 
 
-#####  Purva Phalguni 
+#####  Purva Phalguni
+
 meaning "First Reddish" 
 
 #####  Uttara Phalguni
+
 meaning "Second Reddish" 
 
 #####  Hasta
+
 meaning "Hand" 
 
 #####  Chitra
+
 meaning "Bright One"
 In this specific engraving in the temple, interestingly, this single star-asterism is drawn as two stars and not only as one as it used to be the tradition. The companion is called "Apamvatsa" in later star catalogues and also bears this name in the IAU-Catalogue of Star Names. 
 
-#####  Svati 
+#####  Svati
+
 Svati is a goddess
 
 #####  Vishakha
+
 meaning "Forked" 
 
 #####  Jyeshtha
+
 meaning "Eldest"
 
 #####  Mula
+
 meaning "Root"
 
 #####  Purva Ashadha
+
 meaning "First Invincible"
 
 #####  Uttara Ashadha
+
 meaning "Second Invincible"
 
-#####  Shravana 
+#####  Shravana
+
 meaning "Listening"
 
-#####  Dhanishta 
+#####  Dhanishta
+
 meaning "Most Famous" 
 
 #####  Shatabhisha
+
 meaning "Hundred Physicians" 
 
 #####  Purva Bhadrapada
+
 meaning "First Blessed Feet" 
 
 #####  Uttara Bhadrapada
+
 meaning "Second Blessed Feet"
 
 #####  Revati
+
 meaning "Prosperous"
 
 
 ## References
 
- - [#1] Débarbat, S; Eddy, J. A.; Eichhorn, H. K. and Upgren, A.R. (ed.) 1988. Mapping the Sky. International Astronomical Union Symposia, Kluwer Academic, Dordrecht (NL).
- - [#2] Dikshit, S.B. 1981. Bhāratīya Jyotish Śāstra (History of Indian Astronomy), vol. 2, New Delhi (First published in Marathi in 1896.)
- - [#3] Hoffmann and Shylaja (forthcoming), Nakshatras in the first millennium BCE
- - [#4] Shylaja B S and Shubha B S (2024). A Unique Application Of The Observation Of Stars In Indian Astronomical Texts , 2024,  Journal for Astronomical History and Heritage, 27(3): 595-604 
- - [#5] Weber, A. 1860-1862. Die Vedischen Nachrichten von der Naxatra. Königliche Akademie der Wissenschaften, Berlin. 2 Volumes.
- - [#6] Yano, M. 2017. ‘The Nakṣatra System of the Atharvaveda-Pariśiṣṭa,’ Journal of Indian Studies 28/29: 65–74.
+ - [#1]: Débarbat, S; Eddy, J. A.; Eichhorn, H. K. and Upgren, A.R. (ed.) 1988. Mapping the Sky. International Astronomical Union Symposia, Kluwer Academic, Dordrecht (NL).
+ - [#2]: Dikshit, S.B. 1981. Bhāratīya Jyotish Śāstra (History of Indian Astronomy), vol. 2, New Delhi (First published in Marathi in 1896.)
+ - [#3]: Hoffmann and Shylaja (forthcoming), Nakshatras in the first millennium BCE
+ - [#4]: Shylaja B S and Shubha B S (2024). A Unique Application Of The Observation Of Stars In Indian Astronomical Texts , 2024,  Journal for Astronomical History and Heritage, 27(3): 595-604 
+ - [#5]: Weber, A. 1860-1862. Die Vedischen Nachrichten von der Naxatra. Königliche Akademie der Wissenschaften, Berlin. 2 Volumes.
+ - [#6]: Yano, M. 2017. ‘The Nakṣatra System of the Atharvaveda-Pariśiṣṭa,’ Journal of Indian Studies 28/29: 65–74.
 
 ## Authors
 
@@ -129,6 +155,7 @@ Susanne M Hoffmann
 With B.S. Shylaja, I studied the early history of the nakshatras in our research. 
 
 ### Acknowledgements
+
 I thank B. S. Shylaja for consulting me in my studies of the history of Vedic astronomy. 
 
 Students of the University of Jena, Germany: Vincent Gerlach, Fabian Hofer, Luca-Philipp Grumbach, Mher Mnatsakanyan, Richard Hofmann and Moritz Rätz. These students developed a "Sky Culture Maker Plugin" for Stellarium which I am herewith testing.  
