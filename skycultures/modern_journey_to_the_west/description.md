@@ -501,7 +501,7 @@ Corresponding to the modern constellation *Sculptor*.
 
 A jade seal used to stamp the Travel Rescript (passport).
 
-##### Soft-Shelled Turtle
+##### Giant Soft-Shelled Turtle
 
 Corresponding to the modern constellations *Carina, Puppis, Vela*.
 
