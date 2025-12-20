@@ -16,24 +16,14 @@
 % License:
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %
+% Adapted 2025/11 by Georg Zotti for Legrand Orange Book class version 3.1. 
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %----------------------------------------------------------------------------------------
 %	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-\usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm,headsep=10pt,a4paper]{geometry} % Page margins
-\usepackage{ifpdf}
-% We want to create PDF and HTML. Some alternatives are required.
-% https://tex.stackexchange.com/questions/93852/what-is-the-correct-way-to-check-for-latex-pdflatex-and-html-in-the-same-latex
 
-\ifpdf
-  \usepackage{graphicx} % Required for including pictures
-\else % processed with htlatex?
-  \usepackage[dvipdfmx]{graphicx} % Required for including pictures POSSIBLY some other option?
-\fi
-\graphicspath{{pictures/}} % Specifies the directory where pictures are stored
-
-\usepackage{tikz} % Required for drawing custom shapes
 \usepackage{longtable}
 \usepackage{tabularx}
 %\usepackage{tabu} % tabu makes problems with htlatex, sorry.
@@ -45,10 +35,10 @@
 
 \usepackage{booktabs} % Required for nicer horizontal rules in tables
 
-\usepackage{xcolor} % Required for specifying colors by name
-\definecolor{ocre}{RGB}{51,153,255} % Define the color used for highlighting throughout the book
+%\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{51,153,255} % Define the color used for highlighting throughout the book (ignore name 'ocre' coming from book template)
+\definecolor{light-gray}{gray}{0.90}
 
-\usepackage{color}
 \usepackage{listings}
 \usepackage{rotating} % Allow sidewaysfigure
 \usepackage{fancyvrb}% provides \VerbatimFootnotes
@@ -287,7 +277,7 @@
 \makeatletter
 \ifhtlatex
 \newcommand{\printchapterauthor}[1]{%
-  {\parindent0pt\vspace*{-25pt}%
+  {\parindent0pt\vspace*{-5pt}%
   \linespread{1.1}\large#1%
   \par\nobreak\vspace*{35pt}}
   \@afterheading%
@@ -307,7 +297,7 @@
 }
 \else
 \newcommand{\printchapterauthor}[1]{%
-  {\parindent0pt\vspace*{-25pt}%
+  {\parindent0pt\vspace*{-5pt}%
   \linespread{1.1}\large\scshape#1%
   \par\nobreak\vspace*{35pt}}
   \@afterheading%
@@ -329,16 +319,10 @@
 \makeatother
 
 %----------------------------------------------------------------------------------------
-%	FONTS
+%	FONTS (ADDITIONS)
 %----------------------------------------------------------------------------------------
 
-\usepackage{avant} % Use the Avantgarde font for headings
-%\usepackage{times} % Use the Times font for headings
-\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Symbol, Chancery and Computer Modern fonts
-
-\usepackage{microtype} % Slightly tweak font spacing for aesthetics
-\usepackage[utf8]{inputenc} % Required for including letters with accents
-\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{footmisc} % As of 2025, this is only needed in older systems (Ubuntu 20.04, not 22.04). Can probably be removed. 
 \usepackage{newunicodechar} % Must be loaded after [utf8]inputenc
 \newunicodechar{°}{\degree}
 % Taken from https://tex.stackexchange.com/a/424538
@@ -354,9 +338,10 @@
 
 \usepackage{csquotes} % recommended when using biblatex and babel
 %\usepackage[style=numeric,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
-\usepackage[style=authoryear-comp,citestyle=authoryear,natbib=true,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+%% TODO2025: Reactivate in class file
+%\usepackage[style=authoryear-comp,citestyle=authoryear,natbib=true,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \addbibresource{guide.bib} % BibTeX bibliography file
-\defbibheading{bibempty}{}
+%\defbibheading{bibempty}{}
 % This command prints >>title (name, year)<< for more extensive citations.
 \newcommand{\citetp}[1]{\citetitle{#1} \citep{#1}}
 % NOTE on citations: we have several options, provided with the natbib compatibility interface.
@@ -366,215 +351,20 @@
 % \citetp --> Stellarium User Guide (Zotti and Wolf, 2017)
 
 
-\usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
-
-\ifhtlatex
-% We don't have an index in HTML version. If anybody want to play with it, go for it...
-\else
-\usepackage{makeidx} % Required to make an index
-\makeindex % Tells LaTeX to create the files required for indexing
-\fi
-
 %----------------------------------------------------------------------------------------
-%	MAIN TABLE OF CONTENTS
+%	PAGE HEADERS (ADDITIONS)
 %----------------------------------------------------------------------------------------
 
-\usepackage{titletoc} % Required for manipulating the table of contents
-
-\contentsmargin{0cm} % Removes the default margin
-
-% Part text styling
-\titlecontents{part}[0cm]
-{\addvspace{20pt}\centering\large\bfseries}
-{}
-{}
-{}
-
-% Chapter text styling
-\titlecontents{chapter}[1.35cm] % Indentation
-{\addvspace{12pt}\large\sffamily\bfseries} % Spacing and font options for chapters
-{\color{ocre!60}\contentslabel[\Large\thecontentslabel]{1.35cm}\color{ocre}} % Chapter number
-{\color{ocre}}  
-{\color{ocre!60}\normalsize\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
-
-% Section text styling
-\titlecontents{section}[1.35cm] % Indentation
-{\addvspace{3pt}\sffamily\bfseries} % Spacing and font options for sections
-{\contentslabel[\thecontentslabel]{1.35cm}} % Section number
-{}
-{\hfill\color{black}\thecontentspage} % Page number
-[]
-
-% Subsection text styling
-\titlecontents{subsection}[1.35cm] % Indentation
-{\addvspace{1pt}\sffamily\small} % Spacing and font options for subsections
-{\contentslabel[\thecontentslabel]{1.35cm}} % Subsection number
-{}
-{\ \titlerule*[.5pc]{.}\;\thecontentspage} % Page number
-[]
-
-% List of figures
-\titlecontents{figure}[0em]
-{\addvspace{-5pt}\sffamily}
-{\thecontentslabel\hspace*{1em}}
-{}
-{\ \titlerule*[.5pc]{.}\;\thecontentspage}
-[]
-
-% List of tables
-\titlecontents{table}[0em]
-{\addvspace{-5pt}\sffamily}
-{\thecontentslabel\hspace*{1em}}
-{}
-{\ \titlerule*[.5pc]{.}\;\thecontentspage}
-[]
-
-%----------------------------------------------------------------------------------------
-%	MINI TABLE OF CONTENTS IN PART HEADS
-%----------------------------------------------------------------------------------------
-
-% Chapter text styling
-\titlecontents{lchapter}[0em] % Indenting
-{\addvspace{15pt}\large\sffamily\bfseries} % Spacing and font options for chapters
-{\color{ocre}\contentslabel[\Large\thecontentslabel]{1.25cm}\color{ocre}} % Chapter number
-{}  
-{\color{ocre}\normalsize\sffamily\bfseries\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
-
-% Section text styling
-\titlecontents{lsection}[0em] % Indenting
-{\sffamily\small} % Spacing and font options for sections
-{\contentslabel[\thecontentslabel]{1.25cm}} % Section number
-{}
-{}
-
-% Subsection text styling
-\titlecontents{lsubsection}[.5em] % Indentation
-{\normalfont\footnotesize\sffamily} % Font settings
-{}
-{}
-{}
-
-%----------------------------------------------------------------------------------------
-%	PAGE HEADERS
-%----------------------------------------------------------------------------------------
-
-\usepackage{fancyhdr} % Required for header and footer configuration
-
-\pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\markboth{\sffamily\normalsize\bfseries\chaptername\ \thechapter.\ #1}{}} % Chapter text font settings
-\renewcommand{\sectionmark}[1]{\markright{\sffamily\normalsize\thesection\hspace{5pt}#1}{}} % Section text font settings
-\fancyhf{} \fancyhead[LE,RO]{\sffamily\normalsize\thepage} % Font setting for the page number in the header
-\fancyhead[LO]{\rightmark} % Print the nearest section name on the left side of odd pages
-\fancyhead[RE]{\leftmark} % Print the current chapter name on the right side of even pages
-\renewcommand{\headrulewidth}{0.5pt} % Width of the rule under the header
+%% SUG tweaks:
 \addtolength{\headheight}{2.75pt} % Increase the spacing around the header slightly
 \renewcommand{\footrulewidth}{0pt} % Removes the rule in the footer
-\fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}} % Style for when a plain pagestyle is specified
 
-% Removes the header from odd empty pages at the end of chapters
-\makeatletter
-\renewcommand{\cleardoublepage}{
-\clearpage\ifodd\c@page\else
-\hbox{}
-\vspace*{\fill}
-\thispagestyle{empty}
-\newpage
-\fi}
 
 %----------------------------------------------------------------------------------------
-%	THEOREM STYLES
+%	DEFINITION OF COLORED BOXES (ADDITIONS)
 %----------------------------------------------------------------------------------------
-
-\usepackage{amsmath,amsfonts,amssymb,amsthm} % For math equations, theorems, symbols, etc
-
-\newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
-\newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
-\newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
-\newtheorem{notation}{Notation}[chapter]
-
-% Boxed/framed environments
-\newtheoremstyle{ocrenumbox}% % Theorem style name
-{0pt}% Space above
-{0pt}% Space below
-{\normalfont}% % Body font
-{}% Indent amount
-{\small\bf\sffamily\color{ocre}}% % Theorem head font
-{\;}% Punctuation after theorem head
-{0.25em}% Space after theorem head
-{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
-\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
-\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
-
-\newtheoremstyle{blacknumex}% Theorem style name
-{5pt}% Space above
-{5pt}% Space below
-{\normalfont}% Body font
-{} % Indent amount
-{\small\bf\sffamily}% Theorem head font
-{\;}% Punctuation after theorem head
-{0.25em}% Space after theorem head
-{\small\sffamily{\tiny\ensuremath{\blacksquare}}\nobreakspace\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
-\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}% Optional theorem note
-
-\newtheoremstyle{blacknumbox} % Theorem style name
-{0pt}% Space above
-{0pt}% Space below
-{\normalfont}% Body font
-{}% Indent amount
-{\small\bf\sffamily}% Theorem head font
-{\;}% Punctuation after theorem head
-{0.25em}% Space after theorem head
-{\small\sffamily\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
-\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}% Optional theorem note
-
-% Non-boxed/non-framed environments
-\newtheoremstyle{ocrenum}% % Theorem style name
-{5pt}% Space above
-{5pt}% Space below
-{\normalfont}% % Body font
-{}% Indent amount
-{\small\bf\sffamily\color{ocre}}% % Theorem head font
-{\;}% Punctuation after theorem head
-{0.25em}% Space after theorem head
-{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
-\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
-\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
-\makeatother
-
-% Defines the theorem text style for each type of theorem to one of the three styles above
-\newcounter{dummy} 
-\numberwithin{dummy}{section}
-\theoremstyle{ocrenumbox}
-\newtheorem{theoremeT}[dummy]{Theorem}
-\newtheorem{problem}{Problem}[chapter]
-\newtheorem{exerciseT}{Exercise}[chapter]
-\theoremstyle{blacknumex}
-\newtheorem{exampleT}{Example}[chapter]
-\theoremstyle{blacknumbox}
-\newtheorem{vocabulary}{Vocabulary}[chapter]
-\newtheorem{definitionT}{Definition}[section]
-\newtheorem{corollaryT}[dummy]{Corollary}
-\theoremstyle{ocrenum}
-\newtheorem{proposition}[dummy]{Proposition}
-
-%----------------------------------------------------------------------------------------
-%	DEFINITION OF COLORED BOXES
-%----------------------------------------------------------------------------------------
-\RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
-
-% Theorem box
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-backgroundcolor=black!5,
-linecolor=ocre,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-innerbottommargin=5pt]{tBox}
-
-% Config box
+%
+% GZ: Config box
 \newmdenv[skipabove=7pt,
 skipbelow=7pt,
 rightline=false,
@@ -590,215 +380,15 @@ innerbottommargin=5pt,
 leftmargin=0cm,
 rightmargin=0cm,
 linewidth=1pt]{wBox}
-
-% Exercise box	  
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-backgroundcolor=ocre!10,
-linecolor=ocre,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-innerbottommargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt]{eBox}	
-
-% Definition box
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-linecolor=ocre,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=0pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt,
-innerbottommargin=0pt]{dBox}	
-
-% Corollary box
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-linecolor=gray,
-backgroundcolor=black!5,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt,
-innerbottommargin=5pt]{cBox}
-
-% Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
-\newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
-\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}				  
-\newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
-\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}		
-\newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}	
+%
+%
+%% Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
 \newenvironment{config}{\begin{wBox}}{\end{wBox}}
 
-%----------------------------------------------------------------------------------------
-%	REMARK ENVIRONMENT
-%----------------------------------------------------------------------------------------
-
-\newenvironment{remark}{\par\vspace{10pt}\small % Vertical white space above the remark and smaller font size
-\begin{list}{}{
-\leftmargin=35pt % Indentation on the left
-\rightmargin=25pt}\item\ignorespaces % Indentation on the right
-\makebox[-2.5pt]{\begin{tikzpicture}[overlay]
-\node[draw=ocre!60,line width=1pt,circle,fill=ocre!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{R}};\end{tikzpicture}} % Orange R in a circle
-\advance\baselineskip -1pt}{\end{list}\vskip5pt} % Tighter line spacing and white space after remark
-
-%----------------------------------------------------------------------------------------
-%	SECTION NUMBERING IN THE MARGIN
-%----------------------------------------------------------------------------------------
-
-\makeatletter
-\renewcommand{\@seccntformat}[1]{\llap{\textcolor{ocre}{\csname the#1\endcsname}\hspace{1em}}}                    
-\renewcommand{\section}{\@startsection{section}{1}{\z@}
-{-4ex \@plus -1ex \@minus -.4ex}
-{1ex \@plus.2ex }
-{\normalfont\large\sffamily\bfseries}}
-\renewcommand{\subsection}{\@startsection {subsection}{2}{\z@}
-{-3ex \@plus -0.1ex \@minus -.4ex}
-{0.5ex \@plus.2ex }
-{\normalfont\sffamily\bfseries}}
-\renewcommand{\subsubsection}{\@startsection {subsubsection}{3}{\z@}
-{-2ex \@plus -0.1ex \@minus -.2ex}
-{.2ex \@plus.2ex }
-{\normalfont\small\sffamily\bfseries}}                        
-\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}
-{-2ex \@plus-.2ex \@minus .2ex}
-{.1ex}
-{\normalfont\small\sffamily\bfseries}}
-
-%----------------------------------------------------------------------------------------
-%	PART HEADINGS
-%----------------------------------------------------------------------------------------
-
-\newcommand{\StelTOCdepth}{1}% reset this to 0 before appendix!
-
-% numbered part in the table of contents
-\newcommand{\@mypartnumtocformat}[2]{%
-\setlength\fboxsep{0pt}%
-\noindent\colorbox{ocre!20}{\strut\parbox[c][.7cm]{\ecart}{\color{ocre!70}\Large\sffamily\bfseries\centering#1}}\hskip\esp\colorbox{ocre!40}{\strut\parbox[c][.7cm]{\linewidth-\ecart-\esp}{\Large\sffamily\centering#2}}}%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% unnumbered part in the table of contents
-\newcommand{\@myparttocformat}[1]{%
-\setlength\fboxsep{0pt}%
-\noindent\colorbox{ocre!40}{\strut\parbox[c][.7cm]{\linewidth}{\Large\sffamily\centering#1}}}%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newlength\esp
-\setlength\esp{4pt}
-\newlength\ecart
-\setlength\ecart{1.2cm-\esp}
-\newcommand{\thepartimage}{}%
-\newcommand{\partimage}[1]{\renewcommand{\thepartimage}{#1}}%
-\def\@part[#1]#2{%
-\ifnum \c@secnumdepth >-2\relax%
-\refstepcounter{part}%
-\addcontentsline{toc}{part}{\texorpdfstring{\protect\@mypartnumtocformat{\thepart}{#1}}{\partname~\thepart\ ---\ #1}}
-\else%
-\addcontentsline{toc}{part}{\texorpdfstring{\protect\@myparttocformat{#1}}{#1}}%
-\fi%
-\startcontents%
-\markboth{}{}%
-{\thispagestyle{empty}%
-\begin{tikzpicture}[remember picture,overlay]%
-\node at (current page.north west){\begin{tikzpicture}[remember picture,overlay]%	
-\fill[ocre!20](0cm,0cm) rectangle (\paperwidth,-\paperheight);
-\node[anchor=north] at (4cm,-3.25cm){\color{ocre!40}\fontsize{220}{100}\sffamily\bfseries\@Roman\c@part}; 
-\node[anchor=south east] at (\paperwidth-1cm,-\paperheight+1cm){\parbox[t][][t]{10.5cm}{% GZ: was 8.5cm, but Appendix has longer names.
-\printcontents{l}{0}{\setcounter{tocdepth}{\StelTOCdepth}}% %% GZ TODO: Make tocdepth0 for Appendix, 1 before.
-}};
-\node[anchor=north east] at (\paperwidth-1.5cm,-3.25cm){\parbox[t][][t]{15cm}{\strut\raggedleft\color{white}\fontsize{30}{30}\sffamily\bfseries#2}};
-\end{tikzpicture}};
-\end{tikzpicture}}%
-\@endpart}
-\def\@spart#1{%
-\startcontents%
-\phantomsection
-{\thispagestyle{empty}%
-\begin{tikzpicture}[remember picture,overlay]%
-\node at (current page.north west){\begin{tikzpicture}[remember picture,overlay]%	
-\fill[ocre!20](0cm,0cm) rectangle (\paperwidth,-\paperheight);
-\node[anchor=north east] at (\paperwidth-1.5cm,-3.25cm){\parbox[t][][t]{15cm}{\strut\raggedleft\color{white}\fontsize{30}{30}\sffamily\bfseries#1}};
-\end{tikzpicture}};
-\end{tikzpicture}}
-\addcontentsline{toc}{part}{\texorpdfstring{%
-\setlength\fboxsep{0pt}%
-\noindent\protect\colorbox{ocre!40}{\strut\protect\parbox[c][.7cm]{\linewidth}{\Large\sffamily\protect\centering #1\quad\mbox{}}}}{#1}}%
-\@endpart}
-\def\@endpart{\vfil\newpage
-\if@twoside
-\if@openright
-\null
-\thispagestyle{empty}%
-\newpage
-\fi
-\fi
-\if@tempswa
-\twocolumn
-\fi}
-
-%----------------------------------------------------------------------------------------
-%	CHAPTER HEADINGS
-%----------------------------------------------------------------------------------------
-
-\newcommand{\thechapterimage}{}%
-\newcommand{\chapterimage}[1]{\renewcommand{\thechapterimage}{#1}}%
-\def\@makechapterhead#1{%
-{\parindent \z@ \raggedright \normalfont
-\ifnum \c@secnumdepth >\m@ne
-\if@mainmatter
-\begin{tikzpicture}[remember picture,overlay]
-\node at (current page.north west)
-{\begin{tikzpicture}[remember picture,overlay]
-\node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{\thechapterimage}};
-\draw[anchor=west] (\Gm@lmargin,-9cm) node [line width=2pt,rounded corners=15pt,draw=ocre,fill=white,fill opacity=0.5,inner sep=15pt]{\strut\makebox[22cm]{}};
-\draw[anchor=west] (\Gm@lmargin+.3cm,-9cm) node {\huge\sffamily\bfseries\color{black}\thechapter. #1\strut};
-\end{tikzpicture}};
-\end{tikzpicture}
-\else
-\begin{tikzpicture}[remember picture,overlay]
-\node at (current page.north west)
-{\begin{tikzpicture}[remember picture,overlay]
-\node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{\thechapterimage}};
-\draw[anchor=west] (\Gm@lmargin,-9cm) node [line width=2pt,rounded corners=15pt,draw=ocre,fill=white,fill opacity=0.5,inner sep=15pt]{\strut\makebox[22cm]{}};
-\draw[anchor=west] (\Gm@lmargin+.3cm,-9cm) node {\huge\sffamily\bfseries\color{black}#1\strut};
-\end{tikzpicture}};
-\end{tikzpicture}
-\fi\fi\par\vspace*{270\p@}}}
-
-%-------------------------------------------
-
-\def\@makeschapterhead#1{%
-\begin{tikzpicture}[remember picture,overlay]
-\node at (current page.north west)
-{\begin{tikzpicture}[remember picture,overlay]
-\node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{\thechapterimage}};
-\draw[anchor=west] (\Gm@lmargin,-9cm) node [line width=2pt,rounded corners=15pt,draw=ocre,fill=white,fill opacity=0.5,inner sep=15pt]{\strut\makebox[22cm]{}};
-\draw[anchor=west] (\Gm@lmargin+.3cm,-9cm) node {\huge\sffamily\bfseries\color{black}#1\strut};
-\end{tikzpicture}};
-\end{tikzpicture}
-\par\vspace*{270\p@}}
-\makeatother
 
 \usepackage{marvosym}% For the Zodiac symbols, \Aries etc.
 \usepackage{wasysym}% For \diameter etc.
-\usepackage{tocvsec2} % Allows fine-tuning TOC depth. (to suppress GPL sections in TOC but have them still numbered)
+
 %\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
 %\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
 %\lstnewenvironment{commands}{\begin{wBox}\lstset{basicstyle=\ttfamily}\begin{lstlisting}}{\end{lstlisting}\end{wBox}}
@@ -808,7 +398,7 @@ innerbottommargin=5pt]{cBox}
 
 
 \ifpdf
- \usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This requires the updated catoptions.sty.
+ \usepackage[os=win]{menukeys}% For the menu, keycaps, etc. 
  %% Keypress buttons. This is just a font change now, but can be a boxed key or such.
  % Prefer using menukeys.
  \newcommand{\key}[1]{\keys{#1}}
@@ -836,7 +426,6 @@ innerbottommargin=5pt]{cBox}
 
 \renewcommand{\topfraction}{0.9}
 
-\definecolor{light-gray}{gray}{0.90}
 %----------------------------------------------------------------------------------------
 %	HYPERLINKS IN THE DOCUMENTS. These packages should be last, else some PDF bookmarks fail!
 %----------------------------------------------------------------------------------------
@@ -855,40 +444,4 @@ innerbottommargin=5pt]{cBox}
 % 	\ifx\footref\nextToken\textsuperscript{,}\fi}
 
 %\usepackage[dont-mess-around]{fnpct}
-
-\ifpdf
-\usepackage{xurl}% will break long URLs also with pdflatex.
-\usepackage{hyperref}
-\hypersetup{hidelinks,%backref=true,pagebackref=true,hyperindex=true, %% 3 latter are default, produce warnings if specified again.
-            colorlinks=false,breaklinks=true,urlcolor= ocre,
-            pdfpagemode=UseOutlines,bookmarksopen=true,%bookmarks=true,bookmarksopenlevel=1,bookmarksnumbered,
-            pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,
-            pdfduplex=DuplexFlipLongEdge,
-            pdfsubject={Stellarium is a multi-platform open-source desktop planetarium. This document describes version 0.15+ (2016)},
-            %pdfcreator={PDFLaTeX},
-            %pdfproducer={Stellarium team},%(should be application name!)
-            pdfkeywords={Stellarium Manual},
-            pdftitle={Stellarium User Guide},pdfdisplaydoctitle=true,
-            pdfauthor={Georg Zotti and Alexander Wolf (editors)}%
-            }
-%% GZ TODO Maybe in some other style, but links should be visible.
-%\hypersetup{backref=true,pagebackref=true,hyperindex=true,colorlinks=true,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
-% Repeat some settings with pdfcatalog:
-%\pdfcatalog{pdfpagemode=UseOutlines,bookmarksopen=true,%bookmarks=true,bookmarksopenlevel=1,bookmarksnumbered,
-%            pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,}
-\fi
-
-\usepackage{bookmark}
-\bookmarksetup{
-open,
-numbered,
-addtohook={%
-\ifnum\bookmarkget{level}=0 % chapter
-\bookmarksetup{bold}%
-\fi
-\ifnum\bookmarkget{level}=-1 % part
-\bookmarksetup{color=ocre,bold}%
-\fi
-}
-}
 

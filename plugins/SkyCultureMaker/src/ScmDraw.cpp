@@ -22,8 +22,10 @@
  */
 
 #include "ScmDraw.hpp"
+#include "ConstellationMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelModule.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelProjector.hpp"
 #include <QApplication>
@@ -134,6 +136,11 @@ scm::ScmDraw::ScmDraw()
 	maxSnapRadiusInPixels = conf->value("maxSnapRadiusInPixels", 25).toUInt();
 	conf->endGroup();
 
+	ConstellationMgr *constellationMgr = GETSTELMODULE(ConstellationMgr);
+	constellationLineThickness         = constellationMgr->getConstellationLineThickness();
+	connect(constellationMgr, &ConstellationMgr::constellationLineThicknessChanged, this,
+	        [this](int thickness) { constellationLineThickness = thickness; });
+
 	currentLine.start.reset();
 	currentLine.end.reset();
 	lastEraserPos.set(std::nan("1"), std::nan("1"));
@@ -150,23 +157,39 @@ scm::ScmDraw::ScmDraw()
 	connect(mvmMgr, &StelMovementMgr::flagTrackingChanged, this, &ScmDraw::setMoveToAnotherStart);
 }
 
-void scm::ScmDraw::drawLine(StelCore *core) const
+void scm::ScmDraw::drawLines(StelCore *core) const
 {
 	StelPainter painter(core->getProjection(drawFrame));
+
+	// set up  painter
 	painter.setBlending(true);
 	painter.setLineSmooth(true);
 	painter.setColor(fixedLineColor, fixedLineAlpha);
+	const float scale = painter.getProjector()->getScreenScale();
+	if (constellationLineThickness > 1 || scale > 1.f)
+	{
+		painter.setLineWidth(constellationLineThickness * scale);
+	}
 
+	// draw existing lines
 	for (ConstellationLine line : drawnLines)
 	{
 		painter.drawGreatCircleArc(line.start.coordinate, line.end.coordinate);
 	}
 
+	// draw line from last point to cursor
 	if (hasFlag(drawState, Drawing::hasFloatingEnd))
 	{
 		painter.setColor(floatingLineColor, floatingLineAlpha);
 		painter.drawGreatCircleArc(currentLine.start.coordinate, currentLine.end.coordinate);
 	}
+
+	// restore line properties
+	if (constellationLineThickness > 1 || scale > 1.f)
+	{
+		painter.setLineWidth(1); // restore thickness
+	}
+	painter.setLineSmooth(false);
 }
 
 void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)

@@ -217,7 +217,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 
 	updateState = HelpDialog::CompleteUpdates;
 
-	QString latestVersion = map["name"].toString();
+	QString latestVersion = map["tag_name"].toString();
 	latestVersion.replace("v","", Qt::CaseInsensitive);
 	QStringList v = latestVersion.split(".");
 	v.append("0"); // the latest number (PATCH) is always 0 for releases

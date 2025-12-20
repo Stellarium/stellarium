@@ -501,7 +501,7 @@ Corresponding to the modern constellation *Sculptor*.
 
 A jade seal used to stamp the Travel Rescript (passport).
 
-##### Soft-Shelled Turtle
+##### Giant Soft-Shelled Turtle
 
 Corresponding to the modern constellations *Carina, Puppis, Vela*.
 
@@ -519,9 +519,9 @@ https://item.jd.com/14406961.html
 
 ## References
 
-- [1]:Xu Gang. (2025). Monkey King Star Quest: A Guide to the Constellations（《大闹星空：读西游识星座》 ）. Beijing: Posts & Telecom Press. ISBN 9787115653604.
+- [1]: Xu Gang. (2025). Monkey King Star Quest: A Guide to the Constellations（《大闹星空：读西游识星座》 ）. Beijing: Posts & Telecom Press. ISBN 9787115653604.
  
-- [2]:Xu Gang. (2025). Monkey King Star Quest: Celestial Chart（《大闹星空：西游星座图》）. Beijing: Posts & Telecom Press. ISBN：9787115658395.
+- [2]: Xu Gang. (2025). Monkey King Star Quest: Celestial Chart（《大闹星空：西游星座图》）. Beijing: Posts & Telecom Press. ISBN：9787115658395.
 
 ## Author
 
