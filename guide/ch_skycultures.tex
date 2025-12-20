@@ -3,6 +3,10 @@
 %% 2016-04-17 New chapter.
 %% 2025-02-17: Rewrite for new SC format
 
+%% JSON tag. (tag exists)
+\newcommand{\jtag}[1]{\texttt{"#1"}}
+
+
 
 \chapter{Adding Sky Cultures}
 \label{ch:SkyCultures}
@@ -18,7 +22,7 @@ skills in image processing.
 
 Version 25.1 introduces a completely new format for skyculture data.\newFeature{25.1} 
 If you are interested in the old format, please refer to the 24.4 edition of the User Guide.
-In case you have created your own skycultures, we have created a format converter  described in section~\ref{ch:SkyCultures:converter}.
+In case you have created your own skycultures in the old format, we have created a format converter  described in section~\ref{ch:SkyCultures:converter}.
 
 
 If you add a new sky culture, please adhere to this description for an optimal result!
@@ -64,7 +68,7 @@ other files with various extensions are text files.
 
 A sky culture must contain the file \file{description.md}, this is a text in \program{Markdown} format. 
 Markdown is a plaintext format which allows the simple declaration of text regions like sections, subsections, lists, images, or references. 
-The file is automatically broken into pieces, translated and converted to HTML for display. Also some important skyculture components are extracted from here.
+The file is automatically broken into pieces, translated and converted to HTML for display or else processed for speech output. Also some important skyculture components are extracted from here.
 
 The first line of the file starts with the only Level 1 header, 
 i.e., a line starting with a single hash (\texttt{\#}), 
@@ -89,16 +93,17 @@ Each of these sections except \texttt{Constellations} will have its own entry in
 The \texttt{Constellations} section will be split, so that each constellation's description will be translated separately.
 
 \begin{description}
-\item \texttt{Introduction} -- a summary that could ideally be shown on a small screen entirely.
-\item \texttt{Description} -- the actual text of the description.
-\item \texttt{Constellations} -- a sequence of Level 5 sections, where the header is the English name of a constellation (as given in the \file{index.json} file), and the body gives some information on this constellation.
-\item \texttt{References} -- a list of references, see \ref{SC:references} for details.
-\item \texttt{Authors} -- all authors and acknowledgments go here.
-\item \texttt{License} -- either a license id (see \ref{SC:license}), or a sequence of lines separated by empty lines (i.e. Markdown paragraphs) describing which part of the culture has which license, in the format "Sky culture item: License-ID".
+\item[\texttt{Introduction}] -- a summary that could ideally be shown on a small screen entirely.
+\item[\texttt{Description}] -- the actual text of the description.
+\item[\texttt{Constellations}] -- a sequence of Level 5 sections, where the header is the \jtag{english} name of a constellation (as given in the \file{index.json} file), and the body gives some information on this constellation. This text is used\newFeature{25.4} for display and speech output when the constellation is selected.
+\item[\texttt{References}] -- a list of references, see \ref{SC:references} for details.
+\item[\texttt{Authors}] -- all authors and acknowledgments go here.
+\item[\texttt{License}] -- either a license id (see \ref{SC:license}), or a sequence of lines separated by empty lines (i.e. Markdown paragraphs) describing which part of the culture has which license, in the format "Sky culture item: License-ID".
 \end{description}
 
 Note that the \texttt{Constellations} section has the strict format described above. 
-In particular, there's no place for an introduction for all the constellations or a similar deviation from the format of this section. 
+In particular, there's no place for an introduction for all the constellations, 
+or closing remarks or a similar deviation from the format of this section. 
 If this kind of text is desired, it can be placed in a subsection of the \texttt{Description} section.
 
 To allow the correct display of special characters like ÄÖÜßáé you must provide the file in UTF-8 encoding. 
@@ -248,9 +253,6 @@ but these files aren't supposed to be committed, you can remove it.
 \section{Technical data: index.json}
 \label{sec:skycultures:index.json}
 \label{SC:index.json}
-
-%% JSON tag. (tag exists)
-\newcommand{\jtag}[1]{\texttt{"#1"}}
 
 
 The file \file{index.json} contains all ``technical data'' of the skyculture. 

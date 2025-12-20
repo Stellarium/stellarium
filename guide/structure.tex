@@ -396,9 +396,12 @@ linewidth=1pt]{wBox}
 %% This can be used to verify general page layout with the command \layout given later.
 %% \usepackage{layout}
 
+\usepackage{MnSymbol} % for black triangles and box symbols. See LaTeX symbols PDF.
+
 
 \ifpdf
  \usepackage[os=win]{menukeys}% For the menu, keycaps, etc. 
+ %\usepackage{keystroke} % Prettier?
  %% Keypress buttons. This is just a font change now, but can be a boxed key or such.
  % Prefer using menukeys.
  \newcommand{\key}[1]{\keys{#1}}
