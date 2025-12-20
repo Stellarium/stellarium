@@ -3,10 +3,14 @@
 ## Introduction
 
 *Journey to the West* is a classic of Chinese God and devil novels. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.
+
 For a detailed introduction to *Journey to the West*, please refer to:
+
 https://en.wikipedia.org/wiki/Journey_to_the_West
+
 This sky culture is based on *Journey to the West*, in which the author replaces the figures of Greek mythology with characters, demons, and magical artifacts from the novel. For example, Sun Wukong substitutes for Hercules, and Zhu Bajie takes the place of Perseus. Similar to how Arab and Persian figures replaced Greco-Roman images in the Book of Fixed Stars, this can be seen as an effort to localize constellation imagery within a Chinese cultural context.
 Just to let you know, this unique sky culture is not related to the historical journey of Xuanzang to India, nor was it created in the 16th century when the novel was published. It never existed historically and is purely an artistic reinterpretation of modern constellations. When switching to "byname" display mode, you can still view the standard IAU constellation names（The *Journey to the West* sky culture includes 84 of the 88 IAU standard constellations. The four constellations Circinus, Pictor, Pyxis, and Telescopium have no corresponding figures or elements in the story.）
+
 The purpose of creating this sky culture is to attract more children—especially in China and East Asia—to learn about constellations. Journey to the West holds greater influence in these regions than Greek mythology, and the author hopes it will enhance beginners' interest and memorization, much like how H. A. Rey used imaginative constellation lines and English labels to make the stars more accessible.
 
 ## Constellations
