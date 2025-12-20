@@ -2,9 +2,11 @@
 
 ## Introduction
 
-*Journey to the West* is a classic of Chinese God and devil novel. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.
-
-This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from *Journey to the West*, creating an entirely new constellation world imbued with the rich hues of Chinese mythology. (The *Journey to the West* sky culture includes 84 of the 88 IAU standard constellations. The four constellations Circinus, Pictor, Pyxis and Telescopium have no corresponding figures or elements in the story.)
+*Journey to the West* is a classic of Chinese God and devil novels. It is written in the 16th-century Ming dynasty. It mainly chronicles the epic pilgrimage of the monk Xuanzang (Tang Monk) as he travels westward to obtain sacred Buddhist scriptures. He is accompanied by his three formidable disciples: the rebellious and powerful Monkey King, Sun Wukong; the humorous yet often gluttonous Zhu Bajie; and the steadfast Sha Wujing. Throughout their journey, they encounter a captivating array of celestial beings, demons, and deities, battling hardships and overcoming eighty-one tribulations to reach their ultimate goal.
+For a detailed introduction to *Journey to the West*, please refer to:
+https://en.wikipedia.org/wiki/Journey_to_the_West
+This sky culture is based on *Journey to the West*, in which the author replaces the figures of Greek mythology with characters, demons, and magical artifacts from the novel. For example, Sun Wukong substitutes for Hercules, and Zhu Bajie takes the place of Perseus. Similar to how Arab and Persian figures replaced Greco-Roman images in the Book of Fixed Stars, this can be seen as an effort to localize constellation imagery within a Chinese cultural context.
+Just to let you know, this unique sky culture is not related to the historical journey of Xuanzang to India, nor was it created in the 16th century when the novel was published. It never existed historically and is purely an artistic reinterpretation of modern constellations. When switching to "byname" display mode, you can still view the standard IAU constellation names（The *Journey to the West* sky culture includes 84 of the 88 IAU standard constellations. The four constellations Circinus, Pictor, Pyxis, and Telescopium have no corresponding figures or elements in the story.）
 
 ## Constellations
 
@@ -60,7 +62,7 @@ The lute held by Dhṛtarāṣṭra (the Heavenly King of the East).
 
 Corresponding to the modern constellation *Cygnus*.
 
-A divine bird similar to a phoenix, often found in celestial mountains and blessed lands in "Journey to the West."
+A divine bird similar to a phoenix, often found in celestial mountains and blessed lands in *Journey to the West*.
 
 ##### Queen Mother of the West
 
@@ -504,7 +506,7 @@ A 1,300-year-old turtle that carried the pilgrims across the Tongtian River.
 
 ![](illustrations/chart.png)
 
-If you wish to learn more about the Journey to the West sky culture or to own a beautifully illustrated constellation map based on the story, we highly recommend the books and celestial charts authored and illustrated by **Xu Gang**.
+If you wish to learn more about the *Journey to the West* sky culture or to own a beautifully illustrated constellation map based on the story, we highly recommend the books and celestial charts authored and illustrated by **Xu Gang**.
 
 https://item.jd.com/14924220.html
 
