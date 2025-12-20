@@ -90,40 +90,40 @@ bool StelTranslator::isEmpty() const
 	return translator->isEmpty();
 }
 
-QString StelTranslator::qtranslate(const QString& s, const QString& c) const
+QString StelTranslator::qtranslate(const QString& string, const QString& context) const
 {
-	if (s.isEmpty())
+	if (string.isEmpty())
 		return "";
-	const auto res = tryQtranslate(s, c);
+	const auto res = tryQtranslate(string, context);
 	if (res.isEmpty())
-		return s;
+		return string;
 	return res;
 }
 
-QString StelTranslator::qTranslateStar(const QString& s, const QString& c) const
+QString StelTranslator::qTranslateStar(const QString& string, const QString& context) const
 {
-	if (s.isEmpty())
+	if (string.isEmpty())
 		return "";
-	const auto res = tryQtranslateStar(s, c);
+	const auto res = tryQtranslateStar(string, context);
 	if (res.isEmpty())
-		return s;
+		return string;
 	return res;
 }
 
-QString StelTranslator::qTranslateStarPronounce(const QString& s, const QString& c) const
+QString StelTranslator::qTranslateStarPronounce(const QString& string, const QString& context) const
 {
-	if (s.isEmpty())
+	if (string.isEmpty())
 		return "";
-	const auto res = tryQtranslateStarPronounce(s, c);
+	const auto res = tryQtranslateStarPronounce(string, context);
 	if (res.isEmpty())
-		return s;
+		return string;
 	return res;
 }
 
-QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString& c) const
+QString StelTranslator::tryTranslateChineseStar(const QString& string, const QString& context) const
 {
 	static const auto re = []{ QRegularExpression re("(.+)( [IXVLCDM]+)([*?]*)$"); re.optimize(); return re; }();
-	const auto match = re.match(s);
+	const auto match = re.match(string);
 	if (!match.hasMatch()) return {};
 
 	auto constellation = match.captured(1);
@@ -135,7 +135,7 @@ QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString&
 		addedPresent = true;
 	}
 
-	const auto translatedConstellation = tryQtranslate(constellation, c);
+	const auto translatedConstellation = tryQtranslate(constellation, context);
 	if (translatedConstellation.isEmpty()) return {};
 
 	QString number = match.captured(2);
@@ -171,37 +171,37 @@ QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString&
 	return translatedConstellation + translatedAdded + number + extra;
 }
 
-QString StelTranslator::tryTranslateChineseStarPronounce(const QString& s, const QString& c) const
+QString StelTranslator::tryTranslateChineseStarPronounce(const QString& string, const QString& context) const
 {
         static const auto re = []{ QRegularExpression re("(.+)( [IXVLCDM*?]+)$"); re.optimize(); return re; }();
-	const auto match = re.match(s);
+	const auto match = re.match(string);
 	if (!match.hasMatch()) return {};
 
 	const auto constellation = match.captured(1);
-	const auto translatedConstellation = tryQtranslate(constellation, c);
+	const auto translatedConstellation = tryQtranslate(constellation, context);
 	if (translatedConstellation.isEmpty()) return {};
 
 	QString number = match.captured(2);
 	return translatedConstellation + number;
 }
 
-QString StelTranslator::tryQtranslate(const QString &s, const QString &c) const
+QString StelTranslator::tryQtranslate(const QString &string, const QString &context) const
 {
-	return translator->translate("", s.toUtf8().constData(),c.toUtf8().constData());
+	return translator->translate("", string.toUtf8().constData(),context.toUtf8().constData());
 }
 
-QString StelTranslator::tryQtranslateStar(const QString &s, const QString &c) const
+QString StelTranslator::tryQtranslateStar(const QString &string, const QString &context) const
 {
-	const auto translated = tryTranslateChineseStar(s, c);
+	const auto translated = tryTranslateChineseStar(string, context);
 	if (!translated.isEmpty()) return translated;
-	return tryQtranslate(s, c);
+	return tryQtranslate(string, context);
 }
 
-QString StelTranslator::tryQtranslateStarPronounce(const QString &s, const QString &c) const
+QString StelTranslator::tryQtranslateStarPronounce(const QString &string, const QString &context) const
 {
-	const auto translated = tryTranslateChineseStarPronounce(s, c);
+	const auto translated = tryTranslateChineseStarPronounce(string, context);
 	if (!translated.isEmpty()) return translated;
-	return tryQtranslate(s, c);
+	return tryQtranslate(string, context);
 }
 
 	
@@ -347,11 +347,11 @@ StelSkyTranslator::StelSkyTranslator(const QString& langName)
 		qWarning() << "Empty skyculture-independent translation file for language " << getTrueLocaleName();
 }
 
-QString StelSkyTranslator::tryQtranslate(const QString& s, const QString& c) const
+QString StelSkyTranslator::tryQtranslate(const QString& string, const QString& context) const
 {
-	const auto res = StelTranslator::tryQtranslate(s, c);
+	const auto res = StelTranslator::tryQtranslate(string, context);
 	if (!res.isEmpty()) return res;
-	return commonSkyTranslator.tryQtranslate(s, c);
+	return commonSkyTranslator.tryQtranslate(string, context);
 }
 
 bool StelSkyTranslator::isEmpty() const

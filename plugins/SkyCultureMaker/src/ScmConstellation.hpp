@@ -27,12 +27,14 @@
 #include "ScmConstellationArtwork.hpp"
 #include "VecMath.hpp"
 #include "types/ConstellationLine.hpp"
-#include <StelCore.hpp>
+#include "StelCore.hpp"
+#include "StelModuleMgr.hpp"
 #include <optional>
 #include <variant>
 #include <vector>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QObject>
 #include <QString>
 
 namespace scm
@@ -45,6 +47,9 @@ public:
 
 	/// The frame that is used for calculation and is drawn on.
 	static const StelCore::FrameType drawFrame = StelCore::FrameJ2000;
+
+	/// Whether the constellation should be drawn or not.
+	bool isHidden = false;
 
 	/**
     * @brief Gets the id of the constellation
@@ -109,8 +114,18 @@ public:
 	 */
 	std::optional<QString> getIPA() const;
 
+	/**
+	* @brief Sets the description of the constellation.
+	* 
+	* @param description The description.
+	*/
 	void setDescription(const QString& description) { this->description = description; }
 
+	/**
+	 * @brief Gets the description of the constellation.
+	 * 
+	 * @return The description.
+	 */
 	QString getDescription() const { return description; }
 
 	/**
@@ -140,20 +155,21 @@ public:
 	 * @return The lines of the constellation.
 	 */
 	const std::vector<ConstellationLine> &getLines() const;
-	/**
-	 * @brief Draws the constellation based on the coordinates.
-	 *
-	 * @param core The core used for drawing.
-	 * @param color The color to use for drawing the constellation.
-	 */
-	void drawConstellation(StelCore *core, const Vec3f &lineColor, const Vec3f &labelColor) const;
 
 	/**
-	 * @brief Draws the constellation based on the coordinates using the default color.
+	 * @brief Draws the constellation lines, name and artwork using default colors.
 	 *
 	 * @param core The core used for drawing.
 	 */
-	void drawConstellation(StelCore *core) const;
+	void draw(StelCore *core) const;
+
+	/**
+	 * @brief Draws the constellation lines.
+	 * 
+	 * @param sPainter The painter used for drawing.
+	 * @param lineColor The color of the lines.
+	 */
+	void drawLines(StelPainter &sPainter, const Vec3f &lineColor) const;
 
 	/**
 	 * @brief Draws the label of the constellation.
@@ -162,15 +178,15 @@ public:
 	 * @param painter The painter used for drawing.
 	 * @param labelColor The color of the label.
 	 */
-	void drawNames(StelCore *core, StelPainter &painter, const Vec3f &labelColor) const;
+	void drawName(StelCore *core, StelPainter &painter, const Vec3f &labelColor) const;
 
 	/**
-	 * @brief Draws the label of the constellation using the default color.
+	 * @brief Draws the artwork of the constellation.
 	 * 
 	 * @param core The core used for drawing.
 	 * @param painter The painter used for drawing.
 	 */
-	void drawNames(StelCore *core, StelPainter &painter) const;
+	void drawArtwork(StelCore *core, StelPainter &painter) const;
 
 	/**
 	  * @brief Returns the constellation data as a JSON object.
@@ -189,16 +205,6 @@ public:
 	 * @return false Failed to save.
 	 */
 	bool saveArtwork(const QString &directory);
-
-	/**
-	 * @brief Hides the constellation from being drawn.
-	 */
-	void hide();
-
-	/**
-	 * @brief Enables the constellation to be drawn.
-	 */
-	void show();
 
 	/** 
 	 * @brief Returns whether the constellation is a dark constellation.
@@ -250,11 +256,11 @@ private:
 	/// Holds the path the artwork was saved to.
 	QString artworkPath;
 
-	/// Whether the constellation should be drawn or not.
-	bool isHidden = false;
-
 	/// Indicates if the constellation is a dark constellation.
 	bool isDarkConstellation = false;
+
+	/// The thickness of the constellation lines.
+	int constellationLineThickness = 1;
 
 	/**
 	 * @brief Updates the XYZname that is used for the text position.

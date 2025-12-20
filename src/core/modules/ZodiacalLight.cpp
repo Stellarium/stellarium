@@ -343,13 +343,12 @@ void main(void)
 	if(!renderProgram || !renderProgram->isLinked())
 		return;
 
-	int bortle=drawer->getBortleScaleIndex();
+	const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
 	// Test for light pollution, return if too bad.
-	if ( (drawer->getFlagHasAtmosphere()) && (bortle > 5) ) return;
+	if (drawer->getFlagHasAtmosphere() && nelm < 5.5) return;
 
 	static LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
 	const float atmFadeIntensity = lMgr->getAtmosphereFadeIntensity();
-	const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
 	const float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
 
 	StelToneReproducer* eye = core->getToneReproducer();

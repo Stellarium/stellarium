@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-11-11 11:07+0700\n"
+"POT-Creation-Date: 2025-12-06 21:26+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: tommy <tmhrozw@gmail.com>, 2025\n"
 "Language-Team: Japanese (https://app.transifex.com/stellarium/teams/80998/ja/)\n"
@@ -50,7 +50,7 @@ msgstr "カスタムオブジェクト"
 #: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:2456
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3080
 #: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7688
-#: src/gui/ObsListDialog.cpp:291 src/ui_configurationDialog.h:2021
+#: src/gui/ObsListDialog.cpp:297 src/ui_configurationDialog.h:2021
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
@@ -77,10 +77,10 @@ msgstr "アステリズム"
 #: src/core/modules/NomenclatureMgr.cpp:90 src/core/modules/NebulaMgr.cpp:469
 #: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:348
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
-#: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:156
-#: src/core/modules/HipsMgr.cpp:157 src/core/StelApp.cpp:699
+#: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:158
+#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:699
 #: src/core/StelCore.cpp:310 src/core/StelSkyLayerMgr.cpp:83
-#: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:966
+#: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:969
 msgid "Display Options"
 msgstr "画面設定"
 
@@ -855,7 +855,7 @@ msgid "Author"
 msgstr "著者"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1533 src/gui/StelGuiItems.cpp:954
+#: src/core/modules/LandscapeMgr.cpp:1533 src/gui/StelGuiItems.cpp:950
 #: plugins/Satellites/src/Satellite.cpp:436
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -863,7 +863,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1536 src/gui/ObsListDialog.cpp:297
+#: src/core/modules/LandscapeMgr.cpp:1536 src/gui/ObsListDialog.cpp:303
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:416
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -951,7 +951,7 @@ msgstr "直径"
 #: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:709
 #: src/core/modules/Planet.cpp:730 src/core/modules/Planet.cpp:854
 #: src/core/modules/Planet.cpp:1370 src/core/modules/Comet.cpp:191
-#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:982
+#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:978
 #: src/gui/AstroCalcDialog.cpp:3199 src/gui/AstroCalcDialog.cpp:3747
 #: src/gui/AstroCalcDialog.cpp:8506 plugins/Satellites/src/Satellites.cpp:3020
 #: plugins/Satellites/src/Satellite.cpp:359
@@ -1823,7 +1823,7 @@ msgstr "種類不明"
 #: src/core/modules/Nebula.cpp:179 src/core/StelObject.cpp:350
 #: src/gui/AstroCalcChart.cpp:97 src/gui/AstroCalcChart.cpp:107
 #: src/gui/AstroCalcChart.cpp:437 src/gui/AstroCalcChart.cpp:463
-#: src/gui/ObsListDialog.cpp:294 plugins/Supernovae/src/Supernova.cpp:128
+#: src/gui/ObsListDialog.cpp:300 plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
 msgstr "等級"
 
@@ -2259,7 +2259,7 @@ msgid "Toggle DSO type filter"
 msgstr "表示する星雲・星団をチェック"
 
 #: src/core/modules/NebulaMgr.cpp:1572 src/gui/StelDialog.cpp:336
-#: src/gui/ObsListDialog.cpp:588 src/StelMainView.cpp:1063
+#: src/gui/ObsListDialog.cpp:597 src/StelMainView.cpp:1067
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid "Attention!"
 msgstr "注意してください！"
@@ -2879,11 +2879,11 @@ msgstr "黄道光"
 msgid "Digitized Sky Survey (TOAST)"
 msgstr "デジタル・スカイ・サーベイ(TOSAT)"
 
-#: src/core/modules/HipsMgr.cpp:156
+#: src/core/modules/HipsMgr.cpp:158
 msgid "Toggle Hierarchical Progressive Surveys"
 msgstr "全球データ可視化手法HiPS"
 
-#: src/core/modules/HipsMgr.cpp:157
+#: src/core/modules/HipsMgr.cpp:159
 msgid "Toggle HiPS dialog"
 msgstr "HiPSダイアログの切り替え"
 
@@ -3797,12 +3797,12 @@ msgid ""
 msgstr "これはユーザーが係数を定義して%1Tを計算する2次式です。"
 
 #: src/core/StelCore.cpp:2795 src/core/SimbadSearcher.cpp:187
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:972
-#: src/gui/ObsListDialog.cpp:996 src/gui/ObsListDialog.cpp:1045
-#: src/gui/ObsListDialog.cpp:1061 src/gui/ObsListDialog.cpp:1102
-#: src/gui/ObsListDialog.cpp:1114 src/gui/ObsListDialog.cpp:1123
-#: src/gui/ObsListDialog.cpp:1141 src/gui/ObsListDialog.cpp:1161
-#: src/gui/ObsListDialog.cpp:1324 src/gui/ObsListDialog.cpp:1329
+#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:981
+#: src/gui/ObsListDialog.cpp:1005 src/gui/ObsListDialog.cpp:1054
+#: src/gui/ObsListDialog.cpp:1070 src/gui/ObsListDialog.cpp:1111
+#: src/gui/ObsListDialog.cpp:1123 src/gui/ObsListDialog.cpp:1132
+#: src/gui/ObsListDialog.cpp:1150 src/gui/ObsListDialog.cpp:1170
+#: src/gui/ObsListDialog.cpp:1333 src/gui/ObsListDialog.cpp:1338
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "エラー"
@@ -4159,7 +4159,7 @@ msgid "Lunar Az./Alt."
 msgstr "月の方位角/高度"
 
 #: src/core/StelObjectMgr.cpp:50 src/core/StelMovementMgr.cpp:194
-#: src/gui/StelGui.cpp:274 src/StelMainView.cpp:964 src/StelMainView.cpp:965
+#: src/gui/StelGui.cpp:274 src/StelMainView.cpp:967 src/StelMainView.cpp:968
 msgid "Miscellaneous"
 msgstr "その他"
 
@@ -4387,7 +4387,7 @@ msgstr "Free Art License は、自由にコピー、配布、変換する権利�
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:256
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:296
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:298
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
@@ -4873,7 +4873,7 @@ msgstr "謝辞"
 #: src/gui/ConfigurationDialog.cpp:1369
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 msgid "Authors"
@@ -4891,7 +4891,7 @@ msgstr "連絡先"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
@@ -5146,7 +5146,7 @@ msgid "Custom equation of %1T"
 msgstr "ユーザー定義の%1T計算式"
 
 #: src/gui/ConfigurationDialog.cpp:2040 src/gui/ConfigurationDialog.cpp:2079
-#: src/gui/StelGuiItems.cpp:876 src/gui/LocationDialog.cpp:557
+#: src/gui/StelGuiItems.cpp:872 src/gui/LocationDialog.cpp:557
 msgid "System default"
 msgstr "システムのデフォルト"
 
@@ -5706,91 +5706,91 @@ msgstr "インフォメーション無し"
 msgid "Custom info"
 msgstr "カスタム・インフォメーション"
 
-#: src/gui/StelGuiItems.cpp:493 src/gui/StelGuiItems.cpp:1121
+#: src/gui/StelGuiItems.cpp:489 src/gui/StelGuiItems.cpp:1117
 msgid "Space"
 msgstr "Space"
 
-#: src/gui/StelGuiItems.cpp:878
+#: src/gui/StelGuiItems.cpp:874
 msgid "Time zone"
 msgstr "タイムゾーン"
 
-#: src/gui/StelGuiItems.cpp:881 src/gui/LocationDialog.cpp:555
+#: src/gui/StelGuiItems.cpp:877 src/gui/LocationDialog.cpp:555
 msgid "Local Mean Solar Time"
 msgstr "地方平均太陽時"
 
-#: src/gui/StelGuiItems.cpp:884 src/gui/LocationDialog.cpp:556
+#: src/gui/StelGuiItems.cpp:880 src/gui/LocationDialog.cpp:556
 msgid "Local True Solar Time"
 msgstr "地方真太陽時"
 
 #. TRANSLATORS: unit of measurement: minutes per second
-#: src/gui/StelGuiItems.cpp:887
+#: src/gui/StelGuiItems.cpp:883
 msgctxt "unit of measurement"
 msgid "min/s"
 msgstr "分／秒"
 
 #. TRANSLATORS: unit of measurement: hours per second
-#: src/gui/StelGuiItems.cpp:895
+#: src/gui/StelGuiItems.cpp:891
 msgctxt "unit of measurement"
 msgid "hr/s"
 msgstr "時／秒"
 
 #. TRANSLATORS: unit of measurement: days per second
-#: src/gui/StelGuiItems.cpp:901
+#: src/gui/StelGuiItems.cpp:897
 msgctxt "unit of measurement"
 msgid "d/s"
 msgstr "日／秒"
 
 #. TRANSLATORS: unit of measurement: years per second
-#: src/gui/StelGuiItems.cpp:907
+#: src/gui/StelGuiItems.cpp:903
 msgctxt "unit of measurement"
 msgid "yr/s"
 msgstr "年／秒"
 
-#: src/gui/StelGuiItems.cpp:909 src/gui/StelGuiItems.cpp:911
+#: src/gui/StelGuiItems.cpp:905 src/gui/StelGuiItems.cpp:907
 msgid "Simulation speed"
 msgstr "シミュレーション速度"
 
-#: src/gui/StelGuiItems.cpp:951
+#: src/gui/StelGuiItems.cpp:947
 msgid "flight"
 msgstr "フライト"
 
-#: src/gui/StelGuiItems.cpp:982
+#: src/gui/StelGuiItems.cpp:978
 msgid "planetocentric distance"
 msgstr "惑心距離"
 
-#: src/gui/StelGuiItems.cpp:984
+#: src/gui/StelGuiItems.cpp:980
 msgid "planetocentric observer"
 msgstr "惑星中心の観測者"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgid "Atmospheric pressure"
 msgstr "大気圧"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgctxt "pressure unit"
 msgid "mbar"
 msgstr "mbar"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgid "temperature"
 msgstr "温度"
 
-#: src/gui/StelGuiItems.cpp:1008 src/gui/StelGuiItems.cpp:1010
+#: src/gui/StelGuiItems.cpp:1004 src/gui/StelGuiItems.cpp:1006
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr "FOV"
 
-#: src/gui/StelGuiItems.cpp:1018
+#: src/gui/StelGuiItems.cpp:1014
 msgid "Field of view"
 msgstr "視野角"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:1029 src/gui/StelGuiItems.cpp:1050
+#: src/gui/StelGuiItems.cpp:1025 src/gui/StelGuiItems.cpp:1046
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr "FPS"
 
-#: src/gui/StelGuiItems.cpp:1036
+#: src/gui/StelGuiItems.cpp:1032
 msgid "Frames per second"
 msgstr "1秒当たりのフレーム数"
 
@@ -6251,7 +6251,7 @@ msgid "Ecliptic (J2000.0)"
 msgstr "黄道座標(J2000.0)"
 
 #: src/gui/SearchDialog.cpp:369 src/gui/AstroCalcChart.cpp:445
-#: src/gui/AstroCalcChart.cpp:471 src/gui/ObsListDialog.cpp:292
+#: src/gui/AstroCalcChart.cpp:471 src/gui/ObsListDialog.cpp:298
 msgid "Right ascension"
 msgstr "赤経"
 
@@ -6261,7 +6261,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:372 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:428
-#: src/gui/AstroCalcChart.cpp:454 src/gui/ObsListDialog.cpp:293
+#: src/gui/AstroCalcChart.cpp:454 src/gui/ObsListDialog.cpp:299
 msgid "Declination"
 msgstr "赤緯"
 
@@ -6915,7 +6915,7 @@ msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "食の最大時点での皆既食または金環食の継続時間"
 
 #: src/gui/AstroCalcDialog.cpp:3403 src/gui/AstroCalcChart.cpp:380
-#: src/gui/ObsListDialog.cpp:296 src/ui_obsListDialog.h:412
+#: src/gui/ObsListDialog.cpp:302 src/ui_obsListDialog.h:412
 msgid "Date"
 msgstr "日付"
 
@@ -8211,132 +8211,132 @@ msgstr ""
 msgid "Today"
 msgstr "今日"
 
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1123
+#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:1132
 msgid "Cannot open observingLists.json to write"
 msgstr "描き込み用の observingLists.json ファイルを開けません"
 
-#: src/gui/ObsListDialog.cpp:182
+#: src/gui/ObsListDialog.cpp:186
 msgctxt "default name for observing list if none is available"
 msgid "new list"
 msgstr "新規リスト"
 
-#: src/gui/ObsListDialog.cpp:222
+#: src/gui/ObsListDialog.cpp:228
 msgid "Select observing lists directory"
 msgstr "観測リスト用ディレクトリ (フォルダ) の選択"
 
-#: src/gui/ObsListDialog.cpp:289
+#: src/gui/ObsListDialog.cpp:295
 msgid "Object designation"
 msgstr "符号"
 
-#: src/gui/ObsListDialog.cpp:290
+#: src/gui/ObsListDialog.cpp:296
 msgid "Object name"
 msgstr "天体名"
 
-#: src/gui/ObsListDialog.cpp:295 src/ui_configurationDialog.h:2030
+#: src/gui/ObsListDialog.cpp:301 src/ui_configurationDialog.h:2030
 msgid "Constellation"
 msgstr "星座"
 
-#: src/gui/ObsListDialog.cpp:298 src/ui_viewDialog.h:3878
+#: src/gui/ObsListDialog.cpp:304 src/ui_viewDialog.h:3878
 #: src/ui_obsListDialog.h:420
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Landscape"
 msgstr "風景"
 
-#: src/gui/ObsListDialog.cpp:588
+#: src/gui/ObsListDialog.cpp:597
 msgid "Error during conversion. Please see logfile for details."
 msgstr "通話エラー。詳細はログファイルを見て下さい。"
 
-#: src/gui/ObsListDialog.cpp:700
+#: src/gui/ObsListDialog.cpp:709
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:225
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Note"
 msgstr "ノート"
 
-#: src/gui/ObsListDialog.cpp:700
+#: src/gui/ObsListDialog.cpp:709
 msgid "Some bookmarked objects were not found. See logfile for details."
 msgstr "ブックマークした天体が見つかりません。詳細はログファイルを見て下さい。"
 
-#: src/gui/ObsListDialog.cpp:950
+#: src/gui/ObsListDialog.cpp:959
 msgid "New Observation List"
 msgstr "新規観測リスト"
 
-#: src/gui/ObsListDialog.cpp:951
+#: src/gui/ObsListDialog.cpp:960
 msgid "Observing list creation mode"
 msgstr "観測リスト作成"
 
-#: src/gui/ObsListDialog.cpp:967
+#: src/gui/ObsListDialog.cpp:976
 msgid "Observing list editor mode"
 msgstr "観測リスト編集"
 
-#: src/gui/ObsListDialog.cpp:972
+#: src/gui/ObsListDialog.cpp:981
 msgid "selectedOlud empty. This is a bug"
 msgstr "selectedOlud が空です。バグです。"
 
-#: src/gui/ObsListDialog.cpp:984
+#: src/gui/ObsListDialog.cpp:993
 msgid "Export observing list as..."
 msgstr "観測リストのエキスポート..."
 
-#: src/gui/ObsListDialog.cpp:996
+#: src/gui/ObsListDialog.cpp:1005
 msgid "Cannot export. See logfile for details."
 msgstr "エキスポート出来ません。詳細はログファイルを見て下さい。"
 
-#: src/gui/ObsListDialog.cpp:1033
+#: src/gui/ObsListDialog.cpp:1042
 msgid "Import observing list"
 msgstr "観測リストのインポート"
 
-#: src/gui/ObsListDialog.cpp:1045
+#: src/gui/ObsListDialog.cpp:1054
 msgid "Cannot open selected file for import"
 msgstr "インポートファイルを開けません"
 
-#: src/gui/ObsListDialog.cpp:1061
+#: src/gui/ObsListDialog.cpp:1070
 msgid "Empty list."
 msgstr "リストが空。"
 
-#: src/gui/ObsListDialog.cpp:1083
+#: src/gui/ObsListDialog.cpp:1092
 #, qt-format
 msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
 "existing list '%4', dated %5 and last modified %6. Accept?"
 msgstr "リスト名「%1」(作成日 %2、更新日 %3) はリスト名「'%4」(作成日 %5、更新日 %6) を上書きします。よろしいですか？"
 
-#: src/gui/ObsListDialog.cpp:1102
+#: src/gui/ObsListDialog.cpp:1111
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "ファイルが空か、従来のブックマークがありません。"
 
-#: src/gui/ObsListDialog.cpp:1114
+#: src/gui/ObsListDialog.cpp:1123
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr "観測リストや従来のブックマークがファイルのありません。"
 
-#: src/gui/ObsListDialog.cpp:1141
+#: src/gui/ObsListDialog.cpp:1150
 msgid "File format is wrong!"
 msgstr "フォーマットが違います！"
 
-#: src/gui/ObsListDialog.cpp:1161
+#: src/gui/ObsListDialog.cpp:1170
 msgid "Cannot open JSON output file. Will not delete."
 msgstr "JSON出力ファイルが開けません。削除出来ません。"
 
-#: src/gui/ObsListDialog.cpp:1185 src/ui_configurationDialog.h:1895
+#: src/gui/ObsListDialog.cpp:1194 src/ui_configurationDialog.h:1895
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Information"
 msgstr "天体情報"
 
-#: src/gui/ObsListDialog.cpp:1185
+#: src/gui/ObsListDialog.cpp:1194
 msgid "You cannot delete the default or the last list."
 msgstr "デフォルトや最後のリストは削除出来ません。"
 
-#: src/gui/ObsListDialog.cpp:1241
+#: src/gui/ObsListDialog.cpp:1250
 msgid "Unnamed object"
 msgstr "未命名の天体"
 
-#: src/gui/ObsListDialog.cpp:1324
+#: src/gui/ObsListDialog.cpp:1333
 msgid "Empty name"
 msgstr "名前が空"
 
-#: src/gui/ObsListDialog.cpp:1329
+#: src/gui/ObsListDialog.cpp:1338
 msgid "List name already exists"
 msgstr "リストの名前が既にあります"
 
-#: src/gui/ObsListDialog.cpp:1394 src/ui_configurationDialog.h:2095
+#: src/gui/ObsListDialog.cpp:1403 src/ui_configurationDialog.h:2095
 #: src/ui_obsListDialog.h:361
 msgid "Observing lists"
 msgstr "観測リスト"
@@ -8408,25 +8408,25 @@ msgstr ""
 msgid "Shortcut"
 msgstr "ショートカット"
 
-#: src/StelMainView.cpp:964
+#: src/StelMainView.cpp:967
 msgid "Save screenshot"
 msgstr "スクリーンショットを保存"
 
-#: src/StelMainView.cpp:965
+#: src/StelMainView.cpp:968
 msgid "Reload shaders (for development)"
 msgstr "シェーダーを再描画(開発者向け)"
 
-#: src/StelMainView.cpp:966
+#: src/StelMainView.cpp:969
 msgid "Full-screen mode"
 msgstr "全画面表示"
 
-#: src/StelMainView.cpp:1063
+#: src/StelMainView.cpp:1067
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
 msgstr "ショートカットが重複しています！プログラム起動後にF7キーを押して、以下の複数の割り当てを確認してください"
 
-#: src/StelMainView.cpp:1146
+#: src/StelMainView.cpp:1152
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8434,19 +8434,19 @@ msgstr ""
 "OpenGLのバージョンが古いです。グラフィックボードやドライバーをアップデートするか、--angle-mode( --mesa-"
 "mode)のオプションを使って下さい。"
 
-#: src/StelMainView.cpp:1148
+#: src/StelMainView.cpp:1154
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
 msgstr ""
 "OpenGL のバージョンが不適当です。ドライバー、グラフィックス ハードウェアを更新するか、オプションに --mesa-mode を使用してください。"
 
-#: src/StelMainView.cpp:1152
+#: src/StelMainView.cpp:1158
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "OpenGLのバージョンが古いです。グラフィックボードやドライバーをアップデートして下さい。"
 
-#: src/StelMainView.cpp:1195
+#: src/StelMainView.cpp:1201
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8454,7 +8454,7 @@ msgstr ""
 "DirectX / OpenGL ESサブシステムに問題があります。 詳細はログを参照してください。\n"
 "今後この通知を無視して表示せず、低品質モードで続行しますか？"
 
-#: src/StelMainView.cpp:1246
+#: src/StelMainView.cpp:1252
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8462,7 +8462,7 @@ msgstr ""
 "OpenGL/Mesa サブシステムに問題があります。 詳細はログを参照してください。\n"
 "今後この通知を無視して表示せず、低品質モードで続行しますか？"
 
-#: src/StelMainView.cpp:1306
+#: src/StelMainView.cpp:1312
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8470,7 +8470,7 @@ msgstr ""
 "OpenGLサブシステムに問題があります。 詳細はログを参照してください。\n"
 "今後この通知を無視して表示せず、低品質モードで続行しますか？"
 
-#: src/StelMainView.cpp:1347
+#: src/StelMainView.cpp:1353
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -10901,7 +10901,6 @@ msgstr "選択(&C)"
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
-#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
 msgstr "キャンセル"
@@ -10957,7 +10956,6 @@ msgid "Copy &Link Location"
 msgstr "リンクのURLをコピー(&L)"
 
 #: src/translations.h:860
-#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
 msgid "Abort"
 msgstr "中断"
 
@@ -17130,22 +17128,22 @@ msgid "Angle measure settings"
 msgstr "角度測定の設定"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:680
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:677
 msgid "The Angle Measure is enabled:"
 msgstr "角度測定が利用可能です:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:682
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:679
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "ドラッグ＆ドロップで角度測定、左クリックでクリアします。"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:684
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:681
 msgid "Right-clicking changes the end point only."
 msgstr "右クリックで終点を変更できます。"
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:686
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:683
 msgid "PA="
 msgstr "位置角="
 
@@ -17395,42 +17393,42 @@ msgid "Toggle Oculars button bar"
 msgstr "望遠鏡視野ボタン"
 
 #: plugins/Oculars/src/Oculars.cpp:1528
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:173
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Select next telescope"
 msgstr "次の望遠鏡"
 
 #: plugins/Oculars/src/Oculars.cpp:1530
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:171
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
 msgid "Select previous telescope"
 msgstr "前の望遠鏡"
 
 #: plugins/Oculars/src/Oculars.cpp:1532
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:161
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
 msgid "Select next eyepiece"
 msgstr "次のアイピース"
 
 #: plugins/Oculars/src/Oculars.cpp:1534
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:159
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Select previous eyepiece"
 msgstr "前のアイピース"
 
 #: plugins/Oculars/src/Oculars.cpp:1536
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:165
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Select next lens"
 msgstr "次の補正レンズ"
 
 #: plugins/Oculars/src/Oculars.cpp:1538
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:163
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Select previous lens"
 msgstr "前の補正レンズ"
 
 #: plugins/Oculars/src/Oculars.cpp:1540
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:169
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Select next CCD frame"
 msgstr "次のCCD"
 
 #: plugins/Oculars/src/Oculars.cpp:1542
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:167
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Select previous CCD frame"
 msgstr "前のCCD"
 
@@ -17455,12 +17453,12 @@ msgid "Toggle focuser overlay"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1550
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1242
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1289
 msgid "Reset the sensor frame rotation"
 msgstr "回転リセット"
 
 #: plugins/Oculars/src/Oculars.cpp:1551
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1245
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1292
 msgid "Reset the prism rotation"
 msgstr "プリズムの回転をリセットする"
 
@@ -17476,8 +17474,8 @@ msgstr "赤経/赤緯線 (J2000.0)"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 #: plugins/Oculars/src/Oculars.cpp:2008
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:515
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:562
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 msgid "\"/px"
 msgstr "\"/px"
 
@@ -17497,37 +17495,37 @@ msgid "s"
 msgstr "秒"
 
 #: plugins/Oculars/src/Oculars.cpp:2292
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:305
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:352
 msgid "Binocular"
 msgstr "双眼鏡"
 
 #: plugins/Oculars/src/Oculars.cpp:2292
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:303
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
 msgid "Ocular"
 msgstr "接眼レンズ"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:2312
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:348
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:395
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "焦点距離: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:2319
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:357
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:404
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "みかけの視野角: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2330
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:387
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:434
 #, qt-format
 msgid "Lens #%1"
 msgstr "補正レンズ #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2334
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:391
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:438
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "補正レンズ #%1: %2"
@@ -17537,19 +17535,19 @@ msgid "Lens: none"
 msgstr "補正レンズ: なし"
 
 #: plugins/Oculars/src/Oculars.cpp:2354 plugins/Oculars/src/Oculars.cpp:2415
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:651
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #, qt-format
 msgid "Telescope #%1"
 msgstr "望遠鏡 #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2363
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:764
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 #, qt-format
 msgid "Magnification: %1"
 msgstr "倍率: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2370
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:773
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "射出瞳径: %1 mm"
@@ -17560,32 +17558,32 @@ msgid "FOV: %1"
 msgstr "視野角: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2398
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "実視野(縦x横): %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2399
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:509
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 msgid "Binning"
 msgstr "ビニング"
 
 #: plugins/Oculars/src/Oculars.cpp:2403
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:463
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:510
 #, qt-format
 msgid "Sensor #%1"
 msgstr "センサー(CCD) #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2407
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:467
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "センサー(CCD) #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2420
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:655
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "望遠鏡 #%1: %2"
@@ -17618,247 +17616,247 @@ msgstr "前へ(&P)"
 msgid "&Next telescope"
 msgstr "次へ(&N)"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:397
 msgid "Effective focal length of the ocular"
 msgstr "接眼レンズの焦点距離"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:360
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:407
 msgid "Apparent field of view of the ocular"
 msgstr "接眼レンズのみかけの視野角"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:393
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:440
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "補正レンズ倍率: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:398
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:445
 msgid "Lens: None"
 msgstr "補正レンズ無し"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:399
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:446
 msgid "Multiplicity: N/A"
 msgstr "補正レンズ倍率: 無効"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:403
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:450
 msgid "Focal length of eyepiece"
 msgstr "接眼レンズの焦点距離"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
 msgid "Dimensions field of view"
 msgstr "視野の範囲"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:563
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:751
 msgid "X scale"
 msgstr "X方向スケール"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:517
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:705
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:752
 msgid "Horizontal scale"
 msgstr "水平方向スケール"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:521
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
 msgid "Y scale"
 msgstr "Y方向スケール"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:707
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:569
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 msgid "Vertical scale"
 msgstr "垂直方向スケール"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:528
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:575
 #, qt-format
 msgid "Rotation: %1"
 msgstr "回転: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:572
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:619
 #, qt-format
 msgid "PA of prism: %1"
 msgstr "プリズムの位置角: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:575
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:622
 msgid "Position angle of the off-axis guider' prism"
 msgstr "オフアクシスガイド用プリズムの位置角"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:787
 msgid "Magnification provided by these binoculars"
 msgstr "双眼鏡の倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:741
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:788
 msgid "Actual field of view provided by these binoculars"
 msgstr "双眼鏡の実視野角"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:789
 msgid "Exit pupil provided by these binoculars"
 msgstr "双眼鏡の射出瞳径"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:743
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:790
 msgid "Twilight factor (or dusk index) provided by these binoculars"
 msgstr "この双眼鏡の薄暮係数 (または夕暮指数)"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:791
 msgid "Relative brightness provided by these binoculars"
 msgstr "この双眼鏡の相対的な明るさ"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:745
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
 msgid "Alan Adler's Index (or Astro Index) provided by these binoculars"
 msgstr "この双眼鏡によるAlan Adlerの指数 (またはアストロ指数)"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
 msgid "Roy Bishop's Index (or Visibility Factor) provided by these binoculars"
 msgstr "この双眼鏡によるRoy Bishopの指数 (または可視性係数)"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "この組み合わせでの望遠鏡倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:755
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "この組み合わせでの実際の視野角"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:756
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:803
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "この組み合わせでの射出瞳径"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:781
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:828
 msgid "Twilight factor"
 msgstr "薄暮係数"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:787
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
 msgid "Relative brightness"
 msgstr "明るさ"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:840
 msgid "Adler index"
 msgstr "アドラー指数"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:799
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
 msgid "Bishop index"
 msgstr "ビショップ指数"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:809
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
 msgctxt "field of view"
 msgid "FOV"
 msgstr "視野"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:877
 msgid "Rayleigh criterion"
 msgstr "レイリーの基準"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
 msgid "The Rayleigh resolution criterion"
 msgstr "レイリーの分解能基準"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:837
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:884
 msgid "Dawes' limit"
 msgstr "ドーズの限界"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:886
 msgid "Dawes' resolution criterion"
 msgstr "ドーズの分解能基準"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
 msgid "Abbe's limit"
 msgstr "アッベの限界"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:893
 msgid "Abbe’s diffraction resolution limit"
 msgstr "アッベの回折による分解能限界"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Sparrow's limit"
 msgstr "スパローの限界"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:853
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:900
 msgid "Sparrow's resolution limit"
 msgstr "スパローの分解能限界"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Visual resolution"
 msgstr "裸眼の分解能"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:881
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "裸眼の分解能は目の特性と倍率に基づいています"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:895
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:942
 msgctxt "Limiting magnitude of device"
 msgid "Limiting magnitude"
 msgstr "限界等級"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:945
 msgid "Approximate limiting magnitude of this binocular"
 msgstr "この双眼鏡のおおよその限界等級"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:900
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:947
 msgid ""
 "Approximate limiting magnitude of this ocular/lens/telescope combination"
 msgstr "これらの望遠鏡、レンズ、接眼レンズの組み合わせでのおおよその限界等級"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1194
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1241
 msgid "Rotate the sensor frame 90 degrees counterclockwise"
 msgstr "反時計回り90度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1244
 msgid "Rotate the prism 90 degrees counterclockwise"
 msgstr "反時計回りにプリズムを90度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1206
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1253
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "反時計回り15度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1209
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1256
 msgid "Rotate the prism 15 degrees counterclockwise"
 msgstr "反時計回りにプリズムを15度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1218
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1265
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "反時計回り5度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1221
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1268
 msgid "Rotate the prism 5 degrees counterclockwise"
 msgstr "反時計回りにプリズムを5度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1230
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1277
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "反時計回り1度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1233
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1280
 msgid "Rotate the prism 1 degree counterclockwise"
 msgstr "反時計回りにプリズムを1度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1254
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1301
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "時計回り1度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1257
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1304
 msgid "Rotate the prism 1 degree clockwise"
 msgstr "時計回りにプリズムを1度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1266
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1313
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "時計回り5度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1269
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1316
 msgid "Rotate the prism 5 degrees clockwise"
 msgstr "時計回りにプリズムを5度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1278
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1325
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "時計回り15度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1281
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1328
 msgid "Rotate the prism 15 degrees clockwise"
 msgstr "時計回りにプリズムを15度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1290
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1337
 msgid "Rotate the sensor frame 90 degrees clockwise"
 msgstr "時計回り90度回転"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1293
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1340
 msgid "Rotate the prism 90 degrees clockwise"
 msgstr "時計回りにプリズムを90度回転"
 
@@ -22528,9 +22526,8 @@ msgstr "太陽系小天体"
 msgid ""
 "This plug-in edits a custom Solar System configuration file for the minor "
 "bodies. If something goes wrong and Stellarium crashes and/or doesn't start,"
-" you can delete manually that file from:"
+" you can manually delete that file from:"
 msgstr ""
-"このプラグインは太陽系小天体を表示するために太陽系設定ファイルを編集します。何か問題が発生してステラリウムがクラッシュしたり起動しなかったりした場合は、そのファイルを次の場所から手動で削除できます:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:227
 msgid ""
@@ -22699,7 +22696,7 @@ msgid "Navigational Stars"
 msgstr "天測航法の星"
 
 #: plugins/NavStars/src/NavStars.cpp:58
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:301
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:303
 msgid "This plugin marks navigational stars from a selected set."
 msgstr "このプラグインは各国の天体暦から天測航法に使える恒星をマークします。"
 
@@ -22738,7 +22735,14 @@ msgstr ""
 "1764 年出版のネビル・マスケリン『英国船員ガイド』 (<em>The British Mariner's Guide</em>) "
 "に記載されている47個の天測航法用の恒星。"
 
-#: plugins/NavStars/src/NavStars.cpp:395
+#. TRANSLATORS: The emphasis tags mark a title.
+#: plugins/NavStars/src/NavStars.cpp:396
+msgid ""
+"The 47 navigational stars that are listed in the Thornton S. Lecky's "
+"<em>Wrinkles in practical navigation</em> published in 1884."
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:397
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac published by the"
 " Federal Maritime and Hydrographic Agency of Germany."
@@ -22746,12 +22750,12 @@ msgstr ""
 "ドイツ連邦海事水路局 (Federal Maritime and Hydrographic Agency of Germany) "
 "発行の『ドイツ航海年鑑』(German Nautical Almanac) に記載されている80個の恒星。"
 
-#: plugins/NavStars/src/NavStars.cpp:396
+#: plugins/NavStars/src/NavStars.cpp:398
 msgid "The 160 stars that are listed in the Russian Nautical Almanac."
 msgstr "『ロシア航海年鑑』(Russian Nautical Almanac) に記載されている160個の恒星。"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:398
+#: plugins/NavStars/src/NavStars.cpp:400
 msgid ""
 "The typical set of navigational stars which was used by aviation of the "
 "Soviet Union. These stars can be found in books like <em>Aviation "
@@ -22759,26 +22763,26 @@ msgid ""
 msgstr ""
 "ソビエト連邦で飛行時使用された典型的な天測航法用の恒星のセット。『航空天文学』や『航空ハンドブック』などの本でこれらの恒星を見つけることができます。"
 
-#: plugins/NavStars/src/NavStars.cpp:399
+#: plugins/NavStars/src/NavStars.cpp:401
 msgid ""
 "These 151 stars were used in the Voskhod (Soviet) and Soyuz (Soviet and "
 "Russian) manned space programs to navigate in space."
 msgstr "これらの151個の恒星はボスホート (ソ連) とソユーズ (ソ連、ロシア) の有人宇宙計画で宇宙を航行するために使用されました。"
 
-#: plugins/NavStars/src/NavStars.cpp:400
+#: plugins/NavStars/src/NavStars.cpp:402
 msgid ""
 "These 37 stars were used by the Apollo space program to navigate to the Moon"
 " from 1969-1972, Apollo 11 through Apollo 17."
 msgstr "これら37個の恒星は1969年から1972年 (アポロ 11 号からアポロ 17 号) までのアポロ宇宙計画で月への航行に使用されました。"
 
-#: plugins/NavStars/src/NavStars.cpp:401
+#: plugins/NavStars/src/NavStars.cpp:403
 msgid ""
 "Alignment stars from the Gemini Astronomical Positioning System, a "
 "professional level computerized device for controlling small to medium "
 "German equatorial telescope mounts."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:402
+#: plugins/NavStars/src/NavStars.cpp:404
 msgid ""
 "The Meade LX200 utilizes 33 bright and well known stars to calibrate the "
 "telescope’s Object Library in the ALTAZ and POLAR alignments. These stars "
@@ -22786,138 +22790,138 @@ msgid ""
 "night, to be able to easily and quickly make precision alignments."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:403
+#: plugins/NavStars/src/NavStars.cpp:405
 msgid ""
 "This list from Meade ETX mount will aid the observer to find alignment stars"
 " at various times of the year."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:404
+#: plugins/NavStars/src/NavStars.cpp:406
 msgid "Alignment stars for the Meade Autostar #494 handset (ETX60AT)."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:405
+#: plugins/NavStars/src/NavStars.cpp:407
 msgid "Alignment stars for the Meade Autostar #497 handset."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:406
+#: plugins/NavStars/src/NavStars.cpp:408
 msgid ""
 "Even though there are about 250 named stars in the hand control database, "
 "only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
 "alignment and related tasks."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:407
+#: plugins/NavStars/src/NavStars.cpp:409
 msgid ""
 "Alignment stars for the Skywatcher SynScan hand controller and SynScan Pro "
 "App."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:408
+#: plugins/NavStars/src/NavStars.cpp:410
 msgid "Alignment stars for Vixen Starbook mounts."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:409
+#: plugins/NavStars/src/NavStars.cpp:411
 msgid "Alignment stars for Argo Navis digital setting circles."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:410
+#: plugins/NavStars/src/NavStars.cpp:412
 msgid "Alignment stars for Orion Intelliscope mounts."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:411
+#: plugins/NavStars/src/NavStars.cpp:413
 msgid "Alignment stars for Sky Commander digital setting circles."
 msgstr ""
 
 #. TRANSLATORS: The full phrase: The original almanac title is
 #. NAME_OF_THE_ALMANAC
-#: plugins/NavStars/src/NavStars.cpp:430
+#: plugins/NavStars/src/NavStars.cpp:432
 msgid "The original almanac title is"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:850
+#: plugins/NavStars/src/NavStars.cpp:838
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "上部外縁"
 
-#: plugins/NavStars/src/NavStars.cpp:851
+#: plugins/NavStars/src/NavStars.cpp:839
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "下部外縁"
 
-#: plugins/NavStars/src/NavStars.cpp:866 plugins/NavStars/src/NavStars.cpp:894
-#: plugins/NavStars/src/NavStars.cpp:900
+#: plugins/NavStars/src/NavStars.cpp:854 plugins/NavStars/src/NavStars.cpp:882
+#: plugins/NavStars/src/NavStars.cpp:888
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:868 plugins/NavStars/src/NavStars.cpp:898
+#: plugins/NavStars/src/NavStars.cpp:856 plugins/NavStars/src/NavStars.cpp:886
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:870 plugins/NavStars/src/NavStars.cpp:904
+#: plugins/NavStars/src/NavStars.cpp:858 plugins/NavStars/src/NavStars.cpp:892
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:873
+#: plugins/NavStars/src/NavStars.cpp:861
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:876
+#: plugins/NavStars/src/NavStars.cpp:864
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "地上位置: 緯度/経度"
 
-#: plugins/NavStars/src/NavStars.cpp:879
+#: plugins/NavStars/src/NavStars.cpp:867
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "推定位置: 緯度/経度"
 
-#: plugins/NavStars/src/NavStars.cpp:882
+#: plugins/NavStars/src/NavStars.cpp:870
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "計算高度/方位"
 
-#: plugins/NavStars/src/NavStars.cpp:889
+#: plugins/NavStars/src/NavStars.cpp:877
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "世界時"
 
-#: plugins/NavStars/src/NavStars.cpp:892
+#: plugins/NavStars/src/NavStars.cpp:880
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "測定高度"
 
-#: plugins/NavStars/src/NavStars.cpp:896
+#: plugins/NavStars/src/NavStars.cpp:884
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:902
+#: plugins/NavStars/src/NavStars.cpp:890
 msgctxt "Declination"
 msgid "DEC"
 msgstr "赤緯"
 
-#: plugins/NavStars/src/NavStars.cpp:906
+#: plugins/NavStars/src/NavStars.cpp:894
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "緯度"
 
-#: plugins/NavStars/src/NavStars.cpp:908
+#: plugins/NavStars/src/NavStars.cpp:896
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "経度"
 
-#: plugins/NavStars/src/NavStars.cpp:910
+#: plugins/NavStars/src/NavStars.cpp:898
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "計算高度"
 
-#: plugins/NavStars/src/NavStars.cpp:912
+#: plugins/NavStars/src/NavStars.cpp:900
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "計算方位"
@@ -22949,66 +22953,72 @@ msgstr "フランス"
 msgid "British (XVIII century)"
 msgstr "イギリス (18世紀)"
 
-#. TRANSLATORS: Part of full phrase: Russian set of navigational stars
+#. TRANSLATORS: Part of full phrase: British (XIX century) set of navigational
+#. stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
+msgid "British (XIX century)"
+msgstr ""
+
+#. TRANSLATORS: Part of full phrase: Russian set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
 msgid "Russian"
 msgstr "ロシア"
 
 #. TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
 msgid "Soviet aviation"
 msgstr "ソ連航空"
 
 #. TRANSLATORS: Part of full phrase: German set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:256
 msgid "German"
 msgstr "ドイツ"
 
 #. TRANSLATORS: Part of full phrase: Voskhod and Soyuz manned space programs
 #. set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:257
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:259
 msgid "Voskhod and Soyuz manned space programs"
 msgstr "ボスホート宇宙計画とソユーズ宇宙計画"
 
 #. TRANSLATORS: Part of full phrase: Apollo space program set of navigational
 #. stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:259
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:261
 msgid "Apollo space program"
 msgstr "アポロ宇宙計画"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:294
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:296
 msgid "Navigational Stars Plug-in"
 msgstr "天測航法の星プラグイン"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:307
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:311
 msgid "These fields are:"
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:311
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:332
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:334
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:314
 msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:338
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:340
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
 #. star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:317
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
@@ -23017,7 +23027,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
 #. reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:317
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
@@ -23026,19 +23036,19 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the
 #. Nautical Almanac where "height" is altitude. Likewise, Zn is computed
 #. azimuth, as seen from the AP.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:321
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:323
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:325
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:327
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:329
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The"
 " Nautical Almanac</em> format:"
@@ -23046,50 +23056,50 @@ msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers
 #. would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:331
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:335
 msgid "LMST: Local mean sidereal time."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:334
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:336
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr ""
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:336
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:338
 msgid "DEC: The navigation star's declination."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:337
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:339
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr ""
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:340
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:342
 msgid "LAT: The observer's geodetic latitude."
 msgstr ""
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:342
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:344
 msgid "LON: The observer's geodetic longitude."
 msgstr ""
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc
 #. computed height (altitude) for the AP
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:344
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:346
 msgid "Hc: The AP calculated height (altitude) of navigation star."
 msgstr ""
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn
 #. computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:346
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:348
 msgid "Zn: The AP calculated azimuth of navigation star."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:350
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:352
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr ""
 
@@ -28690,8 +28700,8 @@ msgid "Title:"
 msgstr ""
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:157
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:162
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:236
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:473
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
@@ -28708,41 +28718,41 @@ msgstr ""
 msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:575
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:479
 msgid "INFO"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:582
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:486
 msgid "WARNING"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:589
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:493
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"
 msgstr "エラー"
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:70
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:138
 msgid "Welcome to the Sky Culture Maker!"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:70
 msgid ""
 "Note: Test only. The result does not yet comply to Stellarium's formatting "
 "rules."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:92
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:91
 msgid ""
 "Convert sky cultures from the legacy (fab) format to the new (json) format"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:179
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:195
 msgid "Please select a license for the sky culture."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:185
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:201
 msgid ""
 "The sky culture description is not complete. Please fill in all required "
 "fields correctly."
@@ -28796,107 +28806,90 @@ msgstr ""
 msgid "The selected directory is not valid"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
-msgid "SCM: Dark Constellation Editor"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
-msgid "SCM: Constellation Editor"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:147
-msgid "Please name your Dark Constellation"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:148
-msgid "Please name your Constellation"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:297
 msgid "Open Artwork"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:299
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
 msgid "Images (*.png *.jpg *.jpeg)"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:306
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:305
 msgid "Chosen path is not a valid file:\n"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:315
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:314
 msgid "Chosen file is not a PNG, JPG or JPEG image:\n"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:342
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:373
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:341
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:372
 msgid "No anchor was selected. Please select an anchor to bind to."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:353
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:352
 msgid "No star was selected to bind to the current selected anchor."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:364
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:363
 msgid "The selected object must be of type Star or Nebula."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:382
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:381
 msgid "The selected object must contain a HIP number."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:405
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:404
 msgid "Could not save: Sky Culture is not set"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:413
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:412
 msgid "Could not save: English name is empty"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:423
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:422
 msgid "Could not save: Constellation ID is empty"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:432
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:442
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:431
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:441
 msgid "Could not save: Constellation with this ID already exists"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:453
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:452
 msgid "Could not save: The constellation does not contain any drawings"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:464
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:463
 msgid ""
 "Could not save: An artwork is attached, but not all anchors have a star "
 "bound."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:98
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:597
 msgid ""
 "Use RightClick or Control + Click to draw a connected line.\n"
 "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
 "Use Command + F to search and connect stars."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:103
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:600
 msgid ""
 "Hold RightClick or Control + Click to delete the line under the cursor.\n"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:106
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:602
 msgid ""
 "Use RightClick to draw a connected line.\n"
 "Use Double-RightClick to stop drawing the line.\n"
 "Use CTRL + F to search and connect stars."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:110
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:605
 msgid "Hold RightClick to delete the line under the cursor.\n"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:115
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:608
 msgid ""
 "Usage:\n"
 "1. Upload an image\n"
@@ -28907,6 +28900,23 @@ msgid ""
 "5. The anchor is shown in a brighter color when bound to a star\n"
 "   - The corresponding bound star is automatically selected when an anchor is selected\n"
 "   - 'Bind Star' will overwrite the current binding if it already exists"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:619
+msgid "SCM: Dark Constellation Editor"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+msgid "SCM: Constellation Editor"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:621
+msgid "Please name your Dark Constellation"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:622
+msgid "Please name your Constellation"
 msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:140
@@ -29189,11 +29199,20 @@ msgid "Export and Exit"
 msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:128
-msgid "Hide the plugin to resume later or abort the process?"
+msgid ""
+"Hide the plugin to resume later or close it without saving the sky culture?"
 msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:129
-msgid "Hide"
+msgid "Hide editor"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
+msgid "Close without saving"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
+msgid "Don't close"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:57

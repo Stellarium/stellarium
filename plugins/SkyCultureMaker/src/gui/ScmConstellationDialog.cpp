@@ -88,7 +88,7 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	ui->description->setText(constellationDescription);
 
 	// Hide the original constellation while editing
-	constellation->hide();
+	constellation->isHidden = true;
 	// Load the lines to ScmDraw
 	maker->getScmDraw()->loadLines(constellation->getLines());
 
@@ -141,12 +141,7 @@ void ScmConstellationDialog::setIsDarkConstellation(bool isDark)
 		draw->setDrawingMode(isDark ? scm::DrawingMode::Coordinates : scm::DrawingMode::StarsAndDSO);
 	}
 
-	if (ui != nullptr)
-	{
-		ui->titleBar->setTitle(isDark ? q_("SCM: Dark Constellation Editor") : q_("SCM: Constellation Editor"));
-		ui->labelsTitle->setText(isDark ? q_("Please name your Dark Constellation")
-		                                : q_("Please name your Constellation"));
-	}
+	updateTranslatableStrings();
 }
 
 void ScmConstellationDialog::retranslate()
@@ -154,12 +149,15 @@ void ScmConstellationDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		updateTranslatableStrings();
 	}
 }
 
 void ScmConstellationDialog::close()
 {
-	maker->setConstellationDialogVisibility(false);
+	setVisible(false);
+	maker->setIsLineDrawEnabled(false);
+	maker->setCanCreateConstellations(true);
 }
 
 void ScmConstellationDialog::createDialogContent()
@@ -192,6 +190,7 @@ void ScmConstellationDialog::createDialogContent()
 		});
 	imageItem->setAnchorPositionChangedCallback([this]() { this->updateArtwork(); });
 
+	updateTranslatableStrings();
 	ui->tooltipBtn->setToolTip(artworkToolTip);
 
 	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmConstellationDialog::saveConstellation);
@@ -477,7 +476,7 @@ void ScmConstellationDialog::cancel()
 	if (constellationBeingEdited != nullptr)
 	{
 		// If we are editing a constellation, we need to show the original one again
-		constellationBeingEdited->show();
+		constellationBeingEdited->isHidden = false;
 	}
 	resetDialog();
 	ScmConstellationDialog::close();
@@ -584,4 +583,60 @@ void ScmConstellationDialog::handleDialogSizeChanged(QSizeF size)
 	StelDialog::handleDialogSizeChanged(size);
 
 	ui->artwork_image->fitInView(imageItem, Qt::KeepAspectRatio);
+}
+
+void ScmConstellationDialog::updateTranslatableStrings()
+{
+	// check if ui is valid before attempting retranslation
+	if(ui == nullptr)
+	{
+		return;
+	}
+
+#if defined(Q_OS_MAC)
+	helpDrawInfoPen = q_("Use RightClick or Control + Click to draw a connected line.\n"
+	                     "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
+	                     "Use Command + F to search and connect stars.");
+	helpDrawInfoEraser = q_("Hold RightClick or Control + Click to delete the line under the cursor.\n");
+#else
+	helpDrawInfoPen = q_("Use RightClick to draw a connected line.\n"
+	                     "Use Double-RightClick to stop drawing the line.\n"
+	                     "Use CTRL + F to search and connect stars.");
+	helpDrawInfoEraser = q_("Hold RightClick to delete the line under the cursor.\n");
+#endif
+
+	artworkToolTip = q_("Usage:\n"
+	                    "1. Upload an image\n"
+	                    "2. Three anchor points appear in the center of the image\n"
+	                    "   - An anchor is green when selected\n"
+	                    "3. Select a star of your choice\n"
+	                    "4. Click the 'Bind Star' button\n"
+	                    "5. The anchor is shown in a brighter color when bound to a star\n"
+	                    "   - The corresponding bound star is automatically selected when an anchor is selected\n"
+	                    "   - 'Bind Star' will overwrite the current binding if it already exists");
+
+	// Update title and labels depending on constellation type
+	ui->titleBar->setTitle(isDarkConstellation ? q_("SCM: Dark Constellation Editor")
+	                                           : q_("SCM: Constellation Editor"));
+	ui->labelsTitle->setText(isDarkConstellation ? q_("Please name your Dark Constellation")
+	                                             : q_("Please name your Constellation"));
+
+	// Update UI elements that use these strings if they're visible
+	if (ui->tooltipBtn != nullptr)
+	{
+		ui->tooltipBtn->setToolTip(artworkToolTip);
+	}
+
+	// Update the drawInfoBox text if a tool is currently active
+	if (ui->drawInfoBox != nullptr)
+	{
+		if (activeTool == scm::DrawTools::Pen)
+		{
+			ui->drawInfoBox->setText(helpDrawInfoPen);
+		}
+		else if (activeTool == scm::DrawTools::Eraser)
+		{
+			ui->drawInfoBox->setText(helpDrawInfoEraser);
+		}
+	}
 }

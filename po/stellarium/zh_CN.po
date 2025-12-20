@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-11-19 19:27+0700\n"
+"POT-Creation-Date: 2025-12-10 07:28+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -85,8 +85,8 @@ msgstr "星群"
 #: src/core/modules/NomenclatureMgr.cpp:90 src/core/modules/NebulaMgr.cpp:469
 #: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:348
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
-#: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:156
-#: src/core/modules/HipsMgr.cpp:157 src/core/StelApp.cpp:699
+#: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:158
+#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:699
 #: src/core/StelCore.cpp:310 src/core/StelSkyLayerMgr.cpp:83
 #: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:969
 msgid "Display Options"
@@ -863,7 +863,7 @@ msgid "Author"
 msgstr "作者"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1533 src/gui/StelGuiItems.cpp:954
+#: src/core/modules/LandscapeMgr.cpp:1533 src/gui/StelGuiItems.cpp:950
 #: plugins/Satellites/src/Satellite.cpp:436
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -959,7 +959,7 @@ msgstr "直径"
 #: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:709
 #: src/core/modules/Planet.cpp:730 src/core/modules/Planet.cpp:854
 #: src/core/modules/Planet.cpp:1370 src/core/modules/Comet.cpp:191
-#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:982
+#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:978
 #: src/gui/AstroCalcDialog.cpp:3199 src/gui/AstroCalcDialog.cpp:3747
 #: src/gui/AstroCalcDialog.cpp:8506 plugins/Satellites/src/Satellites.cpp:3020
 #: plugins/Satellites/src/Satellite.cpp:359
@@ -1826,7 +1826,7 @@ msgstr "区"
 
 #: src/core/modules/Nebula.cpp:106
 msgid "object of unknown nature"
-msgstr "性质不明天体"
+msgstr "未知性质天体"
 
 #: src/core/modules/Nebula.cpp:179 src/core/StelObject.cpp:350
 #: src/gui/AstroCalcChart.cpp:97 src/gui/AstroCalcChart.cpp:107
@@ -2267,7 +2267,7 @@ msgid "Toggle DSO type filter"
 msgstr "切换深空天体类型过滤器"
 
 #: src/core/modules/NebulaMgr.cpp:1572 src/gui/StelDialog.cpp:336
-#: src/gui/ObsListDialog.cpp:597 src/StelMainView.cpp:1066
+#: src/gui/ObsListDialog.cpp:597 src/StelMainView.cpp:1067
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid "Attention!"
 msgstr "注意！"
@@ -2887,11 +2887,11 @@ msgstr "黄道光"
 msgid "Digitized Sky Survey (TOAST)"
 msgstr "数字化巡天 (TOAST)"
 
-#: src/core/modules/HipsMgr.cpp:156
+#: src/core/modules/HipsMgr.cpp:158
 msgid "Toggle Hierarchical Progressive Surveys"
 msgstr "分层累进式巡天"
 
-#: src/core/modules/HipsMgr.cpp:157
+#: src/core/modules/HipsMgr.cpp:159
 msgid "Toggle HiPS dialog"
 msgstr "切换HiPS对话框"
 
@@ -4166,7 +4166,7 @@ msgstr "IAU星座"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/StelObject.cpp:995 src/translations.h:59
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:475
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:518
 msgid "Constellations"
 msgstr "星座"
 
@@ -5173,7 +5173,7 @@ msgid "Custom equation of %1T"
 msgstr "%1T 的自定义公式"
 
 #: src/gui/ConfigurationDialog.cpp:2040 src/gui/ConfigurationDialog.cpp:2079
-#: src/gui/StelGuiItems.cpp:876 src/gui/LocationDialog.cpp:557
+#: src/gui/StelGuiItems.cpp:872 src/gui/LocationDialog.cpp:557
 msgid "System default"
 msgstr "系统默认"
 
@@ -5730,91 +5730,91 @@ msgstr "无信息"
 msgid "Custom info"
 msgstr "自定义信息"
 
-#: src/gui/StelGuiItems.cpp:493 src/gui/StelGuiItems.cpp:1121
+#: src/gui/StelGuiItems.cpp:489 src/gui/StelGuiItems.cpp:1117
 msgid "Space"
 msgstr "空格键"
 
-#: src/gui/StelGuiItems.cpp:878
+#: src/gui/StelGuiItems.cpp:874
 msgid "Time zone"
 msgstr "时区"
 
-#: src/gui/StelGuiItems.cpp:881 src/gui/LocationDialog.cpp:555
+#: src/gui/StelGuiItems.cpp:877 src/gui/LocationDialog.cpp:555
 msgid "Local Mean Solar Time"
 msgstr "本地平太阳时"
 
-#: src/gui/StelGuiItems.cpp:884 src/gui/LocationDialog.cpp:556
+#: src/gui/StelGuiItems.cpp:880 src/gui/LocationDialog.cpp:556
 msgid "Local True Solar Time"
 msgstr "本地真太阳时"
 
 #. TRANSLATORS: unit of measurement: minutes per second
-#: src/gui/StelGuiItems.cpp:887
+#: src/gui/StelGuiItems.cpp:883
 msgctxt "unit of measurement"
 msgid "min/s"
 msgstr "分/秒"
 
 #. TRANSLATORS: unit of measurement: hours per second
-#: src/gui/StelGuiItems.cpp:895
+#: src/gui/StelGuiItems.cpp:891
 msgctxt "unit of measurement"
 msgid "hr/s"
 msgstr "时/秒"
 
 #. TRANSLATORS: unit of measurement: days per second
-#: src/gui/StelGuiItems.cpp:901
+#: src/gui/StelGuiItems.cpp:897
 msgctxt "unit of measurement"
 msgid "d/s"
 msgstr "日/秒"
 
 #. TRANSLATORS: unit of measurement: years per second
-#: src/gui/StelGuiItems.cpp:907
+#: src/gui/StelGuiItems.cpp:903
 msgctxt "unit of measurement"
 msgid "yr/s"
 msgstr "年/秒"
 
-#: src/gui/StelGuiItems.cpp:909 src/gui/StelGuiItems.cpp:911
+#: src/gui/StelGuiItems.cpp:905 src/gui/StelGuiItems.cpp:907
 msgid "Simulation speed"
 msgstr "仿真速度"
 
-#: src/gui/StelGuiItems.cpp:951
+#: src/gui/StelGuiItems.cpp:947
 msgid "flight"
 msgstr "飞行"
 
-#: src/gui/StelGuiItems.cpp:982
+#: src/gui/StelGuiItems.cpp:978
 msgid "planetocentric distance"
 msgstr "行星中心距离"
 
-#: src/gui/StelGuiItems.cpp:984
+#: src/gui/StelGuiItems.cpp:980
 msgid "planetocentric observer"
 msgstr "行星中心观测者"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgid "Atmospheric pressure"
 msgstr "气压"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgctxt "pressure unit"
 msgid "mbar"
 msgstr "毫巴"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgid "temperature"
 msgstr "温度"
 
-#: src/gui/StelGuiItems.cpp:1008 src/gui/StelGuiItems.cpp:1010
+#: src/gui/StelGuiItems.cpp:1004 src/gui/StelGuiItems.cpp:1006
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr "视场"
 
-#: src/gui/StelGuiItems.cpp:1018
+#: src/gui/StelGuiItems.cpp:1014
 msgid "Field of view"
 msgstr "视场"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:1029 src/gui/StelGuiItems.cpp:1050
+#: src/gui/StelGuiItems.cpp:1025 src/gui/StelGuiItems.cpp:1046
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr "帧/秒"
 
-#: src/gui/StelGuiItems.cpp:1036
+#: src/gui/StelGuiItems.cpp:1032
 msgid "Frames per second"
 msgstr "帧/秒"
 
@@ -8438,30 +8438,30 @@ msgstr "重新加载着色器（用于开发）"
 msgid "Full-screen mode"
 msgstr "全屏模式"
 
-#: src/StelMainView.cpp:1066
+#: src/StelMainView.cpp:1067
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
 msgstr "快捷键有冲突！ Stellarium启动后，请按F7键并检查被重复分配的快捷键"
 
-#: src/StelMainView.cpp:1151
+#: src/StelMainView.cpp:1152
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr "OpenGL版本过低。 请更新驱动程序，图形硬件或使用--angle模式（或--mesa模式）选项。"
 
-#: src/StelMainView.cpp:1153
+#: src/StelMainView.cpp:1154
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
 msgstr "OpenGL版本不足。请更新驱动程序，图形硬件，或使用——mesa模式选项。"
 
-#: src/StelMainView.cpp:1157
+#: src/StelMainView.cpp:1158
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "OpenGL版本不足。 请更新驱动程序或图形硬件。"
 
-#: src/StelMainView.cpp:1200
+#: src/StelMainView.cpp:1201
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8469,7 +8469,7 @@ msgstr ""
 "DirectX / OpenGL ES驱动有问题。 有关详细信息，请参阅日志。\n"
 "将来忽略并禁止此通知并继续尝试使用降级模式吗？"
 
-#: src/StelMainView.cpp:1251
+#: src/StelMainView.cpp:1252
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8477,7 +8477,7 @@ msgstr ""
 "您的OpenGL / Mesa驱动有问题。 有关详细信息，请参阅日志。\n"
 "将来忽略并禁止此通知并继续尝试使用降级模式吗？"
 
-#: src/StelMainView.cpp:1311
+#: src/StelMainView.cpp:1312
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8485,7 +8485,7 @@ msgstr ""
 "您的OpenGL驱动有问题。 有关详细信息，请参阅日志。\n"
 "将来忽略并禁止此通知并继续尝试使用降级模式吗？"
 
-#: src/StelMainView.cpp:1352
+#: src/StelMainView.cpp:1353
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -10918,7 +10918,6 @@ msgstr "选择(&C)"
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
-#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
 msgstr "取消"
@@ -10974,7 +10973,6 @@ msgid "Copy &Link Location"
 msgstr "复制链接地址(&L)"
 
 #: src/translations.h:860
-#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
 msgid "Abort"
 msgstr "放弃"
 
@@ -11114,6 +11112,706 @@ msgstr "显示隐藏文件(&h)"
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:141
 msgid "Search"
 msgstr "搜索"
+
+#: src/translations.h:895
+msgctxt "IAU constellation name"
+msgid "Andromeda"
+msgstr "仙女座"
+
+#: src/translations.h:896
+msgctxt "IAU constellation name"
+msgid "Antlia"
+msgstr "唧筒座"
+
+#: src/translations.h:897
+msgctxt "IAU constellation name"
+msgid "Apus"
+msgstr "天燕座"
+
+#: src/translations.h:898
+msgctxt "IAU constellation name"
+msgid "Aquila"
+msgstr "天鹰座"
+
+#: src/translations.h:899
+msgctxt "IAU constellation name"
+msgid "Aquarius"
+msgstr "宝瓶座"
+
+#: src/translations.h:900
+msgctxt "IAU constellation name"
+msgid "Ara"
+msgstr "天坛座"
+
+#: src/translations.h:901
+msgctxt "IAU constellation name"
+msgid "Aries"
+msgstr "白羊座"
+
+#: src/translations.h:902
+msgctxt "IAU constellation name"
+msgid "Auriga"
+msgstr "御夫座"
+
+#: src/translations.h:903
+msgctxt "IAU constellation name"
+msgid "Bootes"
+msgstr "牧夫座"
+
+#: src/translations.h:904
+msgctxt "IAU constellation name"
+msgid "Canis Major"
+msgstr "大犬座"
+
+#: src/translations.h:905
+msgctxt "IAU constellation name"
+msgid "Canis Minor"
+msgstr "小犬座"
+
+#: src/translations.h:906
+msgctxt "IAU constellation name"
+msgid "Caelum"
+msgstr "雕具座"
+
+#: src/translations.h:907
+msgctxt "IAU constellation name"
+msgid "Camelopardalis"
+msgstr "鹿豹座"
+
+#: src/translations.h:908
+msgctxt "IAU constellation name"
+msgid "Capricornus"
+msgstr "魔羯座"
+
+#: src/translations.h:909
+msgctxt "IAU constellation name"
+msgid "Carina"
+msgstr "船底座"
+
+#: src/translations.h:910
+msgctxt "IAU constellation name"
+msgid "Cassiopeia"
+msgstr "仙后座"
+
+#: src/translations.h:911
+msgctxt "IAU constellation name"
+msgid "Centaurus"
+msgstr "半人马座"
+
+#: src/translations.h:912
+msgctxt "IAU constellation name"
+msgid "Cepheus"
+msgstr "仙王座"
+
+#: src/translations.h:913
+msgctxt "IAU constellation name"
+msgid "Cetus"
+msgstr "鲸鱼座"
+
+#: src/translations.h:914
+msgctxt "IAU constellation name"
+msgid "Chamaeleon"
+msgstr "蝘蜓座"
+
+#: src/translations.h:915
+msgctxt "IAU constellation name"
+msgid "Circinus"
+msgstr "圆规座"
+
+#: src/translations.h:916
+msgctxt "IAU constellation name"
+msgid "Cancer"
+msgstr "巨蟹座"
+
+#: src/translations.h:917
+msgctxt "IAU constellation name"
+msgid "Columba"
+msgstr "天鸽座"
+
+#: src/translations.h:918
+msgctxt "IAU constellation name"
+msgid "Coma Berenices"
+msgstr "后发座"
+
+#: src/translations.h:919
+msgctxt "IAU constellation name"
+msgid "Corona Australis"
+msgstr "南冕座"
+
+#: src/translations.h:920
+msgctxt "IAU constellation name"
+msgid "Corona Borealis"
+msgstr "北冕座"
+
+#: src/translations.h:921
+msgctxt "IAU constellation name"
+msgid "Crater"
+msgstr "巨爵座"
+
+#: src/translations.h:922
+msgctxt "IAU constellation name"
+msgid "Crux"
+msgstr "南十字座"
+
+#: src/translations.h:923
+msgctxt "IAU constellation name"
+msgid "Corvus"
+msgstr "乌鸦座"
+
+#: src/translations.h:924
+msgctxt "IAU constellation name"
+msgid "Canes Venatici"
+msgstr "猎犬座"
+
+#: src/translations.h:925
+msgctxt "IAU constellation name"
+msgid "Cygnus"
+msgstr "天鹅座"
+
+#: src/translations.h:926
+msgctxt "IAU constellation name"
+msgid "Delphinus"
+msgstr "海豚座"
+
+#: src/translations.h:927
+msgctxt "IAU constellation name"
+msgid "Dorado"
+msgstr "剑鱼座"
+
+#: src/translations.h:928
+msgctxt "IAU constellation name"
+msgid "Draco"
+msgstr "天龙座"
+
+#: src/translations.h:929
+msgctxt "IAU constellation name"
+msgid "Equuleus"
+msgstr "小马座"
+
+#: src/translations.h:930
+msgctxt "IAU constellation name"
+msgid "Eridanus"
+msgstr "波江座"
+
+#: src/translations.h:931
+msgctxt "IAU constellation name"
+msgid "Fornax"
+msgstr "天炉座"
+
+#: src/translations.h:932
+msgctxt "IAU constellation name"
+msgid "Gemini"
+msgstr "双子座"
+
+#: src/translations.h:933
+msgctxt "IAU constellation name"
+msgid "Grus"
+msgstr "天鹤座"
+
+#: src/translations.h:934
+msgctxt "IAU constellation name"
+msgid "Hercules"
+msgstr "武仙座"
+
+#: src/translations.h:935
+msgctxt "IAU constellation name"
+msgid "Horologium"
+msgstr "时钟座"
+
+#: src/translations.h:936
+msgctxt "IAU constellation name"
+msgid "Hydra"
+msgstr "长蛇座"
+
+#: src/translations.h:937
+msgctxt "IAU constellation name"
+msgid "Hydrus"
+msgstr "水蛇座"
+
+#: src/translations.h:938
+msgctxt "IAU constellation name"
+msgid "Indus"
+msgstr "印第安座"
+
+#: src/translations.h:939
+msgctxt "IAU constellation name"
+msgid "Leo Minor"
+msgstr "小狮座"
+
+#: src/translations.h:940
+msgctxt "IAU constellation name"
+msgid "Lacerta"
+msgstr "蝎虎座"
+
+#: src/translations.h:941
+msgctxt "IAU constellation name"
+msgid "Leo"
+msgstr "狮子座"
+
+#: src/translations.h:942
+msgctxt "IAU constellation name"
+msgid "Lepus"
+msgstr "天兔座"
+
+#: src/translations.h:943
+msgctxt "IAU constellation name"
+msgid "Libra"
+msgstr "天秤座"
+
+#: src/translations.h:944
+msgctxt "IAU constellation name"
+msgid "Lupus"
+msgstr "豺狼座"
+
+#: src/translations.h:945
+msgctxt "IAU constellation name"
+msgid "Lynx"
+msgstr "天猫座"
+
+#: src/translations.h:946
+msgctxt "IAU constellation name"
+msgid "Lyra"
+msgstr "天琴座"
+
+#: src/translations.h:947
+msgctxt "IAU constellation name"
+msgid "Mensa"
+msgstr "山案座"
+
+#: src/translations.h:948
+msgctxt "IAU constellation name"
+msgid "Microscopium"
+msgstr "显微镜座"
+
+#: src/translations.h:949
+msgctxt "IAU constellation name"
+msgid "Monoceros"
+msgstr "麒麟座"
+
+#: src/translations.h:950
+msgctxt "IAU constellation name"
+msgid "Musca"
+msgstr "苍蝇座"
+
+#: src/translations.h:951
+msgctxt "IAU constellation name"
+msgid "Norma"
+msgstr "矩尺座"
+
+#: src/translations.h:952
+msgctxt "IAU constellation name"
+msgid "Octans"
+msgstr "南极座"
+
+#: src/translations.h:953
+msgctxt "IAU constellation name"
+msgid "Ophiuchus"
+msgstr "蛇夫座"
+
+#: src/translations.h:954
+msgctxt "IAU constellation name"
+msgid "Orion"
+msgstr "猎户座"
+
+#: src/translations.h:955
+msgctxt "IAU constellation name"
+msgid "Pavo"
+msgstr "孔雀座"
+
+#: src/translations.h:956
+msgctxt "IAU constellation name"
+msgid "Pegasus"
+msgstr "飞马座"
+
+#: src/translations.h:957
+msgctxt "IAU constellation name"
+msgid "Perseus"
+msgstr "英仙座"
+
+#: src/translations.h:958
+msgctxt "IAU constellation name"
+msgid "Phoenix"
+msgstr "凤凰座"
+
+#: src/translations.h:959
+msgctxt "IAU constellation name"
+msgid "Pictor"
+msgstr "绘架座"
+
+#: src/translations.h:960
+msgctxt "IAU constellation name"
+msgid "Piscis Austrinus"
+msgstr "南鱼座"
+
+#: src/translations.h:961
+msgctxt "IAU constellation name"
+msgid "Pisces"
+msgstr "双鱼座"
+
+#: src/translations.h:962
+msgctxt "IAU constellation name"
+msgid "Puppis"
+msgstr "船尾座"
+
+#: src/translations.h:963
+msgctxt "IAU constellation name"
+msgid "Pyxis"
+msgstr "罗盘座"
+
+#: src/translations.h:964
+msgctxt "IAU constellation name"
+msgid "Reticulum"
+msgstr "网罟座"
+
+#: src/translations.h:965
+msgctxt "IAU constellation name"
+msgid "Sculptor"
+msgstr "玉夫座"
+
+#: src/translations.h:966
+msgctxt "IAU constellation name"
+msgid "Scorpius"
+msgstr "天蝎座"
+
+#: src/translations.h:967
+msgctxt "IAU constellation name"
+msgid "Scutum"
+msgstr "盾牌座"
+
+#: src/translations.h:968
+msgctxt "IAU constellation name"
+msgid "Serpens"
+msgstr "巨蛇座"
+
+#: src/translations.h:969
+msgctxt "IAU constellation name"
+msgid "Sextans"
+msgstr "六分仪座"
+
+#: src/translations.h:970
+msgctxt "IAU constellation name"
+msgid "Sagitta"
+msgstr "天箭座"
+
+#: src/translations.h:971
+msgctxt "IAU constellation name"
+msgid "Sagittarius"
+msgstr "人马座"
+
+#: src/translations.h:972
+msgctxt "IAU constellation name"
+msgid "Taurus"
+msgstr "金牛座"
+
+#: src/translations.h:973
+msgctxt "IAU constellation name"
+msgid "Telescopium"
+msgstr "望远镜座"
+
+#: src/translations.h:974
+msgctxt "IAU constellation name"
+msgid "Triangulum Australe"
+msgstr "南三角座"
+
+#: src/translations.h:975
+msgctxt "IAU constellation name"
+msgid "Triangulum"
+msgstr "三角座"
+
+#: src/translations.h:976
+msgctxt "IAU constellation name"
+msgid "Tucana"
+msgstr "杜鹃座"
+
+#: src/translations.h:977
+msgctxt "IAU constellation name"
+msgid "Ursa Major"
+msgstr "大熊座"
+
+#: src/translations.h:978
+msgctxt "IAU constellation name"
+msgid "Ursa Minor"
+msgstr "小熊座"
+
+#: src/translations.h:979
+msgctxt "IAU constellation name"
+msgid "Vela"
+msgstr "船帆座"
+
+#: src/translations.h:980
+msgctxt "IAU constellation name"
+msgid "Virgo"
+msgstr "室女座"
+
+#: src/translations.h:981
+msgctxt "IAU constellation name"
+msgid "Volans"
+msgstr "飞鱼座"
+
+#: src/translations.h:982
+msgctxt "IAU constellation name"
+msgid "Vulpecula"
+msgstr "狐狸座"
+
+#: src/translations.h:983
+msgctxt "Nebula narration"
+msgid "a Galaxy"
+msgstr "星系"
+
+#: src/translations.h:984
+msgctxt "Nebula narration"
+msgid "an Active galaxy"
+msgstr "活动星系"
+
+#: src/translations.h:985
+msgctxt "Nebula narration"
+msgid "a Radio galaxy"
+msgstr "射电星系"
+
+#: src/translations.h:986
+msgctxt "Nebula narration"
+msgid "an Interacting galaxy"
+msgstr "相互作用星系"
+
+#: src/translations.h:987
+msgctxt "Nebula narration"
+msgid "a Quasar"
+msgstr "类星体"
+
+#: src/translations.h:988
+msgctxt "Nebula narration"
+msgid "a Star cluster"
+msgstr "星团"
+
+#: src/translations.h:989
+msgctxt "Nebula narration"
+msgid "an Open star cluster"
+msgstr "疏散星团"
+
+#: src/translations.h:990
+msgctxt "Nebula narration"
+msgid "a Globular star cluster"
+msgstr "球状星团"
+
+#: src/translations.h:991
+msgctxt "Nebula narration"
+msgid "a Stellar association"
+msgstr "星协"
+
+#: src/translations.h:992
+msgctxt "Nebula narration"
+msgid "a Star cloud"
+msgstr "恒星云"
+
+#: src/translations.h:993
+msgctxt "Nebula narration"
+msgid "A nebula"
+msgstr "星云"
+
+#: src/translations.h:994
+msgctxt "Nebula narration"
+msgid "a Planetary nebula"
+msgstr "行星状星云"
+
+#: src/translations.h:995
+msgctxt "Nebula narration"
+msgid "a Dark Nebula"
+msgstr "暗星云"
+
+#: src/translations.h:996
+msgctxt "Nebula narration"
+msgid "a Reflection nebula"
+msgstr "反射星云"
+
+#: src/translations.h:997
+msgctxt "Nebula narration"
+msgid "a Bipolar nebula"
+msgstr "双极星云"
+
+#: src/translations.h:998
+msgctxt "Nebula narration"
+msgid "an emission nebula"
+msgstr "发射星云"
+
+#: src/translations.h:999
+msgctxt "Nebula narration"
+msgid "a cluster associated with nebulosity"
+msgstr "与星云相关的星团"
+
+#: src/translations.h:1000
+msgctxt "Nebula narration"
+msgid "an H two region"
+msgstr "电离氢区"
+
+#: src/translations.h:1001
+msgctxt "Nebula narration"
+msgid "a Supernova remnant"
+msgstr "超新星遗迹"
+
+#: src/translations.h:1002
+msgctxt "Nebula narration"
+msgid "Interstellar matter"
+msgstr "星际物质"
+
+#: src/translations.h:1003
+msgctxt "Nebula narration"
+msgid "an Emission object"
+msgstr "发射天体"
+
+#: src/translations.h:1004
+msgctxt "Nebula narration"
+msgid "a BL Lacertae object"
+msgstr "蝎虎座BL型天体"
+
+#: src/translations.h:1005
+msgctxt "Nebula narration"
+msgid "a Blazar"
+msgstr "耀变体"
+
+#: src/translations.h:1006
+msgctxt "Nebula narration"
+msgid "a Molecular Cloud"
+msgstr "分子云"
+
+#: src/translations.h:1007
+msgctxt "Nebula narration"
+msgid "a Young Stellar Object"
+msgstr "初期恒星体"
+
+#: src/translations.h:1008
+msgctxt "Nebula narration"
+msgid "a Possible Quasar"
+msgstr "可能的类星体"
+
+#: src/translations.h:1009
+msgctxt "Nebula narration"
+msgid "a Possible Planetary Nebula"
+msgstr "可能的行星状星云"
+
+#: src/translations.h:1010
+msgctxt "Nebula narration"
+msgid "a Protoplanetary Nebula"
+msgstr "原行星云"
+
+#: src/translations.h:1011
+msgctxt "Nebula narration"
+msgid "a Star"
+msgstr "恒星"
+
+#: src/translations.h:1012
+msgctxt "Nebula narration"
+msgid "a Symbiotic Star"
+msgstr "共生星"
+
+#: src/translations.h:1013
+msgctxt "Nebula narration"
+msgid "an Emission-line Star"
+msgstr "发射线星"
+
+#: src/translations.h:1014
+msgctxt "Nebula narration"
+msgid "a Supernova Candidate"
+msgstr "超新星候选体"
+
+#: src/translations.h:1015
+msgctxt "Nebula narration"
+msgid "a Supernova Remnant Candidate"
+msgstr "超新星遗迹候选体"
+
+#: src/translations.h:1016
+msgctxt "Nebula narration"
+msgid "a cluster of Galaxies"
+msgstr "星系团"
+
+#: src/translations.h:1017
+msgctxt "Nebula narration"
+msgid "a part of a Galaxy"
+msgstr "星系的一部分"
+
+#: src/translations.h:1018
+msgctxt "Nebula narration"
+msgid "a region of the sky"
+msgstr "区"
+
+#: src/translations.h:1019
+msgctxt "Nebula narration"
+msgid "an object of unknown type"
+msgstr "未知性质天体"
+
+#: src/translations.h:1020
+msgctxt "object narration"
+msgid "a star"
+msgstr "恒星"
+
+#: src/translations.h:1021
+msgctxt "object narration"
+msgid "a major planet"
+msgstr "大行星"
+
+#: src/translations.h:1022
+msgctxt "object narration"
+msgid "a planet moon"
+msgstr "卫星"
+
+#: src/translations.h:1023
+msgctxt "object narration"
+msgid "an observer"
+msgstr "观测者"
+
+#: src/translations.h:1024
+msgctxt "object narration"
+msgid "an artificial object"
+msgstr "人造天体"
+
+#: src/translations.h:1025
+msgctxt "object narration"
+msgid "an asteroid"
+msgstr "小行星"
+
+#: src/translations.h:1026
+msgctxt "object narration"
+msgid "a plutino"
+msgstr "冥族小天体"
+
+#: src/translations.h:1027
+msgctxt "object narration"
+msgid "a comet"
+msgstr "彗星"
+
+#: src/translations.h:1028
+msgctxt "object narration"
+msgid "a dwarf planet"
+msgstr "矮行星"
+
+#: src/translations.h:1029
+msgctxt "object narration"
+msgid "a cubewano"
+msgstr "经典柯伊伯带天体"
+
+#: src/translations.h:1030
+msgctxt "object narration"
+msgid "a scattered disc object"
+msgstr "离散盘天体"
+
+#: src/translations.h:1031
+msgctxt "object narration"
+msgid "an Oort Cloud Object"
+msgstr "奥尔特云天体"
+
+#: src/translations.h:1032
+msgctxt "object narration"
+msgid "a sednoid"
+msgstr "类赛德娜天体"
+
+#: src/translations.h:1033
+msgctxt "object narration"
+msgid "an interstellar object"
+msgstr "星际天体"
+
+#: src/translations.h:1034
+msgctxt "object narration"
+msgid "an object of undefined type"
+msgstr "未归类天体"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Africa
@@ -12916,7 +13614,7 @@ msgid "View"
 msgstr "显示"
 
 #: src/ui_viewDialog.h:3864 src/ui_viewDialog.h:3885
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:492
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:535
 msgid "Sky"
 msgstr "天空"
 
@@ -15338,7 +16036,8 @@ msgstr "安装完毕后立即使用新地景"
 
 #: src/ui_addRemoveLandscapesDialog.h:234
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:236
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:479
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:522
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:552
 msgid "Remove"
 msgstr "移除"
 
@@ -17143,22 +17842,22 @@ msgid "Angle measure settings"
 msgstr "角度测量设置"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:680
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:677
 msgid "The Angle Measure is enabled:"
 msgstr "角度测量已启用："
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:682
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:679
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "按下鼠标左键并拖动以测量，点击鼠标右键以清除测量。"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:684
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:681
 msgid "Right-clicking changes the end point only."
 msgstr "点击鼠标右键以改变终点。"
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:686
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:683
 msgid "PA="
 msgstr "位置角="
 
@@ -17407,42 +18106,42 @@ msgid "Toggle Oculars button bar"
 msgstr "切换目镜工具栏"
 
 #: plugins/Oculars/src/Oculars.cpp:1528
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:173
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Select next telescope"
 msgstr "选择下一个望远镜"
 
 #: plugins/Oculars/src/Oculars.cpp:1530
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:171
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
 msgid "Select previous telescope"
 msgstr "选择上一个望远镜"
 
 #: plugins/Oculars/src/Oculars.cpp:1532
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:161
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
 msgid "Select next eyepiece"
 msgstr "选择下一个目镜"
 
 #: plugins/Oculars/src/Oculars.cpp:1534
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:159
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Select previous eyepiece"
 msgstr "选择上一个目镜"
 
 #: plugins/Oculars/src/Oculars.cpp:1536
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:165
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Select next lens"
 msgstr "选择下一个镜头"
 
 #: plugins/Oculars/src/Oculars.cpp:1538
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:163
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Select previous lens"
 msgstr "选择上一个镜头"
 
 #: plugins/Oculars/src/Oculars.cpp:1540
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:169
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Select next CCD frame"
 msgstr "选择下一个CCD框架"
 
 #: plugins/Oculars/src/Oculars.cpp:1542
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:167
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Select previous CCD frame"
 msgstr "选择上一个CCD框架"
 
@@ -17467,12 +18166,12 @@ msgid "Toggle focuser overlay"
 msgstr "显示聚焦器叠加层"
 
 #: plugins/Oculars/src/Oculars.cpp:1550
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1242
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1289
 msgid "Reset the sensor frame rotation"
 msgstr "重设图像传感器的角度"
 
 #: plugins/Oculars/src/Oculars.cpp:1551
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1245
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1292
 msgid "Reset the prism rotation"
 msgstr "重置棱镜角度"
 
@@ -17488,8 +18187,8 @@ msgstr "十字丝的赤经/赤纬 (J2000)"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 #: plugins/Oculars/src/Oculars.cpp:2008
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:515
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:562
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 msgid "\"/px"
 msgstr "\"/像素"
 
@@ -17509,37 +18208,37 @@ msgid "s"
 msgstr "s"
 
 #: plugins/Oculars/src/Oculars.cpp:2292
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:305
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:352
 msgid "Binocular"
 msgstr "双筒望远镜"
 
 #: plugins/Oculars/src/Oculars.cpp:2292
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:303
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
 msgid "Ocular"
 msgstr "目镜"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:2312
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:348
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:395
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "目镜焦距：%1 毫米"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:2319
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:357
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:404
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "目镜表观视场：%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2330
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:387
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:434
 #, qt-format
 msgid "Lens #%1"
 msgstr "透镜 #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2334
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:391
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:438
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "透镜 #%1：%2"
@@ -17549,19 +18248,19 @@ msgid "Lens: none"
 msgstr "透镜：无"
 
 #: plugins/Oculars/src/Oculars.cpp:2354 plugins/Oculars/src/Oculars.cpp:2415
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:651
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #, qt-format
 msgid "Telescope #%1"
 msgstr "望远镜#%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2363
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:764
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 #, qt-format
 msgid "Magnification: %1"
 msgstr "放大率：%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2370
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:773
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "出射光瞳：%1 毫米"
@@ -17572,32 +18271,32 @@ msgid "FOV: %1"
 msgstr "视场：%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2398
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "尺寸：%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2399
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:509
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 msgid "Binning"
 msgstr "合并(Binning)"
 
 #: plugins/Oculars/src/Oculars.cpp:2403
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:463
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:510
 #, qt-format
 msgid "Sensor #%1"
 msgstr "传感器#%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2407
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:467
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "传感器#%1：%2"
 
 #: plugins/Oculars/src/Oculars.cpp:2420
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:655
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "望远镜#%1：%2"
@@ -17630,247 +18329,247 @@ msgstr "前一个望远镜(&P)"
 msgid "&Next telescope"
 msgstr "后一个望远镜(&N)"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:397
 msgid "Effective focal length of the ocular"
 msgstr "目镜有效焦距"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:360
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:407
 msgid "Apparent field of view of the ocular"
 msgstr "目镜可视视场"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:393
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:440
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "放大率：%1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:398
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:445
 msgid "Lens: None"
 msgstr "透镜：无"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:399
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:446
 msgid "Multiplicity: N/A"
 msgstr "放大率：未知"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:403
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:450
 msgid "Focal length of eyepiece"
 msgstr "目镜焦距"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
 msgid "Dimensions field of view"
 msgstr "视场大小"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:563
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:751
 msgid "X scale"
 msgstr "X轴标度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:517
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:705
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:752
 msgid "Horizontal scale"
 msgstr "水平标度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:521
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
 msgid "Y scale"
 msgstr "Y轴标度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:707
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:569
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 msgid "Vertical scale"
 msgstr "垂直标度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:528
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:575
 #, qt-format
 msgid "Rotation: %1"
 msgstr "旋转：%1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:572
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:619
 #, qt-format
 msgid "PA of prism: %1"
 msgstr "棱镜位置角: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:575
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:622
 msgid "Position angle of the off-axis guider' prism"
 msgstr "离轴导星镜棱镜的位置角"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:787
 msgid "Magnification provided by these binoculars"
 msgstr "双筒望远镜的放大率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:741
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:788
 msgid "Actual field of view provided by these binoculars"
 msgstr "双筒望远镜的实际视场"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:789
 msgid "Exit pupil provided by these binoculars"
 msgstr "双筒望远镜提供的出射光瞳"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:743
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:790
 msgid "Twilight factor (or dusk index) provided by these binoculars"
 msgstr "这些双筒望远镜提供的曙暮光系数（或晨昏指数）"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:791
 msgid "Relative brightness provided by these binoculars"
 msgstr "这些双筒望远镜所给予的相对亮度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:745
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
 msgid "Alan Adler's Index (or Astro Index) provided by these binoculars"
 msgstr "这些双筒望远镜提供的Alan Adler指数（或天文指数）"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
 msgid "Roy Bishop's Index (or Visibility Factor) provided by these binoculars"
 msgstr "这些双筒望远镜提供的Roy Bishop指数（或可见度系数）"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "此目镜、透镜和望远镜组合的放大率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:755
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "此目镜、透镜和望远镜组合的实际视场"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:756
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:803
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "此目镜、透镜和望远镜组合提供的出射光瞳"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:781
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:828
 msgid "Twilight factor"
 msgstr "曙暮光系数"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:787
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
 msgid "Relative brightness"
 msgstr "相对亮度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:840
 msgid "Adler index"
 msgstr "Adler指数"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:799
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
 msgid "Bishop index"
 msgstr "Bishop指数"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:809
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
 msgctxt "field of view"
 msgid "FOV"
 msgstr "视场"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:877
 msgid "Rayleigh criterion"
 msgstr "瑞利判据"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
 msgid "The Rayleigh resolution criterion"
 msgstr "瑞利分辨率判据"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:837
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:884
 msgid "Dawes' limit"
 msgstr "道斯极限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:886
 msgid "Dawes' resolution criterion"
 msgstr "道斯分辨率判据"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
 msgid "Abbe's limit"
 msgstr "阿贝极限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:893
 msgid "Abbe’s diffraction resolution limit"
 msgstr "阿贝的衍射分辨率极限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Sparrow's limit"
 msgstr "斯帕若极限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:853
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:900
 msgid "Sparrow's resolution limit"
 msgstr "斯帕若分辨率极限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Visual resolution"
 msgstr "目视分辨率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:881
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "目视分辨率基于人眼的特性"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:895
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:942
 msgctxt "Limiting magnitude of device"
 msgid "Limiting magnitude"
 msgstr "极限星等"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:945
 msgid "Approximate limiting magnitude of this binocular"
 msgstr "此双筒望远镜的大致极限星等"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:900
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:947
 msgid ""
 "Approximate limiting magnitude of this ocular/lens/telescope combination"
 msgstr "此目镜/透镜/望远镜组合的大致极限星等"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1194
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1241
 msgid "Rotate the sensor frame 90 degrees counterclockwise"
 msgstr "将图像传感器逆时针旋转 90 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1244
 msgid "Rotate the prism 90 degrees counterclockwise"
 msgstr "将棱镜逆时针旋转 90 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1206
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1253
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "将图像传感器逆时针旋转 15 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1209
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1256
 msgid "Rotate the prism 15 degrees counterclockwise"
 msgstr "将棱镜逆时针旋转 15 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1218
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1265
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "将图像传感器逆时针旋转 5 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1221
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1268
 msgid "Rotate the prism 5 degrees counterclockwise"
 msgstr "将棱镜逆时针旋转 5 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1230
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1277
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "将图像传感器逆时针旋转 1 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1233
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1280
 msgid "Rotate the prism 1 degree counterclockwise"
 msgstr "将棱镜逆时针旋转 1 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1254
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1301
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "将图像传感器顺时针旋转 1 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1257
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1304
 msgid "Rotate the prism 1 degree clockwise"
 msgstr "将棱镜顺时针旋转 1 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1266
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1313
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "将图像传感器顺时针旋转 5 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1269
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1316
 msgid "Rotate the prism 5 degrees clockwise"
 msgstr "将棱镜顺时针旋转 5 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1278
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1325
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "将图像传感器顺时针旋转 15 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1281
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1328
 msgid "Rotate the prism 15 degrees clockwise"
 msgstr "将棱镜顺时针旋转 15 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1290
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1337
 msgid "Rotate the sensor frame 90 degrees clockwise"
 msgstr "将图像传感器顺时针旋转 90 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1293
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1340
 msgid "Rotate the prism 90 degrees clockwise"
 msgstr "将棱镜顺时针旋转 90 度"
 
@@ -17935,7 +18634,7 @@ msgid "Pixel grid feature"
 msgstr "像素网格功能"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:639
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:482
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:525
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "概览"
@@ -18293,6 +18992,7 @@ msgstr "通用"
 #: plugins/Oculars/src/ui_ocularDialog.h:1544
 #: plugins/Oculars/src/ui_ocularDialog.h:1563
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:549
 msgid "Add"
 msgstr "添加"
 
@@ -20287,7 +20987,7 @@ msgid "Add communication data"
 msgstr "添加通信数据"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:126
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:512
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:559
 msgid "Description"
 msgstr "描述"
 
@@ -22544,8 +23244,8 @@ msgstr "太阳系小天体"
 msgid ""
 "This plug-in edits a custom Solar System configuration file for the minor "
 "bodies. If something goes wrong and Stellarium crashes and/or doesn't start,"
-" you can delete manually that file from:"
-msgstr "该插件会为太阳系小天体定制一个配置文件。 如果出现问题，如Stellarium崩溃和/或无法打开，您可以手动删除该文件："
+" you can manually delete that file from:"
+msgstr "该插件会为太阳系小天体定制一个配置文件。 如果出现问题，如Stellarium崩溃和/或无法打开，您可以通过以下路径手动删除该配置文件："
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:227
 msgid ""
@@ -28610,10 +29310,10 @@ msgid "Title:"
 msgstr "标题："
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:157
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:162
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:236
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:473
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:516
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
 msgid "Sky Culture Maker"
 msgstr "星空文化创建工具"
@@ -28628,41 +29328,41 @@ msgstr "请通过 GitHub 用户名联系我们，方式是在 Stellarium 仓库�
 msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr "用于在Stellarium中绘制并导出星空文化的插件。"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:575
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:479
 msgid "INFO"
 msgstr "信息"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:582
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:486
 msgid "WARNING"
 msgstr "错误"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:589
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:493
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"
 msgstr "错误"
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:70
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:138
 msgid "Welcome to the Sky Culture Maker!"
 msgstr "欢迎使用星空文化创建工具"
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:70
 msgid ""
 "Note: Test only. The result does not yet comply to Stellarium's formatting "
 "rules."
 msgstr "注意：仅供测试。当前结果暂未完全符合 Stellarium 的格式规范。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:92
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:91
 msgid ""
 "Convert sky cultures from the legacy (fab) format to the new (json) format"
 msgstr "将星空文化从旧版 (fab) 格式转换为新版 (json) 格式"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:179
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:222
 msgid "Please select a license for the sky culture."
 msgstr "请为星空文化选择许可证。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:185
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:228
 msgid ""
 "The sky culture description is not complete. Please fill in all required "
 "fields correctly."
@@ -28716,84 +29416,67 @@ msgstr "选择导出目录"
 msgid "The selected directory is not valid"
 msgstr "所选目录无效"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
-msgid "SCM: Dark Constellation Editor"
-msgstr "暗星座编辑器"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
-msgid "SCM: Constellation Editor"
-msgstr "星座编辑器"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:147
-msgid "Please name your Dark Constellation"
-msgstr "请为您的暗星座命名"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:148
-msgid "Please name your Constellation"
-msgstr "请为您的星座命名"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:297
 msgid "Open Artwork"
 msgstr "打开星座图绘"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:299
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
 msgid "Images (*.png *.jpg *.jpeg)"
 msgstr "图片 (*.png *.jpg *.jpeg)"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:306
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:305
 msgid "Chosen path is not a valid file:\n"
 msgstr "所选路径不是有效文件:\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:315
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:314
 msgid "Chosen file is not a PNG, JPG or JPEG image:\n"
 msgstr "所选文件不是PNG、JPG或JPEG图像:\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:342
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:373
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:341
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:372
 msgid "No anchor was selected. Please select an anchor to bind to."
 msgstr "未选择锚点。请选择一个锚点以进行锚定。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:353
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:352
 msgid "No star was selected to bind to the current selected anchor."
 msgstr "未选择可锚定至当前锚点的恒星。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:364
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:363
 msgid "The selected object must be of type Star or Nebula."
 msgstr "选择的对象必须是恒星或深空天体。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:382
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:381
 msgid "The selected object must contain a HIP number."
 msgstr "所选对象必须包含一个HIP编号。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:405
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:404
 msgid "Could not save: Sky Culture is not set"
 msgstr "无法保存：星空文化未设置"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:413
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:412
 msgid "Could not save: English name is empty"
 msgstr "无法保存：英文名称为空"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:423
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:422
 msgid "Could not save: Constellation ID is empty"
 msgstr "无法保存：星座ID为空"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:432
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:442
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:431
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:441
 msgid "Could not save: Constellation with this ID already exists"
 msgstr "无法保存：该ID的星座已经存在"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:453
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:452
 msgid "Could not save: The constellation does not contain any drawings"
 msgstr "无法保存：该星座未包含任何绘制内容"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:464
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:463
 msgid ""
 "Could not save: An artwork is attached, but not all anchors have a star "
 "bound."
 msgstr "无法保存：已关联一个图绘，但存在未锚定恒星的锚点。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:98
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:597
 msgid ""
 "Use RightClick or Control + Click to draw a connected line.\n"
 "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
@@ -28803,12 +29486,12 @@ msgstr ""
 "请使用双击右键或 Control + 双击 结束线条绘制。\n"
 "请使用 Command + F 键搜索并连接恒星。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:103
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:600
 msgid ""
 "Hold RightClick or Control + Click to delete the line under the cursor.\n"
 msgstr "长按右键或 Control + 单击 可删除光标下方的线条。\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:106
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:602
 msgid ""
 "Use RightClick to draw a connected line.\n"
 "Use Double-RightClick to stop drawing the line.\n"
@@ -28818,11 +29501,11 @@ msgstr ""
 "请双击右键结束线条绘制。\n"
 "请使用 CTRL + F 键搜索并连接恒星。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:110
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:605
 msgid "Hold RightClick to delete the line under the cursor.\n"
 msgstr "长按右键可删除光标下方的线条。\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:115
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:608
 msgid ""
 "Usage:\n"
 "1. Upload an image\n"
@@ -28844,6 +29527,23 @@ msgstr ""
 "  - 选择锚点时将自动选中其锚定的对应恒星\n"
 "  - 若锚点已存在锚定关系，点击「锚定恒星」将覆盖现有锚定"
 
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:619
+msgid "SCM: Dark Constellation Editor"
+msgstr "暗星座编辑器"
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+msgid "SCM: Constellation Editor"
+msgstr "星座编辑器"
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:621
+msgid "Please name your Dark Constellation"
+msgstr "请为您的暗星座命名"
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:622
+msgid "Please name your Constellation"
+msgstr "请为您的星座命名"
+
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:140
 msgid "Create a new sky culture"
 msgstr "新建星空文化"
@@ -28857,7 +29557,7 @@ msgid "Not implemented yet."
 msgstr "尚未实现。"
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:146
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:478
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:521
 msgid "Edit"
 msgstr "编辑"
 
@@ -28925,59 +29625,59 @@ msgstr "移除图片"
 msgid "Artwork"
 msgstr "星座图绘"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:474
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:517
 msgid "Name of the Sky Culture"
 msgstr "星空文化名称"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:476
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:519
 msgid "Add Constellation"
 msgstr "添加星座"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:477
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:520
 msgid "Add Dark Constellation"
 msgstr "添加暗星座"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:480
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:523
 msgid "License of the Sky Culture"
 msgstr "星空文化许可证"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:481
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:524
 msgid "Export Sky Culture"
 msgstr "导出星空文化"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:483
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:526
 msgid "Please describe the Sky Culture"
 msgstr "请描述一下星空文化"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:484
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:527
 msgid "Mandatory fields are marked with an asterisk (*)."
 msgstr "必选字段用星号（*）标记。"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:485
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:528
 msgid "General Information"
 msgstr "常规信息"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:486
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:529
 msgid "Classification of the Sky Culture*"
 msgstr "星空文化分类"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:530
 msgid "Introduction:*"
 msgstr "简介:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:488
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:531
 msgid " A summary that could ideally be shown on a small screen entirely."
 msgstr "内容摘要应确保能在一个小屏幕上完整显示。"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:489
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:532
 msgid "Description (What can the user see here?)"
 msgstr "描述（用户在这里可以看到什么？）"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:490
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:533
 msgid "Culture Description:*"
 msgstr "文化的描述:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:491
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:534
 msgid ""
 "Give a short introduction about the culture: time, location, circumstances "
 "of life. Please describe specifics of the source (book/clay "
@@ -28990,7 +29690,7 @@ msgid ""
 msgstr ""
 "请简要介绍该星空文化的背景：包括其形成时间、地理位置及生活环​​境。请说明文献载体的具体形式（如书籍/黏土板/羊皮卷等）或文化的独特性（例如：以太阳观测为核心/以月亮周期为中心/当地气候特征/地域地理特点）。该文化是否建造了金字塔或其他著名建筑？他们如何运用天文知识（例如：计时、制定历法、天气预测等）？是否与其他文化存在交流关联？当前版本是教学简化版还是基于特定历史文献的重构？"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:493
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:536
 msgid ""
 "What special features did/does this culture use, what shall the user watch "
 "out for? Is it worthwhile to click a specific button rather than others - "
@@ -29003,87 +29703,87 @@ msgid ""
 msgstr ""
 "该文化采用了哪些特殊天文特征？用户需注意哪些细节？是否有值得优先点击的特定功能（例如：黄道分区、超级星座、暗星座、全天域星座等）？其星座是否会随月份变化，还是全年固定不变？本次呈现中哪些内容具有历史准确性？该文化是否确实使用简笔轮廓表示星座？他们是绘制具象图像（或仅使用星体名称）？他们主要观测恒星，还是更侧重银河的明暗云带？"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:494
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:537
 msgid "Moon & Sun:"
 msgstr "月球与太阳："
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:495
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:538
 msgid "How did they determine their calendar? Did they observe phases?"
 msgstr "他们如何制定历法？是否观测月相？"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:496
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:539
 msgid "Planets:"
 msgstr "行星："
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:497
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:540
 msgid ""
 "Were the planets deified? What deities connect, what meaning do they have?"
 msgstr "行星是否被神化？关联哪些神祇？有哪些象征意义？"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:498
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:541
 msgid "Zodiac/ Lunar System:"
 msgstr "黄道带/月球系统："
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:499
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:542
 msgid ""
 "Did they have the (Bab.) zodiac system or any other division of the \"path "
 "of the Moon\"? If so, was it a (equal or unequal) division of the ecliptic "
 "or of any other type?"
 msgstr "该文化是否采用（巴比伦式）黄道带系统或其他“月球运行轨迹”划分方式？若存在此类划分，其方式属于黄道等分分区、非等分分区，还是其他类型？"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:500
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:543
 msgid "Milky Way:"
 msgstr "银河："
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:501
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:544
 msgid "Was the Milky Way deified? What meaning did it have?"
 msgstr "银河是否被神化？象征什么？"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:502
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:545
 msgid "Other Celestial Objects:"
 msgstr "其他天体："
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:503
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:546
 msgid ""
 "What other celestial objects were significant? E.g what about shooting "
 "stars, aurorae? Did they observe stellar transients, e.g. supernovae, that "
 "were visible only in a specific year?"
 msgstr "还有哪些天体具有重要文化意义？例如流星、极光等现象？他们是否观测过仅在某特定年份可见的暂现天体（例如超新星）？"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:504
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:547
 msgid "Credits and References"
 msgstr "致谢与参考文献"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:505
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:548
 msgid "References:*"
 msgstr "参考文献:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:506
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:553
 msgid "Authors:*"
 msgstr "作者:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:507
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:554
 msgid ""
 "Who are you and what is your background (native person, researcher, ...)? "
 "Ideally, please provide an email-address as well."
 msgstr "您的身份与背景是（如：原住民、研究人员等）？好还能提供一个电子邮件地址。"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:508
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:555
 msgid "About:*"
 msgstr "关于:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:509
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:556
 msgid ""
 "How do you know about this Sky Culture? Is this contribution based on your "
 "own or other people's research? Is it based on interviews with Elders or "
 "reading ancient text, etc.?"
 msgstr "您如何了解到该星空文化？本次贡献是基于您个人还是他人的研究成果？其来源是源自与长者的访谈、古籍研读还是其他途径？"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:510
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:557
 msgid "Acknowledgements:"
 msgstr "致谢："
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:511
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:558
 msgid ""
 "What acknowledgements would you like to make? E.g. to interviewed people, "
 "organizations, or resources that helped you?"
@@ -29132,12 +29832,21 @@ msgid "Export and Exit"
 msgstr "导出并退出"
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:128
-msgid "Hide the plugin to resume later or abort the process?"
-msgstr "隐藏插件以稍后继续，还是放弃当前操作？"
+msgid ""
+"Hide the plugin to resume later or close it without saving the sky culture?"
+msgstr "隐藏插件以稍后继续，还是不保存星空文化的情况下关闭？"
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:129
-msgid "Hide"
-msgstr "隐藏"
+msgid "Hide editor"
+msgstr "隐藏插件"
+
+#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
+msgid "Close without saving"
+msgstr "不保存并关闭"
+
+#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
+msgid "Don't close"
+msgstr "不要关闭"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:57
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:270

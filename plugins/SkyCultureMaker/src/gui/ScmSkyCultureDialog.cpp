@@ -24,7 +24,26 @@
 #include "ScmSkyCultureDialog.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
+#include <QStyledItemDelegate>
 #include <QDebug>
+
+namespace
+{
+
+class NoEditDelegate : public QStyledItemDelegate
+{
+public:
+	NoEditDelegate(QObject* parent = nullptr)
+		: QStyledItemDelegate(parent)
+	{
+	}
+	QWidget* createEditor(QWidget*, const QStyleOptionViewItem&, const QModelIndex&) const override
+	{
+		return nullptr;
+	}
+};
+
+}
 
 ScmSkyCultureDialog::ScmSkyCultureDialog(SkyCultureMaker *maker)
 	: StelDialogSeparate("ScmSkyCultureDialog")
@@ -41,7 +60,7 @@ ScmSkyCultureDialog::~ScmSkyCultureDialog()
 	qDebug() << "SkyCultureMaker: Unloaded the ScmSkyCultureDialog";
 }
 
-void ScmSkyCultureDialog::setConstellations(std::vector<scm::ScmConstellation> *constellations)
+void ScmSkyCultureDialog::setConstellations(std::vector<std::unique_ptr<scm::ScmConstellation>> *constellations)
 {
 	ScmSkyCultureDialog::constellations = constellations;
 	if (ui && dialog && constellations != nullptr)
@@ -50,7 +69,7 @@ void ScmSkyCultureDialog::setConstellations(std::vector<scm::ScmConstellation> *
 		for (const auto &constellation : *constellations)
 		{
 			// Add the constellation to the list widget
-			ui->constellationsList->addItem(getDisplayNameFromConstellation(constellation));
+			ui->constellationsList->addItem(getDisplayNameFromConstellation(*constellation));
 		}
 	}
 }
@@ -74,12 +93,28 @@ void ScmSkyCultureDialog::retranslate()
 
 void ScmSkyCultureDialog::close()
 {
-	maker->setHideOrAbortMakerDialogVisibility(true);
+	maker->setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, true);
+}
+
+bool ScmSkyCultureDialog::eventFilter(QObject *obj, QEvent *event)
+{
+	if (obj == dialog && event->type() == QEvent::KeyPress)
+	{
+		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+		if (keyEvent->key() == Qt::Key_Escape)
+		{
+			// escape should not close the dialog directly
+			maker->setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, true);
+			return true;
+		}
+	}
+	return StelDialogSeparate::eventFilter(obj, event);
 }
 
 void ScmSkyCultureDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	dialog->installEventFilter(this);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
@@ -153,6 +188,14 @@ void ScmSkyCultureDialog::createDialogContent()
 			ui->classificationCB->setCurrentIndex(index);
 		}
 	}
+
+	resetReferences();
+	ui->referencesList->setItemDelegateForColumn(0, new NoEditDelegate(ui->referencesList));
+	connect(ui->addRefBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::addNewReference);
+	connect(ui->removeRefBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::removeReference);
+	connect(ui->moveRefUpBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::moveCurrentReferenceUp);
+	connect(ui->moveRefDownBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::moveCurrentReferenceDown);
+	connect(ui->referencesList, &QTreeWidget::currentItemChanged, this, &ScmSkyCultureDialog::updateReferencesButtons);
 }
 
 void ScmSkyCultureDialog::handleFontChanged()
@@ -190,7 +233,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	maker->setSkyCultureDescription(desc);
 
 	// open export dialog
-	maker->setSkyCultureExportDialogVisibility(true);
+	maker->setDialogVisibility(scm::DialogID::SkyCultureExportDialog, true);
 }
 
 void ScmSkyCultureDialog::editSelectedConstellation()
@@ -207,14 +250,14 @@ void ScmSkyCultureDialog::editSelectedConstellation()
 		QString selectedConstellationId = "";
 		for (const auto &constellation : *constellations)
 		{
-			if (constellationName == (getDisplayNameFromConstellation(constellation)))
+			if (constellationName == (getDisplayNameFromConstellation(*constellation)))
 			{
-				selectedConstellationId = constellation.getId();
+				selectedConstellationId = constellation->getId();
 				break;
 			}
 		}
 
-		maker->openConstellationDialog(selectedConstellationId);
+		openConstellationDialog(selectedConstellationId);
 	}
 }
 
@@ -232,9 +275,9 @@ void ScmSkyCultureDialog::removeSelectedConstellation()
 		QString selectedConstellationId = "";
 		for (const auto &constellation : *constellations)
 		{
-			if (constellationName == (getDisplayNameFromConstellation(constellation)))
+			if (constellationName == (getDisplayNameFromConstellation(*constellation)))
 			{
-				selectedConstellationId = constellation.getId();
+				selectedConstellationId = constellation->getId();
 				break;
 			}
 		}
@@ -251,8 +294,33 @@ void ScmSkyCultureDialog::removeSelectedConstellation()
 
 void ScmSkyCultureDialog::openConstellationDialog(bool isDarkConstellation)
 {
-	maker->setConstellationDialogVisibility(true);
+	maker->setDialogVisibility(scm::DialogID::ConstellationDialog, true);
 	maker->setConstellationDialogIsDarkConstellation(isDarkConstellation);
+	maker->setIsLineDrawEnabled(true);
+	updateAddConstellationButtons(false);
+}
+
+void ScmSkyCultureDialog::openConstellationDialog(const QString &constellationId)
+{
+	scm::ScmSkyCulture *skyCulture = maker->getCurrentSkyCulture();
+	if (skyCulture == nullptr)
+	{
+		qDebug() << "SkyCultureMaker: Current Sky Culture is not initialized.";
+		return;
+	}
+
+	scm::ScmConstellation *constellation = skyCulture->getConstellation(constellationId);
+	if (constellation != nullptr)
+	{
+		maker->loadDialogFromConstellation(constellation);
+		maker->setDialogVisibility(scm::DialogID::ConstellationDialog, true);
+		maker->setIsLineDrawEnabled(true);
+		updateAddConstellationButtons(false);
+	}
+	else
+	{
+		qWarning() << "SkyCultureMaker: Constellation with ID" << constellationId << "not found.";
+	}
 }
 
 void ScmSkyCultureDialog::setIdFromName(QString &name)
@@ -263,8 +331,11 @@ void ScmSkyCultureDialog::setIdFromName(QString &name)
 
 void ScmSkyCultureDialog::updateAddConstellationButtons(bool enabled)
 {
-	ui->AddConstellationBtn->setEnabled(enabled);
-	ui->AddDarkConstellationBtn->setEnabled(enabled);
+	if(ui && dialog)
+	{
+		ui->AddConstellationBtn->setEnabled(enabled);
+		ui->AddDarkConstellationBtn->setEnabled(enabled);
+	}
 }
 
 void ScmSkyCultureDialog::updateEditConstellationButton()
@@ -296,6 +367,111 @@ QString ScmSkyCultureDialog::getDisplayNameFromConstellation(const scm::ScmConst
 	return constellation.getEnglishName() + " (" + constellation.getId() + ")";
 }
 
+void ScmSkyCultureDialog::resetReferences()
+{
+	if (ui && dialog)
+	{
+		ui->referencesList->clear();
+		ui->moveRefUpBtn->setEnabled(false);
+		ui->moveRefDownBtn->setEnabled(false);
+		ui->removeRefBtn->setEnabled(false);
+	}
+}
+
+void ScmSkyCultureDialog::updateReferencesButtons()
+{
+	const auto count = ui->referencesList->topLevelItemCount();
+	const auto currentItem = ui->referencesList->currentItem();
+
+	ui->removeRefBtn->setDisabled(count == 0 || !currentItem);
+
+	if (count <= 1 || !currentItem)
+	{
+		ui->moveRefUpBtn->setDisabled(true);
+		ui->moveRefDownBtn->setDisabled(true);
+		return;
+	}
+	const auto rootItem = ui->referencesList->invisibleRootItem();
+	Q_ASSERT(rootItem);
+	const auto row = rootItem->indexOfChild(currentItem);
+	ui->moveRefUpBtn->setDisabled(row == 0);
+	ui->moveRefDownBtn->setDisabled(row == count - 1);
+}
+
+void ScmSkyCultureDialog::updateReferencesNumeration()
+{
+	for (int row = 0; row < ui->referencesList->topLevelItemCount(); ++row)
+	{
+		ui->referencesList->topLevelItem(row)->setText(0, QString("#%1").arg(row + 1));
+	}
+}
+
+void ScmSkyCultureDialog::addNewReference()
+{
+	const auto num = ui->referencesList->topLevelItemCount() + 1;
+	const QStringList labels{QString("#%1").arg(num), ""};
+	const auto item = new QTreeWidgetItem(labels);
+	item->setFlags(item->flags() | Qt::ItemIsEditable);
+	ui->referencesList->addTopLevelItem(item);
+	ui->referencesList->setCurrentItem(item, 1);
+	ui->referencesList->resizeColumnToContents(0);
+	ui->referencesList->editItem(item, 1);
+
+	updateReferencesButtons();
+}
+
+void ScmSkyCultureDialog::removeReference()
+{
+	const auto currentItem = ui->referencesList->currentItem();
+	if (!currentItem) return;
+	const auto rootItem = ui->referencesList->invisibleRootItem();
+	Q_ASSERT(rootItem);
+	const auto row = rootItem->indexOfChild(currentItem);
+	const auto itemToRemove = ui->referencesList->takeTopLevelItem(row);
+	Q_ASSERT(itemToRemove == currentItem); Q_UNUSED(itemToRemove);
+	updateReferencesNumeration();
+	updateReferencesButtons();
+}
+
+void ScmSkyCultureDialog::moveCurrentReferenceUp()
+{
+	const auto currentItem = ui->referencesList->currentItem();
+	if (!currentItem) return;
+
+	const auto rootItem = ui->referencesList->invisibleRootItem();
+	Q_ASSERT(rootItem);
+	const auto row = rootItem->indexOfChild(currentItem);
+	if (row == 0) return;
+
+	const auto itemToMove = ui->referencesList->takeTopLevelItem(row);
+	Q_ASSERT(itemToMove == currentItem);
+	ui->referencesList->insertTopLevelItem(row-1, itemToMove);
+	ui->referencesList->setCurrentItem(itemToMove, 1);
+
+	updateReferencesNumeration();
+	updateReferencesButtons();
+}
+
+void ScmSkyCultureDialog::moveCurrentReferenceDown()
+{
+	const auto currentItem = ui->referencesList->currentItem();
+	if (!currentItem) return;
+
+	const auto rootItem = ui->referencesList->invisibleRootItem();
+	Q_ASSERT(rootItem);
+	const auto row = rootItem->indexOfChild(currentItem);
+	const auto count = ui->referencesList->topLevelItemCount();
+	if (row == count - 1) return;
+
+	const auto itemToMove = ui->referencesList->takeTopLevelItem(row);
+	Q_ASSERT(itemToMove == currentItem);
+	ui->referencesList->insertTopLevelItem(row+1, itemToMove);
+	ui->referencesList->setCurrentItem(itemToMove, 1);
+
+	updateReferencesNumeration();
+	updateReferencesButtons();
+}
+
 QString ScmSkyCultureDialog::makeConstellationsSection() const
 {
 	if (!constellations) return {};
@@ -303,16 +479,29 @@ QString ScmSkyCultureDialog::makeConstellationsSection() const
 	QString text;
 	for (const auto& constellation : *constellations)
 	{
-		const auto descr = constellation.getDescription().trimmed();
+		const auto descr = constellation->getDescription().trimmed();
 		if (descr.isEmpty()) continue;
 		if (!text.isEmpty())
 			text += "\n\n";
 		text += "##### ";
-		text += constellation.getEnglishName();
+		text += constellation->getEnglishName();
 		text += "\n\n";
 		text += descr;
 	}
 	return text.trimmed();
+}
+
+QString ScmSkyCultureDialog::makeReferencesSection() const
+{
+	QString refs;
+	for (int row = 0; row < ui->referencesList->topLevelItemCount(); ++row)
+	{
+		const auto text = ui->referencesList->topLevelItem(row)->text(1);
+		refs += QString(" - [#%1]: %2\n").arg(row + 1).arg(text.trimmed());
+	}
+	if (!refs.isEmpty())
+		refs.chop(1); // remove the final newline char
+	return refs;
 }
 
 scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
@@ -331,7 +520,7 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 
 	desc.constellations = makeConstellationsSection();
 
-	desc.references       = ui->referencesTE->toPlainText();
+	desc.references       = makeReferencesSection();
 
 	desc.authors            = ui->authorsTE->toPlainText();
 	desc.about              = ui->aboutTE->toPlainText();
@@ -357,7 +546,7 @@ void ScmSkyCultureDialog::resetDialog()
 		ui->zodiacTE->clear();
 		ui->milkyWayTE->clear();
 		ui->otherObjectsTE->clear();
-		ui->referencesTE->clear();
+		resetReferences();
 		ui->acknowledgementsTE->clear();
 
 		ui->licenseCB->setCurrentIndex(0);
@@ -367,6 +556,9 @@ void ScmSkyCultureDialog::resetDialog()
 		setIdFromName(name);
 		resetConstellations();
 		maker->setSkyCultureDescription(getDescriptionFromTextEdit());
+
+		updateAddConstellationButtons(true);
+		updateEditConstellationButton();
 		updateRemoveConstellationButton();
 	}
 }

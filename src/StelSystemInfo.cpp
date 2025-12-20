@@ -326,13 +326,15 @@ void printSystemInfo()
 			log(QString("CPU name: %1").arg(cpumodel));
 		if (!freq.isEmpty())
 			log(QString("CPU maximum speed: %1").arg(freq));
-                log(QString("CPU logical cores: %1").arg(ncpu));
+
+		log(QString("CPU logical cores: %1").arg(ncpu));
+
 		if (!hardware.isEmpty())
-                        log(QString("CPU hardware: %1").arg(hardware));
+			log(QString("CPU hardware: %1").arg(hardware));
 		if (!systype.isEmpty())
 			log(QString("System type: %1").arg(systype));
 		if (!platform.isEmpty())
-                        log(QString("Platform: %1").arg(platform));
+			log(QString("Platform: %1").arg(platform));
 		if (!model.isEmpty() && (!hardware.isEmpty() || !platform.isEmpty()))
 			log(QString("Model: %1").arg(model));
 		if (!machine.isEmpty())
@@ -367,7 +369,7 @@ void printSystemInfo()
 	sysctlbyname(_model, nullptr, &len, nullptr, 0);
 	std::string model(len, '\0');
 	sysctlbyname(_model, const_cast<char *>(model.data()), &len, nullptr, 0);
-        log(QString("CPU name: %1").arg(model.data()));
+	log(QString("CPU name: %1").arg(model.data()));
 
 	int64_t freq = 0;
 	len = sizeof(freq);
@@ -385,7 +387,7 @@ void printSystemInfo()
 	int ncpu = 0;
 	len = sizeof(ncpu);
 	sysctlbyname("hw.ncpu", &ncpu, &len, nullptr, 0);
-        log(QString("CPU logical cores: %1").arg(ncpu));
+	log(QString("CPU logical cores: %1").arg(ncpu));
 
 	// memory info
 	uint64_t totalRAM = 0;
@@ -397,27 +399,29 @@ void printSystemInfo()
 #ifdef Q_OS_OPENBSD
 	int mib[2], freq, ncpu;
 	size_t len = 1024;
-	std::string model;
+	std::string model, vendor, machine;
 	model.resize(len);
+	vendor.resize(len);
+	machine.resize(len);
 
 	// CPU info
 	mib[0] = CTL_HW;
 	mib[1] = HW_MODEL;
 	sysctl(mib, 2, model.data(), &len, NULL, 0);
 	model.resize(len);
-        log(QString("CPU name: %1").arg(model.data()));
+	log(QString("CPU name: %1").arg(model.data()));
 
 	mib[0] = CTL_HW;
 	mib[1] = HW_CPUSPEED;
 	len = sizeof(freq);
 	sysctl(mib, 2, &freq, &len, NULL, 0);
-        log(QString("CPU speed: %1 MHz").arg(freq));
+	log(QString("CPU speed: %1 MHz").arg(freq));
 
 	mib[0] = CTL_HW;
 	mib[1] = HW_NCPU;
 	len = sizeof(ncpu);
 	sysctl(mib, 2, &ncpu, &len, NULL, 0);
-        log(QString("CPU logical cores: %1").arg(ncpu));
+	log(QString("CPU logical cores: %1").arg(ncpu));
 
 	// memory info
 	mib[0] = CTL_HW;
@@ -434,28 +438,31 @@ void printSystemInfo()
 	// extra info
 	mib[0] = CTL_HW;
 	mib[1] = HW_VENDOR;
-	sysctl(mib, 2, model.data(), &len, NULL, 0);
-	model.resize(len);
-	QString vendor = model.data();
+	len = 1024;
+	sysctl(mib, 2, vendor.data(), &len, NULL, 0);
+	vendor.resize(len);
+	QString sVendor = QString("%1").arg(vendor.data()).trimmed();
+	if (!sVendor.isEmpty())
+		log(QString("Vendor: %1").arg(sVendor));
 
 	mib[0] = CTL_HW;
 	mib[1] = HW_PRODUCT;
-	sysctl(mib, 2, model.data(), &len, NULL, 0);
-	model.resize(len);
-	if (vendor.isEmpty())
-		log(QString("Machine: %1").arg(model.data()));
-	else
-		log(QString("Machine: %1 %2").arg(vendor, model.data()));
+	len = 1024;
+	sysctl(mib, 2, machine.data(), &len, NULL, 0);
+	machine.resize(len);
+	QString sMachine = QString("%1").arg(machine.data()).trimmed();
+	if (!sMachine.isEmpty())
+		log(QString("Machine: %1").arg(sMachine));
 #endif
 
 #ifdef Q_OS_SOLARIS
 	processor_info_t pinfo;
 	processor_info(0, &pinfo);
-        //log(QString("CPU name: %1").arg(pinfo.pi_processor_type));
-        log(QString("CPU speed: %1 MHz").arg(pinfo.pi_clock));
+	//log(QString("CPU name: %1").arg(pinfo.pi_processor_type));
+	log(QString("CPU speed: %1 MHz").arg(pinfo.pi_clock));
 
 	int ncpu = sysconf( _SC_NPROCESSORS_ONLN );
-        log(QString("CPU logical cores: %1").arg(ncpu));
+	log(QString("CPU logical cores: %1").arg(ncpu));
 
 	// memory info
 	uint64_t totalRAM = (size_t)sysconf( _SC_PHYS_PAGES ) * (size_t)sysconf( _SC_PAGESIZE );

@@ -1069,8 +1069,8 @@ To exclude entries from being displayed for a particular skyculture, add an entr
 modern  = 11,36,OrB,OrS,OSh,OrC,HeG,Sal,TPT
 \end{configfile}
 %
-Here, \texttt{modern} names the skyculture, and the comma-separated entries are references from the file \file{description.md} or 
-asterism abbreviations you want to be ignored.
+Here, \texttt{modern} names the skyculture, and the comma-separated entries are references listed in 
+the file \file{description.md} or asterism abbreviations you want to be ignored.
 
 
 
@@ -1125,8 +1125,9 @@ while the references to them are expected to be in the form of
       as the \texttt{LOCALE} parameter, these names will be read and put into the \jtag{native} section of the corresponding JSON entry. 
       Note that the order of stars/DSOs in the normal and localized files must be the same, otherwise there's no way to match the names.
 \item[\texttt{-\/-translated-md}] To check the look of the translated description texts you can use this option. 
-      The output directory will contain, in addition to \file{description.md}, files named like 
-      \file{description.es\_419.DO\_NOT\_COMMIT.md}, with the ``DO NOT COMMIT'' part reminding you that they are not a part of the sky culture.
+      The output directory will contain files named like 
+      \file{description.es\_419.DO\_NOT\_COMMIT.md}, in addition to \file{description.md}, 
+      with the \texttt{DO\_NOT\_COMMIT} part reminding you that they are not a part of the sky culture.
 \end{description}
 
 \noindent After the run, read the notes and warnings, and adjust your text accordingly. 

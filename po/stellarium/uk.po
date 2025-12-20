@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-11-19 19:27+0700\n"
+"POT-Creation-Date: 2025-12-10 07:28+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -71,8 +71,8 @@ msgstr "астеризм"
 #: src/core/modules/NomenclatureMgr.cpp:90 src/core/modules/NebulaMgr.cpp:469
 #: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:348
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
-#: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:156
-#: src/core/modules/HipsMgr.cpp:157 src/core/StelApp.cpp:699
+#: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:158
+#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:699
 #: src/core/StelCore.cpp:310 src/core/StelSkyLayerMgr.cpp:83
 #: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:969
 msgid "Display Options"
@@ -851,7 +851,7 @@ msgid "Author"
 msgstr "Автор"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1533 src/gui/StelGuiItems.cpp:954
+#: src/core/modules/LandscapeMgr.cpp:1533 src/gui/StelGuiItems.cpp:950
 #: plugins/Satellites/src/Satellite.cpp:436
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -949,7 +949,7 @@ msgstr "Діаметр"
 #: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:709
 #: src/core/modules/Planet.cpp:730 src/core/modules/Planet.cpp:854
 #: src/core/modules/Planet.cpp:1370 src/core/modules/Comet.cpp:191
-#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:982
+#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:978
 #: src/gui/AstroCalcDialog.cpp:3199 src/gui/AstroCalcDialog.cpp:3747
 #: src/gui/AstroCalcDialog.cpp:8506 plugins/Satellites/src/Satellites.cpp:3020
 #: plugins/Satellites/src/Satellite.cpp:359
@@ -2273,7 +2273,7 @@ msgid "Toggle DSO type filter"
 msgstr "Увімкнути або вимкнути фільтрування віддалених об’єктів за типом"
 
 #: src/core/modules/NebulaMgr.cpp:1572 src/gui/StelDialog.cpp:336
-#: src/gui/ObsListDialog.cpp:597 src/StelMainView.cpp:1066
+#: src/gui/ObsListDialog.cpp:597 src/StelMainView.cpp:1067
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid "Attention!"
 msgstr "Увага!"
@@ -2895,11 +2895,11 @@ msgstr "Зодіакальне світло"
 msgid "Digitized Sky Survey (TOAST)"
 msgstr "Цифровий огляд неба (TOAST)"
 
-#: src/core/modules/HipsMgr.cpp:156
+#: src/core/modules/HipsMgr.cpp:158
 msgid "Toggle Hierarchical Progressive Surveys"
 msgstr "Увімкнути або вимкнути огляди HiPS"
 
-#: src/core/modules/HipsMgr.cpp:157
+#: src/core/modules/HipsMgr.cpp:159
 msgid "Toggle HiPS dialog"
 msgstr "Перемкнути вікно HiPS"
 
@@ -4258,7 +4258,7 @@ msgstr "Сузір’я МАО"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/StelObject.cpp:995 src/translations.h:59
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:475
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:518
 msgid "Constellations"
 msgstr "Сузір'я"
 
@@ -5326,7 +5326,7 @@ msgid "Custom equation of %1T"
 msgstr "Нетипове рівняння для %1T"
 
 #: src/gui/ConfigurationDialog.cpp:2040 src/gui/ConfigurationDialog.cpp:2079
-#: src/gui/StelGuiItems.cpp:876 src/gui/LocationDialog.cpp:557
+#: src/gui/StelGuiItems.cpp:872 src/gui/LocationDialog.cpp:557
 msgid "System default"
 msgstr "Типовий системний"
 
@@ -5910,91 +5910,91 @@ msgstr "Без даних"
 msgid "Custom info"
 msgstr "Нетипові дані"
 
-#: src/gui/StelGuiItems.cpp:493 src/gui/StelGuiItems.cpp:1121
+#: src/gui/StelGuiItems.cpp:489 src/gui/StelGuiItems.cpp:1117
 msgid "Space"
 msgstr "Пробіл"
 
-#: src/gui/StelGuiItems.cpp:878
+#: src/gui/StelGuiItems.cpp:874
 msgid "Time zone"
 msgstr "Часовий пояс"
 
-#: src/gui/StelGuiItems.cpp:881 src/gui/LocationDialog.cpp:555
+#: src/gui/StelGuiItems.cpp:877 src/gui/LocationDialog.cpp:555
 msgid "Local Mean Solar Time"
 msgstr "Місцевий середній сонячний час"
 
-#: src/gui/StelGuiItems.cpp:884 src/gui/LocationDialog.cpp:556
+#: src/gui/StelGuiItems.cpp:880 src/gui/LocationDialog.cpp:556
 msgid "Local True Solar Time"
 msgstr "Місцевий справжній сонячний час"
 
 #. TRANSLATORS: unit of measurement: minutes per second
-#: src/gui/StelGuiItems.cpp:887
+#: src/gui/StelGuiItems.cpp:883
 msgctxt "unit of measurement"
 msgid "min/s"
 msgstr "хв/с"
 
 #. TRANSLATORS: unit of measurement: hours per second
-#: src/gui/StelGuiItems.cpp:895
+#: src/gui/StelGuiItems.cpp:891
 msgctxt "unit of measurement"
 msgid "hr/s"
 msgstr "год/с"
 
 #. TRANSLATORS: unit of measurement: days per second
-#: src/gui/StelGuiItems.cpp:901
+#: src/gui/StelGuiItems.cpp:897
 msgctxt "unit of measurement"
 msgid "d/s"
 msgstr "д/с"
 
 #. TRANSLATORS: unit of measurement: years per second
-#: src/gui/StelGuiItems.cpp:907
+#: src/gui/StelGuiItems.cpp:903
 msgctxt "unit of measurement"
 msgid "yr/s"
 msgstr "р/с"
 
-#: src/gui/StelGuiItems.cpp:909 src/gui/StelGuiItems.cpp:911
+#: src/gui/StelGuiItems.cpp:905 src/gui/StelGuiItems.cpp:907
 msgid "Simulation speed"
 msgstr "Швидкість імітації"
 
-#: src/gui/StelGuiItems.cpp:951
+#: src/gui/StelGuiItems.cpp:947
 msgid "flight"
 msgstr "політ"
 
-#: src/gui/StelGuiItems.cpp:982
+#: src/gui/StelGuiItems.cpp:978
 msgid "planetocentric distance"
 msgstr "планетоцентрична відстань"
 
-#: src/gui/StelGuiItems.cpp:984
+#: src/gui/StelGuiItems.cpp:980
 msgid "planetocentric observer"
 msgstr "планетоцентричний спостерігач"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgid "Atmospheric pressure"
 msgstr "Атмосферний тиск"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgctxt "pressure unit"
 msgid "mbar"
 msgstr "мБар"
 
-#: src/gui/StelGuiItems.cpp:993
+#: src/gui/StelGuiItems.cpp:989
 msgid "temperature"
 msgstr "температура"
 
-#: src/gui/StelGuiItems.cpp:1008 src/gui/StelGuiItems.cpp:1010
+#: src/gui/StelGuiItems.cpp:1004 src/gui/StelGuiItems.cpp:1006
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr "ПЗ"
 
-#: src/gui/StelGuiItems.cpp:1018
+#: src/gui/StelGuiItems.cpp:1014
 msgid "Field of view"
 msgstr "Поле зору"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:1029 src/gui/StelGuiItems.cpp:1050
+#: src/gui/StelGuiItems.cpp:1025 src/gui/StelGuiItems.cpp:1046
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr "кд/c"
 
-#: src/gui/StelGuiItems.cpp:1036
+#: src/gui/StelGuiItems.cpp:1032
 msgid "Frames per second"
 msgstr "Кадрів в секунду"
 
@@ -8675,7 +8675,7 @@ msgstr "Перезавантажити шейдери (для розробник
 msgid "Full-screen mode"
 msgstr "Повноекранний режим"
 
-#: src/StelMainView.cpp:1066
+#: src/StelMainView.cpp:1067
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8684,7 +8684,7 @@ msgstr ""
 " запуску програми і перевірте, чи правильно призначено вказані нижче "
 "скорочення."
 
-#: src/StelMainView.cpp:1151
+#: src/StelMainView.cpp:1152
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8693,7 +8693,7 @@ msgstr ""
 "графічної підсистеми або скористайтеся параметром --angle-mode (або --mesa-"
 "mode)."
 
-#: src/StelMainView.cpp:1153
+#: src/StelMainView.cpp:1154
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8701,14 +8701,14 @@ msgstr ""
 "Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвер, обладнання "
 "графічної підсистеми або скористайтеся параметром --mesa-mode."
 
-#: src/StelMainView.cpp:1157
+#: src/StelMainView.cpp:1158
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвери або графічне "
 "обладнання."
 
-#: src/StelMainView.cpp:1200
+#: src/StelMainView.cpp:1201
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8716,7 +8716,7 @@ msgstr ""
 "У вашій підсистемі DirectX/OpenGL ES виявлено проблеми. Подробиці можна знайти у журналі.\n"
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1251
+#: src/StelMainView.cpp:1252
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8724,7 +8724,7 @@ msgstr ""
 "У вашій підсистемі OpenGL/Mesa виявлено проблеми. Подробиці можна знайти у журналі.\n"
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1311
+#: src/StelMainView.cpp:1312
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8732,7 +8732,7 @@ msgstr ""
 "У вашій підсистемі OpenGL виявлено проблеми. Подробиці можна знайти у журналі.\n"
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1352
+#: src/StelMainView.cpp:1353
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -11245,7 +11245,6 @@ msgstr "Ви&брати"
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
-#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
 msgstr "Скасувати"
@@ -11301,7 +11300,6 @@ msgid "Copy &Link Location"
 msgstr "Скопіювати &адресу посилання"
 
 #: src/translations.h:860
-#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
 msgid "Abort"
 msgstr "Перервати"
 
@@ -11441,6 +11439,706 @@ msgstr "Показати при&ховані файли"
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:141
 msgid "Search"
 msgstr "Пошук"
+
+#: src/translations.h:895
+msgctxt "IAU constellation name"
+msgid "Andromeda"
+msgstr "Andromeda"
+
+#: src/translations.h:896
+msgctxt "IAU constellation name"
+msgid "Antlia"
+msgstr "Насос"
+
+#: src/translations.h:897
+msgctxt "IAU constellation name"
+msgid "Apus"
+msgstr "Райський Птах"
+
+#: src/translations.h:898
+msgctxt "IAU constellation name"
+msgid "Aquila"
+msgstr "Орел"
+
+#: src/translations.h:899
+msgctxt "IAU constellation name"
+msgid "Aquarius"
+msgstr "Водолій"
+
+#: src/translations.h:900
+msgctxt "IAU constellation name"
+msgid "Ara"
+msgstr "Жертовник"
+
+#: src/translations.h:901
+msgctxt "IAU constellation name"
+msgid "Aries"
+msgstr "Овен"
+
+#: src/translations.h:902
+msgctxt "IAU constellation name"
+msgid "Auriga"
+msgstr "Візничий"
+
+#: src/translations.h:903
+msgctxt "IAU constellation name"
+msgid "Bootes"
+msgstr "Волопас"
+
+#: src/translations.h:904
+msgctxt "IAU constellation name"
+msgid "Canis Major"
+msgstr "Великий Пес"
+
+#: src/translations.h:905
+msgctxt "IAU constellation name"
+msgid "Canis Minor"
+msgstr "Малий Пес"
+
+#: src/translations.h:906
+msgctxt "IAU constellation name"
+msgid "Caelum"
+msgstr "Різець"
+
+#: src/translations.h:907
+msgctxt "IAU constellation name"
+msgid "Camelopardalis"
+msgstr "Жирафа"
+
+#: src/translations.h:908
+msgctxt "IAU constellation name"
+msgid "Capricornus"
+msgstr "Capricornus"
+
+#: src/translations.h:909
+msgctxt "IAU constellation name"
+msgid "Carina"
+msgstr "Кіль"
+
+#: src/translations.h:910
+msgctxt "IAU constellation name"
+msgid "Cassiopeia"
+msgstr "Cassiopeia"
+
+#: src/translations.h:911
+msgctxt "IAU constellation name"
+msgid "Centaurus"
+msgstr "Кентавр"
+
+#: src/translations.h:912
+msgctxt "IAU constellation name"
+msgid "Cepheus"
+msgstr "Cepheus"
+
+#: src/translations.h:913
+msgctxt "IAU constellation name"
+msgid "Cetus"
+msgstr "Левіафан"
+
+#: src/translations.h:914
+msgctxt "IAU constellation name"
+msgid "Chamaeleon"
+msgstr "Хамелеон"
+
+#: src/translations.h:915
+msgctxt "IAU constellation name"
+msgid "Circinus"
+msgstr "Циркуль"
+
+#: src/translations.h:916
+msgctxt "IAU constellation name"
+msgid "Cancer"
+msgstr "Рак"
+
+#: src/translations.h:917
+msgctxt "IAU constellation name"
+msgid "Columba"
+msgstr "Голуб"
+
+#: src/translations.h:918
+msgctxt "IAU constellation name"
+msgid "Coma Berenices"
+msgstr "Волосся Вероніки"
+
+#: src/translations.h:919
+msgctxt "IAU constellation name"
+msgid "Corona Australis"
+msgstr "Південна Корона"
+
+#: src/translations.h:920
+msgctxt "IAU constellation name"
+msgid "Corona Borealis"
+msgstr "Північна Корона"
+
+#: src/translations.h:921
+msgctxt "IAU constellation name"
+msgid "Crater"
+msgstr "Чаша"
+
+#: src/translations.h:922
+msgctxt "IAU constellation name"
+msgid "Crux"
+msgstr "Південний Хрест"
+
+#: src/translations.h:923
+msgctxt "IAU constellation name"
+msgid "Corvus"
+msgstr "Ворон"
+
+#: src/translations.h:924
+msgctxt "IAU constellation name"
+msgid "Canes Venatici"
+msgstr "Гончі Пси"
+
+#: src/translations.h:925
+msgctxt "IAU constellation name"
+msgid "Cygnus"
+msgstr "Лебідь"
+
+#: src/translations.h:926
+msgctxt "IAU constellation name"
+msgid "Delphinus"
+msgstr "Дельфін"
+
+#: src/translations.h:927
+msgctxt "IAU constellation name"
+msgid "Dorado"
+msgstr "Золота Риба"
+
+#: src/translations.h:928
+msgctxt "IAU constellation name"
+msgid "Draco"
+msgstr "Дракон"
+
+#: src/translations.h:929
+msgctxt "IAU constellation name"
+msgid "Equuleus"
+msgstr "Малий Кінь"
+
+#: src/translations.h:930
+msgctxt "IAU constellation name"
+msgid "Eridanus"
+msgstr "Eridanus"
+
+#: src/translations.h:931
+msgctxt "IAU constellation name"
+msgid "Fornax"
+msgstr "Піч"
+
+#: src/translations.h:932
+msgctxt "IAU constellation name"
+msgid "Gemini"
+msgstr "Близнюки"
+
+#: src/translations.h:933
+msgctxt "IAU constellation name"
+msgid "Grus"
+msgstr "Журавель"
+
+#: src/translations.h:934
+msgctxt "IAU constellation name"
+msgid "Hercules"
+msgstr "Геркулес"
+
+#: src/translations.h:935
+msgctxt "IAU constellation name"
+msgid "Horologium"
+msgstr "Годинник"
+
+#: src/translations.h:936
+msgctxt "IAU constellation name"
+msgid "Hydra"
+msgstr "Гідра"
+
+#: src/translations.h:937
+msgctxt "IAU constellation name"
+msgid "Hydrus"
+msgstr "Південний Змій"
+
+#: src/translations.h:938
+msgctxt "IAU constellation name"
+msgid "Indus"
+msgstr "Індіанець"
+
+#: src/translations.h:939
+msgctxt "IAU constellation name"
+msgid "Leo Minor"
+msgstr "Малий Лев"
+
+#: src/translations.h:940
+msgctxt "IAU constellation name"
+msgid "Lacerta"
+msgstr "Ящірка"
+
+#: src/translations.h:941
+msgctxt "IAU constellation name"
+msgid "Leo"
+msgstr "Лев"
+
+#: src/translations.h:942
+msgctxt "IAU constellation name"
+msgid "Lepus"
+msgstr "Заєць"
+
+#: src/translations.h:943
+msgctxt "IAU constellation name"
+msgid "Libra"
+msgstr "Терези"
+
+#: src/translations.h:944
+msgctxt "IAU constellation name"
+msgid "Lupus"
+msgstr "Вовк"
+
+#: src/translations.h:945
+msgctxt "IAU constellation name"
+msgid "Lynx"
+msgstr "Рись"
+
+#: src/translations.h:946
+msgctxt "IAU constellation name"
+msgid "Lyra"
+msgstr "Ліра"
+
+#: src/translations.h:947
+msgctxt "IAU constellation name"
+msgid "Mensa"
+msgstr "Столова Гора"
+
+#: src/translations.h:948
+msgctxt "IAU constellation name"
+msgid "Microscopium"
+msgstr "Мікроскоп"
+
+#: src/translations.h:949
+msgctxt "IAU constellation name"
+msgid "Monoceros"
+msgstr "Одноріг"
+
+#: src/translations.h:950
+msgctxt "IAU constellation name"
+msgid "Musca"
+msgstr "Муха"
+
+#: src/translations.h:951
+msgctxt "IAU constellation name"
+msgid "Norma"
+msgstr "Косинець"
+
+#: src/translations.h:952
+msgctxt "IAU constellation name"
+msgid "Octans"
+msgstr "Октант"
+
+#: src/translations.h:953
+msgctxt "IAU constellation name"
+msgid "Ophiuchus"
+msgstr "Змієносець"
+
+#: src/translations.h:954
+msgctxt "IAU constellation name"
+msgid "Orion"
+msgstr "Orion"
+
+#: src/translations.h:955
+msgctxt "IAU constellation name"
+msgid "Pavo"
+msgstr "Павич"
+
+#: src/translations.h:956
+msgctxt "IAU constellation name"
+msgid "Pegasus"
+msgstr "Pegasus"
+
+#: src/translations.h:957
+msgctxt "IAU constellation name"
+msgid "Perseus"
+msgstr "Perseus"
+
+#: src/translations.h:958
+msgctxt "IAU constellation name"
+msgid "Phoenix"
+msgstr "Фенікс"
+
+#: src/translations.h:959
+msgctxt "IAU constellation name"
+msgid "Pictor"
+msgstr "Живописець"
+
+#: src/translations.h:960
+msgctxt "IAU constellation name"
+msgid "Piscis Austrinus"
+msgstr "Південна Риба"
+
+#: src/translations.h:961
+msgctxt "IAU constellation name"
+msgid "Pisces"
+msgstr "Риби"
+
+#: src/translations.h:962
+msgctxt "IAU constellation name"
+msgid "Puppis"
+msgstr "Корма"
+
+#: src/translations.h:963
+msgctxt "IAU constellation name"
+msgid "Pyxis"
+msgstr "Компас"
+
+#: src/translations.h:964
+msgctxt "IAU constellation name"
+msgid "Reticulum"
+msgstr "Сітка"
+
+#: src/translations.h:965
+msgctxt "IAU constellation name"
+msgid "Sculptor"
+msgstr "Скульптор"
+
+#: src/translations.h:966
+msgctxt "IAU constellation name"
+msgid "Scorpius"
+msgstr "Скорпіон"
+
+#: src/translations.h:967
+msgctxt "IAU constellation name"
+msgid "Scutum"
+msgstr "Щит"
+
+#: src/translations.h:968
+msgctxt "IAU constellation name"
+msgid "Serpens"
+msgstr "Змія"
+
+#: src/translations.h:969
+msgctxt "IAU constellation name"
+msgid "Sextans"
+msgstr "Секстант"
+
+#: src/translations.h:970
+msgctxt "IAU constellation name"
+msgid "Sagitta"
+msgstr "Стріла"
+
+#: src/translations.h:971
+msgctxt "IAU constellation name"
+msgid "Sagittarius"
+msgstr "Стрілець"
+
+#: src/translations.h:972
+msgctxt "IAU constellation name"
+msgid "Taurus"
+msgstr "Телець"
+
+#: src/translations.h:973
+msgctxt "IAU constellation name"
+msgid "Telescopium"
+msgstr "Телескоп"
+
+#: src/translations.h:974
+msgctxt "IAU constellation name"
+msgid "Triangulum Australe"
+msgstr "Південний Трикутник"
+
+#: src/translations.h:975
+msgctxt "IAU constellation name"
+msgid "Triangulum"
+msgstr "Трикутник"
+
+#: src/translations.h:976
+msgctxt "IAU constellation name"
+msgid "Tucana"
+msgstr "Тукан"
+
+#: src/translations.h:977
+msgctxt "IAU constellation name"
+msgid "Ursa Major"
+msgstr "Велика Ведмедиця"
+
+#: src/translations.h:978
+msgctxt "IAU constellation name"
+msgid "Ursa Minor"
+msgstr "Мала Ведмедиця"
+
+#: src/translations.h:979
+msgctxt "IAU constellation name"
+msgid "Vela"
+msgstr "Вітрила"
+
+#: src/translations.h:980
+msgctxt "IAU constellation name"
+msgid "Virgo"
+msgstr "Діва"
+
+#: src/translations.h:981
+msgctxt "IAU constellation name"
+msgid "Volans"
+msgstr "Летюча Риба"
+
+#: src/translations.h:982
+msgctxt "IAU constellation name"
+msgid "Vulpecula"
+msgstr "Лисичка"
+
+#: src/translations.h:983
+msgctxt "Nebula narration"
+msgid "a Galaxy"
+msgstr "Галактика"
+
+#: src/translations.h:984
+msgctxt "Nebula narration"
+msgid "an Active galaxy"
+msgstr "Активна галактика"
+
+#: src/translations.h:985
+msgctxt "Nebula narration"
+msgid "a Radio galaxy"
+msgstr "Радіогалактика"
+
+#: src/translations.h:986
+msgctxt "Nebula narration"
+msgid "an Interacting galaxy"
+msgstr "Взаємодія галактик"
+
+#: src/translations.h:987
+msgctxt "Nebula narration"
+msgid "a Quasar"
+msgstr "Квазар"
+
+#: src/translations.h:988
+msgctxt "Nebula narration"
+msgid "a Star cluster"
+msgstr "Зоряне скупчення"
+
+#: src/translations.h:989
+msgctxt "Nebula narration"
+msgid "an Open star cluster"
+msgstr "Розсіяне зоряне скупчення"
+
+#: src/translations.h:990
+msgctxt "Nebula narration"
+msgid "a Globular star cluster"
+msgstr "Кулясте зоряне скупчення"
+
+#: src/translations.h:991
+msgctxt "Nebula narration"
+msgid "a Stellar association"
+msgstr "Зоряна асоціація"
+
+#: src/translations.h:992
+msgctxt "Nebula narration"
+msgid "a Star cloud"
+msgstr "Зоряна хмара"
+
+#: src/translations.h:993
+msgctxt "Nebula narration"
+msgid "A nebula"
+msgstr "Туманність"
+
+#: src/translations.h:994
+msgctxt "Nebula narration"
+msgid "a Planetary nebula"
+msgstr "Планетарна туманність"
+
+#: src/translations.h:995
+msgctxt "Nebula narration"
+msgid "a Dark Nebula"
+msgstr "Темна туманність"
+
+#: src/translations.h:996
+msgctxt "Nebula narration"
+msgid "a Reflection nebula"
+msgstr "Відбивна туманність"
+
+#: src/translations.h:997
+msgctxt "Nebula narration"
+msgid "a Bipolar nebula"
+msgstr "Біполярна туманність"
+
+#: src/translations.h:998
+msgctxt "Nebula narration"
+msgid "an emission nebula"
+msgstr "Емісійна туманність"
+
+#: src/translations.h:999
+msgctxt "Nebula narration"
+msgid "a cluster associated with nebulosity"
+msgstr "Скупчення, пов’язане із туманністю"
+
+#: src/translations.h:1000
+msgctxt "Nebula narration"
+msgid "an H two region"
+msgstr "Зона H II"
+
+#: src/translations.h:1001
+msgctxt "Nebula narration"
+msgid "a Supernova remnant"
+msgstr "Залишок наднової"
+
+#: src/translations.h:1002
+msgctxt "Nebula narration"
+msgid "Interstellar matter"
+msgstr "Міжзоряна речовина"
+
+#: src/translations.h:1003
+msgctxt "Nebula narration"
+msgid "an Emission object"
+msgstr "Емісійний об’єкт"
+
+#: src/translations.h:1004
+msgctxt "Nebula narration"
+msgid "a BL Lacertae object"
+msgstr "Лацертид"
+
+#: src/translations.h:1005
+msgctxt "Nebula narration"
+msgid "a Blazar"
+msgstr "Блазар"
+
+#: src/translations.h:1006
+msgctxt "Nebula narration"
+msgid "a Molecular Cloud"
+msgstr "Молекулярна хмара"
+
+#: src/translations.h:1007
+msgctxt "Nebula narration"
+msgid "a Young Stellar Object"
+msgstr "Молодий зоряний об’єкт"
+
+#: src/translations.h:1008
+msgctxt "Nebula narration"
+msgid "a Possible Quasar"
+msgstr "Можливий квазар"
+
+#: src/translations.h:1009
+msgctxt "Nebula narration"
+msgid "a Possible Planetary Nebula"
+msgstr "Можлива планетарна туманність"
+
+#: src/translations.h:1010
+msgctxt "Nebula narration"
+msgid "a Protoplanetary Nebula"
+msgstr "Протопланетна туманність"
+
+#: src/translations.h:1011
+msgctxt "Nebula narration"
+msgid "a Star"
+msgstr "Зірка"
+
+#: src/translations.h:1012
+msgctxt "Nebula narration"
+msgid "a Symbiotic Star"
+msgstr "Симбіотична зірка"
+
+#: src/translations.h:1013
+msgctxt "Nebula narration"
+msgid "an Emission-line Star"
+msgstr "Зірка із емісійними смугами"
+
+#: src/translations.h:1014
+msgctxt "Nebula narration"
+msgid "a Supernova Candidate"
+msgstr "Кандидат у наднові"
+
+#: src/translations.h:1015
+msgctxt "Nebula narration"
+msgid "a Supernova Remnant Candidate"
+msgstr "Кандидат у залишки наднових"
+
+#: src/translations.h:1016
+msgctxt "Nebula narration"
+msgid "a cluster of Galaxies"
+msgstr "скупчення галактик"
+
+#: src/translations.h:1017
+msgctxt "Nebula narration"
+msgid "a part of a Galaxy"
+msgstr "частина галактики"
+
+#: src/translations.h:1018
+msgctxt "Nebula narration"
+msgid "a region of the sky"
+msgstr "область на небі"
+
+#: src/translations.h:1019
+msgctxt "Nebula narration"
+msgid "an object of unknown type"
+msgstr "об'єкт невідомого типу"
+
+#: src/translations.h:1020
+msgctxt "object narration"
+msgid "a star"
+msgstr "зірка"
+
+#: src/translations.h:1021
+msgctxt "object narration"
+msgid "a major planet"
+msgstr "основна планета"
+
+#: src/translations.h:1022
+msgctxt "object narration"
+msgid "a planet moon"
+msgstr "супутник планети"
+
+#: src/translations.h:1023
+msgctxt "object narration"
+msgid "an observer"
+msgstr "спостерігач"
+
+#: src/translations.h:1024
+msgctxt "object narration"
+msgid "an artificial object"
+msgstr "штучний об'єкт"
+
+#: src/translations.h:1025
+msgctxt "object narration"
+msgid "an asteroid"
+msgstr "астероїд"
+
+#: src/translations.h:1026
+msgctxt "object narration"
+msgid "a plutino"
+msgstr "плутіно"
+
+#: src/translations.h:1027
+msgctxt "object narration"
+msgid "a comet"
+msgstr "комета"
+
+#: src/translations.h:1028
+msgctxt "object narration"
+msgid "a dwarf planet"
+msgstr "карликова планета"
+
+#: src/translations.h:1029
+msgctxt "object narration"
+msgid "a cubewano"
+msgstr "к'юбівано"
+
+#: src/translations.h:1030
+msgctxt "object narration"
+msgid "a scattered disc object"
+msgstr "об’єкт розсіяного диска"
+
+#: src/translations.h:1031
+msgctxt "object narration"
+msgid "an Oort Cloud Object"
+msgstr "об’єкт поясу Оорта"
+
+#: src/translations.h:1032
+msgctxt "object narration"
+msgid "a sednoid"
+msgstr "седноїд"
+
+#: src/translations.h:1033
+msgctxt "object narration"
+msgid "an interstellar object"
+msgstr "міжзоряний об'єкт"
+
+#: src/translations.h:1034
+msgctxt "object narration"
+msgid "an object of undefined type"
+msgstr "об'єкт невизначеного типу"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Africa
@@ -13251,7 +13949,7 @@ msgid "View"
 msgstr "Перегляд"
 
 #: src/ui_viewDialog.h:3864 src/ui_viewDialog.h:3885
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:492
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:535
 msgid "Sky"
 msgstr "Небо"
 
@@ -15798,7 +16496,8 @@ msgstr "Перемкнутися на новий ландшафт після в�
 
 #: src/ui_addRemoveLandscapesDialog.h:234
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:236
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:479
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:522
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:552
 msgid "Remove"
 msgstr "Вилучити"
 
@@ -17669,24 +18368,24 @@ msgid "Angle measure settings"
 msgstr "Параметри вимірювання кутів"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:680
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:677
 msgid "The Angle Measure is enabled:"
 msgstr "Вимірювання кутів увімкнено:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:682
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:679
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "Перетягування з натиснутою лівою кнопкою миші вимірює, клацання лівою "
 "кнопкою — скидає."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:684
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:681
 msgid "Right-clicking changes the end point only."
 msgstr "Клацанням правою кнопкою можна змінити лише кінцеву точку."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:686
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:683
 msgid "PA="
 msgstr "КР="
 
@@ -17954,42 +18653,42 @@ msgid "Toggle Oculars button bar"
 msgstr "Перемкнути панель кнопок окулярів"
 
 #: plugins/Oculars/src/Oculars.cpp:1528
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:173
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Select next telescope"
 msgstr "Вибрати наступний телескоп"
 
 #: plugins/Oculars/src/Oculars.cpp:1530
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:171
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
 msgid "Select previous telescope"
 msgstr "Вибрати попередній телескоп"
 
 #: plugins/Oculars/src/Oculars.cpp:1532
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:161
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
 msgid "Select next eyepiece"
 msgstr "Вибрати наступний окуляр"
 
 #: plugins/Oculars/src/Oculars.cpp:1534
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:159
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Select previous eyepiece"
 msgstr "Вибрати попередній окуляр"
 
 #: plugins/Oculars/src/Oculars.cpp:1536
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:165
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Select next lens"
 msgstr "Вибрати наступний об'єктив"
 
 #: plugins/Oculars/src/Oculars.cpp:1538
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:163
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Select previous lens"
 msgstr "Вибрати попередній об'єктив"
 
 #: plugins/Oculars/src/Oculars.cpp:1540
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:169
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Select next CCD frame"
 msgstr "Вибрати наступний кадр ПЗЗ"
 
 #: plugins/Oculars/src/Oculars.cpp:1542
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:167
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Select previous CCD frame"
 msgstr "Вибрати попередній кадр ПЗЗ"
 
@@ -18014,12 +18713,12 @@ msgid "Toggle focuser overlay"
 msgstr "Перемкнути накладку фокусувальника"
 
 #: plugins/Oculars/src/Oculars.cpp:1550
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1242
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1289
 msgid "Reset the sensor frame rotation"
 msgstr "Скинути обертання рамки датчика"
 
 #: plugins/Oculars/src/Oculars.cpp:1551
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1245
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1292
 msgid "Reset the prism rotation"
 msgstr "Скинути обертання призми"
 
@@ -18035,8 +18734,8 @@ msgstr "ПС/Схил (J2000.0) перехрестя"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 #: plugins/Oculars/src/Oculars.cpp:2008
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:515
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:562
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 msgid "\"/px"
 msgstr "\"/пк."
 
@@ -18056,37 +18755,37 @@ msgid "s"
 msgstr "с"
 
 #: plugins/Oculars/src/Oculars.cpp:2292
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:305
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:352
 msgid "Binocular"
 msgstr "Бінокль"
 
 #: plugins/Oculars/src/Oculars.cpp:2292
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:303
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
 msgid "Ocular"
 msgstr "Окуляр"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:2312
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:348
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:395
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ФВ окуляра: %1 мм"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:2319
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:357
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:404
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Видиме ПЗ окуляра: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2330
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:387
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:434
 #, qt-format
 msgid "Lens #%1"
 msgstr "Лінза №%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2334
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:391
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:438
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Лінза №%1: %2"
@@ -18096,19 +18795,19 @@ msgid "Lens: none"
 msgstr "Лінза: немає"
 
 #: plugins/Oculars/src/Oculars.cpp:2354 plugins/Oculars/src/Oculars.cpp:2415
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:651
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Телескоп %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2363
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:764
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Збільшення: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2370
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:773
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Вихідна зіниця: %1 мм"
@@ -18119,32 +18818,32 @@ msgid "FOV: %1"
 msgstr "Поле зору: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2398
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Розміри: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2399
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:509
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 msgid "Binning"
 msgstr "Поділки"
 
 #: plugins/Oculars/src/Oculars.cpp:2403
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:463
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:510
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Датчик %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2407
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:467
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Датчик %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2420
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:655
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Телескоп %1: %2"
@@ -18177,257 +18876,257 @@ msgstr "&Попередній телескоп"
 msgid "&Next telescope"
 msgstr "&Наступний телескоп"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:397
 msgid "Effective focal length of the ocular"
 msgstr "Ефективна фокусна відстань цього окуляра"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:360
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:407
 msgid "Apparent field of view of the ocular"
 msgstr "Видиме поле зору цього окуляра"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:393
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:440
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "Кратність: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:398
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:445
 msgid "Lens: None"
 msgstr "Лінза: немає"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:399
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:446
 msgid "Multiplicity: N/A"
 msgstr "Кратність: недоступна"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:403
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:450
 msgid "Focal length of eyepiece"
 msgstr "Фокусна відстань окуляра"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
 msgid "Dimensions field of view"
 msgstr "Розмірності поля зору"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:516
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:563
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:751
 msgid "X scale"
 msgstr "Масштаб за X"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:517
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:705
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:752
 msgid "Horizontal scale"
 msgstr "Горизонтальна шкала"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:521
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:753
 msgid "Y scale"
 msgstr "Масштаб за Y"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:707
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:569
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 msgid "Vertical scale"
 msgstr "Вертикальна шкала"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:528
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:575
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Обертання: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:572
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:619
 #, qt-format
 msgid "PA of prism: %1"
 msgstr "ПК призми: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:575
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:622
 msgid "Position angle of the off-axis guider' prism"
 msgstr "Позиційний кут позаосьової призми засобу наведення"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:787
 msgid "Magnification provided by these binoculars"
 msgstr "Збільшення, що забезпечується цим біноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:741
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:788
 msgid "Actual field of view provided by these binoculars"
 msgstr "Справжнє поле зору, що забезпечується цим біноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:789
 msgid "Exit pupil provided by these binoculars"
 msgstr "Вихідна зіниця, що забезпечується цим біноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:743
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:790
 msgid "Twilight factor (or dusk index) provided by these binoculars"
 msgstr ""
 "Сутінковий фактор (або індекс темноти), що забезпечується цим біноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:791
 msgid "Relative brightness provided by these binoculars"
 msgstr "Відносна яскравість, що забезпечується цим біноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:745
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
 msgid "Alan Adler's Index (or Astro Index) provided by these binoculars"
 msgstr "Індекс Алана Адлера (або астроіндекс), що забезпечується цим біноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
 msgid "Roy Bishop's Index (or Visibility Factor) provided by these binoculars"
 msgstr ""
 "Індекс Роя Бішопа (або фактор видимості), що забезпечується цим біноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr ""
 "Збільшення, яке забезпечується цією комбінацією окуляра, лінзи і телескопа"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:755
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 "Дійсне поле зору, яке забезпечується цією комбінацією окуляра, лінзи і "
 "телескопа"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:756
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:803
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
 "Вихідна зіниця, що забезпечується цим поєднанням окуляра, об’єктива або "
 "телескопа"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:781
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:828
 msgid "Twilight factor"
 msgstr "Сутінковий фактор"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:787
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
 msgid "Relative brightness"
 msgstr "Відносна яскравість"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:793
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:840
 msgid "Adler index"
 msgstr "Адлер-індекс"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:799
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
 msgid "Bishop index"
 msgstr "Бішоп-індекс"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:809
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
 msgctxt "field of view"
 msgid "FOV"
 msgstr "ПЗ"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:877
 msgid "Rayleigh criterion"
 msgstr "Критерій Релея"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
 msgid "The Rayleigh resolution criterion"
 msgstr "Критерій роздільності Релея"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:837
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:884
 msgid "Dawes' limit"
 msgstr "Обмеження Дейвса"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:886
 msgid "Dawes' resolution criterion"
 msgstr "Критерій роздільності Дейвса"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
 msgid "Abbe's limit"
 msgstr "Обмеження Аббе"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:893
 msgid "Abbe’s diffraction resolution limit"
 msgstr "Обмеження дифракційної роздільності Аббе"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Sparrow's limit"
 msgstr "Обмеження Сперроу"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:853
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:900
 msgid "Sparrow's resolution limit"
 msgstr "Обмеження роздільності Сперроу"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Visual resolution"
 msgstr "Візуальна роздільність"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:881
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr ""
 "Візуальна роздільність визначається на основі властивостей ока та збільшення"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:895
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:942
 msgctxt "Limiting magnitude of device"
 msgid "Limiting magnitude"
 msgstr "Обмеження на величину"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:945
 msgid "Approximate limiting magnitude of this binocular"
 msgstr "Приблизне обмеження на величину для цього бінокля"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:900
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:947
 msgid ""
 "Approximate limiting magnitude of this ocular/lens/telescope combination"
 msgstr ""
 "Приблизне обмеження на величину для цієї комбінації окуляра, об'єктива та "
 "телескопа"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1194
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1241
 msgid "Rotate the sensor frame 90 degrees counterclockwise"
 msgstr "Повернути рамку датчика на 90° проти годинникової стрілки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1244
 msgid "Rotate the prism 90 degrees counterclockwise"
 msgstr "Обернути призму на 90° проти годинникової стрілки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1206
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1253
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "Повернути рамку датчика на 15° проти годинникової стрілки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1209
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1256
 msgid "Rotate the prism 15 degrees counterclockwise"
 msgstr "Обернути призму на 15° проти годинникової стрілки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1218
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1265
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "Повернути рамку датчика на 5° проти годинникової стрілки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1221
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1268
 msgid "Rotate the prism 5 degrees counterclockwise"
 msgstr "Обернути призму на 5° проти годинникової стрілки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1230
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1277
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "Повернути рамку датчика на 1° проти годинникової стрілки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1233
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1280
 msgid "Rotate the prism 1 degree counterclockwise"
 msgstr "Обернути призму на 1° проти годинникової стрілки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1254
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1301
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "Повернути рамку датчика на 1° за годинниковою стрілкою"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1257
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1304
 msgid "Rotate the prism 1 degree clockwise"
 msgstr "Обернути призму на 1° за годинниковою стрілкою"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1266
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1313
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "Повернути рамку датчика на 5° за годинниковою стрілкою"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1269
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1316
 msgid "Rotate the prism 5 degrees clockwise"
 msgstr "Обернути призму на 5° за годинниковою стрілкою"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1278
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1325
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "Повернути рамку датчика на 15° за годинниковою стрілкою"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1281
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1328
 msgid "Rotate the prism 15 degrees clockwise"
 msgstr "Обернути призму на 15° за годинниковою стрілкою"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1290
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1337
 msgid "Rotate the sensor frame 90 degrees clockwise"
 msgstr "Повернути рамку датчика на 90° за годинниковою стрілкою"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1293
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1340
 msgid "Rotate the prism 90 degrees clockwise"
 msgstr "Обернути призму на 90° за годинниковою стрілкою"
 
@@ -18492,7 +19191,7 @@ msgid "Pixel grid feature"
 msgstr "Можливість піксельної ґратки"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:639
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:482
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:525
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "Перегляд"
@@ -18895,6 +19594,7 @@ msgstr "Загальне"
 #: plugins/Oculars/src/ui_ocularDialog.h:1544
 #: plugins/Oculars/src/ui_ocularDialog.h:1563
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:549
 msgid "Add"
 msgstr "Додати"
 
@@ -20980,7 +21680,7 @@ msgid "Add communication data"
 msgstr "Додати дані обміну даними"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:126
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:512
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:559
 msgid "Description"
 msgstr "Опис"
 
@@ -23501,7 +24201,7 @@ msgstr "Малі тіла Сонячної системи"
 msgid ""
 "This plug-in edits a custom Solar System configuration file for the minor "
 "bodies. If something goes wrong and Stellarium crashes and/or doesn't start,"
-" you can delete manually that file from:"
+" you can manually delete that file from:"
 msgstr ""
 "За допомогою цього додатка можна редагувати нетиповий файл налаштувань "
 "Сонячної системи для малих об’єктів. Якщо редагування виявиться невдалим, і "
@@ -30366,10 +31066,10 @@ msgid "Title:"
 msgstr "Назва:"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:157
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:162
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:236
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:473
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:516
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
 msgid "Sky Culture Maker"
 msgstr "Засіб створення картини зоряного неба"
@@ -30387,26 +31087,26 @@ msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr ""
 "Додаток для малювання та експортування картин зоряного неба у Stellarium."
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:575
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:479
 msgid "INFO"
 msgstr "ВІДОМОСТІ"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:582
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:486
 msgid "WARNING"
 msgstr "ПОПЕРЕДЖЕННЯ"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:589
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:493
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"
 msgstr "ПОМИЛКА"
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:70
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:138
 msgid "Welcome to the Sky Culture Maker!"
 msgstr "Вітаємо у засобі роботи з картинами зоряного неба!"
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:70
 msgid ""
 "Note: Test only. The result does not yet comply to Stellarium's formatting "
 "rules."
@@ -30414,18 +31114,18 @@ msgstr ""
 "Зауваження: лише тестування. Результат ще не відповідає правилам "
 "форматування Stellarium."
 
-#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:92
+#: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:91
 msgid ""
 "Convert sky cultures from the legacy (fab) format to the new (json) format"
 msgstr ""
 "Перетворення картин зоряного неба зі старого формату (fab) на новий формат "
 "(json)"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:179
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:222
 msgid "Please select a license for the sky culture."
 msgstr "Будь ласка, виберіть умови ліцензування для картини зоряного неба."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:185
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:228
 msgid ""
 "The sky culture description is not complete. Please fill in all required "
 "fields correctly."
@@ -30481,80 +31181,63 @@ msgstr "Виберіть каталог для експортування"
 msgid "The selected directory is not valid"
 msgstr "Вибрано некоректний каталог"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
-msgid "SCM: Dark Constellation Editor"
-msgstr "ЗКЗМ: редактор темних сузір'їв"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
-msgid "SCM: Constellation Editor"
-msgstr "ЗКЗМ: редактор сузір'їв"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:147
-msgid "Please name your Dark Constellation"
-msgstr "Будь ласка, вкажіть назву темного сузір'я"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:148
-msgid "Please name your Constellation"
-msgstr "Будь ласка, вкажіть назву сузір'я"
-
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:297
 msgid "Open Artwork"
 msgstr "Відкрити графіку"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:299
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
 msgid "Images (*.png *.jpg *.jpeg)"
 msgstr "зображення (*.png *.jpg *.jpeg)"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:306
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:305
 msgid "Chosen path is not a valid file:\n"
 msgstr "Вибраний шлях не є шляхом до коректного файла:\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:315
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:314
 msgid "Chosen file is not a PNG, JPG or JPEG image:\n"
 msgstr "Вибраний файл не є файлом зображення PNG, JPG або JPEG:\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:342
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:373
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:341
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:372
 msgid "No anchor was selected. Please select an anchor to bind to."
 msgstr ""
 "Не було вибрано жодної прив'язки. Будь ласка, виберіть прив'язку для "
 "пов'язування."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:353
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:352
 msgid "No star was selected to bind to the current selected anchor."
 msgstr "Не вибрано жодної зірки для прив'язки до поточної вибраної точки."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:364
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:363
 msgid "The selected object must be of type Star or Nebula."
 msgstr "Вибраний об'єкт має належати до типу зірок або туманностей."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:382
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:381
 msgid "The selected object must contain a HIP number."
 msgstr "Вибраний об'єкт повинен мати номер HIP."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:405
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:404
 msgid "Could not save: Sky Culture is not set"
 msgstr "Не вдалося зберегти: не встановлено картину зоряного неба"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:413
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:412
 msgid "Could not save: English name is empty"
 msgstr "Не вдалося зберегти: назва англійською порожня"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:423
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:422
 msgid "Could not save: Constellation ID is empty"
 msgstr "Не вдалося зберегти: ідентифікатор сузір'я порожній"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:432
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:442
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:431
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:441
 msgid "Could not save: Constellation with this ID already exists"
 msgstr "Не вдалося зберегти: вже існує сузір'я із цим ідентифікатором"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:453
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:452
 msgid "Could not save: The constellation does not contain any drawings"
 msgstr "Не вдалося зберегти: сузір'я не містить жодних малюнків"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:464
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:463
 msgid ""
 "Could not save: An artwork is attached, but not all anchors have a star "
 "bound."
@@ -30562,7 +31245,7 @@ msgstr ""
 "Не вдалося зберегти: долучено графіку, але не усі прив'язки пов'язано із "
 "зірками."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:98
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:597
 msgid ""
 "Use RightClick or Control + Click to draw a connected line.\n"
 "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
@@ -30572,14 +31255,14 @@ msgstr ""
 "Скористайтеся подвійним клацанням правою кнопкою миші або Control + подвійним клацанням, щоб припинити малювання лінії.\n"
 "Скористайтеся Command + F для пошуку і з'єднання зірок."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:103
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:600
 msgid ""
 "Hold RightClick or Control + Click to delete the line under the cursor.\n"
 msgstr ""
 "Утримуйте натиснутою праву кнопку миші або клацніть з натисканням Ctrl, щоб "
 "вилучити лінію під вказівником.\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:106
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:602
 msgid ""
 "Use RightClick to draw a connected line.\n"
 "Use Double-RightClick to stop drawing the line.\n"
@@ -30588,13 +31271,13 @@ msgstr ""
 "Скористайтеся клацанням правою кнопкою миші, щоб намалювати з'єднану лінію.\\inСкористайтеся подвійним клацанням правою кнопкою миші, щоб припинити малювання лінії.\n"
 "Скористайтеся CTRL + F для пошуку і з'єднання зірок."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:110
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:605
 msgid "Hold RightClick to delete the line under the cursor.\n"
 msgstr ""
 "Утримуйте натиснутою праву кнопку миші, щоб вилучити лінію під "
 "вказівником.\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:115
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:608
 msgid ""
 "Usage:\n"
 "1. Upload an image\n"
@@ -30616,6 +31299,23 @@ msgstr ""
 "- Відповідну пов'язану зірку буде автоматично позначено, коли буде позначено прив'язку\n"
 "- «Прив'язати зірку» перезапише поточне прив'язування, якщо воно вже існує"
 
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:619
+msgid "SCM: Dark Constellation Editor"
+msgstr "ЗКЗМ: редактор темних сузір'їв"
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+msgid "SCM: Constellation Editor"
+msgstr "ЗКЗМ: редактор сузір'їв"
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:621
+msgid "Please name your Dark Constellation"
+msgstr "Будь ласка, вкажіть назву темного сузір'я"
+
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:622
+msgid "Please name your Constellation"
+msgstr "Будь ласка, вкажіть назву сузір'я"
+
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:140
 msgid "Create a new sky culture"
 msgstr "Створити картину зоряного неба"
@@ -30629,7 +31329,7 @@ msgid "Not implemented yet."
 msgstr "Ще не реалізовано."
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:146
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:478
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:521
 msgid "Edit"
 msgstr "Змінити"
 
@@ -30697,59 +31397,59 @@ msgstr "Вилучити зображення"
 msgid "Artwork"
 msgstr "Графіка"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:474
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:517
 msgid "Name of the Sky Culture"
 msgstr "Назва картини зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:476
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:519
 msgid "Add Constellation"
 msgstr "Додати сузір'я"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:477
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:520
 msgid "Add Dark Constellation"
 msgstr "Додати темне сузір'я"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:480
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:523
 msgid "License of the Sky Culture"
 msgstr "Умови ліцензування картини зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:481
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:524
 msgid "Export Sky Culture"
 msgstr "Експортувати картину зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:483
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:526
 msgid "Please describe the Sky Culture"
 msgstr "Будь ласка, опишіть картину зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:484
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:527
 msgid "Mandatory fields are marked with an asterisk (*)."
 msgstr "Обов'язкові поля позначено зірочкою (*)."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:485
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:528
 msgid "General Information"
 msgstr "Загальні відомості"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:486
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:529
 msgid "Classification of the Sky Culture*"
 msgstr "Класифікація картини зоряного неба*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:530
 msgid "Introduction:*"
 msgstr "Вступ:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:488
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:531
 msgid " A summary that could ideally be shown on a small screen entirely."
 msgstr " Резюме, яке можна було б показати на малому екрані."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:489
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:532
 msgid "Description (What can the user see here?)"
 msgstr "Опис (що тут побачить користувач?)"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:490
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:533
 msgid "Culture Description:*"
 msgstr "Опис картини:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:491
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:534
 msgid ""
 "Give a short introduction about the culture: time, location, circumstances "
 "of life. Please describe specifics of the source (book/clay "
@@ -30769,7 +31469,7 @@ msgstr ""
 "прогнозуванням погоди...)? Чи є зв'язки з іншими культурами? Чи є ця версія "
 "дидактичною редукцією, чи вона походить з конкретного іншого джерела?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:493
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:536
 msgid ""
 "What special features did/does this culture use, what shall the user watch "
 "out for? Is it worthwhile to click a specific button rather than others - "
@@ -30789,30 +31489,30 @@ msgstr ""
 " (чи просто використовували назви зірок)? Чи використовували вони зірки "
 "взагалі, чи надавали перевагу темним/яскравим хмарам Чумацького Шляху?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:494
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:537
 msgid "Moon & Sun:"
 msgstr "Місяць і сонце:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:495
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:538
 msgid "How did they determine their calendar? Did they observe phases?"
 msgstr "Як визначався календар? Чи велося спостереження за фазами?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:496
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:539
 msgid "Planets:"
 msgstr "Планети:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:497
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:540
 msgid ""
 "Were the planets deified? What deities connect, what meaning do they have?"
 msgstr ""
 "Чи обожествлялися планети? З якими богами їх було пов'язано, яким було їхнє "
 "значення?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:498
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:541
 msgid "Zodiac/ Lunar System:"
 msgstr "Зодіакальна/Місячна система:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:499
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:542
 msgid ""
 "Did they have the (Bab.) zodiac system or any other division of the \"path "
 "of the Moon\"? If so, was it a (equal or unequal) division of the ecliptic "
@@ -30822,19 +31522,19 @@ msgstr ""
 "Місяця»? Якщо так, то чи був це (рівномірний чи нерівномірний) поділ "
 "екліптики чи якогось іншого типу?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:500
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:543
 msgid "Milky Way:"
 msgstr "Чумацький Шлях:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:501
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:544
 msgid "Was the Milky Way deified? What meaning did it have?"
 msgstr "Чи обожествлявся Чумацький Шлях? Яким було його значення?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:502
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:545
 msgid "Other Celestial Objects:"
 msgstr "Інші небесні об'єкти:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:503
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:546
 msgid ""
 "What other celestial objects were significant? E.g what about shooting "
 "stars, aurorae? Did they observe stellar transients, e.g. supernovae, that "
@@ -30844,19 +31544,19 @@ msgstr ""
 "полярних сяйв? Чи спостерігали вони перехідні зоряні явища, наприклад, "
 "наднові, які були видимі лише в певний рік?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:504
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:547
 msgid "Credits and References"
 msgstr "Подяки і посилання"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:505
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:548
 msgid "References:*"
 msgstr "Посилання:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:506
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:553
 msgid "Authors:*"
 msgstr "Автори:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:507
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:554
 msgid ""
 "Who are you and what is your background (native person, researcher, ...)? "
 "Ideally, please provide an email-address as well."
@@ -30864,11 +31564,11 @@ msgstr ""
 "Хто ви і який у вас досвід (носій мови, дослідник тощо)? В ідеалі, будь "
 "ласка, також надайте адресу електронної пошти."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:508
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:555
 msgid "About:*"
 msgstr "Відомості:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:509
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:556
 msgid ""
 "How do you know about this Sky Culture? Is this contribution based on your "
 "own or other people's research? Is it based on interviews with Elders or "
@@ -30878,11 +31578,11 @@ msgstr ""
 " власних дослідженнях чи дослідженнях інших людей? Його засновано на "
 "інтерв'ю зі старійшинами, читанні стародавніх текстів тощо?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:510
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:557
 msgid "Acknowledgements:"
 msgstr "Подяки:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:511
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:558
 msgid ""
 "What acknowledgements would you like to make? E.g. to interviewed people, "
 "organizations, or resources that helped you?"
@@ -30936,13 +31636,23 @@ msgid "Export and Exit"
 msgstr "Експортувати і вийти"
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:128
-msgid "Hide the plugin to resume later or abort the process?"
+msgid ""
+"Hide the plugin to resume later or close it without saving the sky culture?"
 msgstr ""
-"Приховати додаток для наступного відновлення роботи чи перервати процедуру?"
+"Приховати додаток для наступного відновлення роботи чи закрити його без "
+"збереження картини зоряного неба?"
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:129
-msgid "Hide"
-msgstr "Приховати"
+msgid "Hide editor"
+msgstr "Приховати редактор"
+
+#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
+msgid "Close without saving"
+msgstr "Закрити без збереження"
+
+#: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
+msgid "Don't close"
+msgstr "Не закривати"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:57
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:270
