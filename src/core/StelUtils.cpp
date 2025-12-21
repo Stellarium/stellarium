@@ -3129,5 +3129,50 @@ qint64 getLongLong(const QJsonValue& v)
 	return integer;
 }
 
+// Convert otherwise unspeakable (usually) Greek characters from star labels (Bayer, Struve, ...) into speech compatible output.
+// When preparing speech output, just apply this as filter.
+QString narrateGreekChars(const QString &input)
+{
+	QHash<QChar,QString> greekLetters = {
+		{QChar(0x0391), q_("Alpha")   }, {QChar(0x03B1), q_("alpha")   },
+		{QChar(0x0392), q_("Beta")    }, {QChar(0x03B2), q_("beta")    },
+		{QChar(0x0393), q_("Gamma")   }, {QChar(0x03B3), q_("gamma")   },
+		{QChar(0x0394), q_("Delta")   }, {QChar(0x03B4), q_("delta")   },
+		{QChar(0x0395), q_("Epsilon") }, {QChar(0x03B5), q_("epsilon") },
+
+		{QChar(0x0396), q_("Zeta")    }, {QChar(0x03B6), q_("zeta")    },
+		{QChar(0x0397), q_("Eta")     }, {QChar(0x03B7), q_("eta")     },
+		{QChar(0x0398), q_("Theta")   }, {QChar(0x03B8), q_("theta")   },
+		{QChar(0x0399), q_("Iota")    }, {QChar(0x03B9), q_("iota")    },
+		{QChar(0x039A), q_("Kappa")   }, {QChar(0x03BA), q_("kappa")   },
+
+		{QChar(0x039B), q_("Lambda")  }, {QChar(0x03BB), q_("lambda")  },
+		{QChar(0x039C), q_("Mu")      }, {QChar(0x03BC), q_("mu")      },
+		{QChar(0x039D), q_("Nu")      }, {QChar(0x03BD), q_("nu")      },
+		{QChar(0x039E), q_("Xi")      }, {QChar(0x03BE), q_("xi")      },
+		{QChar(0x039F), q_("Omicron") }, {QChar(0x03BF), q_("omicron") },
+
+		{QChar(0x03A0), q_("Pi")      }, {QChar(0x03C0), q_("pi")      },
+		{QChar(0x03A1), q_("Rho")     }, {QChar(0x03C1), q_("rho")     },
+		{QChar(0x03A3), q_("Sigma")   }, {QChar(0x03C3), q_("sigma")   }, // second lower-case sigma shouldn't affect anything
+		{QChar(0x03A4), q_("Tau")     }, {QChar(0x03C4), q_("tau")     },
+		{QChar(0x03A5), q_("Upsilon") }, {QChar(0x03C5), q_("upsilon") },
+
+		{QChar(0x03A6), q_("Phi")     }, {QChar(0x03C6), q_("phi")     },
+		{QChar(0x03A7), q_("Chi")     }, {QChar(0x03C7), q_("chi")     },
+		{QChar(0x03A8), q_("Psi")     }, {QChar(0x03C8), q_("psi")     },
+		{QChar(0x03A9), q_("Omega")   }, {QChar(0x03C9), q_("omega")   }};
+
+	// This may still be inefficient. Any ideas to improve?
+	QString res=input;
+	QHashIterator<QChar, QString> i(greekLetters);
+	while (i.hasNext())
+	{
+	    i.next();
+	    res=res.replace(i.key(), i.value());
+	}
+	return res;
+}
+
 } // end of the StelUtils namespace
 

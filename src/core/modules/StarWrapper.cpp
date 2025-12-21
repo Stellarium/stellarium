@@ -598,7 +598,7 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 
 	if (flags&CatalogNumber) // Designations. TBD: KEEP HOW MANY? For now, two:
 	{
-		oss << designations.sliced(0, qMin(2, designations.length())) .join(", ") << ". ";
+		oss << StelUtils::narrateGreekChars(designations.sliced(0, qMin(2, designations.length())) .join(", ")) << ". ";
 
 		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
 		if (!extraCat.isEmpty())
@@ -1104,7 +1104,7 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 			oss << commonNames << ". ";
 	}
 	if (flags&CatalogNumber) // Use only 2 designations
-		oss << designations.sliced(0, qMin(2, designations.length())) .join(", ");
+		oss << StelUtils::narrateGreekChars(designations.sliced(0, qMin(2, designations.length())) .join(", "));
 
 	if (flags&ObjectType)
 	{
@@ -1443,7 +1443,7 @@ QString StarWrapper3::getNarration(const StelCore *core, const InfoStringGroup& 
 
 		designations.append(QString("Gaia DR3 %1").arg(star_id));
 
-		oss << designations.sliced(0, qMax(2, designations.length())) .join(", ");
+		oss << StelUtils::narrateGreekChars(designations.sliced(0, qMax(2, designations.length())) .join(", "));
 	}
 
 	if (flags&ObjectType)

@@ -1121,6 +1121,9 @@ namespace StelUtils
 		typedef Result result_type;
 	};
 
+	//! Convert otherwise unspeakable (usually) Greek characters from star labels (Bayer, Struve, ...) into speech compatible output.
+	//! When preparing speech output, just apply this as filter.
+	QString narrateGreekChars(const QString &input);
 
 #ifdef _MSC_BUILD
 	inline double trunc(double x)
