@@ -1554,37 +1554,10 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-
-// Implemented fields:
-// * Name
-//   CatalogNumber
-// * Magnitude
-//   RaDecJ2000
-//   RaDecOfDate
-//   AltAzi
-// * Distance
-//   Elongation
-// * Size
-//   Velocity
-//   ProperMotion
-// * Extra: Discovery
-//   HourAngle
-//   AbsoluteMagnitude
-//   GalacticCoord
-//   SupergalacticCoord
-//   OtherCoord
-// * ObjectType
-//   EclipticCoordJ2000
-//   EclipticCoordOfDate
-// * IAUConstellation
-// * CulturalConstellation
-//   SiderealTime
-//   RTSTime
-//   SolarLunarPosition
-
 QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
 	const Vec3d pos = getEquinoxEquatorialPos(core);
+	const QString currentPlanetName = core->getCurrentPlanet()->getEnglishName();
 
 	// We cannot seriously omit at least the standard name.
 	QString res=getNameI18n() + " ";
@@ -1635,9 +1608,10 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		res += QString("%1 %2, ").arg(qc_("currently at visual magnitude of", "object narration"), StelUtils::narrateDecimal(mag, 1));
 		const float airmass = getAirmass(core);
 		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
-			res += QString("%1 %2 %3 %4 %5, ").arg(qc_("reduced to", "object narration: reduced magnitude by extinction"),
-							       StelUtils::narrateDecimal(getVMagnitudeWithExtinction(core, mag), 1), qc_("by", "narration: extinction by XX airmasses"),
-							       StelUtils::narrateDecimal(airmass, 2), qc_("Airmasses of atmospheric extinction", "object narration"));
+			res += ", " + QString(qc_("reduced to %1 by %2 airmasses of atmospheric extinction", "object narration: reduced magnitude by extinction"))
+					.arg(StelUtils::narrateDecimal(getVMagnitudeWithExtinction(core, mag), 1),
+					     StelUtils::narrateDecimal(airmass, 2)) + ". ";
+
 		res += getExtraInfoStrings(Magnitude).join(". ");
 	}
 
@@ -1651,24 +1625,35 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&CulturalConstellation)
 	{
 		// Culture info
-		//StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
-		ConstellationMgr   *cMgr=GETSTELMODULE(ConstellationMgr);
-		const QList<Constellation*> cList=cMgr->isObjectIn(this, true);
-		QStringList cNames;
+		ConstellationMgr *cMgr=GETSTELMODULE(ConstellationMgr);
 
-		for (const Constellation *cst: cList)
-			cNames.append(cst->getNamePronounce());
-		if (cList.length()>0)
-			res.append(" " + qc_("In this skyculture, it lies within the area of", "object narration") + " " + cNames.join(QString(" %1 ").arg(qc_("and", "object narration"))) + ". ");
-		if (cMgr->hasZodiac())
+		// Add constellation from convex hull, if that is enabled in the first place.
+		static QSettings *conf=StelApp::getInstance().getSettings();
+		static const bool hullsEnabled = conf->value("gui/skyculture_enable_hulls", false).toBool();
+		if (hullsEnabled)
 		{
-			res.append(" " + qc_("Its position in the", "object narration") + " " + cMgr->getZodiacSystemName() + " " + qc_("system is", "object narration") + " " );
-			res.append(cMgr->getZodiacCoordinate(pos, true) + ". ");
+			const QList<Constellation*> cList=cMgr->isObjectIn(this, true);
+			QStringList cNames;
+
+			for (const Constellation *cst: cList)
+				cNames.append(cst->getNamePronounce());
+			if (cList.length()>0)
+				res.append(" " + qc_("In this skyculture, it lies within the area of", "object narration") + " "
+					   + cNames.join(QString(" %1 ").arg(qc_("and", "object narration"))) + ". ");
 		}
-		if (cMgr->hasLunarSystem())
+
+		if (cMgr->hasZodiac() && (currentPlanetName==L1S("Earth")))
 		{
-			res.append(" " + qc_("Its position in the", "object narration") + " " + cMgr->getLunarSystemName() + " " + qc_("system is", "object narration") + " " );
-			res.append(cMgr->getLunarSystemCoordinate(pos, true) + ". ");
+			QString zodiacSystemLabel = cMgr->getZodiacSystemName();
+			// TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
+			res += QString(qc_("Its %1 Position is %2", "object narration")).arg(zodiacSystemLabel, cMgr->getZodiacCoordinate(pos, true)) + ". ";
+
+		}
+		if (cMgr->hasLunarSystem() && (currentPlanetName==L1S("Earth")))
+		{
+			QString lunarSystemLabel = cMgr->getLunarSystemName();
+			// TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
+			res += QString(qc_("Its %1 Position is %2", "object narration")).arg(lunarSystemLabel, cMgr->getLunarSystemCoordinate(pos, true)) + ". ";
 		}
 	}
 
@@ -3254,7 +3239,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 
 	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	const bool isSun  = this==ssm->getSun();
-	const bool currentLocationIsEarth = core->getCurrentLocation().planetName == "Earth";
+	const bool currentLocationIsEarth = core->getCurrentLocation().planetName == L1S("Earth");
 	if (isSun && currentLocationIsEarth)
 	{
 		static LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);

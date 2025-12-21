@@ -547,6 +547,7 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 	const QString sciExtraName = StarMgr::getSciExtraDesignation(star_id);
 	const QString varSciName = StarMgr::getGcvsDesignation(star_id);
 	const QString wdsSciName = StarMgr::getWdsDesignation(star_id);
+
 	QStringList designations;
 	if (!sciName.isEmpty())
 		designations.append(sciName.split(" - "));
@@ -648,7 +649,7 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 
 	if (flags&Extra)
 	{
-		oss << QString("%1 %2. ").arg(qc_("Its B minus V Color Index is", "object narration"), StelUtils::narrateDecimal(s->getBV(), 2));
+		oss << QString(qc_("Its B minus V Color Index is %1", "object narration")).arg(StelUtils::narrateDecimal(s->getBV(), 2)) << " ";
 
 		if (!varType.isEmpty())
 		{
@@ -664,10 +665,10 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 			{
 				QString minStr = StelUtils::narrateDecimal(minimumM1, 2);
 				if (min2VMag<99.f)
-					minStr = QString("%1 %2 %3").arg(StelUtils::narrateDecimal(minimumM1, 2), qc_("or", "object narration, alternatives"), StelUtils::narrateDecimal(minimumM2, 2));
+					minStr = QString(qc_("either %1 or %2", "object narration, alternatives")).arg(StelUtils::narrateDecimal(minimumM1, 2), StelUtils::narrateDecimal(minimumM2, 2));
 
-				oss << QString("%1 %2 %3 %4 (%5 %6). ").arg(qc_("Its magnitude range goes from ", "object narration"), StelUtils::narrateDecimal(maxVMag, 2),
-									    qc_("to", "object narration, describes a range target"), minStr, qc_("in the Photometric system", "object narration"), photoVSys);
+				oss << QString(qc_("Its magnitude range goes from %1 to %2 in the Photometric system %3.", "object narration"))
+				       .arg(StelUtils::narrateDecimal(maxVMag, 2), minStr, photoVSys) + " ";
 			}
 		}
 	}
@@ -682,10 +683,10 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
 		if ((Plx!=0) && (PlxErr!=0) && (Plx/PlxErr>5))
 		{
-			//TRANSLATORS: Unit of measure for distance - Light Years
-			QString ly = qc_("light years", "distance");
 			const double distance = PARSEC_LY * 1000. / Plx;
-			oss << QString("%1  %2%3%4 %5. ").arg(qc_("Its distance is", "object narration"), StelUtils::narrateDecimal(distance, 2), QChar(0x00B1), StelUtils::narrateDecimal(distance * PlxErr / Plx, 2), ly);
+			// TRANSLATORS: Its distance is x plus/minus y light years
+			oss << QString(qc_("Its distance is %1 ± %2 light years.", "object narration")).
+			       arg(StelUtils::narrateDecimal(distance, 2), StelUtils::narrateDecimal(distance * PlxErr / Plx, 2)) << " ";
 		}
 		//oss << getExtraInfoStrings(Distance).join("");
 	}
@@ -694,26 +695,15 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 	if ((flags&ProperMotion) && (pmra || pmdec))
 	{
 		const float pa = StelUtils::fmodpos(static_cast<float>(std::atan2(pmra, pmdec))*M_180_PIf, 360.f);
-		oss << QString("%1 %2 %3 %4 %5°, ").arg(qc_("Its proper motion is", "object narration"),
-							StelUtils::narrateDecimal(std::sqrt(pmra * pmra + pmdec * pmdec), 2),
-							qc_("milli-arcseconds per year", "object narration"),
-							qc_("towards", "into the direction of"),
-							StelUtils::narrateDecimal(pa, 1));
-		oss << QString("%1 %2 %3 %4 %5 %3 %6. ").arg(qc_("or, by axes, ", "object narration"),
-							StelUtils::narrateDecimal(pmra, 2),
-							qc_("milli-arcseconds per year", "object narration"),
-							qc_("in right ascension and ", "object narration"),
-							StelUtils::narrateDecimal(pmdec, 2),
-							qc_("in declination", "object narration"));
+		oss << QString(qc_("Its proper motion is %1 milli-arcseconds per year towards %2 degrees, or, by axes, %3 milli-arcseconds per year in right ascension and %4 in declination.", "object narration"))
+		       .arg(StelUtils::narrateDecimal(std::sqrt(pmra * pmra + pmdec * pmdec), 2), StelUtils::narrateDecimal(pa, 1), StelUtils::narrateDecimal(pmra, 2), StelUtils::narrateDecimal(pmdec, 2)) + " ";
 	}
 
 	if (flags&Velocity)
 	{
 		if (RadialVel)
 		{
-			// TRANSLATORS: Unit of measure for speed - kilometers per second
-			const QString kms = qc_("kilometers per second", "speed");
-			oss << QString("%1: %2 %3. ").arg(qc_("Its radial velocity is", "object narration"), StelUtils::narrateDecimal(RadialVel, 1), kms);
+			oss << QString(qc_("Its radial velocity is %1 kilometers per second.", "object narration")).arg(StelUtils::narrateDecimal(RadialVel, 1)) + " ";
 		}
 	}
 
@@ -721,19 +711,20 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 	{
 		if (Plx!=0)
 		{
-			QString plx = qc_("Its parallax is", "object narration");
 			if (PlxErr>0.f)
-				oss <<  QString("%1: %2 %3 %4 ").arg(plx, StelUtils::narrateDecimal(Plx, 1), QChar(0x00B1), StelUtils::narrateDecimal(PlxErr, 2));
+				oss <<  QString(qc_("Its parallax is %1 ± %2 milli-arcseconds.", "object narration"))
+					.arg(StelUtils::narrateDecimal(Plx, 1), StelUtils::narrateDecimal(PlxErr, 2));
 			else
-				oss << QString("%1: %2 ").arg(plx, StelUtils::narrateDecimal(Plx, 1));
-			oss  << qc_("milli-arcseconds", "parallax") << ". ";
+				oss << QString(qc_("Its parallax is %1 milli-arcseconds.", "object narration"))
+				       .arg(StelUtils::narrateDecimal(Plx, 1));
+			oss   << " ";
 		}
 
 		if (s->getSpInt())
-			oss << QString("%1  %2. ").arg(qc_("Its Spectral Type is", "object narration"), StarMgr::convertToSpectralType(s->getSpInt()));
+			oss << QString(qc_("Its Spectral Type is %1.", "object narration")).arg(StarMgr::convertToSpectralType(s->getSpInt())) + " ";
 
 		if (vPeriod>0.)
-			oss << QString("%1 %2 %3. ").arg(qc_("It has a period of", "object narration"), StelUtils::narrateDecimal(vPeriod, 2), qc_("days", "duration"));
+			oss << QString(qc_("It has a period of %1 days", "object narration")).arg(StelUtils::narrateDecimal(vPeriod, 2));
 
 		if (vEpoch>0. && vPeriod>0.)
 		{
@@ -741,39 +732,37 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 			double vsEpoch = 2400000+vEpoch;
 			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
-			const QString dateStr = ebsFlag ? qc_("Next minimum light will be", "object narration") :
-							  qc_("Next maximum light will be", "object narration");
-			oss << QString("%1 %2 UTC").arg(dateStr, nextDate);
+			const QString dateStr = ebsFlag ? qc_("Next minimum light will be at %1 UTC", "object narration") :
+							  qc_("Next maximum light will be at %1 UTC", "object narration");
+			oss << QString(dateStr).arg(nextDate) << ". ";
 		}
 
 		if (vMm>0)
 		{
-			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is", "object narration") :
-							qc_("The rising time fraction is", "object narration: light curve");
-			const QString thatIs = qc_("that is", "object narration");
+			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
+							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
 
 			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
-			oss << QString("%1: %2% (%3 %4)").arg(mmStr, StelUtils::narrateDecimal(vMm, 2), thatIs, dms);
+			oss << QString(mmStr).arg(StelUtils::narrateDecimal(vMm, 2), dms);
 		}
 
 		if ((wdsObs>0) || (binary_sep>0.f))  // either have a WDS observation or a separation modelled by the binary orbit
 		{
 			// use separation and position angle from the binary orbit if available
-			oss << QString("%1 %3: %2 %4. ").arg(qc_("Its position angle as given for", "object narration"),
-							StelUtils::narrateDecimal((binary_sep>0.f) ? binary_pa : wdsPA, 2),
-							(binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): StelUtils::narrateDecimal(wdsObs),
-							     qc_("degrees", "object narration"));
+			oss << QString(qc_("Its position angle as given for %1 is %2 degrees.", "object narration"))
+			       .arg((binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): StelUtils::narrateDecimal(wdsObs),
+					StelUtils::narrateDecimal((binary_sep>0.f) ? binary_pa : wdsPA, 2)) + " ";
 			if (wdsSep>0.f && wdsSep<999.f) // A spectroscopic binary or not?
 			{
 				if (wdsSep>60.f) // A wide binary star?
-					oss << QString("%1 %4: %2 %5 (%3). ").arg(
-									    qc_("Its Separation for", "object narration"),
-									    StelUtils::narrateDecimal((binary_sep>0.f) ? binary_sep: wdsSep, 2),
-									    StelUtils::decDegToDmsNarration(((binary_sep>0.f) ? binary_sep: wdsSep)/3600.f),
-									    (binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): StelUtils::narrateDecimal(wdsObs, 1),
-									    qc_("arc-seconds", "object narration"));
+					oss << QString(qc_("Its Separation for %1 is %2 arc-seconds (%3). ", "object narration"))
+					       .arg((binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): StelUtils::narrateDecimal(wdsObs, 1),
+						    StelUtils::narrateDecimal((binary_sep>0.f) ? binary_sep: wdsSep, 2),
+						    StelUtils::decDegToDmsNarration(((binary_sep>0.f) ? binary_sep: wdsSep)/3600.f));
 				else
-					oss << QString("%1 %3: %2 %4. ").arg(qc_("Its Separation for", "object narration"), StelUtils::narrateDecimal(wdsSep, 2), StelUtils::narrateDecimal(wdsObs, 1), qc_("arc-seconds", "object narration"));
+					oss << QString(qc_("Its Separation for %1 is %2 arc-seconds. ", "object narration"))
+					       .arg(StelUtils::narrateDecimal(wdsObs, 1), StelUtils::narrateDecimal(wdsSep, 2));
+				oss << " ";
 			}
 		}
 	}
@@ -1079,7 +1068,7 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 	if (!sciName.isEmpty())
 		designations.append(sciName.split(" - "));
 	if (!sciExtraName.isEmpty())
-		designations.append(sciExtraName);
+		designations.append(sciExtraName.split(" - "));
 	if (!varSciName.isEmpty() && !sciName.contains(varSciName, Qt::CaseInsensitive))
 		designations.append(varSciName);
 
@@ -1110,9 +1099,10 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 	{
 		const QString objectTypeI18nStr = getObjectTypeI18n();
 		if (!varType.isEmpty())
-			oss << QString("%1 %2 %3 %4. ").arg(qc_("Its type is", "object narration"), objectTypeI18nStr, qc_("with variable type", "object narration"), varType);
+			oss << QString(qc_("Its type is %1 with variable type %2.", "object narration")).arg(objectTypeI18nStr, varType);
 		else
-			oss << QString("%1 %2. ").arg(qc_("Its type is", "object narration"), objectTypeI18nStr);
+			oss << QString(qc_("Its type is %1.", "object narration")).arg(objectTypeI18nStr);
+		oss << ". ";
 	}
 
 	if (flags&Magnitude)
@@ -1130,7 +1120,7 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 
 	if (flags&Extra)
 	{
-		oss << QString("%1 %2. ").arg(qc_("Its B minus V Color Index is", "object narration"), StelUtils::narrateDecimal(getBV(), 2));
+		oss << QString(qc_("Its B minus V Color Index is %1", "object narration")).arg(StelUtils::narrateDecimal(s->getBV(), 2)) << " ";
 
 		if (!varType.isEmpty())
 		{
@@ -1152,10 +1142,10 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 			{
 				QString minStr = StelUtils::narrateDecimal(minimumM1,  2);
 				if (min2VMag<99.f)
-					minStr = QString(qc_("either %1 or %2", "variable star narration")).arg(StelUtils::narrateDecimal(minimumM1, 2), StelUtils::narrateDecimal(minimumM2, 2));
+					minStr = QString(qc_("either %1 or %2", "object narration, alternatives")).arg(StelUtils::narrateDecimal(minimumM1, 2), StelUtils::narrateDecimal(minimumM2, 2));
 
-				oss << QString("%1 %2 %3 %4 (%5 %6). ").arg(qc_("Its magnitude range goes from ", "object narration"), StelUtils::narrateDecimal(maxVMag, 2),
-									    qc_("to", "object narration, describes a range target"), minStr, qc_("in the Photometric system", "object narration"), photoVSys);
+				oss << QString(qc_("Its magnitude range goes from %1 to %2 in the Photometric system %3.", "object narration"))
+				       .arg(StelUtils::narrateDecimal(maxVMag, 2), minStr, photoVSys) + " ";
 			}
 		}
 	}
@@ -1167,17 +1157,8 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 	if (computeAstrometryFlag)
 	{
 		const float pa = StelUtils::fmodpos(static_cast<float>(std::atan2(pmra, pmdec))*M_180_PIf, 360.f);
-		oss << QString("%1 %2 %3 %4 %5°, ").arg(qc_("Its proper motion is", "object narration"),
-							StelUtils::narrateDecimal(std::sqrt(pmra * pmra + pmdec * pmdec), 2),
-							qc_("milli-arcseconds per year", "object narration"),
-							qc_("towards", "into the direction of"),
-							StelUtils::narrateDecimal(pa, 1));
-		oss << QString("%1 %2 %3 %4 %5 %3 %6. ").arg(qc_("or, by axes, ", "object narration"),
-							StelUtils::narrateDecimal(pmra, 2),
-							qc_("milli-arcseconds per year", "object narration"),
-							qc_("in right ascension and ", "object narration"),
-							StelUtils::narrateDecimal(pmdec, 2),
-							qc_("in declination", "object narration"));
+		oss << QString(qc_("Its proper motion is %1 milli-arcseconds per year towards %2 degrees, or, by axes, %3 milli-arcseconds per year in right ascension and %4 in declination.", "object narration"))
+		       .arg(StelUtils::narrateDecimal(std::sqrt(pmra * pmra + pmdec * pmdec), 2), StelUtils::narrateDecimal(pa, 1), StelUtils::narrateDecimal(pmra, 2), StelUtils::narrateDecimal(pmdec, 2)) + " ";
 	}
 
 	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
@@ -1186,10 +1167,10 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
 		if ((Plx!=0) && (PlxErr!=0) & (Plx/PlxErr > 5.))
 		{
-			//TRANSLATORS: Unit of measure for distance - Light Years
-			QString ly = qc_("light years", "distance");
 			const double distance = PARSEC_LY * 1000. / Plx;
-			oss << QString("%1: %2%3%4 %5. ").arg(qc_("Its distance is", "object narration"), StelUtils::narrateDecimal(distance, 2), QChar(0x00B1), StelUtils::narrateDecimal(distance * PlxErr / Plx, 2), ly);
+			// TRANSLATORS: Its distance is x plus/minus y light years
+			oss << QString(qc_("Its distance is %1 ± %2 light years.", "object narration")).
+			       arg(StelUtils::narrateDecimal(distance, 2), StelUtils::narrateDecimal(distance * PlxErr / Plx, 2)) << " ";
 		}
 		//oss << getExtraInfoStrings(Distance).join("");
 	}
@@ -1198,12 +1179,13 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 	{
 		if ((Plx!=0) && (PlxErr!=0))  // as long as having parallax, display it (but not necessarily displaying inverse parallax)
 		{
-			QString plx = qc_("Its Parallax is", "object narration");
 			if (PlxErr>0.f)
-				oss <<  QString("%1: %2 %3 %4 ").arg(plx, StelUtils::narrateDecimal(Plx, 1), QChar(0x00B1), StelUtils::narrateDecimal(PlxErr, 2));
+				oss <<  QString(qc_("Its parallax is %1 ± %2 milli-arcseconds.", "object narration"))
+					.arg(StelUtils::narrateDecimal(Plx, 1), StelUtils::narrateDecimal(PlxErr, 2));
 			else
-				oss << QString("%1: %2 ").arg(plx, StelUtils::narrateDecimal(Plx, 1));
-			oss  << qc_("milli-arcseconds", "parallax") << ". ";
+				oss << QString(qc_("Its parallax is %1 milli-arcseconds.", "object narration"))
+				       .arg(StelUtils::narrateDecimal(Plx, 1));
+			oss  << ". ";
 		}
 
 		const double vEpoch = StarMgr::getGcvsEpoch(star_id);
@@ -1215,10 +1197,10 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 		const bool ebsFlag = stype.contains("eclipsing binary system");
 
 		if (!sType.isEmpty())
-			oss << QString("%1 %2").arg(qc_("Its spectral type is", "star narration"), sType);
+			oss << QString(qc_("Its Spectral Type is %1.", "object narration")).arg(sType);
 
 		if (vPeriod>0.)
-			oss << QString("%1 %2 %3. ").arg(qc_("It has a period of", "object narration"), StelUtils::narrateDecimal(vPeriod, 2), qc_("days", "duration"));
+			oss << QString(qc_("It has a period of %1 days", "object narration")).arg(StelUtils::narrateDecimal(vPeriod, 2));
 
 		if (vEpoch>0. && vPeriod>0.)
 		{
@@ -1226,19 +1208,18 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 			double vsEpoch = 2400000+vEpoch;
 			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
-			const QString dateStr = ebsFlag ? qc_("Next minimum light will be", "object narration") :
-							  qc_("Next maximum light will be", "object narration");
-			oss << QString("%1 %2 UTC. ").arg(dateStr, nextDate);
+			const QString dateStr = ebsFlag ? qc_("Next minimum light will be at %1 UTC", "object narration") :
+							  qc_("Next maximum light will be at %1 UTC", "object narration");
+			oss << QString(dateStr).arg(nextDate) << ". ";
 		}
 
 		if (vMm>0)
 		{
-			const QString mmStr = ebsFlag ? qc_("The duration of an eclipse is", "object narration") :
-							qc_("The rising time fraction is", "object narration: light curve");
-			const QString thatIs = qc_("that is", "object narration");
+			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
+							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
 
 			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
-			oss << QString("%1: %2% (%3 %4). ").arg(mmStr, StelUtils::narrateDecimal(vMm, 2), thatIs, dms);
+			oss << QString(mmStr).arg(StelUtils::narrateDecimal(vMm, 2), dms);
 		}
 	}
 
@@ -1450,9 +1431,10 @@ QString StarWrapper3::getNarration(const StelCore *core, const InfoStringGroup& 
 	{
 		const QString objectTypeI18nStr = getObjectTypeI18n();
 		if (!varType.isEmpty())
-			oss << QString("%1 %2 %3 %4. ").arg(qc_("Its type is", "object narration"), objectTypeI18nStr, qc_("with variable type", "object narration"), varType);
+			oss << QString(qc_("Its type is %1 with variable type %2.", "object narration")).arg(objectTypeI18nStr, varType);
 		else
-			oss << QString("%1 %2. ").arg(qc_("Its type is", "object narration"), objectTypeI18nStr);
+			oss << QString(qc_("Its type is %1.", "object narration")).arg(objectTypeI18nStr);
+		oss << ". ";
 	}
 
 	if (flags&Magnitude)
@@ -1482,10 +1464,10 @@ QString StarWrapper3::getNarration(const StelCore *core, const InfoStringGroup& 
 			{
 				QString minStr = StelUtils::narrateDecimal(minimumM1,  2);
 				if (min2VMag<99.f)
-					minStr = QString(qc_("either %1 or %2", "variable star narration")).arg(StelUtils::narrateDecimal(minimumM1, 2), StelUtils::narrateDecimal(minimumM2, 2));
+					minStr = QString(qc_("either %1 or %2", "object narration, alternatives")).arg(StelUtils::narrateDecimal(minimumM1, 2), StelUtils::narrateDecimal(minimumM2, 2));
 
-				oss << QString("%1 %2 %3 %4 (%5 %6). ").arg(qc_("Its magnitude range goes from ", "object narration"), StelUtils::narrateDecimal(maxVMag, 2),
-									    qc_("to", "object narration, describes a range target"), minStr, qc_("in the Photometric system", "object narration"), photoVSys);
+				oss << QString(qc_("Its magnitude range goes from %1 to %2 in the Photometric system %3.", "object narration"))
+				       .arg(StelUtils::narrateDecimal(maxVMag, 2), minStr, photoVSys) + " ";
 			}
 		}
 	}
@@ -1503,10 +1485,10 @@ QString StarWrapper3::getNarration(const StelCore *core, const InfoStringGroup& 
 		const bool ebsFlag = stype.contains("eclipsing binary system");
 
 		if (!sType.isEmpty())
-			oss << QString("%1 %2").arg(qc_("Its spectral type is", "star narration"), sType);
+			oss << QString(qc_("Its Spectral Type is %1.", "object narration")).arg(sType);
 
 		if (vPeriod>0.)
-			oss << QString("%1 %2 %3. ").arg(qc_("It has a period of", "object narration"), StelUtils::narrateDecimal(vPeriod, 2), qc_("days", "duration"));
+			oss << QString(qc_("It has a period of %1 days", "object narration")).arg(StelUtils::narrateDecimal(vPeriod, 2));
 
 		if (vEpoch>0. && vPeriod>0.)
 		{
@@ -1514,19 +1496,18 @@ QString StarWrapper3::getNarration(const StelCore *core, const InfoStringGroup& 
 			double vsEpoch = 2400000+vEpoch;
 			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
-			const QString dateStr = ebsFlag ? qc_("Next minimum light will be", "object narration") :
-							  qc_("Next maximum light will be", "object narration");
-			oss << QString("%1 %2 UTC. ").arg(dateStr, nextDate);
+			const QString dateStr = ebsFlag ? qc_("Next minimum light will be at %1 UTC", "object narration") :
+							  qc_("Next maximum light will be at %1 UTC", "object narration");
+			oss << QString(dateStr).arg(nextDate) << ". ";
 		}
 
 		if (vMm>0)
 		{
-			const QString mmStr = ebsFlag ? qc_("The duration of an eclipse is", "object narration") :
-							qc_("The rising time fraction is", "object narration: light curve");
-			const QString thatIs = qc_("that is", "object narration");
+			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
+							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
 
 			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
-			oss << QString("%1: %2% (%3 %4). ").arg(mmStr, StelUtils::narrateDecimal(vMm, 2), thatIs, dms);
+			oss << QString(mmStr).arg(StelUtils::narrateDecimal(vMm, 2), dms);
 		}
 	}
 
