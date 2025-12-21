@@ -2015,7 +2015,7 @@ msgstr ""
 
 #. Description of Balinese constellation Elephantfish
 msgid ""
-"Gajahmina is an elephantfish. A sea-creature that have elephant head and fish body. It is a supranatural creature and helps the inhabitants. \n"
+"Gajahmina is an elephantfish. A sea-creature that has elephant head and fish body. It is a supranatural creature and helps the inhabitants. \n"
 "\n"
 "<img width=\"255\" src=\"illustrations/descr_pics/Bu_Pa.png\"/>"
 msgstr ""
@@ -3010,115 +3010,77 @@ msgstr ""
 #. Chinese Song Dynasty Sky sky culture introduction section in markdown
 #. format
 msgid ""
-"This sky culture is based on the observation data of Huangyou four years "
-"(1052 AD), and presents the medieval Chinese sky map as faithfully as "
-"possible. This sky culture includes 283 Xingguans (星官, Chinese "
-"Constellations) and 1464 stars (including clusters M7, M44) of the "
-"*Xinyixiangfayao Star Map*. And the determinative star is marked for each "
-"Xingguan that can determine the determinative star. The boundaries of "
-"Twenty-eight Lunar Mansions are based on 1052 AD."
+"This sky culture is based on the observation data from the 4th year of the "
+"Huangyou era (1052 AD), and aims to faithfully reconstruct the star map of "
+"China during the Song Dynasty. This sky culture comprises 283 Xingguans (星官,"
+" Chinese Constellations) and 1464 stars (including clusters M7, M44) from "
+"the *Xinyixiangfayao Star Map*."
 msgstr ""
-"Kultura zviježđa temelji se na podacima četverogodišnjeg promatranja "
-"Huangyoua (1052. g.) i prikazuje vjernu srednjovjekovnu kinesku zvjezdanu "
-"kartu . Uključuje 283 Xingguansa (星官, kineskih zviježđa) i 1464 zvijezda "
-"(uključujući skupove M7, M44) *Xinyixiangfayao zvjezdane karte*. Također su "
-"označene određujuće zvijezde svakog Xingguan koje su mogle biti određene. "
-"Granice 28 Mjesečevih Kuća temeljene su prema 1052. godini."
 
 #. Chinese Song Dynasty Sky sky culture description section in markdown format
 msgid ""
-"### Medieval Xingguans\n"
+"###  Xingguan System\n"
 "\n"
-"From the Three Kingdoms Period to the Ming Dynasty, covering the whole of the Middle Ages, China's star map is similar.\n"
+"The Chinese system of Xingguans originated in antiquity. During the Warring States period (475–221 BC), astronomers Gan De (甘德) and Shi Shen (石申) established independent systems. Another system was attributed to the legendary figure Wuxian (巫咸) of the Shang Dynasty  (16th century BC–1046 BC), though modern scholarship suggests it was likely compiled by later generations in his name. In the Three Kingdoms period (220–280 AD), astronomer Chen Zhuo (陈卓) synthesized these three systems into a unified one, defining 283 Xingguans and 1464 stars. This framework became the standard and was later immortalized in the *Song of the Sky Pacers (步天歌)*, a Tang Dynasty astronomical text written in verse. It remained largely stable until the introduction of Western astronomy in the 17th century.\n"
 "\n"
-"The Xingguans originated in ancient times. Wuxian (巫咸) of Shang Dynasty(16th century BC-1046 BC), Gan De (甘德) and Shi Shen (石申) of The Warring States Period (475–221 BC), created their own Xingguan system respectively. During the Three Kingdoms period (220–280 AD), Chen Zhuo (陈卓) summarized the Xingguans system of Gan De, Shi Shen and Wuxian, including 283 Xingguans and 1464 stars. Since then, Xingguan system has been basically defined, and after a thousand years, there has not been much change. Since the 17th century, Western astronomy has had an impact on Chinese astronomy, and the shape and number of Xingguans have changed significantly. Only about half of the constellations maintained the medieval style.\n"
+"An important concept within this system is the *determinative star*. Before the 17th century, Chinese astronomers generally did not assign names to individual stars; instead, they designated a primary star—though not necessarily the brightest—within each Xingguan as its determinative star. Astronomical observations primarily documented the coordinates of these determinative stars, though in particularly important or special Xingguans, additional stars could also be selected for observation and recording, or even assigned names. For each Xingguan from which a determinative star can be identified, we have marked its determinative star.\n"
 "\n"
-"Determinative star is an important concept. In the Middle Ages, Chinese astronomers did not name all stars, and each Xingguans was chosen as a major star called determinative star. In ancient China, astronomical measurements measured its coordinate position, and other stars in the Xingguan were rarely mentioned. However, some important constellations will be selected more stars for observation and recording. In ancient China, astronomers used mansion distance degrees (determinative star distance) and polar distance degrees to record the position of stars. **In ancient China, the determinative stars of Twenty-eight Lunar Mansions was the benchmark for determining the longitude of the equatorial coordinate system**.\n"
+"**The determinative stars of the Twenty-eight Lunar Mansions were of particular importance, forming—together with the North Celestial Pole—the fundamental reference framework for the ancient Chinese equatorial coordinate system.** \n"
 "\n"
-"The *Song of the Sky Pacers* (步天歌) is an early Chinese star catalogue in the form of poem in heptasyllabic verse, enumerating the names of stars.\n"
+"Due to precession, the determinative stars of the Twenty-Eight Lunar Mansions have varied across different historical periods. A notable example involves the mansions of Turtle Beak and Three Stars. During the Song Dynasty and earlier periods, the determinative star for Turtle Beak was φ¹ Ori, while for Three Stars it was δ Ori. By the 13th century, however, precession had caused φ¹ Ori to shift to a position east of δ Ori, resulting in the phenomenon known as \"Turtle Beak lying within Three Stars,\" which contradicted the traditional sequence of the Twenty-Eight Mansions. This discrepancy became increasingly pronounced by the Qing Dynasty, leading the Imperial Observatory to redefine the determinative stars: for Three Stars, it was changed from δ Ori to ζ Ori, and for Turtle Beak, from φ¹ Ori to λ Ori.\n"
 "\n"
-"Below is *Xinyixiangfayao Star Map* from Su Song(苏颂, 1020-1101 AD).\n"
+"\n"
+"In ancient China, the *Du* (度, Chinese degree) served as the fundamental angular unit for measuring celestial coordinates. It was defined as the mean daily distance traveled by the Sun along the ecliptic. Accordingly, the full celestial circumference was divided into 365.25 *Du*. Historical records note that the radius of the celestial equator measured “slightly more than 91 *Du*” from the North Celestial Pole. Evidently, the *Du* is slightly smaller than the modern degree, equivalent to approximately 0.9856°. Unlike modern angular units, there were no precise subdivisions below the Du (such as arcminutes or arcseconds). Instead, a set of descriptive terms was used to roughly approximate divisions of one Du, either into quarters or tenths.\n"
+"\n"
+"Another angular unit used in traditional Chinese astronomy was the *Chen* (辰). One *Chen* corresponds to a 30-degree segment, and the celestial circle was divided into twelve such units. Thus, one *Chen* equals 30 modern degrees—or slightly more than 30 *Du*, though *Chen* was generally not converted into *Du* in practice. Due to its relatively large scale, the *Chen* was seldom used for precise angular measurement. In later periods, it became more common as a unit of time, dividing one full day into twelve *Chen*, each equivalent to two modern hours.\n"
+"\n"
+"Below is *Xinyixiangfayao Star Map* from Su Song (苏颂, 1020-1101 AD).\n"
 "\n"
 "![](illustrations/xyxfy.png)\n"
+"Xinyixiangfayao Star Map (1088 AD)\n"
+"{: .img_and_caption }\n"
 "\n"
-"*Xinyixiangfayao Star Map(1088 AD)*\n"
+"### Reconstruction of the Sky Map\n"
 "\n"
-"### Restore Sky Map\n"
+"The Imperial Observatory of the Song Dynasty conducted several large-scale stellar observations with remarkable accuracy, surpassing all previous eras in precision. The data from the 4th year of the Huangyou era (1052 AD) is the most complete set that survives today. Based on these records, two significant star charts were produced: the *Xinyixiangfayao Star Map* (based on observational data from 1052 AD, created in 1088 AD) and the *Suzhou Star Map* (based on observational data from 1078 to 1085 AD, carved in 1247 AD).\n"
 "\n"
-"The sky map of the Song dynasty is typical of the Chinese medieval sky map. In 1052 AD, the Song Dynasty official conducted accurate stellar measurements, leaving a lot of data.\n"
+"The historian of astronomy Pan Nai (潘鼐) systematically compiled the observational data from the Huangyou era into the *Huangyou Star Catalog*. By cross-referencing it with the *Xinyixiangfayao Star Map* in his work *The History of Stellar Observation in China*[#1], he reconstructed most of the Song Dynasty Xingguans, serving as the primary reference for this project.\n"
 "\n"
-"Pan Nai(潘鼐) collated these astronomical observations data and based on the *Xinyixiangfayao Star Map*, he restored most of the Song Dynasty's Xingguan in his masterpiece *The History of Stellar Observation in China*, which is the most important reference book. Qi Rui (齐锐) and Wan Haoyi (万昊宜) also restored the Xingguans of the Song Dynasty in the book *Roving China Heavens*, which is also an important reference book.\n"
+"In their work *Roving China Heavens*[#2], Qi Rui (齐锐) and Wan Haoyi (万昊宜) also reconstructed the Song Dynasty Xingguans. Their research primarily referenced the *Suzhou Star Map* . Since the observational data used for this star map dates from slightly later than 1052 AD, *Roving China Heavens* serves as supplementary reference material for this study.\n"
 "\n"
-"Due to the limitation of observation conditions in Song Dynasty, combined with instruments, circulated errors and other reasons, different scholars restored the sky map is somewhat different.\n"
+"Due to the limitations of observational technology and potential errors in transmission, different scholarly reconstructions may vary slightly. Based on the aforementioned works, Stellarium faithfully reconstructs the Chinese night sky of 1052 AD.\n"
 "\n"
-"Based on these books, Stellarium can almost truly present the Chinese medieval sky map of Huangyou four years (1052 AD).\n"
+"### The Milky Way\n"
 "\n"
-"### Planets\n"
+"The Chinese imagine the Milky Way as a river. During the Song Dynasty in China, the official name for the Milky Way was \"天汉\" (pinyin: Tiānhàn), meaning \"river in the heavens.\" It was also referred to as \"银河\" (pinyin: Yínhé)—which remains the modern Chinese official name for the Milky Way—meaning \"silver river.\" In traditional Chinese culture, the Milky Way has also been referred to as \"天河\" (pinyin: Tiānhé), similarly meaning \"river in the heavens\"; \"银汉\" (pinyin: Yínhàn), also meaning \"silvery river\"; \"河汉\" (pinyin: Héhàn), meaning \"river in the sky\"; \"星河\" (pinyin: Xīnghé) or \"星汉\" (pinyin: Xīnghàn), meaning \"river of stars\"; and \"云汉\" (pinyin: Yúnhàn), meaning \"cloud-like river.\"\n"
 "\n"
-"Taiyang (太阳), Sun. The name comes from yin and yang, meaning a lot of yang,\n"
+"### Seven Luminaries\n"
 "\n"
-"Taiyin (太阴), Moon. The name comes from yin and yang, meaning a lot of Yin,\n"
+"The Sun, the Moon, and the five major planets are collectively referred to as the *Seven Luminaries*. The sun and moon are named after *yin and yang*, while the pictographic characters \"日\" (the Sun, pinyin: Rì) and \"月\" (the Moon, pinyin: Yuè) are also used. The five major planets represent the *five elements*, but the following names were the most orthodox designations at the time. Similar to other civilizations around the world, Venus also had additional names depending on whether it appeared in the morning or the evening.\n"
 "\n"
-"Chen Star (辰星), Mercury. Chen is an angle unit, which refers to about 30 degrees. Mercury is always within 30 degrees of the sun.\n"
+"Great Yang (太阳, pinyin: Tàiyáng): The Sun. In Chinese philosophy, it represents the pinnacle of Yang energy.\n"
 "\n"
-"Taibai (太白), Venus. Taibai means big and white.\n"
+"Great Yin (太阴, pinyin: Tàiyīn): The Moon. It represents the pinnacle of Yin energy.\n"
 "\n"
-"Yinghuo (荧惑), Mars. The colors of Mars are like fire, and movement is confusing.\n"
+"Division Star (辰星, pinyin: Chénxīng): Mercury. From Earth, Mercury's angular distance from the Sun never exceeds 28 degrees, remaining within one *Chen* (a 30-degree unit, see discussion of *Chen* above), and thus it is historically known as *Division Star*.\n"
 "\n"
-"Sui Star (岁星), Jupiter. It means the old star. Jupiter travels around the celestial sphere for a week every 12 years. The ancients took Jupiter's position as the standard of the chronology.\n"
+"Grand White (太白, pinyin: Tàibái): Venus. It is named for its extremely high brightness and pure white color.\n"
 "\n"
-"Zhen Star (填星), Saturn. Zhen, means passing Lunar Mansions. Saturn travels around the celestial sphere about every 28 years. Saturn will pass through a Lunar Mansion every year."
+"Spark-Weaver (荧惑, pinyin: Yínghuò): Mars. It is named for its fiery red color and its erratic, unpredictable orbit.\n"
+"\n"
+"Year Star (岁星, pinyin: Suìxīng): Jupiter. Jupiter's orbital period of approximately 12 years was used by the ancients to mark the cycle of years, hence its name.\n"
+"\n"
+"Stabilizer Star (填星, pinyin: Zhènxīng): Saturn. In traditional theory, Saturn was believed to take about 28 years to orbit the heavens, *guarding* or *filling* one lunar mansion each year."
 msgstr ""
-"### Srednjovjekovni Xingguani\n"
-"\n"
-"Kineska zvjezdana karta ostala je gotovo nepromijenjena od perioda Tri Kraljevstva do Dinastije Ming, što pokriva cijeli srednji vijek.\n"
-"\n"
-"Xingguani potječu iz drevnih dana. Wuxian (巫咸) iz Dinastije Shang (16 stoljeće pr. Kr -1046 god. pr.Kr.), Gan De (甘德) i Shi Shen (石申) iz perioda Zaraćenih država (475. - 221. god. pr.Kr.), izradili su svoje vlastite Xingguan sustave. Tijekom razdoblja Tri kraljevstva (220–280.), Chen Zhuo (陈卓) je sažeo Gan De, Shi Shen i Wuxian Xingguan sustave, uključujući 283 Xingguana i 1464 zvijezda. Otada je sustav Xingguana u osnovi definiran, a nakon tisuću godina nije se puno promijenilo. Od 17. stoljeća zapadna astronomija imala je utjecaj na kinesku astronomiju, a oblik i broj Xingguana znatno su se promijenili. Samo oko polovica zviježđa ostala je u svom srednjovjekovnom obliku.\n"
-"\n"
-"Determinative star is an important concept. In the Middle Ages, Chinese astronomers did not name all stars, and each Xingguans was chosen as a major star called determinative star. In ancient China, astronomical measurements measured its coordinate position, and other stars in the Xingguan were rarely mentioned. However, some important constellations will be selected more stars for observation and recording. In ancient China, astronomers used mansion distance degrees (determinative star distance) and polar distance degrees to record the position of stars. **In ancient China, the determinative stars of Twenty-eight Lunar Mansions was the benchmark for determining the longitude of the equatorial coordinate system**.\n"
-"\n"
-"*Pjesma Nebeskih Hodača* (步天歌) je rani kineski katalog zvijezda u u formi pjesama u sedmercu, u kojima se nabrajaju nazivi zvijezda.\n"
-"\n"
-"Niže se nalazi *Xinyixiangfayao zvjezdana karta* Su Songa (苏颂, 1020-1101).\n"
-"\n"
-"![](illustrations/xyxfy.png)\n"
-"\n"
-"*Xinyixiangfayao zvjezdana karta (1088)*\n"
-"\n"
-"### Obnova zvjezdane karte\n"
-"\n"
-"Zvjezdana karta dinastije song tipična je kineska srednjovjekovna zvjezdana karta. Dinastija Song je 1052. godine službeno je provela točna zvjezdana mjerenja i tako ostavila veliku količinu podataka za sobom.\n"
-"\n"
-"Pan Nai(潘鼐) sakupio je ove podatke s astronomskih opažanja, te je na temelju *Xinyixiangfayao zvjezdane karte*, restaurirao većinu Xingguana dinastije Song u svom remekdjelu *Povijest opažanja zvijezda u Kini*, koja je postala najvažnija referentna knjiga. Qi Rui (齐锐) i Wan Haoyi (万昊宜) također su restaurirali Xingguane dinastije Song u knjizi *Putovanje kineskim nebom*, koja također služi kao važna referentna knjiga.\n"
-"\n"
-"Zbog ograničenih uvjeta opažanja tijekom dinastije Song, uključujući i instrumente, pogreške i druge razloge, različiti naučnici su zvjezdane karte restaurirali s određenim razlikama.\n"
-"\n"
-"Na temelju ovih knjiga, Stellarium gotovo vjerno predstavlja kinesku srednjovjekovnu zvjezdanu kartu Huangyou-a (1052. godina)\n"
-"\n"
-"### Planeti\n"
-"\n"
-"Taiyang (太阳), Sunce. Naziv dolazi iz koncepta yin i yang, a znači puno Yang-a,\n"
-"\n"
-"Taiyin (太阴), Mjesec. Naziv dolazi iz koncepta yin i yang, a znači puno Yin-a,\n"
-"\n"
-"Zvijezda Chen (辰星), Merkur. Chen je kutna mjera od otprilike 30 stupnjeva. Proizlazi iz toga što je Merkur uvijek unutar 30 stupnjeva od Sunca.\n"
-"\n"
-"Taibai (太白), Venera. Taibai označava veliko i bijelo.\n"
-"\n"
-"Yinghuo (荧惑), Mars. Boja Marsa je ona slična vatri a kretanje je zbunjujuće.\n"
-"\n"
-"Zvijezda Sui (岁星), Jupiter. Znači stara zvijezda. Jupiter putuje po nebeskoj sferi tjedan dana svakih 12 godina. Drevni su uzimali položaj Jupitera kao standard u kronologiji.\n"
-"\n"
-"Zvijezda Zhen (填星), Saturn. Zhen znači prolazak Mjesečeve stanice. Saturn putuje po nebeskoj sferi svakih 28 godina što bi značilo da prođe jednu Mjesečevu stanicu svake godine."
 
 #. Chinese Song Dynasty Sky sky culture references section in markdown format
 msgid ""
-" - [#1]: Pan Nai. The History of Stellar Observation in China\n"
-" - [#2]: Qi Rui and Wan Haoyi. Roving China Heavens\n"
-" - [#3]: Su Song. *Xinyixiangfayao Star Map*\n"
-" - [#4]: *Records of the Grand Historian*\n"
-" - [#5]: *Book of Sui*\n"
-" - [#6]: *History of Song*\n"
+" - [#1]: Pan Nai. *Zhongguo Hengxing Guance Shi [The History of Stellar Observation in China]*. Shanghai: Xuelin Publishing House, 2009.\n"
+" - [#2]: Qi Rui, Wan Haoyi. *Manbu Zhongguo Xingkong [Roving China Heavens]*. Beijing: Science Popularization Press, 2014.\n"
+" - [#3]: Su Song (Song Dynasty). *Xinyixiangfayao Yizhu [Annotated Translation of Xinyixiangfayao]*. Translated and annotated by Lu Jingyan and Qian Xueying. Shanghai: Shanghai Ancient Books Publishing House, 2008.\n"
+" - [#4]: Sima Qian (Han Dynasty). *Shiji [Records of the Grand Historian]*. Compiled with commentary by Pei Yin (Liu Song Dynasty), indexed by Sima Zhen (Tang  Dynasty), and annotated by Zhang Shoujie (Tang  Dynasty). Beijing: Zhonghua Book Company, 2014.\n"
+" - [#5]: Wei Zheng, et al. (Tang Dynasty). *Suishu [Book of Sui]* Beijing: Zhonghua Book Company, 1997.\n"
+" - [#6]: Tuotuo, et al. (Yuan Dynasty). *Songshi [History of Song]*. Beijing: Zhonghua Book Company, 1985.\n"
 "\n"
 "### External links\n"
 "\n"
@@ -3129,21 +3091,6 @@ msgid ""
 " - [wikipedia - Song of the Sky Pacers](https://en.wikipedia.org/wiki/Song_of_the_Sky_Pacers)\n"
 " - [(Chinese) Chinese Heaven in WWT Community Beijing](http://wwt.china-vo.org/why/chineseheaven.htm)"
 msgstr ""
-" - [#1]: Pan Nai. The History of Stellar Observation in China\n"
-" - [#2]: Qi Rui and Wan Haoyi. Roving China Heavens\n"
-" - [#3]: Su Song. *Xinyixiangfayao Star Map*\n"
-" - [#4]: *Records of the Grand Historian*\n"
-" - [#5]: *Book of Sui*\n"
-" - [#6]: *History of Song*\n"
-"\n"
-"### Vanjske poveznice\n"
-"\n"
-" - [wikipedia - Su Song](https://en.wikipedia.org/wiki/Su_Song)\n"
-" - [Povijest dinastije Song](http://chinesenotes.com/songshi.html)\n"
-" - [Zapisi Velikog Povjesničara](http://chinesenotes.com/shiji.html)\n"
-" - [(kineski) Pjesma Nebeskih Hodača](https://www.lcsd.gov.hk/CE/Museum/Space/archive/Research/Literature/c_research_literature_9.htm)\n"
-" - [wikipedia - Pjesma Nebeskih Hodača](https://en.wikipedia.org/wiki/Song_of_the_Sky_Pacers)\n"
-" - [(Chinese) Chinese Heaven in WWT Community Beijing](http://wwt.china-vo.org/why/chineseheaven.htm)"
 
 #. Chinese Song Dynasty Sky sky culture authors section in markdown format
 msgid ""
@@ -6264,6 +6211,690 @@ msgid ""
 "The IAU is the only scientifically accepted authority to assign new names to stars. Commercial exploits like \"star name registries\", who sell stars for commemorative purposes or as gifts, only sell printed pieces of paper. These names are not approved and never used by scientists."
 msgstr ""
 
+#. Description of Modern constellation Andromeda
+msgid ""
+"Princess Andromeda, daughter of Queen Cassiopeia and King Kepheus, was chained to a rock on the coast or Ethiopia to prepare her as sacrifice to Cetus, the Sea Monster. She was rescued by Perseus.  \n"
+"\n"
+"In this constellation you find the nearest large galaxy, the Great Andromeda Galaxy. It is barely visible with the unaided eye in a dark rural sky."
+msgstr ""
+
+#. Description of Modern constellation Cassiopeia
+msgid ""
+"Shown as the Seated Queen, Cassiopeia had boasted about her beauty, so much "
+"as to enrage Poseidon. The latter sent the sea monster Cetus which ravaged "
+"the coast of Ethiopia. An oracle promised Cetus would only go away when "
+"Princess Andromeda would be sacrificed to Cetus."
+msgstr ""
+
+#. Description of Modern constellation Cepheus
+msgid ""
+"King Kepheus of Ethiopia was husband of Cassiopeia and father of Andromeda. "
+"After his wife had enraged Poseidon, he had to order that his daughter, "
+"Princess Andromeda, should be sacrificed to Cetus, the sea monster."
+msgstr ""
+
+#. Description of Modern constellation Whale
+msgid ""
+"The Sea Monster, also called Whale, was sent by Poseidon to punish Ethiopia "
+"for the heresy of Cassiopeia. It was finally killed by Perseus."
+msgstr ""
+
+#. Description of Modern constellation Pegasus
+msgid ""
+"The Winged Horse carried Perseus on his way to rescue Princess Andromeda "
+"from being sacrificed to Cetus."
+msgstr ""
+
+#. Description of Modern constellation Little Horse
+msgid ""
+"_Equuleus_, the Little Horse, is actually only a horse head and represents "
+"the foal Celeris, offspring or brother of the larger horse, Pegasus. It is "
+"seen next to the head of Pegasus."
+msgstr ""
+
+#. Description of Modern constellation Perseus
+msgid ""
+"The hero Perseus came in flying on Pegasus to rescue Andromeda from being "
+"sacrificed. In his hand he carries Medusa's head with the variable star "
+"Algol, which he presented to the sea monster Cetus just as it was about to "
+"devour Andromeda. Its magic caused Cetus to immediately turn to a rock. "
+"Before freeing Andromeda from her chains, he dropped the sack with Medusa's "
+"head to the beach. When the surf opened the sack, nearby algae were "
+"petrified into corals."
+msgstr ""
+
+#. Description of Modern constellation Orion
+msgid ""
+"The famous hunter Orion was killed by a Scorpion, but was transferred into one of the most prominent constellations, notably just opposite of Scorpius. He is accompanied by the Greater and Lesser Dogs.  \n"
+"\n"
+"Orion is host of one of the most spectacular star-forming regions, the Great Orion Nebula, Messier 42."
+msgstr ""
+
+#. Description of Modern constellation Greater Dog
+msgid ""
+"The Greater Dog is one of Orion's hunting companions. Its main star, "
+"*Sirius*, is the brightest of the fixed stars."
+msgstr ""
+
+#. Description of Modern constellation Lesser Dog
+msgid "The Lesser Dog is one of Orion's hunting companions."
+msgstr ""
+
+#. Description of Modern constellation Hare
+msgid "_Lepus_, the hare, is hiding just below the hunter Orion."
+msgstr ""
+
+#. Description of Modern constellation Charioteer
+msgid ""
+"_Auriga_, the charioteer, was born with crippled legs. He invented the wheel and built his wagon to overcome his handicap. Its main star, *Capella*, represents a goat which accompanies him. \n"
+"\n"
+"In this constellation you can find a nice selection of open star clusters."
+msgstr ""
+
+#. Description of Modern constellation Great Bear
+msgid ""
+"_Ursa Major_, the Great Bear, represents Callisto. Once a beautiful nymph, she was seduced by Zeus. His wife Hera was enraged and converted her into a bear. Zeus could not change that, but he could raise her to the stars. But again, Hera interfered so that the Bear could not take a bath in the Okeanos. This means, from ancient Greece the constellation was circumpolar, always above the horizon. Meanwhile, precession allows the Bear to at least submerge her feet in the sea. The seven brightest stars are called the Plough or Big Dipper in English but have other names in other cultures. \n"
+"\n"
+"Ursa Major contains a few nice galaxies for small telescopes."
+msgstr ""
+
+#. Description of Modern constellation Lesser Bear
+msgid ""
+"_Ursa Minor_, the Lesser Bear may be Arkas, son of Callisto, who is commemorated as Greater Bear and who was likewise placed into the sky by Zeus. Another myth commemorates two bears who saved the infant Zeus from his father Kronos. When he later placed them in the sky, he flung them up by their tails, explaining these unnaturally long bear tails.\n"
+"\n"
+"Its most prominent object is Polaris, the Pole Star. In our era, it is less than a degree from the pole which makes it a very important navigational aid, but, due to precession, in antiquity there was no bright star right on the celestial pole."
+msgstr ""
+
+#. Description of Modern constellation Dragon
+msgid ""
+"Greek mythology names several dragons. Eratosthenes identifies _Draco_ as Ladon, the snake-like dragon which protected the golden apples in the garden of the Hesperides. It was killed by Hercules who can be seen stepping on the dragon's head.\n"
+"\n"
+"The constellation winds around the Northern Ecliptical Pole, close to which we can observe a planetary nebula, the Cat's Eye. The star alpha Draconis, or *Thuban*, was closest to the Northern Celestial Pole when the Egyptians built their pyramids, and could have acted as their polar star."
+msgstr ""
+
+#. Description of Modern constellation Hercules
+msgid ""
+"Hercules, or the Kneeler, was a Greek hero, a son of Zeus with Alkmene. When his half-sister Athena tried to put him on Hera's breast, his biting caused Hera to push him away, and Hera's milk spilled all over the sky, creating the Milky Way. Hercules had to fulfill 12 major labours and countless other fights and adventures.  In the northern sky, he is actually upside-down, with his head, *Ras Algethi* next to the head of Ophiuchus, *Rasalhague*, and he is seen to trample on the head of Draco, the dragon. \n"
+"\n"
+"Hercules hosts the magnificent globular cluster Messier 13, and a smaller one, Messier 92."
+msgstr ""
+
+#. Description of Modern constellation Serpent Bearer
+msgid ""
+"The Serpent Bearer, _Ophiuchus_, also called _Serpentarius_, resembles a man"
+" holding Serpens, the snake, in his hands. He is standing on Scorpius, and "
+"with his legs he is in fact crossing the ecliptic. Some people therefore "
+"call it the 13th zodiacal constellation, but the Zodiac still only has 12 "
+"signs, for practical purposes of it being just a coordinate system. His "
+"head, *Rasalhague*, is adjacent to the head of Hercules, *Ras Algethi*."
+msgstr ""
+
+#. Description of Modern constellation Serpent
+msgid ""
+"The Serpent is the only constellation which nowadays comes in two parts, the"
+" serpent's head and tail. Its central part is held by Ophiuchus, the Serpent"
+" Bearer, and therefore those stars are counted belonging to that "
+"constellation."
+msgstr ""
+
+#. Description of Modern constellation Boötes
+msgid ""
+"This figure is described either as cow shepherd moving behind the seven oxen"
+" (*septemtriones*) according to the Romans, or in Greek tradition of "
+"*Arktophylax*, as figure related to the Greater Bear. Ptolemy described its "
+"brightest star, *Arcturus*, as not belonging to the actual shape but as "
+"bright star lying between his knees. Starting with the atlas of Polish "
+"astronomer Jan Hevelius in the 17th century, Boötes leads the Hunting Dogs "
+"on leashes."
+msgstr ""
+
+#. Description of Modern constellation Hunting Dogs
+msgid ""
+"The Hunting Dogs were introduced by Polish astronomer Jan Hevelius. In his atlas from 1687 he shows the dogs on a leash in the hands of Boötes, the Herdsman, maybe to chase the Greater Bear. \n"
+"\n"
+"The dim constellation hosts the magnificent Whirlpool Galaxy, Messier 51, and several other galaxies for small telescopes, and the bright globular cluster M3."
+msgstr ""
+
+#. Description of Modern constellation Triangle
+msgid ""
+"The Triangle has been associated with a lot of things, like the Greek uppercase letter Delta, the Nile delta, or the Island of Sicily.\n"
+"\n"
+"_Triangulum_ hosts one of the closest and brightest galaxies, Messier 33, called the Pinwheel."
+msgstr ""
+
+#. Description of Modern constellation Ram
+msgid ""
+"_Aries_, the Ram, is the first of the twelve constellations of the Zodiac "
+"which mark the area of the apparent paths of the Sun, Moon and the planets. "
+"When the Zodiac system was invented, the stars stood roughly within the "
+"respective signs. Over two thousand years of precessional movement along the"
+" ecliptic has caused a shift which moved the actual star figures about one "
+"full sign further towards the east."
+msgstr ""
+
+#. Description of Modern constellation Bull
+msgid ""
+"_Taurus_, the front part of a bull, is one of the most conspicuous figures of the zodiac. The wide open star cluster of the Hyades form the V-shaped head with the red eye (which is itself not a member of the Hyades cluster), and the ends of two long horns are marked by moderately bright stars. On its back, the most famous of all open star clusters, the Pleiades, can be seen. Although named the Seven Sisters, most observers can see six or eight stars. The Hyades and Pleiades form the Golden Gate of the Ecliptic, through which all planets, the Sun and Moon usually pass. Occasionally, the Moon can occult the Pleiades. \n"
+"\n"
+"Taurus may have already been known to Paleolithic Europeans. A Cave painting in Lasceaux shows an Aurochs with a cluster of stars in its back."
+msgstr ""
+
+#. Description of Modern constellation Twins
+msgid ""
+"The zodiacal constellation of _Gemini_, the Twins, commemorates Kastor and Polydeukes, or Castor and Pollux. Queen Leda of Sparta gave birth to uneven twins, Castor fathered by her husband, King Tyndareos, and Polydeukes allegedly fathered by Zeus who had approached her in the shape of a beautiful swan, which made only Polydeukes immortal. The otherwise inseparable twins joined Hercules on Jason's voyage on the ship Argo. Castor was fatally wounded in a battle. Polydeukes pled to his divine father to let him die with his brother. Instead, Zeus placed both into the sky, where they jointly can be seen immortalized in the sky or go below the horizon into the underworld. \n"
+"\n"
+"Gemini is host to a fine open cluster (M35) and the Eskimo planetary nebula."
+msgstr ""
+
+#. Description of Modern constellation Crab
+msgid ""
+"The zodiacal constellation of _Cancer_, the crab, used to stand along the northernmost part of the ecliptic which defines the Tropic of Cancer. Precession has meanwhile moved it a full sign to the west. \n"
+"\n"
+"When Hercules was wrestling the Lernaean Hydra, the Crab appeared and bit him in the foot. Hercules killed it, but Hera, always opposing Hercules, placed it among the stars. \n"
+"\n"
+"As an aquatic animal, Cancer consists of only dim stars, but is host to a nice naked-eye open star cluster called Praesepe, the manger. Two dim stars resemble the northern and southern donkeys eating from it."
+msgstr ""
+
+#. Description of Modern constellation Lion
+msgid ""
+"The lion, or _Leo_, is a large and conspicuous zodiacal constellation that was already known to the Babylonians. The Greeks identified it with the Nemean Lion which was killed by Hercules. \n"
+"\n"
+"Two trapezoids form body and head. Its main star, *Regulus* lies almost on the ecliptic. Leo is host to five fine Messier and several more galaxies."
+msgstr ""
+
+#. Description of Modern constellation Bernice's Hair
+msgid ""
+"Over the tuft of the Lion's tail we can see a loose cluster of dim stars. Ptolemy has described this as one of two asterisms added to his traditional 48 constellations. _Coma Berenices_ represents the Hair of Berenike II, consort of Ptolemy III Euergetes, which she had sacrificed for a safe return of her husband from war. It is the only constellation commemorating a historical person. \n"
+"\n"
+"The stars of Coma are indeed a loose open star cluster, and far behind, in the border region to Virgo, lies a region very rich in galaxies."
+msgstr ""
+
+#. Description of Modern constellation Lesser Lion
+msgid ""
+"17th-century Polish astronomer Jan Hevelius filled several almost empty "
+"regions between classical constellations with new figures in his atlas. _Leo"
+" Minor_, the Lesser Lion, was one of them, residing between Leo and Ursa "
+"Major."
+msgstr ""
+
+#. Description of Modern constellation Maiden
+msgid ""
+"The large zodiacal constellation of _Virgo_, the Maiden, spans more than one and a half zodiacal signs. Since the times of her Babylonian origins, she is associated with fertility and holds an ear of grain in her hand, marked by its brightest star *Spica*. \n"
+"\n"
+"There are plenty of Messier Galaxies and many dimmer ones in the Virgo galaxy cluster and more generally the Virgo-Coma area."
+msgstr ""
+
+#. Description of Modern constellation Scales
+msgid ""
+"The scales were known to Babylonian astronomy. The same stars were also seen as the claws of the Scorpion, which was the dominant interpretation in Greek antiquity. Later, the Romans re-established the scales as own constellation, commemorating the scales of Astraea, goddess of justice. \n"
+"\n"
+"The autumnal equinox point is called First Point of Libra, but this refers to the Zodiacal Sign. This point nowadays is near the head of Virgo."
+msgstr ""
+
+#. Description of Modern constellation Scorpion
+msgid ""
+"When Orion boasted to Artemis that he could kill every animal on earth, she sent the scorpion to kill Orion. Both were raised to the stars by Zeus and placed on opposite sides of the sky. \n"
+"\n"
+"The constellation's brightest star is *Antares*, the \"counter-Mars\", named after its reddish color. A fan of stars radiating towards the west further extend towards the scales which used to be its claws, and a long curved tail extends towards the south-east, ending in a conspicuous sting.\n"
+"\n"
+"Scorpius is host to a few fine globular clusters, M4 and M80, and several open star clusters. It covers some of the brightest parts of the Milky Way."
+msgstr ""
+
+#. Description of Modern constellation Archer
+msgid ""
+"_Sagittarius_, the Archer, is commonly depicted as centaur, half-man and half-horse. \n"
+"\n"
+"The Archer lies around the center of the Milky Way, therefore this area is rich with open and globular star clusters, bright and dark clouds. The bright Messier objects M8 (the Lagoon Nebula), M17 (the Omega Nebula) or M20 (the Trifid Nebula) are always worth a look, but there are more."
+msgstr ""
+
+#. Description of Modern constellation Capricornus
+msgid ""
+"The Sea-Goat constellation is of Babylonian origin and is depicted, as the name says, as \"having horns like a goat\", with the back of the body in shape of a fish tail. In antiquity it used to stand along the southernmost part of the ecliptic which defines the Tropic of Capricorn. Precession has meanwhile moved the stars a full sign to the west, so that the Zodiacal First point of Capricorn lies near the eastern edge of Sagittarius.\n"
+"\n"
+"Capricornus includes one bright globular cluster, Messier 30."
+msgstr ""
+
+#. Description of Modern constellation Water Bearer
+msgid ""
+"_Aquarius_, the Water Bearer goes back to the Babylonian god Ea, bringer of fresh water. It is commonly depicted as man pouring water from a water jar which arches down into the mouth of the Southern Fish.\n"
+"\n"
+"In 1846, Johann Galle discovered the planet Neptune close to where now we see the border to Capricornus.\n"
+"\n"
+"The Water Bearer hosts three Messier objects: the two globular clusters M2 and M72, and the open cluster M73. \n"
+"In addition, it shows two prominent planetary nebulae: The large Helix Nebula, and much smaller Saturn nebula."
+msgstr ""
+
+#. Description of Modern constellation Fishes
+msgid ""
+"The zodiacal constellation of _Pisces_, the Fishes, is located around where the Sun is on March equinox, the beginning of spring in the Northern hemisphere, a point commonly named the First Point of Aries. Since the time the Zodiac was defined as coordinate system of twelve zodiacal signs, the name-giving constellations have moved one full sign to the west by the precession of earth's axis. \n"
+"\n"
+"The two fishes are connected by a band of Babylonian origin. According to Hyginus, Aphrodite and Eros fled from the monster Typhon, jumped into the Euphrates river and were transformed into fishes. Ovid tells a similar story around their Roman counterparts, Venus and Cupid, who were not transformed, but saved by riding on the backs of two helpful fishes. In both stories the fishes are then placed into the sky, the band expressing their connectedness. \n"
+"\n"
+"The Fishes can be seen as two ovals of dim stars with a large V-shaped band knotted near the neck of Cetus. Its deep-sky highlight certainly is Messier 74, the Phantom Galaxy."
+msgstr ""
+
+#. Description of Modern constellation Water Snake
+msgid ""
+"_Hydra_, the Water Snake, is the largest of all constellations. Its origins go back to Babylonian times. The Greek mythology knows a story where Corvus, the Crow, was sent out with the Crater (the Cup) to fetch water for Apollo. The crow was distracted by a fig tree, the fruits of which it wanted to eat. When it finally returned, it brought a snake from the well, claiming it was the cause of the delay. Apollo, discovering the lie, threw Corvus, the Crater and Hydra into the sky.\n"
+"\n"
+"Hydra hosts three Messier objects: the Southern Pinwheel galaxy (M83), a globular cluster nearby (M68) and the open cluster M48. Furthermore, there is the Ghost of Jupiter planetary nebula, and many fainter galaxies."
+msgstr ""
+
+#. Description of Modern constellation Cup
+msgid ""
+"This is the cup, or _crater_, which was handed to Corvus, the crow, by "
+"Apollo to fetch water. When the crow finally returned with an excuse that a "
+"water snake caused its delay, Apollo did not believe the story and flung all"
+" three, Corvus, Crater and Hydra into the sky."
+msgstr ""
+
+#. Description of Modern constellation Crow
+msgid ""
+"_Corvus_, the crow, was sent out by Apollo to fetch water with Crater, the "
+"cup. When the crow finally returned with an excuse that a water snake caused"
+" its delay, Apollo did not believe the story and flung all three, Corvus, "
+"Crater and Hydra into the sky, arranging them so that the crow could not "
+"drink from the cup."
+msgstr ""
+
+#. Description of Modern constellation Northern Crown
+msgid ""
+"The Northern Crown, or _Corona Borealis_, commemorates the crest or similar bridal adornment of Ariadne, it was originally not a solid golden king's crown as shown here.  In one version of the legend, Dionysos gave a wreath to Ariadne, daughter of King Minos of Crete, who handed it over to Theseus as he went into the labyrinth to kill the Minotaur, and the wreath's light helped Theseus finding the way out again. Theseus took Ariadne to Naxos but abandoned her. Dionysos found and married her, throwing her bridal crown into the heavens.\n"
+"\n"
+"The Northern Crown features interesting variable stars: the cataclysmic variable T Coronae Borealis and the prototype R Coronae Borealis which occasionally drops by many magnitude in brightness, obscured by its own dust clouds."
+msgstr ""
+
+#. Description of Modern constellation Southern Crown
+msgid ""
+"The Southern Crown, or _Corona Australis_, should be seen more as wreath "
+"than as crown. It may belong to either Sagittarius or Centaurus. It can be "
+"seen as distinct ring of faint stars south of the \"Teapot\" asterism of "
+"Sagittarius."
+msgstr ""
+
+#. Description of Modern constellation Eagle
+msgid ""
+"Aquila is the Eagle which carried the thunderbolts of Zeus and was sent out to bring the pretty boy Ganymede to the Olymp to serve as cupbearer. In another context Ptolemy placed Antinoos, the deceased favourite of emperor Hadrian, among the stars beside the eagle. For the Romans it was _Vultur volans_, the flying vulture, as opposed to _vultur cadens_, their interpretation of Lyra.\n"
+"\n"
+"The main star, *Altair*, is one star of the famous Summer Triangle asterism, together with *Vega* in Lyra and *Deneb* in Cygnus. \n"
+"\n"
+"The Pioneer 11 space probe is heading towards &lambda; Aquilae, but don't hold your breath - it is expected to pass the star in about 4 million years."
+msgstr ""
+
+#. Description of Modern constellation Lyre
+msgid ""
+"According to Greek mythology, the young god Hermes stole a herd of Apollo's sacred cows. From a hollowed-out turtle shell and cow gut, he created the first _lyra_ which he gave to Apollo in compensation for the theft. The Greeks saw the constellation as commemorating the lyre of Orpheus, the famous singer. Later, the Roman author Hyginus saw the lyre of Theseus and connected it to nearby Hercules. Romans also saw _vultur cadens_ or the falling vulture, in contrast to _vultur volans_, our Aquila or Eagle.\n"
+"\n"
+"The brightest star *Vega* is of magnitude 0.0. It is one star of the famous Summer Triangle asterism, together with *Altair* in Aquila and *Deneb* in Cygnus.   The nearby star epsilon is the famous double-double star, two close double stars observable in one eyepiece field. On the other end of the lyre, the famous Ring Nebula (M57) can be seen. And don't forget to visit globular cluster M56."
+msgstr ""
+
+#. Description of Modern constellation Swan
+msgid ""
+"_Cygnus_, The Swan, is a large and conspicuous constellation right in the northern Milky Way. Its central part is also called Northern Cross, but its outstretched wing ends show the elegant curve of a large flying bird with long neck. In Greek mythology, it can be interpreted as one of several swans, among them Zeus who disguised himself as swan to seduce Leda, who then gave birth to the Twins, or Orpheus, who was transformed into a swan after his murder and placed into the sky next to his instrument, the lyre. In another interpretation, the three birds, Cygnus, the flying eagle or vulture (Aquila) and falling eagle or vulture (Lyra) could represent the Stymphalian birds which nearby Hercules had to fight as one of his twelve labours.\n"
+"\n"
+"The brightest star *Deneb* in its tail is one star of the famous Summer Triangle asterism, together with *Altair* in Aquila and *Vega* in Lyra. Deneb is one of the most luminous stars of its spectral class known. It is 2600 light years away. The Swan's head star, *Albireo* is a pretty color-contrast binary star, a bright orange star with a blue companion. &chi; Cygni is a Mira-type variable sometimes visible in the swan's neck.\n"
+"\n"
+"With its position right in the Milky Way, Cygnus hosts a multitude of star clusters and bright and dark nebulae. Famous examples are the North America Nebula and the Veil supernova remnant. The Milky Way itself is seen to be split by the Cygnus Rift, a dark molecule cloud."
+msgstr ""
+
+#. Description of Modern constellation Altar
+msgid ""
+"The Altar with offerings in fire and smoke is usually depicted with the smoke going to the south.\n"
+"\n"
+"The constellation lies along the Milky Way south of Scorpius and has rich star fields, including a large globular cluster."
+msgstr ""
+
+#. Description of Modern constellation Dolphin
+msgid ""
+"In a story told by Roman poet Ovid, the musician Arion was on a return voyage from a successful concert tour to Sicily and Italy. The crew of his ship envied his amassed fortunes and wanted to kill him. Arion was granted a last wish, and he started singing, then jumped into the sea where a dolphin had been attracted by his music. The dolphin brought him back to the shore, and was placed into the heavens with nine stars.\n"
+"\n"
+"The dolphin, or _Delphinus_, is a small but conspicuous shape between Aquila and Cygnus."
+msgstr ""
+
+#. Description of Modern constellation Eridanus
+msgid ""
+"The large constellation of the river Eridanus flows from its origin near *Rigel* in a winding curve towards the south. When Phaethon, son of Helios, failed to control his father's Sun wagon, Zeus had to throw a thunderbolt and Phaethon plunged burning into the Eridanus river.\n"
+"\n"
+"The brightest star *Archernar* is too far south to have been observed from the Mediterranean, so usually *Acamar* used to be the final observable star of the river."
+msgstr ""
+
+#. Description of Modern constellation Arrow
+msgid ""
+"The distinct Arrow, or _Sagitta_, is the third smallest constellation. It may be an arrow shot by Hercules against the Eagle devouring the liver of Prometheus, or against the Stymphalian birds (Cygnus, Aquila, Lyra).\n"
+"\n"
+"Its deep-sky highlight is the globular cluster Messier 71."
+msgstr ""
+
+#. Description of Modern constellation Southern Fish
+msgid ""
+"_Piscis Austrinus_, the Southern Fish, goes back to a Babylonian fish "
+"constellation. It may be parent to the two fishes of the zodiacal "
+"constellation of the Fishes. It is a mostly dim constellation. The only "
+"moderately bright star is *Fomalhaut*, the mouth of the fish, which is often"
+" drawn to swallow the water poured by Aquarius from his water jar."
+msgstr ""
+
+#. Description of Modern constellation Keel
+msgid ""
+"_Carina_, or the Keel of the Ship, is part of the antique constellation Argo, which commemorates the ship of Jason and the Argonauts who sailed to Kolchis in search of the Golden Fleece. \n"
+"\n"
+"In the 1750s, French astronomer Abbé Nicolas-Louis de la Caille proposed to break apart the huge Argo constellation and created three separate parts. The other parts are Vela, the sails, and Puppis, the stern. This decision was only finalized in 1930 when the International Astronomical Union decided about the official constellation borders.\n"
+"\n"
+"Its brightest star, *Canopus*, is the second brightest fixed star and lies close to the south pole of the ecliptic, and therefore is an important navigational star for interplanetary spacecraft.\n"
+"\n"
+"Three cross-like asterisms can be seen in Carina: The False Cross which in cloudy nights may have decepted navigators in search of the Southern Cross, the Diamond Cross, and the Shadow Cross. \n"
+"\n"
+"Carina lies along the Milky Way and therefore includes a multitude of deep-sky objects like star clusters and gas clouds. Most prominent is the region about eta Carinae, a star system with huge luminosity which from 1837 to the 1850s experienced a \"Great Eruption\", temporarily becoming the second-brightest star in the sky.  \n"
+"\n"
+"To the south of it we find the Southern Pleiades open star cluster."
+msgstr ""
+
+#. Description of Modern constellation Stern
+msgid ""
+"_Puppis_, the stern of the ship, is the largest part of the former constellation Argo. The other parts are Carina, the keel, and Vela, the sails. The Argo took Jason and the Argonauts to Kolchis in search of the Golden Fleece.\n"
+"\n"
+"Puppis lies along the Milky Way and contains several prominent open clusters. In the northern part we find three Messier clusters, M46, M47 and M93. The planetary nebula NGC2438 appears to lie inside M46, but is a foreground object."
+msgstr ""
+
+#. Description of Modern constellation Sails
+msgid ""
+"_Vela_ are the sails of the former constellation Argo. The other parts are Carina, the keel, and Puppis, the stern. The Argo took Jason and the Argonauts to Kolchis in search of the Golden Fleece.\n"
+"\n"
+"_Vela_ lies along the Milky Way and shows several intersting deep-sky objects. Most notably the Eight-Burst or Southern Ring Planetary Nebula, and the globular cluster NGC 3201."
+msgstr ""
+
+#. Description of Modern constellation Centaur
+msgid ""
+"According to Roman poet Ovid, the figure commemorates the centaur Chiron who had instructed Hercules and several other heroes. Chiron was accidentally poisoned by an arrow shot by Hercules. \n"
+"\n"
+"Centaurus is a large and conspicuous figure. The bright stars alpha and beta Centauri are commonly named \"Pointers\" as they indicate the Southern Cross which in antiquity were seen as the Centaur's hind legs.  Alpha is the nearest bright star and actually a multiple star system. One component is even closer to the Sun but only visible in telescopes: Proxima Centauri. Its light takes only 4.3 years to reach us. \n"
+"\n"
+"The large constellation lies along the Milky Way and therefore contains many open and several globular star clusters, most notably the largest in the sky, Omega Centauri."
+msgstr ""
+
+#. Description of Modern constellation Wolf
+msgid ""
+"_Lupus_, the Wolf, used to be an unspecified wild animal against which Centaurus was fighting, or, alternatively, a wineskin. \n"
+"\n"
+"In 1006, Lupus was host to the brightest supernova in written history."
+msgstr ""
+
+#. Description of Modern constellation Southern Cross
+msgid ""
+"Early European seafarers separated four conspicuous stars from the hind legs"
+" of Centaurus to form _Crux_, the Southern Cross. It was first published on "
+"a celestial globe from 1589 by Jacob van Langren and Petrus Plancius and was"
+" accepted as an important guide for navigation and also spiritual guidance."
+msgstr ""
+
+#. Description of Modern constellation Southern Triangle
+msgid ""
+"The simple constellation of _Triangulum Australe_ was introduced by Dutch-"
+"Flemish cartographer Petrus Plancius on a celestial globe published by Jacob"
+" van Langren in 1589."
+msgstr ""
+
+#. Description of Modern constellation Dove
+msgid ""
+"The Dove has been introduced by Dutch-Flemish cartographer Petrus Plancius in the early 1590s next to the great ship Argo. It represents the Dove returning to Noah with an olive branch, showing the end of the deluge.\n"
+"\n"
+"The constellation contains the Solar antapex, meaning the Solar system moves away from this direction."
+msgstr ""
+
+#. Description of Modern constellation Fly
+msgid ""
+"Originally this was introduced as _Apis_, the Bee, by Petrus Plancius on a "
+"celestial globe from 1598. Abbé de la Caille renamed it to its current name "
+"_Musca_, the Fly."
+msgstr ""
+
+#. Description of Modern constellation Bird of Paradise
+msgid ""
+"_Apus_, the Bird of Paradise, was introduced by Petrus Plancius on a "
+"celestial globe from 1598, based on observations by Pieter Dirkszoon Keyser "
+"and Frederick de Houtman."
+msgstr ""
+
+#. Description of Modern constellation Chameleon
+msgid ""
+"A _chamaeleon_ was introduced by Petrus Plancius on a celestial globe from "
+"1598, based on observations by Pieter Dirkszoon Keyser and Frederick de "
+"Houtman."
+msgstr ""
+
+#. Description of Modern constellation Swordfish
+msgid ""
+"_Dorado_ was introduced by Petrus Plancius on a celestial globe from 1598, "
+"based on observations by Pieter Dirkszoon Keyser and Frederick de Houtman. "
+"Usually translated as Goldfish, and later also named Swordfish, it was named"
+" after the Mahi-Mahi or dolphinfish, a predatory fish often hunting the "
+"Flying Fish that you can see nearby."
+msgstr ""
+
+#. Description of Modern constellation Flying Fish
+msgid ""
+"Early European seafarers reported swarms of fish flying out of the water to "
+"escape their predators. _Volans_, the Flying Fish, was introduced by Petrus "
+"Plancius on a celestial globe from 1598, based on observations by Pieter "
+"Dirkszoon Keyser and Frederick de Houtman. It is a common prey of the "
+"Doradus, or Goldfish. Both can be seen near Carina, the ship's keel of the "
+"old constellation Argo."
+msgstr ""
+
+#. Description of Modern constellation Crane
+msgid ""
+"The Crane, or _Grus_, is one of the four \"Southern Birds\" introduced by "
+"Petrus Plancius on a celestial globe from 1598, based on observations by "
+"Pieter Dirkszoon Keyser and Frederick de Houtman. The others are the "
+"Peacock, Phoenix, and the Toucan."
+msgstr ""
+
+#. Description of Modern constellation Peacock
+msgid ""
+"_Pavo_, the Peacock, is one of the four \"Southern Birds\" introduced by "
+"Petrus Plancius on a celestial globe from 1598, based on observations by "
+"Pieter Dirkszoon Keyser and Frederick de Houtman. The others are the Crane, "
+"Phoenix, and the Toucan."
+msgstr ""
+
+#. Description of Modern constellation Phoenix
+msgid ""
+"The Phoenix is the largest of the four \"Southern Birds\" introduced by "
+"Petrus Plancius on a celestial globe from 1598, based on observations by "
+"Pieter Dirkszoon Keyser and Frederick de Houtman. The others are the "
+"Peacock, the Crane, and the Toucan."
+msgstr ""
+
+#. Description of Modern constellation Toucan
+msgid ""
+"_Tucana_, the Toucan, is the smallest of the four \"Southern Birds\" "
+"introduced by Petrus Plancius on a celestial globe from 1598, based on "
+"observations by Pieter Dirkszoon Keyser and Frederick de Houtman. The others"
+" are the Peacock, Phoenix, and the Crane. Originating from a Dutch "
+"expedition to the East Indies, it actually shows a Hornbill, while the name "
+"was taken from the bird in the American Tropics."
+msgstr ""
+
+#. Description of Modern constellation Lesser Water Snake
+msgid ""
+"_Hydrus_, the Male, or Lesser Water Snake, was introduced by Petrus Plancius"
+" on a celestial globe from 1598, based on observations by Pieter Dirkszoon "
+"Keyser and Frederick de Houtman. It seems to continue the wiggle line formed"
+" by the Eridanus river. A line connecting its brightest star, beta, and the "
+"Southern Cross can guide you to the Southern Celestial Pole."
+msgstr ""
+
+#. Description of Modern constellation Indian
+msgid ""
+"The Indian, _Indus_, was introduced by Petrus Plancius on a celestial globe "
+"from 1598, based on observations by Pieter Dirkszoon Keyser and Frederick de"
+" Houtman made on a Dutch expedition to the Eastern Indies. It is therefore "
+"likely to show a native from the region called East India by the European "
+"discoverers, or South-Eastern Asia today."
+msgstr ""
+
+#. Description of Modern constellation Giraffe
+msgid ""
+"On a celestial globe from 1612, Flemish-Dutch cartographer Petrus Plancius "
+"introduced a few new constellations to fill the voids. One of them was this "
+"large but inconspicuous constellation of _Camelopardalis_, the Giraffe, "
+"between Ursa Major and Cassiopeia."
+msgstr ""
+
+#. Description of Modern constellation Unicorn
+msgid ""
+"The large but inconspicuous constellation of _Monoceros_, the Unicorn, between Orion and Canis Minor, made its first appearance on a celestial globe from 1612 by the Flemish-Dutch cartographer Petrus Plancius.\n"
+"\n"
+"While it does not have bright stars, telescope owners will like to visit a few fine open star clusters, and especially the Rosette Nebula."
+msgstr ""
+
+#. Description of Modern constellation Lynx
+msgid ""
+"The constellation of Lynx was introduced by Polish astronomer Jan Hevelius "
+"in the late 17th century. You need the eyes of a Lynx to see it."
+msgstr ""
+
+#. Description of Modern constellation Shield
+msgid ""
+"_Scutum_, the constellation of the shield, was introduced by Polish "
+"astronomer Jan Hevelius in the late 17th century to pay homage to his king, "
+"Jan Sobieski."
+msgstr ""
+
+#. Description of Modern constellation Fox
+msgid ""
+"Originally introduced as the constellation of _Vulpecula cum Ansere_, the Fox with the Goose, by Polish astronomer Jan Hevelius in the 17th century, nowadays we only see the little fox here. \n"
+"\n"
+"It is host to the famous Dumbbell planetary nebula, M27, and the Coathanger asterism, both visible in binoculars."
+msgstr ""
+
+#. Description of Modern constellation Lizard
+msgid ""
+"The constellation of _Lacerta_, the Lizard, was introduced by Polish "
+"astronomer Jan Hevelius in the late 17th century."
+msgstr ""
+
+#. Description of Modern constellation Sextant
+msgid ""
+"Polish astronomer Jan Hevelius placed the _sextans_, one of his "
+"observational instruments, into the sky in his atlas of 1687. This was not "
+"the mirror sextant later used for marine navigation!"
+msgstr ""
+
+#. Description of Modern constellation Air Pump
+msgid ""
+"The Air Pump, a scientific development of the 17th century, was formed as "
+"constellation _Antlia Pneumatica_ by French astronomer-geodesist Abbé "
+"Nicolas-Louis de la Caille in the mid-18th century."
+msgstr ""
+
+#. Description of Modern constellation Engraving Tool
+msgid ""
+"This dim and small constellation was introduced as _Caelum Sculptorium_ by "
+"French astronomer Abbé Nicolas-Louis de la Caille in the 1750s. It "
+"commemorates an engraver's chisel, an essential tool for mapmaking."
+msgstr ""
+
+#. Description of Modern constellation Drawing Compass
+msgid ""
+"French astronomer Abbé Nicolas-Louis de la Caille introduced _Circinus_, the"
+" Drawing Compass, to join Triangulum Australe and Norma as scientific "
+"instruments for geometrical construction."
+msgstr ""
+
+#. Description of Modern constellation Carpenter's Square
+msgid ""
+"A carpenter's square, helpful to draw right angles was important enough for "
+"Abbé Nicolas-Louis de la Caille to depict it as _Norma_ among his new "
+"constellations on the southern hemisphere, adjacent to other draughtsman's "
+"tools, Triangulum Australe and Circinus."
+msgstr ""
+
+#. Description of Modern constellation Furnace
+msgid ""
+"_Fornax_, a chemical oven was one of the scientific instruments placed into the southern sky by French astronomer Abbé Nicolas-Louis de la Caille. \n"
+"\n"
+"With only five stars brighter than 5th magnitude, it is better known for its richness in galaxies."
+msgstr ""
+
+#. Description of Modern constellation Clock
+msgid ""
+"In 1756, French astronomer Abbé Nicolas-Louis de la Caille placed "
+"_Horologium_, a pendulum clock with seconds hand, among the stars. An "
+"accurate clock of this kind was an important scientific instrument of his "
+"era, the Age of Enlightenment."
+msgstr ""
+
+#. Description of Modern constellation Microscope
+msgid ""
+"French astronomer Abbé Nicolas-Louis de la Caille created 14 new "
+"constellations in the southern sky in which he mostly commemorated "
+"scientific instruments of his time, the mid-18th century. _Microscopium_, "
+"the Microscope, just south of Capricornus, consists of dim stars only."
+msgstr ""
+
+#. Description of Modern constellation Telescope
+msgid ""
+"Next to the Microscope, French astronomer Abbé Nicolas-Louis de la Caille "
+"placed _Telescopium_ in his mid-17th century map which introduced 14 new "
+"constellations, mostly commemorating scientific instruments. In his own "
+"imagination it was a long-focal-length aerial telescope, but later the "
+"constellation was cut back to its present size. It has only seven stars "
+"brighter than magnitude 5."
+msgstr ""
+
+#. Description of Modern constellation Table Mountain
+msgid ""
+"French astronomer Abbé Nicolas-Louis de la Caille observed the southern sky "
+"in the mid-18th century from the Cape of Good Hope. He commemorated the "
+"Table Mountain in his constellation of _Mensa_, which includes the Large "
+"Magellanic Clound resembling the cloud \"table cloth\" frequently forming "
+"around the top of the mountain."
+msgstr ""
+
+#. Description of Modern constellation Octant
+msgid ""
+"The Octant was a tool for marine navigation, similar to the sextant, "
+"developed by John Hadley in 1730. In his series of constellations "
+"commemorating scientific instruments, French astronomer Abbé Nicolas-Louis "
+"de la Caille placed _Octans_ right next to the Southern Celestial Pole. It "
+"only shows dim stars."
+msgstr ""
+
+#. Description of Modern constellation Painter's Easel
+msgid ""
+"The full name of this constellation was _Equuleus Pictoris_, or the Painter's Easel, when French astronomer Abbé Nicolas-Louis de la Caille introduced it in the mid-18th century. The name was shortened to _Pictor_.\n"
+"\n"
+"In 1983, the IRAS Infrared Astronomical Satellite discovered a debris disk around the star Beta Pictoris. Later observations even showed two disks and several exoplanets."
+msgstr ""
+
+#. Description of Modern constellation Reticle
+msgid ""
+"A constellation _Rhombus_ had already been introduced in the early 17th "
+"century. More than a century later, French astronomer Abbé Nicolas-Louis de "
+"la Caille changed it to the present constellation of _Reticulum_, again "
+"commemorating a scientific instrument. The rhomboidal reticle, or net, was a"
+" device placed in the eyepiece's focal plane to allow more precise "
+"measurements."
+msgstr ""
+
+#. Description of Modern constellation Sculptor
+msgid ""
+"French astronomer Abbé Nicolas-Louis de la Caille created the _Apparatus Sculptoris_, the sculptor's studio in the 1750s, later shortened to Sculptor. \n"
+"\n"
+"While the constellation only hosts dim stars, deep-sky observers will enjoy galaxies: The Sculptor Galaxy (NGC 253), NGC 55 or even the Sculptor Dwarf galaxy."
+msgstr ""
+
+#. Description of Modern constellation Mariner Compass
+msgid ""
+"French astronomer Abbé Nicolas-Louis de la Caille created 14 new "
+"constellations in the southern sky in which he mostly commemorated "
+"scientific instruments of his time, the 18th century. _Pyxis_, the Mariner "
+"Compass, can be seen as a valuable addition to the old Ship Argo, which de "
+"la Caille has however broken up into three pieces: Carina (the keel), Vela "
+"(the sails), and Puppis (the stern)."
+msgstr ""
+
 #. Modern sky culture references section in markdown format
 msgid ""
 " - [#1]: Kunitzsch, P.; Smart T. (2006). \"A Dictionary of Modern star Names: A Short Guide to 254 Star Names and Their Derivations\" (2nd rev. ed.). Cambridge, MA: Sky Pub. ISBN 978-1-931559-44-7.\n"
@@ -6494,7 +7125,7 @@ msgstr ""
 
 #. Modern (IAU) sky culture references section in markdown format
 msgid ""
-" - [#1]: [The Constellations](https://www.iau.org/public/themes/constellations/)\n"
+" - [#1]: [The Constellations](https://iauarchive.eso.org/public/themes/constellations/)\n"
 " - [#2]: [IAU Catalog of Star Names (IAU-CSN)](https://exopla.net/star-names/modern-iau-star-names/)\n"
 " - [#3]: [Uranometria 2000.0 Deep Sky Field Guide. ISBN: 0-943396-73-5](https://shopatsky.com/products/uranometria-2000-0-atlas-deep-sky-field-guide)\n"
 " - [#4]: Delporte, Eugene (1930). \"Delimitation scientifique des constellations (tables et cartes)\". Cambridge.\n"
