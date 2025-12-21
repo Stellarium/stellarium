@@ -13,6 +13,16 @@ Just to let you know, this unique sky culture is not related to the historical j
 
 The purpose of creating this sky culture is to attract more children—especially in China and East Asia—to learn about constellations. Journey to the West holds greater influence in these regions than Greek mythology, and the author hopes it will enhance beginners' interest and memorization, much like how H. A. Rey used imaginative constellation lines and English labels to make the stars more accessible.
 
+## Description
+
+![](illustrations/chart.png)
+
+If you wish to learn more about the *Journey to the West* sky culture or to own a beautifully illustrated constellation map based on the story, we highly recommend the books and celestial charts authored and illustrated by **Xu Gang**.
+
+https://item.jd.com/14924220.html
+
+https://item.jd.com/14406961.html
+
 ## Constellations
 
 ##### Yellow Wind Monster
@@ -506,16 +516,6 @@ A jade seal used to stamp the Travel Rescript (passport).
 Corresponding to the modern constellations *Carina, Puppis, Vela*.
 
 A 1,300-year-old turtle that carried the pilgrims across the Tongtian River.
-
-## Description
-
-![](illustrations/chart.png)
-
-If you wish to learn more about the *Journey to the West* sky culture or to own a beautifully illustrated constellation map based on the story, we highly recommend the books and celestial charts authored and illustrated by **Xu Gang**.
-
-https://item.jd.com/14924220.html
-
-https://item.jd.com/14406961.html
 
 ## References
 
