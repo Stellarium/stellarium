@@ -1,4 +1,4 @@
-# Indian Nakshatras
+# Indian (Nakshatras)
 
 ## Introduction
 

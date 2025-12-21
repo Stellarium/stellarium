@@ -1,4 +1,4 @@
-# Modern Journey to the West
+# Modern (Journey to the West)
 
 ## Introduction
 
