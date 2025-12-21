@@ -31,7 +31,8 @@ Considering that some parts of the zodiac are not visible at all throughout the 
 ### Milky Way
 
 In this model, the Milky Way serves as the embodiment of the world tree Yggdrasil. This ash tree is the largest and best of all trees, and its branches spread across the entire world (Sturluson 2017 [#8], p. 28). It has three roots, and beneath each one is a spring. Several literary scholars believe that locating Yggdrasil in the sky would be useful for understanding the topography of the Eddic myths. However, this is contradicted by the description of animals living in the tree (Lorenz 1984 [#5], p. 241). If we assume that the animals mentioned, such as squirrels and eagles, are also celestial objects/ constellations, then Yggdrasil forms a super-constellation containing these constellations, and equating it with the Milky Way becomes rather inevitable. Sigurdson (2022) [#7] and Jonsson (1994) [#3] also believe that this translucent white tree in the sky should be understood as a mythical analogue of the Milky Way (Sigurdson 2022 [#7], p. 238). 
-<p><img width="800" src="illustrations/MilkyWay_Edda.png"/></p>
+
+![](illustrations/MilkyWay_Edda.png)
 
 ## Constellations
 
