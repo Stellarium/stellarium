@@ -1636,21 +1636,26 @@ QString hoursToNarration(const float hours, const bool minutesOnly)
 
 QString narrateDecimal(double num, int decimals)
 {
-	bool isNegative = (num<0);
-	QString numStr=QString::number(fabs(num), 'f', decimals);
-	QStringList numList = numStr.split('.');
-	Q_ASSERT(numList.length()<3);
-	QString res;
-	if (isNegative)
-		res.append(q_("minus") + " ");
-	res.append(numList.constFirst());
-	if (numList.length()>1)
+	QString lang=StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	if (lang=="de") // TODO: Which other languages use comma or other non-C-locale formulation when speaking?
 	{
-		res.append(" " + qc_("point", "decimal separator") + " ");
-		for (QChar c: numList.at(1))
-			res.append(QString(c) + " ");
+		bool isNegative = (num<0);
+		QString numStr=QString::number(fabs(num), 'f', decimals);
+		QStringList numList = numStr.split('.');
+		Q_ASSERT(numList.length()<3);
+		QString res;
+		if (isNegative)
+			res.append(q_("minus") + " ");
+		res.append(numList.constFirst());
+		if (numList.length()>1)
+		{
+			res.append(" " + qc_("point", "decimal separator") + " ");
+			for (QChar c: numList.at(1))
+				res.append(QString(c) + " ");
+		}
+		return res;
 	}
-	return res;
+	else return QString::number(num, 'f', decimals);
 }
 
 
