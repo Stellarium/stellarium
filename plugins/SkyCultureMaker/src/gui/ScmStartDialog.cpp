@@ -65,11 +65,9 @@ void ScmStartDialog::retranslate()
 void ScmStartDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	ui->welcomeLabel->setText(q_("Welcome to the Sky Culture Maker!"));
 
-	// SCM just after merge creates misformatted description.md. For now, inform the feature testers.
-	ui->welcomeLabel->setText(QString("%1<br/><bold>%2</bold>").arg(q_("Welcome to the Sky Culture Maker!"), q_("Note: Test only. The result does not yet comply to Stellarium's formatting rules.")));
-
-	// connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmStartDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmStartDialog::handleFontChanged);
 
