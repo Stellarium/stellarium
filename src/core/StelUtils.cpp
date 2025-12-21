@@ -1636,28 +1636,12 @@ QString hoursToNarration(const float hours, const bool minutesOnly)
 
 QString narrateDecimal(double num, int decimals)
 {
+	QString numStr=QString::number(fabs(num), 'f', decimals);
 	QString lang=StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	if (lang=="de") // TODO: Which other languages use comma or other non-C-locale formulation when speaking?
-	{
-		bool isNegative = (num<0);
-		QString numStr=QString::number(fabs(num), 'f', decimals);
-		QStringList numList = numStr.split('.');
-		Q_ASSERT(numList.length()<3);
-		QString res;
-		if (isNegative)
-			res.append(q_("minus") + " ");
-		res.append(numList.constFirst());
-		if (numList.length()>1)
-		{
-			res.append(" " + qc_("point", "decimal separator") + " ");
-			for (QChar c: numList.at(1))
-				res.append(QString(c) + " ");
-		}
-		return res;
-	}
-	else return QString::number(num, 'f', decimals);
+		numStr=numStr.replace('.', ',');
+	return numStr;
 }
-
 
 //! The method to splitting the text by substrings by some limit of string length
 QString wrapText(const QString& s, const int limit)
