@@ -18,6 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
@@ -354,7 +355,9 @@ void Constellation::setNarration(const QString &narration)
 QString Constellation::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
 	Q_UNUSED(flags)
-	QString toBeSpoken=narration;
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
+
+	QString toBeSpoken=trans.qtranslate(narration);
 	// Strip away markdown elements like underscores or stars.
 	static const QRegularExpression latin("_([^_]{0,50})_");
 	static const QRegularExpression star("\\*([^\\*]{0,50})\\*");
