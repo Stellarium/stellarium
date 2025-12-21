@@ -16,6 +16,7 @@
 # Andika Triwidada <andika@gmail.com>, 2022
 # Anahdraw Naidra, 2023
 # Hariyadi Putraga <hariyadiputraga@gmail.com>, 2025
+# Ruslan Kabatsaev, 2025
 # Mukhammad Reza, 2025
 # 
 #, fuzzy
@@ -23,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-06 21:26+0700\n"
+"POT-Creation-Date: 2025-12-10 07:28+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Mukhammad Reza, 2025\n"
 "Language-Team: Indonesian (https://app.transifex.com/stellarium/teams/80998/id/)\n"
@@ -4253,7 +4254,7 @@ msgstr "Konstelasi IAU"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/StelObject.cpp:995 src/translations.h:59
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:475
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:518
 msgid "Constellations"
 msgstr "Rasi Bintang"
 
@@ -11417,6 +11418,706 @@ msgstr "Tamp&ilkan berkas tersembunyi"
 msgid "Search"
 msgstr "Cari"
 
+#: src/translations.h:895
+msgctxt "IAU constellation name"
+msgid "Andromeda"
+msgstr "Andromeda"
+
+#: src/translations.h:896
+msgctxt "IAU constellation name"
+msgid "Antlia"
+msgstr ""
+
+#: src/translations.h:897
+msgctxt "IAU constellation name"
+msgid "Apus"
+msgstr ""
+
+#: src/translations.h:898
+msgctxt "IAU constellation name"
+msgid "Aquila"
+msgstr ""
+
+#: src/translations.h:899
+msgctxt "IAU constellation name"
+msgid "Aquarius"
+msgstr ""
+
+#: src/translations.h:900
+msgctxt "IAU constellation name"
+msgid "Ara"
+msgstr ""
+
+#: src/translations.h:901
+msgctxt "IAU constellation name"
+msgid "Aries"
+msgstr ""
+
+#: src/translations.h:902
+msgctxt "IAU constellation name"
+msgid "Auriga"
+msgstr ""
+
+#: src/translations.h:903
+msgctxt "IAU constellation name"
+msgid "Bootes"
+msgstr ""
+
+#: src/translations.h:904
+msgctxt "IAU constellation name"
+msgid "Canis Major"
+msgstr ""
+
+#: src/translations.h:905
+msgctxt "IAU constellation name"
+msgid "Canis Minor"
+msgstr ""
+
+#: src/translations.h:906
+msgctxt "IAU constellation name"
+msgid "Caelum"
+msgstr ""
+
+#: src/translations.h:907
+msgctxt "IAU constellation name"
+msgid "Camelopardalis"
+msgstr ""
+
+#: src/translations.h:908
+msgctxt "IAU constellation name"
+msgid "Capricornus"
+msgstr "Capricornus"
+
+#: src/translations.h:909
+msgctxt "IAU constellation name"
+msgid "Carina"
+msgstr ""
+
+#: src/translations.h:910
+msgctxt "IAU constellation name"
+msgid "Cassiopeia"
+msgstr "Cassiopeia"
+
+#: src/translations.h:911
+msgctxt "IAU constellation name"
+msgid "Centaurus"
+msgstr ""
+
+#: src/translations.h:912
+msgctxt "IAU constellation name"
+msgid "Cepheus"
+msgstr "Cepheus"
+
+#: src/translations.h:913
+msgctxt "IAU constellation name"
+msgid "Cetus"
+msgstr ""
+
+#: src/translations.h:914
+msgctxt "IAU constellation name"
+msgid "Chamaeleon"
+msgstr ""
+
+#: src/translations.h:915
+msgctxt "IAU constellation name"
+msgid "Circinus"
+msgstr ""
+
+#: src/translations.h:916
+msgctxt "IAU constellation name"
+msgid "Cancer"
+msgstr ""
+
+#: src/translations.h:917
+msgctxt "IAU constellation name"
+msgid "Columba"
+msgstr ""
+
+#: src/translations.h:918
+msgctxt "IAU constellation name"
+msgid "Coma Berenices"
+msgstr ""
+
+#: src/translations.h:919
+msgctxt "IAU constellation name"
+msgid "Corona Australis"
+msgstr ""
+
+#: src/translations.h:920
+msgctxt "IAU constellation name"
+msgid "Corona Borealis"
+msgstr ""
+
+#: src/translations.h:921
+msgctxt "IAU constellation name"
+msgid "Crater"
+msgstr ""
+
+#: src/translations.h:922
+msgctxt "IAU constellation name"
+msgid "Crux"
+msgstr ""
+
+#: src/translations.h:923
+msgctxt "IAU constellation name"
+msgid "Corvus"
+msgstr ""
+
+#: src/translations.h:924
+msgctxt "IAU constellation name"
+msgid "Canes Venatici"
+msgstr ""
+
+#: src/translations.h:925
+msgctxt "IAU constellation name"
+msgid "Cygnus"
+msgstr ""
+
+#: src/translations.h:926
+msgctxt "IAU constellation name"
+msgid "Delphinus"
+msgstr ""
+
+#: src/translations.h:927
+msgctxt "IAU constellation name"
+msgid "Dorado"
+msgstr ""
+
+#: src/translations.h:928
+msgctxt "IAU constellation name"
+msgid "Draco"
+msgstr ""
+
+#: src/translations.h:929
+msgctxt "IAU constellation name"
+msgid "Equuleus"
+msgstr ""
+
+#: src/translations.h:930
+msgctxt "IAU constellation name"
+msgid "Eridanus"
+msgstr "Eridanus"
+
+#: src/translations.h:931
+msgctxt "IAU constellation name"
+msgid "Fornax"
+msgstr ""
+
+#: src/translations.h:932
+msgctxt "IAU constellation name"
+msgid "Gemini"
+msgstr ""
+
+#: src/translations.h:933
+msgctxt "IAU constellation name"
+msgid "Grus"
+msgstr ""
+
+#: src/translations.h:934
+msgctxt "IAU constellation name"
+msgid "Hercules"
+msgstr "Hercules"
+
+#: src/translations.h:935
+msgctxt "IAU constellation name"
+msgid "Horologium"
+msgstr ""
+
+#: src/translations.h:936
+msgctxt "IAU constellation name"
+msgid "Hydra"
+msgstr ""
+
+#: src/translations.h:937
+msgctxt "IAU constellation name"
+msgid "Hydrus"
+msgstr ""
+
+#: src/translations.h:938
+msgctxt "IAU constellation name"
+msgid "Indus"
+msgstr ""
+
+#: src/translations.h:939
+msgctxt "IAU constellation name"
+msgid "Leo Minor"
+msgstr ""
+
+#: src/translations.h:940
+msgctxt "IAU constellation name"
+msgid "Lacerta"
+msgstr ""
+
+#: src/translations.h:941
+msgctxt "IAU constellation name"
+msgid "Leo"
+msgstr ""
+
+#: src/translations.h:942
+msgctxt "IAU constellation name"
+msgid "Lepus"
+msgstr ""
+
+#: src/translations.h:943
+msgctxt "IAU constellation name"
+msgid "Libra"
+msgstr ""
+
+#: src/translations.h:944
+msgctxt "IAU constellation name"
+msgid "Lupus"
+msgstr ""
+
+#: src/translations.h:945
+msgctxt "IAU constellation name"
+msgid "Lynx"
+msgstr "Lynx"
+
+#: src/translations.h:946
+msgctxt "IAU constellation name"
+msgid "Lyra"
+msgstr ""
+
+#: src/translations.h:947
+msgctxt "IAU constellation name"
+msgid "Mensa"
+msgstr ""
+
+#: src/translations.h:948
+msgctxt "IAU constellation name"
+msgid "Microscopium"
+msgstr ""
+
+#: src/translations.h:949
+msgctxt "IAU constellation name"
+msgid "Monoceros"
+msgstr ""
+
+#: src/translations.h:950
+msgctxt "IAU constellation name"
+msgid "Musca"
+msgstr ""
+
+#: src/translations.h:951
+msgctxt "IAU constellation name"
+msgid "Norma"
+msgstr ""
+
+#: src/translations.h:952
+msgctxt "IAU constellation name"
+msgid "Octans"
+msgstr ""
+
+#: src/translations.h:953
+msgctxt "IAU constellation name"
+msgid "Ophiuchus"
+msgstr ""
+
+#: src/translations.h:954
+msgctxt "IAU constellation name"
+msgid "Orion"
+msgstr "Orion"
+
+#: src/translations.h:955
+msgctxt "IAU constellation name"
+msgid "Pavo"
+msgstr ""
+
+#: src/translations.h:956
+msgctxt "IAU constellation name"
+msgid "Pegasus"
+msgstr "Pegasus"
+
+#: src/translations.h:957
+msgctxt "IAU constellation name"
+msgid "Perseus"
+msgstr "Perseus"
+
+#: src/translations.h:958
+msgctxt "IAU constellation name"
+msgid "Phoenix"
+msgstr "Phoenix"
+
+#: src/translations.h:959
+msgctxt "IAU constellation name"
+msgid "Pictor"
+msgstr ""
+
+#: src/translations.h:960
+msgctxt "IAU constellation name"
+msgid "Piscis Austrinus"
+msgstr ""
+
+#: src/translations.h:961
+msgctxt "IAU constellation name"
+msgid "Pisces"
+msgstr ""
+
+#: src/translations.h:962
+msgctxt "IAU constellation name"
+msgid "Puppis"
+msgstr ""
+
+#: src/translations.h:963
+msgctxt "IAU constellation name"
+msgid "Pyxis"
+msgstr ""
+
+#: src/translations.h:964
+msgctxt "IAU constellation name"
+msgid "Reticulum"
+msgstr ""
+
+#: src/translations.h:965
+msgctxt "IAU constellation name"
+msgid "Sculptor"
+msgstr "Sculptor"
+
+#: src/translations.h:966
+msgctxt "IAU constellation name"
+msgid "Scorpius"
+msgstr ""
+
+#: src/translations.h:967
+msgctxt "IAU constellation name"
+msgid "Scutum"
+msgstr ""
+
+#: src/translations.h:968
+msgctxt "IAU constellation name"
+msgid "Serpens"
+msgstr ""
+
+#: src/translations.h:969
+msgctxt "IAU constellation name"
+msgid "Sextans"
+msgstr ""
+
+#: src/translations.h:970
+msgctxt "IAU constellation name"
+msgid "Sagitta"
+msgstr ""
+
+#: src/translations.h:971
+msgctxt "IAU constellation name"
+msgid "Sagittarius"
+msgstr ""
+
+#: src/translations.h:972
+msgctxt "IAU constellation name"
+msgid "Taurus"
+msgstr ""
+
+#: src/translations.h:973
+msgctxt "IAU constellation name"
+msgid "Telescopium"
+msgstr ""
+
+#: src/translations.h:974
+msgctxt "IAU constellation name"
+msgid "Triangulum Australe"
+msgstr ""
+
+#: src/translations.h:975
+msgctxt "IAU constellation name"
+msgid "Triangulum"
+msgstr ""
+
+#: src/translations.h:976
+msgctxt "IAU constellation name"
+msgid "Tucana"
+msgstr ""
+
+#: src/translations.h:977
+msgctxt "IAU constellation name"
+msgid "Ursa Major"
+msgstr ""
+
+#: src/translations.h:978
+msgctxt "IAU constellation name"
+msgid "Ursa Minor"
+msgstr ""
+
+#: src/translations.h:979
+msgctxt "IAU constellation name"
+msgid "Vela"
+msgstr ""
+
+#: src/translations.h:980
+msgctxt "IAU constellation name"
+msgid "Virgo"
+msgstr ""
+
+#: src/translations.h:981
+msgctxt "IAU constellation name"
+msgid "Volans"
+msgstr ""
+
+#: src/translations.h:982
+msgctxt "IAU constellation name"
+msgid "Vulpecula"
+msgstr ""
+
+#: src/translations.h:983
+msgctxt "Nebula narration"
+msgid "a Galaxy"
+msgstr ""
+
+#: src/translations.h:984
+msgctxt "Nebula narration"
+msgid "an Active galaxy"
+msgstr ""
+
+#: src/translations.h:985
+msgctxt "Nebula narration"
+msgid "a Radio galaxy"
+msgstr ""
+
+#: src/translations.h:986
+msgctxt "Nebula narration"
+msgid "an Interacting galaxy"
+msgstr ""
+
+#: src/translations.h:987
+msgctxt "Nebula narration"
+msgid "a Quasar"
+msgstr ""
+
+#: src/translations.h:988
+msgctxt "Nebula narration"
+msgid "a Star cluster"
+msgstr ""
+
+#: src/translations.h:989
+msgctxt "Nebula narration"
+msgid "an Open star cluster"
+msgstr ""
+
+#: src/translations.h:990
+msgctxt "Nebula narration"
+msgid "a Globular star cluster"
+msgstr ""
+
+#: src/translations.h:991
+msgctxt "Nebula narration"
+msgid "a Stellar association"
+msgstr ""
+
+#: src/translations.h:992
+msgctxt "Nebula narration"
+msgid "a Star cloud"
+msgstr ""
+
+#: src/translations.h:993
+msgctxt "Nebula narration"
+msgid "A nebula"
+msgstr ""
+
+#: src/translations.h:994
+msgctxt "Nebula narration"
+msgid "a Planetary nebula"
+msgstr ""
+
+#: src/translations.h:995
+msgctxt "Nebula narration"
+msgid "a Dark Nebula"
+msgstr ""
+
+#: src/translations.h:996
+msgctxt "Nebula narration"
+msgid "a Reflection nebula"
+msgstr ""
+
+#: src/translations.h:997
+msgctxt "Nebula narration"
+msgid "a Bipolar nebula"
+msgstr ""
+
+#: src/translations.h:998
+msgctxt "Nebula narration"
+msgid "an emission nebula"
+msgstr ""
+
+#: src/translations.h:999
+msgctxt "Nebula narration"
+msgid "a cluster associated with nebulosity"
+msgstr ""
+
+#: src/translations.h:1000
+msgctxt "Nebula narration"
+msgid "an H two region"
+msgstr ""
+
+#: src/translations.h:1001
+msgctxt "Nebula narration"
+msgid "a Supernova remnant"
+msgstr ""
+
+#: src/translations.h:1002
+msgctxt "Nebula narration"
+msgid "Interstellar matter"
+msgstr ""
+
+#: src/translations.h:1003
+msgctxt "Nebula narration"
+msgid "an Emission object"
+msgstr ""
+
+#: src/translations.h:1004
+msgctxt "Nebula narration"
+msgid "a BL Lacertae object"
+msgstr ""
+
+#: src/translations.h:1005
+msgctxt "Nebula narration"
+msgid "a Blazar"
+msgstr ""
+
+#: src/translations.h:1006
+msgctxt "Nebula narration"
+msgid "a Molecular Cloud"
+msgstr ""
+
+#: src/translations.h:1007
+msgctxt "Nebula narration"
+msgid "a Young Stellar Object"
+msgstr ""
+
+#: src/translations.h:1008
+msgctxt "Nebula narration"
+msgid "a Possible Quasar"
+msgstr ""
+
+#: src/translations.h:1009
+msgctxt "Nebula narration"
+msgid "a Possible Planetary Nebula"
+msgstr ""
+
+#: src/translations.h:1010
+msgctxt "Nebula narration"
+msgid "a Protoplanetary Nebula"
+msgstr ""
+
+#: src/translations.h:1011
+msgctxt "Nebula narration"
+msgid "a Star"
+msgstr ""
+
+#: src/translations.h:1012
+msgctxt "Nebula narration"
+msgid "a Symbiotic Star"
+msgstr ""
+
+#: src/translations.h:1013
+msgctxt "Nebula narration"
+msgid "an Emission-line Star"
+msgstr ""
+
+#: src/translations.h:1014
+msgctxt "Nebula narration"
+msgid "a Supernova Candidate"
+msgstr ""
+
+#: src/translations.h:1015
+msgctxt "Nebula narration"
+msgid "a Supernova Remnant Candidate"
+msgstr ""
+
+#: src/translations.h:1016
+msgctxt "Nebula narration"
+msgid "a cluster of Galaxies"
+msgstr ""
+
+#: src/translations.h:1017
+msgctxt "Nebula narration"
+msgid "a part of a Galaxy"
+msgstr ""
+
+#: src/translations.h:1018
+msgctxt "Nebula narration"
+msgid "a region of the sky"
+msgstr ""
+
+#: src/translations.h:1019
+msgctxt "Nebula narration"
+msgid "an object of unknown type"
+msgstr ""
+
+#: src/translations.h:1020
+msgctxt "object narration"
+msgid "a star"
+msgstr ""
+
+#: src/translations.h:1021
+msgctxt "object narration"
+msgid "a major planet"
+msgstr ""
+
+#: src/translations.h:1022
+msgctxt "object narration"
+msgid "a planet moon"
+msgstr ""
+
+#: src/translations.h:1023
+msgctxt "object narration"
+msgid "an observer"
+msgstr ""
+
+#: src/translations.h:1024
+msgctxt "object narration"
+msgid "an artificial object"
+msgstr ""
+
+#: src/translations.h:1025
+msgctxt "object narration"
+msgid "an asteroid"
+msgstr ""
+
+#: src/translations.h:1026
+msgctxt "object narration"
+msgid "a plutino"
+msgstr ""
+
+#: src/translations.h:1027
+msgctxt "object narration"
+msgid "a comet"
+msgstr ""
+
+#: src/translations.h:1028
+msgctxt "object narration"
+msgid "a dwarf planet"
+msgstr ""
+
+#: src/translations.h:1029
+msgctxt "object narration"
+msgid "a cubewano"
+msgstr ""
+
+#: src/translations.h:1030
+msgctxt "object narration"
+msgid "a scattered disc object"
+msgstr ""
+
+#: src/translations.h:1031
+msgctxt "object narration"
+msgid "an Oort Cloud Object"
+msgstr ""
+
+#: src/translations.h:1032
+msgctxt "object narration"
+msgid "a sednoid"
+msgstr ""
+
+#: src/translations.h:1033
+msgctxt "object narration"
+msgid "an interstellar object"
+msgstr ""
+
+#: src/translations.h:1034
+msgctxt "object narration"
+msgid "an object of undefined type"
+msgstr ""
+
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Africa
 #: src/translations_regions.h:33
@@ -13225,7 +13926,7 @@ msgid "View"
 msgstr "Tilikan"
 
 #: src/ui_viewDialog.h:3864 src/ui_viewDialog.h:3885
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:492
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:535
 msgid "Sky"
 msgstr "Langit"
 
@@ -15753,7 +16454,8 @@ msgstr "Beralih ke lanskap baru setelah terpasang"
 
 #: src/ui_addRemoveLandscapesDialog.h:234
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:236
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:479
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:522
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:552
 msgid "Remove"
 msgstr "Hapus"
 
@@ -18427,7 +19129,7 @@ msgid "Pixel grid feature"
 msgstr "Fitur kisi piksel"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:639
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:482
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:525
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "Ringkasan"
@@ -18826,6 +19528,7 @@ msgstr "Umum"
 #: plugins/Oculars/src/ui_ocularDialog.h:1544
 #: plugins/Oculars/src/ui_ocularDialog.h:1563
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:549
 msgid "Add"
 msgstr "Tambah"
 
@@ -20905,7 +21608,7 @@ msgid "Add communication data"
 msgstr "Tambah data komunikasi"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:126
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:512
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:559
 msgid "Description"
 msgstr "Deskripsi"
 
@@ -25713,29 +26416,39 @@ msgid ""
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
+"Fortitudo adalah bahasa Latin untuk <em>ketabahan</em>. Ketabahan berarti "
+"kekuatan emosional dan mental dalam menghadapi kesulitan, sebagaimana "
+"diwujudkan oleh elang (diwakili oleh konstelasi Aquila)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:392
 msgid ""
 "Historians largely believe that the Albanians are descendants of the "
 "Illyrians, a term Albanians proudly call themselves."
 msgstr ""
+"Sejarawan sebagian besar percaya bahwa orang Albania adalah keturunan "
+"Illyrian, istilah yang dengan bangga disematkan orang Albania pada diri "
+"mereka sendiri."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:393
 msgid ""
 "Arber is the term for the inhabitants of Albania during the middle ages."
-msgstr ""
+msgstr "Arber adalah istilah untuk penduduk Albania selama abad pertengahan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:394
 msgid ""
 "Hoggar is the name of the main mountain range in the Sahara Desert in "
 "southern Algeria."
 msgstr ""
+"Hoggar adalah nama dari rangkaian pegunungan utama di Gurun Sahara di "
+"Aljazair selatan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:395
 msgid ""
 "Tassili is a UNESCO World Heritage Site situated in the Sahara Desert and is"
 " renowned for its prehistoric cave art and scenic geological formations."
 msgstr ""
+"Tassili adalah Situs Warisan Dunia UNESCO yang terletak di Gurun Sahara dan "
+"terkenal karena seni gua prasejarah dan formasi geologi yang indah."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
 msgid ""
@@ -25744,6 +26457,10 @@ msgid ""
 " primitive solar calendar and reference point for shepherds and early "
 "inhabitants of Andorra."
 msgstr ""
+"Arcalis adalah puncak terkenal di utara Andorra, di mana Matahari melewati "
+"lubang di gunung dua kali setahun pada tanggal yang ditetapkan. Itu "
+"digunakan sebagai kalender surya primitif dan titik acuan bagi para "
+"penggembala dan penduduk awal Andorra."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:397
 msgid ""
@@ -25752,18 +26469,28 @@ msgid ""
 "of Andorra. It is the main part of the Madriu-Perafita-Claror UNESCO World "
 "Heritage Site."
 msgstr ""
+"Madriu (Mare del riu dalam bahasa Catalan, Ibu Sungai dalam bahasa Inggris) "
+"adalah nama dari lembah glasial dan sungai yang mengalir melaluinya di "
+"tenggara Andorra. Ini adalah bagian utama dari Situs Warisan Dunia UNESCO "
+"Madriu-Perafita-Claror."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
 msgid ""
 "Nosaxa means spring in the Moqoit language. The word comes from a "
 "combination of nosahuec, which means renew, and ñaaxa, which means year."
 msgstr ""
+"Nosaxa berarti musim semi dalam bahasa Moqoit. Kata tersebut berasal dari "
+"kombinasi nosahuec, yang berarti memperbaharui, dan ñaaxa, yang berarti "
+"tahun."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:399
 msgid ""
 "Naqaỹa means brother-family-relative in the Moqoit language and leads us to "
 "call all humans, indigenous or non-indigenous, brother."
 msgstr ""
+"Naqaỹa berarti saudara-keluarga-kerabat dalam bahasa Moqoit dan mengarahkan "
+"kita untuk memanggil semua manusia, pribumi atau non-pribumi, sebagai "
+"saudara."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:400
 msgid ""
@@ -25771,6 +26498,10 @@ msgid ""
 "stretch that interrupts the limestone and rocky terrace along the coast. Its"
 " shallow clear Caribbean waters make it a popular snorkelling spot."
 msgstr ""
+"Malmok adalah nama pribumi yang diberikan untuk pantai di Aruba dengan "
+"bentangan pasir sempit yang menyela teras batu kapur dan berbatu di "
+"sepanjang pantai. Perairannya yang dangkal dan jernih di Karibia "
+"menjadikannya tempat snorkeling yang populer."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:401
 msgid ""
@@ -25778,26 +26509,34 @@ msgid ""
 "in Arikok National Park along the northeast coast of Aruba. It is named "
 "after Plantation Prins where coconuts are cultivated."
 msgstr ""
+"Boca Prins adalah pantai terpencil dengan bukit pasir putih dan pemandangan "
+"ikonik yang terletak di Taman Nasional Arikok di sepanjang pantai timur laut"
+" Aruba. Itu dinamai dari Plantasi Prins tempat kelapa dibudidayakan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:402
 msgid "Bubup is the Boonwurrung word for child."
-msgstr ""
+msgstr "Bubup adalah kata Boonwurrung untuk anak."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:403
 msgid "YanYan is the Boonwurrung word for boy."
-msgstr ""
+msgstr "YanYan adalah kata Boonwurrung untuk anak laki-laki."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:404
 msgid ""
 "Franz is a character in the movie 'Sissi' embodying an emperor of Austria in"
 " the XIXth century. The role is played by the actor Karlheinz Böhm."
 msgstr ""
+"Franz adalah karakter dalam film 'Sissi' yang mewujudkan seorang kaisar "
+"Austria pada abad ke-XIX. Peran tersebut dimainkan oleh aktor Karlheinz "
+"Böhm."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:405
 msgid ""
 "Sissi is a character in the movie 'Sissi', who is married with Franz. The "
 "role is played by the actress Romy Schneider."
 msgstr ""
+"Sissi adalah karakter dalam film 'Sissi', yang menikah dengan Franz. Peran "
+"tersebut dimainkan oleh aktris Romy Schneider."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:406
 msgid ""
@@ -25806,6 +26545,10 @@ msgid ""
 "and Nizami and was well educated and talented and played numerous musical "
 "instruments."
 msgstr ""
+"Mahsati Ganjavi (1089–1159) adalah salah satu bintang paling terang yang "
+"bersinar dari puisi Azerbaijan. Dia dikatakan terkait dengan Omar Khayyam "
+"dan Nizami dan berpendidikan baik serta berbakat dan memainkan berbagai alat"
+" musik."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:407
 msgid ""
@@ -25814,26 +26557,37 @@ msgid ""
 "capital of Azerbaijan, the first capital of the Azerbaijan Democratic "
 "Republic and the city with the spirit of wisdom and freedom."
 msgstr ""
+"Ganja adalah kota kuno Azerbaijan, dan merupakan tempat kelahiran banyak "
+"tokoh terkemuka seperti para penyair Mahsati dan Nizami. Ini adalah ibu kota"
+" kuno Azerbaijan, ibu kota pertama Republik Demokratik Azerbaijan dan kota "
+"dengan semangat kebijaksanaan dan kebebasan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:408
 msgid ""
 "Timir means darkness in Bengali language, alluding to the star being far "
 "away in the darkness of space."
 msgstr ""
+"Timir berarti kegelapan dalam bahasa Bengali, merujuk pada bintang yang jauh"
+" di dalam kegelapan ruang angkasa."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:409
 msgid ""
 "Tondra means nap in Bengali language, alluding to the symbolic notion that "
 "the planet was asleep until discovered."
 msgstr ""
+"Tondra berarti tidur siang dalam bahasa Bengali, merujuk pada gagasan "
+"simbolis bahwa planet itu tertidur hingga ditemukan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:410
 msgid "Nervia, adapted from Nervii, was a prominent Belgian Celtic tribe."
 msgstr ""
+"Nervia, diadaptasi dari Nervii, adalah suku Celtic Belgia yang terkemuka."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:411
 msgid "Eburonia, adapted from Eburones, was a prominent Belgian Celtic tribe."
 msgstr ""
+"Eburonia, diadaptasi dari Eburones, adalah suku Celtic Belgia yang "
+"terkemuka."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:412
 msgid ""
@@ -25841,24 +26595,33 @@ msgid ""
 "philosophy conceived and followed in Bhutan and is one of Bhutan's "
 "contributions to the world."
 msgstr ""
+"Gakyid berarti kebahagiaan. Gross National Happiness adalah filosofi "
+"pembangunan yang dicetuskan dan diikuti di Bhutan dan merupakan salah satu "
+"kontribusi Bhutan bagi dunia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:413
 msgid ""
 "Drukyul (land of the thunder dragon) is the native name for Bhutan, the "
 "country that came up with the philosophy of Gross National Happiness."
 msgstr ""
+"Drukyul (tanah naga guntur) adalah nama asli untuk Bhutan, negara yang "
+"mencetuskan filosofi Gross National Happiness."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:414
 msgid ""
 "Tapecue means eternal path in Guarani and represents the Milky Way through "
 "which the first inhabitants of the Earth arrived and could return."
 msgstr ""
+"Tapecue berarti jalur abadi dalam bahasa Guarani dan melambangkan Bima Sakti"
+" di mana penduduk pertama Bumi tiba dan dapat kembali."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:415
 msgid ""
 "Yvaga means paradise for the Guarani and the Milky Way was known as the road"
 " to Yvaga or paradise."
 msgstr ""
+"Yvaga berarti surga bagi orang Guarani dan Bima Sakti dikenal sebagai jalan "
+"menuju Yvaga atau surga."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:416
 msgid ""
@@ -25866,6 +26629,9 @@ msgid ""
 "Later, the name was transformed to Bosnia originating from the name of the "
 "Bosna river."
 msgstr ""
+"Bosona adalah nama yang diberikan untuk wilayah Bosnia pada abad ke-10. "
+"Kemudian, nama itu diubah menjadi Bosnia yang berasal dari nama sungai "
+"Bosna."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:417
 msgid ""
@@ -25873,6 +26639,10 @@ msgid ""
 "partly in Croatia) in antiquity originating with the Celts who called it "
 "Nera Etwa which means the Flowing Divinity."
 msgstr ""
+"Naron adalah salah satu nama yang diberikan untuk sungai Neretva di "
+"Herzegovina (dan sebagian di Kroasia) pada masa antikuitas yang berasal dari"
+" orang Celtic yang menyebutnya Nera Etwa yang berarti Keilahian yang "
+"Mengalir."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:418
 msgid ""
@@ -25880,34 +26650,45 @@ msgid ""
 "eastern coast of South America, before the Portuguese arrived in the 16th "
 "century."
 msgstr ""
+"Tupi adalah nama Masyarakat Adat paling banyak yang tinggal di pesisir timur"
+" Amerika Selatan, sebelum Portugis tiba pada abad ke-16."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:419
 msgid ""
 "Guarani is the name of the most populous Indigenous people living in South "
 "Brazil and parts of Argentina, Paraguay and Uruguay."
 msgstr ""
+"Guarani adalah nama Masyarakat Adat paling banyak yang tinggal di Brasil "
+"Selatan dan sebagian Argentina, Paraguay, dan Uruguay."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:420
 msgid ""
 "Gumala is a Malay word, which means a magic bezoar stone found in snakes, "
 "dragons, etc."
 msgstr ""
+"Gumala adalah kata Melayu, yang berarti batu bezoar ajaib yang ditemukan "
+"pada ular, naga, dll."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:421
 msgid ""
 "Mastika is a Malay word, which means a gem, precious stone, jewel or the "
 "prettiest, the most beautiful."
 msgstr ""
+"Mastika adalah kata Melayu, yang berarti permata, batu berharga, perhiasan, "
+"atau yang paling cantik, yang paling indah."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:422
 msgid "Tangra is the supreme celestial god that early Bulgars worshiped."
 msgstr ""
+"Tangra adalah dewa langit tertinggi yang disembah oleh orang Bulgar awal."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:423
 msgid ""
 "Bendida is the Great Mother Goddess of the Thracians. She was especially "
 "revered as a goddess of marriage and living nature."
 msgstr ""
+"Bendida adalah Dewi Ibu Agung dari Thracians. Dia sangat dihormati sebagai "
+"dewi pernikahan dan alam yang hidup."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:424
 msgid ""
@@ -25915,6 +26696,9 @@ msgid ""
 "plays an important role in the lives of the people in the areas it passes "
 "through."
 msgstr ""
+"Mouhoun, juga disebut Volta Noire, adalah sungai terbesar di Burkina Faso "
+"dan memainkan peran penting dalam kehidupan masyarakat di daerah yang "
+"dilaluinya."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:425
 msgid ""
@@ -25922,16 +26706,18 @@ msgid ""
 "Burkina Faso. Its source is in the heart of the Sahara Burkinabe and ends in"
 " Ghana."
 msgstr ""
+"Nakanbé, juga disebut Volta Blanche, adalah sungai terbesar kedua di Burkina"
+" Faso. Sumbernya berada di jantung Gurun Burkinabe dan berakhir di Ghana."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:426
 msgid ""
 "Nikawiy is the word for mother in the Indigenous Cree language of Canada."
-msgstr ""
+msgstr "Nikawiy adalah kata untuk ibu dalam bahasa Cree Pribumi Kanada."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:427
 msgid ""
 "Awasis is the word for child in the Indigenous Cree language of Canada."
-msgstr ""
+msgstr "Awasis adalah kata untuk anak dalam bahasa Cree Pribumi Kanada."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:428
 msgid ""
@@ -25939,18 +26725,26 @@ msgid ""
 " to bring drowned sailors to the Caleuche so that they can live in the "
 "afterlife."
 msgstr ""
+"Pincoya adalah roh air perempuan dari mitologi Chili selatan yang dikatakan "
+"membawa pelaut yang tenggelam ke Caleuche sehingga mereka dapat hidup di "
+"akhirat."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:429
 msgid ""
 "Caleuche is a large ghost ship from southern Chilean mythology which sails "
 "the seas around the island of Chiloé at night."
 msgstr ""
+"Caleuche adalah kapal hantu besar dari mitologi Chili selatan yang berlayar "
+"di laut di sekitar pulau Chiloé pada malam hari."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:430
 msgid ""
 "Lion Rock is a lion-shaped peak overlooking Hong Kong and is a cultural "
 "symbol with deep respect from the local community."
 msgstr ""
+"Lion Rock adalah puncak berbentuk singa yang menghadap ke Hong Kong dan "
+"merupakan simbol budaya dengan rasa hormat yang mendalam dari komunitas "
+"lokal."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:431
 msgid ""
@@ -25958,6 +26752,9 @@ msgid ""
 "ambassadorial gateway for foreign visitors wishing to experience Hong Kong "
 "first hand."
 msgstr ""
+"Victoria Peak menghadap ke Pelabuhan Victoria yang ramai dan dianggap "
+"sebagai gerbang duta besar bagi pengunjung asing yang ingin mengalami Hong "
+"Kong secara langsung."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:432
 msgid ""
@@ -25965,18 +26762,24 @@ msgid ""
 "represents the earliest astronomers and developers of calendars in ancient "
 "China."
 msgstr ""
+"Xihe (羲和) adalah dewi matahari dalam mitologi Tiongkok dan juga mewakili "
+"astronom paling awal dan pengembang kalender di Tiongkok kuno."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:433
 msgid ""
 "Wangshu (望舒) is the goddess who drives for the Moon and also represents the "
 "Moon in Chinese mythology."
 msgstr ""
+"Wangshu (望舒) adalah dewi yang mengemudi untuk Bulan dan juga mewakili Bulan "
+"dalam mitologi Tiongkok."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:434
 msgid ""
 "Formosa is the historical name of Taiwan used in the 17th century, meaning "
 "beautiful in Latin."
 msgstr ""
+"Formosa adalah nama historis Taiwan yang digunakan pada abad ke-17, yang "
+"berarti indah dalam bahasa Latin."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:435
 msgid ""
@@ -25985,6 +26788,10 @@ msgid ""
 "the Thao people who are a tribe of Taiwanese aborigines who lived in the "
 "region for hundreds of years."
 msgstr ""
+"Sazum adalah nama tradisional Yuchi, sebuah Township di kabupaten Nantou, di"
+" mana Danau Matahari-Bulan yang terkenal berada. Sazum berarti air dalam "
+"bahasa orang Thao yang merupakan suku pribumi Taiwan yang tinggal di wilayah"
+" tersebut selama ratusan tahun."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:436
 msgid ""
@@ -25992,6 +26799,9 @@ msgid ""
 "(Cien años de soledad) the classic novel by Gabriel García Marquez. Macondo "
 "is a fictional place where magic and reality are mixed."
 msgstr ""
+"Macondo adalah desa mitos dari novel Seratus Tahun Kesunyian (Cien años de "
+"soledad) novel klasik karya Gabriel García Marquez. Macondo adalah tempat "
+"fiksi di mana sihir dan kenyataan bercampur."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:437
 msgid ""
@@ -25999,28 +26809,40 @@ msgid ""
 " orbiting a star, connecting it with the external world by introducing new "
 "knowledge using his inventions as well as his stories."
 msgstr ""
+"Melquíades adalah karakter fiksi yang berjalan di sekitar Macondo, seperti "
+"planet yang mengorbit bintang, menghubungkannya dengan dunia luar dengan "
+"memperkenalkan pengetahuan baru menggunakan penemuannya serta cerita-"
+"ceritanya."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:438
 msgid ""
 "Poerava is the word in the Cook Islands Maori language for a large mystical "
 "black pearl of utter beauty and perfection."
 msgstr ""
+"Poerava adalah kata dalam bahasa Māori Kepulauan Cook untuk mutiara hitam "
+"mistis besar dengan keindahan dan kesempurnaan yang luar biasa."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:439
 msgid ""
 "Pipitea is a small, white and gold pearl found in Penrhyn lagoon in the "
 "northern group of the Cook Islands."
 msgstr ""
+"Pipitea adalah mutiara kecil, putih, dan emas yang ditemukan di laguna "
+"Penrhyn di kelompok utara Kepulauan Cook."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:440
 msgid ""
 "Dìwö in Bribri language means the sun (bigger than the sun we know) and that"
 " never turns off."
 msgstr ""
+"Dìwö dalam bahasa Bribri berarti matahari (lebih besar dari matahari yang "
+"kita kenal) dan yang tidak pernah padam."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:441
 msgid "Ditsö̀ is the name that the god Sibö̀ gave to the first Bribri people."
 msgstr ""
+"Ditsö̀ adalah nama yang diberikan dewa Sibö̀ kepada orang Bribri yang "
+"pertama."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:442
 msgid ""
@@ -26028,10 +26850,13 @@ msgid ""
 "character in the book Priče iz davnine (Croatian Tales of Long Ago) by the "
 "Croatian author Ivana Brlić-Mažuranić."
 msgstr ""
+"Stribor adalah Dewa angin dalam mitologi Slavia, serta karakter sastra dalam"
+" buku Priče iz davnine (Kisah Kroasia Zaman Dahulu) oleh penulis Kroasia "
+"Ivana Brlić-Mažuranić."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:443
 msgid "Veles is a major Slavic god of earth, waters and the underworld."
-msgstr ""
+msgstr "Veles adalah dewa utama Slavia dari bumi, air, dan dunia bawah."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:444
 msgid ""
@@ -26039,6 +26864,9 @@ msgid ""
 "Carlos and San Ambrosio Seminary. He opened the way to education for all, "
 "and began the experimental teaching of physics in Cuba."
 msgstr ""
+"Felix Varela (1788–1853) adalah yang pertama mengajarkan sains di Kuba di "
+"Seminario San Carlos dan San Ambrosio. Dia membuka jalan bagi pendidikan "
+"untuk semua, dan memulai pengajaran fisika eksperimental di Kuba."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:445
 msgid ""
@@ -26046,12 +26874,17 @@ msgid ""
 " in the research of yellow fever, determining that it was transmitted "
 "through mosquitoes."
 msgstr ""
+"Carlos Juan Finlay (1833–1915) adalah seorang ahli epidemiologi yang diakui "
+"sebagai pionir dalam penelitian demam kuning, menentukan bahwa itu "
+"ditularkan melalui nyamuk."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:446
 msgid ""
 "Alasia is the first historically recorded name of Cyprus, dating back to "
 "mid-fifteenth century BC."
 msgstr ""
+"Alasia adalah nama pertama Siprus yang tercatat secara historis, berasal "
+"dari pertengahan abad kelima belas SM."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:447
 msgid ""
@@ -26059,6 +26892,9 @@ msgid ""
 "the fifth century BC Idalion Tablet. Also known as the Onasilou Plate, it is"
 " considered as the oldest legal contract found in the world."
 msgstr ""
+"Onasilos adalah dokter tertua yang tercatat secara historis di Siprus, "
+"tertulis di Tablet Idalion abad kelima SM. Juga dikenal sebagai Lempeng "
+"Onasilou, itu dianggap sebagai kontrak hukum tertua yang ditemukan di dunia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:448
 msgid ""
@@ -26066,6 +26902,8 @@ msgid ""
 " absolutno (The Factory for the Absolute) by influential Czech writer Karel "
 "Čapek."
 msgstr ""
+"Absolutno adalah zat ajaib fiksi dalam novel sci-fi Továrna na absolutno "
+"(Pabrik untuk Absolut) oleh penulis Ceko berpengaruh Karel Čapek."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:449
 msgid ""
@@ -26073,12 +26911,18 @@ msgid ""
 "Makropulos Affair), dealing with problems of immortality and consequences of"
 " an artificial prolongation of life."
 msgstr ""
+"Makropulos adalah nama dari drama Karel Čapek Věc Makropulos (Urusan "
+"Makropulos), yang membahas masalah keabadian dan konsekuensi dari "
+"perpanjangan hidup buatan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:450
 msgid ""
 "Muspelheim is the Norse mythological realm of fire. The first gods used the "
 "sparks of Muspelheim to form the sun, moon, planets, and stars."
 msgstr ""
+"Muspelheim adalah alam mitologis Nordik berupa api. Para dewa pertama "
+"menggunakan percikan api Muspelheim untuk membentuk matahari, bulan, planet,"
+" dan bintang."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:451
 msgid ""
@@ -26086,6 +26930,9 @@ msgid ""
 "mythology. At Ragnarok, the end of the world, he will lead the attack on our"
 " world and destroy it in flames."
 msgstr ""
+"Surt adalah penguasa Muspelheim dan raksasa api di sana dalam mitologi "
+"Nordik. Di Ragnarok, akhir dunia, ia akan memimpin serangan ke dunia kita "
+"dan menghancurkannya dalam api."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:452
 msgid ""
@@ -26093,18 +26940,25 @@ msgid ""
 "higher position on the stalagmite than Boinayel in the El Puente cave, where"
 " the Sun makes its way down every 21 December."
 msgstr ""
+"Márohu dewa kekeringan adalah pelindung Matahari dan diukir pada posisi yang"
+" lebih tinggi pada stalagmit daripada Boinayel di gua El Puente, di mana "
+"Matahari turun setiap 21 Desember."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:453
 msgid ""
 "Boinayel the god of rain that fertilizes the soil is engraved on the "
 "stalagmite at a lower position than Márohu in the El Puente cave."
 msgstr ""
+"Boinayel dewa hujan yang menyuburkan tanah diukir pada stalagmit di posisi "
+"yang lebih rendah daripada Márohu di gua El Puente."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:454
 msgid ""
 "Nenque means the Sun in the language spoken by the Indigenous Waorani tribes"
 " of the Amazon regions of Ecuador"
 msgstr ""
+"Nenque berarti Matahari dalam bahasa yang digunakan oleh suku pribumi "
+"Waorani di wilayah Amazon Ekuador."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:455
 msgid ""
@@ -26112,16 +26966,21 @@ msgid ""
 "the Amazon regions of Ecuador. This word is suggested for the exoplanet "
 "owing to the proximity of the planet to the host star."
 msgstr ""
+"Eyeke berarti dekat dalam bahasa yang digunakan oleh Suku Pribumi Waorani di"
+" wilayah Amazon Ekuador. Kata ini disarankan untuk eksoplanet karena "
+"kedekatan planet tersebut dengan bintang induknya."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:456
 msgid "Citalá means River of stars in the native Nahuat language."
-msgstr ""
+msgstr "Citalá berarti Sungai Bintang dalam bahasa Nahuat pribumi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:457
 msgid ""
 "Cayahuanca means The rock looking at the stars in the native Nahuat "
 "language."
 msgstr ""
+"Cayahuanca berarti Batu yang menatap bintang-bintang dalam bahasa asli "
+"Nahuat."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:458
 msgid ""
@@ -29598,7 +30457,7 @@ msgstr "Judul:"
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:162
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:236
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:473
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:516
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
 msgid "Sky Culture Maker"
 msgstr ""
@@ -29643,11 +30502,11 @@ msgid ""
 "Convert sky cultures from the legacy (fab) format to the new (json) format"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:195
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:222
 msgid "Please select a license for the sky culture."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:201
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:228
 msgid ""
 "The sky culture description is not complete. Please fill in all required "
 "fields correctly."
@@ -29827,7 +30686,7 @@ msgid "Not implemented yet."
 msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:146
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:478
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:521
 msgid "Edit"
 msgstr ""
 
@@ -29895,59 +30754,59 @@ msgstr ""
 msgid "Artwork"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:474
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:517
 msgid "Name of the Sky Culture"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:476
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:519
 msgid "Add Constellation"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:477
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:520
 msgid "Add Dark Constellation"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:480
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:523
 msgid "License of the Sky Culture"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:481
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:524
 msgid "Export Sky Culture"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:483
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:526
 msgid "Please describe the Sky Culture"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:484
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:527
 msgid "Mandatory fields are marked with an asterisk (*)."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:485
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:528
 msgid "General Information"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:486
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:529
 msgid "Classification of the Sky Culture*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:530
 msgid "Introduction:*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:488
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:531
 msgid " A summary that could ideally be shown on a small screen entirely."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:489
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:532
 msgid "Description (What can the user see here?)"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:490
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:533
 msgid "Culture Description:*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:491
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:534
 msgid ""
 "Give a short introduction about the culture: time, location, circumstances "
 "of life. Please describe specifics of the source (book/clay "
@@ -29959,7 +30818,7 @@ msgid ""
 " is it derived from a specific other source?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:493
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:536
 msgid ""
 "What special features did/does this culture use, what shall the user watch "
 "out for? Is it worthwhile to click a specific button rather than others - "
@@ -29971,87 +30830,87 @@ msgid ""
 "stars at all or prefer dark/bright clouds of the Milky Way?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:494
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:537
 msgid "Moon & Sun:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:495
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:538
 msgid "How did they determine their calendar? Did they observe phases?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:496
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:539
 msgid "Planets:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:497
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:540
 msgid ""
 "Were the planets deified? What deities connect, what meaning do they have?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:498
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:541
 msgid "Zodiac/ Lunar System:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:499
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:542
 msgid ""
 "Did they have the (Bab.) zodiac system or any other division of the \"path "
 "of the Moon\"? If so, was it a (equal or unequal) division of the ecliptic "
 "or of any other type?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:500
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:543
 msgid "Milky Way:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:501
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:544
 msgid "Was the Milky Way deified? What meaning did it have?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:502
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:545
 msgid "Other Celestial Objects:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:503
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:546
 msgid ""
 "What other celestial objects were significant? E.g what about shooting "
 "stars, aurorae? Did they observe stellar transients, e.g. supernovae, that "
 "were visible only in a specific year?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:504
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:547
 msgid "Credits and References"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:505
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:548
 msgid "References:*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:506
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:553
 msgid "Authors:*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:507
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:554
 msgid ""
 "Who are you and what is your background (native person, researcher, ...)? "
 "Ideally, please provide an email-address as well."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:508
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:555
 msgid "About:*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:509
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:556
 msgid ""
 "How do you know about this Sky Culture? Is this contribution based on your "
 "own or other people's research? Is it based on interviews with Elders or "
 "reading ancient text, etc.?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:510
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:557
 msgid "Acknowledgements:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:511
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:558
 msgid ""
 "What acknowledgements would you like to make? E.g. to interviewed people, "
 "organizations, or resources that helped you?"
