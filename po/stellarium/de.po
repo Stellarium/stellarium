@@ -14,9 +14,9 @@
 # Frank Tönies <fraies@web.de>, 2022
 # Alexander Stohr <alexander.stohr@gmx.de>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
-# Latein Lebt, 2025
 # Luca-Philipp Grumbach, 2025
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
+# Latein Lebt, 2025
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2025
 # 
 #, fuzzy
@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-21 21:30+0700\n"
+"POT-Creation-Date: 2025-12-22 04:12+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2025\n"
 "Language-Team: German (https://app.transifex.com/stellarium/teams/80998/de/)\n"
@@ -1503,7 +1503,10 @@ msgstr "Seine planetographischen Koordinaten sind"
 #: src/core/StelObject.cpp:1159 src/core/StelObject.cpp:1206
 #: src/core/StelObject.cpp:1229 src/core/StelObject.cpp:1252
 #: src/core/StelObject.cpp:1283 src/core/StelObject.cpp:1310
-#: src/core/StelSkyCultureSkyPartition.cpp:528
+#: src/core/StelSkyCultureSkyPartition.cpp:528 src/core/StelUtils.cpp:165
+#: src/core/StelUtils.cpp:345 src/core/StelUtils.cpp:441
+#: src/core/StelUtils.cpp:520 src/core/StelUtils.cpp:569
+#: src/core/StelUtils.cpp:1536
 msgctxt "object narration"
 msgid "and"
 msgstr "und"
@@ -1515,7 +1518,9 @@ msgstr "Die Sonnenhöhe über dem Merkmal beträgt"
 
 #: src/core/modules/NomenclatureItem.cpp:385
 #: src/core/modules/StarWrapper.cpp:765
-#: src/core/StelSkyCultureSkyPartition.cpp:526
+#: src/core/StelSkyCultureSkyPartition.cpp:526 src/core/StelUtils.cpp:227
+#: src/core/StelUtils.cpp:430 src/core/StelUtils.cpp:517
+#: src/core/StelUtils.cpp:528 src/core/StelUtils.cpp:566
 msgctxt "object narration"
 msgid "degrees"
 msgstr "Grad"
@@ -3309,8 +3314,8 @@ msgstr "Winkelabstand"
 #: src/core/modules/Planet.cpp:947 src/core/modules/StarWrapper.cpp:399
 #: src/core/modules/StarWrapper.cpp:736 src/core/modules/StarWrapper.cpp:1030
 #: src/core/modules/StarWrapper.cpp:1221 src/core/modules/StarWrapper.cpp:1393
-#: src/core/modules/StarWrapper.cpp:1509 src/gui/AstroCalcDialog.cpp:8542
-#: src/gui/AstroCalcAlmanacWidget.cpp:254
+#: src/core/modules/StarWrapper.cpp:1509 src/core/StelUtils.cpp:163
+#: src/gui/AstroCalcDialog.cpp:8542 src/gui/AstroCalcAlmanacWidget.cpp:254
 msgctxt "duration"
 msgid "days"
 msgstr "Tage"
@@ -5705,12 +5710,16 @@ msgstr "Tierkreis"
 msgid "Lunar Station"
 msgstr "Mondstation/-haus"
 
-#: src/core/StelSkyCultureSkyPartition.cpp:527
+#: src/core/StelSkyCultureSkyPartition.cpp:527 src/core/StelUtils.cpp:344
+#: src/core/StelUtils.cpp:518 src/core/StelUtils.cpp:567
+#: src/core/StelUtils.cpp:1535
 msgctxt "object narration"
 msgid "minutes"
 msgstr "Minuten"
 
-#: src/core/StelSkyCultureSkyPartition.cpp:529
+#: src/core/StelSkyCultureSkyPartition.cpp:529 src/core/StelUtils.cpp:346
+#: src/core/StelUtils.cpp:519 src/core/StelUtils.cpp:568
+#: src/core/StelUtils.cpp:1537
 msgctxt "object narration"
 msgid "seconds"
 msgstr "Sekunden"
@@ -6419,6 +6428,300 @@ msgstr ""
 #: src/core/StelModuleMgr.cpp:324
 msgid "Further information can be found in the {developer documentation}."
 msgstr "Weitere Information gibt es in der {developer documentation}."
+
+#: src/core/StelUtils.cpp:144
+msgctxt "duration"
+msgid "d"
+msgstr "d"
+
+#: src/core/StelUtils.cpp:145
+msgctxt "duration"
+msgid "h"
+msgstr "h"
+
+#: src/core/StelUtils.cpp:146
+msgctxt "duration"
+msgid "m"
+msgstr "m"
+
+#: src/core/StelUtils.cpp:147
+msgctxt "duration"
+msgid "s"
+msgstr "s"
+
+#: src/core/StelUtils.cpp:164
+msgctxt "duration"
+msgid "hours"
+msgstr "Stunden"
+
+#: src/core/StelUtils.cpp:165
+msgctxt "duration"
+msgid "minutes"
+msgstr "Minuten"
+
+#: src/core/StelUtils.cpp:166
+msgctxt "duration"
+msgid "seconds"
+msgstr "Sekunden"
+
+#: src/core/StelUtils.cpp:343 src/core/StelUtils.cpp:1534
+msgctxt "object narration"
+msgid "hours"
+msgstr "Stunden"
+
+#: src/core/StelUtils.cpp:437 src/core/StelUtils.cpp:489
+#: src/core/StelUtils.cpp:1648
+msgid "minus"
+msgstr "minus"
+
+#: src/core/StelUtils.cpp:441
+msgctxt "object narration"
+msgid "arc minutes"
+msgstr "Bogenminuten"
+
+#: src/core/StelUtils.cpp:444
+msgctxt "object narration"
+msgid "arc seconds"
+msgstr "Bogensekunden"
+
+#: src/core/StelUtils.cpp:489
+msgid "plus"
+msgstr "plus"
+
+#: src/core/StelUtils.cpp:491
+msgid "degrees"
+msgstr "Grad"
+
+#: src/core/StelUtils.cpp:493
+msgid "minutes"
+msgstr "Minuten"
+
+#: src/core/StelUtils.cpp:493 src/ui_astroCalcDialog.h:2352
+#: src/ui_astroCalcDialog.h:2454 plugins/Satellites/src/Satellite.cpp:493
+msgid "and"
+msgstr "und"
+
+#: src/core/StelUtils.cpp:495 src/ui_configurationDialog.h:2706
+msgid "seconds"
+msgstr "Sekunden"
+
+#: src/core/StelUtils.cpp:526 src/core/StelUtils.cpp:528
+msgctxt "object narration"
+msgid "North"
+msgstr "Nord"
+
+#: src/core/StelUtils.cpp:526 src/core/StelUtils.cpp:528
+msgctxt "object narration"
+msgid "South"
+msgstr "Süd"
+
+#: src/core/StelUtils.cpp:574 src/core/StelUtils.cpp:580
+msgctxt "object narration"
+msgid "East"
+msgstr "Ost"
+
+#: src/core/StelUtils.cpp:575 src/core/StelUtils.cpp:581
+msgctxt "object narration"
+msgid "West"
+msgstr "West"
+
+#: src/core/StelUtils.cpp:1652
+msgctxt "decimal separator"
+msgid "point"
+msgstr "komma"
+
+#: src/core/StelUtils.cpp:3142
+msgid "Alpha"
+msgstr "Alpha"
+
+#: src/core/StelUtils.cpp:3142 src/ui_searchDialogGui.h:774
+msgid "alpha"
+msgstr "alpha"
+
+#: src/core/StelUtils.cpp:3143
+msgid "Beta"
+msgstr "Beta"
+
+#: src/core/StelUtils.cpp:3143 src/ui_searchDialogGui.h:777
+msgid "beta"
+msgstr "beta"
+
+#: src/core/StelUtils.cpp:3144 src/gui/AstroCalcDialog.cpp:2457
+#: src/gui/AstroCalcDialog.cpp:3049
+msgid "Gamma"
+msgstr "Gamma"
+
+#: src/core/StelUtils.cpp:3144 src/ui_searchDialogGui.h:780
+msgid "gamma"
+msgstr "gamma"
+
+#: src/core/StelUtils.cpp:3145
+msgid "Delta"
+msgstr "Delta"
+
+#: src/core/StelUtils.cpp:3145 src/ui_searchDialogGui.h:783
+msgid "delta"
+msgstr "delta"
+
+#: src/core/StelUtils.cpp:3146
+msgid "Epsilon"
+msgstr "Epsilon"
+
+#: src/core/StelUtils.cpp:3146 src/ui_searchDialogGui.h:786
+msgid "epsilon"
+msgstr "epsilon"
+
+#: src/core/StelUtils.cpp:3148
+msgid "Zeta"
+msgstr "Zeta"
+
+#: src/core/StelUtils.cpp:3148 src/ui_searchDialogGui.h:789
+msgid "zeta"
+msgstr "zeta"
+
+#: src/core/StelUtils.cpp:3149
+msgid "Eta"
+msgstr "Eta"
+
+#: src/core/StelUtils.cpp:3149 src/ui_searchDialogGui.h:792
+msgid "eta"
+msgstr "eta"
+
+#: src/core/StelUtils.cpp:3150
+msgid "Theta"
+msgstr "Theta"
+
+#: src/core/StelUtils.cpp:3150 src/ui_searchDialogGui.h:795
+msgid "theta"
+msgstr "theta"
+
+#: src/core/StelUtils.cpp:3151
+msgid "Iota"
+msgstr "Iota"
+
+#: src/core/StelUtils.cpp:3151 src/ui_searchDialogGui.h:771
+msgid "iota"
+msgstr "iota"
+
+#: src/core/StelUtils.cpp:3152
+msgid "Kappa"
+msgstr "Kappa"
+
+#: src/core/StelUtils.cpp:3152 src/ui_searchDialogGui.h:798
+msgid "kappa"
+msgstr "kappa"
+
+#: src/core/StelUtils.cpp:3154
+msgid "Lambda"
+msgstr "Lambda"
+
+#: src/core/StelUtils.cpp:3154 src/ui_searchDialogGui.h:801
+msgid "lambda"
+msgstr "lambda"
+
+#: src/core/StelUtils.cpp:3155
+msgid "Mu"
+msgstr "Mu"
+
+#: src/core/StelUtils.cpp:3155 src/ui_searchDialogGui.h:804
+msgid "mu"
+msgstr "mu"
+
+#: src/core/StelUtils.cpp:3156
+msgid "Nu"
+msgstr "Nu"
+
+#: src/core/StelUtils.cpp:3156 src/ui_searchDialogGui.h:807
+msgid "nu"
+msgstr "nu"
+
+#: src/core/StelUtils.cpp:3157
+msgid "Xi"
+msgstr "Xi"
+
+#: src/core/StelUtils.cpp:3157 src/ui_searchDialogGui.h:810
+msgid "xi"
+msgstr "xi"
+
+#: src/core/StelUtils.cpp:3158
+msgid "Omicron"
+msgstr "Omicron"
+
+#: src/core/StelUtils.cpp:3158 src/ui_searchDialogGui.h:813
+msgid "omicron"
+msgstr "omikron"
+
+#: src/core/StelUtils.cpp:3160
+msgid "Pi"
+msgstr "Pi"
+
+#: src/core/StelUtils.cpp:3160 src/ui_searchDialogGui.h:816
+msgid "pi"
+msgstr "pi"
+
+#: src/core/StelUtils.cpp:3161
+msgid "Rho"
+msgstr "Rho"
+
+#: src/core/StelUtils.cpp:3161 src/ui_searchDialogGui.h:819
+msgid "rho"
+msgstr "rho"
+
+#: src/core/StelUtils.cpp:3162
+msgid "Sigma"
+msgstr "Sigma"
+
+#: src/core/StelUtils.cpp:3162 src/ui_searchDialogGui.h:822
+msgid "sigma"
+msgstr "sigma"
+
+#: src/core/StelUtils.cpp:3163
+msgid "Tau"
+msgstr "Tau"
+
+#: src/core/StelUtils.cpp:3163 src/ui_searchDialogGui.h:825
+msgid "tau"
+msgstr "tau"
+
+#: src/core/StelUtils.cpp:3164
+msgid "Upsilon"
+msgstr "Upsilon"
+
+#: src/core/StelUtils.cpp:3164 src/ui_searchDialogGui.h:828
+msgid "upsilon"
+msgstr "ypsilon"
+
+#: src/core/StelUtils.cpp:3166
+msgid "Phi"
+msgstr "Phi"
+
+#: src/core/StelUtils.cpp:3166 src/ui_searchDialogGui.h:831
+msgid "phi"
+msgstr "phi"
+
+#: src/core/StelUtils.cpp:3167
+msgid "Chi"
+msgstr "Chi"
+
+#: src/core/StelUtils.cpp:3167 src/ui_searchDialogGui.h:834
+msgid "chi"
+msgstr "chi"
+
+#: src/core/StelUtils.cpp:3168
+msgid "Psi"
+msgstr "Psi"
+
+#: src/core/StelUtils.cpp:3168 src/ui_searchDialogGui.h:837
+msgid "psi"
+msgstr "psi"
+
+#: src/core/StelUtils.cpp:3169
+msgid "Omega"
+msgstr "Omega"
+
+#: src/core/StelUtils.cpp:3169 src/ui_searchDialogGui.h:840
+msgid "omega"
+msgstr "omega"
 
 #: src/gui/ConfigurationDialog.cpp:129 src/ui_configurationDialog.h:2363
 msgid "Plugins"
@@ -8310,10 +8613,6 @@ msgstr "Aufgänge, Durchgänge und Untergänge"
 msgid "Saros"
 msgstr "Saros"
 
-#: src/gui/AstroCalcDialog.cpp:2457 src/gui/AstroCalcDialog.cpp:3049
-msgid "Gamma"
-msgstr "Gamma"
-
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:2459
 msgctxt "column name"
@@ -10009,7 +10308,7 @@ msgid "Cannot open JSON output file. Will not delete."
 msgstr "Die JSON-Ausgabedatei kann nicht geöffnet werden. Lösche nichts. "
 
 #: src/gui/ObsListDialog.cpp:1194 src/ui_configurationDialog.h:2345
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
 msgid "Information"
 msgstr "Information"
 
@@ -12684,7 +12983,7 @@ msgstr "Aus&wählen"
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
@@ -12720,7 +13019,7 @@ msgstr "&Speichern"
 
 #: src/translations.h:855 src/ui_configurationDialog.h:2371
 #: src/ui_configurationDialog.h:2819
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
 msgid "Save"
 msgstr "Speichern"
 
@@ -14463,102 +14762,6 @@ msgstr "Objekt suchen"
 #: src/ui_searchDialogGui.h:766
 msgid "Use tab key for select of found items"
 msgstr "Verwende Tab-Taste zum Auswählen der gefundenen Einträge"
-
-#: src/ui_searchDialogGui.h:771
-msgid "iota"
-msgstr "iota"
-
-#: src/ui_searchDialogGui.h:774
-msgid "alpha"
-msgstr "alpha"
-
-#: src/ui_searchDialogGui.h:777
-msgid "beta"
-msgstr "beta"
-
-#: src/ui_searchDialogGui.h:780
-msgid "gamma"
-msgstr "gamma"
-
-#: src/ui_searchDialogGui.h:783
-msgid "delta"
-msgstr "delta"
-
-#: src/ui_searchDialogGui.h:786
-msgid "epsilon"
-msgstr "epsilon"
-
-#: src/ui_searchDialogGui.h:789
-msgid "zeta"
-msgstr "zeta"
-
-#: src/ui_searchDialogGui.h:792
-msgid "eta"
-msgstr "eta"
-
-#: src/ui_searchDialogGui.h:795
-msgid "theta"
-msgstr "theta"
-
-#: src/ui_searchDialogGui.h:798
-msgid "kappa"
-msgstr "kappa"
-
-#: src/ui_searchDialogGui.h:801
-msgid "lambda"
-msgstr "lambda"
-
-#: src/ui_searchDialogGui.h:804
-msgid "mu"
-msgstr "mu"
-
-#: src/ui_searchDialogGui.h:807
-msgid "nu"
-msgstr "nu"
-
-#: src/ui_searchDialogGui.h:810
-msgid "xi"
-msgstr "xi"
-
-#: src/ui_searchDialogGui.h:813
-msgid "omicron"
-msgstr "omikron"
-
-#: src/ui_searchDialogGui.h:816
-msgid "pi"
-msgstr "pi"
-
-#: src/ui_searchDialogGui.h:819
-msgid "rho"
-msgstr "rho"
-
-#: src/ui_searchDialogGui.h:822
-msgid "sigma"
-msgstr "sigma"
-
-#: src/ui_searchDialogGui.h:825
-msgid "tau"
-msgstr "tau"
-
-#: src/ui_searchDialogGui.h:828
-msgid "upsilon"
-msgstr "ypsilon"
-
-#: src/ui_searchDialogGui.h:831
-msgid "phi"
-msgstr "phi"
-
-#: src/ui_searchDialogGui.h:834
-msgid "chi"
-msgstr "chi"
-
-#: src/ui_searchDialogGui.h:837
-msgid "psi"
-msgstr "psi"
-
-#: src/ui_searchDialogGui.h:840
-msgid "omega"
-msgstr "omega"
 
 #: src/ui_searchDialogGui.h:843
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
@@ -16945,10 +17148,6 @@ msgstr "Mauszeiger ausblenden, wenn inaktiv"
 msgid "Mouse cursor timeout:"
 msgstr "Mauszeiger-Timeout:"
 
-#: src/ui_configurationDialog.h:2706
-msgid "seconds"
-msgstr "Sekunden"
-
 #: src/ui_configurationDialog.h:2709
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Alles bis auf einen zentralen Kreis in der Hauptansicht ausblenden"
@@ -17688,11 +17887,6 @@ msgstr "Himmelskörper:"
 #: src/ui_astroCalcDialog.h:2349
 msgid "First celestial body"
 msgstr "Erster Himmelskörper"
-
-#: src/ui_astroCalcDialog.h:2352 src/ui_astroCalcDialog.h:2454
-#: plugins/Satellites/src/Satellite.cpp:493
-msgid "and"
-msgstr "und"
 
 #: src/ui_astroCalcDialog.h:2354
 msgid "Second celestial body"
@@ -32129,7 +32323,7 @@ msgid "SCM: Dark Constellation Editor"
 msgstr "SCM: Dunkelsternbildeditor"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
 msgid "SCM: Constellation Editor"
 msgstr "SCM: Sternbildeditor"
 
@@ -32162,63 +32356,63 @@ msgstr "Editieren"
 msgid "Convert"
 msgstr "Konvertieren"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:323
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
 msgid "Pen"
 msgstr "Stift"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:325
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:324
 msgid "Revert the last drawn line."
 msgstr "Die zuletzt gezeichnete Linie rückgängig machen."
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:326
 msgid "Undo"
 msgstr "Rückgängig machen"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
 msgid "Eraser"
 msgstr "Radierer"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
 msgid "Drawing"
 msgstr "Zeichnung"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
 msgid "English name"
 msgstr "Englischer Name"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
 msgid "ID (Do not include 'CON' or the sky culture name)"
 msgstr "ID (Ohne 'CON' oder den Namen der Himmelskultur)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
 msgid "Native name (optional)"
 msgstr "Originaler Name (optional)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
 msgid "Pronounciation (optional, European glyphs or Pinyin)"
 msgstr "Aussprache (optional, europäische Schriftzeichen oder Pinyin)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
 msgid "IPA (optional)"
 msgstr "IPA (optional)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
 msgid "Description (optional)"
 msgstr "Beschreibung (optional)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Bind Star"
 msgstr "Stern binden"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
 msgid "Upload Image"
 msgstr "Bild hochladen"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
 msgid "Remove Image"
 msgstr "Bild entfernen"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
 msgid "Artwork"
 msgstr "Sternbild-Hintergrundbild"
 
