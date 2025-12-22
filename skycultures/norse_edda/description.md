@@ -6,7 +6,7 @@ In the 13th century, Snorri Sturluson provided the most comprehensive documentat
 
 ## Description
 
-The Eddic myths were widespread in the North Germanic cultural area, which encompasses present-day Scandinavia (Denmark, Norway, Sweden, Iceland). They were written down in the 13th century in Iceland, predominantly in two literary works, the Prose Edda and the Poetic Edda, this way representing the most important sources of our knowledge on Norse mythology. The culture referred to here therefore includes the North Germanic peoples from the 13th century and earlier. An important factor in observing the sky at this latitude is the brightness of the midnight sun in summer. During several weeks, the sky at Iceland's latitude does not get dark or only for a very short time, which severely limits the possibility of observing stars during this period. Given the fact that Snorri’s Edda was written in Iceland and under the assumption, that some of the myths describe celestial phenomena, this plays an important role in the localization of assumed constellations: for instance, the modern constellation of Scorpius, the Scorpion, is hardly visible, so, it won't be identified with any Norse constellation. More information and discussion of each one of the (hypothetical) constellations will be given in the All Skies Encyclopaedia.
+The Eddic myths were widespread in the North Germanic cultural area, which encompasses present-day Scandinavia (Denmark, Norway, Sweden, Iceland). They were written down in the 13th century in Iceland, predominantly in two literary works, the Prose Edda and the Poetic Edda, this way representing the most important sources of our knowledge on Norse mythology. The culture referred to here therefore includes the North Germanic peoples from the 13th century and earlier. An important factor in observing the sky at this latitude is the brightness of the midnight sun in summer. During several weeks, the sky at Iceland's latitude does not get dark or only for a very short time, which severely limits the possibility of observing stars during this period. Given the fact that Snorri’s Edda was written in Iceland and under the assumption that some of the myths describe celestial phenomena, this plays an important role in the localization of assumed constellations: for instance, the modern constellation of Scorpius, the Scorpion, is hardly visible, so, it won't be identified with any Norse constellation. More information and discussion of each one of the (hypothetical) constellations will be given in the All Skies Encyclopaedia.
 
 ### Sky
 
@@ -143,6 +143,7 @@ Sophie Marshall and Susanne M. Hoffmann served as mentors during the research pr
 ## License
 
 CC BY 4.0
+
 
 
 
