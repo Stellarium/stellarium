@@ -1762,9 +1762,9 @@ QString Nebula::getNarration(const StelCore *core, const InfoStringGroup &flags)
 				distanceErr = qAbs(3.162e-5f/(qAbs(parallaxErr + parallax)*4.848e-9f) - distance);
 
 			if (distanceErr>0.f)
-				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
+				dx = QString("%1%2%3").arg(StelUtils::narrateDecimal(distance, 3)).arg(QChar(0x00B1)).arg(StelUtils::narrateDecimal(distanceErr, 3));
 			else
-				dx = QString("%1").arg(QString::number(distance, 'f', 3));
+				dx = QString("%1").arg(StelUtils::narrateDecimal(distance, 3));
 
 			if (oDistance==0.f)
 			{
@@ -1806,13 +1806,13 @@ QString Nebula::getNarration(const StelCore *core, const InfoStringGroup &flags)
 
 			if (oDistanceErr>0.f)
 			{
-				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
-				dy = QString("%1%2%3").arg(QString::number(distanceLY, 'f', ms)).arg(QChar(0x00B1)).arg(QString::number(distanceErrLY, 'f', ms));
+				dx = QString("%1%2%3").arg(StelUtils::narrateDecimal(distance, 3)).arg(QChar(0x00B1)).arg(StelUtils::narrateDecimal(distanceErr, 3));
+				dy = QString("%1%2%3").arg(StelUtils::narrateDecimal(distanceLY, ms)).arg(QChar(0x00B1)).arg(StelUtils::narrateDecimal(distanceErrLY, ms));
 			}
 			else
 			{
-				dx = QString("%1").arg(QString::number(distance, 'f', 3));
-				dy = QString("%1").arg(QString::number(distanceLY, 'f', ms));
+				dx = QString("%1").arg(StelUtils::narrateDecimal(distance, 3));
+				dy = QString("%1").arg(StelUtils::narrateDecimal(distanceLY, ms));
 			}
 
 			res.append(QString("%1 %2 %3 (%4 %5)").arg(qc_("in a distance of", "object narration"), dx, dupc, dy, duly));
@@ -1831,9 +1831,9 @@ QString Nebula::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		{
 			QString z;
 			if (redshiftErr>0.f)
-				z = QString("%1 %2 %3").arg(QString::number(redshift, 'f', 6), qc_("plus minus", "object narration"), QString::number(redshiftErr, 'f', 6));
+				z = QString("%1 %2 %3").arg(StelUtils::narrateDecimal(redshift, 6), qc_("plus minus", "object narration"), StelUtils::narrateDecimal(redshiftErr, 6));
 			else
-				z = QString("%1").arg(QString::number(redshift, 'f', 6));
+				z = QString("%1").arg(StelUtils::narrateDecimal(redshift, 6));
 
 			res += QString("%1 %2").arg(qc_("Its redshift is", "object narration"), z);
 		}
@@ -1841,9 +1841,9 @@ QString Nebula::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		{
 			QString px;
 			if (parallaxErr>0.f)
-				px = QString("%1 %2 %3").arg(QString::number(qAbs(parallax), 'f', 3), qc_("plus minus", "object narration"), QString::number(parallaxErr, 'f', 3));
+				px = QString("%1 %2 %3").arg(StelUtils::narrateDecimal(qAbs(parallax), 3), qc_("plus minus", "object narration"), StelUtils::narrateDecimal(parallaxErr, 3));
 			else
-				px = QString("%1").arg(QString::number(qAbs(parallax), 'f', 3));
+				px = QString("%1").arg(StelUtils::narrateDecimal(qAbs(parallax), 3));
 
 			res += QString("%1 %2 %3").arg(qc_("Its Parallax", "object narration"), px, qc_("milli-arcseconds", "parallax"));
 		}
