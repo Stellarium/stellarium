@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In the 13th century, Snorri Sturluson provided the most comprehensive documentation of myths from Old Norse culture that we know of today in his Edda. In this sky culture, the Eddic myths are to be brought into the sky in the form of constellations. Since there are no records of constellations from this time and region, the reconstruction of these constellations is a speculative. In our visualisations we follow various literary scholars who found parallels to Norse mythology in the Edda. 
+In the 13th century, Snorri Sturluson provided the most comprehensive documentation of myths from Old Norse culture that we know of today in his Edda. In this sky culture, the Eddic myths are to be brought into the sky in the form of constellations. Since there are no records of constellations from this time and region, the reconstruction of these constellations is not always certain (in some cases even speculative). In our visualisations we follow various literary scholars who found parallels to Norse mythology in the Edda. 
 
 ## Description
 
@@ -143,6 +143,7 @@ Sophie Marshall and Susanne M. Hoffmann served as mentors during the research pr
 ## License
 
 CC BY 4.0
+
 
 
 
