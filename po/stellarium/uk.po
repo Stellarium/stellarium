@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-22 04:12+0700\n"
+"POT-Creation-Date: 2025-12-22 20:18+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -39,8 +39,8 @@ msgstr "нетиповий об’єкт"
 #: src/core/modules/Nebula.cpp:295 src/core/modules/Planet.cpp:619
 #: src/core/modules/Planet.cpp:622 src/core/modules/StarWrapper.cpp:51
 #: src/core/modules/StarWrapper.cpp:288 src/core/modules/StarWrapper.cpp:290
-#: src/core/modules/StarWrapper.cpp:926 src/core/modules/StarWrapper.cpp:928
-#: src/core/modules/StarWrapper.cpp:1339 src/core/modules/StarWrapper.cpp:1341
+#: src/core/modules/StarWrapper.cpp:915 src/core/modules/StarWrapper.cpp:917
+#: src/core/modules/StarWrapper.cpp:1320 src/core/modules/StarWrapper.cpp:1322
 #: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:2456
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3080
 #: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7688
@@ -1430,8 +1430,8 @@ msgid "Origin of name"
 msgstr "Походження назви"
 
 #: src/core/modules/NomenclatureItem.cpp:312
-#: src/core/modules/NomenclatureItem.cpp:324 src/core/modules/Planet.cpp:1725
-#: src/core/modules/Planet.cpp:1748
+#: src/core/modules/NomenclatureItem.cpp:324 src/core/modules/Planet.cpp:1710
+#: src/core/modules/Planet.cpp:1733
 msgctxt "object narration"
 msgid "or"
 msgstr "або"
@@ -1451,12 +1451,12 @@ msgctxt "object narration"
 msgid "on the"
 msgstr "на"
 
-#: src/core/modules/NomenclatureItem.cpp:335 src/core/modules/Planet.cpp:1687
+#: src/core/modules/NomenclatureItem.cpp:335 src/core/modules/Planet.cpp:1672
 msgctxt "object narration"
 msgid "on"
 msgstr "на"
 
-#: src/core/modules/NomenclatureItem.cpp:346 src/core/modules/Planet.cpp:1807
+#: src/core/modules/NomenclatureItem.cpp:346 src/core/modules/Planet.cpp:1792
 msgctxt "object narration"
 msgid "Its diameter is"
 msgstr "Діаметр —"
@@ -1466,8 +1466,8 @@ msgid "It extends over"
 msgstr "Поширюється на понад"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:347 src/core/modules/Planet.cpp:1712
-#: src/core/modules/Planet.cpp:1735 src/core/modules/Planet.cpp:1808
+#: src/core/modules/NomenclatureItem.cpp:347 src/core/modules/Planet.cpp:1697
+#: src/core/modules/Planet.cpp:1720 src/core/modules/Planet.cpp:1793
 msgctxt "distance"
 msgid "kilometers"
 msgstr "кілометрів"
@@ -1487,15 +1487,11 @@ msgctxt "object narration"
 msgid "Its planetographic coordinates are"
 msgstr "Планетографічні координати —"
 
-#: src/core/modules/NomenclatureItem.cpp:382 src/core/modules/Planet.cpp:1662
-#: src/core/StelObject.cpp:1095 src/core/StelObject.cpp:1120
-#: src/core/StelObject.cpp:1159 src/core/StelObject.cpp:1206
-#: src/core/StelObject.cpp:1229 src/core/StelObject.cpp:1252
-#: src/core/StelObject.cpp:1283 src/core/StelObject.cpp:1310
-#: src/core/StelSkyCultureSkyPartition.cpp:528 src/core/StelUtils.cpp:165
-#: src/core/StelUtils.cpp:345 src/core/StelUtils.cpp:441
-#: src/core/StelUtils.cpp:520 src/core/StelUtils.cpp:569
-#: src/core/StelUtils.cpp:1536
+#: src/core/modules/NomenclatureItem.cpp:382 src/core/modules/Planet.cpp:1642
+#: src/core/StelObject.cpp:1549 src/core/StelSkyCultureSkyPartition.cpp:528
+#: src/core/StelUtils.cpp:165 src/core/StelUtils.cpp:345
+#: src/core/StelUtils.cpp:441 src/core/StelUtils.cpp:520
+#: src/core/StelUtils.cpp:569 src/core/StelUtils.cpp:1536
 msgctxt "object narration"
 msgid "and"
 msgstr "і"
@@ -1506,7 +1502,6 @@ msgid "Solar altitude over the feature is"
 msgstr "Сонячна висота над характерною особливістю поверхні"
 
 #: src/core/modules/NomenclatureItem.cpp:385
-#: src/core/modules/StarWrapper.cpp:765
 #: src/core/StelSkyCultureSkyPartition.cpp:526 src/core/StelUtils.cpp:227
 #: src/core/StelUtils.cpp:430 src/core/StelUtils.cpp:517
 #: src/core/StelUtils.cpp:528 src/core/StelUtils.cpp:566
@@ -2323,8 +2318,8 @@ msgid "protoplanetary nebula"
 msgstr "протопланетна туманність"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:133
-#: src/core/modules/StarWrapper.cpp:98 src/core/modules/StarWrapper.cpp:793
-#: src/core/modules/StarWrapper.cpp:1261
+#: src/core/modules/StarWrapper.cpp:98 src/core/modules/StarWrapper.cpp:782
+#: src/core/modules/StarWrapper.cpp:1242
 msgid "star"
 msgstr "зірка"
 
@@ -2381,7 +2376,7 @@ msgid "reduced to"
 msgstr "зменшилася до"
 
 #: src/core/modules/Nebula.cpp:199 src/core/StelObject.cpp:353
-#: src/core/StelObject.cpp:371 plugins/Satellites/src/Satellite.cpp:350
+#: plugins/Satellites/src/Satellite.cpp:350
 msgid "by"
 msgstr "на"
 
@@ -2396,13 +2391,13 @@ msgid "Additional names: "
 msgstr "Додаткові назви:"
 
 #: src/core/modules/Nebula.cpp:286 src/core/modules/Planet.cpp:603
-#: src/core/modules/StarWrapper.cpp:274 src/core/modules/StarWrapper.cpp:605
+#: src/core/modules/StarWrapper.cpp:274 src/core/modules/StarWrapper.cpp:606
 msgid "Additional catalog numbers: "
 msgstr "Додаткові номери у каталозі:"
 
 #: src/core/modules/Nebula.cpp:304 src/core/modules/Planet.cpp:866
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:319
-#: src/core/modules/StarWrapper.cpp:945 src/core/modules/StarWrapper.cpp:1348
+#: src/core/modules/StarWrapper.cpp:934 src/core/modules/StarWrapper.cpp:1329
 #: plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
 msgstr "Індекс кольору (B-V)"
@@ -2447,7 +2442,7 @@ msgstr "Кут орієнтації"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:388 src/core/modules/Nebula.cpp:401
-#: src/core/modules/StarWrapper.cpp:351 src/core/modules/StarWrapper.cpp:1000
+#: src/core/modules/StarWrapper.cpp:351 src/core/modules/StarWrapper.cpp:989
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
 msgctxt "distance"
@@ -2457,7 +2452,7 @@ msgstr "св.р."
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:389 src/core/modules/Nebula.cpp:435
 #: src/core/modules/Planet.cpp:744 src/core/modules/Planet.cpp:750
-#: src/core/modules/StarWrapper.cpp:353 src/core/modules/StarWrapper.cpp:1002
+#: src/core/modules/StarWrapper.cpp:353 src/core/modules/StarWrapper.cpp:991
 #: src/gui/AstroCalcDialog.cpp:988 src/gui/AstroCalcChart.cpp:94
 #: src/gui/AstroCalcChart.cpp:104 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:2537
@@ -2489,13 +2484,13 @@ msgid "Redshift"
 msgstr "Червоний зсув"
 
 #: src/core/modules/Nebula.cpp:460 src/core/modules/StarWrapper.cpp:387
-#: src/core/modules/StarWrapper.cpp:1006 src/ui_configurationDialog.h:2727
+#: src/core/modules/StarWrapper.cpp:995 src/ui_configurationDialog.h:2727
 msgid "Parallax"
 msgstr "Паралакс"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:460 src/core/modules/StarWrapper.cpp:392
-#: src/core/modules/StarWrapper.cpp:1011 plugins/Pulsars/src/Pulsar.cpp:257
+#: src/core/modules/StarWrapper.cpp:1000 plugins/Pulsars/src/Pulsar.cpp:257
 msgctxt "parallax"
 msgid "mas"
 msgstr "кут. мс"
@@ -2797,8 +2792,7 @@ msgstr "невідомий тип"
 msgid "called"
 msgstr "має назву"
 
-#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:1629
-#: src/core/StelObject.cpp:1574 src/core/StelObject.cpp:1581
+#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:1602
 msgid "is"
 msgstr "є"
 
@@ -2809,8 +2803,7 @@ msgid "an object of unknown type"
 msgstr "об'єкт невідомого типу"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:1772 src/core/modules/StarWrapper.cpp:686
-#: src/core/modules/StarWrapper.cpp:1190
+#: src/core/modules/Nebula.cpp:1772
 msgctxt "distance"
 msgid "light years"
 msgstr "світлові роки"
@@ -2844,7 +2837,7 @@ msgctxt "object narration"
 msgid "Million light years"
 msgstr "Міліони світлових років"
 
-#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:1648
+#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:1622
 msgctxt "object narration"
 msgid "in the constellation of"
 msgstr "у сузір'ї"
@@ -2864,18 +2857,17 @@ msgctxt "object narration"
 msgid "Its Parallax"
 msgstr "Паралакс —"
 
-#: src/core/modules/Nebula.cpp:1848 src/core/modules/StarWrapper.cpp:729
-#: src/core/modules/StarWrapper.cpp:1206
+#: src/core/modules/Nebula.cpp:1848
 msgctxt "parallax"
 msgid "milli-arcseconds"
-msgstr "мілікут. сек."
+msgstr "кут. мілісек."
 
-#: src/core/modules/Nebula.cpp:1854 src/core/modules/Planet.cpp:1679
+#: src/core/modules/Nebula.cpp:1854 src/core/modules/Planet.cpp:1664
 msgctxt "object narration"
 msgid "It was discovered by"
 msgstr "Відкрито"
 
-#: src/core/modules/Nebula.cpp:1856 src/core/modules/Planet.cpp:1683
+#: src/core/modules/Nebula.cpp:1856 src/core/modules/Planet.cpp:1668
 msgctxt "object narration"
 msgid "in the year"
 msgstr "у році"
@@ -3168,8 +3160,8 @@ msgid "interstellar object"
 msgstr "міжзоряний об'єкт"
 
 #: src/core/modules/Planet.cpp:571 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:941
-#: src/core/modules/StarWrapper.cpp:1129 plugins/Quasars/src/Quasar.cpp:131
+#: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:930
+#: src/core/modules/StarWrapper.cpp:1119 plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "Абсолютна величина"
 
@@ -3204,8 +3196,7 @@ msgstr "Годинний рух"
 
 #: src/core/modules/Planet.cpp:685 src/core/modules/Planet.cpp:1222
 #: src/core/modules/Planet.cpp:1231 src/core/modules/StarWrapper.cpp:365
-#: src/core/modules/StarWrapper.cpp:700 src/core/modules/StarWrapper.cpp:985
-#: src/core/modules/StarWrapper.cpp:1173 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/StarWrapper.cpp:974 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "до"
@@ -3256,7 +3247,7 @@ msgstr ""
 "ЗАУВАЖЕННЯ: елементи для епохи %1, ймовірно, застаріли. Вам варто оновити "
 "дані!"
 
-#: src/core/modules/Planet.cpp:823 src/core/modules/Planet.cpp:1777
+#: src/core/modules/Planet.cpp:823 src/core/modules/Planet.cpp:1762
 msgid "with rings"
 msgstr "з кільцями"
 
@@ -3302,10 +3293,9 @@ msgstr "Кутова відстань"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:947 src/core/modules/StarWrapper.cpp:399
-#: src/core/modules/StarWrapper.cpp:736 src/core/modules/StarWrapper.cpp:1030
-#: src/core/modules/StarWrapper.cpp:1221 src/core/modules/StarWrapper.cpp:1393
-#: src/core/modules/StarWrapper.cpp:1509 src/core/StelUtils.cpp:163
-#: src/gui/AstroCalcDialog.cpp:8542 src/gui/AstroCalcAlmanacWidget.cpp:254
+#: src/core/modules/StarWrapper.cpp:1019 src/core/modules/StarWrapper.cpp:1374
+#: src/core/StelUtils.cpp:163 src/gui/AstroCalcDialog.cpp:8542
+#: src/gui/AstroCalcAlmanacWidget.cpp:254
 msgctxt "duration"
 msgid "days"
 msgstr "днів"
@@ -3494,161 +3484,153 @@ msgstr "Альбедо"
 msgid "Discovered"
 msgstr "Відкриття"
 
-#: src/core/modules/Planet.cpp:1606
+#: src/core/modules/Planet.cpp:1579
 msgctxt "object narration"
 msgid "called"
 msgstr "має назву"
 
-#: src/core/modules/Planet.cpp:1613 src/translations.h:1020
+#: src/core/modules/Planet.cpp:1586 src/translations.h:1020
 msgctxt "object narration"
 msgid "a star"
 msgstr "зірка"
 
-#: src/core/modules/Planet.cpp:1614 src/translations.h:1021
+#: src/core/modules/Planet.cpp:1587 src/translations.h:1021
 msgctxt "object narration"
 msgid "a major planet"
 msgstr "основна планета"
 
-#: src/core/modules/Planet.cpp:1615 src/translations.h:1022
+#: src/core/modules/Planet.cpp:1588 src/translations.h:1022
 msgctxt "object narration"
 msgid "a planet moon"
 msgstr "супутник планети"
 
-#: src/core/modules/Planet.cpp:1616 src/translations.h:1023
+#: src/core/modules/Planet.cpp:1589 src/translations.h:1023
 msgctxt "object narration"
 msgid "an observer"
 msgstr "спостерігач"
 
-#: src/core/modules/Planet.cpp:1617 src/translations.h:1024
+#: src/core/modules/Planet.cpp:1590 src/translations.h:1024
 msgctxt "object narration"
 msgid "an artificial object"
 msgstr "штучний об'єкт"
 
-#: src/core/modules/Planet.cpp:1618 src/translations.h:1025
+#: src/core/modules/Planet.cpp:1591 src/translations.h:1025
 msgctxt "object narration"
 msgid "an asteroid"
 msgstr "астероїд"
 
-#: src/core/modules/Planet.cpp:1619 src/translations.h:1026
+#: src/core/modules/Planet.cpp:1592 src/translations.h:1026
 msgctxt "object narration"
 msgid "a plutino"
 msgstr "плутіно"
 
-#: src/core/modules/Planet.cpp:1620 src/translations.h:1027
+#: src/core/modules/Planet.cpp:1593 src/translations.h:1027
 msgctxt "object narration"
 msgid "a comet"
 msgstr "комета"
 
-#: src/core/modules/Planet.cpp:1621 src/translations.h:1028
+#: src/core/modules/Planet.cpp:1594 src/translations.h:1028
 msgctxt "object narration"
 msgid "a dwarf planet"
 msgstr "карликова планета"
 
-#: src/core/modules/Planet.cpp:1622 src/translations.h:1029
+#: src/core/modules/Planet.cpp:1595 src/translations.h:1029
 msgctxt "object narration"
 msgid "a cubewano"
 msgstr "к'юбівано"
 
-#: src/core/modules/Planet.cpp:1623 src/translations.h:1030
+#: src/core/modules/Planet.cpp:1596 src/translations.h:1030
 msgctxt "object narration"
 msgid "a scattered disc object"
 msgstr "об’єкт розсіяного диска"
 
-#: src/core/modules/Planet.cpp:1624 src/translations.h:1031
+#: src/core/modules/Planet.cpp:1597 src/translations.h:1031
 msgctxt "object narration"
 msgid "an Oort Cloud Object"
 msgstr "об’єкт поясу Оорта"
 
-#: src/core/modules/Planet.cpp:1625 src/translations.h:1032
+#: src/core/modules/Planet.cpp:1598 src/translations.h:1032
 msgctxt "object narration"
 msgid "a sednoid"
 msgstr "седноїд"
 
-#: src/core/modules/Planet.cpp:1626 src/translations.h:1033
+#: src/core/modules/Planet.cpp:1599 src/translations.h:1033
 msgctxt "object narration"
 msgid "an interstellar object"
 msgstr "міжзоряний об'єкт"
 
-#: src/core/modules/Planet.cpp:1627 src/core/modules/Planet.cpp:1629
+#: src/core/modules/Planet.cpp:1600 src/core/modules/Planet.cpp:1602
 #: src/translations.h:1034
 msgctxt "object narration"
 msgid "an object of undefined type"
 msgstr "об'єкт невизначеного типу"
 
-#: src/core/modules/Planet.cpp:1635
+#: src/core/modules/Planet.cpp:1608
 msgctxt "object narration"
 msgid "currently at visual magnitude of"
 msgstr "зараз має видиму величину"
 
-#: src/core/modules/Planet.cpp:1638 src/core/StelObject.cpp:370
+#: src/core/modules/Planet.cpp:1611 src/core/StelObject.cpp:370
+#, qt-format
 msgctxt "object narration: reduced magnitude by extinction"
-msgid "reduced to"
-msgstr "зменшилася до"
+msgid "reduced to %1 by %2 airmasses of atmospheric extinction"
+msgstr "зменшено до %1 на %2 мас атмосфери атмосферного витоку"
 
-#: src/core/modules/Planet.cpp:1639
-msgctxt "narration: extinction by XX airmasses"
-msgid "by"
-msgstr "на"
-
-#: src/core/modules/Planet.cpp:1640 src/core/StelObject.cpp:372
-msgctxt "object narration"
-msgid "Airmasses of atmospheric extinction"
-msgstr "Мас атмосферного витоку"
-
-#: src/core/modules/Planet.cpp:1662
+#: src/core/modules/Planet.cpp:1641 src/core/StelObject.cpp:1548
 msgctxt "object narration"
 msgid "In this skyculture, it lies within the area of"
 msgstr "У цій картині зоряного неба перебуває в області"
 
-#: src/core/modules/Planet.cpp:1665 src/core/modules/Planet.cpp:1670
+#. TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
+#. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
+#. TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
+#. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
+#: src/core/modules/Planet.cpp:1649 src/core/modules/Planet.cpp:1656
+#: src/core/StelObject.cpp:1557 src/core/StelObject.cpp:1564
+#, qt-format
 msgctxt "object narration"
-msgid "Its position in the"
-msgstr "Розташовується у"
+msgid "Its %1 Position is %2"
+msgstr "Позиція %1 — %2"
 
-#: src/core/modules/Planet.cpp:1665 src/core/modules/Planet.cpp:1670
-msgctxt "object narration"
-msgid "system is"
-msgstr "система є"
-
-#: src/core/modules/Planet.cpp:1685
+#: src/core/modules/Planet.cpp:1670
 msgctxt "object narration"
 msgid "in"
 msgstr "у"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:1701
+#: src/core/modules/Planet.cpp:1686
 msgctxt "distance, astronomical unit"
 msgid "Astronomical Units"
 msgstr "Астрономічні одиниці"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:1703
+#: src/core/modules/Planet.cpp:1688
 msgctxt "object narration"
 msgid "or, in light time,"
 msgstr "або, у тривалості поширення світла,"
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
-#: src/core/modules/Planet.cpp:1719 src/core/modules/Planet.cpp:1742
+#: src/core/modules/Planet.cpp:1704 src/core/modules/Planet.cpp:1727
 msgctxt "distance"
 msgid "Million kilometers"
 msgstr "Міліони кілометрів"
 
-#: src/core/modules/Planet.cpp:1722
+#: src/core/modules/Planet.cpp:1707
 msgctxt "object narration"
 msgid "The current distance from the Sun amounts to"
 msgstr "Поточна відстань від Сонця —"
 
-#: src/core/modules/Planet.cpp:1745
+#: src/core/modules/Planet.cpp:1730
 msgctxt "object narration"
 msgid "The current distance amounts to"
 msgstr "Поточна відстань —"
 
-#: src/core/modules/Planet.cpp:1804
+#: src/core/modules/Planet.cpp:1789
 msgctxt "object narration"
 msgid "The apparent diameter is"
 msgstr "Видимий діаметр —"
 
-#: src/core/modules/Planet.cpp:1807
+#: src/core/modules/Planet.cpp:1792
 msgctxt "object narration"
 msgid "The equatorial diameter is"
 msgstr "Екваторіальний діаметр —"
@@ -3736,60 +3718,60 @@ msgstr "Позначати малі тіла"
 msgid "double star"
 msgstr "подвійна зірка"
 
-#: src/core/modules/StarWrapper.cpp:104 src/core/modules/StarWrapper.cpp:799
-#: src/core/modules/StarWrapper.cpp:1267
+#: src/core/modules/StarWrapper.cpp:104 src/core/modules/StarWrapper.cpp:788
+#: src/core/modules/StarWrapper.cpp:1248
 msgid "eruptive variable star"
 msgstr "еруптивна змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:106 src/core/modules/StarWrapper.cpp:801
-#: src/core/modules/StarWrapper.cpp:1269
+#: src/core/modules/StarWrapper.cpp:106 src/core/modules/StarWrapper.cpp:790
+#: src/core/modules/StarWrapper.cpp:1250
 msgid "pulsating variable star"
 msgstr "пульсаційна змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:108 src/core/modules/StarWrapper.cpp:803
-#: src/core/modules/StarWrapper.cpp:1271
+#: src/core/modules/StarWrapper.cpp:108 src/core/modules/StarWrapper.cpp:792
+#: src/core/modules/StarWrapper.cpp:1252
 msgid "rotating variable star"
 msgstr "затемнена змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:110 src/core/modules/StarWrapper.cpp:805
-#: src/core/modules/StarWrapper.cpp:1273
+#: src/core/modules/StarWrapper.cpp:110 src/core/modules/StarWrapper.cpp:794
+#: src/core/modules/StarWrapper.cpp:1254
 msgid "cataclysmic variable star"
 msgstr "катаклізмічна змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:112 src/core/modules/StarWrapper.cpp:807
-#: src/core/modules/StarWrapper.cpp:1275
+#: src/core/modules/StarWrapper.cpp:112 src/core/modules/StarWrapper.cpp:796
+#: src/core/modules/StarWrapper.cpp:1256
 msgid "eclipsing binary system"
 msgstr "подвійна система з затемненнями"
 
-#: src/core/modules/StarWrapper.cpp:116 src/core/modules/StarWrapper.cpp:811
-#: src/core/modules/StarWrapper.cpp:1279
+#: src/core/modules/StarWrapper.cpp:116 src/core/modules/StarWrapper.cpp:800
+#: src/core/modules/StarWrapper.cpp:1260
 msgid "variable star"
 msgstr "змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:969
-#: src/core/modules/StarWrapper.cpp:1372
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:958
+#: src/core/modules/StarWrapper.cpp:1353
 #: plugins/Satellites/src/ui_satellitesDialog.h:1233
 msgid "Magnitude range"
 msgstr "Діапазон величин"
 
-#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:969
-#: src/core/modules/StarWrapper.cpp:1372
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:958
+#: src/core/modules/StarWrapper.cpp:1353
 msgid "Photometric system"
 msgstr "Фотометрична система"
 
-#: src/core/modules/StarWrapper.cpp:362 src/core/modules/StarWrapper.cpp:982
+#: src/core/modules/StarWrapper.cpp:362 src/core/modules/StarWrapper.cpp:971
 #: plugins/Pulsars/src/Pulsar.cpp:202
 msgid "Proper motion"
 msgstr "Власний рух"
 
 #: src/core/modules/StarWrapper.cpp:364 src/core/modules/StarWrapper.cpp:370
-#: src/core/modules/StarWrapper.cpp:984 src/core/modules/StarWrapper.cpp:990
+#: src/core/modules/StarWrapper.cpp:973 src/core/modules/StarWrapper.cpp:979
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "мкс/рік"
 
-#: src/core/modules/StarWrapper.cpp:367 src/core/modules/StarWrapper.cpp:987
+#: src/core/modules/StarWrapper.cpp:367 src/core/modules/StarWrapper.cpp:976
 #: plugins/Pulsars/src/Pulsar.cpp:205
 msgid "Proper motions by axes"
 msgstr "Власні рухи за осями"
@@ -3798,38 +3780,38 @@ msgstr "Власні рухи за осями"
 msgid "Radial velocity"
 msgstr "Радіальна швидкість"
 
-#: src/core/modules/StarWrapper.cpp:396 src/core/modules/StarWrapper.cpp:1027
-#: src/core/modules/StarWrapper.cpp:1390 plugins/Quasars/src/Quasar.cpp:142
+#: src/core/modules/StarWrapper.cpp:396 src/core/modules/StarWrapper.cpp:1016
+#: src/core/modules/StarWrapper.cpp:1371 plugins/Quasars/src/Quasar.cpp:142
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 msgid "Spectral Type"
 msgstr "Спектральний тип"
 
-#: src/core/modules/StarWrapper.cpp:399 src/core/modules/StarWrapper.cpp:1030
-#: src/core/modules/StarWrapper.cpp:1393
+#: src/core/modules/StarWrapper.cpp:399 src/core/modules/StarWrapper.cpp:1019
+#: src/core/modules/StarWrapper.cpp:1374
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
 #: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Period"
 msgstr "Період"
 
-#: src/core/modules/StarWrapper.cpp:407 src/core/modules/StarWrapper.cpp:1038
-#: src/core/modules/StarWrapper.cpp:1401
+#: src/core/modules/StarWrapper.cpp:407 src/core/modules/StarWrapper.cpp:1027
+#: src/core/modules/StarWrapper.cpp:1382
 msgid "Next maximum light"
 msgstr "Наступна максимальна світність"
 
-#: src/core/modules/StarWrapper.cpp:409 src/core/modules/StarWrapper.cpp:1040
-#: src/core/modules/StarWrapper.cpp:1403
+#: src/core/modules/StarWrapper.cpp:409 src/core/modules/StarWrapper.cpp:1029
+#: src/core/modules/StarWrapper.cpp:1384
 msgid "Next minimum light"
 msgstr "Наступна мінімальна світність"
 
-#: src/core/modules/StarWrapper.cpp:416 src/core/modules/StarWrapper.cpp:1047
-#: src/core/modules/StarWrapper.cpp:1410
+#: src/core/modules/StarWrapper.cpp:416 src/core/modules/StarWrapper.cpp:1036
+#: src/core/modules/StarWrapper.cpp:1391
 msgctxt "light curve"
 msgid "Rising time"
 msgstr "Час сходження"
 
-#: src/core/modules/StarWrapper.cpp:418 src/core/modules/StarWrapper.cpp:1049
-#: src/core/modules/StarWrapper.cpp:1412
+#: src/core/modules/StarWrapper.cpp:418 src/core/modules/StarWrapper.cpp:1038
+#: src/core/modules/StarWrapper.cpp:1393
 msgid "Duration of eclipse"
 msgstr "Тривалість затемнення"
 
@@ -3848,183 +3830,154 @@ msgstr "на дату"
 msgid "Separation"
 msgstr "Роз’єднання"
 
-#: src/core/modules/StarWrapper.cpp:613
+#: src/core/modules/StarWrapper.cpp:614
 msgctxt "object narration"
 msgid "This star is described as "
 msgstr "Цю зірку описано як"
 
-#: src/core/modules/StarWrapper.cpp:645
+#: src/core/modules/StarWrapper.cpp:646
 msgctxt "object narration"
 msgid "with absolute Magnitude of"
 msgstr "з абсолютною величиною"
 
-#: src/core/modules/StarWrapper.cpp:651 src/core/modules/StarWrapper.cpp:1133
-#: src/core/modules/StarWrapper.cpp:1463
+#: src/core/modules/StarWrapper.cpp:652 src/core/modules/StarWrapper.cpp:1123
+#, qt-format
 msgctxt "object narration"
-msgid "Its B minus V Color Index is"
-msgstr "Індекс кольору B мінус V —"
+msgid "Its B minus V Color Index is %1"
+msgstr "Індекс кольору B мінус V — %1"
 
-#: src/core/modules/StarWrapper.cpp:667
+#: src/core/modules/StarWrapper.cpp:668 src/core/modules/StarWrapper.cpp:1145
+#: src/core/modules/StarWrapper.cpp:1467
+#, qt-format
 msgctxt "object narration, alternatives"
-msgid "or"
-msgstr "або"
+msgid "either %1 or %2"
+msgstr "або %1 або %2"
 
-#: src/core/modules/StarWrapper.cpp:669 src/core/modules/StarWrapper.cpp:1157
-#: src/core/modules/StarWrapper.cpp:1487
+#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1147
+#: src/core/modules/StarWrapper.cpp:1469
+#, qt-format
 msgctxt "object narration"
-msgid "Its magnitude range goes from "
-msgstr "Діапазон величин від"
+msgid "Its magnitude range goes from %1 to %2 in the Photometric system %3."
+msgstr ""
+"Величини перебувають у діапазоні від %1 до %2 у фотометричній системі %3."
 
-#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1158
+#. TRANSLATORS: Its distance is x plus/minus y light years
+#: src/core/modules/StarWrapper.cpp:688 src/core/modules/StarWrapper.cpp:1172
+#, qt-format
+msgctxt "object narration"
+msgid "Its distance is %1 ± %2 light years."
+msgstr "Відстань — %1 ± %2 світлових років."
+
+#: src/core/modules/StarWrapper.cpp:698 src/core/modules/StarWrapper.cpp:1160
+#, qt-format
+msgctxt "object narration"
+msgid ""
+"Its proper motion is %1 milli-arcseconds per year towards %2 degrees, or, by"
+" axes, %3 milli-arcseconds per year in right ascension and %4 in "
+"declination."
+msgstr ""
+"Власний рух — %1 кутових мілісекунд на рік у напрямку %2 градусів або, за "
+"вісями, %3 кутових мілісекунд на рік за прямим сходженням і %4 за схиленням."
+
+#: src/core/modules/StarWrapper.cpp:706
+#, qt-format
+msgctxt "object narration"
+msgid "Its radial velocity is %1 kilometers per second."
+msgstr "Радіальна швидкість — %1 кілометрів за секунду."
+
+#: src/core/modules/StarWrapper.cpp:715 src/core/modules/StarWrapper.cpp:1183
+#, qt-format
+msgctxt "object narration"
+msgid "Its parallax is %1 ± %2 milli-arcseconds."
+msgstr "Паралакс — %1 ± %2 кутових мілісекунд."
+
+#: src/core/modules/StarWrapper.cpp:718 src/core/modules/StarWrapper.cpp:1186
+#, qt-format
+msgctxt "object narration"
+msgid "Its parallax is %1 milli-arcseconds."
+msgstr "Паралакс — %1 кутових мілісекунд."
+
+#: src/core/modules/StarWrapper.cpp:724 src/core/modules/StarWrapper.cpp:1200
 #: src/core/modules/StarWrapper.cpp:1488
-msgctxt "object narration, describes a range target"
-msgid "to"
-msgstr "до"
-
-#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1158
-#: src/core/modules/StarWrapper.cpp:1488
+#, qt-format
 msgctxt "object narration"
-msgid "in the Photometric system"
-msgstr "у фотометричній системі"
+msgid "Its Spectral Type is %1."
+msgstr "Спектральний тип — %1."
 
-#: src/core/modules/StarWrapper.cpp:688 src/core/modules/StarWrapper.cpp:1192
+#: src/core/modules/StarWrapper.cpp:727 src/core/modules/StarWrapper.cpp:1203
+#: src/core/modules/StarWrapper.cpp:1491
+#, qt-format
 msgctxt "object narration"
-msgid "Its distance is"
-msgstr "Відстань —"
+msgid "It has a period of %1 days"
+msgstr "Період — %1 днів"
 
-#: src/core/modules/StarWrapper.cpp:697 src/core/modules/StarWrapper.cpp:1170
+#: src/core/modules/StarWrapper.cpp:735 src/core/modules/StarWrapper.cpp:1211
+#: src/core/modules/StarWrapper.cpp:1499
+#, qt-format
 msgctxt "object narration"
-msgid "Its proper motion is"
-msgstr "Власний рух —"
+msgid "Next minimum light will be at %1 UTC"
+msgstr "Наступний мінімум світності буде о %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:699 src/core/modules/StarWrapper.cpp:704
-#: src/core/modules/StarWrapper.cpp:1172 src/core/modules/StarWrapper.cpp:1177
+#: src/core/modules/StarWrapper.cpp:736 src/core/modules/StarWrapper.cpp:1212
+#: src/core/modules/StarWrapper.cpp:1500
+#, qt-format
 msgctxt "object narration"
-msgid "milli-arcseconds per year"
-msgstr "мілісекнуд на рік"
+msgid "Next maximum light will be at %1 UTC"
+msgstr "Наступний максимум світності буде о %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:702 src/core/modules/StarWrapper.cpp:1175
+#: src/core/modules/StarWrapper.cpp:742 src/core/modules/StarWrapper.cpp:1218
+#: src/core/modules/StarWrapper.cpp:1506
+#, qt-format
 msgctxt "object narration"
-msgid "or, by axes, "
-msgstr "або, за вісями,"
+msgid "The duration fraction of an eclipse is %1, that is, %2."
+msgstr "Тривалість часткового затемнення — %1, тобто %2."
 
-#: src/core/modules/StarWrapper.cpp:705 src/core/modules/StarWrapper.cpp:1178
-msgctxt "object narration"
-msgid "in right ascension and "
-msgstr "у прямому сходженні і"
-
-#: src/core/modules/StarWrapper.cpp:707 src/core/modules/StarWrapper.cpp:1180
-msgctxt "object narration"
-msgid "in declination"
-msgstr "у схиленні"
-
-#. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/StarWrapper.cpp:715
-msgctxt "speed"
-msgid "kilometers per second"
-msgstr "кілометри за секунду"
-
-#: src/core/modules/StarWrapper.cpp:716
-msgctxt "object narration"
-msgid "Its radial velocity is"
-msgstr "Радіальна швидкість —"
-
-#: src/core/modules/StarWrapper.cpp:724
-msgctxt "object narration"
-msgid "Its parallax is"
-msgstr "Паралакс —"
-
-#: src/core/modules/StarWrapper.cpp:733
-msgctxt "object narration"
-msgid "Its Spectral Type is"
-msgstr "Спектральний тип —"
-
-#: src/core/modules/StarWrapper.cpp:736 src/core/modules/StarWrapper.cpp:1221
-#: src/core/modules/StarWrapper.cpp:1509
-msgctxt "object narration"
-msgid "It has a period of"
-msgstr "Має період"
-
-#: src/core/modules/StarWrapper.cpp:744 src/core/modules/StarWrapper.cpp:1229
-#: src/core/modules/StarWrapper.cpp:1517
-msgctxt "object narration"
-msgid "Next minimum light will be"
-msgstr "Наступним мнімумом світності буде"
-
-#: src/core/modules/StarWrapper.cpp:745 src/core/modules/StarWrapper.cpp:1230
-#: src/core/modules/StarWrapper.cpp:1518
-msgctxt "object narration"
-msgid "Next maximum light will be"
-msgstr "Наступним максимумом світності буде"
-
-#: src/core/modules/StarWrapper.cpp:751
-msgctxt "object narration"
-msgid "The duration fraction of an eclipse is"
-msgstr "Тривалість часткового затемнення —"
-
-#: src/core/modules/StarWrapper.cpp:752 src/core/modules/StarWrapper.cpp:1237
-#: src/core/modules/StarWrapper.cpp:1525
+#: src/core/modules/StarWrapper.cpp:743 src/core/modules/StarWrapper.cpp:1219
+#: src/core/modules/StarWrapper.cpp:1507
+#, qt-format
 msgctxt "object narration: light curve"
-msgid "The rising time fraction is"
-msgstr "Частка часу сходження —"
+msgid "The rising time fraction is %1, that is, %2."
+msgstr "Частка часу сходження — %1, тобто %2."
 
-#: src/core/modules/StarWrapper.cpp:753 src/core/modules/StarWrapper.cpp:1238
-#: src/core/modules/StarWrapper.cpp:1526
+#: src/core/modules/StarWrapper.cpp:752
+#, qt-format
 msgctxt "object narration"
-msgid "that is"
-msgstr "тобто"
+msgid "Its position angle as given for %1 is %2 degrees."
+msgstr "Позиційний кут, як задано для %1 — %2 градусів."
 
-#: src/core/modules/StarWrapper.cpp:762
-msgctxt "object narration"
-msgid "Its position angle as given for"
-msgstr "Позиційний кут, як задано для"
-
-#: src/core/modules/StarWrapper.cpp:764 src/core/modules/StarWrapper.cpp:773
+#: src/core/modules/StarWrapper.cpp:753 src/core/modules/StarWrapper.cpp:759
 msgctxt "coordinates for current epoch"
 msgid "current date"
 msgstr "поточна дата"
 
-#: src/core/modules/StarWrapper.cpp:770 src/core/modules/StarWrapper.cpp:776
-msgctxt "object narration"
-msgid "Its Separation for"
-msgstr "Роз'єднання для"
-
-#: src/core/modules/StarWrapper.cpp:774 src/core/modules/StarWrapper.cpp:776
-msgctxt "object narration"
-msgid "arc-seconds"
-msgstr "кут. секунди"
-
-#: src/core/modules/StarWrapper.cpp:1113 src/core/modules/StarWrapper.cpp:1115
-#: src/core/modules/StarWrapper.cpp:1453 src/core/modules/StarWrapper.cpp:1455
-msgctxt "object narration"
-msgid "Its type is"
-msgstr "Тип —"
-
-#: src/core/modules/StarWrapper.cpp:1113 src/core/modules/StarWrapper.cpp:1453
-msgctxt "object narration"
-msgid "with variable type"
-msgstr "з типом змінності"
-
-#: src/core/modules/StarWrapper.cpp:1155 src/core/modules/StarWrapper.cpp:1485
+#: src/core/modules/StarWrapper.cpp:758
 #, qt-format
-msgctxt "variable star narration"
-msgid "either %1 or %2"
-msgstr "або %1, або %2"
-
-#: src/core/modules/StarWrapper.cpp:1201
 msgctxt "object narration"
-msgid "Its Parallax is"
-msgstr "Паралакс —"
+msgid "Its Separation for %1 is %2 arc-seconds (%3). "
+msgstr "Відокремлення для %1 — %2 кутових секунд (%3). "
 
-#: src/core/modules/StarWrapper.cpp:1218 src/core/modules/StarWrapper.cpp:1506
-msgctxt "star narration"
-msgid "Its spectral type is"
-msgstr "Спектральний тип —"
-
-#: src/core/modules/StarWrapper.cpp:1236 src/core/modules/StarWrapper.cpp:1524
+#: src/core/modules/StarWrapper.cpp:763
+#, qt-format
 msgctxt "object narration"
-msgid "The duration of an eclipse is"
-msgstr "Тривалість затемнення —"
+msgid "Its Separation for %1 is %2 arc-seconds. "
+msgstr "Відокремлення для %1 — %2 кутових секунд. "
+
+#: src/core/modules/StarWrapper.cpp:1102 src/core/modules/StarWrapper.cpp:1434
+#, qt-format
+msgctxt "object narration"
+msgid "Its type is %1 with variable type %2."
+msgstr "Тип — %1 з типом змінності %2."
+
+#: src/core/modules/StarWrapper.cpp:1104 src/core/modules/StarWrapper.cpp:1436
+#, qt-format
+msgctxt "object narration"
+msgid "Its type is %1."
+msgstr "Тип — %1."
+
+#: src/core/modules/StarWrapper.cpp:1445
+msgctxt "object narration"
+msgid "Its B minus V Color Index is"
+msgstr "Індекс кольору B мінус V —"
 
 #: src/core/modules/MilkyWay.cpp:110
 msgid "Milky Way"
@@ -5354,7 +5307,7 @@ msgstr "Час доби"
 msgid "Polar night"
 msgstr "Полярна ніч"
 
-#: src/core/StelObject.cpp:887 src/core/StelObject.cpp:1449
+#: src/core/StelObject.cpp:887 src/core/StelObject.cpp:1439
 msgid "This object never rises"
 msgstr "Це об'єкт ніколи не сходить"
 
@@ -5403,14 +5356,13 @@ msgstr "Макс. елонгація на захід"
 msgid "Parallactic Angle"
 msgstr "Паралактичний кут"
 
-#: src/core/StelObject.cpp:994 src/core/StelObject.cpp:1544
+#: src/core/StelObject.cpp:994 src/core/StelObject.cpp:1530
 #: src/gui/AstroCalcDialog.cpp:7770
 msgid "IAU Constellation"
 msgstr "Сузір’я МАО"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/StelObject.cpp:1016 src/core/StelObject.cpp:1566
-#: src/translations.h:59
+#: src/core/StelObject.cpp:1016 src/translations.h:59
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:518
 msgid "Constellations"
 msgstr "Сузір'я"
@@ -5421,18 +5373,19 @@ msgid "Equatorial coordinates for J2000: "
 msgstr "Екваторіальні координати J2000.0:"
 
 #: src/core/StelObject.cpp:1094 src/core/StelObject.cpp:1119
+#, qt-format
 msgctxt "object narration"
-msgid "Right Ascension"
-msgstr "Пряме сходження"
+msgid "Right Ascension %1, and %2 %3. "
+msgstr "Пряме сходження — %1 і %2 %3. "
 
-#: src/core/StelObject.cpp:1096 src/core/StelObject.cpp:1121
-#: src/core/StelObject.cpp:1160
+#: src/core/StelObject.cpp:1095 src/core/StelObject.cpp:1120
+#: src/core/StelObject.cpp:1159
 msgctxt "object narration"
 msgid "Polar Distance"
 msgstr "Полярна відстань"
 
-#: src/core/StelObject.cpp:1096 src/core/StelObject.cpp:1121
-#: src/core/StelObject.cpp:1160
+#: src/core/StelObject.cpp:1095 src/core/StelObject.cpp:1120
+#: src/core/StelObject.cpp:1159
 msgctxt "object narration"
 msgid "Declination"
 msgstr "Схилення"
@@ -5448,9 +5401,10 @@ msgid "Fixed-Equatorial coordinates of date:"
 msgstr "Виправлені екваторіальні координати на дату:"
 
 #: src/core/StelObject.cpp:1158
+#, qt-format
 msgctxt "object narration"
-msgid "Hour Angle"
-msgstr "Годинний кут"
+msgid "Hour Angle %1, and %2 %3. "
+msgstr "Годинний кут — %1 і %2 %3. "
 
 #: src/core/StelObject.cpp:1204
 msgctxt "object narration"
@@ -5458,207 +5412,163 @@ msgid "Azimuthal coordinates are:"
 msgstr "Азимутальні координати:"
 
 #: src/core/StelObject.cpp:1205
+#, qt-format
 msgctxt "object narration"
-msgid "azimuth"
-msgstr "азимут"
+msgid "Azimuth %1, and altitude %2. "
+msgstr "Азимут — %1 і висота %2. "
 
-#: src/core/StelObject.cpp:1207
-msgctxt "object narration"
-msgid "altitude"
-msgstr "висота"
-
-#: src/core/StelObject.cpp:1227
+#: src/core/StelObject.cpp:1225
 msgctxt "object narration"
 msgid "Galactic coordinates are:"
 msgstr "Галактичні координати:"
 
-#: src/core/StelObject.cpp:1228 src/core/StelObject.cpp:1251
-#: src/core/StelObject.cpp:1282 src/core/StelObject.cpp:1309
+#: src/core/StelObject.cpp:1226 src/core/StelObject.cpp:1247
+#: src/core/StelObject.cpp:1276 src/core/StelObject.cpp:1301
+#, qt-format
 msgctxt "object narration"
-msgid "longitude"
-msgstr "довгота"
+msgid "Longitude %1, and latitude %2. "
+msgstr "Довгота — %1 і широта %2. "
 
-#: src/core/StelObject.cpp:1230 src/core/StelObject.cpp:1253
-#: src/core/StelObject.cpp:1284 src/core/StelObject.cpp:1311
-msgctxt "object narration"
-msgid "latitude"
-msgstr "широта"
-
-#: src/core/StelObject.cpp:1250
+#: src/core/StelObject.cpp:1246
 msgctxt "object narration"
 msgid "Supergalactic coordinates are:"
 msgstr "Супергалактичні координати:"
 
-#: src/core/StelObject.cpp:1281
+#: src/core/StelObject.cpp:1275
 msgctxt "object narration"
 msgid "Ecliptical coordinates for Equinox 2000 are:"
 msgstr "Екліптичні координати, рівнодення 2000.0:"
 
-#: src/core/StelObject.cpp:1308
+#: src/core/StelObject.cpp:1300
 msgctxt "object narration"
 msgid "Ecliptical coordinates of date are:"
 msgstr "Екліптичні координати на дату:"
 
-#: src/core/StelObject.cpp:1315
+#: src/core/StelObject.cpp:1305
 msgctxt "object narration"
 msgid "The Ecliptic obliquity of date is"
 msgstr "Відхилення екліптики на дату —"
 
-#: src/core/StelObject.cpp:1331
+#: src/core/StelObject.cpp:1321
 msgctxt "object narration"
 msgid "The Mean Sidereal Time is"
 msgstr "Середній сидеричний час —"
 
-#: src/core/StelObject.cpp:1340
+#: src/core/StelObject.cpp:1330
 msgctxt "object narration"
 msgid "The Apparent Sidereal Time is"
 msgstr "Видимий сидеричний час —"
 
-#: src/core/StelObject.cpp:1373
+#: src/core/StelObject.cpp:1363
 msgctxt "object narration; celestial event; passage across a meridian"
 msgid "Transit on this day is at"
 msgstr "Транзит на цей день —"
 
-#: src/core/StelObject.cpp:1374
+#: src/core/StelObject.cpp:1364
 msgctxt "object narration"
 msgid "Rise on this day is at"
 msgstr "Сходження на цей день —"
 
-#: src/core/StelObject.cpp:1375
+#: src/core/StelObject.cpp:1365
 msgctxt "object narration"
 msgid "Set on this day is at"
 msgstr "Захід на цей день —"
 
-#: src/core/StelObject.cpp:1385
+#: src/core/StelObject.cpp:1375
 msgctxt "object narration"
 msgid "The object does not rise on this day."
 msgstr "Цього дня об'єкт не сходить над горизонтом."
 
-#: src/core/StelObject.cpp:1399
+#: src/core/StelObject.cpp:1389
 msgctxt "object narration"
 msgid "There is no meridian transit on this day."
 msgstr "На цей день немає переходу через мередіан."
 
-#: src/core/StelObject.cpp:1411
+#: src/core/StelObject.cpp:1401
 msgctxt "object narration"
 msgid "The object does not set on this day."
 msgstr "Цього дня об'єкт не сідає за горизонт."
 
-#: src/core/StelObject.cpp:1427
+#: src/core/StelObject.cpp:1417
+#, qt-format
 msgctxt "celestial event"
-msgid "Morning twilight for a Solar altitude of"
-msgstr "Вранішні сутінки для висоти Сонця"
+msgid "Morning twilight for a Solar altitude of %1 degrees begins at %2. "
+msgstr "Вранішні сутінки для висоти Сонця у %1 градусів починаються о %2."
 
-#: src/core/StelObject.cpp:1428
+#: src/core/StelObject.cpp:1418
+#, qt-format
 msgctxt "celestial event"
-msgid "Evening twilight for a Solar altitude of"
-msgstr "Вечірні сутінки для висоти Сонця"
+msgid "Evening twilight for a Solar altitude of %1 degrees ends at %2. "
+msgstr "Вечірні сутінки для висоти Сонця у %1 градусів завершуються о %2."
 
-#: src/core/StelObject.cpp:1431
-msgctxt "object narration"
-msgid "begins at"
-msgstr "починається о"
-
-#: src/core/StelObject.cpp:1434
-msgctxt "object narration"
-msgid "ends at"
-msgstr "завершується о"
-
-#: src/core/StelObject.cpp:1439
+#: src/core/StelObject.cpp:1429
 msgctxt "object narration"
 msgid "Duration of Daytime"
 msgstr "Тривалість дня"
 
-#: src/core/StelObject.cpp:1447
+#: src/core/StelObject.cpp:1437
 msgctxt "object narration"
 msgid "It is Polar night"
 msgstr "Полярна ніч"
 
-#: src/core/StelObject.cpp:1454
+#: src/core/StelObject.cpp:1444
 msgid "It is Polar day"
 msgstr "Полярний день"
 
-#: src/core/StelObject.cpp:1456
+#: src/core/StelObject.cpp:1446
 msgid "This object is circumpolar and so never sets"
 msgstr "Цей об'єкт є навколополярним і ніколи не заходить"
 
-#: src/core/StelObject.cpp:1473
-msgctxt "celestial coordinate system"
-msgid "Azimuth"
-msgstr "Азимут"
-
-#: src/core/StelObject.cpp:1474
-msgctxt "celestial coordinate system"
-msgid "Hour Angle"
-msgstr "Годинний кут"
-
-#. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
-#. with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:1476
+#: src/core/StelObject.cpp:1480
+#, qt-format
 msgctxt "object narration"
-msgid "Greatest Eastern Digression is at"
-msgstr "Найбільша східна елонгація о"
+msgid "Greatest Eastern Digression is at Azimuth %1, Hour Angle %2"
+msgstr "Найбільша східна елонгація для азимута %1, годинний кут — %2"
 
-#. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
-#. stars with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:1496
+#: src/core/StelObject.cpp:1494
+#, qt-format
 msgctxt "object narration"
-msgid "Greatest Western Digression is at"
-msgstr "Найбільша західна елонгація о"
+msgid "Greatest Western Digression is at Azimuth %1, Hour Angle %2"
+msgstr "Найбільша західна елонгація для азимута %1, годинний кут — %2"
 
-#: src/core/StelObject.cpp:1533
+#: src/core/StelObject.cpp:1519
 msgctxt "object narration"
 msgid "The Parallactic Angle is"
 msgstr "Паралактичний кут —"
 
-#: src/core/StelObject.cpp:1573 src/core/StelObject.cpp:1580
-msgctxt "object narration"
-msgid "Its"
-msgstr "Її"
-
-#: src/core/StelObject.cpp:1573 src/core/StelObject.cpp:1580
-msgctxt "object narration"
-msgid "Position"
-msgstr "Позиція"
-
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1967
+#: src/core/StelObject.cpp:1950
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "А/В Сонця"
 
-#: src/core/StelObject.cpp:1967
+#: src/core/StelObject.cpp:1950
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "Аз./Вис. Сонця"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1985
+#: src/core/StelObject.cpp:1968
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "А/В Місяця"
 
-#: src/core/StelObject.cpp:1985
+#: src/core/StelObject.cpp:1968
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "Аз./Вис. Місяця"
 
-#. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:2024
+#: src/core/StelObject.cpp:2006
+#, qt-format
 msgctxt "object narration"
-msgid "The sun's azimuth is "
-msgstr "Азимут сонця —"
+msgid "The Sun's azimuth is %1, and its altitude is %2."
+msgstr "Азимут Сонця — %1, а його висота — %2."
 
-#: src/core/StelObject.cpp:2025 src/core/StelObject.cpp:2039
+#: src/core/StelObject.cpp:2017
+#, qt-format
 msgctxt "object narration"
-msgid "and its altitude is "
-msgstr "і його висота —"
-
-#. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:2038
-msgctxt "object narration"
-msgid "The Moon's azimuth is "
-msgstr "Азимут Місяця —"
+msgid "The Moon's azimuth is %1, and its altitude is %2."
+msgstr "Азимут Місяця — %1, а його висота — %2."
 
 #: src/core/StelObjectMgr.cpp:51 src/core/StelMovementMgr.cpp:194
 #: src/gui/StelGui.cpp:274 src/StelMainView.cpp:967 src/StelMainView.cpp:968
@@ -6468,7 +6378,6 @@ msgid "hours"
 msgstr "години"
 
 #: src/core/StelUtils.cpp:437 src/core/StelUtils.cpp:489
-#: src/core/StelUtils.cpp:1648
 msgid "minus"
 msgstr "мінус"
 
@@ -6523,201 +6432,196 @@ msgctxt "object narration"
 msgid "West"
 msgstr "Захід"
 
-#: src/core/StelUtils.cpp:1652
-msgctxt "decimal separator"
-msgid "point"
-msgstr "точка"
-
-#: src/core/StelUtils.cpp:3142
+#: src/core/StelUtils.cpp:3126
 msgid "Alpha"
 msgstr "альфу"
 
-#: src/core/StelUtils.cpp:3142 src/ui_searchDialogGui.h:774
+#: src/core/StelUtils.cpp:3126 src/ui_searchDialogGui.h:774
 msgid "alpha"
 msgstr "альфа"
 
-#: src/core/StelUtils.cpp:3143
+#: src/core/StelUtils.cpp:3127
 msgid "Beta"
 msgstr "Бета-версія"
 
-#: src/core/StelUtils.cpp:3143 src/ui_searchDialogGui.h:777
+#: src/core/StelUtils.cpp:3127 src/ui_searchDialogGui.h:777
 msgid "beta"
 msgstr "бета"
 
-#: src/core/StelUtils.cpp:3144 src/gui/AstroCalcDialog.cpp:2457
+#: src/core/StelUtils.cpp:3128 src/gui/AstroCalcDialog.cpp:2457
 #: src/gui/AstroCalcDialog.cpp:3049
 msgid "Gamma"
 msgstr "Гамма"
 
-#: src/core/StelUtils.cpp:3144 src/ui_searchDialogGui.h:780
+#: src/core/StelUtils.cpp:3128 src/ui_searchDialogGui.h:780
 msgid "gamma"
 msgstr "гамма"
 
-#: src/core/StelUtils.cpp:3145
+#: src/core/StelUtils.cpp:3129
 msgid "Delta"
 msgstr "Дельта"
 
-#: src/core/StelUtils.cpp:3145 src/ui_searchDialogGui.h:783
+#: src/core/StelUtils.cpp:3129 src/ui_searchDialogGui.h:783
 msgid "delta"
 msgstr "дельта"
 
-#: src/core/StelUtils.cpp:3146
+#: src/core/StelUtils.cpp:3130
 msgid "Epsilon"
 msgstr "Епсилон"
 
-#: src/core/StelUtils.cpp:3146 src/ui_searchDialogGui.h:786
+#: src/core/StelUtils.cpp:3130 src/ui_searchDialogGui.h:786
 msgid "epsilon"
 msgstr "епсилон"
 
-#: src/core/StelUtils.cpp:3148
+#: src/core/StelUtils.cpp:3132
 msgid "Zeta"
 msgstr "Дзета"
 
-#: src/core/StelUtils.cpp:3148 src/ui_searchDialogGui.h:789
+#: src/core/StelUtils.cpp:3132 src/ui_searchDialogGui.h:789
 msgid "zeta"
 msgstr "дзета"
 
-#: src/core/StelUtils.cpp:3149
+#: src/core/StelUtils.cpp:3133
 msgid "Eta"
 msgstr "Ета"
 
-#: src/core/StelUtils.cpp:3149 src/ui_searchDialogGui.h:792
+#: src/core/StelUtils.cpp:3133 src/ui_searchDialogGui.h:792
 msgid "eta"
 msgstr "ета"
 
-#: src/core/StelUtils.cpp:3150
+#: src/core/StelUtils.cpp:3134
 msgid "Theta"
 msgstr "Тета"
 
-#: src/core/StelUtils.cpp:3150 src/ui_searchDialogGui.h:795
+#: src/core/StelUtils.cpp:3134 src/ui_searchDialogGui.h:795
 msgid "theta"
 msgstr "тета"
 
-#: src/core/StelUtils.cpp:3151
+#: src/core/StelUtils.cpp:3135
 msgid "Iota"
 msgstr "Йота"
 
-#: src/core/StelUtils.cpp:3151 src/ui_searchDialogGui.h:771
+#: src/core/StelUtils.cpp:3135 src/ui_searchDialogGui.h:771
 msgid "iota"
 msgstr "йота"
 
-#: src/core/StelUtils.cpp:3152
+#: src/core/StelUtils.cpp:3136
 msgid "Kappa"
 msgstr "Каппа"
 
-#: src/core/StelUtils.cpp:3152 src/ui_searchDialogGui.h:798
+#: src/core/StelUtils.cpp:3136 src/ui_searchDialogGui.h:798
 msgid "kappa"
 msgstr "каппа"
 
-#: src/core/StelUtils.cpp:3154
+#: src/core/StelUtils.cpp:3138
 msgid "Lambda"
 msgstr "Лямбда"
 
-#: src/core/StelUtils.cpp:3154 src/ui_searchDialogGui.h:801
+#: src/core/StelUtils.cpp:3138 src/ui_searchDialogGui.h:801
 msgid "lambda"
 msgstr "лямбда"
 
-#: src/core/StelUtils.cpp:3155
+#: src/core/StelUtils.cpp:3139
 msgid "Mu"
 msgstr "Мю"
 
-#: src/core/StelUtils.cpp:3155 src/ui_searchDialogGui.h:804
+#: src/core/StelUtils.cpp:3139 src/ui_searchDialogGui.h:804
 msgid "mu"
 msgstr "мю"
 
-#: src/core/StelUtils.cpp:3156
+#: src/core/StelUtils.cpp:3140
 msgid "Nu"
 msgstr "Ню"
 
-#: src/core/StelUtils.cpp:3156 src/ui_searchDialogGui.h:807
+#: src/core/StelUtils.cpp:3140 src/ui_searchDialogGui.h:807
 msgid "nu"
 msgstr "ню"
 
-#: src/core/StelUtils.cpp:3157
+#: src/core/StelUtils.cpp:3141
 msgid "Xi"
 msgstr "Ксі"
 
-#: src/core/StelUtils.cpp:3157 src/ui_searchDialogGui.h:810
+#: src/core/StelUtils.cpp:3141 src/ui_searchDialogGui.h:810
 msgid "xi"
 msgstr "ксі"
 
-#: src/core/StelUtils.cpp:3158
+#: src/core/StelUtils.cpp:3142
 msgid "Omicron"
 msgstr "Омікрон"
 
-#: src/core/StelUtils.cpp:3158 src/ui_searchDialogGui.h:813
+#: src/core/StelUtils.cpp:3142 src/ui_searchDialogGui.h:813
 msgid "omicron"
 msgstr "омікрон"
 
-#: src/core/StelUtils.cpp:3160
+#: src/core/StelUtils.cpp:3144
 msgid "Pi"
 msgstr "Пі"
 
-#: src/core/StelUtils.cpp:3160 src/ui_searchDialogGui.h:816
+#: src/core/StelUtils.cpp:3144 src/ui_searchDialogGui.h:816
 msgid "pi"
 msgstr "пі"
 
-#: src/core/StelUtils.cpp:3161
+#: src/core/StelUtils.cpp:3145
 msgid "Rho"
 msgstr "Ро"
 
-#: src/core/StelUtils.cpp:3161 src/ui_searchDialogGui.h:819
+#: src/core/StelUtils.cpp:3145 src/ui_searchDialogGui.h:819
 msgid "rho"
 msgstr "ро"
 
-#: src/core/StelUtils.cpp:3162
+#: src/core/StelUtils.cpp:3146
 msgid "Sigma"
 msgstr "Сигма"
 
-#: src/core/StelUtils.cpp:3162 src/ui_searchDialogGui.h:822
+#: src/core/StelUtils.cpp:3146 src/ui_searchDialogGui.h:822
 msgid "sigma"
 msgstr "сигма"
 
-#: src/core/StelUtils.cpp:3163
+#: src/core/StelUtils.cpp:3147
 msgid "Tau"
 msgstr "Tau"
 
-#: src/core/StelUtils.cpp:3163 src/ui_searchDialogGui.h:825
+#: src/core/StelUtils.cpp:3147 src/ui_searchDialogGui.h:825
 msgid "tau"
 msgstr "тау"
 
-#: src/core/StelUtils.cpp:3164
+#: src/core/StelUtils.cpp:3148
 msgid "Upsilon"
 msgstr "Іпсілон"
 
-#: src/core/StelUtils.cpp:3164 src/ui_searchDialogGui.h:828
+#: src/core/StelUtils.cpp:3148 src/ui_searchDialogGui.h:828
 msgid "upsilon"
 msgstr "іпсилон"
 
-#: src/core/StelUtils.cpp:3166
+#: src/core/StelUtils.cpp:3150
 msgid "Phi"
 msgstr "Фі"
 
-#: src/core/StelUtils.cpp:3166 src/ui_searchDialogGui.h:831
+#: src/core/StelUtils.cpp:3150 src/ui_searchDialogGui.h:831
 msgid "phi"
 msgstr "фі"
 
-#: src/core/StelUtils.cpp:3167
+#: src/core/StelUtils.cpp:3151
 msgid "Chi"
 msgstr "Хі"
 
-#: src/core/StelUtils.cpp:3167 src/ui_searchDialogGui.h:834
+#: src/core/StelUtils.cpp:3151 src/ui_searchDialogGui.h:834
 msgid "chi"
 msgstr "хі"
 
-#: src/core/StelUtils.cpp:3168
+#: src/core/StelUtils.cpp:3152
 msgid "Psi"
 msgstr "Псі"
 
-#: src/core/StelUtils.cpp:3168 src/ui_searchDialogGui.h:837
+#: src/core/StelUtils.cpp:3152 src/ui_searchDialogGui.h:837
 msgid "psi"
 msgstr "псі"
 
-#: src/core/StelUtils.cpp:3169
+#: src/core/StelUtils.cpp:3153
 msgid "Omega"
 msgstr "Омега"
 
-#: src/core/StelUtils.cpp:3169 src/ui_searchDialogGui.h:840
+#: src/core/StelUtils.cpp:3153 src/ui_searchDialogGui.h:840
 msgid "omega"
 msgstr "омега"
 
