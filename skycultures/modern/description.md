@@ -232,7 +232,7 @@ The Archer lies around the center of the Milky Way, therefore this area is rich 
 
 ##### Capricornus
 
-The Sea-Goat constellation is of Babylonian origin and is depicted, as the name says, as "having horns like a goat", with the back of the body in shape of a fish tail. In antiquity it used to stand along the southernmost part of the ecliptic which defines the Tropic of Capricorn. Precession has meanwhile moved the stars a full sign to the west, so that the Zodiacal First point of Capricorn lies near the eastern edge of Sagittarius.
+The Sea-Goat constellation is of Babylonian origin and is depicted, as the name says, as "having horns like a goat", with the back of the body in shape of a fish tail. In antiquity it used to stand along the southernmost part of the ecliptic which defines the Tropic of Capricorn. Precession has meanwhile moved the stars a full sign to the east, so that the Zodiacal First point of Capricorn lies near the western edge of the constellation of Sagittarius.
 
 Capricornus includes one bright globular cluster, Messier 30. 
 
