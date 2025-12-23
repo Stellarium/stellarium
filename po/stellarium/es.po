@@ -6,10 +6,10 @@
 # Translators:
 # María José Fernández Pintelos, 2022
 # cardinot <mcardinot@gmail.com>, 2022
-# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
 # Leonardo Oliveri, 2024
-# Víctor Vega <transifex.757ab@simplelogin.com>, 2025
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2025
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
+# Víctor Vega <transifex.757ab@simplelogin.com>, 2025
 # Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2025
 # 
 #, fuzzy
@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-21 21:30+0700\n"
+"POT-Creation-Date: 2025-12-23 14:39+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/stellarium/teams/80998/es/)\n"
@@ -43,8 +43,8 @@ msgstr "objeto personalizado"
 #: src/core/modules/Nebula.cpp:295 src/core/modules/Planet.cpp:619
 #: src/core/modules/Planet.cpp:622 src/core/modules/StarWrapper.cpp:51
 #: src/core/modules/StarWrapper.cpp:288 src/core/modules/StarWrapper.cpp:290
-#: src/core/modules/StarWrapper.cpp:926 src/core/modules/StarWrapper.cpp:928
-#: src/core/modules/StarWrapper.cpp:1339 src/core/modules/StarWrapper.cpp:1341
+#: src/core/modules/StarWrapper.cpp:915 src/core/modules/StarWrapper.cpp:917
+#: src/core/modules/StarWrapper.cpp:1320 src/core/modules/StarWrapper.cpp:1322
 #: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:2456
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3080
 #: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7688
@@ -1435,271 +1435,293 @@ msgstr "Altitud solar"
 msgid "Origin of name"
 msgstr "Origen del nombre"
 
-#: src/core/modules/NomenclatureItem.cpp:312
-#: src/core/modules/NomenclatureItem.cpp:324 src/core/modules/Planet.cpp:1725
-#: src/core/modules/Planet.cpp:1748
+#: src/core/modules/NomenclatureItem.cpp:312 src/core/modules/Planet.cpp:1710
+#: src/core/modules/Planet.cpp:1733
 msgctxt "object narration"
 msgid "or"
 msgstr "o"
 
-#: src/core/modules/NomenclatureItem.cpp:318
+#: src/core/modules/NomenclatureItem.cpp:328
+#, qt-format
 msgctxt "object narration"
-msgid "is a"
-msgstr "es una"
+msgid "is a %1 (or %2), that is: %3, on the Moon"
+msgstr "es un %1 (o %2), es decir: %3, en la Luna"
 
-#: src/core/modules/NomenclatureItem.cpp:332
-msgctxt "object narration)"
-msgid "that is"
-msgstr "que es igual a"
+#: src/core/modules/NomenclatureItem.cpp:330
+#, qt-format
+msgctxt "object narration"
+msgid "is a %1 (or %2), on the Moon"
+msgstr "es un %1 (o %2), en la Luna"
 
 #: src/core/modules/NomenclatureItem.cpp:335
+#, qt-format
 msgctxt "object narration"
-msgid "on the"
-msgstr "en el"
+msgid "is a %1, that is: %2, on the Moon"
+msgstr "es un %1, es decir: %2, en la Luna"
 
-#: src/core/modules/NomenclatureItem.cpp:335 src/core/modules/Planet.cpp:1687
+#: src/core/modules/NomenclatureItem.cpp:337
+#, qt-format
 msgctxt "object narration"
-msgid "on"
-msgstr "en"
+msgid "is a %1 on the Moon"
+msgstr "es un %1 en la Luna"
 
-#: src/core/modules/NomenclatureItem.cpp:346 src/core/modules/Planet.cpp:1807
+#: src/core/modules/NomenclatureItem.cpp:345
+#, qt-format
 msgctxt "object narration"
-msgid "Its diameter is"
-msgstr "Su diámetro es"
+msgid "is a %1 (or %2), that is: %3, on %4"
+msgstr "es un %1 (o %2), es decir: %3, en %4"
 
-#: src/core/modules/NomenclatureItem.cpp:346
-msgid "It extends over"
-msgstr "Se extiende sobre"
+#: src/core/modules/NomenclatureItem.cpp:347
+#, qt-format
+msgctxt "object narration"
+msgid "is a %1 (or %2), on %3"
+msgstr "es un %1 (o %2), en %3"
 
-#. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:347 src/core/modules/Planet.cpp:1712
-#: src/core/modules/Planet.cpp:1735 src/core/modules/Planet.cpp:1808
-msgctxt "distance"
-msgid "kilometers"
-msgstr "kilómetros"
+#: src/core/modules/NomenclatureItem.cpp:352
+#, qt-format
+msgctxt "object narration"
+msgid "is a %1, that is: %2, on %3"
+msgstr "es un %1, es decir: %2, en %3"
 
-#: src/core/modules/NomenclatureItem.cpp:353
+#: src/core/modules/NomenclatureItem.cpp:354
+#, qt-format
+msgctxt "object narration"
+msgid "is a %1 on %2"
+msgstr "es un %1 en %2"
+
+#: src/core/modules/NomenclatureItem.cpp:366
+#, qt-format
+msgctxt "object narration"
+msgid "Its diameter is %1 kilometers"
+msgstr "Su diámetro es de %1 kilómetros"
+
+#: src/core/modules/NomenclatureItem.cpp:366
+#, qt-format
+msgid "It extends over %1 kilometers"
+msgstr "Se extiende a lo largo de %1 kilómetros"
+
+#: src/core/modules/NomenclatureItem.cpp:373
 msgctxt "object narration"
 msgid "The feature was named after"
 msgstr "La característica recibió su nombre en honor a"
 
-#: src/core/modules/NomenclatureItem.cpp:357
+#: src/core/modules/NomenclatureItem.cpp:377
 msgctxt "object narration"
 msgid "Its planetocentric coordinates are"
 msgstr "Sus coordenadas planetocéntricas son"
 
-#: src/core/modules/NomenclatureItem.cpp:357
+#: src/core/modules/NomenclatureItem.cpp:377
 msgctxt "object narration"
 msgid "Its planetographic coordinates are"
 msgstr "Sus coordenadas planetográficas son"
 
-#: src/core/modules/NomenclatureItem.cpp:382 src/core/modules/Planet.cpp:1662
-#: src/core/StelObject.cpp:1095 src/core/StelObject.cpp:1120
-#: src/core/StelObject.cpp:1159 src/core/StelObject.cpp:1206
-#: src/core/StelObject.cpp:1229 src/core/StelObject.cpp:1252
-#: src/core/StelObject.cpp:1283 src/core/StelObject.cpp:1310
-#: src/core/StelSkyCultureSkyPartition.cpp:528
+#: src/core/modules/NomenclatureItem.cpp:402 src/core/modules/Planet.cpp:1642
+#: src/core/StelObject.cpp:1549 src/core/StelSkyCultureSkyPartition.cpp:528
+#: src/core/StelUtils.cpp:165 src/core/StelUtils.cpp:345
+#: src/core/StelUtils.cpp:441 src/core/StelUtils.cpp:520
+#: src/core/StelUtils.cpp:569 src/core/StelUtils.cpp:1536
 msgctxt "object narration"
 msgid "and"
 msgstr "y"
 
-#: src/core/modules/NomenclatureItem.cpp:385
+#: src/core/modules/NomenclatureItem.cpp:405
 msgctxt "object narration"
 msgid "Solar altitude over the feature is"
 msgstr "La altitud solar sobre la característica es"
 
-#: src/core/modules/NomenclatureItem.cpp:385
-#: src/core/modules/StarWrapper.cpp:765
-#: src/core/StelSkyCultureSkyPartition.cpp:526
+#: src/core/modules/NomenclatureItem.cpp:405
+#: src/core/StelSkyCultureSkyPartition.cpp:526 src/core/StelUtils.cpp:227
+#: src/core/StelUtils.cpp:430 src/core/StelUtils.cpp:517
+#: src/core/StelUtils.cpp:528 src/core/StelUtils.cpp:566
 msgctxt "object narration"
 msgid "degrees"
 msgstr "grados"
 
-#: src/core/modules/NomenclatureItem.cpp:697
-#: src/core/modules/NomenclatureItem.cpp:698
-#: src/core/modules/NomenclatureItem.cpp:699
-#: src/core/modules/NomenclatureItem.cpp:700
-#: src/core/modules/NomenclatureItem.cpp:701
+#: src/core/modules/NomenclatureItem.cpp:717
+#: src/core/modules/NomenclatureItem.cpp:718
+#: src/core/modules/NomenclatureItem.cpp:719
+#: src/core/modules/NomenclatureItem.cpp:720
+#: src/core/modules/NomenclatureItem.cpp:721
 msgctxt "special point"
 msgid "point"
 msgstr "punto"
 
 #. TRANSLATORS: Geographic area distinguished by amount of reflected light
-#: src/core/modules/NomenclatureItem.cpp:703
+#: src/core/modules/NomenclatureItem.cpp:723
 msgctxt "landform"
 msgid "albedo feature"
 msgstr "función albedo"
 
 #. TRANSLATORS: Arc-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:705
+#: src/core/modules/NomenclatureItem.cpp:725
 msgctxt "landform"
 msgid "arcus"
 msgstr "arco"
 
 #. TRANSLATORS: Radial-patterned features on Venus
-#: src/core/modules/NomenclatureItem.cpp:707
+#: src/core/modules/NomenclatureItem.cpp:727
 msgctxt "landform"
 msgid "astrum"
 msgstr "astrum"
 
 #. TRANSLATORS: Chain of craters
-#: src/core/modules/NomenclatureItem.cpp:709
+#: src/core/modules/NomenclatureItem.cpp:729
 msgctxt "landform"
 msgid "catena"
 msgstr "catena"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays
 #. or clusters
-#: src/core/modules/NomenclatureItem.cpp:711
+#: src/core/modules/NomenclatureItem.cpp:731
 msgctxt "landform"
 msgid "cavus"
 msgstr "cavus"
 
 #. TRANSLATORS: Distinctive area of broken terrain
-#: src/core/modules/NomenclatureItem.cpp:713
+#: src/core/modules/NomenclatureItem.cpp:733
 msgctxt "landform"
 msgid "chaos"
 msgstr "chaos"
 
 #. TRANSLATORS: A deep, elongated, steep-sided depression
-#: src/core/modules/NomenclatureItem.cpp:715
+#: src/core/modules/NomenclatureItem.cpp:735
 msgctxt "landform"
 msgid "chasma"
 msgstr "chasma"
 
 #. TRANSLATORS: Small hills or knobs
-#: src/core/modules/NomenclatureItem.cpp:717
+#: src/core/modules/NomenclatureItem.cpp:737
 msgctxt "landform"
 msgid "collis"
 msgstr "collis"
 
 #. TRANSLATORS: Ovoid-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:719
+#: src/core/modules/NomenclatureItem.cpp:739
 msgctxt "landform"
 msgid "corona"
 msgstr "corona"
 
 #. TRANSLATORS: A circular depression
-#: src/core/modules/NomenclatureItem.cpp:721
+#: src/core/modules/NomenclatureItem.cpp:741
 msgctxt "landform"
 msgid "crater"
 msgstr "cráter"
 
 #. TRANSLATORS: Ridge
-#: src/core/modules/NomenclatureItem.cpp:723
+#: src/core/modules/NomenclatureItem.cpp:743
 msgctxt "landform"
 msgid "dorsum"
 msgstr "dorsal"
 
 #. TRANSLATORS: Active volcanic centers on Io
-#: src/core/modules/NomenclatureItem.cpp:725
+#: src/core/modules/NomenclatureItem.cpp:745
 msgctxt "landform"
 msgid "eruptive center"
 msgstr "centro eruptivo"
 
 #. TRANSLATORS: Bright spot
-#: src/core/modules/NomenclatureItem.cpp:727
+#: src/core/modules/NomenclatureItem.cpp:747
 msgctxt "landform"
 msgid "facula"
 msgstr "fácula"
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
-#: src/core/modules/NomenclatureItem.cpp:729
+#: src/core/modules/NomenclatureItem.cpp:749
 msgctxt "landform"
 msgid "farrum"
 msgstr "farrum"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
-#: src/core/modules/NomenclatureItem.cpp:731
+#: src/core/modules/NomenclatureItem.cpp:751
 msgctxt "landform"
 msgid "flexus"
 msgstr "flexus"
 
 #. TRANSLATORS: Flow terrain
-#: src/core/modules/NomenclatureItem.cpp:733
+#: src/core/modules/NomenclatureItem.cpp:753
 msgctxt "landform"
 msgid "fluctus"
 msgstr "fluctus"
 
 #. TRANSLATORS: Channel on Titan that might carry liquid
-#: src/core/modules/NomenclatureItem.cpp:735
+#: src/core/modules/NomenclatureItem.cpp:755
 msgctxt "landform"
 msgid "flumen"
 msgstr "flumen"
 
 #. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas
 #. of liquid
-#: src/core/modules/NomenclatureItem.cpp:737
+#: src/core/modules/NomenclatureItem.cpp:757
 msgctxt "landform"
 msgid "fretum"
 msgstr "fretum"
 
 #. TRANSLATORS: Long, narrow depression
-#: src/core/modules/NomenclatureItem.cpp:739
+#: src/core/modules/NomenclatureItem.cpp:759
 msgctxt "landform"
 msgid "fossa"
 msgstr "fossa"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such
 #. areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
-#: src/core/modules/NomenclatureItem.cpp:741
+#: src/core/modules/NomenclatureItem.cpp:761
 msgctxt "landform"
 msgid "insula"
 msgstr "insula"
 
 #. TRANSLATORS: Landslide
-#: src/core/modules/NomenclatureItem.cpp:743
+#: src/core/modules/NomenclatureItem.cpp:763
 msgctxt "landform"
 msgid "labes"
 msgstr "labes"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
-#: src/core/modules/NomenclatureItem.cpp:745
+#: src/core/modules/NomenclatureItem.cpp:765
 msgctxt "landform"
 msgid "labyrinthus"
 msgstr "labyrinthus"
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance
 #. of a dry lake bed
-#: src/core/modules/NomenclatureItem.cpp:747
+#: src/core/modules/NomenclatureItem.cpp:767
 msgctxt "landform"
 msgid "lacuna"
 msgstr "lacuna"
 
 #. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain
 #. with discrete, sharp boundaries
-#: src/core/modules/NomenclatureItem.cpp:749
+#: src/core/modules/NomenclatureItem.cpp:769
 msgctxt "landform"
 msgid "lacus"
 msgstr "lacus"
 
 #. TRANSLATORS: Cryptic ringed feature
-#: src/core/modules/NomenclatureItem.cpp:751
+#: src/core/modules/NomenclatureItem.cpp:771
 msgctxt "landform"
 msgid "large ringed feature"
 msgstr "característica de anillado grande"
 
 #. TRANSLATORS: Small dark spots on Europa
-#: src/core/modules/NomenclatureItem.cpp:753
+#: src/core/modules/NomenclatureItem.cpp:773
 msgctxt "landform"
 msgid "lenticula"
 msgstr "lentícula"
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
-#: src/core/modules/NomenclatureItem.cpp:755
+#: src/core/modules/NomenclatureItem.cpp:775
 msgctxt "landform"
 msgid "linea"
 msgstr "linea"
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like
 #. boundaries
-#: src/core/modules/NomenclatureItem.cpp:757
+#: src/core/modules/NomenclatureItem.cpp:777
 msgctxt "landform"
 msgid "lingula"
 msgstr "lingula"
 
 #. TRANSLATORS: Dark spot, may be irregular
-#: src/core/modules/NomenclatureItem.cpp:759
+#: src/core/modules/NomenclatureItem.cpp:779
 msgctxt "landform"
 msgid "macula"
 msgstr "macula"
@@ -1708,198 +1730,198 @@ msgstr "macula"
 #. generally of large extent; on Mars, dark albedo areas of no known
 #. geological significance; on Titan, large expanses of dark materials thought
 #. to be liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:761
+#: src/core/modules/NomenclatureItem.cpp:781
 msgctxt "landform"
 msgid "mare"
 msgstr "mare"
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
-#: src/core/modules/NomenclatureItem.cpp:763
+#: src/core/modules/NomenclatureItem.cpp:783
 msgctxt "landform"
 msgid "mensa"
 msgstr "mensa"
 
 #. TRANSLATORS: Mountain
-#: src/core/modules/NomenclatureItem.cpp:765
+#: src/core/modules/NomenclatureItem.cpp:785
 msgctxt "landform"
 msgid "mons"
 msgstr "mons"
 
 #. TRANSLATORS: A very large dark area on the Moon
-#: src/core/modules/NomenclatureItem.cpp:767
+#: src/core/modules/NomenclatureItem.cpp:787
 msgctxt "landform"
 msgid "oceanus"
 msgstr "oceanus"
 
 #. TRANSLATORS: "Swamp"; small plain
-#: src/core/modules/NomenclatureItem.cpp:769
+#: src/core/modules/NomenclatureItem.cpp:789
 msgctxt "landform"
 msgid "palus"
 msgstr "palus"
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
-#: src/core/modules/NomenclatureItem.cpp:771
+#: src/core/modules/NomenclatureItem.cpp:791
 msgctxt "landform"
 msgid "patera"
 msgstr "patera"
 
 #. TRANSLATORS: Low plain
-#: src/core/modules/NomenclatureItem.cpp:773
+#: src/core/modules/NomenclatureItem.cpp:793
 msgctxt "landform"
 msgid "planitia"
 msgstr "planitia"
 
 #. TRANSLATORS: Plateau or high plain
-#: src/core/modules/NomenclatureItem.cpp:775
+#: src/core/modules/NomenclatureItem.cpp:795
 msgctxt "landform"
 msgid "planum"
 msgstr "planum"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
-#: src/core/modules/NomenclatureItem.cpp:777
+#: src/core/modules/NomenclatureItem.cpp:797
 msgctxt "landform"
 msgid "plume"
 msgstr "plume"
 
 #. TRANSLATORS: "Cape"; headland promontoria
-#: src/core/modules/NomenclatureItem.cpp:779
+#: src/core/modules/NomenclatureItem.cpp:799
 msgctxt "landform"
 msgid "promontorium"
 msgstr "promontorio"
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from
 #. adjacent areas, or a broad geographic region
-#: src/core/modules/NomenclatureItem.cpp:781
+#: src/core/modules/NomenclatureItem.cpp:801
 msgctxt "landform"
 msgid "regio"
 msgstr "regio"
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
-#: src/core/modules/NomenclatureItem.cpp:783
+#: src/core/modules/NomenclatureItem.cpp:803
 msgctxt "landform"
 msgid "reticulum"
 msgstr "retículo"
 
 #. TRANSLATORS: Fissure
-#: src/core/modules/NomenclatureItem.cpp:785
+#: src/core/modules/NomenclatureItem.cpp:805
 msgctxt "landform"
 msgid "rima"
 msgstr "rima"
 
 #. TRANSLATORS: Scarp
-#: src/core/modules/NomenclatureItem.cpp:787
+#: src/core/modules/NomenclatureItem.cpp:807
 msgctxt "landform"
 msgid "rupes"
 msgstr "rupes"
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
-#: src/core/modules/NomenclatureItem.cpp:789
+#: src/core/modules/NomenclatureItem.cpp:809
 msgctxt "landform"
 msgid "satellite feature"
 msgstr "función satelital"
 
 #. TRANSLATORS: Boulder or rock
-#: src/core/modules/NomenclatureItem.cpp:791
+#: src/core/modules/NomenclatureItem.cpp:811
 msgctxt "landform"
 msgid "saxum"
 msgstr "saxo"
 
 #. TRANSLATORS: Lobate or irregular scarp
-#: src/core/modules/NomenclatureItem.cpp:793
+#: src/core/modules/NomenclatureItem.cpp:813
 msgctxt "landform"
 msgid "scopulus"
 msgstr "scopulus"
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief
 #. along its length
-#: src/core/modules/NomenclatureItem.cpp:795
+#: src/core/modules/NomenclatureItem.cpp:815
 msgctxt "landform"
 msgid "serpens"
 msgstr "serpens"
 
 #. TRANSLATORS: Subparallel furrows and ridges
-#: src/core/modules/NomenclatureItem.cpp:797
+#: src/core/modules/NomenclatureItem.cpp:817
 msgctxt "landform"
 msgid "sulcus"
 msgstr "sulcus"
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of
 #. liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:799
+#: src/core/modules/NomenclatureItem.cpp:819
 msgctxt "landform"
 msgid "sinus"
 msgstr "sinus"
 
 #. TRANSLATORS: Extensive land mass
-#: src/core/modules/NomenclatureItem.cpp:801
+#: src/core/modules/NomenclatureItem.cpp:821
 msgctxt "landform"
 msgid "terra"
 msgstr "terra"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
-#: src/core/modules/NomenclatureItem.cpp:803
+#: src/core/modules/NomenclatureItem.cpp:823
 msgctxt "landform"
 msgid "tessera"
 msgstr "tessera"
 
 #. TRANSLATORS: Small domical mountain or hill
-#: src/core/modules/NomenclatureItem.cpp:805
+#: src/core/modules/NomenclatureItem.cpp:825
 msgctxt "landform"
 msgid "tholus"
 msgstr "tholus"
 
 #. TRANSLATORS: Dunes
-#: src/core/modules/NomenclatureItem.cpp:807
+#: src/core/modules/NomenclatureItem.cpp:827
 msgctxt "landform"
 msgid "unda"
 msgstr "unda"
 
 #. TRANSLATORS: Valley
-#: src/core/modules/NomenclatureItem.cpp:809
+#: src/core/modules/NomenclatureItem.cpp:829
 msgctxt "landform"
 msgid "vallis"
 msgstr "valle"
 
 #. TRANSLATORS: Extensive plain
-#: src/core/modules/NomenclatureItem.cpp:811
+#: src/core/modules/NomenclatureItem.cpp:831
 msgctxt "landform"
 msgid "vastitas"
 msgstr "vastitas"
 
 #. TRANSLATORS: A streak or stripe of color
-#: src/core/modules/NomenclatureItem.cpp:813
+#: src/core/modules/NomenclatureItem.cpp:833
 msgctxt "landform"
 msgid "virga"
 msgstr "virga"
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
-#: src/core/modules/NomenclatureItem.cpp:815
+#: src/core/modules/NomenclatureItem.cpp:835
 msgctxt "landform"
 msgid "landing site name"
 msgstr "nombre de lugar de aterrizaje"
 
 #. TRANSLATORS: Description for landform 'albedo feature'
-#: src/core/modules/NomenclatureItem.cpp:819
+#: src/core/modules/NomenclatureItem.cpp:839
 msgid "Geographic area distinguished by amount of reflected light."
 msgstr "Área geográfica distinguida por la cantidad de luz reflejada."
 
 #. TRANSLATORS: Description for landform 'arcus'
-#: src/core/modules/NomenclatureItem.cpp:821
+#: src/core/modules/NomenclatureItem.cpp:841
 msgid "Arc-shaped feature."
 msgstr "Característica arqueada."
 
 #. TRANSLATORS: Description for landform 'astrum'
-#: src/core/modules/NomenclatureItem.cpp:823
+#: src/core/modules/NomenclatureItem.cpp:843
 msgid "Radial-patterned feature."
 msgstr "Característica con diseño radial."
 
 #. TRANSLATORS: Description for landform 'catena'
-#: src/core/modules/NomenclatureItem.cpp:825
+#: src/core/modules/NomenclatureItem.cpp:845
 msgid "Chain of craters."
 msgstr "Cadena de cráteres."
 
 #. TRANSLATORS: Description for landform 'cavus'
-#: src/core/modules/NomenclatureItem.cpp:827
+#: src/core/modules/NomenclatureItem.cpp:847
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
 msgstr ""
@@ -1907,67 +1929,67 @@ msgstr ""
 "formaciones o grupos."
 
 #. TRANSLATORS: Description for landform 'chaos'
-#: src/core/modules/NomenclatureItem.cpp:829
+#: src/core/modules/NomenclatureItem.cpp:849
 msgid "Distinctive area of broken terrain."
 msgstr "Área distintiva de terreno quebrado."
 
 #. TRANSLATORS: Description for landform 'chasma'
-#: src/core/modules/NomenclatureItem.cpp:831
+#: src/core/modules/NomenclatureItem.cpp:851
 msgid "A deep, elongated, steep-sided depression."
 msgstr "Una depresión profunda, alargada, de lados pronunciados."
 
 #. TRANSLATORS: Description for landform 'collis'
-#: src/core/modules/NomenclatureItem.cpp:833
+#: src/core/modules/NomenclatureItem.cpp:853
 msgid "Small hills or knobs."
 msgstr "Pequeñas colinas o protuberancias."
 
 #. TRANSLATORS: Description for landform 'corona'
-#: src/core/modules/NomenclatureItem.cpp:835
+#: src/core/modules/NomenclatureItem.cpp:855
 msgid "Ovoid-shaped feature."
 msgstr "Característica ovoide."
 
 #. TRANSLATORS: Description for landform 'crater'
-#: src/core/modules/NomenclatureItem.cpp:837
+#: src/core/modules/NomenclatureItem.cpp:857
 msgid "A circular depression."
 msgstr "Una depresión circular."
 
 #. TRANSLATORS: Description for landform 'dorsum'
-#: src/core/modules/NomenclatureItem.cpp:839
+#: src/core/modules/NomenclatureItem.cpp:859
 msgid "Ridge."
 msgstr "Cresta."
 
 #. TRANSLATORS: Description for landform 'eruptive center'
-#: src/core/modules/NomenclatureItem.cpp:841
+#: src/core/modules/NomenclatureItem.cpp:861
 msgid "Active volcanic center."
 msgstr "Centro volcánico activo."
 
 #. TRANSLATORS: Description for landform 'facula'
-#: src/core/modules/NomenclatureItem.cpp:843
+#: src/core/modules/NomenclatureItem.cpp:863
 msgid "Bright spot."
 msgstr "Punto brillante."
 
 #. TRANSLATORS: Description for landform 'farrum'
-#: src/core/modules/NomenclatureItem.cpp:845
+#: src/core/modules/NomenclatureItem.cpp:865
 msgid "Pancake-like structure, or a row of such structures."
 msgstr "Estructura tipo panqueque, o una fila de tales estructuras."
 
 #. TRANSLATORS: Description for landform 'flexus'
-#: src/core/modules/NomenclatureItem.cpp:847
+#: src/core/modules/NomenclatureItem.cpp:867
 msgid "A very low curvilinear ridge with a scalloped pattern."
 msgstr "Una cresta curvilínea muy baja con un patrón ondulado."
 
 #. TRANSLATORS: Description for landform 'fluctus'
-#: src/core/modules/NomenclatureItem.cpp:849
+#: src/core/modules/NomenclatureItem.cpp:869
 msgid "Flow terrain."
 msgstr "Terreno de flujo."
 
 #. TRANSLATORS: Description for landform 'flumen'
-#: src/core/modules/NomenclatureItem.cpp:851
+#: src/core/modules/NomenclatureItem.cpp:871
 msgid "Channel, that might carry liquid."
 msgstr "Canal, que podría acarrear líquido."
 
 #. TRANSLATORS: Description for landform 'fretum'
-#: src/core/modules/NomenclatureItem.cpp:853
+#: src/core/modules/NomenclatureItem.cpp:873
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
 msgstr ""
@@ -1975,12 +1997,12 @@ msgstr ""
 " un líquido."
 
 #. TRANSLATORS: Description for landform 'fossa'
-#: src/core/modules/NomenclatureItem.cpp:855
+#: src/core/modules/NomenclatureItem.cpp:875
 msgid "Long, narrow depression."
 msgstr "Larga, estrecha depresión."
 
 #. TRANSLATORS: Description for landform 'insula'
-#: src/core/modules/NomenclatureItem.cpp:857
+#: src/core/modules/NomenclatureItem.cpp:877
 msgid ""
 "Island, an isolated land area surrounded by, or nearly surrounded by, a "
 "liquid area (sea or lake)."
@@ -1989,17 +2011,17 @@ msgstr ""
 "área líquida (mar o lago)."
 
 #. TRANSLATORS: Description for landform 'labes'
-#: src/core/modules/NomenclatureItem.cpp:859
+#: src/core/modules/NomenclatureItem.cpp:879
 msgid "Landslide."
 msgstr "Deslizamiento terrestre."
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
-#: src/core/modules/NomenclatureItem.cpp:861
+#: src/core/modules/NomenclatureItem.cpp:881
 msgid "Complex of intersecting valleys or ridges."
 msgstr "Complejo de valles o crestas que se cruzan."
 
 #. TRANSLATORS: Description for landform 'lacuna'
-#: src/core/modules/NomenclatureItem.cpp:863
+#: src/core/modules/NomenclatureItem.cpp:883
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
 msgstr ""
@@ -2007,88 +2029,88 @@ msgstr ""
 "seco."
 
 #. TRANSLATORS: Description for landform 'lacus'
-#: src/core/modules/NomenclatureItem.cpp:865
+#: src/core/modules/NomenclatureItem.cpp:885
 msgid "'Lake' or small plain."
 msgstr "'Lago' o planicie pequeña."
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
-#: src/core/modules/NomenclatureItem.cpp:867
+#: src/core/modules/NomenclatureItem.cpp:887
 msgid "Cryptic ringed feature."
 msgstr "Función de anillos crípticos."
 
 #. TRANSLATORS: Description for landform 'lenticula'
-#: src/core/modules/NomenclatureItem.cpp:869
+#: src/core/modules/NomenclatureItem.cpp:889
 msgid "Small dark spot."
 msgstr "Punto obscuro pequeño."
 
 #. TRANSLATORS: Description for landform 'linea'
-#: src/core/modules/NomenclatureItem.cpp:871
+#: src/core/modules/NomenclatureItem.cpp:891
 msgid "A dark or bright elongate marking, may be curved or straight."
 msgstr "Ubna obscura o brillante marca elongada, que puede ser curva o recta."
 
 #. TRANSLATORS: Description for landform 'lingula'
-#: src/core/modules/NomenclatureItem.cpp:873
+#: src/core/modules/NomenclatureItem.cpp:893
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
 msgstr "Extensión de una meseta que tiene límites lobulados o redondeados."
 
 #. TRANSLATORS: Description for landform 'macula'
-#: src/core/modules/NomenclatureItem.cpp:875
+#: src/core/modules/NomenclatureItem.cpp:895
 msgid "Dark spot, may be irregular"
 msgstr "Punto obscuro, puede ser irregular"
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
-#: src/core/modules/NomenclatureItem.cpp:877
+#: src/core/modules/NomenclatureItem.cpp:897
 msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
 msgstr ""
 "'Mar'; albedo bajo, relativamente liso, generalmente de gran extensión."
 
 #. TRANSLATORS: Description for landform 'mensa'
-#: src/core/modules/NomenclatureItem.cpp:879
+#: src/core/modules/NomenclatureItem.cpp:899
 msgid "A flat-topped prominence with cliff-like edges."
 msgstr "Una prominencia plana con bordes en forma de acantilado."
 
 #. TRANSLATORS: Description for landform 'mons'
-#: src/core/modules/NomenclatureItem.cpp:881
+#: src/core/modules/NomenclatureItem.cpp:901
 msgid "Mountain."
 msgstr "Montaña."
 
 #. TRANSLATORS: Description for landform 'oceanus'
-#: src/core/modules/NomenclatureItem.cpp:883
+#: src/core/modules/NomenclatureItem.cpp:903
 msgid "A very large dark area."
 msgstr "Un área obscura muy grande."
 
 #. TRANSLATORS: Description for landform 'palus'
-#: src/core/modules/NomenclatureItem.cpp:885
+#: src/core/modules/NomenclatureItem.cpp:905
 msgid "'Swamp'; small plain."
 msgstr "'Pantano'; pequeña llanura."
 
 #. TRANSLATORS: Description for landform 'patera'
-#: src/core/modules/NomenclatureItem.cpp:887
+#: src/core/modules/NomenclatureItem.cpp:907
 msgid "An irregular crater, or a complex one with scalloped edges."
 msgstr "Un cráter irregular, o uno complejo con bordes ondulados."
 
 #. TRANSLATORS: Description for landform 'planitia'
-#: src/core/modules/NomenclatureItem.cpp:889
+#: src/core/modules/NomenclatureItem.cpp:909
 msgid "Low plain."
 msgstr "Planicie baja."
 
 #. TRANSLATORS: Description for landform 'planum'
-#: src/core/modules/NomenclatureItem.cpp:891
+#: src/core/modules/NomenclatureItem.cpp:911
 msgid "Plateau or high plain."
 msgstr "Meseta o llanura alta."
 
 #. TRANSLATORS: Description for landform 'plume'
-#: src/core/modules/NomenclatureItem.cpp:893
+#: src/core/modules/NomenclatureItem.cpp:913
 msgid "Cryo-volcanic feature."
 msgstr "Característica criovolcánica."
 
 #. TRANSLATORS: Description for landform 'promontorium'
-#: src/core/modules/NomenclatureItem.cpp:895
+#: src/core/modules/NomenclatureItem.cpp:915
 msgid "'Cape'; headland promontoria."
 msgstr "'Cabo'; apartado promontorio."
 
 #. TRANSLATORS: Description for landform 'regio'
-#: src/core/modules/NomenclatureItem.cpp:897
+#: src/core/modules/NomenclatureItem.cpp:917
 msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
@@ -2097,38 +2119,38 @@ msgstr ""
 " adjacentes, o una región geográfica amplia."
 
 #. TRANSLATORS: Description for landform 'reticulum'
-#: src/core/modules/NomenclatureItem.cpp:899
+#: src/core/modules/NomenclatureItem.cpp:919
 msgid "Reticular (netlike) pattern."
 msgstr "Patrón reticular (como una red)."
 
 #. TRANSLATORS: Description for landform 'rima'
-#: src/core/modules/NomenclatureItem.cpp:901
+#: src/core/modules/NomenclatureItem.cpp:921
 msgid "Fissure."
 msgstr "Fisura."
 
 #. TRANSLATORS: Description for landform 'rupes'
-#: src/core/modules/NomenclatureItem.cpp:903
+#: src/core/modules/NomenclatureItem.cpp:923
 msgid "Scarp."
 msgstr "Escarpa."
 
 #. TRANSLATORS: Description for landform 'satellite feature'
-#: src/core/modules/NomenclatureItem.cpp:905
+#: src/core/modules/NomenclatureItem.cpp:925
 msgid "A feature that shares the name of an associated feature."
 msgstr ""
 "Una caracteristica que comparte el nombre de una característica asociada."
 
 #. TRANSLATORS: Description for landform 'saxum'
-#: src/core/modules/NomenclatureItem.cpp:907
+#: src/core/modules/NomenclatureItem.cpp:927
 msgid "Boulder or rock."
 msgstr "Piedra o roca."
 
 #. TRANSLATORS: Description for landform 'scopulus'
-#: src/core/modules/NomenclatureItem.cpp:909
+#: src/core/modules/NomenclatureItem.cpp:929
 msgid "Lobate or irregular scarp."
 msgstr "Escarpa lobulada o irregular."
 
 #. TRANSLATORS: Description for landform 'serpens'
-#: src/core/modules/NomenclatureItem.cpp:911
+#: src/core/modules/NomenclatureItem.cpp:931
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
@@ -2137,47 +2159,47 @@ msgstr ""
 "largo de su longitud."
 
 #. TRANSLATORS: Description for landform 'sinus'
-#: src/core/modules/NomenclatureItem.cpp:913
+#: src/core/modules/NomenclatureItem.cpp:933
 msgid "'Bay'; small plain."
 msgstr "'Bahía'; planicie pequeña."
 
 #. TRANSLATORS: Description for landform 'sulcus'
-#: src/core/modules/NomenclatureItem.cpp:915
+#: src/core/modules/NomenclatureItem.cpp:935
 msgid "Subparallel furrows and ridges."
 msgstr "Surcos y crestas subparalelas."
 
 #. TRANSLATORS: Description for landform 'terra'
-#: src/core/modules/NomenclatureItem.cpp:917
+#: src/core/modules/NomenclatureItem.cpp:937
 msgid "Extensive land mass."
 msgstr "Masa extensa de tierra."
 
 #. TRANSLATORS: Description for landform 'tessera'
-#: src/core/modules/NomenclatureItem.cpp:919
+#: src/core/modules/NomenclatureItem.cpp:939
 msgid "Tile-like, polygonal terrain."
 msgstr "Terreno poligonal tipo mosaico."
 
 #. TRANSLATORS: Description for landform 'tholus'
-#: src/core/modules/NomenclatureItem.cpp:921
+#: src/core/modules/NomenclatureItem.cpp:941
 msgid "Small domical mountain or hill."
 msgstr "Pequeña montaña o colina abovedada."
 
 #. TRANSLATORS: Description for landform 'unda'
-#: src/core/modules/NomenclatureItem.cpp:923
+#: src/core/modules/NomenclatureItem.cpp:943
 msgid "Dunes."
 msgstr "Dunas."
 
 #. TRANSLATORS: Description for landform 'vallis'
-#: src/core/modules/NomenclatureItem.cpp:925
+#: src/core/modules/NomenclatureItem.cpp:945
 msgid "Valley."
 msgstr "Valle."
 
 #. TRANSLATORS: Description for landform 'vastitas'
-#: src/core/modules/NomenclatureItem.cpp:927
+#: src/core/modules/NomenclatureItem.cpp:947
 msgid "Extensive plain."
 msgstr "Planicie extensa."
 
 #. TRANSLATORS: Description for landform 'virga'
-#: src/core/modules/NomenclatureItem.cpp:929
+#: src/core/modules/NomenclatureItem.cpp:949
 msgid "A streak or stripe of color."
 msgstr "Una raya o una franja de color."
 
@@ -2326,8 +2348,8 @@ msgid "protoplanetary nebula"
 msgstr "nebulosa protoplanetaria"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:133
-#: src/core/modules/StarWrapper.cpp:98 src/core/modules/StarWrapper.cpp:793
-#: src/core/modules/StarWrapper.cpp:1261
+#: src/core/modules/StarWrapper.cpp:98 src/core/modules/StarWrapper.cpp:782
+#: src/core/modules/StarWrapper.cpp:1242
 msgid "star"
 msgstr "estrella"
 
@@ -2384,7 +2406,7 @@ msgid "reduced to"
 msgstr "reducida a"
 
 #: src/core/modules/Nebula.cpp:199 src/core/StelObject.cpp:353
-#: src/core/StelObject.cpp:371 plugins/Satellites/src/Satellite.cpp:350
+#: plugins/Satellites/src/Satellite.cpp:350
 msgid "by"
 msgstr "por"
 
@@ -2399,13 +2421,13 @@ msgid "Additional names: "
 msgstr "Nombres adicionales: "
 
 #: src/core/modules/Nebula.cpp:286 src/core/modules/Planet.cpp:603
-#: src/core/modules/StarWrapper.cpp:274 src/core/modules/StarWrapper.cpp:605
+#: src/core/modules/StarWrapper.cpp:274 src/core/modules/StarWrapper.cpp:606
 msgid "Additional catalog numbers: "
 msgstr "Números de catálogo adicionales: "
 
 #: src/core/modules/Nebula.cpp:304 src/core/modules/Planet.cpp:866
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:319
-#: src/core/modules/StarWrapper.cpp:945 src/core/modules/StarWrapper.cpp:1348
+#: src/core/modules/StarWrapper.cpp:934 src/core/modules/StarWrapper.cpp:1329
 #: plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
 msgstr "Índice  de color (B-V)"
@@ -2450,7 +2472,7 @@ msgstr "Ángulo de orientación"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:388 src/core/modules/Nebula.cpp:401
-#: src/core/modules/StarWrapper.cpp:351 src/core/modules/StarWrapper.cpp:1000
+#: src/core/modules/StarWrapper.cpp:351 src/core/modules/StarWrapper.cpp:989
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
 msgctxt "distance"
@@ -2460,7 +2482,7 @@ msgstr "Año Luz"
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:389 src/core/modules/Nebula.cpp:435
 #: src/core/modules/Planet.cpp:744 src/core/modules/Planet.cpp:750
-#: src/core/modules/StarWrapper.cpp:353 src/core/modules/StarWrapper.cpp:1002
+#: src/core/modules/StarWrapper.cpp:353 src/core/modules/StarWrapper.cpp:991
 #: src/gui/AstroCalcDialog.cpp:988 src/gui/AstroCalcChart.cpp:94
 #: src/gui/AstroCalcChart.cpp:104 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:2537
@@ -2492,13 +2514,13 @@ msgid "Redshift"
 msgstr "Corrimiento al rojo"
 
 #: src/core/modules/Nebula.cpp:460 src/core/modules/StarWrapper.cpp:387
-#: src/core/modules/StarWrapper.cpp:1006 src/ui_configurationDialog.h:2727
+#: src/core/modules/StarWrapper.cpp:995 src/ui_configurationDialog.h:2727
 msgid "Parallax"
 msgstr "Paralaje"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:460 src/core/modules/StarWrapper.cpp:392
-#: src/core/modules/StarWrapper.cpp:1011 plugins/Pulsars/src/Pulsar.cpp:257
+#: src/core/modules/StarWrapper.cpp:1000 plugins/Pulsars/src/Pulsar.cpp:257
 msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
@@ -2804,8 +2826,7 @@ msgstr "tipo sin documentar"
 msgid "called"
 msgstr "llamada"
 
-#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:1629
-#: src/core/StelObject.cpp:1574 src/core/StelObject.cpp:1581
+#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:1602
 msgid "is"
 msgstr "es"
 
@@ -2816,8 +2837,7 @@ msgid "an object of unknown type"
 msgstr "un objeto de tipo desconocido"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:1772 src/core/modules/StarWrapper.cpp:686
-#: src/core/modules/StarWrapper.cpp:1190
+#: src/core/modules/Nebula.cpp:1772
 msgctxt "distance"
 msgid "light years"
 msgstr "años luz"
@@ -2851,7 +2871,7 @@ msgctxt "object narration"
 msgid "Million light years"
 msgstr "Millones de años luz"
 
-#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:1648
+#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:1622
 msgctxt "object narration"
 msgid "in the constellation of"
 msgstr "en la constelación de"
@@ -2871,18 +2891,17 @@ msgctxt "object narration"
 msgid "Its Parallax"
 msgstr "Su paralaje"
 
-#: src/core/modules/Nebula.cpp:1848 src/core/modules/StarWrapper.cpp:729
-#: src/core/modules/StarWrapper.cpp:1206
+#: src/core/modules/Nebula.cpp:1848
 msgctxt "parallax"
 msgid "milli-arcseconds"
 msgstr "milisegundos de arco"
 
-#: src/core/modules/Nebula.cpp:1854 src/core/modules/Planet.cpp:1679
+#: src/core/modules/Nebula.cpp:1854 src/core/modules/Planet.cpp:1664
 msgctxt "object narration"
 msgid "It was discovered by"
 msgstr "Su descubrimiento fue efectuado por"
 
-#: src/core/modules/Nebula.cpp:1856 src/core/modules/Planet.cpp:1683
+#: src/core/modules/Nebula.cpp:1856 src/core/modules/Planet.cpp:1668
 msgctxt "object narration"
 msgid "in the year"
 msgstr "en el año"
@@ -3175,8 +3194,8 @@ msgid "interstellar object"
 msgstr "objeto interestelar"
 
 #: src/core/modules/Planet.cpp:571 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:941
-#: src/core/modules/StarWrapper.cpp:1129 plugins/Quasars/src/Quasar.cpp:131
+#: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:930
+#: src/core/modules/StarWrapper.cpp:1119 plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "Magnitud absoluta"
 
@@ -3211,8 +3230,7 @@ msgstr "Movimiento por hora"
 
 #: src/core/modules/Planet.cpp:685 src/core/modules/Planet.cpp:1222
 #: src/core/modules/Planet.cpp:1231 src/core/modules/StarWrapper.cpp:365
-#: src/core/modules/StarWrapper.cpp:700 src/core/modules/StarWrapper.cpp:985
-#: src/core/modules/StarWrapper.cpp:1173 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/StarWrapper.cpp:974 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "hacia"
@@ -3263,7 +3281,7 @@ msgstr ""
 "NOTA: Los elementos para la época %1 probablemente están desactualizados. "
 "¡Considere actualizar los datos!"
 
-#: src/core/modules/Planet.cpp:823 src/core/modules/Planet.cpp:1777
+#: src/core/modules/Planet.cpp:823 src/core/modules/Planet.cpp:1762
 msgid "with rings"
 msgstr "con anillos"
 
@@ -3309,9 +3327,8 @@ msgstr "Distancia angular"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:947 src/core/modules/StarWrapper.cpp:399
-#: src/core/modules/StarWrapper.cpp:736 src/core/modules/StarWrapper.cpp:1030
-#: src/core/modules/StarWrapper.cpp:1221 src/core/modules/StarWrapper.cpp:1393
-#: src/core/modules/StarWrapper.cpp:1509 src/gui/AstroCalcDialog.cpp:8542
+#: src/core/modules/StarWrapper.cpp:1019 src/core/modules/StarWrapper.cpp:1374
+#: src/core/StelUtils.cpp:163 src/gui/AstroCalcDialog.cpp:8542
 #: src/gui/AstroCalcAlmanacWidget.cpp:254
 msgctxt "duration"
 msgid "days"
@@ -3501,164 +3518,173 @@ msgstr "Albedo"
 msgid "Discovered"
 msgstr "Descubierto"
 
-#: src/core/modules/Planet.cpp:1606
+#: src/core/modules/Planet.cpp:1579
 msgctxt "object narration"
 msgid "called"
 msgstr "llamado"
 
-#: src/core/modules/Planet.cpp:1613 src/translations.h:1020
+#: src/core/modules/Planet.cpp:1586 src/translations.h:1020
 msgctxt "object narration"
 msgid "a star"
 msgstr "una estrella"
 
-#: src/core/modules/Planet.cpp:1614 src/translations.h:1021
+#: src/core/modules/Planet.cpp:1587 src/translations.h:1021
 msgctxt "object narration"
 msgid "a major planet"
 msgstr "un planeta mayor"
 
-#: src/core/modules/Planet.cpp:1615 src/translations.h:1022
+#: src/core/modules/Planet.cpp:1588 src/translations.h:1022
 msgctxt "object narration"
 msgid "a planet moon"
 msgstr "una luna planetaria"
 
-#: src/core/modules/Planet.cpp:1616 src/translations.h:1023
+#: src/core/modules/Planet.cpp:1589 src/translations.h:1023
 msgctxt "object narration"
 msgid "an observer"
 msgstr "un observador"
 
-#: src/core/modules/Planet.cpp:1617 src/translations.h:1024
+#: src/core/modules/Planet.cpp:1590 src/translations.h:1024
 msgctxt "object narration"
 msgid "an artificial object"
 msgstr "un objeto artificial"
 
-#: src/core/modules/Planet.cpp:1618 src/translations.h:1025
+#: src/core/modules/Planet.cpp:1591 src/translations.h:1025
 msgctxt "object narration"
 msgid "an asteroid"
 msgstr "un asteroide"
 
-#: src/core/modules/Planet.cpp:1619 src/translations.h:1026
+#: src/core/modules/Planet.cpp:1592 src/translations.h:1026
 msgctxt "object narration"
 msgid "a plutino"
 msgstr "un plutino"
 
-#: src/core/modules/Planet.cpp:1620 src/translations.h:1027
+#: src/core/modules/Planet.cpp:1593 src/translations.h:1027
 msgctxt "object narration"
 msgid "a comet"
 msgstr "un cometa"
 
-#: src/core/modules/Planet.cpp:1621 src/translations.h:1028
+#: src/core/modules/Planet.cpp:1594 src/translations.h:1028
 msgctxt "object narration"
 msgid "a dwarf planet"
 msgstr "un planeta enano"
 
-#: src/core/modules/Planet.cpp:1622 src/translations.h:1029
+#: src/core/modules/Planet.cpp:1595 src/translations.h:1029
 msgctxt "object narration"
 msgid "a cubewano"
 msgstr "un cubewano"
 
-#: src/core/modules/Planet.cpp:1623 src/translations.h:1030
+#: src/core/modules/Planet.cpp:1596 src/translations.h:1030
 msgctxt "object narration"
 msgid "a scattered disc object"
 msgstr "un objeto del disco disperso"
 
-#: src/core/modules/Planet.cpp:1624 src/translations.h:1031
+#: src/core/modules/Planet.cpp:1597 src/translations.h:1031
 msgctxt "object narration"
 msgid "an Oort Cloud Object"
 msgstr "un objeto de la nube de Oort"
 
-#: src/core/modules/Planet.cpp:1625 src/translations.h:1032
+#: src/core/modules/Planet.cpp:1598 src/translations.h:1032
 msgctxt "object narration"
 msgid "a sednoid"
 msgstr "un sednoide"
 
-#: src/core/modules/Planet.cpp:1626 src/translations.h:1033
+#: src/core/modules/Planet.cpp:1599 src/translations.h:1033
 msgctxt "object narration"
 msgid "an interstellar object"
 msgstr "un objeto interestelar"
 
-#: src/core/modules/Planet.cpp:1627 src/core/modules/Planet.cpp:1629
+#: src/core/modules/Planet.cpp:1600 src/core/modules/Planet.cpp:1602
 #: src/translations.h:1034
 msgctxt "object narration"
 msgid "an object of undefined type"
 msgstr "un objeto de tipo indefinido"
 
-#: src/core/modules/Planet.cpp:1635
+#: src/core/modules/Planet.cpp:1608
 msgctxt "object narration"
 msgid "currently at visual magnitude of"
 msgstr "actualmente en una magnitud visual de"
 
-#: src/core/modules/Planet.cpp:1638 src/core/StelObject.cpp:370
+#: src/core/modules/Planet.cpp:1611 src/core/StelObject.cpp:370
+#, qt-format
 msgctxt "object narration: reduced magnitude by extinction"
-msgid "reduced to"
-msgstr "reducido a"
+msgid "reduced to %1 by %2 airmasses of atmospheric extinction"
+msgstr "reducido a %1 por %2 masas de aire de extinción atmosférica"
 
-#: src/core/modules/Planet.cpp:1639
-msgctxt "narration: extinction by XX airmasses"
-msgid "by"
-msgstr "por"
-
-#: src/core/modules/Planet.cpp:1640 src/core/StelObject.cpp:372
-msgctxt "object narration"
-msgid "Airmasses of atmospheric extinction"
-msgstr "Masas de aire de extinción atmosférica"
-
-#: src/core/modules/Planet.cpp:1662
+#: src/core/modules/Planet.cpp:1641 src/core/StelObject.cpp:1548
 msgctxt "object narration"
 msgid "In this skyculture, it lies within the area of"
 msgstr "En esta cultura estelar, se encuentra dentro del área de"
 
-#: src/core/modules/Planet.cpp:1665 src/core/modules/Planet.cpp:1670
+#. TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
+#. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
+#. TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
+#. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
+#: src/core/modules/Planet.cpp:1649 src/core/modules/Planet.cpp:1656
+#: src/core/StelObject.cpp:1557 src/core/StelObject.cpp:1564
+#, qt-format
 msgctxt "object narration"
-msgid "Its position in the"
-msgstr "Su posición en el"
+msgid "Its %1 Position is %2"
+msgstr "Su posición %1 es %2"
 
-#: src/core/modules/Planet.cpp:1665 src/core/modules/Planet.cpp:1670
-msgctxt "object narration"
-msgid "system is"
-msgstr "sistema es"
-
-#: src/core/modules/Planet.cpp:1685
+#: src/core/modules/Planet.cpp:1670
 msgctxt "object narration"
 msgid "in"
 msgstr "en"
 
+#: src/core/modules/Planet.cpp:1672
+msgctxt "object narration"
+msgid "on"
+msgstr "en"
+
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:1701
+#: src/core/modules/Planet.cpp:1686
 msgctxt "distance, astronomical unit"
 msgid "Astronomical Units"
 msgstr "Unidades astronómicas"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:1703
+#: src/core/modules/Planet.cpp:1688
 msgctxt "object narration"
 msgid "or, in light time,"
 msgstr "o, en tiempo de luz,"
 
+#. TRANSLATORS: Unit of measure for distance - kilometers
+#: src/core/modules/Planet.cpp:1697 src/core/modules/Planet.cpp:1720
+#: src/core/modules/Planet.cpp:1793
+msgctxt "distance"
+msgid "kilometers"
+msgstr "kilómetros"
+
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
-#: src/core/modules/Planet.cpp:1719 src/core/modules/Planet.cpp:1742
+#: src/core/modules/Planet.cpp:1704 src/core/modules/Planet.cpp:1727
 msgctxt "distance"
 msgid "Million kilometers"
 msgstr "Millones de kilómetros"
 
-#: src/core/modules/Planet.cpp:1722
+#: src/core/modules/Planet.cpp:1707
 msgctxt "object narration"
 msgid "The current distance from the Sun amounts to"
 msgstr "La distancia actual del Sol asciende a"
 
-#: src/core/modules/Planet.cpp:1745
+#: src/core/modules/Planet.cpp:1730
 msgctxt "object narration"
 msgid "The current distance amounts to"
 msgstr "La distancia actual asciende a"
 
-#: src/core/modules/Planet.cpp:1804
+#: src/core/modules/Planet.cpp:1789
 msgctxt "object narration"
 msgid "The apparent diameter is"
 msgstr "El diámetro aparente es"
 
-#: src/core/modules/Planet.cpp:1807
+#: src/core/modules/Planet.cpp:1792
 msgctxt "object narration"
 msgid "The equatorial diameter is"
 msgstr "El diámetro ecuatorial es"
+
+#: src/core/modules/Planet.cpp:1792
+msgctxt "object narration"
+msgid "Its diameter is"
+msgstr "Su diámetro es"
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:217
@@ -3743,60 +3769,60 @@ msgstr "Marcar cuerpos menores"
 msgid "double star"
 msgstr "estrella doble"
 
-#: src/core/modules/StarWrapper.cpp:104 src/core/modules/StarWrapper.cpp:799
-#: src/core/modules/StarWrapper.cpp:1267
+#: src/core/modules/StarWrapper.cpp:104 src/core/modules/StarWrapper.cpp:788
+#: src/core/modules/StarWrapper.cpp:1248
 msgid "eruptive variable star"
 msgstr "estrella variable eruptiva"
 
-#: src/core/modules/StarWrapper.cpp:106 src/core/modules/StarWrapper.cpp:801
-#: src/core/modules/StarWrapper.cpp:1269
+#: src/core/modules/StarWrapper.cpp:106 src/core/modules/StarWrapper.cpp:790
+#: src/core/modules/StarWrapper.cpp:1250
 msgid "pulsating variable star"
 msgstr "estrella variable pulsante"
 
-#: src/core/modules/StarWrapper.cpp:108 src/core/modules/StarWrapper.cpp:803
-#: src/core/modules/StarWrapper.cpp:1271
+#: src/core/modules/StarWrapper.cpp:108 src/core/modules/StarWrapper.cpp:792
+#: src/core/modules/StarWrapper.cpp:1252
 msgid "rotating variable star"
 msgstr "estrella variable rotante"
 
-#: src/core/modules/StarWrapper.cpp:110 src/core/modules/StarWrapper.cpp:805
-#: src/core/modules/StarWrapper.cpp:1273
+#: src/core/modules/StarWrapper.cpp:110 src/core/modules/StarWrapper.cpp:794
+#: src/core/modules/StarWrapper.cpp:1254
 msgid "cataclysmic variable star"
 msgstr "estrella variable cataclísmica"
 
-#: src/core/modules/StarWrapper.cpp:112 src/core/modules/StarWrapper.cpp:807
-#: src/core/modules/StarWrapper.cpp:1275
+#: src/core/modules/StarWrapper.cpp:112 src/core/modules/StarWrapper.cpp:796
+#: src/core/modules/StarWrapper.cpp:1256
 msgid "eclipsing binary system"
 msgstr "sistema binario eclipsante"
 
-#: src/core/modules/StarWrapper.cpp:116 src/core/modules/StarWrapper.cpp:811
-#: src/core/modules/StarWrapper.cpp:1279
+#: src/core/modules/StarWrapper.cpp:116 src/core/modules/StarWrapper.cpp:800
+#: src/core/modules/StarWrapper.cpp:1260
 msgid "variable star"
 msgstr "estrella variable"
 
-#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:969
-#: src/core/modules/StarWrapper.cpp:1372
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:958
+#: src/core/modules/StarWrapper.cpp:1353
 #: plugins/Satellites/src/ui_satellitesDialog.h:1233
 msgid "Magnitude range"
 msgstr "Rango magnitud"
 
-#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:969
-#: src/core/modules/StarWrapper.cpp:1372
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:958
+#: src/core/modules/StarWrapper.cpp:1353
 msgid "Photometric system"
 msgstr "Sistema fotométrico"
 
-#: src/core/modules/StarWrapper.cpp:362 src/core/modules/StarWrapper.cpp:982
+#: src/core/modules/StarWrapper.cpp:362 src/core/modules/StarWrapper.cpp:971
 #: plugins/Pulsars/src/Pulsar.cpp:202
 msgid "Proper motion"
 msgstr "Movimiento propio"
 
 #: src/core/modules/StarWrapper.cpp:364 src/core/modules/StarWrapper.cpp:370
-#: src/core/modules/StarWrapper.cpp:984 src/core/modules/StarWrapper.cpp:990
+#: src/core/modules/StarWrapper.cpp:973 src/core/modules/StarWrapper.cpp:979
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "ms arco/año"
 
-#: src/core/modules/StarWrapper.cpp:367 src/core/modules/StarWrapper.cpp:987
+#: src/core/modules/StarWrapper.cpp:367 src/core/modules/StarWrapper.cpp:976
 #: plugins/Pulsars/src/Pulsar.cpp:205
 msgid "Proper motions by axes"
 msgstr "Movimientos propios por ejes"
@@ -3805,38 +3831,38 @@ msgstr "Movimientos propios por ejes"
 msgid "Radial velocity"
 msgstr "Velocidad radial"
 
-#: src/core/modules/StarWrapper.cpp:396 src/core/modules/StarWrapper.cpp:1027
-#: src/core/modules/StarWrapper.cpp:1390 plugins/Quasars/src/Quasar.cpp:142
+#: src/core/modules/StarWrapper.cpp:396 src/core/modules/StarWrapper.cpp:1016
+#: src/core/modules/StarWrapper.cpp:1371 plugins/Quasars/src/Quasar.cpp:142
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 msgid "Spectral Type"
 msgstr "Tipo espectral"
 
-#: src/core/modules/StarWrapper.cpp:399 src/core/modules/StarWrapper.cpp:1030
-#: src/core/modules/StarWrapper.cpp:1393
+#: src/core/modules/StarWrapper.cpp:399 src/core/modules/StarWrapper.cpp:1019
+#: src/core/modules/StarWrapper.cpp:1374
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
 #: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Period"
 msgstr "Período"
 
-#: src/core/modules/StarWrapper.cpp:407 src/core/modules/StarWrapper.cpp:1038
-#: src/core/modules/StarWrapper.cpp:1401
+#: src/core/modules/StarWrapper.cpp:407 src/core/modules/StarWrapper.cpp:1027
+#: src/core/modules/StarWrapper.cpp:1382
 msgid "Next maximum light"
 msgstr "Siguiente luz máxima"
 
-#: src/core/modules/StarWrapper.cpp:409 src/core/modules/StarWrapper.cpp:1040
-#: src/core/modules/StarWrapper.cpp:1403
+#: src/core/modules/StarWrapper.cpp:409 src/core/modules/StarWrapper.cpp:1029
+#: src/core/modules/StarWrapper.cpp:1384
 msgid "Next minimum light"
 msgstr "Siguiente luz mínima"
 
-#: src/core/modules/StarWrapper.cpp:416 src/core/modules/StarWrapper.cpp:1047
-#: src/core/modules/StarWrapper.cpp:1410
+#: src/core/modules/StarWrapper.cpp:416 src/core/modules/StarWrapper.cpp:1036
+#: src/core/modules/StarWrapper.cpp:1391
 msgctxt "light curve"
 msgid "Rising time"
 msgstr "Tiempo de ascenso"
 
-#: src/core/modules/StarWrapper.cpp:418 src/core/modules/StarWrapper.cpp:1049
-#: src/core/modules/StarWrapper.cpp:1412
+#: src/core/modules/StarWrapper.cpp:418 src/core/modules/StarWrapper.cpp:1038
+#: src/core/modules/StarWrapper.cpp:1393
 msgid "Duration of eclipse"
 msgstr "Duración del eclipse"
 
@@ -3855,183 +3881,154 @@ msgstr "en fecha"
 msgid "Separation"
 msgstr "Separación"
 
-#: src/core/modules/StarWrapper.cpp:613
+#: src/core/modules/StarWrapper.cpp:614
 msgctxt "object narration"
 msgid "This star is described as "
 msgstr "Esta estrella se describe como"
 
-#: src/core/modules/StarWrapper.cpp:645
+#: src/core/modules/StarWrapper.cpp:646
 msgctxt "object narration"
 msgid "with absolute Magnitude of"
 msgstr "con magnitud absoluta de"
 
-#: src/core/modules/StarWrapper.cpp:651 src/core/modules/StarWrapper.cpp:1133
-#: src/core/modules/StarWrapper.cpp:1463
+#: src/core/modules/StarWrapper.cpp:652 src/core/modules/StarWrapper.cpp:1123
+#, qt-format
 msgctxt "object narration"
-msgid "Its B minus V Color Index is"
-msgstr "Su índice de color B-V es"
+msgid "Its B minus V Color Index is %1"
+msgstr "Su índice de color B-V es %1"
 
-#: src/core/modules/StarWrapper.cpp:667
+#: src/core/modules/StarWrapper.cpp:668 src/core/modules/StarWrapper.cpp:1145
+#: src/core/modules/StarWrapper.cpp:1467
+#, qt-format
 msgctxt "object narration, alternatives"
-msgid "or"
-msgstr "o"
+msgid "either %1 or %2"
+msgstr "ya sea %1 o %2"
 
-#: src/core/modules/StarWrapper.cpp:669 src/core/modules/StarWrapper.cpp:1157
-#: src/core/modules/StarWrapper.cpp:1487
+#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1147
+#: src/core/modules/StarWrapper.cpp:1469
+#, qt-format
 msgctxt "object narration"
-msgid "Its magnitude range goes from "
-msgstr "Su rango de magnitud va desde"
+msgid "Its magnitude range goes from %1 to %2 in the Photometric system %3."
+msgstr "Su rango de magnitud va de %1 a %2 en el sistema fotométrico %3."
 
-#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1158
+#. TRANSLATORS: Its distance is x plus/minus y light years
+#: src/core/modules/StarWrapper.cpp:688 src/core/modules/StarWrapper.cpp:1172
+#, qt-format
+msgctxt "object narration"
+msgid "Its distance is %1 ± %2 light years."
+msgstr "Su distancia %1 ± %2 años luz."
+
+#: src/core/modules/StarWrapper.cpp:698 src/core/modules/StarWrapper.cpp:1160
+#, qt-format
+msgctxt "object narration"
+msgid ""
+"Its proper motion is %1 milli-arcseconds per year towards %2 degrees, or, by"
+" axes, %3 milli-arcseconds per year in right ascension and %4 in "
+"declination."
+msgstr ""
+"Su movimiento propio es de %1 milisegundos de arco por año hacia %2 grados, "
+"o, por ejes, %3 milisegundos de arco por año en ascensión recta y %4 en "
+"declinación."
+
+#: src/core/modules/StarWrapper.cpp:706
+#, qt-format
+msgctxt "object narration"
+msgid "Its radial velocity is %1 kilometers per second."
+msgstr "Su velocidad radial es de %1 kilómetros por segundo."
+
+#: src/core/modules/StarWrapper.cpp:715 src/core/modules/StarWrapper.cpp:1183
+#, qt-format
+msgctxt "object narration"
+msgid "Its parallax is %1 ± %2 milli-arcseconds."
+msgstr "Su paralaje es de %1 ± %2 milisegundos de arco."
+
+#: src/core/modules/StarWrapper.cpp:718 src/core/modules/StarWrapper.cpp:1186
+#, qt-format
+msgctxt "object narration"
+msgid "Its parallax is %1 milli-arcseconds."
+msgstr "Su paralaje es de %1 milisegundos de arco."
+
+#: src/core/modules/StarWrapper.cpp:724 src/core/modules/StarWrapper.cpp:1200
 #: src/core/modules/StarWrapper.cpp:1488
-msgctxt "object narration, describes a range target"
-msgid "to"
-msgstr "hasta"
-
-#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1158
-#: src/core/modules/StarWrapper.cpp:1488
+#, qt-format
 msgctxt "object narration"
-msgid "in the Photometric system"
-msgstr "en el sistema fotométrico"
+msgid "Its Spectral Type is %1."
+msgstr "Su tipo espectral es %1."
 
-#: src/core/modules/StarWrapper.cpp:688 src/core/modules/StarWrapper.cpp:1192
+#: src/core/modules/StarWrapper.cpp:727 src/core/modules/StarWrapper.cpp:1203
+#: src/core/modules/StarWrapper.cpp:1491
+#, qt-format
 msgctxt "object narration"
-msgid "Its distance is"
-msgstr "Su distancia es"
+msgid "It has a period of %1 days"
+msgstr "Tiene un periodo de %1 días"
 
-#: src/core/modules/StarWrapper.cpp:697 src/core/modules/StarWrapper.cpp:1170
+#: src/core/modules/StarWrapper.cpp:735 src/core/modules/StarWrapper.cpp:1211
+#: src/core/modules/StarWrapper.cpp:1499
+#, qt-format
 msgctxt "object narration"
-msgid "Its proper motion is"
-msgstr "Su movimiento propio es"
+msgid "Next minimum light will be at %1 UTC"
+msgstr "La próxima luz mínima será a las %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:699 src/core/modules/StarWrapper.cpp:704
-#: src/core/modules/StarWrapper.cpp:1172 src/core/modules/StarWrapper.cpp:1177
+#: src/core/modules/StarWrapper.cpp:736 src/core/modules/StarWrapper.cpp:1212
+#: src/core/modules/StarWrapper.cpp:1500
+#, qt-format
 msgctxt "object narration"
-msgid "milli-arcseconds per year"
-msgstr "milisegundos de arco por año"
+msgid "Next maximum light will be at %1 UTC"
+msgstr "La próxima luz máxima será a las %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:702 src/core/modules/StarWrapper.cpp:1175
+#: src/core/modules/StarWrapper.cpp:742 src/core/modules/StarWrapper.cpp:1218
+#: src/core/modules/StarWrapper.cpp:1506
+#, qt-format
 msgctxt "object narration"
-msgid "or, by axes, "
-msgstr "o, en ejes,"
+msgid "The duration fraction of an eclipse is %1, that is, %2."
+msgstr "La fracción de duración de un eclipse es %1, que es igual a %2."
 
-#: src/core/modules/StarWrapper.cpp:705 src/core/modules/StarWrapper.cpp:1178
-msgctxt "object narration"
-msgid "in right ascension and "
-msgstr "en ascensión recta y"
-
-#: src/core/modules/StarWrapper.cpp:707 src/core/modules/StarWrapper.cpp:1180
-msgctxt "object narration"
-msgid "in declination"
-msgstr "en declinación"
-
-#. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/StarWrapper.cpp:715
-msgctxt "speed"
-msgid "kilometers per second"
-msgstr "kilómetros por segundo"
-
-#: src/core/modules/StarWrapper.cpp:716
-msgctxt "object narration"
-msgid "Its radial velocity is"
-msgstr "Su velocidad radial es"
-
-#: src/core/modules/StarWrapper.cpp:724
-msgctxt "object narration"
-msgid "Its parallax is"
-msgstr "Su paralaje es"
-
-#: src/core/modules/StarWrapper.cpp:733
-msgctxt "object narration"
-msgid "Its Spectral Type is"
-msgstr "Su tipo espectral es"
-
-#: src/core/modules/StarWrapper.cpp:736 src/core/modules/StarWrapper.cpp:1221
-#: src/core/modules/StarWrapper.cpp:1509
-msgctxt "object narration"
-msgid "It has a period of"
-msgstr "Tiene un periodo de"
-
-#: src/core/modules/StarWrapper.cpp:744 src/core/modules/StarWrapper.cpp:1229
-#: src/core/modules/StarWrapper.cpp:1517
-msgctxt "object narration"
-msgid "Next minimum light will be"
-msgstr "La próxima luz mínima será"
-
-#: src/core/modules/StarWrapper.cpp:745 src/core/modules/StarWrapper.cpp:1230
-#: src/core/modules/StarWrapper.cpp:1518
-msgctxt "object narration"
-msgid "Next maximum light will be"
-msgstr "La próxima luz máxima será"
-
-#: src/core/modules/StarWrapper.cpp:751
-msgctxt "object narration"
-msgid "The duration fraction of an eclipse is"
-msgstr "La fracción de duración de un eclipse es"
-
-#: src/core/modules/StarWrapper.cpp:752 src/core/modules/StarWrapper.cpp:1237
-#: src/core/modules/StarWrapper.cpp:1525
+#: src/core/modules/StarWrapper.cpp:743 src/core/modules/StarWrapper.cpp:1219
+#: src/core/modules/StarWrapper.cpp:1507
+#, qt-format
 msgctxt "object narration: light curve"
-msgid "The rising time fraction is"
-msgstr "La fracción de tiempo ascendente es"
+msgid "The rising time fraction is %1, that is, %2."
+msgstr "La fracción de tiempo ascendente es %1, que es igual a %2."
 
-#: src/core/modules/StarWrapper.cpp:753 src/core/modules/StarWrapper.cpp:1238
-#: src/core/modules/StarWrapper.cpp:1526
+#: src/core/modules/StarWrapper.cpp:752
+#, qt-format
 msgctxt "object narration"
-msgid "that is"
-msgstr "que es igual a"
+msgid "Its position angle as given for %1 is %2 degrees."
+msgstr "Su ángulo de posición, dado para %1, es %2 grados."
 
-#: src/core/modules/StarWrapper.cpp:762
-msgctxt "object narration"
-msgid "Its position angle as given for"
-msgstr "Su ángulo de posición es el indicado para"
-
-#: src/core/modules/StarWrapper.cpp:764 src/core/modules/StarWrapper.cpp:773
+#: src/core/modules/StarWrapper.cpp:753 src/core/modules/StarWrapper.cpp:759
 msgctxt "coordinates for current epoch"
 msgid "current date"
 msgstr "fecha actual"
 
-#: src/core/modules/StarWrapper.cpp:770 src/core/modules/StarWrapper.cpp:776
-msgctxt "object narration"
-msgid "Its Separation for"
-msgstr "Su separación para"
-
-#: src/core/modules/StarWrapper.cpp:774 src/core/modules/StarWrapper.cpp:776
-msgctxt "object narration"
-msgid "arc-seconds"
-msgstr "segundos de arco"
-
-#: src/core/modules/StarWrapper.cpp:1113 src/core/modules/StarWrapper.cpp:1115
-#: src/core/modules/StarWrapper.cpp:1453 src/core/modules/StarWrapper.cpp:1455
-msgctxt "object narration"
-msgid "Its type is"
-msgstr "Su tipo es"
-
-#: src/core/modules/StarWrapper.cpp:1113 src/core/modules/StarWrapper.cpp:1453
-msgctxt "object narration"
-msgid "with variable type"
-msgstr "con tipo variable"
-
-#: src/core/modules/StarWrapper.cpp:1155 src/core/modules/StarWrapper.cpp:1485
+#: src/core/modules/StarWrapper.cpp:758
 #, qt-format
-msgctxt "variable star narration"
-msgid "either %1 or %2"
-msgstr "ya sea %1 o %2"
-
-#: src/core/modules/StarWrapper.cpp:1201
 msgctxt "object narration"
-msgid "Its Parallax is"
-msgstr "Su paralaje es"
+msgid "Its Separation for %1 is %2 arc-seconds (%3). "
+msgstr "Su separación para %1 es de %2 segundos de arco (%3)."
 
-#: src/core/modules/StarWrapper.cpp:1218 src/core/modules/StarWrapper.cpp:1506
-msgctxt "star narration"
-msgid "Its spectral type is"
-msgstr "Su tipo espectral es"
-
-#: src/core/modules/StarWrapper.cpp:1236 src/core/modules/StarWrapper.cpp:1524
+#: src/core/modules/StarWrapper.cpp:763
+#, qt-format
 msgctxt "object narration"
-msgid "The duration of an eclipse is"
-msgstr "La duración de un eclipse es"
+msgid "Its Separation for %1 is %2 arc-seconds. "
+msgstr "Su separación para %1 es de %2 segundos de arco."
+
+#: src/core/modules/StarWrapper.cpp:1102 src/core/modules/StarWrapper.cpp:1434
+#, qt-format
+msgctxt "object narration"
+msgid "Its type is %1 with variable type %2."
+msgstr "Su tipo es %1 con tipo variable %2."
+
+#: src/core/modules/StarWrapper.cpp:1104 src/core/modules/StarWrapper.cpp:1436
+#, qt-format
+msgctxt "object narration"
+msgid "Its type is %1."
+msgstr "Su tipo es %1"
+
+#: src/core/modules/StarWrapper.cpp:1445
+msgctxt "object narration"
+msgid "Its B minus V Color Index is"
+msgstr "Su índice de color B-V es"
 
 #: src/core/modules/MilkyWay.cpp:110
 msgid "Milky Way"
@@ -5348,7 +5345,7 @@ msgstr "Tiempo de día"
 msgid "Polar night"
 msgstr "Noche polar"
 
-#: src/core/StelObject.cpp:887 src/core/StelObject.cpp:1449
+#: src/core/StelObject.cpp:887 src/core/StelObject.cpp:1439
 msgid "This object never rises"
 msgstr "Este objeto nunca sale"
 
@@ -5397,14 +5394,13 @@ msgstr "Max. Digresión Oeste"
 msgid "Parallactic Angle"
 msgstr "Ángulo de paralaje"
 
-#: src/core/StelObject.cpp:994 src/core/StelObject.cpp:1544
+#: src/core/StelObject.cpp:994 src/core/StelObject.cpp:1530
 #: src/gui/AstroCalcDialog.cpp:7770
 msgid "IAU Constellation"
 msgstr "Constelación UAI"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/StelObject.cpp:1016 src/core/StelObject.cpp:1566
-#: src/translations.h:59
+#: src/core/StelObject.cpp:1016 src/translations.h:59
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:518
 msgid "Constellations"
 msgstr "Constelaciones"
@@ -5415,18 +5411,19 @@ msgid "Equatorial coordinates for J2000: "
 msgstr "Coordenadas ecuatoriales de J2000:"
 
 #: src/core/StelObject.cpp:1094 src/core/StelObject.cpp:1119
+#, qt-format
 msgctxt "object narration"
-msgid "Right Ascension"
-msgstr "Ascensión recta"
+msgid "Right Ascension %1, and %2 %3. "
+msgstr "Asención recta %1, y %2 %3. "
 
-#: src/core/StelObject.cpp:1096 src/core/StelObject.cpp:1121
-#: src/core/StelObject.cpp:1160
+#: src/core/StelObject.cpp:1095 src/core/StelObject.cpp:1120
+#: src/core/StelObject.cpp:1159
 msgctxt "object narration"
 msgid "Polar Distance"
 msgstr "Distancia polar"
 
-#: src/core/StelObject.cpp:1096 src/core/StelObject.cpp:1121
-#: src/core/StelObject.cpp:1160
+#: src/core/StelObject.cpp:1095 src/core/StelObject.cpp:1120
+#: src/core/StelObject.cpp:1159
 msgctxt "object narration"
 msgid "Declination"
 msgstr "Declinación"
@@ -5442,9 +5439,10 @@ msgid "Fixed-Equatorial coordinates of date:"
 msgstr "Coordenadas ecuatoriales fijas de la fecha:"
 
 #: src/core/StelObject.cpp:1158
+#, qt-format
 msgctxt "object narration"
-msgid "Hour Angle"
-msgstr "Ángulo horario"
+msgid "Hour Angle %1, and %2 %3. "
+msgstr "Ángulo horario %1 y %2 %3."
 
 #: src/core/StelObject.cpp:1204
 msgctxt "object narration"
@@ -5452,207 +5450,168 @@ msgid "Azimuthal coordinates are:"
 msgstr "Las coordenadas azimutales son:"
 
 #: src/core/StelObject.cpp:1205
+#, qt-format
 msgctxt "object narration"
-msgid "azimuth"
-msgstr "azimut"
+msgid "Azimuth %1, and altitude %2. "
+msgstr "Azimut %1, y altitud %2. "
 
-#: src/core/StelObject.cpp:1207
-msgctxt "object narration"
-msgid "altitude"
-msgstr "altitud"
-
-#: src/core/StelObject.cpp:1227
+#: src/core/StelObject.cpp:1225
 msgctxt "object narration"
 msgid "Galactic coordinates are:"
 msgstr "Las coordenadas galácticas son:"
 
-#: src/core/StelObject.cpp:1228 src/core/StelObject.cpp:1251
-#: src/core/StelObject.cpp:1282 src/core/StelObject.cpp:1309
+#: src/core/StelObject.cpp:1226 src/core/StelObject.cpp:1247
+#: src/core/StelObject.cpp:1276 src/core/StelObject.cpp:1301
+#, qt-format
 msgctxt "object narration"
-msgid "longitude"
-msgstr "longitud"
+msgid "Longitude %1, and latitude %2. "
+msgstr "Longitud %1, y latitud %2. "
 
-#: src/core/StelObject.cpp:1230 src/core/StelObject.cpp:1253
-#: src/core/StelObject.cpp:1284 src/core/StelObject.cpp:1311
-msgctxt "object narration"
-msgid "latitude"
-msgstr "latitud"
-
-#: src/core/StelObject.cpp:1250
+#: src/core/StelObject.cpp:1246
 msgctxt "object narration"
 msgid "Supergalactic coordinates are:"
 msgstr "Las coordenadas supergalácticas son:"
 
-#: src/core/StelObject.cpp:1281
+#: src/core/StelObject.cpp:1275
 msgctxt "object narration"
 msgid "Ecliptical coordinates for Equinox 2000 are:"
 msgstr "Las coordenadas eclípticas para el equinoccio de 2000 son:"
 
-#: src/core/StelObject.cpp:1308
+#: src/core/StelObject.cpp:1300
 msgctxt "object narration"
 msgid "Ecliptical coordinates of date are:"
 msgstr "Las coordenadas eclípticas de la fecha son:"
 
-#: src/core/StelObject.cpp:1315
+#: src/core/StelObject.cpp:1305
 msgctxt "object narration"
 msgid "The Ecliptic obliquity of date is"
 msgstr "La oblicuidad eclíptica de la fecha es"
 
-#: src/core/StelObject.cpp:1331
+#: src/core/StelObject.cpp:1321
 msgctxt "object narration"
 msgid "The Mean Sidereal Time is"
 msgstr "El tiempo sideral medio es"
 
-#: src/core/StelObject.cpp:1340
+#: src/core/StelObject.cpp:1330
 msgctxt "object narration"
 msgid "The Apparent Sidereal Time is"
 msgstr "El tiempo sideral aparente es"
 
-#: src/core/StelObject.cpp:1373
+#: src/core/StelObject.cpp:1363
 msgctxt "object narration; celestial event; passage across a meridian"
 msgid "Transit on this day is at"
 msgstr "El tránsito en este día es a las"
 
-#: src/core/StelObject.cpp:1374
+#: src/core/StelObject.cpp:1364
 msgctxt "object narration"
 msgid "Rise on this day is at"
 msgstr "El ascenso en este día es a las"
 
-#: src/core/StelObject.cpp:1375
+#: src/core/StelObject.cpp:1365
 msgctxt "object narration"
 msgid "Set on this day is at"
 msgstr "El descenso en este día es a las"
 
-#: src/core/StelObject.cpp:1385
+#: src/core/StelObject.cpp:1375
 msgctxt "object narration"
 msgid "The object does not rise on this day."
 msgstr "El objeto no asciende en este día."
 
-#: src/core/StelObject.cpp:1399
+#: src/core/StelObject.cpp:1389
 msgctxt "object narration"
 msgid "There is no meridian transit on this day."
 msgstr "No hay tránsito meridiano en este día."
 
-#: src/core/StelObject.cpp:1411
+#: src/core/StelObject.cpp:1401
 msgctxt "object narration"
 msgid "The object does not set on this day."
 msgstr "El objeto no se pone en este día."
 
-#: src/core/StelObject.cpp:1427
+#: src/core/StelObject.cpp:1417
+#, qt-format
 msgctxt "celestial event"
-msgid "Morning twilight for a Solar altitude of"
-msgstr "Crepúsculo matutino para una altitud solar de"
+msgid "Morning twilight for a Solar altitude of %1 degrees begins at %2. "
+msgstr ""
+"El crepúsculo matutino para una altitud solar de %1 grados comienza a las "
+"%2."
 
-#: src/core/StelObject.cpp:1428
+#: src/core/StelObject.cpp:1418
+#, qt-format
 msgctxt "celestial event"
-msgid "Evening twilight for a Solar altitude of"
-msgstr "Crepúsculo vespertino para una altitud solar de"
+msgid "Evening twilight for a Solar altitude of %1 degrees ends at %2. "
+msgstr ""
+"El crepúsculo vespertino para una altitud solar de %1 grados termina a las "
+"%2."
 
-#: src/core/StelObject.cpp:1431
-msgctxt "object narration"
-msgid "begins at"
-msgstr "comienza a las"
-
-#: src/core/StelObject.cpp:1434
-msgctxt "object narration"
-msgid "ends at"
-msgstr "termina a las"
-
-#: src/core/StelObject.cpp:1439
+#: src/core/StelObject.cpp:1429
 msgctxt "object narration"
 msgid "Duration of Daytime"
 msgstr "Duración del día"
 
-#: src/core/StelObject.cpp:1447
+#: src/core/StelObject.cpp:1437
 msgctxt "object narration"
 msgid "It is Polar night"
 msgstr "Es una noche polar"
 
-#: src/core/StelObject.cpp:1454
+#: src/core/StelObject.cpp:1444
 msgid "It is Polar day"
 msgstr "Es un día polar"
 
-#: src/core/StelObject.cpp:1456
+#: src/core/StelObject.cpp:1446
 msgid "This object is circumpolar and so never sets"
 msgstr "Este objeto es circumpolar y por lo tanto nunca se pone."
 
-#: src/core/StelObject.cpp:1473
-msgctxt "celestial coordinate system"
-msgid "Azimuth"
-msgstr "Azimut"
-
-#: src/core/StelObject.cpp:1474
-msgctxt "celestial coordinate system"
-msgid "Hour Angle"
-msgstr "Ángulo horario"
-
-#. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
-#. with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:1476
+#: src/core/StelObject.cpp:1480
+#, qt-format
 msgctxt "object narration"
-msgid "Greatest Eastern Digression is at"
-msgstr "La mayor digresión oriental está en"
+msgid "Greatest Eastern Digression is at Azimuth %1, Hour Angle %2"
+msgstr "La mayor digresión oriental está en el azimut 1 % y ángulo horario %2"
 
-#. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
-#. stars with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:1496
+#: src/core/StelObject.cpp:1494
+#, qt-format
 msgctxt "object narration"
-msgid "Greatest Western Digression is at"
-msgstr "La mayor digresión occidental está en"
+msgid "Greatest Western Digression is at Azimuth %1, Hour Angle %2"
+msgstr ""
+"La mayor digresión occidental está en el azimut 1 % y ángulo horario %2"
 
-#: src/core/StelObject.cpp:1533
+#: src/core/StelObject.cpp:1519
 msgctxt "object narration"
 msgid "The Parallactic Angle is"
 msgstr "El ángulo paraláctico es"
 
-#: src/core/StelObject.cpp:1573 src/core/StelObject.cpp:1580
-msgctxt "object narration"
-msgid "Its"
-msgstr "Su"
-
-#: src/core/StelObject.cpp:1573 src/core/StelObject.cpp:1580
-msgctxt "object narration"
-msgid "Position"
-msgstr "Posición"
-
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1967
+#: src/core/StelObject.cpp:1950
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "Solar A/a"
 
-#: src/core/StelObject.cpp:1967
+#: src/core/StelObject.cpp:1950
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "Solar Az./Alt."
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1985
+#: src/core/StelObject.cpp:1968
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "Lunar A/a"
 
-#: src/core/StelObject.cpp:1985
+#: src/core/StelObject.cpp:1968
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "Lunar Az./Alt."
 
-#. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:2024
+#: src/core/StelObject.cpp:2006
+#, qt-format
 msgctxt "object narration"
-msgid "The sun's azimuth is "
-msgstr "El acimut del Sol es"
+msgid "The Sun's azimuth is %1, and its altitude is %2."
+msgstr "El azimut del Sol es %1 y su altitud es %2."
 
-#: src/core/StelObject.cpp:2025 src/core/StelObject.cpp:2039
+#: src/core/StelObject.cpp:2017
+#, qt-format
 msgctxt "object narration"
-msgid "and its altitude is "
-msgstr "y su altitud es"
-
-#. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:2038
-msgctxt "object narration"
-msgid "The Moon's azimuth is "
-msgstr "El acimut de la Luna es"
+msgid "The Moon's azimuth is %1, and its altitude is %2."
+msgstr "El azimut de la Luna es %1 y su altitud es %2."
 
 #: src/core/StelObjectMgr.cpp:51 src/core/StelMovementMgr.cpp:194
 #: src/gui/StelGui.cpp:274 src/StelMainView.cpp:967 src/StelMainView.cpp:968
@@ -5703,12 +5662,16 @@ msgstr "Zodíaco"
 msgid "Lunar Station"
 msgstr "Estación lunar"
 
-#: src/core/StelSkyCultureSkyPartition.cpp:527
+#: src/core/StelSkyCultureSkyPartition.cpp:527 src/core/StelUtils.cpp:344
+#: src/core/StelUtils.cpp:518 src/core/StelUtils.cpp:567
+#: src/core/StelUtils.cpp:1535
 msgctxt "object narration"
 msgid "minutes"
 msgstr "minutos"
 
-#: src/core/StelSkyCultureSkyPartition.cpp:529
+#: src/core/StelSkyCultureSkyPartition.cpp:529 src/core/StelUtils.cpp:346
+#: src/core/StelUtils.cpp:519 src/core/StelUtils.cpp:568
+#: src/core/StelUtils.cpp:1537
 msgctxt "object narration"
 msgid "seconds"
 msgstr "segundos"
@@ -6418,6 +6381,294 @@ msgstr ""
 msgid "Further information can be found in the {developer documentation}."
 msgstr ""
 "Puede obtener más información en la {documentación del desarrollador}."
+
+#: src/core/StelUtils.cpp:144
+msgctxt "duration"
+msgid "d"
+msgstr "d"
+
+#: src/core/StelUtils.cpp:145
+msgctxt "duration"
+msgid "h"
+msgstr "h"
+
+#: src/core/StelUtils.cpp:146
+msgctxt "duration"
+msgid "m"
+msgstr "m"
+
+#: src/core/StelUtils.cpp:147
+msgctxt "duration"
+msgid "s"
+msgstr "s"
+
+#: src/core/StelUtils.cpp:164
+msgctxt "duration"
+msgid "hours"
+msgstr "horas"
+
+#: src/core/StelUtils.cpp:165
+msgctxt "duration"
+msgid "minutes"
+msgstr "minutos"
+
+#: src/core/StelUtils.cpp:166
+msgctxt "duration"
+msgid "seconds"
+msgstr "segundos"
+
+#: src/core/StelUtils.cpp:343 src/core/StelUtils.cpp:1534
+msgctxt "object narration"
+msgid "hours"
+msgstr "horas"
+
+#: src/core/StelUtils.cpp:437 src/core/StelUtils.cpp:489
+msgid "minus"
+msgstr "menos"
+
+#: src/core/StelUtils.cpp:441
+msgctxt "object narration"
+msgid "arc minutes"
+msgstr "minutos de arco"
+
+#: src/core/StelUtils.cpp:444
+msgctxt "object narration"
+msgid "arc seconds"
+msgstr "segundos de arco"
+
+#: src/core/StelUtils.cpp:489
+msgid "plus"
+msgstr "más"
+
+#: src/core/StelUtils.cpp:491
+msgid "degrees"
+msgstr "grados"
+
+#: src/core/StelUtils.cpp:493
+msgid "minutes"
+msgstr "minutos"
+
+#: src/core/StelUtils.cpp:493 src/ui_astroCalcDialog.h:2352
+#: src/ui_astroCalcDialog.h:2454 plugins/Satellites/src/Satellite.cpp:493
+msgid "and"
+msgstr "y"
+
+#: src/core/StelUtils.cpp:495 src/ui_configurationDialog.h:2706
+msgid "seconds"
+msgstr "segundos"
+
+#: src/core/StelUtils.cpp:526 src/core/StelUtils.cpp:528
+msgctxt "object narration"
+msgid "North"
+msgstr "Norte"
+
+#: src/core/StelUtils.cpp:526 src/core/StelUtils.cpp:528
+msgctxt "object narration"
+msgid "South"
+msgstr "Sur"
+
+#: src/core/StelUtils.cpp:574 src/core/StelUtils.cpp:580
+msgctxt "object narration"
+msgid "East"
+msgstr "Este"
+
+#: src/core/StelUtils.cpp:575 src/core/StelUtils.cpp:581
+msgctxt "object narration"
+msgid "West"
+msgstr "Oeste"
+
+#: src/core/StelUtils.cpp:3126
+msgid "Alpha"
+msgstr "Alfa"
+
+#: src/core/StelUtils.cpp:3126 src/ui_searchDialogGui.h:774
+msgid "alpha"
+msgstr "alfa"
+
+#: src/core/StelUtils.cpp:3127
+msgid "Beta"
+msgstr "Beta"
+
+#: src/core/StelUtils.cpp:3127 src/ui_searchDialogGui.h:777
+msgid "beta"
+msgstr "beta"
+
+#: src/core/StelUtils.cpp:3128 src/gui/AstroCalcDialog.cpp:2457
+#: src/gui/AstroCalcDialog.cpp:3049
+msgid "Gamma"
+msgstr "Gamma"
+
+#: src/core/StelUtils.cpp:3128 src/ui_searchDialogGui.h:780
+msgid "gamma"
+msgstr "gamma"
+
+#: src/core/StelUtils.cpp:3129
+msgid "Delta"
+msgstr "Delta"
+
+#: src/core/StelUtils.cpp:3129 src/ui_searchDialogGui.h:783
+msgid "delta"
+msgstr "delta"
+
+#: src/core/StelUtils.cpp:3130
+msgid "Epsilon"
+msgstr "Épsilon"
+
+#: src/core/StelUtils.cpp:3130 src/ui_searchDialogGui.h:786
+msgid "epsilon"
+msgstr "épsilon"
+
+#: src/core/StelUtils.cpp:3132
+msgid "Zeta"
+msgstr "Zeta"
+
+#: src/core/StelUtils.cpp:3132 src/ui_searchDialogGui.h:789
+msgid "zeta"
+msgstr "zeta"
+
+#: src/core/StelUtils.cpp:3133
+msgid "Eta"
+msgstr "Eta"
+
+#: src/core/StelUtils.cpp:3133 src/ui_searchDialogGui.h:792
+msgid "eta"
+msgstr "eta"
+
+#: src/core/StelUtils.cpp:3134
+msgid "Theta"
+msgstr "Theta"
+
+#: src/core/StelUtils.cpp:3134 src/ui_searchDialogGui.h:795
+msgid "theta"
+msgstr "teta"
+
+#: src/core/StelUtils.cpp:3135
+msgid "Iota"
+msgstr "Iota"
+
+#: src/core/StelUtils.cpp:3135 src/ui_searchDialogGui.h:771
+msgid "iota"
+msgstr "iota"
+
+#: src/core/StelUtils.cpp:3136
+msgid "Kappa"
+msgstr "Kappa"
+
+#: src/core/StelUtils.cpp:3136 src/ui_searchDialogGui.h:798
+msgid "kappa"
+msgstr "kappa"
+
+#: src/core/StelUtils.cpp:3138
+msgid "Lambda"
+msgstr "Lambda"
+
+#: src/core/StelUtils.cpp:3138 src/ui_searchDialogGui.h:801
+msgid "lambda"
+msgstr "lambda"
+
+#: src/core/StelUtils.cpp:3139
+msgid "Mu"
+msgstr "Mi"
+
+#: src/core/StelUtils.cpp:3139 src/ui_searchDialogGui.h:804
+msgid "mu"
+msgstr "mi"
+
+#: src/core/StelUtils.cpp:3140
+msgid "Nu"
+msgstr "Ni"
+
+#: src/core/StelUtils.cpp:3140 src/ui_searchDialogGui.h:807
+msgid "nu"
+msgstr "ni"
+
+#: src/core/StelUtils.cpp:3141
+msgid "Xi"
+msgstr "Xi"
+
+#: src/core/StelUtils.cpp:3141 src/ui_searchDialogGui.h:810
+msgid "xi"
+msgstr "xi"
+
+#: src/core/StelUtils.cpp:3142
+msgid "Omicron"
+msgstr "Ómicron"
+
+#: src/core/StelUtils.cpp:3142 src/ui_searchDialogGui.h:813
+msgid "omicron"
+msgstr "ómicron"
+
+#: src/core/StelUtils.cpp:3144
+msgid "Pi"
+msgstr "Pi"
+
+#: src/core/StelUtils.cpp:3144 src/ui_searchDialogGui.h:816
+msgid "pi"
+msgstr "pi"
+
+#: src/core/StelUtils.cpp:3145
+msgid "Rho"
+msgstr "Ro"
+
+#: src/core/StelUtils.cpp:3145 src/ui_searchDialogGui.h:819
+msgid "rho"
+msgstr "ro"
+
+#: src/core/StelUtils.cpp:3146
+msgid "Sigma"
+msgstr "Sigma"
+
+#: src/core/StelUtils.cpp:3146 src/ui_searchDialogGui.h:822
+msgid "sigma"
+msgstr "sigma"
+
+#: src/core/StelUtils.cpp:3147
+msgid "Tau"
+msgstr "Tau"
+
+#: src/core/StelUtils.cpp:3147 src/ui_searchDialogGui.h:825
+msgid "tau"
+msgstr "tau"
+
+#: src/core/StelUtils.cpp:3148
+msgid "Upsilon"
+msgstr "Ípsilon"
+
+#: src/core/StelUtils.cpp:3148 src/ui_searchDialogGui.h:828
+msgid "upsilon"
+msgstr "ípsilon"
+
+#: src/core/StelUtils.cpp:3150
+msgid "Phi"
+msgstr "Fi"
+
+#: src/core/StelUtils.cpp:3150 src/ui_searchDialogGui.h:831
+msgid "phi"
+msgstr "fi"
+
+#: src/core/StelUtils.cpp:3151
+msgid "Chi"
+msgstr "Ji"
+
+#: src/core/StelUtils.cpp:3151 src/ui_searchDialogGui.h:834
+msgid "chi"
+msgstr "ji"
+
+#: src/core/StelUtils.cpp:3152
+msgid "Psi"
+msgstr "Psi"
+
+#: src/core/StelUtils.cpp:3152 src/ui_searchDialogGui.h:837
+msgid "psi"
+msgstr "psi"
+
+#: src/core/StelUtils.cpp:3153
+msgid "Omega"
+msgstr "Omega"
+
+#: src/core/StelUtils.cpp:3153 src/ui_searchDialogGui.h:840
+msgid "omega"
+msgstr "omega"
 
 #: src/gui/ConfigurationDialog.cpp:129 src/ui_configurationDialog.h:2363
 msgid "Plugins"
@@ -8299,10 +8550,6 @@ msgstr "Salidas, tránsitos y puestas"
 msgid "Saros"
 msgstr "Saros"
 
-#: src/gui/AstroCalcDialog.cpp:2457 src/gui/AstroCalcDialog.cpp:3049
-msgid "Gamma"
-msgstr "Gamma"
-
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:2459
 msgctxt "column name"
@@ -10003,7 +10250,7 @@ msgid "Cannot open JSON output file. Will not delete."
 msgstr "No se puede abrir el archivo de salida JSON. No se eliminará."
 
 #: src/gui/ObsListDialog.cpp:1194 src/ui_configurationDialog.h:2345
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
 msgid "Information"
 msgstr "Información"
 
@@ -12680,7 +12927,7 @@ msgstr "E&legir"
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
@@ -12716,7 +12963,7 @@ msgstr "&Guardar"
 
 #: src/translations.h:855 src/ui_configurationDialog.h:2371
 #: src/ui_configurationDialog.h:2819
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
 msgid "Save"
 msgstr "Guardar"
 
@@ -14460,102 +14707,6 @@ msgstr "Encontrar Objeto"
 #: src/ui_searchDialogGui.h:766
 msgid "Use tab key for select of found items"
 msgstr "Utilizar la tecla tab para seleccionar los elementos encontrados"
-
-#: src/ui_searchDialogGui.h:771
-msgid "iota"
-msgstr "iota"
-
-#: src/ui_searchDialogGui.h:774
-msgid "alpha"
-msgstr "alpha"
-
-#: src/ui_searchDialogGui.h:777
-msgid "beta"
-msgstr "beta"
-
-#: src/ui_searchDialogGui.h:780
-msgid "gamma"
-msgstr "gamma"
-
-#: src/ui_searchDialogGui.h:783
-msgid "delta"
-msgstr "delta"
-
-#: src/ui_searchDialogGui.h:786
-msgid "epsilon"
-msgstr "épsilon"
-
-#: src/ui_searchDialogGui.h:789
-msgid "zeta"
-msgstr "zeta"
-
-#: src/ui_searchDialogGui.h:792
-msgid "eta"
-msgstr "eta"
-
-#: src/ui_searchDialogGui.h:795
-msgid "theta"
-msgstr "teta"
-
-#: src/ui_searchDialogGui.h:798
-msgid "kappa"
-msgstr "kappa"
-
-#: src/ui_searchDialogGui.h:801
-msgid "lambda"
-msgstr "lambda"
-
-#: src/ui_searchDialogGui.h:804
-msgid "mu"
-msgstr "mu"
-
-#: src/ui_searchDialogGui.h:807
-msgid "nu"
-msgstr "nu"
-
-#: src/ui_searchDialogGui.h:810
-msgid "xi"
-msgstr "xi"
-
-#: src/ui_searchDialogGui.h:813
-msgid "omicron"
-msgstr "omicron"
-
-#: src/ui_searchDialogGui.h:816
-msgid "pi"
-msgstr "pi"
-
-#: src/ui_searchDialogGui.h:819
-msgid "rho"
-msgstr "ro"
-
-#: src/ui_searchDialogGui.h:822
-msgid "sigma"
-msgstr "sigma"
-
-#: src/ui_searchDialogGui.h:825
-msgid "tau"
-msgstr "tau"
-
-#: src/ui_searchDialogGui.h:828
-msgid "upsilon"
-msgstr "upsilon"
-
-#: src/ui_searchDialogGui.h:831
-msgid "phi"
-msgstr "phi"
-
-#: src/ui_searchDialogGui.h:834
-msgid "chi"
-msgstr "chi"
-
-#: src/ui_searchDialogGui.h:837
-msgid "psi"
-msgstr "psi"
-
-#: src/ui_searchDialogGui.h:840
-msgid "omega"
-msgstr "omega"
 
 #: src/ui_searchDialogGui.h:843
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
@@ -16966,10 +17117,6 @@ msgstr "Ocultar el cursor del ratón cuando está inactivo"
 msgid "Mouse cursor timeout:"
 msgstr "Tiempo de espera del cursor del ratón:"
 
-#: src/ui_configurationDialog.h:2706
-msgid "seconds"
-msgstr "segundos"
-
 #: src/ui_configurationDialog.h:2709
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Ocultar todo fuera del círculo central en la vista principal"
@@ -17710,11 +17857,6 @@ msgstr "Cuerpo celeste:"
 #: src/ui_astroCalcDialog.h:2349
 msgid "First celestial body"
 msgstr "Primer cuerpo celeste"
-
-#: src/ui_astroCalcDialog.h:2352 src/ui_astroCalcDialog.h:2454
-#: plugins/Satellites/src/Satellite.cpp:493
-msgid "and"
-msgstr "y"
 
 #: src/ui_astroCalcDialog.h:2354
 msgid "Second celestial body"
@@ -32225,7 +32367,7 @@ msgid "SCM: Dark Constellation Editor"
 msgstr "CCE: Editor de Constelaciones Oscuras"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
 msgid "SCM: Constellation Editor"
 msgstr "CCE: Editor de Constelaciones"
 
@@ -32258,63 +32400,63 @@ msgstr "Editar"
 msgid "Convert"
 msgstr "Convertir"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:323
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
 msgid "Pen"
 msgstr "Pluma"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:325
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:324
 msgid "Revert the last drawn line."
 msgstr "Revertir la última línea dibujada."
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:326
 msgid "Undo"
 msgstr "Deshacer"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
 msgid "Eraser"
 msgstr "Borrador"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
 msgid "Drawing"
 msgstr "Dibujo"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
 msgid "English name"
 msgstr "Nombre en inglés"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
 msgid "ID (Do not include 'CON' or the sky culture name)"
 msgstr "ID (No incluya «CON» o el nombre de la cultura estelar)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
 msgid "Native name (optional)"
 msgstr "Nombre nativo (opcional)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
 msgid "Pronounciation (optional, European glyphs or Pinyin)"
 msgstr "Pronunciación (opcional, glifos europeos o pinyin)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
 msgid "IPA (optional)"
 msgstr "AFI (opcional)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
 msgid "Description (optional)"
 msgstr "Descripción (opcional)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Bind Star"
 msgstr "Enlazar estrella"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
 msgid "Upload Image"
 msgstr "Subir imagen"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
 msgid "Remove Image"
 msgstr "Borrar imagen"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
 msgid "Artwork"
 msgstr "Ilustración"
 
