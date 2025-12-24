@@ -742,6 +742,7 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 		if (vMm>0)
 		{
 			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
+							// TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing stage of a stellar light curve
 							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
 
 			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
@@ -1220,6 +1221,7 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 		if (vMm>0)
 		{
 			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
+							// TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing stage of a stellar light curve
 							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
 
 			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
@@ -1508,6 +1510,7 @@ QString StarWrapper3::getNarration(const StelCore *core, const InfoStringGroup& 
 		if (vMm>0)
 		{
 			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
+							// TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing stage of a stellar light curve
 							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
 
 			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
