@@ -322,7 +322,7 @@ void printSystemInfo()
 	{
 		if (readVendorId)
 			log(QString("CPU name: %1 %2").arg(vendor, cpumodel));
-		else
+		else if (cpumodel!=L1S("unknown"))
 			log(QString("CPU name: %1").arg(cpumodel));
 		if (!freq.isEmpty())
 			log(QString("CPU maximum speed: %1").arg(freq));
@@ -335,7 +335,7 @@ void printSystemInfo()
 			log(QString("System type: %1").arg(systype));
 		if (!platform.isEmpty())
 			log(QString("Platform: %1").arg(platform));
-		if (!model.isEmpty() && (!hardware.isEmpty() || !platform.isEmpty()))
+		if (!model.isEmpty())
 			log(QString("Model: %1").arg(model));
 		if (!machine.isEmpty())
 			log(QString("Machine: %1").arg(machine));
