@@ -1099,7 +1099,7 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 	{
 		const QString objectTypeI18nStr = getObjectTypeI18n();
 		if (!varType.isEmpty())
-			oss << QString(qc_("Its type is %1 with variable type %2.", "object narration")).arg(objectTypeI18nStr, varType);
+			oss << QString(qc_("Its type is %1 with variability type %2.", "object narration")).arg(objectTypeI18nStr, varType);
 		else
 			oss << QString(qc_("Its type is %1.", "object narration")).arg(objectTypeI18nStr);
 		oss << ". ";
@@ -1431,7 +1431,7 @@ QString StarWrapper3::getNarration(const StelCore *core, const InfoStringGroup& 
 	{
 		const QString objectTypeI18nStr = getObjectTypeI18n();
 		if (!varType.isEmpty())
-			oss << QString(qc_("Its type is %1 with variable type %2.", "object narration")).arg(objectTypeI18nStr, varType);
+			oss << QString(qc_("Its type is %1 with variability type %2.", "object narration")).arg(objectTypeI18nStr, varType);
 		else
 			oss << QString(qc_("Its type is %1.", "object narration")).arg(objectTypeI18nStr);
 		oss << ". ";
