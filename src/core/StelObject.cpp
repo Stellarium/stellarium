@@ -1360,9 +1360,9 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		{
 			rts = getRTSTime(core);
 		}
-		QString sTransit = qc_("Transit on this day is at", "object narration; celestial event; passage across a meridian");
-		QString sRise = qc_("Rise on this day is at", "object narration");
-		QString sSet = qc_("Set on this day is at", "object narration");
+		QString sTransit = qc_("Transit on this day is at:", "object narration; celestial event; passage across a meridian");
+		QString sRise = qc_("Rise on this day is at:", "object narration");
+		QString sSet = qc_("Set on this day is at:", "object narration");
 		double sunrise = 0.;
 		double sunset = 24.;
 		double hour(0);
@@ -1377,7 +1377,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		else
 		{
 			hour = StelUtils::getHoursFromJulianDay(rts[0]+utcShift);
-			res += QString("%1: %2. ").arg(sRise, StelUtils::hoursToHmsNarration(hour, true));
+			res += QString("%1 %2. ").arg(sRise, StelUtils::hoursToHmsNarration(hour, true));
 
 			sunrise = hour;
 		}
@@ -1391,7 +1391,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		else {
 			hour = StelUtils::getHoursFromJulianDay(rts[1]+utcShift);
 
-			res += QString("%1: %2. ").arg(sTransit, StelUtils::hoursToHmsNarration(hour, true));
+			res += QString("%1 %2. ").arg(sTransit, StelUtils::hoursToHmsNarration(hour, true));
 		}
 
 		// Set
@@ -1402,7 +1402,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		}
 		else {
 			hour = StelUtils::getHoursFromJulianDay(rts[2]+utcShift);
-			res += QString("%1: %2. ").arg(sSet, StelUtils::hoursToHmsNarration(hour, true));
+			res += QString("%1 %2. ").arg(sSet, StelUtils::hoursToHmsNarration(hour, true));
 
 			sunset = hour;
 		}
