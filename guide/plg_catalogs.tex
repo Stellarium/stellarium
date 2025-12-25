@@ -1013,8 +1013,7 @@ Note commas and brackets, they are very important!
         "designation": "Name",
         "IAUNo": "IAU shower number",
         "activity":
-        [
-        {
+        [{
             "year": "generic",
             "zhr": Maximum ZHR (-1 if variable),
             "variable": "Minimum-maximum (if variable)",
@@ -1027,62 +1026,55 @@ Note commas and brackets, they are very important!
                   before peak,
             "b2": Slope of distribution function
                   after peak
-        }
-        ],
+        }],
         "speed": Geocentric speed (km/s),
         "radiantAlpha": Right Ascension (J2000) (degree),
         "radiantDelta": Declination (J2000) (degree),
         "driftAlpha": Radiant drift in Right Ascension,
         "driftDelta": Radiant drift in Declination,
         "colors":
-        [
-        {
+        [{
             "color": "white",
             "intensity": 70
-        },
-        {
+         },
+         {
             "color": "blueGreen",
             "intensity": 30
-        }
-        ],
+         }],
         "parentObj": "Parent object",
         "pidx": population index
     },
 \end{configfile}
 
-For example, below is a record for \textit{Northern Taurids}:
+For example, below is a record for the \textit{Northern Taurids}:
 
-\begin{configfile}[\footnotesize]
+\begin{configfile}[\scriptsize]
 "NTA":
     {
         "designation": "Northern Taurids",
         "IAUNo": "17",
         "activity":
-        [
-        {
+        [{
             "year": "generic",
             "zhr": 5,
             "start": 206,
             "finish": 258,
             "peak": 230
-        }
-        ],
+         }],
         "speed": 29,
         "radiantAlpha": 58,
         "radiantDelta": 22,
         "driftAlpha": 1.03,
         "driftDelta": 0.26,
         "colors":
-        [
-        {
+        [{
             "color": "yellow",
             "intensity": 80
-        },
-        {
+         },
+         {
             "color": "white",
             "intensity": 20
-        }
-        ],
+         }],
         "parentObj": "Comet 2P/Encke",
         "pidx": 2.3
     },
