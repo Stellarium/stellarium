@@ -2,16 +2,19 @@
 
 ## Introduction
 
-<p>The sculptured Dendera zodiac (or Denderah zodiac) is a widely known Egyptian bas-relief from the ceiling of the pronaos (or portico) of a chapel dedicated to Osiris in the Hathor temple at Dendera. This chapel was begun in the late Ptolemaic period when Egypt was ruled by (Greek) successors of Alexander the Great (hellenistic Egypt: 305-30 BCE). Its <i>pronaos</i> (a hall in front of the holy chamber) was added by the Roman emperor Tiberius (14-37 CE). This led Jean-François Champollion (18th century) to date the relief to the Greco-Roman period (while most of his contemporaries believed it to be of a millennium earlier because of the Egyptian style of the figures - this is not believed anymore). Today, French archaeologists date it to exactly 54 BCE [1].  The relief is now on display at the Musée du Louvre, Paris (France).</p>
+The sculptured Dendera zodiac (or Denderah zodiac) is a widely known Egyptian bas-relief from the ceiling of the pronaos (or portico) of a chapel dedicated to Osiris in the Hathor temple at Dendera. This chapel was begun in the late Ptolemaic period when Egypt was ruled by (Greek) successors of Alexander the Great (hellenistic Egypt: 305-30 BCE). Its _pronaos_ (a hall in front of the holy chamber) was added by the Roman emperor Tiberius (14-37 CE). This led Jean-François Champollion (18th century) to date the relief to the Greco-Roman period (while most of his contemporaries believed it to be of a millennium earlier because of the Egyptian style of the figures - this is not believed anymore). Today, French archaeologists date it to exactly 54 BCE [#1].  The relief is now on display at the Musée du Louvre, Paris (France).
 
 ## Description
 
 The temple in (today's) Egypt probably dates to the Roman (or Late Greek) time of Egypt and, thus, does not show the original Egyptian sky but a mixture of Greco-Roman, Egyptian and Babylonian figures, all drawn in an Egyptian style.
 
-<p><img width="600" src="illustrations/Dendera_zodiac_Louvre.jpg"/></p>
-<p><i>Photograph for the display in Musée du Louvre (Paris), Public Domain/ CC0. The plate is 255 x 253 cm in size.</i></p>
+<img width="600" src="illustrations/Dendera_zodiac_Louvre.jpg"/>
+
+Photograph for the display in Musée du Louvre (Paris), Public Domain/ CC0. The plate is 255 x 253 cm in size.
 
 ### List of constellation figure
+
+<!-- This list must be re-worked into a proper section Constellations, below. -->
 
 <p><table>
 <tr valign="middle">
@@ -218,9 +221,9 @@ These positions are equal to the "secret places" in Babylonian astrology and the
 
 Additionally, the equinoxes are marked with great disks: One in Libra and one Aries.
 
-## Constellations
+### Constellations
 
-### Zodiac
+#### Zodiac
 
 The zodiac came to Greece from Babylonian sources. It is unknown whether or not the Egyptians had similar figures: The origin of the zodiac is the path of the Moon and was, thus, important for the Egyptian calendar, too. However, the zodiac depicted in Dendera is definitely the Greek (partially misunderstood) interpretation of the Babylonian one.
 
@@ -228,7 +231,7 @@ The Zodiac is the Babylonian one with the semi-exception of Pisces: Pisces are d
 
  The other constellations of the zodiac are the Babylonian versions, partially egyptized. Virgo is depicted as the Babylonian Goddess Shala with the Ear of Grain, Capricornus as a Goat-Fish accompanying the Babylonian god of witchcraft (Aquarius), Sagittarius as the Babylonian god Pabilsang. Scorpion, Aries and Cancer leave rather no room for interpretation. Leo is depicted as a usual lion but carries the Egyptian queen Berenice (whose name was given to the constellation Coma Berenices) at his tail. Gemini are not depicted as Twins but as a couple, the Bull is not halved.
 
-### Outside the Zodiac
+#### Outside the Zodiac
 
 The rest of the sky  also shows a mixture of several cultures: The hippo goddess who guards the Ox Thigh is a clearly Egyptian constellation. Interestingly, there is a desert fox and a sheep next to the ox thigh which refers to same positions in the sky as the Babylonian constellations of the Fox and the Ewe.
 
@@ -238,11 +241,8 @@ Interestingly, this depiction explains several Greek names of single stars: e.g.
 
 ### Source(s)
 
-<p>This <em>sky culture</em> is a mapping of historical figures onto the stars. The figures are directly copied by hand from the digital photographs that are provided by the Louvre and the <a href="https://en.wikipedia.org/wiki/File:Zodiaque_de_Denderah_aux_couleurs_d'origine.jpg">colours follow roughly the reconstruction by Alexandre N.Isis  (wikicommons, 2013)</a>.</p>
+This <em>sky culture</em> is a mapping of historical figures onto the stars. The figures are directly copied by hand from the digital photographs that are provided by the Louvre and the <a href="https://en.wikipedia.org/wiki/File:Zodiaque_de_Denderah_aux_couleurs_d'origine.jpg">colours follow roughly the reconstruction by Alexandre N.Isis  (wikicommons, 2013)</a>.
 
-### Fair Use
-
-This sky culture originates from research. We provide this for free but the authors of contributions certainly deserve to be cited according to the common rules. Thank you!
 
 ## References
 
@@ -258,9 +258,15 @@ This sky culture originates from research. We provide this for free but the auth
 
 This Greco-Egyptian sky culture was painted and added to Stellarium by:
 
-<p><em>Susanne M. Hoffmann:   service@uhura-uraniae.com </em></p>
-<p>Written in English: <em>SMH</em></p>
+_Susanne M. Hoffmann:   service@uhura-uraniae.com _
+
+Written in English: _SMH_
+
+### Fair Use
+
+This sky culture originates from research. We provide this for free but the authors of contributions certainly deserve to be cited according to the common rules. Thank you!
 
 ## License
 
 CC BY-ND 4.0
+
