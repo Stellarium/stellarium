@@ -295,15 +295,15 @@ The following table lists the original names of the constellations in columns 2 
  - [#5]: Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, 2017
  - [#6]: Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984
 
-### Fair Use
-
-We provide this sky culture free of charge, but the authors deserve to be cited according to the usual rules. Thank you!
-
 ## Authors
 
 This sky culture was added to Stellarium by Susanne M. Hoffmann (service@uhura-uraniae.com) and originally created in collaboration with Prof. Dr. Dieter Blume (Art History, FSU Jena, Germany) for Planetarium Jena.
 
 Written in English: the authors
+
+### Fair Use
+
+We provide this sky culture free of charge, but the authors deserve to be cited according to the usual rules. Thank you!
 
 ## License
 
