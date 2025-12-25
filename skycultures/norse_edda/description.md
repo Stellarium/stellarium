@@ -112,25 +112,16 @@ Mímis brunnr (Mímir’s well) is the source of wisdom, from which Odin sacrifi
 
 Urðarbrunnr (well of Urðr) is the spring at which the Æsir hold daily council. To reach it, they ride across Bifröst (Sturluson 2017 [#8], p. 28). The wells are again represented by gaps in the Milky Way, with a larger dark spot at the end of Bifröst near Daneb representing the spring beneath Yggdrasil’s root. 
 
-
 ## References
 
  - [#1]: Beckman, N. & Kålund, K. (eds.) (1914–1916) Alfræði íslenzk II: Rímtöl. Copenhagen: Hið íslenzka bókmenntafélag.
-
  - [#2]: Holmberg, P. (2022) ‘Watching Star Wars with Viking Age Subtitles: An analysis of cohesion and coherence in the Rök runestone inscription’, Arkiv för nordisk filologi, 137, pp. 231–246. (Publication date: 2 May 2025).
-
  - [#3]: Jonsson, B. (1994) Star Myths of the Vikings: A New Concept of Norse Mythology. Swan River, Manitoba: The Author.
-
  - [#4]: Krause, A. (2010) Reclam’s Lexicon of Germanic Mythology and Heroic Legend. Stuttgart: Philipp Reclam jun.
-
  - [#5]: Lorenz, G. (1984) Gylfaginning. Text, translation and commentary. Darmstadt: Wissenschaftliche Buchgesellschaft. (Texte zur Forschung, 48).
-
  - [#6]: Persson, J.R. (2017) Norse Constellations. ResearchGate. DOI: 10.13140/RG.2.2.15662.92483.
-
  - [#7]: Sigurðsson, G. (2022) ‘How Gylfi’s Illusion Breathes Life into the Sky’, Religionsvidenskabeligt Tidsskrift, 74, pp. 231–246. DOI: 10.7146/rt.v74i.132105.
-
  - [#8]: Sturluson, S. (2017) The Edda of Snorri Sturluson. Translated by K. Simrock. Bibliographically updated edition. Stuttgart: Reclam. 
-
 
 ## Authors
 
