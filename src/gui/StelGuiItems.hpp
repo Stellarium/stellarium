@@ -20,6 +20,7 @@
 #ifndef STELGUIITEMS_HPP
 #define STELGUIITEMS_HPP
 
+#include <QGraphicsProxyWidget>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsWidget>
 #include <QDebug>
@@ -29,8 +30,20 @@ class QGraphicsSceneMouseEvent;
 class QTimeLine;
 class QGraphicsTextItem;
 class QTimer;
+class QLabel;
 class StelProgressController;
 class QProgressBar;
+
+class StelToolTip : public QGraphicsProxyWidget
+{
+public:
+	StelToolTip(QGraphicsItem* parent);
+	void showToolTip(const QPoint& scenePos, const QString& text);
+private:
+	void setFontSizeFromApp(int size);
+
+	QLabel* label = nullptr;
+};
 
 // Progress bars in the lower right corner
 class StelProgressBarMgr : public QGraphicsWidget

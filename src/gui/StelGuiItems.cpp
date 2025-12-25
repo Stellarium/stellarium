@@ -42,6 +42,7 @@
 #include <QGraphicsLineItem>
 #include <QRectF>
 #include <QDebug>
+#include <QLabel>
 #include <QScreen>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsTextItem>
@@ -55,6 +56,45 @@
 #include <QSettings>
 #include <QGuiApplication>
 
+StelToolTip::StelToolTip(QGraphicsItem* parent)
+	: QGraphicsProxyWidget(parent)
+	, label(new QLabel(""))
+{
+	setZValue(1e38); // Show on top
+	label->setObjectName("StelToolTip");
+	setWidget(label);
+	setVisible(false);
+
+	setSizePolicy({QSizePolicy::Minimum, QSizePolicy::Fixed});
+	connect(dynamic_cast<StelGui*>(StelApp::getInstance().getGui()),
+	        &StelGui::guiStyleChanged, this,
+	        [this](const QString &style){ label->setStyleSheet(style); });
+
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged,
+	        this, &StelToolTip::setFontSizeFromApp);
+	setFontSizeFromApp(StelApp::getInstance().getGuiFontSize());
+}
+
+void StelToolTip::setFontSizeFromApp(const int size)
+{
+	auto font = QGuiApplication::font();
+	font.setPixelSize(size);
+	setFont(font);
+}
+
+void StelToolTip::showToolTip(const QPoint& scenePos, const QString& text)
+{
+	if (isVisible() && label->text() == text)
+	{
+		// Avoid moving the tooltip when the text doesn't change
+		return;
+	}
+
+	label->setText(text);
+	setPos(scenePos);
+	updateGeometry();
+	setVisible(!text.isEmpty());
+}
 
 void StelButton::brightenImage(QImage &img, float factor)
 {
