@@ -96,6 +96,11 @@ void StelToolTip::showToolTip(const QPoint& scenePos, const QString& text)
 	setVisible(!text.isEmpty());
 }
 
+void StelToolTip::mousePressEvent(QGraphicsSceneMouseEvent*)
+{
+	showToolTip({}, "");
+}
+
 void StelButton::brightenImage(QImage &img, float factor)
 {
 	for (int y=0; y<img.height(); y++)
