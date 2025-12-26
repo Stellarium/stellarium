@@ -447,8 +447,8 @@ void ConfigurationDialog::createDialogContent()
 	#endif
 
 	// Speech configuration
+#ifdef ENABLE_SPEECH
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
-#if defined (ENABLE_SPEECH)
 	if (speechMgr->enabled())
 	{
 		ui->speechTextEdit->setPlainText(q_("Stellarium is a free open source planetarium for your computer. "
@@ -489,7 +489,7 @@ void ConfigurationDialog::createDialogContent()
 		// Kludge: we should take out the element in front of scripts, but only Qt6 can find it.
 		int pos=5;
 #else
-		QList<QListWidgetItem *> lwItemList=ui->stackListWidget->findItems("Speech", Qt::MatchExactly);
+		QList<QListWidgetItem *> lwItemList=ui->stackListWidget->findItems(q_("Speech"), Qt::MatchExactly); // use q_() to avoid crash!
 		int pos = ui->stackListWidget->indexFromItem(lwItemList.first()).row();
 #endif
 		QListWidgetItem *speechItem = ui->stackListWidget->takeItem(pos); // take out from its place.
