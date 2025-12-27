@@ -42,6 +42,7 @@
 #include <QGraphicsLineItem>
 #include <QRectF>
 #include <QDebug>
+#include <QLabel>
 #include <QScreen>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsTextItem>
@@ -55,6 +56,52 @@
 #include <QSettings>
 #include <QGuiApplication>
 
+StelToolTip::StelToolTip(QGraphicsItem* parent)
+	: QGraphicsProxyWidget(parent)
+	, label(new QLabel(""))
+{
+	setZValue(1e38); // Show on top
+	label->setObjectName("StelToolTip");
+	setWidget(label);
+	setVisible(false);
+
+	setSizePolicy({QSizePolicy::Minimum, QSizePolicy::Fixed});
+	connect(dynamic_cast<StelGui*>(StelApp::getInstance().getGui()),
+	        &StelGui::guiStyleChanged, this,
+	        [this](const QString &style){ label->setStyleSheet(style); });
+
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged,
+	        this, &StelToolTip::setFontSizeFromApp);
+	setFontSizeFromApp(StelApp::getInstance().getGuiFontSize());
+}
+
+void StelToolTip::setFontSizeFromApp(const int size)
+{
+	auto font = QGuiApplication::font();
+	font.setPixelSize(size);
+	setFont(font);
+}
+
+void StelToolTip::showToolTip(const QPoint& scenePos, const QString& text)
+{
+	if (isVisible() && label->text() == text)
+	{
+		// Avoid moving the tooltip when the text doesn't change
+		return;
+	}
+
+	label->setText(text);
+	// The shift avoids clicking the tooltip instead of the control it's annotating
+	const QPoint shift(2, 2);
+	setPos(scenePos + shift);
+	updateGeometry();
+	setVisible(!text.isEmpty());
+}
+
+void StelToolTip::mousePressEvent(QGraphicsSceneMouseEvent*)
+{
+	showToolTip({}, "");
+}
 
 void StelButton::brightenImage(QImage &img, float factor)
 {
@@ -129,6 +176,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	action = anAction;
 	secondAction = otherAction;
 	checked = false;
+	secondState = false;
 	flagChangeFocus = false;
 
 	//Q_ASSERT(!pixOn.isNull());
@@ -189,13 +237,18 @@ StelButton::StelButton(QGraphicsItem* parent,
 					   const QPixmap& pixHover,
 					   const QString& actionId,
 					   bool noBackground,
-					   bool isTristate)
+					   bool isTristate,
+					   const QString &otherActionId)
 	: QGraphicsPixmapItem(pixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
 	if (!actionId.isEmpty() && !action)
 		qWarning() << "Couldn't find action" << actionId;
-	initCtor(pixOn, pixOff, pixNoChange, pixHover, action, nullptr, noBackground, isTristate);
+	StelAction *otherAction=nullptr;
+	if (!otherActionId.isEmpty())
+		otherAction = StelApp::getInstance().getStelActionManager()->findAction(otherActionId);
+
+	initCtor(pixOn, pixOff, pixNoChange, pixHover, action, otherAction, noBackground, isTristate);
 }
 
 StelButton::StelButton(QGraphicsItem* parent,
@@ -319,7 +372,8 @@ void StelButton::updateIcon()
 		painter.drawPixmap(0, 0, pixBackground);
 
 	painter.drawPixmap(0, 0,
-		(isTristate_ && checked == ButtonStateNoChange) ? (pixNoChange) :
+		(isTristate_ && checked == ButtonStateNoChange) ||
+			   (!isTristate_ && secondState && checked == ButtonStateOn) ? (pixNoChange) :
 		(checked == ButtonStateOn) ? (pixOn) :
 		/* (checked == ButtonStateOff) ? */ (pixOff));
 
