@@ -563,7 +563,7 @@ def update_cultures_pot(sclist, pot):
 
         sc_name = sc_names[sky_culture]
 
-        with open(index_file) as file:
+        with open(index_file, encoding='utf-8') as file:
             data = json.load(file)
             file.close()
 

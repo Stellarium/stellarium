@@ -56,6 +56,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
+#include "StelSpeechMgr.hpp"
 #include "SpecialMarkersMgr.hpp"
 #include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
@@ -230,7 +231,7 @@ Q_IMPORT_PLUGIN(MosaicCameraStelPluginInterface)
 #endif
 
 // Initialize static variables
-StelApp* StelApp::singleton = Q_NULLPTR;
+StelApp* StelApp::singleton = nullptr;
 qint64 StelApp::startMSecs = 0;
 double StelApp::animationScale = 1.;
 
@@ -249,32 +250,33 @@ void StelApp::deinitStatic()
 *************************************************************************/
 StelApp::StelApp(StelMainView *parent)
 	: QObject(parent)
-	, randomGenerator(Q_NULLPTR)
+	, randomGenerator(nullptr)
 	, mainWin(parent)
-	, core(Q_NULLPTR)
-	, moduleMgr(Q_NULLPTR)
-	, localeMgr(Q_NULLPTR)
-	, skyCultureMgr(Q_NULLPTR)
-	, actionMgr(Q_NULLPTR)
-	, propMgr(Q_NULLPTR)
-	, textureMgr(Q_NULLPTR)
-	, stelObjectMgr(Q_NULLPTR)
-	, planetLocationMgr(Q_NULLPTR)
-	, networkAccessManager(Q_NULLPTR)
-	, audioMgr(Q_NULLPTR)
-	, videoMgr(Q_NULLPTR)
-	, skyImageMgr(Q_NULLPTR)
+	, core(nullptr)
+	, moduleMgr(nullptr)
+	, localeMgr(nullptr)
+	, skyCultureMgr(nullptr)
+	, actionMgr(nullptr)
+	, propMgr(nullptr)
+	, textureMgr(nullptr)
+	, stelObjectMgr(nullptr)
+	, planetLocationMgr(nullptr)
+	, networkAccessManager(nullptr)
+	, audioMgr(nullptr)
+	, videoMgr(nullptr)
+	, speechMgr(nullptr)
+	, skyImageMgr(nullptr)
 #ifdef ENABLE_SCRIPTING
-	, scriptAPIProxy(Q_NULLPTR)
-	, scriptMgr(Q_NULLPTR)
+	, scriptAPIProxy(nullptr)
+	, scriptMgr(nullptr)
 #endif
-	, stelGui(Q_NULLPTR)
+	, stelGui(nullptr)
 	, devicePixelsPerPixel(1.)
 	, fps(0)
 	, frame(0)
 	, frameTimeAccum(0.)
 	, flagNightVision(false)
-	, confSettings(Q_NULLPTR)
+	, confSettings(nullptr)
 	, initialized(false)
 	, saveProjW(-1.)
 	, saveProjH(-1.)
@@ -283,9 +285,9 @@ StelApp::StelApp(StelMainView *parent)
 	, nbUsedCache(0)
 	, totalUsedCacheSize(0)
 	, screenFontSize(getDefaultGuiFontSize())
-	, renderBuffer(Q_NULLPTR)
-	, viewportEffect(Q_NULLPTR)
-	, gl(Q_NULLPTR)
+	, renderBuffer(nullptr)
+	, viewportEffect(nullptr)
+	, gl(nullptr)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
 	, flagUseNegativeHourAngles(false)
@@ -295,7 +297,7 @@ StelApp::StelApp(StelMainView *parent)
 	, overwriteInfoColor(Vec3f(1.f))
 	, daylightInfoColor(Vec3f(0.f))
 	#ifdef ENABLE_SPOUT
-	, spoutSender(Q_NULLPTR)
+	, spoutSender(nullptr)
 	#endif
 	, currentFbo(0)
 {
@@ -327,22 +329,23 @@ StelApp::~StelApp()
 	moduleMgr->unloadModule("StelSkyCultureMgr", true);// No need to delete only later!
 	StelModuleMgr* tmp = moduleMgr;
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
-	delete tmp; tmp=Q_NULLPTR;
-	delete skyImageMgr; skyImageMgr=Q_NULLPTR;
-	delete core; core=Q_NULLPTR;
-	delete localeMgr; localeMgr=Q_NULLPTR;
-	delete audioMgr; audioMgr=Q_NULLPTR;
-	delete videoMgr; videoMgr=Q_NULLPTR;
-	delete stelObjectMgr; stelObjectMgr=Q_NULLPTR; // Delete the module by hand afterward
-	delete textureMgr; textureMgr=Q_NULLPTR;
-	delete planetLocationMgr; planetLocationMgr=Q_NULLPTR;
-	delete moduleMgr; moduleMgr=Q_NULLPTR; // Delete the secondary instance
-	delete actionMgr; actionMgr = Q_NULLPTR;
-	delete propMgr; propMgr = Q_NULLPTR;
-	delete renderBuffer; renderBuffer = Q_NULLPTR;
-	delete randomGenerator; randomGenerator=Q_NULLPTR;
+	delete tmp; tmp=nullptr;
+	delete skyImageMgr; skyImageMgr=nullptr;
+	delete core; core=nullptr;
+	delete localeMgr; localeMgr=nullptr;
+	delete audioMgr; audioMgr=nullptr;
+	delete videoMgr; videoMgr=nullptr;
+	//delete speechMgr; speechMgr=nullptr;
+	delete stelObjectMgr; stelObjectMgr=nullptr; // Delete the module by hand afterward
+	delete textureMgr; textureMgr=nullptr;
+	delete planetLocationMgr; planetLocationMgr=nullptr;
+	delete moduleMgr; moduleMgr=nullptr; // Delete the secondary instance
+	delete actionMgr; actionMgr = nullptr;
+	delete propMgr; propMgr = nullptr;
+	delete renderBuffer; renderBuffer = nullptr;
+	delete randomGenerator; randomGenerator=nullptr;
 	Q_ASSERT(singleton);
-	singleton = Q_NULLPTR;
+	singleton = nullptr;
 }
 
 void StelApp::setupNetworkProxy()
@@ -505,7 +508,6 @@ void StelApp::init(QSettings* conf)
 	//create non-StelModule managers
 	propMgr = new StelPropertyMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
-	skyCultureMgr->init();
 	getModuleMgr().registerModule(skyCultureMgr);
 
 	planetLocationMgr = new StelLocationMgr();
@@ -600,6 +602,14 @@ void StelApp::init(QSettings* conf)
 	videoMgr = new StelVideoMgr(audioOK);
 	videoMgr->init();
 	getModuleMgr().registerModule(videoMgr);
+
+	// Init speech manager. If no media or Qt too low, this installs a dummy object, the initialisation of which need not be announced.
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+	SplashScreen::showMessage(q_("Initializing speech output..."));
+#endif
+	speechMgr = new StelSpeechMgr();
+	speechMgr->init();
+	getModuleMgr().registerModule(speechMgr);
 
 	// Constellations
 	SplashScreen::showMessage(q_("Initializing constellations..."));
@@ -740,7 +750,7 @@ void StelApp::init(QSettings* conf)
 			{
 				QMessageBox::warning(&StelMainView::getInstance(), "Stellarium SPOUT", q_("Cannot create Spout sender. See log for details."), QMessageBox::Ok);
 				delete spoutSender;
-				spoutSender = Q_NULLPTR;
+				spoutSender = nullptr;
 				qApp->setProperty("spout", "");
 			}
 			SplashScreen::clearMessage();
@@ -767,7 +777,7 @@ void StelApp::initPlugIns()
 			continue;
 		SplashScreen::showMessage(QString("%1 \"%2\"...").arg(q_("Loading plugin"), q_(i.info.displayedName)));
 		StelModule* m = moduleMgr->loadPlugin(i.info.id);
-		if (m!=Q_NULLPTR)
+		if (m!=nullptr)
 		{
 			moduleMgr->registerModule(m, true);
 			//load extensions after the module is registered
@@ -782,7 +792,7 @@ void StelApp::deinit()
 {
 #ifdef 	ENABLE_SPOUT
 	delete spoutSender;
-	spoutSender = Q_NULLPTR;
+	spoutSender = nullptr;
 #endif
 #ifdef ENABLE_SCRIPTING
 	if (scriptMgr->scriptIsRunning())
@@ -1446,12 +1456,12 @@ void StelApp::setViewportEffect(const QString& name)
 	{
 		ensureGLContextCurrent();
 		delete renderBuffer;
-		renderBuffer = Q_NULLPTR;
+		renderBuffer = nullptr;
 	}
 	if (viewportEffect)
 	{
 		delete viewportEffect;
-		viewportEffect = Q_NULLPTR;
+		viewportEffect = nullptr;
 	}
 	if (name == "none") return;
 

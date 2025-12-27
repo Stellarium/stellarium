@@ -415,6 +415,9 @@ SET(ENABLE_PODIR 1 CACHE BOOL "Define whether processing of translation files sh
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
 
+# Activate media support
+SET(ENABLE_SPEECH 1 CACHE BOOL "Define whether speech output should be activated. Requires Qt6.4+ and ENABLE_MEDIA.")
+
 # Activate QtWebEngine support
 SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be supported if it installed.")
 
@@ -699,8 +702,8 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 IF(ENABLE_SHOWMYSKY)
     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
-        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.5.tar.gz
-        URL_HASH SHA256=d49eab6bc70a2c82bf294dd8ace9ef2fc6df0afbb72ba493bb6d3f1f8cd8829d
+        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.4.0.tar.gz
+        URL_HASH SHA256=1096f3c6067e05dd8c4df601b745cca5e88b843ad1328938e5dba69c1fcfb84f
         EXCLUDE_FROM_ALL yes
         OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)

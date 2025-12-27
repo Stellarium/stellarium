@@ -213,14 +213,16 @@ void StelTranslator::init(const QString& fileName)
 	StelTranslator::initIso639_1LanguageCodes(fileName);
 	
 	Q_ASSERT(StelTranslator::globalTranslator==Q_NULLPTR);
-	StelTranslator::globalTranslator = new StelTranslator("stellarium", "system");
+	StelTranslator::globalTranslator = new StelTranslator("stellarium", "en");
 }
 
 //! Try to determine system language from system configuration
 void StelTranslator::initSystemLanguage()
 {
+#ifdef ENABLE_NLS
 	systemLangName = QLocale::system().name();
 	if (systemLangName.isEmpty())
+#endif
 		systemLangName = "en";
 
 	//change systemLangName to ISO 639 / ISO 3166.

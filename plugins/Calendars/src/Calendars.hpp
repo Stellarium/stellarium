@@ -213,6 +213,8 @@ public slots:
 	//! Get the current color of the text (when override flag is active).
 	Vec3f getTextColor() const;
 	void setTextColor(const Vec3f& newColor);
+	//! Simple hotkey action to export the currently shown calendar data to $USER_DATA_DIR/Calendars.html
+	void exportCalendars();
 
 	//! enable display of calendars overlay
 	void enable(bool b);
@@ -292,6 +294,8 @@ public slots:
 	void showTibetan(bool b);	        //!< activate display of Tibetan
 
 private:
+	//! Create an HTML table which can be displayed or exported
+	QString createTableToDraw();
 	CalendarsInfoPanel *infoPanel;
 	CalendarsDialog* configDialog;
 	StelButton* toolbarButton;
