@@ -238,6 +238,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	astroCalcDialog = new AstroCalcDialog(atopLevelGraphicsWidget);
 	obsListDialog = new ObsListDialog(atopLevelGraphicsWidget);
 
+	toolTip = new StelToolTip(atopLevelGraphicsWidget);
+
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
 
@@ -652,6 +654,11 @@ void StelGui::update()
 		savedProgressBarSize=skyGui->progressBarMgr->boundingRect().size();
 		forceRefreshGui();
 	}
+}
+
+void StelGui::showToolTip(const QPoint& scenePos, const QString& text)
+{
+	toolTip->showToolTip(scenePos, text);
 }
 
 void StelGui::displayAllInfo()
