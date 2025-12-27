@@ -636,9 +636,9 @@ void StelGui::update()
 	const auto &stel=StelMainView::getInstance();
 	flag = stel.isFullScreen();
 	const auto exclusive=!stel.topMost->isVisible();
-	if (buttonFullscreen->secondState != exclusive)
+	if (buttonFullscreen->secondState == exclusive)
 	{
-		buttonFullscreen->secondState=exclusive;
+		buttonFullscreen->secondState=!exclusive;
 		buttonFullscreen->updateIcon();
 	}
 	if (getAction("actionSet_Full_Screen_Global")->isChecked() != flag)

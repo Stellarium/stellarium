@@ -388,8 +388,17 @@ protected:
 			}
 		}
 
-		parent->showToolTip(point, text);
-		event->setAccepted(!text.isEmpty());
+		const auto &stel=StelMainView::getInstance();
+		const auto exclusive=!stel.topMost->isVisible();
+		if (exclusive)
+		{
+			parent->showToolTip(point, text);
+			event->setAccepted(!text.isEmpty());
+		}
+		else
+		{
+			QGraphicsScene::helpEvent(event);
+		}
 	}
 
 private:
@@ -1540,14 +1549,13 @@ void StelMainView::initTitleI18n()
 
 void StelMainView::setFullScreen(bool b)
 {
+	topMost->hide();
 	if (b)
 	{
-		topMost->show();
 		showFullScreen();
 	}
 	else
 	{
-		topMost->hide();
 		showNormal();
 
 		// Not enough. If we had started in fullscreen, the inner part of the window is at 0/0, with the frame extending to top/left off screen.
