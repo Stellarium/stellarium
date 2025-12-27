@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-23 14:39+0700\n"
+"POT-Creation-Date: 2025-12-24 20:03+0400\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2025\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -54,8 +54,8 @@ msgstr "objet personnalisé"
 #: src/core/modules/Nebula.cpp:295 src/core/modules/Planet.cpp:619
 #: src/core/modules/Planet.cpp:622 src/core/modules/StarWrapper.cpp:51
 #: src/core/modules/StarWrapper.cpp:288 src/core/modules/StarWrapper.cpp:290
-#: src/core/modules/StarWrapper.cpp:915 src/core/modules/StarWrapper.cpp:917
-#: src/core/modules/StarWrapper.cpp:1320 src/core/modules/StarWrapper.cpp:1322
+#: src/core/modules/StarWrapper.cpp:920 src/core/modules/StarWrapper.cpp:922
+#: src/core/modules/StarWrapper.cpp:1326 src/core/modules/StarWrapper.cpp:1328
 #: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:2456
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3080
 #: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7688
@@ -1454,49 +1454,49 @@ msgstr "ou"
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 (or %2), that is: %3, on the Moon"
-msgstr ""
+msgstr "est un %1 (ou %2), c'est -à-dire %3, sur la Lune"
 
 #: src/core/modules/NomenclatureItem.cpp:330
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 (or %2), on the Moon"
-msgstr ""
+msgstr "est un %1 (ou %2) sur la Lune"
 
 #: src/core/modules/NomenclatureItem.cpp:335
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1, that is: %2, on the Moon"
-msgstr ""
+msgstr "est un %1, c'est -à-dire %2, sur la Lune"
 
 #: src/core/modules/NomenclatureItem.cpp:337
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 on the Moon"
-msgstr ""
+msgstr "est un %1 sur la Lune"
 
 #: src/core/modules/NomenclatureItem.cpp:345
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 (or %2), that is: %3, on %4"
-msgstr ""
+msgstr "est un %1 (ou %2), c'est -à-dire %3, sur %4"
 
 #: src/core/modules/NomenclatureItem.cpp:347
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 (or %2), on %3"
-msgstr ""
+msgstr "est un %1 (ou %2) sur la %3"
 
 #: src/core/modules/NomenclatureItem.cpp:352
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1, that is: %2, on %3"
-msgstr ""
+msgstr "est un %1, c'est -à-dire %2, sur %3"
 
 #: src/core/modules/NomenclatureItem.cpp:354
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 on %2"
-msgstr ""
+msgstr "est un %1 sur la %2"
 
 #: src/core/modules/NomenclatureItem.cpp:366
 #, qt-format
@@ -1512,7 +1512,7 @@ msgstr "Il s'étend sur plus de %1 kilomètres"
 #: src/core/modules/NomenclatureItem.cpp:373
 msgctxt "object narration"
 msgid "The feature was named after"
-msgstr ""
+msgstr "Cette structure a été dénommée d'après"
 
 #: src/core/modules/NomenclatureItem.cpp:377
 msgctxt "object narration"
@@ -1536,7 +1536,7 @@ msgstr "et"
 #: src/core/modules/NomenclatureItem.cpp:405
 msgctxt "object narration"
 msgid "Solar altitude over the feature is"
-msgstr ""
+msgstr "La hauteur du Soleil au-dessus de la structure est"
 
 #: src/core/modules/NomenclatureItem.cpp:405
 #: src/core/StelSkyCultureSkyPartition.cpp:526 src/core/StelUtils.cpp:227
@@ -2353,8 +2353,8 @@ msgid "protoplanetary nebula"
 msgstr "nébuleuse protoplanétaire"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:133
-#: src/core/modules/StarWrapper.cpp:98 src/core/modules/StarWrapper.cpp:782
-#: src/core/modules/StarWrapper.cpp:1242
+#: src/core/modules/StarWrapper.cpp:98 src/core/modules/StarWrapper.cpp:787
+#: src/core/modules/StarWrapper.cpp:1248
 msgid "star"
 msgstr "étoile"
 
@@ -2426,13 +2426,13 @@ msgid "Additional names: "
 msgstr "Noms supplémentaires :"
 
 #: src/core/modules/Nebula.cpp:286 src/core/modules/Planet.cpp:603
-#: src/core/modules/StarWrapper.cpp:274 src/core/modules/StarWrapper.cpp:606
+#: src/core/modules/StarWrapper.cpp:274 src/core/modules/StarWrapper.cpp:608
 msgid "Additional catalog numbers: "
 msgstr "Numéros de catalogues supplémentaires :"
 
 #: src/core/modules/Nebula.cpp:304 src/core/modules/Planet.cpp:866
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:319
-#: src/core/modules/StarWrapper.cpp:934 src/core/modules/StarWrapper.cpp:1329
+#: src/core/modules/StarWrapper.cpp:939 src/core/modules/StarWrapper.cpp:1335
 #: plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
 msgstr "Index de couleur (B-V)"
@@ -2477,7 +2477,7 @@ msgstr "Angle d'orientation"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:388 src/core/modules/Nebula.cpp:401
-#: src/core/modules/StarWrapper.cpp:351 src/core/modules/StarWrapper.cpp:989
+#: src/core/modules/StarWrapper.cpp:351 src/core/modules/StarWrapper.cpp:994
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
 msgctxt "distance"
@@ -2487,7 +2487,7 @@ msgstr "al"
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:389 src/core/modules/Nebula.cpp:435
 #: src/core/modules/Planet.cpp:744 src/core/modules/Planet.cpp:750
-#: src/core/modules/StarWrapper.cpp:353 src/core/modules/StarWrapper.cpp:991
+#: src/core/modules/StarWrapper.cpp:353 src/core/modules/StarWrapper.cpp:996
 #: src/gui/AstroCalcDialog.cpp:988 src/gui/AstroCalcChart.cpp:94
 #: src/gui/AstroCalcChart.cpp:104 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:2537
@@ -2519,13 +2519,13 @@ msgid "Redshift"
 msgstr "Décalage vers le rouge"
 
 #: src/core/modules/Nebula.cpp:460 src/core/modules/StarWrapper.cpp:387
-#: src/core/modules/StarWrapper.cpp:995 src/ui_configurationDialog.h:2727
+#: src/core/modules/StarWrapper.cpp:1000 src/ui_configurationDialog.h:2727
 msgid "Parallax"
 msgstr "Parallaxe"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:460 src/core/modules/StarWrapper.cpp:392
-#: src/core/modules/StarWrapper.cpp:1000 plugins/Pulsars/src/Pulsar.cpp:257
+#: src/core/modules/StarWrapper.cpp:1005 plugins/Pulsars/src/Pulsar.cpp:257
 msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
@@ -3191,8 +3191,8 @@ msgid "interstellar object"
 msgstr "objet interstellaire"
 
 #: src/core/modules/Planet.cpp:571 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:930
-#: src/core/modules/StarWrapper.cpp:1119 plugins/Quasars/src/Quasar.cpp:131
+#: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:935
+#: src/core/modules/StarWrapper.cpp:1124 plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "Magnitude absolue"
 
@@ -3227,7 +3227,7 @@ msgstr "Mouvement horaire"
 
 #: src/core/modules/Planet.cpp:685 src/core/modules/Planet.cpp:1222
 #: src/core/modules/Planet.cpp:1231 src/core/modules/StarWrapper.cpp:365
-#: src/core/modules/StarWrapper.cpp:974 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/StarWrapper.cpp:979 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "vers"
@@ -3324,7 +3324,7 @@ msgstr "Distance angulaire"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:947 src/core/modules/StarWrapper.cpp:399
-#: src/core/modules/StarWrapper.cpp:1019 src/core/modules/StarWrapper.cpp:1374
+#: src/core/modules/StarWrapper.cpp:1024 src/core/modules/StarWrapper.cpp:1380
 #: src/core/StelUtils.cpp:163 src/gui/AstroCalcDialog.cpp:8542
 #: src/gui/AstroCalcAlmanacWidget.cpp:254
 msgctxt "duration"
@@ -3705,7 +3705,7 @@ msgstr "Diamètre de la coma (estimé)"
 msgid "Gas tail length (estimate)"
 msgstr "Longueur de la queue de gaz (estimée)"
 
-#: src/core/modules/Comet.cpp:513 src/core/StelProjectorClasses.cpp:873
+#: src/core/modules/Comet.cpp:514 src/core/StelProjectorClasses.cpp:873
 msgid "Orthographic"
 msgstr "Orthographique"
 
@@ -3766,60 +3766,60 @@ msgstr "Marqueur des objets mineurs"
 msgid "double star"
 msgstr "étoile double"
 
-#: src/core/modules/StarWrapper.cpp:104 src/core/modules/StarWrapper.cpp:788
-#: src/core/modules/StarWrapper.cpp:1248
+#: src/core/modules/StarWrapper.cpp:104 src/core/modules/StarWrapper.cpp:793
+#: src/core/modules/StarWrapper.cpp:1254
 msgid "eruptive variable star"
 msgstr "étoile variable éruptive"
 
-#: src/core/modules/StarWrapper.cpp:106 src/core/modules/StarWrapper.cpp:790
-#: src/core/modules/StarWrapper.cpp:1250
+#: src/core/modules/StarWrapper.cpp:106 src/core/modules/StarWrapper.cpp:795
+#: src/core/modules/StarWrapper.cpp:1256
 msgid "pulsating variable star"
 msgstr "étoile variable pulsante"
 
-#: src/core/modules/StarWrapper.cpp:108 src/core/modules/StarWrapper.cpp:792
-#: src/core/modules/StarWrapper.cpp:1252
+#: src/core/modules/StarWrapper.cpp:108 src/core/modules/StarWrapper.cpp:797
+#: src/core/modules/StarWrapper.cpp:1258
 msgid "rotating variable star"
 msgstr "étoile variable par rotation"
 
-#: src/core/modules/StarWrapper.cpp:110 src/core/modules/StarWrapper.cpp:794
-#: src/core/modules/StarWrapper.cpp:1254
+#: src/core/modules/StarWrapper.cpp:110 src/core/modules/StarWrapper.cpp:799
+#: src/core/modules/StarWrapper.cpp:1260
 msgid "cataclysmic variable star"
 msgstr "étoile variable cataclysmique"
 
-#: src/core/modules/StarWrapper.cpp:112 src/core/modules/StarWrapper.cpp:796
-#: src/core/modules/StarWrapper.cpp:1256
+#: src/core/modules/StarWrapper.cpp:112 src/core/modules/StarWrapper.cpp:801
+#: src/core/modules/StarWrapper.cpp:1262
 msgid "eclipsing binary system"
 msgstr "système binaire à éclipses"
 
-#: src/core/modules/StarWrapper.cpp:116 src/core/modules/StarWrapper.cpp:800
-#: src/core/modules/StarWrapper.cpp:1260
+#: src/core/modules/StarWrapper.cpp:116 src/core/modules/StarWrapper.cpp:805
+#: src/core/modules/StarWrapper.cpp:1266
 msgid "variable star"
 msgstr "étoile variable"
 
-#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:958
-#: src/core/modules/StarWrapper.cpp:1353
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:963
+#: src/core/modules/StarWrapper.cpp:1359
 #: plugins/Satellites/src/ui_satellitesDialog.h:1233
 msgid "Magnitude range"
 msgstr "Plage de magnitudes"
 
-#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:958
-#: src/core/modules/StarWrapper.cpp:1353
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:963
+#: src/core/modules/StarWrapper.cpp:1359
 msgid "Photometric system"
 msgstr "Système photométrique"
 
-#: src/core/modules/StarWrapper.cpp:362 src/core/modules/StarWrapper.cpp:971
+#: src/core/modules/StarWrapper.cpp:362 src/core/modules/StarWrapper.cpp:976
 #: plugins/Pulsars/src/Pulsar.cpp:202
 msgid "Proper motion"
 msgstr "Mouvement propre"
 
 #: src/core/modules/StarWrapper.cpp:364 src/core/modules/StarWrapper.cpp:370
-#: src/core/modules/StarWrapper.cpp:973 src/core/modules/StarWrapper.cpp:979
+#: src/core/modules/StarWrapper.cpp:978 src/core/modules/StarWrapper.cpp:984
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "mas/a"
 
-#: src/core/modules/StarWrapper.cpp:367 src/core/modules/StarWrapper.cpp:976
+#: src/core/modules/StarWrapper.cpp:367 src/core/modules/StarWrapper.cpp:981
 #: plugins/Pulsars/src/Pulsar.cpp:205
 msgid "Proper motions by axes"
 msgstr "Mouvement propre par axes"
@@ -3828,38 +3828,38 @@ msgstr "Mouvement propre par axes"
 msgid "Radial velocity"
 msgstr "Vitesse radiale"
 
-#: src/core/modules/StarWrapper.cpp:396 src/core/modules/StarWrapper.cpp:1016
-#: src/core/modules/StarWrapper.cpp:1371 plugins/Quasars/src/Quasar.cpp:142
+#: src/core/modules/StarWrapper.cpp:396 src/core/modules/StarWrapper.cpp:1021
+#: src/core/modules/StarWrapper.cpp:1377 plugins/Quasars/src/Quasar.cpp:142
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 msgid "Spectral Type"
 msgstr "Type spectral"
 
-#: src/core/modules/StarWrapper.cpp:399 src/core/modules/StarWrapper.cpp:1019
-#: src/core/modules/StarWrapper.cpp:1374
+#: src/core/modules/StarWrapper.cpp:399 src/core/modules/StarWrapper.cpp:1024
+#: src/core/modules/StarWrapper.cpp:1380
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
 #: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Period"
 msgstr "Période"
 
-#: src/core/modules/StarWrapper.cpp:407 src/core/modules/StarWrapper.cpp:1027
-#: src/core/modules/StarWrapper.cpp:1382
+#: src/core/modules/StarWrapper.cpp:407 src/core/modules/StarWrapper.cpp:1032
+#: src/core/modules/StarWrapper.cpp:1388
 msgid "Next maximum light"
 msgstr "Prochain max. de luminosité"
 
-#: src/core/modules/StarWrapper.cpp:409 src/core/modules/StarWrapper.cpp:1029
-#: src/core/modules/StarWrapper.cpp:1384
+#: src/core/modules/StarWrapper.cpp:409 src/core/modules/StarWrapper.cpp:1034
+#: src/core/modules/StarWrapper.cpp:1390
 msgid "Next minimum light"
 msgstr "Prochain min. de luminosité"
 
-#: src/core/modules/StarWrapper.cpp:416 src/core/modules/StarWrapper.cpp:1036
-#: src/core/modules/StarWrapper.cpp:1391
+#: src/core/modules/StarWrapper.cpp:416 src/core/modules/StarWrapper.cpp:1041
+#: src/core/modules/StarWrapper.cpp:1397
 msgctxt "light curve"
 msgid "Rising time"
 msgstr "Heure du lever"
 
-#: src/core/modules/StarWrapper.cpp:418 src/core/modules/StarWrapper.cpp:1038
-#: src/core/modules/StarWrapper.cpp:1393
+#: src/core/modules/StarWrapper.cpp:418 src/core/modules/StarWrapper.cpp:1043
+#: src/core/modules/StarWrapper.cpp:1399
 msgid "Duration of eclipse"
 msgstr "Durée de l'éclipse"
 
@@ -3867,55 +3867,56 @@ msgstr "Durée de l'éclipse"
 msgid "Position angle"
 msgstr "Angle de position"
 
-#: src/core/modules/StarWrapper.cpp:430 src/core/modules/StarWrapper.cpp:438
+#: src/core/modules/StarWrapper.cpp:430 src/core/modules/StarWrapper.cpp:439
 #: src/core/StelObject.cpp:396
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "de la date"
 
-#: src/core/modules/StarWrapper.cpp:435 src/core/modules/StarWrapper.cpp:440
-#: src/gui/AstroCalcDialog.cpp:5833
-msgid "Separation"
-msgstr "Séparation"
+#. TRANSLATORS: This is about the angular separation between components of a
+#. binary star.
+#: src/core/modules/StarWrapper.cpp:436 src/core/modules/StarWrapper.cpp:442
+msgid "Component separation"
+msgstr "Séparations des composants"
 
-#: src/core/modules/StarWrapper.cpp:614
+#: src/core/modules/StarWrapper.cpp:616
 msgctxt "object narration"
 msgid "This star is described as "
 msgstr "L'étoile est décrite comme"
 
-#: src/core/modules/StarWrapper.cpp:646
+#: src/core/modules/StarWrapper.cpp:648
 msgctxt "object narration"
 msgid "with absolute Magnitude of"
 msgstr "avec une magnitude absolue de"
 
-#: src/core/modules/StarWrapper.cpp:652 src/core/modules/StarWrapper.cpp:1123
+#: src/core/modules/StarWrapper.cpp:654 src/core/modules/StarWrapper.cpp:1128
 #, qt-format
 msgctxt "object narration"
 msgid "Its B minus V Color Index is %1"
 msgstr "Son indice de couleur B moins V est %1"
 
-#: src/core/modules/StarWrapper.cpp:668 src/core/modules/StarWrapper.cpp:1145
-#: src/core/modules/StarWrapper.cpp:1467
+#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1150
+#: src/core/modules/StarWrapper.cpp:1473
 #, qt-format
 msgctxt "object narration, alternatives"
 msgid "either %1 or %2"
 msgstr "soit %1, soit %2"
 
-#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1147
-#: src/core/modules/StarWrapper.cpp:1469
+#: src/core/modules/StarWrapper.cpp:672 src/core/modules/StarWrapper.cpp:1152
+#: src/core/modules/StarWrapper.cpp:1475
 #, qt-format
 msgctxt "object narration"
 msgid "Its magnitude range goes from %1 to %2 in the Photometric system %3."
 msgstr "Sa magnitude varie de %1 à %2 dans le système photométrique %3."
 
 #. TRANSLATORS: Its distance is x plus/minus y light years
-#: src/core/modules/StarWrapper.cpp:688 src/core/modules/StarWrapper.cpp:1172
+#: src/core/modules/StarWrapper.cpp:690 src/core/modules/StarWrapper.cpp:1177
 #, qt-format
 msgctxt "object narration"
 msgid "Its distance is %1 ± %2 light years."
 msgstr "Sa distance est de %1 ± %2 années-lumière."
 
-#: src/core/modules/StarWrapper.cpp:698 src/core/modules/StarWrapper.cpp:1160
+#: src/core/modules/StarWrapper.cpp:700 src/core/modules/StarWrapper.cpp:1165
 #, qt-format
 msgctxt "object narration"
 msgid ""
@@ -3927,102 +3928,108 @@ msgstr ""
 " degrés, ou, selon les acxes, de %3 milli-arcsecondes par an en ascension "
 "droite et %4 en déclinaison."
 
-#: src/core/modules/StarWrapper.cpp:706
+#: src/core/modules/StarWrapper.cpp:708
 #, qt-format
 msgctxt "object narration"
 msgid "Its radial velocity is %1 kilometers per second."
 msgstr "Sa vitesse radiale est de %1 kilomètres par seconde."
 
-#: src/core/modules/StarWrapper.cpp:715 src/core/modules/StarWrapper.cpp:1183
+#: src/core/modules/StarWrapper.cpp:717 src/core/modules/StarWrapper.cpp:1188
 #, qt-format
 msgctxt "object narration"
 msgid "Its parallax is %1 ± %2 milli-arcseconds."
 msgstr "Sa parallaxe est de %1 ± %2 milli-arcsecondes."
 
-#: src/core/modules/StarWrapper.cpp:718 src/core/modules/StarWrapper.cpp:1186
+#: src/core/modules/StarWrapper.cpp:720 src/core/modules/StarWrapper.cpp:1191
 #, qt-format
 msgctxt "object narration"
 msgid "Its parallax is %1 milli-arcseconds."
 msgstr "Sa parallaxe est de %1 milli-arcsecondes."
 
-#: src/core/modules/StarWrapper.cpp:724 src/core/modules/StarWrapper.cpp:1200
-#: src/core/modules/StarWrapper.cpp:1488
+#: src/core/modules/StarWrapper.cpp:726 src/core/modules/StarWrapper.cpp:1205
+#: src/core/modules/StarWrapper.cpp:1494
 #, qt-format
 msgctxt "object narration"
 msgid "Its Spectral Type is %1."
 msgstr "Son type spectral est %1."
 
-#: src/core/modules/StarWrapper.cpp:727 src/core/modules/StarWrapper.cpp:1203
-#: src/core/modules/StarWrapper.cpp:1491
+#: src/core/modules/StarWrapper.cpp:729 src/core/modules/StarWrapper.cpp:1208
+#: src/core/modules/StarWrapper.cpp:1497
 #, qt-format
 msgctxt "object narration"
 msgid "It has a period of %1 days"
 msgstr "Sa période est de %1 jours"
 
-#: src/core/modules/StarWrapper.cpp:735 src/core/modules/StarWrapper.cpp:1211
-#: src/core/modules/StarWrapper.cpp:1499
+#: src/core/modules/StarWrapper.cpp:737 src/core/modules/StarWrapper.cpp:1216
+#: src/core/modules/StarWrapper.cpp:1505
 #, qt-format
 msgctxt "object narration"
 msgid "Next minimum light will be at %1 UTC"
-msgstr ""
+msgstr "Le prochain minimum de luminosité aura lieu à %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:736 src/core/modules/StarWrapper.cpp:1212
-#: src/core/modules/StarWrapper.cpp:1500
-#, qt-format
-msgctxt "object narration"
-msgid "Next maximum light will be at %1 UTC"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:742 src/core/modules/StarWrapper.cpp:1218
+#: src/core/modules/StarWrapper.cpp:738 src/core/modules/StarWrapper.cpp:1217
 #: src/core/modules/StarWrapper.cpp:1506
 #, qt-format
 msgctxt "object narration"
-msgid "The duration fraction of an eclipse is %1, that is, %2."
-msgstr ""
+msgid "Next maximum light will be at %1 UTC"
+msgstr "Le prochain maximum de luminosité aura lieu à %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:743 src/core/modules/StarWrapper.cpp:1219
-#: src/core/modules/StarWrapper.cpp:1507
+#: src/core/modules/StarWrapper.cpp:744 src/core/modules/StarWrapper.cpp:1223
+#: src/core/modules/StarWrapper.cpp:1512
+#, qt-format
+msgctxt "object narration"
+msgid "The duration fraction of an eclipse is %1, that is, %2."
+msgstr "La partie de la durée d'une éclipse et %1, c'est-à-dire %2."
+
+#. TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing
+#. stage of a stellar light curve
+#: src/core/modules/StarWrapper.cpp:746 src/core/modules/StarWrapper.cpp:1225
+#: src/core/modules/StarWrapper.cpp:1514
 #, qt-format
 msgctxt "object narration: light curve"
 msgid "The rising time fraction is %1, that is, %2."
-msgstr ""
+msgstr "La partie croissante est %1, c'est-à-dire %2"
 
-#: src/core/modules/StarWrapper.cpp:752
+#: src/core/modules/StarWrapper.cpp:755
 #, qt-format
 msgctxt "object narration"
 msgid "Its position angle as given for %1 is %2 degrees."
-msgstr ""
+msgstr "Son angle de position, donné pour %1, est de %2 degrés."
 
-#: src/core/modules/StarWrapper.cpp:753 src/core/modules/StarWrapper.cpp:759
+#: src/core/modules/StarWrapper.cpp:756 src/core/modules/StarWrapper.cpp:763
 msgctxt "coordinates for current epoch"
 msgid "current date"
 msgstr "date actuelle"
 
-#: src/core/modules/StarWrapper.cpp:758
+#. TRANSLATORS: This is about the angular separation between components of a
+#. binary star.
+#: src/core/modules/StarWrapper.cpp:762
 #, qt-format
 msgctxt "object narration"
-msgid "Its Separation for %1 is %2 arc-seconds (%3). "
-msgstr ""
+msgid "Its component separation for %1 is %2 arc-seconds (%3). "
+msgstr "La séparation des composants pour %1 est %2 arc-secondes (%3). "
 
-#: src/core/modules/StarWrapper.cpp:763
+#. TRANSLATORS: This is about the angular separation between components of a
+#. binary star.
+#: src/core/modules/StarWrapper.cpp:768
 #, qt-format
 msgctxt "object narration"
-msgid "Its Separation for %1 is %2 arc-seconds. "
-msgstr ""
+msgid "Its component separation for %1 is %2 arc-seconds. "
+msgstr "La séparation des composants pour %1 est %2 arc-secondes. "
 
-#: src/core/modules/StarWrapper.cpp:1102 src/core/modules/StarWrapper.cpp:1434
+#: src/core/modules/StarWrapper.cpp:1107 src/core/modules/StarWrapper.cpp:1440
 #, qt-format
 msgctxt "object narration"
-msgid "Its type is %1 with variable type %2."
-msgstr ""
+msgid "Its type is %1 with variability type %2."
+msgstr "Son type est %1, avec une type de variabilité %2."
 
-#: src/core/modules/StarWrapper.cpp:1104 src/core/modules/StarWrapper.cpp:1436
+#: src/core/modules/StarWrapper.cpp:1109 src/core/modules/StarWrapper.cpp:1442
 #, qt-format
 msgctxt "object narration"
 msgid "Its type is %1."
-msgstr ""
+msgstr "Son type est %1."
 
-#: src/core/modules/StarWrapper.cpp:1445
+#: src/core/modules/StarWrapper.cpp:1451
 msgctxt "object narration"
 msgid "Its B minus V Color Index is"
 msgstr "Son indice de couleur B moins V est"
@@ -5417,7 +5424,7 @@ msgstr "Coordonnées équatoriales pour J2000 :"
 #, qt-format
 msgctxt "object narration"
 msgid "Right Ascension %1, and %2 %3. "
-msgstr ""
+msgstr "Ascension droite %1 et %2 %3"
 
 #: src/core/StelObject.cpp:1095 src/core/StelObject.cpp:1120
 #: src/core/StelObject.cpp:1159
@@ -5445,137 +5452,137 @@ msgstr "Coordonnées équatoriales fixes de la date :"
 #, qt-format
 msgctxt "object narration"
 msgid "Hour Angle %1, and %2 %3. "
-msgstr ""
+msgstr "Angle horaire %1 et %2 %3"
 
 #: src/core/StelObject.cpp:1204
 msgctxt "object narration"
 msgid "Azimuthal coordinates are:"
-msgstr ""
+msgstr "Les coordonnées azimutales sont"
 
 #: src/core/StelObject.cpp:1205
 #, qt-format
 msgctxt "object narration"
 msgid "Azimuth %1, and altitude %2. "
-msgstr ""
+msgstr "Azimut %1 et hauteur %2. "
 
 #: src/core/StelObject.cpp:1225
 msgctxt "object narration"
 msgid "Galactic coordinates are:"
-msgstr ""
+msgstr "Les coordonnées galactiques sont"
 
 #: src/core/StelObject.cpp:1226 src/core/StelObject.cpp:1247
 #: src/core/StelObject.cpp:1276 src/core/StelObject.cpp:1301
 #, qt-format
 msgctxt "object narration"
 msgid "Longitude %1, and latitude %2. "
-msgstr ""
+msgstr "Longitude %1 et latitude %2. "
 
 #: src/core/StelObject.cpp:1246
 msgctxt "object narration"
 msgid "Supergalactic coordinates are:"
-msgstr ""
+msgstr "Les coordonnées supergalactiques sont"
 
 #: src/core/StelObject.cpp:1275
 msgctxt "object narration"
 msgid "Ecliptical coordinates for Equinox 2000 are:"
-msgstr ""
+msgstr "Les coordonnées écliptiques pour l'équinoxe 2000 sont"
 
 #: src/core/StelObject.cpp:1300
 msgctxt "object narration"
 msgid "Ecliptical coordinates of date are:"
-msgstr ""
+msgstr "Les coordonnées écliptiques de la date sont"
 
 #: src/core/StelObject.cpp:1305
 msgctxt "object narration"
 msgid "The Ecliptic obliquity of date is"
-msgstr ""
+msgstr "L'obliquité de l'écliptique de la date est"
 
 #: src/core/StelObject.cpp:1321
 msgctxt "object narration"
 msgid "The Mean Sidereal Time is"
-msgstr ""
+msgstr "Le temps sidéral moyen est"
 
 #: src/core/StelObject.cpp:1330
 msgctxt "object narration"
 msgid "The Apparent Sidereal Time is"
-msgstr ""
+msgstr "Le temps sidéral apparent est"
 
 #: src/core/StelObject.cpp:1363
 msgctxt "object narration; celestial event; passage across a meridian"
-msgid "Transit on this day is at"
-msgstr ""
+msgid "Transit on this day is at:"
+msgstr "La culmination ce jour-ci est à :"
 
 #: src/core/StelObject.cpp:1364
 msgctxt "object narration"
-msgid "Rise on this day is at"
-msgstr ""
+msgid "Rise on this day is at:"
+msgstr "Le lever ce jour-ci est à :"
 
 #: src/core/StelObject.cpp:1365
 msgctxt "object narration"
-msgid "Set on this day is at"
-msgstr ""
+msgid "Set on this day is at:"
+msgstr "Le coucher ce jour-ci est à :"
 
 #: src/core/StelObject.cpp:1375
 msgctxt "object narration"
 msgid "The object does not rise on this day."
-msgstr ""
+msgstr "L'objet ne se ève pas ce jour-ci"
 
 #: src/core/StelObject.cpp:1389
 msgctxt "object narration"
 msgid "There is no meridian transit on this day."
-msgstr ""
+msgstr "Il n'y a pas de culmination ce jour-ci"
 
 #: src/core/StelObject.cpp:1401
 msgctxt "object narration"
 msgid "The object does not set on this day."
-msgstr ""
+msgstr "L'objet ne se couche pas ce jour-ci"
 
 #: src/core/StelObject.cpp:1417
 #, qt-format
 msgctxt "celestial event"
 msgid "Morning twilight for a Solar altitude of %1 degrees begins at %2. "
-msgstr ""
+msgstr "L'aube commence à %2 pour une hauteur du Soleil de %1 degrés."
 
 #: src/core/StelObject.cpp:1418
 #, qt-format
 msgctxt "celestial event"
 msgid "Evening twilight for a Solar altitude of %1 degrees ends at %2. "
-msgstr ""
+msgstr "Le crépuscule commence à %2 pour une hauteur du Soleil de %1 degrés."
 
 #: src/core/StelObject.cpp:1429
 msgctxt "object narration"
 msgid "Duration of Daytime"
-msgstr ""
+msgstr "Durée du jour"
 
 #: src/core/StelObject.cpp:1437
 msgctxt "object narration"
 msgid "It is Polar night"
-msgstr ""
+msgstr "C'est la nuit polaire"
 
 #: src/core/StelObject.cpp:1444
 msgid "It is Polar day"
-msgstr ""
+msgstr "C'est le jour polaire"
 
 #: src/core/StelObject.cpp:1446
 msgid "This object is circumpolar and so never sets"
-msgstr ""
+msgstr "Cet objet est circumpolaire et ne se couche jamais"
 
 #: src/core/StelObject.cpp:1480
 #, qt-format
 msgctxt "object narration"
 msgid "Greatest Eastern Digression is at Azimuth %1, Hour Angle %2"
-msgstr ""
+msgstr "La plus grande digression Est est à l'azimut %1, angle horaire %2"
 
 #: src/core/StelObject.cpp:1494
 #, qt-format
 msgctxt "object narration"
 msgid "Greatest Western Digression is at Azimuth %1, Hour Angle %2"
-msgstr ""
+msgstr "La plus grande digression Ouest est à l'azimut %1, angle horaire %2"
 
 #: src/core/StelObject.cpp:1519
 msgctxt "object narration"
 msgid "The Parallactic Angle is"
-msgstr ""
+msgstr "L'angle parallactique est de"
 
 #. TRANSLATORS: Azimuth/Altitude
 #: src/core/StelObject.cpp:1950
@@ -5603,13 +5610,13 @@ msgstr "Az./Haut. lunaire"
 #, qt-format
 msgctxt "object narration"
 msgid "The Sun's azimuth is %1, and its altitude is %2."
-msgstr ""
+msgstr "L'azimut du Soleil est %1 et sa hauteur est %2. "
 
 #: src/core/StelObject.cpp:2017
 #, qt-format
 msgctxt "object narration"
 msgid "The Moon's azimuth is %1, and its altitude is %2."
-msgstr ""
+msgstr "L'azimut de la Lune est %1 et sa hauteur est %2. "
 
 #: src/core/StelObjectMgr.cpp:51 src/core/StelMovementMgr.cpp:194
 #: src/gui/StelGui.cpp:274 src/StelMainView.cpp:967 src/StelMainView.cpp:968
@@ -5677,7 +5684,7 @@ msgstr "secondes"
 #: src/core/StelSkyCultureSkyPartition.cpp:530
 msgctxt "object narration; quarter part of nakshatra"
 msgid "pada"
-msgstr ""
+msgstr "pada"
 
 #: src/core/StelSkyCultureSkyPartition.cpp:571
 msgctxt "object narration"
@@ -9561,6 +9568,10 @@ msgstr "Objet 2"
 #: src/gui/AstroCalcDialog.cpp:5832
 msgid "Mag. 2"
 msgstr "Mag. 2"
+
+#: src/gui/AstroCalcDialog.cpp:5833
+msgid "Separation"
+msgstr "Séparation"
 
 #: src/gui/AstroCalcDialog.cpp:5834
 msgid "Elevation"
@@ -16811,7 +16822,7 @@ msgstr "Coordonnées galactiques"
 
 #: src/ui_configurationDialog.h:2495
 msgid "Supergalactic coordinates"
-msgstr "Coordonnées super galactiques"
+msgstr "Coordonnées supergalactiques"
 
 #: src/ui_configurationDialog.h:2497
 msgid "Additional coordinates (from plugins)"
@@ -32235,6 +32246,8 @@ msgid ""
 "The sky culture description is not complete. The following fields are not "
 "filled correctly:\n"
 msgstr ""
+"La description de la culture céleste n'est pas terminée. Les champs suivants"
+" ne sont pas remplis correctement :\n"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:104
 msgid "No sky culture is set."
@@ -32681,7 +32694,7 @@ msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:555
 msgid "About the sky culture:*"
-msgstr ""
+msgstr "À propos de la culture céleste :*"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:556
 msgid ""
