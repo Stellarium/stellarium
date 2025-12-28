@@ -372,7 +372,7 @@ protected:
 			{
 				const auto itemWidget = proxy->widget();
 				if (!itemWidget) continue;
-				const auto child = itemWidget->childAt(pos);
+				const auto child = itemWidget->childAt(itemWidget->mapFromParent(pos));
 				if (child && !child->toolTip().isEmpty())
 				{
 					text = child->toolTip();
