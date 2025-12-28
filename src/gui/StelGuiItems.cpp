@@ -91,10 +91,14 @@ void StelToolTip::showToolTip(const QPoint& scenePos, const QString& text)
 	}
 
 	label->setText(text);
-	// The shift avoids clicking the tooltip instead of the control it's annotating
-	const QPoint shift(2, 2);
-	setPos(scenePos + shift);
 	updateGeometry();
+	label->adjustSize();
+	// The shift avoids clicking the tooltip instead of the control it's annotating
+	int x = scenePos.x() + label->width() < scene()->width() ? 2 : -2 - label->width();
+	int y = scenePos.y() + label->height() < scene()->height() ? 2 : -2 - label->height();
+	const QPoint shift(x, y);
+	setPos(scenePos + shift);
+//	updateGeometry();
 	setVisible(!text.isEmpty());
 }
 
