@@ -119,12 +119,22 @@ public:
 
 protected:
 	// components for Planet::getInfoString() that are overridden here:
+	//! Any flags&Name information to be displayed
 	QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const override;
+	//! Any flags&Name information to be narrated
+	QString getNarrationName(const StelCore *core, const InfoStringGroup& flags) const override;
+	//! Any flags&AbsoluteMagnitude information to be displayed
 	QString getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const override;
-	//! Any flag=Size information to be displayed
+	//! Any flags&AbsoluteMagnitude information to be narrated
+	QString getNarrationAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const override;
+	//! Any flags&Size information to be displayed
 	QString getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const override;
-	//! Any flag=Extra information to be displayed at the end
+	//! Any flags&Size information to be narrated
+	QString getNarrationSize(const StelCore *core, const InfoStringGroup& flags) const override;
+	//! Any flags&Extra information to be displayed
 	QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const override;
+	//! Any flags&Extra information to be narrated
+	QString getNarrationExtra(const StelCore *core, const InfoStringGroup& flags) const override;
 
 private:
 	//! @returns estimates for (Coma diameter [AU], gas tail length [AU]).

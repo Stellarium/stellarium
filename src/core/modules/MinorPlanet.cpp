@@ -196,9 +196,33 @@ QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGro
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphereScale != 1.)
-		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+		oss << " (\u00D7" << sphereScale << ")";
 
 	oss << "</h2>";
+
+	return str;
+}
+
+QString MinorPlanet::getNarrationName(const StelCore *core, const InfoStringGroup& flags) const
+{
+	Q_UNUSED(core) Q_UNUSED(flags)
+	QString str;
+	QTextStream oss(&str);
+
+	oss << getNameI18n();  // UI translation can differ from sky translation
+
+	QStringList designations;
+	if (!nameIsIAUDesignation && !iauDesignationHtml.isEmpty())
+		designations << iauDesignationHtml;
+	if (!getExtraDesignations().isEmpty())
+		designations << getExtraDesignations();
+	if (!designations.isEmpty())
+		oss << QString(" (%1)").arg(designations.join(q_(" or ")));
+
+	if (sphereScale != 1.)
+		oss << " (" << QString(qc_("magnified %1 times", "object narration")).arg(StelUtils::narrateDecimal(sphereScale, 1)) << ")";
+
+	oss << " . . ";
 
 	return str;
 }
@@ -212,16 +236,31 @@ QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGr
 	{
 		oss << Planet::getInfoStringExtra(core, flags);
 		if (!specT.isEmpty())
-		{
 			// TRANSLATORS: Tholen spectral taxonomic classification of asteroids
 			oss << QString("%1: %2<br/>").arg(q_("Tholen spectral type"), specT);
-		}
 
 		if (!specB.isEmpty())
-		{
 			// TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
 			oss << QString("%1: %2<br/>").arg(q_("SMASSII spectral type"), specB);
-		}		
+	}
+	return str;
+}
+
+QString MinorPlanet::getNarrationExtra(const StelCore *core, const InfoStringGroup& flags) const
+{
+	Q_UNUSED(core)
+	QString str;
+	QTextStream oss(&str);
+	if (flags&Extra)
+	{
+		oss << Planet::getNarrationExtra(core, flags);
+		if (!specT.isEmpty())
+			// TRANSLATORS: Tholen spectral taxonomic classification of asteroids
+			oss << QString(qc_("Its Tholen spectral type is %1", "planet narration")).arg(specT) << ". ";
+
+		if (!specB.isEmpty())
+			// TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
+			oss << QString(qc_("Its SMASSII spectral type is", "planet narration")).arg(specB) << ". ";
 	}
 	return str;
 }

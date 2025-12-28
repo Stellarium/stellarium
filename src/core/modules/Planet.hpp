@@ -678,19 +678,35 @@ public:
 protected:
 	// These components for getInfoString() can be overridden in subclasses
 	virtual QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const;
+	virtual QString getNarrationName(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual QString getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const;
+	virtual QString getNarrationAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const;
 	//! Any flag=Extra information to be displayed after the magnitude strings
 	virtual QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Any flag=Extra information to be displayed after the magnitude strings
+	virtual QString getNarrationExtraMag(const StelCore *core, const InfoStringGroup& flags) const;
 	//! Any flag=Size information to be displayed
 	virtual QString getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Any flag=Size information to be narrated
+	virtual QString getNarrationSize(const StelCore *core, const InfoStringGroup& flags) const;
 	//! Return elongation and phase angle when flags=Elongation
 	virtual QString getInfoStringEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const;
+	//! Return elongation and phase angle when flags=Elongation
+	virtual QString getNarrationEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const;
 	//! Return sidereal and synodic periods when flags=Extra
 	virtual QString getInfoStringPeriods(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Return sidereal and synodic periods when flags=Extra
+	virtual QString getNarrationPeriods(const StelCore *core, const InfoStringGroup& flags) const;
 	//! Any flag=Extra information to be displayed at the end
 	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Any flag=Extra information to be displayed at the end
+	virtual QString getNarrationExtra(const StelCore *core, const InfoStringGroup& flags) const;
 
 	virtual QString getDiscoveryCircumstances() const;
+	//! Format discovery information for display
+	virtual QString getDiscoveryInfoString() const;
+	//! Format discovery information to be narrated
+	virtual QString getDiscoveryNarration() const;
 
 protected:
 	struct PlanetOBJModel
