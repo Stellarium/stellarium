@@ -81,6 +81,10 @@
 	#define M_180_PIf   (180.f/M_PIf)
 #endif
 
+#ifndef M_RAD_ARCSECOND
+	#define M_RAD_ARCSECOND (M_PI_180 / 3600.)
+#endif
+
 #define stelpow10f(x) std::exp((x) * 2.3025850930f)
 
 #define L1S(x) QLatin1String(x)
