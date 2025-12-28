@@ -31,6 +31,9 @@
 #include "Planet.hpp"
 #include "Orbit.hpp"
 #include "planetsephems/precession.h"
+#ifndef NDEBUG
+#include "planetsephems/EphemWrapper.hpp"
+#endif
 #include "SolarEclipseComputer.hpp"
 #include "StelObserver.hpp"
 #include "StelProjector.hpp"
