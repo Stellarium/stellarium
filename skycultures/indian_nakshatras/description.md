@@ -125,7 +125,7 @@ Literally, the term Shatabhisha means "Hundred Physicians" and some historical d
 
 #####  Purva Bhadrapada
 
-From the Blessed Feed, here we see the "First Blessed Feet".
+From the Blessed Feet, here we see the "First Blessed Feet".
 
 #####  Uttara Bhadrapada
 
@@ -157,7 +157,7 @@ With B.S. Shylaja, I studied the early history of the nakshatras in our research
 
 I thank B. S. Shylaja for consulting me in my studies of the history of Vedic astronomy. 
 
-Students of the University of Jena, Germany: Vincent Gerlach, Fabian Hofer, Luca-Philipp Grumbach, Mher Mnatsakanyan, Richard Hofmann and Moritz Rätz. These students developed a "Sky Culture Maker Plugin" for Stellarium which I am herewith testing.  
+Students of the University of Jena, Germany: Vincent Gerlach, Fabian Hofer, Luca-Philipp Grumbach, Mher Mnatsakanyan, Richard Hofmann and Moritz Rätz. These students developed the "Sky Culture Maker Plugin" for Stellarium which I am herewith testing.  
 
 ## License
 
