@@ -170,9 +170,11 @@ Calendars::Calendars():
 Calendars::~Calendars()
 {
 	delete configDialog; configDialog=nullptr;
-	for (auto c = calendars.cbegin(), end = calendars.cend(); c != end; ++c)
+	QMapIterator<QString, Calendar*> i(calendars);
+	while (i.hasNext())
 	{
-		Calendar *cal = calendars.take(c.key());
+		i.next();
+		Calendar *cal = calendars.take(i.key());
 		delete cal;
 	}
 	if (infoPanel) delete infoPanel;
