@@ -90,10 +90,14 @@ void StelToolTip::showToolTip(const QPoint& scenePos, const QString& text)
 		return;
 	}
 
-	label->setText(text);
+	setVisible(!text.isEmpty());
 	label->setMargin(3);
-	updateGeometry();
+	label->setText(NULL);
 	label->adjustSize();
+	updateGeometry();
+	label->setText(text);
+	label->adjustSize();
+	updateGeometry();
 	// The shift s avoids clicking the tooltip instead of the control it's annotating
 	int s = 4, S = 12;
 	int X = scenePos.x(), w = s + label->width(), W = scene()->width();
@@ -102,8 +106,6 @@ void StelToolTip::showToolTip(const QPoint& scenePos, const QString& text)
 	int y = Y+h+S < H ? Y+s+S : Y-h < 0 ? 0 : Y-h;
 	const QPoint pos(x, y);
 	setPos(pos);
-//	updateGeometry();
-	setVisible(!text.isEmpty());
 }
 
 void StelToolTip::mousePressEvent(QGraphicsSceneMouseEvent*)
