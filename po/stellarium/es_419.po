@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-23 14:39+0700\n"
+"POT-Creation-Date: 2025-12-28 20:24+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2025\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/stellarium/teams/80998/es_419/)\n"
@@ -38,8 +38,8 @@ msgstr "objeto personalizado"
 #: src/core/modules/Nebula.cpp:295 src/core/modules/Planet.cpp:619
 #: src/core/modules/Planet.cpp:622 src/core/modules/StarWrapper.cpp:51
 #: src/core/modules/StarWrapper.cpp:288 src/core/modules/StarWrapper.cpp:290
-#: src/core/modules/StarWrapper.cpp:915 src/core/modules/StarWrapper.cpp:917
-#: src/core/modules/StarWrapper.cpp:1320 src/core/modules/StarWrapper.cpp:1322
+#: src/core/modules/StarWrapper.cpp:920 src/core/modules/StarWrapper.cpp:922
+#: src/core/modules/StarWrapper.cpp:1326 src/core/modules/StarWrapper.cpp:1328
 #: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:2456
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3080
 #: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7688
@@ -1439,60 +1439,60 @@ msgstr "o"
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 (or %2), that is: %3, on the Moon"
-msgstr ""
+msgstr "es un %1 (o %2), es decir: %3, en la Luna"
 
 #: src/core/modules/NomenclatureItem.cpp:330
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 (or %2), on the Moon"
-msgstr ""
+msgstr "es un %1 (o %2), en la Luna"
 
 #: src/core/modules/NomenclatureItem.cpp:335
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1, that is: %2, on the Moon"
-msgstr ""
+msgstr "es un %1, es decir: %2, en la Luna"
 
 #: src/core/modules/NomenclatureItem.cpp:337
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 on the Moon"
-msgstr ""
+msgstr "es un %1 en la Luna"
 
 #: src/core/modules/NomenclatureItem.cpp:345
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 (or %2), that is: %3, on %4"
-msgstr ""
+msgstr "es un %1 (o %2), es decir: %3, en %4"
 
 #: src/core/modules/NomenclatureItem.cpp:347
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 (or %2), on %3"
-msgstr ""
+msgstr "es un %1 (o %2), en %3"
 
 #: src/core/modules/NomenclatureItem.cpp:352
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1, that is: %2, on %3"
-msgstr ""
+msgstr "es un %1, es decir: %2, en %3"
 
 #: src/core/modules/NomenclatureItem.cpp:354
 #, qt-format
 msgctxt "object narration"
 msgid "is a %1 on %2"
-msgstr ""
+msgstr "es un %1 en %2"
 
 #: src/core/modules/NomenclatureItem.cpp:366
 #, qt-format
 msgctxt "object narration"
 msgid "Its diameter is %1 kilometers"
-msgstr ""
+msgstr "Su diámetro es de %1 kilómetros"
 
 #: src/core/modules/NomenclatureItem.cpp:366
 #, qt-format
 msgid "It extends over %1 kilometers"
-msgstr ""
+msgstr "Se extiende a lo largo de %1 kilómetros"
 
 #: src/core/modules/NomenclatureItem.cpp:373
 msgctxt "object narration"
@@ -2342,8 +2342,8 @@ msgid "protoplanetary nebula"
 msgstr "nebulosa protoplanetaria"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:133
-#: src/core/modules/StarWrapper.cpp:98 src/core/modules/StarWrapper.cpp:782
-#: src/core/modules/StarWrapper.cpp:1242
+#: src/core/modules/StarWrapper.cpp:98 src/core/modules/StarWrapper.cpp:787
+#: src/core/modules/StarWrapper.cpp:1248
 msgid "star"
 msgstr "estrella"
 
@@ -2415,13 +2415,13 @@ msgid "Additional names: "
 msgstr "Nombres adicionales: "
 
 #: src/core/modules/Nebula.cpp:286 src/core/modules/Planet.cpp:603
-#: src/core/modules/StarWrapper.cpp:274 src/core/modules/StarWrapper.cpp:606
+#: src/core/modules/StarWrapper.cpp:274 src/core/modules/StarWrapper.cpp:608
 msgid "Additional catalog numbers: "
 msgstr "Números de catálogo adicionales: "
 
 #: src/core/modules/Nebula.cpp:304 src/core/modules/Planet.cpp:866
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:319
-#: src/core/modules/StarWrapper.cpp:934 src/core/modules/StarWrapper.cpp:1329
+#: src/core/modules/StarWrapper.cpp:939 src/core/modules/StarWrapper.cpp:1335
 #: plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
 msgstr "Índice  de color (B-V)"
@@ -2466,7 +2466,7 @@ msgstr "Ángulo de orientación"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:388 src/core/modules/Nebula.cpp:401
-#: src/core/modules/StarWrapper.cpp:351 src/core/modules/StarWrapper.cpp:989
+#: src/core/modules/StarWrapper.cpp:351 src/core/modules/StarWrapper.cpp:994
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
 msgctxt "distance"
@@ -2476,7 +2476,7 @@ msgstr "Año Luz"
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:389 src/core/modules/Nebula.cpp:435
 #: src/core/modules/Planet.cpp:744 src/core/modules/Planet.cpp:750
-#: src/core/modules/StarWrapper.cpp:353 src/core/modules/StarWrapper.cpp:991
+#: src/core/modules/StarWrapper.cpp:353 src/core/modules/StarWrapper.cpp:996
 #: src/gui/AstroCalcDialog.cpp:988 src/gui/AstroCalcChart.cpp:94
 #: src/gui/AstroCalcChart.cpp:104 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:2537
@@ -2508,13 +2508,13 @@ msgid "Redshift"
 msgstr "Corrimiento al rojo"
 
 #: src/core/modules/Nebula.cpp:460 src/core/modules/StarWrapper.cpp:387
-#: src/core/modules/StarWrapper.cpp:995 src/ui_configurationDialog.h:2727
+#: src/core/modules/StarWrapper.cpp:1000 src/ui_configurationDialog.h:2727
 msgid "Parallax"
 msgstr "Paralaje"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:460 src/core/modules/StarWrapper.cpp:392
-#: src/core/modules/StarWrapper.cpp:1000 plugins/Pulsars/src/Pulsar.cpp:257
+#: src/core/modules/StarWrapper.cpp:1005 plugins/Pulsars/src/Pulsar.cpp:257
 msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
@@ -3188,8 +3188,8 @@ msgid "interstellar object"
 msgstr "objeto interestelar"
 
 #: src/core/modules/Planet.cpp:571 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:930
-#: src/core/modules/StarWrapper.cpp:1119 plugins/Quasars/src/Quasar.cpp:131
+#: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:935
+#: src/core/modules/StarWrapper.cpp:1124 plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "Magnitud absoluta"
 
@@ -3224,7 +3224,7 @@ msgstr "Movimiento por hora"
 
 #: src/core/modules/Planet.cpp:685 src/core/modules/Planet.cpp:1222
 #: src/core/modules/Planet.cpp:1231 src/core/modules/StarWrapper.cpp:365
-#: src/core/modules/StarWrapper.cpp:974 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/StarWrapper.cpp:979 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "hacia"
@@ -3321,7 +3321,7 @@ msgstr "Distancia angular"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:947 src/core/modules/StarWrapper.cpp:399
-#: src/core/modules/StarWrapper.cpp:1019 src/core/modules/StarWrapper.cpp:1374
+#: src/core/modules/StarWrapper.cpp:1024 src/core/modules/StarWrapper.cpp:1380
 #: src/core/StelUtils.cpp:163 src/gui/AstroCalcDialog.cpp:8542
 #: src/gui/AstroCalcAlmanacWidget.cpp:254
 msgctxt "duration"
@@ -3602,7 +3602,7 @@ msgstr "actualmente en una magnitud visual de"
 #, qt-format
 msgctxt "object narration: reduced magnitude by extinction"
 msgid "reduced to %1 by %2 airmasses of atmospheric extinction"
-msgstr ""
+msgstr "reducido a %1 por %2 masas de aire de extinción atmosférica"
 
 #: src/core/modules/Planet.cpp:1641 src/core/StelObject.cpp:1548
 msgctxt "object narration"
@@ -3618,7 +3618,7 @@ msgstr "En esta cultura estelar, se encuentra dentro del área de"
 #, qt-format
 msgctxt "object narration"
 msgid "Its %1 Position is %2"
-msgstr ""
+msgstr "Su posición %1 es %2"
 
 #: src/core/modules/Planet.cpp:1670
 msgctxt "object narration"
@@ -3702,7 +3702,7 @@ msgstr "Diámetro de coma (estimación)"
 msgid "Gas tail length (estimate)"
 msgstr "Longitud de la estela de gas (estimación)"
 
-#: src/core/modules/Comet.cpp:513 src/core/StelProjectorClasses.cpp:873
+#: src/core/modules/Comet.cpp:514 src/core/StelProjectorClasses.cpp:873
 msgid "Orthographic"
 msgstr "Ortográfica"
 
@@ -3763,60 +3763,60 @@ msgstr "Marcar cuerpos menores"
 msgid "double star"
 msgstr "estrella doble"
 
-#: src/core/modules/StarWrapper.cpp:104 src/core/modules/StarWrapper.cpp:788
-#: src/core/modules/StarWrapper.cpp:1248
+#: src/core/modules/StarWrapper.cpp:104 src/core/modules/StarWrapper.cpp:793
+#: src/core/modules/StarWrapper.cpp:1254
 msgid "eruptive variable star"
 msgstr "estrella variable eruptiva"
 
-#: src/core/modules/StarWrapper.cpp:106 src/core/modules/StarWrapper.cpp:790
-#: src/core/modules/StarWrapper.cpp:1250
+#: src/core/modules/StarWrapper.cpp:106 src/core/modules/StarWrapper.cpp:795
+#: src/core/modules/StarWrapper.cpp:1256
 msgid "pulsating variable star"
 msgstr "estrella variable pulsante"
 
-#: src/core/modules/StarWrapper.cpp:108 src/core/modules/StarWrapper.cpp:792
-#: src/core/modules/StarWrapper.cpp:1252
+#: src/core/modules/StarWrapper.cpp:108 src/core/modules/StarWrapper.cpp:797
+#: src/core/modules/StarWrapper.cpp:1258
 msgid "rotating variable star"
 msgstr "estrella variable rotante"
 
-#: src/core/modules/StarWrapper.cpp:110 src/core/modules/StarWrapper.cpp:794
-#: src/core/modules/StarWrapper.cpp:1254
+#: src/core/modules/StarWrapper.cpp:110 src/core/modules/StarWrapper.cpp:799
+#: src/core/modules/StarWrapper.cpp:1260
 msgid "cataclysmic variable star"
 msgstr "estrella variable cataclísmica"
 
-#: src/core/modules/StarWrapper.cpp:112 src/core/modules/StarWrapper.cpp:796
-#: src/core/modules/StarWrapper.cpp:1256
+#: src/core/modules/StarWrapper.cpp:112 src/core/modules/StarWrapper.cpp:801
+#: src/core/modules/StarWrapper.cpp:1262
 msgid "eclipsing binary system"
 msgstr "sistema binario eclipsante"
 
-#: src/core/modules/StarWrapper.cpp:116 src/core/modules/StarWrapper.cpp:800
-#: src/core/modules/StarWrapper.cpp:1260
+#: src/core/modules/StarWrapper.cpp:116 src/core/modules/StarWrapper.cpp:805
+#: src/core/modules/StarWrapper.cpp:1266
 msgid "variable star"
 msgstr "estrella variable"
 
-#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:958
-#: src/core/modules/StarWrapper.cpp:1353
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:963
+#: src/core/modules/StarWrapper.cpp:1359
 #: plugins/Satellites/src/ui_satellitesDialog.h:1233
 msgid "Magnitude range"
 msgstr "Rango magnitud"
 
-#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:958
-#: src/core/modules/StarWrapper.cpp:1353
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:963
+#: src/core/modules/StarWrapper.cpp:1359
 msgid "Photometric system"
 msgstr "Sistema fotométrico"
 
-#: src/core/modules/StarWrapper.cpp:362 src/core/modules/StarWrapper.cpp:971
+#: src/core/modules/StarWrapper.cpp:362 src/core/modules/StarWrapper.cpp:976
 #: plugins/Pulsars/src/Pulsar.cpp:202
 msgid "Proper motion"
 msgstr "Movimiento propio"
 
 #: src/core/modules/StarWrapper.cpp:364 src/core/modules/StarWrapper.cpp:370
-#: src/core/modules/StarWrapper.cpp:973 src/core/modules/StarWrapper.cpp:979
+#: src/core/modules/StarWrapper.cpp:978 src/core/modules/StarWrapper.cpp:984
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "ms arco/año"
 
-#: src/core/modules/StarWrapper.cpp:367 src/core/modules/StarWrapper.cpp:976
+#: src/core/modules/StarWrapper.cpp:367 src/core/modules/StarWrapper.cpp:981
 #: plugins/Pulsars/src/Pulsar.cpp:205
 msgid "Proper motions by axes"
 msgstr "Movimientos propios por ejes"
@@ -3825,38 +3825,38 @@ msgstr "Movimientos propios por ejes"
 msgid "Radial velocity"
 msgstr "Velocidad radial"
 
-#: src/core/modules/StarWrapper.cpp:396 src/core/modules/StarWrapper.cpp:1016
-#: src/core/modules/StarWrapper.cpp:1371 plugins/Quasars/src/Quasar.cpp:142
+#: src/core/modules/StarWrapper.cpp:396 src/core/modules/StarWrapper.cpp:1021
+#: src/core/modules/StarWrapper.cpp:1377 plugins/Quasars/src/Quasar.cpp:142
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 msgid "Spectral Type"
 msgstr "Tipo espectral"
 
-#: src/core/modules/StarWrapper.cpp:399 src/core/modules/StarWrapper.cpp:1019
-#: src/core/modules/StarWrapper.cpp:1374
+#: src/core/modules/StarWrapper.cpp:399 src/core/modules/StarWrapper.cpp:1024
+#: src/core/modules/StarWrapper.cpp:1380
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
 #: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Period"
 msgstr "Período"
 
-#: src/core/modules/StarWrapper.cpp:407 src/core/modules/StarWrapper.cpp:1027
-#: src/core/modules/StarWrapper.cpp:1382
+#: src/core/modules/StarWrapper.cpp:407 src/core/modules/StarWrapper.cpp:1032
+#: src/core/modules/StarWrapper.cpp:1388
 msgid "Next maximum light"
 msgstr "Siguiente luz máxima"
 
-#: src/core/modules/StarWrapper.cpp:409 src/core/modules/StarWrapper.cpp:1029
-#: src/core/modules/StarWrapper.cpp:1384
+#: src/core/modules/StarWrapper.cpp:409 src/core/modules/StarWrapper.cpp:1034
+#: src/core/modules/StarWrapper.cpp:1390
 msgid "Next minimum light"
 msgstr "Siguiente luz mínima"
 
-#: src/core/modules/StarWrapper.cpp:416 src/core/modules/StarWrapper.cpp:1036
-#: src/core/modules/StarWrapper.cpp:1391
+#: src/core/modules/StarWrapper.cpp:416 src/core/modules/StarWrapper.cpp:1041
+#: src/core/modules/StarWrapper.cpp:1397
 msgctxt "light curve"
 msgid "Rising time"
 msgstr "Tiempo de ascenso"
 
-#: src/core/modules/StarWrapper.cpp:418 src/core/modules/StarWrapper.cpp:1038
-#: src/core/modules/StarWrapper.cpp:1393
+#: src/core/modules/StarWrapper.cpp:418 src/core/modules/StarWrapper.cpp:1043
+#: src/core/modules/StarWrapper.cpp:1399
 msgid "Duration of eclipse"
 msgstr "Duración del eclipse"
 
@@ -3864,55 +3864,56 @@ msgstr "Duración del eclipse"
 msgid "Position angle"
 msgstr "Ángulo de posición"
 
-#: src/core/modules/StarWrapper.cpp:430 src/core/modules/StarWrapper.cpp:438
+#: src/core/modules/StarWrapper.cpp:430 src/core/modules/StarWrapper.cpp:439
 #: src/core/StelObject.cpp:396
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "en fecha"
 
-#: src/core/modules/StarWrapper.cpp:435 src/core/modules/StarWrapper.cpp:440
-#: src/gui/AstroCalcDialog.cpp:5833
-msgid "Separation"
-msgstr "Separación"
+#. TRANSLATORS: This is about the angular separation between components of a
+#. binary star.
+#: src/core/modules/StarWrapper.cpp:436 src/core/modules/StarWrapper.cpp:442
+msgid "Component separation"
+msgstr "Separación de componentes"
 
-#: src/core/modules/StarWrapper.cpp:614
+#: src/core/modules/StarWrapper.cpp:616
 msgctxt "object narration"
 msgid "This star is described as "
 msgstr "Esta estrella se describe como"
 
-#: src/core/modules/StarWrapper.cpp:646
+#: src/core/modules/StarWrapper.cpp:648
 msgctxt "object narration"
 msgid "with absolute Magnitude of"
 msgstr "con magnitud absoluta de"
 
-#: src/core/modules/StarWrapper.cpp:652 src/core/modules/StarWrapper.cpp:1123
+#: src/core/modules/StarWrapper.cpp:654 src/core/modules/StarWrapper.cpp:1128
 #, qt-format
 msgctxt "object narration"
 msgid "Its B minus V Color Index is %1"
-msgstr ""
+msgstr "Su índice de color B-V es %1"
 
-#: src/core/modules/StarWrapper.cpp:668 src/core/modules/StarWrapper.cpp:1145
-#: src/core/modules/StarWrapper.cpp:1467
+#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1150
+#: src/core/modules/StarWrapper.cpp:1473
 #, qt-format
 msgctxt "object narration, alternatives"
 msgid "either %1 or %2"
-msgstr ""
+msgstr "ya sea %1 o %2"
 
-#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1147
-#: src/core/modules/StarWrapper.cpp:1469
+#: src/core/modules/StarWrapper.cpp:672 src/core/modules/StarWrapper.cpp:1152
+#: src/core/modules/StarWrapper.cpp:1475
 #, qt-format
 msgctxt "object narration"
 msgid "Its magnitude range goes from %1 to %2 in the Photometric system %3."
-msgstr ""
+msgstr "Su rango de magnitud va de %1 a %2 en el sistema fotométrico %3."
 
 #. TRANSLATORS: Its distance is x plus/minus y light years
-#: src/core/modules/StarWrapper.cpp:688 src/core/modules/StarWrapper.cpp:1172
+#: src/core/modules/StarWrapper.cpp:690 src/core/modules/StarWrapper.cpp:1177
 #, qt-format
 msgctxt "object narration"
 msgid "Its distance is %1 ± %2 light years."
-msgstr ""
+msgstr "Su distancia %1 ± %2 años luz."
 
-#: src/core/modules/StarWrapper.cpp:698 src/core/modules/StarWrapper.cpp:1160
+#: src/core/modules/StarWrapper.cpp:700 src/core/modules/StarWrapper.cpp:1165
 #, qt-format
 msgctxt "object narration"
 msgid ""
@@ -3920,103 +3921,112 @@ msgid ""
 " axes, %3 milli-arcseconds per year in right ascension and %4 in "
 "declination."
 msgstr ""
+"Su movimiento propio es de %1 milisegundos de arco por año hacia %2 grados, "
+"o, por ejes, %3 milisegundos de arco por año en ascensión recta y %4 en "
+"declinación."
 
-#: src/core/modules/StarWrapper.cpp:706
+#: src/core/modules/StarWrapper.cpp:708
 #, qt-format
 msgctxt "object narration"
 msgid "Its radial velocity is %1 kilometers per second."
-msgstr ""
+msgstr "Su velocidad radial es de %1 kilómetros por segundo."
 
-#: src/core/modules/StarWrapper.cpp:715 src/core/modules/StarWrapper.cpp:1183
+#: src/core/modules/StarWrapper.cpp:717 src/core/modules/StarWrapper.cpp:1188
 #, qt-format
 msgctxt "object narration"
 msgid "Its parallax is %1 ± %2 milli-arcseconds."
-msgstr ""
+msgstr "Su paralaje es de %1 ± %2 milisegundos de arco."
 
-#: src/core/modules/StarWrapper.cpp:718 src/core/modules/StarWrapper.cpp:1186
+#: src/core/modules/StarWrapper.cpp:720 src/core/modules/StarWrapper.cpp:1191
 #, qt-format
 msgctxt "object narration"
 msgid "Its parallax is %1 milli-arcseconds."
-msgstr ""
+msgstr "Su paralaje es de %1 milisegundos de arco."
 
-#: src/core/modules/StarWrapper.cpp:724 src/core/modules/StarWrapper.cpp:1200
-#: src/core/modules/StarWrapper.cpp:1488
+#: src/core/modules/StarWrapper.cpp:726 src/core/modules/StarWrapper.cpp:1205
+#: src/core/modules/StarWrapper.cpp:1494
 #, qt-format
 msgctxt "object narration"
 msgid "Its Spectral Type is %1."
-msgstr ""
+msgstr "Su tipo espectral es %1."
 
-#: src/core/modules/StarWrapper.cpp:727 src/core/modules/StarWrapper.cpp:1203
-#: src/core/modules/StarWrapper.cpp:1491
+#: src/core/modules/StarWrapper.cpp:729 src/core/modules/StarWrapper.cpp:1208
+#: src/core/modules/StarWrapper.cpp:1497
 #, qt-format
 msgctxt "object narration"
 msgid "It has a period of %1 days"
-msgstr ""
+msgstr "Tiene un periodo de %1 días"
 
-#: src/core/modules/StarWrapper.cpp:735 src/core/modules/StarWrapper.cpp:1211
-#: src/core/modules/StarWrapper.cpp:1499
+#: src/core/modules/StarWrapper.cpp:737 src/core/modules/StarWrapper.cpp:1216
+#: src/core/modules/StarWrapper.cpp:1505
 #, qt-format
 msgctxt "object narration"
 msgid "Next minimum light will be at %1 UTC"
-msgstr ""
+msgstr "La próxima luz mínima será a las %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:736 src/core/modules/StarWrapper.cpp:1212
-#: src/core/modules/StarWrapper.cpp:1500
-#, qt-format
-msgctxt "object narration"
-msgid "Next maximum light will be at %1 UTC"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:742 src/core/modules/StarWrapper.cpp:1218
+#: src/core/modules/StarWrapper.cpp:738 src/core/modules/StarWrapper.cpp:1217
 #: src/core/modules/StarWrapper.cpp:1506
 #, qt-format
 msgctxt "object narration"
-msgid "The duration fraction of an eclipse is %1, that is, %2."
-msgstr ""
+msgid "Next maximum light will be at %1 UTC"
+msgstr "La próxima luz máxima será a las %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:743 src/core/modules/StarWrapper.cpp:1219
-#: src/core/modules/StarWrapper.cpp:1507
+#: src/core/modules/StarWrapper.cpp:744 src/core/modules/StarWrapper.cpp:1223
+#: src/core/modules/StarWrapper.cpp:1512
+#, qt-format
+msgctxt "object narration"
+msgid "The duration fraction of an eclipse is %1, that is, %2."
+msgstr "La fracción de duración de un eclipse es %1, que es igual a %2."
+
+#. TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing
+#. stage of a stellar light curve
+#: src/core/modules/StarWrapper.cpp:746 src/core/modules/StarWrapper.cpp:1225
+#: src/core/modules/StarWrapper.cpp:1514
 #, qt-format
 msgctxt "object narration: light curve"
 msgid "The rising time fraction is %1, that is, %2."
-msgstr ""
+msgstr "La fracción de tiempo ascendente es %1, que es igual a %2."
 
-#: src/core/modules/StarWrapper.cpp:752
+#: src/core/modules/StarWrapper.cpp:755
 #, qt-format
 msgctxt "object narration"
 msgid "Its position angle as given for %1 is %2 degrees."
-msgstr ""
+msgstr "Su ángulo de posición, dado para %1, es %2 grados."
 
-#: src/core/modules/StarWrapper.cpp:753 src/core/modules/StarWrapper.cpp:759
+#: src/core/modules/StarWrapper.cpp:756 src/core/modules/StarWrapper.cpp:763
 msgctxt "coordinates for current epoch"
 msgid "current date"
 msgstr "fecha actual"
 
-#: src/core/modules/StarWrapper.cpp:758
+#. TRANSLATORS: This is about the angular separation between components of a
+#. binary star.
+#: src/core/modules/StarWrapper.cpp:762
 #, qt-format
 msgctxt "object narration"
-msgid "Its Separation for %1 is %2 arc-seconds (%3). "
-msgstr ""
+msgid "Its component separation for %1 is %2 arc-seconds (%3). "
+msgstr "Su separación de componentes para %1 es de %2 segundos de arco (%3)."
 
-#: src/core/modules/StarWrapper.cpp:763
+#. TRANSLATORS: This is about the angular separation between components of a
+#. binary star.
+#: src/core/modules/StarWrapper.cpp:768
 #, qt-format
 msgctxt "object narration"
-msgid "Its Separation for %1 is %2 arc-seconds. "
-msgstr ""
+msgid "Its component separation for %1 is %2 arc-seconds. "
+msgstr "Su separación de componentes para %1 es de %2 segundos de arco."
 
-#: src/core/modules/StarWrapper.cpp:1102 src/core/modules/StarWrapper.cpp:1434
+#: src/core/modules/StarWrapper.cpp:1107 src/core/modules/StarWrapper.cpp:1440
 #, qt-format
 msgctxt "object narration"
-msgid "Its type is %1 with variable type %2."
-msgstr ""
+msgid "Its type is %1 with variability type %2."
+msgstr "Su tipo es %1 con tipo de variabilidad %2."
 
-#: src/core/modules/StarWrapper.cpp:1104 src/core/modules/StarWrapper.cpp:1436
+#: src/core/modules/StarWrapper.cpp:1109 src/core/modules/StarWrapper.cpp:1442
 #, qt-format
 msgctxt "object narration"
 msgid "Its type is %1."
-msgstr ""
+msgstr "Su tipo es %1."
 
-#: src/core/modules/StarWrapper.cpp:1445
+#: src/core/modules/StarWrapper.cpp:1451
 msgctxt "object narration"
 msgid "Its B minus V Color Index is"
 msgstr "Su índice de color B-V es"
@@ -5405,7 +5415,7 @@ msgstr "Coordenadas ecuatoriales de J2000:"
 #, qt-format
 msgctxt "object narration"
 msgid "Right Ascension %1, and %2 %3. "
-msgstr ""
+msgstr "Asención recta %1, y %2 %3. "
 
 #: src/core/StelObject.cpp:1095 src/core/StelObject.cpp:1120
 #: src/core/StelObject.cpp:1159
@@ -5433,7 +5443,7 @@ msgstr "Coordenadas ecuatoriales fijas de la fecha:"
 #, qt-format
 msgctxt "object narration"
 msgid "Hour Angle %1, and %2 %3. "
-msgstr ""
+msgstr "Ángulo horario %1 y %2 %3."
 
 #: src/core/StelObject.cpp:1204
 msgctxt "object narration"
@@ -5444,7 +5454,7 @@ msgstr "Las coordenadas acimutales son:"
 #, qt-format
 msgctxt "object narration"
 msgid "Azimuth %1, and altitude %2. "
-msgstr ""
+msgstr "Acimut %1, y altitud %2. "
 
 #: src/core/StelObject.cpp:1225
 msgctxt "object narration"
@@ -5456,7 +5466,7 @@ msgstr "Las coordenadas galácticas son:"
 #, qt-format
 msgctxt "object narration"
 msgid "Longitude %1, and latitude %2. "
-msgstr ""
+msgstr "Longitud %1, y latitud %2. "
 
 #: src/core/StelObject.cpp:1246
 msgctxt "object narration"
@@ -5490,18 +5500,18 @@ msgstr "El tiempo sideral aparente es"
 
 #: src/core/StelObject.cpp:1363
 msgctxt "object narration; celestial event; passage across a meridian"
-msgid "Transit on this day is at"
-msgstr "El tránsito en este día es a las"
+msgid "Transit on this day is at:"
+msgstr "El tránsito en este día es a las:"
 
 #: src/core/StelObject.cpp:1364
 msgctxt "object narration"
-msgid "Rise on this day is at"
-msgstr "El ascenso en este día es a las"
+msgid "Rise on this day is at:"
+msgstr "El ascenso en este día es a las:"
 
 #: src/core/StelObject.cpp:1365
 msgctxt "object narration"
-msgid "Set on this day is at"
-msgstr "El descenso en este día es a las"
+msgid "Set on this day is at:"
+msgstr "El descenso en este día es a las:"
 
 #: src/core/StelObject.cpp:1375
 msgctxt "object narration"
@@ -5523,12 +5533,16 @@ msgstr "El objeto no se pone en este día."
 msgctxt "celestial event"
 msgid "Morning twilight for a Solar altitude of %1 degrees begins at %2. "
 msgstr ""
+"El crepúsculo matutino para una altitud solar de %1 grados comienza a las "
+"%2."
 
 #: src/core/StelObject.cpp:1418
 #, qt-format
 msgctxt "celestial event"
 msgid "Evening twilight for a Solar altitude of %1 degrees ends at %2. "
 msgstr ""
+"El crepúsculo vespertino para una altitud solar de %1 grados termina a las "
+"%2."
 
 #: src/core/StelObject.cpp:1429
 msgctxt "object narration"
@@ -5552,13 +5566,14 @@ msgstr "Este objeto es circumpolar y por lo tanto nunca se pone."
 #, qt-format
 msgctxt "object narration"
 msgid "Greatest Eastern Digression is at Azimuth %1, Hour Angle %2"
-msgstr ""
+msgstr "La mayor digresión oriental está en el acimut 1 % y ángulo horario %2"
 
 #: src/core/StelObject.cpp:1494
 #, qt-format
 msgctxt "object narration"
 msgid "Greatest Western Digression is at Azimuth %1, Hour Angle %2"
 msgstr ""
+"La mayor digresión occidental está en el acimut 1 % y ángulo horario %2"
 
 #: src/core/StelObject.cpp:1519
 msgctxt "object narration"
@@ -5591,13 +5606,13 @@ msgstr "Lunar Az./Alt."
 #, qt-format
 msgctxt "object narration"
 msgid "The Sun's azimuth is %1, and its altitude is %2."
-msgstr ""
+msgstr "El acimut del Sol es %1 y su altitud es %2."
 
 #: src/core/StelObject.cpp:2017
 #, qt-format
 msgctxt "object narration"
 msgid "The Moon's azimuth is %1, and its altitude is %2."
-msgstr ""
+msgstr "El acimut de la Luna es %1 y su altitud es %2."
 
 #: src/core/StelObjectMgr.cpp:51 src/core/StelMovementMgr.cpp:194
 #: src/gui/StelGui.cpp:274 src/StelMainView.cpp:967 src/StelMainView.cpp:968
@@ -6419,19 +6434,19 @@ msgstr "minutos de arco"
 #: src/core/StelUtils.cpp:444
 msgctxt "object narration"
 msgid "arc seconds"
-msgstr ""
+msgstr "segundos de arco"
 
 #: src/core/StelUtils.cpp:489
 msgid "plus"
-msgstr ""
+msgstr "más"
 
 #: src/core/StelUtils.cpp:491
 msgid "degrees"
-msgstr ""
+msgstr "grados"
 
 #: src/core/StelUtils.cpp:493
 msgid "minutes"
-msgstr ""
+msgstr "minutos"
 
 #: src/core/StelUtils.cpp:493 src/ui_astroCalcDialog.h:2352
 #: src/ui_astroCalcDialog.h:2454 plugins/Satellites/src/Satellite.cpp:493
@@ -6445,22 +6460,22 @@ msgstr "segundos"
 #: src/core/StelUtils.cpp:526 src/core/StelUtils.cpp:528
 msgctxt "object narration"
 msgid "North"
-msgstr ""
+msgstr "Norte"
 
 #: src/core/StelUtils.cpp:526 src/core/StelUtils.cpp:528
 msgctxt "object narration"
 msgid "South"
-msgstr ""
+msgstr "Sur"
 
 #: src/core/StelUtils.cpp:574 src/core/StelUtils.cpp:580
 msgctxt "object narration"
 msgid "East"
-msgstr ""
+msgstr "Este"
 
 #: src/core/StelUtils.cpp:575 src/core/StelUtils.cpp:581
 msgctxt "object narration"
 msgid "West"
-msgstr ""
+msgstr "Oeste"
 
 #: src/core/StelUtils.cpp:3126
 msgid "Alpha"
@@ -6581,7 +6596,7 @@ msgstr "Ómicron"
 
 #: src/core/StelUtils.cpp:3142 src/ui_searchDialogGui.h:813
 msgid "omicron"
-msgstr "omicron"
+msgstr "ómicron"
 
 #: src/core/StelUtils.cpp:3144
 msgid "Pi"
@@ -6676,6 +6691,10 @@ msgstr "Ahora los datos se pueden entregar con salida de voz."
 #: src/gui/ConfigurationDialog.cpp:474
 msgid "Displayed fields"
 msgstr "Campos mostrados"
+
+#: src/gui/ConfigurationDialog.cpp:492 src/ui_configurationDialog.h:2359
+msgid "Speech"
+msgstr "Voz"
 
 #: src/gui/ConfigurationDialog.cpp:1006
 msgid "Select screenshot directory"
@@ -9536,6 +9555,10 @@ msgstr "Objeto 2"
 msgid "Mag. 2"
 msgstr "Mag. 2"
 
+#: src/gui/AstroCalcDialog.cpp:5833
+msgid "Separation"
+msgstr "Separación"
+
 #: src/gui/AstroCalcDialog.cpp:5834
 msgid "Elevation"
 msgstr "Elevación"
@@ -10235,7 +10258,7 @@ msgid "Cannot open JSON output file. Will not delete."
 msgstr "No se puede abrir el archivo de salida JSON. No se eliminará."
 
 #: src/gui/ObsListDialog.cpp:1194 src/ui_configurationDialog.h:2345
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Information"
 msgstr "Información"
 
@@ -12758,7 +12781,7 @@ msgstr "No es un objeto (error, artefacto, ...)"
 #: src/translations.h:786
 msgctxt "SIMBAD object type"
 msgid "Part of Cloud"
-msgstr "Parte de una nube"
+msgstr "Parte de una Nube"
 
 #: src/translations.h:787
 msgctxt "SIMBAD object type"
@@ -12912,7 +12935,7 @@ msgstr "E&legir"
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
@@ -12948,7 +12971,7 @@ msgstr "&Guardar"
 
 #: src/translations.h:855 src/ui_configurationDialog.h:2371
 #: src/ui_configurationDialog.h:2819
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
 msgid "Save"
 msgstr "Guardar"
 
@@ -16487,10 +16510,6 @@ msgstr "Tiempo"
 #: src/ui_configurationDialog.h:2357
 msgid "Tools"
 msgstr "Herramientas"
-
-#: src/ui_configurationDialog.h:2359
-msgid "Speech"
-msgstr "Voz"
 
 #: src/ui_configurationDialog.h:2366
 msgid "Language settings"
@@ -32357,7 +32376,7 @@ msgid "SCM: Dark Constellation Editor"
 msgstr "CCE: Editor de Constelaciones Oscuras"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
 msgid "SCM: Constellation Editor"
 msgstr "CCE: Editor de Constelaciones"
 
@@ -32390,63 +32409,63 @@ msgstr "Editar"
 msgid "Convert"
 msgstr "Convertir"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:323
 msgid "Pen"
 msgstr "Pluma"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:324
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:325
 msgid "Revert the last drawn line."
 msgstr "Revertir la última línea dibujada."
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:326
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
 msgid "Undo"
 msgstr "Deshacer"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
 msgid "Eraser"
 msgstr "Borrador"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
 msgid "Drawing"
 msgstr "Dibujo"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
 msgid "English name"
 msgstr "Nombre en inglés"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
 msgid "ID (Do not include 'CON' or the sky culture name)"
 msgstr "ID (No incluya \"CON\" o el nombre de la cultura estelar)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
 msgid "Native name (optional)"
 msgstr "Nombre nativo (opcional)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
 msgid "Pronounciation (optional, European glyphs or Pinyin)"
 msgstr "Pronunciación (opcional, glifos europeos o pinyin)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
 msgid "IPA (optional)"
 msgstr "AFI (opcional)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
 msgid "Description (optional)"
 msgstr "Descripción (opcional)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
 msgid "Bind Star"
 msgstr "Enlazar estrella"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
 msgid "Upload Image"
 msgstr "Subir imagen"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
 msgid "Remove Image"
 msgstr "Borrar imagen"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
 msgid "Artwork"
 msgstr "Ilustración"
 
@@ -33141,243 +33160,247 @@ msgstr "Calendarios"
 msgid "Calendars of the world"
 msgstr "Calendarios del mundo"
 
-#: plugins/Calendars/src/Calendars.cpp:370
+#: plugins/Calendars/src/Calendars.cpp:209
+msgid "Export to Calendars.html"
+msgstr "Exportar a Calendars.html"
+
+#: plugins/Calendars/src/Calendars.cpp:400
 #: plugins/Calendars/src/ui_calendarsDialog.h:933
 #: plugins/Calendars/src/ui_calendarsDialog.h:953
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr "Gregoriano"
 
-#: plugins/Calendars/src/Calendars.cpp:371
+#: plugins/Calendars/src/Calendars.cpp:401
 #: plugins/Calendars/src/ui_calendarsDialog.h:905
 #: plugins/Calendars/src/ui_calendarsDialog.h:954
 msgctxt "calendar"
 msgid "Julian"
 msgstr "Juliano"
 
-#: plugins/Calendars/src/Calendars.cpp:372
+#: plugins/Calendars/src/Calendars.cpp:402
 #: plugins/Calendars/src/ui_calendarsDialog.h:931
 #: plugins/Calendars/src/ui_calendarsDialog.h:955
 msgctxt "calendar"
 msgid "Revised Julian"
 msgstr "Juliano revisado"
 
-#: plugins/Calendars/src/Calendars.cpp:373
+#: plugins/Calendars/src/Calendars.cpp:403
 msgctxt "calendar"
 msgid "ISO week"
 msgstr "Semana ISO"
 
-#: plugins/Calendars/src/Calendars.cpp:374
+#: plugins/Calendars/src/Calendars.cpp:404
 #: plugins/Calendars/src/ui_calendarsDialog.h:937
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr "Islandés"
 
-#: plugins/Calendars/src/Calendars.cpp:375
+#: plugins/Calendars/src/Calendars.cpp:405
 #: plugins/Calendars/src/ui_calendarsDialog.h:930
 msgctxt "calendar"
 msgid "Roman"
 msgstr "Romano"
 
-#: plugins/Calendars/src/Calendars.cpp:376
+#: plugins/Calendars/src/Calendars.cpp:406
 #: plugins/Calendars/src/ui_calendarsDialog.h:917
 msgctxt "calendar"
 msgid "Olympic"
 msgstr "Olímpico"
 
-#: plugins/Calendars/src/Calendars.cpp:377
+#: plugins/Calendars/src/Calendars.cpp:407
 #: plugins/Calendars/src/ui_calendarsDialog.h:906
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "Egipcio"
 
-#: plugins/Calendars/src/Calendars.cpp:378
+#: plugins/Calendars/src/Calendars.cpp:408
 #: plugins/Calendars/src/ui_calendarsDialog.h:909
 msgctxt "calendar"
 msgid "Armenian"
 msgstr "Armenio"
 
-#: plugins/Calendars/src/Calendars.cpp:379
+#: plugins/Calendars/src/Calendars.cpp:409
 #: plugins/Calendars/src/ui_calendarsDialog.h:923
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr "Zoroastriano"
 
-#: plugins/Calendars/src/Calendars.cpp:380
+#: plugins/Calendars/src/Calendars.cpp:410
 #: plugins/Calendars/src/ui_calendarsDialog.h:908
 msgctxt "calendar"
 msgid "Coptic"
 msgstr "Copto"
 
-#: plugins/Calendars/src/Calendars.cpp:381
+#: plugins/Calendars/src/Calendars.cpp:411
 #: plugins/Calendars/src/ui_calendarsDialog.h:907
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr "Etiope"
 
-#: plugins/Calendars/src/Calendars.cpp:382
+#: plugins/Calendars/src/Calendars.cpp:412
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
 msgstr "Rev. francesa (astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:383
+#: plugins/Calendars/src/Calendars.cpp:413
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
 msgstr "Rev. francesa (aritm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:384
+#: plugins/Calendars/src/Calendars.cpp:414
 #: plugins/Calendars/src/ui_calendarsDialog.h:904
 msgctxt "calendar"
 msgid "Islamic"
 msgstr "Islámico"
 
-#: plugins/Calendars/src/Calendars.cpp:385
+#: plugins/Calendars/src/Calendars.cpp:415
 #: plugins/Calendars/src/ui_calendarsDialog.h:914
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "Hebreo"
 
-#: plugins/Calendars/src/Calendars.cpp:386
+#: plugins/Calendars/src/Calendars.cpp:416
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
 msgstr "Persa (aritm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:387
+#: plugins/Calendars/src/Calendars.cpp:417
 msgctxt "calendar"
 msgid "Persian (Astron.)"
 msgstr "Persa (astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:388
+#: plugins/Calendars/src/Calendars.cpp:418
 msgctxt "calendar"
 msgid "Bahá’í (Arithm.)"
 msgstr "Bahá’í (Aritm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:389
+#: plugins/Calendars/src/Calendars.cpp:419
 msgctxt "calendar"
 msgid "Bahá’í (Astron.)"
 msgstr "Bahá’í (Astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:390
+#: plugins/Calendars/src/Calendars.cpp:420
 #: plugins/Calendars/src/ui_calendarsDialog.h:910
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr "Viejo solar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:391
+#: plugins/Calendars/src/Calendars.cpp:421
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
 msgstr "Viejo lunisolar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:392
+#: plugins/Calendars/src/Calendars.cpp:422
 #: plugins/Calendars/src/ui_calendarsDialog.h:913
 msgctxt "calendar"
 msgid "New Hindu Solar"
 msgstr "Nuevo solar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:393
+#: plugins/Calendars/src/Calendars.cpp:423
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
 msgstr "‎Nuevo ‎‎lunisolar‎‎ hindú‎"
 
-#: plugins/Calendars/src/Calendars.cpp:394
+#: plugins/Calendars/src/Calendars.cpp:424
 msgctxt "calendar"
 msgid "New Hindu Panchang"
 msgstr "Nuevo panchang hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:396
+#: plugins/Calendars/src/Calendars.cpp:426
 #: plugins/Calendars/src/ui_calendarsDialog.h:920
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
 msgstr "Astro solar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:397
+#: plugins/Calendars/src/Calendars.cpp:427
 #: plugins/Calendars/src/ui_calendarsDialog.h:927
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
 msgstr "Astro lunisolar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:398
+#: plugins/Calendars/src/Calendars.cpp:428
 #: plugins/Calendars/src/ui_calendarsDialog.h:929
 msgctxt "calendar"
 msgid "Tibetan"
 msgstr "Tibetano"
 
-#: plugins/Calendars/src/Calendars.cpp:400
+#: plugins/Calendars/src/Calendars.cpp:430
 #: plugins/Calendars/src/ui_calendarsDialog.h:934
 #: plugins/Calendars/src/ui_calendarsDialog.h:957
 msgctxt "calendar"
 msgid "Chinese"
 msgstr "Chino"
 
-#: plugins/Calendars/src/Calendars.cpp:401
+#: plugins/Calendars/src/Calendars.cpp:431
 msgctxt "calendar"
 msgid "Chinese Solar Terms"
 msgstr "Términos solares chinos"
 
-#: plugins/Calendars/src/Calendars.cpp:404
+#: plugins/Calendars/src/Calendars.cpp:434
 #: plugins/Calendars/src/ui_calendarsDialog.h:911
 msgctxt "calendar"
 msgid "Japanese"
 msgstr "Japonés"
 
-#: plugins/Calendars/src/Calendars.cpp:405
+#: plugins/Calendars/src/Calendars.cpp:435
 msgctxt "calendar"
 msgid "Japanese Solar Terms"
 msgstr "Términos solares japoneses"
 
-#: plugins/Calendars/src/Calendars.cpp:408
+#: plugins/Calendars/src/Calendars.cpp:438
 #: plugins/Calendars/src/ui_calendarsDialog.h:938
 msgctxt "calendar"
 msgid "Korean"
 msgstr "Coreano"
 
-#: plugins/Calendars/src/Calendars.cpp:409
+#: plugins/Calendars/src/Calendars.cpp:439
 msgctxt "calendar"
 msgid "Korean Solar Terms"
 msgstr "Términos solares coreanos"
 
-#: plugins/Calendars/src/Calendars.cpp:412
+#: plugins/Calendars/src/Calendars.cpp:442
 #: plugins/Calendars/src/ui_calendarsDialog.h:940
 msgctxt "calendar"
 msgid "Vietnamese"
 msgstr "Vietnamita"
 
-#: plugins/Calendars/src/Calendars.cpp:413
+#: plugins/Calendars/src/Calendars.cpp:443
 msgctxt "calendar"
 msgid "Vietnamese Solar Terms"
 msgstr "Términos solares vietnamitas"
 
-#: plugins/Calendars/src/Calendars.cpp:415
+#: plugins/Calendars/src/Calendars.cpp:445
 #: plugins/Calendars/src/ui_calendarsDialog.h:918
 msgctxt "calendar"
 msgid "Balinese Pawukon"
 msgstr "Balinese Pawukon"
 
-#: plugins/Calendars/src/Calendars.cpp:416
+#: plugins/Calendars/src/Calendars.cpp:446
 #: plugins/Calendars/src/ui_calendarsDialog.h:925
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "Cuenta Larga Maya"
 
-#: plugins/Calendars/src/Calendars.cpp:417
+#: plugins/Calendars/src/Calendars.cpp:447
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "Haab Maya"
 
-#: plugins/Calendars/src/Calendars.cpp:418
+#: plugins/Calendars/src/Calendars.cpp:448
 #: plugins/Calendars/src/ui_calendarsDialog.h:915
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "Tzolkin Maya"
 
-#: plugins/Calendars/src/Calendars.cpp:419
+#: plugins/Calendars/src/Calendars.cpp:449
 #: plugins/Calendars/src/ui_calendarsDialog.h:936
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "Xihuitl mexica"
 
-#: plugins/Calendars/src/Calendars.cpp:420
+#: plugins/Calendars/src/Calendars.cpp:450
 #: plugins/Calendars/src/ui_calendarsDialog.h:924
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
