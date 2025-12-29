@@ -62,6 +62,7 @@ StelToolTip::StelToolTip(QGraphicsItem* parent)
 {
 	setZValue(1e38); // Show on top
 	label->setObjectName("StelToolTip");
+	label->setMargin(3);
 	setWidget(label);
 	setVisible(false);
 
@@ -91,8 +92,7 @@ void StelToolTip::showToolTip(const QPoint& scenePos, const QString& text)
 	}
 
 	setVisible(!text.isEmpty());
-	label->setMargin(3);
-	label->setText(NULL);
+	label->setText("");
 	label->adjustSize();
 	updateGeometry();
 	label->setText(text);
@@ -108,7 +108,7 @@ void StelToolTip::showToolTip(const QPoint& scenePos, const QString& text)
 	setPos(pos);
 }
 
-void StelToolTip::mousePressEvent(QGraphicsSceneMouseEvent*)
+void StelToolTip::mouseMoveEvent(QGraphicsSceneMouseEvent*)
 {
 	showToolTip({}, "");
 }

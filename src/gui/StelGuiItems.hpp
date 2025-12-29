@@ -40,7 +40,7 @@ public:
 	StelToolTip(QGraphicsItem* parent);
 	void showToolTip(const QPoint& scenePos, const QString& text);
 protected:
-	void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
+	void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
 private:
 	void setFontSizeFromApp(int size);
 
