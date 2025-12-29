@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-24 20:03+0400\n"
+"POT-Creation-Date: 2025-12-28 20:24+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2025\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -6695,6 +6695,10 @@ msgstr "Les données peuvent maintenant être fournie par synthèse vocale."
 msgid "Displayed fields"
 msgstr "Champs affichés"
 
+#: src/gui/ConfigurationDialog.cpp:492 src/ui_configurationDialog.h:2359
+msgid "Speech"
+msgstr "Synthèse vocale"
+
 #: src/gui/ConfigurationDialog.cpp:1006
 msgid "Select screenshot directory"
 msgstr "Sélectionner le dossier des captures d'écran"
@@ -10276,7 +10280,7 @@ msgstr ""
 "Impossible d'ouvrir le fichier JSON de sortie. Il ne sera pas supprimé."
 
 #: src/gui/ObsListDialog.cpp:1194 src/ui_configurationDialog.h:2345
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Information"
 msgstr "Informations"
 
@@ -12952,7 +12956,7 @@ msgstr "Sélectionner"
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
@@ -12988,7 +12992,7 @@ msgstr "Enregi&strer"
 
 #: src/translations.h:855 src/ui_configurationDialog.h:2371
 #: src/ui_configurationDialog.h:2819
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -16532,10 +16536,6 @@ msgstr "Heure"
 #: src/ui_configurationDialog.h:2357
 msgid "Tools"
 msgstr "Outils"
-
-#: src/ui_configurationDialog.h:2359
-msgid "Speech"
-msgstr "Synthèse vocale"
 
 #: src/ui_configurationDialog.h:2366
 msgid "Language settings"
@@ -32423,7 +32423,7 @@ msgid "SCM: Dark Constellation Editor"
 msgstr "Éditeur de constellation sombre"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
 msgid "SCM: Constellation Editor"
 msgstr "Éditeur de constellation"
 
@@ -32456,63 +32456,63 @@ msgstr "Modifier"
 msgid "Convert"
 msgstr "Convertir"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:323
 msgid "Pen"
 msgstr "Crayon"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:324
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:325
 msgid "Revert the last drawn line."
 msgstr "Annuler la dernière ligne tracée"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:326
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
 msgid "Undo"
 msgstr "Annuler"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
 msgid "Eraser"
 msgstr "Gomme"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
 msgid "Drawing"
 msgstr "Dessin"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
 msgid "English name"
 msgstr "Nom anglais"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
 msgid "ID (Do not include 'CON' or the sky culture name)"
 msgstr "ID (ne pas inclure « CON » ou le nom de la culture céleste)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
 msgid "Native name (optional)"
 msgstr "Nom natif (optionnel)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
 msgid "Pronounciation (optional, European glyphs or Pinyin)"
 msgstr "Prononciation (optionnel, caractères européens ou Pinyin)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
 msgid "IPA (optional)"
 msgstr "IPA (optionnel)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
 msgid "Description (optional)"
 msgstr "Description (optionnelle)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
 msgid "Bind Star"
 msgstr "Lier étoile"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
 msgid "Upload Image"
 msgstr "Déposer image"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
 msgid "Remove Image"
 msgstr "Supprimer image"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
 msgid "Artwork"
 msgstr "Dessin"
 
@@ -33212,243 +33212,247 @@ msgstr "Calendriers"
 msgid "Calendars of the world"
 msgstr "Calendriers du monde"
 
-#: plugins/Calendars/src/Calendars.cpp:370
+#: plugins/Calendars/src/Calendars.cpp:209
+msgid "Export to Calendars.html"
+msgstr ""
+
+#: plugins/Calendars/src/Calendars.cpp:400
 #: plugins/Calendars/src/ui_calendarsDialog.h:933
 #: plugins/Calendars/src/ui_calendarsDialog.h:953
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr "Grégorien"
 
-#: plugins/Calendars/src/Calendars.cpp:371
+#: plugins/Calendars/src/Calendars.cpp:401
 #: plugins/Calendars/src/ui_calendarsDialog.h:905
 #: plugins/Calendars/src/ui_calendarsDialog.h:954
 msgctxt "calendar"
 msgid "Julian"
 msgstr "Julien"
 
-#: plugins/Calendars/src/Calendars.cpp:372
+#: plugins/Calendars/src/Calendars.cpp:402
 #: plugins/Calendars/src/ui_calendarsDialog.h:931
 #: plugins/Calendars/src/ui_calendarsDialog.h:955
 msgctxt "calendar"
 msgid "Revised Julian"
 msgstr "Julien révisé"
 
-#: plugins/Calendars/src/Calendars.cpp:373
+#: plugins/Calendars/src/Calendars.cpp:403
 msgctxt "calendar"
 msgid "ISO week"
 msgstr "Semaine ISO"
 
-#: plugins/Calendars/src/Calendars.cpp:374
+#: plugins/Calendars/src/Calendars.cpp:404
 #: plugins/Calendars/src/ui_calendarsDialog.h:937
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr "Islandais"
 
-#: plugins/Calendars/src/Calendars.cpp:375
+#: plugins/Calendars/src/Calendars.cpp:405
 #: plugins/Calendars/src/ui_calendarsDialog.h:930
 msgctxt "calendar"
 msgid "Roman"
 msgstr "Romain"
 
-#: plugins/Calendars/src/Calendars.cpp:376
+#: plugins/Calendars/src/Calendars.cpp:406
 #: plugins/Calendars/src/ui_calendarsDialog.h:917
 msgctxt "calendar"
 msgid "Olympic"
 msgstr "Olympique"
 
-#: plugins/Calendars/src/Calendars.cpp:377
+#: plugins/Calendars/src/Calendars.cpp:407
 #: plugins/Calendars/src/ui_calendarsDialog.h:906
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "Égyptien"
 
-#: plugins/Calendars/src/Calendars.cpp:378
+#: plugins/Calendars/src/Calendars.cpp:408
 #: plugins/Calendars/src/ui_calendarsDialog.h:909
 msgctxt "calendar"
 msgid "Armenian"
 msgstr "Arménien"
 
-#: plugins/Calendars/src/Calendars.cpp:379
+#: plugins/Calendars/src/Calendars.cpp:409
 #: plugins/Calendars/src/ui_calendarsDialog.h:923
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr "Zoroastrien"
 
-#: plugins/Calendars/src/Calendars.cpp:380
+#: plugins/Calendars/src/Calendars.cpp:410
 #: plugins/Calendars/src/ui_calendarsDialog.h:908
 msgctxt "calendar"
 msgid "Coptic"
 msgstr "Copte"
 
-#: plugins/Calendars/src/Calendars.cpp:381
+#: plugins/Calendars/src/Calendars.cpp:411
 #: plugins/Calendars/src/ui_calendarsDialog.h:907
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr "Éthiopien"
 
-#: plugins/Calendars/src/Calendars.cpp:382
+#: plugins/Calendars/src/Calendars.cpp:412
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
 msgstr "Révol. français (astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:383
+#: plugins/Calendars/src/Calendars.cpp:413
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
 msgstr "Révol. français (arithm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:384
+#: plugins/Calendars/src/Calendars.cpp:414
 #: plugins/Calendars/src/ui_calendarsDialog.h:904
 msgctxt "calendar"
 msgid "Islamic"
 msgstr "Islamique"
 
-#: plugins/Calendars/src/Calendars.cpp:385
+#: plugins/Calendars/src/Calendars.cpp:415
 #: plugins/Calendars/src/ui_calendarsDialog.h:914
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "Hébraïque"
 
-#: plugins/Calendars/src/Calendars.cpp:386
+#: plugins/Calendars/src/Calendars.cpp:416
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
 msgstr "Persan (arithm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:387
+#: plugins/Calendars/src/Calendars.cpp:417
 msgctxt "calendar"
 msgid "Persian (Astron.)"
 msgstr "Persan (astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:388
+#: plugins/Calendars/src/Calendars.cpp:418
 msgctxt "calendar"
 msgid "Bahá’í (Arithm.)"
 msgstr "Bahá’í (arithm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:389
+#: plugins/Calendars/src/Calendars.cpp:419
 msgctxt "calendar"
 msgid "Bahá’í (Astron.)"
 msgstr "Bahá’í (astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:390
+#: plugins/Calendars/src/Calendars.cpp:420
 #: plugins/Calendars/src/ui_calendarsDialog.h:910
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr "Ancien hindou solaire"
 
-#: plugins/Calendars/src/Calendars.cpp:391
+#: plugins/Calendars/src/Calendars.cpp:421
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
 msgstr "Ancien hindou lunisolaire"
 
-#: plugins/Calendars/src/Calendars.cpp:392
+#: plugins/Calendars/src/Calendars.cpp:422
 #: plugins/Calendars/src/ui_calendarsDialog.h:913
 msgctxt "calendar"
 msgid "New Hindu Solar"
 msgstr "Nouveau solaire hindou"
 
-#: plugins/Calendars/src/Calendars.cpp:393
+#: plugins/Calendars/src/Calendars.cpp:423
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
 msgstr "Nouveau hindou lunisolaire"
 
-#: plugins/Calendars/src/Calendars.cpp:394
+#: plugins/Calendars/src/Calendars.cpp:424
 msgctxt "calendar"
 msgid "New Hindu Panchang"
 msgstr "Nouveau hindou Panchang"
 
-#: plugins/Calendars/src/Calendars.cpp:396
+#: plugins/Calendars/src/Calendars.cpp:426
 #: plugins/Calendars/src/ui_calendarsDialog.h:920
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
 msgstr "Astro solaire hindou"
 
-#: plugins/Calendars/src/Calendars.cpp:397
+#: plugins/Calendars/src/Calendars.cpp:427
 #: plugins/Calendars/src/ui_calendarsDialog.h:927
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
 msgstr "Astro lunisolaire hindou"
 
-#: plugins/Calendars/src/Calendars.cpp:398
+#: plugins/Calendars/src/Calendars.cpp:428
 #: plugins/Calendars/src/ui_calendarsDialog.h:929
 msgctxt "calendar"
 msgid "Tibetan"
 msgstr "Tibétain"
 
-#: plugins/Calendars/src/Calendars.cpp:400
+#: plugins/Calendars/src/Calendars.cpp:430
 #: plugins/Calendars/src/ui_calendarsDialog.h:934
 #: plugins/Calendars/src/ui_calendarsDialog.h:957
 msgctxt "calendar"
 msgid "Chinese"
 msgstr "Chinois"
 
-#: plugins/Calendars/src/Calendars.cpp:401
+#: plugins/Calendars/src/Calendars.cpp:431
 msgctxt "calendar"
 msgid "Chinese Solar Terms"
 msgstr "Termes solaires chinois"
 
-#: plugins/Calendars/src/Calendars.cpp:404
+#: plugins/Calendars/src/Calendars.cpp:434
 #: plugins/Calendars/src/ui_calendarsDialog.h:911
 msgctxt "calendar"
 msgid "Japanese"
 msgstr "Japonais"
 
-#: plugins/Calendars/src/Calendars.cpp:405
+#: plugins/Calendars/src/Calendars.cpp:435
 msgctxt "calendar"
 msgid "Japanese Solar Terms"
 msgstr "Termes solaires japonais"
 
-#: plugins/Calendars/src/Calendars.cpp:408
+#: plugins/Calendars/src/Calendars.cpp:438
 #: plugins/Calendars/src/ui_calendarsDialog.h:938
 msgctxt "calendar"
 msgid "Korean"
 msgstr "Coréen"
 
-#: plugins/Calendars/src/Calendars.cpp:409
+#: plugins/Calendars/src/Calendars.cpp:439
 msgctxt "calendar"
 msgid "Korean Solar Terms"
 msgstr "Termes solaires coréens"
 
-#: plugins/Calendars/src/Calendars.cpp:412
+#: plugins/Calendars/src/Calendars.cpp:442
 #: plugins/Calendars/src/ui_calendarsDialog.h:940
 msgctxt "calendar"
 msgid "Vietnamese"
 msgstr "Vietnamien"
 
-#: plugins/Calendars/src/Calendars.cpp:413
+#: plugins/Calendars/src/Calendars.cpp:443
 msgctxt "calendar"
 msgid "Vietnamese Solar Terms"
 msgstr "Termes solaires vietnamiens"
 
-#: plugins/Calendars/src/Calendars.cpp:415
+#: plugins/Calendars/src/Calendars.cpp:445
 #: plugins/Calendars/src/ui_calendarsDialog.h:918
 msgctxt "calendar"
 msgid "Balinese Pawukon"
 msgstr "Balinais Pawukon"
 
-#: plugins/Calendars/src/Calendars.cpp:416
+#: plugins/Calendars/src/Calendars.cpp:446
 #: plugins/Calendars/src/ui_calendarsDialog.h:925
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "Maya compte long"
 
-#: plugins/Calendars/src/Calendars.cpp:417
+#: plugins/Calendars/src/Calendars.cpp:447
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "Maya Haab"
 
-#: plugins/Calendars/src/Calendars.cpp:418
+#: plugins/Calendars/src/Calendars.cpp:448
 #: plugins/Calendars/src/ui_calendarsDialog.h:915
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "Maya Tzolk'in"
 
-#: plugins/Calendars/src/Calendars.cpp:419
+#: plugins/Calendars/src/Calendars.cpp:449
 #: plugins/Calendars/src/ui_calendarsDialog.h:936
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "Aztèque Xihuitl"
 
-#: plugins/Calendars/src/Calendars.cpp:420
+#: plugins/Calendars/src/Calendars.cpp:450
 #: plugins/Calendars/src/ui_calendarsDialog.h:924
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
