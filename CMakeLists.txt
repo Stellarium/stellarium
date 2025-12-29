@@ -43,7 +43,7 @@ ENDIF()
 # Note: Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 25)
 # Number of the release (0 is used before first release)
-SET(STELLARIUM_MINOR 3)
+SET(STELLARIUM_MINOR 4)
 IF(STELLARIUM_RELEASE_BUILD)
     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
     SET(CMAKE_BUILD_TYPE Release)
