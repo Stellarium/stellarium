@@ -629,6 +629,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | ENABLE_QT6                         | bool   | ON      | Enable building Qt6-based Stellarium
 | ENABLE_NLS                         | bool   | ON      | Enable interface translation
 | ENABLE_SHOWMYSKY                   | bool   | ON      | Enable support for ShowMySky module that implements a realistic atmosphere model
+| ENABLE_SPEECH                      | bool   | ON      | Enable speech output support. Requires Qt6.4+ and ENABLE_MEDIA
 | ENABLE_GPS                         | bool   | ON      | Enable GPS support
 | ENABLE_LIBGPS                      | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
 | ENABLE_MEDIA                       | bool   | ON      | Enable sound and video support
