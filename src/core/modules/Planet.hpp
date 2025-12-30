@@ -681,10 +681,6 @@ protected:
 	virtual QString getNarrationName(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual QString getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual QString getNarrationAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const;
-	//! Any flag=Extra information to be displayed after the magnitude strings
-	virtual QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const;
-	//! Any flag=Extra information to be displayed after the magnitude strings
-	virtual QString getNarrationExtraMag(const StelCore *core, const InfoStringGroup& flags) const;
 	//! Any flag=Size information to be displayed
 	virtual QString getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const;
 	//! Any flag=Size information to be narrated

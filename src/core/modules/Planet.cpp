@@ -691,7 +691,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
 	}
 
-	oss << getInfoStringExtraMag(core, flags);
+	if (flags&Extra && b_v<99.f)
+		oss << getB_VInfoString(b_v);
+
 	oss << getCommonInfoString(core, flags);
 
 #ifndef NDEBUG
@@ -965,24 +967,6 @@ QString Planet::getNarrationSize(const StelCore *core, const InfoStringGroup& fl
 		oss << getExtraInfoStrings(Size).join("") << ". ";
 	}
 	return str;
-}
-
-QString Planet::getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const
-{
-	Q_UNUSED(core)
-	if (flags&Extra && b_v<99.f)
-		return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
-	else
-		return QString();
-}
-
-QString Planet::getNarrationExtraMag(const StelCore *core, const InfoStringGroup& flags) const
-{
-	Q_UNUSED(core)
-	if (flags&Extra && b_v<99.f)
-		return QString(qc_("Its B minus V Color Index is %1", "planet narration")).arg(StelUtils::narrateDecimal(b_v, 1)) + ". ";
-	else
-		return QString();
 }
 
 QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const
@@ -2241,6 +2225,14 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 			oss <<  QString(qc_("Its %1 Position is %2", "object narration")).arg(lunarSystemLabel, cMgr->getLunarSystemCoordinate(pos, true)) + ". ";
 		}
 	}
+
+	if (flags&AbsoluteMagnitude)
+	{
+		oss << getNarrationAbsoluteMagnitude(core, flags);
+	}
+
+	if (flags&Extra && b_v<99.f)
+		oss << getB_VNarration(b_v);
 
 	if (flags&Extra) // Discovery
 	{
