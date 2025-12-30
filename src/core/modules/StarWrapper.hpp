@@ -191,6 +191,92 @@ protected:
 		}
 		return QString();
 	}
+	QString getGcvsDataInfoString(const StelCore *core, StarId star_id, QString spec=QString()) const
+	{
+		QString str;
+		QTextStream oss(&str);
+
+		const double vEpoch = StarMgr::getGcvsEpoch(star_id);
+		const double vPeriod = StarMgr::getGcvsPeriod(star_id);
+		const int vMm = StarMgr::getGcvsMM(star_id);
+		const QString sType = spec.isEmpty() ? StarMgr::getGcvsSpectralType(star_id) : spec;
+
+		const bool ebsFlag = getObjectType().contains("eclipsing binary system");
+
+		if (!sType.isEmpty())
+			oss << QString("%1: %2").arg(q_("Spectral Type"), sType) << "<br />";
+
+		if (vPeriod>0.)
+			oss << QString("%1: %2 %3").arg(q_("Period")).arg(vPeriod).arg(qc_("days", "duration")) << "<br />";
+
+		if (vEpoch>0. && vPeriod>0.)
+		{
+			// Calculate next minimum or maximum light
+			double vsEpoch = 2400000+vEpoch;
+			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
+			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
+			QString dateStr = q_("Next maximum light");
+			if (ebsFlag)
+				dateStr = q_("Next minimum light");
+
+			oss << QString("%1: %2 UTC").arg(dateStr, nextDate) << "<br />";
+		}
+
+		if (vMm>0)
+		{
+			QString mmStr = qc_("Rising time", "light curve");
+			if (ebsFlag)
+				mmStr = q_("Duration of eclipse");
+
+			float daysFraction = vPeriod * vMm / 100.f;
+			auto dms = StelUtils::daysFloatToDHMS(daysFraction);
+			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
+		}
+		return str;
+	}
+	QString getGcvsDataNarration(const StelCore *core, StarId star_id, QString spec=QString()) const
+	{
+		QString str;
+		QTextStream oss(&str);
+
+		const double vEpoch = StarMgr::getGcvsEpoch(star_id);
+		const double vPeriod = StarMgr::getGcvsPeriod(star_id);
+		const int vMm = StarMgr::getGcvsMM(star_id);
+		const QString sType = StarMgr::getGcvsSpectralType(star_id);
+
+		QString stype = getObjectType();
+		const bool ebsFlag = stype.contains("eclipsing binary system");
+
+		if (!sType.isEmpty())
+			oss << QString(qc_("Its Spectral Type is %1.", "object narration")).arg(sType);
+
+		if (vPeriod>0.)
+			oss << QString(qc_("It has a period of %1 days", "object narration")).arg(StelUtils::narrateDecimal(vPeriod, 2));
+
+		if (vEpoch>0. && vPeriod>0.)
+		{
+			// Calculate next minimum or maximum light
+			double vsEpoch = 2400000+vEpoch;
+			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
+			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
+			const QString dateStr = ebsFlag ? qc_("Next minimum light will be at %1 UTC", "object narration") :
+							  qc_("Next maximum light will be at %1 UTC", "object narration");
+			oss << QString(dateStr).arg(nextDate) << ". ";
+		}
+
+		if (vMm>0)
+		{
+			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
+							// TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing stage of a stellar light curve
+							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
+
+			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
+			oss << QString(mmStr).arg(StelUtils::narrateDecimal(vMm, 2), dms) << ". ";
+		}
+		return str;
+	}
+
+
 	//! @return either a generalized variable star type or "star"
 	QString getObjectType() const override
 	{

@@ -226,9 +226,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
 	}
 
-	QString stype = getObjectType();
 	QString objectTypeI18nStr = getObjectTypeI18n();
-	bool ebsFlag = stype.contains("eclipsing binary system");
 	if (flags&ObjectType)
 	{
 		QStringList stypes;
@@ -315,11 +313,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Extra)
 	{
-
-		const double vEpoch = StarMgr::getGcvsEpoch(star_id);
-		const double vPeriod = StarMgr::getGcvsPeriod(star_id);
-		const int vMm = StarMgr::getGcvsMM(star_id);
-
 		if (Plx!=0)
 		{
 			QString plx = q_("Parallax");
@@ -330,35 +323,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss  << qc_("mas", "parallax") << "<br />";
 		}
 
-		if (s->getSpInt())
-			oss << QString("%1: %2").arg(q_("Spectral Type"), StarMgr::convertToSpectralType(s->getSpInt())) << "<br />";
-
-		if (vPeriod>0.)
-			oss << QString("%1: %2 %3").arg(q_("Period")).arg(vPeriod).arg(qc_("days", "duration")) << "<br />";
-
-		if (vEpoch>0. && vPeriod>0.)
-		{
-			// Calculate next minimum or maximum light
-			double vsEpoch = 2400000+vEpoch;
-			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
-			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
-			QString dateStr = q_("Next maximum light");
-			if (ebsFlag)
-				dateStr = q_("Next minimum light");
-
-			oss << QString("%1: %2 UTC").arg(dateStr, nextDate) << "<br />";
-		}
-
-		if (vMm>0)
-		{
-			QString mmStr = qc_("Rising time", "light curve");
-			if (ebsFlag)
-				mmStr = q_("Duration of eclipse");
-
-			float daysFraction = vPeriod * vMm / 100.f;
-			auto dms = StelUtils::daysFloatToDHMS(daysFraction);
-			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
-		}
+		const QString specSW1 = (s->getSpInt() ? StarMgr::convertToSpectralType(s->getSpInt()) : QString());
+		oss << getGcvsDataInfoString(core, star_id, specSW1);
 
 		if ((wdsObs>0) || (binary_sep>0.f))  // either have a WDS observation or a separation modelled by the binary orbit
 		{
@@ -423,11 +389,6 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 	const int wdsObs = StarMgr::getWdsLastObservation(star_id);
 	const float wdsPA = StarMgr::getWdsLastPositionAngle(star_id);
 	const float wdsSep = StarMgr::getWdsLastSeparation(star_id);
-
-	const double vEpoch = StarMgr::getGcvsEpoch(star_id);
-	const double vPeriod = StarMgr::getGcvsPeriod(star_id);
-	const int vMm = StarMgr::getGcvsMM(star_id);
-
 
 	const QString commonNameI18 = StarMgr::getCommonNameI18n(star_id);
 	const QString culturalInfoName=StarMgr::getCulturalScreenLabel(star_id);
@@ -494,9 +455,8 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 			oss << q_("Additional catalog numbers: ") << extraCat.sliced(0, qMin(2, designations.length())) .join(", ") << ". ";
 	}
 
-	QString stype = getObjectType();
 	QString objectTypeI18nStr = getObjectTypeI18n();
-	const bool ebsFlag = stype.contains("eclipsing binary system");
+
 	if (flags&ObjectType)
 	{
 		QString descType=qc_("This star is described as ", "object narration");
@@ -566,13 +526,8 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 		       .arg(StelUtils::narrateDecimal(std::sqrt(pmra * pmra + pmdec * pmdec), 2), StelUtils::narrateDecimal(pa, 1), StelUtils::narrateDecimal(pmra, 2), StelUtils::narrateDecimal(pmdec, 2)) + " ";
 	}
 
-	if (flags&Velocity)
-	{
-		if (RadialVel)
-		{
-			oss << QString(qc_("Its radial velocity is %1 kilometers per second.", "object narration")).arg(StelUtils::narrateDecimal(RadialVel, 1)) + " ";
-		}
-	}
+	if (flags&Velocity && RadialVel)
+		oss << QString(qc_("Its radial velocity is %1 kilometers per second.", "object narration")).arg(StelUtils::narrateDecimal(RadialVel, 1)) + " ";
 
 	if (flags&Extra)
 	{
@@ -587,32 +542,8 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 			oss   << " ";
 		}
 
-		if (s->getSpInt())
-			oss << QString(qc_("Its Spectral Type is %1.", "object narration")).arg(StarMgr::convertToSpectralType(s->getSpInt())) + " ";
-
-		if (vPeriod>0.)
-			oss << QString(qc_("It has a period of %1 days", "object narration")).arg(StelUtils::narrateDecimal(vPeriod, 2));
-
-		if (vEpoch>0. && vPeriod>0.)
-		{
-			// Calculate next minimum or maximum light
-			double vsEpoch = 2400000+vEpoch;
-			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
-			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
-			const QString dateStr = ebsFlag ? qc_("Next minimum light will be at %1 UTC", "object narration") :
-							  qc_("Next maximum light will be at %1 UTC", "object narration");
-			oss << QString(dateStr).arg(nextDate) << ". ";
-		}
-
-		if (vMm>0)
-		{
-			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
-							// TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing stage of a stellar light curve
-							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
-
-			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
-			oss << QString(mmStr).arg(StelUtils::narrateDecimal(vMm, 2), dms);
-		}
+		const QString specSW1 = (s->getSpInt() ? StarMgr::convertToSpectralType(s->getSpInt()) : QString());
+		oss << getGcvsDataNarration(core, star_id, specSW1);
 
 		if ((wdsObs>0) || (binary_sep>0.f))  // either have a WDS observation or a separation modelled by the binary orbit
 		{
@@ -787,45 +718,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	if (flags&Extra)
-	{
-		const double vEpoch = StarMgr::getGcvsEpoch(star_id);
-		const double vPeriod = StarMgr::getGcvsPeriod(star_id);
-		const int vMm = StarMgr::getGcvsMM(star_id);
-		const QString sType = StarMgr::getGcvsSpectralType(star_id);
-
-		QString stype = getObjectType();
-		bool ebsFlag = stype.contains("eclipsing binary system");
-
-		if (!sType.isEmpty())
-			oss << QString("%1: %2").arg(q_("Spectral Type"), sType) << "<br />";
-
-		if (vPeriod>0.)
-			oss << QString("%1: %2 %3").arg(q_("Period")).arg(vPeriod).arg(qc_("days", "duration")) << "<br />";
-
-		if (vEpoch>0. && vPeriod>0.)
-		{
-			// Calculate next minimum or maximum light
-			double vsEpoch = 2400000+vEpoch;
-			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
-			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
-			QString dateStr = q_("Next maximum light");
-			if (ebsFlag)
-				dateStr = q_("Next minimum light");
-
-			oss << QString("%1: %2 UTC").arg(dateStr, nextDate) << "<br />";
-		}
-
-		if (vMm>0)
-		{
-			QString mmStr = qc_("Rising time", "light curve");
-			if (ebsFlag)
-				mmStr = q_("Duration of eclipse");
-
-			float daysFraction = vPeriod * vMm / 100.f;
-			auto dms = StelUtils::daysFloatToDHMS(daysFraction);
-			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
-		}
-	}
+		oss << getGcvsDataInfoString(core, star_id);
 
 	oss << getSolarLunarInfoString(core, flags);
 
@@ -945,41 +838,7 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 				       .arg(StelUtils::narrateDecimal(Plx, 1));
 			oss  << ". ";
 		}
-
-		const double vEpoch = StarMgr::getGcvsEpoch(star_id);
-		const double vPeriod = StarMgr::getGcvsPeriod(star_id);
-		const int vMm = StarMgr::getGcvsMM(star_id);
-		const QString sType = StarMgr::getGcvsSpectralType(star_id);
-
-		QString stype = getObjectType();
-		const bool ebsFlag = stype.contains("eclipsing binary system");
-
-		if (!sType.isEmpty())
-			oss << QString(qc_("Its Spectral Type is %1.", "object narration")).arg(sType);
-
-		if (vPeriod>0.)
-			oss << QString(qc_("It has a period of %1 days", "object narration")).arg(StelUtils::narrateDecimal(vPeriod, 2));
-
-		if (vEpoch>0. && vPeriod>0.)
-		{
-			// Calculate next minimum or maximum light
-			double vsEpoch = 2400000+vEpoch;
-			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
-			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
-			const QString dateStr = ebsFlag ? qc_("Next minimum light will be at %1 UTC", "object narration") :
-							  qc_("Next maximum light will be at %1 UTC", "object narration");
-			oss << QString(dateStr).arg(nextDate) << ". ";
-		}
-
-		if (vMm>0)
-		{
-			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
-							// TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing stage of a stellar light curve
-							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
-
-			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
-			oss << QString(mmStr).arg(StelUtils::narrateDecimal(vMm, 2), dms);
-		}
+		oss << getGcvsDataNarration(core, star_id);
 	}
 
 	oss << getSolarLunarNarration(core, flags);
@@ -1032,45 +891,7 @@ QString StarWrapper3::getInfoString(const StelCore *core, const InfoStringGroup&
 	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra)  // Spectral Type, period
-	{
-		const double vEpoch = StarMgr::getGcvsEpoch(star_id);
-		const double vPeriod = StarMgr::getGcvsPeriod(star_id);
-		const int vMm = StarMgr::getGcvsMM(star_id);
-		const QString sType = StarMgr::getGcvsSpectralType(star_id);
-
-		QString stype = getObjectType();
-		bool ebsFlag = stype.contains("eclipsing binary system");
-
-		if (!sType.isEmpty())
-			oss << QString("%1: %2").arg(q_("Spectral Type"), sType) << "<br />";
-
-		if (vPeriod>0.)
-			oss << QString("%1: %2 %3").arg(q_("Period")).arg(vPeriod).arg(qc_("days", "duration")) << "<br />";
-
-		if (vEpoch>0. && vPeriod>0.)
-		{
-			// Calculate next minimum or maximum light
-			double vsEpoch = 2400000+vEpoch;
-			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
-			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
-			QString dateStr = q_("Next maximum light");
-			if (ebsFlag)
-				dateStr = q_("Next minimum light");
-
-			oss << QString("%1: %2 UTC").arg(dateStr, nextDate) << "<br />";
-		}
-
-		if (vMm>0)
-		{
-			QString mmStr = qc_("Rising time", "light curve");
-			if (ebsFlag)
-				mmStr = q_("Duration of eclipse");
-
-			float daysFraction = vPeriod * vMm / 100.f;
-			auto dms = StelUtils::daysFloatToDHMS(daysFraction);
-			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
-		}
-	}
+		oss << getGcvsDataInfoString(core, star_id);
 
 	oss << getSolarLunarInfoString(core, flags);
 
@@ -1123,42 +944,7 @@ QString StarWrapper3::getNarration(const StelCore *core, const InfoStringGroup& 
 	oss << getCommonNarration(core, flags);
 
 	if (flags&Extra) // Spectral Type, period
-	{
-		const double vEpoch = StarMgr::getGcvsEpoch(star_id);
-		const double vPeriod = StarMgr::getGcvsPeriod(star_id);
-		const int vMm = StarMgr::getGcvsMM(star_id);
-		const QString sType = StarMgr::getGcvsSpectralType(star_id);
-
-		QString stype = getObjectType();
-		const bool ebsFlag = stype.contains("eclipsing binary system");
-
-		if (!sType.isEmpty())
-			oss << QString(qc_("Its Spectral Type is %1.", "object narration")).arg(sType);
-
-		if (vPeriod>0.)
-			oss << QString(qc_("It has a period of %1 days", "object narration")).arg(StelUtils::narrateDecimal(vPeriod, 2));
-
-		if (vEpoch>0. && vPeriod>0.)
-		{
-			// Calculate next minimum or maximum light
-			double vsEpoch = 2400000+vEpoch;
-			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
-			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
-			const QString dateStr = ebsFlag ? qc_("Next minimum light will be at %1 UTC", "object narration") :
-							  qc_("Next maximum light will be at %1 UTC", "object narration");
-			oss << QString(dateStr).arg(nextDate) << ". ";
-		}
-
-		if (vMm>0)
-		{
-			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
-							// TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing stage of a stellar light curve
-							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
-
-			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
-			oss << QString(mmStr).arg(StelUtils::narrateDecimal(vMm, 2), dms);
-		}
-	}
+		oss << getGcvsDataNarration(core, star_id);
 
 	oss << getSolarLunarNarration(core, flags);
 
