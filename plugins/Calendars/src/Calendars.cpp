@@ -170,7 +170,7 @@ Calendars::Calendars():
 Calendars::~Calendars()
 {
 	delete configDialog; configDialog=nullptr;
-	QMapIterator<QString, Calendar*> i(calendars);
+	QMutableMapIterator<QString, Calendar*> i(calendars);
 	while (i.hasNext())
 	{
 		i.next();
