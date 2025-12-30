@@ -377,6 +377,16 @@ QString StelObject::getMagnitudeNarration(const StelCore *core, const InfoString
 		return QString();
 }
 
+QString StelObject::getB_VInfoString(float b_v)
+{
+	return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
+}
+QString StelObject::getB_VNarration(float b_v)
+{
+	return QString(qc_("Its B minus V Color Index is %1", "object narration")).arg(StelUtils::narrateDecimal(b_v, 2));
+}
+
+
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
 // computing positional info sometimes also compute others like proper motion too, so store them in the object
 QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const

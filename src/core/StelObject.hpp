@@ -568,6 +568,10 @@ protected:
 	//! Narration version of getMagnitudeInfoString().
 	virtual QString getMagnitudeNarration(const StelCore *core, const InfoStringGroup& flags, const int decimals=1, const float& magOffset=0.f) const;
 
+	//! Format B-V color index information
+	static QString getB_VInfoString(float b_v);
+	static QString getB_VNarration(float b_v);
+
 	//! Add a section to the InfoString with just horizontal data for the Sun and Moon, when observed from Earth.
 	//! The application of this is to have quick info while observing other objects.
 	QString getSolarLunarInfoString(const StelCore *core, const InfoStringGroup& flags) const;
