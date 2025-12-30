@@ -75,6 +75,12 @@ protected:
 	StarWrapper(const SpecialZoneArray<Star> *array,
 		const SpecialZoneData<Star> *zone,
 		const Star *star) : a(array), z(zone), s(star) {}
+	virtual StarId getStarId() const {return s->getGaia();}
+	virtual QString getID(void) const override
+	{
+		return QString("Gaia DR3 %1").arg(s->getGaia());
+	}
+
 	Vec3d getJ2000EquatorialPos(const StelCore* core) const override
 	{
 		Vec3d v;
@@ -112,9 +118,174 @@ protected:
 		Q_UNUSED(core)
 		return s->getMag() / 1000.f;
 	}
-	float getBV(void) const  override {return s->getBV();}
+	float getBV(void) const override final {return s->getBV();}
 	//QString getEnglishName(void) const override {return QString();}
-	QString getNameI18n(void) const override {return s->getNameI18n();}
+	QString getNameI18n(void) const override final {return s->getNameI18n();}
+
+	QString getVariabilityRangeInfoString(const StelCore *core, const InfoStringGroup& flags) const
+	{
+		StarId star_id=getStarId();
+		if (flags&Extra) // variable range
+		{
+			const QString varType = StarMgr::getGcvsVariabilityType(star_id);
+
+			if (!varType.isEmpty())
+			{
+				const float maxVMag = StarMgr::getGcvsMaxMagnitude(star_id);
+				const float magFlag = StarMgr::getGcvsMagnitudeFlag(star_id);
+				const float minVMag = StarMgr::getGcvsMinMagnitude(star_id);
+				const float min2VMag = StarMgr::getGcvsMinMagnitude(star_id, false);
+				const QString photoVSys = StarMgr::getGcvsPhotometricSystem(star_id);
+				float minimumM1 = minVMag;
+				float minimumM2 = min2VMag;
+				if (magFlag==1.f) // Amplitude
+				{
+					minimumM1 += maxVMag;
+					minimumM2 += maxVMag;
+				}
+
+				if (maxVMag!=99.f) // seems it is not eruptive variable star
+				{
+					QString minStr = QString::number(minimumM1, 'f', 2);
+					if (min2VMag<99.f)
+						minStr = QString("%1/%2").arg(QString::number(minimumM1, 'f', 2), QString::number(minimumM2, 'f', 2));
+
+					return QString("%1: <b>%2</b>%3<b>%4</b> (%5: %6)").arg(q_("Magnitude range"), QString::number(maxVMag, 'f', 2), QChar(0x00F7), minStr, q_("Photometric system"), photoVSys) + "<br />";
+				}
+			}
+		}
+		return QString();
+	}
+	QString getVariabilityRangeNarration(const StelCore *core, const InfoStringGroup& flags) const
+	{
+		StarId star_id=getStarId();
+		if (flags&Extra) // variable range
+		{
+			const QString varType = StarMgr::getGcvsVariabilityType(star_id);
+			if (!varType.isEmpty())
+			{
+				const float maxVMag = StarMgr::getGcvsMaxMagnitude(star_id);
+				const float magFlag = StarMgr::getGcvsMagnitudeFlag(star_id);
+				const float minVMag = StarMgr::getGcvsMinMagnitude(star_id);
+				const float min2VMag = StarMgr::getGcvsMinMagnitude(star_id, false);
+				const QString photoVSys = StarMgr::getGcvsPhotometricSystem(star_id);
+
+				float minimumM1 = minVMag;
+				float minimumM2 = min2VMag;
+				if (magFlag==1.f) // Amplitude
+				{
+					minimumM1 += maxVMag;
+					minimumM2 += maxVMag;
+				}
+
+				if (maxVMag!=99.f) // seems it is not eruptive variable star
+				{
+					QString minStr = StelUtils::narrateDecimal(minimumM1,  2);
+					if (min2VMag<99.f)
+						minStr = QString(qc_("either %1 or %2", "object narration, alternatives")).arg(StelUtils::narrateDecimal(minimumM1, 2), StelUtils::narrateDecimal(minimumM2, 2));
+
+					return QString(qc_("Its magnitude range goes from %1 to %2 in the Photometric system %3.", "object narration"))
+					       .arg(StelUtils::narrateDecimal(maxVMag, 2), minStr, photoVSys) + " ";
+				}
+			}
+		}
+		return QString();
+	}
+	//! @return either a generalized variable star type or "star"
+	QString getObjectType() const override
+	{
+		StarId star_id = getStarId();
+
+		const QString varType = StarMgr::getGcvsVariabilityType(star_id);
+		if(!varType.isEmpty())
+		{
+			QString varstartype = "";
+			// see also http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+			if (QString("BE FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
+				varstartype = N_("eruptive variable star");
+			else if (QString("ACYG BCEP BCEPS BLBOO CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC LPB M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB ZZO").contains(varType))
+				varstartype = N_("pulsating variable star");
+			else if (QString("ACV, ACVO, BY, ELL, FKCOM, PSR, SXARI").contains(varType))
+				varstartype = N_("rotating variable star");
+			else if (QString("N NA NB NC NL NR SN SNI SNII UG UGSS UGSU UGZ ZAND").contains(varType))
+				varstartype = N_("cataclysmic variable star");
+			else if (QString("E EA EB EP EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR").contains(varType))
+				varstartype = N_("eclipsing binary system");
+			else
+			// XXX intense variable X-ray sources "AM, X, XB, XF, XI, XJ, XND, XNG, XP, XPR, XPRM, XM)"
+			// XXX other symbols "BLLAC, CST, GAL, L:, QSO, S,"
+				varstartype = N_("variable star");
+
+			return varstartype;
+		}
+		else
+			return N_("star");
+	}
+	QString getObjectTypeI18n() const override
+	{
+		QString stypefinal, stype = getObjectType();
+		StarId star_id =  getStarId();
+
+		const QString varType = StarMgr::getGcvsVariabilityType(star_id);
+		if (!varType.isEmpty())
+		{
+			if (stype.contains(","))
+			{
+				const QStringList stypes = stype.split(",");
+				QStringList stypesI18n;
+				for (const auto &st: stypes) { stypesI18n << q_(st.trimmed()); }
+				stypefinal = stypesI18n.join(", ");
+			}
+			else
+				stypefinal = q_(stype);
+		}
+		else
+			stypefinal = q_(stype);
+
+		return stypefinal;
+	}
+	QVariantMap getInfoMap(const StelCore *core) const override
+	{
+		QVariantMap map = StelObject::getInfoMap(core);
+		StarId star_id=getStarId();
+		const int wdsObs = StarMgr::getWdsLastObservation(star_id);
+		const float wdsPA = StarMgr::getWdsLastPositionAngle(star_id);
+		const float wdsSep = StarMgr::getWdsLastSeparation(star_id);
+		const double vPeriod = StarMgr::getGcvsPeriod(star_id);
+
+		const QString objectType=StarWrapper::getObjectType();
+		QMap<QString, QString>varmap={
+			{N_("eruptive variable star")   , "eruptive"},
+			{N_("pulsating variable star")  , "pulsating"},
+			{N_("rotating variable star")   , "rotating"},
+			{N_("cataclysmic variable star"), "cataclysmic"},
+			{N_("eclipsing binary system")  , "eclipsing-binary"},
+			{N_("variable star")            , "variable"},
+			{N_("star")                     , "no"}};
+		map.insert("variable-star", varmap.value(objectType, "no"));
+
+		map.insert("bV", getBV());
+
+		if (s->getPlx())
+		{
+			map.insert("parallax", 0.001*s->getPlx());
+			map.insert("absolute-mag", getVMagnitude(core)+5.f*(std::log10(0.001*s->getPlx())));
+			map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.001/3600)*(M_PI/180))));
+		}
+
+		if (vPeriod>0)
+			map.insert("period", vPeriod);
+
+		if (wdsObs>0)
+		{
+			map.insert("wds-year", wdsObs);
+			map.insert("wds-position-angle", wdsPA);
+			map.insert("wds-separation", wdsSep);
+		}
+
+		return map;
+	}
+
 protected:
 	const SpecialZoneArray<Star> *const a;
 	const SpecialZoneData<Star> *const z;
@@ -128,6 +299,11 @@ public:
 	StarWrapper1(const SpecialZoneArray<Star1> *array,
 		const SpecialZoneData<Star1> *zone,
 		const Star1 *star) : StarWrapper<Star1>(array,zone,star) {}
+	StarId getStarId() const override {return s->getHip() ?  s->getHip() : s->getGaia();}
+	QString getEnglishName(void) const override;
+	QString getID(void) const override;
+	QString getObjectType() const override;
+	//QString getObjectTypeI18n() const override;
 
 	//! StarWrapper1 supports the following InfoStringGroup flags: <ul>
 	//! <li> Name
@@ -160,10 +336,6 @@ public:
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
 #endif
-	QString getEnglishName(void) const override;
-	QString getID(void) const override;
-	QString getObjectType() const override;
-	QString getObjectTypeI18n() const override;
 };
 
 class StarWrapper2 : public StarWrapper<Star2>
@@ -172,13 +344,10 @@ public:
 	StarWrapper2(const SpecialZoneArray<Star2> *array,
 			   const SpecialZoneData<Star2> *zone,
 			   const Star2 *star) : StarWrapper<Star2>(array,zone,star) {}
-	QString getID(void) const override;
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
 #endif
-	QString getObjectType() const override;
-	QString getObjectTypeI18n() const override;
 };
 
 class StarWrapper3 : public StarWrapper<Star3>
@@ -187,14 +356,10 @@ public:
 	StarWrapper3(const SpecialZoneArray<Star3> *array,
 			   const SpecialZoneData<Star3> *zone,
 			   const Star3 *star) : StarWrapper<Star3>(array,zone,star) {}
-	QString getID(void) const override;
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
 #endif
-	QString getObjectType() const override;
-	QString getObjectTypeI18n() const override;
 };
-
 
 #endif // STARWRAPPER_HPP
