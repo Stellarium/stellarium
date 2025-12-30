@@ -36,15 +36,25 @@ class QProgressBar;
 
 class StelToolTip : public QGraphicsProxyWidget
 {
+	Q_OBJECT
 public:
 	StelToolTip(QGraphicsItem* parent);
 	void showToolTip(const QPoint& scenePos, const QString& text);
+
+signals:
+	void timeout();
+
+private slots:
+	void hideToolTip();
+
 protected:
-	void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+
 private:
 	void setFontSizeFromApp(int size);
 
 	QLabel* label = nullptr;
+	QTimer* toolTipTimeoutTimer = nullptr;
 };
 
 // Progress bars in the lower right corner

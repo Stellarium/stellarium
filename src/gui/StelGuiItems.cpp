@@ -74,6 +74,10 @@ StelToolTip::StelToolTip(QGraphicsItem* parent)
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged,
 	        this, &StelToolTip::setFontSizeFromApp);
 	setFontSizeFromApp(StelApp::getInstance().getGuiFontSize());
+
+	toolTipTimeoutTimer = new QTimer(this);
+	toolTipTimeoutTimer->setSingleShot(true);
+	connect(toolTipTimeoutTimer, SIGNAL(timeout()), this, SLOT(hideToolTip()));
 }
 
 void StelToolTip::setFontSizeFromApp(const int size)
@@ -106,11 +110,24 @@ void StelToolTip::showToolTip(const QPoint& scenePos, const QString& text)
 	int y = Y+h+S < H ? Y+s+S : Y-h < 0 ? 0 : Y-h;
 	const QPoint pos(x, y);
 	setPos(pos);
+	toolTipTimeoutTimer->start(10000);
 }
 
-void StelToolTip::mouseMoveEvent(QGraphicsSceneMouseEvent*)
+void StelToolTip::hideToolTip()
 {
 	showToolTip({}, "");
+}
+
+void StelToolTip::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+	painter->setBrush(QBrush(QColor::fromRgbF(0, 0, 0, 0.3)));
+	painter->setPen(Qt::NoPen);
+	QRect shadow = label->rect();
+	shadow.adjust(4, 5, 2, 1);
+	painter->drawRect(shadow);
+	shadow.adjust(1, -1, -1, 1);
+	painter->drawRect(shadow);
+	QGraphicsProxyWidget::paint(painter, option, widget);
 }
 
 void StelButton::brightenImage(QImage &img, float factor)
