@@ -266,7 +266,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Extra) // B-V, variable range
 	{
-		oss << getB_VInfoString(getBV()) << "<br />";
+		oss << getB_VInfoString(getBV());
 		oss << getVariabilityRangeInfoString(core, flags);
 	}
 
@@ -604,7 +604,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Extra)
 	{
-		oss << getB_VInfoString(getBV()) << "<br />";
+		oss << getB_VInfoString(getBV());
 		oss << getVariabilityRangeInfoString(core, flags);
 	}
 	
@@ -750,7 +750,7 @@ QString StarWrapper3::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Extra) // B-V, variable range
 	{
-		oss << getB_VInfoString(getBV()) << "<br />";
+		oss << getB_VInfoString(getBV());
 		oss << getVariabilityRangeInfoString(core, flags);
 	}
 
