@@ -120,14 +120,19 @@ void StelToolTip::hideToolTip()
 
 void StelToolTip::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	painter->setBrush(QBrush(QColor::fromRgbF(0, 0, 0, 0.3)));
+	QGraphicsProxyWidget::paint(painter, option, widget);
+	QColor shadowcolor = Qt::black;
+	shadowcolor.setAlphaF(0.3);
+	painter->setBrush(QBrush(shadowcolor));
 	painter->setPen(Qt::NoPen);
 	QRect shadow = label->rect();
-	shadow.adjust(4, 5, 2, 1);
+	shadow.adjust(4, 4, 2, 2);
+	QRegion clip = shadow;
+	painter->setClipRegion(clip.subtracted(label->rect()));
+	shadow.adjust(0, 1, 0, -1);
 	painter->drawRect(shadow);
 	shadow.adjust(1, -1, -1, 1);
 	painter->drawRect(shadow);
-	QGraphicsProxyWidget::paint(painter, option, widget);
 }
 
 void StelButton::brightenImage(QImage &img, float factor)
