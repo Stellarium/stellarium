@@ -272,56 +272,19 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getCommonInfoString(core, flags);
 
-	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
-	if (flags&Distance)
-	{
-		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
-		if ((Plx!=0) && (PlxErr!=0) && (Plx/PlxErr>5))
-		{
-			//TRANSLATORS: Unit of measure for distance - Light Years
-			QString ly = qc_("ly", "distance");
-			double distance = PARSEC_LY * 1000. / Plx;
-			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
-		}
-		oss << getExtraInfoStrings(Distance).join("");
-	}
+	oss << getDistanceInfoString(core, flags, Plx, PlxErr);
 
-	// kinda impossible for both pm to be exactly 0, so they must just be missing
-	if ((flags&ProperMotion) && (pmra || pmdec))
-	{
-		const float pa = StelUtils::fmodpos(::atan2f(pmra, pmdec)*M_180_PIf, 360.f);
-		oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
-							QString::number(std::sqrt(pmra * pmra + pmdec * pmdec), 'f', 2),
-							qc_("mas/yr", "milliarc second per year"),
-							qc_("towards", "into the direction of"),
-							QString::number(pa, 'f', 1)) << "<br />";
-		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
-							QString::number(pmra, 'f', 2),
-							QString::number(pmdec, 'f', 2),
-							qc_("mas/yr", "milliarc second per year")) << "<br />";
-	}
+	oss << getProperMotionInfoString(core, flags, pmra, pmdec);
 
-	if (flags&Velocity)
+	if ((flags&Velocity) && RadialVel)
 	{
-		if (RadialVel)
-		{
-			// TRANSLATORS: Unit of measure for speed - kilometers per second
-			QString kms = qc_("km/s", "speed");
-			oss << QString("%1: %2 %3").arg(q_("Radial velocity"), QString::number(RadialVel, 'f', 1), kms) << "<br />";
-		}
+		// TRANSLATORS: Unit of measure for speed - kilometers per second
+		QString kms = qc_("km/s", "speed");
+		oss << QString("%1: %2 %3").arg(q_("Radial velocity"), QString::number(RadialVel, 'f', 1), kms) << "<br />";
 	}
 
 	if (flags&Extra)
 	{
-		if (Plx!=0)
-		{
-			QString plx = q_("Parallax");
-			if (PlxErr>0.f)
-				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
-			else
-				oss << QString("%1: %2 ").arg(plx, QString::number(Plx, 'f', 3));
-			oss  << qc_("mas", "parallax") << "<br />";
-		}
 
 		const QString specSW1 = (s->getSpInt() ? StarMgr::convertToSpectralType(s->getSpInt()) : QString());
 		oss << getGcvsDataInfoString(core, star_id, specSW1);
@@ -504,44 +467,15 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 	//InfoStringGroup alreadyProcessed=StelObject::IAUConstellation | StelObject::CulturalConstellation;
 	oss << getCommonNarration(core, flags); // & (~alreadyProcessed));
 
-	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
-	if (flags&Distance)
-	{
-		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
-		if ((Plx!=0) && (PlxErr!=0) && (Plx/PlxErr>5))
-		{
-			const double distance = PARSEC_LY * 1000. / Plx;
-			// TRANSLATORS: Its distance is x plus/minus y light years
-			oss << QString(qc_("Its distance is %1 ± %2 light years.", "object narration")).
-			       arg(StelUtils::narrateDecimal(distance, 2), StelUtils::narrateDecimal(distance * PlxErr / Plx, 2)) << " ";
-		}
-		//oss << getExtraInfoStrings(Distance).join("");
-	}
+	oss << getDistanceNarration(core, flags, Plx, PlxErr);
 
-	// kinda impossible for both pm to be exactly 0, so they must just be missing
-	if ((flags&ProperMotion) && (pmra || pmdec))
-	{
-		const float pa = StelUtils::fmodpos(static_cast<float>(std::atan2(pmra, pmdec))*M_180_PIf, 360.f);
-		oss << QString(qc_("Its proper motion is %1 milli-arcseconds per year towards %2 degrees, or, by axes, %3 milli-arcseconds per year in right ascension and %4 in declination.", "object narration"))
-		       .arg(StelUtils::narrateDecimal(std::sqrt(pmra * pmra + pmdec * pmdec), 2), StelUtils::narrateDecimal(pa, 1), StelUtils::narrateDecimal(pmra, 2), StelUtils::narrateDecimal(pmdec, 2)) + " ";
-	}
+	oss << getProperMotionNarration(core, flags, pmra, pmdec);
 
-	if (flags&Velocity && RadialVel)
+	if ((flags&Velocity) && RadialVel)
 		oss << QString(qc_("Its radial velocity is %1 kilometers per second.", "object narration")).arg(StelUtils::narrateDecimal(RadialVel, 1)) + " ";
 
 	if (flags&Extra)
 	{
-		if (Plx!=0)
-		{
-			if (PlxErr>0.f)
-				oss <<  QString(qc_("Its parallax is %1 ± %2 milli-arcseconds.", "object narration"))
-					.arg(StelUtils::narrateDecimal(Plx, 1), StelUtils::narrateDecimal(PlxErr, 2));
-			else
-				oss << QString(qc_("Its parallax is %1 milli-arcseconds.", "object narration"))
-				       .arg(StelUtils::narrateDecimal(Plx, 1));
-			oss   << " ";
-		}
-
 		const QString specSW1 = (s->getSpInt() ? StarMgr::convertToSpectralType(s->getSpInt()) : QString());
 		oss << getGcvsDataNarration(core, star_id, specSW1);
 
@@ -663,7 +597,6 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	double PlxErr = s->getPlxErr();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
-	const bool computeAstrometryFlag = (flags&ProperMotion) && (pmra || pmdec);
 
 	if ((flags&AbsoluteMagnitude) && s->getPlx())
 		// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
@@ -677,45 +610,9 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	
 	oss << getCommonInfoString(core, flags);
 
-	// kinda impossible for both pm to be exactly 0, so they must just be missing
-	if (computeAstrometryFlag)
-	{
-		float pa = std::atan2(pmra, pmdec)*M_180_PIf;
-		if (pa<0)
-			pa += 360.f;
-		oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
-							QString::number(std::sqrt(pmra * pmra + pmdec * pmdec), 'f', 2),
-							qc_("mas/yr", "milliarc second per year"),
-							qc_("towards", "into the direction of"),
-							QString::number(pa, 'f', 1)) << "<br />";
-		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
-							QString::number(pmra, 'f', 2),
-							QString::number(pmdec, 'f', 2),
-							qc_("mas/yr", "milliarc second per year")) << "<br />";
-	}
+	oss << getProperMotionInfoString(core, flags, pmra, pmdec);
 
-	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
-	if (flags&Distance)
-	{
-		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
-		if ((Plx!=0) && (PlxErr!=0) & (Plx/PlxErr > 5.))
-		{
-			//TRANSLATORS: Unit of measure for distance - Light Years
-			QString ly = qc_("ly", "distance");
-			double distance = PARSEC_LY * 1000. / Plx;
-			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
-		}
-		if ((Plx!=0) && (PlxErr!=0))  // as long as having parallax, display it (but not necessarily displaying inverse parallax)
-		{
-			QString plx = q_("Parallax");
-			if (PlxErr>0.f)
-				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
-			else
-				oss << QString("%1: %2 ").arg(plx, QString::number(Plx, 'f', 3));
-			oss  << qc_("mas", "parallax") << "<br />";
-		}
-		oss << getExtraInfoStrings(Distance).join("");
-	}
+	oss << getDistanceInfoString(core, flags, Plx, PlxErr);
 
 	if (flags&Extra)
 		oss << getGcvsDataInfoString(core, star_id);
@@ -789,7 +686,6 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 	double PlxErr = s->getPlxErr();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
-	const bool computeAstrometryFlag = (pmra || pmdec);
 
 	if ((flags&AbsoluteMagnitude) && s->getPlx())
 		// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
@@ -804,42 +700,12 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 	//InfoStringGroup alreadyProcessed=StelObject::IAUConstellation | StelObject::CulturalConstellation;
 	oss << getCommonNarration(core, flags); // & (~alreadyProcessed));
 
-	// kinda impossible for both pm to be exactly 0, so they must just be missing
-	if (computeAstrometryFlag)
-	{
-		const float pa = StelUtils::fmodpos(static_cast<float>(std::atan2(pmra, pmdec))*M_180_PIf, 360.f);
-		oss << QString(qc_("Its proper motion is %1 milli-arcseconds per year towards %2 degrees, or, by axes, %3 milli-arcseconds per year in right ascension and %4 in declination.", "object narration"))
-		       .arg(StelUtils::narrateDecimal(std::sqrt(pmra * pmra + pmdec * pmdec), 2), StelUtils::narrateDecimal(pa, 1), StelUtils::narrateDecimal(pmra, 2), StelUtils::narrateDecimal(pmdec, 2)) + " ";
-	}
+	oss << getProperMotionNarration(core, flags, pmra, pmdec);
 
-	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
-	if (flags&Distance)
-	{
-		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
-		if ((Plx!=0) && (PlxErr!=0) & (Plx/PlxErr > 5.))
-		{
-			const double distance = PARSEC_LY * 1000. / Plx;
-			// TRANSLATORS: Its distance is x plus/minus y light years
-			oss << QString(qc_("Its distance is %1 ± %2 light years.", "object narration")).
-			       arg(StelUtils::narrateDecimal(distance, 2), StelUtils::narrateDecimal(distance * PlxErr / Plx, 2)) << " ";
-		}
-		//oss << getExtraInfoStrings(Distance).join("");
-	}
+	oss << getDistanceNarration(core, flags, Plx, PlxErr);
 
 	if (flags&Extra)
-	{
-		if ((Plx!=0) && (PlxErr!=0))  // as long as having parallax, display it (but not necessarily displaying inverse parallax)
-		{
-			if (PlxErr>0.f)
-				oss <<  QString(qc_("Its parallax is %1 ± %2 milli-arcseconds.", "object narration"))
-					.arg(StelUtils::narrateDecimal(Plx, 1), StelUtils::narrateDecimal(PlxErr, 2));
-			else
-				oss << QString(qc_("Its parallax is %1 milli-arcseconds.", "object narration"))
-				       .arg(StelUtils::narrateDecimal(Plx, 1));
-			oss  << ". ";
-		}
 		oss << getGcvsDataNarration(core, star_id);
-	}
 
 	oss << getSolarLunarNarration(core, flags);
 
