@@ -461,7 +461,7 @@ private:
       qint32  dx0;     // 4 bytes, uas/yr
       qint32  dx1;     // 4 bytes, uas/yr
       qint32  dx2;     // 4 bytes, uas/yr
-      qint16  b_v;     // 2 bytea, B-V in milli-mag
+      qint16  b_v;     // 2 bytes, B-V in milli-mag
       qint16  vmag;    // 2 bytes, V magnitude in milli-mag
       quint16 plx;     // 2 bytes, parallax in 20 uas
       quint16 plx_err; // 2 bytes, parallax error in 10 uas
