@@ -3,17 +3,34 @@
   "region": "Northern Africa",
   "classification": ["single"],
   "fallback_to_international_names": false,
+    "zodiac": { "name": { "native": "ζῳδιακός", "pronounce": "zodiakos", "english": "Circle of Living Creatures"},
+              "partitions": [ 12, 3,2,5],
+              "extent": 9,
+              "context": "Greek zodiacal sign",
+	      "names": [ 
+       { "symbol": "\u2648", "native": "Κριός", "pronounce": "Krios", "english": "Ram"},
+			 { "symbol": "\u2649", "native": "Ταυ̃ρος", "pronounce": "Tauros", "english": "Bull"},
+			 { "symbol": "\u264A", "native": "Δίδυμοι", "pronounce": "Didimoy", "english": "Twins"},
+			 { "symbol": "\u264B", "native": "Καρκίνος", "pronounce": "Karkinos", "english": "Crab"},
+			 { "symbol": "\u264C", "native": "Λέων", "pronounce": "Leon", "english": "Lion"},
+			 { "symbol": "\u264D", "native": "Παρθένος", "pronounce": "Parthenos", "english": "Maiden"},
+			 { "symbol": "\u264E", "native": "Χηλαί", "pronounce": "Chelai", "english": "Claws"},
+			 { "symbol": "\u264F", "native": "Σκορπίος", "pronounce": "Scorpios", "english": "Scorpion"},
+			 { "symbol": "\u2650", "native": "Τοξότης", "pronounce": "Toxotes", "english": "Archer"},
+			 { "symbol": "\u2651", "native": "Αίγόκερος", "pronounce": "Aigokeros", "english": "Capricorn"},
+			 { "symbol": "\u2652", "native": "ʿΥδροχόος", "pronounce": "Hydrochoös", "english": "Water-Pourer"},
+			 { "symbol": "\u2653", "native": "ʾΙχθύες", "pronounce": "Ichthyes", "english": "Fish"}]},
   "constellations": [
     {
       "id": "CON greek_almagest UMi",
       "lines": [[11767, 85822, 82080, 77055, 72607, 75097, 79822, 77055]],
-      "common_name": {"english": "Small Bear", "native": "Μικρή ʾˊΑρκτος", "pronounce": "Mikre Arktos"}
+      "common_name": {"english": "Small She-Bear", "native": "Μικρή ʾˊΑρκτος", "pronounce": "Mikre Arktos"}
     },
     {
       "id": "CON greek_almagest UMa",
       "lines": [[41704, 44390, 45038], [44390, 46977, 45038, 45075, 46733], [41704, 48319, 48402, 46853, 44127], [46853, 44471], [46733, 54061], [48402, 53910, 58001], [54061, 59774], [54539, 50372], [54539, 50801], [59774, 58001], [59774, 62956, 65378, 67301], [58001, 54539]],
       "hull_extension": [63125, 45860, 46952, 61317, 47029, 44700],
-      "common_name": {"english": "Great Bear", "native": "Μεγαλή ʾˊΑρκτος", "pronounce": "Megale Arktos"}
+      "common_name": {"english": "Great She-Bear", "native": "Μεγαλή ʾˊΑρκτος", "pronounce": "Megale Arktos"}
     },
     {
       "id": "CON greek_almagest Dra",

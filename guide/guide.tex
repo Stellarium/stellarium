@@ -1,7 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% The Legrand Orange Book
-% LaTeX Template
-% Version 2.1.1 (14/07/16)
+% Stellarium User Guide
+% Document style based on: 
+%   The Legrand Orange Book
+%   LaTeX Template
+%   Version 2.1.1 (14/07/16)
+%   GZ: Updated to use 
+%   Version 3.1 (February 18, 2022)
 %
 % This template has been downloaded from:
 % http://www.LaTeXTemplates.com
@@ -15,13 +19,13 @@
 % License:
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %
-% Compiling this template:
-% This template uses biber for its bibliography and makeindex for its index.
-% When you first open the template, compile it from the command line with the 
+% Compiling this guide:
+% The User Guide uses biber for its bibliography and makeindex for its index.
+% Compile it from the command line with the 
 % commands below to make sure your LaTeX distribution is configured correctly:
 %
 % 1) pdflatex guide
-% 2) makeindex guide.idx -s StyleInd.ist
+% 2) makeindex guide.idx -s indexstyle.ist
 % 3) biber guide
 % 4) pdflatex guide x 2
 %
@@ -29,7 +33,7 @@
 % command above and make sure to compile with pdflatex several times 
 % afterwards to propagate your changes to the document.
 %
-% This template also uses a number of packages which may need to be
+% This document also uses a number of packages which may need to be
 % updated to the newest versions for the template to compile. It is strongly
 % recommended you update your LaTeX distribution if you have any
 % compilation errors.
@@ -53,27 +57,33 @@
   \htlatextrue
 \fi
 
+% --------------------------------------------------------------------------------------
+% GZ: Stack pdf hypersetup
+% https://tex.stackexchange.com/questions/662094/can-i-call-hypersetup-twice
+% May need LaTeX from 2022...
+% --------------------------------------------------------------------------------------
+% \DocumentMetadata{} 
+
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-% See https://tex.stackexchange.com/questions/581907/extra-endgroup-error
-\RequirePackage[2020-02-02]{latexrelease}
+
 \ifhtlatex
-\documentclass[12pt,fleqn,dvipdfmx]{book} % Default font size and left-justified equations
+\documentclass[11pt,fleqn,dvipdfmx]{LegrandOrangeBook} % Default font size and left-justified equations
 \else
 % There is still also demand of discerning latex from pdflatex at the documentclass line.
 % http://tug.org/pipermail/macostex-archives/2006-January/020022.html
 \ifx\pdfoutput\undefined
-\documentclass[12pt,fleqn,dvipdfmx]{book} % Default font size and left-justified equations
+\documentclass[11pt,fleqn,dvipdfmx,a4paper]{LegrandOrangeBook} % Default font size and left-justified equations
 \else
-\documentclass[12pt,fleqn]{book} % Default font size and left-justified equations
+\documentclass[11pt,fleqn,a4paper]{LegrandOrangeBook} % Default font size and left-justified equations
 \pdfcompresslevel=9
 \fi
 \fi
 %----------------------------------------------------------------------------------------
 
-\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
-\input{version}
+\input{structure} % Insert the structure.tex file which contains the majority of the structure that came with the original template and extends it
+\input{version} % Insert Stellarium version information. This file must be created anew for each version!
 
 \title{Stellarium User Guide}
 \author{Georg Zotti \and Alexander Wolf (editors)}
@@ -159,6 +169,8 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 
 \chapterimage{chapter-t1-bg.png} % Table of contents heading image
+\chapterspaceabove{6.75cm} % Whitespace from the top of the page to the chapter title on chapter pages
+\chapterspacebelow{7.25cm} % Amount of vertical whitespace from the top margin to the start of the text on chapter pages
 
 \pagestyle{empty} % No headers
 \ifpdf
@@ -231,7 +243,7 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 
 
-\renewcommand{\StelTOCdepth}{0}
+\renewcommand{\StelTOCdepth}{1}
 \part{Extending Stellarium}
 %\chapterimage{chapter-t3-bg.png} % Chapter heading image
 \include{ch_plugins}

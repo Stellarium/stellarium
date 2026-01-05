@@ -39,15 +39,13 @@ whether your System is properly identified. Note that it does not check whether 
 
 ### Linux
 
-These instructions are based on Ubuntu. Find out and add the changes required for your System.
+These instructions are based on Ubuntu and TeXlive (https://www.tug.org/texlive/quickinstall.html). Find out and add the changes required for your System.
 
-Ubuntu 14.04's TeXlive is a bit outdated. Install TeXlive directly. See https://www.tug.org/texlive/quickinstall.html
-
-On Ubuntu 18.04 and later the following should work: 
+On Ubuntu 22.04 and later the following should work: 
 
 ```
 sudo apt-get install texlive-base texlive-bibtex-extra texlive-latex-recommended \
-texlive-latex-extra texlive-pictures texlive-fonts-recommended biber make
+texlive-latex-extra texlive-pictures texlive-fonts-recommended texlive-fonts-extra biber make
 ```
 
 

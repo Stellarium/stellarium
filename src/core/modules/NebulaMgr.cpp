@@ -52,7 +52,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-const QString NebulaMgr::StellariumDSOCatalogVersion = QStringLiteral("3.21");
+const QString NebulaMgr::StellariumDSOCatalogVersion = QStringLiteral("3.22");
 
 namespace
 {
@@ -2054,6 +2054,7 @@ void NebulaMgr::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	for (const auto& n : std::as_const(dsoArray))
 		n->translateName(trans);
+	Nebula::updateI18n();
 }
 
 

@@ -3,6 +3,23 @@
   "region": "Southern Europe",
   "classification": ["comparative"],
   "fallback_to_international_names": false,
+  "zodiac": { "name": { "native": "ζῳδιακός", "pronounce": "zodiakos", "english": "Circle of Living Creatures"},
+              "partitions": [ 12, 3,2,5],
+              "extent": 9,
+              "context": "Greek zodiacal sign",
+	      "names": [ 
+       { "symbol": "\u2648", "native": "Κριός", "pronounce": "Krios", "english": "Ram"},
+			 { "symbol": "\u2649", "native": "Ταυ̃ρος", "pronounce": "Tauros", "english": "Bull"},
+			 { "symbol": "\u264A", "native": "Δίδυμοι", "pronounce": "Didimoy", "english": "Twins"},
+			 { "symbol": "\u264B", "native": "Καρκίνος", "pronounce": "Karkinos", "english": "Crab"},
+			 { "symbol": "\u264C", "native": "Λέων", "pronounce": "Leon", "english": "Lion"},
+			 { "symbol": "\u264D", "native": "Παρθένος", "pronounce": "Parthenos", "english": "Maiden"},
+			 { "symbol": "\u264E", "native": "Χηλαί", "pronounce": "Chelai", "english": "Claws"},
+			 { "symbol": "\u264F", "native": "Σκορπίος", "pronounce": "Scorpios", "english": "Scorpion"},
+			 { "symbol": "\u2650", "native": "Τοξότης", "pronounce": "Toxotes", "english": "Archer"},
+			 { "symbol": "\u2651", "native": "Αίγόκερος", "pronounce": "Aigokeros", "english": "Capricorn"},
+			 { "symbol": "\u2652", "native": "ʿΥδροχόος", "pronounce": "Hydrochoös", "english": "Water-Pourer"},
+			 { "symbol": "\u2653", "native": "ʾΙχθύες", "pronounce": "Ichthyes", "english": "Fish"}]},
   "constellations": [
     {
       "id": "CON greek_farnese UMi",

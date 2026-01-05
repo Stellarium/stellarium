@@ -5,7 +5,7 @@
 
 \section{Introduction}
 \label{sec:surveys:introduction}
-
+\enlargethispage{\baselineskip}
 
 A \indexterm{sky survey} \newFeature{0.18.0} is a map of the sky stored as a hierarchical set of a potentially
 large number of smaller images (called tiles).  The advantage compared to a
@@ -94,6 +94,20 @@ considerate, don't waste bandwidth, and do this only if you really need it.
 The images are stored in subdirectories that increase in size and
 number of files (see Table~\ref{tab:TOAST:levels}). Zooming in loads
 the next level if available.
+\begin{table}[ht]
+  \centering\scriptsize
+\begin{tabular}{rrr|rrr|rrr}
+Level & No of files & Filespace (kB)&Level & No of files & Filespace (kB)&Level & No of files & Filespace (kB)\\
+\hline{}
+0     &          1  &         32    &4     &        256  &      7.172    &8     &     65.536  &  1.661.808\\
+1     &          4  &        124    &5     &      1.024  &     27.920    &9     &    262.144  &  6.119.092\\
+2     &         16  &        472    &6     &      4.096  &    109.628    &10    &  1.048.576  & 20.250.216\\
+3     &         64  &      1.820    &7     &     16.384  &    429.800    &11    &  4.194.305  & 83.583.724
+\end{tabular}
+\caption{Number of files and storage requirements for local DSS TOAST installation}
+\label{tab:TOAST:levels}
+\end{table}
+
 
 For partial downloads, you can limit the maximally used level (e.g. 9
 or 10). The difference from level 10 to 11 is really hardly
@@ -127,26 +141,26 @@ toast_survey_host = /
 toast_survey_levels = 10
 \end{configfile}
 
-\begin{table}[htbp]
-  \centering
-\begin{tabular}{rrr}
-Level & No of files & Filespace (kB)\\
-0     &          1  &         32\\
-1     &          4  &        124\\
-2     &         16  &        472\\
-3     &         64  &      1.820\\
-4     &        256  &      7.172\\
-5     &      1.024  &     27.920\\
-6     &      4.096  &    109.628\\
-7     &     16.384  &    429.800\\
-8     &     65.536  &  1.661.808\\
-9     &    262.144  &  6.119.092\\
-10    &  1.048.576  & 20.250.216\\
-11    &  4.194.305  & 83.583.724
-\end{tabular}
-\caption{Number of files and storage requirements for local DSS TOAST installation}
-\label{tab:TOAST:levels}
-\end{table}
+%\begin{table}[htbp]
+%  \centering
+%\begin{tabular}{rrr}
+%Level & No of files & Filespace (kB)\\
+%0     &          1  &         32\\
+%1     &          4  &        124\\
+%2     &         16  &        472\\
+%3     &         64  &      1.820\\
+%4     &        256  &      7.172\\
+%5     &      1.024  &     27.920\\
+%6     &      4.096  &    109.628\\
+%7     &     16.384  &    429.800\\
+%8     &     65.536  &  1.661.808\\
+%9     &    262.144  &  6.119.092\\
+%10    &  1.048.576  & 20.250.216\\
+%11    &  4.194.305  & 83.583.724
+%\end{tabular}
+%\caption{Number of files and storage requirements for local DSS TOAST installation}
+%\label{tab:TOAST:levels}
+%\end{table}
 
 
 

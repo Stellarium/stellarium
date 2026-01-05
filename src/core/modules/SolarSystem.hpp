@@ -1258,7 +1258,9 @@ private:
 	LinearFader markerFader;         // Useful for markers displayed for minor bodies regardless of magnitude
 
 public:
+	//! Draw a tiny symbol at x/y
 	bool drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color);
+	//! return brightness for markers (from a fader, 0..1)
 	float getMarkerValue() const {return markerFader.getInterstate();}
 
 private:

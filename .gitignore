@@ -79,3 +79,19 @@ qrc_*.cpp
 .vscode
 # Ignore QtCreator project files
 .qtcreator
+.gitattributes
+# Ignore script test data
+scripts/tests/media
+scripts/tests/videotest_avi.ssc
+scripts/tests/QJSEngine_basictest.ssc
+skycultures/modern_her
+*.tif
+valgrind.log
+*_old*
+*_pch.h
+PCH-*
+*_GZ*
+GZ_*
+*.awk
+
+

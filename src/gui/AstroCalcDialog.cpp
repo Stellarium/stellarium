@@ -7441,7 +7441,7 @@ void AstroCalcDialog::updateTabBarListWidgetWidth()
 
 	// stackListWidget->font() does not work properly!
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
-	QFont font;
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(14);
 	font.setWeight(QFont::Bold);
 	QFontMetrics fontMetrics(font);

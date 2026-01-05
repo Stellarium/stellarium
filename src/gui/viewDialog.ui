@@ -4597,6 +4597,26 @@
            </widget>
           </item>
           <item row="3" column="1">
+
+
+            <layout class="QGridLayout" name="landscapeButtonsGridLayout">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0" colspan="3">
+
+
+
+
            <widget class="QPushButton" name="pushButtonAddRemoveLandscapes">
             <property name="styleSheet">
              <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
@@ -4605,6 +4625,43 @@
              <string>Add/remove landscapes...</string>
             </property>
            </widget>
+	   </item>
+	   
+	   <item row="0" column="3">
+           <widget class="QPushButton" name="pushButtonLandscapes_say">
+            <property name="styleSheet">
+             <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
+            </property>
+            <property name="text">
+             <string>Read text</string>
+            </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtStart.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
+                   </property>
+           </widget>
+	   </item>
+
+	<item row="0" column="4">
+           <widget class="QPushButton" name="pushButtonLandscapes_stop">
+            <property name="styleSheet">
+             <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
+            </property>
+            <property name="text">
+             <string>Stop</string>
+            </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtStop.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
+                   </property>
+           </widget>
+	   </item>
+
+
+	   
+	  </layout> 
           </item>
           <item row="1" column="1">
            <widget class="QGroupBox" name="landscapeOptionsGroupBox">
@@ -5419,6 +5476,7 @@
             <property name="title">
              <string>Options</string>
             </property>
+	    
             <layout class="QGridLayout" name="formLayout_2">
              <property name="leftMargin">
               <number>0</number>
@@ -5432,15 +5490,45 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="0" colspan="2">
+	     
+             <item row="3" column="0">
+              <layout class="QGridLayout" name="gridLayout_CulturalLabeling">
+	      
+             <item row="0" column="0" colspan="5">
               <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
                <property name="text">
                 <string>Use this sky culture as default</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <layout class="QGridLayout" name="gridLayout_CulturalLabeling">
+	     	     
+	<item row="0" column="6">
+	  <widget class="QPushButton" name="pushButtonSkyculture_say">
+            <property name="text">
+             <string>Read text</string>
+            </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtStart.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
+                   </property>
+           </widget>
+	 </item>
+	     
+	<item row="0" column="7">	   
+	   <widget class="QPushButton" name="pushButtonSkyculture_stop">
+            <property name="text">
+             <string>Stop</string>
+            </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtStop.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
+                   </property>
+           </widget>
+	  </item>
+	     
+	      
                <item row="1" column="0">
                 <widget class="QLabel" name="labelInfoLabel2">
                  <property name="text">
@@ -5651,6 +5739,9 @@
                </item>
               </layout>
              </item>
+	     
+	     
+	     
              <item row="6" column="0" rowspan="2">
               <layout class="QGridLayout" name="skyCultureGridLayout">
                <item row="4" column="9">

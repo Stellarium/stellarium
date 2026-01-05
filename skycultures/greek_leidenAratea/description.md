@@ -288,27 +288,22 @@ The following table lists the original names of the constellations in columns 2 
 
 ## References
 
-### For the Aratea itself:
-
  - [#1]: Blume, Dieter; Haffner, Mechthild; Metzger, Wolfgang: Sternbilder des Mittelalters und der Renaissance: Porträts aus der Geschichte der Leibnizschen Wissenschaftsakademie, Band I-II, de Gruyter, 2012-2016
  - [#2]: Dekker, Elly: The Provenance of the Stars in the Leiden Aratea Picture Book, Journal of the Warburg and Courtauld Institutes Vol. 73 (2010), pp. 1-37
  - [#3]: Katzenstein, Ranee and Savage-Smith, Emily: The Leiden Aratea &mdash; Ancient Constellations in a medieval manuscript, The Paul Getty Museum, Malibu California, 1988
-
-### For Ptolemaios (in comparison): Almagest star catalogue
-
  - [#4]: Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, Leipzig, 1898
  - [#5]: Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, 2017
  - [#6]: Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984
-
-### Fair Use
-
-We provide this sky culture free of charge, but the authors deserve to be cited according to the usual rules. Thank you!
 
 ## Authors
 
 This sky culture was added to Stellarium by Susanne M. Hoffmann (service@uhura-uraniae.com) and originally created in collaboration with Prof. Dr. Dieter Blume (Art History, FSU Jena, Germany) for Planetarium Jena.
 
 Written in English: the authors
+
+### Fair Use
+
+We provide this sky culture free of charge, but the authors deserve to be cited according to the usual rules. Thank you!
 
 ## License
 

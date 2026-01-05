@@ -16,13 +16,7 @@ Dante calls the seven bright stars of Ursa Major "The Chariot", the constellatio
 
 ## References
 
-The Italian Dante Society (Societá Dantesca Italiana) provides Dante's work online: [Dante_Online](https://danteonline.it/opere/index.php).
-
-### Fair Use
-
-We provide this sky culture free of charge, but the authors deserve to be cited according to the usual rules. Thank you!
-
-Susanne M Hoffmann, Dieter Blume, Karl Ph. Ellerbrock, Eduardo Castadura, Bodo Zöll (2022)
+- [#1]: The Italian Dante Society (Societá Dantesca Italiana) provides Dante's work online: [Dante_Online](https://danteonline.it/opere/index.php).
 
 ## Authors
 
@@ -33,6 +27,12 @@ Written in English: Susanne M. Hoffmann.
 ### Notes
 
 Region of origin: Florence, Italy; this single sky culture was made for use in research.
+
+### Fair Use
+
+We provide this sky culture free of charge, but the authors deserve to be cited according to the usual rules. Thank you!
+
+Susanne M Hoffmann, Dieter Blume, Karl Ph. Ellerbrock, Eduardo Castadura, Bodo Zöll (2022)
 
 ## License
 

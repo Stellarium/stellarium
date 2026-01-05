@@ -26,6 +26,7 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 #include "ConstellationMgr.hpp"
+#include "Constellation.hpp"
 #include "StelApp.hpp"
 
 #include <md4c-html.h>
@@ -43,8 +44,6 @@
 #include <QRegularExpression>
 #include <QMetaEnum>
 
-namespace
-{
 
 #if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 constexpr auto SkipEmptyParts = Qt::SkipEmptyParts;
@@ -52,7 +51,7 @@ constexpr auto SkipEmptyParts = Qt::SkipEmptyParts;
 constexpr auto SkipEmptyParts = QString::SkipEmptyParts;
 #endif
 
-void applyStyleToMarkdown(QString& string)
+void StelSkyCultureMgr::applyStyleToMarkdown(QString& string)
 {
 	static const auto pPattern = []{
 		// Locates any paragraph. This will make sure we get the smallest paragraphs. If
@@ -97,7 +96,7 @@ void applyStyleToMarkdown(QString& string)
 	} while(replaced);
 }
 
-QString markdownToHTML(QString input)
+QString StelSkyCultureMgr::markdownToHTML(QString input)
 {
 	const auto inputUTF8 = input.toStdString();
 
@@ -112,14 +111,12 @@ QString markdownToHTML(QString input)
 	return result;
 }
 
-QString convertReferenceLinks(QString text)
+QString StelSkyCultureMgr::convertReferenceLinks(QString text)
 {
 	static const QRegularExpression re(" ?\\[#([0-9]+)\\]", QRegularExpression::MultilineOption);
 	text.replace(re,
 	             "<sup><a href=\"#cite_\\1\">[\\1]</a></sup>");
 	return text;
-}
-
 }
 
 QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) const
@@ -693,15 +690,17 @@ QMap<QString, QString> StelSkyCultureMgr::getDirToI18Map(void) const
 
 std::vector<std::pair<QString, QString>> StelSkyCultureMgr::getConstellationsDescriptions(QString consSection) const
 {
+	//qDebug() << "StelSkyCultureMgr::getConstellationsDescriptions: dissecting:" << consSection;
 	static const QRegularExpression startWithL5Section("^#####[^#]");
 	consSection = consSection.trimmed();
 	if (!consSection.contains(startWithL5Section))
 	{
 		// Invalid formatting of the Constellations section
+		qDebug() << "StelSkyCultureMgr::getConstellationsDescriptions: bad format:" << consSection;
 		return {};
 	}
 
-	const QRegularExpression l5SectionNamePat("^[ \t]*#####[ \t]*([^#\n][^\n]*)$",
+	static const QRegularExpression l5SectionNamePat("^[ \t]*#####[ \t]*([^#\n][^\n]*)$",
 	                                          QRegularExpression::MultilineOption);
 	std::vector<std::pair<QString/*constellation*/, QString/*description*/>> descrMap;
 	QString prevSectionName;
@@ -709,7 +708,7 @@ std::vector<std::pair<QString, QString>> StelSkyCultureMgr::getConstellationsDes
 	for (auto it = l5SectionNamePat.globalMatch(consSection); it.hasNext(); )
 	{
 		const auto match = it.next();
-		const auto sectionName = match.captured(1);
+		const auto sectionName = match.captured(1).trimmed();
 		const auto nameStartPos = match.capturedStart(0);
 		const auto bodyStartPos = match.capturedEnd(0);
 		if (!prevSectionName.isEmpty())
@@ -734,6 +733,8 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
                                                         const qsizetype bodyStartPos, const qsizetype bodyEndPos,
                                                         const StelTranslator& trans)
 {
+	//qDebug() << "=========convertMarkdownLevel2Section: " << sectionName;
+
 	auto textEng = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
 	static const QRegularExpression re("^\n*|\n*$");
 	textEng.replace(re, "");
@@ -750,9 +751,14 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
 		{
 			const auto consEngName = entry.first;
 			const auto cons = cMgr->searchByName(consEngName);
-			const auto consName = cons ? cons->getNameI18n() : consEngName;
+			const auto consName = cons ? cons->getNameI18n().trimmed() : consEngName;
                         textTr += "<h4>" + consName + "</h4>\n";
 			textTr += markdownToHTML(trans.qtranslate(entry.second.trimmed()));
+
+			if (cons)
+				reinterpret_cast<Constellation *>(cons.data())->setNarration(trans.qtranslate(entry.second.trimmed()));
+			else
+				qDebug() << "convertMarkdownLevel2Section: cons not found: " << consName;
 		}
 		return textTr;
 	}
@@ -776,6 +782,21 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
 	}
 
 	return markdownToHTML(textTr);
+}
+
+QString StelSkyCultureMgr::convertMarkdownLevel2SectionNarration(const QString& markdown, const QString& sectionName,
+							const qsizetype bodyStartPos, const qsizetype bodyEndPos,
+							const StelTranslator& trans)
+{
+	//qDebug() << "=========convertMarkdownLevel2SectionNarration: " << sectionName;
+
+	auto textEng = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
+	static const QRegularExpression re("^\n*|\n*$");
+	textEng.replace(re, "");
+	auto textTr = trans.tryQtranslate(textEng);
+	if (textTr.isEmpty()) textTr = textEng;
+
+	return textTr;
 }
 
 QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdownInput, const QString& descrPath)
@@ -839,14 +860,74 @@ QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdownInpu
 
 	return text;
 }
+QString StelSkyCultureMgr::descriptionMarkdownToNarration(const QString& markdownInput, const QString& descrPath)
+{
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
+
+	// Strip comments before translating
+	static const QRegularExpression commentPat("<!--.*?-->");
+	auto markdown = QString(markdownInput).replace(commentPat, "");
+
+	// Remove everything after "## Constellations"
+	static const QRegularExpression constRE(QString("^## +Constellations *$"), QRegularExpression::MultilineOption);
+	qsizetype pos=markdown.indexOf(constRE);
+	if (pos>0)
+		markdown.truncate(pos);
+	else
+		qDebug() << "Cannot find " << constRE;
+
+	static const QRegularExpression headerPat("^# +(.+)$", QRegularExpression::MultilineOption);
+	const auto match = headerPat.match(markdown);
+	QString name;
+	if (match.isValid())
+	{
+		name = match.captured(1);
+	}
+	else
+	{
+		qCritical().nospace() << "Failed to get sky culture name in file " << descrPath
+				      << ": got " << match.lastCapturedIndex() << " matches instead of 1";
+		name = "Unknown";
+	}
+
+	QString text = trans.qtranslate(name, "sky culture") + " . . . ";
+	static const QRegularExpression sectionNamePat("^## +(.+)$", QRegularExpression::MultilineOption);
+	QString prevSectionName;
+	qsizetype prevBodyStartPos = -1;
+	for (auto it = sectionNamePat.globalMatch(markdown); it.hasNext(); )
+	{
+		const auto match = it.next();
+		const auto sectionName = match.captured(1);
+		const auto nameStartPos = match.capturedStart(0);
+		const auto bodyStartPos = match.capturedEnd(0);
+		if (!prevSectionName.isEmpty())
+		{
+			const auto sectionText = convertMarkdownLevel2SectionNarration(markdown, prevSectionName, prevBodyStartPos, nameStartPos, trans);
+			if(prevSectionName != "Introduction" && prevSectionName != "Description")
+				//text +=  qc_(prevSectionName, "Name of a section in sky culture description") + " . . . ";
+			if (!sectionText.isEmpty())
+			{
+				text += sectionText + " ";
+			}
+		}
+		prevBodyStartPos = bodyStartPos;
+		prevSectionName = sectionName;
+	}
+	if (prevBodyStartPos >= 0)
+	{
+		const auto sectionText = convertMarkdownLevel2SectionNarration(markdown, prevSectionName, prevBodyStartPos, markdown.size(), trans);
+		if (!sectionText.isEmpty())
+		{
+			text += " . . " + qc_(prevSectionName, "Name of a section in sky culture description") + ". . . ";
+			text += sectionText;
+		}
+	}
+
+	return text;
+}
 
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription()
 {
-	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
-	{
-		lang = lang.split("_").at(0);
-	}
 	const QString descPath = currentSkyCulture.path + "/description.md";
 	const bool pathExists = QFileInfo::exists(descPath);
 	if (!pathExists)
@@ -855,14 +936,15 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription()
 	QString description;
 	if (!pathExists)
 	{
-		description = QString("<h2>%1</2><p>%2</p>").arg(getCurrentSkyCultureNameI18(), q_("No description"));
+		description = QString("<h2>%1</h2><p>%2</p>").arg(getCurrentSkyCultureNameI18(), q_("No description"));
 	}
 	else
 	{
 		QFile f(descPath);
 		if(f.open(QIODevice::ReadOnly))
 		{
-			const auto markdown = QString::fromUtf8(f.readAll());
+			auto markdown = QString::fromUtf8(f.readAll());
+			markdown.replace("\r", ""); // avoid regexp trouble on Windows
 			description = descriptionMarkdownToHTML(markdown, descPath);
 		}
 		else
@@ -875,6 +957,40 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription()
 	description.append(getCurrentSkyCultureHtmlClassification());
 	description.append(getCurrentSkyCultureHtmlRegion());
 
+
+	return description;
+}
+
+QString StelSkyCultureMgr::getCurrentSkyCultureNarration()
+{
+	const QString descPath = currentSkyCulture.path + "/description.md";
+	const bool pathExists = QFileInfo::exists(descPath);
+	if (!pathExists)
+		qWarning() << "Can't find description for skyculture" << currentSkyCulture.id;
+
+	QString description;
+	if (!pathExists)
+	{
+		description = QString("%1 . . . %2").arg(getCurrentSkyCultureNameI18(), q_("No description"));
+	}
+	else
+	{
+		QFile f(descPath);
+		if(f.open(QIODevice::ReadOnly))
+		{
+			auto markdown = QString::fromUtf8(f.readAll());
+			markdown.replace("\r", ""); // avoid regexp trouble on Windows
+			description = descriptionMarkdownToNarration(markdown, descPath);
+		}
+		else
+		{
+			qWarning().nospace() << "Failed to open sky culture description file " << descPath << ": " << f.errorString();
+		}
+	}
+
+	//description.append(getCurrentSkyCultureHtmlLicense());
+	//description.append(getCurrentSkyCultureHtmlClassification());
+	//description.append(getCurrentSkyCultureHtmlRegion());
 
 	return description;
 }

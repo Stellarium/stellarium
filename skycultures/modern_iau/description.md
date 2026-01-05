@@ -50,7 +50,7 @@ The third volume of "Uranometria 2000.0" is a guide to deep-sky objects - Deep S
 
 ## References
 
- - [#1]: [The Constellations](https://www.iau.org/public/themes/constellations/)
+ - [#1]: [The Constellations](https://iauarchive.eso.org/public/themes/constellations/)
  - [#2]: [IAU Catalog of Star Names (IAU-CSN)](https://exopla.net/star-names/modern-iau-star-names/)
  - [#3]: [Uranometria 2000.0 Deep Sky Field Guide. ISBN: 0-943396-73-5](https://shopatsky.com/products/uranometria-2000-0-atlas-deep-sky-field-guide)
  - [#4]: Delporte, Eugene (1930). "Delimitation scientifique des constellations (tables et cartes)". Cambridge.

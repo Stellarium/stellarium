@@ -157,18 +157,33 @@
         ]
       },
       "common_name": {"english": "The Old Woman Behind", "native": "Kingulliq"}
-    }
+    },
+    {
+      "id": "CON inuit 012",
+      "lines": [["DSO:M42", "DSO:M42"]],
+      "single_star_radius": 1.0,
+      "common_name": {"english": "Nephews or Nieces", "native": "Qangimmaariik"}
+    },
+    {
+      "id": "CON inuit 013",
+      "lines": [[11767, 11767]],
+      "common_name": {"english": "Never Moves", "native": "Nuuttuittuq"}
+    },
+    {
+      "id": "CON inuit 014",
+      "lines": [[37279, 37279]],
+      "common_name": {"english": "Name of a Murdered Man", "native": "Sikuliaqsiujuittuq"}
+    }        
   ],
   "common_names": {
     "HIP 11767": [{"english": "Never Moves", "native": "Nuuttuittuq"}],
     "HIP 21421": [{"english": "Spirit of a Polar Bear"}],
-    "HIP 26241": [{"english": "Nephews"}],
     "HIP 32349": [{"english": "Flickering"}],
-    "HIP 37279": [{"english": "Name of a Murdered Man"}],
+    "HIP 37279": [{"native": "Sikuliaqsiujuittuq", "english": "Name of a Murdered Man"}],
     "HIP 67927": [{"english": "The Little Orphan Boy"}],
     "HIP 69673": [{"english": "The Old Man"}],
     "HIP 91262": [{"english": "The Old Woman Behind", "native": "Kingulliq"}],
-    "M42":       [{"english": "Group of children", "native": "Qangimmaariik"}],
+    "M42":       [{"english": "Nephews or Nieces", "native": "Qangimmaariik"}],
     "M45":       [{"english": "Breastbone", "native": "Sakiattiak"}]
   }
 }

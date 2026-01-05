@@ -52,6 +52,7 @@
 #include "StelPropertyMgr.hpp"
 #include "StelHips.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelSpeechMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -141,12 +142,16 @@ void ViewDialog::retranslate()
 {
 	if (dialog)
 	{
+		static StelSkyCultureMgr *scMgr = GETSTELMODULE(StelSkyCultureMgr);
+
 		ui->retranslateUi(dialog);
 		updateZhrDescription(StelApp::getInstance().getModule("SporadicMeteorMgr")->property("zhr").toInt());
 		populateLists();
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
+		populateCulturalCombo(ui->zodiacLabelComboBox, scMgr->getZodiacLabelStyle());
+		populateCulturalCombo(ui->lunarSystemLabelComboBox, scMgr->getLunarSystemLabelStyle());
 		ui->lightPollutionWidget->retranslate();
 
 		populateHipsGroups();
@@ -723,6 +728,40 @@ void ViewDialog::createDialogContent()
 		ui->landscapeTextBrowser->document()->setDefaultStyleSheet(style);
 		ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(style);
 	});
+
+	// Connect narration buttons. We might need to prepare the texts, though.
+	if (GETSTELMODULE(StelSpeechMgr)->enabled())
+	{
+		connect(ui->pushButtonLandscapes_say, &QPushButton::clicked, this, [this](){
+			static LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
+
+			QString pureContent=lmgr->getDescription();
+			static const QRegularExpression htmlbegin("<.*>");
+			static const QRegularExpression htmlend("</.*>");
+			static const QRegularExpression htmlendH("</[Hh][1-4]>");
+			static const QRegularExpression html1("<.*/>");
+			QString stripped=pureContent.replace(htmlendH, ". . . ").remove(html1).remove(htmlend).remove(htmlbegin);
+
+			GETSTELMODULE(StelSpeechMgr)->say(stripped);});
+		connect(ui->pushButtonLandscapes_stop, &QPushButton::clicked, this, [this](){
+			GETSTELMODULE(StelSpeechMgr)->stop();});
+		connect(ui->pushButtonSkyculture_say, &QPushButton::clicked, this, [this](){
+			StelApp& app = StelApp::getInstance();
+			QString md = app.getSkyCultureMgr().getCurrentSkyCultureNarration();
+			qDebug() << "MD as received: " << md;
+
+			GETSTELMODULE(StelSpeechMgr)->say(md);
+		});
+		connect(ui->pushButtonSkyculture_stop, &QPushButton::clicked, this, [this](){
+			GETSTELMODULE(StelSpeechMgr)->stop();});
+	}
+	else
+	{
+		const auto wList = QList<QWidget*>({ui->pushButtonLandscapes_say, ui->pushButtonLandscapes_stop,
+						    ui->pushButtonSkyculture_say, ui->pushButtonSkyculture_stop});
+		for (auto w: wList)
+			w->hide();
+	}
 }
 
 bool ViewDialog::eventFilter(QObject* object, QEvent* event)
@@ -1162,7 +1201,7 @@ void ViewDialog::updateTabBarListWidgetWidth()
 
 	// stackListWidget->font() does not work properly!
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
-	QFont font;
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(14);
 	font.setWeight(QFont::Bold);
 	QFontMetrics fontMetrics(font);

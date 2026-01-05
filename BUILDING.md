@@ -119,6 +119,13 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev lib
                  libexiv2-dev libnlopt-cxx-dev libqt6concurrent6 libmd4c-dev libmd4c-html0-dev
 ```
 
+Ubuntu 24.04 has Qt6.4 and so allows speech output. Add these to the packages above (add more speech-dispatcher components as you wish):
+
+```
+sudo apt install libqt6texttospeech6 qt6-speech-dev qt6-speech-speechd-plugin qt6-speech-flite-plugin \
+                 flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
+```
+
 
 #### Fedora / CentOS / AlmaLinux / Rocky Linux
 
@@ -298,9 +305,9 @@ https://github.com/Stellarium/stellarium/releases
 Do this command in a terminal (if you prefer, you might use arK or some other graphical archive tool): 
 
 ```
-$ tar zxf stellarium-25.3.tar.gz
+$ tar zxf stellarium-25.4.tar.gz
 ```
-You should now have a directory `stellarium-25.3` with the source code in it.
+You should now have a directory `stellarium-25.4` with the source code in it.
 
 
 ### Clone project from GitHub
@@ -339,7 +346,7 @@ GitHub by web.
 
 #### Windows specifics
 
-On Windows save the file (`master.zip` or `stellarium-25.3.tar.gz`) to the `C:/Devel` directory as 
+On Windows save the file (`master.zip` or `stellarium-25.4.tar.gz`) to the `C:/Devel` directory as 
 example. You will need a decompression program installed in Windows, for example [7-Zip](http://www.7-zip.org/). 
 The root of the source tree will be `C:/Devel/stellarium` for simplicity.
 
@@ -622,6 +629,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | ENABLE_QT6                         | bool   | ON      | Enable building Qt6-based Stellarium
 | ENABLE_NLS                         | bool   | ON      | Enable interface translation
 | ENABLE_SHOWMYSKY                   | bool   | ON      | Enable support for ShowMySky module that implements a realistic atmosphere model
+| ENABLE_SPEECH                      | bool   | ON      | Enable speech output support. Requires Qt6.4+ and ENABLE_MEDIA
 | ENABLE_GPS                         | bool   | ON      | Enable GPS support
 | ENABLE_LIBGPS                      | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
 | ENABLE_MEDIA                       | bool   | ON      | Enable sound and video support

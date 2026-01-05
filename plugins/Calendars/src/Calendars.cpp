@@ -29,7 +29,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelScriptMgr.hpp"
-
+#include "StelFileMgr.hpp"
 #include "Calendars.hpp"
 #include "CalendarsDialog.hpp"
 
@@ -170,9 +170,11 @@ Calendars::Calendars():
 Calendars::~Calendars()
 {
 	delete configDialog; configDialog=nullptr;
-	foreach (QString key, calendars.keys())
+	QMutableMapIterator<QString, Calendar*> i(calendars);
+	while (i.hasNext())
 	{
-		Calendar *cal = calendars.take(key);
+		i.next();
+		Calendar *cal = calendars.take(i.key());
 		delete cal;
 	}
 	if (infoPanel) delete infoPanel;
@@ -205,6 +207,8 @@ void Calendars::init()
 	QString section=N_("Calendars");
 	addAction("actionShow_Calendars",         section, N_("Calendars"), "enabled", "Alt+K");
 	addAction("actionShow_Calendars_dialog",  section, N_("Show settings dialog"),  configDialog,  "visible",           "Alt+Shift+K");
+	// No hotkey here, but users can define their own
+	addAction("actionShow_Calendars_export",  section, N_("Export to Calendars.html"),  this,  "exportCalendars()");
 
 	// Add a toolbar button
 	StelApp& app=StelApp::getInstance();
@@ -361,12 +365,40 @@ void Calendars::draw(StelCore* core)
 		infoPanel->hide();
 		return;
 	}
+	if (calendars.count()==0) return;
 
+	QString str = createTableToDraw();
+	Vec3f color(1);
+	if (getFlagTextColorOverride())
+	{
+		color=textColor;
+	}
+	else
+	{
+		if (StelApp::getInstance().getFlagOverwriteInfoColor())
+		{
+			// make info text more readable...
+			color = StelApp::getInstance().getOverwriteInfoColor();
+		}
+		if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
+		{
+			// make info text more readable when atmosphere enabled at daylight.
+			color = StelApp::getInstance().getDaylightInfoColor();
+		}
+	}
+
+	infoPanel->setDefaultTextColor(color.toQColor());
+	infoPanel->setHtml(str);
+	infoPanel->updatePosition();
+	infoPanel->show();
+}
+
+QString Calendars::createTableToDraw()
+{
 	QString str;
 	QTextStream oss(&str);
 	oss << "<table>";
 	// Select the drawable calendars from GUI or settings.
-	if (calendars.count()==0) return;
 	if (flagShowGregorian)          oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Gregorian",             "calendar"), getCal("Gregorian")->getFormattedDateString());
 	if (flagShowJulian)             oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Julian",                "calendar"), getCal("Julian")->getFormattedDateString());
 	if (flagShowRevisedJulian)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Revised Julian",        "calendar"), getCal("RevisedJulian")->getFormattedDateString());
@@ -419,29 +451,22 @@ void Calendars::draw(StelCore* core)
 	if (flagShowAztecXihuitl)       oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Aztec Xihuitl",         "calendar"), getCal("AztecXihuitl")->getFormattedDateString());
 	if (flagShowAztecTonalpohualli) oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Aztec Tonalpohualli",   "calendar"), getCal("AztecTonalpohualli")->getFormattedDateString());
 	oss << "</table>";
-	Vec3f color(1);
-	if (getFlagTextColorOverride())
-	{
-		color=textColor;
-	}
-	else
-	{
-		if (StelApp::getInstance().getFlagOverwriteInfoColor())
-		{
-			// make info text more readable...
-			color = StelApp::getInstance().getOverwriteInfoColor();
-		}
-		if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
-		{
-			// make info text more readable when atmosphere enabled at daylight.
-			color = StelApp::getInstance().getDaylightInfoColor();
-		}
-	}
+	return str;
+}
 
-	infoPanel->setDefaultTextColor(color.toQColor());
-	infoPanel->setHtml(str);
-	infoPanel->updatePosition();
-	infoPanel->show();
+void Calendars::exportCalendars()
+{
+	QString html=createTableToDraw();
+	QString fileName=StelFileMgr::getUserDir() + "/Calendar.html";
+	QFile file(fileName);
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
+	{
+		qWarning() << "ERROR: Cannot open file" << fileName;
+		return;
+	}
+	QTextStream out(&file);
+	out << (html);
+	file.close();
 }
 
 // Get a pointer to the respective calendar

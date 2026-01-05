@@ -268,9 +268,14 @@ public:
 
 	bool objectInAllowedSizeRangeLimits() const;
 
+	//! Return a narration text ready for synthesized speech output
+	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
+
 protected:
 	//! Format the magnitude info string for the object
 	QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1, const float& magOffset=0.f) const override;
+	//! (Re-)Fill TypeI18nNebulaStringMap. Called by NebulaMgr when required.
+	static void updateI18n();
 
 private:
 	friend struct DrawNebulaFuncObject;
@@ -379,7 +384,8 @@ private:
 
 	static Vec3f labelColor;				// The color of labels
 	static QMap<Nebula::NebulaType, Vec3f>hintColorMap;	// map for rapid lookup. Updated by NebulaMgr whenever a color changes.
-	static const QMap<Nebula::NebulaType, QString> typeEnglishStringMap; // map that keeps type strings for NebulaType			// (Re-)Fills typeStringMap. Called by NebulaMgr when required.
+	static const QMap<Nebula::NebulaType, QString> typeEnglishStringMap; // map that keeps type strings for NebulaType
+	static QMap<Nebula::NebulaType, QString>typeI18nNebulaStringMap;     // map that keeps translated type strings for NebulaType
 
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;

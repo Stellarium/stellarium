@@ -59,21 +59,19 @@ struct Description
 	std::vector<scm::RegionType> region;	 // region code
 
 
-	/**
-	 * @brief Check if the description is complete.
-	 * @return true if all required fields are correctly filled, false otherwise.
-	 */
-	bool isComplete() const
+	QStringList getIncompleteFieldsList() const
 	{
-		return !name.trimmed().isEmpty() &&
-			   !introduction.trimmed().isEmpty() &&
-			   !cultureDescription.trimmed().isEmpty() &&
-			   !references.trimmed().isEmpty() &&
-			   !authors.trimmed().isEmpty() &&
-			   !about.trimmed().isEmpty() &&
-			   license != scm::LicenseType::NONE &&
-			   classification != scm::ClassificationType::NONE &&
-			   !region.empty();;
+		QStringList list;
+		if (name.trimmed().isEmpty())               list.append(q_("Name of the Sky Culture"));
+		if (introduction.trimmed().isEmpty())       list.append(qc_("Introduction", "Name of a section in sky culture description"));
+		if (cultureDescription.trimmed().isEmpty()) list.append(q_("Culture Description"));
+		if (references.trimmed().isEmpty())         list.append(qc_("References", "Name of a section in sky culture description"));
+		if (authors.trimmed().isEmpty())            list.append(qc_("Authors", "Name of a section in sky culture description"));
+		if (about.trimmed().isEmpty())              list.append(q_("About the sky culture"));
+		if (license == scm::LicenseType::NONE)      list.append(qc_("License", "Name of a section in sky culture description"));
+		if (classification == scm::ClassificationType::NONE) list.append(q_("Classification"));
+		if (region.empty())               list.append(q_("Region of the Sky Culture"));
+		return list;
 	}
 };
 } // namespace scm

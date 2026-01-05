@@ -248,12 +248,12 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		oss << QString("%1: %2 %3<br/>").arg(sz, QString::number(size, 'f', 2), qc_("km", "distance"));
 	}
 
-	if (flags&Extra)
+	if (flags&OtherCoord)
 	{
 		const QString cType = isPlanetocentric() ? q_("Planetocentric coordinates") : q_("Planetographic coordinates");
 		QString sLong = StelUtils::decDegToLongitudeStr(longitude, isEastPositive(), is180(), !withDecimalDegree),
 			sLat  = StelUtils::decDegToLatitudeStr(latitude, !withDecimalDegree);
-		if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()=="Jupiter")
+		if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()==L1S("Jupiter"))
 		{
 			// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
 			double lng=0., lat=0.;
@@ -280,9 +280,11 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (nType!=NomenclatureItem::niUNDEFINED && nType<NomenclatureItem::niSpecialPointPole && !description.isEmpty())
 			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
-		if (planet->getEnglishName()!="Jupiter") // we must exclude this for now due to Jupiter's "off" rotation
+		if (planet->getEnglishName()!=L1S("Jupiter")) // we must exclude this for now due to Jupiter's "off" rotation
 			oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
-
+	}
+	if (flags&Extra)
+	{
 		if (!origin.isEmpty())
 			oss << StelUtils::wrapText(QString("%1: %2").arg(q_("Origin of name"), originI18n)) << "<br/>";
 
@@ -293,6 +295,122 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	}
 
 	postProcessInfoString(str, flags);
+	return str;
+}
+
+QString NomenclatureItem::getNarration(const StelCore* core, const InfoStringGroup& flags) const
+{
+	QString str;
+	QTextStream oss(&str);
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+
+	if (flags&Name)
+	{
+		oss << nameI18n;
+		// englishName here is the original scientific term, usually latin but could be plain english like "landing site".
+		if (nameI18n!=englishName && nType<NomenclatureItemType::niSpecialPointPole)
+			oss << qc_("or", "object narration") << " " << englishName;
+		oss << ". ";
+	}
+
+	if (flags&ObjectType && nType!=NomenclatureItem::niUNDEFINED)
+	{
+		const QString typeStr=getNomenclatureTypeString(nType);
+		const QString latinTypeStr=getNomenclatureTypeLatinString(nType);
+		const QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName()); // TODO Needs articles etc?
+		const bool onTheMoon=planet->getEnglishName()==L1S("Moon");
+
+		if (onTheMoon)
+		{
+			if (typeStr!=latinTypeStr)
+			{
+				if (nType!=NomenclatureItem::niUNDEFINED && nType<NomenclatureItem::niSpecialPointPole && !description.isEmpty())
+					oss << " " << QString(qc_("is a %1 (or %2), that is: %3, on the Moon", "object narration")).arg(typeStr, latinTypeStr, description);
+				else
+					oss << " " << QString(qc_("is a %1 (or %2), on the Moon", "object narration")).arg(typeStr, latinTypeStr);
+			}
+			else
+			{
+				if (nType!=NomenclatureItem::niUNDEFINED && nType<NomenclatureItem::niSpecialPointPole && !description.isEmpty())
+					oss << " " << QString(qc_("is a %1, that is: %2, on the Moon", "object narration")).arg(typeStr, description);
+				else
+					oss << " " << QString(qc_("is a %1 on the Moon", "object narration")).arg(typeStr);
+			}
+		}
+		else
+		{
+			if (typeStr!=latinTypeStr)
+			{
+				if (nType!=NomenclatureItem::niUNDEFINED && nType<NomenclatureItem::niSpecialPointPole && !description.isEmpty())
+					oss << " " << QString(qc_("is a %1 (or %2), that is: %3, on %4", "object narration")).arg(typeStr, latinTypeStr, description, planet->getNameI18n());
+				else
+					oss << " " << QString(qc_("is a %1 (or %2), on %3", "object narration")).arg(typeStr, latinTypeStr, planet->getNameI18n());
+			}
+			else
+			{
+				if (nType!=NomenclatureItem::niUNDEFINED && nType<NomenclatureItem::niSpecialPointPole && !description.isEmpty())
+					oss << " " << QString(qc_("is a %1, that is: %2, on %3", "object narration")).arg(typeStr, description, planet->getNameI18n());
+				else
+					oss << " " << QString(qc_("is a %1 on %2", "object narration")).arg(typeStr, planet->getNameI18n());
+			}
+		}
+	}
+
+	// TODO Ra/Dec etc.
+	//oss << getCommonInfoString(core, flags);
+
+	if (flags&Size && size>0. && nType<NomenclatureItem::niSpecialPointPole)
+	{
+		// Satellite Features are almost(?) exclusively lettered craters, and all are on the Moon. Assume craters.
+		QString sz = ((nType==NomenclatureItem::niCrater) || (nType==NomenclatureItem::niSatelliteFeature)) ?
+			qc_("Its diameter is %1 kilometers", "object narration") : q_("It extends over %1 kilometers");
+		oss << QString(sz).arg(StelUtils::narrateDecimal(size, 2)) << ". ";
+	}
+
+	if (flags&Extra)
+	{
+		if (!origin.isEmpty())
+			oss << QString("%1: %2. ").arg(qc_("The feature was named after", "object narration"), originI18n);
+	}
+	if (flags&OtherCoord)
+	{
+		const QString cType = isPlanetocentric() ? qc_("Its planetocentric coordinates are", "object narration") : qc_("Its planetographic coordinates are", "object narration");
+		QString sLong = StelUtils::decDegToLongitudeNarration(longitude, isEastPositive(), is180(), !withDecimalDegree),
+			sLat  = StelUtils::decDegToLatitudeNarration(latitude, !withDecimalDegree);
+		if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()==L1S("Jupiter"))
+		{
+			// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
+			double lng=0., lat=0.;
+			// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
+			if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
+			{
+				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+				lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
+				Q_ASSERT(lat==0.);
+			}
+			// Center and Subsolar points are similar.
+			if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
+			{
+				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+				lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
+				lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
+			}
+			lng   = StelUtils::fmodpos(lng, 360.);
+			sLong = StelUtils::decDegToLongitudeNarration(360.-lng, isEastPositive(), is180(), !withDecimalDegree);
+			sLat  = StelUtils::decDegToLatitudeNarration(lat, !withDecimalDegree);
+		}
+		oss << QString("%1: %2, %3 %4. ").arg(cType, sLat, qc_("and", "object narration"), sLong);
+
+		if (planet->getEnglishName()!=L1S("Jupiter")) // we must exclude this for now due to Jupiter's "off" rotation
+			oss << QString("%1 %2 %3. ").arg(qc_("Solar altitude over the feature is", "object narration"), StelUtils::narrateDecimal(getSolarAltitude(core), 1), qc_("degrees", "object narration"));
+
+		// DEBUG output. This should help defining valid criteria for selection priority.
+		// oss << QString("Planet angular size (semidiameter!): %1''<br/>").arg(QString::number(planet->getAngularSize(core)*3600.));
+		// oss << QString("Angular size: %1''<br/>").arg(QString::number(getAngularSize(core)*3600.));
+		// oss << QString("Angular size ratio: %1<br/>").arg(QString::number(static_cast<double>(getAngularDiameterRatio(core)), 'f', 5));
+	}
+
+	//postProcessInfoString(str, flags);
 	return str;
 }
 

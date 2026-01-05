@@ -6,7 +6,7 @@ Modern sky culture is used internationally by modern astronomers, and is the off
 
 ## Description
 
-## Constellations
+### Constellations
 
 The modern culture divides the celestial sphere into 88 areas of various sizes called *constellations*, each with precise boundary, issued by the International Astronomical Union. These constellations have become the standard way to describe the sky, replacing similar sets in other sky cultures exhaustively in daily usage.
 

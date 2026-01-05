@@ -20,6 +20,8 @@ SET(stellarium_lib_SRCS
      core/StelAudioMgr.cpp
      core/StelVideoMgr.hpp
      core/StelVideoMgr.cpp
+     core/StelSpeechMgr.hpp
+     core/StelSpeechMgr.cpp
      core/StelGeodesicGrid.cpp
      core/StelGeodesicGrid.hpp
      core/StelMovementMgr.cpp
@@ -523,7 +525,24 @@ IF(APPLE AND Qt6_FOUND)
 ENDIF()
 IF(ENABLE_MEDIA)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::MultimediaWidgets)
-ENDIF()
+     IF(Qt6_FOUND AND Qt6Core_VERSION GREATER_EQUAL 6.4.0)
+          find_package(Qt6 COMPONENTS TextToSpeech)
+          IF(Qt6TextToSpeech_VERSION VERSION_GREATER_EQUAL 6.4.0)
+               SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt6::TextToSpeech)
+               MESSAGE(STATUS "Adding Speech output.")
+          ELSE()
+                    MESSAGE(STATUS "Qt::TextToSpeech not found or <6.4. You will not have Speech output!")
+                    SET(ENABLE_SPEECH 0)
+          ENDIF()
+     ELSE()
+          MESSAGE(STATUS "Qt<6.4 found. You will not have Speech output!")
+          SET(ENABLE_SPEECH 0)
+     ENDIF()
+     IF(ENABLE_SPEECH)
+          ADD_DEFINITIONS(-DENABLE_SPEECH)
+     ENDIF(ENABLE_SPEECH)
+ENDIF(ENABLE_MEDIA)
+
 IF(ENABLE_SCRIPTING)
     IF(ENABLE_SCRIPT_QML)
          SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Qml)

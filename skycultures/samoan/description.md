@@ -8,126 +8,171 @@ Formerly known as the *Navigator Islands*, the Samoan archipelago has been the l
 
 ### General Terminology
 
-<dl>
-  <dt><notr>fētū</notr></dt><dd>star</dd>
-  <dt><notr>lā</notr></dt><dd>sun</dd>
-  <dt><notr>māsina</notr></dt><dd>moon</dd>
-  <dt><notr>lagi</notr></dt><dd>sky</dd>
-  <dt><notr>fuifuifētū</notr></dt><dd>constellation ("star clusters")</dd>
-  <dt><notr>ʻemoʻemo, ʻemaʻema</notr></dt><dd>twinkling</dd>
-  <dt><notr>liʻo</notr></dt><dd>observed halo or reflective ring around star/moon</dd>
-  <dt><notr>pupula</notr></dt><dd>light emitted by sun/star, reflected by moon</dd>
-  <dt><notr>vānimonimo/vāteatea/vāuliuli</notr></dt><dd>outer space ("immeasurable space"/"expanse"/"dark void")</dd>
-  <dt><notr>fētūafi/fētūlele/fētūatiafi</notr></dt><dd>meteor/shooting star ("fire star"/"flying star"/"fire-carrying star")</dd>
-  <dt><notr>pusaloa</notr></dt><dd>comet ("smoke plume")</dd>
-  <dt><notr>nuanua</notr></dt><dd>rainbow</dd>
-  <dt><notr>sopolagi</notr></dt><dd>starpath/orbit</dd>
-  <dt><notr>sila</notr></dt><dd>endpoint of starpath/orbit (point on the horizon where star/sun/moon/planet is seen to rise/set from)</dd>
-  <dt><notr>maluopeaua</notr></dt><dd>the moment at which a star/moon/planet becomes visible at the horizon ("obscured in the sea mist")</dd>
-  <dt><notr>goto/ifo/paʻū</notr></dt><dd>to set (descent of star/moon/sun/planet below the horizon)</dd>
-  <dt><notr>oso/aʻe/fānaʻe/aufasa</notr></dt><dd>to rise (ascent of star/moon/sun /planet above the horizon)</dd>
-  <dt><notr>fetāileliʻi</notr></dt><dd>navigational path formed by a series of constellations/stars rising in sequence</dd>
-  <dt><notr>gasetoto</notr></dt><dd>solar eclipse</dd>
-  <dt><notr>gaseʻeleʻele</notr></dt><dd>lunar eclipse</dd>
-  <dt><notr>pulou</notr></dt><dd>zenith position</dd>
-  <dt><notr>pale/faliu</notr></dt><dd>to descend from zenith position toward horizon</dd>
-  <dt><notr>itūlagi</notr></dt><dd>spatial division of the sky/horizon</dd>
-  <dt><notr>tafatafailagi</notr></dt><dd>horizon</dd>
-  <dt><notr>tilotilo</notr></dt><dd>to catch a fleeting glance of star/moon during cloudy conditions</dd>
-  <dt><notr>gālouluvao</notr></dt><dd>obstructed view of star/moon</dd>
-  <dt><notr>lagivalea</notr></dt><dd>view of sky obstructed by clouds</dd>
-  <dt><notr>fanoloa</notr></dt><dd>period of time when star/moon/planet is not visible</dd>
-  <dt><notr>lagi e mamā/lagilelei/lagimā</notr></dt><dd>clear view of sky</dd>
-  <dt><notr>mataʻaga</notr></dt><dd>the act of watching the sky for stars/signs</dd>
-  <dt><notr>vaʻaiiliu</notr></dt><dd>to lay down in the hull to observe the sky above</dd>
-  <dt><notr>fotu</notr></dt><dd>appearance of star/moon/sun/planet</dd>
-  <dt><notr>galo</notr></dt><dd>disappearance of star/moon/sun/planet</dd>
-</dl>
+- _fētū_ - star
+- _lā_ - sun
+- _māsina_ - moon
+- _lagi_ - sky
+- _fuifuifētū_ - constellation ("star clusters")
+- _ʻemoʻemo, ʻemaʻema_ - twinkling
+- _liʻo_ - observed halo or reflective ring around star/moon
+- _pupula_ - light emitted by sun/star, reflected by moon
+- _vānimonimo/vāteatea/vāuliuli_ - outer space ("immeasurable space"/"expanse"/"dark void")
+- _fētūafi/fētūlele/fētūatiafi_ - meteor/shooting star ("fire star"/"flying star"/"fire-carrying star")
+- _pusaloa_ - comet ("smoke plume")
+- _nuanua_ - rainbow
+- _sopolagi_ - starpath/orbit
+- _sila_ - endpoint of starpath/orbit (point on the horizon where star/sun/moon/planet is seen to rise/set from)
+- _maluopeaua_ - the moment at which a star/moon/planet becomes visible at the horizon ("obscured in the sea mist")
+- _goto/ifo/paʻū_ - to set (descent of star/moon/sun/planet below the horizon)
+- _oso/aʻe/fānaʻe/aufasa_ - to rise (ascent of star/moon/sun /planet above the horizon)
+- _fetāileliʻi_ - navigational path formed by a series of constellations/stars rising in sequence
+- _gasetoto_ - solar eclipse
+- _gaseʻeleʻele_ - lunar eclipse
+- _pulou_ - zenith position
+- _pale/faliu_ - to descend from zenith position toward horizon
+- _itūlagi_ - spatial division of the sky/horizon
+- _tafatafailagi_ - horizon
+- _tilotilo_ - to catch a fleeting glance of star/moon during cloudy conditions
+- _gālouluvao_ - obstructed view of star/moon
+- _lagivalea_ - view of sky obstructed by clouds
+- _fanoloa_ - period of time when star/moon/planet is not visible
+- _lagi e mamā/lagilelei/lagimā_ - clear view of sky
+- _mataʻaga_ - the act of watching the sky for stars/signs
+- _vaʻaiiliu_ - to lay down in the hull to observe the sky above
+- _fotu_ - appearance of star/moon/sun/planet
+- _galo_ - disappearance of star/moon/sun/planet
 
 ### Planet Terminology
 
-<dl>
-  <dt><notr>Tupualēgase</notr></dt><dd>("Undying Mystery") Jupiter; associated with the ritual observance of the Amo o Ātua iā Tupualēgase (the Ātua chiefdomʻs annual celebration of the deity Tupualēgase, who is embodied by the planet Jupiter).</dd>
-  <dt><notr>Tapuʻitea</notr></dt><dd>("Forbidden Radiance") Venus; associated with the cannibal demigoddess Tapuʻitea who self-exiled herself to outer space to spare her son Toʻivā from her insatiable appetite; Toʻivā (abbreviation of Toʻivaitotonuoleʻatoatufuga) is also seen in the night sky as an adze-shaped constellation (Sickle of Leo); Venus is known to pass through Leo once (sometimes twice) a year, acknowledging the relationship between mother and son.</dd>
-  <dt><notr>Fētūao</notr></dt><dd>("Morning Star") Venus when seen before sunrise; associated with the legend of Tapuʻitea.</dd>
-  <dt><notr>Matamemea</notr></dt><dd>("Reddish Face/Surface") Mars.</dd>
-  <dt><notr>Tāʻelo</notr></dt><dd>("Brownish") Mercury.</dd>
-  <dt><notr>Fētūʻāsoa</notr></dt><dd>("Garland Star") Saturn.</dd>
-</dl>
+#### Tupualēgase
+
+_Undying Mystery_ - Jupiter; associated with the ritual observance of the Amo o Ātua iā Tupualēgase (the Ātua chiefdomʻs annual celebration of the deity Tupualēgase, who is embodied by the planet Jupiter).
+
+#### Tapuʻitea
+
+_Forbidden Radiance__ - Venus; associated with the cannibal demigoddess Tapuʻitea who self-exiled herself to outer space to spare her son Toʻivā from her insatiable appetite; Toʻivā (abbreviation of Toʻivaitotonuoleʻatoatufuga) is also seen in the night sky as an adze-shaped constellation (Sickle of Leo); Venus is known to pass through Leo once (sometimes twice) a year, acknowledging the relationship between mother and son.
+
+#### Fētūao
+
+_Morning Star_ - Venus when seen before sunrise; associated with the legend of Tapuʻitea.
+
+#### Matamemea
+
+_Reddish Face/Surface_ - Mars.
+
+#### Tāʻelo
+
+_Brownish_ - Mercury.
+
+#### Fētūʻāsoa
+
+_Garland Star_ - Saturn.
 
 ### Star Terminology
 
-<dl>
-  <dt><notr>Luatagata</notr></dt><dd>("Two Men") Alpha and Beta Centauri collectively; associated with the legend of Sumu (Crux, Southern Cross).</dd>
-  <dt><notr>Filo/Mea</notr></dt><dd>Alpha and Beta Centauri individually (no distinction between the two); associated with the legend of Sumu (Crux, Southern Cross).</dd>
-  <dt><notr>Suga/Pae</notr></dt><dd>M4 and M80 within Scorpius (no distinction between the two); associated with the legend of Toloa (head of Scorpius).</dd>
-  <dt><notr>Fētūsolonuʻu</notr></dt><dd>("Gliding Star") Sirius; considered zenith star for traveling between Sāmoa and Fiji.</dd>
-  <dt><notr>Telegese</notr></dt><dd>("Slow-Moving") Sirius; considered zenith star for traveling between Sāmoa and Fiji.</dd>
-  <dt><notr>Taʻulua</notr></dt><dd>("Two Salutations") refers to Sirius during the part of the year when it is visible both at sunrise and sunset (thus "greeted twice" on the same day).</dd>
-  <dt><notr>Taʻuluatuāfanua</notr></dt><dd>("Taʻulua Eastward") Sirius seen at sunrise.</dd>
-  <dt><notr>Taʻuluaalofi</notr></dt><dd>("Taʻulua Westward") Sirius seen at sunset.</dd>
-  <dt><notr>Aolele</notr></dt><dd>("Flying Cloud") Small Magellanic Cloud.</dd>
-  <dt><notr>Aotea</notr></dt><dd>("Pale Cloud") Large Magellanic Cloud.</dd>
-  <dt><notr>ʻAniva</notr></dt><dd>("Expanse") Milky Way.</dd>
-</dl>
+#### Matāliʻi
+
+_Face of Liʻi_ - Pleiades (grouping of seven stars representing eyes, ears, nostrils, and mouth of demigod Liʻi); associated with the legend of a Tanifā (Cetus) pursuing a canoe paddled by Liʻi; acronychal rising of Matāliʻi signaled the beginning of the new year (Vāipālolo season) and ushered in the festivities of the first fruits (Talomua) during the lunar months of Taumafamua and Toetaumafa. Note: for display clarity and ease of use Matāliʻi is assigned to the star Alcyone.
+
+#### Luatagata
+
+_Two Men_ - Alpha and Beta Centauri collectively; associated with the legend of Sumu (Crux, Southern Cross).
+
+#### Filo/Mea
+
+Alpha and Beta Centauri individually (no distinction between the two); associated with the legend of Sumu (Crux, Southern Cross).
+
+#### Suga/Pae
+
+M4 and M80 within Scorpius (no distinction between the two); associated with the legend of Toloa (head of Scorpius).
+
+#### Fētūsolonuʻu
+
+_Gliding Star_ - Sirius; considered zenith star for traveling between Sāmoa and Fiji.
+
+#### Telegese
+
+_Slow-Moving_ - Sirius; considered zenith star for traveling between Sāmoa and Fiji.
+
+#### Taʻulua
+
+_Two Salutations_ - refers to Sirius during the part of the year when it is visible both at sunrise and sunset (thus "greeted twice" on the same day).
+
+#### Taʻuluatuāfanua
+
+_Taʻulua Eastward_ - Sirius seen at sunrise.
+
+#### Taʻuluaalofi
+
+_Taʻulua Westward_ - Sirius seen at sunset.
+
+#### Aolele
+
+_Flying Cloud - Small Magellanic Cloud.
+
+#### Aotea
+
+_Pale Cloud_ - Large Magellanic Cloud.
+
+#### ʻAniva
+
+_Expanse_ - Milky Way.
+
+
 
 ## Constellations
 
-##### <notr>Sumu</notr>
+##### Triggerfish
 
-("Triggerfish") Crux/Southern Cross; associated with the legend of Filo and Mea (Alpha and Beta Centauri) fishing for the Sumu.
+("Sumu") Crux/Southern Cross; associated with the legend of Filo and Mea (Alpha and Beta Centauri) fishing for the Sumu.
 
-##### <notr>Faipā</notr>
+##### Fishhook lure
 
-("Fishhook Lure") the entire hook shaped constellation of Scorpius; associated with the legend of ʻAloʻalolelā and the magic fishhook (pā).
+("Faipā") the entire hook shaped constellation of Scorpius; associated with the legend of ʻAloʻalolelā and the magic fishhook (pā).
 
-##### <notr>Toloa</notr>
+##### Wild duck
 
-("Wild Duck") asterism within Faipā, representing a flying duck (head of Scorpius); associated with the legend of Suga and Pae (M4 and M80) hunting the Toloa; the duckʻs head (Antares) is recorded as having been used to sail from Pukapuka to ʻUpolu when the star was "low in the sky to the westward".
+("Toloa") asterism within Faipā, representing a flying duck (head of Scorpius); associated with the legend of Suga and Pae (M4 and M80) hunting the Toloa; the duckʻs head (Antares) is recorded as having been used to sail from Pukapuka to ʻUpolu when the star was "low in the sky to the westward".
 
-##### <notr>Tūlālupe</notr>
+##### Pigeon Perch
 
-("Pigeon Perch") asterism within Faipā (distal tail of Scorpius); associated with the chiefly sport of pigeon snaring.
+("Tūlālupe") asterism within Faipā (distal tail of Scorpius); associated with the chiefly sport of pigeon snaring.
 
-##### <notr>Matāliʻi</notr>
+##### Sea monster
 
-("Face of Liʻi") Pleiades (grouping of seven stars representing eyes, ears, nostrils, and mouth of demigod Liʻi); associated with the legend of a Tanifā (Cetus) pursuing a canoe paddled by Liʻi; acronychal rising of Matāliʻi signaled the beginning of the new year (Vāipālolo season) and ushered in the festivities of the first fruits (Talomua) during the lunar months of Taumafamua and Toetaumafa. Note: for display clarity and ease of use Matāliʻi is assigned to the star Alcyone.
+("Tanifā") Cetus (tail of Cetus is the head of Tanifā), pursuing Liʻi (Pleiades).
 
-##### <notr>Tanifā</notr>
+##### Tongs
 
-("Sea Monster") Cetus (tail of Cetus is the head of Tanifā), pursuing Liʻi (Pleiades).
+("Iʻofi") Taurus; associated with the legend of Tiʻitiʻiatalaga/Maui.
 
-##### <notr>Iʻofi</notr>
+##### Carrying pole
 
-("Tongs") Taurus; associated with the legend of Tiʻitiʻiatalaga/Maui.
+("Amoga") constellation stretching from Pi-3 Orionis to Gamma Monocerotis; associated with the legend of Tiʻitiʻiatalaga; zenith star for traveling between Sāmoa and Tonga.
 
-##### <notr>Amoga</notr>
+##### Triad of moons
 
-("Carrying Pole") constellation stretching from Pi-3 Orionis to Gamma Monocerotis; associated with the legend of Tiʻitiʻiatalaga; zenith star for traveling between Sāmoa and Tonga.
+("Tolugāmāuli") asterism within Amoga (three stars of Orionʻs Belt); associated with legend of Tiʻitiʻiatalaga; noted as the "star course" to sail from Manuʻa to Pukapuka.
 
-##### <notr>Tolugāmāuli</notr>
+##### Heirloom Warclub
 
-("Triad of Moons") asterism within Amoga (three stars of Orionʻs Belt); associated with legend of Tiʻitiʻiatalaga; noted as the "star course" to sail from Manuʻa to Pukapuka.
+("ʻAnava") constellation found largely within Ursa Major.
 
-##### <notr>ʻAnava</notr>
+##### Kingfisher
 
-("Warclub") constellation found largely within Ursa Major.
+("Tiʻotala") Delphinus; associated with the legend of the tiʻotala (kingfisher) ambushing the grasshopper (sē).
 
-##### <notr>Tiʻotala</notr>
+##### Grasshopper
 
-("Kingfisher") Delphinus; associated with the legend of the tiʻotala (kingfisher) ambushing the grasshopper (sē).
+("Sē") constellation found within Pegasus; associated with the legend of the tiʻotala (kingfisher) ambushing the grasshopper (sē).
 
-##### <notr>Sē</notr>
+##### Candlenut torch
 
-("Grasshopper") constellation found within Pegasus; associated with the legend of the tiʻotala (kingfisher) ambushing the grasshopper (sē).
+("Tuigālama") Orionʻs arm/club; associated with the legend of Tiʻitiʻiatalaga.
 
-##### <notr>Tuigālama</notr>
+##### Great Adze
 
-("Candlenut Torch") Orionʻs arm/club; associated with the legend of Tiʻitiʻiatalaga.
-
-##### <notr>Toʻivā</notr>
-
-("Great Adze") Sickle of Leo; associated with the legend of Tapuʻitea (Venus) and her son Toʻivāitotonuoleʻatoatufuga ("Great Adze Within the Builderʻs Tool Basket").
+("Toʻivā") Sickle of Leo; associated with the legend of Tapuʻitea (Venus) and her son Toʻivāitotonuoleʻatoatufuga ("Great Adze Within the Builderʻs Tool Basket").
 
 ## References
 
