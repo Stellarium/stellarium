@@ -51,7 +51,7 @@ StelDialog::StelDialog(const QString &dialogName, QObject* parent)
 	, dialogName(dialogName)	
 {
 	if (parent == nullptr)
-    	setParent(StelMainView::getMainWindow());
+        setParent(StelMainView::getMainWindow());
 
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &StelDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &StelDialog::handleFontChanged);
@@ -85,7 +85,7 @@ void StelDialog::setVisible(bool v)
 {
     if (v)
     {
-        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());		
+        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
         QSize screenSize = StelMainView::getInstance().size();
 		// If dialog size is very large and we move to a computer with much smaller screen, this should create the dialog with reasonable better size.
         QSize maxSize = 0.95*screenSize;
@@ -120,7 +120,7 @@ void StelDialog::setVisible(bool v)
 			// Ensure that tooltip get rendered in red in night mode.
             connect(&StelApp::getInstance(), &StelApp::visionNightModeChanged, this, &StelDialog::updateNightModeProperty);
             updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
-			
+
 			connect(&StelApp::getInstance(), &StelApp::darkModeChanged, this, &StelDialog::updateDarkModeProperty);
 			updateDarkModeProperty(StelApp::getInstance().getDarkMode());
 
