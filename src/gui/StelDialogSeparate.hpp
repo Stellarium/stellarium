@@ -23,6 +23,7 @@
 
 #include "StelDialog.hpp"
 #include <QDialog>
+#include <QResizeEvent>
 
 class NightCover;
 
@@ -43,40 +44,19 @@ public:
 	StelDialogSeparate(QString dialogName="Default", QObject* parent=nullptr);
 	~StelDialogSeparate() override;
 
+private:
+	void forceRepolish(QWidget* w);
+
 public slots:
 	//! On the first call with "true" populates the window contents.
 	void setVisible(bool) override;
 
 protected slots:
 	void updateNightModeProperty(bool n) override;
+	void updateDarkModeProperty(bool n) override;
 
 protected:
 	NightCover *nightCover;
-};
-
-//! This class allows storing size changes when its sizeChanged() signal is connected to some handler.
-class CustomDialog : public QDialog
-{
-	Q_OBJECT
-public:
-	CustomDialog(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags())
-	: QDialog(parent, f)
-	{
-		setFocusPolicy(Qt::StrongFocus);
-	}
-
-signals:
-	void sizeChanged(QSizeF);
-
-protected:
-	void resizeEvent(QResizeEvent *event) override
-	{
-		if (event->size() != event->oldSize())
-		{
-			emit sizeChanged(event->size());
-		}
-		QDialog::resizeEvent(event);
-	}
 };
 
 #endif // STELDIALOGSEPARATE_HPP

@@ -21,8 +21,6 @@
 #define STELDIALOG_HPP
 
 #include <QObject>
-#include <QGraphicsProxyWidget>
-#include <QGraphicsSceneResizeEvent>
 #include <QSettings>
 #include <QWidget>
 #include "StelApp.hpp"
@@ -197,7 +195,6 @@ protected:
 
 	//! The main dialog
 	QWidget* dialog;
-	class CustomProxy* proxy;
 	//! The name should be set in derived classes' constructors and can be used to store and retrieve the panel locations.
 	QString dialogName;
 
@@ -217,49 +214,6 @@ protected slots:
 	void handleColorSchemeChanged();
 
 	virtual void updateNightModeProperty(bool n);
-};
-
-class CustomProxy : public QGraphicsProxyWidget
-{	private:
-	Q_OBJECT
-	public:
-		CustomProxy(QGraphicsItem *parent = nullptr, Qt::WindowFlags wFlags = Qt::Widget) : QGraphicsProxyWidget(parent, wFlags)
-		{
-			setFocusPolicy(Qt::StrongFocus);
-		}
-		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
-		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override
-		{
-/*			QStyleOptionTitleBar bar;
-			initStyleOption(&bar);
-			bar.subControls = QStyle::SC_TitleBarCloseButton;
-			qWarning() << style()->subControlRect(QStyle::CC_TitleBar, &bar, QStyle::SC_TitleBarCloseButton);
-			QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);*/
-		}
-	signals: void sizeChanged(QSizeF);
-	protected:
-		bool event(QEvent* event) override
-		{
-			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
-			{
-				switch (event->type())
-				{
-					case QEvent::WindowDeactivate:
-						widget()->setWindowOpacity(0.4);
-						break;
-					case QEvent::WindowActivate:
-						widget()->setWindowOpacity(0.9);
-					default:
-						break;
-				}
-			}
-			return QGraphicsProxyWidget::event(event);
-		}
-		void resizeEvent(QGraphicsSceneResizeEvent *event) override
-		{
-			if (event->newSize() != event->oldSize())
-				emit sizeChanged(event->newSize());
-			QGraphicsProxyWidget::resizeEvent(event);
-		}
+	virtual void updateDarkModeProperty(bool n);
 };
 #endif // STELDIALOG_HPP

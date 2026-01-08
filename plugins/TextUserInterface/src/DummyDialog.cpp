@@ -23,52 +23,12 @@
 
 #include <QDebug>
 #include <QDialog>
-#include <QGraphicsProxyWidget>
+#include <QKeyEvent>
 #include <QStyleOptionGraphicsItem>
 #include <QLineEdit>
 
-// this is adapted from DummyDialog.cpp
-class DummyCustomProxy : public QGraphicsProxyWidget
-{
-	public:
-		DummyCustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::WindowFlags()) : QGraphicsProxyWidget(parent, wFlags)
-		{
-			setFocusPolicy(Qt::StrongFocus);
-		}
-		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
-		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem *, QWidget *) override
-		{
-		}
-
-	protected:
-		bool event(QEvent* event) override
-		{
-			if (event->type()==QEvent::WindowDeactivate)
-			{
-				widget()->setWindowOpacity(0.4);
-			}
-			if (event->type()==QEvent::WindowActivate)
-			{
-				widget()->setWindowOpacity(0.9);
-			}
-			return QGraphicsProxyWidget::event(event);
-		}
-		
-		// Avoid blocking the program when hovering over an inactive window
-		bool sceneEvent(QEvent* event) override
-		{
-			if (!(isActiveWindow() || event->type()==QEvent::WindowActivate || event->type()==QEvent::GraphicsSceneMousePress))
-			{
-				event->setAccepted(false);
-				return false;
-			}
-			return QGraphicsProxyWidget::sceneEvent(event);
-		}
-};
-
 DummyDialog::DummyDialog(StelModule* eventHandler)
-	: proxy(Q_NULLPTR)
-	, dialog(Q_NULLPTR)
+	: dialog(Q_NULLPTR)
 	, evtHandler(eventHandler)
 {
 }
@@ -91,30 +51,18 @@ void DummyDialog::setVisible(bool v)
 		if (dialog)
 		{
 			dialog->show();
-			StelMainView::getInstance().scene()->setActiveWindow(proxy);
-			proxy->setFocus();
+			dialog->setFocus();
 			return;
 		}
 		dialog = new QDialog(Q_NULLPTR);
 		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
-		
-		proxy = new DummyCustomProxy(Q_NULLPTR, Qt::Tool);
-		proxy->setWidget(dialog);
-		StelMainView::getInstance().scene()->addItem(proxy);
-		// Invisible frame around the window to make resizing easier
-		// (this also changes the bounding rectangle size)
-		proxy->setWindowFrameMargins(7,0,7,7);
-		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache); 
-		proxy->setZValue(100);
-		StelMainView::getInstance().scene()->setActiveWindow(proxy);
-		proxy->setFocus();
 	}
 	else
 	{
 		dialog->hide();
 		emit visibleChanged(false);
-		//proxy->clearFocus();
+		dialog->clearFocus();
 		StelMainView::getInstance().scene()->setActiveWindow(Q_NULLPTR);
 	}
 }

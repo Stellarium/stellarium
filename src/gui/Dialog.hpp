@@ -39,25 +39,35 @@
 
 class TitleBar : public QFrame
 {
-	Q_OBJECT
-	Q_PROPERTY(QString title READ title WRITE setTitle)
+    Q_OBJECT
+    Q_PROPERTY(QString title READ title WRITE setTitle)
 public:
-	QPoint mousePos;
+    QPoint mousePos;
 
-	TitleBar(QWidget* parent = nullptr);
-	void setTitle(const QString& title) { label->setText(title); }
-	QString title() const { return label->text(); }
+    TitleBar(QWidget* parent = nullptr)
+        : QFrame(parent)
+    {
+        setVisible(false);
+    }
+
+    void setTitle(const QString& title) {
+        m_title = title;
+        QWidget* p = parentWidget();
+        if (p)
+            p->setWindowTitle(title);
+    }
+
+    QString title() const { return m_title; }
 protected:
-	void mousePressEvent(QMouseEvent *event) override;
-	void mouseReleaseEvent(QMouseEvent *event) override;
-	void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event){};
+    void mouseReleaseEvent(QMouseEvent *event){};
+    void mouseMoveEvent(QMouseEvent *event){};
 signals:
-	void closeClicked();
-	// should be connected to the StelDialog in createDialogContents()
-	void movedTo(QPoint newPosition);
+    void closeClicked();
+    void movedTo(QPoint newPosition);
 protected:
-	bool moving = false;
-	QLabel* label;
+    bool moving = false;
+    QString m_title;
 };
 
 class ResizeFrame : public QFrame

@@ -89,6 +89,7 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLFramebufferObject>
 #include <QOpenGLFunctions_3_3_Core>
+#include <QProcess>
 #include <QString>
 #include <QStringList>
 #include <QSysInfo>
@@ -1264,6 +1265,61 @@ void StelApp::setVisionModeNight(bool b)
 		flagNightVision=b;
 		emit visionNightModeChanged(b);
 	}
+}
+
+// void StelApp::setDarkMode(bool b)
+// {
+// 	if (flagDarkMode!=b)
+// 	{
+// 		flagDarkMode=b;
+// 		StelApp::immediateSave("gui/flag_dark_mode", b);
+// 		emit darkModeChanged(b);
+// 	}
+// }
+
+bool StelApp::getDarkMode(){
+	#if defined(Q_OS_WIN)
+		// Windows 10: Check registry for AppsUseLightTheme
+		QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+						QSettings::NativeFormat);
+		return settings.value("AppsUseLightTheme", 1).toInt() == 0; // 0 = dark mode
+
+	#elif defined(Q_OS_MAC)
+		// macOS: Use defaults command to check AppleInterfaceStyle
+		QProcess process;
+		process.start("defaults", {"read", "-g", "AppleInterfaceStyle"});
+		process.waitForFinished();
+		QString output = process.readAllStandardOutput().trimmed();
+		return output.compare("Dark", Qt::CaseInsensitive) == 0;
+
+	#elif defined(Q_OS_UNIX)
+		// GNOME (Linux): Use gsettings to get interface color-scheme
+		QProcess process;
+		process.start("gsettings", {"get", "org.gnome.desktop.interface", "color-scheme"});
+		process.waitForFinished();
+		QString output = process.readAllStandardOutput();
+		return output.contains("dark", Qt::CaseInsensitive);
+
+	#else
+		// Other platforms: Default to false (light mode)
+		return true;
+	#endif
+}
+
+void StelApp::startDarkModeMonitor() {
+    currentDarkMode = getDarkMode();
+
+    QTimer* timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &StelApp::checkDarkMode);
+    timer->start(100);
+}
+
+void StelApp::checkDarkMode() {
+    bool darkNow = getDarkMode();
+    if (darkNow != currentDarkMode) {
+        currentDarkMode = darkNow;
+        emit darkModeChanged(darkNow);
+    }
 }
 
 void StelApp::setFlagOverwriteInfoColor(bool b)

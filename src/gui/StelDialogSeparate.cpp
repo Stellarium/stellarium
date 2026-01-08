@@ -22,11 +22,15 @@
 #include "StelDialogSeparate.hpp"
 #include "StelMainView.hpp"
 #include "StelGui.hpp"
+#include "StyleUtils.hpp"
 
 //#include <QDebug>
+#include <QApplication>
+#include <QEvent>
 #include <QWidget>
 #include <QDialog>
 #include <QSizeGrip>
+#include <QStyle>
 
 class NightCover: public QWidget{
 public:
@@ -57,6 +61,8 @@ StelDialogSeparate::StelDialogSeparate(QString dialogname, QObject* parent)
 	: StelDialog(dialogname, parent),
 	nightCover(nullptr)
 {
+	connect(&StelApp::getInstance(), SIGNAL(darkModeChanged(bool)), this, SLOT(updateDarkModeProperty(bool)));
+	updateDarkModeProperty(StelApp::getInstance().getDarkMode());
 }
 
 StelDialogSeparate::~StelDialogSeparate()
@@ -82,7 +88,7 @@ void StelDialogSeparate::setVisible(bool v)
 		}
 		else
 		{
-			dialog = new CustomDialog(&StelMainView::getInstance(), Qt::Tool | Qt::FramelessWindowHint);
+			dialog = new QDialog(&StelMainView::getInstance(), Qt::Tool | Qt::FramelessWindowHint);
 			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 			createDialogContent();
 			if (gui)
@@ -91,9 +97,9 @@ void StelDialogSeparate::setVisible(bool v)
 			connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
 			updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 
-			reinterpret_cast<CustomDialog*>(dialog)->setSizeGripEnabled(true);
+			reinterpret_cast<QDialog*>(dialog)->setSizeGripEnabled(true);
 			QSizeF size = dialog->size();
-			connect(reinterpret_cast<CustomDialog*>(dialog), SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
+			connect(reinterpret_cast<QDialog*>(dialog), SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
 
 			int newX, newY;
 			// Retrieve panel locations from config.ini, but shift if required to a visible position.
@@ -186,4 +192,15 @@ void StelDialogSeparate::updateNightModeProperty(bool n)
 	    else
 		nightCover->hide();
 	}
+}
+
+void StelDialogSeparate::updateDarkModeProperty(bool n)
+{
+	StelDialog::updateDarkModeProperty(n);
+
+	if (!dialog)
+		return;
+
+	dialog->setProperty("darkMode", n);
+	fullyRefreshWidgetStyleRecursive(dialog);
 }
