@@ -41,9 +41,9 @@ ENDIF()
 # -- YD (PATCH) - 0 for releases and the day of the current year for snapshots
 # Example: first release in year 2023 has version 23.1.0 and short (public) version 23.1, series 23.0
 # Note: Use integer versions instead of strings for easier handling if required
-SET(STELLARIUM_MAJOR 25)
+SET(STELLARIUM_MAJOR 26)
 # Number of the release (0 is used before first release)
-SET(STELLARIUM_MINOR 4)
+SET(STELLARIUM_MINOR 0)
 IF(STELLARIUM_RELEASE_BUILD)
     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
     SET(CMAKE_BUILD_TYPE Release)
