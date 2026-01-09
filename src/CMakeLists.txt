@@ -264,6 +264,8 @@ SET(stellarium_lib_SRCS
      core/modules/SpecificTimeMgr.hpp
      StelMainView.hpp
      StelMainView.cpp
+     StelMainWindow.hpp
+     StelMainWindow.cpp
      StelSplashScreen.hpp
      StelSplashScreen.cpp
      StelLogger.hpp

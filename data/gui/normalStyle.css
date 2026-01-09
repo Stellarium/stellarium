@@ -1,1297 +1,208 @@
 /**************************************************************************************************************
- * General styles — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] QWidget {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(31, 41, 55),
-		stop: 1 rgb(17, 24, 39)
-	);
-	selection-background-color: rgb(96, 165, 250);
-	selection-color: rgb(17, 24, 39);
-}
-
-[darkMode="true"] QLabel {
-	color: rgb(243, 244, 246);
-}
-
-[darkMode="true"] QLabel:disabled {
-	color: rgb(107, 114, 128);
-}
-
-[darkMode="true"] QDockWidget {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] QFrame[frameShape="4"],
-[darkMode="true"] QFrame[frameShape="5"] {
-	border: 1px solid rgb(75, 85, 99);
-}
-
-[darkMode="true"] QToolTip {
-	color: rgb(243, 244, 246);
-	background: rgb(55, 65, 81);
-}
-
-[darkMode="true"] QSizeGrip {
-	background: rgb(107, 114, 128);
-}
-
-[darkMode="true"] QTextEdit,
-[darkMode="true"] QPlainTextEdit,
-[darkMode="true"] QListWidget,
-[darkMode="true"] QTreeWidget,
-[darkMode="true"] QLineEdit {
-	background: rgb(31, 41, 55);
-	color: rgb(243, 244, 246);
-	selection-background-color: rgb(96, 165, 250);
-}
-
-[darkMode="true"] QTextEdit,
-[darkMode="true"] QPlainTextEdit,
-[darkMode="true"] QListWidget,
-[darkMode="true"] QLineEdit {
-	border: 1px solid rgb(75, 85, 99);
-}
-
-[darkMode="true"] QTextEdit:disabled,
-[darkMode="true"] QListWidget:disabled,
-[darkMode="true"] QTreeWidget:disabled,
-[darkMode="true"] QLineEdit:disabled {
-	background: rgb(55, 65, 81);
-	color: rgb(107, 114, 128);
-}
-
-[darkMode="true"] QTextBrowser {
-	background: rgb(31, 41, 55);
-	color: rgb(243, 244, 246);
-}
-
-[darkMode="true"] QGroupBox {
-	background-color: rgb(31, 41, 55);
-	border: 1px solid rgb(75, 85, 99);
-}
-
-[darkMode="true"] QGroupBox::title {
-	color: rgb(243, 244, 246);
-}
-
-[darkMode="true"] QTabBar {
-	background-color: rgb(17, 24, 39);
-	color: rgb(209, 213, 219);
-}
-
-[darkMode="true"] QListView {
-	background: rgb(31, 41, 55);
-	color: rgb(209, 213, 219);
-}
-
-[darkMode="true"] QListView::item:hover {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] QListView::item:selected {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(96, 165, 250),
-		stop: 1 rgb(59, 130, 246)
-	);
-	color: rgb(17, 24, 39);
-}
-
-[darkMode="true"] QProgressBar {
-	background-color: rgb(31, 41, 55);
-	border: 1px solid rgb(75, 85, 99);
-	color: rgb(209, 213, 219);
-}
-
-[darkMode="true"] QProgressBar::chunk {
-	background-color: rgb(96, 165, 250);
-}
-
-[darkMode="true"] QTreeView {
-	background-color: rgb(31, 41, 55);
-	color: rgb(243, 244, 246);
-}
-
-[darkMode="true"] QHeaderView::section {
-	background-color: rgb(31, 41, 55);
-	color: rgb(243, 244, 246);
-	border: 1px solid rgb(75, 85, 99);
-}
-
-[darkMode="true"] QMenu {
-	background-color: rgb(31, 41, 55);
-	border: 1px solid rgb(75, 85, 99);
-	color: rgb(243, 244, 246);
-}
-
-[darkMode="true"] QMenu::item {
-	background-color: rgb(55, 65, 81);
-}
-
-[darkMode="true"] QMenu::item:selected {
-	background-color: rgb(96, 165, 250);
-	color: rgb(17, 24, 39);
-}
-
-[darkMode="true"] QFrame#titleBar {
-	background-color: qlineargradient(
-		x1:0, y1:0, x2:0, y2:1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] QLabel#stelWindowTitle {
-	color: rgb(209, 213, 219);
-}
-
-[darkMode="true"] QFrame#viewContent {
-	background: rgb(17, 24, 39);
-}
-
-[darkMode="true"] QListView#stackListWidget {
-	color: rgb(156, 163, 175);
-}
-
-[darkMode="true"] QListView::item:hover#stackListWidget {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] QListView::item:selected#stackListWidget {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(96, 165, 250),
-		stop: 1 rgb(59, 130, 246)
-	);
-	color: rgb(17, 24, 39);
-}
-
-[darkMode="true"] QTabBar::tab:selected {
-	color: rgb(243, 244, 246);
-}
-
-[darkMode="true"] QTabBar::tab:top:hover {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] QTabBar::tab:top:selected {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(75, 85, 99),
-		stop: 1 rgb(55, 65, 81)
-	);
-}
-
-[darkMode="true"] QTabBar::tab:bottom:hover {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(31, 41, 55),
-		stop: 1 rgb(55, 65, 81)
-	);
-}
-
-[darkMode="true"] QTabBar::tab:bottom:selected {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(75, 85, 99),
-		stop: 1 rgb(55, 65, 81)
-	);
-}
-
-[darkMode="true"] QTabBar QToolButton {
-	background-color: rgb(31, 41, 55);
-}
-
-[darkMode="true"] QPushButton,
-[darkMode="true"] QToolButton {
-	border: 1px solid rgb(75, 85, 99);
-	color: rgb(243, 244, 246);
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] QPushButton:disabled,
-[darkMode="true"] QToolButton:disabled {
-	color: rgb(107, 114, 128);
-	border: 1px solid rgb(107, 114, 128);
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] QPushButton:hover,
-[darkMode="true"] QToolButton:hover {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(75, 85, 99),
-		stop: 1 rgb(55, 65, 81)
-	);
-}
-
-[darkMode="true"] QPushButton:pressed,
-[darkMode="true"] QToolButton:pressed,
-[darkMode="true"] QPushButton:checked,
-[darkMode="true"] QToolButton:checked {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(96, 165, 250),
-		stop: 0.2 rgb(59, 130, 246),
-		stop: 1 rgb(37, 99, 235)
-	);
-	color: rgb(17, 24, 39);
-}
-
-[darkMode="true"] QScrollBar:horizontal {
-	background: rgb(31, 41, 55);
-}
-
-[darkMode="true"] QScrollBar::handle:horizontal {
-	background: qlineargradient(
-		x1:0, y1:0, x2:1, y2:1,
-		stop:0 rgb(107, 114, 128),
-		stop:1 rgb(75, 85, 99)
-	);
-}
-
-[darkMode="true"] QScrollBar::add-page:horizontal,
-[darkMode="true"] QScrollBar::sub-page:horizontal {
-	background: qlineargradient(
-		x1:0, y1:0, x2:0, y2:1,
-		stop:0 rgb(55, 65, 81),
-		stop:1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] QScrollBar::right-arrow,
-[darkMode="true"] QScrollBar::left-arrow {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-
-[darkMode="true"] QScrollBar::left-arrow {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] QSlider::groove:horizontal {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgba(0,0,0,0),
-		stop: 0.3571 rgba(0,0,0,0),
-		stop: 0.3572 rgb(75, 85, 99),
-		stop: 0.6429 rgb(107, 114, 128),
-		stop: 0.6430 rgba(0,0,0,0),
-		stop: 1 rgba(0,0,0,0)
-	);
-}
-
-[darkMode="true"] QSlider::handle:horizontal {
-	border: 1px solid rgb(75, 85, 99);
-	color: rgb(243, 244, 246);
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] QSlider::handle:horizontal:hover {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(75, 85, 99),
-		stop: 1 rgb(55, 65, 81)
-	);
-}
-
-[darkMode="true"] QSlider::groove:horizontal:disabled {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgba(0,0,0,0),
-		stop: 0.3571 rgba(0,0,0,0),
-		stop: 0.3572 rgb(55, 65, 81),
-		stop: 0.6429 rgb(75, 85, 99),
-		stop: 0.6430 rgba(0,0,0,0),
-		stop: 1 rgba(0,0,0,0)
-	);
-}
-
-[darkMode="true"] QSlider::handle:horizontal:disabled {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-	border: 1px solid rgb(107, 114, 128);
-}
-
-/**************************************************************************************************************
- * shortcutsDialog — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] QLineEdit[collision="true"] {
-	color: rgb(248, 113, 113);
-}
-
-/**************************************************************************************************************
- * dateTimeDialog — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] #dateTimeDialogForm #dateTimeTabWidget QFrame {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(55, 65, 81),
-		stop: 1 rgb(31, 41, 55)
-	);
-}
-
-[darkMode="true"] #dateTimeDialogForm QSpinBox,
-[darkMode="true"] #dateTimeDialogForm QDoubleSpinBox {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * AstroCalc — darkMode
- *************************************************************************************************************/
-
-/* AstroCalc is already dark-oriented; ensure consistency */
-[darkMode="true"] #astroCalcDialogForm QCheckBox,
-[darkMode="true"] #astroCalcDialogForm QLabel {
-	color: rgb(243, 244, 246);
-}
-
-[darkMode="true"] QLabel#monthlyElevationTimeInfo {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * searchDialog — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] QLineEdit#lineEditSearchSkyObject {
-	background: rgb(31, 41, 55);
-	border: 1px solid rgb(75, 85, 99);
-	color: rgb(243, 244, 246);
-	border-right: none;
-}
-
-[darkMode="true"] QFrame#greekLettersFrame {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * script console — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] #scriptConsoleForm QLabel#quickrunLabel {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * search dialog (labels) — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] #searchDialogForm QLabel#labelGreekLetterTitle,
-[darkMode="true"] #searchDialogForm QLabel#simbadStatusLabel,
-[darkMode="true"] #searchDialogForm QLabel#simbadCooStatusLabel {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * shortcuts dialog (labels) — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] #shortcutsDialogForm QLabel#primaryLabel,
-[darkMode="true"] #shortcutsDialogForm QLabel#altLabel {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * locationDialog — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] QLineEdit#citySearchLineEdit {
-	background-color: rgb(31, 41, 55);
-	color: rgb(243, 244, 246);
-}
-
-[darkMode="true"] QListView#citiesListView {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * configurationDialog — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] QTextBrowser#deltaTAlgorithmDescription {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * viewDialog — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] QTextBrowser#projectionTextBrowser {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * helpDialog — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] QTextBrowser#helpBrowser,
-[darkMode="true"] QTextBrowser#aboutBrowser {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * satellitesDialog — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] QListWidget#satellitesList,
-[darkMode="true"] QListWidget#sourceList {
-	color: rgb(243, 244, 246);
-}
-
-/* Labels are already light-on-dark by design; keep explicit for safety */
-[darkMode="true"] #satellitesDialog QLabel#labelAutoAdd,
-[darkMode="true"] #satellitesDialog QLabel#labelTle,
-[darkMode="true"] #satellitesDialog QLabel#labelTleEpoch,
-[darkMode="true"] #satellitesDialog QLabel#labelTleEpochData,
-[darkMode="true"] #satellitesDialog QLabel#validAgeLabel {
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * TelescopeControl — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] QTreeView::item:selected#treeView {
-	background-color: rgb(96, 165, 250);
-	color: rgb(17, 24, 39);
-}
-
-[darkMode="true"] QTreeView::item:!enabled#treeView {
-	color: rgb(107, 114, 128);
-}
-
-/**************************************************************************************************************
- * ocularDialog — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] QLabel#lensNote {
-	color: rgb(243, 244, 246);
-}
-
-[darkMode="true"] QMessageBox {
-	background-color: rgb(31, 41, 55);
-	color: rgb(243, 244, 246);
-}
-
-[darkMode="true"] QColorDialog {
-	background-color: rgb(31, 41, 55);
-	color: rgb(243, 244, 246);
-}
-
-/**************************************************************************************************************
- * AstroCalcAlmanacWidget — darkMode
- *************************************************************************************************************/
-
-[darkMode="true"] AstroCalcAlmanacWidget QFrame[frameShape="4"],
-[darkMode="true"] AstroCalcAlmanacWidget QFrame[frameShape="5"] {
-	border: 1px solid rgb(75, 85, 99);
-}
-
-/**************************************************************************************************************
  * General styles
  *************************************************************************************************************/
 
-QWidget {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(249, 250, 251),
-		stop: 1 rgb(229, 231, 235)
-	);
-	selection-background-color: rgb(147, 197, 253);
-	selection-color: rgb(17, 24, 39);
-}
+QWidget {}
 
-QLabel {
-	color: rgb(17, 24, 39);
-	font-size: 100%;
-	background: none;
-}
+QLabel {}
+QLabel:disabled {}
 
-QLabel:disabled {
-	color: rgb(156, 163, 175);
-}
+QDockWidget {}
 
-QDockWidget {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(229, 231, 235),
-		stop: 1 rgb(209, 213, 219)
-	);
-}
+QFrame {}
+QFrame[frameShape="4"],
+QFrame[frameShape="5"] {}
 
-QFrame {
-	background: none;
-	border: none;
-}
+QToolTip {}
 
-QFrame[frameShape="4"],   /* QFrame::HLine == 0x0004 */
-QFrame[frameShape="5"] { /* QFrame::VLine == 0x0005 */
-	border: 1px solid rgb(209, 213, 219);
-}
+*[nightMode="true"] QToolTip {}
 
-QToolTip {
-	color: rgb(31, 41, 55);
-	font-size: 100%;
-	padding: 2px;
-	background: rgb(229, 231, 235);
-}
-
-*[nightMode="true"] QToolTip {
-	color: rgb(4, 0, 0);
-	font-size: 100%;
-	padding: 2px;
-	background: rgb(101, 0, 0);
-}
-
-QSizeGrip {
-	width: 8px;
-	height: 8px;
-	background: rgb(156, 163, 175);
-}
+QSizeGrip {}
 
 QTextEdit,
 QPlainTextEdit,
 QListWidget,
 QTreeWidget,
-QLineEdit {
-	background: rgb(255, 255, 255);
-	selection-background-color: rgb(147, 197, 253);
-	color: rgb(17, 24, 39);
-	font-size: 100%;
-}
+QLineEdit {}
 
 QTextEdit,
 QPlainTextEdit,
 QListWidget,
-QLineEdit {
-	border: 1px solid rgb(209, 213, 219);
-	border-radius: 0;
-	padding: 0 8px;
-}
+QLineEdit {}
 
 QTextEdit:disabled,
 QListWidget:disabled,
 QTreeWidget:disabled,
-QLineEdit:disabled {
-	background: rgb(229, 231, 235);
-}
+QLineEdit:disabled {}
 
-QTextBrowser {
-	border: 0 solid rgb(0, 0, 0);
-	background: rgb(243, 244, 246);
-	color: rgb(17, 24, 39);
-	font-size: 100%;
-}
+QTextBrowser {}
 
-QGroupBox {
-	padding: 15px;
-	padding-top: 35px;
-	margin-right: 10px;
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background-color: rgba(243, 244, 246, 100%);
-	border: 1px solid rgba(209, 213, 219, 100%);
-	border-style: inset;
-	font-weight: bold;
-	border-radius: 5px;
-}
+QGroupBox {}
 
-QGroupBox::title {
-	subcontrol-position: top left;
-	subcontrol-origin: margin;
-	color: rgb(17, 24, 39);
-	left: 27px;
-	top: 20px;
-}
+QGroupBox::title {}
 
-QTabWidget::pane {
-	border: none;
-	margin-top: 0;
-}
+QTabWidget::pane {}
+QTabWidget::tab-bar {}
 
-QTabWidget::tab-bar {
-	width: 1000px;
-}
+QTabBar {}
 
-QTabBar {
-	margin: 0;
-	padding: 0;
-	font-weight: bold;
-	color: rgb(55, 65, 81);
-	background-color: rgb(243, 244, 246);
-	font-size: 108%;
-}
+QListView {}
+QListView::item {}
+QListView::item:hover {}
+QListView::item:selected {}
 
-QListView {
-	font-size: 108%;
-	color: rgb(55, 65, 81);
-	background: rgb(255, 255, 255);
-	show-decoration-selected: 1;
-	border: none;
-}
+QProgressBar {}
+QProgressBar::chunk {}
 
-QListView::item {
-	padding-top: 6px;
-	padding-bottom: 6px;
-	padding-left: 0;
-	padding-right: 0;
-}
+QTreeView {}
 
-QListView::item:hover {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(229, 231, 235),
-		stop: 1 rgb(209, 213, 219)
-	);
-}
+QHeaderView::section {}
+QHeaderView::up-arrow {}
+QHeaderView::down-arrow {}
 
-QListView::item:selected {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(191, 219, 254),
-		stop: 1 rgb(147, 197, 253)
-	);
-}
-
-QProgressBar {
-	border: 1px solid rgba(209, 213, 219, 100%);
-	border-radius: 2px;
-	background-color: rgba(243, 244, 246, 100%);
-	text-align: center;
-	color: rgb(55, 65, 81);
-	font-size: 92%;
-}
-
-QProgressBar::chunk {
-	background-color: rgba(96, 165, 250, 100%);
-	width: 10px;
-	margin: 0.5px;
-}
-
-QTreeView {
-	background-color: rgb(243, 244, 246);
-	color: rgb(17, 24, 39);
-	font-size: 100%;
-}
-
-QHeaderView::section {
-	background-color: rgb(229, 231, 235);
-	font: bold;
-	color: rgb(17, 24, 39);
-	font-size: 100%;
-	padding-left: 4px;
-	border: 1px solid rgb(209, 213, 219);
-}
-
-QHeaderView::up-arrow {
-	image: url(:/graphicGui/uieSpinup.png);
-}
-
-QHeaderView::down-arrow {
-	image: url(:/graphicGui/uieSpindown.png);
-}
-
-QMenu {
-	background-color: rgb(243, 244, 246);
-	border: 1px solid rgb(209, 213, 219);
-	color: rgb(17, 24, 39);
-}
-
-QMenu::item {
-	background-color: rgb(229, 231, 235);
-}
-
-QMenu::item:selected {
-	background-color: rgb(191, 219, 254);
-}
+QMenu {}
+QMenu::item {}
+QMenu::item:selected {}
 
 /*
  * Windows
  */
 
-QFrame#titleBar {
-	/* Title bar on windows */
-	min-width: 16px;
-	min-height: 25px;
-	max-height: 25px;
-	margin: 0;
-	background-color: qlineargradient(
-		x1:0, y1:0, x2:0, y2:1,
-		stop: 0 rgb(229, 231, 235),
-		stop: 1 rgb(209, 213, 219)
-	);
-}
+QFrame#titleBar {}
 
-QLabel#stelWindowTitle {
-	/* Titles of windows */
-	margin-left: 24px;
-	font-size: 108%;
-	font-weight: bold;
-	color: rgb(55, 65, 81);
-	background: none;
-}
+QLabel#stelWindowTitle {}
 
-QFrame#viewContent {
-	/*
-	 * Content of windows.
-	 *
-	 * Includes everything inside a window apart from the stelWindowTitle
-	 */
-	background: rgb(255, 255, 255);
-}
+QFrame#viewContent {}
 
 /*
  * Main tab bar on windows
  */
 
-QListView#stackListWidget {
-	min-height: 74px;
-	max-height: 74px;
-	icon-size: 50px;
-	font-weight: bold;
-	color: rgb(107, 114, 128);
-}
-
-QListView::item:hover#stackListWidget {
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(229, 231, 235),
-		stop: 1 rgb(209, 213, 219)
-	);
-}
-
-QListView::item:selected#stackListWidget {
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(191, 219, 254),
-		stop: 1 rgb(147, 197, 253)
-	);
-	color: rgb(30, 41, 59);
-}
-
-QListView::item#stackListWidget {
-	min-height: 74px;
-	max-height: 74px;
-	margin: 0;
-	padding-top: 0;
-	padding-bottom: 5px;
-	padding-left: 8px;
-	padding-right: 8px;
-}
+QListView#stackListWidget {}
+QListView::item:hover#stackListWidget {}
+QListView::item:selected#stackListWidget {}
+QListView::item#stackListWidget {}
 
 /*
  * Secondary tab bar
  */
 
-QTabBar::tab {
-	border: none;
-	margin: 0;
-	padding: 1ex 2ex;
-	min-height: 28px;
-}
-
-QTabBar::tab:selected {
-	border: none;
-	margin: 0;
-	color: rgb(17, 24, 39);
-}
-
-QTabBar::tab:top {
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-
-QTabBar::tab:top:hover {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(229, 231, 235),
-		stop: 1 rgb(209, 213, 219)
-	);
-}
-
-QTabBar::tab:top:selected {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(243, 244, 246),
-		stop: 1 rgb(229, 231, 235)
-	);
-}
-
-QTabBar::tab:bottom {
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
-QTabBar::tab:bottom:hover {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(209, 213, 219),
-		stop: 1 rgb(229, 231, 235)
-	);
-}
-
-QTabBar::tab:bottom:selected {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(243, 244, 246),
-		stop: 1 rgb(209, 213, 219)
-	);
-}
-
-QTabBar QToolButton {
-	background-color: rgb(243, 244, 246);
-}
+QTabBar::tab {}
+QTabBar::tab:selected {}
+QTabBar::tab:top {}
+QTabBar::tab:top:hover {}
+QTabBar::tab:top:selected {}
+QTabBar::tab:bottom {}
+QTabBar::tab:bottom:hover {}
+QTabBar::tab:bottom:selected {}
+QTabBar QToolButton {}
 
 /*
  * QPushButton and QToolButton
  */
 
-QToolButton {
-	padding: 2px;
-}
-
-QPushButton {
-	padding: 2px 8px;
-}
-
-QPushButton, QToolButton {
-	border: 1px solid rgb(209, 213, 219);
-	border-radius: 2px;
-	color: rgb(17, 24, 39);
-	font-size: 100%;
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(243, 244, 246),
-		stop: 1 rgb(229, 231, 235)
-	);
-	icon-size: 16px;
-}
-
-QPushButton:disabled, QToolButton:disabled {
-	color: rgb(156, 163, 175);
-	border: 1px solid rgb(156, 163, 175);
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(229, 231, 235),
-		stop: 1 rgb(209, 213, 219)
-	);
-}
-
-QPushButton:flat, QToolButton:flat {
-	border: none;
-	background: transparent;
-}
-
-QPushButton:hover, QToolButton:hover {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(219, 234, 254),
-		stop: 1 rgb(191, 219, 254)
-	);
-}
-
-QPushButton:pressed, QToolButton:pressed {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(147, 197, 253),
-		stop: 0.2 rgb(96, 165, 250),
-		stop: 1 rgb(59, 130, 246)
-	);
-}
-
-QPushButton:checked, QToolButton:checked {
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(147, 197, 253),
-		stop: 0.2 rgb(96, 165, 250),
-		stop: 1 rgb(59, 130, 246)
-	);
-}
-
-QToolButton#pushButtonGotoSearchSkyObject {
-	icon-size: 24px;
-}
-
-QToolButton#moveUp, QToolButton#moveDown, QToolButton#moveLeft, QToolButton#moveRight {
-	icon-size: 22px;
-}
-
-QToolButton#pushButtonCustomStepsDialog, QToolButton#pushButtonNow, QToolButton#pushButtonExtraEphemerisDialog {
-	icon-size: 20px;
-	min-width: 22px;
-	max-width: 22px;
-	min-height: 22px;
-	max-height: 22px;
-	padding: 0;
-}
-
-ColorButton {
-	min-width: 16px;
-	max-width: 16px;
-	min-height: 16px;
-	max-height: 16px;
-	padding: 0;
-}
-
-StelCloseButton, StelCloseButton:hover {
-	min-width: 16px;
-	max-width: 16px;
-	min-height: 16px;
-	max-height: 16px;
-	margin: 0 1px 0 0;
-	background: none;
-}
+QToolButton {}
+QPushButton {}
+QPushButton, QToolButton {}
+QPushButton:disabled, QToolButton:disabled {}
+QPushButton:flat, QToolButton:flat {}
+QPushButton:hover, QToolButton:hover {}
+QPushButton:pressed, QToolButton:pressed {}
+QPushButton:checked, QToolButton:checked {}
+QToolButton#pushButtonGotoSearchSkyObject {}
+QToolButton#moveUp, QToolButton#moveDown, QToolButton#moveLeft, QToolButton#moveRight {}
+QToolButton#pushButtonCustomStepsDialog, QToolButton#pushButtonNow, QToolButton#pushButtonExtraEphemerisDialog {}
+ColorButton {}
+StelCloseButton, StelCloseButton:hover {}
 
 /*
  * QScrollBar:horizontal
  */
 
-QScrollBar:horizontal {
-	border: 0 solid rgb(209, 213, 219);
-	background: rgb(243, 244, 246);
-	height: 16px;
-	margin: 0 20px;
-}
-
-QScrollBar::handle:horizontal {
-	border: 0;
-	background: qlineargradient(
-		x1:0, y1:0, x2:1, y2:1,
-		stop:0 rgb(209, 213, 219),
-		stop:1 rgb(156, 163, 175)
-	);
-	min-width: 20px;
-}
-
-QScrollBar::add-line:horizontal {
-	border: 0 solid rgb(209, 213, 219);
-	width: 20px;
-	subcontrol-position: left;
-	subcontrol-origin: margin;
-}
-
-QScrollBar::sub-line:horizontal {
-	border: 0 solid rgb(209, 213, 219);
-	width: 20px;
-	subcontrol-position: right;
-	subcontrol-origin: margin;
-}
-
+QScrollBar:horizontal {}
+QScrollBar::handle:horizontal {}
+QScrollBar::add-line:horizontal {}
+QScrollBar::sub-line:horizontal {}
 QScrollBar::add-page:horizontal,
-QScrollBar::sub-page:horizontal {
-	background: qlineargradient(
-		x1:0, y1:0, x2:0, y2:1,
-		stop:0 rgb(229, 231, 235),
-		stop:1 rgb(209, 213, 219)
-	);
-}
-
-QScrollBar::right-arrow {
-	subcontrol-origin: padding;
-	subcontrol-position: left; /* position at the top right corner */
-	height: 16px;
-	width: 20px;
-	image: url(:/graphicGui/uieScrollleft.png);
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(229, 231, 235),
-		stop: 1 rgb(209, 213, 219)
-	);
-}
-
-QScrollBar::left-arrow {
-	subcontrol-origin: padding;
-	subcontrol-position: right; /* position at the bottom right corner */
-	height: 16px;
-	width: 20px;
-	image: url(:/graphicGui/uieScrollright.png);
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(229, 231, 235),
-		stop: 1 rgb(209, 213, 219)
-	);
-}
+QScrollBar::sub-page:horizontal {}
+QScrollBar::right-arrow {}
+QScrollBar::left-arrow {}
 
 /*
  * QSlider:horizontal
  */
 
-QSlider {
-	background: none;
-	height: 14px;
-}
-
-QSlider::groove:horizontal {
-	border: none;
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgba(0,0,0,0),
-		stop: 0.3571 rgba(0,0,0,0),
-		stop: 0.3572 rgb(209, 213, 219),
-		stop: 0.6429 rgb(156, 163, 175),
-		stop: 0.6430 rgba(0,0,0,0),
-		stop: 1 rgba(0,0,0,0)
-	);
-	margin: 0;
-}
-
-QSlider::handle:horizontal {
-	border: 1px solid rgb(209, 213, 219);
-	border-radius: 2px;
-	width: 32px;
-	margin: 0;
-	color: rgb(17, 24, 39);
-	background-color: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(243, 244, 246),
-		stop: 1 rgb(229, 231, 235)
-	);
-}
-
-QSlider::handle:horizontal:hover {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(219, 234, 254),
-		stop: 1 rgb(191, 219, 254)
-	);
-}
-
-QSlider::groove:horizontal:disabled {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgba(0,0,0,0),
-		stop: 0.3571 rgba(0,0,0,0),
-		stop: 0.3572 rgb(229, 231, 235),
-		stop: 0.6429 rgb(209, 213, 219),
-		stop: 0.6430 rgba(0,0,0,0),
-		stop: 1 rgba(0,0,0,0)
-	);
-}
-
-QSlider::handle:horizontal:disabled {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(229, 231, 235),
-		stop: 1 rgb(209, 213, 219)
-	);
-	border: 1px solid rgb(156, 163, 175);
-}
+QSlider {}
+QSlider::groove:horizontal {}
+QSlider::handle:horizontal {}
+QSlider::handle:horizontal:hover {}
+QSlider::groove:horizontal:disabled {}
+QSlider::handle:horizontal:disabled {}
 
 /* solution to night mode for DialogSeparate */
-QWidget#NightCover{
-	background: none;
-	color: rgba(80, 8, 0, 0.33);
-	background-color: rgba(80, 8, 0, 0.33); /* The actual filter color! */
-	selection-color: rgba(80, 8, 0, 0.33);
-	selection-background-color: rgba(80, 8, 0, 0.33);
-	alternate-background-color: rgba(80, 8, 0, 0.33);
-}
+QWidget#NightCover{}
 
 /**************************************************************************************************************
  * shortcutsDialog
  *************************************************************************************************************/
 
-QLineEdit[collision="true"] {
-	/*
-	 * Shortcut collision, when a user selects the same shortcut for two
-	 * functions
-	 */
-	color: rgb(220, 38, 38);
-}
+QLineEdit[collision="true"] {}
 
 /**************************************************************************************************************
  * dateTimeDialog
  *************************************************************************************************************/
 
-#dateTimeDialogForm #dateTimeTabWidget QFrame {
-	background: qlineargradient(
-		x1: 0, y1: 0, x2: 0, y2: 1,
-		stop: 0 rgb(243, 244, 246),
-		stop: 1 rgb(229, 231, 235)
-	);
-	border: none;
-}
+#dateTimeDialogForm #dateTimeTabWidget QFrame {}
 
-#dateTimeDialogForm #dateTimeTabWidget QLabel {
-	padding: 0;
-	margin: 0;
-	font-size: 24px;
-	text-align: center;
-	background: none;
-}
+#dateTimeDialogForm #dateTimeTabWidget QLabel {}
 
 #dateTimeDialogForm QSpinBox,
-#dateTimeDialogForm QDoubleSpinBox {
-	border: 0;
-	background: rgba(0, 0, 0, 0%);
-	padding-top: 16px;
-	padding-bottom: 16px;
-	font-size: 18px;
-	text-align: center;
-	padding-left: 3px;
-	padding-right: 3px;
-	color: rgb(17, 24, 39);
-}
+#dateTimeDialogForm QDoubleSpinBox {}
 
 #dateTimeDialogForm QSpinBox::up-button,
-#dateTimeDialogForm QDoubleSpinBox::up-button {
-	subcontrol-origin: border;
-	subcontrol-position: top center;
-	margin: 0 1px 8px 0;
-	width: 16px;
-	border: none;
-	background: none;
-	image: url(:/graphicGui/uieSpinup-aboveNumber.png);
-}
+#dateTimeDialogForm QDoubleSpinBox::up-button {}
 
 #dateTimeDialogForm QSpinBox::up-arrow,
-#dateTimeDialogForm QDoubleSpinBox::up-arrow {
-	image: none;
-	subcontrol-origin: border;
-	subcontrol-position: bottom center;
-	padding-bottom: 20px;
-}
+#dateTimeDialogForm QDoubleSpinBox::up-arrow {}
 
 #dateTimeDialogForm QSpinBox::down-button,
-#dateTimeDialogForm QDoubleSpinBox::down-button {
-	subcontrol-origin: border;
-	subcontrol-position: bottom center;
-	margin: 8px 1px 0 0;
-	border: none;
-	width: 16px;
-	background: none;
-	image: url(:/graphicGui/uieSpindown-aboveNumber.png);
-}
+#dateTimeDialogForm QDoubleSpinBox::down-button {}
 
 #dateTimeDialogForm QSpinBox::down-arrow,
-#dateTimeDialogForm QDoubleSpinBox::down-arrow {
-	image: none;
-	subcontrol-origin: border;
-	subcontrol-position: top center;
-	padding-top: 20px;
-}
+#dateTimeDialogForm QDoubleSpinBox::down-arrow {}
 
 /**************************************************************************************************************
  * AstroCalc
  *************************************************************************************************************/
 
 #astroCalcDialogForm QCheckBox,
-#astroCalcDialogForm QLabel {
-	color: rgb(243, 244, 246);
-}
+#astroCalcDialogForm QLabel {}
 
-QLabel#monthlyElevationTimeInfo {
-	color: rgb(243, 244, 246);
-	font-size: 18pt;
-}
+QLabel#monthlyElevationTimeInfo {}
 
-QWidget#eclipseFilterWidget {
-	background: transparent;
-}
+QWidget#eclipseFilterWidget {}
 
-QChartView#hecPositionsChartView {
-	background: transparent;
-}
+QChartView#hecPositionsChartView {}
 
 /**************************************************************************************************************
  * searchDialog
  *************************************************************************************************************/
 
-QFrame#horizontalSearchLayout {
-	background: none;
-	border: none;
-	padding: 20px;
-	padding-bottom: 0;
-}
+QFrame#horizontalSearchLayout {}
 
-QLineEdit#lineEditSearchSkyObject {
-	background: rgb(255, 255, 255);
-	margin: 0;
-	padding-left: 3px;
-	padding-top: 3px;
-	padding-bottom: 0;
-	border: 1px solid rgb(209, 213, 219);
-	border-right: none;
-	font-size: 123%;
-	color: rgb(17, 24, 39);
-}
+QLineEdit#lineEditSearchSkyObject {}
 
-QListView#searchListView {
-	font-size: 108%;
-	padding-left: 20px;
-	padding-right: 15px;
-	border: none;
-	background: transparent;
-}
+QListView#searchListView {}
 
-QFrame#greekLettersFrame {
-	font-size: 139%;
-	padding: 10px 20px;
-	background: transparent;
-	color: rgb(17, 24, 39);
-}
+QFrame#greekLettersFrame {}
 
-QFrame#j2000Frame {
-	padding: 10px 20px;
-}
+QFrame#j2000Frame {}
 
 /**************************************************************************************************************
  * script console
  *************************************************************************************************************/
 
-#scriptConsoleForm QLabel#quickrunLabel {
-	color: rgb(243, 244, 246);
-}
+#scriptConsoleForm QLabel#quickrunLabel {}
 
 /**************************************************************************************************************
  * search dialog
@@ -1299,151 +210,85 @@ QFrame#j2000Frame {
 
 #searchDialogForm QLabel#labelGreekLetterTitle, 
 #searchDialogForm QLabel#simbadStatusLabel, 
-#searchDialogForm QLabel#simbadCooStatusLabel {
-	color: rgb(243, 244, 246);
-}
+#searchDialogForm QLabel#simbadCooStatusLabel {}
 
 /**************************************************************************************************************
  * shortcuts dialog
  *************************************************************************************************************/
 
 #shortcutsDialogForm QLabel#primaryLabel, 
-#shortcutsDialogForm QLabel#altLabel {
-	color: rgb(243, 244, 246);
-}
+#shortcutsDialogForm QLabel#altLabel {}
 
 /**************************************************************************************************************
  * locationDialog
  *************************************************************************************************************/
 
-QLineEdit#citySearchLineEdit {
-	margin: 0 0 4px 0;
-	padding: 4px;
-	padding-left: 32px;
-	background-image: url(:/graphicGui/uieSearchBoxBackground.png);
-	background-repeat: none;
-	background-position: center left;
-	border: none;
-	color: rgb(17, 24, 39);
-	background-color: rgb(255, 255, 255);
-}
+QLineEdit#citySearchLineEdit {}
 
-QListView#citiesListView {
-	font-size: 100%;
-	min-width: 300px;
-	color: rgb(17, 24, 39);
-}
+QListView#citiesListView {}
 
-QListView#citiesListView::item {
-	padding: 2px 0;
-}
+QListView#citiesListView::item {}
 
-QFrame#frame_coordinates {
-	min-width: 300px;
-}
+QFrame#frame_coordinates {}
 
 /**************************************************************************************************************
  * configurationDialog
  *************************************************************************************************************/
 
-QTextBrowser#deltaTAlgorithmDescription {
-	background: transparent;
-	padding: 0;
-	margin: 0;
-	max-height: 175px;
-	color: rgb(17, 24, 39);
-}
+QTextBrowser#deltaTAlgorithmDescription {}
 
-QListWidget#scriptListWidget {
-	min-width: 190px;
-	max-width: 190px;
-}
+QListWidget#scriptListWidget {}
 
-QListWidget#pluginsListWidget {
-	min-width: 180px;
-	max-width: 180px;
-}
+QListWidget#pluginsListWidget {}
 
-QCommandLinkButton#getStarsButton {
-	qproperty-iconSize: 24px;
-}
+QCommandLinkButton#getStarsButton {}
 
 /**************************************************************************************************************
  * viewDialog
  *************************************************************************************************************/
 
-QTextBrowser#projectionTextBrowser {
-	background: transparent;
-	padding: 0;
-	margin: 0;
-	min-height: 75px;
-	color: rgb(17, 24, 39);
-}
+QTextBrowser#projectionTextBrowser {}
 
-QListWidget#projectionListWidget {
-	min-width: 180px;
-	max-width: 230px;
-}
+QListWidget#projectionListWidget {}
 
-QListWidget#landscapesListWidget {
-	min-width: 120px;
-	max-width: 220px;
-}
+QListWidget#landscapesListWidget {}
 
-QListWidget#culturesListWidget {
-	min-width: 120px;
-	max-width: 220px;
-}
+QListWidget#culturesListWidget {}
 
 /* Try to make them the same size */
 QPushButton#selectAllCatalogs,
 QPushButton#selectStandardCatalogs,
 QPushButton#selectPreferredCatalogs,
 QPushButton#storePreferredCatalogs,
-QPushButton#selectNoneCatalogs {
-	min-width: 150px;
-}
+QPushButton#selectNoneCatalogs {}
 
 /**************************************************************************************************************
  * helpDialog
  *************************************************************************************************************/
 
 QTextBrowser#helpBrowser,
-QTextBrowser#aboutBrowser {
-	padding-left: 11px;
-	color: rgb(17, 24, 39);
-}
+QTextBrowser#aboutBrowser {}
 
 /**************************************************************************************************************
  * satellitesDialog
  *************************************************************************************************************/
 
 QListWidget#satellitesList,
-QListWidget#sourceList {
-	font-size: 60%;
-	color: rgb(17, 24, 39);
-}
+QListWidget#sourceList {}
 
 #satellitesDialog QLabel#labelAutoAdd,
 #satellitesDialog QLabel#labelTle,
 #satellitesDialog QLabel#labelTleEpoch,
 #satellitesDialog QLabel#labelTleEpochData,
-#satellitesDialog QLabel#validAgeLabel { 
-	color: rgb(243, 244, 246);
-}
+#satellitesDialog QLabel#validAgeLabel {}
 
 /**************************************************************************************************************
  * TelescopeControl
  *************************************************************************************************************/
 
-QTreeView::item:selected#treeView {
-	background-color: rgb(59, 130, 246);
-	color: rgb(255, 255, 255);
-}
+QTreeView::item:selected#treeView {}
 
-QTreeView::item:!enabled#treeView {
-	color: rgb(156, 163, 175);
-}
+QTreeView::item:!enabled#treeView {}
 
 /**************************************************************************************************************
  * ocularDialog
@@ -1452,38 +297,22 @@ QTreeView::item:!enabled#treeView {
 QPushButton#pushButtonMoveSensorUp,
 QPushButton#pushButtonMoveOcularUp,
 QPushButton#pushButtonMoveTelescopeUp,
-QPushButton#pushButtonMoveLensUp {
-	image: url(:/graphicGui/uieSpinup.png);
-}
+QPushButton#pushButtonMoveLensUp {}
 
 QPushButton#pushButtonMoveSensorDown,
 QPushButton#pushButtonMoveOcularDown,
 QPushButton#pushButtonMoveTelescopeDown,
-QPushButton#pushButtonMoveLensDown {
-	image: url(:/graphicGui/uieSpindown.png);
-}
+QPushButton#pushButtonMoveLensDown {}
 
-QLabel#lensNote {
-	margin-left: 5px;
-	color: rgb(17, 24, 39);
-}
+QLabel#lensNote {}
 
-QMessageBox {
-	font-weight: bold;
-	background-color: rgb(229, 231, 235);
-	color: rgb(17, 24, 39);
-}
+QMessageBox {}
 
-QColorDialog {
-	background-color: rgb(229, 231, 235);
-	color: rgb(17, 24, 39);
-}
+QColorDialog {}
 
 /*************************************************************************
  * AstroCalcAlmanacWidget
  *************************************************************************/
 
-AstroCalcAlmanacWidget QFrame[frameShape="4"],   /* QFrame::HLine == 0x0004 */
-AstroCalcAlmanacWidget QFrame[frameShape="5"] {  /* QFrame::VLine == 0x0005 */
-	border: 1px solid rgb(243, 244, 246);
-}
+AstroCalcAlmanacWidget QFrame[frameShape="4"],
+AstroCalcAlmanacWidget QFrame[frameShape="5"] {}

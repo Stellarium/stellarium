@@ -18,19 +18,14 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelMainWindow.hpp"
 #include "StelMainView.hpp"
-#include "StelSplashScreen.hpp"
-#include "StelTranslator.hpp"
 #include "StelLogger.hpp"
 #include "StelSystemInfo.hpp"
 #include "StelFileMgr.hpp"
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
-#ifdef ENABLE_SCRIPTING
-#include "StelScriptOutput.hpp"
-#endif
-
 #include <QDebug>
 
 #include <QApplication>
@@ -41,7 +36,6 @@
 #include <QFile>
 #include <QScreen>
 #include <QFileInfo>
-#include <QFontDatabase>
 #include <QGuiApplication>
 #include <QSettings>
 #include <QString>
@@ -50,8 +44,6 @@
 #include <QTranslator>
 #include <QNetworkDiskCache>
 #include <QThread>
-#include <QThreadPool>
-
 
 #ifdef Q_OS_MACOS
 #include <QEvent>
@@ -85,27 +77,6 @@
 		int AmdPowerXpressRequestHighPerformance = 1;
 	}
 #endif //Q_OS_WIN
-
-//! @class CustomQTranslator
-//! Provides custom i18n support.
-class CustomQTranslator : public QTranslator
-{
-	using QTranslator::translate;
-public:
-	bool isEmpty() const override { return false; }
-
-	//! Overrides QTranslator::translate().
-	//! Calls StelTranslator::qtranslate().
-	//! @param context Qt context string - IGNORED.
-	//! @param sourceText the source message.
-	//! @param comment optional parameter
-	QString translate(const char *context, const char *sourceText, const char *disambiguation = Q_NULLPTR, int n = -1) const override
-	{
-		Q_UNUSED(context)
-		Q_UNUSED(n)
-		return StelTranslator::globalTranslator->qtranslate(sourceText, disambiguation);
-	}
-};
 
 class StelApplication : public QApplication
 {
@@ -165,9 +136,6 @@ int main(int argc, char **argv)
 	                                     "%{if-warning}WARN%{endif}"
 	                                     "%{if-critical}CRIT%{endif}"
 	                                     "%{if-fatal}FATAL%{endif}] %{message}");
-	Q_INIT_RESOURCE(mainRes);
-	Q_INIT_RESOURCE(guiRes);
-
 	// Log command line arguments.
 	QString argStr;
 	QStringList argList;
@@ -398,109 +366,16 @@ int main(int argc, char **argv)
 
 	QSurfaceFormat::setDefaultFormat(StelMainView::getDesiredGLFormat(confSettings));
 
-	#ifdef ENABLE_SCRIPTING
-	QString outputFile = StelFileMgr::getUserDir()+"/output.txt";
-	if (confSettings->value("main/use_separate_output_file", false).toBool())
-		outputFile = StelFileMgr::getUserDir()+"/output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt";
-	StelScriptOutput::init(outputFile);
-	#endif
 
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-	StelFileMgr::setObsListDir(confSettings->value("main/observinglists_dir", StelFileMgr::getUserDir()).toString());
+	StelMainWindow mainWindow(confSettings);
 
-	// Add the Noto & DejaVu fonts that we use everywhere in the program
-	const QStringList customFonts = { "NotoSans-Regular.ttf", "NotoSansMono-Regular.ttf", "NotoSansSC-Regular.otf", "DejaVuSans.ttf", "DejaVuSansMono.ttf" };
-	for (auto &font: std::as_const(customFonts))
-	{
-		QString customFont = StelFileMgr::findFile(QString("data/%1").arg(font));
-		if (!customFont.isEmpty())
-			QFontDatabase::addApplicationFont(customFont);
-	}
-	
-	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
-	if (!fileFont.isEmpty())
-	{
-		const QString& afName = StelFileMgr::findFile(QString("data/%1").arg(fileFont));
-		if (!afName.isEmpty() && !afName.contains("file not found"))
-			QFontDatabase::addApplicationFont(afName);
-		else
-			qWarning().noquote() << "ERROR while loading custom font:" << QDir::toNativeSeparators(fileFont);
-	}
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
-	// Set OS-dependent fallback fonts to retrieve missing glyphs if the main font does not provide them
-#ifdef Q_OS_WIN
-	QFontDatabase::addApplicationFallbackFontFamily(QChar::Script_Cuneiform, "Segoe UI Historic");
-#endif
-#endif
-
-	// Set the default application font and font size.
-	// Note that style sheet will possibly override this setting.
-	QString baseFont = confSettings->value("gui/base_font_name", "Noto Sans").toString();
-	QFont tmpFont(baseFont);
-	tmpFont.setPixelSize(confSettings->value("gui/gui_font_size", DEFAULT_FONT_SIZE).toInt());
-	QGuiApplication::setFont(tmpFont);
-
-	if (qApp->property("onetime_fontinfo").toBool())
-	{
-		qInfo() << "=======================================================================";
-		StelApp::getInstance().dumpFontInfo();
-		qInfo() << "=======================================================================";
-	}
-
-	// Initialize translator feature
-	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/languages.tab");
-	
-	// Use our custom translator for Qt translations as well
-	CustomQTranslator trans;
-	app.installTranslator(&trans);
-
-	StelMainView mainWin(confSettings);
-
-	int screen = confSettings->value("video/screen_number", 0).toInt();
-	if (screen < 0 || screen >= qApp->screens().count())
-	{
-		qWarning().noquote() << "Screen" << screen << "not found";
-		screen = 0;
-	}
-	const auto qscreen = qApp->screens().at(screen);
-	const QRect screenGeom = qscreen->geometry();
-	const auto pixelRatio = qscreen->devicePixelRatio();
-
-	const auto virtSize = QSize(confSettings->value("video/screen_w", screenGeom.width()).toInt(),
-								confSettings->value("video/screen_h", screenGeom.height()).toInt());
-	const auto size = QSize(std::lround(virtSize.width()/pixelRatio),
-							std::lround(virtSize.height()/pixelRatio));
-	mainWin.resize(size);
-
-	const bool fullscreen = confSettings->value("video/fullscreen", true).toBool();
-	if (fullscreen)
-	{
-		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
-		mainWin.move(screenGeom.x()+1, screenGeom.y()+1);
-		// The fullscreen window appears on screen where is the majority of
-		// the normal window. Therefore we crop the normal window to the
-		// screen area to ensure that the majority is not on another screen.
-		mainWin.setGeometry(mainWin.geometry() & screenGeom);
-		mainWin.setFullScreen(true);
-	}
-	else
-	{
-		const int x = confSettings->value("video/screen_x", 0).toInt();
-		const int y = confSettings->value("video/screen_y", 0).toInt();
-		mainWin.move(screenGeom.x() + x/pixelRatio,
-			     screenGeom.y() + y/pixelRatio);
-	}
-
-	mainWin.show();
-	SplashScreen::finish(&mainWin);
-	qDebug() << "Max thread count (Global Pool): " << QThreadPool::globalInstance()->maxThreadCount();
+	mainWindow.show();
 	// Share available cores with the TextureLoader and other jobs
 	//QThreadPool::globalInstance()->setMaxThreadCount(qMax(1,QThread::idealThreadCount()/2-1));
 	app.exec();
-	mainWin.deinit();
 
 	delete confSettings;
 	StelLogger::deinit();
