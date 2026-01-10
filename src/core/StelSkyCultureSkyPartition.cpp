@@ -526,7 +526,6 @@ QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos, bool na
 	const QString sDegrees=qc_("degrees", "object narration");
 	const QString sMinutes=qc_("minutes", "object narration");
 	const QString sAnd=qc_("and", "object narration");
-	const QString sSeconds=qc_("seconds", "object narration");
 	const QString sPada=qc_("pada", "object narration; quarter part of nakshatra");
 
 	double ra, dec;
