@@ -35,7 +35,7 @@ void RomanCalendar::retranslate()
 	monthGen={
 		{ 1, qc_("Ianuarii"   , "Roman month name (genitive)")},
 		{ 2, qc_("Februarii"  , "Roman month name (genitive)")},
-		{ 3, qc_("Martii"     , "Roman month name (genitive)")},
+		{ 3, qc_("Martiae"    , "Roman month name (genitive)")}, // only used with fem.pl. Kalendae, Nonae, Idus
 		{ 4, qc_("Aprilis"    , "Roman month name (genitive)")},
 		{ 5, qc_("Maii"       , "Roman month name (genitive)")},
 		{ 6, qc_("Iunii"      , "Roman month name (genitive)")},
@@ -63,8 +63,8 @@ void RomanCalendar::setJD(double JD)
 QStringList RomanCalendar::getDateStrings() const
 {
 	QStringList events={qc_("Kalendae", "Roman calendar term"),
-			    qc_("Nones",    "Roman calendar term"),
-			    qc_("Ides",     "Roman calendar term")};
+			    qc_("Nonae",    "Roman calendar term"),
+			    qc_("Idus",     "Roman calendar term")};
 	QStringList eventsShort={qc_("Kal.", "Roman calendar term"),
 				 qc_("Non.", "Roman calendar term"),
 				 qc_("Id." , "Roman calendar term")};
