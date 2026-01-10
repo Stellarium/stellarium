@@ -248,10 +248,10 @@ protected:
 		const bool ebsFlag = stype.contains("eclipsing binary system");
 
 		if (!sType.isEmpty())
-			oss << QString(qc_("Its Spectral Type is %1.", "object narration")).arg(sType);
+			oss << QString(qc_("Its Spectral Type is %1", "object narration")).arg(sType) << ". ";
 
 		if (vPeriod>0.)
-			oss << QString(qc_("It has a period of %1 days", "object narration")).arg(StelUtils::narrateDecimal(vPeriod, 2));
+			oss << QString(qc_("It has a period of %1 days", "object narration")).arg(StelUtils::narrateDecimal(vPeriod, 2)) << ". ";
 
 		if (vEpoch>0. && vPeriod>0.)
 		{
@@ -266,12 +266,12 @@ protected:
 
 		if (vMm>0)
 		{
-			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1, that is, %2.", "object narration") :
+			const QString mmStr = ebsFlag ? qc_("The duration fraction of an eclipse is %1 percent, that is, %2", "object narration") :
 							// TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing stage of a stellar light curve
-							qc_("The rising time fraction is %1, that is, %2.", "object narration: light curve");
+							qc_("The rising time fraction is %1 percent, that is, %2", "object narration: light curve");
 
 			QString dms = StelUtils::daysFloatToDHMSnarration(vPeriod * vMm / 100.f);
-			oss << QString(mmStr).arg(StelUtils::narrateDecimal(vMm, 2), dms) << ". ";
+			oss << QString(mmStr).arg(QString::number(vMm), dms) << ". ";
 		}
 		return str;
 	}
@@ -359,11 +359,10 @@ protected:
 			{
 				if (PlxErr>0.f)
 					oss <<  QString(qc_("Its parallax is %1 ± %2 milli-arcseconds.", "object narration"))
-						.arg(StelUtils::narrateDecimal(Plx, 1), StelUtils::narrateDecimal(PlxErr, 2));
+						.arg(StelUtils::narrateDecimal(Plx, 1), StelUtils::narrateDecimal(PlxErr, 2)) << " ";
 				else
 					oss << QString(qc_("Its parallax is %1 milli-arcseconds.", "object narration"))
-					       .arg(StelUtils::narrateDecimal(Plx, 1));
-				oss  << ". ";
+					       .arg(StelUtils::narrateDecimal(Plx, 1)) << " ";
 			}
 
 			//oss << getExtraInfoStrings(Distance).join("");

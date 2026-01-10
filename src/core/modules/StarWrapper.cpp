@@ -293,7 +293,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			// use separation and position angle from the binary orbit if available
 			oss << QString("%1 (%3): %2°").arg(q_("Position angle"),
-							QString::number((binary_sep>0.f) ? binary_pa: wdsPA, 'f', 2),
+							QString::number((binary_sep>0.f) ? binary_pa: wdsPA, 'f', 1),
 							(binary_sep>0.f) ? qc_("on date", "coordinates for current epoch"): QString::number(wdsObs)) << "<br />";
 			if (wdsSep>0.f && wdsSep<999.f) // A spectroscopic binary or not?
 			{
@@ -483,20 +483,20 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 		{
 			// use separation and position angle from the binary orbit if available
 			oss << QString(qc_("Its position angle as given for %1 is %2 degrees.", "object narration"))
-			       .arg((binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): StelUtils::narrateDecimal(wdsObs),
-					StelUtils::narrateDecimal((binary_sep>0.f) ? binary_pa : wdsPA, 2)) + " ";
+			       .arg((binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): QString::number(wdsObs),
+					StelUtils::narrateDecimal((binary_sep>0.f) ? binary_pa : wdsPA, 1)) + " ";
 			if (wdsSep>0.f && wdsSep<999.f) // A spectroscopic binary or not?
 			{
 				if (wdsSep>60.f) // A wide binary star?
 					// TRANSLATORS: This is about the angular separation between components of a binary star.
 					oss << QString(qc_("Its component separation for %1 is %2 arc-seconds (%3). ", "object narration"))
-					       .arg((binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): StelUtils::narrateDecimal(wdsObs, 1),
-						    StelUtils::narrateDecimal((binary_sep>0.f) ? binary_sep: wdsSep, 2),
+					       .arg((binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): QString::number(wdsObs),
+						    StelUtils::narrateDecimal((binary_sep>0.f) ? binary_sep: wdsSep, 1),
 						    StelUtils::decDegToDmsNarration(((binary_sep>0.f) ? binary_sep: wdsSep)/3600.f));
 				else
 					// TRANSLATORS: This is about the angular separation between components of a binary star.
 					oss << QString(qc_("Its component separation for %1 is %2 arc-seconds. ", "object narration"))
-					       .arg(StelUtils::narrateDecimal(wdsObs, 1), StelUtils::narrateDecimal(wdsSep, 2));
+					       .arg(QString::number(wdsObs), StelUtils::narrateDecimal(wdsSep, 1));
 				oss << " ";
 			}
 		}
