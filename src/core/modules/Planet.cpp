@@ -31,7 +31,9 @@
 #include "Planet.hpp"
 #include "Orbit.hpp"
 #include "planetsephems/precession.h"
+#ifndef NDEBUG
 #include "planetsephems/EphemWrapper.hpp"
+#endif
 #include "SolarEclipseComputer.hpp"
 #include "StelObserver.hpp"
 #include "StelProjector.hpp"
@@ -561,6 +563,31 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	return str;
 }
 
+QString Planet::getNarrationName(const StelCore *core, const InfoStringGroup& flags) const
+{
+	Q_UNUSED(core) Q_UNUSED(flags)
+	QString str;
+	QTextStream oss(&str);
+
+	// NOTE: currently only moons have an IAU designation
+	//if (!iauMoonNumber.isEmpty())
+	//	oss << QString(qc_("Moon %1: ", "opening of narration for planet moon")).arg(iauMoonNumber);
+
+	oss << getInfoLabel();
+
+	// NOTE: currently only moons have an IAU designation
+	QString iau = getIAUDesignation();
+	if (!iau.isEmpty())
+		// TRANSLATORS: Moon is the word for a planet moon, not Earth's Moon.
+		oss << QString(qc_(" (Moon %1)", "add-on to planet name in planet narration")).arg(iau);
+
+	if (sphereScale != 1.)
+		oss << QString(qc_("(enlarged %1 times)", "planet narration")).arg(StelUtils::narrateDecimal(sphereScale, 2));
+
+	oss << ". . ";
+	return str;
+}
+
 QString Planet::getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const
 {
 	Q_UNUSED(core)
@@ -572,6 +599,22 @@ QString Planet::getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoS
 		const float moMag=getMeanOppositionMagnitude();
 		if (moMag<50.f)
 			oss << QString("%1: %2<br/>").arg(q_("Mean Opposition Magnitude")).arg(moMag, 0, 'f', 2);
+	}
+
+	return str;
+}
+
+QString Planet::getNarrationAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const
+{
+	Q_UNUSED(core)
+	QString str;
+	QTextStream oss(&str);
+	if (flags&AbsoluteMagnitude && (getAbsoluteMagnitude() > -99.f))
+	{
+		oss << QString(qc_("Its absolute Magnitude is %1", "planet narration")).arg(StelUtils::narrateDecimal(getAbsoluteMagnitude(), 1)) << ". ";
+		const float moMag=getMeanOppositionMagnitude();
+		if (moMag<50.f)
+			oss << qc_("and", "object narration") << QString(qc_("Its mean Opposition Magnitude is %1", "planet narration")).arg(StelUtils::narrateDecimal(moMag, 1)) << ". ";
 	}
 
 	return str;
@@ -648,7 +691,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
 	}
 
-	oss << getInfoStringExtraMag(core, flags);
+	if (flags&Extra && b_v<99.f)
+		oss << getB_VInfoString(b_v);
+
 	oss << getCommonInfoString(core, flags);
 
 #ifndef NDEBUG
@@ -859,13 +904,69 @@ QString Planet::getInfoStringSize(const StelCore *core, const InfoStringGroup& f
 	return str;
 }
 
-QString Planet::getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const
+// Narratable apparent and equatorial diameters
+QString Planet::getNarrationSize(const StelCore *core, const InfoStringGroup& flags) const
 {
-	Q_UNUSED(core)
-	if (flags&Extra && b_v<99.f)
-		return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
-	else
-		return QString();
+	static StelApp& app = StelApp::getInstance();
+	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+
+	QString str;
+	QTextStream oss(&str);
+
+	const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
+	if (flags&Size && angularSize >= 0.01*M_RAD_ARCSECOND)
+	{
+		QString s1, s2, sizeStr;
+		if (rings)
+		{
+			const double withoutRings = 2.*getSpheroidAngularRadius(core)*M_PI/180.;
+			if (withDecimalDegree)
+			{
+				s1 = StelUtils::narrateDecimal(withoutRings * M_180_PI, 1) + "°";
+				s2 = StelUtils::narrateDecimal(angularSize * M_180_PI, 1) + "°";
+			}
+			else
+			{
+				s1 = StelUtils::radToDmsPNarration(withoutRings, 2);
+				s2 = StelUtils::radToDmsPNarration(angularSize, 2);
+			}
+			// TRANSLATORS: a planet's angular diameter is %1, or %2 with rings
+			sizeStr = QString(qc_("%1, or, with rings, %2", "planet narration")).arg(s1, s2);
+		}
+		else
+		{
+			if (sphereScale!=1.) // We must give correct diameters even if upscaling (e.g. Moon)
+			{
+				if (withDecimalDegree)
+				{
+					s1 = StelUtils::narrateDecimal(angularSize / sphereScale * M_180_PI, 1) + "°";
+					//s2 = StelUtils::radToDecDegStr(angularSize, 5, false, true);
+				}
+				else
+				{
+					s1 = StelUtils::radToDmsPNarration(angularSize / sphereScale, 2);
+					//s2 = StelUtils::radToDmsPNarration(angularSize, 2);
+				}
+
+				//// TRANSLATORS: a planet's angular diameter is %1, scaled up to %2
+				//sizeStr = QString(qc_("%1, scaled up to: %2", "planet narration")).arg(s1, s2);
+				// We do not provide the scaled diameter audibly.
+				sizeStr = s1;
+			}
+			else
+				sizeStr = withDecimalDegree ? StelUtils::narrateDecimal(angularSize * M_180_PI, 1) + "°" :
+							      StelUtils::radToDmsPNarration(angularSize, 2);
+		}
+		oss << QString(qc_("The apparent diameter of %1 is %2", "planet narration")).arg(getNameI18n(), sizeStr);
+	}
+
+	if (flags&Size)
+	{
+		QString diam = (getPlanetType()==isPlanet ? qc_("Its equatorial diameter is %1 kilometers", "object narration") : qc_("Its diameter is %1 kilometers", "object narration")); // Many asteroids have irregular shape (Currently unhandled)
+		oss << QString(diam).arg(StelUtils::narrateDecimal(AU * getEquatorialRadius() * 2.0, 1)) << ". ";
+		oss << getExtraInfoStrings(Size).join("") << ". ";
+	}
+	return str;
 }
 
 QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const
@@ -932,6 +1033,55 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 	return str;
 }
 
+QString Planet::getNarrationEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const
+{
+	QString str;
+	QTextStream oss(&str);
+	if ((flags&Elongation) && englishName!=L1S("Sun") && core->getCurrentPlanet()->englishName!=L1S("Sun"))
+	{
+		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+		const double elongation = getElongation(observerHelioPos);
+		double elongAlongEcliptic = getElongationDLambda();
+		if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
+		double elongationDecDeg=elongAlongEcliptic*M_180_PI;
+
+		QString pha, elo, dLam;
+
+		if (withDecimalDegree)
+		{
+			pha  = StelUtils::radToDecDegNarration(getPhaseAngle(observerHelioPos),4,false,true);
+			elo  = StelUtils::radToDecDegNarration(elongation,4,false,true);
+			dLam = StelUtils::decDegToLongitudeNarration(elongationDecDeg, true, true, false);
+		}
+		else
+		{
+			pha  = StelUtils::radToDmsNarration(getPhaseAngle(observerHelioPos), true);
+			elo  = StelUtils::radToDmsNarration(elongation, true);
+			dLam = StelUtils::decDegToLongitudeNarration(elongationDecDeg);
+		}
+		elo.replace("+","",Qt::CaseInsensitive); // remove sign
+
+		oss << QString(qc_("Elongation from the Sun is %1, or %2 in ecliptical longitude", "planet narration")).arg(elo, dLam) << ". ";
+		oss << QString(qc_("Phase angle is %1", "planet narration")).arg(pha) << ". ";
+		if (withIllum)
+			oss << QString(qc_("The illuminated fraction is %1 percent", "planet narration")).arg(StelUtils::narrateDecimal(getPhase(observerHelioPos) * 100., 1)) << ". ";
+
+		if (getPlanetType()==isMoon && this->parent!=core->getCurrentPlanet())
+		{
+			QString ad;
+			const double angularDistance = getJ2000EquatorialPos(core).angle(this->parent->getJ2000EquatorialPos(core));
+			if (withDecimalDegree)
+				ad = StelUtils::radToDecDegNarration(angularDistance,4,false,true);
+			else
+				ad = StelUtils::radToDmsNarration(angularDistance, true);
+
+			oss << QString(qc_("The angular distance from %1 is %2", "planet narration")).arg(this->parent->getNameI18n(), ad);
+		}
+	}
+	return str;
+}
+
 QString Planet::getInfoStringPeriods(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -966,6 +1116,34 @@ QString Planet::getInfoStringPeriods(const StelCore *core, const InfoStringGroup
 		}
 		if (withTables)
 			oss << "</table>";
+	}
+	return str;
+}
+
+QString Planet::getNarrationPeriods(const StelCore *core, const InfoStringGroup& flags) const
+{
+	QString str;
+	QTextStream oss(&str);
+
+	if (flags&Extra)
+	{
+		// Sidereal and synodic periods are better sorted here
+		PlanetP currentPlanet = core->getCurrentPlanet();
+		const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
+		const double siderealPeriodCurrentPlanet = currentPlanet->getSiderealPeriod();
+		QString celestialObject = getEnglishName();
+		if (siderealPeriod>0.0 && celestialObject != L1S("Sun"))
+			oss << QString(qc_("The Sidereal period is %1 days or %2 years", "planet narration"))
+			       .arg(StelUtils::narrateDecimal(siderealPeriod, 2), StelUtils::narrateDecimal(siderealPeriod/365.25, 3)) << ". ";
+		if (celestialObject!=L1S("Sun"))
+			celestialObject = getParent()->getEnglishName();
+		// Synodic revolution period
+		if (siderealPeriodCurrentPlanet > 0.0 && siderealPeriod > 0.0 && currentPlanet->getPlanetType()==Planet::isPlanet && (getPlanetType()==Planet::isPlanet || currentPlanet->getEnglishName()==celestialObject))
+		{
+			double synodicPeriod = qAbs(1./(1./siderealPeriodCurrentPlanet - 1./siderealPeriod));
+			oss << QString(qc_("The synodic period is %1 days or %2 years", "planet narration"))
+			       .arg(StelUtils::narrateDecimal(synodicPeriod, 2), StelUtils::narrateDecimal(synodicPeriod/365.25, 3)) << ". ";
+		}
 	}
 	return str;
 }
@@ -1133,7 +1311,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			const double age = deltaLong*29.530588853/360.;
 			oss << QString("%1: %2 %3").arg(q_("Moon age"), QString::number(age, 'f', 1), q_("days old"));
 			if (!moonPhase.isEmpty())
-				oss << QString(" (%4)").arg(moonPhase);
+				oss << QString(" (%1)").arg(moonPhase);
 			oss << "<br />";
 
 			if (useTopocentric)
@@ -1182,7 +1360,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			const double Bs=ssop.second[1];
 			double Ls   =StelUtils::fmodpos(-ssop.second[2], M_PI*2.0); if (Ls>M_PI) Ls-=2.0*M_PI;
 			const double totalLibr=sqrt(Le*Le+Be*Be);
-			double librAngle=StelUtils::fmodpos(atan2(Le, -Be), 2.0*M_PI);
+			const double librAngle=StelUtils::fmodpos(atan2(Le, -Be), 2.0*M_PI);
 			// find out and indicate which limb is optimally visible
 			const int limbSector= std::lround(std::floor(StelUtils::fmodpos(librAngle*M_180_PI+11.25, 360.)/22.5));
 			QString limbStr=compassDirs.at(limbSector);
@@ -1396,11 +1574,395 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		if (englishName != L1S("Sun"))
 			oss << QString("%1: %2<br/>").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 2));
 
-		if (!discoveryDate.isEmpty())
-			oss << QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
+		oss << getDiscoveryInfoString();
 	}
 	return str;
 }
+
+QString Planet::getNarrationExtra(const StelCore *core, const InfoStringGroup& flags) const
+{
+	if (core->getCurrentObserver()->isTraveling()) // transition to elsewhere: report nothing.
+		return QString();
+	QString str;
+
+	if (flags&Extra)
+	{
+		QTextStream oss(&str);
+		static StelApp &app = StelApp::getInstance();
+		const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+		const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
+		const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
+		const double siderealDay = getSiderealDay(); // =re.period
+		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+		PlanetP earth = ssystem->getEarth();
+
+		//PlanetP currentPlanet = core->getCurrentPlanet();
+		const bool onEarth = (core->getCurrentPlanet()==earth);
+		// TRANSLATORS: Unit of measure for speed - kilometers per second
+		QString kms = qc_("kilometers per second", "speed");
+		// TRANSLATORS: Unit of measure for speed - meters per second
+		QString mps = qc_("meters per second", "speed");
+
+		if (siderealPeriod>0.0)
+		{
+			if (qAbs(siderealDay)>0 && getPlanetType()!=isArtificial)
+			{
+				if (englishName==L1S("Sun"))
+					oss << QString(qc_("A rotation takes %1.", "planet narration")).arg(StelUtils::hoursToHmsNarration(qAbs(siderealDay*24)));
+				else
+					oss << QString(qc_("A rotation takes %1, while a Mean Solar Day takes %2.", "planet narration"))
+					       .arg(StelUtils::hoursToHmsNarration(qAbs(siderealDay*24)),
+						    StelUtils::hoursToHmsNarration(qAbs(getMeanSolarDay()*24)));
+				oss << ". ";
+			}
+			else if (re.period==0.)
+			{
+				oss << q_("The period of rotation is chaotic") << ". ";
+			}
+			if (qAbs(re.W1)>0.)
+			{
+				const double eqRotVel = (2.0*M_PI*AU/(360.*86400.0))*getEquatorialRadius()*re.W1;
+				if (eqRotVel>1.)
+					oss << QString(qc_("The Equatorial rotation velocity is %1 %2", "planet narration")).arg(StelUtils::narrateDecimal(qAbs(eqRotVel), 3), kms);
+				else
+					oss << QString(qc_("The Equatorial rotation velocity is %1 %2", "planet narration")).arg(StelUtils::narrateDecimal(qAbs(eqRotVel*1000.), 3), mps);
+				oss << ". ";
+			}
+			else if (qAbs(re.period)>0.)
+			{
+				const double eqRotVel = 2.0*M_PI*(AU*getEquatorialRadius())/(getSiderealDay()*86400.0);
+				if (eqRotVel>1.)
+					oss << QString(qc_("The Equatorial rotation velocity is %1 %2", "planet narration")).arg(StelUtils::narrateDecimal(qAbs(eqRotVel), 3), kms);
+				else
+					oss << QString(qc_("The Equatorial rotation velocity is %1 %2", "planet narration")).arg(StelUtils::narrateDecimal(qAbs(eqRotVel*1000.), 3), mps);
+			}
+		}
+
+		// PHYSICAL EPHEMERIS DATA
+		// Lunar phase names, libration, or axis orientation/rotation data
+		if (englishName==L1S("Moon") && onEarth)
+		{
+			// For computing the Moon age we use geocentric coordinates
+			app.enableBottomStelBarUpdates(false);
+			StelCore* core1 = app.getCore(); // we need non-const reference here.
+			const bool useTopocentric = core1->getUseTopocentricCoordinates();
+			core1->setUseTopocentricCoordinates(false);
+			core1->update(0); // enforce update cache!
+			const double eclJDE = earth->getRotObliquity(core1->getJDE());
+			double ra_equ, dec_equ, lambdaMoon, lambdaSun, betaMoon, betaSun, raSun, deSun;
+			StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core1));
+			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &betaMoon);
+			StelUtils::rectToSphe(&raSun,&deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
+			StelUtils::equToEcl(raSun, deSun, eclJDE, &lambdaSun, &betaSun);
+			core1->setUseTopocentricCoordinates(useTopocentric);
+			core1->update(0); // enforce update cache to avoid odd selection of Moon details!
+			app.enableBottomStelBarUpdates(true);
+			const double deltaLong = StelUtils::fmodpos((lambdaMoon-lambdaSun)*M_180_PI, 360.);
+			QString moonPhase = "";
+			if ((deltaLong<0.5) || (deltaLong>359.5))
+				moonPhase = qc_("New Moon", "Moon phase");
+			else if (deltaLong<89.5)
+				moonPhase = qc_("Waxing Crescent", "Moon phase");
+			else if (deltaLong<90.5)
+				moonPhase = qc_("First Quarter", "Moon phase");
+			else if (deltaLong<179.5)
+				moonPhase = qc_("Waxing Gibbous", "Moon phase");
+			else if (deltaLong<180.5)
+				moonPhase = qc_("Full Moon", "Moon phase");
+			else if (deltaLong<269.5)
+				moonPhase = qc_("Waning Gibbous", "Moon phase");
+			else if (deltaLong<270.5)
+				moonPhase = qc_("Third Quarter", "Moon phase");
+			else if (deltaLong<359.5)
+				moonPhase = qc_("Waning Crescent", "Moon phase");
+			else
+			{
+				qWarning() << "ERROR IN PHASE STRING PROGRAMMING!";
+				Q_ASSERT(0);
+			}
+
+			const double age = deltaLong*29.530588853/360.;
+			if (!moonPhase.isEmpty())
+				oss << QString(qc_("The Moon is %1 days old and appears as %2", "planet narration")).arg(StelUtils::narrateDecimal(age, 1), moonPhase);
+			else
+				oss << QString(qc_("The Moon is %1 days old", "planet narration")).arg(StelUtils::narrateDecimal(age, 1));
+			oss << ". ";
+
+			if (useTopocentric)
+			{
+				// we must repeat the position lookup from above in case we have topocentric corrections.
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
+				StelUtils::rectToSphe(&raSun,&deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+			}
+			const double chi=atan2(cos(deSun)*sin(raSun-ra_equ), sin(deSun)*cos(dec_equ)-cos(deSun)*sin(dec_equ)*cos(raSun-ra_equ));
+			QString chiStr;
+			if (withDecimalDegree)
+				chiStr=StelUtils::radToDecDegNarration(StelUtils::fmodpos(chi, M_PI*2.0), 1);
+			else
+				chiStr=StelUtils::radToDmsNarration(chi, false);
+			oss << QString(qc_("The position angle of the bright limb is %1", "planet narration")).arg(chiStr) << ". ";
+
+
+			// Everything around libration
+			const QStringList compassDirs={
+				qc_("South",            "compass direction narration"),
+				qc_("South South West", "compass direction narration"),
+				qc_("South West",       "compass direction narration"),
+				qc_("West South West",  "compass direction narration"),
+				qc_("West",             "compass direction narration"),
+				qc_("West NWest ",      "compass direction narration"),
+				qc_("North West",       "compass direction narration"),
+				qc_("North North West", "compass direction narration"),
+				qc_("North",            "compass direction narration"),
+				qc_("North North East", "compass direction narration"),
+				qc_("North East",       "compass direction narration"),
+				qc_("East North East",  "compass direction narration"),
+				qc_("East",             "compass direction narration"),
+				qc_("East South East",  "compass direction narration"),
+				qc_("South East",       "compass direction narration"),
+				qc_("South South East", "compass direction narration")};
+
+			QPair<Vec4d, Vec3d> ssop=getSubSolarObserverPoints(core);
+
+			const double Be=ssop.first[1];
+			double Le   =StelUtils::fmodpos(-ssop.first[2],  M_PI*2.0); if (Le>M_PI) Le-=2.0*M_PI;
+			const double Bs=ssop.second[1];
+			double Ls   =StelUtils::fmodpos(-ssop.second[2], M_PI*2.0); if (Ls>M_PI) Ls-=2.0*M_PI;
+			const double totalLibr=sqrt(Le*Le+Be*Be);
+			const double librAngle=StelUtils::fmodpos(atan2(Le, -Be), 2.0*M_PI);
+			// find out and indicate which limb is optimally visible
+			const int limbSector= std::lround(std::floor(StelUtils::fmodpos(librAngle*M_180_PI+11.25, 360.)/22.5));
+			QString limbStr=compassDirs.at(limbSector);
+			QString emph;
+			if (totalLibr>3.*M_PI_180)
+				emph=qc_("nicely", "object narration: emphasis stage 1/3");
+			if (totalLibr>5.*M_PI_180)
+				emph=qc_("strongly", "object narration: emphasis stage 2/3");
+			if (totalLibr>7.*M_PI_180)
+				emph=qc_("extremely", "object narration: emphasis stage 3/3");
+			QString paAxisStr, libLStr, libBStr, subsolarLStr, subsolarBStr, colongitudeStr, totalLibrationStr, librationAngleStr;
+			if (withDecimalDegree)
+			{
+				paAxisStr=StelUtils::radToDecDegNarration(ssop.first[3], 1);
+				libLStr=StelUtils::radToDecDegNarration(Le, 1);
+				libBStr=StelUtils::radToDecDegNarration(Be, 1);
+				subsolarLStr=StelUtils::radToDecDegNarration(Ls, 1);
+				subsolarBStr=StelUtils::radToDecDegNarration(Bs, 1);
+				colongitudeStr=StelUtils::radToDecDegNarration(StelUtils::fmodpos(450.0*M_PI_180-Ls, M_PI*2.0), 1);
+				totalLibrationStr=StelUtils::radToDecDegNarration(totalLibr, 1);
+				librationAngleStr=StelUtils::radToDecDegNarration(librAngle, 1);
+			}
+			else
+			{
+				paAxisStr=StelUtils::radToDmsNarration(ssop.first[3]);
+				libLStr=StelUtils::radToDmsNarration(Le);
+				libBStr=StelUtils::radToDmsNarration(Be);
+				subsolarLStr=StelUtils::radToDmsNarration(Ls);
+				subsolarBStr=StelUtils::radToDmsNarration(Bs);
+				colongitudeStr=StelUtils::radToDmsNarration(StelUtils::fmodpos(450.0*M_PI_180-Ls, M_PI*2.0));
+				totalLibrationStr=StelUtils::radToDmsNarration(totalLibr);
+				librationAngleStr=StelUtils::radToDmsNarration(librAngle);
+			}
+			oss << QString(qc_("The position angle of the Moon's axis is at %1", "planet narration")).arg(paAxisStr) << ". ";
+			// TRANSLATORS: "Libration is [X degrees] towards [Y degrees], which [-/nicely/strongly/extremely] prefers the limb at [compass rose direction]"
+			oss << QString(qc_("The libration is %1 towards %2, which %3 prefers the limb at the %4", "planet narration")).arg(totalLibrationStr, librationAngleStr, emph, limbStr) << ". ";
+			oss << QString(qc_("The Libration in longitude is %1, and in latitude %2", "planet narration")).arg(libLStr, libBStr) << ". ";
+			oss << QString(qc_("The subsolar point is at longitude %1 and latitude %2", "planet narration")).arg(subsolarLStr, subsolarBStr) << ". ";
+			oss << QString(qc_("The colongitude is %1", "planet narration")).arg(colongitudeStr) << ". ";
+		}
+		else if (englishName!=L1S("Sun") && onEarth)
+		{
+			// The planetographic longitudes (central meridian etc) are counted in the other direction than on Moon.
+			QPair<Vec4d, Vec3d> ssop=getSubSolarObserverPoints(core);
+
+			const double Le=StelUtils::fmodpos(ssop.first[2],  M_PI*2.0);
+			const double Ls=StelUtils::fmodpos(ssop.second[2], M_PI*2.0);
+
+			QString paAxisStr, subearthLStr, subearthBStr, subsolarLStr, subsolarBStr;
+			const QString lngSystem = englishName==L1S("Jupiter") ? qc_("in system two", "Jupiter longitude system II, narration") :
+										(englishName==L1S("Saturn") ? qc_("in system three", "Saturn longitude system III, narration") : "");
+			if (withDecimalDegree)
+			{
+				paAxisStr=StelUtils::radToDecDegNarration(ssop.first[3], 1);
+				subearthLStr=StelUtils::radToDecDegNarration(Le, 1);
+				subearthBStr=StelUtils::radToDecDegNarration(ssop.first[1], 1);
+				subsolarLStr=StelUtils::radToDecDegNarration(Ls, 1);
+				subsolarBStr=StelUtils::radToDecDegNarration(ssop.second[1], 1);
+			}
+			else
+			{
+				paAxisStr=StelUtils::radToDmsNarration(ssop.first[3]);
+				subearthLStr=StelUtils::radToDmsNarration(Le);
+				subearthBStr=StelUtils::radToDmsNarration(ssop.first[1]);
+				subsolarLStr=StelUtils::radToDmsNarration(Ls);
+				subsolarBStr=StelUtils::radToDmsNarration(ssop.second[1]);
+			}
+			oss << QString(q_("The position Angle of the rotation axis is at %1")).arg(paAxisStr) << ". ";
+			// Translators: The Center point [optional: in system II] has longitude L and latitude B
+			oss << QString(qc_("The Center point %1 has longitude %2 and latitude %3", "planet narration")).arg(lngSystem, subearthLStr, subearthBStr) << ". ";
+			oss << QString(qc_("The Subsolar point %1 has longitude %2 and latitude %3", "planet narration")).arg(lngSystem, subsolarLStr, subsolarBStr) << ". ";
+		}
+
+		if (englishName==L1S("Sun"))
+		{
+			// Only show during eclipse or transit, show percent?
+			QPair<double, PlanetP> eclObj = ssystem->getSolarEclipseFactor(core);
+			const double eclipseObscuration = 100.*(1.-eclObj.first);
+			if (eclipseObscuration>1.e-7) // needed to avoid false display of 1e-14 or so.
+			{
+				double crescentAngle = 0.;
+				PlanetP obj = eclObj.second;
+				if (onEarth && obj == ssystem->getMoon())
+				{
+					const double solarRadiusRadians = 0.5 * angularSize;
+					const double lunarRadiusRadians = (obj->getAngularRadius(core) * M_PI_180) / obj->getSphereScale();
+
+					const double eclipseMagnitude =
+							(solarRadiusRadians
+							 + lunarRadiusRadians
+							- getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))
+							/ angularSize;
+					oss << QString(qc_("We have a Solar eclipse of magnitude %1", "planet narration")).arg(StelUtils::narrateDecimal(eclipseMagnitude, 3)) << ". ";
+					crescentAngle = ssystem->getEclipseCrescentAngle(lunarRadiusRadians, solarRadiusRadians, eclipseMagnitude) * M_180_PI;
+				}
+				oss << QString(qc_("The eclipse obscuration is %1 percent", "planet narration")).arg(StelUtils::narrateDecimal(eclipseObscuration, 2)) << ". ";
+				if (crescentAngle > 0.)
+					oss << QString(qc_("The crescent angle is at %1 degrees", "planet narration")).arg(StelUtils::narrateDecimal(crescentAngle, 1)) << ". ";
+			}
+
+			if (onEarth)
+			{
+				// Solar eclipse information
+				// Use geocentric coordinates
+				app.enableBottomStelBarUpdates(false);
+
+				StelCore* core1 = StelApp::getInstance().getCore();
+				const bool useTopocentric = core1->getUseTopocentricCoordinates();
+				core1->setUseTopocentricCoordinates(false);
+				core1->update(0);
+
+				double raSun, deSun, raMoon, deMoon;
+				StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
+				StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
+
+				double raDiff = StelUtils::fmodpos((raMoon - raSun)/M_PI_180, 360.0);
+				if ((raDiff < 3.) || (raDiff > 357.))
+				{
+					double JD = core1->getJD();
+					double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
+					calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+
+					if (pathWidth > 0.) // only display when shadow axis is touching Earth
+					{
+						oss << QString(qc_("The Moon to Sun diameter ratio is %1", "planet narration")) // It seems magnitude of total/annular eclipses sometimes represented by this value
+						       .arg(StelUtils::narrateDecimal(dRatio, 3));
+						if (dRatio < 1.0)
+							oss << " - " << QString(qc_("(globally, the eclipse is annular)","type of solar eclipse"));
+						else
+							oss << " - " << QString(qc_("(globally, the eclipse is total)","type of solar eclipse"));
+						oss << ". ";
+						double centralDuraton = abs(duration);
+						int durationMinute = int(centralDuraton);
+						int durationSecond = round((centralDuraton - durationMinute) * 60.);
+						if (durationSecond>59)
+						{
+							durationMinute += 1;
+							durationSecond = 0;
+						}
+						oss << QString(qc_("The duration of the Central eclipse is %1 minutes and %2 seconds", "planet narration"))
+						       .arg(QString::number(durationMinute), QString::number(durationSecond)) << ". ";
+						if (withDecimalDegree)
+							oss << QString(qc_("The center of the solar eclipse is at latitude %1 degrees and longitude %2 degrees", "planet narration"))
+							       .arg(StelUtils::narrateDecimal(latDeg, 4), StelUtils::narrateDecimal(lngDeg, 4)) << ". ";
+						else
+							oss << QString(qc_("The center of the solar eclipse is at latitude %1 and longitude %2", "planet narration"))
+							       .arg(StelUtils::decDegToDmsNarration(latDeg), StelUtils::decDegToDmsNarration(lngDeg)) << ". ";
+						StelLocation loc = core->getCurrentLocation();
+						// distance between center point and current location
+						double distance = loc.distanceKm(lngDeg, latDeg);
+						double azimuth = loc.getAzimuthForLocation(lngDeg, latDeg);
+						oss << QString(qc_("The shadow center point is %1 km towards azimuth %2 degrees", "object narration"))
+						       .arg(StelUtils::narrateDecimal(distance, 1), StelUtils::narrateDecimal(azimuth, 1)) << ". ";
+						if (dRatio < 1.0)
+							oss << QString(qc_("The width of the antumbra is %1 kilometers", "planet narration")).arg(StelUtils::narrateDecimal(pathWidth, 1));
+						else
+							oss << QString(qc_("The width of the umbra is %1 kilometers", "planet narration")).arg(StelUtils::narrateDecimal(pathWidth, 1));
+						oss << ". ";
+					}
+				}
+				core1->setUseTopocentricCoordinates(useTopocentric);
+				core1->update(0); // enforce update cache to avoid odd selection of Moon details!
+				app.enableBottomStelBarUpdates(true);
+			}
+		}
+
+		if (englishName == L1S("Moon") && onEarth)
+		{
+			// Show magnitude of lunar eclipse
+			QPair<double,double> magnitudes = getLunarEclipseMagnitudes();
+			if (magnitudes.first > 1.e-3)
+			{
+				oss << QString(qc_("The penumbral eclipse magnitude is %1 percent", "planet narration")).arg(StelUtils::narrateDecimal(magnitudes.first*100., 1)) << ". ";
+				if (magnitudes.second > 1.e-3)
+					oss << QString(qc_("The umbral eclipse magnitude is %1 percent", "planet narration")).arg(StelUtils::narrateDecimal(magnitudes.second*100., 1))  << ". ";
+			}
+		}
+
+		// Not sure if albedo is at all interesting?
+		if (englishName != L1S("Sun"))
+			oss << QString("%1: %2. ").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 2));
+
+		oss << getDiscoveryNarration();
+	}
+	return str;
+}
+
+QString Planet::getDiscoveryInfoString() const
+{
+	if (!discoveryDate.isEmpty())
+		return QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
+	else
+		return QString();
+}
+
+QString Planet::getDiscoveryNarration() const
+{
+	QString str;
+	if (!discoveryDate.isEmpty())
+	{
+		QString ddate; // = StelUtils::localeDiscoveryDateString(discoveryDate);
+		//QString ddate = discoveryDate; // YYYY
+		QStringList date = discoveryDate.split("-");
+		if (date.count()==3) // YYYY-MM-DD
+			// TRANSLATORS: 3-part date. %1=genitive month name, %2=day numeral (add a point in format string if your language makes ordinals), %3=year
+			ddate = QString(qc_("%1 %2, %3", "date narration")).arg(StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), QString::number(date.at(2).toInt()), date.at(0));
+		else if (date.count()==2) // YYYY-MM
+			// TRANSLATORS: 2-part date. %1=month name, %2=year
+			ddate = QString(qc_("%1 %2", "date narration")).arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+		else ddate = discoveryDate;
+
+		if (discoverer.isEmpty())
+		{
+			// TRANSLATORS: Narration, only year of dicovery given in %1
+			str = QString(qc_("%1 was discovered in %1", "planet narration")).arg(getNameI18n(), ddate);
+			// TRANSLATORS: Narration, only year and month of dicovery given in %1
+			str = QString(qc_("%1 was discovered in %1", "planet narration")).arg(getNameI18n(), ddate);
+			// TRANSLATORS: Narration, day of dicovery given in %1
+			str = QString(qc_("%1 was discovered on %1", "planet narration")).arg(getNameI18n(), ddate);
+		}
+		else
+		{
+			// TRANSLATORS: Narration, only year of dicovery given in %1
+			str = QString(qc_("%1 was discovered in %1 by %2", "planet narration")).arg(getNameI18n(), ddate, discoverer);
+			// TRANSLATORS: Narration, only year and month of dicovery given in %1
+			str = QString(qc_("%1 was discovered in %1 by %2", "planet narration")).arg(getNameI18n(), ddate, discoverer);
+			// TRANSLATORS: Narration, day of dicovery given in %1
+			str = QString(qc_("%1 was discovered on %1 by %2", "planet narration")).arg(getNameI18n(), ddate, discoverer);
+		}
+	}
+	return str;
+}
+
 
 QVariantMap Planet::getInfoMap(const StelCore *core) const
 {
@@ -1556,11 +2118,14 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 
 QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
+	QString str;
+	QTextStream oss(&str);
+
 	const Vec3d pos = getEquinoxEquatorialPos(core);
 	const QString currentPlanetName = core->getCurrentPlanet()->getEnglishName();
 
 	// We cannot seriously omit at least the standard name.
-	QString res=getNameI18n() + " ";
+	oss << getNameI18n() + " ";
 
 	if (flags&Name)
 	{
@@ -1573,10 +2138,10 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		}
 		cNames.removeDuplicates();
 		cNames.removeAll("");
-		cNames.removeAll(res);
+		cNames.removeAll(getNameI18n());
 
 		if (!cNames.isEmpty())
-			res.append(", " +  qc_("called", "object narration") + " " + cNames.first() + ", "); // TBD: Provide more than 1 name?
+			oss << (", " +  qc_("called", "object narration") + " " + cNames.first() + ", "); // TBD: Provide more than 1 name?
 	}
 
 	if (flags&ObjectType && englishName!="Moon") // Type
@@ -1599,29 +2164,33 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		{ isInterstellar, qc_("an interstellar object",      "object narration") },
 		{ isUNDEFINED,    qc_("an object of undefined type", "object narration") }
 	};
-		res.append(" " + q_("is") + " " + typeStringMap.value(pType, qc_("an object of undefined type", "object narration")) + " ");
+		oss <<(" " + q_("is") + " " + typeStringMap.value(pType, qc_("an object of undefined type", "object narration")) + " ");
 	}
+
+	if (getPlanetType()==PlanetType::isObserver)
+		// Do not tell meaningless data for observers! We're done here.
+		return str;
 
 	if (flags&Magnitude)
 	{
 		const float mag = getVMagnitude(core);
-		res += QString("%1 %2, ").arg(qc_("currently at visual magnitude of", "object narration"), StelUtils::narrateDecimal(mag, 1));
+		oss <<  QString("%1 %2, ").arg(qc_("currently at visual magnitude of", "object narration"), StelUtils::narrateDecimal(mag, 1));
 		const float airmass = getAirmass(core);
 		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
-			res += ", " + QString(qc_("reduced to %1 by %2 airmasses of atmospheric extinction", "object narration: reduced magnitude by extinction"))
+			oss <<  ", " + QString(qc_("reduced to %1 by %2 airmasses of atmospheric extinction", "object narration: reduced magnitude by extinction"))
 					.arg(StelUtils::narrateDecimal(getVMagnitudeWithExtinction(core, mag), 1),
 					     StelUtils::narrateDecimal(airmass, 2)) + ". ";
 
-		res += getExtraInfoStrings(Magnitude).join(". ");
+		oss <<  getExtraInfoStrings(Magnitude).join(". ");
 	}
 
 	if (flags&IAUConstellation)
 	{
 		// IAU Constellation
 		const QString iauConstellation = ConstellationMgr::getIAUconstellationName(core->getIAUConstellation(pos));
-		res.append(" " + qc_("in the constellation of", "object narration") + " " + iauConstellation);
+		oss << (" " + qc_("in the constellation of", "object narration") + " " + iauConstellation);
 	}
-	res.append(". ");
+	oss << (". ");
 	if (flags&CulturalConstellation)
 	{
 		// Culture info
@@ -1638,7 +2207,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 			for (const Constellation *cst: cList)
 				cNames.append(cst->getNamePronounce());
 			if (cList.length()>0)
-				res.append(" " + qc_("In this skyculture, it lies within the area of", "object narration") + " "
+				oss << (" " + qc_("In this skyculture, it lies within the area of", "object narration") + " "
 					   + cNames.join(QString(" %1 ").arg(qc_("and", "object narration"))) + ". ");
 		}
 
@@ -1646,37 +2215,62 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		{
 			QString zodiacSystemLabel = cMgr->getZodiacSystemName();
 			// TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
-			res += QString(qc_("Its %1 Position is %2", "object narration")).arg(zodiacSystemLabel, cMgr->getZodiacCoordinate(pos, true)) + ". ";
+			oss <<  QString(qc_("Its %1 Position is %2", "object narration")).arg(zodiacSystemLabel, cMgr->getZodiacCoordinate(pos, true)) + ". ";
 
 		}
 		if (cMgr->hasLunarSystem() && (currentPlanetName==L1S("Earth")))
 		{
 			QString lunarSystemLabel = cMgr->getLunarSystemName();
 			// TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
-			res += QString(qc_("Its %1 Position is %2", "object narration")).arg(lunarSystemLabel, cMgr->getLunarSystemCoordinate(pos, true)) + ". ";
+			oss <<  QString(qc_("Its %1 Position is %2", "object narration")).arg(lunarSystemLabel, cMgr->getLunarSystemCoordinate(pos, true)) + ". ";
 		}
 	}
+
+	if (flags&AbsoluteMagnitude)
+	{
+		oss << getNarrationAbsoluteMagnitude(core, flags);
+	}
+
+	if (flags&Extra && b_v<99.f)
+		oss << getB_VNarration(b_v);
 
 	if (flags&Extra) // Discovery
 	{
+		oss << getDiscoveryNarration();
+		/*
 		if (!discoverer.isEmpty())
 		{
-			res.append(qc_("It was discovered by", "object narration") + " " + discoverer);
+			oss << (qc_("It was discovered by", "object narration") + " " + discoverer);
 			if (!discoveryDate.isEmpty())
 			{
 				if (!discoveryDate.contains('-'))
-					res.append(" " + qc_("in the year", "object narration") + " " + discoveryDate); // only year
+					oss << (" " + qc_("in the year", "object narration") + " " + discoveryDate); // only year
 				else if (discoveryDate.count('-')==1)
-					res.append(" " + qc_("in", "object narration") + " " + StelUtils::localeDiscoveryDateString(discoveryDate)); // month given
+					oss << (" " + qc_("in", "object narration") + " " + StelUtils::localeDiscoveryDateString(discoveryDate)); // month given
 				else
-					res.append(" " + qc_("on", "object narration") + " " + StelUtils::localeDiscoveryDateString(discoveryDate)); // month given
+					oss << (" " + qc_("on", "object narration") + " " + StelUtils::localeDiscoveryDateString(discoveryDate)); // month given
 			}
-			res.append(". ");
+			oss << (". ");
 		}
+		*/
 	}
 
 	InfoStringGroup alreadyProcessed=StelObject::IAUConstellation | StelObject::CulturalConstellation;
-	res += getCommonNarration(core, flags & (~alreadyProcessed));
+	oss <<  getCommonNarration(core, flags & (~alreadyProcessed));
+
+	// Second test avoids crash when observer is on spaceship
+	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
+	{
+		Vec4d properMotion = getHourlyProperMotion(core);
+		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		oss << QString(qc_("In one hour, %1 moves %2 towards %3 degrees, or %4 in right ascension and %5 in declination", "planet narration"))
+		       .arg(getNameI18n(), withDecimalDegree ? StelUtils::radToDecDegNarration(properMotion[0]) : StelUtils::narrateDecimal(properMotion[0]*M_180_PI, 1),
+			    StelUtils::narrateDecimal(properMotion[1]*M_180_PI, 1),
+				withDecimalDegree ? StelUtils::radToDecDegNarration(properMotion[2]) : StelUtils::radToDmsNarration(properMotion[2]),
+				withDecimalDegree ? StelUtils::radToDecDegNarration(properMotion[3]) : StelUtils::radToDmsNarration(properMotion[3]));
+	}
+
+	oss << getNarrationEloPhase(core, flags, pType<=isMoon);
 
 	if (flags&Distance) // Distance from sun and earth
 	{
@@ -1704,7 +2298,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 				km = qc_("Million kilometers", "distance");
 			}
 
-			res.append(QString("%1 %2 %3 %4 %5 %6, ").arg(qc_("The current distance from the Sun amounts to", "object narration"),
+			oss << (QString("%1 %2 %3 %4 %5 %6, ").arg(qc_("The current distance from the Sun amounts to", "object narration"),
 								      hdistanceAu > 0.5 ? distAU : "",
 								      hdistanceAu > 0.5 ? auStr : "",
 								      hdistanceAu > 0.5 ? qc_("or", "object narration") : "",
@@ -1727,14 +2321,33 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 			km = qc_("Million kilometers", "distance");
 		}
 
-		res.append(QString("%1 %2 %3 %4 %5 %6 ").arg(qc_("The current distance amounts to", "object narration"),
+		oss << (QString("%1 %2 %3 %4 %5 %6 ").arg(qc_("The current distance amounts to", "object narration"),
 							     distanceAu > 0.5 ? distAU : "",
 							     distanceAu > 0.5 ? auStr : "",
 							     distanceAu > 0.5 ? qc_("or", "object narration") : "",
 							     distKM, km));
-		res.append(QString("%1 %2. ").arg(lightTime, StelUtils::hoursToHmsNarration(distanceKm/SPEED_OF_LIGHT/3600.) ));
+		oss << (QString("%1 %2. ").arg(lightTime, StelUtils::hoursToHmsNarration(distanceKm/SPEED_OF_LIGHT/3600.) ));
 	}
 
+	if (flags&Velocity)
+	{
+		const Vec3d orbitalVel=getEclipticVelocity();
+		const double orbVel=orbitalVel.norm();
+		if (orbVel>0.)
+		{ // AU/d * km/AU /24
+			oss << QString(qc_("The orbital velocity of %1 is %2 kilometers per second", "planet narration"))
+			       .arg(getNameI18n(), StelUtils::narrateDecimal(orbVel* AU/86400., 1));
+			const double helioVel=getHeliocentricEclipticVelocity().norm();
+			if (!fuzzyEquals(helioVel, orbVel))
+				oss << QString(qc_("while the heliocentric velocity is %1 kilometers per second", "planet narration"))
+				       .arg(StelUtils::narrateDecimal(helioVel* AU/86400., 1));
+		}
+		oss << getExtraInfoStrings(Velocity).join("");
+	}
+
+	oss <<  getNarrationPeriods(core, flags);
+	oss <<  getNarrationSize(core, flags);
+	/*
 	if (flags&Size) // Diameter
 	{
 		StelApp& app = StelApp::getInstance();
@@ -1786,14 +2399,18 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 						sizeStr = StelUtils::radToDmsPNarration(angularSize, 2);
 				}
 			}
-			res.append(QString("%1 %2. ").arg(qc_("The apparent diameter is", "object narration"), sizeStr));
+			oss << (QString("%1 %2. ").arg(qc_("The apparent diameter is", "object narration"), sizeStr));
 		}
 
 		QString diam = (getPlanetType()==isPlanet ? qc_("The equatorial diameter is", "object narration") : qc_("Its diameter is", "object narration")); // Many asteroids have irregular shape (Currently unhandled)
-		res.append(QString("%1 %2 %3. ").arg(diam, StelUtils::narrateDecimal(AU * getEquatorialRadius() * 2.0, 1) , qc_("kilometers", "distance")));
+		oss << (QString("%1 %2 %3. ").arg(diam, StelUtils::narrateDecimal(AU * getEquatorialRadius() * 2.0, 1) , qc_("kilometers", "distance")));
 	}
+	*/
 
-	return res;
+	oss <<  getNarrationExtra(core, flags);
+	oss <<  getSolarLunarNarration(core, flags);
+
+	return str;
 }
 
 QPair<double,double> Planet::getLunarEclipseMagnitudes() const
@@ -5467,7 +6084,7 @@ Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) con
 			core1->update(0);
 			Theta2=obsPlanet->getSiderealTime(currentJD+mt, currentJDE+mt) * (M_PI/180.) + L;  // [radians]
 			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
-			cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
+			//cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
 			h2=StelUtils::fmodpos(Theta2-ra, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
 			mt += -h2*(0.5*rotRate/M_PI);
 		}
