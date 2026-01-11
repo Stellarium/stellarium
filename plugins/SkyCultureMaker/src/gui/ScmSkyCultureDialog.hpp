@@ -26,7 +26,7 @@
 
 #include "ScmConstellation.hpp"
 #include "SkyCultureMaker.hpp"
-#include "StelDialogSeparate.hpp"
+#include "StelDialog.hpp"
 #include "types/Classification.hpp"
 #include "types/Description.hpp"
 #include "types/License.hpp"
@@ -38,9 +38,10 @@
 
 class Ui_scmSkyCultureDialog;
 
-class ScmSkyCultureDialog : public StelDialogSeparate
+class ScmSkyCultureDialog : public StelDialog
 {
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 	bool eventFilter(QObject *obj, QEvent *event) override;
 
@@ -73,7 +74,6 @@ public:
 	void updateAddConstellationButtons(bool enabled);
 
 public slots:
-	void retranslate() override;
 	void close() override;
 
 protected slots:

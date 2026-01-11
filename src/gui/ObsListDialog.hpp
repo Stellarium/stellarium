@@ -142,7 +142,7 @@ class ObsListDialog : public StelDialog
 	Q_PROPERTY(bool flagUseFov       READ getFlagUseFov       WRITE setFlagUseFov       NOTIFY flagUseFovChanged)
 
 public:
-	explicit ObsListDialog(QObject *parent);
+	explicit ObsListDialog(QWidget *parent = nullptr);
 
 	~ObsListDialog() override;
 
@@ -164,6 +164,8 @@ public:
 
 protected:
 	Ui_obsListDialogForm *ui;
+
+	virtual void onRetranslate() override;
 
 	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
@@ -323,7 +325,6 @@ signals:
 	void flagUseFovChanged(bool b);
 
 public slots:
-	void retranslate() override;
 	bool getFlagUseJD() {return flagUseJD;}
 	bool getFlagUseLandscape() {return flagUseLandscape;}
 	bool getFlagUseLocation() {return flagUseLocation;}

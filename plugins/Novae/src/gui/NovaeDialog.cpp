@@ -52,21 +52,18 @@ NovaeDialog::~NovaeDialog()
 	delete ui;
 }
 
-void NovaeDialog::retranslate()
+void NovaeDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		refreshUpdateValues();
-		setAboutHtml();
-	}
+    ui->retranslateUi(this);
+    refreshUpdateValues();
+    setAboutHtml();
 }
 
 // Initialize the dialog widgets and connect the signals/slots
 void NovaeDialog::createDialogContent()
 {
 	nova = GETSTELMODULE(Novae);
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
@@ -94,9 +91,6 @@ void NovaeDialog::createDialogContent()
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 	updateTimer->start(7000);
-
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));

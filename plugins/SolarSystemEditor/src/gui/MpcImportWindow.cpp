@@ -98,12 +98,10 @@ MpcImportWindow::~MpcImportWindow()
 
 void MpcImportWindow::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar,            &TitleBar::closeClicked,   this, &StelDialog::close);
-	connect(ui->titleBar,            SIGNAL(movedTo(QPoint)),   this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->pushButtonAcquire,       SIGNAL(clicked()), this, SLOT(acquireObjectData()));
 	connect(ui->pushButtonAbortDownload, SIGNAL(clicked()), this, SLOT(abortDownload()));
@@ -203,13 +201,10 @@ void MpcImportWindow::populateBookmarksList()
 	ui->comboBoxBookmarks->addItems(bookmarkTitles);
 }
 
-void MpcImportWindow::retranslate()
+void MpcImportWindow::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		updateTexts();
-	}
+    ui->retranslateUi(this);
+    updateTexts();
 }
 
 void MpcImportWindow::acquireObjectData()

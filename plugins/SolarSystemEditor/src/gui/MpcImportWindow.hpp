@@ -47,9 +47,6 @@ public:
 	MpcImportWindow();
 	~MpcImportWindow() override;
 
-public slots:
-	void retranslate() override;
-
 signals:
 	void objectsImported();
 
@@ -146,6 +143,7 @@ private:
 	void setCheckState(Qt::CheckState state);
 
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 	Ui_mpcImportWindow * ui;
 };

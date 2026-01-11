@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>pointerCoordinatesWindowForm</class>
  <widget class="QWidget" name="pointerCoordinatesWindowForm">
+  <property name="windowTitle">
+   <string>Pointer Coordinates</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,13 +29,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Pointer Coordinates</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
@@ -341,12 +337,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>ColorButton</class>
    <extends>QToolButton</extends>

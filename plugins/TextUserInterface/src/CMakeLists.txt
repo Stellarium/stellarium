@@ -3,8 +3,6 @@ INCLUDE_DIRECTORIES(.)
 LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(TextUserInterface_SRCS
-     DummyDialog.hpp
-     DummyDialog.cpp
      TuiNode.hpp
      TuiNode.cpp
      TuiNodeActivate.hpp

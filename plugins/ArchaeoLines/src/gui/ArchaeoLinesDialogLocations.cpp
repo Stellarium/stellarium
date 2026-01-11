@@ -43,18 +43,15 @@ ArchaeoLinesDialogLocations::~ArchaeoLinesDialogLocations()
 	delete ui;          ui=Q_NULLPTR;
 }
 
-void ArchaeoLinesDialogLocations::retranslate()
+void ArchaeoLinesDialogLocations::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-	}
+    ui->retranslateUi(this);
 }
 
 void ArchaeoLinesDialogLocations::createDialogContent()
 {
 	al = GETSTELMODULE(ArchaeoLines);
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->citiesListView;
@@ -63,8 +60,6 @@ void ArchaeoLinesDialogLocations::createDialogContent()
 	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	//initialize list model
 	StelLocationMgr *locMgr=&(StelApp::getInstance().getLocationMgr());

@@ -25,22 +25,20 @@
 #define SCM_SKY_CULTURE_EXPORT_DIALOG_HPP
 
 #include "SkyCultureMaker.hpp"
-#include "StelDialogSeparate.hpp"
+#include "StelDialog.hpp"
 #include <QString>
 
 class Ui_scmSkyCultureExportDialog;
 
-class ScmSkyCultureExportDialog : public StelDialogSeparate
+class ScmSkyCultureExportDialog : public StelDialog
 {
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 
 public:
 	ScmSkyCultureExportDialog(SkyCultureMaker *maker);
 	~ScmSkyCultureExportDialog() override;
-
-public slots:
-	void retranslate() override;
 
 protected slots:
 	void handleFontChanged();

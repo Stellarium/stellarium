@@ -38,13 +38,11 @@ class ConfigurationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	ConfigurationDialog(StelGui* agui, QObject* parent);
+    explicit ConfigurationDialog(QWidget* parent = nullptr);
 	~ConfigurationDialog() override;
 
-public slots:
-	void retranslate() override;
-
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
 	Ui_configurationDialogForm* ui;

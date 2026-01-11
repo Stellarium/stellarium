@@ -21,11 +21,13 @@ public:
 
 	void setupMenus();
 
+public slots:
+    void initTitleI18n();
+
 protected:
 	void closeEvent(QCloseEvent* event) override;
 
 private:
-    static QAction* bindStelAction;
     void initWorkspace(QSettings* confSettings);
     void initFonts(QSettings* confSettings);
     void initTranslations();

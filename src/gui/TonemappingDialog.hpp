@@ -33,13 +33,11 @@ public:
 	TonemappingDialog();
 	~TonemappingDialog() override;
 
-public slots:
-	void retranslate() override;
-
 private slots:
 	void resetTonemapping();
 
 protected:
+	virtual void onRetranslate() override;
         //! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_TonemappingDialogForm *ui;

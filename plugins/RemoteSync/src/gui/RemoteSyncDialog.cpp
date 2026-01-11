@@ -41,19 +41,16 @@ RemoteSyncDialog::~RemoteSyncDialog()
 	delete ui; ui=nullptr;
 }
 
-void RemoteSyncDialog::retranslate()
+void RemoteSyncDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-	}
+	ui->retranslateUi(this);
+    setAboutHtml();
 }
 
 void RemoteSyncDialog::createDialogContent()
 {
 	rs = GETSTELMODULE(RemoteSync);
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -68,8 +65,6 @@ void RemoteSyncDialog::createDialogContent()
 	ui->pushButtonDeselectProperties->setText(QChar(0x2190));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(rs, SIGNAL(stateChanged(RemoteSync::SyncState)), this, SLOT(updateState()));
 	updateState();

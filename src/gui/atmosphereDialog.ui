@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>atmosphereDialogForm</class>
  <widget class="QWidget" name="atmosphereDialogForm">
+  <property name="windowTitle">
+   <string>Atmosphere Details</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -32,13 +35,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Atmosphere Details</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QGroupBox" name="visualModelConfigGroup">
      <property name="sizePolicy">
@@ -434,14 +430,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>atmosphereModel</tabstop>
   <tabstop>showMySky_pathToModelEdit</tabstop>

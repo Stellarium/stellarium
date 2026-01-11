@@ -45,20 +45,17 @@ ObservabilityDialog::~ObservabilityDialog()
 	delete ui;
 }
 
-void ObservabilityDialog::retranslate()
+void ObservabilityDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-		updateControls(); // Also re-translate the dynamic slider labels
-	}
+	ui->retranslateUi(this);
+    setAboutHtml();
+    updateControls(); // Also re-translate the dynamic slider labels
 }
 
 // Initialize the dialog widgets and connect the signals/slots
 void ObservabilityDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	ui->tabs->setCurrentIndex(0);
 	connect(&StelApp::getInstance(),
 	        SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -109,8 +106,6 @@ void ObservabilityDialog::createDialogContent()
 	connect(ui->horizonAltitudeSlider, SIGNAL(sliderMoved(int)),
 	        this, SLOT(updateHorizonLabel(int)));
 
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
 		this, SLOT(restoreDefaults()));
 	// TODO: The plug-in should emit a signal when settings are changed.

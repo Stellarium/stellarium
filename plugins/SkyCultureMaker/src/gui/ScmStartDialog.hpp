@@ -37,6 +37,7 @@ class Ui_scmStartDialog;
 class ScmStartDialog : public StelDialog
 {
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 
 public:
@@ -56,7 +57,6 @@ public:
 	void setConverterDialogVisibility(bool b);
 
 public slots:
-	void retranslate() override;
 	void close() override;
 
 protected slots:

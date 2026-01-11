@@ -18,7 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include "Dialog.hpp"
 #include "DateTimeDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -32,7 +31,7 @@
 #include <QFrame>
 #include <QLineEdit>
 
-DateTimeDialog::DateTimeDialog(QObject* parent) :
+DateTimeDialog::DateTimeDialog(QWidget* parent) :
 	StelDialog("DateTime", parent),
 	year(0),
 	month(0),
@@ -61,12 +60,10 @@ DateTimeDialog::~DateTimeDialog()
 
 void DateTimeDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	setDateTime(core->getJD());
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectSpinnerEvents();
 
@@ -146,11 +143,9 @@ bool DateTimeDialog::applyJD(double jday)
 	return true;
 }
 
-void DateTimeDialog::retranslate()
+void DateTimeDialog::onRetranslate()
 {
-	if (dialog) {
-		ui->retranslateUi(dialog);
-	}
+	ui->retranslateUi(this);
 }
 
 void DateTimeDialog::close()

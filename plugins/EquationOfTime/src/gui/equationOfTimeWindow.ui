@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>equationOfTimeWindowForm</class>
  <widget class="QWidget" name="equationOfTimeWindowForm">
+  <property name="windowTitle">
+   <string>Equation of Time</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,13 +29,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Equation of Time</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
@@ -265,12 +261,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>ColorButton</class>
    <extends>QToolButton</extends>

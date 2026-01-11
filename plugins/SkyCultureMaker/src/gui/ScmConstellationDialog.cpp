@@ -22,6 +22,7 @@
  */
 
 #include "ScmConstellationDialog.hpp"
+#include "StelMainView.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelObjectMgr.hpp"
@@ -36,7 +37,7 @@
 #include <QFileInfo>
 
 ScmConstellationDialog::ScmConstellationDialog(SkyCultureMaker *maker)
-	: StelDialogSeparate("ScmConstellationDialog")
+	: StelDialog("ScmConstellationDialog")
 	, maker(maker)
 {
 	assert(maker != nullptr);
@@ -144,13 +145,10 @@ void ScmConstellationDialog::setIsDarkConstellation(bool isDark)
 	updateTranslatableStrings();
 }
 
-void ScmConstellationDialog::retranslate()
+void ScmConstellationDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		updateTranslatableStrings();
-	}
+    ui->retranslateUi(this);
+    updateTranslatableStrings();
 }
 
 void ScmConstellationDialog::close()
@@ -163,7 +161,7 @@ void ScmConstellationDialog::close()
 void ScmConstellationDialog::createDialogContent()
 {
 	isDialogInitialized = true;
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	imageItem->hide();
 	ui->artwork_image->setScene(imageItem->scene());
 	ui->bind_star->setEnabled(false);
@@ -171,8 +169,6 @@ void ScmConstellationDialog::createDialogContent()
 	setIsDarkConstellation(false);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmConstellationDialog::close);
 	connect(ui->tabs, &QTabWidget::currentChanged, this, &ScmConstellationDialog::tabChanged);
 
 	connect(ui->penBtn, &QPushButton::toggled, this, &ScmConstellationDialog::togglePen);
@@ -301,7 +297,7 @@ void ScmConstellationDialog::triggerUploadImage()
 
 	if (!fileInfo.isFile())
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("Chosen path is not a valid file:\n") + filePath);
 		return;
 	}
@@ -310,7 +306,7 @@ void ScmConstellationDialog::triggerUploadImage()
 	      fileInfo.suffix().compare("JPG", Qt::CaseInsensitive) == 0 ||
 	      fileInfo.suffix().compare("JPEG", Qt::CaseInsensitive) == 0))
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("Chosen file is not a PNG, JPG or JPEG image:\n") + filePath);
 		return;
 	}
@@ -337,7 +333,7 @@ void ScmConstellationDialog::bindSelectedStar()
 {
 	if (!imageItem->hasAnchorSelection())
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("No anchor was selected. Please select an anchor to bind to."));
 		qDebug() << "SkyCultureMaker: No anchor was selected.";
 		return;
@@ -348,7 +344,7 @@ void ScmConstellationDialog::bindSelectedStar()
 
 	if (!objectMgr.getWasSelected())
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("No star was selected to bind to the current selected anchor."));
 		qDebug() << "SkyCultureMaker: No star was selected to bind to.";
 		return;
@@ -359,7 +355,7 @@ void ScmConstellationDialog::bindSelectedStar()
 	if (stelObj->getType().compare("star", Qt::CaseInsensitive) != 0 &&
 	    stelObj->getType().compare("nebula", Qt::CaseInsensitive) != 0)
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("The selected object must be of type Star or Nebula."));
 		qDebug() << "SkyCultureMaker: The selected object is not of type Star, got " << stelObj->getType();
 		return;
@@ -368,7 +364,7 @@ void ScmConstellationDialog::bindSelectedStar()
 	ScmConstellationImageAnchor *anchor = imageItem->getSelectedAnchor();
 	if (anchor == nullptr)
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("No anchor was selected. Please select an anchor to bind to."));
 		qDebug() << "SkyCultureMaker: No anchor was selected";
 		return;
@@ -377,7 +373,7 @@ void ScmConstellationDialog::bindSelectedStar()
 	bool success = anchor->trySetStarHip(stelObj->getID());
 	if (success == false)
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("The selected object must contain a HIP number."));
 		qDebug() << "SkyCultureMaker: The object does not contain a HIP, id = " << stelObj->getID();
 		return;
@@ -400,7 +396,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	scm::ScmSkyCulture *currentSkyCulture = maker->getCurrentSkyCulture();
 	if (currentSkyCulture == nullptr)
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("Could not save: Sky Culture is not set"));
 		qDebug() << "SkyCultureMaker: Could not save: Sky Culture is not set";
 		return false;
@@ -408,7 +404,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 
 	if (constellationEnglishName.isEmpty())
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("Could not save: English name is empty"));
 		qDebug() << "SkyCultureMaker: Could not save: English name is empty";
 		return false;
@@ -418,7 +414,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	QString finalId = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
 	if (finalId.isEmpty())
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("Could not save: Constellation ID is empty"));
 		qDebug() << "SkyCultureMaker: Could not save: Constellation ID is empty";
 		return false;
@@ -427,7 +423,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	// Not editing a constellation, but the ID already exists
 	if (constellationBeingEdited == nullptr && currentSkyCulture->getConstellation(finalId) != nullptr)
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("Could not save: Constellation with this ID already exists"));
 		qDebug() << "SkyCultureMaker: Could not save: Constellation with this ID already exists, id = "
 			 << finalId;
@@ -437,7 +433,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	else if (constellationBeingEdited != nullptr && constellationBeingEdited->getId() != finalId &&
 	         currentSkyCulture->getConstellation(finalId) != nullptr)
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("Could not save: Constellation with this ID already exists"));
 		qDebug() << "SkyCultureMaker: Could not save: Constellation with this ID already exists, id = "
 			 << finalId;
@@ -448,7 +444,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	auto drawnConstellation = maker->getScmDraw()->getConstellationLines();
 	if (drawnConstellation.empty())
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 		                            q_("Could not save: The constellation does not contain any drawings"));
 		qDebug() << "SkyCultureMaker: Could not save: The constellation does not contain any drawings";
 		return false;
@@ -459,7 +455,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	{
 		if (!imageItem->isImageAnchored())
 		{
-			maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+			maker->showUserErrorMessage(StelMainView::getMainWindow(), windowTitle(),
 			                            q_("Could not save: An artwork is attached, but not all "
 			                               "anchors have a star bound."));
 			qDebug() << "SkyCultureMaker: Could not save: An artwork is attached, but not all "
@@ -616,7 +612,7 @@ void ScmConstellationDialog::updateTranslatableStrings()
 	                    "   - 'Bind Star' will overwrite the current binding if it already exists");
 
 	// Update title and labels depending on constellation type
-	ui->titleBar->setTitle(isDarkConstellation ? q_("SCM: Dark Constellation Editor")
+	setWindowTitle(isDarkConstellation ? q_("SCM: Dark Constellation Editor")
 	                                           : q_("SCM: Constellation Editor"));
 	ui->labelsTitle->setText(isDarkConstellation ? q_("Please name your Dark Constellation")
 	                                             : q_("Please name your Constellation"));

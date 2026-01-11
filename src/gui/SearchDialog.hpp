@@ -59,8 +59,8 @@ class CompletionListModel : public QStringListModel
 	Q_OBJECT
 
 public:
-	CompletionListModel(QObject* parent=Q_NULLPTR);
-	CompletionListModel(const QStringList & strings, QObject* parent =Q_NULLPTR);
+	CompletionListModel(QWidget* parent=Q_NULLPTR);
+	CompletionListModel(const QStringList & strings, QWidget* parent =Q_NULLPTR);
 	~CompletionListModel() override;
 
 	QString getSelected(void) const;
@@ -124,7 +124,7 @@ public:
 	};
 	Q_ENUM(CoordinateSystem)
 
-	SearchDialog(QObject* parent);
+	SearchDialog(QWidget* parent = nullptr);
 	~SearchDialog() override;
 	bool eventFilter(QObject *object, QEvent *event) override;
 
@@ -148,7 +148,6 @@ signals:
 	void simbadGetsDimsChanged(bool b);
 
 public slots:
-	void retranslate() override;
 	//! On the first call with "true" populates the window contents. Also sets focus to entry line.
 	void setVisible(bool v) override;
 	//! This style only displays the text search field and the search button
@@ -182,6 +181,7 @@ public:
 	int  getRecentSearchSize () const { return recentObjectSearchesData.maxSize;}
 
 protected:
+	virtual void onRetranslate() override;
 	Ui_searchDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;

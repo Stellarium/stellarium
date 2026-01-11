@@ -330,8 +330,6 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ShortcutLineEdit.cpp
           gui/ShortcutsDialog.hpp
           gui/ShortcutsDialog.cpp
-          gui/Dialog.hpp
-          gui/Dialog.cpp
           gui/MapWidget.hpp
           gui/MapWidget.cpp
           gui/AngleSpinBox.hpp
@@ -377,11 +375,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ObsListDialog.hpp
           gui/ObsListDialog.cpp
           gui/StelDialog.hpp
-          gui/StelDialogWindow.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
-          gui/StelDialogSeparate.hpp
-          gui/StelDialogSeparate.cpp
           gui/TonemappingDialog.hpp
           gui/TonemappingDialog.cpp
           gui/SkylightDialog.hpp

@@ -58,9 +58,6 @@ public:
 	int refreshCount, refreshLimit;
 
 public slots:
-	//! Retranslate UI components based on current language settings
-	void retranslate() override;
-
 	//! Refresh textures when they are painted on screen
 	void initializeRefreshIfNeeded();
 
@@ -83,6 +80,8 @@ public slots:
 	void setAvoidAreaConflict(bool b) { conf->setValue(ConfigPrefix + "/avoidAreaConflict", b); refreshTextures(); }
 
 protected:
+    //! Retranslate UI components based on current language settings
+	virtual void onRetranslate() override;
 	//! Set up the content and interactions of the NebulaTexturesDialog
 	void createDialogContent() override;
 

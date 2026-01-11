@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>helpDialogForm</class>
  <widget class="QWidget" name="helpDialogForm">
+  <property name="windowTitle">
+   <string>Help</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -35,13 +38,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Help</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QFrame" name="viewContent">
      <property name="frameShape">
@@ -344,12 +340,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>

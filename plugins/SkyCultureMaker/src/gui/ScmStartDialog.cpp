@@ -54,17 +54,14 @@ ScmStartDialog::~ScmStartDialog()
 	qDebug() << "SkyCultureMaker: Unloaded the ScmStartDialog";
 }
 
-void ScmStartDialog::retranslate()
+void ScmStartDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-	}
+    ui->retranslateUi(this);
 }
 
 void ScmStartDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	ui->welcomeLabel->setText(q_("Welcome to the Sky Culture Maker!"));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -78,8 +75,6 @@ void ScmStartDialog::createDialogContent()
 	connect(ui->scmStartEditpushButton, &QPushButton::clicked, this,
 	        &ScmStartDialog::close); // Edit - TODO: add logic (currently closing the window)
 
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmStartDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	// Init the correct font
 	handleFontChanged();
 

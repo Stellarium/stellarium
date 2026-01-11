@@ -662,8 +662,6 @@ StelMainView::StelMainView(QSettings* settings)
 
 	qApp->installEventFilter(this);
 
-	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
-	initTitleI18n();
 	setObjectName("MainView");
 
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
@@ -949,6 +947,10 @@ void StelMainView::init()
 
 	//create and initialize main app
 	stelApp = new StelApp(this);
+    if (auto* mw = qobject_cast<QMainWindow*>(window()))
+    {
+        stelApp->setMainWindow(mw);
+    }
 	stelApp->setGui(gui);
 	stelApp->init(configuration);
 	//this makes sure the app knows how large the window is
@@ -1480,12 +1482,6 @@ void StelMainView::deinit()
 	deinitGL();
 	delete stelApp;
 	stelApp = Q_NULLPTR;
-}
-
-// Update the translated title
-void StelMainView::initTitleI18n()
-{
-	setWindowTitle(StelUtils::getApplicationName());
 }
 
 void StelMainView::setFullScreen(bool b)

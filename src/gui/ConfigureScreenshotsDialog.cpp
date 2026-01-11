@@ -19,7 +19,6 @@
 #include "ConfigureScreenshotsDialog.hpp"
 #include "ui_configureScreenshotsDialog.h"
 
-#include "Dialog.hpp"
 #include "StelApp.hpp"
 #include "StelTranslator.hpp"
 #include "StelObjectMgr.hpp"
@@ -35,22 +34,17 @@ ConfigureScreenshotsDialog::~ConfigureScreenshotsDialog()
 	ui=Q_NULLPTR;
 }
 
-void ConfigureScreenshotsDialog::retranslate()
+void ConfigureScreenshotsDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-	}
+    ui->retranslateUi(this);
 }
 
 void ConfigureScreenshotsDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectBoolProperty(ui->useDateTimeFileMask, "MainView.flagScreenshotDateFileName");
 	connectStringProperty(ui->maskLineEdit, "MainView.screenShotFileMask");

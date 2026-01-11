@@ -56,7 +56,7 @@
 #include "StelTranslator.hpp"
 #include "ContributorsList.hpp"
 
-HelpDialog::HelpDialog(QObject* parent)
+HelpDialog::HelpDialog(QWidget* parent)
 	: StelDialog("Help", parent)
 	, message("")
 	, updateState(CompleteNoUpdates)
@@ -72,35 +72,26 @@ HelpDialog::~HelpDialog()
 	ui = nullptr;
 }
 
-void HelpDialog::retranslate()
+void HelpDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		updateHelpText();
-		updateAboutText();
-		updateTabBarListWidgetWidth();
-	}
+    ui->retranslateUi(this);
+    updateHelpText();
+    updateAboutText();
+    updateTabBarListWidgetWidth();
 }
 
-void HelpDialog::styleChanged(const QString &style)
+void HelpDialog::onStyleChanged()
 {
-	StelDialog::styleChanged(style);
-	if (dialog)
-	{
-		updateHelpText();
-		updateAboutText();
-	}
+    updateHelpText();
+    updateAboutText();
 }
 
 void HelpDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;

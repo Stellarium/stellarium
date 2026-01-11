@@ -33,15 +33,15 @@ class LocationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	LocationDialog(QObject* parent);
+	LocationDialog(QWidget* parent = nullptr);
 	~LocationDialog() override;
 
 public slots:
 	//! Apply application style change
 	void styleChanged(const QString &style) override;
-	void retranslate() override;
 
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
 	Ui_locationDialogForm* ui;

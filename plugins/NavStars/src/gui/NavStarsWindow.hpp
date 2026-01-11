@@ -35,10 +35,8 @@ public:
 	NavStarsWindow();
 	~NavStarsWindow() override;
 
-public slots:
-	void retranslate() override;
-
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 
 private:

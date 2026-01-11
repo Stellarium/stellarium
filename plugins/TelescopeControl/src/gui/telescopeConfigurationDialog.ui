@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>telescopeConfigurationDialog</class>
  <widget class="QWidget" name="telescopeConfigurationDialog">
+  <property name="windowTitle">
+   <string>Telescope Configuration</string>
+  </property>
   <property name="windowModality">
    <enum>Qt::WindowModal</enum>
   </property>
@@ -41,13 +44,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Telescope Configuration</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QGroupBox" name="groupBoxType">
      <property name="sizePolicy">
@@ -880,12 +876,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>

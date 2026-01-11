@@ -19,7 +19,6 @@
  */
 
 #include "TelescopeConfigurationDialog.hpp"
-#include "Dialog.hpp"
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
@@ -117,19 +116,15 @@ QStringList* TelescopeConfigurationDialog::listSerialPorts()
 	return plist;
 }
 
-void TelescopeConfigurationDialog::retranslate()
+void TelescopeConfigurationDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		populateToolTips();
-	}
+    populateToolTips();
 }
 
 // Initialize the dialog widgets and connect the signals/slots
 void TelescopeConfigurationDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// ASCOM Telescope client widget needs to be dynamically added in order to make use of preprocessors to exclude for non-windows
 	#if defined(Q_OS_WIN)
@@ -151,9 +146,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 
 	// Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &TelescopeConfigurationDialog::buttonDiscardPressed);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(dialog, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
+	connect(this, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
 
 	// Connect: sender, signal, receiver, member
 	connect(ui->radioButtonTelescopeLocal, SIGNAL(toggled(bool)), this, SLOT(toggleTypeLocal(bool)));
@@ -265,7 +258,7 @@ void TelescopeConfigurationDialog::initNewTelescopeConfiguration(int slot)
 {
 	configuredSlot = slot;
 	initConfigurationDialog();
-	ui->titleBar->setTitle(q_("Add New Telescope"));
+	setWindowTitle(q_("Add New Telescope"));
 	ui->lineEditTelescopeName->setText(QString("New Telescope %1").arg(QString::number(configuredSlot)));
 
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(TelescopeControl::DEFAULT_DELAY));
@@ -275,7 +268,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 {
 	configuredSlot = slot;
 	initConfigurationDialog();
-	ui->titleBar->setTitle(q_("Configure Telescope"));
+	setWindowTitle(q_("Configure Telescope"));
 
 	// Read the telescope properties
 	QString name;

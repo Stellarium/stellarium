@@ -38,10 +38,8 @@ public:
 	CustomDeltaTEquationDialog();
 	~CustomDeltaTEquationDialog() override;
 
-public slots:
-	void retranslate() override;
-
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_customDeltaTEquationDialogForm *ui;
@@ -62,7 +60,7 @@ private:
 	double ndot;
 	Vec3d coeff;
 
-	void setDescription(void) const;
+	void setDescription(void);
 };
 
 #endif // CUSTOMDELTATEQUATIONDIALOG_HPP

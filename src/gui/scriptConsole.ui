@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>scriptConsoleForm</class>
  <widget class="QWidget" name="scriptConsoleForm">
+  <property name="windowTitle">
+   <string>Script console</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,13 +29,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title" stdset="0">
-      <string>Script console</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QFrame" name="frame">
      <property name="sizePolicy">
@@ -439,39 +435,6 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="ResizeFrame" name="frame_4">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>24</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Sans Serif</family>
-           </font>
-          </property>
-          <property name="cursor">
-           <cursorShape>SizeFDiagCursor</cursorShape>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
      </layout>
@@ -479,19 +442,11 @@
    </item>
   </layout>
   <zorder>frame</zorder>
-  <zorder>titleBar</zorder>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ResizeFrame</class>
    <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

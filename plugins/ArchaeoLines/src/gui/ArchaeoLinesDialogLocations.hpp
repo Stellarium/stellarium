@@ -42,11 +42,11 @@ public:
 	~ArchaeoLinesDialogLocations() override;
 
 public slots:
-	void retranslate() override;
 	//! call with context 1 or 2 to prepare selection of location 1 or 2.
 	void setModalContext(int context);
 
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 
 private:

@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>slewDialog</class>
  <widget class="QWidget" name="slewDialog">
+  <property name="windowTitle">
+   <string>Slew telescope to</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -41,13 +44,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title" stdset="0">
-      <string>Slew telescope to</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QLabel" name="labelNoTelescopes">
      <property name="sizePolicy">
@@ -414,12 +410,6 @@ margin-bottom:10px;</string>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>

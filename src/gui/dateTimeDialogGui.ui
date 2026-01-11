@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>dateTimeDialogForm</class>
  <widget class="QWidget" name="dateTimeDialogForm">
+  <property name="windowTitle">
+   <string>Date and Time</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,13 +32,6 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <item row="0" column="0">
-    <widget class="TitleBar" name="titleBar">
-     <property name="title" stdset="0">
-      <string>Date and Time</string>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="0">
     <widget class="QTabWidget" name="dateTimeTabWidget">
      <property name="currentIndex">
@@ -539,12 +535,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>

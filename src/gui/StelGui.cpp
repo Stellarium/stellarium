@@ -224,19 +224,19 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	qInfo() << "Creating GUI ...";
 
 	StelGuiBase::init(atopLevelGraphicsWidget);
-	skyGui = new SkyGui(atopLevelGraphicsWidget);
-	locationDialog = new LocationDialog(atopLevelGraphicsWidget);
-	helpDialog = new HelpDialog(atopLevelGraphicsWidget);
-	dateTimeDialog = new DateTimeDialog(atopLevelGraphicsWidget);
-	searchDialog = new SearchDialog(atopLevelGraphicsWidget);
-	viewDialog = new ViewDialog(atopLevelGraphicsWidget);
-	shortcutsDialog = new ShortcutsDialog(atopLevelGraphicsWidget);
-	configurationDialog = new ConfigurationDialog(this, atopLevelGraphicsWidget);
+	skyGui = new SkyGui();
+	locationDialog = new LocationDialog();
+	helpDialog = new HelpDialog();
+	dateTimeDialog = new DateTimeDialog();
+	searchDialog = new SearchDialog();
+	viewDialog = new ViewDialog();
+	shortcutsDialog = new ShortcutsDialog();
+	configurationDialog = new ConfigurationDialog();
 #ifdef ENABLE_SCRIPT_CONSOLE
-	scriptConsole = new ScriptConsole(atopLevelGraphicsWidget);
+	scriptConsole = new ScriptConsole();
 #endif
-	astroCalcDialog = new AstroCalcDialog(atopLevelGraphicsWidget);
-	obsListDialog = new ObsListDialog(atopLevelGraphicsWidget);
+	astroCalcDialog = new AstroCalcDialog();
+	obsListDialog = new ObsListDialog();
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
@@ -258,6 +258,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 #endif
 
         QString windowsGroup = N_("Windows");
+
 #ifdef ENABLE_SCRIPT_CONSOLE
 	actionsMgr->addAction("actionShow_ScriptConsole_Window_Global", windowsGroup, N_("Script console window"), scriptConsole, "visible", "F12", "", true);
 #endif

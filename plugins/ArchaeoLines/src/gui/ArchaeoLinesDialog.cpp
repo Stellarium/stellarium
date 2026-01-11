@@ -47,19 +47,16 @@ ArchaeoLinesDialog::~ArchaeoLinesDialog()
 	delete ui;              ui=Q_NULLPTR;
 }
 
-void ArchaeoLinesDialog::retranslate()
+void ArchaeoLinesDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-	}
+    ui->retranslateUi(this);
+    setAboutHtml();
 }
 
 void ArchaeoLinesDialog::createDialogContent()
 {
 	al = GETSTELMODULE(ArchaeoLines);
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -68,8 +65,6 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectIntProperty(ui->lineWidthSpinBox, "ArchaeoLines.lineWidth");
 

@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>satellitesCommDialog</class>
  <widget class="QWidget" name="satellitesCommDialog">
+  <property name="windowTitle">
+   <string>Frequencies</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -32,13 +35,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title" stdset="0">
-      <string>Frequencies</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
@@ -189,14 +185,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../../../../data/gui/guiRes.qrc"/>
  </resources>

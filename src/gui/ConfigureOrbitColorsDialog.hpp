@@ -33,13 +33,11 @@ public:
 	ConfigureOrbitColorsDialog();
 	~ConfigureOrbitColorsDialog() override;
 
-public slots:
-	void retranslate() override;
-
 private slots:
 	void setColorStyle();
 
 protected:
+	virtual void onRetranslate() override;
         //! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_ConfigureOrbitColorsDialogForm *ui;

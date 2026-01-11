@@ -21,24 +21,24 @@
 #ifndef ONLINEQUERIESDIALOG_HPP
 #define ONLINEQUERIESDIALOG_HPP
 
-#include "StelDialogSeparate.hpp"
+#include "StelDialog.hpp"
 #include "ui_onlineQueriesDialog.h"
 
 class OnlineQueries;
 
-class OnlineQueriesDialog : public StelDialogSeparate
+class OnlineQueriesDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	OnlineQueriesDialog(QObject* parent = nullptr);
+	OnlineQueriesDialog(QWidget* parent = nullptr);
 	~OnlineQueriesDialog() override;
 
 public slots:
-	void retranslate() override;
 	void setOutputHtml(const QString &html) const;
 	void setOutputUrl(const QUrl &url) const;
 
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 	void setAboutHtml();
 

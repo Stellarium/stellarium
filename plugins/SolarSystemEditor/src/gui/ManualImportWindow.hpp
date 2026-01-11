@@ -41,9 +41,6 @@ public:
 	ManualImportWindow();
 	~ManualImportWindow() override;
 
-public slots:
-	void retranslate() override;
-
 private slots:
 	//TODO: Object type
 
@@ -74,6 +71,7 @@ private:
 	bool verifyPowerOfTwo(int value);
 
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 	Ui_manualImportWindow * ui;
 };

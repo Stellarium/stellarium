@@ -59,22 +59,18 @@ ScmConvertDialog::~ScmConvertDialog()
 	}
 }
 
-void ScmConvertDialog::retranslate()
+void ScmConvertDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-	}
+	ui->retranslateUi(this);
+
 }
 
 void ScmConvertDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// Connect signals
 	connect(ui->browseButton, &QPushButton::clicked, this, &ScmConvertDialog::browseFile);
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmConvertDialog::closeDialog);
-	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 	connect(ui->convertButton, &QPushButton::clicked, this, &ScmConvertDialog::convert);
 	connect(watcher, &QFutureWatcher<QString>::finished, this, &ScmConvertDialog::onConversionFinished);
 }

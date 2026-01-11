@@ -3,6 +3,7 @@
 #include "StelTranslator.hpp"
 #include "core/StelApp.hpp"
 #include "core/StelActionMgr.hpp"
+#include "core/StelLocaleMgr.hpp"
 #include "StelMainWindow.hpp"
 #include "StelMainView.hpp"
 #include <QCloseEvent>
@@ -48,6 +49,7 @@ StelMainWindow::StelMainWindow(QSettings* confSettings, QWidget* parent)
     Q_INIT_RESOURCE(mainRes);
     Q_INIT_RESOURCE(guiRes);
 
+    setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
     enableScripting(confSettings);
     initWorkspace(confSettings);
     initFonts(confSettings);
@@ -55,12 +57,20 @@ StelMainWindow::StelMainWindow(QSettings* confSettings, QWidget* parent)
 	mainView = new StelMainView(confSettings);
 	setCentralWidget(mainView);
 	applyVideoSettings(confSettings);
+    connect(&StelApp::getInstance().getLocaleMgr(), &StelLocaleMgr::appLanguageChanged, this, &StelMainWindow::initTitleI18n);
+	initTitleI18n();
     setupMenus();
 	SplashScreen::finish(this);
     qDebug() << "Max thread count (Global Pool): " << QThreadPool::globalInstance()->maxThreadCount();
 }
 
 StelMainWindow::~StelMainWindow() = default;
+
+// Update the translated title
+void StelMainWindow::initTitleI18n()
+{
+	setWindowTitle(StelUtils::getApplicationName());
+}
 
 void StelMainWindow::closeEvent(QCloseEvent* event)
 {

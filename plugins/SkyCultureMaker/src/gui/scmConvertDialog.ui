@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>scmConvertDialog</class>
  <widget class="QWidget" name="scmConvertDialog">
+  <property name="windowTitle">
+   <string>Sky Culture Converter</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -18,13 +21,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title" stdset="0">
-      <string>Sky Culture Converter</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QFrame" name="Content">
      <property name="frameShape">
@@ -109,14 +105,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header location="global">Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

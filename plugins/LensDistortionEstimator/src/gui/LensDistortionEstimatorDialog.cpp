@@ -198,18 +198,15 @@ LensDistortionEstimatorDialog::~LensDistortionEstimatorDialog()
 {
 }
 
-void LensDistortionEstimatorDialog::retranslate()
+void LensDistortionEstimatorDialog::onRetranslate()
 {
-	if(dialog)
-	{
-		ui_->retranslateUi(dialog);
-		setAboutText();
-	}
+    ui_->retranslateUi(this);
+    setAboutText();
 }
 
 void LensDistortionEstimatorDialog::createDialogContent()
 {
-	ui_->setupUi(dialog);
+	ui_->setupUi(this);
 	ui_->tabs->setCurrentIndex(0);
 
 	// Kinetic scrolling
@@ -222,8 +219,6 @@ void LensDistortionEstimatorDialog::createDialogContent()
 	}
 
 	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &LensDistortionEstimatorDialog::retranslate);
-	connect(ui_->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui_->titleBar, &TitleBar::movedTo, this, &LensDistortionEstimatorDialog::handleMovedTo);
 
 	core_ = StelApp::getInstance().getCore();
 	starMgr_ = GETSTELMODULE(StarMgr);

@@ -45,16 +45,14 @@ public:
 		OtherError				//!< Other error
 	};
 
-	HelpDialog(QObject* parent);
+	HelpDialog(QWidget* parent = nullptr);
 	~HelpDialog() override;
 
 
-public slots:
-	//! Apply application style change
-	void styleChanged(const QString &style) override;
-	void retranslate() override;
-
 protected:
+	virtual void onRetranslate() override;
+    void onStyleChanged() override;
+
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
 

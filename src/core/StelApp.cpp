@@ -457,6 +457,16 @@ QStringList StelApp::getCommandlineArguments()
 	return qApp->property("stelCommandLine").toStringList();
 }
 
+void StelApp::setMainWindow(QWidget* w)
+{
+    mainWindow = w;
+}
+
+QWidget* StelApp::getMainWindow() const
+{
+    return mainWindow;
+}
+
 void StelApp::init(QSettings* conf)
 {
 	gl = QOpenGLContext::currentContext()->functions();

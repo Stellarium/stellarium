@@ -25,22 +25,20 @@
 #define SCMHIDEORABORTMAKERDIALOG_HPP
 
 #include "SkyCultureMaker.hpp"
-#include "StelDialogSeparate.hpp"
+#include "StelDialog.hpp"
 #include <QObject>
 
 class Ui_scmHideOrAbortMakerDialog;
 
-class ScmHideOrAbortMakerDialog : public StelDialogSeparate
+class ScmHideOrAbortMakerDialog : public StelDialog
 {
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 
 public:
 	ScmHideOrAbortMakerDialog(SkyCultureMaker *maker);
 	~ScmHideOrAbortMakerDialog() override;
-
-public slots:
-	void retranslate() override;
 
 protected slots:
 	void handleFontChanged();

@@ -42,26 +42,21 @@ NavStarsWindow::~NavStarsWindow()
 	delete ui;
 }
 
-void NavStarsWindow::retranslate()
+void NavStarsWindow::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-		populateNavigationalStarsSets();
-		populateNavigationalStarsSetDescription();
-		populateToday();
-	}
+    ui->retranslateUi(this);
+    setAboutHtml();
+    populateNavigationalStarsSets();
+    populateNavigationalStarsSetDescription();
+    populateToday();
 }
 
 void NavStarsWindow::createDialogContent()
 {
 	ns = GETSTELMODULE(NavStars);
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateNavigationalStarsSets();
 	populateNavigationalStarsSetDescription();

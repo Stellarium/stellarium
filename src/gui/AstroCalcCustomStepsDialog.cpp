@@ -17,7 +17,6 @@
 */
 
 #include "StelApp.hpp"
-#include "Dialog.hpp"
 #include "StelTranslator.hpp"
 #include "StelObjectMgr.hpp"
 
@@ -36,24 +35,19 @@ AstroCalcCustomStepsDialog::~AstroCalcCustomStepsDialog()
 	ui=Q_NULLPTR;
 }
 
-void AstroCalcCustomStepsDialog::retranslate()
+void AstroCalcCustomStepsDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		populateUnitMeasurementsList();
-	}
+    ui->retranslateUi(this);
+    populateUnitMeasurementsList();
 }
 
 
 void AstroCalcCustomStepsDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	ui->timeStepDoubleSpinBox->setValue(conf->value("astrocalc/custom_time_step", 1.0).toDouble());
 	connect(ui->timeStepDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveTimeStep(double)));

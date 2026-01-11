@@ -26,6 +26,7 @@
 #include <cassert>
 #include <QStyledItemDelegate>
 #include <QDebug>
+#include <QKeyEvent>
 
 namespace
 {
@@ -46,7 +47,7 @@ public:
 }
 
 ScmSkyCultureDialog::ScmSkyCultureDialog(SkyCultureMaker *maker)
-	: StelDialogSeparate("ScmSkyCultureDialog")
+	: StelDialog("ScmSkyCultureDialog")
 	, maker(maker)
 {
 	assert(maker != nullptr);
@@ -63,7 +64,7 @@ ScmSkyCultureDialog::~ScmSkyCultureDialog()
 void ScmSkyCultureDialog::setConstellations(std::vector<std::unique_ptr<scm::ScmConstellation>> *constellations)
 {
 	ScmSkyCultureDialog::constellations = constellations;
-	if (ui && dialog && constellations != nullptr)
+	if (ui && constellations != nullptr)
 	{
 		ui->constellationsList->clear();
 		for (const auto &constellation : *constellations)
@@ -76,19 +77,16 @@ void ScmSkyCultureDialog::setConstellations(std::vector<std::unique_ptr<scm::Scm
 
 void ScmSkyCultureDialog::resetConstellations()
 {
-	if (ui && dialog)
+	if (ui)
 	{
 		ui->constellationsList->clear();
 		constellations = nullptr; // Reset the constellations pointer
 	}
 }
 
-void ScmSkyCultureDialog::retranslate()
+void ScmSkyCultureDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-	}
+    ui->retranslateUi(this);
 }
 
 void ScmSkyCultureDialog::close()
@@ -98,7 +96,7 @@ void ScmSkyCultureDialog::close()
 
 bool ScmSkyCultureDialog::eventFilter(QObject *obj, QEvent *event)
 {
-	if (obj == dialog && event->type() == QEvent::KeyPress)
+	if (obj == this && event->type() == QEvent::KeyPress)
 	{
 		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
 		if (keyEvent->key() == Qt::Key_Escape)
@@ -108,17 +106,15 @@ bool ScmSkyCultureDialog::eventFilter(QObject *obj, QEvent *event)
 			return true;
 		}
 	}
-	return StelDialogSeparate::eventFilter(obj, event);
+	return StelDialog::eventFilter(obj, event);
 }
 
 void ScmSkyCultureDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
-	dialog->installEventFilter(this);
+	ui->setupUi(this);
+	installEventFilter(this);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmSkyCultureDialog::close);
 
 	// Overview Tab
 	connect(ui->skyCultureNameLE, &QLineEdit::textChanged, this,
@@ -219,7 +215,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	// check if license is set
 	if (desc.license == scm::LicenseType::NONE)
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please select a license for the sky culture."));
+		maker->showUserWarningMessage(this, windowTitle(), q_("Please select a license for the sky culture."));
 		return;
 	}
 	// check if description is complete
@@ -229,7 +225,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 		auto msg = q_("The sky culture description is not complete. The following fields are not filled correctly:\n");
 		for (const auto& field : incompFieldsList)
 			msg += u8" \u2022 " + field + "\n";
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), msg);
+		maker->showUserWarningMessage(this, windowTitle(), msg);
 		return;
 	}
 
@@ -335,7 +331,7 @@ void ScmSkyCultureDialog::setIdFromName(QString &name)
 
 void ScmSkyCultureDialog::updateAddConstellationButtons(bool enabled)
 {
-	if(ui && dialog)
+	if(ui)
 	{
 		ui->AddConstellationBtn->setEnabled(enabled);
 		ui->AddDarkConstellationBtn->setEnabled(enabled);
@@ -373,7 +369,7 @@ QString ScmSkyCultureDialog::getDisplayNameFromConstellation(const scm::ScmConst
 
 void ScmSkyCultureDialog::resetReferences()
 {
-	if (ui && dialog)
+	if (ui)
 	{
 		ui->referencesList->clear();
 		ui->moveRefUpBtn->setEnabled(false);
@@ -538,7 +534,7 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 
 void ScmSkyCultureDialog::resetDialog()
 {
-	if (ui && dialog)
+	if (ui)
 	{
 		ui->skyCultureNameLE->clear();
 		ui->authorsTE->clear();

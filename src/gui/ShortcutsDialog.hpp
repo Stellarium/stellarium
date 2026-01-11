@@ -42,7 +42,7 @@ class ShortcutsFilterModel : public QSortFilterProxyModel
 	Q_OBJECT
 	
 public:
-	ShortcutsFilterModel(QObject* parent = Q_NULLPTR);
+	ShortcutsFilterModel(QWidget* parent = Q_NULLPTR);
 	
 protected:
 	bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
@@ -54,7 +54,7 @@ class ShortcutsDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	ShortcutsDialog(QObject* parent);
+	ShortcutsDialog(QWidget* parent = nullptr);
 	~ShortcutsDialog() override;
 
 	//! highlight items that have collisions with current lineEdits' state according to CSS.
@@ -64,7 +64,6 @@ public:
 public slots:
 	//! restore colors of all items it TreeWidget to defaults.
 	void resetCollisions();
-	void retranslate() override;
 	//! initialize editors state when current item changed.
 	void initEditors();
 	//! checks whether one QKeySequence is prefix of another.
@@ -86,6 +85,7 @@ public slots:
 	void updateTreeData();
 
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 

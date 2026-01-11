@@ -69,7 +69,6 @@ public slots:
 	void moveDownSelectedOcular();
 	void moveDownSelectedTelescope();
 	void moveDownSelectedLens();
-	void retranslate() override;
 
 	// Mini-methods required to immediately update display
 	void updateOcular();
@@ -82,8 +81,10 @@ public slots:
 	void selectTelescope(const QModelIndex);
 
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
+    void closeEvent(QCloseEvent* event) override;
 	Ui_ocularDialogForm* ui;
 
 private slots:

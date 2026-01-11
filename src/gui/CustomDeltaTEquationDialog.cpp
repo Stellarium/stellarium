@@ -19,7 +19,6 @@
 #include "CustomDeltaTEquationDialog.hpp"
 #include "ui_customDeltaTEquationDialog.h"
 
-#include "Dialog.hpp"
 #include "StelApp.hpp"
 #include "StelTranslator.hpp"
 #include "StelObjectMgr.hpp"
@@ -41,18 +40,15 @@ CustomDeltaTEquationDialog::~CustomDeltaTEquationDialog()
 	ui=Q_NULLPTR;
 }
 
-void CustomDeltaTEquationDialog::retranslate()
+void CustomDeltaTEquationDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setDescription();
-	}
+    ui->retranslateUi(this);
+    setDescription();
 }
 
 void CustomDeltaTEquationDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	setDescription();
 
 	ui->labelNDot->setText(QString("n%1:").arg(QChar(0x2032)));
@@ -65,8 +61,6 @@ void CustomDeltaTEquationDialog::createDialogContent()
 
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->lineEditNDot, SIGNAL(textEdited(const QString&)), this, SLOT(setNDot(const QString&)));
 	connect(ui->lineEditYear, SIGNAL(textEdited(const QString&)), this, SLOT(setYear(const QString&)));
@@ -121,9 +115,9 @@ void CustomDeltaTEquationDialog::setCoeffC(const QString& v)
 	saveSettings();
 }
 
-void CustomDeltaTEquationDialog::setDescription() const
+void CustomDeltaTEquationDialog::setDescription()
 {
-	ui->titleBar->setTitle(q_("Custom equation for %1T").arg(QChar(0x0394)));
+	setWindowTitle(q_("Custom equation for %1T").arg(QChar(0x0394)));
 	ui->labelDescription->setText(q_("A typical equation for calculation of %1T looks like:").arg(QChar(0x0394)));
 	ui->labelEquation->setText(QString("<strong>&Delta;T = a + b&middot;u + c&middot;u<sup>2</sup>,</strong>"));
 	ui->labelSubEquation->setText(QString("%1 <em>u = (%2 - y)/100</em>").arg(q_("where"), q_("year")));

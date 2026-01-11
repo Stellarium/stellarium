@@ -43,9 +43,11 @@ signals:
 	void satellitesAccepted(const TleDataList& newSatellites);
 	
 public slots:
-	void retranslate() override;
 	void setVisible(bool visible = true) override;
 	
+protected:
+	virtual void onRetranslate() override;
+
 private slots:
 	void getData();
 	void receiveDownload(QNetworkReply* networkReply);

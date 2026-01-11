@@ -27,7 +27,7 @@
 #include <QDebug>
 
 ScmHideOrAbortMakerDialog::ScmHideOrAbortMakerDialog(SkyCultureMaker *maker)
-	: StelDialogSeparate("ScmHideOrAbortMakerDialog")
+	: StelDialog("ScmHideOrAbortMakerDialog")
 	, maker(maker)
 {
 	assert(maker != nullptr);
@@ -44,21 +44,16 @@ ScmHideOrAbortMakerDialog::~ScmHideOrAbortMakerDialog()
 	qDebug() << "SkyCultureMaker: Unloaded the ScmHideOrAbortMakerDialog";
 }
 
-void ScmHideOrAbortMakerDialog::retranslate()
+void ScmHideOrAbortMakerDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-	}
+    ui->retranslateUi(this);
 }
 
 void ScmHideOrAbortMakerDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmHideOrAbortMakerDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmHideOrAbortMakerDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this,

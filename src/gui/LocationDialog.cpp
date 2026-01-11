@@ -18,7 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include "Dialog.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "LocationDialog.hpp"
@@ -43,7 +42,7 @@
 #include <QStringListModel>
 #include <QTimeZone>
 
-LocationDialog::LocationDialog(QObject* parent)
+LocationDialog::LocationDialog(QWidget* parent)
 	: StelDialog("Location", parent)
 	, isEditingNew(false)
 	, allModel(nullptr)
@@ -61,31 +60,27 @@ LocationDialog::~LocationDialog()
 	delete ui;
 }
 
-void LocationDialog::retranslate()
+void LocationDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		populatePlanetList();
-		populateRegionList(StelApp::getInstance().getCore()->getCurrentLocation().planetName);
-		populateTimeZonesList();
-		populateTooltips();
-	}
+    ui->retranslateUi(this);
+    populatePlanetList();
+    populateRegionList(StelApp::getInstance().getCore()->getCurrentLocation().planetName);
+    populateTimeZonesList();
+    populateTooltips();
 }
 
 void LocationDialog::styleChanged(const QString &style)
 {
 	StelDialog::styleChanged(style);
 	// Make the map red if needed
-	if (dialog)
-		setMapForLocation(StelApp::getInstance().getCore()->getCurrentLocation());
+	setMapForLocation(StelApp::getInstance().getCore()->getCurrentLocation());
 }
 
 // Initialize the dialog widgets and connect the signals/slots
 void LocationDialog::createDialogContent()
 {
 	// We try to directly connect to the observer slots as much as we can
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -131,8 +126,6 @@ void LocationDialog::createDialogContent()
 		this, SLOT(setLocationFromList(const QModelIndex&)));
 
 	// Connect all the QT signals
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)), Qt::UniqueConnection);
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
@@ -211,6 +204,8 @@ void LocationDialog::createDialogContent()
 	});
 
 	ui->citySearchLineEdit->setFocus();
+
+    initialized = true;
 }
 
 void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
@@ -246,8 +241,8 @@ void LocationDialog::populateTooltips()
 // Update the widget to make sure it is synchrone if the location is changed programmatically
 void LocationDialog::updateFromProgram(const StelLocation& newLocation)
 {
-	if (!dialog)
-		return;
+    if (!initialized)
+        return;
 
 	if (newLocation.name.contains("->")) // avoid extra updates
 		return;
@@ -400,6 +395,9 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 // Update the map for the given location.
 void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
+    if (!initialized)
+        return;
+
 	// Avoids useless processing
 	if (lastPlanet!=loc.planetName)
 	{

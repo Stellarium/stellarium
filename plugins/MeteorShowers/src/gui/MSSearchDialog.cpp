@@ -41,21 +41,18 @@ MSSearchDialog::~MSSearchDialog()
 	delete m_ui;
 }
 
-void MSSearchDialog::retranslate()
+void MSSearchDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		m_ui->retranslateUi(dialog);
-		setHeaderNames();
+	m_ui->retranslateUi(this);
+    setHeaderNames();
 
-		if (!m_ui->listEvents->findItems("", Qt::MatchContains, 0).isEmpty())
-			searchEvents();
-	}
+    if (!m_ui->listEvents->findItems("", Qt::MatchContains, 0).isEmpty())
+        searchEvents();
 }
 
 void MSSearchDialog::createDialogContent()
 {
-	m_ui->setupUi(dialog);
+	m_ui->setupUi(this);
 
 	// Kinetic scrolling
 	kineticScrollingList << m_ui->listEvents;
@@ -69,9 +66,6 @@ void MSSearchDialog::createDialogContent()
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshRangeDates()));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-
-	connect(m_ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(m_ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(m_ui->searchButton, SIGNAL(clicked()), this, SLOT(searchEvents()));
 

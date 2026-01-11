@@ -28,7 +28,7 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 
-StoredPointsDialog::StoredPointsDialog(const QString &dialogName, QObject* parent):
+StoredPointsDialog::StoredPointsDialog(const QString &dialogName, QWidget* parent):
 	StelDialog(dialogName, parent)
 {
 	ui = new Ui_StoredPoints;
@@ -41,19 +41,16 @@ StoredPointsDialog::~StoredPointsDialog()
 	delete storedPointsListModel;
 }
 
-void StoredPointsDialog::retranslate()
+void StoredPointsDialog::onRetranslate()
 {
-	if (dialog)
-		ui->retranslateUi(dialog);
+	ui->retranslateUi(this);
 }
 
 void StoredPointsDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->pushButtonAddPoint,   SIGNAL(clicked()), this, SLOT(buttonAddPressed()));
 	connect(ui->pushButtonRemovePoint,SIGNAL(clicked()), this, SLOT(buttonRemovePressed()));

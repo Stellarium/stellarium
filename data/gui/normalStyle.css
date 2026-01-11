@@ -2,145 +2,252 @@
  * General styles
  *************************************************************************************************************/
 
-QWidget {}
+QWidget {
+    background-color: transparent;
+}
 
-QLabel {}
-QLabel:disabled {}
+QDialog, QWidget[dialog="true"] {
+    background-color: #1D1D1D;
+    color: #E6E6E6;
+    font-size: 11pt;
+}
 
-QDockWidget {}
+QLabel {
+    color: #E6E6E6;
+}
 
-QFrame {}
+QLabel:disabled {
+    color: #7A7A7A;
+}
+
+QDockWidget {
+    background-color: #1D1D1D;
+    titlebar-close-icon: none;
+    titlebar-normal-icon: none;
+}
+
+QFrame {
+    background-color: #272727;
+    border: 1px solid #3A3A3A;
+}
+
 QFrame[frameShape="4"],
-QFrame[frameShape="5"] {}
+QFrame[frameShape="5"] {
+    border: none;
+}
 
-QToolTip {}
+QToolTip {
+    background-color: #2F2F2F;
+    color: #E6E6E6;
+    border: 1px solid #3A8DFF;
+    padding: 6px;
+    border-radius: 4px;
+}
 
-*[nightMode="true"] QToolTip {}
+*[nightMode="true"] QToolTip {
+    background-color: #1A1A1A;
+}
 
-QSizeGrip {}
+QSizeGrip {
+    background: transparent;
+}
 
 QTextEdit,
 QPlainTextEdit,
 QListWidget,
 QTreeWidget,
-QLineEdit {}
+QLineEdit {
+    background-color: #1D1D1D;
+    border: 1px solid #3A3A3A;
+    border-radius: 4px;
+    padding: 4px;
+    selection-background-color: #2D5F9E;
+    selection-color: #FFFFFF;
+}
 
-QTextEdit,
-QPlainTextEdit,
-QListWidget,
-QLineEdit {}
+QTextEdit:focus,
+QPlainTextEdit:focus,
+QListWidget:focus,
+QTreeWidget:focus,
+QLineEdit:focus {
+    border: 1px solid #3A8DFF;
+}
 
 QTextEdit:disabled,
 QListWidget:disabled,
 QTreeWidget:disabled,
-QLineEdit:disabled {}
+QLineEdit:disabled {
+    background-color: #222222;
+    color: #7A7A7A;
+}
 
-QTextBrowser {}
+QTextBrowser {
+    background-color: #1D1D1D;
+    border: none;
+}
 
-QGroupBox {}
+QGroupBox {
+    border: 1px solid #3A3A3A;
+    border-radius: 6px;
+    margin-top: 10px;
+}
 
-QGroupBox::title {}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 6px;
+    color: #B0B0B0;
+}
 
-QTabWidget::pane {}
-QTabWidget::tab-bar {}
+QTabWidget::pane {
+    border: 1px solid #3A3A3A;
+    background-color: #272727;
+}
 
-QTabBar {}
+QTabBar::tab {
+    background-color: #272727;
+    border: 1px solid #3A3A3A;
+    padding: 6px 12px;
+    margin-right: 2px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: #B0B0B0;
+}
 
-QListView {}
-QListView::item {}
-QListView::item:hover {}
-QListView::item:selected {}
+QTabBar::tab:hover {
+    background-color: #2F2F2F;
+    color: #FFFFFF;
+}
 
-QProgressBar {}
-QProgressBar::chunk {}
+QTabBar::tab:selected {
+    background-color: #1D1D1D;
+    border-bottom-color: #1D1D1D;
+    color: #3A8DFF;
+}
 
-QTreeView {}
+QListView {
+    background-color: #1D1D1D;
+}
 
-QHeaderView::section {}
-QHeaderView::up-arrow {}
-QHeaderView::down-arrow {}
+QListView::item {
+    padding: 6px;
+}
 
-QMenu {}
-QMenu::item {}
-QMenu::item:selected {}
+QListView::item:hover {
+    background-color: #2F2F2F;
+}
 
-/*
- * Windows
- */
+QListView::item:selected {
+    background-color: #2458CA;
+    color: #FFFFFF;
+}
 
-QFrame#titleBar {}
+QProgressBar {
+    background-color: #272727;
+    border: 1px solid #3A3A3A;
+    border-radius: 4px;
+    text-align: center;
+}
 
-QLabel#stelWindowTitle {}
+QProgressBar::chunk {
+    background-color: #3A8DFF;
+    border-radius: 4px;
+}
 
-QFrame#viewContent {}
+QHeaderView::section {
+    background-color: #272727;
+    border: 1px solid #3A3A3A;
+    padding: 4px;
+}
 
-/*
- * Main tab bar on windows
- */
+QMenu {
+    background-color: #272727;
+    border: 1px solid #3A3A3A;
+}
 
-QListView#stackListWidget {}
-QListView::item:hover#stackListWidget {}
-QListView::item:selected#stackListWidget {}
-QListView::item#stackListWidget {}
+QMenu::item {
+    padding: 6px 20px;
+}
 
-/*
- * Secondary tab bar
- */
+QMenu::item:selected {
+    background-color: #2D5F9E;
+    color: #FFFFFF;
+}
 
-QTabBar::tab {}
-QTabBar::tab:selected {}
-QTabBar::tab:top {}
-QTabBar::tab:top:hover {}
-QTabBar::tab:top:selected {}
-QTabBar::tab:bottom {}
-QTabBar::tab:bottom:hover {}
-QTabBar::tab:bottom:selected {}
-QTabBar QToolButton {}
+QPushButton,
+QToolButton {
+    background-color: #272727;
+    border: 1px solid #3A3A3A;
+    border-radius: 4px;
+    padding: 6px 10px;
+}
 
-/*
- * QPushButton and QToolButton
- */
+QPushButton:hover,
+QToolButton:hover {
+    background-color: #2F2F2F;
+    border-color: #3A8DFF;
+}
 
-QToolButton {}
-QPushButton {}
-QPushButton, QToolButton {}
-QPushButton:disabled, QToolButton:disabled {}
-QPushButton:flat, QToolButton:flat {}
-QPushButton:hover, QToolButton:hover {}
-QPushButton:pressed, QToolButton:pressed {}
-QPushButton:checked, QToolButton:checked {}
-QToolButton#pushButtonGotoSearchSkyObject {}
-QToolButton#moveUp, QToolButton#moveDown, QToolButton#moveLeft, QToolButton#moveRight {}
-QToolButton#pushButtonCustomStepsDialog, QToolButton#pushButtonNow, QToolButton#pushButtonExtraEphemerisDialog {}
-ColorButton {}
-StelCloseButton, StelCloseButton:hover {}
+QPushButton:pressed,
+QToolButton:pressed {
+    background-color: #1D1D1D;
+}
 
-/*
- * QScrollBar:horizontal
- */
+QPushButton:checked,
+QToolButton:checked {
+    background-color: #2D5F9E;
+    color: #FFFFFF;
+}
 
-QScrollBar:horizontal {}
-QScrollBar::handle:horizontal {}
-QScrollBar::add-line:horizontal {}
-QScrollBar::sub-line:horizontal {}
+QPushButton:disabled,
+QToolButton:disabled {
+    background-color: #222222;
+    color: #7A7A7A;
+    border-color: #2A2A2A;
+}
+
+QScrollBar:horizontal {
+    background-color: #1D1D1D;
+    height: 10px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #3A3A3A;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #3A8DFF;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal,
 QScrollBar::add-page:horizontal,
-QScrollBar::sub-page:horizontal {}
-QScrollBar::right-arrow {}
-QScrollBar::left-arrow {}
+QScrollBar::sub-page:horizontal {
+    background: none;
+}
 
-/*
- * QSlider:horizontal
- */
+QSlider::groove:horizontal {
+    background-color: #3A3A3A;
+    height: 4px;
+    border-radius: 2px;
+}
 
-QSlider {}
-QSlider::groove:horizontal {}
-QSlider::handle:horizontal {}
-QSlider::handle:horizontal:hover {}
-QSlider::groove:horizontal:disabled {}
-QSlider::handle:horizontal:disabled {}
+QSlider::handle:horizontal {
+    background-color: #3A8DFF;
+    width: 14px;
+    margin: -6px 0;
+    border-radius: 7px;
+}
+
+QSlider::handle:horizontal:hover {
+    background-color: #5AA2FF;
+}
 
 /* solution to night mode for DialogSeparate */
-QWidget#NightCover{}
+QWidget#NightCover {
+    background-color: rgba(0, 0, 0, 180);
+}
 
 /**************************************************************************************************************
  * shortcutsDialog

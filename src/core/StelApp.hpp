@@ -127,6 +127,9 @@ public:
 	//! @return the arguments passed to Stellarium on the command line concatenated with the STEL_OPTS environment variable
 	static QStringList getCommandlineArguments();
 
+    void setMainWindow(QWidget* w);
+    QWidget* getMainWindow() const;
+
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
 	static StelApp& getInstance() {Q_ASSERT(singleton); return *singleton;}
@@ -452,6 +455,8 @@ private:
 
 	//! The main window which is the parent of this object
 	StelMainView* mainWin;
+
+    QWidget* mainWindow = nullptr;
 
 	// The associated StelCore instance
 	StelCore* core;

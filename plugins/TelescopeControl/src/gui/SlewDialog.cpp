@@ -20,7 +20,6 @@
 
 #include <QDebug>
 
-#include "Dialog.hpp"
 #include "StelFileMgr.hpp"
 #include "AngleSpinBox.hpp"
 #include "StelApp.hpp"
@@ -36,7 +35,7 @@
 #include "ui_slewDialog.h"
 #include "TelescopeClient.hpp"
 
-SlewDialog::SlewDialog(const QString &dialogName, QObject *parent)
+SlewDialog::SlewDialog(const QString &dialogName, QWidget *parent)
 	: StelDialog(dialogName, parent)
 	, storedPointsDialog(nullptr)
 {
@@ -53,20 +52,17 @@ SlewDialog::~SlewDialog()
 	storedPointsDialog = nullptr;
 }
 
-void SlewDialog::retranslate()
+void SlewDialog::onRetranslate()
 {
-	if (dialog)
-		ui->retranslateUi(dialog);
+    ui->retranslateUi(this);
 }
 
 void SlewDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->radioButtonHMS, SIGNAL(toggled(bool)), this, SLOT(setFormatHMS(bool)));
 	connect(ui->radioButtonDMS, SIGNAL(toggled(bool)), this, SLOT(setFormatDMS(bool)));

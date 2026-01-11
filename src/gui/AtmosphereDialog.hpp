@@ -34,10 +34,8 @@ public:
 	AtmosphereDialog();
 	~AtmosphereDialog() override;
 
-public slots:
-	void retranslate() override;
-
 protected:
+	virtual void onRetranslate() override;
         //! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
         Ui_atmosphereDialogForm *ui;

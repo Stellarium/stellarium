@@ -75,33 +75,32 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 	validatorName = new QRegularExpressionValidator(nameExp, this);
 }
 
-OcularDialog::~OcularDialog()
+void OcularDialog::closeEvent(QCloseEvent* e)
 {
-	if (dialog)
-	{
-		ui->telescopeListView->clearSelection();
-		ui->ocularListView->clearSelection();
-		ui->ccdListView->clearSelection();
-		ui->lensListView->clearSelection();
-	}
+    ui->telescopeListView->clearSelection();
+    ui->ocularListView->clearSelection();
+    ui->ccdListView->clearSelection();
+    ui->lensListView->clearSelection();
 
-	ocularTableModel->disconnect(ocularMapper);
+    ocularTableModel->disconnect(ocularMapper);
 	telescopeTableModel->disconnect(telescopeMapper);
 	ccdTableModel->disconnect(ccdMapper);
 	lensTableModel->disconnect(lensMapper);
 
+    QWidget::closeEvent(e);
+}
+
+OcularDialog::~OcularDialog()
+{
 	delete ui;
 	ui = Q_NULLPTR;
 }
 
-void OcularDialog::retranslate()
+void OcularDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		initAboutText();
-		updateSuffixes();
-	}
+	ui->retranslateUi(this);
+    initAboutText();
+    updateSuffixes();
 }
 
 void OcularDialog::closeWindow()
@@ -286,7 +285,7 @@ void OcularDialog::moveDownSelectedLens()
 
 void OcularDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	ui->ccdListView->setModel(ccdTableModel);
 	ui->ocularListView->setModel(ocularTableModel);
@@ -303,9 +302,6 @@ void OcularDialog::createDialogContent()
 	}
 	
 	//Now the rest of the actions.
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-
 	connectBoolProperty(ui->checkBoxControlPanel,		"Oculars.flagGuiPanelEnabled");
 	connectIntProperty(ui->guiFontSizeSpinBox,		"Oculars.guiPanelFontSize");
 	connectBoolProperty(ui->checkBoxInitialFOV,		"Oculars.flagInitFOVUsage");
@@ -505,7 +501,7 @@ void OcularDialog::setupTelradFOVspins(Vec4f fov)
 
 void OcularDialog::updateCCDRotationAngles()
 {
-	if (dialog->isVisible())
+	if (isVisible())
 	{
 		if (plugin->getSelectedCCDIndex()==ccdMapper->currentIndex())
 		{

@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>ConfigureDSOColorsDialogForm</class>
  <widget class="QWidget" name="ConfigureDSOColorsDialogForm">
+  <property name="windowTitle">
+   <string>Color settings</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,13 +29,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Color settings</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QGroupBox" name="colorsGroupBox">
      <property name="title">
@@ -573,12 +569,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>ColorButton</class>
    <extends>QToolButton</extends>

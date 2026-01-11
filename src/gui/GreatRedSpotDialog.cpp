@@ -39,20 +39,17 @@ GreatRedSpotDialog::~GreatRedSpotDialog()
 	ui=Q_NULLPTR;
 }
 
-void GreatRedSpotDialog::retranslate()
+void GreatRedSpotDialog::onRetranslate()
 {
-	if (dialog)
-		ui->retranslateUi(dialog);
+    ui->retranslateUi(this);
 }
 
 void GreatRedSpotDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	SolarSystem* ss = GETSTELMODULE(SolarSystem);
 	connectIntProperty(ui->longitudeSpinBox, "SolarSystem.grsLongitude");

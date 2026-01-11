@@ -34,13 +34,11 @@ public:
 	AstroCalcExtraEphemerisDialog();
 	~AstroCalcExtraEphemerisDialog() override;
 
-public slots:
-	void retranslate() override;
-
 private slots:
 	void setOptionStatus();
 
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_astroCalcExtraEphemerisDialogForm *ui;

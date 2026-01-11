@@ -38,7 +38,6 @@ public:
 	~AddRemoveLandscapesDialog() override;
 
 public slots:
-	void retranslate() override;
 	//! This function overrides StelDialog::setVisible()
 	//! to allow the current landscape to be selected in the list of user
 	//! landscapes (if it is in the list) every time the dialog is displayed.
@@ -46,6 +45,7 @@ public slots:
 	void populateLists();
 	
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_addRemoveLandscapesDialogForm* ui;

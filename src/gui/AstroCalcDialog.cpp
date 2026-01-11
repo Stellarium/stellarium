@@ -89,7 +89,7 @@ double AstroCalcDialog::brightLimit = 10.;
 const QString AstroCalcDialog::dash = QChar(0x2014);
 const QString AstroCalcDialog::delimiter(", ");
 
-AstroCalcDialog::AstroCalcDialog(QObject* parent)
+AstroCalcDialog::AstroCalcDialog(QWidget* parent)
 	: StelDialog("AstroCalc", parent)
 	, ui(new Ui_astroCalcDialogForm)
 	, core(StelApp::getInstance().getCore())
@@ -142,53 +142,50 @@ AstroCalcDialog::~AstroCalcDialog()
 		delete pcChart;
 }
 
-void AstroCalcDialog::retranslate()
+void AstroCalcDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setCelestialPositionsHeaderNames();
-		setHECPositionsHeaderNames();
-		setEphemerisHeaderNames();
-		setRTSHeaderNames();
-		setPhenomenaHeaderNames();
-		setWUTHeaderNames();
-		setLunarEclipseHeaderNames();
-		setLunarEclipseContactsHeaderNames();
-		setSolarEclipseHeaderNames();
-		setSolarEclipseContactsHeaderNames();
-		setSolarEclipseLocalHeaderNames();
-		setTransitHeaderNames();
-		populateCelestialBodyList();
-		populateCelestialCategoryList();
-		populateEphemerisTimeUnitsList();
-		populateEphemerisTimeStepsList();
-		populateEphemerisTimeDurationTooltip();
-		populatePlanetList();
-		populateGroupCelestialBodyList();
-		currentCelestialPositions();
-		currentHECPositions();
-		populateFunctionsList();
-		drawAltVsTimeDiagram();
-		drawAziVsTimeDiagram();
-		drawMonthlyElevationGraph();
-		drawLunarElongationGraph();
-		drawDistanceGraph();
-		drawXVsTimeGraphs();
-		populateTimeIntervalsList();		
-		populateWutGroups();
-		// Hack to shrink the tabs to optimal size after language change
-		// by causing the list items to be laid out again.
-		updateTabBarListWidgetWidth();
-		populateToolTips();
-		// Almanac
-		ui->astroCalcAlmanac->retranslate();
-	}
+    ui->retranslateUi(this);
+    setCelestialPositionsHeaderNames();
+    setHECPositionsHeaderNames();
+    setEphemerisHeaderNames();
+    setRTSHeaderNames();
+    setPhenomenaHeaderNames();
+    setWUTHeaderNames();
+    setLunarEclipseHeaderNames();
+    setLunarEclipseContactsHeaderNames();
+    setSolarEclipseHeaderNames();
+    setSolarEclipseContactsHeaderNames();
+    setSolarEclipseLocalHeaderNames();
+    setTransitHeaderNames();
+    populateCelestialBodyList();
+    populateCelestialCategoryList();
+    populateEphemerisTimeUnitsList();
+    populateEphemerisTimeStepsList();
+    populateEphemerisTimeDurationTooltip();
+    populatePlanetList();
+    populateGroupCelestialBodyList();
+    currentCelestialPositions();
+    currentHECPositions();
+    populateFunctionsList();
+    drawAltVsTimeDiagram();
+    drawAziVsTimeDiagram();
+    drawMonthlyElevationGraph();
+    drawLunarElongationGraph();
+    drawDistanceGraph();
+    drawXVsTimeGraphs();
+    populateTimeIntervalsList();
+    populateWutGroups();
+    // Hack to shrink the tabs to optimal size after language change
+    // by causing the list items to be laid out again.
+    updateTabBarListWidgetWidth();
+    populateToolTips();
+    // Almanac
+    ui->astroCalcAlmanac->retranslate();
 }
 
 void AstroCalcDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->celestialPositionsTreeWidget << ui->ephemerisTreeWidget << ui->phenomenaTreeWidget << ui->wutCategoryListWidget;
@@ -207,8 +204,6 @@ void AstroCalcDialog::createDialogContent()
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &AstroCalcDialog::populateCelestialNames);
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	initListCelestialPositions();
 	initListHECPositions();
@@ -768,7 +763,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	//..
 	// we got notified about a reason to redraw the plot, but dialog was
 	// not visible. which means we must redraw when becoming visible again!
-	if (!dialog->isVisible() && plotAziVsTime)
+	if (!isVisible() && plotAziVsTime)
 	{
 		graphPlotNeedsRefresh = true;
 		azVsTimeChartMutex.unlock();
@@ -2230,7 +2225,7 @@ void AstroCalcDialog::initListRTS()
 void AstroCalcDialog::generateRTS()
 {
 	// special case - compute time when tab is visible
-	if (!dialog->isVisible() || !computeRTS)
+	if (!isVisible() || !computeRTS)
 	{
 		cleanupRTS();
 		return;
@@ -5274,7 +5269,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	//..
 	// we got notified about a reason to redraw the plot, but dialog was
 	// not visible. which means we must redraw when becoming visible again!
-	if (!dialog->isVisible() && plotAltVsTime)
+	if (!isVisible() && plotAltVsTime)
 	{
 		graphPlotNeedsRefresh = true;
 		altVsTimeChartMutex.unlock();
@@ -5408,7 +5403,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 {
 	// special case - plot the graph when tab is visible
 	// and only if dialog is visible at all
-	if (!dialog->isVisible() || (!plotAltVsTime && !plotAziVsTime && !plotXYVsTimeGraph)) return;
+	if (!isVisible() || (!plotAltVsTime && !plotAziVsTime && !plotXYVsTimeGraph)) return;
 
 	const double currentJD = core->getJD();
 	const double UTCOffset = core->getUTCOffset(currentJD)/24.;
@@ -5521,7 +5516,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 void AstroCalcDialog::updateXVsTimeGraphs()
 {
 	// Do all that only if the dialog is visible!
-	if (!dialog->isVisible())
+	if (!isVisible())
 		return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
@@ -5735,7 +5730,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 	//..
 	// we got notified about a reason to redraw the plot, but dialog was
 	// not visible. which means we must redraw when becoming visible again!
-	if (!dialog->isVisible() && plotMonthlyElevation)
+	if (!isVisible() && plotMonthlyElevation)
 	{
 		graphPlotNeedsRefresh = true;
 		monthlyElevationChartMutex.unlock();
@@ -5801,7 +5796,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 // When dialog becomes visible: check if there is a graph plot to refresh
 void AstroCalcDialog::handleVisibleEnabled()
 {
-	if (dialog->isVisible())
+	if (this -> isVisible())
 	{
 		// check which graph needs refresh (only one is set, if any)
 		if (graphPlotNeedsRefresh)
@@ -7463,13 +7458,10 @@ void AstroCalcDialog::updateTabBarListWidgetWidth()
 
 void AstroCalcDialog::updateSolarSystemData()
 {
-	if (dialog)
-	{
-		populateCelestialBodyList();
-		populateGroupCelestialBodyList();
-		currentCelestialPositions();
-		calculateWutObjects();
-	}
+    populateCelestialBodyList();
+    populateGroupCelestialBodyList();
+    currentCelestialPositions();
+    calculateWutObjects();
 }
 
 void AstroCalcDialog::populateTimeIntervalsList()
@@ -8592,7 +8584,7 @@ void AstroCalcDialog::drawDistanceGraph()
 	if (!pcChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 
 	// special case - plot the graph when tab is visible
-	if (!plotDistanceGraph || !dialog->isVisible())
+	if (!plotDistanceGraph || !isVisible())
 	{
 		pcChartMutex.unlock();
 		return;
@@ -8678,7 +8670,7 @@ void AstroCalcDialog::drawLunarElongationGraph()
 	//..
 	// we got notified about a reason to redraw the plot, but dialog was
 	// not visible. which means we must redraw when becoming visible again!
-	if (!dialog->isVisible() && !plotLunarElongationGraph)
+	if (!isVisible() && !plotLunarElongationGraph)
 	{
 		graphPlotNeedsRefresh = true;
 		lunarElongationChartMutex.unlock();
@@ -8770,7 +8762,7 @@ void AstroCalcDialog::saveLunarElongationLimit(int limit)
 void AstroCalcDialog::drawLunarElongationLimitLine()
 {
 	// special case - plot the graph when tab is visible
-	if (!plotLunarElongationGraph || !dialog->isVisible())
+	if (!plotLunarElongationGraph || !isVisible())
 		return;
 
 	double limit = ui->lunarElongationLimitSpinBox->value();

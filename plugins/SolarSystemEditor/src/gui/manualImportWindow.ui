@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>manualImportWindow</class>
  <widget class="QWidget" name="manualImportWindow">
+  <property name="windowTitle">
+   <string notr="true" extracomment="The title of the window will be set during runtime">Define an object</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,13 +20,6 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <item row="0" column="0" colspan="2">
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string notr="true" extracomment="The title of the window will be set during runtime">Define an object</string>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="1">
     <widget class="QGroupBox" name="groupBoxObjectType">
      <property name="title">
@@ -704,12 +700,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>

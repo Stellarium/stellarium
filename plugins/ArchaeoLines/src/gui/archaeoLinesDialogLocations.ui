@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>archaeoLinesDialogLocations</class>
  <widget class="QWidget" name="archaeoLinesDialogLocations">
+  <property name="windowTitle">
+   <string>Locations</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,13 +32,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Locations</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QFrame" name="locationContent">
      <property name="sizePolicy">
@@ -110,12 +106,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>

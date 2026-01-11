@@ -20,7 +20,6 @@
 #include "AddRemoveLandscapesDialog.hpp"
 #include "ui_addRemoveLandscapesDialog.h"
 
-#include "Dialog.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
@@ -44,21 +43,18 @@ AddRemoveLandscapesDialog::~AddRemoveLandscapesDialog()
 	delete ui;
 }
 
-void AddRemoveLandscapesDialog::retranslate()
+void AddRemoveLandscapesDialog::onRetranslate()
 {
-	if (dialog)
-		ui->retranslateUi(dialog);
+	ui->retranslateUi(this);
 }
 
 // Initialize the dialog widgets and connect the signals/slots
 void AddRemoveLandscapesDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->pushButtonBrowseForArchive, SIGNAL(clicked()), this, SLOT(browseForArchiveClicked()));
 	connect(ui->listWidgetUserLandscapes, SIGNAL(currentRowChanged(int)), this, SLOT(updateSidePane(int)));

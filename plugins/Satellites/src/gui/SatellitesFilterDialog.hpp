@@ -34,8 +34,10 @@ public:
 	~SatellitesFilterDialog() override;
 	
 public slots:
-	void retranslate() override;
 	void setVisible(bool visible = true) override;
+
+protected:
+	virtual void onRetranslate() override;
 
 private slots:
 	void populateTexts();
