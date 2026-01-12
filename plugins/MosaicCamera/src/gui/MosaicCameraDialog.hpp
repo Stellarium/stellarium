@@ -44,10 +44,10 @@ public:
 	void setCameraNames(const QStringList& cameraNames);
 
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 
 public slots:
-	void retranslate() override;
 	void updateRA();
 	void updateDec();
 	void updateRotation();

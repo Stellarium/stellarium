@@ -33,21 +33,18 @@ ConfigureOrbitColorsDialog::~ConfigureOrbitColorsDialog()
 	delete ui;
 }
 
-void ConfigureOrbitColorsDialog::retranslate()
+void ConfigureOrbitColorsDialog::onRetranslate()
 {
-	if (dialog)
-		ui->retranslateUi(dialog);
+	ui->retranslateUi(this);
 }
 
 
 void ConfigureOrbitColorsDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	QString activeColorStyle = StelApp::getInstance().getModule("SolarSystem")->property("orbitColorStyle").toString();
 

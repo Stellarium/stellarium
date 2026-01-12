@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>scmConstellationDialog</class>
  <widget class="QWidget" name="scmConstellationDialog">
+  <property name="windowTitle">
+   <string>SCM: Constellation Editor</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,13 +32,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title" stdset="0">
-      <string>SCM: Constellation Editor</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="autoFillBackground">
@@ -399,18 +395,9 @@
     </widget>
    </item>
   </layout>
-  <zorder>titleBar</zorder>
   <zorder>Content</zorder>
   <zorder>tabs</zorder>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header location="global">Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../../resources/SkyCultureMaker.qrc"/>
  </resources>

@@ -30,13 +30,6 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title" stdset="0">
-      <string>Lens Distortion Estimator</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
       <number>0</number>
@@ -863,12 +856,6 @@ distortion</string>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>ColorButton</class>
    <extends>QToolButton</extends>

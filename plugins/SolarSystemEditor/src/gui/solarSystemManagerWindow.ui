@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>solarSystemManagerWindow</class>
  <widget class="QWidget" name="solarSystemManagerWindow">
+  <property name="windowTitle">
+   <string>Minor Solar System objects</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,13 +29,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title" stdset="0">
-      <string>Minor Solar System objects</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
@@ -296,12 +292,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>

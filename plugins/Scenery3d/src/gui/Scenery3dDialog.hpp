@@ -32,13 +32,11 @@ class Scenery3dDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	Scenery3dDialog(QObject* parent = nullptr);
+	Scenery3dDialog(QWidget* parent = nullptr);
 	~Scenery3dDialog() override;
 
-public slots:
-	void retranslate() override;
-
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 
 private slots:

@@ -26,11 +26,12 @@
 #include "StelPropertyMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
+#include "StyleUtils.hpp"
 
 #include <QDebug>
 #include <QAbstractButton>
+#include <QApplication>
 #include <QComboBox>
-#include <QDialog>
 #include <QGraphicsSceneWheelEvent>
 #include <QMetaProperty>
 #include <QStyleOptionGraphicsItem>
@@ -43,19 +44,18 @@
 #include <QColorDialog>
 #include <QMessageBox>
 
-StelDialog::StelDialog(const QString &dialogName, QObject* parent)
-	: QObject(parent)
-	, dialog(nullptr)
-	, proxy(nullptr)
-	, dialogName(dialogName)	
+StelDialog::StelDialog(const QString& dialogName, QWidget* parent)
+	: QDialog(parent ? parent : StelMainView::getMainWindow())
+	, dialogName(dialogName)
 {
 	if (parent == nullptr)
-		setParent(StelMainView::getInstance().getGuiWidget());
+        setParent(StelMainView::getMainWindow());
 
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &StelDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &StelDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::colorSchemeChanged, this, &StelDialog::handleColorSchemeChanged);
 	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), SIGNAL(guiStyleChanged(const QString &)), this, SLOT(styleChanged(const QString &)));
+	connect(&StelApp::getInstance(), SIGNAL(darkModeChanged(bool)), this, SLOT(updateDarkModeProperty(bool)));
 }
 
 StelDialog::~StelDialog()
@@ -69,149 +69,142 @@ void StelDialog::close()
 
 void StelDialog::styleChanged(const QString &style)
 {
+    if (!initialized)
+        return;
+
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui && dialog)
-		dialog->setStyleSheet(style);
+	if (gui)
+		setStyleSheet(style);
+
+    onStyleChanged();
 }
+
+void StelDialog::onStyleChanged() {}
+
+void StelDialog::retranslate() {
+    if (!initialized)
+        return;
+
+    onRetranslate();
+}
+
+void StelDialog::onRetranslate() {}
 
 bool StelDialog::visible() const
 {
-	return dialog!=nullptr && dialog->isVisible();
+	return isVisible();
 }
 
 void StelDialog::setVisible(bool v)
 {
-	if (v)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());		
-		QSize screenSize = StelMainView::getInstance().size();
-		// If dialog size is very large and we move to a computer with much smaller screen, this should create the dialog with reasonable better size.
-		QSize maxSize = 0.95*screenSize;
-		if (dialog)
-		{
-			// reload stylesheet, in case size changed!
-			if (gui)
-				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
-			dialog->show();
-			StelMainView::getInstance().scene()->setActiveWindow(proxy);
-			// If the main window has been resized, it is possible the dialog
-			// will be off screen.  Check for this and move it to a visible
-			// position if necessary
-			QPointF newPos = proxy->pos();
-			if (newPos.x()>=screenSize.width())
-				newPos.setX(screenSize.width() - dialog->size().width());
-			if (newPos.y()>=screenSize.height())
-				newPos.setY(screenSize.height() - dialog->size().height());
-			if (newPos != dialog->pos())
-				proxy->setPos(newPos);
-		}
-		else
-		{
-			QGraphicsWidget* parent = qobject_cast<QGraphicsWidget*>(this->parent());
-			dialog = new QDialog(nullptr);
-			// dialog->setParent(parent);
-			//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
-			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
-			createDialogContent();
-			if (gui)
-				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+    if (v)
+    {
+        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+        QSize screenSize = StelMainView::getInstance().size();
+        // If dialog size is very large and we move to a computer with much smaller screen, this should create the dialog with reasonable better size.
+        QSize maxSize = 0.95*screenSize;
+        if (!initialized)
+        {
+            createDialogContent();
+            if (gui)
+                setStyleSheet(gui->getStelStyle().qtStyleSheet);
+
 			// Ensure that tooltip get rendered in red in night mode.
-			connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
-			updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
+            connect(&StelApp::getInstance(), &StelApp::visionNightModeChanged, this, &StelDialog::updateNightModeProperty);
+            updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 
-			proxy = new CustomProxy(parent, Qt::Tool);
-			proxy->setWidget(dialog);
-			QSizeF size = proxy->size();
+			connect(&StelApp::getInstance(), &StelApp::darkModeChanged, this, &StelDialog::updateDarkModeProperty);
+			updateDarkModeProperty(StelApp::getInstance().getDarkMode());
 
-			connect(proxy, SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
-
-			int newX, newY;
+            int newX, newY;
 			// Retrieve panel locations from config.ini, but shift if required to a visible position.
 			// else centre dialog according to current window size.
-			QSettings *conf=StelApp::getInstance().getSettings();
-			Q_ASSERT(conf);
-			QString confNamePt="DialogPositions/" + dialogName;
-			QString storedPosString=conf->value(confNamePt,
-							    QString("%1,%2")
-							    .arg(static_cast<int>((screenSize.width()  - size.width() )/2))
-							    .arg(static_cast<int>((screenSize.height() - size.height())/2)))
-					.toString();
-			QStringList posList=storedPosString.split(",");
-			if (posList.length()==2)
-			{
-				newX=posList.at(0).toInt();
-				newY=posList.at(1).toInt();
-			}
-			else	// in case there is an invalid string?
-			{
-				newX=static_cast<int>((screenSize.width()  - size.width() )/2);
-				newY=static_cast<int>((screenSize.height() - size.height())/2);
-			}
+            QSettings *conf = StelApp::getInstance().getSettings();
+            Q_ASSERT(conf);
+            QString confNamePt = "DialogPositions/" + dialogName;
+            QString storedPosString = conf->value(confNamePt,
+                QString("%1,%2")
+                .arg((screenSize.width() - size().width()) / 2)
+                .arg((screenSize.height() - size().height()) / 2)).toString();
+            QStringList posList = storedPosString.split(",");
+            if (posList.length() == 2)
+            {
+                newX = posList.at(0).toInt();
+                newY = posList.at(1).toInt();
+            }
+            else	// in case there is an invalid string?
+            {
+                newX = (screenSize.width() - size().width()) / 2;
+                newY = (screenSize.height() - size().height()) / 2;
+            }
 
-			if (newX>=screenSize.width())
-				newX= (screenSize.width()  - dialog->size().width());
-			if (newY>=screenSize.height())
-				newY= (screenSize.height() - dialog->size().height());
+            if (newX >= screenSize.width())
+                newX = screenSize.width() - size().width();
+            if (newY >= screenSize.height())
+                newY = screenSize.height() - size().height();
 
-			// Make sure that the window's title bar is accessible
-			if (newY < 0)
-				newY = 0;
-			// Make sure that the window is not moved to the left border
-			if (newX < -(static_cast<int>(dialog->size().width()*.75)))
-				newX = -(static_cast<int>(dialog->size().width()*.75)); // 25% of window is visible
-			proxy->setPos(newX, newY);
-			// Invisible frame around the window to make resizing easier
-			// (this also changes the bounding rectangle size)
-			proxy->setWindowFrameMargins(7,0,7,7);
+            if (newY < 0)
+                newY = 0;
+            if (newX < -(size().width() * .75))
+                newX = -(size().width() * .75);
 
-			// Retrieve stored panel sizes, scale panel up if it was stored larger than default.
-			QString confNameSize="DialogSizes/" + dialogName;
-			QString storedSizeString=conf->value(confNameSize, QString("0,0")).toString();
-			QStringList sizeList=storedSizeString.split(",");
-			if (sizeList.length()==2)
-			{
-				newX=sizeList.at(0).toInt();
-				newY=sizeList.at(1).toInt();
-			}
-			else	// in case there is an invalid string?
-			{
-				newX=0;
-				newY=0;
-			}
-			// resize only if number was valid and larger than default loaded size.
-			if ( (newX>=proxy->size().width()) || (newY>=proxy->size().height()) )
-			{
-				//qDebug() << confNameSize << ": resize from" << proxy->size().width() << "x" << proxy->size().height() << "to " << storedSizeString;
-				proxy->resize(qMax(static_cast<qreal>(newX), proxy->size().width()), qMax(static_cast<qreal>(newY), proxy->size().height()));
-			}
-			if(proxy->size().width() > maxSize.width() || proxy->size().height() > maxSize.height())
-			{
-				proxy->resize(qMin(static_cast<qreal>(maxSize.width()), proxy->size().width()), qMin(static_cast<qreal>(maxSize.height()), proxy->size().height()));
-			}
-			handleDialogSizeChanged(proxy->size()); // This may trigger internal updates in subclasses. E.g. LocationPanel location arrow.
+            this->move(newX, newY);
 
-			proxy->setZValue(100);
-			StelMainView::getInstance().scene()->setActiveWindow(proxy);
-		}
-		proxy->setFocus();
+            // Retrieve stored panel sizes, scale panel up if it was stored larger than default.
+			QString confNameSize = "DialogSizes/" + dialogName;
+            QString storedSizeString = conf->value(confNameSize, QString("0,0")).toString();
+            QStringList sizeList = storedSizeString.split(",");
+            if (sizeList.length() == 2)
+            {
+                int w = sizeList.at(0).toInt();
+                int h = sizeList.at(1).toInt();
+                if (w > size().width() || h > size().height())
+                    resize(qMax(w, size().width()), qMax(h, size().height()));
+                if (size().width() > maxSize.width() || size().height() > maxSize.height())
+                    resize(qMin(size().width(), maxSize.width()), qMin(size().height(), maxSize.height()));
+            }
+            handleDialogSizeChanged(size());
+
+            initialized = true;
+        }
+
+        // reload stylesheet, in case size changed!
+        if (gui)
+            setStyleSheet(gui->getStelStyle().qtStyleSheet);
+        // If the main window has been resized, it is possible the dialog
+        // will be off screen.  Check for this and move it to a visible
+        // position if necessary
+        QPoint newPos = pos();
+        if (newPos.x() >= screenSize.width())
+            newPos.setX(screenSize.width() - size().width());
+        if (newPos.y() >= screenSize.height())
+            newPos.setY(screenSize.height() - size().height());
+        if (newPos != pos())
+            move(newPos);
+
+        QWidget::setVisible(true);
+		raise();
+		activateWindow();
+		setFocus();
 	}
 	else
 	{
-		dialog->hide();
-		//proxy->clearFocus();
+        QWidget::setVisible(false);
 		StelMainView::getInstance().focusSky();
 	}
+
 	emit visibleChanged(v);
 }
 
+
 void StelDialog::handleFontChanged()
 {
-	if (dialog && dialog->isVisible())
+	if (isVisible())
 	{
 		// reload stylesheet, in case size or font changed!
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		if (gui)
-			dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+			setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	}
 }
 
@@ -364,7 +357,19 @@ void StelDialog::enableKineticScrolling(bool b)
 
 void StelDialog::updateNightModeProperty(bool n)
 {
-	dialog->setProperty("nightMode", n);
+    if (!initialized)
+        return;
+
+	setProperty("nightMode", n);
+}
+
+void StelDialog::updateDarkModeProperty(bool n)
+{
+    if (!initialized)
+        return;
+
+	setProperty("darkMode", n);
+	fullyRefreshWidgetStyleRecursive(this);
 }
 
 void StelDialog::handleMovedTo(QPoint newPos)
@@ -372,6 +377,13 @@ void StelDialog::handleMovedTo(QPoint newPos)
 	QSettings *conf=StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("DialogPositions/" + dialogName, QString("%1,%2").arg(newPos.x()).arg(newPos.y()));
+}
+
+void StelDialog::resizeEvent(QResizeEvent* event)
+{
+    QDialog::resizeEvent(event);
+
+    handleDialogSizeChanged(QSizeF(event->size()));
 }
 
 void StelDialog::handleDialogSizeChanged(QSizeF size)

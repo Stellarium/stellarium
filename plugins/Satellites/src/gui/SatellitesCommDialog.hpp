@@ -45,7 +45,6 @@ public:
 	~SatellitesCommDialog() override;
 	
 public slots:
-	void retranslate() override;
 	void setVisible(bool visible = true) override;
 
 private slots:
@@ -56,6 +55,7 @@ private slots:
 	void removeCommData();
 
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_satellitesCommDialog* ui;

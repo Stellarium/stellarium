@@ -128,13 +128,10 @@ void MosaicCameraDialog::setCurrentCameraName(const QString& cameraName, const Q
 	updateDialogFields();
 }
 
-void MosaicCameraDialog::retranslate()
+void MosaicCameraDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-	}
+    ui->retranslateUi(this);
+    setAboutHtml();
 }
 
 void MosaicCameraDialog::onCameraSelectionChanged(const QString& cameraName)
@@ -178,7 +175,7 @@ void MosaicCameraDialog::setCameraNames(const QStringList& cameraNames)
 void MosaicCameraDialog::createDialogContent()
 {
 	mc = GETSTELMODULE(MosaicCamera);
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	ui->tabs->setCurrentIndex(1);
 
 	setCameraNames(mc->getCameraNames());
@@ -193,9 +190,6 @@ void MosaicCameraDialog::createDialogContent()
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
-
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// About tab
 	setAboutHtml();

@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>GreatRedSpotDialogForm</class>
  <widget class="QWidget" name="GreatRedSpotDialogForm">
+  <property name="windowTitle">
+   <string>Great Red Spot Details</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,13 +29,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Great Red Spot Details</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QGroupBox" name="greatRedSpotGroupBox">
      <property name="enabled">
@@ -167,12 +163,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>

@@ -31,7 +31,7 @@
 #include <QJsonObject>
 
 ScmSkyCultureExportDialog::ScmSkyCultureExportDialog(SkyCultureMaker* maker)
-	: StelDialogSeparate("ScmSkyCultureExportDialog")
+	: StelDialog("ScmSkyCultureExportDialog")
 	, maker(maker)
 {
 	assert(maker != nullptr);
@@ -49,17 +49,14 @@ ScmSkyCultureExportDialog::~ScmSkyCultureExportDialog()
 	}
 }
 
-void ScmSkyCultureExportDialog::retranslate()
+void ScmSkyCultureExportDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-	}
+    ui->retranslateUi(this);
 }
 
 void ScmSkyCultureExportDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmSkyCultureExportDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this,
@@ -67,8 +64,6 @@ void ScmSkyCultureExportDialog::createDialogContent()
 	handleFontChanged();
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmSkyCultureExportDialog::close);
 
 	ui->mergeLinesCB->setChecked(
 		StelApp::getInstance().getSettings()->value("SkyCultureMaker/mergeLinesOnExport", true).toBool());
@@ -101,7 +96,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	if (currentSkyCulture == nullptr)
 	{
 		qWarning() << "SkyCultureMaker: current sky culture is nullptr. Cannot export.";
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("No sky culture is set."));
+		maker->showUserErrorMessage(this, windowTitle(), q_("No sky culture is set."));
 		ScmSkyCultureExportDialog::close();
 		return false;
 	}
@@ -115,7 +110,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	{
 		qWarning() << "SkyCultureMaker: Could not export sky culture. User cancelled or failed to choose "
 			      "directory.";
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to choose export directory."));
+		maker->showUserErrorMessage(this, windowTitle(), q_("Failed to choose export directory."));
 		return false; // User cancelled or failed to choose directory
 	}
 
@@ -123,7 +118,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	{
 		qWarning() << "SkyCultureMaker: Sky culture with ID" << skyCultureId
 			   << "already exists. Cannot export.";
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Sky culture with this ID already exists."));
+		maker->showUserErrorMessage(this, windowTitle(), q_("Sky culture with this ID already exists."));
 		// don't close the dialog here, so the user can delete the folder first
 		return false;
 	}
@@ -134,7 +129,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	{
 		qWarning() << "SkyCultureMaker: Failed to create sky culture directory at"
 			   << skyCultureDirectory.absolutePath();
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to create sky culture directory."));
+		maker->showUserErrorMessage(this, windowTitle(), q_("Failed to create sky culture directory."));
 		return false;
 	}
 
@@ -144,7 +139,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	if (!savedIllustrationsSuccessfully)
 	{
 		qWarning() << "SkyCultureMaker: Failed to export sky culture illustrations.";
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to save the illustrations."));
+		maker->showUserErrorMessage(this, windowTitle(), q_("Failed to save the illustrations."));
 		// delete the created directory
 		skyCultureDirectory.removeRecursively();
 		ScmSkyCultureExportDialog::close();
@@ -160,7 +155,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	if (scJsonDoc.isNull() || scJsonDoc.isEmpty())
 	{
 		qWarning() << "SkyCultureMaker: Failed to create JSON document for sky culture.";
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to create JSON document for sky culture."));
+		maker->showUserErrorMessage(this, windowTitle(), q_("Failed to create JSON document for sky culture."));
 		skyCultureDirectory.removeRecursively();
 		ScmSkyCultureExportDialog::close();
 		return false;
@@ -169,7 +164,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	if (!scJsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		qWarning() << "SkyCultureMaker: Failed to open index.json for writing.";
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to open index.json for writing."));
+		maker->showUserErrorMessage(this, windowTitle(), q_("Failed to open index.json for writing."));
 		skyCultureDirectory.removeRecursively();
 		ScmSkyCultureExportDialog::close();
 		return false;
@@ -181,7 +176,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	bool savedDescriptionSuccessfully = maker->saveSkyCultureDescription(skyCultureDirectory);
 	if (!savedDescriptionSuccessfully)
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to export sky culture description."));
+		maker->showUserErrorMessage(this, windowTitle(), q_("Failed to export sky culture description."));
 		qWarning() << "SkyCultureMaker: Failed to export sky culture description.";
 		skyCultureDirectory.removeRecursively();
 		ScmSkyCultureExportDialog::close();
@@ -192,14 +187,14 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	bool savedCMakeListsSuccessfully = saveSkyCultureCMakeListsFile(skyCultureDirectory);
 	if (!savedCMakeListsSuccessfully)
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to export CMakeLists.txt."));
+		maker->showUserErrorMessage(this, windowTitle(), q_("Failed to export CMakeLists.txt."));
 		qWarning() << "SkyCultureMaker: Failed to export CMakeLists.txt.";
 		skyCultureDirectory.removeRecursively();
 		ScmSkyCultureExportDialog::close();
 		return false;
 	}
 
-	maker->showUserInfoMessage(this->dialog, ui->titleBar->title(),
+	maker->showUserInfoMessage(this, windowTitle(),
 	                            q_("Sky culture exported successfully to ") +
 	                            skyCultureDirectory.absolutePath());
 	qInfo() << "SkyCultureMaker: Sky culture exported successfully to" << skyCultureDirectory.absolutePath();
@@ -223,7 +218,7 @@ bool ScmSkyCultureExportDialog::chooseExportDirectory(const QString& skyCultureI
 
 	if (!QDir(selectedDirectory).exists())
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("The selected directory is not valid"));
+		maker->showUserErrorMessage(this, windowTitle(), q_("The selected directory is not valid"));
 		qDebug() << "SkyCultureMaker: Selected non-existing export directory";
 		return false;
 	}

@@ -34,7 +34,7 @@
 #include <QStandardItemModel>
 #include <QTimer>
 
-Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(nullptr)
+Scenery3dDialog::Scenery3dDialog(QWidget* parent) : StelDialog("Scenery3d", parent), mgr(nullptr)
 {
 	ui = new Ui_scenery3dDialogForm;
 }
@@ -44,34 +44,31 @@ Scenery3dDialog::~Scenery3dDialog()
 	delete ui;
 }
 
-void Scenery3dDialog::retranslate()
+void Scenery3dDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
+    ui->retranslateUi(this);
 
-		updateToolTipStrings();
+    updateToolTipStrings();
 
-		//update description
-		SceneInfo si = mgr->getLoadingScene(); //the scene that is currently being loaded
-		if(!si.isValid)
-			si = mgr->getCurrentScene(); //the scene that is currently displayed
-		updateTextBrowser(si);
+    //update description
+    SceneInfo si = mgr->getLoadingScene(); //the scene that is currently being loaded
+    if(!si.isValid)
+        si = mgr->getCurrentScene(); //the scene that is currently displayed
+    updateTextBrowser(si);
 
-		for (auto* but : std::as_const(shortcutButtons))
-		{
-			//replace stored text with re-translated one
-			const QString btClassName=but->metaObject()->className();
-			if (btClassName == "QGroupBox")
-				dynamic_cast<QGroupBox*>(but)->setProperty("stelOriginalText",dynamic_cast<QGroupBox*>(but)->title());
-			else if (btClassName == "QCheckBox")
-				dynamic_cast<QCheckBox*>(but)->setProperty("stelOriginalText",dynamic_cast<QCheckBox*>(but)->text());
-			else
-				qCritical() << "Scenery3dDialog: UNKNOWN WIDGET TYPE: " << but->metaObject()->className();
-		}
+    for (auto* but : std::as_const(shortcutButtons))
+    {
+        //replace stored text with re-translated one
+        const QString btClassName=but->metaObject()->className();
+        if (btClassName == "QGroupBox")
+            dynamic_cast<QGroupBox*>(but)->setProperty("stelOriginalText",dynamic_cast<QGroupBox*>(but)->title());
+        else if (btClassName == "QCheckBox")
+            dynamic_cast<QCheckBox*>(but)->setProperty("stelOriginalText",dynamic_cast<QCheckBox*>(but)->text());
+        else
+            qCritical() << "Scenery3dDialog: UNKNOWN WIDGET TYPE: " << but->metaObject()->className();
+    }
 
-		updateShortcutStrings();
-	}
+    updateShortcutStrings();
 }
 
 void Scenery3dDialog::createDialogContent()
@@ -83,7 +80,7 @@ void Scenery3dDialog::createDialogContent()
 	//additionally, Scenery3dMgr::init should have been called to make sure the correct values are set for hardware support
 
 	//load Ui from form file
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	updateToolTipStrings();
 
@@ -94,8 +91,6 @@ void Scenery3dDialog::createDialogContent()
 	ui->comboBoxCubemapMode->setModel(new CubemapModeListModel(ui->comboBoxCubemapMode));
 
 	//connect UI events
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->scenery3dListWidget, &QListWidget::currentItemChanged, this, &Scenery3dDialog::scenery3dChanged);
 
 	//checkboxes can connect directly to manager

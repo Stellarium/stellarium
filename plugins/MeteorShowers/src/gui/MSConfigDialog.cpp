@@ -45,18 +45,15 @@ MSConfigDialog::~MSConfigDialog()
 	delete m_ui;
 }
 
-void MSConfigDialog::retranslate()
+void MSConfigDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		m_ui->retranslateUi(dialog);
-		setAboutHtml();
-	}
+    m_ui->retranslateUi(this);
+    setAboutHtml();
 }
 
 void MSConfigDialog::createDialogContent()
 {
-	m_ui->setupUi(dialog);
+	m_ui->setupUi(this);
 	m_ui->tabs->setCurrentIndex(0);
 
 	// Kinetic scrolling
@@ -69,8 +66,6 @@ void MSConfigDialog::createDialogContent()
 	}
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(m_ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(m_ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(m_ui->bRestoreDefaults, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
 	// General tab

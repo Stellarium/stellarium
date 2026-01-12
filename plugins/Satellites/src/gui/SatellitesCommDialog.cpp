@@ -41,14 +41,11 @@ SatellitesCommDialog::~SatellitesCommDialog()
 	delete ui;
 }
 
-void SatellitesCommDialog::retranslate()
+void SatellitesCommDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setCommunicationsHeaderNames();
-		populateTexts();
-	}
+	ui->retranslateUi(this);
+    setCommunicationsHeaderNames();
+    populateTexts();
 }
 
 void SatellitesCommDialog::setVisible(bool visible)
@@ -61,10 +58,8 @@ void SatellitesCommDialog::setVisible(bool visible)
 
 void SatellitesCommDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	initListCommunications();

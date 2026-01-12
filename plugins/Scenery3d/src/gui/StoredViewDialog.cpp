@@ -27,7 +27,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 
-StoredViewDialog::StoredViewDialog(QObject *parent) : StelDialog("Scenery3dViews", parent), mgr(nullptr), viewModel(nullptr)
+StoredViewDialog::StoredViewDialog(QWidget *parent) : StelDialog("Scenery3dViews", parent), mgr(nullptr), viewModel(nullptr)
 {
 	ui = new Ui_storedViewDialogForm;
 }
@@ -37,17 +37,14 @@ StoredViewDialog::~StoredViewDialog()
 	delete ui;
 }
 
-void StoredViewDialog::retranslate()
+void StoredViewDialog::onRetranslate()
 {
-	if(dialog)
-		ui->retranslateUi(dialog);
+	ui->retranslateUi(this);
 }
 
 void StoredViewDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	ui->setupUi(this);
 
 	mgr = GETSTELMODULE(Scenery3d);
 	Q_ASSERT(mgr);

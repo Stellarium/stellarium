@@ -106,32 +106,27 @@ SatellitesDialog::~SatellitesDialog()
 	delete ui;
 }
 
-void SatellitesDialog::retranslate()
+void SatellitesDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);		
-		updateSettingsPage(); // For the button; also calls updateCountdown()
-		populateAboutPage();
-		populateInfo();
-		populateFilterMenu();
-		updateSatelliteData();
+    ui->retranslateUi(this);
+    updateSettingsPage(); // For the button; also calls updateCountdown()
+    populateAboutPage();
+    populateInfo();
+    populateFilterMenu();
+    updateSatelliteData();
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
-		initListIridiumFlares();
+    initListIridiumFlares();
 #endif
-	}
 }
 
 // Initialize the dialog widgets and connect the signals/slots
 void SatellitesDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 #if(SATELLITES_PLUGIN_IRIDIUM == 0)
 	ui->tabs->removeTab(ui->tabs->indexOf(ui->iridiumTab));
 #endif
 	ui->tabs->setCurrentIndex(0);	
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	Satellites* plugin = GETSTELMODULE(Satellites);
 

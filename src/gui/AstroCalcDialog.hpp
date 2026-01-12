@@ -276,22 +276,20 @@ public:
 		Years	= 6
 	};
 
-	AstroCalcDialog(QObject* parent);
+	AstroCalcDialog(QWidget* parent = nullptr);
 	~AstroCalcDialog() override;
 
 	static QVector<Ephemeris> EphemerisList;
 	static int DisplayedPositionIndex;
 
 
-public slots:
-	void retranslate() override;
-		
 signals:
 	//! This signal is emitted when the graph day changed.
 	void graphDayChanged();
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
         Ui_astroCalcDialogForm *ui;
 

@@ -30,13 +30,13 @@ class ScriptConsole : public StelDialog
 {
 	Q_OBJECT
 public:
-	ScriptConsole(QObject* parent);
+	ScriptConsole(QWidget* parent = nullptr);
 	~ScriptConsole() override;
 
 public slots:
 	//! Apply application style change
 	void styleChanged(const QString &style) override;
-	void retranslate() override;
+	virtual void onRetranslate() override;
 
 private slots:
 	void runScript();

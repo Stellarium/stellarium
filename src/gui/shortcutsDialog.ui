@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>shortcutsDialogForm</class>
  <widget class="QWidget" name="shortcutsDialogForm">
+  <property name="windowTitle">
+   <string>Keyboard Shortcuts</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,13 +32,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Keyboard Shortcuts</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QFrame" name="mainFrame">
      <property name="frameShape">
@@ -202,12 +198,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ShortcutLineEdit</class>
    <extends>QLineEdit</extends>
    <header>ShortcutsDialog.hpp</header>
@@ -225,22 +215,6 @@
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>titleBar</sender>
-   <signal>closeClicked()</signal>
-   <receiver>shortcutsDialogForm</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>493</x>
-     <y>150</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>260</x>
-     <y>151</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>primaryBackspaceButton</sender>
    <signal>clicked()</signal>

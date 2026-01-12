@@ -40,13 +40,11 @@ class SlewDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	SlewDialog(const QString &dialogName=QString("TelescopeDialogSlew"), QObject* parent=nullptr);
+	SlewDialog(const QString &dialogName=QString("TelescopeDialogSlew"), QWidget* parent=nullptr);
 	~SlewDialog() override;
 
-public slots:
-	void retranslate() override;
-	
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
 	Ui_slewDialog* ui;

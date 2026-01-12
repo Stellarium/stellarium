@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include "Dialog.hpp"
 #include "SearchDialog.hpp"
 #include "ui_searchDialogGui.h"
 #include "StelApp.hpp"
@@ -60,18 +59,19 @@
 #include <QDir>
 #include <QSet>
 #include <QDialog>
+#include <QKeyEvent>
 #include <QAbstractItemModel>
 
 #include "SimbadSearcher.hpp"
 
 // Start of members for class CompletionListModel
-CompletionListModel::CompletionListModel(QObject* parent):
+CompletionListModel::CompletionListModel(QWidget* parent):
 	QStringListModel(parent),
 	selectedIdx(0)
 {
 }
 
-CompletionListModel::CompletionListModel(const QStringList &string, QObject* parent):
+CompletionListModel::CompletionListModel(const QStringList &string, QWidget* parent):
 	QStringListModel(string, parent),
 	selectedIdx(0)
 {
@@ -227,7 +227,7 @@ const char* SearchDialog::DEF_SIMBAD_URL = "https://simbad.u-strasbg.fr/";
 SearchDialog::SearchDialogStaticData SearchDialog::staticData;
 QString SearchDialog::extSearchText = "";
 
-SearchDialog::SearchDialog(QObject* parent)
+SearchDialog::SearchDialog(QWidget* parent)
 	: StelDialog("Search", parent)
 	, simbadReply(nullptr)
 	, listModel(nullptr)
@@ -279,19 +279,16 @@ SearchDialog::~SearchDialog()
 	}
 }
 
-void SearchDialog::retranslate()
+void SearchDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		QString text(ui->lineEditSearchSkyObject->text());
-		ui->retranslateUi(dialog);
-		ui->lineEditSearchSkyObject->setText(text);
-		populateSimbadServerList();
-		populateCoordinateSystemsList();
-		populateCoordinateAxis();
-		populateRecentSearch();
-		updateListTab();
-	}
+    ui->retranslateUi(this);
+    QString text(ui->lineEditSearchSkyObject->text());
+    ui->lineEditSearchSkyObject->setText(text);
+    populateSimbadServerList();
+    populateCoordinateSystemsList();
+    populateCoordinateAxis();
+    populateRecentSearch();
+    updateListTab();
 }
 
 void SearchDialog::setCurrentCoordinateSystemKey(QString key)
@@ -431,12 +428,10 @@ void SearchDialog::setCoordinateSystem(int csID)
 // Initialize the dialog widgets and connect the signals/slots
 void SearchDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(populateCoordinateAxis()));
 	connect(&StelApp::getInstance(), SIGNAL(flagUsePolarDistanceChanged(bool)), this, SLOT(populateCoordinateData()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->simbadCooQueryButton, SIGNAL(clicked()), this, SLOT(lookupCoordinates()));
 	connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(clearSimbadText(StelModule::StelModuleSelectAction)));
@@ -616,9 +611,9 @@ void SearchDialog::enableSimbadSearch(bool enable)
 {
 	useSimbad = enable;
 	conf->setValue("search/flag_search_online", useSimbad);
-	if (dialog && ui->simbadStatusLabel) ui->simbadStatusLabel->clear();
-	if (dialog && ui->simbadCooStatusLabel) ui->simbadCooStatusLabel->clear();	
-	if (dialog && ui->simbadTab) ui->simbadTab->setEnabled(enable);
+	if (ui->simbadStatusLabel) ui->simbadStatusLabel->clear();
+	if (ui->simbadCooStatusLabel) ui->simbadCooStatusLabel->clear();
+	if (ui->simbadTab) ui->simbadTab->setEnabled(enable);
 	emit simbadUseChanged(enable);
 }
 

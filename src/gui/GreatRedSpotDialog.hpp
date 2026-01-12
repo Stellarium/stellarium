@@ -35,14 +35,12 @@ public:
 	GreatRedSpotDialog();
 	~GreatRedSpotDialog() override;
 
-public slots:
-	void retranslate() override;
-
 private slots:
 	void setGrsJD(QDateTime dt);
 	void openRecentGrsMeasurement(); //! Opens a website in the system web browser where GRS data can be found.
 
 protected:
+	virtual void onRetranslate() override;
         //! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_GreatRedSpotDialogForm *ui;

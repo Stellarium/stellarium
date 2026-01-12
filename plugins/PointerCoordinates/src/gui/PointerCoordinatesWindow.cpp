@@ -39,26 +39,21 @@ PointerCoordinatesWindow::~PointerCoordinatesWindow()
 	delete ui;
 }
 
-void PointerCoordinatesWindow::retranslate()
+void PointerCoordinatesWindow::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-		populateCoordinatesPlacesList();
-		populateCoordinateSystemsList();
-	}
+	ui->retranslateUi(this);
+    setAboutHtml();
+    populateCoordinatesPlacesList();
+    populateCoordinateSystemsList();
 }
 
 void PointerCoordinatesWindow::createDialogContent()
 {
 	coord = GETSTELMODULE(PointerCoordinates);
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(&StelApp::getInstance(), SIGNAL(flagUsePolarDistanceChanged(bool)), this, SLOT(populateCoordinates(bool)));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 

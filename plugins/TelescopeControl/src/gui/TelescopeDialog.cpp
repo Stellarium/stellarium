@@ -18,7 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include "Dialog.hpp"
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelStyle.hpp"
@@ -45,7 +44,7 @@
 #endif
 
 
-TelescopeDialog::TelescopeDialog(const QString &dialogName, QObject *parent)
+TelescopeDialog::TelescopeDialog(const QString &dialogName, QWidget *parent)
 	: StelDialog(dialogName, parent)
 	, telescopeCount(0)
 	, configuredSlot(0)
@@ -78,30 +77,27 @@ TelescopeDialog::~TelescopeDialog()
 	delete telescopeListModel;
 }
 
-void TelescopeDialog::retranslate()
+void TelescopeDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutText();
-		setHeaderNames();
-		updateWarningTexts();
-		
-		//Retranslate type strings
-		for (int i = 0; i < telescopeListModel->rowCount(); i++)
-		{
-			QStandardItem* item = telescopeListModel->item(i, ColumnType);
-			QString original = item->data(Qt::UserRole).toString();
-			QModelIndex index = telescopeListModel->index(i, ColumnType);
-			telescopeListModel->setData(index, q_(original), Qt::DisplayRole);
-		}
-	}
+    ui->retranslateUi(this);
+    setAboutText();
+    setHeaderNames();
+    updateWarningTexts();
+
+    //Retranslate type strings
+    for (int i = 0; i < telescopeListModel->rowCount(); i++)
+    {
+        QStandardItem* item = telescopeListModel->item(i, ColumnType);
+        QString original = item->data(Qt::UserRole).toString();
+        QModelIndex index = telescopeListModel->index(i, ColumnType);
+        telescopeListModel->setData(index, q_(original), Qt::DisplayRole);
+    }
 }
 
 // Initialize the dialog widgets and connect the signals/slots
 void TelescopeDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	
 	// Kinetic scrolling
 	kineticScrollingList << ui->telescopeTreeView << ui->textBrowserHelp << ui->textBrowserAbout;
@@ -119,8 +115,6 @@ void TelescopeDialog::createDialogContent()
 
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	//Connect: sender, signal, receiver, method
 	//Page: Telescopes
@@ -1029,12 +1023,9 @@ void TelescopeDialog::setStatusButtonToDisconnect()
 
 void TelescopeDialog::updateStyle()
 {
-	if (dialog)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui)
-			ui->textBrowserAbout->document()->setDefaultStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	}
+    StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+    if (gui)
+        ui->textBrowserAbout->document()->setDefaultStyleSheet(gui->getStelStyle().htmlStyleSheet);
 }
 
 void TelescopeDialog::buttonBrowseServerDirectoryPressed()

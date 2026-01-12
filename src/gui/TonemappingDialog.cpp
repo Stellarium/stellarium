@@ -40,20 +40,17 @@ TonemappingDialog::~TonemappingDialog()
 	ui=Q_NULLPTR;
 }
 
-void TonemappingDialog::retranslate()
+void TonemappingDialog::onRetranslate()
 {
-	if (dialog)
-		ui->retranslateUi(dialog);
+	ui->retranslateUi(this);
 }
 
 void TonemappingDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectDoubleProperty(ui->dalSpinBox,   "StelToneReproducer.displayAdaptationLuminance");
 	connectDoubleProperty(ui->dmSpinBox,    "StelToneReproducer.maxDisplayLuminance");

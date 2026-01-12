@@ -35,7 +35,7 @@ TelescopeClientASCOMWidget::~TelescopeClientASCOMWidget()
 	delete ui;
 }
 
-void TelescopeClientASCOMWidget::retranslate()
+void TelescopeClientASCOMWidget::onRetranslate()
 {
 	ui->groupBox->setTitle(q_("ASCOM Settings"));
 	ui->chooseButton->setText(q_("Choose ASCOM Telescope"));

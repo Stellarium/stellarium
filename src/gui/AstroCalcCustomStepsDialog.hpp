@@ -35,8 +35,6 @@ public:
 	~AstroCalcCustomStepsDialog() override;
 
 public slots:
-	void retranslate() override;
-
 	void populateUnitMeasurementsList();
 	void saveTimeStep(double value);
 	void saveUnitMeasurement(int index);
@@ -45,6 +43,7 @@ private:
 	QSettings* conf;
 
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_astroCalcCustomStepsDialogForm *ui;

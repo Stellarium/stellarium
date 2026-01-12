@@ -19,8 +19,6 @@
 #include "AstroCalcExtraEphemerisDialog.hpp"
 #include "ui_astroCalcExtraEphemerisDialog.h"
 
-#include "Dialog.hpp"
-
 AstroCalcExtraEphemerisDialog::AstroCalcExtraEphemerisDialog() : StelDialog("AstroCalcExtraEphemeris")
 {
 	ui = new Ui_astroCalcExtraEphemerisDialogForm;
@@ -32,22 +30,17 @@ AstroCalcExtraEphemerisDialog::~AstroCalcExtraEphemerisDialog()
 	ui=Q_NULLPTR;
 }
 
-void AstroCalcExtraEphemerisDialog::retranslate()
+void AstroCalcExtraEphemerisDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);		
-	}
+	ui->retranslateUi(this);
 }
 
 void AstroCalcExtraEphemerisDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->skipDataCheckBox, SIGNAL(clicked()), this, SLOT(setOptionStatus()));
 
 	connectBoolProperty(ui->skipDataCheckBox,	"SolarSystem.ephemerisSkippedData");

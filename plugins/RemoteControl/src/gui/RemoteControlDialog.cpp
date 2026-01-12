@@ -42,19 +42,16 @@ RemoteControlDialog::~RemoteControlDialog()
 	delete ui;
 }
 
-void RemoteControlDialog::retranslate()
+void RemoteControlDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-	}
+	ui->retranslateUi(this);
+    setAboutHtml();
 }
 
 void RemoteControlDialog::createDialogContent()
 {
 	rc = GETSTELMODULE(RemoteControl);
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -67,8 +64,6 @@ void RemoteControlDialog::createDialogContent()
 
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// TODO Fill other buttons
 

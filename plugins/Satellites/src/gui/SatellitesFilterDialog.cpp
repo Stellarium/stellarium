@@ -34,13 +34,10 @@ SatellitesFilterDialog::~SatellitesFilterDialog()
 	delete ui;
 }
 
-void SatellitesFilterDialog::retranslate()
+void SatellitesFilterDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		populateTexts();
-	}
+    ui->retranslateUi(this);
+    populateTexts();
 }
 
 void SatellitesFilterDialog::setVisible(bool visible)
@@ -50,10 +47,8 @@ void SatellitesFilterDialog::setVisible(bool visible)
 
 void SatellitesFilterDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	connectBoolProperty(ui->inclinationCheckBox,  "Satellites.flagCFInclination");

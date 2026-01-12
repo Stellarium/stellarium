@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>onlineQueriesDialogForm</class>
  <widget class="QWidget" name="onlineQueriesDialogForm">
+  <property name="windowTitle">
+   <string>Online Queries</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -35,13 +38,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Online Queries</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QFrame" name="viewContent">
      <property name="frameShape">
@@ -225,12 +221,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>

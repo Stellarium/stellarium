@@ -20,7 +20,6 @@
 #define TEXTUSERINTERFACE_HPP
 
 #include "StelModule.hpp"
-#include "DummyDialog.hpp"
 #include "StelCore.hpp"
 
 #include <QObject>
@@ -84,7 +83,6 @@ signals:
 	void flagShowObjInfoChanged(bool);
 
 private:
-	DummyDialog dummyDialog;
 	int fontSize;
 	bool tuiActive;
 	bool tuiDateTime; // property

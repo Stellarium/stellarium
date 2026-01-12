@@ -264,6 +264,8 @@ SET(stellarium_lib_SRCS
      core/modules/SpecificTimeMgr.hpp
      StelMainView.hpp
      StelMainView.cpp
+     StelMainWindow.hpp
+     StelMainWindow.cpp
      StelSplashScreen.hpp
      StelSplashScreen.cpp
      StelLogger.hpp
@@ -274,6 +276,8 @@ SET(stellarium_lib_SRCS
      CLIProcessor.cpp
      translations.h
      translations_regions.h
+     WindowHelper.hpp
+     WindowHelper.cpp
 )
 
 IF(ENABLE_PCH)
@@ -326,8 +330,6 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ShortcutLineEdit.cpp
           gui/ShortcutsDialog.hpp
           gui/ShortcutsDialog.cpp
-          gui/Dialog.hpp
-          gui/Dialog.cpp
           gui/MapWidget.hpp
           gui/MapWidget.cpp
           gui/AngleSpinBox.hpp
@@ -375,18 +377,16 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
-          gui/StelDialogSeparate.hpp
-          gui/StelDialogSeparate.cpp
           gui/TonemappingDialog.hpp
           gui/TonemappingDialog.cpp
           gui/SkylightDialog.hpp
           gui/SkylightDialog.cpp
           gui/ContributorsList.hpp
-          gui/StelCloseButton.hpp
-          gui/StelCloseButton.cpp
           gui/ColorButton.hpp
           gui/ColorButton.cpp
           gui/ExternalStepSpinBox.hpp
+          gui/StyleUtils.hpp
+          gui/StyleUtils.cpp
      )
 
      ################# compiles .ui files ############

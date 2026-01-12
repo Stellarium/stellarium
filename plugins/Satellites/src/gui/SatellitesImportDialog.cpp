@@ -68,12 +68,9 @@ SatellitesImportDialog::~SatellitesImportDialog()
 	}
 }
 
-void SatellitesImportDialog::retranslate()
+void SatellitesImportDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-	}
+    ui->retranslateUi(this);
 }
 
 void SatellitesImportDialog::setVisible(bool visible)
@@ -85,7 +82,7 @@ void SatellitesImportDialog::setVisible(bool visible)
 
 void SatellitesImportDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->listView;
@@ -95,9 +92,6 @@ void SatellitesImportDialog::createDialogContent()
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
-
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->pushButtonGetData, SIGNAL(clicked()),
 	        this, SLOT(getData()));

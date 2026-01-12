@@ -24,6 +24,8 @@
 #include <QKeySequence>
 #include <QList>
 
+class QAction;
+
 //! Wrapper around an argumentless QObject slot or a bool Q_PROPERTY with WRITE method,
 //! allowing the slot to be called/property to be toggled using this action object.
 //! The action object can be identified by a unique string, and found through StelActionMgr::findAction.
@@ -72,6 +74,8 @@ public:
 	const QKeySequence getAltShortcut() const {return altKeySequence;}
 	QString getText() const;
 	void setText(const QString& value) {text = value; emit changed();}
+
+    QAction* getQAction() const { return qAction; }
 signals:
 	//! Emitted when the boolean state of this StelAction changes.
 	//! When the action is connected to a StelProperty,

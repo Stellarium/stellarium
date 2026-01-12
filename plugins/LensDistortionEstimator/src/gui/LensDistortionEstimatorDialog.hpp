@@ -85,12 +85,10 @@ public:
 	std::vector<ImagePointStatus> imagePointDirections() const;
 
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 	void emitWarning(const QString& text, bool autoFixable = false);
 	void clearWarnings();
-
-public slots:
-	void retranslate() override;
 
 private:
 	double imageCenterShiftX() const;

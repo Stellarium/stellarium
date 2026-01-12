@@ -93,13 +93,10 @@ NebulaTexturesDialog::~NebulaTexturesDialog()
 /**
  * @brief Retranslates UI elements in response to a language change.
  */
-void NebulaTexturesDialog::retranslate()
+void NebulaTexturesDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-	}
+    ui->retranslateUi(this);
+    setAboutHtml();
 }
 
 /**
@@ -109,7 +106,7 @@ void NebulaTexturesDialog::retranslate()
  */
 void NebulaTexturesDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// load config
 	ui->recoverCoordsButton->setVisible(false);
@@ -129,8 +126,6 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->openFileButton, SIGNAL(clicked()), this, SLOT(openImageFile()));
 	connect(ui->solveButton, SIGNAL(clicked()), this, SLOT(solveImage()));

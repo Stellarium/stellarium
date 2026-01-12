@@ -100,7 +100,7 @@ struct HipsItemType
 	};
 };
 
-ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
+ViewDialog::ViewDialog(QWidget* parent) : StelDialog("View", parent)
 	, addRemoveLandscapesDialog(nullptr)
 	, atmosphereDialog(nullptr)
 	, skylightDialog(nullptr)
@@ -136,43 +136,37 @@ ViewDialog::~ViewDialog()
 	configureOrbitColorsDialog = nullptr;
 }
 
-void ViewDialog::retranslate()
+void ViewDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		static StelSkyCultureMgr *scMgr = GETSTELMODULE(StelSkyCultureMgr);
+    ui->retranslateUi(this);
 
-		ui->retranslateUi(dialog);
-		updateZhrDescription(StelApp::getInstance().getModule("SporadicMeteorMgr")->property("zhr").toInt());
-		populateLists();
-		populateToolTips();
-		populatePlanetMagnitudeAlgorithmsList();
-		populatePlanetMagnitudeAlgorithmDescription();
-		populateCulturalCombo(ui->zodiacLabelComboBox, scMgr->getZodiacLabelStyle());
-		populateCulturalCombo(ui->lunarSystemLabelComboBox, scMgr->getLunarSystemLabelStyle());
-		ui->lightPollutionWidget->retranslate();
+    static StelSkyCultureMgr *scMgr = GETSTELMODULE(StelSkyCultureMgr);
 
-		populateHipsGroups();
-		clearHips();
-		updateHips();
+    updateZhrDescription(StelApp::getInstance().getModule("SporadicMeteorMgr")->property("zhr").toInt());
+    populateLists();
+    populateToolTips();
+    populatePlanetMagnitudeAlgorithmsList();
+    populatePlanetMagnitudeAlgorithmDescription();
+    populateCulturalCombo(ui->zodiacLabelComboBox, scMgr->getZodiacLabelStyle());
+    populateCulturalCombo(ui->lunarSystemLabelComboBox, scMgr->getLunarSystemLabelStyle());
+    ui->lightPollutionWidget->retranslate();
 
-		//Hack to shrink the tabs to optimal size after language change
-		//by causing the list items to be laid out again.
-		updateTabBarListWidgetWidth();
-	}
+    populateHipsGroups();
+    clearHips();
+    updateHips();
+
+    //Hack to shrink the tabs to optimal size after language change
+    //by causing the list items to be laid out again.
+    updateTabBarListWidgetWidth();
 }
 
-void ViewDialog::styleChanged(const QString &style)
+void ViewDialog::onStyleChanged()
 {
-	StelDialog::styleChanged(style);
-	if (dialog)
-	{
-		populateLists();
-		populateToolTips();
-		populatePlanetMagnitudeAlgorithmsList();
-		populatePlanetMagnitudeAlgorithmDescription();
-		populateHipsGroups();
-	}
+    populateLists();
+    populateToolTips();
+    populatePlanetMagnitudeAlgorithmsList();
+    populatePlanetMagnitudeAlgorithmDescription();
+    populateHipsGroups();
 }
 
 void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
@@ -186,9 +180,9 @@ void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
 
 void ViewDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	Q_ASSERT(ui->stackedWidget->count() == Page::COUNT);
-	dialog->installEventFilter(this);
+	installEventFilter(this);
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -205,8 +199,6 @@ void ViewDialog::createDialogContent()
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateLists();
 	populateToolTips();
@@ -742,7 +734,7 @@ void ViewDialog::createDialogContent()
 
 bool ViewDialog::eventFilter(QObject* object, QEvent* event)
 {
-	if (object != dialog || event->type() != QEvent::KeyPress)
+	if (object != this || event->type() != QEvent::KeyPress)
 		return false;
 	const auto keyEvent = static_cast<QKeyEvent*>(event);
 	if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)

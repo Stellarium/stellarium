@@ -31,18 +31,18 @@ class DateTimeDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	DateTimeDialog(QObject* parent);
+	DateTimeDialog(QWidget* parent = nullptr);
 	~DateTimeDialog() override;
 	double newJd();
 	bool makeValidAndApply(int y, int m, int d, int h, int min, int s);
 	bool applyJD(double jday);
 public slots:
-	void retranslate() override;
 	void close() override;
 	//! update the editing display with new JD.
 	void setDateTime(double newJd);
 
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
 	void connectSpinnerEvents() const;

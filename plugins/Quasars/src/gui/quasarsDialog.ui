@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Quasars Configuration</string>
+   <string>Quasars Plug-in Configuration</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
@@ -29,13 +29,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Quasars Plug-in Configuration</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
@@ -319,12 +312,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>ColorButton</class>
    <extends>QToolButton</extends>

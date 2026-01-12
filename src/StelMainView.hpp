@@ -23,6 +23,7 @@
 #include <QCoreApplication>
 #include <QGraphicsView>
 #include <QEventLoop>
+#include <QMainwindow>
 #include <QOpenGLContext>
 #include <QTimer>
 #ifdef OPENGL_DEBUG_LOGGING
@@ -67,6 +68,8 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(int maxFps	                   READ getMaxFps                     WRITE setMaxFps                     NOTIFY maxFpsChanged)
 	Q_PROPERTY(int minTimeBetweenFrames        READ getMinTimeBetweenFrames       WRITE setMinTimeBetweenFrames       NOTIFY minTimeBetweenFramesChanged)
 public:
+	static void setMainWindow(QMainWindow* w) { mainWindow = w; }
+    static QMainWindow* getMainWindow() { return mainWindow; }
 	//! Contains some basic info about the OpenGL context used
 	struct GLInfo
 	{
@@ -90,10 +93,6 @@ public:
 	//! Start the main initialization of Stellarium
 	void init();
 	void deinit();
-
-	//! Set the application title for the current language.
-	//! This is useful for e.g. chinese.
-	void initTitleI18n();
 
 	//! Get the StelMainView singleton instance.
 	static StelMainView& getInstance() {Q_ASSERT(singleton); return *singleton;}
@@ -302,10 +301,12 @@ private slots:
 	void contextDestroyed();
 #endif
 	void updateNightModeProperty(bool b);
+	void updateDarkModeProperty(bool b);
 
 	void reloadShaders();
 
 private:
+	static QMainWindow* mainWindow;
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
 	void drawEnded();
 	//! provide extended OpenGL diagnostics in logfile.
@@ -326,6 +327,8 @@ private:
 	class StelRootItem* rootItem;
 	QGraphicsWidget* guiItem;
 	QGraphicsEffect* nightModeEffect;
+
+	void reloadStyleSheetForDarkMode(bool darkMode);
 
 	//! The openGL viewport of the graphics scene
 	//! Responsible for main GL setup, rendering is done in the scene background

@@ -30,7 +30,7 @@
 #include "ui_shortcutsDialog.h"
 
 
-ShortcutsFilterModel::ShortcutsFilterModel(QObject* parent) :
+ShortcutsFilterModel::ShortcutsFilterModel(QWidget* parent) :
     QSortFilterProxyModel(parent)
 {
 	//
@@ -68,7 +68,7 @@ bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &s
 }
 
 
-ShortcutsDialog::ShortcutsDialog(QObject* parent) :
+ShortcutsDialog::ShortcutsDialog(QWidget* parent) :
 	StelDialog("Shortcuts", parent),
 	ui(new Ui_shortcutsDialogForm),
 	filterModel(new ShortcutsFilterModel(this)),
@@ -115,14 +115,11 @@ void ShortcutsDialog::resetCollisions()
 	collisionItems.clear();
 }
 
-void ShortcutsDialog::retranslate()
+void ShortcutsDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setModelHeader();
-		updateTreeData();
-	}
+    ui->retranslateUi(this);
+    setModelHeader();
+    updateTreeData();
 }
 
 void ShortcutsDialog::initEditors()
@@ -291,8 +288,7 @@ void ShortcutsDialog::switchToEditors(const QModelIndex& index)
 
 void ShortcutsDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	ui->setupUi(this);
 
 	resetModel();
 	filterModel->setSourceModel(mainModel);

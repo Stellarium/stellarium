@@ -29,7 +29,6 @@
 #include <QRegularExpression>
 
 #include <QAction>
-#include "StelMainView.hpp"
 
 StelAction::StelAction(const QString& actionId,
 		       const QString& groupId,
@@ -63,10 +62,10 @@ StelAction::StelAction(const QString& actionId,
 		if (shortcuts.size() > 1)
 			setAltShortcut(shortcuts[1]);		
 	}
-	QWidget* mainView = &StelMainView::getInstance();
+    QWidget* mainWindow = StelApp::getInstance().getMainWindow();
 	qAction = new QAction(this);
 	onChanged();
-	mainView->addAction(qAction);
+    mainWindow->addAction(qAction);
 	connect(qAction, SIGNAL(triggered()), this, SLOT(trigger()));
 	connect(this, SIGNAL(changed()), this, SLOT(onChanged()));	
 }
@@ -74,7 +73,7 @@ StelAction::StelAction(const QString& actionId,
 void StelAction::onChanged()
 {
 	qAction->setShortcuts(QList<QKeySequence>() << keySequence << altKeySequence);
-	qAction->setShortcutContext(global ? Qt::ApplicationShortcut : Qt::WidgetShortcut);
+	qAction->setShortcutContext(global ? Qt::ApplicationShortcut : Qt::WindowShortcut);
 }
 
 void StelAction::setShortcut(const QString& key)
@@ -138,6 +137,9 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 #else
 		Q_ASSERT(prop.type() == QVariant::Bool);
 #endif
+
+        qAction->setCheckable(true);
+        qAction->setChecked(prop.toBool());
 
 		// Listen to the property notified signal if there is one.
 		int propIndex = obj->metaObject()->indexOfProperty(slot);

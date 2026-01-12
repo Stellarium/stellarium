@@ -19,7 +19,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
 #include "CustomDeltaTEquationDialog.hpp"
 #include "ConfigureScreenshotsDialog.hpp"
@@ -79,7 +78,7 @@ public:
 	}
 };
 
-ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
+ConfigurationDialog::ConfigurationDialog(QWidget* parent)
 	: StelDialog("Configuration", parent)
 	, isDownloadingStarCatalog(false)
 	, nextStarCatalogToDownloadIndex(0)
@@ -88,7 +87,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, starCatalogDownloadReply(Q_NULLPTR)
 	, currentDownloadFile(Q_NULLPTR)
 	, progressBar(Q_NULLPTR)
-	, gui(agui)
+    , gui(dynamic_cast<StelGui*>(StelApp::getInstance().getGui()))
 	, customDeltaTEquationDialog(Q_NULLPTR)
 	, configureScreenshotsDialog(Q_NULLPTR)
 	, savedProjectionType(StelApp::getInstance().getCore()->getCurrentProjectionType())
@@ -108,42 +107,39 @@ ConfigurationDialog::~ConfigurationDialog()
 	currentDownloadFile = Q_NULLPTR;
 }
 
-void ConfigurationDialog::retranslate()
+void ConfigurationDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
+    ui->retranslateUi(this);
 
-		//Initial FOV and direction on the "Main" page
-		updateConfigLabels();
-		
-		//Star catalog download button and info
-		updateStarCatalogControlsText();
+    //Initial FOV and direction on the "Main" page
+    updateConfigLabels();
 
-		//Script information
-		//(trigger re-displaying the description of the current item)
-		#ifdef ENABLE_SCRIPTING
-		scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
-		#else
-		// we had hidden and re-sorted the tabs, and must now manually re-set the label.
-		ui->stackListWidget->item(5)->setText(QCoreApplication::translate("configurationDialogForm", "Plugins", nullptr));
-		#endif
+    //Star catalog download button and info
+    updateStarCatalogControlsText();
 
-		populateDitherList();
+    //Script information
+    //(trigger re-displaying the description of the current item)
+    #ifdef ENABLE_SCRIPTING
+    scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
+    #else
+    // we had hidden and re-sorted the tabs, and must now manually re-set the label.
+    ui->stackListWidget->item(5)->setText(QCoreApplication::translate("configurationDialogForm", "Plugins", nullptr));
+    #endif
 
-		//Plug-in information
-		populatePluginsList();
+    populateDitherList();
 
-		populateDeltaTAlgorithmsList();
-		populateDateFormatsList();
-		populateTimeFormatsList();
+    //Plug-in information
+    populatePluginsList();
 
-		populateTooltips();
+    populateDeltaTAlgorithmsList();
+    populateDateFormatsList();
+    populateTimeFormatsList();
 
-		//Hack to shrink the tabs to optimal size after language change
-		//by causing the list items to be laid out again.
-		updateTabBarListWidgetWidth();
-	}
+    populateTooltips();
+
+    //Hack to shrink the tabs to optimal size after language change
+    //by causing the list items to be laid out again.
+    updateTabBarListWidgetWidth();
 }
 
 void ConfigurationDialog::createDialogContent()
@@ -153,7 +149,7 @@ void ConfigurationDialog::createDialogContent()
 
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Set the main tab activated by default
@@ -169,8 +165,6 @@ void ConfigurationDialog::createDialogContent()
 		connect(appGui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
 
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Main tab
 	#ifdef ENABLE_NLS
@@ -490,6 +484,11 @@ void ConfigurationDialog::createDialogContent()
 		int pos=5;
 #else
 		QList<QListWidgetItem *> lwItemList=ui->stackListWidget->findItems(q_("Speech"), Qt::MatchExactly); // use q_() to avoid crash!
+        if (lwItemList.isEmpty())
+        {
+            qWarning() << "Speech item not found in stackListWidget";
+            return;
+        }
 		int pos = ui->stackListWidget->indexFromItem(lwItemList.first()).row();
 #endif
 		QListWidgetItem *speechItem = ui->stackListWidget->takeItem(pos); // take out from its place.
@@ -561,7 +560,6 @@ void ConfigurationDialog::selectLanguage(const int id)
 	const QString &langName=static_cast<QComboBox*>(sender())->itemText(id);
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
-	StelMainView::getInstance().initTitleI18n();
 }
 
 void ConfigurationDialog::setStartupTimeMode()
@@ -1479,8 +1477,23 @@ void ConfigurationDialog::saveAllSettings()
 
 	QWidget& mainWindow = StelMainView::getInstance();
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	QScreen *mainScreen = mainWindow.windowHandle()->screen();
-	int screenNum=qApp->screens().indexOf(mainScreen);
+	QScreen* mainScreen = nullptr;
+
+    if (QWindow* w = mainWindow.windowHandle())
+    {
+        mainScreen = w->screen();
+    }
+
+    if (!mainScreen)
+    {
+        mainScreen = QGuiApplication::primaryScreen();
+    }
+
+    int screenNum = qApp->screens().indexOf(mainScreen);
+    if (screenNum < 0)
+    {
+        screenNum = 0;
+    }
 #else
 	int screenNum = qApp->desktop()->screenNumber(&StelMainView::getInstance());
 #endif
@@ -1657,6 +1670,9 @@ void ConfigurationDialog::pluginConfigureCurrentSelection()
 #ifdef ENABLE_SCRIPTING
 void ConfigurationDialog::populateScriptsList(void)
 {
+    if (!isVisible() || !ui || !ui->scriptListWidget)
+        return;
+
 	QListWidget *scripts = ui->scriptListWidget;
 	scripts->blockSignals(true);
 	int currentRow = scripts->currentRow();

@@ -55,9 +55,9 @@ class ScmConvertDialog : public StelDialog
 public:
 	explicit ScmConvertDialog(SkyCultureMaker *maker);
 	~ScmConvertDialog() override;
-	void retranslate() override;
 
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 
 private slots:

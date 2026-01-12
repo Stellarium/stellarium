@@ -53,11 +53,9 @@ public:
 	~MSSearchDialog() override;
 
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog and connect the signals/slots
 	void createDialogContent() override;
-
-public slots:
-	void retranslate() override;
 
 private slots:
 	//! Search events and fill the list.

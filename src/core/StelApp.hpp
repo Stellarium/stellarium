@@ -127,6 +127,9 @@ public:
 	//! @return the arguments passed to Stellarium on the command line concatenated with the STEL_OPTS environment variable
 	static QStringList getCommandlineArguments();
 
+    void setMainWindow(QWidget* w);
+    QWidget* getMainWindow() const;
+
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
 	static StelApp& getInstance() {Q_ASSERT(singleton); return *singleton;}
@@ -252,6 +255,8 @@ public:
 	//! This means, enclose the temporary state change with 2 calls (false/true) per such method.
 	void enableBottomStelBarUpdates(bool enable);
 
+	void startDarkModeMonitor();
+
 #ifdef ENABLE_SCRIPTING
 	//! Get the script API proxy (for signal handling)
 	StelMainScriptAPIProxy* getMainScriptAPIProxy() const {return scriptAPIProxy;}
@@ -304,6 +309,9 @@ public slots:
 	void setVisionModeNight(bool);
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
+	bool getDarkMode();
+
+	void checkDarkMode();  // Periodic check
 
 	//! Set flag for activating overwrite mode for text color in info panel.
 	void setFlagOverwriteInfoColor(bool);
@@ -391,6 +399,7 @@ public slots:
 	void quit();
 signals:
 	void visionNightModeChanged(bool);
+	void darkModeChanged(bool dark);
 	void flagShowDecimalDegreesChanged(bool);
 	void flagUseAzimuthFromSouthChanged(bool);
 	void flagUseNegativeHourAnglesChanged(bool);
@@ -447,6 +456,8 @@ private:
 	//! The main window which is the parent of this object
 	StelMainView* mainWin;
 
+    QWidget* mainWindow = nullptr;
+
 	// The associated StelCore instance
 	StelCore* core;
 
@@ -490,6 +501,8 @@ private:
 	StelSpeechMgr *speechMgr;
 
 	StelSkyLayerMgr* skyImageMgr;
+
+	bool currentDarkMode = false;
 
 #ifdef ENABLE_SCRIPTING
 	// The script API proxy object (for bridging threads)

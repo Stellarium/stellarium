@@ -38,23 +38,18 @@ EquationOfTimeWindow::~EquationOfTimeWindow()
 	delete ui;
 }
 
-void EquationOfTimeWindow::retranslate()
+void EquationOfTimeWindow::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-	}
+	ui->retranslateUi(this);
+    setAboutHtml();
 }
 
 void EquationOfTimeWindow::createDialogContent()
 {
 	eq = GETSTELMODULE(EquationOfTime);
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	ui->checkBoxEnableAtStartup->setChecked(eq->getFlagEnableAtStartup());
 	connect(ui->checkBoxEnableAtStartup, SIGNAL(clicked(bool)), eq, SLOT(setFlagEnableAtStartup(bool)));

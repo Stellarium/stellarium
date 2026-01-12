@@ -39,11 +39,10 @@ public:
 	~ObservabilityDialog();
 
 protected:
+	virtual void onRetranslate() override;
+
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent();
-
-public slots:
-	void retranslate();
 
 private slots:
 	//! Read the color values from the sliders and set the font color.

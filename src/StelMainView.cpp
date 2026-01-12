@@ -50,12 +50,14 @@
 #include <QPluginLoader>
 #include <QScreen>
 #include <QSettings>
+#include <QStyle>
 #include <QRegularExpression>
 #include <QtPlugin>
 #include <QThread>
 #include <QTimer>
 #include <QWidget>
 #include <QWindow>
+#include <QMainWindow>
 #include <QMessageBox>
 #include <QStandardPaths>
 #include <QStorageInfo>
@@ -83,6 +85,7 @@ Q_LOGGING_CATEGORY(mainview, "stel.MainView")
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = Q_NULLPTR;
+QMainWindow* StelMainView::mainWindow = nullptr;
 
 class StelGLWidget : public QOpenGLWidget
 {
@@ -659,8 +662,6 @@ StelMainView::StelMainView(QSettings* settings)
 
 	qApp->installEventFilter(this);
 
-	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
-	initTitleI18n();
 	setObjectName("MainView");
 
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
@@ -946,6 +947,10 @@ void StelMainView::init()
 
 	//create and initialize main app
 	stelApp = new StelApp(this);
+    if (auto* mw = qobject_cast<QMainWindow*>(window()))
+    {
+        stelApp->setMainWindow(mw);
+    }
 	stelApp->setGui(gui);
 	stelApp->init(configuration);
 	//this makes sure the app knows how large the window is
@@ -976,6 +981,7 @@ void StelMainView::init()
 	focusSky();
 	nightModeEffect = new NightModeGraphicsEffect(this);
 	updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
+	updateDarkModeProperty(StelApp::getInstance().getDarkMode());
 	//install the effect on the whole view
 	rootItem->setGraphicsEffect(nightModeEffect);
 
@@ -1006,6 +1012,7 @@ void StelMainView::init()
 	if (sgui!=Q_NULLPTR)
 		setStyleSheet(sgui->getStelStyle().qtStyleSheet);
 	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
+	connect(stelApp, SIGNAL(darkModeChanged(bool)), this, SLOT(updateDarkModeProperty(bool)));
 
 	// I doubt this will have any effect on framerate, but may cause problems elsewhere?
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
@@ -1077,6 +1084,11 @@ void StelMainView::updateNightModeProperty(bool b)
 	// So that the bottom bar tooltips get properly rendered in night mode.
 	setProperty("nightMode", b);
 	nightModeEffect->setEnabled(b);
+}
+
+void StelMainView::updateDarkModeProperty(bool b)
+{
+	setProperty("darkMode", b);
 }
 
 void StelMainView::reloadShaders()
@@ -1470,12 +1482,6 @@ void StelMainView::deinit()
 	deinitGL();
 	delete stelApp;
 	stelApp = Q_NULLPTR;
-}
-
-// Update the translated title
-void StelMainView::initTitleI18n()
-{
-	setWindowTitle(StelUtils::getApplicationName());
 }
 
 void StelMainView::setFullScreen(bool b)

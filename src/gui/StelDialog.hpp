@@ -20,9 +20,8 @@
 #ifndef STELDIALOG_HPP
 #define STELDIALOG_HPP
 
+#include <QDialog>
 #include <QObject>
-#include <QGraphicsProxyWidget>
-#include <QGraphicsSceneResizeEvent>
 #include <QSettings>
 #include <QWidget>
 #include "StelApp.hpp"
@@ -74,12 +73,12 @@ class AngleSpinBox;
 //! - \ref connectBoolProperty to connect a StelProperty to a QAbstractButton (includes QCheckBox)
 //! Take care that a valid property name is used and it represents a property that can be converted to
 //! the required data type, or the program will crash at runtime when the function is called
-class StelDialog : public QObject
+class StelDialog : public QDialog
 {
 	Q_OBJECT
 	Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 public:
-	StelDialog(const QString &dialogName=QString("Default"), QObject* parent=nullptr);
+    explicit StelDialog(const QString& dialogName = QString("Default"), QWidget* parent = nullptr);
 	~StelDialog() override;
 
 	//! Returns true if the dialog contents have been constructed and are currently shown
@@ -96,12 +95,11 @@ public slots:
 	//! based on a Qt Designer file (.ui)</a>, the implementation needs to call
 	//! the generated class' retranslateUi() method, like this:
 	//! \code
-	//! if (dialog)
-	//! 	ui->retranslateUi(dialog);
+	//! ui->retranslateUi(this);
 	//! \endcode
-	virtual void retranslate() = 0;
+	void retranslate();
 	//! On the first call with "true" populates the window contents.
-	virtual void setVisible(bool);
+	void setVisible(bool) override;
 	//! Closes the window (the window widget is not deleted, just not visible).
 	virtual void close();
 	//! Adds dialog location to config.ini; should be connected in createDialogContent()
@@ -114,6 +112,12 @@ signals:
 	void visibleChanged(bool);
 
 protected:
+    bool initialized = false;
+    virtual void onStyleChanged();
+    virtual void onRetranslate();
+
+    void resizeEvent(QResizeEvent* event) override;
+
 	//! Initialize the dialog widgets and connect the signals/slots.
 	virtual void createDialogContent()=0;
 
@@ -195,9 +199,6 @@ protected:
 	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectBoolProperty(QGroupBox *checkBox, const QString &propName);
 
-	//! The main dialog
-	QWidget* dialog;
-	class CustomProxy* proxy;
 	//! The name should be set in derived classes' constructors and can be used to store and retrieve the panel locations.
 	QString dialogName;
 
@@ -217,49 +218,6 @@ protected slots:
 	void handleColorSchemeChanged();
 
 	virtual void updateNightModeProperty(bool n);
-};
-
-class CustomProxy : public QGraphicsProxyWidget
-{	private:
-	Q_OBJECT
-	public:
-		CustomProxy(QGraphicsItem *parent = nullptr, Qt::WindowFlags wFlags = Qt::Widget) : QGraphicsProxyWidget(parent, wFlags)
-		{
-			setFocusPolicy(Qt::StrongFocus);
-		}
-		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
-		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override
-		{
-/*			QStyleOptionTitleBar bar;
-			initStyleOption(&bar);
-			bar.subControls = QStyle::SC_TitleBarCloseButton;
-			qWarning() << style()->subControlRect(QStyle::CC_TitleBar, &bar, QStyle::SC_TitleBarCloseButton);
-			QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);*/
-		}
-	signals: void sizeChanged(QSizeF);
-	protected:
-		bool event(QEvent* event) override
-		{
-			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
-			{
-				switch (event->type())
-				{
-					case QEvent::WindowDeactivate:
-						widget()->setWindowOpacity(0.4);
-						break;
-					case QEvent::WindowActivate:
-						widget()->setWindowOpacity(0.9);
-					default:
-						break;
-				}
-			}
-			return QGraphicsProxyWidget::event(event);
-		}
-		void resizeEvent(QGraphicsSceneResizeEvent *event) override
-		{
-			if (event->newSize() != event->oldSize())
-				emit sizeChanged(event->newSize());
-			QGraphicsProxyWidget::resizeEvent(event);
-		}
+	virtual void updateDarkModeProperty(bool n);
 };
 #endif // STELDIALOG_HPP

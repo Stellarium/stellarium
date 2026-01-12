@@ -43,13 +43,10 @@ class StoredPointsDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	StoredPointsDialog(const QString &dialogName=QString("TelescopeControlStoredPoints"), QObject* parent=nullptr);
+	StoredPointsDialog(const QString &dialogName=QString("TelescopeControlStoredPoints"), QWidget* parent=nullptr);
 	~StoredPointsDialog() override;
 
 	void populatePointsList(QVariantList list);
-
-public slots:
-	void retranslate() override;
 
 private slots:
 	void buttonAddPressed();
@@ -65,6 +62,7 @@ signals:
 	void clearStoredPoints();
 
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
 	Ui_StoredPoints *ui;

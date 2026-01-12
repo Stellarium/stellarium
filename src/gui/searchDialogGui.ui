@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>searchDialogForm</class>
  <widget class="QWidget" name="searchDialogForm">
+  <property name="windowTitle">
+   <string>Search window</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -44,13 +47,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string>Search window</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
@@ -1090,12 +1086,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>

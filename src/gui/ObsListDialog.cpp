@@ -48,7 +48,7 @@
 
 Q_LOGGING_CATEGORY(ObsLists, "stel.ObsLists", QtInfoMsg)
 
-ObsListDialog::ObsListDialog(QObject *parent) :
+ObsListDialog::ObsListDialog(QWidget *parent) :
 	StelDialog("ObservingList", parent),
 	ui(new Ui_obsListDialogForm()),
 	core(StelApp::getInstance().getCore()),
@@ -106,11 +106,10 @@ ObsListDialog::~ObsListDialog() {
 */
 void ObsListDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 
 	// Standard mode buttons: NewList/EditList/DeleteList
 	connect(ui->newListButton,        SIGNAL(clicked()), this, SLOT(   newListButtonPressed()));
@@ -276,13 +275,10 @@ bool ObsListDialog::checkIfBookmarksListExists()
 /*
  * Retranslate dialog
 */
-void ObsListDialog::retranslate()
+void ObsListDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setObservingListHeaderNames();
-	}
+    ui->retranslateUi(this);
+    setObservingListHeaderNames();
 }
 
 /*
@@ -957,7 +953,7 @@ void ObsListDialog::newListButtonPressed()
 	switchEditMode(true, true);
 
 	ui->listNameLineEdit->setText(q_("New Observation List"));
-	ui->titleBar->setTitle(q_("Observing list creation mode"));
+	setWindowTitle(q_("Observing list creation mode"));
 }
 /*
  * Slot for editButton
@@ -973,7 +969,7 @@ void ObsListDialog::editListButtonPressed()
 	{
 		switchEditMode(true, false);
 
-		ui->titleBar->setTitle(q_("Observing list editor mode"));
+		setWindowTitle(q_("Observing list editor mode"));
 	}
 	else
 	{
@@ -1400,7 +1396,7 @@ void ObsListDialog::switchEditMode(bool enableEditMode, bool newList)
 		isCreationMode=newList;
 		// The Layout classes have no setVisible(bool), we must configure individual buttons! :-(
 
-		ui->titleBar->setTitle(q_("Observing lists"));
+		setWindowTitle(q_("Observing lists"));
 		//ui->horizontalLayoutCombo->setEnabled(!isEditMode);     // disable list selection
 		ui->obsListComboLabel->setVisible(!isEditMode);
 		ui->obsListComboBox->setVisible(!isEditMode);

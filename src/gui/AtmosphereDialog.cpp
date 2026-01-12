@@ -51,21 +51,18 @@ AtmosphereDialog::~AtmosphereDialog()
 	delete ui;
 }
 
-void AtmosphereDialog::retranslate()
+void AtmosphereDialog::onRetranslate()
 {
-	if (dialog)
-		ui->retranslateUi(dialog);
+    ui->retranslateUi(this);
 }
 
 void AtmosphereDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
-	dialog->installEventFilter(this);
+	ui->setupUi(this);
+	installEventFilter(this);
 	
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectDoubleProperty(ui->pressureDoubleSpinBox,"StelSkyDrawer.atmospherePressure");
 	connectDoubleProperty(ui->temperatureDoubleSpinBox,"StelSkyDrawer.atmosphereTemperature");
@@ -119,7 +116,7 @@ void AtmosphereDialog::createDialogContent()
 
 bool AtmosphereDialog::eventFilter(QObject* object, QEvent* event)
 {
-	if (object != dialog || event->type() != QEvent::KeyPress)
+	if (object != this || event->type() != QEvent::KeyPress)
 		return false;
 	const auto keyEvent = static_cast<QKeyEvent*>(event);
 	if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)

@@ -40,7 +40,7 @@
 #include <QTextDocumentFragment>
 #include <QRegularExpression>
 
-ScriptConsole::ScriptConsole(QObject *parent)
+ScriptConsole::ScriptConsole(QWidget *parent)
 	: StelDialog("ScriptConsole", parent)
 	, highlighter(nullptr)
 	, useUserDir(false)
@@ -59,13 +59,10 @@ ScriptConsole::~ScriptConsole()
 	delete highlighter; highlighter = nullptr;
 }
 
-void ScriptConsole::retranslate()
+void ScriptConsole::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		populateQuickRunList();
-	}
+    ui->retranslateUi(this);
+    populateQuickRunList();
 }
 
 void ScriptConsole::styleChanged(const QString &style)
@@ -95,7 +92,7 @@ void ScriptConsole::populateQuickRunList()
 
 void ScriptConsole::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
@@ -105,8 +102,6 @@ void ScriptConsole::createDialogContent()
 
 	connect(ui->scriptEdit, SIGNAL(cursorPositionChanged()), this, SLOT(rowColumnChanged()));
 	connect(ui->scriptEdit, SIGNAL(textChanged()), this, SLOT(setDirty()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadScript()));
 	connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(saveScript()));
 	connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clearButtonPressed()));
@@ -325,7 +320,7 @@ void ScriptConsole::scriptStarted()
 	ui->runButton->setEnabled(false);
 	ui->stopButton->setEnabled(true);
 	if (hideWindowAtScriptRun)
-		dialog->setVisible(false);
+		setVisible(false);
 }
 
 void ScriptConsole::scriptEnded()
@@ -336,7 +331,7 @@ void ScriptConsole::scriptEnded()
 	ui->runButton->setEnabled(true);
 	ui->stopButton->setEnabled(false);
 	if (hideWindowAtScriptRun)
-		dialog->setVisible(true);
+		setVisible(true);
 }
 
 void ScriptConsole::appendLogLine(const QString& s)

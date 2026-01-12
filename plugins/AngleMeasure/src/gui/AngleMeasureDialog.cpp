@@ -38,18 +38,15 @@ AngleMeasureDialog::~AngleMeasureDialog()
 	delete ui;
 }
 
-void AngleMeasureDialog::retranslate()
+void AngleMeasureDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-	}
+	ui->retranslateUi(this);
+    setAboutHtml();
 }
 
 void AngleMeasureDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -58,8 +55,6 @@ void AngleMeasureDialog::createDialogContent()
 	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectBoolProperty(ui->panAndSelectCheckBox,			"AngleMeasure.flagPanAndSelect");
 	connectBoolProperty(ui->followCursorCheckBox, 			"AngleMeasure.flagFollowCursor");

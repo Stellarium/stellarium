@@ -33,9 +33,6 @@ public:
 	SkylightDialog();
 	~SkylightDialog() override;
 
-public slots:
-	void retranslate() override;
-
 protected slots:
 	//! Reset function for the parametrizable Preetham atmosphere model.
 	//! This resets the parameters for the CIE Y distribution to the values found in Preetham's 1999 paper.
@@ -76,6 +73,7 @@ protected slots:
 	void setIncrements(int idx);
 
 protected:
+	virtual void onRetranslate() override;
         //! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_skylightDialogForm *ui;

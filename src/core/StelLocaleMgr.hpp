@@ -27,8 +27,9 @@
 //! @class StelLocaleMgr
 //! Manage i18n operations such as message translation and date/time localization.
 //! @author Fabien Chereau
-class StelLocaleMgr
+class StelLocaleMgr  : public QObject
 {
+    Q_OBJECT
 public:
 	StelLocaleMgr();
 	~StelLocaleMgr();
@@ -171,6 +172,9 @@ public:
 	//! Returns the Roman name (a number) of the \a month [1..12]
 	static QString romanMonthName(int month);
 	
+signals:
+    void appLanguageChanged();
+
 private:
 	//! fill the class-inherent lists with translated names for weekdays, month names etc. in the current language.
 	//! Call this at program start and then after each language change.

@@ -44,15 +44,12 @@ class ViewDialog : public StelDialog
 {
 Q_OBJECT
 public:
-	ViewDialog(QObject* parent);
+	ViewDialog(QWidget* parent = nullptr);
 	~ViewDialog() override;
 
-public slots:
-	//! Apply application style change
-	void styleChanged(const QString &style) override;
-	void retranslate() override;
-
 protected:
+	virtual void onRetranslate() override;
+    void onStyleChanged() override;
 	Ui_viewDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;

@@ -26,7 +26,7 @@
 
 #include "ScmConstellationImage.hpp"
 #include "SkyCultureMaker.hpp"
-#include "StelDialogSeparate.hpp"
+#include "StelDialog.hpp"
 #include "types/DrawTools.hpp"
 #include <array>
 #include <optional>
@@ -36,9 +36,10 @@
 
 class Ui_scmConstellationDialog;
 
-class ScmConstellationDialog : public StelDialogSeparate
+class ScmConstellationDialog : public StelDialog
 {
 protected:
+	virtual void onRetranslate() override;
 	void createDialogContent() override;
 	void handleDialogSizeChanged(QSizeF size) override;
 
@@ -49,7 +50,6 @@ public:
 	void setIsDarkConstellation(bool isDarkConstellation);
 
 public slots:
-	void retranslate() override;
 	void close() override;
 
 	/**

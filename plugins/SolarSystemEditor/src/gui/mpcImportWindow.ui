@@ -3,6 +3,9 @@
  <author>Bogdan Marinov</author>
  <class>mpcImportWindow</class>
  <widget class="QWidget" name="mpcImportWindow">
+  <property name="windowTitle">
+   <string extracomment="The title of the window will be set during runtime">Import data</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -27,13 +30,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title">
-      <string extracomment="The title of the window will be set during runtime">Import data</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
@@ -599,12 +595,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>

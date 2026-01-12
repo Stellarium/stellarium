@@ -39,11 +39,11 @@ public:
 	~NovaeDialog() override;
 
 protected:
+	virtual void onRetranslate() override;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
 
 public slots:
-	void retranslate() override;
 	void refreshUpdateValues(void);
 
 private slots:

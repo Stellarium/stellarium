@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>locationDialogForm</class>
  <widget class="QWidget" name="locationDialogForm">
+  <property name="windowTitle">
+   <string>Location</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,13 +32,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title" stdset="0">
-      <string>Location</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QFrame" name="locationContent">
      <property name="sizePolicy">
@@ -582,12 +578,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>

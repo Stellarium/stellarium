@@ -29,8 +29,8 @@
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
 
-OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
-	StelDialogSeparate("OnlineQueries", parent),
+OnlineQueriesDialog::OnlineQueriesDialog(QWidget* parent) :
+	StelDialog("OnlineQueries", parent),
 	plugin(nullptr),
 	view(nullptr)
 {
@@ -44,13 +44,10 @@ OnlineQueriesDialog::~OnlineQueriesDialog()
 	if (view) delete view;
 }
 
-void OnlineQueriesDialog::retranslate()
+void OnlineQueriesDialog::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		setAboutHtml();
-	}
+	ui->retranslateUi(this);
+    setAboutHtml();
 }
 
 void OnlineQueriesDialog::createDialogContent()
@@ -59,7 +56,7 @@ void OnlineQueriesDialog::createDialogContent()
 	Q_ASSERT(plugin);
 
 	//load UI from form file
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 	// Given possible unavailability of QtWebEngine on some platforms,
 	// we must add this dynamically here. In addition, there are platforms where QtWebEngine appears to be available,
 	// but fails to initialize properly at runtime. We therefore can only add this as QWidget.
@@ -79,9 +76,6 @@ void OnlineQueriesDialog::createDialogContent()
 
 	//hook up retranslate event
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	//connect UI events
-	connect(ui->titleBar, &TitleBar::closeClicked, plugin, [=]{ plugin->setEnabled(false);});
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Kinetic scrolling and style sheet for output
 	kineticScrollingList << view;

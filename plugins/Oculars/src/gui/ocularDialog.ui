@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>ocularDialogForm</class>
  <widget class="QWidget" name="ocularDialogForm">
+  <property name="windowTitle">
+   <string>Oculars</string>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -32,13 +35,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="TitleBar" name="titleBar">
-     <property name="title" stdset="0">
-      <string>Oculars</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QFrame" name="Contents">
      <property name="sizePolicy">
@@ -2023,12 +2019,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>TitleBar</class>
-   <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>ColorButton</class>
    <extends>QToolButton</extends>

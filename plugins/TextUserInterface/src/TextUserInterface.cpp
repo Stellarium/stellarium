@@ -98,8 +98,7 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
  Constructor
 *************************************************************************/
 TextUserInterface::TextUserInterface()
-	: dummyDialog(this)
-	, tuiActive(false)
+	: tuiActive(false)
 	, tuiDateTime(false)
 	, tuiObjInfo(false)
 	, tuiGravityUi(false)
@@ -710,13 +709,14 @@ void TextUserInterface::handleKeys(QKeyEvent* event)
 		return;
 	}
 
-	if (event->type()==QEvent::KeyPress && (event->modifiers() & Qt::AltModifier) &&  event->key()==Qt::Key_T)
-	{
-		tuiActive = ! tuiActive;
-		dummyDialog.close();
-		event->setAccepted(true);
-		return;
-	}
+    if (event->type()==QEvent::KeyPress &&
+        (event->modifiers() & Qt::AltModifier) &&
+        event->key()==Qt::Key_T)
+    {
+        tuiActive = !tuiActive;
+        event->setAccepted(true);
+        return;
+    }
 
 	if (!tuiActive)
 	{

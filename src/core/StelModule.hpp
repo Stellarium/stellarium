@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QObject>
+#include <QKeyEvent>
 #include <functional>
 
 // Predeclaration

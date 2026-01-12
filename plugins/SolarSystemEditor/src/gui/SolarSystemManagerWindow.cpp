@@ -60,7 +60,7 @@ SolarSystemManagerWindow::~SolarSystemManagerWindow()
 
 void SolarSystemManagerWindow::createDialogContent()
 {
-	ui->setupUi(dialog);
+	ui->setupUi(this);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->listWidgetObjects;
@@ -74,8 +74,6 @@ void SolarSystemManagerWindow::createDialogContent()
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->pushButtonCopyFile, SIGNAL(clicked()), this, SLOT(copyConfiguration()));
 	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
 	connect(ui->pushButtonAddFile, SIGNAL(clicked()), this, SLOT(addConfiguration()));
@@ -112,15 +110,11 @@ void SolarSystemManagerWindow::updateTexts()
 	ui->labelMPC->setText(QString(mpcText).arg(linkCode));
 }
 
-void SolarSystemManagerWindow::retranslate()
+void SolarSystemManagerWindow::onRetranslate()
 {
-	if (dialog)
-	{
-		ui->retranslateUi(dialog);
-		populateSolarSystemList();
-		setAboutHtml();
-		updateTexts();
-	}
+    ui->retranslateUi(this);
+    populateSolarSystemList();
+    setAboutHtml();
 }
 
 void SolarSystemManagerWindow::newImportMPC()
@@ -157,7 +151,7 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 		manualImportWindow = nullptr;
 
 		//This window is in the background, bring it to the foreground
-		dialog->setVisible(true);
+		setVisible(true);
 	}
 }
 
