@@ -351,7 +351,7 @@ Puppis lies along the Milky Way and contains several prominent open clusters. In
 
 _Vela_ are the sails of the former constellation Argo. The other parts are Carina, the keel, and Puppis, the stern. The Argo took Jason and the Argonauts to Kolchis in search of the Golden Fleece.
 
-_Vela_ lies along the Milky Way and shows several intersting deep-sky objects. Most notably the Eight-Burst or Southern Ring Planetary Nebula, and the globular cluster NGC 3201.
+_Vela_ lies along the Milky Way and shows several interesting deep-sky objects. Most notably the Eight-Burst or Southern Ring Planetary Nebula, and the globular cluster NGC 3201.
 
 ##### Centaur
 
