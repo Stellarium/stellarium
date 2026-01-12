@@ -5,7 +5,6 @@ configuration: Release
 clone_folder: c:\stellarium
 # set clone depth
 clone_depth: 10
-shallow_clone: true
 # Do not build feature branch with open Pull Requests
 skip_branch_with_pr: true
 # Do not build on tags
