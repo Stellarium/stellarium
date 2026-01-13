@@ -6175,8 +6175,11 @@ void AstroCalcDialog::calculatePhenomena()
 
 	// adjust the column width
 	adjustPhenomenaColumns();
+	// hook: do not disable selection of the objects when list of phenomena is empty
+	if (ui->phenomenaTreeWidget->topLevelItemCount()==0)
+		followLatestSelectedObject = true;
 	// sort-by-date
-	ui->phenomenaTreeWidget->sortItems(PhenomenaDate, Qt::AscendingOrder);	
+	ui->phenomenaTreeWidget->sortItems(PhenomenaDate, Qt::AscendingOrder);
 	enablePhenomenaButtons(true);
 }
 
