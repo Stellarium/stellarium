@@ -273,7 +273,7 @@ public:
 	static constexpr InfoStringGroup AllInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
 									   Distance|Elongation|Size|Velocity|ProperMotion|Extra|HourAngle|AbsoluteMagnitude|
 									   GalacticCoord|SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|
-									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime|SolarLunarPosition);
+	                                                                   EclipticCoordOfDate|IAUConstellation|CulturalConstellation|SiderealTime|RTSTime|SolarLunarPosition);
 	//! A pre-defined "default" set of specifiers for the getInfoString flags argument to getInfoString
 	//! It appears useful to propose this set as post-install settings and let users configure more on demand.
 	static constexpr InfoStringGroup DefaultInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecOfDate|HourAngle|AltAzi|OtherCoord|
