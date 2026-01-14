@@ -19535,7 +19535,7 @@ msgid ""
 "frame and a Telrad sight."
 msgstr ""
 "Muestra el cielo como si se estuviera mirando a través del ocular de un "
-"telescopio (sólo se simulan el aumento y el campo de visión). También puede "
+"telescopio (solo se simulan el aumento y el campo de visión). También puede "
 "mostrar un cuadro sensor  y una mira Telrad."
 
 #: plugins/Oculars/src/Oculars.cpp:1007
@@ -20412,7 +20412,7 @@ msgstr "Ocultar cuadrículas y líneas cuando está activado"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1453
 msgid "Enable only if an object is selected"
-msgstr "Activar sólo si se selecciona un objeto"
+msgstr "Activar solo si se selecciona un objeto"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1455
 msgid "Show border circle"
@@ -21915,8 +21915,8 @@ msgstr "Notas para usuarios"
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
-"Los satélites y sus órbitas sólo aparecen cuando el observador está en la "
-"tierra."
+"Los satélites y sus órbitas solo aparecen cuando el observador está en la "
+"Tierra."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
 msgid ""
@@ -21924,9 +21924,9 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
-"Las posiciones previstas sólo son buenas durante un tiempo relativamente "
+"Las posiciones previstas solo son válidas durante un tiempo relativamente "
 "corto (del orden de días, semanas o quizás un mes en el pasado y el futuro)."
-" Esperar algo raro al mirar las fechas fuera de este rango."
+" Espere rarezas al mirar fechas fuera de este rango."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
 msgid ""
@@ -23230,7 +23230,7 @@ msgstr "telescopio"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:288
 msgid "Read-only telescope"
-msgstr "Telescopio de sólo lectura"
+msgstr "Telescopio de solo lectura"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:291
 msgid "Telescope position: "
@@ -23710,7 +23710,7 @@ msgid ""
 "USB) adapter may be necessary."
 msgstr ""
 "En las tres plataformas, del ordenador no tiene puertos serie \"clásicos\" y"
-" el telescopio sólo se puede conectar a un puerto serie, un adaptador de "
+" el telescopio solo se puede conectar a un puerto serie, un adaptador de "
 "serie a USB  (RS232 a USB) puede ser necesario."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
@@ -24006,7 +24006,7 @@ msgid ""
 "only if you are attempting a remote connection over a network."
 msgstr ""
 "Las conexiones INDIRECTAS, modificando el valor de nombre de host "
-"predeterminado sólo tiene sentido si se intenta una conexión remota a través"
+"predeterminado solo tiene sentido si se intenta una conexión remota a través"
 " de una red."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:433
@@ -24994,7 +24994,7 @@ msgstr "Consultar el MPC %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:153
 msgid "Only one result will be returned if the query is successful."
-msgstr "Sólo un resultado será devuelto si la consulta es exitosa."
+msgstr "Solo un resultado será devuelto si la consulta es exitosa."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:154
 msgid ""
@@ -25013,7 +25013,7 @@ msgid ""
 " will return the asteroid %6."
 msgstr ""
 "Los <i>nombres</i> necesitan el prefijo %1 o %2. Si más de un cometa "
-"concuerda un nombre, sólo el primer resultado será devuelto. Por ejemplo, "
+"concuerda un nombre, solo el primer resultado será devuelto. Por ejemplo, "
 "buscar \"%3\" devolverá %4, el Cometa Halley, pero una busqueda de \"%5\" "
 "devolverá el asteroide %6."
 
@@ -26219,7 +26219,7 @@ msgstr "con emisión pulsada de frecuencias de radio a infrarojo o superiores"
 
 #: plugins/Pulsars/src/Pulsar.cpp:401
 msgid "with pulsed emission only at infrared or higher frequencies"
-msgstr "con emision pulsada sólo a frecuencias infrarojo o superior"
+msgstr "con emision pulsada solo en frecuencias infrarojas o superiores"
 
 #: plugins/Pulsars/src/Pulsar.cpp:406
 msgid "with pulsed emission in the radio band"
