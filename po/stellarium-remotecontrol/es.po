@@ -29,11 +29,11 @@ msgstr "No se puede recuperar la lista de acciones"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr "Acción '%1' no aceptada por el servidor: "
+msgstr "Acción «%1» no aceptada por el servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr "Error enviando la acción '%1' al servidor: "
+msgstr "Error al enviar acción «%1» al servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
@@ -56,11 +56,11 @@ msgstr "No se puede recuperar la lista de propiedades"
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr "Propiedad '%1' no aceptada por el servidor: "
+msgstr "Propiedad «%1» no aceptada por el servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr "Error enviando la propiedad '%1' al servidor: "
+msgstr "Error al enviar la propiedad «%1» al servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
@@ -636,8 +636,8 @@ msgstr "No hay respuesta del servidor"
 #: index.html:881 tablet7in.html:964
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
-"No hay respuesta desde el servidor durante %1 segundos. ¿Stellarium aún está"
-" en ejecución?"
+"No hay respuesta desde el servidor desde hace %1 segundos. ¿Stellarium aún "
+"está en ejecución?"
 
 #: tablet7in.html:34
 msgid "Time Jump"
