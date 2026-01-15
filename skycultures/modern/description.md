@@ -493,7 +493,7 @@ Next to the Microscope, French astronomer Abbé Nicolas-Louis de la Caille place
 
 ##### Table Mountain
 
-French astronomer Abbé Nicolas-Louis de la Caille observed the southern sky in the mid-18th century from the Cape of Good Hope. He commemorated the Table Mountain in his constellation of _Mensa_, which includes the Large Magellanic Clound resembling the cloud "table cloth" frequently forming around the top of the mountain.
+French astronomer Abbé Nicolas-Louis de la Caille observed the southern sky in the mid-18th century from the Cape of Good Hope. He commemorated the Table Mountain in his constellation of _Mensa_, which includes the Large Magellanic Cloud resembling the cloud "table cloth" frequently forming around the top of the mountain.
 
 ##### Octant
 
