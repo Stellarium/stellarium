@@ -41,6 +41,7 @@
 #include <QGuiApplication>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsAnchorLayout>
+#include <QGraphicsProxyWidget>
 #include <QGraphicsWidget>
 #include <QGraphicsEffect>
 #include <QFileInfo>
@@ -348,6 +349,56 @@ protected:
 		}
 		//pass event on to items otherwise
 		QGraphicsScene::keyPressEvent(event);
+	}
+	void helpEvent(QGraphicsSceneHelpEvent* event) override
+	{
+		const QPoint pos(parent->mapFromGlobal(event->screenPos()));
+		QList<QGraphicsItem*> itemsToCheck;
+		if (parent->isTransformed())
+		{
+			const auto xform = parent->viewportTransform();
+			itemsToCheck = items(xform.inverted().map(pos), Qt::IntersectsItemShape,
+			                     Qt::DescendingOrder, xform);
+		}
+		else
+		{
+			itemsToCheck = items(pos, Qt::IntersectsItemShape, Qt::DescendingOrder);
+		}
+		QString text;
+		QPoint point;
+		for (auto*const item : itemsToCheck)
+		{
+			if (const auto proxy = dynamic_cast<QGraphicsProxyWidget*>(item))
+			{
+				const auto itemWidget = proxy->widget();
+				if (!itemWidget) continue;
+				const auto child = itemWidget->childAt(itemWidget->mapFromParent(pos));
+				if (child && !child->toolTip().isEmpty())
+				{
+					text = child->toolTip();
+					point = pos;
+					break;
+				}
+			}
+			if (!item->toolTip().isEmpty())
+			{
+				text = item->toolTip();
+				point = pos;
+				break;
+			}
+		}
+
+		const auto &stel=StelMainView::getInstance();
+		const auto exclusive=!stel.topMost->isVisible();
+		if (exclusive)
+		{
+			parent->showToolTip(point, text);
+			event->setAccepted(!text.isEmpty());
+		}
+		else
+		{
+			QGraphicsScene::helpEvent(event);
+		}
 	}
 
 private:
@@ -707,6 +758,7 @@ StelMainView::StelMainView(QSettings* settings)
 	//setMouseTracking(true);
 
     setRenderHint(QPainter::Antialiasing);
+	topMost=new TopMost();
 }
 
 void StelMainView::resizeEvent(QResizeEvent* event)
@@ -967,7 +1019,8 @@ void StelMainView::init()
 	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
 	actionMgr->addAction("actionReload_Shaders", N_("Miscellaneous"), N_("Reload shaders (for development)"), this, "reloadShaders()", "Ctrl+R, P");
 	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
-	
+	actionMgr->addAction("actionSet_Full_Screen_Exclusive", N_("Display Options"), N_("Full-screen exclusive"), this, "fullScreenExclusive()", "Shift+F11");
+
 	StelPainter::initGLShaders();
 
 	guiItem = new StelGuiItem(size(), rootItem);
@@ -1084,6 +1137,22 @@ void StelMainView::reloadShaders()
 	//make sure GL context is bound
 	glContextMakeCurrent();
 	emit reloadShadersRequested();
+}
+
+void StelMainView::fullScreenExclusive()
+{
+	if (!isFullScreen())
+		return;
+
+	const auto exclusive=topMost->isVisible();
+	if (exclusive)
+		topMost->hide();
+	else
+		topMost->show();
+
+	const auto verbose=qApp->property("verbose").toBool();
+	if (verbose)
+		qDebug() << "running" << (exclusive?"exclusive":"managed") << "fullscreen";
 }
 
 // This is a series of various diagnostics based on "bugs" reported for 0.13.0 and 0.13.1.
@@ -1480,8 +1549,11 @@ void StelMainView::initTitleI18n()
 
 void StelMainView::setFullScreen(bool b)
 {
+	topMost->hide();
 	if (b)
+	{
 		showFullScreen();
+	}
 	else
 	{
 		showNormal();
@@ -1988,6 +2060,11 @@ void StelMainView::setSkyBackgroundColor(Vec3f color)
 Vec3f StelMainView::getSkyBackgroundColor() const
 {
 	return rootItem->getSkyBackgroundColor();
+}
+
+void StelMainView::showToolTip(const QPoint& scenePos, const QString& text)
+{
+	gui->showToolTip(scenePos, text);
 }
 
 QRectF StelMainView::setWindowSize(int width, int height)
