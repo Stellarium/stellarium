@@ -872,8 +872,8 @@ namespace StelUtils
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of the "historical" part of the algorithm by JPL Horizons for DeltaT computation.
-	//! @param jDay the date and time expressed as a Julian day
-	//! @return Delta-T in seconds or 0 if year not in -2999..1620 (!)
+	//! @param jDay the date and time expressed as a Julian day (mixed calendar)
+	//! (SS) 2025-11-27 @return Delta-T in seconds or 0 if year not in -9998..9999
 	double getDeltaTByJPLHorizons(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
@@ -985,10 +985,13 @@ namespace StelUtils
 	//! For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
 	//! @param jDay the JD
 	//! @param ndot value of n-dot (secular acceleration of the Moon) which should be used in the lunar ephemeris instead of the default values.
-	//! @param useDE4xx true if function should adapt calculation of the secular acceleration of the Moon to the DE43x/DE44x ephemerides
+	//! @param useDE43x or DE44x true if function should adapt calculation of the secular acceleration of the Moon to the DE43x or DE44x ephemerides
 	//! @return SecularAcceleration in seconds
-	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy and for DE43x/DE44x is -25.8 "/cy/cy
-	double getMoonSecularAcceleration(const double jDay, const double ndot, const bool useDE4xx);
+	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy
+	//! (SS) 2025-11-27: There are two slightly different values of n.dot for DE43x/DE44x :
+	//! DE43x is -25.82  "/cy/cy
+	//! DE44x is -25.936 "/cy/cy
+	double getMoonSecularAcceleration(const double jDay, const double ndot, const bool useDE43x, const bool useDE44x); 
 
 	//! Get the standard error (sigma) for the value of DeltaT
 	//! @param jDay the JD
