@@ -32,11 +32,13 @@ QFrame[frameShape="5"] { /* QFrame::VLine == 0x0005 */
         border: 1px solid rgb(31, 31, 31);
 }
 
+#StelToolTip,
 QToolTip {
 	color: rgb(4, 5, 9);
 	font-size: 100%;
 	padding: 2px;
 	background: rgb(143, 143, 143);
+	border: 1px solid rgb(0, 0, 0);
 }
 
 *[nightMode="true"] QToolTip {
