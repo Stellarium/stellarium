@@ -70,7 +70,7 @@ struct Description
 		if (about.trimmed().isEmpty())              list.append(q_("About the sky culture"));
 		if (license == scm::LicenseType::NONE)      list.append(qc_("License", "Name of a section in sky culture description"));
 		if (classification == scm::ClassificationType::NONE) list.append(q_("Classification"));
-		if (region.empty())               list.append(q_("Region of the Sky Culture"));
+		if (region.empty())							list.append(q_("Region of the Sky Culture"));
 		return list;
 	}
 };

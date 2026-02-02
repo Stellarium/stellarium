@@ -27,7 +27,6 @@
 
 #include <QJsonObject>
 #include <QJsonDocument>
-#include <QtMath>
 #include <cmath> // for M_PI
 
 ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
@@ -257,7 +256,6 @@ void ScmGeoLocGraphicsView::selectPolygon(int id)
 
 void ScmGeoLocGraphicsView::updateCultureVisibility()
 {
-	// iterate over all polygons --> if currentTime is between startTime and endTime show, else hide
 	const auto itemList = scene()->items();
 	for(const auto &item : itemList) {
 		ScmPreviewPolygonItem *previewPItem = qgraphicsitem_cast<ScmPreviewPolygonItem *>(item);

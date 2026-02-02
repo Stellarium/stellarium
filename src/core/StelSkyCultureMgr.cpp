@@ -632,7 +632,7 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void) const
 	return cultures;
 }
 
-//! returns newline delimited map of human readable culture names (translated to current locale) and corresponding regions
+//! returns map of human readable culture names (translated to current locale) and corresponding regions
 QMultiMap<QString, QString> StelSkyCultureMgr::getSkyCultureRegionMapI18(void) const
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
@@ -642,7 +642,6 @@ QMultiMap<QString, QString> StelSkyCultureMgr::getSkyCultureRegionMapI18(void) c
 	while (i.hasNext())
 	{
 		i.next();
-		//translatedCultureMap.insert(trans.qtranslate(i.value().englishName, "sky culture"), i.value().region);
 		for (const auto &currentRegion : i.value().region)
 		{
 			translatedCultureMap.insert(trans.qtranslate(i.value().englishName, "sky culture"), currentRegion.toString());
