@@ -125,7 +125,6 @@ private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
 	void initSkyCultureTime();
-	int modifiedDamerauLevenshteinDistance(const QString &source, const QString &target);
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
@@ -147,6 +146,14 @@ private:
 	QHash<QString/*planet English name*/, PlanetSurveyPack> planetarySurveys;
 	QHash<QString/*survey URL*/, QTreeWidgetItem*> surveysInTheList;
 	QString selectedSurveyType;
+
+	// list of special characters and their 'normal' counterpart for filtering (skycultures / the culturesListWidget)ĀA
+	// (when a new special character is added to 'specialCharString', 'normalCharList' must also be expanded)
+	QString specialCharString = "ŠŒŽšœžŸ¥µÀÁÂÃĀÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãāäåæçèéêëìíîïðñòóôõöøùúûüýÿ";
+	QStringList normalCharList = QStringList({"S", "OE", "Z", "s", "oe", "z", "Y", "Y", "u", "A", "A", "A", "A", "A", "A", "A",
+										"AE", "C", "E", "E", "E", "E", "I", "I", "I", "I", "D", "N", "O", "O", "O", "O", "O", "O",
+										"U", "U", "U", "U", "Y", "s", "a", "a", "a", "a", "a", "a", "a", "ae", "c", "e", "e", "e", "e",
+										"i", "i", "i", "i","o", "n", "o", "o", "o", "o", "o", "o", "u", "u", "u", "u", "y", "y"});
 };
 
 #endif // _VIEWDIALOG_HPP
