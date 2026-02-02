@@ -20,14 +20,17 @@
 #include "SkyCultureMapGraphicsView.hpp"
 #include "SkyCulturePolygonItem.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelFileMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include <qjsonarray.h>
-#include <QGraphicsSvgItem>
 #include <qscrollbar.h>
 
+#include <QGraphicsSvgItem>
 #include <QJsonObject>
 #include <QJsonDocument>
-#include <QtMath>
+#include <QWheelEvent>
+#include <QMouseEvent>
+#include <QFile>
 
 SkyCultureMapGraphicsView::SkyCultureMapGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
@@ -45,7 +48,7 @@ SkyCultureMapGraphicsView::SkyCultureMapGraphicsView(QWidget *parent)
 	setInteractive(true);
 
 	setRenderHint(QPainter::Antialiasing); // maybe unnecessary for this project
-	setTransformationAnchor(AnchorUnderMouse);
+	setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
 	setCursor(Qt::ArrowCursor);
 	setMouseTracking(true);
@@ -76,7 +79,7 @@ void SkyCultureMapGraphicsView::drawMapContent()
 	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/skyCultureWorldMap.svgz");
 
 	scene()->addItem(baseMap);
-	scene()->setSceneRect(- baseMap->boundingRect().width() * 0.75, - baseMap->boundingRect().height() * 0.5, baseMap->boundingRect().width() * 2.5, baseMap->boundingRect().height() * 2);
+	scene()->setSceneRect(- baseMap->boundingRect().width() * 0.5, - baseMap->boundingRect().height() * 0.25, baseMap->boundingRect().width() * 2.0, baseMap->boundingRect().height() * 1.5);
 	this->defaultRect = baseMap->boundingRect();
 
 	loadCulturePolygons();
@@ -164,16 +167,39 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 void SkyCultureMapGraphicsView::wheelEvent(QWheelEvent *e)
 {
 	qreal zoomFactor = pow(2.0, e->angleDelta().y() / 240.0);
-	qreal ctrZoomFactor = 0.0;
 	if (e->modifiers() & Qt::ControlModifier)
 	{
 		//holding ctrl while wheel zooming results in a finer zoom
-		ctrZoomFactor = 1.0 + ( zoomFactor - 1.0 ) / 15.0;
-		scaleView(ctrZoomFactor);
-		return;
+		zoomFactor = 1.0 + ( zoomFactor - 1.0 ) / 15.0;
 	}
-
 	scaleView(zoomFactor);
+
+	// ensure that the view is in bounds after scale operation
+	QRectF currentViewRect = mapToScene(viewport()->rect()).boundingRect();
+	if (!defaultRect.contains(currentViewRect.center()))
+	{
+		qreal x = currentViewRect.center().x();
+		qreal y = currentViewRect.center().y();
+
+		if (currentViewRect.center().x() < defaultRect.x())
+		{
+			x = defaultRect.x();
+		}
+		else if (currentViewRect.center().x() > defaultRect.x() + defaultRect.width())
+		{
+			x = defaultRect.x() + defaultRect.width();
+		}
+		if (currentViewRect.center().y() < defaultRect.y())
+		{
+			y = defaultRect.y();
+		}
+		else if (currentViewRect.center().y() > defaultRect.y() + defaultRect.height())
+		{
+			y = defaultRect.y() + defaultRect.height();
+		}
+
+		centerOn(x, y);
+	}
 }
 
 void SkyCultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
@@ -187,8 +213,64 @@ void SkyCultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
 		QScrollBar *hBar = horizontalScrollBar();
 		QScrollBar *vBar = verticalScrollBar();
 		QPoint delta = e->pos() - mouseLastXY;
-		hBar->setValue(hBar->value() + (isRightToLeft() ? delta.x() : -delta.x()));
-		vBar->setValue(vBar->value() - delta.y());
+		int oldHBarValue= hBar->value();
+		int oldVBarValue= vBar->value();
+		int newHBarValue = oldHBarValue + (isRightToLeft() ? delta.x() : -delta.x());
+		int newVBarValue = oldVBarValue - delta.y();
+		int borderValue = 0; // scrollbar value of the respective border of the map
+
+		// ensure the user is not able to pan too far away from the map
+		QPointF mappedUpperLeftBorder = transform().map(QPointF(defaultRect.x(), defaultRect.y()));
+		QPointF mappedlowerRightBorder = transform().map(QPointF(defaultRect.x() + defaultRect.width(), defaultRect.y() + defaultRect.height()));
+		if (newHBarValue < oldHBarValue)
+		{
+			borderValue = mappedUpperLeftBorder.x() - (viewport()->width() / 2.0);
+			if (newHBarValue < borderValue)
+			{
+				hBar->setValue(borderValue);
+			}
+			else
+			{
+				hBar->setValue(newHBarValue);
+			}
+		}
+		else if (newHBarValue > oldHBarValue)
+		{
+			borderValue = mappedlowerRightBorder.x() - (viewport()->width() / 2.0);
+			if (newHBarValue > borderValue)
+			{
+				hBar->setValue(borderValue);
+			}
+			else
+			{
+				hBar->setValue(newHBarValue);
+			}
+		}
+		if (newVBarValue < oldVBarValue)
+		{
+			borderValue = mappedUpperLeftBorder.y() - (viewport()->height() / 2.0);
+			if (newVBarValue < borderValue)
+			{
+				vBar->setValue(borderValue);
+			}
+			else
+			{
+				vBar->setValue(newVBarValue);
+			}
+		}
+		else if (newVBarValue > oldVBarValue)
+		{
+			borderValue = mappedlowerRightBorder.y() - (viewport()->height() / 2.0);
+			if (newVBarValue > borderValue)
+			{
+				vBar->setValue(borderValue);
+			}
+			else
+			{
+				vBar->setValue(newVBarValue);
+			}
+		}
+
 		mapMoved = true;
 	}
 	mouseLastXY = e->pos();
@@ -264,7 +346,7 @@ void SkyCultureMapGraphicsView::scaleView(double factor)
 	// calculate requested zoom before executing the zoom operation to limit the min / max zoom level
 	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
 
-	if (scaling < 0.1 || scaling > 500.0) // scaling < min or scaling > max zoom level
+	if (scaling < 0.23 || scaling > 500.0) // scaling < min or scaling > max zoom level
 		return;
 
 	scale(factor, factor);
