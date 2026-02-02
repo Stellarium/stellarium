@@ -885,7 +885,7 @@
                <item row="0" column ="0">
                 <widget class="QLabel" name="skyCultureCurrentTimeLabel">
                  <property name="text">
-                  <string>current Time</string>
+                  <string>Current time</string>
                  </property>
                 </widget>
                </item>
@@ -924,76 +924,9 @@
                  </property>
                  <property name="styleSheet">
                   <string notr="true">
-
                   QSpinBox
                   {
-                  font-weight: bold;
-                          padding-right: 0;
-
-                          border: 1px solid rgb(0, 0, 0);
-                          color: rgb(31, 31, 31);
-                          min-height: 25px;
-                          width: 100px;
-                  }
-
-                  QSpinBox::up-button
-                  {
-                          subcontrol-origin: border;
-                          subcontrol-position: center right;
-                          border: 1px solid rgba(0, 0, 0, 100%);
-                          width: 25px;
-                          height: 25px;
-                          image: url(:/graphicGui/uieSpinboxAdd.png);
-                          background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(100, 100, 100), stop: 1 rgb(50, 50, 50));
-
-                  }
-
-                  QSpinBox::down-button
-                  {
-                          subcontrol-origin: border;
-                          subcontrol-position: center left;
-                          border: 1px solid rgba(0, 0, 0, 100%);
-                          width: 25px;
-                          height: 25px;
-                          image: url(:/graphicGui/uieSpinboxRemove.png);
-                          background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(100, 100, 100), stop: 1 rgb(50, 50, 50));
-                  }
-
-                  QSpinBox::up-button:hover
-                  {
-                          subcontrol-origin: border;
-                          subcontrol-position: center right;
-                          width: 25px;
-                          height: 25px;
-                          border: 1px solid rgba(0, 0, 0, 100%);
-
-                          image: url(:/graphicGui/uieSpinboxAdd.png);
-                          background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 87), stop: 1 rgb(50, 50, 50));
-
-                  }
-
-                  QSpinBox::down-button:hover
-                  {
-                          subcontrol-origin: border;
-                          subcontrol-position: center left;
-                          width: 25px;
-                          height: 25px;
-                          border: 1px solid rgba(0, 0, 0, 100%);
-
-                          image: url(:/graphicGui/uieSpinboxRemove.png);
-                          background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 87), stop: 1 rgb(50, 50, 50));
-
-                  }
-
-
-                  QSpinBox::up-button:pressed
-                  {
-                          image: url(:/graphicGui/uieSpinboxAdd-pressed.png);
-                  }
-
-                  QSpinBox::down-button:pressed
-                  {
-                          image: url(:/graphicGui/uieSpinboxRemove-pressed.png);
+                      width: 65px;
                   }
                   </string>
                  </property>
