@@ -179,6 +179,8 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 
 	// Export the locations (polygons) of the sky culture to the territory.json file
 	qDebug() << "SkyCultureMaker: Exporting sky culture...";
+	// clean up potential overlaps / user errors before exporting
+	currentSkyCulture->mergeLocations();
 	QJsonObject scTerritoryJsonObject = currentSkyCulture->getTerritoryJson();
 	QJsonDocument scTerritoryJsonDoc(scTerritoryJsonObject);
 	if (scTerritoryJsonDoc.isNull() || scTerritoryJsonDoc.isEmpty())

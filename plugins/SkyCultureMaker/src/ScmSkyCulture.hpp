@@ -123,6 +123,11 @@ public:
 	 */
 	bool saveIllustrations(const QString &directory);
 
+	/**
+	* @brief Checks whether the polygons of locations overlap and merges them if necessary
+	*/
+	void mergeLocations();
+
 private:
 	/// Sky culture identifier
 	QString id;
