@@ -599,11 +599,11 @@ void ViewDialog::createDialogContent()
 	initSkyCultureTime();
 
 	connect(ui->skyCultureTimeSlider, &QSlider::valueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
-	connect(ui->skyCultureCurrentTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
+	connect(ui->skyCultureCurrentTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &ViewDialog::updateSkyCultureTimeValue);
 	connect(ui->skyCultureMapGraphicsView, &SkyCultureMapGraphicsView::timeValueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
 
-	connect(ui->skyCultureMinTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::changeMinTime);
-	connect(ui->skyCultureMaxTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::changeMaxTime);
+	connect(ui->skyCultureMinTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &ViewDialog::changeMinTime);
+	connect(ui->skyCultureMaxTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &ViewDialog::changeMaxTime);
 
 	connect(ui->applyTimeOnListCheckBox, &QCheckBox::toggled, this, &ViewDialog::filterSkyCultures);
 	connect(ui->useLocationForRotationCheckBox, &QCheckBox::toggled, this, &ViewDialog::initiateSkyCultureMapRotation);
@@ -1455,24 +1455,22 @@ void ViewDialog::populateLists()
 		l->addItem(new SeparatorListWidgetItem(region));
 	}
 
-	QMultiMapIterator<QString, QString> cultureRegionIterator(cultureRegionMap);
-	// find the earliest startTime of all cultures (needed in initSkyCultureTime) ---> evaluate it here so we don't need to iterate over all cultures multiple times
+	// find the earliest startTime of all cultures (needed in initSkyCultureTime)
+	// ---> evaluate it here so we don't need to iterate over all cultures multiple times
 	int globalStartTime = QDateTime::currentDateTime().date().year();
 
-	cultureRegionIterator.toBack(); // reverse iteration to preserve alphabetical order
-	while (cultureRegionIterator.hasPrevious())
+	for (auto cultureRegionIt = std::prev(cultureRegionMap.cend()), end = std::prev(cultureRegionMap.cbegin()); cultureRegionIt != end; cultureRegionIt--)
 	{
-		cultureRegionIterator.previous();
-		QListWidgetItem* item = new QListWidgetItem(cultureRegionIterator.key());
-		item->setData(Qt::UserRole, cultureTimeLimitMap.value(cultureRegionIterator.key()).first); // startTime
-		item->setData(Qt::UserRole + 1, cultureTimeLimitMap.value(cultureRegionIterator.key()).second); // endTime
+		QListWidgetItem* item = new QListWidgetItem(cultureRegionIt.key());
+		item->setData(Qt::UserRole, cultureTimeLimitMap.value(cultureRegionIt.key()).first); // startTime
+		item->setData(Qt::UserRole + 1, cultureTimeLimitMap.value(cultureRegionIt.key()).second); // endTime
 
-		if (cultureTimeLimitMap.value(cultureRegionIterator.key()).first < globalStartTime)
+		if (cultureTimeLimitMap.value(cultureRegionIt.key()).first < globalStartTime)
 		{
-			globalStartTime = cultureTimeLimitMap.value(cultureRegionIterator.key()).first;
+			globalStartTime = cultureTimeLimitMap.value(cultureRegionIt.key()).first;
 		}
 
-		l->insertItem(l->row(l->findItems(cultureRegionIterator.value(), Qt::MatchContains).at(0)) + 1, item);
+		l->insertItem(l->row(l->findItems(cultureRegionIt.value(), Qt::MatchContains).at(0)) + 1, item);
 	}
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalStartTime);
 
