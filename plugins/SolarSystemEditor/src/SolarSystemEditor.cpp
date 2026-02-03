@@ -136,9 +136,9 @@ void SolarSystemEditor::init()
 
 	// { Asteroid Number, "Periodic Comet Number"}
 	cometLikeAsteroids = {
-		{   2060,  "95P" }, {   4015, "107P" }, {   7968, "133P" }, {  60558, "174P" },
-		{ 118401, "176P" }, { 248370, "433P" }, { 300163, "288P" }, { 323137, "282P" },
-		{ 457175, "362P" }
+	        {   2060,  "95P" }, {   4015, "107P" }, {   7968, "133P" }, {  60558, "174P" },
+	        { 118401, "176P" }, { 248370, "433P" }, { 300163, "288P" }, { 323137, "282P" },
+	        { 457175, "362P" }
 	};
 
 	initMinorPlanetData();
@@ -480,6 +480,7 @@ void SolarSystemEditor::initCometCrossref()
 	{
 		// regular expression to find the comments and empty lines
 		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+		unsigned int numLines = 0;
 
 		while(!cdata.atEnd())
 		{
@@ -492,6 +493,7 @@ void SolarSystemEditor::initCometCrossref()
 			// Find data
 			if (!line.isEmpty())
 			{
+				numLines++;
 				CometDiscoveryData comet;
 				QStringList columns = line.split("|");
 				// New IAU Designation ("1994 V1", "1995 Q3", etc.)
@@ -535,6 +537,7 @@ void SolarSystemEditor::initCometCrossref()
 			}
 		}
 		cdata.close();
+		qInfo().noquote() << "Loaded" << numLines << "discovery circumstances records for comets...";
 	}
 }
 
@@ -556,6 +559,7 @@ void SolarSystemEditor::initMinorPlanetData()
 		//create and open a QBuffer for reading
 		QBuffer buf(&data);
 		buf.open(QIODevice::ReadOnly);
+		unsigned int numLines = 0;
 
 		// regular expression to find the comments and empty lines
 		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
@@ -568,6 +572,7 @@ void SolarSystemEditor::initMinorPlanetData()
 			if (commentRx.match(line).hasMatch() || line.startsWith("//"))
 				continue;
 
+			numLines++;
 			QStringList list=line.split("\t");
 			int number = list.at(0).trimmed().toInt();
 			// The first entry is the date of discovery, the second is the name of discoverer
@@ -576,6 +581,7 @@ void SolarSystemEditor::initMinorPlanetData()
 			numberedMinorPlanets.insert(number, discovery);
 		}
 		buf.close();
+		qInfo().noquote() << "Loaded" << numLines << "discovery circumstances records for minor planets...";
 	}
 }
 
