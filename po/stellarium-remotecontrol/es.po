@@ -6,7 +6,7 @@
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2025
 # Víctor Vega <transifex.757ab@simplelogin.com>, 2025
-# Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2025
+# Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2026
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2025-12-01 14:32+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2025\n"
+"Last-Translator: Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2026\n"
 "Language-Team: Spanish (https://app.transifex.com/stellarium/teams/80998/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,17 +29,17 @@ msgstr "No se puede recuperar la lista de acciones"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr "Acción '%1' no aceptada por el servidor: "
+msgstr "Acción «%1» no aceptada por el servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr "Error enviando la acción '%1' al servidor: "
+msgstr "Error al enviar acción «%1» al servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
 #: plugins/RemoteControl/webroot/js/api/search.js:188
 msgid "Error performing search"
-msgstr "Error efectuando búsqueda"
+msgstr "Error al efectuar búsqueda"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
@@ -56,11 +56,11 @@ msgstr "No se puede recuperar la lista de propiedades"
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr "Propiedad '%1' no aceptada por el servidor: "
+msgstr "Propiedad «%1» no aceptada por el servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr "Error enviando la propiedad '%1' al servidor: "
+msgstr "Error al enviar la propiedad «%1» al servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
@@ -300,7 +300,7 @@ msgstr "Centrar y acercar al objeto"
 
 #: index.html:249 tablet7in.html:269
 msgid "Just mark the object"
-msgstr "Marcar sólo el objeto"
+msgstr "Solo marcar el objeto"
 
 #: index.html:251 tablet7in.html:271
 msgid "Quick select"
@@ -408,7 +408,7 @@ msgstr "Coeficiente de extinción:"
 
 #: index.html:383 tablet7in.html:461
 msgid "Only extinction/refraction, no blue skylight"
-msgstr "Sólo extinción/refracción, sin tragaluz azul"
+msgstr "Solo extinción/refracción, sin luz celeste"
 
 #: index.html:383 tablet7in.html:462
 msgid "Suppress scattering"
@@ -428,7 +428,7 @@ msgid ""
 " Displayed on Earth only."
 msgstr ""
 "Círculos instantáneos del eje de la Tierra en su movimiento alrededor de los"
-" polos eclítpicos. Se muestra sólo en la Tierra."
+" polos eclípticos. Solo se muestra en la Tierra."
 
 #: index.html:452 tablet7in.html:537
 msgid "Center"
@@ -636,8 +636,8 @@ msgstr "No hay respuesta del servidor"
 #: index.html:881 tablet7in.html:964
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
-"No hay respuesta desde el servidor durante %1 segundos. ¿Stellarium aún está"
-" en ejecución?"
+"No hay respuesta desde el servidor desde hace %1 segundos. ¿Stellarium aún "
+"está en ejecución?"
 
 #: tablet7in.html:34
 msgid "Time Jump"
