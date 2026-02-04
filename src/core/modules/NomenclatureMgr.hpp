@@ -81,13 +81,15 @@ public:
 	QString getName() const override { return "Geological features"; }
 	QString getStelObjectType() const override { return NomenclatureItem::NOMENCLATURE_TYPE; }
 
-public slots:
-	///////////////////////////////////////////////////////////////////////////
-	// Other public methods
 	//! Get a pointer to a nomenclature item.
 	//! @param nomenclatureItemEnglishName the English name of the desired object.
 	//! @return The matching nomenclature item pointer if exists or Q_NULLPTR.
 	NomenclatureItemP searchByEnglishName(QString nomenclatureItemEnglishName) const;
+
+public slots:
+	///////////////////////////////////////////////////////////////////////////
+	// Other public methods
+
 	//! Set the color used to draw nomenclature items.
 	//! @param c The color of the nomenclature items (R,G,B)
 	//! @code
