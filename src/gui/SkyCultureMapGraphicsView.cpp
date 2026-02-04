@@ -542,8 +542,8 @@ void SkyCultureMapGraphicsView::smoothFitInView(QRectF targetRect)
 	QEasingCurve factor(QEasingCurve::OutQuad);
 
 	zoomToDefaultTimer.start();
-	qreal deviation = std::max((qFabs(startingRect.center().x() - defaultRect.center().x()) + qFabs(startingRect.center().y() - defaultRect.center().y())) / 2,
-						   std::min(qFabs(startingRect.width() - defaultRect.width()), qFabs(startingRect.height() - defaultRect.height())));
+	qreal deviation = std::max((std::fabs(startingRect.center().x() - defaultRect.center().x()) + std::fabs(startingRect.center().y() - defaultRect.center().y())) / 2,
+						   std::min(std::fabs(startingRect.width() - defaultRect.width()), std::fabs(startingRect.height() - defaultRect.height())));
 
 	// if value > threshold --> result > 1.0
 	// valueForProgress returns 1.0 for all values greater than 1.0 (which equals maxDuration)
