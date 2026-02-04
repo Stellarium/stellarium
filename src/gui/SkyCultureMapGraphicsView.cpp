@@ -43,7 +43,6 @@ SkyCultureMapGraphicsView::SkyCultureMapGraphicsView(QWidget *parent)
 	, oldSkyCulture("")
 {
 	QGraphicsScene *scene = new QGraphicsScene(this);
-	// scene->setItemIndexMethod(QGraphicsScene::NoIndex); // noIndex better when adding / removing many items
 	setScene(scene);
 	setInteractive(true);
 
@@ -65,6 +64,9 @@ SkyCultureMapGraphicsView::SkyCultureMapGraphicsView(QWidget *parent)
 	connect(&zoomToDefaultTimer, &QTimeLine::valueChanged, this, &SkyCultureMapGraphicsView::zoomToDefault);
 	connect(&zoomToDefaultTimer, &QTimeLine::finished, &zoomOnTargetTimer, &QTimeLine::start);
 	connect(&zoomOnTargetTimer, &QTimeLine::valueChanged, this, &SkyCultureMapGraphicsView::zoomOnTarget);
+	connect(&zoomOnTargetTimer, &QTimeLine::finished, this, [this] () {
+		setSceneRect(- defaultRect.width() * 0.375, - defaultRect.height() * 0.125, defaultRect.width() * 1.75, defaultRect.height() * 1.25);
+	});
 
 	// draw basemap and culture polygons
 	drawMapContent();
@@ -79,7 +81,7 @@ void SkyCultureMapGraphicsView::drawMapContent()
 	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/skyCultureWorldMap.svgz");
 
 	scene()->addItem(baseMap);
-	scene()->setSceneRect(- baseMap->boundingRect().width() * 0.5, - baseMap->boundingRect().height() * 0.25, baseMap->boundingRect().width() * 2.0, baseMap->boundingRect().height() * 1.5);
+	scene()->setSceneRect(- baseMap->boundingRect().width() * 0.375, - baseMap->boundingRect().height() * 0.125, baseMap->boundingRect().width() * 1.75, baseMap->boundingRect().height() * 1.25);
 	this->defaultRect = baseMap->boundingRect();
 
 	loadCulturePolygons();
@@ -166,7 +168,7 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 
 void SkyCultureMapGraphicsView::wheelEvent(QWheelEvent *e)
 {
-	qreal zoomFactor = pow(2.0, e->angleDelta().y() / 240.0);
+	qreal zoomFactor = std::pow(2.0, e->angleDelta().y() / 240.0);
 	if (e->modifiers() & Qt::ControlModifier)
 	{
 		//holding ctrl while wheel zooming results in a finer zoom
@@ -346,7 +348,7 @@ void SkyCultureMapGraphicsView::scaleView(double factor)
 	// calculate requested zoom before executing the zoom operation to limit the min / max zoom level
 	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
 
-	if (scaling < 0.23 || scaling > 500.0) // scaling < min or scaling > max zoom level
+	if (scaling < 0.16 || scaling > 500.0) // scaling < min or scaling > max zoom level
 		return;
 
 	scale(factor, factor);
@@ -359,7 +361,7 @@ QPolygonF SkyCultureMapGraphicsView::convertLatLonToMeter(const QPolygonF &latLo
 	for(auto point : latLonCoordinates)
 	{
 		qreal xMeter = (point.x() * 20037508.3427892439067363739014) / 180.0;
-		qreal yMeter = ((qLn(qTan(((90.0 + point.y())* M_PI) / 360.0)) / (M_PI / 180.0)) * 20037508.3427892439067363739014) / 180.0;
+		qreal yMeter = ((std::log(std::tan(((90.0 + point.y())* M_PI) / 360.0)) / (M_PI / 180.0)) * 20037508.3427892439067363739014) / 180.0;
 		meterCoordinates << QPointF(xMeter, yMeter);
 	}
 
@@ -372,12 +374,12 @@ QPolygonF SkyCultureMapGraphicsView::convertMeterToView(const QPolygonF &meterCo
 
 	// cropped map (EPSG: 3857) extent:
 	// x / lon: -20037507.0671618431806564 | 20037507.0671618431806564 ---> sum(abs) = 40075014.1343236863613128
-	// y / lat: -19202484.5635684318840504 | 18418386.3090785145759583 ---> sum(abs) = 37620870.87264694646000862
+	// y / lat: -18856469.2953464388847351 | 18418386.3090785145759583 ---> sum(abs) = 37274855.60442495346069336
 	for(auto point : meterCoordinates)
 	{
 		// used map is cropped ---> project points (in meter) from full extent to smaller / cropped extent
 		qreal xView = ((point.x() + 20037507.0671618431806564) / 40075014.1343236863613128) * defaultRect.width();
-		qreal yView = ((point.y() - 18418386.3090785145759583) / -37620870.87264694646000862) * defaultRect.height();
+		qreal yView = ((point.y() - 18418386.3090785145759583) / -37274855.60442495346069336) * defaultRect.height();
 		viewCoordinates << QPointF(xView, yView);
 	}
 
@@ -532,13 +534,16 @@ void SkyCultureMapGraphicsView::smoothFitInView(QRectF targetRect)
 	this->targetRect = targetRect;
 	this->startingRect = mapToScene(viewport()->rect()).boundingRect();
 
+	// make sure sceneRect is big enough to not interfere with zoom
+	setSceneRect(- defaultRect.width() * 1.0, - defaultRect.height() * 0.75, defaultRect.width() * 3.0, defaultRect.height() * 2.5);
+
 	qreal maxDuration = 2000;
 	qreal threshold = 1200;
 	QEasingCurve factor(QEasingCurve::OutQuad);
 
 	zoomToDefaultTimer.start();
-	qreal deviation = qMax((qFabs(startingRect.center().x() - defaultRect.center().x()) + qFabs(startingRect.center().y() - defaultRect.center().y())) / 2,
-						   qMin(qFabs(startingRect.width() - defaultRect.width()), qFabs(startingRect.height() - defaultRect.height())));
+	qreal deviation = std::max((qFabs(startingRect.center().x() - defaultRect.center().x()) + qFabs(startingRect.center().y() - defaultRect.center().y())) / 2,
+						   std::min(qFabs(startingRect.width() - defaultRect.width()), qFabs(startingRect.height() - defaultRect.height())));
 
 	// if value > threshold --> result > 1.0
 	// valueForProgress returns 1.0 for all values greater than 1.0 (which equals maxDuration)
@@ -595,7 +600,7 @@ qreal SkyCultureMapGraphicsView::calculateScaleRatio(qreal width, qreal height)
 	qreal yratio = viewRect.height() / sceneRect.height();
 
 	// keep original aspect ratio
-	return qMin(xratio, yratio);
+	return std::min(xratio, yratio);
 }
 
 QRectF SkyCultureMapGraphicsView::calculateBoundingBox(const QList<QGraphicsItem *> graphicsItemList)
@@ -614,9 +619,9 @@ QRectF SkyCultureMapGraphicsView::calculateBoundingBox(const QList<QGraphicsItem
 	// threshold that controls how small the smaller dim of the Bbox is allowed to be (value in view coordinates, not real world)
 	int minViewValue = 80;
 
-	if(qMax(width, height) * 1.25 < minViewValue)
+	if(std::max(width, height) * 1.25 < minViewValue)
 	{
-		if(qMax(width, height) == width)
+		if(std::max(width, height) == width)
 		{
 			// width is the smaller dim --> set width to minViewValue and scale height accordingly
 			width = minViewValue;

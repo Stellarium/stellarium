@@ -60,7 +60,7 @@ ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
 
 void ScmGeoLocGraphicsView::wheelEvent(QWheelEvent *event)
 {
-	qreal zoomFactor = qPow(2.0, event->angleDelta().y() / 240.0);
+	qreal zoomFactor = std::pow(2.0, event->angleDelta().y() / 240.0);
 	qreal ctrZoomFactor = 0.0;
 	if ( event->modifiers() & Qt::ControlModifier )
 	{
@@ -317,7 +317,7 @@ qreal ScmGeoLocGraphicsView::calculateScaleRatio(qreal width, qreal height)
 	qreal yratio = viewRect.height() / sceneRect.height();
 
 	// keep original aspect ratio
-	return qMin(xratio, yratio);
+	return std::min(xratio, yratio);
 }
 
 void ScmGeoLocGraphicsView::addCurrentPoly(int startTime, int endTime)
@@ -364,7 +364,7 @@ QPolygonF ScmGeoLocGraphicsView::convertViewToWGS84(const QPolygonF &viewCoordin
 	for (const auto &point : viewCoordinatePolygon)
 	{
 		qreal xInMeter = ((point.x() / defaultRect.width()) * 40075014.1343236863613128) - 20037507.0671618431806564;
-		qreal yInMeter = ((point.y() / defaultRect.height()) * -37620870.87264694646000862) + 18418386.3090785145759583;
+		qreal yInMeter = ((point.y() / defaultRect.height()) * -37274855.60442495346069336) + 18418386.3090785145759583;
 		result.append(QPointF(xInMeter, yInMeter));
 	}
 
@@ -372,7 +372,7 @@ QPolygonF ScmGeoLocGraphicsView::convertViewToWGS84(const QPolygonF &viewCoordin
 	for (auto &point : result)
 	{
 		qreal xInLon= (point.x() * 180.0) / 20037508.3427892439067363739014;
-		qreal yInLat = (qAtan(qExp(((point.y() * 180.0) / 20037508.3427892439067363739014) * (M_PI / 180.0))) * (360.0 / M_PI)) - 90.0;
+		qreal yInLat = (std::atan(std::exp(((point.y() * 180.0) / 20037508.3427892439067363739014) * (M_PI / 180.0))) * (360.0 / M_PI)) - 90.0;
 
 		point.setX(xInLon);
 		point.setY(yInLat);
