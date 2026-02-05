@@ -108,7 +108,7 @@ _Taʻulua Westward_ - Sirius seen at sunset.
 
 #### Aolele
 
-_Flying Cloud - Small Magellanic Cloud.
+_Flying Cloud_ - Small Magellanic Cloud.
 
 #### Aotea
 
