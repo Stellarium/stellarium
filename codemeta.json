@@ -1,0 +1,239 @@
+{
+    "@context": "https://w3id.org/codemeta/3.0",
+    "type": "SoftwareSourceCode",
+    "applicationCategory": "Astronomy, desktop planetarium",
+    "author": [
+        {
+            "id": "_:author_1",
+            "type": "Person",
+            "affiliation": {
+                "type": "Organization",
+                "name": "Stellarium Labs"
+            },
+            "familyName": "Chéreau",
+            "givenName": "Fabien "
+        },
+        {
+            "type": "Role",
+            "schema:author": "_:author_1",
+            "roleName": "Founder",
+            "startDate": "2000-08-01"
+        },
+        {
+            "id": "_:author_2",
+            "type": "Person",
+            "email": "alex.v.wolf@gmail.com",
+            "familyName": "Wolf",
+            "givenName": "Alexander "
+        },
+        {
+            "type": "Role",
+            "schema:author": "_:author_2",
+            "roleName": "Maintainer",
+            "startDate": "2012-01-01"
+        },
+        {
+            "id": "https://orcid.org/0000-0002-8152-0408",
+            "type": "Person",
+            "affiliation": {
+                "type": "Organization",
+                "name": "VRVis Vienna Research Center for Visual Computing"
+            },
+            "email": "Georg.Zotti@univie.ac.at",
+            "familyName": "Zotti",
+            "givenName": "Georg"
+        },
+        {
+            "type": "Role",
+            "schema:author": "https://orcid.org/0000-0002-8152-0408",
+            "roleName": "Developer",
+            "startDate": "2010-01-23"
+        },
+        {
+            "id": "_:author_4",
+            "type": "Person",
+            "familyName": "Gajdosik",
+            "givenName": "Johannes"
+        },
+        {
+            "type": "Role",
+            "schema:author": "_:author_4",
+            "endDate": "2012-12-31",
+            "roleName": "Developer"
+        },
+        {
+            "id": "_:author_5",
+            "type": "Person",
+            "familyName": "Marinov",
+            "givenName": "Bogdan"
+        },
+        {
+            "type": "Role",
+            "schema:author": "_:author_5",
+            "endDate": "2014-12-31",
+            "roleName": "Developer"
+        },
+        {
+            "id": "_:author_6",
+            "type": "Person",
+            "familyName": "Chéreau",
+            "givenName": "Guillaume"
+        },
+        {
+            "type": "Role",
+            "schema:author": "_:author_6",
+            "roleName": "Developer"
+        },
+        {
+            "id": "_:author_7",
+            "type": "Person",
+            "familyName": "Reaves",
+            "givenName": "Timothy"
+        },
+        {
+            "type": "Role",
+            "schema:author": "_:author_7",
+            "endDate": "2021-03-31",
+            "roleName": "Developer",
+            "startDate": "2004-01-01"
+        },
+        {
+            "id": "_:author_8",
+            "type": "Person",
+            "familyName": "Kabatsayev",
+            "givenName": "Ruslan"
+        },
+        {
+            "type": "Role",
+            "schema:author": "_:author_8",
+            "roleName": "Developer",
+            "startDate": "2020-12-06"
+        }
+    ],
+    "codeRepository": "https://github.com/Stellarium/stellarium",
+    "contributor": [
+        {
+            "id": "_:contributor_1",
+            "type": "Person",
+            "familyName": "Gates",
+            "givenName": "Matthew "
+        },
+        {
+            "type": "Role",
+            "contributor": "_:contributor_1",
+            "endDate": "2013-12-31",
+            "roleName": "Documentation (First User Guide)",
+            "startDate": "2004-01-01"
+        },
+        {
+            "id": "_:contributor_2",
+            "type": "Person",
+            "familyName": "Gerdes",
+            "givenName": "Barry"
+        },
+        {
+            "type": "Role",
+            "contributor": "_:contributor_2",
+            "endDate": "2014-07-31",
+            "roleName": "Tester",
+            "startDate": "2004-01-01"
+        },
+        {
+            "id": "_:contributor_3",
+            "type": "Person",
+            "affiliation": {
+                "type": "Organization",
+                "name": "TU Wien"
+            },
+            "familyName": "Schaukowitsch",
+            "givenName": "Florian"
+        },
+        {
+            "type": "Role",
+            "contributor": "_:contributor_3",
+            "endDate": "2018-10-20",
+            "roleName": "Developer",
+            "startDate": "2014-10-01"
+        },
+        {
+            "id": "https://orcid.org/0000-0001-5384-7545",
+            "type": "Person",
+            "familyName": "Hoffmann",
+            "givenName": "Susanne"
+        },
+        {
+            "type": "Role",
+            "contributor": "https://orcid.org/0000-0001-5384-7545",
+            "roleName": "Skyculture Researcher"
+        },
+        {
+            "id": "_:contributor_5",
+            "type": "Person",
+            "familyName": "Boonplod",
+            "givenName": "Worachate"
+        },
+        {
+            "type": "Role",
+            "contributor": "_:contributor_5",
+            "roleName": "Developer (Eclipses)"
+        },
+        {
+            "id": "_:contributor_6",
+            "type": "Person",
+            "familyName": "Meuris",
+            "givenName": "Jan"
+        },
+        {
+            "type": "Role",
+            "contributor": "_:contributor_6",
+            "endDate": "2021-09-30",
+            "roleName": "Graphic designer",
+            "startDate": "2004-01-01"
+        },
+        {
+            "id": "_:contributor_7",
+            "type": "Person",
+            "familyName": "Bernardi",
+            "givenName": "Martín"
+        },
+        {
+            "type": "Role",
+            "contributor": "_:contributor_7",
+            "roleName": "Graphic designer",
+            "startDate": "2021-10-01"
+        }
+    ],
+    "dateCreated": "2000-08-01",
+    "dateModified": "2025-12-29",
+    "description": "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.",
+    "downloadUrl": "https://stellarium.org/",
+    "keywords": [
+        "ephemerides",
+        "sky simulation",
+        "virtual archaeoastronomy",
+        "skyscape archaeology"
+    ],
+    "license": "https://spdx.org/licenses/GPL-2.0-only",
+    "name": "Stellarium",
+    "operatingSystem": [
+        "Windows",
+        "Linux",
+        "MacOS"
+    ],
+    "programmingLanguage": [
+        "C++",
+        "C",
+        "Qt",
+        "GLSL"
+    ],
+    "relatedLink": "https://stellarium.org",
+    "review": {
+        "type": "Review",
+        "reviewAspect": "Application in Cultural Astronomy"
+    },
+    "version": "25.4.0",
+    "developmentStatus": "active",
+    "funding": "https://opencollective.com/stellarium/donate",
+    "issueTracker": "https://github.com/Stellarium/stellarium/issues",
+    "referencePublication": "https://doi.org/10.1558/jsa.17822"
+}
