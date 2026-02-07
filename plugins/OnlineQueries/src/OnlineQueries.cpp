@@ -146,7 +146,7 @@ void OnlineQueries::loadConfiguration(void)
 	conf->beginGroup("OnlineQueries");
 
 	disableWebView =conf->value("disable_webview", false).toBool();
-	aseUrl         =conf->value("ase_url",          "https://xing.fmi.uni-jena.de/mediawiki/index.php/%1").toString();
+	aseUrl         =conf->value("ase_url",          "https://ase.exopla.net/index.php/%1").toString();
 	aavsoHipUrl    =conf->value("aavso_hip_url",    "https://www.aavso.org/vsx/index.php?view=api.object&ident=HIP%1").toString();
 	aavsoOidUrl    =conf->value("aavso_oid_url",    "https://www.aavso.org/vsx/index.php?view=detail.top&oid=%1").toString();
 	gcvsUrl        =conf->value("gcvs_url",         "http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+&num=%1").toString();
