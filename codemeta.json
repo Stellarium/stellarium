@@ -20,15 +20,19 @@
             "startDate": "2000-08-01"
         },
         {
-            "id": "_:author_2",
+            "id": "https://orcid.org/0000-0002-2047-089X",
             "type": "Person",
+            "affiliation": {
+                "type": "Organization",
+                "name": "Altai State Pedagogical University"
+            },
             "email": "alex.v.wolf@gmail.com",
             "familyName": "Wolf",
             "givenName": "Alexander "
         },
         {
             "type": "Role",
-            "schema:author": "_:author_2",
+            "schema:author": "https://orcid.org/0000-0002-2047-089X",
             "roleName": "Maintainer",
             "startDate": "2012-01-01"
         },
