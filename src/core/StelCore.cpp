@@ -2352,7 +2352,7 @@ double StelCore::getDeltaT() const
 	return JD.second;
 }
 
-
+// (SS) 2025-11-27 : REVISED for differentiating between DE430/431 and DE440/441 ephemeris selection in Moon Secular Acceleration
 // compute and return DeltaT in seconds. Try not to call it directly, current DeltaT, JD, and JDE are available.
 double StelCore::computeDeltaT(const double JD)
 {
@@ -2374,10 +2374,10 @@ double StelCore::computeDeltaT(const double JD)
 	}
 
 	if (!deltaTdontUseMoon)
-		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, ((de440Active&&EphemWrapper::jd_fits_de440(JD)) ||
-										 (de441Active&&EphemWrapper::jd_fits_de441(JD)) ||
-										 (de430Active&&EphemWrapper::jd_fits_de430(JD)) ||
-										 (de431Active&&EphemWrapper::jd_fits_de431(JD))));
+		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot,((de430Active && EphemWrapper::jd_fits_de430(JD)) ||
+		                                                                (de431Active && EphemWrapper::jd_fits_de431(JD))),
+		                                                               ((de440Active && EphemWrapper::jd_fits_de440(JD)) ||
+		                                                                (de441Active && EphemWrapper::jd_fits_de441(JD)))); 
 
 	return DeltaT;
 }
@@ -2531,11 +2531,19 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTfinish	=  2150; // 1997;
 			break;
 		case JPLHorizons:
-			// JPL Horizons algorithm for DeltaT
-			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
+			// (SS) 2025-11-27 JPL Horizons algorithm for DeltaT - REVISED
+			// From a communication with Jon Giorgini (JPL) 2025-11-12, n.dot value of -25.82"/cy/cy matches
+			// DE430/DE431 Ephemerides and Stephenson/Morrison/Hohenkerk/Zawilski cubic splines.
+			// However, DE440/DE441 Ephemerides use slightly different lunar model, so we need to apply
+			// the moon secular acceleration correction separately in computeDeltaT() when those are selected.
+			// The n.dot value for DE440/DE441 is -25.936"/cy/cy per Jon Giorgini (JPL) 2025-11-12 email.
+			// The JPL Horizons DeltaT model is valid only from 9999BC to Present. JPL Horizons app actually clamps
+			// Delta-T values to the last EOP file predictions for future dates beyond Present while allowing 
+			// JD value up to 9999-12-30 00:00. Just keep in mind that Delta-T values are not valid beyond Present.
+			deltaTnDot = -25.82; // n.dot = -25.82"/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByJPLHorizons;
-			deltaTstart	= -2999;
-			deltaTfinish	= 1620;
+			deltaTstart = -9998; // 9999BC-03-20 00:00 UT --> JD_UT >= -1930633.5, yearFraction >= -9997.786301369860
+			deltaTfinish = 9999; // 9999AD-12-30 00:00 UT --> JD_UT <=  5373482.5, yearFraction <=  9999.994520547950
 			break;
 		case MeeusSimons:
 			// Meeus & Simons (2000) algorithm for DeltaT
