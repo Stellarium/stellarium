@@ -1289,7 +1289,7 @@ void StelCore::setAberrationFactor(double factor)
 {
 	if (!fuzzyEquals(aberrationFactor, factor))
 	{
-		aberrationFactor=qBound(0.,factor, 5.);
+		aberrationFactor=qBound(0.,factor, 10000.);
 		StelApp::immediateSave("astro/aberration_factor", aberrationFactor);
 		emit aberrationFactorChanged(factor);
 	}

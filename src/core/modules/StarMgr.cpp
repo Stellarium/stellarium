@@ -1288,10 +1288,6 @@ void StarMgr::draw(StelCore* core)
 	
 	QVector<SphericalCap> viewportCaps = prj->getViewportConvexPolygon(margin, margin)->getBoundingSphericalCaps();
 	viewportCaps.append(core->getVisibleSkyArea());
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(viewportCaps,maxSearchLevel);
-
-	// Set temporary static variable for optimization
-	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
 
 	// prepare for aberration: Explan. Suppl. 2013, (7.38)
 	const bool withAberration=core->getUseAberration();
@@ -1300,6 +1296,11 @@ void StarMgr::draw(StelCore* core)
 	{
 		vel = core->getAberrationVec(core->getJDE());
 	}
+
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(viewportCaps, maxSearchLevel, vel);
+
+	// Set temporary static variable for optimization
+	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
 
 	// Prepare openGL for drawing many stars
 	StelPainter sPainter(prj);
@@ -1424,7 +1425,8 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	e3 *= f;
 	// Search the triangles
 	SphericalConvexPolygon c(e3, e2, e2, e0);
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingSphericalCaps(),lastMaxSearchLevel);
+	Vec3d vel(0.);
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingSphericalCaps(),lastMaxSearchLevel,vel);
 
 	double withParallax = core->getUseParallax() * core->getParallaxFactor();
 	Vec3d diffPos(0., 0., 0.);
@@ -1473,12 +1475,6 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 #endif
 		largerCaps.append(SphericalCap(cap.n, qMin(cap.d, 0.75))); // 0.83 seemed still too small, unclear why. 0.75 seems to work.
 	}
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxGeodesicGridLevel)->search(largerCaps,maxGeodesicGridLevel);
-
-#ifndef NDEBUG
-	// Just some temporary debug output.
-	geodesic_search_result->print();
-#endif
 	// prepare for aberration: Explan. Suppl. 2013, (7.38)
 	const bool withAberration=core->getUseAberration();
 	Vec3d vel(0.);
@@ -1486,6 +1482,12 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 	{
 		vel = core->getAberrationVec(core->getJDE());
 	}
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxGeodesicGridLevel)->search(largerCaps,maxGeodesicGridLevel,vel);
+
+#ifndef NDEBUG
+	// Just some temporary debug output.
+	geodesic_search_result->print();
+#endif
 
 #ifndef NDEBUG
 	qDebug() << "We have" << gridLevels.count() << " ZoneArrays in gridLevels at maxGeodesicGridLevel:" << maxGeodesicGridLevel;
