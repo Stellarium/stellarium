@@ -399,9 +399,10 @@ void printSystemInfo()
 #ifdef Q_OS_OPENBSD
 	int mib[2], freq, ncpu;
 	size_t len = 1024;
-	std::string model, vendor, machine;
+	std::string model, vendor, product, machine;
 	model.resize(len);
 	vendor.resize(len);
+	product.resize(len);
 	machine.resize(len);
 
 	// CPU info
@@ -448,9 +449,18 @@ void printSystemInfo()
 	mib[0] = CTL_HW;
 	mib[1] = HW_PRODUCT;
 	len = 1024;
+	sysctl(mib, 2, product.data(), &len, NULL, 0);
+	product.resize(len);
+	QString sProduct = QString("%1").arg(product.data()).trimmed();
+	if (!sProduct.isEmpty())
+		log(QString("Product: %1").arg(sProduct));
+
+	mib[0] = CTL_HW;
+	mib[1] = HW_VERSION;
+	len = 1024;
 	sysctl(mib, 2, machine.data(), &len, NULL, 0);
 	machine.resize(len);
-	QString sMachine = QString("%1").arg(machine.data()).trimmed();
+	QString sMachine= QString("%1").arg(machine.data()).trimmed();
 	if (!sMachine.isEmpty())
 		log(QString("Machine: %1").arg(sMachine));
 #endif
