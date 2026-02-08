@@ -167,6 +167,27 @@ QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& fl
 	return str;
 }
 
+QString Comet::getNarrationName(const StelCore *core, const InfoStringGroup& flags) const
+{
+	Q_UNUSED(core) Q_UNUSED(flags)
+	QString str;
+	QTextStream oss(&str);
+
+	oss << getNameI18n(); // UI translation can differ from sky translation
+
+	if (!iauDesignation.isEmpty() &&  !getNameI18n().contains(iauDesignation))
+		oss << QString(" , %1").arg(iauDesignation);
+
+	if (!getExtraDesignations().isEmpty())
+		oss << QString(" , %1").arg(getExtraDesignations().join(" , "));
+
+	if (sphereScale != 1.)
+		oss << " (" << QString(qc_("magnified %1 times", "object narration")).arg(StelUtils::narrateDecimal(sphereScale, 1)) << ")";
+	oss << ". . ";
+
+	return str;
+}
+
 QString Comet::getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const
 {
 	Q_UNUSED(core)
@@ -182,6 +203,23 @@ QString Comet::getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoSt
 			oss << QString("%1: %2<br/>").arg(q_("Absolute Magnitude")).arg(absoluteMagnitude, 0, 'f', 2);
 	}
 
+	return str;
+}
+
+QString Comet::getNarrationAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const
+{
+	Q_UNUSED(core)
+	QString str;
+	QTextStream oss(&str);
+	if (flags&AbsoluteMagnitude)
+	{
+		//TODO: Make sure absolute magnitude is a sane value
+		//If the two parameter magnitude system is not used, don't display this
+		//value. (Using radius/albedo doesn't make any sense for comets.)
+		// Note that slope parameter can be <0 (down to -2?), so -10 is now used for "uninitialized"
+		if (slopeParameter >= -9.9f)
+			oss << QString(qc_("The comet is listed with an absolute magnitude of %1", "comet narration")).arg(StelUtils::narrateDecimal(absoluteMagnitude, 2)) << ". ";
+	}
 	return str;
 }
 
@@ -230,18 +268,62 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 	return str;
 }
 
-QString Comet::getInfoStringExtra(const StelCore *core, const InfoStringGroup &flags) const
+QString Comet::getNarrationSize(const StelCore *core, const InfoStringGroup &flags) const
 {
-	Q_UNUSED(core)
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	QString str;
 	QTextStream oss(&str);
-	if (flags&Extra)
+
+	if (flags&Size)
 	{
-		if (!discoveryDate.isEmpty())
-			oss << QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
+		// Given the very irregular shape, other terminology like "equatorial radius" do not make much sense.
+		oss << QString(qc_("Its core diameter is estimated at %1 kilometers", "comet narration")).arg(StelUtils::narrateDecimal(AU * 2.0 * getEquatorialRadius(), 1)) << ". ";
+	}
+	if ((flags&Size) && (tailFactors[0]>0.0f))
+	{
+		// Add estimates for coma diameter and tail length.
+		const double coma = std::floor(static_cast<double>(tailFactors[0])*AU/1000.0)*1000.0;
+		const double tail = static_cast<double>(tailFactors[1])*AU;
+		const double distanceKm = AU * getJ2000EquatorialPos(core).norm();
+		// Try to estimate tail length in degrees.
+		// TODO: Take projection effect into account!
+		// The estimates here assume that the tail is seen from the side.
+		QString comaDeg, tailDeg;
+		if (withDecimalDegree)
+		{
+			comaDeg = StelUtils::radToDecDegStr(atan(coma/distanceKm),4,false,true);
+			tailDeg = StelUtils::radToDecDegStr(atan(tail/distanceKm),4,false,true);
+		}
+		else
+		{
+			comaDeg = StelUtils::radToDmsStr(atan(coma/distanceKm));
+			tailDeg = StelUtils::radToDmsStr(atan(tail/distanceKm));
+		}
+		if (coma>1e6)
+			oss << QString(qc_("and the coma diameter at %1 million kilometers (or %2 degrees)", "comet narration")).arg(StelUtils::narrateDecimal(coma*1e-6, 3), comaDeg) << ". ";
+		else
+			oss << QString(qc_("and the coma diameter at %1 kilometers (or %2 degrees)", "comet narration")).arg(StelUtils::narrateDecimal(coma, 0), comaDeg) << ". ";
+		oss << QString(qc_("The gas tail length is estimated to be %1 million kilometers long, or %2 degrees in the sky", "comet narration")).arg(StelUtils::narrateDecimal(tail*1e-6, 3), tailDeg) << ". ";
 	}
 	return str;
 }
+
+QString Comet::getInfoStringExtra(const StelCore *core, const InfoStringGroup &flags) const
+{
+	Q_UNUSED(core)
+	if (flags&Extra)
+		return getDiscoveryInfoString();
+	return QString();
+}
+
+QString Comet::getNarrationExtra(const StelCore *core, const InfoStringGroup &flags) const
+{
+	Q_UNUSED(core)
+	if (flags&Extra)
+		return getDiscoveryNarration();
+	return QString();
+}
+
 
 QVariantMap Comet::getInfoMap(const StelCore *core) const
 {
