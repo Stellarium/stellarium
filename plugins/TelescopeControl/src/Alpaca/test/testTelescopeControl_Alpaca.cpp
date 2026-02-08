@@ -1,0 +1,103 @@
+/*
+ * Copyright (C) 2019 Gion Kunz <gion.kunz@gmail.com> (ASCOM)
+ * Copyright (C) 2019 Alexander Wolf <alex.v.wolf@gmail.com>
+ * Copyright (C) 2025 Georg Zotti (Alpaca port)
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
+ */
+
+#include "testTelescopeControl_Alpaca.hpp"
+
+void TestTelescopeControl_Alpaca::useJNowShouldDetermineCorrectly()
+{
+	// Given
+	const AlpacaDevice::AlpacaEquatorialCoordinateType type = AlpacaDevice::AlpacaEquatorialCoordinateType::Topocentric;
+	const bool useDeviceEqCoordType = true;
+	const TelescopeControl::Equinox stellariumEquinox = TelescopeControl::EquinoxJ2000;
+
+	// When
+	const bool jnow = TelescopeClientAlpaca::useJNow(type, useDeviceEqCoordType, stellariumEquinox);
+
+	// Then
+	QVERIFY(jnow == true);
+}
+
+void TestTelescopeControl_Alpaca::useJNowShouldUseStellariumEquinoxWhenRequested()
+{
+	// Given
+	const AlpacaDevice::AlpacaEquatorialCoordinateType type = AlpacaDevice::AlpacaEquatorialCoordinateType::Topocentric;
+	const bool useDeviceEqCoordType = false;
+	const TelescopeControl::Equinox stellariumEquinox = TelescopeControl::EquinoxJ2000;
+
+	// When
+	const bool jnow = TelescopeClientAlpaca::useJNow(type, useDeviceEqCoordType, stellariumEquinox);
+
+	// Then
+	QVERIFY(jnow == false);
+}
+
+void TestTelescopeControl_Alpaca::useJNowShouldUseJNowOnUnknownAlpaca()
+{
+	// Given
+	const AlpacaDevice::AlpacaEquatorialCoordinateType type = AlpacaDevice::AlpacaEquatorialCoordinateType::Other;
+	const bool useDeviceEqCoordType = true;
+	const TelescopeControl::Equinox stellariumEquinox = TelescopeControl::EquinoxJ2000;
+
+	// When
+	const bool jnow = TelescopeClientAlpaca::useJNow(type, useDeviceEqCoordType, stellariumEquinox);
+
+	// Then
+	QVERIFY(jnow == true);
+}
+
+void TestTelescopeControl_Alpaca::areSimilarShouldCompareCorrectly()
+{
+	// Give
+	const double a = 0.00000000000001;
+	const double b = 0.00000000000001;
+
+	// When
+	const bool isSimilar = qFuzzyCompare(a, b);
+
+	// Then
+	QVERIFY(isSimilar == true);
+}
+
+void TestTelescopeControl_Alpaca::areSimilarShouldShowSlightErrors()
+{
+	// Give
+	const double a = 0.00000000000001;
+	const double b = 0.0000000000001;
+
+	// When
+	const bool isSimilar = qFuzzyCompare(a, b);
+
+	// Then
+	QVERIFY(isSimilar == false);
+}
+
+//void TestTelescopeControl_Alpaca::alpacaDeviceShouldFailToInitializeWithInvalidDevice()
+//{
+//	// Given
+//	AlpacaDevice* device;
+//
+//	// When
+//	device = new AlpacaDevice(nullptr, nullptr);
+//
+//	// Then
+//	QVERIFY(device->connect() == false);
+//}
+
+QTEST_MAIN(TestTelescopeControl_Alpaca)
