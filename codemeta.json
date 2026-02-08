@@ -1,5 +1,5 @@
 {
-    "@context": "https://w3id.org/codemeta/3.0",
+    "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
     "type": "SoftwareSourceCode",
     "applicationCategory": "Astronomy, desktop planetarium",
     "author": [
@@ -14,10 +14,10 @@
             "givenName": "Fabien "
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "schema:author": "_:author_1",
-            "roleName": "Founder",
-            "startDate": "2000-08-01"
+            "schema:roleName": "Founder",
+            "schema:startDate": "2000-08-01"
         },
         {
             "id": "https://orcid.org/0000-0002-2047-089X",
@@ -48,10 +48,10 @@
             "givenName": "Georg"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "schema:author": "https://orcid.org/0000-0002-8152-0408",
-            "roleName": "Developer",
-            "startDate": "2010-01-23"
+            "schema:roleName": "Developer",
+            "schema:startDate": "2010-01-23"
         },
         {
             "id": "_:author_4",
@@ -60,10 +60,10 @@
             "givenName": "Johannes"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "schema:author": "_:author_4",
-            "endDate": "2012-12-31",
-            "roleName": "Developer"
+            "schema:endDate": "2012-12-31",
+            "schema:roleName": "Developer"
         },
         {
             "id": "_:author_5",
@@ -72,10 +72,10 @@
             "givenName": "Bogdan"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "schema:author": "_:author_5",
-            "endDate": "2014-12-31",
-            "roleName": "Developer"
+            "schema:endDate": "2014-12-31",
+            "schema:roleName": "Developer"
         },
         {
             "id": "_:author_6",
@@ -84,9 +84,9 @@
             "givenName": "Guillaume"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "schema:author": "_:author_6",
-            "roleName": "Developer"
+            "schema:roleName": "Developer"
         },
         {
             "id": "_:author_7",
@@ -95,11 +95,11 @@
             "givenName": "Timothy"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "schema:author": "_:author_7",
-            "endDate": "2021-03-31",
-            "roleName": "Developer",
-            "startDate": "2004-01-01"
+            "schema:endDate": "2021-03-31",
+            "schema:roleName": "Developer",
+            "schema:startDate": "2004-01-01"
         },
         {
             "id": "_:author_8",
@@ -108,10 +108,10 @@
             "givenName": "Ruslan"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "schema:author": "_:author_8",
-            "roleName": "Developer",
-            "startDate": "2020-12-06"
+            "schema:roleName": "Developer",
+            "schema:startDate": "2020-12-06"
         }
     ],
     "codeRepository": "https://github.com/Stellarium/stellarium",
@@ -123,11 +123,11 @@
             "givenName": "Matthew "
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "contributor": "_:contributor_1",
-            "endDate": "2013-12-31",
-            "roleName": "Documentation (First User Guide)",
-            "startDate": "2004-01-01"
+            "schema:endDate": "2013-12-31",
+            "schema:roleName": "Documentation (First User Guide)",
+            "schema:startDate": "2004-01-01"
         },
         {
             "id": "_:contributor_2",
@@ -136,11 +136,11 @@
             "givenName": "Barry"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "contributor": "_:contributor_2",
-            "endDate": "2014-07-31",
-            "roleName": "Tester",
-            "startDate": "2004-01-01"
+            "schema:endDate": "2014-07-31",
+            "schema:roleName": "Tester",
+            "schema:startDate": "2004-01-01"
         },
         {
             "id": "_:contributor_3",
@@ -153,11 +153,11 @@
             "givenName": "Florian"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "contributor": "_:contributor_3",
-            "endDate": "2018-10-20",
-            "roleName": "Developer",
-            "startDate": "2014-10-01"
+            "schema:endDate": "2018-10-20",
+            "schema:roleName": "Developer",
+            "schema:startDate": "2014-10-01"
         },
         {
             "id": "https://orcid.org/0000-0001-5384-7545",
@@ -166,9 +166,9 @@
             "givenName": "Susanne"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "contributor": "https://orcid.org/0000-0001-5384-7545",
-            "roleName": "Skyculture Researcher"
+            "schema:roleName": "Skyculture Researcher"
         },
         {
             "id": "_:contributor_5",
@@ -177,9 +177,9 @@
             "givenName": "Worachate"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "contributor": "_:contributor_5",
-            "roleName": "Developer (Eclipses)"
+            "schema:roleName": "Developer (Eclipses)"
         },
         {
             "id": "_:contributor_6",
@@ -188,11 +188,11 @@
             "givenName": "Jan"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "contributor": "_:contributor_6",
-            "endDate": "2021-09-30",
-            "roleName": "Graphic designer",
-            "startDate": "2004-01-01"
+            "schema:endDate": "2021-09-30",
+            "schema:roleName": "Graphic designer",
+            "schema:startDate": "2004-01-01"
         },
         {
             "id": "_:contributor_7",
@@ -201,10 +201,10 @@
             "givenName": "Martín"
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "contributor": "_:contributor_7",
-            "roleName": "Graphic designer",
-            "startDate": "2021-10-01"
+            "schema:roleName": "Graphic designer",
+            "schema:startDate": "2021-10-01"
         }
     ],
     "dateCreated": "2000-08-01",
@@ -231,9 +231,9 @@
         "GLSL"
     ],
     "relatedLink": "https://stellarium.org",
-    "review": {
-        "type": "Review",
-        "reviewAspect": "Application in Cultural Astronomy"
+    "schema:review": {
+        "type": "schema:Review",
+        "schema:reviewAspect": "Application in Cultural Astronomy"
     },
     "version": "25.4.0",
     "developmentStatus": "active",
