@@ -326,6 +326,16 @@
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QLabel" name="regionLabel">
+                   <property name="text">
+                    <string>Region of the Sky Culture*</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="ScmMultiselectionComboBox" name="regionComboBox"/>
+                 </item>
                 </layout>
                </widget>
               </item>
@@ -437,7 +447,7 @@
                  <item>
                   <widget class="QLabel" name="zodiacLbl">
                    <property name="text">
-                    <string>Zodiac/ Lunar System:</string>
+                    <string>Zodiac / Lunar System:</string>
                    </property>
                   </widget>
                  </item>
@@ -672,6 +682,412 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="geoLocTab">
+         <attribute name="title">
+          <string>Location</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="geoLocVerticalLayout">
+          <item>
+           <widget class="QWidget" name="mapPage">
+            <layout class="QGridLayout" name="mapGridLayout">
+             <item row="2" column="2" alignment="Qt::AlignRight|Qt::AlignBottom">
+              <widget class="QPushButton" name="helpLabel">
+               <property name="styleSheet">
+                <string notr="true">
+                  border: 1px solid black;
+                  margin: 2px;
+                  padding: 10px;
+                  background-color: rgb(143, 143, 143);
+                  text-align: left;
+                </string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" rowspan="3" colspan="3">
+              <widget class="ScmGeoLocGraphicsView" name="scmGeoLocGraphicsView"/>
+             </item>
+             <item row="0" column="0" rowspan="3" colspan="3">
+              <widget class="QWidget" name="mapForegroundWidget" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">
+                   background-color: rgba(0, 0, 0, 180);
+                </string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QFrame" name="addPolygonFrame">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <layout class="QGridLayout" name="addPolygonGridLayout">
+                <property name="leftMargin">
+                 <number>2</number>
+                </property>
+                <property name="topMargin">
+                 <number>2</number>
+                </property>
+                <property name="rightMargin">
+                 <number>2</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>2</number>
+                </property>
+                <property name="horizontalSpacing">
+                 <number>15</number>
+                </property>
+                <property name="verticalSpacing">
+                 <number>15</number>
+                </property>
+                <item row="0" column="0" rowspan="5" colspan="6">
+                 <widget class="QWidget" name="addPolygonBackgroundWidget" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">
+                      background-color: rgb(100, 100, 100);
+                      border: 1px solid rgb(0, 0, 0);
+                      border-radius: 10px;
+                   </string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column ="1">
+                 <widget class="QLabel" name="startTimeLabel">
+                  <property name="text">
+                   <string>start Time</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="ScmAdvancedSpinBox" name="startTimeSpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>100</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                 <property name="minimum">
+                  <number>-2000</number>
+                 </property>
+                 <property name="maximum">
+                  <number>2000</number>
+                 </property>
+                 </widget>
+                </item>
+                <item row="2" column ="1">
+                 <widget class="QLabel" name="endTimeLabel">
+                  <property name="text">
+                   <string>end Time</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="ScmAdvancedSpinBox" name="endTimeSpinBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::NoButtons</enum>
+                  </property>
+                  <property name="minimum">
+                   <number>-2000</number>
+                  </property>
+                  <property name="maximum">
+                   <number>2000</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1" colspan="2">
+                 <widget class="QDialogButtonBox" name="addPolygonDialogButtonBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="standardButtons">
+                   <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="skyCultureTimeOptionsGroupBox">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="title">
+             <string>Options</string>
+            </property>
+            <layout class="QGridLayout" name="skyCultureTimeOptionsGridLayout">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>20</number>
+             </property>
+             <item row="0" column="0" colspan="2">
+              <layout class="QGridLayout" name="skyCultureTimeSliderGridLayout">
+               <property name="horizontalSpacing">
+                <number>10</number>
+               </property>
+               <item row="0" column ="0">
+                <widget class="QLabel" name="skyCultureCurrentTimeLabel">
+                 <property name="text">
+                  <string>Current time</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QSlider" name="skyCultureTimeSlider">
+                 <property name="minimum">
+                  <number>-2000</number>
+                 </property>
+                 <property name="maximum">
+                  <number>2000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>1</number>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="tickPosition">
+                  <enum>QSlider::TicksBelow</enum>
+                 </property>
+                 <property name="tickInterval">
+                  <number>150</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QSpinBox" name="skyCultureCurrentTimeSpinBox">
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>-2000</number>
+                 </property>
+                 <property name="maximum">
+                  <number>2000</number>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">
+                  QSpinBox
+                  {
+                      width: 65px;
+                  }
+                  </string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="0">
+              <layout class="QGridLayout" name="polygonInfoGridLayout">
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>10</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <property name="horizontalSpacing">
+               <number>40</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>10</number>
+              </property>
+               <item row="0" column="1">
+                <widget class="QLabel" name="polygonCountLabel">
+                 <property name="text">
+                  <string>Number of digitized polygons:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="polygonCountValueLabel">
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="cultureStartTimeLabel">
+                 <property name="text">
+                  <string>Start time of the culture:</string>
+                 </property>>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="cultureStartTimeValueLabel">
+                 <property name="text">
+                  <string></string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="cultureEndTimeLabel">
+                 <property name="text">
+                  <string>End time of the culture:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QLabel" name="cultureEndTimeValueLabel">
+                 <property name="text">
+                  <string></string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1" colspan="2">
+                <widget class="QPushButton" name="removePolygonButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Delete selected polygon</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0" rowspan="6">
+                <widget class="QTreeWidget" name="polygonInfoTreeWidget">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>400</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="columnCount">
+                  <number>3</number>
+                 </property>
+                 <column>
+                  <property name="text">
+                   <string>Start time</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>End time</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Vertex count</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="1" alignment="Qt::AlignBottom">
+              <widget class="QToolButton" name="mapHelpToolButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::NoFocus</enum>
+               </property>
+               <property name="icon">
+                <iconset resource="../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/tabHelp-selected.png</normaloff>
+                 <disabledoff>:/graphicGui/tabHelp-selected.png</disabledoff>:/graphicGui/tabHelp-selected.png</iconset>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">
+                  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(113, 114, 115), stop: 1 rgb(71, 73, 74));
+                </string>
+               </property>
+               <property name="cursor">
+                <cursorShape>WhatsThisCursor</cursorShape>
+               </property>
+               <property name="checkable">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -685,6 +1101,21 @@
    <extends>QFrame</extends>
    <header location="global">Dialog.hpp</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ScmGeoLocGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>ScmGeoLocGraphicsView.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>ScmMultiselectionComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ScmMultiselectionComboBox.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>ScmAdvancedSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>ScmAdvancedSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <resources>

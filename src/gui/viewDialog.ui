@@ -4614,9 +4614,9 @@
              <string>Add/remove landscapes...</string>
             </property>
            </widget>
-	   </item>
-	   
-	   <item row="0" column="3">
+           </item>
+
+           <item row="0" column="3">
            <widget class="QPushButton" name="pushButtonLandscapes_say">
             <property name="styleSheet">
              <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
@@ -4630,9 +4630,9 @@
                      <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
                    </property>
            </widget>
-	   </item>
+           </item>
 
-	<item row="0" column="4">
+        <item row="0" column="4">
            <widget class="QPushButton" name="pushButtonLandscapes_stop">
             <property name="styleSheet">
              <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
@@ -4646,11 +4646,11 @@
                      <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
                    </property>
            </widget>
-	   </item>
+           </item>
 
 
-	   
-	  </layout> 
+
+          </layout>
           </item>
           <item row="1" column="1">
            <widget class="QGroupBox" name="landscapeOptionsGroupBox">
@@ -4953,7 +4953,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="page_skyculture">
+        <widget class="QWidget" name="page_skyCulture">
          <layout class="QGridLayout" name="gridLayout_4">
           <property name="leftMargin">
            <number>0</number>
@@ -4970,1030 +4970,1424 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="0" column="1">
-           <widget class="QTextBrowser" name="skyCultureTextBrowser">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+          <item row="0" column="0">
+           <widget class="QTabWidget" name="skyCultureTabWidget">
+            <property name="currentIndex">
+             <number>0</number>
             </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAsNeeded</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="openExternalLinks">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" rowspan="3">
-           <widget class="QListWidget" name="culturesListWidget">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>100</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="selectionRectVisible">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-	  	  
-          <item row="1" column="1">
-           <widget class="QGroupBox" name="skyCultureOptionsGroupBox">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="title">
-             <string>Options</string>
-            </property>
-	    
-            <layout class="QGridLayout" name="formLayout_2">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-	     
-             <item row="3" column="0">
-              <layout class="QGridLayout" name="gridLayout_CulturalLabeling">
-	      
-             <item row="0" column="0" colspan="5">
-              <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
-               <property name="text">
-                <string>Use this sky culture as default</string>
+            <widget class="QWidget" name="skyCultureDetailsTab">
+             <attribute name="title">
+              <string>Details and Appearance</string>
+             </attribute>
+             <layout class="QGridLayout" name="skyCultureDetailsPageGridLayout">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+              <widget class="QTextBrowser" name="skyCultureTextBrowser">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="verticalScrollBarPolicy">
+                <enum>Qt::ScrollBarAsNeeded</enum>
+               </property>
+               <property name="horizontalScrollBarPolicy">
+                <enum>Qt::ScrollBarAlwaysOff</enum>
+               </property>
+               <property name="openExternalLinks">
+                <bool>true</bool>
                </property>
               </widget>
-             </item>
-	     	     
-	<item row="0" column="6">
-	  <widget class="QPushButton" name="pushButtonSkyculture_say">
-            <property name="text">
-             <string>Read text</string>
-            </property>
-                   <property name="icon">
-                    <iconset resource="../../data/gui/guiRes.qrc">
-                     <normaloff>:/graphicGui/uibtStart.png</normaloff>
-                     <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
+              </item>
+              <item row="1" column="0">
+               <widget class="QGroupBox" name="skyCultureOptionsGroupBox">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="title">
+                 <string>Options</string>
+                </property>
+
+                <layout class="QGridLayout" name="formLayout_2">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+
+                 <item row="3" column="0">
+                  <layout class="QGridLayout" name="gridLayout_CulturalLabeling">
+
+                 <item row="0" column="0" colspan="5">
+                  <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
+                   <property name="text">
+                    <string>Use this sky culture as default</string>
                    </property>
-           </widget>
-	 </item>
-	     
-	<item row="0" column="7">	   
-	   <widget class="QPushButton" name="pushButtonSkyculture_stop">
-            <property name="text">
-             <string>Stop</string>
-            </property>
-                   <property name="icon">
-                    <iconset resource="../../data/gui/guiRes.qrc">
-                     <normaloff>:/graphicGui/uibtStop.png</normaloff>
-                     <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
+                  </widget>
+                 </item>
+
+            <item row="0" column="6">
+              <widget class="QPushButton" name="pushButtonSkyculture_say">
+                <property name="text">
+                 <string>Read text</string>
+                </property>
+                       <property name="icon">
+                        <iconset resource="../../data/gui/guiRes.qrc">
+                         <normaloff>:/graphicGui/uibtStart.png</normaloff>
+                         <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
+                       </property>
+               </widget>
+             </item>
+
+            <item row="0" column="7">
+               <widget class="QPushButton" name="pushButtonSkyculture_stop">
+                <property name="text">
+                 <string>Stop</string>
+                </property>
+                       <property name="icon">
+                        <iconset resource="../../data/gui/guiRes.qrc">
+                         <normaloff>:/graphicGui/uibtStop.png</normaloff>
+                         <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
+                       </property>
+               </widget>
+              </item>
+
+
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="labelInfoLabel2">
+                     <property name="text">
+                      <string>Info label</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="labelScreenLabel2">
+                     <property name="text">
+                      <string>Screen label</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="5">
+                    <widget class="QCheckBox" name="screenLabelTranslationCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">translation</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="5">
+                    <widget class="QCheckBox" name="infoLabelTranslationCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">translation</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="2">
+                    <widget class="QCheckBox" name="screenLabelPronounceCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">transliteration</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="7">
+                    <widget class="QCheckBox" name="screenLabelModernCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">modern</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="3">
+                    <widget class="QCheckBox" name="screenLabelTransliterationCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="toolTip">
+                      <string>Scientific transliteration</string>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">sci. translit.</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QCheckBox" name="infoLabelNativeCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">native</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="3">
+                    <widget class="QCheckBox" name="infoLabelTransliterationCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="toolTip">
+                      <string>Scientific transliteration</string>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">sci. translit.</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="4">
+                    <widget class="QCheckBox" name="infoLabelIPACheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="toolTip">
+                      <string>International Phonetic Alphabet</string>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">IPA</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QCheckBox" name="screenLabelNativeCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">native</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="2">
+                    <widget class="QCheckBox" name="infoLabelPronounceCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">transliteration</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="4">
+                    <widget class="QCheckBox" name="screenLabelIPACheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="toolTip">
+                      <string>International Phonetic Alphabet</string>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">IPA</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="7">
+                    <widget class="QCheckBox" name="infoLabelModernCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">modern</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="6">
+                    <widget class="QCheckBox" name="infoLabelBynameCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">byname</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="6">
+                    <widget class="QCheckBox" name="screenLabelBynameCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string comment="menu item">byname</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+
+
+
+                 <item row="6" column="0" rowspan="2">
+                  <layout class="QGridLayout" name="skyCultureGridLayout">
+                   <item row="4" column="9">
+                    <spacer name="horizontalSpacer_10">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="6" column="1" colspan="2">
+                    <widget class="QCheckBox" name="zodiacCheckBox">
+                     <property name="toolTip">
+                      <string>Show zodiac (if defined)</string>
+                     </property>
+                     <property name="text">
+                      <string>Zodiac</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="4">
+                    <widget class="QSpinBox" name="constellationsFontSizeSpinBox">
+                     <property name="toolTip">
+                      <string>Constellations font size</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>8</number>
+                     </property>
+                     <property name="maximum">
+                      <number>40</number>
+                     </property>
+                     <property name="value">
+                      <number>14</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="0">
+                    <widget class="ColorButton" name="zodiacColorButton">
+                     <property name="toolTip">
+                      <string>Color of zodiac lines</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="4">
+                    <widget class="QSpinBox" name="zodiacThicknessSpinBox">
+                     <property name="toolTip">
+                      <string>Thickness of line in pixels</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="maximum">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="11">
+                    <widget class="QDoubleSpinBox" name="asterismLinesFadeDurationDoubleSpinBox">
+                     <property name="toolTip">
+                      <string>Fading duration for lines of asterisms</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="decimals">
+                      <number>1</number>
+                     </property>
+                     <property name="minimum">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>10.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1" colspan="2">
+                    <widget class="QCheckBox" name="showConstellationLabelsCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Constellation labels</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="6">
+                    <widget class="ColorButton" name="colorAsterismLines">
+                     <property name="toolTip">
+                      <string>Color of asterism lines</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="6">
+                    <widget class="ColorButton" name="constellationHullsColorButton">
+                     <property name="toolTip">
+                      <string>Color of constellation area (convex hull) boundaries</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="10" colspan="2">
+                    <widget class="QCheckBox" name="constellationPickCheckBox">
+                     <property name="toolTip">
+                      <string>Only one at a time</string>
+                     </property>
+                     <property name="text">
+                      <string>Isolated</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="4">
+                    <widget class="QSpinBox" name="constellationBoundariesThicknessSpinBox">
+                     <property name="toolTip">
+                      <string>Thickness of line in pixels</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="maximum">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="7" colspan="2">
+                    <widget class="QCheckBox" name="showAsterismLinesCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Asterism lines</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="6">
+                    <widget class="ColorButton" name="colorRayHelpers">
+                     <property name="toolTip">
+                      <string>Color of ray helpers</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="7" colspan="2">
+                    <widget class="QCheckBox" name="constellationHullsCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="toolTip">
+                      <string>Show areas (convex hulls) of constellations</string>
+                     </property>
+                     <property name="text">
+                      <string>Constellation areas</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0">
+                    <widget class="ColorButton" name="colorConstellationBoundaries">
+                     <property name="toolTip">
+                      <string>Color of constellation boundaries</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1" colspan="5">
+                    <widget class="QCheckBox" name="abbreviatedNamesCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Abbreviated names</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="6">
+                    <widget class="ColorButton" name="colorAsterismLabels">
+                     <property name="toolTip">
+                      <string>Color of asterism names</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="1" colspan="2">
+                    <widget class="QCheckBox" name="showConstellationArtCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Constellation art</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="7" colspan="2">
+                    <widget class="QCheckBox" name="lunarSystemCheckBox">
+                     <property name="toolTip">
+                      <string>Show lunar stations (if defined)</string>
+                     </property>
+                     <property name="text">
+                      <string>Lunar Stations</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="4">
+                    <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox">
+                     <property name="toolTip">
+                      <string>Brightness for constellation art</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="maximum">
+                      <double>1.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.050000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="1" colspan="2">
+                    <widget class="QCheckBox" name="showConstellationBoundariesCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="toolTip">
+                      <string>Show boundaries of constellations</string>
+                     </property>
+                     <property name="text">
+                      <string>Constellation boundaries</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="11">
+                    <widget class="QDoubleSpinBox" name="rayHelpersFadeDurationDoubleSpinBox">
+                     <property name="toolTip">
+                      <string>Fading duration for lines of ray helpers</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="decimals">
+                      <number>1</number>
+                     </property>
+                     <property name="minimum">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>10.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1" colspan="2">
+                    <widget class="QCheckBox" name="showConstellationLinesCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Constellation lines</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="5">
+                    <widget class="QDoubleSpinBox" name="namesFadeDurationDoubleSpinBox">
+                     <property name="toolTip">
+                      <string>Fading duration for screen labels of constellations</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="decimals">
+                      <number>1</number>
+                     </property>
+                     <property name="minimum">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>10.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="10">
+                    <widget class="QSpinBox" name="constellationHullsThicknessSpinBox">
+                     <property name="toolTip">
+                      <string>Thickness of line in pixels</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="11">
+                    <widget class="QDoubleSpinBox" name="lunarSystemFadeDurationDoubleSpinBox">
+                     <property name="toolTip">
+                      <string>Fading duration for lunar station lines</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="decimals">
+                      <number>1</number>
+                     </property>
+                     <property name="minimum">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>10.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="11">
+                    <widget class="QDoubleSpinBox" name="asterismNamesFadeDurationDoubleSpinBox">
+                     <property name="toolTip">
+                      <string>Fading duration for screen labels of asterisms </string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="decimals">
+                      <number>1</number>
+                     </property>
+                     <property name="minimum">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>10.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="10">
+                    <widget class="QSpinBox" name="lunarSystemThicknessSpinBox">
+                     <property name="toolTip">
+                      <string>Thickness of line in pixels</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="maximum">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="7" colspan="2">
+                    <widget class="QCheckBox" name="showRayHelpersCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Ray helpers</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="5">
+                    <widget class="QDoubleSpinBox" name="artFadeDurationDoubleSpinBox">
+                     <property name="toolTip">
+                      <string>Fading duration for artwork of constellations </string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="decimals">
+                      <number>1</number>
+                     </property>
+                     <property name="minimum">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>10.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="ColorButton" name="colorConstellationLabels">
+                     <property name="toolTip">
+                      <string>Color of constellation names</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="11">
+                    <widget class="QDoubleSpinBox" name="constellationHullsFadeDurationDoubleSpinBox">
+                     <property name="toolTip">
+                      <string>Fading duration for area limits of constellations</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="decimals">
+                      <number>1</number>
+                     </property>
+                     <property name="minimum">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>10.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="10">
+                    <widget class="QSpinBox" name="asterismLineThicknessSpinBox">
+                     <property name="toolTip">
+                      <string>Thickness of line in pixels</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="maximum">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="ColorButton" name="colorConstellationLines">
+                     <property name="toolTip">
+                      <string>Color of constellation lines</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="4">
+                    <widget class="QSpinBox" name="constellationLineThicknessSpinBox">
+                     <property name="toolTip">
+                      <string>Thickness of line in pixels</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="maximum">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="7" colspan="2">
+                    <widget class="QCheckBox" name="selectSingleConstellationCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="toolTip">
+                      <string>Click on star to show its constellation</string>
+                     </property>
+                     <property name="text">
+                      <string>Select single constellation</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="7" colspan="2">
+                    <widget class="QCheckBox" name="showAsterismLabelsCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Asterism labels</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="5">
+                    <widget class="QDoubleSpinBox" name="zodiacFadeDurationDoubleSpinBox">
+                     <property name="toolTip">
+                      <string>Fading duration for zodiac lines</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="decimals">
+                      <number>1</number>
+                     </property>
+                     <property name="minimum">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>10.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="10">
+                    <widget class="QSpinBox" name="asterismsFontSizeSpinBox">
+                     <property name="toolTip">
+                      <string>Asterisms font size</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>8</number>
+                     </property>
+                     <property name="maximum">
+                      <number>40</number>
+                     </property>
+                     <property name="value">
+                      <number>14</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="10">
+                    <widget class="QSpinBox" name="rayHelperThicknessSpinBox">
+                     <property name="toolTip">
+                      <string>Thickness of line in pixels</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="maximum">
+                      <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="6">
+                    <widget class="ColorButton" name="lunarSystemColorButton">
+                     <property name="toolTip">
+                      <string>Color of Lunar station lines</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="3">
+                    <spacer name="horizontalSpacer_9">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="2" column="5">
+                    <widget class="QDoubleSpinBox" name="linesFadeDurationDoubleSpinBox">
+                     <property name="toolTip">
+                      <string>Fading duration for lines of constellations</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="decimals">
+                      <number>1</number>
+                     </property>
+                     <property name="minimum">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>10.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="5">
+                    <widget class="QDoubleSpinBox" name="boundariesFadeDurationDoubleSpinBox">
+                     <property name="toolTip">
+                      <string>Fading duration for boundaries of constellations</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="decimals">
+                      <number>1</number>
+                     </property>
+                     <property name="minimum">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>10.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="0" colspan="12">
+                    <widget class="Line" name="line_3">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>1</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>1</height>
+                      </size>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="3">
+                    <widget class="QComboBox" name="zodiacLabelComboBox"/>
+                   </item>
+                   <item row="6" column="9">
+                    <widget class="QComboBox" name="lunarSystemLabelComboBox"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="Line" name="line_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>1</height>
+                    </size>
                    </property>
-           </widget>
-	  </item>
-	     
-	      
-               <item row="1" column="0">
-                <widget class="QLabel" name="labelInfoLabel2">
-                 <property name="text">
-                  <string>Info label</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="labelScreenLabel2">
-                 <property name="text">
-                  <string>Screen label</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="5">
-                <widget class="QCheckBox" name="screenLabelTranslationCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">translation</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QCheckBox" name="infoLabelTranslationCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">translation</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QCheckBox" name="screenLabelPronounceCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">transliteration</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="7">
-                <widget class="QCheckBox" name="screenLabelModernCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">modern</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3">
-                <widget class="QCheckBox" name="screenLabelTransliterationCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Scientific transliteration</string>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">sci. translit.</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QCheckBox" name="infoLabelNativeCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">native</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3">
-                <widget class="QCheckBox" name="infoLabelTransliterationCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Scientific transliteration</string>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">sci. translit.</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QCheckBox" name="infoLabelIPACheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>International Phonetic Alphabet</string>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">IPA</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QCheckBox" name="screenLabelNativeCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">native</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QCheckBox" name="infoLabelPronounceCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">transliteration</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="4">
-                <widget class="QCheckBox" name="screenLabelIPACheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>International Phonetic Alphabet</string>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">IPA</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="7">
-                <widget class="QCheckBox" name="infoLabelModernCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">modern</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="6">
-                <widget class="QCheckBox" name="infoLabelBynameCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">byname</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="6">
-                <widget class="QCheckBox" name="screenLabelBynameCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">byname</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-	     
-	     
-	     
-             <item row="6" column="0" rowspan="2">
-              <layout class="QGridLayout" name="skyCultureGridLayout">
-               <item row="4" column="9">
-                <spacer name="horizontalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="6" column="1" colspan="2">
-                <widget class="QCheckBox" name="zodiacCheckBox">
-                 <property name="toolTip">
-                  <string>Show zodiac (if defined)</string>
-                 </property>
-                 <property name="text">
-                  <string>Zodiac</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QSpinBox" name="constellationsFontSizeSpinBox">
-                 <property name="toolTip">
-                  <string>Constellations font size</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>8</number>
-                 </property>
-                 <property name="maximum">
-                  <number>40</number>
-                 </property>
-                 <property name="value">
-                  <number>14</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="0">
-                <widget class="ColorButton" name="zodiacColorButton">
-                 <property name="toolTip">
-                  <string>Color of zodiac lines</string>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="4">
-                <widget class="QSpinBox" name="zodiacThicknessSpinBox">
-                 <property name="toolTip">
-                  <string>Thickness of line in pixels</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>5</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="11">
-                <widget class="QDoubleSpinBox" name="asterismLinesFadeDurationDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Fading duration for lines of asterisms</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1" colspan="2">
-                <widget class="QCheckBox" name="showConstellationLabelsCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Constellation labels</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="6">
-                <widget class="ColorButton" name="colorAsterismLines">
-                 <property name="toolTip">
-                  <string>Color of asterism lines</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="6">
-                <widget class="ColorButton" name="constellationHullsColorButton">
-                 <property name="toolTip">
-                  <string>Color of constellation area (convex hull) boundaries</string>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="10" colspan="2">
-                <widget class="QCheckBox" name="constellationPickCheckBox">
-                 <property name="toolTip">
-                  <string>Only one at a time</string>
-                 </property>
-                 <property name="text">
-                  <string>Isolated</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="4">
-                <widget class="QSpinBox" name="constellationBoundariesThicknessSpinBox">
-                 <property name="toolTip">
-                  <string>Thickness of line in pixels</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>5</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="7" colspan="2">
-                <widget class="QCheckBox" name="showAsterismLinesCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Asterism lines</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="6">
-                <widget class="ColorButton" name="colorRayHelpers">
-                 <property name="toolTip">
-                  <string>Color of ray helpers</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="7" colspan="2">
-                <widget class="QCheckBox" name="constellationHullsCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Show areas (convex hulls) of constellations</string>
-                 </property>
-                 <property name="text">
-                  <string>Constellation areas</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="ColorButton" name="colorConstellationBoundaries">
-                 <property name="toolTip">
-                  <string>Color of constellation boundaries</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1" colspan="5">
-                <widget class="QCheckBox" name="abbreviatedNamesCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Abbreviated names</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="6">
-                <widget class="ColorButton" name="colorAsterismLabels">
-                 <property name="toolTip">
-                  <string>Color of asterism names</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1" colspan="2">
-                <widget class="QCheckBox" name="showConstellationArtCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Constellation art</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="7" colspan="2">
-                <widget class="QCheckBox" name="lunarSystemCheckBox">
-                 <property name="toolTip">
-                  <string>Show lunar stations (if defined)</string>
-                 </property>
-                 <property name="text">
-                  <string>Lunar Stations</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="4">
-                <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox">
-                 <property name="toolTip">
-                  <string>Brightness for constellation art</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="maximum">
-                  <double>1.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.050000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1" colspan="2">
-                <widget class="QCheckBox" name="showConstellationBoundariesCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Show boundaries of constellations</string>
-                 </property>
-                 <property name="text">
-                  <string>Constellation boundaries</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="11">
-                <widget class="QDoubleSpinBox" name="rayHelpersFadeDurationDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Fading duration for lines of ray helpers</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1" colspan="2">
-                <widget class="QCheckBox" name="showConstellationLinesCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Constellation lines</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QDoubleSpinBox" name="namesFadeDurationDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Fading duration for screen labels of constellations</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="10">
-                <widget class="QSpinBox" name="constellationHullsThicknessSpinBox">
-                 <property name="toolTip">
-                  <string>Thickness of line in pixels</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="11">
-                <widget class="QDoubleSpinBox" name="lunarSystemFadeDurationDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Fading duration for lunar station lines</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="11">
-                <widget class="QDoubleSpinBox" name="asterismNamesFadeDurationDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Fading duration for screen labels of asterisms </string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="10">
-                <widget class="QSpinBox" name="lunarSystemThicknessSpinBox">
-                 <property name="toolTip">
-                  <string>Thickness of line in pixels</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>5</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="7" colspan="2">
-                <widget class="QCheckBox" name="showRayHelpersCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Ray helpers</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="5">
-                <widget class="QDoubleSpinBox" name="artFadeDurationDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Fading duration for artwork of constellations </string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="ColorButton" name="colorConstellationLabels">
-                 <property name="toolTip">
-                  <string>Color of constellation names</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="11">
-                <widget class="QDoubleSpinBox" name="constellationHullsFadeDurationDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Fading duration for area limits of constellations</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="10">
-                <widget class="QSpinBox" name="asterismLineThicknessSpinBox">
-                 <property name="toolTip">
-                  <string>Thickness of line in pixels</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>5</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="ColorButton" name="colorConstellationLines">
-                 <property name="toolTip">
-                  <string>Color of constellation lines</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="4">
-                <widget class="QSpinBox" name="constellationLineThicknessSpinBox">
-                 <property name="toolTip">
-                  <string>Thickness of line in pixels</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>5</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="7" colspan="2">
-                <widget class="QCheckBox" name="selectSingleConstellationCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Click on star to show its constellation</string>
-                 </property>
-                 <property name="text">
-                  <string>Select single constellation</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="7" colspan="2">
-                <widget class="QCheckBox" name="showAsterismLabelsCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Asterism labels</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="5">
-                <widget class="QDoubleSpinBox" name="zodiacFadeDurationDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Fading duration for zodiac lines</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="10">
-                <widget class="QSpinBox" name="asterismsFontSizeSpinBox">
-                 <property name="toolTip">
-                  <string>Asterisms font size</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>8</number>
-                 </property>
-                 <property name="maximum">
-                  <number>40</number>
-                 </property>
-                 <property name="value">
-                  <number>14</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="10">
-                <widget class="QSpinBox" name="rayHelperThicknessSpinBox">
-                 <property name="toolTip">
-                  <string>Thickness of line in pixels</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>5</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="6">
-                <widget class="ColorButton" name="lunarSystemColorButton">
-                 <property name="toolTip">
-                  <string>Color of Lunar station lines</string>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="3">
-                <spacer name="horizontalSpacer_9">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="5">
-                <widget class="QDoubleSpinBox" name="linesFadeDurationDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Fading duration for lines of constellations</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="5">
-                <widget class="QDoubleSpinBox" name="boundariesFadeDurationDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Fading duration for boundaries of constellations</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0" colspan="12">
-                <widget class="Line" name="line_3">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>1</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>1</height>
-                  </size>
-                 </property>
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="3">
-                <widget class="QComboBox" name="zodiacLabelComboBox"/>
-               </item>
-               <item row="6" column="9">
-                <widget class="QComboBox" name="lunarSystemLabelComboBox"/>
-               </item>
-              </layout>
-             </item>
-             <item row="4" column="0">
-              <widget class="Line" name="line_2">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>1</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>1</height>
-                </size>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>1</height>
+                    </size>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="skyCultureMapTab">
+             <attribute name="title">
+              <string>Exploration and Selection</string>
+             </attribute>
+             <layout class="QGridLayout" name="skyCultureMapPageGridLayout">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <item row="0" column="1">
+               <layout class="QGridLayout" name="gridLayout_25">
+                <property name="leftMargin">
+                 <number>8</number>
+                </property>
+                <property name="topMargin">
+                 <number>8</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>8</number>
+                </property>
+                <property name="horizontalSpacing">
+                 <number>10</number>
+                </property>
+                <property name="verticalSpacing">
+                 <number>6</number>
+                </property>
+                 <item row="0" column="0">
+                  <widget class="SkyCultureMapGraphicsView" name="skyCultureMapGraphicsView"/>
+                 </item>
+               </layout>
+              </item>
+              <item row="1" column="1">
+               <widget class="QGroupBox" name="skyCultureTimeOptionsGroupBox">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="title">
+                 <string>Options</string>
+                </property>
+                <layout class="QGridLayout" name="skyCultureTimeOptionsGridLayout">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="verticalSpacing">
+                  <number>10</number>
+                 </property>
+                 <item row="0" column="0">
+                  <layout class="QGridLayout" name="skyCultureTimeSliderGridLayout">
+                   <property name="horizontalSpacing">
+                    <number>10</number>
+                   </property>
+                   <item row="0" column ="0">
+                    <widget class="QLabel" name="skyCultureCurrentTimeLabel">
+                     <property name="text">
+                      <string>Current time</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QSlider" name="skyCultureTimeSlider">
+                     <property name="minimum">
+                      <number>-2000</number>
+                     </property>
+                     <property name="maximum">
+                      <number>2000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="tickPosition">
+                      <enum>QSlider::TicksBelow</enum>
+                     </property>
+                     <property name="tickInterval">
+                      <number>150</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QSpinBox" name="skyCultureCurrentTimeSpinBox">
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>-2000</number>
+                     </property>
+                     <property name="maximum">
+                      <number>2000</number>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">
+                        QSpinBox
+                        {
+                        width: 60px;
+                        }
+                      </string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="1" column="0">
+                  <layout class="QGridLayout" name="skyCultureMinMaxTimeGridLayout">
+                  <property name="leftMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="horizontalSpacing">
+                   <number>20</number>
+                  </property>
+                  <property name="verticalSpacing">
+                   <number>10</number>
+                  </property>
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="skyCultureMinTimeLabel">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Minimum year</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QSpinBox" name="skyCultureMinTimeSpinBox">
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>-2000</number>
+                     </property>
+                     <property name="maximum">
+                      <number>2000</number>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">
+                        QSpinBox
+                        {
+                        width: 60px;
+                        }
+                      </string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3" rowspan="4">
+                    <spacer name="timeOptionsHorizontalSpacer">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Expanding</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="0" column="6">
+                    <widget class="QLabel" name="skyCultureMaxTimeLabel">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Maximum year</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="7">
+                    <widget class="QSpinBox" name="skyCultureMaxTimeSpinBox">
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>-2000</number>
+                     </property>
+                     <property name="maximum">
+                      <number>2000</number>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">
+                        QSpinBox
+                        {
+                        width: 60px;
+                        }
+                      </string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="4" colspan="3">
+                    <widget class="QCheckBox" name="applyTimeOnListCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Apply time interval limits to list</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column ="0" colspan="2">
+                    <widget class="QLabel" name="selectedCultureMinTimeLabel">
+                     <property name="text">
+                      <string>Selected culture start time:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column ="2">
+                    <widget class="QLabel" name="selectedCultureMinTimeValueLabel">
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column ="0" colspan="2">
+                    <widget class="QLabel" name="selectedCultureMaxTimeLabel">
+                     <property name="text">
+                      <string>Selected culture end time:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column ="2">
+                    <widget class="QLabel" name="selectedCultureMaxTimeValueLabel">
+                     <property name="text">
+                      <string>0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="4" colspan="3">
+                    <widget class="QCheckBox" name="useLocationForRotationCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Rotate the map according to the current location</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="0" column="0" rowspan="2">
+               <layout class="QVBoxLayout" name="verticalLayout_5">
+                <property name="spacing">
+                 <number>5</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>5</number>
+                </property>
+                <item>
+                 <widget class="QListWidget" name="culturesListWidget">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+                    <horstretch>100</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>1500</width>
+                   </size>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="horizontalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAlwaysOff</enum>
+                  </property>
+                  <property name="selectionRectVisible">
+                   <bool>false</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="culturesListSearchLineEdit">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="leftMargin">
+                   <number>5</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>5</number>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Enter Culture...</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">
+                    border: 5px solid rgb(47, 48, 50);
+                    border-radius: 10px;
+                    background-color: rgb(47, 48, 50);
+                    padding-left: 28px;
+                    padding-right: 10px;
+                    background-image: url(:/graphicGui/uieSearchBoxBackground.png);
+                    background-repeat: none;
+                    background-position: left center;
+                   </string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
            </widget>
           </item>
          </layout>
@@ -6085,6 +6479,11 @@
    <extends>QSpinBox</extends>
    <header>AngleSpinBox.hpp</header>
   </customwidget>
+  <customwidget>
+   <class>SkyCultureMapGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>SkyCultureMapGraphicsView.hpp</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>page_sky</tabstop>
@@ -6168,9 +6567,7 @@
   <tabstop>landscapeLabelsCheckBox</tabstop>
   <tabstop>landscapeIlluminationCheckBox</tabstop>
   <tabstop>pushButtonAddRemoveLandscapes</tabstop>
-  <tabstop>page_skyculture</tabstop>
-  <tabstop>culturesListWidget</tabstop>
-  <tabstop>skyCultureTextBrowser</tabstop>
+  <tabstop>page_skyCultureMap</tabstop>
   <tabstop>useAsDefaultSkyCultureCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>
   <tabstop>constellationsFontSizeSpinBox</tabstop>

@@ -150,6 +150,30 @@ public:
 	void setSkyCultureDescription(const scm::Description &description);
 
 	/**
+	 * @brief Sets the current sky culture start time.
+	 * @param startTime The start time to set.
+	 */
+	void setSkyCultureStartTime(int startTime);
+
+	/**
+	 * @brief Sets the current sky culture end time.
+	 * @param endTime The end time to set.
+	 */
+	void setSkyCultureEndTime(const QString &endTime);
+
+	/**
+	 * @brief Adds a CulturePolygon to the sky culture.
+	 * @param polygon The culturePolygon to add.
+	 */
+	void addSkyCultureLocation(const scm::CulturePolygon &polygon);
+
+	/**
+	 * @brief Removes a CulturePolygon from the sky culture by its Id.
+	 * @param id The identifier of the location.
+	 */
+	void removeSkyCultureLocation(int id);
+
+	/**
 	 * @brief Saves the current sky culture description as markdown text.
 	 * @param directory The directory to save the description in.
 	 * @return true if the description was saved successfully, false otherwise.

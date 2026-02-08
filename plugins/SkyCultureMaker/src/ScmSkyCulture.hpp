@@ -28,6 +28,7 @@
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "types/Classification.hpp"
+#include "types/CulturePolygon.hpp"
 #include "types/ConstellationLine.hpp"
 #include "types/Description.hpp"
 #include "types/License.hpp"
@@ -52,6 +53,12 @@ public:
 	 */
 	const QString &getId() const;
 
+	/// Sets the start time of the sky culture
+	void setStartTime(int startTime);
+
+	/// Sets the end time of the sky culture
+	void setEndTime(const QString &endTime);
+
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
 
@@ -60,8 +67,14 @@ public:
 									   const std::vector<ConstellationLine> &lines, 
 									   const bool isDarkConstellation);
 
+	/// Adds a location to the sky culture
+	void addLocation(const scm::CulturePolygon &polygon);
+
 	/// Removes a constellation from the sky culture by its ID
 	void removeConstellation(const QString &id);
+
+	/// Removes a location from the sky culture by its ID
+	void removeLocation(int id);
 
 	/// Gets a constellation from the sky culture by its ID
 	ScmConstellation *getConstellation(const QString &id);
@@ -77,6 +90,11 @@ public:
 	* @param mergeLines Whether to merge the lines of the constellations into polylines where possible.
 	*/
 	QJsonObject toJson(const bool mergeLines) const;
+
+	/**
+	* @brief Returns the territory of the sky culture as a JSON object
+	*/
+	QJsonObject getTerritoryJson() const;
 
 	/**
 	* @brief Draws the sky culture.
@@ -105,6 +123,11 @@ public:
 	 */
 	bool saveIllustrations(const QString &directory);
 
+	/**
+	* @brief Checks whether the polygons of locations overlap and merges them if necessary
+	*/
+	void mergeLocations();
+
 private:
 	/// Sky culture identifier
 	QString id;
@@ -117,6 +140,16 @@ private:
 
 	/// The description of the sky culture
 	scm::Description description;
+
+	/// The geographical location (as polygons) of the sky culture
+	QList<CulturePolygon> locations;
+
+	/// The earliest year associated with a territory of the sky culture
+	int startTime;
+
+	/// The latest year associated with a territory of the sky culture
+	// (represented as QString because culture can still exist)
+	QString endTime;
 };
 
 } // namespace scm

@@ -101,8 +101,12 @@ public:
 	//! The license
 	QString license;
 	//! The name of region following the United Nations geoscheme UN~M49 https://unstats.un.org/unsd/methodology/m49/
-	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "World".
-	QString region;
+	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "Global".
+	QJsonArray region;
+	//! Earliest available year
+	int startTime;
+	//! Latest available year
+	QString endTime;
 	//! Type of the boundaries
 	BoundariesType boundariesType;
 	//! JSON data describing the constellations (names, lines, artwork)
@@ -249,11 +253,23 @@ public slots:
 	//! @return A list of translated sky culture names.
 	QStringList getSkyCultureListI18(void) const;
 
+	//! Get a map of sky culture names in the current language and the corresponding region.
+	//! @return A map of translated sky culture names and corresponding regions.
+	QMultiMap<QString, QString> getSkyCultureRegionMapI18(void) const;
+
+	//! Get a map of sky culture names in the current language and the corresponding time limits.
+	//! @return A map of translated sky culture names and the corresponding time limits.
+	QMap<QString, QPair<int, QString> > getSkyCultureTimeLimitMapI18(void) const;
+
 	//! Get a list of sky culture IDs
 	QStringList getSkyCultureListIDs(void) const;
 
 	//! Returns a map from sky culture IDs/folders to sky culture names.
 	QMap<QString, StelSkyCulture> getDirToNameMap() const { return dirToNameEnglish; }
+
+	//! Get a map of sky culture IDs / folders and the corresponding (translated) names in the current language.
+	//! @return A map of sky culture IDs and the corresponding translated names in the current language.
+	QMap<QString, QString> getDirToI18Map(void) const;
 
 	static StelObject::CulturalDisplayStyle convertCulturalDisplayStyleFromCSVstring(const QString &csv);
 	static QString convertCulturalDisplayStyleToCSVstring(const StelObject::CulturalDisplayStyle style);

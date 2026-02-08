@@ -155,9 +155,9 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	bool mergeLinesOnExport =
 		StelApp::getInstance().getSettings()->value("SkyCultureMaker/mergeLinesOnExport", true).toBool();
 	qDebug() << "SkyCultureMaker: Exporting sky culture. Merge lines on export:" << mergeLinesOnExport;
-	QJsonObject scJsonObject = currentSkyCulture->toJson(mergeLinesOnExport);
-	QJsonDocument scJsonDoc(scJsonObject);
-	if (scJsonDoc.isNull() || scJsonDoc.isEmpty())
+	QJsonObject scIndexJsonObject = currentSkyCulture->toJson(mergeLinesOnExport);
+	QJsonDocument scIndexJsonDoc(scIndexJsonObject);
+	if (scIndexJsonDoc.isNull() || scIndexJsonDoc.isEmpty())
 	{
 		qWarning() << "SkyCultureMaker: Failed to create JSON document for sky culture.";
 		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to create JSON document for sky culture."));
@@ -165,8 +165,8 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 		ScmSkyCultureExportDialog::close();
 		return false;
 	}
-	QFile scJsonFile(skyCultureDirectory.absoluteFilePath("index.json"));
-	if (!scJsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+	QFile scIndexJsonFile(skyCultureDirectory.absoluteFilePath("index.json"));
+	if (!scIndexJsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		qWarning() << "SkyCultureMaker: Failed to open index.json for writing.";
 		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to open index.json for writing."));
@@ -174,8 +174,34 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 		ScmSkyCultureExportDialog::close();
 		return false;
 	}
-	scJsonFile.write(scJsonDoc.toJson(QJsonDocument::Indented));
-	scJsonFile.close();
+	scIndexJsonFile.write(scIndexJsonDoc.toJson(QJsonDocument::Indented));
+	scIndexJsonFile.close();
+
+	// Export the locations (polygons) of the sky culture to the territory.json file
+	qDebug() << "SkyCultureMaker: Exporting sky culture...";
+	// clean up potential overlaps / user errors before exporting
+	currentSkyCulture->mergeLocations();
+	QJsonObject scTerritoryJsonObject = currentSkyCulture->getTerritoryJson();
+	QJsonDocument scTerritoryJsonDoc(scTerritoryJsonObject);
+	if (scTerritoryJsonDoc.isNull() || scTerritoryJsonDoc.isEmpty())
+	{
+		qWarning() << "SkyCultureMaker: Failed to create JSON document for sky culture.";
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to create JSON document for sky culture."));
+		skyCultureDirectory.removeRecursively();
+		ScmSkyCultureExportDialog::close();
+		return false;
+	}
+	QFile scTerritoryJsonFile(skyCultureDirectory.absoluteFilePath("territory.json"));
+	if (!scTerritoryJsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		qWarning() << "SkyCultureMaker: Failed to open territory.json for writing.";
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to open territory.json for writing."));
+		skyCultureDirectory.removeRecursively();
+		ScmSkyCultureExportDialog::close();
+		return false;
+	}
+	scTerritoryJsonFile.write(scTerritoryJsonDoc.toJson(QJsonDocument::Indented));
+	scTerritoryJsonFile.close();
 
 	// Save the sky culture description
 	bool savedDescriptionSuccessfully = maker->saveSkyCultureDescription(skyCultureDirectory);

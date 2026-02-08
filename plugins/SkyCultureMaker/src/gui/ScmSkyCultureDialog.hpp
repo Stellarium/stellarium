@@ -31,12 +31,14 @@
 #include "types/Description.hpp"
 #include "types/License.hpp"
 #include <optional>
+#include <qtreewidget.h>
 #include <QFile>
 #include <QObject>
 #include <QString>
 #include <QVariant>
 
 class Ui_scmSkyCultureDialog;
+class ScmAddPolygonDialog;
 
 class ScmSkyCultureDialog : public StelDialogSeparate
 {
@@ -86,7 +88,17 @@ private slots:
 	void removeSelectedConstellation();
 	void updateEditConstellationButton();
 	void updateRemoveConstellationButton();
+	void updateRemovePolygonButton();
 	void saveLicense();
+	void updateSkyCultureTimeValue(int year);
+	void addLocation(const scm::CulturePolygon polygon);
+	void removeLocation();
+	void selectLocation(QTreeWidgetItem *item);
+	void showAddPolygon();
+	void hideAddPolygon();
+	void confirmAddPolygon();
+	void cancelAddPolygon();
+	void checkMutExRegions(const QStringList checkedItems);
 
 private:
 	Ui_scmSkyCultureDialog *ui = nullptr;
@@ -97,6 +109,18 @@ private:
 
 	/// The vector of constellations to be displayed in the dialog.
 	std::vector<std::unique_ptr<scm::ScmConstellation>> *constellations = nullptr;
+
+	/// Help text on how to digitize polygons in the map.
+	const QString mapToolTip = q_(
+		"Controls:\n"
+		"LMB / RMB: Set a new vertex for the active polygon\n"
+		"SHIFT + LMB / MMB: Navigate the Map\n"
+		"ALT + LMB / RMB: Save the active polygon\n"
+		"DELETE: Remove the last point of the active polygon\n"
+		"ESC: Remove all points of the active polygon\n"
+		"Scroll UP / DOWN: Zoom in / out of the map\n"
+		"CTRL + Scroll: Fine grained zoom"
+		);
 
 	/**
 	 * @brief Gets the display name from a constellation.
@@ -170,6 +194,12 @@ private:
 	 * @param constellationId The ID of the constellation to open the dialog for.
 	 */
 	void openConstellationDialog(const QString &constellationId);
+
+	/**
+	 * @brief Initialize the time of the map, slider and spinboxes.
+	 *
+	 */
+	void initSkyCultureTime();
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP
