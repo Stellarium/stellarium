@@ -232,6 +232,8 @@ public slots:
 	//! Get the sky background color. (Actually retrieves from the StelRootItem.)  Everything else than black creates a work of art!
 	Vec3f getSkyBackgroundColor() const;
 
+	void showToolTip(const QPoint& scenePos, const QString& text);
+
 protected:
 	//! Hack to determine current monitor pixel ratio
 	//! @todo Find a better way to handle this

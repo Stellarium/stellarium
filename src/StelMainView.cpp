@@ -41,6 +41,7 @@
 #include <QGuiApplication>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsAnchorLayout>
+#include <QGraphicsProxyWidget>
 #include <QGraphicsWidget>
 #include <QGraphicsEffect>
 #include <QFileInfo>
@@ -348,6 +349,47 @@ protected:
 		}
 		//pass event on to items otherwise
 		QGraphicsScene::keyPressEvent(event);
+	}
+	void helpEvent(QGraphicsSceneHelpEvent* event) override
+	{
+		const QPoint pos(parent->mapFromGlobal(event->screenPos()));
+		QList<QGraphicsItem*> itemsToCheck;
+		if (parent->isTransformed())
+		{
+			const auto xform = parent->viewportTransform();
+			itemsToCheck = items(xform.inverted().map(pos), Qt::IntersectsItemShape,
+			                     Qt::DescendingOrder, xform);
+		}
+		else
+		{
+			itemsToCheck = items(pos, Qt::IntersectsItemShape, Qt::DescendingOrder);
+		}
+		QString text;
+		QPoint point;
+		for (auto*const item : itemsToCheck)
+		{
+			if (const auto proxy = dynamic_cast<QGraphicsProxyWidget*>(item))
+			{
+				const auto itemWidget = proxy->widget();
+				if (!itemWidget) continue;
+				const auto child = itemWidget->childAt(pos);
+				if (child && !child->toolTip().isEmpty())
+				{
+					text = child->toolTip();
+					point = pos;
+					break;
+				}
+			}
+			if (!item->toolTip().isEmpty())
+			{
+				text = item->toolTip();
+				point = pos;
+				break;
+			}
+		}
+
+		parent->showToolTip(point, text);
+		event->setAccepted(!text.isEmpty());
 	}
 
 private:
@@ -1988,6 +2030,11 @@ void StelMainView::setSkyBackgroundColor(Vec3f color)
 Vec3f StelMainView::getSkyBackgroundColor() const
 {
 	return rootItem->getSkyBackgroundColor();
+}
+
+void StelMainView::showToolTip(const QPoint& scenePos, const QString& text)
+{
+	gui->showToolTip(scenePos, text);
 }
 
 QRectF StelMainView::setWindowSize(int width, int height)
