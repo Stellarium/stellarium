@@ -31,10 +31,10 @@
             "givenName": "Alexander "
         },
         {
-            "type": "Role",
+            "type": "schema:Role",
             "schema:author": "https://orcid.org/0000-0002-2047-089X",
-            "roleName": "Maintainer",
-            "startDate": "2012-01-01"
+            "schema:roleName": "Maintainer",
+            "schema:startDate": "2012-01-01"
         },
         {
             "id": "https://orcid.org/0000-0002-8152-0408",
@@ -179,7 +179,8 @@
         {
             "type": "schema:Role",
             "contributor": "_:contributor_5",
-            "schema:roleName": "Developer (Eclipses)"
+            "schema:roleName": "Developer (Eclipses)",
+            "schema:startDate": "2020-06-03"
         },
         {
             "id": "_:contributor_6",
