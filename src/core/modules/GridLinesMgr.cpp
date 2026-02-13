@@ -144,7 +144,7 @@ static const double STEP_SIZES_DMS[] = {0.05, 0.2, 1., 5., 10., 60., 300., 600.,
 static const double STEP_SIZES_HMS[] = {0.05, 0.2, 1.5, 7.5, 15., 15.*5., 15.*10., 15.*60., 15.*60.*5., 15.*60*10., 15.*60*60};
 
 //! Return the angular grid step in degree which best fits the given scale
-static double getClosestResolutionDMS(double pixelPerRad, double spacingMultiplier = 1.0)
+static double getClosestResolutionDMS(double pixelPerRad, double spacingMultiplier)
 {
     // Apply spacing multiplier: higher values = denser grid
     double minResolution = 80.0 / spacingMultiplier;
@@ -158,7 +158,7 @@ static double getClosestResolutionDMS(double pixelPerRad, double spacingMultipli
 }
 
 //! Return the angular grid step in degree which best fits the given scale
-static double getClosestResolutionHMS(double pixelPerRad, double spacingMultiplier = 1.0)
+static double getClosestResolutionHMS(double pixelPerRad, double spacingMultiplier)
 {
     // Apply spacing multiplier: higher values = denser grid
     double minResolution = 80.0 / spacingMultiplier;
