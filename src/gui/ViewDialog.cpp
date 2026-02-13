@@ -421,8 +421,8 @@ void ViewDialog::createDialogContent()
 	updateDefaultLandscape();
 	connect(lmgr, SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
 	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
-        // Connect grid spacing combo box
-        connect(ui->gridSpacingComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(gridSpacingChanged(int)));
+    // Connect grid spacing combo box
+    connect(ui->gridSpacingComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(gridSpacingChanged(int)));
 
 	// Grid and lines
 	connectGroupBox(ui->celestialSphereGroupBox,              "actionShow_Gridlines");
