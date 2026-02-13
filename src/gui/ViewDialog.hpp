@@ -75,13 +75,11 @@ private slots:
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
-
+	void gridSpacingChanged(int index);
+	void updateGridSpacingComboBox();
 	void showAddRemoveLandscapesDialog();
+	
 	// GZ I make this public to have it on a hotkey...
-
-    void gridSpacingChanged(int index);
-    void updateGridSpacingComboBox();
-
 public slots:
 	void showAtmosphereDialog();
 	void showSkylightDialog();
