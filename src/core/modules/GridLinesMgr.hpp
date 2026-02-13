@@ -289,7 +289,7 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(float lineThickness			READ getLineThickness		WRITE setLineThickness			NOTIFY lineThicknessChanged)
 	Q_PROPERTY(float partThickness			READ getPartThickness		WRITE setPartThickness			NOTIFY partThicknessChanged)
 	Q_PROPERTY(float pointSize			READ getPointSize		WRITE setPointSize			NOTIFY pointSizeChanged)
-    Q_PROPERTY(double gridSpacingMultiplier 	READ getGridSpacingMultiplier	WRITE setGridSpacingMultiplier	        NOTIFY gridSpacingMultiplierChanged)
+	Q_PROPERTY(double gridSpacingMultiplier 	READ getGridSpacingMultiplier	WRITE setGridSpacingMultiplier	        NOTIFY gridSpacingMultiplierChanged)
 public:
 	GridLinesMgr();
 	~GridLinesMgr() override;
@@ -1111,9 +1111,9 @@ public slots:
 	//! Get the size of celestial points
 	float getPointSize() const;
     //! Get the grid spacing multiplier
-    double getGridSpacingMultiplier() const;
+	double getGridSpacingMultiplier() const;
     //! Set the grid spacing multiplier (0.5=coarse, 1.0=normal, 2.0=fine)
-    void setGridSpacingMultiplier(double multiplier);
+	void setGridSpacingMultiplier(double multiplier);
 
 signals:
 	void gridlinesDisplayedChanged(const bool);
@@ -1238,7 +1238,7 @@ signals:
 	void umbraCenterPointDisplayedChanged(const bool displayed);
 	void apexPointsDisplayedChanged(const bool displayed);
 	void apexPointsColorChanged(const Vec3f & newColor);
-    void gridSpacingMultiplierChanged(double multiplier);
+	void gridSpacingMultiplierChanged(double multiplier);
 
 private slots:
 	//! Re-translate the labels of the great circles.
@@ -1300,8 +1300,8 @@ private:
 	SkyPoint * solsticePoints;		// Solstice points
 	SkyPoint * antisolarPoint;		// Antisolar point
 	SkyPoint * umbraCenterPoint;		// The point of the center of umbra
-    SkyPoint * apexPoints;			// Apex and Antapex points, i.e. the point where the observer planet is moving to or receding from
-    double gridSpacingMultiplier;		// multiplier for grid spacing (0.5=coarse, 1.0=normal, 2.0=fine)
+	SkyPoint * apexPoints;			// Apex and Antapex points, i.e. the point where the observer planet is moving to or receding from
+	double gridSpacingMultiplier;		// multiplier for grid spacing (0.5=coarse, 1.0=normal, 2.0=fine)
 };
 
 #endif // GRIDLINESMGR_HPP
