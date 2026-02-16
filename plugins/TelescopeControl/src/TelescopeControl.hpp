@@ -35,6 +35,7 @@
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
+#include <QLoggingCategory>
 #include <QFile>
 #include <QHash>
 #include <QMap>
@@ -74,6 +75,14 @@ setting up the connection.
 //! No esoteric features like motor focus, electric heating and such.
 //! The actual controlling of a telescope is left to the implementation
 //! of the abstract base class TelescopeClient.
+
+
+//! @note You can finetune the amount of TelescopeControl related messages in the logfile by configuring the logging category stel.Telescopes.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Telescopes.debug=true;".
+//! By default, only Info and more severe messages are displayed.
+Q_DECLARE_LOGGING_CATEGORY(Telescopes)
+
+
 class TelescopeControl : public StelObjectModule
 {
 	Q_OBJECT

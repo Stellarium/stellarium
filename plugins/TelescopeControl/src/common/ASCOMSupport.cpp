@@ -18,6 +18,7 @@
 
 
 #include "OLE.hpp"
+#include "TelescopeControl.hpp"
 #include "ASCOMSupport.hpp"
 
 
@@ -61,16 +62,21 @@ int ASCOMSupport::getASCOMMajorVersion()
 	IDispatch* utilDispatch;
 
 	initResult = OleInit(COINIT_APARTMENTTHREADED);
-	hResult = OleCreateInstance(L"ASCOM.Utilities.Util", &utilDispatch);
+        hResult = OleCreateInstance(L"ASCOM.Utilities.Util", &utilDispatch);
 
 	// OLE Problem
 	if (FAILED(hResult) || !initResult) {
+                qCCritical(Telescopes).nospace().noquote() << "ASCOM getASCOMMajorVersion(): initResult = " << initResult
+                                                           << ", hResult = 0x" << QString::number(unsigned(hResult), 16)
+                                                           << " = " << QString::number((hResult), 10);
+                qCCritical(Telescopes) << "Problem with ASCOM. Presumably not installed properly?";
 		return false;
 	}
 
 	hResult = OlePropertyGet(utilDispatch, &v1, const_cast<wchar_t*>(LPlatformVersion));
+        qCInfo(Telescopes) << "ASCOM platformversion returns" << hResult;
 	QString version = QString::fromStdWString(v1.bstrVal);
-	QString majorVersion = "";
+        QString majorVersion;
 
 	static const QRegularExpression versionRx("^([^\\.]*)\\.([^\\.]*)$");
 	QRegularExpressionMatch versionMatch=versionRx.match(version);
