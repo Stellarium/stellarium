@@ -116,7 +116,7 @@ ELSE()
      SET(ISS_MIN_WIN_VERSION "6.1")
 ENDIF()
 # Define required version for MSVC
-# Details: https://docs.microsoft.com/ru-ru/windows/win32/winprog/using-the-windows-headers
+# Details: https://docs.microsoft.com/en-us/windows/win32/winprog/using-the-windows-headers
 IF(Qt6_FOUND)
      SET(MIN_WIN_VERSION "0x0A00")
 ELSE()
@@ -221,7 +221,7 @@ ENDIF()
 
 # Add ASan (AddressSanitizer) build options if necessary
 # Details: https://github.com/google/sanitizers/wiki/AddressSanitizer
-#          https://docs.microsoft.com/ru-ru/cpp/build/reference/fsanitize?view=msvc-150
+#          https://docs.microsoft.com/en-us/cpp/build/reference/fsanitize?view=msvc-150
 IF(${CMAKE_BUILD_TYPE} MATCHES "ASan")
      IF(MSVC)
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /fsanitize=address")
@@ -241,7 +241,7 @@ ENDIF()
 
 # Add Fuzzer (Fuzzer Sanitizer) build options if necessary
 # Details: https://llvm.org/docs/LibFuzzer.html
-#          https://docs.microsoft.com/ru-ru/cpp/build/reference/fsanitize?view=msvc-150
+#          https://docs.microsoft.com/en-us/cpp/build/reference/fsanitize?view=msvc-150
 IF(${CMAKE_BUILD_TYPE} MATCHES "Fuzzer")
      IF(MSVC)
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /fsanitize=fuzzer")
@@ -451,7 +451,7 @@ ENDIF()
 IF(WIN32)
      # On AMD64 systems it should be enough to just not set this variable.
      # To cross-compile, call with cmake -DSTELLARIUM_BUILD_ARM64
-     IF(${CMAKE_SYSTEM_PROCESSOR} MATCHES "ARM64") # for Surface etc.
+     IF(CMAKE_SYSTEM_PROCESSOR STREQUAL "ARM64") # for Surface etc.
           SET(STELLARIUM_BUILD_ARM64 1 CACHE BOOL "Build for Windows on ARM")
      ENDIF()
 
