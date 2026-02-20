@@ -128,6 +128,8 @@ private:
 // rms added color as parameter
 SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2f,0.2f,0.2f), frameType(frame), lineThickness(1), spacingMultiplier(1.0)
 {
+	// Font size is 12
+	fontSize = StelApp::getInstance().getScreenFontSize()-1;
 }
 
 SkyGrid::~SkyGrid()
