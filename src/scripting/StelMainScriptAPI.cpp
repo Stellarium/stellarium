@@ -70,6 +70,7 @@
 #include <QTemporaryFile>
 #include <QTimer>
 #include <QEventLoop>
+#include <LabelMgr.hpp>
 
 #include <cmath>
 
@@ -1206,6 +1207,11 @@ void StelMainScriptAPI::clear(const QString& state)
 		StelMovementMgr* movmgr = GETSTELMODULE(StelMovementMgr);
 		ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
+		LabelMgr* lMgr = GETSTELMODULE(LabelMgr);
+		StelSkyLayerMgr* siMgr = GETSTELMODULE(StelSkyLayerMgr);
+
+		lMgr->deleteAllLabels();
+		siMgr->removeSkyLayer("*");
 
 		// Hide artificial satellites through StelProperties to avoid crash if plugin was not loaded
 		propMgr->setStelPropertyValue("Satellites.flagHintsVisible",   false, true);
