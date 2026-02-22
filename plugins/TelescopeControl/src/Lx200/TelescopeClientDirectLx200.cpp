@@ -64,16 +64,16 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 	}
 	else
 	{
-		qWarning() << "ERROR creating TelescopeClientDirectLx200: invalid parameters.";
+		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectLx200: invalid parameters.";
 		return;
 	}
 	
-	qDebug() << "TelescopeClientDirectLx200 parameters: port, time_delay:" << serialDeviceName << time_delay;
+	qCDebug(Telescopes) << "TelescopeClientDirectLx200 parameters: port, time_delay:" << serialDeviceName << time_delay;
 	
 	//Validation: Time delay
 	if (time_delay <= 0 || time_delay > 10000000)
 	{
-		qWarning() << "ERROR creating TelescopeClientDirectLx200: time_delay not valid (should be less than 10000000)";
+		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectLx200: time_delay not valid (should be less than 10000000)";
 		return;
 	}
 	
@@ -88,7 +88,7 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 	lx200 = new Lx200Connection(*this, qPrintable(serialDeviceName));
 	if (lx200->isClosed())
 	{
-		qWarning() << "ERROR creating TelescopeClientDirectLx200: cannot open serial device" << serialDeviceName;
+		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectLx200: cannot open serial device" << serialDeviceName;
 		return;
 	}
 	
