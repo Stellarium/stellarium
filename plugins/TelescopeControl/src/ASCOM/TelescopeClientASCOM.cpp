@@ -43,7 +43,7 @@ TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& p
 		mAscomUseDeviceEqCoordType = paramMatch.captured(2).trimmed() == "true";
 	}
 
-	qDebug() << "TelescopeClientASCOM::TelescopeClientASCOM with telescope name " << name << " and ascomDeviceId " << mAscomDeviceId;
+        qCInfo(Telescopes) << "TelescopeClientASCOM::TelescopeClientASCOM with telescope name " << name << " and ascomDeviceId " << mAscomDeviceId;
 
 	mAscomDevice = new ASCOMDevice(this, mAscomDeviceId);
 	mAscomDevice->connect();
@@ -167,6 +167,7 @@ void TelescopeClientASCOM::telescopeAbortSlew()
 
 bool TelescopeClientASCOM::isConnected() const
 {
+        // TODO: This is called once per frame in draw(). Find a solution like for LX200, test stale handle.
 	return mAscomDevice->isDeviceConnected();
 }
 
