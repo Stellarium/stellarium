@@ -74,7 +74,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	}
 	else
 	{
-		qWarning() << "Telescope definition" << url << "not recognised";
+		qCWarning(Telescopes) << "Telescope definition" << url << "not recognised";
 		return nullptr;
 	}
 
@@ -118,12 +118,12 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	#endif
 	else
 	{
-		qWarning() << "Unknown telescope type" << type << "- not creating a telescope object for url" << url;
+		qCWarning(Telescopes) << "Unknown telescope type" << type << "- not creating a telescope object for url" << url;
 	}
 	
 	if (newTelescope && !newTelescope->isInitialized())
 	{
-		qDebug() << "TelescopeClient::create(): Unable to create a telescope client.";
+		qCWarning(Telescopes) << "TelescopeClient::create(): Unable to create a telescope client.";
 		delete newTelescope;
 		newTelescope = nullptr;
 	}
@@ -153,7 +153,7 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 
 void TelescopeClient::telescopeAbortSlew()
 {
-	qWarning() << "Telescope" << getID() << "does not support AbortSlew()!";
+	qCWarning(Telescopes) << "Telescope" << getID() << "does not support AbortSlew()!";
 	QMessageBox::critical(&StelMainView::getInstance(), q_("QUICK!"), q_("This Telescope does not support Abort command!"));
 }
 
@@ -161,7 +161,7 @@ void TelescopeClient::move(double angle, double speed)
 {
 	Q_UNUSED(angle)
 	Q_UNUSED(speed)
-	qDebug() << "TelescopeClient::move not implemented";
+	qCInfo(Telescopes) << "TelescopeClient::move not implemented";
 }
 
 qint64 TelescopeClient::getNow(void)
@@ -211,7 +211,7 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Telescope
 	}
 	else
 	{
-		qWarning() << "Incorrect TelescopeTCP parameters";
+		qCWarning(Telescopes) << "Incorrect TelescopeTCP parameters";
 		return;
 	}
 
@@ -219,7 +219,7 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Telescope
 	
 	if (time_delay <= 0 || time_delay > 10000000)
 	{
-		qWarning() << "ERROR creating TelescopeTCP - time_delay not valid (should be less than 10000000)";
+		qCWarning(Telescopes) << "ERROR creating TelescopeTCP - time_delay not valid (should be less than 10000000)";
 		return;
 	}
 	
@@ -227,11 +227,11 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Telescope
 	QHostInfo info = QHostInfo::fromName(host);
 	if (info.error())
 	{
-		qWarning() << "ERROR creating TelescopeTCP: error looking up host " << host << ":" << info.errorString();
+		qCWarning(Telescopes) << "ERROR creating TelescopeTCP: error looking up host " << host << ":" << info.errorString();
 		return;
 	}
 	//BM: is info.addresses().isEmpty() if there's no error?
-	//qDebug() << "TelescopeClient::create(): Host addresses:" << info.addresses();
+	//qCInfo(Telescopes) << "TelescopeClient::create(): Host addresses:" << info.addresses();
 	for (const auto& resolvedAddress : info.addresses())
 	{
 		//For now, Stellarium's telescope servers support only IPv4
@@ -243,7 +243,7 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Telescope
 	}
 	if(address.isNull())
 	{
-		qWarning() << "ERROR creating TelescopeTCP: cannot find IPv4 address. Addresses found at " << host << ":" << info.addresses();
+		qCWarning(Telescopes) << "ERROR creating TelescopeTCP: cannot find IPv4 address. Addresses found at " << host << ":" << info.addresses();
 		return;
 	}
 	
@@ -340,7 +340,7 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 	}
 	else
 	{
-		qDebug() << "TelescopeTCP(" << name << ")::telescopeGoto: "<< "communication is too slow, I will ignore this command";
+		qCWarning(Telescopes) << "TelescopeTCP(" << name << ")::telescopeGoto: "<< "communication is too slow, I will ignore this command";
 	}
 }
 
@@ -351,7 +351,7 @@ void TelescopeTCP::performWriting(void)
 	if (rc < 0)
 	{
 		//TODO: Better error message. See the Qt documentation.
-		qDebug() << "TelescopeTCP(" << name << ")::performWriting: "
+		qCWarning(Telescopes) << "TelescopeTCP(" << name << ")::performWriting: "
 			<< "write failed: " << tcpSocket->errorString();
 		hangup();
 	}
@@ -379,12 +379,12 @@ void TelescopeTCP::performReading(void)
 	if (rc < 0)
 	{
 		//TODO: Better error warning. See the Qt documentation.
-		qDebug() << "TelescopeTCP(" << name << ")::performReading: " << "read failed: " << tcpSocket->errorString();
+		qCWarning(Telescopes) << "TelescopeTCP(" << name << ")::performReading: " << "read failed: " << tcpSocket->errorString();
 		hangup();
 	}
 	else if (rc == 0)
 	{
-		qDebug() << "TelescopeTCP(" << name << ")::performReading: " << "server has closed the connection";
+		qCWarning(Telescopes) << "TelescopeTCP(" << name << ")::performReading: " << "server has closed the connection";
 		hangup();
 	}
 	else
@@ -397,7 +397,7 @@ void TelescopeTCP::performReading(void)
 			const int size = static_cast<int>((static_cast<unsigned char>(p[0])) | ((static_cast<unsigned int>(static_cast<unsigned char>(p[1]))) << 8));
 			if (size > static_cast<int>(sizeof(readBuffer)) || size < 4)
 			{
-				qDebug() << "TelescopeTCP(" << name << ")::performReading: " << "bad packet size: " << size;
+				qCWarning(Telescopes) << "TelescopeTCP(" << name << ")::performReading: " << "bad packet size: " << size;
 				hangup();
 				return;
 			}
@@ -417,7 +417,7 @@ void TelescopeTCP::performReading(void)
 				// "Stellarium telescope control protocol"
 					if (size < 24)
 					{
-						qDebug() << "TelescopeTCP(" << name << ")::performReading: " << "type 0: bad packet size: " << size;
+						qCWarning(Telescopes) << "TelescopeTCP(" << name << ")::performReading: " << "type 0: bad packet size: " << size;
 						hangup();
 						return;
 					}
@@ -460,7 +460,7 @@ void TelescopeTCP::performReading(void)
 				}
 				break;
 				default:
-					qDebug() << "TelescopeTCP(" << name << ")::performReading: " << "ignoring unknown packet, type: " << type;
+					qCWarning(Telescopes) << "TelescopeTCP(" << name << ")::performReading: " << "ignoring unknown packet, type: " << type;
 				break;
 			}
 			p += size;
@@ -496,7 +496,7 @@ bool TelescopeTCP::prepareCommunication()
 		if(wait_for_connection_establishment)
 		{
 			wait_for_connection_establishment = false;
-			qDebug() << "TelescopeTCP(" << name << ")::prepareCommunication: Connection established";
+			qCDebug(Telescopes) << "TelescopeTCP(" << name << ")::prepareCommunication: Connection established";
 		}
 		return true;
 	}
@@ -506,7 +506,7 @@ bool TelescopeTCP::prepareCommunication()
 		if (now > end_of_timeout)
 		{
 			end_of_timeout = now + 1000000;
-			qDebug() << "TelescopeTCP(" << name << ")::prepareCommunication: Connection attempt timed out";
+			qCWarning(Telescopes) << "TelescopeTCP(" << name << ")::prepareCommunication: Connection attempt timed out";
 			hangup();
 		}
 	}
@@ -518,7 +518,7 @@ bool TelescopeTCP::prepareCommunication()
 		end_of_timeout = now + 5000000;
 		tcpSocket->connectToHost(address, port);
 		wait_for_connection_establishment = true;
-		qDebug() << "TelescopeTCP(" << name << ")::prepareCommunication: Attempting to connect to host" << address.toString() << "at port" << port;
+		qCDebug(Telescopes) << "TelescopeTCP(" << name << ")::prepareCommunication: Attempting to connect to host" << address.toString() << "at port" << port;
 	}
 	return false;
 }
@@ -540,12 +540,12 @@ void TelescopeTCP::performCommunication()
 
 void TelescopeTCP::socketConnected(void)
 {
-	qDebug() << "TelescopeTCP(" << name <<"): turning off Nagle algorithm.";
+	qCDebug(Telescopes) << "TelescopeTCP(" << name <<"): turning off Nagle algorithm.";
 	tcpSocket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 }
 
 //TODO: More informative error messages?
 void TelescopeTCP::socketFailed(QAbstractSocket::SocketError)
 {
-	qDebug() << "TelescopeTCP(" << name << "): TCP socket error:\n" << tcpSocket->errorString();
+	qCWarning(Telescopes) << "TelescopeTCP(" << name << "): TCP socket error:\n" << tcpSocket->errorString();
 }

@@ -182,7 +182,7 @@ public:
 	void telescopeAbortSlew() override
 	{
 		desired_pos=XYZ;
-		qDebug() << "Telescope" << getID() << "Slew aborted";
+		qCInfo(Telescopes) << "Telescope" << getID() << "Slew aborted";
 	}
 	bool isAbortSlewSupported() const override {return true;}
 	bool hasKnownPosition(void) const override
