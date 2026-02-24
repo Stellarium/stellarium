@@ -26,11 +26,12 @@ environment:
   tidyURL: https://github.com/htacg/tidy-html5/releases/download/5.8.0/tidy-5.8.0-win64.zip
   tidyBaseName: tidy-5.8.0-win64
   matrix:
-  - BUILD_NAME: Win64 Qt6.8
+# While testing, deactivate 2 builds that we know to be OK.  
+  - BUILD_NAME: Win64 Qt6.9
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
     QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.8\msvc2022_64
+    QT_BASEDIR: C:\Qt\6.9\msvc2022_64
     CMAKE_GENERATOR: Visual Studio 17 2022
     CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
@@ -46,6 +47,7 @@ environment:
     exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc64.zip
     exiv2baseName: exiv2-0.28.0-2017msvc64
     scConverterEnabled: false
+    # The Qt5.15 CI has issues around memory use in translation tools. 
 #  - BUILD_NAME: Win64 Qt5.15
 #    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
 #    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
@@ -56,15 +58,27 @@ environment:
 #    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
 #    exiv2baseName: exiv2-0.28.0-2019msvc64
 #    scConverterEnabled: false
-  - BUILD_NAME: Arm64 Qt6.8
+    # TODO: This is not yet properly supported, or some config switch is missing. We postpone Qt6.9-based AppVeyor builds for Win/Arm64 to post-26.1.
+#  - BUILD_NAME: Arm64 Qt6.9
+#    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+#    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
+#    QT_VERSION_MAJOR: 6
+#    QT_BASEDIR: C:\Qt\6.9\msvc2022_arm64
+#    CMAKE_GENERATOR: Visual Studio 17 2022
+#    # While tesing appveyor, disable all plugins and extras to minimize build time..
+#    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.9/msvc2022_64 -DQt6LinguistTools_DIR=C:/Qt/6.9/msvc2022_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DQT_ENABLE_VERBOSE_DEPLOYMENT=ON -DQMAKESPEC=C:/Qt/6.9/msvc2022_arm64/mkspecs -DUSE_PLUGIN_ANGLEMEASURE=OFF -DUSE_PLUGIN_ARCHAEOLINES=OFF -DUSE_PLUGIN_EQUATIONOFTIME=OFF -DUSE_PLUGIN_CALENDARS=OFF -DUSE_PLUGIN_EXOPLANETS=OFF -DUSE_PLUGIN_METEORSHOWERS=OFF -DUSE_PLUGIN_MOSAICCAMERA=OFF -DUSE_PLUGIN_NAVSTARS=OFF -DUSE_PLUGIN_NOVAE=OFF -DUSE_PLUGIN_NEBULATEXTURES=OFF -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=OFF -DUSE_PLUGIN_SOLARSYSTEMEDITOR=OFF -DUSE_PLUGIN_OBSERVABILITY=OFF -DUSE_PLUGIN_OCULARS=OFF -DUSE_PLUGIN_ONLINEQUERIES=OFF -DUSE_PLUGIN_POINTERCOORDINATES=OFF -DUSE_PLUGIN_PULSARS=OFF -DUSE_PLUGIN_QUASARS=OFF -DUSE_PLUGIN_REMOTECONTROL=OFF -DUSE_PLUGIN_REMOTESYNC=OFF -DUSE_PLUGIN_SATELLITES=OFF -DUSE_PLUGIN_SCENERY3D=OFF -DUSE_PLUGIN_SKYCULTUREMAKER=OFF -DUSE_PLUGIN_SUPERNOVAE=OFF -DUSE_PLUGIN_TELESCOPECONTROL=OFF -DUSE_PLUGIN_TEXTUSERINTERFACE=OFF -DENABLE_SHOWMYSKY=OFF -DENABLE_SPEECH=OFF -DENABLE_TESTING=OFF -DENABLE_SCRIPT_CONSOLE=OFF -DENABLE_SPOUT=OFF -DENABLE_XLSX=OFF -DENABLE_NLS=OFF
+#    scConverterEnabled: false
+    # Qt6.5 for Win/Arm64 is missing QtWebEngine. (Introduced in Qt6.10 only).
+  - BUILD_NAME: Arm64 Qt6.5
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
     QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.8\msvc2022_arm64
+    QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.8\msvc2022_64 -DQt6LinguistTools_DIR=C:\Qt\6.8\msvc2022_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
+    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.5/msvc2019_64 -DQt6LinguistTools_DIR=C:/Qt/6.5/msvc2019_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
     scConverterEnabled: false
+
 before_build:
+  # push a few Artifacts created by windeploy to the AppVeyor result page for inspection (log, err files)?
   - set DEBUG_WINDEPLOYQT=false
   - set PUBLISH_BINARY=false
   - set USE_MESA=false
@@ -74,11 +88,13 @@ before_build:
   - set INSTALL_CONVERTER=false
   - set INSTALL_CONVERTER_DEPS=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
-  - set PATH=%VSPATH%;%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;c:\%gettextBaseName%\bin;c:\%tidyBaseName%\bin;c:\skyculture-converter;%PATH%
+  - set PATH=%VSPATH%;%QT_BASEDIR%;%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;c:\%gettextBaseName%\bin;c:\%tidyBaseName%\bin;c:\skyculture-converter;%PATH%
 
-  - ps: if($env:QT_BASEDIR.contains('_64') -or $env:QT_BASEDIR.contains('arm64')) { $env:BITS=64 } else { $env:BITS=32 }
-  - ps: if($env:QT_BASEDIR.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
-  - ps: if($env:QT_BASEDIR.contains('arm64')) { $env:PKGARCH="arm64" }
+## We no longer build 32bit stuff
+#  - ps: if($env:QT_BASEDIR.contains('_64') -or $env:QT_BASEDIR.contains('arm64')) { $env:BITS=64 } else { $env:BITS=32 }
+#  - ps: if($env:QT_BASEDIR.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
+  - ps:  $env:BITS=64 
+  - ps: if($env:QT_BASEDIR.contains('arm64')) { $env:PKGARCH="arm64" } else { $env:PKGARCH="x64" }    
   - ps: if($env:QT_VERSION_MAJOR -eq "6") { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable") { $env:PUBLISH_BINARY = 'true' }
@@ -133,9 +149,36 @@ test_script:
   - ps: if($env:PUBLISH_BINARY -eq "false" -and $env:BUILD_NAME.contains("Win")) { ctest --output-on-failure }
 
 after_test:
+  ## A few comments and diagnostics useful for upgrading win/Arm64 build to Qt6.8 or higher.
+  # Where are we?
+  #- echo %cd%
+  # save current working dir before changing elsewhere
+  #- set after_test_dir=%cd%
+  # windeployqt complains about path element missing. Unable to read \mkspecs\qconfig.pri: The system cannot find the path specified.
+  #- path  
+  # Unsure: set path for host or target arch?
+  #- set PATH=C:\Qt\6.9\msvc2022_64\bin;%PATH%
+  #- set PATH=C:\Qt\6.9\msvc2022_arm64\bin;%PATH%
+  # CAVEAT: problem in next line? TODO: Change the following line so that windeployqt actually copies the arm dlls!
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target install
+  # Where are we after cmake build?
+  #- echo %cd%
   - if [%DEBUG_WINDEPLOYQT%]==[true] cd c:\stellarium\build\
-  - if [%DEBUG_WINDEPLOYQT%]==[true] for %%i in (windeployqt.*) do appveyor PushArtifact %%i
+  # what is pushed?
+  #- if [%DEBUG_WINDEPLOYQT%]==[true] dir /s windeployqt.*
+  # Make a few diagnostic files available when debugging
+  - if [%DEBUG_WINDEPLOYQT%]==[true] for %%i in (windeployqt.*) do appveyor PushArtifact %%i  
+  # Alternative while investigating the Arm64 cross-compile issue
+  #- if [%DEBUG_WINDEPLOYQT%]==[true] for %%i in (windeployqt.* c:\stellarium\build\Stellarium.sln) do appveyor PushArtifact %%i
+  #- echo %cd%
+  #- cd %after_test_dir%
+  #- echo %cd%
+  #- echo " we should be back"  
+  #- echo "Checking that qconfig.pri exists in the expected places"
+  #- dir C:\Qt\6.9\msvc2022_64\mkspecs\qconfig.pri
+  #- type C:\Qt\6.9\msvc2022_64\mkspecs\qconfig.pri
+  #- dir C:\Qt\6.9\msvc2022_arm64\mkspecs\qconfig.pri
+  #- type C:\Qt\6.9\msvc2022_arm64\mkspecs\qconfig.pri
   - if [%INSTALL_CONVERTER%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-skyculture-converter/releases/download/v0.0.1/stellarium-skyculture-converter-0.0.1-win64.zip -FileName c:\sc-converter.zip
   - if [%INSTALL_CONVERTER%]==[true] 7z e c:\sc-converter.zip -aoa -oc:\sc-converter
   - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\lib*.dll c:\stellarium-package\bin\
@@ -155,6 +198,20 @@ after_test:
 #  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/translations/translations.zip -FileName c:\translations.zip
 #  - if [%PUBLISH_BINARY%]==[true] 7z e c:\translations.zip -spf -oc:\stellarium-package\share\stellarium\
   - if [%PUBLISH_BINARY%]==[true] if NOT [%exiv2url%] == [] copy c:\%exiv2baseName%\bin\exiv2.dll c:\stellarium-package\bin\
+  # DEBUG: find if there is anything in qtstuff... 
+  # It appears that for Arm64 there is no directory qtstuff. This may cause issues later. Let's create it. But being empty, it still causes an error. Add a dummy file.
+  #- if not exist c:\stellarium-package\qtstuff mkdir c:\stellarium-package\qtstuff
+  #- echo "This is just to make Inno work." > c:\stellarium-package\qtstuff\dummy.txt
+  # Check the following output: Is there a compiled program to find? Feed it to windeployqt below...
+  #- echo %cd%
+  #- dir /s 
+  #- echo "======== ANOTHER DIR LISTING"
+  #- dir /s c:\stellarium-package\qtstuff\
+  # In case the first windeployqt from cmake has now worked, we don't need the second run which again failed because of path errors.
+  # Manually run windeployqt again for ARM builds? TBD: give location of Arm libraries?
+  # - ps: if($env:QT_BASEDIR.contains('arm64')) { C:\Qt\6.9\msvc2022_64\bin\windeployqt.exe --no-translations --compiler-runtime --verbose 2 --qtpaths C:\Qt\6.9\msvc2022_arm64\bin\qtpaths.bat --dir c:\stellarium-package\qtstuff\ c:\stellarium-package\bin\stellarium.exe}
+  #- echo "The qtstuff directory should include Qt6 dll libraries, not just the dummy file "
+  #- dir /s c:\stellarium-package\qtstuff\
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-installer
   - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-patch-installer
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
@@ -176,4 +233,3 @@ notifications:
   on_build_success: false
   on_build_failure: true
   on_build_status_changed: true
-
