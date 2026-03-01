@@ -2,11 +2,11 @@
 add_subdirectory(external)
 
 IF(ENABLE_SPOUT)
-    SET(spout_SRCS
-     external/SpoutLibrary.h
-     core/SpoutSender.hpp
-     core/SpoutSender.cpp
-	 )
+     SET(spout_SRCS
+          external/SpoutLibrary.h
+          core/SpoutSender.hpp
+          core/SpoutSender.cpp
+     )
 ENDIF()
 
 SET(stellarium_lib_SRCS
@@ -278,7 +278,7 @@ SET(stellarium_lib_SRCS
 
 IF(ENABLE_PCH)
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-         stelMain_pch.hpp
+          stelMain_pch.hpp
      )
 ENDIF(ENABLE_PCH)
 
@@ -430,17 +430,17 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
      ENDIF()
 
      IF(${QT_VERSION_MAJOR} EQUAL "5")
-         QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
+          QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
      ELSE()
-         QT_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
-    ENDIF()
+          QT_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
+     ENDIF()
 
      # compiles resources files
      SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
      IF(${QT_VERSION_MAJOR} EQUAL "5")
-         QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
+          QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
      ELSE()
-         QT_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
+          QT_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
      ENDIF()
 
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
@@ -450,7 +450,7 @@ ENDIF()
 ################################ No GUI plugin compilation ##################################
 #############################################################################################
 IF (STELLARIUM_GUI_MODE STREQUAL "None")
-    ADD_DEFINITIONS(-DNO_GUI)
+     ADD_DEFINITIONS(-DNO_GUI)
 ENDIF()
 
 
@@ -532,11 +532,11 @@ IF(ENABLE_MEDIA)
 ENDIF(ENABLE_MEDIA)
 
 IF(ENABLE_SCRIPTING)
-    IF(ENABLE_SCRIPT_QML)
-         SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Qml)
-    ELSE(ENABLE_SCRIPT_QML)
-         SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
-    ENDIF(ENABLE_SCRIPT_QML)
+     IF(ENABLE_SCRIPT_QML)
+          SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Qml)
+     ELSE(ENABLE_SCRIPT_QML)
+          SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
+     ENDIF(ENABLE_SCRIPT_QML)
 ENDIF()
 IF(ENABLE_GPS)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Positioning Qt${QT_VERSION_MAJOR}::SerialPort)
@@ -587,7 +587,7 @@ ELSE()
      ENDIF()
 ENDIF()
 if(ENABLE_PCH)
-    # prepend an include to each cpp file which itself includes the most frequently used includes.
+     # prepend an include to each cpp file which itself includes the most frequently used includes.
      target_precompile_headers(stelMain PRIVATE
           $<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stelMain_pch.hpp>)
      IF(CMAKE_VERSION VERSION_GREATER_EQUAL 3.19)
@@ -595,7 +595,7 @@ if(ENABLE_PCH)
      ENDIF()
 ENDIF(ENABLE_PCH)
 IF(ENABLE_SHOWMYSKY)
-    TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
+     TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
 ENDIF()
 TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${md4c_SOURCE_DIR}/src")
 
@@ -616,7 +616,7 @@ ENDIF(MSVC)
 IF(APPLE)
      INSTALL(TARGETS stellarium DESTINATION MacOS)
      INSTALL(CODE
-	  "
+          "
 	  EXECUTE_PROCESS(
 	       COMMAND \"${MACDEPLOYQT_COMMAND}\"
 		    \"\${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app\"
@@ -717,248 +717,246 @@ SET_TARGET_PROPERTIES(stellarium PROPERTIES FOLDER "src")
 #############################################################################################
 
 IF(ENABLE_TESTING)
+     SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Test stelMain)
 
-    SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Test stelMain)
+     # Custom target used to build all tests at once
+     ADD_CUSTOM_TARGET(buildTests)
+     SET_TARGET_PROPERTIES(buildTests PROPERTIES FOLDER "src/tests")
 
-    # Custom target used to build all tests at once
-    ADD_CUSTOM_TARGET(buildTests)
-    SET_TARGET_PROPERTIES(buildTests PROPERTIES FOLDER "src/tests")
+     SET(tests_testDates_SRCS
+          tests/testDates.hpp
+          tests/testDates.cpp
+     )
+     ADD_EXECUTABLE(testDates ${tests_testDates_SRCS})
+     TARGET_LINK_LIBRARIES(testDates ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testDates)
+     ADD_TEST(testDates testDates)
+     SET_TARGET_PROPERTIES(testDates PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testDates_SRCS
-        tests/testDates.hpp
-        tests/testDates.cpp
-    )
-    ADD_EXECUTABLE(testDates ${tests_testDates_SRCS})
-    TARGET_LINK_LIBRARIES(testDates ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testDates)
-    ADD_TEST(testDates testDates)
-    SET_TARGET_PROPERTIES(testDates PROPERTIES FOLDER "src/tests")
+     SET(tests_testStelFileMgr_SRCS
+          tests/testStelFileMgr.hpp
+          tests/testStelFileMgr.cpp
+     )
+     ADD_EXECUTABLE(testStelFileMgr ${tests_testStelFileMgr_SRCS})
+     TARGET_LINK_LIBRARIES(testStelFileMgr ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testStelFileMgr)
+     ADD_TEST(testStelFileMgr testStelFileMgr)
+     SET_TARGET_PROPERTIES(testStelFileMgr PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testStelFileMgr_SRCS
-        tests/testStelFileMgr.hpp
-        tests/testStelFileMgr.cpp
-    )
-    ADD_EXECUTABLE(testStelFileMgr ${tests_testStelFileMgr_SRCS})
-    TARGET_LINK_LIBRARIES(testStelFileMgr ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testStelFileMgr)
-    ADD_TEST(testStelFileMgr testStelFileMgr)
-    SET_TARGET_PROPERTIES(testStelFileMgr PROPERTIES FOLDER "src/tests")
+     SET(tests_testStelSphereGeometry_SRCS
+          tests/testStelSphereGeometry.hpp
+          tests/testStelSphereGeometry.cpp
+     )
+     ADD_EXECUTABLE(testStelSphereGeometry ${tests_testStelSphereGeometry_SRCS})
+     TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES} glues_stel)
+     ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
+     ADD_TEST(testStelSphereGeometry testStelSphereGeometry)
+     SET_TARGET_PROPERTIES(testStelSphereGeometry PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testStelSphereGeometry_SRCS
-        tests/testStelSphereGeometry.hpp
-        tests/testStelSphereGeometry.cpp
-    )
-    ADD_EXECUTABLE(testStelSphereGeometry ${tests_testStelSphereGeometry_SRCS})
-    TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES} glues_stel)
-    ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
-    ADD_TEST(testStelSphereGeometry testStelSphereGeometry)
-    SET_TARGET_PROPERTIES(testStelSphereGeometry PROPERTIES FOLDER "src/tests")
+     SET(tests_testStelSphericalIndex_SRCS
+          tests/testStelSphericalIndex.hpp
+          tests/testStelSphericalIndex.cpp
+     )
+     ADD_EXECUTABLE(testStelSphericalIndex ${tests_testStelSphericalIndex_SRCS})
+     TARGET_LINK_LIBRARIES(testStelSphericalIndex ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
+     ADD_TEST(testStelSphericalIndex testStelSphericalIndex)
+     SET_TARGET_PROPERTIES(testStelSphericalIndex PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testStelSphericalIndex_SRCS
-        tests/testStelSphericalIndex.hpp
-        tests/testStelSphericalIndex.cpp
-    )
-    ADD_EXECUTABLE(testStelSphericalIndex ${tests_testStelSphericalIndex_SRCS})
-    TARGET_LINK_LIBRARIES(testStelSphericalIndex ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
-    ADD_TEST(testStelSphericalIndex testStelSphericalIndex)
-    SET_TARGET_PROPERTIES(testStelSphericalIndex PROPERTIES FOLDER "src/tests")
+     SET(tests_testStelJsonParser_SRCS
+          tests/testStelJsonParser.hpp
+          tests/testStelJsonParser.cpp
+     )
+     ADD_EXECUTABLE(testStelJsonParser ${tests_testStelJsonParser_SRCS})
+     TARGET_LINK_LIBRARIES(testStelJsonParser ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testStelJsonParser)
+     ADD_TEST(testStelJsonParser testStelJsonParser)
+     SET_TARGET_PROPERTIES(testStelJsonParser PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testStelJsonParser_SRCS
-        tests/testStelJsonParser.hpp
-        tests/testStelJsonParser.cpp
-    )
-    ADD_EXECUTABLE(testStelJsonParser ${tests_testStelJsonParser_SRCS})
-    TARGET_LINK_LIBRARIES(testStelJsonParser ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testStelJsonParser)
-    ADD_TEST(testStelJsonParser testStelJsonParser)
-    SET_TARGET_PROPERTIES(testStelJsonParser PROPERTIES FOLDER "src/tests")
+     SET(tests_testStelIniParser_SRCS
+          tests/testStelIniParser.hpp
+          tests/testStelIniParser.cpp
+     )
+     ADD_EXECUTABLE(testStelIniParser ${tests_testStelIniParser_SRCS})
+     TARGET_LINK_LIBRARIES(testStelIniParser ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testStelIniParser)
+     ADD_TEST(testStelIniParser testStelIniParser)
+     SET_TARGET_PROPERTIES(testStelIniParser PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testStelIniParser_SRCS
-        tests/testStelIniParser.hpp
-        tests/testStelIniParser.cpp
-    )
-    ADD_EXECUTABLE(testStelIniParser ${tests_testStelIniParser_SRCS})
-    TARGET_LINK_LIBRARIES(testStelIniParser ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testStelIniParser)
-    ADD_TEST(testStelIniParser testStelIniParser)
-    SET_TARGET_PROPERTIES(testStelIniParser PROPERTIES FOLDER "src/tests")
+     SET(tests_testStelVertexArray_SRCS
+          tests/testStelVertexArray.hpp
+          tests/testStelVertexArray.cpp
+     )
+     ADD_EXECUTABLE(testStelVertexArray ${tests_testStelVertexArray_SRCS})
+     TARGET_LINK_LIBRARIES(testStelVertexArray ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testStelVertexArray)
+     ADD_TEST(testStelVertexArray testStelVertexArray)
+     SET_TARGET_PROPERTIES(testStelVertexArray PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testStelVertexArray_SRCS
-        tests/testStelVertexArray.hpp
-        tests/testStelVertexArray.cpp
-    )
-    ADD_EXECUTABLE(testStelVertexArray ${tests_testStelVertexArray_SRCS})
-    TARGET_LINK_LIBRARIES(testStelVertexArray ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testStelVertexArray)
-    ADD_TEST(testStelVertexArray testStelVertexArray)
-    SET_TARGET_PROPERTIES(testStelVertexArray PROPERTIES FOLDER "src/tests")
+     SET(tests_testDeltaT_SRCS
+          tests/testDeltaT.hpp
+          tests/testDeltaT.cpp
+     )
+     ADD_EXECUTABLE(testDeltaT ${tests_testDeltaT_SRCS})
+     TARGET_LINK_LIBRARIES(testDeltaT ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testDeltaT)
+     ADD_TEST(testDeltaT testDeltaT)
+     SET_TARGET_PROPERTIES(testDeltaT PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testDeltaT_SRCS
-        tests/testDeltaT.hpp
-        tests/testDeltaT.cpp
-    )
-    ADD_EXECUTABLE(testDeltaT ${tests_testDeltaT_SRCS})
-    TARGET_LINK_LIBRARIES(testDeltaT ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testDeltaT)
-    ADD_TEST(testDeltaT testDeltaT)
-    SET_TARGET_PROPERTIES(testDeltaT PROPERTIES FOLDER "src/tests")
+     SET(tests_testConversions_SRCS
+          tests/testConversions.hpp
+          tests/testConversions.cpp
+     )
+     ADD_EXECUTABLE(testConversions ${tests_testConversions_SRCS})
+     TARGET_LINK_LIBRARIES(testConversions ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testConversions)
+     ADD_TEST(testConversions testConversions)
+     SET_TARGET_PROPERTIES(testConversions PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testConversions_SRCS
-        tests/testConversions.hpp
-        tests/testConversions.cpp
-    )
-    ADD_EXECUTABLE(testConversions ${tests_testConversions_SRCS})
-    TARGET_LINK_LIBRARIES(testConversions ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testConversions)
-    ADD_TEST(testConversions testConversions)
-    SET_TARGET_PROPERTIES(testConversions PROPERTIES FOLDER "src/tests")
+     SET(tests_testComputations_SRCS
+          tests/testComputations.hpp
+          tests/testComputations.cpp
+     )
+     ADD_EXECUTABLE(testComputations ${tests_testComputations_SRCS})
+     TARGET_LINK_LIBRARIES(testComputations ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testComputations)
+     ADD_TEST(testComputations testComputations)
+     SET_TARGET_PROPERTIES(testComputations PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testComputations_SRCS
-        tests/testComputations.hpp
-        tests/testComputations.cpp
-    )
-    ADD_EXECUTABLE(testComputations ${tests_testComputations_SRCS})
-    TARGET_LINK_LIBRARIES(testComputations ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testComputations)
-    ADD_TEST(testComputations testComputations)
-    SET_TARGET_PROPERTIES(testComputations PROPERTIES FOLDER "src/tests")
+     SET(tests_testComparisons_SRCS
+          tests/testComparisons.hpp
+          tests/testComparisons.cpp
+     )
+     ADD_EXECUTABLE(testComparisons ${tests_testComparisons_SRCS})
+     TARGET_LINK_LIBRARIES(testComparisons ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testComparisons)
+     ADD_TEST(testComparisons testComparisons)
+     SET_TARGET_PROPERTIES(testComparisons PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testComparisons_SRCS
-        tests/testComparisons.hpp
-        tests/testComparisons.cpp
-    )
-    ADD_EXECUTABLE(testComparisons ${tests_testComparisons_SRCS})
-    TARGET_LINK_LIBRARIES(testComparisons ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testComparisons)
-    ADD_TEST(testComparisons testComparisons)
-    SET_TARGET_PROPERTIES(testComparisons PROPERTIES FOLDER "src/tests")
+     SET(tests_testExtinction_SRCS
+          tests/testExtinction.hpp
+          tests/testExtinction.cpp
+     )
+     ADD_EXECUTABLE(testExtinction ${tests_testExtinction_SRCS})
+     TARGET_LINK_LIBRARIES(testExtinction ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testExtinction)
+     ADD_TEST(testExtinction testExtinction)
+     SET_TARGET_PROPERTIES(testExtinction PROPERTIES FOLDER "src/tests")
 
+     SET(tests_testRefraction_SRCS
+          tests/testRefraction.hpp
+          tests/testRefraction.cpp
+     )
+     ADD_EXECUTABLE(testRefraction ${tests_testRefraction_SRCS})
+     TARGET_LINK_LIBRARIES(testRefraction ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testRefraction)
+     ADD_TEST(testRefraction testRefraction)
+     SET_TARGET_PROPERTIES(testRefraction PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testExtinction_SRCS
-        tests/testExtinction.hpp
-        tests/testExtinction.cpp
-    )
-    ADD_EXECUTABLE(testExtinction ${tests_testExtinction_SRCS})
-    TARGET_LINK_LIBRARIES(testExtinction ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testExtinction)
-    ADD_TEST(testExtinction testExtinction)
-    SET_TARGET_PROPERTIES(testExtinction PROPERTIES FOLDER "src/tests")
+     SET(tests_testAirmass_SRCS
+          tests/testAirmass.hpp
+          tests/testAirmass.cpp
+     )
+     ADD_EXECUTABLE(testAirmass ${tests_testAirmass_SRCS})
+     TARGET_LINK_LIBRARIES(testAirmass ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testAirmass)
+     ADD_TEST(testAirmass testAirmass)
+     SET_TARGET_PROPERTIES(testAirmass PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testRefraction_SRCS
-        tests/testRefraction.hpp
-        tests/testRefraction.cpp
-    )
-    ADD_EXECUTABLE(testRefraction ${tests_testRefraction_SRCS})
-    TARGET_LINK_LIBRARIES(testRefraction ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testRefraction)
-    ADD_TEST(testRefraction testRefraction)
-    SET_TARGET_PROPERTIES(testRefraction PROPERTIES FOLDER "src/tests")
+     SET(tests_testAstrometry_SRCS
+          tests/testAstrometry.hpp
+          tests/testAstrometry.cpp
+     )
+     ADD_EXECUTABLE(testAstrometry ${tests_testAstrometry_SRCS})
+     TARGET_LINK_LIBRARIES(testAstrometry ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testAstrometry)
+     ADD_TEST(testAstrometry testAstrometry)
+     SET_TARGET_PROPERTIES(testAstrometry PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testAirmass_SRCS
-        tests/testAirmass.hpp
-        tests/testAirmass.cpp
-    )
-    ADD_EXECUTABLE(testAirmass ${tests_testAirmass_SRCS})
-    TARGET_LINK_LIBRARIES(testAirmass ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testAirmass)
-    ADD_TEST(testAirmass testAirmass)
-    SET_TARGET_PROPERTIES(testAirmass PROPERTIES FOLDER "src/tests")
+     SET(tests_testGeomMath_SRCS
+          tests/testGeomMath.hpp
+          tests/testGeomMath.cpp
+     )
+     ADD_EXECUTABLE(testGeomMath ${tests_testGeomMath_SRCS})
+     TARGET_LINK_LIBRARIES(testGeomMath ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testGeomMath)
+     ADD_TEST(testGeomMath testGeomMath)
+     SET_TARGET_PROPERTIES(testGeomMath PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testAstrometry_SRCS
-        tests/testAstrometry.hpp
-        tests/testAstrometry.cpp
-    )
-    ADD_EXECUTABLE(testAstrometry ${tests_testAstrometry_SRCS})
-    TARGET_LINK_LIBRARIES(testAstrometry ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testAstrometry)
-    ADD_TEST(testAstrometry testAstrometry)
-    SET_TARGET_PROPERTIES(testAstrometry PROPERTIES FOLDER "src/tests")
+     SET(tests_testVecMath_SRCS
+          tests/testVecMath.hpp
+          tests/testVecMath.cpp
+     )
+     ADD_EXECUTABLE(testVecMath ${tests_testVecMath_SRCS})
+     TARGET_LINK_LIBRARIES(testVecMath ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testVecMath)
+     ADD_TEST(testVecMath testVecMath)
+     SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testGeomMath_SRCS
-        tests/testGeomMath.hpp
-        tests/testGeomMath.cpp
-    )
-    ADD_EXECUTABLE(testGeomMath ${tests_testGeomMath_SRCS})
-    TARGET_LINK_LIBRARIES(testGeomMath ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testGeomMath)
-    ADD_TEST(testGeomMath testGeomMath)
-    SET_TARGET_PROPERTIES(testGeomMath PROPERTIES FOLDER "src/tests")
+     IF(ENABLE_SCRIPTING)
+          SET(tests_testJavaScripting_SRCS
+               tests/testJavaScripting.hpp
+               tests/testJavaScripting.cpp
+          )
+          ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
+          TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
+          ADD_DEPENDENCIES(buildTests testJavaScripting)
+          ADD_TEST(testJavaScripting testJavaScripting)
+          SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+     ENDIF(ENABLE_SCRIPTING)
 
-    SET(tests_testVecMath_SRCS
-        tests/testVecMath.hpp
-        tests/testVecMath.cpp
-    )
-    ADD_EXECUTABLE(testVecMath ${tests_testVecMath_SRCS})
-    TARGET_LINK_LIBRARIES(testVecMath ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testVecMath)
-    ADD_TEST(testVecMath testVecMath)
-    SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
+     SET(tests_testStelProjector_SRCS
+          tests/testStelProjector.hpp
+          tests/testStelProjector.cpp
+     )
+     ADD_EXECUTABLE(testStelProjector ${tests_testStelProjector_SRCS})
+     TARGET_LINK_LIBRARIES(testStelProjector ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testStelProjector)
+     ADD_TEST(testStelProjector testStelProjector)
+     SET_TARGET_PROPERTIES(testStelProjector PROPERTIES FOLDER "src/tests")
 
-    IF(ENABLE_SCRIPTING)
-        SET(tests_testJavaScripting_SRCS
-            tests/testJavaScripting.hpp
-            tests/testJavaScripting.cpp
-        )
-        ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
-        TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
-        ADD_DEPENDENCIES(buildTests testJavaScripting)
-        ADD_TEST(testJavaScripting testJavaScripting)
-        SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
-    ENDIF(ENABLE_SCRIPTING)
-	
-    SET(tests_testStelProjector_SRCS
-        tests/testStelProjector.hpp
-        tests/testStelProjector.cpp
-    )
-    ADD_EXECUTABLE(testStelProjector ${tests_testStelProjector_SRCS})
-    TARGET_LINK_LIBRARIES(testStelProjector ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testStelProjector)
-    ADD_TEST(testStelProjector testStelProjector)
-    SET_TARGET_PROPERTIES(testStelProjector PROPERTIES FOLDER "src/tests")
+     SET(tests_testPrecession_SRCS
+          tests/testPrecession.hpp
+          tests/testPrecession.cpp
+     )
+     ADD_EXECUTABLE(testPrecession ${tests_testPrecession_SRCS})
+     TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testPrecession)
+     ADD_TEST(testPrecession testPrecession)
+     SET_TARGET_PROPERTIES(testPrecession PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testPrecession_SRCS
-        tests/testPrecession.hpp
-        tests/testPrecession.cpp
-    )
-    ADD_EXECUTABLE(testPrecession ${tests_testPrecession_SRCS})
-    TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testPrecession)
-    ADD_TEST(testPrecession testPrecession)
-    SET_TARGET_PROPERTIES(testPrecession PROPERTIES FOLDER "src/tests")
+     SET(tests_testSiderealTime_SRCS
+          tests/testSiderealTime.hpp
+          tests/testSiderealTime.cpp
+     )
+     ADD_EXECUTABLE(testSiderealTime ${tests_testSiderealTime_SRCS})
+     TARGET_LINK_LIBRARIES(testSiderealTime ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testSiderealTime)
+     ADD_TEST(testSiderealTime testSiderealTime)
+     SET_TARGET_PROPERTIES(testSiderealTime PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testSiderealTime_SRCS
-        tests/testSiderealTime.hpp
-        tests/testSiderealTime.cpp
-    )
-    ADD_EXECUTABLE(testSiderealTime ${tests_testSiderealTime_SRCS})
-    TARGET_LINK_LIBRARIES(testSiderealTime ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testSiderealTime)
-    ADD_TEST(testSiderealTime testSiderealTime)
-    SET_TARGET_PROPERTIES(testSiderealTime PROPERTIES FOLDER "src/tests")
+     SET(tests_testEphemeris_SRCS
+          tests/testEphemeris.hpp
+          tests/testEphemeris.cpp
+     )
+     ADD_EXECUTABLE(testEphemeris ${tests_testEphemeris_SRCS})
+     TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testEphemeris)
+     ADD_TEST(testEphemeris testEphemeris)
+     SET_TARGET_PROPERTIES(testEphemeris PROPERTIES FOLDER "src/tests")
+     SET_TESTS_PROPERTIES(testEphemeris PROPERTIES
+          ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
 
-    SET(tests_testEphemeris_SRCS
-        tests/testEphemeris.hpp
-        tests/testEphemeris.cpp
-    )
-    ADD_EXECUTABLE(testEphemeris ${tests_testEphemeris_SRCS})
-    TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testEphemeris)
-    ADD_TEST(testEphemeris testEphemeris)
-    SET_TARGET_PROPERTIES(testEphemeris PROPERTIES FOLDER "src/tests")
-    SET_TESTS_PROPERTIES(testEphemeris PROPERTIES
-        ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
-
-    SET(tests_testStelSkyCultureMgr_SRCS
-        tests/testStelSkyCultureMgr.hpp
-        tests/testStelSkyCultureMgr.cpp
-    )
-    ADD_EXECUTABLE(testStelSkyCultureMgr ${tests_testStelSkyCultureMgr_SRCS})
-    TARGET_LINK_LIBRARIES(testStelSkyCultureMgr ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testStelSkyCultureMgr)
-    ADD_TEST(testStelSkyCultureMgr testStelSkyCultureMgr)
-    SET_TARGET_PROPERTIES(testStelSkyCultureMgr PROPERTIES FOLDER "src/tests")
-    SET_TESTS_PROPERTIES(testStelSkyCultureMgr PROPERTIES
-        ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
+     SET(tests_testStelSkyCultureMgr_SRCS
+          tests/testStelSkyCultureMgr.hpp
+          tests/testStelSkyCultureMgr.cpp
+     )
+     ADD_EXECUTABLE(testStelSkyCultureMgr ${tests_testStelSkyCultureMgr_SRCS})
+     TARGET_LINK_LIBRARIES(testStelSkyCultureMgr ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testStelSkyCultureMgr)
+     ADD_TEST(testStelSkyCultureMgr testStelSkyCultureMgr)
+     SET_TARGET_PROPERTIES(testStelSkyCultureMgr PROPERTIES FOLDER "src/tests")
+     SET_TESTS_PROPERTIES(testStelSkyCultureMgr PROPERTIES
+          ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
 
 ENDIF (ENABLE_TESTING)

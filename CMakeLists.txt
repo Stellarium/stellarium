@@ -10,7 +10,7 @@ ENDIF()
 
 SET(ENABLE_EXPORT_COMPILE_COMMANDS 0 CACHE BOOL "Export CMake compile commands for code analysis")
 IF(ENABLE_EXPORT_COMPILE_COMMANDS)
-    SET(CMAKE_EXPORT_COMPILE_COMMANDS on)
+     SET(CMAKE_EXPORT_COMPILE_COMMANDS on)
 ENDIF(ENABLE_EXPORT_COMPILE_COMMANDS)
 
 # warn about deprecated stuff so that we may try fixing it
@@ -26,10 +26,10 @@ SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release
 ########### Detect Qt version
 SET(ENABLE_QT6 1 CACHE BOOL "Whether to try building with Qt6. If Qt6 is not found, Qt5 will be used.")
 IF(ENABLE_QT6)
-    FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
+     FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
 ENDIF()
 if (NOT Qt6_FOUND)
-    FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core)
+     FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core)
 ENDIF()
 
 # Activate this to error on all things deprecated in 5.15
@@ -45,14 +45,14 @@ SET(STELLARIUM_MAJOR 26)
 # Number of the release (0 is used before first release)
 SET(STELLARIUM_MINOR 0)
 IF(STELLARIUM_RELEASE_BUILD)
-    ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
-    SET(CMAKE_BUILD_TYPE Release)
-    SET(STELLARIUM_PATCH 0)
+     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
+     SET(CMAKE_BUILD_TYPE Release)
+     SET(STELLARIUM_PATCH 0)
 ELSE()
-    ########### Get revision number for non-release builds ###########
-    STRING(TIMESTAMP CDNUMBER "%j")
-    MATH(EXPR STELLARIUM_PATCH_DIGIT "${CDNUMBER} + 0" OUTPUT_FORMAT DECIMAL)
-    SET(STELLARIUM_PATCH ${STELLARIUM_PATCH_DIGIT})
+     ########### Get revision number for non-release builds ###########
+     STRING(TIMESTAMP CDNUMBER "%j")
+     MATH(EXPR STELLARIUM_PATCH_DIGIT "${CDNUMBER} + 0" OUTPUT_FORMAT DECIMAL)
+     SET(STELLARIUM_PATCH ${STELLARIUM_PATCH_DIGIT})
 ENDIF()
 # Use integer versions instead of strings for easier handling if required
 ADD_DEFINITIONS(
@@ -258,9 +258,9 @@ IF(APPLE)
      SET(SDATALOC "Resources")
 ELSE()
      IF(HAIKU)
-	  SET(SDATAPREFIX "data")
+          SET(SDATAPREFIX "data")
      ELSE()
-	  SET(SDATAPREFIX "share")
+          SET(SDATAPREFIX "share")
      ENDIF()
      # share data location:
      SET(SDATALOC "${SDATAPREFIX}/${PACKAGE}")
@@ -268,8 +268,8 @@ ENDIF()
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
      IF(WIN32)
-        # The stars structs rely on gnu gcc packing of bit-fields.
-        SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
+          # The stars structs rely on gnu gcc packing of bit-fields.
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
      ENDIF()
      SET(GCC_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
 ELSE()
@@ -704,46 +704,46 @@ SET(CMAKE_AUTOUIC ON) # ?
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 IF(ENABLE_SHOWMYSKY)
-    ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
-    CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
-        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.4.0.tar.gz
-        URL_HASH SHA256=1096f3c6067e05dd8c4df601b745cca5e88b843ad1328938e5dba69c1fcfb84f
-        EXCLUDE_FROM_ALL yes
-        OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
-    IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
-        # Don't want to link to ShowMySky::ShowMySky directly, so find out its
-        # include dir and lib location manually.
-        GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES
-            ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
-        SET(ShowMySky_LIBRARY $<TARGET_FILE:ShowMySky::ShowMySky>)
-        MESSAGE(STATUS "Will build ShowMySky library")
-        INCLUDE(GNUInstallDirs)
-	IF(APPLE)
-	    INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)
-	ELSE()
-	    INSTALL(TARGETS ShowMySky
+     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
+     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
+          URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.4.0.tar.gz
+          URL_HASH SHA256=1096f3c6067e05dd8c4df601b745cca5e88b843ad1328938e5dba69c1fcfb84f
+          EXCLUDE_FROM_ALL yes
+          OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
+     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
+          # Don't want to link to ShowMySky::ShowMySky directly, so find out its
+          # include dir and lib location manually.
+          GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES
+               ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
+          SET(ShowMySky_LIBRARY $<TARGET_FILE:ShowMySky::ShowMySky>)
+          MESSAGE(STATUS "Will build ShowMySky library")
+          INCLUDE(GNUInstallDirs)
+          IF(APPLE)
+               INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)
+          ELSE()
+               INSTALL(TARGETS ShowMySky
 		    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 		    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
-	ENDIF()
-        # We used EXCLUDE_FROM_ALL in CPMFindPackage to avoid building
-        # irrelevant binaries of CalcMySky. But we still need to build
-        # libShowMySky, so add some target which would depend on it.
-        # stelMain is not defined at this point yet, so can't use it.
-        FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/fake-show-my-sky-client.cpp "")
-        ADD_LIBRARY(fake-show-my-sky-client SHARED
-            ${CMAKE_CURRENT_BINARY_DIR}/fake-show-my-sky-client.cpp)
-        ADD_DEPENDENCIES(fake-show-my-sky-client ShowMySky::ShowMySky)
-    ELSE()
-        GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES
-            ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
-        GET_TARGET_PROPERTY(ShowMySky_LIBRARY
-            ShowMySky::ShowMySky LOCATION)
-        IF(EXISTS ${ShowMySky_LIBRARY})
-            MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
-        ELSE()
-            MESSAGE(FATAL_ERROR "Could NOT found ShowMySky library")
-        ENDIF()
-    ENDIF()
+          ENDIF()
+          # We used EXCLUDE_FROM_ALL in CPMFindPackage to avoid building
+          # irrelevant binaries of CalcMySky. But we still need to build
+          # libShowMySky, so add some target which would depend on it.
+          # stelMain is not defined at this point yet, so can't use it.
+          FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/fake-show-my-sky-client.cpp "")
+          ADD_LIBRARY(fake-show-my-sky-client SHARED
+               ${CMAKE_CURRENT_BINARY_DIR}/fake-show-my-sky-client.cpp)
+          ADD_DEPENDENCIES(fake-show-my-sky-client ShowMySky::ShowMySky)
+     ELSE()
+          GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES
+               ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
+          GET_TARGET_PROPERTY(ShowMySky_LIBRARY
+               ShowMySky::ShowMySky LOCATION)
+          IF(EXISTS ${ShowMySky_LIBRARY})
+               MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
+          ELSE()
+               MESSAGE(FATAL_ERROR "Could NOT found ShowMySky library")
+          ENDIF()
+     ENDIF()
 ENDIF(ENABLE_SHOWMYSKY)
 
 IF(ENABLE_SCRIPTING)
@@ -794,12 +794,12 @@ IF(ENABLE_MEDIA OR USE_PLUGIN_SCENERY3D)
 ENDIF()
 
 IF(ENABLE_TESTING)
-    ENABLE_TESTING()
-    ADD_DEFINITIONS(-DENABLE_TESTING)
-    FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Test REQUIRED)
-    MESSAGE(STATUS "Unit tests support: enabled")
+     ENABLE_TESTING()
+     ADD_DEFINITIONS(-DENABLE_TESTING)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Test REQUIRED)
+     MESSAGE(STATUS "Unit tests support: enabled")
 ELSE(ENABLE_TESTING)
-    MESSAGE(STATUS "Unit tests support: disabled")
+     MESSAGE(STATUS "Unit tests support: disabled")
 ENDIF(ENABLE_TESTING)
 
 ### Zlib package
@@ -843,7 +843,7 @@ IF(ENABLE_XLSX)
           CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
 #               URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.5.0.tar.gz
 #               URL_HASH SHA256=4461bb0fc9b88b6a970520e8b32eb7d2fc391a1a5c326b139a0af836278cdb09
-                URL https://github.com/QtExcel/QXlsx/archive/refs/heads/master.zip
+               URL https://github.com/QtExcel/QXlsx/archive/refs/heads/master.zip
                EXCLUDE_FROM_ALL ON
                SOURCE_SUBDIR QXlsx)
      ENDIF()
@@ -1083,33 +1083,33 @@ ENDIF()
 
 include("cmake/Check-from_chars.cmake")
 IF(NOT FROM_CHARS_WORKS)
-    CPMFindPackage(NAME FastFloat
-                   GIT_REPOSITORY https://github.com/fastfloat/fast_float
-                   VERSION 6.1.0
-                   EXCLUDE_FROM_ALL yes)
-    GET_TARGET_PROPERTY(FastFloat_INCLUDE_DIRECTORIES
-                        FastFloat::fast_float INTERFACE_INCLUDE_DIRECTORIES)
-    INCLUDE_DIRECTORIES(${FastFloat_INCLUDE_DIRECTORIES})
-    ADD_DEFINITIONS(-DUSE_FAST_FLOAT)
+     CPMFindPackage(NAME FastFloat
+          GIT_REPOSITORY https://github.com/fastfloat/fast_float
+          VERSION 6.1.0
+          EXCLUDE_FROM_ALL yes)
+     GET_TARGET_PROPERTY(FastFloat_INCLUDE_DIRECTORIES
+          FastFloat::fast_float INTERFACE_INCLUDE_DIRECTORIES)
+     INCLUDE_DIRECTORIES(${FastFloat_INCLUDE_DIRECTORIES})
+     ADD_DEFINITIONS(-DUSE_FAST_FLOAT)
 ENDIF()
 
 include("cmake/Check-std_execution.cmake")
 IF(STD_EXECUTION_KNOWN)
-ADD_DEFINITIONS(-DSTD_EXECUTION_KNOWN)
+     ADD_DEFINITIONS(-DSTD_EXECUTION_KNOWN)
 ENDIF()
 
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
 INCLUDE_DIRECTORIES(
-      ${CMAKE_BINARY_DIR}
-      ${CMAKE_SOURCE_DIR}/src
-      ${CMAKE_SOURCE_DIR}/src/core
-      ${CMAKE_SOURCE_DIR}/src/core/modules
-      ${CMAKE_SOURCE_DIR}/src/core/planetsephems
-      ${CMAKE_SOURCE_DIR}/src/gui
-      ${CMAKE_SOURCE_DIR}/src/scripting
-      ${INTL_INCLUDE_DIR}
-      ${CMAKE_BINARY_DIR}/src
+     ${CMAKE_BINARY_DIR}
+     ${CMAKE_SOURCE_DIR}/src
+     ${CMAKE_SOURCE_DIR}/src/core
+     ${CMAKE_SOURCE_DIR}/src/core/modules
+     ${CMAKE_SOURCE_DIR}/src/core/planetsephems
+     ${CMAKE_SOURCE_DIR}/src/gui
+     ${CMAKE_SOURCE_DIR}/src/scripting
+     ${INTL_INCLUDE_DIR}
+     ${CMAKE_BINARY_DIR}/src
 )
 
 ########### Subdirectories ###############

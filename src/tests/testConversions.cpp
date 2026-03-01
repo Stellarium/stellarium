@@ -174,9 +174,7 @@ void TestConversions::testRadToHMSStrAdapt()
 		QString ehms	= data.takeFirst().toString();
 		QString rhms	= StelUtils::radToHmsStrAdapt(rad);
 		QVERIFY2(rhms==ehms, qPrintable(QString("%1 radians = %2 (expected %3)")
-					    .arg(QString::number(rad, 'f', 5))
-					    .arg(rhms)
-					    .arg(ehms)));
+					    .arg(QString::number(rad, 'f', 5), rhms, ehms)));
 	}
 }
 
@@ -474,15 +472,11 @@ void TestConversions::testRadToDMSPStr()
 	{
 		double rad	= data.takeFirst().toDouble();
 		QString edms	= data.takeFirst().toString();
-		int precission	= data.takeFirst().toInt();
+		int precision	= data.takeFirst().toInt();
 		bool flag	= data.takeFirst().toBool();
-		QString rdms	= StelUtils::radToDmsPStr(rad, precission, flag);
-		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3) [precission: %4; flag: %5]")
-						.arg(QString::number(rad, 'f', 5))
-						.arg(rdms)
-						.arg(edms)
-						.arg(precission)
-						.arg(flag)));
+		QString rdms	= StelUtils::radToDmsPStr(rad, precision, flag);
+		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3) [precision: %4; flag: %5]")
+						.arg(QString::number(rad, 'f', 5), rdms, edms, QString::number(precision), flag?"True":"False")));
 	}
 }
 
@@ -773,10 +767,10 @@ void TestConversions::testStringCoordinateToRad()
 
 		QVERIFY2(std::abs((angle) - (expectedValue)) < LIM,
 				 qPrintable(QString("%1 = %2 radians (expected %3 radians) - %4")
-							.arg(coordinate)
-							.arg(QString::number(angle))
-							.arg(QString::number(expectedValue))
-							.arg(explain)) );		
+							.arg(coordinate,
+							     QString::number(angle),
+							     QString::number(expectedValue),
+							     explain )));
 	}
 	#undef LIM
 }
@@ -810,11 +804,11 @@ void TestConversions::testHMSToHours()
 		expectedHours = data.takeFirst().toDouble();
 		double hours = StelUtils::hmsToHours(h, m, s);
 		QVERIFY2(qAbs(hours-expectedHours)<=ERROR_LIMIT, qPrintable(QString("%1h%2m%3s = %4h (expected %5h)")
-									    .arg(h)
-									    .arg(m)
-									    .arg(s)
-									    .arg(QString::number(hours, 'f', 6))
-									    .arg(QString::number(expectedHours, 'f', 6))));
+									    .arg(QString::number(h),
+										 QString::number(m),
+										 QString::number(s),
+										 QString::number(hours, 'f', 6),
+										 QString::number(expectedHours, 'f', 6))));
 	}
 }
 
@@ -846,9 +840,9 @@ void TestConversions::testHMSStringToHours()
 		expectedHours = data.takeFirst().toDouble();
 		double hours = StelUtils::hmsStrToHours(hms);
 		QVERIFY2(qAbs(hours-expectedHours)<=ERROR_LIMIT, qPrintable(QString("%1 = %2h (expected %3h)")
-									    .arg(hms)
-									    .arg(QString::number(hours, 'f', 6))
-									    .arg(QString::number(expectedHours, 'f', 6))));
+									    .arg(hms,
+										 QString::number(hours, 'f', 6),
+										 QString::number(expectedHours, 'f', 6))));
 	}
 }
 
@@ -877,9 +871,9 @@ void TestConversions::testHoursToHMSStr()
 		double hours = data.takeFirst().toDouble();
 		QString hms = StelUtils::hoursToHmsStr(hours);
 		QVERIFY2(expectedHMS==hms, qPrintable(QString("%1h = %2 (expected %3)")
-									    .arg(QString::number(hours, 'f', 6))
-									    .arg(hms)
-									    .arg(expectedHMS)));
+									    .arg(QString::number(hours, 'f', 6),
+										 hms,
+										 expectedHMS)));
 	}
 }
 
@@ -906,13 +900,13 @@ void TestConversions::testHoursToHMSStrLowPrecision()
 		QString hms = StelUtils::hoursToHmsStr(hours, true);
 		QString hmsF = StelUtils::hoursToHmsStr(static_cast<float>(hours), true);
 		QVERIFY2(expectedHMS==hms, qPrintable(QString("%1h = %2 (expected %3)")
-										.arg(QString::number(hours, 'f', 6))
-										.arg(hms)
-										.arg(expectedHMS)));
+										.arg(QString::number(hours, 'f', 6),
+										     hms,
+										     expectedHMS)));
 		QVERIFY2(expectedHMS==hmsF, qPrintable(QString("%1h = %2 (expected %3)")
-										.arg(QString::number(hours, 'f', 6))
-										.arg(hmsF)
-										.arg(expectedHMS)));
+										.arg(QString::number(hours, 'f', 6),
+										     hmsF,
+										     expectedHMS)));
 	}	
 }
 
@@ -964,9 +958,9 @@ void TestConversions::testRadToDecDegStr()
 		QString degree = StelUtils::radToDecDegStr(angle, 2, true, true);
 
 		QVERIFY2(degree==expectedValue, qPrintable(QString("%1 radians = %2 (expected %3)")
-							   .arg(QString::number(angle, 'f', 5))
-							   .arg(degree)
-							   .arg(expectedValue)));
+							   .arg(QString::number(angle, 'f', 5),
+								degree,
+								expectedValue)));
 	}
 }
 
@@ -993,9 +987,9 @@ void TestConversions::testVec3iToHtmlColor()
 		QString cColor	= srcColor.toHtmlColor().toUpper();
 
 		QVERIFY2(cColor==color, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(srcColor.toString())
-							   .arg(cColor)
-							   .arg(color)));
+							   .arg(srcColor.toString(),
+								cColor,
+								color)));
 	}
 }
 
@@ -1022,9 +1016,9 @@ void TestConversions::testVec3fToHtmlColor()
 		QString cColor	= srcColor.toHtmlColor().toUpper();
 
 		QVERIFY2(cColor==color, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(srcColor.toString())
-							   .arg(cColor)
-							   .arg(color)));
+							   .arg(srcColor.toString(),
+								cColor,
+								color)));
 	}
 }
 void TestConversions::testVec3dToHtmlColor()
@@ -1050,9 +1044,9 @@ void TestConversions::testVec3dToHtmlColor()
 		QString cColor	= srcColor.toHtmlColor().toUpper();
 
 		QVERIFY2(cColor==color, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(srcColor.toString())
-							   .arg(cColor)
-							   .arg(color)));
+							   .arg(srcColor.toString(),
+								cColor,
+								color)));
 	}
 }
 
@@ -1078,9 +1072,9 @@ void TestConversions::testVec3iSetFromHtmlColor()
 		Vec3i v3icolor	= Vec3i().setFromHtmlColor(color);
 
 		QVERIFY2(v3icolor==expected, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(color)
-							   .arg(v3icolor.toString())
-							   .arg(expected.toString())));
+							   .arg(color,
+								v3icolor.toString(),
+								expected.toString())));
 	}
 }
 
@@ -1106,9 +1100,9 @@ void TestConversions::testVec3fSetFromHtmlColor()
 		Vec3f v3fcolor	= Vec3f().setFromHtmlColor(color);
 
 		QVERIFY2(v3fcolor==expected, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(color)
-							   .arg(v3fcolor.toString())
-							   .arg(expected.toString())));
+							   .arg(color,
+								v3fcolor.toString(),
+								expected.toString())));
 	}
 }
 
@@ -1134,9 +1128,9 @@ void TestConversions::testVec3dSetFromHtmlColor()
 		Vec3d v3dcolor	= Vec3d().setFromHtmlColor(color);
 
 		QVERIFY2(v3dcolor==expected, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(color)
-							   .arg(v3dcolor.toString())
-							   .arg(expected.toString())));
+							   .arg(color,
+								v3dcolor.toString(),
+								expected.toString())));
 	}
 }
 
@@ -1162,9 +1156,9 @@ void TestConversions::testVec3iQColor()
 		QString qcolStr  = v3icolor.toQColor().name(QColor::HexRgb).toUpper();
 
 		QVERIFY2(qcolStr == colorStr,
-			 qPrintable(QString("%1 = %2 (expected %3)").arg(colorStr)
-								    .arg(qcolStr)
-								    .arg(expected.toHtmlColor())));
+			 qPrintable(QString("%1 = %2 (expected %3)").arg(colorStr,
+									 qcolStr,
+									 expected.toHtmlColor())));
 	}
 }
 void TestConversions::testVec3fQColor()
@@ -1189,9 +1183,9 @@ void TestConversions::testVec3fQColor()
 		QString qcolStr  = v3fcolor.toQColor().name(QColor::HexRgb).toUpper();
 
 		QVERIFY2(qcolStr == colorStr,
-			 qPrintable(QString("%1 = %2 (expected %3)").arg(colorStr)
-								    .arg(qcolStr)
-								    .arg(expected.toHtmlColor())));
+			 qPrintable(QString("%1 = %2 (expected %3)").arg(colorStr,
+									 qcolStr,
+									 expected.toHtmlColor())));
 	}
 }
 void TestConversions::testVec3dQColor()
@@ -1216,9 +1210,9 @@ void TestConversions::testVec3dQColor()
 		QString qcolStr  = v3dcolor.toQColor().name(QColor::HexRgb).toUpper();
 
 		QVERIFY2(qcolStr == colorStr,
-			 qPrintable(QString("%1 = %2 (expected %3)").arg(colorStr)
-								    .arg(qcolStr)
-								    .arg(expected.toHtmlColor())));
+			 qPrintable(QString("%1 = %2 (expected %3)").arg(colorStr,
+									 qcolStr,
+									 expected.toHtmlColor())));
 	}
 }
 
@@ -1241,9 +1235,9 @@ void TestConversions::testStrToVec2f()
 		Vec2f dstVec	= Vec2f(vec);
 
 		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(vec)
-							   .arg(dstVec.toString())
-							   .arg(srcVec.toString())));
+							   .arg(vec,
+								dstVec.toString(),
+								srcVec.toString())));
 	}
 }
 
@@ -1265,9 +1259,9 @@ void TestConversions::testVec2fToStr()
 		QString dstVec	= srcVec.toStr();
 
 		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(srcVec.toString())
-							   .arg(dstVec)
-							   .arg(vec)));
+							   .arg(srcVec.toString(),
+								dstVec,
+								vec)));
 	}
 }
 
@@ -1336,9 +1330,9 @@ void TestConversions::testStrToVec3f()
 		Vec3f dstVec	= Vec3f(vec);
 
 		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(vec)
-							   .arg(dstVec.toString())
-							   .arg(srcVec.toString())));
+							   .arg(vec,
+								dstVec.toString(),
+								srcVec.toString())));
 	}
 }
 
@@ -1425,9 +1419,9 @@ void TestConversions::testVec3fToStr()
 		QString dstVec	= srcVec.toStr();
 
 		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(srcVec.toString())
-							   .arg(dstVec)
-							   .arg(vec)));
+							   .arg(srcVec.toString(),
+								dstVec,
+								vec)));
 	}
 }
 
@@ -1612,9 +1606,9 @@ void TestConversions::testStrToVec4d()
 		Vec4d dstVec	= Vec4d(vec);
 
 		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(vec)
-							   .arg(dstVec.toString())
-							   .arg(srcVec.toString())));
+							   .arg(vec,
+								dstVec.toString(),
+								srcVec.toString())));
 	}
 }
 
@@ -1704,9 +1698,9 @@ void TestConversions::testVec4dToStr()
 		QString dstVec	= srcVec.toStr();
 
 		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
-							   .arg(srcVec.toString())
-							   .arg(dstVec)
-							   .arg(vec)));
+							   .arg(srcVec.toString(),
+								dstVec,
+								vec)));
 	}
 }
 

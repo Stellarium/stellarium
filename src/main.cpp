@@ -433,6 +433,8 @@ int main(int argc, char **argv)
 	// Set OS-dependent fallback fonts to retrieve missing glyphs if the main font does not provide them
 #ifdef Q_OS_WIN
 	QFontDatabase::addApplicationFallbackFontFamily(QChar::Script_Cuneiform, "Segoe UI Historic");
+	QFontDatabase::addApplicationFallbackFontFamily(QChar::Script_EgyptianHieroglyphs, "Segoe UI Historic");
+	QFontDatabase::addApplicationFallbackFontFamily(QChar::Script_Mongolian, "Mongolian Baiti");
 #endif
 #endif
 

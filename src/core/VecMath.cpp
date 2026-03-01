@@ -208,21 +208,21 @@ template<> Vec3d Vector3<double>::setFromHtmlColor(QString s)
 
 template<> QString Vec3i::toStr() const
 {
-	return QString("%1,%2,%3").arg(v[0]).arg(v[1]).arg(v[2]);
+	return QString("%1,%2,%3").arg(QString::number(v[0]), QString::number(v[1]), QString::number(v[2]));
 }
 template<> QString Vec3f::toStr() const
 {
 	return QString("%1,%2,%3")
-			.arg(static_cast<double>(v[0]),0,'f',6)
-			.arg(static_cast<double>(v[1]),0,'f',6)
-			.arg(static_cast<double>(v[2]),0,'f',6);
+			.arg(QString::number(static_cast<double>(v[0]),'f',6),
+			     QString::number(static_cast<double>(v[1]),'f',6),
+			     QString::number(static_cast<double>(v[2]),'f',6));
 }
 template<> QString Vec3d::toStr() const
 {
 	return QString("%1,%2,%3")
-			.arg(v[0],0,'f',10)
-			.arg(v[1],0,'f',10)
-			.arg(v[2],0,'f',10);
+			.arg(QString::number(v[0],'f',10),
+			     QString::number(v[1],'f',10),
+			     QString::number(v[2],'f',10));
 }
 
 template<> QString Vec3i::toHtmlColor() const
