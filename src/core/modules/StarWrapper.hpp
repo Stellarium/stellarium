@@ -76,7 +76,7 @@ protected:
 		const SpecialZoneData<Star> *zone,
 		const Star *star) : a(array), z(zone), s(star) {}
 	virtual StarId getStarId() const {return s->getGaia();}
-	virtual QString getID(void) const override
+	QString getID(void) const override
 	{
 		return QString("Gaia DR3 %1").arg(s->getGaia());
 	}
