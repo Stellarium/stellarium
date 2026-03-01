@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This celestial map is based on the *Xianglin* (象林, "Forest of Constellations") star chart, compiled by the late Ming dynasty scholar **Chen Jinmo**​ (陈荩谟) in **1634 CE**. It represents one of the last precise mappings of the traditional Chinese star system before significant Western astronomical influence altered subsequent charts. Created independently of the contemporaneous, Jesuit-influenced official star catalogues, the *Xianglin* chart is a crucial document for understanding indigenous Chinese astronomy on the eve of its major transformation.
+This sky culture is based on the *Xianglin* (象林, "Forest of Constellations") star chart, compiled by the late Ming dynasty scholar **Chen Jinmo**​ (陈荩谟) in **1634 CE**. It represents one of the last precise mappings of the traditional Chinese star system before significant Western astronomical influence altered subsequent charts. Created independently of the contemporaneous, Jesuit-influenced official star catalogues, the *Xianglin* chart is a crucial document for understanding indigenous Chinese astronomy on the eve of its major transformation.
 
 ## Description
 
