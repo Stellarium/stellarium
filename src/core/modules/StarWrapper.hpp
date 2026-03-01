@@ -423,6 +423,20 @@ protected:
 
 		return stypefinal;
 	}
+
+	//! In addition to the entries from StelObject::getInfoMap(), StarWrapper objects provide
+	//! - variable-star (no|eruptive|pulsating|rotating|cataclysmic|eclipsing-binary|variable)
+	//! - star-type (star|double-star)
+	//! - bV : B-V Color Index
+	//! A few tags are only present if data known, or for variable or double stars from the WDS catalog:
+	//! - absolute-mag
+	//! - distance-ly
+	//! - parallax
+	//! - spectral-class
+	//! - period (days)
+	//! - wds-year (year of validity of wds... fields)
+	//! - wds-position-angle
+	//! - wds-separation (arcseconds; 0 for spectroscopic binaries)
 	QVariantMap getInfoMap(const StelCore *core) const override
 	{
 		QVariantMap map = StelObject::getInfoMap(core);
@@ -498,19 +512,10 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HTML encoded description of the StarWrapper1.
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
-	//! In addition to the entries from StelObject::getInfoMap(), StarWrapper1 objects provide
-	//! - variable-star (no|eruptive|pulsating|rotating|cataclysmic|eclipsing-binary)
-	//! - star-type (star|double-star)
-	//! - bV : B-V Color Index
-	//! A few tags are only present if data known, or for variable or double stars from the WDS catalog
-	//! - absolute-mag
-	//! - distance-ly
-	//! - parallax
+	//! In addition to the entries from StarWrapper, StarWrapper1 objects provide
+	//! - star-type: double-star|star
+	//! If data known:
 	//! - spectral-class
-	//! - period (days)
-	//! - wds-year (year of validity of wds... fields)
-	//! - wds-position-angle
-	//! - wds-separation (arcseconds; 0 for spectroscopic binaries)
 	QVariantMap getInfoMap(const StelCore *core) const override;
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;

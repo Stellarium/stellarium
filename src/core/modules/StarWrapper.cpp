@@ -226,9 +226,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
 	}
 
-	QString objectTypeI18nStr = getObjectTypeI18n();
 	if (flags&ObjectType)
 	{
+		QString objectTypeI18nStr = getObjectTypeI18n();
 		QStringList stypes;
 		if (!objType.isEmpty())
 			stypes.append(objType);
@@ -325,13 +325,6 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 	const int wdsObs = StarMgr::getWdsLastObservation(star_id);
 
 	map.insert("star-type", (s->getComponentIds() || wdsObs>0) ? "double-star" : "star");
-
-	if (s->getPlx())
-	{
-		map.insert("parallax", 0.001*s->getPlx());
-		map.insert("absolute-mag", getVMagnitude(core)+5.f*(std::log10(0.001*s->getPlx())));
-		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.001/3600)*(M_PI/180))));
-	}
 
 	if (s->getSpInt())
 		map.insert("spectral-class", StarMgr::convertToSpectralType(s->getSpInt()));
@@ -589,6 +582,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), objectTypeI18nStr, varType) << "<br />";
 		else
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), objectTypeI18nStr) << "<br />";
+		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
 
 	oss << getMagnitudeInfoString(core, flags, 2);
@@ -610,9 +604,9 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	
 	oss << getCommonInfoString(core, flags);
 
-	oss << getProperMotionInfoString(core, flags, pmra, pmdec);
-
 	oss << getDistanceInfoString(core, flags, Plx, PlxErr);
+
+	oss << getProperMotionInfoString(core, flags, pmra, pmdec);
 
 	if (flags&Extra)
 		oss << getGcvsDataInfoString(core, star_id);
@@ -689,7 +683,7 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 
 	if ((flags&AbsoluteMagnitude) && s->getPlx())
 		// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
-		oss << QString("%1: %2. ").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2);
+		oss << QString(q_("The star has an absolute Magnitude of %1")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2) << ". ";
 
 	if (flags&Extra)
 	{
@@ -700,9 +694,9 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 	//InfoStringGroup alreadyProcessed=StelObject::IAUConstellation | StelObject::CulturalConstellation;
 	oss << getCommonNarration(core, flags); // & (~alreadyProcessed));
 
-	oss << getProperMotionNarration(core, flags, pmra, pmdec);
-
 	oss << getDistanceNarration(core, flags, Plx, PlxErr);
+
+	oss << getProperMotionNarration(core, flags, pmra, pmdec);
 
 	if (flags&Extra)
 		oss << getGcvsDataNarration(core, star_id);
