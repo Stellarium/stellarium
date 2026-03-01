@@ -53,7 +53,7 @@ Traditional Manchu constellations mostly name prominent star groups in the north
 <td>ᡤᠠᠰᡥᠠ<br>
 嘎思哈</td>
 <td>Divine Eagle</td>
-<td><img src="illustrations/08Gasha1.png" width="200"></td>
+<td><img src="illustrations/08Gasha.png" width="200"></td>
 <td>Orion<br>Taurus<br>Auriga, etc.</td>
 <td>A vast asterism composed of numerous stars, envisioned as a soaring eagle. Dominating the mid-winter sky, it is majestic and imposing, serving as one of the primary stellar deities worshipped by shamans, visible only in autumn and winter skies. Its form and position were used for observing seasons and predicting weather. Its right leg is led by Nadan Narhū (Pleiades), while its left leg is bound by a rope (Eridanus constellation).</td>
 </tr>
@@ -157,7 +157,7 @@ Traditional Manchu constellations mostly name prominent star groups in the north
 <td>ᡠᠰᡳᡥᠠ ᠪᡠᡵᡠᡥᡠᠨ<br>
 乌西哈布鲁古</td>
 <td>Star of Buruhun (The Dawn Beast)</td>
-<td><img src="illustrations/16Buruhun1.png" width="200"></td>
+<td><img src="illustrations/16Buruhun.png" width="200"></td>
 <td>Boötes<br>Canes Venatici<br>Coma Berenices</td>
 <td>An asterism depicting the Dawn Beast, rising in the east and setting in the west. It serves as the herald guiding the sunrise before winter dawn.</td>
 </tr>
@@ -181,7 +181,7 @@ Traditional Manchu constellations mostly name prominent star groups in the north
 <td>ᠨᡳᠮᠠᡥᠠ ᡠᠰᡳᡥᠠ<br>
 尼玛哈乌西哈</td>
 <td>Fishhook</td>
-<td><img src="illustrations/19Nimaha2.png" width="200"></td>
+<td><img src="illustrations/19Nimaha.png" width="200"></td>
 <td>Scorpius</td>
 <td>A summer stellar deity, commonly called the "Warm Star." Its appearance was used to determine the farming season and divine agricultural abundance or failure.</td>
 </tr>
