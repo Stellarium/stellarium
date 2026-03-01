@@ -1,4 +1,4 @@
-# Manchu
+# Chinese Manchu
 
 ## Introduction
 
