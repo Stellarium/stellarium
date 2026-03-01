@@ -26,7 +26,27 @@ In Manchu celestial worship, the sun holds a supremely important position. For a
 
 In contrast, worship of the moon was relatively weaker in early times, likely due to the fishing and hunting lifestyle: snow reflection provided some illumination, while moonlight cast stark shadows of humans and animals, disadvantageous for stealth during hunting. As society gradually shifted towards settlement and agriculture, and under the influence of Central Plains culture, observations and related myths about the moon gradually became more abundant.
 
-### Constellations
+### Star Worship Customs
+
+Star worship was a significant ritual activity for the Manchus and their ancestors, historically as important as ancestor worship. Ceremonies were typically held on clear winter nights, often during the first lunar month or at specific seasonal nodes. The rituals were solemn, usually involving extinguishing lights, setting up an altar in the courtyard facing the Big Dipper or eastern stars, making blood sacrifices (often using piglets or fowl), using wooden utensils and straw as vessels, and the communal sharing of sacrificial meat by the clan. The shaman would chant "invocations to the star deities," believing that calling upon them made the stars shine brighter. In some large-scale collective star ceremonies, activities like piling firewood and setting it ablaze (called the "star bridge") and fire-skill competitions were held. The purposes of star worship included praying for blessings, dispelling pestilence, celebrating harvests, and beseeching the smooth passage of the shaman's soul to the celestial realm. Records of these ancient customs can be found in Qing dynasty documents such as the *Jilin Tongzhi*, *Jilin Jiuwenlu*, and the *Imperially Commissioned Manchu Rites for Sacrificing to Spirits and Heaven*.
+
+### Mythological Connections
+
+Many traditional Manchu constellations are closely linked to the narrative of their creation myth, *The Heavenly Palace War*. The core of this myth is the cosmic battle between the three goddesses—the Sky Goddess *Abka hehe*, the Earth Goddess *Banaji hehe*, and the Star-Spreading Goddess *Elden hehe*​ (also called *Elden mama*)—and the nine-headed demon *Yeruri*.
+
+The Star-Spreading Goddess *Elden hehe* governs light and scattered stars using a birch-bark bag. In the myth, she creates the sun and moon from the eyes of *Abka hehe*. To aid her in star-spreading, the Fire Goddess *Tumu*​ shed her luminous fur into the sky to become stars, leaving herself bare. She then swung from east to west beneath the *Ilan usiha*​ (Orion's Belt), with the Great Orion Nebula (M42) being her last flicker of light. The Milky Way is the "mountain of stars" *Elden hehe* gathered to block *Yeruri*'s path.
+
+The movement of stars is also explained mythologically: the demon *Yeruri* once stole *Elden hehe*'s star bag and later threw it westward. *Elden hehe* chased from east to west to retrieve it. Ever since, stars have always risen in the east and moved westward.
+
+Several constellations are assigned mythological roles. The origin of *Nadan Narhū*​ (the Pleiades) is as follows: when the Fire Goddess *Tumu* was about to extinguish, the goddess *Nadan*​ emerged from *Elden*'s bag and transformed into hundreds of small stars amidst the evil winds stirred by *Yeruri*, forming the Pleiades cluster, becoming the leading star deity of the stellar array.
+
+*Singgeri usiha*​ (the Rat Star) is the dawn-greeting Rat Goddess. *Usiha Buruhun*​ (the Dawn Beast asterism) is the three-eared, six-eyed Dawn Beast dispatched by *Abka hehe*. They rise before winter dawn, facing east to welcome and guide the sun's rays, preventing *Yeruri* from causing trouble in the pre-dawn darkness.
+
+*Siri Mama*​ (the Carp Star Goddess) transformed into a carp to search for *Yeruri* when he fled into a river, which is why carps in the world prefer dwelling in deep water. *Taci Mama*​ is the timekeeping star entrusted by *Abka hehe* to measure time for the deities day and night.
+
+Furthermore, the myth explains seasonal changes through celestial phenomena: the giant star where the Snow Deity resided, called the "Snow Star" or "Cold Star" (possibly Antares, α Sco), was split in two by *Abka hehe*. One half remained in the sky, the other fell to earth and transformed into the northern sacred mountain "*Nimanggi Uyan hada*"​ (meaning "Snow Peak", Gorod-Makit Mountain in modern Russia). Consequently, the Snow Deity dwells in two places, and its residence determines the season—when in the sky, spring blooms and flowers flourish; when on earth, heavy snow blankets the land for years. This star (or the mountain derived from it) is also called "*Niyengniyeri*"​ Sacred Mountain (meaning "spring"), becoming a marker for seasonal transition.
+
+## Constellations
 
 Traditional Manchu constellations mostly name prominent star groups in the northern night sky using familiar animals, objects, or mythological figures.
 
@@ -191,26 +211,6 @@ Traditional Manchu constellations mostly name prominent star groups in the north
 **Integration with the Traditional Chinese Asterism System**: After the establishment of the Qing dynasty, with the sinicization of state institutions, official astronomical agencies gradually adopted the traditional Chinese *xingguan* system (Three Enclosures and Twenty-Eight Mansions) for astronomical observation and calendar compilation, translating many asterism names into Manchu. However, among the folk in Northeast China, the aforementioned traditional shamanistic constellation system persisted, intertwined with ancient memories of production and life, myths, legends, and some folk customs, constituting the older, more indigenous layer of Manchu stellar culture. As late as the 20th century, a small number of people in Northeast China still used these shamanistic constellations.
 
 Stellarium provides over 20 of these shamanistic constellations and also uses asterisms lines to represent *xingguans* from the official Qing dynasty star catalog (*Yixiang Kaocheng*).
-
-### Star Worship Customs
-
-Star worship was a significant ritual activity for the Manchus and their ancestors, historically as important as ancestor worship. Ceremonies were typically held on clear winter nights, often during the first lunar month or at specific seasonal nodes. The rituals were solemn, usually involving extinguishing lights, setting up an altar in the courtyard facing the Big Dipper or eastern stars, making blood sacrifices (often using piglets or fowl), using wooden utensils and straw as vessels, and the communal sharing of sacrificial meat by the clan. The shaman would chant "invocations to the star deities," believing that calling upon them made the stars shine brighter. In some large-scale collective star ceremonies, activities like piling firewood and setting it ablaze (called the "star bridge") and fire-skill competitions were held. The purposes of star worship included praying for blessings, dispelling pestilence, celebrating harvests, and beseeching the smooth passage of the shaman's soul to the celestial realm. Records of these ancient customs can be found in Qing dynasty documents such as the *Jilin Tongzhi*, *Jilin Jiuwenlu*, and the *Imperially Commissioned Manchu Rites for Sacrificing to Spirits and Heaven*.
-
-### Mythological Connections
-
-Many traditional Manchu constellations are closely linked to the narrative of their creation myth, *The Heavenly Palace War*. The core of this myth is the cosmic battle between the three goddesses—the Sky Goddess *Abka hehe*, the Earth Goddess *Banaji hehe*, and the Star-Spreading Goddess *Elden hehe*​ (also called *Elden mama*)—and the nine-headed demon *Yeruri*.
-
-The Star-Spreading Goddess *Elden hehe* governs light and scattered stars using a birch-bark bag. In the myth, she creates the sun and moon from the eyes of *Abka hehe*. To aid her in star-spreading, the Fire Goddess *Tumu*​ shed her luminous fur into the sky to become stars, leaving herself bare. She then swung from east to west beneath the *Ilan usiha*​ (Orion's Belt), with the Great Orion Nebula (M42) being her last flicker of light. The Milky Way is the "mountain of stars" *Elden hehe* gathered to block *Yeruri*'s path.
-
-The movement of stars is also explained mythologically: the demon *Yeruri* once stole *Elden hehe*'s star bag and later threw it westward. *Elden hehe* chased from east to west to retrieve it. Ever since, stars have always risen in the east and moved westward.
-
-Several constellations are assigned mythological roles. The origin of *Nadan Narhū*​ (the Pleiades) is as follows: when the Fire Goddess *Tumu* was about to extinguish, the goddess *Nadan*​ emerged from *Elden*'s bag and transformed into hundreds of small stars amidst the evil winds stirred by *Yeruri*, forming the Pleiades cluster, becoming the leading star deity of the stellar array.
-
-*Singgeri usiha*​ (the Rat Star) is the dawn-greeting Rat Goddess. *Usiha Buruhun*​ (the Dawn Beast asterism) is the three-eared, six-eyed Dawn Beast dispatched by *Abka hehe*. They rise before winter dawn, facing east to welcome and guide the sun's rays, preventing *Yeruri* from causing trouble in the pre-dawn darkness.
-
-*Siri Mama*​ (the Carp Star Goddess) transformed into a carp to search for *Yeruri* when he fled into a river, which is why carps in the world prefer dwelling in deep water. *Taci Mama*​ is the timekeeping star entrusted by *Abka hehe* to measure time for the deities day and night.
-
-Furthermore, the myth explains seasonal changes through celestial phenomena: the giant star where the Snow Deity resided, called the "Snow Star" or "Cold Star" (possibly Antares, α Sco), was split in two by *Abka hehe*. One half remained in the sky, the other fell to earth and transformed into the northern sacred mountain "*Nimanggi Uyan hada*"​ (meaning "Snow Peak", Gorod-Makit Mountain in modern Russia). Consequently, the Snow Deity dwells in two places, and its residence determines the season—when in the sky, spring blooms and flowers flourish; when on earth, heavy snow blankets the land for years. This star (or the mountain derived from it) is also called "*Niyengniyeri*"​ Sacred Mountain (meaning "spring"), becoming a marker for seasonal transition.
 
 ## References
 
