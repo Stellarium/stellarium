@@ -53,7 +53,7 @@ Traditional Manchu constellations mostly name prominent star groups in the north
 <table>
 <thead>
 <tr>
-<th>Manchu and<br>Chinese Name</th>
+<th>Chinese and<br>Manchu Name</th>
 <th>Translation</th>
 <th>Illustration</th>
 <th>Corresponding Star Region</th>
@@ -62,148 +62,156 @@ Traditional Manchu constellations mostly name prominent star groups in the north
 </thead>
 <tbody>
 <tr>
-<td>ᠨᠠᡩᠠᠨ ᠨᠠᡳᡥᡡ<br>
-那丹那拉呼</td>
+<td>那丹那拉呼<br>
+<img src="illustrations/manchu_script/01Narhv_manchu.png" width="40"></td>
 <td>Seven Maidens</td>
 <td><img src="illustrations/01Narhv.png" width="200"></td>
 <td>Pleiades</td>
 <td>One of the most prominent open clusters in the winter night sky. In Manchu mythology, it is the leading star deity or assistant to the Star-Spreading Goddess. Rising in the east at dusk, it is regarded as the commander leading the westward procession of winter star groups. It is a crucial astronomical marker for determining the onset of winter and for nighttime timekeeping.</td>
 </tr>
 <tr>
-<td>ᡤᠠᠰᡥᠠ<br>
-嘎思哈</td>
+<td>嘎思哈<br>
+<img src="illustrations/manchu_script/08Gasha_manchu.png" width="40"></td>
 <td>Divine Eagle</td>
 <td><img src="illustrations/08Gasha.png" width="200"></td>
 <td>Orion<br>Taurus<br>Auriga, etc.</td>
 <td>A vast asterism composed of numerous stars, envisioned as a soaring eagle. Dominating the mid-winter sky, it is majestic and imposing, serving as one of the primary stellar deities worshipped by shamans, visible only in autumn and winter skies. Its form and position were used for observing seasons and predicting weather. Its right leg is led by Nadan Narhū (Pleiades), while its left leg is bound by a rope (Eridanus constellation).</td>
 </tr>
 <tr>
-<td>ᡝᠨᡩᡠᡵᡳ ᠰᡝᠨᡤᡤᡠ<br>
-恩都力僧固</td>
+<td>恩都力僧固<br>
+<img src="illustrations/manchu_script/02Sengge_manchu.png" width="40"></td>
 <td>God of Hedgehogs</td>
 <td><img src="illustrations/02Sengge.png" width="200"></td>
 <td>Cygnus</td>
 <td>A prominent bright star group located within the Milky Way. Called the "Rafter Star" or "Hedgehog Star," it was venerated as a deity guarding the night and home, and served as an important directional star.</td>
 </tr>
 <tr>
-<td>ᡨᠠᠴᡳ ᠮᠠᠮᠠ<br>
-塔其妈妈</td>
+<td>塔其妈妈<br>
+<img src="illustrations/manchu_script/03Taci_manchu.png" width="40"></td>
 <td>Taci (Goddess)</td>
 <td><img src="illustrations/03Taci.png" width="200"></td>
 <td>Cassiopeia</td>
 <td>Its shape (W-shaped) resembles a knot or a winnowing basket, imagined as a snake or a dipper. It is an important timekeeping star; changes in its position and angle in the night sky were used to estimate the hour of the night. Perennially visible at high northern latitudes, it served as a crucial navigational and chronological reference.</td>
 </tr>
 <tr>
-<td>ᡨᠣᠪᠣ ᡠᠰᡳᡥᠠ<br>
-托包乌西哈</td>
+<td>托包乌西哈<br>
+<img src="illustrations/manchu_script/04Tobo_manchu.png" width="40"></td>
 <td>Hut</td>
 <td><img src="illustrations/04Tobo.png" width="200"></td>
 <td>Perseus</td>
 <td>Imagined as a resting place (hut) for the shaman's soul during its ascent to heaven.</td>
 </tr>
 <tr>
-<td>ᡝᠨᡩᡠᡵᡳ ᡨᡝᡥᡝ<br>
-恩都力特克</td>
+<td>恩都力特克<br>
+<img src="illustrations/manchu_script/05Tehe_manchu.png" width="40"></td>
 <td>God of the Stand</td>
 <td><img src="illustrations/05Tehe.png" width="200"></td>
 <td>Pegasus</td>
 <td>Located in the southern sky, moving westward, this asterism was used by shamans to observe signs of wind and snow. The Great Square of Pegasus is very prominent in the autumn night sky.</td>
 </tr>
 <tr>
-<td>ᡳᠯᠠᠨ ᡠᠰᡳᡥᠠ<br>
-依兰乌西哈</td>
+<td>依兰乌西哈<br>
+<img src="illustrations/manchu_script/06Ilan_manchu.png" width="40"></td>
 <td>Three Stars</td>
 <td><img src="illustrations/06Ilan.png" width="200"></td>
 <td>Orion's Belt</td>
 <td>Three bright stars aligned in a row, one of the most distinctive markers of the winter night sky. As brilliant seasonal and timekeeping stars, their rising in the east at dusk signals the heart of winter; their movement can be used to estimate the time in the latter half of the night.</td>
 </tr>
 <tr>
-<td>ᠨᠠᡩᠠᠨ ᡠᠰᡳᡥᠠ<br>
-那丹乌西哈</td>
+<td>那丹乌西哈<br>
+<img src="illustrations/manchu_script/07Nadan_manchu.png" width="40"></td>
 <td>Seven Stars</td>
 <td><img src="illustrations/07Nadan.png" width="200"></td>
 <td>Ursa Major</td>
 <td>The Big Dipper asterism, the most important star group for nighttime timekeeping and identifying the northern direction. The pointing of its "dipper handle" indicates the seasons and holds protective symbolism.</td>
 </tr>
 <tr>
-<td>ᠰᡳᠩᡤᡝᡵᡳ ᡠᠰᡳᡥᠠ<br>
-兴恶里乌西哈</td>
+<td>兴恶里乌西哈<br>
+<img src="illustrations/manchu_script/09Singgeri_manchu.png" width="40"></td>
 <td>Rat</td>
 <td><img src="illustrations/09Singgeri.png" width="200"></td>
 <td>Leo</td>
 <td>The Dawn-Greeting Rat Deity, which rises in the east before winter dawn together with the Dawn Beast Buruhun to welcome the sunrise. Used for divining snow volume and wind strength.</td>
 </tr>
 <tr>
-<td>ᠮᠣᡵᡳᠨ ᡠᠰᡳᡥᠠ<br>
-莫林乌西哈</td>
+<td>莫林乌西哈<br>
+<img src="illustrations/manchu_script/10Morin_manchu.png" width="40"></td>
 <td>Horse</td>
 <td></td>
 <td></td>
 <td>A seasonal timekeeping star that rises in the east and sets in the west. It is not a single star, but a collective name for four bright stars: the bright star α Aur visible in the eastern sky at dusk after winter begins, α CMa rising in the east during the Xu hour (7-9 PM), and α Boo and α Vir rising at dawn.</td>
 </tr>
 <tr>
-<td>ᠸᠠᡩᠠᠨ<br>
-瓦丹星</td>
+<td>瓦丹星<br>
+<img src="illustrations/manchu_script/11Wadan_manchu.png" width="40"></td>
 <td>Wadan (The Celestial Altar)</td>
 <td><img src="illustrations/11Wadan.png" width="200"></td>
 <td>Corvus</td>
 <td>The celestial location where ritual implements are stored, which must be worshipped when someone learns shamanism or when a shaman passes away.</td>
 </tr>
 <tr>
-<td>ᡳᠮᠴᡳᠨ<br>
-尼玛沁星</td>
+<td>尼玛沁星<br>
+<img src="illustrations/manchu_script/12Imcin_manchu.png" width="40"></td>
 <td>Drum</td>
 <td><img src="illustrations/12Imcin-Gisun.png" width="200"></td>
 <td>Aries<br>Triangulum<br>Andromeda</td>
 <td>Along with the "Drumstick Star," considered the shaman's ritual instrument stars. It is the divine drum used by the Star-Spreading Goddess.</td>
 </tr>
 <tr>
-<td>ᠰᡳᡵᡳ ᠮᠠᠮᠠ<br>
-西离妈妈</td>
+<td>西离妈妈<br>
+<img src="illustrations/manchu_script/14Siri_manchu.png" width="40"></td>
 <td>Goddess of Carp</td>
 <td><img src="illustrations/14Siri.png" width="200"></td>
 <td>Lynx<br>Camelopardalis</td>
 <td>Imagined as a fish star transformed from a person, governing the fish of glacial rivers. Observing this star was used for divining the abundance or scarcity of the winter fishing and hunting season.</td>
 </tr>
 <tr>
-<td>ᡨᡝᡵᡴᡳᠨ ᡠᠰᡳᡥᠠ ᠮᠠᠮᠠ<br>
-妥亲乌西哈妈妈</td>
+<td>妥亲乌西哈妈妈<br>
+<img src="illustrations/manchu_script/15Terkin_manchu.png" width="40"></td>
 <td>Goddess of the Staircase Stars</td>
 <td><img src="illustrations/15Terkin.png" width="200"></td>
 <td>Virgo<br>Coma Berenices</td>
 <td>Believed to be the "stairway to heaven" that the shaman's soul could use during its ascent, represented by a goddess figure in a seated posture offering assistance.</td>
 </tr>
 <tr>
-<td>ᡠᠰᡳᡥᠠ ᠪᡠᡵᡠᡥᡠᠨ<br>
-乌西哈布鲁古</td>
+<td>乌西哈布鲁古<br>
+<img src="illustrations/manchu_script/16Buruhun_manchu.png" width="40"></td>
 <td>Star of Buruhun (The Dawn Beast)</td>
 <td><img src="illustrations/16Buruhun.png" width="200"></td>
 <td>Boötes<br>Canes Venatici<br>Coma Berenices</td>
 <td>An asterism depicting the Dawn Beast, rising in the east and setting in the west. It serves as the herald guiding the sunrise before winter dawn.</td>
 </tr>
 <tr>
-<td>ᡶᠣᡩᠣᡥᠣ ᡠᠰᡳᡥᠠ<br>
-佛朵乌西哈</td>
+<td>佛朵乌西哈<br>
+<img src="illustrations/manchu_script/17Fodoho_manchu.png" width="40"></td>
 <td>Willow</td>
 <td><img src="illustrations/17Fodoho.png" width="200"></td>
 <td>Head of Hydra</td>
 <td>Located low in the southern sky, it was considered a divine star governing human fertility and was also used for divining the year's harvest and epidemics.</td>
 </tr>
 <tr>
-<td>ᠠᠰᡠ ᡠᠰᡳᡥᠠ<br>
-阿苏乌西哈</td>
+<td>阿苏乌西哈<br>
+<img src="illustrations/manchu_script/18Asu_manchu.png" width="40"></td>
 <td>Net</td>
 <td><img src="illustrations/18Asu.png" width="200"></td>
 <td>Hercules</td>
 <td>Imagined as the hunting net used by the Hunting God (Banda mafa), reflecting the characteristics of a fishing and hunting lifestyle. The ring-like structure of Corona Borealis is easily associated with a hunting net.</td>
 </tr>
 <tr>
-<td>ᠨᡳᠮᠠᡥᠠ ᡠᠰᡳᡥᠠ<br>
-尼玛哈乌西哈</td>
+<td>尼玛哈乌西哈<br>
+<img src="illustrations/manchu_script/19Nimaha_manchu.png" width="40"></td>
 <td>Fishhook</td>
 <td><img src="illustrations/19Nimaha.png" width="200"></td>
 <td>Scorpius</td>
 <td>A summer stellar deity, commonly called the "Warm Star." Its appearance was used to determine the farming season and divine agricultural abundance or failure.</td>
+</tr>
+<tr>
+<td>苏勒肯乌西哈<br>
+<img src="illustrations/manchu_script/20Sureken_manchu.png" width="40"></td>
+<td>Star of Wisdom</td>
+<td><img src="illustrations/20Sureken.png" width="200"></td>
+<td></td>
+<td>Star Deity of Wisdom. Composed of four bright stars in the southern sky, shaped like a dipper. The Star Deity of Wisdom primarily blesses girls to be intelligent and beautiful, and is a great female deity.</td>
 </tr>
 </tbody>
 </table>
@@ -217,10 +225,17 @@ Stellarium provides over 20 of these shamanistic constellations and also uses as
  - [#1]: Fu Yuguang. (2005). Fu Yuguang's Collected Works on Folk Culture. Changchun: Jilin University Press.
  - [#2]: Fu Yuguang, Jing Wenli. (2009). The Heavenly Palace War & Sirin Amban mafa. Jilin People's Publishing House.
  - [#3]: [Ursan Manchu-Chinese Online Dictionary](http://www.dorontu.com/#/homePage)
+ - [#4]: Fu Yuguang, Wang Honggang. (1995). Shamanic Goddess. Liaoning People's Publishing House.
+ - [#5]: Jiang, Z., & Wang, L. (2020, December). Dependent origination of the Qing Dynasty’s Manchu star names: A study based on the Emperor Gaozong’s *Han i araha sunja hacin i hergen kamciha manju gisun i buleku bithe*. *The History of Science Newsletter*, 44, pp. 29-52.
+ - [#6]: Guo, S. (2003). The star worship of shamanism and the germ of northern astronomy. *World Religious Studies*, (01), 122–131+155.
 
 ## Authors
 
 This sky culture was contributed by Lyu Haocheng. [lvhc2016@126.com](mailto:lvhc2016@126.com)
+
+### Acknowledgements
+
+I thank to Jalakū and others from the [Ursan Dictionary project](http://www.dorontu.com/#/homePage) for proofreading the Manchu transliterations and providing the Manchu font.
 
 ## License
 
