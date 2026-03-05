@@ -66,7 +66,7 @@ uniform highp vec3 lightDirection;
 #endif
 #ifdef IS_MOON
     uniform sampler2D earthShadow;
-    uniform mediump float eclipsePush;
+	uniform mediump vec3 eclipsePush;
     uniform sampler2D normalMap;
     uniform sampler2D horizonMap;
 
@@ -425,8 +425,8 @@ void main()
         //finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
         finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, smoothstep(0., 1., 1.-mixfactor)); 
     }
-    finalColor *= litColor;
-#ifdef IS_MOON
+	finalColor *= litColor;
+	#ifdef IS_MOON
     if(final_illumination < 0.9999)
     {
         lowp vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));
@@ -435,7 +435,14 @@ void main()
         // Current implementation is a legacy from older times.
         lowp vec4 color = vec4(linearToSRGB(finalColor.rgb), finalColor.a);
         lowp float alpha = clamp(shadowColor.a, 0.0, 0.7); // clamp alpha to allow some maria detail
-        finalColor = eclipsePush * (1.0-0.75*shadowColor.a) * mix(color, shadowColor, alpha);
+		finalColor = vec4(eclipsePush * (1.0-0.75*shadowColor.a) * mix(color, shadowColor, alpha).rgb, finalColor.a);
+        finalColor.rgb = srgbToLinear(finalColor.rgb);
+    }
+    else
+    {
+        // No eclipse: apply FOV-based brightness push
+        finalColor.rgb = linearToSRGB(finalColor.rgb);
+        finalColor.rgb *= eclipsePush;
         finalColor.rgb = srgbToLinear(finalColor.rgb);
     }
 #endif
