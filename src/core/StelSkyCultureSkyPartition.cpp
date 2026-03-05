@@ -267,7 +267,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 			}
 			else
 			{
-				Q_ASSERT(extent.length() == 2*partitions.length());
+				Q_ASSERT(extent.length() == 2*partitions.at(0));
 				nExt=qMax(extent.at(2*p),   extent.at(2*((p-1+partitions[0]) % partitions[0])));
 				sExt=qMin(extent.at(2*p+1), extent.at(2*((p-1+partitions[0]) % partitions[0])+1));
 			}
