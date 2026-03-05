@@ -4432,38 +4432,59 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 	{
 		GL(normalMap->bind(2));
 		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
+
+		// Compute FOV-based push (always active, not just during eclipse)
+		const double Lambda = getEclipticPos().norm();
+		const double tau    = atan(getEquatorialRadius() / Lambda) * M_180_PI;
+		const double fov    = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
+		const float sizeRatio = static_cast<float>(tau / fov);
+
+		const float MIN_RATIO = 0.003f;
+		const float MAX_RATIO = 0.03f;
+
+		GLfloat push = 1.0f;
+		if (sizeRatio < MIN_RATIO)
+		{
+			push = 6.0f;
+		}
+		else if (sizeRatio < MAX_RATIO)
+		{
+			float t = (sizeRatio - MIN_RATIO) / (MAX_RATIO - MIN_RATIO);
+			push = 1.0f + 3.0f * (1.0f - pow(t, 1.0f/6.0f));
+		}
+
 		if (!rData.shadowCandidates.isEmpty())
 		{
 			GL(texEarthShadow->bind(3));
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
-			// Ad-hoc visibility improvement during lunar eclipses:
-			// During partial umbra phase, make moon brighter so that the bright limb and umbra border has more visibility.
-			// When the moon is half in umbra, we start to raise its brightness. Near edge of totality we try to simulate the apparent super-bright edge.
-			static const double tweak=1.015; // 1.00 to have maximum push only in full umbra. 1.01 or even 1.02 looks better to show a brilliant last/first edge
-			GLfloat push=1.0f;
 
-			// Like in getVMagnitude() we must compute an elongation from the aberrated sun.
+			static const double tweak=1.015;
 			PlanetP sun=ssm->getSun();
 			const Vec3d obsPos=parent->eclipticPos-sun->getAberrationPush();
 			const double observerRq = obsPos.normSquared();
 			const Vec3d& planetHelioPos = getHeliocentricEclipticPos() - sun->getAberrationPush();
 			const double planetRq = planetHelioPos.normSquared();
 			const double observerPlanetRq = (obsPos - planetHelioPos).normSquared();
-			double aberratedElongation = std::acos((observerPlanetRq  + observerRq - planetRq)/(2.0*std::sqrt(observerPlanetRq*observerRq)));
-			const double od = 180. - aberratedElongation * (180.0/M_PI); // opposition distance [degrees]
-
-			// Compute umbra radius at lunar distance.
-			const double Lambda=getEclipticPos().norm();                             // Lunar distance [AU]
+			double aberratedElongation = std::acos((observerPlanetRq + observerRq - planetRq)/(2.0*std::sqrt(observerPlanetRq*observerRq)));
+			const double od = 180. - aberratedElongation * (180.0/M_PI);
 			const double sigma=ssm->getEarthShadowRadiiAtLunarDistance().first[0]/3600.;
-			const double tau=atan(getEquatorialRadius()/Lambda) * M_180_PI; // geocentric angle of Lunar radius [degrees]
 
-			if (od<tweak*sigma-tau)     // if the Moon is fully immersed in the shadow
-				push=4.0f;
-			else if (od<tweak*sigma)    // If the Moon is half immersed, start pushing with a strong power function that make it apparent only in the last few percents.
-				push+=3.f*(1.f-pow(static_cast<float>((od-tweak*sigma+tau)/tau), 1.f/6.f));
+			float eclipsePush = 1.0f;
+			if (od<tweak*sigma-tau)
+			eclipsePush = 4.0f;
+			else if (od<tweak*sigma)
+			eclipsePush = 1.0f + 3.f*(1.f-pow(static_cast<float>((od-tweak*sigma+tau)/tau), 1.f/6.f));
 
-			GL(moonShaderProgram->setUniformValue(moonShaderVars.eclipsePush, push)); // constant for now...
+			push = std::max(push, eclipsePush);
 		}
+
+		const float vMag = getVMagnitude(StelApp::getInstance().getCore());
+		const float vMagExt = getVMagnitudeWithExtinction(StelApp::getInstance().getCore(), vMag);
+		const float extinctedMag = vMagExt - vMag;
+		const float mgGreen = powf(0.85f, 0.6f * extinctedMag);
+		const float mgBlue  = powf(0.6f,  0.5f * extinctedMag);
+		GL(moonShaderProgram->setUniformValue(moonShaderVars.eclipsePush,
+			push, mgGreen * push, mgBlue * push)); // now always sent!
 		GL(horizonMap->bind(4));
 		GL(moonShaderProgram->setUniformValue(moonShaderVars.horizonMap, 4));
 	}
