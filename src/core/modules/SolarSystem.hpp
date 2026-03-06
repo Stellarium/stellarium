@@ -74,6 +74,8 @@ class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 	Q_PROPERTY(bool flagShowObjSelfShadows		READ getFlagShowObjSelfShadows		WRITE setFlagShowObjSelfShadows		NOTIFY flagShowObjSelfShadowsChanged)
 	Q_PROPERTY(bool flagMoonScale			READ getFlagMoonScale			WRITE setFlagMoonScale			NOTIFY flagMoonScaleChanged)
 	Q_PROPERTY(double moonScale			READ getMoonScale			WRITE setMoonScale			NOTIFY moonScaleChanged)
+	Q_PROPERTY(bool flagDynamicMoonScale		READ getFlagDynamicMoonScale		WRITE setFlagDynamicMoonScale		NOTIFY flagDynamicMoonScaleChanged)
+	Q_PROPERTY(double moonScaleFovThreshold		READ getMoonScaleFovThreshold		WRITE setMoonScaleFovThreshold		NOTIFY moonScaleFovThresholdChanged)
 	Q_PROPERTY(bool flagMinorBodyScale		READ getFlagMinorBodyScale		WRITE setFlagMinorBodyScale		NOTIFY flagMinorBodyScaleChanged)
 	Q_PROPERTY(double minorBodyScale		READ getMinorBodyScale			WRITE setMinorBodyScale			NOTIFY minorBodyScaleChanged)
 	Q_PROPERTY(bool flagPlanetScale			READ getFlagPlanetScale			WRITE setFlagPlanetScale		NOTIFY flagPlanetScaleChanged)
@@ -584,6 +586,16 @@ public slots:
 	//! Get the display scaling factor for Earth's moon.
 	double getMoonScale(void) const {return moonScale;}
 
+	//! Set whether dynamic FOV-based Moon scaling is active.
+	void setFlagDynamicMoonScale(bool b);
+	//! Get whether dynamic FOV-based Moon scaling is active.
+	bool getFlagDynamicMoonScale(void) const {return flagDynamicMoonScale;}
+
+	//! Set the FOV (in degrees) at which the dynamic Moon scale equals 1x (natural size).
+	void setMoonScaleFovThreshold(double deg);
+	//! Get the FOV threshold for dynamic Moon scaling.
+	double getMoonScaleFovThreshold(void) const {return moonScaleFovThreshold;}
+
 	//! Set flag which determines if minor bodies (everything except the 8 planets) are drawn scaled or not.
 	void setFlagMinorBodyScale(bool b);
 	//! Get the current value of the flag which determines if minor bodies (everything except the 8 planets) are drawn scaled or not.
@@ -814,6 +826,8 @@ signals:
 	void flagShowObjSelfShadowsChanged(bool b);
 	void flagMoonScaleChanged(bool b);
 	void moonScaleChanged(double f);
+	void flagDynamicMoonScaleChanged(bool b);
+	void moonScaleFovThresholdChanged(double deg);
 	void flagMinorBodyScaleChanged(bool b);
 	void minorBodyScaleChanged(double f);
 	void flagPlanetScaleChanged(bool b);
@@ -1125,6 +1139,8 @@ private:
 	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
 	bool flagMoonScale;
 	double moonScale;
+	bool flagDynamicMoonScale;   //!< If true, Moon scale is computed dynamically from FOV instead of using a fixed multiplier.
+	double moonScaleFovThreshold; //!< FOV in degrees at which dynamic Moon scale equals 1x (natural size).
 	bool flagMinorBodyScale;
 	double minorBodyScale;
 	bool flagPlanetScale;
