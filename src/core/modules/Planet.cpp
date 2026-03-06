@@ -4356,7 +4356,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
-	const unsigned short int nb_facet = static_cast<unsigned short int>(qBound(10u, static_cast<uint>(screenRd * 40.f/50.f * sqrt(sphereScaleF)), 100u));	// 40 facets for 1024 pixels diameter on screen
+	const unsigned short int nb_facet = static_cast<unsigned short int>(qBound(20u, static_cast<uint>(screenRd * 40.f/50.f * sqrt(sphereScaleF)), 100u));	// 40 facets for 1024 pixels diameter on screen
 
 	// Generates the vertices
 	Planet3DModel model;
