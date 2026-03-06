@@ -289,6 +289,8 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->planetLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customPlanetMagLimit");
 	connectBoolProperty(ui->planetScaleMoonCheckBox, "SolarSystem.flagMoonScale");
 	connectDoubleProperty(ui->moonScaleFactor,"SolarSystem.moonScale");
+	connectBoolProperty(ui->moonScaleDynamicCheckBox, "SolarSystem.flagDynamicMoonScale");
+	connectDoubleProperty(ui->moonScaleFovThresholdSpinBox, "SolarSystem.moonScaleFovThreshold");
 	connectBoolProperty(ui->planetScaleMinorBodyCheckBox, "SolarSystem.flagMinorBodyScale");
 	connectDoubleProperty(ui->minorBodyScaleFactor,"SolarSystem.minorBodyScale");
 	connectBoolProperty(ui->planetScalePlanetsCheckBox, "SolarSystem.flagPlanetScale");
