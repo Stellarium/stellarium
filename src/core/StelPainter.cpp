@@ -1888,6 +1888,11 @@ void StelPainter::drawSprite2dModeNoDeviceScale(const std::vector<Vec2f>& points
 	drawSprite2dMode(points, radius/(static_cast<float>(prj->getDevicePixelsPerPixel())));
 }
 
+void StelPainter::drawSprite2dModeNoDeviceScale(float x, float y, float radius, float rotation)
+{
+	drawSprite2dMode(x, y, radius / static_cast<float>(prj->getDevicePixelsPerPixel()), rotation);
+}
+
 void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
 {
 	Vec3d win;
