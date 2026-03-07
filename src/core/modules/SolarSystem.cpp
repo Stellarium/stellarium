@@ -639,7 +639,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 			const float angle = angleBase + i * 90;
 			const float x = screenpos[0] + screenSize * cos(angle * M_PI_180f);
 			const float y = screenpos[1] + screenSize * sin(angle * M_PI_180f);
-			sPainter.drawSprite2dMode(x, y, radius, angle);
+			sPainter.drawSprite2dModeNoDeviceScale(x, y, radius, angle);
 		}
 	}
 }

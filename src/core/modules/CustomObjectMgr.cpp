@@ -419,7 +419,7 @@ void CustomObjectMgr::drawPointer(StelCore* core, StelPainter& painter)
 		const float angle = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 40;
 		const float scale = StelApp::getInstance().getScreenScale();
 		const float radius = 13.f * scale;
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], radius, angle);
+		painter.drawSprite2dModeNoDeviceScale(screenpos[0], screenpos[1], radius, angle);
 	}
 }
 
