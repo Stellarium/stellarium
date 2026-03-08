@@ -1170,7 +1170,7 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 	if (viewportEffect)
 		viewportEffect->distortXY(x, y);
 
-	QMouseEvent event(inputEvent->type(), QPoint(qRound(x*devicePixelsPerPixel), qRound(y*devicePixelsPerPixel)), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
+	QMouseEvent event(inputEvent->type(), QPointF(x*devicePixelsPerPixel, y*devicePixelsPerPixel), inputEvent->globalPosition(), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
 	event.setAccepted(false);
 	
 	// Send the event to every StelModule
