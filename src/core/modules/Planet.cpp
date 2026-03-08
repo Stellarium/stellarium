@@ -2564,7 +2564,13 @@ QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core, bool
 	const double fTerm=1-f*f;
 	// When using the last computed elements, light time should already be accounted for.
 	const Vec3d r  = PrecNut*StelCore::matVsop87ToJ2000*getHeliocentricEclipticPos();
-	const Vec3d r_e= PrecNut*StelCore::matVsop87ToJ2000*core->getCurrentPlanet()->getHeliocentricEclipticPos();
+	// When observing from the same planet, the result delivers NaN. This causes red Saturn rings. (#4619)
+	// Tentative solution: Use data for Earth observer.
+	Vec3d r_e;
+	if (core->getCurrentPlanet()->getEnglishName() == getEnglishName())
+		r_e= PrecNut*StelCore::matVsop87ToJ2000*GETSTELMODULE(SolarSystem)->getEarth()->getHeliocentricEclipticPos();
+	else
+		r_e= PrecNut*StelCore::matVsop87ToJ2000*core->getCurrentPlanet()->getHeliocentricEclipticPos();
 	const Vec3d Dr= r-r_e; // should be regular vector resembling RA/DE of object in rectangular equatorial PrecNut*(J2000) coords.
 //	// verify this assumption...
 //	double ra, de;

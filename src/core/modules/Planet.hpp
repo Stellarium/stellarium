@@ -484,6 +484,9 @@ public:
 	//! @note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
 	//! @note: For Jupiter, this returns central meridian in L_II.
 	//! @note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).
+	//! @note: As a generalisation for other observer locations, conditions are adapted to observer planet.
+	//!        When this is computed for the planet the observer is located, conditions for an earth observer is returned.
+	//!        The actual result seems to be pretty meaningless in this case, but avoids NaN result (GH: #4619).
 	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(const StelCore *core, bool jupiterGraphical=false) const;
 
 	//! returns if planet has retrograde rotation
