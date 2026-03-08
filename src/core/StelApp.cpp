@@ -1172,11 +1172,10 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	QMouseEvent event(inputEvent->type(), QPointF(x*devicePixelsPerPixel, y*devicePixelsPerPixel), inputEvent->globalPosition(), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
-	event.setAccepted(false);
 #else
-    QMouseEvent event(inputEvent->type(), QPoint(qRound(x*devicePixelsPerPixel), qRound(y*devicePixelsPerPixel)), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
-	event.setAccepted(false);
+	QMouseEvent event(inputEvent->type(), QPoint(qRound(x*devicePixelsPerPixel), qRound(y*devicePixelsPerPixel)), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
 #endif
+	event.setAccepted(false);
 	
 	// Send the event to every StelModule
 	for (auto* i : moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
