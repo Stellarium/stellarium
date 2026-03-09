@@ -2227,7 +2227,7 @@ double getDeltaTByJPLHorizons(const double jDay)
 	// JD_UT >= 1458077.5 or 721BC-01-01 00:00
 	// JD_UT <  2437684.5 or  1962-01-20 00:00
 	// deltaT values correspond to DeltaT = TDB - UT1 in this time range.
-	if (1458077.5 <= jDay && jDay < 2437684.5)
+	else if (1458077.5 <= jDay && jDay < 2437684.5)
 	{
 		int i = 0;
 		while (StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[i][1] < y)	i++;
@@ -2274,7 +2274,7 @@ double getDeltaTByJPLHorizons(const double jDay)
 	// TDB - UT1 we need to subtract DUT1 = (UT1 - UTC). The DUT1 values are typically provided by
 	// IERS bulletins and is of the order of +/- one second. JPL Horizons app do not
 	// apply this correction, and we won't do it here neither.
-	if (2437684.5 <= jDay && jDay <= 5373482.5)
+	else if (2437684.5 <= jDay && jDay <= 5373482.5)
 	{
 		const int TTmTDB_id = 17; // TT - TDB (JPL ID)
 		double xyz[6];
