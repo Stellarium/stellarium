@@ -217,7 +217,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 
 	updateState = HelpDialog::CompleteUpdates;
 
-	QString latestVersion = map["name"].toString();
+	QString latestVersion = map["tag_name"].toString();
 	latestVersion.replace("v","", Qt::CaseInsensitive);
 	QStringList v = latestVersion.split(".");
 	v.append("0"); // the latest number (PATCH) is always 0 for releases
@@ -604,7 +604,7 @@ void HelpDialog::updateTabBarListWidgetWidth()
 
 	// stackListWidget->font() does not work properly!
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
-	QFont font;
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(14);
 	font.setWeight(QFont::Bold);
 	QFontMetrics fontMetrics(font);

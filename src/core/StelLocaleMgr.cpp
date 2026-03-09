@@ -49,7 +49,11 @@ void StelLocaleMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+#ifdef ENABLE_NLS
 	setAppLanguage(conf->value("localization/app_locale", "system").toString(), false);
+#else
+	setAppLanguage("en", false);
+#endif
 
 	timeFormat = stringToSTimeFormat(conf->value("localization/time_display_format", "system_default").toString());
 	dateFormat = stringToSDateFormat(conf->value("localization/date_display_format", "system_default").toString());

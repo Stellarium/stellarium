@@ -17,8 +17,10 @@ table tr td, table tr th {
 
 table.layout, table.layout tr td, table.layout tr th {
         margin: 0;
-        padding: 0;
+        padding: 0 5px 0 0;
         border-style: none;
+        border-color: transparent;
+        border-width: 0px;
 }
 
 .img_and_caption {

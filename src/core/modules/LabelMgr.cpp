@@ -582,7 +582,7 @@ int LabelMgr::labelObject(const QString& text,
 			  bool autoDelete,
 			  int autoDeleteTimeoutMs)
 {
-	QFont font;
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(static_cast<int>(fontSize));
 	StelObjectP obj = GETSTELMODULE(StelObjectMgr)->searchByName(objectName);
 	if (!obj)
@@ -623,7 +623,7 @@ int LabelMgr::labelHorizon(const QString& text,
 		bool autoDelete,
 		int autoDeleteTimeoutMs)
 {
-	QFont font;
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(static_cast<int>(fontSize));
 	HorizonLabel* l = new HorizonLabel(text, az, alt, font, fontColor);
 	if (l==Q_NULLPTR)
@@ -663,7 +663,7 @@ int LabelMgr::labelEquatorial(const QString& text,
 		int autoDeleteTimeoutMs,
 		bool j2000epoch)
 {
-	QFont font;
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(static_cast<int>(fontSize));
 	double dRA	= StelUtils::getDecAngle(ra);
 	double dDec	= StelUtils::getDecAngle(dec);
@@ -699,7 +699,7 @@ int LabelMgr::labelScreen(const QString& text,
 			  bool autoDelete,
 			  int autoDeleteTimeoutMs)
 {
-	QFont font;
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(static_cast<int>(fontSize));
 	ScreenLabel* l = new ScreenLabel(text, x, y, font, fontColor);
 	if (l==Q_NULLPTR)

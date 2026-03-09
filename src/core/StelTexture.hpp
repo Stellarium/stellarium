@@ -144,7 +144,7 @@ private:
 	//! texture size in both dimensions by this number.
 	static GLData imageToGLData(const QImage    &image, const int decimateBy);
 	static GLData loadFromPath( const QString    &path, const int decimateBy);
-	static GLData loadFromData( const QByteArray &data, const int decimateBy);
+	static GLData loadFromData( const QByteArray &data, const QString& path, const int decimateBy);
 
 	//! Private constructor
 	StelTexture();

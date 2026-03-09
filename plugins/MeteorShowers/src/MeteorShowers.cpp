@@ -88,10 +88,10 @@ void MeteorShowers::drawPointer(StelCore* core)
 	const float size = (20.f + 10.f * sinf(2.f * static_cast<float>(StelApp::getInstance().getTotalRunTime()))) * scale;
 	const float radius = 10 * scale;
 	const float x = screenpos[0], y = screenpos[1];
-	painter.drawSprite2dMode(x-size/2, y-size/2, radius, 90);
-	painter.drawSprite2dMode(x-size/2, y+size/2, radius, 0);
-	painter.drawSprite2dMode(x+size/2, y+size/2, radius, -90);
-	painter.drawSprite2dMode(x+size/2, y-size/2, radius, -180);
+	painter.drawSprite2dModeNoDeviceScale(x-size/2, y-size/2, radius, 90);
+	painter.drawSprite2dModeNoDeviceScale(x-size/2, y+size/2, radius, 0);
+	painter.drawSprite2dModeNoDeviceScale(x+size/2, y+size/2, radius, -90);
+	painter.drawSprite2dModeNoDeviceScale(x+size/2, y-size/2, radius, -180);
 	painter.setColor(1, 1, 1, 0);
 }
 

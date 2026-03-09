@@ -178,7 +178,7 @@ QVariant CompletionListModel::data(const QModelIndex &index, int role) const
 	// Bold recent objects
 	if(role == Qt::FontRole)
 	{
-	    QFont font;
+	    QFont font=QGuiApplication::font();
 	    bool toBold = recentValues.contains(objectName);
 	    font.setBold(toBold);
 	    return font;

@@ -644,7 +644,7 @@ void StelPainter::drawTextGravity180(const float x, const float y, const QString
 	else
 	{
 		// We manage our RTL by ourselves.
-		for (int i = 0; i < label32.length(); ++i)
+		for (unsigned i = 0; i < label32.length(); ++i)
 		{
 			uint32_t chr32=label32[i];
 			if (chr32==FSI32)
@@ -1886,6 +1886,11 @@ void StelPainter::drawSprite2dModeNoDeviceScale(float x, float y, float radius)
 void StelPainter::drawSprite2dModeNoDeviceScale(const std::vector<Vec2f>& points, float radius)
 {
 	drawSprite2dMode(points, radius/(static_cast<float>(prj->getDevicePixelsPerPixel())));
+}
+
+void StelPainter::drawSprite2dModeNoDeviceScale(float x, float y, float radius, float rotation)
+{
+	drawSprite2dMode(x, y, radius / static_cast<float>(prj->getDevicePixelsPerPixel()), rotation);
 }
 
 void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)

@@ -22,6 +22,7 @@
  */
 
 #include "ScmConstellationArtwork.hpp"
+#include "ConstellationMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
@@ -36,11 +37,20 @@ scm::ScmConstellationArtwork::ScmConstellationArtwork(const std::array<Anchor, 3
 	, artwork(artwork)
 	, hasArt(true)
 {
+	initValues();
 }
 
 scm::ScmConstellationArtwork::ScmConstellationArtwork()
 	: hasArt(false)
 {
+	initValues();
+}
+
+void scm::ScmConstellationArtwork::initValues()
+{
+	ConstellationMgr *constMgr = GETSTELMODULE(ConstellationMgr);
+	artIntensity = constMgr->getArtIntensity();
+	QObject::connect(constMgr, &ConstellationMgr::artIntensityChanged, [this](float v) { artIntensity = v; });
 }
 
 void scm::ScmConstellationArtwork::setupArt()
@@ -279,7 +289,7 @@ bool scm::ScmConstellationArtwork::save(const QString &filepath) const
 void scm::ScmConstellationArtwork::drawOptimized(StelPainter &sPainter, const SphericalRegion &region,
                                                  const Vec3d &obsVelocity) const
 {
-	const float intensity = artOpacity * artIntensityFovScale;
+	const float intensity = artIntensity * artIntensityFovScale;
 	if (artTexture && intensity > 0.0f && region.intersects(boundingCap))
 	{
 		sPainter.setColor(intensity, intensity, intensity);

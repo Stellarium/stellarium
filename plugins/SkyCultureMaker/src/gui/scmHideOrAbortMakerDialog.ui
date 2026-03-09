@@ -87,7 +87,7 @@
            <item>
             <widget class="QLabel" name="questionLbl">
              <property name="text">
-              <string>Hide the plugin to resume later or abort the process?</string>
+              <string>Hide the plugin to resume later or close it without saving the sky culture?</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -117,21 +117,21 @@
              <item>
               <widget class="QPushButton" name="scmMakerHideButton">
                <property name="text">
-                <string>Hide</string>
+                <string>Hide editor</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="scmMakerAbortButton">
                <property name="text">
-                <string>Abort</string>
+                <string>Close without saving</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="scmMakerCancelButton">
                <property name="text">
-                <string>Cancel</string>
+                <string>Don't close</string>
                </property>
               </widget>
              </item>

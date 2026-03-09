@@ -2,9 +2,16 @@
 
 ## Introduction
 
-The Inuit sky culture files available for Stellarium are an adaptation of John MacDonald's research in his book [#1]. While placements and specifics of Inuit constellations might differ from tribe to tribe, the information in Stellarium presents the constellations and general themes of the arctic universe.
+Inuit are the native population of the Arctic. 
 
 ## Description
+
+The Inuit sky culture files available for Stellarium are an adaptation of John MacDonald's research in his book [#1]. While placements and specifics of Inuit constellations might differ from tribe to tribe, the information in Stellarium presents the constellations and general themes of the arctic universe.
+
+### The Milky Way
+
+The Divider, Aviguti.
+
 
 ## Constellations
 
@@ -36,7 +43,7 @@ The big dipper is Tukturjuit, the caribou.
 
 Sivulliik, "the first ones" , Little Orphan Boy being chased by an angry grandfather.
 
-##### The One Behind
+##### The Old Woman Behind
 
 Kingulliq, the grandmother chasing the Two in Front
 
@@ -59,10 +66,6 @@ Nuuttuittuq is the North Star Polaris, the star that never moves.
 ##### Nephews or Nieces
 
 The Orion Nebula, Qangimmaariik, a group of children.
-
-##### The Milky Way
-
-The Divider, Aviguti.
 
 ##### Name of a Murdered Man
 

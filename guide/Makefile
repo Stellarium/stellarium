@@ -97,9 +97,9 @@ else
 endif
 
 # htlatex needs bounding box files.
-PICSpdf=$(wildcard pictures/*.pdf)
-PICSpng=$(wildcard pictures/*.png) $(subst .pdf,.png, ${PICSpdf})
-PICSjpg=$(wildcard pictures/*.jpg)
+PICSpdf=$(wildcard Images/*.pdf)
+PICSpng=$(wildcard Images/*.png) $(subst .pdf,.png, ${PICSpdf})
+PICSjpg=$(wildcard Images/*.jpg)
 PICSbbx=$(subst .png,.xbb, ${PICSpng}) $(subst .jpg,.xbb, ${PICSjpg})
 
 
@@ -167,7 +167,7 @@ html: guide.html
 # we must call makeindex again just before final run to update page numbers. Not too intuitive, but seems necessary...
 guide.pdf : guide.ind guide.bbl 
 	${PDFLATEX} '\PassOptionsToPackage{draft}{graphicx}\input guide.tex'
-	${MAKEINDEX} guide.idx -s StyleInd.ist
+	${MAKEINDEX} guide.idx -s indexstyle.ist
 	${PDFLATEX} '\PassOptionsToPackage{draft}{graphicx}\input guide.tex'
 	${PDFLATEX} guide.tex
 	@touch -c guide.ind
@@ -181,7 +181,7 @@ guide.dvi : guide.tex
 
 #guide.ind: guide.idx guide.toc
 guide.ind: guide.idx guide.aux
-	${MAKEINDEX} guide.idx -s StyleInd.ist
+	${MAKEINDEX} guide.idx -s indexstyle.ist
 
 guide.bbl: guide.bcf guide.bib
 	${BIBER} guide
@@ -194,7 +194,7 @@ guide.bcf: guide.log
 
 guide.aux: guide.log
 
-guide.log: $(wildcard *.tex) 
+guide.log: $(wildcard *.tex) LegrandOrangeBook.cls
 	${PDFLATEX} guide.tex
 
 SUG SUG.pdf: guide_opt.pdf
@@ -213,7 +213,7 @@ SUG SUG.pdf: guide_opt.pdf
 
 pdf2png: $(subst .pdf,.png, ${PICSpdf})
 
-pictures/%.png : pictures/%.pdf
+Images/%.png : Images/%.pdf
 	convert $< $@
 
 %.xbb: %.png
@@ -272,9 +272,9 @@ guide.mk4:
 	@echo if mode == "draft" then   > $@
 	@echo Make:htlatex()           >> $@
 	@echo else                     >> $@
-	@echo   Make:add("biber", "biber ${input}")                                                        >> $@
+	@echo   Make:add("biber", "biber ${input}")                                                     >> $@
 	@echo   Make:add("texindex", "tex '\def\filename{{guide}{idx}{4dx}{ind}} \input  idxmake.4ht'") >> $@
-	@echo   Make:add("makeindex", "$makeindex ${filename}.idx -s StyleInd.ist")                     >> $@
+	@echo   Make:add("makeindex", "$makeindex ${filename}.idx -s indexstyle.ist")                   >> $@
 	@echo   local filter = require "make4ht-filter"                                                 >> $@
 	@echo   local process = filter{"cleanspan", "fixligatures", "hruletohr", "fix-links"}           >> $@
 	@echo   Make:htlatex()     >> $@

@@ -675,6 +675,9 @@ public slots:
 	//! Add one synodic month to the simulation time.
 	void addSynodicMonth();
 
+	//! Add one Metonic cycle (235 synodic months) from the simulation time.
+	void addMetonicCycle();
+
 	//! Add one saros (223 synodic months) to the simulation time.
 	void addSaros();
 
@@ -724,6 +727,9 @@ public slots:
 
 	//! Subtract one synodic month from the simulation time.
 	void subtractSynodicMonth();
+
+	//! Subtract one Metonic cycle (235 synodic months) from the simulation time.
+	void subtractMetonicCycle();
 
 	//! Subtract one saros (223 synodic months) from the simulation time.
 	void subtractSaros();

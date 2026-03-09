@@ -53,6 +53,7 @@ class StelLocationMgr;
 class StelSkyLayerMgr;
 class StelAudioMgr;
 class StelVideoMgr;
+class StelSpeechMgr;
 class StelGuiBase;
 class StelMainScriptAPIProxy;
 class StelScriptMgr;
@@ -163,6 +164,9 @@ public:
 
 	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() const {return audioMgr;}
+
+	//! Get the speech manager
+	StelSpeechMgr* getStelSpeechMgr() const {return speechMgr;}
 
 	//! Get the actions manager to use for managing and editing actions
 	StelActionMgr* getStelActionManager() const {return actionMgr;}
@@ -481,6 +485,9 @@ private:
 
 	// The video manager.  Must execute in the main thread.
 	StelVideoMgr* videoMgr;
+
+	// The speech synthesizer
+	StelSpeechMgr *speechMgr;
 
 	StelSkyLayerMgr* skyImageMgr;
 

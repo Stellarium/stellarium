@@ -235,13 +235,13 @@ To permanently set this mode, use \button{Save settings} a final time.
 \label{fig:gui:configuration:info}
 \end{figure}
 
-The Information tab (Fig.~\ref{fig:gui:configuration:info}) allows you to set the type and amount of information
-displayed about a selected object.
-\begin{itemize}
-\item Ticking or unticking the relevant boxes will control this.
-\item The information displays in various colors depending on the type and
-level of the stored data
-\end{itemize}
+\noindent The Information tab (Fig.~\ref{fig:gui:configuration:info}) allows you to 
+set the type and amount of information displayed (left column) or output by 
+speech (right column; see \ref{sec:gui:configuration:speech}\newFeature{25.4}) about a 
+selected object. 
+The Radio buttons on the top of the dialog allow quick selection of some useful 
+configurations for display. 
+
 
 \subsection{The Extras Tab}
 \label{sec:gui:configuration:extras}
@@ -467,6 +467,35 @@ Some printing workflows require particular DPI (dots per inch)
 settings stored in the screenshots. \newFeature{0.22.0} You can
 configure DPI which will be stored in the image metadata. The intended
 print size in \mm\ is shown in the tooltip of the dpi spinner.
+
+
+\subsection{The Speech Tab}
+\label{sec:gui:configuration:speech}
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{config_dialog_speech_tab.png}
+\caption{Configuration Window: Speech Tab}
+\label{fig:gui:configuration:speech}
+\end{figure}
+
+\noindent The Speech tab (Fig.~\ref{fig:gui:configuration:speech})\newFeature{25.4} allows configuring speech output.%
+\footnote{This fully depends on capabilities of the operating system and is not available 
+for builds/platforms with Qt version less than 6.4.} You can select some speech engine, 
+then (hopefully) a list of voices for your user language becomes available from which you can choose. 
+You can influence pitch and speed (Rate) and balance volume against your system volume. 
+Then test the content of the text box with the \button{$\filledmedtriangleright$ Say}, or cut this off via \button{$\filledmedsquare$ Stop}.
+
+Speech output is available for data of the currently selected object. 
+In the Information tab (see \ref{sec:gui:configuration:info}), the right checkbox colums let you select 
+those information bits which should be output by voice. Most users will keep coordinate readings off, 
+but some physical or morphological data may be interesting to listen to.  
+
+The default hotkey for speech output is \key{Shift+R}. Pressing it another time will cut off narration.
+
+Also the long texts in the Landscape (see \ref{sec:gui:view:landscape}) and 
+Skyculture (\ref{sec:gui:view:skyculture}) tabs of the View Settings dialog can be narrated 
+with the \button{$\filledmedtriangleright$ Read text}/\button{$\filledmedsquare$ Stop} buttons 
+near the respective text boxes.
 
 \subsection{The Scripts Tab}
 \label{sec:gui:configuration:scripts}

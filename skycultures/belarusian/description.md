@@ -2,31 +2,71 @@
 
 ## Introduction
 
-Shown here are some interesting folk astronomy constellations found in Belarus, a country in Eastern Europe bordered by Russia to the northeast, Ukraine to the south, Poland to the west, and Lithuania and Latvia to the northwest. Belarus is landlocked and contains large tracts of marshy land and thousands of lakes. Forests cover about 40% of the country. Belarus is exceptional in that people in the villages have preserved their traditional knowledge about the stars and related beliefs, right through to the present time. The illustrations are by no means exhaustive. In fact, many asterisms have multiple recorded meanings, ranging from ancient to Christianized.
+Belarus is a country in Eastern Europe bordered by Russia to the northeast, Ukraine to the south, Poland to the west, and Lithuania and Latvia to the northwest. Belarus is landlocked and contains large tracts of marshy land and thousands of lakes. Forests cover about 40% of the country. Belarus is exceptional in that people in the villages have preserved their traditional knowledge about the stars and related beliefs, right through to the present time. The illustrations are by no means exhaustive. In fact, many asterisms have multiple recorded meanings, ranging from ancient to Christianized.
 
 ## Description
 
+Shown here are some interesting folk astronomy constellations.
+
 ## Constellations
 
- - Elias's Cart &mdash; the burning cart that is ridden by Elias, the Christianized version of a constellation previously seen as *simply* a large cart.
- - The Bride
- - The Chicks
- - The Cross &mdash; a Peter’s cross
- - The Crown &mdash; the thorn wreath that was put on Christ’s head.
- - The Goat
- - The Grass Snakes
- - The Kingdoms &mdash; These two stars served as a symbol of two states: the Great Lithuanian Princedom and the Polish Kingdom.
- - The Mowers &mdash; These three stars stand one after another in the manner of people mowing the fields.
- - The Nail &mdash; The north star is seen as a nail around which the skies revolve.
- - The Ploughman
- - The Rake
- - The Ram
- - The Serpent &mdash; St. Yuri killed this serpent and hung it near the star that always stands in the same place
- - The Sieve &mdash; It was said that “God used to sift grains of *zhito* through it“.
- - The Small Cart &mdash; Ursa Minor resembles the large cart of Ursa Major.
- - The Throne &mdash; Lord Jesus’s chair.
- - The Twins
- - The Goose's Way
+##### Elias's Cart
+
+The burning cart that is ridden by Elias, the Christianized version of a constellation previously seen as *simply* a large cart.
+
+##### The Bride
+
+##### The Chicks
+
+##### The Cross
+
+a Peter’s cross
+
+##### The Crown
+
+The thorn wreath that was put on Christ’s head.
+
+##### The Goat
+
+##### The Grass Snakes
+
+##### Poland and Lithuania
+
+These two stars served as a symbol of two states: the Great Lithuanian Princedom and the Polish Kingdom.
+
+##### The Mowers
+
+These three stars stand one after another in the manner of people mowing the fields.
+
+##### The Nail
+
+The north star is seen as a nail around which the skies revolve.
+
+##### The Ploughman
+
+##### The Rake
+
+##### The Ram
+
+##### The Serpent
+
+St. Yuri killed this serpent and hung it near the star that always stands in the same place
+
+##### The Sieve
+
+It was said that “God used to sift grains of *zhito* through it“.
+
+##### The Small Cart
+
+Ursa Minor resembles the large cart of Ursa Major.
+
+##### The Throne
+
+Lord Jesus’s chair.
+
+##### The Twins
+
+##### The Goose's Way
 
 ## References
 

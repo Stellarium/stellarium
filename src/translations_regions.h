@@ -51,7 +51,7 @@ class GeoRegionsTranslations
 		N_("Central America");
 		// TRANSLATORS: Name of region on Earth
 		// TRANSLATORS: https://en.wikipedia.org/wiki/South_America
-		N_("Southern America");
+		N_("South America");
 		// TRANSLATORS: Name of region on Earth
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Northern_America
 		N_("Northern America");

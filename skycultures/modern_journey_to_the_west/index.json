@@ -1,0 +1,1963 @@
+{
+  "id": "modern_journey_to_the_west",
+  "region": "Eastern Asia",
+  "classification": ["single"],
+  "fallback_to_international_names": true,
+  "constellations": [
+    {
+      "id": "CON modern_journey_to_the_west Aql",
+      "lines": [[99473, 98036, 97649, 97278, 93747, 93244], [97649, 98103, 99742], [97649, 96229, 95501, 93805]],
+      "image": {
+        "file": "illustrations/aquila.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [195, 148], "hip": 97649},
+          {"pos": [435, 52], "hip": 93244},
+          {"pos": [370, 433], "hip": 93805}
+        ]
+      },
+      "common_name": {"english": "Golden-Winged Great Peng", "native": "金翅大鹏", "pronounce": "Jīn Chì Dà Péng", "byname": "Aquila"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west And",
+      "lines": [[677, 3092, 5447], [9640, 5447, 4436, 3881]],
+      "image": {
+        "file": "illustrations/andromeda.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [296, 246], "hip": 3881},
+          {"pos": [464, 293], "hip": 3092},
+          {"pos": [144, 409], "hip": 9640}
+        ]
+      },
+      "common_name": {"english": "Chang'e", "native": "嫦娥", "pronounce": "Cháng É", "byname": "Andromeda"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Scl",
+      "lines": [[116231, 4577, 115102, 116231]],
+      "image": {
+        "file": "illustrations/sculptor.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [222, 4], "hip": 115102},
+          {"pos": [255, 78], "hip": 116231},
+          {"pos": [42, 223], "hip": 4577}
+        ]
+      },
+      "common_name": {"english": "Jade Seal of Passage", "native": "通行宝印", "pronounce": "Tōng Xíng Bǎo Yìn", "byname": "Sculptor"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Ara",
+      "lines": [[88714, 85258, 83081, 82363, 85727], [85792, 83153, 83081]],
+      "image": {
+        "file": "illustrations/ara.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [227, 189], "hip": 82363},
+          {"pos": [143, 207], "hip": 85727},
+          {"pos": [39, 52], "hip": 88714}
+        ]
+      },
+      "common_name": {"english": "Flaming Mountains", "native": "火焰山", "pronounce": "Huǒ Yàn Shān", "byname": "Ara"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Lib",
+      "lines": [[76333, 74785, 72622, 73714]],
+      "image": {
+        "file": "illustrations/libra.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [130, 33], "hip": 74785},
+          {"pos": [210, 132], "hip": 72622},
+          {"pos": [69, 105], "hip": 76333}
+        ]
+      },
+      "common_name": {"english": "Luggage Pole", "native": "行李担", "pronounce": "Xíng Li Dān", "byname": "Libra"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cet",
+      "lines": [[3419, 5364, 6537], [12770, 8645, 6537, 1562], [9347, 8102, 8645, 10826, 10324, 11484, 12093, 12706, 14135, 13954, 12828, 11484]],
+      "image": {
+        "file": "illustrations/cetus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [100, 89], "hip": 14135},
+          {"pos": [437, 428], "hip": 1562},
+          {"pos": [311, 484], "hip": 3419}
+        ]
+      },
+      "common_name": {"english": "Water-Avoiding Golden-Eyed Beast", "native": "辟水金睛兽", "pronounce": "Pì Shuǐ Jīn Jīng Shòu", "byname": "Cetus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Ari",
+      "lines": [[13209, 9884, 8903, 8832]],
+      "image": {
+        "file": "illustrations/aries.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [12, 130], "hip": 13209},
+          {"pos": [58, 206], "hip": 13914},
+          {"pos": [210, 47], "hip": 8832}
+        ]
+      },
+      "common_name": {"english": "Great Immortal Antelope", "native": "羊力大仙", "pronounce": "Yáng Lì Dà Xiān", "byname": "Aries"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Sct",
+      "lines": [[92175, 92202, 92814, 90595, 91117, 92175]],
+      "image": {
+        "file": "illustrations/scutum.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [75, 9], "hip": 92175},
+          {"pos": [247, 173], "hip": 90595},
+          {"pos": [131, 246], "hip": 92814}
+        ]
+      },
+      "common_name": {"english": "Round Shield", "native": "团牌", "pronounce": "Tuán Pái", "byname": "Scutum"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Pyx",
+      "lines": [[42828, 42828]],
+      "common_name": {"byname": "Pyxis", "english": "Pyx"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Boo",
+      "lines": [[69673, 72105, 74666, 73555, 71075, 71053, 69673], [71075, 69732, 70497]],
+      "image": {
+        "file": "illustrations/bootes.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [323, 100], "hip": 69732},
+          {"pos": [134, 211], "hip": 74666},
+          {"pos": [242, 437], "hip": 69673}
+        ]
+      },
+      "common_name": {"english": "Erlang Shen (Yang Jian)", "native": "二郎神杨戬", "pronounce": "Èr Láng Shén (Yáng Jiǎn)", "byname": "Bootes"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cae",
+      "lines": [[21060, 21770, 21861]],
+      "image": {
+        "file": "illustrations/caelum.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [16, 231], "hip": 21060},
+          {"pos": [76, 145], "hip": 21770},
+          {"pos": [199, 75], "hip": 21861}
+        ]
+      },
+      "common_name": {"english": "Thunder God's Wedge", "native": "雷公捎", "pronounce": "Léi Gōng Shāo", "byname": "Caelum"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cha",
+      "lines": [[40702, 51839, 60000]],
+      "image": {
+        "file": "illustrations/chamaeleon.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [29, 214], "hip": 60000},
+          {"pos": [73, 123], "hip": 51839},
+          {"pos": [184, 33], "hip": 40702}
+        ]
+      },
+      "common_name": {"english": "Alligator Minister", "native": "鼍丞相", "pronounce": "Tuó Chéng Xiàng", "byname": "Chamaeleon"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cnc",
+      "lines": [[43103, 42806, 40843], [42806, 42911, 40526], [42911, 44066]],
+      "image": {
+        "file": "illustrations/cancer.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [29, 166], "hip": 44066},
+          {"pos": [101, 255], "hip": 40526},
+          {"pos": [206, 91], "hip": 40843}
+        ]
+      },
+      "common_name": {"english": "Crab General", "native": "蟹将军", "pronounce": "Xiè Jiāng Jūn", "byname": "Cancer"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cap",
+      "lines": [[100064, 100345, 104139, 105515, 106985, 107556], [100345, 102485, 102978, 104234, 105881, 106985]],
+      "image": {
+        "file": "illustrations/capricornus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [239, 30], "hip": 100064},
+          {"pos": [76, 435], "hip": 107556},
+          {"pos": [396, 321], "hip": 102978}
+        ]
+      },
+      "common_name": {"english": "Jade Dragon Transforming into a White Horse", "native": "玉龙化白马", "pronounce": "Yù Lóng Huà Bái Mǎ", "byname": "Capricornus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Car",
+      "lines": [[50371, 52370, 50099, 45238], [41037, 30438], [34834, 31685]],
+      "image": {
+        "file": "illustrations/argonavis.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [49, 311], "hip": 52727},
+          {"pos": [395, 47], "hip": 39757},
+          {"pos": [206, 509], "hip": 45238}
+        ]
+      },
+      "common_name": {"byname": "Carina", "english": "Car"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cas",
+      "lines": [[8886, 6686, 4427, 3179, 746]],
+      "image": {
+        "file": "illustrations/cassiopeia.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [320, 372], "hip": 8886},
+          {"pos": [248, 86], "hip": 3179},
+          {"pos": [118, 97], "hip": 746}
+        ]
+      },
+      "common_name": {"english": "Queen Mother of the West", "native": "王母娘娘", "pronounce": "Wáng Mǔ Niáng Niáng", "byname": "Cassiopeia"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cen",
+      "lines": [[71683, 66657, 68702], [73334, 71352, 68933, 65109, 65936, 67464, 67472, 68002, 66657, 61932, 59196, 56480, 56561]],
+      "image": {
+        "file": "illustrations/centaurus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [320, 115], "hip": 65109},
+          {"pos": [85, 100], "hip": 73334},
+          {"pos": [374, 433], "hip": 56480}
+        ]
+      },
+      "common_name": {"english": "Wooden Dragon (Jiao)", "native": "角木蛟", "pronounce": "Jiǎo Mù Jiāo", "byname": "Centaurus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cep",
+      "lines": [[109492, 112724, 106032, 105199, 109492], [112724, 116727, 106032]],
+      "image": {
+        "file": "illustrations/cepheus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [359, 27], "hip": 116727},
+          {"pos": [356, 224], "hip": 106032},
+          {"pos": [163, 332], "hip": 109492}
+        ]
+      },
+      "common_name": {"english": "Jade Emperor", "native": "玉皇大帝", "pronounce": "Yù Huáng Dà Dì", "byname": "Cepheus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Com",
+      "lines": [[64241, 64394, 60742]],
+      "image": {
+        "file": "illustrations/coma-berenices.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [27, 199], "hip": 64241},
+          {"pos": [38, 58], "hip": 64394},
+          {"pos": [172, 64], "hip": 60742}
+        ]
+      },
+      "common_name": {"english": "Hair of the Queen of Dharma-Defying Kingdom", "native": "灭法国皇后的头发", "pronounce": "Miè Fǎ Guó Huáng Hòu de Tóu Fà", "byname": "Coma Berenices"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west CVn",
+      "lines": [[61317, 63125]],
+      "image": {
+        "file": "illustrations/canes-venatici.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [80, 209], "hip": 63901},
+          {"pos": [194, 84], "hip": 61317},
+          {"pos": [218, 244], "hip": 61309}
+        ]
+      },
+      "common_name": {"english": "Howling Celestial Hound", "native": "哮天犬", "pronounce": "Xiào Tiān Quǎn", "byname": "Canes Venatici"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Aur",
+      "lines": [[28380, 28360, 24608, 23453, 23015], [25428, 23015], [25428, 28380]],
+      "image": {
+        "file": "illustrations/auriga.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [111, 319], "hip": 28380},
+          {"pos": [219, 70], "hip": 24608},
+          {"pos": [412, 302], "hip": 23015}
+        ]
+      },
+      "common_name": {"english": "Keeper of the Heavenly Horses", "native": "弼马温", "pronounce": "Bì Mǎ Wēn", "byname": "Auriga"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Col",
+      "lines": [[30277, 29807, 28199, 27628, 28328], [27628, 26634, 25859]],
+      "image": {
+        "file": "illustrations/columba.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [72, 124], "hip": 29807},
+          {"pos": [153, 186], "hip": 28328},
+          {"pos": [150, 76], "hip": 26634}
+        ]
+      },
+      "common_name": {"english": "Parrot", "native": "鹦哥", "pronounce": "Yīng Gē", "byname": "Columba"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Crt",
+      "lines": [[53740, 54682, 55705, 55282, 53740], [55282, 55687, 56633, 58188, 57283, 55705]],
+      "image": {
+        "file": "illustrations/crater.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [118, 53], "hip": 58188},
+          {"pos": [131, 181], "hip": 55282},
+          {"pos": [10, 182], "hip": 54682}
+        ]
+      },
+      "common_name": {"english": "Crystal Cup", "native": "琉璃盏", "pronounce": "Liú Li Zhǎn", "byname": "Crater"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west CrA",
+      "lines": [[91875, 92989, 93174, 93825, 94114, 94160, 94005, 93542, 92953], [91875, 90887]],
+      "image": {
+        "file": "illustrations/corona-australis.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [71, 12], "hip": 93825},
+          {"pos": [251, 159], "hip": 90887},
+          {"pos": [86, 204], "hip": 92953}
+        ]
+      },
+      "common_name": {"english": "Tight-Fillet", "native": "紧箍儿", "pronounce": "Jǐn Gū Ér", "byname": "Corona Australis"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west CrB",
+      "lines": [[76127, 75695, 76267, 76952, 77512, 78159, 78493]],
+      "image": {
+        "file": "illustrations/corona-borealis.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [35, 125], "hip": 78493},
+          {"pos": [193, 237], "hip": 76267},
+          {"pos": [219, 94], "hip": 76127}
+        ]
+      },
+      "common_name": {"english": "Vairocana Hat", "native": "毗卢帽", "pronounce": "Pí Lú Mào", "byname": "Corona Borealis"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Crv",
+      "lines": [[61174, 60965, 59803, 59316, 59199], [59316, 61359, 60965]],
+      "image": {
+        "file": "illustrations/corvus.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [65, 59], "hip": 60965},
+          {"pos": [77, 235], "hip": 61359},
+          {"pos": [213, 187], "hip": 59316}
+        ]
+      },
+      "common_name": {"english": "Fire Crow", "native": "火鸦", "pronounce": "Huǒ Yā", "byname": "Corvus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cru",
+      "lines": [[61084, 60718], [62434, 59747]],
+      "image": {
+        "file": "illustrations/crux.png",
+        "size": [128, 128],
+        "anchors": [
+          {"pos": [112, 21], "hip": 61084},
+          {"pos": [42, 20], "hip": 62434},
+          {"pos": [21, 106], "hip": 60718}
+        ]
+      },
+      "common_name": {"english": "Demon-Subduing Pestle", "native": "降妖杵", "pronounce": "Xiáng Yāo Chǔ", "byname": "Crux"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cyg",
+      "lines": [[94779, 95853, 97165, 100453, 102098], [100453, 102488, 104732, 107310], [100453, 98110, 95947]],
+      "image": {
+        "file": "illustrations/cygnus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [81, 481], "hip": 104732},
+          {"pos": [415, 63], "hip": 94779},
+          {"pos": [459, 502], "hip": 95947}
+        ]
+      },
+      "common_name": {"english": "Mythical Azure Bird", "native": "青鸾", "pronounce": "Qīng Luán", "byname": "Cygnus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Del",
+      "lines": [[101421, 101769, 101958, 102532, 102281, 101769]],
+      "image": {
+        "file": "illustrations/delphinus.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [156, 89], "hip": 102532},
+          {"pos": [84, 57], "hip": 103294},
+          {"pos": [70, 200], "hip": 101421}
+        ]
+      },
+      "common_name": {"english": "Zhu Bajie Transformed into a Catfish", "native": "八戒鲇鱼", "pronounce": "Bā Jiè Nián Yú", "byname": "Delphinus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Dor",
+      "lines": [[27100, 27890, 26069, 27100], [26069, 21281, 19893]],
+      "image": {
+        "file": "illustrations/dorado.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [61, 203], "hip": 27890},
+          {"pos": [79, 242], "hip": 27100},
+          {"pos": [254, 91], "hip": 19893}
+        ]
+      },
+      "common_name": {"english": "Mandarin Fish Matron", "native": "斑衣鳜婆", "pronounce": "Bān Yī Guì Pó", "byname": "Dorado"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Dra",
+      "lines": [[87585, 87833, 85670, 85829, 87585, 94376, 97433, 94648, 89937, 83895, 80331, 78527, 75458, 68756, 61281, 56211]],
+      "image": {
+        "file": "illustrations/draco.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [440, 424], "hip": 56211},
+          {"pos": [50, 188], "hip": 85670},
+          {"pos": [286, 44], "hip": 97433}
+        ]
+      },
+      "common_name": {"english": "Dragon King of the Eastern Sea", "native": "东海龙王敖广", "pronounce": "Dōng Hǎi Lóng Wáng Áo Guǎng", "byname": "Draco"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Nor",
+      "lines": [[80000, 80582, 78914, 78639]],
+      "image": {
+        "file": "illustrations/norma.png",
+        "size": [128, 128],
+        "anchors": [
+          {"pos": [124, 47], "hip": 78914},
+          {"pos": [78, 75], "hip": 78639},
+          {"pos": [73, 23], "hip": 80582}
+        ]
+      },
+      "common_name": {"english": "Ferule", "native": "戒尺", "pronounce": "Jiè Chǐ", "byname": "Norma"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Eri",
+      "lines": [[7588, 9007, 10602, 11407, 12413, 13847, 15510, 17797, 17874, 20042, 20535, 21393, 17651, 16611, 15474, 14146, 12843, 13701, 15197, 16537, 17378, 21444, 22109, 22701, 23875]],
+      "image": {
+        "file": "illustrations/eridanus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [10, 117], "hip": 23875},
+          {"pos": [325, 56], "hip": 13701},
+          {"pos": [498, 507], "hip": 7588}
+        ]
+      },
+      "common_name": {"english": "Flowing-Sand River", "native": "流沙河", "pronounce": "Liú Shā Hé", "byname": "Eridanus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Sge",
+      "lines": [[96837, 97365, 96757], [97365, 98337, 98920]],
+      "image": {
+        "file": "illustrations/sagitta.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [6, 12], "hip": 98920},
+          {"pos": [249, 213], "hip": 96757},
+          {"pos": [218, 243], "hip": 96837}
+        ]
+      },
+      "common_name": {"english": "Fire Arrow", "native": "火箭", "pronounce": "Huǒ Jiàn", "byname": "Sagitta"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west For",
+      "lines": [[13147, 14879]],
+      "image": {
+        "file": "illustrations/fornax.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [49, 171], "hip": 14879},
+          {"pos": [218, 39], "hip": 9677},
+          {"pos": [162, 198], "hip": 13265}
+        ]
+      },
+      "common_name": {"english": "Eight-Trigram Furnace", "native": "八卦炉", "pronounce": "Bā Guà Lú", "byname": "Fornax"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Gem",
+      "lines": [[31681, 34088, 35550, 35350, 32362], [35550, 36962], [36962, 37826], [36962, 36046, 34693, 36850], [34693, 32246, 30883], [32246, 30343, 29655, 28734]],
+      "image": {
+        "file": "illustrations/gemini.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [72, 34], "hip": 36850},
+          {"pos": [146, 235], "hip": 32362},
+          {"pos": [251, 149], "hip": 28734}
+        ]
+      },
+      "common_name": {"english": "Golden Horn King & The Silver Horn King", "native": "金角大王、银角大王", "pronounce": "Jīn Jiǎo Dà Wáng, Yín Jiǎo Dà Wáng", "byname": "Gemini"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cam",
+      "lines": [[16228, 17884, 17959, 22783, 29997, 33694], [22783, 23522, 23040]],
+      "image": {
+        "file": "illustrations/camelopardalis.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [48, 73], "hip": 33694},
+          {"pos": [192, 241], "hip": 23040},
+          {"pos": [245, 137], "hip": 16228}
+        ]
+      },
+      "common_name": {"english": "White Deer", "native": "白鹿", "pronounce": "Bái Lù", "byname": "Camelopardalis"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west CMa",
+      "lines": [[34045, 32349, 33160, 34045, 33347, 33977, 34444, 35904], [30788, 32759, 33579, 33856, 34444], [33579, 33152, 31592, 30324], [31592, 33347], [33579, 31125, 30122]],
+      "image": {
+        "file": "illustrations/canis-major.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [56, 109], "hip": 33160},
+          {"pos": [226, 398], "hip": 34444},
+          {"pos": [271, 109], "hip": 30324}
+        ]
+      },
+      "common_name": {"english": "Yellow Robe Monster", "native": "黄袍怪", "pronounce": "Huáng Páo Guài", "byname": "Canis Major"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west UMa",
+      "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774], [58001, 54539, 55219], [46853, 50372, 50801], [53910, 46853, 44127], [46733, 48319, 46853, 41704, 46733, 54061]],
+      "image": {
+        "file": "illustrations/ursa-major.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [32, 471], "hip": 67301},
+          {"pos": [442, 494], "hip": 55219},
+          {"pos": [353, 15], "hip": 41704}
+        ]
+      },
+      "common_name": {"english": "Black Bear Spirit", "native": "黑熊怪", "pronounce": "Hēi Xióng Guài", "byname": "Ursa Major"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Gru",
+      "lines": [[108085, 109111, 109908, 109973, 110997, 111043, 112122], [109268, 112122, 114421, 114131], [112122, 113638], [112122, 112623]],
+      "image": {
+        "file": "illustrations/grus.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [176, 25], "hip": 109111},
+          {"pos": [106, 239], "hip": 113638},
+          {"pos": [196, 126], "hip": 109268}
+        ]
+      },
+      "common_name": {"english": "Red-Crowned White Crane", "native": "朱顶白鹤", "pronounce": "Zhū Dǐng Bái Hè", "byname": "Grus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Her",
+      "lines": [[86414, 87808, 84380, 81833, 81126, 79992, 79101, 77760], [81833, 81693, 80816, 80170, 80463, 81008], [88886, 88794, 87933, 86974, 85693, 84379, 84345, 80816], [84379, 83207, 84380], [81693, 83207]],
+      "image": {
+        "file": "illustrations/hercules.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [191, 45], "hip": 84345},
+          {"pos": [141, 484], "hip": 77760},
+          {"pos": [406, 304], "hip": 87808}
+        ]
+      },
+      "common_name": {"english": "Great Sage Equalling Heaven (Sun Wukong)", "native": "齐天大圣", "pronounce": "Qí Tiān Dà Shèng (Sūn Wù Kōng)", "byname": "Hercules"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Hor",
+      "lines": [[19747, 12225, 12484, 13884, 19747]],
+      "image": {
+        "file": "illustrations/horlogium.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [169, 210], "hip": 19893},
+          {"pos": [105, 64], "hip": 12484},
+          {"pos": [175, 68], "hip": 14240}
+        ]
+      },
+      "common_name": {"english": "Watchman's Clapper (Bangzi)", "native": "梆子", "pronounce": "Bāng Zi", "byname": "Horologium"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Hya",
+      "lines": [[42799, 42402, 42313, 43109, 43234, 42799], [43234, 43813, 45336, 46776, 46509, 46390, 48356, 49841, 51069, 52943, 56343, 57936, 64166, 64962]],
+      "image": {
+        "file": "illustrations/hydra.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [2, 511], "hip": 70469},
+          {"pos": [2, 2], "hip": 59753},
+          {"pos": [511, 2], "hip": 40217}
+        ]
+      },
+      "common_name": {"english": "Giant Red-Scaled Python", "native": "红鳞大蟒", "pronounce": "Hóng Lín Dà Mǎng", "byname": "Hydra"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Hyi",
+      "lines": [[17678, 2021, 3781, 12394, 11001, 8928, 9236]],
+      "image": {
+        "file": "illustrations/hydrus.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [43, 36], "hip": 9236},
+          {"pos": [254, 151], "hip": 2021},
+          {"pos": [111, 237], "hip": 17678}
+        ]
+      },
+      "common_name": {"english": "White-Spotted Snake Monster", "native": "白花蛇怪", "pronounce": "Bái Huā Shé Guài", "byname": "Hydrus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Ind",
+      "lines": [[105319, 101772, 103227, 105319]],
+      "image": {
+        "file": "illustrations/indus.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [166, 96], "hip": 101772},
+          {"pos": [67, 239], "hip": 103227},
+          {"pos": [39, 153], "hip": 105319}
+        ]
+      },
+      "common_name": {"english": "King of Purpuria", "native": "朱紫国国王", "pronounce": "Zhū Zǐ Guó Guó Wáng", "byname": "Indus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Lac",
+      "lines": [[109937, 111104, 111022, 110609, 110538, 111169, 111022]],
+      "image": {
+        "file": "illustrations/lacerta.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [249, 42], "hip": 110538},
+          {"pos": [108, 123], "hip": 111104},
+          {"pos": [67, 215], "hip": 109937}
+        ]
+      },
+      "common_name": {"english": "Dragon Alligator", "native": "鼍龙", "pronounce": "Tuó Lóng", "byname": "Lacerta"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Mon",
+      "lines": [[29651, 30867, 34769, 32578, 30419, 31216, 31978], [31216, 32578], [34769, 39863, 37447]],
+      "image": {
+        "file": "illustrations/monoceros.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [489, 242], "hip": 29651},
+          {"pos": [297, 25], "hip": 31978},
+          {"pos": [155, 416], "hip": 37447}
+        ]
+      },
+      "common_name": {"english": "Great King One-Horned Rhinoceros", "native": "独角兕大王", "pronounce": "Dú Jiǎo Sì Dà Wáng", "byname": "Monoceros"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Lep",
+      "lines": [[28103, 27288, 25985, 24305], [25985, 27654, 27072], [25606, 23685], [25985, 25606], [24305, 24845], [24305, 24327], [27288, 27654]],
+      "image": {
+        "file": "illustrations/lepus.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [151, 33], "hip": 24327},
+          {"pos": [204, 171], "hip": 23685},
+          {"pos": [70, 201], "hip": 27072}
+        ]
+      },
+      "common_name": {"english": "Jade Hare", "native": "玉兔", "pronounce": "Yù Tù", "byname": "Lepus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Leo",
+      "lines": [[57632, 54879, 49669, 49583, 50583, 54872, 57632], [50583, 50335, 48455, 47908], [54872, 54879]],
+      "image": {
+        "file": "illustrations/leo.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [69, 411], "hip": 57632},
+          {"pos": [383, 186], "hip": 49669},
+          {"pos": [321, 32], "hip": 47908}
+        ]
+      },
+      "common_name": {"english": "Nine-Headed Lion", "native": "九头狮子", "pronounce": "Jiǔ Tóu Shī Zi", "byname": "Leo"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Lup",
+      "lines": [[77634, 78918, 78384, 77634], [78384, 76297, 75141, 75177], [75141, 73273, 71860, 74395], [76297, 75264, 74395, 71536, 69996]],
+      "image": {
+        "file": "illustrations/lupus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [60, 132], "hip": 78384},
+          {"pos": [239, 67], "hip": 75177},
+          {"pos": [293, 444], "hip": 74395}
+        ]
+      },
+      "common_name": {"english": "Iron-Backed Grey Wolf Fiend", "native": "铁背苍狼怪", "pronounce": "Tiě Bèi Cāng Láng Guài", "byname": "Lupus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Lyn",
+      "lines": [[45860, 45688, 44700, 44248, 41075, 36145, 33449, 30060]],
+      "image": {
+        "file": "illustrations/lynx.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [16, 420], "hip": 45860},
+          {"pos": [343, 256], "hip": 36145},
+          {"pos": [471, 46], "hip": 30060}
+        ]
+      },
+      "common_name": {"english": "South Mountain King", "native": "南山大王", "pronounce": "Nán Shān Dà Wáng", "byname": "Lynx"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Lyr",
+      "lines": [[91262, 91971, 92420, 93194, 92791, 91971]],
+      "image": {
+        "file": "illustrations/lyra.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [59, 161], "hip": 92791},
+          {"pos": [118, 141], "hip": 91262},
+          {"pos": [62, 218], "hip": 92420}
+        ]
+      },
+      "common_name": {"english": "Lute of the Heavenly King", "native": "天王琵琶", "pronounce": "Tiān Wáng Pí Pá", "byname": "Lyra"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Ant",
+      "lines": [[51172, 48926]],
+      "image": {
+        "file": "illustrations/antlia.png",
+        "size": [128, 128],
+        "anchors": [
+          {"pos": [55, 12], "hip": 51172},
+          {"pos": [1, 31], "hip": 53502},
+          {"pos": [116, 93], "hip": 46515}
+        ]
+      },
+      "common_name": {"english": "Wind Bag", "native": "风口袋", "pronounce": "Fēng Kǒu Dài", "byname": "Antlia"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Mic",
+      "lines": [[105140, 103738, 102831]],
+      "image": {
+        "file": "illustrations/microscopium.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [13, 51], "hip": 105140},
+          {"pos": [218, 212], "hip": 103127},
+          {"pos": [182, 41], "hip": 102831}
+        ]
+      },
+      "common_name": {"english": "Demon-Revealing Mirror", "native": "照妖镜", "pronounce": "Zhào Yāo Jìng", "byname": "Microscopium"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Mus",
+      "lines": [[62322, 57363, 61199, 61585, 62322]],
+      "image": {
+        "file": "illustrations/musca.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [57, 52], "hip": 61199},
+          {"pos": [177, 68], "hip": 62322},
+          {"pos": [129, 236], "hip": 57363}
+        ]
+      },
+      "common_name": {"english": "Sleep-Inducing Insect", "native": "瞌睡虫", "pronounce": "Kē Shuì Chóng", "byname": "Musca"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Oct",
+      "lines": [[107089, 112405, 70638, 107089]],
+      "image": {
+        "file": "illustrations/octans.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [237, 177], "hip": 70638},
+          {"pos": [54, 53], "hip": 107089},
+          {"pos": [60, 135], "hip": 112405}
+        ]
+      },
+      "common_name": {"english": "Old Man of the South Pole", "native": "南极老寿星", "pronounce": "Nán Jí Lǎo Shòu Xīng", "byname": "Octans"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Aps",
+      "lines": [[72370, 81065, 81852]],
+      "image": {
+        "file": "illustrations/apus.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [28, 222], "hip": 81852},
+          {"pos": [69, 234], "hip": 81065},
+          {"pos": [187, 144], "hip": 72370}
+        ]
+      },
+      "common_name": {"english": "Moon Swallow (Wei)", "native": "危月燕", "pronounce": "Wēi Yuè Yàn", "byname": "Apus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Oph",
+      "lines": [[86032, 86742], [84012, 86742], [86032, 83000, 79882, 81377, 84012, 85755]],
+      "image": {
+        "file": "illustrations/ophiuchus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [5, 183], "hip": 92946},
+          {"pos": [452, 47], "hip": 77233},
+          {"pos": [238, 453], "hip": 85755}
+        ]
+      },
+      "common_name": {"english": "Heavenly King Virūpākṣa", "native": "西方广目天王", "pronounce": "Xī Fāng Guǎng Mù Tiān Wáng", "byname": "Ophiuchus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Ori",
+      "lines": [[26727, 26311, 25930], [27989, 26727, 27366, 24436, 25930, 25336, 26207, 27989]],
+      "image": {
+        "file": "illustrations/orion.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [402, 25], "hip": 27913},
+          {"pos": [132, 463], "hip": 27366},
+          {"pos": [476, 344], "hip": 22449}
+        ]
+      },
+      "common_name": {"english": "Nezha", "native": "哪吒", "pronounce": "Né Zhā", "byname": "Orion"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Pav",
+      "lines": [[100751, 105858, 98495, 91792, 86929, 88866, 90098, 92609, 99240, 102395, 100751]],
+      "image": {
+        "file": "illustrations/pavo.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [238, 112], "hip": 88866},
+          {"pos": [3, 179], "hip": 105858},
+          {"pos": [34, 50], "hip": 100751}
+        ]
+      },
+      "common_name": {"english": "Male Peacock", "native": "雄孔雀", "pronounce": "Xióng Kǒng Què", "byname": "Pavo"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Peg",
+      "lines": [[1067, 113963], [113881, 112158, 109352], [113881, 112748, 112440, 109176, 107354], [113963, 112447, 112029, 109427, 107315], [677, 113881], [677, 1067], [113881, 113963]],
+      "image": {
+        "file": "illustrations/pegasus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [247, 30], "hip": 107315},
+          {"pos": [348, 475], "hip": 677},
+          {"pos": [387, 231], "hip": 113963}
+        ]
+      },
+      "common_name": {"english": "Heavenly Steeds", "native": "天马", "pronounce": "Tiān Mǎ", "byname": "Pegasus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Per",
+      "lines": [[17448, 18246, 18614, 18532, 17358, 15863, 14328, 13268], [15863, 14576, 14354, 13254]],
+      "image": {
+        "file": "illustrations/perseus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [164, 323], "hip": 18532},
+          {"pos": [299, 175], "hip": 15863},
+          {"pos": [385, 386], "hip": 13254}
+        ]
+      },
+      "common_name": {"english": "Zhu Bajie", "native": "猪八戒", "pronounce": "Zhū Bā Jiè", "byname": "Perseus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Pic",
+      "lines": [[32607, 32607]],
+      "common_name": {"byname": "Pictor", "english": "Pic"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Cir",
+      "lines": [[71908, 71908]],
+      "common_name": {"byname": "Circinus", "english": "Cir"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Tel",
+      "lines": [[90422, 90422]],
+      "common_name": {"byname": "Telescopium", "english": "Tel"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Equ",
+      "lines": [[104521, 104858, 105570, 104987, 104521]],
+      "image": {
+        "file": "illustrations/equuleus.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [6, 168], "hip": 103294},
+          {"pos": [253, 127], "hip": 106856},
+          {"pos": [163, 54], "hip": 104987}
+        ]
+      },
+      "common_name": {"english": "Horse-Face", "native": "马面", "pronounce": "Mǎ Miàn", "byname": "Equuleus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west CMi",
+      "lines": [[37279, 36188]],
+      "image": {
+        "file": "illustrations/canis-minor.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [96, 43], "hip": 37921},
+          {"pos": [101, 171], "hip": 37279},
+          {"pos": [184, 124], "hip": 36188}
+        ]
+      },
+      "common_name": {"english": "Metal Dog (Lou)", "native": "娄金狗", "pronounce": "Lóu Jīn Gǒu", "byname": "Canis Minor"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west LMi",
+      "lines": [[53229, 51233, 49593, 46952], [49593, 53229]],
+      "image": {
+        "file": "illustrations/leo-minor.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [194, 236], "hip": 53229},
+          {"pos": [64, 20], "hip": 46952},
+          {"pos": [58, 186], "hip": 50801}
+        ]
+      },
+      "common_name": {"english": "Yellow Lion Spirit", "native": "黄狮精", "pronounce": "Huáng Shī Jīng", "byname": "Leo Minor"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Vul",
+      "lines": [[95771, 97886, 103004]],
+      "image": {
+        "file": "illustrations/vulpecula.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [169, 190], "hip": 97679},
+          {"pos": [251, 181], "hip": 95771},
+          {"pos": [12, 22], "hip": 103004}
+        ]
+      },
+      "common_name": {"english": "Nine-Tailed Vixen", "native": "九尾狐狸", "pronounce": "Jiǔ Wěi Hú Li", "byname": "Vulpecula"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west UMi",
+      "lines": [[11767, 85822, 82080, 77055, 79822, 75097, 72607, 77055]],
+      "image": {
+        "file": "illustrations/ursa-minor.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [15, 20], "hip": 11767},
+          {"pos": [193, 51], "hip": 59504},
+          {"pos": [93, 209], "hip": 79822}
+        ]
+      },
+      "common_name": {"english": "Yellow Wind Monster", "native": "黄风怪", "pronounce": "Huáng Fēng Guài", "byname": "Ursa Minor"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Phe",
+      "lines": [[5348, 5165, 2072], [765, 2072, 2081], [5165, 6867, 8837], [3405, 765, 116389, 116602, 118234]],
+      "image": {
+        "file": "illustrations/phoenix.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [226, 23], "hip": 116389},
+          {"pos": [158, 228], "hip": 5348},
+          {"pos": [40, 160], "hip": 6867}
+        ]
+      },
+      "common_name": {"english": "Nine-Headed Monstrous Bird", "native": "九头虫", "pronounce": "Jiǔ Tóu Chóng", "byname": "Phoenix"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Psc",
+      "lines": [[4889, 5742], [4889, 6193, 5742, 7097, 8198, 9487, 8833, 7884, 7007, 4906, 3760, 1645, 118268, 116771, 116928, 115738, 114971, 115830, 116771]],
+      "image": {
+        "file": "illustrations/pisces.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [15, 65], "hip": 4889},
+          {"pos": [105, 500], "hip": 9487},
+          {"pos": [459, 119], "hip": 114971}
+        ]
+      },
+      "common_name": {"english": "Benborba & Baborben", "native": "奔波儿灞、灞波儿奔", "pronounce": "Bēn Bōr Bà, Bà Bōr Bēn", "byname": "Pisces"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west PsA",
+      "lines": [[113368, 111954, 109422, 107608, 107380, 109285, 111188, 113246, 113368]],
+      "image": {
+        "file": "illustrations/piscis-austrinus.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [216, 80], "hip": 107608},
+          {"pos": [65, 138], "hip": 111954},
+          {"pos": [90, 218], "hip": 113246}
+        ]
+      },
+      "common_name": {"english": "Goldfish Monster", "native": "灵感大王", "pronounce": "Líng Gǎn Dà Wáng", "byname": "Piscis Austrinus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Vol",
+      "lines": [[41312, 35228, 34481, 37504, 39794, 41312], [44382, 41312]],
+      "image": {
+        "file": "illustrations/volans.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [67, 54], "hip": 41312},
+          {"pos": [160, 131], "hip": 35228},
+          {"pos": [94, 192], "hip": 37504}
+        ]
+      },
+      "common_name": {"english": "Carp Commander", "native": "鲤总兵", "pronounce": "Lǐ Zǒng Bīng", "byname": "Volans"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Pup",
+      "lines": [[34834, 35264, 38170, 39757]],
+      "common_name": {"byname": "Puppis", "english": "Pup"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Ret",
+      "lines": [[19780, 19921, 18597, 17440, 19780]],
+      "image": {
+        "file": "illustrations/reticulum.png",
+        "size": [128, 128],
+        "anchors": [
+          {"pos": [47, 56], "hip": 18597},
+          {"pos": [78, 88], "hip": 19780},
+          {"pos": [16, 111], "hip": 19921}
+        ]
+      },
+      "common_name": {"english": "Spider Web", "native": "蜘蛛网", "pronounce": "Zhī Zhū Wǎng", "byname": "Reticulum"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Sgr",
+      "lines": [[89931, 90496], [89642, 90185, 88635, 89341], [88635, 89931, 90185, 93506, 92041, 89931], [92041, 90496], [93506, 93864, 92855, 92041], [92855, 93085, 93683, 94141, 95168]],
+      "image": {
+        "file": "illustrations/sagittarius.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [180, 49], "hip": 95168},
+          {"pos": [219, 411], "hip": 95347},
+          {"pos": [466, 240], "hip": 88635}
+        ]
+      },
+      "common_name": {"english": "Wooden Unicorn (Dou)", "native": "斗木獬", "pronounce": "Dǒu Mù Xiè", "byname": "Sagittarius"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Sco",
+      "lines": [[85927, 86670, 87073, 86228, 84143, 82671, 82514, 82396, 81266, 80763, 80112, 78401, 78104], [78401, 78820]],
+      "image": {
+        "file": "illustrations/scorpius.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [418, 210], "hip": 78401},
+          {"pos": [61, 409], "hip": 85927},
+          {"pos": [298, 252], "hip": 80763}
+        ]
+      },
+      "common_name": {"english": "Scorpion Spirit", "native": "蝎子精", "pronounce": "Xiē Zi Jīng", "byname": "Scorpius"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Ser",
+      "lines": [[77516, 77622, 77070, 76276, 77233, 78072, 77450, 77233], [92946, 89962, 86565, 86263, 84880]],
+      "common_name": {"english": "Divine Serpent", "native": "灵蛇", "pronounce": "Líng Shé", "byname": "Serpens"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Sex",
+      "lines": [[51437, 49641]],
+      "image": {
+        "file": "illustrations/sextans.png",
+        "size": [128, 128],
+        "anchors": [
+          {"pos": [67, 23], "hip": 51437},
+          {"pos": [108, 63], "hip": 49641},
+          {"pos": [32, 98], "hip": 50414}
+        ]
+      },
+      "common_name": {"english": "Siming Spade", "native": "四明铲", "pronounce": "Sì Míng Chǎn", "byname": "Sextans"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Men",
+      "lines": [[25918, 21949]],
+      "image": {
+        "file": "illustrations/mensa.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [100, 67], "hip": 21949},
+          {"pos": [179, 136], "hip": 25918},
+          {"pos": [54, 183], "hip": 29134}
+        ]
+      },
+      "common_name": {"english": "Ling Sacred Mountain", "native": "灵山", "pronounce": "Líng Shān", "byname": "Mensa"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Tau",
+      "lines": [[25428, 21881, 20889, 20648, 20455, 20205, 18724, 15900, 18907, 16852], [18724, 21589, 21402, 19860], [26451, 21421, 20885, 20205], [20889, 20635, 19038, 17573, 16369, 15900]],
+      "image": {
+        "file": "illustrations/taurus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [37, 83], "hip": 25539},
+          {"pos": [371, 147], "hip": 17702},
+          {"pos": [338, 493], "hip": 16852}
+        ]
+      },
+      "common_name": {"english": "Bull Demon King", "native": "牛魔王", "pronounce": "Niú Mó Wáng", "byname": "Taurus"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Tuc",
+      "lines": [[110130, 114996, 2484, 1599, 118322, 110838, 110130]],
+      "image": {
+        "file": "illustrations/tucana.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [48, 65], "hip": 2484},
+          {"pos": [199, 93], "hip": 114996},
+          {"pos": [179, 229], "hip": 110838}
+        ]
+      },
+      "common_name": {"english": "Thunder God", "native": "雷公", "pronounce": "Léi Gōng", "byname": "Tucana"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Tri",
+      "lines": [[10670, 10064, 8796, 10670]],
+      "image": {
+        "file": "illustrations/triangulum.png",
+        "size": [128, 128],
+        "anchors": [
+          {"pos": [10, 56], "hip": 10064},
+          {"pos": [19, 89], "hip": 10670},
+          {"pos": [118, 29], "hip": 8796}
+        ]
+      },
+      "common_name": {"english": "Black Vulture Flag", "native": "皂雕旗", "pronounce": "Zào Diāo Qí", "byname": "Triangulum"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west TrA",
+      "lines": [[82273, 74946, 77952, 82273]],
+      "image": {
+        "file": "illustrations/triangulum-australe.png",
+        "size": [128, 128],
+        "anchors": [
+          {"pos": [44, 29], "hip": 77952},
+          {"pos": [110, 6], "hip": 74946},
+          {"pos": [98, 94], "hip": 82273}
+        ]
+      },
+      "common_name": {"english": "Command Flag", "native": "令字旗", "pronounce": "Lìng Zì Qí", "byname": "Triangulum Australe"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Aqr",
+      "lines": [[106278, 109074, 110395, 112961, 114855, 116971, 115669, 114119, 113368], [109074, 110003, 109139], [110003, 111123, 112716, 113136]],
+      "image": {
+        "file": "illustrations/aquarius.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [156, 93], "hip": 110960},
+          {"pos": [372, 88], "hip": 106278},
+          {"pos": [109, 442], "hip": 115669}
+        ]
+      },
+      "common_name": {"english": "Guanyin (Avalokiteśvara)", "native": "观音菩萨", "pronounce": "Guān Yīn Pú Sà", "byname": "Aquarius"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Vir",
+      "lines": [[57380, 57757, 60129, 63090, 66249, 68520, 72220], [68520, 71957], [63090, 63608], [60129, 61941, 65474]],
+      "image": {
+        "file": "illustrations/virgo.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [29, 296], "hip": 72220},
+          {"pos": [469, 51], "hip": 57757},
+          {"pos": [300, 310], "hip": 65474}
+        ]
+      },
+      "common_name": {"english": "Queen of the Womanland", "native": "女儿国国王", "pronounce": "Nǚ Ér Guó Guó Wáng", "byname": "Virgo"}
+    },
+    {
+      "id": "CON modern_journey_to_the_west Vel",
+      "lines": [[51986, 50191, 46651, 51986, 52727, 44816, 39429, 36377, 34834, 41037, 45080, 45556, 50371, 51232, 52727]],
+      "common_name": {"english": "Giant Soft-Shelled Turtle", "native": "老鼋", "pronounce": "Lǎo Yuán", "byname": "Vela"}
+    }
+  ],
+  "edges_type": "iau",
+  "edges_source": "https://pbarbier.com/constellations/edges_18.txt",
+  "edges_epoch": "B1875",
+  "edges": [
+    "001:002 M+ 22:52:00 +34:30:00 22:52:00 +52:30:00 AND LAC",
+    "002:003 P+ 22:52:00 +52:30:00 23:20:00 +52:30:00 AND CAS",
+    "004:005 P+ 23:20:00 +50:00:00 23:35:00 +50:00:00 AND CAS",
+    "006:007 P+ 23:35:00 +48:00:00 00:10:00 +48:00:00 AND CAS",
+    "008:009 P+ 00:10:00 +46:00:00 00:52:00 +46:00:00 AND CAS",
+    "009:010 M+ 00:52:00 +46:00:00 00:52:00 +48:00:00 AND CAS",
+    "010:011 P+ 00:52:00 +48:00:00 01:07:00 +48:00:00 AND CAS",
+    "011:012 M+ 01:07:00 +48:00:00 01:07:00 +50:00:00 AND CAS",
+    "012:013 P+ 01:07:00 +50:00:00 01:22:00 +50:00:00 AND CAS",
+    "013:014 P+ 01:22:00 +50:00:00 01:40:00 +50:00:00 AND PER",
+    "015:016 P+ 01:40:00 +47:00:00 02:02:30 +47:00:00 AND PER",
+    "016:017 M+ 02:02:30 +47:00:00 02:02:30 +50:30:00 AND PER",
+    "017:018 P+ 02:02:30 +50:30:00 02:31:00 +50:30:00 AND PER",
+    "025:026 P+ 00:43:00 +23:45:00 00:51:00 +23:45:00 AND PSC",
+    "028:029 M+ 00:08:30 +21:00:00 00:08:30 +22:00:00 AND PEG",
+    "030:031 M+ 00:04:00 +22:00:00 00:04:00 +28:00:00 AND PEG",
+    "032:033 M+ 00:00:00 +28:00:00 00:00:00 +31:20:00 AND PEG",
+    "034:035 M+ 23:45:00 +31:20:00 23:45:00 +32:05:00 AND PEG",
+    "036:037 M+ 23:30:00 +32:05:00 23:30:00 +34:30:00 AND PEG",
+    "038:050 P+ 09:22:00 -24:00:00 09:45:00 -24:00:00 ANT HYA",
+    "049:048 P+ 09:45:00 -26:30:00 10:15:00 -26:30:00 ANT HYA",
+    "047:046 P+ 10:15:00 -29:10:00 10:35:00 -29:10:00 ANT HYA",
+    "045:044 P+ 10:35:00 -31:10:00 10:50:00 -31:10:00 ANT HYA",
+    "043:042 P+ 10:50:00 -35:00:00 11:00:00 -35:00:00 ANT HYA",
+    "040:039 M+ 09:22:00 -39:45:00 09:22:00 -36:45:00 ANT VEL",
+    "039:038 M+ 09:22:00 -36:45:00 09:22:00 -24:00:00 ANT PYX",
+    "051:060 M+ 13:40:00 -82:30:00 13:40:00 -75:00:00 APS CHA",
+    "060:059 M+ 13:40:00 -75:00:00 13:40:00 -70:00:00 APS MUS",
+    "059:058 P+ 13:40:00 -70:00:00 14:45:00 -70:00:00 APS CIR",
+    "058:057 P+ 14:45:00 -70:00:00 17:00:00 -70:00:00 APS TRA",
+    "057:056 M+ 17:00:00 -70:00:00 17:00:00 -67:30:00 APS TRA",
+    "056:055 P+ 17:00:00 -67:30:00 17:30:00 -67:30:00 APS ARA",
+    "055:054 P+ 17:30:00 -67:30:00 18:00:00 -67:30:00 APS PAV",
+    "061:062 M+ 20:32:00 +00:00:00 20:32:00 +02:00:00 AQR AQL",
+    "062:063 P+ 20:32:00 +02:00:00 20:50:00 +02:00:00 AQR DEL",
+    "063:064 P+ 20:50:00 +02:00:00 21:20:00 +02:00:00 AQR EQU",
+    "064:065 P+ 21:20:00 +02:00:00 21:28:00 +02:00:00 AQR PEG",
+    "065:066 M+ 21:28:00 +02:00:00 21:28:00 +02:45:00 AQR PEG",
+    "066:067 P+ 21:28:00 +02:45:00 21:40:00 +02:45:00 AQR PEG",
+    "068:069 P+ 21:40:00 +01:45:00 22:00:00 +01:45:00 AQR PEG",
+    "069:070 M+ 22:00:00 +01:45:00 22:00:00 +02:00:00 AQR PEG",
+    "070:071 P+ 22:00:00 +02:00:00 22:45:00 +02:00:00 AQR PEG",
+    "073:074 P+ 22:45:00 -04:00:00 23:50:00 -04:00:00 AQR PSC",
+    "078:079 M+ 21:52:00 -25:30:00 21:52:00 -09:00:00 AQR CAP",
+    "082:083 M+ 20:32:00 -15:00:00 20:32:00 -09:00:00 AQR CAP",
+    "083:061 M+ 20:32:00 -09:00:00 20:32:00 +00:00:00 AQR AQL",
+    "084:085 M+ 18:35:00 +00:00:00 18:35:00 +02:00:00 AQL SER2",
+    "085:086 P+ 18:35:00 +02:00:00 18:52:00 +02:00:00 AQL SER2",
+    "086:087 M+ 18:52:00 +02:00:00 18:52:00 +06:15:00 AQL SER2",
+    "088:089 M+ 18:39:44 +06:15:00 18:39:44 +12:00:00 AQL OPH",
+    "089:090 P+ 18:39:44 +12:00:00 18:52:00 +12:00:00 AQL HER",
+    "090:091 M+ 18:52:00 +12:00:00 18:52:00 +18:30:00 AQL HER",
+    "091:092 P+ 18:52:00 +18:30:00 19:00:00 +18:30:00 AQL SGE",
+    "093:094 P+ 19:00:00 +16:10:00 19:50:00 +16:10:00 AQL SGE",
+    "095:096 P+ 19:50:00 +15:45:00 20:08:30 +15:45:00 AQL SGE",
+    "097:098 P+ 20:08:30 +08:30:00 20:18:00 +08:30:00 AQL DEL",
+    "099:062 P+ 20:18:00 +02:00:00 20:32:00 +02:00:00 AQL DEL",
+    "102:103 M+ 18:52:00 -12:02:00 18:52:00 -04:00:00 AQL SCT",
+    "104:084 M+ 18:35:00 -04:00:00 18:35:00 +00:00:00 AQL SER2",
+    "105:106 M+ 16:25:15 -60:00:00 16:25:15 -45:30:00 ARA NOR",
+    "106:107 P+ 16:25:15 -45:30:00 17:50:00 -45:30:00 ARA SCO",
+    "107:108 P+ 17:50:00 -45:30:00 18:00:00 -45:30:00 ARA CRA",
+    "111:112 M+ 16:50:00 -67:30:00 16:50:00 -65:00:00 ARA TRA",
+    "113:114 M+ 16:45:00 -65:00:00 16:45:00 -63:35:00 ARA TRA",
+    "115:116 M+ 16:35:00 -63:35:00 16:35:00 -61:00:00 ARA TRA",
+    "117:105 M+ 16:25:15 -61:00:00 16:25:15 -60:00:00 ARA TRA",
+    "119:120 M+ 01:40:00 +09:55:00 01:40:00 +25:00:00 ARI PSC",
+    "120:121 P+ 01:40:00 +25:00:00 01:55:00 +25:00:00 ARI TRI",
+    "121:122 M+ 01:55:00 +25:00:00 01:55:00 +27:15:00 ARI TRI",
+    "122:123 P+ 01:55:00 +27:15:00 02:25:00 +27:15:00 ARI TRI",
+    "123:124 M+ 02:25:00 +27:15:00 02:25:00 +30:40:00 ARI TRI",
+    "124:125 P+ 02:25:00 +30:40:00 02:43:00 +30:40:00 ARI TRI",
+    "125:126 P+ 02:43:00 +30:40:00 03:22:00 +30:40:00 ARI PER",
+    "130:131 M+ 04:30:00 +30:40:00 04:30:00 +36:00:00 AUR PER",
+    "131:132 P+ 04:30:00 +36:00:00 04:41:30 +36:00:00 AUR PER",
+    "132:133 M+ 04:41:30 +36:00:00 04:41:30 +52:30:00 AUR PER",
+    "133:134 P+ 04:41:30 +52:30:00 05:00:00 +52:30:00 AUR CAM",
+    "134:135 M+ 05:00:00 +52:30:00 05:00:00 +56:00:00 AUR CAM",
+    "135:136 P+ 05:00:00 +56:00:00 06:06:00 +56:00:00 AUR CAM",
+    "137:138 P+ 06:06:00 +54:00:00 06:30:00 +54:00:00 AUR LYN",
+    "139:140 P+ 06:30:00 +50:00:00 06:48:00 +50:00:00 AUR LYN",
+    "141:142 P+ 06:48:00 +44:30:00 07:22:00 +44:30:00 AUR LYN",
+    "146:147 M+ 05:53:00 +28:00:00 05:53:00 +28:30:00 AUR TAU",
+    "148:149 M+ 04:45:00 +28:30:00 04:45:00 +30:00:00 AUR TAU",
+    "150:130 M+ 04:30:00 +30:00:00 04:30:00 +30:40:00 AUR TAU",
+    "152:153 M+ 13:30:00 +08:00:00 13:30:00 +15:00:00 BOO VIR",
+    "153:154 M+ 13:30:00 +15:00:00 13:30:00 +28:30:00 BOO COM",
+    "154:155 P+ 13:30:00 +28:30:00 13:57:30 +28:30:00 BOO CVN",
+    "155:156 M+ 13:57:30 +28:30:00 13:57:30 +30:45:00 BOO CVN",
+    "156:157 P+ 13:57:30 +30:45:00 14:02:00 +30:45:00 BOO CVN",
+    "157:158 M+ 14:02:00 +30:45:00 14:02:00 +48:30:00 BOO CVN",
+    "158:159 M+ 14:02:00 +48:30:00 14:02:00 +55:30:00 BOO UMA",
+    "159:160 P+ 14:02:00 +55:30:00 14:25:00 +55:30:00 BOO UMA",
+    "160:161 P+ 14:25:00 +55:30:00 15:15:00 +55:30:00 BOO DRA",
+    "162:163 P+ 15:15:00 +53:00:00 15:45:00 +53:00:00 BOO DRA",
+    "171:184 M+ 04:16:00 -40:00:00 04:16:00 -37:00:00 CAE ERI",
+    "184:183 P+ 04:16:00 -37:00:00 04:35:00 -37:00:00 CAE ERI",
+    "183:182 M+ 04:35:00 -37:00:00 04:35:00 -30:00:00 CAE ERI",
+    "182:181 P+ 04:35:00 -30:00:00 04:42:00 -30:00:00 CAE ERI",
+    "181:180 M+ 04:42:00 -30:00:00 04:42:00 -27:15:00 CAE ERI",
+    "180:179 P+ 04:42:00 -27:15:00 04:50:00 -27:15:00 CAE ERI",
+    "179:178 P+ 04:50:00 -27:15:00 05:00:00 -27:15:00 CAE LEP",
+    "172:171 M+ 04:16:00 -49:00:00 04:16:00 -40:00:00 CAE HOR",
+    "185:186 M+ 03:20:00 +52:30:00 03:20:00 +55:00:00 CAM PER",
+    "187:188 M+ 03:10:00 +55:00:00 03:10:00 +57:00:00 CAM PER",
+    "189:190 M+ 03:06:00 +57:00:00 03:06:00 +68:00:00 CAM CAS",
+    "190:191 P+ 03:06:00 +68:00:00 03:25:00 +68:00:00 CAM CAS",
+    "191:192 M+ 03:25:00 +68:00:00 03:25:00 +77:00:00 CAM CAS",
+    "192:193 P+ 03:25:00 +77:00:00 03:30:30 +77:00:00 CAM CEP",
+    "193:194 M+ 03:30:30 +77:00:00 03:30:30 +80:00:00 CAM CEP",
+    "194:195 P+ 03:30:30 +80:00:00 05:00:00 +80:00:00 CAM CEP",
+    "195:196 M+ 05:00:00 +80:00:00 05:00:00 +85:00:00 CAM CEP",
+    "196:197 P+ 05:00:00 +85:00:00 08:00:00 +85:00:00 CAM CEP",
+    "197:198 M+ 08:00:00 +85:00:00 08:00:00 +86:30:00 CAM CEP",
+    "198:199 P+ 08:00:00 +86:30:00 14:30:00 +86:30:00 CAM UMI",
+    "204:205 M+ 11:30:00 +77:00:00 11:30:00 +80:00:00 CAM DRA",
+    "206:207 M+ 10:40:00 +80:00:00 10:40:00 +82:00:00 CAM DRA",
+    "212:213 M+ 07:00:00 +60:00:00 07:00:00 +62:00:00 CAM LYN",
+    "217:218 M+ 07:55:30 +07:00:00 07:55:30 +10:00:00 CNC CMI",
+    "219:220 M+ 07:48:30 +10:00:00 07:48:30 +13:30:00 CNC CMI",
+    "220:221 M+ 07:48:30 +13:30:00 07:48:30 +20:00:00 CNC GEM",
+    "221:222 P+ 07:48:30 +20:00:00 07:53:00 +20:00:00 CNC GEM",
+    "222:223 M+ 07:53:00 +20:00:00 07:53:00 +28:00:00 CNC GEM",
+    "223:224 P+ 07:53:00 +28:00:00 08:00:00 +28:00:00 CNC GEM",
+    "224:225 M+ 08:00:00 +28:00:00 08:00:00 +33:30:00 CNC GEM",
+    "225:226 P+ 08:00:00 +33:30:00 09:15:00 +33:30:00 CNC LYN",
+    "227:228 M+ 12:00:00 +34:00:00 12:00:00 +45:00:00 CVN UMA",
+    "228:229 P+ 12:00:00 +45:00:00 12:05:00 +45:00:00 CVN UMA",
+    "229:230 M+ 12:05:00 +45:00:00 12:05:00 +53:00:00 CVN UMA",
+    "230:231 P+ 12:05:00 +53:00:00 13:30:00 +53:00:00 CVN UMA",
+    "232:158 P+ 13:30:00 +48:30:00 14:02:00 +48:30:00 CVN UMA",
+    "233:234 M+ 13:15:00 +28:30:00 13:15:00 +32:00:00 CVN COM",
+    "235:236 M+ 12:20:00 +32:00:00 12:20:00 +34:00:00 CVN COM",
+    "237:238 P+ 06:07:00 -11:00:00 07:22:00 -11:00:00 CMA MON",
+    "241:242 M+ 06:07:00 -33:00:00 06:07:00 -27:15:00 CMA COL",
+    "242:237 M+ 06:07:00 -27:15:00 06:07:00 -11:00:00 CMA LEP",
+    "244:245 M+ 07:12:00 +00:00:00 07:12:00 +01:30:00 CMI MON",
+    "246:247 M+ 07:01:00 +01:30:00 07:01:00 +05:30:00 CMI MON",
+    "248:249 M+ 07:00:00 +05:30:00 07:00:00 +10:00:00 CMI MON",
+    "249:250 M+ 07:00:00 +10:00:00 07:00:00 +12:30:00 CMI GEM",
+    "250:251 P+ 07:00:00 +12:30:00 07:30:00 +12:30:00 CMI GEM",
+    "251:252 M+ 07:30:00 +12:30:00 07:30:00 +13:30:00 CMI GEM",
+    "252:220 P+ 07:30:00 +13:30:00 07:48:30 +13:30:00 CMI GEM",
+    "219:218 P+ 07:48:30 +10:00:00 07:55:30 +10:00:00 CMI CNC",
+    "217:216 P+ 07:55:30 +07:00:00 08:05:00 +07:00:00 CMI CNC",
+    "082:081 P+ 20:32:00 -15:00:00 21:20:00 -15:00:00 CAP AQR",
+    "081:080 M+ 21:20:00 -15:00:00 21:20:00 -09:00:00 CAP AQR",
+    "080:079 P+ 21:20:00 -09:00:00 21:52:00 -09:00:00 CAP AQR",
+    "253:101 M+ 20:00:00 -28:00:00 20:00:00 -12:02:00 CAP SGR",
+    "101:100 M+ 20:00:00 -12:02:00 20:00:00 -09:00:00 CAP AQL",
+    "100:083 P+ 20:00:00 -09:00:00 20:32:00 -09:00:00 CAP AQL",
+    "275:274 M+ 09:02:00 -75:00:00 09:02:00 -64:00:00 CAR VOL",
+    "273:272 M+ 06:50:00 -64:00:00 06:50:00 -58:00:00 CAR PIC",
+    "271:270 M+ 06:30:00 -58:00:00 06:30:00 -55:00:00 CAR PIC",
+    "269:268 M+ 06:10:00 -55:00:00 06:10:00 -52:30:00 CAR PIC",
+    "267:266 M+ 06:00:00 -52:30:00 06:00:00 -50:45:00 CAR PIC",
+    "266:265 P+ 06:00:00 -50:45:00 08:00:00 -50:45:00 CAR PUP",
+    "265:264 P+ 08:00:00 -50:45:00 08:10:00 -50:45:00 CAR VEL",
+    "263:262 P+ 08:10:00 -53:00:00 08:27:00 -53:00:00 CAR VEL",
+    "261:260 P+ 08:27:00 -54:30:00 08:50:00 -54:30:00 CAR VEL",
+    "259:258 P+ 08:50:00 -56:30:00 11:00:00 -56:30:00 CAR VEL",
+    "258:257 P+ 11:00:00 -56:30:00 11:15:00 -56:30:00 CAR CEN",
+    "002:278 M+ 22:52:00 +52:30:00 22:52:00 +56:15:00 CAS LAC",
+    "278:279 M+ 22:52:00 +56:15:00 22:52:00 +59:05:00 CAS CEP",
+    "279:280 P+ 22:52:00 +59:05:00 23:10:00 +59:05:00 CAS CEP",
+    "280:281 M+ 23:10:00 +59:05:00 23:10:00 +63:00:00 CAS CEP",
+    "281:282 P+ 23:10:00 +63:00:00 23:35:00 +63:00:00 CAS CEP",
+    "282:283 M+ 23:35:00 +63:00:00 23:35:00 +66:00:00 CAS CEP",
+    "283:284 P+ 23:35:00 +66:00:00 00:20:00 +66:00:00 CAS CEP",
+    "284:285 M+ 00:20:00 +66:00:00 00:20:00 +77:00:00 CAS CEP",
+    "285:192 P+ 00:20:00 +77:00:00 03:25:00 +77:00:00 CAS CEP",
+    "286:287 M+ 02:26:00 +57:00:00 02:26:00 +58:30:00 CAS PER",
+    "008:007 M+ 00:10:00 +46:00:00 00:10:00 +48:00:00 CAS AND",
+    "006:005 M+ 23:35:00 +48:00:00 23:35:00 +50:00:00 CAS AND",
+    "004:003 M+ 23:20:00 +50:00:00 23:20:00 +52:30:00 CAS AND",
+    "042:307 P+ 11:00:00 -35:00:00 12:15:00 -35:00:00 CEN HYA",
+    "307:306 M+ 12:15:00 -35:00:00 12:15:00 -33:00:00 CEN HYA",
+    "306:305 P+ 12:15:00 -33:00:00 12:35:00 -33:00:00 CEN HYA",
+    "305:304 M+ 12:35:00 -33:00:00 12:35:00 -29:30:00 CEN HYA",
+    "304:303 P+ 12:35:00 -29:30:00 14:55:00 -29:30:00 CEN HYA",
+    "300:299 P+ 14:10:00 -55:00:00 14:32:00 -55:00:00 CEN LUP",
+    "296:295 M+ 12:50:00 -64:00:00 12:50:00 -55:00:00 CEN CRU",
+    "277:257 M+ 11:15:00 -64:00:00 11:15:00 -56:30:00 CEN CAR",
+    "258:041 M+ 11:00:00 -56:30:00 11:00:00 -39:45:00 CEN VEL",
+    "041:042 M+ 11:00:00 -39:45:00 11:00:00 -35:00:00 CEN ANT",
+    "308:309 M+ 20:00:00 +59:30:00 20:00:00 +61:30:00 CEP DRA",
+    "309:310 P+ 20:00:00 +61:30:00 20:25:00 +61:30:00 CEP DRA",
+    "310:311 M+ 20:25:00 +61:30:00 20:25:00 +67:00:00 CEP DRA",
+    "311:312 P+ 20:25:00 +67:00:00 20:40:00 +67:00:00 CEP DRA",
+    "312:313 M+ 20:40:00 +67:00:00 20:40:00 +75:00:00 CEP DRA",
+    "314:315 M+ 20:10:00 +75:00:00 20:10:00 +80:00:00 CEP DRA",
+    "315:316 P+ 20:10:00 +80:00:00 21:00:00 +80:00:00 CEP DRA",
+    "316:317 M+ 21:00:00 +80:00:00 21:00:00 +86:00:00 CEP DRA",
+    "317:318 M+ 21:00:00 +86:00:00 21:00:00 +86:10:00 CEP UMI",
+    "318:319 P+ 21:00:00 +86:10:00 23:00:00 +86:10:00 CEP UMI",
+    "319:320 M+ 23:00:00 +86:10:00 23:00:00 +88:00:00 CEP UMI",
+    "320:321 P+ 23:00:00 +88:00:00 08:00:00 +88:00:00 CEP UMI",
+    "326:327 M+ 21:58:00 +52:45:00 21:58:00 +54:50:00 CEP CYG",
+    "328:329 M+ 20:36:00 +54:50:00 20:36:00 +60:55:00 CEP CYG",
+    "332:333 M+ 00:20:00 +00:00:00 00:20:00 +02:00:00 CET PSC",
+    "333:334 P+ 00:20:00 +02:00:00 02:00:00 +02:00:00 CET PSC",
+    "334:118 M+ 02:00:00 +02:00:00 02:00:00 +09:55:00 CET PSC",
+    "118:129 P+ 02:00:00 +09:55:00 03:17:00 +09:55:00 CET ARI",
+    "076:075 M+ 23:50:00 -25:30:00 23:50:00 -07:00:00 CET AQR",
+    "075:341 P+ 23:50:00 -07:00:00 00:20:00 -07:00:00 CET PSC",
+    "341:332 M+ 00:20:00 -07:00:00 00:20:00 +00:00:00 CET PSC",
+    "342:343 M+ 07:40:00 -82:30:00 07:40:00 -75:00:00 CHA MEN",
+    "343:275 P+ 07:40:00 -75:00:00 09:02:00 -75:00:00 CHA VOL",
+    "275:276 P+ 09:02:00 -75:00:00 11:15:00 -75:00:00 CHA CAR",
+    "276:060 P+ 11:15:00 -75:00:00 13:40:00 -75:00:00 CHA MUS",
+    "297:298 P+ 13:30:00 -64:00:00 14:32:00 -64:00:00 CIR CEN",
+    "298:299 M+ 14:32:00 -64:00:00 14:32:00 -55:00:00 CIR CEN",
+    "299:354 P+ 14:32:00 -55:00:00 15:03:00 -55:00:00 CIR LUP",
+    "354:353 P+ 15:03:00 -55:00:00 15:20:00 -55:00:00 CIR NOR",
+    "059:345 M+ 13:40:00 -70:00:00 13:40:00 -65:00:00 CIR MUS",
+    "344:297 M+ 13:30:00 -65:00:00 13:30:00 -64:00:00 CIR MUS",
+    "177:178 M+ 05:00:00 -43:00:00 05:00:00 -27:15:00 COL CAE",
+    "178:242 P+ 05:00:00 -27:15:00 06:07:00 -27:15:00 COL LEP",
+    "241:240 P+ 06:07:00 -33:00:00 06:35:00 -33:00:00 COL CMA",
+    "357:358 M+ 11:52:00 +14:00:00 11:52:00 +29:00:00 COM LEO",
+    "358:359 P+ 11:52:00 +29:00:00 12:00:00 +29:00:00 COM UMA",
+    "359:227 M+ 12:00:00 +29:00:00 12:00:00 +34:00:00 COM UMA",
+    "227:236 P+ 12:00:00 +34:00:00 12:20:00 +34:00:00 COM CVN",
+    "235:234 P+ 12:20:00 +32:00:00 13:15:00 +32:00:00 COM CVN",
+    "233:154 P+ 13:15:00 +28:30:00 13:30:00 +28:30:00 COM CVN",
+    "362:363 P+ 17:50:00 -37:00:00 19:10:00 -37:00:00 CRA SGR",
+    "107:362 M+ 17:50:00 -45:30:00 17:50:00 -37:00:00 CRA SCO",
+    "169:168 M+ 15:11:00 +26:00:00 15:11:00 +33:00:00 CRB BOO",
+    "168:167 P+ 15:11:00 +33:00:00 15:26:00 +33:00:00 CRB BOO",
+    "167:166 M+ 15:26:00 +33:00:00 15:26:00 +40:00:00 CRB BOO",
+    "166:165 P+ 15:26:00 +40:00:00 15:45:00 +40:00:00 CRB BOO",
+    "165:365 P+ 15:45:00 +40:00:00 16:20:00 +40:00:00 CRB HER",
+    "372:371 M+ 11:50:00 -24:30:00 11:50:00 -11:00:00 CRV CRT",
+    "371:370 P+ 11:50:00 -11:00:00 12:50:00 -11:00:00 CRV VIR",
+    "376:382 P+ 10:45:00 -06:00:00 11:31:00 -06:00:00 CRT LEO",
+    "382:381 P+ 11:31:00 -06:00:00 11:50:00 -06:00:00 CRT VIR",
+    "380:379 M+ 10:50:00 -24:30:00 10:50:00 -19:00:00 CRT HYA",
+    "378:377 M+ 10:45:00 -19:00:00 10:45:00 -11:00:00 CRT HYA",
+    "377:376 M+ 10:45:00 -11:00:00 10:45:00 -06:00:00 CRT SEX",
+    "294:295 P+ 11:50:00 -55:00:00 12:50:00 -55:00:00 CRU CEN",
+    "293:294 M+ 11:50:00 -64:00:00 11:50:00 -55:00:00 CRU CEN",
+    "383:384 M+ 19:15:30 +27:30:00 19:15:30 +30:00:00 CYG LYR",
+    "384:385 P+ 19:15:30 +30:00:00 19:21:30 +30:00:00 CYG LYR",
+    "385:386 M+ 19:21:30 +30:00:00 19:21:30 +36:30:00 CYG LYR",
+    "386:387 P+ 19:21:30 +36:30:00 19:24:00 +36:30:00 CYG LYR",
+    "387:388 M+ 19:24:00 +36:30:00 19:24:00 +43:30:00 CYG LYR",
+    "389:390 M+ 19:10:00 +43:30:00 19:10:00 +47:30:00 CYG LYR",
+    "391:392 M+ 19:05:00 +47:30:00 19:05:00 +55:30:00 CYG DRA",
+    "392:393 P+ 19:05:00 +55:30:00 19:25:00 +55:30:00 CYG DRA",
+    "393:394 M+ 19:25:00 +55:30:00 19:25:00 +58:00:00 CYG DRA",
+    "394:395 P+ 19:25:00 +58:00:00 19:46:00 +58:00:00 CYG DRA",
+    "395:396 M+ 19:46:00 +58:00:00 19:46:00 +59:30:00 CYG DRA",
+    "396:308 P+ 19:46:00 +59:30:00 20:00:00 +59:30:00 CYG DRA",
+    "308:331 P+ 20:00:00 +59:30:00 20:32:12 +59:30:00 CYG CEP",
+    "331:330 M+ 20:32:12 +59:30:00 20:32:12 +60:55:00 CYG CEP",
+    "330:329 P+ 20:32:12 +60:55:00 20:36:00 +60:55:00 CYG CEP",
+    "328:327 P+ 20:36:00 +54:50:00 21:58:00 +54:50:00 CYG CEP",
+    "405:406 M+ 20:55:00 +28:00:00 20:55:00 +29:00:00 CYG VUL",
+    "099:098 M+ 20:18:00 +02:00:00 20:18:00 +08:30:00 DEL AQL",
+    "097:096 M+ 20:08:30 +08:30:00 20:08:30 +15:45:00 DEL AQL",
+    "096:409 P+ 20:08:30 +15:45:00 20:15:00 +15:45:00 DEL SGE",
+    "409:410 M+ 20:15:00 +15:45:00 20:15:00 +20:30:00 DEL SGE",
+    "410:411 P+ 20:15:00 +20:30:00 20:34:00 +20:30:00 DEL VUL",
+    "412:413 P+ 20:34:00 +19:30:00 21:03:00 +19:30:00 DEL VUL",
+    "418:437 M+ 03:50:00 -53:10:00 03:50:00 -51:00:00 DOR HOR",
+    "437:436 P+ 03:50:00 -51:00:00 04:05:00 -51:00:00 DOR HOR",
+    "436:435 M+ 04:05:00 -51:00:00 04:05:00 -49:00:00 DOR HOR",
+    "435:172 P+ 04:05:00 -49:00:00 04:16:00 -49:00:00 DOR HOR",
+    "172:173 P+ 04:16:00 -49:00:00 04:30:00 -49:00:00 DOR CAE",
+    "434:433 P+ 04:30:00 -54:00:00 05:00:00 -54:00:00 DOR PIC",
+    "432:431 P+ 05:00:00 -57:30:00 05:30:00 -57:30:00 DOR PIC",
+    "430:429 P+ 05:30:00 -61:00:00 06:00:00 -61:00:00 DOR PIC",
+    "428:427 P+ 06:00:00 -64:00:00 06:35:00 -64:00:00 DOR PIC",
+    "425:424 M+ 04:35:00 -70:00:00 04:35:00 -67:30:00 DOR HYI",
+    "424:423 M+ 04:35:00 -67:30:00 04:35:00 -59:00:00 DOR RET",
+    "422:421 M+ 04:20:00 -59:00:00 04:20:00 -56:30:00 DOR RET",
+    "420:419 M+ 04:00:00 -56:30:00 04:00:00 -53:10:00 DOR RET",
+    "209:208 M+ 09:10:00 +73:30:00 09:10:00 +82:00:00 DRA CAM",
+    "208:207 P+ 09:10:00 +82:00:00 10:40:00 +82:00:00 DRA CAM",
+    "206:205 P+ 10:40:00 +80:00:00 11:30:00 +80:00:00 DRA CAM",
+    "204:203 P+ 11:30:00 +77:00:00 13:00:00 +77:00:00 DRA CAM",
+    "438:439 P+ 13:00:00 +70:00:00 14:00:00 +70:00:00 DRA UMI",
+    "440:441 P+ 14:00:00 +66:00:00 15:40:00 +66:00:00 DRA UMI",
+    "441:442 M+ 15:40:00 +66:00:00 15:40:00 +70:00:00 DRA UMI",
+    "442:443 P+ 15:40:00 +70:00:00 16:32:00 +70:00:00 DRA UMI",
+    "443:444 M+ 16:32:00 +70:00:00 16:32:00 +75:00:00 DRA UMI",
+    "444:445 P+ 16:32:00 +75:00:00 17:30:00 +75:00:00 DRA UMI",
+    "445:446 M+ 17:30:00 +75:00:00 17:30:00 +80:00:00 DRA UMI",
+    "446:447 P+ 17:30:00 +80:00:00 18:00:00 +80:00:00 DRA UMI",
+    "447:448 M+ 18:00:00 +80:00:00 18:00:00 +86:00:00 DRA UMI",
+    "448:317 P+ 18:00:00 +86:00:00 21:00:00 +86:00:00 DRA UMI",
+    "314:313 P+ 20:10:00 +75:00:00 20:40:00 +75:00:00 DRA CEP",
+    "449:450 M+ 18:14:00 +47:30:00 18:14:00 +50:30:00 DRA HER",
+    "451:452 M+ 17:00:00 +50:30:00 17:00:00 +51:30:00 DRA HER",
+    "164:163 M+ 15:45:00 +51:30:00 15:45:00 +53:00:00 DRA BOO",
+    "162:161 M+ 15:15:00 +53:00:00 15:15:00 +55:30:00 DRA BOO",
+    "160:453 M+ 14:25:00 +55:30:00 14:25:00 +63:00:00 DRA UMA",
+    "454:455 M+ 13:30:00 +63:00:00 13:30:00 +64:00:00 DRA UMA",
+    "456:457 M+ 12:00:00 +64:00:00 12:00:00 +66:30:00 DRA UMA",
+    "458:459 M+ 11:20:00 +66:30:00 11:20:00 +73:30:00 DRA UMA",
+    "063:417 M+ 20:50:00 +02:00:00 20:50:00 +06:00:00 EQU DEL",
+    "417:416 P+ 20:50:00 +06:00:00 20:52:30 +06:00:00 EQU DEL",
+    "416:415 M+ 20:52:30 +06:00:00 20:52:30 +11:50:00 EQU DEL",
+    "415:414 P+ 20:52:30 +11:50:00 21:03:00 +11:50:00 EQU DEL",
+    "414:460 P+ 21:03:00 +11:50:00 21:07:00 +11:50:00 EQU PEG",
+    "460:461 M+ 21:07:00 +11:50:00 21:07:00 +12:30:00 EQU PEG",
+    "461:462 P+ 21:07:00 +12:30:00 21:20:00 +12:30:00 EQU PEG",
+    "463:464 P+ 03:35:00 +00:00:00 04:37:00 +00:00:00 ERI TAU",
+    "464:465 P+ 04:37:00 +00:00:00 04:40:00 +00:00:00 ERI ORI",
+    "466:467 P+ 04:40:00 -04:00:00 05:05:00 -04:00:00 ERI ORI",
+    "484:485 M+ 01:20:00 -58:30:00 01:20:00 -53:30:00 ERI PHE",
+    "485:486 P+ 01:20:00 -53:30:00 01:35:00 -53:30:00 ERI PHE",
+    "486:487 M+ 01:35:00 -53:30:00 01:35:00 -51:30:00 ERI PHE",
+    "487:488 P+ 01:35:00 -51:30:00 01:50:00 -51:30:00 ERI PHE",
+    "488:489 M+ 01:50:00 -51:30:00 01:50:00 -48:10:00 ERI PHE",
+    "489:490 P+ 01:50:00 -48:10:00 02:20:00 -48:10:00 ERI PHE",
+    "490:491 M+ 02:20:00 -48:10:00 02:20:00 -40:00:00 ERI PHE",
+    "491:492 P+ 02:20:00 -40:00:00 03:00:00 -40:00:00 ERI FOR",
+    "492:493 M+ 03:00:00 -40:00:00 03:00:00 -39:35:00 ERI FOR",
+    "493:494 P+ 03:00:00 -39:35:00 03:30:00 -39:35:00 ERI FOR",
+    "494:495 M+ 03:30:00 -39:35:00 03:30:00 -36:00:00 ERI FOR",
+    "495:496 P+ 03:30:00 -36:00:00 03:45:00 -36:00:00 ERI FOR",
+    "496:497 M+ 03:45:00 -36:00:00 03:45:00 -24:23:00 ERI FOR",
+    "338:337 M+ 02:39:00 -24:23:00 02:39:00 -01:45:00 ERI CET",
+    "337:336 P+ 02:39:00 -01:45:00 03:17:00 -01:45:00 ERI CET",
+    "336:498 P+ 03:17:00 -01:45:00 03:35:00 -01:45:00 ERI TAU",
+    "498:463 M+ 03:35:00 -01:45:00 03:35:00 +00:00:00 ERI TAU",
+    "339:338 P+ 01:40:00 -24:23:00 02:39:00 -24:23:00 FOR CET",
+    "338:497 P+ 02:39:00 -24:23:00 03:45:00 -24:23:00 FOR ERI",
+    "499:340 M+ 01:40:00 -40:00:00 01:40:00 -25:30:00 FOR SCL",
+    "340:339 M+ 01:40:00 -25:30:00 01:40:00 -24:23:00 FOR CET",
+    "500:501 M+ 06:18:30 +12:00:00 06:18:30 +17:30:00 GEM ORI",
+    "502:503 M+ 06:13:00 +17:30:00 06:13:00 +21:30:00 GEM ORI",
+    "504:505 M+ 05:53:00 +21:30:00 05:53:00 +22:50:00 GEM ORI",
+    "505:146 M+ 05:53:00 +22:50:00 05:53:00 +28:00:00 GEM TAU",
+    "146:145 P+ 05:53:00 +28:00:00 06:32:00 +28:00:00 GEM AUR",
+    "145:144 M+ 06:32:00 +28:00:00 06:32:00 +35:30:00 GEM AUR",
+    "144:143 P+ 06:32:00 +35:30:00 07:22:00 +35:30:00 GEM AUR",
+    "143:506 P+ 07:22:00 +35:30:00 07:45:00 +35:30:00 GEM LYN",
+    "507:225 P+ 07:45:00 +33:30:00 08:00:00 +33:30:00 GEM LYN",
+    "508:509 M+ 06:56:00 +10:00:00 06:56:00 +12:00:00 GEM MON",
+    "510:518 P+ 21:20:00 -37:00:00 23:00:00 -37:00:00 GRU PSA",
+    "518:517 P+ 23:00:00 -37:00:00 23:20:00 -37:00:00 GRU SCL",
+    "514:513 M+ 22:00:00 -57:00:00 22:00:00 -50:00:00 GRU IND",
+    "512:511 M+ 21:20:00 -50:00:00 21:20:00 -45:30:00 GRU IND",
+    "511:510 M+ 21:20:00 -45:30:00 21:20:00 -37:00:00 GRU MIC",
+    "520:521 M+ 16:05:00 +04:00:00 16:05:00 +16:00:00 HER SER1",
+    "522:523 M+ 15:55:00 +16:00:00 15:55:00 +22:00:00 HER SER1",
+    "523:524 P+ 15:55:00 +22:00:00 16:02:00 +22:00:00 HER SER1",
+    "524:369 M+ 16:02:00 +22:00:00 16:02:00 +26:00:00 HER SER1",
+    "369:368 P+ 16:02:00 +26:00:00 16:10:00 +26:00:00 HER CRB",
+    "368:367 M+ 16:10:00 +26:00:00 16:10:00 +27:00:00 HER CRB",
+    "367:366 P+ 16:10:00 +27:00:00 16:20:00 +27:00:00 HER CRB",
+    "366:365 M+ 16:20:00 +27:00:00 16:20:00 +40:00:00 HER CRB",
+    "165:164 M+ 15:45:00 +40:00:00 15:45:00 +51:30:00 HER BOO",
+    "164:452 P+ 15:45:00 +51:30:00 17:00:00 +51:30:00 HER DRA",
+    "451:450 P+ 17:00:00 +50:30:00 18:14:00 +50:30:00 HER DRA",
+    "526:527 P+ 18:10:30 +30:00:00 18:22:00 +30:00:00 HER LYR",
+    "528:529 P+ 18:22:00 +26:00:00 18:52:00 +26:00:00 HER LYR",
+    "532:533 M+ 18:15:00 +12:00:00 18:15:00 +14:20:00 HER OPH",
+    "542:483 M+ 02:10:00 -67:30:00 02:10:00 -58:30:00 HOR HYI",
+    "483:482 M+ 02:10:00 -58:30:00 02:10:00 -54:00:00 HOR ERI",
+    "482:481 P+ 02:10:00 -54:00:00 02:25:00 -54:00:00 HOR ERI",
+    "481:480 M+ 02:25:00 -54:00:00 02:25:00 -51:00:00 HOR ERI",
+    "480:479 P+ 02:25:00 -51:00:00 02:40:00 -51:00:00 HOR ERI",
+    "479:478 M+ 02:40:00 -51:00:00 02:40:00 -49:00:00 HOR ERI",
+    "478:477 P+ 02:40:00 -49:00:00 03:00:00 -49:00:00 HOR ERI",
+    "477:476 M+ 03:00:00 -49:00:00 03:00:00 -46:00:00 HOR ERI",
+    "476:475 P+ 03:00:00 -46:00:00 03:25:00 -46:00:00 HOR ERI",
+    "475:474 M+ 03:25:00 -46:00:00 03:25:00 -44:00:00 HOR ERI",
+    "474:473 P+ 03:25:00 -44:00:00 03:52:00 -44:00:00 HOR ERI",
+    "473:472 M+ 03:52:00 -44:00:00 03:52:00 -40:00:00 HOR ERI",
+    "472:171 P+ 03:52:00 -40:00:00 04:16:00 -40:00:00 HOR ERI",
+    "243:216 M+ 08:05:00 +00:00:00 08:05:00 +07:00:00 HYA CMI",
+    "216:215 P+ 08:05:00 +07:00:00 09:15:00 +07:00:00 HYA CNC",
+    "215:543 P+ 09:15:00 +07:00:00 09:35:00 +07:00:00 HYA LEO",
+    "545:377 P+ 09:35:00 -11:00:00 10:45:00 -11:00:00 HYA SEX",
+    "378:379 P+ 10:45:00 -19:00:00 10:50:00 -19:00:00 HYA CRT",
+    "380:372 P+ 10:50:00 -24:30:00 11:50:00 -24:30:00 HYA CRT",
+    "372:373 P+ 11:50:00 -24:30:00 12:35:00 -24:30:00 HYA CRV",
+    "373:374 M+ 12:35:00 -24:30:00 12:35:00 -22:00:00 HYA CRV",
+    "374:375 P+ 12:35:00 -22:00:00 12:50:00 -22:00:00 HYA CRV",
+    "375:546 P+ 12:50:00 -22:00:00 14:15:00 -22:00:00 HYA VIR",
+    "547:548 P+ 14:15:00 -24:30:00 14:55:00 -24:30:00 HYA LIB",
+    "043:044 M+ 10:50:00 -35:00:00 10:50:00 -31:10:00 HYA ANT",
+    "045:046 M+ 10:35:00 -31:10:00 10:35:00 -29:10:00 HYA ANT",
+    "047:048 M+ 10:15:00 -29:10:00 10:15:00 -26:30:00 HYA ANT",
+    "049:050 M+ 09:45:00 -26:30:00 09:45:00 -24:00:00 HYA ANT",
+    "549:550 M+ 09:05:00 -24:00:00 09:05:00 -19:00:00 HYA PYX",
+    "551:552 M+ 08:35:00 -19:00:00 08:35:00 -17:00:00 HYA PYX",
+    "553:554 M+ 08:22:00 -17:00:00 08:22:00 -11:00:00 HYA PUP",
+    "555:243 M+ 08:05:00 -11:00:00 08:05:00 +00:00:00 HYA MON",
+    "559:560 M+ 00:00:00 -82:30:00 00:00:00 -75:00:00 HYI OCT",
+    "560:561 P+ 00:00:00 -75:00:00 00:45:00 -75:00:00 HYI TUC",
+    "562:563 P+ 00:45:00 -76:00:00 01:20:00 -76:00:00 HYI TUC",
+    "563:484 M+ 01:20:00 -76:00:00 01:20:00 -58:30:00 HYI TUC",
+    "484:483 P+ 01:20:00 -58:30:00 02:10:00 -58:30:00 HYI ERI",
+    "542:541 P+ 02:10:00 -67:30:00 03:12:00 -67:30:00 HYI HOR",
+    "541:424 P+ 03:12:00 -67:30:00 04:35:00 -67:30:00 HYI RET",
+    "564:571 M+ 21:20:00 -75:00:00 21:20:00 -60:00:00 IND PAV",
+    "570:569 M+ 20:20:00 -60:00:00 20:20:00 -57:00:00 IND PAV",
+    "569:568 M+ 20:20:00 -57:00:00 20:20:00 -45:30:00 IND TEL",
+    "568:511 P+ 20:20:00 -45:30:00 21:20:00 -45:30:00 IND MIC",
+    "512:513 P+ 21:20:00 -50:00:00 22:00:00 -50:00:00 IND GRU",
+    "567:566 P+ 22:00:00 -67:30:00 23:20:00 -67:30:00 IND TUC",
+    "401:400 M+ 21:52:30 +36:00:00 21:52:30 +43:45:00 LAC CYG",
+    "400:399 P+ 21:52:30 +43:45:00 21:54:30 +43:45:00 LAC CYG",
+    "399:398 M+ 21:54:30 +43:45:00 21:54:30 +44:00:00 LAC CYG",
+    "398:397 P+ 21:54:30 +44:00:00 21:58:00 +44:00:00 LAC CYG",
+    "397:326 M+ 21:58:00 +44:00:00 21:58:00 +52:45:00 LAC CYG",
+    "326:325 P+ 21:58:00 +52:45:00 22:08:00 +52:45:00 LAC CEP",
+    "325:324 M+ 22:08:00 +52:45:00 22:08:00 +55:00:00 LAC CEP",
+    "324:323 P+ 22:08:00 +55:00:00 22:19:00 +55:00:00 LAC CEP",
+    "323:322 M+ 22:19:00 +55:00:00 22:19:00 +56:15:00 LAC CEP",
+    "322:278 P+ 22:19:00 +56:15:00 22:52:00 +56:15:00 LAC CEP",
+    "572:573 M+ 22:49:00 +34:30:00 22:49:00 +35:00:00 LAC PEG",
+    "574:575 M+ 22:00:00 +35:00:00 22:00:00 +36:00:00 LAC PEG",
+    "576:577 M+ 10:45:00 +00:00:00 10:45:00 +07:00:00 LEO SEX",
+    "215:226 M+ 09:15:00 +07:00:00 09:15:00 +33:30:00 LEO CNC",
+    "226:578 P+ 09:15:00 +33:30:00 09:53:00 +33:30:00 LEO LMI",
+    "579:580 P+ 09:53:00 +28:30:00 10:30:00 +28:30:00 LEO LMI",
+    "581:582 P+ 10:30:00 +23:30:00 10:45:00 +23:30:00 LEO LMI",
+    "582:583 M+ 10:45:00 +23:30:00 10:45:00 +25:30:00 LEO LMI",
+    "583:584 P+ 10:45:00 +25:30:00 11:00:00 +25:30:00 LEO LMI",
+    "584:585 M+ 11:00:00 +25:30:00 11:00:00 +29:00:00 LEO LMI",
+    "585:358 P+ 11:00:00 +29:00:00 11:52:00 +29:00:00 LEO UMA",
+    "376:576 M+ 10:45:00 -06:00:00 10:45:00 +00:00:00 LEO SEX",
+    "226:589 M+ 09:15:00 +33:30:00 09:15:00 +39:45:00 LMI LYN",
+    "589:590 P+ 09:15:00 +39:45:00 09:35:00 +39:45:00 LMI LYN",
+    "590:591 M+ 09:35:00 +39:45:00 09:35:00 +42:00:00 LMI LYN",
+    "591:592 P+ 09:35:00 +42:00:00 10:10:00 +42:00:00 LMI UMA",
+    "593:594 P+ 10:10:00 +40:00:00 10:47:00 +40:00:00 LMI UMA",
+    "595:596 P+ 10:47:00 +34:00:00 11:00:00 +34:00:00 LMI UMA",
+    "581:580 M+ 10:30:00 +23:30:00 10:30:00 +28:30:00 LMI LEO",
+    "579:578 M+ 09:53:00 +28:30:00 09:53:00 +33:30:00 LMI LEO",
+    "179:471 M+ 04:50:00 -27:15:00 04:50:00 -14:30:00 LEP ERI",
+    "471:470 P+ 04:50:00 -14:30:00 04:55:00 -14:30:00 LEP ERI",
+    "470:469 M+ 04:55:00 -14:30:00 04:55:00 -11:00:00 LEP ERI",
+    "469:468 P+ 04:55:00 -11:00:00 05:05:00 -11:00:00 LEP ERI",
+    "468:597 P+ 05:05:00 -11:00:00 05:50:00 -11:00:00 LEP ORI",
+    "597:237 P+ 05:50:00 -11:00:00 06:07:00 -11:00:00 LEP MON",
+    "607:606 P+ 15:05:00 -03:15:00 15:55:00 -03:15:00 LIB SER1",
+    "303:548 M+ 14:55:00 -29:30:00 14:55:00 -24:30:00 LIB HYA",
+    "547:546 M+ 14:15:00 -24:30:00 14:15:00 -22:00:00 LIB HYA",
+    "546:601 M+ 14:15:00 -22:00:00 14:15:00 -08:00:00 LIB VIR",
+    "601:600 P+ 14:15:00 -08:00:00 14:40:00 -08:00:00 LIB VIR",
+    "600:599 M+ 14:40:00 -08:00:00 14:40:00 +00:00:00 LIB VIR",
+    "599:598 P+ 14:40:00 +00:00:00 15:05:00 +00:00:00 LIB VIR",
+    "300:301 M+ 14:10:00 -55:00:00 14:10:00 -42:00:00 LUP CEN",
+    "301:302 P+ 14:10:00 -42:00:00 14:55:00 -42:00:00 LUP CEN",
+    "302:303 M+ 14:55:00 -42:00:00 14:55:00 -29:30:00 LUP CEN",
+    "303:602 P+ 14:55:00 -29:30:00 15:40:00 -29:30:00 LUP LIB",
+    "602:614 P+ 15:40:00 -29:30:00 16:00:00 -29:30:00 LUP SCO",
+    "143:142 M+ 07:22:00 +35:30:00 07:22:00 +44:30:00 LYN AUR",
+    "141:140 M+ 06:48:00 +44:30:00 06:48:00 +50:00:00 LYN AUR",
+    "139:138 M+ 06:30:00 +50:00:00 06:30:00 +54:00:00 LYN AUR",
+    "137:136 M+ 06:06:00 +54:00:00 06:06:00 +56:00:00 LYN AUR",
+    "136:214 M+ 06:06:00 +56:00:00 06:06:00 +62:00:00 LYN CAM",
+    "214:213 P+ 06:06:00 +62:00:00 07:00:00 +62:00:00 LYN CAM",
+    "212:211 P+ 07:00:00 +60:00:00 07:58:00 +60:00:00 LYN CAM",
+    "211:615 P+ 07:58:00 +60:00:00 08:25:00 +60:00:00 LYN UMA",
+    "616:617 P+ 08:25:00 +47:00:00 09:10:00 +47:00:00 LYN UMA",
+    "618:591 P+ 09:10:00 +42:00:00 09:35:00 +42:00:00 LYN UMA",
+    "507:506 M+ 07:45:00 +33:30:00 07:45:00 +35:30:00 LYN GEM",
+    "530:529 M+ 18:52:00 +25:30:00 18:52:00 +26:00:00 LYR HER",
+    "528:527 M+ 18:22:00 +26:00:00 18:22:00 +30:00:00 LYR HER",
+    "526:525 M+ 18:10:30 +30:00:00 18:10:30 +47:30:00 LYR HER",
+    "525:449 P+ 18:10:30 +47:30:00 18:14:00 +47:30:00 LYR HER",
+    "449:391 P+ 18:14:00 +47:30:00 19:05:00 +47:30:00 LYR DRA",
+    "391:390 P+ 19:05:00 +47:30:00 19:10:00 +47:30:00 LYR CYG",
+    "389:388 P+ 19:10:00 +43:30:00 19:24:00 +43:30:00 LYR CYG",
+    "621:558 M+ 03:30:00 -85:00:00 03:30:00 -82:30:00 MEN OCT",
+    "558:557 M+ 03:30:00 -82:30:00 03:30:00 -75:00:00 MEN HYI",
+    "557:556 P+ 03:30:00 -75:00:00 04:35:00 -75:00:00 MEN HYI",
+    "556:425 M+ 04:35:00 -75:00:00 04:35:00 -70:00:00 MEN HYI",
+    "425:426 P+ 04:35:00 -70:00:00 06:35:00 -70:00:00 MEN DOR",
+    "622:343 P+ 06:35:00 -75:00:00 07:40:00 -75:00:00 MEN VOL",
+    "254:255 P+ 20:20:00 -28:00:00 21:20:00 -28:00:00 MIC CAP",
+    "568:254 M+ 20:20:00 -45:30:00 20:20:00 -28:00:00 MIC SGR",
+    "623:624 M+ 06:14:30 +00:00:00 06:14:30 +10:00:00 MON ORI",
+    "624:625 P+ 06:14:30 +10:00:00 06:18:30 +10:00:00 MON ORI",
+    "625:500 M+ 06:18:30 +10:00:00 06:18:30 +12:00:00 MON ORI",
+    "500:509 P+ 06:18:30 +12:00:00 06:56:00 +12:00:00 MON GEM",
+    "508:249 P+ 06:56:00 +10:00:00 07:00:00 +10:00:00 MON GEM",
+    "248:247 P+ 07:00:00 +05:30:00 07:01:00 +05:30:00 MON CMI",
+    "246:245 P+ 07:01:00 +01:30:00 07:12:00 +01:30:00 MON CMI",
+    "244:243 P+ 07:12:00 +00:00:00 08:05:00 +00:00:00 MON CMI",
+    "597:626 M+ 05:50:00 -11:00:00 05:50:00 -04:00:00 MON ORI",
+    "626:627 P+ 05:50:00 -04:00:00 06:14:30 -04:00:00 MON ORI",
+    "627:623 M+ 06:14:30 -04:00:00 06:14:30 +00:00:00 MON ORI",
+    "277:293 P+ 11:15:00 -64:00:00 11:50:00 -64:00:00 MUS CEN",
+    "293:296 P+ 11:50:00 -64:00:00 12:50:00 -64:00:00 MUS CRU",
+    "296:297 P+ 12:50:00 -64:00:00 13:30:00 -64:00:00 MUS CEN",
+    "344:345 P+ 13:30:00 -65:00:00 13:40:00 -65:00:00 MUS CIR",
+    "276:277 M+ 11:15:00 -75:00:00 11:15:00 -64:00:00 MUS CAR",
+    "352:353 M+ 15:20:00 -60:00:00 15:20:00 -55:00:00 NOR CIR",
+    "354:608 M+ 15:03:00 -55:00:00 15:03:00 -54:00:00 NOR LUP",
+    "608:609 P+ 15:03:00 -54:00:00 15:20:00 -54:00:00 NOR LUP",
+    "609:610 M+ 15:20:00 -54:00:00 15:20:00 -48:00:00 NOR LUP",
+    "610:611 P+ 15:20:00 -48:00:00 15:40:00 -48:00:00 NOR LUP",
+    "611:612 M+ 15:40:00 -48:00:00 15:40:00 -42:00:00 NOR LUP",
+    "612:613 P+ 15:40:00 -42:00:00 16:00:00 -42:00:00 NOR LUP",
+    "613:628 P+ 16:00:00 -42:00:00 16:25:15 -42:00:00 NOR SCO",
+    "559:558 P+ 00:00:00 -82:30:00 03:30:00 -82:30:00 OCT HYI",
+    "621:620 P+ 03:30:00 -85:00:00 07:40:00 -85:00:00 OCT MEN",
+    "620:342 M+ 07:40:00 -85:00:00 07:40:00 -82:30:00 OCT MEN",
+    "342:051 P+ 07:40:00 -82:30:00 13:40:00 -82:30:00 OCT CHA",
+    "051:052 P+ 13:40:00 -82:30:00 18:00:00 -82:30:00 OCT APS",
+    "052:053 M+ 18:00:00 -82:30:00 18:00:00 -75:00:00 OCT APS",
+    "053:564 P+ 18:00:00 -75:00:00 21:20:00 -75:00:00 OCT PAV",
+    "564:565 P+ 21:20:00 -75:00:00 23:20:00 -75:00:00 OCT IND",
+    "565:560 P+ 23:20:00 -75:00:00 00:00:00 -75:00:00 OCT TUC",
+    "629:519 M+ 16:16:00 +00:00:00 16:16:00 +04:00:00 OPH SER1",
+    "519:537 P+ 16:16:00 +04:00:00 16:45:00 +04:00:00 OPH HER",
+    "537:536 M+ 16:45:00 +04:00:00 16:45:00 +12:50:00 OPH HER",
+    "536:535 P+ 16:45:00 +12:50:00 17:15:00 +12:50:00 OPH HER",
+    "535:534 M+ 17:15:00 +12:50:00 17:15:00 +14:20:00 OPH HER",
+    "534:533 P+ 17:15:00 +14:20:00 18:15:00 +14:20:00 OPH HER",
+    "532:089 P+ 18:15:00 +12:00:00 18:39:44 +12:00:00 OPH HER",
+    "631:632 P+ 18:15:00 +04:30:00 18:25:30 +04:30:00 OPH SER2",
+    "637:638 P+ 17:50:00 -04:00:00 17:58:00 -04:00:00 OPH SER2",
+    "642:643 M+ 17:35:00 -11:40:00 17:35:00 -10:00:00 OPH SER2",
+    "645:646 P+ 17:10:00 -16:00:00 17:36:00 -16:00:00 OPH SER2",
+    "648:649 M+ 16:45:00 -30:00:00 16:45:00 -24:35:00 OPH SCO",
+    "650:651 M+ 16:16:00 -24:35:00 16:16:00 -19:15:00 OPH SCO",
+    "651:652 P+ 16:16:00 -19:15:00 16:22:30 -19:15:00 OPH SCO",
+    "652:653 M+ 16:22:30 -19:15:00 16:22:30 -18:15:00 OPH SCO",
+    "654:655 M+ 16:16:00 -18:15:00 16:16:00 -08:00:00 OPH SCO",
+    "605:606 M+ 15:55:00 -08:00:00 15:55:00 -03:15:00 OPH LIB",
+    "606:656 P+ 15:55:00 -03:15:00 16:16:00 -03:15:00 OPH SER1",
+    "656:629 M+ 16:16:00 -03:15:00 16:16:00 +00:00:00 OPH SER1",
+    "464:657 M+ 04:37:00 +00:00:00 04:37:00 +15:30:00 ORI TAU",
+    "657:658 P+ 04:37:00 +15:30:00 04:58:00 +15:30:00 ORI TAU",
+    "658:659 M+ 04:58:00 +15:30:00 04:58:00 +16:00:00 ORI TAU",
+    "659:660 P+ 04:58:00 +16:00:00 05:20:00 +16:00:00 ORI TAU",
+    "661:662 P+ 05:20:00 +15:30:00 05:36:00 +15:30:00 ORI TAU",
+    "663:664 P+ 05:36:00 +12:30:00 05:46:00 +12:30:00 ORI TAU",
+    "664:665 M+ 05:46:00 +12:30:00 05:46:00 +18:00:00 ORI TAU",
+    "666:667 M+ 05:42:00 +18:00:00 05:42:00 +22:50:00 ORI TAU",
+    "667:505 P+ 05:42:00 +22:50:00 05:53:00 +22:50:00 ORI TAU",
+    "504:503 P+ 05:53:00 +21:30:00 06:13:00 +21:30:00 ORI GEM",
+    "502:501 P+ 06:13:00 +17:30:00 06:18:30 +17:30:00 ORI GEM",
+    "468:467 M+ 05:05:00 -11:00:00 05:05:00 -04:00:00 ORI ERI",
+    "466:465 M+ 04:40:00 -04:00:00 04:40:00 +00:00:00 ORI ERI",
+    "053:054 M+ 18:00:00 -75:00:00 18:00:00 -67:30:00 PAV APS",
+    "055:110 M+ 17:30:00 -67:30:00 17:30:00 -57:00:00 PAV ARA",
+    "110:109 P+ 17:30:00 -57:00:00 18:00:00 -57:00:00 PAV ARA",
+    "109:569 P+ 18:00:00 -57:00:00 20:20:00 -57:00:00 PAV TEL",
+    "570:571 P+ 20:20:00 -60:00:00 21:20:00 -60:00:00 PAV IND",
+    "064:462 M+ 21:20:00 +02:00:00 21:20:00 +12:30:00 PEG EQU",
+    "414:413 M+ 21:03:00 +11:50:00 21:03:00 +19:30:00 PEG DEL",
+    "413:668 P+ 21:03:00 +19:30:00 21:15:00 +19:30:00 PEG VUL",
+    "668:669 M+ 21:15:00 +19:30:00 21:15:00 +23:30:00 PEG VUL",
+    "669:670 P+ 21:15:00 +23:30:00 21:25:00 +23:30:00 PEG VUL",
+    "670:404 M+ 21:25:00 +23:30:00 21:25:00 +28:00:00 PEG VUL",
+    "404:403 P+ 21:25:00 +28:00:00 21:44:00 +28:00:00 PEG CYG",
+    "403:402 M+ 21:44:00 +28:00:00 21:44:00 +36:00:00 PEG CYG",
+    "402:401 P+ 21:44:00 +36:00:00 21:52:30 +36:00:00 PEG CYG",
+    "401:575 P+ 21:52:30 +36:00:00 22:00:00 +36:00:00 PEG LAC",
+    "574:573 P+ 22:00:00 +35:00:00 22:49:00 +35:00:00 PEG LAC",
+    "572:001 P+ 22:49:00 +34:30:00 22:52:00 +34:30:00 PEG LAC",
+    "001:037 P+ 22:52:00 +34:30:00 23:30:00 +34:30:00 PEG AND",
+    "036:035 P+ 23:30:00 +32:05:00 23:45:00 +32:05:00 PEG AND",
+    "034:033 P+ 23:45:00 +31:20:00 00:00:00 +31:20:00 PEG AND",
+    "032:031 P+ 00:00:00 +28:00:00 00:04:00 +28:00:00 PEG AND",
+    "030:029 P+ 00:04:00 +22:00:00 00:08:30 +22:00:00 PEG AND",
+    "068:067 M+ 21:40:00 +01:45:00 21:40:00 +02:45:00 PEG AQR",
+    "125:677 M+ 02:43:00 +30:40:00 02:43:00 +34:00:00 PER TRI",
+    "678:679 M+ 02:34:00 +34:00:00 02:34:00 +36:45:00 PER TRI",
+    "019:018 M+ 02:31:00 +36:45:00 02:31:00 +50:30:00 PER AND",
+    "015:014 M+ 01:40:00 +47:00:00 01:40:00 +50:00:00 PER AND",
+    "013:292 M+ 01:22:00 +50:00:00 01:22:00 +54:00:00 PER CAS",
+    "292:291 P+ 01:22:00 +54:00:00 01:42:00 +54:00:00 PER CAS",
+    "291:290 M+ 01:42:00 +54:00:00 01:42:00 +57:30:00 PER CAS",
+    "290:289 P+ 01:42:00 +57:30:00 01:54:30 +57:30:00 PER CAS",
+    "289:288 M+ 01:54:30 +57:30:00 01:54:30 +58:30:00 PER CAS",
+    "288:287 P+ 01:54:30 +58:30:00 02:26:00 +58:30:00 PER CAS",
+    "286:189 P+ 02:26:00 +57:00:00 03:06:00 +57:00:00 PER CAS",
+    "189:188 P+ 03:06:00 +57:00:00 03:10:00 +57:00:00 PER CAM",
+    "187:186 P+ 03:10:00 +55:00:00 03:20:00 +55:00:00 PER CAM",
+    "185:133 P+ 03:20:00 +52:30:00 04:41:30 +52:30:00 PER CAM",
+    "516:499 P+ 23:20:00 -40:00:00 01:40:00 -40:00:00 PHE SCL",
+    "499:491 P+ 01:40:00 -40:00:00 02:20:00 -40:00:00 PHE FOR",
+    "680:515 M+ 23:20:00 -58:30:00 23:20:00 -57:00:00 PHE TUC",
+    "515:516 M+ 23:20:00 -57:00:00 23:20:00 -40:00:00 PHE GRU",
+    "267:268 P+ 06:00:00 -52:30:00 06:10:00 -52:30:00 PIC CAR",
+    "269:270 P+ 06:10:00 -55:00:00 06:30:00 -55:00:00 PIC CAR",
+    "271:272 P+ 06:30:00 -58:00:00 06:50:00 -58:00:00 PIC CAR",
+    "428:429 M+ 06:00:00 -64:00:00 06:00:00 -61:00:00 PIC DOR",
+    "430:431 M+ 05:30:00 -61:00:00 05:30:00 -57:30:00 PIC DOR",
+    "432:433 M+ 05:00:00 -57:30:00 05:00:00 -54:00:00 PIC DOR",
+    "434:173 M+ 04:30:00 -54:00:00 04:30:00 -49:00:00 PIC DOR",
+    "173:174 M+ 04:30:00 -49:00:00 04:30:00 -46:30:00 PIC CAE",
+    "174:175 P+ 04:30:00 -46:30:00 04:50:00 -46:30:00 PIC CAE",
+    "175:176 M+ 04:50:00 -46:30:00 04:50:00 -43:00:00 PIC CAE",
+    "176:177 P+ 04:50:00 -43:00:00 05:00:00 -43:00:00 PIC CAE",
+    "177:356 P+ 05:00:00 -43:00:00 06:00:00 -43:00:00 PIC COL",
+    "072:071 M+ 22:45:00 +00:00:00 22:45:00 +02:00:00 PSC AQR",
+    "071:676 M+ 22:45:00 +02:00:00 22:45:00 +07:30:00 PSC PEG",
+    "676:675 P+ 22:45:00 +07:30:00 23:50:00 +07:30:00 PSC PEG",
+    "675:674 M+ 23:50:00 +07:30:00 23:50:00 +10:00:00 PSC PEG",
+    "674:673 P+ 23:50:00 +10:00:00 00:00:00 +10:00:00 PSC PEG",
+    "673:672 M+ 00:00:00 +10:00:00 00:00:00 +12:30:00 PSC PEG",
+    "672:671 P+ 00:00:00 +12:30:00 00:08:30 +12:30:00 PSC PEG",
+    "671:028 M+ 00:08:30 +12:30:00 00:08:30 +21:00:00 PSC PEG",
+    "028:027 P+ 00:08:30 +21:00:00 00:51:00 +21:00:00 PSC AND",
+    "027:026 M+ 00:51:00 +21:00:00 00:51:00 +23:45:00 PSC AND",
+    "025:024 M+ 00:43:00 +23:45:00 00:43:00 +33:00:00 PSC AND",
+    "024:023 P+ 00:43:00 +33:00:00 01:24:30 +33:00:00 PSC AND",
+    "681:682 P+ 01:24:30 +28:00:00 01:40:00 +28:00:00 PSC TRI",
+    "119:118 P+ 01:40:00 +09:55:00 02:00:00 +09:55:00 PSC ARI",
+    "075:074 M+ 23:50:00 -07:00:00 23:50:00 -04:00:00 PSC AQR",
+    "073:072 M+ 22:45:00 -04:00:00 22:45:00 +00:00:00 PSC AQR",
+    "510:255 M+ 21:20:00 -37:00:00 21:20:00 -28:00:00 PSA MIC",
+    "255:256 M+ 21:20:00 -28:00:00 21:20:00 -25:30:00 PSA CAP",
+    "256:078 P+ 21:20:00 -25:30:00 21:52:00 -25:30:00 PSA CAP",
+    "078:077 P+ 21:52:00 -25:30:00 23:00:00 -25:30:00 PSA AQR",
+    "238:555 P+ 07:22:00 -11:00:00 08:05:00 -11:00:00 PUP MON",
+    "555:554 P+ 08:05:00 -11:00:00 08:22:00 -11:00:00 PUP HYA",
+    "266:356 M+ 06:00:00 -50:45:00 06:00:00 -43:00:00 PUP PIC",
+    "356:355 P+ 06:00:00 -43:00:00 06:35:00 -43:00:00 PUP COL",
+    "355:240 M+ 06:35:00 -43:00:00 06:35:00 -33:00:00 PUP COL",
+    "240:239 P+ 06:35:00 -33:00:00 07:22:00 -33:00:00 PUP CMA",
+    "239:238 M+ 07:22:00 -33:00:00 07:22:00 -11:00:00 PUP CMA",
+    "553:552 P+ 08:22:00 -17:00:00 08:35:00 -17:00:00 PYX HYA",
+    "551:550 P+ 08:35:00 -19:00:00 09:05:00 -19:00:00 PYX HYA",
+    "549:038 P+ 09:05:00 -24:00:00 09:22:00 -24:00:00 PYX HYA",
+    "685:553 M+ 08:22:00 -36:45:00 08:22:00 -17:00:00 PYX PUP",
+    "541:540 M+ 03:12:00 -67:30:00 03:12:00 -57:30:00 RET HOR",
+    "540:539 P+ 03:12:00 -57:30:00 03:30:00 -57:30:00 RET HOR",
+    "539:538 M+ 03:30:00 -57:30:00 03:30:00 -53:10:00 RET HOR",
+    "538:418 P+ 03:30:00 -53:10:00 03:50:00 -53:10:00 RET HOR",
+    "418:419 P+ 03:50:00 -53:10:00 04:00:00 -53:10:00 RET DOR",
+    "420:421 P+ 04:00:00 -56:30:00 04:20:00 -56:30:00 RET DOR",
+    "422:423 P+ 04:20:00 -59:00:00 04:35:00 -59:00:00 RET DOR",
+    "091:531 M+ 18:52:00 +18:30:00 18:52:00 +21:05:00 SGE HER",
+    "531:686 P+ 18:52:00 +21:05:00 19:15:00 +21:05:00 SGE VUL",
+    "687:688 P+ 19:15:00 +19:10:00 19:50:00 +19:10:00 SGE VUL",
+    "688:689 M+ 19:50:00 +19:10:00 19:50:00 +21:15:00 SGE VUL",
+    "689:690 P+ 19:50:00 +21:15:00 20:15:00 +21:15:00 SGE VUL",
+    "095:094 M+ 19:50:00 +15:45:00 19:50:00 +16:10:00 SGE AQL",
+    "093:092 M+ 19:00:00 +16:10:00 19:00:00 +18:30:00 SGE AQL",
+    "102:101 P+ 18:52:00 -12:02:00 20:00:00 -12:02:00 SGR AQL",
+    "253:254 P+ 20:00:00 -28:00:00 20:20:00 -28:00:00 SGR CAP",
+    "364:363 M+ 19:10:00 -45:30:00 19:10:00 -37:00:00 SGR CRA",
+    "362:693 M+ 17:50:00 -37:00:00 17:50:00 -30:00:00 SGR SCO",
+    "647:646 M+ 17:36:00 -30:00:00 17:36:00 -16:00:00 SGR OPH",
+    "646:692 P+ 17:36:00 -16:00:00 18:15:00 -16:00:00 SGR SER2",
+    "692:691 P+ 18:15:00 -16:00:00 18:52:00 -16:00:00 SGR SCT",
+    "691:102 M+ 18:52:00 -16:00:00 18:52:00 -12:02:00 SGR SCT",
+    "605:655 P+ 15:55:00 -08:00:00 16:16:00 -08:00:00 SCO OPH",
+    "654:653 P+ 16:16:00 -18:15:00 16:22:30 -18:15:00 SCO OPH",
+    "650:649 P+ 16:16:00 -24:35:00 16:45:00 -24:35:00 SCO OPH",
+    "648:647 P+ 16:45:00 -30:00:00 17:36:00 -30:00:00 SCO OPH",
+    "647:693 P+ 17:36:00 -30:00:00 17:50:00 -30:00:00 SCO SGR",
+    "106:628 M+ 16:25:15 -45:30:00 16:25:15 -42:00:00 SCO NOR",
+    "613:614 M+ 16:00:00 -42:00:00 16:00:00 -29:30:00 SCO LUP",
+    "602:603 M+ 15:40:00 -29:30:00 15:40:00 -20:00:00 SCO LIB",
+    "603:604 P+ 15:40:00 -20:00:00 15:55:00 -20:00:00 SCO LIB",
+    "604:605 M+ 15:55:00 -20:00:00 15:55:00 -08:00:00 SCO LIB",
+    "077:076 P+ 23:00:00 -25:30:00 23:50:00 -25:30:00 SCL AQR",
+    "076:340 P+ 23:50:00 -25:30:00 01:40:00 -25:30:00 SCL CET",
+    "516:517 M+ 23:20:00 -40:00:00 23:20:00 -37:00:00 SCL GRU",
+    "518:077 M+ 23:00:00 -37:00:00 23:00:00 -25:30:00 SCL PSA",
+    "692:694 M+ 18:15:00 -16:00:00 18:15:00 -04:00:00 SCT SER2",
+    "694:104 P+ 18:15:00 -04:00:00 18:35:00 -04:00:00 SCT SER2",
+    "104:103 P+ 18:35:00 -04:00:00 18:52:00 -04:00:00 SCT AQL",
+    "598:151 M+ 15:05:00 +00:00:00 15:05:00 +08:00:00 SER1 VIR",
+    "151:170 M+ 15:05:00 +08:00:00 15:05:00 +26:00:00 SER1 BOO",
+    "170:169 P+ 15:05:00 +26:00:00 15:11:00 +26:00:00 SER1 BOO",
+    "169:369 P+ 15:11:00 +26:00:00 16:02:00 +26:00:00 SER1 CRB",
+    "522:521 P+ 15:55:00 +16:00:00 16:05:00 +16:00:00 SER1 HER",
+    "520:519 P+ 16:05:00 +04:00:00 16:16:00 +04:00:00 SER1 HER",
+    "607:598 M+ 15:05:00 -03:15:00 15:05:00 +00:00:00 SER1 LIB",
+    "635:634 M+ 18:15:00 +00:00:00 18:15:00 +03:00:00 SER2 OPH",
+    "634:633 P+ 18:15:00 +03:00:00 18:25:30 +03:00:00 SER2 OPH",
+    "633:632 M+ 18:25:30 +03:00:00 18:25:30 +04:30:00 SER2 OPH",
+    "631:630 M+ 18:15:00 +04:30:00 18:15:00 +06:15:00 SER2 OPH",
+    "630:088 P+ 18:15:00 +06:15:00 18:39:44 +06:15:00 SER2 OPH",
+    "088:087 P+ 18:39:44 +06:15:00 18:52:00 +06:15:00 SER2 AQL",
+    "645:644 M+ 17:10:00 -16:00:00 17:10:00 -10:00:00 SER2 OPH",
+    "644:643 P+ 17:10:00 -10:00:00 17:35:00 -10:00:00 SER2 OPH",
+    "642:641 P+ 17:35:00 -11:40:00 17:40:00 -11:40:00 SER2 OPH",
+    "641:640 M+ 17:40:00 -11:40:00 17:40:00 -10:00:00 SER2 OPH",
+    "640:639 P+ 17:40:00 -10:00:00 17:58:00 -10:00:00 SER2 OPH",
+    "639:638 M+ 17:58:00 -10:00:00 17:58:00 -04:00:00 SER2 OPH",
+    "637:636 M+ 17:50:00 -04:00:00 17:50:00 +00:00:00 SER2 OPH",
+    "636:635 P+ 17:50:00 +00:00:00 18:15:00 +00:00:00 SER2 OPH",
+    "544:543 M+ 09:35:00 +00:00:00 09:35:00 +07:00:00 SEX HYA",
+    "543:577 P+ 09:35:00 +07:00:00 10:45:00 +07:00:00 SEX LEO",
+    "545:544 M+ 09:35:00 -11:00:00 09:35:00 +00:00:00 SEX HYA",
+    "336:335 M+ 03:17:00 -01:45:00 03:17:00 +00:00:00 TAU CET",
+    "335:129 M+ 03:17:00 +00:00:00 03:17:00 +09:55:00 TAU CET",
+    "129:128 M+ 03:17:00 +09:55:00 03:17:00 +19:00:00 TAU ARI",
+    "128:127 P+ 03:17:00 +19:00:00 03:22:00 +19:00:00 TAU ARI",
+    "127:126 M+ 03:22:00 +19:00:00 03:22:00 +30:40:00 TAU ARI",
+    "126:130 P+ 03:22:00 +30:40:00 04:30:00 +30:40:00 TAU PER",
+    "150:149 P+ 04:30:00 +30:00:00 04:45:00 +30:00:00 TAU AUR",
+    "148:147 P+ 04:45:00 +28:30:00 05:53:00 +28:30:00 TAU AUR",
+    "666:665 P+ 05:42:00 +18:00:00 05:46:00 +18:00:00 TAU ORI",
+    "663:662 M+ 05:36:00 +12:30:00 05:36:00 +15:30:00 TAU ORI",
+    "661:660 M+ 05:20:00 +15:30:00 05:20:00 +16:00:00 TAU ORI",
+    "109:108 M+ 18:00:00 -57:00:00 18:00:00 -45:30:00 TEL ARA",
+    "108:364 P+ 18:00:00 -45:30:00 19:10:00 -45:30:00 TEL CRA",
+    "364:568 P+ 19:10:00 -45:30:00 20:20:00 -45:30:00 TEL SGR",
+    "120:682 M+ 01:40:00 +25:00:00 01:40:00 +28:00:00 TRI PSC",
+    "681:023 M+ 01:24:30 +28:00:00 01:24:30 +33:00:00 TRI PSC",
+    "023:022 M+ 01:24:30 +33:00:00 01:24:30 +35:00:00 TRI AND",
+    "022:021 P+ 01:24:30 +35:00:00 02:00:00 +35:00:00 TRI AND",
+    "021:020 M+ 02:00:00 +35:00:00 02:00:00 +36:45:00 TRI AND",
+    "020:019 P+ 02:00:00 +36:45:00 02:31:00 +36:45:00 TRI AND",
+    "019:679 P+ 02:31:00 +36:45:00 02:34:00 +36:45:00 TRI PER",
+    "678:677 P+ 02:34:00 +34:00:00 02:43:00 +34:00:00 TRI PER",
+    "058:346 M+ 14:45:00 -70:00:00 14:45:00 -67:30:00 TRA CIR",
+    "346:347 P+ 14:45:00 -67:30:00 14:55:00 -67:30:00 TRA CIR",
+    "347:348 M+ 14:55:00 -67:30:00 14:55:00 -63:35:00 TRA CIR",
+    "348:349 P+ 14:55:00 -63:35:00 15:10:00 -63:35:00 TRA CIR",
+    "349:350 M+ 15:10:00 -63:35:00 15:10:00 -61:00:00 TRA CIR",
+    "350:351 P+ 15:10:00 -61:00:00 15:20:00 -61:00:00 TRA CIR",
+    "351:352 M+ 15:20:00 -61:00:00 15:20:00 -60:00:00 TRA CIR",
+    "352:105 P+ 15:20:00 -60:00:00 16:25:15 -60:00:00 TRA NOR",
+    "117:116 P+ 16:25:15 -61:00:00 16:35:00 -61:00:00 TRA ARA",
+    "115:114 P+ 16:35:00 -63:35:00 16:45:00 -63:35:00 TRA ARA",
+    "113:112 P+ 16:45:00 -65:00:00 16:50:00 -65:00:00 TRA ARA",
+    "111:056 P+ 16:50:00 -67:30:00 17:00:00 -67:30:00 TRA ARA",
+    "565:566 M+ 23:20:00 -75:00:00 23:20:00 -67:30:00 TUC IND",
+    "567:514 M+ 22:00:00 -67:30:00 22:00:00 -57:00:00 TUC IND",
+    "514:515 P+ 22:00:00 -57:00:00 23:20:00 -57:00:00 TUC GRU",
+    "680:484 P+ 23:20:00 -58:30:00 01:20:00 -58:30:00 TUC PHE",
+    "562:561 M+ 00:45:00 -76:00:00 00:45:00 -75:00:00 TUC HYI",
+    "618:617 M+ 09:10:00 +42:00:00 09:10:00 +47:00:00 UMA LYN",
+    "616:615 M+ 08:25:00 +47:00:00 08:25:00 +60:00:00 UMA LYN",
+    "211:210 M+ 07:58:00 +60:00:00 07:58:00 +73:30:00 UMA CAM",
+    "210:209 P+ 07:58:00 +73:30:00 09:10:00 +73:30:00 UMA CAM",
+    "209:459 P+ 09:10:00 +73:30:00 11:20:00 +73:30:00 UMA DRA",
+    "458:457 P+ 11:20:00 +66:30:00 12:00:00 +66:30:00 UMA DRA",
+    "456:455 P+ 12:00:00 +64:00:00 13:30:00 +64:00:00 UMA DRA",
+    "454:453 P+ 13:30:00 +63:00:00 14:25:00 +63:00:00 UMA DRA",
+    "232:231 M+ 13:30:00 +48:30:00 13:30:00 +53:00:00 UMA CVN",
+    "585:596 M+ 11:00:00 +29:00:00 11:00:00 +34:00:00 UMA LMI",
+    "595:594 M+ 10:47:00 +34:00:00 10:47:00 +40:00:00 UMA LMI",
+    "593:592 M+ 10:10:00 +40:00:00 10:10:00 +42:00:00 UMA LMI",
+    "203:202 P+ 13:00:00 +77:00:00 13:35:00 +77:00:00 UMI CAM",
+    "202:201 M+ 13:35:00 +77:00:00 13:35:00 +80:00:00 UMI CAM",
+    "201:200 P+ 13:35:00 +80:00:00 14:30:00 +80:00:00 UMI CAM",
+    "200:199 M+ 14:30:00 +80:00:00 14:30:00 +86:30:00 UMI CAM",
+    "198:321 M+ 08:00:00 +86:30:00 08:00:00 +88:00:00 UMI CEP",
+    "440:439 M+ 14:00:00 +66:00:00 14:00:00 +70:00:00 UMI DRA",
+    "438:203 M+ 13:00:00 +70:00:00 13:00:00 +77:00:00 UMI DRA",
+    "259:260 M+ 08:50:00 -56:30:00 08:50:00 -54:30:00 VEL CAR",
+    "261:262 M+ 08:27:00 -54:30:00 08:27:00 -53:00:00 VEL CAR",
+    "263:264 M+ 08:10:00 -53:00:00 08:10:00 -50:45:00 VEL CAR",
+    "265:683 M+ 08:00:00 -50:45:00 08:00:00 -43:00:00 VEL PUP",
+    "683:684 P+ 08:00:00 -43:00:00 08:22:00 -43:00:00 VEL PUP",
+    "684:685 M+ 08:22:00 -43:00:00 08:22:00 -36:45:00 VEL PUP",
+    "685:039 P+ 08:22:00 -36:45:00 09:22:00 -36:45:00 VEL PYX",
+    "040:041 P+ 09:22:00 -39:45:00 11:00:00 -39:45:00 VEL ANT",
+    "588:587 M+ 11:31:00 +00:00:00 11:31:00 +11:00:00 VIR LEO",
+    "587:586 P+ 11:31:00 +11:00:00 11:52:00 +11:00:00 VIR LEO",
+    "586:357 M+ 11:52:00 +11:00:00 11:52:00 +14:00:00 VIR LEO",
+    "357:361 P+ 11:52:00 +14:00:00 12:50:00 +14:00:00 VIR COM",
+    "361:360 M+ 12:50:00 +14:00:00 12:50:00 +15:00:00 VIR COM",
+    "360:153 P+ 12:50:00 +15:00:00 13:30:00 +15:00:00 VIR COM",
+    "152:151 P+ 13:30:00 +08:00:00 15:05:00 +08:00:00 VIR BOO",
+    "375:370 M+ 12:50:00 -22:00:00 12:50:00 -11:00:00 VIR CRV",
+    "371:381 M+ 11:50:00 -11:00:00 11:50:00 -06:00:00 VIR CRT",
+    "382:588 M+ 11:31:00 -06:00:00 11:31:00 +00:00:00 VIR LEO",
+    "427:273 P+ 06:35:00 -64:00:00 06:50:00 -64:00:00 VOL PIC",
+    "273:274 P+ 06:50:00 -64:00:00 09:02:00 -64:00:00 VOL CAR",
+    "622:426 M+ 06:35:00 -75:00:00 06:35:00 -70:00:00 VOL MEN",
+    "426:427 M+ 06:35:00 -70:00:00 06:35:00 -64:00:00 VOL DOR",
+    "531:530 M+ 18:52:00 +21:05:00 18:52:00 +25:30:00 VUL HER",
+    "530:619 P+ 18:52:00 +25:30:00 19:15:30 +25:30:00 VUL LYR",
+    "619:383 M+ 19:15:30 +25:30:00 19:15:30 +27:30:00 VUL LYR",
+    "383:408 P+ 19:15:30 +27:30:00 19:40:00 +27:30:00 VUL CYG",
+    "408:407 M+ 19:40:00 +27:30:00 19:40:00 +29:00:00 VUL CYG",
+    "407:406 P+ 19:40:00 +29:00:00 20:55:00 +29:00:00 VUL CYG",
+    "405:404 P+ 20:55:00 +28:00:00 21:25:00 +28:00:00 VUL CYG",
+    "412:411 M+ 20:34:00 +19:30:00 20:34:00 +20:30:00 VUL DEL",
+    "410:690 M+ 20:15:00 +20:30:00 20:15:00 +21:15:00 VUL SGE",
+    "687:686 M+ 19:15:00 +19:10:00 19:15:00 +21:05:00 VUL SGE"
+  ]
+}

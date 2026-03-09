@@ -11,18 +11,18 @@ and used now only as a first search point or if there is no Internet
 connection.
 
 If the object has a name (not just a catalogue number), you should add
-one or more records to the \file{.../nebulae/default/names.dat} file
+one or more records to the file \file{.../nebulae/default/names.dat}
 (where \file{...} is either the installation directory or (preferably) the user
 directory). See section~\ref{sec:dso:modifyingNamesDat} Modifying
 \file{names.dat} for details of the file format.
 
 If you wish to associate a texture (image) with the object, you must
-add a record to the \file{.../nebulae/default/textures.json} file. See
+add a record to the  file \file{.../nebulae/default/textures.json}. See
 section~\ref{sec:dso:modifyingTexturesJson} for details.
 
 If you wish to associate an outline with the object, you must add the
-series of lines to the \file{.../nebulae/default/outlines.dat}
-file. See section~\ref{sec:dso:modifyingOutlines} for details.
+series of lines to the file \file{.../nebulae/default/outlines.dat}. 
+See section~\ref{sec:dso:modifyingOutlines} for details.
 
 
 \section{Stellarium DSO Catalog}
@@ -77,7 +77,7 @@ follow catalogs\footnote{Abell Catalog of Planetary Nebulae was added in v0.18.2
 \item[\textbf{VV}]  The catalogue of interacting galaxies by Vorontsov-Velyaminov~\citep{2001A&AT...20..717V}
 \item[\textbf{PK}]  Version 2000 of the Catalogue of Galactic Planetary Nebulae~\citep{2001A&A...378..843K}
 \item[\textbf{PN G}]  The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae\footnote{PN G, SNR G and Abell was added in version 0.16.1}~\citep{1992secg.book.....A}\newFeature{0.16.1}
-\item[\textbf{SNR G}]  A catalogue of Galactic supernova remnants~\citep{2014yCat.7272....0G}
+\item[\textbf{SNR G}]  A catalogue of Galactic supernova remnants~\citep{2025JApA...46...14G}
 \item[\textbf{Abell}]  A Catalog of Rich Clusters of Galaxies~\citep{1989ApJS...70....1A}
 \item[\textbf{HCG}]  Atlas of compact groups of galaxies~\citep{1993ApL....29....1H}\newFeature{0.18.0}
 \item[\textbf{ESO}]  ESO/Uppsala Survey of the ESO(B) Atlas~\citep{1982ESO...C......0L}\newFeature{0.18.2}
@@ -101,6 +101,7 @@ and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipa
 
 \noindent Visual magnitudes for Messier objects obtained from ``Revised New General Catalogue and Index Catalogue'' by Dr. Wolfgang Steinicke (Version: 2 February 2021 --- NI2021)\footnote{Discovery and Cataloguing of Nebulae and Star Clusters --- \url{http://www.klima-luft.de/steinicke/index_e.htm}}.
 
+\newpage
 \subsection{Modifying catalog.dat}
 \label{sec:dso:modifyingCatalog.dat}
 
@@ -388,6 +389,8 @@ Example for outline of M42:
 
 The format of the file \file{outlines.dat} is compatible with the similar file of the \program{SkyChart (Cartes du Ciel)} planetarium.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \section{Adding Extra Nebula Images}%\label{adding-extra-nebulae-images}
 \label{sec:dso:adding_images}
 \sectionauthor*{Glenn Newell}

@@ -1,6 +1,6 @@
 ## LICENSE
 ```
-   Copyright (C) 2004-2025 Fabien Chereau et al.
+   Copyright (C) 2004-2026 Fabien Chereau et al.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License

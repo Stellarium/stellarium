@@ -79,10 +79,16 @@ private slots:
 	void setDefaultSelectedInfo();
 	void setCustomSelectedInfo();
 	//! Set the selected object info fields from the "Displayed Fields" boxes.
-	//! Called when any of the boxes has been clicked. Sets the
-	//! "selected info" mode to "Custom".
+	//! Called when any of the boxes has been clicked.
+	//! Sets the "selected info" mode to "Custom".
 	void setSelectedInfoFromCheckBoxes();
 	void saveCustomSelectedInfo();
+
+	void setCustomSelectedNarration();
+	//! Set the selected object narration fields from the "Displayed Fields" boxes.
+	//! Called when any of the boxes has been clicked.
+	void setSelectedNarrationFromCheckBoxes();
+	void saveCustomSelectedNarration();
 
 	void updateCurrentLanguage();
 	void selectLanguage(const int id);    // id is index of name in QComboBox (must be called in a signal/slot connection!)
@@ -200,6 +206,19 @@ private:
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
+
+	//! Speech configuration (needs Qt6.4+)
+	void populateSpeechEngineCombo();
+#ifdef ENABLE_SPEECH
+	//! Speech configuration (needs Qt6.4+)
+	void populateVoiceCombo();
+	//! Speech configuration (needs Qt6.4+)
+	void selectSpeechEngine(int idx);
+	//! Speech configuration (needs Qt6.4+)
+	void selectVoice(int idx);
+	//! react to changes after setting Speech Engine
+	void onSpeechReady();
+#endif
 };
 
 #endif // CONFIGURATIONDIALOG_HPP

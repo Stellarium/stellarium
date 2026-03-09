@@ -46,16 +46,12 @@ They observed that some celestial body moves independently relative to backgroun
 
 ## References
 
-### General
-
  - [#1]: [Nakshatra](https://sa.wikipedia.org/wiki/नक्षत्रम्) article at Sanskrit Wikipedia
  - [#2]: [Nakshatra](http://en.wikipedia.org/wiki/Nakshatra) article at English Wikipedia
  - [#3]: [History Of Calendar-Panchanga Committee Report](https://archive.org/stream/HistoryOfCalendarPanchangaCommittee/History-of-Calendar-Panchanga-Committee#page/n77/mode/2up)
  - [#4]: ["Possible period of the design of Nakshatras and Abhijit"](http://www.tifr.res.in/~archaeo/papers/Others/Possible%20period%20of%20the%20design%20of%20Nakshatras.pdf)
 
-### Mythology
-
-Much of the below is available online for free at archive.org.
+   <!--Much of the below is available online for free at archive.org.-->
 
  - [#5]: Secondary references such as: Purana Encyclopedia, Purana Index, Mahabharata Index, Vedic Indix
  - [#6]: Vedas, Agamas

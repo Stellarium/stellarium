@@ -92,6 +92,9 @@ def handle_constellations_section(sky_culture, sc_name, body, pot):
     for s in range(int(len(subsections) / 2)):
         title = subsections[s * 2]
         descr = subsections[s * 2 + 1].strip()
+        if len(descr) == 0:
+            print(f'{sky_culture}: warning: description of constellation {title} exists but is empty', file=sys.stderr)
+            continue
         if title not in cons_names_for_describing[sky_culture]:
             print(f'{sky_culture}: warning: no constellation named "{title}" in index', file=sys.stderr)
             continue
@@ -563,7 +566,7 @@ def update_cultures_pot(sclist, pot):
 
         sc_name = sc_names[sky_culture]
 
-        with open(index_file) as file:
+        with open(index_file, encoding='utf-8') as file:
             data = json.load(file)
             file.close()
 

@@ -68,6 +68,7 @@ private slots:
 	void triggerRemoveImage();
 	void bindSelectedStar();
 	void tabChanged(int index);
+	void updateTranslatableStrings();
 
 private:
 	Ui_scmConstellationDialog *ui = nullptr;
@@ -93,35 +94,12 @@ private:
 	QString lastUsedImageDirectory;
 	/// A short description of the constellation that could be shown in e.g. an info block.
 	QString constellationDescription;
-#if defined(Q_OS_MAC)
-	/// Help text on how to use the pen for Mac users.
-	const QString helpDrawInfoPen = q_("Use RightClick or Control + Click to draw a connected line.\n"
-	                                   "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
-	                                   "Use Command + F to search and connect stars.");
-	/// Help text on how to use the eraser for Mac users.
-	const QString helpDrawInfoEraser = q_(
-		"Hold RightClick or Control + Click to delete the line under the cursor.\n");
-#else
-	/// Help text on how to use the pen for non-Mac users.
-	const QString helpDrawInfoPen = q_("Use RightClick to draw a connected line.\n"
-	                                   "Use Double-RightClick to stop drawing the line.\n"
-	                                   "Use CTRL + F to search and connect stars.");
-	/// Help text on how to use the eraser for non-Mac users.
-	const QString helpDrawInfoEraser = q_("Hold RightClick to delete the line under the cursor.\n");
-#endif
-
+	/// Help text on how to use the pen.
+	QString helpDrawInfoPen;
+	/// Help text on how to use the eraser.
+	QString helpDrawInfoEraser;
 	/// Help text on how to use the artwork tool.
-	const QString artworkToolTip = q_(
-		"Usage:\n"
-		"1. Upload an image\n"
-		"2. Three anchor points appear in the center of the image\n"
-		"   - An anchor is green when selected\n"
-		"3. Select a star of your choice\n"
-		"4. Click the 'Bind Star' button\n"
-		"5. The anchor is shown in a brighter color when bound to a star\n"
-		"   - The corresponding bound star is automatically selected when an anchor is selected\n"
-		"   - 'Bind Star' will overwrite the current binding if it already exists"
-	);
+	QString artworkToolTip;
 
 	/// The constellation that is currently being edited
 	scm::ScmConstellation *constellationBeingEdited = nullptr;

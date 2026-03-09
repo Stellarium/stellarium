@@ -29,6 +29,7 @@
 #include "ScmDraw.hpp"
 #include "ScmSkyCulture.hpp"
 #include "StelCore.hpp"
+#include "StelDialog.hpp"
 #include "StelModule.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTranslator.hpp"
@@ -50,7 +51,6 @@ class ScmHideOrAbortMakerDialog;
 class SkyCultureMaker : public StelModule
 {
 	Q_OBJECT
-	// TODO: var - getter - setter - trigger
 	Q_PROPERTY(bool enabledScm READ getIsScmEnabled WRITE setIsScmEnabled NOTIFY eventIsScmEnabled)
 public:
 	SkyCultureMaker();
@@ -86,27 +86,6 @@ public:
 	void setToolbarButtonState(bool b);
 
 	/**
-	 * @brief Shows the start dialog for the sky culture maker.
-	 * 
-	 * @param b The boolean value to be set.
-	 */
-	void setStartDialogVisibility(bool b);
-
-	/**
-	 * @brief Shows the sky culture dialog.
-	 *
-	 * @param b The boolean value to be set.
-	 */
-	void setSkyCultureDialogVisibility(bool b);
-
-	/**
-	 * @brief Shows the constellation dialog.
-	 *
-	 * @param b The boolean value to be set.
-	 */
-	void setConstellationDialogVisibility(bool b);
-
-	/**
 	 * @brief Sets whether the constellation dialog is for a dark constellation.
 	 *
 	 * @param isDarkConstellation The boolean value to be set.
@@ -114,32 +93,18 @@ public:
 	void setConstellationDialogIsDarkConstellation(bool isDarkConstellation);
 
 	/**
-	 * @brief Shows the sky culture export dialog.
-	 *
-	 * @param b The boolean value to be set.
-	 */
-	void setSkyCultureExportDialogVisibility(bool b);
-
-	/**
-	 * @brief Shows the hide or abort maker dialog.
-	 *
-	 * @param b The boolean value to be set.
-	 */
-	void setHideOrAbortMakerDialogVisibility(bool b);
-
-	/**
-	 * @brief Set the visibility of all dialogs.
-	 * 
-	 * @param b The boolean value to be set.
-	 */
-	void hideAllDialogs();
-
-	/**
 	 * @brief Toggles the usage of the line draw.
 	 *
 	 * @param b The boolean value to be set.
 	 */
 	void setIsLineDrawEnabled(bool b);
+
+	/**
+	 * @brief Toggles the buttons to create constellations.
+	 *
+	 * @param b The boolean value to be set.
+	 */
+	void setCanCreateConstellations(bool b);
 
 	/**
 	 * @brief Triggers a single undo operation in the line draw.
@@ -192,35 +157,33 @@ public:
 	bool saveSkyCultureDescription(const QDir &directory);
 
 	/**
-	 * @brief Saves the visibility state of the SCM dialogs.
+	 * @brief Sets the visibility of a given dialog.
+	 * @param dialogId The ID of the dialog to set the visibility for.
+	 * @param b The visibility to be set.
 	 */
-	void saveScmDialogVisibilityState();
+	void setDialogVisibility(scm::DialogID dialogId, bool b);
 
 	/**
-	 * @brief Restores the visibility state of the SCM dialogs.
+	 * @brief Hides all SCM dialogs and saves their visibility state.
 	 */
-	void restoreScmDialogVisibilityState();
+	void hideScm();
 
 	/**
-	 * @brief Checks if any SCM dialog is currently hidden.
+	 * @brief Stops the SCM process by hiding all dialogs and resetting their states.
 	 */
-	bool isAnyDialogHidden() const;
+	void stopScm();
 
 	/**
-	 * @brief Resets all SCM dialogs content and visibility states.
+	 * @brief Checks if any dialog is visible in the visibility map.
+	 * @return true if any dialog is visible, false otherwise
+	 */
+	bool isAnyDialogVisible() const;
+
+	/**
+	 * @brief Resets all SCM dialogs content.
 	*/
 	void resetScmDialogs();
 
-	/**
-	 * @brief Resets the visibility state of the SCM dialogs.
-	 */
-	void resetScmDialogsVisibilityState();
-
-	/**
-	 * @brief Checks if any SCM dialog is currently visible.
-	 * @return true if any dialog is visible, false otherwise.
-	 */
-	bool isAnyDialogVisible() const;
 	/**
 	 * @brief Sets the temporary artwork that should be drawn.
 	 * @param artwork The artwork to draw.
@@ -229,9 +192,10 @@ public:
 
 	/**
 	 * @brief Opens the constellation dialog with data for a given constellation.
-	 * @param constellationId The ID of the constellation to open the dialog for.
+	 * 
+	 * @param constellation The constellation to open the dialog for.
 	 */
-	void openConstellationDialog(const QString &constellationId);
+	void loadDialogFromConstellation(scm::ScmConstellation *constellation);
 
 	/**
 	 * @brief Displays an information message to the user.
@@ -272,7 +236,7 @@ private:
 	const QString groupId      = N_("Sky Culture Maker");
 	const QString actionIdLine = "actionShow_SkyCultureMaker_Line";
 
-	/// Indicates that SCM creation process is enabled (QT Signal)
+	/// Indicates that SCM is enabled
 	bool isScmEnabled = false;
 
 	/// Indicates that line drawing can be done (QT Signal)
@@ -287,44 +251,22 @@ private:
 	/// The object used for drawing constellations
 	scm::ScmDraw *drawObj = nullptr;
 
-	/// Toogle SCM creation process on
-	void startScmProcess();
-
-	/// Toogle SCM creation process off
-	void stopScmProcess();
-
-	/// Dialog for starting/editing/cancel creation process
-	ScmStartDialog *scmStartDialog = nullptr;
-
-	/// Dialog for creating/editing a sky culture
-	ScmSkyCultureDialog *scmSkyCultureDialog = nullptr;
-
-	/// Dialog for creating/editing a constellation
-	ScmConstellationDialog *scmConstellationDialog = nullptr;
-
-	/// Dialog for exporting a sky culture
-	ScmSkyCultureExportDialog *scmSkyCultureExportDialog = nullptr;
-
-	/// Dialog for hiding or aborting maker process
-	ScmHideOrAbortMakerDialog *scmHideOrAbortMakerDialog = nullptr;
+	/// Map of all SCM dialogs
+	const QMap<scm::DialogID, StelDialog *> dialogMap;
 
 	/// The current sky culture
 	scm::ScmSkyCulture *currentSkyCulture = nullptr;
 
-	/**
-	 * Store the visibility state of the SCM dialogs
-	 * The key is the dialog ID, the value is true if the dialog was hidden, false if newly created.
-	 */
-	QMap<scm::DialogID, bool> scmDialogVisibilityMap = {
-		{scm::DialogID::StartDialog,            false},
-		{scm::DialogID::SkyCultureDialog,       false},
-		{scm::DialogID::ConstellationDialog,    false},
-		{scm::DialogID::SkyCultureExportDialog, false},
-		{scm::DialogID::HideOrAbortMakerDialog, false}
-        };
+	/// The dialog visibility states. This is used to restore the visibility states after hiding all dialogs.
+	QMap<scm::DialogID, bool> dialogVisibilityMap;
 
 	/// The artwork to temporary draw on the sky.
 	const scm::ScmConstellationArtwork *tempArtwork = nullptr;
+
+	/**
+	 * @brief Starts the Sky Culture Maker process
+	 */
+	void startScm();
 
 	/**
 	 * @brief Initializes a setting with a default value if it does not exist.
@@ -333,6 +275,13 @@ private:
 	 * @param defaultValue The default value to set if the setting does not exist.
 	 */
 	void initSetting(QSettings *conf, const QString key, const QVariant &defaultValue);
+
+	/**
+	 * @brief Checks if a dialog ID is valid.
+	 * @param dialogId The dialog ID to check.
+	 * @return true if the dialog ID is valid, false otherwise.
+	 */
+	bool isValidDialog(scm::DialogID dialogId) const;
 };
 
 #include "StelPluginInterface.hpp"

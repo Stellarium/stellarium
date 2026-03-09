@@ -22,6 +22,7 @@
 #include "StelMainScriptAPIProxy.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "ScreenImageMgr.hpp"
 
 #include "ConstellationMgr.hpp"
 #include "AsterismMgr.hpp"
@@ -36,6 +37,7 @@
 #include "StelApp.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
+#include "StelSpeechMgr.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocation.hpp"
@@ -69,6 +71,7 @@
 #include <QTemporaryFile>
 #include <QTimer>
 #include <QEventLoop>
+#include <LabelMgr.hpp>
 
 #include <cmath>
 
@@ -1206,6 +1209,10 @@ void StelMainScriptAPI::clear(const QString& state)
 		ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 
+		GETSTELMODULE(LabelMgr)->deleteAllLabels();
+		GETSTELMODULE(StelSkyLayerMgr)->removeSkyLayer("*");
+		GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
+
 		// Hide artificial satellites through StelProperties to avoid crash if plugin was not loaded
 		propMgr->setStelPropertyValue("Satellites.flagHintsVisible",   false, true);
 		propMgr->setStelPropertyValue("Satellites.flagLabelsVisible",  false, true);
@@ -1621,4 +1628,13 @@ Vec2d StelMainScriptAPI::setWindowSize(int width, int height)
 	StelMainView &mainView=StelMainView::getInstance();
 	QRectF rect=mainView.setWindowSize(width, height);
 	return Vec2d(rect.width(), rect.height());
+}
+
+void StelMainScriptAPI::say(const QString &text)
+{
+	static StelSpeechMgr *speech=StelApp::getInstance().getStelSpeechMgr();
+	if (speech)
+		speech->say(text);
+	else
+		qWarning() << "Speech output problem in say()";
 }

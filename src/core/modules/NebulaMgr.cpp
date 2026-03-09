@@ -52,7 +52,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-const QString NebulaMgr::StellariumDSOCatalogVersion = QStringLiteral("3.21");
+const QString NebulaMgr::StellariumDSOCatalogVersion = QStringLiteral("3.22");
 
 namespace
 {
@@ -903,10 +903,10 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		screenRd += (20.f + 10.f*std::sin(3.f * static_cast<float>(StelApp::getInstance().getAnimationTime()))) * scale;
 		const float radius = 10 * scale;
 		const float x = pos[0], y = pos[1];
-		sPainter.drawSprite2dMode(x-screenRd*0.5f, y-screenRd*0.5f, radius, 90);
-		sPainter.drawSprite2dMode(x-screenRd*0.5f, y+screenRd*0.5f, radius, 0);
-		sPainter.drawSprite2dMode(x+screenRd*0.5f, y+screenRd*0.5f, radius, -90);
-		sPainter.drawSprite2dMode(x+screenRd*0.5f, y-screenRd*0.5f, radius, -180);
+		sPainter.drawSprite2dModeNoDeviceScale(x-screenRd*0.5f, y-screenRd*0.5f, radius, 90);
+		sPainter.drawSprite2dModeNoDeviceScale(x-screenRd*0.5f, y+screenRd*0.5f, radius, 0);
+		sPainter.drawSprite2dModeNoDeviceScale(x+screenRd*0.5f, y+screenRd*0.5f, radius, -90);
+		sPainter.drawSprite2dModeNoDeviceScale(x+screenRd*0.5f, y-screenRd*0.5f, radius, -180);
 	}
 }
 
@@ -2054,6 +2054,7 @@ void NebulaMgr::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	for (const auto& n : std::as_const(dsoArray))
 		n->translateName(trans);
+	Nebula::updateI18n();
 }
 
 

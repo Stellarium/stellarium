@@ -406,6 +406,8 @@ StelLocationMgr::StelLocationMgr()
 	// The first entry is the DB name, the second is as we display it in the program.
 	if (locationDBToIANAtranslations.isEmpty())
 	{
+		// Seen in V25.3
+		locationDBToIANAtranslations.insert("America/Coyhaique", "UTC-03:00");
 		// Reported July 7, 2023 (#3316)
 		locationDBToIANAtranslations.insert("Asia/Calcutta", "Asia/Kolkata");
 		// Reported April 25, 2023. (#3200)

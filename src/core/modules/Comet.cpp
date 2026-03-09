@@ -504,7 +504,8 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 			StelPainter sPainter(prjin);
 			drawHints(core, sPainter, planetNameFont);
 			Vec3f color=Vec3f(0.25, 0.75, 1);
-			ss->drawAsteroidMarker(core, &sPainter, screenPos[0], screenPos[1], color); // This does not draw directly, but record an entry to be drawn in a batch.
+			if (vMagnitude < ss->getMarkerMagThreshold())
+				ss->drawAsteroidMarker(core, &sPainter, screenPos[0], screenPos[1], color); // This does not draw directly, but record an entry to be drawn in a batch.
 		}
 
 		draw3dModel(core,transfo,static_cast<float>(screenRd), 1.0);

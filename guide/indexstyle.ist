@@ -1,0 +1,4 @@
+delim_0 "\\dotfill\ " % Filler between section heading and page number
+delim_1 "\\dotfill\ " % Filler between subsection heading and page number
+headings_flag 1
+heading_prefix "\\nopagebreak\n\\vspace*{0.1cm}\\tikz\\node at (0pt,0pt) [draw=none, fill=ocre!50, line width=1pt, inner sep=5pt]{\\parbox{0.993\\linewidth-2\\fboxsep-2\\fboxrule-2pt}{\\centering\\large\\sffamily\\bfseries\\textcolor{white}{" heading_suffix "}}};\\vspace*{0.2cm}\\nopagebreak\n" % Styling of index letter headings

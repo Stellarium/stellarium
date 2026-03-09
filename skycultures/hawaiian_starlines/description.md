@@ -71,7 +71,7 @@ The northern pointer is found in *Manokalanipo* (&delta; Peg, Alpheratz) and *Ke
  - [#3]: [Imiloa](http://www.imiloahawaii.org/71/star-paths)
  - [#4]: [Hawaiian Star Lines and Names for Stars](http://archive.hokulea.com/ike/hookele/hawaiian_star_lines.html)
 
- The Hawaiian Star Compass landscape which should be used with this skyculture is available at the [Stellarium Landscapes](https://stellarium.org/landscapes.html) collection.
+ - [#5]: The Hawaiian Star Compass landscape which should be used with this skyculture is available at the [Stellarium Landscapes](https://stellarium.org/landscapes.html) collection.
 
 ## Authors
 

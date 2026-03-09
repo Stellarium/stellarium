@@ -6175,8 +6175,11 @@ void AstroCalcDialog::calculatePhenomena()
 
 	// adjust the column width
 	adjustPhenomenaColumns();
+	// hook: do not disable selection of the objects when list of phenomena is empty
+	if (ui->phenomenaTreeWidget->topLevelItemCount()==0)
+		followLatestSelectedObject = true;
 	// sort-by-date
-	ui->phenomenaTreeWidget->sortItems(PhenomenaDate, Qt::AscendingOrder);	
+	ui->phenomenaTreeWidget->sortItems(PhenomenaDate, Qt::AscendingOrder);
 	enablePhenomenaButtons(true);
 }
 
@@ -7441,7 +7444,7 @@ void AstroCalcDialog::updateTabBarListWidgetWidth()
 
 	// stackListWidget->font() does not work properly!
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
-	QFont font;
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(14);
 	font.setWeight(QFont::Bold);
 	QFontMetrics fontMetrics(font);

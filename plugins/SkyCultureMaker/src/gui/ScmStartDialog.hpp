@@ -57,13 +57,13 @@ public:
 
 public slots:
 	void retranslate() override;
+	void close() override;
 
 protected slots:
 	void handleFontChanged();
 
 private slots:
 	void startScmCreationProcess();
-	void closeDialog();
 
 private:
 	Ui_scmStartDialog *ui  = nullptr;

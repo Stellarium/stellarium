@@ -185,9 +185,50 @@ simply a list of integer values which describe the number of stars for
 each zone. The total length of the Zones section depends on the number
 of zones. See table~\ref{tab:Catalogues:stars:record:zones}.
 
+\begin{table}[htbp]
+\begin{tabularx}{\textwidth}{llllX}\toprule
+\emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
+num stars in zone 0     & 0      & int & 4 &  number of records in this file which are in zone 0\\
+num stars in zone 1     & 4      & int & 4 &  number of records is this file which are in zone 1\\
+\ldots                  &        &     &   &\\
+num stars in zone $n-1$ & $4n-4$ & int & 4 &  number of records is this file which are in zone $n$\\\bottomrule
+num stars in zone $n$   & $4n$   & int & 4 &  number of records is this file which are in the global zone\\\bottomrule
+\end{tabularx}
+\caption{Zones section}
+\label{tab:Catalogues:stars:record:zones}
+\end{table}
+
+
 
 \subsubsection{Star Data Records}%\label{star-data-records}
 \label{sec:Catalogues:stars:record:data}
+
+
+\begin{table}[htbp]
+\begin{tabular}{llllp{75mm}}\toprule
+\emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
+gaia\_id       &  0 & int64\_t           & 8 & Gaia source id\\%\midrule
+x0             &  8 & int                & 4 & Cartesian x position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\
+x1             & 12 & int                & 4 & Cartesian y position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\
+x2             & 16 & int                & 4 & Cartesian z position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
+dx0            & 20 & int                & 4 & First component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\
+dx1            & 24 & int                & 4 & Second component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\
+dx2            & 28 & int                & 4 & Third component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
+b\_v           & 32 & short              & 2 & $B-V$ colour in milli-mag unit.\\
+mag            & 34 & short              & 2 & $V$-band magnitude in milli-mag unit.\\
+plx            & 36 & unsigned short     & 2 & parallax of the star in 0.02 mas unit.\\
+plx\_err       & 38 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\%\midrule
+rv             & 40 & short              & 2 & radial velocity of the star in 0.1 km/s unit.\\%\midrule
+sp\_int        & 42 & unsigned short     & 2 & index into an array of spectral type descriptions 
+                                               which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the
+                                               line number in the file - 1\\%\midrule
+obtype	       & 44 & unsigned char      & 1 & object type classification index. The index corresponds to the line number in the file \file{object\_types\_v*.cat} - 1.\\%\midrule
+hip            & 45 & int                & 3 & Hipparcos catalogue number with component ID (e.g. A, B, C...)\\\bottomrule
+\end{tabular}
+\caption{Star Data Record Type 0}
+\label{tab:StarDataRecord0}
+\end{table}
+
 
 After the Zones section, the actual star data starts. The star data
 records themselves do not contain the zone in which the star belongs.
@@ -233,44 +274,6 @@ one can use the following formulas:
 
 where $\mu_{\alpha^*}\equiv\mu_{\alpha}\cos{(\delta)}$.
 
-\begin{table}[htbp]
-\begin{tabularx}{\textwidth}{llllX}\toprule
-\emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-num stars in zone 0     & 0      & int & 4 &  number of records in this file which are in zone 0\\
-num stars in zone 1     & 4      & int & 4 &  number of records is this file which are in zone 1\\
-\ldots                  &        &     &   &\\
-num stars in zone $n-1$ & $4n-4$ & int & 4 &  number of records is this file which are in zone $n$\\\bottomrule
-num stars in zone $n$   & $4n$   & int & 4 &  number of records is this file which are in the global zone\\\bottomrule
-\end{tabularx}
-\caption{Zones section}
-\label{tab:Catalogues:stars:record:zones}
-\end{table}
-
-
-\begin{table}[htbp]
-\begin{tabular}{llllp{75mm}}\toprule
-\emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-gaia\_id       &  0 & int64\_t           & 8 & Gaia source id\\%\midrule
-x0             &  8 & int                & 4 & Cartesian x position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\
-x1             & 12 & int                & 4 & Cartesian y position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\
-x2             & 16 & int                & 4 & Cartesian z position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
-dx0            & 20 & int                & 4 & First component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\
-dx1            & 24 & int                & 4 & Second component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\
-dx2            & 28 & int                & 4 & Third component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
-b\_v           & 32 & short              & 2 & $B-V$ colour in milli-mag unit.\\
-mag            & 34 & short              & 2 & $V$-band magnitude in milli-mag unit.\\
-plx            & 36 & unsigned short     & 2 & parallax of the star in 0.02 mas unit.\\
-plx\_err       & 38 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\%\midrule
-rv             & 40 & short              & 2 & radial velocity of the star in 0.1 km/s unit.\\%\midrule
-sp\_int        & 42 & unsigned short     & 2 & index into an array of spectral type descriptions 
-                                               which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the
-                                               line number in the file - 1\\%\midrule
-obtype	       & 44 & unsigned char      & 1 & object type classification index. The index corresponds to the line number in the file \file{object\_types\_v*.cat} - 1.\\%\midrule
-hip            & 45 & int                & 3 & Hipparcos catalogue number with component ID (e.g. A, B, C...)\\\bottomrule
-\end{tabular}
-\caption{Star Data Record Type 0}
-\label{tab:StarDataRecord0}
-\end{table}
 
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule

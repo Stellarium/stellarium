@@ -50,9 +50,33 @@ private:
 	SkyCultureMaker *maker           = nullptr;
 	QString skyCulturesPath;
 
+	/**
+	 * @brief Exports the current sky culture to the selected directory.
+	 *
+	 * @return true if the export was successful, false otherwise.
+	 */
 	bool exportSkyCulture();
+
+	/**
+	 * @brief Opens a dialog to choose the export directory for the sky culture.
+	 *
+	 * @param skyCultureId The ID of the sky culture to be exported.
+	 * @param skyCultureDirectory The directory where the sky culture will be exported to.
+	 * @return true if a directory was chosen, false otherwise.
+	 */
 	bool chooseExportDirectory(const QString &skyCultureId, QDir &skyCultureDirectory);
+
+	/**
+	 * @brief Exports the current sky culture and exits the dialog.
+	 */
 	void exportAndExitSkyCulture();
+
+	/**
+	 * @brief Saves the CMakeLists.txt file for the sky culture.
+	 *
+	 * @param directory The directory where the CMakeLists.txt file will be saved.
+	 * @return true if the file was saved successfully, false otherwise.
+	 */
 	bool saveSkyCultureCMakeListsFile(const QDir &directory);
 };
 
