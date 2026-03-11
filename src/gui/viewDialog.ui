@@ -1680,27 +1680,65 @@
                <item row="2" column="2" colspan="2">
                 <widget class="QCheckBox" name="moonScaleDynamicCheckBox">
                  <property name="toolTip">
-                  <string>When enabled, the Moon is kept at its natural (1×) apparent size relative to the viewport at 10° FOV. Zooming out increases the scale proportionally, keeping the Moon at the same fraction of the screen. The fixed scale factor above is ignored.</string>
+                  <string>When enabled, the Moon scales smoothly between 1× (natural size) at the minimum FOV and the configured scale factor at the maximum FOV. Outside those bounds the scale is held constant.</string>
                  </property>
                  <property name="text">
                   <string>Dynamic (FOV-based) Moon size</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="4">
-                <widget class="QLabel" name="moonScaleFovThresholdLabel">
+               <item row="3" column="2">
+                <widget class="QLabel" name="moonScaleMinFovLabel">
                  <property name="toolTip">
-                  <string>FOV at which the Moon appears at natural (1×) size. Below this FOV the Moon is unscaled; above it the scale grows to keep the Moon at the same apparent size in the viewport.</string>
+                  <string>FOV at and below which the Moon is drawn at 1× (natural) size.</string>
                  </property>
                  <property name="text">
-                  <string>1× at</string>
+                  <string>1× below</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="5">
-                <widget class="QDoubleSpinBox" name="moonScaleFovThresholdSpinBox">
+               <item row="3" column="3">
+                <widget class="QDoubleSpinBox" name="moonScaleMinFovSpinBox">
                  <property name="toolTip">
-                  <string>FOV at which the Moon appears at natural (1×) size. Below this FOV the Moon is unscaled; above it the scale grows to keep the Moon at the same apparent size in the viewport.</string>
+                  <string>FOV at and below which the Moon is drawn at 1× (natural) size.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="suffix">
+                  <string>°</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>0.5</double>
+                 </property>
+                 <property name="maximum">
+                  <double>89.0</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>1.0</double>
+                 </property>
+                 <property name="value">
+                  <double>10.0</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="4">
+                <widget class="QLabel" name="moonScaleMaxFovLabel">
+                 <property name="toolTip">
+                  <string>FOV at and above which the Moon is drawn at the configured scale factor.</string>
+                 </property>
+                 <property name="text">
+                  <string>Nx above</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="5">
+                <widget class="QDoubleSpinBox" name="moonScaleMaxFovSpinBox">
+                 <property name="toolTip">
+                  <string>FOV at and above which the Moon is drawn at the configured scale factor.</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1715,13 +1753,13 @@
                   <double>1.0</double>
                  </property>
                  <property name="maximum">
-                  <double>89.0</double>
+                  <double>180.0</double>
                  </property>
                  <property name="singleStep">
                   <double>1.0</double>
                  </property>
                  <property name="value">
-                  <double>10.0</double>
+                  <double>90.0</double>
                  </property>
                 </widget>
                </item>
