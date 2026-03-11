@@ -1171,7 +1171,7 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 		viewportEffect->distortXY(x, y);
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	QMouseEvent event(inputEvent->type(), QPointF(x*devicePixelsPerPixel, y*devicePixelsPerPixel), inputEvent->globalPosition(), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
+	QMouseEvent event(inputEvent->type(), QPointF(x,y) * devicePixelsPerPixel, inputEvent->globalPosition() * devicePixelsPerPixel, inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
 #else
 	QMouseEvent event(inputEvent->type(), QPoint(qRound(x*devicePixelsPerPixel), qRound(y*devicePixelsPerPixel)), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
 #endif
