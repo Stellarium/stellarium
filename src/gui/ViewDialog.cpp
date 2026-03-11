@@ -293,6 +293,14 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->moonScaleMinFovSpinBox, "SolarSystem.moonScaleMinFov");
 	connectDoubleProperty(ui->moonScaleMaxFovSpinBox, "SolarSystem.moonScaleMaxFov");
 
+	// Keep minFov strictly below maxFov by updating each spinbox's limit when the other changes.
+	connect(ui->moonScaleMinFovSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [this](double val) {
+		ui->moonScaleMaxFovSpinBox->setMinimum(val + 1.0);
+	});
+	connect(ui->moonScaleMaxFovSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [this](double val) {
+		ui->moonScaleMinFovSpinBox->setMaximum(val - 1.0);
+	});
+
 	// Grey out dynamic Moon controls when Moon scaling is disabled.
 	auto updateMoonDynamicControlsState = [this]() {
 		const bool moonScaleOn = ui->planetScaleMoonCheckBox->isChecked();
