@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-03-01 13:43+0700\n"
+"POT-Creation-Date: 2026-03-11 14:00+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -5651,14 +5651,14 @@ msgid "Reload the deep-sky objects background images"
 msgstr "Перезавантажити зображення тла віддалених об'єктів"
 
 #. TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%'" in progress bar
-#: src/core/StelSkyLayerMgr.cpp:211
+#: src/core/StelSkyLayerMgr.cpp:229
 #, qt-format
 msgid "Loading '%1'"
 msgstr "Завантаження «%1»"
 
 #. TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%' from %URL%" in
 #. progress bar
-#: src/core/StelSkyLayerMgr.cpp:216
+#: src/core/StelSkyLayerMgr.cpp:234
 #, qt-format
 msgid "Loading '%1' from %2"
 msgstr "Завантаження «%1» з %2"
@@ -6752,7 +6752,7 @@ msgstr "Автори"
 msgid "Contact"
 msgstr "Контакти"
 
-#: src/gui/ConfigurationDialog.cpp:1593 src/gui/HelpDialog.cpp:516
+#: src/gui/ConfigurationDialog.cpp:1593 src/gui/HelpDialog.cpp:536
 #: src/scripting/StelScriptMgr.cpp:656
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
@@ -7117,7 +7117,7 @@ msgstr "Довідка зі Stellarium"
 msgid "Keys"
 msgstr "Клавіші"
 
-#: src/gui/HelpDialog.cpp:288 src/gui/HelpDialog.cpp:434
+#: src/gui/HelpDialog.cpp:288 src/gui/HelpDialog.cpp:454
 msgid "Further Reading"
 msgstr "Інформація для подальшого ознайомлення"
 
@@ -7232,11 +7232,39 @@ msgstr "Текстовий інтерфейс користувача (TUI)"
 msgid "Activate TUI"
 msgstr "Задіяти TUI"
 
-#: src/gui/HelpDialog.cpp:401
+#: src/gui/HelpDialog.cpp:402
+msgid "⌥+Arrow keys"
+msgstr "⌥+клавіші зі стрілками"
+
+#: src/gui/HelpDialog.cpp:406
+msgid "Ctrl+Arrow keys"
+msgstr "Ctrl+клавіші зі стрілками"
+
+#: src/gui/HelpDialog.cpp:409
+msgid "Move camera forward/backward/left/right"
+msgstr "Пересунути камеру вперед/назад/ліворуч/праворуч"
+
+#: src/gui/HelpDialog.cpp:411
+msgid "Speed up camera movement by 5×"
+msgstr "Пришвидшити рух камери у 5×"
+
+#: src/gui/HelpDialog.cpp:413
+msgid "Speed up camera movement by 10×"
+msgstr "Пришвидшити рух камери у 10×"
+
+#: src/gui/HelpDialog.cpp:414
+msgid "Shift"
+msgstr "Shift"
+
+#: src/gui/HelpDialog.cpp:415
+msgid "Move camera up/down"
+msgstr "Пересунути камеру вгору/вниз"
+
+#: src/gui/HelpDialog.cpp:421
 msgid "Special local keys"
 msgstr "Спеціалізовані локальні клавіші"
 
-#: src/gui/HelpDialog.cpp:402
+#: src/gui/HelpDialog.cpp:422
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
@@ -7244,56 +7272,56 @@ msgstr ""
 "Усі ці клавіатурні скорочення доступні локально, якщо відкрито певне вікно "
 "або вкладка."
 
-#: src/gui/HelpDialog.cpp:403 src/ui_scriptConsole.h:345
+#: src/gui/HelpDialog.cpp:423 src/ui_scriptConsole.h:345
 msgid "Script console"
 msgstr "Консоль сценаріїв"
 
-#: src/gui/HelpDialog.cpp:404 src/ui_scriptConsole.h:347
+#: src/gui/HelpDialog.cpp:424 src/ui_scriptConsole.h:347
 msgid "Load script from file"
 msgstr "Завантажити сценарій з файла"
 
-#: src/gui/HelpDialog.cpp:406 src/ui_scriptConsole.h:351
+#: src/gui/HelpDialog.cpp:426 src/ui_scriptConsole.h:351
 msgid "Save script to file"
 msgstr "Зберегти сценарій до файла"
 
-#: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:369
+#: src/gui/HelpDialog.cpp:428 src/ui_scriptConsole.h:369
 msgid "Run script"
 msgstr "Запустити сценарій"
 
-#: src/gui/HelpDialog.cpp:410 src/ui_astroCalcDialog.h:2274
+#: src/gui/HelpDialog.cpp:430 src/ui_astroCalcDialog.h:2274
 msgid "Astronomical calculations"
 msgstr "Астрономічні обчислення"
 
-#: src/gui/HelpDialog.cpp:411 src/ui_astroCalcDialog.h:2329
+#: src/gui/HelpDialog.cpp:431 src/ui_astroCalcDialog.h:2329
 #: src/ui_astroCalcDialog.h:2334
 msgid "Update positions"
 msgstr "Оновити позиції"
 
-#: src/gui/HelpDialog.cpp:414 src/ui_astroCalcDialog.h:2346
+#: src/gui/HelpDialog.cpp:434 src/ui_astroCalcDialog.h:2346
 msgid "Calculate ephemeris"
 msgstr "Обчислити ефемериди"
 
-#: src/gui/HelpDialog.cpp:417
+#: src/gui/HelpDialog.cpp:437
 msgid "Calculate RTS"
 msgstr "Обчислити RTS"
 
-#: src/gui/HelpDialog.cpp:419 src/ui_astroCalcDialog.h:2476
+#: src/gui/HelpDialog.cpp:439 src/ui_astroCalcDialog.h:2476
 msgid "Calculate phenomena"
 msgstr "Обчислити події"
 
-#: src/gui/HelpDialog.cpp:421
+#: src/gui/HelpDialog.cpp:441
 msgid "Calculate solar eclipses"
 msgstr "Обчислити сонячні затемнення"
 
-#: src/gui/HelpDialog.cpp:423
+#: src/gui/HelpDialog.cpp:443
 msgid "Calculate lunar eclipses"
 msgstr "Обчислити місячні затемнення"
 
-#: src/gui/HelpDialog.cpp:425 src/ui_astroCalcDialog.h:2593
+#: src/gui/HelpDialog.cpp:445 src/ui_astroCalcDialog.h:2593
 msgid "Calculate transits"
 msgstr "Обчислити проходження"
 
-#: src/gui/HelpDialog.cpp:435
+#: src/gui/HelpDialog.cpp:455
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -7302,28 +7330,28 @@ msgstr ""
 "перегляду інтернету:\n"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:439
+#: src/gui/HelpDialog.cpp:459
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Frequently Asked Questions} щодо Stellarium. З відповідями."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:444
+#: src/gui/HelpDialog.cpp:464
 msgid "{The Stellarium Wiki} - general information."
 msgstr "{Вікі Stellarium} — загальні відомості"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:449
+#: src/gui/HelpDialog.cpp:469
 msgid "{The landscapes} - user-contributed landscapes for Stellarium."
 msgstr "{Ландшафти} — надіслані користувачами ландшафти для Stellarium."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:454
+#: src/gui/HelpDialog.cpp:474
 msgid "{The scripts} - user-contributed and official scripts for Stellarium."
 msgstr ""
 "{Сценарії} — надіслані користувачами та офіційні сценарії для Stellarium."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:459
+#: src/gui/HelpDialog.cpp:479
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -7334,65 +7362,65 @@ msgstr ""
 "повідомлення про ваду або побажання щодо покращення."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:464
+#: src/gui/HelpDialog.cpp:484
 msgid "{Google Groups} - discuss Stellarium with other users."
 msgstr "{Групи Google} — обговоріть Stellarium з іншими користувачами."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:469
+#: src/gui/HelpDialog.cpp:489
 msgid "{Open Collective} - donations to the Stellarium development team."
 msgstr ""
 "{Open Collective} — фінансові пожертви команді розробників Stellarium."
 
-#: src/gui/HelpDialog.cpp:517
+#: src/gui/HelpDialog.cpp:537
 msgid "Based on Qt"
 msgstr "На основі Qt"
 
-#: src/gui/HelpDialog.cpp:518
+#: src/gui/HelpDialog.cpp:538
 msgid "Running on Operating System"
 msgstr "Запущено в операційній системі"
 
-#: src/gui/HelpDialog.cpp:539
+#: src/gui/HelpDialog.cpp:559
 msgid "Developers"
 msgstr "Розробники"
 
-#: src/gui/HelpDialog.cpp:540
+#: src/gui/HelpDialog.cpp:560
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор проєкту і основний розробник: %1"
 
-#: src/gui/HelpDialog.cpp:541 src/gui/HelpDialog.cpp:552
+#: src/gui/HelpDialog.cpp:561 src/gui/HelpDialog.cpp:572
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Створення графіки/інших елементів: %1"
 
-#: src/gui/HelpDialog.cpp:542 src/gui/HelpDialog.cpp:543
-#: src/gui/HelpDialog.cpp:544 src/gui/HelpDialog.cpp:545
-#: src/gui/HelpDialog.cpp:546 src/gui/HelpDialog.cpp:547
-#: src/gui/HelpDialog.cpp:554 src/gui/HelpDialog.cpp:555
-#: src/gui/HelpDialog.cpp:556 src/gui/HelpDialog.cpp:557
-#: src/gui/HelpDialog.cpp:558 src/gui/HelpDialog.cpp:559
-#: src/gui/HelpDialog.cpp:560 src/gui/HelpDialog.cpp:561
 #: src/gui/HelpDialog.cpp:562 src/gui/HelpDialog.cpp:563
+#: src/gui/HelpDialog.cpp:564 src/gui/HelpDialog.cpp:565
+#: src/gui/HelpDialog.cpp:566 src/gui/HelpDialog.cpp:567
+#: src/gui/HelpDialog.cpp:574 src/gui/HelpDialog.cpp:575
+#: src/gui/HelpDialog.cpp:576 src/gui/HelpDialog.cpp:577
+#: src/gui/HelpDialog.cpp:578 src/gui/HelpDialog.cpp:579
+#: src/gui/HelpDialog.cpp:580 src/gui/HelpDialog.cpp:581
+#: src/gui/HelpDialog.cpp:582 src/gui/HelpDialog.cpp:583
 #, qt-format
 msgid "Developer: %1"
 msgstr "Розробник: %1"
 
-#: src/gui/HelpDialog.cpp:548
+#: src/gui/HelpDialog.cpp:568
 #, qt-format
 msgid "Sky cultures researcher: %1"
 msgstr "Дослідника картин зоряного неба: %1"
 
-#: src/gui/HelpDialog.cpp:549
+#: src/gui/HelpDialog.cpp:569
 #, qt-format
 msgid "Tester: %1"
 msgstr "Перевірено: %1"
 
-#: src/gui/HelpDialog.cpp:550
+#: src/gui/HelpDialog.cpp:570
 msgid "Former Developers"
 msgstr "Колишні розробники"
 
-#: src/gui/HelpDialog.cpp:551
+#: src/gui/HelpDialog.cpp:571
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -7400,22 +7428,22 @@ msgstr ""
 "Дехто зробив значний внесок, але тепер не бере участі у розробці програми. "
 "Внесок цих людей значно вплинув на поточний стан проєкту."
 
-#: src/gui/HelpDialog.cpp:553
+#: src/gui/HelpDialog.cpp:573
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Автор документації/розробник: %1"
 
-#: src/gui/HelpDialog.cpp:564 src/gui/HelpDialog.cpp:565
+#: src/gui/HelpDialog.cpp:584 src/gui/HelpDialog.cpp:585
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Розробник під OSX: %1"
 
-#: src/gui/HelpDialog.cpp:566
+#: src/gui/HelpDialog.cpp:586
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Неперервна інтеграція: %1"
 
-#: src/gui/HelpDialog.cpp:567
+#: src/gui/HelpDialog.cpp:587
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:629
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
@@ -7429,7 +7457,7 @@ msgstr "Неперервна інтеграція: %1"
 msgid "Contributors"
 msgstr "Учасники розробки"
 
-#: src/gui/HelpDialog.cpp:568
+#: src/gui/HelpDialog.cpp:588
 #, qt-format
 msgid ""
 "Many individuals have made contributions to the project and their work has "
@@ -7438,11 +7466,11 @@ msgstr ""
 "Внесок у проєкт зробили багато учасників, їхня робота зробила Stellarium "
 "кращим. Упорядкований за абеткою список усіх учасників розробки: %1."
 
-#: src/gui/HelpDialog.cpp:569
+#: src/gui/HelpDialog.cpp:589
 msgid "Financial support"
 msgstr "Фінансова підтримка"
 
-#: src/gui/HelpDialog.cpp:570
+#: src/gui/HelpDialog.cpp:590
 #, qt-format
 msgid ""
 "Many individuals and organizations are supporting the development of "
@@ -7453,7 +7481,7 @@ msgstr ""
 "організацій, найщедрішими (чиї пожертви перевищили 250 доларів) є %1."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:572
+#: src/gui/HelpDialog.cpp:592
 msgid ""
 "The full list of financial contributors you may see on our {Open Collective "
 "page}."
@@ -7461,11 +7489,11 @@ msgstr ""
 "Із повним списком тих, хто підтримав нас грошима, ви можете ознайомитися на "
 "нашій {сторінці Open Collective}."
 
-#: src/gui/HelpDialog.cpp:573 plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: src/gui/HelpDialog.cpp:593 plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 msgid "Acknowledgment"
 msgstr "Подяки"
 
-#: src/gui/HelpDialog.cpp:574
+#: src/gui/HelpDialog.cpp:594
 msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
@@ -7473,14 +7501,14 @@ msgstr ""
 "Якщо планетарій Stellarium був вам корисний у дослідницькій роботі, ми "
 "будемо раді такому посиланню:"
 
-#: src/gui/HelpDialog.cpp:575
+#: src/gui/HelpDialog.cpp:595
 msgid "This research has made use of the Stellarium planetarium"
 msgstr ""
 "Це дослідження було виконано за допомогою планетарію Stellarium (This "
 "research has made use of the Stellarium planetarium)"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:578
+#: src/gui/HelpDialog.cpp:598
 msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
