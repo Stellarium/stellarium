@@ -2321,6 +2321,7 @@
                  </property>
                 </widget>
                </item>
+	       
                <item row="1" column="2">
                 <widget class="QCheckBox" name="nutationCheckBox">
                  <property name="toolTip">
@@ -2331,6 +2332,7 @@
                  </property>
                 </widget>
                </item>
+	       
                <item row="1" column="1">
                 <widget class="QCheckBox" name="topocentricCheckBox">
                  <property name="toolTip">
@@ -2782,75 +2784,7 @@
                </property>
               </widget>
              </item>
-	     
-             <item row="0" column="3" rowspan="2">
-              <layout class="QGridLayout" name="gridLayoutInclude">
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <item row="1" column="2">
-                <layout class="QHBoxLayout" name="horizontalLayout_IncludeNutAberr">
-                 <item>
-                  <widget class="QCheckBox" name="aberrationCheckBox">
-                   <property name="toolTip">
-                    <string>Annual aberration is an annual wobble in positions, amounting to max. about 20 arcseconds for observers on Earth.</string>
-                   </property>
-                   <property name="text">
-                    <string>Aberration</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QDoubleSpinBox" name="aberrationSpinBox">
-                   <property name="toolTip">
-                    <string>Exaggerate aberration (for didactic explanations)</string>
-                   </property>
-                   <property name="decimals">
-                    <number>1</number>
-                   </property>
-                   <property name="maximum">
-                    <double>5.000000000000000</double>
-                   </property>
-                   <property name="singleStep">
-                    <double>0.100000000000000</double>
-                   </property>
-                   <property name="value">
-                    <double>1.000000000000000</double>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="0" column="1" colspan="2">
-                <widget class="QCheckBox" name="topocentricCheckBox">
-                 <property name="toolTip">
-                  <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
-                 </property>
-                 <property name="text">
-                  <string>Topocentric coordinates</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QCheckBox" name="nutationCheckBox">
-                 <property name="toolTip">
-                  <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
-                 </property>
-                 <property name="text">
-                  <string>Nutation</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_Include">
-                 <property name="text">
-                  <string>Include </string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-	     
+	     	     
             </layout>
            </widget>
           </item>
