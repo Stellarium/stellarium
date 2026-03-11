@@ -2,10 +2,10 @@
 
 define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 	"api/properties", "./time", "./joystickqueue", "./actions", "./viewoptions",
-	"./scripts",
-	"./viewcontrol", "./location", "./search", "jquery-ui"
+	"./scripts", "./viewcontrol", "./location", "./search", "./gpcontroller", "jquery-ui"
 ], function($, settings, globalize, rc, actionApi, propApi, timeui,
-	JoystickQueue) {
+	JoystickQueue, actionsui, viewoptionsui, scriptsui, viewcontrolui, locationui,
+	searchui, gpcontroller) {
 	"use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
@@ -343,6 +343,8 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 
 		$("#loadoverlay").fadeOut();
 		$(rc).trigger("uiReady"); //signal other components that the main UI init is done (some may need the jQueryUI stuff set up)
+		// Initialize Gamepad controller after UI is ready
+		gpcontroller.init();
 	});
 
 	//new server data

@@ -7,6 +7,7 @@
   <title><?= tr("Stellarium remote control plugin")?></title>
   <link type="text/css" rel="stylesheet" href="/external/jquery-ui.css"/>
   <link type="text/css" rel="stylesheet" href="style.css" />
+	<link type="text/css" rel="stylesheet" href="gamepad.css" />
   <!-- Stellarium uses require.js to provide a controlled module environment -->
   <script data-main="js/main" src="js/require.js" type="text/javascript"></script>
 </head>
@@ -39,6 +40,7 @@
         <li><a href="#tab_location"><?= tr("Location")?></a></li>
         <li><a href="#tab_projection"><?= tr("Projection")?></a></li>
         <li class="stelplugin" data-plugin="Scenery3d"><a href="#tab_scenery3d"><?= tr("Scenery3d")?></a></li>
+				<li><a href="#tab_gamepad"><?= tr("Gamepad Controller")?></a></li>
       </ul>
       <div id="tab_main">
         <div class="flex">
@@ -856,7 +858,135 @@
             <iframe id="s3d_info" class="flex-expand">No scene selected</iframe>
           </div>
       </div>
-    </div>
+		
+<!-- قسم DualShock 4 Controller المعدل - بدون Quick Tips و Default Mapping Reference -->
+<div id="tab_gamepad">
+    <section id="gp-controller" class="block">
+        <header>
+            <h2><?= tr("Gamepad Controller")?></h2>
+            <div id="gp-status" class="controller-status inline-block" style="margin-left: 20px;">
+                <span class="status-indicator">🔴 <?= tr("Disconnected")?></span>
+                <button id="gp-connect" class="jquerybutton" style="margin-left: 10px;"><?= tr("Connect")?></button>
+            </div>
+        </header>
+        
+        <div class="flex flex-wrap" style="gap: 20px;">
+            <!-- Controller Settings Panel -->
+            <div class="controller-settings-panel">
+                <h3><?= tr("Controller Settings")?></h3>
+                
+                <!-- Device Information -->
+                <div class="device-info-card">
+                    <div class="device-info-row">
+                        <span class="device-info-label"><?= tr("Device:")?></span>
+                        <span class="device-info-value" id="gp-device-name">-</span>
+                    </div>
+                    <div class="device-info-row">
+                        <span class="device-info-label"><?= tr("Status:")?></span>
+                        <span class="device-info-value" id="gp-connection-status">Disconnected</span>
+                    </div>
+                    <div class="device-info-row">
+                        <span class="device-info-label"><?= tr("Current FOV:")?></span>
+                        <span class="device-info-value" id="gp-current-fov">60°</span>
+                    </div>
+                </div>
+                
+                <!-- Calibration Section -->
+                <div class="calibration-section">
+                    <div class="calibration-header">
+                        <h4><?= tr("Joystick Calibration")?></h4>
+                        <button id="gp-calibrate" class="calibration-btn"><?= tr("Calibrate")?></button>
+                    </div>
+                    <div id="gp-calibration-values" class="calibration-status"></div>
+                    <p class="note" style="margin-top: 5px; font-size: 10px; color: #aaa;">
+                        <?= tr("Move joysticks in circles to calibrate center position")?>
+                    </p>
+                </div>
+                
+                <!-- Joystick Preview -->
+                <h4 style="margin: 15px 0 10px; color: #4CAF50;"><?= tr("Joystick Preview")?></h4>
+                <div class="joystick-preview-container">
+                    <div class="joystick-preview">
+                        <canvas id="gp-left-stick-canvas" width="100" height="100"></canvas>
+                        <div class="stick-label">
+                            <strong><?= tr("Left Stick")?></strong>
+                            <small><?= tr("View movement")?></small>
+                        </div>
+                    </div>
+                    <div class="joystick-preview">
+                        <canvas id="gp-right-stick-canvas" width="100" height="100"></canvas>
+                        <div class="stick-label">
+                            <strong><?= tr("Right Stick")?></strong>
+                            <small><?= tr("Smooth zoom")?></small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Control Settings -->
+                <div class="control-slider-group">
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="gp-invert-x" />
+                            <label for="gp-invert-x"><?= tr("Invert X-Axis")?></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="gp-invert-y" />
+                            <label for="gp-invert-y"><?= tr("Invert Y-Axis")?></label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="gp-auto-detect" checked />
+                            <label for="gp-auto-detect"><?= tr("Auto-detect device")?></label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-row">
+                        <span class="slider-label"><?= tr("Sensitivity:")?></span>
+                        <div class="slider-container">
+                            <div id="gp-sensitivity" class="slider"></div>
+                        </div>
+                        <span id="gp-sensitivity-value" class="slider-value">1.0</span>
+                    </div>
+                    
+                    <div class="slider-row">
+                        <span class="slider-label"><?= tr("Deadzone:")?></span>
+                        <div class="slider-container">
+                            <div id="gp-deadzone" class="slider"></div>
+                        </div>
+                        <span id="gp-deadzone-value" class="slider-value">0.15</span>
+                    </div>
+                    
+                    <div class="slider-row">
+                        <span class="slider-label"><?= tr("Zoom Speed:")?></span>
+                        <div class="slider-container">
+                            <div id="gp-zoom-speed" class="slider"></div>
+                        </div>
+                        <span id="gp-zoom-speed-value" class="slider-value">0.05</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Button Customization Panel -->
+            <div class="button-customization-panel">
+                <h3><?= tr("Button Customization")?></h3>
+                
+                <div class="customization-note">
+                    <span class="ui-icon ui-icon-info" style="float: left; margin-right: 5px;"></span>
+                    <?= tr("Connect a controller to customize button assignments")?>
+                </div>
+                
+                <div id="gp-button-customization" class="button-customization-container">
+                    <!-- Populated by JavaScript -->
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="gp-reset-mappings" class="action-btn reset"><?= tr("Reset to Defaults")?></button>
+                    <button id="gp-save-mappings" class="action-btn save"><?= tr("Save Customization")?></button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>		 
+	 </div>
     <ul class="ui-corner-all ui-widget-content button32list margin-vertical">
       <li title="<?= tr("Constellation lines")?>"><button class="stelaction icon32 btConstellationLines" name="actionShow_Constellation_Lines"></button></li>
       <li title="<?= tr("Constellation boundaries")?>"><button class="stelaction icon32 btConstellationBoundaries" name="actionShow_Constellation_Boundaries"></button></li>

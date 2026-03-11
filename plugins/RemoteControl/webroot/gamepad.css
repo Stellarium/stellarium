@@ -1,0 +1,470 @@
+/* gamepad.css - Gamepad Controller Styles */
+
+/* ========== Controller Settings Panel ========== */
+.controller-settings-panel {
+    flex: 1;
+    min-width: 320px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.controller-settings-panel h3 {
+    color: #4CAF50;
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #4CAF50;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Device Information Card */
+.device-info-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.device-info-row {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.device-info-row:last-child {
+    border-bottom: none;
+}
+
+.device-info-label {
+    min-width: 100px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.device-info-value {
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* Calibration Section */
+.calibration-section {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calibration-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.calibration-header h4 {
+    margin: 0;
+    color: #4CAF50;
+    font-size: 13px;
+}
+
+.calibration-btn {
+    background: linear-gradient(#4CAF50, #2E7D32);
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.calibration-btn:hover {
+    background: linear-gradient(#5CBF60, #3E8D42);
+}
+
+.calibration-btn:active {
+    transform: translateY(1px);
+}
+
+.calibration-status {
+    font-size: 11px;
+    color: #4CAF50;
+    margin-top: 8px;
+    padding: 4px 8px;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.calibration-values {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 11px;
+}
+
+.calibration-value-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.calibration-value-label {
+    color: #aaa;
+    margin-right: 5px;
+}
+
+.calibration-value-number {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* Joystick Preview */
+.joystick-preview-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.joystick-preview {
+    text-align: center;
+}
+
+.joystick-preview canvas {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #444;
+    border-radius: 6px;
+    background: #222;
+    display: block;
+    margin: 0 auto 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.stick-label {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.stick-label strong {
+    color: #4CAF50;
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* Control Sliders */
+.control-slider-group {
+    margin: 15px 0;
+}
+
+.slider-row {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    padding: 5px 0;
+}
+
+.slider-label {
+    min-width: 100px;
+    color: #ddd;
+    font-size: 12px;
+}
+
+.slider-container {
+    flex: 1;
+    margin: 0 15px;
+}
+
+.slider-value {
+    min-width: 45px;
+    text-align: right;
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+    display: flex;
+    gap: 20px;
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin: 0;
+}
+
+.checkbox-item label {
+    color: #ddd;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* ========== Button Customization Panel ========== */
+.button-customization-panel {
+    flex: 2;
+    min-width: 450px;
+		min-height:600px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.button-customization-panel h3 {
+    color: #4CAF50;
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #4CAF50;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.customization-note {
+    background: rgba(76, 175, 80, 0.1);
+    border-left: 3px solid #4CAF50;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    font-size: 11px;
+    color: #ddd;
+    border-radius: 0 4px 4px 0;
+}
+
+.customization-note .ui-icon {
+    margin-right: 5px;
+    color: #4CAF50;
+}
+
+/* No Device Message */
+.no-device-message {
+    padding: 30px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    border: 1px dashed #4CAF50;
+}
+
+.no-device-message p {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* Button Groups */
+.button-groups-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    max-height: 90000px;
+    overflow-y: auto;
+    padding: 5px;
+}
+
+.button-group {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.button-group-header {
+    margin: 0 0 12px 0;
+    color: #4CAF50;
+    font-size: 13px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+    padding-bottom: 5px;
+}
+
+.button-item {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    margin: 4px 0;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.button-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.button-name {
+    min-width: 100px;
+    font-weight: bold;
+    color: #4CAF50;
+    font-size: 12px;
+}
+
+.button-select {
+    flex: 1;
+    margin: 0 5px 0 10px;
+    padding: 5px;
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 3px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.button-select:hover {
+    border-color: #4CAF50;
+}
+
+.button-select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-btn {
+    padding: 6px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn.reset {
+    background: linear-gradient(#666, #444);
+    color: white;
+}
+
+.action-btn.reset:hover {
+    background: linear-gradient(#777, #555);
+}
+
+.action-btn.save {
+    background: linear-gradient(#4CAF50, #2E7D32);
+    color: white;
+}
+
+.action-btn.save:hover {
+    background: linear-gradient(#5CBF60, #3E8D42);
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 1024px) {
+    .button-groups-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .button-customization-panel {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .controller-settings-panel,
+    .button-customization-panel {
+        min-width: 100%;
+    }
+    
+    .joystick-preview-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .slider-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .slider-container {
+        width: 100%;
+        margin: 8px 0;
+    }
+    
+    .slider-value {
+        align-self: flex-end;
+    }
+    
+    .checkbox-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .button-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .button-name {
+        margin-bottom: 5px;
+    }
+    
+    .button-select {
+        width: 100%;
+        margin: 5px 0 0 0;
+    }
+}
+
+/* ========== Loading States ========== */
+.calibrating .calibration-btn {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.calibrating .joystick-preview canvas {
+    opacity: 0.7;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { border-color: #4CAF50; }
+    50% { border-color: #666; }
+    100% { border-color: #4CAF50; }
+}
+
+/* ========== Scrollbar Styling ========== */
+.button-groups-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.button-groups-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.button-groups-container::-webkit-scrollbar-thumb {
+    background: #4CAF50;
+    border-radius: 4px;
+}
+
+.button-groups-container::-webkit-scrollbar-thumb:hover {
+    background: #5CBF60;
+}
