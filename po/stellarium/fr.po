@@ -20,17 +20,17 @@
 # Fabien Chéreau <fabien.chereau@gmail.com>, 2025
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
 # Lionel HANNEQUIN <lh56@proton.me>, 2025
-# Nicolas Martignoni, 2026
 # Ascor8522, 2026
+# Nicolas Martignoni, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-03-01 13:43+0700\n"
+"POT-Creation-Date: 2026-03-11 14:00+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Ascor8522, 2026\n"
+"Last-Translator: Nicolas Martignoni, 2026\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5653,14 +5653,14 @@ msgid "Reload the deep-sky objects background images"
 msgstr "Recharger les images d'arrière plan des objets du ciel profond"
 
 #. TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%'" in progress bar
-#: src/core/StelSkyLayerMgr.cpp:211
+#: src/core/StelSkyLayerMgr.cpp:229
 #, qt-format
 msgid "Loading '%1'"
 msgstr "Chargement de %1"
 
 #. TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%' from %URL%" in
 #. progress bar
-#: src/core/StelSkyLayerMgr.cpp:216
+#: src/core/StelSkyLayerMgr.cpp:234
 #, qt-format
 msgid "Loading '%1' from %2"
 msgstr "Chargement de %1 depuis %2"
@@ -6754,7 +6754,7 @@ msgstr "Auteurs"
 msgid "Contact"
 msgstr "Contact"
 
-#: src/gui/ConfigurationDialog.cpp:1593 src/gui/HelpDialog.cpp:516
+#: src/gui/ConfigurationDialog.cpp:1593 src/gui/HelpDialog.cpp:536
 #: src/scripting/StelScriptMgr.cpp:656
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
@@ -7119,7 +7119,7 @@ msgstr "Aide de Stellarium"
 msgid "Keys"
 msgstr "Touches"
 
-#: src/gui/HelpDialog.cpp:288 src/gui/HelpDialog.cpp:434
+#: src/gui/HelpDialog.cpp:288 src/gui/HelpDialog.cpp:454
 msgid "Further Reading"
 msgstr "Lectures complémentaires"
 
@@ -7234,11 +7234,39 @@ msgstr "Interface texte (TUI)"
 msgid "Activate TUI"
 msgstr "Activer l'interface texte"
 
-#: src/gui/HelpDialog.cpp:401
+#: src/gui/HelpDialog.cpp:402
+msgid "⌥+Arrow keys"
+msgstr "⌥+Flèches"
+
+#: src/gui/HelpDialog.cpp:406
+msgid "Ctrl+Arrow keys"
+msgstr "Ctrl+Flèches"
+
+#: src/gui/HelpDialog.cpp:409
+msgid "Move camera forward/backward/left/right"
+msgstr "Déplacer la caméra en avant/en arrière/à gauche/à droite"
+
+#: src/gui/HelpDialog.cpp:411
+msgid "Speed up camera movement by 5×"
+msgstr "Accélérer 5x le mouvement de la caméra"
+
+#: src/gui/HelpDialog.cpp:413
+msgid "Speed up camera movement by 10×"
+msgstr "Accélérer 10x le mouvement de la caméra"
+
+#: src/gui/HelpDialog.cpp:414
+msgid "Shift"
+msgstr "Maj."
+
+#: src/gui/HelpDialog.cpp:415
+msgid "Move camera up/down"
+msgstr "Déplacer la caméra vers le haut/vers le bas"
+
+#: src/gui/HelpDialog.cpp:421
 msgid "Special local keys"
 msgstr "Touches spéciales locales"
 
-#: src/gui/HelpDialog.cpp:402
+#: src/gui/HelpDialog.cpp:422
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
@@ -7246,56 +7274,56 @@ msgstr ""
 "Tous ces raccourcis claviers sont disponibles localement lorsqu'une fenêtre "
 "ou un onglet spécifique est ouvert."
 
-#: src/gui/HelpDialog.cpp:403 src/ui_scriptConsole.h:345
+#: src/gui/HelpDialog.cpp:423 src/ui_scriptConsole.h:345
 msgid "Script console"
 msgstr "Console de script"
 
-#: src/gui/HelpDialog.cpp:404 src/ui_scriptConsole.h:347
+#: src/gui/HelpDialog.cpp:424 src/ui_scriptConsole.h:347
 msgid "Load script from file"
 msgstr "Charger un script depuis un fichier"
 
-#: src/gui/HelpDialog.cpp:406 src/ui_scriptConsole.h:351
+#: src/gui/HelpDialog.cpp:426 src/ui_scriptConsole.h:351
 msgid "Save script to file"
 msgstr "Exporter le script"
 
-#: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:369
+#: src/gui/HelpDialog.cpp:428 src/ui_scriptConsole.h:369
 msgid "Run script"
 msgstr "Lancer un script"
 
-#: src/gui/HelpDialog.cpp:410 src/ui_astroCalcDialog.h:2274
+#: src/gui/HelpDialog.cpp:430 src/ui_astroCalcDialog.h:2274
 msgid "Astronomical calculations"
 msgstr "Calculs astronomiques"
 
-#: src/gui/HelpDialog.cpp:411 src/ui_astroCalcDialog.h:2329
+#: src/gui/HelpDialog.cpp:431 src/ui_astroCalcDialog.h:2329
 #: src/ui_astroCalcDialog.h:2334
 msgid "Update positions"
 msgstr "Mettre à jour les positions"
 
-#: src/gui/HelpDialog.cpp:414 src/ui_astroCalcDialog.h:2346
+#: src/gui/HelpDialog.cpp:434 src/ui_astroCalcDialog.h:2346
 msgid "Calculate ephemeris"
 msgstr "Calculer les éphémérides"
 
-#: src/gui/HelpDialog.cpp:417
+#: src/gui/HelpDialog.cpp:437
 msgid "Calculate RTS"
 msgstr "Calcule la stratégie en temps réel"
 
-#: src/gui/HelpDialog.cpp:419 src/ui_astroCalcDialog.h:2476
+#: src/gui/HelpDialog.cpp:439 src/ui_astroCalcDialog.h:2476
 msgid "Calculate phenomena"
 msgstr "Calculer les phénomènes"
 
-#: src/gui/HelpDialog.cpp:421
+#: src/gui/HelpDialog.cpp:441
 msgid "Calculate solar eclipses"
 msgstr "Calculer les éclipses solaires"
 
-#: src/gui/HelpDialog.cpp:423
+#: src/gui/HelpDialog.cpp:443
 msgid "Calculate lunar eclipses"
 msgstr "Calculer les éclipses lunaires"
 
-#: src/gui/HelpDialog.cpp:425 src/ui_astroCalcDialog.h:2593
+#: src/gui/HelpDialog.cpp:445 src/ui_astroCalcDialog.h:2593
 msgid "Calculate transits"
 msgstr "Calculer les transits"
 
-#: src/gui/HelpDialog.cpp:435
+#: src/gui/HelpDialog.cpp:455
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -7304,31 +7332,31 @@ msgstr ""
 "navigateur :\n"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:439
+#: src/gui/HelpDialog.cpp:459
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Foire Aux Questions} sur Stellarium. Avec les réponses."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:444
+#: src/gui/HelpDialog.cpp:464
 msgid "{The Stellarium Wiki} - general information."
 msgstr "{Le wiki de Stellarium} - Informations générales."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:449
+#: src/gui/HelpDialog.cpp:469
 msgid "{The landscapes} - user-contributed landscapes for Stellarium."
 msgstr ""
 "{Les paysages} - Paysages pour Stellarium mis à disposition par la "
 "communauté."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:454
+#: src/gui/HelpDialog.cpp:474
 msgid "{The scripts} - user-contributed and official scripts for Stellarium."
 msgstr ""
 "{Les scripts} - Scripts Stellarium officiels et mis à disposition par la "
 "communauté."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:459
+#: src/gui/HelpDialog.cpp:479
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -7339,64 +7367,64 @@ msgstr ""
 "pouvez ouvrir une annonce de bogue ici."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:464
+#: src/gui/HelpDialog.cpp:484
 msgid "{Google Groups} - discuss Stellarium with other users."
 msgstr "{Google Groups} - Discuter de Stellarium avec d'autres utilisateurs."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:469
+#: src/gui/HelpDialog.cpp:489
 msgid "{Open Collective} - donations to the Stellarium development team."
 msgstr "{Open Collective} - Dons à l'équipe de développement de Stellarium."
 
-#: src/gui/HelpDialog.cpp:517
+#: src/gui/HelpDialog.cpp:537
 msgid "Based on Qt"
 msgstr "Basée sur Qt"
 
-#: src/gui/HelpDialog.cpp:518
+#: src/gui/HelpDialog.cpp:538
 msgid "Running on Operating System"
 msgstr "Tournant sur système d'exploitation"
 
-#: src/gui/HelpDialog.cpp:539
+#: src/gui/HelpDialog.cpp:559
 msgid "Developers"
 msgstr "Développeurs"
 
-#: src/gui/HelpDialog.cpp:540
+#: src/gui/HelpDialog.cpp:560
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordinateur du projet & développeur principal : %1"
 
-#: src/gui/HelpDialog.cpp:541 src/gui/HelpDialog.cpp:552
+#: src/gui/HelpDialog.cpp:561 src/gui/HelpDialog.cpp:572
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Designer graphique/autres : %1"
 
-#: src/gui/HelpDialog.cpp:542 src/gui/HelpDialog.cpp:543
-#: src/gui/HelpDialog.cpp:544 src/gui/HelpDialog.cpp:545
-#: src/gui/HelpDialog.cpp:546 src/gui/HelpDialog.cpp:547
-#: src/gui/HelpDialog.cpp:554 src/gui/HelpDialog.cpp:555
-#: src/gui/HelpDialog.cpp:556 src/gui/HelpDialog.cpp:557
-#: src/gui/HelpDialog.cpp:558 src/gui/HelpDialog.cpp:559
-#: src/gui/HelpDialog.cpp:560 src/gui/HelpDialog.cpp:561
 #: src/gui/HelpDialog.cpp:562 src/gui/HelpDialog.cpp:563
+#: src/gui/HelpDialog.cpp:564 src/gui/HelpDialog.cpp:565
+#: src/gui/HelpDialog.cpp:566 src/gui/HelpDialog.cpp:567
+#: src/gui/HelpDialog.cpp:574 src/gui/HelpDialog.cpp:575
+#: src/gui/HelpDialog.cpp:576 src/gui/HelpDialog.cpp:577
+#: src/gui/HelpDialog.cpp:578 src/gui/HelpDialog.cpp:579
+#: src/gui/HelpDialog.cpp:580 src/gui/HelpDialog.cpp:581
+#: src/gui/HelpDialog.cpp:582 src/gui/HelpDialog.cpp:583
 #, qt-format
 msgid "Developer: %1"
 msgstr "Développeur : %1"
 
-#: src/gui/HelpDialog.cpp:548
+#: src/gui/HelpDialog.cpp:568
 #, qt-format
 msgid "Sky cultures researcher: %1"
 msgstr "Recherche de cultures célestes : %1"
 
-#: src/gui/HelpDialog.cpp:549
+#: src/gui/HelpDialog.cpp:569
 #, qt-format
 msgid "Tester: %1"
 msgstr "Testeur : %1"
 
-#: src/gui/HelpDialog.cpp:550
+#: src/gui/HelpDialog.cpp:570
 msgid "Former Developers"
 msgstr "Anciens développeurs"
 
-#: src/gui/HelpDialog.cpp:551
+#: src/gui/HelpDialog.cpp:571
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -7404,22 +7432,22 @@ msgstr ""
 "Plusieurs personnes ont apporté des contributions importantes, mais ne sont "
 "plus actifs. Leur travail a fait une grande différence pour le projet :"
 
-#: src/gui/HelpDialog.cpp:553
+#: src/gui/HelpDialog.cpp:573
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Document d'auteur/développeur : %1"
 
-#: src/gui/HelpDialog.cpp:564 src/gui/HelpDialog.cpp:565
+#: src/gui/HelpDialog.cpp:584 src/gui/HelpDialog.cpp:585
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Développeur OS X : %1"
 
-#: src/gui/HelpDialog.cpp:566
+#: src/gui/HelpDialog.cpp:586
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Intégration continue : %1"
 
-#: src/gui/HelpDialog.cpp:567
+#: src/gui/HelpDialog.cpp:587
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:629
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
@@ -7433,7 +7461,7 @@ msgstr "Intégration continue : %1"
 msgid "Contributors"
 msgstr "Contributeurs"
 
-#: src/gui/HelpDialog.cpp:568
+#: src/gui/HelpDialog.cpp:588
 #, qt-format
 msgid ""
 "Many individuals have made contributions to the project and their work has "
@@ -7443,11 +7471,11 @@ msgstr ""
 "rendre Stellarium meilleur. La liste de tous les contributeurs, par ordre "
 "alphabétique : %1"
 
-#: src/gui/HelpDialog.cpp:569
+#: src/gui/HelpDialog.cpp:589
 msgid "Financial support"
 msgstr "Soutien financier"
 
-#: src/gui/HelpDialog.cpp:570
+#: src/gui/HelpDialog.cpp:590
 #, qt-format
 msgid ""
 "Many individuals and organizations are supporting the development of "
@@ -7459,7 +7487,7 @@ msgstr ""
 "sont %1"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:572
+#: src/gui/HelpDialog.cpp:592
 msgid ""
 "The full list of financial contributors you may see on our {Open Collective "
 "page}."
@@ -7467,11 +7495,11 @@ msgstr ""
 "La liste complète des donateurs et donatrices est disponible sur {Ouvrir la "
 "page Collective}."
 
-#: src/gui/HelpDialog.cpp:573 plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: src/gui/HelpDialog.cpp:593 plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 msgid "Acknowledgment"
 msgstr "Remerciements"
 
-#: src/gui/HelpDialog.cpp:574
+#: src/gui/HelpDialog.cpp:594
 msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
@@ -7479,12 +7507,12 @@ msgstr ""
 "Si le planétarium Stellarium vous a aidé dans votre travail de recherche, la"
 " mention suivante serait appréciée :"
 
-#: src/gui/HelpDialog.cpp:575
+#: src/gui/HelpDialog.cpp:595
 msgid "This research has made use of the Stellarium planetarium"
 msgstr "Ce travail de recherche a utilisé le planétarium Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:578
+#: src/gui/HelpDialog.cpp:598
 msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
