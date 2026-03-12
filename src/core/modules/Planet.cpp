@@ -1934,31 +1934,55 @@ QString Planet::getDiscoveryNarration() const
 		QString ddate; // = StelUtils::localeDiscoveryDateString(discoveryDate);
 		//QString ddate = discoveryDate; // YYYY
 		QStringList date = discoveryDate.split("-");
-		if (date.count()==3) // YYYY-MM-DD
+		if (date.count()==3)
+		{
+			// YYYY-MM-DD
 			// TRANSLATORS: 3-part date. %1=genitive month name, %2=day numeral (add a point in format string if your language makes ordinals), %3=year
 			ddate = QString(qc_("%1 %2, %3", "date narration")).arg(StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), QString::number(date.at(2).toInt()), date.at(0));
-		else if (date.count()==2) // YYYY-MM
+		}
+		else if (date.count()==2)
+		{
+			// YYYY-MM
 			// TRANSLATORS: 2-part date. %1=month name, %2=year
 			ddate = QString(qc_("%1 %2", "date narration")).arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+		}
 		else ddate = discoveryDate;
 
 		if (discoverer.isEmpty())
 		{
-			// TRANSLATORS: Narration, only year of dicovery given in %1
-			str = QString(qc_("%1 was discovered in %1", "planet narration")).arg(getNameI18n(), ddate);
-			// TRANSLATORS: Narration, only year and month of dicovery given in %1
-			str = QString(qc_("%1 was discovered in %1", "planet narration")).arg(getNameI18n(), ddate);
-			// TRANSLATORS: Narration, day of dicovery given in %1
-			str = QString(qc_("%1 was discovered on %1", "planet narration")).arg(getNameI18n(), ddate);
+			if (date.count()==1)
+			{
+				// TRANSLATORS: Narration, only year of discovery given in %2
+				str = QString(qc_("%1 was discovered in %2", "planet narration")).arg(getNameI18n(), ddate);
+			}
+			else if (date.count()==2)
+			{
+				// TRANSLATORS: Narration, only year and month of discovery given in %2
+				str = QString(qc_("%1 was discovered in %2", "planet narration")).arg(getNameI18n(), ddate);
+			}
+			else
+			{
+				// TRANSLATORS: Narration, day of discovery given in %2
+				str = QString(qc_("%1 was discovered on %2", "planet narration")).arg(getNameI18n(), ddate);
+			}
 		}
 		else
 		{
-			// TRANSLATORS: Narration, only year of dicovery given in %1
-			str = QString(qc_("%1 was discovered in %1 by %2", "planet narration")).arg(getNameI18n(), ddate, discoverer);
-			// TRANSLATORS: Narration, only year and month of dicovery given in %1
-			str = QString(qc_("%1 was discovered in %1 by %2", "planet narration")).arg(getNameI18n(), ddate, discoverer);
-			// TRANSLATORS: Narration, day of dicovery given in %1
-			str = QString(qc_("%1 was discovered on %1 by %2", "planet narration")).arg(getNameI18n(), ddate, discoverer);
+			if (date.count()==1)
+			{
+				// TRANSLATORS: Narration, only year of discovery given in %2
+				str = QString(qc_("%1 was discovered in %2 by %3", "planet narration")).arg(getNameI18n(), ddate, discoverer);
+			}
+			else if (date.count()==2)
+			{
+				// TRANSLATORS: Narration, only year and month of discovery given in %2
+				str = QString(qc_("%1 was discovered in %2 by %3", "planet narration")).arg(getNameI18n(), ddate, discoverer);
+			}
+			else
+			{
+				// TRANSLATORS: Narration, day of discovery given in %2
+				str = QString(qc_("%1 was discovered on %2 by %3", "planet narration")).arg(getNameI18n(), ddate, discoverer);
+			}
 		}
 	}
 	return str;

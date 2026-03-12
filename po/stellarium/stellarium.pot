@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-03-12 02:36+0700\n"
+"POT-Creation-Date: 2026-03-12 19:57+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1419,8 +1419,8 @@ msgstr ""
 msgid "Origin of name"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:312 src/core/modules/Planet.cpp:2285
-#: src/core/modules/Planet.cpp:2308
+#: src/core/modules/NomenclatureItem.cpp:312 src/core/modules/Planet.cpp:2309
+#: src/core/modules/Planet.cpp:2332
 msgctxt "object narration"
 msgid "or"
 msgstr ""
@@ -1500,7 +1500,7 @@ msgid "Its planetographic coordinates are"
 msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:402 src/core/modules/Planet.cpp:617
-#: src/core/modules/Planet.cpp:2212 src/core/StelObject.cpp:1559
+#: src/core/modules/Planet.cpp:2236 src/core/StelObject.cpp:1559
 #: src/core/StelSkyCultureSkyPartition.cpp:528 src/core/StelUtils.cpp:165
 #: src/core/StelUtils.cpp:345 src/core/StelUtils.cpp:441
 #: src/core/StelUtils.cpp:522 src/core/StelUtils.cpp:571
@@ -2769,7 +2769,7 @@ msgstr ""
 msgid "called"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:2168
+#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:2192
 msgid "is"
 msgstr ""
 
@@ -2814,7 +2814,7 @@ msgctxt "object narration"
 msgid "Million light years"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:2192
+#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:2216
 msgctxt "object narration"
 msgid "in the constellation of"
 msgstr ""
@@ -3381,49 +3381,49 @@ msgid "Equatorial rotation velocity"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1290 src/core/modules/Planet.cpp:1663
-#: src/core/modules/Planet.cpp:2087
+#: src/core/modules/Planet.cpp:2111
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1292 src/core/modules/Planet.cpp:1665
-#: src/core/modules/Planet.cpp:2089
+#: src/core/modules/Planet.cpp:2113
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1294 src/core/modules/Planet.cpp:1667
-#: src/core/modules/Planet.cpp:2091
+#: src/core/modules/Planet.cpp:2115
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1296 src/core/modules/Planet.cpp:1669
-#: src/core/modules/Planet.cpp:2093
+#: src/core/modules/Planet.cpp:2117
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1298 src/core/modules/Planet.cpp:1671
-#: src/core/modules/Planet.cpp:2095
+#: src/core/modules/Planet.cpp:2119
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1300 src/core/modules/Planet.cpp:1673
-#: src/core/modules/Planet.cpp:2097
+#: src/core/modules/Planet.cpp:2121
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1302 src/core/modules/Planet.cpp:1675
-#: src/core/modules/Planet.cpp:2099
+#: src/core/modules/Planet.cpp:2123
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1677
-#: src/core/modules/Planet.cpp:2101
+#: src/core/modules/Planet.cpp:2125
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr ""
@@ -3829,142 +3829,142 @@ msgid "Discovered"
 msgstr ""
 
 #. TRANSLATORS: 3-part date. %1=genitive month name, %2=day numeral (add a point in format string if your language makes ordinals), %3=year
-#: src/core/modules/Planet.cpp:1939
+#: src/core/modules/Planet.cpp:1941
 #, qt-format
 msgctxt "date narration"
 msgid "%1 %2, %3"
 msgstr ""
 
 #. TRANSLATORS: 2-part date. %1=month name, %2=year
-#: src/core/modules/Planet.cpp:1942
+#: src/core/modules/Planet.cpp:1947
 #, qt-format
 msgctxt "date narration"
 msgid "%1 %2"
 msgstr ""
 
-#. TRANSLATORS: Narration, only year of dicovery given in %1
-#. TRANSLATORS: Narration, only year and month of dicovery given in %1
-#: src/core/modules/Planet.cpp:1948 src/core/modules/Planet.cpp:1950
+#. TRANSLATORS: Narration, only year of discovery given in %2
+#. TRANSLATORS: Narration, only year and month of discovery given in %2
+#: src/core/modules/Planet.cpp:1956 src/core/modules/Planet.cpp:1961
 #, qt-format
 msgctxt "planet narration"
-msgid "%1 was discovered in %1"
+msgid "%1 was discovered in %2"
 msgstr ""
 
-#. TRANSLATORS: Narration, day of dicovery given in %1
-#: src/core/modules/Planet.cpp:1952
+#. TRANSLATORS: Narration, day of discovery given in %2
+#: src/core/modules/Planet.cpp:1966
 #, qt-format
 msgctxt "planet narration"
-msgid "%1 was discovered on %1"
+msgid "%1 was discovered on %2"
 msgstr ""
 
-#. TRANSLATORS: Narration, only year of dicovery given in %1
-#. TRANSLATORS: Narration, only year and month of dicovery given in %1
-#: src/core/modules/Planet.cpp:1957 src/core/modules/Planet.cpp:1959
+#. TRANSLATORS: Narration, only year of discovery given in %2
+#. TRANSLATORS: Narration, only year and month of discovery given in %2
+#: src/core/modules/Planet.cpp:1974 src/core/modules/Planet.cpp:1979
 #, qt-format
 msgctxt "planet narration"
-msgid "%1 was discovered in %1 by %2"
+msgid "%1 was discovered in %2 by %3"
 msgstr ""
 
-#. TRANSLATORS: Narration, day of dicovery given in %1
-#: src/core/modules/Planet.cpp:1961
+#. TRANSLATORS: Narration, day of discovery given in %2
+#: src/core/modules/Planet.cpp:1984
 #, qt-format
 msgctxt "planet narration"
-msgid "%1 was discovered on %1 by %2"
+msgid "%1 was discovered on %2 by %3"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2145
+#: src/core/modules/Planet.cpp:2169
 msgctxt "object narration"
 msgid "called"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2152 src/translations.h:1020
+#: src/core/modules/Planet.cpp:2176 src/translations.h:1020
 msgctxt "object narration"
 msgid "a star"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2153 src/translations.h:1021
+#: src/core/modules/Planet.cpp:2177 src/translations.h:1021
 msgctxt "object narration"
 msgid "a major planet"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2154 src/translations.h:1022
+#: src/core/modules/Planet.cpp:2178 src/translations.h:1022
 msgctxt "object narration"
 msgid "a planet moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2155 src/translations.h:1023
+#: src/core/modules/Planet.cpp:2179 src/translations.h:1023
 msgctxt "object narration"
 msgid "an observer"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2156 src/translations.h:1024
+#: src/core/modules/Planet.cpp:2180 src/translations.h:1024
 msgctxt "object narration"
 msgid "an artificial object"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2157 src/translations.h:1025
+#: src/core/modules/Planet.cpp:2181 src/translations.h:1025
 msgctxt "object narration"
 msgid "an asteroid"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2158 src/translations.h:1026
+#: src/core/modules/Planet.cpp:2182 src/translations.h:1026
 msgctxt "object narration"
 msgid "a plutino"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2159 src/translations.h:1027
+#: src/core/modules/Planet.cpp:2183 src/translations.h:1027
 msgctxt "object narration"
 msgid "a comet"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2160 src/translations.h:1028
+#: src/core/modules/Planet.cpp:2184 src/translations.h:1028
 msgctxt "object narration"
 msgid "a dwarf planet"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2161 src/translations.h:1029
+#: src/core/modules/Planet.cpp:2185 src/translations.h:1029
 msgctxt "object narration"
 msgid "a cubewano"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2162 src/translations.h:1030
+#: src/core/modules/Planet.cpp:2186 src/translations.h:1030
 msgctxt "object narration"
 msgid "a scattered disc object"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2163 src/translations.h:1031
+#: src/core/modules/Planet.cpp:2187 src/translations.h:1031
 msgctxt "object narration"
 msgid "an Oort Cloud Object"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2164 src/translations.h:1032
+#: src/core/modules/Planet.cpp:2188 src/translations.h:1032
 msgctxt "object narration"
 msgid "a sednoid"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2165 src/translations.h:1033
+#: src/core/modules/Planet.cpp:2189 src/translations.h:1033
 msgctxt "object narration"
 msgid "an interstellar object"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2166 src/core/modules/Planet.cpp:2168
+#: src/core/modules/Planet.cpp:2190 src/core/modules/Planet.cpp:2192
 #: src/translations.h:1034
 msgctxt "object narration"
 msgid "an object of undefined type"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2178
+#: src/core/modules/Planet.cpp:2202
 msgctxt "object narration"
 msgid "currently at visual magnitude of"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2181 src/core/StelObject.cpp:370
+#: src/core/modules/Planet.cpp:2205 src/core/StelObject.cpp:370
 #, qt-format
 msgctxt "object narration: reduced magnitude by extinction"
 msgid "reduced to %1 by %2 airmasses of atmospheric extinction"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2211 src/core/StelObject.cpp:1558
+#: src/core/modules/Planet.cpp:2235 src/core/StelObject.cpp:1558
 msgctxt "object narration"
 msgid "In this skyculture, it lies within the area of"
 msgstr ""
@@ -3973,14 +3973,14 @@ msgstr ""
 #. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
 #. TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
 #. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
-#: src/core/modules/Planet.cpp:2219 src/core/modules/Planet.cpp:2226
+#: src/core/modules/Planet.cpp:2243 src/core/modules/Planet.cpp:2250
 #: src/core/StelObject.cpp:1567 src/core/StelObject.cpp:1574
 #, qt-format
 msgctxt "object narration"
 msgid "Its %1 Position is %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2247
+#: src/core/modules/Planet.cpp:2271
 #, qt-format
 msgctxt "planet narration"
 msgid ""
@@ -3989,46 +3989,46 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:2261
+#: src/core/modules/Planet.cpp:2285
 msgctxt "distance, astronomical unit"
 msgid "Astronomical Units"
 msgstr ""
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:2263
+#: src/core/modules/Planet.cpp:2287
 msgctxt "object narration"
 msgid "or, in light time,"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/Planet.cpp:2272 src/core/modules/Planet.cpp:2295
+#: src/core/modules/Planet.cpp:2296 src/core/modules/Planet.cpp:2319
 msgctxt "distance"
 msgid "kilometers"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
-#: src/core/modules/Planet.cpp:2279 src/core/modules/Planet.cpp:2302
+#: src/core/modules/Planet.cpp:2303 src/core/modules/Planet.cpp:2326
 msgctxt "distance"
 msgid "Million kilometers"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2282
+#: src/core/modules/Planet.cpp:2306
 msgctxt "object narration"
 msgid "The current distance from the Sun amounts to"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2305
+#: src/core/modules/Planet.cpp:2329
 msgctxt "object narration"
 msgid "The current distance amounts to"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2319
+#: src/core/modules/Planet.cpp:2343
 #, qt-format
 msgctxt "planet narration"
 msgid "The orbital velocity of %1 is %2 kilometers per second"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:2323
+#: src/core/modules/Planet.cpp:2347
 #, qt-format
 msgctxt "planet narration"
 msgid "while the heliocentric velocity is %1 kilometers per second"
@@ -10158,7 +10158,7 @@ msgid "Cannot open JSON output file. Will not delete."
 msgstr ""
 
 #: src/gui/ObsListDialog.cpp:1194 src/ui_configurationDialog.h:2345
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Information"
 msgstr ""
 
@@ -12659,7 +12659,7 @@ msgstr ""
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
@@ -12695,7 +12695,7 @@ msgstr ""
 
 #: src/translations.h:855 src/ui_configurationDialog.h:2371
 #: src/ui_configurationDialog.h:2819
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
 msgid "Save"
 msgstr ""
 
@@ -29925,7 +29925,7 @@ msgid "SCM: Dark Constellation Editor"
 msgstr ""
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
 msgid "SCM: Constellation Editor"
 msgstr ""
 
@@ -29958,63 +29958,63 @@ msgstr ""
 msgid "Convert"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:323
 msgid "Pen"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:324
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:325
 msgid "Revert the last drawn line."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:326
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
 msgid "Undo"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
 msgid "Eraser"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
 msgid "Drawing"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
 msgid "English name"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
 msgid "ID (Do not include 'CON' or the sky culture name)"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
 msgid "Native name (optional)"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
 msgid "Pronounciation (optional, European glyphs or Pinyin)"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
 msgid "IPA (optional)"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
 msgid "Description (optional)"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
 msgid "Bind Star"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
 msgid "Upload Image"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
 msgid "Remove Image"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
 msgid "Artwork"
 msgstr ""
 
