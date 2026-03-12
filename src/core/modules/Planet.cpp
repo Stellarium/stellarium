@@ -957,14 +957,14 @@ QString Planet::getNarrationSize(const StelCore *core, const InfoStringGroup& fl
 				sizeStr = withDecimalDegree ? StelUtils::narrateDecimal(angularSize * M_180_PI, 1) + "°" :
 							      StelUtils::radToDmsPNarration(angularSize, 2);
 		}
-		oss << QString(qc_("The apparent diameter of %1 is %2", "planet narration")).arg(getNameI18n(), sizeStr);
+		oss << ". " << QString(qc_("The apparent diameter of %1 is %2", "planet narration")).arg(getNameI18n(), sizeStr) << ".  ";
 	}
 
 	if (flags&Size)
 	{
 		QString diam = (getPlanetType()==isPlanet ? qc_("Its equatorial diameter is %1 kilometers", "object narration") : qc_("Its diameter is %1 kilometers", "object narration")); // Many asteroids have irregular shape (Currently unhandled)
 		oss << QString(diam).arg(StelUtils::narrateDecimal(AU * getEquatorialRadius() * 2.0, 1)) << ". ";
-		oss << getExtraInfoStrings(Size).join("") << ". ";
+		oss << getExtraInfoStrings(Size).join(". ") << ". ";
 	}
 	return str;
 }
@@ -2338,66 +2338,6 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 
 	oss <<  getNarrationPeriods(core, flags);
 	oss <<  getNarrationSize(core, flags);
-	/*
-	if (flags&Size) // Diameter
-	{
-		StelApp& app = StelApp::getInstance();
-		const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
-
-
-		const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
-		if (angularSize>=4.8e-8)
-		{
-			QString s1, s2, sizeStr = "";
-			if (rings)
-			{
-				const double withoutRings = 2.*getSpheroidAngularRadius(core)*M_PI/180.;
-				if (withDecimalDegree)
-				{
-					s1 = StelUtils::narrateDecimal(withoutRings * M_180_PI, 1) + "°";
-					s2 = StelUtils::narrateDecimal(angularSize * M_180_PI, 1) + "°";
-				}
-				else
-				{
-					s1 = StelUtils::radToDmsPNarration(withoutRings, 2);
-					s2 = StelUtils::radToDmsPNarration(angularSize, 2);
-				}
-
-				sizeStr = QString("%1, %2: %3").arg(s1, q_("with rings"), s2);
-			}
-			else
-			{
-				if (sphereScale!=1.) // We must give correct diameters even if upscaling (e.g. Moon)
-				{
-					if (withDecimalDegree)
-					{
-						s1 = StelUtils::narrateDecimal(angularSize / sphereScale * M_180_PI, 1) + "°";
-						//s2 = StelUtils::radToDecDegStr(angularSize, 5, false, true);
-					}
-					else
-					{
-						s1 = StelUtils::radToDmsPNarration(angularSize / sphereScale, 2);
-						//s2 = StelUtils::radToDmsPStr(angularSize, 2);
-					}
-
-					sizeStr = QString("%1, ").arg(s1);
-				}
-				else
-				{
-					if (withDecimalDegree)
-						sizeStr = StelUtils::narrateDecimal(angularSize * M_180_PI, 1) + "°";
-					else
-						sizeStr = StelUtils::radToDmsPNarration(angularSize, 2);
-				}
-			}
-			oss << (QString("%1 %2. ").arg(qc_("The apparent diameter is", "object narration"), sizeStr));
-		}
-
-		QString diam = (getPlanetType()==isPlanet ? qc_("The equatorial diameter is", "object narration") : qc_("Its diameter is", "object narration")); // Many asteroids have irregular shape (Currently unhandled)
-		oss << (QString("%1 %2 %3. ").arg(diam, StelUtils::narrateDecimal(AU * getEquatorialRadius() * 2.0, 1) , qc_("kilometers", "distance")));
-	}
-	*/
-
 	oss <<  getNarrationExtra(core, flags);
 	oss <<  getSolarLunarNarration(core, flags);
 
