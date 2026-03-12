@@ -10,17 +10,17 @@
 # Daniel Nylander <po@danielnylander.se>, 2025
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
 # Ruslan Kabatsaev, 2025
-# Karl Birgersson <birgerssonkarl@outlook.com>, 2026
 # spcsmrf <spcsmrf@gmail.com>, 2026
+# Karl Birgersson <birgerssonkarl@outlook.com>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-03-01 13:43+0700\n"
+"POT-Creation-Date: 2026-03-12 02:36+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: spcsmrf <spcsmrf@gmail.com>, 2026\n"
+"Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,11 +41,11 @@ msgstr "anpassat objekt"
 #: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:444
 #: src/core/modules/Constellation.cpp:588
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:293
-#: src/core/modules/Nebula.cpp:295 src/core/modules/Planet.cpp:619
-#: src/core/modules/Planet.cpp:622 src/core/modules/StarWrapper.cpp:51
-#: src/core/modules/StarWrapper.cpp:288 src/core/modules/StarWrapper.cpp:290
-#: src/core/modules/StarWrapper.cpp:920 src/core/modules/StarWrapper.cpp:922
-#: src/core/modules/StarWrapper.cpp:1326 src/core/modules/StarWrapper.cpp:1328
+#: src/core/modules/Nebula.cpp:295 src/core/modules/Planet.cpp:662
+#: src/core/modules/Planet.cpp:665 src/core/modules/StarWrapper.cpp:51
+#: src/core/modules/StarWrapper.cpp:238 src/core/modules/StarWrapper.cpp:240
+#: src/core/modules/StarWrapper.cpp:582 src/core/modules/StarWrapper.cpp:584
+#: src/core/modules/StarWrapper.cpp:738 src/core/modules/StarWrapper.cpp:740
 #: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:2456
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3080
 #: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7691
@@ -798,8 +798,8 @@ msgid "Antapex"
 msgstr "Antapex"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:760
-#: src/core/modules/Planet.cpp:1045 src/core/modules/StarWrapper.cpp:378
+#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:805
+#: src/core/modules/Planet.cpp:1223 src/core/modules/StarWrapper.cpp:282
 #: src/gui/AstroCalcDialog.cpp:8574 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/Satellite.cpp:406
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
@@ -1007,97 +1007,97 @@ msgid "Compass marks"
 msgstr "Kompassmärken"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1169
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1347
 msgctxt "compass direction"
 msgid "N"
 msgstr "N"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:286 src/core/modules/Planet.cpp:1161
+#: src/core/modules/LandscapeMgr.cpp:286 src/core/modules/Planet.cpp:1339
 msgctxt "compass direction"
 msgid "S"
 msgstr "S"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:288 src/core/modules/Planet.cpp:1173
+#: src/core/modules/LandscapeMgr.cpp:288 src/core/modules/Planet.cpp:1351
 msgctxt "compass direction"
 msgid "E"
 msgstr "Ö"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:290 src/core/modules/Planet.cpp:1165
+#: src/core/modules/LandscapeMgr.cpp:290 src/core/modules/Planet.cpp:1343
 msgctxt "compass direction"
 msgid "W"
 msgstr "V"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1171
+#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1349
 msgctxt "compass direction"
 msgid "NE"
 msgstr "NO"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1175
+#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1353
 msgctxt "compass direction"
 msgid "SE"
 msgstr "SO"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1163
+#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1341
 msgctxt "compass direction"
 msgid "SW"
 msgstr "SV"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1167
+#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1345
 msgctxt "compass direction"
 msgid "NW"
 msgstr "NV"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1170
+#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1348
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "NNO"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1172
+#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1350
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "ONO"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:304 src/core/modules/Planet.cpp:1174
+#: src/core/modules/LandscapeMgr.cpp:304 src/core/modules/Planet.cpp:1352
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "OSO"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:306 src/core/modules/Planet.cpp:1176
+#: src/core/modules/LandscapeMgr.cpp:306 src/core/modules/Planet.cpp:1354
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "SSO"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:308 src/core/modules/Planet.cpp:1162
+#: src/core/modules/LandscapeMgr.cpp:308 src/core/modules/Planet.cpp:1340
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "SSV"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:310 src/core/modules/Planet.cpp:1164
+#: src/core/modules/LandscapeMgr.cpp:310 src/core/modules/Planet.cpp:1342
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "VSV"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:312 src/core/modules/Planet.cpp:1166
+#: src/core/modules/LandscapeMgr.cpp:312 src/core/modules/Planet.cpp:1344
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "VNV"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:314 src/core/modules/Planet.cpp:1168
+#: src/core/modules/LandscapeMgr.cpp:314 src/core/modules/Planet.cpp:1346
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "NNV"
@@ -1388,15 +1388,15 @@ msgstr "geologisk term"
 msgid "Linear size"
 msgstr "Linjär storlek"
 
-#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:855
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:900
 msgid "Diameter"
 msgstr "Diameter"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:711
-#: src/core/modules/Planet.cpp:732 src/core/modules/Planet.cpp:856
-#: src/core/modules/Planet.cpp:1372 src/core/modules/Comet.cpp:191
-#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:978
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:756
+#: src/core/modules/Planet.cpp:777 src/core/modules/Planet.cpp:901
+#: src/core/modules/Planet.cpp:1550 src/core/modules/Comet.cpp:229
+#: src/core/modules/Comet.cpp:239 src/gui/StelGuiItems.cpp:978
 #: src/gui/AstroCalcDialog.cpp:3199 src/gui/AstroCalcDialog.cpp:3747
 #: src/gui/AstroCalcDialog.cpp:8509 plugins/Satellites/src/Satellites.cpp:3020
 #: plugins/Satellites/src/Satellite.cpp:359
@@ -1431,8 +1431,8 @@ msgstr "Solhöjd"
 msgid "Origin of name"
 msgstr "Namnets ursprung"
 
-#: src/core/modules/NomenclatureItem.cpp:312 src/core/modules/Planet.cpp:1710
-#: src/core/modules/Planet.cpp:1733
+#: src/core/modules/NomenclatureItem.cpp:312 src/core/modules/Planet.cpp:2285
+#: src/core/modules/Planet.cpp:2308
 msgctxt "object narration"
 msgid "or"
 msgstr "eller"
@@ -1485,7 +1485,7 @@ msgctxt "object narration"
 msgid "is a %1 on %2"
 msgstr "är en %1 på %2"
 
-#: src/core/modules/NomenclatureItem.cpp:366
+#: src/core/modules/NomenclatureItem.cpp:366 src/core/modules/Planet.cpp:965
 #, qt-format
 msgctxt "object narration"
 msgid "Its diameter is %1 kilometers"
@@ -1511,11 +1511,12 @@ msgctxt "object narration"
 msgid "Its planetographic coordinates are"
 msgstr "Dess planetografiska koordinater är"
 
-#: src/core/modules/NomenclatureItem.cpp:402 src/core/modules/Planet.cpp:1642
-#: src/core/StelObject.cpp:1549 src/core/StelSkyCultureSkyPartition.cpp:528
-#: src/core/StelUtils.cpp:165 src/core/StelUtils.cpp:345
-#: src/core/StelUtils.cpp:441 src/core/StelUtils.cpp:520
-#: src/core/StelUtils.cpp:569 src/core/StelUtils.cpp:1536
+#: src/core/modules/NomenclatureItem.cpp:402 src/core/modules/Planet.cpp:617
+#: src/core/modules/Planet.cpp:2212 src/core/StelObject.cpp:1559
+#: src/core/StelSkyCultureSkyPartition.cpp:528 src/core/StelUtils.cpp:165
+#: src/core/StelUtils.cpp:345 src/core/StelUtils.cpp:441
+#: src/core/StelUtils.cpp:522 src/core/StelUtils.cpp:571
+#: src/core/StelUtils.cpp:1538
 msgctxt "object narration"
 msgid "and"
 msgstr "och"
@@ -1527,8 +1528,8 @@ msgstr "Solhöjd över objektet är"
 
 #: src/core/modules/NomenclatureItem.cpp:405
 #: src/core/StelSkyCultureSkyPartition.cpp:526 src/core/StelUtils.cpp:227
-#: src/core/StelUtils.cpp:430 src/core/StelUtils.cpp:517
-#: src/core/StelUtils.cpp:528 src/core/StelUtils.cpp:566
+#: src/core/StelUtils.cpp:430 src/core/StelUtils.cpp:519
+#: src/core/StelUtils.cpp:530 src/core/StelUtils.cpp:568
 msgctxt "object narration"
 msgid "degrees"
 msgstr "grader"
@@ -2336,9 +2337,8 @@ msgstr "möjlig planetarisk nebulosa"
 msgid "protoplanetary nebula"
 msgstr "protoplanetarisk nebulosa"
 
-#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:133
-#: src/core/modules/StarWrapper.cpp:98 src/core/modules/StarWrapper.cpp:787
-#: src/core/modules/StarWrapper.cpp:1248
+#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:135
+#: src/core/modules/StarWrapper.cpp:107
 msgid "star"
 msgstr "stjärna"
 
@@ -2404,19 +2404,17 @@ msgstr "av"
 msgid "Airmasses"
 msgstr "luftmassor"
 
-#: src/core/modules/Nebula.cpp:280 src/core/modules/Planet.cpp:596
-#: src/core/modules/StarWrapper.cpp:268
+#: src/core/modules/Nebula.cpp:280 src/core/modules/Planet.cpp:639
+#: src/core/modules/StarWrapper.cpp:220
 msgid "Additional names: "
 msgstr "Ytterligare namn: "
 
-#: src/core/modules/Nebula.cpp:286 src/core/modules/Planet.cpp:603
-#: src/core/modules/StarWrapper.cpp:274 src/core/modules/StarWrapper.cpp:608
+#: src/core/modules/Nebula.cpp:286 src/core/modules/Planet.cpp:646
+#: src/core/modules/StarWrapper.cpp:226 src/core/modules/StarWrapper.cpp:411
 msgid "Additional catalog numbers: "
 msgstr "Ytterligare katalognummer: "
 
-#: src/core/modules/Nebula.cpp:304 src/core/modules/Planet.cpp:866
-#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:319
-#: src/core/modules/StarWrapper.cpp:939 src/core/modules/StarWrapper.cpp:1335
+#: src/core/modules/Nebula.cpp:304 src/core/StelObject.cpp:382
 #: plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
 msgstr "Färgindex (B-V)"
@@ -2461,7 +2459,6 @@ msgstr "Orienteringsvinkel"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:388 src/core/modules/Nebula.cpp:401
-#: src/core/modules/StarWrapper.cpp:351 src/core/modules/StarWrapper.cpp:994
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
 msgctxt "distance"
@@ -2470,8 +2467,7 @@ msgstr "lå"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:389 src/core/modules/Nebula.cpp:435
-#: src/core/modules/Planet.cpp:744 src/core/modules/Planet.cpp:750
-#: src/core/modules/StarWrapper.cpp:353 src/core/modules/StarWrapper.cpp:996
+#: src/core/modules/Planet.cpp:789 src/core/modules/Planet.cpp:795
 #: src/gui/AstroCalcDialog.cpp:988 src/gui/AstroCalcChart.cpp:94
 #: src/gui/AstroCalcChart.cpp:104 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:2537
@@ -2502,14 +2498,12 @@ msgstr "Mlå"
 msgid "Redshift"
 msgstr "Rödförskjutning"
 
-#: src/core/modules/Nebula.cpp:460 src/core/modules/StarWrapper.cpp:387
-#: src/core/modules/StarWrapper.cpp:1000 src/ui_configurationDialog.h:2727
+#: src/core/modules/Nebula.cpp:460 src/ui_configurationDialog.h:2727
 msgid "Parallax"
 msgstr "Parallax"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:460 src/core/modules/StarWrapper.cpp:392
-#: src/core/modules/StarWrapper.cpp:1005 plugins/Pulsars/src/Pulsar.cpp:257
+#: src/core/modules/Nebula.cpp:460 plugins/Pulsars/src/Pulsar.cpp:257
 msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
@@ -2810,7 +2804,7 @@ msgstr "ej dokumenterad typ"
 msgid "called"
 msgstr "som heter"
 
-#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:1602
+#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:2168
 msgid "is"
 msgstr "är"
 
@@ -2855,7 +2849,7 @@ msgctxt "object narration"
 msgid "Million light years"
 msgstr "Miljoner ljusår"
 
-#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:1622
+#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:2192
 msgctxt "object narration"
 msgid "in the constellation of"
 msgstr "i stjärnbilden"
@@ -2880,12 +2874,12 @@ msgctxt "parallax"
 msgid "milli-arcseconds"
 msgstr "millibågsekunder"
 
-#: src/core/modules/Nebula.cpp:1854 src/core/modules/Planet.cpp:1664
+#: src/core/modules/Nebula.cpp:1854
 msgctxt "object narration"
 msgid "It was discovered by"
 msgstr "Den upptäcktes av"
 
-#: src/core/modules/Nebula.cpp:1856 src/core/modules/Planet.cpp:1668
+#: src/core/modules/Nebula.cpp:1856
 msgctxt "object narration"
 msgid "in the year"
 msgstr "år"
@@ -3125,102 +3119,126 @@ msgstr "engelska"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Planet TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/planet.txt
-#: src/core/modules/Planet.cpp:134 plugins/Satellites/src/Satellites.cpp:3449
+#: src/core/modules/Planet.cpp:136 plugins/Satellites/src/Satellites.cpp:3449
 msgid "planet"
 msgstr "planet"
 
-#: src/core/modules/Planet.cpp:135
+#: src/core/modules/Planet.cpp:137
 msgid "moon"
 msgstr "måne"
 
-#: src/core/modules/Planet.cpp:136
+#: src/core/modules/Planet.cpp:138
 msgid "observer"
 msgstr "observatör"
 
-#: src/core/modules/Planet.cpp:137
+#: src/core/modules/Planet.cpp:139
 msgid "artificial"
 msgstr "konstgjord"
 
-#: src/core/modules/Planet.cpp:138
+#: src/core/modules/Planet.cpp:140
 msgid "asteroid"
 msgstr "asteroid"
 
-#: src/core/modules/Planet.cpp:139
+#: src/core/modules/Planet.cpp:141
 msgid "plutino"
 msgstr "plutino"
 
-#: src/core/modules/Planet.cpp:140
+#: src/core/modules/Planet.cpp:142
 msgid "comet"
 msgstr "komet"
 
-#: src/core/modules/Planet.cpp:141
+#: src/core/modules/Planet.cpp:143
 msgid "dwarf planet"
 msgstr "dvärgplanet"
 
-#: src/core/modules/Planet.cpp:142
+#: src/core/modules/Planet.cpp:144
 msgid "cubewano"
 msgstr "cubewano"
 
-#: src/core/modules/Planet.cpp:143
+#: src/core/modules/Planet.cpp:145
 msgid "scattered disc object"
 msgstr "scattered disc-objekt"
 
-#: src/core/modules/Planet.cpp:144
+#: src/core/modules/Planet.cpp:146
 msgid "Oort cloud object"
 msgstr "Objekt från Oorts kometmoln"
 
-#: src/core/modules/Planet.cpp:145
+#: src/core/modules/Planet.cpp:147
 msgid "sednoid"
 msgstr "sednoid"
 
-#: src/core/modules/Planet.cpp:146
+#: src/core/modules/Planet.cpp:148
 msgid "interstellar object"
 msgstr "interstellärt objekt"
 
-#: src/core/modules/Planet.cpp:571 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:935
-#: src/core/modules/StarWrapper.cpp:1124 plugins/Quasars/src/Quasar.cpp:131
+#. TRANSLATORS: Moon is the word for a planet moon, not Earth's Moon.
+#: src/core/modules/Planet.cpp:582
+#, qt-format
+msgctxt "add-on to planet name in planet narration"
+msgid " (Moon %1)"
+msgstr " (Måne %1)"
+
+#: src/core/modules/Planet.cpp:585
+#, qt-format
+msgctxt "planet narration"
+msgid "(enlarged %1 times)"
+msgstr "(förstorad %1 gånger)"
+
+#: src/core/modules/Planet.cpp:598 src/core/modules/Comet.cpp:203
+#: src/core/modules/StarWrapper.cpp:263 src/core/modules/StarWrapper.cpp:597
+#: plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "Absolut magnitud"
 
-#: src/core/modules/Planet.cpp:574
+#: src/core/modules/Planet.cpp:601
 msgid "Mean Opposition Magnitude"
 msgstr "Medelmagnitud vid opposition"
 
-#: src/core/modules/Planet.cpp:610
+#: src/core/modules/Planet.cpp:614
+#, qt-format
+msgctxt "planet narration"
+msgid "Its absolute Magnitude is %1"
+msgstr "Dess absoluta magnitud är %1"
+
+#: src/core/modules/Planet.cpp:617
+#, qt-format
+msgctxt "planet narration"
+msgid "Its mean Opposition Magnitude is %1"
+msgstr "Dess genomsnittliga oppositionsmagnitud är %1"
+
+#: src/core/modules/Planet.cpp:653
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "icke-periodisk"
 
-#: src/core/modules/Planet.cpp:615
+#: src/core/modules/Planet.cpp:658
 msgctxt "type of comet"
 msgid "short-period"
 msgstr "kortperiodisk"
 
-#: src/core/modules/Planet.cpp:617
+#: src/core/modules/Planet.cpp:660
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "periodisk"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:674 src/core/modules/Planet.cpp:676
+#: src/core/modules/Planet.cpp:719 src/core/modules/Planet.cpp:721
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "Ekliptisk"
 
-#: src/core/modules/Planet.cpp:685 src/core/modules/Planet.cpp:686
+#: src/core/modules/Planet.cpp:730 src/core/modules/Planet.cpp:731
 msgid "Hourly motion"
 msgstr "Timvis rörelse"
 
-#: src/core/modules/Planet.cpp:685 src/core/modules/Planet.cpp:1222
-#: src/core/modules/Planet.cpp:1231 src/core/modules/StarWrapper.cpp:365
-#: src/core/modules/StarWrapper.cpp:979 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/Planet.cpp:730 src/core/modules/Planet.cpp:1400
+#: src/core/modules/Planet.cpp:1409 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "mot"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:700 src/gui/AstroCalcDialog.cpp:934
+#: src/core/modules/Planet.cpp:745 src/gui/AstroCalcDialog.cpp:934
 #: src/gui/AstroCalcDialog.cpp:1247 src/gui/AstroCalcDialog.cpp:1545
 #: src/gui/AstroCalcDialog.cpp:1821 src/gui/AstroCalcDialog.cpp:1983
 #: src/gui/AstroCalcDialog.cpp:8534 src/gui/AstroCalcChart.cpp:430
@@ -3233,368 +3251,763 @@ msgid "AU"
 msgstr "AU"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:702
+#: src/core/modules/Planet.cpp:747
 msgid "Light time"
 msgstr "Ljustid"
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:718 src/core/modules/Planet.cpp:739
-#: src/core/modules/Comet.cpp:193 src/gui/AstroCalcDialog.cpp:8511
+#: src/core/modules/Planet.cpp:763 src/core/modules/Planet.cpp:784
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:8511
 msgctxt "distance"
 msgid "M km"
 msgstr "Mkm"
 
-#: src/core/modules/Planet.cpp:722 src/core/modules/Planet.cpp:724
+#: src/core/modules/Planet.cpp:767 src/core/modules/Planet.cpp:769
 msgid "Distance from Sun"
 msgstr "Avstånd från solen"
 
-#: src/core/modules/Planet.cpp:767
+#: src/core/modules/Planet.cpp:812
 msgid "Orbital velocity"
 msgstr "Hastighet i omloppsbana"
 
-#: src/core/modules/Planet.cpp:770
+#: src/core/modules/Planet.cpp:815
 msgid "Heliocentric velocity"
 msgstr "Heliocentrisk hastighet"
 
-#: src/core/modules/Planet.cpp:785
+#: src/core/modules/Planet.cpp:830
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
 "OBS: banelementen för epok %1 är troligen utgångna. Överväg att uppdatera "
 "datan!"
 
-#: src/core/modules/Planet.cpp:823 src/core/modules/Planet.cpp:1762
+#: src/core/modules/Planet.cpp:868
 msgid "with rings"
 msgstr "med ringar"
 
-#: src/core/modules/Planet.cpp:840
+#: src/core/modules/Planet.cpp:885
 msgid "scaled up to"
 msgstr "skalad till"
 
-#: src/core/modules/Planet.cpp:850
+#: src/core/modules/Planet.cpp:895
 msgid "Apparent diameter"
 msgstr "Skenbar diameter"
 
-#: src/core/modules/Planet.cpp:855
+#: src/core/modules/Planet.cpp:900
 msgid "Equatorial diameter"
 msgstr "Diameter vid ekvatorn"
 
-#: src/core/modules/Planet.cpp:904 src/core/modules/Planet.cpp:905
-#: src/core/modules/Planet.cpp:913 src/gui/AstroCalcChart.cpp:95
+#. TRANSLATORS: a planet's angular diameter is %1, or %2 with rings
+#: src/core/modules/Planet.cpp:934
+#, qt-format
+msgctxt "planet narration"
+msgid "%1, or, with rings, %2"
+msgstr "%1, eller, med ringar, %2"
+
+#: src/core/modules/Planet.cpp:960
+#, qt-format
+msgctxt "planet narration"
+msgid "The apparent diameter of %1 is %2"
+msgstr "Den skenbara diametern på %1 är %2"
+
+#: src/core/modules/Planet.cpp:965
+#, qt-format
+msgctxt "object narration"
+msgid "Its equatorial diameter is %1 kilometers"
+msgstr "Dess ekvatordiameter är %1 kilometer"
+
+#: src/core/modules/Planet.cpp:1005 src/core/modules/Planet.cpp:1006
+#: src/core/modules/Planet.cpp:1014 src/gui/AstroCalcChart.cpp:95
 #: src/gui/AstroCalcChart.cpp:105 src/gui/AstroCalcChart.cpp:432
 #: src/gui/AstroCalcChart.cpp:458 src/ui_configurationDialog.h:2505
 msgid "Elongation"
 msgstr "Elongation"
 
-#: src/core/modules/Planet.cpp:906 src/core/modules/Planet.cpp:915
+#: src/core/modules/Planet.cpp:1007 src/core/modules/Planet.cpp:1016
 #: src/gui/AstroCalcChart.cpp:98 src/gui/AstroCalcChart.cpp:108
 #: src/gui/AstroCalcChart.cpp:441 src/gui/AstroCalcChart.cpp:467
 #: plugins/Satellites/src/Satellite.cpp:411
 msgid "Phase angle"
 msgstr "Fasvinkel"
 
-#: src/core/modules/Planet.cpp:908 src/core/modules/Planet.cpp:917
+#: src/core/modules/Planet.cpp:1009 src/core/modules/Planet.cpp:1018
 msgid "Illuminated"
 msgstr "Belyst"
 
-#: src/core/modules/Planet.cpp:914
+#: src/core/modules/Planet.cpp:1015
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:342
 msgid "Elong. in Ecl.Long."
 msgstr "Elong. i ekl.long."
 
-#: src/core/modules/Planet.cpp:929 src/gui/AstroCalcDialog.cpp:8744
+#: src/core/modules/Planet.cpp:1030 src/gui/AstroCalcDialog.cpp:8744
 #: src/gui/AstroCalcChart.cpp:475
 msgid "Angular distance"
 msgstr "Vinkelavstånd"
 
+#: src/core/modules/Planet.cpp:1065
+#, qt-format
+msgctxt "planet narration"
+msgid "Elongation from the Sun is %1, or %2 in ecliptical longitude"
+msgstr "Elongationen från solen är %1, eller %2 i ekliptisk longitud"
+
+#: src/core/modules/Planet.cpp:1066
+#, qt-format
+msgctxt "planet narration"
+msgid "Phase angle is %1"
+msgstr "Fasvinkeln är %1"
+
+#: src/core/modules/Planet.cpp:1068
+#, qt-format
+msgctxt "planet narration"
+msgid "The illuminated fraction is %1 percent"
+msgstr "Den upplysta delen är %1 procent"
+
+#: src/core/modules/Planet.cpp:1079
+#, qt-format
+msgctxt "planet narration"
+msgid "The angular distance from %1 is %2"
+msgstr "Vinkelavståndet från %1 är %2"
+
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:947 src/core/modules/StarWrapper.cpp:399
-#: src/core/modules/StarWrapper.cpp:1024 src/core/modules/StarWrapper.cpp:1380
-#: src/core/StelUtils.cpp:163 src/gui/AstroCalcDialog.cpp:8545
-#: src/gui/AstroCalcAlmanacWidget.cpp:254
+#: src/core/modules/Planet.cpp:1097 src/core/StelUtils.cpp:163
+#: src/gui/AstroCalcDialog.cpp:8545 src/gui/AstroCalcAlmanacWidget.cpp:254
 msgctxt "duration"
 msgid "days"
 msgstr "dygn"
 
-#: src/core/modules/Planet.cpp:956
+#: src/core/modules/Planet.cpp:1106
 msgid "Sidereal period"
 msgstr "Siderisk omloppstid"
 
-#: src/core/modules/Planet.cpp:965
+#: src/core/modules/Planet.cpp:1115
 msgid "Synodic period"
 msgstr "Synodisk omloppstid"
 
+#: src/core/modules/Planet.cpp:1136
+#, qt-format
+msgctxt "planet narration"
+msgid "The Sidereal period is %1 days or %2 years"
+msgstr "Den sideriska perioden är %1 dagar eller %2 år"
+
+#: src/core/modules/Planet.cpp:1144
+#, qt-format
+msgctxt "planet narration"
+msgid "The synodic period is %1 days or %2 years"
+msgstr "Den synodiska perioden är %1 dagar eller %2 år"
+
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1047
+#: src/core/modules/Planet.cpp:1225
 msgctxt "speed"
 msgid "m/s"
 msgstr "m/s"
 
-#: src/core/modules/Planet.cpp:1062
+#: src/core/modules/Planet.cpp:1240
 msgid "Sidereal day"
 msgstr "Sideriskt dygn"
 
-#: src/core/modules/Planet.cpp:1064
+#: src/core/modules/Planet.cpp:1242
 msgid "Mean solar day"
 msgstr "Medelsoldygn"
 
-#: src/core/modules/Planet.cpp:1070
+#: src/core/modules/Planet.cpp:1248 src/core/modules/Planet.cpp:1620
 msgid "The period of rotation is chaotic"
 msgstr "Rotationsperioden är kaotisk"
 
-#: src/core/modules/Planet.cpp:1076 src/core/modules/Planet.cpp:1078
-#: src/core/modules/Planet.cpp:1084 src/core/modules/Planet.cpp:1086
+#: src/core/modules/Planet.cpp:1254 src/core/modules/Planet.cpp:1256
+#: src/core/modules/Planet.cpp:1262 src/core/modules/Planet.cpp:1264
 msgid "Equatorial rotation velocity"
 msgstr "Rotationshastighet vid ekvatorn"
 
-#: src/core/modules/Planet.cpp:1112 src/core/modules/Planet.cpp:1524
+#: src/core/modules/Planet.cpp:1290 src/core/modules/Planet.cpp:1663
+#: src/core/modules/Planet.cpp:2087
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Nymåne"
 
-#: src/core/modules/Planet.cpp:1114 src/core/modules/Planet.cpp:1526
+#: src/core/modules/Planet.cpp:1292 src/core/modules/Planet.cpp:1665
+#: src/core/modules/Planet.cpp:2089
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Tilltagande skära"
 
-#: src/core/modules/Planet.cpp:1116 src/core/modules/Planet.cpp:1528
+#: src/core/modules/Planet.cpp:1294 src/core/modules/Planet.cpp:1667
+#: src/core/modules/Planet.cpp:2091
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Första kvarteret"
 
-#: src/core/modules/Planet.cpp:1118 src/core/modules/Planet.cpp:1530
+#: src/core/modules/Planet.cpp:1296 src/core/modules/Planet.cpp:1669
+#: src/core/modules/Planet.cpp:2093
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Tilltagande kullrig"
 
-#: src/core/modules/Planet.cpp:1120 src/core/modules/Planet.cpp:1532
+#: src/core/modules/Planet.cpp:1298 src/core/modules/Planet.cpp:1671
+#: src/core/modules/Planet.cpp:2095
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Fullmåne"
 
-#: src/core/modules/Planet.cpp:1122 src/core/modules/Planet.cpp:1534
+#: src/core/modules/Planet.cpp:1300 src/core/modules/Planet.cpp:1673
+#: src/core/modules/Planet.cpp:2097
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Avtagande kullrig"
 
-#: src/core/modules/Planet.cpp:1124 src/core/modules/Planet.cpp:1536
+#: src/core/modules/Planet.cpp:1302 src/core/modules/Planet.cpp:1675
+#: src/core/modules/Planet.cpp:2099
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Tredje kvarteret"
 
-#: src/core/modules/Planet.cpp:1126 src/core/modules/Planet.cpp:1538
+#: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1677
+#: src/core/modules/Planet.cpp:2101
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Avtagande skära"
 
-#: src/core/modules/Planet.cpp:1134
+#: src/core/modules/Planet.cpp:1312
 msgid "Moon age"
 msgstr "Månens ålder"
 
-#: src/core/modules/Planet.cpp:1134
+#: src/core/modules/Planet.cpp:1312
 msgid "days old"
 msgstr "dagar gammal"
 
-#: src/core/modules/Planet.cpp:1154 src/core/modules/Planet.cpp:1157
+#: src/core/modules/Planet.cpp:1332 src/core/modules/Planet.cpp:1335
 msgid "Position angle of bright limb"
 msgstr "Positionsvinkel för den ljusa kanten"
 
-#: src/core/modules/Planet.cpp:1221 src/core/modules/Planet.cpp:1230
-#: src/core/modules/Planet.cpp:1266 src/core/modules/Planet.cpp:1273
+#: src/core/modules/Planet.cpp:1399 src/core/modules/Planet.cpp:1408
+#: src/core/modules/Planet.cpp:1444 src/core/modules/Planet.cpp:1451
 msgid "Position Angle of axis"
 msgstr "Axelns positionsvinkel"
 
-#: src/core/modules/Planet.cpp:1222 src/core/modules/Planet.cpp:1223
-#: src/core/modules/Planet.cpp:1231 src/core/modules/Planet.cpp:1232
+#: src/core/modules/Planet.cpp:1400 src/core/modules/Planet.cpp:1401
+#: src/core/modules/Planet.cpp:1409 src/core/modules/Planet.cpp:1410
 msgid "Libration"
 msgstr "Libration"
 
-#: src/core/modules/Planet.cpp:1224 src/core/modules/Planet.cpp:1233
-#: src/core/modules/Planet.cpp:1268 src/core/modules/Planet.cpp:1275
+#: src/core/modules/Planet.cpp:1402 src/core/modules/Planet.cpp:1411
+#: src/core/modules/Planet.cpp:1446 src/core/modules/Planet.cpp:1453
 msgid "Subsolar point"
 msgstr "Punkt under solen"
 
-#: src/core/modules/Planet.cpp:1225 src/core/modules/Planet.cpp:1234
+#: src/core/modules/Planet.cpp:1403 src/core/modules/Planet.cpp:1412
 msgid "Colongitude"
 msgstr "Kolongitud"
 
-#: src/core/modules/Planet.cpp:1267 src/core/modules/Planet.cpp:1274
+#: src/core/modules/Planet.cpp:1445 src/core/modules/Planet.cpp:1452
 msgid "Center point"
 msgstr "Centralpunkt"
 
-#: src/core/modules/Planet.cpp:1298
+#: src/core/modules/Planet.cpp:1476
 msgid "Eclipse magnitude"
 msgstr "Magnitud på förmörkelse"
 
-#: src/core/modules/Planet.cpp:1301
+#: src/core/modules/Planet.cpp:1479
 msgid "Eclipse obscuration"
 msgstr "Förmörkad del"
 
-#: src/core/modules/Planet.cpp:1303
+#: src/core/modules/Planet.cpp:1481
 msgid "Crescent angle"
 msgstr "Månskärans vinkel"
 
-#: src/core/modules/Planet.cpp:1331
+#: src/core/modules/Planet.cpp:1509
 msgid "Moon/Sun diameter ratio"
 msgstr "Kvot mellan månens och solens diametrar"
 
-#: src/core/modules/Planet.cpp:1334
+#: src/core/modules/Planet.cpp:1512
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(ringformig)"
 
-#: src/core/modules/Planet.cpp:1336
+#: src/core/modules/Planet.cpp:1514
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(total)"
 
-#: src/core/modules/Planet.cpp:1347
+#: src/core/modules/Planet.cpp:1525
 msgid "Central eclipse duration"
 msgstr "Varaktighet på central förmörkelse"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1349
+#: src/core/modules/Planet.cpp:1527
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "m"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1351
+#: src/core/modules/Planet.cpp:1529
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "s"
 
-#: src/core/modules/Planet.cpp:1352
+#: src/core/modules/Planet.cpp:1530
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Centrum på solförmörkelse (lat./long.)"
 
-#: src/core/modules/Planet.cpp:1362
+#: src/core/modules/Planet.cpp:1540
 msgid "Shadow center point is"
 msgstr "Centralpunkt för skugga är"
 
-#: src/core/modules/Planet.cpp:1364
+#: src/core/modules/Planet.cpp:1542
 msgid "km towards azimuth"
 msgstr "km mot azimut"
 
-#: src/core/modules/Planet.cpp:1367
+#: src/core/modules/Planet.cpp:1545
 msgid "Width of antumbra"
 msgstr "Bredd på antikärnskugga"
 
-#: src/core/modules/Planet.cpp:1369
+#: src/core/modules/Planet.cpp:1547
 msgid "Width of umbra"
 msgstr "Bredd på kärnskugga"
 
-#: src/core/modules/Planet.cpp:1387
+#: src/core/modules/Planet.cpp:1565
 msgid "Penumbral eclipse magnitude"
 msgstr "Magnitud på halvskuggeförmörkelse"
 
-#: src/core/modules/Planet.cpp:1390
+#: src/core/modules/Planet.cpp:1568
 msgid "Umbral eclipse magnitude"
 msgstr "Magnitud på kärnskuggeförmörkelse"
 
-#: src/core/modules/Planet.cpp:1397 src/gui/ViewDialog.cpp:928
+#: src/core/modules/Planet.cpp:1575 src/core/modules/Planet.cpp:1913
+#: src/gui/ViewDialog.cpp:928
 msgid "Albedo"
 msgstr "Albedo"
 
-#: src/core/modules/Planet.cpp:1400 src/core/modules/Comet.cpp:241
+#. TRANSLATORS: Unit of measure for speed - kilometers per second
+#: src/core/modules/Planet.cpp:1602
+msgctxt "speed"
+msgid "kilometers per second"
+msgstr "kilometer per sekund"
+
+#. TRANSLATORS: Unit of measure for speed - meters per second
+#: src/core/modules/Planet.cpp:1604
+msgctxt "speed"
+msgid "meters per second"
+msgstr "meter per sekund"
+
+#: src/core/modules/Planet.cpp:1611
+#, qt-format
+msgctxt "planet narration"
+msgid "A rotation takes %1."
+msgstr "En rotation tar %1."
+
+#: src/core/modules/Planet.cpp:1613
+#, qt-format
+msgctxt "planet narration"
+msgid "A rotation takes %1, while a Mean Solar Day takes %2."
+msgstr "En rotation tar %1, medan ett medelsoldygn tar %2."
+
+#: src/core/modules/Planet.cpp:1626 src/core/modules/Planet.cpp:1628
+#: src/core/modules/Planet.cpp:1635 src/core/modules/Planet.cpp:1637
+#, qt-format
+msgctxt "planet narration"
+msgid "The Equatorial rotation velocity is %1 %2"
+msgstr "Rotationshastigheten vid ekvatorn är %1 %2"
+
+#: src/core/modules/Planet.cpp:1686
+#, qt-format
+msgctxt "planet narration"
+msgid "The Moon is %1 days old and appears as %2"
+msgstr "Månen är %1 dagar gammal och visas som %2"
+
+#: src/core/modules/Planet.cpp:1688
+#, qt-format
+msgctxt "planet narration"
+msgid "The Moon is %1 days old"
+msgstr "Månen är %1 dagar gammal"
+
+#: src/core/modules/Planet.cpp:1703
+#, qt-format
+msgctxt "planet narration"
+msgid "The position angle of the bright limb is %1"
+msgstr "Positionsvinkel för den ljusa kanten är %1"
+
+#: src/core/modules/Planet.cpp:1708
+msgctxt "compass direction narration"
+msgid "South"
+msgstr "Söder"
+
+#: src/core/modules/Planet.cpp:1709
+msgctxt "compass direction narration"
+msgid "South South West"
+msgstr "Sydsydväst"
+
+#: src/core/modules/Planet.cpp:1710
+msgctxt "compass direction narration"
+msgid "South West"
+msgstr "Sydväst"
+
+#: src/core/modules/Planet.cpp:1711
+msgctxt "compass direction narration"
+msgid "West South West"
+msgstr "Västsydväst"
+
+#: src/core/modules/Planet.cpp:1712
+msgctxt "compass direction narration"
+msgid "West"
+msgstr "Väster"
+
+#: src/core/modules/Planet.cpp:1713
+msgctxt "compass direction narration"
+msgid "West NWest "
+msgstr "Västnordväst"
+
+#: src/core/modules/Planet.cpp:1714
+msgctxt "compass direction narration"
+msgid "North West"
+msgstr "Nordväst"
+
+#: src/core/modules/Planet.cpp:1715
+msgctxt "compass direction narration"
+msgid "North North West"
+msgstr "Nordnordväst"
+
+#: src/core/modules/Planet.cpp:1716
+msgctxt "compass direction narration"
+msgid "North"
+msgstr "Norr"
+
+#: src/core/modules/Planet.cpp:1717
+msgctxt "compass direction narration"
+msgid "North North East"
+msgstr "Nordnordost"
+
+#: src/core/modules/Planet.cpp:1718
+msgctxt "compass direction narration"
+msgid "North East"
+msgstr "Nordost"
+
+#: src/core/modules/Planet.cpp:1719
+msgctxt "compass direction narration"
+msgid "East North East"
+msgstr "Ostnordost"
+
+#: src/core/modules/Planet.cpp:1720
+msgctxt "compass direction narration"
+msgid "East"
+msgstr "Öster"
+
+#: src/core/modules/Planet.cpp:1721
+msgctxt "compass direction narration"
+msgid "East South East"
+msgstr "Ostsydost"
+
+#: src/core/modules/Planet.cpp:1722
+msgctxt "compass direction narration"
+msgid "South East"
+msgstr "Sydost"
+
+#: src/core/modules/Planet.cpp:1723
+msgctxt "compass direction narration"
+msgid "South South East"
+msgstr "Sydsydost"
+
+#: src/core/modules/Planet.cpp:1738
+msgctxt "object narration: emphasis stage 1/3"
+msgid "nicely"
+msgstr "trevligt"
+
+#: src/core/modules/Planet.cpp:1740
+msgctxt "object narration: emphasis stage 2/3"
+msgid "strongly"
+msgstr "starkt"
+
+#: src/core/modules/Planet.cpp:1742
+msgctxt "object narration: emphasis stage 3/3"
+msgid "extremely"
+msgstr "extremt"
+
+#: src/core/modules/Planet.cpp:1766
+#, qt-format
+msgctxt "planet narration"
+msgid "The position angle of the Moon's axis is at %1"
+msgstr "Positionsvinkeln för månaxeln är %1"
+
+#. TRANSLATORS: "Libration is [X degrees] towards [Y degrees], which
+#. [-/nicely/strongly/extremely] prefers the limb at [compass rose direction]"
+#: src/core/modules/Planet.cpp:1768
+#, qt-format
+msgctxt "planet narration"
+msgid "The libration is %1 towards %2, which %3 prefers the limb at the %4"
+msgstr "Librationen är %1 mot %2, vilket %3 placerar kanten vid %4"
+
+#: src/core/modules/Planet.cpp:1769
+#, qt-format
+msgctxt "planet narration"
+msgid "The Libration in longitude is %1, and in latitude %2"
+msgstr "Librationen i longitud är %1, och i latitud %2"
+
+#: src/core/modules/Planet.cpp:1770
+#, qt-format
+msgctxt "planet narration"
+msgid "The subsolar point is at longitude %1 and latitude %2"
+msgstr "Punkten under solen är vid longitud %1 och latitud %2"
+
+#: src/core/modules/Planet.cpp:1771
+#, qt-format
+msgctxt "planet narration"
+msgid "The colongitude is %1"
+msgstr "Kolongituden är %1"
+
+#: src/core/modules/Planet.cpp:1782
+msgctxt "Jupiter longitude system II, narration"
+msgid "in system two"
+msgstr "i system två"
+
+#: src/core/modules/Planet.cpp:1783
+msgctxt "Saturn longitude system III, narration"
+msgid "in system three"
+msgstr "i system tre"
+
+#: src/core/modules/Planet.cpp:1800
+#, qt-format
+msgid "The position Angle of the rotation axis is at %1"
+msgstr "Positionsvinkeln för rotationsaxeln är %1"
+
+#: src/core/modules/Planet.cpp:1802
+#, qt-format
+msgctxt "planet narration"
+msgid "The Center point %1 has longitude %2 and latitude %3"
+msgstr "Centrumpunkten %1 har longitud %2 och latitud %3"
+
+#: src/core/modules/Planet.cpp:1803
+#, qt-format
+msgctxt "planet narration"
+msgid "The Subsolar point %1 has longitude %2 and latitude %3"
+msgstr "Punkten under solen %1 har longitud %2 och latitud %3"
+
+#: src/core/modules/Planet.cpp:1825
+#, qt-format
+msgctxt "planet narration"
+msgid "We have a Solar eclipse of magnitude %1"
+msgstr "Vi har en solförmörkelse med magnitud %1"
+
+#: src/core/modules/Planet.cpp:1828
+#, qt-format
+msgctxt "planet narration"
+msgid "The eclipse obscuration is %1 percent"
+msgstr "Förmörkelsetäckningen är %1 procent"
+
+#: src/core/modules/Planet.cpp:1830
+#, qt-format
+msgctxt "planet narration"
+msgid "The crescent angle is at %1 degrees"
+msgstr "Månskärans vinkel är på %1 grader"
+
+#: src/core/modules/Planet.cpp:1857
+#, qt-format
+msgctxt "planet narration"
+msgid "The Moon to Sun diameter ratio is %1"
+msgstr "Kvoten mellan månen och solen är %1"
+
+#: src/core/modules/Planet.cpp:1860
+msgctxt "type of solar eclipse"
+msgid "(globally, the eclipse is annular)"
+msgstr "(globalt sett är förmörkelsen ringformig)"
+
+#: src/core/modules/Planet.cpp:1862
+msgctxt "type of solar eclipse"
+msgid "(globally, the eclipse is total)"
+msgstr "(globalt sett är förmörkelsen total)"
+
+#: src/core/modules/Planet.cpp:1872
+#, qt-format
+msgctxt "planet narration"
+msgid "The duration of the Central eclipse is %1 minutes and %2 seconds"
+msgstr "Centralförmörkelsens varaktighet är %1 minuter och %2 sekunder"
+
+#: src/core/modules/Planet.cpp:1875
+#, qt-format
+msgctxt "planet narration"
+msgid ""
+"The center of the solar eclipse is at latitude %1 degrees and longitude %2 "
+"degrees"
+msgstr ""
+"Solförmörkelsens centrum är vid latitud %1 grader och longitud %2 grader"
+
+#: src/core/modules/Planet.cpp:1878
+#, qt-format
+msgctxt "planet narration"
+msgid "The center of the solar eclipse is at latitude %1 and longitude %2"
+msgstr "Solförmörkelsens centrum är vid latitud %1 och longitud %2"
+
+#: src/core/modules/Planet.cpp:1884
+#, qt-format
+msgctxt "object narration"
+msgid "The shadow center point is %1 km towards azimuth %2 degrees"
+msgstr "Centrumpunkten för skuggan är %1 km mot azimut %2 grader"
+
+#: src/core/modules/Planet.cpp:1887
+#, qt-format
+msgctxt "planet narration"
+msgid "The width of the antumbra is %1 kilometers"
+msgstr "Bredden på anti-kärnskuggan är %1 kilometer"
+
+#: src/core/modules/Planet.cpp:1889
+#, qt-format
+msgctxt "planet narration"
+msgid "The width of the umbra is %1 kilometers"
+msgstr "Bredden på kärnskuggan är %1 kilometer"
+
+#: src/core/modules/Planet.cpp:1905
+#, qt-format
+msgctxt "planet narration"
+msgid "The penumbral eclipse magnitude is %1 percent"
+msgstr "Magnituden på halvskuggeförmörkelsen är %1 procent"
+
+#: src/core/modules/Planet.cpp:1907
+#, qt-format
+msgctxt "planet narration"
+msgid "The umbral eclipse magnitude is %1 percent"
+msgstr "Magnituden på kärnförmörkelsen är %1 procent"
+
+#: src/core/modules/Planet.cpp:1924
 msgid "Discovered"
 msgstr "Upptäckt"
 
-#: src/core/modules/Planet.cpp:1579
+#. TRANSLATORS: 3-part date. %1=genitive month name, %2=day numeral (add a
+#. point in format string if your language makes ordinals), %3=year
+#: src/core/modules/Planet.cpp:1939
+#, qt-format
+msgctxt "date narration"
+msgid "%1 %2, %3"
+msgstr "%1 %2, %3"
+
+#. TRANSLATORS: 2-part date. %1=month name, %2=year
+#: src/core/modules/Planet.cpp:1942
+#, qt-format
+msgctxt "date narration"
+msgid "%1 %2"
+msgstr "%1 %2"
+
+#. TRANSLATORS: Narration, only year of dicovery given in %1
+#. TRANSLATORS: Narration, only year and month of dicovery given in %1
+#: src/core/modules/Planet.cpp:1948 src/core/modules/Planet.cpp:1950
+#, qt-format
+msgctxt "planet narration"
+msgid "%1 was discovered in %1"
+msgstr "%1 upptäcktes %1"
+
+#. TRANSLATORS: Narration, day of dicovery given in %1
+#: src/core/modules/Planet.cpp:1952
+#, qt-format
+msgctxt "planet narration"
+msgid "%1 was discovered on %1"
+msgstr "%1 upptäcktes den %1"
+
+#. TRANSLATORS: Narration, only year of dicovery given in %1
+#. TRANSLATORS: Narration, only year and month of dicovery given in %1
+#: src/core/modules/Planet.cpp:1957 src/core/modules/Planet.cpp:1959
+#, qt-format
+msgctxt "planet narration"
+msgid "%1 was discovered in %1 by %2"
+msgstr "%1 upptäcktes år %1 av %2"
+
+#. TRANSLATORS: Narration, day of dicovery given in %1
+#: src/core/modules/Planet.cpp:1961
+#, qt-format
+msgctxt "planet narration"
+msgid "%1 was discovered on %1 by %2"
+msgstr "%1 upptäcktes den %1 av %2"
+
+#: src/core/modules/Planet.cpp:2145
 msgctxt "object narration"
 msgid "called"
 msgstr "som heter"
 
-#: src/core/modules/Planet.cpp:1586 src/translations.h:1020
+#: src/core/modules/Planet.cpp:2152 src/translations.h:1020
 msgctxt "object narration"
 msgid "a star"
 msgstr "en stjärna"
 
-#: src/core/modules/Planet.cpp:1587 src/translations.h:1021
+#: src/core/modules/Planet.cpp:2153 src/translations.h:1021
 msgctxt "object narration"
 msgid "a major planet"
 msgstr "en större planet"
 
-#: src/core/modules/Planet.cpp:1588 src/translations.h:1022
+#: src/core/modules/Planet.cpp:2154 src/translations.h:1022
 msgctxt "object narration"
 msgid "a planet moon"
 msgstr "en planetmåne"
 
-#: src/core/modules/Planet.cpp:1589 src/translations.h:1023
+#: src/core/modules/Planet.cpp:2155 src/translations.h:1023
 msgctxt "object narration"
 msgid "an observer"
 msgstr "en observatör"
 
-#: src/core/modules/Planet.cpp:1590 src/translations.h:1024
+#: src/core/modules/Planet.cpp:2156 src/translations.h:1024
 msgctxt "object narration"
 msgid "an artificial object"
 msgstr "ett artificiellt objekt"
 
-#: src/core/modules/Planet.cpp:1591 src/translations.h:1025
+#: src/core/modules/Planet.cpp:2157 src/translations.h:1025
 msgctxt "object narration"
 msgid "an asteroid"
 msgstr "en asteroid"
 
-#: src/core/modules/Planet.cpp:1592 src/translations.h:1026
+#: src/core/modules/Planet.cpp:2158 src/translations.h:1026
 msgctxt "object narration"
 msgid "a plutino"
 msgstr "en plutino"
 
-#: src/core/modules/Planet.cpp:1593 src/translations.h:1027
+#: src/core/modules/Planet.cpp:2159 src/translations.h:1027
 msgctxt "object narration"
 msgid "a comet"
 msgstr "en komet"
 
-#: src/core/modules/Planet.cpp:1594 src/translations.h:1028
+#: src/core/modules/Planet.cpp:2160 src/translations.h:1028
 msgctxt "object narration"
 msgid "a dwarf planet"
 msgstr "en dvärgplanet"
 
-#: src/core/modules/Planet.cpp:1595 src/translations.h:1029
+#: src/core/modules/Planet.cpp:2161 src/translations.h:1029
 msgctxt "object narration"
 msgid "a cubewano"
 msgstr "en cubewano"
 
-#: src/core/modules/Planet.cpp:1596 src/translations.h:1030
+#: src/core/modules/Planet.cpp:2162 src/translations.h:1030
 msgctxt "object narration"
 msgid "a scattered disc object"
 msgstr "ett scattered-disc-objekt"
 
-#: src/core/modules/Planet.cpp:1597 src/translations.h:1031
+#: src/core/modules/Planet.cpp:2163 src/translations.h:1031
 msgctxt "object narration"
 msgid "an Oort Cloud Object"
 msgstr "ett objekt från Oorts kometmoln"
 
-#: src/core/modules/Planet.cpp:1598 src/translations.h:1032
+#: src/core/modules/Planet.cpp:2164 src/translations.h:1032
 msgctxt "object narration"
 msgid "a sednoid"
 msgstr "en sednoid"
 
-#: src/core/modules/Planet.cpp:1599 src/translations.h:1033
+#: src/core/modules/Planet.cpp:2165 src/translations.h:1033
 msgctxt "object narration"
 msgid "an interstellar object"
 msgstr "ett interstellärt objekt"
 
-#: src/core/modules/Planet.cpp:1600 src/core/modules/Planet.cpp:1602
+#: src/core/modules/Planet.cpp:2166 src/core/modules/Planet.cpp:2168
 #: src/translations.h:1034
 msgctxt "object narration"
 msgid "an object of undefined type"
 msgstr "ett objekt av okänd natur"
 
-#: src/core/modules/Planet.cpp:1608
+#: src/core/modules/Planet.cpp:2178
 msgctxt "object narration"
 msgid "currently at visual magnitude of"
 msgstr "har just nu en skenbar magnitud på"
 
-#: src/core/modules/Planet.cpp:1611 src/core/StelObject.cpp:370
+#: src/core/modules/Planet.cpp:2181 src/core/StelObject.cpp:370
 #, qt-format
 msgctxt "object narration: reduced magnitude by extinction"
 msgid "reduced to %1 by %2 airmasses of atmospheric extinction"
 msgstr "reducerat till %1 av %2 luftmassors atmosfärsextinktion"
 
-#: src/core/modules/Planet.cpp:1641 src/core/StelObject.cpp:1548
+#: src/core/modules/Planet.cpp:2211 src/core/StelObject.cpp:1558
 msgctxt "object narration"
 msgid "In this skyculture, it lies within the area of"
 msgstr "I den här himmelskulturen ligger den inom arean"
@@ -3603,96 +4016,149 @@ msgstr "I den här himmelskulturen ligger den inom arean"
 #. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
 #. TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
 #. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
-#: src/core/modules/Planet.cpp:1649 src/core/modules/Planet.cpp:1656
-#: src/core/StelObject.cpp:1557 src/core/StelObject.cpp:1564
+#: src/core/modules/Planet.cpp:2219 src/core/modules/Planet.cpp:2226
+#: src/core/StelObject.cpp:1567 src/core/StelObject.cpp:1574
 #, qt-format
 msgctxt "object narration"
 msgid "Its %1 Position is %2"
 msgstr "Dess %1 position är %2"
 
-#: src/core/modules/Planet.cpp:1670
-msgctxt "object narration"
-msgid "in"
-msgstr "i"
-
-#: src/core/modules/Planet.cpp:1672
-msgctxt "object narration"
-msgid "on"
-msgstr "på"
+#: src/core/modules/Planet.cpp:2247
+#, qt-format
+msgctxt "planet narration"
+msgid ""
+"In one hour, %1 moves %2 towards %3 degrees, or %4 in right ascension and %5"
+" in declination"
+msgstr ""
+"På en timme rör sig %1 %2 mot %3 grader, eller %4 i rektascension och %5 i "
+"deklination"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:1686
+#: src/core/modules/Planet.cpp:2261
 msgctxt "distance, astronomical unit"
 msgid "Astronomical Units"
 msgstr "Astronomiska enheter"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:1688
+#: src/core/modules/Planet.cpp:2263
 msgctxt "object narration"
 msgid "or, in light time,"
 msgstr "eller, i ljustid,"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/Planet.cpp:1697 src/core/modules/Planet.cpp:1720
-#: src/core/modules/Planet.cpp:1793
+#: src/core/modules/Planet.cpp:2272 src/core/modules/Planet.cpp:2295
 msgctxt "distance"
 msgid "kilometers"
 msgstr "kilometer"
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
-#: src/core/modules/Planet.cpp:1704 src/core/modules/Planet.cpp:1727
+#: src/core/modules/Planet.cpp:2279 src/core/modules/Planet.cpp:2302
 msgctxt "distance"
 msgid "Million kilometers"
 msgstr "Miljoner kilometer"
 
-#: src/core/modules/Planet.cpp:1707
+#: src/core/modules/Planet.cpp:2282
 msgctxt "object narration"
 msgid "The current distance from the Sun amounts to"
 msgstr "Dess nuvarande avstånd från solen uppgår till"
 
-#: src/core/modules/Planet.cpp:1730
+#: src/core/modules/Planet.cpp:2305
 msgctxt "object narration"
 msgid "The current distance amounts to"
 msgstr "Dess nuvarande avstånd uppgår till"
 
-#: src/core/modules/Planet.cpp:1789
-msgctxt "object narration"
-msgid "The apparent diameter is"
-msgstr "Dess skenbara diameter är"
+#: src/core/modules/Planet.cpp:2319
+#, qt-format
+msgctxt "planet narration"
+msgid "The orbital velocity of %1 is %2 kilometers per second"
+msgstr "Banhastigheten för %1 är %2 kilometer per sekund"
 
-#: src/core/modules/Planet.cpp:1792
-msgctxt "object narration"
-msgid "The equatorial diameter is"
-msgstr "Dess ekvatordiameter är"
+#: src/core/modules/Planet.cpp:2323
+#, qt-format
+msgctxt "planet narration"
+msgid "while the heliocentric velocity is %1 kilometers per second"
+msgstr "medan den heliocentriska hastigheten är %1 kilometer per sekund"
 
-#: src/core/modules/Planet.cpp:1792
+#: src/core/modules/MinorPlanet.cpp:220
+msgid " or "
+msgstr "eller"
+
+#: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:185
+#, qt-format
 msgctxt "object narration"
-msgid "Its diameter is"
-msgstr "Dess diameter är"
+msgid "magnified %1 times"
+msgstr "förstorad &1 gånger"
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:217
+#: src/core/modules/MinorPlanet.cpp:240
 msgid "Tholen spectral type"
 msgstr "Tholen-spektraltyp"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:223
+#: src/core/modules/MinorPlanet.cpp:244
 msgid "SMASSII spectral type"
 msgstr "SMASSII-spektraltyp"
 
-#: src/core/modules/Comet.cpp:201
+#. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
+#: src/core/modules/MinorPlanet.cpp:259
+#, qt-format
+msgctxt "planet narration"
+msgid "Its Tholen spectral type is %1"
+msgstr "Tholen-spektraltypen är %1"
+
+#. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
+#: src/core/modules/MinorPlanet.cpp:263
+msgctxt "planet narration"
+msgid "Its SMASSII spectral type is"
+msgstr "SMASSII-spektraltypen är"
+
+#: src/core/modules/Comet.cpp:221
+#, qt-format
+msgctxt "comet narration"
+msgid "The comet is listed with an absolute magnitude of %1"
+msgstr "Kometen är listad att ha en absolut magnitud på %1"
+
+#: src/core/modules/Comet.cpp:239
 msgid "Core diameter"
 msgstr "Kärnans diameter"
 
-#: src/core/modules/Comet.cpp:206
+#: src/core/modules/Comet.cpp:244
 msgid "Coma diameter (estimate)"
 msgstr "Komans diameter (uppskattningsvis)"
 
-#: src/core/modules/Comet.cpp:228
+#: src/core/modules/Comet.cpp:266
 msgid "Gas tail length (estimate)"
 msgstr "Gassvansens längd (uppskattningsvis)"
 
-#: src/core/modules/Comet.cpp:514 src/core/StelProjectorClasses.cpp:873
+#: src/core/modules/Comet.cpp:280
+#, qt-format
+msgctxt "comet narration"
+msgid "Its core diameter is estimated at %1 kilometers"
+msgstr "Dess diameter på kärnan uppskattas vara %1 kilometer"
+
+#: src/core/modules/Comet.cpp:303
+#, qt-format
+msgctxt "comet narration"
+msgid "and the coma diameter at %1 million kilometers (or %2 degrees)"
+msgstr "och diameter på koman %1 miljoner kilometer (eller %2 grader)"
+
+#: src/core/modules/Comet.cpp:305
+#, qt-format
+msgctxt "comet narration"
+msgid "and the coma diameter at %1 kilometers (or %2 degrees)"
+msgstr "och diameter på koman %1 kilometer (eller %2 grader)"
+
+#: src/core/modules/Comet.cpp:306
+#, qt-format
+msgctxt "comet narration"
+msgid ""
+"The gas tail length is estimated to be %1 million kilometers long, or %2 "
+"degrees in the sky"
+msgstr ""
+"Längden på gassvansen uppskattas vara %1 miljoner kilometer lång, eller %2 "
+"grader på himlen"
+
+#: src/core/modules/Comet.cpp:596 src/core/StelProjectorClasses.cpp:873
 msgid "Orthographic"
 msgstr "Ortografisk"
 
@@ -3749,248 +4215,60 @@ msgstr "Förstora solen"
 msgid "Mark minor bodies"
 msgstr "Markera små himlakroppar"
 
-#: src/core/modules/StarWrapper.cpp:98
+#: src/core/modules/StarWrapper.cpp:103
 msgid "double star"
 msgstr "dubbelstjärna"
 
-#: src/core/modules/StarWrapper.cpp:104 src/core/modules/StarWrapper.cpp:793
-#: src/core/modules/StarWrapper.cpp:1254
-msgid "eruptive variable star"
-msgstr "eruptiv variabel stjärna"
-
-#: src/core/modules/StarWrapper.cpp:106 src/core/modules/StarWrapper.cpp:795
-#: src/core/modules/StarWrapper.cpp:1256
-msgid "pulsating variable star"
-msgstr "pulserande variabel stjärna"
-
-#: src/core/modules/StarWrapper.cpp:108 src/core/modules/StarWrapper.cpp:797
-#: src/core/modules/StarWrapper.cpp:1258
-msgid "rotating variable star"
-msgstr "roterande variabel stjärna"
-
-#: src/core/modules/StarWrapper.cpp:110 src/core/modules/StarWrapper.cpp:799
-#: src/core/modules/StarWrapper.cpp:1260
-msgid "cataclysmic variable star"
-msgstr "kataklysmisk variabel stjärna"
-
-#: src/core/modules/StarWrapper.cpp:112 src/core/modules/StarWrapper.cpp:801
-#: src/core/modules/StarWrapper.cpp:1262
-msgid "eclipsing binary system"
-msgstr "förmörkande dubbelsystem"
-
-#: src/core/modules/StarWrapper.cpp:116 src/core/modules/StarWrapper.cpp:805
-#: src/core/modules/StarWrapper.cpp:1266
-msgid "variable star"
-msgstr "variabel stjärna"
-
-#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:963
-#: src/core/modules/StarWrapper.cpp:1359
-#: plugins/Satellites/src/ui_satellitesDialog.h:1233
-msgid "Magnitude range"
-msgstr "Magnitudomfång"
-
-#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:963
-#: src/core/modules/StarWrapper.cpp:1359
-msgid "Photometric system"
-msgstr "Fotometriskt system"
-
-#: src/core/modules/StarWrapper.cpp:362 src/core/modules/StarWrapper.cpp:976
-#: plugins/Pulsars/src/Pulsar.cpp:202
-msgid "Proper motion"
-msgstr "Egenrörelse"
-
-#: src/core/modules/StarWrapper.cpp:364 src/core/modules/StarWrapper.cpp:370
-#: src/core/modules/StarWrapper.cpp:978 src/core/modules/StarWrapper.cpp:984
-#: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
-msgctxt "milliarc second per year"
-msgid "mas/yr"
-msgstr "mas/år"
-
-#: src/core/modules/StarWrapper.cpp:367 src/core/modules/StarWrapper.cpp:981
-#: plugins/Pulsars/src/Pulsar.cpp:205
-msgid "Proper motions by axes"
-msgstr "Egenrörelse efter axlar"
-
-#: src/core/modules/StarWrapper.cpp:379
+#: src/core/modules/StarWrapper.cpp:283
 msgid "Radial velocity"
 msgstr "Radialhastighet"
 
-#: src/core/modules/StarWrapper.cpp:396 src/core/modules/StarWrapper.cpp:1021
-#: src/core/modules/StarWrapper.cpp:1377 plugins/Quasars/src/Quasar.cpp:142
-#: plugins/Exoplanets/src/Exoplanet.cpp:329
-msgid "Spectral Type"
-msgstr "Spektraltyp"
-
-#: src/core/modules/StarWrapper.cpp:399 src/core/modules/StarWrapper.cpp:1024
-#: src/core/modules/StarWrapper.cpp:1380
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
-#: plugins/Exoplanets/src/Exoplanet.cpp:361
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
-msgid "Period"
-msgstr "Period"
-
-#: src/core/modules/StarWrapper.cpp:407 src/core/modules/StarWrapper.cpp:1032
-#: src/core/modules/StarWrapper.cpp:1388
-msgid "Next maximum light"
-msgstr "Nästa ljusmaxima"
-
-#: src/core/modules/StarWrapper.cpp:409 src/core/modules/StarWrapper.cpp:1034
-#: src/core/modules/StarWrapper.cpp:1390
-msgid "Next minimum light"
-msgstr "Nästa ljusminima"
-
-#: src/core/modules/StarWrapper.cpp:416 src/core/modules/StarWrapper.cpp:1041
-#: src/core/modules/StarWrapper.cpp:1397
-msgctxt "light curve"
-msgid "Rising time"
-msgstr "Ökningstid"
-
-#: src/core/modules/StarWrapper.cpp:418 src/core/modules/StarWrapper.cpp:1043
-#: src/core/modules/StarWrapper.cpp:1399
-msgid "Duration of eclipse"
-msgstr "Förmörkelsens varaktighet"
-
-#: src/core/modules/StarWrapper.cpp:428
+#: src/core/modules/StarWrapper.cpp:295
 msgid "Position angle"
 msgstr "Positionsvinkel"
 
-#: src/core/modules/StarWrapper.cpp:430 src/core/modules/StarWrapper.cpp:439
-#: src/core/StelObject.cpp:396
+#: src/core/modules/StarWrapper.cpp:297 src/core/modules/StarWrapper.cpp:306
+#: src/core/StelObject.cpp:406
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "för datum"
 
 #. TRANSLATORS: This is about the angular separation between components of a
 #. binary star.
-#: src/core/modules/StarWrapper.cpp:436 src/core/modules/StarWrapper.cpp:442
+#: src/core/modules/StarWrapper.cpp:303 src/core/modules/StarWrapper.cpp:309
 msgid "Component separation"
 msgstr "Separation på komponent"
 
-#: src/core/modules/StarWrapper.cpp:616
+#: src/core/modules/StarWrapper.cpp:418
 msgctxt "object narration"
 msgid "This star is described as "
 msgstr "Stjärnan beskrivs som"
 
-#: src/core/modules/StarWrapper.cpp:648
+#: src/core/modules/StarWrapper.cpp:450
 msgctxt "object narration"
 msgid "with absolute Magnitude of"
 msgstr "med en absolut magnitud på"
 
-#: src/core/modules/StarWrapper.cpp:654 src/core/modules/StarWrapper.cpp:1128
-#, qt-format
-msgctxt "object narration"
-msgid "Its B minus V Color Index is %1"
-msgstr "Dess B minus V färgindex är %1"
-
-#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:1150
-#: src/core/modules/StarWrapper.cpp:1473
-#, qt-format
-msgctxt "object narration, alternatives"
-msgid "either %1 or %2"
-msgstr "antingen %1 eller %2"
-
-#: src/core/modules/StarWrapper.cpp:672 src/core/modules/StarWrapper.cpp:1152
-#: src/core/modules/StarWrapper.cpp:1475
-#, qt-format
-msgctxt "object narration"
-msgid "Its magnitude range goes from %1 to %2 in the Photometric system %3."
-msgstr ""
-"Dess magnitudomfång går från %1 till %2 i det fotometriska systemet %3."
-
-#. TRANSLATORS: Its distance is x plus/minus y light years
-#: src/core/modules/StarWrapper.cpp:690 src/core/modules/StarWrapper.cpp:1177
-#, qt-format
-msgctxt "object narration"
-msgid "Its distance is %1 ± %2 light years."
-msgstr "Dess avstånd är %1 ± %2 ljusår."
-
-#: src/core/modules/StarWrapper.cpp:700 src/core/modules/StarWrapper.cpp:1165
-#, qt-format
-msgctxt "object narration"
-msgid ""
-"Its proper motion is %1 milli-arcseconds per year towards %2 degrees, or, by"
-" axes, %3 milli-arcseconds per year in right ascension and %4 in "
-"declination."
-msgstr ""
-"Dess egenrörelse är %1 millibågsekunder per år mot %2 grader, eller, efter "
-"axlar, %3 millibågsekunder per år i rektascension och %4 i deklination."
-
-#: src/core/modules/StarWrapper.cpp:708
+#: src/core/modules/StarWrapper.cpp:468
 #, qt-format
 msgctxt "object narration"
 msgid "Its radial velocity is %1 kilometers per second."
 msgstr "Dess radialhastighet är %1 kilometer per sekund."
 
-#: src/core/modules/StarWrapper.cpp:717 src/core/modules/StarWrapper.cpp:1188
-#, qt-format
-msgctxt "object narration"
-msgid "Its parallax is %1 ± %2 milli-arcseconds."
-msgstr "Dess parallax är %1 ± %2 millibågsekunder."
-
-#: src/core/modules/StarWrapper.cpp:720 src/core/modules/StarWrapper.cpp:1191
-#, qt-format
-msgctxt "object narration"
-msgid "Its parallax is %1 milli-arcseconds."
-msgstr "Dess parallax är %1 millibågsekunder."
-
-#: src/core/modules/StarWrapper.cpp:726 src/core/modules/StarWrapper.cpp:1205
-#: src/core/modules/StarWrapper.cpp:1494
-#, qt-format
-msgctxt "object narration"
-msgid "Its Spectral Type is %1."
-msgstr "Dess spektraltyp är %1."
-
-#: src/core/modules/StarWrapper.cpp:729 src/core/modules/StarWrapper.cpp:1208
-#: src/core/modules/StarWrapper.cpp:1497
-#, qt-format
-msgctxt "object narration"
-msgid "It has a period of %1 days"
-msgstr "Den har en period på %1 dagar"
-
-#: src/core/modules/StarWrapper.cpp:737 src/core/modules/StarWrapper.cpp:1216
-#: src/core/modules/StarWrapper.cpp:1505
-#, qt-format
-msgctxt "object narration"
-msgid "Next minimum light will be at %1 UTC"
-msgstr "Nästa ljusminima kommer ske %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:738 src/core/modules/StarWrapper.cpp:1217
-#: src/core/modules/StarWrapper.cpp:1506
-#, qt-format
-msgctxt "object narration"
-msgid "Next maximum light will be at %1 UTC"
-msgstr "Nästa ljusmaxima kommer ske %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:744 src/core/modules/StarWrapper.cpp:1223
-#: src/core/modules/StarWrapper.cpp:1512
-#, qt-format
-msgctxt "object narration"
-msgid "The duration fraction of an eclipse is %1, that is, %2."
-msgstr "Varaktighetsfraktionen på en förmörkelse är %1, det vill säga, %2."
-
-#. TRANSLATORS: "Rising" here is not a rise above the horizon, but the growing
-#. stage of a stellar light curve
-#: src/core/modules/StarWrapper.cpp:746 src/core/modules/StarWrapper.cpp:1225
-#: src/core/modules/StarWrapper.cpp:1514
-#, qt-format
-msgctxt "object narration: light curve"
-msgid "The rising time fraction is %1, that is, %2."
-msgstr "Tidsfraktionen för ökning är %1, det vill säga, %2."
-
-#: src/core/modules/StarWrapper.cpp:755
+#: src/core/modules/StarWrapper.cpp:478
 #, qt-format
 msgctxt "object narration"
 msgid "Its position angle as given for %1 is %2 degrees."
 msgstr "Dess positionsvinkel givet för %1 är %2 grader."
 
-#: src/core/modules/StarWrapper.cpp:756 src/core/modules/StarWrapper.cpp:763
+#: src/core/modules/StarWrapper.cpp:479 src/core/modules/StarWrapper.cpp:486
 msgctxt "coordinates for current epoch"
 msgid "current date"
 msgstr "nuvarande datum"
 
 #. TRANSLATORS: This is about the angular separation between components of a
 #. binary star.
-#: src/core/modules/StarWrapper.cpp:762
+#: src/core/modules/StarWrapper.cpp:485
 #, qt-format
 msgctxt "object narration"
 msgid "Its component separation for %1 is %2 arc-seconds (%3). "
@@ -3998,28 +4276,28 @@ msgstr "Dess separation på komponenter för %1 är %2 bågsekunder (%3)."
 
 #. TRANSLATORS: This is about the angular separation between components of a
 #. binary star.
-#: src/core/modules/StarWrapper.cpp:768
+#: src/core/modules/StarWrapper.cpp:491
 #, qt-format
 msgctxt "object narration"
 msgid "Its component separation for %1 is %2 arc-seconds. "
 msgstr "Dess separation på komponenter för %1 är %2 bågsekunder."
 
-#: src/core/modules/StarWrapper.cpp:1107 src/core/modules/StarWrapper.cpp:1440
+#: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:789
 #, qt-format
 msgctxt "object narration"
 msgid "Its type is %1 with variability type %2."
 msgstr "Dess typ är %1 med variabeltyp %2."
 
-#: src/core/modules/StarWrapper.cpp:1109 src/core/modules/StarWrapper.cpp:1442
+#: src/core/modules/StarWrapper.cpp:672 src/core/modules/StarWrapper.cpp:791
 #, qt-format
 msgctxt "object narration"
 msgid "Its type is %1."
 msgstr "Dess typ är %1."
 
-#: src/core/modules/StarWrapper.cpp:1451
-msgctxt "object narration"
-msgid "Its B minus V Color Index is"
-msgstr "Dess B-minus-V-färgindex är"
+#: src/core/modules/StarWrapper.cpp:686
+#, qt-format
+msgid "The star has an absolute Magnitude of %1"
+msgstr "Stjärnan har en absolut magnitud på %1"
 
 #: src/core/modules/MilkyWay.cpp:110
 msgid "Milky Way"
@@ -5237,364 +5515,370 @@ msgstr ""
 msgid "The object's visual magnitude is"
 msgstr "Objektets skenbara magnitud är"
 
-#: src/core/StelObject.cpp:398 src/core/StelObject.cpp:1053
+#: src/core/StelObject.cpp:386
+#, qt-format
+msgctxt "object narration"
+msgid "Its B minus V Color Index is %1"
+msgstr "Dess B minus V färgindex är %1"
+
+#: src/core/StelObject.cpp:408 src/core/StelObject.cpp:1063
 msgid "(apparent)"
 msgstr "(synlig)"
 
 #. TRANSLATORS: Right ascension/Polar distance
-#: src/core/StelObject.cpp:428
+#: src/core/StelObject.cpp:438
 msgctxt "celestial coordinate system"
 msgid "RA/PD"
 msgstr "RA/PA"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:433
+#: src/core/StelObject.cpp:443
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "Ra/Dek"
 
 #. TRANSLATORS: Hour angle/Polar distance
-#: src/core/StelObject.cpp:518
+#: src/core/StelObject.cpp:528
 msgctxt "celestial coordinate system"
 msgid "HA/PD"
 msgstr "HA/PA"
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:520
+#: src/core/StelObject.cpp:530
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "HA/Dec"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:569
+#: src/core/StelObject.cpp:579
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "Az./Alt."
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:595
+#: src/core/StelObject.cpp:605
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "Gal. long./lat."
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:620
+#: src/core/StelObject.cpp:630
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "Supergal. long./lat."
 
-#: src/core/StelObject.cpp:638
+#: src/core/StelObject.cpp:648
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "Ekl. long./lat."
 
-#: src/core/StelObject.cpp:697
+#: src/core/StelObject.cpp:707
 msgid "Ecliptic obliquity"
 msgstr "Ekliptikans snedhet"
 
-#: src/core/StelObject.cpp:726
+#: src/core/StelObject.cpp:736
 msgid "Mean Sidereal Time"
 msgstr "Genomsnittlig siderisk tid"
 
-#: src/core/StelObject.cpp:741
+#: src/core/StelObject.cpp:751
 msgid "Apparent Sidereal Time"
 msgstr "Skenbar siderisk tid"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:779 src/gui/AstroCalcDialog.cpp:947
+#: src/core/StelObject.cpp:789 src/gui/AstroCalcDialog.cpp:947
 #: src/gui/AstroCalcDialog.cpp:2204 src/gui/AstroCalcDialog.cpp:7675
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Meridianpassage"
 
-#: src/core/StelObject.cpp:780 src/gui/AstroCalcDialog.cpp:2203
+#: src/core/StelObject.cpp:790 src/gui/AstroCalcDialog.cpp:2203
 #: src/gui/AstroCalcDialog.cpp:7674
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Uppgång"
 
-#: src/core/StelObject.cpp:781 src/gui/AstroCalcDialog.cpp:2205
+#: src/core/StelObject.cpp:791 src/gui/AstroCalcDialog.cpp:2205
 #: src/gui/AstroCalcDialog.cpp:7678
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Nedgång"
 
-#: src/core/StelObject.cpp:849
+#: src/core/StelObject.cpp:859
 msgctxt "celestial event"
 msgid "Morning twilight"
 msgstr "Gryningsljus"
 
-#: src/core/StelObject.cpp:850
+#: src/core/StelObject.cpp:860
 msgctxt "celestial event"
 msgid "Evening twilight"
 msgstr "Skymningsljus"
 
-#: src/core/StelObject.cpp:871 plugins/NavStars/src/ui_navStarsWindow.h:532
+#: src/core/StelObject.cpp:881 plugins/NavStars/src/ui_navStarsWindow.h:532
 msgid "Daytime"
 msgstr "Dagsljus"
 
-#: src/core/StelObject.cpp:885
+#: src/core/StelObject.cpp:895
 msgid "Polar night"
 msgstr "Polarnatt"
 
-#: src/core/StelObject.cpp:887 src/core/StelObject.cpp:1439
+#: src/core/StelObject.cpp:897 src/core/StelObject.cpp:1449
 msgid "This object never rises"
 msgstr "Detta objekt går aldrig upp"
 
-#: src/core/StelObject.cpp:892
+#: src/core/StelObject.cpp:902
 msgid "Polar day"
 msgstr "Polardag"
 
-#: src/core/StelObject.cpp:894
+#: src/core/StelObject.cpp:904
 msgid "Circumpolar (never sets)"
 msgstr "Cirkumpolär (går aldrig ned)"
 
 #. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
 #. with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:912
+#: src/core/StelObject.cpp:922
 msgid "Max. E. Digression"
 msgstr "Max. ö. digression"
 
 #. TRANSLATORS: azimuth (abbrev.)
-#: src/core/StelObject.cpp:914
+#: src/core/StelObject.cpp:924
 msgctxt "celestial coordinate system"
 msgid "A"
 msgstr "A"
 
-#: src/core/StelObject.cpp:914
+#: src/core/StelObject.cpp:924
 msgctxt "celestial coordinate system"
 msgid "Az."
 msgstr "Az."
 
-#: src/core/StelObject.cpp:916
+#: src/core/StelObject.cpp:926
 msgctxt "celestial coordinate system"
 msgid "h"
 msgstr "h"
 
-#: src/core/StelObject.cpp:916
+#: src/core/StelObject.cpp:926
 msgctxt "celestial coordinate system"
 msgid "HA"
 msgstr "HA"
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
 #. stars with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:942
+#: src/core/StelObject.cpp:952
 msgid "Max. W. Digression"
 msgstr "Max. v. digression"
 
-#: src/core/StelObject.cpp:985
+#: src/core/StelObject.cpp:995
 msgid "Parallactic Angle"
 msgstr "Parallaxvinkel"
 
-#: src/core/StelObject.cpp:994 src/core/StelObject.cpp:1530
+#: src/core/StelObject.cpp:1004 src/core/StelObject.cpp:1540
 #: src/gui/AstroCalcDialog.cpp:7773
 msgid "IAU Constellation"
 msgstr "IAU-stjärnbild"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/StelObject.cpp:1016 src/translations.h:59
+#: src/core/StelObject.cpp:1026 src/translations.h:59
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:518
 msgid "Constellations"
 msgstr "Stjärnbilder"
 
-#: src/core/StelObject.cpp:1093
+#: src/core/StelObject.cpp:1103
 msgctxt "object narration"
 msgid "Equatorial coordinates for J2000: "
 msgstr "Ekvatoriella koordinater för J2000:"
 
-#: src/core/StelObject.cpp:1094 src/core/StelObject.cpp:1119
+#: src/core/StelObject.cpp:1104 src/core/StelObject.cpp:1129
 #, qt-format
 msgctxt "object narration"
 msgid "Right Ascension %1, and %2 %3. "
 msgstr "Rektascension %1, och %2 %3."
 
-#: src/core/StelObject.cpp:1095 src/core/StelObject.cpp:1120
-#: src/core/StelObject.cpp:1159
+#: src/core/StelObject.cpp:1105 src/core/StelObject.cpp:1130
+#: src/core/StelObject.cpp:1169
 msgctxt "object narration"
 msgid "Polar Distance"
 msgstr "Polärt avstånd"
 
-#: src/core/StelObject.cpp:1095 src/core/StelObject.cpp:1120
-#: src/core/StelObject.cpp:1159
+#: src/core/StelObject.cpp:1105 src/core/StelObject.cpp:1130
+#: src/core/StelObject.cpp:1169
 msgctxt "object narration"
 msgid "Declination"
 msgstr "Deklination"
 
-#: src/core/StelObject.cpp:1118
+#: src/core/StelObject.cpp:1128
 msgctxt "object narration"
 msgid "Equatorial coordinates of date: "
 msgstr "Ekvatoriella koordinater för datum:"
 
-#: src/core/StelObject.cpp:1157
+#: src/core/StelObject.cpp:1167
 msgctxt "object narration"
 msgid "Fixed-Equatorial coordinates of date:"
 msgstr "Fixerade ekvatoriella koordinater för datum:"
 
-#: src/core/StelObject.cpp:1158
+#: src/core/StelObject.cpp:1168
 #, qt-format
 msgctxt "object narration"
 msgid "Hour Angle %1, and %2 %3. "
 msgstr "Timvinkel %1, och %2 %3."
 
-#: src/core/StelObject.cpp:1204
+#: src/core/StelObject.cpp:1214
 msgctxt "object narration"
 msgid "Azimuthal coordinates are:"
 msgstr "Azimutala koordinater är:"
 
-#: src/core/StelObject.cpp:1205
+#: src/core/StelObject.cpp:1215
 #, qt-format
 msgctxt "object narration"
 msgid "Azimuth %1, and altitude %2. "
 msgstr "Azimut %1, och altitud %2."
 
-#: src/core/StelObject.cpp:1225
+#: src/core/StelObject.cpp:1235
 msgctxt "object narration"
 msgid "Galactic coordinates are:"
 msgstr "Galaktiska koordinater är:"
 
-#: src/core/StelObject.cpp:1226 src/core/StelObject.cpp:1247
-#: src/core/StelObject.cpp:1276 src/core/StelObject.cpp:1301
+#: src/core/StelObject.cpp:1236 src/core/StelObject.cpp:1257
+#: src/core/StelObject.cpp:1286 src/core/StelObject.cpp:1311
 #, qt-format
 msgctxt "object narration"
 msgid "Longitude %1, and latitude %2. "
 msgstr "Longitud %1, och latitud %2."
 
-#: src/core/StelObject.cpp:1246
+#: src/core/StelObject.cpp:1256
 msgctxt "object narration"
 msgid "Supergalactic coordinates are:"
 msgstr "Supergalaktiska koordinater är:"
 
-#: src/core/StelObject.cpp:1275
+#: src/core/StelObject.cpp:1285
 msgctxt "object narration"
 msgid "Ecliptical coordinates for Equinox 2000 are:"
 msgstr "Ekliptiska koordinater för dagjämning 2000 är:"
 
-#: src/core/StelObject.cpp:1300
+#: src/core/StelObject.cpp:1310
 msgctxt "object narration"
 msgid "Ecliptical coordinates of date are:"
 msgstr "Ekliptiska koordinater för datum är:"
 
-#: src/core/StelObject.cpp:1305
+#: src/core/StelObject.cpp:1315
 msgctxt "object narration"
 msgid "The Ecliptic obliquity of date is"
 msgstr "Ekliptikans snedhet för datum är"
 
-#: src/core/StelObject.cpp:1321
+#: src/core/StelObject.cpp:1331
 msgctxt "object narration"
 msgid "The Mean Sidereal Time is"
 msgstr "Genomsnittlig siderisk tid är"
 
-#: src/core/StelObject.cpp:1330
+#: src/core/StelObject.cpp:1340
 msgctxt "object narration"
 msgid "The Apparent Sidereal Time is"
 msgstr "Skenbar siderisk tid är"
 
-#: src/core/StelObject.cpp:1363
+#: src/core/StelObject.cpp:1373
 msgctxt "object narration; celestial event; passage across a meridian"
 msgid "Transit on this day is at:"
 msgstr "Meridianpassage på detta datum är:"
 
-#: src/core/StelObject.cpp:1364
+#: src/core/StelObject.cpp:1374
 msgctxt "object narration"
 msgid "Rise on this day is at:"
 msgstr "Uppgång på detta datum är:"
 
-#: src/core/StelObject.cpp:1365
+#: src/core/StelObject.cpp:1375
 msgctxt "object narration"
 msgid "Set on this day is at:"
 msgstr "Nedgång på detta datum är:"
 
-#: src/core/StelObject.cpp:1375
+#: src/core/StelObject.cpp:1385
 msgctxt "object narration"
 msgid "The object does not rise on this day."
 msgstr "Objektet går inte upp denna dag."
 
-#: src/core/StelObject.cpp:1389
+#: src/core/StelObject.cpp:1399
 msgctxt "object narration"
 msgid "There is no meridian transit on this day."
 msgstr "Det finns ingen meridianpassage för denna dag."
 
-#: src/core/StelObject.cpp:1401
+#: src/core/StelObject.cpp:1411
 msgctxt "object narration"
 msgid "The object does not set on this day."
 msgstr "Objektet går inte ner denna dag."
 
-#: src/core/StelObject.cpp:1417
+#: src/core/StelObject.cpp:1427
 #, qt-format
 msgctxt "celestial event"
 msgid "Morning twilight for a Solar altitude of %1 degrees begins at %2. "
 msgstr "Gryningen vid solaltitud på %1 grader börjar vid %2."
 
-#: src/core/StelObject.cpp:1418
+#: src/core/StelObject.cpp:1428
 #, qt-format
 msgctxt "celestial event"
 msgid "Evening twilight for a Solar altitude of %1 degrees ends at %2. "
 msgstr "Skymningen vid solaltitud på %1 grader slutar vid %2."
 
-#: src/core/StelObject.cpp:1429
+#: src/core/StelObject.cpp:1439
 msgctxt "object narration"
 msgid "Duration of Daytime"
 msgstr "Varaktighet på dagsljus"
 
-#: src/core/StelObject.cpp:1437
+#: src/core/StelObject.cpp:1447
 msgctxt "object narration"
 msgid "It is Polar night"
 msgstr "Det är polarnatt"
 
-#: src/core/StelObject.cpp:1444
+#: src/core/StelObject.cpp:1454
 msgid "It is Polar day"
 msgstr "Det är polardag"
 
-#: src/core/StelObject.cpp:1446
+#: src/core/StelObject.cpp:1456
 msgid "This object is circumpolar and so never sets"
 msgstr "Detta objekt är cirkumpolärt och går därför aldrig ner"
 
-#: src/core/StelObject.cpp:1480
+#: src/core/StelObject.cpp:1490
 #, qt-format
 msgctxt "object narration"
 msgid "Greatest Eastern Digression is at Azimuth %1, Hour Angle %2"
 msgstr "Största östliga digression är vid azimut %1, timvinkel %2"
 
-#: src/core/StelObject.cpp:1494
+#: src/core/StelObject.cpp:1504
 #, qt-format
 msgctxt "object narration"
 msgid "Greatest Western Digression is at Azimuth %1, Hour Angle %2"
 msgstr "Största västliga digression är vid azimut %1, timvinkel %2"
 
-#: src/core/StelObject.cpp:1519
+#: src/core/StelObject.cpp:1529
 msgctxt "object narration"
 msgid "The Parallactic Angle is"
 msgstr "Parallaxvinkeln är"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1950
+#: src/core/StelObject.cpp:1960
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "Solens A/a"
 
-#: src/core/StelObject.cpp:1950
+#: src/core/StelObject.cpp:1960
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "Solens az./alt."
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1968
+#: src/core/StelObject.cpp:1978
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "Månens A/a"
 
-#: src/core/StelObject.cpp:1968
+#: src/core/StelObject.cpp:1978
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "Månens az./alt."
 
-#: src/core/StelObject.cpp:2006
+#: src/core/StelObject.cpp:2016
 #, qt-format
 msgctxt "object narration"
 msgid "The Sun's azimuth is %1, and its altitude is %2."
 msgstr "Solens azimut är %1, och dess altitud är %2."
 
-#: src/core/StelObject.cpp:2017
+#: src/core/StelObject.cpp:2027
 #, qt-format
 msgctxt "object narration"
 msgid "The Moon's azimuth is %1, and its altitude is %2."
@@ -5627,14 +5911,14 @@ msgid "Reload the deep-sky objects background images"
 msgstr "Läs om bakgrundsbilder för djuprymdsobjekt"
 
 #. TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%'" in progress bar
-#: src/core/StelSkyLayerMgr.cpp:211
+#: src/core/StelSkyLayerMgr.cpp:229
 #, qt-format
 msgid "Loading '%1'"
 msgstr "Läser in \"%1\""
 
 #. TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%' from %URL%" in
 #. progress bar
-#: src/core/StelSkyLayerMgr.cpp:216
+#: src/core/StelSkyLayerMgr.cpp:234
 #, qt-format
 msgid "Loading '%1' from %2"
 msgstr "Läser in '%1' från %2"
@@ -5650,35 +5934,28 @@ msgid "Lunar Station"
 msgstr "Månstation"
 
 #: src/core/StelSkyCultureSkyPartition.cpp:527 src/core/StelUtils.cpp:344
-#: src/core/StelUtils.cpp:518 src/core/StelUtils.cpp:567
-#: src/core/StelUtils.cpp:1535
+#: src/core/StelUtils.cpp:520 src/core/StelUtils.cpp:569
+#: src/core/StelUtils.cpp:1537
 msgctxt "object narration"
 msgid "minutes"
 msgstr "minuter"
 
-#: src/core/StelSkyCultureSkyPartition.cpp:529 src/core/StelUtils.cpp:346
-#: src/core/StelUtils.cpp:519 src/core/StelUtils.cpp:568
-#: src/core/StelUtils.cpp:1537
-msgctxt "object narration"
-msgid "seconds"
-msgstr "sekunder"
-
-#: src/core/StelSkyCultureSkyPartition.cpp:530
+#: src/core/StelSkyCultureSkyPartition.cpp:529
 msgctxt "object narration; quarter part of nakshatra"
 msgid "pada"
 msgstr "pada"
 
-#: src/core/StelSkyCultureSkyPartition.cpp:571
+#: src/core/StelSkyCultureSkyPartition.cpp:570
 msgctxt "object narration"
 msgid "Begin of"
 msgstr "Början på"
 
-#: src/core/StelSkyCultureSkyPartition.cpp:571
+#: src/core/StelSkyCultureSkyPartition.cpp:570
 msgctxt "object narration"
 msgid "Center of"
 msgstr "I mitten av"
 
-#: src/core/StelSkyCultureSkyPartition.cpp:571
+#: src/core/StelSkyCultureSkyPartition.cpp:570
 msgctxt "object narration"
 msgid "End of"
 msgstr "Slutet av"
@@ -6390,21 +6667,27 @@ msgctxt "duration"
 msgid "seconds"
 msgstr "sekunder"
 
-#: src/core/StelUtils.cpp:343 src/core/StelUtils.cpp:1534
+#: src/core/StelUtils.cpp:343 src/core/StelUtils.cpp:1536
 msgctxt "object narration"
 msgid "hours"
 msgstr "timmar"
+
+#: src/core/StelUtils.cpp:346 src/core/StelUtils.cpp:521
+#: src/core/StelUtils.cpp:570 src/core/StelUtils.cpp:1539
+msgctxt "object narration"
+msgid "seconds"
+msgstr "sekunder"
 
 #: src/core/StelUtils.cpp:437 src/core/StelUtils.cpp:489
 msgid "minus"
 msgstr "minus"
 
-#: src/core/StelUtils.cpp:441
+#: src/core/StelUtils.cpp:441 src/core/StelUtils.cpp:493
 msgctxt "object narration"
 msgid "arc minutes"
 msgstr "bågminuter"
 
-#: src/core/StelUtils.cpp:444
+#: src/core/StelUtils.cpp:444 src/core/StelUtils.cpp:496
 msgctxt "object narration"
 msgid "arc seconds"
 msgstr "bågsekunder"
@@ -6417,229 +6700,221 @@ msgstr "plus"
 msgid "degrees"
 msgstr "grader"
 
-#: src/core/StelUtils.cpp:493
-msgid "minutes"
-msgstr "minuter"
-
-#: src/core/StelUtils.cpp:493 src/ui_astroCalcDialog.h:2352
+#: src/core/StelUtils.cpp:495 src/ui_astroCalcDialog.h:2352
 #: src/ui_astroCalcDialog.h:2454 plugins/Satellites/src/Satellite.cpp:493
 msgid "and"
 msgstr "och"
 
-#: src/core/StelUtils.cpp:495 src/ui_configurationDialog.h:2706
-msgid "seconds"
-msgstr "sekunder"
-
-#: src/core/StelUtils.cpp:526 src/core/StelUtils.cpp:528
+#: src/core/StelUtils.cpp:528 src/core/StelUtils.cpp:530
 msgctxt "object narration"
 msgid "North"
 msgstr "Norr"
 
-#: src/core/StelUtils.cpp:526 src/core/StelUtils.cpp:528
+#: src/core/StelUtils.cpp:528 src/core/StelUtils.cpp:530
 msgctxt "object narration"
 msgid "South"
 msgstr "Söder"
 
-#: src/core/StelUtils.cpp:574 src/core/StelUtils.cpp:580
+#: src/core/StelUtils.cpp:576 src/core/StelUtils.cpp:582
 msgctxt "object narration"
 msgid "East"
 msgstr "Öster"
 
-#: src/core/StelUtils.cpp:575 src/core/StelUtils.cpp:581
+#: src/core/StelUtils.cpp:577 src/core/StelUtils.cpp:583
 msgctxt "object narration"
 msgid "West"
 msgstr "Väster"
 
-#: src/core/StelUtils.cpp:3126
+#: src/core/StelUtils.cpp:3128
 msgid "Alpha"
 msgstr "Alfa"
 
-#: src/core/StelUtils.cpp:3126 src/ui_searchDialogGui.h:774
+#: src/core/StelUtils.cpp:3128 src/ui_searchDialogGui.h:774
 msgid "alpha"
 msgstr "alfa"
 
-#: src/core/StelUtils.cpp:3127
+#: src/core/StelUtils.cpp:3129
 msgid "Beta"
 msgstr "Beta"
 
-#: src/core/StelUtils.cpp:3127 src/ui_searchDialogGui.h:777
+#: src/core/StelUtils.cpp:3129 src/ui_searchDialogGui.h:777
 msgid "beta"
 msgstr "beta"
 
-#: src/core/StelUtils.cpp:3128 src/gui/AstroCalcDialog.cpp:2457
+#: src/core/StelUtils.cpp:3130 src/gui/AstroCalcDialog.cpp:2457
 #: src/gui/AstroCalcDialog.cpp:3049
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/core/StelUtils.cpp:3128 src/ui_searchDialogGui.h:780
+#: src/core/StelUtils.cpp:3130 src/ui_searchDialogGui.h:780
 msgid "gamma"
 msgstr "gamma"
 
-#: src/core/StelUtils.cpp:3129
+#: src/core/StelUtils.cpp:3131
 msgid "Delta"
 msgstr "Delta"
 
-#: src/core/StelUtils.cpp:3129 src/ui_searchDialogGui.h:783
+#: src/core/StelUtils.cpp:3131 src/ui_searchDialogGui.h:783
 msgid "delta"
 msgstr "delta"
 
-#: src/core/StelUtils.cpp:3130
+#: src/core/StelUtils.cpp:3132
 msgid "Epsilon"
 msgstr "Epsilon"
 
-#: src/core/StelUtils.cpp:3130 src/ui_searchDialogGui.h:786
+#: src/core/StelUtils.cpp:3132 src/ui_searchDialogGui.h:786
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/core/StelUtils.cpp:3132
+#: src/core/StelUtils.cpp:3134
 msgid "Zeta"
 msgstr "Zeta"
 
-#: src/core/StelUtils.cpp:3132 src/ui_searchDialogGui.h:789
+#: src/core/StelUtils.cpp:3134 src/ui_searchDialogGui.h:789
 msgid "zeta"
 msgstr "zeta"
 
-#: src/core/StelUtils.cpp:3133
+#: src/core/StelUtils.cpp:3135
 msgid "Eta"
 msgstr "Eta"
 
-#: src/core/StelUtils.cpp:3133 src/ui_searchDialogGui.h:792
+#: src/core/StelUtils.cpp:3135 src/ui_searchDialogGui.h:792
 msgid "eta"
 msgstr "eta"
 
-#: src/core/StelUtils.cpp:3134
+#: src/core/StelUtils.cpp:3136
 msgid "Theta"
 msgstr "Theta"
 
-#: src/core/StelUtils.cpp:3134 src/ui_searchDialogGui.h:795
+#: src/core/StelUtils.cpp:3136 src/ui_searchDialogGui.h:795
 msgid "theta"
 msgstr "theta"
 
-#: src/core/StelUtils.cpp:3135
+#: src/core/StelUtils.cpp:3137
 msgid "Iota"
 msgstr "Iota"
 
-#: src/core/StelUtils.cpp:3135 src/ui_searchDialogGui.h:771
+#: src/core/StelUtils.cpp:3137 src/ui_searchDialogGui.h:771
 msgid "iota"
 msgstr "iota"
 
-#: src/core/StelUtils.cpp:3136
+#: src/core/StelUtils.cpp:3138
 msgid "Kappa"
 msgstr "Kappa"
 
-#: src/core/StelUtils.cpp:3136 src/ui_searchDialogGui.h:798
+#: src/core/StelUtils.cpp:3138 src/ui_searchDialogGui.h:798
 msgid "kappa"
 msgstr "kappa"
 
-#: src/core/StelUtils.cpp:3138
+#: src/core/StelUtils.cpp:3140
 msgid "Lambda"
 msgstr "Lambda"
 
-#: src/core/StelUtils.cpp:3138 src/ui_searchDialogGui.h:801
+#: src/core/StelUtils.cpp:3140 src/ui_searchDialogGui.h:801
 msgid "lambda"
 msgstr "lambda"
 
-#: src/core/StelUtils.cpp:3139
+#: src/core/StelUtils.cpp:3141
 msgid "Mu"
 msgstr "My"
 
-#: src/core/StelUtils.cpp:3139 src/ui_searchDialogGui.h:804
+#: src/core/StelUtils.cpp:3141 src/ui_searchDialogGui.h:804
 msgid "mu"
 msgstr "mu"
 
-#: src/core/StelUtils.cpp:3140
+#: src/core/StelUtils.cpp:3142
 msgid "Nu"
 msgstr "Ny"
 
-#: src/core/StelUtils.cpp:3140 src/ui_searchDialogGui.h:807
+#: src/core/StelUtils.cpp:3142 src/ui_searchDialogGui.h:807
 msgid "nu"
 msgstr "nu"
 
-#: src/core/StelUtils.cpp:3141
+#: src/core/StelUtils.cpp:3143
 msgid "Xi"
 msgstr "Xi"
 
-#: src/core/StelUtils.cpp:3141 src/ui_searchDialogGui.h:810
+#: src/core/StelUtils.cpp:3143 src/ui_searchDialogGui.h:810
 msgid "xi"
 msgstr "xi"
 
-#: src/core/StelUtils.cpp:3142
+#: src/core/StelUtils.cpp:3144
 msgid "Omicron"
 msgstr "Omikron"
 
-#: src/core/StelUtils.cpp:3142 src/ui_searchDialogGui.h:813
+#: src/core/StelUtils.cpp:3144 src/ui_searchDialogGui.h:813
 msgid "omicron"
 msgstr "omikron"
 
-#: src/core/StelUtils.cpp:3144
+#: src/core/StelUtils.cpp:3146
 msgid "Pi"
 msgstr "Pi"
 
-#: src/core/StelUtils.cpp:3144 src/ui_searchDialogGui.h:816
+#: src/core/StelUtils.cpp:3146 src/ui_searchDialogGui.h:816
 msgid "pi"
 msgstr "pi"
 
-#: src/core/StelUtils.cpp:3145
+#: src/core/StelUtils.cpp:3147
 msgid "Rho"
 msgstr "Rho"
 
-#: src/core/StelUtils.cpp:3145 src/ui_searchDialogGui.h:819
+#: src/core/StelUtils.cpp:3147 src/ui_searchDialogGui.h:819
 msgid "rho"
 msgstr "rho"
 
-#: src/core/StelUtils.cpp:3146
+#: src/core/StelUtils.cpp:3148
 msgid "Sigma"
 msgstr "Sigma"
 
-#: src/core/StelUtils.cpp:3146 src/ui_searchDialogGui.h:822
+#: src/core/StelUtils.cpp:3148 src/ui_searchDialogGui.h:822
 msgid "sigma"
 msgstr "sigma"
 
-#: src/core/StelUtils.cpp:3147
+#: src/core/StelUtils.cpp:3149
 msgid "Tau"
 msgstr "Tau"
 
-#: src/core/StelUtils.cpp:3147 src/ui_searchDialogGui.h:825
+#: src/core/StelUtils.cpp:3149 src/ui_searchDialogGui.h:825
 msgid "tau"
 msgstr "tau"
 
-#: src/core/StelUtils.cpp:3148
+#: src/core/StelUtils.cpp:3150
 msgid "Upsilon"
 msgstr "Ypsilon"
 
-#: src/core/StelUtils.cpp:3148 src/ui_searchDialogGui.h:828
+#: src/core/StelUtils.cpp:3150 src/ui_searchDialogGui.h:828
 msgid "upsilon"
 msgstr "ypsilon"
 
-#: src/core/StelUtils.cpp:3150
+#: src/core/StelUtils.cpp:3152
 msgid "Phi"
 msgstr "Fi"
 
-#: src/core/StelUtils.cpp:3150 src/ui_searchDialogGui.h:831
+#: src/core/StelUtils.cpp:3152 src/ui_searchDialogGui.h:831
 msgid "phi"
 msgstr "phi"
 
-#: src/core/StelUtils.cpp:3151
+#: src/core/StelUtils.cpp:3153
 msgid "Chi"
 msgstr "Chi"
 
-#: src/core/StelUtils.cpp:3151 src/ui_searchDialogGui.h:834
+#: src/core/StelUtils.cpp:3153 src/ui_searchDialogGui.h:834
 msgid "chi"
 msgstr "chi"
 
-#: src/core/StelUtils.cpp:3152
+#: src/core/StelUtils.cpp:3154
 msgid "Psi"
 msgstr "Psi"
 
-#: src/core/StelUtils.cpp:3152 src/ui_searchDialogGui.h:837
+#: src/core/StelUtils.cpp:3154 src/ui_searchDialogGui.h:837
 msgid "psi"
 msgstr "psi"
 
-#: src/core/StelUtils.cpp:3153
+#: src/core/StelUtils.cpp:3155
 msgid "Omega"
 msgstr "Omega"
 
-#: src/core/StelUtils.cpp:3153 src/ui_searchDialogGui.h:840
+#: src/core/StelUtils.cpp:3155 src/ui_searchDialogGui.h:840
 msgid "omega"
 msgstr "omega"
 
@@ -6716,7 +6991,7 @@ msgstr "Upphovsmän"
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:1593 src/gui/HelpDialog.cpp:516
+#: src/gui/ConfigurationDialog.cpp:1593 src/gui/HelpDialog.cpp:536
 #: src/scripting/StelScriptMgr.cpp:656
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
@@ -7079,7 +7354,7 @@ msgstr "Hjälp för Stellarium"
 msgid "Keys"
 msgstr "Tangenter"
 
-#: src/gui/HelpDialog.cpp:288 src/gui/HelpDialog.cpp:434
+#: src/gui/HelpDialog.cpp:288 src/gui/HelpDialog.cpp:454
 msgid "Further Reading"
 msgstr "Ytterligare läsning"
 
@@ -7193,11 +7468,39 @@ msgstr "Användargränssnitt för text"
 msgid "Activate TUI"
 msgstr "Aktivera TUI"
 
-#: src/gui/HelpDialog.cpp:401
+#: src/gui/HelpDialog.cpp:402
+msgid "⌥+Arrow keys"
+msgstr "⌥+Piltangenter"
+
+#: src/gui/HelpDialog.cpp:406
+msgid "Ctrl+Arrow keys"
+msgstr "Ctrl+Piltangenter"
+
+#: src/gui/HelpDialog.cpp:409
+msgid "Move camera forward/backward/left/right"
+msgstr "Rör kameran framåt/bakåt/vänster/höger"
+
+#: src/gui/HelpDialog.cpp:411
+msgid "Speed up camera movement by 5×"
+msgstr "Snabba upp kamerarörelsen med 5×"
+
+#: src/gui/HelpDialog.cpp:413
+msgid "Speed up camera movement by 10×"
+msgstr "Snabba upp kamerarörelsen med 10×"
+
+#: src/gui/HelpDialog.cpp:414
+msgid "Shift"
+msgstr "Shift"
+
+#: src/gui/HelpDialog.cpp:415
+msgid "Move camera up/down"
+msgstr "Flytta kameran upp/ner"
+
+#: src/gui/HelpDialog.cpp:421
 msgid "Special local keys"
 msgstr "Speciella lokala tangenter"
 
-#: src/gui/HelpDialog.cpp:402
+#: src/gui/HelpDialog.cpp:422
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
@@ -7205,56 +7508,56 @@ msgstr ""
 "Alla dessa hotkeys finns lokalt tillgängliga att köra ett specifikt fönster "
 "eller flik är öppet."
 
-#: src/gui/HelpDialog.cpp:403 src/ui_scriptConsole.h:345
+#: src/gui/HelpDialog.cpp:423 src/ui_scriptConsole.h:345
 msgid "Script console"
 msgstr "Skriptkonsol"
 
-#: src/gui/HelpDialog.cpp:404 src/ui_scriptConsole.h:347
+#: src/gui/HelpDialog.cpp:424 src/ui_scriptConsole.h:347
 msgid "Load script from file"
 msgstr "Läs in skript från fil"
 
-#: src/gui/HelpDialog.cpp:406 src/ui_scriptConsole.h:351
+#: src/gui/HelpDialog.cpp:426 src/ui_scriptConsole.h:351
 msgid "Save script to file"
 msgstr "Spara skript till fil"
 
-#: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:369
+#: src/gui/HelpDialog.cpp:428 src/ui_scriptConsole.h:369
 msgid "Run script"
 msgstr "Kör skript"
 
-#: src/gui/HelpDialog.cpp:410 src/ui_astroCalcDialog.h:2274
+#: src/gui/HelpDialog.cpp:430 src/ui_astroCalcDialog.h:2274
 msgid "Astronomical calculations"
 msgstr "Astronomiska beräkningar"
 
-#: src/gui/HelpDialog.cpp:411 src/ui_astroCalcDialog.h:2329
+#: src/gui/HelpDialog.cpp:431 src/ui_astroCalcDialog.h:2329
 #: src/ui_astroCalcDialog.h:2334
 msgid "Update positions"
 msgstr "Uppdatera positioner"
 
-#: src/gui/HelpDialog.cpp:414 src/ui_astroCalcDialog.h:2346
+#: src/gui/HelpDialog.cpp:434 src/ui_astroCalcDialog.h:2346
 msgid "Calculate ephemeris"
 msgstr "Beräkna efemerid"
 
-#: src/gui/HelpDialog.cpp:417
+#: src/gui/HelpDialog.cpp:437
 msgid "Calculate RTS"
 msgstr "Beräkna UPN"
 
-#: src/gui/HelpDialog.cpp:419 src/ui_astroCalcDialog.h:2476
+#: src/gui/HelpDialog.cpp:439 src/ui_astroCalcDialog.h:2476
 msgid "Calculate phenomena"
 msgstr "Beräkna fenomen"
 
-#: src/gui/HelpDialog.cpp:421
+#: src/gui/HelpDialog.cpp:441
 msgid "Calculate solar eclipses"
 msgstr "Beräkna solförmörkelser"
 
-#: src/gui/HelpDialog.cpp:423
+#: src/gui/HelpDialog.cpp:443
 msgid "Calculate lunar eclipses"
 msgstr "Beräkna månförmörkelser"
 
-#: src/gui/HelpDialog.cpp:425 src/ui_astroCalcDialog.h:2593
+#: src/gui/HelpDialog.cpp:445 src/ui_astroCalcDialog.h:2593
 msgid "Calculate transits"
 msgstr "Beräkna passager"
 
-#: src/gui/HelpDialog.cpp:435
+#: src/gui/HelpDialog.cpp:455
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -7263,29 +7566,29 @@ msgstr ""
 "webbläsare:\n"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:439
+#: src/gui/HelpDialog.cpp:459
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Frågor och svar} om Stellarium."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:444
+#: src/gui/HelpDialog.cpp:464
 msgid "{The Stellarium Wiki} - general information."
 msgstr "{Stellarium Wiki} - allmän information."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:449
+#: src/gui/HelpDialog.cpp:469
 msgid "{The landscapes} - user-contributed landscapes for Stellarium."
 msgstr "{Landskap} - landskap till Stellarium som användarna bidragit med."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:454
+#: src/gui/HelpDialog.cpp:474
 msgid "{The scripts} - user-contributed and official scripts for Stellarium."
 msgstr ""
 "{Skript} - skript till Stellarium, både officiella och som användarna "
 "bidragit med."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:459
+#: src/gui/HelpDialog.cpp:479
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -7295,64 +7598,64 @@ msgstr ""
 "eller saknas och inte finns i översikten, kan du skriva en felrapport här."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:464
+#: src/gui/HelpDialog.cpp:484
 msgid "{Google Groups} - discuss Stellarium with other users."
 msgstr "{Google Grupper} - diskutera Stellarium med andra användare."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:469
+#: src/gui/HelpDialog.cpp:489
 msgid "{Open Collective} - donations to the Stellarium development team."
 msgstr "{Öppet kollektiv} - donationer till Stellariums utvecklingsteam."
 
-#: src/gui/HelpDialog.cpp:517
+#: src/gui/HelpDialog.cpp:537
 msgid "Based on Qt"
 msgstr "Baserad på Qt"
 
-#: src/gui/HelpDialog.cpp:518
+#: src/gui/HelpDialog.cpp:538
 msgid "Running on Operating System"
 msgstr "Körs på operativsystem"
 
-#: src/gui/HelpDialog.cpp:539
+#: src/gui/HelpDialog.cpp:559
 msgid "Developers"
 msgstr "Utvecklare"
 
-#: src/gui/HelpDialog.cpp:540
+#: src/gui/HelpDialog.cpp:560
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Projektkoordinator och huvudutvecklare: %1"
 
-#: src/gui/HelpDialog.cpp:541 src/gui/HelpDialog.cpp:552
+#: src/gui/HelpDialog.cpp:561 src/gui/HelpDialog.cpp:572
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafisk / annan formgivare: %1"
 
-#: src/gui/HelpDialog.cpp:542 src/gui/HelpDialog.cpp:543
-#: src/gui/HelpDialog.cpp:544 src/gui/HelpDialog.cpp:545
-#: src/gui/HelpDialog.cpp:546 src/gui/HelpDialog.cpp:547
-#: src/gui/HelpDialog.cpp:554 src/gui/HelpDialog.cpp:555
-#: src/gui/HelpDialog.cpp:556 src/gui/HelpDialog.cpp:557
-#: src/gui/HelpDialog.cpp:558 src/gui/HelpDialog.cpp:559
-#: src/gui/HelpDialog.cpp:560 src/gui/HelpDialog.cpp:561
 #: src/gui/HelpDialog.cpp:562 src/gui/HelpDialog.cpp:563
+#: src/gui/HelpDialog.cpp:564 src/gui/HelpDialog.cpp:565
+#: src/gui/HelpDialog.cpp:566 src/gui/HelpDialog.cpp:567
+#: src/gui/HelpDialog.cpp:574 src/gui/HelpDialog.cpp:575
+#: src/gui/HelpDialog.cpp:576 src/gui/HelpDialog.cpp:577
+#: src/gui/HelpDialog.cpp:578 src/gui/HelpDialog.cpp:579
+#: src/gui/HelpDialog.cpp:580 src/gui/HelpDialog.cpp:581
+#: src/gui/HelpDialog.cpp:582 src/gui/HelpDialog.cpp:583
 #, qt-format
 msgid "Developer: %1"
 msgstr "Utvecklare: %1"
 
-#: src/gui/HelpDialog.cpp:548
+#: src/gui/HelpDialog.cpp:568
 #, qt-format
 msgid "Sky cultures researcher: %1"
 msgstr "Himmelskultursforskare: %1"
 
-#: src/gui/HelpDialog.cpp:549
+#: src/gui/HelpDialog.cpp:569
 #, qt-format
 msgid "Tester: %1"
 msgstr "Tester: %1"
 
-#: src/gui/HelpDialog.cpp:550
+#: src/gui/HelpDialog.cpp:570
 msgid "Former Developers"
 msgstr "Tidigare utvecklare"
 
-#: src/gui/HelpDialog.cpp:551
+#: src/gui/HelpDialog.cpp:571
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -7360,22 +7663,22 @@ msgstr ""
 "Ett flertal personer har gjort betydande insatser, men är inte längre "
 "aktiva. Deras arbete har varit till stor hjälp för projektet:"
 
-#: src/gui/HelpDialog.cpp:553
+#: src/gui/HelpDialog.cpp:573
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Dokument författare / utvecklare: %1"
 
-#: src/gui/HelpDialog.cpp:564 src/gui/HelpDialog.cpp:565
+#: src/gui/HelpDialog.cpp:584 src/gui/HelpDialog.cpp:585
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX-utvecklare: %1"
 
-#: src/gui/HelpDialog.cpp:566
+#: src/gui/HelpDialog.cpp:586
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Fortlöpande integrering: %1"
 
-#: src/gui/HelpDialog.cpp:567
+#: src/gui/HelpDialog.cpp:587
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:629
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
@@ -7389,7 +7692,7 @@ msgstr "Fortlöpande integrering: %1"
 msgid "Contributors"
 msgstr "Medverkande"
 
-#: src/gui/HelpDialog.cpp:568
+#: src/gui/HelpDialog.cpp:588
 #, qt-format
 msgid ""
 "Many individuals have made contributions to the project and their work has "
@@ -7398,11 +7701,11 @@ msgstr ""
 "Många individer har bidragit till projektet och deras arbete har gjort "
 "Stellarium bättre. En alfabetisk lista över alla medverkande: %1."
 
-#: src/gui/HelpDialog.cpp:569
+#: src/gui/HelpDialog.cpp:589
 msgid "Financial support"
 msgstr "Ekonomiskt stöd"
 
-#: src/gui/HelpDialog.cpp:570
+#: src/gui/HelpDialog.cpp:590
 #, qt-format
 msgid ""
 "Many individuals and organizations are supporting the development of "
@@ -7414,7 +7717,7 @@ msgstr ""
 "donationer på 250 USD eller mer) är %1."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:572
+#: src/gui/HelpDialog.cpp:592
 msgid ""
 "The full list of financial contributors you may see on our {Open Collective "
 "page}."
@@ -7422,11 +7725,11 @@ msgstr ""
 "Den fullständiga listan över finansiella bidragsgivare kan du se på vår "
 "{Open Collective-sida}."
 
-#: src/gui/HelpDialog.cpp:573 plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: src/gui/HelpDialog.cpp:593 plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 msgid "Acknowledgment"
 msgstr "Bekräftelse"
 
-#: src/gui/HelpDialog.cpp:574
+#: src/gui/HelpDialog.cpp:594
 msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
@@ -7434,12 +7737,12 @@ msgstr ""
 "Om planetariet Stellarium har varit till hjälp för ditt forskningsarbete, "
 "skulle vi uppskatta följande erkännande:"
 
-#: src/gui/HelpDialog.cpp:575
+#: src/gui/HelpDialog.cpp:595
 msgid "This research has made use of the Stellarium planetarium"
 msgstr "Den här forskningen har använt Stellariums planetarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:578
+#: src/gui/HelpDialog.cpp:598
 msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
@@ -10216,7 +10519,7 @@ msgid "Cannot open JSON output file. Will not delete."
 msgstr "Det går inte att öppna JSON-utdatafilen. Kommer inte att raderas."
 
 #: src/gui/ObsListDialog.cpp:1194 src/ui_configurationDialog.h:2345
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
 msgid "Information"
 msgstr "Information"
 
@@ -12880,7 +13183,7 @@ msgstr "&Välj"
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
@@ -12916,7 +13219,7 @@ msgstr "&Spara"
 
 #: src/translations.h:855 src/ui_configurationDialog.h:2371
 #: src/ui_configurationDialog.h:2819
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
 msgid "Save"
 msgstr "Spara"
 
@@ -17019,6 +17322,10 @@ msgstr "Döljer muspekaren vid inaktivitet"
 #: src/ui_configurationDialog.h:2704
 msgid "Mouse cursor timeout:"
 msgstr "Tidsgräns för muspekare:"
+
+#: src/ui_configurationDialog.h:2706
+msgid "seconds"
+msgstr "sekunder"
 
 #: src/ui_configurationDialog.h:2709
 msgid "Mask out everything outside a central circle in the main view"
@@ -22611,6 +22918,10 @@ msgstr "Visa jordens kärnskugga"
 msgid "The color of Earth's umbra circle"
 msgstr "Färg på jordens kärnskuggecirkel"
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:1233
+msgid "Magnitude range"
+msgstr "Magnitudomfång"
+
 #: plugins/Satellites/src/ui_satellitesDialog.h:1234
 msgid "Altitude range"
 msgstr "Höjdintervall"
@@ -22910,6 +23221,12 @@ msgstr "Min."
 #: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Exoplanets/src/Exoplanet.cpp:365
 msgid "Eccentricity"
 msgstr "Excentricitet"
+
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
+#: plugins/Exoplanets/src/Exoplanet.cpp:361
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
+msgid "Period"
+msgstr "Period"
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:264
 msgid "Perigee"
@@ -25820,6 +26137,10 @@ msgstr "Slå på visning av kvasarfördelning"
 msgid "Use markers for quasars"
 msgstr "Använd markörer för kvasarer"
 
+#: plugins/Quasars/src/Quasar.cpp:142 plugins/Exoplanets/src/Exoplanet.cpp:329
+msgid "Spectral Type"
+msgstr "Spektraltyp"
+
 #. TRANSLATORS: Jy is Jansky(10-26W/m2/Hz)
 #: plugins/Quasars/src/Quasar.cpp:144
 msgctxt "radio flux density"
@@ -25911,6 +26232,19 @@ msgstr "Använd separat färg för pulsarer vid glitchar"
 #: plugins/Pulsars/src/Pulsar.cpp:191
 msgid "registered glitches"
 msgstr "registrerade glitchar"
+
+#: plugins/Pulsars/src/Pulsar.cpp:202
+msgid "Proper motion"
+msgstr "Egenrörelse"
+
+#: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
+msgctxt "milliarc second per year"
+msgid "mas/yr"
+msgstr "mas/år"
+
+#: plugins/Pulsars/src/Pulsar.cpp:205
+msgid "Proper motions by axes"
+msgstr "Egenrörelse efter axlar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:213
 msgid "Barycentric period"
@@ -32079,7 +32413,7 @@ msgid "SCM: Dark Constellation Editor"
 msgstr "SCM: Redigerare för mörka nebulosor"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:620
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
 msgid "SCM: Constellation Editor"
 msgstr "SCM: Stjärnbildsredigerare"
 
@@ -32112,63 +32446,63 @@ msgstr "Redigera"
 msgid "Convert"
 msgstr "Konvertera"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:323
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
 msgid "Pen"
 msgstr "Penna"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:325
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:324
 msgid "Revert the last drawn line."
 msgstr "Ångra den senast utritade linjen."
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:326
 msgid "Undo"
 msgstr "Ångra"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
 msgid "Eraser"
 msgstr "Suddigum"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
 msgid "Drawing"
 msgstr "Ritning"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
 msgid "English name"
 msgstr "Engelskt namn"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
 msgid "ID (Do not include 'CON' or the sky culture name)"
 msgstr "ID (ta inte med 'CON' eller himmelskulturens namn)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
 msgid "Native name (optional)"
 msgstr "Ursprungligt namn (valfritt)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
 msgid "Pronounciation (optional, European glyphs or Pinyin)"
 msgstr "Uttal (valfritt, europeiska alfabet eller pinyin)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
 msgid "IPA (optional)"
 msgstr "IPA (valfritt)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
 msgid "Description (optional)"
 msgstr "Beskrivning (valfritt)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Bind Star"
 msgstr "Anknyt stjärna"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
 msgid "Upload Image"
 msgstr "Ladda upp bild"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
 msgid "Remove Image"
 msgstr "Ta bort bild"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
 msgid "Artwork"
 msgstr "Stjärnbildsgrafik"
 
