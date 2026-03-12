@@ -1710,7 +1710,7 @@ QString Planet::getNarrationExtra(const StelCore *core, const InfoStringGroup& f
 				qc_("South West",       "compass direction narration"),
 				qc_("West South West",  "compass direction narration"),
 				qc_("West",             "compass direction narration"),
-				qc_("West NWest ",      "compass direction narration"),
+				qc_("West North West",  "compass direction narration"),
 				qc_("North West",       "compass direction narration"),
 				qc_("North North West", "compass direction narration"),
 				qc_("North",            "compass direction narration"),
