@@ -40,6 +40,7 @@ private slots:
 	void saveMinutes(int minutes);
 	void saveCustomSunAltitue(double altitude);
 	void saveCustomMoonAltitue(double altitude);
+	void updateSelectedObjectState();
 
 private:
 	class StelCore* core;

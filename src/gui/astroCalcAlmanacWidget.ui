@@ -1509,6 +1509,319 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabSpecificTimeMgr">
+      <attribute name="title">
+       <string>Selected object</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="vboxSpecificTime">
+
+       <!-- ── Group: Selected object ── -->
+       <item>
+        <widget class="QGroupBox" name="groupRTS">
+         <property name="title"><string>Selected object</string></property>
+         <layout class="QGridLayout" name="gridRTS">
+
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelSelectedObject">
+            <property name="text"><string>No object selected</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+            <property name="wordWrap"><bool>true</bool></property>
+           </widget>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelRTSHeader">
+            <property name="text"><string>Previous</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="labelRTSHeaderToday">
+            <property name="text"><string>Today</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="labelRTSHeaderNext">
+            <property name="text"><string>Next</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QPushButton" name="buttonPreviousRising">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Previous rising of the selected object</string></property>
+            <property name="text"><string>Rising</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeRewind-off.png</normaloff><disabledoff>:/graphicGui/btTimeRewind-off.png</disabledoff>:/graphicGui/btTimeRewind-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="buttonTodayRising">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Today's rising of the selected object</string></property>
+            <property name="text"><string>Rising</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/bbtTime-off.png</normaloff><disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="buttonNextRising">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Next rising of the selected object</string></property>
+            <property name="text"><string>Rising</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeForward-off.png</normaloff><disabledoff>:/graphicGui/btTimeForward-off.png</disabledoff>:/graphicGui/btTimeForward-off.png</iconset></property>
+           </widget>
+          </item>
+
+          <item row="3" column="0">
+           <widget class="QPushButton" name="buttonPreviousTransit">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Previous transit of the selected object</string></property>
+            <property name="text"><string>Transit</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeRewind-off.png</normaloff><disabledoff>:/graphicGui/btTimeRewind-off.png</disabledoff>:/graphicGui/btTimeRewind-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="buttonTodayTransit">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Today's transit of the selected object</string></property>
+            <property name="text"><string>Transit</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/bbtTime-off.png</normaloff><disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="buttonNextTransit">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Next transit of the selected object</string></property>
+            <property name="text"><string>Transit</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeForward-off.png</normaloff><disabledoff>:/graphicGui/btTimeForward-off.png</disabledoff>:/graphicGui/btTimeForward-off.png</iconset></property>
+           </widget>
+          </item>
+
+          <item row="4" column="0">
+           <widget class="QPushButton" name="buttonPreviousSetting">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Previous setting of the selected object</string></property>
+            <property name="text"><string>Setting</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeRewind-off.png</normaloff><disabledoff>:/graphicGui/btTimeRewind-off.png</disabledoff>:/graphicGui/btTimeRewind-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QPushButton" name="buttonTodaySetting">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Today's setting of the selected object</string></property>
+            <property name="text"><string>Setting</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/bbtTime-off.png</normaloff><disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QPushButton" name="buttonNextSetting">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Next setting of the selected object</string></property>
+            <property name="text"><string>Setting</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeForward-off.png</normaloff><disabledoff>:/graphicGui/btTimeForward-off.png</disabledoff>:/graphicGui/btTimeForward-off.png</iconset></property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+       <!-- ── Group: Twilight ── -->
+       <item>
+        <widget class="QGroupBox" name="groupTwilight">
+         <property name="title"><string>Twilight</string></property>
+         <layout class="QGridLayout" name="gridTwilight">
+
+          <item row="0" column="0" colspan="3">
+           <layout class="QHBoxLayout" name="hboxTwilightAltitude">
+            <item>
+             <widget class="QLabel" name="labelTwilightAltitude">
+              <property name="text"><string>Solar altitude:</string></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="twilightAltitudeSpinBox">
+              <property name="toolTip"><string>Solar altitude used for twilight calculations (also settable in View → Sky)</string></property>
+              <property name="alignment"><set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set></property>
+              <property name="suffix"><string notr="true">°</string></property>
+              <property name="decimals"><number>2</number></property>
+              <property name="minimum"><double>-20.000000000000000</double></property>
+              <property name="maximum"><double>0.000000000000000</double></property>
+              <property name="singleStep"><double>0.100000000000000</double></property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="twilightAltitudeSpacer">
+              <property name="orientation"><enum>Qt::Horizontal</enum></property>
+              <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelTwilightPrev">
+            <property name="text"><string>Previous</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="labelTwilightToday">
+            <property name="text"><string>Today</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="labelTwilightNext">
+            <property name="text"><string>Next</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QPushButton" name="buttonPreviousMorningTwilight">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Previous morning twilight</string></property>
+            <property name="text"><string>Morning</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeRewind-off.png</normaloff><disabledoff>:/graphicGui/btTimeRewind-off.png</disabledoff>:/graphicGui/btTimeRewind-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="buttonTodayMorningTwilight">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Today's morning twilight</string></property>
+            <property name="text"><string>Morning</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/bbtTime-off.png</normaloff><disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="buttonNextMorningTwilight">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Next morning twilight</string></property>
+            <property name="text"><string>Morning</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeForward-off.png</normaloff><disabledoff>:/graphicGui/btTimeForward-off.png</disabledoff>:/graphicGui/btTimeForward-off.png</iconset></property>
+           </widget>
+          </item>
+
+          <item row="3" column="0">
+           <widget class="QPushButton" name="buttonPreviousEveningTwilight">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Previous evening twilight</string></property>
+            <property name="text"><string>Evening</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeRewind-off.png</normaloff><disabledoff>:/graphicGui/btTimeRewind-off.png</disabledoff>:/graphicGui/btTimeRewind-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="buttonTodayEveningTwilight">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Today's evening twilight</string></property>
+            <property name="text"><string>Evening</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/bbtTime-off.png</normaloff><disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="buttonNextEveningTwilight">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Next evening twilight</string></property>
+            <property name="text"><string>Evening</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeForward-off.png</normaloff><disabledoff>:/graphicGui/btTimeForward-off.png</disabledoff>:/graphicGui/btTimeForward-off.png</iconset></property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+       <!-- ── Group: Selected object at altitude ── -->
+       <item>
+        <widget class="QGroupBox" name="groupAtAltitude">
+         <property name="title"><string>Selected object at current altitude</string></property>
+         <layout class="QGridLayout" name="gridAtAltitude">
+
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelAltPrev">
+            <property name="text"><string>Previous</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelAltToday">
+            <property name="text"><string>Today</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="labelAltNext">
+            <property name="text"><string>Next</string></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+           </widget>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QPushButton" name="buttonPreviousMorningAtAltitude">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Selected object at its current altitude, previous morning</string></property>
+            <property name="text"><string>Morning</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeRewind-off.png</normaloff><disabledoff>:/graphicGui/btTimeRewind-off.png</disabledoff>:/graphicGui/btTimeRewind-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="buttonTodayMorningAtAltitude">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Selected object at its current altitude this morning</string></property>
+            <property name="text"><string>Morning</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/bbtTime-off.png</normaloff><disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="buttonNextMorningAtAltitude">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Selected object at its current altitude, next morning</string></property>
+            <property name="text"><string>Morning</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeForward-off.png</normaloff><disabledoff>:/graphicGui/btTimeForward-off.png</disabledoff>:/graphicGui/btTimeForward-off.png</iconset></property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QPushButton" name="buttonPreviousEveningAtAltitude">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Selected object at its current altitude, previous evening</string></property>
+            <property name="text"><string>Evening</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeRewind-off.png</normaloff><disabledoff>:/graphicGui/btTimeRewind-off.png</disabledoff>:/graphicGui/btTimeRewind-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="buttonTodayEveningAtAltitude">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Selected object at its current altitude this evening</string></property>
+            <property name="text"><string>Evening</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/bbtTime-off.png</normaloff><disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset></property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="buttonNextEveningAtAltitude">
+            <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Fixed"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+            <property name="toolTip"><string>Selected object at its current altitude, next evening</string></property>
+            <property name="text"><string>Evening</string></property>
+            <property name="icon"><iconset resource="../../data/gui/guiRes.qrc"><normaloff>:/graphicGui/btTimeForward-off.png</normaloff><disabledoff>:/graphicGui/btTimeForward-off.png</disabledoff>:/graphicGui/btTimeForward-off.png</iconset></property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Vertical spacer -->
+       <item>
+        <spacer name="verticalSpacerSpecificTime">
+         <property name="orientation"><enum>Qt::Vertical</enum></property>
+         <property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property>
+        </spacer>
+       </item>
+
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>

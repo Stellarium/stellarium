@@ -581,6 +581,51 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAlmanacWidgetVisibility()));
 	updateAlmanacWidgetVisibility();
 
+	// Tab: Time Steps
+	// Solar / calendar
+	connect(ui->btnAddSolarDay,          &QToolButton::clicked, core, &StelCore::addDay);
+	connect(ui->btnSubSolarDay,          &QToolButton::clicked, core, &StelCore::subtractDay);
+	connect(ui->btnAddSolarWeek,         &QToolButton::clicked, core, &StelCore::addWeek);
+	connect(ui->btnSubSolarWeek,         &QToolButton::clicked, core, &StelCore::subtractWeek);
+	connect(ui->btnAddCalendarMonth,     &QToolButton::clicked, core, &StelCore::addCalendarMonth);
+	connect(ui->btnSubCalendarMonth,     &QToolButton::clicked, core, &StelCore::subtractCalendarMonth);
+	connect(ui->btnAddCalendarYear,      &QToolButton::clicked, core, &StelCore::addCalendarYear);
+	connect(ui->btnSubCalendarYear,      &QToolButton::clicked, core, &StelCore::subtractCalendarYear);
+	// Sidereal
+	connect(ui->btnAddSiderealDay,       &QToolButton::clicked, core, &StelCore::addSiderealDay);
+	connect(ui->btnSubSiderealDay,       &QToolButton::clicked, core, &StelCore::subtractSiderealDay);
+	connect(ui->btnAddSiderealWeek,      &QToolButton::clicked, core, &StelCore::addSiderealWeek);
+	connect(ui->btnSubSiderealWeek,      &QToolButton::clicked, core, &StelCore::subtractSiderealWeek);
+	connect(ui->btnAddSiderealYear,      &QToolButton::clicked, core, &StelCore::addSiderealYear);
+	connect(ui->btnSubSiderealYear,      &QToolButton::clicked, core, &StelCore::subtractSiderealYear);
+	// Lunar months
+	connect(ui->btnAddSynodicMonth,      &QToolButton::clicked, core, &StelCore::addSynodicMonth);
+	connect(ui->btnSubSynodicMonth,      &QToolButton::clicked, core, &StelCore::subtractSynodicMonth);
+	connect(ui->btnAddMeanTropicalMonth, &QToolButton::clicked, core, &StelCore::addMeanTropicalMonth);
+	connect(ui->btnSubMeanTropicalMonth, &QToolButton::clicked, core, &StelCore::subtractMeanTropicalMonth);
+	connect(ui->btnAddDraconicMonth,     &QToolButton::clicked, core, &StelCore::addDraconicMonth);
+	connect(ui->btnSubDraconicMonth,     &QToolButton::clicked, core, &StelCore::subtractDraconicMonth);
+	connect(ui->btnAddAnomalisticMonth,  &QToolButton::clicked, core, &StelCore::addAnomalisticMonth);
+	connect(ui->btnSubAnomalisticMonth,  &QToolButton::clicked, core, &StelCore::subtractAnomalisticMonth);
+	// Solar years
+	connect(ui->btnAddMeanTropicalYear,  &QToolButton::clicked, core, &StelCore::addMeanTropicalYear);
+	connect(ui->btnSubMeanTropicalYear,  &QToolButton::clicked, core, &StelCore::subtractMeanTropicalYear);
+	connect(ui->btnAddTropicalYear,      &QToolButton::clicked, core, &StelCore::addTropicalYear);
+	connect(ui->btnSubTropicalYear,      &QToolButton::clicked, core, &StelCore::subtractTropicalYear);
+	connect(ui->btnAddDraconicYear,      &QToolButton::clicked, core, &StelCore::addDraconicYear);
+	connect(ui->btnSubDraconicYear,      &QToolButton::clicked, core, &StelCore::subtractDraconicYear);
+	connect(ui->btnAddAnomalisticYear,   &QToolButton::clicked, core, &StelCore::addAnomalisticYear);
+	connect(ui->btnSubAnomalisticYear,   &QToolButton::clicked, core, &StelCore::subtractAnomalisticYear);
+	connect(ui->btnAddJulianYear,        &QToolButton::clicked, core, &StelCore::addJulianYear);
+	connect(ui->btnSubJulianYear,        &QToolButton::clicked, core, &StelCore::subtractJulianYear);
+	connect(ui->btnAddGaussianYear,      &QToolButton::clicked, core, &StelCore::addGaussianYear);
+	connect(ui->btnSubGaussianYear,      &QToolButton::clicked, core, &StelCore::subtractGaussianYear);
+	// Longer cycles
+	connect(ui->btnAddMetonicCycle,      &QToolButton::clicked, core, &StelCore::addMetonicCycle);
+	connect(ui->btnSubMetonicCycle,      &QToolButton::clicked, core, &StelCore::subtractMetonicCycle);
+	connect(ui->btnAddSaros,             &QToolButton::clicked, core, &StelCore::addSaros);
+	connect(ui->btnSubSaros,             &QToolButton::clicked, core, &StelCore::subtractSaros);
+
 	updateTabBarListWidgetWidth();
 
 	ui->celestialPositionsUpdateButton->setShortcut(QKeySequence("Shift+F10"));

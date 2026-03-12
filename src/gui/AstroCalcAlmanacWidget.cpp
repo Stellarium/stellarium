@@ -21,6 +21,8 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
 #include "SpecificTimeMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -104,6 +106,54 @@ void AstroCalcAlmanacWidget::setup()
 	connect(ui->buttonDecemberSolsticeCurrent, &QPushButton::clicked, this, [=](){specMgr->currentDecemberSolstice();});
 	connect(ui->buttonDecemberSolsticeNext, &QPushButton::clicked, this, [=](){specMgr->nextDecemberSolstice();});
 	connect(ui->buttonDecemberSolsticePrevious, &QPushButton::clicked, this, [=](){specMgr->previousDecemberSolstice();});
+
+	// Specific Time tab: Rising / Transit / Setting
+	connect(ui->buttonPreviousRising,  &QPushButton::clicked, this, [=](){specMgr->previousRising();});
+	connect(ui->buttonTodayRising,     &QPushButton::clicked, this, [=](){specMgr->todayRising();});
+	connect(ui->buttonNextRising,      &QPushButton::clicked, this, [=](){specMgr->nextRising();});
+	connect(ui->buttonPreviousTransit, &QPushButton::clicked, this, [=](){specMgr->previousTransit();});
+	connect(ui->buttonTodayTransit,    &QPushButton::clicked, this, [=](){specMgr->todayTransit();});
+	connect(ui->buttonNextTransit,     &QPushButton::clicked, this, [=](){specMgr->nextTransit();});
+	connect(ui->buttonPreviousSetting, &QPushButton::clicked, this, [=](){specMgr->previousSetting();});
+	connect(ui->buttonTodaySetting,    &QPushButton::clicked, this, [=](){specMgr->todaySetting();});
+	connect(ui->buttonNextSetting,     &QPushButton::clicked, this, [=](){specMgr->nextSetting();});
+
+	// Specific Time tab: Twilight — wire spinbox to SpecificTimeMgr.twilightAltitude property.
+	// We can't call StelDialog::connectDoubleProperty (protected), so we replicate its logic directly.
+	{
+		StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty("SpecificTimeMgr.twilightAltitude");
+		if (prop)
+		{
+			ui->twilightAltitudeSpinBox->setValue(prop->getValue().toDouble());
+			connect(ui->twilightAltitudeSpinBox,
+			        static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+			        prop, &StelProperty::setValue);
+			connect(prop, &StelProperty::changed, ui->twilightAltitudeSpinBox, [=](const QVariant& val){
+				bool b = ui->twilightAltitudeSpinBox->blockSignals(true);
+				ui->twilightAltitudeSpinBox->setValue(val.toDouble());
+				ui->twilightAltitudeSpinBox->blockSignals(b);
+			});
+		}
+	}
+	connect(ui->buttonPreviousMorningTwilight, &QPushButton::clicked, this, [=](){specMgr->previousMorningTwilight();});
+	connect(ui->buttonTodayMorningTwilight,    &QPushButton::clicked, this, [=](){specMgr->todayMorningTwilight();});
+	connect(ui->buttonNextMorningTwilight,     &QPushButton::clicked, this, [=](){specMgr->nextMorningTwilight();});
+	connect(ui->buttonPreviousEveningTwilight, &QPushButton::clicked, this, [=](){specMgr->previousEveningTwilight();});
+	connect(ui->buttonTodayEveningTwilight,    &QPushButton::clicked, this, [=](){specMgr->todayEveningTwilight();});
+	connect(ui->buttonNextEveningTwilight,     &QPushButton::clicked, this, [=](){specMgr->nextEveningTwilight();});
+
+	// Specific Time tab: At altitude
+	connect(ui->buttonPreviousMorningAtAltitude, &QPushButton::clicked, this, [=](){specMgr->previousMorningAtAltitude();});
+	connect(ui->buttonTodayMorningAtAltitude,    &QPushButton::clicked, this, [=](){specMgr->todayMorningAtAltitude();});
+	connect(ui->buttonNextMorningAtAltitude,     &QPushButton::clicked, this, [=](){specMgr->nextMorningAtAltitude();});
+	connect(ui->buttonPreviousEveningAtAltitude, &QPushButton::clicked, this, [=](){specMgr->previousEveningAtAltitude();});
+	connect(ui->buttonTodayEveningAtAltitude,    &QPushButton::clicked, this, [=](){specMgr->todayEveningAtAltitude();});
+	connect(ui->buttonNextEveningAtAltitude,     &QPushButton::clicked, this, [=](){specMgr->nextEveningAtAltitude();});
+
+	// Update selected-object label and button states when selection changes
+	connect(GETSTELMODULE(StelObjectMgr), &StelObjectMgr::selectedObjectChanged,
+	        this, &AstroCalcAlmanacWidget::updateSelectedObjectState);
+	updateSelectedObjectState();
 
 	// handling special days
 	connect(ui->buttonMarchEquinoxCurrent, &QPushButton::clicked, this, [=](){setTodayTimes();});
@@ -527,4 +577,20 @@ void AstroCalcAlmanacWidget::setTodayTimes()
 
 	// spinboxes
 	ui->spinBoxMinutes->setEnabled(sunBtn);
+}
+
+void AstroCalcAlmanacWidget::updateSelectedObjectState()
+{
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	const bool hasObject = !selected.isEmpty() && selected[0]->getType() != "Satellite";
+
+	// Update the label to show which object the buttons will act on
+	if (hasObject)
+		ui->labelSelectedObject->setText(selected[0]->getNameI18n());
+	else
+		ui->labelSelectedObject->setText(q_("No object selected"));
+
+	// Enable/disable the object-dependent button groups
+	ui->groupRTS->setEnabled(hasObject);
+	ui->groupAtAltitude->setEnabled(hasObject);
 }
