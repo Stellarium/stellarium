@@ -158,6 +158,16 @@
         <widget class="QLineEdit" name="pronounceLE"/>
        </item>
        <item>
+        <widget class="QLabel" name="translitLbl">
+         <property name="text">
+          <string>Transliteration (optional)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="translitLE"/>
+       </item>
+       <item>
         <widget class="QLabel" name="ipaLbl">
          <property name="text">
           <string>IPA (optional)</string>

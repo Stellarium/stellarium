@@ -101,6 +101,20 @@ public:
 	std::optional<QString> getPronounce() const;
 
 	/**
+	* @brief Sets the transliteration of the constellation.
+	*
+	* @param translit The optional transliteration
+	 */
+	void setTransliteration(const std::optional<QString> &translit);
+
+	/**
+	 * @brief Gets the Transliteration.
+	 *
+	 * @return The optional transliteration
+	 */
+	std::optional<QString> getTransliteration() const;
+
+	/**
     * @brief Sets the IPA.
     * 
     * @param ipa The optional ipa
@@ -225,6 +239,9 @@ private:
 
 	/// Native name in European glyphs, if needed. For Chinese, expect Pinyin here.
 	std::optional<QString> pronounce;
+
+	/// The scientiﬁc Latin-character based transliteration.
+	std::optional<QString> transliteration;
 
 	/// The native name in IPA (International Phonetic Alphabet)
 	std::optional<QString> ipa;

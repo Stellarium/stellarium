@@ -72,18 +72,20 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	// Save the constellation that is currently being edited
 	constellationBeingEdited = constellation;
 
-	constellationId            = constellation->getId();
-	constellationEnglishName   = constellation->getEnglishName();
-	constellationPlaceholderId = constellation->getId();
-	constellationNativeName    = constellation->getNativeName();
-	constellationPronounce     = constellation->getPronounce();
-	constellationIPA           = constellation->getIPA();
-	constellationDescription   = constellation->getDescription();
+	constellationId              = constellation->getId();
+	constellationEnglishName     = constellation->getEnglishName();
+	constellationPlaceholderId   = constellation->getId();
+	constellationNativeName      = constellation->getNativeName();
+	constellationPronounce       = constellation->getPronounce();
+	constellationTransliteration = constellation->getTransliteration();
+	constellationIPA             = constellation->getIPA();
+	constellationDescription     = constellation->getDescription();
 
 	ui->enNameLE->setText(constellationEnglishName);
 	ui->idLE->setText(constellationId);
 	ui->natNameLE->setText(constellationNativeName.value_or(""));
 	ui->pronounceLE->setText(constellationPronounce.value_or(""));
+	ui->translitLE->setText(constellationTransliteration.value_or(""));
 	ui->ipaLE->setText(constellationIPA.value_or(""));
 	ui->description->setText(constellationDescription);
 
@@ -240,6 +242,15 @@ void ScmConstellationDialog::createDialogContent()
 				constellationPronounce = std::nullopt;
 			}
 		});
+	connect(ui->translitLE, &QLineEdit::textChanged, this,
+			[this]()
+			{
+				constellationTransliteration = ui->translitLE->text();
+				if (constellationTransliteration->isEmpty())
+				{
+					constellationTransliteration = std::nullopt;
+				}
+			});
 	connect(ui->ipaLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
@@ -513,6 +524,7 @@ void ScmConstellationDialog::saveConstellation()
 		constellation.setEnglishName(constellationEnglishName);
 		constellation.setNativeName(constellationNativeName);
 		constellation.setPronounce(constellationPronounce);
+		constellation.setTransliteration(constellationTransliteration);
 		constellation.setIPA(constellationIPA);
 		constellation.setDescription(constellationDescription);
 		if (imageItem->isVisible() && imageItem->getArtwork().getHasArt())
@@ -557,6 +569,9 @@ void ScmConstellationDialog::resetDialog()
 
 	constellationPronounce = std::nullopt;
 	ui->pronounceLE->clear();
+
+	constellationTransliteration = std::nullopt;
+	ui->translitLE->clear();
 
 	constellationIPA = std::nullopt;
 	ui->ipaLE->clear();
