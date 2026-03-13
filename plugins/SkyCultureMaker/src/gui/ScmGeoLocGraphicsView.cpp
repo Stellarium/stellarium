@@ -133,18 +133,8 @@ void ScmGeoLocGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 	setFocus();
 	if (event->button() == Qt::LeftButton)
 	{
-		// open dialog (range of time) + save and reset the current capture polygon
-		if(event->modifiers() & Qt::AltModifier)
-		{
-			if (currentCapturePolygon->polygon().size() < 3)
-			{
-				return;
-			}
-			// open dialog 'popup'
-			emit showAddPolyDialog();
-		}
 		// do not set a point after a scrolling operation (maybe the user unintentionally released SHIFT)
-		else if (!viewScrolling)
+		if (!viewScrolling)
 		{
 			if (currentCapturePolygon->polygon().size() < 1)
 			{
@@ -160,36 +150,36 @@ void ScmGeoLocGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 	}
 	else if (event->button() == Qt::RightButton)
 	{
-		// open dialog (range of time) + save and reset the current capture polygon
-		if(event->modifiers() & Qt::AltModifier)
+		if (currentCapturePolygon->polygon().size() < 1)
 		{
-			if (currentCapturePolygon->polygon().size() < 3)
-			{
-				return;
-			}
-			// open dialog 'popup'
-			emit showAddPolyDialog();
+			previewCapturePath->setFirstPoint(mapToScene(event->pos()));
 		}
-		// do not set a point after a scrolling operation (maybe the user unintentionally released SHIFT)
 		else
 		{
-			if (currentCapturePolygon->polygon().size() < 1)
-			{
-				previewCapturePath->setFirstPoint(mapToScene(event->pos()));
-			}
-			else
-			{
-				previewCapturePath->setLastPoint(mapToScene(event->pos()));
-			}
-
-			currentCapturePolygon->setPolygon(currentCapturePolygon->polygon() << mapToScene(event->pos()));
+			previewCapturePath->setLastPoint(mapToScene(event->pos()));
 		}
+
+		currentCapturePolygon->setPolygon(currentCapturePolygon->polygon() << mapToScene(event->pos()));
 	}
 
 	if(viewScrolling)
 	{
 		viewScrolling = false;
 		QGuiApplication::restoreOverrideCursor();
+	}
+}
+
+void ScmGeoLocGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
+{
+	if (event->button() == Qt::RightButton)
+	{
+		// open dialog (range of time) + save and reset the current capture polygon
+		if (currentCapturePolygon->polygon().size() < 3)
+		{
+			return;
+		}
+		// open dialog 'popup'
+		emit showAddPolyDialog();
 	}
 }
 
@@ -281,7 +271,7 @@ void ScmGeoLocGraphicsView::reset()
 	// remove all polygons from the scene
 	for (auto it = polygonIdentifierMap.cbegin(); it != polygonIdentifierMap.cend(); ++it)
 	{
-		scene()->removeItem(it.value());
+		delete it.value();
 	}
 
 	// clear the map used for identifying the polygon items
