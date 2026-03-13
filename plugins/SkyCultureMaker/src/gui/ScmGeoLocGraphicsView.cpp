@@ -185,16 +185,17 @@ void ScmGeoLocGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
 
 void ScmGeoLocGraphicsView::keyPressEvent(QKeyEvent *event)
 {
-	// delete the last point in the capture poylgon (except the very first one)
+	// delete the last point in the capture poylgon
 	if (event->key() == Qt::Key_Backspace)
 	{
-		if (currentCapturePolygon->polygon().size() > 1)
+		deleteLastPointSet();
+	}
+	// delete the last point in the capture poylgon
+	else if (event->key() == Qt::Key_Z)
+	{
+		if(event->modifiers() & Qt::ControlModifier)
 		{
-			QPolygonF newPoly = currentCapturePolygon->polygon();
-			newPoly.removeLast();
-
-			previewCapturePath->setLastPoint(newPoly.last());
-			currentCapturePolygon->setPolygon(newPoly);
+			deleteLastPointSet();
 		}
 	}
 	// abort current capture ---> reset all points (including first one)
@@ -283,6 +284,19 @@ void ScmGeoLocGraphicsView::reset()
 	// clear the digitization previews
 	currentCapturePolygon->setPolygon(QPolygonF());
 	previewCapturePath->reset();
+}
+
+void ScmGeoLocGraphicsView::deleteLastPointSet()
+{
+	// delete the last point set (except the very first one)
+	if (currentCapturePolygon->polygon().size() > 1)
+	{
+		QPolygonF newPoly = currentCapturePolygon->polygon();
+		newPoly.removeLast();
+
+		previewCapturePath->setLastPoint(newPoly.last());
+		currentCapturePolygon->setPolygon(newPoly);
+	}
 }
 
 qreal ScmGeoLocGraphicsView::calculateScaleRatio(qreal width, qreal height)

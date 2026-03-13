@@ -94,6 +94,12 @@ private:
 	void updateCultureVisibility();
 
 	/**
+	 * @brief Delete the last point set in the active polygon.
+	 *
+	 */
+	void deleteLastPointSet();
+
+	/**
 	 * @brief Scale the view with respect to the min / max zoom level.
 	 *
 	 * @param scaleFactor The factor by which the view should be scaled.
