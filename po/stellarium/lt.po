@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-03-12 19:57+0700\n"
+"POT-Creation-Date: 2026-03-12 21:39+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Gediminas Tauras, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
@@ -1433,8 +1433,8 @@ msgstr "Saulės altitudė"
 msgid "Origin of name"
 msgstr "Vardo kilmė"
 
-#: src/core/modules/NomenclatureItem.cpp:312 src/core/modules/Planet.cpp:2309
-#: src/core/modules/Planet.cpp:2332
+#: src/core/modules/NomenclatureItem.cpp:312 src/core/modules/Planet.cpp:2295
+#: src/core/modules/Planet.cpp:2318
 msgctxt "object narration"
 msgid "or"
 msgstr "arba"
@@ -1514,7 +1514,7 @@ msgid "Its planetographic coordinates are"
 msgstr "Jos planetografinės koordinatės yra"
 
 #: src/core/modules/NomenclatureItem.cpp:402 src/core/modules/Planet.cpp:617
-#: src/core/modules/Planet.cpp:2236 src/core/StelObject.cpp:1559
+#: src/core/modules/Planet.cpp:2222 src/core/StelObject.cpp:1559
 #: src/core/StelSkyCultureSkyPartition.cpp:528 src/core/StelUtils.cpp:165
 #: src/core/StelUtils.cpp:345 src/core/StelUtils.cpp:441
 #: src/core/StelUtils.cpp:522 src/core/StelUtils.cpp:571
@@ -2813,7 +2813,7 @@ msgstr "nedokumentuotas tipas"
 msgid "called"
 msgstr "pavadinta"
 
-#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:2192
+#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:2178
 msgid "is"
 msgstr "yra"
 
@@ -2858,7 +2858,7 @@ msgctxt "object narration"
 msgid "Million light years"
 msgstr "Milijonų šviesmečių"
 
-#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:2216
+#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:2202
 msgctxt "object narration"
 msgid "in the constellation of"
 msgstr "žvaigždyne "
@@ -3429,49 +3429,49 @@ msgid "Equatorial rotation velocity"
 msgstr "Ekvatorinis sukimosi greitis"
 
 #: src/core/modules/Planet.cpp:1290 src/core/modules/Planet.cpp:1663
-#: src/core/modules/Planet.cpp:2111
+#: src/core/modules/Planet.cpp:2097
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Jaunatis"
 
 #: src/core/modules/Planet.cpp:1292 src/core/modules/Planet.cpp:1665
-#: src/core/modules/Planet.cpp:2113
+#: src/core/modules/Planet.cpp:2099
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Priešpilnis"
 
 #: src/core/modules/Planet.cpp:1294 src/core/modules/Planet.cpp:1667
-#: src/core/modules/Planet.cpp:2115
+#: src/core/modules/Planet.cpp:2101
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Pirmasis ketvirtis"
 
 #: src/core/modules/Planet.cpp:1296 src/core/modules/Planet.cpp:1669
-#: src/core/modules/Planet.cpp:2117
+#: src/core/modules/Planet.cpp:2103
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Vos didėjantis mėnulis"
 
 #: src/core/modules/Planet.cpp:1298 src/core/modules/Planet.cpp:1671
-#: src/core/modules/Planet.cpp:2119
+#: src/core/modules/Planet.cpp:2105
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Pilnatis"
 
 #: src/core/modules/Planet.cpp:1300 src/core/modules/Planet.cpp:1673
-#: src/core/modules/Planet.cpp:2121
+#: src/core/modules/Planet.cpp:2107
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Dylantis mėnulis"
 
 #: src/core/modules/Planet.cpp:1302 src/core/modules/Planet.cpp:1675
-#: src/core/modules/Planet.cpp:2123
+#: src/core/modules/Planet.cpp:2109
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Trečias ketvirtis"
 
 #: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1677
-#: src/core/modules/Planet.cpp:2125
+#: src/core/modules/Planet.cpp:2111
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Delčia"
@@ -3878,144 +3878,148 @@ msgstr "Umbros užtemimo stiprumas yra %1 proc."
 msgid "Discovered"
 msgstr "Atrasta"
 
-#. TRANSLATORS: 3-part date. %1=genitive month name, %2=day numeral (add a
-#. point in format string if your language makes ordinals), %3=year
+#. TRANSLATORS: Narration, %1=planet name, day of discovery given in %2=day
+#. number, %3=month name, %4=year. Many languages change from American word
+#. order used here!
 #: src/core/modules/Planet.cpp:1941
 #, qt-format
-msgctxt "date narration"
-msgid "%1 %2, %3"
-msgstr "%1 %2, %3"
+msgctxt "planet narration"
+msgid "%1 was discovered on %3 %2, %4"
+msgstr "%1 buvo atrasta %3 %2, %4 "
 
-#. TRANSLATORS: 2-part date. %1=month name, %2=year
-#: src/core/modules/Planet.cpp:1947
+#. TRANSLATORS: Narration, %1=planet name, only year and month of discovery
+#. given in %2
+#: src/core/modules/Planet.cpp:1946
 #, qt-format
-msgctxt "date narration"
-msgid "%1 %2"
-msgstr "%1 %2"
+msgctxt "planet narration"
+msgid "%1 was discovered in %2 of %3"
+msgstr "%1 buvo atrasta %3 m. %2 mėn. "
 
-#. TRANSLATORS: Narration, only year of discovery given in %2
-#. TRANSLATORS: Narration, only year and month of discovery given in %2
-#: src/core/modules/Planet.cpp:1956 src/core/modules/Planet.cpp:1961
+#. TRANSLATORS: Narration, %1=planet name, only year of discovery given in %2
+#: src/core/modules/Planet.cpp:1951
 #, qt-format
 msgctxt "planet narration"
 msgid "%1 was discovered in %2"
 msgstr "%1 buvo atrasta %2"
 
-#. TRANSLATORS: Narration, day of discovery given in %2
-#: src/core/modules/Planet.cpp:1966
+#. TRANSLATORS: Narration, %1=planet name, day of discovery given in %2=day
+#. number, %3=month name, %4=year. Many languages change from American word
+#. order used here! %5 is discoverer name.
+#: src/core/modules/Planet.cpp:1959
 #, qt-format
 msgctxt "planet narration"
-msgid "%1 was discovered on %2"
-msgstr "%1 buvo atrasta %2"
+msgid "%1 was discovered on %3 %2, %4 by %5"
+msgstr "%5 atrado %1 -ą %4 - %3 - %2 "
 
-#. TRANSLATORS: Narration, only year of discovery given in %2
-#. TRANSLATORS: Narration, only year and month of discovery given in %2
-#: src/core/modules/Planet.cpp:1974 src/core/modules/Planet.cpp:1979
+#. TRANSLATORS: Narration, %1=planet name, only month %2 and year %3 of
+#. discovery given. %4 is discoverer name.
+#: src/core/modules/Planet.cpp:1964
+#, qt-format
+msgctxt "planet narration"
+msgid "%1 was discovered in %2 of %3 by %4"
+msgstr "%4 atrado %1 -ą %3 m. %2 mėn. "
+
+#. TRANSLATORS: Narration, %1=planet name, only year of discovery given in %2.
+#. %3 is discoverer name.
+#: src/core/modules/Planet.cpp:1969
 #, qt-format
 msgctxt "planet narration"
 msgid "%1 was discovered in %2 by %3"
 msgstr "%3 atrado %1ą %2"
 
-#. TRANSLATORS: Narration, day of discovery given in %2
-#: src/core/modules/Planet.cpp:1984
-#, qt-format
-msgctxt "planet narration"
-msgid "%1 was discovered on %2 by %3"
-msgstr "%3 atrado %1ą %2"
-
-#: src/core/modules/Planet.cpp:2169
+#: src/core/modules/Planet.cpp:2155
 msgctxt "object narration"
 msgid "called"
 msgstr "vadinama"
 
-#: src/core/modules/Planet.cpp:2176 src/translations.h:1020
+#: src/core/modules/Planet.cpp:2162 src/translations.h:1020
 msgctxt "object narration"
 msgid "a star"
 msgstr "žvaigždė"
 
-#: src/core/modules/Planet.cpp:2177 src/translations.h:1021
+#: src/core/modules/Planet.cpp:2163 src/translations.h:1021
 msgctxt "object narration"
 msgid "a major planet"
 msgstr "didžioji planeta"
 
-#: src/core/modules/Planet.cpp:2178 src/translations.h:1022
+#: src/core/modules/Planet.cpp:2164 src/translations.h:1022
 msgctxt "object narration"
 msgid "a planet moon"
 msgstr "planetos palydovas"
 
-#: src/core/modules/Planet.cpp:2179 src/translations.h:1023
+#: src/core/modules/Planet.cpp:2165 src/translations.h:1023
 msgctxt "object narration"
 msgid "an observer"
 msgstr "stebėtojas"
 
-#: src/core/modules/Planet.cpp:2180 src/translations.h:1024
+#: src/core/modules/Planet.cpp:2166 src/translations.h:1024
 msgctxt "object narration"
 msgid "an artificial object"
 msgstr "dirbtinis objektas"
 
-#: src/core/modules/Planet.cpp:2181 src/translations.h:1025
+#: src/core/modules/Planet.cpp:2167 src/translations.h:1025
 msgctxt "object narration"
 msgid "an asteroid"
 msgstr "asteroidas"
 
-#: src/core/modules/Planet.cpp:2182 src/translations.h:1026
+#: src/core/modules/Planet.cpp:2168 src/translations.h:1026
 msgctxt "object narration"
 msgid "a plutino"
 msgstr "plutinas"
 
-#: src/core/modules/Planet.cpp:2183 src/translations.h:1027
+#: src/core/modules/Planet.cpp:2169 src/translations.h:1027
 msgctxt "object narration"
 msgid "a comet"
 msgstr "kometa"
 
-#: src/core/modules/Planet.cpp:2184 src/translations.h:1028
+#: src/core/modules/Planet.cpp:2170 src/translations.h:1028
 msgctxt "object narration"
 msgid "a dwarf planet"
 msgstr "nykštukinė planeta"
 
-#: src/core/modules/Planet.cpp:2185 src/translations.h:1029
+#: src/core/modules/Planet.cpp:2171 src/translations.h:1029
 msgctxt "object narration"
 msgid "a cubewano"
 msgstr "kubevanas"
 
-#: src/core/modules/Planet.cpp:2186 src/translations.h:1030
+#: src/core/modules/Planet.cpp:2172 src/translations.h:1030
 msgctxt "object narration"
 msgid "a scattered disc object"
 msgstr "sklaidyto disko objektas"
 
-#: src/core/modules/Planet.cpp:2187 src/translations.h:1031
+#: src/core/modules/Planet.cpp:2173 src/translations.h:1031
 msgctxt "object narration"
 msgid "an Oort Cloud Object"
 msgstr "Oorto debesies objektas"
 
-#: src/core/modules/Planet.cpp:2188 src/translations.h:1032
+#: src/core/modules/Planet.cpp:2174 src/translations.h:1032
 msgctxt "object narration"
 msgid "a sednoid"
 msgstr "sednoidas"
 
-#: src/core/modules/Planet.cpp:2189 src/translations.h:1033
+#: src/core/modules/Planet.cpp:2175 src/translations.h:1033
 msgctxt "object narration"
 msgid "an interstellar object"
 msgstr "tarpžvaigždinis objektas"
 
-#: src/core/modules/Planet.cpp:2190 src/core/modules/Planet.cpp:2192
+#: src/core/modules/Planet.cpp:2176 src/core/modules/Planet.cpp:2178
 #: src/translations.h:1034
 msgctxt "object narration"
 msgid "an object of undefined type"
 msgstr "neapibrėžto tipo objektas"
 
-#: src/core/modules/Planet.cpp:2202
+#: src/core/modules/Planet.cpp:2188
 msgctxt "object narration"
 msgid "currently at visual magnitude of"
 msgstr "šiuo metu vizualinio dydžio"
 
-#: src/core/modules/Planet.cpp:2205 src/core/StelObject.cpp:370
+#: src/core/modules/Planet.cpp:2191 src/core/StelObject.cpp:370
 #, qt-format
 msgctxt "object narration: reduced magnitude by extinction"
 msgid "reduced to %1 by %2 airmasses of atmospheric extinction"
 msgstr "sumažintas iki %1 dėl %2 atmosferos oro masių slopinimo"
 
-#: src/core/modules/Planet.cpp:2235 src/core/StelObject.cpp:1558
+#: src/core/modules/Planet.cpp:2221 src/core/StelObject.cpp:1558
 msgctxt "object narration"
 msgid "In this skyculture, it lies within the area of"
 msgstr "Šioje dangaus kultūroje ji yra"
@@ -4024,14 +4028,14 @@ msgstr "Šioje dangaus kultūroje ji yra"
 #. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
 #. TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
 #. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
-#: src/core/modules/Planet.cpp:2243 src/core/modules/Planet.cpp:2250
+#: src/core/modules/Planet.cpp:2229 src/core/modules/Planet.cpp:2236
 #: src/core/StelObject.cpp:1567 src/core/StelObject.cpp:1574
 #, qt-format
 msgctxt "object narration"
 msgid "Its %1 Position is %2"
 msgstr "Jo %1 padėtis yra %2"
 
-#: src/core/modules/Planet.cpp:2271
+#: src/core/modules/Planet.cpp:2257
 #, qt-format
 msgctxt "planet narration"
 msgid ""
@@ -4042,46 +4046,46 @@ msgstr ""
 "kryptimi ir %5 deklinacijos kryptimi."
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:2285
+#: src/core/modules/Planet.cpp:2271
 msgctxt "distance, astronomical unit"
 msgid "Astronomical Units"
 msgstr "Astronominiai vienetai"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:2287
+#: src/core/modules/Planet.cpp:2273
 msgctxt "object narration"
 msgid "or, in light time,"
 msgstr "arba, šviesos laiku,"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/Planet.cpp:2296 src/core/modules/Planet.cpp:2319
+#: src/core/modules/Planet.cpp:2282 src/core/modules/Planet.cpp:2305
 msgctxt "distance"
 msgid "kilometers"
 msgstr "kilometrų"
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
-#: src/core/modules/Planet.cpp:2303 src/core/modules/Planet.cpp:2326
+#: src/core/modules/Planet.cpp:2289 src/core/modules/Planet.cpp:2312
 msgctxt "distance"
 msgid "Million kilometers"
 msgstr "Milijonai(ų) kilometrų"
 
-#: src/core/modules/Planet.cpp:2306
+#: src/core/modules/Planet.cpp:2292
 msgctxt "object narration"
 msgid "The current distance from the Sun amounts to"
 msgstr "Dabartinis atstumas nuo Saulės yra lygus"
 
-#: src/core/modules/Planet.cpp:2329
+#: src/core/modules/Planet.cpp:2315
 msgctxt "object narration"
 msgid "The current distance amounts to"
 msgstr "Dabartinis atstumas yra lygus"
 
-#: src/core/modules/Planet.cpp:2343
+#: src/core/modules/Planet.cpp:2329
 #, qt-format
 msgctxt "planet narration"
 msgid "The orbital velocity of %1 is %2 kilometers per second"
 msgstr "%1 orbitinis greitis yra %2 km/sek."
 
-#: src/core/modules/Planet.cpp:2347
+#: src/core/modules/Planet.cpp:2333
 #, qt-format
 msgctxt "planet narration"
 msgid "while the heliocentric velocity is %1 kilometers per second"
