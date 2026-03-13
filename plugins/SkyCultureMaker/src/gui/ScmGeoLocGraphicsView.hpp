@@ -71,6 +71,9 @@ private:
 	/// Flag that indicates if the view is currently navigated by the user.
 	bool viewScrolling;
 
+	/// Flag that indicates that the current polygon wether the current polygon should be saved.
+	bool savePolygon;
+
 	bool firstShow;
 	int currentYear;
 	QPoint mouseLastXY;

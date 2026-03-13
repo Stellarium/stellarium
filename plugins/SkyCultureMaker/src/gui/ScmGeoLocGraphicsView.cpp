@@ -32,6 +32,7 @@
 ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
 	, viewScrolling(false)
+	, savePolygon(false)
 	, firstShow(true)
 	, currentYear(0)
 	, mouseLastXY(0, 0)
@@ -150,16 +151,30 @@ void ScmGeoLocGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 	}
 	else if (event->button() == Qt::RightButton)
 	{
-		if (currentCapturePolygon->polygon().size() < 1)
+		if (savePolygon)
 		{
-			previewCapturePath->setFirstPoint(mapToScene(event->pos()));
+			savePolygon = false;
+			// open dialog (range of time) if the current polygon has enough points
+			if (currentCapturePolygon->polygon().size() < 3)
+			{
+				return;
+			}
+			// open dialog 'popup'
+			emit showAddPolyDialog();
 		}
 		else
 		{
-			previewCapturePath->setLastPoint(mapToScene(event->pos()));
-		}
+			if (currentCapturePolygon->polygon().size() < 1)
+			{
+				previewCapturePath->setFirstPoint(mapToScene(event->pos()));
+			}
+			else
+			{
+				previewCapturePath->setLastPoint(mapToScene(event->pos()));
+			}
 
-		currentCapturePolygon->setPolygon(currentCapturePolygon->polygon() << mapToScene(event->pos()));
+			currentCapturePolygon->setPolygon(currentCapturePolygon->polygon() << mapToScene(event->pos()));
+		}
 	}
 
 	if(viewScrolling)
@@ -173,13 +188,12 @@ void ScmGeoLocGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
 {
 	if (event->button() == Qt::RightButton)
 	{
-		// open dialog (range of time) + save and reset the current capture polygon
-		if (currentCapturePolygon->polygon().size() < 3)
-		{
-			return;
-		}
-		// open dialog 'popup'
-		emit showAddPolyDialog();
+		// before and after mouseDoubleClickEvent 1 mouseReleaseEvent is triggered
+		// to prevent unwanted adition of a new point from the first event: delete the last point
+		deleteLastPointSet();
+		// to prevent problems with the focus management: delay action to next mouseReleaseEvent
+		// (set flag to signal that the next mouseReleaseEvent shoud open the addPolyDialog instead of adding a new point)
+		savePolygon = true;
 	}
 }
 
