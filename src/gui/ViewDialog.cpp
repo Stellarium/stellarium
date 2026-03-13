@@ -1423,15 +1423,6 @@ void ViewDialog::populateLists()
 	l->blockSignals(true);
 	l->clear();
 
-	// hard coded sequence of UN-regions to maintain thematic proximity (e.g. eastern, northern, southern, western europe)
-	const QStringList sortedRegions =
-		{"Global",
-		 "Eastern Europe", "Northern Europe", "Southern Europe", "Western Europe",
-		 "Eastern Africa", "Middle Africa", "Northern Africa", "Southern Africa", "Western Africa",
-		 "Caribbean", "Central America", "Northern America", "South America",
-		 "Central Asia", "Eastern Asia", "South-eastern Asia", "Southern Asia", "Western Asia",
-		 "Australasia", "Melanesia", "Micronesia", "Polynesia"};
-
 	const QMultiMap<QString, QString> &cultureRegionMap = app.getSkyCultureMgr().getSkyCultureRegionMapI18();
 	const QMap<QString, QPair<int, QString>> &cultureTimeLimitMap = app.getSkyCultureMgr().getSkyCultureTimeLimitMapI18();
 

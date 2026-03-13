@@ -101,7 +101,7 @@ public:
 	//! The license
 	QString license;
 	//! The name of region following the United Nations geoscheme UN~M49 https://unstats.un.org/unsd/methodology/m49/
-	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "Global".
+	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "World".
 	QJsonArray region;
 	//! Earliest available year
 	int startTime;

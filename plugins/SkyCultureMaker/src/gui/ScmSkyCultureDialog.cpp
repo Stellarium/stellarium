@@ -813,25 +813,25 @@ void ScmSkyCultureDialog::selectLocation(QTreeWidgetItem *item)
 
 void ScmSkyCultureDialog::checkMutExRegions(const QStringList checkedItems)
 {
-	// global should not be selectable when any other region is selected and vice versa
+	// world should not be selectable when any other region is selected and vice versa
 	if (checkedItems.empty())
 	{
 		// enable all regions
 		ui->regionComboBox->setItemEnabledState("", true, true);
 	}
-	else if (checkedItems.contains("Global"))
+	else if (checkedItems.contains("World"))
 	{
-		// enable "Global"
-		ui->regionComboBox->setItemEnabledState("Global", true);
+		// enable "World"
+		ui->regionComboBox->setItemEnabledState("World", true);
 		// disable all other regions
-		ui->regionComboBox->setItemEnabledState("Global", false, true);
+		ui->regionComboBox->setItemEnabledState("World", false, true);
 	}
 	else
 	{
-		// disable "Global"
-		ui->regionComboBox->setItemEnabledState("Global", false);
+		// disable "World"
+		ui->regionComboBox->setItemEnabledState("World", false);
 		// enable all other regions
-		ui->regionComboBox->setItemEnabledState("Global", true, true);
+		ui->regionComboBox->setItemEnabledState("World", true, true);
 	}
 }
 

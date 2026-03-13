@@ -115,7 +115,7 @@ private:
 		"Controls:\n"
 		"LMB / RMB: Set a new vertex for the active polygon\n"
 		"SHIFT + LMB / MMB: Navigate the Map\n"
-		"ALT + LMB / RMB: Save the active polygon\n"
+		"Double RMB: Save the active polygon\n"
 		"DELETE: Remove the last point of the active polygon\n"
 		"ESC: Remove all points of the active polygon\n"
 		"Scroll UP / DOWN: Zoom in / out of the map\n"

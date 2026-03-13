@@ -154,6 +154,14 @@ private:
 										"AE", "C", "E", "E", "E", "E", "I", "I", "I", "I", "D", "N", "O", "O", "O", "O", "O", "O",
 										"U", "U", "U", "U", "Y", "s", "a", "a", "a", "a", "a", "a", "a", "ae", "c", "e", "e", "e", "e",
 										"i", "i", "i", "i","o", "n", "o", "o", "o", "o", "o", "o", "u", "u", "u", "u", "y", "y"});
+	// hard coded sequence of UN-regions to maintain thematic proximity (e.g. eastern, northern, southern, western europe)
+	const QStringList sortedRegions =
+		{"World",
+		 "Eastern Europe", "Northern Europe", "Southern Europe", "Western Europe",
+		 "Eastern Africa", "Middle Africa", "Northern Africa", "Southern Africa", "Western Africa",
+		 "Caribbean", "Central America", "Northern America", "South America",
+		 "Central Asia", "Eastern Asia", "South-eastern Asia", "Southern Asia", "Western Asia",
+		 "Australasia", "Melanesia", "Micronesia", "Polynesia"};
 };
 
 #endif // _VIEWDIALOG_HPP
