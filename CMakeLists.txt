@@ -590,6 +590,7 @@ ADD_PLUGIN(LensDistortionEstimator 1)
 # Candidate to removing as an archaic plugin
 ADD_PLUGIN(TextUserInterface 1)
 ADD_PLUGIN(TelescopeControl 1)
+ADD_PLUGIN(TimeNavigator 1)
 ADD_PLUGIN(Vts 0)
 
 ########## Static plugins need to define includes and libraries
