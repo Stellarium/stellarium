@@ -124,7 +124,7 @@ public:
 	bool saveIllustrations(const QString &directory);
 
 	/**
-	* @brief Checks whether the polygons of locations overlap and merges them if necessary
+	* @brief Checks whether the polygons of locations overlap and merges them if necessary.
 	*/
 	void mergeLocations();
 
@@ -148,8 +148,19 @@ private:
 	int startTime;
 
 	/// The latest year associated with a territory of the sky culture
-	// (represented as QString because culture can still exist)
+	// (represented as QString ("∞") because culture can still exist)
 	QString endTime;
+
+	/**
+	 * @brief Evaluates which action shoud be taken after a merge operation and updates the respective location.
+	 *
+	 * @param idx The current index of the respective polygon in locations.
+	 * @param mergeStartTime The startTime of the new polygon that was created in the merge process.
+	 * @param mergeEndTime The endTime of the new polygon that was created in the merge process.
+	 * @param locationEndTime The endTime of the respective location.
+	 * @return True if a deletion was performed, false otherwise.
+	 */
+	bool updateLocationAfterMerge(int idx, int mergeStartTime, int mergeEndTime, int locationEndTime);
 };
 
 } // namespace scm

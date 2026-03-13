@@ -31,23 +31,15 @@ public:
 	ScmPreviewPolygonItem(int startTime, int endTime);
 	ScmPreviewPolygonItem(int startTime, int endTime, bool isTemporary);
 	ScmPreviewPolygonItem(int startTime, int endTime, const QPolygonF &polygon);
-
 	// public functions
 	int getStartTime() const {return startTime;}
 	int getEndTime() const {return endTime;}
 	bool existsAtPointInTime(int year) const;
 
-public slots:
-
-signals:
-
-protected:
-
 private:
 	bool isTemporary;
 	int startTime;
 	int endTime;
-
 	void initialize();
 };
 

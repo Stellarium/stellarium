@@ -165,6 +165,56 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 	}
 }
 
+void SkyCultureMapGraphicsView::calculateVBarValue(QPoint delta)
+{
+	QScrollBar *vBar = verticalScrollBar();
+	int newVBarValue = vBar->value() - delta.y();
+	QPointF mappedUpperLeftBorder = transform().map(QPointF(defaultRect.x(), defaultRect.y()));
+	QPointF mappedlowerRightBorder = transform().map(QPointF(defaultRect.x() + defaultRect.width(), defaultRect.y() + defaultRect.height()));
+	qreal upperBorderValue = mappedUpperLeftBorder.y() - (viewport()->height() / 2.0);
+	qreal lowerBorderValue = mappedlowerRightBorder.y() - (viewport()->height() / 2.0);
+
+	evaluateScrollBarValue(vBar->value(), newVBarValue, upperBorderValue, lowerBorderValue, vBar);
+}
+
+void SkyCultureMapGraphicsView::calculateHBarValue(QPoint delta)
+{
+	QScrollBar *hBar = horizontalScrollBar();
+	int newHBarValue = hBar->value() + (isRightToLeft() ? delta.x() : -delta.x());
+	QPointF mappedUpperLeftBorder = transform().map(QPointF(defaultRect.x(), defaultRect.y()));
+	QPointF mappedlowerRightBorder = transform().map(QPointF(defaultRect.x() + defaultRect.width(), defaultRect.y() + defaultRect.height()));
+	qreal leftBorderValue = mappedUpperLeftBorder.x() - (viewport()->width() / 2.0);
+	qreal rightBorderValue = mappedlowerRightBorder.x() - (viewport()->width() / 2.0);
+
+	evaluateScrollBarValue(hBar->value(), newHBarValue, leftBorderValue, rightBorderValue, hBar);
+}
+
+void SkyCultureMapGraphicsView::evaluateScrollBarValue(int oldValue, int newValue, qreal upperLeftBorder, qreal lowerRightBorder,  QScrollBar *bar)
+{
+	if (newValue < oldValue)
+	{
+		if (newValue < upperLeftBorder)
+		{
+			bar->setValue(upperLeftBorder);
+		}
+		else
+		{
+			bar->setValue(newValue);
+		}
+	}
+	else if (newValue > oldValue)
+	{
+		if (newValue > lowerRightBorder)
+		{
+			bar->setValue(lowerRightBorder);
+		}
+		else
+		{
+			bar->setValue(newValue);
+		}
+	}
+}
+
 void SkyCultureMapGraphicsView::wheelEvent(QWheelEvent *e)
 {
 	qreal zoomFactor = std::pow(2.0, e->angleDelta().y() / 240.0);
@@ -211,66 +261,11 @@ void SkyCultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
 		{
 			QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
 		}
-		QScrollBar *hBar = horizontalScrollBar();
-		QScrollBar *vBar = verticalScrollBar();
-		QPoint delta = e->pos() - mouseLastXY;
-		int oldHBarValue= hBar->value();
-		int oldVBarValue= vBar->value();
-		int newHBarValue = oldHBarValue + (isRightToLeft() ? delta.x() : -delta.x());
-		int newVBarValue = oldVBarValue - delta.y();
-		int borderValue = 0; // scrollbar value of the respective border of the map
 
 		// ensure the user is not able to pan too far away from the map
-		QPointF mappedUpperLeftBorder = transform().map(QPointF(defaultRect.x(), defaultRect.y()));
-		QPointF mappedlowerRightBorder = transform().map(QPointF(defaultRect.x() + defaultRect.width(), defaultRect.y() + defaultRect.height()));
-		if (newHBarValue < oldHBarValue)
-		{
-			borderValue = mappedUpperLeftBorder.x() - (viewport()->width() / 2.0);
-			if (newHBarValue < borderValue)
-			{
-				hBar->setValue(borderValue);
-			}
-			else
-			{
-				hBar->setValue(newHBarValue);
-			}
-		}
-		else if (newHBarValue > oldHBarValue)
-		{
-			borderValue = mappedlowerRightBorder.x() - (viewport()->width() / 2.0);
-			if (newHBarValue > borderValue)
-			{
-				hBar->setValue(borderValue);
-			}
-			else
-			{
-				hBar->setValue(newHBarValue);
-			}
-		}
-		if (newVBarValue < oldVBarValue)
-		{
-			borderValue = mappedUpperLeftBorder.y() - (viewport()->height() / 2.0);
-			if (newVBarValue < borderValue)
-			{
-				vBar->setValue(borderValue);
-			}
-			else
-			{
-				vBar->setValue(newVBarValue);
-			}
-		}
-		else if (newVBarValue > oldVBarValue)
-		{
-			borderValue = mappedlowerRightBorder.y() - (viewport()->height() / 2.0);
-			if (newVBarValue > borderValue)
-			{
-				vBar->setValue(borderValue);
-			}
-			else
-			{
-				vBar->setValue(newVBarValue);
-			}
-		}
+		QPoint delta = e->pos() - mouseLastXY;
+		calculateVBarValue(delta);
+		calculateHBarValue(delta);
 
 		mapMoved = true;
 	}

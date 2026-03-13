@@ -28,19 +28,10 @@ class ScmPreviewPathItem : public QGraphicsPathItem
 {
 public:
 	ScmPreviewPathItem();
-
-	// public functions
 	void setFirstPoint(QPointF point);
 	void setMousePoint(QPointF point);
 	void setLastPoint(QPointF point);
-
 	void reset();
-
-public slots:
-
-signals:
-
-protected:
 
 private:
 	QPainterPath currentPath;

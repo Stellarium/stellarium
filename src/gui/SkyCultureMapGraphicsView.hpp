@@ -167,6 +167,31 @@ private:
 	void loadCulturePolygons();
 
 	/**
+	 * @brief Calculates and sets the respectives values for the verticalScrollBar when moving the map.
+	 *
+	 * @param delta Difference between the old and new mouse position.
+	 */
+	void calculateVBarValue(QPoint delta);
+
+	/**
+	 * @brief Calculates and sets the respectives values for the horizontalScrollBar when moving the map.
+	 *
+	 * @param delta Difference between the old and new mouse position.
+	 */
+	void calculateHBarValue(QPoint delta);
+
+	/**
+	 * @brief Evaluates wether the given ScrollBar should be set to the new or old value.
+	 *
+	 * @param oldValue Old scrollbar value (pre map movement).
+	 * @param newValue New scrollbar value (post map movement).
+	 * @param upperLeftBorder Either upper or left border (scrollbar) value of the movable area.
+	 * @param lowerRightBorder Either lower or right border (scrollbar) value of the movable area.
+	 * @param bar Reference to respective scrollbar (either horizontal or vertical).
+	 */
+	void evaluateScrollBarValue(int oldValue, int newValue, qreal upperLeftBorder, qreal lowerRightBorder,  QScrollBar *bar);
+
+	/**
 	 * @brief Calculate the factor by which the view must be scaled to fit in the given width / height.
 	 *
 	 * @param width The width of the new view.
