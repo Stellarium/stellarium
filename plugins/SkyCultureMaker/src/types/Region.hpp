@@ -43,7 +43,9 @@ struct Region
 //! Enum class to represent different types of regions
 enum class RegionType
 {
-	GLOBAL = 0,
+	NONE = 0,		// (delete this when multiple regions are used)
+	WORLD,			// (delete this when multiple regions are used)
+	//WORLD = 0,	// (uncomment this when multiple regions are used)
 	EASTERN_EUROPE,
 	NORTHERN_EUROPE,
 	SOUTHERN_EUROPE,
@@ -63,14 +65,15 @@ enum class RegionType
 	SOUTHERN_ASIA,
 	WESTERN_ASIA,
 	AUSTRALASIA,
-	MELANASIA,
+	MELANESIA,
 	MICRONESIA,
 	POLYNESIA
 };
 
 //! Map of region types to their corresponding name and description
 const std::map<RegionType, Region> REGIONS = {
-	{RegionType::GLOBAL, Region("Global", "Unofficial region intended only for cultures that operate globally and cannot be assigned to a single location. (e.g. Modern)")},
+	{RegionType::NONE, Region("None", "Please select a valid region.")}, // (delete this when multiple regions are used)
+	{RegionType::WORLD, Region("World", "Unofficial region intended only for cultures that operate globally and cannot be assigned to a single location. (e.g. Modern)")},
 	{RegionType::EASTERN_EUROPE, Region("Eastern Europe", "This region includes the whole of russia (even the parts on the asian continent).")},
 	{RegionType::NORTHERN_EUROPE, Region("Northern Europe", "")},
 	{RegionType::SOUTHERN_EUROPE, Region("Southern Europe", "")},
@@ -90,7 +93,7 @@ const std::map<RegionType, Region> REGIONS = {
 	{RegionType::SOUTHERN_ASIA, Region("Southern Asia", "")},
 	{RegionType::WESTERN_ASIA, Region("Western Asia", "")},
 	{RegionType::AUSTRALASIA, Region("Australasia", "")},
-	{RegionType::MELANASIA, Region("Melanesia", "")},
+	{RegionType::MELANESIA, Region("Melanesia", "")},
 	{RegionType::MICRONESIA, Region("Micronesia", "")},
 	{RegionType::POLYNESIA, Region("Polynesia", "")}
 };

@@ -56,7 +56,8 @@ struct Description
 	QString acknowledgements;                // content of subsection (L3) in author section
 	scm::LicenseType license;                // license code
 	scm::ClassificationType classification;  // classification code
-	std::vector<scm::RegionType> region;	 // region code
+	scm::RegionType region;					 // region code (delete this when multiple regions are used)
+	//std::vector<scm::RegionType> region;	 // region code (uncomment this when multiple regions are used)
 
 
 	QStringList getIncompleteFieldsList() const
@@ -70,7 +71,8 @@ struct Description
 		if (about.trimmed().isEmpty())              list.append(q_("About the sky culture"));
 		if (license == scm::LicenseType::NONE)      list.append(qc_("License", "Name of a section in sky culture description"));
 		if (classification == scm::ClassificationType::NONE) list.append(q_("Classification"));
-		if (region.empty())							list.append(q_("Region of the Sky Culture"));
+		if (region == scm::RegionType::NONE)		list.append(q_("Region of the Sky Culture")); // (delete this when multiple regions are used)
+		//if (region.empty())						list.append(q_("Region of the Sky Culture")); // (uncomment this when multiple regions are used)
 		return list;
 	}
 };

@@ -92,12 +92,16 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 
 	scJsonObj["id"] = id;
 
-	QJsonArray regionArray;
+	// delete this when multiple regions are used
+	scJsonObj["region"] = REGIONS.at(description.region).name;
+
+	// uncomment this when multiple regions are used
+	/*QJsonArray regionArray;
 	for (const auto &currentRegion : description.region)
 	{
 		regionArray.append(REGIONS.at(currentRegion).name);
 	}
-	scJsonObj["region"] = regionArray;
+	scJsonObj["region"] = regionArray;*/
 
 	scJsonObj["startTime"] = startTime;
 	scJsonObj["endTime"] = endTime;

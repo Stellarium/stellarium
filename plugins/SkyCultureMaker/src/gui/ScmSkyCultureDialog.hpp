@@ -30,6 +30,7 @@
 #include "types/Classification.hpp"
 #include "types/Description.hpp"
 #include "types/License.hpp"
+#include "types/Region.hpp"
 #include <optional>
 #include <qtreewidget.h>
 #include <QFile>
@@ -98,7 +99,8 @@ private slots:
 	void hideAddPolygon();
 	void confirmAddPolygon();
 	void cancelAddPolygon();
-	void checkMutExRegions(const QStringList checkedItems);
+	// (uncomment when multiple regions are used)
+	//void checkMutExRegions(const QStringList checkedItems);
 
 private:
 	Ui_scmSkyCultureDialog *ui = nullptr;

@@ -23,7 +23,6 @@
 
 #include "ScmSkyCultureDialog.hpp"
 #include "ScmPolygonInfoTreeItem.hpp"
-#include "types/Region.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
 #include <QStyledItemDelegate>
@@ -192,12 +191,29 @@ void ScmSkyCultureDialog::createDialogContent()
 	}
 
 	// add all regions to the combo box
+	// (delete when multiple regions are used)
 	for (const auto &region : scm::REGIONS)
+	{
+		// add name, region type
+		ui->regionCB->addItem(region.second.name, QVariant::fromValue(region.first));
+		// set the region description as tooltip
+		int index = ui->regionCB->count() - 1;
+		ui->regionCB->setItemData(index, region.second.description, Qt::ToolTipRole);
+		// set NONE as the default region
+		if (region.first == scm::RegionType::NONE)
+		{
+			ui->regionCB->setCurrentIndex(index);
+		}
+	}
+
+	// preparation for a possible extension of multiple regions for 1 skyculture
+	// please set regionComboBox to ScmMultiselectionComboBox in the ui file (instead of a normal QComboBox)
+	/*for (const auto &region : scm::REGIONS)
 	{
 		ui->regionComboBox->addItem(region.second.name, QVariant::fromValue(region.first), region.second.description);
 	}
 	ui->regionComboBox->setDefaultText("None");
-	connect(ui->regionComboBox, &ScmMultiselectionComboBox::checkedItemsChanged, this, &ScmSkyCultureDialog::checkMutExRegions);
+	connect(ui->regionComboBox, &ScmMultiselectionComboBox::checkedItemsChanged, this, &ScmSkyCultureDialog::checkMutExRegions);*/
 
 	// Geographical Location Tab
 
@@ -614,11 +630,15 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	desc.license            = ui->licenseCB->currentData().value<scm::LicenseType>();
 	desc.classification   = ui->classificationCB->currentData().value<scm::ClassificationType>();
 
-	desc.region.clear();
-	for (const auto &itemData : ui->regionComboBox->checkedItemsData())
+	// (delete when multiple regions are used)
+	desc.region = ui->regionCB->currentData().value<scm::RegionType>();
+
+	// (uncomment when multiple regions are used)
+	/*desc.region.clear();
+	for (const auto &itemData : ui->regionCB->checkedItemsData())
 	{
 		desc.region.push_back(itemData.value<scm::RegionType>());
-	}
+	}*/
 
 	return desc;
 }
@@ -643,7 +663,12 @@ void ScmSkyCultureDialog::resetDialog()
 
 		ui->licenseCB->setCurrentIndex(0);
 		ui->classificationCB->setCurrentIndex(0);
-		ui->regionComboBox->reset();
+
+		// (delete when multiple regions are used)
+		ui->regionCB->setCurrentIndex(0);
+
+		// (uncomment when multiple regions are used)
+		//ui->regionComboBox->reset();
 
 		name.clear();
 		setIdFromName(name);
@@ -811,7 +836,8 @@ void ScmSkyCultureDialog::selectLocation(QTreeWidgetItem *item)
 	ui->scmGeoLocGraphicsView->selectPolygon(polygonInfoItem->getId());
 }
 
-void ScmSkyCultureDialog::checkMutExRegions(const QStringList checkedItems)
+// (uncomment when multiple regions are used)
+/*void ScmSkyCultureDialog::checkMutExRegions(const QStringList checkedItems)
 {
 	// world should not be selectable when any other region is selected and vice versa
 	if (checkedItems.empty())
@@ -833,7 +859,7 @@ void ScmSkyCultureDialog::checkMutExRegions(const QStringList checkedItems)
 		// enable all other regions
 		ui->regionComboBox->setItemEnabledState("World", true, true);
 	}
-}
+}*/
 
 void ScmSkyCultureDialog::confirmAddPolygon()
 {
