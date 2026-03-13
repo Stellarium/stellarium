@@ -595,6 +595,7 @@ void ViewDialog::createDialogContent()
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::defaultSkyCultureIDChanged,
 	        this, &ViewDialog::updateDefaultSkyCulture);
 	updateDefaultSkyCulture();
+	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::skyCultureListChanged, this, &ViewDialog::updateSkyCultureGUI);
 
 	initSkyCultureTime();
 
@@ -1464,9 +1465,9 @@ void ViewDialog::populateLists()
 		l->insertItem(l->row(l->findItems(cultureRegionIt.value(), Qt::MatchContains).at(0)) + 1, item);
 	}
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalStartTime);
-
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
+
 	updateSkyCultureText();
 
 	const StelCore* core = app.getCore();
@@ -2021,6 +2022,19 @@ void ViewDialog::filterSkyCultures()
 void ViewDialog::initiateSkyCultureMapRotation()
 {
 	ui->skyCultureMapGraphicsView->rotateMap(ui->useLocationForRotationCheckBox->isChecked());
+}
+
+void ViewDialog::updateSkyCultureGUI()
+{
+	// update respectve ViewDialog elements after exporting a skyculture with SCM
+	ui->skyCultureMapGraphicsView->reloadMap();
+	populateLists();
+
+	int minYear = ui->skyCultureCurrentTimeSpinBox->minimum();
+	ui->skyCultureMinTimeSpinBox->setMinimum(minYear);
+	ui->skyCultureMinTimeSpinBox->setValue(minYear);
+	ui->skyCultureMaxTimeSpinBox->setMinimum(minYear);
+	ui->skyCultureTimeSlider->setMinimum(minYear);
 }
 
 void ViewDialog::populatePlanetMagnitudeAlgorithmsList()

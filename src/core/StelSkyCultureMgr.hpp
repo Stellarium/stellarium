@@ -336,6 +336,9 @@ signals:
 	//! Emitted when the current sky culture changes
 	void currentSkyCultureChanged(const StelSkyCulture& culture);
 
+	//! Emitted when the list of sky cultures is (re)made
+	void skyCultureListChanged();
+
 	//! Emitted when InfoLabelStyle has changed
 	void infoLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
 	//! Emitted when ScreenLabelStyle has changed

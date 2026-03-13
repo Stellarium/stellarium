@@ -77,7 +77,6 @@ void SkyCultureMapGraphicsView::drawMapContent()
 	// delete all items
 	scene()->clear();
 
-	// evaluate projection
 	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/skyCultureWorldMap.svgz");
 
 	scene()->addItem(baseMap);
@@ -310,7 +309,6 @@ void SkyCultureMapGraphicsView::mouseReleaseEvent( QMouseEvent *e )
 				// if so, select all polygons of the respective culture, emit the cultureSelected Signal and set the oldSkyCulture to currentSkyCulture
 				selectAllCulturePolygon(currentSkyCulture);
 				emit cultureSelected(currentSkyCulture);
-				oldSkyCulture = currentSkyCulture;
 			}
 		}
 	}
@@ -416,6 +414,7 @@ void SkyCultureMapGraphicsView::selectAllCulturePolygon(const QString &skyCultur
 			}
 		}
 	}
+	oldSkyCulture = skyCultureId;
 }
 
 void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int startTime)
@@ -500,6 +499,13 @@ void SkyCultureMapGraphicsView::rotateMap(bool applyRotation)
 			isRotated = false;
 		}
 	}
+}
+
+void SkyCultureMapGraphicsView::reloadMap()
+{
+	drawMapContent();
+	updateCultureVisibility();
+	selectAllCulturePolygon(oldSkyCulture);
 }
 
 void SkyCultureMapGraphicsView::updateCultureVisibility()

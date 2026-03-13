@@ -294,6 +294,7 @@ void StelSkyCultureMgr::makeCulturesList()
 			culture.classification = classification;
 		}
 	}
+	emit skyCultureListChanged();
 }
 
 //! Init itself from a config file.

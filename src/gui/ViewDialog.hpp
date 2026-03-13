@@ -81,6 +81,7 @@ private slots:
 	void updateSkyCultureTimeRange(int minYear, int maxYear);
 	void filterSkyCultures();
 	void initiateSkyCultureMapRotation();
+	void updateSkyCultureGUI();
 
 	void showAddRemoveLandscapesDialog();
 	// GZ I make this public to have it on a hotkey...

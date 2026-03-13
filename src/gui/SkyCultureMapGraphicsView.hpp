@@ -55,6 +55,12 @@ public slots:
 	 */
 	void rotateMap(bool applyRotation);
 
+	/**
+	 * @brief Reloads the view and its content.
+	 *
+	 */
+	void reloadMap();
+
 signals:
 	void cultureSelected(const QString &skyCultureId);
 	void timeValueChanged(int year);
