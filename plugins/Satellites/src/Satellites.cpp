@@ -534,9 +534,9 @@ StelObjectP Satellites::searchByInternationalDesignator(const QString &intlDesig
 }
 
 
-QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (!hintFader || maxNbItem <= 0)
 		return result;
 
@@ -568,45 +568,49 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	if (match2.hasMatch())
 		designatorPrefix = QString("%1-%2").arg(match2.captured(1), match2.captured(2));
 
-	QStringList names;
+	QVector<QPair<QString,StelObjectP>> names;
 	for (const auto& sobj : satellites)
 	{
 		if (!sobj->initialized || !sobj->displayed)
 			continue;
 
-		names.append(sobj->getNameI18n());
-		names.append(sobj->getEnglishName());
+		names.append({sobj->getNameI18n(), StelObjectP(sobj)});
+		names.append({sobj->getEnglishName(), StelObjectP(sobj)});
 		if (!numberPrefix.isEmpty() && sobj->getCatalogNumberString().startsWith(numberPrefix))
-			names.append(QString("NORAD %1").arg(sobj->getCatalogNumberString()));
+			names.append({QString("NORAD %1").arg(sobj->getCatalogNumberString()), StelObjectP(sobj)});
 		if (!designatorPrefix.isEmpty() && sobj->getInternationalDesignator().startsWith(designatorPrefix))
-			names.append(sobj->getInternationalDesignator());
+			names.append({sobj->getInternationalDesignator(), StelObjectP(sobj)});
 	}
 
-	QString fullMatch = "";
-	for (const auto& name : std::as_const(names))
+	QString fullMatchName;
+	StelObjectP fullMatchP;
+	for (const auto& [name,obj] : std::as_const(names))
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 			continue;
 
 		if (name==objPrefix)
-			fullMatch = name;
+		{
+			fullMatchName = name;
+			fullMatchP = obj;
+		}
 		else
-			result.append(name);
+			result.append({name, obj});
 
 		if (result.size() >= maxNbItem)
 			break;
 	}
 
-	result.sort();
-	if (!fullMatch.isEmpty())
-		result.prepend(fullMatch);
+	std::sort(result.begin(), result.end(), [](auto& a, auto& b){ return a.first < b.first; });
+	if (!fullMatchName.isEmpty())
+		result.prepend({fullMatchName, fullMatchP});
 
 	return result;
 }
 
-QStringList Satellites::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> Satellites::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 
 	if (!hintFader)
 		return result;
@@ -622,9 +626,9 @@ QStringList Satellites::listAllObjects(bool inEnglish) const
 	for (const auto& sat : satellites)
 	{
 		if (inEnglish)
-			result << sat->getEnglishName();
+			result.append({sat->getEnglishName(), StelObjectP(sat)});
 		else
-			result << sat->getNameI18n();
+			result.append({sat->getNameI18n(), StelObjectP(sat)});
 	}
 	return result;
 }

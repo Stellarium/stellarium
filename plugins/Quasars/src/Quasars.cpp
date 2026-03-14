@@ -325,18 +325,18 @@ StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (flagShowQuasars)
 		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 	return result;
 }
 
 
-QStringList Quasars::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> Quasars::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (!flagShowQuasars)
 		return result;
 
@@ -344,14 +344,14 @@ QStringList Quasars::listAllObjects(bool inEnglish) const
 	{
 		for (const auto& quasar : QSO)
 		{
-			result << quasar->getEnglishName();
+			result.append({quasar->getEnglishName(), StelObjectP(quasar)});
 		}
 	}
 	else
 	{
 		for (const auto& quasar : QSO)
 		{
-			result << quasar->getNameI18n();
+			result.append({quasar->getNameI18n(), StelObjectP(quasar)});
 		}
 	}
 	return result;

@@ -28,6 +28,7 @@
 #include <QHash>
 #include <QDialog>
 #include "StelDialog.hpp"
+#include "StelObjectType.hpp"
 #include "VecMath.hpp"
 
 // pre declaration of the ui class
@@ -368,7 +369,8 @@ private:
 	//! Display search per user preference
 	void adjustMatchesResult(QStringList &allMatches, QStringList& recentMatches, QStringList& matches, int maxNbItem);
 	//! Update searches result display and reset selectedIdx = 0
-	void resetSearchResultDisplay(QStringList allMatches, QStringList recentMatches);
+	void resetSearchResultDisplay(QStringList allMatches, QStringList recentMatches,
+	                              const QVector<QPair<QString,StelObjectP>>& matchesWithPointers);
 	//! Decide if push button should be enabled
 	void setPushButtonGotoSearch();
 	//! Default maxNbItem when matching objects

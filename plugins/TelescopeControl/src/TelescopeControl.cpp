@@ -1755,9 +1755,9 @@ void TelescopeControl::logAtSlot(int slot)
 		log_file = telescopeServerLogStreams.value(slot);
 }
 
-QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, const int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> TelescopeControl::listMatchingObjects(const QString& objPrefix, const int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (maxNbItem<=0)
 		return result;
 
@@ -1778,7 +1778,7 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, cons
 				find = true;
 		}
 		if (find)
-			result << tn;
+			result.append({tn, StelObjectP(telescope)});
 
 		tn = telescope->getEnglishName();
 		find = false;
@@ -1793,9 +1793,9 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, cons
 				find = true;
 		}
 		if (find)
-			result << tn;
+			result.append({tn, StelObjectP(telescope)});
 	}
-	result.sort();
+	std::sort(result.begin(), result.end(), [](auto& a, auto& b){ return a.first < b.first; });
 	if (result.size()>maxNbItem)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 		result.erase(result.begin()+maxNbItem, result.end());

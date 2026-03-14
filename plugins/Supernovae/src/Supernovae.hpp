@@ -112,7 +112,7 @@ public:
 		return qSharedPointerCast<StelObject>(getByID(id));
 	}
 
-	QStringList listAllObjects(bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override;
 
 	QString getName() const override { return "Historical Supernovae"; }
 	QString getStelObjectType() const override { return Supernova::SUPERNOVA_TYPE; }

@@ -2478,7 +2478,8 @@ QStringList SolarSystem::getObjectsList(QString objType) const
 	QStringList r;
 	if (objType.toLower()==L1S("all"))
 	{
-		r = listAllObjects(true);
+		for (const auto& [name,obj] : listAllObjects(true))
+			r << name;
 		// Remove the Sun
 		r.removeOne("Sun");
 		// Remove special objects
@@ -2491,7 +2492,10 @@ QStringList SolarSystem::getObjectsList(QString objType) const
 		r.removeOne("Neptune Observer");
 	}
 	else
-		r = listAllObjectsByType(objType, true);
+	{
+		for (const auto& [name,obj] : listAllObjectsByType(objType, true))
+			r << name;
+	}
 
 	return r;
 }
@@ -2559,9 +2563,9 @@ void SolarSystem::updateI18n()
 		p->translateName(trans);
 }
 
-QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (getFlagPlanets())
 		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 	return result;
@@ -2780,36 +2784,36 @@ bool SolarSystem::nearLunarEclipse() const
 	return true;
 }
 
-QStringList SolarSystem::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> SolarSystem::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QMap<QString,StelObjectP> map;
 	if (inEnglish)
 	{
 		for (const auto& p : systemPlanets)
 		{
-			result << p->getEnglishName();
+			map[p->getEnglishName()] = StelObjectP(p);
 			if (!p->getIAUDesignation().isEmpty())
-				result << p->getIAUDesignation();
+				map[p->getIAUDesignation()] = StelObjectP(p);
 		}
 	}
 	else
 	{
 		for (const auto& p : systemPlanets)
 		{
-			result << p->getNameI18n();
+			map[p->getNameI18n()] = StelObjectP(p);
 			if (!p->culturalNames.isEmpty())
 			{
 				// Objects can have more than 1 name, e.g. Venus as Morning/Evening star.
 				for (const StelObject::CulturalName &cName : qAsConst(p->culturalNames))
 				{
-					result << cName.translatedI18n << cName.native << cName.pronounceI18n;
+					map[cName.translatedI18n] = StelObjectP(p);
+					map[cName.native] = StelObjectP(p);
+					map[cName.pronounceI18n] = StelObjectP(p);
 				}
 			}
-			result.removeAll("");
-			result.removeDuplicates();
 
 			if (!p->getIAUDesignation().isEmpty())
-				result << p->getIAUDesignation();
+				map[p->getIAUDesignation()] = StelObjectP(p);
 		}
 	}
 	for (const auto& p : systemMinorBodies)
@@ -2824,26 +2828,29 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 			c = mp->getExtraDesignations();
 		}
-		if (c.count()>0)
-			result << c;
+		for (const auto& name : c)
+			map[name] = StelObjectP(p);
 	}
-	result.removeAll("");
-	result.removeDuplicates();
+	map.remove("");
+
+	QVector<QPair<QString,StelObjectP>> result;
+	for(auto it = map.constKeyValueBegin(); it != map.constKeyValueEnd(); ++it)
+		result.append({(*it).first, (*it).second});
 	return result;
 }
 
-QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> SolarSystem::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
-	QStringList result;
+	QMap<QString,StelObjectP> map;
 	if (inEnglish)
 	{
 		for (const auto& p : systemPlanets)
 		{
 			if (p->getObjectType()==objType)
 			{
-				result << p->getEnglishName();
+				map[p->getEnglishName()] = StelObjectP(p);
 				if (!p->getIAUDesignation().isEmpty())
-					result << p->getIAUDesignation();
+					map[p->getIAUDesignation()] = StelObjectP(p);
 			}
 		}
 	}
@@ -2853,18 +2860,18 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 		{
 			if (p->getObjectType()==objType)
 			{
-				result << p->getNameI18n();
+				map[p->getNameI18n()] = StelObjectP(p);
 				if (!p->getIAUDesignation().isEmpty())
-					result << p->getIAUDesignation();
+					map[p->getIAUDesignation()] = StelObjectP(p);
 				if (!p->culturalNames.isEmpty())
 				{
 					for (const StelObject::CulturalName &cName : qAsConst(p->culturalNames))
 					{
-						result << cName.native << cName.pronounceI18n << cName.translatedI18n;
+						map[cName.native] = StelObjectP(p);
+						map[cName.pronounceI18n] = StelObjectP(p);
+						map[cName.translatedI18n] = StelObjectP(p);
 					}
 				}
-				result.removeAll("");
-				result.removeDuplicates();
 			}
 		}
 	}
@@ -2882,10 +2889,15 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 				QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 				c = mp->getExtraDesignations();
 			}
-			if (c.count()>0)
-				result << c;
+			for (const auto& name : c)
+				map[name] = StelObjectP(p);
 		}
 	}
+	map.remove("");
+
+	QVector<QPair<QString,StelObjectP>> result;
+	for(auto it = map.constKeyValueBegin(); it != map.constKeyValueEnd(); ++it)
+		result.append({(*it).first, (*it).second});
 	return result;
 }
 

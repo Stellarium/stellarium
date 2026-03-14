@@ -45,11 +45,17 @@ QStringList ObjectService::performSearch(const QString &text)
 	QStringList matches;
 	if(greekText != text)
 	{
-		matches = objMgr->listMatchingObjects(text, 3, useStartOfWords);
-		matches += objMgr->listMatchingObjects(greekText, (8 - matches.size()), useStartOfWords);
+		for(const auto& [name,obj] : objMgr->listMatchingObjects(text, 3, useStartOfWords))
+			matches += name;
+		for(const auto& [name,obj] : objMgr->listMatchingObjects(greekText, (8 - matches.size()), useStartOfWords))
+			matches += name;
 	}
-	else //no greek replaced, saves 1 call
-		matches = objMgr->listMatchingObjects(text, 5, useStartOfWords);
+	else
+	{
+		// no greek replaced, saves 1 call
+		for(const auto& [name,obj] : objMgr->listMatchingObjects(text, 5, useStartOfWords))
+			matches += name;
+	}
 
 	return matches;
 }
@@ -194,7 +200,9 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 
 		if(!type.isEmpty())
 		{
-			QStringList list = objMgr->listAllModuleObjects(type,eng);
+			QStringList list;
+			for (const auto& [name,obj] : objMgr->listAllModuleObjects(type,eng))
+				list << name;
 
 			//sort
 			list.sort();
