@@ -963,6 +963,12 @@ flag\_gravity\_labels         & bool  & Set to \emph{true} if you want labels to
 \midrule
 flag\_moon\_scaled            & bool  & Keep it \emph{false} if you want to see the real moon size \\%\midrule
 moon\_scale                   & float & Sets the moon scale factor, sometimes useful to correlate to our perception of the moon's size. Typical value: \emph{4}\\
+flag\_dynamic\_moon\_scale    & bool  & If \emph{true}, Moon scale is computed dynamically from FOV rather than
+                               using the fixed \texttt{moon\_scale} multiplier. Requires \texttt{flag\_moon\_scaled} to also be \emph{true}. Default: \emph{false}\\%\midrule
+moon\_scale\_min\_fov         & float & FOV in degrees at which dynamic Moon scaling equals $1\times$
+                               (natural size). Below this FOV the Moon is unscaled. Default: \emph{10.0}\\%\midrule
+moon\_scale\_max\_fov         & float & FOV in degrees at which dynamic Moon scaling reaches the fixed
+                               \texttt{moon\_scale} value. Above this FOV the scale is clamped. Default: \emph{90.0}\\
 flag\_planets\_scaled         & bool  & Keep it \emph{false} if you want to see the real planet size \\%\midrule
 planets\_scale                & float & Sets the planet scale factor, sometimes useful to show planets symbolically. Typical value: \emph{150}\\
 flag\_sun\_scaled             & bool  & Keep it \emph{false} if you want to see the real sun size \\%\midrule

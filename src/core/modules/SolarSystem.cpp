@@ -47,6 +47,7 @@
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 #include "TrailGroup.hpp"
+#include "StelMovementMgr.hpp"
 
 #include "AstroCalcDialog.hpp"
 #include "StelObserver.hpp"
@@ -77,6 +78,9 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, earthShadowEnlargementDanjon(false)
 	, flagMoonScale(false)
 	, moonScale(1.0)
+	, flagDynamicMoonScale(false)
+	, moonScaleMinFov(10.0)
+	, moonScaleMaxFov(90.0)
 	, flagMinorBodyScale(false)
 	, minorBodyScale(1.0)
 	, flagPlanetScale(false)
@@ -233,6 +237,9 @@ void SolarSystem::init()
 	setFlagDrawSunHalo(conf->value("viewing/flag_draw_sun_halo", true).toBool());
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", false).toBool()).toBool());  // name change
 	setMoonScale(conf->value("viewing/moon_scale", 4.0).toDouble());
+	setFlagDynamicMoonScale(conf->value("viewing/flag_dynamic_moon_scale", false).toBool());
+	setMoonScaleMinFov(conf->value("viewing/moon_scale_min_fov", 10.0).toDouble());
+	setMoonScaleMaxFov(conf->value("viewing/moon_scale_max_fov", 90.0).toDouble());
 	setMinorBodyScale(conf->value("viewing/minorbodies_scale", 10.0).toDouble());
 	setFlagMinorBodyScale(conf->value("viewing/flag_minorbodies_scaled", false).toBool());
 	setFlagPlanetScale(conf->value("viewing/flag_planets_scaled", false).toBool());
@@ -2720,6 +2727,31 @@ void SolarSystem::update(double deltaTime)
 		p->update(static_cast<int>(deltaTime*1000));
 	}
 	markerFader.update(deltaTime*1000);
+
+	// Dynamic Moon scaling: interpolate between 1× (at moonScaleMinFov) and moonScale (at moonScaleMaxFov).
+	// Only active when both flagMoonScale and flagDynamicMoonScale are set.
+	if (flagMoonScale && flagDynamicMoonScale)
+	{
+		const double currentFov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
+		double effectiveScale;
+		if (currentFov <= moonScaleMinFov)
+		{
+			// Zoomed in at or past minFov: natural size.
+			effectiveScale = 1.0;
+		}
+		else if (currentFov >= moonScaleMaxFov)
+		{
+			// Zoomed out at or past maxFov: full configured scale.
+			effectiveScale = moonScale;
+		}
+		else
+		{
+			// Linearly interpolate between 1× and moonScale across the FOV range.
+			const double t = (currentFov - moonScaleMinFov) / (moonScaleMaxFov - moonScaleMinFov);
+			effectiveScale = 1.0 + t * (moonScale - 1.0);
+		}
+		getMoon()->setSphereScale(effectiveScale);
+	}
 }
 
 // is a lunar eclipse close at hand?
@@ -3665,6 +3697,45 @@ void SolarSystem::setNeptuneOrbitColor(const Vec3f &c)
 Vec3f SolarSystem::getNeptuneOrbitColor(void) const
 {
 	return Planet::getNeptuneOrbitColor();
+}
+
+// Set if Moon display is scaled dynamically based on FOV
+void SolarSystem::setFlagDynamicMoonScale(bool b)
+{
+	if (b != flagDynamicMoonScale)
+	{
+		flagDynamicMoonScale = b;
+		// If turning off dynamic mode, restore the static scale (or 1x if moon scaling is off)
+		if (!b)
+		{
+			if (flagMoonScale)
+				getMoon()->setSphereScale(moonScale);
+			else
+				getMoon()->setSphereScale(1.0);
+		}
+		StelApp::immediateSave("viewing/flag_dynamic_moon_scale", b);
+		emit flagDynamicMoonScaleChanged(b);
+	}
+}
+
+void SolarSystem::setMoonScaleMinFov(double deg)
+{
+	if (!fuzzyEquals(moonScaleMinFov, deg))
+	{
+		moonScaleMinFov = deg;
+		StelApp::immediateSave("viewing/moon_scale_min_fov", deg);
+		emit moonScaleMinFovChanged(deg);
+	}
+}
+
+void SolarSystem::setMoonScaleMaxFov(double deg)
+{
+	if (!fuzzyEquals(moonScaleMaxFov, deg))
+	{
+		moonScaleMaxFov = deg;
+		StelApp::immediateSave("viewing/moon_scale_max_fov", deg);
+		emit moonScaleMaxFovChanged(deg);
+	}
 }
 
 // Set/Get if Moon display is scaled
