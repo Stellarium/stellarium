@@ -446,8 +446,9 @@ void ViewDialog::createDialogContent()
 	updateDefaultLandscape();
 	connect(lmgr, SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
 	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
-    // Connect grid spacing combo box
+	// Connect grid spacing combo box
 	connect(ui->gridSpacingComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(gridSpacingChanged(int)));
+	updateGridSpacingComboBox();
 
 	// Grid and lines
 	connectGroupBox(ui->celestialSphereGroupBox,              "actionShow_Gridlines");
@@ -1846,15 +1847,15 @@ void ViewDialog::gridSpacingChanged(int index)
 {
 	GridLinesMgr* gridMgr = GETSTELMODULE(GridLinesMgr);
 
-		// Map combo box index to multiplier values
-		// Index 0 = Fine (2.0x), Index 1 = Normal (1.0x), Index 2 = Coarse (0.5x)
+	// Map combo box index to multiplier values
+	// Index 0 = Fine (2.0x), Index 1 = Normal (1.0x), Index 2 = Coarse (0.5x)
 	double multiplier = 1.0;
 	switch(index)
 	{
 		case 0: // Fine
 			multiplier = 2.0;
 			break;
-        case 1: // Normal
+		case 1: // Normal
 			multiplier = 1.0;
 			break;
 		case 2: // Coarse
@@ -1890,5 +1891,4 @@ void ViewDialog::updateGridSpacingComboBox()
 	ui->gridSpacingComboBox->blockSignals(true);
 	ui->gridSpacingComboBox->setCurrentIndex(index);
 	ui->gridSpacingComboBox->blockSignals(false);
-	updateGridSpacingComboBox();
 }

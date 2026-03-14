@@ -148,7 +148,7 @@ static const double STEP_SIZES_HMS[] = {0.05, 0.2, 1.5, 7.5, 15., 15.*5., 15.*10
 //! Return the angular grid step in degree which best fits the given scale
 static double getClosestResolutionDMS(double pixelPerRad, double spacingMultiplier)
 {
-    // Apply spacing multiplier: higher values = denser grid
+	// Apply spacing multiplier: higher values = denser grid
 	double minResolution = 80.0 / spacingMultiplier;
 	double minSizeArcsec = minResolution/pixelPerRad*M_180_PI*3600;
 	for (unsigned int i=0;i<12;++i)
@@ -162,7 +162,7 @@ static double getClosestResolutionDMS(double pixelPerRad, double spacingMultipli
 //! Return the angular grid step in degree which best fits the given scale
 static double getClosestResolutionHMS(double pixelPerRad, double spacingMultiplier)
 {
-    // Apply spacing multiplier: higher values = denser grid
+	// Apply spacing multiplier: higher values = denser grid
 	double minResolution = 80.0 / spacingMultiplier;
 	double minSizeArcsec = minResolution/pixelPerRad*M_180_PI*3600;
 	for (unsigned int i=0;i<11;++i)
@@ -1992,7 +1992,7 @@ void GridLinesMgr::init()
 	setPartThickness(conf->value("viewing/part_thickness", 1.f).toFloat());
 	// Set the point size
 	setPointSize(conf->value("viewing/point_size", 5.f).toFloat());
-    // Set gridline spacing
+	// Set gridline spacing
 	setGridSpacingMultiplier(conf->value("viewing/grid_spacing_multiplier", 1.0).toDouble());
 
 	// Load colors from config file
@@ -4187,7 +4187,7 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 }
 double GridLinesMgr::getGridSpacingMultiplier() const
 {
-        return gridSpacingMultiplier;
+	return gridSpacingMultiplier;
 }
 
 void GridLinesMgr::setGridSpacingMultiplier(double multiplier)
