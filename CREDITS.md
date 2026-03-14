@@ -269,11 +269,14 @@
 	    Observatory) using data from the MODIS instrument aboard the
 	    Terra satellite (Public Domain). See chapter 10.1 for full
 	    credits.
-	4.2 Moon texture map was combined from maps by USGS Astrogeology Research
-	    Program,
-	    http://astrogeology.usgs.gov (Public Domain, DFSG-free) and by Lunar
-	    surface textures from Celestia, based on Clementine data (Public
-	    Domain).
+	4.2 Moon albedo map was generated from Hapke-normalized LROC WAC data for
+	    visible-light wavelengths, plus empirically-normalized data for 643 nm to
+	    cover the polar areas. The spectra were converted to linear sRGB, then
+	    scaled up by a factor of 4, and then the sRGB inverse transfer function
+	    was applied. The polar areas, being monochromatic in the original data set,
+	    were colored using a fit to the equatorial sectors. After this the image
+	    was color-balanced to yield the grayish look of the texture instead of the
+	    natural beige color of the lunar surface.
 	4.3a Jupiter map created by James Hastings-Trew from Cassini data. "The 
 	     maps are free to download and use as source material or resource
 	     in artwork or rendering (CGI or real time)."

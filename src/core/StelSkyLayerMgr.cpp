@@ -149,7 +149,25 @@ QString StelSkyLayerMgr::insertSkyImage(const QString& uri, const QString& keyHi
 // Remove a sky image tile from the list of background images
 void StelSkyLayerMgr::removeSkyLayer(const QString& key)
 {
-	//qDebug() << "StelSkyLayerMgr::removeSkyImage removing image:" << key;
+	//qDebug() << "StelSkyLayerMgr::removeSkyLayer removing image:" << key;
+
+	if (key=="*")
+	{
+		QStringList keys = getAllKeys();
+
+		for (auto &k : std::as_const(keys))
+		{
+			// TODO: This list should contain all possible names of layers that are
+			//       not inserted by scripts and therefore should not be accidentally deleted.
+			//       So far I know of Nebulae, and maybe the custom nebulae from the NebulaeTextures plugin.
+			QStringList permanentList= {"Nebulae"};
+			//qDebug() << "Removing SkyImage " << k;
+			if (! permanentList.contains(k))
+				removeSkyLayer(k);
+		}
+		return;
+	}
+
 	if (allSkyLayers.contains(key))
 	{
 		SkyLayerElem* bEl = allSkyLayers[key];

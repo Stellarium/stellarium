@@ -2343,15 +2343,15 @@ void StelCore::registerMathMetaTypes()
 	//Hopefully this works to convert types in scripts when given as String "[...]"
 	// Maybe even make brackets optional!
 	// Nope, does not work for QJSEngine.
-//	QMetaType::registerConverter<QString, Vec2d>(&Vec2d::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec2f>(&Vec2f::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec2i>(&Vec2i::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec3d>(&Vec3d::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec3f>(&Vec3f::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec3i>(&Vec3i::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec4d>(&Vec4d::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec4f>(&Vec4f::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec4i>(&Vec4i::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec2d>(&Vec2d::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec2f>(&Vec2f::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec2i>(&Vec2i::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec3d>(&Vec3d::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec3f>(&Vec3f::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec3i>(&Vec3i::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec4d>(&Vec4d::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec4f>(&Vec4f::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec4i>(&Vec4i::fromBracketedString);
 }
 
 void StelCore::setStartupTimeMode(const QString& s)

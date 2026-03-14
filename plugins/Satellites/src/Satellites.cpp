@@ -2956,10 +2956,10 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		size += (12. + 3.*std::sin(2. * StelApp::getInstance().getTotalRunTime())) * scale;
 		const float radius = 20 * scale;
 		const float x = screenpos[0], y = screenpos[1];
-		painter.drawSprite2dMode(x-size/2, y-size/2, radius, 90);
-		painter.drawSprite2dMode(x-size/2, y+size/2, radius, 0);
-		painter.drawSprite2dMode(x+size/2, y+size/2, radius, -90);
-		painter.drawSprite2dMode(x+size/2, y-size/2, radius, -180);
+		painter.drawSprite2dModeNoDeviceScale(x-size/2, y-size/2, radius, 90);
+		painter.drawSprite2dModeNoDeviceScale(x-size/2, y+size/2, radius, 0);
+		painter.drawSprite2dModeNoDeviceScale(x+size/2, y+size/2, radius, -90);
+		painter.drawSprite2dModeNoDeviceScale(x+size/2, y-size/2, radius, -180);
 	}
 }
 

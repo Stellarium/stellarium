@@ -27,7 +27,7 @@
 
 #include <QOpenGLShaderProgram>
 
-Extinction::Extinction() : ext_coeff(50), undergroundExtinctionMode(UndergroundExtinctionMirror)
+Extinction::Extinction() : ext_coeff(50), undergroundExtinctionMode(UndergroundExtinctionZero)
 {
 }
 

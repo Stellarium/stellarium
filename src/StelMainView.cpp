@@ -887,8 +887,8 @@ void StelMainView::init()
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
 	qInfo().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
-        #if defined Q_OS_HAIKU || defined Q_OS_NETBSD || defined Q_OS_OPENBSD || defined Q_OS_SOLARIS
-        // Haiku OS/NetBSD/OpenBSD/Solaris hasn't hardware acceleration and we shouldn't use High Graphics Mode here
+        #if defined Q_OS_HAIKU || defined Q_OS_SOLARIS
+        // Haiku OS/Solaris hasn't hardware acceleration and we shouldn't use High Graphics Mode here
         glInfo.isHighGraphicsMode = false;
         #else
 	glInfo.isHighGraphicsMode = !qApp->property("onetime_force_low_graphics").toBool() && !!StelOpenGL::highGraphicsFunctions();

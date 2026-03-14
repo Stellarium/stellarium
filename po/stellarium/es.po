@@ -9,17 +9,18 @@
 # Leonardo Oliveri, 2024
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2025
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
-# Víctor Vega <transifex.757ab@simplelogin.com>, 2025
 # Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2026
+# Diego Rodríguez Peregrin <diegorodriguezperegrin@gmail.com>, 2026
+# Víctor Vega <transifex.757ab@simplelogin.com>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-01-14 22:14+0700\n"
+"POT-Creation-Date: 2026-03-01 13:43+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2026\n"
+"Last-Translator: Víctor Vega <transifex.757ab@simplelogin.com>, 2026\n"
 "Language-Team: Spanish (https://app.transifex.com/stellarium/teams/80998/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4469,191 +4470,199 @@ msgid "Add 1 synodic month"
 msgstr "Añadir 1 mes sinodico"
 
 #: src/core/StelCore.cpp:334
+msgid "Add 1 Metonic cycle"
+msgstr "Añadir 1 ciclo metónico"
+
+#: src/core/StelCore.cpp:335
 msgid "Add 1 saros"
 msgstr "Agregar 1 saros"
 
-#: src/core/StelCore.cpp:335
+#: src/core/StelCore.cpp:336
 msgid "Add 1 draconic month"
 msgstr "Añadir 1 mes draconico"
 
-#: src/core/StelCore.cpp:336
+#: src/core/StelCore.cpp:337
 msgid "Add 1 draconic year"
 msgstr "Añadir 1 año dracónico"
 
-#: src/core/StelCore.cpp:337
+#: src/core/StelCore.cpp:338
 msgid "Add 1 anomalistic month"
 msgstr "Añadir 1 mes anómalo"
 
-#: src/core/StelCore.cpp:338
+#: src/core/StelCore.cpp:339
 msgid "Add 1 anomalistic year"
 msgstr "Añadir 1 año anómalo"
 
-#: src/core/StelCore.cpp:339
+#: src/core/StelCore.cpp:340
 msgid "Add 100 anomalistic years"
 msgstr "Añadir 100 años anómalos"
 
-#: src/core/StelCore.cpp:340
+#: src/core/StelCore.cpp:341
 msgid "Add 1 mean tropical month"
 msgstr "Agregar 1 mes tropical medio"
 
-#: src/core/StelCore.cpp:341
+#: src/core/StelCore.cpp:342
 msgid "Add 1 mean tropical year"
 msgstr "Agregar 1 año tropical medio"
 
-#: src/core/StelCore.cpp:342
+#: src/core/StelCore.cpp:343
 msgid "Add 100 mean tropical years"
 msgstr "Añadir 100 años tropicales medios"
 
-#: src/core/StelCore.cpp:343
+#: src/core/StelCore.cpp:344
 msgid "Add 1 tropical year"
 msgstr "Añadir 1 año tropical"
 
-#: src/core/StelCore.cpp:344
+#: src/core/StelCore.cpp:345
 msgid "Add 1 Julian year"
 msgstr "Agregar 1 año juliano"
 
-#: src/core/StelCore.cpp:345
+#: src/core/StelCore.cpp:346
 msgid "Add 1 Julian century"
 msgstr "Agregar 1 centuria juliana"
 
-#: src/core/StelCore.cpp:346
+#: src/core/StelCore.cpp:347
 msgid "Add 1 Gaussian year"
 msgstr "Agregar 1 año gaussiano"
 
-#: src/core/StelCore.cpp:347
+#: src/core/StelCore.cpp:348
 msgid "Add 1 calendar month"
 msgstr "Añadir 1 mes calendario"
 
-#: src/core/StelCore.cpp:348
+#: src/core/StelCore.cpp:349
 msgid "Add 1 calendar year"
 msgstr "Añadir 1 año calendario"
 
-#: src/core/StelCore.cpp:349
+#: src/core/StelCore.cpp:350
 msgid "Add 10 calendar years"
 msgstr "Añadir 10 años calendario"
 
-#: src/core/StelCore.cpp:350
+#: src/core/StelCore.cpp:351
 msgid "Add 100 calendar years"
 msgstr "Añadir 100 años calendario"
 
-#: src/core/StelCore.cpp:351
+#: src/core/StelCore.cpp:352
 msgid "Add 1 Great year"
 msgstr "Añadir 1 año platónico"
 
-#: src/core/StelCore.cpp:352
+#: src/core/StelCore.cpp:353
 msgid "Subtract 1 sidereal day"
 msgstr "Substraer 1 día sidéreo"
 
-#: src/core/StelCore.cpp:353
+#: src/core/StelCore.cpp:354
 msgid "Subtract 7 sidereal days"
 msgstr "Substraer 7 días sidéreos"
 
-#: src/core/StelCore.cpp:354
+#: src/core/StelCore.cpp:355
 msgid "Subtract 1 sidereal year"
 msgstr "Restar 1 año sidéreo"
 
-#: src/core/StelCore.cpp:355
+#: src/core/StelCore.cpp:356
 msgid "Subtract 100 sidereal years"
 msgstr "Restar 100 años sidéreos"
 
-#: src/core/StelCore.cpp:356
+#: src/core/StelCore.cpp:357
 msgid "Subtract 1 synodic month"
 msgstr "Substraer 1 mes sinódico"
 
-#: src/core/StelCore.cpp:357
+#: src/core/StelCore.cpp:358
+msgid "Subtract 1 Metonic cycle"
+msgstr "Restar 1 ciclo metónico"
+
+#: src/core/StelCore.cpp:359
 msgid "Subtract 1 saros"
 msgstr "Substraer 1 saros"
 
-#: src/core/StelCore.cpp:358
+#: src/core/StelCore.cpp:360
 msgid "Subtract 1 draconic month"
 msgstr "Substraer 1 mes dracónico"
 
-#: src/core/StelCore.cpp:359
+#: src/core/StelCore.cpp:361
 msgid "Subtract 1 draconic year"
 msgstr "Restar 1 año dracónico"
 
-#: src/core/StelCore.cpp:360
+#: src/core/StelCore.cpp:362
 msgid "Subtract 1 anomalistic month"
 msgstr "Substraer 1 mes anómalo"
 
-#: src/core/StelCore.cpp:361
+#: src/core/StelCore.cpp:363
 msgid "Subtract 1 anomalistic year"
 msgstr "Restar 1 año anómalo"
 
-#: src/core/StelCore.cpp:362
+#: src/core/StelCore.cpp:364
 msgid "Subtract 100 anomalistic years"
 msgstr "Restar 100 años anómalos"
 
-#: src/core/StelCore.cpp:363
+#: src/core/StelCore.cpp:365
 msgid "Subtract 1 mean tropical month"
 msgstr "Substraer 1 mes tropical medio"
 
-#: src/core/StelCore.cpp:364
+#: src/core/StelCore.cpp:366
 msgid "Subtract 1 mean tropical year"
 msgstr "Restar 1 año tropical medio"
 
-#: src/core/StelCore.cpp:365
+#: src/core/StelCore.cpp:367
 msgid "Subtract 100 mean tropical years"
 msgstr "Restar 100 años tropicales medios"
 
-#: src/core/StelCore.cpp:366
+#: src/core/StelCore.cpp:368
 msgid "Subtract 1 tropical year"
 msgstr "Restar 1 año tropical"
 
-#: src/core/StelCore.cpp:367
+#: src/core/StelCore.cpp:369
 msgid "Subtract 1 Julian year"
 msgstr "Restar 1 año juliano"
 
-#: src/core/StelCore.cpp:368
+#: src/core/StelCore.cpp:370
 msgid "Subtract 1 Julian century"
 msgstr "Substraer 1 centuria juliana"
 
-#: src/core/StelCore.cpp:369
+#: src/core/StelCore.cpp:371
 msgid "Subtract 1 Gaussian year"
 msgstr "Restar 1 año gaussiano"
 
-#: src/core/StelCore.cpp:370
+#: src/core/StelCore.cpp:372
 msgid "Subtract 1 calendar month"
 msgstr "Restar 1 mes calendario"
 
-#: src/core/StelCore.cpp:371
+#: src/core/StelCore.cpp:373
 msgid "Subtract 1 calendar year"
 msgstr "Restar 1 año calendario"
 
-#: src/core/StelCore.cpp:372
+#: src/core/StelCore.cpp:374
 msgid "Subtract 10 calendar years"
 msgstr "Restar 10 años calendario"
 
-#: src/core/StelCore.cpp:373
+#: src/core/StelCore.cpp:375
 msgid "Subtract 100 calendar years"
 msgstr "Restar 100 años calendario"
 
-#: src/core/StelCore.cpp:374
+#: src/core/StelCore.cpp:376
 msgid "Subtract 1 Great year"
 msgstr "Restar 1 año platónico"
 
-#: src/core/StelCore.cpp:376
+#: src/core/StelCore.cpp:378
 msgid "Set home planet to selected planet"
 msgstr "Establecer el planeta seleccionado como el inicial"
 
-#: src/core/StelCore.cpp:377
+#: src/core/StelCore.cpp:379
 msgid "Go to home"
 msgstr "Ir al inicio"
 
-#: src/core/StelCore.cpp:379
+#: src/core/StelCore.cpp:381
 msgid "Flip scene horizontally"
 msgstr "Voltear vista horizontalmente"
 
-#: src/core/StelCore.cpp:380
+#: src/core/StelCore.cpp:382
 msgid "Flip scene vertically"
 msgstr "Voltear vista verticalmente"
 
-#: src/core/StelCore.cpp:2690
+#: src/core/StelCore.cpp:2704
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "La corrección está deshabilitada. ¡Úsela solo si sabe lo que está haciendo!"
 
-#: src/core/StelCore.cpp:2693
+#: src/core/StelCore.cpp:2707
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -4665,7 +4674,7 @@ msgstr ""
 "Confirmada por Antiguos Eclipses Solares</em> (%1). Vea más información "
 "%2aquí%3."
 
-#: src/core/StelCore.cpp:2696
+#: src/core/StelCore.cpp:2710
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -4674,7 +4683,7 @@ msgstr ""
 "Esta ecuación empírica fue publicada por G. M. Clemence en el artículo "
 "<em>En el Sistema de las Constantes Astronómicas</em> (%1)."
 
-#: src/core/StelCore.cpp:2699
+#: src/core/StelCore.cpp:2713
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -4687,7 +4696,7 @@ msgstr ""
 "su <em> Fórmulas Astronómicas para Calculadoras </em>. También fue adoptado "
 "en el programa de PC SunTracker Pro."
 
-#: src/core/StelCore.cpp:2703
+#: src/core/StelCore.cpp:2717
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -4697,7 +4706,7 @@ msgstr ""
 "fue adoptada en la <em>Efemérides Astronómicas</em> y en el <em> Canon de "
 "los Eclipses Solares</em> por Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:2707
+#: src/core/StelCore.cpp:2721
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -4709,7 +4718,7 @@ msgstr ""
 "EC. La misma relación también se adoptó implícitamente en las tablas de "
 "syzygy de Goldstine (1973)."
 
-#: src/core/StelCore.cpp:2711
+#: src/core/StelCore.cpp:2725
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -4720,7 +4729,7 @@ msgstr ""
 "artículo <em>Las aceleraciones de la Tierra y la luna desde observaciones "
 "astronómicas anteriores</em> (%1)."
 
-#: src/core/StelCore.cpp:2714
+#: src/core/StelCore.cpp:2728
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -4729,7 +4738,7 @@ msgstr ""
 "Esta ecuación fue publicada por F. R. Stephenson en el artículo "
 "<em>Observaciones Astronómicas Pre-Telescópicas</em> (%1)."
 
-#: src/core/StelCore.cpp:2717
+#: src/core/StelCore.cpp:2731
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -4743,7 +4752,7 @@ msgstr ""
 "período 1800-1975</em> (%1) como adaptación a través de datos publicados por"
 " Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2720
+#: src/core/StelCore.cpp:2734
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -4753,7 +4762,7 @@ msgstr ""
 " +2800 </ em> (1986) de P. Bretagnon & L. Simon y en el programa de "
 "planetario de PC RedShift."
 
-#: src/core/StelCore.cpp:2723
+#: src/core/StelCore.cpp:2737
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -4764,7 +4773,7 @@ msgstr ""
 "artículo <em>Cambios a largo plazo en la rotación de la tierra - 700 a. C. a"
 " 1980 d. C.</em> (%1)."
 
-#: src/core/StelCore.cpp:2726
+#: src/core/StelCore.cpp:2740
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -4775,7 +4784,7 @@ msgstr ""
 "libro <em>Atlas of Historical Eclipse Maps</em> (%1). Este algoritmo se "
 "utiliza en la Guía 7 del programa Planetario para PC."
 
-#: src/core/StelCore.cpp:2729
+#: src/core/StelCore.cpp:2743
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -4785,7 +4794,7 @@ msgstr ""
 "eclipses solares: 1986-2035 </em> (1987) y en su <em> cincuenta años Canon "
 "de eclipses lunares: 1986-2035 </em> (1989)."
 
-#: src/core/StelCore.cpp:2732
+#: src/core/StelCore.cpp:2746
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -4794,7 +4803,7 @@ msgstr ""
 "Esta fórmula fue obtenida por K.M. Borkowski (%1) a partir de un análisis de"
 " 31 registros de eclipses solares que datan entre 2137 BCE y 1715 CE."
 
-#: src/core/StelCore.cpp:2735
+#: src/core/StelCore.cpp:2749
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -4807,7 +4816,7 @@ msgstr ""
 "Período 1800-1988</em> (%1) como los datos dados por Stephenson y Morrison "
 "(1984)."
 
-#: src/core/StelCore.cpp:2738
+#: src/core/StelCore.cpp:2752
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -4817,7 +4826,7 @@ msgstr ""
 "abreviada de la teoría lunar del ELP 2000-85 en sus <em> Tablas Lunares y "
 "Programas de 4000 a. A A.D. 8000 </em> (1991)."
 
-#: src/core/StelCore.cpp:2741
+#: src/core/StelCore.cpp:2755
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -4828,7 +4837,7 @@ msgstr ""
 "artículo <em>Fluctuaciones a Largo Plazo en la Rotación de la Tierra: 700 a."
 " C. a 1990 d. C.</em> (%1)."
 
-#: src/core/StelCore.cpp:2744
+#: src/core/StelCore.cpp:2758
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -4837,7 +4846,7 @@ msgstr ""
 "F. R. Stephenson publicó esta fórmula en su libro <em>Eclipses Históricos y "
 "Rotación de la Tierra</em> (%1)."
 
-#: src/core/StelCore.cpp:2747
+#: src/core/StelCore.cpp:2761
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -4848,7 +4857,7 @@ msgstr ""
 "Chapront, Chapront-Touze & Francou (1997) para las fechas fuera de "
 "1620..2000."
 
-#: src/core/StelCore.cpp:2750
+#: src/core/StelCore.cpp:2764
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -4858,7 +4867,7 @@ msgstr ""
 "Chorro de la NASA usa esta fórmula en su sitio interactivo %1JPL  "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:2753
+#: src/core/StelCore.cpp:2767
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -4867,7 +4876,7 @@ msgstr ""
 "Este polinomio fue publicado por J. Meeus y L. Simmons en el artículo "
 "<em>Aproximaciones polinomiales a Delta T, 1620-2000 d. C.</em> (%1)."
 
-#: src/core/StelCore.cpp:2756
+#: src/core/StelCore.cpp:2770
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -4877,7 +4886,7 @@ msgstr ""
 "por O. Montebruck y T. Pfleger provee datos simples de 3er orden polinomial "
 "que encajan para el pasado reciente."
 
-#: src/core/StelCore.cpp:2759
+#: src/core/StelCore.cpp:2773
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -4889,7 +4898,7 @@ msgstr ""
 "Calendáricas</em> (2002). Está basado en los <em>Algoritmos "
 "Astronómicos</em> de Jean Meeus (1991)."
 
-#: src/core/StelCore.cpp:2762
+#: src/core/StelCore.cpp:2776
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -4900,7 +4909,7 @@ msgstr ""
 " en el artículo <em> Valores históricos del error de reloj de la Tierra%1T y"
 " el cálculo de eclipses </em> (%2) con adición en (%3)."
 
-#: src/core/StelCore.cpp:2765
+#: src/core/StelCore.cpp:2779
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -4914,7 +4923,7 @@ msgstr ""
 "periodicidad descrita por Stephenson (%2). Vea para más información "
 "%3aqui%4."
 
-#: src/core/StelCore.cpp:2768
+#: src/core/StelCore.cpp:2782
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -4932,7 +4941,7 @@ msgstr ""
 "fórmula también se usa en el programa de efemérides solares, lunares y "
 "planetarias SOLEX."
 
-#: src/core/StelCore.cpp:2771
+#: src/core/StelCore.cpp:2785
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -4945,15 +4954,15 @@ msgstr ""
 "de observaciones y predicciones del Centro de Predicción/Servicio Rápido del"
 " IERS."
 
-#: src/core/StelCore.cpp:2771
+#: src/core/StelCore.cpp:2785
 msgid "Used by default."
 msgstr "Usar por defecto."
 
-#: src/core/StelCore.cpp:2774
+#: src/core/StelCore.cpp:2788
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "VERSION PARCHADA SIN ACELERACIÓN LUNAR ADICIONAL."
 
-#: src/core/StelCore.cpp:2774
+#: src/core/StelCore.cpp:2788
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -4961,7 +4970,7 @@ msgstr ""
 "Esta solución de F. Espenak y J. Meeus, basada en Morrison & Stephenson "
 "(2004) y un ajuste polinomial a través de valores tabulados para 1600-2000."
 
-#: src/core/StelCore.cpp:2777
+#: src/core/StelCore.cpp:2791
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -4972,7 +4981,7 @@ msgstr ""
 "publicada en el artículo <em> Eclipses antiguos y datación de la caída de "
 "Babilonia </em> (%1)."
 
-#: src/core/StelCore.cpp:2780
+#: src/core/StelCore.cpp:2794
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -4984,7 +4993,7 @@ msgstr ""
 "Aproximación polinomial de DeltaT</em> (%1) y revisado por Sana Islam en "
 "2013."
 
-#: src/core/StelCore.cpp:2783
+#: src/core/StelCore.cpp:2797
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -4995,7 +5004,7 @@ msgstr ""
 "Mariam Sultana y Faheem Zaidi se publicó en <em> Delta T: Aproximación "
 "polinomial del período de tiempo 1620-2013 </ em> (%1)."
 
-#: src/core/StelCore.cpp:2786
+#: src/core/StelCore.cpp:2800
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -5013,7 +5022,7 @@ msgstr ""
 "Hohenkerk, CY y Zawilski, M.; %2). Fuera del rango mencionado (modelado con "
 "un ajuste spline) proporciona valores de una parábola aproximada."
 
-#: src/core/StelCore.cpp:2789
+#: src/core/StelCore.cpp:2803
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -5024,7 +5033,7 @@ msgstr ""
 "aceleración de la Luna y del Universo - la masa del gravitón</em> (%1) y "
 "basaso en la fórmula de C. Schoch (1931)."
 
-#: src/core/StelCore.cpp:2792
+#: src/core/StelCore.cpp:2806
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -5033,7 +5042,7 @@ msgstr ""
 "Esta es una fórmula cuadrática para el cálculo de %1T con coeficientes "
 "definidos por el usuario."
 
-#: src/core/StelCore.cpp:2795 src/core/SimbadSearcher.cpp:187
+#: src/core/StelCore.cpp:2809 src/core/SimbadSearcher.cpp:187
 #: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:981
 #: src/gui/ObsListDialog.cpp:1005 src/gui/ObsListDialog.cpp:1054
 #: src/gui/ObsListDialog.cpp:1070 src/gui/ObsListDialog.cpp:1111
@@ -5044,7 +5053,7 @@ msgstr ""
 msgid "Error"
 msgstr "Error"
 
-#: src/core/StelCore.cpp:2803
+#: src/core/StelCore.cpp:2817
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -5053,16 +5062,16 @@ msgstr ""
 "El valor de la solución de %1 para %2 (aceleración secular de la Luna) "
 "requiere una adaptación, vea la Guía para más detalles."
 
-#: src/core/StelCore.cpp:2847
+#: src/core/StelCore.cpp:2861
 msgid "with zero values outside this range"
 msgstr "con valores cero fuera de este rango"
 
-#: src/core/StelCore.cpp:2850
+#: src/core/StelCore.cpp:2864
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "con una precisión típica de 1 segundo y valores cero fuera de este rango"
 
-#: src/core/StelCore.cpp:2853
+#: src/core/StelCore.cpp:2867
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -5070,16 +5079,16 @@ msgstr ""
 "con un error medio inferior a un segundo, un error máximo de 1.9 s y valores"
 " para los años límite fuera de este rango"
 
-#: src/core/StelCore.cpp:2860
+#: src/core/StelCore.cpp:2874
 msgid "with values for the limit years outside this range"
 msgstr "con valores para los años límites fuera de este rango"
 
-#: src/core/StelCore.cpp:2870
+#: src/core/StelCore.cpp:2884
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Rango válido de uso: entre los años %1 y %2, %3."
 
-#: src/core/StelCore.cpp:2872
+#: src/core/StelCore.cpp:2886
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Rango válido de uso: entre los años %1 y %2."
@@ -5497,12 +5506,12 @@ msgstr "La oblicuidad eclíptica de la fecha es"
 #: src/core/StelObject.cpp:1321
 msgctxt "object narration"
 msgid "The Mean Sidereal Time is"
-msgstr "El tiempo sideral medio es"
+msgstr "El Tiempo sidéreo medio es"
 
 #: src/core/StelObject.cpp:1330
 msgctxt "object narration"
 msgid "The Apparent Sidereal Time is"
-msgstr "El tiempo sideral aparente es"
+msgstr "El Tiempo sidéreo aparente es"
 
 #: src/core/StelObject.cpp:1363
 msgctxt "object narration; celestial event; passage across a meridian"
@@ -13194,7 +13203,7 @@ msgstr "América Central"
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_America
 #: src/translations_regions.h:54
-msgid "Southern America"
+msgid "South America"
 msgstr "América del Sur"
 
 #. TRANSLATORS: Name of region on Earth
@@ -24981,7 +24990,7 @@ msgstr ""
 msgid "Import orbital elements in MPC format..."
 msgstr "Importar elementos orbitales en formato MPC..."
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:766
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:772
 msgid "Anonymous"
 msgstr "Anónimo"
 
@@ -32143,8 +32152,8 @@ msgstr "Cargar/guardar con fecha"
 msgid "Title:"
 msgstr "Título:"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:162
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:62
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:163
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:236
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:516
@@ -32152,7 +32161,7 @@ msgstr "Título:"
 msgid "Sky Culture Maker"
 msgstr "Creador de Culturas Estelares"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:63
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:64
 msgid ""
 "Contact us using our GitHub usernames, via an Issue or the Discussion tab in"
 " the Stellarium repository."
@@ -32161,19 +32170,19 @@ msgstr ""
 "GitHub, a través de un problema o la pestaña de debate en el repositorio de "
 "Stellarium."
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:64
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:65
 msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr "Complemento para dibujar y exportar culturas del cielo en Stellarium."
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:479
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:480
 msgid "INFO"
 msgstr "INFORMACIÓN"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:486
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:487
 msgid "WARNING"
 msgstr "ADVERTENCIA"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:493
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:494
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"

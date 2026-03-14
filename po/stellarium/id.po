@@ -18,16 +18,16 @@
 # Ruslan Kabatsaev, 2025
 # Adhiansyah Ancha <ampradanaf@outlook.com>, 2025
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
-# Mukhammad Reza, 2025
+# Mukhammad Reza, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-28 20:24+0700\n"
+"POT-Creation-Date: 2026-01-14 22:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Mukhammad Reza, 2025\n"
+"Last-Translator: Mukhammad Reza, 2026\n"
 "Language-Team: Indonesian (https://app.transifex.com/stellarium/teams/80998/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +55,7 @@ msgstr "objek khusus"
 #: src/core/modules/StarWrapper.cpp:1326 src/core/modules/StarWrapper.cpp:1328
 #: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:2456
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3080
-#: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7688
+#: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7691
 #: src/gui/ObsListDialog.cpp:297 src/ui_configurationDialog.h:2517
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
@@ -807,7 +807,7 @@ msgstr "Antapex"
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:760
 #: src/core/modules/Planet.cpp:1045 src/core/modules/StarWrapper.cpp:378
-#: src/gui/AstroCalcDialog.cpp:8571 plugins/Satellites/src/Satellite.cpp:363
+#: src/gui/AstroCalcDialog.cpp:8574 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/Satellite.cpp:406
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgctxt "speed"
@@ -1408,7 +1408,7 @@ msgstr "Diameter"
 #: src/core/modules/Planet.cpp:1372 src/core/modules/Comet.cpp:191
 #: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:978
 #: src/gui/AstroCalcDialog.cpp:3199 src/gui/AstroCalcDialog.cpp:3747
-#: src/gui/AstroCalcDialog.cpp:8506 plugins/Satellites/src/Satellites.cpp:3020
+#: src/gui/AstroCalcDialog.cpp:8509 plugins/Satellites/src/Satellites.cpp:3020
 #: plugins/Satellites/src/Satellite.cpp:359
 #: plugins/Satellites/src/Satellite.cpp:402
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1198
@@ -3096,7 +3096,7 @@ msgid "a region of the sky"
 msgstr ""
 
 #: src/core/modules/NebulaMgr.cpp:469 src/gui/AstroCalcDialog.cpp:1055
-#: src/gui/AstroCalcDialog.cpp:7536
+#: src/gui/AstroCalcDialog.cpp:7539
 msgid "Deep-sky objects"
 msgstr "Objek langit dalam"
 
@@ -3243,7 +3243,7 @@ msgstr "menuju"
 #: src/core/modules/Planet.cpp:700 src/gui/AstroCalcDialog.cpp:934
 #: src/gui/AstroCalcDialog.cpp:1247 src/gui/AstroCalcDialog.cpp:1545
 #: src/gui/AstroCalcDialog.cpp:1821 src/gui/AstroCalcDialog.cpp:1983
-#: src/gui/AstroCalcDialog.cpp:8531 src/gui/AstroCalcChart.cpp:430
+#: src/gui/AstroCalcDialog.cpp:8534 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:434 src/gui/AstroCalcChart.cpp:449
 #: src/gui/AstroCalcChart.cpp:456 src/gui/AstroCalcChart.cpp:460
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
@@ -3261,7 +3261,7 @@ msgstr "Waktu cahaya"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:718 src/core/modules/Planet.cpp:739
-#: src/core/modules/Comet.cpp:193 src/gui/AstroCalcDialog.cpp:8508
+#: src/core/modules/Comet.cpp:193 src/gui/AstroCalcDialog.cpp:8511
 msgctxt "distance"
 msgid "M km"
 msgstr "jt km"
@@ -3324,7 +3324,7 @@ msgstr "Diterangi"
 msgid "Elong. in Ecl.Long."
 msgstr "Elongasi dalam Bujur Ekliptika"
 
-#: src/core/modules/Planet.cpp:929 src/gui/AstroCalcDialog.cpp:8741
+#: src/core/modules/Planet.cpp:929 src/gui/AstroCalcDialog.cpp:8744
 #: src/gui/AstroCalcChart.cpp:475
 msgid "Angular distance"
 msgstr "Jarak angular"
@@ -3332,7 +3332,7 @@ msgstr "Jarak angular"
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:947 src/core/modules/StarWrapper.cpp:399
 #: src/core/modules/StarWrapper.cpp:1024 src/core/modules/StarWrapper.cpp:1380
-#: src/core/StelUtils.cpp:163 src/gui/AstroCalcDialog.cpp:8542
+#: src/core/StelUtils.cpp:163 src/gui/AstroCalcDialog.cpp:8545
 #: src/gui/AstroCalcAlmanacWidget.cpp:254
 msgctxt "duration"
 msgid "days"
@@ -3718,7 +3718,7 @@ msgstr "Ortografik"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:349 src/gui/AstroCalcDialog.cpp:5158
-#: src/gui/AstroCalcDialog.cpp:7507 src/translations.h:37
+#: src/gui/AstroCalcDialog.cpp:7510 src/translations.h:37
 msgid "Planets"
 msgstr "Planet"
 
@@ -5312,19 +5312,19 @@ msgstr "Waktu Sideris Tampak"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:779 src/gui/AstroCalcDialog.cpp:947
-#: src/gui/AstroCalcDialog.cpp:2204 src/gui/AstroCalcDialog.cpp:7672
+#: src/gui/AstroCalcDialog.cpp:2204 src/gui/AstroCalcDialog.cpp:7675
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Transit"
 
 #: src/core/StelObject.cpp:780 src/gui/AstroCalcDialog.cpp:2203
-#: src/gui/AstroCalcDialog.cpp:7671
+#: src/gui/AstroCalcDialog.cpp:7674
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Terbit"
 
 #: src/core/StelObject.cpp:781 src/gui/AstroCalcDialog.cpp:2205
-#: src/gui/AstroCalcDialog.cpp:7675
+#: src/gui/AstroCalcDialog.cpp:7678
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Terbenam"
@@ -5397,7 +5397,7 @@ msgid "Parallactic Angle"
 msgstr "Sudut Paralaktik"
 
 #: src/core/StelObject.cpp:994 src/core/StelObject.cpp:1530
-#: src/gui/AstroCalcDialog.cpp:7770
+#: src/gui/AstroCalcDialog.cpp:7773
 msgid "IAU Constellation"
 msgstr "Konstelasi IAU"
 
@@ -8296,7 +8296,7 @@ msgstr "Harap pilih objek untuk membuat grafiknya 'Azimut vs. Waktu'."
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:877 src/gui/AstroCalcDialog.cpp:981
 #: src/gui/AstroCalcDialog.cpp:1792 src/gui/AstroCalcDialog.cpp:2202
-#: src/gui/AstroCalcDialog.cpp:7660 src/ui_configurationDialog.h:2441
+#: src/gui/AstroCalcDialog.cpp:7663 src/ui_configurationDialog.h:2441
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:532
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:103
 #: plugins/Exoplanets/src/Exoplanet.cpp:360
@@ -8320,13 +8320,13 @@ msgid "Dec (J2000)"
 msgstr "Dek (J2000)"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:903 src/gui/AstroCalcDialog.cpp:7669
+#: src/gui/AstroCalcDialog.cpp:903 src/gui/AstroCalcDialog.cpp:7672
 msgid "Opac."
 msgstr "Opac."
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:908 src/gui/AstroCalcDialog.cpp:1817
-#: src/gui/AstroCalcDialog.cpp:2209 src/gui/AstroCalcDialog.cpp:7664
+#: src/gui/AstroCalcDialog.cpp:2209 src/gui/AstroCalcDialog.cpp:7667
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Mag."
 msgstr "Mag."
@@ -8339,7 +8339,7 @@ msgstr "A.S."
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:924 src/gui/AstroCalcDialog.cpp:7679
+#: src/gui/AstroCalcDialog.cpp:924 src/gui/AstroCalcDialog.cpp:7682
 msgid "Sep."
 msgstr "Sep."
 
@@ -8374,7 +8374,7 @@ msgid "S.B."
 msgstr "S.B."
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:949 src/gui/AstroCalcDialog.cpp:7674
+#: src/gui/AstroCalcDialog.cpp:949 src/gui/AstroCalcDialog.cpp:7677
 msgid "Elev."
 msgstr "Elev."
 
@@ -9304,51 +9304,51 @@ msgid "Solar system"
 msgstr "Tata surya"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5159 src/gui/AstroCalcDialog.cpp:7513
+#: src/gui/AstroCalcDialog.cpp:5159 src/gui/AstroCalcDialog.cpp:7516
 #: src/translations.h:41
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:480
 msgid "Asteroids"
 msgstr "Asteroid-asteroid"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5159 src/gui/AstroCalcDialog.cpp:7515
+#: src/gui/AstroCalcDialog.cpp:5159 src/gui/AstroCalcDialog.cpp:7518
 #: src/translations.h:45
 msgid "Plutinos"
 msgstr "Plutino"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5159 src/gui/AstroCalcDialog.cpp:7514
+#: src/gui/AstroCalcDialog.cpp:5159 src/gui/AstroCalcDialog.cpp:7517
 #: src/translations.h:39
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:481
 msgid "Comets"
 msgstr "Komet-komet"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5159 src/gui/AstroCalcDialog.cpp:7516
+#: src/gui/AstroCalcDialog.cpp:5159 src/gui/AstroCalcDialog.cpp:7519
 #: src/translations.h:47
 msgid "Dwarf planets"
 msgstr "Planet-planet kerdil"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5160 src/gui/AstroCalcDialog.cpp:7517
+#: src/gui/AstroCalcDialog.cpp:5160 src/gui/AstroCalcDialog.cpp:7520
 #: src/translations.h:49
 msgid "Cubewanos"
 msgstr "Cubewano"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5160 src/gui/AstroCalcDialog.cpp:7518
+#: src/gui/AstroCalcDialog.cpp:5160 src/gui/AstroCalcDialog.cpp:7521
 #: src/translations.h:51
 msgid "Scattered disc objects"
 msgstr "Objek piringan tersebar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5160 src/gui/AstroCalcDialog.cpp:7519
+#: src/gui/AstroCalcDialog.cpp:5160 src/gui/AstroCalcDialog.cpp:7522
 #: src/translations.h:53
 msgid "Oort cloud objects"
 msgstr "Objek awan Oort"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5161 src/gui/AstroCalcDialog.cpp:7520
+#: src/gui/AstroCalcDialog.cpp:5161 src/gui/AstroCalcDialog.cpp:7523
 #: src/translations.h:55
 msgid "Sednoids"
 msgstr "Sednoid"
@@ -9384,7 +9384,7 @@ msgid "Bright nebulae (<%1 mag)"
 msgstr "Nebula terang (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5165 src/gui/AstroCalcDialog.cpp:7510
+#: src/gui/AstroCalcDialog.cpp:5165 src/gui/AstroCalcDialog.cpp:7513
 #: src/translations.h:292 src/ui_viewDialog.h:4244
 #: src/ui_dsoColorsDialog.h:603
 msgid "Dark nebulae"
@@ -9396,19 +9396,19 @@ msgid "Bright galaxies (<%1 mag)"
 msgstr "Galaksi terang (<%1 mag)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5166 src/gui/AstroCalcDialog.cpp:7525
+#: src/gui/AstroCalcDialog.cpp:5166 src/gui/AstroCalcDialog.cpp:7528
 #: src/translations.h:342 src/ui_dsoColorsDialog.h:636
 msgid "Symbiotic stars"
 msgstr "Bintang simbiotik"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5167 src/gui/AstroCalcDialog.cpp:7526
+#: src/gui/AstroCalcDialog.cpp:5167 src/gui/AstroCalcDialog.cpp:7529
 #: src/translations.h:344 src/ui_dsoColorsDialog.h:615
 msgid "Emission-line stars"
 msgstr "Bintang garis-emisi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5167 src/gui/AstroCalcDialog.cpp:7531
+#: src/gui/AstroCalcDialog.cpp:5167 src/gui/AstroCalcDialog.cpp:7534
 #: src/translations.h:57
 msgid "Interstellar objects"
 msgstr "Objek antarbintang"
@@ -9431,13 +9431,13 @@ msgid "Moons of first body"
 msgstr "Bulan dari benda pertama"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5171 src/gui/AstroCalcDialog.cpp:7543
+#: src/gui/AstroCalcDialog.cpp:5171 src/gui/AstroCalcDialog.cpp:7546
 #: src/translations.h:429
 msgid "Bright carbon stars"
 msgstr "Bintang karbon terang"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5171 src/gui/AstroCalcDialog.cpp:7544
+#: src/gui/AstroCalcDialog.cpp:5171 src/gui/AstroCalcDialog.cpp:7547
 #: src/translations.h:431
 msgid "Bright barium stars"
 msgstr "Bintang barium terang"
@@ -9550,358 +9550,358 @@ msgstr "Separasi"
 msgid "Elevation"
 msgstr "Elevasi"
 
-#: src/gui/AstroCalcDialog.cpp:6191
+#: src/gui/AstroCalcDialog.cpp:6194
 msgid "Save calculated phenomena as..."
 msgstr "Simpan fenomena yang dihitung sebagai..."
 
-#: src/gui/AstroCalcDialog.cpp:6195 src/ui_astroCalcDialog.h:2291
+#: src/gui/AstroCalcDialog.cpp:6198 src/ui_astroCalcDialog.h:2291
 msgid "Phenomena"
 msgstr "Fenomena"
 
-#: src/gui/AstroCalcDialog.cpp:6212
+#: src/gui/AstroCalcDialog.cpp:6215
 msgid "Magnitude of first object"
 msgstr "Magnitudo objek pertama"
 
-#: src/gui/AstroCalcDialog.cpp:6215
+#: src/gui/AstroCalcDialog.cpp:6218
 msgid "Magnitude of second object"
 msgstr "Magnitudo objek kedua"
 
-#: src/gui/AstroCalcDialog.cpp:6221
+#: src/gui/AstroCalcDialog.cpp:6224
 msgid "Elevation of first object at moment of phenomena"
 msgstr "Ketinggian objek pertama pada saat fenomena"
 
-#: src/gui/AstroCalcDialog.cpp:6223 src/gui/AstroCalcDialog.cpp:6370
+#: src/gui/AstroCalcDialog.cpp:6226 src/gui/AstroCalcDialog.cpp:6373
 msgid "Angular distance from the Sun"
 msgstr "Jarak sudut dari Matahari"
 
-#: src/gui/AstroCalcDialog.cpp:6226 src/gui/AstroCalcDialog.cpp:6371
+#: src/gui/AstroCalcDialog.cpp:6229 src/gui/AstroCalcDialog.cpp:6374
 msgid "Angular distance from the Moon"
 msgstr "Jarak sudut dari Bulan"
 
-#: src/gui/AstroCalcDialog.cpp:6244 src/gui/AstroCalcDialog.cpp:6423
-#: src/gui/AstroCalcDialog.cpp:6498
+#: src/gui/AstroCalcDialog.cpp:6247 src/gui/AstroCalcDialog.cpp:6426
+#: src/gui/AstroCalcDialog.cpp:6501
 msgid "Conjunction"
 msgstr "Konjungsi"
 
-#: src/gui/AstroCalcDialog.cpp:6253
+#: src/gui/AstroCalcDialog.cpp:6256
 msgid "Shadow transit"
 msgstr "Transit bayangan"
 
-#: src/gui/AstroCalcDialog.cpp:6256 src/gui/AstroCalcDialog.cpp:6263
-#: src/gui/AstroCalcDialog.cpp:6319 src/gui/AstroCalcDialog.cpp:6325
-#: src/gui/AstroCalcDialog.cpp:6510 src/gui/AstroCalcDialog.cpp:6526
-#: src/gui/AstroCalcDialog.cpp:6532
+#: src/gui/AstroCalcDialog.cpp:6259 src/gui/AstroCalcDialog.cpp:6266
+#: src/gui/AstroCalcDialog.cpp:6322 src/gui/AstroCalcDialog.cpp:6328
+#: src/gui/AstroCalcDialog.cpp:6513 src/gui/AstroCalcDialog.cpp:6529
+#: src/gui/AstroCalcDialog.cpp:6535
 msgid "Eclipse"
 msgstr "Gerhana"
 
-#: src/gui/AstroCalcDialog.cpp:6260 src/gui/AstroCalcDialog.cpp:6507
+#: src/gui/AstroCalcDialog.cpp:6263 src/gui/AstroCalcDialog.cpp:6510
 msgid "Opposition"
 msgstr "Oposisi"
 
-#: src/gui/AstroCalcDialog.cpp:6272
+#: src/gui/AstroCalcDialog.cpp:6275
 msgid "Greatest eastern elongation"
 msgstr "Elongasi timur terbesar"
 
-#: src/gui/AstroCalcDialog.cpp:6275
+#: src/gui/AstroCalcDialog.cpp:6278
 msgid "Greatest western elongation"
 msgstr "Elongasi barat terbesar"
 
-#: src/gui/AstroCalcDialog.cpp:6282
+#: src/gui/AstroCalcDialog.cpp:6285
 msgid "Eastern quadrature"
 msgstr "Kuadratur timur"
 
-#: src/gui/AstroCalcDialog.cpp:6285
+#: src/gui/AstroCalcDialog.cpp:6288
 msgid "Western quadrature"
 msgstr "Kuadratur barat"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:6292
+#: src/gui/AstroCalcDialog.cpp:6295
 msgid "Stationary (begin retrograde motion)"
 msgstr "Stasioner (mulai gerak retrograde)"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:6297
+#: src/gui/AstroCalcDialog.cpp:6300
 msgid "Stationary (begin prograde motion)"
 msgstr "Stasioner (mulai gerak prograde)"
 
-#: src/gui/AstroCalcDialog.cpp:6303
+#: src/gui/AstroCalcDialog.cpp:6306
 msgid "Perihelion"
 msgstr "Perihelion"
 
-#: src/gui/AstroCalcDialog.cpp:6305
+#: src/gui/AstroCalcDialog.cpp:6308
 msgid "Aphelion"
 msgstr "Aphelion"
 
-#: src/gui/AstroCalcDialog.cpp:6312 src/gui/AstroCalcDialog.cpp:6519
+#: src/gui/AstroCalcDialog.cpp:6315 src/gui/AstroCalcDialog.cpp:6522
 msgctxt "passage of a celestial body in front of another"
 msgid "Transit"
 msgstr "Transit"
 
-#: src/gui/AstroCalcDialog.cpp:6315 src/gui/AstroCalcDialog.cpp:6428
-#: src/gui/AstroCalcDialog.cpp:6522
+#: src/gui/AstroCalcDialog.cpp:6318 src/gui/AstroCalcDialog.cpp:6431
+#: src/gui/AstroCalcDialog.cpp:6525
 msgid "Occultation"
 msgstr "Okultasi"
 
-#: src/gui/AstroCalcDialog.cpp:6335 src/gui/AstroCalcDialog.cpp:6337
-#: src/gui/AstroCalcDialog.cpp:6545 src/gui/AstroCalcDialog.cpp:6547
+#: src/gui/AstroCalcDialog.cpp:6338 src/gui/AstroCalcDialog.cpp:6340
+#: src/gui/AstroCalcDialog.cpp:6548 src/gui/AstroCalcDialog.cpp:6550
 msgid "Superior conjunction"
 msgstr "Konjungsi superior"
 
-#: src/gui/AstroCalcDialog.cpp:6335 src/gui/AstroCalcDialog.cpp:6337
-#: src/gui/AstroCalcDialog.cpp:6545 src/gui/AstroCalcDialog.cpp:6547
+#: src/gui/AstroCalcDialog.cpp:6338 src/gui/AstroCalcDialog.cpp:6340
+#: src/gui/AstroCalcDialog.cpp:6548 src/gui/AstroCalcDialog.cpp:6550
 msgid "Inferior conjunction"
 msgstr "Konjungsi inferior"
 
-#: src/gui/AstroCalcDialog.cpp:6374
+#: src/gui/AstroCalcDialog.cpp:6377
 msgid "Angular distance from the Sun for second object"
 msgstr "Jarak sudut dari Matahari untuk objek kedua"
 
-#: src/gui/AstroCalcDialog.cpp:6375
+#: src/gui/AstroCalcDialog.cpp:6378
 msgid "Angular distance from the Moon for second object"
 msgstr "Jarak sudut dari Bulan untuk objek kedua"
 
-#: src/gui/AstroCalcDialog.cpp:7386 src/gui/AstroCalcDialog.cpp:7391
+#: src/gui/AstroCalcDialog.cpp:7389 src/gui/AstroCalcDialog.cpp:7394
 #: src/ui_astroCalcDialog.h:2600
 msgid "Table of solar eclipses"
 msgstr "Tabel gerhana Matahari yang terlihat di lokasi saat ini"
 
-#: src/gui/AstroCalcDialog.cpp:7387
+#: src/gui/AstroCalcDialog.cpp:7390
 msgid "Table of solar eclipses visible in current location"
 msgstr "Tabel gerhana Matahari yang terlihat di lokasi saat ini"
 
-#: src/gui/AstroCalcDialog.cpp:7388
+#: src/gui/AstroCalcDialog.cpp:7391
 msgid "Table of lunar eclipses"
 msgstr "Tabel gerhana Bulan"
 
-#: src/gui/AstroCalcDialog.cpp:7389
+#: src/gui/AstroCalcDialog.cpp:7392
 msgid "Transits of Mercury and Venus across the Sun"
 msgstr "Transit Merkurius dan Venus melintasi Matahari"
 
-#: src/gui/AstroCalcDialog.cpp:7485
+#: src/gui/AstroCalcDialog.cpp:7488
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "Di malam hari"
 
-#: src/gui/AstroCalcDialog.cpp:7486
+#: src/gui/AstroCalcDialog.cpp:7489
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "Di pagi hari"
 
-#: src/gui/AstroCalcDialog.cpp:7487
+#: src/gui/AstroCalcDialog.cpp:7490
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "Sekitar tengah malam"
 
-#: src/gui/AstroCalcDialog.cpp:7488
+#: src/gui/AstroCalcDialog.cpp:7491
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "Di waktu malam"
 
-#: src/gui/AstroCalcDialog.cpp:7508
+#: src/gui/AstroCalcDialog.cpp:7511
 msgid "Bright stars"
 msgstr "Bintang terang"
 
-#: src/gui/AstroCalcDialog.cpp:7509 src/ui_viewDialog.h:4243
+#: src/gui/AstroCalcDialog.cpp:7512 src/ui_viewDialog.h:4243
 msgid "Bright nebulae"
 msgstr "Nebula terang"
 
-#: src/gui/AstroCalcDialog.cpp:7511 src/ui_viewDialog.h:4247
+#: src/gui/AstroCalcDialog.cpp:7514 src/ui_viewDialog.h:4247
 #: src/ui_dsoColorsDialog.h:543
 msgid "Galaxies"
 msgstr "Galaksi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7512 src/translations.h:284
+#: src/gui/AstroCalcDialog.cpp:7515 src/translations.h:284
 #: src/ui_viewDialog.h:4250 src/ui_dsoColorsDialog.h:547
 msgid "Open star clusters"
 msgstr "Gugus terbuka"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7521 src/translations.h:290
+#: src/gui/AstroCalcDialog.cpp:7524 src/translations.h:290
 #: src/ui_viewDialog.h:4242 src/ui_dsoColorsDialog.h:536
 msgid "Planetary nebulae"
 msgstr "Nebula planeter"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7522 src/translations.h:419
+#: src/gui/AstroCalcDialog.cpp:7525 src/translations.h:419
 msgid "Bright double stars"
 msgstr "Bintang ganda terang"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7523 src/translations.h:421
+#: src/gui/AstroCalcDialog.cpp:7526 src/translations.h:421
 msgid "Bright variable stars"
 msgstr "Bintang variabel terang"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7524 src/translations.h:423
+#: src/gui/AstroCalcDialog.cpp:7527 src/translations.h:423
 msgid "Bright stars with high proper motion"
 msgstr "Bintang terang dengan gerak diri tinggi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7527 src/translations.h:320
+#: src/gui/AstroCalcDialog.cpp:7530 src/translations.h:320
 #: src/ui_dsoColorsDialog.h:584
 msgid "Supernova candidates"
 msgstr "Kandidat supernova"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7528 src/translations.h:322
+#: src/gui/AstroCalcDialog.cpp:7531 src/translations.h:322
 #: src/ui_dsoColorsDialog.h:622
 msgid "Supernova remnant candidates"
 msgstr "Kandidat sisa-sisa Supernova"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7529 src/translations.h:318
+#: src/gui/AstroCalcDialog.cpp:7532 src/translations.h:318
 #: src/ui_viewDialog.h:4249 src/ui_dsoColorsDialog.h:529
 msgid "Supernova remnants"
 msgstr "Sisa-sisa Supernova"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7530 src/translations.h:346
+#: src/gui/AstroCalcDialog.cpp:7533 src/translations.h:346
 #: src/ui_viewDialog.h:4246 src/ui_dsoColorsDialog.h:635
 msgid "Clusters of galaxies"
 msgstr "Gugus galaksi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7532 src/translations.h:286
+#: src/gui/AstroCalcDialog.cpp:7535 src/translations.h:286
 #: src/ui_viewDialog.h:4252 src/ui_dsoColorsDialog.h:522
 msgid "Globular star clusters"
 msgstr "Gugus bintang globular"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7533 src/translations.h:348
+#: src/gui/AstroCalcDialog.cpp:7536 src/translations.h:348
 #: src/ui_dsoColorsDialog.h:648
 msgid "Regions of the sky"
 msgstr "Daerah langit"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7534 src/translations.h:300
+#: src/gui/AstroCalcDialog.cpp:7537 src/translations.h:300
 #: src/ui_viewDialog.h:4241 src/ui_dsoColorsDialog.h:513
 msgid "Active galaxies"
 msgstr "Galaksi aktif"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7535 src/translations.h:304
+#: src/gui/AstroCalcDialog.cpp:7538 src/translations.h:304
 #: src/ui_viewDialog.h:4248 src/ui_dsoColorsDialog.h:594
 msgid "Interacting galaxies"
 msgstr "Galaksi berinteraksi"
 
-#: src/gui/AstroCalcDialog.cpp:7537
+#: src/gui/AstroCalcDialog.cpp:7540
 msgid "Messier objects"
 msgstr "Objek Messier"
 
-#: src/gui/AstroCalcDialog.cpp:7538
+#: src/gui/AstroCalcDialog.cpp:7541
 msgid "NGC/IC objects"
 msgstr "Objek NGC/IC"
 
-#: src/gui/AstroCalcDialog.cpp:7539
+#: src/gui/AstroCalcDialog.cpp:7542
 msgid "Caldwell objects"
 msgstr "Objek Caldwell"
 
-#: src/gui/AstroCalcDialog.cpp:7540
+#: src/gui/AstroCalcDialog.cpp:7543
 msgid "Herschel 400 objects"
 msgstr "Objek Herschel 400"
 
-#: src/gui/AstroCalcDialog.cpp:7541
+#: src/gui/AstroCalcDialog.cpp:7544
 msgid "Algol-type eclipsing systems"
 msgstr "Sistem gerhana tipe Algol"
 
-#: src/gui/AstroCalcDialog.cpp:7542
+#: src/gui/AstroCalcDialog.cpp:7545
 msgid "The classical cepheids"
 msgstr "Sefeid klasik"
 
-#: src/gui/AstroCalcDialog.cpp:7546
+#: src/gui/AstroCalcDialog.cpp:7549
 msgid "Bright nova stars"
 msgstr "Bintang nova terang"
 
-#: src/gui/AstroCalcDialog.cpp:7548
+#: src/gui/AstroCalcDialog.cpp:7551
 msgid "Bright supernova stars"
 msgstr "Bintang supernova terang"
 
-#: src/gui/AstroCalcDialog.cpp:7551 plugins/Pulsars/src/Pulsars.cpp:72
+#: src/gui/AstroCalcDialog.cpp:7554 plugins/Pulsars/src/Pulsars.cpp:72
 #: plugins/Pulsars/src/Pulsars.cpp:170
 msgid "Pulsars"
 msgstr "Pulsar"
 
-#: src/gui/AstroCalcDialog.cpp:7554
+#: src/gui/AstroCalcDialog.cpp:7557
 msgid "Exoplanetary systems"
 msgstr "Sistem eksoplanet"
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:7684
+#: src/gui/AstroCalcDialog.cpp:7687
 msgid "Ang. Size"
 msgstr "Ukur. Sudut"
 
 #. TRANSLATORS: IAU Constellation
-#: src/gui/AstroCalcDialog.cpp:7687
+#: src/gui/AstroCalcDialog.cpp:7690
 msgctxt "IAU Constellation"
 msgid "Const."
 msgstr "Konst."
 
-#: src/gui/AstroCalcDialog.cpp:7804 src/ui_viewDialog.h:4281
+#: src/gui/AstroCalcDialog.cpp:7807 src/ui_viewDialog.h:4281
 #: src/ui_astroCalcDialog.h:2541
 msgid "Limit angular size:"
 msgstr "Batasi ukuran sudut:"
 
-#: src/gui/AstroCalcDialog.cpp:7805 src/ui_astroCalcDialog.h:2539
+#: src/gui/AstroCalcDialog.cpp:7808 src/ui_astroCalcDialog.h:2539
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "Tetapkan batas untuk ukuran sudut objek langit yang terlihat"
 
-#: src/gui/AstroCalcDialog.cpp:7806 src/ui_astroCalcDialog.h:2533
+#: src/gui/AstroCalcDialog.cpp:7809 src/ui_astroCalcDialog.h:2533
 msgid "Minimal angular size for visible celestial objects"
 msgstr "Ukuran sudut minimal untuk objek langit yang terlihat"
 
-#: src/gui/AstroCalcDialog.cpp:7807 src/ui_astroCalcDialog.h:2536
+#: src/gui/AstroCalcDialog.cpp:7810 src/ui_astroCalcDialog.h:2536
 msgid "Maximum angular size for visible celestial objects"
 msgstr "Ukuran sudut maksimal untuk objek langit yang terlihat"
 
-#: src/gui/AstroCalcDialog.cpp:8079
+#: src/gui/AstroCalcDialog.cpp:8082
 msgid "Limit angular separation:"
 msgstr "Batasi pemisahan sudut:"
 
-#: src/gui/AstroCalcDialog.cpp:8080
+#: src/gui/AstroCalcDialog.cpp:8083
 msgid "Set limits for angular separation for visible double stars"
 msgstr "Tetapkan batas untuk pemisahan sudut bintang ganda yang terlihat"
 
-#: src/gui/AstroCalcDialog.cpp:8081
+#: src/gui/AstroCalcDialog.cpp:8084
 msgid "Minimal angular separation for visible double stars"
 msgstr "Pemisahan sudut minimal untuk bintang ganda yang terlihat"
 
-#: src/gui/AstroCalcDialog.cpp:8082
+#: src/gui/AstroCalcDialog.cpp:8085
 msgid "Maximum angular separation for visible double stars"
 msgstr "Pemisahan sudut maksimal untuk bintang ganda yang terlihat"
 
-#: src/gui/AstroCalcDialog.cpp:8456
+#: src/gui/AstroCalcDialog.cpp:8459
 msgid "Save list of objects as..."
 msgstr "Simpan daftar objek sebagai..."
 
-#: src/gui/AstroCalcDialog.cpp:8462 src/ui_astroCalcDialog.h:2297
+#: src/gui/AstroCalcDialog.cpp:8465 src/ui_astroCalcDialog.h:2297
 msgid "What's Up Tonight"
 msgstr "Apa yang Terlihat Malam Ini"
 
 #. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
-#: src/gui/AstroCalcDialog.cpp:8540
+#: src/gui/AstroCalcDialog.cpp:8543
 msgctxt "mean motion"
 msgid "day"
 msgstr "hari"
 
-#: src/gui/AstroCalcDialog.cpp:8604
+#: src/gui/AstroCalcDialog.cpp:8607
 msgid "Linear and angular distances between selected objects"
 msgstr "Jarak linear dan sudut antara objek yang dipilih"
 
-#: src/gui/AstroCalcDialog.cpp:8674
+#: src/gui/AstroCalcDialog.cpp:8677
 msgid "Angular distance between the Moon and selected object"
 msgstr "Jarak sudut antara Bulan dan objek yang dipilih"
 
-#: src/gui/AstroCalcDialog.cpp:8740
+#: src/gui/AstroCalcDialog.cpp:8743
 msgid "Angular distance between the Moon and celestial object"
 msgstr "Jarak sudut antara Bulan dan objek langit"
 
-#: src/gui/AstroCalcDialog.cpp:8891
+#: src/gui/AstroCalcDialog.cpp:8894
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1619
 msgid "CSV (Comma delimited)"
 msgstr "CSV (Dipisahkan koma)"
 
-#: src/gui/AstroCalcDialog.cpp:8894
+#: src/gui/AstroCalcDialog.cpp:8897
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1620
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Lembar Bentang XML Terbuka Microsoft Excel"
@@ -19539,7 +19539,7 @@ msgstr "Bidikan Telrad"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
 #: plugins/Scenery3d/src/Scenery3d.cpp:340
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:272
-#: plugins/Calendars/src/Calendars.cpp:207
+#: plugins/Calendars/src/Calendars.cpp:209
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:93
 msgid "Show settings dialog"
 msgstr "Tunjukkan dialog setelan"
@@ -28286,24 +28286,32 @@ msgid ""
 "Buru means dust in the Dholuo language of Kenya and is typically associated "
 "with wind storms."
 msgstr ""
+"Buru berarti debu dalam bahasa Dholuo dari Kenya dan biasanya dikaitkan "
+"dengan badai angin."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:506
 msgid ""
 "Liesma means flame, and it is the name of a character from the Latvian poem "
 "Staburags un Liesma."
 msgstr ""
+"Liesma berarti nyala api, dan merupakan nama karakter dari puisi Latvia "
+"Staburags un Liesma."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:507
 msgid ""
 "Staburags is the name of a character from the Latvian poem Staburags un "
 "Liesma, and denotes a rock with symbolic meaning in literature and history."
 msgstr ""
+"Staburags adalah nama karakter dari puisi Latvia Staburags un Liesma, dan "
+"melambangkan sebuah batu dengan makna simbolis dalam sastra dan sejarah."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
 msgid ""
 "Phoenicia was an ancient thalassocratic civilisation of the Mediterranean "
 "that originated from the area of modern-day Lebanon."
 msgstr ""
+"Fenisia adalah peradaban talasokrasi kuno di Mediterania yang berasal dari "
+"wilayah Lebanon modern."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
 msgid ""
@@ -28311,12 +28319,17 @@ msgid ""
 "was a Phoenician port. Beirut is now the capital and largest city of "
 "Lebanon."
 msgstr ""
+"Beirut adalah salah satu kota tertua di dunia yang terus dihuni dan "
+"merupakan pelabuhan Fenisia. Beirut kini adalah ibu kota dan kota terbesar "
+"di Lebanon."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
 msgid ""
 "In the local dialect of Triesenberg, Pipoltr is a bright and visible "
 "butterfly, alluding to the properties of a star."
 msgstr ""
+"Dalam dialek lokal Triesenberg, Pipoltr adalah kupu-kupu yang cerah dan "
+"terlihat jelas, merujuk pada sifat-sifat bintang."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
 msgid ""
@@ -28324,20 +28337,25 @@ msgid ""
 "barely visible ant, alluding to the properties of a planet with respect to "
 "its star."
 msgstr ""
+"Dalam dialek lokal Liechtenstein selatan, Umbäässa adalah semut kecil yang "
+"nyaris tidak terlihat, merujuk pada sifat-sifat planet sehubungan dengan "
+"bintangnya."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
 msgid "Taika means peace in the Lithuanian language."
-msgstr ""
+msgstr "Taika berarti perdamaian dalam bahasa Lituania."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
 msgid "Vytis is the symbol of the Lithuanian coat of arms."
-msgstr ""
+msgstr "Vytis adalah simbol lambang negara Lituania."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
 msgid ""
 "The Lucilinburhuc fortress was built in 963 by the founder of Luxembourg, "
 "Count Siegfried."
 msgstr ""
+"Benteng Lucilinburhuc dibangun pada tahun 963 oleh pendiri Luksemburg, "
+"Pangeran Siegfried."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
 msgid ""
@@ -28345,38 +28363,49 @@ msgid ""
 " river's bend around Lucilinburhuc fortress alluding to the orbit of the "
 "planet around its star."
 msgstr ""
+"Peitruss berasal dari nama sungai di Luksemburg, Pétrusse, dengan kelokan "
+"sungai di sekitar benteng Lucilinburhuc yang merujuk pada orbit planet di "
+"sekitar bintangnya."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
 msgid "Rapeto is a giant creature from Malagasy tales."
-msgstr ""
+msgstr "Rapeto adalah makhluk raksasa dari kisah-kisah Malagasi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:517
 msgid "Trimobe is a rich ogre from Malagasy tales."
-msgstr ""
+msgstr "Trimobe adalah ogre kaya dari kisah-kisah Malagasi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:518
 msgid ""
 "Intan means diamond in the Malay language (Bahasa Melayu), alluding to the "
 "shining of a star."
 msgstr ""
+"Intan berarti berlian dalam bahasa Malay (Bahasa Melayu), merujuk pada "
+"pancaran sinar sebuah bintang."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:519
 msgid ""
 "Baiduri means opal in Malay language (Bahasa Melayu), alluding to the "
 "mysterious beauty of the planet."
 msgstr ""
+"Baiduri berarti opal dalam bahasa Malay (Bahasa Melayu), merujuk pada "
+"keindahan planet yang misterius."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
 msgid ""
 "Sansuna is the name of the mythological giant from traditional Maltese folk "
 "tales that carried the stones of the Gozo megalithic temples on her head."
 msgstr ""
+"Sansuna adalah nama raksasa mitologi dari cerita rakyat tradisional Malta "
+"yang membawa batu-batu kuil megalitikum Gozo di atas kepalanya."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
 msgid ""
 "Ġgantija means giantess: the megalithic temple complex on the island of "
 "Gozo, which alludes to the grandeur of this gas giant exoplanet."
 msgstr ""
+"Ġgantija berarti raksasa perempuan: kompleks kuil megalitikum di pulau Gozo,"
+" yang merujuk pada keagungan planet raksasa gas ini."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:522
 msgid ""
@@ -28384,6 +28413,9 @@ msgid ""
 "1820's, and is used for lighting during special occasions, including the "
 "light festival of Diwali."
 msgstr ""
+"Diya adalah lampu minyak yang dibawa oleh leluhur India ke Mauritius pada "
+"tahun 1820-an, dan digunakan sebagai penerangan selama acara-acara khusus, "
+"termasuk festival cahaya Diwali."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:523
 msgid ""
@@ -28391,6 +28423,9 @@ msgid ""
 "substances, that has long disappeared in Mauritius and has been replaced by "
 "more sophisticated ovens."
 msgstr ""
+"Cuptor adalah ruang terisolasi termal yang digunakan untuk memanggang atau "
+"mengeringkan zat, yang telah lama menghilang di Mauritius dan digantikan "
+"oleh oven yang lebih canggih."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:524
 msgid ""
@@ -28398,12 +28433,17 @@ msgid ""
 " and culturally significant endemic amphibious species from the basin of "
 "Mexico."
 msgstr ""
+"Axólotl berarti hewan air dalam bahasa asli Nahuatl, yang merupakan spesies "
+"amfibi endemik yang unik dan memiliki makna budaya penting dari lembah "
+"Meksiko."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
 msgid ""
 "Xólotl means animal in the native Nahuatl language and was an Aztec deity "
 "associated with the evening star (Venus)."
 msgstr ""
+"Xólotl berarti hewan dalam bahasa asli Nahuatl dan merupakan dewa Aztec yang"
+" dikaitkan dengan bintang kejora atau bintang malam (Venus)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
 msgid ""
@@ -28411,6 +28451,9 @@ msgid ""
 " bride in the Amazigh language and it is associated with a heartbroken "
 "beautiful girl in an ancient local legend."
 msgstr ""
+"Tislit adalah nama sebuah danau di pegunungan Atlas, Maroko. Nama ini "
+"berarti pengantin perempuan dalam bahasa Amazigh dan dikaitkan dengan "
+"seorang gadis cantik yang patah hati dalam legenda kuno setempat."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
 msgid ""
@@ -28418,40 +28461,52 @@ msgid ""
 "groom in the Amazigh language and it is associated with a heartbroken "
 "handsome boy in an ancient local legend."
 msgstr ""
+"Isli adalah nama sebuah danau di pegunungan Atlas, Maroko. Nama ini berarti "
+"pengantin laki-laki dalam bahasa Amazigh dan dikaitkan dengan seorang pemuda"
+" tampan yang patah hati dalam legenda kuno setempat."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
 msgid ""
 "Emiw represents love in the local Makhuwa language of the northern region of"
 " Mozambique."
 msgstr ""
+"Emiw mewakili cinta dalam bahasa lokal Makhuwa dari wilayah utara Mozambik."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:529
 msgid ""
 "Hairu represents unity in the local Makhuwa language of the northern region "
 "of Mozambique."
 msgstr ""
+"Hairu mewakili persatuan dalam bahasa lokal Makhuwa dari wilayah utara "
+"Mozambik."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:530
 msgid "Ayeyarwady is the largest and most important river in Myanmar."
-msgstr ""
+msgstr "Ayeyarwady adalah sungai terbesar dan terpenting di Myanmar."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:531
 msgid ""
 "Bagan is one of Myanmar's ancient cities that lies beside the Ayeyarwardy "
 "river."
 msgstr ""
+"Bagan adalah salah satu kota kuno Myanmar yang terletak di samping sungai "
+"Ayeyarwady."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:532
 msgid ""
 "Sagarmatha is the Nepali name for the highest peak in the world (also known "
 "as Mount Everest) and symbol of national pride of Nepal."
 msgstr ""
+"Sagarmatha adalah nama Nepal untuk puncak tertinggi di dunia (juga dikenal "
+"sebagai Gunung Everest) dan merupakan simbol kebanggaan nasional Nepal."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:533
 msgid ""
 "Laligurans are the Nepali variation of the rhododendron flower and is the "
 "national flower of Nepal."
 msgstr ""
+"Laligurans adalah variasi bunga rhododendron dari Nepal dan merupakan bunga "
+"nasional Nepal."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:534
 msgid ""
@@ -28459,6 +28514,9 @@ msgid ""
 "master Van Gogh that was painted in France in 1889 and now belongs to the "
 "permanent collection of New York's Museum of Modern Art."
 msgstr ""
+"Sterrennacht (Malam Berbintang) adalah lukisan terkenal di dunia karya "
+"maestro Belanda Van Gogh yang dilukis di Prancis pada tahun 1889 dan kini "
+"menjadi koleksi tetap Museum of Modern Art New York."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:535
 msgid ""
@@ -28466,24 +28524,33 @@ msgid ""
 "master Rembrandt that was completed in 1642 and now belongs to the "
 "collection of the Rijksmuseum in Amsterdam."
 msgstr ""
+"Nachtwacht (Penjaga Malam) adalah lukisan terkenal di dunia karya maestro "
+"Belanda, Rembrandt, yang diselesaikan pada tahun 1642 dan kini menjadi "
+"bagian dari koleksi Rijksmuseum di Amsterdam."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:536
 msgid ""
 "Karaka is the word in the Māori language for a plant endemic to New Zealand "
 "that produces a bright orange, fleshy fruit."
 msgstr ""
+"Karaka adalah kata dalam bahasa Māori untuk tanaman endemik Selandia Baru "
+"yang menghasilkan buah berdaging berwarna oranye terang."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:537
 msgid ""
 "Kererū is the word in the Māori language for a large bush pigeon native to "
 "New Zealand."
 msgstr ""
+"Kererū adalah kata dalam bahasa Māori untuk burung merpati hutan besar asli "
+"Selandia Baru."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:538
 msgid ""
 "Cocibolca is the Nahualt name for the largest lake in Central America in "
 "Nicaragua."
 msgstr ""
+"Cocibolca adalah nama Nahuatl untuk danau terbesar di Amerika Tengah yang "
+"terletak di Nikaragua."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
 msgid ""
@@ -28491,61 +28558,80 @@ msgid ""
 " from the Nahualt language of the indigenous tribe that settled in "
 "Nicaragua, which symbolises a native god and a refuge for animals."
 msgstr ""
+"Xolotlan adalah nama danau terbesar kedua di Nikaragua. Namanya berasal dari"
+" bahasa Nahuatl suku asli yang menetap di Nikaragua, yang melambangkan dewa "
+"pribumi dan tempat perlindungan bagi hewan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:540
 msgid ""
 "Amadioha is the god of thunder in Igbo mythology. As well as representing "
 "justice, Amadioha is also a god of love, peace and unity."
 msgstr ""
+"Amadioha adalah dewa petir dalam mitologi Igbo. Selain melambangkan "
+"keadilan, Amadioha juga merupakan dewa cinta, perdamaian, dan persatuan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:541
 msgid ""
 "Equiano was a writer and abolitionist from Ihiala, Nigeria who fought "
 "injustice and the elimination of the slave trade."
 msgstr ""
+"Equiano adalah seorang penulis dan abolisionis dari Ihiala, Nigeria yang "
+"memperjuangkan keadilan dan penghapusan perdagangan budak."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:542
 msgid "Násti means star in the Northern Sami language of Norway."
-msgstr ""
+msgstr "Násti berarti bintang dalam bahasa Sami Utara dari Norwegia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:543
 msgid "Albmi means sky in the Northern Sami language of Norway."
-msgstr ""
+msgstr "Albmi berarti langit dalam bahasa Sami Utara dari Norwegia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:544
 msgid ""
 "Shama is an Urdu literary term meaning a small lamp or flame, symbolic of "
 "the light of the star."
 msgstr ""
+"Shama adalah istilah sastra Urdu yang berarti lampu kecil atau nyala api, "
+"sebagai simbol dari cahaya bintang."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:545
 msgid ""
 "Perwana means moth in Urdu, alluding to the eternal love of an object "
 "circling the source of light (the lamp)."
 msgstr ""
+"Perwana berarti ngengat dalam bahasa Urdu, merujuk pada cinta abadi dari "
+"sebuah objek yang mengelilingi sumber cahaya (lampu)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:546
 msgid ""
 "Moriah is an ancient name for the mountain within the Old City of Jerusalem."
-msgstr ""
+msgstr "Moriah adalah nama kuno untuk gunung di dalam Kota Tua Yerusalem."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:547
 msgid ""
 "Jebus was the ancient name of Jerusalem in 2nd millennium BC when populated "
 "by the Canaanite tribe of Jebusites."
 msgstr ""
+"Jebus adalah nama kuno Yerusalem pada milenium ke-2 SM ketika dihuni oleh "
+"suku Kanaan dari bangsa Yebus."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:548
 msgid ""
 "Montuno is the traditional costume the man wears in the “El Punto”, a "
 "Panamanian dance in which a man and woman dance to the sound of drums."
 msgstr ""
+"Montuno adalah pakaian tradisional yang dikenakan pria dalam \"El Punto\", "
+"sebuah tarian Panama di mana pria dan wanita menari mengikuti suara "
+"genderang."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:549
 msgid ""
 "Pollera is the traditional costume the woman wears in the El Punto, a "
 "Panamanian dance in which a man and woman dance to the sound of drums."
 msgstr ""
+"Pollera adalah pakaian tradisional yang dikenakan wanita dalam El Punto, "
+"sebuah tarian Panama di mana pria dan wanita menari mengikuti suara "
+"genderang."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:550
 msgid ""
@@ -28553,6 +28639,9 @@ msgid ""
 "Paraguayan folklore that helped the supreme god Ñamandu to create the "
 "Universe."
 msgstr ""
+"Tupã adalah salah satu dari empat dewa utama dalam Kosmogoni Guarani dalam "
+"cerita rakyat populer Paraguay yang membantu dewa tertinggi Ñamandu "
+"menciptakan Alam Semesta."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:551
 msgid ""
@@ -28560,18 +28649,25 @@ msgid ""
 " Universe, who is known as the Father of Wisdom in popular Paraguayan "
 "folklore."
 msgstr ""
+"Tume Arandu adalah putra dari Rupavê dan Sypavê, pria dan wanita pertama di "
+"Alam Semesta, yang dikenal sebagai Bapak Kebijaksanaan dalam cerita rakyat "
+"populer Paraguay."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:552
 msgid ""
 "Inquil was one half of the couple involved in the tragic love story Way to "
 "the Sun by famous Peruvian writer Abraham Valdelomar."
 msgstr ""
+"Inquil adalah salah satu dari pasangan dalam kisah cinta tragis \"Way to the"
+" Sun\" karya penulis terkenal Peru, Abraham Valdelomar."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:553
 msgid ""
 "Sumaj Majta was one half of the couple involved in a tragic love story Way "
 "to the Sun by famous Peruvian writer Abraham Valdelomar."
 msgstr ""
+"Sumaj Majta adalah salah satu dari pasangan dalam kisah cinta tragis \"Way "
+"to the Sun\" karya penulis terkenal Peru, Abraham Valdelomar."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:554
 msgid ""
@@ -28579,36 +28675,48 @@ msgid ""
 "mythology, and is the primordial deity of the ocean and protector of "
 "fisherman."
 msgstr ""
+"Aman Sinaya adalah salah satu dari dua dewa trinitas dalam mitologi Tagalog "
+"Filipina, dan merupakan dewa samudra purba serta pelindung nelayan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:555
 msgid ""
 "Haik is the successor of the primordial Aman Sinaya as the God of the Sea of"
 " the Philippine's Tagalog mythology."
 msgstr ""
+"Haik adalah penerus dari dewa purba Aman Sinaya sebagai Dewa Laut dalam "
+"mitologi Tagalog Filipina."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:556
 msgid ""
 "Uklun means us or we in the Pitkern language of the people of Pitcairn "
 "Islands."
 msgstr ""
+"Uklun berarti \"kita\" atau \"kami\" dalam bahasa Pitkern dari penduduk "
+"Kepulauan Pitcairn."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:557
 msgid ""
 "Lekl Sullun means child or children in the Pitkern language of the people of"
 " Pitcairn Islands."
 msgstr ""
+"Lekl Sullun berarti \"anak\" atau \"anak-anak\" dalam bahasa Pitkern dari "
+"penduduk Kepulauan Pitcairn."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:558
 msgid ""
 "Solaris is the title of a 1961 science fiction novel about an ocean-covered "
 "exoplanet by Polish writer Stanislaw Lem."
 msgstr ""
+"Solaris adalah judul novel fiksi ilmiah tahun 1961 tentang sebuah eksoplanet"
+" yang tertutup samudra karya penulis Polandia, Stanislaw Lem."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:559
 msgid ""
 "Pirx is a fictional character from books by Polish science-fiction writer "
 "Stanisław Lem."
 msgstr ""
+"Pirx adalah karakter fiksi dari buku-buku karya penulis fiksi ilmiah "
+"Polandia, Stanisław Lem."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:560
 msgid ""
@@ -28616,36 +28724,47 @@ msgid ""
 "where the Lusitanian people lived and where most of modern-day Portugal is "
 "situated."
 msgstr ""
+"Lusitânia adalah nama kuno dari wilayah barat Semenanjung Iberia tempat "
+"bangsa Lusitania tinggal dan lokasi sebagian besar negara Portugal modern "
+"saat ini."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:561
 msgid ""
 "Viriato was a legendary leader of the Lusitanian people, a herdsman and "
 "hunter who led the resistance against Roman invaders during 2nd century B.C."
 msgstr ""
+"Viriato adalah pemimpin legendaris bangsa Lusitania, seorang penggembala dan"
+" pemburu yang memimpin perlawanan terhadap penjajah Romawi selama abad ke-2 "
+"SM."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:562
 msgid ""
 "Koeia was the word for star in the language of the Taíno Indigenous People "
 "of the Caribbean."
 msgstr ""
+"Koeia adalah kata untuk bintang dalam bahasa Suku Asli Taíno di Karibia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:563
 msgid ""
 "Aumatex was the God of Wind in the mythology of the Taíno Indigenous People "
 "of the Caribbean."
-msgstr ""
+msgstr "Aumatex adalah Dewa Angin dalam mitologi Suku Asli Taíno di Karibia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:564
 msgid ""
 "Moldoveanu is the highest peak in Romania of the Făgăraș mountain range with"
 " an altitude of 2544 metres."
 msgstr ""
+"Moldoveanu adalah puncak tertinggi di Rumania dari pegunungan Făgăraș dengan"
+" ketinggian 2544 meter."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:565
 msgid ""
 "Negoiu is the second highest peak in Romania of the Făgăraș mountain range "
 "with an altitude of 2535 metres."
 msgstr ""
+"Negoiu adalah puncak tertinggi kedua di Rumania dari pegunungan Făgăraș "
+"dengan ketinggian 2535 meter."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:566
 msgid ""
@@ -28653,52 +28772,64 @@ msgid ""
 "by mountain forests and rich wildlife, including bears (as this star lies in"
 " the constellation Ursa Major, the great bear)."
 msgstr ""
+"Dombay adalah wilayah resor di pegunungan Kaukasus Utara yang dikelilingi "
+"oleh hutan pegunungan dan satwa liar yang melimpah, termasuk beruang (karena"
+" bintang ini terletak di rasi bintang Ursa Major, beruang besar)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:567
 msgid ""
 "Teberda is a mountain river in Dombay region with a rapid water flow, "
 "symbolising the planet's rapid motion around its host star."
 msgstr ""
+"Teberda adalah sungai pegunungan di wilayah Dombay dengan aliran air yang "
+"deras, melambangkan gerak cepat planet ini di sekitar bintang induknya."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:568
 msgid "Belel is a rare source of water in the north of Senegal."
-msgstr ""
+msgstr "Belel adalah sumber air langka di sebelah utara Senegal."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:569
 msgid ""
 "Dopere is an expansive historical area in the north of Senegal where Belel "
 "was located."
 msgstr ""
+"Dopere adalah wilayah bersejarah yang luas di utara Senegal tempat Belel "
+"berada."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:570
 msgid "Morava is the longest river system in Serbia."
-msgstr ""
+msgstr "Morava adalah sistem sungai terpanjang di Serbia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:571
 msgid ""
 "Vlasina is one of the most significant tributaries of the South Morava "
 "river."
 msgstr ""
+"Vlasina adalah salah satu anak sungai terpenting dari sungai Morava Selatan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:572
 msgid ""
 "Parumleo is a Latin term for little lion, symbolising Singapore's struggle "
 "for independence."
 msgstr ""
+"Parumleo adalah istilah Latin untuk singa kecil, melambangkan perjuangan "
+"Singapura untuk kemerdekaan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:573
 msgid ""
 "Viculus is a Latin term for little village, embodying the spirit of the "
 "Singaporean people."
 msgstr ""
+"Viculus adalah istilah Latin untuk desa kecil, mewujudkan semangat rakyat "
+"Singapura."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:574
 msgid "Chasoň is an ancient Slovak term for Sun."
-msgstr ""
+msgstr "Chasoň adalah istilah Slowakia kuno untuk Matahari."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:575
 msgid "Kráľomoc is an ancient Slovak term for the planet Jupiter."
-msgstr ""
+msgstr "Kráľomoc adalah istilah Slowakia kuno untuk planet Jupiter."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:576
 msgid ""
@@ -28706,6 +28837,9 @@ msgid ""
 " Ancient Grandfathers by Slovene writer Fran Saleški Finžgar. Irena is a "
 "woman of the court."
 msgstr ""
+"Irena adalah tokoh utama dalam novel Under the Free Sun: a Story of the "
+"Ancient Grandfathers karya penulis Slovenia, Fran Saleški Finžgar. Irena "
+"adalah seorang wanita istana."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:577
 msgid ""
@@ -28713,6 +28847,9 @@ msgid ""
 " Ancient Grandfathers by Slovene writer Fran Saleški Finžgar. Iztok is a "
 "freedom fighter for the Slavic people."
 msgstr ""
+"Iztok adalah tokoh utama dalam novel Under the Free Sun: a Story of the "
+"Ancient Grandfathers karya penulis Slovenia, Fran Saleški Finžgar. Iztok "
+"adalah seorang pejuang kemerdekaan bagi bangsa Slavia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:578
 msgid ""
@@ -28720,24 +28857,33 @@ msgid ""
 "typically given as a name to girls in the hope that they will bring light, "
 "joy and peace to their communities."
 msgstr ""
+"Naledi berarti bintang dalam bahasa Sesotho, SeTswana, dan SePedi, dan "
+"biasanya diberikan sebagai nama untuk anak perempuan dengan harapan mereka "
+"akan membawa cahaya, sukacita, dan kedamaian bagi masyarakat."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:579
 msgid ""
 "Krotoa is considered the Mother of Africa and member of the indigenous Khoi "
 "people, who was a community builder and educator during colonial times."
 msgstr ""
+"Krotoa dianggap sebagai Ibu Afrika dan anggota suku asli Khoi, yang "
+"merupakan pembangun komunitas dan pendidik pada masa kolonial."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:580
 msgid ""
 "Baekdu is the highest mountain on the Korean peninsula, situated in North "
 "Korea, and symbolises the national spirit of Korea."
 msgstr ""
+"Baekdu adalah gunung tertinggi di semenanjung Korea, terletak di Korea "
+"Utara, dan melambangkan semangat nasional Korea."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:581
 msgid ""
 "Halla is the highest mountain in South Korea and is regarded as a sacred "
 "place in the region."
 msgstr ""
+"Halla adalah gunung tertinggi di Korea Selatan dan dianggap sebagai tempat "
+"suci di wilayah tersebut."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:582
 msgid ""
@@ -28745,43 +28891,56 @@ msgid ""
 " Spanish writer, whose pioneering work often referenced the night and "
 "celestial objects."
 msgstr ""
+"Rosalía de Castro adalah tokoh penting dalam budaya Galisia dan penulis "
+"Spanyol terkemuka, yang karya pelopornya sering merujuk pada malam dan "
+"benda-benda langit."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:583
 msgid ""
 "Rio Sar is the name of a river that was present in much of the literary work"
 " of the pioneering Spanish author Rosalía de Castro."
 msgstr ""
+"Rio Sar adalah nama sungai yang banyak muncul dalam karya sastra penulis "
+"pelopor Spanyol, Rosalía de Castro."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:584
 msgid "Sāmaya means peace in the Sinhalese language."
-msgstr ""
+msgstr "Sāmaya berarti perdamaian dalam bahasa Sinhala."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:585
 msgid "Samagiya means togetherness and unity in the Sinhalese language."
-msgstr ""
+msgstr "Samagiya berarti kebersamaan dan persatuan dalam bahasa Sinhala."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:586
 msgid ""
 "Aniara is the name of a spaceship in the epic poem Aniara by Swedish author "
 "Harry Martinson."
 msgstr ""
+"Aniara adalah nama pesawat luar angkasa dalam puisi epik Aniara karya "
+"penulis Swedia, Harry Martinson."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:587
 msgid ""
 "Isagel is the name of the spaceship pilot in the epic science fiction poem "
 "Aniara written by Swedish author Harry Martinson."
 msgstr ""
+"Isagel adalah nama pilot pesawat luar angkasa dalam puisi fiksi ilmiah epik "
+"Aniara yang ditulis oleh penulis Swedia, Harry Martinson."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:588
 msgid ""
 "Mönch is one of the prominent peaks of the Bernese Alps in Switzerland."
 msgstr ""
+"Mönch adalah salah satu puncak menonjol di Pegunungan Alpen Bernese di "
+"Swiss."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:589
 msgid ""
 "Eiger is one of the prominent peaks of the Bernese Alps, in the Jungfrau-"
 "Aletsch protected area."
 msgstr ""
+"Eiger adalah salah satu puncak menonjol di Pegunungan Alpen Bernese, di "
+"kawasan lindung Jungfrau-Aletsch."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:590
 msgid ""
@@ -32394,8 +32553,8 @@ msgid "Allow to use Stellarium as a plugin in CNES VTS."
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:90
-#: plugins/Calendars/src/Calendars.cpp:205
-#: plugins/Calendars/src/Calendars.cpp:206
+#: plugins/Calendars/src/Calendars.cpp:207
+#: plugins/Calendars/src/Calendars.cpp:208
 msgid "Calendars"
 msgstr "Kalender"
 
@@ -32403,247 +32562,247 @@ msgstr "Kalender"
 msgid "Calendars of the world"
 msgstr "Kalender dunia"
 
-#: plugins/Calendars/src/Calendars.cpp:209
+#: plugins/Calendars/src/Calendars.cpp:211
 msgid "Export to Calendars.html"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:400
+#: plugins/Calendars/src/Calendars.cpp:402
 #: plugins/Calendars/src/ui_calendarsDialog.h:933
 #: plugins/Calendars/src/ui_calendarsDialog.h:953
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:401
+#: plugins/Calendars/src/Calendars.cpp:403
 #: plugins/Calendars/src/ui_calendarsDialog.h:905
 #: plugins/Calendars/src/ui_calendarsDialog.h:954
 msgctxt "calendar"
 msgid "Julian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:402
+#: plugins/Calendars/src/Calendars.cpp:404
 #: plugins/Calendars/src/ui_calendarsDialog.h:931
 #: plugins/Calendars/src/ui_calendarsDialog.h:955
 msgctxt "calendar"
 msgid "Revised Julian"
 msgstr "Julian yang diperbaiki"
 
-#: plugins/Calendars/src/Calendars.cpp:403
+#: plugins/Calendars/src/Calendars.cpp:405
 msgctxt "calendar"
 msgid "ISO week"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:404
+#: plugins/Calendars/src/Calendars.cpp:406
 #: plugins/Calendars/src/ui_calendarsDialog.h:937
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:405
+#: plugins/Calendars/src/Calendars.cpp:407
 #: plugins/Calendars/src/ui_calendarsDialog.h:930
 msgctxt "calendar"
 msgid "Roman"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:406
+#: plugins/Calendars/src/Calendars.cpp:408
 #: plugins/Calendars/src/ui_calendarsDialog.h:917
 msgctxt "calendar"
 msgid "Olympic"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:407
+#: plugins/Calendars/src/Calendars.cpp:409
 #: plugins/Calendars/src/ui_calendarsDialog.h:906
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "Mesir"
 
-#: plugins/Calendars/src/Calendars.cpp:408
+#: plugins/Calendars/src/Calendars.cpp:410
 #: plugins/Calendars/src/ui_calendarsDialog.h:909
 msgctxt "calendar"
 msgid "Armenian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:409
+#: plugins/Calendars/src/Calendars.cpp:411
 #: plugins/Calendars/src/ui_calendarsDialog.h:923
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:410
+#: plugins/Calendars/src/Calendars.cpp:412
 #: plugins/Calendars/src/ui_calendarsDialog.h:908
 msgctxt "calendar"
 msgid "Coptic"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:411
+#: plugins/Calendars/src/Calendars.cpp:413
 #: plugins/Calendars/src/ui_calendarsDialog.h:907
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:412
+#: plugins/Calendars/src/Calendars.cpp:414
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:413
+#: plugins/Calendars/src/Calendars.cpp:415
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:414
+#: plugins/Calendars/src/Calendars.cpp:416
 #: plugins/Calendars/src/ui_calendarsDialog.h:904
 msgctxt "calendar"
 msgid "Islamic"
 msgstr "Islam"
 
-#: plugins/Calendars/src/Calendars.cpp:415
+#: plugins/Calendars/src/Calendars.cpp:417
 #: plugins/Calendars/src/ui_calendarsDialog.h:914
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "Ibrani"
 
-#: plugins/Calendars/src/Calendars.cpp:416
+#: plugins/Calendars/src/Calendars.cpp:418
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:417
+#: plugins/Calendars/src/Calendars.cpp:419
 msgctxt "calendar"
 msgid "Persian (Astron.)"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:418
+#: plugins/Calendars/src/Calendars.cpp:420
 msgctxt "calendar"
 msgid "Bahá’í (Arithm.)"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:419
+#: plugins/Calendars/src/Calendars.cpp:421
 msgctxt "calendar"
 msgid "Bahá’í (Astron.)"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:420
+#: plugins/Calendars/src/Calendars.cpp:422
 #: plugins/Calendars/src/ui_calendarsDialog.h:910
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:421
+#: plugins/Calendars/src/Calendars.cpp:423
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:422
+#: plugins/Calendars/src/Calendars.cpp:424
 #: plugins/Calendars/src/ui_calendarsDialog.h:913
 msgctxt "calendar"
 msgid "New Hindu Solar"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:423
+#: plugins/Calendars/src/Calendars.cpp:425
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:424
+#: plugins/Calendars/src/Calendars.cpp:426
 msgctxt "calendar"
 msgid "New Hindu Panchang"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:426
+#: plugins/Calendars/src/Calendars.cpp:428
 #: plugins/Calendars/src/ui_calendarsDialog.h:920
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:427
+#: plugins/Calendars/src/Calendars.cpp:429
 #: plugins/Calendars/src/ui_calendarsDialog.h:927
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:428
+#: plugins/Calendars/src/Calendars.cpp:430
 #: plugins/Calendars/src/ui_calendarsDialog.h:929
 msgctxt "calendar"
 msgid "Tibetan"
 msgstr "Tibet"
 
-#: plugins/Calendars/src/Calendars.cpp:430
+#: plugins/Calendars/src/Calendars.cpp:432
 #: plugins/Calendars/src/ui_calendarsDialog.h:934
 #: plugins/Calendars/src/ui_calendarsDialog.h:957
 msgctxt "calendar"
 msgid "Chinese"
 msgstr "Cina"
 
-#: plugins/Calendars/src/Calendars.cpp:431
+#: plugins/Calendars/src/Calendars.cpp:433
 msgctxt "calendar"
 msgid "Chinese Solar Terms"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:434
+#: plugins/Calendars/src/Calendars.cpp:436
 #: plugins/Calendars/src/ui_calendarsDialog.h:911
 msgctxt "calendar"
 msgid "Japanese"
 msgstr "Jepang"
 
-#: plugins/Calendars/src/Calendars.cpp:435
+#: plugins/Calendars/src/Calendars.cpp:437
 msgctxt "calendar"
 msgid "Japanese Solar Terms"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:438
+#: plugins/Calendars/src/Calendars.cpp:440
 #: plugins/Calendars/src/ui_calendarsDialog.h:938
 msgctxt "calendar"
 msgid "Korean"
 msgstr "Korea"
 
-#: plugins/Calendars/src/Calendars.cpp:439
+#: plugins/Calendars/src/Calendars.cpp:441
 msgctxt "calendar"
 msgid "Korean Solar Terms"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:442
+#: plugins/Calendars/src/Calendars.cpp:444
 #: plugins/Calendars/src/ui_calendarsDialog.h:940
 msgctxt "calendar"
 msgid "Vietnamese"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:443
+#: plugins/Calendars/src/Calendars.cpp:445
 msgctxt "calendar"
 msgid "Vietnamese Solar Terms"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:445
+#: plugins/Calendars/src/Calendars.cpp:447
 #: plugins/Calendars/src/ui_calendarsDialog.h:918
 msgctxt "calendar"
 msgid "Balinese Pawukon"
 msgstr "Pawukon Bali"
 
-#: plugins/Calendars/src/Calendars.cpp:446
+#: plugins/Calendars/src/Calendars.cpp:448
 #: plugins/Calendars/src/ui_calendarsDialog.h:925
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:447
+#: plugins/Calendars/src/Calendars.cpp:449
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "Maya Haab"
 
-#: plugins/Calendars/src/Calendars.cpp:448
+#: plugins/Calendars/src/Calendars.cpp:450
 #: plugins/Calendars/src/ui_calendarsDialog.h:915
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "Maya Tzolkin"
 
-#: plugins/Calendars/src/Calendars.cpp:449
+#: plugins/Calendars/src/Calendars.cpp:451
 #: plugins/Calendars/src/ui_calendarsDialog.h:936
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "Aztec Xihuitl"
 
-#: plugins/Calendars/src/Calendars.cpp:450
+#: plugins/Calendars/src/Calendars.cpp:452
 #: plugins/Calendars/src/ui_calendarsDialog.h:924
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
@@ -33948,8 +34107,8 @@ msgstr "Februarii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:38
 msgctxt "Roman month name (genitive)"
-msgid "Martii"
-msgstr "Martii"
+msgid "Martiae"
+msgstr ""
 
 #: plugins/Calendars/src/RomanCalendar.cpp:39
 msgctxt "Roman month name (genitive)"
@@ -34003,12 +34162,12 @@ msgstr ""
 
 #: plugins/Calendars/src/RomanCalendar.cpp:66
 msgctxt "Roman calendar term"
-msgid "Nones"
+msgid "Nonae"
 msgstr ""
 
 #: plugins/Calendars/src/RomanCalendar.cpp:67
 msgctxt "Roman calendar term"
-msgid "Ides"
+msgid "Idus"
 msgstr ""
 
 #: plugins/Calendars/src/RomanCalendar.cpp:68
