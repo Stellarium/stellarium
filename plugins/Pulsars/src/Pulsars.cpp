@@ -51,6 +51,7 @@
 #include <QDir>
 #include <QSettings>
 #include <stdexcept>
+#include <unordered_map>
 
 #define CATALOG_FORMAT_VERSION 2 /* Version of format of catalog */
 
@@ -323,66 +324,71 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (flagShowPulsars && maxNbItem>0)
 	{
-		QStringList names;
+		QVector<QPair<QString,StelObjectP>> names;
 		for (const auto& pulsar : psr)
 		{
 			if (!pulsar->getNameI18n().isEmpty())
-				names << pulsar->getNameI18n();
+				names.append({pulsar->getNameI18n(), StelObjectP(pulsar)});
 			if (!pulsar->getEnglishName().isEmpty())
-				names << pulsar->getEnglishName();
-			names << pulsar->getDesignation();
+				names.append({pulsar->getEnglishName(), StelObjectP(pulsar)});
+			names.append({pulsar->getDesignation(), StelObjectP(pulsar)});
 			if (!pulsar->getBDesignation().isEmpty())
-				names << pulsar->getBDesignation();
+				names.append({pulsar->getBDesignation(), StelObjectP(pulsar)});
 		}
 
-		QString fullMatch = "";
-		for (const auto& name : std::as_const(names))
+		QString fullMatchName;
+		StelObjectP fullMatchP;
+		for (const auto& [name,obj] : std::as_const(names))
 		{
 			if (!matchObjectName(name, objPrefix, useStartOfWords))
 				continue;
 
 			if (name==objPrefix)
-				fullMatch = name;
+			{
+				fullMatchName = name;
+				fullMatchP = StelObjectP(obj);
+			}
 			else
-				result.append(name);
+				result.append({name, obj});
 
 			if (result.size() >= maxNbItem)
 				break;
 		}
 
-		result.sort();
-		if (!fullMatch.isEmpty())
-			result.prepend(fullMatch);
+		std::sort(result.begin(), result.end(), [](auto& a, auto& b){ return a.first < b.first; });
+		if (!fullMatchName.isEmpty())
+			result.prepend({fullMatchName, fullMatchP});
 	}
 	return result;
 }
 
-QStringList Pulsars::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> Pulsars::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (!flagShowPulsars)
 		return result;
 
 	for (const auto& pulsar : psr)
 	{
+		const auto obj = StelObjectP(pulsar);
 		if (inEnglish)
 		{
 			if (!pulsar->getEnglishName().isEmpty())
-				result << pulsar->getEnglishName();
+				result.append({pulsar->getEnglishName(), obj});
 		}
 		else
 		{
 			if (!pulsar->getNameI18n().isEmpty())
-				result << pulsar->getNameI18n();
+				result.append({pulsar->getNameI18n(), obj});
 		}
-		result << pulsar->getDesignation();
+		result.append({pulsar->getDesignation(), obj});
 		if (!pulsar->getBDesignation().isEmpty())
-			result << pulsar->getBDesignation();
+			result.append({pulsar->getBDesignation(), obj});
 	}
 
 	return result;

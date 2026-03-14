@@ -42,38 +42,41 @@ QList<StelObjectP> StelObjectModule::searchAround(const Vec3d& v, double limitFo
 	return QList<StelObjectP>();
 }
 
-QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> StelObjectModule::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (maxNbItem <= 0)
 		return result;
 
-	QStringList names;
-	names << listAllObjects(false) << listAllObjects(true);
-	names.removeDuplicates();
-	QString fullMatch = "";
-	for (const auto& name : std::as_const(names))
+	QVector<QPair<QString,StelObjectP>> objs;
+	objs << listAllObjects(false) << listAllObjects(true);
+	QString fullMatchName;
+	StelObjectP fullMatchP;
+	for (const auto& [name,obj] : std::as_const(objs))
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 			continue;
 
 		if (name==objPrefix)
-			fullMatch = name;
+		{
+			fullMatchName = name;
+			fullMatchP = obj;
+		}
 		else
-			result.append(name);
+			result.append({name,obj});
 		if (result.size() >= maxNbItem)
 			break;
 	}
 
-	result.sort();
-	if (!fullMatch.isEmpty())
-		result.prepend(fullMatch);
+	std::sort(result.begin(), result.end(), [](auto& a, auto& b){ return a.first < b.first; });
+	if (!fullMatchName.isEmpty())
+		result.prepend({fullMatchName, fullMatchP});
 	return result;
 }
 
-QStringList StelObjectModule::listAllObjectsByType(const QString &objType, bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> StelObjectModule::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
 	Q_UNUSED(objType)
 	Q_UNUSED(inEnglish)
-	return QStringList();
+	return {};
 }

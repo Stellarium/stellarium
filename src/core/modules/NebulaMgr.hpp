@@ -388,10 +388,10 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
+	QVector<QPair<QString,StelObjectP>> listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
 	//! @note Loading deep-sky objects with the proper names only.
-	QStringList listAllObjects(bool inEnglish) const override;
-	QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjectsByType(const QString& objType, bool inEnglish) const override;
 	QString getName() const override { return "Deep-sky objects"; }
 	QString getStelObjectType() const override { return Nebula::NEBULA_TYPE; }
 

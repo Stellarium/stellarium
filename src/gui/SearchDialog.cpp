@@ -556,7 +556,7 @@ void SearchDialog::createDialogContent()
 
 	// Auto display recent searches
 	QStringList recentMatches = listMatchingRecentObjects("", recentObjectSearchesData.maxSize, useStartOfWords);
-	resetSearchResultDisplay(recentMatches, recentMatches);
+	resetSearchResultDisplay(recentMatches, recentMatches, {});
 	setPushButtonGotoSearch();
 
 	// Update max size of "recent object searches"
@@ -968,7 +968,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		maxNbItem = recentObjectSearchesData.maxSize;
 		// Auto display recent searches
 		QStringList recentMatches = listMatchingRecentObjects(trimmedText, maxNbItem, useStartOfWords);
-		resetSearchResultDisplay(recentMatches, recentMatches);
+		resetSearchResultDisplay(recentMatches, recentMatches, {});
 
 		ui->simbadStatusLabel->setText("");
 		ui->simbadCooStatusLabel->setText("");
@@ -984,6 +984,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		}
 
 		// Get possible objects
+		QVector<QPair<QString,StelObjectP>> matchesWithPointers;
 		QStringList matches;
 		QStringList recentMatches;
 		QStringList allMatches;
@@ -1006,9 +1007,9 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 
 			// Get rest of matches
 			// trimmedText
-			matches = objectMgr->listMatchingObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords);
+			matchesWithPointers = objectMgr->listMatchingObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords);
 			// greekText
-			matches += objectMgr->listMatchingObjects(greekText, (greekTextMaxMbItem - matches.size()), useStartOfWords);
+			matchesWithPointers += objectMgr->listMatchingObjects(greekText, (greekTextMaxMbItem - matches.size()), useStartOfWords);
 		}
 		else
 		{
@@ -1018,17 +1019,20 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 			recentMatches = listMatchingRecentObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords);
 
 			// Get rest of matches
-			matches  = objectMgr->listMatchingObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords);
+			matchesWithPointers = objectMgr->listMatchingObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords);
 		}
 		// Check in case either number changes since they were
 		// hard coded
 		maxNbItem  = qMax(greekTextMaxMbItem, trimmedTextMaxNbItem);
 
+		for (const auto& [name,obj] : matchesWithPointers)
+			matches << name;
+
 		// Clean up matches
 		adjustMatchesResult(allMatches, recentMatches, matches, maxNbItem);
 
 		// Updates values - module info will be fetched on-demand
-		resetSearchResultDisplay(allMatches, recentMatches);
+		resetSearchResultDisplay(allMatches, recentMatches, matchesWithPointers);
 
 		// Update push button enabled state
 		setPushButtonGotoSearch();
@@ -1072,7 +1076,7 @@ void SearchDialog::updateRecentSearchList(const QString &nameI18n)
 
 	// Auto display recent searches
 	QStringList recentMatches = listMatchingRecentObjects("", recentObjectSearchesData.maxSize, useStartOfWords);
-	resetSearchResultDisplay(recentMatches, recentMatches);
+	resetSearchResultDisplay(recentMatches, recentMatches, {});
 }
 
 void SearchDialog::adjustRecentList(int maxSize)
@@ -1128,24 +1132,28 @@ void SearchDialog::adjustMatchesResult(QStringList &allMatches, QStringList& rec
 }
 
 
-void SearchDialog::resetSearchResultDisplay(QStringList allMatches,
-					       QStringList recentMatches)
+void SearchDialog::resetSearchResultDisplay(QStringList allMatches, QStringList recentMatches,
+                                            const QVector<QPair<QString,StelObjectP>>& matchesWithPointers)
 {
 	// Updates values
 	searchListModel->appendValues(allMatches);
 	searchListModel->appendRecentValues(recentMatches);
 
 	// Pass saved object types for recent objects to the model
-	QMap<QString, QString> recentObjectTypes; 
+	QMap<QString, QString> objectTypes; 
 	for (const QString& objName: recentMatches)
 	{
 		if (recentObjectSearchesData.objectTypes.contains(objName))
 		{
-			recentObjectTypes[objName] = recentObjectSearchesData.objectTypes[objName];
+			objectTypes[objName] = recentObjectSearchesData.objectTypes[objName];
 		}
 	}
+	// Also pass object types from the objects to which we have pointers
+	for (const auto& [name,obj] : matchesWithPointers)
+		objectTypes[name] = obj->getObjectTypeI18n();
+
 	// Update display with object types
-	searchListModel->setValuesWithModules(allMatches, recentMatches, recentObjectTypes);
+	searchListModel->setValuesWithModules(allMatches, recentMatches, objectTypes);
 
 	// Update display
 	searchListModel->setValues(allMatches, recentMatches);
@@ -1678,7 +1686,10 @@ void SearchDialog::updateListView(int index)
 	ui->searchInListLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	ui->objectsListView->blockSignals(true);
 	ui->objectsListView->reset();
-	listModel->setStringList(objectMgr->listAllModuleObjects(moduleId, englishNames));
+	QStringList moduleObjs;
+	for (const auto& [name,obj] : objectMgr->listAllModuleObjects(moduleId, englishNames))
+		moduleObjs << name;
+	listModel->setStringList(moduleObjs);
 	proxyModel->setSourceModel(listModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
 	ui->objectsListView->blockSignals(false);

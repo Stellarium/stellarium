@@ -76,8 +76,8 @@ public:
 
 	StelObjectP searchByID(const QString &id) const override { return qSharedPointerCast<StelObject>(searchByEnglishName(id)); }
 
-	QStringList listAllObjects(bool inEnglish) const override;
-	QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjectsByType(const QString& objType, bool inEnglish) const override;
 	QString getName() const override { return "Geological features"; }
 	QString getStelObjectType() const override { return NomenclatureItem::NOMENCLATURE_TYPE; }
 

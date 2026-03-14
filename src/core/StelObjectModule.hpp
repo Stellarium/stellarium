@@ -68,18 +68,18 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords decide if start of word is searched	
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QVector<QPair<QString,StelObjectP>> listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	//! List all StelObjects.
 	//! @param inEnglish list names in English (true) or translated (false)
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
-	virtual QStringList listAllObjects(bool inEnglish) const = 0;
+	virtual QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const = 0;
 
 	//! List all StelObjects by type.
 	//! @param objType object type
 	//! @param inEnglish list translated names (false) or in English (true)
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
+	virtual QVector<QPair<QString,StelObjectP>> listAllObjectsByType(const QString& objType, bool inEnglish) const;
 
 	//! Gets a user-displayable name of the object category
 	virtual QString getName() const = 0;
