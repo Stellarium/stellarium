@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-03-13 20:24+0700\n"
+"POT-Creation-Date: 2026-03-15 01:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:348
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
 #: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:158
-#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:709
+#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:713
 #: src/core/StelCore.cpp:310 src/core/StelSkyLayerMgr.cpp:83
 #: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:969
 msgid "Display Options"
@@ -3364,6 +3364,7 @@ msgid "m/s"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1240
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:987
 msgid "Sidereal day"
 msgstr ""
 
@@ -4296,66 +4297,82 @@ msgid "Central eclipse ends"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:57 src/ui_astroCalcAlmanacWidget.h:1129
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1241
 msgid "Specific Time"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:59
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1167
 msgid "Next transit of the selected object"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:60
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1155
 msgid "Next rising of the selected object"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:61
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1179
 msgid "Next setting of the selected object"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:62
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1163
 msgid "Today's transit of the selected object"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:63
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1151
 msgid "Today's rising of the selected object"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:64
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1175
 msgid "Today's setting of the selected object"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:65
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1159
 msgid "Previous transit of the selected object"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:66
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1147
 msgid "Previous rising of the selected object"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:67
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1171
 msgid "Previous setting of the selected object"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:69
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1199
 msgid "Next morning twilight"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:70
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1211
 msgid "Next evening twilight"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:71
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1195
 msgid "Today's morning twilight"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:72
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1207
 msgid "Today's evening twilight"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:73
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1191
 msgid "Previous morning twilight"
 msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:74
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1203
 msgid "Previous evening twilight"
 msgstr ""
 
@@ -4431,147 +4448,147 @@ msgstr ""
 msgid "December solstice at previous year"
 msgstr ""
 
-#: src/core/StelApp.cpp:484
+#: src/core/StelApp.cpp:488
 msgid "Initializing textures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:488
+#: src/core/StelApp.cpp:492
 msgid "Initializing network access..."
 msgstr ""
 
-#: src/core/StelApp.cpp:491
+#: src/core/StelApp.cpp:495
 msgid "Initializing network disk cache..."
 msgstr ""
 
-#: src/core/StelApp.cpp:505
+#: src/core/StelApp.cpp:509
 msgid "Initializing network proxy..."
 msgstr ""
 
-#: src/core/StelApp.cpp:521
+#: src/core/StelApp.cpp:525
 msgid "Initializing Object Database..."
 msgstr ""
 
-#: src/core/StelApp.cpp:527
+#: src/core/StelApp.cpp:531
 msgid "Initializing HiPS survey..."
 msgstr ""
 
-#: src/core/StelApp.cpp:533
+#: src/core/StelApp.cpp:537
 msgid "Initializing Solar System objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:539
+#: src/core/StelApp.cpp:543
 msgid "Initializing planetary nomenclature..."
 msgstr ""
 
-#: src/core/StelApp.cpp:545
+#: src/core/StelApp.cpp:549
 msgid "Initializing stars..."
 msgstr ""
 
-#: src/core/StelApp.cpp:550
+#: src/core/StelApp.cpp:554
 msgid "Initializing core..."
 msgstr ""
 
-#: src/core/StelApp.cpp:554
+#: src/core/StelApp.cpp:558
 msgid "Initializing deep-sky objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:560
+#: src/core/StelApp.cpp:564
 msgid "Initializing Milky Way..."
 msgstr ""
 
-#: src/core/StelApp.cpp:566
+#: src/core/StelApp.cpp:570
 msgid "Initializing zodiacal light..."
 msgstr ""
 
-#: src/core/StelApp.cpp:572
+#: src/core/StelApp.cpp:576
 msgid "Initializing sky image layer..."
 msgstr ""
 
-#: src/core/StelApp.cpp:578
+#: src/core/StelApp.cpp:582
 msgid "Initializing TOAST surveys..."
 msgstr ""
 
-#: src/core/StelApp.cpp:592
+#: src/core/StelApp.cpp:596
 msgid "Initializing audio..."
 msgstr ""
 
-#: src/core/StelApp.cpp:600
+#: src/core/StelApp.cpp:604
 msgid "Initializing video..."
 msgstr ""
 
-#: src/core/StelApp.cpp:608
+#: src/core/StelApp.cpp:612
 msgid "Initializing speech output..."
 msgstr ""
 
-#: src/core/StelApp.cpp:615
+#: src/core/StelApp.cpp:619
 msgid "Initializing constellations..."
 msgstr ""
 
-#: src/core/StelApp.cpp:621
+#: src/core/StelApp.cpp:625
 msgid "Initializing asterisms..."
 msgstr ""
 
-#: src/core/StelApp.cpp:627
+#: src/core/StelApp.cpp:631
 msgid "Initializing landscape..."
 msgstr ""
 
-#: src/core/StelApp.cpp:640
+#: src/core/StelApp.cpp:644
 msgid "Initializing grid lines..."
 msgstr ""
 
-#: src/core/StelApp.cpp:645
+#: src/core/StelApp.cpp:649
 msgid "Initializing special markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:651
+#: src/core/StelApp.cpp:655
 msgid "Initializing sporadic meteors..."
 msgstr ""
 
-#: src/core/StelApp.cpp:657
+#: src/core/StelApp.cpp:661
 msgid "Initializing user labels..."
 msgstr ""
 
-#: src/core/StelApp.cpp:662
+#: src/core/StelApp.cpp:666
 msgid "Initializing sky cultures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:666
+#: src/core/StelApp.cpp:670
 msgid "Initializing user markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:672
+#: src/core/StelApp.cpp:676
 msgid "Initializing custom objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:678
+#: src/core/StelApp.cpp:682
 msgid "Initializing highlights..."
 msgstr ""
 
-#: src/core/StelApp.cpp:684
+#: src/core/StelApp.cpp:688
 msgid "Initializing specific time..."
 msgstr ""
 
-#: src/core/StelApp.cpp:692
+#: src/core/StelApp.cpp:696
 msgid "Initializing scripting..."
 msgstr ""
 
-#: src/core/StelApp.cpp:697
+#: src/core/StelApp.cpp:701
 msgid "Initializing color scheme..."
 msgstr ""
 
-#: src/core/StelApp.cpp:709 src/ui_configurationDialog.h:2658
+#: src/core/StelApp.cpp:713 src/ui_configurationDialog.h:2658
 msgid "Night mode"
 msgstr ""
 
-#: src/core/StelApp.cpp:741
+#: src/core/StelApp.cpp:745
 msgid "Initializing SPOUT sender..."
 msgstr ""
 
-#: src/core/StelApp.cpp:751
+#: src/core/StelApp.cpp:755
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelApp.cpp:778
+#: src/core/StelApp.cpp:782
 msgid "Loading plugin"
 msgstr ""
 
@@ -4633,10 +4650,12 @@ msgid "Add 1 solar hour"
 msgstr ""
 
 #: src/core/StelCore.cpp:323
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:972
 msgid "Add 1 solar day"
 msgstr ""
 
 #: src/core/StelCore.cpp:324
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:981
 msgid "Add 7 solar days"
 msgstr ""
 
@@ -4649,22 +4668,27 @@ msgid "Subtract 1 solar hour"
 msgstr ""
 
 #: src/core/StelCore.cpp:327
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:967
 msgid "Subtract 1 solar day"
 msgstr ""
 
 #: src/core/StelCore.cpp:328
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:976
 msgid "Subtract 7 solar days"
 msgstr ""
 
 #: src/core/StelCore.cpp:329
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:990
 msgid "Add 1 sidereal day"
 msgstr ""
 
 #: src/core/StelCore.cpp:330
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:999
 msgid "Add 7 sidereal days"
 msgstr ""
 
 #: src/core/StelCore.cpp:331
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1073
 msgid "Add 1 sidereal year"
 msgstr ""
 
@@ -4733,10 +4757,12 @@ msgid "Add 1 Gaussian year"
 msgstr ""
 
 #: src/core/StelCore.cpp:348
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1045
 msgid "Add 1 calendar month"
 msgstr ""
 
 #: src/core/StelCore.cpp:349
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1118
 msgid "Add 1 calendar year"
 msgstr ""
 
@@ -4753,14 +4779,17 @@ msgid "Add 1 Great year"
 msgstr ""
 
 #: src/core/StelCore.cpp:353
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:985
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
 #: src/core/StelCore.cpp:354
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:994
 msgid "Subtract 7 sidereal days"
 msgstr ""
 
 #: src/core/StelCore.cpp:355
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1068
 msgid "Subtract 1 sidereal year"
 msgstr ""
 
@@ -4829,10 +4858,12 @@ msgid "Subtract 1 Gaussian year"
 msgstr ""
 
 #: src/core/StelCore.cpp:372
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1040
 msgid "Subtract 1 calendar month"
 msgstr ""
 
 #: src/core/StelCore.cpp:373
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1113
 msgid "Subtract 1 calendar year"
 msgstr ""
 
@@ -5955,6 +5986,7 @@ msgstr ""
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:303
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:220
 msgid "License"
 msgstr ""
 
@@ -6731,6 +6763,7 @@ msgstr ""
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:221
 msgid "Authors"
 msgstr ""
 
@@ -6763,6 +6796,7 @@ msgstr ""
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:180
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:302
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:219
 msgid "Version"
 msgstr ""
 
@@ -8500,6 +8534,7 @@ msgid "Risings, Transits, and Settings"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:3047
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1134
 msgid "Saros"
 msgstr ""
 
@@ -10048,6 +10083,9 @@ msgstr ""
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:489 src/ui_astroCalcAlmanacWidget.h:1115
 #: plugins/NavStars/src/ui_navStarsWindow.h:546
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1143
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1187
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1215
 msgid "Today"
 msgstr ""
 
@@ -16012,6 +16050,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:219
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:249
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1244
 msgid "Save settings"
 msgstr ""
 
@@ -16049,6 +16088,7 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:785
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:538
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1243
 msgid "Restore defaults"
 msgstr ""
 
@@ -17069,6 +17109,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:563
 #: plugins/Observability/src/ui_ObservabilityDialog.h:309
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:786
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1245
 msgid "Settings"
 msgstr ""
 
@@ -17795,6 +17836,7 @@ msgid "Evening astronomical twilight"
 msgstr ""
 
 #: src/ui_astroCalcAlmanacWidget.h:1056
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1181
 msgid "Twilight"
 msgstr ""
 
@@ -18763,6 +18805,7 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:995
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:787
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:545
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1246
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -28890,6 +28933,7 @@ msgstr ""
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:247
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:268
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1242
 msgid "Show plug-in button on toolbar"
 msgstr ""
 
@@ -36308,4 +36352,359 @@ msgstr ""
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:544
 msgid "Manage"
+msgstr ""
+
+#: plugins/TimeNavigator/src/TimeNavigator.cpp:43
+#: plugins/TimeNavigator/src/TimeNavigator.cpp:81
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:962
+msgid "Time Navigator"
+msgstr ""
+
+#: plugins/TimeNavigator/src/TimeNavigator.cpp:46
+msgid ""
+"This plugin provides a convenient panel for stepping the simulation time "
+"forward or backward by common astronomical periods, and for jumping to "
+"specific events such as risings, transits, settings, and twilight times."
+msgstr ""
+
+#: plugins/TimeNavigator/src/TimeNavigator.cpp:82
+msgid "Show Time Navigator window"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:963
+msgid "Step the simulation time forward (▶) or backward (◀) by a period:"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:964
+msgid "Days"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:965
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:974
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:983
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:992
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1002
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1011
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1020
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1029
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1038
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1048
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1057
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1066
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1075
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1084
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1093
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1102
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1111
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1121
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1130
+msgid "◀"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:969
+msgid "Solar day"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:970
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:979
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:988
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:997
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1007
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1016
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1025
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1034
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1043
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1053
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1062
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1071
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1080
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1089
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1098
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1107
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1116
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1126
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1135
+msgid "▶"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:978
+msgid "Solar week"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:996
+msgid "Sidereal week"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1001
+msgid "Months"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1004
+msgid "Subtract 1 synodic month (~29.53 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1006
+msgid "Synodic month"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1009
+msgid "Add 1 synodic month (~29.53 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1013
+msgid "Subtract 1 mean tropical month (~27.32 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1015
+msgid "Mean tropical month"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1018
+msgid "Add 1 mean tropical month (~27.32 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1022
+msgid "Subtract 1 draconic month (~27.21 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1024
+msgid "Draconic month"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1027
+msgid "Add 1 draconic month (~27.21 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1031
+msgid "Subtract 1 anomalistic month (~27.55 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1033
+msgid "Anomalistic month"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1036
+msgid "Add 1 anomalistic month (~27.55 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1042
+msgid "Calendar month"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1047
+msgid "Years"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1050
+msgid "Subtract 1 mean tropical year (~365.24 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1052
+msgid "Mean tropical year"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1055
+msgid "Add 1 mean tropical year (~365.24 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1059
+msgid "Subtract 1 tropical year (varies with epoch)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1061
+msgid "Tropical year"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1064
+msgid "Add 1 tropical year (varies with epoch)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1070
+msgid "Sidereal year"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1077
+msgid "Subtract 1 draconic year (~346.62 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1079
+msgid "Draconic year"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1082
+msgid "Add 1 draconic year (~346.62 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1086
+msgid "Subtract 1 anomalistic year (~365.26 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1088
+msgid "Anomalistic year"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1091
+msgid "Add 1 anomalistic year (~365.26 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1095
+msgid "Subtract 1 Julian year (365.25 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1097
+msgid "Julian year"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1100
+msgid "Add 1 Julian year (365.25 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1104
+msgid "Subtract 1 Gaussian year (~365.26 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1106
+msgid "Gaussian year"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1109
+msgid "Add 1 Gaussian year (~365.26 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1115
+msgid "Calendar year"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1120
+msgid "Long cycles"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1123
+msgid "Subtract 1 Metonic cycle (235 synodic months ≈ 19 years)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1125
+msgid "Metonic cycle"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1128
+msgid "Add 1 Metonic cycle (235 synodic months ≈ 19 years)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1132
+msgid "Subtract 1 saros (223 synodic months ≈ 18 years 11 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1137
+msgid "Add 1 saros (223 synodic months ≈ 18 years 11 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1139
+msgid "Time Steps"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1140
+msgid "Selected object"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1141
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:193
+msgid "No object selected"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1142
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1186
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1214
+msgid "Previous"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1144
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1188
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1216
+msgid "Next"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1145
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1149
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1153
+msgid "Rising"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1157
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1161
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1165
+msgid "Transit"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1169
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1173
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1177
+msgid "Setting"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1182
+msgid "Solar altitude:"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1184
+msgid "Solar altitude used for twilight calculations (synced with View → Sky)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1189
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1193
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1197
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1217
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1221
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1225
+msgid "Morning"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1201
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1205
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1209
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1229
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1233
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1237
+msgid "Evening"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1213
+msgid "Selected object at current altitude"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1219
+msgid "Selected object at its current altitude, previous morning"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1223
+msgid "Selected object at its current altitude this morning"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1227
+msgid "Selected object at its current altitude, next morning"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1231
+msgid "Selected object at its current altitude, previous evening"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1235
+msgid "Selected object at its current altitude this evening"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1239
+msgid "Selected object at its current altitude, next evening"
+msgstr ""
+
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:217
+msgid "Time Navigator Plug-in"
+msgstr ""
+
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:224
+msgid ""
+"The Time Navigator plugin provides a convenient window for stepping the "
+"simulation time forward or backward by common astronomical periods (solar "
+"day, sidereal day, synodic month, tropical year, Saros cycle, etc.), as well "
+"as for jumping to specific events for a selected object (rising, transit, "
+"setting) and to twilight times."
 msgstr ""
