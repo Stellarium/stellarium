@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-03-13 20:24+0700\n"
+"POT-Creation-Date: 2026-03-15 02:32+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Gediminas Tauras, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
@@ -70,21 +70,21 @@ msgstr "asterizmas"
 #: src/core/modules/SpecialMarkersMgr.cpp:314
 #: src/core/modules/LandscapeMgr.cpp:883
 #: src/core/modules/NomenclatureMgr.cpp:90 src/core/modules/NebulaMgr.cpp:469
-#: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:348
+#: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:355
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
 #: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:158
-#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:709
+#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:713
 #: src/core/StelCore.cpp:310 src/core/StelSkyLayerMgr.cpp:83
 #: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:969
 msgid "Display Options"
 msgstr "Vaizdo nustatymai"
 
-#: src/core/modules/AsterismMgr.cpp:103 src/ui_viewDialog.h:4939
+#: src/core/modules/AsterismMgr.cpp:103 src/ui_viewDialog.h:5001
 #: src/ui_configurationDialog.h:2625
 msgid "Asterism lines"
 msgstr "Asterizmų linijos"
 
-#: src/core/modules/AsterismMgr.cpp:104 src/ui_viewDialog.h:5008
+#: src/core/modules/AsterismMgr.cpp:104 src/ui_viewDialog.h:5070
 #: src/ui_configurationDialog.h:2626
 msgid "Asterism labels"
 msgstr "Asterizmų pavadinimai"
@@ -93,7 +93,7 @@ msgstr "Asterizmų pavadinimai"
 msgid "Toggle single asterism selection mode"
 msgstr "Perjungti į vieno asterizmo pasirinkimo režimą"
 
-#: src/core/modules/AsterismMgr.cpp:106 src/ui_viewDialog.h:4985
+#: src/core/modules/AsterismMgr.cpp:106 src/ui_viewDialog.h:5047
 msgid "Ray helpers"
 msgstr "Spinduliniai pagalbininkai"
 
@@ -106,22 +106,22 @@ msgstr "Legenda"
 msgid "constellation"
 msgstr "žvaigždynas"
 
-#: src/core/modules/ConstellationMgr.cpp:150 src/ui_viewDialog.h:4969
+#: src/core/modules/ConstellationMgr.cpp:150 src/ui_viewDialog.h:5031
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Constellation lines"
 msgstr "Žvaigždynų kontūrai"
 
-#: src/core/modules/ConstellationMgr.cpp:151 src/ui_viewDialog.h:4954
+#: src/core/modules/ConstellationMgr.cpp:151 src/ui_viewDialog.h:5016
 #: src/ui_configurationDialog.h:2616
 msgid "Constellation art"
 msgstr "Žvaigždynų piešiniai"
 
-#: src/core/modules/ConstellationMgr.cpp:152 src/ui_viewDialog.h:4924
+#: src/core/modules/ConstellationMgr.cpp:152 src/ui_viewDialog.h:4986
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Constellation labels"
 msgstr "Žvaigždynų pavadinimai"
 
-#: src/core/modules/ConstellationMgr.cpp:153 src/ui_viewDialog.h:4965
+#: src/core/modules/ConstellationMgr.cpp:153 src/ui_viewDialog.h:5027
 #: src/ui_configurationDialog.h:2615
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Constellation boundaries"
@@ -139,7 +139,7 @@ msgstr "Mėnulio stotys / dvarai (jei jie apibrėžti dangaus kultūroje)"
 msgid "Constellation areas (hulls)"
 msgstr "Žvaigždynų plotai (korpusai)"
 
-#: src/core/modules/ConstellationMgr.cpp:159 src/ui_viewDialog.h:5007
+#: src/core/modules/ConstellationMgr.cpp:159 src/ui_viewDialog.h:5069
 msgid "Select single constellation"
 msgstr "Pasirinkti vieną žvaigždyną"
 
@@ -595,7 +595,7 @@ msgctxt "IAU constellation name"
 msgid "Vulpecula"
 msgstr "Vulpecula"
 
-#: src/core/modules/StarMgr.cpp:411 src/ui_viewDialog.h:3961
+#: src/core/modules/StarMgr.cpp:411 src/ui_viewDialog.h:4005
 #: src/ui_dsoColorsDialog.h:644
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Stars"
@@ -613,7 +613,7 @@ msgstr "Padidinti žvaigždžių ryškio ribą"
 msgid "Reduce the magnitude limit for stars"
 msgstr "Sumažinti žvaigždžių ryškio ribą"
 
-#: src/core/modules/GridLinesMgr.cpp:693 src/ui_viewDialog.h:4784
+#: src/core/modules/GridLinesMgr.cpp:693 src/ui_viewDialog.h:4846
 msgid "Meridian"
 msgstr "Dienovidinis"
 
@@ -641,7 +641,7 @@ msgstr "Valandinis kampas"
 msgid "Precession Circle"
 msgstr "Tikslus apskritimas"
 
-#: src/core/modules/GridLinesMgr.cpp:731 src/ui_viewDialog.h:4443
+#: src/core/modules/GridLinesMgr.cpp:731 src/ui_viewDialog.h:4505
 msgid "Horizon"
 msgstr "Horizontas"
 
@@ -654,7 +654,7 @@ msgid "Supergalactic Equator"
 msgstr "Supergalaktinis pusiaujas"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:744 src/ui_viewDialog.h:4788
+#: src/core/modules/GridLinesMgr.cpp:744 src/ui_viewDialog.h:4850
 msgid "O./C. longitude"
 msgstr "O./K. ilguma"
 
@@ -663,7 +663,7 @@ msgid "Quadrature"
 msgstr "Kvadratūra"
 
 #: src/core/modules/GridLinesMgr.cpp:752
-#: src/core/modules/GridLinesMgr.cpp:2065 src/ui_viewDialog.h:4396
+#: src/core/modules/GridLinesMgr.cpp:2065 src/ui_viewDialog.h:4458
 msgid "Prime Vertical"
 msgstr "Pirminis vertikalas"
 
@@ -673,7 +673,7 @@ msgstr "Pirminis vertikalas"
 #: src/gui/AstroCalcDialog.cpp:883 src/gui/AstroCalcDialog.cpp:1799
 #: src/gui/AstroCalcDialog.cpp:2207 src/gui/AstroCalcDialog.cpp:2479
 #: src/gui/AstroCalcChart.cpp:82 src/gui/AstroCalcChart.cpp:420
-#: src/ui_viewDialog.h:4709 plugins/Satellites/src/Satellite.cpp:365
+#: src/ui_viewDialog.h:4771 plugins/Satellites/src/Satellite.cpp:365
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1543
 msgid "Altitude"
 msgstr "Aukštis"
@@ -702,7 +702,7 @@ msgstr "Pusšešėlis"
 msgid "Invariable Plane"
 msgstr "Nekintanti plokštuma"
 
-#: src/core/modules/GridLinesMgr.cpp:785 src/ui_viewDialog.h:4428
+#: src/core/modules/GridLinesMgr.cpp:785 src/ui_viewDialog.h:4490
 msgid "Projected Solar Equator"
 msgstr "Projektuojamas Saulės ekvatorius"
 
@@ -812,11 +812,11 @@ msgstr "Tinkleliai ir linijos"
 msgid "Equatorial grid"
 msgstr "Pusiaujinis tinklelis"
 
-#: src/core/modules/GridLinesMgr.cpp:2044 src/ui_viewDialog.h:4384
+#: src/core/modules/GridLinesMgr.cpp:2044 src/ui_viewDialog.h:4446
 msgid "Fixed Equatorial grid"
 msgstr "Fiksuotas pusiaujinis tinklelis"
 
-#: src/core/modules/GridLinesMgr.cpp:2045 src/ui_viewDialog.h:4820
+#: src/core/modules/GridLinesMgr.cpp:2045 src/ui_viewDialog.h:4882
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Azimuthal grid"
 msgstr "Azimutinis tinklelis"
@@ -874,21 +874,21 @@ msgstr "Ekliptinis J2000 tinklelis"
 msgid "Ecliptic grid"
 msgstr "Ekliptinis tinklelis"
 
-#: src/core/modules/GridLinesMgr.cpp:2058 src/ui_viewDialog.h:4336
+#: src/core/modules/GridLinesMgr.cpp:2058 src/ui_viewDialog.h:4398
 #: src/ui_configurationDialog.h:2614
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Galactic grid"
 msgstr "Galaktikos tinklelis"
 
-#: src/core/modules/GridLinesMgr.cpp:2059 src/ui_viewDialog.h:4420
+#: src/core/modules/GridLinesMgr.cpp:2059 src/ui_viewDialog.h:4482
 msgid "Galactic equator"
 msgstr "Galaktikos pusiaujas"
 
-#: src/core/modules/GridLinesMgr.cpp:2060 src/ui_viewDialog.h:4697
+#: src/core/modules/GridLinesMgr.cpp:2060 src/ui_viewDialog.h:4759
 msgid "Supergalactic grid"
 msgstr "Supergalaktikos tinklelis"
 
-#: src/core/modules/GridLinesMgr.cpp:2061 src/ui_viewDialog.h:4505
+#: src/core/modules/GridLinesMgr.cpp:2061 src/ui_viewDialog.h:4567
 msgid "Supergalactic equator"
 msgstr "Supergalaktikos pusiaujas"
 
@@ -945,15 +945,15 @@ msgstr "J2000 ekliptikos poliai"
 msgid "Ecliptic poles"
 msgstr "Ekliptikos poliai"
 
-#: src/core/modules/GridLinesMgr.cpp:2076 src/ui_viewDialog.h:4658
+#: src/core/modules/GridLinesMgr.cpp:2076 src/ui_viewDialog.h:4720
 msgid "Galactic poles"
 msgstr "Galaktiniai poliai"
 
-#: src/core/modules/GridLinesMgr.cpp:2077 src/ui_viewDialog.h:4593
+#: src/core/modules/GridLinesMgr.cpp:2077 src/ui_viewDialog.h:4655
 msgid "Galactic center and anticenter"
 msgstr "Galaktinis centras ir priešcentris"
 
-#: src/core/modules/GridLinesMgr.cpp:2078 src/ui_viewDialog.h:4451
+#: src/core/modules/GridLinesMgr.cpp:2078 src/ui_viewDialog.h:4513
 msgid "Supergalactic poles"
 msgstr "Supergalaktiniai poliai"
 
@@ -973,7 +973,7 @@ msgstr "Saulėgrįžos J2000 taškai"
 msgid "Solstice points"
 msgstr "Saulėgrįžos taškai"
 
-#: src/core/modules/GridLinesMgr.cpp:2083 src/ui_viewDialog.h:4713
+#: src/core/modules/GridLinesMgr.cpp:2083 src/ui_viewDialog.h:4775
 msgid "Antisolar point"
 msgstr "Antisaulinis taškas"
 
@@ -981,7 +981,7 @@ msgstr "Antisaulinis taškas"
 msgid "The center of the Earth's umbra"
 msgstr "Žemės umbros/šešėlio centras"
 
-#: src/core/modules/GridLinesMgr.cpp:2085 src/ui_viewDialog.h:4759
+#: src/core/modules/GridLinesMgr.cpp:2085 src/ui_viewDialog.h:4821
 msgid "Apex points"
 msgstr "Apekso taškai"
 
@@ -997,7 +997,7 @@ msgstr "Apskritimas, nurodantis regos lauką"
 msgid "Rectangular marker of FOV"
 msgstr "Stačiakampis RL žymeklis"
 
-#: src/core/modules/SpecialMarkersMgr.cpp:318 src/ui_viewDialog.h:4397
+#: src/core/modules/SpecialMarkersMgr.cpp:318 src/ui_viewDialog.h:4459
 #: src/ui_configurationDialog.h:2634
 msgid "Compass marks"
 msgstr "Kompaso žymos"
@@ -1195,7 +1195,7 @@ msgid "NbW"
 msgstr "ŠįV"
 
 #: src/core/modules/LandscapeMgr.cpp:439 src/core/modules/LandscapeMgr.cpp:762
-#: src/gui/ViewDialog.cpp:868
+#: src/gui/ViewDialog.cpp:893
 msgid "Loading..."
 msgstr "Kraunama..."
 
@@ -1227,7 +1227,7 @@ msgstr "Atmosfera"
 msgid "Fog"
 msgstr "Rūkas"
 
-#: src/core/modules/LandscapeMgr.cpp:886 src/ui_viewDialog.h:4797
+#: src/core/modules/LandscapeMgr.cpp:886 src/ui_viewDialog.h:4859
 #: src/ui_configurationDialog.h:2630
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Cardinal points"
@@ -1253,7 +1253,7 @@ msgstr "Žemė"
 msgid "Landscape illumination"
 msgstr "Kraštovaizdžio apšvietimas"
 
-#: src/core/modules/LandscapeMgr.cpp:892 src/ui_viewDialog.h:4854
+#: src/core/modules/LandscapeMgr.cpp:892 src/ui_viewDialog.h:4916
 msgid "Landscape labels"
 msgstr "Kraštovaizdžio žymės"
 
@@ -3412,6 +3412,7 @@ msgid "m/s"
 msgstr "m/s"
 
 #: src/core/modules/Planet.cpp:1240
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1027
 msgid "Sidereal day"
 msgstr "Žvaigždinė diena"
 
@@ -3582,7 +3583,7 @@ msgid "Umbral eclipse magnitude"
 msgstr "Pilno užtemimo dydis"
 
 #: src/core/modules/Planet.cpp:1575 src/core/modules/Planet.cpp:1913
-#: src/gui/ViewDialog.cpp:928
+#: src/gui/ViewDialog.cpp:953
 msgid "Albedo"
 msgstr "Albedas"
 
@@ -4175,55 +4176,55 @@ msgid "Orthographic"
 msgstr "Ortografinė"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:349 src/gui/AstroCalcDialog.cpp:5158
+#: src/core/modules/SolarSystem.cpp:356 src/gui/AstroCalcDialog.cpp:5158
 #: src/gui/AstroCalcDialog.cpp:7510 src/translations.h:37
 msgid "Planets"
 msgstr "Planetos"
 
-#: src/core/modules/SolarSystem.cpp:350
+#: src/core/modules/SolarSystem.cpp:357
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Planet labels"
 msgstr "Planetų pavadinimai"
 
-#: src/core/modules/SolarSystem.cpp:351
+#: src/core/modules/SolarSystem.cpp:358
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:345
 msgid "Planet orbits"
 msgstr "Planetų orbitos"
 
-#: src/core/modules/SolarSystem.cpp:352
+#: src/core/modules/SolarSystem.cpp:359
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Planet trails"
 msgstr "Planetų pėdsakai"
 
-#: src/core/modules/SolarSystem.cpp:353
+#: src/core/modules/SolarSystem.cpp:360
 msgid "Planet trails reset"
 msgstr "Planetų pėdsakų atstatymas"
 
-#: src/core/modules/SolarSystem.cpp:355 src/ui_viewDialog.h:4070
+#: src/core/modules/SolarSystem.cpp:362 src/ui_viewDialog.h:4114
 msgid "Planet markers"
 msgstr "Planetų žymės"
 
-#: src/core/modules/SolarSystem.cpp:356
+#: src/core/modules/SolarSystem.cpp:363
 msgid "Planet selection marker"
 msgstr "Planetų pasirinkimo žymė"
 
-#: src/core/modules/SolarSystem.cpp:357
+#: src/core/modules/SolarSystem.cpp:364
 msgid "Enlarge Moon"
 msgstr "Padidinti mėnulį"
 
-#: src/core/modules/SolarSystem.cpp:358
+#: src/core/modules/SolarSystem.cpp:365
 msgid "Enlarge minor bodies"
 msgstr "Padidinti mažus kūnus"
 
-#: src/core/modules/SolarSystem.cpp:359
+#: src/core/modules/SolarSystem.cpp:366
 msgid "Enlarge Planets"
 msgstr "Padidinti planetas"
 
-#: src/core/modules/SolarSystem.cpp:360
+#: src/core/modules/SolarSystem.cpp:367
 msgid "Enlarge Sun"
 msgstr "Padidinti saulę"
 
-#: src/core/modules/SolarSystem.cpp:361 src/ui_viewDialog.h:4087
+#: src/core/modules/SolarSystem.cpp:368 src/ui_viewDialog.h:4131
 msgid "Mark minor bodies"
 msgstr "Pažymėti mažuosius kūnus"
 
@@ -4361,66 +4362,82 @@ msgstr "Centrinis užtemimas baigiasi"
 
 #: src/core/modules/SpecificTimeMgr.cpp:57
 #: src/ui_astroCalcAlmanacWidget.h:1129
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1248
 msgid "Specific Time"
 msgstr "Konkretus laikas"
 
 #: src/core/modules/SpecificTimeMgr.cpp:59
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1173
 msgid "Next transit of the selected object"
 msgstr "Kitas pasirinkto objekto tranzitas"
 
 #: src/core/modules/SpecificTimeMgr.cpp:60
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1161
 msgid "Next rising of the selected object"
 msgstr "Kitas pasirinkto objekto patekėjimas"
 
 #: src/core/modules/SpecificTimeMgr.cpp:61
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1185
 msgid "Next setting of the selected object"
 msgstr "Kitas pasirinkto objekto nusileidimas"
 
 #: src/core/modules/SpecificTimeMgr.cpp:62
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1169
 msgid "Today's transit of the selected object"
 msgstr " Pasirinkto objekto tranzitas šiandien"
 
 #: src/core/modules/SpecificTimeMgr.cpp:63
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1157
 msgid "Today's rising of the selected object"
 msgstr " Pasirinkto objekto patekėjimas šiandien"
 
 #: src/core/modules/SpecificTimeMgr.cpp:64
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1181
 msgid "Today's setting of the selected object"
 msgstr " Pasirinkto objekto nusileidimas šiandien"
 
 #: src/core/modules/SpecificTimeMgr.cpp:65
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1165
 msgid "Previous transit of the selected object"
 msgstr "Ankstesnis pasirinkto objekto tranzitas"
 
 #: src/core/modules/SpecificTimeMgr.cpp:66
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1153
 msgid "Previous rising of the selected object"
 msgstr "Ankstesnis pasirinkto objekto patekėjimas"
 
 #: src/core/modules/SpecificTimeMgr.cpp:67
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1177
 msgid "Previous setting of the selected object"
 msgstr "Ankstesnis pasirinkto objekto nusileidimas"
 
 #: src/core/modules/SpecificTimeMgr.cpp:69
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1205
 msgid "Next morning twilight"
 msgstr "Kita ryto prieblanda"
 
 #: src/core/modules/SpecificTimeMgr.cpp:70
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1217
 msgid "Next evening twilight"
 msgstr "Kita vakaro prieblanda"
 
 #: src/core/modules/SpecificTimeMgr.cpp:71
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1201
 msgid "Today's morning twilight"
 msgstr "Šiandienos ryto prieblanda"
 
 #: src/core/modules/SpecificTimeMgr.cpp:72
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1213
 msgid "Today's evening twilight"
 msgstr "Šiandienos vakaro prieblanda"
 
 #: src/core/modules/SpecificTimeMgr.cpp:73
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1197
 msgid "Previous morning twilight"
 msgstr "Praėjusio ryto prieblanda"
 
 #: src/core/modules/SpecificTimeMgr.cpp:74
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1209
 msgid "Previous evening twilight"
 msgstr "Praėjusio vakaro prieblanda"
 
@@ -4496,147 +4513,147 @@ msgstr "Kitų metų žiemos saulėgrįža"
 msgid "December solstice at previous year"
 msgstr "Praeitų metų žiemos saulėgrįža"
 
-#: src/core/StelApp.cpp:484
+#: src/core/StelApp.cpp:488
 msgid "Initializing textures..."
 msgstr "Inicializuojamos tekstūros..."
 
-#: src/core/StelApp.cpp:488
+#: src/core/StelApp.cpp:492
 msgid "Initializing network access..."
 msgstr "Inicijuojamas tinklo prieigos užklausimas..."
 
-#: src/core/StelApp.cpp:491
+#: src/core/StelApp.cpp:495
 msgid "Initializing network disk cache..."
 msgstr "Inicijuojamas tinklo disko kešavimas..."
 
-#: src/core/StelApp.cpp:505
+#: src/core/StelApp.cpp:509
 msgid "Initializing network proxy..."
 msgstr "Inicijuojama tarpinė tinklo sąsaja ..."
 
-#: src/core/StelApp.cpp:521
+#: src/core/StelApp.cpp:525
 msgid "Initializing Object Database..."
 msgstr "Inicializuojama objektų duomenų bazė..."
 
-#: src/core/StelApp.cpp:527
+#: src/core/StelApp.cpp:531
 msgid "Initializing HiPS survey..."
 msgstr "Pradedama HiPS apklausa..."
 
-#: src/core/StelApp.cpp:533
+#: src/core/StelApp.cpp:537
 msgid "Initializing Solar System objects..."
 msgstr "Inicializuojami Saulės sistemos objektai..."
 
-#: src/core/StelApp.cpp:539
+#: src/core/StelApp.cpp:543
 msgid "Initializing planetary nomenclature..."
 msgstr "Inicializuojama planetų pavadinimų sistema..."
 
-#: src/core/StelApp.cpp:545
+#: src/core/StelApp.cpp:549
 msgid "Initializing stars..."
 msgstr "Inicijuojamos žvaigždės..."
 
-#: src/core/StelApp.cpp:550
+#: src/core/StelApp.cpp:554
 msgid "Initializing core..."
 msgstr "Sistemos branduolio inicijavimas..."
 
-#: src/core/StelApp.cpp:554
+#: src/core/StelApp.cpp:558
 msgid "Initializing deep-sky objects..."
 msgstr "Inicializuojami giliojo kosmoso objektai..."
 
-#: src/core/StelApp.cpp:560
+#: src/core/StelApp.cpp:564
 msgid "Initializing Milky Way..."
 msgstr "Inicializuojama Paukščių takas..."
 
-#: src/core/StelApp.cpp:566
+#: src/core/StelApp.cpp:570
 msgid "Initializing zodiacal light..."
 msgstr "Inicijuojama zodiako šviesa..."
 
-#: src/core/StelApp.cpp:572
+#: src/core/StelApp.cpp:576
 msgid "Initializing sky image layer..."
 msgstr "Inicializuojamas dangaus vaizdo sluoksnis..."
 
-#: src/core/StelApp.cpp:578
+#: src/core/StelApp.cpp:582
 msgid "Initializing TOAST surveys..."
 msgstr "Inicializuojama TOAST apklausa..."
 
-#: src/core/StelApp.cpp:592
+#: src/core/StelApp.cpp:596
 msgid "Initializing audio..."
 msgstr "Garso inicijavimas..."
 
-#: src/core/StelApp.cpp:600
+#: src/core/StelApp.cpp:604
 msgid "Initializing video..."
 msgstr "Vaizdo inicijavimas..."
 
-#: src/core/StelApp.cpp:608
+#: src/core/StelApp.cpp:612
 msgid "Initializing speech output..."
 msgstr "Inicijuojama balso išvestis..."
 
-#: src/core/StelApp.cpp:615
+#: src/core/StelApp.cpp:619
 msgid "Initializing constellations..."
 msgstr "Inicijuojama žvaigždynai..."
 
-#: src/core/StelApp.cpp:621
+#: src/core/StelApp.cpp:625
 msgid "Initializing asterisms..."
 msgstr "Inicijuojami asterizmai..."
 
-#: src/core/StelApp.cpp:627
+#: src/core/StelApp.cpp:631
 msgid "Initializing landscape..."
 msgstr "Inicijuojamas kraštovaizdis..."
 
-#: src/core/StelApp.cpp:640
+#: src/core/StelApp.cpp:644
 msgid "Initializing grid lines..."
 msgstr "Tinklelio linijų inicijavimas..."
 
-#: src/core/StelApp.cpp:645
+#: src/core/StelApp.cpp:649
 msgid "Initializing special markers..."
 msgstr "Inicializuojami specialūs žymekliai..."
 
-#: src/core/StelApp.cpp:651
+#: src/core/StelApp.cpp:655
 msgid "Initializing sporadic meteors..."
 msgstr "Inicializuojami sporadiniai meteorai..."
 
-#: src/core/StelApp.cpp:657
+#: src/core/StelApp.cpp:661
 msgid "Initializing user labels..."
 msgstr "Vartotojo žymės inicijuojamos..."
 
-#: src/core/StelApp.cpp:662
+#: src/core/StelApp.cpp:666
 msgid "Initializing sky cultures..."
 msgstr "Inicijuojamos dangaus kultūros..."
 
-#: src/core/StelApp.cpp:666
+#: src/core/StelApp.cpp:670
 msgid "Initializing user markers..."
 msgstr "Inicijuojami vartotojo žymekliai ..."
 
-#: src/core/StelApp.cpp:672
+#: src/core/StelApp.cpp:676
 msgid "Initializing custom objects..."
 msgstr "Inicijuojami pasirinktiniai objektai..."
 
-#: src/core/StelApp.cpp:678
+#: src/core/StelApp.cpp:682
 msgid "Initializing highlights..."
 msgstr "Inicijuojami šviesos akcentai..."
 
-#: src/core/StelApp.cpp:684
+#: src/core/StelApp.cpp:688
 msgid "Initializing specific time..."
 msgstr "Inicializuojamas konkretus laikas..."
 
-#: src/core/StelApp.cpp:692
+#: src/core/StelApp.cpp:696
 msgid "Initializing scripting..."
 msgstr "Inicializuojamas scenarijus..."
 
-#: src/core/StelApp.cpp:697
+#: src/core/StelApp.cpp:701
 msgid "Initializing color scheme..."
 msgstr "Inicijuojama spalvų schema..."
 
-#: src/core/StelApp.cpp:709 src/ui_configurationDialog.h:2658
+#: src/core/StelApp.cpp:713 src/ui_configurationDialog.h:2658
 msgid "Night mode"
 msgstr "Nakties režimas"
 
-#: src/core/StelApp.cpp:741
+#: src/core/StelApp.cpp:745
 msgid "Initializing SPOUT sender..."
 msgstr "Inicializuojamas SPOUT siuntimas..."
 
-#: src/core/StelApp.cpp:751
+#: src/core/StelApp.cpp:755
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Negalima sukurti Spout siuntėjo. Žr. žurnalą papild. informacijai."
 
-#: src/core/StelApp.cpp:778
+#: src/core/StelApp.cpp:782
 msgid "Loading plugin"
 msgstr "Įkeliamas įskiepis"
 
@@ -4698,10 +4715,12 @@ msgid "Add 1 solar hour"
 msgstr "Pridėti 1 saulės valandą"
 
 #: src/core/StelCore.cpp:323
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1015
 msgid "Add 1 solar day"
 msgstr "Pridėti 1 saulės dieną"
 
 #: src/core/StelCore.cpp:324
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1022
 msgid "Add 7 solar days"
 msgstr "Pridėti 7 saulės dienas"
 
@@ -4714,22 +4733,27 @@ msgid "Subtract 1 solar hour"
 msgstr "Atimti 1 saulės valandą"
 
 #: src/core/StelCore.cpp:327
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1011
 msgid "Subtract 1 solar day"
 msgstr "Atimti 1 saulės dieną"
 
 #: src/core/StelCore.cpp:328
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1018
 msgid "Subtract 7 solar days"
 msgstr "Atimti 7 saulės dienas"
 
 #: src/core/StelCore.cpp:329
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1029
 msgid "Add 1 sidereal day"
 msgstr "Pridėti 1 žvaigždinę dieną"
 
 #: src/core/StelCore.cpp:330
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1036
 msgid "Add 7 sidereal days"
 msgstr "Pridėti 7 žvaigždines dienas"
 
 #: src/core/StelCore.cpp:331
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1094
 msgid "Add 1 sidereal year"
 msgstr "Pridėti 1 žvaigždinius metus"
 
@@ -4798,10 +4822,12 @@ msgid "Add 1 Gaussian year"
 msgstr "Pridėkite 1 metus pagal Gausą"
 
 #: src/core/StelCore.cpp:348
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1072
 msgid "Add 1 calendar month"
 msgstr "Pridėkite 1 kalendorinį mėnesį"
 
 #: src/core/StelCore.cpp:349
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1129
 msgid "Add 1 calendar year"
 msgstr "Pridėti 1 kalendorinius metus"
 
@@ -4818,14 +4844,17 @@ msgid "Add 1 Great year"
 msgstr "Pridėti 1 didžiuosius metus"
 
 #: src/core/StelCore.cpp:353
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1025
 msgid "Subtract 1 sidereal day"
 msgstr "Atimti 1 žvaigždinę dieną"
 
 #: src/core/StelCore.cpp:354
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1032
 msgid "Subtract 7 sidereal days"
 msgstr "Atimti 7 žvaigždines dienas"
 
 #: src/core/StelCore.cpp:355
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1090
 msgid "Subtract 1 sidereal year"
 msgstr "Atimti 1 žvaigždinius metus"
 
@@ -4894,10 +4923,12 @@ msgid "Subtract 1 Gaussian year"
 msgstr "Atimkite 1 metus pagal Gausą."
 
 #: src/core/StelCore.cpp:372
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1068
 msgid "Subtract 1 calendar month"
 msgstr "Atimti 1 kalendorinį mėnesį"
 
 #: src/core/StelCore.cpp:373
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1125
 msgid "Subtract 1 calendar year"
 msgstr "Atimti 1 kalendorinius metus"
 
@@ -5945,7 +5976,7 @@ msgstr "Kraunama '%1' iš %2"
 
 #. TRANSLATORS: Name of script
 #: src/core/StelSkyCultureSkyPartition.cpp:520 src/translations.h:488
-#: src/ui_viewDialog.h:4910
+#: src/ui_viewDialog.h:4972
 msgid "Zodiac"
 msgstr "Zodiakas"
 
@@ -6220,6 +6251,7 @@ msgstr ""
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:303
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:220
 msgid "License"
 msgstr "Licencija"
 
@@ -7004,6 +7036,7 @@ msgstr "Padėkos"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:221
 msgid "Authors"
 msgstr "Autoriai"
 
@@ -7036,6 +7069,7 @@ msgstr "Susisiekite"
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:180
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:302
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:219
 msgid "Version"
 msgstr "Versija"
 
@@ -7976,36 +8010,36 @@ msgstr "Kadrų per sekundę"
 msgid "Are you sure? This will delete your customized data."
 msgstr "Jūs užtikrintas? Tai ištrins jūsų pritaikytus duomenis."
 
-#: src/gui/ViewDialog.cpp:831
+#: src/gui/ViewDialog.cpp:856
 msgid "properties"
 msgstr "savybės"
 
-#: src/gui/ViewDialog.cpp:929
+#: src/gui/ViewDialog.cpp:954
 msgid "Normal map"
 msgstr "Normalus žemėlapis"
 
-#: src/gui/ViewDialog.cpp:930
+#: src/gui/ViewDialog.cpp:955
 msgid "Horizon map"
 msgstr "Horizonto žemėlapis"
 
-#: src/gui/ViewDialog.cpp:1009
+#: src/gui/ViewDialog.cpp:1034
 msgid "Deep Sky"
 msgstr "Tolimasis kosmosas"
 
-#: src/gui/ViewDialog.cpp:1010
+#: src/gui/ViewDialog.cpp:1035
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:239
 msgid "Solar System"
 msgstr "Saulės sistema"
 
-#: src/gui/ViewDialog.cpp:1145
+#: src/gui/ViewDialog.cpp:1170
 msgid "No albedo map"
 msgstr "Žemėlapis be albedo"
 
-#: src/gui/ViewDialog.cpp:1146
+#: src/gui/ViewDialog.cpp:1171
 msgid "This group of surveys doesn't have an albedo map. Can't display it."
 msgstr "Ši tyrimo grupė neturi albedo žemėlapio. Negalima jo rodyti."
 
-#: src/gui/ViewDialog.cpp:1373
+#: src/gui/ViewDialog.cpp:1398
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -8014,7 +8048,7 @@ msgstr ""
 "objektams (mažiems mėnuliams, asteroidams, kometoms) vietoje sferinės "
 "aproksimacijos."
 
-#: src/gui/ViewDialog.cpp:1374
+#: src/gui/ViewDialog.cpp:1399
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -8024,106 +8058,106 @@ msgstr ""
 "būti prastesnė."
 
 #. TRANSLATORS: duration in seconds
-#: src/gui/ViewDialog.cpp:1383
+#: src/gui/ViewDialog.cpp:1408
 msgctxt "duration, suffix"
 msgid "s"
 msgstr "s"
 
-#: src/gui/ViewDialog.cpp:1544
+#: src/gui/ViewDialog.cpp:1569
 msgctxt "cultural style"
 msgid "native"
 msgstr "vietinis"
 
-#: src/gui/ViewDialog.cpp:1545
+#: src/gui/ViewDialog.cpp:1570
 msgctxt "cultural style"
 msgid "transliteration"
 msgstr "transliteracija"
 
-#: src/gui/ViewDialog.cpp:1546
+#: src/gui/ViewDialog.cpp:1571
 msgctxt "cultural style"
 msgid "sci. translit."
 msgstr "mksl. translit."
 
-#: src/gui/ViewDialog.cpp:1547
+#: src/gui/ViewDialog.cpp:1572
 msgctxt "cultural style"
 msgid "translated"
 msgstr "vertimas"
 
-#: src/gui/ViewDialog.cpp:1698
+#: src/gui/ViewDialog.cpp:1723
 msgid "No shooting stars"
 msgstr "Be krintančių žvaigždžių"
 
-#: src/gui/ViewDialog.cpp:1700
+#: src/gui/ViewDialog.cpp:1725
 msgid "Normal rate"
 msgstr "Normalus dažnis"
 
-#: src/gui/ViewDialog.cpp:1702
+#: src/gui/ViewDialog.cpp:1727
 msgid "Standard Orionids rate"
 msgstr "Standartinis Orionidų dažnis"
 
-#: src/gui/ViewDialog.cpp:1704
+#: src/gui/ViewDialog.cpp:1729
 msgid "Standard Perseids rate"
 msgstr "Standartinis Perseidų"
 
-#: src/gui/ViewDialog.cpp:1706
+#: src/gui/ViewDialog.cpp:1731
 msgid "Standard Geminids rate"
 msgstr "Standartinis Geminidų dažnis"
 
-#: src/gui/ViewDialog.cpp:1708
+#: src/gui/ViewDialog.cpp:1733
 msgid "Exceptional Perseid rate"
 msgstr "Ypač geras Perseidų dažnis"
 
-#: src/gui/ViewDialog.cpp:1710
+#: src/gui/ViewDialog.cpp:1735
 msgid "Meteor storm rate"
 msgstr "Meteorų audros dažnis"
 
-#: src/gui/ViewDialog.cpp:1712
+#: src/gui/ViewDialog.cpp:1737
 msgid "Exceptional Draconid rate"
 msgstr "Ypač geras Drakonidų dažnis"
 
-#: src/gui/ViewDialog.cpp:1714
+#: src/gui/ViewDialog.cpp:1739
 msgid "Exceptional Leonid rate"
 msgstr "Ypač geras Leonidų"
 
-#: src/gui/ViewDialog.cpp:1716
+#: src/gui/ViewDialog.cpp:1741
 msgid "Very high rate (1966 Leonids)"
 msgstr "Labai aukštas dažnis (1966 Leonidai)"
 
-#: src/gui/ViewDialog.cpp:1718
+#: src/gui/ViewDialog.cpp:1743
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Aukščiausias pasiektas dažnis (1833 Leonidai)"
 
-#: src/gui/ViewDialog.cpp:1780
+#: src/gui/ViewDialog.cpp:1805
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "G. Müller (1893)"
 
-#: src/gui/ViewDialog.cpp:1781
+#: src/gui/ViewDialog.cpp:1806
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "Astronominis Almanachas (1984)"
 
-#: src/gui/ViewDialog.cpp:1782
+#: src/gui/ViewDialog.cpp:1807
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Aiškinamasis priedas (1992)"
 
-#: src/gui/ViewDialog.cpp:1783
+#: src/gui/ViewDialog.cpp:1808
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Aiškinamasis priedas (2013)"
 
-#: src/gui/ViewDialog.cpp:1784
+#: src/gui/ViewDialog.cpp:1809
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "Mallama & Hilton (2018)"
 
-#: src/gui/ViewDialog.cpp:1785
+#: src/gui/ViewDialog.cpp:1810
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Bendras"
 
-#: src/gui/ViewDialog.cpp:1808
+#: src/gui/ViewDialog.cpp:1833
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -8131,7 +8165,7 @@ msgstr ""
 "Algoritmas buvo naudojamas <em>Astronominiam Almanache</em> (1984 ir vėliau)"
 " ir suteikia V (instrumentiniu) dydžius (tariamai iš D.L. Harris)."
 
-#: src/gui/ViewDialog.cpp:1809
+#: src/gui/ViewDialog.cpp:1834
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
@@ -8141,7 +8175,7 @@ msgstr ""
 "metais ir vis dar buvo išleistas <em>Astronominė Efemerija aiškinamajame "
 "priede</em> (1961)."
 
-#: src/gui/ViewDialog.cpp:1810
+#: src/gui/ViewDialog.cpp:1835
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
@@ -8149,7 +8183,7 @@ msgstr ""
 "Algoritmas buvo paskelbtas <em>Astronominio Almanacho aiškinamąjame "
 "priede</em> (1992), antroje leidimo versijoje."
 
-#: src/gui/ViewDialog.cpp:1811
+#: src/gui/ViewDialog.cpp:1836
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -8157,7 +8191,7 @@ msgstr ""
 "Algoritmas buvo paskelbtas <em>Astronominio Almanacho aiškinamąjame "
 "priede</em> (2013), trečioje leidimo versijoje."
 
-#: src/gui/ViewDialog.cpp:1812
+#: src/gui/ViewDialog.cpp:1837
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
@@ -8167,7 +8201,7 @@ msgstr ""
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 
-#: src/gui/ViewDialog.cpp:1815
+#: src/gui/ViewDialog.cpp:1840
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vizualinis ryškis pagal fazinį kampą ir albedą."
 
@@ -8692,7 +8726,7 @@ msgstr "Pailg."
 msgid "Symbol"
 msgstr "Simbolis"
 
-#: src/gui/AstroCalcDialog.cpp:1056 src/ui_viewDialog.h:3911
+#: src/gui/AstroCalcDialog.cpp:1056 src/ui_viewDialog.h:3955
 msgid "Solar system objects"
 msgstr "Saulės sistemos objektai"
 
@@ -8761,7 +8795,7 @@ msgstr "Atstumas nuo Saulės skaičiavimo momento metu"
 msgid "Heliocentric ecliptic positions of the major planets"
 msgstr "Heliocentrinės ekliptikos pagrindinių planetų padėtys"
 
-#: src/gui/AstroCalcDialog.cpp:1743 src/ui_viewDialog.h:4039
+#: src/gui/AstroCalcDialog.cpp:1743 src/ui_viewDialog.h:4083
 #: src/ui_astroCalcDialog.h:2340
 msgid "Major planets"
 msgstr "Pagrindinės planetos"
@@ -8841,6 +8875,7 @@ msgid "Risings, Transits, and Settings"
 msgstr "Patekėjimai, tranzitai ir nusileidimai"
 
 #: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:3047
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1142
 msgid "Saros"
 msgstr "Saros"
 
@@ -9681,7 +9716,7 @@ msgstr "Ryškūs ūkai (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5165 src/gui/AstroCalcDialog.cpp:7513
-#: src/translations.h:292 src/ui_viewDialog.h:4244
+#: src/translations.h:292 src/ui_viewDialog.h:4306
 #: src/ui_dsoColorsDialog.h:603
 msgid "Dark nebulae"
 msgstr "Tamsieji ūkai"
@@ -9999,24 +10034,24 @@ msgstr "Bet kada naktį"
 msgid "Bright stars"
 msgstr "Ryškios žvaigždės"
 
-#: src/gui/AstroCalcDialog.cpp:7512 src/ui_viewDialog.h:4243
+#: src/gui/AstroCalcDialog.cpp:7512 src/ui_viewDialog.h:4305
 msgid "Bright nebulae"
 msgstr "Ryškūs ūkai"
 
-#: src/gui/AstroCalcDialog.cpp:7514 src/ui_viewDialog.h:4247
+#: src/gui/AstroCalcDialog.cpp:7514 src/ui_viewDialog.h:4309
 #: src/ui_dsoColorsDialog.h:543
 msgid "Galaxies"
 msgstr "Galaktikos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7515 src/translations.h:284
-#: src/ui_viewDialog.h:4250 src/ui_dsoColorsDialog.h:547
+#: src/ui_viewDialog.h:4312 src/ui_dsoColorsDialog.h:547
 msgid "Open star clusters"
 msgstr "Padrikieji žvaigždžių spiečiai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7524 src/translations.h:290
-#: src/ui_viewDialog.h:4242 src/ui_dsoColorsDialog.h:536
+#: src/ui_viewDialog.h:4304 src/ui_dsoColorsDialog.h:536
 msgid "Planetary nebulae"
 msgstr "Planetiškieji ūkai"
 
@@ -10049,19 +10084,19 @@ msgstr "Supernovos liekanų kandidatės"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7532 src/translations.h:318
-#: src/ui_viewDialog.h:4249 src/ui_dsoColorsDialog.h:529
+#: src/ui_viewDialog.h:4311 src/ui_dsoColorsDialog.h:529
 msgid "Supernova remnants"
 msgstr "Supernovos liekanos"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7533 src/translations.h:346
-#: src/ui_viewDialog.h:4246 src/ui_dsoColorsDialog.h:635
+#: src/ui_viewDialog.h:4308 src/ui_dsoColorsDialog.h:635
 msgid "Clusters of galaxies"
 msgstr "Galaktikų spiečius"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7535 src/translations.h:286
-#: src/ui_viewDialog.h:4252 src/ui_dsoColorsDialog.h:522
+#: src/ui_viewDialog.h:4314 src/ui_dsoColorsDialog.h:522
 msgid "Globular star clusters"
 msgstr "Kamuoliniai žvaigždžių spiečiai"
 
@@ -10073,13 +10108,13 @@ msgstr "Dangaus sritys"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7537 src/translations.h:300
-#: src/ui_viewDialog.h:4241 src/ui_dsoColorsDialog.h:513
+#: src/ui_viewDialog.h:4303 src/ui_dsoColorsDialog.h:513
 msgid "Active galaxies"
 msgstr "Aktyvios galaktikos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7538 src/translations.h:304
-#: src/ui_viewDialog.h:4248 src/ui_dsoColorsDialog.h:594
+#: src/ui_viewDialog.h:4310 src/ui_dsoColorsDialog.h:594
 msgid "Interacting galaxies"
 msgstr "Sąveikaujančios galaktikos"
 
@@ -10135,7 +10170,7 @@ msgctxt "IAU Constellation"
 msgid "Const."
 msgstr "Žvgždn."
 
-#: src/gui/AstroCalcDialog.cpp:7807 src/ui_viewDialog.h:4281
+#: src/gui/AstroCalcDialog.cpp:7807 src/ui_viewDialog.h:4343
 #: src/ui_astroCalcDialog.h:2541
 msgid "Limit angular size:"
 msgstr "Kamp. dydžio ribos:"
@@ -10425,6 +10460,9 @@ msgstr "min"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:489 src/ui_astroCalcAlmanacWidget.h:1115
 #: plugins/NavStars/src/ui_navStarsWindow.h:546
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1150
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1194
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1222
 msgid "Today"
 msgstr "Šiandien"
 
@@ -10453,7 +10491,7 @@ msgstr "Objekto pavadinimas"
 msgid "Constellation"
 msgstr "Žvaigždynas"
 
-#: src/gui/ObsListDialog.cpp:304 src/ui_viewDialog.h:3921
+#: src/gui/ObsListDialog.cpp:304 src/ui_viewDialog.h:3965
 #: src/ui_obsListDialog.h:420
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Landscape"
@@ -11391,12 +11429,12 @@ msgid "Protoplanetary Nebulae"
 msgstr "Protoplanetiniai ūkai"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:350 src/ui_viewDialog.h:4232
+#: src/translations.h:350 src/ui_viewDialog.h:4294
 msgid "Messier Catalogue"
 msgstr "Messier Katalogas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:352 src/ui_viewDialog.h:4238
+#: src/translations.h:352 src/ui_viewDialog.h:4300
 msgid "Caldwell Catalogue"
 msgstr "Caldwell Katalogas"
 
@@ -11526,17 +11564,17 @@ msgid "James Dunlop's southern deep sky catalogue"
 msgstr "Džeimso Dunlopo pietinio giliojo kosmoso objektų katalogas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:404 src/ui_viewDialog.h:4235
+#: src/translations.h:404 src/ui_viewDialog.h:4297
 msgid "Trumpler Catalogue"
 msgstr "Trumplerio Katalogas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:406 src/ui_viewDialog.h:4171
+#: src/translations.h:406 src/ui_viewDialog.h:4233
 msgid "Stock Catalogue"
 msgstr "Stock katalogas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:408 src/ui_viewDialog.h:4174
+#: src/translations.h:408 src/ui_viewDialog.h:4236
 msgid "Ruprecht Catalogue"
 msgstr "Ruprechto Katalogas"
 
@@ -15104,72 +15142,72 @@ msgstr "Maks. rodomų elementų kiekis:"
 msgid "Deletes all recent search object data"
 msgstr "Pašalinami visi naujausi paieškos objekto duomenys"
 
-#: src/ui_searchDialogGui.h:890 src/ui_viewDialog.h:4830
-#: src/ui_viewDialog.h:4875 src/ui_configurationDialog.h:2852
+#: src/ui_searchDialogGui.h:890 src/ui_viewDialog.h:4892
+#: src/ui_viewDialog.h:4937 src/ui_configurationDialog.h:2852
 #: src/ui_configurationDialog.h:2863
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:304
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:418
 msgid "Options"
 msgstr "Nustatymai"
 
-#: src/ui_viewDialog.h:3902
+#: src/ui_viewDialog.h:3946
 msgid "View"
 msgstr "Vaizdas"
 
-#: src/ui_viewDialog.h:3907 src/ui_viewDialog.h:3928
+#: src/ui_viewDialog.h:3951 src/ui_viewDialog.h:3972
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:535
 msgid "Sky"
 msgstr "Dangus"
 
-#: src/ui_viewDialog.h:3909
+#: src/ui_viewDialog.h:3953
 msgctxt "Solar system objects"
 msgid "SSO"
 msgstr "SSO"
 
-#: src/ui_viewDialog.h:3914
+#: src/ui_viewDialog.h:3958
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "GKO"
 
-#: src/ui_viewDialog.h:3916
+#: src/ui_viewDialog.h:3960
 msgid "Deep-Sky Objects"
 msgstr "Tolimojo kosmoso objektai"
 
-#: src/ui_viewDialog.h:3919
+#: src/ui_viewDialog.h:3963
 msgid "Markings"
 msgstr "Žymės"
 
-#: src/ui_viewDialog.h:3923
+#: src/ui_viewDialog.h:3967
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Sky Culture"
 msgstr "Dangaus kultūra"
 
-#: src/ui_viewDialog.h:3925
+#: src/ui_viewDialog.h:3969
 msgid "Surveys"
 msgstr "Apklausos"
 
-#: src/ui_viewDialog.h:3931 src/ui_viewDialog.h:3934
+#: src/ui_viewDialog.h:3975 src/ui_viewDialog.h:3978
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr "Sporadinių meteorų zenitinė valandinė norma."
 
-#: src/ui_viewDialog.h:3937
+#: src/ui_viewDialog.h:3981
 msgid "Settings for sporadic meteors"
 msgstr "Nustatymai pavieniams meteorams"
 
-#: src/ui_viewDialog.h:3939
+#: src/ui_viewDialog.h:3983
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr "Krintančios žvaigždės:"
 
-#: src/ui_viewDialog.h:3940
+#: src/ui_viewDialog.h:3984
 msgid "Solar altitude for Twilight Finder:"
 msgstr "Saulės altitudė Sutemų ieškikliui:"
 
-#: src/ui_viewDialog.h:3941
+#: src/ui_viewDialog.h:3985
 msgid "Atmosphere visualization"
 msgstr "Atmosferos vizualizacija"
 
-#: src/ui_viewDialog.h:3943
+#: src/ui_viewDialog.h:3987
 msgid ""
 "Atmosphere settings: visual model, pressure, temperature, extinction "
 "coefficient, etc."
@@ -15177,95 +15215,95 @@ msgstr ""
 "Atmosferos nustatymai: vizualus modelis, slėgis, temperatūra, išnykimo "
 "koeficientas, ir t.t."
 
-#: src/ui_viewDialog.h:3946
+#: src/ui_viewDialog.h:3990
 msgid "Open skylight details (color tweaks for the atmosphere)"
 msgstr "Atidaryti dangaus šviesos detalės (spalvų korekcijos atmosferai)"
 
-#: src/ui_viewDialog.h:3949
+#: src/ui_viewDialog.h:3993
 msgid "Open tone mapping details."
 msgstr "Atverti spalvų žemėlapio detales."
 
-#: src/ui_viewDialog.h:3952
+#: src/ui_viewDialog.h:3996
 msgid ""
 "Changing saturation from totally unsaturated (0.00) to default (1.00) value."
 msgstr ""
 "Keičiant sodrumą nuo visiškai nesodraus (0.00) iki numatytosios (1.00) "
 "vertės."
 
-#: src/ui_viewDialog.h:3954
+#: src/ui_viewDialog.h:3998
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
 msgid "Light pollution:"
 msgstr "Šviesos tarša:"
 
-#: src/ui_viewDialog.h:3955
+#: src/ui_viewDialog.h:3999
 msgid "Zodiacal Light brightness:"
 msgstr "Zodiako šviesos ryškumas:"
 
-#: src/ui_viewDialog.h:3956
+#: src/ui_viewDialog.h:4000
 msgid "Milky Way brightness/saturation:"
 msgstr "Paukščių Tako šviesumas/sodrumas."
 
-#: src/ui_viewDialog.h:3958
+#: src/ui_viewDialog.h:4002
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Pritemdyti neryškias žvaigždes, kai matomas labai ryškus objektas."
 
-#: src/ui_viewDialog.h:3960
+#: src/ui_viewDialog.h:4004
 msgid "Dynamic eye adaptation"
 msgstr "Dinamiškas akių prisitaikymas"
 
-#: src/ui_viewDialog.h:3962
+#: src/ui_viewDialog.h:4006
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:261
 msgid "Absolute scale:"
 msgstr "Absoliutus mastelis:"
 
-#: src/ui_viewDialog.h:3964
+#: src/ui_viewDialog.h:4008
 msgid "Twinkle amount (magnitudes) along horizon (less in zenith)"
 msgstr "Mirgėjimo kiekis (dydžiai) išilgai horizonto (mažiau zenite)"
 
-#: src/ui_viewDialog.h:3966
+#: src/ui_viewDialog.h:4010
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:267
 msgid "Twinkle:"
 msgstr "Mirgėjimas:"
 
-#: src/ui_viewDialog.h:3967 src/ui_viewDialog.h:4008 src/ui_viewDialog.h:4253
+#: src/ui_viewDialog.h:4011 src/ui_viewDialog.h:4052 src/ui_viewDialog.h:4315
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:283
 msgid "Labels and Markers"
 msgstr "Pavadinimai ir žymos"
 
-#: src/ui_viewDialog.h:3969
+#: src/ui_viewDialog.h:4013
 msgid "Show all available proper names"
 msgstr "Rodyti visus prieinamus tikrus vardus"
 
-#: src/ui_viewDialog.h:3971
+#: src/ui_viewDialog.h:4015
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:288
 msgid "Show additional star names"
 msgstr "Rodyti papildomus žvaigždžių pavadinimus"
 
-#: src/ui_viewDialog.h:3973
+#: src/ui_viewDialog.h:4017
 msgid ""
 "Use designations of stars instead of their common names for screen labels"
 msgstr ""
 "Naudokite žvaigždžių pavadinimus vietoj jų bendrųjų vardų ekrano etiketėms."
 
-#: src/ui_viewDialog.h:3975 src/ui_viewDialog.h:4257
+#: src/ui_viewDialog.h:4019 src/ui_viewDialog.h:4319
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Use designations for screen labels"
 msgstr "Naudokite žymėjimus ekrano etiketėms."
 
-#: src/ui_viewDialog.h:3977
+#: src/ui_viewDialog.h:4021
 msgid "Limit the magnitude of stars"
 msgstr "Riboti rodomas žvaigždžes pagal ryškį"
 
-#: src/ui_viewDialog.h:3979 src/ui_viewDialog.h:4030 src/ui_viewDialog.h:4288
+#: src/ui_viewDialog.h:4023 src/ui_viewDialog.h:4074 src/ui_viewDialog.h:4350
 msgid "Limit magnitude:"
 msgstr "Ribotas ryškis:"
 
-#: src/ui_viewDialog.h:3980
+#: src/ui_viewDialog.h:4024
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Relative scale:"
 msgstr "Santykinis mastelis:"
 
-#: src/ui_viewDialog.h:3982
+#: src/ui_viewDialog.h:4026
 msgid ""
 "Show traditional designations of double stars if proper name, Bayer or "
 "Flamsteed designations do not exist for the star."
@@ -15273,12 +15311,12 @@ msgstr ""
 "Rodyti tradicinius dvigubų žvaigždžių pavadinimus, jei žvaigždė neturi "
 "tinkamojo pavadinimo, Bayerio ar Flamsteedo pavadinimų."
 
-#: src/ui_viewDialog.h:3984
+#: src/ui_viewDialog.h:4028
 msgctxt "double stars"
 msgid "Dbl. stars"
 msgstr "Dvig. žvaigždės"
 
-#: src/ui_viewDialog.h:3986
+#: src/ui_viewDialog.h:4030
 msgid ""
 "Show designations of variable stars if proper name, Bayer or Flamsteed "
 "designations, or designation of double star do not exist for the star."
@@ -15286,12 +15324,12 @@ msgstr ""
 "Rodyti kintamųjų žvaigždžių pavadinimus, jei nėra tinkamojo pavadinimo, "
 "Bayerio ar Flamsteedo pavadinimų ar dvigubos žvaigždės pavadinimo."
 
-#: src/ui_viewDialog.h:3988
+#: src/ui_viewDialog.h:4032
 msgctxt "variable stars"
 msgid "Var. stars"
 msgstr "Knt. žvaigždės"
 
-#: src/ui_viewDialog.h:3990
+#: src/ui_viewDialog.h:4034
 msgid ""
 "Show designations from Hipparcos catalog (HIP) if available and star doesn't"
 " have other traditional designations."
@@ -15299,16 +15337,16 @@ msgstr ""
 "Rodyti Hipparcos katalogo (HIP) žymenis, jei jie yra prieinami ir žvaigždė "
 "neturi kitų tradicinių žymenų."
 
-#: src/ui_viewDialog.h:3993
+#: src/ui_viewDialog.h:4037
 msgid "Show stars with pointed rays"
 msgstr "Rodyti žvaigždes su aštriais spinduliais"
 
-#: src/ui_viewDialog.h:3995
+#: src/ui_viewDialog.h:4039
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Spiky stars"
 msgstr "Spygliuotos žvaigždės"
 
-#: src/ui_viewDialog.h:3997
+#: src/ui_viewDialog.h:4041
 msgid ""
 "Twinkle is caused by atmospheric turbulence. This option forces its display "
 "regardless of atmosphere (for artistic purpose)."
@@ -15316,59 +15354,59 @@ msgstr ""
 "Mirgėjimą sukelia atmosferos turbulencija. Ši parinktis priverčia jį rodyti "
 "nepriklausomai nuo atmosferos (meniniais tikslais)."
 
-#: src/ui_viewDialog.h:3999
+#: src/ui_viewDialog.h:4043
 msgid "even without atmosphere"
 msgstr "netgi be atmosferos"
 
-#: src/ui_viewDialog.h:4000
+#: src/ui_viewDialog.h:4044
 msgid "Projection"
 msgstr "Projekcija"
 
-#: src/ui_viewDialog.h:4001
+#: src/ui_viewDialog.h:4045
 msgid "Current FoV"
 msgstr "Dabartinis RL"
 
-#: src/ui_viewDialog.h:4002
+#: src/ui_viewDialog.h:4046
 msgid "Vertical viewport offset"
 msgstr "Vertikalusis rodinio poslinkis"
 
-#: src/ui_viewDialog.h:4003
+#: src/ui_viewDialog.h:4047
 msgid "Custom FoV limit"
 msgstr "Pasirinkto RL riba"
 
-#: src/ui_viewDialog.h:4005
+#: src/ui_viewDialog.h:4049
 msgid "Additional custom limitation (e.g. for planetarium use)"
 msgstr "Papildomas individualus apribojimas (pvz., naudojant planetariumą)"
 
-#: src/ui_viewDialog.h:4007
+#: src/ui_viewDialog.h:4051
 msgid "Solar System objects"
 msgstr "Saulės sistemos objektai"
 
-#: src/ui_viewDialog.h:4010
+#: src/ui_viewDialog.h:4054
 msgid "Color of planet labels"
 msgstr "Planetų pavadinimų spalva"
 
-#: src/ui_viewDialog.h:4013
+#: src/ui_viewDialog.h:4057
 msgid "Planets magnitude algorithm"
 msgstr "Planetų ryškio algoritmas"
 
-#: src/ui_viewDialog.h:4015
+#: src/ui_viewDialog.h:4059
 msgid "Planets magnitude algorithm:"
 msgstr "Planetų ryškio algoritmas:"
 
-#: src/ui_viewDialog.h:4017
+#: src/ui_viewDialog.h:4061
 msgid "Color of trails"
 msgstr "Takelio spalva"
 
-#: src/ui_viewDialog.h:4019
+#: src/ui_viewDialog.h:4063
 msgid "Show trails"
 msgstr "Rodyti takus"
 
-#: src/ui_viewDialog.h:4021
+#: src/ui_viewDialog.h:4065
 msgid "Trails thickness in pixels"
 msgstr "Takelių storis pikseliais"
 
-#: src/ui_viewDialog.h:4024
+#: src/ui_viewDialog.h:4068
 #, c-format
 msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
@@ -15377,51 +15415,51 @@ msgstr ""
 "Astronominis almanachas (numatytasis) turi 2% padidinimą, Danjonas (1951) "
 "naudoja šiek tiek kitokį modelį."
 
-#: src/ui_viewDialog.h:4026
+#: src/ui_viewDialog.h:4070
 msgid "Earth shadow enlargement after Danjon"
 msgstr "Žemės šešėlio dydis pagal Danjoną"
 
-#: src/ui_viewDialog.h:4028
+#: src/ui_viewDialog.h:4072
 msgid "Limit the magnitude of solar system objects"
 msgstr "Apriboti Saulės sistemos objektų ryškį"
 
-#: src/ui_viewDialog.h:4031
+#: src/ui_viewDialog.h:4075
 msgid "Show orbits"
 msgstr "Rodyti orbitas"
 
-#: src/ui_viewDialog.h:4033
+#: src/ui_viewDialog.h:4077
 msgid "Show orbit even if object is off screen"
 msgstr "Rodyti orbitą net jei objektas yra už ekrano ribų"
 
-#: src/ui_viewDialog.h:4035
+#: src/ui_viewDialog.h:4079
 msgid "permanently"
 msgstr "nuolatos"
 
-#: src/ui_viewDialog.h:4037
+#: src/ui_viewDialog.h:4081
 msgid "Show orbits of major planets"
 msgstr "Rodyti didžiųjų planetų orbitas"
 
-#: src/ui_viewDialog.h:4041
+#: src/ui_viewDialog.h:4085
 msgid "Configure colors of orbit lines"
 msgstr "Konfigūruoti orbitos linijų spalvas"
 
-#: src/ui_viewDialog.h:4044
+#: src/ui_viewDialog.h:4088
 msgid "Orbits thickness in pixels"
 msgstr "Orbitų storis pikseliais"
 
-#: src/ui_viewDialog.h:4047
+#: src/ui_viewDialog.h:4091
 msgid "Color of nomenclature labels"
 msgstr "Nomenklatūros etikečių spalva"
 
-#: src/ui_viewDialog.h:4051
+#: src/ui_viewDialog.h:4095
 msgid "Show hints and labels for planetary features"
 msgstr "Rodyti užuominas ir žymas planetų savybių"
 
-#: src/ui_viewDialog.h:4053
+#: src/ui_viewDialog.h:4097
 msgid "Show planetary nomenclature"
 msgstr "Rodyti planetų pavadinimus"
 
-#: src/ui_viewDialog.h:4055
+#: src/ui_viewDialog.h:4099
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
@@ -15429,77 +15467,77 @@ msgstr ""
 "Išjunkite šią parinktį, jei norite matyti takus visiems Saulės sistemos "
 "kūnams."
 
-#: src/ui_viewDialog.h:4057
+#: src/ui_viewDialog.h:4101
 msgid "Only for N latest selected objects:"
 msgstr "Tik N naujausių pasirinktų objektų:"
 
-#: src/ui_viewDialog.h:4059
+#: src/ui_viewDialog.h:4103
 msgid "Hide orbits of minor bodies."
 msgstr "Slėpti mažųjų kūnų orbitas."
 
-#: src/ui_viewDialog.h:4061
+#: src/ui_viewDialog.h:4105
 msgid "Only orbits of major planets..."
 msgstr "Tik didžiųjų planetų orbitos..."
 
-#: src/ui_viewDialog.h:4063
+#: src/ui_viewDialog.h:4107
 msgid "Show orbit only for selected SSO"
 msgstr "Rodyti orbitą tik pasirinktiems SSO"
 
-#: src/ui_viewDialog.h:4065
+#: src/ui_viewDialog.h:4109
 msgid "Only orbit for selected object..."
 msgstr "Orbita tik pasirinktam objektui..."
 
-#: src/ui_viewDialog.h:4067
+#: src/ui_viewDialog.h:4111
 msgid "Also show moons of selected object or planets."
 msgstr "Taip pat rodyti pasirinkto objekto arba planetų mėnulius."
 
-#: src/ui_viewDialog.h:4069
+#: src/ui_viewDialog.h:4113
 msgid "... and moons"
 msgstr "... ir mėnulius"
 
-#: src/ui_viewDialog.h:4072
+#: src/ui_viewDialog.h:4116
 msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
 msgstr ""
 "Perjungti nuolatinį Saulės vainiko piešimą, kai išjungtas atmosferos "
 "režimas."
 
-#: src/ui_viewDialog.h:4074
+#: src/ui_viewDialog.h:4118
 msgid "Sun's corona"
 msgstr "Saulės vainikas"
 
-#: src/ui_viewDialog.h:4076
+#: src/ui_viewDialog.h:4120
 msgid "Toggle drawing halo around the Moon"
 msgstr "Perjungti Mėnulio halą "
 
-#: src/ui_viewDialog.h:4078
+#: src/ui_viewDialog.h:4122
 msgid "Moon's halo"
 msgstr "Mėnulio halas"
 
-#: src/ui_viewDialog.h:4079 src/ui_astroCalcDialog.h:2361
+#: src/ui_viewDialog.h:4123 src/ui_astroCalcDialog.h:2361
 msgid "Show:"
 msgstr "Rodyti:"
 
-#: src/ui_viewDialog.h:4081
+#: src/ui_viewDialog.h:4125
 msgid "Toggle drawing Sun's glare"
 msgstr "Perjungti  Saulės šviesos atspindžius"
 
-#: src/ui_viewDialog.h:4083
+#: src/ui_viewDialog.h:4127
 msgid "Sun's glare"
 msgstr "Saulės šviesos atspindžiai"
 
-#: src/ui_viewDialog.h:4085
+#: src/ui_viewDialog.h:4129
 msgid "Show tiny circles for minor bodies regardless of magnitude"
 msgstr "Rodyti mažus mažųjų kūnų apskritimus, neatsižvelgiant į jų dydį"
 
-#: src/ui_viewDialog.h:4089
+#: src/ui_viewDialog.h:4133
 msgid "Draw markers for objects with magnitude brighter than this"
 msgstr "Braižyti žymeklius objektams, kurių ryškumas yra didesnis nei šis"
 
-#: src/ui_viewDialog.h:4094
+#: src/ui_viewDialog.h:4138
 msgid "Use more accurate 3D models (where available)"
 msgstr "Naudoti tiksliesnius 3D modelius (jei prieinami)"
 
-#: src/ui_viewDialog.h:4096
+#: src/ui_viewDialog.h:4140
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
@@ -15507,167 +15545,195 @@ msgstr ""
 "Aktyvuoti šią parinktį, tikro šviesos greičio efekto imitavimui "
 "(rekomenduojama)."
 
-#: src/ui_viewDialog.h:4098
+#: src/ui_viewDialog.h:4142
 msgid "Simulate light speed"
 msgstr "Imituoti šviesos greitį"
 
-#: src/ui_viewDialog.h:4100
+#: src/ui_viewDialog.h:4144
 msgid "Jupiter's Great Red Spot..."
 msgstr "Jupiterio Didžioji Raudonoji Dėmė..."
 
-#: src/ui_viewDialog.h:4102
+#: src/ui_viewDialog.h:4146
 msgid "GRS details..."
 msgstr "DRD detalės..."
 
-#: src/ui_viewDialog.h:4103
+#: src/ui_viewDialog.h:4147
 msgid "Solar System Editor..."
 msgstr "Saulės sistemos redaktorius..."
 
-#: src/ui_viewDialog.h:4104
+#: src/ui_viewDialog.h:4148
 msgctxt "scale"
 msgid "Planets"
 msgstr "Planetos"
 
-#: src/ui_viewDialog.h:4105
+#: src/ui_viewDialog.h:4149
 msgctxt "scale"
 msgid "Minor bodies"
 msgstr "Mažieji kūnai"
 
-#: src/ui_viewDialog.h:4107
+#: src/ui_viewDialog.h:4151
 msgid "Scale factor"
 msgstr "Mastelio faktorius"
 
-#: src/ui_viewDialog.h:4109
+#: src/ui_viewDialog.h:4153
 msgctxt "scale"
 msgid "Sun"
 msgstr "Saulė"
 
-#: src/ui_viewDialog.h:4110
+#: src/ui_viewDialog.h:4154
 msgid "Scale:"
 msgstr "Mastelis:"
 
-#: src/ui_viewDialog.h:4111
+#: src/ui_viewDialog.h:4155
 msgctxt "scale"
 msgid "Moon"
 msgstr "Mėnulis"
 
-#: src/ui_viewDialog.h:4112
+#: src/ui_viewDialog.h:4157
+msgid ""
+"When enabled, the Moon scales smoothly between 1× (natural size) at the "
+"minimum FOV and the configured scale factor at the maximum FOV. Outside "
+"those bounds the scale is held constant."
+msgstr ""
+
+#: src/ui_viewDialog.h:4159
+msgid "Dynamic (FOV-based) Moon size"
+msgstr ""
+
+#: src/ui_viewDialog.h:4161 src/ui_viewDialog.h:4165
+msgid "FOV at and below which the Moon is drawn at 1× (natural) size."
+msgstr ""
+
+#: src/ui_viewDialog.h:4163
+msgid "1× below"
+msgstr ""
+
+#: src/ui_viewDialog.h:4168 src/ui_viewDialog.h:4172
+msgid ""
+"FOV at and above which the Moon is drawn at the configured scale factor."
+msgstr ""
+
+#: src/ui_viewDialog.h:4170
+msgid "Nx above"
+msgstr ""
+
+#: src/ui_viewDialog.h:4174
 msgid "Hide nomenclature on the celestial body of observer"
 msgstr "Slėpti nomenklatūrą stebėtojo dangaus kūne"
 
-#: src/ui_viewDialog.h:4114
+#: src/ui_viewDialog.h:4176
 msgid "Label only features along the terminator"
 msgstr "Žymėti tik ties terminatoriumi esančias ypatybes"
 
-#: src/ui_viewDialog.h:4116
+#: src/ui_viewDialog.h:4178
 msgid "Only for Solar elevation"
 msgstr "Tik saulės pakilimui"
 
-#: src/ui_viewDialog.h:4118
+#: src/ui_viewDialog.h:4180
 msgid "Minimum Solar altitude"
 msgstr "Minimali Saulės altitudė"
 
-#: src/ui_viewDialog.h:4120 src/ui_scriptConsole.h:396
+#: src/ui_viewDialog.h:4182 src/ui_scriptConsole.h:396
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 msgid "..."
 msgstr "..."
 
-#: src/ui_viewDialog.h:4122
+#: src/ui_viewDialog.h:4184
 msgid "Maximum Solar altitude"
 msgstr "Maksimali Saulės altitudė"
 
-#: src/ui_viewDialog.h:4125
+#: src/ui_viewDialog.h:4187
 msgid "Mark impact features with ellipses"
 msgstr "Pažymėti paveikius elementus elipsėmis"
 
-#: src/ui_viewDialog.h:4127
+#: src/ui_viewDialog.h:4189
 msgid "Outline craters"
 msgstr "Kontūriniai krateriai"
 
-#: src/ui_viewDialog.h:4129
+#: src/ui_viewDialog.h:4191
 msgid "Show special nomenclature points only"
 msgstr "Rodyti tik specialius nomenklatūros punktus"
 
-#: src/ui_viewDialog.h:4131
+#: src/ui_viewDialog.h:4193
 msgid "Special points only"
 msgstr "Tik specialieji taškai"
 
-#: src/ui_viewDialog.h:4135
+#: src/ui_viewDialog.h:4197
 msgid "Simulate self-shadowing"
 msgstr "Simuliuoti savaiminį šešėliavimą"
 
-#: src/ui_viewDialog.h:4136
+#: src/ui_viewDialog.h:4198
 msgid "Display objects from catalogs"
 msgstr "Rodyti objektus iš katalogų"
 
-#: src/ui_viewDialog.h:4137
+#: src/ui_viewDialog.h:4199
 msgid "Quick selection:"
 msgstr "Greitas pasirinkimas:"
 
-#: src/ui_viewDialog.h:4139
+#: src/ui_viewDialog.h:4201
 msgid "Select all catalogs"
 msgstr "Pasirinkite visus katalogus"
 
-#: src/ui_viewDialog.h:4141
+#: src/ui_viewDialog.h:4203
 msgid "select all"
 msgstr "pažymėti viską"
 
-#: src/ui_viewDialog.h:4143
+#: src/ui_viewDialog.h:4205
 msgid "Select standard catalogs (NGC/IC and M)"
 msgstr "Pasirinkti standartinius katalogus (NGC/IC ir M)"
 
-#: src/ui_viewDialog.h:4145
+#: src/ui_viewDialog.h:4207
 msgid "select standard"
 msgstr "pasirinkti standartą"
 
-#: src/ui_viewDialog.h:4146
+#: src/ui_viewDialog.h:4208
 msgid "select preference"
 msgstr "pasirinkti pageidavimą"
 
-#: src/ui_viewDialog.h:4147
+#: src/ui_viewDialog.h:4209
 msgid "store preference"
 msgstr "saugoti? pageidavimus"
 
-#: src/ui_viewDialog.h:4149
+#: src/ui_viewDialog.h:4211
 msgid "Deselect all catalogs"
 msgstr "Atžymėti visus katalogus"
 
-#: src/ui_viewDialog.h:4151
+#: src/ui_viewDialog.h:4213
 msgid "select none"
 msgstr "nežymėti nieko"
 
-#: src/ui_viewDialog.h:4153
+#: src/ui_viewDialog.h:4215
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
 msgstr "Keistųjų galaktikų atlasas (Arp, 1966)"
 
-#: src/ui_viewDialog.h:4156
+#: src/ui_viewDialog.h:4218
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Uppsala Bendrinis Galaktikų Katalogas"
 
-#: src/ui_viewDialog.h:4159
+#: src/ui_viewDialog.h:4221
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Lynds' Ryškių ūkų Katalogas (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:4162
+#: src/ui_viewDialog.h:4224
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
 msgstr ""
 " Hα-emisijos sričių pietinėje Paukšių tako dalyje  katalogas(Rodgers+, 1960)"
 
-#: src/ui_viewDialog.h:4165
+#: src/ui_viewDialog.h:4227
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr " HII sričių  Katalogas(Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:4168
+#: src/ui_viewDialog.h:4230
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "Naujasis Ūkų ir Žvaigždžių spiečių Bendrasis Katalogas"
 
-#: src/ui_viewDialog.h:4177
+#: src/ui_viewDialog.h:4239
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 msgstr "Turtingų galaktikų spiečių katalogas (Abell+, 1989)"
 
-#: src/ui_viewDialog.h:4180
+#: src/ui_viewDialog.h:4242
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
@@ -15675,23 +15741,23 @@ msgstr ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 
-#: src/ui_viewDialog.h:4183
+#: src/ui_viewDialog.h:4245
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 msgstr " Sąveikaujančių galaktikų katalogas (Vorontsov-Velyaminov+, 2001)"
 
-#: src/ui_viewDialog.h:4186
+#: src/ui_viewDialog.h:4248
 msgid "Catalogue of Reflection Nebulae (van den Bergh, 1966)"
 msgstr "Atspindžio ūkų katalogas(Van den Bergh, 1966)"
 
-#: src/ui_viewDialog.h:4189
+#: src/ui_viewDialog.h:4251
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 msgstr "Galaktinių planetinių ūkų katalogas (Kohoutek, 2001)"
 
-#: src/ui_viewDialog.h:4192
+#: src/ui_viewDialog.h:4254
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr " Padrikųjų galaktinių spiečių katalogas(Collinder, 1931)"
 
-#: src/ui_viewDialog.h:4195
+#: src/ui_viewDialog.h:4257
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh and "
 "Herbst, 1975)"
@@ -15699,55 +15765,55 @@ msgstr ""
 "Pietinių žvaigždžių,  įterptų į ūkus katalogas (van den Bergh and Herbst, "
 "1975)"
 
-#: src/ui_viewDialog.h:4198
+#: src/ui_viewDialog.h:4260
 msgid "Hickson Compact Group (Hickson+, 1982)"
 msgstr "Hickson Kompaktiška grupė (Hickson+, 1982)"
 
-#: src/ui_viewDialog.h:4201
+#: src/ui_viewDialog.h:4263
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr "Strasbūro-ESO Galaktinių planetinių ūkų katalogas (Acker+, 1992)"
 
-#: src/ui_viewDialog.h:4204
+#: src/ui_viewDialog.h:4266
 msgid ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 msgstr ""
 "Katalogas ir atstumai tarp optiškai matomų H II regionų (Dickel+, 1969)"
 
-#: src/ui_viewDialog.h:4207
+#: src/ui_viewDialog.h:4269
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 msgstr "ESO/Uppsala ESO(B) Atlas tyrimas (Lauberts, 1982)"
 
-#: src/ui_viewDialog.h:4210
+#: src/ui_viewDialog.h:4272
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr "Galaktinių supernovos liekanų katalogas (Green, 2014)"
 
-#: src/ui_viewDialog.h:4213
+#: src/ui_viewDialog.h:4275
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Lynds' tamsiųjų ūkų Katalogas (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:4216
+#: src/ui_viewDialog.h:4278
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Barnardo 349ių  tamsiųjų dangaus objektų katalogas (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:4219
+#: src/ui_viewDialog.h:4281
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Ūkų ir Žvaigždžių spiečių Indeksų Katalogas"
 
-#: src/ui_viewDialog.h:4221
+#: src/ui_viewDialog.h:4283
 msgctxt "other catalogs"
 msgid "Other"
 msgstr "Kitas"
 
-#: src/ui_viewDialog.h:4223
+#: src/ui_viewDialog.h:4285
 msgid "Principal Galaxy Catalog"
 msgstr "Pagrindinis Galaktikų Katalogas"
 
-#: src/ui_viewDialog.h:4226
+#: src/ui_viewDialog.h:4288
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Ryškių difuzinių Galaktikos ūkų  katalogas(Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:4229
+#: src/ui_viewDialog.h:4291
 msgid ""
 "van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern "
 "Milky Way; van den Bergh and Hagen, 1975)"
@@ -15755,19 +15821,19 @@ msgstr ""
 "van den Bergh-Hagen katalogas (Spiečių Pietinėje Paukščių tako dalyje "
 "vienalytis tyrimas  ; van den Bergh ir Hagen, 1975)"
 
-#: src/ui_viewDialog.h:4240
+#: src/ui_viewDialog.h:4302
 msgid "Filter by type"
 msgstr "Filtruoti pagal tipą"
 
-#: src/ui_viewDialog.h:4245 src/ui_dsoColorsDialog.h:580
+#: src/ui_viewDialog.h:4307 src/ui_dsoColorsDialog.h:580
 msgid "Hydrogen regions"
 msgstr "Vandenilio regionai"
 
-#: src/ui_viewDialog.h:4251
+#: src/ui_viewDialog.h:4313
 msgid "Other"
 msgstr "Kita"
 
-#: src/ui_viewDialog.h:4255
+#: src/ui_viewDialog.h:4317
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
@@ -15775,42 +15841,42 @@ msgstr ""
 "Naudokite giliiojo kosmoso objekto pavadinimus vietoj jų bendrųjų vardų "
 "ekrano etiketėms."
 
-#: src/ui_viewDialog.h:4258
+#: src/ui_viewDialog.h:4320
 msgid "Use additional names of DSO"
 msgstr "Naudokite papildomus GKO pavadinimus"
 
-#: src/ui_viewDialog.h:4259
+#: src/ui_viewDialog.h:4321
 msgid "Show only named DSO"
 msgstr "Rodyti tik įvardytus GKO"
 
-#: src/ui_viewDialog.h:4260
+#: src/ui_viewDialog.h:4322
 msgid "Use outlines for big deep-sky objects"
 msgstr "Naudokite kontūrus dideliems giliojo kosmoso objektams."
 
-#: src/ui_viewDialog.h:4262
+#: src/ui_viewDialog.h:4324
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 "Naudokite užuominas, proporcingas giliųjų kosmoso objektų kampiniam dydžiui."
 
-#: src/ui_viewDialog.h:4264
+#: src/ui_viewDialog.h:4326
 msgid "Use proportional hints"
 msgstr "Naudokite proporcingus patarimus"
 
-#: src/ui_viewDialog.h:4265 plugins/Satellites/src/ui_satellitesDialog.h:1251
+#: src/ui_viewDialog.h:4327 plugins/Satellites/src/ui_satellitesDialog.h:1251
 msgid "Labels"
 msgstr "Užrašai"
 
-#: src/ui_viewDialog.h:4267 src/ui_viewDialog.h:4270
+#: src/ui_viewDialog.h:4329 src/ui_viewDialog.h:4332
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1542
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:535
 msgid "Brightness"
 msgstr "Šviesumas"
 
-#: src/ui_viewDialog.h:4272
+#: src/ui_viewDialog.h:4334
 msgid "Hints"
 msgstr "Užuominos"
 
-#: src/ui_viewDialog.h:4274
+#: src/ui_viewDialog.h:4336
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
@@ -15818,132 +15884,132 @@ msgstr ""
 "Naudokite giliojo kosmoso objektų paviršiaus šviesumą, kad nustatytumėte jų "
 "žymeklių ir etikečių matomumo mastelį."
 
-#: src/ui_viewDialog.h:4276
+#: src/ui_viewDialog.h:4338
 msgid "Use surface brightness"
 msgstr "Naudokite paviršiaus ryškumą"
 
-#: src/ui_viewDialog.h:4277
+#: src/ui_viewDialog.h:4339
 msgid "Configure colors of markers"
 msgstr "Konfigūruokite žymeklių spalvas"
 
-#: src/ui_viewDialog.h:4283
+#: src/ui_viewDialog.h:4345
 msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr "Maksimalus kampinis dydis arkminutėmis matomiems GKO."
 
-#: src/ui_viewDialog.h:4286
+#: src/ui_viewDialog.h:4348
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Riboti  giliojo kosmoso objektų ryškį (be įrangos/binoklių stebėtojams)."
 
-#: src/ui_viewDialog.h:4290
+#: src/ui_viewDialog.h:4352
 msgid "Minimal angular size in arcminutes for visible DSO"
 msgstr "Minimalus kampinis dydis arkminutėmis matomiems GKO"
 
-#: src/ui_viewDialog.h:4292
+#: src/ui_viewDialog.h:4354
 msgid "Celestial Sphere"
 msgstr "Dangaus sfera"
 
-#: src/ui_viewDialog.h:4294 src/ui_viewDialog.h:4303 src/ui_viewDialog.h:4366
-#: src/ui_viewDialog.h:4374 src/ui_viewDialog.h:4422 src/ui_viewDialog.h:4433
-#: src/ui_viewDialog.h:4460 src/ui_viewDialog.h:4498 src/ui_viewDialog.h:4543
-#: src/ui_viewDialog.h:4587 src/ui_viewDialog.h:4647 src/ui_viewDialog.h:4703
-#: src/ui_viewDialog.h:4715 src/ui_viewDialog.h:4726 src/ui_viewDialog.h:4742
+#: src/ui_viewDialog.h:4356 src/ui_viewDialog.h:4365 src/ui_viewDialog.h:4428
+#: src/ui_viewDialog.h:4436 src/ui_viewDialog.h:4484 src/ui_viewDialog.h:4495
+#: src/ui_viewDialog.h:4522 src/ui_viewDialog.h:4560 src/ui_viewDialog.h:4605
+#: src/ui_viewDialog.h:4649 src/ui_viewDialog.h:4709 src/ui_viewDialog.h:4765
+#: src/ui_viewDialog.h:4777 src/ui_viewDialog.h:4788 src/ui_viewDialog.h:4804
 msgid "Show partitions"
 msgstr "Rodyti skirsnius"
 
-#: src/ui_viewDialog.h:4298
+#: src/ui_viewDialog.h:4360
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "Rodyti J2000.0 ekliptikos liniją (VSOP87A pagrindinę plokštumą)."
 
-#: src/ui_viewDialog.h:4300
+#: src/ui_viewDialog.h:4362
 msgid "Ecliptic (J2000)"
 msgstr "Ekliptika (J2000)"
 
-#: src/ui_viewDialog.h:4301
+#: src/ui_viewDialog.h:4363
 msgid "Zenith and Nadir"
 msgstr "Zenitas ir Nadyras"
 
-#: src/ui_viewDialog.h:4307
+#: src/ui_viewDialog.h:4369
 msgid "Show ecliptic poles of J2000.0"
 msgstr "Rodyti J2000.0 ekliptikos polius."
 
-#: src/ui_viewDialog.h:4309
+#: src/ui_viewDialog.h:4371
 msgid "Ecliptic poles (J2000)"
 msgstr "Ekliptikos poliai (J2000)"
 
-#: src/ui_viewDialog.h:4311
+#: src/ui_viewDialog.h:4373
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 "Rodyti kolūras (didžiuosius apskritimus per ašigalius ir "
 "saulėgrįžas/lygiadienius)."
 
-#: src/ui_viewDialog.h:4313
+#: src/ui_viewDialog.h:4375
 msgid "Colures"
 msgstr "Kolūros"
 
-#: src/ui_viewDialog.h:4315
+#: src/ui_viewDialog.h:4377
 msgid "Show celestial equator of current planet and date."
 msgstr "Rodyti dabartinės planetos ir datos žvaigždinį pusiaują."
 
-#: src/ui_viewDialog.h:4317
+#: src/ui_viewDialog.h:4379
 msgid "Equator (of date)"
 msgstr "Pusiaujas (datai)"
 
-#: src/ui_viewDialog.h:4319 src/ui_viewDialog.h:4327 src/ui_viewDialog.h:4339
-#: src/ui_viewDialog.h:4347 src/ui_viewDialog.h:4378 src/ui_viewDialog.h:4386
-#: src/ui_viewDialog.h:4448 src/ui_viewDialog.h:4456 src/ui_viewDialog.h:4472
-#: src/ui_viewDialog.h:4486 src/ui_viewDialog.h:4494 src/ui_viewDialog.h:4636
-#: src/ui_viewDialog.h:4767 src/ui_viewDialog.h:4771 src/ui_viewDialog.h:4811
+#: src/ui_viewDialog.h:4381 src/ui_viewDialog.h:4389 src/ui_viewDialog.h:4401
+#: src/ui_viewDialog.h:4409 src/ui_viewDialog.h:4440 src/ui_viewDialog.h:4448
+#: src/ui_viewDialog.h:4510 src/ui_viewDialog.h:4518 src/ui_viewDialog.h:4534
+#: src/ui_viewDialog.h:4548 src/ui_viewDialog.h:4556 src/ui_viewDialog.h:4698
+#: src/ui_viewDialog.h:4829 src/ui_viewDialog.h:4833 src/ui_viewDialog.h:4873
 msgid "Label partitions"
 msgstr "Ženklinti skirsnius"
 
-#: src/ui_viewDialog.h:4323
+#: src/ui_viewDialog.h:4385
 msgid "Show fixed celestial equator (hour angles) of current planet."
 msgstr ""
 "Parodykite dabartinės planetos fiksuotąjį dangaus pusiaują (valandos "
 "kampai)."
 
-#: src/ui_viewDialog.h:4325
+#: src/ui_viewDialog.h:4387
 msgid "Fixed Equator"
 msgstr "Fiksuotas pusiaujas"
 
-#: src/ui_viewDialog.h:4331
+#: src/ui_viewDialog.h:4393
 msgid "Color of ecliptic poles (of date)"
 msgstr "Ekliptikos polių spalva (datos)"
 
-#: src/ui_viewDialog.h:4334
+#: src/ui_viewDialog.h:4396
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "Galaktinės koordinatės, Sistema II (IAU 1958)."
 
-#: src/ui_viewDialog.h:4337
+#: src/ui_viewDialog.h:4399
 msgid "Equinoxes (J2000)"
 msgstr "Lygiadieniai (J2000)"
 
-#: src/ui_viewDialog.h:4343 src/ui_viewDialog.h:4390
+#: src/ui_viewDialog.h:4405 src/ui_viewDialog.h:4452
 msgid "Show circles"
 msgstr "Rodyti apskritimus"
 
-#: src/ui_viewDialog.h:4351 src/ui_viewDialog.h:4468 src/ui_viewDialog.h:4512
-#: src/ui_viewDialog.h:4539 src/ui_viewDialog.h:4550 src/ui_viewDialog.h:4561
-#: src/ui_viewDialog.h:4568 src/ui_viewDialog.h:4655 src/ui_viewDialog.h:4667
-#: src/ui_viewDialog.h:4671 src/ui_viewDialog.h:4679 src/ui_viewDialog.h:4749
-#: src/ui_viewDialog.h:4775
+#: src/ui_viewDialog.h:4413 src/ui_viewDialog.h:4530 src/ui_viewDialog.h:4574
+#: src/ui_viewDialog.h:4601 src/ui_viewDialog.h:4612 src/ui_viewDialog.h:4623
+#: src/ui_viewDialog.h:4630 src/ui_viewDialog.h:4717 src/ui_viewDialog.h:4729
+#: src/ui_viewDialog.h:4733 src/ui_viewDialog.h:4741 src/ui_viewDialog.h:4811
+#: src/ui_viewDialog.h:4837
 msgid "Show line"
 msgstr "Rodyti liniją"
 
-#: src/ui_viewDialog.h:4355
+#: src/ui_viewDialog.h:4417
 msgid "Color of equator (J2000.0)"
 msgstr "Pusiaujo spalva (J2000.0)"
 
-#: src/ui_viewDialog.h:4358
+#: src/ui_viewDialog.h:4420
 msgid "Show celestial poles of J2000.0."
 msgstr "Rodyti J2000.0 žvaigždinius polius."
 
-#: src/ui_viewDialog.h:4360
+#: src/ui_viewDialog.h:4422
 msgid "Celestial poles (J2000)"
 msgstr "Žvaigždiniai poliai (J2000)"
 
-#: src/ui_viewDialog.h:4362
+#: src/ui_viewDialog.h:4424
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the"
 " mathematical horizon."
@@ -15951,140 +16017,140 @@ msgstr ""
 "Šie ratai apibrėžia žvaigždes, kurios visada yra virš (atitinkamai žemiau) "
 "matematinio horizonto."
 
-#: src/ui_viewDialog.h:4364
+#: src/ui_viewDialog.h:4426
 msgid "Circumpolar circles"
 msgstr "Apskritimai apie polius"
 
-#: src/ui_viewDialog.h:4370
+#: src/ui_viewDialog.h:4432
 msgid "Color of umbra circle"
 msgstr "Umbros apskritimo spalva "
 
-#: src/ui_viewDialog.h:4382
+#: src/ui_viewDialog.h:4444
 msgid ""
 "Fixed equatorial coordinates (hour angle/declination) of current planet."
 msgstr ""
 "Fiksuotos dabartinės planetos pusiaujo koordinatės (valandinis kampas / "
 "deklinavimas)."
 
-#: src/ui_viewDialog.h:4394
+#: src/ui_viewDialog.h:4456
 msgid "Show Prime (East-West) Vertical."
 msgstr "Rodyti Pirminį(Rytai-Vakarai) Vertikalą"
 
-#: src/ui_viewDialog.h:4399
+#: src/ui_viewDialog.h:4461
 msgid "The line thickness for grids and lines"
 msgstr "Linijos storis tinkleliams ir linijoms"
 
-#: src/ui_viewDialog.h:4401
+#: src/ui_viewDialog.h:4463
 msgid "Thickness: "
 msgstr "Storis:"
 
-#: src/ui_viewDialog.h:4402
+#: src/ui_viewDialog.h:4464
 msgid "lines"
 msgstr "eilutės"
 
-#: src/ui_viewDialog.h:4404 src/ui_viewDialog.h:4845 src/ui_viewDialog.h:4919
-#: src/ui_viewDialog.h:4937 src/ui_viewDialog.h:4974 src/ui_viewDialog.h:4983
-#: src/ui_viewDialog.h:4996 src/ui_viewDialog.h:5002 src/ui_viewDialog.h:5016
+#: src/ui_viewDialog.h:4466 src/ui_viewDialog.h:4907 src/ui_viewDialog.h:4981
+#: src/ui_viewDialog.h:4999 src/ui_viewDialog.h:5036 src/ui_viewDialog.h:5045
+#: src/ui_viewDialog.h:5058 src/ui_viewDialog.h:5064 src/ui_viewDialog.h:5078
 msgid "Thickness of line in pixels"
 msgstr "Linijos storis pikseliais"
 
-#: src/ui_viewDialog.h:4407
+#: src/ui_viewDialog.h:4469
 msgid "The line thickness for circle partitions"
 msgstr "Apskritimo skaidinių linijos storis"
 
-#: src/ui_viewDialog.h:4409
+#: src/ui_viewDialog.h:4471
 msgid "partitions"
 msgstr "daliniai"
 
-#: src/ui_viewDialog.h:4411
+#: src/ui_viewDialog.h:4473
 msgid "Thickness of partitions in pixels"
 msgstr "Dalinių storis pikseliais"
 
-#: src/ui_viewDialog.h:4413
+#: src/ui_viewDialog.h:4475
 msgid "points"
 msgstr "taškai"
 
-#: src/ui_viewDialog.h:4415
+#: src/ui_viewDialog.h:4477
 msgid "Size of celestial points in pixels"
 msgstr "Dangaus taškų dydis pikseliais"
 
-#: src/ui_viewDialog.h:4418
+#: src/ui_viewDialog.h:4480
 msgid "Show Galactic equator line."
 msgstr "Rodyti Galaktikos ekvatorinę liniją."
 
-#: src/ui_viewDialog.h:4426
+#: src/ui_viewDialog.h:4488
 msgid "Solar equator projected into space."
 msgstr "Saulės ekvatorius projektuotas į kosmosą."
 
-#: src/ui_viewDialog.h:4430
+#: src/ui_viewDialog.h:4492
 msgid "Color of supergalactic equator"
 msgstr "Supergalaktinio ekvatoriaus spalva"
 
-#: src/ui_viewDialog.h:4437
+#: src/ui_viewDialog.h:4499
 msgid "Show marker of center for field of view (FOV)"
 msgstr "Rodyti centro žymeklį regos laukui (RL)"
 
-#: src/ui_viewDialog.h:4439
+#: src/ui_viewDialog.h:4501
 msgid "Center of FOV"
 msgstr "RL centras"
 
-#: src/ui_viewDialog.h:4441
+#: src/ui_viewDialog.h:4503
 msgid "Show mathematical horizon line."
 msgstr "Rodyti matematinio horizonto liniją."
 
-#: src/ui_viewDialog.h:4445
+#: src/ui_viewDialog.h:4507
 msgid "Color of the supergalactic grid"
 msgstr "Supergalaktinio tinklelio spalva"
 
-#: src/ui_viewDialog.h:4453
+#: src/ui_viewDialog.h:4515
 msgid "Color of the equinox points (J2000.0)"
 msgstr "Lygiadienio taškų spalva (J2000.0)"
 
-#: src/ui_viewDialog.h:4464
+#: src/ui_viewDialog.h:4526
 msgid "Color of the projected Solar equator line"
 msgstr "Projektuojamos Saulės ekvatorinės linijos spalva"
 
-#: src/ui_viewDialog.h:4476
+#: src/ui_viewDialog.h:4538
 msgid "Color of precession circles"
 msgstr "Precesijos apskritimų spalva"
 
-#: src/ui_viewDialog.h:4479
+#: src/ui_viewDialog.h:4541
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr "Ekliptikos koordinatės dabartinei dienai. Rodytos tik Žemėje."
 
-#: src/ui_viewDialog.h:4481
+#: src/ui_viewDialog.h:4543
 msgid "Ecliptic grid (of date)"
 msgstr "Ekliptikos tinklelis (datos)"
 
-#: src/ui_viewDialog.h:4483
+#: src/ui_viewDialog.h:4545
 msgid "Color of the celestial poles (J2000.0)"
 msgstr "Žvaigždinių polių spalva (J2000.0)"
 
-#: src/ui_viewDialog.h:4490
+#: src/ui_viewDialog.h:4552
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "Ekliptinės koordinatės J2000.0."
 
-#: src/ui_viewDialog.h:4492
+#: src/ui_viewDialog.h:4554
 msgid "Ecliptic grid (J2000)"
 msgstr "Ekliptikos tinklelis (J2000)"
 
-#: src/ui_viewDialog.h:4501
+#: src/ui_viewDialog.h:4563
 msgid "Equinoxes (of date)"
 msgstr "Lygiadieniai (datai)"
 
-#: src/ui_viewDialog.h:4503
+#: src/ui_viewDialog.h:4565
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr "Rodyti de Vaucouleurs' Supergalaktinių koordinačių pusiaują (1976)."
 
-#: src/ui_viewDialog.h:4507
+#: src/ui_viewDialog.h:4569
 msgid "Color of the solstice points (J2000.0)"
 msgstr "Saulėgrįžos taškų spalva (J2000.0)"
 
-#: src/ui_viewDialog.h:4516
+#: src/ui_viewDialog.h:4578
 msgid "Color of altitude line"
 msgstr "Aukščio linijos spalva"
 
-#: src/ui_viewDialog.h:4520
+#: src/ui_viewDialog.h:4582
 msgid ""
 "This circle represents the size of Earth's central, deep shadow in the "
 "distance of the Moon. Will not show when Moon scaling is enabled!"
@@ -16092,148 +16158,148 @@ msgstr ""
 "Šis ratas vaizduoja Žemės centrinį, gilų šešėlį Mėnulio atstumu. Nerodoma, "
 "jei įjungtas Mėnulio masteliavimas!"
 
-#: src/ui_viewDialog.h:4522
+#: src/ui_viewDialog.h:4584
 msgid "Earth umbra"
 msgstr "Žemės umbra"
 
-#: src/ui_viewDialog.h:4524
+#: src/ui_viewDialog.h:4586
 msgid "Show center point of Earth's shadow in the distance of the Moon."
 msgstr "Rodyti Žemės šešėlio centro tašką Mėnulio atstumu."
 
-#: src/ui_viewDialog.h:4528
+#: src/ui_viewDialog.h:4590
 msgid "Color of fixed equator"
 msgstr "Fiksuotojo pusiaujo spalva"
 
-#: src/ui_viewDialog.h:4532
+#: src/ui_viewDialog.h:4594
 msgid "Color of ecliptic (of date)"
 msgstr "Ekliptikos spalva (datai)"
 
-#: src/ui_viewDialog.h:4535
+#: src/ui_viewDialog.h:4597
 msgid ""
 "A plane perpendicular to the angular momentum vector of the Solar system."
 msgstr "Plokštuma, statmena Saulės sistemos kampinio momento vektoriui."
 
-#: src/ui_viewDialog.h:4537
+#: src/ui_viewDialog.h:4599
 msgid "Invariable plane of the Solar system"
 msgstr "Nekintama Saulės sistemos plokštuma"
 
-#: src/ui_viewDialog.h:4547
+#: src/ui_viewDialog.h:4609
 msgid "Color of the equatorial grid (of date)"
 msgstr "Pusiaujinio tinklelio spalva (datai)"
 
-#: src/ui_viewDialog.h:4554
+#: src/ui_viewDialog.h:4616
 msgid "Color of equator (of date)"
 msgstr "Pusiaujo spalva (datos)"
 
-#: src/ui_viewDialog.h:4557
+#: src/ui_viewDialog.h:4619
 msgid "Color of antisolar point"
 msgstr "Antisaulės taško spalva"
 
-#: src/ui_viewDialog.h:4565
+#: src/ui_viewDialog.h:4627
 msgid "Color of colures"
 msgstr "Koliūrų spalva"
 
-#: src/ui_viewDialog.h:4572
+#: src/ui_viewDialog.h:4634
 msgid "Color of the equinox points (of date)"
 msgstr "Lygiadienio taškų spalva (datos)"
 
-#: src/ui_viewDialog.h:4575
+#: src/ui_viewDialog.h:4637
 msgid "Color of Apex and Antapex points"
 msgstr "Apekso ir Antapekso taškų spalva"
 
-#: src/ui_viewDialog.h:4578
+#: src/ui_viewDialog.h:4640
 msgid "Color of the quadrature circle"
 msgstr "Kvadratūros apskritimo spalva"
 
-#: src/ui_viewDialog.h:4581
+#: src/ui_viewDialog.h:4643
 msgid "Color of Zenith and Nadir"
 msgstr "Zenito ir Nadiro spalva"
 
-#: src/ui_viewDialog.h:4584
+#: src/ui_viewDialog.h:4646
 msgid "Color of the galactic grid"
 msgstr "Galaktinio tinklelio spalva"
 
-#: src/ui_viewDialog.h:4591
+#: src/ui_viewDialog.h:4653
 msgid "Color of celestial poles (of date)"
 msgstr "Žvaigždinių polių spalva (datos)"
 
-#: src/ui_viewDialog.h:4595
+#: src/ui_viewDialog.h:4657
 msgid "Color of the ecliptical grid (of date)"
 msgstr "Ekliptikos tinklelio spalva (datai)"
 
-#: src/ui_viewDialog.h:4598
+#: src/ui_viewDialog.h:4660
 msgid "Color of the azimuthal grid"
 msgstr "Azimutinio tinklelio spalva"
 
-#: src/ui_viewDialog.h:4601
+#: src/ui_viewDialog.h:4663
 msgid "Color of circumpolar circles"
 msgstr "Apskritimų apie polius spalva"
 
-#: src/ui_viewDialog.h:4604
+#: src/ui_viewDialog.h:4666
 msgid "Color of supergalactic poles"
 msgstr "Supergalaktinių polių spalva"
 
-#: src/ui_viewDialog.h:4607
+#: src/ui_viewDialog.h:4669
 msgid "Color of the opposition/conjunction longitude line"
 msgstr "Opozicijos / konjunkcijos ilgumos linijos spalva"
 
-#: src/ui_viewDialog.h:4610
+#: src/ui_viewDialog.h:4672
 msgid "Width of rectangle, in degrees"
 msgstr "Stačiakampio plotis laipsniais"
 
-#: src/ui_viewDialog.h:4613
+#: src/ui_viewDialog.h:4675
 msgid "Field of view in degrees"
 msgstr "Regos laukas laipsniais"
 
-#: src/ui_viewDialog.h:4616
+#: src/ui_viewDialog.h:4678
 msgid "Show circular marker of field of view (FOV)"
 msgstr "Rodyti  regos lauko (RL) apvalų žymeklį"
 
-#: src/ui_viewDialog.h:4618
+#: src/ui_viewDialog.h:4680
 msgid "Circular FOV"
 msgstr "Apskritiminis RL"
 
-#: src/ui_viewDialog.h:4620
+#: src/ui_viewDialog.h:4682
 msgid "Rotation angle of rectangle, in degrees"
 msgstr "Stačiakampio posūkio kampas, laipsniais"
 
-#: src/ui_viewDialog.h:4623
+#: src/ui_viewDialog.h:4685
 msgid "Height of rectangle, in degrees"
 msgstr "Stačiakampio aukštis, laipsniais"
 
-#: src/ui_viewDialog.h:4626
+#: src/ui_viewDialog.h:4688
 msgid "Show rectangular marker of field of view (FOV)"
 msgstr "Rodyti regos lauko (RL) stačiakampį žymeklį"
 
-#: src/ui_viewDialog.h:4628
+#: src/ui_viewDialog.h:4690
 msgid "Rectangular FOV"
 msgstr "Stačiakampis RL"
 
-#: src/ui_viewDialog.h:4630
+#: src/ui_viewDialog.h:4692
 msgid "Color of circular marker of FOV"
 msgstr "Apvalaus RL žymeklio spalva"
 
-#: src/ui_viewDialog.h:4633
+#: src/ui_viewDialog.h:4695
 msgid "Color of rectangular marker of FOV"
 msgstr "Stačiakampio RL žymeklio spalva"
 
-#: src/ui_viewDialog.h:4640
+#: src/ui_viewDialog.h:4702
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "Pusiaujinio tinklelio spalva (J2000.0)"
 
-#: src/ui_viewDialog.h:4643
+#: src/ui_viewDialog.h:4705
 msgid "Color of the invariable plane of the Solar system"
 msgstr "Saulės sistemos nekintamos plokštumos spalva"
 
-#: src/ui_viewDialog.h:4651
+#: src/ui_viewDialog.h:4713
 msgid "Color of the solstice points (of date)"
 msgstr "Saulėgrįžos taškų spalva (datos)"
 
-#: src/ui_viewDialog.h:4660
+#: src/ui_viewDialog.h:4722
 msgid "Color of ecliptic (J2000.0)"
 msgstr "Ekliptikos spalva (J2000.0)"
 
-#: src/ui_viewDialog.h:4663
+#: src/ui_viewDialog.h:4725
 msgid ""
 "This circle represents the outermost rim of Earth's shadow in the distance "
 "of the Moon. Will not show when Moon scaling is enabled!"
@@ -16241,39 +16307,39 @@ msgstr ""
 "Šis ratas vaizduoja Žemės šešėlio išorinį kraštą Mėnulio atstumu. Nerodoma, "
 "jei įjungtas Mėnulio masteliavimas!"
 
-#: src/ui_viewDialog.h:4665
+#: src/ui_viewDialog.h:4727
 msgid "Earth penumbra"
 msgstr "Žemės penumbra"
 
-#: src/ui_viewDialog.h:4675
+#: src/ui_viewDialog.h:4737
 msgid "Show celestial poles of current planet and date."
 msgstr "Rodyti dabartinės planetos ir datos žvaigždinius polius."
 
-#: src/ui_viewDialog.h:4677
+#: src/ui_viewDialog.h:4739
 msgid "Celestial poles (of date)"
 msgstr "Žvaigždiniai poliai (datos)"
 
-#: src/ui_viewDialog.h:4683
+#: src/ui_viewDialog.h:4745
 msgid "Color of galactic poles"
 msgstr "Galaktinių polių spalva"
 
-#: src/ui_viewDialog.h:4686
+#: src/ui_viewDialog.h:4748
 msgid "Color of penumbra circle"
 msgstr "Penumbros apskritimo spalva"
 
-#: src/ui_viewDialog.h:4689
+#: src/ui_viewDialog.h:4751
 msgid "Solstices (of date)"
 msgstr "Saulėgrįžos (datos)"
 
-#: src/ui_viewDialog.h:4691
+#: src/ui_viewDialog.h:4753
 msgid "Show celestial equator of J2000.0."
 msgstr "Rodyti J2000.0 žvaigždinio pusiaujo liniją."
 
-#: src/ui_viewDialog.h:4693
+#: src/ui_viewDialog.h:4755
 msgid "Equator (J2000)"
 msgstr "Pusiaujas (J2000)"
 
-#: src/ui_viewDialog.h:4695
+#: src/ui_viewDialog.h:4757
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
@@ -16281,66 +16347,66 @@ msgstr ""
 "Rodyti de Vaucouleuro supergalaktines koordinates (1976), apibrėžtus "
 "artimųjų galaktikų pasiskirstymu."
 
-#: src/ui_viewDialog.h:4699
+#: src/ui_viewDialog.h:4761
 msgid "Show ecliptic poles of current date."
 msgstr "Rodyti dabartinės datos ekliptikos polius."
 
-#: src/ui_viewDialog.h:4701
+#: src/ui_viewDialog.h:4763
 msgid "Ecliptic poles (of date)"
 msgstr "Ekliptikos poliai (datos)"
 
-#: src/ui_viewDialog.h:4707
+#: src/ui_viewDialog.h:4769
 msgid ""
 "Show a vertical line (with optional altitude marks) in the screen center."
 msgstr ""
 "Rodyti vertikalią liniją (su pasirinktiniais aukščio žymekliais) ekrano "
 "centre."
 
-#: src/ui_viewDialog.h:4711
+#: src/ui_viewDialog.h:4773
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr "Ekliptikos polių spalva (J2000.0)"
 
-#: src/ui_viewDialog.h:4719
+#: src/ui_viewDialog.h:4781
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "Ekliptikos tinklelio spalva (J2000.0)"
 
-#: src/ui_viewDialog.h:4722
+#: src/ui_viewDialog.h:4784
 msgid "A circle 90° from the Sun marking quadrature"
 msgstr "Apskritimas 90° nuo Saulės, žymintis kvadratūrą."
 
-#: src/ui_viewDialog.h:4724
+#: src/ui_viewDialog.h:4786
 msgid "Quadrature circle"
 msgstr "Kvadratūrinis apskritimas"
 
-#: src/ui_viewDialog.h:4730
+#: src/ui_viewDialog.h:4792
 msgid "Equatorial coordinates of J2000.0."
 msgstr "Ekvatorialinės koordinatės J2000.0."
 
-#: src/ui_viewDialog.h:4732
+#: src/ui_viewDialog.h:4794
 msgid "Equatorial grid (J2000)"
 msgstr "Ekvatorialinis tinklelis (J2000)"
 
-#: src/ui_viewDialog.h:4734
+#: src/ui_viewDialog.h:4796
 msgid "Show ecliptic line of current date."
 msgstr "Rodyti dabartinės datos ekliptikos liniją."
 
-#: src/ui_viewDialog.h:4736
+#: src/ui_viewDialog.h:4798
 msgid "Ecliptic (of date)"
 msgstr "Ekliptika (datai)"
 
-#: src/ui_viewDialog.h:4738
+#: src/ui_viewDialog.h:4800
 msgid "Mark Solar positions along the Ecliptic"
 msgstr "Žymėti Saulės padėtis Ekliptikoje"
 
-#: src/ui_viewDialog.h:4740
+#: src/ui_viewDialog.h:4802
 msgid "with Solar Dates"
 msgstr "su Saulės datomis"
 
-#: src/ui_viewDialog.h:4746
+#: src/ui_viewDialog.h:4808
 msgid "Color of galactic equator"
 msgstr "Galaktinio ekvatoriaus spalva"
 
-#: src/ui_viewDialog.h:4753
+#: src/ui_viewDialog.h:4815
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -16348,11 +16414,11 @@ msgstr ""
 "Žemės ašies judėjimo aplink ekliptikos polius momentiniai apskritimai. "
 "Rodoma tik Žemėje."
 
-#: src/ui_viewDialog.h:4755
+#: src/ui_viewDialog.h:4817
 msgid "Precession circles"
 msgstr "Precesijos apskritimai"
 
-#: src/ui_viewDialog.h:4757
+#: src/ui_viewDialog.h:4819
 msgid ""
 "Apex and Antapex indicate where the observer's planet is heading to or "
 "receding from, respectively."
@@ -16360,23 +16426,23 @@ msgstr ""
 "Apeksas ir Antapeksas nurodo, kur link planeta, kurią stebi stebėtojas, juda"
 " arba atsitraukia, atitinkamai."
 
-#: src/ui_viewDialog.h:4761
+#: src/ui_viewDialog.h:4823
 msgid "Color of marker of center of FOV"
 msgstr "RL centro žymeklio spalva"
 
-#: src/ui_viewDialog.h:4764
+#: src/ui_viewDialog.h:4826
 msgid "Color of meridian"
 msgstr "Meridiano spalva"
 
-#: src/ui_viewDialog.h:4779
+#: src/ui_viewDialog.h:4841
 msgid "Color of horizon"
 msgstr "Horizonto spalva"
 
-#: src/ui_viewDialog.h:4782
+#: src/ui_viewDialog.h:4844
 msgid "Show meridian line."
 msgstr "Rodyti dienovidinio liniją."
 
-#: src/ui_viewDialog.h:4786
+#: src/ui_viewDialog.h:4848
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
@@ -16384,336 +16450,336 @@ msgstr ""
 "Opozicijos / Konjunkcijos ilgumos linija - tai linija, kuri praeina per abu "
 "ekliptikos polius, Saulę ir opozicijos tašką."
 
-#: src/ui_viewDialog.h:4789
+#: src/ui_viewDialog.h:4851
 msgid "Solstices (J2000)"
 msgstr "Saulėgrįžos (J2000)"
 
-#: src/ui_viewDialog.h:4791
+#: src/ui_viewDialog.h:4853
 msgid "Equatorial coordinates of current date and planet."
 msgstr "Ekvatorialinės koordinatės šios dienos ir planetos atžvilgiu."
 
-#: src/ui_viewDialog.h:4793
+#: src/ui_viewDialog.h:4855
 msgid "Equatorial grid (of date)"
 msgstr "Ekvatorinis tinklelis (datos)"
 
-#: src/ui_viewDialog.h:4795
+#: src/ui_viewDialog.h:4857
 msgid "Labels for the cardinal directions (4-wind compass rose)."
 msgstr "Pagrindinių krypčių žymės (4 krypčių kompaso rožė)."
 
-#: src/ui_viewDialog.h:4799
+#: src/ui_viewDialog.h:4861
 msgid ""
 "Labels for the intercardinal (or ordinal) directions (8-wind compass rose)."
 msgstr ""
 "Tarpkryptinių (arba ordinalių) krypčių žymės (8 krypčių kompaso rožė)."
 
-#: src/ui_viewDialog.h:4802
+#: src/ui_viewDialog.h:4864
 msgid ""
 "Labels for the secondary intercardinal directions (16-wind compass rose)."
 msgstr "Antrinių tarpkryptinių krypčių žymės (16 krypčių kompaso rožė)."
 
-#: src/ui_viewDialog.h:4805
+#: src/ui_viewDialog.h:4867
 msgid ""
 "Labels for the tertiary intercardinal directions (32-wind compass rose)."
 msgstr "Tretinių tarpkryptinių krypčių žymės (32 krypčių kompaso rožė)."
 
-#: src/ui_viewDialog.h:4808
+#: src/ui_viewDialog.h:4870
 msgid "Color of cardinal points"
 msgstr "Pagrindinių taškų spalva"
 
-#: src/ui_viewDialog.h:4815
+#: src/ui_viewDialog.h:4877
 msgid "Color of Prime Vertical"
 msgstr "Pirminio vertikalo spalva"
 
-#: src/ui_viewDialog.h:4818
+#: src/ui_viewDialog.h:4880
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "Altitudės ir azimutai (skaičiuojant iš šiaurės į rytus)."
 
-#: src/ui_viewDialog.h:4822
+#: src/ui_viewDialog.h:4884
 msgid "Color of galactic center and anticenter"
 msgstr "Galaktinio centro ir priešcentrio spalva"
 
-#: src/ui_viewDialog.h:4825
+#: src/ui_viewDialog.h:4887
 msgid "Color of compass marks"
 msgstr "Kompaso ženklų spalva"
 
-#: src/ui_viewDialog.h:4827
+#: src/ui_viewDialog.h:4889
 msgid "Add/remove landscapes..."
 msgstr "Pridėti/pašalinti kraštovaizdžius..."
 
-#: src/ui_viewDialog.h:4828 src/ui_viewDialog.h:4877
+#: src/ui_viewDialog.h:4890 src/ui_viewDialog.h:4939
 msgid "Read text"
 msgstr "Skaityti tekstą"
 
-#: src/ui_viewDialog.h:4829 src/ui_viewDialog.h:4878
+#: src/ui_viewDialog.h:4891 src/ui_viewDialog.h:4940
 #: src/ui_configurationDialog.h:2844
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1011
 msgid "Stop"
 msgstr "Stabdyti"
 
-#: src/ui_viewDialog.h:4832
+#: src/ui_viewDialog.h:4894
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "Naudokite minimalų ryškumą, kaip nurodyta landscape.ini."
 
-#: src/ui_viewDialog.h:4834
+#: src/ui_viewDialog.h:4896
 msgid "from landscape, if given"
 msgstr "nuo kraštovaizdžio, jei duodama"
 
-#: src/ui_viewDialog.h:4836
+#: src/ui_viewDialog.h:4898
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "Rodyti apšvietimo sluoksnį (šviesūs langai, šviesos tarša ir kt.)"
 
-#: src/ui_viewDialog.h:4838
+#: src/ui_viewDialog.h:4900
 msgid "Show illumination "
 msgstr "Rodyti apšvietimą"
 
-#: src/ui_viewDialog.h:4839
+#: src/ui_viewDialog.h:4901
 msgid "Transparency:"
 msgstr "Skaidrumas:"
 
-#: src/ui_viewDialog.h:4841
+#: src/ui_viewDialog.h:4903
 msgid "Draw horizon polyline if one is defined."
 msgstr "Brėžti horizontinę poliliniją, jei ji yra apibrėžta."
 
-#: src/ui_viewDialog.h:4843
+#: src/ui_viewDialog.h:4905
 msgid "Draw only polygon"
 msgstr "Piešti tik daugiakampį"
 
-#: src/ui_viewDialog.h:4848
+#: src/ui_viewDialog.h:4910
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 "Naudokite minimalų ryškumą, kad peizažas būtų matomas ir tamsioje aplinkoje."
 
-#: src/ui_viewDialog.h:4850
+#: src/ui_viewDialog.h:4912
 msgid "Minimal brightness:"
 msgstr "Minimalus ryškumas:"
 
-#: src/ui_viewDialog.h:4852
+#: src/ui_viewDialog.h:4914
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Reikšmių diapazonas 0..1 (peizažas naktį yra juodas - peizažas yra visiškai "
 "šviesus)"
 
-#: src/ui_viewDialog.h:4856
+#: src/ui_viewDialog.h:4918
 msgid "Font size"
 msgstr "Šrifto dydis"
 
-#: src/ui_viewDialog.h:4859
+#: src/ui_viewDialog.h:4921
 msgid "Text angle"
 msgstr "Teksto kampas"
 
-#: src/ui_viewDialog.h:4862
+#: src/ui_viewDialog.h:4924
 msgid "Color for landscape labels"
 msgstr "Kraštovaizdžio žymių spalva"
 
-#: src/ui_viewDialog.h:4865
+#: src/ui_viewDialog.h:4927
 msgid "Color for polygon line"
 msgstr "Daugiakampio linijos spalva"
 
-#: src/ui_viewDialog.h:4868
+#: src/ui_viewDialog.h:4930
 msgid "Show fog"
 msgstr "Rodyti rūką"
 
-#: src/ui_viewDialog.h:4869
+#: src/ui_viewDialog.h:4931
 msgid "Show ground"
 msgstr "Rodyti žemę"
 
-#: src/ui_viewDialog.h:4871
+#: src/ui_viewDialog.h:4933
 msgid "Set the planet and location as specified for the selected landscape"
 msgstr "Nustatyti planetą ir vietą, kaip nurodyta pasirinktam kraštovaizdžiui"
 
-#: src/ui_viewDialog.h:4873
+#: src/ui_viewDialog.h:4935
 msgid "Location from landscape"
 msgstr "Vieta iš kraštovaizdžio"
 
-#: src/ui_viewDialog.h:4874
+#: src/ui_viewDialog.h:4936
 msgid "Use this landscape as default"
 msgstr "Naudoti šį kraštovaizdį kaip numatytąjį"
 
-#: src/ui_viewDialog.h:4876
+#: src/ui_viewDialog.h:4938
 msgid "Use this sky culture as default"
 msgstr "Naudoti šią dangaus kultūrą kaip numatytąją"
 
-#: src/ui_viewDialog.h:4879
+#: src/ui_viewDialog.h:4941
 msgid "Info label"
 msgstr "Informacinė žymė"
 
-#: src/ui_viewDialog.h:4880
+#: src/ui_viewDialog.h:4942
 msgid "Screen label"
 msgstr "Ekrano žymė"
 
-#: src/ui_viewDialog.h:4881 src/ui_viewDialog.h:4882
+#: src/ui_viewDialog.h:4943 src/ui_viewDialog.h:4944
 msgctxt "menu item"
 msgid "translation"
 msgstr "vertimas"
 
-#: src/ui_viewDialog.h:4883 src/ui_viewDialog.h:4899
+#: src/ui_viewDialog.h:4945 src/ui_viewDialog.h:4961
 msgctxt "menu item"
 msgid "transliteration"
 msgstr "transliteracija"
 
-#: src/ui_viewDialog.h:4884 src/ui_viewDialog.h:4904
+#: src/ui_viewDialog.h:4946 src/ui_viewDialog.h:4966
 msgctxt "menu item"
 msgid "modern"
 msgstr "modernus"
 
-#: src/ui_viewDialog.h:4886 src/ui_viewDialog.h:4891
+#: src/ui_viewDialog.h:4948 src/ui_viewDialog.h:4953
 msgid "Scientific transliteration"
 msgstr "Mokslinė transliteracija"
 
-#: src/ui_viewDialog.h:4888 src/ui_viewDialog.h:4893
+#: src/ui_viewDialog.h:4950 src/ui_viewDialog.h:4955
 msgctxt "menu item"
 msgid "sci. translit."
 msgstr "moksl. translit."
 
-#: src/ui_viewDialog.h:4889 src/ui_viewDialog.h:4898
+#: src/ui_viewDialog.h:4951 src/ui_viewDialog.h:4960
 msgctxt "menu item"
 msgid "native"
 msgstr "Originalus"
 
-#: src/ui_viewDialog.h:4895 src/ui_viewDialog.h:4901
+#: src/ui_viewDialog.h:4957 src/ui_viewDialog.h:4963
 msgid "International Phonetic Alphabet"
 msgstr "Tarptautinė fonetinė abėcėlė"
 
-#: src/ui_viewDialog.h:4897 src/ui_viewDialog.h:4903
+#: src/ui_viewDialog.h:4959 src/ui_viewDialog.h:4965
 msgctxt "menu item"
 msgid "IPA"
 msgstr "TFA"
 
-#: src/ui_viewDialog.h:4905 src/ui_viewDialog.h:4906
+#: src/ui_viewDialog.h:4967 src/ui_viewDialog.h:4968
 msgctxt "menu item"
 msgid "byname"
 msgstr "pseudonimas"
 
-#: src/ui_viewDialog.h:4908
+#: src/ui_viewDialog.h:4970
 msgid "Show zodiac (if defined)"
 msgstr "Rodyti zodiaką (jei apibrėžta)"
 
-#: src/ui_viewDialog.h:4912
+#: src/ui_viewDialog.h:4974
 msgid "Constellations font size"
 msgstr "Žvaigždynų šrifto dydis"
 
-#: src/ui_viewDialog.h:4915
+#: src/ui_viewDialog.h:4977
 msgid "Color of zodiac lines"
 msgstr "Zodiako linijų spalva"
 
-#: src/ui_viewDialog.h:4922
+#: src/ui_viewDialog.h:4984
 msgid "Fading duration for lines of asterisms"
 msgstr "Asterizmų linijų blukimo trukmė"
 
-#: src/ui_viewDialog.h:4926
+#: src/ui_viewDialog.h:4988
 msgid "Color of asterism lines"
 msgstr "Asterizmo linijų spalva"
 
-#: src/ui_viewDialog.h:4929
+#: src/ui_viewDialog.h:4991
 msgid "Color of constellation area (convex hull) boundaries"
 msgstr "Žvaigždyno srities (išgaubtojo korpuso) ribų spalva"
 
-#: src/ui_viewDialog.h:4933
+#: src/ui_viewDialog.h:4995
 msgid "Only one at a time"
 msgstr "Vienu metu tik po vieną"
 
-#: src/ui_viewDialog.h:4935
+#: src/ui_viewDialog.h:4997
 msgid "Isolated"
 msgstr "Izoliuota"
 
-#: src/ui_viewDialog.h:4941
+#: src/ui_viewDialog.h:5003
 msgid "Color of ray helpers"
 msgstr "Spindulinių pagalbininkų spalva"
 
-#: src/ui_viewDialog.h:4944
+#: src/ui_viewDialog.h:5006
 msgid "Show areas (convex hulls) of constellations"
 msgstr "Rodyti žvaigždynų sritis (išgaubtus korpusus)"
 
-#: src/ui_viewDialog.h:4946
+#: src/ui_viewDialog.h:5008
 msgid "Constellation areas"
 msgstr "Žvaigždynų sritys"
 
-#: src/ui_viewDialog.h:4948
+#: src/ui_viewDialog.h:5010
 msgid "Color of constellation boundaries"
 msgstr "Žvaigždynų ribų spalva"
 
-#: src/ui_viewDialog.h:4950
+#: src/ui_viewDialog.h:5012
 msgid "Abbreviated names"
 msgstr "Sutrumpinti pavadinimai"
 
-#: src/ui_viewDialog.h:4952
+#: src/ui_viewDialog.h:5014
 msgid "Color of asterism names"
 msgstr "Asterizmo vardų spalva"
 
-#: src/ui_viewDialog.h:4956
+#: src/ui_viewDialog.h:5018
 msgid "Show lunar stations (if defined)"
 msgstr "Rodyti Mėnulio stotis (jei apibrėžta)"
 
-#: src/ui_viewDialog.h:4958
+#: src/ui_viewDialog.h:5020
 msgid "Lunar Stations"
 msgstr "Mėnulio stotys"
 
-#: src/ui_viewDialog.h:4960
+#: src/ui_viewDialog.h:5022
 msgid "Brightness for constellation art"
 msgstr "Žvaigždynų piešinių ryškumas"
 
-#: src/ui_viewDialog.h:4963
+#: src/ui_viewDialog.h:5025
 msgid "Show boundaries of constellations"
 msgstr "Rodyti žvaigždynų ribas"
 
-#: src/ui_viewDialog.h:4967
+#: src/ui_viewDialog.h:5029
 msgid "Fading duration for lines of ray helpers"
 msgstr "Spindulių pagalbininkų linijų blukimo trukmė"
 
-#: src/ui_viewDialog.h:4971
+#: src/ui_viewDialog.h:5033
 msgid "Fading duration for screen labels of constellations"
 msgstr "Žvaigždynų ekrano žymių blukimo trukmė"
 
-#: src/ui_viewDialog.h:4977
+#: src/ui_viewDialog.h:5039
 msgid "Fading duration for lunar station lines"
 msgstr "Mėnulio stočių linijų blukimo trukmė"
 
-#: src/ui_viewDialog.h:4980
+#: src/ui_viewDialog.h:5042
 msgid "Fading duration for screen labels of asterisms "
 msgstr "Asterizmų ekrano žymų blukimo trukmė "
 
-#: src/ui_viewDialog.h:4987
+#: src/ui_viewDialog.h:5049
 msgid "Fading duration for artwork of constellations "
 msgstr "Žvaigždynų paveikslėlių blukimo trukmė"
 
-#: src/ui_viewDialog.h:4990
+#: src/ui_viewDialog.h:5052
 msgid "Color of constellation names"
 msgstr "Žvaigždynų pavadinimų spalva"
 
-#: src/ui_viewDialog.h:4993
+#: src/ui_viewDialog.h:5055
 msgid "Fading duration for area limits of constellations"
 msgstr "Silpnėjimo trukmė žvaigždynų teritorijos ribose"
 
-#: src/ui_viewDialog.h:4999
+#: src/ui_viewDialog.h:5061
 msgid "Color of constellation lines"
 msgstr "Žvaigždynų linijų spalva"
 
-#: src/ui_viewDialog.h:5005
+#: src/ui_viewDialog.h:5067
 msgid "Click on star to show its constellation"
 msgstr "Spauskite ant žvaigždės, kad pamatytumėte jos žvaigždyną"
 
-#: src/ui_viewDialog.h:5010
+#: src/ui_viewDialog.h:5072
 msgid "Fading duration for zodiac lines"
 msgstr "Zodiako linijų blukimo trukmė"
 
-#: src/ui_viewDialog.h:5013
+#: src/ui_viewDialog.h:5075
 msgid "Asterisms font size"
 msgstr "Asterizmų šrifto dydis"
 
-#: src/ui_viewDialog.h:5019
+#: src/ui_viewDialog.h:5081
 msgid "Color of Lunar station lines"
 msgstr "Mėnulio stočių linijų spalva"
 
-#: src/ui_viewDialog.h:5023
+#: src/ui_viewDialog.h:5085
 msgid "Fading duration for lines of constellations"
 msgstr "Žvaigždynų linijų blukimo trukmė"
 
-#: src/ui_viewDialog.h:5026
+#: src/ui_viewDialog.h:5088
 msgid "Fading duration for boundaries of constellations"
 msgstr "Žvaigždynų ribų blukimo trukmė"
 
-#: src/ui_viewDialog.h:5028
+#: src/ui_viewDialog.h:5090
 msgid "Filter"
 msgstr "Filtras"
 
@@ -16848,6 +16914,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:219
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:249
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1251
 msgid "Save settings"
 msgstr "Įrašyti nustatymus"
 
@@ -16887,6 +16954,7 @@ msgstr "Atstatyti numatytuosius nustatymus buvusius įdiegiant Stellarium"
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:785
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:538
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1250
 msgid "Restore defaults"
 msgstr "Atstatyti numatytuosius nustatymus"
 
@@ -17962,6 +18030,7 @@ msgstr "Leisti scenarijams saugoti išvestį į bet kokius katalogus"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:563
 #: plugins/Observability/src/ui_ObservabilityDialog.h:309
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:786
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1252
 msgid "Settings"
 msgstr "Nustatymai"
 
@@ -18719,6 +18788,7 @@ msgid "Evening astronomical twilight"
 msgstr "Vakaro astronominės sutemos"
 
 #: src/ui_astroCalcAlmanacWidget.h:1056
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1188
 msgid "Twilight"
 msgstr "Sutemos"
 
@@ -19728,6 +19798,7 @@ msgstr "Leisti pririšti prie pasirinkto objekto"
 #: plugins/Calendars/src/ui_calendarsDialog.h:995
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:787
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:545
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1253
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Apie"
@@ -31313,6 +31384,7 @@ msgstr "Mozaikos kameros konfigūracija"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:247
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:268
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1249
 msgid "Show plug-in button on toolbar"
 msgstr "Rodyti įskiepių mygtuką įrankių juostoje"
 
@@ -39036,3 +39108,314 @@ msgstr "Pasirinktų tekstūrų elementų pašalinimas"
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:544
 msgid "Manage"
 msgstr "Tvarkyti"
+
+#: plugins/TimeNavigator/src/TimeNavigator.cpp:43
+#: plugins/TimeNavigator/src/TimeNavigator.cpp:81
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1007
+msgid "Time Navigator"
+msgstr ""
+
+#: plugins/TimeNavigator/src/TimeNavigator.cpp:46
+msgid ""
+"This plugin provides a convenient panel for stepping the simulation time "
+"forward or backward by common astronomical periods, and for jumping to "
+"specific events such as risings, transits, settings, and twilight times."
+msgstr ""
+
+#: plugins/TimeNavigator/src/TimeNavigator.cpp:82
+msgid "Show Time Navigator window"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1008
+msgid "Step the simulation time forward (▶) or backward (◀) by a period:"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1009
+msgid "Days"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1013
+msgid "Solar day"
+msgstr "Saulės diena"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1020
+msgid "Solar week"
+msgstr "Saulės savaitė"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1034
+msgid "Sidereal week"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1038
+msgid "Months"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1040
+msgid "Subtract 1 synodic month (~29.53 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1042
+msgid "Synodic month"
+msgstr "Sinodinis mėnuo"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1044
+msgid "Add 1 synodic month (~29.53 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1047
+msgid "Subtract 1 mean tropical month (~27.32 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1049
+msgid "Mean tropical month"
+msgstr "Vidutinis atogrąžinis mėnuo"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1051
+msgid "Add 1 mean tropical month (~27.32 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1054
+msgid "Subtract 1 draconic month (~27.21 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1056
+msgid "Draconic month"
+msgstr "Drakoniškasis mėnuo"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1058
+msgid "Add 1 draconic month (~27.21 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1061
+msgid "Subtract 1 anomalistic month (~27.55 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1063
+msgid "Anomalistic month"
+msgstr "Anomalusis mėnuo"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1065
+msgid "Add 1 anomalistic month (~27.55 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1070
+msgid "Calendar month"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1074
+msgid "Years"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1076
+msgid "Subtract 1 mean tropical year (~365.24 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1078
+msgid "Mean tropical year"
+msgstr "Vidutiniai atogrąžiniai metai"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1080
+msgid "Add 1 mean tropical year (~365.24 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1083
+msgid "Subtract 1 tropical year (varies with epoch)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1085
+msgid "Tropical year"
+msgstr "Atogrąžiniai metai"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1087
+msgid "Add 1 tropical year (varies with epoch)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1092
+msgid "Sidereal year"
+msgstr "Žvaigždiniai metai"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1097
+msgid "Subtract 1 draconic year (~346.62 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1099
+msgid "Draconic year"
+msgstr "Drakoniškieji metai"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1101
+msgid "Add 1 draconic year (~346.62 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1104
+msgid "Subtract 1 anomalistic year (~365.26 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1106
+msgid "Anomalistic year"
+msgstr "Anomalieji metai"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1108
+msgid "Add 1 anomalistic year (~365.26 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1111
+msgid "Subtract 1 Julian year (365.25 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1113
+msgid "Julian year"
+msgstr "Metai pagal Julijų"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1115
+msgid "Add 1 Julian year (365.25 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1118
+msgid "Subtract 1 Gaussian year (~365.26 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1120
+msgid "Gaussian year"
+msgstr "Metai pagal Gausą"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1122
+msgid "Add 1 Gaussian year (~365.26 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1127
+msgid "Calendar year"
+msgstr "Kalendoriniai metai"
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1131
+msgid "Long cycles"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1133
+msgid "Subtract 1 Metonic cycle (235 synodic months ≈ 19 years)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1135
+msgid "Metonic cycle"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1137
+msgid "Add 1 Metonic cycle (235 synodic months ≈ 19 years)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1140
+msgid "Subtract 1 saros (223 synodic months ≈ 18 years 11 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1144
+msgid "Add 1 saros (223 synodic months ≈ 18 years 11 days)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1146
+msgid "Time Steps"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1147
+msgid "Selected object"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1148
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:193
+msgid "No object selected"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1149
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1193
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1221
+msgid "Previous"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1151
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1195
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1223
+msgid "Next"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1155
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1159
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1163
+msgid "Rising"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1167
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1171
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1175
+msgid "Transit"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1179
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1183
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1187
+msgid "Setting"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1189
+msgid "Solar altitude:"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1191
+msgid "Solar altitude used for twilight calculations (synced with View → Sky)"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1199
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1203
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1207
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1227
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1231
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1235
+msgid "Morning"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1211
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1215
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1219
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1239
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1243
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1247
+msgid "Evening"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1220
+msgid "Selected object at current altitude"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1225
+msgid "Selected object at its current altitude, previous morning"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1229
+msgid "Selected object at its current altitude this morning"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1233
+msgid "Selected object at its current altitude, next morning"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1237
+msgid "Selected object at its current altitude, previous evening"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1241
+msgid "Selected object at its current altitude this evening"
+msgstr ""
+
+#: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1245
+msgid "Selected object at its current altitude, next evening"
+msgstr ""
+
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:217
+msgid "Time Navigator Plug-in"
+msgstr ""
+
+#: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:224
+msgid ""
+"The Time Navigator plugin provides a convenient window for stepping the "
+"simulation time forward or backward by common astronomical periods (solar "
+"day, sidereal day, synodic month, tropical year, Saros cycle, etc.), as well"
+" as for jumping to specific events for a selected object (rising, transit, "
+"setting) and to twilight times."
+msgstr ""
