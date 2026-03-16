@@ -19,6 +19,7 @@
 
 #include "TimeNavigator.hpp"
 #include "TimeNavigatorDialog.hpp"
+#include "PlanetaryEventsMgr.hpp"
 #include "ui_timeNavigatorDialog.h"
 
 #include "StelApp.hpp"
@@ -29,7 +30,20 @@
 #include "StelObjectMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelUtils.hpp"
 #include "SpecificTimeMgr.hpp"
+#include "StelLocation.hpp"
+#include "StelMovementMgr.hpp"
+#include "SolarSystem.hpp"
+
+#include <QDate>
+#include <QGroupBox>
+#include <QScrollArea>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QGridLayout>
+#include <QFrame>
+#include <QSizePolicy>
 
 TimeNavigatorDialog::TimeNavigatorDialog()
 	: StelDialog("TimeNavigator")
@@ -37,6 +51,8 @@ TimeNavigatorDialog::TimeNavigatorDialog()
 	, core(Q_NULLPTR)
 	, specMgr(Q_NULLPTR)
 	, objMgr(Q_NULLPTR)
+	, planetaryMgr(Q_NULLPTR)
+	, notOnEarthLabel(Q_NULLPTR)
 {
 }
 
@@ -61,6 +77,24 @@ void TimeNavigatorDialog::createDialogContent()
 	objMgr  = GETSTELMODULE(StelObjectMgr);
 
 	ui->setupUi(dialog);
+
+	// ── Earth-only guard ─────────────────────────────────────────────────────
+	// All functionality in this plugin is only meaningful from Earth.
+	// Build a message label that replaces the tab widget when the observer
+	// travels to another body.
+	notOnEarthLabel = new QLabel(
+	    q_("The Time Navigator is only available when observing from Earth."),
+	    dialog);
+	notOnEarthLabel->setAlignment(Qt::AlignCenter);
+	notOnEarthLabel->setWordWrap(true);
+	// Insert it into the same top-level layout as the tab widget, but hide
+	// it initially; updateEarthOnlyState() will show/hide as needed.
+	ui->mainVBox->insertWidget(1, notOnEarthLabel);
+	notOnEarthLabel->hide();
+
+	connect(core, SIGNAL(locationChanged(StelLocation)),
+	        this, SLOT(updateEarthOnlyState()));
+	updateEarthOnlyState();   // apply correct initial state
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -155,8 +189,24 @@ void TimeNavigatorDialog::createDialogContent()
 	        this, &TimeNavigatorDialog::updateSelectedObjectState);
 	updateSelectedObjectState();
 
+	// ── Tab: Planetary Events ────────────────────────────────────────────────
+	planetaryMgr = new PlanetaryEventsMgr(this);
+	buildPlanetaryTab();
+
 	// ── Tab: Settings ────────────────────────────────────────────────────
-	connectBoolProperty(ui->checkBoxShowButton, "TimeNavigator.flagShowButton");
+	connectBoolProperty(ui->checkBoxShowButton,    "TimeNavigator.flagShowButton");
+	connectBoolProperty(ui->checkBoxSelectObject,  "TimeNavigator.flagSelectObject");
+	connectBoolProperty(ui->checkBoxCenterView,    "TimeNavigator.flagCenterView");
+
+	// "Center view" only makes sense when "Select object" is enabled.
+	auto updateCenterEnabled = [this]() {
+		ui->checkBoxCenterView->setEnabled(
+		    ui->checkBoxSelectObject->isChecked());
+	};
+	connect(ui->checkBoxSelectObject, &QCheckBox::toggled,
+	        this, [updateCenterEnabled](bool) { updateCenterEnabled(); });
+	updateCenterEnabled();
+
 	connect(ui->btnSaveSettings,    &QPushButton::clicked, this, &TimeNavigatorDialog::saveSettings);
 	connect(ui->btnRestoreDefaults, &QPushButton::clicked, this, &TimeNavigatorDialog::restoreDefaults);
 
@@ -237,4 +287,163 @@ void TimeNavigatorDialog::setAboutHtml()
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
 	}
 	ui->aboutTextBrowser->setHtml(html);
+}
+
+
+// ── Planetary Events tab ─────────────────────────────────────────────────────
+
+void TimeNavigatorDialog::buildPlanetaryTab()
+{
+
+	QWidget*     tabW      = ui->tabWidget->findChild<QWidget*>("tabPlanetaryEvents");
+	QVBoxLayout* outerVBox = qobject_cast<QVBoxLayout*>(tabW->layout());
+
+	QScrollArea* scroll = new QScrollArea(tabW);
+	scroll->setWidgetResizable(true);
+	scroll->setFrameShape(QFrame::NoFrame);
+	QWidget*     contents = new QWidget(scroll);
+	QVBoxLayout* vbox     = new QVBoxLayout(contents);
+	vbox->setSpacing(6);
+	vbox->setContentsMargins(0, 0, 0, 0);
+	scroll->setWidget(contents);
+	outerVBox->addWidget(scroll);
+
+	// Helper: add one group of event rows.
+	// rows = list of { display label, eventType key }
+	auto addGroup = [&](const QString& title,
+	                    std::initializer_list<QPair<QString,QString>> rows)
+	{
+		QGroupBox*   group = new QGroupBox(title, contents);
+		QGridLayout* grid  = new QGridLayout(group);
+		grid->setSpacing(2);
+		grid->setContentsMargins(4, 4, 4, 4);
+
+		// Column headers
+		grid->addWidget(new QLabel(q_("◀ Previous"), group), 0, 1, Qt::AlignCenter);
+		grid->addWidget(new QLabel(q_("Next ▶"),     group), 0, 2, Qt::AlignCenter);
+
+		int r = 1;
+		for (const auto& row : rows)
+		{
+			const QString rowLabel  = row.first;
+			const QString eventType = row.second;
+
+			grid->addWidget(new QLabel(rowLabel, group), r, 0);
+
+			QPushButton* btnP = new QPushButton(q_("◀"), group);
+			btnP->setToolTip(QString(q_("Previous %1")).arg(rowLabel));
+			btnP->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+			grid->addWidget(btnP, r, 1);
+
+			QPushButton* btnN = new QPushButton(q_("▶"), group);
+			btnN->setToolTip(QString(q_("Next %1")).arg(rowLabel));
+			btnN->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+			grid->addWidget(btnN, r, 2);
+
+			connect(btnP, &QPushButton::clicked, this, [this, eventType]() {
+				double jd = planetaryMgr->findPrev(core->getJD(), eventType);
+				if (jd > 0.0) { core->setJD(jd); applySelectCenter(eventType); }
+			});
+			connect(btnN, &QPushButton::clicked, this, [this, eventType]() {
+				double jd = planetaryMgr->findNext(core->getJD(), eventType);
+				if (jd > 0.0) { core->setJD(jd); applySelectCenter(eventType); }
+			});
+			++r;
+		}
+		vbox->addWidget(group);
+	};
+
+	addGroup(q_("Mercury"), {
+		{ q_("Inferior conjunction"),     PE::MercuryInfConj  },
+		{ q_("Superior conjunction"),     PE::MercurySupConj  },
+		{ q_("Greatest elongation east"), PE::MercuryElongE   },
+		{ q_("Greatest elongation west"), PE::MercuryElongW   },
+	});
+	addGroup(q_("Venus"), {
+		{ q_("Inferior conjunction"),     PE::VenusInfConj  },
+		{ q_("Superior conjunction"),     PE::VenusSupConj  },
+		{ q_("Greatest elongation east"), PE::VenusElongE   },
+		{ q_("Greatest elongation west"), PE::VenusElongW   },
+	});
+	addGroup(q_("Mars"), {
+		{ q_("Opposition"),         PE::MarsOpposition },
+		{ q_("Superior conjunction"),PE::MarsSupConj   },
+	});
+	addGroup(q_("Jupiter"), {
+		{ q_("Opposition"),          PE::JupiterOpposition },
+		{ q_("Superior conjunction"),PE::JupiterSupConj    },
+	});
+	addGroup(q_("Saturn"), {
+		{ q_("Opposition"),          PE::SaturnOpposition },
+		{ q_("Superior conjunction"),PE::SaturnSupConj    },
+	});
+	addGroup(q_("Uranus"), {
+		{ q_("Opposition"),          PE::UranusOpposition },
+		{ q_("Superior conjunction"),PE::UranusSupConj    },
+	});
+	addGroup(q_("Neptune"), {
+		{ q_("Opposition"),          PE::NeptuneOpposition },
+		{ q_("Superior conjunction"),PE::NeptuneSupConj    },
+	});
+	addGroup(q_("Moon"), {
+		{ q_("New Moon"),      PE::MoonNew          },
+		{ q_("First quarter"), PE::MoonFirstQuarter },
+		{ q_("Full Moon"),     PE::MoonFull         },
+		{ q_("Last quarter"),  PE::MoonLastQuarter  },
+		{ q_("Perigee"),       PE::MoonPerigee      },
+		{ q_("Apogee"),        PE::MoonApogee       },
+	});
+	addGroup(q_("Earth"), {
+		{ q_("Perihelion"), PE::EarthPerihelion },
+		{ q_("Aphelion"),   PE::EarthAphelion   },
+	});
+
+	vbox->addStretch();
+}
+
+// ── Earth-only guard ─────────────────────────────────────────────────────────
+
+void TimeNavigatorDialog::updateEarthOnlyState()
+{
+	const bool onEarth = (core->getCurrentPlanet()->getEnglishName() == "Earth");
+	ui->tabWidget->setVisible(onEarth);
+	notOnEarthLabel->setVisible(!onEarth);
+}
+
+// ── Select / center on event ──────────────────────────────────────────────────
+
+void TimeNavigatorDialog::applySelectCenter(const QString& eventType) const
+{
+	// Extract the planet name: everything before the first space.
+	// e.g. "Jupiter opposition" → "Jupiter", "Moon new" → "Moon"
+	const QString planetName = eventType.section(' ', 0, 0);
+
+	// Earth events (perihelion/aphelion): observer IS Earth, nothing to select.
+	if (planetName == "Earth")
+		return;
+
+	const TimeNavigator* tn = GETSTELMODULE(TimeNavigator);
+	if (!tn->getFlagSelectObject())
+		return;
+
+	SolarSystem*    ss      = GETSTELMODULE(SolarSystem);
+	StelObjectMgr*  objMgr  = GETSTELMODULE(StelObjectMgr);
+	StelMovementMgr* mvMgr  = GETSTELMODULE(StelMovementMgr);
+
+	PlanetP planet = ss->searchByEnglishName(planetName);
+	if (!planet)
+		return;
+
+	objMgr->setSelectedObject(qSharedPointerCast<StelObject>(planet),
+	                          StelModule::ReplaceSelection);
+
+	if (tn->getFlagCenterView())
+	{
+		const QList<StelObjectP> sel = objMgr->getSelectedObject();
+		if (!sel.isEmpty())
+		{
+			mvMgr->moveToObject(sel[0], mvMgr->getAutoMoveDuration());
+			mvMgr->setFlagTracking(true);
+		}
+	}
 }

@@ -55,6 +55,14 @@ class TimeNavigator : public StelModule
 		   READ getFlagShowButton
 		   WRITE setFlagShowButton
 		   NOTIFY flagShowButtonChanged)
+	Q_PROPERTY(bool flagSelectObject
+		   READ getFlagSelectObject
+		   WRITE setFlagSelectObject
+		   NOTIFY flagSelectObjectChanged)
+	Q_PROPERTY(bool flagCenterView
+		   READ getFlagCenterView
+		   WRITE setFlagCenterView
+		   NOTIFY flagCenterViewChanged)
 
 public:
 	TimeNavigator();
@@ -75,13 +83,19 @@ public:
 	void saveSettingsToConfig() const;
 
 	bool getFlagShowButton() const { return flagShowButton; }
+	bool getFlagSelectObject() const { return flagSelectObject; }
+	bool getFlagCenterView()   const { return flagCenterView;   }
 
 public slots:
 	//! Display/hide the toolbar button for this plugin.
 	void setFlagShowButton(bool b);
+	void setFlagSelectObject(bool b) { flagSelectObject = b; emit flagSelectObjectChanged(b); }
+	void setFlagCenterView(bool b)   { flagCenterView   = b; emit flagCenterViewChanged(b);   }
 
 signals:
 	void flagShowButtonChanged(bool b);
+	void flagSelectObjectChanged(bool b);
+	void flagCenterViewChanged(bool b);
 
 private slots:
 	//! Called when the user clicks "Save settings" in the dialog.
@@ -95,6 +109,8 @@ private:
 	StelGui* gui;
 
 	bool flagShowButton;
+	bool flagSelectObject;
+	bool flagCenterView;
 	StelButton* toolbarButton;
 };
 
