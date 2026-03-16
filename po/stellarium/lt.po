@@ -15595,27 +15595,34 @@ msgid ""
 "minimum FOV and the configured scale factor at the maximum FOV. Outside "
 "those bounds the scale is held constant."
 msgstr ""
+"Kai aktyvuota, Mėnulio vaizdas sklandžiai keičiamas nuo 1× (natūralaus "
+"dydžio) esant mažiausiam matymo laukui iki nustatyto mastelio koeficiento "
+"esant didžiausiam matymo laukui. Už šių ribų mastelis išlieka pastovus."
 
 #: src/ui_viewDialog.h:4159
 msgid "Dynamic (FOV-based) Moon size"
-msgstr ""
+msgstr "Dinaminis (pagal matymo lauką) Mėnulio dydis"
 
 #: src/ui_viewDialog.h:4161 src/ui_viewDialog.h:4165
 msgid "FOV at and below which the Moon is drawn at 1× (natural) size."
 msgstr ""
+"Regos laukas, kuriame ir žemiau jo Mėnulis vaizduojamas 1× (natūralaus) "
+"dydžio."
 
 #: src/ui_viewDialog.h:4163
 msgid "1× below"
-msgstr ""
+msgstr "1× žemiau"
 
 #: src/ui_viewDialog.h:4168 src/ui_viewDialog.h:4172
 msgid ""
 "FOV at and above which the Moon is drawn at the configured scale factor."
 msgstr ""
+"Regos laukas, kuriame ir už kurio ribų Mėnulis vaizduojamas pagal nustatytą "
+"mastelio koeficientą."
 
 #: src/ui_viewDialog.h:4170
 msgid "Nx above"
-msgstr ""
+msgstr "Nx aukščiau"
 
 #: src/ui_viewDialog.h:4174
 msgid "Hide nomenclature on the celestial body of observer"
@@ -23084,7 +23091,7 @@ msgstr "Markerių, pavadinimų ir orbitų spalva nematomiems palydovams"
 #: plugins/Satellites/src/ui_satellitesDialog.h:1268
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:256
 msgid "Settings of custom filter"
-msgstr "Nustatymai pasirinktai filtrui"
+msgstr "Nustatymai pasirinktam filtrui"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1270
 msgid "Search ..."
@@ -23092,8 +23099,7 @@ msgstr "Ieškoti..."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1272
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
-"Kad pradėtumėte jį stebėti palydovą, spustelėkite du kartus  pele ant jo."
+msgstr "Kad pradėtumėte sekti palydovą, spustelėkite du kartus  pele ant jo."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1275
 msgid "Add more satellites"
@@ -23548,7 +23554,7 @@ msgstr "ASCOM Nustatymai"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:41
 msgid "Choose ASCOM Telescope"
-msgstr "Pasirinkti ASCOM teleskopą."
+msgstr "Pasirinkti ASCOM teleskopą"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:42
 msgid "Selected Device:"
@@ -23579,8 +23585,8 @@ msgid ""
 "Use the coordinate system that is configured in the general telescope "
 "properties for this telescope."
 msgstr ""
-"Naudokite koordinatų sistemą, kuri yra sukonfigūruota bendrosiose teleskopo "
-"savybėse šiam teleskopui."
+"Naudokite koordinačių sistemą, kuri yra sukonfigūruota bendrosiose teleskopo"
+" savybėse šiam teleskopui."
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:48
 msgid "Use Stellarium settings"
@@ -39113,7 +39119,7 @@ msgstr "Tvarkyti"
 #: plugins/TimeNavigator/src/TimeNavigator.cpp:81
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1007
 msgid "Time Navigator"
-msgstr ""
+msgstr "Laiko navigatorius"
 
 #: plugins/TimeNavigator/src/TimeNavigator.cpp:46
 msgid ""
@@ -39121,18 +39127,23 @@ msgid ""
 "forward or backward by common astronomical periods, and for jumping to "
 "specific events such as risings, transits, settings, and twilight times."
 msgstr ""
+"Šis papildinys suteikia patogų valdymo skydelį, leidžiantį perkelti "
+"simuliacijos laiką į priekį arba atgal standartiniais astronominiais "
+"laikotarpiais, taip pat peršokti prie konkrečių įvykių, pavyzdžiui, "
+"patekėjimo, perėjimo, nusileidimo ir prieblandos laikų."
 
 #: plugins/TimeNavigator/src/TimeNavigator.cpp:82
 msgid "Show Time Navigator window"
-msgstr ""
+msgstr "Rodyti Laiko navigatoriaus langą"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1008
 msgid "Step the simulation time forward (▶) or backward (◀) by a period:"
 msgstr ""
+"Perkelkite modeliavimo laiką į priekį (▶) arba atgal (◀) vienu laikotarpiu:"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1009
 msgid "Days"
-msgstr ""
+msgstr "Dienos"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1013
 msgid "Solar day"
@@ -39144,15 +39155,15 @@ msgstr "Saulės savaitė"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1034
 msgid "Sidereal week"
-msgstr ""
+msgstr "Siderinė savaitė"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1038
 msgid "Months"
-msgstr ""
+msgstr "Mėnesiai"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1040
 msgid "Subtract 1 synodic month (~29.53 days)"
-msgstr ""
+msgstr "Atimti 1 sinodinį mėnesį (~29.53 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1042
 msgid "Synodic month"
@@ -39160,11 +39171,11 @@ msgstr "Sinodinis mėnuo"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1044
 msgid "Add 1 synodic month (~29.53 days)"
-msgstr ""
+msgstr "Pridėti 1 sinodinį mėnesį (~29.53 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1047
 msgid "Subtract 1 mean tropical month (~27.32 days)"
-msgstr ""
+msgstr "Atimti 1 vidutinį tropinį mėnesį (~27.32 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1049
 msgid "Mean tropical month"
@@ -39172,11 +39183,11 @@ msgstr "Vidutinis atogrąžinis mėnuo"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1051
 msgid "Add 1 mean tropical month (~27.32 days)"
-msgstr ""
+msgstr "Pridėti 1 vidutinį tropinį mėnesį (~27.32 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1054
 msgid "Subtract 1 draconic month (~27.21 days)"
-msgstr ""
+msgstr "Atimti 1 drakoniškąjį mėnesį (~27.21 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1056
 msgid "Draconic month"
@@ -39184,11 +39195,11 @@ msgstr "Drakoniškasis mėnuo"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1058
 msgid "Add 1 draconic month (~27.21 days)"
-msgstr ""
+msgstr "Pridėti 1 drakoniškąjį mėnesį (~27.21 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1061
 msgid "Subtract 1 anomalistic month (~27.55 days)"
-msgstr ""
+msgstr "Atimti 1 anomalistinį mėnesį (~27.55 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1063
 msgid "Anomalistic month"
@@ -39196,19 +39207,19 @@ msgstr "Anomalusis mėnuo"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1065
 msgid "Add 1 anomalistic month (~27.55 days)"
-msgstr ""
+msgstr "Pridėti 1 anomalistinį mėnesį (~27.55 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1070
 msgid "Calendar month"
-msgstr ""
+msgstr "Kalendorinis mėnuo"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1074
 msgid "Years"
-msgstr ""
+msgstr "Metai"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1076
 msgid "Subtract 1 mean tropical year (~365.24 days)"
-msgstr ""
+msgstr "Atimti 1 vidutinius tropinius metus (~365.24 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1078
 msgid "Mean tropical year"
@@ -39216,11 +39227,11 @@ msgstr "Vidutiniai atogrąžiniai metai"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1080
 msgid "Add 1 mean tropical year (~365.24 days)"
-msgstr ""
+msgstr "Pridėti 1 vidutinius tropinius metus (~365.24 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1083
 msgid "Subtract 1 tropical year (varies with epoch)"
-msgstr ""
+msgstr "Atimti 1 tropinius metus (skiriasi priklausomai nuo epochos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1085
 msgid "Tropical year"
@@ -39228,7 +39239,7 @@ msgstr "Atogrąžiniai metai"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1087
 msgid "Add 1 tropical year (varies with epoch)"
-msgstr ""
+msgstr "Pridėti 1 tropinius metus (skiriasi priklausomai nuo epochos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1092
 msgid "Sidereal year"
@@ -39236,7 +39247,7 @@ msgstr "Žvaigždiniai metai"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1097
 msgid "Subtract 1 draconic year (~346.62 days)"
-msgstr ""
+msgstr "Atimti 1 drakoniškuosius metus (~346.62 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1099
 msgid "Draconic year"
@@ -39244,11 +39255,11 @@ msgstr "Drakoniškieji metai"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1101
 msgid "Add 1 draconic year (~346.62 days)"
-msgstr ""
+msgstr "Pridėti 1 drakoniškuosius metus (~346.62 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1104
 msgid "Subtract 1 anomalistic year (~365.26 days)"
-msgstr ""
+msgstr "Atimti 1 anomalistinius metus (~365.26 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1106
 msgid "Anomalistic year"
@@ -39256,11 +39267,11 @@ msgstr "Anomalieji metai"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1108
 msgid "Add 1 anomalistic year (~365.26 days)"
-msgstr ""
+msgstr "Pridėti 1 anomalistinius metus (~365.26 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1111
 msgid "Subtract 1 Julian year (365.25 days)"
-msgstr ""
+msgstr "Atimti 1 Julijaus metus (365.25 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1113
 msgid "Julian year"
@@ -39268,11 +39279,11 @@ msgstr "Metai pagal Julijų"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1115
 msgid "Add 1 Julian year (365.25 days)"
-msgstr ""
+msgstr "Pridėti 1 Julijaus metus (365.25 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1118
 msgid "Subtract 1 Gaussian year (~365.26 days)"
-msgstr ""
+msgstr "Atimti 1 Gauso metus (365.26 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1120
 msgid "Gaussian year"
@@ -39280,7 +39291,7 @@ msgstr "Metai pagal Gausą"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1122
 msgid "Add 1 Gaussian year (~365.26 days)"
-msgstr ""
+msgstr "Pridėti 1 Gauso metus (365.26 dienos)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1127
 msgid "Calendar year"
@@ -39288,78 +39299,80 @@ msgstr "Kalendoriniai metai"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1131
 msgid "Long cycles"
-msgstr ""
+msgstr "Ilgieji ciklai"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1133
 msgid "Subtract 1 Metonic cycle (235 synodic months ≈ 19 years)"
-msgstr ""
+msgstr "Atimti 1 Metono ciklą (235 sinodinių mėnesių ≈ 19 metų)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1135
 msgid "Metonic cycle"
-msgstr ""
+msgstr "Metono ciklas"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1137
 msgid "Add 1 Metonic cycle (235 synodic months ≈ 19 years)"
-msgstr ""
+msgstr "Pridėti 1 Metono ciklą (235 sinodinių mėnesių ≈ 19 metų)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1140
 msgid "Subtract 1 saros (223 synodic months ≈ 18 years 11 days)"
-msgstr ""
+msgstr "Atimti 1 sarą (223 sinodiniai mėnesiai ≈ 18 metų 11 dienų)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1144
 msgid "Add 1 saros (223 synodic months ≈ 18 years 11 days)"
-msgstr ""
+msgstr "Pridėti 1 sarą (223 sinodiniai mėnesiai ≈ 18 metų 11 dienų)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1146
 msgid "Time Steps"
-msgstr ""
+msgstr "Laiko žingsniai"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1147
 msgid "Selected object"
-msgstr ""
+msgstr "Pasirinktas objektas"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1148
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:193
 msgid "No object selected"
-msgstr ""
+msgstr "Nėra pasirinktų objektų"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1149
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1193
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1221
 msgid "Previous"
-msgstr ""
+msgstr "Ankstesnis"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1151
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1195
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1223
 msgid "Next"
-msgstr ""
+msgstr "Kitas"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1155
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1159
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1163
 msgid "Rising"
-msgstr ""
+msgstr "Tekantis"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1167
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1171
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1175
 msgid "Transit"
-msgstr ""
+msgstr "Tranzite"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1179
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1183
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1187
 msgid "Setting"
-msgstr ""
+msgstr "Besileidžiantis"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1189
 msgid "Solar altitude:"
-msgstr ""
+msgstr "Saulės altitudė:"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1191
 msgid "Solar altitude used for twilight calculations (synced with View → Sky)"
 msgstr ""
+"Saulės altitudė, naudojama skaičiuojant prieblandą (sinchronizuota su  "
+"„View“ → „Sky“)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1199
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1203
@@ -39368,7 +39381,7 @@ msgstr ""
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1231
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1235
 msgid "Morning"
-msgstr ""
+msgstr "Rytas"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1211
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1215
@@ -39377,39 +39390,40 @@ msgstr ""
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1243
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1247
 msgid "Evening"
-msgstr ""
+msgstr "Vakaras"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1220
 msgid "Selected object at current altitude"
-msgstr ""
+msgstr "Pasirinktas objektas esant dabartinei altitudei"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1225
 msgid "Selected object at its current altitude, previous morning"
 msgstr ""
+"Pasirinktas objektas esant dabartinei altitudei, praėjusios dienos rytą"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1229
 msgid "Selected object at its current altitude this morning"
-msgstr ""
+msgstr "Pasirinktas objektas esant dabartinei altitudei, šį rytą"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1233
 msgid "Selected object at its current altitude, next morning"
-msgstr ""
+msgstr "Pasirinktas objektas esant dabartinei altitudei, ateinantį rytą"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1237
 msgid "Selected object at its current altitude, previous evening"
-msgstr ""
+msgstr "Pasirinktas objektas esant dabartinei altitudei, praėjusį vakarą"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1241
 msgid "Selected object at its current altitude this evening"
-msgstr ""
+msgstr "Pasirinktas objektas esant dabartinei altitudei, šį vakarą"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1245
 msgid "Selected object at its current altitude, next evening"
-msgstr ""
+msgstr "Pasirinktas objektas esant dabartinei altitudei, ateinantį vakarą"
 
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:217
 msgid "Time Navigator Plug-in"
-msgstr ""
+msgstr "Laiko navigatoriaus papildinys"
 
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:224
 msgid ""
@@ -39419,3 +39433,9 @@ msgid ""
 " as for jumping to specific events for a selected object (rising, transit, "
 "setting) and to twilight times."
 msgstr ""
+"Įskiepis Laiko navigatorius suteikia patogų langą, kuriame galima perkelti "
+"simuliacijos laiką į priekį arba atgal standartiniais astronominiais "
+"laikotarpiais (saulės diena, žvaigždinė diena, sinodinis mėnuo, tropiniai "
+"metai, Saro ciklas ir kt.), taip pat peršokti prie konkrečių pasirinktos "
+"dangaus kūno įvykių (tekėjimas, tranzitas, leidimasis) ir prie aušros bei "
+"sutemų laikų."
