@@ -469,8 +469,9 @@ void ObsListDialog::loadSelectedList()
 
 	// Display description and creation date
 	currentListName=observingListMap.value(KEY_NAME).toString();
+	currentListDescription=observingListMap.value(KEY_DESCRIPTION).toString();
 	ui->listNameLineEdit->setText(currentListName);
-	ui->descriptionLineEdit->setText(observingListMap.value(KEY_DESCRIPTION).toString());
+	ui->descriptionLineEdit->setText(currentListDescription);
 	ui->creationDateLineEdit->setText(observingListMap.value(KEY_CREATION_DATE).toString());
 	ui->lastEditLineEdit->setText(observingListMap.value(KEY_LAST_EDIT, observingListMap.value(KEY_CREATION_DATE)).toString());
 
@@ -1339,7 +1340,11 @@ void ObsListDialog::saveButtonPressed()
 		return;
 	}
 
-	// Last chance to detect any change: Just list name changed?
+	// Last chance to detect any change: Just list name or description changed?
+	QString listDescription = ui->descriptionLineEdit->text().trimmed();
+	if(currentListDescription!=listDescription)
+		tainted=true;
+
 	if (currentListName!=listName)
 		tainted=true;
 
@@ -1348,6 +1353,7 @@ void ObsListDialog::saveButtonPressed()
 
 	//OK, we save this and keep it as current list.
 	currentListName=listName;
+	currentListDescription=listDescription;
 
 	QFile jsonFile(observingListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text))
@@ -1505,7 +1511,7 @@ QVariantMap ObsListDialog::prepareCurrentList(QHash<QString, observingListItem> 
 	QVariantMap currentList = {
 		// Name, description, current date for the list, current sorting
 		{KEY_NAME,          currentListName},
-		{KEY_DESCRIPTION,   ui->descriptionLineEdit->text()},
+		{KEY_DESCRIPTION,   currentListDescription},
 		{KEY_SORTING,       sorting},
 		{KEY_CREATION_DATE, ui->creationDateLineEdit->text()},
 		{KEY_LAST_EDIT,     lastEditDate }
