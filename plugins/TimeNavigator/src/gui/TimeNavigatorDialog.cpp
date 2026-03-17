@@ -319,8 +319,8 @@ void TimeNavigatorDialog::buildPlanetaryTab()
 		grid->setContentsMargins(4, 4, 4, 4);
 
 		// Column headers
-		grid->addWidget(new QLabel(q_("◀ Previous"), group), 0, 1, Qt::AlignCenter);
-		grid->addWidget(new QLabel(q_("Next ▶"),     group), 0, 2, Qt::AlignCenter);
+		grid->addWidget(new QLabel(QString("◀ ") + q_("Previous"), group), 0, 1, Qt::AlignCenter);
+		grid->addWidget(new QLabel(q_("Next") + QString(" ▶"),     group), 0, 2, Qt::AlignCenter);
 
 		int r = 1;
 		for (const auto& row : rows)
@@ -330,12 +330,12 @@ void TimeNavigatorDialog::buildPlanetaryTab()
 
 			grid->addWidget(new QLabel(rowLabel, group), r, 0);
 
-			QPushButton* btnP = new QPushButton(q_("◀"), group);
+			QPushButton* btnP = new QPushButton("◀", group);
 			btnP->setToolTip(QString(q_("Previous %1")).arg(rowLabel));
 			btnP->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 			grid->addWidget(btnP, r, 1);
 
-			QPushButton* btnN = new QPushButton(q_("▶"), group);
+			QPushButton* btnN = new QPushButton("▶", group);
 			btnN->setToolTip(QString(q_("Next %1")).arg(rowLabel));
 			btnN->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 			grid->addWidget(btnN, r, 2);
