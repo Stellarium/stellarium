@@ -491,7 +491,7 @@ void Comet::update(int deltaTime)
 		const float brightnessDecreasePerVertexFromHead=1.0f/(COMET_TAIL_SLICES*COMET_TAIL_STACKS)  * avgAtmLum;
 		float brightnessPerVertexFromHead=1.0f;
                 
-                const Vec3d tailEclOffset = eclipticPos + aberrationPush;
+        const Vec3d tailEclOffset = eclipticPos + aberrationPush;
                 
 		gastailColorArr.clear();
 		dusttailColorArr.clear();
