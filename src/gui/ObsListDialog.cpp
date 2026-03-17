@@ -1307,9 +1307,13 @@ void ObsListDialog::removeObjectButtonPressed()
 {
 	Q_ASSERT(isEditMode);
 
-	int number = ui->treeView->currentIndex().row();
-	QString uuid = itemModel->index(number, ColumnUUID).data().toString();
-	itemModel->removeRow(number);
+	//Convert selected UI row (potentially sorted) into itemModel row (unsorted)
+	QModelIndex index = ui->treeView->currentIndex();
+	QSortFilterProxyModel* proxy = qobject_cast<QSortFilterProxyModel*>(ui->treeView->model());
+	int sourceRow = proxy ? proxy->mapToSource(index).row() : index.row();
+
+	QString uuid = itemModel->index(sourceRow, ColumnUUID).data().toString();
+	itemModel->removeRow(sourceRow);
 	currentItemCollection.remove(uuid);
 	tainted=true;
 }
