@@ -490,13 +490,15 @@ void Comet::update(int deltaTime)
 		const float avgAtmLum=lMgr->getAtmosphereAverageLuminance();
 		const float brightnessDecreasePerVertexFromHead=1.0f/(COMET_TAIL_SLICES*COMET_TAIL_STACKS)  * avgAtmLum;
 		float brightnessPerVertexFromHead=1.0f;
-
+                
+                const Vec3d tailEclOffset = eclipticPos + aberrationPush;
+                
 		gastailColorArr.clear();
 		dusttailColorArr.clear();
 		for (int i=0; i<gastailVertexArr.size(); ++i)
 		{
 			// Gastail extinction:
-			Vec3d vertAltAz=core->j2000ToAltAz(gastailVertexArr.at(i), StelCore::RefractionOn);
+			Vec3d vertAltAz = core->heliocentricEclipticToAltAz(gastailVertexArr.at(i) + tailEclOffset, StelCore::RefractionOn);
 			vertAltAz.normalize();
 			Q_ASSERT(fabs(vertAltAz.normSquared()-1.0) < 0.001);
 			float oneMag=0.0f;
@@ -505,7 +507,7 @@ void Comet::update(int deltaTime)
 			gastailColorArr.append(gasColor*extinctionFactor* brightnessPerVertexFromHead*intensityFovScale);
 
 			// dusttail extinction:
-			vertAltAz=core->j2000ToAltAz(dusttailVertexArr.at(i), StelCore::RefractionOn);
+			vertAltAz = core->heliocentricEclipticToAltAz(dusttailVertexArr.at(i) + tailEclOffset, StelCore::RefractionOn);
 			vertAltAz.normalize();
 			Q_ASSERT(fabs(vertAltAz.normSquared()-1.0) < 0.001);
 			oneMag=0.0f;
