@@ -69,7 +69,7 @@ Q_GLOBAL_STATIC(QStringList, objtype_array);
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always match the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 26;
+static const int StarCatalogFormatVersion = 27;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -435,7 +435,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		const float angle = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 40;
 		const float scale = StelApp::getInstance().getScreenScale();
 		const float radius = 13.f * scale;
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], radius, angle);
+		sPainter.drawSprite2dModeNoDeviceScale(screenpos[0], screenpos[1], radius, angle);
 	}
 }
 

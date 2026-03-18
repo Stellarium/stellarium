@@ -22,6 +22,7 @@
 #include "StelMainScriptAPIProxy.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "ScreenImageMgr.hpp"
 
 #include "ConstellationMgr.hpp"
 #include "AsterismMgr.hpp"
@@ -70,6 +71,7 @@
 #include <QTemporaryFile>
 #include <QTimer>
 #include <QEventLoop>
+#include <LabelMgr.hpp>
 
 #include <cmath>
 
@@ -1206,6 +1208,10 @@ void StelMainScriptAPI::clear(const QString& state)
 		StelMovementMgr* movmgr = GETSTELMODULE(StelMovementMgr);
 		ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
+
+		GETSTELMODULE(LabelMgr)->deleteAllLabels();
+		GETSTELMODULE(StelSkyLayerMgr)->removeSkyLayer("*");
+		GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
 
 		// Hide artificial satellites through StelProperties to avoid crash if plugin was not loaded
 		propMgr->setStelPropertyValue("Satellites.flagHintsVisible",   false, true);

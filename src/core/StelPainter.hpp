@@ -158,6 +158,7 @@ public:
 	//! Same as drawSprite2dMode but don't scale according to display device scaling. 
 	void drawSprite2dModeNoDeviceScale(float x, float y, float radius);
 	void drawSprite2dModeNoDeviceScale(const std::vector<Vec2f>& points, float radius);
+	void drawSprite2dModeNoDeviceScale(float x, float y, float radius, float rotation);
 
 	//! Draw a rotated square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.

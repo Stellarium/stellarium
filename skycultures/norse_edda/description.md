@@ -110,7 +110,7 @@ Mímis brunnr (Mímir’s well) is the source of wisdom, from which Odin sacrifi
 
 ##### Well of Urd
 
-Urðarbrunnr (well of Urðr) is the spring at which the Æsir hold daily council. To reach it, they ride across Bifröst (Sturluson 2017 [#8], p. 28). The wells are again represented by gaps in the Milky Way, with a larger dark spot at the end of Bifröst near Daneb representing the spring beneath Yggdrasil’s root. 
+Urðarbrunnr (well of Urðr) is the spring at which the Æsir hold daily council. To reach it, they ride across Bifröst (Sturluson 2017 [#8], p. 28).  The well is located in the Milky Way. We painted it in the area of Perseus, as it fits the end of Bifröst. This way, the Alpha-Persei star cluster could represent the spring beneath Yggdrasil’s root. 
 
 ## References
 

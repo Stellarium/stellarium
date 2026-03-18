@@ -1,0 +1,1458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>timeNavigatorDialog</class>
+ <widget class="QWidget" name="timeNavigatorDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>620</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="mainVBox">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title" stdset="0">
+      <string>Time Navigator</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tabTimeSteps">
+      <attribute name="title">
+       <string>Time Steps</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="vboxTimeSteps">
+       <item>
+        <widget class="QLabel" name="labelTimeStepsHeader">
+         <property name="text">
+          <string>Step the simulation time forward (▶) or backward (◀) by a period:</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupDays">
+         <property name="title">
+          <string>Days</string>
+         </property>
+         <layout class="QGridLayout" name="gridDays">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubSolarDay">
+              <property name="toolTip">
+               <string>Subtract 1 solar day</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Solar day</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddSolarDay">
+              <property name="toolTip">
+               <string>Add 1 solar day</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubSolarWeek">
+              <property name="toolTip">
+               <string>Subtract 7 solar days</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Solar week</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddSolarWeek">
+              <property name="toolTip">
+               <string>Add 7 solar days</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubSiderealDay">
+              <property name="toolTip">
+               <string>Subtract 1 sidereal day</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Sidereal day</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddSiderealDay">
+              <property name="toolTip">
+               <string>Add 1 sidereal day</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="1">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubSiderealWeek">
+              <property name="toolTip">
+               <string>Subtract 7 sidereal days</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Sidereal week</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddSiderealWeek">
+              <property name="toolTip">
+               <string>Add 7 sidereal days</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupMonths">
+         <property name="title">
+          <string>Months</string>
+         </property>
+         <layout class="QGridLayout" name="gridMonths">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubSynodicMonth">
+              <property name="toolTip">
+               <string>Subtract 1 synodic month (~29.53 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Synodic month</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddSynodicMonth">
+              <property name="toolTip">
+               <string>Add 1 synodic month (~29.53 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubMeanTropicalMonth">
+              <property name="toolTip">
+               <string>Subtract 1 mean tropical month (~27.32 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Mean tropical month</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddMeanTropicalMonth">
+              <property name="toolTip">
+               <string>Add 1 mean tropical month (~27.32 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubDraconicMonth">
+              <property name="toolTip">
+               <string>Subtract 1 draconic month (~27.21 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Draconic month</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddDraconicMonth">
+              <property name="toolTip">
+               <string>Add 1 draconic month (~27.21 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="1">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubAnomalisticMonth">
+              <property name="toolTip">
+               <string>Subtract 1 anomalistic month (~27.55 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Anomalistic month</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddAnomalisticMonth">
+              <property name="toolTip">
+               <string>Add 1 anomalistic month (~27.55 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubCalendarMonth">
+              <property name="toolTip">
+               <string>Subtract 1 calendar month</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Calendar month</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddCalendarMonth">
+              <property name="toolTip">
+               <string>Add 1 calendar month</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupYears">
+         <property name="title">
+          <string>Years</string>
+         </property>
+         <layout class="QGridLayout" name="gridYears">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubMeanTropicalYear">
+              <property name="toolTip">
+               <string>Subtract 1 mean tropical year (~365.24 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Mean tropical year</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddMeanTropicalYear">
+              <property name="toolTip">
+               <string>Add 1 mean tropical year (~365.24 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubTropicalYear">
+              <property name="toolTip">
+               <string>Subtract 1 tropical year (varies with epoch)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Tropical year</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddTropicalYear">
+              <property name="toolTip">
+               <string>Add 1 tropical year (varies with epoch)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubSiderealYear">
+              <property name="toolTip">
+               <string>Subtract 1 sidereal year</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Sidereal year</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddSiderealYear">
+              <property name="toolTip">
+               <string>Add 1 sidereal year</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="1">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubDraconicYear">
+              <property name="toolTip">
+               <string>Subtract 1 draconic year (~346.62 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Draconic year</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddDraconicYear">
+              <property name="toolTip">
+               <string>Add 1 draconic year (~346.62 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubAnomalisticYear">
+              <property name="toolTip">
+               <string>Subtract 1 anomalistic year (~365.26 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Anomalistic year</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddAnomalisticYear">
+              <property name="toolTip">
+               <string>Add 1 anomalistic year (~365.26 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="1">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubJulianYear">
+              <property name="toolTip">
+               <string>Subtract 1 Julian year (365.25 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Julian year</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddJulianYear">
+              <property name="toolTip">
+               <string>Add 1 Julian year (365.25 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubGaussianYear">
+              <property name="toolTip">
+               <string>Subtract 1 Gaussian year (~365.26 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Gaussian year</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddGaussianYear">
+              <property name="toolTip">
+               <string>Add 1 Gaussian year (~365.26 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="1">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubCalendarYear">
+              <property name="toolTip">
+               <string>Subtract 1 calendar year</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Calendar year</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddCalendarYear">
+              <property name="toolTip">
+               <string>Add 1 calendar year</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupLongCycles">
+         <property name="title">
+          <string>Long cycles</string>
+         </property>
+         <layout class="QGridLayout" name="gridLongCycles">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubMetonicCycle">
+              <property name="toolTip">
+               <string>Subtract 1 Metonic cycle (235 synodic months ≈ 19 years)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Metonic cycle</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddMetonicCycle">
+              <property name="toolTip">
+               <string>Add 1 Metonic cycle (235 synodic months ≈ 19 years)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QToolButton" name="btnSubSaros">
+              <property name="toolTip">
+               <string>Subtract 1 saros (223 synodic months ≈ 18 years 11 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">◀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Saros</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnAddSaros">
+              <property name="toolTip">
+               <string>Add 1 saros (223 synodic months ≈ 18 years 11 days)</string>
+              </property>
+              <property name="text">
+               <string notr="true">▶</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacerTimeSteps">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabSpecificTime">
+      <attribute name="title">
+       <string>Specific Time</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="vboxSpecificTime">
+       <item>
+        <widget class="QGroupBox" name="groupRTS">
+         <property name="title">
+          <string>Selected object</string>
+         </property>
+         <layout class="QGridLayout" name="gridRTS">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="labelSelectedObject">
+            <property name="text">
+             <string>No object selected</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelRTSPrev">
+            <property name="text">
+             <string>Previous</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="labelRTSToday">
+            <property name="text">
+             <string>Today</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="labelRTSNext">
+            <property name="text">
+             <string>Next</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="btnPreviousRising">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Previous rising of the selected object</string>
+            </property>
+            <property name="text">
+             <string>Rising</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="btnTodayRising">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Today's rising of the selected object</string>
+            </property>
+            <property name="text">
+             <string>Rising</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="btnNextRising">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Next rising of the selected object</string>
+            </property>
+            <property name="text">
+             <string>Rising</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="btnPreviousTransit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Previous transit of the selected object</string>
+            </property>
+            <property name="text">
+             <string>Transit</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="btnTodayTransit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Today's transit of the selected object</string>
+            </property>
+            <property name="text">
+             <string>Transit</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="btnNextTransit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Next transit of the selected object</string>
+            </property>
+            <property name="text">
+             <string>Transit</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QPushButton" name="btnPreviousSetting">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Previous setting of the selected object</string>
+            </property>
+            <property name="text">
+             <string>Setting</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QPushButton" name="btnTodaySetting">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Today's setting of the selected object</string>
+            </property>
+            <property name="text">
+             <string>Setting</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QPushButton" name="btnNextSetting">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Next setting of the selected object</string>
+            </property>
+            <property name="text">
+             <string>Setting</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupTwilight">
+         <property name="title">
+          <string>Twilight</string>
+         </property>
+         <layout class="QGridLayout" name="gridTwilight">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0" colspan="3">
+           <layout class="QHBoxLayout" name="hboxTwilightAlt">
+            <item>
+             <widget class="QLabel" name="labelTwilightAlt">
+              <property name="text">
+               <string>Solar altitude:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="spinBoxTwilightAltitude">
+              <property name="toolTip">
+               <string>Solar altitude used for twilight calculations (synced with View → Sky)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="suffix">
+               <string notr="true">°</string>
+              </property>
+              <property name="decimals">
+               <number>2</number>
+              </property>
+              <property name="minimum">
+               <double>-20.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>0.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelTwilightPrev">
+            <property name="text">
+             <string>Previous</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="labelTwilightToday">
+            <property name="text">
+             <string>Today</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="labelTwilightNext">
+            <property name="text">
+             <string>Next</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="btnPreviousMorningTwilight">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Previous morning twilight</string>
+            </property>
+            <property name="text">
+             <string>Morning</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="btnTodayMorningTwilight">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Today's morning twilight</string>
+            </property>
+            <property name="text">
+             <string>Morning</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="btnNextMorningTwilight">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Next morning twilight</string>
+            </property>
+            <property name="text">
+             <string>Morning</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="btnPreviousEveningTwilight">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Previous evening twilight</string>
+            </property>
+            <property name="text">
+             <string>Evening</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="btnTodayEveningTwilight">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Today's evening twilight</string>
+            </property>
+            <property name="text">
+             <string>Evening</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="btnNextEveningTwilight">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Next evening twilight</string>
+            </property>
+            <property name="text">
+             <string>Evening</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupAtAltitude">
+         <property name="title">
+          <string>Selected object at current altitude</string>
+         </property>
+         <layout class="QGridLayout" name="gridAtAltitude">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelAltPrev">
+            <property name="text">
+             <string>Previous</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelAltToday">
+            <property name="text">
+             <string>Today</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="labelAltNext">
+            <property name="text">
+             <string>Next</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="btnPreviousMorningAtAltitude">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Selected object at its current altitude, previous morning</string>
+            </property>
+            <property name="text">
+             <string>Morning</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="btnTodayMorningAtAltitude">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Selected object at its current altitude this morning</string>
+            </property>
+            <property name="text">
+             <string>Morning</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="btnNextMorningAtAltitude">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Selected object at its current altitude, next morning</string>
+            </property>
+            <property name="text">
+             <string>Morning</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="btnPreviousEveningAtAltitude">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Selected object at its current altitude, previous evening</string>
+            </property>
+            <property name="text">
+             <string>Evening</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="btnTodayEveningAtAltitude">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Selected object at its current altitude this evening</string>
+            </property>
+            <property name="text">
+             <string>Evening</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="btnNextEveningAtAltitude">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Selected object at its current altitude, next evening</string>
+            </property>
+            <property name="text">
+             <string>Evening</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacerSpecificTime">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabSettings">
+      <attribute name="title">
+       <string>Settings</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="vboxSettings">
+       <item>
+        <widget class="QCheckBox" name="checkBoxShowButton">
+         <property name="text">
+          <string>Show plug-in button on toolbar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacerSettings">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="hboxSettingsButtons">
+         <item>
+          <widget class="QPushButton" name="btnRestoreDefaults">
+           <property name="text">
+            <string>Restore defaults</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnSaveSettings">
+           <property name="text">
+            <string>Save settings</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabAbout">
+      <attribute name="title">
+       <string comment="tab in plugin windows">About</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="vboxAbout">
+       <item>
+        <widget class="QTextBrowser" name="aboutTextBrowser">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TitleBar</class>
+   <extends>QFrame</extends>
+   <header>Dialog.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

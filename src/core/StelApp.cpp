@@ -230,6 +230,10 @@ Q_IMPORT_PLUGIN(NebulaTexturesStelPluginInterface)
 Q_IMPORT_PLUGIN(MosaicCameraStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_TIMENAVIGATOR
+Q_IMPORT_PLUGIN(TimeNavigatorStelPluginInterface)
+#endif
+
 // Initialize static variables
 StelApp* StelApp::singleton = nullptr;
 qint64 StelApp::startMSecs = 0;

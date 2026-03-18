@@ -1677,6 +1677,92 @@
                  </property>
                 </widget>
                </item>
+               <item row="2" column="2" colspan="2">
+                <widget class="QCheckBox" name="moonScaleDynamicCheckBox">
+                 <property name="toolTip">
+                  <string>When enabled, the Moon scales smoothly between 1× (natural size) at the minimum FOV and the configured scale factor at the maximum FOV. Outside those bounds the scale is held constant.</string>
+                 </property>
+                 <property name="text">
+                  <string>Dynamic (FOV-based) Moon size</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2">
+                <widget class="QLabel" name="moonScaleMinFovLabel">
+                 <property name="toolTip">
+                  <string>FOV at and below which the Moon is drawn at 1× (natural) size.</string>
+                 </property>
+                 <property name="text">
+                  <string>1× below</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3">
+                <widget class="QDoubleSpinBox" name="moonScaleMinFovSpinBox">
+                 <property name="toolTip">
+                  <string>FOV at and below which the Moon is drawn at 1× (natural) size.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>0.500000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>89.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="4">
+                <widget class="QLabel" name="moonScaleMaxFovLabel">
+                 <property name="toolTip">
+                  <string>FOV at and above which the Moon is drawn at the configured scale factor.</string>
+                 </property>
+                 <property name="text">
+                  <string>Nx above</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="5">
+                <widget class="QDoubleSpinBox" name="moonScaleMaxFovSpinBox">
+                 <property name="toolTip">
+                  <string>FOV at and above which the Moon is drawn at the configured scale factor.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>180.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>90.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="1">
                 <spacer name="horizontalSpacer_17">
                  <property name="orientation">

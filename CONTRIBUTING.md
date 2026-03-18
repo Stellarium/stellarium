@@ -10,6 +10,10 @@ strange colors, Moon not rendered, or similar, *please make absolutely sure*
 you are running the latest graphics drivers for your graphics card. 
 95% of graphics problems are solved this way.
 
+We develop and test on "average" contemporary Windows and popular Linux PCs and MacOS systems. 
+We cannot test every exotic distribution or platform, though. If you have solved some issue in your Favorinux, 
+you are invited to send a pull request with a fix that doesn't break the rest. 
+
 Before reporting an issue, please *absolutely make sure* to check the recent 
 open and also [closed issues](https://github.com/Stellarium/stellarium/issues?q=is%3Aissue+is%3Aclosed) 
 whether it has been reported and solved/closed already! Don't report a new 
@@ -36,6 +40,10 @@ When opening an issue to report a problem, please try and provide a minimal step
 reproduces the issue, and also include details of the operating
 system, Stellarium versions and Graphics Card info you are using.
 
+We are very much open to applications and extensions into cultural astronomy as long as the astronomy is concerned. 
+However, we have no knowledge, motivation, or will, to extend Stellarium with purely astrological, religious or political material. 
+Any such requests will be rejected, and insistence will quickly lead to you being excluded. Don't waste our time!
+
 ## Pull Requests (Contributing code)
 So you're interested in contributing code to Stellarium? Excellent!
 
@@ -44,8 +52,8 @@ forks of the [Stellarium repository](https://github.com/Stellarium/stellarium).
 If you're new to this style of development, you'll want to read over our
 [development workflow](https://github.com/Stellarium/stellarium/wiki/Git-Contributor-Workflow).
 
-You may also/instead be interested in contributing to an stellarium affiliated stuff, like 
-landscapes, sky cultures, DSO or planetary textures and scripts.
+You may also/instead be interested in contributing to stellarium affiliated data, like 
+landscapes, 3D sceneries, sky cultures, DSO or planetary textures and scripts.
 
 Once you open a pull request (which should be opened against the ``master``
 branch, not against any of the other branches), please make sure that you
@@ -54,15 +62,15 @@ include the following:
 - **Code**: the code you are adding, which should follow as much as possible
   our [coding guidelines](http://stellarium.org/doc/head/codingStyle.html).
 
-- **Tests**: these are usually tests to ensure that code that previously
-  failed now works (regression tests) or tests that cover as much as possible
+- **Tests**: these are usually tests to ensure that code that previously already
+  worked now does not fail (regression tests) or tests that cover as much as possible
   of the new functionality to make sure it doesn't break in future, and also
   returns consistent results on all platforms (since we run these tests on many
   platforms/configurations). 
 
 - **Documentation**: if you are adding new functionality, be sure to include a 
 description in the main documentation (in ``docs/``) or doxygen description/comments 
-for code in the ``*.hpp`` files (commenting the code may be extremely helpful!).
+for code in the ``*.hpp`` files (commenting the code is extremely helpful for maintaining it years later!).
 
 Thanks!
 
