@@ -158,30 +158,30 @@ void TimeNavigatorDialog::createDialogContent()
 
 	// Selected object: Rising / Transit / Setting
 	connect(ui->btnPreviousRising,  &QPushButton::clicked, this, [=](){specMgr->previousRising();});
-	connect(ui->btnTodayRising,     &QPushButton::clicked, this, [=](){specMgr->todayRising();});
+	connect(ui->btnThisDateRising,     &QPushButton::clicked, this, [=](){specMgr->todayRising();});
 	connect(ui->btnNextRising,      &QPushButton::clicked, this, [=](){specMgr->nextRising();});
 	connect(ui->btnPreviousTransit, &QPushButton::clicked, this, [=](){specMgr->previousTransit();});
-	connect(ui->btnTodayTransit,    &QPushButton::clicked, this, [=](){specMgr->todayTransit();});
+	connect(ui->btnThisDateTransit,    &QPushButton::clicked, this, [=](){specMgr->todayTransit();});
 	connect(ui->btnNextTransit,     &QPushButton::clicked, this, [=](){specMgr->nextTransit();});
 	connect(ui->btnPreviousSetting, &QPushButton::clicked, this, [=](){specMgr->previousSetting();});
-	connect(ui->btnTodaySetting,    &QPushButton::clicked, this, [=](){specMgr->todaySetting();});
+	connect(ui->btnThisDateSetting,    &QPushButton::clicked, this, [=](){specMgr->todaySetting();});
 	connect(ui->btnNextSetting,     &QPushButton::clicked, this, [=](){specMgr->nextSetting();});
 
 	// Twilight - wire the altitude spinbox directly to SpecificTimeMgr property
 	connectTwilightAltitudeSpinBox();
 	connect(ui->btnPreviousMorningTwilight, &QPushButton::clicked, this, [=](){specMgr->previousMorningTwilight();});
-	connect(ui->btnTodayMorningTwilight,    &QPushButton::clicked, this, [=](){specMgr->todayMorningTwilight();});
+	connect(ui->btnThisDateMorningTwilight,    &QPushButton::clicked, this, [=](){specMgr->todayMorningTwilight();});
 	connect(ui->btnNextMorningTwilight,     &QPushButton::clicked, this, [=](){specMgr->nextMorningTwilight();});
 	connect(ui->btnPreviousEveningTwilight, &QPushButton::clicked, this, [=](){specMgr->previousEveningTwilight();});
-	connect(ui->btnTodayEveningTwilight,    &QPushButton::clicked, this, [=](){specMgr->todayEveningTwilight();});
+	connect(ui->btnThisDateEveningTwilight,    &QPushButton::clicked, this, [=](){specMgr->todayEveningTwilight();});
 	connect(ui->btnNextEveningTwilight,     &QPushButton::clicked, this, [=](){specMgr->nextEveningTwilight();});
 
 	// At altitude
 	connect(ui->btnPreviousMorningAtAltitude, &QPushButton::clicked, this, [=](){specMgr->previousMorningAtAltitude();});
-	connect(ui->btnTodayMorningAtAltitude,    &QPushButton::clicked, this, [=](){specMgr->todayMorningAtAltitude();});
+	connect(ui->btnThisDateMorningAtAltitude,    &QPushButton::clicked, this, [=](){specMgr->todayMorningAtAltitude();});
 	connect(ui->btnNextMorningAtAltitude,     &QPushButton::clicked, this, [=](){specMgr->nextMorningAtAltitude();});
 	connect(ui->btnPreviousEveningAtAltitude, &QPushButton::clicked, this, [=](){specMgr->previousEveningAtAltitude();});
-	connect(ui->btnTodayEveningAtAltitude,    &QPushButton::clicked, this, [=](){specMgr->todayEveningAtAltitude();});
+	connect(ui->btnThisDateEveningAtAltitude,    &QPushButton::clicked, this, [=](){specMgr->todayEveningAtAltitude();});
 	connect(ui->btnNextEveningAtAltitude,     &QPushButton::clicked, this, [=](){specMgr->nextEveningAtAltitude();});
 
 	// Enable/disable object-dependent groups when selection changes
