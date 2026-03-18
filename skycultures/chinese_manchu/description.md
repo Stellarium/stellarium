@@ -54,6 +54,8 @@ The stellar nomenclature in this Manchu sky culture comprises two distinct layer
 
 Stellarium includes over 20 of these shamanistic constellations. It also uses asterism lines to represent the *xingguans*(Chinese costellations) from official Qing dynasty star catalogs (such as the *Yixiang Kaocheng*).
 
+It should be noted that some of the connecting lines in the traditional Manchu asterisms—especially those representing imaginative or symbolic parts of the figures—are artistic interpretations from historical hand-drawn charts and do not correspond precisely to actual stars. In order to preserve the overall shape of these constellations as traditionally depicted, lines occasionally link to stars fainter than 6th magnitude. This does not imply that the original culture recognized or included such faint stars; it is merely a graphical means to render the envisioned form.
+
 ### Notes on Script Representation
 
 All traditional Manchu constellation names in this sky culture originate from the Manchu language. Since the original ethnographic research materials recorded these constellation names and descriptions exclusively in Chinese, the authoritative original Manchu spelling is not directly attested and has been reconstructed. For reference, the corresponding Chinese *Pinyin* (Chinese phonetic transcription) of the recorded Chinese names is appended to the `byname` field.
