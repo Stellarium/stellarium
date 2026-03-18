@@ -6,7 +6,7 @@ Fishing and hunting peoples represented by the Manchus have held traditions of s
 
 ## Description
 
-### Cosmology and Cosmic Structure
+### Sky
 
 In the ancient beliefs of Manchu Shamanism, the cosmos did not initially have a fixed form. Mythology describes: "In the earliest, earliest times, Heaven had no shape; it flowed like water and drifted like clouds." This reflects a naive imagination of the chaotic state before the separation of heaven and earth.
 
@@ -16,7 +16,7 @@ Additionally, there exists the concept of the universe as a "Cosmic Tree," "Heav
 
 ### Astronomical Observation and Calendar Applications
 
-The core of Manchu ancestral astronomical knowledge lies in the practical observation of celestial phenomena. Living in high-latitude, frigid regions with long winters and clear night skies, their stellar system particularly emphasizes winter constellations. They determined seasons, direction, time, and weather changes by observing the rise/set times, positions, and trajectories of specific asterisms, directly guiding production and daily life. For example, observing the direction of the "dipper's handle" of the *Nadan usiha*​ (Big Dipper) — "when the dipper handle points north, winter reigns over the land"; judging the deep night hour by the position of the *Ilan usiha*​ (Orion's Belt); predicting wind and snow by observing changes in the form of *Gas'ha*​ (Eagle asterism). Such experiences crystallized into rich astronomical proverbs, such as "When the eagle (star) falls in the western sky, the sun peeks over the mountains" (foretelling dawn) and "When stars braid their hair, heavy snow will fall in succession."
+The core of Manchu ancestral astronomical knowledge lies in the practical observation of celestial phenomena. Living in high-latitude, frigid regions with long winters and clear night skies, their stellar system particularly emphasizes winter constellations. They determined seasons, direction, time, and weather changes by observing the rise/set times, positions, and trajectories of specific constellations, directly guiding production and daily life. For example, observing the direction of the "dipper's handle" of the *Nadan usiha*​ (Big Dipper) — "when the dipper handle points north, winter reigns over the land"; judging the deep night hour by the position of the *Ilan usiha*​ (Orion's Belt); predicting wind and snow by observing changes in the form of *Gas'ha*​ (Eagle constellation). Such experiences crystallized into rich astronomical proverbs, such as "When the eagle (star) falls in the western sky, the sun peeks over the mountains" (foretelling dawn) and "When stars braid their hair, heavy snow will fall in succession."
 
 Star worship ceremonies themselves were closely tied to seasonal nodes. For instance, ceremonies held with the first snow prayed for bountiful winter hunts, while those in the first lunar month aimed to expel pestilence and pray for peace. This method of "determining time, direction, and the year" based on stellar movements formed an effective primitive calendrical system developed by the Manchu ancestors over long ages.
 
@@ -40,185 +40,168 @@ The movement of stars is also explained mythologically: the demon *Yeruri* once 
 
 Several constellations are assigned mythological roles. The origin of *Nadan Narhū*​ (the Pleiades) is as follows: when the Fire Goddess *Tumu* was about to extinguish, the goddess *Nadan*​ emerged from *Elden*'s bag and transformed into hundreds of small stars amidst the evil winds stirred by *Yeruri*, forming the Pleiades cluster, becoming the leading star deity of the stellar array.
 
-*Singgeri usiha*​ (the Rat Star) is the dawn-greeting Rat Goddess. *Usiha Buruhun*​ (the Dawn Beast asterism) is the three-eared, six-eyed Dawn Beast dispatched by *Abka hehe*. They rise before winter dawn, facing east to welcome and guide the sun's rays, preventing *Yeruri* from causing trouble in the pre-dawn darkness.
+*Singgeri usiha*​ (the Rat Star) is the dawn-greeting Rat Goddess. *Usiha Buruhun*​ (the Dawn Beast constellation) is the three-eared, six-eyed Dawn Beast dispatched by *Abka hehe*. They rise before winter dawn, facing east to welcome and guide the sun's rays, preventing *Yeruri* from causing trouble in the pre-dawn darkness.
 
 *Siri Mama*​ (the Carp Star Goddess) transformed into a carp to search for *Yeruri* when he fled into a river, which is why carps in the world prefer dwelling in deep water. *Taci Mama*​ is the timekeeping star entrusted by *Abka hehe* to measure time for the deities day and night.
 
 Furthermore, the myth explains seasonal changes through celestial phenomena: the giant star where the Snow Deity resided, called the "Snow Star" or "Cold Star" (possibly Antares, α Sco), was split in two by *Abka hehe*. One half remained in the sky, the other fell to earth and transformed into the northern sacred mountain "*Nimanggi Uyan hada*"​ (meaning "Snow Peak", Gorod-Makit Mountain in modern Russia). Consequently, the Snow Deity dwells in two places, and its residence determines the season—when in the sky, spring blooms and flowers flourish; when on earth, heavy snow blankets the land for years. This star (or the mountain derived from it) is also called "*Niyengniyeri*"​ Sacred Mountain (meaning "spring"), becoming a marker for seasonal transition.
 
+### Constellation System
+
+The stellar nomenclature in this Manchu sky culture comprises two distinct layers. The core consists of over 20 traditional shamanistic constellations​ (such as *Nadan Narhū* and *Gasha*), whose names originate from the Manchu language and its associated mythology. These constellations primarily name prominent star groups in the northern night sky using familiar animals, objects, or mythological figures. The remaining constellations are translations of traditional Chinese *xingguans* adopted officially during the Qing dynasty. It is important to distinguish these two sources; the native Manchu names apply specifically to the traditional constellations, not to the sinicized star names introduced later.
+
+**Integration with the Traditional Chinese Constellation System**: After the establishment of the Qing dynasty, with the sinicization of state institutions, official astronomical agencies gradually adopted the traditional Chinese constellation system (Three Enclosures and Twenty-Eight Mansions) for astronomical observation and calendar compilation, translating many constellation names into Manchu. However, among the folk in Northeast China, the aforementioned traditional shamanistic constellation system persisted, intertwined with ancient memories of production and life, myths, legends, and some folk customs, constituting the older, more indigenous layer of Manchu stellar culture. As late as the 20th century, a small number of people in Northeast China still used these shamanistic constellations.
+
+Stellarium includes over 20 of these shamanistic constellations. It also uses asterism lines to represent the *xingguans*(Chinese costellations) from official Qing dynasty star catalogs (such as the *Yixiang Kaocheng*).
+
+### Notes on Script Representation
+
+All traditional Manchu constellation names in this sky culture originate from the Manchu language. Since the original ethnographic research materials recorded these constellation names and descriptions exclusively in Chinese, the authoritative original Manchu spelling is not directly attested and has been reconstructed. For reference, the corresponding Chinese *Pinyin* (Chinese phonetic transcription) of the recorded Chinese names is appended to the `byname` field.
+
+The `native` names provide these names in the Manchu script using Unicode. However, it is important to note that the Unicode standard shares the same code block for the Manchu and Mongolian scripts. Most system fonts default to displaying Mongolian glyphs. Therefore, to correctly view the Manchu script in the native names, users need to install and apply a dedicated Manchu-supporting font. Otherwise, the text may display with **incorrect Mongolian glyphs**.
+
+The `transliteration` names uniformly provide the Möllendorff Latin transliteration of the Manchu names.
+
+To reliably present the authentic visual form of the Manchu script, the reconstructed spellings for the core traditional constellations are also displayed as image files in the Constellations section below.
+
 ## Constellations
 
-Traditional Manchu constellations mostly name prominent star groups in the northern night sky using familiar animals, objects, or mythological figures.
+##### Seven Maidens
 
-<table>
-<thead>
-<tr>
-<th>Chinese and<br>Manchu Name</th>
-<th>Translation</th>
-<th>Illustration</th>
-<th>Corresponding Star Region</th>
-<th>Introduction & Astronomical Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>那丹那拉呼<br>
-<img src="illustrations/manchu_script/01Narhv_manchu.png" width="40"></td>
-<td>Seven Maidens</td>
-<td><img src="illustrations/01Narhv.png" width="200"></td>
-<td>Pleiades</td>
-<td>One of the most prominent open clusters in the winter night sky. In Manchu mythology, it is the leading star deity or assistant to the Star-Spreading Goddess. Rising in the east at dusk, it is regarded as the commander leading the westward procession of winter star groups. It is a crucial astronomical marker for determining the onset of winter and for nighttime timekeeping.</td>
-</tr>
-<tr>
-<td>嘎思哈<br>
-<img src="illustrations/manchu_script/08Gasha_manchu.png" width="40"></td>
-<td>Divine Eagle</td>
-<td><img src="illustrations/08Gasha.png" width="200"></td>
-<td>Orion<br>Taurus<br>Auriga, etc.</td>
-<td>A vast asterism composed of numerous stars, envisioned as a soaring eagle. Dominating the mid-winter sky, it is majestic and imposing, serving as one of the primary stellar deities worshipped by shamans, visible only in autumn and winter skies. Its form and position were used for observing seasons and predicting weather. Its right leg is led by Nadan Narhū (Pleiades), while its left leg is bound by a rope (Eridanus constellation).</td>
-</tr>
-<tr>
-<td>恩都力僧固<br>
-<img src="illustrations/manchu_script/02Sengge_manchu.png" width="40"></td>
-<td>God of Hedgehogs</td>
-<td><img src="illustrations/02Sengge.png" width="200"></td>
-<td>Cygnus</td>
-<td>A prominent bright star group located within the Milky Way. Called the "Rafter Star" or "Hedgehog Star," it was venerated as a deity guarding the night and home, and served as an important directional star.</td>
-</tr>
-<tr>
-<td>塔其妈妈<br>
-<img src="illustrations/manchu_script/03Taci_manchu.png" width="40"></td>
-<td>Taci (Goddess)</td>
-<td><img src="illustrations/03Taci.png" width="200"></td>
-<td>Cassiopeia</td>
-<td>Its shape (W-shaped) resembles a knot or a winnowing basket, imagined as a snake or a dipper. It is an important timekeeping star; changes in its position and angle in the night sky were used to estimate the hour of the night. Perennially visible at high northern latitudes, it served as a crucial navigational and chronological reference.</td>
-</tr>
-<tr>
-<td>托包乌西哈<br>
-<img src="illustrations/manchu_script/04Tobo_manchu.png" width="40"></td>
-<td>Hut</td>
-<td><img src="illustrations/04Tobo.png" width="200"></td>
-<td>Perseus</td>
-<td>Imagined as a resting place (hut) for the shaman's soul during its ascent to heaven.</td>
-</tr>
-<tr>
-<td>恩都力特克<br>
-<img src="illustrations/manchu_script/05Tehe_manchu.png" width="40"></td>
-<td>God of the Stand</td>
-<td><img src="illustrations/05Tehe.png" width="200"></td>
-<td>Pegasus</td>
-<td>Located in the southern sky, moving westward, this asterism was used by shamans to observe signs of wind and snow. The Great Square of Pegasus is very prominent in the autumn night sky.</td>
-</tr>
-<tr>
-<td>依兰乌西哈<br>
-<img src="illustrations/manchu_script/06Ilan_manchu.png" width="40"></td>
-<td>Three Stars</td>
-<td><img src="illustrations/06Ilan.png" width="200"></td>
-<td>Orion's Belt</td>
-<td>Three bright stars aligned in a row, one of the most distinctive markers of the winter night sky. As brilliant seasonal and timekeeping stars, their rising in the east at dusk signals the heart of winter; their movement can be used to estimate the time in the latter half of the night.</td>
-</tr>
-<tr>
-<td>那丹乌西哈<br>
-<img src="illustrations/manchu_script/07Nadan_manchu.png" width="40"></td>
-<td>Seven Stars</td>
-<td><img src="illustrations/07Nadan.png" width="200"></td>
-<td>Ursa Major</td>
-<td>The Big Dipper asterism, the most important star group for nighttime timekeeping and identifying the northern direction. The pointing of its "dipper handle" indicates the seasons and holds protective symbolism.</td>
-</tr>
-<tr>
-<td>兴恶里乌西哈<br>
-<img src="illustrations/manchu_script/09Singgeri_manchu.png" width="40"></td>
-<td>Rat</td>
-<td><img src="illustrations/09Singgeri.png" width="200"></td>
-<td>Leo</td>
-<td>The Dawn-Greeting Rat Deity, which rises in the east before winter dawn together with the Dawn Beast Buruhun to welcome the sunrise. Used for divining snow volume and wind strength.</td>
-</tr>
-<tr>
-<td>莫林乌西哈<br>
-<img src="illustrations/manchu_script/10Morin_manchu.png" width="40"></td>
-<td>Horse</td>
-<td></td>
-<td></td>
-<td>A seasonal timekeeping star that rises in the east and sets in the west. It is not a single star, but a collective name for four bright stars: the bright star α Aur visible in the eastern sky at dusk after winter begins, α CMa rising in the east during the Xu hour (7-9 PM), and α Boo and α Vir rising at dawn.</td>
-</tr>
-<tr>
-<td>瓦丹星<br>
-<img src="illustrations/manchu_script/11Wadan_manchu.png" width="40"></td>
-<td>Wadan (The Celestial Altar)</td>
-<td><img src="illustrations/11Wadan.png" width="200"></td>
-<td>Corvus</td>
-<td>The celestial location where ritual implements are stored, which must be worshipped when someone learns shamanism or when a shaman passes away.</td>
-</tr>
-<tr>
-<td>尼玛沁星<br>
-<img src="illustrations/manchu_script/12Imcin_manchu.png" width="40"></td>
-<td>Drum</td>
-<td><img src="illustrations/12Imcin-Gisun.png" width="200"></td>
-<td>Aries<br>Triangulum<br>Andromeda</td>
-<td>Along with the "Drumstick Star," considered the shaman's ritual instrument stars. It is the divine drum used by the Star-Spreading Goddess.</td>
-</tr>
-<tr>
-<td>西离妈妈<br>
-<img src="illustrations/manchu_script/14Siri_manchu.png" width="40"></td>
-<td>Goddess of Carp</td>
-<td><img src="illustrations/14Siri.png" width="200"></td>
-<td>Lynx<br>Camelopardalis</td>
-<td>Imagined as a fish star transformed from a person, governing the fish of glacial rivers. Observing this star was used for divining the abundance or scarcity of the winter fishing and hunting season.</td>
-</tr>
-<tr>
-<td>妥亲乌西哈妈妈<br>
-<img src="illustrations/manchu_script/15Terkin_manchu.png" width="40"></td>
-<td>Goddess of the Staircase Stars</td>
-<td><img src="illustrations/15Terkin.png" width="200"></td>
-<td>Virgo<br>Coma Berenices</td>
-<td>Believed to be the "stairway to heaven" that the shaman's soul could use during its ascent, represented by a goddess figure in a seated posture offering assistance.</td>
-</tr>
-<tr>
-<td>乌西哈布鲁古<br>
-<img src="illustrations/manchu_script/16Buruhun_manchu.png" width="40"></td>
-<td>Star of Buruhun (The Dawn Beast)</td>
-<td><img src="illustrations/16Buruhun.png" width="200"></td>
-<td>Boötes<br>Canes Venatici<br>Coma Berenices</td>
-<td>An asterism depicting the Dawn Beast, rising in the east and setting in the west. It serves as the herald guiding the sunrise before winter dawn.</td>
-</tr>
-<tr>
-<td>佛朵乌西哈<br>
-<img src="illustrations/manchu_script/17Fodoho_manchu.png" width="40"></td>
-<td>Willow</td>
-<td><img src="illustrations/17Fodoho.png" width="200"></td>
-<td>Head of Hydra</td>
-<td>Located low in the southern sky, it was considered a divine star governing human fertility and was also used for divining the year's harvest and epidemics.</td>
-</tr>
-<tr>
-<td>阿苏乌西哈<br>
-<img src="illustrations/manchu_script/18Asu_manchu.png" width="40"></td>
-<td>Net</td>
-<td><img src="illustrations/18Asu.png" width="200"></td>
-<td>Hercules</td>
-<td>Imagined as the hunting net used by the Hunting God (Banda mafa), reflecting the characteristics of a fishing and hunting lifestyle. The ring-like structure of Corona Borealis is easily associated with a hunting net.</td>
-</tr>
-<tr>
-<td>尼玛哈乌西哈<br>
-<img src="illustrations/manchu_script/19Nimaha_manchu.png" width="40"></td>
-<td>Fishhook</td>
-<td><img src="illustrations/19Nimaha.png" width="200"></td>
-<td>Scorpius</td>
-<td>A summer stellar deity, commonly called the "Warm Star." Its appearance was used to determine the farming season and divine agricultural abundance or failure.</td>
-</tr>
-<tr>
-<td>苏勒肯乌西哈<br>
-<img src="illustrations/manchu_script/20Sureken_manchu.png" width="40"></td>
-<td>Star of Wisdom</td>
-<td><img src="illustrations/20Sureken.png" width="200"></td>
-<td></td>
-<td>Star Deity of Wisdom. Composed of four bright stars in the southern sky, shaped like a dipper. The Star Deity of Wisdom primarily blesses girls to be intelligent and beautiful, and is a great female deity.</td>
-</tr>
-</tbody>
-</table>
+<br>
+<img src="illustrations/manchu_script/01Narhv_manchu.png" width="40">
 
-**Integration with the Traditional Chinese Asterism System**: After the establishment of the Qing dynasty, with the sinicization of state institutions, official astronomical agencies gradually adopted the traditional Chinese *xingguan* system (Three Enclosures and Twenty-Eight Mansions) for astronomical observation and calendar compilation, translating many asterism names into Manchu. However, among the folk in Northeast China, the aforementioned traditional shamanistic constellation system persisted, intertwined with ancient memories of production and life, myths, legends, and some folk customs, constituting the older, more indigenous layer of Manchu stellar culture. As late as the 20th century, a small number of people in Northeast China still used these shamanistic constellations.
+*Nadan Narhū*​ (Chinese: 那丹那拉呼, English: Seven Maidens) corresponds to the Pleiades​ star cluster in the constellation Taurus. One of the most prominent open clusters in the winter night sky. In Manchu mythology, it is the leading star deity or assistant to the Star-Spreading Goddess. Rising in the east at dusk, it is regarded as the commander leading the westward procession of winter star groups. It is a crucial astronomical marker for determining the onset of winter and for nighttime timekeeping.
 
-Stellarium provides over 20 of these shamanistic constellations and also uses asterisms lines to represent *xingguans* from the official Qing dynasty star catalog (*Yixiang Kaocheng*).
+##### Divine Eagle
+
+<br>
+<img src="illustrations/manchu_script/08Gasha_manchu.png" width="40">
+
+*Gasha*​ (Chinese: 嘎思哈, English: Divine Eagle) is a vast constellation spanning the modern constellations of Orion, Taurus, Auriga, etc.​ Envisioned as a soaring eagle, it dominates the mid-winter sky and is one of the primary stellar deities worshipped by shamans, visible only in autumn and winter. Its form and position were used for observing seasons and predicting weather. Its right leg is mythologically led by the Pleiades (Nadan Narhū), while its left leg is bound by a celestial rope (associated with the Eridanus constellation).
+
+##### God of Hedgehogs
+
+<br>
+<img src="illustrations/manchu_script/02Sengge_manchu.png" width="40">
+
+*Enduri Sengge*​ (Chinese: 恩都力僧固, English: God of Hedgehogs) corresponds to the Cygnus​ constellation. A prominent bright star group located within the Milky Way, it is also called the “Rafter Star” or “Hedgehog Star.” It was venerated as a deity guarding the night and the home, and served as an important directional star in the northern sky.
+
+##### Taci (Goddess)
+
+<br>
+<img src="illustrations/manchu_script/03Taci_manchu.png" width="40">
+
+*Taci Mama*​ (Chinese: 塔其妈妈, English: Taci Goddess) corresponds to the Cassiopeia​ constellation. Its distinctive W-shaped constellation resembles a knot or a winnowing basket, imagined as a snake or a dipper. It functioned as an important timekeeping star; changes in its position and angle in the night sky were used to estimate the hour. Perennially visible at high northern latitudes, it served as a crucial navigational and chronological reference.
+
+##### Hut
+
+<br>
+<img src="illustrations/manchu_script/04Tobo_manchu.png" width="40">
+
+*Tobo usiha*​ (Chinese: 托包乌西哈, English: Hut) is associated with the Perseus​ constellation. It was imagined as a resting place (a hut) for the shaman’s soul during its ascent to heaven.
+
+##### God of the Stand
+
+<br>
+<img src="illustrations/manchu_script/05Tehe_manchu.png" width="40">
+
+*Enduri Tehe*​ (Chinese: 恩都力特克, English: God of the Stand) corresponds to the Pegasus​ constellation, notably its “Great Square.” Located in the southern sky and moving westward, this constellation was used by shamans to observe signs of wind and snow. The Great Square of Pegasus is a very prominent feature of the autumn night sky.
+
+##### Three Stars
+
+<br>
+<img src="illustrations/manchu_script/06Ilan_manchu.png" width="40">
+
+*Ilan usiha*​ (Chinese: 依兰乌西哈, English: Three Stars) corresponds to Orion’s Belt. These three bright stars aligned in a row are one of the most distinctive markers of the winter night sky. As brilliant seasonal and timekeeping stars, their rising in the east at dusk signals the heart of winter; their movement can be used to estimate the time in the latter half of the night.
+
+##### Seven Stars
+
+<br>
+<img src="illustrations/manchu_script/07Nadan_manchu.png" width="40">
+
+*Nadan usiha*​ (Chinese: 那丹乌西哈, English: Seven Stars) corresponds to the Big Dipper​ constellation in Ursa Major. It is the most important star group for nighttime timekeeping and identifying the northern direction. The pointing of its “dipper handle” indicates the seasons, and it holds significant protective symbolism in Manchu culture.
+
+##### Rat
+
+<br>
+<img src="illustrations/manchu_script/09Singgeri_manchu.png" width="40">
+
+*Singgeri usiha*​ (Chinese: 兴恶里乌西哈, English: Rat) is associated with the Leo​ constellation. Known as the Dawn-Greeting Rat Deity, it rises in the east before winter dawn together with the Dawn Beast (Buruhun) to welcome the sunrise. It was also used for divining snow volume and wind strength.
+
+##### Horse
+
+<br>
+<img src="illustrations/manchu_script/10Morin_manchu.png" width="40">
+
+*Morin usiha*​ (Chinese: 莫林乌西哈, English: Horse) is a seasonal timekeeping concept, not a single fixed constellation. It is a collective name for four bright stars that rise in the east and set in the west: Capella (α Aur) visible at dusk after winter begins, Sirius (α CMa) rising in the evening (Xu hour), and Arcturus (α Boo) and Spica (α Vir) rising at dawn.
+
+##### Wadan (The Celestial Altar)
+
+<br>
+<img src="illustrations/manchu_script/11Wadan_manchu.png" width="40">
+
+*Wadan*​ (Chinese: 瓦丹星, English: The Celestial Altar) is associated with the Corvus​ constellation. It represents the celestial location where ritual implements are stored. This star must be worshipped when someone begins learning shamanism or when a shaman passes away.
+
+##### Drum
+
+<br>
+<img src="illustrations/manchu_script/12Imcin_manchu.png" width="40">
+
+*Imcin*​ (Chinese: 尼玛沁星, English: Drum), along with the Drumstick Star (Gisun), is considered part of the shaman’s ritual instrument constellations, spanning the area of Aries, Triangulum, and Andromeda. It represents the divine drum used by the Star-Spreading Goddess.
+
+##### Goddess of Carp
+
+<br>
+<img src="illustrations/manchu_script/14Siri_manchu.png" width="40">
+
+*Siri Mama*​ (Chinese: 西离妈妈, English: Goddess of Carp) is an constellation in the regions of Lynx and Camelopardalis. Imagined as a fish star transformed from a person, she governs the fish of glacial rivers. Observing this star was used for divining the abundance or scarcity of the winter fishing and hunting season.
+
+##### Goddess of the Staircase Stars
+
+<br>
+<img src="illustrations/manchu_script/15Terkin_manchu.png" width="40">
+
+*Terkin Usiha Mama*​ (Chinese: 妥亲乌西哈妈妈, English: Goddess of the Staircase Stars) is associated with Virgo and Coma Berenices. Believed to be the “stairway to heaven,” it is represented by a goddess figure in a seated posture offering assistance to the shaman’s soul during its ascent.
+
+##### Star of Buruhun (The Dawn Beast)
+
+<br>
+<img src="illustrations/manchu_script/16Buruhun_manchu.png" width="40">
+
+*Usiha Buruhun*​ (Chinese: 乌西哈布鲁古, English: Star of Buruhun / The Dawn Beast) is an constellation in Boötes, Canes Venatici, and Coma Berenices. Depicting the Dawn Beast, it rises in the east and sets in the west, serving as the herald that guides the sunrise before winter dawn.
+
+##### Willow
+
+<br>
+<img src="illustrations/manchu_script/17Fodoho_manchu.png" width="40">
+
+*Fodoho usiha*​ (Chinese: 佛朵乌西哈, English: Willow) is located in the head of the Hydra​ constellation. Positioned low in the southern sky, it was considered a divine star governing human fertility and was also used for divining the year’s harvest and epidemics.
+
+##### Net
+
+<br>
+<img src="illustrations/manchu_script/18Asu_manchu.png" width="40">
+
+*Asu usiha*​ (Chinese: 阿苏乌西哈, English: Net) is associated with the Hercules​ constellation, and its ring-like structure may also relate to Corona Borealis. Imagined as the hunting net used by the Hunting God (Banda mafa), it reflects the characteristics of a fishing and hunting lifestyle.
+
+##### Fishhook
+
+<br>
+<img src="illustrations/manchu_script/19Nimaha_manchu.png" width="40">
+
+*Nimaha usiha​* (Chinese: 尼玛哈乌西哈, English: Fishhook) corresponds to the Scorpius​ constellation. A summer stellar deity commonly called the “Warm Star,” its appearance was used to determine the farming season and to divine agricultural abundance or failure.
+
+##### Star of Wisdom
+
+<br>
+<img src="illustrations/manchu_script/20Sureken_manchu.png" width="40">
+
+*Sureken usiha​* (Chinese: 苏勒肯乌西哈, English: Star of Wisdom) is described as being composed of four bright stars in the southern sky, shaped like a dipper. The Star Deity of Wisdom primarily blesses girls with intelligence and beauty and is revered as a great female deity.
+
+This constellation is recorded in another work by Fu Yuguang, but no corresponding modern constellation is specified in the source material. Based on the provided star chart and descriptions such as "southern sky" and "bright stars," a plausible speculation is that it may also point to the Corvus​ constellation. This would mean it occupies the same region of the modern sky as the *Wadan*​ star, and could potentially represent an alternative mythological interpretation or naming of the same stellar group within a different regional or transmission lineage. Another view suggests a possible correspondence to the four stars θ, η, γ, and δ in Cancer​ (the additional stars included in the chart might represent the M44 cluster). However, this interpretation is difficult to reconcile with the descriptions "bright stars" and "southern sky."
+
+To maintain academic rigor, this constellation is not rendered​ in Stellarium's celestial view.
 
 ## References
 
