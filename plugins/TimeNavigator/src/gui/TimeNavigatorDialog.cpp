@@ -294,7 +294,6 @@ void TimeNavigatorDialog::setAboutHtml()
 
 void TimeNavigatorDialog::buildPlanetaryTab()
 {
-
 	QWidget*     tabW      = ui->tabWidget->findChild<QWidget*>("tabPlanetaryEvents");
 	QVBoxLayout* outerVBox = qobject_cast<QVBoxLayout*>(tabW->layout());
 
