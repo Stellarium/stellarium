@@ -20,6 +20,7 @@
 #ifndef SEARCHDIALOG_HPP
 #define SEARCHDIALOG_HPP
 
+#include <tuple>
 #include <QObject>
 #include <QStringListModel>
 #include <QStandardItemModel>
@@ -29,6 +30,7 @@
 #include <QDialog>
 #include "StelDialog.hpp"
 #include "StelObjectType.hpp"
+#include "SimbadSearcher.hpp"
 #include "VecMath.hpp"
 
 // pre declaration of the ui class
@@ -36,21 +38,48 @@ class Ui_searchDialogForm;
 class QSortFilterProxyModel;
 class QStringListModel;
 
-struct stringLengthCompare
+struct ObjectFound
 {
-	bool operator()(const QString &s1, const QString &s2) const
+	QString name;
+	QString searchableType;   // returned by StelObject::getType()
+	QString userVisibleType;  // returned by StelObject::getObjectTypeI18n()
+	Vec3d position = {0,0,0}; // SIMBAD-only
+	bool isSimbad = false;
+
+	ObjectFound() = default;
+	ObjectFound(const QString name, const QString& searchableType, const QString& userVisibleType)
+		: name(name)
+		, searchableType(searchableType)
+		, userVisibleType(userVisibleType)
+		, position(0,0,0)
+		, isSimbad(false)
 	{
-		return s1.length() < s2.length();
+	}
+	ObjectFound(const QString name, const QString& searchableType, const QString& userVisibleType, const Vec3d& simbadPosition)
+		: name(name)
+		, searchableType(searchableType)
+		, userVisibleType(userVisibleType)
+		, position(simbadPosition)
+		, isSimbad(true)
+	{
+	}
+	// Comparators for set, map and similar containers
+	bool operator==(const ObjectFound& rhs) const
+	{
+		return name == rhs.name &&
+		       searchableType == rhs.searchableType &&
+		       userVisibleType == rhs.userVisibleType &&
+		       isSimbad == rhs.isSimbad &&
+		       position == rhs.position;
+	}
+	bool operator<(const ObjectFound& rhs) const
+	{
+		return std::tie(name, searchableType, userVisibleType, isSimbad, position[0], position[1], position[2])
+		                                                  <
+		       std::tie(rhs.name, rhs.searchableType, rhs.userVisibleType, rhs.isSimbad, rhs.position[0], rhs.position[1], rhs.position[2]);
 	}
 };
-
-struct recentObjectSearches
-{
-	int maxSize = 20;
-	QStringList recentList;
-	QMap<QString, QString> objectTypes;  //! Maps object name to object type
-};
-Q_DECLARE_METATYPE(recentObjectSearches)
+Q_DECLARE_METATYPE(ObjectFound)
 
 //! @class CompletionListModel
 //! Display a list of results matching the search string, and allow to
@@ -64,18 +93,16 @@ public:
 	CompletionListModel(const QStringList & strings, QObject* parent =Q_NULLPTR);
 	~CompletionListModel() override;
 
-	QString getSelected(void) const;
-	void setValues(const QStringList&, const QStringList&);
-	void setValuesWithModules(const QStringList&, const QStringList&, const QMap<QString, QString>&);
+	ObjectFound getSelected(void) const;
+	void setValues(const QVector<ObjectFound>& values, const QVector<ObjectFound>& recents);
 	bool isEmpty() const {return values.isEmpty();}
-	void appendValues(const QStringList&);
-	void appendValuesWithModules(const QStringList&, const QMap<QString, QString>&);
-	void appendRecentValues(const QStringList&);
+	void appendValues(const QVector<ObjectFound>&);
+	void appendRecentValues(const QVector<ObjectFound>&);
 	void clearValues();
 	void setObjectMgr(class StelObjectMgr* mgr) { objectMgr = mgr; }
 
-	QStringList getValues(void) { return values; }
-	QStringList getRecentValues(void) { return recentValues; }
+	QVector<ObjectFound> getValues(void) { return values; }
+	QVector<ObjectFound> getRecentValues(void) { return recentValues; }
 	int getSelectedIdx() { return selectedIdx; }
 
 	// Bold recent objects and display module info as object type
@@ -89,10 +116,15 @@ public slots:
 private:
 	void updateText();
 	int selectedIdx;
-	QStringList values;
-	QStringList recentValues;
-	mutable QMap<QString, QString> objectModules; // Maps object name to module type (mutable for lazy caching)
+	QVector<ObjectFound> values;
+	QVector<ObjectFound> recentValues;
 	class StelObjectMgr* objectMgr = nullptr; // For lazy module lookups
+};
+
+struct RecentObjectSearches
+{
+	int maxSize = 20;
+	QVector<ObjectFound> recentList;
 };
 
 QT_FORWARD_DECLARE_CLASS(QListWidgetItem)
@@ -199,11 +231,10 @@ private slots:
 	void onSearchTextChanged(const QString& text);
 
 	void gotoObject();
-	void gotoObject(const QString& nameI18n);
-	void gotoObject(const QString& nameI18n, const QString& objType);
+	void gotoObject(const ObjectFound& obj);
 	// for going from list views
-	void gotoObject(const QModelIndex &modelIndex);
-	void gotoObjectWithType(const QModelIndex &modelIndex);
+	void gotoObjectFromSearchResults(const QModelIndex &modelIndex);
+	void gotoObjectFromObjectsList(const QModelIndex &modelIndex);
 
 	void searchListClear();
 	void refreshFocus(bool state);
@@ -316,8 +347,7 @@ private:
 
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
-	QMap<QString, Vec3d> simbadResults; //! Simbad object name and J2000.0 coordinates
-	QMap<QString, QString> simbadObjectTypes; //! Simbad object name and object type
+	std::set<SimbadSearcher::Result> simbadResults; //! Simbad object name, type, and J2000.0 coordinates
 	class StelObjectMgr* objectMgr;
 	class QSettings* conf;
 	QStringListModel* listModel;
@@ -354,11 +384,11 @@ private:
 
 	// Properties for "recent object searches"
 	CompletionListModel* searchListModel;
-	recentObjectSearches recentObjectSearchesData;
+	RecentObjectSearches recentObjectSearchesData;
 	QString recentObjectSearchesJsonPath;
 
 	//! Add to list: called from gotoObject(const QString& nameI18n)
-	void updateRecentSearchList(const QString &nameI18n);
+	void updateRecentSearchList(const ObjectFound& obj);
 
 	//! Get data from previous session
 	void loadRecentSearches();
@@ -367,10 +397,9 @@ private:
 	//! Shrink list if needed
 	void adjustRecentList(int maxSize);
 	//! Display search per user preference
-	void adjustMatchesResult(QStringList &allMatches, QStringList& recentMatches, QStringList& matches, int maxNbItem);
+	QVector<ObjectFound> combineMatches(QVector<ObjectFound>& recentMatches, QVector<ObjectFound>& matches, const int maxItemCount) const;
 	//! Update searches result display and reset selectedIdx = 0
-	void resetSearchResultDisplay(QStringList allMatches, QStringList recentMatches,
-	                              const QVector<QPair<QString,StelObjectP>>& matchesWithPointers);
+	void resetSearchResultDisplay(const QVector<ObjectFound>& allMatches, const QVector<ObjectFound>& recentMatches);
 	//! Decide if push button should be enabled
 	void setPushButtonGotoSearch();
 	//! Default maxNbItem when matching objects
@@ -385,7 +414,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object names by order of recent searches, or an empty list if nothing match
-	QStringList listMatchingRecentObjects(const QString& objPrefix, int maxNbItem=20, bool useStartOfWords=false) const;
+	QVector<ObjectFound> listMatchingRecentObjects(const QString& objPrefix, int maxNbItem=20, bool useStartOfWords=false) const;
 };
 
 #endif // _SEARCHDIALOG_HPP

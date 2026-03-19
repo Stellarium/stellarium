@@ -97,8 +97,7 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 		results.sort(Qt::CaseInsensitive);
 		// objects with short names should be searched first
 		// examples: Moon, Hydra (moon); Jupiter, Ghost of Jupiter
-		stringLengthCompare comparator;
-		std::sort(results.begin(), results.end(), comparator);
+		std::sort(results.begin(), results.end(), [](auto& a, auto& b){ return a.length() < b.length(); });
 
 		//return as json
 		response.writeJSON(QJsonDocument(QJsonArray::fromStringList(results)));
