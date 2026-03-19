@@ -76,7 +76,6 @@ QMap<double,double> PlanetaryEventsMgr::scanForType(const QString& type,
                                                      double startJD,
                                                      double stopJD) const
 {
-
     // ── Inner planet conjunctions ─────────────────────────────────────────────
     // scanConjOpp returns ALL conjunctions (both inf and sup) for inner planets.
     // We filter here to whichever kind was requested.
