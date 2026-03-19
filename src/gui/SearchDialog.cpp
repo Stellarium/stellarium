@@ -62,7 +62,16 @@
 #include <QDialog>
 #include <QAbstractItemModel>
 
-#include "SimbadSearcher.hpp"
+namespace
+{
+enum ModelRole
+{
+	ObjectNameRole = Qt::UserRole,
+	SearchableTypeRole,
+	UserVisibleTypeRole,
+	ObjectRole,
+};
+}
 
 // Start of members for class CompletionListModel
 CompletionListModel::CompletionListModel(QObject* parent):
@@ -81,40 +90,21 @@ CompletionListModel::~CompletionListModel()
 {
 }
 
-void CompletionListModel::setValues(const QStringList& v, const QStringList& rv)
+void CompletionListModel::setValues(const QVector<ObjectFound>& v, const QVector<ObjectFound>& rv)
 {
 	values=v;
 	recentValues=rv;
 	updateText();
 }
 
-void CompletionListModel::setValuesWithModules(const QStringList& v, const QStringList& rv, const QMap<QString, QString>& modules)
-{
-	values=v;
-	recentValues=rv;
-	objectModules=modules;
-	updateText();
-}
-
-void CompletionListModel::appendRecentValues(const QStringList& v)
+void CompletionListModel::appendRecentValues(const QVector<ObjectFound>& v)
 {
 	recentValues+=v;
 }
 
-void CompletionListModel::appendValues(const QStringList& v)
+void CompletionListModel::appendValues(const QVector<ObjectFound>& v)
 {
 	values+=v;
-	updateText();
-}
-
-void CompletionListModel::appendValuesWithModules(const QStringList& v, const QMap<QString, QString>& modules)
-{
-	// Append the module information as object types to object names
-	values+=v;
-	for (auto it = modules.constBegin(); it != modules.constEnd(); ++it)
-	{
-		objectModules[it.key()] = it.value();
-	}
 	updateText();
 }
 
@@ -123,15 +113,13 @@ void CompletionListModel::clearValues()
 	// Default: Show recent values
 	values.clear();
 	values = recentValues;
-	objectModules.clear();
 	selectedIdx=0;
 	updateText();
 }
 
-QString CompletionListModel::getSelected() const
+ObjectFound CompletionListModel::getSelected() const
 {
-	if (values.isEmpty())
-		return QString();
+	if (values.isEmpty()) return {};
 	return values.at(selectedIdx);
 }
 
@@ -159,7 +147,10 @@ void CompletionListModel::selectFirst()
 
 void CompletionListModel::updateText()
 {
-	this->setStringList(values);
+	QStringList lst;
+	for (const auto& v : values)
+		lst << v.name;
+	setStringList(lst);
 }
 
 QVariant CompletionListModel::data(const QModelIndex &index, int role) const
@@ -167,55 +158,41 @@ QVariant CompletionListModel::data(const QModelIndex &index, int role) const
 	if (!index.isValid())
 	    return QVariant();
 
-	QString objectName = values.value(index.row());
+	const auto obj = values.value(index.row());
 
-	// Return the original object name for UserRole (used by gotoObject)
-	if(role == Qt::UserRole)
+	switch(role)
 	{
-		return objectName;
-	}
-
-	// Bold recent objects
-	if(role == Qt::FontRole)
-	{
-	    QFont font=QGuiApplication::font();
-	    bool toBold = recentValues.contains(objectName);
-	    font.setBold(toBold);
-	    return font;
-	}
-
-	// Display object name with module type (lazy-loaded for non-SIMBAD objects)
-	if(role == Qt::DisplayRole)
-	{
-		// Check if we already have module info cached
-		if (objectModules.contains(objectName))
+	case Qt::DisplayRole:
+		if(obj.isSimbad)
 		{
-			QString moduleType = objectModules[objectName];
-			return QString("%1 (%2)").arg(objectName, moduleType);
+			if(obj.userVisibleType.isEmpty())
+				return QString("%1 (SIMBAD)").arg(obj.name);
+			else
+				return QString("%1 (SIMBAD; %2)").arg(obj.name, qc_(obj.userVisibleType, "SIMBAD object type"));
 		}
-		
-		// For non-cached, non-recent objects, do a lazy lookup and cache it
-		if (objectMgr && !recentValues.contains(objectName))
+		else
 		{
-			StelObjectP obj = objectMgr->searchByNameI18n(objectName);
-			if (!obj)
-				obj = objectMgr->searchByName(objectName);
-			if (obj)
-			{
-				QString moduleType = obj->getObjectTypeI18n();
-				objectModules[objectName] = moduleType;
-				return QString("%1 (%2)").arg(objectName, moduleType);
-			}
+			return QString("%1 (%2)").arg(obj.name, obj.userVisibleType);
 		}
-		
-		// Fallback: just return the name
-		return objectName;
-	}
-
-	// For EditRole, return the original name too
-	if(role == Qt::EditRole)
+	case ObjectNameRole:
+		return obj.name;
+	case UserVisibleTypeRole:
+		return obj.userVisibleType;
+	case SearchableTypeRole:
+		return obj.searchableType;
+	case ObjectRole:
+		return QVariant::fromValue(obj);
+	case Qt::FontRole:
 	{
-		return objectName;
+		// Bold recent objects
+		auto font = QGuiApplication::font();
+		const bool toBold = recentValues.contains(obj);
+		font.setBold(toBold);
+		return font;
+	}
+	case Qt::EditRole:
+		// For EditRole, return the original name too
+		return obj.name;
 	}
 
 	return QVariant();
@@ -440,9 +417,9 @@ void SearchDialog::createDialogContent()
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->simbadCooQueryButton, SIGNAL(clicked()), this, SLOT(lookupCoordinates()));
 	connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(clearSimbadText(StelModule::StelModuleSelectAction)));
-	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
+	connect(ui->pushButtonGotoSearchSkyObject, &QPushButton::clicked, this, qOverload<>(&SearchDialog::gotoObject));
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
-	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
+	connect(ui->lineEditSearchSkyObject, &QLineEdit::returnPressed, this, qOverload<>(&SearchDialog::gotoObject));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(selectionChanged()), this, SLOT(setHasSelectedFlag()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
 
@@ -552,11 +529,10 @@ void SearchDialog::createDialogContent()
 
 	// Create list model view
 	ui->searchListView->setModel(searchListModel);
-	searchListModel->setStringList(searchListModel->getValues());
 
 	// Auto display recent searches
-	QStringList recentMatches = listMatchingRecentObjects("", recentObjectSearchesData.maxSize, useStartOfWords);
-	resetSearchResultDisplay(recentMatches, recentMatches, {});
+	const auto recentMatches = listMatchingRecentObjects("", recentObjectSearchesData.maxSize, useStartOfWords);
+	resetSearchResultDisplay(recentMatches, recentMatches);
 	setPushButtonGotoSearch();
 
 	// Update max size of "recent object searches"
@@ -967,8 +943,8 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 
 		maxNbItem = recentObjectSearchesData.maxSize;
 		// Auto display recent searches
-		QStringList recentMatches = listMatchingRecentObjects(trimmedText, maxNbItem, useStartOfWords);
-		resetSearchResultDisplay(recentMatches, recentMatches, {});
+		const auto recentMatches = listMatchingRecentObjects(trimmedText, maxNbItem, useStartOfWords);
+		resetSearchResultDisplay(recentMatches, recentMatches);
 
 		ui->simbadStatusLabel->setText("");
 		ui->simbadCooStatusLabel->setText("");
@@ -985,9 +961,8 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 
 		// Get possible objects
 		QVector<QPair<QString,StelObjectP>> matchesWithPointers;
-		QStringList matches;
-		QStringList recentMatches;
-		QStringList allMatches;
+		QVector<ObjectFound> matches;
+		QVector<ObjectFound> recentMatches;
 
 		QString greekText = substituteGreek(trimmedText);
 
@@ -1026,57 +1001,41 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		maxNbItem  = qMax(greekTextMaxMbItem, trimmedTextMaxNbItem);
 
 		for (const auto& [name,obj] : matchesWithPointers)
-			matches << name;
+			matches.append({name, obj->getType(), obj->getObjectTypeI18n()});
 
 		// Clean up matches
-		adjustMatchesResult(allMatches, recentMatches, matches, maxNbItem);
+		const auto allMatches = combineMatches(recentMatches, matches, maxNbItem);
 
 		// Updates values - module info will be fetched on-demand
-		resetSearchResultDisplay(allMatches, recentMatches, matchesWithPointers);
+		resetSearchResultDisplay(allMatches, recentMatches);
 
 		// Update push button enabled state
 		setPushButtonGotoSearch();
 	}
 
 	// Goto object when clicking in list
-	connect(ui->searchListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(gotoObject(const QModelIndex&)), Qt::UniqueConnection);
-	connect(ui->searchListView, SIGNAL(activated(const QModelIndex&)), this, SLOT(gotoObject(const QModelIndex&)), Qt::UniqueConnection);
+	connect(ui->searchListView, &QListView::clicked, this,
+	        qOverload<const QModelIndex&>(&SearchDialog::gotoObjectFromSearchResults),
+	        Qt::UniqueConnection);
+	connect(ui->searchListView, &QListView::activated, this,
+	        qOverload<const QModelIndex&>(&SearchDialog::gotoObjectFromSearchResults),
+	        Qt::UniqueConnection);
 }
 
-void SearchDialog::updateRecentSearchList(const QString &nameI18n)
+void SearchDialog::updateRecentSearchList(const ObjectFound& obj)
 {
-	if(nameI18n.isEmpty())
+	if(obj.name.isEmpty())
 		return;
 
-	// Capture object type for this search
-	StelObjectP obj = objectMgr->searchByNameI18n(nameI18n);
-	if (!obj)
-		obj = objectMgr->searchByName(nameI18n);
-
-	if (obj)
-	{
-		QString objectType = obj->getObjectTypeI18n();
-		recentObjectSearchesData.objectTypes[nameI18n] = objectType;
-	}
-	else if (simbadObjectTypes.contains(nameI18n))
-	{
-		// For SIMBAD objects, use the type from SIMBAD
-		QString objType = simbadObjectTypes.value(nameI18n, "");
-		if (!objType.isEmpty())
-		recentObjectSearchesData.objectTypes[nameI18n] = QString("SIMBAD; %1").arg(qc_(objType, "SIMBAD object type"));
-		else
-		recentObjectSearchesData.objectTypes[nameI18n] = QString("SIMBAD");
-	}
-
 	// Prepend & remove duplicates
-	recentObjectSearchesData.recentList.prepend(nameI18n);
-	recentObjectSearchesData.recentList.removeDuplicates();
+	recentObjectSearchesData.recentList.prepend(obj);
+	StelUtils::removeDuplicates(recentObjectSearchesData.recentList);
 
 	adjustRecentList(recentObjectSearchesData.maxSize);
 
 	// Auto display recent searches
-	QStringList recentMatches = listMatchingRecentObjects("", recentObjectSearchesData.maxSize, useStartOfWords);
-	resetSearchResultDisplay(recentMatches, recentMatches, {});
+	const auto recentMatches = listMatchingRecentObjects("", recentObjectSearchesData.maxSize, useStartOfWords);
+	resetSearchResultDisplay(recentMatches, recentMatches);
 }
 
 void SearchDialog::adjustRecentList(int maxSize)
@@ -1095,65 +1054,39 @@ void SearchDialog::adjustRecentList(int maxSize)
 		recentObjectSearchesData.recentList = recentObjectSearchesData.recentList.mid(0, spinBoxMaxSize);
 }
 
-void SearchDialog::adjustMatchesResult(QStringList &allMatches, QStringList& recentMatches, QStringList& matches, int maxNbItem)
+QVector<ObjectFound> SearchDialog::combineMatches(QVector<ObjectFound>& recentMatches, QVector<ObjectFound>& matches, const int maxItemCount) const
 {
-	int tempSize;
-	QStringList tempMatches; // unsorted matches use for calculation
-	// not displaying
-
 	// remove possible duplicates from completion list
-	matches.removeDuplicates();
+	StelUtils::removeDuplicates(matches);
 
-	matches.sort(Qt::CaseInsensitive);
+	// FIXME: why do we do this before the next (unstable) sorting?
+	std::sort(matches.begin(), matches.end(), [](auto& a, auto& b){ return a.name.compare(b.name, Qt::CaseInsensitive) < 0; });
+
 	// objects with short names should be searched first
 	// examples: Moon, Hydra (moon); Jupiter, Ghost of Jupiter
-	stringLengthCompare comparator;
-	std::sort(matches.begin(), matches.end(), comparator);
+	std::sort(matches.begin(), matches.end(), [](auto& a, auto& b){ return a.name.length() < b.name.length(); });
 
 	// Adjust recent matches to preferred max size
 	recentMatches = recentMatches.mid(0, recentObjectSearchesData.maxSize);
 
-	// Remove duplicates within recent matches only
-	recentMatches.removeDuplicates();
-
-	// Find total size - but DON'T remove duplicates between recent and matches
-	// This allows objects to appear in both local and SIMBAD results
-	tempSize = recentMatches.size() + matches.size();
-
-	// Adjust match size to be within range
-	if(tempSize>maxNbItem)
-	{
-		int i = tempSize - maxNbItem;
-		matches = matches.mid(0, matches.size() - i);
-	}
-
+	QVector<ObjectFound> allMatches;
 	// Combine list: ordered by recent searches then relevance
 	allMatches << recentMatches << matches;
+
+	StelUtils::removeDuplicates(allMatches);
+
+	if(allMatches.size() > maxItemCount)
+		allMatches.resize(maxItemCount);
+
+	return allMatches;
 }
 
 
-void SearchDialog::resetSearchResultDisplay(QStringList allMatches, QStringList recentMatches,
-                                            const QVector<QPair<QString,StelObjectP>>& matchesWithPointers)
+void SearchDialog::resetSearchResultDisplay(const QVector<ObjectFound>& allMatches, const QVector<ObjectFound>& recentMatches)
 {
 	// Updates values
 	searchListModel->appendValues(allMatches);
 	searchListModel->appendRecentValues(recentMatches);
-
-	// Pass saved object types for recent objects to the model
-	QMap<QString, QString> objectTypes; 
-	for (const QString& objName: recentMatches)
-	{
-		if (recentObjectSearchesData.objectTypes.contains(objName))
-		{
-			objectTypes[objName] = recentObjectSearchesData.objectTypes[objName];
-		}
-	}
-	// Also pass object types from the objects to which we have pointers
-	for (const auto& [name,obj] : matchesWithPointers)
-		objectTypes[name] = obj->getObjectTypeI18n();
-
-	// Update display with object types
-	searchListModel->setValuesWithModules(allMatches, recentMatches, objectTypes);
 
 	// Update display
 	searchListModel->setValues(allMatches, recentMatches);
@@ -1209,14 +1142,59 @@ void SearchDialog::loadRecentSearches()
 			ui->recentSearchSizeSpinBox->setValue(recentObjectSearchesData.maxSize);
 
 			// Get user's recentList data (if possible)
-			recentObjectSearchesData.recentList = recentSearchData.value("recentList").toStringList();
-		
-			// Load object types if available
-			QVariantMap objectTypesMap = recentSearchData.value("objectTypes").toMap();
-			recentObjectSearchesData.objectTypes.clear();
-			for (auto it = objectTypesMap.constBegin(); it != objectTypesMap.constEnd(); ++it)
+			for (const auto& entry : recentSearchData.value("recentList").toList())
 			{
-				recentObjectSearchesData.objectTypes[it.key()] = it.value().toString();
+				const auto map = entry.toMap();
+				// We only support the map, the legacy name-only entry is ignored
+				if(map.isEmpty()) continue;
+
+				const auto name = map["name"].toString();
+				const auto searchableType = map["searchableType"].toString();
+				const auto userVisibleType = map["userVisibleType"].toString();
+				const auto isSimbad = map["isSIMBAD"].toBool();
+				if (name.isEmpty())
+				{
+					qWarning().nospace() << "Bad recent search entry: name=" << name
+					                     << ", searchableType=" << searchableType
+					                     << ", userVisibleType=" << userVisibleType
+					                     << ", isSIMBAD=" << isSimbad;
+					continue;
+				}
+				if (isSimbad)
+				{
+					const auto pos = map["position"].toList();
+					bool good = true;
+					if(pos.size() == 3)
+					{
+						bool okX = false, okY = false, okZ = false;
+						const auto x = pos[0].toDouble(&okX);
+						const auto y = pos[1].toDouble(&okY);
+						const auto z = pos[2].toDouble(&okZ);
+						good = okX && okY && okZ;
+						if (good)
+						{
+							recentObjectSearchesData.recentList.append({name, searchableType, userVisibleType, Vec3d(x,y,z)});
+						}
+					}
+					else
+					{
+						good = false;
+					}
+
+					if (!good)
+					{
+						qWarning().nospace() << "Bad recent search entry: name=" << name
+						                     << ", searchableType=" << searchableType
+						                     << ", userVisibleType=" << userVisibleType
+						                     << ", isSIMBAD=" << isSimbad
+						                     << ", pos=" << pos;
+						continue;
+					}
+				}
+				else
+				{
+					recentObjectSearchesData.recentList.append({name, searchableType, userVisibleType});
+				}
 			}
 		}
 		catch (std::runtime_error &e)
@@ -1246,16 +1224,23 @@ void SearchDialog::saveRecentSearches()
 
 	QVariantMap rslDataList;
 	rslDataList.insert("maxSize", recentObjectSearchesData.maxSize);
-	rslDataList.insert("recentList", recentObjectSearchesData.recentList);
-	
-	// Save object types as a QVariantMap
-	QVariantMap objectTypesMap;
-	for (auto it = recentObjectSearchesData.objectTypes.constBegin();
-		it != recentObjectSearchesData.objectTypes.constEnd(); ++it)
+	QVariantList recentList;
+	for(const auto& entry : recentObjectSearchesData.recentList)
 	{
-		objectTypesMap.insert(it.key(), it.value());
+		QVariantMap map;
+		map["name"] = entry.name;
+		map["searchableType"] = entry.searchableType;
+		map["userVisibleType"] = entry.userVisibleType;
+		map["isSIMBAD"] = entry.isSimbad;
+		if(entry.isSimbad)
+		{
+			QVariantList xyz;
+			xyz << entry.position[0] << entry.position[1] << entry.position[2];
+			map["position"] = QVariant::fromValue(xyz);
+		}
+		recentList.append(map);
 	}
-	rslDataList.insert("objectTypes", objectTypesMap);
+	rslDataList.insert("recentList", recentList);
 
 	QVariantMap rsList;
 	rsList.insert("recentObjectSearches", rslDataList);
@@ -1266,9 +1251,9 @@ void SearchDialog::saveRecentSearches()
 	jsonFile.close();
 }
 
-QStringList SearchDialog::listMatchingRecentObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<ObjectFound> SearchDialog::listMatchingRecentObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<ObjectFound> result;
 
 	if(maxNbItem <= 0)
 		return result;
@@ -1276,8 +1261,8 @@ QStringList SearchDialog::listMatchingRecentObjects(const QString& objPrefix, in
 	// For all recent objects:
 	for (int i = 0; i < recentObjectSearchesData.recentList.size(); i++)
 	{
-		bool toAppend = useStartOfWords ? recentObjectSearchesData.recentList[i].startsWith(objPrefix, Qt::CaseInsensitive)
-						: recentObjectSearchesData.recentList[i].contains(objPrefix, Qt::CaseInsensitive);
+		bool toAppend = useStartOfWords ? recentObjectSearchesData.recentList[i].name.startsWith(objPrefix, Qt::CaseInsensitive)
+		                                : recentObjectSearchesData.recentList[i].name.contains(objPrefix, Qt::CaseInsensitive);
 
 		if(toAppend)
 			result.append(recentObjectSearchesData.recentList[i]);
@@ -1288,8 +1273,7 @@ QStringList SearchDialog::listMatchingRecentObjects(const QString& objPrefix, in
 
 	if (useLengthSorting)
 	{
-		stringLengthCompare comparator;
-		std::sort(result.begin(), result.end(), comparator);
+		std::sort(result.begin(), result.end(), [](auto& a, auto& b){ return a.name.length() < b.name.length(); });
 	}
 
 	return result;
@@ -1344,22 +1328,13 @@ void SearchDialog::onSimbadStatusChanged()
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupFinished)
 	{
 		simbadResults = simbadReply->getResults();
-		simbadObjectTypes = simbadReply->getObjectTypes();
 		
-		QStringList SimbadNames;
-		QMap<QString, QString> moduleInfo;
+		QVector<ObjectFound> objs;
 		
-		for (const QString& objName : simbadResults.keys())
-		{
-			SimbadNames.append(objName);
-			QString objType = simbadObjectTypes.value(objName, "");
-			if (!objType.isEmpty())
-				moduleInfo[objName] = QString("SIMBAD; %1").arg(qc_(objType, "SIMBAD object type"));
-			else
-				moduleInfo[objName] = "SIMBAD";
-		}
+		for (const auto& obj : simbadResults)
+			objs.append({obj.name, "", obj.type, obj.position});
 		
-		searchListModel->appendValuesWithModules(SimbadNames, moduleInfo);
+		searchListModel->appendValues(objs);
 		// Update push button enabled state
 		setPushButtonGotoSearch();
 	}
@@ -1400,126 +1375,7 @@ void SearchDialog::greekLetterClicked()
 	sso->setFocus();
 }
 
-void SearchDialog::gotoObject()
-{
-	gotoObject(searchListModel->getSelected());
-}
-
-void SearchDialog::gotoObject(const QString &nameI18n)
-{
-	if (nameI18n.isEmpty())
-		return;
-
-	// Save recent search list
-	updateRecentSearchList(nameI18n);
-	saveRecentSearches();
-
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	if (simbadResults.contains(nameI18n))
-	{
-		if (objectMgr->findAndSelect(nameI18n))
-		{
-			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-			if (!newSelected.empty())
-			{
-                                if (useAutoClosing)
-                                        close();
-				ui->lineEditSearchSkyObject->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
-
-				// Can't point to home planet
-				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
-				{
-					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-					mvmgr->setFlagTracking(true);
-				}
-				else
-					GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-		else
-		{
-                        if (useAutoClosing)
-                                close();
-			QString objType = simbadObjectTypes.value(nameI18n, "");
-			GETSTELMODULE(CustomObjectMgr)->addPersistentObject(nameI18n, simbadResults[nameI18n], QString("SIMBAD; %1").arg(qc_(objType, "SIMBAD object type")));
-			ui->lineEditSearchSkyObject->clear();
-			searchListModel->clearValues();
-			if (objectMgr->findAndSelect(nameI18n))
-			{
-				const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-				// Can't point to home planet
-				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
-				{
-					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-					mvmgr->setFlagTracking(true);
-				}
-				else
-					GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
-	else if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
-	{
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-                        if (useAutoClosing)
-                                close();
-			ui->lineEditSearchSkyObject->clear();
-
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
-			{
-				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-				mvmgr->setFlagTracking(true);
-			}
-			else
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-		}
-	}
-	simbadResults.clear();
-}
-
-void SearchDialog::gotoObject(const QString &nameI18n, const QString &objType)
-{
-	if (nameI18n.isEmpty())
-		return;
-
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	if (objectMgr->findAndSelectI18n(nameI18n, objType) || objectMgr->findAndSelect(nameI18n, objType))
-	{
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-                        if (useAutoClosing)
-                                close();
-			ui->lineEditSearchSkyObject->clear();
-			
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
-			{
-				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-				mvmgr->setFlagTracking(true);
-			}
-			else
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-		}
-	}
-}
-
-void SearchDialog::gotoObject(const QModelIndex &modelIndex)
-{
-	// Use UserRole to get the original object name (without module type suffix)
-	QString objectName = modelIndex.model()->data(modelIndex, Qt::UserRole).toString();
-	if (objectName.isEmpty())
-	{
-		// Fallback to DisplayRole if UserRole is not available
-		objectName = modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString();
-	}
-	gotoObject(objectName);
-}
-
-void SearchDialog::gotoObjectWithType(const QModelIndex &modelIndex)
+void SearchDialog::gotoObjectFromObjectsList(const QModelIndex &modelIndex)
 {
 	QString objType, objClass = ui->objectTypeComboBox->currentData(Qt::UserRole).toString();
 	if (objClass.contains(":"))
@@ -1546,7 +1402,111 @@ void SearchDialog::gotoObjectWithType(const QModelIndex &modelIndex)
 	objType.replace("Quasars","Quasar");
 	objType.replace("MeteorShowers","MeteorShower");
 
-	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString(), objType);
+	const auto name = modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString();
+	gotoObject(ObjectFound{name, objType, ""});
+}
+
+void SearchDialog::gotoObject()
+{
+	const auto obj = searchListModel->getSelected();
+	gotoObject(obj);
+}
+
+void SearchDialog::gotoObject(const ObjectFound& obj)
+{
+	if (obj.name.isEmpty())
+		return;
+
+	bool recentsUpdated = false;
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	if (obj.isSimbad)
+	{
+		updateRecentSearchList(obj);
+		saveRecentSearches();
+		recentsUpdated = true;
+
+		if (objectMgr->findAndSelect(obj.name))
+		{
+			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+			if (!newSelected.empty())
+			{
+                                if (useAutoClosing)
+                                        close();
+				ui->lineEditSearchSkyObject->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
+
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+		else
+		{
+                        if (useAutoClosing)
+                                close();
+			GETSTELMODULE(CustomObjectMgr)->addPersistentObject(obj.name, obj.position, QString("SIMBAD; %1").arg(qc_(obj.userVisibleType, "SIMBAD object type")));
+			ui->lineEditSearchSkyObject->clear();
+			searchListModel->clearValues();
+			if (objectMgr->findAndSelect(obj.name))
+			{
+				const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+	}
+	else if (objectMgr->findAndSelectI18n(obj.name, obj.searchableType) || objectMgr->findAndSelect(obj.name, obj.searchableType))
+	{
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+                        if (useAutoClosing)
+                                close();
+			ui->lineEditSearchSkyObject->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
+			
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+			{
+				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+				mvmgr->setFlagTracking(true);
+			}
+			else
+				GETSTELMODULE(StelObjectMgr)->unSelect();
+
+			if (obj.userVisibleType.isEmpty())
+			{
+				auto updatedObj = obj;
+				updatedObj.userVisibleType = newSelected[0]->getObjectTypeI18n();
+				updateRecentSearchList(updatedObj);
+				saveRecentSearches();
+				recentsUpdated = true;
+			}
+		}
+	}
+
+	if (!recentsUpdated)
+	{
+		updateRecentSearchList(obj);
+		saveRecentSearches();
+		recentsUpdated = true;
+	}
+}
+
+void SearchDialog::gotoObjectFromSearchResults(const QModelIndex &modelIndex)
+{
+	const auto model = modelIndex.model();
+	const auto obj = model->data(modelIndex, ObjectRole).value<ObjectFound>();
+	gotoObject(obj);
 }
 
 void SearchDialog::searchListClear()
@@ -1694,7 +1654,8 @@ void SearchDialog::updateListView(int index)
 	proxyModel->sort(0, Qt::AscendingOrder);
 	ui->objectsListView->blockSignals(false);
 	//bugfix: prevent multiple connections, which seems to have happened before
-	connect(ui->objectsListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(gotoObjectWithType(const QModelIndex&)), Qt::UniqueConnection);
+	connect(ui->objectsListView, &QListView::clicked, this,
+	        qOverload<const QModelIndex&>(&SearchDialog::gotoObjectFromObjectsList), Qt::UniqueConnection);
 }
 
 void SearchDialog::updateListTab()

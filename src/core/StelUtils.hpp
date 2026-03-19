@@ -20,6 +20,7 @@
 #ifndef STELUTILS_HPP
 #define STELUTILS_HPP
 
+#include <set>
 #include <cmath>
 #include "VecMath.hpp"
 
@@ -1142,6 +1143,24 @@ namespace StelUtils
 	inline double trunc(double x) { return ::trunc(x); }
 	inline float trunc(float x) { return ::trunc(x); }
 #endif
+	template<typename T, template<typename> typename Container>
+	void removeDuplicates(Container<T>& data)
+	{
+		using namespace std;
+		std::set<T> set;
+		for(auto it = begin(data); it != end(data); )
+		{
+			if(set.find(*it) == set.end())
+			{
+				set.insert(*it);
+				++it;
+			}
+			else
+			{
+				it = data.erase(it);
+			}
+		}
+	}
 }
 
 #endif // STELUTILS_HPP
