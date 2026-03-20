@@ -1,0 +1,70 @@
+%% Part of Stellarium User Guide 25.4+
+%% History:
+%% 2025-12-20 New chapter.
+
+
+\newpage
+\section{Sky Culture Maker Plugin}
+\label{sec:plugins:SCM}
+\sectionauthor*{Susanne M. Hoffmann and Georg Zotti (?) or Jena Students?}
+
+
+
+\subsection{Introduction}
+\label{sec:plugins:SCM:Introduction}
+
+The creation of skycultures (Chapter \ref{ch:SkyCultures}) with its many files used to be difficult. 
+Some time ago, \citet{Zotti-Wolf:SEAC2019} mentioned shortcomings and problems that should be 
+approached in a redesign of Stellarium's skycultures, developments that had to wait until 2025. 
+
+This plugin finally helps with the creation of a new skyculture in the new format, 
+in a user-friendly wizard-like editor that checks that all relevant parts are included in the right format.
+
+Lorem Ipsum...
+
+\subsection{An Example}
+\label{sec:plugin:SCM:example}
+
+TODO: Describe process of SC generation, at least including stick figures. 
+
+\subsection{Configuration Options}
+\label{sec:plugins:SCM:configuration}
+
+The configuration dialog allows ...
+
+\subsection*{Section \big[SCM\big] in config.ini file}
+
+Apart from changing settings using the plugin configuration dialog,
+you can also edit the \file{config.ini} file to change
+settings for the SCM plugin -- just make it carefully!
+
+{\footnotesize
+\begin{longtable}{l@{\,}|@{\,}l@{\,}|@{\,}l@{\,}||@{\,}l@{\,}|@{\,}l@{\,}|@{\,}l}\toprule
+  \emph{ID}                      &\emph{Type} & \emph{Default}  &
+  \emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
+flag\_do\_something          &bool & false &
+some\_color                  &R,G,B& \ccbox{0.5,0.5,0.7}  \\
+\end{longtable}
+}
+
+\subsection{Further development}
+The plugin and its description here are  still in development. 
+It is mostly geared towards skyculture researchers who want to see their results publicised via Stellarium. 
+Members of non-European cultures who are actually using the
+output and can judge its correctness are invited to report errors or
+suggest better formatting for their respective skycultures.
+
+
+\subsection{Acknowledgments}
+
+If you are using this plugin in scientific publications, 
+please cite \citet{Zotti-Wolf:SEAC2019}, 
+\citet{Zotti-etal:AG2021:NunciusHamburgensis57}\footnote{or some better-suited one?} 
+or \citet{Zotti-etal:IAUS399} as you find appropriate.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 
+
