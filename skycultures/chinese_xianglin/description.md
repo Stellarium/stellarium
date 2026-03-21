@@ -111,7 +111,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Six Jia
 
-*Six Jia* (Chinese: 六甲, Pinyin: Liù Jiǎ) consists of 6 stars in the *Purple Forbidden Enclosure*, beside the *Canopy of the Emperor* and *Canopy Support*. *Six Jia* refers to the six Heavenly Stems paired with "Jia", including Jiazi, Jiaxu, Jiashen, Jiawu, Jiachen, and Jia寅. Heavenly Stems and Earthly Branches are important timekeeping units in China, also commonly used for counting, naming, and divination. This constellation is used to determine the seasons in the celestial world, manage yin and yang, and announce time to people, promulgating decrees and promoting moral education.
+*Six Jia* (Chinese: 六甲, Pinyin: Liù Jiǎ) consists of 6 stars in the *Purple Forbidden Enclosure*, beside the *Canopy of the Emperor* and *Canopy Support*. *Six Jia* refers to the six Heavenly Stems paired with "Jia", including Jiazi, Jiaxu, Jiashen, Jiawu, Jiachen, and Jiayin. Heavenly Stems and Earthly Branches are important timekeeping units in China, also commonly used for counting, naming, and divination. This constellation is used to determine the seasons in the celestial world, manage yin and yang, and announce time to people, promulgating decrees and promoting moral education.
 
 ##### Interior Seats of the Five Emperors
 
@@ -167,7 +167,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Celestial Great One
 
-*Celestial Great One* (Chinese: 天乙, Pinyin: Tiān Yǐ) is 1 star outside the *Purple Forbidden Enclosure*, south of the right star of the palace gate. It is the god of the Heavenly Emperor, governing the operation of the Heavenly Tao, coordinating the twelve divine generals, and主宰ing wars and personal good fortune.
+*Celestial Great One* (Chinese: 天乙, Pinyin: Tiān Yǐ) is 1 star outside the *Purple Forbidden Enclosure*, south of the right star of the palace gate. It is the god of the Heavenly Emperor, governing the operation of the Heavenly Tao, coordinating the twelve divine generals, and presiding over wars and personal good fortune.
 
 ##### First Great One
 
@@ -199,7 +199,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Celestial Prison
 
-*Celestial Prison* (Chinese: 天牢, Pinyin: Tiān Láo) consists of 6 stars under the *Northern Dipper*'s dipper, a prison for detaining违法 nobles.
+*Celestial Prison* (Chinese: 天牢, Pinyin: Tiān Láo) consists of 6 stars under the *Northern Dipper*'s dipper, a prison for detaining law-breaking nobles.
 
 ##### Three Top Instructors
 
@@ -267,11 +267,11 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Inner Screen
 
-*Inner Screen* (Chinese: 内屏, Pinyin: Nèi Píng) consists of 4 stars inside the *Meridian Gate*, near the south of the *Seats of the Five Emperors*, close to the Right执法 (β Vir).
+*Inner Screen* (Chinese: 内屏, Pinyin: Nèi Píng) consists of 4 stars inside the *Meridian Gate*, near the south of the *Seats of the Five Emperors*, close to the *Right Law Administrator* (β Vir).
 
 ##### Usher to the Court
 
-*Usher to the Court* (Chinese: 谒者, Pinyin: Yè Zhě) is 1 star north of the Left执法 (16 Vir).
+*Usher to the Court* (Chinese: 谒者, Pinyin: Yè Zhě) is 1 star north of the *Left Law Administrator* (η Vir).
 
 ##### Three Excellencies (In Supreme Palace Enclosure)
 
@@ -527,7 +527,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Celestial Spokes
 
-*Celestial Fortune* (Chinese: 天福, Pinyin: Tiān Fú) consists of 2 stars, diagonally lined west of the *Room Mansion*.
+*Celestial Spokes* (Chinese: 天辐, Pinyin: Tiān Fú) consists of 2 stars, diagonally lined west of the *Room Mansion*.
 
 ##### Imperial Guards
 
