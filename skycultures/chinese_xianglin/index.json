@@ -5,6 +5,11 @@
   "fallback_to_international_names": false,
   "constellations": [
     {
+      "id": "CON chinese_xianglin P00",
+      "lines": [[75458, 78527, 80331, 83895, 89908, 101260, 114222, 3721], [68756, 61281, 56211, 46977, 33827, 17959, 11569]],
+      "common_name": {"english": "Purple Forbidden Enclosure", "native": "紫微垣", "pronounce": "Zǐ Wēi Yuán", "IPA": "t͡sɹ̩˨˩˩.weɪ˥.ɥæn˧˥"}
+    },
+    {
       "id": "CON chinese_xianglin P01",
       "lines": [[75097, 72607, 70692, 69112, 62572]],
       "common_name": {"english": "Northern Pole", "native": "北极", "pronounce": "Běi Jí", "IPA": "peɪ˨˩˩.t͡ɕi˧˥"}
@@ -46,7 +51,7 @@
     },
     {
       "id": "CON chinese_xianglin P09",
-      "lines": [[86614, 86614]],
+      "lines": [[79822, 79822]],
       "common_name": {"english": "Female Protocol", "native": "女史", "pronounce": "Nǚ Shǐ", "IPA": "ny˧˥.ʂɻ̍˨˩˦"}
     },
     {
@@ -200,6 +205,12 @@
       "common_name": {"english": "Celestial Spear", "native": "天枪", "pronounce": "Tiān Qiāng", "IPA": "tʰjɛn˥.t͡ɕʰjɑŋ˥"}
     },
     {
+      "id": "CON chinese_xianglin S00",
+      "lines": [[60129, 61941, 63090, 63608, 64241], [57757, 55434, 55642, 54879, 54872]],
+      "label_positions": [[12.15, 11.0]],
+      "common_name": {"english": "Supreme Palace Enclosure", "native": "太微垣", "pronounce": "Tài Wēi Yuán", "IPA": "tʰaɪ˥˩.weɪ˥.ɥæn˧˥"}
+    },
+    {
       "id": "CON chinese_xianglin S01",
       "lines": [[60129, 61941, 63090, 63608, 64241]],
       "common_name": {"english": "Supreme Palace East Wall", "native": "太微垣东蕃", "pronounce": "Tài Wēi Yuán Dōng Fān", "IPA": "tʰaɪ˥˩.weɪ˥.ɥæn˧˥.tʊŋ˥.fan˥"}
@@ -313,6 +324,12 @@
       "id": "CON chinese_xianglin S23",
       "lines": [[44127, 44471, 50372, 50801, 55219, 55203]],
       "common_name": {"english": "Three Steps", "native": "三台", "pronounce": "Sān Tái (Xià Tái)", "IPA": "san˥.tʰaɪ˧˥"}
+    },
+    {
+      "id": "CON chinese_xianglin H00",
+      "lines": [[84379, 85693, 86974, 88794, 92043, 93747, 92946, 89962, 88048, 86263, 84012], [80816, 80170, 79043, 78072, 77233, 76276, 77070, 77622, 79593, 79882, 81377]],
+      "label_positions": [[17.3, 5.0]],
+      "common_name": {"english": "Heavenly Market Enclosure", "native": "天市垣", "pronounce": "Tiān Shì Yuán", "IPA": "tʰjɛn˥.ʂɻ̍˥˩.ɥæn˧˥"}
     },
     {
       "id": "CON chinese_xianglin H01",
@@ -1251,17 +1268,17 @@
     {
       "id": "CON chinese_xianglin 19I",
       "lines": [[26536, 25984, 26712]],
-      "common_name": {"english": "Pillar (In Net Mansion)", "native": "柱(毕宿)", "pronounce": "Zhù(Bì Xiù)", "IPA": "t͡ʂu˥˩(pi˥˩.ɕjoʊ˥˩)"}
+      "common_name": {"english": "Pillars (In Net Mansion)", "native": "柱(毕宿)", "pronounce": "Zhù(Bì Xiù)", "IPA": "t͡ʂu˥˩(pi˥˩.ɕjoʊ˥˩)"}
     },
     {
       "id": "CON chinese_xianglin 19J",
       "lines": [[27673, 27639, 27483]],
-      "common_name": {"english": "Pillar (In Net Mansion)", "native": "柱(毕宿)", "pronounce": "Zhù(Bì Xiù)", "IPA": "t͡ʂu˥˩(pi˥˩.ɕjoʊ˥˩)"}
+      "common_name": {"english": "Pillars (In Net Mansion)", "native": "柱(毕宿)", "pronounce": "Zhù(Bì Xiù)", "IPA": "t͡ʂu˥˩(pi˥˩.ɕjoʊ˥˩)"}
     },
     {
       "id": "CON chinese_xianglin 19K",
       "lines": [[23767, 23416, 23453, 23767]],
-      "common_name": {"english": "Pillar (In Net Mansion)", "native": "柱(毕宿)", "pronounce": "Zhù(Bì Xiù)", "IPA": "t͡ʂu˥˩(pi˥˩.ɕjoʊ˥˩)"}
+      "common_name": {"english": "Pillars (In Net Mansion)", "native": "柱(毕宿)", "pronounce": "Zhù(Bì Xiù)", "IPA": "t͡ʂu˥˩(pi˥˩.ɕjoʊ˥˩)"}
     },
     {
       "id": "CON chinese_xianglin 19L",
@@ -1371,7 +1388,7 @@
     {
       "id": "CON chinese_xianglin 22F",
       "lines": [[33018, 34693, 36046, 36962, 37740]],
-      "common_name": {"english": "Five Feudal Kings (In Well Mansion)", "native": "五诸侯(井宿)", "pronounce": "Wǔ Zhū Hóu(Jǐng Xiù)", "IPA": "wu˨˩˩.t͡ʂu˥.xoʊ˧˥(t͡ɕiŋ˨˩˩.ɕjoʊ˥˩)"}
+      "common_name": {"english": "Five Feudal Kings", "native": "五诸侯(井宿)", "pronounce": "Wǔ Zhū Hóu(Jǐng Xiù)", "IPA": "wu˨˩˩.t͡ʂu˥.xoʊ˧˥(t͡ɕiŋ˨˩˩.ɕjoʊ˥˩)"}
     },
     {
       "id": "CON chinese_xianglin 22G",
@@ -1612,6 +1629,67 @@
                   { "symbol": "27", "native": "翼", "pronounce": "Yì", "english": "Wings"},
                   { "symbol": "28", "native": "轸", "pronounce": "Zhěn", "english": "Chariot"}]},
   "common_names": {
+    "HIP 75097": [{"english": "Crown Prince", "pronounce": "Tàizǐ", "native": "太子", "IPA": "tʰaɪ˥˩ tsɹ̩˨˩˦"}],
+    "HIP 72607": [{"english": "Emperor", "pronounce": "Dì", "native": "帝", "IPA": "ti˥˩"}],
+    "HIP 70692": [{"english": "Bastard", "pronounce": "Shùzǐ", "native": "庶子", "IPA": "ʂu˥˩ tsɹ̩˨˩˦"}],
+    "HIP 69112": [{"english": "Harem", "pronounce": "Hòugōng", "native": "后宫", "IPA": "xoʊ˥˩ kʊŋ˥"}],
+    "HIP 62572": [{"english": "Northern Pole", "pronounce": "Běijí", "native": "北极", "IPA": "peɪ˨˩˦ tɕi˧˥"}],
+    "HIP 62561": [{"english": "Northern Pole", "pronounce": "Běijí", "native": "北极", "IPA": "peɪ˨˩˦ tɕi˧˥"}],
+    "HIP 68756": [{"english": "Right Pivot", "pronounce": "Yòushū", "native": "右枢", "IPA": "joʊ˥˩ ʂu˥"}],
+    "HIP 61281": [{"english": "The Second Commandant", "pronounce": "Shàowèi", "native": "少尉", "IPA": "ʂɑʊ˥˩ weɪ˥˩"}],
+    "HIP 56211": [{"english": "The Great Advisor", "pronounce": "Shàngfǔ", "native": "上辅", "IPA": "ʂɑŋ˥˩ fu˨˩˦"}],
+    "HIP 46977": [{"english": "The Second Advisor", "pronounce": "Shàofǔ", "native": "少辅", "IPA": "ʂɑʊ˥˩ fu˨˩˦"}],
+    "HIP 33827": [{"english": "The Great Imperial Guard", "pronounce": "Shàngwèi", "native": "上卫", "IPA": "ʂɑŋ˥˩ weɪ˥˩"}],
+    "HIP 17959": [{"english": "The Second Imperial Guard", "pronounce": "Shàowèi", "native": "少卫", "IPA": "ʂɑʊ˥˩ weɪ˥˩"}],
+    "HIP 11569": [{"english": "The Great Imperial Minister", "pronounce": "Shàngchéng", "native": "上丞", "IPA": "ʂɑŋ˥˩ ʈʂʰɤŋ˧˥"}],
+    "HIP 75458": [{"english": "Left Pivot", "pronounce": "Zuǒshū", "native": "左枢", "IPA": "tswɔ˨˩˦ ʂu˥"}],
+    "HIP 78527": [{"english": "The Great Prime Minister", "pronounce": "Shàngzǎi", "native": "上宰", "IPA": "ʂɑŋ˥˩ tsaɪ˨˩˦"}],
+    "HIP 78820": [{"english": "The Great Premier", "pronounce": "Shàngxiàng", "native": "上相", "IPA": "ʂɑŋ˥˩ ɕjɑŋ˥˩"}],
+    "HIP 80331": [{"english": "The Second Prime Minister", "pronounce": "Shǎozǎi", "native": "少宰", "IPA": "ʂɑʊ˨˩˦ tsaɪ˨˩˦"}],
+    "HIP 83895": [{"english": "The Great Protector", "pronounce": "Shàngbì", "native": "上弼", "IPA": "ʂɑŋ˥˩ pi˥˩"}],
+    "HIP 89908": [{"english": "The Second Protector", "pronounce": "Shǎobì", "native": "少弼", "IPA": "ʂɑʊ˥˩ pi˥˩"}],
+    "HIP 101260": [{"english": "The Great Imperial Guard", "pronounce": "Shàngwèi", "native": "上卫", "IPA": "ʂɑŋ˥˩ weɪ˥˩"}],
+    "HIP 114222": [{"english": "The Second Imperial Guard", "pronounce": "Shǎowèi", "native": "少卫", "IPA": "ʂɑʊ˥˩ weɪ˥˩"}],
+    "HIP 3721":  [{"english": "The Second Imperial Minister", "pronounce": "Shàochéng", "native": "少丞", "IPA": "ʂɑʊ˥˩ ʈʂʰɤŋ˧˥"}],
+    "HIP 54061": [{"english": "The Celestial Pivot", "pronounce": "Tiānshū", "native": "天枢", "IPA": "tʰjɛn˥ ʂu˥"}],
+    "HIP 53910": [{"english": "The Celestial Rotating Jade", "pronounce": "Tiānxuán", "native": "天璇", "IPA": "tʰjɛn˥ ɕɥɛn˧˥"}],
+    "HIP 58001": [{"english": "The Celestial Shining Pearl", "pronounce": "Tiānjī", "native": "天玑", "IPA": "tʰjɛn˥ tɕi˥"}],
+    "HIP 59774": [{"english": "The Celestial Balance", "pronounce": "Tiānquán", "native": "天权", "IPA": "tʰjɛn˥ tɕʰɥɛn˧˥"}],
+    "HIP 62956": [{"english": "The Jade Sighting-tube", "pronounce": "Yùhéng", "native": "玉衡", "IPA": "y˥˩ xɤŋ˧˥"}],
+    "HIP 65378": [{"english": "The Opener of Heat", "pronounce": "Kāiyáng", "native": "开阳", "IPA": "kʰaɪ˥ jɑŋ˧˥"}],
+    "HIP 67301": [{"english": "The Twinkling Brilliance", "pronounce": "Yáoguāng", "native": "摇光", "IPA": "jɑʊ˧˥ kwɑŋ˥"}],
+    "HIP 57757": [{"english": "Right Law Administrator", "pronounce": "Yòuzhífǎ", "native": "右执法", "IPA": "joʊ˥˩ ʈʂɻ̩˧˥ fa˨˩˦"}],
+    "HIP 55434": [{"english": "The Great General", "pronounce": "Shàngjiàng", "native": "上将", "IPA": "ɕi˥ ʂɑŋ˥˩ tɕjɑŋ˥˩"}],
+    "HIP 55642": [{"english": "The Second General", "pronounce": "Cìjiàng", "native": "次将", "IPA": "ɕi˥ tsʰɹ̩˥˩ tɕjɑŋ˥˩"}],
+    "HIP 54879": [{"english": "The Second Premier", "pronounce": "Cìxiàng", "native": "次相", "IPA": "ɕi˥ tsʰɹ̩˥˩ ɕjɑŋ˥˩"}],
+    "HIP 54872": [{"english": "The Great Premier", "pronounce": "Shàngxiàng", "native": "上相", "IPA": "ɕi˥ ʂɑŋ˥˩ ɕjɑŋ˥˩"}],
+    "HIP 60129": [{"english": "Left Law Administrator", "pronounce": "Zuǒzhífǎ", "native": "左执法", "IPA": "tswɔ˨˩˦ ʈʂɻ̩˧˥ fa˨˩˦"}],
+    "HIP 61941": [{"english": "The Great Premier", "pronounce": "Shàngxiàng", "native": "上相", "IPA": "tʊŋ˥ ʂɑŋ˥˩ ɕjɑŋ˥˩"}],
+    "HIP 63090": [{"english": "The Second Premier", "pronounce": "Cìxiàng", "native": "次相", "IPA": "tʊŋ˥ tsʰɹ̩˥˩ ɕjɑŋ˥˩"}],
+    "HIP 63608": [{"english": "The Second General", "pronounce": "Cìjiàng", "native": "次将", "IPA": "tʊŋ˥ tsʰɹ̩˥˩ tɕjɑŋ˥˩"}],
+    "HIP 64241": [{"english": "The Great General", "pronounce": "Shàngjiàng", "native": "上将", "IPA": "tʊŋ˥ ʂɑŋ˥˩ tɕjɑŋ˥˩"}],
+    "HIP 80816": [{"english": "Hezhong", "pronounce": "Hézhōng", "native": "河中", "IPA": "xɤ˧˥ ʈʂʊŋ˥"}],
+    "HIP 80170": [{"english": "Hejian", "pronounce": "Héjiān", "native": "河间", "IPA": "xɤ˧˥ tɕjɛn˥"}],
+    "HIP 79043": [{"english": "Jin", "pronounce": "Jìn", "native": "晋", "IPA": "tɕin˥˩"}],
+    "HIP 78072": [{"english": "Zheng", "pronounce": "Zhèng", "native": "郑", "IPA": "ʈʂɤŋ˥˩"}],
+    "HIP 77233": [{"english": "Zhou", "pronounce": "Zhōu", "native": "周", "IPA": "ʈʂoʊ˥"}],
+    "HIP 76276": [{"english": "Qin", "pronounce": "Qín", "native": "秦", "IPA": "tɕʰin˧˥"}],
+    "HIP 77070": [{"english": "Shu", "pronounce": "Shǔ", "native": "蜀", "IPA": "ʂu˨˩˦"}],
+    "HIP 77622": [{"english": "Ba", "pronounce": "Bā", "native": "巴", "IPA": "pa˥"}],
+    "HIP 79593": [{"english": "Liang", "pronounce": "Liáng", "native": "梁", "IPA": "ljɑŋ˧˥"}],
+    "HIP 79882": [{"english": "Chu", "pronounce": "Chǔ", "native": "楚", "IPA": "ʈʂʰu˨˩˦"}],
+    "HIP 81377": [{"english": "Han", "pronounce": "Hán", "native": "韩", "IPA": "xan˧˥"}],
+    "HIP 84379": [{"english": "Wei", "pronounce": "Wèi", "native": "魏", "IPA": "weɪ˥˩"}],
+    "HIP 85693": [{"english": "Zhao", "pronounce": "Zhào", "native": "赵", "IPA": "ʈʂɑʊ˥˩"}],
+    "HIP 86974": [{"english": "Jiuhe", "pronounce": "Jiǔhé", "native": "九河", "IPA": "tɕjoʊ˨˩˦ xɤ˧˥"}],
+    "HIP 88794": [{"english": "Zhongshan", "pronounce": "Zhōngshān", "native": "中山", "IPA": "ʈʂʊŋ˥ ʂan˥"}],
+    "HIP 92043": [{"english": "Qi", "pronounce": "Qí", "native": "齐", "IPA": "tɕʰi˧˥"}],
+    "HIP 93747": [{"english": "Wuyue", "pronounce": "Wúyuè", "native": "吴越", "IPA": "wu˧˥ ɥɛ˥˩"}],
+    "HIP 92946": [{"english": "Xu", "pronounce": "Xú", "native": "徐", "IPA": "ɕy˧˥"}],
+    "HIP 89962": [{"english": "Donghai", "pronounce": "Dōnghǎi", "native": "东海", "IPA": "tʊŋ˥ xaɪ˨˩˦"}],
+    "HIP 88048": [{"english": "Yan", "pronounce": "Yān", "native": "燕", "IPA": "jɛn˥"}],
+    "HIP 86263": [{"english": "Nanhai", "pronounce": "Nánhǎi", "native": "南海", "IPA": "nan˧˥ xaɪ˨˩˦"}],
+    "HIP 84012": [{"english": "Song", "pronounce": "Sòng", "native": "宋", "IPA": "sʊŋ˥˩"}],
     "M 44": [{"english": "Cumulative Corpse Gas", "pronounce": "Jīshīqì", "native": "积尸气", "IPA": "t͡ɕi˥ ʂɻ̩˥ t͡ɕʰi˥˩"}],
     "M 7": [{"english": "Fish", "pronounce": "Yú", "native": "鱼", "IPA": "y˧˥"}],
     "NAME Jupiter": [{"english": "Sui Star", "native": "岁星", "translators_comments": "Native name of Jupiter in Chinese culture"}],
