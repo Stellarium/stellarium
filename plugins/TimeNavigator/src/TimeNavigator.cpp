@@ -53,6 +53,8 @@ StelPluginInfo TimeNavigatorStelPluginInterface::getPluginInfo() const
 
 TimeNavigator::TimeNavigator()
 	: flagShowButton(true)
+	, flagSelectObject(true)
+	, flagCenterView(false)
 	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("TimeNavigator");
@@ -117,21 +119,27 @@ void TimeNavigator::restoreDefaultConfigIni()
 {
 	conf->beginGroup("TimeNavigator");
 	conf->remove("");
-	conf->setValue("flag_show_button", true);
+	conf->setValue("flag_show_button",    true);
+	conf->setValue("flag_select_object",  true);
+	conf->setValue("flag_center_view",    false);
 	conf->endGroup();
 }
 
 void TimeNavigator::readSettingsFromConfig()
 {
 	conf->beginGroup("TimeNavigator");
-	flagShowButton = conf->value("flag_show_button", true).toBool();
+	flagShowButton    = conf->value("flag_show_button",   true).toBool();
+	flagSelectObject  = conf->value("flag_select_object", true).toBool();
+	flagCenterView    = conf->value("flag_center_view",   false).toBool();
 	conf->endGroup();
 }
 
 void TimeNavigator::saveSettingsToConfig() const
 {
 	conf->beginGroup("TimeNavigator");
-	conf->setValue("flag_show_button", getFlagShowButton());
+	conf->setValue("flag_show_button",   getFlagShowButton());
+	conf->setValue("flag_select_object", getFlagSelectObject());
+	conf->setValue("flag_center_view",   getFlagCenterView());
 	conf->endGroup();
 }
 

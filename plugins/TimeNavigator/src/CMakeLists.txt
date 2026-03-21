@@ -11,6 +11,8 @@ LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 SET(TIMENAVIGATOR_SRCS
      TimeNavigator.hpp
      TimeNavigator.cpp
+     PlanetaryEventsMgr.hpp
+     PlanetaryEventsMgr.cpp
      gui/TimeNavigatorDialog.hpp
      gui/TimeNavigatorDialog.cpp
 )
