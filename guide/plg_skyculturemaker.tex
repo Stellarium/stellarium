@@ -20,7 +20,25 @@ The plugin is still a beta-version, originally set up as a student project in a 
 \subsection{An Example}
 \label{sec:plugin:SCM:example}
 
-TODO: Describe process of SC generation, at least including stick figures. 
+After clicking the menu button for the SCM, a welcome screen opens that asks if we want to create or convert a sky culture. Generally, we would want to ``create''. The converter should run the conversion from our old data format defined in 2000 to the new JSON format, but has some issues. 
+
+``Create'' opens a wizard-like editor with two tabs: \textit{Overview} and \textit{Description}. The \textit{Overview} contains the features for drawing stick figures, attaching artwork to coordinates, naming and licensing the new sky culture. The \textit{Description} tab offers guidance in providing the information on constellation names that Stellarium needs for the read-out functionality, the information that the Stellarium Team recommends to be provided for the user (based on our decade-long experience of adopting sky cultures) and a function to include a list of (sortable) references. 
+
+We recommend to start with the definition of the sky culture in the \textit{Overview} tab, as the actual adoption may lead to a change of identification and, thus, a different description. However there is no technical requirement on the order of steps in this workflow. The text boxes in the \textit{Description} are rather self-explained. We provide some questions for each sort of information. Unfortunately, these text fields are currently rather rudimentary: there are no editor-buttons for italics, bold face, underline\dots\ or even for including an illustrative image, and WYSIWYG is not yet implemented. That can be done later in the markdown output file description.md 
+
+In the \textit{Overview} menu, first name the new sky culture (uppermost line prompt) and define a licence. Then, use the button ``Add Constellation'' or ``Add Dark Constellation'' to define constellations. The difference between the two is technical: constellations are made out of stars, so that the cursor snaps to the points of the HIP catalogue while dark constellations are defined as dark spots between the stars and must, therefore, be defined by coordinates (J2000) and not by celestial objects with physical properties (e.\,g. brightness, proper motion\dots). 
+
+The menu ``Add Constellation'' opens a new wizard with three tabs: the first is for drawing the stick figure, the second for providing infomation on the constellation name, the third for artwork (not mandatory). The drawing pen and the information tab should be rather self-explained with the brief instruction in the window: when clicking ``pen'', the mouse cursor snaps to star when moved in the star chart. Use right mouse button (RMB) to draw a line from one star to another, double right click to stop drawing. 
+
+In the ``Artwork'' tab, first ``Upload Image''. Your image will be displayed in the wizard-window and three bluegreenish dots. You can move these dots with your mouse to any point in the uploaded image. Take one of them, move it to an appropriate position, then click on a star in the star chart, and hit ``Bind Star'' to set the anchor. Repeat this procedure for the two bluegreenish dots. 
+
+Then, the uploaded artwork should appear on your Stellarium star chart. If you want to change the visual impression, distort the painting or scale it in the sky, you can just move the bluegreenish dots in the image, or, if that's not sufficient, bind them with other stars. 
+
+Once, you are satisfied with the result, click ``Save'' for the constellation. Once you'll be done with all constellations of your sky culture, ``Export Sky Culture''. The latter will output a new folder with the files index.json, description.md, territory.json, CMake.txt and a sub-folder \textit{illustrations} that stores all the uploaded images (likely renamed). 
+
+Copying the new folder to your Stellarium programm folder will bring up your new contribution in the sky culture menu of your (local) Stellarium installation. \textbf{Attention!} This requires administrator rights. 
+
+\textbf{Warning.} Unfortunately, is currently not yet possible to edit an existing sky culture in the wizard. That needs to be done manually. 
 
 \subsection{Configuration Options}
 \label{sec:plugins:SCM:configuration}
