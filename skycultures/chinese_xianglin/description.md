@@ -50,7 +50,7 @@ Crucially, the chart introduces a significant innovation within this traditional
 
 *Well, Ghosts, Willow, Star, Extended Net, Wings, Chariot Mansions*
 
-## Constellations
+### Constellations in Xianglin star chart
 
 The constellations in the *Xianglin* Star Chart fully adhere to the traditional Chinese system of 283 constellations (*Xingguans*) and 1464 stars, reflecting the constellation patterns prevalent in Ming dynasty folk astronomy. This stands in direct contrast to the contemporaneous official versions modified by Jesuit missionaries (such as those in the *Chongzhen Lishu* (Treatise on Calendrical Science of the Chongzhen Reign), *Lingtai Yixiang Zhi* (Records of the Observatory and Its Instruments), and *Yixiang Kaocheng* (Compendium of Astronomical Instruments and Observations)). The "Chinese" sky culture in Stellarium lists the *Xingguans* and star counts from this missionary-modified official system. The discrepancies between the *Xianglin* chart and this official system are noted below:
 
