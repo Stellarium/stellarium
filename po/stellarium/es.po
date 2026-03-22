@@ -94,7 +94,7 @@ msgstr "Etiquetas de asterismos"
 
 #: src/core/modules/AsterismMgr.cpp:105
 msgid "Toggle single asterism selection mode"
-msgstr "‎Alternar el modo de selección ‎‎de asterismo‎‎ único‎"
+msgstr "Alternar el modo de selección de asterismo único"
 
 #: src/core/modules/AsterismMgr.cpp:106 src/ui_viewDialog.h:5047
 msgid "Ray helpers"
@@ -3572,7 +3572,7 @@ msgstr "El punto central de la sombra es"
 
 #: src/core/modules/Planet.cpp:1542
 msgid "km towards azimuth"
-msgstr "km hacia el acimut"
+msgstr "km hacia el azimut"
 
 #: src/core/modules/Planet.cpp:1545
 msgid "Width of antumbra"
@@ -3611,7 +3611,7 @@ msgstr "metros por segundo"
 #, qt-format
 msgctxt "planet narration"
 msgid "A rotation takes %1."
-msgstr "Una rotación tarda %1."
+msgstr "Una rotación dura %1."
 
 #: src/core/modules/Planet.cpp:1613
 #, qt-format
@@ -3860,7 +3860,7 @@ msgstr ""
 #, qt-format
 msgctxt "object narration"
 msgid "The shadow center point is %1 km towards azimuth %2 degrees"
-msgstr "El punto central de la sombra está %1 km hacia el acimut en %2 grados"
+msgstr "El punto central de la sombra está %1 km hacia el azimut en %2 grados"
 
 #: src/core/modules/Planet.cpp:1887
 #, qt-format
@@ -6076,8 +6076,7 @@ msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
 msgstr ""
-"Compara y confronta elementos de al menos dos culturas estelares‎‎ entre "
-"sí.."
+"Compara y confronta elementos de al menos dos culturas estelares entre sí.."
 
 #: src/core/StelSkyCultureMgr.cpp:398
 msgctxt "sky culture classification"
@@ -7821,12 +7820,12 @@ msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
 msgstr ""
-"Si el ‎‎planetario‎‎ Stellarium fuera útil para tu trabajo de investigación,"
-" se apreciaría el siguiente reconocimiento:"
+"Si el planetario Stellarium fue útil para su trabajo de investigación, se "
+"apreciaría el siguiente reconocimiento:"
 
 #: src/gui/HelpDialog.cpp:595
 msgid "This research has made use of the Stellarium planetarium"
-msgstr "‎Esta investigación ha hecho uso del ‎‎planetario‎‎ Stellarium‎"
+msgstr "Esta investigación ha hecho uso del planetario Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:598
@@ -14387,7 +14386,7 @@ msgstr "Mar de los Vapores"
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:428
 msgid "Northern highlands"
-msgstr "‎Tierras altas del norte‎"
+msgstr "Tierras altas del norte"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -15568,8 +15567,8 @@ msgstr "... y satélites"
 #: src/ui_viewDialog.h:4116
 msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
 msgstr ""
-"‎Alternar dibujo permanente de la corona del Sol cuando la ‎‎atmósfera‎‎ "
-"está desactivada‎"
+"Alternar dibujo permanente de la corona del Sol cuando la atmósfera está "
+"desactivada"
 
 #: src/ui_viewDialog.h:4118
 msgid "Sun's corona"
@@ -15589,7 +15588,7 @@ msgstr "Mostrar:"
 
 #: src/ui_viewDialog.h:4125
 msgid "Toggle drawing Sun's glare"
-msgstr "‎Alternar dibujo del resplandor del Sol‎"
+msgstr "Alternar dibujo del resplandor del Sol"
 
 #: src/ui_viewDialog.h:4127
 msgid "Sun's glare"
@@ -16678,8 +16677,8 @@ msgstr "Mostrar suelo"
 #: src/ui_viewDialog.h:4933
 msgid "Set the planet and location as specified for the selected landscape"
 msgstr ""
-"‎Establecer‎‎ el ‎‎planeta‎‎ y la ubicación según lo especificado para el "
-"‎‎paisaje‎‎ seleccionado‎"
+"Establecer el planeta y la ubicación según lo especificado para el paisaje "
+"seleccionado"
 
 #: src/ui_viewDialog.h:4935
 msgid "Location from landscape"
@@ -18010,8 +18009,7 @@ msgstr ""
 #: src/ui_atmosphereDialog.h:382
 msgid "Set the International Standard Atmosphere at the height 0 km MSL"
 msgstr ""
-"‎Establecer‎‎ la ‎‎atmósfera‎‎ estándar internacional a la altura de 0 km "
-"MSL‎"
+"Establecer la atmósfera estándar internacional a la altura de 0 km MSL"
 
 #: src/ui_atmosphereDialog.h:384
 msgid "Standard Atmosphere"
@@ -18615,11 +18613,11 @@ msgstr "Distancia angular:"
 
 #: src/ui_astroCalcDialog.h:2556
 msgid "Mean motion of second celestial body:"
-msgstr "‎Movimiento medio‎‎ del segundo ‎‎cuerpo celeste:‎"
+msgstr "Movimiento medio del segundo cuerpo celeste:"
 
 #: src/ui_astroCalcDialog.h:2557
 msgid "Mean motion of first celestial body:"
-msgstr "‎Movimiento medio‎‎ del primer ‎‎cuerpo celeste:‎"
+msgstr "Movimiento medio del primer cuerpo celeste:"
 
 #: src/ui_astroCalcDialog.h:2558
 msgid "Orbital velocity of second celestial body:"
@@ -18627,7 +18625,7 @@ msgstr "Velocidad orbital del segundo cuerpo celeste:"
 
 #: src/ui_astroCalcDialog.h:2559
 msgid "Orbital periods ratio:"
-msgstr "‎Relación de periodos orbitales:‎"
+msgstr "Relación de periodos orbitales:"
 
 #: src/ui_astroCalcDialog.h:2560
 msgid "Equatorial diameters ratio:"
@@ -21295,8 +21293,7 @@ msgstr "Satélite de Caracterización de Exoplanetas"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1473
 msgid "Tiangong space station (Chinese large modular space station)"
-msgstr ""
-"‎Estación espacial Tiangong (la gran estación espacial modular china)‎"
+msgstr "Estación espacial Tiangong (la gran estación espacial modular china)"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1475
@@ -23569,7 +23566,7 @@ msgid ""
 "Telescope Control plugin is obsolete."
 msgstr ""
 "La versión existente de los datos de configuración de los telescopios en el "
-"complemento Control de telescopios‎‎ está obsoleta."
+"complemento Control de telescopios está obsoleta."
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1821
@@ -26179,7 +26176,7 @@ msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
 msgstr ""
-"Hc/Zn: La altura calculada (altitud) y acimut calculado de la estrella de "
+"Hc/Zn: La altura calculada (altitud) y azimut calculado de la estrella de "
 "navegación, vista desde AP."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:325
@@ -26243,7 +26240,7 @@ msgstr "Hc: La altura (altitud) calculada de AP de la estrella de navegación."
 #. computed azimuth
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:348
 msgid "Zn: The AP calculated azimuth of navigation star."
-msgstr "Zn: El acimut calculado de AP de la estrella de navegación."
+msgstr "Zn: El azimut calculado de AP de la estrella de navegación."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:352
 msgid "For further information please refer to the Stellarium User Guide."
@@ -26298,7 +26295,7 @@ msgstr "Usar miembro superior para el Sol y la Luna"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:502
 msgid "Use UTC time when navigational stars are displayed"
-msgstr "Usar la hora UTC cuando se muestren estrellas de navegación‎"
+msgstr "Usar la hora UTC cuando se muestren estrellas de navegación"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:506
 msgid "Today in the current location"
@@ -33391,21 +33388,21 @@ msgid ""
 "arbitrary locations. The directions are computed based on spherical "
 "trigonometry on a spherical Earth."
 msgstr ""
-"‎Algunas religiones, sobre todo el Islam, se adhieren a una práctica de "
-"observar una ‎‎dirección‎‎ de oración hacia un ‎‎lugar‎‎ en particular. Se "
-"pueden mostrar las líneas ‎‎de acimut‎‎ para dos ubicaciones. Las "
-"ubicaciones predeterminadas son La Meca (Kaaba) y Jerusalén, pero puede "
-"seleccionar ubicaciones de la lista de ubicaciones de Stellarium o ingresar "
-"ubicaciones arbitrarias. Las direcciones se calculan en función de la "
-"trigonometría esférica en una ‎‎Tierra‎‎ esférica.‎"
+"Algunas religiones, sobre todo el Islam, se adhieren a una práctica de "
+"observar una dirección de oración hacia un lugar en particular. Se pueden "
+"mostrar las líneas de azimut para dos ubicaciones. Las ubicaciones "
+"predeterminadas son La Meca (Kaaba) y Jerusalén, pero puede seleccionar "
+"ubicaciones de la lista de ubicaciones de Stellarium o ingresar ubicaciones "
+"arbitrarias. Las direcciones se calculan en función de la trigonometría "
+"esférica en una Tierra esférica."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
 msgid ""
 "In addition, up to two lines each with arbitrary azimuth, altitude and "
 "declination lines with custom label can be shown."
 msgstr ""
-"‎Además, se pueden mostrar hasta dos líneas cada una con líneas arbitrarias "
-"de ‎‎acimut,‎‎ ‎‎altitud‎‎ y ‎‎declinación‎‎ con etiqueta personalizada.‎"
+"Además, se pueden mostrar hasta dos líneas cada una con líneas arbitrarias "
+"de azimut, altitud y declinación con etiqueta personalizada."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:681
 msgid "ArchaeoLines Configuration"
@@ -33535,7 +33532,7 @@ msgstr "Siempre contado desde el Norte"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:747
 msgid "Custom Azimuth 1"
-msgstr "Acimut personalizado 1"
+msgstr "Azimut personalizado 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:749
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:753
@@ -33553,7 +33550,7 @@ msgstr "Declinación personalizada 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:762
 msgid "Custom Azimuth 2"
-msgstr "Acimut personalizado 2"
+msgstr "Azimut personalizado 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:763
 msgid "Custom Altitude 1"
@@ -33733,7 +33730,7 @@ msgstr "Nuevo solar hindú"
 #: plugins/Calendars/src/Calendars.cpp:425
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
-msgstr "‎Nuevo ‎‎lunisolar‎‎ hindú‎"
+msgstr "Nuevo lunisolar hindú"
 
 #: plugins/Calendars/src/Calendars.cpp:426
 msgctxt "calendar"
@@ -35569,7 +35566,7 @@ msgstr "Brumaire (niebla)"
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:61
 msgctxt "French Revolution Calendar month name"
 msgid "Frimaire (sleet)"
-msgstr "Frimaire (aguanieve‎)"
+msgstr "Frimaire (aguanieve)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:62
 msgctxt "French Revolution Calendar month name"
@@ -37983,7 +37980,7 @@ msgstr "Calendario etiope"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:205
 msgid "Islamic Calendar (algorithmic)"
-msgstr "‎Calendario Islámico (algorítmico)‎"
+msgstr "Calendario Islámico (algorítmico)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
 msgid "Hebrew Calendar"
@@ -37991,19 +37988,19 @@ msgstr "Calendario Hebreo"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:207
 msgid "French Revolution calendar (astronomical version of 1793)"
-msgstr "‎Calendario de la Revolución Francesa (versión astronómica de 1793)‎"
+msgstr "Calendario de la Revolución Francesa (versión astronómica de 1793)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:208
 msgid "French Revolution calendar (arithmetic version of 1795)"
-msgstr "‎Calendario de la Revolución Francesa (versión aritmética de 1795)‎"
+msgstr "Calendario de la Revolución Francesa (versión aritmética de 1795)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid "Persian calendar (arithmetic version)"
-msgstr "‎Calendario persa (versión aritmética)‎"
+msgstr "Calendario persa (versión aritmética)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
 msgid "Persian calendar (astronomical version)"
-msgstr "‎Calendario persa (versión astronómica)‎"
+msgstr "Calendario persa (versión astronómica)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
 msgid "Bahá’í calendar (arithmetic version)"
@@ -38015,11 +38012,11 @@ msgstr "Calendario Bahá’í (versión astronómica)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:214
 msgid "Old Hindu Solar and Lunar calendars"
-msgstr "‎Calendarios ‎‎solares‎‎ y ‎‎lunares‎‎ hindúes‎ viejos"
+msgstr "Calendarios solares y lunares hindúes viejos"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:215
 msgid "New Hindu Solar and Lunar calendars"
-msgstr "‎Calendarios ‎‎solares‎‎ y ‎‎lunares‎‎ hindúes‎ nuevos"
+msgstr "Calendarios solares y lunares hindúes nuevos"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:216
 msgid "Astronomically 'accurate' Hindu Solar and Lunar calendars"
@@ -38128,7 +38125,7 @@ msgstr "Viejo lunar hindú"
 #: plugins/Calendars/src/ui_calendarsDialog.h:932
 msgctxt "calendar"
 msgid "New Hindu Lunar"
-msgstr "‎Nuevo ‎‎lunar‎‎ hindú‎"
+msgstr "Nuevo lunar hindú"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:935
 msgctxt "calendar"
