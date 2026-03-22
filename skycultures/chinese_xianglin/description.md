@@ -87,6 +87,8 @@ The constellations in the *Xianglin* Star Chart fully adhere to the traditional 
 
 While omitting the constellations mentioned above, the official system added new constellations near the southern celestial pole, which are not present in the *Xianglin* Star Chart.
 
+In the following `Constellations` chapter, all 283 Chinese traditional constellations will be introduced. However, this introduction is *not yet complete*, as only basic information about the constellations, such as the number of stars and their locations, has been compiled. The cultural significance behind each constellation has not been fully explored in this chapter.
+
 ## Constellations
 
 ##### Purple Forbidden Enclosure
@@ -95,19 +97,35 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Northern Pole
 
-*Northern Pole* (Chinese: 北极, Pinyin: Běi Jí) consists of 5 stars in the central part of the *Purple Forbidden Enclosure*. It is one of the most important constellations in Chinese star culture. The five stars are *Crown Prince* (γ UMi), *Emperor* (β UMi), *Bastard* (4 UMi), *Harem* (3 UMi), and *Celestial Pivot* or *Ancient Star* (HIP 62572).
+*Northern Pole* (Chinese: 北极, Pinyin: Běi Jí) consists of 5 stars in the central part of the *Purple Forbidden Enclosure*. It is one of the most important constellations in Chinese star culture. The five stars are *Crown Prince* (γ UMi), *Emperor* (β UMi), *Bastard* (4 UMi), *Harem* (3 UMi), and *Northern Pole* star (HIP 62572, also known as *Celestial Pivot* or *Ancient Star*).
+
+Due to precession, the Emperor Star (β UMi) was the brightest star closest to the north celestial pole for a long period before the Common Era, making it the North Star at that time. This period was crucial for the formation of the star official system, so this star held a lofty status and was regarded as the Celestial Emperor. The three stars around the Emperor Star (γ UMi, 4 UMi, 3 UMi) were seen as the *Three Excellencies* assisting the Celestial Emperor, which were the three highest-ranking officials in ancient times.
+
+Starting from the Han Dynasty, the north celestial pole gradually moved away from the Emperor Star and approached the faint star HIP 65595. This was the era when Chinese constellations were finally established. HIP 65595 was considered the North Star at that time, and together with the aforementioned *Emperor Star* and the *Three Excellencies*, a total of five stars formed the *Northern Pole* constellation. The meaning of the star officials was also reconstructed, with the *Three Excellencies* becoming *Crown Prince*, *Bastard*, and *Harem*.
+
+Soon, before the Sui and Tang Dynasties, the north celestial pole approached HIP 62572. This star is also faint but brighter than HIP 65595, so HIP 62572 replaced the previous HIP 65595 and became the new North Star. For several hundred years thereafter, spanning important dynasties such as Sui, Tang, Song, and Yuan, up to the Ming Dynasty when the *Xianglin* star chart was drawn, this star was observed as the North Star in China.
+
+In the Ming Dynasty, the north celestial pole moved away from HIP 62572 and approached α UMi, which is the contemporary North Star. However, since α UMi, as the brightest star in the *Gou Chen* constellation, already had a meaning that had been used for millennia, it could not be included as a member of the North Star official. Therefore, HIP 62572 continued to retain its name as *Northern Pole* *Celestial Pivot*, even though it was no longer the North Star.
 
 ##### Four Advisors
 
-*Four Advisors* (Chinese: 四辅, Pinyin: Sì Fǔ) consists of 4 stars surrounding the *Celestial Pivot Star* (HIP 62572). They represent four auxiliary ministers assisting the *Northern Pole*.
+*Four Advisors* (Chinese: 四辅, Pinyin: Sì Fǔ) consists of 4 stars surrounding the *Northern Pole* star (HIP 62572). They represent four auxiliary ministers assisting the *Northern Pole*.
+
+Because the *Northern Pole* star has undergone positional changes from HIP 65595 to HIP 62572, the *Four Advisors* had to change accordingly, making the identification of these four stars on star charts often very difficult, and there can be significant differences between different star charts.
 
 ##### Curved Array
 
 *Curved Array* (Chinese: 钩陈, Pinyin: Gōu Chén) consists of 6 stars in the *Purple Forbidden Enclosure*, arranged like a hook. It represents the Emperor's harem, with the brightest star α UMi representing the primary consort.
 
+During the Han Dynasty, *Curved Array* consisted of 4 stars (α, δ, ε, ζ). Later, no later than the Jin Dynasty, two stars were added (HIP 16489, HIP 4283). Because the two newly added stars at the hook's head were too faint, its shape frequently changed on star charts. Since the Song Dynasty, it was fixed as 2 UMi and HIP 112833. Later, due to positional changes of the *Interior Seats of the Five Emperors*, during the Yuan and Ming Dynasties, HIP 112833 was replaced by HIP 113116.
+
 ##### Great Emperor of Heaven
 
 *Great Emperor of Heaven* (Chinese: 天皇大帝, Pinyin: Tiān Huáng Dà Dì) is 1 star in the mouth of the *Curved Array*. In Taoism, the Heavenly Emperor is also known as the *Hook Array Emperor* because of its location in the *Curved Array*.
+
+He assists the Jade Emperor in governing the north and south celestial poles and the Three Powers (heaven, earth, and humanity), overseeing all stars, serving as the emperor of all celestial bodies and constellations, ruling over the stars, and managing all military and warfare affairs in the human world. Thus, he is regarded as the god of war and martial deity.
+
+Initially, the *Great Emperor of Heaven* corresponded to 2 UMi. However, with changes in the *Curved Array* constellation, the *Great Emperor of Heaven* was changed to HIP 115746 until the end of the Ming Dynasty. There are also a very few works that correspond the *Great Emperor of Heaven* to the brightest star α UMi of the *Curved Array*, but this is not mainstream.
 
 ##### Six Jia
 
@@ -127,7 +145,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Celestial Pillar
 
-*Celestial Pillar* (Chinese: 天柱, Pinyin: Tiān Zhù) consists of 5 stars near the *Purple Forbidden Left Wall*, close to the northern end of the wall. They are pillars in the Heavenly Palace used for posting decrees. Bans are often issued here at the beginning and middle of the month to notify all officials.
+*Celestial Pillar* (Chinese: 天柱, Pinyin: Tiān Zhù) consists of 5 stars near the *Purple Forbidden East Wall*, close to the northern end of the wall. They are pillars in the Heavenly Palace used for posting decrees. Bans are often issued here at the beginning and middle of the month to notify all officials.
 
 ##### Maids-in-waiting
 
@@ -175,7 +193,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Inner Kitchen
 
-*Inner Kitchen* (Chinese: 内厨, Pinyin: Nèi Chú) consists of 2 stars outside the southwest corner of the *Purple Forbidden Enclosure*, the kitchen responsible for the harem's diet.
+*Inner Kitchen* (Chinese: 内厨, Pinyin: Nèi Chú) consists of 2 stars outside the southwest corner of the *Purple Forbidden Enclosure*, the kitchen responsible for the palace's diet.
 
 ##### Celestial Kitchen
 
@@ -195,19 +213,23 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Administrative Center
 
-*Administrative Center* (Chinese: 文昌, Pinyin: Wén Chāng) consists of 6 stars in front of the *Northern Dipper*'s dipper, west of the *Purple Forbidden Enclosure*, shaped like a half-moon and a basket, known as "the dipper wearing a basket". It is a collective name for six government departments or officials, including the *Great General*, *Second General*, *Distinguished Primer*, *Deified Judge of Life*, *Deified Judge of Central Affairs*, and *Deified Judge of Rank*, in charge of cultural education, etiquette and music, rewarding and punishing officials, adding salaries, and promoting officials to higher positions.
+*Administrative Center* (Chinese: 文昌, Pinyin: Wén Chāng) consists of 6 stars in front of the bowl of the *Northern Dipper* (the Big Dipper), west of the *Purple Forbidden Enclosure*, shaped like a half-moon and a basket, known as "the dipper wearing a basket". It is a collective name for six government departments or officials, including the *Great General*, *Second General*, *Distinguished Premier*, *Deified Judge of Life*, *Deified Judge of Central Affairs*, and *Deified Judge of Rank*, in charge of cultural education, etiquette and music, rewarding and punishing officials, adding salaries, and promoting officials to higher positions.
+
+There are two theories regarding the number of stars in this constellation: six or seven. The original version consisted of seven stars: ο, τ, 23, υ, φ, θ, 15 UMa. In later Chinese traditions, the six-star version became mainstream. During the Tang Dynasty, due to inaccuracies in star charting, the entire constellation rotated counterclockwise, leading to changes in the corresponding stars, which were then altered to 23, υ, φ, θ, 15, HIP 44504/18 UMa, making a total of six stars. However, the older version continued to circulate. The *Administrative Center* constellation depicted in the *Xianglin* star chart is the early, unaltered version.
 
 ##### Celestial Prison
 
-*Celestial Prison* (Chinese: 天牢, Pinyin: Tiān Láo) consists of 6 stars under the *Northern Dipper*'s dipper, a prison for detaining law-breaking nobles.
+*Celestial Prison* (Chinese: 天牢, Pinyin: Tiān Láo) consists of 6 stars under the bowl of *Northern Dipper*, a prison for detaining law-breaking nobles.
 
 ##### Three Top Instructors
 
-*Three Top Instructors* (Chinese: 三师, Pinyin: Sān Shī) consists of 3 stars west of the first star (α UMa) of the *Northern Dipper*'s dipper. The *Three Top Instructors* are the *Grand Protector*, *Grand Tutor*, and *Grand Preceptor*, the highest officials responsible for national military and political affairs.
+*Three Top Instructors* (Chinese: 三师, Pinyin: Sān Shī) consists of 3 stars west of the first star (α UMa) of the bowl of the *Northern Dipper*. The *Three Top Instructors* are the *Grand Protector*, *Grand Tutor*, and *Grand Preceptor*, the highest officials responsible for national military and political affairs.
 
 ##### Northern Dipper
 
-*Northern Dipper* (Chinese: 北斗, Pinyin: Běi Dǒu) consists of 7 stars south of the *Purple Forbidden Enclosure*. The first 4 stars (α, β, γ, δ UMa) are called the dipper, and the last 3 stars (ε, ζ, η UMa) are called the dipper handle. Shaped like a ladle and located in the northern sky, it symbolizes the Heavenly Emperor's chariot.
+*Northern Dipper* (Chinese: 北斗, Pinyin: Běi Dǒu) consists of 7 stars south of the *Purple Forbidden Enclosure*, corresponds to the Big Dipper in the West. The first 4 stars (α, β, γ, δ UMa) are called *Dou Kui* (the Bowl or Ladle's Head), and the last 3 stars (ε, ζ, η UMa) are called *Dou Bing* or *Dou Shao* (the Handle). Shaped like a ladle and located in the northern sky, it symbolizes the Heavenly Emperor's chariot.
+
+The *Northern Dipper* lies within the circumpolar circle, is highly distinctive, and its stars are bright. Therefore, it became a crucial constellation for determining direction and indicating the seasons. By using the *Northern Dipper*, one can easily locate other bright stars and constellations in the sky.
 
 ##### Assistant (Vassal of Northern Dipper)
 
@@ -243,7 +265,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Celestial Flail
 
-*Celestial Flail* (Chinese: 天棓, Pinyin: Tiān Bàng) consists of 5 stars northeast of the *Girl's Bed*, a big stick, like the *Celestial Spear*, also a defensive weapon.
+*Celestial Flail* (Chinese: 天棓, Pinyin: Tiān Bàng) consists of 5 stars northeast of the *Woman's Bed*, a big stick, like the *Celestial Spear*, also a defensive weapon.
 
 ##### Royals
 
@@ -263,7 +285,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Seats of the Five Emperors
 
-*Seats of the Five Emperors* (Chinese: 五帝座, Pinyin: Wǔ Dì Zuò) consists of 5 stars in the center of the *Supreme Palace Enclosure*, the seats of the Five Emperors of the five directions. In the *Purple Forbidden Enclosure*, there is also the *Interior Seats of the Five Emperors*. The central bright star (β Leo) is the Yellow Emperor's seat, symbolizing the Son of Heaven.
+*Seats of the Five Emperors* (Chinese: 五帝座, Pinyin: Wǔ Dì Zuò) consists of 5 stars in the center of the *Supreme Palace Enclosure*, the seats of the Five Emperors of the five directions. In the *Purple Forbidden Enclosure*, there is also the *Interior Seats of the Five Emperors*. The central bright star (β Leo) is the seat of Yellow Emperor, symbolizing the Son of Heaven.
 
 ##### Inner Screen
 
@@ -287,7 +309,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Crown Prince
 
-*Crown Prince* (Chinese: 太子, Pinyin: Tài Zǐ) is 1 star north of the Yellow Emperor's seat.
+*Crown Prince* (Chinese: 太子, Pinyin: Tài Zǐ) is 1 star north of the *Seat of Yellow Emperor*.
 
 ##### Retinue (In Supreme Palace Enclosure)
 
@@ -295,11 +317,11 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Officer of Honour
 
-*Officer of Honour* (Chinese: 幸臣, Pinyin: Xìng Chén) is 1 star south of the *Crown Prince*, northeast of the Emperor's seat.
+*Officer of Honour* (Chinese: 幸臣, Pinyin: Xìng Chén) is 1 star south of the *Crown Prince*, northeast of the *Seats of the Five Emperors*.
 
 ##### Officers of the Imperial Guard
 
-*Officers of the Imperial Guard* (Chinese: 郎位, Pinyin: Láng Wèi) consists of 15 stars, northeast of the Emperor's seat.
+*Officers of the Imperial Guard* (Chinese: 郎位, Pinyin: Láng Wèi) consists of 15 stars, northeast of the *Seats of the Five Emperors*.
 
 ##### Captain of the Bodyguards
 
@@ -307,7 +329,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Royal Guards
 
-*Royal Guards* (Chinese: 常陈, Pinyin: Cháng Chén) consists of 7 stars north of the Emperor's seat.
+*Royal Guards* (Chinese: 常陈, Pinyin: Cháng Chén) consists of 7 stars north of the *Seats of the Five Emperors*.
 
 ##### Emperor's Bodyguard
 
@@ -319,15 +341,15 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Three Steps (Upper Step)
 
-*Upper Step* (Chinese: 上台, Pinyin: Shàng Tái) consists of 2 stars, the *Three Steps* start from the *Administrative Center* and line up in the *Supreme Palace Enclosure*.
+*Upper Step* (Chinese: 上台, Pinyin: Shàng Tái) as a part of the *Three Steps*, consists of 2 stars.
 
 ##### Three Steps (Middle Step)
 
-*Middle Step* (Chinese: 中台, Pinyin: Zhōng Tái) consists of 2 stars.
+*Middle Step* (Chinese: 中台, Pinyin: Zhōng Tái) as a part of the *Three Steps*, consists of 2 stars.
 
 ##### Three Steps (Lower Step)
 
-*Lower Step* (Chinese: 下台, Pinyin: Xià Tái) consists of 2 stars, north of the *Supreme Palace Enclosure West Wall*.
+*Lower Step* (Chinese: 下台, Pinyin: Xià Tái) as a part of the *Three Steps*, consists of 2 stars, north of the *Supreme Palace West Wall*.
 
 ##### Junior Officers
 
@@ -359,7 +381,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Emperor's Seat
 
-*Emperor's Seat* (Chinese: 帝座, Pinyin: Dì Zuò) is 1 star in the *Heavenly Market Enclosure*, west of the *Watchman*.
+*Emperor's Seat* (Chinese: 帝座, Pinyin: Dì Zuò) is 1 star in the *Heavenly Market Enclosure*, west of the *Astrologer*.
 
 ##### Astrologer
 
@@ -375,11 +397,11 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Official of Religious Ceremonies
 
-*Official of Religious Ceremonies* (Chinese: 宗人, Pinyin: Zōng Rén) consists of 4 stars east of the *Director of the Imperial Clan*.
+*Official of Religious Ceremonies* (Chinese: 宗人, Pinyin: Zōng Rén) consists of 4 stars east of the *Official for the Royal Clan*.
 
 ##### Patriarchal Clan Stars
 
-*Patriarchal Clan Stars* (Chinese: 宗星, Pinyin: Zōng Xīng) consists of 2 stars north of the *Clan Members*, east of the *Watchman*.
+*Patriarchal Clan Stars* (Chinese: 宗星, Pinyin: Zōng Xīng) consists of 2 stars north of the *Official of Religious Ceremonies*, east of the *Astrologer*.
 
 ##### Municipal Office
 
@@ -391,23 +413,23 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Dipper for Solids
 
-*Dipper for Solids* (Chinese: 斛, Pinyin: Hú) consists of 4 stars in the market, south of the *Dipper*.
+*Dipper for Solids* (Chinese: 斛, Pinyin: Hú) consists of 4 stars in the market, south of the *Dipper for Liquids*.
 
 ##### Dipper for Liquids
 
-*Dipper for Liquids* (Chinese: 斗, Pinyin: Dǒu) consists of 5 stars southwest of the *Eunuchs*.
+*Dipper for Liquids* (Chinese: 斗, Pinyin: Dǒu) consists of 5 stars southwest of the *Eunuch Official*.
 
 ##### Jewel Market
 
-*Jewel Market* (Chinese: 列肆, Pinyin: Liè Sì) consists of 2 stars in the *Heavenly Market Enclosure*, northwest of the *Grain Measure*.
+*Jewel Market* (Chinese: 列肆, Pinyin: Liè Sì) consists of 2 stars in the *Heavenly Market Enclosure*, northwest of the *Dipper for Solids*.
 
 ##### Textile Ruler
 
-*Textile Ruler* (Chinese: 帛度, Pinyin: Bó Dù) consists of 2 stars northeast of the *Clan* stars.
+*Textile Ruler* (Chinese: 帛度, Pinyin: Bó Dù) consists of 2 stars northeast of the *Patriarchal Clan Stars*.
 
 ##### Butcher's Shops
 
-*Butcher's Shops* (Chinese: 屠肆, Pinyin: Tú Sì) consists of 2 stars north of the *Silk Measure*.
+*Butcher's Shops* (Chinese: 屠肆, Pinyin: Tú Sì) consists of 2 stars north of the *Textile Ruler*.
 
 ##### Celestial Discipline
 
@@ -415,11 +437,11 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Woman's Bed
 
-*Woman's Bed* (Chinese: 女床, Pinyin: Nǚ Chuáng) consists of 3 stars north of the *Heavenly Discipline*.
+*Woman's Bed* (Chinese: 女床, Pinyin: Nǚ Chuáng) consists of 3 stars north of the *Celestial Discipline*.
 
 ##### Coiled Thong
 
-*Coiled Thong* (Chinese: 贯索, Pinyin: Guàn Suǒ) consists of 9 stars in front of the *Seven Dukes*.
+*Coiled Thong* (Chinese: 贯索, Pinyin: Guàn Suǒ) consists of 9 stars in front of the *Seven Excellencies*.
 
 ##### Seven Excellencies
 
@@ -431,7 +453,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Flat Road
 
-*Flat Road* (Chinese: 平道, Pinyin: Píng Dào) consists of 2 stars beside the left and right horns.
+*Flat Road* (Chinese: 平道, Pinyin: Píng Dào) consists of 2 stars beside the *Left Horn* (α Vir) and the *Right Horn* (ζ Vir).
 
 ##### Recommending Virtuous Men
 
@@ -439,15 +461,15 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Celestial Farmland (In Horn Mansion)
 
-*Celestial Farmland* (Chinese: 天田, Pinyin: Tiān Tián) consists of 2 stars north of the right horn.
+*Celestial Farmland* (Chinese: 天田, Pinyin: Tiān Tián) consists of 2 stars north of the *Right Horn* (ζ Vir).
 
 ##### Tripod of the Zhou
 
-*Tripod of the Zhou* (Chinese: 周鼎, Pinyin: Zhōu Dǐng) consists of 3 stars west of the Celestialinders, above the *Horn Mansion*.
+*Tripod of the Zhou* (Chinese: 周鼎, Pinyin: Zhōu Dǐng) consists of 3 stars west of the *Right Conductor*, above the *Horn Mansion*.
 
 ##### Celestial Gate
 
-*Celestial Gate* (Chinese: 天门, Pinyin: Tiān Mén) consists of 2 stars south of the left horn, north of the *Flat* stars.
+*Celestial Gate* (Chinese: 天门, Pinyin: Tiān Mén) consists of 2 stars south of the *Left Horn* (α Vir), north of the *Judging Stars*.
 
 ##### Judging Stars
 
@@ -467,7 +489,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Southern Gate
 
-*Southern Gate* (Chinese: 南门, Pinyin: Nán Mén) consists of 2 stars south of the *Storehouse*.
+*Southern Gate* (Chinese: 南门, Pinyin: Nán Mén) consists of 2 stars south of the *Arsenal*.
 
 ##### Neck
 
@@ -475,15 +497,15 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Great Horn
 
-*Great Horn* (Chinese: 大角, Pinyin: Dà Jiǎo) is 1 star between the Celestialinders.
+*Great Horn* (Chinese: 大角, Pinyin: Dà Jiǎo) is 1 star between the left and right *Conductors*.
 
 ##### Left Conductor
 
-*Left Conductor* (Chinese: 左摄提, Pinyin: Zuǒ Shè Tí) consists of 3 stars.
+*Left Conductor* (Chinese: 左摄提, Pinyin: Zuǒ Shè Tí) consists of 3 stars. The left and right *Conductors* sandwiching the *Great Horn*
 
 ##### Right Conductor
 
-*Right Conductor* (Chinese: 右摄提, Pinyin: Yòu Shè Tí) consists of 3 stars, directly south of the *Dipper* handle, sandwiching the *Great Horn*.
+*Right Conductor* (Chinese: 右摄提, Pinyin: Yòu Shè Tí) consists of 3 stars, directly south of the handle of the *Northern Dipper*. The left and right *Conductors* sandwiching the *Great Horn*
 
 ##### Executions
 
@@ -491,11 +513,11 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Trials
 
-*Trials* (Chinese: 顿顽, Pinyin: Dùn Wán) consists of 2 stars southeast of the *Breaking Authority*.
+*Trials* (Chinese: 顿顽, Pinyin: Dùn Wán) consists of 2 stars southeast of the *Executions*.
 
 ##### Gate of Yang
 
-*Gate of Yang* (Chinese: 阳门, Pinyin: Yáng Mén) consists of 2 stars north of the *Storehouse*.
+*Gate of Yang* (Chinese: 阳门, Pinyin: Yáng Mén) consists of 2 stars north of the *Arsenal*.
 
 ##### Root
 
@@ -503,11 +525,11 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Celestial Lance
 
-*Celestial Lance* (Chinese: 梗河, Pinyin: Gěng Hé) consists of 3 stars north of the *Great Horn*, north of the *Emperor's Seat*.
+*Celestial Lance* (Chinese: 梗河, Pinyin: Gěng Hé) consists of 3 stars north of the *Great Horn*, north of the *Mattress of the Emperor*.
 
 ##### Twinkling Indicator
 
-*Twinkling Indicator* (Chinese: 招摇, Pinyin: Zhāo Yáo) is 1 star north of the *Girdle River*.
+*Twinkling Indicator* (Chinese: 招摇, Pinyin: Zhāo Yáo) is 1 star north of the *Celestial Lance*.
 
 ##### Mattress of the Emperor
 
@@ -535,11 +557,11 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Chariots and Cavalry
 
-*Chariots and Cavalry* (Chinese: 车骑, Pinyin: Chē Qí) consists of 3 stars south of the *Cavalry Officers*.
+*Chariots and Cavalry* (Chinese: 车骑, Pinyin: Chē Qí) consists of 3 stars south of the *Imperial Guards*.
 
 ##### Chariots and Cavalry General
 
-*Chariots and Cavalry General* (Chinese: 骑阵将军, Pinyin: Qí Zhèn Jiāng Jūn) is 1 star at the eastern end of the *Cavalry Officers*.
+*Chariots and Cavalry General* (Chinese: 骑阵将军, Pinyin: Qí Zhèn Jiāng Jūn) is 1 star at the eastern end of the *Imperial Guards*.
 
 ##### Room
 
@@ -555,7 +577,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Punishment
 
-*Punishment* (Chinese: 罚, Pinyin: Fá) consists of 3 stars west of the *Eastern Salt*, lined north-south.
+*Punishment* (Chinese: 罚, Pinyin: Fá) consists of 3 stars west of the *Eastern Door*, lined north-south.
 
 ##### Eastern Door
 
@@ -587,7 +609,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Changing Room (Vassal of Tail)
 
-*Changing Room* (Chinese: 神宫, Pinyin: Shén Gōng) is 1 star beside the second star of the *Tail Mansion*.
+*Changing Room* (Chinese: 神宫, Pinyin: Shén Gōng) is 1 star beside the second star of the *Tail Mansion* (μ1 Sco).
 
 ##### Celestial River
 
@@ -599,7 +621,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Fish
 
-*Fish* (Chinese: 鱼, Pinyin: Yú) is 1 star in the river behind the *Tail Mansion*.
+*Fish* (Chinese: 鱼, Pinyin: Yú) is 1 star in the milky way behind the *Tail Mansion*.
 
 ##### Tortoise
 
@@ -619,7 +641,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Dipper
 
-*Dipper* (Chinese: 斗宿, Pinyin: Dǒu Xiù) consists of 6 stars.
+*Dipper* (Chinese: 斗宿, Pinyin: Dǒu Xiù) or *Southern Dipper*, consists of 6 stars.
 
 ##### Establishment Stars
 
@@ -627,7 +649,7 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Market Officer
 
-*Market Officer* (Chinese: 天弁, Pinyin: Tiān Biàn) consists of 9 stars north of the *Establishment* stars.
+*Market Officer* (Chinese: 天弁, Pinyin: Tiān Biàn) consists of 9 stars north of the *Establishment Stars*.
 
 ##### Celestial Keyhole
 
@@ -635,95 +657,95 @@ While omitting the constellations mentioned above, the official system added new
 
 ##### Peasant
 
-Peasant (Chinese: 农丈人, Pinyin: Nóng Zhàng Rén) is 1 star southwest of the Southern Dipper.
+*Peasant* (Chinese: 农丈人, Pinyin: Nóng Zhàng Rén) is 1 star southwest of the *Southern Dipper*.
 
 ##### Dog
 
-Dog (Chinese: 狗, Pinyin: Gǒu) consists of 2 stars in front of the Southern Dipper's dipper.
+*Dog* (Chinese: 狗, Pinyin: Gǒu) consists of 2 stars.
 
 ##### Celestial Cock
 
-Celestial Cock (Chinese: 天鸡, Pinyin: Tiān Jī) consists of 2 stars north of the Dog Country, west of the Ox.
+*Celestial Cock* (Chinese: 天鸡, Pinyin: Tiān Jī) consists of 2 stars north of the *Territory of Dog*, west of the *Ox*.
 
 ##### Territory of Dog
 
-Territory of Dog (Chinese: 狗国, Pinyin: Gǒu Guó) consists of 4 stars southeast of the Establishment stars.
+Territory of Dog (Chinese: 狗国, Pinyin: Gǒu Guó) consists of 4 stars southeast of the *Establishment Stars*.
 
 ##### River Turtle
 
-River Turtle (Chinese: 鳖, Pinyin: Biē) consists of 14 stars south of the Dipper.
+*River Turtle* (Chinese: 鳖, Pinyin: Biē) consists of 14 stars south of the *Dipper*.
 
 ##### Celestial Spring
 
-Celestial Spring (Chinese: 天渊, Pinyin: Tiān Yuān) consists of 10 stars southeast of the Turtle, between the Nine Creeks.
+*Celestial Spring* (Chinese: 天渊, Pinyin: Tiān Yuān) consists of 10 stars southeast of the *River Turtle*, between the *River Turtle* and the *Nine Water Wells*.
 
 ##### Ox
 
-Ox (Chinese: 牛宿, Pinyin: Niú Xiù) consists of 6 stars.
+*Ox* (Chinese: 牛宿, Pinyin: Niú Xiù) consists of 6 stars.
 
 ##### Celestial Drumstick
 
-Celestial Drumstick (Chinese: 天桴, Pinyin: Tiān Fú) consists of 4 stars lined horizontally northeast of the Ox.
+*Celestial Drumstick* (Chinese: 天桴, Pinyin: Tiān Fú) consists of 4 stars lined horizontally north of the *Ox*.
 
 ##### Drum at the River
 
-Drum at the River (Chinese: 河鼓, Pinyin: Hé Gǔ) consists of 3 stars northwest of the Ox.
+*Drum at the River* (Chinese: 河鼓, Pinyin: Hé Gǔ) consists of 3 stars northwest of the *Ox*.
 
 ##### Right Flag
 
-Right Flag (Chinese: 右旗, Pinyin: Yòu Qí) consists of 9 stars north of the Ox, southwest of the River Drum.
+*Right Flag* (Chinese: 右旗, Pinyin: Yòu Qí) consists of 9 stars north of the *Ox*, southwest of the *Drum at the River*.
 
 ##### Left Flag
 
-Left Flag (Chinese: 左旗, Pinyin: Zuǒ Qí) consists of 9 stars beside the left of the River Drum.
+*Left Flag* (Chinese: 左旗, Pinyin: Zuǒ Qí) consists of 9 stars beside the left of the *Drum at the River*.
 
 ##### Clepsydra Terrace
 
-Clepsydra Terrace (Chinese: 渐台, Pinyin: Jiàn Tái) consists of 4 stars southeast of the Weaving Maiden.
+*Clepsydra Terrace* (Chinese: 渐台, Pinyin: Jiàn Tái) consists of 4 stars southeast of the *Weaving Girl*.
 
 ##### Imperial Passageway
 
-Imperial Passageway (Chinese: 辇道, Pinyin: Niǎn Dào) consists of 5 stars northeast of the Gradual Terrace.
+*Imperial Passageway* (Chinese: 辇道, Pinyin: Niǎn Dào) consists of 5 stars northeast of the *Clepsydra Terrace*.
 
 ##### Weaving Girl
 
-Weaving Girl (Chinese: 织女, Pinyin: Zhī Nǚ) consists of 3 stars at the eastern end of the Heavenly Discipline, northeast of the Heavenly Market Enclosure.
+*Weaving Girl* (Chinese: 织女, Pinyin: Zhī Nǚ) consists of 3 stars at the eastern end of the *Celestial Discipline*, northeast of the *Heavenly Market Enclosure*.
 
 ##### Network of Dykes
 
-Network of Dykes (Chinese: 罗堰, Pinyin: Luó Yàn) consists of 3 stars east of the Ox.
+*Network of Dykes* (Chinese: 罗堰, Pinyin: Luó Yàn) consists of 3 stars east of the *Ox*.
 
 ##### Celestial Farmland (In Horn Mansion)
 
-Celestial Farmland (Chinese: 天田, Pinyin: Tiān Tián) consists of 9 stars south of the Ox.
+*Celestial Farmland* (Chinese: 天田, Pinyin: Tiān Tián) consists of 9 stars south of the *Ox*.
 
 ##### Nine Water Wells
 
-Nine Water Wells (Chinese: 九坎, Pinyin: Jiǔ Kǎn) consists of 9 stars south of the Ox.
+*Nine Water Wells* (Chinese: 九坎, Pinyin: Jiǔ Kǎn) consists of 9 stars south of the *Ox*.
 
 ##### Girl
 
-Girl (Chinese: 女宿, Pinyin: Nǚ Xiù) consists of 4 stars.
+*Girl* (Chinese: 女宿, Pinyin: Nǚ Xiù) consists of 4 stars.
 
 ##### Pearls on Ladies' Wear
 
-Pearls on Ladies' Wear (Chinese: 离珠, Pinyin: Lí Zhū) consists of 5 stars north of the Girl.
+*Pearls on Ladies' Wear* (Chinese: 离珠, Pinyin: Lí Zhū) consists of 5 stars north of the *Girl*.
 
 ##### Rotten Gourd
 
-Rotten Gourd (Chinese: 败瓜, Pinyin: Bài Guā) consists of 5 stars beside the Gourd.
+*Rotten Gourd* (Chinese: 败瓜, Pinyin: Bài Guā) consists of 5 stars beside the *Good Gourd*.
 
 ##### Good Gourd
 
-Good Gourd (Chinese: 瓠瓜, Pinyin: Hù Guā) consists of 5 stars north of the Pearls on Ladies' Wear.
+*Good Gourd* (Chinese: 瓠瓜, Pinyin: Hù Guā) consists of 5 stars north of the *Pearls on Ladies' Wear*.
 
 ##### Celestial Ford
 
-Celestial Ford (Chinese: 天津, Pinyin: Tiān Jīn) consists of 9 stars in the river north of the Gourd.
+*Celestial Ford* (Chinese: 天津, Pinyin: Tiān Jīn) consists of 9 stars in the milky way north of the *Good Gourd*.
 
 ##### Xi Zhong
 
-Xi Zhong (Chinese: 奚仲, Pinyin: Xī Zhòng) consists of 4 stars, shaped like a crossbar, north of the Celestial Ford.
+*Xi Zhong* (Chinese: 奚仲, Pinyin: Xī Zhòng) consists of 4 stars, shaped like the *Railings* constellation, north of the *Celestial Ford*.
 
 ##### Basket for Mulberry Leaves
 
@@ -731,483 +753,479 @@ Basket for Mulberry Leaves (Chinese: 扶筐, Pinyin: Fú Kuāng) consists of 7 s
 
 ##### Twelve States
 
-Twelve States (Chinese: 十二国, Pinyin: Shí èr Guó) consists of 16 stars.
+*Twelve States* (Chinese: 十二国, Pinyin: Shí èr Guó) consists of 16 stars.
 
 ##### Yue State
 
-Yue State (Chinese: 越, Pinyin: Yuè) is 1 star north of Zheng.
+*Yue State* (Chinese: 越, Pinyin: Yuè) is 1 star north of *Zheng State*.
 
 ##### Zheng State
 
-Zheng State (Chinese: 郑, Pinyin: Zhèng) is 1 star north of Zhao.
+*Zheng State* (Chinese: 郑, Pinyin: Zhèng) is 1 star north of *Zhao State*.
 
 ##### Zhao State
 
-Zhao State (Chinese: 赵, Pinyin: Zhào) consists of 2 stars north of Qi.
+*Zhao State* (Chinese: 赵, Pinyin: Zhào) consists of 2 stars north of *Qi State*.
 
 ##### Qi State
 
-Qi State (Chinese: 齐, Pinyin: Qí) is 1 star east of the Nine Creeks.
+*Qi State* (Chinese: 齐, Pinyin: Qí) is 1 star east of the *Nine Water Wells*.
 
 ##### Zhou State
 
-Zhou State (Chinese: 周, Pinyin: Zhōu) consists of 2 stars east of Yue.
+*Zhou State* (Chinese: 周, Pinyin: Zhōu) consists of 2 stars east of *Yue State*.
 
 ##### Qin State
 
-Qin State (Chinese: 秦, Pinyin: Qín) consists of 2 stars, lined north-south southeast of Zhou.
+*Qin State* (Chinese: 秦, Pinyin: Qín) consists of 2 stars, lined north-south southeast of *Zhou*.
 
 ##### Dai State
 
-Dai State (Chinese: 代, Pinyin: Dài) consists of 2 stars south of Qin.
+*Dai State* (Chinese: 代, Pinyin: Dài) consists of 2 stars south of *Qin State*.
 
 ##### Jin State
 
-Jin State (Chinese: 晋, Pinyin: Jìn) is 1 star west of Dai.
+*Jin State* (Chinese: 晋, Pinyin: Jìn) is 1 star west of *Dai State*.
 
 ##### Han State
 
-Han State (Chinese: 韩, Pinyin: Hán) is 1 star north of Jin.
+*Han State* (Chinese: 韩, Pinyin: Hán) is 1 star north of *Jin State*.
 
 ##### Wei State
 
-Wei State (Chinese: 魏, Pinyin: Wèi) is 1 star north of Han.
+*Wei State* (Chinese: 魏, Pinyin: Wèi) is 1 star north of *Han State*.
 
 ##### Chu State
 
-Chu State (Chinese: 楚, Pinyin: Chǔ) is 1 star west of Wei.
+*Chu State* (Chinese: 楚, Pinyin: Chǔ) is 1 star west of *Wei State*.
 
 ##### Yan State
 
-Yan State (Chinese: 燕, Pinyin: Yàn) is 1 star south of Chu.
+*Yan State* (Chinese: 燕, Pinyin: Yàn) is 1 star south of *Chu State*.
 
 ##### Emptiness
 
-Emptiness (Chinese: 虚宿, Pinyin: Xū Xiù) consists of 2 stars.
+*Emptiness* (Chinese: 虚宿, Pinyin: Xū Xiù) consists of 2 stars.
 
 ##### Deified Judge of Life
 
-Deified Judge of Life (Chinese: 司命, Pinyin: Sī Mìng) consists of 2 stars north of the Emptiness.
+*Deified Judge of Life* (Chinese: 司命, Pinyin: Sī Mìng) consists of 2 stars north of the *Emptiness*.
 
 ##### Deified Judge of Rank
 
-Deified Judge of Rank (Chinese: 司禄, Pinyin: Sī Lù) consists of 2 stars north of the Director of Destinies.
+*Deified Judge of Rank* (Chinese: 司禄, Pinyin: Sī Lù) consists of 2 stars north of the *Deified Judge of Life*.
 
 ##### Deified Judge of Disaster and Good Fortune
 
-Deified Judge of Disaster and Good Fortune (Chinese: 司危, Pinyin: Sī Wēi) consists of 2 stars north of the Director of Salaries.
+*Deified Judge of Disaster and Good Fortune* (Chinese: 司危, Pinyin: Sī Wēi) consists of 2 stars north of the *Deified Judge of Rank*.
 
 ##### Deified Judge of Right and Wrong
 
-Deified Judge of Right and Wrong (Chinese: 司非, Pinyin: Sī Fēi) consists of 2 stars north of the Director of Dangers.
+*Deified Judge of Right and Wrong* (Chinese: 司非, Pinyin: Sī Fēi) consists of 2 stars north of the *Deified Judge of Disaster and Good Fortune*.
 
 ##### Crying
 
-Crying (Chinese: 哭, Pinyin: Kū) consists of 2 stars south of the Emptiness.
+*Crying* (Chinese: 哭, Pinyin: Kū) consists of 2 stars south of the *Emptiness*.
 
 ##### Weeping
 
-Weeping (Chinese: 泣, Pinyin: Qì) consists of 2 stars east of the Crying.
+*Weeping* (Chinese: 泣, Pinyin: Qì) consists of 2 stars east of the *Crying*.
 
 ##### Celestial Ramparts
 
-Celestial Ramparts (Chinese: 天垒城, Pinyin: Tiān Lěi Chéng) consists of 12 stars south of the Crying and Weeping.
+*Celestial Ramparts* (Chinese: 天垒城, Pinyin: Tiān Lěi Chéng) consists of 12 stars south of the *Crying* and *Weeping*.
 
 ##### Decayed Mortar
 
-Decayed Mortar (Chinese: 败臼, Pinyin: Bài Jiù) consists of 4 stars south of the Emptiness and Danger.
+*Decayed Mortar* (Chinese: 败臼, Pinyin: Bài Jiù) consists of 4 stars south of the *Emptiness* and *Rooftop*.
 
 ##### Jade Ornament on Ladies' Wear
 
-Jade Ornament on Ladies' Wear (Chinese: 离瑜, Pinyin: Lí Yú) consists of 3 stars, lined north-south southeast of Qin and Dai.
+*Jade Ornament on Ladies' Wear* (Chinese: 离瑜, Pinyin: Lí Yú) consists of 3 stars, lined north-south southeast of *Qin State* and *Dai State*.
 
 ##### Rooftop
 
-Rooftop (Chinese: 危宿, Pinyin: Wēi Xiù) consists of 3 stars southeast of the Celestial Ford.
+*Rooftop* (Chinese: 危宿, Pinyin: Wēi Xiù) consists of 3 stars southeast of the *Celestial Ford*.
 
 ##### Tomb (Vassal of Rooftop)
 
-Tomb (Chinese: 坟墓, Pinyin: Fén Mù) consists of 4 stars south of the Danger.
+*Tomb* (Chinese: 坟墓, Pinyin: Fén Mù) consists of 4 stars south of the *Rooftop*.
 
 ##### Humans Stars
 
-Humans Stars (Chinese: 人星, Pinyin: Rén Xīng) consists of 5 stars southeast of the Chariot House, north of the Emptiness.
+*Humans Stars* (Chinese: 人星, Pinyin: Rén Xīng) consists of 5 stars southeast of the *Big Yard for Chariots*, north of the *Emptiness*.
 
 ##### Pestle (In Rooftop Mansion)
 
-Pestle (Chinese: 杵, Pinyin: Chǔ) consists of 3 stars east of the People stars, beside the river.
+*Pestle* (Chinese: 杵, Pinyin: Chǔ) consists of 3 stars east of the *Humans Stars*, beside the milky way.
 
 ##### Mortar
 
-Mortar (Chinese: 臼, Pinyin: Jiù) consists of 4 stars east of the People stars, under the Pestle stars.
+*Mortar* (Chinese: 臼, Pinyin: Jiù) consists of 4 stars east of the *Humans Stars*, under the *Pestle* stars.
 
 ##### Big Yard for Chariots
 
-Big Yard for Chariots (Chinese: 车府, Pinyin: Chē Fǔ) consists of 7 stars east of the Celestial Ford, near the river, lined east-west.
+*Big Yard for Chariots* (Chinese: 车府, Pinyin: Chē Fǔ) consists of 7 stars east of the *Celestial Ford*, near the milky way, lined east-west.
 
 ##### Zaofu
 
-Zaofu (Chinese: 造父, Pinyin: Zào Fù) consists of 5 stars south of the Guest House, in the river.
+*Zaofu* (Chinese: 造父, Pinyin: Zào Fù) consists of 5 stars south of the *Celestial Hook*, in the milky way.
 
 ##### Celestial Hook
 
-Celestial Hook (Chinese: 天钩, Pinyin: Tiān Gōu) consists of 9 stars north of Zao Fu.
+*Celestial Hook* (Chinese: 天钩, Pinyin: Tiān Gōu) consists of 9 stars north of *Zaofu*.
 
 ##### Roofing
 
-Roofing (Chinese: 盖屋, Pinyin: Gài Wū) consists of 2 stars south of the Danger.
+*Roofing* (Chinese: 盖屋, Pinyin: Gài Wū) consists of 2 stars south of the *Rooftop*.
 
 ##### Temple
 
-Temple (Chinese: 虚梁, Pinyin: Xū Liáng) consists of 4 stars south of the Danger.
+*Temple* (Chinese: 虚梁, Pinyin: Xū Liáng) consists of 4 stars south of the *Rooftop*.
 
 ##### Celestial Money
 
-Celestial Money (Chinese: 天钱, Pinyin: Tiān Qián) consists of 10 stars northwest of the Northern Fall.
+*Celestial Money* (Chinese: 天钱, Pinyin: Tiān Qián) consists of 10 stars northwest of the *North Gate of the Military Camp*.
 
 ##### Encampment
 
-Encampment (Chinese: 室宿, Pinyin: Shì Xiù) consists of 2 stars.
+*Encampment* (Chinese: 室宿, Pinyin: Shì Xiù) consists of 2 stars.
 
 ##### Resting Palace (Vassal of Encampment)
 
-Resting Palace (Chinese: 离宫, Pinyin: Lí Gōng) consists of 6 stars.
+*Resting Palace* (Chinese: 离宫, Pinyin: Lí Gōng) consists of 6 stars.
 
 ##### Flying Serpent
 
-Flying Serpent (Chinese: 螣蛇, Pinyin: Téng Shé) consists of 22 stars north of the Encampment.
+*Flying Serpent* (Chinese: 螣蛇, Pinyin: Téng Shé) consists of 22 stars north of the *Encampment*.
 
 ##### Thunder and Lightning
 
-Thunder and Lightning (Chinese: 雷电, Pinyin: Léi Diàn) consists of 6 stars southwest of the Encampment.
+*Thunder and Lightning* (Chinese: 雷电, Pinyin: Léi Diàn) consists of 6 stars southwest of the *Encampment*.
 
 ##### Official for Materials Supply
 
-Official for Materials Supply (Chinese: 土公吏, Pinyin: Tǔ Gōng Lì) consists of 2 stars southwest of the Encampment.
+*Official for Materials Supply* (Chinese: 土公吏, Pinyin: Tǔ Gōng Lì) consists of 2 stars southwest of the *Encampment*.
 
 ##### Palace Guard
 
-Palace Guard (Chinese: 羽林军, Pinyin: Yǔ Lín Jūn) consists of 45 stars south of the Encampment, south of the Ramparts.
+*Palace Guard* (Chinese: 羽林军, Pinyin: Yǔ Lín Jūn) consists of 45 stars south of the Encampment, south of the *Line of Ramparts*.
 
 ##### Line of Ramparts
 
-Line of Ramparts (Chinese: 垒壁阵, Pinyin: Lěi Bì Zhèn) consists of 12 stars south of the Encampment and Wall, north of the Feathered Forest.
+*Line of Ramparts* (Chinese: 垒壁阵, Pinyin: Lěi Bì Zhèn) consists of 12 stars south of the *Encampment* and *Wall*, north of the *Palace Guard*.
 
 ##### Axe
 
-Axe (Chinese: 𫓧钺, Pinyin: Fū Yuè) consists of 3 stars east of the Northern Fall.
+*Axe* (Chinese: 𫓧钺, Pinyin: Fū Yuè) consists of 3 stars east of the *North Gate of the Military Camp*.
 
 ##### North Gate of the Military Camp
 
-North Gate of the Military Camp (Chinese: 北落师门, Pinyin: Běi Luò Shī Mén) is 1 star southwest of the Feathered Forest.
+*North Gate of the Military Camp* (Chinese: 北落师门, Pinyin: Běi Luò Shī Mén) is 1 star southwest of the *Palace Guard*.
 
 ##### Materials for Making Tents
 
-Materials for Making Tents (Chinese: 天纲, Pinyin: Tiān Gāng) is 1 star southwest of the Northern Fall.
+*Materials for Making Tents* (Chinese: 天纲, Pinyin: Tiān Gāng) is 1 star southwest of the *North Gate of the Military Camp*.
 
 ##### Net for Catching Birds
 
-Net for Catching Birds (Chinese: 八魁, Pinyin: Bā Kuí) consists of 9 stars southeast of the Northern Fall.
+*Net for Catching Birds* (Chinese: 八魁, Pinyin: Bā Kuí) consists of 9 stars southeast of the *North Gate of the Military Camp*.
 
 ##### Wall
 
-Wall (Chinese: 壁宿, Pinyin: Bì Xiù) consists of 2 stars.
+*Wall* (Chinese: 壁宿, Pinyin: Bì Xiù) consists of 2 stars.
 
 ##### Celestial Stable
 
-Celestial Stable (Chinese: 天厩, Pinyin: Tiān Jiù) consists of 10 stars north of the Eastern Wall, near Wang Liang.
+*Celestial Stable* (Chinese: 天厩, Pinyin: Tiān Jiù) consists of 10 stars north of the *Wall*, near *Wang Liang*.
 
 ##### Official for Earthworks and Buildings
 
-Official for Earthworks and Buildings (Chinese: 土公, Pinyin: Tǔ Gōng) consists of 2 stars south of the Eastern Wall.
-
-##### Celestial Spring
-
-Celestial Sea (Chinese: 天海, Pinyin: Tiān Hǎi) consists of 10 stars.
+*Official for Earthworks and Buildings* (Chinese: 土公, Pinyin: Tǔ Gōng) consists of 2 stars south of the *Wall*.
 
 ##### Thunderbolt
 
-Thunderbolt (Chinese: 霹雳, Pinyin: Pī Lì) consists of 5 stars southwest of the Earth Duke, north of the Clouds and Rain.
+*Thunderbolt* (Chinese: 霹雳, Pinyin: Pī Lì) consists of 5 stars southwest of the *Official for Earthworks and Buildings*, north of the *Cloud and Rain*.
 
 ##### Cloud and Rain
 
-Cloud and Rain (Chinese: 云雨, Pinyin: Yún Yǔ) consists of 4 stars south of the Thunderbolt, east of the Thunder and Lightning.
+*Cloud and Rain* (Chinese: 云雨, Pinyin: Yún Yǔ) consists of 4 stars south of the *Thunderbolt*, east of the *Thunder and Lightning*.
 
 ##### Sickle
 
-Sickle (Chinese: 𫓧锧, Pinyin: Fū Zhì) consists of 5 stars southwest of the Celestial Granary.
+*Sickle* (Chinese: 𫓧锧, Pinyin: Fū Zhì) consists of 5 stars southwest of the *Square Celestial Granary*.
 
 ##### Legs
 
-Legs (Chinese: 奎宿, Pinyin: Kuí Xiù) consists of 16 stars.
+*Legs* (Chinese: 奎宿, Pinyin: Kuí Xiù) consists of 16 stars.
 
 ##### Auxiliary Road
 
-Auxiliary Road (Chinese: 附路, Pinyin: Fù Lù) is 1 star beside the south of the Flying Corridor, east of Wang Liang.
+*Auxiliary Road* (Chinese: 附路, Pinyin: Fù Lù) is 1 star beside the south of the *Flying Corridor*, east of *Wang Liang*.
 
 ##### Flying Corridor
 
-*Flying Corridor* (Chinese: 阁道, Pinyin: Gé Dào) consists of 6 stars in front of Wang Liang.
+*Flying Corridor* (Chinese: 阁道, Pinyin: Gé Dào) consists of 6 stars in front of *Wang Liang*.
 
 ##### Wang Liang
 
-Wang Liang (Chinese: 王良, Pinyin: Wáng Liáng) consists of 5 stars in the river north of the Legs.
+*Wang Liang* (Chinese: 王良, Pinyin: Wáng Liáng) consists of 5 stars in the river north of the *Legs*.
 
 ##### Whip
 
-Whip (Chinese: 策, Pinyin: Cè) is 1 star north of Wang Liang.
+*Whip* (Chinese: 策, Pinyin: Cè) is 1 star north of *Wang Liang*.
 
 ##### Southern Military Gate
 
-Southern Military Gate (Chinese: 军南门, Pinyin: Jūn Nán Mén) is 1 star southwest of the Celestial Great General.
+*Southern Military Gate* (Chinese: 军南门, Pinyin: Jūn Nán Mén) is 1 star southwest of the *Great General of Heaven*.
 
 ##### Outer Fence
 
-Outer Fence (Chinese: 外屏, Pinyin: Wài Píng) consists of 7 stars south of the Legs.
+*Outer Fence* (Chinese: 外屏, Pinyin: Wài Píng) consists of 7 stars south of the *Legs*.
 
 ##### Celestial Pigsty
 
-Celestial Pigsty (Chinese: 天溷, Pinyin: Tiān Hùn) consists of 7 stars south of the Outer Screen.
+*Celestial Pigsty* (Chinese: 天溷, Pinyin: Tiān Hùn) consists of 7 stars south of the *Outer Screen*.
 
 ##### Master of Constructions (In Legs Mansion)
 
-Master of Constructions (Chinese: 土司空, Pinyin: Tǔ Sī Kōng) is 1 star south of the Legs.
+*Master of Constructions* (Chinese: 土司空, Pinyin: Tǔ Sī Kōng) is 1 star south of the *Legs*.
 
 ##### Bond
 
-Bond (Chinese: 娄宿, Pinyin: Lóu Xiù) consists of 3 stars.
+*Bond* (Chinese: 娄宿, Pinyin: Lóu Xiù) consists of 3 stars.
 
 ##### Great General of Heaven
 
-Great General of Heaven (Chinese: 天大将军, Pinyin: Tiān Dà Jiāng Jūn) consists of 11 stars north of the Bond.
+*Great General of Heaven* (Chinese: 天大将军, Pinyin: Tiān Dà Jiāng Jūn) consists of 11 stars north of the *Bond*.
 
 ##### Official in Charge of Pasturing
 
-Official in Charge of Pasturing (Chinese: 右更, Pinyin: Yòu Gēng) consists of 5 stars west of the Bond.
+*Official in Charge of Pasturing* (Chinese: 右更, Pinyin: Yòu Gēng) consists of 5 stars west of the *Bond*.
 
 ##### Official in Charge of the Forest
 
-Official in Charge of the Forest (Chinese: 左更, Pinyin: Zuǒ Gēng) consists of 5 stars east of the Bond.
+*Official in Charge of the Forest* (Chinese: 左更, Pinyin: Zuǒ Gēng) consists of 5 stars east of the *Bond*.
 
 ##### Square Celestial Granary
 
-Square Celestial Granary (Chinese: 天仓, Pinyin: Tiān Cāng) consists of 6 stars south of the Bond.
+*Square Celestial Granary* (Chinese: 天仓, Pinyin: Tiān Cāng) consists of 6 stars south of the *Bond*.
 
 ##### Ricks of Grain
 
-Ricks of Grain (Chinese: 天庾, Pinyin: Tiān Yǔ) consists of 3 stars southeast of the Celestial Granary.
+*Ricks of Grain* (Chinese: 天庾, Pinyin: Tiān Yǔ) consists of 3 stars southeast of the *Square Celestial Granary*.
 
 ##### Stomach
 
-Stomach (Chinese: 胃宿, Pinyin: Wèi Xiù) consists of 3 stars.
+*Stomach* (Chinese: 胃宿, Pinyin: Wèi Xiù) consists of 3 stars.
 
 ##### Mausoleum
 
-Mausoleum (Chinese: 大陵, Pinyin: Dà Líng) consists of 8 stars north of the Stomach.
+*Mausoleum* (Chinese: 大陵, Pinyin: Dà Líng) consists of 8 stars north of the *Stomach*.
 
 ##### Heap of Corpses (In Stomach Mansion)
 
-Heap of Corpses (Chinese: 积尸, Pinyin: Jī Shī) is 1 star in the Great Mound.
+*Heap of Corpses* (Chinese: 积尸, Pinyin: Jī Shī) is 1 star in the *Mausoleum*.
 
 ##### Celestial Boat
 
-Celestial Boat (Chinese: 天船, Pinyin: Tiān Chuán) consists of 9 stars north of the Great Mound, in the river.
+*Celestial Boat* (Chinese: 天船, Pinyin: Tiān Chuán) consists of 9 stars north of the *Mausoleum*, in the milky way.
 
 ##### Stored water (In Stomach Mansion)
 
-Stored water (Chinese: 积水, Pinyin: Jī Shuǐ) is 1 star in the Celestial Ship.
+*Stored water* (Chinese: 积水, Pinyin: Jī Shuǐ) is 1 star in the *Celestial Boat*.
 
 ##### Circular Celestial Granary
 
-Circular Celestial Granary (Chinese: 天囷, Pinyin: Tiān Qūn) consists of 13 stars south of the Stomach, shaped like a Y.
+*Circular Celestial Granary* (Chinese: 天囷, Pinyin: Tiān Qūn) consists of 13 stars south of the *Stomach*, shaped like a character "乙".
 
 ##### Celestial Foodstuff
 
-Celestial Foodstuff (Chinese: 天廪, Pinyin: Tiān Lǐn) consists of 4 stars south of the Hairy Head.
+*Celestial Foodstuff* (Chinese: 天廪, Pinyin: Tiān Lǐn) consists of 4 stars south of the *Hairy Head*.
 
 ##### Hairy Head
 
-Hairy Head (Chinese: 昴宿, Pinyin: Mǎo Xiù) consists of 7 stars.
+*Hairy Head* (Chinese: 昴宿, Pinyin: Mǎo Xiù) consists of 7 stars.
 
 ##### Celestial Concave
 
-Celestial Concave (Chinese: 天阿, Pinyin: Tiān Ā) is 1 star north of the Celestial Granary,偏高 west of the Hairy Head.
+*Celestial Concave* (Chinese: 天阿, Pinyin: Tiān Ā) is 1 star northwest of the *Hairy Head*.
 
 ##### Rolled Tongue
 
-Rolled Tongue (Chinese: 卷舌, Pinyin: Juǎn Shé) consists of 6 stars north of the Hairy Head.
+*Rolled Tongue* (Chinese: 卷舌, Pinyin: Juǎn Shé) consists of 6 stars north of the *Hairy Head*.
 
 ##### Celestial Slander
 
-Celestial Slander (Chinese: 天谗, Pinyin: Tiān Chán) is 1 star in the Rolling Tongue.
+*Celestial Slander* (Chinese: 天谗, Pinyin: Tiān Chán) is 1 star in the *Rolled Tongue*.
 
 ##### Whetstone
 
-Whetstone (Chinese: 砺石, Pinyin: Lì Shí) consists of 4 stars west of the Five Chariots.
+*Whetstone* (Chinese: 砺石, Pinyin: Lì Shí) consists of 4 stars southeast of the *Rolled Tongue*.
 
 ##### Lunar Star
 
-Lunar Star (Chinese: 月, Pinyin: Yuè) is 1 star east of the Hairy Head.
+*Lunar Star* (Chinese: 月, Pinyin: Yuè) is 1 star east of the *Hairy Head*.
 
 ##### Celestial Yin Force
 
-Celestial Yin Force (Chinese: 天阴, Pinyin: Tiān Yīn) consists of 5 stars west of the Net's handle.
+*Celestial Yin Force* (Chinese: 天阴, Pinyin: Tiān Yīn) consists of 5 stars west of the *Net*'s handle.
 
 ##### Hay
 
-Hay (Chinese: 刍藁, Pinyin: Chú Gǎo) consists of 6 stars west of the Celestial Garden.
+*Hay* (Chinese: 刍藁, Pinyin: Chú Gǎo) consists of 6 stars west of the *Celestial Meadows*.
 
 ##### Celestial Meadows
 
-Celestial Meadows (Chinese: 天苑, Pinyin: Tiān Yuàn) consists of 16 stars south of the Net.
+*Celestial Meadows* (Chinese: 天苑, Pinyin: Tiān Yuàn) consists of 16 stars south of the *Net*.
 
 ##### Net
 
-Net (Chinese: 毕宿, Pinyin: Bì Xiù) consists of 8 stars.
+*Net* (Chinese: 毕宿, Pinyin: Bì Xiù) consists of 8 stars.
 
 ##### Whisper (Vassal of Net)
 
-Whisper (Chinese: 附耳, Pinyin: Fù Ěr) is 1 star under the Net.
+*Whisper* (Chinese: 附耳, Pinyin: Fù Ěr) is 1 star under the *Net*.
 
 ##### Celestial Street
 
-Celestial Street (Chinese: 天街, Pinyin: Tiān Jiē) consists of 2 stars between the Hairy Head and Net, near the east of the Moon.
+*Celestial Street* (Chinese: 天街, Pinyin: Tiān Jiē) consists of 2 stars between the *Hairy Head* and *Net*, near the east of the *Lunar Star*.
 
 ##### Feudal Kings
 
-Feudal Kings (Chinese: 诸王, Pinyin: Zhū Wáng) consists of 6 stars south of the Five Chariots.
+*Feudal Kings* (Chinese: 诸王, Pinyin: Zhū Wáng) consists of 6 stars south of the *Five Chariots*.
 
 ##### Celestial High Terrace
 
-Celestial High Terrace (Chinese: 天高, Pinyin: Tiān Gāo) consists of 4 stars west of the Three Flags, near the Net.
+*Celestial High Terrace* (Chinese: 天高, Pinyin: Tiān Gāo) consists of 4 stars west of the *Banner of Three Stars*, near the *Net*.
 
 ##### Five Chariots
 
-Five Chariots (Chinese: 五车, Pinyin: Wǔ Chē) consists of 5 stars northeast of the Net.
+*Five Chariots* (Chinese: 五车, Pinyin: Wǔ Chē) consists of 5 stars northeast of the *Net*.
 
 ##### Pillars (In Net Mansion)
 
-Pillars (Chinese: 柱, Pinyin: Zhù) consists of 9 stars northeast of the Net.
+*Pillars* (Chinese: 柱, Pinyin: Zhù) consists of 9 stars northeast of the *Net*.
 
 ##### Celestial Pier
 
-Celestial Pier (Chinese: 天潢, Pinyin: Tiān Huáng) consists of 5 stars in the Five Chariots.
+*Celestial Pier* (Chinese: 天潢, Pinyin: Tiān Huáng) consists of 5 stars in the *Five Chariots*.
 
 ##### Pool of Harmony
 
-Pool of Harmony (Chinese: 咸池, Pinyin: Xián Chí) consists of 3 stars northwest of the Celestial Yellow Springs.
+*Pool of Harmony* (Chinese: 咸池, Pinyin: Xián Chí) consists of 3 stars northwest of the *Celestial Pier*.
 
 ##### Celestial Pass
 
-Celestial Pass (Chinese: 天关, Pinyin: Tiān Guān) is 1 star south of the Five Chariots, northwest of the Three Stars.
+*Celestial Pass* (Chinese: 天关, Pinyin: Tiān Guān) is 1 star south of the *Five Chariots*, northwest of the *Three Stars*.
 
 ##### Celestial Tally
 
-Celestial Tally (Chinese: 天节, Pinyin: Tiān Jié) consists of 8 stars south of the Net and Attached Ear.
+*Celestial Tally* (Chinese: 天节, Pinyin: Tiān Jié) consists of 8 stars south of the *Net* and *Whisper*.
 
 ##### Interpreters of Nine Dialects
 
-Interpreters of Nine Dialects (Chinese: 九州殊口, Pinyin: Jiǔ Zhōu Shū Kǒu) consists of 9 stars under the Celestial Festival.
+*Interpreters of Nine Dialects* (Chinese: 九州殊口, Pinyin: Jiǔ Zhōu Shū Kǒu) consists of 9 stars under the *Celestial Tally*.
 
 ##### Banner of Three Stars
 
-Banner of Three Stars (Chinese: 参旗, Pinyin: Shēn Qí) consists of 9 stars west of the Three Stars.
+*Banner of Three Stars* (Chinese: 参旗, Pinyin: Shēn Qí) consists of 9 stars west of the *Three Stars*.
 
 ##### Imperial Military Flag
 
-Imperial Military Flag (Chinese: 九斿, Pinyin: Jiǔ Yóu) consists of 9 stars southwest of the Jade Well.
+*Imperial Military Flag* (Chinese: 九斿, Pinyin: Jiǔ Yóu) consists of 9 stars southwest of the *Jade Well*.
 
 ##### Celestial Orchard
 
-Celestial Orchard (Chinese: 天园, Pinyin: Tiān Yuán) consists of 13 stars south of the Celestial Garden.
+*Celestial Orchard* (Chinese: 天园, Pinyin: Tiān Yuán) consists of 13 stars south of the *Celestial Meadows*.
 
 ##### Turtle Beak
 
-Turtle Beak (Chinese: 觜宿, Pinyin: Zī Xiù) consists of 3 stars.
+*Turtle Beak* (Chinese: 觜宿, Pinyin: Zī Xiù) consists of 3 stars.
 
 ##### Deity in Charge of Monsters
 
-Deity in Charge of Monsters (Chinese: 司怪, Pinyin: Sī Guài) consists of 4 stars in front of the Well Axe.
+*Deity in Charge of Monsters* (Chinese: 司怪, Pinyin: Sī Guài) consists of 4 stars in front of the *Well* and the *Battle Axe*.
 
 ##### Seat Flags
 
-Seat Flags (Chinese: 座旗, Pinyin: Zuò Qí) consists of 9 stars northeast of the Director of Monsters.
+*Seat Flags* (Chinese: 座旗, Pinyin: Zuò Qí) consists of 9 stars northeast of the *Deity in Charge of Monsters*.
 
 ##### Three Stars
 
-Three Stars (Chinese: 参宿, Pinyin: Shēn Xiù) consists of 10 stars.
+*Three Stars* (Chinese: 参宿, Pinyin: Shēn Xiù) consists of 7 stars.
 
 ##### Send Armed Forces To Suppress (Vassal of Three Stars)
 
-Send Armed Forces To Suppress (Chinese: 伐, Pinyin: Fá) consists of 3 small stars in the center of the Three Stars.
+*Send Armed Forces To Suppress* (Chinese: 伐, Pinyin: Fá) consists of 3 small stars in the center of the *Three Stars*.
 
 ##### Jade Well
 
-Jade Well (Chinese: 玉井, Pinyin: Yù Jǐng) consists of 4 stars under the left foot of the Three Stars.
+*Jade Well* (Chinese: 玉井, Pinyin: Yù Jǐng) consists of 4 stars under the left foot of the *Three Stars* (β Ori).
 
 ##### Military Well
 
-Military Well (Chinese: 军井, Pinyin: Jūn Jǐng) consists of 4 stars southeast of the Jade Well.
+*Military Well* (Chinese: 军井, Pinyin: Jūn Jǐng) consists of 4 stars southeast of the *Jade Well*.
 
 ##### Screen
 
-Screen (Chinese: 屏, Pinyin: Píng) consists of 2 stars south of the Jade Well.
+*Screen* (Chinese: 屏, Pinyin: Píng) consists of 2 stars south of the *Jade Well*.
 
 ##### Toilet
 
-Toilet (Chinese: 厕, Pinyin: Cè) consists of 4 stars east of the Screen.
+*Toilet* (Chinese: 厕, Pinyin: Cè) consists of 4 stars east of the *Screen*.
 
 ##### Excrement
 
-Excrement (Chinese: 屎, Pinyin: Tiān) is 1 star south of the Toilet.
+*Excrement* (Chinese: 屎, Pinyin: Tiān) is 1 star south of the *Toilet*.
 
 ##### Well
 
-Well (Chinese: 井宿, Pinyin: Jǐng Xiù) consists of 8 stars.
+*Well* (Chinese: 井宿, Pinyin: Jǐng Xiù) or *Eastern Well*, consists of 8 stars.
 
 ##### Battle Axe (Vassal of Well)
 
-Battle Axe (Chinese: 钺, Pinyin: Yuè) is 1 star attached to the front of the Well Mansion.
+*Battle Axe* (Chinese: 钺, Pinyin: Yuè) is 1 star attached to the front of the *Well Mansion*.
 
 ##### Celestial Wine Cup
 
-Celestial Wine Cup (Chinese: 天罇, Pinyin: Tiān Zūn) consists of 3 stars north of the Eastern Well, south of the Five Lords.
+*Celestial Wine Cup* (Chinese: 天罇, Pinyin: Tiān Zūn) consists of 3 stars north of the *Well*, south of the *Five Feudal Kings*.
 
 ##### Five Feudal Kings
 
-Five Feudal Kings (Chinese: 五诸侯, Pinyin: Wǔ Zhū Hóu) consists of 5 stars north of the Eastern Well, near the Northern River.
+*Five Feudal Kings* (Chinese: 五诸侯, Pinyin: Wǔ Zhū Hóu) consists of 5 stars north of the *Eastern Well*, near the *North River*.
 
 ##### North River
 
-North River (Chinese: 北河, Pinyin: Běi Hé) consists of 3 stars northeast of the Three Stars.
+*North River* (Chinese: 北河, Pinyin: Běi Hé) consists of 3 stars.
 
 ##### South River
 
-South River (Chinese: 南河, Pinyin: Nán Hé) consists of 3 stars northeast of the Three Stars.
+*South River* (Chinese: 南河, Pinyin: Nán Hé) consists of 3 stars northeast of the *Three Stars*.
 
 ##### Accumulated Water (In Well Mansion)
 
-Stored water (Chinese: 积水, Pinyin: Jī Shuǐ) is 1 star northwest of the Northern River.
+*Accumulated water* (Chinese: 积水, Pinyin: Jī Shuǐ) is 1 star northwest of the *North River*.
 
 ##### Pile of Firewood
 
-Pile of Firewood (Chinese: 积薪, Pinyin: Jī Xīn) is 1 star southeast of the Accumulated Water.
+*Pile of Firewood* (Chinese: 积薪, Pinyin: Jī Xīn) is 1 star southeast of the *Accumulated Water*.
 
 ##### Water Level
 
-Water Level (Chinese: 水位, Pinyin: Shuǐ Wèi) consists of 4 stars, lined north-south southeast of the Eastern Well, east of the Accumulated Firewood.
+*Water Level* (Chinese: 水位, Pinyin: Shuǐ Wèi) consists of 4 stars, lined north-south east of the *Eastern Well*.
 
 ##### Four Channels
 
-Four Channels (Chinese: 四渎, Pinyin: Sì Dú) consists of 4 stars east of the Southern辕 of the Eastern Well.
+*Four Channels* (Chinese: 四渎, Pinyin: Sì Dú) consists of 4 stars east of the southern lined four stars of the *Eastern Well*.
 
 ##### Official for Irrigation
 
-Official for Irrigation (Chinese: 水府, Pinyin: Shuǐ Fǔ) consists of 4 stars southwest of the Eastern Well.
+*Official for Irrigation* (Chinese: 水府, Pinyin: Shuǐ Fǔ) consists of 4 stars southwest of the *Eastern Well*.
 
 ##### Palace Gate
 
-Palace Gate (Chinese: 阙丘, Pinyin: Quē Qiū) consists of 2 stars south of the Southern River.
+*Palace Gate* (Chinese: 阙丘, Pinyin: Quē Qiū) consists of 2 stars south of the *South River*.
 
 ##### Market for Soldiers
 
