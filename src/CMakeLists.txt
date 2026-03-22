@@ -659,14 +659,15 @@ IF(WIN32)
      ENDIF()
 
      IF(STELLARIUM_BUILD_ARM64)
-          cmake_path(APPEND QT_PATHS ${QT6_INSTALL_PREFIX} "bin" "qtpaths.bat")
+          #cmake_path(APPEND QT_PATHS ${QT6_INSTALL_PREFIX} "bin" "qtpaths.bat")
+          FIND_PROGRAM(QT_PATHS qtpaths.bat HINTS "${_qt_bin_dir}")
      ENDIF()
      IF(QT_PATHS)
           SET(_qt_paths "--qtpaths \"${QT_PATHS}\"")
      ELSE()
           SET(_qt_paths "")
      ENDIF()
-
+     
      INSTALL(CODE
 	  "
 	  EXECUTE_PROCESS(
@@ -692,14 +693,17 @@ IF(WIN32)
 		    COMMAND \"${WINDEPLOYQT_COMMAND}\"
 			 --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
 			 --no-translations
+			 --verbose 1
 			 ${VIRTUAL_KBD_SETTING}
+			 ${_qt_paths}
 			 --compiler-runtime
 			 \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
 		    WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
 		    OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.log\"
 		    ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.err\"
 	       )
-	  "
+               MESSAGE(STATUS \"Running windeployqt for mainlib...\")
+          "
      )
      ENDIF()
      # workaround for https://bugreports.qt.io/browse/QTBUG-105984

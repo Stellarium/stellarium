@@ -21,11 +21,15 @@
 #define TIMENAVIGATOR_DIALOG_HPP
 
 #include "StelDialog.hpp"
+#include "PlanetaryEventsMgr.hpp"
+
+#include <QLabel>
 
 class Ui_timeNavigatorDialog;
 class StelCore;
 class SpecificTimeMgr;
 class StelObjectMgr;
+class StelLocation;
 
 //! @class TimeNavigatorDialog
 //! @ingroup timeNavigator
@@ -48,16 +52,29 @@ private slots:
 	void restoreDefaults();
 	void saveSettings();
 	void updateSelectedObjectState();
+	//! Show/hide the tab widget depending on whether the observer is on Earth.
+	void updateEarthOnlyState();
 
 private:
 	Ui_timeNavigatorDialog* ui;
 
-	StelCore*        core;
-	SpecificTimeMgr* specMgr;
-	StelObjectMgr*   objMgr;
+	StelCore*           core;
+	SpecificTimeMgr*    specMgr;
+	StelObjectMgr*      objMgr;
+	PlanetaryEventsMgr* planetaryMgr;
+
+	//! Shown in place of the tab widget when the observer is not on Earth.
+	QLabel*             notOnEarthLabel;
 
 	void setAboutHtml();
 	void connectTwilightAltitudeSpinBox();
+
+	//! Build the scroll-area contents of the Planetary Events tab.
+	void buildPlanetaryTab();
+
+	//! Optionally select and/or center the planet for @p eventType,
+	//! according to the flagSelectObject / flagCenterView settings.
+	void applySelectCenter(const QString& eventType) const;
 };
 
 #endif /* TIMENAVIGATOR_DIALOG_HPP */
