@@ -99,21 +99,21 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 		const QString filePath = StelFileMgr::findFile("skyCultures/" + currentCulture + "/territory.json");
 		if (filePath.isEmpty())
 		{
-			qCritical() << "Failed to * find * [ " << currentCulture << " ] territory file in sky culture directory";
+			qWarning() << "Failed to * find * [ " << currentCulture << " ] territory file in sky culture directory";
 			continue;
 		}
 		// try to open file
 		QFile file(filePath);
 		if (!file.open(QFile::ReadOnly))
 		{
-			qCritical() << "Failed to * open * [ " << currentCulture << " ] territory file in sky culture directory";
+			qWarning() << "Failed to * open * [ " << currentCulture << " ] territory file in sky culture directory";
 			continue;
 		}
 		// try to read file
 		const auto jsonText = file.readAll();
 		if (jsonText.isEmpty())
 		{
-			qCritical() << "Failed to read data from [ " << currentCulture << " ] territory file in sky culture directory";
+			qWarning() << "Failed to read data from [ " << currentCulture << " ] territory file in sky culture directory";
 			continue;
 		}
 		// try to parse file as JsonDocument
@@ -121,12 +121,12 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 		const auto jsonDoc = QJsonDocument::fromJson(jsonText, &error);
 		if (error.error != QJsonParseError::NoError)
 		{
-			qCritical().nospace() << "Failed to parse  [ " << currentCulture << " ] territory file in sky culture directory: " << error.errorString();
+			qWarning().nospace() << "Failed to parse  [ " << currentCulture << " ] territory file in sky culture directory: " << error.errorString();
 			continue;
 		}
 		if (!jsonDoc.isObject())
 		{
-			qCritical() << "Failed to find the expected JSON structure in [ " << currentCulture << " ] territory file in sky culture directory";
+			qWarning() << "Failed to find the expected JSON structure in [ " << currentCulture << " ] territory file in sky culture directory";
 			continue;
 		}
 		// try to access important information ---> create a new PolygonItem and add it to the scene
