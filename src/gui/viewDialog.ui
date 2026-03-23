@@ -4557,17 +4557,17 @@
                  </property>
                  <item>
                   <property name="text">
-                   <string>Fine</string>
+                   <string comment="grid density">Fine</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Normal</string>
+                   <string comment="grid density">Normal</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Coarse</string>
+                   <string comment="grid density">Coarse</string>
                   </property>
                  </item>
                 </widget>
@@ -4588,7 +4588,7 @@
                <item>
                 <widget class="QLabel" name="label_2">
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The thickness of celestial lines&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>The thickness of celestial lines</string>
                  </property>
                  <property name="text">
                   <string>Thickness lines:</string>
@@ -4646,7 +4646,7 @@
                <item>
                 <widget class="QLabel" name="pointSizeLabel">
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Size of celestial points in pixels&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>Size of celestial points in pixels</string>
                  </property>
                  <property name="text">
                   <string>Points size:</string>
@@ -6332,12 +6332,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
