@@ -24,6 +24,7 @@
 #include <qopengl.h>
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
+#include "StelProjectorType.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelTranslator.hpp"
 #include "VecMath.hpp"
@@ -911,11 +912,19 @@ private:
 
 	std::unique_ptr<QOpenGLVertexArrayObject> sphereVAO;
 	std::unique_ptr<QOpenGLVertexArrayObject> ringsVAO;
+	std::unique_ptr<QOpenGLVertexArrayObject> moonVAO;
 	GLuint sphereVBO=0;
 	GLuint ringsVBO=0;
+	GLuint moonVBO=0;
 
 	std::unique_ptr<QOpenGLVertexArrayObject> surveyVAO;
 	GLuint surveyVBO=0;
+
+	StelProjectorP prevProjector;
+
+	void setupMoonVAO();
+	void bindMoonVAO();
+	void releaseMoonVAO();
 
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;
@@ -942,6 +951,7 @@ private:
 		int skyBrightness;
 		int orenNayarParameters;
 		int outgasParameters;
+		int sphereScale;
 
 		// For Mars poles
 		int poleLat; // latitudes of edges of northern (x) and southern (y) polar cap [texture y, moving from 0 (S) to 1 (N)]. Only used for Mars, use [1, 0] for other objects.
@@ -990,6 +1000,9 @@ private:
 	static PlanetShaderVars ringPlanetShaderVars;
 	static QOpenGLShaderProgram* ringPlanetShaderProgram;
 	
+	static PlanetShaderVars sphereMoonShaderVars;
+	static QOpenGLShaderProgram* sphereMoonShaderProgram;
+
 	static PlanetShaderVars moonShaderVars;
 	static QOpenGLShaderProgram* moonShaderProgram;
 

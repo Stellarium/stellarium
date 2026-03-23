@@ -114,6 +114,8 @@ QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=Q_NULLPTR;
 Planet::PlanetShaderVars Planet::ringPlanetShaderVars;
 QOpenGLShaderProgram* Planet::moonShaderProgram=Q_NULLPTR;
 Planet::PlanetShaderVars Planet::moonShaderVars;
+QOpenGLShaderProgram* Planet::sphereMoonShaderProgram=Q_NULLPTR;
+Planet::PlanetShaderVars Planet::sphereMoonShaderVars;
 QOpenGLShaderProgram* Planet::objShaderProgram=Q_NULLPTR;
 Planet::PlanetShaderVars Planet::objShaderVars;
 QOpenGLShaderProgram* Planet::objShadowShaderProgram=Q_NULLPTR;
@@ -362,8 +364,12 @@ Planet::~Planet()
 			gl->glDeleteBuffers(1, &sphereVBO);
 		if(ringsVAO)
 			gl->glDeleteBuffers(1, &ringsVBO);
+		if(moonVAO)
+			gl->glDeleteBuffers(1, &moonVBO);
 		if(surveyVBO)
 			gl->glDeleteBuffers(1, &surveyVBO);
+		if(moonVBO)
+			gl->glDeleteBuffers(1, &moonVBO);
 	}
 }
 
@@ -3958,6 +3964,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(hasNormalMap = p->uniformLocation("hasNormalMap"));
 	GL(hasHorizonMap = p->uniformLocation("hasHorizonMap"));
 	GL(texCoordsFromFragment = p->uniformLocation("texCoordsFromFragment"));
+	GL(sphereScale = p->uniformLocation("sphereScale"));
 
 	// Moon-specific variables
 	GL(earthShadow = p->uniformLocation("earthShadow"));
@@ -4110,8 +4117,8 @@ bool Planet::initShader()
 	ringPlanetShaderProgram = createShader("ringPlanetShaderProgram",ringPlanetShaderVars,vsrc,
 	                                       makeSRGBUtilsShader()+fsrc,"#define RINGS_SUPPORT\n\n");
 	// Moon shader program
-	moonShaderProgram = createShader("moonShaderProgram",moonShaderVars,vsrc,
-	                                 makeSRGBUtilsShader()+fsrc,"#define IS_MOON\n\n");
+	sphereMoonShaderProgram = createShader("sphereMoonShaderProgram",sphereMoonShaderVars,vsrc,
+	                                       makeSRGBUtilsShader()+fsrc,"#define IS_MOON\n\n");
 	// OBJ model shader program
 	// we REQUIRE some fixed attribute locations here
 	QMap<QByteArray,int> attrLoc;
@@ -4246,7 +4253,7 @@ bool Planet::initShader()
 	//check if ALL shaders have been created correctly
 	shaderError = !(planetShaderProgram&&
 	                ringPlanetShaderProgram&&
-	                moonShaderProgram&&
+	                sphereMoonShaderProgram&&
 	                objShaderProgram&&
 	                objShadowShaderProgram&&
 	                transformShaderProgram);
@@ -4260,8 +4267,8 @@ void Planet::deinitShader()
 	planetShaderProgram = Q_NULLPTR;
 	delete ringPlanetShaderProgram;
 	ringPlanetShaderProgram = Q_NULLPTR;
-	delete moonShaderProgram;
-	moonShaderProgram = Q_NULLPTR;
+	delete sphereMoonShaderProgram;
+	sphereMoonShaderProgram = Q_NULLPTR;
 	delete objShaderProgram;
 	objShaderProgram = Q_NULLPTR;
 	delete objShadowShaderProgram;
@@ -4942,6 +4949,37 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	return data;
 }
 
+void Planet::setupMoonVAO()
+{
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+	gl.glBindBuffer(GL_ARRAY_BUFFER, moonVBO);
+	gl.glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, moonVBO);
+	moonShaderProgram->setAttributeBuffer(moonShaderVars.vertex, GL_FLOAT, 0, 3);
+	moonShaderProgram->enableAttributeArray(moonShaderVars.vertex);
+	gl.glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void Planet::bindMoonVAO()
+{
+	if(moonVAO->isCreated())
+		moonVAO->bind();
+	else
+		setupMoonVAO();
+}
+
+void Planet::releaseMoonVAO()
+{
+	if(moonVAO->isCreated())
+	{
+		moonVAO->release();
+	}
+	else
+	{
+		moonShaderProgram->disableAttributeArray(moonShaderVars.vertex);
+		gl->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+}
+
 float Planet::computeEclipsePush() const
 {
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
@@ -4997,30 +5035,76 @@ bool Planet::drawMoon(const StelPainterLight& light, StelPainter& painter)
 	if (normalMap && !normalMap->bind(normalTexUnit)) return false;
 	if (texMap && !texMap->bind(colorTexUnit)) return false;
 
-	QVector<float> projectedVertexArr(model.vertexArr.size());
-	const auto sphereScaleF=static_cast<float>(sphereScale);
-	for (int i=0;i<model.vertexArr.size()/3;++i)
+	const auto projector = painter.getProjector();
+	if(!moonShaderProgram || !prevProjector || !projector->isSameProjection(*prevProjector))
 	{
-		Vec3f p = *(reinterpret_cast<const Vec3f*>(model.vertexArr.constData()+i*3));
-		p *= sphereScaleF;
-		painter.getProjector()->project(p, *(reinterpret_cast<Vec3f*>(projectedVertexArr.data()+i*3)));
-	}
+		moonShaderProgram = new QOpenGLShaderProgram;
+		prevProjector = projector;
 
-	const PlanetShaderVars* shaderVars = &moonShaderVars;
-	//check if shaders are loaded
-	if(!moonShaderProgram)
-	{
-		Planet::initShader();
-		if(shaderError)
+		const auto vFileName = StelFileMgr::findFile("data/shaders/planet.vert",StelFileMgr::File);
+		const auto fFileName = StelFileMgr::findFile("data/shaders/planet.frag",StelFileMgr::File);
+
+		if(vFileName.isEmpty())
 		{
-			qCritical() << "Can't use planet drawing, shaders invalid!";
+			qCritical() << "Cannot find 'data/shaders/planet.vert', can't use planet rendering!";
 			return false;
 		}
+		if(fFileName.isEmpty())
+		{
+			qCritical() << "Cannot find 'data/shaders/planet.frag', can't use planet rendering!";
+			return false;
+		}
+
+		QFile vFile(vFileName);
+		if(!vFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			qCritical() << "Cannot load planet vertex shader file" << vFileName << vFile.errorString();
+			return false;
+		}
+		const auto vsrc = StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+							projector->getProjectShader() +
+							"#define PROJECTOR_PRESENT\n"
+							"#define IS_MOON\n\n" +
+							vFile.readAll();
+		bool ok = moonShaderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vsrc);
+		if(!moonShaderProgram->log().isEmpty())
+		{
+			qWarning().noquote() << "Planet::drawMoon: warnings while compiling vertex shader:\n"
+								 << moonShaderProgram->log();
+		}
+		if(!ok) return false;
+
+		QFile fFile(fFileName);
+		if(!fFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			qCritical() << "Cannot load planet fragment shader file" << fFileName << fFile.errorString();
+			return false;
+		}
+		const auto fsrc = StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+							makeSRGBUtilsShader()+
+							"#define IS_MOON\n\n" +
+							fFile.readAll();
+		ok = moonShaderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, fsrc);
+		if(!moonShaderProgram->log().isEmpty())
+		{
+			qWarning().noquote() << "Planet::drawMoon: warnings while compiling fragment shader:\n"
+								 << moonShaderProgram->log();
+		}
+		if(!ok) return false;
+
+		if(!StelPainter::linkProg(moonShaderProgram, "Moon render program"))
+			return false;
+
+		moonShaderVars.initLocations(moonShaderProgram);
 	}
+	if(!moonShaderProgram || !moonShaderProgram->isLinked())
+		return false;
 
 	GL(moonShaderProgram->bind());
 
-	RenderData rData = setCommonShaderUniforms(painter,moonShaderProgram,*shaderVars,light,true,true,true);
+	moonShaderProgram->setUniformValue(moonShaderVars.sphereScale, static_cast<GLfloat>(sphereScale));
+	projector->setProjectUniforms(*moonShaderProgram);
+	RenderData rData = setCommonShaderUniforms(painter,moonShaderProgram,moonShaderVars,light,true,true,true);
 
 	GL(moonShaderProgram->setUniformValue(moonShaderVars.tex, colorTexUnit));
 	GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, normalTexUnit));
@@ -5033,37 +5117,25 @@ bool Planet::drawMoon(const StelPainterLight& light, StelPainter& painter)
 	}
 	GL(moonShaderProgram->setUniformValue(moonShaderVars.horizonMap, horizonTexUnit));
 
-	if(!sphereVAO)
-	{
-		sphereVAO.reset(new QOpenGLVertexArrayObject);
-		sphereVAO->create();
-		gl->glGenBuffers(1, &sphereVBO);
-	}
-
-	sphereVAO->bind();
-	gl->glBindBuffer(GL_ARRAY_BUFFER, sphereVBO);
-	gl->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sphereVBO);
-
-	const auto projectedVertArrSize = projectedVertexArr.size() * GLsizeiptr(sizeof projectedVertexArr[0]);
-
-	const auto modelVertArrOffset = projectedVertArrSize;
-	const auto modelVertArrSize = model.vertexArr.size() * GLsizeiptr(sizeof model.vertexArr[0]);
-
-	const auto indicesOffset = modelVertArrOffset + modelVertArrSize;
+	const auto vertArrSize = model.vertexArr.size() * GLsizeiptr(sizeof model.vertexArr[0]);
+	const auto indicesOffset = vertArrSize;
 	const auto indicesSize = model.indexArr.size() * GLsizeiptr(sizeof model.indexArr[0]);
 
-	gl->glBufferData(GL_ARRAY_BUFFER, projectedVertArrSize+modelVertArrSize+indicesSize, nullptr, GL_STREAM_DRAW);
-	gl->glBufferSubData(GL_ARRAY_BUFFER, 0, projectedVertArrSize, projectedVertexArr.constData());
-	gl->glBufferSubData(GL_ARRAY_BUFFER, modelVertArrOffset, modelVertArrSize, model.vertexArr.constData());
-	gl->glBufferSubData(GL_ARRAY_BUFFER, indicesOffset, indicesSize, model.indexArr.constData());
+	if(!moonVAO)
+	{
+		moonVAO.reset(new QOpenGLVertexArrayObject);
+		moonVAO->create();
+		gl->glGenBuffers(1, &moonVBO);
 
-	GL(moonShaderProgram->setAttributeBuffer(shaderVars->vertex, GL_FLOAT, 0, 3));
-	GL(moonShaderProgram->enableAttributeArray(shaderVars->vertex));
-	GL(moonShaderProgram->setAttributeBuffer(shaderVars->unprojectedVertex, GL_FLOAT, modelVertArrOffset, 3));
-	GL(moonShaderProgram->enableAttributeArray(shaderVars->unprojectedVertex));
-	// This may have been enabled by drawSphere() if the Moon has been rendered by it due to user toggling settings,
-	// so disable the array explicitly. Maybe it's drawSphere who should actually take care of this.
-	GL(moonShaderProgram->disableAttributeArray(shaderVars->texCoord));
+		gl->glBindBuffer(GL_ARRAY_BUFFER, moonVBO);
+		gl->glBufferData(GL_ARRAY_BUFFER, vertArrSize+indicesSize, nullptr, GL_STATIC_DRAW);
+		gl->glBufferSubData(GL_ARRAY_BUFFER, 0, vertArrSize, model.vertexArr.constData());
+		gl->glBufferSubData(GL_ARRAY_BUFFER, indicesOffset, indicesSize, model.indexArr.constData());
+
+		bindMoonVAO();
+		setupMoonVAO();
+		releaseMoonVAO();
+	}
 
 	painter.setCullFace(true);
 	gl->glCullFace(GL_BACK);
@@ -5071,11 +5143,9 @@ bool Planet::drawMoon(const StelPainterLight& light, StelPainter& painter)
 	painter.setDepthTest(true);
 	gl->glClear(GL_DEPTH_BUFFER_BIT);
 
+	bindMoonVAO();
 	GL(gl->glDrawElements(GL_TRIANGLES, model.indexArr.size(), GL_UNSIGNED_INT, reinterpret_cast<void*>(indicesOffset)));
-
-	gl->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	gl->glBindBuffer(GL_ARRAY_BUFFER, 0);
-	sphereVAO->release();
+	releaseMoonVAO();
 
 	GL(moonShaderProgram->release());
 
@@ -5146,8 +5216,8 @@ void Planet::drawSphere(const StelPainterLight& light, StelPainter* painter, flo
 	}
 	if (isMoon)
 	{
-		shader = moonShaderProgram;
-		shaderVars = &moonShaderVars;
+		shader = sphereMoonShaderProgram;
+		shaderVars = &sphereMoonShaderVars;
 	}
 	//check if shaders are loaded
 	if(!shader)
@@ -5167,7 +5237,7 @@ void Planet::drawSphere(const StelPainterLight& light, StelPainter* painter, flo
 		}
 		if (isMoon)
 		{
-			shader = moonShaderProgram;
+			shader = sphereMoonShaderProgram;
 		}
 	}
 
@@ -5193,16 +5263,16 @@ void Planet::drawSphere(const StelPainterLight& light, StelPainter* painter, flo
 	if (isMoon)
 	{
 		GL(normalMap->bind(2));
-		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
+		GL(sphereMoonShaderProgram->setUniformValue(sphereMoonShaderVars.normalMap, 2));
 		if (!rData.shadowCandidates.isEmpty())
 		{
 			GL(texEarthShadow->bind(3));
-			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
+			GL(sphereMoonShaderProgram->setUniformValue(sphereMoonShaderVars.earthShadow, 3));
 			const auto push = computeEclipsePush();
-			GL(moonShaderProgram->setUniformValue(moonShaderVars.eclipsePush, push)); // constant for now...
+			GL(sphereMoonShaderProgram->setUniformValue(sphereMoonShaderVars.eclipsePush, push)); // constant for now...
 		}
 		GL(horizonMap->bind(4));
-		GL(moonShaderProgram->setUniformValue(moonShaderVars.horizonMap, 4));
+		GL(sphereMoonShaderProgram->setUniformValue(sphereMoonShaderVars.horizonMap, 4));
 	}
 
 	if (englishName==L1S("Mars"))
@@ -5393,8 +5463,8 @@ void Planet::drawSurvey(const StelPainterLight& light, StelCore* core, StelPaint
 	}
 	if (isMoon)
 	{
-		shader = moonShaderProgram;
-		shaderVars = &moonShaderVars;
+		shader = sphereMoonShaderProgram;
+		shaderVars = &sphereMoonShaderVars;
 	}
 
 	GL(shader->bind());
@@ -5415,12 +5485,15 @@ void Planet::drawSurvey(const StelPainterLight& light, StelCore* core, StelPaint
 
 	if (isMoon)
 	{
-		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
+		GL(sphereMoonShaderProgram->setUniformValue(sphereMoonShaderVars.normalMap, 2));
 		if (!rData.shadowCandidates.isEmpty())
 		{
 			GL(texEarthShadow->bind(3));
-			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
+			GL(sphereMoonShaderProgram->setUniformValue(sphereMoonShaderVars.earthShadow, 3));
+			const auto push = computeEclipsePush();
+			GL(sphereMoonShaderProgram->setUniformValue(sphereMoonShaderVars.eclipsePush, push)); // constant for now...
 		}
+		GL(sphereMoonShaderProgram->setUniformValue(sphereMoonShaderVars.horizonMap, 4));
 	}
 
 	// Apply a rotation otherwise the hips surveys don't get rendered at the
