@@ -446,6 +446,9 @@ void ViewDialog::createDialogContent()
 	updateDefaultLandscape();
 	connect(lmgr, SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
 	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
+	// Connect grid spacing combo box
+	connect(ui->gridSpacingComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(gridSpacingChanged(int)));
+	updateGridSpacingComboBox();
 
 	// Grid and lines
 	connectGroupBox(ui->celestialSphereGroupBox,              "actionShow_Gridlines");
@@ -1839,4 +1842,53 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmDescription()
 
 	QString info = planetMagnitudeAlgorithmMap.value(currentAlgorithm, q_("Visual magnitude based on phase angle and albedo."));
 	ui->planetMagnitudeAlgorithmDescription->setText(QString("<small>%1</small>").arg(info));
+}
+void ViewDialog::gridSpacingChanged(int index)
+{
+	GridLinesMgr* gridMgr = GETSTELMODULE(GridLinesMgr);
+
+	// Map combo box index to multiplier values
+	// Index 0 = Fine (2.0x), Index 1 = Normal (1.0x), Index 2 = Coarse (0.5x)
+	double multiplier = 1.0;
+	switch(index)
+	{
+		case 0: // Fine
+			multiplier = 2.0;
+			break;
+		case 1: // Normal
+			multiplier = 1.0;
+			break;
+		case 2: // Coarse
+			multiplier = 0.5;
+			break;
+		default:
+			multiplier = 1.0;
+	}
+
+	gridMgr->setGridSpacingMultiplier(multiplier);
+
+	// Save to settings
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->setValue("viewing/grid_spacing_multiplier", multiplier);
+}
+
+
+void ViewDialog::updateGridSpacingComboBox()
+{
+	GridLinesMgr* gridMgr = GETSTELMODULE(GridLinesMgr);
+	double multiplier = gridMgr->getGridSpacingMultiplier();
+
+	// Set the appropriate index based on multiplier
+	int index = 1; // Default to Normal
+	if (multiplier >= 1.8) // Close to 4.0
+		index = 0; // Fine
+	else if (multiplier <= 0.7) // Close to 0.5
+		index = 2; // Coarse
+	else
+		index = 1; // Normal
+
+	// Block signals to avoid triggering the slot
+	ui->gridSpacingComboBox->blockSignals(true);
+	ui->gridSpacingComboBox->setCurrentIndex(index);
+	ui->gridSpacingComboBox->blockSignals(false);
 }
