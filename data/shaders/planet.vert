@@ -23,7 +23,9 @@
 
 ATTRIBUTE highp vec4 vertex; // vertex projected by CPU
 ATTRIBUTE mediump vec2 texCoord;
+#ifndef PROJECTOR_PRESENT
 ATTRIBUTE highp vec4 unprojectedVertex; //original vertex coordinate (in km for OBJ models, in AU otherwise)
+#endif
 #ifdef IS_OBJ
     ATTRIBUTE mediump vec3 normalIn; // OBJs have pre-calculated normals
 #endif
@@ -49,9 +51,18 @@ VARYING highp vec3 P; //original unprojected position (in AU)
     uniform highp vec3 lightDirection;
 #endif
 
+#ifdef PROJECTOR_PRESENT
+uniform float sphereScale;
+#endif
+
 void main()
 {
+#ifdef PROJECTOR_PRESENT
+	highp vec4 unprojectedVertex = vertex;
+	gl_Position = projectionMatrix*vec4(project(sphereScale*vertex.xyz), 1);
+#else
     gl_Position = projectionMatrix * vertex;
+#endif
     texc = texCoord;
 
 #ifdef SHADOWMAP
