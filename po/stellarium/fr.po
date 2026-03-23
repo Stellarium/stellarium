@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-03-23 19:55+0700\n"
+"POT-Creation-Date: 2026-03-23 23:15+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2026\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -16617,14 +16617,17 @@ msgid "Grid density:"
 msgstr "Densité de grille :"
 
 #: src/ui_viewDialog.h:4904
+msgctxt "grid density"
 msgid "Fine"
 msgstr "Fine"
 
 #: src/ui_viewDialog.h:4905
+msgctxt "grid density"
 msgid "Normal"
 msgstr "Normale"
 
 #: src/ui_viewDialog.h:4906
+msgctxt "grid density"
 msgid "Coarse"
 msgstr "Grossière"
 
@@ -16633,10 +16636,8 @@ msgid "Select grid line spacing density"
 msgstr "Choisir l'espacement des lignes des grilles"
 
 #: src/ui_viewDialog.h:4912
-msgid ""
-"<html><head/><body><p>The thickness of celestial lines</p></body></html>"
-msgstr ""
-"<html><head/><body><p>L'épaisseur des lignes du ciel</p></body></html>"
+msgid "The thickness of celestial lines"
+msgstr "Épaisseur des lignes du ciel"
 
 #: src/ui_viewDialog.h:4914
 msgid "Thickness lines:"
@@ -16651,10 +16652,8 @@ msgid "Partitions thickness:"
 msgstr "Épaisseur des séparations :"
 
 #: src/ui_viewDialog.h:4926
-msgid ""
-"<html><head/><body><p>Size of celestial points in pixels</p></body></html>"
-msgstr ""
-"<html><head/><body><p>Taille des points célestes en pixels</p></body></html>"
+msgid "Size of celestial points in pixels"
+msgstr "Taille des points du ciel en pixels"
 
 #: src/ui_viewDialog.h:4928
 msgid "Points size:"
