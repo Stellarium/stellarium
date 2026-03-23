@@ -4563,16 +4563,13 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter.setColor(overbright, powf(0.75f, extinctedMag)*overbright, powf(0.42f, 0.9f*extinctedMag)*overbright);
 		}
 
-		if(ssm->getFlagUseObjModels() && (!objModelPath.isEmpty() || isMoon))
+		if (!survey || survey.colors->getInterstate() < 1.0f)
 		{
-			if(!drawObjModel(light, &sPainter, isMoon, screenRd))
-			{
+			bool drawingModel = ssm->getFlagUseObjModels() && (!objModelPath.isEmpty() || isMoon);
+			if (drawingModel)
+				drawingModel = drawObjModel(light, &sPainter, isMoon, screenRd);
+			if (!drawingModel)
 				drawSphere(light, &sPainter, screenRd, drawOnlyRing);
-			}
-		}
-		else if (!survey || survey.colors->getInterstate() < 1.0f)
-		{
-			drawSphere(light, &sPainter, screenRd, drawOnlyRing);
 		}
 
 		if (survey && survey.colors->getInterstate() > 0.0f)
