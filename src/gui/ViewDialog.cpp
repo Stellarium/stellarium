@@ -1419,6 +1419,11 @@ void ViewDialog::populateToolTips()
 	ui->rayHelpersFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->zodiacFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->lunarSystemFadeDurationDoubleSpinBox->setSuffix(seconds);
+	
+	QString px = qc_("px", "pixels");
+	ui->lineThicknessSpinBox->setSuffix(QString(" %1").arg(px));
+	ui->partThicknessSpinBox->setSuffix(QString(" %1").arg(px));
+	ui->pointSizeSpinBox->setSuffix(QString(" %1").arg(px));
 }
 
 void ViewDialog::populateLists()
