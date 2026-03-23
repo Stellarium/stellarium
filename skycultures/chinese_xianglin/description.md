@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This sky culture is based on the *Xianglin* (象林, "Forest of Constellations") star chart, compiled by the late Ming dynasty scholar **Chen Jinmo**​ (陈荩谟) in **1634 CE**. It represents one of the last precise mappings of the traditional Chinese star system before significant Western astronomical influence altered subsequent charts. Created independently of the contemporaneous, Jesuit-influenced official star catalogues, the *Xianglin* chart is a crucial document for understanding indigenous Chinese astronomy on the eve of its major transformation.
+This sky culture is based on the *Xianglin* (象林, "Forest of Constellations") star chart, compiled by the late Ming dynasty scholar **Chen Jinmo** (陈荩谟) in **1634 CE**. It represents one of the last precise mappings of the traditional Chinese star system before significant Western astronomical influence altered subsequent charts. Created independently of the contemporaneous, Jesuit-influenced official star catalogues, the *Xianglin* chart is a crucial document for understanding indigenous Chinese astronomy on the eve of its major transformation.
 
 ## Description
 
 ### Author and Sources
 
-Chen Jinmo, a scholar from Xiushui (modern Jiaxing, Zhejiang), was a student of the renowned intellectual Huang Daozhou. His work *Xianglin* was intended as a commentary and refinement of Huang's esoteric text *Sanyi Dongji* (三易洞玑). For his star chart, Chen meticulously consulted and cross-referenced classical Chinese astronomical texts, primarily relying on the Southern Song dynasty "**Zhongxing Astronomical Records**"​ (*Zhongxing Tianwen Zhi*). He critically examined stellar positions, magnitudes, and asterism names, noting discrepancies and advocating for verification through actual observation where possible.
+Chen Jinmo, a scholar from Xiushui (modern Jiaxing, Zhejiang), was a student of the renowned intellectual Huang Daozhou. His work *Xianglin* was intended as a commentary and refinement of Huang's esoteric text *Sanyi Dongji* (三易洞玑). For his star chart, Chen meticulously consulted and cross-referenced classical Chinese astronomical texts, primarily relying on the Southern Song dynasty "**Zhongxing Astronomical Records**" (*Zhongxing Tianwen Zhi*). He critically examined stellar positions, magnitudes, and asterism names, noting discrepancies and advocating for verification through actual observation where possible.
 
 ### Historical Context
 
@@ -16,11 +16,11 @@ The *Xianglin* chart was completed in the same year (1634) as the official *Chon
 
 ### Cartographic Features
 
-The chart is organized according to the classic Three Enclosures and Twenty-Eight Lunar Mansions​ system. It comprises 31 individual sectional maps​ that, when assembled, form a complete all-sky dome centered on the North Celestial Pole. These maps clearly delineate key celestial reference lines: the Celestial Equator, the Ecliptic, and the Circles of Perpetual Visibility and Invisibility.
+The chart is organized according to the classic Three Enclosures and Twenty-Eight Lunar Mansions system. It comprises 31 individual sectional maps that, when assembled, form a complete all-sky dome centered on the North Celestial Pole. These maps clearly delineate key celestial reference lines: the Celestial Equator, the Ecliptic, and the Circles of Perpetual Visibility and Invisibility.
 
-In its depiction of constellations, the chart adheres to the traditional “Three Schools” convention: stars from the Shi​ and Wuxian​ schools are denoted with outlined circles, while those from the Gan​ school are marked with solid dots.
+In its depiction of constellations, the chart adheres to the traditional “Three Schools” convention: stars from the *Shi* and *Wuxian* schools are denoted with outlined circles, while those from the *Gan* school are marked with solid dots.
 
-Crucially, the chart introduces a significant innovation within this traditional framework: it departs from the common Chinese practice of not indicating stellar brightness.​ This is achieved by filling in the outlined circles​ representing particularly bright stars (e.g., ε Boo​ and β And) that belong to the Shi or Wuxian schools, thereby visually distinguishing them from fainter stars within the same constallation.
+Crucially, the chart introduces a significant innovation within this traditional framework: it departs from the common Chinese practice of not indicating stellar brightness. This is achieved by filling in the outlined circles representing particularly bright stars (e.g., ε Boo and β And) that belong to the Shi or Wuxian schools, thereby visually distinguishing them from fainter stars within the same constallation.
 
 ![](illustrations/xianglin.png)!
 
@@ -87,7 +87,7 @@ The constellations in the *Xianglin* Star Chart fully adhere to the traditional 
 
 While omitting the constellations mentioned above, the official system added new constellations near the southern celestial pole, which are not present in the *Xianglin* Star Chart.
 
-In the following `Constellations` chapter, all 283 Chinese traditional constellations will be introduced. However, this introduction is *not yet complete*, as only basic information about the constellations, such as the number of stars and their locations, has been compiled. The cultural significance behind each constellation has not been fully explored in this chapter.
+In the following `Constellations` chapter, all 283 Chinese traditional constellations will be introduced. However, this introduction is **not yet complete**, as only basic information about the constellations, such as the number of stars and their locations, has been compiled. The cultural significance behind each constellation has not been fully explored in this chapter.
 
 ## Constellations
 
