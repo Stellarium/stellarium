@@ -2155,7 +2155,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
-		painter.setColor(lineColor);
+		//painter.setColor(lineColor); // let's use original color
 		reticleTexture->bind();
 		/* Why it need?
 		int textureHeight;
@@ -2231,7 +2231,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		else
 			polarAngle -= 90.0;
 
-		painter.setColor(lineColor);
+		//painter.setColor(lineColor); // let's use original color
 		bool flipH = core->getFlipHorz();
 		bool flipV = core->getFlipVert();
 		if (flipH && flipV)
