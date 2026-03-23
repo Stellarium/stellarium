@@ -22,10 +22,10 @@
 #include <qpen.h>
 #include <qstyleoption.h>
 
-SkyCulturePolygonItem::SkyCulturePolygonItem(QString scId, int startTime, int endTime)
+SkyCulturePolygonItem::SkyCulturePolygonItem(QString scId, int beginTime, int endTime)
 	: QGraphicsPolygonItem()
 	, skyCultureId(scId)
-	, startTime(startTime)
+	, beginTime(beginTime)
 	, endTime(endTime)
 	, lastSelectedState(false)
 	, isHovered(false)
@@ -49,7 +49,7 @@ void SkyCulturePolygonItem::setSelectionState(bool newSelectionState)
 
 bool SkyCulturePolygonItem::existsAtPointInTime(int year) const
 {
-	return (startTime <= year) && (endTime >= year);
+	return (beginTime <= year) && (endTime >= year);
 }
 
 void SkyCulturePolygonItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)

@@ -19,11 +19,11 @@
 
 #include "ScmPolygonInfoTreeItem.hpp"
 
-ScmPolygonInfoTreeItem::ScmPolygonInfoTreeItem(int identifier, int startTime, const QString &endTime, int vertexCount)
+ScmPolygonInfoTreeItem::ScmPolygonInfoTreeItem(int identifier, int beginTime, const QString &endTime, int vertexCount)
 	: QTreeWidgetItem()
 	, id(identifier)
 {
-	setText(0, QString::number(startTime));
+	setText(0, QString::number(beginTime));
 	setText(1, endTime);
 	setText(2, QString::number(vertexCount));
 

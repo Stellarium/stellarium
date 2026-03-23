@@ -252,7 +252,7 @@ void ScmGeoLocGraphicsView::selectPolygon(int id)
 	if(!poly->existsAtPointInTime(currentYear))
 	{
 		// signal connects to updateSkyCultureTimeValue in ScmSkyCultureDialog which invokes updateTime (in this class)
-		emit timeValueChanged(poly->getStartTime());
+		emit timeValueChanged(poly->getBeginTime());
 	}
 
 	const QRectF polyBbox = poly->boundingRect();
@@ -338,10 +338,10 @@ qreal ScmGeoLocGraphicsView::calculateScaleRatio(qreal width, qreal height)
 	return std::min(xratio, yratio);
 }
 
-void ScmGeoLocGraphicsView::addCurrentPoly(int startTime, int endTime)
+void ScmGeoLocGraphicsView::addCurrentPoly(int beginTime, int endTime)
 {
 	// add the polygon to the scene so users can see the progress while digitizing other polygons
-	ScmPreviewPolygonItem *poly = new ScmPreviewPolygonItem(startTime, endTime, currentCapturePolygon->polygon());
+	ScmPreviewPolygonItem *poly = new ScmPreviewPolygonItem(beginTime, endTime, currentCapturePolygon->polygon());
 	scene()->addItem(poly);
 
 	// save poly
@@ -357,7 +357,7 @@ void ScmGeoLocGraphicsView::addCurrentPoly(int startTime, int endTime)
 	// convert the view coordinates to real world coordinates
 	QPolygonF transformedPolygon = convertViewToWGS84(currentCapturePolygon->polygon());
 
-	emit addPolygonToCulture(scm::CulturePolygon(polygonIdentifierMap.lastKey(), startTime, QString::number(endTime), transformedPolygon));
+	emit addPolygonToCulture(scm::CulturePolygon(polygonIdentifierMap.lastKey(), beginTime, QString::number(endTime), transformedPolygon));
 
 	// reset capture poly and path
 	currentCapturePolygon->setPolygon(QPolygonF());

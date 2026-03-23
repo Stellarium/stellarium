@@ -30,19 +30,19 @@ ScmPreviewPolygonItem::ScmPreviewPolygonItem(bool isTemporary)
 	initialize();
 }
 
-ScmPreviewPolygonItem::ScmPreviewPolygonItem(int startTime, int endTime)
+ScmPreviewPolygonItem::ScmPreviewPolygonItem(int beginTime, int endTime)
 	: QGraphicsPolygonItem()
 	, isTemporary(false)
-	, startTime(startTime)
+	, beginTime(beginTime)
 	, endTime(endTime)
 {
 	initialize();
 }
 
-ScmPreviewPolygonItem::ScmPreviewPolygonItem(int startTime, int endTime, const QPolygonF &polygon)
+ScmPreviewPolygonItem::ScmPreviewPolygonItem(int beginTime, int endTime, const QPolygonF &polygon)
 	: QGraphicsPolygonItem()
 	, isTemporary(false)
-	, startTime(startTime)
+	, beginTime(beginTime)
 	, endTime(endTime)
 {
 	initialize();
@@ -86,6 +86,6 @@ bool ScmPreviewPolygonItem::existsAtPointInTime(int year) const
 	}
 	else
 	{
-		return (startTime <= year) && (endTime >= year);
+		return (beginTime <= year) && (endTime >= year);
 	}
 }

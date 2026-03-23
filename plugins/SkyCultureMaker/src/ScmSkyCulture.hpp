@@ -54,7 +54,7 @@ public:
 	const QString &getId() const;
 
 	/// Sets the start time of the sky culture
-	void setStartTime(int startTime);
+	void setBeginTime(int beginTime);
 
 	/// Sets the end time of the sky culture
 	void setEndTime(const QString &endTime);
@@ -145,7 +145,7 @@ private:
 	QList<CulturePolygon> locations;
 
 	/// The earliest year associated with a territory of the sky culture
-	int startTime;
+	int beginTime;
 
 	/// The latest year associated with a territory of the sky culture
 	// (represented as QString ("∞") because culture can still exist)
@@ -155,12 +155,12 @@ private:
 	 * @brief Evaluates which action shoud be taken after a merge operation and updates the respective location.
 	 *
 	 * @param idx The current index of the respective polygon in locations.
-	 * @param mergeStartTime The startTime of the new polygon that was created in the merge process.
+	 * @param mergeBeginTime The beginTime of the new polygon that was created in the merge process.
 	 * @param mergeEndTime The endTime of the new polygon that was created in the merge process.
 	 * @param locationEndTime The endTime of the respective location.
 	 * @return True if a deletion was performed, false otherwise.
 	 */
-	bool updateLocationAfterMerge(int idx, int mergeStartTime, int mergeEndTime, int locationEndTime);
+	bool updateLocationAfterMerge(int idx, int mergeBeginTime, int mergeEndTime, int locationEndTime);
 };
 
 } // namespace scm

@@ -37,9 +37,9 @@ void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 	ScmSkyCulture::fallbackToInternationalNames = fallback;
 }
 
-void scm::ScmSkyCulture::setStartTime(int startTime)
+void scm::ScmSkyCulture::setBeginTime(int beginTime)
 {
-	ScmSkyCulture::startTime = startTime;
+	ScmSkyCulture::beginTime = beginTime;
 }
 
 void scm::ScmSkyCulture::setEndTime(const QString &endTime)
@@ -103,7 +103,7 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 	}
 	scJsonObj["region"] = regionArray;*/
 
-	scJsonObj["startTime"] = startTime;
+	scJsonObj["beginTime"] = beginTime;
 	scJsonObj["endTime"] = endTime;
 
 	// for some reason, the classification is inside an array, eg. ["historical"]
@@ -268,28 +268,28 @@ void scm::ScmSkyCulture::mergeLocations()
 				// check whether there is there a point in time at which they both exist
 				int evalCurrentLocEndTime = locations[currentLocationIdx].endTime == "∞" ? contValue : locations[currentLocationIdx].endTime.toInt();
 				int evalCompareLocEndTime = locations[compareLocationIdx].endTime == "∞" ? contValue : locations[compareLocationIdx].endTime.toInt();
-				int mergeStartTime = std::max(locations[currentLocationIdx].startTime, locations[compareLocationIdx].startTime);
+				int mergeBeginTime = std::max(locations[currentLocationIdx].beginTime, locations[compareLocationIdx].beginTime);
 				int mergeEndTime = std::min(evalCurrentLocEndTime, evalCompareLocEndTime);
-				if (mergeStartTime <= mergeEndTime)
+				if (mergeBeginTime <= mergeEndTime)
 				{
 					// merge the polygons and add the new location to the list
 					QPolygonF mergedPolygon = locations[currentLocationIdx].polygon.united(locations[compareLocationIdx].polygon);
 					QString mergedPolyEndTime = mergeEndTime == contValue ? "∞" : QString::number(mergeEndTime);
-					locations.push_back(scm::CulturePolygon(locations.last().id + 1, mergeStartTime, mergedPolyEndTime, mergedPolygon));
+					locations.push_back(scm::CulturePolygon(locations.last().id + 1, mergeBeginTime, mergedPolyEndTime, mergedPolygon));
 
-					// there are 3 cases that can occur (depending on the overlap of startTime / endTime)
-					// case 1: startTime and endTime are within the boundaries of the new merged polygon ---> delete old polygon
-					// case 2: startTime / endTime only partly overlaps with boundaries ---> change startTime or endTime of old polygon accordingly
-					// case 3: new merged polygon lies within startTime / endTime of old polygon ---> split old polygon and change startTime / endTime
+					// there are 3 cases that can occur (depending on the overlap of beginTime / endTime)
+					// case 1: beginTime and endTime are within the boundaries of the new merged polygon ---> delete old polygon
+					// case 2: beginTime / endTime only partly overlaps with boundaries ---> change beginTime or endTime of old polygon accordingly
+					// case 3: new merged polygon lies within beginTime / endTime of old polygon ---> split old polygon and change beginTime / endTime
 
 					// handle location that is compared to the current location
-					if (updateLocationAfterMerge(compareLocationIdx, mergeStartTime, mergeEndTime, evalCompareLocEndTime))
+					if (updateLocationAfterMerge(compareLocationIdx, mergeBeginTime, mergeEndTime, evalCompareLocEndTime))
 					{
 						// adjust idx after deletion
 						compareLocationIdx--;
 					}
 					// handle the current location
-					if (updateLocationAfterMerge(currentLocationIdx, mergeStartTime, mergeEndTime, evalCurrentLocEndTime))
+					if (updateLocationAfterMerge(currentLocationIdx, mergeBeginTime, mergeEndTime, evalCurrentLocEndTime))
 					{
 						// adjust idx after deletion and stop loop (cant compare anymore when currentLocation is deleted)
 						currentLocationIdx--;
@@ -301,28 +301,28 @@ void scm::ScmSkyCulture::mergeLocations()
 	}
 }
 
-bool scm::ScmSkyCulture::updateLocationAfterMerge(int idx, int mergeStartTime, int mergeEndTime, int locationEndTime)
+bool scm::ScmSkyCulture::updateLocationAfterMerge(int idx, int mergeBeginTime, int mergeEndTime, int locationEndTime)
 {
-	int dStartTime = mergeStartTime - locations[idx].startTime;
+	int dBeginTime = mergeBeginTime - locations[idx].beginTime;
 	int dEndTime = locationEndTime - mergeEndTime;
 
-	if (dStartTime > 0 && dEndTime > 0)
+	if (dBeginTime > 0 && dEndTime > 0)
 	{
 		// case 3 (split)
 		locations.push_back(scm::CulturePolygon(locations.last().id + 1, mergeEndTime + 1, locations[idx].endTime, locations[idx].polygon));
-		locations[idx].endTime = QString::number(mergeStartTime - 1);
+		locations[idx].endTime = QString::number(mergeBeginTime - 1);
 	}
-	else if (dStartTime <= 0 && dEndTime > 0)
+	else if (dBeginTime <= 0 && dEndTime > 0)
 	{
-		// case 2.1 (change startTime)
-		locations[idx].startTime = mergeEndTime + 1;
+		// case 2.1 (change beginTime)
+		locations[idx].beginTime = mergeEndTime + 1;
 	}
-	else if (dStartTime > 0 && dEndTime <= 0)
+	else if (dBeginTime > 0 && dEndTime <= 0)
 	{
 		// case 2.2 (change endTime)
-		locations[idx].endTime = QString::number(mergeStartTime - 1);
+		locations[idx].endTime = QString::number(mergeBeginTime - 1);
 	}
-	else if (dStartTime <= 0 && dEndTime <= 0)
+	else if (dBeginTime <= 0 && dEndTime <= 0)
 	{
 		// case 1 (deletion)
 		removeLocation(locations[idx].id);

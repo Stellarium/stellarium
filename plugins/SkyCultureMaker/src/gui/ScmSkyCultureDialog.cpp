@@ -256,10 +256,10 @@ void ScmSkyCultureDialog::createDialogContent()
 
 	// dialog popup for time limits
 
-	// prevent startTimeSpinBox value to be greater than endTimeSpinBox and vice versa
-	connect(ui->startTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), ui->endTimeSpinBox,
+	// prevent beginTimeSpinBox value to be greater than endTimeSpinBox and vice versa
+	connect(ui->beginTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), ui->endTimeSpinBox,
 	        &ScmAdvancedSpinBox::setMinimum);
-	connect(ui->endTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), ui->startTimeSpinBox,
+	connect(ui->endTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), ui->beginTimeSpinBox,
 	        &ScmAdvancedSpinBox::setMaximum);
 
 	connect(ui->addPolygonDialogButtonBox, &QDialogButtonBox::accepted, this, &ScmSkyCultureDialog::confirmAddPolygon);
@@ -680,7 +680,7 @@ void ScmSkyCultureDialog::resetDialog()
 		updateRemoveConstellationButton();
 
 		ui->polygonCountValueLabel->setText(QString::number(0));
-		ui->cultureStartTimeValueLabel->setText("");
+		ui->cultureBeginTimeValueLabel->setText("");
 		ui->cultureEndTimeValueLabel->setText("");
 		initSkyCultureTime(); // reuse init function to set skyCultureTimeSlider / skyCultureCurrentTimeSpinBox
 		ui->polygonInfoTreeWidget->clear(); // reset the location list
@@ -698,18 +698,18 @@ void ScmSkyCultureDialog::showAddPolygon()
 	ui->addPolygonFrame->setVisible(true);
 
 	// set start / end time SpinBoxes to the respective values of currentTimeSpinBox
-	ui->startTimeSpinBox->setMinimum(ui->skyCultureCurrentTimeSpinBox->minimum());
-	ui->startTimeSpinBox->setUseCustomMaximum(true);
-	ui->startTimeSpinBox->setCustomMaximum(ui->skyCultureCurrentTimeSpinBox->maximum());
-	ui->endTimeSpinBox->setMaximum(ui->skyCultureCurrentTimeSpinBox->maximum() + 1); // + 1 for still existing cultures
-
-	// connection in createDialogContent correctly sets the min / max when value is changed
-	ui->endTimeSpinBox->setValue(ui->skyCultureCurrentTimeSpinBox->value());
-	ui->startTimeSpinBox->setValue(ui->skyCultureCurrentTimeSpinBox->value());
+	ui->beginTimeSpinBox->setMinimum(ui->skyCultureCurrentTimeSpinBox->minimum());
+	ui->beginTimeSpinBox->setUseCustomMaximum(true);
+	ui->beginTimeSpinBox->setCustomMaximum(ui->skyCultureCurrentTimeSpinBox->maximum());
+	ui->endTimeSpinBox->setMaximum(ui->skyCultureCurrentTimeSpinBox->maximum());
 
 	// display a fitting char for cultures that still exist
 	ui->endTimeSpinBox->setDisplayCustomStringForValue(true);
 	ui->endTimeSpinBox->setCustomStringForMax("∞");
+
+	// connection in createDialogContent correctly sets the min / max when value is changed
+	ui->endTimeSpinBox->setValue(ui->skyCultureCurrentTimeSpinBox->value());
+	ui->beginTimeSpinBox->setValue(ui->skyCultureCurrentTimeSpinBox->value());
 }
 
 void ScmSkyCultureDialog::hideAddPolygon()
@@ -754,13 +754,13 @@ void ScmSkyCultureDialog::updateSkyCultureTimeValue(int year)
 
 void ScmSkyCultureDialog::addLocation(scm::CulturePolygon culturePoly)
 {
-	if (culturePoly.endTime.toInt() > ui->skyCultureCurrentTimeSpinBox->maximum())
+	if (culturePoly.endTime.toInt() >= ui->skyCultureCurrentTimeSpinBox->maximum())
 	{
 		culturePoly.endTime = "∞";
 	}
 
 	// add polygon to list (polygonInfoTreeWidget)
-	ui->polygonInfoTreeWidget->addTopLevelItem(new ScmPolygonInfoTreeItem(culturePoly.id, culturePoly.startTime, culturePoly.endTime, culturePoly.polygon.size()));
+	ui->polygonInfoTreeWidget->addTopLevelItem(new ScmPolygonInfoTreeItem(culturePoly.id, culturePoly.beginTime, culturePoly.endTime, culturePoly.polygon.size()));
 
 	// send poly to maker
 	maker->addSkyCultureLocation(culturePoly);
@@ -790,16 +790,15 @@ void ScmSkyCultureDialog::removeLocation()
 	if (ui->polygonInfoTreeWidget->topLevelItemCount() > 0)
 	{
 		// update the start / end time info labels
-		int startTime = ui->polygonInfoTreeWidget->topLevelItem(0)->text(0).toInt();
+		int beginTime = ui->polygonInfoTreeWidget->topLevelItem(0)->text(0).toInt();
 		QString endTime = ui->polygonInfoTreeWidget->topLevelItem(0)->text(1);
 
-		bool endTimeEvaluated = false; // can't use break when endTime is done because of startTime
-
+		bool endTimeEvaluated = (endTime == "∞"); // can't use break when endTime is done because of beginTime
 		for (int index = 1; index < ui->polygonInfoTreeWidget->topLevelItemCount(); index++)
 		{
-			if (ui->polygonInfoTreeWidget->topLevelItem(index)->text(0).toInt() < startTime)
+			if (ui->polygonInfoTreeWidget->topLevelItem(index)->text(0).toInt() < beginTime)
 			{
-				startTime = ui->polygonInfoTreeWidget->topLevelItem(index)->text(0).toInt();
+				beginTime = ui->polygonInfoTreeWidget->topLevelItem(index)->text(0).toInt();
 			}
 
 			if (!endTimeEvaluated)
@@ -816,16 +815,16 @@ void ScmSkyCultureDialog::removeLocation()
 			}
 		}
 
-		ui->cultureStartTimeValueLabel->setText(QString::number(startTime));
+		ui->cultureBeginTimeValueLabel->setText(QString::number(beginTime));
 		ui->cultureEndTimeValueLabel->setText(endTime);
 
-		// update the startTime / endTime of the skyCulture
-		maker->setSkyCultureStartTime(ui->cultureStartTimeValueLabel->text().toInt());
+		// update the beginTime / endTime of the skyCulture
+		maker->setSkyCultureBeginTime(ui->cultureBeginTimeValueLabel->text().toInt());
 		maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text());
 	}
 	else
 	{
-		ui->cultureStartTimeValueLabel->setText("");
+		ui->cultureBeginTimeValueLabel->setText("");
 		ui->cultureEndTimeValueLabel->setText("");
 	}
 }
@@ -863,22 +862,22 @@ void ScmSkyCultureDialog::selectLocation(QTreeWidgetItem *item)
 
 void ScmSkyCultureDialog::confirmAddPolygon()
 {
-	int startTime = ui->startTimeSpinBox->value();
+	int beginTime = ui->beginTimeSpinBox->value();
 	QString endTime = ui->endTimeSpinBox->text();
 
 	// increase the polygonCountValueLabel by 1
 	ui->polygonCountValueLabel->setText(QString::number(ui->polygonCountValueLabel->text().toInt() + 1));
 
-	// update the cultureStartTimeValueLabel and cultureEndTimeValueLabel accordingly
-	if (ui->cultureStartTimeValueLabel->text().isEmpty())
+	// update the cultureBeginTimeValueLabel and cultureEndTimeValueLabel accordingly
+	if (ui->cultureBeginTimeValueLabel->text().isEmpty())
 	{
-		ui->cultureStartTimeValueLabel->setText(QString::number(startTime));
+		ui->cultureBeginTimeValueLabel->setText(QString::number(beginTime));
 	}
 	else
 	{
-		if (startTime < ui->cultureStartTimeValueLabel->text().toInt())
+		if (beginTime < ui->cultureBeginTimeValueLabel->text().toInt())
 		{
-			ui->cultureStartTimeValueLabel->setText(QString::number(startTime));
+			ui->cultureBeginTimeValueLabel->setText(QString::number(beginTime));
 		}
 	}
 
@@ -898,12 +897,12 @@ void ScmSkyCultureDialog::confirmAddPolygon()
 		}
 	}
 
-	// update the startTime / endTime of the skyCulture
-	maker->setSkyCultureStartTime(ui->cultureStartTimeValueLabel->text().toInt());
+	// update the beginTime / endTime of the skyCulture
+	maker->setSkyCultureBeginTime(ui->cultureBeginTimeValueLabel->text().toInt());
 	maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text());
 
-	// add the current polygon to the map with startTime and endTime as time limits
-	ui->scmGeoLocGraphicsView->addCurrentPoly(startTime, ui->endTimeSpinBox->value());
+	// add the current polygon to the map with beginTime and endTime as time limits
+	ui->scmGeoLocGraphicsView->addCurrentPoly(beginTime, ui->endTimeSpinBox->value());
 
 	// hide the popup dialog
 	hideAddPolygon();

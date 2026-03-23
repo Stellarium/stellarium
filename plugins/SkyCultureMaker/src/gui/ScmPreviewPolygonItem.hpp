@@ -23,22 +23,22 @@
 #include <QGraphicsPolygonItem>
 
 //! @class ScmPreviewPolygonItem
-//! Simple QGraphicsPolygonItem defined by a polygon, startTime and EndTime.
+//! Simple QGraphicsPolygonItem defined by a polygon, beginTime and EndTime.
 class ScmPreviewPolygonItem : public QGraphicsPolygonItem
 {
 public:
 	ScmPreviewPolygonItem(bool isTemporary);
-	ScmPreviewPolygonItem(int startTime, int endTime);
-	ScmPreviewPolygonItem(int startTime, int endTime, bool isTemporary);
-	ScmPreviewPolygonItem(int startTime, int endTime, const QPolygonF &polygon);
+	ScmPreviewPolygonItem(int beginTime, int endTime);
+	ScmPreviewPolygonItem(int beginTime, int endTime, bool isTemporary);
+	ScmPreviewPolygonItem(int beginTime, int endTime, const QPolygonF &polygon);
 	// public functions
-	int getStartTime() const {return startTime;}
+	int getBeginTime() const {return beginTime;}
 	int getEndTime() const {return endTime;}
 	bool existsAtPointInTime(int year) const;
 
 private:
 	bool isTemporary;
-	int startTime;
+	int beginTime;
 	int endTime;
 	void initialize();
 };

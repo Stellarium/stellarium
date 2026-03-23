@@ -23,16 +23,16 @@
 #include <QGraphicsPolygonItem>
 
 //! @class SkyCulturePolygonItem
-//! Simple QGraphicsPolygonItem defined by a polygon, startTime and EndTime.
+//! Simple QGraphicsPolygonItem defined by a polygon, beginTime and EndTime.
 class SkyCulturePolygonItem : public QGraphicsPolygonItem
 {
 
 public:
-	SkyCulturePolygonItem(QString skyCultureId, int startTime, int endTime);
+	SkyCulturePolygonItem(QString skyCultureId, int beginTime, int endTime);
 
 	const QString& getSkyCultureId() const { return skyCultureId; }
 
-	int getStartTime() const {return startTime;}
+	int getBeginTime() const {return beginTime;}
 	int getEndTime() const {return endTime;}
 	void setDefaultBrushColor(const QColor color) {defaultBrushColor = color;}
 	void setSelectedBrushColor(const QColor color) {selectedBrushColor = color;}
@@ -55,7 +55,7 @@ protected:
 
 private:
 	QString skyCultureId;
-	int startTime;
+	int beginTime;
 	int endTime;
 	bool lastSelectedState;
 	bool isHovered;

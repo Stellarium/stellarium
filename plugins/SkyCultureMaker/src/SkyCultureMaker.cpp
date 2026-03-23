@@ -424,11 +424,11 @@ void SkyCultureMaker::setSkyCultureDescription(const scm::Description &descripti
 	}
 }
 
-void SkyCultureMaker::setSkyCultureStartTime(int startTime)
+void SkyCultureMaker::setSkyCultureBeginTime(int beginTime)
 {
 	if (currentSkyCulture != nullptr)
 	{
-		currentSkyCulture->setStartTime(startTime);
+		currentSkyCulture->setBeginTime(beginTime);
 	}
 }
 

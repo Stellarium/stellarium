@@ -221,7 +221,7 @@ void StelSkyCultureMgr::makeCulturesList()
 			culture.region = QJsonArray();
 			culture.region.append(data["region"]);
 		}
-		culture.startTime = data["startTime"].toInt();
+		culture.beginTime = data["beginTime"].toInt();
 		if (data["endTime"].toString().isEmpty())
 		{
 			culture.endTime = "0";
@@ -670,7 +670,7 @@ QMap<QString, QPair<int, QString>> StelSkyCultureMgr::getSkyCultureTimeLimitMapI
 	while (i.hasNext())
 	{
 		i.next();
-		translatedCultureTimeMap.insert(trans.qtranslate(i.value().englishName, "sky culture"), QPair<int, QString>(i.value().startTime, i.value().endTime));
+		translatedCultureTimeMap.insert(trans.qtranslate(i.value().englishName, "sky culture"), QPair<int, QString>(i.value().beginTime, i.value().endTime));
 	}
 
 	return translatedCultureTimeMap;

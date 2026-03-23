@@ -219,8 +219,8 @@ void ViewDialog::createDialogContent()
 	// TODOs after properties merge:
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
 	connect(ui->culturesListWidget, &QListWidget::currentTextChanged, this, [this](const QString &text) {
-		int startTime = ui->culturesListWidget->currentItem()->data(Qt::UserRole).toInt(); // Qt::UserRole = startTime
-		ui->skyCultureMapGraphicsView->selectCulture(text, startTime);
+		int beginTime = ui->culturesListWidget->currentItem()->data(Qt::UserRole).toInt(); // Qt::UserRole = beginTime
+		ui->skyCultureMapGraphicsView->selectCulture(text, beginTime);
 	});
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(ui->skyCultureMapGraphicsView, &SkyCultureMapGraphicsView::cultureSelected, &StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::setCurrentSkyCultureNameI18);
@@ -1447,24 +1447,24 @@ void ViewDialog::populateLists()
 		l->addItem(new SeparatorListWidgetItem(region));
 	}
 
-	// find the earliest startTime of all cultures (needed in initSkyCultureTime)
+	// find the earliest beginTime of all cultures (needed in initSkyCultureTime)
 	// ---> evaluate it here so we don't need to iterate over all cultures multiple times
-	int globalStartTime = QDateTime::currentDateTime().date().year();
+	int globalBeginTime = QDateTime::currentDateTime().date().year();
 
 	for (auto cultureRegionIt = std::prev(cultureRegionMap.cend()), end = std::prev(cultureRegionMap.cbegin()); cultureRegionIt != end; cultureRegionIt--)
 	{
 		QListWidgetItem* item = new QListWidgetItem(cultureRegionIt.key());
-		item->setData(Qt::UserRole, cultureTimeLimitMap.value(cultureRegionIt.key()).first); // startTime
+		item->setData(Qt::UserRole, cultureTimeLimitMap.value(cultureRegionIt.key()).first); // beginTime
 		item->setData(Qt::UserRole + 1, cultureTimeLimitMap.value(cultureRegionIt.key()).second); // endTime
 
-		if (cultureTimeLimitMap.value(cultureRegionIt.key()).first < globalStartTime)
+		if (cultureTimeLimitMap.value(cultureRegionIt.key()).first < globalBeginTime)
 		{
-			globalStartTime = cultureTimeLimitMap.value(cultureRegionIt.key()).first;
+			globalBeginTime = cultureTimeLimitMap.value(cultureRegionIt.key()).first;
 		}
 
 		l->insertItem(l->row(l->findItems(cultureRegionIt.value(), Qt::MatchContains).at(0)) + 1, item);
 	}
-	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalStartTime);
+	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalBeginTime);
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 
@@ -1798,7 +1798,7 @@ void ViewDialog::setCurrentCultureAsDefault(void)
 
 void ViewDialog::updateDefaultSkyCulture()
 {
-	// set Labels to the Min / Max time of the current selected culture (UserRole == startTime, UserRole + 1 == endTime)
+	// set Labels to the Min / Max time of the current selected culture (UserRole == beginTime, UserRole + 1 == endTime)
 	ui->selectedCultureMinTimeValueLabel->setText(ui->culturesListWidget->currentItem()->data(Qt::UserRole).toString());
 	ui->selectedCultureMaxTimeValueLabel->setText(ui->culturesListWidget->currentItem()->data(Qt::UserRole + 1).toString());
 
@@ -1994,7 +1994,7 @@ void ViewDialog::filterSkyCultures()
 			// if checkBox is ticked ---> apply additional filter operation
 			if (applyTimeFilter)
 			{
-				// hide items that are not within the time limits (UserRole = startTime, UserRole + 1 = endTime)
+				// hide items that are not within the time limits (UserRole = beginTime, UserRole + 1 = endTime)
 				int endTime;
 				if (item->data(Qt::UserRole + 1).toString() == "∞")
 				{

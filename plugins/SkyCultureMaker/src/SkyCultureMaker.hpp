@@ -151,9 +151,9 @@ public:
 
 	/**
 	 * @brief Sets the current sky culture start time.
-	 * @param startTime The start time to set.
+	 * @param beginTime The start time to set.
 	 */
-	void setSkyCultureStartTime(int startTime);
+	void setSkyCultureBeginTime(int beginTime);
 
 	/**
 	 * @brief Sets the current sky culture end time.

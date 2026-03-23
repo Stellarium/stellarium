@@ -138,7 +138,7 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 			{
 				auto polygonObject = currentPoly.toObject();
 
-				int startTime = polygonObject.value("startTime").toInt();
+				int beginTime = polygonObject.value("beginTime").toInt();
 				int endTime;
 				if (polygonObject.value("endTime").toString() == "∞")
 				{
@@ -157,7 +157,7 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 					geometry << QPointF(pointArray[0].toDouble(), pointArray[1].toDouble());
 				}
 
-				SkyCulturePolygonItem *item = new SkyCulturePolygonItem(cultureIdToTranslationMap.value(currentCulture), startTime, endTime);
+				SkyCulturePolygonItem *item = new SkyCulturePolygonItem(cultureIdToTranslationMap.value(currentCulture), beginTime, endTime);
 				item->setPolygon(convertLatLonToMeter(geometry));
 				scene()->addItem(item);
 			}
@@ -412,10 +412,10 @@ void SkyCultureMapGraphicsView::selectAllCulturePolygon(const QString &skyCultur
 	oldSkyCulture = skyCultureId;
 }
 
-void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int startTime)
+void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int beginTime)
 {
 	QList<QGraphicsItem *> currentTimeItems = QList<QGraphicsItem *>();
-	QList<QGraphicsItem *> startTimeItems = QList<QGraphicsItem *>();
+	QList<QGraphicsItem *> beginTimeItems = QList<QGraphicsItem *>();
 
 	const auto itemList = scene()->items();
 	for(const auto &item : itemList)
@@ -433,9 +433,9 @@ void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int s
 			{
 				currentTimeItems.append(item);
 			}
-			else if (scPolyItem->existsAtPointInTime(startTime))
+			else if (scPolyItem->existsAtPointInTime(beginTime))
 			{
-				startTimeItems.append(item);
+				beginTimeItems.append(item);
 			}
 		}
 	}
@@ -446,10 +446,10 @@ void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int s
 	{
 		smoothFitInView(calculateBoundingBox(currentTimeItems));
 	}
-	else if (!startTimeItems.empty())
+	else if (!beginTimeItems.empty())
 	{
-		smoothFitInView(calculateBoundingBox(startTimeItems));
-		emit timeValueChanged(startTime);
+		smoothFitInView(calculateBoundingBox(beginTimeItems));
+		emit timeValueChanged(beginTime);
 	}
 	else
 	{
@@ -505,7 +505,7 @@ void SkyCultureMapGraphicsView::reloadMap()
 
 void SkyCultureMapGraphicsView::updateCultureVisibility()
 {
-	// iterate over all polygons --> if currentTime is between startTime and endTime: show polygon (else hide it)
+	// iterate over all polygons --> if currentTime is between beginTime and endTime: show polygon (else hide it)
 	const auto itemList = scene()->items();
 	for(const auto &item : itemList) {
 		// cast generic QGraphicsItem to subclass SkyCulturePolygonItem

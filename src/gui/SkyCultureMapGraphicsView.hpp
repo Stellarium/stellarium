@@ -37,9 +37,9 @@ public slots:
 	 * @brief Selects a culture on the map and sets the current time if necessary.
 	 *
 	 * @param skyCultureId Name of the skyCulture.
-	 * @param startTime Start time of the skyCulture.
+	 * @param beginTime Start time of the skyCulture.
 	 */
-	void selectCulture(const QString &skyCultureId, int startTime);
+	void selectCulture(const QString &skyCultureId, int beginTime);
 
 	/**
 	 * @brief Update the current time and visibility of all polygons.

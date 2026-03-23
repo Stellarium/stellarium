@@ -25,7 +25,7 @@
 class ScmPolygonInfoTreeItem : public QTreeWidgetItem
 {
 public:
-	ScmPolygonInfoTreeItem(int identifier, int startTime, const QString &endTime, int vertexCount);
+	ScmPolygonInfoTreeItem(int identifier, int beginTime, const QString &endTime, int vertexCount);
 	int getId() const;
 
 private:

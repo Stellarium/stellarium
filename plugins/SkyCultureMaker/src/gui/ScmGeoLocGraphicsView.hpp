@@ -34,7 +34,7 @@ class ScmGeoLocGraphicsView : public QGraphicsView
 public:
 	ScmGeoLocGraphicsView(QWidget *parent = nullptr);
 
-	void addCurrentPoly(int startTime, int endTime);
+	void addCurrentPoly(int beginTime, int endTime);
 	void removePolygon(int id);
 	void reset();
 

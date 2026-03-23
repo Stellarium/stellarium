@@ -104,7 +104,7 @@ public:
 	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "World".
 	QJsonArray region;
 	//! Earliest available year
-	int startTime;
+	int beginTime;
 	//! Latest available year
 	QString endTime;
 	//! Type of the boundaries

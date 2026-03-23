@@ -31,8 +31,8 @@ struct CulturePolygon
 {
 	CulturePolygon() = default;
 
-	CulturePolygon(int id, int startTime, QString endTime, QPolygonF polygon)
-		: id(id), startTime(startTime), endTime(endTime), polygon(polygon)
+	CulturePolygon(int id, int beginTime, QString endTime, QPolygonF polygon)
+		: id(id), beginTime(beginTime), endTime(endTime), polygon(polygon)
 	{
 	}
 
@@ -40,7 +40,7 @@ struct CulturePolygon
 	int id = 0;
 
 	//! The start time of the polygon.
-	int startTime = 0;
+	int beginTime = 0;
 
 	//! The end time of the polygon.
 	QString endTime = "0";
@@ -57,7 +57,7 @@ struct CulturePolygon
 	{
 		QJsonObject jsonObject;
 
-		jsonObject["startTime"] = startTime;
+		jsonObject["beginTime"] = beginTime;
 		jsonObject["endTime"] = endTime;
 
 		QJsonArray poly;
