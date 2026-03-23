@@ -220,6 +220,37 @@ public slots:
 	//! If the name is "", any currently selected objects will be
 	//! de-selected.
 	//! @param pointer whether or not to have the selection pointer enabled
+	//! @note For select a planetary feature (nomenclature item) by name you need to enable the visibility
+	//! of nomenclature and use target because one name may using on different planets.
+	//! See the examples below.
+	//!
+	//! **Example 1**. Selecting a crater Copernicus on the Moon:
+	//! @code
+	//! NomenclatureMgr.setFlagShowNomenclature(true);
+	//! core.selectObjectByName("Copernicus (crater, Moon)", true);
+	//! @endcode
+	//!
+	//! **Example 2**. Selecting a Mare Crisium on the Moon:
+	//! @code
+	//! NomenclatureMgr.setFlagShowNomenclature(true);
+	//! core.selectObjectByName("Mare Crisium (Moon)", true);
+	//! @endcode
+	//!
+	//! **Example 3**. Selecting an Olympus Mons on the Mars:
+	//! @code
+	//! NomenclatureMgr.setFlagShowNomenclature(true);
+	//! core.selectObjectByName("Olympus Mons (Mars)", true);
+	//! @endcode
+	//!
+	//! **Example 4**. Selecting a star Copernicus:
+	//! @code
+	//! core.selectObjectByName("Copernicus", true);
+	//! @endcode
+	//!
+	//! **Example 5**. Selecting a planet Mars:
+	//! @code
+	//! core.selectObjectByName("Mars", true);
+	//! @endcode
 	static void selectObjectByName(const QString& name, bool pointer=false);
 
 	//! Select a constellation by name

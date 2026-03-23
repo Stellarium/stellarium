@@ -49,5 +49,11 @@ VARIANT OleIntToVariant(INT i);
 VARIANT OleDoubleToVariant(double d);
 VARIANT OleBoolToVariant(BOOL b);
 
+// Debugging helper
+QString variantToQstring(VARIANT &var);
+int variantToInt(VARIANT &var);
+double variantToDouble(VARIANT &var);
+bool variantToBool(VARIANT &var);
+
 #endif // OLE_HPP
 #endif // Q_OS_WIN

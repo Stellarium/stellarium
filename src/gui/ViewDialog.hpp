@@ -83,7 +83,10 @@ private slots:
 	void initiateSkyCultureMapRotation();
 	void updateSkyCultureGUI();
 
+	void gridSpacingChanged(int index);
+	void updateGridSpacingComboBox();
 	void showAddRemoveLandscapesDialog();
+	
 	// GZ I make this public to have it on a hotkey...
 public slots:
 	void showAtmosphereDialog();

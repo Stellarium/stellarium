@@ -26,7 +26,7 @@
 #include <QJsonArray>
 
 
-//! @class HiPSMgr
+//! @class HipsMgr
 //! This class controls display of Hierarchical Progressive Surveys (HiPS), all-sky surveys in a particular format
 //! defined by the International Virtual Observatory Alliance. A full description of the format can be found on the
 //! IVOA website. (https://www.ivoa.net/documents/HiPS/20170519/REC-HIPS-1.0-20170519.pdf)

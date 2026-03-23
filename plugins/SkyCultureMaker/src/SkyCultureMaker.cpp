@@ -36,6 +36,7 @@
 #include "gui/ScmStartDialog.hpp"
 
 #include "ScmDraw.hpp"
+#include <stdexcept>
 #include <QApplication>
 #include <QDebug>
 #include <QKeyEvent>

@@ -331,6 +331,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionAdd_Sidereal_Year", timeGroup, N_("Add 1 sidereal year"), this, "addSiderealYear()", "Ctrl+Alt+Shift+]");
 	actionsMgr->addAction("actionAdd_Sidereal_Century", timeGroup, N_("Add 100 sidereal years"), this, "addSiderealYears()");
 	actionsMgr->addAction("actionAdd_Synodic_Month", timeGroup, N_("Add 1 synodic month"), this, "addSynodicMonth()");
+	actionsMgr->addAction("actionAdd_Metonic_Cycle", timeGroup, N_("Add 1 Metonic cycle"), this, "addMetonicCycle()");
 	actionsMgr->addAction("actionAdd_Saros", timeGroup, N_("Add 1 saros"), this, "addSaros()");
 	actionsMgr->addAction("actionAdd_Draconic_Month", timeGroup, N_("Add 1 draconic month"), this, "addDraconicMonth()");
 	actionsMgr->addAction("actionAdd_Draconic_Year", timeGroup, N_("Add 1 draconic year"), this, "addDraconicYear()");
@@ -354,6 +355,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionSubtract_Sidereal_Year", timeGroup, N_("Subtract 1 sidereal year"), this, "subtractSiderealYear()", "Ctrl+Alt+Shift+[");
 	actionsMgr->addAction("actionSubtract_Sidereal_Century", timeGroup, N_("Subtract 100 sidereal years"), this, "subtractSiderealYears()");
 	actionsMgr->addAction("actionSubtract_Synodic_Month", timeGroup, N_("Subtract 1 synodic month"), this, "subtractSynodicMonth()");
+	actionsMgr->addAction("actionSubtract_Metonic_Cycle", timeGroup, N_("Subtract 1 Metonic cycle"), this, "subtractMetonicCycle()");
 	actionsMgr->addAction("actionSubtract_Saros", timeGroup, N_("Subtract 1 saros"), this, "subtractSaros()");
 	actionsMgr->addAction("actionSubtract_Draconic_Month", timeGroup, N_("Subtract 1 draconic month"), this, "subtractDraconicMonth()");
 	actionsMgr->addAction("actionSubtract_Draconic_Year", timeGroup, N_("Subtract 1 draconic year"), this, "subtractDraconicYear()");
@@ -1833,6 +1835,12 @@ void StelCore::addSynodicMonth()
 	addSolarDays(29.530588853);
 }
 
+void StelCore::addMetonicCycle()
+{
+	// 235 synodic months
+	addSolarDays(235*29.530588853);
+}
+
 void StelCore::addSaros()
 {
 	// 223 synodic months
@@ -1997,6 +2005,12 @@ void StelCore::subtractSiderealYears(double n)
 void StelCore::subtractSynodicMonth()
 {
 	addSolarDays(-29.530588853);
+}
+
+void StelCore::subtractMetonicCycle()
+{
+	// 235 synodic months
+	addSolarDays(-235*29.530588853);
 }
 
 void StelCore::subtractSaros()
@@ -2329,15 +2343,15 @@ void StelCore::registerMathMetaTypes()
 	//Hopefully this works to convert types in scripts when given as String "[...]"
 	// Maybe even make brackets optional!
 	// Nope, does not work for QJSEngine.
-//	QMetaType::registerConverter<QString, Vec2d>(&Vec2d::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec2f>(&Vec2f::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec2i>(&Vec2i::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec3d>(&Vec3d::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec3f>(&Vec3f::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec3i>(&Vec3i::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec4d>(&Vec4d::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec4f>(&Vec4f::fromBracketedString);
-//	QMetaType::registerConverter<QString, Vec4i>(&Vec4i::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec2d>(&Vec2d::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec2f>(&Vec2f::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec2i>(&Vec2i::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec3d>(&Vec3d::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec3f>(&Vec3f::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec3i>(&Vec3i::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec4d>(&Vec4d::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec4f>(&Vec4f::fromBracketedString);
+	QMetaType::registerConverter<QString, Vec4i>(&Vec4i::fromBracketedString);
 }
 
 void StelCore::setStartupTimeMode(const QString& s)

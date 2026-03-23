@@ -263,6 +263,8 @@ No longer used:
 \end{description}
 
 \subsubsection{Artificial Polygonal Panoramas}
+\label{sec:landscapes:Polygonal:Artificial}
+
 The online service
 \program{HeyWhatsThat}\footnote{\url{https://www.heywhatsthat.com/}}
 allows an SRTM-based analysis of the viewshed (the visible topographic
@@ -275,29 +277,7 @@ landscape. Its package/directory name is
 rename the directory. You may also want to extend the scene
 description in \file{landscape.ini}.
 
-A data download option provides users inclined to do some programming
-with the necessary data to create a polygonal landscape for
-Stellarium. From this, \name[Brian]{Doyle} has created another online service,
-\program{horiZONE}\footnote{\url{https://briandoylegit.github.io/horiZONE/}},
-which does just this work for you.
-\begin{enumerate}
-\item When your viewshed analysis has been created in
-  \program{HeyWhatsThat}, enter the ``all panoramas'' tab, and on the
-  map click the marker associated with the panorama. Select ``make
-  public''.
-\item Then, take the landscape key given to you by
-  \program{HeyWhatsThat}\footnote{ in the line
-    \texttt{https://www.heywhatsthat.com/?view=N15ABXY}}, add a few
-  lines of description and other details that will become visible and
-  used in Stellarium, and you receive a ZIP file ready for
-  installation in Stellarium (see section
-  \ref{sec:gui:view:landscape}).
-\end{enumerate}
-
-A similar web service, \program{PeakFinder}\footnote{\url{https://www.peakfinder.com}}, 
-meanwhile also allows downloading the horizon polygon as installable landscape for Stellarium. 
-A great feature of this service is the excellent gazetteer (peak identification) also visible on the website.
-
+See section~\ref{sec:landscapes:Artificial} for more options.
 
 \subsection{Spherical landscape}
 \label{sec:landscapes:Spherical}
@@ -1467,6 +1447,22 @@ enough experience what level of error may be acceptable for you.
 
 \subsection{Artificial Panoramas}
 \label{sec:landscapes:Artificial}
+
+You do not have to visit a site to create a panorama from your own photographs. There is dedicated software that can process free and proprietary geodata.
+
+A classic for archaeoastronomers is Andrew Smith's \program{Horizon}\footnote{url{http://www.agksmith.net/horizon/}} which can process SRTM 1'' data which are freely available.
+
+A web service similar to HeyWhatsThat (see~\ref{sec:landscapes:Polygonal:Artificial}), 
+\program{PeakFinder}\footnote{\url{https://www.peakfinder.com}}, 
+creates a polygonal line and black/white landscape feature renderings and also allows downloading the horizon as installable landscape for Stellarium. 
+A great feature of this service is the excellent gazetteer (peak identification) also visible on the website.
+
+\name[Brian]{Doyle} has created another online service, \program{Skyliner}\footnote{\url{https://archaeoastronomyireland.github.io/skyliner/}}, 
+computing a panorama in the web browser. A gazetteer can be created manually. 
+A similar website that can also export Stellarium landscapes is \name[David]{Hoyle}'s \program{Panorama}\footnote{\url{https://www.standingstones.org/viewer.html}}. 
+He also released his program, which can process SRTM and even Lidar data on Github\footnote{\url{https://github.com/davidjhoyle/OpenPanorama}}.
+
+
 
 I have created a
 website\footnote{\url{https://homepage.univie.ac.at/Georg.Zotti/php/panoCam.php}} where
