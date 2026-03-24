@@ -137,6 +137,24 @@ QJsonObject scm::ScmSkyCulture::getTerritoryJson() const
 	return locJsonObj;
 }
 
+QJsonObject scm::ScmSkyCulture::getTerritoryGeoJson() const
+{
+	QJsonObject locJsonObj;
+	QJsonArray locationsArray;
+
+	locJsonObj["type"] = "FeatureCollection";
+	locJsonObj["name"] = id;
+
+	for (const auto &culturePolygon : locations)
+	{
+		locationsArray.append(culturePolygon.toGeoJson());
+	}
+
+	locJsonObj["features"] = locationsArray;
+
+	return locJsonObj;
+}
+
 void scm::ScmSkyCulture::draw(StelCore *core) const
 {
 	for (auto &constellation : constellations)

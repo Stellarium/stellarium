@@ -51,7 +51,7 @@ struct CulturePolygon
 	/**
 	 * @brief Converts the CulturePolygon to a JSON object.
      *
-	 * @return QJsonObejct The JSON representation of the culture polygon.
+	 * @return QJsonObject The JSON representation of the culture polygon.
      */
 	QJsonObject toJson() const
 	{
@@ -71,6 +71,48 @@ struct CulturePolygon
 		jsonObject["geometry"] = poly;
 
 		return jsonObject;
+	}
+
+	/**
+	 * @brief Converts the CulturePolygon to a (Geo)JSON object.
+	 *
+	 * @return QJsonObejct The (Geo)JSON representation of the culture polygon.
+	 */
+	QJsonObject toGeoJson() const
+	{
+		QJsonObject geoJsonObject;
+		QJsonObject propertiesObject;
+		QJsonObject geometryObject;
+
+		geoJsonObject["type"] = "Feature";
+
+		propertiesObject["id"] = id;
+		propertiesObject["beginTime"] = beginTime;
+		propertiesObject["endTime"] = endTime;
+		geoJsonObject["properties"] = propertiesObject;
+
+		geometryObject["type"] = "Polygon";
+		QJsonArray coordinatesArray;
+		QJsonArray polygonArray;
+		for (const auto &point : polygon)
+		{
+			QJsonArray currentPoint;
+			currentPoint.append(point.x());
+			currentPoint.append(point.y());
+			polygonArray.append(currentPoint);
+		}
+		// according to the GeoJSON standard, the last point must match with the first point of the polygon
+		QJsonArray currentPoint;
+		currentPoint.append(polygon[0].x());
+		currentPoint.append(polygon[0].y());
+		polygonArray.append(currentPoint);
+
+		// append other arrays to coordinatesArray for holes in the main Polygon (for now SCM does not support those, but may in the future)
+		coordinatesArray.append(polygonArray);
+		geometryObject["coordinates"] = coordinatesArray;
+		geoJsonObject["geometry"] = geometryObject;
+
+		return geoJsonObject;
 	}
 };
 } // namespace scm

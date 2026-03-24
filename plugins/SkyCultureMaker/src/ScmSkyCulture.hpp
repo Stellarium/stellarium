@@ -97,6 +97,11 @@ public:
 	QJsonObject getTerritoryJson() const;
 
 	/**
+	* @brief Returns the territory of the sky culture as a (Geo)JSON object
+	*/
+	QJsonObject getTerritoryGeoJson() const;
+
+	/**
 	* @brief Draws the sky culture.
 	*/
 	void draw(StelCore *core) const;
