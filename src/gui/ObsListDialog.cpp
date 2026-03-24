@@ -467,6 +467,10 @@ void ObsListDialog::loadSelectedList()
 
 	QVariantList listOfObjects;
 
+	// Display selected name in combo box
+	int index = ui->obsListComboBox->findData(selectedOlud);
+	ui->obsListComboBox->setCurrentIndex(index);
+
 	// Display description and creation date
 	currentListName=observingListMap.value(KEY_NAME).toString();
 	currentListDescription=observingListMap.value(KEY_DESCRIPTION).toString();
