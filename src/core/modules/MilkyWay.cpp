@@ -327,7 +327,7 @@ void main(void)
 	const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
 	const float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
 
-	const float lum = drawer->surfaceBrightnessToLuminance(12.f+0.15f*bortleIntensity); // was 11.5; Source? How to calibrate the new texture?
+	const float lum = drawer->surfaceBrightnessToLuminance(14.f+0.15f*bortleIntensity); // was 11.5; Source? How to calibrate the new texture?
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
