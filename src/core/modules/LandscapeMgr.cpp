@@ -539,7 +539,19 @@ void LandscapeMgr::update(double deltaTime)
 		resetToFallbackAtmosphere();
 	}
 
-	core->getSkyDrawer()->reportLuminanceInFov(3.75f+atmosphere->getAverageLuminance()*3.5f, true);
+	// Store the natural sky adaptation luminance for atmosphere shader
+	// tone-mapping, using the original Preetham-era multiplier (3.5).
+	// This keeps the sky rendering identical to the original code.
+	atmosphere->setSkyAdaptationLuminance(3.75f + atmosphere->getAverageLuminance() * 3.5f);
+
+	// Report the star-visibility adaptation luminance using a per-model
+	// multiplier.  ShowMySky produces much smaller averageLuminance values
+	// than Preetham/Schaefer, so it needs a larger multiplier (~1000) to
+	// correctly suppress stars until astronomical twilight (-18 deg).
+	// Preetham uses ~12 (derived from the twilight brightness ratio between
+	// -8 deg and -18 deg applied to the original 3.5 multiplier).
+	const float starMult = atmosphere->getStarAdaptationMultiplier();
+	core->getSkyDrawer()->reportLuminanceInFov(3.6f + atmosphere->getAverageLuminance() * starMult, true);
 
 	// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
 	if (currentPlanet->getID() == sun->getID())

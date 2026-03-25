@@ -109,6 +109,23 @@ public:
 	//! Get the light pollution luminance in cd/m^2
 	float getLightPollutionLuminance() const { return lightPollutionLuminance; }
 
+	//! Get the multiplier applied to averageLuminance when computing the
+	//! star-visibility adaptation luminance reported to StelSkyDrawer.
+	//! Each atmosphere model produces averageLuminance in a different scale,
+	//! so this multiplier must be tuned per model.  The default (1000) is
+	//! calibrated for the Preetham/Schaefer model to reach full stellar
+	//! visibility at approximately -18 deg sun altitude (astronomical twilight).
+	//! ShowMySky uses the same value (see AtmosphereShowMySky.hpp).
+	virtual float getStarAdaptationMultiplier() const { return 1000.f; }
+
+	//! Store the natural sky adaptation luminance for atmosphere rendering.
+	//! This is the un-inflated value used by the atmosphere shader so that
+	//! the sky tone-maps correctly even when the star-visibility adaptation
+	//! luminance reported via StelSkyDrawer::reportLuminanceInFov() differs.
+	void setSkyAdaptationLuminance(float lum) { skyAdaptationLuminance = lum; }
+	//! Get the natural sky adaptation luminance stored for atmosphere rendering.
+	float getSkyAdaptationLuminance() const { return skyAdaptationLuminance; }
+
 protected:
 	//! The average luminance of the atmosphere in cd/m2
 	float averageLuminance = 0;
@@ -116,6 +133,9 @@ protected:
 	float eclipseFactor = 1;
 	LinearFader fader;
 	float lightPollutionLuminance = 0;
+	//! Natural sky adaptation luminance for atmosphere shader tone-mapping,
+	//! decoupled from the star-visibility adaptation luminance.
+	float skyAdaptationLuminance = 50.f;
 };
 
 #endif // ATMOSPHERE_HPP

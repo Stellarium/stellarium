@@ -809,11 +809,22 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	if (!atm_intensity)
 		return;
 
+	// Temporarily set the natural (un-inflated) sky adaptation luminance
+	// for the tone-mapping shader uniforms. The global Lwa has been inflated
+	// (via a large star-adaptation multiplier) to suppress stars during
+	// twilight, but the sky must still tone-map with the real atmospheric
+	// luminance so it looks blue during the day.
+	float savedLwa = eye->getWorldAdaptationLuminance();
+	eye->setWorldAdaptationLuminance(skyAdaptationLuminance);
+
 	GL(luminanceToScreenProgram_->bind());
 
 	float a, b, c, d;
 	bool useTmGamma, sRGB;
 	eye->getShadersParams(a, b, c, d, useTmGamma, sRGB);
+
+	// Restore the inflated Lwa so star rendering continues to use it
+	eye->setWorldAdaptationLuminance(savedLwa);
 
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.alphaWaOverAlphaDa, a));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.oneOverGamma, b));

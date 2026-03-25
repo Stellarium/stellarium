@@ -398,6 +398,12 @@ void AtmospherePreetham::draw(StelCore* core)
 
 	StelToneReproducer* eye = core->getToneReproducer();
 
+	// Temporarily set the natural sky adaptation luminance for the
+	// tone-mapping shader uniforms, in case the star-visibility
+	// adaptation luminance differs (see LandscapeMgr.cpp).
+	float savedLwa = eye->getWorldAdaptationLuminance();
+	eye->setWorldAdaptationLuminance(skyAdaptationLuminance);
+
 	StelPainter sPainter(core->getProjection2d());
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
@@ -405,6 +411,9 @@ void AtmospherePreetham::draw(StelCore* core)
 	float a, b, c, d;
 	bool useTmGamma, sRGB;
 	eye->getShadersParams(a, b, c, d, useTmGamma, sRGB);
+
+	// Restore the star-visibility Lwa
+	eye->setWorldAdaptationLuminance(savedLwa);
 
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.alphaWaOverAlphaDa, a));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.oneOverGamma, b));

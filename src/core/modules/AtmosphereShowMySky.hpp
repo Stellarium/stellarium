@@ -57,6 +57,11 @@ public:
 	bool isReadyToRender() const override;
 	LoadingStatus stepDataLoading() override;
 
+	//! ShowMySky produces averageLuminance in a much smaller scale than
+	//! Preetham/Schaefer, so a larger multiplier is needed to correctly
+	//! suppress stars during twilight until astronomical twilight (-18°).
+	float getStarAdaptationMultiplier() const override { return 1000.f; }
+
 private:
 #ifdef ENABLE_SHOWMYSKY
 	QLibrary showMySkyLib;
