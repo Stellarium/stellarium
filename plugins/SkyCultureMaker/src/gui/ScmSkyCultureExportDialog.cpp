@@ -181,50 +181,27 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	qDebug() << "SkyCultureMaker: Exporting sky culture territory...";
 	// clean up potential overlaps / user errors before exporting
 	currentSkyCulture->mergeLocations();
-	QJsonObject scTerritoryJsonObject = currentSkyCulture->getTerritoryJson();
-	QJsonDocument scTerritoryJsonDoc(scTerritoryJsonObject);
-	if (scTerritoryJsonDoc.isNull() || scTerritoryJsonDoc.isEmpty())
+	QJsonObject scTerritoryGeoJsonObject = currentSkyCulture->getTerritoryGeoJson();
+	QJsonDocument scTerritoryGeoJsonDoc(scTerritoryGeoJsonObject);
+	if (scTerritoryGeoJsonDoc.isNull() || scTerritoryGeoJsonDoc.isEmpty())
 	{
 		qWarning() << "SkyCultureMaker: Failed to create JSON document for sky culture.";
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to create JSON document for sky culture."));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to create GeoJSON document for sky culture."));
 		skyCultureDirectory.removeRecursively();
 		ScmSkyCultureExportDialog::close();
 		return false;
 	}
-	QFile scTerritoryJsonFile(skyCultureDirectory.absoluteFilePath("territory.json"));
-	if (!scTerritoryJsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+	QFile scTerritoryGeoJsonFile(skyCultureDirectory.absoluteFilePath("territory.geojson"));
+	if (!scTerritoryGeoJsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
-		qWarning() << "SkyCultureMaker: Failed to open territory.json for writing.";
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to open territory.json for writing."));
+		qWarning() << "SkyCultureMaker: Failed to open territory.geojson for writing.";
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to open territory.geojson for writing."));
 		skyCultureDirectory.removeRecursively();
 		ScmSkyCultureExportDialog::close();
 		return false;
 	}
-	scTerritoryJsonFile.write(scTerritoryJsonDoc.toJson(QJsonDocument::Indented));
-	scTerritoryJsonFile.close();
-
-	// possibility to write geojson files in the future
-	// QJsonObject scTerritoryGeoJsonObject = currentSkyCulture->getTerritoryGeoJson();
-	// QJsonDocument scTerritoryGeoJsonDoc(scTerritoryGeoJsonObject);
-	// if (scTerritoryGeoJsonDoc.isNull() || scTerritoryGeoJsonDoc.isEmpty())
-	// {
-	// 	qWarning() << "SkyCultureMaker: Failed to create JSON document for sky culture.";
-	// 	maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to create GeoJSON document for sky culture."));
-	// 	skyCultureDirectory.removeRecursively();
-	// 	ScmSkyCultureExportDialog::close();
-	// 	return false;
-	// }
-	// QFile scTerritoryGeoJsonFile(skyCultureDirectory.absoluteFilePath("territory.geojson"));
-	// if (!scTerritoryGeoJsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
-	// {
-	// 	qWarning() << "SkyCultureMaker: Failed to open territory.geojson for writing.";
-	// 	maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Failed to open territory.geojson for writing."));
-	// 	skyCultureDirectory.removeRecursively();
-	// 	ScmSkyCultureExportDialog::close();
-	// 	return false;
-	// }
-	// scTerritoryGeoJsonFile.write(scTerritoryGeoJsonDoc.toJson(QJsonDocument::Indented));
-	// scTerritoryGeoJsonFile.close();
+	scTerritoryGeoJsonFile.write(scTerritoryGeoJsonDoc.toJson(QJsonDocument::Indented));
+	scTerritoryGeoJsonFile.close();
 
 	// Save the sky culture description
 	bool savedDescriptionSuccessfully = maker->saveSkyCultureDescription(skyCultureDirectory);

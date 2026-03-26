@@ -96,7 +96,7 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 	for (const auto &currentCulture : cultureIds)
 	{
 		// find path of file
-		const QString filePath = StelFileMgr::findFile("skyCultures/" + currentCulture + "/territory.json");
+		const QString filePath = StelFileMgr::findFile("skyCultures/" + currentCulture + "/territory.geojson");
 		if (filePath.isEmpty())
 		{
 			qWarning() << "Failed to * find * [ " << currentCulture << " ] territory file in sky culture directory";
@@ -113,7 +113,7 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 		const auto jsonText = file.readAll();
 		if (jsonText.isEmpty())
 		{
-			qWarning() << "Failed to read data from [ " << currentCulture << " ] territory file in sky culture directory";
+			qWarning() << "Failed to * read data * from [ " << currentCulture << " ] territory file in sky culture directory";
 			continue;
 		}
 		// try to parse file as JsonDocument
@@ -121,7 +121,7 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 		const auto jsonDoc = QJsonDocument::fromJson(jsonText, &error);
 		if (error.error != QJsonParseError::NoError)
 		{
-			qWarning().nospace() << "Failed to parse  [ " << currentCulture << " ] territory file in sky culture directory: " << error.errorString();
+			qWarning().nospace() << "Failed to * parse * [ " << currentCulture << " ] territory file in sky culture directory: " << error.errorString();
 			continue;
 		}
 		if (!jsonDoc.isObject())
@@ -131,27 +131,27 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 		}
 		// try to access important information ---> create a new PolygonItem and add it to the scene
 		const auto data = jsonDoc.object();
-		if (data["polygons"].isArray())
+		if (data["features"].isArray())
 		{
-			const auto polygonArray = data["polygons"].toArray();
+			const auto polygonArray = data["features"].toArray();
 			for (const auto &currentPoly : polygonArray)
 			{
 				auto polygonObject = currentPoly.toObject();
 
-				int beginTime = polygonObject.value("beginTime").toInt();
+				int beginTime = polygonObject["properties"].toObject().value("beginTime").toInt();
 				int endTime;
-				if (polygonObject.value("endTime").toString() == "∞")
+				if (polygonObject["properties"].toObject().value("endTime").toString() == "∞")
 				{
 					endTime = QDateTime::currentDateTime().date().year();
 				}
 				else
 				{
-					endTime = polygonObject.value("endTime").toString().toInt();
+					endTime = polygonObject["properties"].toObject().value("endTime").toString().toInt();
 				}
 				QPolygonF geometry;
 
-				const auto geometryArray = polygonObject.value("geometry").toArray();
-				for (const auto &point : geometryArray)
+				const auto coordinatesArray = polygonObject["geometry"].toObject()["coordinates"].toArray()[0].toArray();
+				for (const auto &point : coordinatesArray)
 				{
 					auto pointArray = point.toArray();
 					geometry << QPointF(pointArray[0].toDouble(), pointArray[1].toDouble());
