@@ -222,14 +222,7 @@ void StelSkyCultureMgr::makeCulturesList()
 			culture.region.append(data["region"]);
 		}
 		culture.beginTime = data["beginTime"].toInt();
-		if (data["endTime"].toString().isEmpty())
-		{
-			culture.endTime = "0";
-		}
-		else
-		{
-			culture.endTime = data["endTime"].toString();
-		}
+		culture.endTime = data["endTime"].toInt();
 		if (data["constellations"].isArray())
 		{
 			culture.constellations = data["constellations"].toArray();
@@ -661,16 +654,16 @@ QMultiMap<QString, QString> StelSkyCultureMgr::getSkyCultureRegionMapI18(void) c
 }
 
 //! returns map of human readable culture names (translated to current locale) and the corresponding time limits (start / end time)
-QMap<QString, QPair<int, QString>> StelSkyCultureMgr::getSkyCultureTimeLimitMapI18(void) const
+QMap<QString, QPair<int, int>> StelSkyCultureMgr::getSkyCultureTimeLimitMapI18(void) const
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
-	QMap<QString, QPair<int, QString>> translatedCultureTimeMap;
+	QMap<QString, QPair<int, int>> translatedCultureTimeMap;
 
 	while (i.hasNext())
 	{
 		i.next();
-		translatedCultureTimeMap.insert(trans.qtranslate(i.value().englishName, "sky culture"), QPair<int, QString>(i.value().beginTime, i.value().endTime));
+		translatedCultureTimeMap.insert(trans.qtranslate(i.value().englishName, "sky culture"), QPair<int, int>(i.value().beginTime, i.value().endTime));
 	}
 
 	return translatedCultureTimeMap;

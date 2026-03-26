@@ -57,7 +57,7 @@ public:
 	void setBeginTime(int beginTime);
 
 	/// Sets the end time of the sky culture
-	void setEndTime(const QString &endTime);
+	void setEndTime(int endTime);
 
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
@@ -90,11 +90,6 @@ public:
 	* @param mergeLines Whether to merge the lines of the constellations into polylines where possible.
 	*/
 	QJsonObject toJson(const bool mergeLines) const;
-
-	/**
-	* @brief Returns the territory of the sky culture as a JSON object
-	*/
-	QJsonObject getTerritoryJson() const;
 
 	/**
 	* @brief Returns the territory of the sky culture as a (Geo)JSON object
@@ -153,8 +148,7 @@ private:
 	int beginTime;
 
 	/// The latest year associated with a territory of the sky culture
-	// (represented as QString ("∞") because culture can still exist)
-	QString endTime;
+	int endTime;
 
 	/**
 	 * @brief Evaluates which action shoud be taken after a merge operation and updates the respective location.
@@ -162,10 +156,9 @@ private:
 	 * @param idx The current index of the respective polygon in locations.
 	 * @param mergeBeginTime The beginTime of the new polygon that was created in the merge process.
 	 * @param mergeEndTime The endTime of the new polygon that was created in the merge process.
-	 * @param locationEndTime The endTime of the respective location.
 	 * @return True if a deletion was performed, false otherwise.
 	 */
-	bool updateLocationAfterMerge(int idx, int mergeBeginTime, int mergeEndTime, int locationEndTime);
+	bool updateLocationAfterMerge(int idx, int mergeBeginTime, int mergeEndTime);
 };
 
 } // namespace scm

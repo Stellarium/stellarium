@@ -159,7 +159,7 @@ public:
 	 * @brief Sets the current sky culture end time.
 	 * @param endTime The end time to set.
 	 */
-	void setSkyCultureEndTime(const QString &endTime);
+	void setSkyCultureEndTime(int endTime);
 
 	/**
 	 * @brief Adds a CulturePolygon to the sky culture.

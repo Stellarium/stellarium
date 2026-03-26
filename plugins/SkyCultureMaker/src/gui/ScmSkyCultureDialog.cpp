@@ -754,13 +754,15 @@ void ScmSkyCultureDialog::updateSkyCultureTimeValue(int year)
 
 void ScmSkyCultureDialog::addLocation(scm::CulturePolygon culturePoly)
 {
-	if (culturePoly.endTime.toInt() >= ui->skyCultureCurrentTimeSpinBox->maximum())
+	QString endTimeString = QString::number(culturePoly.endTime);
+	if (culturePoly.endTime >= ui->skyCultureCurrentTimeSpinBox->maximum())
 	{
-		culturePoly.endTime = "∞";
+		culturePoly.endTime = 9146; // special value for existing cultures
+		endTimeString = "∞";
 	}
 
 	// add polygon to list (polygonInfoTreeWidget)
-	ui->polygonInfoTreeWidget->addTopLevelItem(new ScmPolygonInfoTreeItem(culturePoly.id, culturePoly.beginTime, culturePoly.endTime, culturePoly.polygon.size()));
+	ui->polygonInfoTreeWidget->addTopLevelItem(new ScmPolygonInfoTreeItem(culturePoly.id, culturePoly.beginTime, endTimeString, culturePoly.polygon.size()));
 
 	// send poly to maker
 	maker->addSkyCultureLocation(culturePoly);
@@ -820,7 +822,7 @@ void ScmSkyCultureDialog::removeLocation()
 
 		// update the beginTime / endTime of the skyCulture
 		maker->setSkyCultureBeginTime(ui->cultureBeginTimeValueLabel->text().toInt());
-		maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text());
+		maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text() == "∞" ? 9146 : ui->cultureEndTimeValueLabel->text().toInt());
 	}
 	else
 	{
@@ -899,7 +901,7 @@ void ScmSkyCultureDialog::confirmAddPolygon()
 
 	// update the beginTime / endTime of the skyCulture
 	maker->setSkyCultureBeginTime(ui->cultureBeginTimeValueLabel->text().toInt());
-	maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text());
+	maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text() == "∞" ? 9146 : ui->cultureEndTimeValueLabel->text().toInt());
 
 	// add the current polygon to the map with beginTime and endTime as time limits
 	ui->scmGeoLocGraphicsView->addCurrentPoly(beginTime, ui->endTimeSpinBox->value());

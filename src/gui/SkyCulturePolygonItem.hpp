@@ -26,7 +26,6 @@
 //! Simple QGraphicsPolygonItem defined by a polygon, beginTime and EndTime.
 class SkyCulturePolygonItem : public QGraphicsPolygonItem
 {
-
 public:
 	SkyCulturePolygonItem(QString skyCultureId, int beginTime, int endTime);
 
@@ -63,7 +62,6 @@ private:
 	QColor selectedBrushColor;
 	QColor defaultPenColor;
 	QColor selectedPenColor;
-
 };
 
 #endif // SKYCULTUREPOLYGONITEM_HPP

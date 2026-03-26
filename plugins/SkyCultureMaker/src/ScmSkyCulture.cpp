@@ -42,7 +42,7 @@ void scm::ScmSkyCulture::setBeginTime(int beginTime)
 	ScmSkyCulture::beginTime = beginTime;
 }
 
-void scm::ScmSkyCulture::setEndTime(const QString &endTime)
+void scm::ScmSkyCulture::setEndTime(int endTime)
 {
 	ScmSkyCulture::endTime = endTime;
 }
@@ -120,21 +120,6 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 	scJsonObj["constellations"] = constellationsArray;
 
 	return scJsonObj;
-}
-
-QJsonObject scm::ScmSkyCulture::getTerritoryJson() const
-{
-	QJsonObject locJsonObj;
-
-	QJsonArray locationsArray;
-	for (const auto &culturePolygon : locations)
-	{
-		locationsArray.append(culturePolygon.toJson());
-	}
-
-	locJsonObj["polygons"] = locationsArray;
-
-	return locJsonObj;
 }
 
 QJsonObject scm::ScmSkyCulture::getTerritoryGeoJson() const
@@ -284,16 +269,13 @@ void scm::ScmSkyCulture::mergeLocations()
 			if (locations[currentLocationIdx].polygon.intersects(locations[compareLocationIdx].polygon))
 			{
 				// check whether there is there a point in time at which they both exist
-				int evalCurrentLocEndTime = locations[currentLocationIdx].endTime == "∞" ? contValue : locations[currentLocationIdx].endTime.toInt();
-				int evalCompareLocEndTime = locations[compareLocationIdx].endTime == "∞" ? contValue : locations[compareLocationIdx].endTime.toInt();
 				int mergeBeginTime = std::max(locations[currentLocationIdx].beginTime, locations[compareLocationIdx].beginTime);
-				int mergeEndTime = std::min(evalCurrentLocEndTime, evalCompareLocEndTime);
+				int mergeEndTime = std::min(locations[currentLocationIdx].endTime, locations[compareLocationIdx].endTime);
 				if (mergeBeginTime <= mergeEndTime)
 				{
 					// merge the polygons and add the new location to the list
 					QPolygonF mergedPolygon = locations[currentLocationIdx].polygon.united(locations[compareLocationIdx].polygon);
-					QString mergedPolyEndTime = mergeEndTime == contValue ? "∞" : QString::number(mergeEndTime);
-					locations.push_back(scm::CulturePolygon(locations.last().id + 1, mergeBeginTime, mergedPolyEndTime, mergedPolygon));
+					locations.push_back(scm::CulturePolygon(locations.last().id + 1, mergeBeginTime, mergeEndTime, mergedPolygon));
 
 					// there are 3 cases that can occur (depending on the overlap of beginTime / endTime)
 					// case 1: beginTime and endTime are within the boundaries of the new merged polygon ---> delete old polygon
@@ -301,13 +283,13 @@ void scm::ScmSkyCulture::mergeLocations()
 					// case 3: new merged polygon lies within beginTime / endTime of old polygon ---> split old polygon and change beginTime / endTime
 
 					// handle location that is compared to the current location
-					if (updateLocationAfterMerge(compareLocationIdx, mergeBeginTime, mergeEndTime, evalCompareLocEndTime))
+					if (updateLocationAfterMerge(compareLocationIdx, mergeBeginTime, mergeEndTime))
 					{
 						// adjust idx after deletion
 						compareLocationIdx--;
 					}
 					// handle the current location
-					if (updateLocationAfterMerge(currentLocationIdx, mergeBeginTime, mergeEndTime, evalCurrentLocEndTime))
+					if (updateLocationAfterMerge(currentLocationIdx, mergeBeginTime, mergeEndTime))
 					{
 						// adjust idx after deletion and stop loop (cant compare anymore when currentLocation is deleted)
 						currentLocationIdx--;
@@ -319,16 +301,16 @@ void scm::ScmSkyCulture::mergeLocations()
 	}
 }
 
-bool scm::ScmSkyCulture::updateLocationAfterMerge(int idx, int mergeBeginTime, int mergeEndTime, int locationEndTime)
+bool scm::ScmSkyCulture::updateLocationAfterMerge(int idx, int mergeBeginTime, int mergeEndTime)
 {
 	int dBeginTime = mergeBeginTime - locations[idx].beginTime;
-	int dEndTime = locationEndTime - mergeEndTime;
+	int dEndTime = locations[idx].endTime - mergeEndTime;
 
 	if (dBeginTime > 0 && dEndTime > 0)
 	{
 		// case 3 (split)
 		locations.push_back(scm::CulturePolygon(locations.last().id + 1, mergeEndTime + 1, locations[idx].endTime, locations[idx].polygon));
-		locations[idx].endTime = QString::number(mergeBeginTime - 1);
+		locations[idx].endTime = mergeBeginTime - 1;
 	}
 	else if (dBeginTime <= 0 && dEndTime > 0)
 	{
@@ -338,7 +320,7 @@ bool scm::ScmSkyCulture::updateLocationAfterMerge(int idx, int mergeBeginTime, i
 	else if (dBeginTime > 0 && dEndTime <= 0)
 	{
 		// case 2.2 (change endTime)
-		locations[idx].endTime = QString::number(mergeBeginTime - 1);
+		locations[idx].endTime = mergeBeginTime - 1;
 	}
 	else if (dBeginTime <= 0 && dEndTime <= 0)
 	{

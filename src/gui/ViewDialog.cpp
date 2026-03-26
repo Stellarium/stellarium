@@ -1458,7 +1458,7 @@ void ViewDialog::populateLists()
 	l->clear();
 
 	const QMultiMap<QString, QString> &cultureRegionMap = app.getSkyCultureMgr().getSkyCultureRegionMapI18();
-	const QMap<QString, QPair<int, QString>> &cultureTimeLimitMap = app.getSkyCultureMgr().getSkyCultureTimeLimitMapI18();
+	const QMap<QString, QPair<int, int>> &cultureTimeLimitMap = app.getSkyCultureMgr().getSkyCultureTimeLimitMapI18();
 
 	// remove duplicates in list of occuring regions (optional)
 	QList<QString> occuringRegions = cultureRegionMap.values();
@@ -1832,8 +1832,9 @@ void ViewDialog::setCurrentCultureAsDefault(void)
 void ViewDialog::updateDefaultSkyCulture()
 {
 	// set Labels to the Min / Max time of the current selected culture (UserRole == beginTime, UserRole + 1 == endTime)
+	QString endTimeString = ui->culturesListWidget->currentItem()->data(Qt::UserRole + 1).toString();
 	ui->selectedCultureMinTimeValueLabel->setText(ui->culturesListWidget->currentItem()->data(Qt::UserRole).toString());
-	ui->selectedCultureMaxTimeValueLabel->setText(ui->culturesListWidget->currentItem()->data(Qt::UserRole + 1).toString());
+	ui->selectedCultureMaxTimeValueLabel->setText(endTimeString == "9146" ? "∞" : endTimeString);
 
 	// Check that the useAsDefaultSkyCultureCheckBox needs to be updated
 	bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
@@ -2028,19 +2029,9 @@ void ViewDialog::filterSkyCultures()
 			if (applyTimeFilter)
 			{
 				// hide items that are not within the time limits (UserRole = beginTime, UserRole + 1 = endTime)
-				int endTime;
-				if (item->data(Qt::UserRole + 1).toString() == "∞")
+				if (item->data(Qt::UserRole).toInt() > maxYear || item->data(Qt::UserRole + 1).toInt() < minYear)
 				{
-					endTime = ui->skyCultureCurrentTimeSpinBox->maximum();
-				}
-				else
-				{
-					endTime = item->data(Qt::UserRole + 1).toInt();
-				}
-
-				if (item->data(Qt::UserRole).toInt() > maxYear || endTime < minYear)
-				{
-					item->setHidden((true));
+					item->setHidden(true);
 				}
 			}
 

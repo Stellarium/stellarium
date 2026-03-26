@@ -31,7 +31,7 @@ struct CulturePolygon
 {
 	CulturePolygon() = default;
 
-	CulturePolygon(int id, int beginTime, QString endTime, QPolygonF polygon)
+	CulturePolygon(int id, int beginTime, int endTime, QPolygonF polygon)
 		: id(id), beginTime(beginTime), endTime(endTime), polygon(polygon)
 	{
 	}
@@ -43,35 +43,10 @@ struct CulturePolygon
 	int beginTime = 0;
 
 	//! The end time of the polygon.
-	QString endTime = "0";
+	int endTime = 0;
 
 	//! The settlement area of the culture.
 	QPolygonF polygon;
-
-	/**
-	 * @brief Converts the CulturePolygon to a JSON object.
-     *
-	 * @return QJsonObject The JSON representation of the culture polygon.
-     */
-	QJsonObject toJson() const
-	{
-		QJsonObject jsonObject;
-
-		jsonObject["beginTime"] = beginTime;
-		jsonObject["endTime"] = endTime;
-
-		QJsonArray poly;
-		for (const auto &point : polygon)
-		{
-			QJsonArray currentPoint;
-			currentPoint.append(point.x());
-			currentPoint.append(point.y());
-			poly.append(currentPoint);
-		}
-		jsonObject["geometry"] = poly;
-
-		return jsonObject;
-	}
 
 	/**
 	 * @brief Converts the CulturePolygon to a (Geo)JSON object.

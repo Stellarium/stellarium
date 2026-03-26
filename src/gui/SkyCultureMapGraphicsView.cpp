@@ -137,19 +137,9 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 			for (const auto &currentPoly : polygonArray)
 			{
 				auto polygonObject = currentPoly.toObject();
-
 				int beginTime = polygonObject["properties"].toObject().value("beginTime").toInt();
-				int endTime;
-				if (polygonObject["properties"].toObject().value("endTime").toString() == "∞")
-				{
-					endTime = QDateTime::currentDateTime().date().year();
-				}
-				else
-				{
-					endTime = polygonObject["properties"].toObject().value("endTime").toString().toInt();
-				}
+				int endTime = polygonObject["properties"].toObject().value("endTime").toInt();
 				QPolygonF geometry;
-
 				const auto coordinatesArray = polygonObject["geometry"].toObject()["coordinates"].toArray()[0].toArray();
 				for (const auto &point : coordinatesArray)
 				{
