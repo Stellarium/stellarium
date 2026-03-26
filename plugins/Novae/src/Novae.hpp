@@ -115,8 +115,8 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
-	QStringList listAllObjects(bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override;
 	QString getName() const  override{ return "Bright Novae"; }
 	QString getStelObjectType() const override { return Nova::NOVA_TYPE; }
 

@@ -99,18 +99,18 @@ StelObjectP HighlightMgr::searchByID(const QString& id) const
 	return Q_NULLPTR;
 }
 
-QStringList HighlightMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> HighlightMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	Q_UNUSED(objPrefix)
 	Q_UNUSED(maxNbItem)
 	Q_UNUSED(useStartOfWords)	
-	return QStringList();
+	return {};
 }
 
-QStringList HighlightMgr::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> HighlightMgr::listAllObjects(bool inEnglish) const
 {
 	Q_UNUSED(inEnglish)
-	return QStringList();
+	return {};
 }
 
 void HighlightMgr::setColor(const Vec3f& c)

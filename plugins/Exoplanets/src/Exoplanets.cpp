@@ -355,63 +355,70 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (!flagShowExoplanets || maxNbItem <= 0)
 	{
 		return result;
 	}
 
-	QStringList names;
+	QVector<QPair<QString,StelObjectP>> names;
 	for (const auto& eps : ep)
 	{
-		names.append(eps->getNameI18n());
-		names.append(eps->getExoplanetsNamesI18n());
-		names.append(eps->getEnglishName());
-		names.append(eps->getExoplanetsEnglishNames());
-		names.append(eps->getDesignations());
+		for(const auto& name : eps->getNameI18n())               names.append({name, StelObjectP(eps)});
+		for(const auto& name : eps->getExoplanetsNamesI18n())    names.append({name, StelObjectP(eps)});
+		for(const auto& name : eps->getEnglishName())            names.append({name, StelObjectP(eps)});
+		for(const auto& name : eps->getExoplanetsEnglishNames()) names.append({name, StelObjectP(eps)});
+		for(const auto& name : eps->getDesignations())           names.append({name, StelObjectP(eps)});
 	}
 
-	QString fullMatch = "";
-	for (const auto& name : names)
+	QString fullMatchName;
+	StelObjectP fullMatchP;
+	for (const auto& [name,obj] : names)
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 			continue;
 
 		if (name==objPrefix)
-			fullMatch = name;
+		{
+			fullMatchName = name;
+			fullMatchP = obj;
+		}
 		else
-			result.append(name);
+			result.append({name, obj});
 
 		if (result.size() >= maxNbItem)
 			break;
 	}
 
-	result.sort();
-	if (!fullMatch.isEmpty())
-		result.prepend(fullMatch);
+	std::sort(result.begin(), result.end(), [](auto& a, auto& b){ return a.first < b.first; });
+	if (!fullMatchName.isEmpty())
+		result.prepend({fullMatchName, fullMatchP});
 	return result;
 }
 
-QStringList Exoplanets::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> Exoplanets::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (!flagShowExoplanets)
 		return result;
 
 	for (const auto& planet : ep)
-		result << planet->getExoplanetsDesignations();
+		for(const auto& name : planet->getExoplanetsDesignations())
+			result.append({name, StelObjectP(planet)});
 
 	if (inEnglish)
 	{
 		for (const auto& planet : ep)
-			result << planet->getExoplanetsEnglishNames();
+			for(const auto& name : planet->getExoplanetsEnglishNames())
+				result.append({name, StelObjectP(planet)});
 	}
 	else
 	{
 		for (const auto& planet : ep)
-			result << planet->getExoplanetsNamesI18n();
+			for(const auto& name : planet->getExoplanetsNamesI18n())
+				result.append({name, StelObjectP(planet)});
 	}
 	return result;
 }

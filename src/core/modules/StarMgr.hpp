@@ -213,12 +213,12 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
+	QVector<QPair<QString,StelObjectP>> listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
 	//! List all currently loaded names.
 	//! @param inEnglish list EnglishNames (true) or translated (false)
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
 	//! @note Listing stars with the common names only, not skyculture-related.
-	QStringList listAllObjects(bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override;
 	//! @param objType a string with int number 0...8.
 	//! 0..Interesting double stars
 	//! 1..Interesting variable stars
@@ -231,7 +231,7 @@ public:
 	//! 8..Bright Barium stars
 	//! @param inEnglish: return English, not translated star names
 	//! @return a QStringList with all known star names
-	QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjectsByType(const QString& objType, bool inEnglish) const override;
 	QString getName() const override { return "Stars"; }
 	//! @return "Star"
 	QString getStelObjectType() const override;
@@ -568,9 +568,15 @@ private:
 	//! Load scientific star names, variable names, binary data, cross indices. Called once in init().
 	void populateStarsDesignations();
 
+	void populateDoubleStarsList();
+	void populateVariableStarsList();
+
 	//! List of all Hipparcos stars.
 	QList<StelObjectP> hipparcosStars, carbonStars, bariumStars;
 	QList<StelACStarData> doubleHipStars, variableHipStars, algolTypeStars, classicalCepheidsTypeStars, hipStarsHighPM;
+
+	QMap<QString,StelObjectP> doubleStars; //!< Intersting double stars
+	QMap<QString,StelObjectP> variableStars; //!< Interesting variable stars
 
 	LinearFader labelsFader;
 	LinearFader starsFader;

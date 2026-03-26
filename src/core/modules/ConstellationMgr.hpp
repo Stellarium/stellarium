@@ -126,7 +126,7 @@ public:
 
 	StelObjectP searchByID(const QString &id) const override;
 
-	QStringList listAllObjects(bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override;
 	QString getName() const override { return "Constellations"; }
 	QString getStelObjectType() const override;
 
