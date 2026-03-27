@@ -1910,7 +1910,7 @@ QString Planet::getNarrationExtra(const StelCore *core, const InfoStringGroup& f
 
 		// Not sure if albedo is at all interesting?
 		if (englishName != L1S("Sun"))
-			oss << QString("%1: %2. ").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 2));
+			oss << QString("%1: %2. ").arg(q_("Albedo"), StelUtils::narrateDecimal(getAlbedo(), 2));
 
 		// In the narration, this comes much earlier.
 		//oss << getDiscoveryNarration() << ". ";
@@ -2330,8 +2330,9 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 			       .arg(getNameI18n(), StelUtils::narrateDecimal(orbVel* AU/86400., 1));
 			const double helioVel=getHeliocentricEclipticVelocity().norm();
 			if (!fuzzyEquals(helioVel, orbVel))
-				oss << " " << QString(qc_("while the heliocentric velocity is %1 kilometers per second", "planet narration"))
-				       .arg(StelUtils::narrateDecimal(helioVel* AU/86400., 1)) << ". ";
+				oss << ", " << QString(qc_("while the heliocentric velocity is %1 kilometers per second", "planet narration"))
+				       .arg(StelUtils::narrateDecimal(helioVel* AU/86400., 1));
+			oss << ". ";
 		}
 		oss << getExtraInfoStrings(Velocity).join(" ");
 	}

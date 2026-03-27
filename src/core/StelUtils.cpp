@@ -1642,6 +1642,8 @@ QString narrateDecimal(double num, int decimals)
 	QString lang=StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	if (lang=="de") // TODO: Which other languages use comma or other non-C-locale formulation when speaking?
 		numStr=numStr.replace('.', ',');
+	if (num<0.)
+		numStr.prepend(q_("minus") + " ");
 	return numStr;
 }
 
