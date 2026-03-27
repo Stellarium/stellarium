@@ -211,12 +211,18 @@ void StelSkyCultureMgr::makeCulturesList()
 			qWarning() << "Sky culture id" << id << "doesn't match directory name" << dir;
 		culture.id = id;
 		culture.englishName = getSkyCultureEnglishName(dir);
-		culture.region = data["region"].toString();
-		if (culture.region.length()==0)
+		if (data["region"].isArray())
 		{
-			qWarning() << "No geographic region declared in skyculture" << id << ". setting \"World\"";
-			culture.region = "World";
+			culture.region = data["region"].toArray();
 		}
+		// this is needed for legacy reasons, in the future all skyculture will be stored as JsonArray (at least if the SkyCultureMaker Plugin is used)
+		else
+		{
+			culture.region = QJsonArray();
+			culture.region.append(data["region"]);
+		}
+		culture.beginTime = data["beginTime"].toInt();
+		culture.endTime = data["endTime"].toInt();
 		if (data["constellations"].isArray())
 		{
 			culture.constellations = data["constellations"].toArray();
@@ -281,6 +287,7 @@ void StelSkyCultureMgr::makeCulturesList()
 			culture.classification = classification;
 		}
 	}
+	emit skyCultureListChanged();
 }
 
 //! Init itself from a config file.
@@ -559,7 +566,15 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlRegion() const
 {
-	QString html = "", region = currentSkyCulture.region.trimmed();
+	QString html = "";
+	QString region;
+	// convert jsonArray to QString
+	QJsonDocument jsonDoc;
+	jsonDoc.setArray(currentSkyCulture.region);
+	region = QString(jsonDoc.toJson()).trimmed();
+	// converted string still has some unwanted characters (e.g. [ "Northern Europe", "Southern Europe", "Western Europe" ])
+	region = region.remove(QRegularExpression("[^\\w\\s,]"));
+
 	QString description = q_("The region indicates the geographical area of origin of a given sky culture.");
 
 	// special case: modern sky culture
@@ -611,9 +626,67 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void) const
 	return cultures;
 }
 
+//! returns map of human readable culture names (translated to current locale) and corresponding regions
+QMultiMap<QString, QString> StelSkyCultureMgr::getSkyCultureRegionMapI18(void) const
+{
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
+	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
+	QMultiMap<QString, QString> translatedCultureMap;
+
+	while (i.hasNext())
+	{
+		i.next();
+		for (const auto &currentRegion : i.value().region)
+		{
+			if (currentRegion.toString() == "Southern America")
+			{
+				qWarning() << trans.qtranslate(i.value().englishName, "sky culture") << ": outdated region key found! Please update the region from 'Southern America' to 'South America'.";
+				translatedCultureMap.insert(trans.qtranslate(i.value().englishName, "sky culture"), "South America");
+			}
+			else
+			{
+				translatedCultureMap.insert(trans.qtranslate(i.value().englishName, "sky culture"), currentRegion.toString());
+			}
+		}
+	}
+
+	return translatedCultureMap;
+}
+
+//! returns map of human readable culture names (translated to current locale) and the corresponding time limits (start / end time)
+QMap<QString, QPair<int, int>> StelSkyCultureMgr::getSkyCultureTimeLimitMapI18(void) const
+{
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
+	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
+	QMap<QString, QPair<int, int>> translatedCultureTimeMap;
+
+	while (i.hasNext())
+	{
+		i.next();
+		translatedCultureTimeMap.insert(trans.qtranslate(i.value().englishName, "sky culture"), QPair<int, int>(i.value().beginTime, i.value().endTime));
+	}
+
+	return translatedCultureTimeMap;
+}
+
 QStringList StelSkyCultureMgr::getSkyCultureListIDs(void) const
 {
 	return dirToNameEnglish.keys();
+}
+
+QMap<QString, QString> StelSkyCultureMgr::getDirToI18Map(void) const
+{
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
+	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
+	QMap<QString, QString> dirToTranslationMap;
+
+	while (i.hasNext())
+	{
+		i.next();
+		dirToTranslationMap.insert(i.value().id, trans.qtranslate(i.value().englishName, "sky culture"));
+	}
+
+	return dirToTranslationMap;
 }
 
 std::vector<std::pair<QString, QString>> StelSkyCultureMgr::getConstellationsDescriptions(QString consSection) const

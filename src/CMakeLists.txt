@@ -330,6 +330,12 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/Dialog.cpp
           gui/MapWidget.hpp
           gui/MapWidget.cpp
+          gui/SkyCultureMapGraphicsView.hpp
+          gui/SkyCultureMapGraphicsView.cpp
+          gui/SkyCulturePolygonItem.hpp
+          gui/SkyCulturePolygonItem.cpp
+          gui/SeparatorListWidgetItem.hpp
+          gui/SeparatorListWidgetItem.cpp
           gui/AngleSpinBox.hpp
           gui/AngleSpinBox.cpp
           gui/LocationDialog.hpp
@@ -503,7 +509,13 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 # Setup Qt5/6 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Positioning)
+SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Positioning)
+
+IF(Qt6_FOUND)
+# Qt6 needs SvgWidgets, for Qt5 it's included in Svg
+     LIST(APPEND STELLARIUM_QT_LIBRARIES Qt6::SvgWidgets)
+ENDIF()
+
 IF(NOT USE_BUNDLED_QTCOMPRESS)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::GuiPrivate)
 ELSE()

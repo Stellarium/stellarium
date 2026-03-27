@@ -88,6 +88,16 @@ std::optional<QString> scm::ScmConstellation::getPronounce() const
 	return pronounce;
 }
 
+void scm::ScmConstellation::setTransliteration(const std::optional<QString> &translit)
+{
+	ScmConstellation::transliteration = translit;
+}
+
+std::optional<QString> scm::ScmConstellation::getTransliteration() const
+{
+	return transliteration;
+}
+
 void scm::ScmConstellation::setIPA(const std::optional<QString> &ipa)
 {
 	ScmConstellation::ipa = ipa;
@@ -232,6 +242,10 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const boo
 	if (pronounce.has_value())
 	{
 		commonNameObj["pronounce"] = pronounce.value();
+	}
+	if (transliteration.has_value())
+	{
+		commonNameObj["transliteration"] = transliteration.value();
 	}
 	if (ipa.has_value())
 	{

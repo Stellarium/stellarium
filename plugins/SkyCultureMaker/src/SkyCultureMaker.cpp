@@ -425,6 +425,38 @@ void SkyCultureMaker::setSkyCultureDescription(const scm::Description &descripti
 	}
 }
 
+void SkyCultureMaker::setSkyCultureBeginTime(int beginTime)
+{
+	if (currentSkyCulture != nullptr)
+	{
+		currentSkyCulture->setBeginTime(beginTime);
+	}
+}
+
+void SkyCultureMaker::setSkyCultureEndTime(int endTime)
+{
+	if (currentSkyCulture != nullptr)
+	{
+		currentSkyCulture->setEndTime(endTime);
+	}
+}
+
+void SkyCultureMaker::addSkyCultureLocation(const scm::CulturePolygon &polygon)
+{
+	if (currentSkyCulture != nullptr)
+	{
+		currentSkyCulture->addLocation(polygon);
+	}
+}
+
+void SkyCultureMaker::removeSkyCultureLocation(int id)
+{
+	if (currentSkyCulture != nullptr)
+	{
+		currentSkyCulture->removeLocation(id);
+	}
+}
+
 void SkyCultureMaker::setTempArtwork(const scm::ScmConstellationArtwork *artwork)
 {
 	tempArtwork = artwork;
