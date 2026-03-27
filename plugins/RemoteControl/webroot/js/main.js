@@ -35,5 +35,3 @@ require(["ui/mainui", "ui/gpcontroller"], function(mainui, gpcontroller) {
 	// Initialize gamepad controller after main UI is ready
 	// The actual initialization will happen in mainui.js when UI is ready
 });
-
-require(["ui/mainui"]);
