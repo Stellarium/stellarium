@@ -8,6 +8,7 @@
   <link type="text/css" rel="stylesheet" href="/external/jquery-ui.css"/>
   <link type="text/css" rel="stylesheet" href="style.css" />
   <link type="text/css" rel="stylesheet" href="style_tablet7in.css" />
+	<link type="text/css" rel="stylesheet" href="gamepad.css" />
   <!-- Stellarium uses require.js to provide a controlled module environment -->
   <script data-main="js/main" src="js/require.js" type="text/javascript"></script>
 </head>
@@ -45,6 +46,7 @@
         <li><a href="#tab_location"><?= tr("Location")?></a></li>
         <li><a href="#tab_projection"><?= tr("Projection")?></a></li>
         <li class="stelplugin" data-plugin="Scenery3d"><a href="#tab_scenery3d"><?= tr("Scenery3d")?></a></li>
+				<li><a href="#tab_gamepad"><?= tr("Gamepad Controller")?></a></li>
       </ul>
       <div id="tab_main">
         <div class="flex">
@@ -938,6 +940,196 @@
             <iframe id="s3d_info" class="flex-expand">No scene selected</iframe>
           </div>
       </div>
+			<!-- Gamepad Controller Section - Built on W3C Gamepad API -->
+			<div id="tab_gamepad">
+					<section id="gp-controller" class="block">
+							<header>
+									<h2><?= tr("Gamepad Controller")?></h2>
+									<div id="gp-status" class="controller-status inline-block" style="margin-left: 20px;">
+											<span id="gp-connection-status">🔴 <?= tr("Disconnected")?></span>
+											<button id="gp-connect" class="jquerybutton" style="margin-left: 10px;"><?= tr("Scan")?></button>
+									</div>
+							</header>
+							
+							<div class="flex flex-wrap" style="gap: 20px;">
+									<!-- Controller Settings Panel -->
+									<div class="controller-settings-panel">
+											<h3><?= tr("Controller Settings")?></h3>
+											<div class="device-selector-row">
+													<label><?= tr("Active Device:")?></label>
+													<select id="gp-device-selector">
+															<option value=""><?= tr("No devices connected")?></option>
+													</select>
+											</div>
+											<div class="device-info-card">
+													<div class="device-info-row">
+															<span class="device-info-label"><?= tr("Device:")?></span>
+															<span class="device-info-value" id="gp-device-name">-</span>
+													</div>
+													<div class="device-info-row">
+															<span class="device-info-label"><?= tr("Model:")?></span>
+															<span class="device-info-value" id="gp-device-model">-</span>
+													</div>
+													<div class="device-info-row">
+															<span class="device-info-label"><?= tr("Vendor:")?></span>
+															<span class="device-info-value" id="gp-device-vendor">-</span>
+													</div>
+													<div class="device-info-row">
+															<span class="device-info-label"><?= tr("Current FOV:")?></span>
+															<span class="device-info-value" id="gp-current-fov">60°</span>
+													</div>
+											</div>
+											
+											<!-- Calibration Section -->
+											<div class="calibration-section">
+													<div class="calibration-header">
+															<h4><?= tr("Joystick Calibration")?></h4>
+															<div class="calibration-buttons">
+																	<button id="gp-calibrate" class="calibration-btn"><?= tr("Calibrate")?></button>
+																	<button id="gp-reset-calibration" class="calibration-btn"><?= tr("Reset")?></button>
+															</div>
+													</div>
+													<div id="gp-calibration-values" class="calibration-status"></div>
+													<p class="note" style="margin-top: 5px; font-size: 10px; color: #aaa;">
+															<?= tr("Move joysticks in circles to calibrate center position. Press any button to finish.")?>
+													</p>
+											</div>
+											
+											<!-- Joystick Preview -->
+											<h4 style="margin: 15px 0 10px; color: #B4B7B0;"><?= tr("Joystick Preview")?></h4>
+											<div class="joystick-preview-container">
+													<div class="joystick-preview">
+															<canvas id="gp-left-stick-canvas" width="100" height="100"></canvas>
+															<div class="stick-label">
+																	<strong><?= tr("Left Stick")?></strong>
+																	<small><?= tr("View movement")?></small>
+															</div>
+													</div>
+													<div class="joystick-preview">
+															<canvas id="gp-right-stick-canvas" width="100" height="100"></canvas>
+															<div class="stick-label">
+																	<strong><?= tr("Right Stick")?></strong>
+																	<small><?= tr("Continuous zoom")?></small>
+															</div>
+													</div>
+											</div>
+											
+											<!-- Control Settings -->
+											<div class="control-slider-group">
+													<div class="checkbox-group">
+															<div class="checkbox-item">
+																	<input type="checkbox" id="gp-invert-x" />
+																	<label for="gp-invert-x"><?= tr("Invert X-Axis")?></label>
+															</div>
+															<div class="checkbox-item">
+																	<input type="checkbox" id="gp-invert-y" />
+																	<label for="gp-invert-y"><?= tr("Invert Y-Axis")?></label>
+															</div>
+															<div class="checkbox-item">
+																	<input type="checkbox" id="gp-vibration-feedback" />
+																	<label for="gp-vibration-feedback"><?= tr("Vibration Feedback")?></label>
+																	<span class="help-text">(<?= tr("works in Chrome/Edge")?>)</span>
+															</div>
+													</div>
+													
+													<div class="slider-row" id="gp-vibration-intensity-row" style="display: none;">
+															<span class="slider-label"><?= tr("Vibration Intensity:")?></span>
+															<div class="slider-container">
+																	<div id="gp-vibration-intensity" class="slider"></div>
+															</div>
+															<span id="gp-vibration-intensity-value" class="slider-value">0.5</span>
+													</div>
+													
+													<div class="checkbox-item" style="margin-top: 5px; margin-bottom: 15px;">
+															<button id="gp-test-vibration" class="test-vibration-btn"><?= tr("Test Vibration")?></button>
+															<span class="help-text" style="margin-left: 10px;"><?= tr("Manual test")?></span>
+													</div>
+													
+													<div class="slider-row">
+															<span class="slider-label"><?= tr("Sensitivity:")?></span>
+															<div class="slider-container">
+																	<div id="gp-sensitivity" class="slider"></div>
+															</div>
+															<span id="gp-sensitivity-value" class="slider-value">1.0</span>
+													</div>
+													
+													<div class="slider-row">
+															<span class="slider-label"><?= tr("Deadzone:")?></span>
+															<div class="slider-container">
+																	<div id="gp-deadzone" class="slider"></div>
+															</div>
+															<span id="gp-deadzone-value" class="slider-value">0.15</span>
+													</div>
+													
+													<div class="slider-row">
+															<span class="slider-label"><?= tr("Zoom Speed:")?></span>
+															<div class="slider-container">
+																	<div id="gp-zoom-speed" class="slider"></div>
+															</div>
+															<span id="gp-zoom-speed-value" class="slider-value">0.05</span>
+													</div>
+													
+													<div class="slider-row">
+															<span class="slider-label"><?= tr("Movement Speed:")?></span>
+															<div class="slider-container">
+																	<div id="gp-movement-speed" class="slider"></div>
+															</div>
+															<span id="gp-movement-speed-value" class="slider-value">5.0</span>
+													</div>
+											</div>
+									</div>
+									
+									<!-- Button Customization Panel -->
+									<div class="button-customization-panel">
+											<h3><?= tr("Button Customization")?></h3>
+											<div class="customization-note">
+													<span class="ui-icon ui-icon-info" style="float: left; margin-right: 5px;"></span>
+													<?= tr("Each connected controller has its own independent profile. Select a device from 'Active Device' to customize.")?>
+											</div>
+											<div id="gp-button-customization" class="button-customization-container">
+													<!-- Populated by JavaScript -->
+											</div>
+											<div class="action-buttons">
+													<button id="gp-reset-mappings" class="action-btn reset"><?= tr("Reset Mappings")?></button>
+													<button id="gp-save-mappings" class="action-btn save"><?= tr("Save Mappings")?></button>
+													<button id="gp-export-profile" class="action-btn export"><?= tr("Export Profile")?></button>
+													<button id="gp-import-profile" class="action-btn import"><?= tr("Import Profile")?></button>
+											</div>
+											<p class="note" style="margin-top: 10px; font-size: 10px; color: #aaa; text-align: center;">
+													<?= tr("Profiles are saved per device and can be exported/imported for backup or sharing")?>
+											</p>
+									</div>
+							</div>
+							
+							<!-- Live Input Panel -->
+							<div id="gp-live-input" class="live-input-panel" style="margin-top: 20px;">
+									<div class="live-input-header">
+											<h4><?= tr("Live Input Monitor")?></h4>
+											<p><?= tr("Real-time raw values from the browser's Gamepad API.")?></p>
+									</div>
+									<div class="live-input-content">
+											<div class="live-input-two-columns">
+													<div class="live-input-column">
+															<h5><?= tr("Buttons")?></h5>
+															<div id="gp-buttons-container" class="live-input-grid">
+																	<div class="loading-placeholder"><?= tr("Waiting for controller input...")?></div>
+															</div>
+													</div>
+													<div class="live-input-column">
+															<h5><?= tr("Axes")?></h5>
+															<div id="gp-axes-container" class="live-input-grid">
+																	<div class="loading-placeholder"><?= tr("Waiting for controller input...")?></div>
+															</div>
+													</div>
+											</div>
+											<div class="live-info-section">
+													<h5><?= tr("Device Information")?></h5>
+													<div id="gp-device-info-live"></div>
+											</div>
+									</div>
+							</div>
+					</section>
+			</div>
     </div>
     <!-- main buttons under the tabs -->
     <ul class="ui-corner-all ui-widget-content button32list margin-vertical">

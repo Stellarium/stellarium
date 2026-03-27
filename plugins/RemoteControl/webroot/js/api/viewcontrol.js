@@ -35,7 +35,7 @@ define(["jquery", "./remotecontrol"], function($, rc) {
                 if (x !== 0 || y !== 0) {
                     updateTimeout = setTimeout(function() {
                         move(x, y);
-                    }, 250); //repeat each 250ms to avoid Stellarium thinking the interface crashed
+                    }, 100); //repeat each 250ms to avoid Stellarium thinking the interface crashed
                 }
             }
         });
@@ -57,7 +57,7 @@ define(["jquery", "./remotecontrol"], function($, rc) {
 
         if (queuedFov === lastServerFov) {
             //dont do another request just yet, nothing changed for now
-            fovTimeout = setTimeout(fovServerUpdate, 250);
+            fovTimeout = setTimeout(fovServerUpdate, 50);
         } else {
             var fov = queuedFov;
             fovXHR = $.ajax({
@@ -71,7 +71,7 @@ define(["jquery", "./remotecontrol"], function($, rc) {
 
                     if (lastServerFov !== queuedFov) {
                         //we have not yet reached the queued value, queue another update after some time
-                        fovTimeout = setTimeout(fovServerUpdate, 250);
+                        fovTimeout = setTimeout(fovServerUpdate, 50);
                     } else {
                         fovXHR = undefined;
                         fovTimeout = undefined;

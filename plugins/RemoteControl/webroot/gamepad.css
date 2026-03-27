@@ -1,27 +1,87 @@
-/* gamepad.css - Gamepad Controller Styles */
+/* ========================================================================
+ * gamepad.css - Gamepad Controller Styles
+ * ========================================================================
+ * 
+ * Stylesheet for the Gamepad Controller module for Stellarium Remote Control.
+ * Provides comprehensive styling for gamepad configuration interface including:
+ * - Controller settings panel with device information
+ * - Joystick preview canvases with real-time visualization
+ * - Button customization grid with categorized groups
+ * - Calibration interface with visual feedback
+ * - Responsive design for various screen sizes
+ * - Vibration intensity controls
+ * - Import/Export profile interface
+ * - Live Input Monitor interface
+ * 
+ * Version: 2.5.0
+ * Author: kutaibaa akraa (GitHub: @kutaibaa-akraa)
+ * Date: 2026-03-27
+ * License: GPLv2+
+ * 
+ * ======================================================================== */
 
-/* ========== Controller Settings Panel ========== */
+/* ========================================================================
+ * SECTION 1: GLOBAL CONTAINER STYLES
+ * ======================================================================== */
+
+/* Ensure all elements use border-box for consistent sizing */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+/* Main container for gamepad section with proper overflow handling */
+#gp-controller,
+#tab_gamepad,
+#tab_gamepad .block,
+#tab_gamepad .flex {
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* Flex container with proper gap and wrapping */
+.flex.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ========================================================================
+ * SECTION 2: CONTROLLER SETTINGS PANEL
+ * ======================================================================== */
+
+/**
+ * Main settings panel containing device info, calibration, and joystick preview.
+ * Uses flexible width with constraints for responsive behavior.
+ */
 .controller-settings-panel {
     flex: 1;
-    min-width: 320px;
+    min-width: 280px;      /* Reduced from 320px for better responsiveness */
+    max-width: 420px;      /* Maximum width to prevent excessive expansion */
     background: rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 15px;
+    transition: all 0.2s ease;
 }
 
 .controller-settings-panel h3 {
-    color: #4CAF50;
+    color: #B4B7B0;
     margin: 0 0 15px 0;
     padding-bottom: 8px;
-    border-bottom: 2px solid #4CAF50;
+    border-bottom: 2px solid #B4B7B0;
     font-size: 14px;
     font-weight: bold;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.5);
 }
 
 /* Device Information Card */
 .device-info-card {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.25);
     border-radius: 6px;
     padding: 12px;
     margin-bottom: 20px;
@@ -40,18 +100,60 @@
 }
 
 .device-info-label {
-    min-width: 100px;
-    color: #aaa;
+    min-width: 80px;
+    color: #B4B7B0;
     font-size: 12px;
+    font-weight: bold;
 }
 
 .device-info-value {
-    color: #4CAF50;
+    color: #DCDBDA;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 12px;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
-/* Calibration Section */
+/* Device Selector */
+.device-selector-row {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;      /* Allow wrapping on small screens */
+}
+
+.device-selector-row label {
+    color: #B4B7B0;
+    font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;       /* Prevent label from shrinking */
+}
+
+#gp-device-selector {
+    flex: 1;
+    min-width: 150px;     /* Minimum width before wrapping */
+    background: #3A3C3E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 4px;
+    padding: 6px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+#gp-device-selector:hover {
+    border-color: #B4B7B0;
+}
+
+/* ========================================================================
+ * SECTION 3: CALIBRATION SECTION
+ * ======================================================================== */
+
 .calibration-section {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 6px;
@@ -65,18 +167,27 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .calibration-header h4 {
     margin: 0;
-    color: #4CAF50;
+    color: #B4B7B0;
     font-size: 13px;
+    font-weight: bold;
+}
+
+.calibration-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;      /* Allow wrapping on small screens */
 }
 
 .calibration-btn {
-    background: linear-gradient(#4CAF50, #2E7D32);
-    color: white;
-    border: none;
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
+    border: 1px solid #2A2C2E;
     padding: 5px 12px;
     border-radius: 4px;
     font-size: 12px;
@@ -86,7 +197,8 @@
 }
 
 .calibration-btn:hover {
-    background: linear-gradient(#5CBF60, #3E8D42);
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
 }
 
 .calibration-btn:active {
@@ -95,12 +207,13 @@
 
 .calibration-status {
     font-size: 11px;
-    color: #4CAF50;
+    color: #B4B7B0;
     margin-top: 8px;
-    padding: 4px 8px;
-    background: rgba(76, 175, 80, 0.1);
-    border-radius: 3px;
-    display: inline-block;
+    padding: 8px;
+    background: rgba(180, 183, 176, 0.1);
+    border-radius: 4px;
+    text-align: center;
+    word-wrap: break-word;
 }
 
 .calibration-values {
@@ -119,16 +232,20 @@
 }
 
 .calibration-value-label {
-    color: #aaa;
+    color: #B4B7B0;
     margin-right: 5px;
 }
 
 .calibration-value-number {
-    color: #4CAF50;
+    color: #DCDBDA;
     font-weight: bold;
+    font-family: monospace;
 }
 
-/* Joystick Preview */
+/* ========================================================================
+ * SECTION 4: JOYSTICK PREVIEW
+ * ======================================================================== */
+
 .joystick-preview-container {
     display: flex;
     justify-content: space-around;
@@ -136,16 +253,19 @@
     padding: 10px;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    gap: 20px;            /* Add gap between joysticks */
+    flex-wrap: wrap;      /* Allow wrapping on small screens */
 }
 
 .joystick-preview {
     text-align: center;
+    flex-shrink: 0;       /* Prevent joystick from shrinking */
 }
 
 .joystick-preview canvas {
     width: 100px;
     height: 100px;
-    border: 2px solid #444;
+    border: 2px solid #5D5F62;
     border-radius: 6px;
     background: #222;
     display: block;
@@ -155,16 +275,19 @@
 
 .stick-label {
     font-size: 12px;
-    color: #ccc;
+    color: #B4B7B0;
 }
 
 .stick-label strong {
-    color: #4CAF50;
+    color: #DCDBDA;
     display: block;
     margin-bottom: 2px;
 }
 
-/* Control Sliders */
+/* ========================================================================
+ * SECTION 5: CONTROL SLIDERS AND INPUTS
+ * ======================================================================== */
+
 .control-slider-group {
     margin: 15px 0;
 }
@@ -174,25 +297,31 @@
     align-items: center;
     margin: 12px 0;
     padding: 5px 0;
+    flex-wrap: wrap;      /* Allow wrapping on small screens */
+    gap: 10px;            /* Add gap between elements */
 }
 
 .slider-label {
     min-width: 100px;
-    color: #ddd;
+    color: #B4B7B0;
     font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;       /* Prevent label from shrinking */
 }
 
 .slider-container {
     flex: 1;
     margin: 0 15px;
+    min-width: 120px;     /* Minimum width for slider */
 }
 
 .slider-value {
     min-width: 45px;
     text-align: right;
-    color: #4CAF50;
+    color: #DCDBDA;
     font-weight: bold;
     font-size: 12px;
+    font-family: monospace;
 }
 
 /* Checkbox Group */
@@ -203,6 +332,7 @@
     padding: 10px;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+    flex-wrap: wrap;
 }
 
 .checkbox-item {
@@ -213,47 +343,105 @@
 
 .checkbox-item input[type="checkbox"] {
     margin: 0;
+    cursor: pointer;
+    flex-shrink: 0;       /* Prevent checkbox from shrinking */
 }
 
 .checkbox-item label {
-    color: #ddd;
+    color: #B4B7B0;
     font-size: 12px;
     cursor: pointer;
 }
 
-/* ========== Button Customization Panel ========== */
+.checkbox-item label:hover {
+    color: #DCDBDA;
+}
+
+.checkbox-item .help-text {
+    font-size: 10px;
+    color: #aaa;
+    margin-left: 8px;
+}
+
+.checkbox-item input[type="checkbox"]:checked + label {
+    color: #4CAF50;
+}
+
+/* Vibration Intensity Slider Row */
+#gp-vibration-intensity-row {
+    transition: opacity 0.2s ease;
+    margin: 10px 0 15px 0;
+    padding: 5px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#gp-vibration-intensity-row.hidden {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Test Vibration Button */
+.test-vibration-btn {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
+    border: 1px solid #2A2C3E;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.test-vibration-btn:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+    transform: translateY(-1px);
+}
+
+.test-vibration-btn:active {
+    transform: translateY(1px);
+}
+
+/* ========================================================================
+ * SECTION 6: BUTTON CUSTOMIZATION PANEL
+ * ======================================================================== */
+
+/**
+ * Main panel for button mapping customization.
+ * Flexible width with responsive constraints to prevent overflow.
+ */
 .button-customization-panel {
     flex: 2;
-    min-width: 450px;
-		min-height:600px;
+    min-width: 280px;      /* Reduced from 450px for better responsiveness */
+    max-width: calc(100% - 300px);  /* Dynamic maximum width */
     background: rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 15px;
+    transition: all 0.2s ease;
 }
 
 .button-customization-panel h3 {
-    color: #4CAF50;
+    color: #B4B7B0;
     margin: 0 0 15px 0;
     padding-bottom: 8px;
-    border-bottom: 2px solid #4CAF50;
+    border-bottom: 2px solid #B4B7B0;
     font-size: 14px;
     font-weight: bold;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.5);
 }
 
 .customization-note {
-    background: rgba(76, 175, 80, 0.1);
-    border-left: 3px solid #4CAF50;
+    background: rgba(180, 183, 176, 0.1);
+    border-left: 3px solid #B4B7B0;
     padding: 8px 12px;
     margin-bottom: 15px;
     font-size: 11px;
-    color: #ddd;
+    color: #B4B7B0;
     border-radius: 0 4px 4px 0;
-}
-
-.customization-note .ui-icon {
-    margin-right: 5px;
-    color: #4CAF50;
+    word-wrap: break-word;
 }
 
 /* No Device Message */
@@ -262,40 +450,44 @@
     text-align: center;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 6px;
-    border: 1px dashed #4CAF50;
+    border: 1px dashed #B4B7B0;
 }
 
 .no-device-message p {
     margin: 0;
     font-size: 13px;
+    color: #B4B7B0;
 }
 
-/* Button Groups */
+/* Button Groups Container */
 .button-groups-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 15px;
-    max-height: 90000px;
+    max-height: 800px;
     overflow-y: auto;
     padding: 5px;
 }
 
+/* Individual Button Group */
 .button-group {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     padding: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 0;          /* Prevent overflow in flex/grid containers */
 }
 
 .button-group-header {
     margin: 0 0 12px 0;
-    color: #4CAF50;
+    color: #B4B7B0;
     font-size: 13px;
     font-weight: bold;
-    border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+    border-bottom: 1px solid rgba(180, 183, 176, 0.3);
     padding-bottom: 5px;
 }
 
+/* Button Item - Individual button mapping row */
 .button-item {
     display: flex;
     align-items: center;
@@ -304,6 +496,8 @@
     background: rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     transition: background 0.2s;
+    gap: 10px;            /* Add gap between elements */
+    flex-wrap: wrap;      /* Allow wrapping on small screens */
 }
 
 .button-item:hover {
@@ -311,31 +505,49 @@
 }
 
 .button-name {
-    min-width: 100px;
+    min-width: 110px;
     font-weight: bold;
-    color: #4CAF50;
+    color: #DCDBDA;
     font-size: 12px;
+    flex-shrink: 0;       /* Prevent button name from shrinking */
 }
 
+/**
+ * Dropdown select styling - Critical for preventing overflow issues.
+ * Uses text-overflow ellipsis to handle long text gracefully.
+ */
 .button-select {
     flex: 1;
     margin: 0 5px 0 10px;
-    padding: 5px;
-    background: #333;
-    color: #fff;
-    border: 1px solid #555;
+    padding: 6px;
+    background: #3A3C3E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
     border-radius: 3px;
     font-size: 11px;
     cursor: pointer;
+    max-width: 100%;      /* Prevent overflow beyond container */
+    min-width: 0;         /* Allow shrinking below content width */
+    overflow: hidden;     /* Hide overflow content */
+    text-overflow: ellipsis;  /* Show ellipsis for truncated text */
+    white-space: nowrap;       /* Prevent text wrapping */
+}
+
+.button-select optgroup,
+.button-select option {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .button-select:hover {
-    border-color: #4CAF50;
+    border-color: #B4B7B0;
 }
 
 .button-select:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: #B4B7B0;
 }
 
 /* Action Buttons */
@@ -346,11 +558,12 @@
     margin-top: 20px;
     padding-top: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
 }
 
 .action-btn {
     padding: 6px 15px;
-    border: none;
+    border: 1px solid #2A2C2E;
     border-radius: 4px;
     font-size: 12px;
     font-weight: bold;
@@ -359,38 +572,229 @@
 }
 
 .action-btn.reset {
-    background: linear-gradient(#666, #444);
-    color: white;
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
 }
 
 .action-btn.reset:hover {
-    background: linear-gradient(#777, #555);
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
 }
 
 .action-btn.save {
-    background: linear-gradient(#4CAF50, #2E7D32);
-    color: white;
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
 }
 
 .action-btn.save:hover {
-    background: linear-gradient(#5CBF60, #3E8D42);
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
 }
 
-/* ========== Responsive Design ========== */
-@media (max-width: 1024px) {
-    .button-groups-container {
-        grid-template-columns: 1fr;
+.action-btn.export {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
+}
+
+.action-btn.export:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+}
+
+.action-btn.import {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
+}
+
+.action-btn.import:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+}
+
+/* Connect Button */
+/* ========================================================================
+ * Scan Button Animation
+ * ======================================================================== */
+
+#gp-connect {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
+    border: 1px solid #2A2C2E;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#gp-connect:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+    transform: translateY(-1px);
+}
+
+#gp-connect:active {
+    transform: translateY(1px);
+}
+
+#gp-connect:disabled {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+}
+
+/* Scanning animation */
+#gp-connect.scanning {
+    position: relative;
+    background: linear-gradient(#3A6B3A, #2A4A2A);
+}
+
+#gp-connect.scanning::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: scan-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes scan-pulse {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Status indicator for scanning */
+#gp-connection-status.scanning {
+    animation: status-blink 1s ease-in-out infinite;
+}
+
+@keyframes status-blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Notification Message */
+.notification-message {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
+    border: 1px solid #B4B7B0;
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+    max-width: 90%;       /* Prevent overflow on small screens */
+    word-wrap: break-word;
+}
+
+/* ========================================================================
+ * SECTION 7: RESPONSIVE DESIGN - BREAKPOINTS
+ * ======================================================================== */
+
+/**
+ * Medium screens (tablets, small desktops)
+ * 1025px - 1399px: Standard desktop/laptop screens
+ */
+@media (min-width: 1025px) and (max-width: 1399px) {
+    .button-customization-panel {
+        min-width: 400px;
+        max-width: calc(100% - 320px);
     }
     
-    .button-customization-panel {
-        min-width: auto;
+    .button-select {
+        font-size: 11px;
     }
 }
 
+/**
+ * Large screens (desktops, high resolution)
+ * 1400px and above: Large desktop monitors
+ */
+@media (min-width: 1400px) {
+    .button-customization-panel {
+        min-width: 500px;
+        max-width: 800px;
+    }
+    
+    .controller-settings-panel {
+        min-width: 320px;
+        max-width: 450px;
+    }
+}
+
+/**
+ * Medium-small screens (small laptops, tablets landscape)
+ * 769px - 1024px: Tablet landscape and small laptops
+ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .button-customization-panel {
+        min-width: 320px;
+        max-width: calc(100% - 280px);
+    }
+    
+    .controller-settings-panel {
+        min-width: 260px;
+        max-width: 380px;
+    }
+    
+    .button-select {
+        font-size: 10px;
+        padding: 5px;
+    }
+    
+    .button-name {
+        min-width: 90px;
+        font-size: 11px;
+    }
+    
+    .button-item {
+        flex-wrap: wrap;
+    }
+    
+    .button-select {
+        margin-left: 0;
+        margin-top: 5px;
+        width: 100%;
+    }
+    
+    .button-name {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+    
+    .slider-label {
+        min-width: 90px;
+    }
+}
+
+/**
+ * Tablet portrait and small devices
+ * 481px - 768px: Tablets portrait, large phones
+ */
 @media (max-width: 768px) {
     .controller-settings-panel,
     .button-customization-panel {
         min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .button-groups-container {
+        grid-template-columns: 1fr;
     }
     
     .joystick-preview-container {
@@ -402,6 +806,12 @@
     .slider-row {
         flex-direction: column;
         align-items: flex-start;
+        width: 100%;
+    }
+    
+    .slider-label {
+        width: 100%;
+        margin-bottom: 5px;
     }
     
     .slider-container {
@@ -421,9 +831,11 @@
     .button-item {
         flex-direction: column;
         align-items: flex-start;
+        width: 100%;
     }
     
     .button-name {
+        width: 100%;
         margin-bottom: 5px;
     }
     
@@ -431,9 +843,126 @@
         width: 100%;
         margin: 5px 0 0 0;
     }
+    
+    .calibration-header {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    .calibration-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .calibration-buttons .calibration-btn {
+        flex: 1;
+        text-align: center;
+    }
+    
+    .action-buttons {
+        justify-content: center;
+    }
+    
+    .action-btn {
+        flex: 1;
+        min-width: 100px;
+        text-align: center;
+    }
+    
+    .device-selector-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .device-selector-row label {
+        margin-bottom: 5px;
+    }
+    
+    #gp-device-selector {
+        width: 100%;
+    }
+    
+    .calibration-values {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* ========== Loading States ========== */
+/**
+ * Mobile phones
+ * 320px - 480px: Small mobile devices
+ */
+@media (max-width: 480px) {
+    .controller-settings-panel,
+    .button-customization-panel {
+        padding: 10px;
+    }
+    
+    .device-info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .device-info-label {
+        min-width: auto;
+    }
+    
+    .joystick-preview canvas {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .button-group-header {
+        font-size: 12px;
+    }
+    
+    .button-name {
+        font-size: 11px;
+        min-width: auto;
+    }
+    
+    .button-select {
+        font-size: 10px;
+        padding: 5px;
+    }
+    
+    .action-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+        min-width: 80px;
+    }
+    
+    .slider-label {
+        font-size: 11px;
+        min-width: auto;
+    }
+    
+    .slider-value {
+        font-size: 11px;
+    }
+    
+    .calibration-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+    
+    .test-vibration-btn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    
+    .customization-note {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+}
+
+/* ========================================================================
+ * SECTION 8: UTILITY CLASSES AND STATES
+ * ======================================================================== */
+
+/* Loading and Calibration States */
 .calibrating .calibration-btn {
     opacity: 0.7;
     cursor: wait;
@@ -445,12 +974,12 @@
 }
 
 @keyframes pulse {
-    0% { border-color: #4CAF50; }
-    50% { border-color: #666; }
-    100% { border-color: #4CAF50; }
+    0% { border-color: #B4B7B0; }
+    50% { border-color: #5D5F62; }
+    100% { border-color: #B4B7B0; }
 }
 
-/* ========== Scrollbar Styling ========== */
+/* Scrollbar Styling */
 .button-groups-container::-webkit-scrollbar {
     width: 8px;
 }
@@ -461,10 +990,320 @@
 }
 
 .button-groups-container::-webkit-scrollbar-thumb {
-    background: #4CAF50;
+    background: #B4B7B0;
     border-radius: 4px;
 }
 
 .button-groups-container::-webkit-scrollbar-thumb:hover {
-    background: #5CBF60;
+    background: #DCDBDA;
 }
+
+/* Help text styling */
+.help-text {
+    font-size: 10px;
+    color: #aaa;
+    margin-left: 8px;
+}
+
+/* Note text styling */
+.note {
+    font-size: 10px;
+    color: #aaa;
+    text-align: center;
+    margin-top: 10px;
+    word-wrap: break-word;
+}
+
+/* ========================================================================
+ * SECTION 9: PRINT STYLES
+ * ======================================================================== */
+
+@media print {
+    .controller-settings-panel,
+    .button-customization-panel {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .joystick-preview canvas {
+        border: 1px solid #000;
+    }
+    
+    .button-select {
+        border: 1px solid #000;
+        background: #fff;
+        color: #000;
+    }
+    
+    .calibration-btn,
+    .action-btn,
+    .test-vibration-btn,
+    #gp-connect {
+        border: 1px solid #000;
+        background: #fff;
+        color: #000;
+    }
+}
+
+/* ========================================================================
+ * SECTION 10: Live Input Panel Styles
+ * ======================================================================== */
+
+.live-input-panel {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 0;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.live-input-header {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(180, 183, 176, 0.3);
+}
+
+.live-input-header h4 {
+    margin: 0;
+    color: #B4B7B0;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.live-input-header p {
+    margin: 4px 0 0 0;
+    font-size: 10px;
+    color: #8A8C8E;
+}
+
+.live-input-content {
+    padding: 15px;
+}
+
+.live-input-two-columns {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.live-input-column {
+    flex: 1;
+    min-width: 280px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.live-input-column h5 {
+    margin: 0 0 10px 0;
+    padding-bottom: 6px;
+    color: #B4B7B0;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(180, 183, 176, 0.3);
+}
+
+.live-input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 6px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+.live-input-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 8px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.live-input-item .label {
+    color: #B4B7B0;
+    font-family: 'DejaVuSans', sans-serif;
+}
+
+.live-input-item .label .raw-id {
+    font-size: 9px;
+    color: #6A6C6E;
+    margin-left: 6px;
+}
+
+.live-input-item .value {
+    font-family: 'DejaVuSansMono', monospace;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: #2A2C2E;
+    min-width: 48px;
+    text-align: center;
+    font-size: 10px;
+    color: #DCDBDA;
+}
+
+.live-input-item .value.pressed {
+    background: #4A6A4A;
+    color: #FFFFFF;
+}
+
+.live-input-item .value.axis-positive {
+    background: #2A4A3A;
+    color: #A0D0A0;
+}
+
+.live-input-item .value.axis-negative {
+    background: #4A2A2A;
+    color: #E0A0A0;
+}
+
+.live-input-item .value.axis-neutral {
+    background: #2A2C2E;
+    color: #B4B7B0;
+}
+
+/* Device Info Section */
+.live-info-section {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 15px;
+}
+
+.live-info-section h5 {
+    margin: 0 0 10px 0;
+    padding-bottom: 6px;
+    color: #B4B7B0;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(180, 183, 176, 0.3);
+}
+
+#gp-device-info-live {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 8px;
+}
+
+.device-info-live-row {
+    display: flex;
+    align-items: baseline;
+    padding: 5px 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.device-info-live-row .label {
+    min-width: 110px;
+    color: #B4B7B0;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.device-info-live-row .value {
+    color: #DCDBDA;
+    font-family: 'DejaVuSansMono', monospace;
+    font-size: 10px;
+    word-break: break-all;
+}
+
+.info-note-live {
+    background: rgba(180, 183, 176, 0.08);
+    padding: 10px 12px;
+    font-size: 10px;
+    color: #8A8C8E;
+    border-radius: 4px;
+    margin-top: 12px;
+    line-height: 1.5;
+}
+
+.info-note-live strong {
+    color: #B4B7B0;
+    font-weight: bold;
+}
+
+/* Scrollbar Styling for Live Input */
+.live-input-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.live-input-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.live-input-grid::-webkit-scrollbar-thumb {
+    background: #5D5F62;
+    border-radius: 3px;
+}
+
+.live-input-grid::-webkit-scrollbar-thumb:hover {
+    background: #B4B7B0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .live-input-two-columns {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .live-input-column {
+        min-width: auto;
+    }
+    
+    .live-input-grid {
+        grid-template-columns: 1fr;
+        max-height: 300px;
+    }
+    
+    .device-info-live-row {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .device-info-live-row .label {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .live-input-header h4 {
+        font-size: 12px;
+    }
+    
+    .live-input-header p {
+        font-size: 9px;
+    }
+    
+    .live-input-column h5 {
+        font-size: 11px;
+    }
+    
+    .live-input-item {
+        font-size: 10px;
+    }
+    
+    .live-input-item .value {
+        font-size: 9px;
+        min-width: 42px;
+    }
+}
+
+/* Loading placeholder */
+.loading-placeholder {
+    text-align: center;
+    padding: 30px;
+    color: #8A8C8E;
+    font-style: italic;
+    font-size: 11px;
+}
+
+/* ========================================================================
+ * END OF FILE
+ * ======================================================================== */
