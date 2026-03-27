@@ -33,7 +33,7 @@ namespace StelContributors {
         "Alexey Sokolov", "Wang Siliang", "Anton Samoylov", "Khalid AlAjaji", "Adriano Steffler", 
         "Minmin Gong", "Alexander Duytschaever", "Nick Fedoseev", "Sibi Antony", "Tanmoy Saha", 
         "Pluton Helleformer", "Alex Gamper", "Atque", "Vishvas Vasuki विश्वासः", "Vladislav Bataron", 
-        "Alessandro Siniscalchi", "Elaina", "Kutaibaa Akraa", "Luca-Philipp Grumbach", "Peter Mousley", 
+        "Alessandro Siniscalchi", "Elaina", "Kutaibaa Akraa", "Luca-Philipp Grumbach", "Moritz Rätz", "Peter Mousley",
         "Andy Kirkham", "Jörg Müller", "Peter Vasey", "Rumen Bogdanovski", "Dan Smale", 
         "Hernan Martinez", "henrysky", "FreewareTips", "RVS", "Wolfgang Laun", 
         "luzpaz", "uwes-ufo", "Allan Johnson", "Colin Gaudion", "Emmanuel", 
