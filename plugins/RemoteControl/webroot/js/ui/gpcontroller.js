@@ -1507,6 +1507,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                         } else {
                             setActiveDevice(null);
                             updateConnectionStatus(false);
+														updateLiveInputDisplay();
                         }
                     }
                     
@@ -1640,12 +1641,14 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 updateDeviceSelector();
                 populateButtonCustomization();
                 updateCalibrationDisplayForDevice(currentDeviceInfo);
+								updateLiveInputDisplay();
             } else {
                 activeDeviceIndex = null;
                 currentDeviceInfo = null;
                 updateConnectionStatus(false);
                 updateDeviceSelector();
                 populateButtonCustomization();
+								updateLiveInputDisplay();
             }
         }
 
@@ -2314,9 +2317,12 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 				 */
 				function updateLiveInputDisplay() {
 						var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
-						if (!device) {
+						
+						// If no device is connected or active device is null, clear all displays
+						if (!device || activeDeviceIndex === null) {
 								$('#gp-buttons-container').html('<div class="loading-placeholder">' + _tr("No controller connected") + '</div>');
 								$('#gp-axes-container').html('<div class="loading-placeholder">' + _tr("No controller connected") + '</div>');
+								$('#gp-device-info-live').html('<div class="loading-placeholder">' + _tr("No controller connected") + '</div>');
 								return;
 						}
 						
@@ -2324,16 +2330,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						if (!gp) {
 								$('#gp-buttons-container').html('<div class="loading-placeholder">' + _tr("Controller data not available") + '</div>');
 								$('#gp-axes-container').html('<div class="loading-placeholder">' + _tr("Controller data not available") + '</div>');
+								$('#gp-device-info-live').html('<div class="loading-placeholder">' + _tr("Controller data not available") + '</div>');
 								return;
 						}
 						
-						// Update Buttons Display
+						// Update displays with valid data
 						updateButtonsDisplay(gp);
-						
-						// Update Axes Display
 						updateAxesDisplay(gp);
-						
-						// Update Device Info Tab
 						updateDeviceInfoLive(gp, device);
 				}
 
@@ -2344,7 +2347,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						var $container = $('#gp-buttons-container');
 						$container.empty();
 						
-						if (!gamepad.buttons || gamepad.buttons.length === 0) {
+						if (!gamepad || !gamepad.buttons || gamepad.buttons.length === 0) {
 								$container.html('<div class="loading-placeholder">' + _tr("No button data available") + '</div>');
 								return;
 						}
@@ -2375,7 +2378,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						var $container = $('#gp-axes-container');
 						$container.empty();
 						
-						if (!gamepad.axes || gamepad.axes.length === 0) {
+						if (!gamepad || !gamepad.axes || gamepad.axes.length === 0) {
 								$container.html('<div class="loading-placeholder">' + _tr("No axis data available") + '</div>');
 								return;
 						}
