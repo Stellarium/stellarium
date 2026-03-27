@@ -450,7 +450,6 @@ int main(int argc, char **argv)
 	}
 	const auto qscreen = qApp->screens().at(screen);
 	const QRect screenGeom = qscreen->geometry();
-	const auto pixelRatio = qscreen->devicePixelRatio();
 
 	const auto virtSize = QSize(confSettings->value("video/screen_w", screenGeom.width()).toInt(),
 								confSettings->value("video/screen_h", screenGeom.height()).toInt());
@@ -458,6 +457,7 @@ int main(int argc, char **argv)
 	const auto size = QSize(std::lround(virtSize.width()),
 				    std::lround(virtSize.height()));
 #else
+	const auto pixelRatio = qscreen->devicePixelRatio();
 	const auto size = QSize(std::lround(virtSize.width()/pixelRatio),
 				    std::lround(virtSize.height()/pixelRatio));
 #endif
