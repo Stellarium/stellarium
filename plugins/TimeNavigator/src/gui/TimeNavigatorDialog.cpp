@@ -353,16 +353,16 @@ void TimeNavigatorDialog::buildPlanetaryTab()
 	};
 
 	addGroup(q_("Mercury"), {
-		{ q_("Inferior conjunction"),     PE::MercuryInfConj  },
-		{ q_("Superior conjunction"),     PE::MercurySupConj  },
-		{ q_("Greatest elongation east"), PE::MercuryElongE   },
-		{ q_("Greatest elongation west"), PE::MercuryElongW   },
+		{ q_("Inferior conjunction"),        PE::MercuryInfConj  },
+		{ q_("Superior conjunction"),        PE::MercurySupConj  },
+		{ q_("Greatest eastern elongation"), PE::MercuryElongE   },
+		{ q_("Greatest western elongation"), PE::MercuryElongW   },
 	});
 	addGroup(q_("Venus"), {
-		{ q_("Inferior conjunction"),     PE::VenusInfConj  },
-		{ q_("Superior conjunction"),     PE::VenusSupConj  },
-		{ q_("Greatest elongation east"), PE::VenusElongE   },
-		{ q_("Greatest elongation west"), PE::VenusElongW   },
+		{ q_("Inferior conjunction"),        PE::VenusInfConj  },
+		{ q_("Superior conjunction"),        PE::VenusSupConj  },
+		{ q_("Greatest eastern elongation"), PE::VenusElongE   },
+		{ q_("Greatest western elongation"), PE::VenusElongW   },
 	});
 	addGroup(q_("Mars"), {
 		{ q_("Opposition"),         PE::MarsOpposition },
