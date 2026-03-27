@@ -99,7 +99,9 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 		const QString filePath = StelFileMgr::findFile("skyCultures/" + currentCulture + "/territory.geojson");
 		if (filePath.isEmpty())
 		{
-			qWarning() << "Failed to * find * [ " << currentCulture << " ] territory file in sky culture directory";
+			// There is just no point to emit a warning in V26.1.
+			if (StelUtils::getApplicationSeries().toDouble() > 26.2)
+				qWarning() << "Failed to * find * [ " << currentCulture << " ] territory file in sky culture directory";
 			continue;
 		}
 		// try to open file
