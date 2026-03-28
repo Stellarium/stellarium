@@ -58,6 +58,7 @@ SET( SkyCultureMaker_SRCS
      types/DrawTools.hpp
      types/License.hpp
      types/SkyPoint.hpp
+     types/Region.hpp
 )
 
 SET( SCM_UIS
