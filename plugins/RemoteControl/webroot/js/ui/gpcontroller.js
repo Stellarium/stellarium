@@ -958,32 +958,57 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
          * Handles educational actions (view directions, zoom, etc.)
          */
         GamepadDevice.prototype.handleEducationalAction = function(action) {
-            // View directions
-            if (action === "view_north") {
-                rc.postCmd("/api/main/view", { az: Math.PI, alt: 0 });
-                return true;
-            }
-            if (action === "view_south") {
-                rc.postCmd("/api/main/view", { az: 0, alt: 0 });
-                return true;
-            }
-            if (action === "view_east") {
-                rc.postCmd("/api/main/view", { az: Math.PI / 2, alt: 0 });
-                return true;
-            }
-            if (action === "view_west") {
-                rc.postCmd("/api/main/view", { az: 3 * Math.PI / 2, alt: 0 });
-                return true;
-            }
-            if (action === "view_zenith") {
-                rc.postCmd("/api/main/view", { alt: Math.PI / 2 });
-                return true;
-            }
-            if (action === "view_nadir") {
-                rc.postCmd("/api/main/view", { alt: -Math.PI / 2 });
-                return true;
-            }
-            
+						 // View directions with smooth transition using core.moveToAltAzi
+						// Duration set to 0.5 seconds for smooth but responsive movement
+						if (action === "view_north") {
+								// North = azimuth 180° (π radians), altitude 0°
+								rc.postCmd("/api/scripts/direct", { 
+										code: "core.moveToAltAzi(0, 0, 3)", 
+										useIncludes: false 
+								});
+								return true;
+						}
+						if (action === "view_south") {
+								// South = azimuth 0°, altitude 0°
+								rc.postCmd("/api/scripts/direct", { 
+										code: "core.moveToAltAzi(0, 180, 3)", 
+										useIncludes: false 
+								});
+								return true;
+						}
+						if (action === "view_east") {
+								// East = azimuth 90°, altitude 0°
+								rc.postCmd("/api/scripts/direct", { 
+										code: "core.moveToAltAzi(0, 90, 3)", 
+										useIncludes: false 
+								});
+								return true;
+						}
+						if (action === "view_west") {
+								// West = azimuth 270°, altitude 0°
+								rc.postCmd("/api/scripts/direct", { 
+										code: "core.moveToAltAzi(0, 270, 3)", 
+										useIncludes: false 
+								});
+								return true;
+						}
+						if (action === "view_zenith") {
+								// Zenith = altitude 90°, azimuth unchanged
+								rc.postCmd("/api/scripts/direct", { 
+										code: "core.moveToAltAzi(90, 0, 3)", 
+										useIncludes: false 
+								});
+								return true;
+						}
+						if (action === "view_nadir") {
+								// Nadir = altitude -90°, azimuth unchanged
+								rc.postCmd("/api/scripts/direct", { 
+										code: "core.moveToAltAzi(-90, 0, 3)", 
+										useIncludes: false 
+								});
+								return true;
+						}
+
             // Zoom levels
             var zoomMap = {
                 "zoom_0_1": 0.1, "zoom_1": 1, "zoom_5": 5, "zoom_10": 10,
