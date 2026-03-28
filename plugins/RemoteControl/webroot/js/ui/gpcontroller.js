@@ -1009,28 +1009,37 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 								return true;
 						}
 
-            // Zoom levels
-            var zoomMap = {
-                "zoom_0_1": 0.1, "zoom_1": 1, "zoom_5": 5, "zoom_10": 10,
-                "zoom_20": 20, "zoom_30": 30, "zoom_40": 40, "zoom_50": 50,
-                "zoom_60": 60, "zoom_90": 90, "zoom_120": 120, "zoom_150": 150, "zoom_180": 180
-            };
-            if (zoomMap[action]) {
-                viewcontrol.setFOV(zoomMap[action]);
-                return true;
-            }
+           // Zoom levels with smooth transition (3 seconds duration)
+					var zoomMap = {
+							"zoom_0_1": 0.1, "zoom_1": 1, "zoom_5": 5, "zoom_10": 10,
+							"zoom_20": 20, "zoom_30": 30, "zoom_40": 40, "zoom_50": 50,
+							"zoom_60": 60, "zoom_90": 90, "zoom_120": 120, "zoom_150": 150, "zoom_180": 180
+					};
+					if (zoomMap[action] !== undefined) {
+							var zoomValue = zoomMap[action];
+							// Use smooth zoom transition with (3 seconds duration)
+							rc.postCmd("/api/scripts/direct", {
+									code: "StelMovementMgr.zoomTo(" + zoomValue + ", 3)",
+									useIncludes: false
+							});
+							return true;
+					}
             
-            // Viewport offset
-            var offsetMap = {
-                "viewport_offset_m50": -50, "viewport_offset_m40": -40, "viewport_offset_m30": -30,
-                "viewport_offset_m20": -20, "viewport_offset_m10": -10, "viewport_offset_0": 0,
-                "viewport_offset_20": 20, "viewport_offset_40": 40, "viewport_offset_60": 60,
-                "viewport_offset_80": 80, "viewport_offset_100": 100
-            };
-            if (offsetMap[action] !== undefined) {
-                propApi.setStelPropQueued("StelMovementMgr.viewportVerticalOffsetTarget", offsetMap[action]);
-                return true;
-            }
+						// Viewport offset with smooth transition (3 seconds)
+						var offsetMap = {
+								"viewport_offset_m50": -50, "viewport_offset_m40": -40, "viewport_offset_m30": -30,
+								"viewport_offset_m20": -20, "viewport_offset_m10": -10, "viewport_offset_0": 0,
+								"viewport_offset_20": 20, "viewport_offset_40": 40, "viewport_offset_60": 60,
+								"viewport_offset_80": 80, "viewport_offset_100": 100
+						};
+						if (offsetMap[action] !== undefined) {
+								var offsetValue = offsetMap[action];
+								rc.postCmd("/api/scripts/direct", {
+										code: "StelMovementMgr.moveViewport(0, " + offsetValue + ", 3)",
+										useIncludes: false
+								});
+								return true;
+						}
             
             // Time speed
             if (action === "time_speed_normal") {
