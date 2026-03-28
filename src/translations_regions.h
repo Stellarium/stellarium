@@ -36,7 +36,7 @@ class GeoRegionsTranslations
 		N_("Eastern Africa");
 		// TRANSLATORS: Name of region on Earth
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Central_Africa
-		N_("Middle Africa");
+		N_("Central Africa");
 		// TRANSLATORS: Name of region on Earth
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Africa
 		N_("Southern Africa");
