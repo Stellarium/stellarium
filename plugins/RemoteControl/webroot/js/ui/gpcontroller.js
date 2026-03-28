@@ -244,16 +244,16 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 
 						// === CONSTELLATION HIGHLIGHTS ===
 						// These actions isolate and highlight ONLY the selected constellation
-						"highlight_orion": "Highlight Orion (isolate)",
-						"highlight_ursa_major": "Highlight Ursa Major (isolate)",
-						"highlight_cassiopeia": "Highlight Cassiopeia (isolate)",
-						"highlight_cygnus": "Highlight Cygnus (isolate)",
-						"highlight_lyra": "Highlight Lyra (isolate)",
-						"highlight_aquila": "Highlight Aquila (isolate)",
-						"highlight_scorpius": "Highlight Scorpius (isolate)",
-						"highlight_sagittarius": "Highlight Sagittarius (isolate)",
-						"highlight_taurus": "Highlight Taurus (isolate)",
-						"highlight_gemini": "Highlight Gemini (isolate)",
+						"highlight_orion": "Highlight Orion (Toggle isolate)",
+						"highlight_ursa_major": "Highlight Ursa Major (Toggle isolate)",
+						"highlight_cassiopeia": "Highlight Cassiopeia (Toggle isolate)",
+						"highlight_cygnus": "Highlight Cygnus (Toggle isolate)",
+						"highlight_lyra": "Highlight Lyra (Toggle isolate)",
+						"highlight_aquila": "Highlight Aquila (Toggle isolate)",
+						"highlight_scorpius": "Highlight Scorpius (Toggle isolate)",
+						"highlight_sagittarius": "Highlight Sagittarius (Toggle isolate)",
+						"highlight_taurus": "Highlight Taurus (Toggle isolate)",
+						"highlight_gemini": "Highlight Gemini (Toggle isolate)",
 
 						// === CONSTELLATION DISPLAY ===
 						"clear_constellation_highlight": "Show all constellations (clear isolation)",
@@ -1111,40 +1111,113 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             }
         };
 
-				/**
-				 * Highlights ONLY the specified constellation using the proper API
-				 * @param {string} constellationName - Name of the constellation (e.g., "orion", "ursa_major")
-				 */
-				GamepadDevice.prototype.handleConstellationHighlight = function(constellationName) {
-						// Convert to proper case (e.g., "orion" -> "Orion")
-						var searchTerm = constellationName.replace(/_/g, ' ');
-						searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase() });
-						
-						console.log("[Gamepad] Highlighting constellation:", searchTerm);
-						
-						// Step 1: Ensure constellation lines are visible
-						var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-						if (linesVisible === false) {
-								actions.execute("actionShow_Constellation_Lines");
-						}
-						
-						// Step 2: First, clear previous selection (with empty success function)
-						rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-						
-						// Step 3: Small delay to allow Stellarium to process the clear
-						var self = this;
-						setTimeout(function() {
-								// Step 4: Enable isolation mode
-								propApi.setStelProp("ConstellationMgr.isolateSelected", true);
-								
-								// Step 5: Select the constellation (with empty success function)
-								rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
-								
-								// Step 6: Show feedback
-								console.log(_tr("Highlighting constellation: ") + searchTerm);
-								showNotification(_tr("Highlighting constellation: ") + searchTerm);
-						}, 100);
-				};
+/**
+ * Toggles constellation highlighting
+ * First press: isolates and highlights the specified constellation
+ * Second press: clears isolation and shows all constellations
+ * @param {string} constellationName - Name of the constellation (e.g., "orion", "ursa_major")
+ */
+GamepadDevice.prototype.handleConstellationHighlight = function(constellationName) {
+    // Convert to proper case (e.g., "orion" -> "Orion")
+    var searchTerm = constellationName.replace(/_/g, ' ');
+    searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase() });
+    
+    // Get current state
+    var isIsolated = propApi.getStelProp("ConstellationMgr.isolateSelected");
+    var currentSelection = propApi.getStelProp("StelCore.selectedObject");
+    
+    // Check if this constellation is currently highlighted
+    var isCurrentlyHighlighted = isIsolated === true && 
+        currentSelection && currentSelection.toLowerCase() === searchTerm.toLowerCase();
+    
+    if (isCurrentlyHighlighted) {
+        // Toggle OFF: Clear highlighting
+        console.log("[Gamepad] Clearing constellation highlight:", searchTerm);
+        
+        // Disable isolation mode
+        propApi.setStelProp("ConstellationMgr.isolateSelected", false);
+        
+        // Clear selected object
+        rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+        
+        // Ensure constellation lines remain visible
+        var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+        if (linesVisible === false) {
+            actions.execute("actionShow_Constellation_Lines");
+        }
+        
+        showNotification(_tr("Cleared highlight: ") + searchTerm);
+    } else {
+        // Toggle ON: Highlight the constellation
+        console.log("[Gamepad] Highlighting constellation:", searchTerm);
+        
+        // Step 1: Ensure constellation lines are visible
+        var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+        if (linesVisible === false) {
+            actions.execute("actionShow_Constellation_Lines");
+        }
+        
+        // Step 2: Clear previous selection
+        rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+        
+        // Step 3: Delay to allow Stellarium to process the clear
+        setTimeout(function() {
+            // Step 4: Enable isolation mode
+            propApi.setStelProp("ConstellationMgr.isolateSelected", true);
+            
+            // Step 5: Select the constellation
+            rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
+            
+            // Step 6: Show feedback
+            showNotification(_tr("Highlighting constellation: ") + searchTerm);
+        }, 100);
+    }
+};
+				
+				// Add a property to track last highlighted constellation
+GamepadDevice.prototype.lastHighlightedConstellation = null;
+
+GamepadDevice.prototype.handleConstellationHighlight = function(constellationName) {
+    var searchTerm = constellationName.replace(/_/g, ' ');
+    searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase() });
+    
+    // Check if this constellation is currently highlighted
+    var isCurrentlyHighlighted = (this.lastHighlightedConstellation === searchTerm);
+    
+    if (isCurrentlyHighlighted) {
+        // Toggle OFF
+        console.log("[Gamepad] Clearing constellation highlight:", searchTerm);
+        
+        propApi.setStelProp("ConstellationMgr.isolateSelected", false);
+        rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+        
+        var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+        if (linesVisible === false) {
+            actions.execute("actionShow_Constellation_Lines");
+        }
+        
+        this.lastHighlightedConstellation = null;
+        showNotification(_tr("Cleared highlight: ") + searchTerm);
+    } else {
+        // Toggle ON
+        console.log("[Gamepad] Highlighting constellation:", searchTerm);
+        
+        var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+        if (linesVisible === false) {
+            actions.execute("actionShow_Constellation_Lines");
+        }
+        
+        rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+        
+        setTimeout(function() {
+            propApi.setStelProp("ConstellationMgr.isolateSelected", true);
+            rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
+            showNotification(_tr("Highlighting constellation: ") + searchTerm);
+        }, 100);
+        
+        this.lastHighlightedConstellation = searchTerm;
+    }
+};
 
 				/**
 				 * Clears all constellation highlighting
