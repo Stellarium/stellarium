@@ -640,7 +640,7 @@ QMultiMap<QString, QString> StelSkyCultureMgr::getSkyCultureRegionMapI18(void) c
 		{
 			if (currentRegion.toString() == "Southern America")
 			{
-				qWarning() << trans.qtranslate(i.value().englishName, "sky culture") << ": outdated region key found! Please update the region from 'Southern America' to 'South America'.";
+				qWarning() << i.value().englishName << ": outdated region key found! Please update the region from 'Southern America' to 'South America'.";
 				translatedCultureMap.insert(trans.qtranslate(i.value().englishName, "sky culture"), "South America");
 			}
 			else

@@ -5123,6 +5123,9 @@
           </property>
           <item row="0" column="0">
            <widget class="QTabWidget" name="skyCultureTabWidget">
+            <property name="tabPosition">
+             <enum>QTabWidget::South</enum>
+            </property>
             <property name="currentIndex">
              <number>0</number>
             </property>
@@ -5147,26 +5150,26 @@
                <number>0</number>
               </property>
               <item row="0" column="0">
-              <widget class="QTextBrowser" name="skyCultureTextBrowser">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="verticalScrollBarPolicy">
-                <enum>Qt::ScrollBarAsNeeded</enum>
-               </property>
-               <property name="horizontalScrollBarPolicy">
-                <enum>Qt::ScrollBarAlwaysOff</enum>
-               </property>
-               <property name="openExternalLinks">
-                <bool>true</bool>
-               </property>
-              </widget>
+               <widget class="QTextBrowser" name="skyCultureTextBrowser">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAsNeeded</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="openExternalLinks">
+                 <bool>true</bool>
+                </property>
+               </widget>
               </item>
               <item row="1" column="0">
                <widget class="QGroupBox" name="skyCultureOptionsGroupBox">
@@ -5182,7 +5185,6 @@
                 <property name="title">
                  <string>Options</string>
                 </property>
-
                 <layout class="QGridLayout" name="formLayout_2">
                  <property name="leftMargin">
                   <number>0</number>
@@ -5196,45 +5198,39 @@
                  <property name="bottomMargin">
                   <number>0</number>
                  </property>
-
                  <item row="3" column="0">
                   <layout class="QGridLayout" name="gridLayout_CulturalLabeling">
-
-                 <item row="0" column="0" colspan="5">
-                  <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
-                   <property name="text">
-                    <string>Use this sky culture as default</string>
-                   </property>
-                  </widget>
-                 </item>
-
-            <item row="0" column="6">
-              <widget class="QPushButton" name="pushButtonSkyculture_say">
-                <property name="text">
-                 <string>Read text</string>
-                </property>
-                       <property name="icon">
-                        <iconset resource="../../data/gui/guiRes.qrc">
-                         <normaloff>:/graphicGui/uibtStart.png</normaloff>
-                         <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
-                       </property>
-               </widget>
-             </item>
-
-            <item row="0" column="7">
-               <widget class="QPushButton" name="pushButtonSkyculture_stop">
-                <property name="text">
-                 <string>Stop</string>
-                </property>
-                       <property name="icon">
-                        <iconset resource="../../data/gui/guiRes.qrc">
-                         <normaloff>:/graphicGui/uibtStop.png</normaloff>
-                         <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
-                       </property>
-               </widget>
-              </item>
-
-
+                   <item row="0" column="0" colspan="5">
+                    <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
+                     <property name="text">
+                      <string>Use this sky culture as default</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="6">
+                    <widget class="QPushButton" name="pushButtonSkyculture_say">
+                     <property name="text">
+                      <string>Read text</string>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../../data/gui/guiRes.qrc">
+                       <normaloff>:/graphicGui/uibtStart.png</normaloff>
+                       <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="7">
+                    <widget class="QPushButton" name="pushButtonSkyculture_stop">
+                     <property name="text">
+                      <string>Stop</string>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../../data/gui/guiRes.qrc">
+                       <normaloff>:/graphicGui/uibtStop.png</normaloff>
+                       <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
+                     </property>
+                    </widget>
+                   </item>
                    <item row="1" column="0">
                     <widget class="QLabel" name="labelInfoLabel2">
                      <property name="text">
@@ -5445,9 +5441,6 @@
                    </item>
                   </layout>
                  </item>
-
-
-
                  <item row="6" column="0" rowspan="2">
                   <layout class="QGridLayout" name="skyCultureGridLayout">
                    <item row="4" column="9">
@@ -6182,11 +6175,11 @@
                 <property name="topMargin">
                  <number>8</number>
                 </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
                 <property name="rightMargin">
                  <number>8</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
                 </property>
                 <property name="horizontalSpacing">
                  <number>10</number>
@@ -6194,9 +6187,9 @@
                 <property name="verticalSpacing">
                  <number>6</number>
                 </property>
-                 <item row="0" column="0">
-                  <widget class="SkyCultureMapGraphicsView" name="skyCultureMapGraphicsView"/>
-                 </item>
+                <item row="0" column="0">
+                 <widget class="SkyCultureMapGraphicsView" name="skyCultureMapGraphicsView"/>
+                </item>
                </layout>
               </item>
               <item row="1" column="1">
@@ -6234,7 +6227,7 @@
                    <property name="horizontalSpacing">
                     <number>10</number>
                    </property>
-                   <item row="0" column ="0">
+                   <item row="0" column="0">
                     <widget class="QLabel" name="skyCultureCurrentTimeLabel">
                      <property name="text">
                       <string>Current time</string>
@@ -6256,7 +6249,7 @@
                       <enum>Qt::Horizontal</enum>
                      </property>
                      <property name="tickPosition">
-                      <enum>QSlider::TicksBelow</enum>
+                      <enum>QSlider::TickPosition::TicksBelow</enum>
                      </property>
                      <property name="tickInterval">
                       <number>150</number>
@@ -6266,7 +6259,7 @@
                    <item row="0" column="2">
                     <widget class="QSpinBox" name="skyCultureCurrentTimeSpinBox">
                      <property name="alignment">
-                      <set>Qt::AlignCenter</set>
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                      </property>
                      <property name="minimum">
                       <number>-2000</number>
@@ -6274,38 +6267,30 @@
                      <property name="maximum">
                       <number>2000</number>
                      </property>
-                     <property name="styleSheet">
-                      <string notr="true">
-                        QSpinBox
-                        {
-                        width: 60px;
-                        }
-                      </string>
-                     </property>
                     </widget>
                    </item>
                   </layout>
                  </item>
                  <item row="1" column="0">
                   <layout class="QGridLayout" name="skyCultureMinMaxTimeGridLayout">
-                  <property name="leftMargin">
-                   <number>10</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>10</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="horizontalSpacing">
-                   <number>20</number>
-                  </property>
-                  <property name="verticalSpacing">
-                   <number>10</number>
-                  </property>
+                   <property name="leftMargin">
+                    <number>10</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>10</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="horizontalSpacing">
+                    <number>20</number>
+                   </property>
+                   <property name="verticalSpacing">
+                    <number>10</number>
+                   </property>
                    <item row="0" column="0">
                     <widget class="QLabel" name="skyCultureMinTimeLabel">
                      <property name="sizePolicy">
@@ -6322,21 +6307,13 @@
                    <item row="0" column="1">
                     <widget class="QSpinBox" name="skyCultureMinTimeSpinBox">
                      <property name="alignment">
-                      <set>Qt::AlignCenter</set>
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                      </property>
                      <property name="minimum">
                       <number>-2000</number>
                      </property>
                      <property name="maximum">
                       <number>2000</number>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">
-                        QSpinBox
-                        {
-                        width: 60px;
-                        }
-                      </string>
                      </property>
                     </widget>
                    </item>
@@ -6346,7 +6323,7 @@
                       <enum>Qt::Horizontal</enum>
                      </property>
                      <property name="sizeType">
-                      <enum>QSizePolicy::Expanding</enum>
+                      <enum>QSizePolicy::Policy::Expanding</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
@@ -6372,21 +6349,13 @@
                    <item row="0" column="7">
                     <widget class="QSpinBox" name="skyCultureMaxTimeSpinBox">
                      <property name="alignment">
-                      <set>Qt::AlignCenter</set>
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                      </property>
                      <property name="minimum">
                       <number>-2000</number>
                      </property>
                      <property name="maximum">
                       <number>2000</number>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">
-                        QSpinBox
-                        {
-                        width: 60px;
-                        }
-                      </string>
                      </property>
                     </widget>
                    </item>
@@ -6403,34 +6372,34 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column ="0" colspan="2">
+                   <item row="2" column="0" colspan="2">
                     <widget class="QLabel" name="selectedCultureMinTimeLabel">
                      <property name="text">
                       <string>Selected culture start time:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column ="2">
+                   <item row="2" column="2">
                     <widget class="QLabel" name="selectedCultureMinTimeValueLabel">
                      <property name="text">
-                      <string>0</string>
+                      <string notr="true">0</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignRight</set>
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column ="0" colspan="2">
+                   <item row="3" column="0" colspan="2">
                     <widget class="QLabel" name="selectedCultureMaxTimeLabel">
                      <property name="text">
                       <string>Selected culture end time:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column ="2">
+                   <item row="3" column="2">
                     <widget class="QLabel" name="selectedCultureMaxTimeValueLabel">
                      <property name="text">
-                      <string>0</string>
+                      <string notr="true">0</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignRight</set>
@@ -6480,11 +6449,6 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>1500</width>
-                   </size>
-                  </property>
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
                   </property>
@@ -6506,20 +6470,9 @@
                   </property>
                   <property name="minimumSize">
                    <size>
+                    <width>0</width>
                     <height>30</height>
                    </size>
-                  </property>
-                  <property name="leftMargin">
-                   <number>5</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>5</number>
-                  </property>
-                  <property name="placeholderText">
-                   <string>Enter Culture...</string>
-                  </property>
-                  <property name="text">
-                   <string/>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">
@@ -6533,61 +6486,24 @@
                     background-position: left center;
                    </string>
                   </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Enter Culture...</string>
+                  </property>
+                  <property name="leftMargin" stdset="0">
+                   <number>5</number>
+                  </property>
+                  <property name="rightMargin" stdset="0">
+                   <number>5</number>
+                  </property>
                  </widget>
                 </item>
                </layout>
               </item>
              </layout>
             </widget>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="page_surveys">
-         <layout class="QGridLayout" name="gridLayout_21">
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>3</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>3</number>
-          </property>
-          <property name="spacing">
-           <number>3</number>
-          </property>
-          <item row="0" column="1" rowspan="3">
-           <widget class="QTextBrowser" name="surveysTextBrowser">
-            <property name="openExternalLinks">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QComboBox" name="surveyTypeComboBox"/>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="surveysFilter">
-            <property name="placeholderText">
-             <string>Filter</string>
-            </property>
-            <property name="clearButtonEnabled">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QTreeWidget" name="surveysTreeWidget">
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="rootIsDecorated">
-             <bool>false</bool>
-            </property>
            </widget>
           </item>
          </layout>
@@ -6767,7 +6683,6 @@
   <tabstop>landscapeLabelsCheckBox</tabstop>
   <tabstop>landscapeIlluminationCheckBox</tabstop>
   <tabstop>pushButtonAddRemoveLandscapes</tabstop>
-  <tabstop>page_skyCultureMap</tabstop>
   <tabstop>useAsDefaultSkyCultureCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>
   <tabstop>constellationsFontSizeSpinBox</tabstop>

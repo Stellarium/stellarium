@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-03-28 04:23+0700\n"
+"POT-Creation-Date: 2026-03-28 17:08+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
@@ -83,12 +83,12 @@ msgstr "asterism"
 msgid "Display Options"
 msgstr "Visningsalternativ"
 
-#: src/core/modules/AsterismMgr.cpp:103 src/ui_viewDialog.h:5305
+#: src/core/modules/AsterismMgr.cpp:103 src/ui_viewDialog.h:5252
 #: src/ui_configurationDialog.h:2625
 msgid "Asterism lines"
 msgstr "Asterismlinjer"
 
-#: src/core/modules/AsterismMgr.cpp:104 src/ui_viewDialog.h:5374
+#: src/core/modules/AsterismMgr.cpp:104 src/ui_viewDialog.h:5321
 #: src/ui_configurationDialog.h:2626
 msgid "Asterism labels"
 msgstr "Asterismetiketter"
@@ -97,7 +97,7 @@ msgstr "Asterismetiketter"
 msgid "Toggle single asterism selection mode"
 msgstr "Slå på enkel selektering av asterismer"
 
-#: src/core/modules/AsterismMgr.cpp:106 src/ui_viewDialog.h:5351
+#: src/core/modules/AsterismMgr.cpp:106 src/ui_viewDialog.h:5298
 msgid "Ray helpers"
 msgstr "Hjälplinjer"
 
@@ -110,22 +110,22 @@ msgstr "Legend"
 msgid "constellation"
 msgstr "stjärnbild"
 
-#: src/core/modules/ConstellationMgr.cpp:150 src/ui_viewDialog.h:5335
+#: src/core/modules/ConstellationMgr.cpp:150 src/ui_viewDialog.h:5282
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Constellation lines"
 msgstr "Stjärnbildslinjer"
 
-#: src/core/modules/ConstellationMgr.cpp:151 src/ui_viewDialog.h:5320
+#: src/core/modules/ConstellationMgr.cpp:151 src/ui_viewDialog.h:5267
 #: src/ui_configurationDialog.h:2616
 msgid "Constellation art"
 msgstr "Stjärnbildsgrafik"
 
-#: src/core/modules/ConstellationMgr.cpp:152 src/ui_viewDialog.h:5290
+#: src/core/modules/ConstellationMgr.cpp:152 src/ui_viewDialog.h:5237
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Constellation labels"
 msgstr "Stjärnbildsetiketter"
 
-#: src/core/modules/ConstellationMgr.cpp:153 src/ui_viewDialog.h:5331
+#: src/core/modules/ConstellationMgr.cpp:153 src/ui_viewDialog.h:5278
 #: src/ui_configurationDialog.h:2615
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Constellation boundaries"
@@ -143,7 +143,7 @@ msgstr "Månstationer/-hus (om dessa är definierade i himmelskulturen)"
 msgid "Constellation areas (hulls)"
 msgstr "Stjärnbildsytor (höljen)"
 
-#: src/core/modules/ConstellationMgr.cpp:159 src/ui_viewDialog.h:5373
+#: src/core/modules/ConstellationMgr.cpp:159 src/ui_viewDialog.h:5320
 msgid "Select single constellation"
 msgstr "Välj enskild stjärnbild"
 
@@ -599,7 +599,7 @@ msgctxt "IAU constellation name"
 msgid "Vulpecula"
 msgstr "Räven"
 
-#: src/core/modules/StarMgr.cpp:413 src/ui_viewDialog.h:4296
+#: src/core/modules/StarMgr.cpp:413 src/ui_viewDialog.h:4243
 #: src/ui_dsoColorsDialog.h:644
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Stars"
@@ -617,7 +617,7 @@ msgstr "Öka stjärnors gränsmagnitud"
 msgid "Reduce the magnitude limit for stars"
 msgstr "Minska stjärnors gränsmagnitud"
 
-#: src/core/modules/GridLinesMgr.cpp:698 src/ui_viewDialog.h:5146
+#: src/core/modules/GridLinesMgr.cpp:698 src/ui_viewDialog.h:5093
 msgid "Meridian"
 msgstr "Meridianen"
 
@@ -645,7 +645,7 @@ msgstr "Timvinkel"
 msgid "Precession Circle"
 msgstr "Precessionscirkel"
 
-#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:4956
+#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:4903
 msgid "Horizon"
 msgstr "Horisont"
 
@@ -658,7 +658,7 @@ msgid "Supergalactic Equator"
 msgstr "Supergalaktisk ekvator"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:749 src/ui_viewDialog.h:4810
+#: src/core/modules/GridLinesMgr.cpp:749 src/ui_viewDialog.h:4757
 msgid "O./C. longitude"
 msgstr "O.-/K.-longitud"
 
@@ -667,7 +667,7 @@ msgid "Quadrature"
 msgstr "Kvadratur"
 
 #: src/core/modules/GridLinesMgr.cpp:757
-#: src/core/modules/GridLinesMgr.cpp:2072 src/ui_viewDialog.h:5014
+#: src/core/modules/GridLinesMgr.cpp:2072 src/ui_viewDialog.h:4961
 msgid "Prime Vertical"
 msgstr "Primärvertikal"
 
@@ -677,7 +677,7 @@ msgstr "Primärvertikal"
 #: src/gui/AstroCalcDialog.cpp:883 src/gui/AstroCalcDialog.cpp:1799
 #: src/gui/AstroCalcDialog.cpp:2207 src/gui/AstroCalcDialog.cpp:2479
 #: src/gui/AstroCalcChart.cpp:82 src/gui/AstroCalcChart.cpp:420
-#: src/ui_viewDialog.h:5039 plugins/Satellites/src/Satellite.cpp:365
+#: src/ui_viewDialog.h:4986 plugins/Satellites/src/Satellite.cpp:365
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1543
 msgid "Altitude"
 msgstr "Höjd"
@@ -706,7 +706,7 @@ msgstr "Halvskugga"
 msgid "Invariable Plane"
 msgstr "Oföränderliga planet"
 
-#: src/core/modules/GridLinesMgr.cpp:790 src/ui_viewDialog.h:4978
+#: src/core/modules/GridLinesMgr.cpp:790 src/ui_viewDialog.h:4925
 msgid "Projected Solar Equator"
 msgstr "Solens projicerade ekvator"
 
@@ -816,11 +816,11 @@ msgstr "Rutnät och linjer"
 msgid "Equatorial grid"
 msgstr "Ekvatoriellt rutnät"
 
-#: src/core/modules/GridLinesMgr.cpp:2051 src/ui_viewDialog.h:4792
+#: src/core/modules/GridLinesMgr.cpp:2051 src/ui_viewDialog.h:4739
 msgid "Fixed Equatorial grid"
 msgstr "Fast ekvatoriellt rutnät"
 
-#: src/core/modules/GridLinesMgr.cpp:2052 src/ui_viewDialog.h:4840
+#: src/core/modules/GridLinesMgr.cpp:2052 src/ui_viewDialog.h:4787
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Azimuthal grid"
 msgstr "Azimutalt rutnät"
@@ -878,21 +878,21 @@ msgstr "Ekliptiskt J2000-rutnät"
 msgid "Ecliptic grid"
 msgstr "Ekliptiskt rutnät"
 
-#: src/core/modules/GridLinesMgr.cpp:2065 src/ui_viewDialog.h:5050
+#: src/core/modules/GridLinesMgr.cpp:2065 src/ui_viewDialog.h:4997
 #: src/ui_configurationDialog.h:2614
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Galactic grid"
 msgstr "Galaktiskt rutnät"
 
-#: src/core/modules/GridLinesMgr.cpp:2066 src/ui_viewDialog.h:4671
+#: src/core/modules/GridLinesMgr.cpp:2066 src/ui_viewDialog.h:4618
 msgid "Galactic equator"
 msgstr "Galaktisk ekvator"
 
-#: src/core/modules/GridLinesMgr.cpp:2067 src/ui_viewDialog.h:4936
+#: src/core/modules/GridLinesMgr.cpp:2067 src/ui_viewDialog.h:4883
 msgid "Supergalactic grid"
 msgstr "Supergalaktiskt rutnät"
 
-#: src/core/modules/GridLinesMgr.cpp:2068 src/ui_viewDialog.h:4852
+#: src/core/modules/GridLinesMgr.cpp:2068 src/ui_viewDialog.h:4799
 msgid "Supergalactic equator"
 msgstr "Supergalaktisk ekvator"
 
@@ -949,15 +949,15 @@ msgstr "Ekliptiska poler J2000"
 msgid "Ecliptic poles"
 msgstr "Ekliptiska poler"
 
-#: src/core/modules/GridLinesMgr.cpp:2083 src/ui_viewDialog.h:5035
+#: src/core/modules/GridLinesMgr.cpp:2083 src/ui_viewDialog.h:4982
 msgid "Galactic poles"
 msgstr "Galaktiska poler"
 
-#: src/core/modules/GridLinesMgr.cpp:2084 src/ui_viewDialog.h:5114
+#: src/core/modules/GridLinesMgr.cpp:2084 src/ui_viewDialog.h:5061
 msgid "Galactic center and anticenter"
 msgstr "Galaktiskt centrum och anticentrum"
 
-#: src/core/modules/GridLinesMgr.cpp:2085 src/ui_viewDialog.h:4768
+#: src/core/modules/GridLinesMgr.cpp:2085 src/ui_viewDialog.h:4715
 msgid "Supergalactic poles"
 msgstr "Supergalaktiska poler"
 
@@ -977,7 +977,7 @@ msgstr "Solståndspunkter i J2000"
 msgid "Solstice points"
 msgstr "Solståndspunkter"
 
-#: src/core/modules/GridLinesMgr.cpp:2090 src/ui_viewDialog.h:5071
+#: src/core/modules/GridLinesMgr.cpp:2090 src/ui_viewDialog.h:5018
 msgid "Antisolar point"
 msgstr "Antisolär punkt"
 
@@ -985,7 +985,7 @@ msgstr "Antisolär punkt"
 msgid "The center of the Earth's umbra"
 msgstr "Centrum av jordens kärnskugga"
 
-#: src/core/modules/GridLinesMgr.cpp:2092 src/ui_viewDialog.h:4649
+#: src/core/modules/GridLinesMgr.cpp:2092 src/ui_viewDialog.h:4596
 msgid "Apex points"
 msgstr "Apexpunkter"
 
@@ -1001,7 +1001,7 @@ msgstr "Cirkulär markering för synfält"
 msgid "Rectangular marker of FOV"
 msgstr "Rektangulär markering för synfält"
 
-#: src/core/modules/SpecialMarkersMgr.cpp:318 src/ui_viewDialog.h:5040
+#: src/core/modules/SpecialMarkersMgr.cpp:318 src/ui_viewDialog.h:4987
 #: src/ui_configurationDialog.h:2634
 msgid "Compass marks"
 msgstr "Kompassmärken"
@@ -1229,7 +1229,7 @@ msgstr "Atmosfär"
 msgid "Fog"
 msgstr "Dimma"
 
-#: src/core/modules/LandscapeMgr.cpp:886 src/ui_viewDialog.h:5061
+#: src/core/modules/LandscapeMgr.cpp:886 src/ui_viewDialog.h:5008
 #: src/ui_configurationDialog.h:2630
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Cardinal points"
@@ -1255,7 +1255,7 @@ msgstr "Marknivå"
 msgid "Landscape illumination"
 msgstr "Landskapsbelysning"
 
-#: src/core/modules/LandscapeMgr.cpp:892 src/ui_viewDialog.h:5220
+#: src/core/modules/LandscapeMgr.cpp:892 src/ui_viewDialog.h:5167
 msgid "Landscape labels"
 msgstr "Landskapsetiketter"
 
@@ -4193,7 +4193,7 @@ msgstr "Planetspår"
 msgid "Planet trails reset"
 msgstr "Återställ planetspår"
 
-#: src/core/modules/SolarSystem.cpp:362 src/ui_viewDialog.h:4405
+#: src/core/modules/SolarSystem.cpp:362 src/ui_viewDialog.h:4352
 msgid "Planet markers"
 msgstr "Planetmarkörer"
 
@@ -4217,7 +4217,7 @@ msgstr "Förstora planeter"
 msgid "Enlarge Sun"
 msgstr "Förstora solen"
 
-#: src/core/modules/SolarSystem.cpp:368 src/ui_viewDialog.h:4422
+#: src/core/modules/SolarSystem.cpp:368 src/ui_viewDialog.h:4369
 msgid "Mark minor bodies"
 msgstr "Markera små himlakroppar"
 
@@ -5956,7 +5956,7 @@ msgstr "Läser in '%1' från %2"
 
 #. TRANSLATORS: Name of script
 #: src/core/StelSkyCultureSkyPartition.cpp:520 src/translations.h:488
-#: src/ui_viewDialog.h:5276
+#: src/ui_viewDialog.h:5223
 msgid "Zodiac"
 msgstr "Zodiaken"
 
@@ -8715,7 +8715,7 @@ msgstr "Elong."
 msgid "Symbol"
 msgstr "Symbol"
 
-#: src/gui/AstroCalcDialog.cpp:1056 src/ui_viewDialog.h:4246
+#: src/gui/AstroCalcDialog.cpp:1056 src/ui_viewDialog.h:4193
 msgid "Solar system objects"
 msgstr "Solsystemsobjekt"
 
@@ -8784,7 +8784,7 @@ msgstr "Avstånd från solen vid positionsberäkning"
 msgid "Heliocentric ecliptic positions of the major planets"
 msgstr "De större planeternas heliocentriska ekliptiska positioner"
 
-#: src/gui/AstroCalcDialog.cpp:1743 src/ui_viewDialog.h:4374
+#: src/gui/AstroCalcDialog.cpp:1743 src/ui_viewDialog.h:4321
 #: src/ui_astroCalcDialog.h:2340
 msgid "Major planets"
 msgstr "Större planeter"
@@ -9712,7 +9712,7 @@ msgstr "Ljusa nebulosor (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5165 src/gui/AstroCalcDialog.cpp:7513
-#: src/translations.h:292 src/ui_viewDialog.h:4597
+#: src/translations.h:292 src/ui_viewDialog.h:4544
 #: src/ui_dsoColorsDialog.h:603
 msgid "Dark nebulae"
 msgstr "Mörka nebulosor"
@@ -10049,24 +10049,24 @@ msgstr "När som helst under natten"
 msgid "Bright stars"
 msgstr "Ljusa stjärnor"
 
-#: src/gui/AstroCalcDialog.cpp:7512 src/ui_viewDialog.h:4596
+#: src/gui/AstroCalcDialog.cpp:7512 src/ui_viewDialog.h:4543
 msgid "Bright nebulae"
 msgstr "Ljusa nebulosor"
 
-#: src/gui/AstroCalcDialog.cpp:7514 src/ui_viewDialog.h:4600
+#: src/gui/AstroCalcDialog.cpp:7514 src/ui_viewDialog.h:4547
 #: src/ui_dsoColorsDialog.h:543
 msgid "Galaxies"
 msgstr "Galaxer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7515 src/translations.h:284
-#: src/ui_viewDialog.h:4603 src/ui_dsoColorsDialog.h:547
+#: src/ui_viewDialog.h:4550 src/ui_dsoColorsDialog.h:547
 msgid "Open star clusters"
 msgstr "Öppna stjärnhopar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7524 src/translations.h:290
-#: src/ui_viewDialog.h:4595 src/ui_dsoColorsDialog.h:536
+#: src/ui_viewDialog.h:4542 src/ui_dsoColorsDialog.h:536
 msgid "Planetary nebulae"
 msgstr "Planetariska nebulosor"
 
@@ -10099,19 +10099,19 @@ msgstr "Supernovarestkandidater"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7532 src/translations.h:318
-#: src/ui_viewDialog.h:4602 src/ui_dsoColorsDialog.h:529
+#: src/ui_viewDialog.h:4549 src/ui_dsoColorsDialog.h:529
 msgid "Supernova remnants"
 msgstr "Supernovarester"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7533 src/translations.h:346
-#: src/ui_viewDialog.h:4599 src/ui_dsoColorsDialog.h:635
+#: src/ui_viewDialog.h:4546 src/ui_dsoColorsDialog.h:635
 msgid "Clusters of galaxies"
 msgstr "Hopar av galaxer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7535 src/translations.h:286
-#: src/ui_viewDialog.h:4605 src/ui_dsoColorsDialog.h:522
+#: src/ui_viewDialog.h:4552 src/ui_dsoColorsDialog.h:522
 msgid "Globular star clusters"
 msgstr "Klothopar"
 
@@ -10123,13 +10123,13 @@ msgstr "Himmelsregioner"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7537 src/translations.h:300
-#: src/ui_viewDialog.h:4594 src/ui_dsoColorsDialog.h:513
+#: src/ui_viewDialog.h:4541 src/ui_dsoColorsDialog.h:513
 msgid "Active galaxies"
 msgstr "Aktiva galaxer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7538 src/translations.h:304
-#: src/ui_viewDialog.h:4601 src/ui_dsoColorsDialog.h:594
+#: src/ui_viewDialog.h:4548 src/ui_dsoColorsDialog.h:594
 msgid "Interacting galaxies"
 msgstr "Interagerande galaxer"
 
@@ -10185,7 +10185,7 @@ msgctxt "IAU Constellation"
 msgid "Const."
 msgstr "Stjärnb."
 
-#: src/gui/AstroCalcDialog.cpp:7807 src/ui_viewDialog.h:4634
+#: src/gui/AstroCalcDialog.cpp:7807 src/ui_viewDialog.h:4581
 #: src/ui_astroCalcDialog.h:2541
 msgid "Limit angular size:"
 msgstr "Begränsa vinkelstorlek:"
@@ -10504,7 +10504,7 @@ msgstr "Objektnamn"
 msgid "Constellation"
 msgstr "Stjärnbild"
 
-#: src/gui/ObsListDialog.cpp:304 src/ui_viewDialog.h:4256
+#: src/gui/ObsListDialog.cpp:304 src/ui_viewDialog.h:4203
 #: src/ui_obsListDialog.h:420
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Landscape"
@@ -11438,12 +11438,12 @@ msgid "Protoplanetary Nebulae"
 msgstr "Protoplanetariska nebulosor"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:350 src/ui_viewDialog.h:4585
+#: src/translations.h:350 src/ui_viewDialog.h:4532
 msgid "Messier Catalogue"
 msgstr "Messiers katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:352 src/ui_viewDialog.h:4591
+#: src/translations.h:352 src/ui_viewDialog.h:4538
 msgid "Caldwell Catalogue"
 msgstr "Caldwells katalog"
 
@@ -11573,17 +11573,17 @@ msgid "James Dunlop's southern deep sky catalogue"
 msgstr "James Dunlops södra deep sky-katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:404 src/ui_viewDialog.h:4588
+#: src/translations.h:404 src/ui_viewDialog.h:4535
 msgid "Trumpler Catalogue"
 msgstr "Trumpler katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:406 src/ui_viewDialog.h:4524
+#: src/translations.h:406 src/ui_viewDialog.h:4471
 msgid "Stock Catalogue"
 msgstr "Stock katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:408 src/ui_viewDialog.h:4527
+#: src/translations.h:408 src/ui_viewDialog.h:4474
 msgid "Ruprecht Catalogue"
 msgstr "Ruprecht katalog"
 
@@ -13478,8 +13478,8 @@ msgstr "Östafrika"
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_Africa
 #: src/translations_regions.h:39
-msgid "Central Africa"
-msgstr "Centralafrika"
+msgid "Middle Africa"
+msgstr "Mellersta Afrika"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Africa
@@ -15162,8 +15162,8 @@ msgstr "Maximalt antal objekt att visa:"
 msgid "Deletes all recent search object data"
 msgstr "Raderar alla senaste sökobjektdata"
 
-#: src/ui_searchDialogGui.h:890 src/ui_viewDialog.h:5196
-#: src/ui_viewDialog.h:5241 src/ui_viewDialog.h:5395
+#: src/ui_searchDialogGui.h:890 src/ui_viewDialog.h:5143
+#: src/ui_viewDialog.h:5188 src/ui_viewDialog.h:5342
 #: src/ui_configurationDialog.h:2852 src/ui_configurationDialog.h:2863
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:304
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:418
@@ -15171,64 +15171,64 @@ msgstr "Raderar alla senaste sökobjektdata"
 msgid "Options"
 msgstr "Alternativ"
 
-#: src/ui_viewDialog.h:4237
+#: src/ui_viewDialog.h:4184
 msgid "View"
 msgstr "Vy"
 
-#: src/ui_viewDialog.h:4242 src/ui_viewDialog.h:4263
+#: src/ui_viewDialog.h:4189 src/ui_viewDialog.h:4210
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:823
 msgid "Sky"
 msgstr "Himmel"
 
-#: src/ui_viewDialog.h:4244
+#: src/ui_viewDialog.h:4191
 msgctxt "Solar system objects"
 msgid "SSO"
 msgstr "SSO"
 
-#: src/ui_viewDialog.h:4249
+#: src/ui_viewDialog.h:4196
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "DSO"
 
-#: src/ui_viewDialog.h:4251
+#: src/ui_viewDialog.h:4198
 msgid "Deep-Sky Objects"
 msgstr "Djuprymdsobjekt"
 
-#: src/ui_viewDialog.h:4254
+#: src/ui_viewDialog.h:4201
 msgid "Markings"
 msgstr "Markeringar"
 
-#: src/ui_viewDialog.h:4258
+#: src/ui_viewDialog.h:4205
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Sky Culture"
 msgstr "Himmelskultur"
 
-#: src/ui_viewDialog.h:4260
+#: src/ui_viewDialog.h:4207
 msgid "Surveys"
 msgstr "Kartläggningar"
 
-#: src/ui_viewDialog.h:4266 src/ui_viewDialog.h:4269
+#: src/ui_viewDialog.h:4213 src/ui_viewDialog.h:4216
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr "Timfrekvens i zenit för sporadiska meteorer"
 
-#: src/ui_viewDialog.h:4272
+#: src/ui_viewDialog.h:4219
 msgid "Settings for sporadic meteors"
 msgstr "Inställningar för sporadiska meteorer"
 
-#: src/ui_viewDialog.h:4274
+#: src/ui_viewDialog.h:4221
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr "Stjärnfall:"
 
-#: src/ui_viewDialog.h:4275
+#: src/ui_viewDialog.h:4222
 msgid "Solar altitude for Twilight Finder:"
 msgstr "Solhöjd för grynings-/skymningssökare:"
 
-#: src/ui_viewDialog.h:4276
+#: src/ui_viewDialog.h:4223
 msgid "Atmosphere visualization"
 msgstr "Atmosfärsvisualisering"
 
-#: src/ui_viewDialog.h:4278
+#: src/ui_viewDialog.h:4225
 msgid ""
 "Atmosphere settings: visual model, pressure, temperature, extinction "
 "coefficient, etc."
@@ -15236,92 +15236,92 @@ msgstr ""
 "Atmosfärsinställningar: visuell modell, tryck, temperatur, "
 "extinktionskoefficient etc."
 
-#: src/ui_viewDialog.h:4281
+#: src/ui_viewDialog.h:4228
 msgid "Open skylight details (color tweaks for the atmosphere)"
 msgstr "Öppna himmelsdetaljer (färgjusteringar för atmosfären)"
 
-#: src/ui_viewDialog.h:4284
+#: src/ui_viewDialog.h:4231
 msgid "Open tone mapping details."
 msgstr "Öppna tonemapping-detaljer."
 
-#: src/ui_viewDialog.h:4287
+#: src/ui_viewDialog.h:4234
 msgid ""
 "Changing saturation from totally unsaturated (0.00) to default (1.00) value."
 msgstr "Ändrar färgmättnaden från gråskala (0,00) till standardvärde (1,00)."
 
-#: src/ui_viewDialog.h:4289
+#: src/ui_viewDialog.h:4236
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:468
 msgid "Light pollution:"
 msgstr "Ljusförorening:"
 
-#: src/ui_viewDialog.h:4290
+#: src/ui_viewDialog.h:4237
 msgid "Zodiacal Light brightness:"
 msgstr "Zodiakalljusets ljusstyrka:"
 
-#: src/ui_viewDialog.h:4291
+#: src/ui_viewDialog.h:4238
 msgid "Milky Way brightness/saturation:"
 msgstr "Vintergatans ljusstyrka/färgmättnad:"
 
-#: src/ui_viewDialog.h:4293
+#: src/ui_viewDialog.h:4240
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Tona ner svaga stjärnor när ljusstarka objekt är synliga"
 
-#: src/ui_viewDialog.h:4295
+#: src/ui_viewDialog.h:4242
 msgid "Dynamic eye adaptation"
 msgstr "Dynamisk anpassning av ögonen"
 
-#: src/ui_viewDialog.h:4297
+#: src/ui_viewDialog.h:4244
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:261
 msgid "Absolute scale:"
 msgstr "Absolut skala:"
 
-#: src/ui_viewDialog.h:4299
+#: src/ui_viewDialog.h:4246
 msgid "Twinkle amount (magnitudes) along horizon (less in zenith)"
 msgstr "Flimmermängd (magnituder) längs horisonten (mindre i zenit)"
 
-#: src/ui_viewDialog.h:4301
+#: src/ui_viewDialog.h:4248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:267
 msgid "Twinkle:"
 msgstr "Blinkning:"
 
-#: src/ui_viewDialog.h:4302 src/ui_viewDialog.h:4343 src/ui_viewDialog.h:4606
+#: src/ui_viewDialog.h:4249 src/ui_viewDialog.h:4290 src/ui_viewDialog.h:4553
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:283
 msgid "Labels and Markers"
 msgstr "Etiketter och markörer"
 
-#: src/ui_viewDialog.h:4304
+#: src/ui_viewDialog.h:4251
 msgid "Show all available proper names"
 msgstr "Visa alla tillgängliga egennamn"
 
-#: src/ui_viewDialog.h:4306
+#: src/ui_viewDialog.h:4253
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:288
 msgid "Show additional star names"
 msgstr "Visa tilläggsnamn för stjärnor"
 
-#: src/ui_viewDialog.h:4308
+#: src/ui_viewDialog.h:4255
 msgid ""
 "Use designations of stars instead of their common names for screen labels"
 msgstr "Använd beteckningar istället för egennamn på etiketter till stjärnor"
 
-#: src/ui_viewDialog.h:4310 src/ui_viewDialog.h:4610
+#: src/ui_viewDialog.h:4257 src/ui_viewDialog.h:4557
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Use designations for screen labels"
 msgstr "Använd beteckningar som etiketter"
 
-#: src/ui_viewDialog.h:4312
+#: src/ui_viewDialog.h:4259
 msgid "Limit the magnitude of stars"
 msgstr "Begränsa magnitud för stjärnor"
 
-#: src/ui_viewDialog.h:4314 src/ui_viewDialog.h:4365 src/ui_viewDialog.h:4641
+#: src/ui_viewDialog.h:4261 src/ui_viewDialog.h:4312 src/ui_viewDialog.h:4588
 msgid "Limit magnitude:"
 msgstr "Gränsmagnitud:"
 
-#: src/ui_viewDialog.h:4315
+#: src/ui_viewDialog.h:4262
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Relative scale:"
 msgstr "Relativ skala:"
 
-#: src/ui_viewDialog.h:4317
+#: src/ui_viewDialog.h:4264
 msgid ""
 "Show traditional designations of double stars if proper name, Bayer or "
 "Flamsteed designations do not exist for the star."
@@ -15329,12 +15329,12 @@ msgstr ""
 "Visa traditionella beteckningar för dubbelstjärnor om egennamn, Bayer- eller"
 " Flamsteedbeteckningar för stjärnan saknas."
 
-#: src/ui_viewDialog.h:4319
+#: src/ui_viewDialog.h:4266
 msgctxt "double stars"
 msgid "Dbl. stars"
 msgstr "Dbl.stjärnor"
 
-#: src/ui_viewDialog.h:4321
+#: src/ui_viewDialog.h:4268
 msgid ""
 "Show designations of variable stars if proper name, Bayer or Flamsteed "
 "designations, or designation of double star do not exist for the star."
@@ -15342,12 +15342,12 @@ msgstr ""
 "Visa beteckningar för variabla stjärnor om egennamn, Bayer- eller "
 "Flamsteedbeteckningar, eller dubbelstjärnebeteckningar för stjärnan saknas."
 
-#: src/ui_viewDialog.h:4323
+#: src/ui_viewDialog.h:4270
 msgctxt "variable stars"
 msgid "Var. stars"
 msgstr "Var.stjärnor"
 
-#: src/ui_viewDialog.h:4325
+#: src/ui_viewDialog.h:4272
 msgid ""
 "Show designations from Hipparcos catalog (HIP) if available and star doesn't"
 " have other traditional designations."
@@ -15355,16 +15355,16 @@ msgstr ""
 "Visa beteckningar från Hipparcos-katalogen (HIP) om tillgänglighet finns, "
 "och stjärnan inte har några andra traditionella beteckningar."
 
-#: src/ui_viewDialog.h:4328
+#: src/ui_viewDialog.h:4275
 msgid "Show stars with pointed rays"
 msgstr "Visa stjärnor med spetsiga strålar"
 
-#: src/ui_viewDialog.h:4330
+#: src/ui_viewDialog.h:4277
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Spiky stars"
 msgstr "Spetsiga stjärnor"
 
-#: src/ui_viewDialog.h:4332
+#: src/ui_viewDialog.h:4279
 msgid ""
 "Twinkle is caused by atmospheric turbulence. This option forces its display "
 "regardless of atmosphere (for artistic purpose)."
@@ -15372,59 +15372,59 @@ msgstr ""
 "Twinkle orsakas av atmosfärisk turbulens. Detta alternativ tvingar fram en "
 "visning oberoende av atmosfären (av konstnärliga skäl)."
 
-#: src/ui_viewDialog.h:4334
+#: src/ui_viewDialog.h:4281
 msgid "even without atmosphere"
 msgstr "även utan atmosfär"
 
-#: src/ui_viewDialog.h:4335
+#: src/ui_viewDialog.h:4282
 msgid "Projection"
 msgstr "Projektion"
 
-#: src/ui_viewDialog.h:4336
+#: src/ui_viewDialog.h:4283
 msgid "Current FoV"
 msgstr "Nuvarande synfält"
 
-#: src/ui_viewDialog.h:4337
+#: src/ui_viewDialog.h:4284
 msgid "Vertical viewport offset"
 msgstr "Förskjutning av vertikal visning"
 
-#: src/ui_viewDialog.h:4338
+#: src/ui_viewDialog.h:4285
 msgid "Custom FoV limit"
 msgstr "Anpassad gräns för synfält"
 
-#: src/ui_viewDialog.h:4340
+#: src/ui_viewDialog.h:4287
 msgid "Additional custom limitation (e.g. for planetarium use)"
 msgstr "Anpassad gräns (t.ex. för användning i planetarium)"
 
-#: src/ui_viewDialog.h:4342
+#: src/ui_viewDialog.h:4289
 msgid "Solar System objects"
 msgstr "Solsystemsobjekt"
 
-#: src/ui_viewDialog.h:4345
+#: src/ui_viewDialog.h:4292
 msgid "Color of planet labels"
 msgstr "Färg på planetetiketter"
 
-#: src/ui_viewDialog.h:4348
+#: src/ui_viewDialog.h:4295
 msgid "Planets magnitude algorithm"
 msgstr "Algoritm för planeters magnituder"
 
-#: src/ui_viewDialog.h:4350
+#: src/ui_viewDialog.h:4297
 msgid "Planets magnitude algorithm:"
 msgstr "Algoritm för planetmagnitud:"
 
-#: src/ui_viewDialog.h:4352
+#: src/ui_viewDialog.h:4299
 msgid "Color of trails"
 msgstr "Färg på spår"
 
-#: src/ui_viewDialog.h:4354
+#: src/ui_viewDialog.h:4301
 msgid "Show trails"
 msgstr "Visa spår"
 
-#: src/ui_viewDialog.h:4356
+#: src/ui_viewDialog.h:4303
 msgid "Trails thickness in pixels"
 msgstr "Spårtjocklek i pixlar"
 
-#: src/ui_viewDialog.h:4359
+#: src/ui_viewDialog.h:4306
 #, c-format
 msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
@@ -15433,126 +15433,126 @@ msgstr ""
 "Astronomical Almanac (standard) har en förstoring på 2%, medan Danjon (1951)"
 " använder en annan modell"
 
-#: src/ui_viewDialog.h:4361
+#: src/ui_viewDialog.h:4308
 msgid "Earth shadow enlargement after Danjon"
 msgstr "Förstoring på jordskugga efter Danjon"
 
-#: src/ui_viewDialog.h:4363
+#: src/ui_viewDialog.h:4310
 msgid "Limit the magnitude of solar system objects"
 msgstr "Begränsa magnituden för solsystemsobjekt"
 
-#: src/ui_viewDialog.h:4366
+#: src/ui_viewDialog.h:4313
 msgid "Show orbits"
 msgstr "Visa omloppsbanor"
 
-#: src/ui_viewDialog.h:4368
+#: src/ui_viewDialog.h:4315
 msgid "Show orbit even if object is off screen"
 msgstr "Visa omloppsbana även om objektet är utanför skärmen"
 
-#: src/ui_viewDialog.h:4370
+#: src/ui_viewDialog.h:4317
 msgid "permanently"
 msgstr "permanent"
 
-#: src/ui_viewDialog.h:4372
+#: src/ui_viewDialog.h:4319
 msgid "Show orbits of major planets"
 msgstr "Visa större planeters omloppsbanor"
 
-#: src/ui_viewDialog.h:4376
+#: src/ui_viewDialog.h:4323
 msgid "Configure colors of orbit lines"
 msgstr "Anpassa färger på omloppsbanor"
 
-#: src/ui_viewDialog.h:4379
+#: src/ui_viewDialog.h:4326
 msgid "Orbits thickness in pixels"
 msgstr "Omloppsbanetjocklek i pixlar"
 
-#: src/ui_viewDialog.h:4382
+#: src/ui_viewDialog.h:4329
 msgid "Color of nomenclature labels"
 msgstr "Färg på nomenklaturetiketter"
 
-#: src/ui_viewDialog.h:4386
+#: src/ui_viewDialog.h:4333
 msgid "Show hints and labels for planetary features"
 msgstr "Visa symboler och etiketter för planetariska ytor"
 
-#: src/ui_viewDialog.h:4388
+#: src/ui_viewDialog.h:4335
 msgid "Show planetary nomenclature"
 msgstr "Visa planetarisk nomenklatur"
 
-#: src/ui_viewDialog.h:4390
+#: src/ui_viewDialog.h:4337
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
 "Slå av denna inställning om du vill se spår för alla solsystemets kroppar."
 
-#: src/ui_viewDialog.h:4392
+#: src/ui_viewDialog.h:4339
 msgid "Only for N latest selected objects:"
 msgstr "Endast för de N senaste valda objekten:"
 
-#: src/ui_viewDialog.h:4394
+#: src/ui_viewDialog.h:4341
 msgid "Hide orbits of minor bodies."
 msgstr "Göm små himlakroppars omloppsbanor."
 
-#: src/ui_viewDialog.h:4396
+#: src/ui_viewDialog.h:4343
 msgid "Only orbits of major planets..."
 msgstr "Endast omloppsbanor för större planeter..."
 
-#: src/ui_viewDialog.h:4398
+#: src/ui_viewDialog.h:4345
 msgid "Show orbit only for selected SSO"
 msgstr "Visa omloppsbana för valt SSO"
 
-#: src/ui_viewDialog.h:4400
+#: src/ui_viewDialog.h:4347
 msgid "Only orbit for selected object..."
 msgstr "Endast omloppsbana för valt objekt..."
 
-#: src/ui_viewDialog.h:4402
+#: src/ui_viewDialog.h:4349
 msgid "Also show moons of selected object or planets."
 msgstr "Visa också månar till valt objekt eller planeter."
 
-#: src/ui_viewDialog.h:4404
+#: src/ui_viewDialog.h:4351
 msgid "... and moons"
 msgstr "... och månar"
 
-#: src/ui_viewDialog.h:4407
+#: src/ui_viewDialog.h:4354
 msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
 msgstr "Växla permanent visning av solens korona när atmosfären inte visas"
 
-#: src/ui_viewDialog.h:4409
+#: src/ui_viewDialog.h:4356
 msgid "Sun's corona"
 msgstr "Solens korona"
 
-#: src/ui_viewDialog.h:4411
+#: src/ui_viewDialog.h:4358
 msgid "Toggle drawing halo around the Moon"
 msgstr "Slå på halo runt månen"
 
-#: src/ui_viewDialog.h:4413
+#: src/ui_viewDialog.h:4360
 msgid "Moon's halo"
 msgstr "Månhalo"
 
-#: src/ui_viewDialog.h:4414 src/ui_astroCalcDialog.h:2361
+#: src/ui_viewDialog.h:4361 src/ui_astroCalcDialog.h:2361
 msgid "Show:"
 msgstr "Visa:"
 
-#: src/ui_viewDialog.h:4416
+#: src/ui_viewDialog.h:4363
 msgid "Toggle drawing Sun's glare"
 msgstr "Växa visning av solstrålar"
 
-#: src/ui_viewDialog.h:4418
+#: src/ui_viewDialog.h:4365
 msgid "Sun's glare"
 msgstr "Solstrålar"
 
-#: src/ui_viewDialog.h:4420
+#: src/ui_viewDialog.h:4367
 msgid "Show tiny circles for minor bodies regardless of magnitude"
 msgstr "Visa små cirklar för små himlakroppar oavsett magnitud"
 
-#: src/ui_viewDialog.h:4424
+#: src/ui_viewDialog.h:4371
 msgid "Draw markers for objects with magnitude brighter than this"
 msgstr "Rita ut markörer för objekt med en magnitud ljusare än detta"
 
-#: src/ui_viewDialog.h:4429
+#: src/ui_viewDialog.h:4376
 msgid "Use more accurate 3D models (where available)"
 msgstr "Använd mer exakta 3D-modeller (vid tillgänglighet)"
 
-#: src/ui_viewDialog.h:4431
+#: src/ui_viewDialog.h:4378
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
@@ -15560,51 +15560,51 @@ msgstr ""
 "Slå på denna inställning för att simulera verklig ljushastighet "
 "(rekommenderas)."
 
-#: src/ui_viewDialog.h:4433
+#: src/ui_viewDialog.h:4380
 msgid "Simulate light speed"
 msgstr "Simulera ljushastighet"
 
-#: src/ui_viewDialog.h:4435
+#: src/ui_viewDialog.h:4382
 msgid "Jupiter's Great Red Spot..."
 msgstr "Stora röda fläcken på Jupiter..."
 
-#: src/ui_viewDialog.h:4437
+#: src/ui_viewDialog.h:4384
 msgid "GRS details..."
 msgstr "GRS-detaljer..."
 
-#: src/ui_viewDialog.h:4438
+#: src/ui_viewDialog.h:4385
 msgid "Solar System Editor..."
 msgstr "Solsystemsredigerare..."
 
-#: src/ui_viewDialog.h:4439
+#: src/ui_viewDialog.h:4386
 msgctxt "scale"
 msgid "Planets"
 msgstr "Planeter"
 
-#: src/ui_viewDialog.h:4440
+#: src/ui_viewDialog.h:4387
 msgctxt "scale"
 msgid "Minor bodies"
 msgstr "Mindre himlakroppar"
 
-#: src/ui_viewDialog.h:4442
+#: src/ui_viewDialog.h:4389
 msgid "Scale factor"
 msgstr "Skalfaktor"
 
-#: src/ui_viewDialog.h:4444
+#: src/ui_viewDialog.h:4391
 msgctxt "scale"
 msgid "Sun"
 msgstr "Solen"
 
-#: src/ui_viewDialog.h:4445
+#: src/ui_viewDialog.h:4392
 msgid "Scale:"
 msgstr "Skala:"
 
-#: src/ui_viewDialog.h:4446
+#: src/ui_viewDialog.h:4393
 msgctxt "scale"
 msgid "Moon"
 msgstr "Månen"
 
-#: src/ui_viewDialog.h:4448
+#: src/ui_viewDialog.h:4395
 msgid ""
 "When enabled, the Moon scales smoothly between 1× (natural size) at the "
 "minimum FOV and the configured scale factor at the maximum FOV. Outside "
@@ -15614,125 +15614,125 @@ msgstr ""
 "vid minsta synfält och inställd skalfaktor vid största synfält. Utanför "
 "detta intervall behålls månstorleken konstant."
 
-#: src/ui_viewDialog.h:4450
+#: src/ui_viewDialog.h:4397
 msgid "Dynamic (FOV-based) Moon size"
 msgstr "Dynamisk (synfältsbaserad) månskala"
 
-#: src/ui_viewDialog.h:4452 src/ui_viewDialog.h:4456
+#: src/ui_viewDialog.h:4399 src/ui_viewDialog.h:4403
 msgid "FOV at and below which the Moon is drawn at 1× (natural) size."
 msgstr "Synfält där månen ritas ut i 1× (naturlig) storlek."
 
-#: src/ui_viewDialog.h:4454
+#: src/ui_viewDialog.h:4401
 msgid "1× below"
 msgstr "1× under"
 
-#: src/ui_viewDialog.h:4459 src/ui_viewDialog.h:4463
+#: src/ui_viewDialog.h:4406 src/ui_viewDialog.h:4410
 msgid ""
 "FOV at and above which the Moon is drawn at the configured scale factor."
 msgstr "Synfält där månen ritas ut i anpassad skalfaktor."
 
-#: src/ui_viewDialog.h:4461
+#: src/ui_viewDialog.h:4408
 msgid "Nx above"
 msgstr "Nx över"
 
-#: src/ui_viewDialog.h:4465
+#: src/ui_viewDialog.h:4412
 msgid "Hide nomenclature on the celestial body of observer"
 msgstr "Dölj nomenklatur för observatörens himlakropp"
 
-#: src/ui_viewDialog.h:4467
+#: src/ui_viewDialog.h:4414
 msgid "Label only features along the terminator"
 msgstr "Visa endast etiketter längs terminatorn"
 
-#: src/ui_viewDialog.h:4469
+#: src/ui_viewDialog.h:4416
 msgid "Only for Solar elevation"
 msgstr "Endast för solhöjd"
 
-#: src/ui_viewDialog.h:4471
+#: src/ui_viewDialog.h:4418
 msgid "Minimum Solar altitude"
 msgstr "Lägsta solhöjd"
 
-#: src/ui_viewDialog.h:4473 src/ui_scriptConsole.h:396
+#: src/ui_viewDialog.h:4420 src/ui_scriptConsole.h:396
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 msgid "..."
 msgstr "…"
 
-#: src/ui_viewDialog.h:4475
+#: src/ui_viewDialog.h:4422
 msgid "Maximum Solar altitude"
 msgstr "Högsta solhöjd"
 
-#: src/ui_viewDialog.h:4478
+#: src/ui_viewDialog.h:4425
 msgid "Mark impact features with ellipses"
 msgstr "Markera nedslagskratrar med ellipser"
 
-#: src/ui_viewDialog.h:4480
+#: src/ui_viewDialog.h:4427
 msgid "Outline craters"
 msgstr "Visa kraterlinjer"
 
-#: src/ui_viewDialog.h:4482
+#: src/ui_viewDialog.h:4429
 msgid "Show special nomenclature points only"
 msgstr "Visa endast specialpunkter för nomenklatur"
 
-#: src/ui_viewDialog.h:4484
+#: src/ui_viewDialog.h:4431
 msgid "Special points only"
 msgstr "Endast specialpunkter"
 
-#: src/ui_viewDialog.h:4488
+#: src/ui_viewDialog.h:4435
 msgid "Simulate self-shadowing"
 msgstr "Simulera självskuggning"
 
-#: src/ui_viewDialog.h:4489
+#: src/ui_viewDialog.h:4436
 msgid "Display objects from catalogs"
 msgstr "Visa objekt från kataloger"
 
-#: src/ui_viewDialog.h:4490
+#: src/ui_viewDialog.h:4437
 msgid "Quick selection:"
 msgstr "Snabbval:"
 
-#: src/ui_viewDialog.h:4492
+#: src/ui_viewDialog.h:4439
 msgid "Select all catalogs"
 msgstr "Välj alla kataloger"
 
-#: src/ui_viewDialog.h:4494
+#: src/ui_viewDialog.h:4441
 msgid "select all"
 msgstr "välj alla"
 
-#: src/ui_viewDialog.h:4496
+#: src/ui_viewDialog.h:4443
 msgid "Select standard catalogs (NGC/IC and M)"
 msgstr "Välj standardkataloger (NGC/IC och M)"
 
-#: src/ui_viewDialog.h:4498
+#: src/ui_viewDialog.h:4445
 msgid "select standard"
 msgstr "välj standard"
 
-#: src/ui_viewDialog.h:4499
+#: src/ui_viewDialog.h:4446
 msgid "select preference"
 msgstr "välj inställning"
 
-#: src/ui_viewDialog.h:4500
+#: src/ui_viewDialog.h:4447
 msgid "store preference"
 msgstr "lagra inställning"
 
-#: src/ui_viewDialog.h:4502
+#: src/ui_viewDialog.h:4449
 msgid "Deselect all catalogs"
 msgstr "Välj inga kataloger"
 
-#: src/ui_viewDialog.h:4504
+#: src/ui_viewDialog.h:4451
 msgid "select none"
 msgstr "välj inga"
 
-#: src/ui_viewDialog.h:4506
+#: src/ui_viewDialog.h:4453
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
 msgstr "Atlas över egendomliga galaxer (Arp, 1966)"
 
-#: src/ui_viewDialog.h:4509
+#: src/ui_viewDialog.h:4456
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Generella Uppsalakatalogen över galaxer"
 
-#: src/ui_viewDialog.h:4512
+#: src/ui_viewDialog.h:4459
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Lynds katalog över ljusa nebulosor (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:4515
+#: src/ui_viewDialog.h:4462
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
@@ -15740,19 +15740,19 @@ msgstr ""
 "En katalog över Hα-emissionsregioner i södra delen av Vintergatan (Rodgers+,"
 " 1960)"
 
-#: src/ui_viewDialog.h:4518
+#: src/ui_viewDialog.h:4465
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "Katalog över H II-regioner (Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:4521
+#: src/ui_viewDialog.h:4468
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "Ny generell katalog över nebulosor och stjärnhopar"
 
-#: src/ui_viewDialog.h:4530
+#: src/ui_viewDialog.h:4477
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 msgstr "En katalog över rika hopar av galaxer (Abell+, 1989)"
 
-#: src/ui_viewDialog.h:4533
+#: src/ui_viewDialog.h:4480
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
@@ -15760,23 +15760,23 @@ msgstr ""
 "En katalog över stjärnhopar som syns på Franklin-Adams kartplåtar (Melotte, "
 "1915)"
 
-#: src/ui_viewDialog.h:4536
+#: src/ui_viewDialog.h:4483
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 msgstr "Katalogen för interagerande galaxer (Vorontsov-Velyaminov+, 2001)"
 
-#: src/ui_viewDialog.h:4539
+#: src/ui_viewDialog.h:4486
 msgid "Catalogue of Reflection Nebulae (van den Bergh, 1966)"
 msgstr "Katalog över reflexionsnebulosor (van den Bergh, 1966)"
 
-#: src/ui_viewDialog.h:4542
+#: src/ui_viewDialog.h:4489
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 msgstr "Katalogen för galaktiska planetariska nebulosor (Kohoutek, 2001)"
 
-#: src/ui_viewDialog.h:4545
+#: src/ui_viewDialog.h:4492
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "Katalog över öppna galaktiska hopar (Collinder, 1931)"
 
-#: src/ui_viewDialog.h:4548
+#: src/ui_viewDialog.h:4495
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh and "
 "Herbst, 1975)"
@@ -15784,56 +15784,56 @@ msgstr ""
 "Katalog över sydliga stjärnor inbäddade i nebulositet (van den Bergh och "
 "Herbst, 1975)"
 
-#: src/ui_viewDialog.h:4551
+#: src/ui_viewDialog.h:4498
 msgid "Hickson Compact Group (Hickson+, 1982)"
 msgstr "Hickson Compact Group (Hickson+, 1982)"
 
-#: src/ui_viewDialog.h:4554
+#: src/ui_viewDialog.h:4501
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
 "Strasbourg-ESO-katalogen över galaktiska planetariska nebulosor (Acker+, "
 "1992)"
 
-#: src/ui_viewDialog.h:4557
+#: src/ui_viewDialog.h:4504
 msgid ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 msgstr "Katalog och avstånd för optiskt synliga H II-regioner (Dickel+, 1969)"
 
-#: src/ui_viewDialog.h:4560
+#: src/ui_viewDialog.h:4507
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 msgstr "ESO/Uppsala Survey av ESO(B)-atlasen (Lauberts, 1982)"
 
-#: src/ui_viewDialog.h:4563
+#: src/ui_viewDialog.h:4510
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr "En katalog över galaktiska supernovarester (Green, 2014)"
 
-#: src/ui_viewDialog.h:4566
+#: src/ui_viewDialog.h:4513
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Lynds katalog över mörka nebulosor (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:4569
+#: src/ui_viewDialog.h:4516
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Barnards katalog över 349 mörka objekt på himlen (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:4572
+#: src/ui_viewDialog.h:4519
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Indexkatalog över nebulosor och stjärnhopar"
 
-#: src/ui_viewDialog.h:4574
+#: src/ui_viewDialog.h:4521
 msgctxt "other catalogs"
 msgid "Other"
 msgstr "Annat"
 
-#: src/ui_viewDialog.h:4576
+#: src/ui_viewDialog.h:4523
 msgid "Principal Galaxy Catalog"
 msgstr "Principal Galaxy Catalog"
 
-#: src/ui_viewDialog.h:4579
+#: src/ui_viewDialog.h:4526
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Katalog över ljusa diffusa galaktiska nebulosor (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:4582
+#: src/ui_viewDialog.h:4529
 msgid ""
 "van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern "
 "Milky Way; van den Bergh and Hagen, 1975)"
@@ -15841,19 +15841,19 @@ msgstr ""
 "van den Bergh-Hagen-katalogen (enhetlig undersökning av kluster i södra "
 "Vintergatan; van den Bergh och Hagen, 1975)"
 
-#: src/ui_viewDialog.h:4593
+#: src/ui_viewDialog.h:4540
 msgid "Filter by type"
 msgstr "Filtrera efter typ"
 
-#: src/ui_viewDialog.h:4598 src/ui_dsoColorsDialog.h:580
+#: src/ui_viewDialog.h:4545 src/ui_dsoColorsDialog.h:580
 msgid "Hydrogen regions"
 msgstr "Väteregioner"
 
-#: src/ui_viewDialog.h:4604
+#: src/ui_viewDialog.h:4551
 msgid "Other"
 msgstr "Annat"
 
-#: src/ui_viewDialog.h:4608
+#: src/ui_viewDialog.h:4555
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
@@ -15861,41 +15861,41 @@ msgstr ""
 "Använd katalogbeteckningar för djuprymdsobjekt i stället för deras vanliga "
 "namn som etiketter på skärmen"
 
-#: src/ui_viewDialog.h:4611
+#: src/ui_viewDialog.h:4558
 msgid "Use additional names of DSO"
 msgstr "Använd tilläggsnamn för DSO"
 
-#: src/ui_viewDialog.h:4612
+#: src/ui_viewDialog.h:4559
 msgid "Show only named DSO"
 msgstr "Visa endast namngivna DSO"
 
-#: src/ui_viewDialog.h:4613
+#: src/ui_viewDialog.h:4560
 msgid "Use outlines for big deep-sky objects"
 msgstr "Använd kantlinjer för stora djuprymdsobjekt"
 
-#: src/ui_viewDialog.h:4615
+#: src/ui_viewDialog.h:4562
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr "Visa symboler proportionellt till vinkelstorlek hos djuprymdsobjekt"
 
-#: src/ui_viewDialog.h:4617
+#: src/ui_viewDialog.h:4564
 msgid "Use proportional hints"
 msgstr "Använd proportionella symboler"
 
-#: src/ui_viewDialog.h:4618 plugins/Satellites/src/ui_satellitesDialog.h:1251
+#: src/ui_viewDialog.h:4565 plugins/Satellites/src/ui_satellitesDialog.h:1251
 msgid "Labels"
 msgstr "Rubriker"
 
-#: src/ui_viewDialog.h:4620 src/ui_viewDialog.h:4623
+#: src/ui_viewDialog.h:4567 src/ui_viewDialog.h:4570
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1542
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:535
 msgid "Brightness"
 msgstr "Ljusstyrka"
 
-#: src/ui_viewDialog.h:4625
+#: src/ui_viewDialog.h:4572
 msgid "Hints"
 msgstr "Symboler"
 
-#: src/ui_viewDialog.h:4627
+#: src/ui_viewDialog.h:4574
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
@@ -15903,32 +15903,32 @@ msgstr ""
 "Använd ytljusstyrkan hos djuprymdsobjekt som skala för deras markörers och "
 "etiketters synlighet."
 
-#: src/ui_viewDialog.h:4629
+#: src/ui_viewDialog.h:4576
 msgid "Use surface brightness"
 msgstr "Använd ytljusstyrka"
 
-#: src/ui_viewDialog.h:4630
+#: src/ui_viewDialog.h:4577
 msgid "Configure colors of markers"
 msgstr "Anpassa färger på markörer"
 
-#: src/ui_viewDialog.h:4636
+#: src/ui_viewDialog.h:4583
 msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr "Största vinkelstorlek i bågminuter för synliga DSO"
 
-#: src/ui_viewDialog.h:4639
+#: src/ui_viewDialog.h:4586
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Gränsmagnitud (för blotta ögat/kikarobservatörer) för djuprymdsobjekt."
 
-#: src/ui_viewDialog.h:4643
+#: src/ui_viewDialog.h:4590
 msgid "Minimal angular size in arcminutes for visible DSO"
 msgstr "Minsta vinkelstorlek i bågminuter för synliga DSO"
 
-#: src/ui_viewDialog.h:4645
+#: src/ui_viewDialog.h:4592
 msgid "Celestial Sphere"
 msgstr "Himmelssfär"
 
-#: src/ui_viewDialog.h:4647
+#: src/ui_viewDialog.h:4594
 msgid ""
 "Apex and Antapex indicate where the observer's planet is heading to or "
 "receding from, respectively."
@@ -15936,35 +15936,35 @@ msgstr ""
 "Apex och antapex indikerar i vilken riktning observatörens planet färdas "
 "respektive kommer ifrån."
 
-#: src/ui_viewDialog.h:4651 src/ui_viewDialog.h:4655 src/ui_viewDialog.h:4696
-#: src/ui_viewDialog.h:4708 src/ui_viewDialog.h:4725 src/ui_viewDialog.h:4754
-#: src/ui_viewDialog.h:4777 src/ui_viewDialog.h:4782 src/ui_viewDialog.h:4827
-#: src/ui_viewDialog.h:4831 src/ui_viewDialog.h:4861 src/ui_viewDialog.h:4878
-#: src/ui_viewDialog.h:4942 src/ui_viewDialog.h:5124 src/ui_viewDialog.h:5128
+#: src/ui_viewDialog.h:4598 src/ui_viewDialog.h:4602 src/ui_viewDialog.h:4643
+#: src/ui_viewDialog.h:4655 src/ui_viewDialog.h:4672 src/ui_viewDialog.h:4701
+#: src/ui_viewDialog.h:4724 src/ui_viewDialog.h:4729 src/ui_viewDialog.h:4774
+#: src/ui_viewDialog.h:4778 src/ui_viewDialog.h:4808 src/ui_viewDialog.h:4825
+#: src/ui_viewDialog.h:4889 src/ui_viewDialog.h:5071 src/ui_viewDialog.h:5075
 msgid "Show partitions"
 msgstr "Visa delningar"
 
-#: src/ui_viewDialog.h:4659 src/ui_viewDialog.h:4692 src/ui_viewDialog.h:4712
-#: src/ui_viewDialog.h:4743 src/ui_viewDialog.h:4758 src/ui_viewDialog.h:4773
-#: src/ui_viewDialog.h:4815 src/ui_viewDialog.h:4819 src/ui_viewDialog.h:4846
-#: src/ui_viewDialog.h:4908 src/ui_viewDialog.h:4919 src/ui_viewDialog.h:4946
-#: src/ui_viewDialog.h:4961 src/ui_viewDialog.h:4995 src/ui_viewDialog.h:5091
+#: src/ui_viewDialog.h:4606 src/ui_viewDialog.h:4639 src/ui_viewDialog.h:4659
+#: src/ui_viewDialog.h:4690 src/ui_viewDialog.h:4705 src/ui_viewDialog.h:4720
+#: src/ui_viewDialog.h:4762 src/ui_viewDialog.h:4766 src/ui_viewDialog.h:4793
+#: src/ui_viewDialog.h:4855 src/ui_viewDialog.h:4866 src/ui_viewDialog.h:4893
+#: src/ui_viewDialog.h:4908 src/ui_viewDialog.h:4942 src/ui_viewDialog.h:5038
 msgid "Label partitions"
 msgstr "Etikett på delningar"
 
-#: src/ui_viewDialog.h:4663
+#: src/ui_viewDialog.h:4610
 msgid "Color of galactic center and anticenter"
 msgstr "Färg på galaktiskt centrum och anticentrum"
 
-#: src/ui_viewDialog.h:4666
+#: src/ui_viewDialog.h:4613
 msgid "Color of circumpolar circles"
 msgstr "Färg på cirkumpolära cirklar"
 
-#: src/ui_viewDialog.h:4669
+#: src/ui_viewDialog.h:4616
 msgid "Show Galactic equator line."
 msgstr "Visa galaktisk ekvatorlinje."
 
-#: src/ui_viewDialog.h:4673
+#: src/ui_viewDialog.h:4620
 msgid ""
 "This circle represents the size of Earth's central, deep shadow in the "
 "distance of the Moon. Will not show when Moon scaling is enabled!"
@@ -15972,140 +15972,140 @@ msgstr ""
 "Denna cirkel visar storleken på jordens centrala skugga, sett på månens "
 "avstånd. Den visas inte när månskalning är påslaget!"
 
-#: src/ui_viewDialog.h:4675
+#: src/ui_viewDialog.h:4622
 msgid "Earth umbra"
 msgstr "Jordens kärnskugga"
 
-#: src/ui_viewDialog.h:4677
+#: src/ui_viewDialog.h:4624
 msgid "Show center point of Earth's shadow in the distance of the Moon."
 msgstr "Visa centralpunkt för jordens skugga på månens avstånd."
 
-#: src/ui_viewDialog.h:4681
+#: src/ui_viewDialog.h:4628
 msgid "Color of the solstice points (of date)"
 msgstr "Färg på solståndspunkter (för datum)"
 
-#: src/ui_viewDialog.h:4685
+#: src/ui_viewDialog.h:4632
 msgid "Color of the equinox points (of date)"
 msgstr "Färg på dagjämningspunkter (för datum)"
 
-#: src/ui_viewDialog.h:4688
+#: src/ui_viewDialog.h:4635
 msgid "Color of umbra circle"
 msgstr "Färg på kärnskuggecirkel"
 
-#: src/ui_viewDialog.h:4700
+#: src/ui_viewDialog.h:4647
 msgid "Color of antisolar point"
 msgstr "Färg på antisolär punkt"
 
-#: src/ui_viewDialog.h:4704
+#: src/ui_viewDialog.h:4651
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 "Visa kolurer (storcirklar genom polerna och "
 "solstånds-/dagjämningspunkterna)."
 
-#: src/ui_viewDialog.h:4706
+#: src/ui_viewDialog.h:4653
 msgid "Colures"
 msgstr "Kolurer"
 
-#: src/ui_viewDialog.h:4715
+#: src/ui_viewDialog.h:4662
 msgid "Equinoxes (J2000)"
 msgstr "Dagjämningar (J2000)"
 
-#: src/ui_viewDialog.h:4717
+#: src/ui_viewDialog.h:4664
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr "Ekliptiska koordinater för dagens datum. Visas endast på jorden."
 
-#: src/ui_viewDialog.h:4719
+#: src/ui_viewDialog.h:4666
 msgid "Ecliptic grid (of date)"
 msgstr "Ekliptiskt rutnät (för datum)"
 
-#: src/ui_viewDialog.h:4720
+#: src/ui_viewDialog.h:4667
 msgid "Equinoxes (of date)"
 msgstr "Dagjämningar (för datum)"
 
-#: src/ui_viewDialog.h:4722
+#: src/ui_viewDialog.h:4669
 msgid "Color of horizon"
 msgstr "Färg på horisont"
 
-#: src/ui_viewDialog.h:4729 src/ui_viewDialog.h:4794 src/ui_viewDialog.h:4823
-#: src/ui_viewDialog.h:4842 src/ui_viewDialog.h:4874 src/ui_viewDialog.h:4930
-#: src/ui_viewDialog.h:4938 src/ui_viewDialog.h:5000 src/ui_viewDialog.h:5016
-#: src/ui_viewDialog.h:5028 src/ui_viewDialog.h:5055 src/ui_viewDialog.h:5080
-#: src/ui_viewDialog.h:5087
+#: src/ui_viewDialog.h:4676 src/ui_viewDialog.h:4741 src/ui_viewDialog.h:4770
+#: src/ui_viewDialog.h:4789 src/ui_viewDialog.h:4821 src/ui_viewDialog.h:4877
+#: src/ui_viewDialog.h:4885 src/ui_viewDialog.h:4947 src/ui_viewDialog.h:4963
+#: src/ui_viewDialog.h:4975 src/ui_viewDialog.h:5002 src/ui_viewDialog.h:5027
+#: src/ui_viewDialog.h:5034
 msgid "Show line"
 msgstr "Visa linje"
 
-#: src/ui_viewDialog.h:4733
+#: src/ui_viewDialog.h:4680
 msgid "Show ecliptic poles of current date."
 msgstr "Visa ekliptiska poler för nuvarande datum."
 
-#: src/ui_viewDialog.h:4735
+#: src/ui_viewDialog.h:4682
 msgid "Ecliptic poles (of date)"
 msgstr "Ekliptiska poler (för datum)"
 
-#: src/ui_viewDialog.h:4737
+#: src/ui_viewDialog.h:4684
 msgid "Color of supergalactic equator"
 msgstr "Färg på supergalaktisk ekvator"
 
-#: src/ui_viewDialog.h:4740
+#: src/ui_viewDialog.h:4687
 msgid "Color of the galactic grid"
 msgstr "Färg på galaktiskt rutnät"
 
-#: src/ui_viewDialog.h:4747
+#: src/ui_viewDialog.h:4694
 msgid ""
 "A plane perpendicular to the angular momentum vector of the Solar system."
 msgstr "Ett plan vinkelrätt mot solsystemets vektor för rörelsemängdsmoment."
 
-#: src/ui_viewDialog.h:4749
+#: src/ui_viewDialog.h:4696
 msgid "Invariable plane of the Solar system"
 msgstr "Solsystemets oföränderliga plan"
 
-#: src/ui_viewDialog.h:4751
+#: src/ui_viewDialog.h:4698
 msgid "Color of supergalactic poles"
 msgstr "Färg på supergalaktiska poler"
 
-#: src/ui_viewDialog.h:4762
+#: src/ui_viewDialog.h:4709
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "Ekliptiska koordinater för J2000.0."
 
-#: src/ui_viewDialog.h:4764
+#: src/ui_viewDialog.h:4711
 msgid "Ecliptic grid (J2000)"
 msgstr "Ekliptiskt rutnät (J2000)"
 
-#: src/ui_viewDialog.h:4766
+#: src/ui_viewDialog.h:4713
 msgid "Color of Prime Vertical"
 msgstr "Färg på primärvertikal"
 
-#: src/ui_viewDialog.h:4770
+#: src/ui_viewDialog.h:4717
 msgid "Color of the celestial poles (J2000.0)"
 msgstr "Färg på himmelspoler (J2000.0)"
 
-#: src/ui_viewDialog.h:4780
+#: src/ui_viewDialog.h:4727
 msgid "Zenith and Nadir"
 msgstr "Zenit och nadir"
 
-#: src/ui_viewDialog.h:4786
+#: src/ui_viewDialog.h:4733
 msgid "Color of the projected Solar equator line"
 msgstr "Färg på linje för solens projicerade ekvator"
 
-#: src/ui_viewDialog.h:4790
+#: src/ui_viewDialog.h:4737
 msgid ""
 "Fixed equatorial coordinates (hour angle/declination) of current planet."
 msgstr ""
 "Fasta ekvatoriella koordinater (timvinkel/deklination) för nuvarande planet."
 
-#: src/ui_viewDialog.h:4798
+#: src/ui_viewDialog.h:4745
 msgid "Color of penumbra circle"
 msgstr "Färg på halvskuggecirkel"
 
-#: src/ui_viewDialog.h:4802
+#: src/ui_viewDialog.h:4749
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "Färg på ekliptiskt rutnät (J2000.0)"
 
-#: src/ui_viewDialog.h:4805
+#: src/ui_viewDialog.h:4752
 msgid "Color of the supergalactic grid"
 msgstr "Färg på supergalaktiskt rutnät"
 
-#: src/ui_viewDialog.h:4808
+#: src/ui_viewDialog.h:4755
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
@@ -16113,107 +16113,107 @@ msgstr ""
 "Opposition-/konjunktionslongitudlinje - den ekliptiska longitud som passerar"
 " genom båda de ekliptiska polerna, solen och oppositionspunkten."
 
-#: src/ui_viewDialog.h:4812
+#: src/ui_viewDialog.h:4759
 msgid "Color of equator (of date)"
 msgstr "Färg på ekvator (för datum)"
 
-#: src/ui_viewDialog.h:4835
+#: src/ui_viewDialog.h:4782
 msgid "Color of galactic poles"
 msgstr "Färg på galaktiska poler"
 
-#: src/ui_viewDialog.h:4838
+#: src/ui_viewDialog.h:4785
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "Altitud och azimut (räknat från norr och österut)"
 
-#: src/ui_viewDialog.h:4850
+#: src/ui_viewDialog.h:4797
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr "Visa ekvatorn för de Vaucouleurs supergalaktiska koordinater (1976)."
 
-#: src/ui_viewDialog.h:4854
+#: src/ui_viewDialog.h:4801
 msgid "Color of ecliptic (J2000.0)"
 msgstr "Färg på ekliptika (J2000.0)"
 
-#: src/ui_viewDialog.h:4858
+#: src/ui_viewDialog.h:4805
 msgid "Color of marker of center of FOV"
 msgstr "Färg på markör i mitten av synfält"
 
-#: src/ui_viewDialog.h:4865
+#: src/ui_viewDialog.h:4812
 msgid "Color of cardinal points"
 msgstr "Färg på kardinalstreck"
 
-#: src/ui_viewDialog.h:4868
+#: src/ui_viewDialog.h:4815
 msgid "Color of the azimuthal grid"
 msgstr "Färg på planprojicerat rutnät"
 
-#: src/ui_viewDialog.h:4871
+#: src/ui_viewDialog.h:4818
 msgid "Color of the opposition/conjunction longitude line"
 msgstr "Färg på oppositions-/konjunktionslongitudslinje"
 
-#: src/ui_viewDialog.h:4882
+#: src/ui_viewDialog.h:4829
 msgid "Width of rectangle, in degrees"
 msgstr "Bredd på rektangel, i grader"
 
-#: src/ui_viewDialog.h:4885
+#: src/ui_viewDialog.h:4832
 msgid "Field of view in degrees"
 msgstr "Synfält i grader"
 
-#: src/ui_viewDialog.h:4888
+#: src/ui_viewDialog.h:4835
 msgid "Show circular marker of field of view (FOV)"
 msgstr "Visa en cirkelformig markör i mitten av synfältet"
 
-#: src/ui_viewDialog.h:4890
+#: src/ui_viewDialog.h:4837
 msgid "Circular FOV"
 msgstr "Cirkulärt synfält"
 
-#: src/ui_viewDialog.h:4892
+#: src/ui_viewDialog.h:4839
 msgid "Rotation angle of rectangle, in degrees"
 msgstr "Rotation på rektangel, i grader"
 
-#: src/ui_viewDialog.h:4895
+#: src/ui_viewDialog.h:4842
 msgid "Height of rectangle, in degrees"
 msgstr "Höjd på rektangel, i grader"
 
-#: src/ui_viewDialog.h:4898
+#: src/ui_viewDialog.h:4845
 msgid "Show rectangular marker of field of view (FOV)"
 msgstr "Visa rektangulär markör till synfält"
 
-#: src/ui_viewDialog.h:4900
+#: src/ui_viewDialog.h:4847
 msgid "Rectangular FOV"
 msgstr "Rektangulärt synfält"
 
-#: src/ui_viewDialog.h:4902
+#: src/ui_viewDialog.h:4849
 msgid "Color of circular marker of FOV"
 msgstr "Färg på cirkelmarkör till synfält"
 
-#: src/ui_viewDialog.h:4905
+#: src/ui_viewDialog.h:4852
 msgid "Color of rectangular marker of FOV"
 msgstr "Färg på rektangulär markör till synfält"
 
-#: src/ui_viewDialog.h:4912
+#: src/ui_viewDialog.h:4859
 msgid "Color of Apex and Antapex points"
 msgstr "Färg på apex- och antapexpunkter"
 
-#: src/ui_viewDialog.h:4915
+#: src/ui_viewDialog.h:4862
 msgid "Show celestial equator of current planet and date."
 msgstr "Visa himmelsekvatorn för nuvarande planet och datum."
 
-#: src/ui_viewDialog.h:4917
+#: src/ui_viewDialog.h:4864
 msgid "Equator (of date)"
 msgstr "Ekvator (för datum)"
 
-#: src/ui_viewDialog.h:4923
+#: src/ui_viewDialog.h:4870
 msgid "Show celestial equator of J2000.0."
 msgstr "Visa himmelsekvatorn för J2000.0."
 
-#: src/ui_viewDialog.h:4925
+#: src/ui_viewDialog.h:4872
 msgid "Equator (J2000)"
 msgstr "Ekvator (J2000)"
 
-#: src/ui_viewDialog.h:4927
+#: src/ui_viewDialog.h:4874
 msgid "Color of the quadrature circle"
 msgstr "Färg på kvadraturcirkel"
 
-#: src/ui_viewDialog.h:4934
+#: src/ui_viewDialog.h:4881
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
@@ -16221,47 +16221,47 @@ msgstr ""
 "Visa de Vaucouleurs supergalaktiska koordinater (1976), bestämd av "
 "fördelningen av närliggande galaxer."
 
-#: src/ui_viewDialog.h:4950
+#: src/ui_viewDialog.h:4897
 msgid "Color of celestial poles (of date)"
 msgstr "Färg på himmelspoler (för datum)"
 
-#: src/ui_viewDialog.h:4952
+#: src/ui_viewDialog.h:4899
 msgid "Solstices (J2000)"
 msgstr "Solstånd (J2000)"
 
-#: src/ui_viewDialog.h:4954
+#: src/ui_viewDialog.h:4901
 msgid "Show mathematical horizon line."
 msgstr "Visa den matematiska horisontlinjen."
 
-#: src/ui_viewDialog.h:4958
+#: src/ui_viewDialog.h:4905
 msgid "Color of the equatorial grid (of date)"
 msgstr "Färg på ekvatoriellt rutnät (för datum)"
 
-#: src/ui_viewDialog.h:4965
+#: src/ui_viewDialog.h:4912
 msgid "Color of the ecliptical grid (of date)"
 msgstr "Färg på ekliptiskt rutnät (för datum)"
 
-#: src/ui_viewDialog.h:4968
+#: src/ui_viewDialog.h:4915
 msgid "Show celestial poles of J2000.0."
 msgstr "Visa himmelspoler för J2000.0."
 
-#: src/ui_viewDialog.h:4970
+#: src/ui_viewDialog.h:4917
 msgid "Celestial poles (J2000)"
 msgstr "Himmelspoler (J2000)"
 
-#: src/ui_viewDialog.h:4972
+#: src/ui_viewDialog.h:4919
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "Visa ekliptisk linje för J2000.0 (VSOP87A fundamentalt plan)."
 
-#: src/ui_viewDialog.h:4974
+#: src/ui_viewDialog.h:4921
 msgid "Ecliptic (J2000)"
 msgstr "Ekliptikan (J2000)"
 
-#: src/ui_viewDialog.h:4976
+#: src/ui_viewDialog.h:4923
 msgid "Solar equator projected into space."
 msgstr "Solens ekvator projicerad ut i rymden."
 
-#: src/ui_viewDialog.h:4980
+#: src/ui_viewDialog.h:4927
 msgid ""
 "This circle represents the outermost rim of Earth's shadow in the distance "
 "of the Moon. Will not show when Moon scaling is enabled!"
@@ -16269,59 +16269,59 @@ msgstr ""
 "Denna cirkel visar den yttersta kanten på jordskuggan, sett på månens "
 "avstånd. Den visas inte när månskalning är påslaget!"
 
-#: src/ui_viewDialog.h:4982
+#: src/ui_viewDialog.h:4929
 msgid "Earth penumbra"
 msgstr "Jordens halvskugga"
 
-#: src/ui_viewDialog.h:4984
+#: src/ui_viewDialog.h:4931
 msgid "Color of ecliptic (of date)"
 msgstr "Färg på ekliptika (för datum)"
 
-#: src/ui_viewDialog.h:4987
+#: src/ui_viewDialog.h:4934
 msgid "Equatorial coordinates of J2000.0."
 msgstr "Ekvatoriella koordinater för J2000.0."
 
-#: src/ui_viewDialog.h:4989
+#: src/ui_viewDialog.h:4936
 msgid "Equatorial grid (J2000)"
 msgstr "Ekvatoriellt rutnät (J2000)"
 
-#: src/ui_viewDialog.h:4991
+#: src/ui_viewDialog.h:4938
 msgid "Color of the solstice points (J2000.0)"
 msgstr "Färg på solståndspunkter (J2000.0)"
 
-#: src/ui_viewDialog.h:4998
+#: src/ui_viewDialog.h:4945
 msgid "Solstices (of date)"
 msgstr "Solstånd (för datum)"
 
-#: src/ui_viewDialog.h:5004
+#: src/ui_viewDialog.h:4951
 msgid "Show celestial poles of current planet and date."
 msgstr "Visa himmelspoler för nuvarande planet och datum."
 
-#: src/ui_viewDialog.h:5006
+#: src/ui_viewDialog.h:4953
 msgid "Celestial poles (of date)"
 msgstr "Himmelspoler (för datum)"
 
-#: src/ui_viewDialog.h:5008
+#: src/ui_viewDialog.h:4955
 msgid "Color of altitude line"
 msgstr "Färg på höjdlinje"
 
-#: src/ui_viewDialog.h:5012
+#: src/ui_viewDialog.h:4959
 msgid "Show Prime (East-West) Vertical."
 msgstr "Visa primärvertikal (öst-väst)."
 
-#: src/ui_viewDialog.h:5020
+#: src/ui_viewDialog.h:4967
 msgid "Equatorial coordinates of current date and planet."
 msgstr "Ekvatoriella koordinater för dagens datum och planet."
 
-#: src/ui_viewDialog.h:5022
+#: src/ui_viewDialog.h:4969
 msgid "Equatorial grid (of date)"
 msgstr "Ekvatoriellt rutnät (för datum)"
 
-#: src/ui_viewDialog.h:5024 src/ui_viewDialog.h:5107
+#: src/ui_viewDialog.h:4971 src/ui_viewDialog.h:5054
 msgid "Show circles"
 msgstr "Visa cirklar"
 
-#: src/ui_viewDialog.h:5032
+#: src/ui_viewDialog.h:4979
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -16329,56 +16329,56 @@ msgstr ""
 "Momentana cirklar över jordens rotationsaxel på dess rörelse runt "
 "ekliptikans poler. Visas endast på jorden."
 
-#: src/ui_viewDialog.h:5034
+#: src/ui_viewDialog.h:4981
 msgid "Precession circles"
 msgstr "Precessionscirklar"
 
-#: src/ui_viewDialog.h:5037
+#: src/ui_viewDialog.h:4984
 msgid ""
 "Show a vertical line (with optional altitude marks) in the screen center."
 msgstr ""
 "Visa en vertikal linje (med valfria höjdmarkeringar) på skärmens mitt."
 
-#: src/ui_viewDialog.h:5042
+#: src/ui_viewDialog.h:4989
 msgid "Color of equator (J2000.0)"
 msgstr "Färg på ekvator (J2000.0)"
 
-#: src/ui_viewDialog.h:5045
+#: src/ui_viewDialog.h:4992
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "Färg på ekvatoriellt rutnät (J2000.0)"
 
-#: src/ui_viewDialog.h:5048
+#: src/ui_viewDialog.h:4995
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "Galaktiska koordinater, System II (IAU 1958)."
 
-#: src/ui_viewDialog.h:5052
+#: src/ui_viewDialog.h:4999
 msgid "Color of meridian"
 msgstr "Färg på meridian"
 
-#: src/ui_viewDialog.h:5059
+#: src/ui_viewDialog.h:5006
 msgid "Labels for the cardinal directions (4-wind compass rose)."
 msgstr "Etiketter för kardinalstreck (4 streck)"
 
-#: src/ui_viewDialog.h:5063
+#: src/ui_viewDialog.h:5010
 msgid ""
 "Labels for the intercardinal (or ordinal) directions (8-wind compass rose)."
 msgstr "Etiketter för interkardinalstreck (8 streck)"
 
-#: src/ui_viewDialog.h:5066
+#: src/ui_viewDialog.h:5013
 msgid ""
 "Labels for the secondary intercardinal directions (16-wind compass rose)."
 msgstr "Etiketter för mellanliggande interkardinalstreck (16 streck)"
 
-#: src/ui_viewDialog.h:5069
+#: src/ui_viewDialog.h:5016
 msgid ""
 "Labels for the tertiary intercardinal directions (32-wind compass rose)."
 msgstr "Etiketter för fjärdedels interkardinalstreck (32 streck)."
 
-#: src/ui_viewDialog.h:5073
+#: src/ui_viewDialog.h:5020
 msgid "Color of galactic equator"
 msgstr "Färg på galaktisk ekvator"
 
-#: src/ui_viewDialog.h:5076
+#: src/ui_viewDialog.h:5023
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the"
 " mathematical horizon."
@@ -16386,479 +16386,474 @@ msgstr ""
 "Dessa cirklar visar vilka stjärnor som alltid är över respektive under den "
 "matematiska horisonten."
 
-#: src/ui_viewDialog.h:5078
+#: src/ui_viewDialog.h:5025
 msgid "Circumpolar circles"
 msgstr "Cirkumpolära cirklar"
 
-#: src/ui_viewDialog.h:5084
+#: src/ui_viewDialog.h:5031
 msgid "Color of ecliptic poles (of date)"
 msgstr "Färg på ekliptiska poler (för datum)"
 
-#: src/ui_viewDialog.h:5095
+#: src/ui_viewDialog.h:5042
 msgid "Show ecliptic poles of J2000.0"
 msgstr "Visa ekliptiska poler för J2000.0"
 
-#: src/ui_viewDialog.h:5097
+#: src/ui_viewDialog.h:5044
 msgid "Ecliptic poles (J2000)"
 msgstr "Ekliptiska poler (J2000)"
 
-#: src/ui_viewDialog.h:5099
+#: src/ui_viewDialog.h:5046
 msgid "Color of fixed equator"
 msgstr "Färg på fast ekvator"
 
-#: src/ui_viewDialog.h:5103
+#: src/ui_viewDialog.h:5050
 msgid "A circle 90° from the Sun marking quadrature"
 msgstr "En cirkel 90° från solen som markerar kvadraturen"
 
-#: src/ui_viewDialog.h:5105
+#: src/ui_viewDialog.h:5052
 msgid "Quadrature circle"
 msgstr "Kvadraturcirkel"
 
-#: src/ui_viewDialog.h:5111
+#: src/ui_viewDialog.h:5058
 msgid "Show fixed celestial equator (hour angles) of current planet."
 msgstr "Visa den aktuella planetens fasta himmelsekvatorn (timvinklar)."
 
-#: src/ui_viewDialog.h:5113
+#: src/ui_viewDialog.h:5060
 msgid "Fixed Equator"
 msgstr "Fast ekvator"
 
-#: src/ui_viewDialog.h:5116
+#: src/ui_viewDialog.h:5063
 msgid "Show ecliptic line of current date."
 msgstr "Visa ekliptisk linje för dagens datum."
 
-#: src/ui_viewDialog.h:5118
+#: src/ui_viewDialog.h:5065
 msgid "Ecliptic (of date)"
 msgstr "Ekliptikan (för datum)"
 
-#: src/ui_viewDialog.h:5120
+#: src/ui_viewDialog.h:5067
 msgid "Mark Solar positions along the Ecliptic"
 msgstr "Markera solpositioner längs ekliptikan"
 
-#: src/ui_viewDialog.h:5122
+#: src/ui_viewDialog.h:5069
 msgid "with Solar Dates"
 msgstr "med soldatum"
 
-#: src/ui_viewDialog.h:5132
+#: src/ui_viewDialog.h:5079
 msgid "Color of compass marks"
 msgstr "Färg på kompassmärken"
 
-#: src/ui_viewDialog.h:5135
+#: src/ui_viewDialog.h:5082
 msgid "Color of colures"
 msgstr "Färg på kolurer"
 
-#: src/ui_viewDialog.h:5138
+#: src/ui_viewDialog.h:5085
 msgid "Color of Zenith and Nadir"
 msgstr "Färg på zenit och nadir"
 
-#: src/ui_viewDialog.h:5141
+#: src/ui_viewDialog.h:5088
 msgid "Color of the equinox points (J2000.0)"
 msgstr "Färg på dagjämningspunkter (J2000.0)"
 
-#: src/ui_viewDialog.h:5144
+#: src/ui_viewDialog.h:5091
 msgid "Show meridian line."
 msgstr "Visa meridianlinje."
 
-#: src/ui_viewDialog.h:5148
+#: src/ui_viewDialog.h:5095
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr "Färg på ekliptiska poler (J2000.0)"
 
-#: src/ui_viewDialog.h:5151
+#: src/ui_viewDialog.h:5098
 msgid "Show marker of center for field of view (FOV)"
 msgstr "Visa markör för mitten av synfält"
 
-#: src/ui_viewDialog.h:5153
+#: src/ui_viewDialog.h:5100
 msgid "Center of FOV"
 msgstr "Mitten av synfält"
 
-#: src/ui_viewDialog.h:5155
+#: src/ui_viewDialog.h:5102
 msgid "Color of the invariable plane of the Solar system"
 msgstr "Färg på solsystemets oföränderliga plan"
 
-#: src/ui_viewDialog.h:5159
+#: src/ui_viewDialog.h:5106
 msgid "Color of precession circles"
 msgstr "Färg på precessionscirklar"
 
-#: src/ui_viewDialog.h:5162
+#: src/ui_viewDialog.h:5109
 msgid "Grid line spacing density"
 msgstr "Rutnätsmellanrum"
 
-#: src/ui_viewDialog.h:5164
+#: src/ui_viewDialog.h:5111
 msgid "Grid density:"
 msgstr "Rutnätsmellanrum:"
 
-#: src/ui_viewDialog.h:5165
+#: src/ui_viewDialog.h:5112
 msgctxt "grid density"
 msgid "Fine"
 msgstr "Fint"
 
-#: src/ui_viewDialog.h:5166
+#: src/ui_viewDialog.h:5113
 msgctxt "grid density"
 msgid "Normal"
 msgstr "Normalt"
 
-#: src/ui_viewDialog.h:5167
+#: src/ui_viewDialog.h:5114
 msgctxt "grid density"
 msgid "Coarse"
 msgstr "Grovt"
 
-#: src/ui_viewDialog.h:5170
+#: src/ui_viewDialog.h:5117
 msgid "Select grid line spacing density"
 msgstr "Välj rutnätsmellanrum"
 
-#: src/ui_viewDialog.h:5173
+#: src/ui_viewDialog.h:5120
 msgid "The thickness of celestial lines"
 msgstr "Tjocklek på himmelslinjer"
 
-#: src/ui_viewDialog.h:5175
+#: src/ui_viewDialog.h:5122
 msgid "Line thickness:"
 msgstr "Linjetjocklek:"
 
-#: src/ui_viewDialog.h:5180
+#: src/ui_viewDialog.h:5127
 msgid "The line thickness for circle partitions"
 msgstr "Linjetjocklek för cirkeldelningar"
 
-#: src/ui_viewDialog.h:5182
+#: src/ui_viewDialog.h:5129
 msgid "Partitions thickness:"
 msgstr "Partitionstjocklek:"
 
-#: src/ui_viewDialog.h:5187
+#: src/ui_viewDialog.h:5134
 msgid "Size of celestial points in pixels"
 msgstr "Storlek på himmelspunkter i pixlar"
 
-#: src/ui_viewDialog.h:5189
+#: src/ui_viewDialog.h:5136
 msgid "Point size:"
 msgstr "Punktstorlek:"
 
-#: src/ui_viewDialog.h:5193
+#: src/ui_viewDialog.h:5140
 msgid "Add/remove landscapes..."
 msgstr "Lägg till/ta bort landskap..."
 
-#: src/ui_viewDialog.h:5194 src/ui_viewDialog.h:5243
+#: src/ui_viewDialog.h:5141 src/ui_viewDialog.h:5190
 msgid "Read text"
 msgstr "Läs text"
 
-#: src/ui_viewDialog.h:5195 src/ui_viewDialog.h:5244
+#: src/ui_viewDialog.h:5142 src/ui_viewDialog.h:5191
 #: src/ui_configurationDialog.h:2844
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1011
 msgid "Stop"
 msgstr "Stoppa"
 
-#: src/ui_viewDialog.h:5198
+#: src/ui_viewDialog.h:5145
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "Använd lägsta ljusstyrka som den specificeras i landscape.ini"
 
-#: src/ui_viewDialog.h:5200
+#: src/ui_viewDialog.h:5147
 msgid "from landscape, if given"
 msgstr "från landskap, om givet"
 
-#: src/ui_viewDialog.h:5202
+#: src/ui_viewDialog.h:5149
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "Visa belysningslager (ljusa fönster, ljusföroreningar etc.)"
 
-#: src/ui_viewDialog.h:5204
+#: src/ui_viewDialog.h:5151
 msgid "Show illumination "
 msgstr "Visa belysning "
 
-#: src/ui_viewDialog.h:5205
+#: src/ui_viewDialog.h:5152
 msgid "Transparency:"
 msgstr "Transparens:"
 
-#: src/ui_viewDialog.h:5207
+#: src/ui_viewDialog.h:5154
 msgid "Draw horizon polyline if one is defined."
 msgstr "Rita ut horisontpolylinje om en sådan finns definierad."
 
-#: src/ui_viewDialog.h:5209
+#: src/ui_viewDialog.h:5156
 msgid "Draw only polygon"
 msgstr "Rita endast ut polygon"
 
-#: src/ui_viewDialog.h:5211 src/ui_viewDialog.h:5285 src/ui_viewDialog.h:5303
-#: src/ui_viewDialog.h:5340 src/ui_viewDialog.h:5349 src/ui_viewDialog.h:5362
-#: src/ui_viewDialog.h:5368 src/ui_viewDialog.h:5382
+#: src/ui_viewDialog.h:5158 src/ui_viewDialog.h:5232 src/ui_viewDialog.h:5250
+#: src/ui_viewDialog.h:5287 src/ui_viewDialog.h:5296 src/ui_viewDialog.h:5309
+#: src/ui_viewDialog.h:5315 src/ui_viewDialog.h:5329
 msgid "Thickness of line in pixels"
 msgstr "Linjetjocklek i pixlar"
 
-#: src/ui_viewDialog.h:5214
+#: src/ui_viewDialog.h:5161
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "Använd lägsta ljusstyrka för att göra landskap synliga även i mörker"
 
-#: src/ui_viewDialog.h:5216
+#: src/ui_viewDialog.h:5163
 msgid "Minimal brightness:"
 msgstr "Lägsta ljusstyrka:"
 
-#: src/ui_viewDialog.h:5218
+#: src/ui_viewDialog.h:5165
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Värdeomfång 0..1 (landskapet är svart på natten - landskapet är fullt "
 "synligt)"
 
-#: src/ui_viewDialog.h:5222
+#: src/ui_viewDialog.h:5169
 msgid "Font size"
 msgstr "Teckensnittsstorlek"
 
-#: src/ui_viewDialog.h:5225
+#: src/ui_viewDialog.h:5172
 msgid "Text angle"
 msgstr "Textvinkel"
 
-#: src/ui_viewDialog.h:5228
+#: src/ui_viewDialog.h:5175
 msgid "Color for landscape labels"
 msgstr "Kulör för landskapsetiketter"
 
-#: src/ui_viewDialog.h:5231
+#: src/ui_viewDialog.h:5178
 msgid "Color for polygon line"
 msgstr "Kulör för polygonlinje"
 
-#: src/ui_viewDialog.h:5234
+#: src/ui_viewDialog.h:5181
 msgid "Show fog"
 msgstr "Visa dimma"
 
-#: src/ui_viewDialog.h:5235
+#: src/ui_viewDialog.h:5182
 msgid "Show ground"
 msgstr "Visa markyta"
 
-#: src/ui_viewDialog.h:5237
+#: src/ui_viewDialog.h:5184
 msgid "Set the planet and location as specified for the selected landscape"
 msgstr ""
 "Ställ in planet och plats enligt specifikationerna för det valda landskapet"
 
-#: src/ui_viewDialog.h:5239
+#: src/ui_viewDialog.h:5186
 msgid "Location from landscape"
 msgstr "Läge från landskapet"
 
-#: src/ui_viewDialog.h:5240
+#: src/ui_viewDialog.h:5187
 msgid "Use this landscape as default"
 msgstr "Använd detta landskap som standard"
 
-#: src/ui_viewDialog.h:5242
+#: src/ui_viewDialog.h:5189
 msgid "Use this sky culture as default"
 msgstr "Använd denna himmelskultur som standard"
 
-#: src/ui_viewDialog.h:5245
+#: src/ui_viewDialog.h:5192
 msgid "Info label"
 msgstr "Infoetikett"
 
-#: src/ui_viewDialog.h:5246
+#: src/ui_viewDialog.h:5193
 msgid "Screen label"
 msgstr "Skärmetikett"
 
-#: src/ui_viewDialog.h:5247 src/ui_viewDialog.h:5248
+#: src/ui_viewDialog.h:5194 src/ui_viewDialog.h:5195
 msgctxt "menu item"
 msgid "translation"
 msgstr "översättning"
 
-#: src/ui_viewDialog.h:5249 src/ui_viewDialog.h:5265
+#: src/ui_viewDialog.h:5196 src/ui_viewDialog.h:5212
 msgctxt "menu item"
 msgid "transliteration"
 msgstr "translitterering"
 
-#: src/ui_viewDialog.h:5250 src/ui_viewDialog.h:5270
+#: src/ui_viewDialog.h:5197 src/ui_viewDialog.h:5217
 msgctxt "menu item"
 msgid "modern"
 msgstr "modern"
 
-#: src/ui_viewDialog.h:5252 src/ui_viewDialog.h:5257
+#: src/ui_viewDialog.h:5199 src/ui_viewDialog.h:5204
 msgid "Scientific transliteration"
 msgstr "Vetenskaplig translitterering"
 
-#: src/ui_viewDialog.h:5254 src/ui_viewDialog.h:5259
+#: src/ui_viewDialog.h:5201 src/ui_viewDialog.h:5206
 msgctxt "menu item"
 msgid "sci. translit."
 msgstr "vet. transl."
 
-#: src/ui_viewDialog.h:5255 src/ui_viewDialog.h:5264
+#: src/ui_viewDialog.h:5202 src/ui_viewDialog.h:5211
 msgctxt "menu item"
 msgid "native"
 msgstr "ursprunglig"
 
-#: src/ui_viewDialog.h:5261 src/ui_viewDialog.h:5267
+#: src/ui_viewDialog.h:5208 src/ui_viewDialog.h:5214
 msgid "International Phonetic Alphabet"
 msgstr "Internationella fonetiska alfabetet"
 
-#: src/ui_viewDialog.h:5263 src/ui_viewDialog.h:5269
+#: src/ui_viewDialog.h:5210 src/ui_viewDialog.h:5216
 msgctxt "menu item"
 msgid "IPA"
 msgstr "IPA"
 
-#: src/ui_viewDialog.h:5271 src/ui_viewDialog.h:5272
+#: src/ui_viewDialog.h:5218 src/ui_viewDialog.h:5219
 msgctxt "menu item"
 msgid "byname"
 msgstr "binamn"
 
-#: src/ui_viewDialog.h:5274
+#: src/ui_viewDialog.h:5221
 msgid "Show zodiac (if defined)"
 msgstr "Visa zodiaken (om denna är definierad)"
 
-#: src/ui_viewDialog.h:5278
+#: src/ui_viewDialog.h:5225
 msgid "Constellations font size"
 msgstr "Teckenstorlek på stjärnbildsetiketter"
 
-#: src/ui_viewDialog.h:5281
+#: src/ui_viewDialog.h:5228
 msgid "Color of zodiac lines"
 msgstr "Färg på zodiaken"
 
-#: src/ui_viewDialog.h:5288
+#: src/ui_viewDialog.h:5235
 msgid "Fading duration for lines of asterisms"
 msgstr "Tid för att dölja asterismlinjer"
 
-#: src/ui_viewDialog.h:5292
+#: src/ui_viewDialog.h:5239
 msgid "Color of asterism lines"
 msgstr "Färg på asterismlinjer"
 
-#: src/ui_viewDialog.h:5295
+#: src/ui_viewDialog.h:5242
 msgid "Color of constellation area (convex hull) boundaries"
 msgstr "Färg på stjärnbildsytor (konvexa höljen)"
 
-#: src/ui_viewDialog.h:5299
+#: src/ui_viewDialog.h:5246
 msgid "Only one at a time"
 msgstr "Enbart en i taget"
 
-#: src/ui_viewDialog.h:5301
+#: src/ui_viewDialog.h:5248
 msgid "Isolated"
 msgstr "Isolerad"
 
-#: src/ui_viewDialog.h:5307
+#: src/ui_viewDialog.h:5254
 msgid "Color of ray helpers"
 msgstr "Färg på hjälplinjer"
 
-#: src/ui_viewDialog.h:5310
+#: src/ui_viewDialog.h:5257
 msgid "Show areas (convex hulls) of constellations"
 msgstr "Visa stjärnbildsytor (konvexa höljen)"
 
-#: src/ui_viewDialog.h:5312
+#: src/ui_viewDialog.h:5259
 msgid "Constellation areas"
 msgstr "Stjärnbildsytor"
 
-#: src/ui_viewDialog.h:5314
+#: src/ui_viewDialog.h:5261
 msgid "Color of constellation boundaries"
 msgstr "Stjärnbildsgränsernas färg"
 
-#: src/ui_viewDialog.h:5316
+#: src/ui_viewDialog.h:5263
 msgid "Abbreviated names"
 msgstr "Förkortade namn"
 
-#: src/ui_viewDialog.h:5318
+#: src/ui_viewDialog.h:5265
 msgid "Color of asterism names"
 msgstr "Färg på asterismnamn"
 
-#: src/ui_viewDialog.h:5322
+#: src/ui_viewDialog.h:5269
 msgid "Show lunar stations (if defined)"
 msgstr "Visa månstationer (om dessa är definierade)"
 
-#: src/ui_viewDialog.h:5324
+#: src/ui_viewDialog.h:5271
 msgid "Lunar Stations"
 msgstr "Månstationer"
 
-#: src/ui_viewDialog.h:5326
+#: src/ui_viewDialog.h:5273
 msgid "Brightness for constellation art"
 msgstr "Ljusstyrka för stjärnbildsillustrationer"
 
-#: src/ui_viewDialog.h:5329
+#: src/ui_viewDialog.h:5276
 msgid "Show boundaries of constellations"
 msgstr "Visa stjärnbildsgränser"
 
-#: src/ui_viewDialog.h:5333
+#: src/ui_viewDialog.h:5280
 msgid "Fading duration for lines of ray helpers"
 msgstr "Tid för att dölja hjälplinjer"
 
-#: src/ui_viewDialog.h:5337
+#: src/ui_viewDialog.h:5284
 msgid "Fading duration for screen labels of constellations"
 msgstr "Tid för att dölja stjärnbildsetiketter"
 
-#: src/ui_viewDialog.h:5343
+#: src/ui_viewDialog.h:5290
 msgid "Fading duration for lunar station lines"
 msgstr "Tid för att dölja månstationslinjer"
 
-#: src/ui_viewDialog.h:5346
+#: src/ui_viewDialog.h:5293
 msgid "Fading duration for screen labels of asterisms "
 msgstr "Tid för att dölja asterismetiketter"
 
-#: src/ui_viewDialog.h:5353
+#: src/ui_viewDialog.h:5300
 msgid "Fading duration for artwork of constellations "
 msgstr "Tid för att dölja stjärnbildsgrafik"
 
-#: src/ui_viewDialog.h:5356
+#: src/ui_viewDialog.h:5303
 msgid "Color of constellation names"
 msgstr "Stjärnbildsnamnens färg"
 
-#: src/ui_viewDialog.h:5359
+#: src/ui_viewDialog.h:5306
 msgid "Fading duration for area limits of constellations"
 msgstr "Tid för att dölja areagränser för stjärnbilder"
 
-#: src/ui_viewDialog.h:5365
+#: src/ui_viewDialog.h:5312
 msgid "Color of constellation lines"
 msgstr "Stjärnbildslinjernas färg"
 
-#: src/ui_viewDialog.h:5371
+#: src/ui_viewDialog.h:5318
 msgid "Click on star to show its constellation"
 msgstr "Klicka på en stjärna för att visa dess stjärnbild"
 
-#: src/ui_viewDialog.h:5376
+#: src/ui_viewDialog.h:5323
 msgid "Fading duration for zodiac lines"
 msgstr "Tid för att dölja zodiaken"
 
-#: src/ui_viewDialog.h:5379
+#: src/ui_viewDialog.h:5326
 msgid "Asterisms font size"
 msgstr "Teckenstorlek på asterismetiketter"
 
-#: src/ui_viewDialog.h:5385
+#: src/ui_viewDialog.h:5332
 msgid "Color of Lunar station lines"
 msgstr "Färg på månstationslinjer"
 
-#: src/ui_viewDialog.h:5389
+#: src/ui_viewDialog.h:5336
 msgid "Fading duration for lines of constellations"
 msgstr "Tid för att dölja stjärnbildslinjer"
 
-#: src/ui_viewDialog.h:5392
+#: src/ui_viewDialog.h:5339
 msgid "Fading duration for boundaries of constellations"
 msgstr "Tid för att dölja stjärnbildsgränser"
 
-#: src/ui_viewDialog.h:5394
+#: src/ui_viewDialog.h:5341
 msgid "Details and Appearance"
 msgstr "Detaljer och utseende"
 
-#: src/ui_viewDialog.h:5396
+#: src/ui_viewDialog.h:5343
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:851
 msgid "Current time"
 msgstr "Nuvarande tid"
 
-#: src/ui_viewDialog.h:5397
+#: src/ui_viewDialog.h:5344
 msgid "Minimum year"
 msgstr "Lägsta årtal"
 
-#: src/ui_viewDialog.h:5398
+#: src/ui_viewDialog.h:5345
 msgid "Maximum year"
 msgstr "Högsta årtal"
 
-#: src/ui_viewDialog.h:5399
+#: src/ui_viewDialog.h:5346
 msgid "Apply time interval limits to list"
 msgstr "Applicera tidsintervallgränser till lista"
 
-#: src/ui_viewDialog.h:5400
+#: src/ui_viewDialog.h:5347
 msgid "Selected culture start time:"
 msgstr "Vald kulturs starttid:"
 
-#: src/ui_viewDialog.h:5401 src/ui_viewDialog.h:5403
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:853
-msgid "0"
-msgstr "0"
-
-#: src/ui_viewDialog.h:5402
+#: src/ui_viewDialog.h:5348
 msgid "Selected culture end time:"
 msgstr "Vald kulturs sluttid:"
 
-#: src/ui_viewDialog.h:5404
+#: src/ui_viewDialog.h:5349
 msgid "Rotate the map according to the current location"
 msgstr "Rotera kartan enligt nuvarande position"
 
-#: src/ui_viewDialog.h:5405
+#: src/ui_viewDialog.h:5351
 msgid "Enter Culture..."
 msgstr "Välj kultur..."
 
-#: src/ui_viewDialog.h:5407
+#: src/ui_viewDialog.h:5352
 msgid "Exploration and Selection"
 msgstr "Utforskning och selektering"
 
-#: src/ui_viewDialog.h:5408 src/ui_viewDialog.h:5409
+#: src/ui_viewDialog.h:5353
 msgid "Filter"
 msgstr "Filter"
 
@@ -32908,6 +32903,10 @@ msgstr "sluttid"
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:852
 msgid "Number of digitized polygons:"
 msgstr "Antal utritade polygoner:"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:853
+msgid "0"
+msgstr "0"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:854
 msgid "Start time of the culture:"
