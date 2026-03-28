@@ -69,7 +69,8 @@ enum class RegionType
 	AUSTRALASIA,
 	MELANESIA,
 	MICRONESIA,
-	POLYNESIA
+	POLYNESIA,
+	OTHER
 };
 
 //! Map of region types to their corresponding name and description
@@ -99,7 +100,8 @@ const std::map<RegionType, Region> REGIONS = {
 	{RegionType::AUSTRALASIA, Region("Australasia", "")},
 	{RegionType::MELANESIA, Region("Melanesia", "")},
 	{RegionType::MICRONESIA, Region("Micronesia", "")},
-	{RegionType::POLYNESIA, Region("Polynesia", "")}
+	{RegionType::POLYNESIA, Region("Polynesia", "")},
+	{RegionType::OTHER, Region("Other", "Use this region for skycultures not located on our earth (e.g. ficitonal earth). You can edit the file manually later and specify the region as you like.")}
 };
 
 } // namespace scm
