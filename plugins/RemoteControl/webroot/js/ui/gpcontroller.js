@@ -230,12 +230,17 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						"search_ring_nebula": "Center on Ring Nebula (M57)",
 						"search_hercules_cluster": "Center on Star Cluster in Hercules (M13)",
 
-						// === PLANETS ===
+						// === SOLAR SYSTEM OBJECTS ===
+						"search_sun": "Center on Sun",
+						"search_moon": "Center on Moon",
+						"search_mercury": "Center on Mercury",
+						"search_venus": "Center on Venus",
+						"search_mars": "Center on Mars",
 						"search_jupiter": "Center on Jupiter",
 						"search_saturn": "Center on Saturn",
-						"search_mars": "Center on Mars",
-						"search_venus": "Center on Venus",
-						"search_mercury": "Center on Mercury",
+						"search_uranus": "Center on Uranus",
+						"search_neptune": "Center on Neptune",
+						"search_pluto": "Center on Pluto",
 
 						// === CONSTELLATION HIGHLIGHTS ===
 						// These actions isolate and highlight ONLY the selected constellation
@@ -452,8 +457,10 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 								"search_ring_nebula", "search_hercules_cluster"
 						],
 						
-						"Educational: Planets": [
-								"search_jupiter", "search_saturn", "search_mars", "search_venus", "search_mercury"
+						"Educational: Solar System": [
+								"search_sun", "search_moon", "search_mercury", "search_venus",
+								"search_mars", "search_jupiter", "search_saturn",
+								"search_uranus", "search_neptune", "search_pluto"
 						],
 						
 						"Educational: Constellation Highlights": [
