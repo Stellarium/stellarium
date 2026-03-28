@@ -145,6 +145,7 @@ void ViewDialog::retranslate()
 		ui->retranslateUi(dialog);
 		updateZhrDescription(StelApp::getInstance().getModule("SporadicMeteorMgr")->property("zhr").toInt());
 		populateLists();
+		ui->skyCultureMapGraphicsView->translatePolygons();
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
@@ -1489,7 +1490,6 @@ void ViewDialog::populateLists()
 	// find the earliest beginTime of all cultures (needed in initSkyCultureTime)
 	// ---> evaluate it here so we don't need to iterate over all cultures multiple times
 	int globalBeginTime = QDateTime::currentDateTime().date().year();
-
 	for (auto cultureRegionIt = std::prev(cultureRegionMap.cend()), end = std::prev(cultureRegionMap.cbegin()); cultureRegionIt != end; cultureRegionIt--)
 	{
 		QListWidgetItem* item = new QListWidgetItem(cultureRegionIt.key());
@@ -1500,15 +1500,15 @@ void ViewDialog::populateLists()
 		{
 			globalBeginTime = cultureTimeLimitMap.value(cultureRegionIt.key()).first;
 		}
-		if (l->findItems(q_(cultureRegionIt.value()), Qt::MatchContains).empty())
+		if (l->findItems("⸻ " + q_(cultureRegionIt.value()) + " ⸻", Qt::MatchExactly).empty())
 		{
 			// region is unknown (non UN-geoscheme), insert item under "other" separator
-			l->insertItem(l->row(l->findItems(q_("Other"), Qt::MatchContains).at(0)) + 1, item);
+			l->insertItem(l->row(l->findItems("⸻ " + q_("Other") + " ⸻", Qt::MatchExactly).at(0)) + 1, item);
 		}
 		else
 		{
 			// insert item under respective region separator
-			l->insertItem(l->row(l->findItems(q_(cultureRegionIt.value()), Qt::MatchContains).at(0)) + 1, item);
+			l->insertItem(l->row(l->findItems("⸻ " + q_(cultureRegionIt.value()) + " ⸻", Qt::MatchExactly).at(0)) + 1, item);
 		}
 	}
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalBeginTime);

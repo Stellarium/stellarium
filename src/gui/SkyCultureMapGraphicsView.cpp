@@ -149,7 +149,8 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 					geometry << QPointF(pointArray[0].toDouble(), pointArray[1].toDouble());
 				}
 
-				SkyCulturePolygonItem *item = new SkyCulturePolygonItem(cultureIdToTranslationMap.value(currentCulture), beginTime, endTime);
+				SkyCulturePolygonItem *item = new SkyCulturePolygonItem(currentCulture, beginTime, endTime);
+				item->setToolTip(cultureIdToTranslationMap.value(currentCulture));
 				item->setPolygon(convertLatLonToMeter(geometry));
 				scene()->addItem(item);
 			}
@@ -295,7 +296,7 @@ void SkyCultureMapGraphicsView::mouseReleaseEvent( QMouseEvent *e )
 			{
 				// if so, select all polygons of the respective culture, emit the cultureSelected Signal and set the oldSkyCulture to currentSkyCulture
 				selectAllCulturePolygon(currentSkyCulture);
-				emit cultureSelected(currentSkyCulture);
+				emit cultureSelected(scPolyItem->toolTip());
 			}
 		}
 	}
@@ -404,8 +405,9 @@ void SkyCultureMapGraphicsView::selectAllCulturePolygon(const QString &skyCultur
 	oldSkyCulture = skyCultureId;
 }
 
-void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int beginTime)
+void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureName, int beginTime)
 {
+	QString skyCultureId = "";
 	QList<QGraphicsItem *> currentTimeItems = QList<QGraphicsItem *>();
 	QList<QGraphicsItem *> beginTimeItems = QList<QGraphicsItem *>();
 
@@ -419,8 +421,9 @@ void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int b
 			continue;
 		}
 
-		if(skyCultureId == scPolyItem->getSkyCultureId())
+		if(skyCultureName == scPolyItem->toolTip())
 		{
+			skyCultureId = scPolyItem->getSkyCultureId();
 			if (scPolyItem->existsAtPointInTime(currentYear))
 			{
 				currentTimeItems.append(item);
@@ -443,10 +446,21 @@ void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int b
 		smoothFitInView(calculateBoundingBox(beginTimeItems));
 		emit timeValueChanged(beginTime);
 	}
-	else
+}
+
+void SkyCultureMapGraphicsView::translatePolygons()
+{
+	StelApp& app = StelApp::getInstance();
+	QMap<QString, QString> cultureIdToTranslationMap = app.getSkyCultureMgr().getDirToI18Map();
+	const auto itemList = scene()->items();
+	for(const auto &item : itemList)
 	{
-		qInfo() << "couldn't find any polygon with name [" << skyCultureId << "]!";
-		return;
+		SkyCulturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyCulturePolygonItem *>(item);
+		if(!scPolyItem)
+		{
+			continue;
+		}
+		scPolyItem->setToolTip(cultureIdToTranslationMap.value(scPolyItem->getSkyCultureId()));
 	}
 }
 
