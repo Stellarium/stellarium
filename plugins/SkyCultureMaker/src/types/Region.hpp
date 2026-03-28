@@ -101,7 +101,7 @@ const std::map<RegionType, Region> REGIONS = {
 	{RegionType::MELANESIA, Region("Melanesia", "")},
 	{RegionType::MICRONESIA, Region("Micronesia", "")},
 	{RegionType::POLYNESIA, Region("Polynesia", "")},
-	{RegionType::OTHER, Region("Other", "Use this region for skycultures not located on our earth (e.g. ficitonal earth). You can edit the file manually later and specify the region as you like.")}
+	{RegionType::OTHER, Region("Other", "Use this region for skycultures not located on our earth (e.g. fictional earth). You can edit the file manually later and specify the region as you like.")}
 };
 
 } // namespace scm
