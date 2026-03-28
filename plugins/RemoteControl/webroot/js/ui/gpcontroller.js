@@ -228,7 +228,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						"search_orion_nebula": "Center on Orion Nebula (M42)",
 						"search_pleiades": "Center on Pleiades (M45)",
 						"search_ring_nebula": "Center on Ring Nebula (M57)",
-						"search_hercules_cluster": "Center on Hercules Cluster (M13)",
+						"search_hercules_cluster": "Center on Star Cluster in Hercules (M13)",
 
 						// === PLANETS ===
 						"search_jupiter": "Center on Jupiter",
@@ -1054,8 +1054,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
          * Handles search actions for celestial objects
          */
         GamepadDevice.prototype.handleSearchAction = function(searchTerm) {
-            searchTerm = searchTerm.replace(/_/g, ' ');
-            searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+					 // Special case for M13/Hercules Cluster
+						if (searchTerm === "hercules_cluster") {
+								searchTerm = "M13";
+						} else {
+								searchTerm = searchTerm.replace(/_/g, ' ');
+								searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+						}
             
             if (searchApi && typeof searchApi.selectObjectByName === 'function') {
                 var mode = $("#select_SelectionMode").val() || "center";
@@ -1403,7 +1408,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						if (this.index === activeDeviceIndex) {
 								updateStickPreview("left", leftX, leftY);
 								updateStickPreview("right", rightX, rightY);
-								updateLiveInputDisplay();  // <-- أضف هذا السطر
+								updateLiveInputDisplay();
 						}
         };
 
