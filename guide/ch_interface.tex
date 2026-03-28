@@ -955,7 +955,17 @@ broadcasting! See section~\ref{sec:skycultures:licenses} for details.}}}
 \end{figure}
 
 The Sky Culture tab of the View window (Fig.~\ref{fig:gui:view:skyculture})
-controls which culture's constellations and bright star names will be
+provides two sub-tabs\newFeature{26.1}:
+\begin{description}
+\item[Details and Appearance] provides textual information about the currently selected skyculture, 
+and user interface elements to fine-tune the display of available data.
+\item[Exploration and Selection] provides a list of available skycultures, sorted into blocks of geographic regions, 
+together with a world map on which the available cultures are displayed\footnote{As of version 26.1 this is a new feature, and only Norse (Edda) so far has the polygons available.}. 
+Clicking on a polygon will select the respective skyculture.
+\end{description}
+
+On the tab ``Details and Appearance``, you find numerous
+controls to configure how the current culture's constellations and bright star names will be
 used in the main display.  Some cultures have constellation art (e.g.,
 Modern or Inuit), and the rest do not. Configurable options include
 \begin{description}
@@ -975,7 +985,7 @@ in the skyculture's original (\emph{native}) language. If such a culture uses no
 non-native users need a \emph{transliteration} that also helps pronunciation, which even depends on user language. 
 Then there are \emph{scientific transliteration} systems for some cases. 
 Finally, a pronunciation aid can be given using the \emph{International Phonetic Alphabet} (IPA).
-And, for reference, you may want to add the commonly used \emph{modern} name to an object. 
+And, after the actual \emph{translation}, for reference, you may want to add the commonly used \emph{modern} name to an object like star or planet. 
 
 There are two sets of settings, for the screen label and for the label used in the information area in the top-left. 
 The currently configured settings are immediately stored per-skyculture and retrieved when you load another skyculture, 
@@ -983,7 +993,7 @@ so that you can adapt the system to your knowledge of languages and character sy
 
 \item[Abbreviated names] To provide a less cluttered screen in case constellation names are long, you can show abbreviations. 
 The Modern skycultures use the 3-letter codes given by the IAU, for the other skycultures we depend on our skyculture authors 
-to define unique short labels that help memorizing. Some skycultures still just show numbers.
+to define unique short labels that help memorizing. Some skycultures still just show legacy numbers.
  
 \item[Select single constellation/Isolated] See section~\ref{sec:skyculture:singleConstellations} for details.
 \item[Constellation labels] Activate display of constellation labels, like
