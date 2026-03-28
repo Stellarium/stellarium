@@ -195,7 +195,7 @@ void ScmSkyCultureDialog::createDialogContent()
 	for (const auto &region : scm::REGIONS)
 	{
 		// add name, region type
-		ui->regionCB->addItem(region.second.name, QVariant::fromValue(region.first));
+		ui->regionCB->addItem(q_(region.second.name), QVariant::fromValue(region.first));
 		// set the region description as tooltip
 		int index = ui->regionCB->count() - 1;
 		ui->regionCB->setItemData(index, region.second.description, Qt::ToolTipRole);
