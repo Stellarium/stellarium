@@ -1463,14 +1463,16 @@ void ViewDialog::populateLists()
 	// remove duplicates in list of occuring regions (optional)
 	QList<QString> occuringRegions = cultureRegionMap.values();
 	std::sort(occuringRegions.begin(), occuringRegions.end());
-	occuringRegions.erase(std::unique(occuringRegions.begin(), occuringRegions.end()));
+	occuringRegions.resize(std::distance(occuringRegions.begin(), std::unique(occuringRegions.begin(), occuringRegions.end())));
 
 	QStringList sortedOccuringRegions;
+	int occuringRegionsCounter = 0;
 	for (const auto& region : sortedRegions)
 	{
 		if (occuringRegions.contains(region))
 		{
 			sortedOccuringRegions.append(region);
+			occuringRegionsCounter++;
 		}
 	}
 
@@ -1478,6 +1480,10 @@ void ViewDialog::populateLists()
 	for (const auto &region : sortedOccuringRegions)
 	{
 		l->addItem(new SeparatorListWidgetItem(region));
+	}
+	if (occuringRegions.size() > occuringRegionsCounter)
+	{
+		l->addItem(new SeparatorListWidgetItem("Other"));
 	}
 
 	// find the earliest beginTime of all cultures (needed in initSkyCultureTime)
@@ -1494,8 +1500,16 @@ void ViewDialog::populateLists()
 		{
 			globalBeginTime = cultureTimeLimitMap.value(cultureRegionIt.key()).first;
 		}
-
-		l->insertItem(l->row(l->findItems(cultureRegionIt.value(), Qt::MatchContains).at(0)) + 1, item);
+		if (l->findItems(cultureRegionIt.value(), Qt::MatchContains).empty())
+		{
+			// region is unknown (non UN-geoscheme), insert item under "other" separator
+			l->insertItem(l->row(l->findItems("Other", Qt::MatchContains).at(0)) + 1, item);
+		}
+		else
+		{
+			// insert item under respective region separator
+			l->insertItem(l->row(l->findItems(cultureRegionIt.value(), Qt::MatchContains).at(0)) + 1, item);
+		}
 	}
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalBeginTime);
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
