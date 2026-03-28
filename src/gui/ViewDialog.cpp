@@ -1477,7 +1477,7 @@ void ViewDialog::populateLists()
 	// add regions to list as custom QListWidgetItem
 	for (const auto &region : sortedOccuringRegions)
 	{
-		l->addItem(new SeparatorListWidgetItem(region));
+		l->addItem(new SeparatorListWidgetItem(q_(region)));
 	}
 
 	// find the earliest beginTime of all cultures (needed in initSkyCultureTime)
@@ -1495,7 +1495,7 @@ void ViewDialog::populateLists()
 			globalBeginTime = cultureTimeLimitMap.value(cultureRegionIt.key()).first;
 		}
 
-		l->insertItem(l->row(l->findItems(cultureRegionIt.value(), Qt::MatchContains).at(0)) + 1, item);
+		l->insertItem(l->row(l->findItems(q_(cultureRegionIt.value()), Qt::MatchContains).at(0)) + 1, item);
 	}
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalBeginTime);
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
