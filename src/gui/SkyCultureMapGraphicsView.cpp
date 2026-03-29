@@ -96,7 +96,7 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 	for (const auto &currentCulture : cultureIds)
 	{
 		// find path of file
-		const QString filePath = StelFileMgr::findFile("skyCultures/" + currentCulture + "/territory.geojson");
+		const QString filePath = StelFileMgr::findFile("skycultures/" + currentCulture + "/territory.geojson");
 		if (filePath.isEmpty())
 		{
 			// There is just no point to emit a warning in V26.1.
