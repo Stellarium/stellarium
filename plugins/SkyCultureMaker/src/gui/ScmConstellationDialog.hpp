@@ -86,6 +86,8 @@ private:
 	std::optional<QString> constellationNativeName;
 	/// Pronunciation of the constellation
 	std::optional<QString> constellationPronounce;
+	/// Transliteration representation of the constellation
+	std::optional<QString> constellationTransliteration;
 	/// IPA representation of the constellation
 	std::optional<QString> constellationIPA;
 	/// The currently displayed artwork

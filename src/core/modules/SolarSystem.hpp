@@ -74,6 +74,9 @@ class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 	Q_PROPERTY(bool flagShowObjSelfShadows		READ getFlagShowObjSelfShadows		WRITE setFlagShowObjSelfShadows		NOTIFY flagShowObjSelfShadowsChanged)
 	Q_PROPERTY(bool flagMoonScale			READ getFlagMoonScale			WRITE setFlagMoonScale			NOTIFY flagMoonScaleChanged)
 	Q_PROPERTY(double moonScale			READ getMoonScale			WRITE setMoonScale			NOTIFY moonScaleChanged)
+	Q_PROPERTY(bool flagDynamicMoonScale		READ getFlagDynamicMoonScale		WRITE setFlagDynamicMoonScale		NOTIFY flagDynamicMoonScaleChanged)
+	Q_PROPERTY(double moonScaleMinFov		READ getMoonScaleMinFov			WRITE setMoonScaleMinFov		NOTIFY moonScaleMinFovChanged)
+	Q_PROPERTY(double moonScaleMaxFov		READ getMoonScaleMaxFov			WRITE setMoonScaleMaxFov		NOTIFY moonScaleMaxFovChanged)
 	Q_PROPERTY(bool flagMinorBodyScale		READ getFlagMinorBodyScale		WRITE setFlagMinorBodyScale		NOTIFY flagMinorBodyScaleChanged)
 	Q_PROPERTY(double minorBodyScale		READ getMinorBodyScale			WRITE setMinorBodyScale			NOTIFY minorBodyScaleChanged)
 	Q_PROPERTY(bool flagPlanetScale			READ getFlagPlanetScale			WRITE setFlagPlanetScale		NOTIFY flagPlanetScaleChanged)
@@ -204,9 +207,9 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
-	QStringList listAllObjects(bool inEnglish) const override;
-	QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjectsByType(const QString& objType, bool inEnglish) const override;
 	QString getName() const override { return "Solar System"; }
 	QString getStelObjectType() const override { return Planet::PLANET_TYPE; }
 
@@ -584,6 +587,21 @@ public slots:
 	//! Get the display scaling factor for Earth's moon.
 	double getMoonScale(void) const {return moonScale;}
 
+	//! Set whether dynamic FOV-based Moon scaling is active.
+	void setFlagDynamicMoonScale(bool b);
+	//! Get whether dynamic FOV-based Moon scaling is active.
+	bool getFlagDynamicMoonScale(void) const {return flagDynamicMoonScale;}
+
+	//! Set the FOV (degrees) below which the Moon is drawn at 1× (natural) size.
+	void setMoonScaleMinFov(double deg);
+	//! Get the minimum FOV for dynamic Moon scaling (scale = 1× here and below).
+	double getMoonScaleMinFov(void) const {return moonScaleMinFov;}
+
+	//! Set the FOV (degrees) at which the Moon reaches the configured moonScale value.
+	void setMoonScaleMaxFov(double deg);
+	//! Get the maximum FOV for dynamic Moon scaling (scale = moonScale here and above).
+	double getMoonScaleMaxFov(void) const {return moonScaleMaxFov;}
+
 	//! Set flag which determines if minor bodies (everything except the 8 planets) are drawn scaled or not.
 	void setFlagMinorBodyScale(bool b);
 	//! Get the current value of the flag which determines if minor bodies (everything except the 8 planets) are drawn scaled or not.
@@ -814,6 +832,9 @@ signals:
 	void flagShowObjSelfShadowsChanged(bool b);
 	void flagMoonScaleChanged(bool b);
 	void moonScaleChanged(double f);
+	void flagDynamicMoonScaleChanged(bool b);
+	void moonScaleMinFovChanged(double deg);
+	void moonScaleMaxFovChanged(double deg);
 	void flagMinorBodyScaleChanged(bool b);
 	void minorBodyScaleChanged(double f);
 	void flagPlanetScaleChanged(bool b);
@@ -1125,6 +1146,9 @@ private:
 	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
 	bool flagMoonScale;
 	double moonScale;
+	bool flagDynamicMoonScale;   //!< If true, Moon scale is computed dynamically from FOV instead of using a fixed multiplier.
+	double moonScaleMinFov;      //!< FOV (degrees) at and below which dynamic Moon scale equals 1× (natural size).
+	double moonScaleMaxFov;      //!< FOV (degrees) at and above which dynamic Moon scale equals moonScale.
 	bool flagMinorBodyScale;
 	double minorBodyScale;
 	bool flagPlanetScale;

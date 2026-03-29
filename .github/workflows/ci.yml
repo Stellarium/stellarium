@@ -74,7 +74,7 @@ jobs:
                             qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
                             libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin \
                             libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev \
-                            libgps-dev libmd4c-dev libmd4c-html0-dev cmake gettext libgettextpo-dev libtidy-dev libunarr-dev \
+                            libgps-dev libmd4c-dev libmd4c-html0-dev cmake gettext libgettextpo-dev libtidy-dev libunarr-dev qt6-svg-dev libqt6svgwidgets6 \
                             libqt6texttospeech6 qt6-speech-dev qt6-speech-speechd-plugin qt6-speech-flite-plugin \
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
@@ -119,7 +119,7 @@ jobs:
         sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins \
                             qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev \
                             libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev \
-                            zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev libmd4c-dev libmd4c-html0-dev \
+                            zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev libmd4c-dev libmd4c-html0-dev qt6-svg-dev libqt6svgwidgets6 \
                             libqt6texttospeech6 qt6-speech-dev qt6-speech-speechd-plugin qt6-speech-flite-plugin \
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
@@ -138,49 +138,6 @@ jobs:
               -DUSE_PLUGIN_OCULARS=Off -DUSE_PLUGIN_ONLINEQUERIES=Off -DUSE_PLUGIN_POINTERCOORDINATES=Off -DUSE_PLUGIN_PULSARS=Off -DUSE_PLUGIN_QUASARS=Off \
               -DUSE_PLUGIN_REMOTECONTROL=Off -DUSE_PLUGIN_REMOTESYNC=Off -DUSE_PLUGIN_SATELLITES=Off -DUSE_PLUGIN_SCENERY3D=Off -DUSE_PLUGIN_SOLARSYSTEMEDITOR=Off \
               -DUSE_PLUGIN_SUPERNOVAE=Off -DUSE_PLUGIN_TELESCOPECONTROL=Off -DUSE_PLUGIN_TEXTUSERINTERFACE=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off \
-              "${{ github.workspace }}"
-
-    - name: Compile
-      working-directory: build
-      run: make -j ${{env.parallel_processes}}
-
-    - name: Run unit tests
-      uses: coactions/setup-xvfb@v1
-      with:
-        working-directory: build
-        run: ctest --output-on-failure
-
-  # CI on macOS (Qt5)
-  ci-macos-qt5:
-    name: "macOS (x86_64; qt5)"
-    runs-on: macos-15-intel
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
-
-    # @TODO Enable gpsd on macOS instance for CI testing
-    # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
-    steps:
-    - name: Install dependencies
-      env:
-        HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
-        HOMEBREW_NO_AUTO_UPDATE: 1
-      run: |
-        # brew update
-        # brew upgrade
-        brew install qt@5 nlopt exiv2
-
-    - name: Checkout repository
-      uses: actions/checkout@v5
-
-    - name: Configure CMake
-      shell: bash
-      run: |
-        export PATH="/usr/local/opt/qt@5/bin:$PATH"
-        mkdir -p build
-        cd build
-        cmake -DCMAKE_PREFIX_PATH="/usr/local" \
-              -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-              -DSTELLARIUM_RELEASE_BUILD=Off \
-              -DENABLE_TESTING=On \
               "${{ github.workspace }}"
 
     - name: Compile

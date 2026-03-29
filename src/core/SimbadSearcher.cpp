@@ -163,8 +163,7 @@ void SimbadLookupReply::httpQueryFinished()
 					}
 					line.replace("NAME " ,"");
 					QString objectName = line.simplified();
-					resultPositions[objectName] = v;
-					objectTypes[objectName] = objectType;
+					results.insert({objectName, v, objectType});
 				}
 				line = reply->readLine();
 				line.chop(1); // Remove a line break at the end
@@ -186,7 +185,7 @@ QString SimbadLookupReply::getCurrentStatusString() const
 		case SimbadLookupErrorOccured:
 			return q_("Error");
 		case SimbadLookupFinished:
-			return resultPositions.isEmpty() ? q_("Not found") : q_("Found");
+			return results.empty() ? q_("Not found") : q_("Found");
 		case SimbadCoordinateLookupFinished:
 			return cooResult.isEmpty() ? q_("Not found") : q_("Found");
 	}

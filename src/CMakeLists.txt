@@ -330,6 +330,12 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/Dialog.cpp
           gui/MapWidget.hpp
           gui/MapWidget.cpp
+          gui/SkyCultureMapGraphicsView.hpp
+          gui/SkyCultureMapGraphicsView.cpp
+          gui/SkyCulturePolygonItem.hpp
+          gui/SkyCulturePolygonItem.cpp
+          gui/SeparatorListWidgetItem.hpp
+          gui/SeparatorListWidgetItem.cpp
           gui/AngleSpinBox.hpp
           gui/AngleSpinBox.cpp
           gui/LocationDialog.hpp
@@ -503,7 +509,13 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 # Setup Qt5/6 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Positioning)
+SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Positioning)
+
+IF(Qt6_FOUND)
+# Qt6 needs SvgWidgets, for Qt5 it's included in Svg
+     LIST(APPEND STELLARIUM_QT_LIBRARIES Qt6::SvgWidgets)
+ENDIF()
+
 IF(NOT USE_BUNDLED_QTCOMPRESS)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::GuiPrivate)
 ELSE()
@@ -659,14 +671,15 @@ IF(WIN32)
      ENDIF()
 
      IF(STELLARIUM_BUILD_ARM64)
-          cmake_path(APPEND QT_PATHS ${QT6_INSTALL_PREFIX} "bin" "qtpaths.bat")
+          #cmake_path(APPEND QT_PATHS ${QT6_INSTALL_PREFIX} "bin" "qtpaths.bat")
+          FIND_PROGRAM(QT_PATHS qtpaths.bat HINTS "${_qt_bin_dir}")
      ENDIF()
      IF(QT_PATHS)
           SET(_qt_paths "--qtpaths \"${QT_PATHS}\"")
      ELSE()
           SET(_qt_paths "")
      ENDIF()
-
+     
      INSTALL(CODE
 	  "
 	  EXECUTE_PROCESS(
@@ -692,14 +705,17 @@ IF(WIN32)
 		    COMMAND \"${WINDEPLOYQT_COMMAND}\"
 			 --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
 			 --no-translations
+			 --verbose 1
 			 ${VIRTUAL_KBD_SETTING}
+			 ${_qt_paths}
 			 --compiler-runtime
 			 \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
 		    WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
 		    OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.log\"
 		    ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.err\"
 	       )
-	  "
+               MESSAGE(STATUS \"Running windeployqt for mainlib...\")
+          "
      )
      ENDIF()
      # workaround for https://bugreports.qt.io/browse/QTBUG-105984

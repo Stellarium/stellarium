@@ -116,7 +116,7 @@ ELSE()
      SET(ISS_MIN_WIN_VERSION "6.1")
 ENDIF()
 # Define required version for MSVC
-# Details: https://docs.microsoft.com/ru-ru/windows/win32/winprog/using-the-windows-headers
+# Details: https://docs.microsoft.com/en-us/windows/win32/winprog/using-the-windows-headers
 IF(Qt6_FOUND)
      SET(MIN_WIN_VERSION "0x0A00")
 ELSE()
@@ -221,7 +221,7 @@ ENDIF()
 
 # Add ASan (AddressSanitizer) build options if necessary
 # Details: https://github.com/google/sanitizers/wiki/AddressSanitizer
-#          https://docs.microsoft.com/ru-ru/cpp/build/reference/fsanitize?view=msvc-150
+#          https://docs.microsoft.com/en-us/cpp/build/reference/fsanitize?view=msvc-150
 IF(${CMAKE_BUILD_TYPE} MATCHES "ASan")
      IF(MSVC)
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /fsanitize=address")
@@ -241,7 +241,7 @@ ENDIF()
 
 # Add Fuzzer (Fuzzer Sanitizer) build options if necessary
 # Details: https://llvm.org/docs/LibFuzzer.html
-#          https://docs.microsoft.com/ru-ru/cpp/build/reference/fsanitize?view=msvc-150
+#          https://docs.microsoft.com/en-us/cpp/build/reference/fsanitize?view=msvc-150
 IF(${CMAKE_BUILD_TYPE} MATCHES "Fuzzer")
      IF(MSVC)
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /fsanitize=fuzzer")
@@ -451,7 +451,7 @@ ENDIF()
 IF(WIN32)
      # On AMD64 systems it should be enough to just not set this variable.
      # To cross-compile, call with cmake -DSTELLARIUM_BUILD_ARM64
-     IF(${CMAKE_SYSTEM_PROCESSOR} MATCHES "ARM64") # for Surface etc.
+     IF(CMAKE_SYSTEM_PROCESSOR STREQUAL "ARM64") # for Surface etc.
           SET(STELLARIUM_BUILD_ARM64 1 CACHE BOOL "Build for Windows on ARM")
      ENDIF()
 
@@ -590,6 +590,7 @@ ADD_PLUGIN(LensDistortionEstimator 1)
 # Candidate to removing as an archaic plugin
 ADD_PLUGIN(TextUserInterface 1)
 ADD_PLUGIN(TelescopeControl 1)
+ADD_PLUGIN(TimeNavigator 1)
 ADD_PLUGIN(Vts 0)
 
 ########## Static plugins need to define includes and libraries
@@ -614,8 +615,12 @@ IF(${QT_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
 ELSE()
      MESSAGE(STATUS "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found suitable version ${QT_VERSION})")
 ENDIF()
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS
-     Concurrent Gui Network Widgets Charts Positioning)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Concurrent Gui Network Widgets Charts Positioning)
+IF(Qt6_FOUND)
+     FIND_PACKAGE(Qt6 REQUIRED COMPONENTS SvgWidgets)
+ELSEIF(Qt5_FOUND)
+     FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Svg)
+ENDIF()
 SET(USE_BUNDLED_QTCOMPRESS 1 CACHE BOOL "Use bundled version of qtcompress")
 # Qt 6.10 split off FooPrivate from Foo.
 # https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.10.0/release-note.md
@@ -841,9 +846,8 @@ IF(ENABLE_XLSX)
           MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
      ELSE()
           CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
-#               URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.5.0.tar.gz
-#               URL_HASH SHA256=4461bb0fc9b88b6a970520e8b32eb7d2fc391a1a5c326b139a0af836278cdb09
-               URL https://github.com/QtExcel/QXlsx/archive/refs/heads/master.zip
+               URL https://github.com/QtExcel/QXlsx/archive/9f545935a1effa0144ba76598e95a7597210553a.zip
+               URL_HASH SHA256=27dad1aa0e477b43990f6cbbfb30988f417a6f3629c880c397574ae17bfb4b34
                EXCLUDE_FROM_ALL ON
                SOURCE_SUBDIR QXlsx)
      ENDIF()
@@ -880,6 +884,11 @@ IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
      ADD_DEFINITIONS(-DINSTALL_DATADIR_FOR_DEBUG="${CMAKE_SOURCE_DIR}")
      ADD_DEFINITIONS(-DINSTALL_LOCALEDIR_FOR_DEBUG="${CMAKE_SOURCE_DIR}")
 ENDIF()
+
+# Keep this for testing until AppVeyor plays nice (Qt6.10) with arm64.
+#IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
+#     MESSAGE(STATUS "This is an ARM64 build message outside a WIN32 clause.")
+#ENDIF()
 
 IF(WIN32)
      #######################################################
@@ -922,6 +931,7 @@ IF(WIN32)
      #######################################################
 
      IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
+          #MESSAGE(STATUS "This is an ARM64 build message inside a WIN32 clause.")
           SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on arm64:\nArchitecturesAllowed=arm64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=arm64")
           SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-arm64")
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
@@ -929,6 +939,9 @@ IF(WIN32)
           SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win32")
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
           SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
+          # Prepare for InnoSetup 6.3+: Set to x64compatible, which allows to install to arm64 in emulation mode even though we have our own arm64 build.
+          # Currently AppVeyor has InnoSetup 6.2 only. Keep for later.
+          #SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64compatible\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64compatible")
           SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win64")
      ENDIF()
      SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")

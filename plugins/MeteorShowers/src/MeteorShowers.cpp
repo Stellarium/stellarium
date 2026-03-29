@@ -88,10 +88,10 @@ void MeteorShowers::drawPointer(StelCore* core)
 	const float size = (20.f + 10.f * sinf(2.f * static_cast<float>(StelApp::getInstance().getTotalRunTime()))) * scale;
 	const float radius = 10 * scale;
 	const float x = screenpos[0], y = screenpos[1];
-	painter.drawSprite2dMode(x-size/2, y-size/2, radius, 90);
-	painter.drawSprite2dMode(x-size/2, y+size/2, radius, 0);
-	painter.drawSprite2dMode(x+size/2, y+size/2, radius, -90);
-	painter.drawSprite2dMode(x+size/2, y-size/2, radius, -180);
+	painter.drawSprite2dModeNoDeviceScale(x-size/2, y-size/2, radius, 90);
+	painter.drawSprite2dModeNoDeviceScale(x-size/2, y+size/2, radius, 0);
+	painter.drawSprite2dModeNoDeviceScale(x+size/2, y+size/2, radius, -90);
+	painter.drawSprite2dModeNoDeviceScale(x+size/2, y-size/2, radius, -180);
 	painter.setColor(1, 1, 1, 0);
 }
 
@@ -247,9 +247,9 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList MeteorShowers::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> MeteorShowers::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (!m_mgr->getEnablePlugin())
 		return result;
 
@@ -257,14 +257,14 @@ QStringList MeteorShowers::listAllObjects(bool inEnglish) const
 	{
 		for (const auto& ms : m_meteorShowers)
 		{
-			result.append(ms->getEnglishName());
+			result.append({ms->getEnglishName(), StelObjectP(ms)});
 		}
 	}
 	else
 	{
 		for (const auto& ms : m_meteorShowers)
 		{
-			result.append(ms->getNameI18n());
+			result.append({ms->getNameI18n(), StelObjectP(ms)});
 		}
 	}
 	return result;

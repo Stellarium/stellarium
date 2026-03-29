@@ -75,8 +75,18 @@ private slots:
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
+	void updateSkyCultureTimeValue(int year);
+	void changeMinTime(int minYear);
+	void changeMaxTime(int maxYear);
+	void updateSkyCultureTimeRange(int minYear, int maxYear);
+	void filterSkyCultures();
+	void initiateSkyCultureMapRotation();
+	void updateSkyCultureGUI();
 
+	void gridSpacingChanged(int index);
+	void updateGridSpacingComboBox();
 	void showAddRemoveLandscapesDialog();
+	
 	// GZ I make this public to have it on a hotkey...
 public slots:
 	void showAtmosphereDialog();
@@ -118,6 +128,7 @@ private slots:
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
+	void initSkyCultureTime();
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
@@ -139,6 +150,22 @@ private:
 	QHash<QString/*planet English name*/, PlanetSurveyPack> planetarySurveys;
 	QHash<QString/*survey URL*/, QTreeWidgetItem*> surveysInTheList;
 	QString selectedSurveyType;
+
+	// list of special characters and their 'normal' counterpart for filtering (skycultures / the culturesListWidget)ĀA
+	// (when a new special character is added to 'specialCharString', 'normalCharList' must also be expanded)
+	const QString specialCharString = "ŠŒŽšœžŸ¥µÀÁÂÃĀÄÅĂẠÆÇÈÉÊËĒÌÍÎÏIĪÐÑŃÒÓÔÕÖØÙÚÛÜŪŮÝßàáâãāäåăạæçèéêëēìíîïıīðñńòóôõöøùúûüūůýÿ";
+	const QStringList normalCharList = QStringList({"S", "OE", "Z", "s", "oe", "z", "Y", "Y", "u", "A", "A", "A", "A", "A", "A", "A", "A", "A",
+										"AE", "C", "E", "E", "E", "E", "E", "I", "I", "I", "I", "I", "I", "D", "N", "N", "O", "O", "O", "O", "O", "O",
+										"U", "U", "U", "U", "U", "U", "Y", "s", "a", "a", "a", "a", "a", "a", "a", "a", "a", "ae", "c", "e", "e", "e", "e", "e",
+										"i", "i", "i", "i", "i", "i", "d", "n", "n", "o", "o", "o", "o", "o", "o", "u", "u", "u", "u", "u", "u", "y", "y"});
+	// hard coded sequence of UN-regions to maintain thematic proximity (e.g. eastern, northern, southern, western europe)
+	const QStringList sortedRegions =
+		{"World",
+		 "Eastern Europe", "Northern Europe", "Southern Europe", "Western Europe",
+		 "Eastern Africa", "Middle Africa", "Northern Africa", "Southern Africa", "Western Africa",
+		 "Caribbean", "Central America", "Northern America", "South America",
+		 "Central Asia", "Eastern Asia", "South-eastern Asia", "Southern Asia", "Western Asia",
+		 "Australasia", "Melanesia", "Micronesia", "Polynesia"};
 };
 
 #endif // _VIEWDIALOG_HPP

@@ -374,7 +374,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 	{
 		m_mgr->getRadiantTexture()->bind();
 		const float scale = StelApp::getInstance().getScreenScale();
-		painter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), 45 * scale);
+		painter.drawSprite2dModeNoDeviceScale(static_cast<float>(XY[0]), static_cast<float>(XY[1]), 45 * scale);
 
 		if (m_mgr->getEnableLabels())
 		{

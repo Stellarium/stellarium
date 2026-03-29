@@ -25,13 +25,14 @@
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include "TelescopeControl.hpp"
 #include <libindi/inditelescope.h>
 #include "INDIControlWidget.hpp"
 
 TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &params):
 	TelescopeClient(name)
 {
-	qDebug() << "TelescopeClientINDI::TelescopeClientINDI";
+	qCDebug(Telescopes) << "TelescopeClientINDI::TelescopeClientINDI";
 
 	static const QRegularExpression paramRx("^([^:]*):(\\d+):([^:]*)$");
 	QRegularExpressionMatch paramMatch=paramRx.match(params);
@@ -144,13 +145,13 @@ void TelescopeClientINDI::move(double angle, double speed)
 {
 	if (angle < 0.0 || angle >= 360.0)
 	{
-		qWarning() << "TelescopeClientINDI::move angle " << angle << " out of range [0,360)";
+		qCWarning(Telescopes) << "TelescopeClientINDI::move angle " << angle << " out of range [0,360)";
 		return;
 	}
 
 	if (speed < 0.0 || speed > 1.0)
 	{
-		qWarning() << "TelescopeClientINDI::move speed " << speed << "out of range [0,1]";
+		qCWarning(Telescopes) << "TelescopeClientINDI::move speed " << speed << "out of range [0,1]";
 		return;
 	}
 

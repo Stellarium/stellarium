@@ -77,7 +77,7 @@ QStringList* TelescopeConfigurationDialog::listSerialPorts()
 #else
 		plist->append(serialPortInfo.systemLocation());
 #endif
-		qDebug() << "[TelescopeControl] port name:" << serialPortInfo.portName()
+		qCDebug(Telescopes) << "[TelescopeControl] port name:" << serialPortInfo.portName()
 				 << "; vendor identifier:" << serialPortInfo.vendorIdentifier()
 				 << "; product identifier:" << serialPortInfo.productIdentifier();
 	}
@@ -300,7 +300,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		  rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 	{
 		// TODO: Add better debug
-		qDebug() << "Cannot get telescope for slot" << slot;
+		qCWarning(Telescopes) << "Cannot get telescope for slot" << slot;
 		return;
 	}
 	ui->lineEditTelescopeName->setText(name);
@@ -314,7 +314,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		int index = ui->comboBoxDeviceModel->findText(deviceModelName);
 		if (index < 0)
 		{
-			qDebug() << "TelescopeConfigurationDialog: Current device model is not in the list?";
+			qCWarning(Telescopes) << "TelescopeConfigurationDialog: Current device model is not in the list?";
 			emit changesDiscarded();
 			return;
 		}

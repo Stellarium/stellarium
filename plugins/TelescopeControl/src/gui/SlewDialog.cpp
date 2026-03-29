@@ -381,13 +381,13 @@ void SlewDialog::savePointsToFile()
 	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
 	if (pointsJsonPath.isEmpty())
 	{
-		qWarning() << "SlewDialog: Error saving points";
+		qCWarning(Telescopes) << "SlewDialog: Error saving points";
 		return;
 	}
 	QFile pointsJsonFile(pointsJsonPath);
 	if(!pointsJsonFile.open(QFile::WriteOnly|QFile::Text))
 	{
-		qWarning() << "SlewDialog: Points can not be saved. A file can not be open for writing:"
+		qCWarning(Telescopes) << "SlewDialog: Points can not be saved. A file can not be open for writing:"
 				   << QDir::toNativeSeparators(pointsJsonPath);
 		return;
 	}
@@ -421,12 +421,12 @@ void SlewDialog::loadPointsFromFile()
 
 	if (pointsJsonPath.isEmpty())
 	{
-		qWarning() << "SlewDialog: Error loading points";
+		qCWarning(Telescopes) << "SlewDialog: Error loading points";
 		return;
 	}
 	if(!QFileInfo::exists(pointsJsonPath))
 	{
-		qWarning() << "SlewDialog::loadPointsFromFile(): No points loaded. File is missing:"
+		qCWarning(Telescopes) << "SlewDialog::loadPointsFromFile(): No points loaded. File is missing:"
 				   << QDir::toNativeSeparators(pointsJsonPath);
 		storedPointsDescriptions = result;
 		return;
@@ -438,7 +438,7 @@ void SlewDialog::loadPointsFromFile()
 
 	if(!pointsJsonFile.open(QFile::ReadOnly))
 	{
-		qWarning() << "SlewDialog: No points loaded. Can't open for reading"
+		qCWarning(Telescopes) << "SlewDialog: No points loaded. Can't open for reading"
 				   << QDir::toNativeSeparators(pointsJsonPath);
 		storedPointsDescriptions = result;
 		return;
@@ -462,15 +462,15 @@ void SlewDialog::loadPointsFromFile()
 		QString newName = pointsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 		if(pointsJsonFile.rename(newName))
 		{
-			qWarning() << "SlewDialog: The existing version of points.json is obsolete. Backing it up as "
+			qCWarning(Telescopes) << "SlewDialog: The existing version of points.json is obsolete. Backing it up as "
 					   << QDir::toNativeSeparators(newName);
-			qWarning() << "SlewDialog: A blank points.json file will have to be created.";
+			qCWarning(Telescopes) << "SlewDialog: A blank points.json file will have to be created.";
 			storedPointsDescriptions = result;
 			return;
 		}
 		else
 		{
-			qWarning() << "SlewDialog: The existing version of points.json is obsolete. Unable to rename.";
+			qCWarning(Telescopes) << "SlewDialog: The existing version of points.json is obsolete. Unable to rename.";
 			storedPointsDescriptions = result;
 			return;
 		}

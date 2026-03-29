@@ -23,6 +23,7 @@
 #include "SearchDialog.hpp"
 #include "StelApp.hpp"
 
+#include <set>
 #include <QEventLoop>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -86,7 +87,7 @@ public:
 	SimbadLookupReply::SimbadLookupStatus getStatus() { return status; }
 	QString getStatusString() { return statusString; }
 	QString getErrorString() { return errorString; }
-	QMap<QString,Vec3d> getResults() { return results; }
+	const std::set<SimbadSearcher::Result>& getResults() const { return results; }
 	QMutex* getMutex() { return &mutex; }
 	QWaitCondition* getFinishedCondition() { return &finishedCondition; }
 private:
@@ -97,7 +98,7 @@ private:
 	SimbadLookupReply::SimbadLookupStatus status;
 	QString statusString;
 	QString errorString;
-	QMap<QString,Vec3d> results;
+	std::set<SimbadSearcher::Result> results;
 	QThread* parentThread;
 };
 
@@ -146,7 +147,7 @@ void SimbadService::get(const QByteArray& operation, const APIParameters &parame
 				obj.insert("errorString",task.getErrorString());
 				break;
 			case SimbadLookupReply::SimbadLookupFinished:
-				if(task.getResults().isEmpty())
+				if(task.getResults().empty())
 					status = QStringLiteral("empty");
 				else
 					status = QStringLiteral("found");
@@ -161,18 +162,14 @@ void SimbadService::get(const QByteArray& operation, const APIParameters &parame
 		QJsonArray names;
 		QJsonArray positions;
 
-		QMap<QString, Vec3d> res = task.getResults();
-		QMapIterator<QString, Vec3d> it(res);
-		while(it.hasNext())
+		for(const auto& entry : task.getResults())
 		{
-			it.next();
-			names.append(it.key());
+			names.append(entry.name);
 
-			const Vec3d& pos = it.value();
 			QJsonArray position;
-			position.append(pos[0]);
-			position.append(pos[1]);
-			position.append(pos[2]);
+			position.append(entry.position[0]);
+			position.append(entry.position[1]);
+			position.append(entry.position[2]);
 			positions.append(position);
 		}
 

@@ -395,6 +395,26 @@ void HelpDialog::updateHelpText(void) const
 			htmlText += "<tr><td>" + q_("Activate TUI") + "</td>";
 			htmlText += "<td><b>" + hotkeyTextWrapper("Alt+T") + "</b></td></tr>\n";
 		}
+		else if (group.second=="Scenery3d: 3D landscapes") // 3D scenery movement keys that don't have actions
+		{
+#ifdef Q_OS_MACOS
+			const QString altitudeCombo = hotkeyTextWrapper("Alt+PgUp") + "/" + hotkeyTextWrapper("Alt+PgDown");
+			const QString movementCombo = q_("⌥+Arrow keys");
+			const QString baseMultiplier = "⌘";
+#else
+			const QString altitudeCombo = hotkeyTextWrapper("Ctrl+PgUp") + "/" + hotkeyTextWrapper("Ctrl+PgDown");
+			const QString movementCombo = q_("Ctrl+Arrow keys");
+			const QString baseMultiplier = "Alt";
+#endif
+			htmlText += "<tr><td>" + q_("Move camera forward/backward/left/right").toHtmlEscaped() + "</td>";
+			htmlText += "<td><b>" + movementCombo.toHtmlEscaped() + "</b></td></tr>\n";
+			htmlText += "<tr><td>" + q_("Speed up camera movement by 5×").toHtmlEscaped() + "</td>";
+			htmlText += "<td><b>" + baseMultiplier.toHtmlEscaped() + "</b></td></tr>\n";
+			htmlText += "<tr><td>" + q_("Speed up camera movement by 10×").toHtmlEscaped() + "</td>";
+			htmlText += "<td><b>" + q_("Shift").toHtmlEscaped() + "</b></td></tr>\n";
+			htmlText += "<tr><td>" + q_("Move camera up/down").toHtmlEscaped() + "</td>";
+			htmlText += "<td><b>" + altitudeCombo.toHtmlEscaped() + "</b></td></tr>\n";
+		}
 	}
 
 	htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";

@@ -37,6 +37,16 @@ void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 	ScmSkyCulture::fallbackToInternationalNames = fallback;
 }
 
+void scm::ScmSkyCulture::setBeginTime(int beginTime)
+{
+	ScmSkyCulture::beginTime = beginTime;
+}
+
+void scm::ScmSkyCulture::setEndTime(int endTime)
+{
+	ScmSkyCulture::endTime = endTime;
+}
+
 scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
                                                             const std::vector<ConstellationLine> &lines,
                                                             const bool isDarkConstellation)
@@ -45,11 +55,23 @@ scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
 	return *constellations.back();
 }
 
+void scm::ScmSkyCulture::addLocation(const scm::CulturePolygon &polygon)
+{
+	locations.push_back(polygon);
+}
+
 void scm::ScmSkyCulture::removeConstellation(const QString &id)
 {
 	constellations.erase(remove_if(begin(constellations), end(constellations),
 	                               [id](const std::unique_ptr<ScmConstellation> &c) { return c->getId() == id; }),
 	                     end(constellations));
+}
+
+void scm::ScmSkyCulture::removeLocation(int id)
+{
+	locations.erase(std::remove_if(std::begin(locations), std::end(locations),
+							  [id](const CulturePolygon &p) { return p.id == id; }),
+					std::end(locations));
 }
 
 scm::ScmConstellation *scm::ScmSkyCulture::getConstellation(const QString &id)
@@ -67,12 +89,29 @@ std::vector<std::unique_ptr<scm::ScmConstellation>> *scm::ScmSkyCulture::getCons
 QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 {
 	QJsonObject scJsonObj;
+
 	scJsonObj["id"] = id;
+
+	// delete this when multiple regions are used
+	scJsonObj["region"] = REGIONS.at(description.region).name;
+
+	// uncomment this when multiple regions are used
+	/*QJsonArray regionArray;
+	for (const auto &currentRegion : description.region)
+	{
+		regionArray.append(REGIONS.at(currentRegion).name);
+	}
+	scJsonObj["region"] = regionArray;*/
+
+	scJsonObj["beginTime"] = beginTime;
+	scJsonObj["endTime"] = endTime;
+
 	// for some reason, the classification is inside an array, eg. ["historical"]
 	QJsonArray classificationArray = QJsonArray::fromStringList(
 		QStringList() << classificationTypeToString(description.classification));
 	scJsonObj["classification"]                  = classificationArray;
 	scJsonObj["fallback_to_international_names"] = fallbackToInternationalNames;
+
 	QJsonArray constellationsArray;
 	for (const auto &constellation : constellations)
 	{
@@ -81,6 +120,24 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 	scJsonObj["constellations"] = constellationsArray;
 
 	return scJsonObj;
+}
+
+QJsonObject scm::ScmSkyCulture::getTerritoryGeoJson() const
+{
+	QJsonObject locJsonObj;
+	QJsonArray locationsArray;
+
+	locJsonObj["type"] = "FeatureCollection";
+	locJsonObj["name"] = id;
+
+	for (const auto &culturePolygon : locations)
+	{
+		locationsArray.append(culturePolygon.toGeoJson());
+	}
+
+	locJsonObj["features"] = locationsArray;
+
+	return locJsonObj;
 }
 
 void scm::ScmSkyCulture::draw(StelCore *core) const
@@ -197,4 +254,78 @@ bool scm::ScmSkyCulture::saveIllustrations(const QString &directory)
 const QString &scm::ScmSkyCulture::getId() const
 {
 	return id;
+}
+
+void scm::ScmSkyCulture::mergeLocations()
+{
+	int contValue = QDateTime::currentDateTime().date().year() + 1;
+
+	for (int currentLocationIdx = 0; currentLocationIdx < (locations.size() - 1); currentLocationIdx++)
+	{
+		// compare current location to others in list
+		for (int compareLocationIdx = currentLocationIdx + 1; compareLocationIdx < locations.size(); compareLocationIdx++)
+		{
+			// check whether the polygons intersect
+			if (locations[currentLocationIdx].polygon.intersects(locations[compareLocationIdx].polygon))
+			{
+				// check whether there is there a point in time at which they both exist
+				int mergeBeginTime = std::max(locations[currentLocationIdx].beginTime, locations[compareLocationIdx].beginTime);
+				int mergeEndTime = std::min(locations[currentLocationIdx].endTime, locations[compareLocationIdx].endTime);
+				if (mergeBeginTime <= mergeEndTime)
+				{
+					// merge the polygons and add the new location to the list
+					QPolygonF mergedPolygon = locations[currentLocationIdx].polygon.united(locations[compareLocationIdx].polygon);
+					locations.push_back(scm::CulturePolygon(locations.last().id + 1, mergeBeginTime, mergeEndTime, mergedPolygon));
+
+					// there are 3 cases that can occur (depending on the overlap of beginTime / endTime)
+					// case 1: beginTime and endTime are within the boundaries of the new merged polygon ---> delete old polygon
+					// case 2: beginTime / endTime only partly overlaps with boundaries ---> change beginTime or endTime of old polygon accordingly
+					// case 3: new merged polygon lies within beginTime / endTime of old polygon ---> split old polygon and change beginTime / endTime
+
+					// handle location that is compared to the current location
+					if (updateLocationAfterMerge(compareLocationIdx, mergeBeginTime, mergeEndTime))
+					{
+						// adjust idx after deletion
+						compareLocationIdx--;
+					}
+					// handle the current location
+					if (updateLocationAfterMerge(currentLocationIdx, mergeBeginTime, mergeEndTime))
+					{
+						// adjust idx after deletion and stop loop (cant compare anymore when currentLocation is deleted)
+						currentLocationIdx--;
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
+bool scm::ScmSkyCulture::updateLocationAfterMerge(int idx, int mergeBeginTime, int mergeEndTime)
+{
+	int dBeginTime = mergeBeginTime - locations[idx].beginTime;
+	int dEndTime = locations[idx].endTime - mergeEndTime;
+
+	if (dBeginTime > 0 && dEndTime > 0)
+	{
+		// case 3 (split)
+		locations.push_back(scm::CulturePolygon(locations.last().id + 1, mergeEndTime + 1, locations[idx].endTime, locations[idx].polygon));
+		locations[idx].endTime = mergeBeginTime - 1;
+	}
+	else if (dBeginTime <= 0 && dEndTime > 0)
+	{
+		// case 2.1 (change beginTime)
+		locations[idx].beginTime = mergeEndTime + 1;
+	}
+	else if (dBeginTime > 0 && dEndTime <= 0)
+	{
+		// case 2.2 (change endTime)
+		locations[idx].endTime = mergeBeginTime - 1;
+	}
+	else if (dBeginTime <= 0 && dEndTime <= 0)
+	{
+		// case 1 (deletion)
+		removeLocation(locations[idx].id);
+	}
+	return false;
 }

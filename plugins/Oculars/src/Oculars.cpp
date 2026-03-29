@@ -186,6 +186,7 @@ Oculars::Oculars()
 	, flagUseSmallFocuserOverlay(false)
 	, flagUseMediumFocuserOverlay(true)
 	, flagUseLargeFocuserOverlay(true)
+	, flagShowOAGLimits(true)
 {
 	setObjectName("Oculars");
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
@@ -659,6 +660,7 @@ void Oculars::init()
 		setFlagUseSmallFocuserOverlay(settings->value("use_small_focuser_overlay", false).toBool());
 		setFlagUseMediumFocuserOverlay(settings->value("use_medium_focuser_overlay", true).toBool());
 		setFlagUseLargeFocuserOverlay(settings->value("use_large_focuser_overlay", false).toBool());
+		setFlagShowOAGLimits(settings->value("show_oag_limits", true).toBool());
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1756,8 +1758,7 @@ void Oculars::drawCirclesOfConstantAngularRadii(StelPainter& sPainter, const Mat
 	sPainter.enableClientStates(false);
 }
 
-void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate,
-                      const CCD& ccd, const Lens* lens)
+void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate, const CCD& ccd, const Lens* lens)
 {
 	StelPainter sPainter(projector);
 	sPainter.setLineSmooth(true);
@@ -1767,7 +1768,8 @@ void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate,
 	const float innerRadius = ccd.getInnerOAGRadius(telescope, lens) * (M_PI/180);
 	const float outerRadius = ccd.getOuterOAGRadius(telescope, lens) * (M_PI/180);
 
-	drawCirclesOfConstantAngularRadii(sPainter, derotate, {innerRadius,outerRadius});
+	if (flagShowOAGLimits)
+		drawCirclesOfConstantAngularRadii(sPainter, derotate, {innerRadius,outerRadius});
 
 	const int numPointsPerLine = 30;
 
@@ -2153,7 +2155,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
-		painter.setColor(lineColor);
+		//painter.setColor(lineColor); // let's use original color
 		reticleTexture->bind();
 		/* Why it need?
 		int textureHeight;
@@ -2229,7 +2231,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		else
 			polarAngle -= 90.0;
 
-		painter.setColor(lineColor);
+		//painter.setColor(lineColor); // let's use original color
 		bool flipH = core->getFlipHorz();
 		bool flipV = core->getFlipVert();
 		if (flipH && flipV)
@@ -3061,15 +3063,31 @@ bool Oculars::getFlagShowCcdCropOverlayPixelGrid(void) const
 
 void Oculars::setFlagShowFocuserOverlay(const bool b)
 {
-	flagShowFocuserOverlay = b;
-	settings->setValue("show_focuser_overlay", b);
-	settings->sync();
-	emit flagShowFocuserOverlayChanged(b);
+	if (flagShowFocuserOverlay!=b)
+	{
+		flagShowFocuserOverlay = b;
+		settings->setValue("show_focuser_overlay", b);
+		settings->sync();
+		emit flagShowFocuserOverlayChanged(b);
+	}
 }
 
 bool Oculars::getFlagShowFocuserOverlay(void) const
 {
 	return flagShowFocuserOverlay;
+}
+
+void Oculars::setFlagShowOAGLimits(const bool b)
+{
+	flagShowOAGLimits = b;
+	settings->setValue("show_oag_limits", b);
+	settings->sync();
+	emit flagShowOAGLimitsChanged(b);
+}
+
+bool Oculars::getFlagShowOAGLimits(void) const
+{
+	return flagShowOAGLimits;
 }
 
 void Oculars::setFlagUseSmallFocuserOverlay(const bool b)
