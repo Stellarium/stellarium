@@ -110,7 +110,7 @@ Ubuntu 22.04 comes with Qt5.15 and Qt6.2. To build with Qt6:
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev \
                  gcc g++ graphviz doxygen gettext git libxkbcommon-x11-dev libgps-dev \
                  gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio \
-                 gstreamer1.0-libav gstreamer1.0-vaapi qt6-image-formats-plugins qt6-svg-dev libqt6svgwidgets6 \
+                 gstreamer1.0-libav gstreamer1.0-vaapi qt6-image-formats-plugins libqt6svg6-dev libqt6svgwidgets6 \
                  qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev \
                  qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins \
                  qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
@@ -118,9 +118,6 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev lib
                  qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data \
                  libexiv2-dev libnlopt-cxx-dev libqt6concurrent6 libmd4c-dev libmd4c-html0-dev
 ```
-
-Note that in Ubuntu 22.04, the package `qt6-tools-dev` was called `libqt6svg6-dev` 
-
 
 Ubuntu 24.04 has Qt6.4 and so allows speech output. Add these to the packages above (add more speech-dispatcher components as you wish):
 
