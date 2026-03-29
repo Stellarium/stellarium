@@ -119,6 +119,9 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev lib
                  libexiv2-dev libnlopt-cxx-dev libqt6concurrent6 libmd4c-dev libmd4c-html0-dev
 ```
 
+Note that in Ubuntu 22.04, the package `qt6-tools-dev` was called `libqt6svg6-dev` 
+
+
 Ubuntu 24.04 has Qt6.4 and so allows speech output. Add these to the packages above (add more speech-dispatcher components as you wish):
 
 ```
