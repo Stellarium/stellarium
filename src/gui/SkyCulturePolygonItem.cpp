@@ -31,7 +31,6 @@ SkyCulturePolygonItem::SkyCulturePolygonItem(QString scId, int beginTime, int en
 	, isHovered(false)
 {
 	setFlag(QGraphicsItem::ItemIsSelectable);
-	setToolTip(skyCultureId);
 	setAcceptHoverEvents(true);
 
 	defaultBrushColor = QColor(255, 0, 0, 100);

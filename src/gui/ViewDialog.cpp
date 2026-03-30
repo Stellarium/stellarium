@@ -145,6 +145,7 @@ void ViewDialog::retranslate()
 		ui->retranslateUi(dialog);
 		updateZhrDescription(StelApp::getInstance().getModule("SporadicMeteorMgr")->property("zhr").toInt());
 		populateLists();
+		ui->skyCultureMapGraphicsView->translatePolygons();
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
@@ -1461,9 +1462,9 @@ void ViewDialog::populateLists()
 	const QMap<QString, QPair<int, int>> &cultureTimeLimitMap = app.getSkyCultureMgr().getSkyCultureTimeLimitMapI18();
 
 	// remove duplicates in list of occuring regions (optional)
-	QList<QString> occuringRegions = cultureRegionMap.values();
+	QVector<QString> occuringRegions = cultureRegionMap.values().toVector();
 	std::sort(occuringRegions.begin(), occuringRegions.end());
-	occuringRegions.erase(std::unique(occuringRegions.begin(), occuringRegions.end()));
+	occuringRegions.resize(std::distance(occuringRegions.begin(), std::unique(occuringRegions.begin(), occuringRegions.end())));
 
 	QStringList sortedOccuringRegions;
 	for (const auto& region : sortedRegions)
@@ -1479,13 +1480,25 @@ void ViewDialog::populateLists()
 	{
 		l->addItem(new SeparatorListWidgetItem(q_(region)));
 	}
+	// oops... the list of regions has unknown region - let's add "other" region for these sky cultures
+	if (occuringRegions.size() > sortedOccuringRegions.size())
+	{
+		l->addItem(new SeparatorListWidgetItem(q_("Other")));
+	}
 
 	// find the earliest beginTime of all cultures (needed in initSkyCultureTime)
 	// ---> evaluate it here so we don't need to iterate over all cultures multiple times
 	int globalBeginTime = QDateTime::currentDateTime().date().year();
-
-	for (auto cultureRegionIt = std::prev(cultureRegionMap.cend()), end = std::prev(cultureRegionMap.cbegin()); cultureRegionIt != end; cultureRegionIt--)
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	QMultiMapIterator<QString, QString> cultureRegionIt(cultureRegionMap);
+#else
+	QMapIterator<QString, QString> cultureRegionIt(cultureRegionMap);
+#endif
+	cultureRegionIt.toBack();
+	while (cultureRegionIt.hasPrevious())
 	{
+		cultureRegionIt.previous();
+
 		QListWidgetItem* item = new QListWidgetItem(cultureRegionIt.key());
 		item->setData(Qt::UserRole, cultureTimeLimitMap.value(cultureRegionIt.key()).first); // beginTime
 		item->setData(Qt::UserRole + 1, cultureTimeLimitMap.value(cultureRegionIt.key()).second); // endTime
@@ -1495,10 +1508,14 @@ void ViewDialog::populateLists()
 			globalBeginTime = cultureTimeLimitMap.value(cultureRegionIt.key()).first;
 		}
 
-		l->insertItem(l->row(l->findItems(q_(cultureRegionIt.value()), Qt::MatchContains).at(0)) + 1, item);
+		// When region is unknown (non UN-geoscheme), insert item under "other" separator,
+		// otherwise insert item under respective region separator
+		QString itemName = (l->findItems(q_(cultureRegionIt.value()), Qt::MatchContains).empty()) ? q_("Other") : q_(cultureRegionIt.value());
+		l->insertItem(l->row(l->findItems(itemName, Qt::MatchContains).first()) + 1, item);
 	}
+
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalBeginTime);
-	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
+	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));    
 	l->blockSignals(false);
 
 	updateSkyCultureText();
