@@ -5,17 +5,19 @@
  * Stylesheet for the Gamepad Controller module for Stellarium Remote Control.
  * Provides comprehensive styling for gamepad configuration interface including:
  * - Controller settings panel with device information
- * - Joystick preview canvases with real-time visualization
- * - Button customization grid with categorized groups
+ * - Joystick preview canvases with real-time visualization and zoom inversion support
+ * - Button customization grid with categorized groups and compact layout
  * - Calibration interface with visual feedback
- * - Responsive design for various screen sizes
- * - Vibration intensity controls
- * - Import/Export profile interface
- * - Live Input Monitor interface
+ * - Responsive design for various screen sizes with adaptive grid columns
+ * - Vibration intensity controls with test functionality
+ * - Import/Export profile interface for backup and sharing
+ * - Live Input Monitor interface with 4-column button grid and visual axis meters
+ * - Real-time direction display for left stick movement
+ * - Compact spacing and improved mobile/tablet responsiveness
  * 
- * Version: 2.5.0
+ * Version: 2.6.0
  * Author: kutaibaa akraa (GitHub: @kutaibaa-akraa)
- * Date: 2026-03-27
+ * Date: 2026-03-30
  * License: GPLv2+
  * 
  * ======================================================================== */
@@ -259,7 +261,8 @@
 
 .joystick-preview {
     text-align: center;
-    flex-shrink: 0;       /* Prevent joystick from shrinking */
+    flex: 1;
+    min-width: 120px;
 }
 
 .joystick-preview canvas {
@@ -282,6 +285,41 @@
     color: #DCDBDA;
     display: block;
     margin-bottom: 2px;
+}
+
+/* Joystick info row for additional data */
+.joystick-info {
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(180, 183, 176, 0.2);
+    font-size: 10px;
+    color: #B4B7B0;
+}
+
+.joystick-info span {
+    display: inline-block;
+}
+
+.joystick-info .info-label {
+    font-weight: bold;
+    color: #8A8C8E;
+}
+
+.joystick-info .info-value {
+    color: #DCDBDA;
+    font-family: monospace;
+}
+
+/* Axis inversion group */
+.axis-inversion-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 10px 0 5px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    flex-wrap: wrap;
 }
 
 /* ========================================================================
@@ -803,6 +841,11 @@
         gap: 20px;
     }
     
+    .joystick-preview {
+        width: 100%;
+        max-width: 200px;
+    }
+    
     .slider-row {
         flex-direction: column;
         align-items: flex-start;
@@ -1082,6 +1125,7 @@
     padding: 15px;
 }
 
+/* Two-column layout for Live Input */
 .live-input-two-columns {
     display: flex;
     gap: 20px;
@@ -1105,66 +1149,126 @@
     border-bottom: 1px solid rgba(180, 183, 176, 0.3);
 }
 
-.live-input-grid {
+/* Buttons Grid - 4 columns for compact display */
+.live-input-grid-buttons {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 6px;
     max-height: 350px;
     overflow-y: auto;
     padding: 2px;
 }
 
-.live-input-item {
+/* Axes Grid - with visual meter */
+.live-input-grid-axes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+/* Button Item - Compact */
+.live-input-button {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 8px;
     background: rgba(0, 0, 0, 0.25);
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 10px;
+    transition: background 0.1s ease;
 }
 
-.live-input-item .label {
+.live-input-button .label {
     color: #B4B7B0;
     font-family: 'DejaVuSans', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.live-input-item .label .raw-id {
-    font-size: 9px;
+.live-input-button .label .raw-id {
+    font-size: 8px;
     color: #6A6C6E;
-    margin-left: 6px;
+    margin-left: 5px;
 }
 
-.live-input-item .value {
+.live-input-button .value {
     font-family: 'DejaVuSansMono', monospace;
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 3px;
     background: #2A2C2E;
-    min-width: 48px;
+    min-width: 42px;
     text-align: center;
-    font-size: 10px;
+    font-size: 9px;
     color: #DCDBDA;
 }
 
-.live-input-item .value.pressed {
+.live-input-button .value.pressed {
     background: #4A6A4A;
     color: #FFFFFF;
 }
 
-.live-input-item .value.axis-positive {
-    background: #2A4A3A;
-    color: #A0D0A0;
+/* Axis Item with Visual Meter */
+.live-input-axis {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
 }
 
-.live-input-item .value.axis-negative {
-    background: #4A2A2A;
-    color: #E0A0A0;
-}
-
-.live-input-item .value.axis-neutral {
-    background: #2A2C2E;
+.live-input-axis .label {
+    min-width: 80px;
     color: #B4B7B0;
+    font-size: 10px;
+    font-family: 'DejaVuSans', sans-serif;
+}
+
+.live-input-axis .label .raw-id {
+    font-size: 8px;
+    color: #6A6C6E;
+    margin-left: 4px;
+}
+
+.live-input-axis .meter-container {
+    flex: 1;
+    height: 16px;
+    background: #2A2C2E;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.live-input-axis .meter-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.05s linear;
+    border-radius: 8px;
+}
+
+.live-input-axis .meter-fill.positive {
+    background: #4A6A4A;
+}
+
+.live-input-axis .meter-fill.negative {
+    background: #6A4A4A;
+}
+
+.live-input-axis .value {
+    min-width: 42px;
+    text-align: right;
+    font-family: 'DejaVuSansMono', monospace;
+    font-size: 9px;
+    font-weight: bold;
+    color: #DCDBDA;
+    background: #2A2C2E;
+    padding: 2px 6px;
+    border-radius: 3px;
 }
 
 /* Device Info Section */
@@ -1228,25 +1332,44 @@
 }
 
 /* Scrollbar Styling for Live Input */
-.live-input-grid::-webkit-scrollbar {
+.live-input-grid-buttons::-webkit-scrollbar,
+.live-input-grid-axes::-webkit-scrollbar {
     width: 6px;
 }
 
-.live-input-grid::-webkit-scrollbar-track {
+.live-input-grid-buttons::-webkit-scrollbar-track,
+.live-input-grid-axes::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 3px;
 }
 
-.live-input-grid::-webkit-scrollbar-thumb {
+.live-input-grid-buttons::-webkit-scrollbar-thumb,
+.live-input-grid-axes::-webkit-scrollbar-thumb {
     background: #5D5F62;
     border-radius: 3px;
 }
 
-.live-input-grid::-webkit-scrollbar-thumb:hover {
+.live-input-grid-buttons::-webkit-scrollbar-thumb:hover,
+.live-input-grid-axes::-webkit-scrollbar-thumb:hover {
     background: #B4B7B0;
 }
 
-/* Responsive adjustments */
+/* Loading placeholder */
+.loading-placeholder {
+    text-align: center;
+    padding: 30px;
+    color: #8A8C8E;
+    font-style: italic;
+    font-size: 11px;
+}
+
+/* Responsive adjustments for Live Input */
+@media (max-width: 900px) {
+    .live-input-grid-buttons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .live-input-two-columns {
         flex-direction: column;
@@ -1257,8 +1380,8 @@
         min-width: auto;
     }
     
-    .live-input-grid {
-        grid-template-columns: 1fr;
+    .live-input-grid-buttons {
+        grid-template-columns: repeat(2, 1fr);
         max-height: 300px;
     }
     
@@ -1285,23 +1408,23 @@
         font-size: 11px;
     }
     
-    .live-input-item {
-        font-size: 10px;
+    .live-input-grid-buttons {
+        grid-template-columns: 1fr;
     }
     
-    .live-input-item .value {
-        font-size: 9px;
-        min-width: 42px;
+    .live-input-axis {
+        flex-wrap: wrap;
+        gap: 5px;
     }
-}
-
-/* Loading placeholder */
-.loading-placeholder {
-    text-align: center;
-    padding: 30px;
-    color: #8A8C8E;
-    font-style: italic;
-    font-size: 11px;
+    
+    .live-input-axis .label {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .meter-container {
+        width: 100%;
+    }
 }
 
 /* ========================================================================

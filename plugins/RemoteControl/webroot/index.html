@@ -858,7 +858,7 @@
             <iframe id="s3d_info" class="flex-expand">No scene selected</iframe>
           </div>
       </div>		
-			<!-- Gamepad Controller Section - Built on W3C Gamepad API/gpcontroller.js module v2.4.0 -->
+			<!-- Gamepad Controller Section - Built on W3C Gamepad API/gpcontroller.js module v2.6.0 -->
 			<div id="tab_gamepad">
 					<section id="gp-controller" class="block">
 							<header>
@@ -898,10 +898,6 @@
 															<span class="device-info-label"><?= tr("Device ID:")?></span>
 															<span class="device-info-value" id="gp-device-id" style="font-size: 10px;">-</span>
 													</div>
-													<div class="device-info-row">
-															<span class="device-info-label"><?= tr("Current FOV:")?></span>
-															<span class="device-info-value" id="gp-current-fov">60°</span>
-													</div>
 											</div>                
 											<!-- Calibration Section -->
 											<div class="calibration-section">
@@ -916,38 +912,61 @@
 													<p class="note" style="margin-top: 5px; font-size: 10px; color: #aaa;">
 															<?= tr("Move joysticks in circles to calibrate center position. Press any button to finish.")?>
 													</p>
+											</div>											
+									<!-- Joystick Preview -->
+									<h4 style="margin: 15px 0 10px; color: #B4B7B0;"><?= tr("Joystick Preview")?></h4>
+									<div class="joystick-preview-container">
+											<div class="joystick-preview">
+													<canvas id="gp-left-stick-canvas" width="100" height="100"></canvas>
+													<div class="stick-label">
+															<strong><?= tr("Left Stick")?></strong>
+															<small><?= tr("View movement")?></small>
+													</div>
+													<!-- Current Direction Display -->
+													<div class="joystick-info">
+															<span class="info-label"><?= tr("Direction:")?></span>
+															<span class="info-value" id="gp-current-direction"><?= tr("centered")?></span>
+													</div>
 											</div>
-											
-											<!-- Joystick Preview -->
-											<h4 style="margin: 15px 0 10px; color: #B4B7B0;"><?= tr("Joystick Preview")?></h4>
-											<div class="joystick-preview-container">
-													<div class="joystick-preview">
-															<canvas id="gp-left-stick-canvas" width="100" height="100"></canvas>
-															<div class="stick-label">
-																	<strong><?= tr("Left Stick")?></strong>
-																	<small><?= tr("View movement")?></small>
-															</div>
+											<div class="joystick-preview">
+													<canvas id="gp-right-stick-canvas" width="100" height="100"></canvas>
+													<div class="stick-label">
+															<strong><?= tr("Right Stick")?></strong>
+															<small><?= tr("Continuous zoom")?></small>
 													</div>
-													<div class="joystick-preview">
-															<canvas id="gp-right-stick-canvas" width="100" height="100"></canvas>
-															<div class="stick-label">
-																	<strong><?= tr("Right Stick")?></strong>
-																	<small><?= tr("Continuous zoom")?></small>
-															</div>
+													<!-- Current FOV Display -->
+													<div class="joystick-info">
+															<span class="info-label"><?= tr("Current FOV:")?></span>
+															<span class="info-value" id="gp-current-fov">60°</span>
 													</div>
-											</div>                
+											</div>
+									</div>
+									<!-- Axis Inversion Controls -->
+									<div class="axis-inversion-group" style="display: flex; gap: 20px; justify-content: center; margin: 10px 0 5px;">
+											<div class="checkbox-item">
+													<input type="checkbox" id="gp-invert-x" />
+													<label for="gp-invert-x"><?= tr("Invert X-Axis (left stick)")?></label>
+											</div>
+											<div class="checkbox-item">
+													<input type="checkbox" id="gp-invert-y" />
+													<label for="gp-invert-y"><?= tr("Invert Y-Axis (left stick)")?></label>
+											</div>
+											<div class="checkbox-item">
+													<input type="checkbox" id="zoom-invert-y" />
+													<label for="zoom-invert-y"><?= tr("Invert Y-Axis (Zoom stick)")?></label>
+											</div>
+									</div>               
+
 									<!-- Control Settings -->
 									<div class="control-slider-group">
 											<!-- Checkbox Group -->
 											<div class="checkbox-group">
-													<div class="checkbox-item">
-															<input type="checkbox" id="gp-invert-x" />
-															<label for="gp-invert-x"><?= tr("Invert X-Axis")?></label>
+													<!-- Manual Test Button -->
+													<div class="checkbox-item" style="margin-top: 5px; margin-bottom: 15px;">
+															<button id="gp-test-vibration" class="test-vibration-btn"><?= tr("Test Vibration")?></button>
+															<span class="help-text" style="margin-left: 10px;"><?= tr("Manual test (uses full intensity)")?></span>
 													</div>
-													<div class="checkbox-item">
-															<input type="checkbox" id="gp-invert-y" />
-															<label for="gp-invert-y"><?= tr("Invert Y-Axis")?></label>
-													</div>
+													
 													<div class="checkbox-item">
 															<input type="checkbox" id="gp-vibration-feedback" />
 															<label for="gp-vibration-feedback"><?= tr("Vibration Feedback")?></label>
@@ -962,12 +981,6 @@
 															<div id="gp-vibration-intensity" class="slider"></div>
 													</div>
 													<span id="gp-vibration-intensity-value" class="slider-value">0.5</span>
-											</div>
-											
-											<!-- Manual Test Button -->
-											<div class="checkbox-item" style="margin-top: 5px; margin-bottom: 15px;">
-													<button id="gp-test-vibration" class="test-vibration-btn"><?= tr("Test Vibration")?></button>
-													<span class="help-text" style="margin-left: 10px;"><?= tr("Manual test (uses full intensity)")?></span>
 											</div>
 											
 											<!-- Sensitivity Slider -->
@@ -1030,43 +1043,41 @@
 													<?= tr("Profiles are saved per device and can be exported/imported for backup or sharing")?>
 											</p>
 									</div>
-							</div>
-							<!-- Live Input Panel -->
+							</div>							
+							<!-- Live Input Panel - Updated Structure -->
 							<div id="gp-live-input" class="live-input-panel">
 									<div class="live-input-header">
 											<h4><?= tr("Live Input Monitor")?></h4>
-											<p><?= tr("Real-time raw values from the browser's Gamepad API. Use this panel to verify button and axis mappings.")?></p>
+											<p><?= tr("Real-time raw values from the browser's Gamepad API. Buttons show press state, Axes show visual meter. Use this panel to verify button and axis mappings.")?></p>
 									</div>
 									<div class="live-input-content">
 											<div class="live-input-two-columns">
-													<!-- Buttons Column -->
+													<!-- Buttons Column - 4 column grid -->
 													<div class="live-input-column">
-															<h5><?= tr("Buttons")?></h5>
-															<div id="gp-buttons-container" class="live-input-grid">
+															<h5><?= tr("Buttons")?> <span style="font-size:8px;">(4-column grid)</span></h5>
+															<div id="gp-buttons-container" class="live-input-grid-buttons">
+																	<div class="loading-placeholder"><?= tr("Waiting for controller input...")?></div>
+															</div>
+													</div>													
+													<!-- Axes Column - with visual meter -->
+													<div class="live-input-column">
+															<h5><?= tr("Axes")?> <span style="font-size:8px;">(visual meter)</span></h5>
+															<div id="gp-axes-container" class="live-input-grid-axes">
 																	<div class="loading-placeholder"><?= tr("Waiting for controller input...")?></div>
 															</div>
 													</div>
-													
-													<!-- Axes Column -->
-													<div class="live-input-column">
-															<h5><?= tr("Axes")?></h5>
-															<div id="gp-axes-container" class="live-input-grid">
-																	<div class="loading-placeholder"><?= tr("Waiting for controller input...")?></div>
-															</div>
-													</div>
-											</div>
-											
+											</div>											
 											<!-- Device Information Section -->
 											<div class="live-info-section">
 													<h5><?= tr("Device Information")?></h5>
 													<div id="gp-device-info-live">
-															<!-- Populated by JavaScript -->
+															<div class="loading-placeholder"><?= tr("Waiting for controller input...")?></div>
 													</div>
 													<div class="info-note-live">
-															<strong>Understanding Raw Values</strong><br>
-															Buttons: Range 0.0 (not pressed) to 1.0 (fully pressed).<br>
-															Axes: Range -1.0 to 1.0. Center position is 0.0.<br>
-															Note: Different browsers may report the same physical button on different indices. Use this panel to identify the correct mapping for your setup.
+															<strong><?= tr("Understanding Values")?></strong><br>
+															<?= tr("Buttons: Range 0.0 (not pressed) to 1.0 (green = fully pressed).")?><br>
+															<?= tr("Axes: -1.0 to 1.0 with visual meter Center position is 0.0. Triggers (L2/R2) show gradual values.")?><br>
+															<?= tr("Note: Different browsers may report the same physical button on different indices. Use this panel to identify the correct mapping for your setup.")?>
 													</div>
 											</div>
 									</div>

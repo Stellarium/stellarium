@@ -11,15 +11,15 @@
  * - W3C Gamepad API compliance (no static database dependencies)
  * - Multi-controller support with independent profiles per device
  * - Persistent device profiles stored by unique device identifier
- * - Live Input Monitor for real-time raw button/axis value display
+ * - Live Input Monitor for real-time raw button/axis value display with visual meters
  * - Profile import/export functionality for backup and sharing
  * - Enhanced Scan button with visual feedback animation
- * - Real-time joystick preview with calibration visualization
- * - Continuous zoom operation with adjustable speed
+ * - Real-time joystick preview with calibration visualization and zoom inversion
+ * - Continuous zoom operation with adjustable speed and Y-axis inversion
  * - Vibration/rumble control with intensity slider and test function
  * - Full button remapping with categorized action groups
  * - Device detection via vendor/product ID extraction from browser
- * - Responsive UI with multi-device switching
+ * - Responsive UI with multi-device switching and compact layouts
  * - Server connection awareness with auto-resume on reconnect
  * - Dynamic plugin detection and action integration
  *   (ArchaeoLines, Scenery3d, ExoPlanets, NavStars, MeteorShowers, Quasars, Pulsars)
@@ -31,14 +31,17 @@
  *   - Time jumps and season demonstrations
  * - Vibration feedback on button press with adjustable intensity
  * - Joystick calibration to compensate for hardware drift
- * - Sensitivity, deadzone, and axis inversion controls
+ * - Sensitivity, deadzone, and axis inversion controls (including zoom stick inversion)
+ * - Live Input Monitor with 4-column compact button grid and visual meter bars for axes
+ * - Real-time direction display for left stick movement (North, South, East, West, etc.)
  * 
  * Technical Architecture:
  * - Uses requestAnimationFrame for smooth 60fps polling
  * - localStorage for per-device settings persistence
  * - jQuery UI sliders for intuitive configuration
- * - Canvas-based joystick preview with deadzone visualization
- * - Live Input panel with real-time raw value updates
+ * - Canvas-based joystick preview with deadzone visualization and zoom inversion support
+ * - Live Input panel with real-time raw value updates and visual feedback
+ * - Responsive grid layouts for button customization and live input panels
  * 
  * @module gpcontroller
  * @requires jquery
@@ -52,9 +55,9 @@
  * @requires jquery-ui
  * 
  * @author kutaibaa akraa (GitHub: @kutaibaa-akraa)
- * @date 2026-03-27
+ * @date 2026-03-30
  * @license GPLv2+
- * @version 2.5.0
+ * @version 2.6.0
  */
  
 define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/time", "api/properties", "api/search", "jquery-ui"],
@@ -576,6 +579,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         var $leftStickCanvas, $rightStickCanvas;
         var $sensitivitySlider, $deadzoneSlider, $zoomSpeedSlider, $movementSpeedSlider;
         var $invertX, $invertY;
+				var $zoomInvertY;
+				var $currentDirection;  // For displaying current view direction
         var $calibrateBtn, $testVibrationBtn, $vibrationFeedback;
         var $buttonCustomizationContainer;
         var $deviceSelector;
@@ -586,6 +591,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             deadzone: 0.15,
             invertX: false,
             invertY: false,
+						zoomInvertY: false,
             zoomSpeed: 0.05,
             movementSpeed: 5.0,
             vibrationFeedback: false,
@@ -1111,113 +1117,113 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             }
         };
 
-/**
- * Toggles constellation highlighting
- * First press: isolates and highlights the specified constellation
- * Second press: clears isolation and shows all constellations
- * @param {string} constellationName - Name of the constellation (e.g., "orion", "ursa_major")
- */
-GamepadDevice.prototype.handleConstellationHighlight = function(constellationName) {
-    // Convert to proper case (e.g., "orion" -> "Orion")
-    var searchTerm = constellationName.replace(/_/g, ' ');
-    searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase() });
-    
-    // Get current state
-    var isIsolated = propApi.getStelProp("ConstellationMgr.isolateSelected");
-    var currentSelection = propApi.getStelProp("StelCore.selectedObject");
-    
-    // Check if this constellation is currently highlighted
-    var isCurrentlyHighlighted = isIsolated === true && 
-        currentSelection && currentSelection.toLowerCase() === searchTerm.toLowerCase();
-    
-    if (isCurrentlyHighlighted) {
-        // Toggle OFF: Clear highlighting
-        console.log("[Gamepad] Clearing constellation highlight:", searchTerm);
-        
-        // Disable isolation mode
-        propApi.setStelProp("ConstellationMgr.isolateSelected", false);
-        
-        // Clear selected object
-        rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-        
-        // Ensure constellation lines remain visible
-        var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-        if (linesVisible === false) {
-            actions.execute("actionShow_Constellation_Lines");
-        }
-        
-        showNotification(_tr("Cleared highlight: ") + searchTerm);
-    } else {
-        // Toggle ON: Highlight the constellation
-        console.log("[Gamepad] Highlighting constellation:", searchTerm);
-        
-        // Step 1: Ensure constellation lines are visible
-        var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-        if (linesVisible === false) {
-            actions.execute("actionShow_Constellation_Lines");
-        }
-        
-        // Step 2: Clear previous selection
-        rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-        
-        // Step 3: Delay to allow Stellarium to process the clear
-        setTimeout(function() {
-            // Step 4: Enable isolation mode
-            propApi.setStelProp("ConstellationMgr.isolateSelected", true);
-            
-            // Step 5: Select the constellation
-            rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
-            
-            // Step 6: Show feedback
-            showNotification(_tr("Highlighting constellation: ") + searchTerm);
-        }, 100);
-    }
-};
-				
-				// Add a property to track last highlighted constellation
-GamepadDevice.prototype.lastHighlightedConstellation = null;
+					/**
+					 * Toggles constellation highlighting
+					 * First press: isolates and highlights the specified constellation
+					 * Second press: clears isolation and shows all constellations
+					 * @param {string} constellationName - Name of the constellation (e.g., "orion", "ursa_major")
+					 */
+					GamepadDevice.prototype.handleConstellationHighlight = function(constellationName) {
+							// Convert to proper case (e.g., "orion" -> "Orion")
+							var searchTerm = constellationName.replace(/_/g, ' ');
+							searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase() });
+							
+							// Get current state
+							var isIsolated = propApi.getStelProp("ConstellationMgr.isolateSelected");
+							var currentSelection = propApi.getStelProp("StelCore.selectedObject");
+							
+							// Check if this constellation is currently highlighted
+							var isCurrentlyHighlighted = isIsolated === true && 
+									currentSelection && currentSelection.toLowerCase() === searchTerm.toLowerCase();
+							
+							if (isCurrentlyHighlighted) {
+									// Toggle OFF: Clear highlighting
+									console.log("[Gamepad] Clearing constellation highlight:", searchTerm);
+									
+									// Disable isolation mode
+									propApi.setStelProp("ConstellationMgr.isolateSelected", false);
+									
+									// Clear selected object
+									rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+									
+									// Ensure constellation lines remain visible
+									var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+									if (linesVisible === false) {
+											actions.execute("actionShow_Constellation_Lines");
+									}
+									
+									showNotification(_tr("Cleared highlight: ") + searchTerm);
+							} else {
+									// Toggle ON: Highlight the constellation
+									console.log("[Gamepad] Highlighting constellation:", searchTerm);
+									
+									// Step 1: Ensure constellation lines are visible
+									var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+									if (linesVisible === false) {
+											actions.execute("actionShow_Constellation_Lines");
+									}
+									
+									// Step 2: Clear previous selection
+									rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+									
+									// Step 3: Delay to allow Stellarium to process the clear
+									setTimeout(function() {
+											// Step 4: Enable isolation mode
+											propApi.setStelProp("ConstellationMgr.isolateSelected", true);
+											
+											// Step 5: Select the constellation
+											rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
+											
+											// Step 6: Show feedback
+											showNotification(_tr("Highlighting constellation: ") + searchTerm);
+									}, 100);
+							}
+					};
+									
+									// Add a property to track last highlighted constellation
+					GamepadDevice.prototype.lastHighlightedConstellation = null;
 
-GamepadDevice.prototype.handleConstellationHighlight = function(constellationName) {
-    var searchTerm = constellationName.replace(/_/g, ' ');
-    searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase() });
-    
-    // Check if this constellation is currently highlighted
-    var isCurrentlyHighlighted = (this.lastHighlightedConstellation === searchTerm);
-    
-    if (isCurrentlyHighlighted) {
-        // Toggle OFF
-        console.log("[Gamepad] Clearing constellation highlight:", searchTerm);
-        
-        propApi.setStelProp("ConstellationMgr.isolateSelected", false);
-        rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-        
-        var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-        if (linesVisible === false) {
-            actions.execute("actionShow_Constellation_Lines");
-        }
-        
-        this.lastHighlightedConstellation = null;
-        showNotification(_tr("Cleared highlight: ") + searchTerm);
-    } else {
-        // Toggle ON
-        console.log("[Gamepad] Highlighting constellation:", searchTerm);
-        
-        var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-        if (linesVisible === false) {
-            actions.execute("actionShow_Constellation_Lines");
-        }
-        
-        rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-        
-        setTimeout(function() {
-            propApi.setStelProp("ConstellationMgr.isolateSelected", true);
-            rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
-            showNotification(_tr("Highlighting constellation: ") + searchTerm);
-        }, 100);
-        
-        this.lastHighlightedConstellation = searchTerm;
-    }
-};
+					GamepadDevice.prototype.handleConstellationHighlight = function(constellationName) {
+							var searchTerm = constellationName.replace(/_/g, ' ');
+							searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase() });
+							
+							// Check if this constellation is currently highlighted
+							var isCurrentlyHighlighted = (this.lastHighlightedConstellation === searchTerm);
+							
+							if (isCurrentlyHighlighted) {
+									// Toggle OFF
+									console.log("[Gamepad] Clearing constellation highlight:", searchTerm);
+									
+									propApi.setStelProp("ConstellationMgr.isolateSelected", false);
+									rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+									
+									var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+									if (linesVisible === false) {
+											actions.execute("actionShow_Constellation_Lines");
+									}
+									
+									this.lastHighlightedConstellation = null;
+									showNotification(_tr("Cleared highlight: ") + searchTerm);
+							} else {
+									// Toggle ON
+									console.log("[Gamepad] Highlighting constellation:", searchTerm);
+									
+									var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+									if (linesVisible === false) {
+											actions.execute("actionShow_Constellation_Lines");
+									}
+									
+									rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+									
+									setTimeout(function() {
+											propApi.setStelProp("ConstellationMgr.isolateSelected", true);
+											rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
+											showNotification(_tr("Highlighting constellation: ") + searchTerm);
+									}, 100);
+									
+									this.lastHighlightedConstellation = searchTerm;
+							}
+					};
 
 				/**
 				 * Clears all constellation highlighting
@@ -1484,10 +1490,24 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
                     this.isMoving = false;
                 }
             }
+						
+						// update direction display
+						if (this.index === activeDeviceIndex && $currentDirection && $currentDirection.length) {
+								var direction = this.updateCurrentDirection(leftX, leftY);
+								if (direction) {
+										$currentDirection.text(direction);
+								} else if (this.isMoving === false) {
+										$currentDirection.text("centered");
+								}
+						}
 
             // Zoom with corrected direction: pull UP = zoom IN, DOWN = zoom OUT
             if (Math.abs(rightY) > 0.05) {
-                var zoomFactor = 1 - (Math.pow(-rightY, 3) * controllerSettings.zoomSpeed * 2);
+								var zoomInput = rightY;
+								if (controllerSettings.zoomInvertY) {
+										zoomInput = -zoomInput;
+								}
+                var zoomFactor = 1 - (Math.pow(-zoomInput, 3) * controllerSettings.zoomSpeed * 2);
                 var newFov = currentFov * zoomFactor;
                 newFov = Math.max(0.1, Math.min(235, newFov));
                 if (Math.abs(newFov - currentFov) > 0.001) {
@@ -1512,11 +1532,6 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
 
                 this.previousButtonStates.set(i, finalPressed);
             }
-
-            if (this.index === activeDeviceIndex) {
-                updateStickPreview("left", leftX, leftY);
-                updateStickPreview("right", rightX, rightY);
-            }
 						
 						// Update live input display if this is the active device
 						if (this.index === activeDeviceIndex) {
@@ -1525,6 +1540,30 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
 								updateLiveInputDisplay();
 						}
         };
+				
+				// updat current direction 
+				GamepadDevice.prototype.updateCurrentDirection = function(leftX, leftY) {
+						if (Math.abs(leftX) < 0.05 && Math.abs(leftY) < 0.05) {
+								return;
+						}
+						
+						var angle = Math.atan2(-leftY, leftX) * (180 / Math.PI);
+						var direction = "";
+						
+						if (angle >= -22.5 && angle < 22.5) direction = "East →";
+						else if (angle >= 22.5 && angle < 67.5) direction = "North-East ↗";
+						else if (angle >= 67.5 && angle < 112.5) direction = "North ↑";
+						else if (angle >= 112.5 && angle < 157.5) direction = "North-West ↖";
+						else if (angle >= 157.5 || angle < -157.5) direction = "West ←";
+						else if (angle >= -157.5 && angle < -112.5) direction = "South-West ↙";
+						else if (angle >= -112.5 && angle < -67.5) direction = "South ↓";
+						else if (angle >= -67.5 && angle < -22.5) direction = "South-East ↘";
+						
+						var intensity = Math.sqrt(leftX * leftX + leftY * leftY);
+						var speedText = intensity > 0.8 ? "fast" : (intensity > 0.3 ? "medium" : "slow");
+						
+						return direction + " (" + speedText + ")";
+				};
 
         GamepadDevice.prototype.sendMovement = function(x, y) {
             if (viewcontrol && typeof viewcontrol.move === 'function') {
@@ -1777,50 +1816,67 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
             }
         }
 
-        function updateStickPreview(stick, x, y) {
-            var canvas = stick === "left" ? $leftStickCanvas : $rightStickCanvas;
-            if (!canvas || !canvas.length) return;
+				/**
+				 * Updates the joystick preview canvas with current stick position.
+				 * Draws crosshairs, deadzone circle, and a gradient-filled cursor.
+				 * For the right stick, applies zoom inversion if enabled (visual only).
+				 * 
+				 * @param {string} stick - Which stick to update ("left" or "right")
+				 * @param {number} x - X axis value (-1 to 1)
+				 * @param {number} y - Y axis value (-1 to 1)
+				 */
+				function updateStickPreview(stick, x, y) {
+						var canvas = stick === "left" ? $leftStickCanvas : $rightStickCanvas;
+						if (!canvas || !canvas.length) return;
+						
+						// Apply zoom inversion to right stick Y-axis for visual display only
+						var displayX = x;
+						var displayY = y;
+						
+						if (stick === "right" && controllerSettings.zoomInvertY) {
+								displayY = -displayY;
+						}
 
-            var ctx = canvas[0].getContext("2d");
-            var w = canvas.width();
-            var h = canvas.height();
+						var ctx = canvas[0].getContext("2d");
+						var w = canvas.width();
+						var h = canvas.height();
 
-            ctx.clearRect(0, 0, w, h);
-            ctx.fillStyle = "#222";
-            ctx.fillRect(0, 0, w, h);
-            ctx.strokeStyle = "#666";
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(w/2, 0);
-            ctx.lineTo(w/2, h);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(0, h/2);
-            ctx.lineTo(w, h/2);
-            ctx.stroke();
+						ctx.clearRect(0, 0, w, h);
+						ctx.fillStyle = "#222";
+						ctx.fillRect(0, 0, w, h);
+						ctx.strokeStyle = "#666";
+						ctx.lineWidth = 1;
+						ctx.beginPath();
+						ctx.moveTo(w/2, 0);
+						ctx.lineTo(w/2, h);
+						ctx.stroke();
+						ctx.beginPath();
+						ctx.moveTo(0, h/2);
+						ctx.lineTo(w, h/2);
+						ctx.stroke();
 
-            ctx.strokeStyle = "#888";
-            ctx.setLineDash([2, 2]);
-            ctx.beginPath();
-            ctx.arc(w/2, h/2, (w/2) * controllerSettings.deadzone, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.setLineDash([]);
+						ctx.strokeStyle = "#888";
+						ctx.setLineDash([2, 2]);
+						ctx.beginPath();
+						ctx.arc(w/2, h/2, (w/2) * controllerSettings.deadzone, 0, Math.PI * 2);
+						ctx.stroke();
+						ctx.setLineDash([]);
 
-            ctx.fillStyle = "#666";
-            ctx.beginPath();
-            ctx.arc(w/2, h/2, 3, 0, Math.PI * 2);
-            ctx.fill();
+						ctx.fillStyle = "#666";
+						ctx.beginPath();
+						ctx.arc(w/2, h/2, 3, 0, Math.PI * 2);
+						ctx.fill();
 
-            var stickX = w/2 + (x * (w/2 - 8));
-            var stickY = h/2 + (y * (h/2 - 8));
-            var gradient = ctx.createRadialGradient(stickX, stickY, 2, stickX, stickY, 8);
-            gradient.addColorStop(0, "#6B6E70");
-            gradient.addColorStop(1, "#3A3C3E");
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(stickX, stickY, 6, 0, Math.PI * 2);
-            ctx.fill();
-        }
+						var stickX = w/2 + (displayX * (w/2 - 8));
+						var stickY = h/2 + (displayY * (h/2 - 8));
+						var gradient = ctx.createRadialGradient(stickX, stickY, 2, stickX, stickY, 8);
+						gradient.addColorStop(0, "#6B6E70");
+						gradient.addColorStop(1, "#3A3C3E");
+						ctx.fillStyle = gradient;
+						ctx.beginPath();
+						ctx.arc(stickX, stickY, 6, 0, Math.PI * 2);
+						ctx.fill();
+				}
 
         function populateButtonCustomization() {
             if (!$buttonCustomizationContainer || !$buttonCustomizationContainer.length) return;
@@ -2073,23 +2129,26 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
 												}
 										}
 								}
+								
+								// Default values for new settings
+								if (controllerSettings.vibrationFeedback === undefined) {
+										controllerSettings.vibrationFeedback = false;
+								}
+								if (controllerSettings.vibrationIntensity === undefined) {
+										controllerSettings.vibrationIntensity = 0.5;
+								}
+								if (controllerSettings.zoomInvertY === undefined) {
+										controllerSettings.zoomInvertY = false;
+								}
 						} catch(e) {
 								console.warn("Could not load settings", e);
-						}
-						
-						// Default values for new settings
-						if (controllerSettings.vibrationFeedback === undefined) {
-								controllerSettings.vibrationFeedback = false;
-						}
-						if (controllerSettings.vibrationIntensity === undefined) {
-								controllerSettings.vibrationIntensity = 0.5;
 						}
 				}
 
 				function saveSettings() {
 						try {
 								localStorage.setItem("gamepad_controller_settings", JSON.stringify(controllerSettings));
-						} catch(e) {
+								} catch(e) {
 								console.warn("Could not save settings", e);
 						}
 				}
@@ -2172,12 +2231,14 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
             $movementSpeedSlider = $("#gp-movement-speed");
             $invertX = $("#gp-invert-x");
             $invertY = $("#gp-invert-y");
+						$zoomInvertY = $("#zoom-invert-y");
+						$currentDirection = $("#gp-current-direction");
             $calibrateBtn = $("#gp-calibrate");
             $testVibrationBtn = $("#gp-test-vibration");
-           // $vibrationFeedback = $("#gp-vibration-feedback");
+						 // $vibrationFeedback = $("#gp-vibration-feedback");
             $buttonCustomizationContainer = $("#gp-button-customization");
 						
-						    // New vibration intensity slider
+						// New vibration intensity slider
 						var $vibrationIntensityRow = $("#gp-vibration-intensity-row");
 						var $vibrationIntensity = $("#gp-vibration-intensity");
 						var $vibrationIntensityValue = $("#gp-vibration-intensity-value");
@@ -2298,6 +2359,14 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
                     saveSettings();
                 });
             }
+						
+						// Zoom Invert Y checkbox
+						if ($zoomInvertY && $zoomInvertY.length) {
+								$zoomInvertY.prop("checked", controllerSettings.zoomInvertY || false).on("change", function() {
+										controllerSettings.zoomInvertY = $(this).is(":checked");
+										saveSettings();
+								});
+						}
             
             if ($vibrationFeedback && $vibrationFeedback.length) {
                 $vibrationFeedback.prop("checked", controllerSettings.vibrationFeedback).on("change", function() {
@@ -2477,11 +2546,16 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
 								var button = gamepad.buttons[i];
 								var value = button.value !== undefined ? button.value : (button.pressed ? 1 : 0);
 								var isPressed = button.pressed || value > 0.1;
-								var buttonName = currentDeviceInfo ? currentDeviceInfo.getButtonName(i) : ('Button ' + i);
+								var buttonName = currentDeviceInfo ? currentDeviceInfo.getButtonName(i) : ('Btn ' + i);
 								var valueClass = isPressed ? 'pressed' : '';
 								var displayValue = value.toFixed(3);
 								
-								html += '<div class="live-input-item">';
+								// Shorten button name for compact display
+								if (buttonName.length > 12) {
+										buttonName = buttonName.substring(0, 10) + '..';
+								}
+								
+								html += '<div class="live-input-button">';
 								html += '<span class="label">' + escapeHtml(buttonName) + '<span class="raw-id">#' + i + '</span></span>';
 								html += '<span class="value ' + valueClass + '">' + displayValue + '</span>';
 								html += '</div>';
@@ -2493,6 +2567,7 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
 				/**
 				 * Renders the axes panel with raw values
 				 */
+				 
 				function updateAxesDisplay(gamepad) {
 						var $container = $('#gp-axes-container');
 						$container.empty();
@@ -2502,27 +2577,34 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
 								return;
 						}
 						
-						var axisNames = [
-								'Left Stick X', 'Left Stick Y', 'Right Stick X', 'Right Stick Y',
-								'Left Trigger (L2)', 'Right Trigger (R2)', 'Axis 6', 'Axis 7',
-								'Axis 8', 'Axis 9', 'Axis 10', 'Axis 11'
-						];
+						// Axis names
+						var axisNames = {
+								0: 'Left X',
+								1: 'Left Y',
+								2: 'Right X',
+								3: 'Right Y',
+								4: 'L2 Trigger',
+								5: 'R2 Trigger'
+						};
 						
 						var html = '';
 						
 						for (var i = 0; i < gamepad.axes.length; i++) {
 								var value = gamepad.axes[i];
-								var displayValue = value.toFixed(4);
-								var axisName = (i < axisNames.length) ? axisNames[i] : ('Axis ' + i);
+								var displayValue = value.toFixed(3);
+								var axisName = axisNames[i] || ('Axis ' + i);
 								
-								var valueClass = '';
-								if (value > 0.05) valueClass = 'axis-positive';
-								else if (value < -0.05) valueClass = 'axis-negative';
-								else valueClass = 'axis-neutral';
+								// Calculate meter fill percentage (0-100%)
+								var fillPercent = Math.abs(value) * 100;
+								var fillClass = value >= 0 ? 'positive' : 'negative';
+								var meterStyle = 'width: ' + fillPercent + '%;';
 								
-								html += '<div class="live-input-item">';
+								html += '<div class="live-input-axis">';
 								html += '<span class="label">' + escapeHtml(axisName) + '<span class="raw-id">#' + i + '</span></span>';
-								html += '<span class="value ' + valueClass + '">' + displayValue + '</span>';
+								html += '<div class="meter-container">';
+								html += '<div class="meter-fill ' + fillClass + '" style="' + meterStyle + '"></div>';
+								html += '</div>';
+								html += '<span class="value">' + displayValue + '</span>';
 								html += '</div>';
 						}
 						
@@ -2658,6 +2740,7 @@ GamepadDevice.prototype.handleConstellationHighlight = function(constellationNam
                     deadzone: 0.15,
                     invertX: false,
                     invertY: false,
+										zoomInvertY: false,
                     zoomSpeed: 0.05,
                     movementSpeed: 5.0,
                     vibrationFeedback: false
