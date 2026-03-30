@@ -1489,7 +1489,11 @@ void ViewDialog::populateLists()
 	// find the earliest beginTime of all cultures (needed in initSkyCultureTime)
 	// ---> evaluate it here so we don't need to iterate over all cultures multiple times
 	int globalBeginTime = QDateTime::currentDateTime().date().year();
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	QMultiMapIterator<QString, QString> cultureRegionIt(cultureRegionMap);
+#else
+	QMapIterator<QString, QString> cultureRegionIt(cultureRegionMap);
+#endif
 	cultureRegionIt.toBack();
 	while (cultureRegionIt.hasPrevious())
 	{
