@@ -332,10 +332,25 @@ void SkyCultureMapGraphicsView::showEvent(QShowEvent *e)
 void SkyCultureMapGraphicsView::scaleView(double factor)
 {
 	// calculate requested zoom before executing the zoom operation to limit the min / max zoom level
-	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
+	QRectF viewRect = viewport()->rect().adjusted(2, 2, - 2, - 2);
+	QRectF sceneRect = transform().scale(factor, factor).mapRect(QRectF(2, 2, defaultRect.width() * 1.3, defaultRect.height() * 1.3));
+	const double currentTransform = transform().mapRect(QRectF(0, 0, 1, 1)).width();
+	const double scaledTransform = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
+	const double windowMapRatio = calculateScaleRatio(defaultRect.width() * 1.3, defaultRect.height() * 1.3);
+	const double scaledWindowMapRatio = std::min(viewRect.width() / sceneRect.width(), viewRect.height() / sceneRect.height());
 
-	if (scaling < 0.16 || scaling > 500.0) // scaling < min or scaling > max zoom level
-		return;
+	if (factor < 1) // zoom out operation
+	{
+		if (scaledWindowMapRatio > 1.0)
+		{
+			factor = windowMapRatio;
+		}
+	}
+	else // zoom in operation
+	{
+		if (scaledTransform > 500.0)
+			factor = 500.0 / currentTransform;
+	}
 
 	scale(factor, factor);
 }
