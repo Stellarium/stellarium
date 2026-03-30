@@ -165,7 +165,8 @@ private:
 		 "Eastern Africa", "Central Africa", "Northern Africa", "Southern Africa", "Western Africa",
 		 "Caribbean", "Central America", "Northern America", "South America",
 		 "Northern Asia", "Central Asia", "Eastern Asia", "South-eastern Asia", "Southern Asia", "Western Asia",
-		 "Australasia", "Melanesia", "Micronesia", "Polynesia"};
+		 "Australasia", "Melanesia", "Micronesia", "Polynesia",
+	         "Other"};
 };
 
 #endif // _VIEWDIALOG_HPP

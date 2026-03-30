@@ -1467,13 +1467,11 @@ void ViewDialog::populateLists()
 	occuringRegions.resize(std::distance(occuringRegions.begin(), std::unique(occuringRegions.begin(), occuringRegions.end())));
 
 	QStringList sortedOccuringRegions;
-	int occuringRegionsCounter = 0;
 	for (const auto& region : sortedRegions)
 	{
 		if (occuringRegions.contains(region))
 		{
 			sortedOccuringRegions.append(region);
-			occuringRegionsCounter++;
 		}
 	}
 
@@ -1482,7 +1480,8 @@ void ViewDialog::populateLists()
 	{
 		l->addItem(new SeparatorListWidgetItem(q_(region)));
 	}
-	if (occuringRegions.size() > occuringRegionsCounter)
+	// oops... the list of regions has unknown region - let's add "other" region for these sky cultures
+	if (occuringRegions.size() > sortedOccuringRegions.size())
 	{
 		l->addItem(new SeparatorListWidgetItem(q_("Other")));
 	}
@@ -1490,8 +1489,12 @@ void ViewDialog::populateLists()
 	// find the earliest beginTime of all cultures (needed in initSkyCultureTime)
 	// ---> evaluate it here so we don't need to iterate over all cultures multiple times
 	int globalBeginTime = QDateTime::currentDateTime().date().year();
-	for (auto cultureRegionIt = std::prev(cultureRegionMap.cend()), end = std::prev(cultureRegionMap.cbegin()); cultureRegionIt != end; cultureRegionIt--)
+	QMultiMapIterator<QString, QString> cultureRegionIt(cultureRegionMap);
+	cultureRegionIt.toBack();
+	while (cultureRegionIt.hasPrevious())
 	{
+		cultureRegionIt.previous();
+
 		QListWidgetItem* item = new QListWidgetItem(cultureRegionIt.key());
 		item->setData(Qt::UserRole, cultureTimeLimitMap.value(cultureRegionIt.key()).first); // beginTime
 		item->setData(Qt::UserRole + 1, cultureTimeLimitMap.value(cultureRegionIt.key()).second); // endTime
@@ -1500,19 +1503,15 @@ void ViewDialog::populateLists()
 		{
 			globalBeginTime = cultureTimeLimitMap.value(cultureRegionIt.key()).first;
 		}
-		if (l->findItems("⸻ " + q_(cultureRegionIt.value()) + " ⸻", Qt::MatchExactly).empty())
-		{
-			// region is unknown (non UN-geoscheme), insert item under "other" separator
-			l->insertItem(l->row(l->findItems("⸻ " + q_("Other") + " ⸻", Qt::MatchExactly).at(0)) + 1, item);
-		}
-		else
-		{
-			// insert item under respective region separator
-			l->insertItem(l->row(l->findItems("⸻ " + q_(cultureRegionIt.value()) + " ⸻", Qt::MatchExactly).at(0)) + 1, item);
-		}
+
+		// When region is unknown (non UN-geoscheme), insert item under "other" separator,
+		// otherwise insert item under respective region separator
+		QString itemName = (l->findItems(q_(cultureRegionIt.value()), Qt::MatchContains).empty()) ? q_("Other") : q_(cultureRegionIt.value());
+		l->insertItem(l->row(l->findItems(itemName, Qt::MatchContains).first()) + 1, item);
 	}
+
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalBeginTime);
-	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
+	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));    
 	l->blockSignals(false);
 
 	updateSkyCultureText();
