@@ -1267,7 +1267,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             
             // View controls
             if (action === "reset_view") { this.sendMovement(0, 0); return; }
-            if (action === "reset_zoom") { viewcontrol.setFOV(60); return; }
+            if (action === "reset_zoom") { 
+								viewcontrol.setFOV(60);
+								// Force immediate update of all FOV displays
+								currentFov = 60;
+								updateFovDisplay(60);
+								return;
+						}
             if (action === "stop_movement") { this.sendMovement(0, 0); return; }
             
             // Educational actions (view directions, zoom, time speed, seasons)
@@ -2756,6 +2762,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         // SECTION 11: INITIALIZATION
         // =====================================================================
 
+				/**
+				 * Initializes the Gamepad Controller module.
+				 * Sets up UI components, event listeners, and starts the polling loop.
+				 * Synchronizes FOV values with viewcontrol and properties API.
+				 * 
+				 * @returns {void}
+				 */
 				function init() {
 						console.log("[Gamepad Controller] Initializing with W3C Gamepad API v2.6.0");
 						loadSettings();
@@ -2774,11 +2787,11 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 								var initialFov = propApi.getStelProp("StelCore.fov");
 								currentFov = (initialFov !== undefined && initialFov !== null) ? initialFov : 60;
 						}
-						// Ensure currentFov is within valid range
+						// Ensure currentFov is within valid range (0.001389° to 360°)
 						currentFov = Math.max(0.001389, Math.min(360, currentFov));
 						updateFovDisplay(currentFov);
 
-						// Listen for FOV changes from viewcontrol
+						// Listen for FOV changes from viewcontrol (triggered when server confirms FOV change)
 						if (viewcontrol) {
 								$(viewcontrol).on("fovChanged", function(evt, fov) {
 										if (Math.abs(fov - currentFov) > 0.0001) {
@@ -2799,6 +2812,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 								});
 						}
 
+						// Monitor server connection status and pause/resume polling accordingly
 						setInterval(function() {
 								var connected = rc && !rc.isConnectionLost();
 								if (connected !== isServerConnected) {
