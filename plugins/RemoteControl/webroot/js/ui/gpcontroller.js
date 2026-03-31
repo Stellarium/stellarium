@@ -584,6 +584,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         var $calibrateBtn, $testVibrationBtn, $vibrationFeedback;
         var $buttonCustomizationContainer;
         var $deviceSelector;
+				var $viewFovSlider;
 
         // Global Settings
         var controllerSettings = {
@@ -1502,20 +1503,41 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						}
 
             // Zoom with corrected direction: pull UP = zoom IN, DOWN = zoom OUT
-            if (Math.abs(rightY) > 0.05) {
+						// Zoom control with right stick - using same range as viewcontrol.js
+						if (Math.abs(rightY) > 0.0005) {
 								var zoomInput = rightY;
 								if (controllerSettings.zoomInvertY) {
 										zoomInput = -zoomInput;
 								}
-                var zoomFactor = 1 - (Math.pow(-zoomInput, 3) * controllerSettings.zoomSpeed * 2);
-                var newFov = currentFov * zoomFactor;
-                newFov = Math.max(0.1, Math.min(235, newFov));
-                if (Math.abs(newFov - currentFov) > 0.001) {
-                    viewcontrol.setFOV(newFov);
-                    currentFov = newFov;
-                    updateFovDisplay(currentFov);
-                }
-            }
+								
+								// Calculate new FOV using cubic curve for smooth response
+								var zoomFactor = 1 - (Math.pow(-zoomInput, 3) * controllerSettings.zoomSpeed * 2);
+								var newFov = currentFov * zoomFactor;
+								
+								// Use the same range as viewcontrol.js (0.001389° to 360°)
+								var minFovAllowed = 0.001389;
+								var maxFovAllowed = 360;
+								newFov = Math.max(minFovAllowed, Math.min(maxFovAllowed, newFov));
+								
+								// Prevent micro-updates that cause judder
+								if (Math.abs(newFov - currentFov) > 0.00005) {
+										currentFov = newFov;
+										
+										// Update via viewcontrol API - this automatically updates the slider
+										if (viewcontrol && typeof viewcontrol.setFOV === 'function') {
+												viewcontrol.setFOV(newFov);
+										}
+										
+										// Update local display
+										updateFovDisplay(currentFov);
+										
+										// Update the main FOV text in view tab directly
+										var $viewFovText = $("#view_fov_text");
+										if ($viewFovText && $viewFovText.length) {
+												$viewFovText.text(currentFov.toPrecision(5));
+										}
+								}
+						}
 
             for (var i = 0; i < gp.buttons.length; i++) {
                 var button = gp.buttons[i];
@@ -1791,30 +1813,81 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             }
         }
 
-        function setActiveDevice(index) {
-            if (index !== null && index !== undefined && gamepadManager && gamepadManager.getDevice(index)) {
-                activeDeviceIndex = index;
-                currentDeviceInfo = gamepadManager.getDevice(index);
-                updateConnectionStatus(true, currentDeviceInfo);
-                updateDeviceSelector();
-                populateButtonCustomization();
-                updateCalibrationDisplayForDevice(currentDeviceInfo);
+				function setActiveDevice(index) {
+						if (index !== null && index !== undefined && gamepadManager && gamepadManager.getDevice(index)) {
+								activeDeviceIndex = index;
+								currentDeviceInfo = gamepadManager.getDevice(index);
+								updateConnectionStatus(true, currentDeviceInfo);
+								updateDeviceSelector();
+								populateButtonCustomization();
+								updateCalibrationDisplayForDevice(currentDeviceInfo);
 								updateLiveInputDisplay();
-            } else {
-                activeDeviceIndex = null;
-                currentDeviceInfo = null;
-                updateConnectionStatus(false);
-                updateDeviceSelector();
-                populateButtonCustomization();
+								
+								// Refresh FOV display when switching devices - use viewcontrol range
+								if (viewcontrol && typeof viewcontrol.getFOV === 'function') {
+										currentFov = Math.max(0.001389, Math.min(360, viewcontrol.getFOV()));
+										updateFovDisplay(currentFov);
+								}
+						} else {
+								activeDeviceIndex = null;
+								currentDeviceInfo = null;
+								updateConnectionStatus(false);
+								updateDeviceSelector();
+								populateButtonCustomization();
 								updateLiveInputDisplay();
-            }
-        }
+						}
+				}
 
-        function updateFovDisplay(fov) {
-            if ($currentFov && $currentFov.length) {
-                $currentFov.text(fov.toFixed(2) + "°");
-            }
-        }
+				/**
+				 * Updates the FOV display in the gamepad panel and synchronizes with the main FOV slider.
+				 * Uses the same mathematical transformation as viewcontrol.js to ensure perfect synchronization.
+				 * 
+				 * @param {number} fov - Field of view in degrees (range: 0.001389 to 360)
+				 */
+				function updateFovDisplay(fov) {
+						// Update text display in gamepad panel
+						if ($currentFov && $currentFov.length) {
+								var displayFov = isNaN(fov) ? 60 : Math.max(0.001389, Math.min(360, fov));
+								$currentFov.text(displayFov.toFixed(2) + "°");
+						}
+						
+						// Update the main FOV text in view tab (for immediate feedback)
+								var $viewFovText = $("#view_fov_text");
+								if ($viewFovText && $viewFovText.length) {
+										$viewFovText.text(fov.toPrecision(3));
+								}
+						
+						// Synchronize with main FOV slider in view tab using identical transformation
+						if ($viewFovSlider && $viewFovSlider.length && $viewFovSlider.slider) {
+								var minVal = $viewFovSlider.slider("option", "min") || 0;
+								var maxVal = $viewFovSlider.slider("option", "max") || 1000;
+								var fovSteps = maxVal - minVal;
+								
+								// Constants matching viewcontrol.js
+								var minFovActual = 0.001389;
+								var maxFovActual = 360;
+								
+								// Clamp fov to valid range
+								var clampedFov = Math.max(minFovActual, Math.min(maxFovActual, fov));
+								
+								// Apply the same formula as viewcontrol.js: 
+								// t = (fov - min) / (max - min)
+								// val = t^(1/4)
+								// sliderValue = fovSteps - (val * fovSteps)
+								var t = (clampedFov - minFovActual) / (maxFovActual - minFovActual);
+								t = Math.max(0, Math.min(1, t));
+								
+								var val = Math.pow(t, 0.25);
+								var sliderValue = Math.round(val * fovSteps);
+								var finalValue = fovSteps - sliderValue;
+								finalValue = Math.max(minVal, Math.min(maxVal, finalValue));
+								
+								var currentSliderValue = $viewFovSlider.slider("value");
+								if (Math.abs(currentSliderValue - finalValue) > 1) {
+										$viewFovSlider.slider("value", finalValue);
+								}
+						}
+				}
 
 				/**
 				 * Updates the joystick preview canvas with current stick position.
@@ -2237,6 +2310,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             $testVibrationBtn = $("#gp-test-vibration");
 						 // $vibrationFeedback = $("#gp-vibration-feedback");
             $buttonCustomizationContainer = $("#gp-button-customization");
+						$viewFovSlider = $("#view_fov");
 						
 						// New vibration intensity slider
 						var $vibrationIntensityRow = $("#gp-vibration-intensity-row");
@@ -2327,7 +2401,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             
             if ($zoomSpeedSlider.length) {
                 $zoomSpeedSlider.slider({
-                    min: 0.01, max: 0.3, step: 0.01, value: controllerSettings.zoomSpeed,
+                    min: 0.005, max: 0.1, step: 0.001, value: controllerSettings.zoomSpeed,
                     slide: function(e, ui) {
                         controllerSettings.zoomSpeed = ui.value;
                         $("#gp-zoom-speed-value").text(ui.value.toFixed(2));
@@ -2338,7 +2412,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             
             if ($movementSpeedSlider.length) {
                 $movementSpeedSlider.slider({
-                    min: 1, max: 15, step: 0.5, value: controllerSettings.movementSpeed,
+                    min: 0.5, max: 5, step: 0.5, value: controllerSettings.movementSpeed,
                     slide: function(e, ui) {
                         controllerSettings.movementSpeed = ui.value;
                         $("#gp-movement-speed-value").text(ui.value.toFixed(1));
@@ -2682,46 +2756,65 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         // SECTION 11: INITIALIZATION
         // =====================================================================
 
-        function init() {
-            console.log("[Gamepad Controller] Initializing with W3C Gamepad API v2.4.0");
-            loadSettings();
-            setupUI();
+				function init() {
+						console.log("[Gamepad Controller] Initializing with W3C Gamepad API v2.6.0");
+						loadSettings();
+						setupUI();
 
-            gamepadManager = new GamepadManager();
-						
-						// Start background scanning for new devices
+						gamepadManager = new GamepadManager();
 						gamepadManager.startBackgroundScan(3000);
-            
-            loadPluginActions();
+						
+						loadPluginActions();
 
-            if (propApi) {
-                $(propApi).on("stelPropertyChanged:StelCore.fov", function(evt, data) {
-                    currentFov = data.value;
-                    updateFovDisplay(currentFov);
-                });
-            }
-            
-            $(viewcontrol).on("fovChanged", function(evt, fov) {
-                currentFov = fov;
-                updateFovDisplay(fov);
-            });
+						// Get initial FOV value - use the same range as viewcontrol.js
+						if (viewcontrol && typeof viewcontrol.getFOV === 'function') {
+								var initialFov = viewcontrol.getFOV();
+								currentFov = (initialFov !== undefined && initialFov !== null) ? initialFov : 60;
+						} else if (propApi) {
+								var initialFov = propApi.getStelProp("StelCore.fov");
+								currentFov = (initialFov !== undefined && initialFov !== null) ? initialFov : 60;
+						}
+						// Ensure currentFov is within valid range
+						currentFov = Math.max(0.001389, Math.min(360, currentFov));
+						updateFovDisplay(currentFov);
 
-            setInterval(function() {
-                var connected = rc && !rc.isConnectionLost();
-                if (connected !== isServerConnected) {
-                    isServerConnected = connected;
-                    if (!connected) {
-                        console.warn("[Gamepad] Server connection lost. Stopping polling.");
-                        if (gamepadManager) gamepadManager.stopPolling();
-                    } else {
-                        console.log("[Gamepad] Server connection restored. Resuming polling.");
-                        if (gamepadManager) gamepadManager.startPolling();
-                    }
-                }
-            }, 2000);
+						// Listen for FOV changes from viewcontrol
+						if (viewcontrol) {
+								$(viewcontrol).on("fovChanged", function(evt, fov) {
+										if (Math.abs(fov - currentFov) > 0.0001) {
+												currentFov = Math.max(0.001389, Math.min(360, fov));
+												updateFovDisplay(currentFov);
+										}
+								});
+						}
+						
+						// Listen for FOV changes from properties API as fallback
+						if (propApi) {
+								$(propApi).on("stelPropertyChanged:StelCore.fov", function(evt, data) {
+										var newFov = data.value;
+										if (Math.abs(newFov - currentFov) > 0.00001) {
+												currentFov = Math.max(0.001389, Math.min(360, newFov));
+												updateFovDisplay(currentFov);
+										}
+								});
+						}
 
-            console.log("[Gamepad Controller] Initialization complete.");
-        }
+						setInterval(function() {
+								var connected = rc && !rc.isConnectionLost();
+								if (connected !== isServerConnected) {
+										isServerConnected = connected;
+										if (!connected) {
+												console.warn("[Gamepad] Server connection lost. Stopping polling.");
+												if (gamepadManager) gamepadManager.stopPolling();
+										} else {
+												console.log("[Gamepad] Server connection restored. Resuming polling.");
+												if (gamepadManager) gamepadManager.startPolling();
+										}
+								}
+						}, 2000);
+
+						console.log("[Gamepad Controller] Initialization complete.");
+				}
 
         // =====================================================================
         // SECTION 12: PUBLIC API
@@ -2734,20 +2827,27 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 return $.extend(true, {}, controllerSettings);
             },
             
-            resetSettings: function() {
-                controllerSettings = {
-                    sensitivity: 1.0,
-                    deadzone: 0.15,
-                    invertX: false,
-                    invertY: false,
+						resetSettings: function() {
+								controllerSettings = {
+										sensitivity: 1.0,
+										deadzone: 0.15,
+										invertX: false,
+										invertY: false,
 										zoomInvertY: false,
-                    zoomSpeed: 0.05,
-                    movementSpeed: 5.0,
-                    vibrationFeedback: false
-                };
-                saveSettings();
-                location.reload();
-            },
+										zoomSpeed: 0.05,
+										movementSpeed: 5.0,
+										vibrationFeedback: false,
+										vibrationIntensity: 0.5
+								};
+								saveSettings();
+								// Reset FOV to default value within viewcontrol range
+								currentFov = 60;
+								if (viewcontrol && typeof viewcontrol.setFOV === 'function') {
+										viewcontrol.setFOV(60);
+								}
+								updateFovDisplay(currentFov);
+								location.reload();
+						},
             
             startCalibration: startCalibration,
             
