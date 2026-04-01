@@ -2199,30 +2199,37 @@ bool AstroCalcDialog::findSunAtAltitude(double dayJD, double targetAltDeg, bool 
 
 	const double targetSinAlt = std::sin(targetAltRad);
 
-	// Determine search interval relative to dayJD (0h UT of the calendar day).
+	// Compute approximate local noon from the observer's longitude.
+	// Local noon ≈ 12:00 local solar time ≈ dayJD + 0.5 - longitude/360.
+	// This works correctly for any timezone and longitude on Earth.
+	const double longitude = static_cast<double>(core->getCurrentLocation().getLongitude());
+	const double localNoon = dayJD + 0.5 - longitude / 360.0;
+
 	// Evening crossing: Sun descends through targetAlt after local noon.
-	//   Search from local noon to next midnight — bracket [+0.4, +1.1] in UT
-	//   covers ~09:36 UT to ~02:24 UT next day, safely containing evening for all timezones.
+	//   Search from local noon (Sun at maximum altitude) to local midnight (noon + 0.5 day).
 	// Morning crossing: Sun ascends through targetAlt before local noon.
-	//   Search from previous midnight to local noon — bracket [-0.1, +0.6] in UT
-	//   covers ~21:36 UT prev day to ~14:24 UT, safely containing morning for all timezones.
+	//   Search from local midnight (noon - 0.5 day) to local noon (Sun at maximum altitude).
+	// At local noon the Sun is at its highest — guaranteed above any negative target altitude
+	// unless it never rises (polar night), in which case the sign test will correctly return false.
 	double tLow, tHigh;
 	if (evening)
 	{
-		tLow  = dayJD + 0.4;  // ~09:36 UT — after sunrise, Sun is above target
-		tHigh = dayJD + 1.1;  // ~02:24 UT next day — Sun is well below target
+		tLow  = localNoon;         // Sun is highest — above target
+		tHigh = localNoon + 0.5;   // Local midnight — Sun is lowest — below target
 	}
 	else
 	{
-		tLow  = dayJD - 0.1;  // ~21:36 UT prev day — Sun is below target
-		tHigh = dayJD + 0.6;  // ~14:24 UT — after sunrise, Sun is above target
+		tLow  = localNoon - 0.5;   // Local midnight — Sun is lowest — below target
+		tHigh = localNoon;         // Sun is highest — above target
 	}
 
 	// Evaluate at both ends
 	const double fLow  = sunSinAlt(tLow)  - targetSinAlt;
 	const double fHigh = sunSinAlt(tHigh) - targetSinAlt;
 
-	// If both endpoints have the same sign, no crossing in this interval (polar case)
+	// If both endpoints have the same sign, no crossing in this interval.
+	// This correctly handles polar night (Sun never above target)
+	// and midnight sun (Sun never below target).
 	if (fLow * fHigh > 0.0)
 		return false;
 
