@@ -1141,8 +1141,10 @@ private slots:
 	void setEphemerisNeptuneMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisNeptuneMarkerColor(void) const;
 
+#ifndef NO_GUI
 	//! Taking the JD dates for each ephemeride and preparation the human readable dates according to the settings for dates
 	void fillEphemerisDates();
+#endif
 
 	//! When some aspect of orbit drawing changes, update their configuration
 	void reconfigureOrbits();
@@ -1161,14 +1163,16 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
+#ifndef NO_GUI
 	//! Draw ephemeris lines and markers
 	void drawEphemerisItems(const StelCore* core);
 
-	//! Draw a nice markers for ephemeris of objects.
+	//! Draw nice markers for ephemeris of objects.
 	void drawEphemerisMarkers(const StelCore* core);
 
-	//! Draw a line, who connected markers for ephemeris of objects.
+	//! Draw a line which connects markers for ephemeris of objects.
 	void drawEphemerisLine(const StelCore* core);
+#endif
 
 	//! Load planet data from the Solar System configuration files.
 	//! This function attempts to load every possible instance of the

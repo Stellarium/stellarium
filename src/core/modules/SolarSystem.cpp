@@ -49,7 +49,10 @@
 #include "TrailGroup.hpp"
 #include "StelMovementMgr.hpp"
 
+#ifndef NO_GUI
 #include "AstroCalcDialog.hpp"
+#endif
+
 #include "StelObserver.hpp"
 
 #include <algorithm>
@@ -391,20 +394,21 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
 	addAction("actionShow_Planets_ShowMinorBodyMarkers", displayGroup, N_("Mark minor bodies"), "flagMarkers");
 
+#ifndef NO_GUI
 	// Fill ephemeris dates
-	connect(this, SIGNAL(requestEphemerisVisualization()), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisDataStepChanged(int)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSkipDataChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSkipMarkersChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSmartDatesChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelYearChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelMonthChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelDayChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelHourChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelMinuteChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelSecondChanged(bool)), this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(requestEphemerisVisualization()),        this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisDataStepChanged(int)),          this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisSkipDataChanged(bool)),         this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisSkipMarkersChanged(bool)),      this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisSmartDatesChanged(bool)),       this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelYearChanged(bool)),        this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelMonthChanged(bool)),       this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelDayChanged(bool)),         this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelHourChanged(bool)),        this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelMinuteChanged(bool)),      this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelSecondChanged(bool)),      this, SLOT(fillEphemerisDates()));
 	connect(this, SIGNAL(ephemerisFirstOfMonthOnlyChanged(bool)), this, SLOT(fillEphemerisDates()));
-
+#endif
 
 	// Create shader program for mass drawing of asteroid markers
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
@@ -1943,8 +1947,10 @@ struct biggerDistance : public StelUtils::binary_function<PlanetP, PlanetP, bool
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core)
 {
+#ifndef NO_GUI
 	// AstroCalcDialog
 	drawEphemerisItems(core);
+#endif
 
 	if (!flagShow)
 		return;
@@ -2059,6 +2065,7 @@ bool SolarSystem::drawAsteroidMarker(StelCore* core, StelPainter* sPainter, cons
 	return true;
 }
 
+#ifndef NO_GUI
 void SolarSystem::drawEphemerisItems(const StelCore* core)
 {
 	if (flagShow || (!flagShow && getFlagEphemerisAlwaysOn()))
@@ -2436,6 +2443,7 @@ void SolarSystem::fillEphemerisDates()
 		}
 	}
 }
+#endif
 
 PlanetP SolarSystem::searchByEnglishName(const QString &planetEnglishName) const
 {

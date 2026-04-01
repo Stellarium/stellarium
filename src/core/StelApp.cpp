@@ -1585,8 +1585,10 @@ QString StelApp::getVersion() const
 
 void StelApp::enableBottomStelBarUpdates(bool enable)
 {
+#ifndef NO_GUI
 	StelGui *gui=dynamic_cast<StelGui*>(getGui());
 	gui->getButtonBar()->enableTopoCentricUpdate(enable);
+#endif
 }
 
 void StelApp::dumpFontInfo() const
