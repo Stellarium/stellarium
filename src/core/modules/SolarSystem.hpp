@@ -100,6 +100,18 @@ class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
 	Q_PROPERTY(bool ephemerisAlwaysOn		READ getFlagEphemerisAlwaysOn		WRITE setFlagEphemerisAlwaysOn		NOTIFY ephemerisAlwaysOnChanged)
 	Q_PROPERTY(bool ephemerisNow			READ getFlagEphemerisNow		WRITE setFlagEphemerisNow		NOTIFY ephemerisNowChanged)
+	// Ephemeris label component properties (which parts of the date to show)
+	Q_PROPERTY(bool ephemerisLabelYear		READ getFlagEphemerisLabelYear		WRITE setFlagEphemerisLabelYear		NOTIFY ephemerisLabelYearChanged)
+	Q_PROPERTY(bool ephemerisLabelMonth		READ getFlagEphemerisLabelMonth		WRITE setFlagEphemerisLabelMonth	NOTIFY ephemerisLabelMonthChanged)
+	Q_PROPERTY(bool ephemerisLabelDay		READ getFlagEphemerisLabelDay		WRITE setFlagEphemerisLabelDay		NOTIFY ephemerisLabelDayChanged)
+	Q_PROPERTY(bool ephemerisLabelHour		READ getFlagEphemerisLabelHour		WRITE setFlagEphemerisLabelHour		NOTIFY ephemerisLabelHourChanged)
+	Q_PROPERTY(bool ephemerisLabelMinute		READ getFlagEphemerisLabelMinute		WRITE setFlagEphemerisLabelMinute	NOTIFY ephemerisLabelMinuteChanged)
+	Q_PROPERTY(bool ephemerisLabelSecond		READ getFlagEphemerisLabelSecond		WRITE setFlagEphemerisLabelSecond	NOTIFY ephemerisLabelSecondChanged)
+	// Show labels only for 1st of each month
+	Q_PROPERTY(bool ephemerisFirstOfMonthOnly	READ getFlagEphemerisFirstOfMonthOnly	WRITE setFlagEphemerisFirstOfMonthOnly	NOTIFY ephemerisFirstOfMonthOnlyChanged)
+	// Anti-clutter: minimum screen distance (px) between labels
+	Q_PROPERTY(int ephemerisLabelAntiClutterPx	READ getEphemerisLabelAntiClutterPx	WRITE setEphemerisLabelAntiClutterPx	NOTIFY ephemerisLabelAntiClutterPxChanged)
+	Q_PROPERTY(bool ephemerisLabelAntiClutter	READ getFlagEphemerisLabelAntiClutter	WRITE setFlagEphemerisLabelAntiClutter	NOTIFY ephemerisLabelAntiClutterChanged)
 	// Great Red Spot (GRS) properties
 	Q_PROPERTY(int grsLongitude			READ getGrsLongitude			WRITE setGrsLongitude			NOTIFY grsLongitudeChanged)
 	Q_PROPERTY(double grsDrift			READ getGrsDrift			WRITE setGrsDrift			NOTIFY grsDriftChanged)
@@ -856,6 +868,15 @@ signals:
 	void ephemerisDataLimitChanged(int s);
 	void ephemerisSmartDatesChanged(bool b);
 	void ephemerisScaleMarkersChanged(bool b);
+	void ephemerisLabelYearChanged(bool b);
+	void ephemerisLabelMonthChanged(bool b);
+	void ephemerisLabelDayChanged(bool b);
+	void ephemerisLabelHourChanged(bool b);
+	void ephemerisLabelMinuteChanged(bool b);
+	void ephemerisLabelSecondChanged(bool b);
+	void ephemerisFirstOfMonthOnlyChanged(bool b);
+	void ephemerisLabelAntiClutterPxChanged(int v);
+	void ephemerisLabelAntiClutterChanged(bool b);
 	void grsLongitudeChanged(int l);
 	void grsDriftChanged(double drift);
 	void grsJDChanged(double JD);
@@ -1045,6 +1066,37 @@ private slots:
 	//! Get the current value of the flag which allow scaling the ephemeris markers
 	bool getFlagEphemerisScaleMarkers() const;
 
+	//! @name Ephemeris label component flags (which parts of the date to show)
+	//! @{
+	void setFlagEphemerisLabelYear(bool b);
+	bool getFlagEphemerisLabelYear() const;
+	void setFlagEphemerisLabelMonth(bool b);
+	bool getFlagEphemerisLabelMonth() const;
+	void setFlagEphemerisLabelDay(bool b);
+	bool getFlagEphemerisLabelDay() const;
+	void setFlagEphemerisLabelHour(bool b);
+	bool getFlagEphemerisLabelHour() const;
+	void setFlagEphemerisLabelMinute(bool b);
+	bool getFlagEphemerisLabelMinute() const;
+	void setFlagEphemerisLabelSecond(bool b);
+	bool getFlagEphemerisLabelSecond() const;
+	//! @}
+
+	//! Set flag to show labels only for the 1st of each month
+	void setFlagEphemerisFirstOfMonthOnly(bool b);
+	//! Get the current value of the flag which show labels only for the 1st of each month
+	bool getFlagEphemerisFirstOfMonthOnly() const;
+
+	//! Set flag to enable anti-clutter filtering for ephemeris labels
+	void setFlagEphemerisLabelAntiClutter(bool b);
+	//! Get the current value of the anti-clutter flag
+	bool getFlagEphemerisLabelAntiClutter() const;
+
+	//! Set the minimum screen pixel distance for the anti-clutter filter
+	void setEphemerisLabelAntiClutterPx(int v);
+	//! Get the minimum screen pixel distance for the anti-clutter filter
+	int getEphemerisLabelAntiClutterPx() const;
+
 	//! Set the step of skip for date of ephemeris markers (and markers if it enabled)
 	void setEphemerisDataStep(int step);
 	//! Get the step of skip for date of ephemeris markers
@@ -1206,6 +1258,16 @@ private:
 	int ephemerisDataLimit;				// Number of celestial bodies in ephemeris data (how many celestial bodies was in computing of ephemeris)
 	bool ephemerisSmartDatesDisplayed;
 	bool ephemerisScaleMarkersDisplayed;
+	// Ephemeris label component flags
+	bool ephemerisLabelYear;
+	bool ephemerisLabelMonth;
+	bool ephemerisLabelDay;
+	bool ephemerisLabelHour;
+	bool ephemerisLabelMinute;
+	bool ephemerisLabelSecond;
+	bool ephemerisFirstOfMonthOnly;
+	bool ephemerisLabelAntiClutter;
+	int ephemerisLabelAntiClutterPx;
 	Vec3f ephemerisGenericMarkerColor;
 	Vec3f ephemerisSecondaryMarkerColor;
 	Vec3f ephemerisSelectedMarkerColor;

@@ -22,6 +22,7 @@
 #include "StelDialog.hpp"
 
 #include <QObject>
+#include <QSettings>
 
 class Ui_astroCalcExtraEphemerisDialogForm;
 
@@ -39,11 +40,16 @@ public slots:
 
 private slots:
 	void setOptionStatus();
+	void saveSunAltitude(double alt);
+	void saveSunAltitudeEvening(bool evening);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_astroCalcExtraEphemerisDialogForm *ui;
+
+private:
+	QSettings* conf;
 };
 
 #endif // ASTROCALCEXTRAEPHEMERISDIALOG_HPP

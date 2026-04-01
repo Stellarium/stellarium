@@ -276,6 +276,9 @@ public:
 		Years	= 6
 	};
 
+	//! Special time step mode: place markers at the moment when the Sun reaches a given altitude each day
+	static constexpr int EphemerisTimeStepSunAtAltitude = 41;
+
 	AstroCalcDialog(QObject* parent);
 	~AstroCalcDialog() override;
 
@@ -607,6 +610,15 @@ private:
 	void enableCustomEphemerisTimeStepButton();
 	double getCustomTimeStep();
 	void reGenerateEphemeris(bool withSelection);
+
+	//! Find the JD at which the Sun reaches a given altitude (degrees) on a given day.
+	//! Uses bisection on the Sun's altitude in the local frame.
+	//! @param dayJD the Julian Date of the start of the day (0h UT)
+	//! @param targetAltDeg the target Sun altitude in degrees (typically negative)
+	//! @param evening if true, search the evening crossing; if false, the morning crossing
+	//! @param[out] resultJD the JD at which the Sun reaches targetAltDeg
+	//! @return true if a solution was found, false if the Sun never reaches the target altitude
+	bool findSunAtAltitude(double dayJD, double targetAltDeg, bool evening, double &resultJD);
 
 	//! Finding and selecting an object by its name in specific JD
 	void goToObject(const QString &name, const double JD);

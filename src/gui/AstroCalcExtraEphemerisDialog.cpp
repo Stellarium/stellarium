@@ -20,10 +20,12 @@
 #include "ui_astroCalcExtraEphemerisDialog.h"
 
 #include "Dialog.hpp"
+#include "StelApp.hpp"
 
 AstroCalcExtraEphemerisDialog::AstroCalcExtraEphemerisDialog() : StelDialog("AstroCalcExtraEphemeris")
 {
 	ui = new Ui_astroCalcExtraEphemerisDialogForm;
+	conf = StelApp::getInstance().getSettings();
 }
 
 AstroCalcExtraEphemerisDialog::~AstroCalcExtraEphemerisDialog()
@@ -49,6 +51,9 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->skipDataCheckBox, SIGNAL(clicked()), this, SLOT(setOptionStatus()));
+	connect(ui->smartDatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
+	connect(ui->firstOfMonthOnlyCheckBox, SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
+	connect(ui->antiClutterCheckBox, SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
 
 	connectBoolProperty(ui->skipDataCheckBox,	"SolarSystem.ephemerisSkippedData");
 	connectBoolProperty(ui->skipMarkersCheckBox,	"SolarSystem.ephemerisSkippedMarkers");
@@ -59,10 +64,54 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	connectBoolProperty(ui->currentLocationCheckBox,"SolarSystem.ephemerisNow" );
 	connectIntProperty(ui->lineThicknessSpinBox,	"SolarSystem.ephemerisLineThickness");
 
+	// Label date component checkboxes
+	connectBoolProperty(ui->labelYearCheckBox,	"SolarSystem.ephemerisLabelYear");
+	connectBoolProperty(ui->labelMonthCheckBox,	"SolarSystem.ephemerisLabelMonth");
+	connectBoolProperty(ui->labelDayCheckBox,	"SolarSystem.ephemerisLabelDay");
+	connectBoolProperty(ui->labelHourCheckBox,	"SolarSystem.ephemerisLabelHour");
+	connectBoolProperty(ui->labelMinuteCheckBox,	"SolarSystem.ephemerisLabelMinute");
+	connectBoolProperty(ui->labelSecondCheckBox,	"SolarSystem.ephemerisLabelSecond");
+
+	// Anti-clutter
+	connectBoolProperty(ui->antiClutterCheckBox,	"SolarSystem.ephemerisLabelAntiClutter");
+	connectIntProperty(ui->antiClutterSpinBox,	"SolarSystem.ephemerisLabelAntiClutterPx");
+
+	// First-of-month-only
+	connectBoolProperty(ui->firstOfMonthOnlyCheckBox, "SolarSystem.ephemerisFirstOfMonthOnly");
+
+	// Sun at altitude settings (stored directly in conf, read by AstroCalcDialog::generateEphemeris)
+	// Save defaults to conf immediately so generateEphemeris() can read them even if user doesn't touch the spinbox
+	const double savedAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
+	ui->sunAltitudeSpinBox->setValue(savedAlt);
+	conf->setValue("astrocalc/ephemeris_sun_altitude", savedAlt);
+	const bool savedEvening = conf->value("astrocalc/ephemeris_sun_altitude_evening", true).toBool();
+	ui->sunAltEveningCheckBox->setChecked(savedEvening);
+	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", savedEvening);
+	connect(ui->sunAltitudeSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveSunAltitude(double)));
+	connect(ui->sunAltEveningCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSunAltitudeEvening(bool)));
+
 	setOptionStatus();
 }
 
 void AstroCalcExtraEphemerisDialog::setOptionStatus()
 {
 	ui->skipMarkersCheckBox->setEnabled(ui->skipDataCheckBox->isChecked());
+
+	// When "smart dates" is on, the per-component checkboxes are not used
+	const bool smartDates = ui->smartDatesCheckBox->isChecked();
+	const bool firstOfMonth = ui->firstOfMonthOnlyCheckBox->isChecked();
+	ui->labelComponentsGroupBox->setEnabled(!smartDates && !firstOfMonth);
+
+	// Anti-clutter spinbox enabled only when anti-clutter checkbox is checked
+	ui->antiClutterSpinBox->setEnabled(ui->antiClutterCheckBox->isChecked());
+}
+
+void AstroCalcExtraEphemerisDialog::saveSunAltitude(double alt)
+{
+	conf->setValue("astrocalc/ephemeris_sun_altitude", alt);
+}
+
+void AstroCalcExtraEphemerisDialog::saveSunAltitudeEvening(bool evening)
+{
+	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", evening);
 }

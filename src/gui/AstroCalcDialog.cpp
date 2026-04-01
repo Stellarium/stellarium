@@ -40,6 +40,7 @@
 #include "StelJsonParser.hpp"
 #include "planetsephems/sidereal_time.h"
 
+#include <cmath>
 #include <QImage>
 #include <QPainter>
 
@@ -1996,13 +1997,28 @@ void AstroCalcDialog::generateEphemeris()
 	int idxRow = 0, colorIndex = 0;
 	const PlanetP& cplanet = core->getCurrentPlanet();
 	const PlanetP& sun = solarSystem->getSun();
-	const double currentStep = getEphemerisTimeStep(cplanet);
 	const double currentJD = core->getJD(); // save current JD
 	double firstJD;
 	StelUtils::getJDFromDate(&firstJD, ui->dateFromYearSpinBox->value(), ui->dateFromMonthSpinBox->value(), ui->dateFromDaySpinBox->value(), ui->dateFromHourSpinBox->value(), ui->dateFromMinuteSpinBox->value(), 0.0);
 	firstJD -= core->getUTCOffset(firstJD) / 24.;
 	double secondJD = firstJD + ui->dateToDurationSpinBox->value()*getEphemerisTimeDuration();
 
+	// Detect "Sun at altitude" mode
+	const bool sunAtAltitudeMode = (ui->ephemerisStepComboBox->currentData().toInt() == EphemerisTimeStepSunAtAltitude);
+	double sunTargetAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
+	bool sunAltEvening = conf->value("astrocalc/ephemeris_sun_altitude_evening", true).toBool();
+
+	// If the Extra Ephemeris dialog has been opened, read the spinbox values directly
+	// to ensure we use the latest user input (avoids any QSettings caching issues).
+	if (extraEphemerisDialog != nullptr)
+	{
+		// Force a conf sync so any pending writes from the dialog are available
+		conf->sync();
+		sunTargetAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
+		sunAltEvening = conf->value("astrocalc/ephemeris_sun_altitude_evening", true).toBool();
+	}
+
+	const double currentStep = sunAtAltitudeMode ? 1.0 : getEphemerisTimeStep(cplanet);
 	const int elements = static_cast<int>((secondJD - firstJD) / currentStep);
 	EphemerisList.clear();
 	const bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
@@ -2063,8 +2079,27 @@ void AstroCalcDialog::generateEphemeris()
 
 		for (int i = 0; i <= elements; i++)
 		{
+			double JD;
+			if (sunAtAltitudeMode)
+			{
+				// Step day-by-day and solve for the moment when the Sun reaches the target altitude.
+				// Normalize to 0h UT of each calendar day so the search brackets are always correct,
+				// regardless of what hour/minute the user set as the start date.
+				int yy, mm, dd;
+				StelUtils::getDateFromJulianDay(firstJD + i * 1.0, &yy, &mm, &dd);
+				double dayJD;
+				StelUtils::getJDFromDate(&dayJD, yy, mm, dd, 0, 0, 0.0);
+				double solvedJD;
+				if (!findSunAtAltitude(dayJD, sunTargetAlt, sunAltEvening, solvedJD))
+					continue; // No solution for this day (e.g. polar region), skip marker
+				JD = solvedJD;
+			}
+			else
+			{
+				JD = firstJD + i * currentStep;
+			}
+
 			Vec3d pos, sunPos;
-			const double JD = firstJD + i * currentStep;
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
 
@@ -2143,6 +2178,73 @@ void AstroCalcDialog::generateEphemeris()
 	computeEphemeris = true;
 
 	emit solarSystem->requestEphemerisVisualization();
+}
+
+bool AstroCalcDialog::findSunAtAltitude(double dayJD, double targetAltDeg, bool evening, double &resultJD)
+{
+	// Bisection solver to find when the Sun reaches targetAltDeg on the given day.
+	// dayJD should be at 0h UT for the calendar day in question.
+	// The Sun's altitude is obtained from its AltAz position.
+	const PlanetP& sun = solarSystem->getSun();
+	const double targetAltRad = targetAltDeg * M_PI / 180.0;
+
+	// Lambda to compute the Sun's sine of altitude at a given JD
+	auto sunSinAlt = [&](double jd) -> double {
+		core->setJD(jd);
+		core->update(0);
+		Vec3d sunAltAz = sun->getAltAzPosAuto(core);
+		sunAltAz.normalize();
+		return sunAltAz[2]; // z component = sin(altitude) in Stellarium's AltAz frame
+	};
+
+	const double targetSinAlt = std::sin(targetAltRad);
+
+	// Determine search interval relative to dayJD (0h UT of the calendar day).
+	// Evening crossing: Sun descends through targetAlt after local noon.
+	//   Search from local noon to next midnight — bracket [+0.4, +1.1] in UT
+	//   covers ~09:36 UT to ~02:24 UT next day, safely containing evening for all timezones.
+	// Morning crossing: Sun ascends through targetAlt before local noon.
+	//   Search from previous midnight to local noon — bracket [-0.1, +0.6] in UT
+	//   covers ~21:36 UT prev day to ~14:24 UT, safely containing morning for all timezones.
+	double tLow, tHigh;
+	if (evening)
+	{
+		tLow  = dayJD + 0.4;  // ~09:36 UT — after sunrise, Sun is above target
+		tHigh = dayJD + 1.1;  // ~02:24 UT next day — Sun is well below target
+	}
+	else
+	{
+		tLow  = dayJD - 0.1;  // ~21:36 UT prev day — Sun is below target
+		tHigh = dayJD + 0.6;  // ~14:24 UT — after sunrise, Sun is above target
+	}
+
+	// Evaluate at both ends
+	const double fLow  = sunSinAlt(tLow)  - targetSinAlt;
+	const double fHigh = sunSinAlt(tHigh) - targetSinAlt;
+
+	// If both endpoints have the same sign, no crossing in this interval (polar case)
+	if (fLow * fHigh > 0.0)
+		return false;
+
+	// Bisection: 30 iterations give ~1e-9 day ≈ 0.1 ms precision, far more than needed
+	double lo = tLow, hi = tHigh;
+	double flo = fLow;
+	for (int iter = 0; iter < 30; ++iter)
+	{
+		const double mid = 0.5 * (lo + hi);
+		const double fmid = sunSinAlt(mid) - targetSinAlt;
+		if (fmid * flo <= 0.0)
+		{
+			hi = mid;
+		}
+		else
+		{
+			lo = mid;
+			flo = fmid;
+		}
+	}
+	resultJD = 0.5 * (lo + hi);
+	return true;
 }
 
 double AstroCalcDialog::getCustomTimeStep()
@@ -4975,7 +5077,8 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 		{q_("1 sidereal year"), "27"}, {q_("1 Julian day"), "12"}, {q_("5 Julian days"), "13"}, {q_("10 Julian days"), "14"}, {q_("15 Julian days"), "15"},
 		{q_("30 Julian days"), "16"}, {q_("60 Julian days"), "17"}, {q_("100 Julian days"), "26"}, {q_("1 Julian year"), "28"},
 		{q_("1 Gaussian year"), "29"}, {q_("1 synodic month"), "30"}, {q_("1 draconic month"), "31"}, {q_("1 mean tropical month"), "32"},
-		{q_("1 anomalistic month"), "33"} ,{q_("1 anomalistic year"), "34"}, {q_("1 saros"), "35"}, {q_("custom interval"), "0"}
+		{q_("1 anomalistic month"), "33"} ,{q_("1 anomalistic year"), "34"}, {q_("1 saros"), "35"}, {q_("custom interval"), "0"},
+		{q_("Sun at altitude"), "41"}
 	};
 	Q_ASSERT(ui->ephemerisStepComboBox);
 	QComboBox* steps = ui->ephemerisStepComboBox;
