@@ -963,24 +963,75 @@
 													</select>
 											</div>                
 											<!-- Device Information -->
-											<div class="device-info-card">
-													<div class="device-info-row">
-															<span class="device-info-label"><?= tr("Device:")?></span>
-															<span class="device-info-value" id="gp-device-name">-</span>
+									<div class="device-info-card">
+											<div class="device-info-row">
+													<span class="device-info-label"><?= tr("Device:")?></span>
+													<span class="device-info-value" id="gp-device-name">-</span>
+											</div>
+											<div class="device-info-row">
+													<span class="device-info-label"><?= tr("Model:")?></span>
+													<span class="device-info-value" id="gp-device-model">-</span>
+											</div>
+											<div class="device-info-row">
+													<span class="device-info-label"><?= tr("Vendor:")?></span>
+													<span class="device-info-value" id="gp-device-vendor">-</span>
+											</div>
+											<div class="device-info-row">
+													<span class="device-info-label"><?= tr("Device ID:")?></span>
+													<span class="device-info-value" id="gp-device-id" style="font-size: 10px;">-</span>
+											</div>
+											<div class="device-info-row">
+													<span class="device-info-label"><?= tr("Buttons/Axes:")?></span>
+													<span class="device-info-value" id="gp-button-axis-count" style="font-size: 10px;">- / -</span>
+											</div>
+									</div>								
+									<!-- Joystick Preview -->	
+									<div class="joystick-preview-wrapper">
+											<h4><?= tr("Joystick Preview")?></h4>
+											<div class="joystick-preview-container">
+													<!-- Left Stick Section -->
+													<div class="joystick-preview">
+															<canvas id="gp-left-stick-canvas" width="100" height="100"></canvas>
+															<div class="stick-label">
+																	<strong><?= tr("Left Stick")?></strong>
+																	<small><?= tr("View movement")?></small>
+															</div>
+															<div class="joystick-info">
+																	<span class="info-label"><?= tr("Direction:")?></span>
+																	<span class="info-value" id="gp-current-direction"><?= tr("centered")?></span>
+															</div>
+															<div class="stick-options">
+																	<label class="option-item">
+																			<input type="checkbox" id="gp-invert-x" />
+																			<span><?= tr("Invert X")?></span>
+																	</label>
+																	<label class="option-item">
+																			<input type="checkbox" id="gp-invert-y" />
+																			<span><?= tr("Invert Y")?></span>
+																	</label>
+															</div>
 													</div>
-													<div class="device-info-row">
-															<span class="device-info-label"><?= tr("Model:")?></span>
-															<span class="device-info-value" id="gp-device-model">-</span>
+													
+													<!-- Right Stick Section -->
+													<div class="joystick-preview">
+															<canvas id="gp-right-stick-canvas" width="100" height="100"></canvas>
+															<div class="stick-label">
+																	<strong><?= tr("Right Stick")?></strong>
+																	<small><?= tr("Continuous zoom")?></small>
+															</div>
+															<div class="joystick-info">
+																	<span class="info-label"><?= tr("Current FOV:")?></span>
+																	<span class="info-value" id="gp-current-fov">60°</span>
+															</div>
+															<div class="stick-options">
+																	<label class="option-item">
+																			<input type="checkbox" id="zoom-invert-y" />
+																			<span><?= tr("Invert Y")?></span>
+																	</label>
+															</div>
 													</div>
-													<div class="device-info-row">
-															<span class="device-info-label"><?= tr("Vendor:")?></span>
-															<span class="device-info-value" id="gp-device-vendor">-</span>
-													</div>
-													<div class="device-info-row">
-															<span class="device-info-label"><?= tr("Device ID:")?></span>
-															<span class="device-info-value" id="gp-device-id" style="font-size: 10px;">-</span>
-													</div>
-											</div>                
+											</div>
+									</div>									
 											<!-- Calibration Section -->
 											<div class="calibration-section">
 													<div class="calibration-header">
@@ -994,51 +1045,7 @@
 													<p class="note" style="margin-top: 5px; font-size: 10px; color: #aaa;">
 															<?= tr("Move joysticks in circles to calibrate center position. Press any button to finish.")?>
 													</p>
-											</div>											
-									<!-- Joystick Preview -->
-									<h4 style="margin: 15px 0 10px; color: #B4B7B0;"><?= tr("Joystick Preview")?></h4>
-									<div class="joystick-preview-container">
-											<div class="joystick-preview">
-													<canvas id="gp-left-stick-canvas" width="100" height="100"></canvas>
-													<div class="stick-label">
-															<strong><?= tr("Left Stick")?></strong>
-															<small><?= tr("View movement")?></small>
-													</div>
-													<!-- Current Direction Display -->
-													<div class="joystick-info">
-															<span class="info-label"><?= tr("Direction:")?></span>
-															<span class="info-value" id="gp-current-direction"><?= tr("centered")?></span>
-													</div>
-											</div>
-											<div class="joystick-preview">
-													<canvas id="gp-right-stick-canvas" width="100" height="100"></canvas>
-													<div class="stick-label">
-															<strong><?= tr("Right Stick")?></strong>
-															<small><?= tr("Continuous zoom")?></small>
-													</div>
-													<!-- Current FOV Display -->
-													<div class="joystick-info">
-															<span class="info-label"><?= tr("Current FOV:")?></span>
-															<span class="info-value" id="gp-current-fov">60°</span>
-													</div>
-											</div>
-									</div>
-									<!-- Axis Inversion Controls -->
-									<div class="axis-inversion-group" style="display: flex; gap: 20px; justify-content: center; margin: 10px 0 5px;">
-											<div class="checkbox-item">
-													<input type="checkbox" id="gp-invert-x" />
-													<label for="gp-invert-x"><?= tr("Invert X-Axis (left stick)")?></label>
-											</div>
-											<div class="checkbox-item">
-													<input type="checkbox" id="gp-invert-y" />
-													<label for="gp-invert-y"><?= tr("Invert Y-Axis (left stick)")?></label>
-											</div>
-											<div class="checkbox-item">
-													<input type="checkbox" id="zoom-invert-y" />
-													<label for="zoom-invert-y"><?= tr("Invert Y-Axis (Zoom stick)")?></label>
-											</div>
-									</div>               
-
+											</div>									
 									<!-- Control Settings -->
 									<div class="control-slider-group">
 											<!-- Checkbox Group -->
@@ -1106,13 +1113,12 @@
 									<div class="button-customization-panel">
 											<h3><?= tr("Button Customization")?></h3>
 											
-											<div class="customization-note">
-													<span class="ui-icon ui-icon-info" style="float: left; margin-right: 5px;"></span>
-													<?= tr("Each connected controller has its own independent profile. Select a device from 'Active Device' to customize.")?>
-											</div>
-											
 											<div id="gp-button-customization" class="button-customization-container">
 													<!-- Populated by JavaScript -->
+											</div>											
+										
+											<div class="customization-note">													
+													<?= tr("Each connected controller has its own independent profile. Select a device from 'Active Device' to customize.")?>
 											</div>
 											
 											<div class="action-buttons">
@@ -1156,7 +1162,7 @@
 															<div class="loading-placeholder"><?= tr("Waiting for controller input...")?></div>
 													</div>
 													<div class="info-note-live">
-															<strong><?= tr("Understanding Values")?></strong><br>
+															<h4><?= tr("Understanding Raw Values")?></h4>
 															<?= tr("Buttons: Range 0.0 (not pressed) to 1.0 (green = fully pressed).")?><br>
 															<?= tr("Axes: -1.0 to 1.0 with visual meter Center position is 0.0. Triggers (L2/R2) show gradual values.")?><br>
 															<?= tr("Note: Different browsers may report the same physical button on different indices. Use this panel to identify the correct mapping for your setup.")?>

@@ -16,6 +16,8 @@
  * - Enhanced Scan button with visual feedback animation
  * - Real-time joystick preview with calibration visualization and zoom inversion
  * - Continuous zoom operation with adjustable speed and Y-axis inversion
+ * - Full FOV range support (0.001389° to 360°) matching Stellarium's native zoom
+ * - Synchronized FOV slider and text display with immediate visual feedback
  * - Vibration/rumble control with intensity slider and test function
  * - Full button remapping with categorized action groups
  * - Device detection via vendor/product ID extraction from browser
@@ -25,7 +27,7 @@
  *   (ArchaeoLines, Scenery3d, ExoPlanets, NavStars, MeteorShowers, Quasars, Pulsars)
  * - Educational presentation features:
  *   - View directions (North, South, East, West, Zenith, Nadir)
- *   - Zoom levels (0.1° to 235°)
+ *   - Zoom levels (0.001389° to 360°)
  *   - Notable stars and deep sky objects
  *   - Constellation isolation and highlighting
  *   - Time jumps and season demonstrations
@@ -42,6 +44,7 @@
  * - Canvas-based joystick preview with deadzone visualization and zoom inversion support
  * - Live Input panel with real-time raw value updates and visual feedback
  * - Responsive grid layouts for button customization and live input panels
+ * - Direct synchronization with main view FOV slider and text display
  * 
  * @module gpcontroller
  * @requires jquery
@@ -55,7 +58,7 @@
  * @requires jquery-ui
  * 
  * @author kutaibaa akraa (GitHub: @kutaibaa-akraa)
- * @date 2026-03-30
+ * @date 2026-03-31
  * @license GPLv2+
  * @version 2.6.0
  */
@@ -127,7 +130,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
          */
         var DEVICE_MAPPINGS = {
             '054c': {
-                '05c4': { name: 'Sony PlayStation 4 Controller', vendorName: 'Sony', model: 'CUH-ZCT1E',
+                '05c4': { name: 'Sony PlayStation 4 Controller (v1)', vendorName: 'Sony', model: 'CUH-ZCT1E',
                     buttons: { 0: '✕ Cross', 1: '◯ Circle', 2: '□ Square', 3: '△ Triangle', 8: 'Share', 9: 'Options', 16: 'PS', 17: 'Touchpad' } },
                 '09cc': { name: 'Sony PlayStation 4 Controller (v2)', vendorName: 'Sony', model: 'CUH-ZCT2',
                     buttons: { 0: '✕ Cross', 1: '◯ Circle', 2: '□ Square', 3: '△ Triangle', 8: 'Share', 9: 'Options', 16: 'PS', 17: 'Touchpad' } },
@@ -1504,7 +1507,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 								if (direction) {
 										$currentDirection.text(direction);
 								} else if (this.isMoving === false) {
-										$currentDirection.text("centered");
+										$currentDirection.text(_tr("centered"));
 								}
 						}
 
@@ -1561,6 +1564,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 this.previousButtonStates.set(i, finalPressed);
             }
 						
+						// Update button/axis count display for active device
+						if (this.index === activeDeviceIndex && $("#gp-button-axis-count").length) {
+								var buttonCount = gp.buttons ? gp.buttons.length : 0;
+								var axisCount = gp.axes ? gp.axes.length : 0;
+								$("#gp-button-axis-count").text(buttonCount + " / " + axisCount);
+						}
+						
 						// Update live input display if this is the active device
 						if (this.index === activeDeviceIndex) {
 								updateStickPreview("left", leftX, leftY);
@@ -1578,17 +1588,17 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						var angle = Math.atan2(-leftY, leftX) * (180 / Math.PI);
 						var direction = "";
 						
-						if (angle >= -22.5 && angle < 22.5) direction = "East →";
-						else if (angle >= 22.5 && angle < 67.5) direction = "North-East ↗";
-						else if (angle >= 67.5 && angle < 112.5) direction = "North ↑";
-						else if (angle >= 112.5 && angle < 157.5) direction = "North-West ↖";
-						else if (angle >= 157.5 || angle < -157.5) direction = "West ←";
-						else if (angle >= -157.5 && angle < -112.5) direction = "South-West ↙";
-						else if (angle >= -112.5 && angle < -67.5) direction = "South ↓";
-						else if (angle >= -67.5 && angle < -22.5) direction = "South-East ↘";
+						if (angle >= -22.5 && angle < 22.5) direction = _tr("East →");
+						else if (angle >= 22.5 && angle < 67.5) direction = _tr("North-East ↗");
+						else if (angle >= 67.5 && angle < 112.5) direction = _tr("North ↑");
+						else if (angle >= 112.5 && angle < 157.5) direction = _tr("North-West ↖");
+						else if (angle >= 157.5 || angle < -157.5) direction = _tr("West ←");
+						else if (angle >= -157.5 && angle < -112.5) direction = _tr("South-West ↙");
+						else if (angle >= -112.5 && angle < -67.5) direction = _tr("South ↓");
+						else if (angle >= -67.5 && angle < -22.5) direction = _tr("South-East ↘");
 						
 						var intensity = Math.sqrt(leftX * leftX + leftY * leftY);
-						var speedText = intensity > 0.8 ? "fast" : (intensity > 0.3 ? "medium" : "slow");
+						var speedText = intensity > 0.8 ? _tr("fast") : (intensity > 0.3 ? _tr("medium") : _tr("slow"));
 						
 						return direction + " (" + speedText + ")";
 				};
@@ -1601,9 +1611,10 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             }
         };
 
-        GamepadDevice.prototype.getButtonName = function(index) {
-            return BUTTON_NAMES[index] || ("Button " + index);
-        };
+				GamepadDevice.prototype.getButtonName = function(index) {
+						var name = BUTTON_NAMES[index] || ("Button " + index);
+						return _tr(name);
+				};
 
         GamepadDevice.prototype.getButtonCount = function() {
             return this.gamepad ? this.gamepad.buttons.length : 0;
@@ -1777,24 +1788,37 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         // SECTION 7: UI UPDATE FUNCTIONS
         // =====================================================================
 
-        function updateConnectionStatus(connected, device) {
-            if ($connectionStatus && $connectionStatus.length) {
-                $connectionStatus.html(connected ? '<span style="color:#4CAF50;">● Connected</span>' : '<span style="color:#f44336;">● Disconnected</span>');
-            }
-            
-            if (connected && device && $deviceName && $deviceName.length) {
-                var info = device.getDisplayInfo();
-                $deviceName.text(info.name);
-                if ($deviceModel && $deviceModel.length) $deviceModel.text(info.model || "-");
-                if ($deviceVendor && $deviceVendor.length) $deviceVendor.text(info.vendor || "-");
-                if ($deviceId && $deviceId.length) $deviceId.text(info.id || "-");
-            } else if (!connected) {
-                if ($deviceName && $deviceName.length) $deviceName.text("-");
-                if ($deviceModel && $deviceModel.length) $deviceModel.text("-");
-                if ($deviceVendor && $deviceVendor.length) $deviceVendor.text("-");
-                if ($deviceId && $deviceId.length) $deviceId.text("-");
-            }
-        }
+				function updateConnectionStatus(connected, device) {
+						if ($connectionStatus && $connectionStatus.length) {
+								$connectionStatus.html(connected ? 
+										'<span style="color:#4CAF50;">● ' + _tr("Connected") + '</span>' : 
+										'<span style="color:#f44336;">● ' + _tr("Disconnected") + '</span>');
+						}
+						
+						if (connected && device && $deviceName && $deviceName.length) {
+								var info = device.getDisplayInfo();
+								$deviceName.text(info.name);
+								if ($deviceModel && $deviceModel.length) $deviceModel.text(info.model || "-");
+								if ($deviceVendor && $deviceVendor.length) $deviceVendor.text(info.vendor || "-");
+								if ($deviceId && $deviceId.length) $deviceId.text(info.id || "-");
+								
+								// Get button and axis counts from actual gamepad
+								var gp = navigator.getGamepads()[device.index];
+								if (gp && $("#gp-button-axis-count").length) {
+										var buttonCount = gp.buttons ? gp.buttons.length : 0;
+										var axisCount = gp.axes ? gp.axes.length : 0;
+										$("#gp-button-axis-count").text(buttonCount + " / " + axisCount);
+								} else if ($("#gp-button-axis-count").length) {
+										$("#gp-button-axis-count").text("- / -");
+								}
+						} else if (!connected) {
+								if ($deviceName && $deviceName.length) $deviceName.text("-");
+								if ($deviceModel && $deviceModel.length) $deviceModel.text("-");
+								if ($deviceVendor && $deviceVendor.length) $deviceVendor.text("-");
+								if ($deviceId && $deviceId.length) $deviceId.text("-");
+								if ($("#gp-button-axis-count").length) $("#gp-button-axis-count").text("- / -");
+						}
+				}
 
         function updateDeviceSelector() {
             if (!$deviceSelector || !$deviceSelector.length) return;
@@ -1829,7 +1853,15 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 								updateCalibrationDisplayForDevice(currentDeviceInfo);
 								updateLiveInputDisplay();
 								
-								// Refresh FOV display when switching devices - use viewcontrol range
+								// Update button/axis count for the newly selected device
+								var gp = navigator.getGamepads()[currentDeviceInfo.index];
+								if (gp && $("#gp-button-axis-count").length) {
+										var buttonCount = gp.buttons ? gp.buttons.length : 0;
+										var axisCount = gp.axes ? gp.axes.length : 0;
+										$("#gp-button-axis-count").text(buttonCount + " / " + axisCount);
+								}
+								
+								// Refresh FOV display when switching devices
 								if (viewcontrol && typeof viewcontrol.getFOV === 'function') {
 										currentFov = Math.max(0.001389, Math.min(360, viewcontrol.getFOV()));
 										updateFovDisplay(currentFov);
@@ -1841,6 +1873,9 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 								updateDeviceSelector();
 								populateButtonCustomization();
 								updateLiveInputDisplay();
+								
+								// Clear button/axis count
+								if ($("#gp-button-axis-count").length) $("#gp-button-axis-count").text("- / -");
 						}
 				}
 
@@ -1917,12 +1952,19 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						}
 
 						var ctx = canvas[0].getContext("2d");
-						var w = canvas.width();
-						var h = canvas.height();
+						// Use actual canvas dimensions, not CSS dimensions
+						var w = canvas[0].width;
+						var h = canvas[0].height;
+						
+						// If canvas dimensions are 0 (not set), fallback to CSS dimensions
+						if (w === 0) w = canvas.width();
+						if (h === 0) h = canvas.height();
 
 						ctx.clearRect(0, 0, w, h);
 						ctx.fillStyle = "#222";
 						ctx.fillRect(0, 0, w, h);
+						
+						// Draw crosshairs
 						ctx.strokeStyle = "#666";
 						ctx.lineWidth = 1;
 						ctx.beginPath();
@@ -1934,26 +1976,42 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						ctx.lineTo(w, h/2);
 						ctx.stroke();
 
+						// Draw deadzone circle
 						ctx.strokeStyle = "#888";
 						ctx.setLineDash([2, 2]);
 						ctx.beginPath();
-						ctx.arc(w/2, h/2, (w/2) * controllerSettings.deadzone, 0, Math.PI * 2);
+						ctx.arc(w/2, h/2, (Math.min(w, h) / 2) * controllerSettings.deadzone, 0, Math.PI * 2);
 						ctx.stroke();
 						ctx.setLineDash([]);
 
+						// Draw center point
 						ctx.fillStyle = "#666";
 						ctx.beginPath();
 						ctx.arc(w/2, h/2, 3, 0, Math.PI * 2);
 						ctx.fill();
 
-						var stickX = w/2 + (displayX * (w/2 - 8));
-						var stickY = h/2 + (displayY * (h/2 - 8));
+						// Calculate stick position (limit to canvas edges with margin)
+						var radius = Math.min(w, h) / 2 - 8;
+						var stickX = w/2 + (displayX * radius);
+						var stickY = h/2 + (displayY * radius);
+						
+						// Clamp to canvas boundaries
+						stickX = Math.max(8, Math.min(w - 8, stickX));
+						stickY = Math.max(8, Math.min(h - 8, stickY));
+						
+						// Draw stick cursor with gradient
 						var gradient = ctx.createRadialGradient(stickX, stickY, 2, stickX, stickY, 8);
 						gradient.addColorStop(0, "#6B6E70");
 						gradient.addColorStop(1, "#3A3C3E");
 						ctx.fillStyle = gradient;
 						ctx.beginPath();
 						ctx.arc(stickX, stickY, 6, 0, Math.PI * 2);
+						ctx.fill();
+						
+						// Optional: add a small highlight
+						ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+						ctx.beginPath();
+						ctx.arc(stickX - 2, stickY - 2, 2, 0, Math.PI * 2);
 						ctx.fill();
 				}
 
@@ -1984,7 +2042,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             for (var groupName in buttonGroups) {
                 var buttonIndices = buttonGroups[groupName];
                 var groupDiv = $("<div class='button-group'></div>");
-                groupDiv.append("<div class='button-group-header'>" + groupName + "</div>");
+                groupDiv.append("<div class='button-group-header'>" + _tr(groupName) + "</div>");
 
                 for (var j = 0; j < buttonIndices.length; j++) {
                     var buttonId = buttonIndices[j];
@@ -2010,7 +2068,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                         for (var k = 0; k < actionsList.length; k++) {
                             var action = actionsList[k];
                             if (AVAILABLE_ACTIONS[action]) {
-                                var option = $("<option>").val(action).text(AVAILABLE_ACTIONS[action]);
+                                var option = $("<option>").val(action).text(_tr(AVAILABLE_ACTIONS[action]));
                                 if (currentAction === action) {
                                     option.attr("selected", "selected");
                                 }
@@ -2028,7 +2086,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                             var dev = gamepadManager ? gamepadManager.getActiveDevice() : null;
                             if (dev) {
                                 dev.setButtonAction(btnId, newAction);
-                                showNotification(_tr("Button ") + btnName + _tr(" mapped to ") + (AVAILABLE_ACTIONS[newAction] || _tr("No action")));
+                                showNotification(_tr("Button %1 mapped to %2", btnName, (AVAILABLE_ACTIONS[newAction] || _tr("No action"))));
                             }
                         };
                     })(buttonId, buttonName));
@@ -2164,7 +2222,11 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             if (!container.length) return;
 
             if (isCalibrating) {
-                container.html("<div class='calibration-status'>" + _tr("Calibrating... Collected ") + calibrationData.sampleCount + _tr(" samples<br><span style='font-size:10px;'>Move joysticks in circles, press any button to finish</span></div>"));
+                container.html("<div class='calibration-status'>" + 
+								_tr("Calibrating... Collected %1 samples", calibrationData.sampleCount) + 
+								"<br><span style='font-size:10px;'>" + 
+								_tr("Move joysticks in circles, press any button to finish") + 
+								"</span></div>");
             } else if (device && device.calibrationData && device.calibrationData.isCalibrated) {
                 var data = device.calibrationData;
                 container.html(
@@ -2659,12 +2721,12 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 						
 						// Axis names
 						var axisNames = {
-								0: 'Left X',
-								1: 'Left Y',
-								2: 'Right X',
-								3: 'Right Y',
-								4: 'L2 Trigger',
-								5: 'R2 Trigger'
+								0: _tr('Left X'),
+								1: _tr('Left Y'),
+								2: _tr('Right X'),
+								3: _tr('Right Y'),
+								4: _tr('L2 Trigger'),
+								5: _tr('R2 Trigger')
 						};
 						
 						var html = '';
