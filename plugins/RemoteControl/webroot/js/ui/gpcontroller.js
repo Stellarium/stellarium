@@ -250,18 +250,97 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             "search_neptune": "Center on Neptune",
             "search_pluto": "Center on Pluto",
 
-            // === CONSTELLATION HIGHLIGHTS ===
-            "highlight_orion": "Highlight Orion (Toggle isolate)",
-            "highlight_ursa_major": "Highlight Ursa Major (Toggle isolate)",
-            "highlight_cassiopeia": "Highlight Cassiopeia (Toggle isolate)",
-            "highlight_cygnus": "Highlight Cygnus (Toggle isolate)",
-            "highlight_lyra": "Highlight Lyra (Toggle isolate)",
-            "highlight_aquila": "Highlight Aquila (Toggle isolate)",
-            "highlight_scorpius": "Highlight Scorpius (Toggle isolate)",
-            "highlight_sagittarius": "Highlight Sagittarius (Toggle isolate)",
-            "highlight_taurus": "Highlight Taurus (Toggle isolate)",
-            "highlight_gemini": "Highlight Gemini (Toggle isolate)",
-            "clear_constellation_highlight": "Show all constellations (clear isolation)",
+						// === CONSTELLATION HIGHLIGHTS (All 88 Constellations) ===
+						// Zodiac Constellations (13 constellations along the ecliptic)
+						"highlight_aries": "Highlight Aries (Toggle isolate)",
+						"highlight_taurus": "Highlight Taurus (Toggle isolate)",
+						"highlight_gemini": "Highlight Gemini (Toggle isolate)",
+						"highlight_cancer": "Highlight Cancer (Toggle isolate)",
+						"highlight_leo": "Highlight Leo (Toggle isolate)",
+						"highlight_virgo": "Highlight Virgo (Toggle isolate)",
+						"highlight_libra": "Highlight Libra (Toggle isolate)",
+						"highlight_scorpius": "Highlight Scorpius (Toggle isolate)",
+						"highlight_ophiuchus": "Highlight Ophiuchus (Toggle isolate)",
+						"highlight_sagittarius": "Highlight Sagittarius (Toggle isolate)",
+						"highlight_capricornus": "Highlight Capricornus (Toggle isolate)",
+						"highlight_aquarius": "Highlight Aquarius (Toggle isolate)",
+						"highlight_pisces": "Highlight Pisces (Toggle isolate)",
+
+						// Northern Constellations (Visible from northern hemisphere)
+						"highlight_ursa_major": "Highlight Ursa Major (Toggle isolate)",
+						"highlight_ursa_minor": "Highlight Ursa Minor (Toggle isolate)",
+						"highlight_cassiopeia": "Highlight Cassiopeia (Toggle isolate)",
+						"highlight_cepheus": "Highlight Cepheus (Toggle isolate)",
+						"highlight_draco": "Highlight Draco (Toggle isolate)",
+						"highlight_hercules": "Highlight Hercules (Toggle isolate)",
+						"highlight_cygnus": "Highlight Cygnus (Toggle isolate)",
+						"highlight_lyra": "Highlight Lyra (Toggle isolate)",
+						"highlight_aquila": "Highlight Aquila (Toggle isolate)",
+						"highlight_andromeda": "Highlight Andromeda (Toggle isolate)",
+						"highlight_peg asus": "Highlight Pegasus (Toggle isolate)",
+						"highlight_perseus": "Highlight Perseus (Toggle isolate)",
+						"highlight_auriga": "Highlight Auriga (Toggle isolate)",
+						"highlight_boötes": "Highlight Boötes (Toggle isolate)",
+						"highlight_canes_venatici": "Highlight Canes Venatici (Toggle isolate)",
+						"highlight_com_berenices": "Highlight Coma Berenices (Toggle isolate)",
+						"highlight_corona_borealis": "Highlight Corona Borealis (Toggle isolate)",
+						"highlight_vulpecula": "Highlight Vulpecula (Toggle isolate)",
+						"highlight_lacerta": "Highlight Lacerta (Toggle isolate)",
+						"highlight_lynx": "Highlight Lynx (Toggle isolate)",
+						"highlight_triangulum": "Highlight Triangulum (Toggle isolate)",
+						"highlight_camelopardalis": "Highlight Camelopardalis (Toggle isolate)",
+						"highlight_monoceros": "Highlight Monoceros (Toggle isolate)",
+						"highlight_canis_minor": "Highlight Canis Minor (Toggle isolate)",
+						"highlight_canis_major": "Highlight Canis Major (Toggle isolate)",
+
+						// Southern Constellations (Visible from southern hemisphere)
+						"highlight_orion": "Highlight Orion (Toggle isolate)",
+						"highlight_centaurus": "Highlight Centaurus (Toggle isolate)",
+						"highlight_crux": "Highlight Crux (Toggle isolate)",
+						"highlight_carina": "Highlight Carina (Toggle isolate)",
+						"highlight_vela": "Highlight Vela (Toggle isolate)",
+						"highlight_puppis": "Highlight Puppis (Toggle isolate)",
+						"highlight_phoenix": "Highlight Phoenix (Toggle isolate)",
+						"highlight_grus": "Highlight Grus (Toggle isolate)",
+						"highlight_tucana": "Highlight Tucana (Toggle isolate)",
+						"highlight_pavo": "Highlight Pavo (Toggle isolate)",
+						"highlight_ara": "Highlight Ara (Toggle isolate)",
+						"highlight_corona_australis": "Highlight Corona Australis (Toggle isolate)",
+						"highlight_lupus": "Highlight Lupus (Toggle isolate)",
+						"highlight_norma": "Highlight Norma (Toggle isolate)",
+						"highlight_circinus": "Highlight Circinus (Toggle isolate)",
+						"highlight_triangulum_australe": "Highlight Triangulum Australe (Toggle isolate)",
+						"highlight_apus": "Highlight Apus (Toggle isolate)",
+						"highlight_chamaeleon": "Highlight Chamaeleon (Toggle isolate)",
+						"highlight_musca": "Highlight Musca (Toggle isolate)",
+						"highlight_volans": "Highlight Volans (Toggle isolate)",
+						"highlight_dorado": "Highlight Dorado (Toggle isolate)",
+						"highlight_mensa": "Highlight Mensa (Toggle isolate)",
+						"highlight_hydrus": "Highlight Hydrus (Toggle isolate)",
+						"highlight_ reticulum": "Highlight Reticulum (Toggle isolate)",
+						"highlight_horologium": "Highlight Horologium (Toggle isolate)",
+						"highlight_caelum": "Highlight Caelum (Toggle isolate)",
+						"highlight_fornax": "Highlight Fornax (Toggle isolate)",
+						"highlight_sculptor": "Highlight Sculptor (Toggle isolate)",
+						"highlight_antlia": "Highlight Antlia (Toggle isolate)",
+						"highlight_pyxis": "Highlight Pyxis (Toggle isolate)",
+						"highlight_columba": "Highlight Columba (Toggle isolate)",
+						"highlight_lepus": "Highlight Lepus (Toggle isolate)",
+						"highlight_eridanus": "Highlight Eridanus (Toggle isolate)",
+						"highlight_ce tus": "Highlight Cetus (Toggle isolate)",
+						"highlight_equuleus": "Highlight Equuleus (Toggle isolate)",
+						"highlight_delphinus": "Highlight Delphinus (Toggle isolate)",
+						"highlight_sagitta": "Highlight Sagitta (Toggle isolate)",
+						"highlight_scutum": "Highlight Scutum (Toggle isolate)",
+						"highlight_serpens": "Highlight Serpens (Toggle isolate)",
+
+						// Additional Constellations
+						"highlight_hercules": "Highlight Hercules (Toggle isolate)",
+						"highlight_ corona_borealis": "Highlight Corona Borealis (Toggle isolate)",
+						"highlight_corona_australis": "Highlight Corona Australis (Toggle isolate)",
+						"highlight_lupus": "Highlight Lupus (Toggle isolate)",
+
+						"clear_constellation_highlight": "Show all constellations (clear isolation)",
 
             // === TIME CONTROL ===
             "time_speed_normal": "Normal time speed (1x)",
@@ -315,12 +394,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 "search_mars", "search_jupiter", "search_saturn",
                 "search_uranus", "search_neptune", "search_pluto"
             ],
-            "Educational: Constellation Highlights": [
-                "highlight_orion", "highlight_ursa_major", "highlight_cassiopeia",
-                "highlight_cygnus", "highlight_lyra", "highlight_aquila",
-                "highlight_scorpius", "highlight_sagittarius", "highlight_taurus", "highlight_gemini",
-                "clear_constellation_highlight"
-            ],
             "Educational: Time Speed": [
                 "time_speed_normal", "time_speed_fast", "time_speed_very_fast",
                 "time_speed_slow", "time_speed_reverse"
@@ -332,8 +405,42 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             "Educational: Milky Way": [
                 "milky_way_toggle", "milky_way_show", "milky_way_hide",
                 "milky_way_brightness_up", "milky_way_brightness_down"
-            ]
-        };
+            ],
+						 // === CONSTELLATION HIGHLIGHTS ORGANIZED ===    
+						"Constellations: Zodiac (Ecliptic)": [
+								"highlight_aries", "highlight_taurus", "highlight_gemini", "highlight_cancer",
+								"highlight_leo", "highlight_virgo", "highlight_libra", "highlight_scorpius",
+								"highlight_ophiuchus", "highlight_sagittarius", "highlight_capricornus",
+								"highlight_aquarius", "highlight_pisces"
+						],						
+						"Constellations: Northern Sky": [
+								"highlight_ursa_major", "highlight_ursa_minor", "highlight_cassiopeia",
+								"highlight_cepheus", "highlight_draco", "highlight_hercules", "highlight_cygnus",
+								"highlight_lyra", "highlight_aquila", "highlight_andromeda", "highlight_pegasus",
+								"highlight_perseus", "highlight_auriga", "highlight_boötes",
+								"highlight_canes_venatici", "highlight_com_berenices", "highlight_corona_borealis",
+								"highlight_vulpecula", "highlight_lacerta", "highlight_lynx", "highlight_triangulum",
+								"highlight_camelopardalis", "highlight_monoceros", "highlight_canis_minor"
+						],						
+						"Constellations: Southern Sky": [
+								"highlight_orion", "highlight_centaurus", "highlight_crux", "highlight_carina",
+								"highlight_vela", "highlight_puppis", "highlight_phoenix", "highlight_grus",
+								"highlight_tucana", "highlight_pavo", "highlight_ara", "highlight_corona_australis",
+								"highlight_lupus", "highlight_norma", "highlight_circinus", "highlight_triangulum_australe",
+								"highlight_apus", "highlight_chamaeleon", "highlight_musca", "highlight_volans",
+								"highlight_dorado", "highlight_mensa", "highlight_hydrus", "highlight_reticulum",
+								"highlight_horologium", "highlight_caelum", "highlight_fornax", "highlight_sculptor",
+								"highlight_antlia", "highlight_pyxis", "highlight_columba", "highlight_lepus",
+								"highlight_eridanus", "highlight_cetus", "highlight_canis_major"
+						],						
+						"Constellations: Other / Seasonal": [
+								"highlight_equuleus", "highlight_delphinus", "highlight_sagitta", "highlight_scutum",
+								"highlight_serpens"
+						],						
+						"Constellation Actions": [
+								"clear_constellation_highlight"
+						]
+				};
 
         // =====================================================================
         // SECTION 3: PRIVATE VARIABLES AND STATE
@@ -393,6 +500,18 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         var currentDeviceInfo = null;
         var currentFov = 60;
         var gamepadManager = null;
+				
+				// Store previous display states for constellation isolation restoration
+				var previousConstellationStates = {
+						linesDisplayed: null,
+						boundariesDisplayed: null,
+						labelsDisplayed: null,
+						artDisplayed: null,
+						fov: null
+				};
+				
+				var hasSavedState = false;
+				var currentIsolatedConstellation = null;
 
         // =====================================================================
         // SECTION 4: DYNAMIC ACTION LOADING FROM STELLARIUM
@@ -838,90 +957,199 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 rc.postCmd("/api/main/focus", { target: searchTerm, mode: "center" });
             }
         }
+				
+				/**
+				 * Saves the current constellation display settings before isolation
+				 */
+				function saveConstellationDisplayStates() {
+						previousConstellationStates.linesDisplayed = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+						previousConstellationStates.boundariesDisplayed = propApi.getStelProp("ConstellationMgr.boundariesDisplayed");
+						previousConstellationStates.labelsDisplayed = propApi.getStelProp("ConstellationMgr.namesDisplayed");
+						previousConstellationStates.artDisplayed = propApi.getStelProp("ConstellationMgr.artDisplayed");
+						previousConstellationStates.fov = currentFov;
+						hasSavedState = true;
+						
+						console.log("[Gamepad] Saved constellation states:", previousConstellationStates);
+				}
 
-        /**
-         * Toggles constellation highlighting.
-         * First press: isolates and highlights the specified constellation.
-         * Second press: clears isolation and shows all constellations.
-         * @param {string} constellationName - Name of the constellation (e.g., "orion", "ursa_major")
-         */
-        function handleConstellationHighlight(constellationName) {
-            // Convert to proper case (e.g., "orion" -> "Orion")
-            var searchTerm = constellationName.replace(/_/g, ' ');
-            searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
-            
-            // Get current state
-            var isIsolated = propApi.getStelProp("ConstellationMgr.isolateSelected");
-            var currentSelection = propApi.getStelProp("StelCore.selectedObject");
-            
-            // Check if this constellation is currently highlighted
-            var isCurrentlyHighlighted = isIsolated === true && 
-                    currentSelection && currentSelection.toLowerCase() === searchTerm.toLowerCase();
-            
-            if (isCurrentlyHighlighted) {
-                // Toggle OFF: Clear highlighting
-                console.log("[Gamepad] Clearing constellation highlight:", searchTerm);
-                
-                // Disable isolation mode
-                propApi.setStelProp("ConstellationMgr.isolateSelected", false);
-                
-                // Clear selected object
-                rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-                
-                // Ensure constellation lines remain visible
-                var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-                if (linesVisible === false) {
-                    actions.execute("actionShow_Constellation_Lines");
-                }
-                
-                showNotification(_tr("Cleared highlight: ") + searchTerm);
-            } else {
-                // Toggle ON: Highlight the constellation
-                console.log("[Gamepad] Highlighting constellation:", searchTerm);
-                
-                // Step 1: Ensure constellation lines are visible
-                var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-                if (linesVisible === false) {
-                    actions.execute("actionShow_Constellation_Lines");
-                }
-                
-                // Step 2: Clear previous selection
-                rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-                
-                // Step 3: Delay to allow Stellarium to process the clear
-                setTimeout(function() {
-                    // Step 4: Enable isolation mode
-                    propApi.setStelProp("ConstellationMgr.isolateSelected", true);
-                    
-                    // Step 5: Select the constellation
-                    rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
-                    
-                    // Step 6: Show feedback
-                    showNotification(_tr("Highlighting constellation: ") + searchTerm);
-                }, 100);
-            }
-        }
+				/**
+				 * Restores the previous constellation display settings after isolation is cleared
+				 */
+				function restoreConstellationDisplayStates() {
+						// Only restore if we have a saved state
+						if (!hasSavedState) {
+								console.log("[Gamepad] No saved state to restore");
+								return;
+						}
+						
+						// Restore lines
+						if (previousConstellationStates.linesDisplayed !== null) {
+								var currentLines = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+								if (currentLines !== previousConstellationStates.linesDisplayed) {
+										actions.execute("actionShow_Constellation_Lines");
+								}
+						}
+						
+						// Restore boundaries
+						if (previousConstellationStates.boundariesDisplayed !== null) {
+								var currentBoundaries = propApi.getStelProp("ConstellationMgr.boundariesDisplayed");
+								if (currentBoundaries !== previousConstellationStates.boundariesDisplayed) {
+										actions.execute("actionShow_Constellation_Boundaries");
+								}
+						}
+						
+						// Restore labels
+						if (previousConstellationStates.labelsDisplayed !== null) {
+								var currentLabels = propApi.getStelProp("ConstellationMgr.namesDisplayed");
+								if (currentLabels !== previousConstellationStates.labelsDisplayed) {
+										actions.execute("actionShow_Constellation_Labels");
+								}
+						}
+						
+						// Restore art
+						if (previousConstellationStates.artDisplayed !== null) {
+								var currentArt = propApi.getStelProp("ConstellationMgr.artDisplayed");
+								if (currentArt !== previousConstellationStates.artDisplayed) {
+										actions.execute("actionShow_Constellation_Art");
+								}
+						}
+						
+						// Restore FOV
+						if (previousConstellationStates.fov !== null && previousConstellationStates.fov !== currentFov) {
+								rc.postCmd("/api/scripts/direct", {
+										code: "StelMovementMgr.zoomTo(" + previousConstellationStates.fov + ", 2);",
+										useIncludes: false
+								});
+						}
+						
+						hasSavedState = false;  // <-- Reset after restore
+						console.log("[Gamepad] Restored constellation states");
+				}
 
-        /**
-         * Clears all constellation highlighting.
-         */
-        function clearConstellationHighlight() {
-            console.log("[Gamepad] Clearing all constellation highlights");
-            
-            // Step 1: Disable isolation mode
-            propApi.setStelProp("ConstellationMgr.isolateSelected", false);
-            
-            // Step 2: Clear any selected object (with empty success function to prevent alert)
-            rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-            
-            // Step 3: Ensure constellation lines are still visible
-            var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-            if (linesVisible === false) {
-                actions.execute("actionShow_Constellation_Lines");
-            }
-            
-            showNotification(_tr("All constellations visible"));
-        }
+				/**
+				 * Ensures all constellation display elements are enabled for isolation
+				 */
+				function enableAllConstellationDisplays() {
+						// Enable lines if not already enabled
+						var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
+						if (linesVisible === false) {
+								actions.execute("actionShow_Constellation_Lines");
+						}
+						
+						// Enable boundaries if not already enabled
+						var boundariesVisible = propApi.getStelProp("ConstellationMgr.boundariesDisplayed");
+						if (boundariesVisible === false) {
+								actions.execute("actionShow_Constellation_Boundaries");
+						}
+						
+						// Enable labels if not already enabled
+						var labelsVisible = propApi.getStelProp("ConstellationMgr.namesDisplayed");
+						if (labelsVisible === false) {
+								actions.execute("actionShow_Constellation_Labels");
+						}
+						
+						// Enable art if not already enabled
+						var artVisible = propApi.getStelProp("ConstellationMgr.artDisplayed");
+						if (artVisible === false) {
+								actions.execute("actionShow_Constellation_Art");
+						}
+				}
+
+				/**
+				 * Toggles constellation highlighting/isolation.
+				 * First press: saves current state, enables all constellation displays, 
+				 *              isolates and centers on the constellation.
+				 * Second press: restores previous state and clears isolation.
+				 * 
+				 * @param {string} constellationName - Name of the constellation (e.g., "orion", "ursa_major")
+				 */
+				function handleConstellationHighlight(constellationName) {
+						// Convert to proper case (e.g., "orion" -> "Orion")
+						var searchTerm = constellationName.replace(/_/g, ' ');
+						searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+						
+						// Check if THIS constellation is currently isolated using our local tracker
+						var isCurrentlyHighlighted = (currentIsolatedConstellation === searchTerm);
+						
+						console.log("[Gamepad] Toggle - Target:", searchTerm, "Currently isolated:", currentIsolatedConstellation, "Is highlighted:", isCurrentlyHighlighted);
+						
+						if (isCurrentlyHighlighted) {
+								// ===== TOGGLE OFF: Clear isolation and restore previous state =====
+								console.log("[Gamepad] Toggle OFF - Clearing highlight:", searchTerm);
+								
+								// Step 1: Disable isolation mode
+								propApi.setStelProp("ConstellationMgr.isolateSelected", false);
+								
+								// Step 2: Clear selected object
+								rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+								
+								// Step 3: Restore previous display states
+								restoreConstellationDisplayStates();
+								
+								// Step 4: Clear the tracker
+								currentIsolatedConstellation = null;
+								
+								showNotification(_tr("Cleared highlight: ") + searchTerm);
+								
+						} else {
+								// ===== TOGGLE ON: Isolate and highlight constellation =====
+								console.log("[Gamepad] Toggle ON - Isolating constellation:", searchTerm);
+								
+								// Step 1: Save current display states (if not already saved)
+								if (!hasSavedState) {
+										saveConstellationDisplayStates();
+								}
+								
+								// Step 2: Enable all constellation display elements
+								enableAllConstellationDisplays();
+								
+								// Step 3: Clear previous selection
+								rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+								
+								// Step 4: Delay to allow Stellarium to process the clear
+								setTimeout(function() {
+										// Step 5: Enable isolation mode
+										propApi.setStelProp("ConstellationMgr.isolateSelected", true);
+										
+										// Step 6: Select the constellation
+										rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
+										
+										// Step 7: Update tracker
+										currentIsolatedConstellation = searchTerm;
+										
+										// Step 8: Center on constellation with 60° FOV
+										setTimeout(function() {
+												rc.postCmd("/api/scripts/direct", {
+														code: "core.moveToObject(\"" + searchTerm + "\", 2); StelMovementMgr.zoomTo(60, 2);",
+														useIncludes: false
+												});
+												
+												showNotification(_tr("Isolating constellation: ") + searchTerm);
+										}, 150);
+								}, 100);
+						}
+				}
+
+				/**
+				 * Clears all constellation highlighting and restores previous state.
+				 */
+				function clearConstellationHighlight() {
+						console.log("[Gamepad] Clearing all constellation highlights and restoring state");
+						
+						// Step 1: Disable isolation mode
+						propApi.setStelProp("ConstellationMgr.isolateSelected", false);
+						
+						// Step 2: Clear any selected object
+						rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+						
+						// Step 3: Restore previous display states
+						restoreConstellationDisplayStates();
+						
+						// Step 4: Clear the tracker
+						currentIsolatedConstellation = null;
+						
+						showNotification(_tr("All constellations visible"));
+				}
 
         // =====================================================================
         // SECTION 8: GAMEPAD DEVICE CLASS
@@ -1230,7 +1458,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             // Default: Use actions API for native StelActions
             if (action && actions && typeof actions.execute === 'function') {
                 actions.execute(action);
-            }
+            }	
         };
 
         GamepadDevice.prototype.processInput = function() {
