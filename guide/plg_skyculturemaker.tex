@@ -1,0 +1,91 @@
+%% Part of Stellarium User Guide 25.4+
+%% History:
+%% 2025-12-20 New chapter.
+
+
+\newpage
+\section{Sky Culture Maker Plugin}
+\label{sec:plugins:SCM}
+\sectionauthor*{Susanne M. Hoffmann}
+
+
+
+\subsection{Introduction}
+\label{sec:plugins:SCM:Introduction}
+
+To ease the creation of skycultures (Chapter \ref{ch:SkyCultures}) and avoid mistakes caused by the shortcomings of manual coding, Stellarium in 2025 started developing a ``Sky Culture Maker'' (SCM) plugin. 
+It provides the technical means of visual creation of a new sky culture, allowing the user to interact with the usual Stellarium star map with all its amenities 
+while creating stick figures and attaching artwork to the map in a user friendly wizard-like editor. 
+The SCM also prompts the user to include copyright and category information, geographical schema and all the other necessities for a well-defined sky culture. 
+In particular with many new sky culture features released in 2025 (a new data format, display options for historical frames of reference, 
+and audio information output of sky culture info for the user), the requirements on the sky culture code increased and even the information provided in the description needs to be more strictly structured. 
+
+The plugin is still in development, originally set up as a student project in a software development course, 
+but tests with other students (from the humanities faculty) and researchers in cultural astronomy showed that it is already useful for users who are able to edit the source code. 
+Future versions will hopefully improve the SCM. 
+
+\subsection{An Example}
+\label{sec:plugin:SCM:example}
+
+After clicking the menu button for the SCM, a welcome screen opens that asks if we want to create or convert a sky culture. 
+Generally, we would want to \button{create}. The \button{converter} should run the conversion from our old data format used until 2024 to the new JSON format, but has some issues. 
+
+\button{Create} opens a wizard-like editor with three tabs: \textit{Overview}, \textit{Description}, and \textit{Location}. The \textit{Overview} contains the features for drawing stick figures, 
+attaching artwork to coordinates, naming and licensing the new sky culture. 
+The \textit{Description} tab offers guidance in providing the information on constellation names that Stellarium needs for the read-out functionality, 
+the information that the Stellarium Team recommends to be provided for the user (based on our decade-long experience of adopting sky cultures) and a function to include a list of (sortable) references. 
+In the \textit{Location} tab you can specify polygons which show the location of the culture in question, even as the culture evolves spatio-temporally. 
+
+We recommend to start with the definition of the sky culture in the \textit{Overview} tab, as the actual adoption may lead to a change of identification and, thus, a different description. 
+However there is no technical requirement on the order of steps in this workflow. The text boxes in the \textit{Description} are rather self-explained. 
+We provide some questions for each sort of information. 
+Unfortunately, these text fields are currently rather rudimentary: 
+there are no editor-buttons for italics, bold face, underline\dots\ or even for including an illustrative image, and WYSIWYG is not yet implemented. 
+That can be done later in the markdown output file \file{description.md}. 
+
+In the \textit{Overview} menu, first name the new sky culture (uppermost line prompt) and select a licence to clearly indicate what you allow users to do with your work. 
+Then, use the button \button{Add Constellation} or \button{Add Dark Constellation} to define constellations. 
+The difference between the two is technical: constellations are made out of stars, so that the cursor snaps to the displayed star points, 
+while dark constellations are defined by dark regions between the stars and can, therefore, only be defined by coordinates (J2000). 
+
+The menu \button{Add Constellation} opens a new wizard with three tabs: 
+the first is for drawing the stick figure, the second for providing infomation on the constellation name, the third for artwork (not mandatory). 
+The drawing pen and the information tab should be rather self-explanatory with the brief instruction in the window: 
+when clicking \button{pen}, the mouse cursor snaps to star when moved in the star map. 
+Use right mouse button (RMB) to draw a line from one star to another, double right click to stop drawing. 
+
+In the ``Artwork'' tab, first press \button{Upload Image}. Your image will be displayed in the wizard window together with three blue-greenish dots. 
+You can move these dots with your mouse to any point in the uploaded image. 
+Take one of them, move it to an appropriate position, then click on a star in the star map, and hit \button{Bind Star} to set the anchor. 
+Repeat this procedure for the remaining two bluegreenish dots. 
+
+Then, the uploaded artwork should appear in your Stellarium star map. 
+If you want to change the visual impression, distort the painting or scale it in the sky, you can just move the bluegreenish dots in the image, or, if that's not sufficient, bind them to other stars. 
+
+Once you are satisfied with the result, click \button{Save} for the constellation. 
+Once you'll be done with all constellations of your sky culture, press \button{Export Sky Culture}. 
+Select the \file{skycultures} sub-folder inside your user data directory (create it if necessary) and press \button{save}. 
+This outputs a new folder with the files \file{index.json}, \file{description.md}, \file{territory.geojson}, 
+\file{CMakeFile.txt} and a sub-folder \file{illustrations} that stores all the uploaded images (likely renamed). 
+
+% Copying the new folder to your Stellarium programm folder will bring up your new contribution in the sky culture menu of your (local) Stellarium installation. 
+% \textbf{Attention!} This requires administrator rights. 
+%% SORRY BUT NO! As a user you never copy anything into the program folder. 
+
+\textbf{Note:} Unfortunately, it is currently not yet possible to edit an existing sky culture in the wizard. Further changes need to be done manually. 
+
+\subsection{Further development}
+The plugin and its description here are still in development: in the current state, it provides some fundamental aids, but isn't fully functional (beta). 
+When you test the wizard, please let us know what you miss or what isn't working. We hope to find the time to continue development.   
+
+\subsection{Acknowledgments}
+Fabian Hofer, Vincent Gerlach, Luca-Philipp Grumbach, Richard Hofmann, and Mher Mnatsakanyan developed this plugin in 2025 at the University of Jena 
+under supervision of Jan Heinrich Merker and with Susanne M. Hoffmann as product owner. 
+
+If you are using this plugin in scientific publications, please cite this User Guide and \citet{Zotti-etal:IAUS399}. 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 
+
