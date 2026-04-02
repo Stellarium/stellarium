@@ -41,7 +41,7 @@ public slots:
 private slots:
 	void setOptionStatus();
 	void saveSunAltitude(double alt);
-	void saveSunAltitudeEvening(bool evening);
+	void saveSunAltitudeCrossing(int index);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.

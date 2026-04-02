@@ -2006,7 +2006,8 @@ void AstroCalcDialog::generateEphemeris()
 	// Detect "Sun at altitude" mode
 	const bool sunAtAltitudeMode = (ui->ephemerisStepComboBox->currentData().toInt() == EphemerisTimeStepSunAtAltitude);
 	double sunTargetAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
-	bool sunAltEvening = conf->value("astrocalc/ephemeris_sun_altitude_evening", true).toBool();
+	// Crossing: 0 = evening (default), 1 = morning
+	bool sunAltEvening = (conf->value("astrocalc/ephemeris_sun_altitude_evening", 0).toInt() == 0);
 
 	// If the Extra Ephemeris dialog has been opened, read the spinbox values directly
 	// to ensure we use the latest user input (avoids any QSettings caching issues).
@@ -2015,7 +2016,7 @@ void AstroCalcDialog::generateEphemeris()
 		// Force a conf sync so any pending writes from the dialog are available
 		conf->sync();
 		sunTargetAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
-		sunAltEvening = conf->value("astrocalc/ephemeris_sun_altitude_evening", true).toBool();
+		sunAltEvening = (conf->value("astrocalc/ephemeris_sun_altitude_evening", 0).toInt() == 0);
 	}
 
 	const double currentStep = sunAtAltitudeMode ? 1.0 : getEphemerisTimeStep(cplanet);

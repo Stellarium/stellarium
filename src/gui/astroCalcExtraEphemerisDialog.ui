@@ -351,7 +351,7 @@
               <double>0.000000000000000</double>
              </property>
              <property name="singleStep">
-              <double>1.000000000000000</double>
+              <double>0.100000000000000</double>
              </property>
              <property name="value">
               <double>-10.000000000000000</double>
@@ -364,14 +364,38 @@
           </layout>
          </item>
          <item>
-          <widget class="QCheckBox" name="sunAltEveningCheckBox">
-           <property name="text">
-            <string>Evening crossing (uncheck for morning)</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="sunAltCrossingLayout">
+           <item>
+            <widget class="QLabel" name="sunAltCrossingLabel">
+             <property name="text">
+              <string>Crossing:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="sunAltCrossingSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QComboBox" name="sunAltCrossingComboBox">
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>

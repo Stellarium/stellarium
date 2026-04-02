@@ -84,11 +84,15 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	const double savedAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
 	ui->sunAltitudeSpinBox->setValue(savedAlt);
 	conf->setValue("astrocalc/ephemeris_sun_altitude", savedAlt);
-	const bool savedEvening = conf->value("astrocalc/ephemeris_sun_altitude_evening", true).toBool();
-	ui->sunAltEveningCheckBox->setChecked(savedEvening);
-	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", savedEvening);
+
+	// Populate the crossing combobox: 0 = Evening, 1 = Morning
+	ui->sunAltCrossingComboBox->addItem(q_("Evening"), 0);
+	ui->sunAltCrossingComboBox->addItem(q_("Morning"), 1);
+	const int savedCrossing = conf->value("astrocalc/ephemeris_sun_altitude_evening", 0).toInt();
+	ui->sunAltCrossingComboBox->setCurrentIndex(savedCrossing);
+	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", savedCrossing);
 	connect(ui->sunAltitudeSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveSunAltitude(double)));
-	connect(ui->sunAltEveningCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveSunAltitudeEvening(bool)));
+	connect(ui->sunAltCrossingComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveSunAltitudeCrossing(int)));
 
 	setOptionStatus();
 }
@@ -111,7 +115,7 @@ void AstroCalcExtraEphemerisDialog::saveSunAltitude(double alt)
 	conf->setValue("astrocalc/ephemeris_sun_altitude", alt);
 }
 
-void AstroCalcExtraEphemerisDialog::saveSunAltitudeEvening(bool evening)
+void AstroCalcExtraEphemerisDialog::saveSunAltitudeCrossing(int index)
 {
-	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", evening);
+	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", index);
 }
