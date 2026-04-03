@@ -296,8 +296,9 @@ private:
 
 	QSettings* conf;
 
-	// GUI
+#ifndef NO_GUI
 	QuasarsDialog* configDialog;
+#endif
 	bool flagShowQuasars;
 	bool flagShowQuasarsButton;
 	QPixmap* OnIcon;

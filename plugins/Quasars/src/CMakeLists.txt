@@ -12,6 +12,9 @@ SET(Quasars_SRCS
      Quasars.cpp
      Quasar.hpp
      Quasar.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND Quasars_SRCS
      gui/QuasarsDialog.hpp
      gui/QuasarsDialog.cpp
 )
@@ -19,14 +22,19 @@ SET(Quasars_SRCS
 SET(QuasarsDialog_UIS
      gui/quasarsDialog.ui
 )
+ENDIF(STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 SET(Quasars_RES ../resources/Quasars.qrc)
 
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(QuasarsDialog_UIS_H ${QuasarsDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(QuasarsDialog_UIS_H ${QuasarsDialog_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(Quasars_RES_CXX ${Quasars_RES})
 ELSE()
-     QT_WRAP_UI(QuasarsDialog_UIS_H ${QuasarsDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(QuasarsDialog_UIS_H ${QuasarsDialog_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(Quasars_RES_CXX ${Quasars_RES})
 ENDIF()
 

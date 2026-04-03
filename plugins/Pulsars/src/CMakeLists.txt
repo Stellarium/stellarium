@@ -12,6 +12,9 @@ SET(Pulsars_SRCS
      Pulsars.cpp
      Pulsar.hpp
      Pulsar.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND Pulsars_SRCS
      gui/PulsarsDialog.hpp
      gui/PulsarsDialog.cpp
 )
@@ -19,14 +22,19 @@ SET(Pulsars_SRCS
 SET(PulsarsDialog_UIS
      gui/pulsarsDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 SET(Pulsars_RES ../resources/Pulsars.qrc)
 
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(PulsarsDialog_UIS_H ${PulsarsDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(PulsarsDialog_UIS_H ${PulsarsDialog_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(Pulsars_RES_CXX ${Pulsars_RES})
 ELSE()
-     QT_WRAP_UI(PulsarsDialog_UIS_H ${PulsarsDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(PulsarsDialog_UIS_H ${PulsarsDialog_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(Pulsars_RES_CXX ${Pulsars_RES})
 ENDIF()
 
