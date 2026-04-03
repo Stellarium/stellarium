@@ -12,6 +12,9 @@ SET(NavStars_SRCS
      NavStars.cpp
      NavStarsCalculator.hpp
      NavStarsCalculator.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND NavStars_SRCS
      gui/NavStarsWindow.hpp
      gui/NavStarsWindow.cpp
 )
@@ -19,13 +22,18 @@ SET(NavStars_SRCS
 SET(NavStars_UIS
      gui/navStarsWindow.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 SET(NavStars_RES ../resources/NavStars.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(NavStars_UIS_H ${NavStars_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(NavStars_UIS_H ${NavStars_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(NavStars_RES_CXX ${NavStars_RES})
 ELSE()
-     QT_WRAP_UI(NavStars_UIS_H ${NavStars_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(NavStars_UIS_H ${NavStars_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(NavStars_RES_CXX ${NavStars_RES})
 ENDIF()
 

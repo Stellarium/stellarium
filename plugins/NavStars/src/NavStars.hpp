@@ -212,7 +212,9 @@ signals:
 	void flagUseUTCTimeChanged(bool b);
 
 private:
+#ifndef NO_GUI
 	NavStarsWindow* mainWindow;
+#endif
 	StelPropertyMgr* propMgr;
 	QSettings* conf;	
 
