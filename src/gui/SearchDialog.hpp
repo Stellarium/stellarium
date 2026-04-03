@@ -161,12 +161,7 @@ public:
 	~SearchDialog() override;
 	bool eventFilter(QObject *object, QEvent *event) override;
 
-	//! Replaces all occurrences of substrings describing Greek letters (i.e. "alpha", "beta", ...)
-	//! with the actual Greek unicode characters.
-	static QString substituteGreek(const QString& keyString);
-	//! Returns the Greek unicode character for the specified letter string (i.e. "alpha", "beta", ...)
-	static QString getGreekLetterByName(const QString& potentialGreekLetterName);
-	//! URL of the default SIMBAD server (Strasbourg).
+	////! URL of the default SIMBAD server (Strasbourg).
 	static const char* DEF_SIMBAD_URL;
 
 signals:
@@ -199,8 +194,8 @@ public slots:
 
 	void setCoordinateSystem(int csID);
 	void populateCoordinateSystemsList();
-	void populateCoordinateAxis(); // Called when axises data is changed
-	void populateCoordinateData(); // Called when axises data and values are changed
+	void populateCoordinateAxis(); // Called when axes data is changed
+	void populateCoordinateData(); // Called when axes data and values are changed
 	void populateRecentSearch();
 
 public:
@@ -304,46 +299,6 @@ private:
 	bool getSimbadGetsMorpho() const { return simbadGetMorpho;}
 	bool getSimbadGetsTypes () const { return simbadGetTypes;}
 	bool getSimbadGetsDims  () const { return simbadGetDims;}
-
-	class SearchDialogStaticData
-	{
-	public:
-		//! Greek letters and strings
-		QHash<QString, QString> greekLetters;
-
-		SearchDialogStaticData() :
-			greekLetters(QHash<QString,QString>({
-				{"alpha",   QString(QChar(0x03B1))},
-				{"beta",    QString(QChar(0x03B2))},
-				{"beta",    QString(QChar(0x03B2))},
-				{"gamma",   QString(QChar(0x03B3))},
-				{"delta",   QString(QChar(0x03B4))},
-				{"epsilon", QString(QChar(0x03B5))},
-
-				{"zeta",    QString(QChar(0x03B6))},
-				{"eta",     QString(QChar(0x03B7))},
-				{"theta",   QString(QChar(0x03B8))},
-				{"iota",    QString(QChar(0x03B9))},
-				{"kappa",   QString(QChar(0x03BA))},
-
-				{"lambda",  QString(QChar(0x03BB))},
-				{"mu",      QString(QChar(0x03BC))},
-				{"nu",      QString(QChar(0x03BD))},
-				{"xi",      QString(QChar(0x03BE))},
-				{"omicron", QString(QChar(0x03BF))},
-
-				{"pi",      QString(QChar(0x03C0))},
-				{"rho",     QString(QChar(0x03C1))},
-				{"sigma",   QString(QChar(0x03C3))}, // second lower-case sigma shouldn't affect anything
-				{"tau",     QString(QChar(0x03C4))},
-				{"upsilon", QString(QChar(0x03C5))},
-
-				{"phi",     QString(QChar(0x03C6))},
-				{"chi",     QString(QChar(0x03C7))},
-				{"psi",     QString(QChar(0x03C8))},
-				{"omega",   QString(QChar(0x03C9))}})){}
-	};
-	static SearchDialogStaticData staticData;
 
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
