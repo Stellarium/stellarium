@@ -40,7 +40,7 @@ ObjectService::ObjectService(QObject *parent) : AbstractAPIService(parent),
 QStringList ObjectService::performSearch(const QString &text)
 {
 	//perform substitution greek text --> symbol
-	QString greekText = substituteGreek(text);
+	QString greekText = StelUtils::substituteGreek(text);
 
 	QStringList matches;
 	if(greekText != text)
@@ -58,12 +58,6 @@ QStringList ObjectService::performSearch(const QString &text)
 	}
 
 	return matches;
-}
-
-QString ObjectService::substituteGreek(const QString &text)
-{
-	//use the searchdialog static method for that
-	return SearchDialog::substituteGreek(text);
 }
 
 void ObjectService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)

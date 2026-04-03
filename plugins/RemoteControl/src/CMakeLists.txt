@@ -53,23 +53,31 @@ SET(RemoteControl_SRCS
   StelPropertyService.cpp
   ViewService.hpp
   ViewService.cpp
+  ../include/RemoteControlServiceInterface.hpp # added here just so that it shows up in Qt creator
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND RemoteControl_SRCS
   gui/RemoteControlDialog.hpp
   gui/RemoteControlDialog.cpp
-  ../include/RemoteControlServiceInterface.hpp # added here just so that it shows up in Qt creator
 )
 
 SET(RemoteControl_UIS
   gui/remoteControlDialog.ui
 )
+ENDIF(STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 ################# compiles resources files ############
 SET(RemoteControl_RES ../RemoteControl.qrc)
 
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
 ELSE()
-     QT_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
 ENDIF()
 

@@ -18,7 +18,9 @@
  */
 
 #include "RemoteSync.hpp"
-#include "RemoteSyncDialog.hpp"
+#ifndef NO_GUI
+  #include "RemoteSyncDialog.hpp"
+#endif
 
 #include "SyncServer.hpp"
 #include "SyncClient.hpp"
@@ -76,7 +78,9 @@ RemoteSync::RemoteSync()
 {
 	setObjectName("RemoteSync");
 
+#ifndef NO_GUI
 	configDialog = new RemoteSyncDialog();
+#endif
 	conf = StelApp::getInstance().getSettings();
 
 	reconnectTimer.setSingleShot(true);
@@ -88,14 +92,20 @@ RemoteSync::RemoteSync()
 
 RemoteSync::~RemoteSync()
 {
+#ifndef NO_GUI
 	delete configDialog;
+#endif
 }
 
 bool RemoteSync::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 
 QVariant RemoteSync::argsGetOptionWithArg(const QStringList& args, const QString &shortOpt, const QString &longOpt, const QVariant &defaultValue)
