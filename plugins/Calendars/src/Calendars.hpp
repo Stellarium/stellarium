@@ -297,9 +297,11 @@ private:
 	//! Create an HTML table which can be displayed or exported
 	QString createTableToDraw();
 	CalendarsInfoPanel *infoPanel;
+	QSettings* conf;
+#ifndef NO_GUI
 	CalendarsDialog* configDialog;
 	StelButton* toolbarButton;
-	QSettings* conf;
+#endif
 
 	// a QMap of pointers to calendars. The Names are identical to the respective Calendar subclass names, minus "Calendar".
 	QMap<QString, Calendar*> calendars;
