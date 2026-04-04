@@ -4,6 +4,9 @@ LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 SET(ArchaeoLines_SRCS
      ArchaeoLines.hpp
      ArchaeoLines.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND ArchaeoLines_SRCS
      gui/ArchaeoLinesDialog.hpp
      gui/ArchaeoLinesDialog.cpp
      gui/ArchaeoLinesDialogLocations.hpp
@@ -14,14 +17,19 @@ SET(ArchaeoLines_UIS
      gui/archaeoLinesDialog.ui
      gui/archaeoLinesDialogLocations.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 ################# compiles resources files ############
 SET(ArchaeoLines_RES ../ArchaeoLines.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(ArchaeoLines_UIS_H ${ArchaeoLines_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(ArchaeoLines_UIS_H ${ArchaeoLines_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(ArchaeoLines_RES_CXX ${ArchaeoLines_RES})
 ELSE()
-     QT_WRAP_UI(ArchaeoLines_UIS_H ${ArchaeoLines_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+           QT_WRAP_UI(ArchaeoLines_UIS_H ${ArchaeoLines_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(ArchaeoLines_RES_CXX ${ArchaeoLines_RES})
 ENDIF()
 
