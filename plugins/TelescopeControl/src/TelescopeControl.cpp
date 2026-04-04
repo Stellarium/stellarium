@@ -91,11 +91,13 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
-	: toolbarButton(nullptr)
-	, useTelescopeServerLogs(false)
+	: useTelescopeServerLogs(false)
 	, useServerExecutables(false)
+	#ifndef NO_GUI
+	, toolbarButton(nullptr)
 	, telescopeDialog(nullptr)
 	, slewDialog(nullptr)
+	#endif
 	, actionGroupId("PluginTelescopeControl")
 	, moveToSelectedActionId("actionMove_Telescope_To_Selection_%1")
 	, syncActionId("actionSync_Telescope_To_Selection_%1")
@@ -116,8 +118,10 @@ TelescopeControl::TelescopeControl()
 
 TelescopeControl::~TelescopeControl()
 {
+#ifndef NO_GUI
 	delete slewDialog; slewDialog = nullptr;
 	delete telescopeDialog; telescopeDialog = nullptr;
+#endif
 }
 
 
@@ -201,10 +205,10 @@ void TelescopeControl::init()
 		}
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateActionDescriptions()));
 
+#ifndef NO_GUI
 		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
-
 		addAction("actionShow_Slew_Window", N_("Telescope Control"), N_("Move a telescope to a given set of coordinates"), slewDialog, "visible", "Ctrl+0");
 		addAction("actionShow_TelescopeControl_dialog", N_("Telescope Control"), N_("Show settings dialog"), telescopeDialog, "visible");
 
@@ -221,6 +225,7 @@ void TelescopeControl::init()
 						       "actionShow_TelescopeControl_dialog");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
+#endif
 	}
 	catch (std::runtime_error &e)
 	{
@@ -399,12 +404,16 @@ QString TelescopeControl::getStelObjectType() const
 
 bool TelescopeControl::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if(show)
 	{
 		telescopeDialog->setVisible(true);
 	}
 
 	return true;
+#endif
 }
 
 

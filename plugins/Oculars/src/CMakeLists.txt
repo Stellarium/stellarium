@@ -17,6 +17,10 @@ SET(Oculars_SRCS
      Oculars.cpp
      Telescope.hpp
      Telescope.cpp
+)
+
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND Oculars_SRCS
      gui/OcularDialog.hpp
      gui/OcularDialog.cpp
      gui/PropertyBasedTableModel.hpp
@@ -25,18 +29,23 @@ SET(Oculars_SRCS
      gui/OcularsGuiPanel.cpp
 )
 
-SET(Oculars_RES ../resources/Oculars.qrc)
-
 ################# compiles .ui files ############
 SET(Oculars_UIS
      gui/ocularDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+
+SET(Oculars_RES ../resources/Oculars.qrc)
 
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-      QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
-      QT5_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
+     ENDIF()
+     QT5_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
 ELSE()
-     QT_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
 ENDIF()
 
