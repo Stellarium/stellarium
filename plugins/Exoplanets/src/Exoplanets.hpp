@@ -431,12 +431,13 @@ private:
 
 	QSettings* conf;
 
-	// GUI
+#ifndef NO_GUI
 	ExoplanetsDialog* exoplanetsConfigDialog;
+	class StelProgressController* progressBar;
+	StelButton* toolbarButton;
+#endif
 	bool flagShowExoplanets;
 	bool flagShowExoplanetsButton;
-	StelButton* toolbarButton;
-	class StelProgressController* progressBar;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
