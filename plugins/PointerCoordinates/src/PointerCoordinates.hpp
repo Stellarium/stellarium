@@ -181,9 +181,12 @@ public slots:
 	void setFontColor(const Vec3f& c);
 
 private:
+#ifndef NO_GUI
 	PointerCoordinatesWindow* mainWindow;
-	QSettings* conf;
 	StelGui* gui;
+	StelButton* toolbarButton;
+#endif
+	QSettings* conf;
 
 	// The current place for string with coordinates
 	CoordinatesPlace currentPlace;
@@ -199,7 +202,6 @@ private:
 	Vec3f textColor;
 	Vec3d coordinatesPoint;
 	int fontSize;
-	StelButton* toolbarButton;
 	QPair<int, int> customPosition;
 };
 
