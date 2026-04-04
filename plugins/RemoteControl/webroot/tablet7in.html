@@ -825,19 +825,20 @@
           <iframe id="vo_skycultureinfo" class="flex-expand" src="/api/view/skyculturedescription/"></iframe>
         </div>
       </div>
-      <!-- handled by ui/actions.js -->
-      <div id="tab_actions">
-        <div class="flex">
-          <section id="stelaction" name="block flex flex-column">
-            <header><h2><?= tr("Actions")?></h2></header>
-            <select id="actionlist" class="scrollselect flex-expand" size="10">
-            </select>
-            <div>
-              <button id="bt_doaction" disabled="disabled"><?= tr("Run/toggle action")?></button>
-            </div>
-          </section>
-        </div>
-      </div>
+			<!-- handled by ui/actions.js -->
+			<div id="tab_actions">
+				<div class="flex">
+					<section id="stelaction" class="block flex flex-column">
+						<header><h2><?= tr("Actions")?></h2></header>
+						<div class="action-search-container" style="display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
+							<input type="text" id="action-search-input" class="action-search-input" placeholder='<?= tr("Search actions...") ?>' style="flex: 1; min-width: 150px;" />
+							<button id="bt_doaction" disabled="disabled"><?= tr("Run/toggle action")?></button>
+						</div>
+						<select id="actionlist" class="scrollselect flex-expand" size="10">
+						</select>
+					</section>
+				</div>
+			</div>
       <div id="tab_scripts">
         <div class="flex">
           <section id="scripts" class="block flex flex-expand">

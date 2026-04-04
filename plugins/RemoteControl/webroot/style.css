@@ -964,3 +964,40 @@ button.button32:active {
 .smallblock128 {
     max-width: 143px;
 }
+
+/* ========================================================================
+ * Action Search Input Styles
+ * ======================================================================== */
+
+.action-search-container {
+    margin-bottom: 10px;
+}
+
+.action-search-input {
+    padding: 6px 10px;
+    background: #3A3C3E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 4px;
+    font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.action-search-input:focus {
+    outline: none;
+    border-color: #B4B7B0;
+}
+
+.action-search-input::placeholder {
+    color: #8A8C8E;
+    font-size: 11px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .action-search-input {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+}
