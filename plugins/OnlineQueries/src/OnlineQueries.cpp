@@ -18,10 +18,7 @@
  */
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
 #include "StelObjectMgr.hpp"
 #include "Star.hpp"
 #include "StarMgr.hpp"
@@ -29,15 +26,23 @@
 #include "NebulaMgr.hpp"
 #include "Constellation.hpp"
 #include "Asterism.hpp"
-#include "StelDialog.hpp"
 #include "OnlineQueries.hpp"
 #include "OnlineQueriesDialog.hpp"
+
+#ifndef NO_GUI
+#include "StelCore.hpp"
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"
+#include "StelDialog.hpp"
+#include <stdexcept>
+#else
+#include <QDesktopServices>
+#endif
 
 #include <QSettings>
 #include <QMetaEnum>
 #include <QLoggingCategory>
 #include <QXmlStreamReader>
-#include <stdexcept>
 
 Q_LOGGING_CATEGORY(onlineQueries,"stel.plugin.OnlineQueries")
 
@@ -73,7 +78,9 @@ OnlineQueries::OnlineQueries() :
 	hipOnlineReply(nullptr)
 {
 	setObjectName("OnlineQueries");
+#ifndef NO_GUI
 	dialog = new OnlineQueriesDialog();
+#endif
 	StelApp &app = StelApp::getInstance();
 	conf = app.getSettings();
 }
@@ -87,7 +94,9 @@ OnlineQueries::~OnlineQueries()
 	}
 	delete hipQuery;
 	hipQuery=nullptr;
+#ifndef NO_GUI
 	delete dialog;
+#endif
 }
 
 void OnlineQueries::init()
@@ -104,7 +113,7 @@ void OnlineQueries::init()
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
 	addAction("actionShow_OnlineQueries",       N_("Online Queries"), N_("Show window for Online Queries"),           this, "enabled", "");
-	addAction("actionShow_OnlineQueries_ASE",   N_("Online Queries"), N_("Call All Skies Encyclopaedia on current selection"),  this, "queryASE()", "");
+	addAction("actionShow_OnlineQueries_ASE",   N_("Online Queries"), N_("Call All Skies Encyclopaedia on current selection"),  this, "queryASE()", "Ctrl+Alt+O");
 	addAction("actionShow_OnlineQueries_AAVSO", N_("Online Queries"), N_("Call AAVSO database on current selection"), this, "queryAAVSO()", "");
 	addAction("actionShow_OnlineQueries_GCVS",  N_("Online Queries"), N_("Call GCVS database on current selection"),  this, "queryGCVS()", "");
 	addAction("actionShow_OnlineQueries_WP",    N_("Online Queries"), N_("Call Wikipedia on current selection"),      this, "queryWikipedia()", "");
@@ -121,7 +130,9 @@ void OnlineQueries::setEnabled(bool b)
 	{
 		enabled = b;
 		emit flagEnabledChanged(b);
+#ifndef NO_GUI
 		dialog->setVisible(b);
+#endif
 	}
 }
 
@@ -195,6 +206,7 @@ void OnlineQueries::saveConfiguration(void)
 
 void OnlineQueries::createToolbarButton() const
 {
+#ifndef NO_GUI
 	// Add toolbar button (copy/paste widely from AngleMeasure).
 	try
 	{
@@ -216,6 +228,7 @@ void OnlineQueries::createToolbarButton() const
 	{
 		qCWarning(onlineQueries) << "Unable to create toolbar button for OnlineQueries plugin: " << e.what();
 	}
+#endif
 }
 
 void OnlineQueries::queryWikipedia()
@@ -436,12 +449,20 @@ void OnlineQueries::onAavsoHipQueryStatusChanged()
 
 void OnlineQueries::setOutputHtml(const QString &html)
 {
+#ifndef NO_GUI
 	if (dialog)
 		dialog->setOutputHtml(html);
+#endif
 }
 
 void OnlineQueries::setOutputUrl(const QUrl &url)
 {
+#ifndef NO_GUI
 	if (dialog)
 		dialog->setOutputUrl(url);
+#else
+	QDesktopServices::openUrl(url);
+	qDebug() << "Opened" << url.host() << "in your web browser";
+
+#endif
 }
