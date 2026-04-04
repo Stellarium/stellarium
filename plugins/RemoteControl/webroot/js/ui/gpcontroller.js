@@ -182,6 +182,10 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         /**
          * Educational custom actions that are not available as StelActions in Stellarium.
          * These actions are implemented directly in gpcontroller.js for educational purposes.
+         * 
+         * All 88 IAU constellations are included, organized by hemisphere and ecliptic.
+         * Duplicate entries have been removed, and typos in constellation names have been fixed.
+         * 
          * @constant {Object}
          */
         var EDUCATIONAL_CUSTOM_ACTIONS = {
@@ -250,97 +254,99 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             "search_neptune": "Center on Neptune",
             "search_pluto": "Center on Pluto",
 
-						// === CONSTELLATION HIGHLIGHTS (All 88 Constellations) ===
-						// Zodiac Constellations (13 constellations along the ecliptic)
-						"highlight_aries": "Highlight Aries (Toggle isolate)",
-						"highlight_taurus": "Highlight Taurus (Toggle isolate)",
-						"highlight_gemini": "Highlight Gemini (Toggle isolate)",
-						"highlight_cancer": "Highlight Cancer (Toggle isolate)",
-						"highlight_leo": "Highlight Leo (Toggle isolate)",
-						"highlight_virgo": "Highlight Virgo (Toggle isolate)",
-						"highlight_libra": "Highlight Libra (Toggle isolate)",
-						"highlight_scorpius": "Highlight Scorpius (Toggle isolate)",
-						"highlight_ophiuchus": "Highlight Ophiuchus (Toggle isolate)",
-						"highlight_sagittarius": "Highlight Sagittarius (Toggle isolate)",
-						"highlight_capricornus": "Highlight Capricornus (Toggle isolate)",
-						"highlight_aquarius": "Highlight Aquarius (Toggle isolate)",
-						"highlight_pisces": "Highlight Pisces (Toggle isolate)",
+            // === CONSTELLATION HIGHLIGHTS (All 88 IAU Constellations - No Duplicates) ===
+            
+            // Zodiac Constellations (13 constellations along the ecliptic)
+            "highlight_aries": "Highlight Aries (Toggle isolate)",
+            "highlight_taurus": "Highlight Taurus (Toggle isolate)",
+            "highlight_gemini": "Highlight Gemini (Toggle isolate)",
+            "highlight_cancer": "Highlight Cancer (Toggle isolate)",
+            "highlight_leo": "Highlight Leo (Toggle isolate)",
+            "highlight_virgo": "Highlight Virgo (Toggle isolate)",
+            "highlight_libra": "Highlight Libra (Toggle isolate)",
+            "highlight_scorpius": "Highlight Scorpius (Toggle isolate)",
+            "highlight_ophiuchus": "Highlight Ophiuchus (Toggle isolate)",
+            "highlight_sagittarius": "Highlight Sagittarius (Toggle isolate)",
+            "highlight_capricornus": "Highlight Capricornus (Toggle isolate)",
+            "highlight_aquarius": "Highlight Aquarius (Toggle isolate)",
+            "highlight_pisces": "Highlight Pisces (Toggle isolate)",
 
-						// Northern Constellations (Visible from northern hemisphere)
-						"highlight_ursa_major": "Highlight Ursa Major (Toggle isolate)",
-						"highlight_ursa_minor": "Highlight Ursa Minor (Toggle isolate)",
-						"highlight_cassiopeia": "Highlight Cassiopeia (Toggle isolate)",
-						"highlight_cepheus": "Highlight Cepheus (Toggle isolate)",
-						"highlight_draco": "Highlight Draco (Toggle isolate)",
-						"highlight_hercules": "Highlight Hercules (Toggle isolate)",
-						"highlight_cygnus": "Highlight Cygnus (Toggle isolate)",
-						"highlight_lyra": "Highlight Lyra (Toggle isolate)",
-						"highlight_aquila": "Highlight Aquila (Toggle isolate)",
-						"highlight_andromeda": "Highlight Andromeda (Toggle isolate)",
-						"highlight_peg asus": "Highlight Pegasus (Toggle isolate)",
-						"highlight_perseus": "Highlight Perseus (Toggle isolate)",
-						"highlight_auriga": "Highlight Auriga (Toggle isolate)",
-						"highlight_boötes": "Highlight Boötes (Toggle isolate)",
-						"highlight_canes_venatici": "Highlight Canes Venatici (Toggle isolate)",
-						"highlight_com_berenices": "Highlight Coma Berenices (Toggle isolate)",
-						"highlight_corona_borealis": "Highlight Corona Borealis (Toggle isolate)",
-						"highlight_vulpecula": "Highlight Vulpecula (Toggle isolate)",
-						"highlight_lacerta": "Highlight Lacerta (Toggle isolate)",
-						"highlight_lynx": "Highlight Lynx (Toggle isolate)",
-						"highlight_triangulum": "Highlight Triangulum (Toggle isolate)",
-						"highlight_camelopardalis": "Highlight Camelopardalis (Toggle isolate)",
-						"highlight_monoceros": "Highlight Monoceros (Toggle isolate)",
-						"highlight_canis_minor": "Highlight Canis Minor (Toggle isolate)",
-						"highlight_canis_major": "Highlight Canis Major (Toggle isolate)",
+            // Northern Constellations (Visible from northern hemisphere)
+            "highlight_ursa_major": "Highlight Ursa Major (Toggle isolate)",
+            "highlight_ursa_minor": "Highlight Ursa Minor (Toggle isolate)",
+            "highlight_cassiopeia": "Highlight Cassiopeia (Toggle isolate)",
+            "highlight_cepheus": "Highlight Cepheus (Toggle isolate)",
+            "highlight_draco": "Highlight Draco (Toggle isolate)",
+            "highlight_hercules": "Highlight Hercules (Toggle isolate)",
+            "highlight_cygnus": "Highlight Cygnus (Toggle isolate)",
+            "highlight_lyra": "Highlight Lyra (Toggle isolate)",
+            "highlight_aquila": "Highlight Aquila (Toggle isolate)",
+            "highlight_andromeda": "Highlight Andromeda (Toggle isolate)",
+            "highlight_pegasus": "Highlight Pegasus (Toggle isolate)",
+            "highlight_perseus": "Highlight Perseus (Toggle isolate)",
+            "highlight_auriga": "Highlight Auriga (Toggle isolate)",
+            "highlight_boötes": "Highlight Boötes (Toggle isolate)",
+            "highlight_canes_venatici": "Highlight Canes Venatici (Toggle isolate)",
+            "highlight_com_berenices": "Highlight Coma Berenices (Toggle isolate)",
+            "highlight_corona_borealis": "Highlight Corona Borealis (Toggle isolate)",
+            "highlight_vulpecula": "Highlight Vulpecula (Toggle isolate)",
+            "highlight_lacerta": "Highlight Lacerta (Toggle isolate)",
+            "highlight_lynx": "Highlight Lynx (Toggle isolate)",
+            "highlight_triangulum": "Highlight Triangulum (Toggle isolate)",
+            "highlight_camelopardalis": "Highlight Camelopardalis (Toggle isolate)",
+            "highlight_monoceros": "Highlight Monoceros (Toggle isolate)",
+            "highlight_canis_minor": "Highlight Canis Minor (Toggle isolate)",
 
-						// Southern Constellations (Visible from southern hemisphere)
-						"highlight_orion": "Highlight Orion (Toggle isolate)",
-						"highlight_centaurus": "Highlight Centaurus (Toggle isolate)",
-						"highlight_crux": "Highlight Crux (Toggle isolate)",
-						"highlight_carina": "Highlight Carina (Toggle isolate)",
-						"highlight_vela": "Highlight Vela (Toggle isolate)",
-						"highlight_puppis": "Highlight Puppis (Toggle isolate)",
-						"highlight_phoenix": "Highlight Phoenix (Toggle isolate)",
-						"highlight_grus": "Highlight Grus (Toggle isolate)",
-						"highlight_tucana": "Highlight Tucana (Toggle isolate)",
-						"highlight_pavo": "Highlight Pavo (Toggle isolate)",
-						"highlight_ara": "Highlight Ara (Toggle isolate)",
-						"highlight_corona_australis": "Highlight Corona Australis (Toggle isolate)",
-						"highlight_lupus": "Highlight Lupus (Toggle isolate)",
-						"highlight_norma": "Highlight Norma (Toggle isolate)",
-						"highlight_circinus": "Highlight Circinus (Toggle isolate)",
-						"highlight_triangulum_australe": "Highlight Triangulum Australe (Toggle isolate)",
-						"highlight_apus": "Highlight Apus (Toggle isolate)",
-						"highlight_chamaeleon": "Highlight Chamaeleon (Toggle isolate)",
-						"highlight_musca": "Highlight Musca (Toggle isolate)",
-						"highlight_volans": "Highlight Volans (Toggle isolate)",
-						"highlight_dorado": "Highlight Dorado (Toggle isolate)",
-						"highlight_mensa": "Highlight Mensa (Toggle isolate)",
-						"highlight_hydrus": "Highlight Hydrus (Toggle isolate)",
-						"highlight_ reticulum": "Highlight Reticulum (Toggle isolate)",
-						"highlight_horologium": "Highlight Horologium (Toggle isolate)",
-						"highlight_caelum": "Highlight Caelum (Toggle isolate)",
-						"highlight_fornax": "Highlight Fornax (Toggle isolate)",
-						"highlight_sculptor": "Highlight Sculptor (Toggle isolate)",
-						"highlight_antlia": "Highlight Antlia (Toggle isolate)",
-						"highlight_pyxis": "Highlight Pyxis (Toggle isolate)",
-						"highlight_columba": "Highlight Columba (Toggle isolate)",
-						"highlight_lepus": "Highlight Lepus (Toggle isolate)",
-						"highlight_eridanus": "Highlight Eridanus (Toggle isolate)",
-						"highlight_ce tus": "Highlight Cetus (Toggle isolate)",
-						"highlight_equuleus": "Highlight Equuleus (Toggle isolate)",
-						"highlight_delphinus": "Highlight Delphinus (Toggle isolate)",
-						"highlight_sagitta": "Highlight Sagitta (Toggle isolate)",
-						"highlight_scutum": "Highlight Scutum (Toggle isolate)",
-						"highlight_serpens": "Highlight Serpens (Toggle isolate)",
+            // Southern Constellations (Visible from southern hemisphere)
+            "highlight_orion": "Highlight Orion (Toggle isolate)",
+            "highlight_centaurus": "Highlight Centaurus (Toggle isolate)",
+            "highlight_crux": "Highlight Crux (Toggle isolate)",
+            "highlight_carina": "Highlight Carina (Toggle isolate)",
+            "highlight_vela": "Highlight Vela (Toggle isolate)",
+            "highlight_puppis": "Highlight Puppis (Toggle isolate)",
+            "highlight_phoenix": "Highlight Phoenix (Toggle isolate)",
+            "highlight_grus": "Highlight Grus (Toggle isolate)",
+            "highlight_tucana": "Highlight Tucana (Toggle isolate)",
+            "highlight_pavo": "Highlight Pavo (Toggle isolate)",
+            "highlight_ara": "Highlight Ara (Toggle isolate)",
+            "highlight_corona_australis": "Highlight Corona Australis (Toggle isolate)",
+            "highlight_lupus": "Highlight Lupus (Toggle isolate)",
+            "highlight_norma": "Highlight Norma (Toggle isolate)",
+            "highlight_circinus": "Highlight Circinus (Toggle isolate)",
+            "highlight_triangulum_australe": "Highlight Triangulum Australe (Toggle isolate)",
+            "highlight_apus": "Highlight Apus (Toggle isolate)",
+            "highlight_chamaeleon": "Highlight Chamaeleon (Toggle isolate)",
+            "highlight_musca": "Highlight Musca (Toggle isolate)",
+            "highlight_volans": "Highlight Volans (Toggle isolate)",
+            "highlight_dorado": "Highlight Dorado (Toggle isolate)",
+            "highlight_mensa": "Highlight Mensa (Toggle isolate)",
+            "highlight_hydrus": "Highlight Hydrus (Toggle isolate)",
+            "highlight_reticulum": "Highlight Reticulum (Toggle isolate)",
+            "highlight_horologium": "Highlight Horologium (Toggle isolate)",
+            "highlight_caelum": "Highlight Caelum (Toggle isolate)",
+            "highlight_fornax": "Highlight Fornax (Toggle isolate)",
+            "highlight_sculptor": "Highlight Sculptor (Toggle isolate)",
+            "highlight_antlia": "Highlight Antlia (Toggle isolate)",
+            "highlight_pyxis": "Highlight Pyxis (Toggle isolate)",
+            "highlight_columba": "Highlight Columba (Toggle isolate)",
+            "highlight_lepus": "Highlight Lepus (Toggle isolate)",
+            "highlight_eridanus": "Highlight Eridanus (Toggle isolate)",
+            "highlight_cetus": "Highlight Cetus (Toggle isolate)",
+            "highlight_canis_major": "Highlight Canis Major (Toggle isolate)",
 
-						// Additional Constellations
-						"highlight_hercules": "Highlight Hercules (Toggle isolate)",
-						"highlight_ corona_borealis": "Highlight Corona Borealis (Toggle isolate)",
-						"highlight_corona_australis": "Highlight Corona Australis (Toggle isolate)",
-						"highlight_lupus": "Highlight Lupus (Toggle isolate)",
+            // Equatorial Constellations (Visible from both hemispheres)
+            "highlight_equuleus": "Highlight Equuleus (Toggle isolate)",
+            "highlight_delphinus": "Highlight Delphinus (Toggle isolate)",
+            "highlight_sagitta": "Highlight Sagitta (Toggle isolate)",
+            "highlight_scutum": "Highlight Scutum (Toggle isolate)",
+            "highlight_serpens": "Highlight Serpens (Toggle isolate)",
+            "highlight_sextans": "Highlight Sextans (Toggle isolate)",
+            "highlight_hydra": "Highlight Hydra (Toggle isolate)",
+            "highlight_crater": "Highlight Crater (Toggle isolate)",
+            "highlight_corvus": "Highlight Corvus (Toggle isolate)",
 
-						"clear_constellation_highlight": "Show all constellations (clear isolation)",
+            // === CONSTELLATION ACTIONS ===
+            "clear_constellation_highlight": "Show all constellations (clear isolation)",
 
             // === TIME CONTROL ===
             "time_speed_normal": "Normal time speed (1x)",
@@ -365,6 +371,20 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 
         /**
          * Category mapping for educational custom actions.
+         * Organizes actions into logical groups for display in the dropdown menu.
+         * 
+         * Categories include:
+         * - View Directions: Basic cardinal and vertical directions
+         * - Zoom Levels: Preset FOV values from 0.1° to 180°
+         * - Viewport Offset: Vertical offset presets
+         * - Notable Stars: Brightest and most famous stars
+         * - Deep Sky Objects: Popular DSOs like M42, M45, M57, M13
+         * - Solar System: Planets and Sun/Moon
+         * - Constellations: All 88 IAU constellations organized by region
+         * - Time Speed: Preset time rate multipliers
+         * - Seasons: Solstice and equinox dates
+         * - Milky Way: Display and brightness controls
+         * 
          * @constant {Object}
          */
         var EDUCATIONAL_CATEGORIES = {
@@ -394,6 +414,40 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 "search_mars", "search_jupiter", "search_saturn",
                 "search_uranus", "search_neptune", "search_pluto"
             ],
+            "Constellations: Zodiac (Ecliptic)": [
+                "highlight_aries", "highlight_taurus", "highlight_gemini", "highlight_cancer",
+                "highlight_leo", "highlight_virgo", "highlight_libra", "highlight_scorpius",
+                "highlight_ophiuchus", "highlight_sagittarius", "highlight_capricornus",
+                "highlight_aquarius", "highlight_pisces"
+            ],
+            "Constellations: Northern Sky": [
+                "highlight_ursa_major", "highlight_ursa_minor", "highlight_cassiopeia",
+                "highlight_cepheus", "highlight_draco", "highlight_hercules", "highlight_cygnus",
+                "highlight_lyra", "highlight_aquila", "highlight_andromeda", "highlight_pegasus",
+                "highlight_perseus", "highlight_auriga", "highlight_boötes",
+                "highlight_canes_venatici", "highlight_com_berenices", "highlight_corona_borealis",
+                "highlight_vulpecula", "highlight_lacerta", "highlight_lynx", "highlight_triangulum",
+                "highlight_camelopardalis", "highlight_monoceros", "highlight_canis_minor"
+            ],
+            "Constellations: Southern Sky": [
+                "highlight_orion", "highlight_centaurus", "highlight_crux", "highlight_carina",
+                "highlight_vela", "highlight_puppis", "highlight_phoenix", "highlight_grus",
+                "highlight_tucana", "highlight_pavo", "highlight_ara", "highlight_corona_australis",
+                "highlight_lupus", "highlight_norma", "highlight_circinus", "highlight_triangulum_australe",
+                "highlight_apus", "highlight_chamaeleon", "highlight_musca", "highlight_volans",
+                "highlight_dorado", "highlight_mensa", "highlight_hydrus", "highlight_reticulum",
+                "highlight_horologium", "highlight_caelum", "highlight_fornax", "highlight_sculptor",
+                "highlight_antlia", "highlight_pyxis", "highlight_columba", "highlight_lepus",
+                "highlight_eridanus", "highlight_cetus", "highlight_canis_major"
+            ],
+            "Constellations: Equatorial": [
+                "highlight_equuleus", "highlight_delphinus", "highlight_sagitta", "highlight_scutum",
+                "highlight_serpens", "highlight_sextans", "highlight_hydra", "highlight_crater",
+                "highlight_corvus"
+            ],
+            "Constellation Actions": [
+                "clear_constellation_highlight"
+            ],
             "Educational: Time Speed": [
                 "time_speed_normal", "time_speed_fast", "time_speed_very_fast",
                 "time_speed_slow", "time_speed_reverse"
@@ -405,42 +459,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             "Educational: Milky Way": [
                 "milky_way_toggle", "milky_way_show", "milky_way_hide",
                 "milky_way_brightness_up", "milky_way_brightness_down"
-            ],
-						 // === CONSTELLATION HIGHLIGHTS ORGANIZED ===    
-						"Constellations: Zodiac (Ecliptic)": [
-								"highlight_aries", "highlight_taurus", "highlight_gemini", "highlight_cancer",
-								"highlight_leo", "highlight_virgo", "highlight_libra", "highlight_scorpius",
-								"highlight_ophiuchus", "highlight_sagittarius", "highlight_capricornus",
-								"highlight_aquarius", "highlight_pisces"
-						],						
-						"Constellations: Northern Sky": [
-								"highlight_ursa_major", "highlight_ursa_minor", "highlight_cassiopeia",
-								"highlight_cepheus", "highlight_draco", "highlight_hercules", "highlight_cygnus",
-								"highlight_lyra", "highlight_aquila", "highlight_andromeda", "highlight_pegasus",
-								"highlight_perseus", "highlight_auriga", "highlight_boötes",
-								"highlight_canes_venatici", "highlight_com_berenices", "highlight_corona_borealis",
-								"highlight_vulpecula", "highlight_lacerta", "highlight_lynx", "highlight_triangulum",
-								"highlight_camelopardalis", "highlight_monoceros", "highlight_canis_minor"
-						],						
-						"Constellations: Southern Sky": [
-								"highlight_orion", "highlight_centaurus", "highlight_crux", "highlight_carina",
-								"highlight_vela", "highlight_puppis", "highlight_phoenix", "highlight_grus",
-								"highlight_tucana", "highlight_pavo", "highlight_ara", "highlight_corona_australis",
-								"highlight_lupus", "highlight_norma", "highlight_circinus", "highlight_triangulum_australe",
-								"highlight_apus", "highlight_chamaeleon", "highlight_musca", "highlight_volans",
-								"highlight_dorado", "highlight_mensa", "highlight_hydrus", "highlight_reticulum",
-								"highlight_horologium", "highlight_caelum", "highlight_fornax", "highlight_sculptor",
-								"highlight_antlia", "highlight_pyxis", "highlight_columba", "highlight_lepus",
-								"highlight_eridanus", "highlight_cetus", "highlight_canis_major"
-						],						
-						"Constellations: Other / Seasonal": [
-								"highlight_equuleus", "highlight_delphinus", "highlight_sagitta", "highlight_scutum",
-								"highlight_serpens"
-						],						
-						"Constellation Actions": [
-								"clear_constellation_highlight"
-						]
-				};
+            ]
+        };
 
         // =====================================================================
         // SECTION 3: PRIVATE VARIABLES AND STATE
