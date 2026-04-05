@@ -94,6 +94,18 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	connect(ui->sunAltitudeSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveSunAltitude(double)));
 	connect(ui->sunAltCrossingComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveSunAltitudeCrossing(int)));
 
+	// Opposition planet combobox
+	ui->oppositionPlanetComboBox->addItem(q_("Mars"),    "Mars");
+	ui->oppositionPlanetComboBox->addItem(q_("Jupiter"), "Jupiter");
+	ui->oppositionPlanetComboBox->addItem(q_("Saturn"),  "Saturn");
+	ui->oppositionPlanetComboBox->addItem(q_("Uranus"),  "Uranus");
+	ui->oppositionPlanetComboBox->addItem(q_("Neptune"), "Neptune");
+	const QString savedOppPlanet = conf->value("astrocalc/ephemeris_opposition_planet", "Mars").toString();
+	int oppIdx = ui->oppositionPlanetComboBox->findData(savedOppPlanet);
+	if (oppIdx < 0) oppIdx = 0;
+	ui->oppositionPlanetComboBox->setCurrentIndex(oppIdx);
+	connect(ui->oppositionPlanetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveOppositionPlanet(int)));
+
 	setOptionStatus();
 }
 
@@ -118,4 +130,10 @@ void AstroCalcExtraEphemerisDialog::saveSunAltitude(double alt)
 void AstroCalcExtraEphemerisDialog::saveSunAltitudeCrossing(int index)
 {
 	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", index);
+}
+
+void AstroCalcExtraEphemerisDialog::saveOppositionPlanet(int index)
+{
+	conf->setValue("astrocalc/ephemeris_opposition_planet",
+	               ui->oppositionPlanetComboBox->itemData(index).toString());
 }

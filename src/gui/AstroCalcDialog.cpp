@@ -2009,6 +2009,10 @@ void AstroCalcDialog::generateEphemeris()
 	// Crossing: 0 = evening (default), 1 = morning
 	bool sunAltEvening = (conf->value("astrocalc/ephemeris_sun_altitude_evening", 0).toInt() == 0);
 
+	// Detect "Opposition of planet" mode
+	const bool oppositionMode = (ui->ephemerisStepComboBox->currentData().toInt() == EphemerisTimeStepOpposition);
+	QString oppositionPlanetName = conf->value("astrocalc/ephemeris_opposition_planet", "Mars").toString();
+
 	// If the Extra Ephemeris dialog has been opened, read the spinbox values directly
 	// to ensure we use the latest user input (avoids any QSettings caching issues).
 	if (extraEphemerisDialog != nullptr)
@@ -2017,9 +2021,15 @@ void AstroCalcDialog::generateEphemeris()
 		conf->sync();
 		sunTargetAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
 		sunAltEvening = (conf->value("astrocalc/ephemeris_sun_altitude_evening", 0).toInt() == 0);
+		oppositionPlanetName = conf->value("astrocalc/ephemeris_opposition_planet", "Mars").toString();
 	}
 
-	const double currentStep = sunAtAltitudeMode ? 1.0 : getEphemerisTimeStep(cplanet);
+	// For opposition mode, resolve the opposition planet
+	PlanetP oppositionPlanet;
+	if (oppositionMode)
+		oppositionPlanet = solarSystem->searchByEnglishName(oppositionPlanetName);
+
+	const double currentStep = (sunAtAltitudeMode || oppositionMode) ? 1.0 : getEphemerisTimeStep(cplanet);
 	const int elements = static_cast<int>((secondJD - firstJD) / currentStep);
 	EphemerisList.clear();
 	const bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
@@ -2078,10 +2088,37 @@ void AstroCalcDialog::generateEphemeris()
 			elongStr = dash;
 		}
 
-		for (int i = 0; i <= elements; i++)
+		// For opposition mode, pre-compute all opposition dates for the selected planet
+		// within the date range. The ephemeris object's position at each opposition moment
+		// is then recorded as a marker.
+		QVector<double> oppositionDates;
+		if (oppositionMode && oppositionPlanet)
+		{
+			double searchStart = firstJD;
+			while (searchStart < secondJD)
+			{
+				double oppJD;
+				if (findNextOpposition(oppositionPlanet, searchStart, secondJD, oppJD))
+				{
+					oppositionDates.append(oppJD);
+					// Skip ahead past this opposition (minimum synodic gap ~300 days for Mars)
+					searchStart = oppJD + 30.0;
+				}
+				else
+					break; // No more oppositions in range
+			}
+		}
+
+		const int loopCount = oppositionMode ? oppositionDates.size() : (elements + 1);
+
+		for (int i = 0; i < loopCount; i++)
 		{
 			double JD;
-			if (sunAtAltitudeMode)
+			if (oppositionMode)
+			{
+				JD = oppositionDates[i];
+			}
+			else if (sunAtAltitudeMode)
 			{
 				// Step day-by-day and solve for the moment when the Sun reaches the target altitude.
 				// Normalize to 0h UT of each calendar day so the search brackets are always correct,
@@ -2253,6 +2290,78 @@ bool AstroCalcDialog::findSunAtAltitude(double dayJD, double targetAltDeg, bool 
 	}
 	resultJD = 0.5 * (lo + hi);
 	return true;
+}
+
+bool AstroCalcDialog::findNextOpposition(const PlanetP &planet, double startJD, double endJD, double &resultJD)
+{
+	// Opposition finder: scan day-by-day and look for where (π − angular_separation)
+	// reaches a minimum, i.e. angular separation reaches a maximum (~180°).
+	// We detect a minimum of the "opposition metric" f(t) = π − angle(planet, sun).
+	// At opposition, f(t) → 0.
+	const PlanetP& sun = solarSystem->getSun();
+
+	auto oppositionMetric = [&](double jd) -> double {
+		core->setJD(jd);
+		core->update(0);
+		Vec3d planetPos = planet->getJ2000EquatorialPos(core);
+		Vec3d sunPos    = sun->getJ2000EquatorialPos(core);
+		return M_PI - planetPos.angle(sunPos);
+	};
+
+	// Scan with 1-day steps looking for a local minimum (slope goes from negative to positive).
+	// Start half a step before startJD so the scan always observes the full descending
+	// slope before any nearby minimum — without this, events within one step of startJD
+	// are missed because prevSign never reaches -1 before the sign reverses.
+	const double step = 1.0;
+	double jd = startJD - step * 0.5;
+	double prevVal = oppositionMetric(jd);
+	int prevSign = 0;
+	jd += step;
+
+	while (jd <= endJD)
+	{
+		const double val = oppositionMetric(jd);
+		const int sgn = (val > prevVal) ? 1 : ((val < prevVal) ? -1 : 0);
+
+		// Detect minimum: slope was negative (descending), now positive (ascending)
+		if (sgn != prevSign && prevSign == -1)
+		{
+			// Refine with bisection-style halving (same approach as TimeNavigator)
+			double refineJD = jd;
+			double refineStep = -step / 2.0;
+			int refineSign = -sgn;
+			double refinePrevVal = val;
+
+			for (int iter = 0; iter < 30; ++iter)
+			{
+				refineJD += refineStep;
+				const double refineVal = oppositionMetric(refineJD);
+				const int rsgn = (refineVal > refinePrevVal) ? 1 : ((refineVal < refinePrevVal) ? -1 : 0);
+				if (rsgn != refineSign)
+				{
+					refineStep = -refineStep / 2.0;
+					refineSign = -rsgn;
+				}
+				refinePrevVal = refineVal;
+
+				if (std::abs(refineStep) < 1.0 / 1440.0) // < 1 minute precision
+					break;
+			}
+
+			// Verify this is actually near opposition (metric < ~10°) and not a spurious minimum.
+			// Mars can have slightly larger deviations due to its orbital inclination and eccentricity.
+			const double finalMetric = oppositionMetric(refineJD);
+			if (finalMetric < 10.0 * M_PI / 180.0)
+			{
+				resultJD = refineJD;
+				return true;
+			}
+		}
+		prevVal = val;
+		prevSign = sgn;
+		jd += step;
+	}
+	return false;
 }
 
 double AstroCalcDialog::getCustomTimeStep()
@@ -5086,7 +5195,8 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 		{q_("30 Julian days"), "16"}, {q_("60 Julian days"), "17"}, {q_("100 Julian days"), "26"}, {q_("1 Julian year"), "28"},
 		{q_("1 Gaussian year"), "29"}, {q_("1 synodic month"), "30"}, {q_("1 draconic month"), "31"}, {q_("1 mean tropical month"), "32"},
 		{q_("1 anomalistic month"), "33"} ,{q_("1 anomalistic year"), "34"}, {q_("1 saros"), "35"}, {q_("custom interval"), "0"},
-		{q_("Sun at altitude"), "41"}
+		{q_("Sun at altitude"), "41"},
+		{q_("Opposition of planet"), "42"}
 	};
 	Q_ASSERT(ui->ephemerisStepComboBox);
 	QComboBox* steps = ui->ephemerisStepComboBox;
