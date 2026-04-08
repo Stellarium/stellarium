@@ -261,11 +261,11 @@ define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stel
             var displayName = pattern.name;
             var isActive = (selectedPattern === pattern.name);
             
-            buttonsHtml += '<button type="button" class="pattern-btn' + 
-                (isActive ? ' active' : '') + '" data-pattern-name="' + 
-                escapeHtml(pattern.name) + '" data-pattern-type="' + pattern.type + 
-                '" data-pattern-id="' + escapeHtml(pattern.id) + '">' + 
-                escapeHtml(displayName) + '</button>';
+				buttonsHtml += '<button type="button" class="pattern-btn' + 
+						(isActive ? ' active' : '') + '" data-pattern-name="' + 
+						escapeHtml(pattern.name) + '" data-pattern-type="' + 
+						escapeHtml(pattern.type) + '" data-pattern-id="' + 
+						escapeHtml(pattern.id) + '">' + escapeHtml(pattern.name) + '</button>';
         }
         
         buttonsHtml += '</div>';
@@ -491,8 +491,9 @@ define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stel
             var isActive = (culture.id === activeCulture);
             
             buttonsHtml += '<button type="button" class="skyculture-btn' + 
-                (isActive ? ' active' : '') + '" data-culture-id="' + 
-                escapeHtml(culture.id) + '">' + escapeHtml(culture.name) + '</button>';
+						(isActive ? ' active' : '') + '" data-culture-id="' + 
+						escapeHtml(culture.id) + '">' + 
+						escapeHtml(culture.name) + '</button>';
         }
         
         buttonsHtml += '</div>';
@@ -626,15 +627,17 @@ define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stel
     // SECTION 9: UTILITIES
     // =====================================================================
 
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
+		function escapeHtml(str) {
+				if (!str) return '';
+				return str.replace(/[&<>"']/g, function(m) {
+						if (m === '&') return '&amp;';
+						if (m === '<') return '&lt;';
+						if (m === '>') return '&gt;';
+						if (m === '"') return '&quot;';
+						if (m === "'") return '&#39;';
+						return m;
+				});
+		}
 
     function _tr(text) {
         if (typeof window.tr === 'function') return window.tr.apply(window, arguments);
