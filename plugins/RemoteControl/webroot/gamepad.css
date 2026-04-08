@@ -131,7 +131,7 @@
 
 .device-selector-row label {
     color: #000000;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     flex-shrink: 0;
 }
@@ -144,7 +144,7 @@
     border: 1px solid #5D5F62;
     border-radius: 4px;
     padding: 6px;
-    font-size: 12px;
+    font-size: 11px;
     cursor: pointer;
 }
 
@@ -519,8 +519,8 @@
  */
 .button-customization-panel {
     flex: 2;
-    min-width: 280px;
-    max-width: calc(100% - 300px);
+    min-width: 100px;
+    max-width: calc(80% - 100px);
     background: rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     padding: 15px;

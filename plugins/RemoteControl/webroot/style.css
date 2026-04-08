@@ -1001,3 +1001,671 @@ button.button32:active {
         padding: 5px 8px;
     }
 }
+
+/* ========================================================================
+ * Sky Culture Tab - Stellarium Original Colors
+ * ======================================================================== */
+
+/* Main tab container - uses default Stellarium colors */
+
+/* Sky Culture Panel (Left side) */
+.skyculture-panel {
+    flex: 1;
+    min-width: 100%;
+    max-width: 100%;
+    background: rgba(149, 150, 152, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-style: inset;
+    border-radius: 10px;
+    padding: 15px;
+    padding-top: 35px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.skyculture-panel h3 {
+    position: absolute;
+    left: 17px;
+    top: 10px;
+    margin: 0;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Sky Culture Options Panel (Right side) */
+.skyculture-options-panel {
+    flex: 2;
+    min-width: 100%;
+    max-width: calc(100% - 300px);
+    background: rgba(149, 150, 152, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-style: inset;
+    border-radius: 10px;
+    padding: 15px;
+    padding-top: 35px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.skyculture-options-panel h3 {
+    position: absolute;
+    left: 17px;
+    top: 10px;
+    margin: 0;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Buttons Container */
+.skyculture-buttons-container {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.skyculture-buttons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.skyculture-btn {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+    border: 1px solid #2A2C2E;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.skyculture-btn:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+    border-color: #B4B7B0;
+    transform: translateY(-1px);
+}
+
+.skyculture-btn:active {
+    transform: translateY(1px);
+}
+
+.skyculture-btn.active {
+    background: linear-gradient(#DCDBDA, #8A8C8E);
+    border-color: #000000;
+    color: #000000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Info Frame */
+.skyculture-info-frame {
+    width: 100%;
+    min-width: 100%;
+    min-height: 500px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.05);
+    margin-top: 10px;
+}
+
+/* ========================================================================
+ * Options Grid - 3 columns on desktop
+ * ======================================================================== */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 5px;
+}
+
+/* ========================================================================
+ * IMPROVED: Option Item - Horizontal layout (checkbox, label, slider, value in one row)
+ * ======================================================================== */
+.option-item {
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    padding: 10px 12px;
+    /* Horizontal layout - all elements in one row */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+
+/* Option Label - Checkbox + Text (fixed width, doesn't shrink) */
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    flex-shrink: 0;
+    /* Allow label text to wrap if needed, but prefer not to */
+    white-space: normal;
+    word-break: break-word;
+    max-width: 45%;
+}
+
+.option-label input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.option-label span {
+    color: #000000;
+    line-height: 1.3;
+}
+
+/* Option Controls - Slider + Value (takes remaining space) */
+.option-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0; /* Allows flex item to shrink below content size */
+}
+
+/* Slider styling - flexible width */
+.option-controls .slider {
+    flex: 1;
+    min-width: 80px;
+    max-width: 200px;
+    height: 11px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #3a3c3f;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Slider thumb (the handle) */
+.option-controls .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #5D5F62;
+    border: 1px solid #2A2C2E;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option-controls .slider::-webkit-slider-thumb:hover {
+    background: #8A8C8E;
+    transform: scale(1.1);
+}
+
+/* Firefox support */
+.option-controls .slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #5D5F62;
+    border: 1px solid #2A2C2E;
+    cursor: pointer;
+}
+
+.option-controls .slider::-moz-range-track {
+    background: #3a3c3f;
+    height: 4px;
+    border-radius: 3px;
+}
+
+/* Value display next to slider */
+.option-controls span {
+    min-width: 35px;
+    text-align: right;
+    color: #000000;
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+/* Checkbox-only items (no slider) */
+.option-checkbox-only {
+    justify-content: flex-start;
+}
+
+.option-checkbox-only .option-label {
+    justify-content: flex-start;
+    flex-shrink: 0;
+}
+
+/* Additional options row (bottom) */
+.skyculture-additional-options {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.skyculture-additional-options .option-label {
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Loading placeholder */
+.loading-placeholder {
+    text-align: left;
+    padding: 30px;
+    color: #666;
+    font-style: italic;
+    font-size: 11px;
+}
+
+/* ========================================================================
+ * Responsive Design
+ * ======================================================================== */
+
+/* Large Desktop */
+@media (min-width: 1400px) {
+    .skyculture-options-panel {
+        min-width: 500px;
+        max-width: 800px;
+    }
+    
+    .skyculture-panel {
+        min-width: 320px;
+        max-width: 450px;
+    }
+    
+    .options-grid {
+        gap: 20px;
+    }
+    
+    .option-controls .slider {
+        min-width: 120px;
+        max-width: 250px;
+    }
+}
+
+/* Medium screens - keep 3 columns */
+@media (min-width: 900px) and (max-width: 1399px) {
+    .options-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+    
+    .option-controls .slider {
+        min-width: 80px;
+    }
+}
+
+/* Small desktop / Tablet landscape - switch to 2 columns */
+@media (min-width: 600px) and (max-width: 899px) {
+    .skyculture-panel,
+    .skyculture-options-panel {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .options-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    /* Keep horizontal layout, just reduce gaps */
+    .option-item {
+        gap: 10px;
+        padding: 8px 10px;
+    }
+    
+    .option-label {
+        font-size: 11px;
+        max-width: 40%;
+    }
+    
+    .option-controls {
+        gap: 8px;
+    }
+    
+    .option-controls .slider {
+        min-width: 70px;
+    }
+    
+    .option-controls span {
+        font-size: 10px;
+        min-width: 30px;
+        padding: 2px 4px;
+    }
+}
+
+/* Tablet portrait - 2 columns */
+@media (max-width: 768px) {
+    .skyculture-panel,
+    .skyculture-options-panel {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+        padding: 12px;
+        padding-top: 30px;
+    }
+    
+    .options-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .skyculture-buttons-grid {
+        justify-content: center;
+    }
+    
+    .skyculture-btn {
+        padding: 4px 10px;
+        font-size: 10px;
+    }
+    
+    .skyculture-info-frame {
+        min-height: 300px;
+    }
+    
+    /* Keep horizontal layout on tablets */
+    .option-item {
+        flex-direction: row;
+        gap: 10px;
+        padding: 8px 10px;
+    }
+    
+    .option-label {
+        font-size: 10px;
+        max-width: 40%;
+        gap: 6px;
+    }
+    
+    .option-controls {
+        gap: 8px;
+    }
+    
+    .option-controls .slider {
+        min-width: 60px;
+    }
+    
+    .option-controls span {
+        font-size: 10px;
+        min-width: 28px;
+        padding: 2px 4px;
+    }
+}
+
+/* Mobile phones - Switch to vertical layout (one column) */
+@media (max-width: 480px) {
+    .skyculture-panel,
+    .skyculture-options-panel {
+        padding: 10px;
+        padding-top: 28px;
+    }
+    
+    .skyculture-panel h3,
+    .skyculture-options-panel h3 {
+        font-size: 12px;
+        left: 12px;
+        top: 8px;
+    }
+    
+    .options-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    /* Change to VERTICAL layout on mobile phones */
+    .option-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .option-label {
+        max-width: 100%;
+        font-size: 11px;
+        gap: 8px;
+    }
+    
+    .option-label span {
+        font-size: 11px;
+    }
+    
+    .option-controls {
+        padding-left: 0;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .option-controls .slider {
+        min-width: 120px;
+        flex: 1;
+    }
+    
+    .option-controls span {
+        min-width: 35px;
+        font-size: 10px;
+        padding: 2px 6px;
+    }
+    
+    .skyculture-btn {
+        padding: 4px 8px;
+        font-size: 9px;
+    }
+    
+    .skyculture-info-frame {
+        min-height: 250px;
+    }
+    
+    .skyculture-additional-options {
+        gap: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Extra small devices - maintain vertical layout */
+@media (max-width: 360px) {
+    .option-controls {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    
+    .option-controls .slider {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .option-controls span {
+        order: -1;
+        text-align: left;
+        align-self: flex-start;
+    }
+}
+
+/* ========================================================================
+ * Constellations Buttons - Same style as sky culture buttons
+ * ======================================================================== */
+
+.constellations-buttons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    justify-content: flex-start;
+    align-items: center;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.constellation-btn {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+    border: 1px solid #2A2C2E;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.constellation-btn:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+    border-color: #B4B7B0;
+    transform: translateY(-1px);
+}
+
+.constellation-btn:active {
+    transform: translateY(1px);
+}
+
+.constellation-btn.active {
+    background: linear-gradient(#DCDBDA, #8A8C8E);
+    border-color: #000000;
+    color: #000000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments for constellations buttons */
+@media (max-width: 768px) {
+    .constellations-buttons-grid {
+        max-height: 250px;
+        gap: 6px;
+        padding: 8px;
+    }
+    
+    .constellation-btn {
+        padding: 4px 10px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .constellations-buttons-grid {
+        max-height: 200px;
+        gap: 5px;
+        padding: 6px;
+    }
+    
+    .constellation-btn {
+        padding: 4px 8px;
+        font-size: 9px;
+    }
+    
+    .constellations-note {
+        font-size: 9px;
+    }
+}
+
+/* ========================================================================
+ * Patterns Buttons - Common styles for all pattern types
+ * ======================================================================== */
+
+.patterns-buttons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    justify-content: flex-start;
+    align-items: center;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.pattern-btn {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+    border: 1px solid #2A2C2E;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.pattern-btn:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+    border-color: #B4B7B0;
+    transform: translateY(-1px);
+}
+
+.pattern-btn:active {
+    transform: translateY(1px);
+}
+
+.pattern-btn.active {
+    background: linear-gradient(#DCDBDA, #8A8C8E);
+    border-color: #000000;
+    color: #000000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.patterns-note {
+    font-size: 11px;
+    color: #8A8C8E;
+    margin: 0 0 10px 0;
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .patterns-buttons-grid {
+        max-height: 200px;
+        gap: 6px;
+        padding: 8px;
+    }
+    
+    .pattern-btn {
+        padding: 4px 10px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .patterns-buttons-grid {
+        max-height: 150px;
+        gap: 5px;
+        padding: 6px;
+    }
+    
+    .pattern-btn {
+        padding: 4px 8px;
+        font-size: 9px;
+    }
+    
+    .patterns-note {
+        font-size: 9px;
+    }
+}

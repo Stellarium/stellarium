@@ -1097,8 +1097,10 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 								// ===== TOGGLE OFF: Clear isolation and restore previous state =====
 								console.log("[Gamepad] Toggle OFF - Clearing highlight:", searchTerm);
 								
-								// Step 1: Disable isolation mode
+								// Step 1: Disable isolation mode (Constellation selection isolated)&(Only last selected)
 								propApi.setStelProp("ConstellationMgr.isolateSelected", false);
+								
+								propApi.setStelProp("ConstellationMgr.flagConstellationPick", false);
 								
 								// Step 2: Clear selected object
 								rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
@@ -1128,19 +1130,24 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 								
 								// Step 4: Delay to allow Stellarium to process the clear
 								setTimeout(function() {
-										// Step 5: Enable isolation mode
-										propApi.setStelProp("ConstellationMgr.isolateSelected", true);
+									
+										// Step 5: Enable isolation mode (Only last selected)
+										propApi.setStelProp("ConstellationMgr.flagConstellationPick", true);
 										
-										// Step 6: Select the constellation
+										// Step 6: Enable isolation mode (Constellation selection isolated)							
+										propApi.setStelProp("ConstellationMgr.isolateSelected", true);									
+										
+										
+										// Step 7: Select the constellation
 										rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
 										
-										// Step 7: Update tracker
+										// Step 8: Update tracker
 										currentIsolatedConstellation = searchTerm;
 										
-										// Step 8: Center on constellation with 60° FOV
+										// Step 9: Center on constellation with 60° FOV
 										setTimeout(function() {
 												rc.postCmd("/api/scripts/direct", {
-														code: "core.moveToObject(\"" + searchTerm + "\", 2); StelMovementMgr.zoomTo(60, 2);",
+														code: "core.moveToObject(\"" + searchTerm + "\", 2); StelMovementMgr.zoomTo(60, 3);",
 														useIncludes: false
 												});
 												

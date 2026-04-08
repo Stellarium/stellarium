@@ -2,10 +2,10 @@
 
 define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 	"api/properties", "./time", "./joystickqueue", "./actions", "./viewoptions",
-	"./scripts", "./viewcontrol", "./location", "./search", "./gpcontroller", "jquery-ui"
+	"./scripts", "./viewcontrol", "./location", "./search", "ui/skyculture", "./gpcontroller", "jquery-ui"
 ], function($, settings, globalize, rc, actionApi, propApi, timeui,
 	JoystickQueue, actionsui, viewoptionsui, scriptsui, viewcontrolui, locationui,
-	searchui, gpcontroller) {
+	searchui, skyculture, gpcontroller) {
 	"use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
@@ -343,8 +343,50 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 
 		$("#loadoverlay").fadeOut();
 		$(rc).trigger("uiReady"); //signal other components that the main UI init is done (some may need the jQueryUI stuff set up)
-		// Initialize Gamepad controller after UI is ready
-		gpcontroller.init();
+		
+		// =====================================================================
+		// INITIALIZE SKY CULTURE BUTTONS MODULE
+		// =====================================================================
+		// Check if skyculture module is available and initialize it with all required containers
+		// The module now supports multiple data panels: constellations, asterisms, zodiac, lunar mansions, and stars
+		if (typeof skyculture !== 'undefined' && skyculture && typeof skyculture.init === 'function') {
+				// Short delay to ensure DOM is fully ready and other modules are initialized
+				setTimeout(function() {
+						if ($("#skyculture-buttons-container").length) {
+								// Define all container selectors for the skyculture module
+								var containers = {
+										constellations: "#constellations-buttons-container",
+										asterisms: "#asterisms-buttons-container",
+										zodiac: "#zodiac-buttons-container",
+										lunar: "#lunar-buttons-container",
+										stars: "#stars-buttons-container"
+								};
+								
+								// Initialize the skyculture module with culture selector, patterns containers, and info iframe
+								skyculture.init(
+										"#skyculture-buttons-container",    // Culture buttons container
+										containers,                         // Patterns containers object
+										"#vo_skycultureinfo"                // iframe skyculture info container
+								);
+								console.log("[MainUI] Sky culture buttons module initialized with multi-panel support");
+						} else {
+								console.warn("[MainUI] Sky culture container not found, module not initialized");
+						}
+				}, 100);
+		} else {
+				console.warn("[MainUI] Sky culture module not available");
+		}
+    
+    // =====================================================================
+    // INITIALIZE GAMEPAD CONTROLLER
+    // =====================================================================
+    // Initialize Gamepad controller after UI is ready
+    if (typeof gpcontroller !== 'undefined' && gpcontroller && typeof gpcontroller.init === 'function') {
+        gpcontroller.init();
+        console.log("[MainUI] Gamepad controller initialized");
+    } else {
+        console.warn("[MainUI] Gamepad controller module not available");
+    }
 	});
 
 	//new server data
