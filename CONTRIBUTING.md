@@ -33,7 +33,7 @@ Don't report in this case.
 If you miss translations, please help us with your language and join our 
 translators at [Transifex](https://explore.transifex.com/stellarium/stellarium/).
 
-If the bug still persists, or you're find any typos, errors, or new feature suggestions 
+If the bug still persists, or you find any typos, errors, or new feature suggestions 
 feel free to open a new issue.
 
 When opening an issue to report a problem, please try and provide a minimal steps that 
