@@ -116,5 +116,33 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	// according to Fig12 in the paper, a few arcseconds of difference between PQXY and Capitaine parametrisation are allowed.
 	QVERIFY2((angleCap-angleRef)*3600.0<6.0, QString("Angle between rotation matrices too different!").toUtf8());
 
-	//TODO: Add more dates and verify this angle difference is limited to what we can see in Fig.12
+	// Same construction one second later: no tabulated paper vectors here, only matrix/angle agreement.
+	const double JulianDay2 = JulianDay + 1.0 / 86400.0;
+	getPrecessionAnglesVondrak(JulianDay2, &epsilon_A, &chi_A, &omega_A, &psi_A);
+	getPrecessionAnglesVondrakPQXYe(-1234.567, &P_A, &Q_A, &X_A, &Y_A, &epsilon_A);
+	getPrecessionAnglesVondrakPQXYe(JulianDay2, &P_A, &Q_A, &X_A, &Y_A, &epsilon_A);
+	Z = sqrt(qMax(1.0 - P_A * P_A - Q_A * Q_A, 0.0));
+	W = X_A * X_A + Y_A * Y_A;
+	VEC2 = -Q_A * C - Z * S;
+	VEC3 = -Q_A * S + Z * C;
+	VEQ3 = (W < 1.0 ? sqrt(1.0 - W) : 0.0);
+	PECL = Vec3d(P_A, VEC2, VEC3);
+	PEQR = Vec3d(X_A, Y_A, VEQ3);
+	EQX = PEQR ^ PECL;
+	EQX.normalize();
+	V = PEQR ^ EQX;
+	RP = Mat3d(EQX[0], EQX[1], EQX[2], V[0], V[1], V[2], PEQR[0], PEQR[1], PEQR[2]);
+	RRot = Mat4d::xrotation(eps0) * Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(chi_A);
+	RP4 = Mat4d(EQX[0], EQX[1], EQX[2], 0, V[0], V[1], V[2], 0, PEQR[0], PEQR[1], PEQR[2], 0, 0, 0, 0, 1);
+	matDiff3x3 = (RRot - RP4).upper3x3();
+	max = 0.0;
+	for (int i = 0; i < 9; ++i)
+	{
+		if (fabs(matDiff3x3[i]) > max)
+			max = fabs(matDiff3x3[i]);
+	}
+	QVERIFY2(max < 2e-5, QString("JD %1: precession matrices differ by too much.").arg(JulianDay2).toUtf8());
+	angleRef = RP.angle() * 180.0 / M_PI;
+	angleCap = RRot.upper3x3().angle() * 180.0 / M_PI;
+	QVERIFY2((angleCap - angleRef) * 3600.0 < 6.0, QString("JD %1: angle between rotation matrices too different!").arg(JulianDay2).toUtf8());
 }
