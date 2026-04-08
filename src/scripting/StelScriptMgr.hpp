@@ -45,6 +45,20 @@ class QScriptEngine;
 class ScriptConsole;
 #endif
 
+// Event filter to detect keypress for waitForKeypress()
+class KeypressFilter : public QObject {
+	QEventLoop* loop;
+public:
+	KeypressFilter(QEventLoop* 1) : loop(1) {}
+	bool eventFilter(QObject* obj, QEvent* event) override {
+		if (event->type() == QEvent::KeyPress) {
+			loop->quit();
+			return true;
+		}
+		return QObject::eventFilter(obj, event);
+	}
+};
+
 //! Manage scripting in Stellarium
 //! Notes on migration from QtScript to QJSEngine
 //! - The old engine had isEvaluating(). We must use a mutex for the same idea.
@@ -321,6 +335,9 @@ private:
 
 	//! The QEventLoop for wait and waitFor
 	QEventLoop* waitEventLoop;
+
+	//! Event filter to detect keypress for waitForKeypress()
+	QObject* keypressEventFilter;
 	
 	QString scriptFileName;
 	
