@@ -1669,3 +1669,24 @@ button.button32:active {
         font-size: 9px;
     }
 }
+
+/* Pattern count badge styling */
+.pattern-count {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.25);
+    color: #DCDBDA;
+    font-size: 10px;
+    font-weight: normal;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 8px;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+/* Optional: Different colors for different sections */
+/*#constellations-count { background: rgba(76, 175, 80, 0.3); color: #4CAF50; }
+#asterisms-count { background: rgba(33, 150, 243, 0.3); color: #2196F3; }
+#zodiac-count { background: rgba(255, 193, 7, 0.3); color: #FFC107; }
+#lunar-count { background: rgba(156, 39, 176, 0.3); color: #9C27B0; }
+#stars-count { background: rgba(255, 152, 0, 0.3); color: #FF9800; }*/

@@ -863,64 +863,67 @@
             </div>
             <iframe id="vo_skycultureinfo" class="skyculture-info-frame" src="/api/view/skyculturedescription/"></iframe>
         </div>
-        
-        <!-- Constellations Section -->
-        <div class="skyculture-panel">
-            <h3><?= tr("Constellations")?></h3>
-            <p class="patterns-note"><?= tr("Click on any constellation to highlight and isolate it")?></p>
-            <div id="constellations-buttons-container" class="patterns-buttons-container">
-                <div class="loading-placeholder"><?= tr("Select a sky culture to view constellations")?></div>
-            </div>
-        </div>
-        
-    </div>
-    
-    <!-- Second Row: Asterisms and Zodiac -->
-    <div class="flex flex-wrap" style="gap: 20px;">
-        
-        <!-- Asterisms Section -->
-        <div class="skyculture-panel asterisms-panel" style="display: none;">
-            <h3><?= tr("Asterisms")?></h3>
-            <p class="patterns-note"><?= tr("Traditional star patterns within constellations")?></p>
-            <div id="asterisms-buttons-container" class="patterns-buttons-container">
-                <div class="loading-placeholder"><?= tr("No asterisms available")?></div>
-            </div>
-        </div>
-        
-        <!-- Zodiac Signs Section -->
-        <div class="skyculture-panel zodiac-panel" style="display: none;">
-            <h3><?= tr("Zodiac Signs")?></h3>
-            <p class="patterns-note"><?= tr("The 12 signs of the zodiac")?></p>
-            <div id="zodiac-buttons-container" class="patterns-buttons-container">
-                <div class="loading-placeholder"><?= tr("No zodiac data available")?></div>
-            </div>
-        </div>
-        
-    </div>
-    
-    <!-- Third Row: Lunar Mansions and Notable Stars -->
-    <div class="flex flex-wrap" style="gap: 20px;">
-        
-        <!-- Lunar Mansions Section -->
-        <div class="skyculture-panel lunar-panel" style="display: none;">
-            <h3><?= tr("Lunar Mansions")?></h3>
-            <p class="patterns-note"><?= tr("Traditional lunar stations (mansions)")?></p>
-            <div id="lunar-buttons-container" class="patterns-buttons-container">
-                <div class="loading-placeholder"><?= tr("No lunar mansions data available")?></div>
-            </div>
-        </div>
-        
-        <!-- Notable Stars Section -->
-        <div class="skyculture-panel stars-panel" style="display: none;">
-            <h3><?= tr("Notable Stars")?></h3>
-            <p class="patterns-note"><?= tr("Named stars with cultural significance")?></p>
-            <div id="stars-buttons-container" class="patterns-buttons-container">
-                <div class="loading-placeholder"><?= tr("No star name data available")?></div>
-            </div>
-        </div>
-        
-    </div>
-    
+      </div>
+       
+				<!-- Constellations Section -->
+				<div class="skyculture-panel">
+						<h3>
+								<?= tr("Constellations")?>
+								<span class="pattern-count" id="constellations-count"></span>
+						</h3>
+						<p class="patterns-note"><?= tr("Click on any constellation to highlight and isolate it")?></p>
+						<div id="constellations-buttons-container" class="patterns-buttons-container">
+								<div class="loading-placeholder"><?= tr("Select a sky culture to view constellations")?></div>
+						</div>
+				</div>
+
+				<!-- Asterisms Section -->
+				<div class="skyculture-panel asterisms-panel" style="display: none;">
+						<h3>
+								<?= tr("Asterisms")?>
+								<span class="pattern-count" id="asterisms-count"></span>
+						</h3>
+						<p class="patterns-note"><?= tr("Traditional star patterns within constellations")?></p>
+						<div id="asterisms-buttons-container" class="patterns-buttons-container">
+								<div class="loading-placeholder"><?= tr("No asterisms available")?></div>
+						</div>
+				</div>
+
+				<!-- Zodiac Signs Section -->
+				<div class="skyculture-panel zodiac-panel" style="display: none;">
+						<h3>
+								<?= tr("Zodiac Signs")?>
+								<span class="pattern-count" id="zodiac-count"></span>
+						</h3>
+						<p class="patterns-note"><?= tr("The 12 signs of the zodiac")?></p>
+						<div id="zodiac-buttons-container" class="patterns-buttons-container">
+								<div class="loading-placeholder"><?= tr("No zodiac data available")?></div>
+						</div>
+				</div>
+
+				<!-- Lunar Mansions Section -->
+				<div class="skyculture-panel lunar-panel" style="display: none;">
+						<h3>
+								<?= tr("Lunar Mansions")?>
+								<span class="pattern-count" id="lunar-count"></span>
+						</h3>
+						<p class="patterns-note"><?= tr("Traditional lunar stations (mansions)")?></p>
+						<div id="lunar-buttons-container" class="patterns-buttons-container">
+								<div class="loading-placeholder"><?= tr("No lunar mansions data available")?></div>
+						</div>
+				</div>
+
+				<!-- Notable Stars Section -->
+				<div class="skyculture-panel stars-panel" style="display: none;">
+						<h3>
+								<?= tr("Notable Stars")?>
+								<span class="pattern-count" id="stars-count"></span>
+						</h3>
+						<p class="patterns-note"><?= tr("Named stars with cultural significance")?></p>
+						<div id="stars-buttons-container" class="patterns-buttons-container">
+								<div class="loading-placeholder"><?= tr("No star name data available")?></div>
+						</div>
+				</div>    
 
 </div>  
 	<!-- handled by ui/actions.js -->
