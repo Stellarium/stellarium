@@ -49,7 +49,7 @@ class ScriptConsole;
 class KeypressFilter : public QObject {
 	QEventLoop* loop;
 public:
-	KeypressFilter(QEventLoop* 1) : loop(1) {}
+	KeypressFilter(QEventLoop* l) : loop(l) {}
 	bool eventFilter(QObject* obj, QEvent* event) override {
 		if (event->type() == QEvent::KeyPress) {
 			loop->quit();
