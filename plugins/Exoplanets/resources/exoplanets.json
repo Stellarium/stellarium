@@ -8,7 +8,7 @@
 			"exoplanets":
 			[
 				{
-					"mass": 5.743,
+					"mass": 6.8,
 					"radius": 1.152,
 					"period": 1075.4,
 					"semiAxis": 2.051,
@@ -232,10 +232,11 @@
 			"exoplanets":
 			[
 				{
-					"mass": 14.0,
+					"mass": 6.6,
 					"radius": 1.7,
-					"semiAxis": 330.0,
-					"angleDistance": 2.275862,
+					"semiAxis": 305.0,
+					"eccentricity": 0.25,
+					"angleDistance": 2.22,
 					"discovered": 2008,
 					"detectionMethod": "Imaging",
 					"planetName": "b"
@@ -2629,9 +2630,10 @@
 			"exoplanets":
 			[
 				{
-					"mass": 13.5,
+					"mass": 12.9,
 					"radius": 1.75,
-					"semiAxis": 275.0,
+					"semiAxis": 242.0,
+					"eccentricity": 0.54,
 					"angleDistance": 5.813953,
 					"discovered": 2005,
 					"detectionMethod": "Imaging, Astrometry",
@@ -3201,6 +3203,7 @@
 			"exoplanets":
 			[
 				{
+					"mass": 0.51,
 					"radius": 1.03,
 					"period": 3.4878,
 					"semiAxis": 0.046,
@@ -4157,13 +4160,13 @@
 			"exoplanets":
 			[
 				{
-					"mass": 7.3,
+					"mass": 33.5,
 					"radius": 1.62,
 					"period": 1963700.0,
-					"semiAxis": 241.0,
-					"eccentricity": 0.94,
+					"semiAxis": 204.0,
+					"eccentricity": 0.912,
 					"inclination": 151.0,
-					"angleDistance": 10.78,
+					"angleDistance": 2.77,
 					"discovered": 2011,
 					"detectionMethod": "Imaging",
 					"planetName": "b"
@@ -4175,7 +4178,7 @@
 			"smetal": 0.04,
 			"Vmag": 10.98,
 			"effectiveTemp": 3680.0,
-			"starAltNames": "WHH 1",
+			"starAltNames": "WHH 1, TYC 7084-794-1",
 			"RA": "6h9m19.2s",
 			"DE": "-35d49m31.1s"
 		},
@@ -5599,10 +5602,11 @@
 			"exoplanets":
 			[
 				{
-					"mass": 17.0,
+					"mass": 9.7,
 					"radius": 2.2,
-					"semiAxis": 440.0,
-					"angleDistance": 2.666667,
+					"semiAxis": 500.0,
+					"eccentricity": 0.59,
+					"angleDistance": 2.68,
 					"discovered": 2008,
 					"detectionMethod": "Imaging",
 					"planetName": "b"
@@ -5991,11 +5995,11 @@
 			"exoplanets":
 			[
 				{
-					"mass": 12.0,
+					"mass": 11.3,
 					"radius": 2.6,
 					"period": 2722900.0,
-					"semiAxis": 330.0,
-					"eccentricity": 0.49,
+					"semiAxis": 234.0,
+					"eccentricity": 0.58,
 					"inclination": 79.9,
 					"angleDistance": 2.17,
 					"discovered": 2005,
@@ -6569,12 +6573,13 @@
 			"exoplanets":
 			[
 				{
-					"mass": 29.0,
+					"mass": 54.2,
 					"radius": 2.28,
 					"period": 804000.0,
-					"semiAxis": 218.0,
-					"eccentricity": 0.34,
+					"semiAxis": 143.0,
+					"eccentricity": 0.53,
 					"inclination": 81.9,
+					"angleDistance": 4.22,
 					"discovered": 2000,
 					"detectionMethod": "Imaging",
 					"planetName": "b"
@@ -7275,11 +7280,12 @@
 				}
 			],
 			"distance": 207.2,
+			"stype": "G3V",
 			"smass": 1.0,
 			"Vmag": 11.3,
 			"sradius": 1.064,
 			"effectiveTemp": 5720.0,
-			"starAltNames": "EDR3 1107980654748582144",
+			"starAltNames": "TOI-6072, Gaia EDR3 1107980654748582144",
 			"RA": "7h22m56.4s",
 			"DE": "+67d15m9.5s"
 		},
@@ -8575,7 +8581,7 @@
 			"exoplanets":
 			[
 				{
-					"mass": 3.02,
+					"mass": 2.1,
 					"period": 695.69,
 					"semiAxis": 1.151,
 					"eccentricity": 0.0826,
@@ -8585,7 +8591,7 @@
 					"planetName": "b"
 				},
 				{
-					"mass": 2.56,
+					"mass": 1.9,
 					"period": 6500.0,
 					"semiAxis": 5.04,
 					"eccentricity": 0.217,
@@ -9589,6 +9595,14 @@
 					"planetName": "b"
 				}
 			],
+			"distance": 26.613,
+			"stype": "K4V",
+			"smass": 0.781,
+			"smetal": -0.193,
+			"Vmag": 9.24,
+			"sradius": 0.702,
+			"effectiveTemp": 4660.0,
+			"starAltNames": "TOI-7032, TIC 22903436",
 			"RA": "13h43m23.1s",
 			"DE": "+39d14m55.6s"
 		},
@@ -10471,7 +10485,7 @@
 			"exoplanets":
 			[
 				{
-					"mass": 3.6,
+					"mass": 2.46,
 					"period": 61.03474,
 					"semiAxis": 0.214,
 					"eccentricity": 0.002,
@@ -10482,6 +10496,7 @@
 					"planetName": "b"
 				},
 				{
+					"mass": 0.81,
 					"period": 30.126,
 					"semiAxis": 0.134,
 					"eccentricity": 0.25,
@@ -10491,7 +10506,7 @@
 					"planetName": "c"
 				},
 				{
-					"mass": 0.021741,
+					"mass": 0.021,
 					"period": 1.938,
 					"semiAxis": 0.021,
 					"eccentricity": 0.082,
@@ -11064,10 +11079,11 @@
 			"exoplanets":
 			[
 				{
-					"mass": 25.0,
+					"mass": 30.1,
 					"radius": 4.0,
-					"semiAxis": 125.0,
-					"angleDistance": 0.72,
+					"semiAxis": 93.0,
+					"eccentricity": 0.45,
+					"angleDistance": 0.7,
 					"discovered": 2005,
 					"detectionMethod": "Imaging",
 					"planetName": "a"
@@ -11135,16 +11151,22 @@
 			"exoplanets":
 			[
 				{
-					"mass": 25.0,
+					"mass": 13.1,
+					"semiAxis": 264.0,
+					"eccentricity": 0.82,
+					"angleDistance": 3.16,
 					"discovered": 2003,
 					"detectionMethod": "Imaging",
 					"planetName": "b"
 				}
 			],
-			"distance": 86.2977,
-			"stype": "K2V",
-			"smass": 0.8,
-			"starAltNames": "2MASS J01521461-5219332",
+			"distance": 86.63,
+			"stype": "K3V",
+			"smass": 0.85,
+			"Vmag": 10.87,
+			"sradius": 0.898,
+			"effectiveTemp": 4751.0,
+			"starAltNames": "CD-52 381, TYC 8047-232-1",
 			"RA": "1h52m14.6s",
 			"DE": "-52d19m33.1s"
 		},
@@ -13455,6 +13477,7 @@
 				}
 			],
 			"distance": 303.0,
+			"stype": "G1V",
 			"smass": 0.986,
 			"smetal": -0.06,
 			"Vmag": 12.05,
@@ -16028,6 +16051,7 @@
 			"exoplanets":
 			[
 				{
+					"mass": 0.23,
 					"period": 48.056,
 					"semiAxis": 0.269,
 					"eccentricity": 0.05,
@@ -16037,6 +16061,7 @@
 					"planetName": "a"
 				},
 				{
+					"mass": 0.07,
 					"period": 18.3267,
 					"semiAxis": 0.1406,
 					"eccentricity": 0.34,
@@ -31396,30 +31421,6 @@
 			"RA": "10h6m40.7s",
 			"DE": "+17d53m42.3s"
 		},
-		"HD 8765":
-		{
-			"exoplanets":
-			[
-				{
-					"period": 2806.85,
-					"semiAxis": 4.0,
-					"eccentricity": 0.54,
-					"discovered": 2007,
-					"detectionMethod": "Radial Velocity",
-					"planetName": "b"
-				}
-			],
-			"distance": 48.816,
-			"stype": "G5V",
-			"smass": 1.03,
-			"smetal": 0.16,
-			"Vmag": 8.14,
-			"sradius": 1.164,
-			"effectiveTemp": 5566.8,
-			"starAltNames": "TOK 204",
-			"RA": "1h26m19.1s",
-			"DE": "-4d40m26.5s"
-		},
 		"HD 87816":
 		{
 			"exoplanets":
@@ -32743,9 +32744,9 @@
 			"exoplanets":
 			[
 				{
-					"mass": 61.5,
-					"semiAxis": 140.0,
-					"eccentricity": 0.78,
+					"mass": 53.3,
+					"semiAxis": 181.0,
+					"eccentricity": 0.6,
 					"inclination": 115.0,
 					"discovered": 2012,
 					"detectionMethod": "Imaging",
@@ -34049,8 +34050,10 @@
 			"exoplanets":
 			[
 				{
-					"mass": 33.0,
-					"semiAxis": 159.0,
+					"mass": 40.7,
+					"semiAxis": 128.0,
+					"eccentricity": 0.51,
+					"angleDistance": 1.3,
 					"discovered": 2018,
 					"detectionMethod": "Imaging",
 					"planetName": "b"
@@ -34651,9 +34654,10 @@
 			"exoplanets":
 			[
 				{
-					"mass": 28.0,
+					"mass": 19.1,
 					"radius": 1.83,
-					"semiAxis": 710.0,
+					"semiAxis": 472.0,
+					"eccentricity": 0.55,
 					"angleDistance": 4.530951,
 					"discovered": 2011,
 					"detectionMethod": "Imaging",
@@ -42605,7 +42609,7 @@
 			"Vmag": 9.61,
 			"sradius": 1.5,
 			"effectiveTemp": 6232.0,
-			"starAltNames": "BD+12 1842, EPIC 211401787",
+			"starAltNames": "BD+12 1842, EPIC 211401787, TOI-4411",
 			"RA": "8h27m35.2s",
 			"DE": "+11d40m2.8s"
 		},
@@ -103423,6 +103427,31 @@
 			"RA": "19h0m40.1s",
 			"DE": "+43d52m34.8s"
 		},
+		"KOI-972":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.274,
+					"period": 13.118966756,
+					"semiAxis": 0.1376,
+					"inclination": 88.01,
+					"discovered": 2017,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 227.0,
+			"stype": "A8V",
+			"smass": 1.85,
+			"smetal": 0.21,
+			"Vmag": 9.4,
+			"sradius": 1.57,
+			"effectiveTemp": 7800.0,
+			"starAltNames": "HIP 92247, BD+48 2768, KIC 11013201, TOI-4588",
+			"RA": "18h48m0s",
+			"DE": "+48d32m32s"
+		},
 		"XEST 17-036":
 		{
 			"exoplanets":
@@ -104375,6 +104404,7 @@
 			"exoplanets":
 			[
 				{
+					"mass": 0.00746,
 					"radius": 0.1178,
 					"period": 0.46292792,
 					"semiAxis": 0.00623,
@@ -115183,27 +115213,26 @@
 			"RA": "2h53m1s",
 			"DE": "+16d52m53s"
 		},
-		"TIC 12999193":
+		"TIC 117642575":
 		{
 			"exoplanets":
 			[
 				{
-					"radius": 0.8725,
-					"period": 1.482641,
-					"semiAxis": 0.0154,
-					"discovered": 2024,
+					"radius": 0.25221,
+					"period": 4.9446,
+					"discovered": 2026,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
 				}
 			],
-			"distance": 48.844,
-			"stype": "M4V",
-			"smass": 0.222,
-			"sradius": 0.251,
-			"effectiveTemp": 3478.0,
-			"starAltNames": "WT 2313",
-			"RA": "23h7m25.6s",
-			"DE": "-28d21m14.3s"
+			"distance": 188.76,
+			"stype": "G1V",
+			"smass": 1.06,
+			"Vmag": 11.0,
+			"sradius": 1.08,
+			"effectiveTemp": 5862.0,
+			"RA": "0h37m55.2s",
+			"DE": "-37d3m58.6s"
 		},
 		"TIC 13344668":
 		{
@@ -115264,6 +115293,50 @@
 			"RA": "8h16m8.1s",
 			"DE": "+33d17m29.3s"
 		},
+		"TIC 139702105":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.21884,
+					"period": 6.836,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 91.8,
+			"stype": "G8V",
+			"smass": 0.9,
+			"smetal": -0.28,
+			"Vmag": 9.65,
+			"sradius": 1.254,
+			"effectiveTemp": 5265.0,
+			"starAltNames": "BD-18 834",
+			"RA": "4h25m59.5s",
+			"DE": "-18d12m52.3s"
+		},
+		"TIC 142589416":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2382,
+					"period": 2.095183,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 168.933,
+			"stype": "K9/M0V",
+			"smass": 0.641,
+			"Vmag": 14.0,
+			"sradius": 0.714,
+			"effectiveTemp": 4098.0,
+			"RA": "11h12m58.5s",
+			"DE": "+73d49m48.5s"
+		},
 		"TIC 147027702":
 		{
 			"exoplanets":
@@ -115291,29 +115364,91 @@
 			"RA": "10h47m5.4s",
 			"DE": "-43d55m54.5s"
 		},
-		"TIC 156514476":
+		"TIC 153919886":
 		{
 			"exoplanets":
 			[
 				{
-					"radius": 0.8431,
-					"period": 14.42177,
-					"semiAxis": 0.12,
+					"radius": 0.25944,
+					"period": 2.10512,
+					"inclination": 87.388,
 					"discovered": 2022,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
 				}
 			],
-			"distance": 562.376,
-			"stype": "F9/G0IV",
-			"smass": 1.12,
-			"smetal": -0.0936,
-			"Vmag": 12.0,
-			"sradius": 1.919,
-			"effectiveTemp": 6026.94,
-			"starAltNames": "TOI-6884",
-			"RA": "12h52m2.1s",
-			"DE": "+26d40m26.2s"
+			"distance": 132.33,
+			"stype": "M1V",
+			"smass": 0.581,
+			"Vmag": 14.4,
+			"sradius": 0.591,
+			"effectiveTemp": 3828.0,
+			"RA": "11h27m22.5s",
+			"DE": "+68d10m51.7s"
+		},
+		"TIC 154870955":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.27612,
+					"period": 7.9699,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 226.463,
+			"stype": "K0V",
+			"smass": 0.828,
+			"Vmag": 13.4,
+			"sradius": 0.724,
+			"effectiveTemp": 5000.0,
+			"RA": "12h46m58.9s",
+			"DE": "+88d49m47.5s"
+		},
+		"TIC 160113658":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.3114,
+					"period": 6.7295,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 200.156,
+			"stype": "K3V",
+			"smass": 0.76,
+			"Vmag": 12.96,
+			"sradius": 0.789,
+			"effectiveTemp": 4751.0,
+			"RA": "3h57m49.3s",
+			"DE": "-41d37m55.3s"
+		},
+		"TIC 161045582":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.20038,
+					"period": 8.8558,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 162.246,
+			"stype": "G2V",
+			"smass": 1.04,
+			"smetal": 0.188,
+			"Vmag": 10.64,
+			"sradius": 1.08,
+			"effectiveTemp": 5806.0,
+			"RA": "14h54m30.2s",
+			"DE": "+49d5m51.7s"
 		},
 		"TIC 165227846":
 		{
@@ -115356,20 +115491,62 @@
 			"RA": "8h8m26.6s",
 			"DE": "+32d2m30.4s"
 		},
+		"TIC 178172313":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.25016,
+					"period": 4.3732,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 178.137,
+			"stype": "G8V",
+			"smass": 0.91,
+			"Vmag": 11.9,
+			"sradius": 0.843,
+			"effectiveTemp": 5300.0,
+			"RA": "2h53m37.4s",
+			"DE": "-32d4m37.3s"
+		},
+		"TIC 188624430":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.32546,
+					"period": 6.2186,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 300.743,
+			"stype": "G7V",
+			"smass": 0.929,
+			"Vmag": 13.2,
+			"sradius": 0.786,
+			"effectiveTemp": 5366.0,
+			"RA": "17h14m13.6s",
+			"DE": "+53d42m21.6s"
+		},
 		"TIC 18942729":
 		{
 			"exoplanets":
 			[
 				{
 					"radius": 0.18,
-					"period": 1.0,
+					"period": 0.9982,
 					"discovered": 2026,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
 				},
 				{
 					"radius": 0.3247,
-					"period": 23.0,
+					"period": 23.1108,
 					"discovered": 2026,
 					"detectionMethod": "Primary Transit",
 					"planetName": "c"
@@ -115383,6 +115560,48 @@
 			"effectiveTemp": 4169.0,
 			"RA": "7h56m51.5s",
 			"DE": "+16d40m39.3s"
+		},
+		"TIC 198190129":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.26077,
+					"period": 7.948,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 130.035,
+			"stype": "M0V",
+			"smass": 0.638,
+			"Vmag": 13.7,
+			"sradius": 0.64,
+			"effectiveTemp": 4075.0,
+			"RA": "16h25m19.7s",
+			"DE": "+60d22m37.7s"
+		},
+		"TIC 206466666":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.19163,
+					"period": 9.1049,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 127.837,
+			"stype": "K3V",
+			"smass": 0.76,
+			"Vmag": 12.5,
+			"sradius": 0.667,
+			"effectiveTemp": 4727.0,
+			"RA": "3h47m4.6s",
+			"DE": "-52d22m0.3s"
 		},
 		"TIC 231080232":
 		{
@@ -115405,32 +115624,6 @@
 			"starAltNames": "SCR J0432-6852",
 			"RA": "4h32m4.3s",
 			"DE": "-68d52m58.7s"
-		},
-		"TIC 237913194":
-		{
-			"exoplanets":
-			[
-				{
-					"mass": 1.942,
-					"radius": 1.117,
-					"period": 15.168865,
-					"semiAxis": 0.1207,
-					"eccentricity": 0.575,
-					"inclination": 87.0,
-					"discovered": 2020,
-					"detectionMethod": "Primary Transit",
-					"planetName": "b"
-				}
-			],
-			"distance": 309.6,
-			"stype": "G2V",
-			"smass": 1.026,
-			"smetal": 0.14,
-			"sradius": 1.088,
-			"effectiveTemp": 5788.0,
-			"starAltNames": "TOI-2179",
-			"RA": "1h29m47s",
-			"DE": "-60d44m24s"
 		},
 		"TIC 241249530 A":
 		{
@@ -115535,27 +115728,26 @@
 			"RA": "5h14m18.3s",
 			"DE": "-3d26m47.9s"
 		},
-		"TIC 251090642":
+		"TIC 260969020":
 		{
 			"exoplanets":
 			[
 				{
-					"radius": 0.9296,
-					"period": 20.04169,
-					"semiAxis": 0.116,
-					"discovered": 2024,
+					"radius": 0.19868,
+					"period": 8.4858,
+					"discovered": 2026,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
 				}
 			],
-			"distance": 113.903,
-			"stype": "M2V",
-			"smass": 0.517,
-			"Vmag": 15.218,
-			"sradius": 0.52,
-			"effectiveTemp": 3560.0,
-			"RA": "9h19m10.5s",
-			"DE": "+53d35m41.9s"
+			"distance": 121.222,
+			"stype": "K4V",
+			"smass": 0.75,
+			"Vmag": 12.4,
+			"sradius": 0.6898,
+			"effectiveTemp": 4685.0,
+			"RA": "4h59m45.7s",
+			"DE": "-79d35m9.4s"
 		},
 		"TIC 262605715":
 		{
@@ -115577,27 +115769,6 @@
 			"effectiveTemp": 3618.0,
 			"RA": "8h49m48s",
 			"DE": "0d12m25.1s"
-		},
-		"TIC 268727719":
-		{
-			"exoplanets":
-			[
-				{
-					"radius": 0.6486,
-					"period": 0.6256828,
-					"semiAxis": 0.012,
-					"discovered": 2024,
-					"detectionMethod": "Primary Transit",
-					"planetName": "b"
-				}
-			],
-			"distance": 161.939,
-			"stype": "M2V",
-			"smass": 0.582,
-			"sradius": 0.593,
-			"effectiveTemp": 3718.0,
-			"RA": "23h11m49.6s",
-			"DE": "+65d13m48s"
 		},
 		"TIC 279401253":
 		{
@@ -115656,6 +115827,28 @@
 			"RA": "21h16m45.3s",
 			"DE": "-25d47m9.6s"
 		},
+		"TIC 290487717":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.59221,
+					"period": 3.4008,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 395.574,
+			"stype": "G7V",
+			"smass": 0.92,
+			"smetal": 0.096,
+			"Vmag": 13.5,
+			"sradius": 0.944,
+			"effectiveTemp": 5344.0,
+			"RA": "9h16m20.8s",
+			"DE": "+2d33m2.9s"
+		},
 		"TIC 291751499":
 		{
 			"exoplanets":
@@ -115677,6 +115870,28 @@
 			"starAltNames": "V714 And, GSC 02780-01969",
 			"RA": "23h56m29.9s",
 			"DE": "+36d28m53.6s"
+		},
+		"TIC 294329732":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1853,
+					"period": 9.7566,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 189.333,
+			"stype": "G8V",
+			"smass": 0.89,
+			"smetal": 0.23,
+			"Vmag": 12.2,
+			"sradius": 0.92,
+			"effectiveTemp": 5215.0,
+			"RA": "7h16m28.2s",
+			"DE": "-58d14m13.7s"
 		},
 		"TIC 303682623":
 		{
@@ -115723,6 +115938,111 @@
 			"RA": "16h30m57.3s",
 			"DE": "+26d6m25.1s"
 		},
+		"TIC 32032563":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.3102,
+					"period": 13.8346,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 507.86,
+			"stype": "G1V",
+			"smass": 1.05,
+			"Vmag": 13.45,
+			"sradius": 1.0,
+			"effectiveTemp": 5817.0,
+			"RA": "3h44m21.7s",
+			"DE": "-68d51m28.9s"
+		},
+		"TIC 320419023":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.24739,
+					"period": 5.2638,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 288.893,
+			"stype": "G1V",
+			"smass": 1.056,
+			"Vmag": 12.1,
+			"sradius": 0.952,
+			"effectiveTemp": 5848.0,
+			"RA": "7h52m17.4s",
+			"DE": "+11d49m27s"
+		},
+		"TIC 34085383":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.375,
+					"period": 3.47827,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 149.12,
+			"stype": "K4V",
+			"smass": 0.733,
+			"Vmag": 12.5,
+			"sradius": 0.81,
+			"effectiveTemp": 4623.0,
+			"RA": "3h56m56.4s",
+			"DE": "-7d22m32.5s"
+		},
+		"TIC 349520724":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.25212,
+					"period": 7.9404,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 241.105,
+			"stype": "G8V",
+			"smass": 0.89,
+			"Vmag": 13.0,
+			"sradius": 0.818,
+			"effectiveTemp": 5208.0,
+			"RA": "7h24m55.5s",
+			"DE": "-64d38m23.4s"
+		},
+		"TIC 356227008":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2132,
+					"period": 2.9615,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 387.609,
+			"stype": "G3V",
+			"smass": 1.02,
+			"Vmag": 13.0,
+			"sradius": 0.96,
+			"effectiveTemp": 5700.0,
+			"RA": "17h49m0.1s",
+			"DE": "+50d7m50.9s"
+		},
 		"TIC 365102760":
 		{
 			"exoplanets":
@@ -115746,6 +116066,90 @@
 			"effectiveTemp": 4694.0,
 			"RA": "20h23m22s",
 			"DE": "+54d23m40s"
+		},
+		"TIC 38825265":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1954,
+					"period": 3.3134,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 165.64,
+			"stype": "K8V",
+			"smass": 0.64,
+			"Vmag": 14.1,
+			"sradius": 0.664,
+			"effectiveTemp": 4120.0,
+			"RA": "4h32m59.8s",
+			"DE": "-65d12m14.2s"
+		},
+		"TIC 38828280":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2346,
+					"period": 4.8556,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 286.415,
+			"stype": "K0V",
+			"smass": 0.84,
+			"Vmag": 13.7,
+			"sradius": 0.741,
+			"effectiveTemp": 5037.0,
+			"RA": "4h33m34.2s",
+			"DE": "-62d10m10.9s"
+		},
+		"TIC 390586021":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2552,
+					"period": 2.747,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 114.558,
+			"stype": "K8V",
+			"smass": 0.648,
+			"Vmag": 13.1,
+			"sradius": 0.7265,
+			"effectiveTemp": 4140.0,
+			"RA": "13h19m17.4s",
+			"DE": "-31d27m55.8s"
+		},
+		"TIC 423703298":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2473,
+					"period": 4.0371,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 136.191,
+			"stype": "K6V",
+			"smass": 0.691,
+			"Vmag": 12.9,
+			"sradius": 0.73,
+			"effectiveTemp": 4415.0,
+			"RA": "1h31m44.6s",
+			"DE": "-17d0m48.8s"
 		},
 		"TIC 434398831":
 		{
@@ -115783,6 +116187,50 @@
 			"effectiveTemp": 5638.0,
 			"RA": "6h15m50.2s",
 			"DE": "+16d1m25.8s"
+		},
+		"TIC 437041147":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.19761,
+					"period": 3.823,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 246.6,
+			"stype": "G7V",
+			"smass": 0.931,
+			"smetal": 0.243,
+			"Vmag": 12.1,
+			"sradius": 0.961,
+			"effectiveTemp": 5374.0,
+			"RA": "8h51m47.5s",
+			"DE": "+6d45m53.4s"
+		},
+		"TIC 445839811":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.22107,
+					"period": 11.1086,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 235.655,
+			"stype": "G6V",
+			"smass": 0.95,
+			"smetal": 0.029,
+			"Vmag": 12.37,
+			"sradius": 0.85,
+			"effectiveTemp": 5445.0,
+			"RA": "13h20m28.5s",
+			"DE": "+48d24m26.1s"
 		},
 		"TIC 46432937":
 		{
@@ -115840,35 +116288,58 @@
 					"planetName": "b"
 				}
 			],
+			"distance": 781.19,
+			"stype": "F9/G0IV+?",
+			"smass": 1.12,
+			"Vmag": 13.1,
+			"sradius": 1.596,
+			"effectiveTemp": 6044.0,
 			"RA": "16h20m46.8s",
 			"DE": "-9d24m10.7s"
 		},
-		"TIC 52059926":
+		"TIC 62895484":
 		{
 			"exoplanets":
 			[
 				{
-					"mass": 16.9,
-					"radius": 0.955,
-					"period": 175.532,
-					"semiAxis": 0.553,
-					"eccentricity": 0.51,
-					"inclination": 89.685,
+					"radius": 0.31172,
+					"period": 2.8399,
 					"discovered": 2026,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
 				}
 			],
-			"distance": 218.0,
-			"stype": "K4.5V",
-			"smass": 0.73,
-			"smetal": -0.07,
-			"Vmag": 13.8,
-			"sradius": 0.72,
-			"effectiveTemp": 4479.0,
-			"starAltNames": "TOI-2530, UCAC4 109-000906",
-			"RA": "1h7m5.4s",
-			"DE": "-68d22m4.9s"
+			"distance": 294.86,
+			"stype": "G5V",
+			"smass": 0.98,
+			"smetal": 0.098,
+			"Vmag": 12.66,
+			"sradius": 0.874,
+			"effectiveTemp": 5575.0,
+			"RA": "7h46m33.2s",
+			"DE": "+22d35m25.3s"
+		},
+		"TIC 65612701":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.4702,
+					"period": 10.181,
+					"discovered": 2025,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 151.624,
+			"stype": "G0IV",
+			"smass": 1.06,
+			"Vmag": 9.45,
+			"sradius": 1.737,
+			"effectiveTemp": 5861.0,
+			"starAltNames": "BD+35 4222",
+			"RA": "20h41m53.7s",
+			"DE": "+36d20m19.7s"
 		},
 		"TIC 65910228":
 		{
@@ -115897,32 +116368,110 @@
 			"RA": "7h14m51.5s",
 			"DE": "-29d25m49.9s"
 		},
-		"TIC 87422071":
+		"TIC 67686059":
 		{
 			"exoplanets":
 			[
 				{
-					"mass": 1.29,
-					"radius": 0.97,
-					"period": 11.364929,
-					"semiAxis": 0.106,
-					"eccentricity": 0.12,
-					"inclination": 87.3,
+					"radius": 0.23116,
+					"period": 3.5216,
 					"discovered": 2026,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
 				}
 			],
-			"distance": 399.1,
-			"stype": "F8IV-V",
-			"smass": 1.239,
-			"smetal": 0.16,
-			"Vmag": 11.98,
-			"sradius": 1.489,
-			"effectiveTemp": 6150.0,
-			"starAltNames": "TOI-6752, TYC 7912-829-1",
-			"RA": "18h12m8.3s",
-			"DE": "-44d14m35.9s"
+			"distance": 249.2,
+			"stype": "G9/K0V",
+			"smass": 0.86,
+			"Vmag": 13.0,
+			"sradius": 0.82,
+			"effectiveTemp": 5102.0,
+			"RA": "1h19m32.2s",
+			"DE": "-35d17m34.8s"
+		},
+		"TIC 77319217":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.27737,
+					"period": 7.5483,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 267.62,
+			"stype": "F8V",
+			"smass": 1.16,
+			"Vmag": 11.5,
+			"sradius": 1.18,
+			"effectiveTemp": 6126.0,
+			"RA": "4h44m9.7s",
+			"DE": "-39d53m51.3s"
+		},
+		"TIC 77552382":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.50781,
+					"period": 3.5103,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 373.415,
+			"stype": "K0V",
+			"smass": 0.83,
+			"Vmag": 13.9,
+			"sradius": 0.887,
+			"effectiveTemp": 5002.0,
+			"RA": "10h10m3.2s",
+			"DE": "-4d54m12.6s"
+		},
+		"TIC 86380416":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.21519,
+					"period": 6.0409,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 244.7,
+			"stype": "G0V",
+			"smass": 1.07,
+			"Vmag": 11.83,
+			"sradius": 0.989,
+			"effectiveTemp": 5889.0,
+			"RA": "9h40m38.4s",
+			"DE": "+65d43m58s"
+		},
+		"TIC 88692598":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.16175,
+					"period": 2.6491,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 73.526,
+			"stype": "M0V",
+			"smass": 0.529,
+			"Vmag": 13.95,
+			"sradius": 0.532,
+			"effectiveTemp": 3615.0,
+			"RA": "9h56m50.6s",
+			"DE": "+47d46m14.4s"
 		},
 		"TIC 88785435":
 		{
@@ -115950,32 +116499,52 @@
 			"RA": "14h57m8.1s",
 			"DE": "-30d52m48s"
 		},
-		"TIC 9344899":
+		"TOI-1001 A":
 		{
 			"exoplanets":
 			[
 				{
-					"mass": 19.4,
-					"radius": 0.817,
-					"period": 8.5821566,
-					"semiAxis": 0.0815,
-					"eccentricity": 0.029,
-					"inclination": 88.95,
+					"radius": 0.6316,
+					"period": 1.932993,
+					"semiAxis": 0.035,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "a"
+				}
+			],
+			"distance": 295.862,
+			"stype": "F1IV-V",
+			"smass": 1.565,
+			"Vmag": 9.77,
+			"sradius": 2.0,
+			"effectiveTemp": 7070.0,
+			"starAltNames": "HD 67963",
+			"RA": "8h10m19.3s",
+			"DE": "-5d30m49.8s"
+		},
+		"TOI-1007":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 1.2062,
+					"period": 6.998899,
+					"semiAxis": 0.079,
 					"discovered": 2026,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
 				}
 			],
-			"distance": 528.1,
-			"stype": "G3V",
-			"smass": 0.98,
-			"smetal": 0.1,
-			"Vmag": 13.3,
-			"sradius": 1.06,
-			"effectiveTemp": 5703.0,
-			"starAltNames": "TOI-4701, UCAC4 408-007293",
-			"RA": "4h51m10.5s",
-			"DE": "-8d26m50.4s"
+			"distance": 283.291,
+			"stype": "F3IV",
+			"smass": 1.376,
+			"smetal": 0.154,
+			"Vmag": 9.37,
+			"sradius": 2.7,
+			"effectiveTemp": 6596.0,
+			"starAltNames": "BD-04 1980",
+			"RA": "7h31m0.5s",
+			"DE": "-4d27m48s"
 		},
 		"TOI-1011":
 		{
@@ -116002,6 +116571,72 @@
 			"starAltNames": "HD 61051",
 			"RA": "7h35m56.1s",
 			"DE": "-32d50m29.1s"
+		},
+		"TOI-1019":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 2.0894,
+					"period": 5.227922,
+					"semiAxis": 0.071,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 399.544,
+			"stype": "A7V",
+			"smass": 1.79,
+			"Vmag": 10.9,
+			"sradius": 1.562,
+			"effectiveTemp": 7645.0,
+			"RA": "8h0m35.5s",
+			"DE": "-54d52m42.7s"
+		},
+		"TOI-1032 A":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 1.4176,
+					"period": 5.659265,
+					"semiAxis": 0.086,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "a"
+				}
+			],
+			"distance": 587.196,
+			"stype": "A0V",
+			"smass": 2.68,
+			"Vmag": 9.76,
+			"sradius": 2.338,
+			"effectiveTemp": 10395.0,
+			"starAltNames": "HD 92039 A",
+			"RA": "10h36m53.1s",
+			"DE": "-42d32m29.9s"
+		},
+		"TOI-1036 A":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.58,
+					"period": 3.78031,
+					"discovered": 2019,
+					"detectionMethod": "Primary Transit",
+					"planetName": "a"
+				}
+			],
+			"distance": 184.015,
+			"stype": "G2V",
+			"smass": 1.03,
+			"Vmag": 10.98,
+			"sradius": 1.175,
+			"effectiveTemp": 5771.0,
+			"RA": "10h31m28s",
+			"DE": "-42d14m24.7s"
 		},
 		"TOI-1052 A":
 		{
@@ -116097,6 +116732,7 @@
 				}
 			],
 			"distance": 68.81,
+			"stype": "K2V",
 			"smass": 0.748,
 			"smetal": 0.05,
 			"Vmag": 11.0,
@@ -116206,6 +116842,27 @@
 			"starAltNames": "HD 110082",
 			"RA": "12h50m23s",
 			"DE": "-88d7m16s"
+		},
+		"TOI-1105":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.25935,
+					"period": 10.8680523,
+					"discovered": 2019,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 79.52,
+			"stype": "K4V",
+			"smass": 0.74,
+			"Vmag": 11.33,
+			"sradius": 0.756,
+			"effectiveTemp": 4664.0,
+			"RA": "9h44m12.9s",
+			"DE": "-89d28m17.4s"
 		},
 		"TOI-1107":
 		{
@@ -116709,6 +117366,28 @@
 			"effectiveTemp": 3326.0,
 			"RA": "2h28m47.5s",
 			"DE": "-80d53m56.7s"
+		},
+		"TOI-1226":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2079,
+					"period": 3.92878505676442,
+					"discovered": 2019,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 257.93,
+			"stype": "G3V",
+			"smass": 1.01,
+			"smetal": 0.129,
+			"Vmag": 12.1,
+			"sradius": 0.987,
+			"effectiveTemp": 5668.0,
+			"RA": "6h55m1.1s",
+			"DE": "-69d52m1.6s"
 		},
 		"TOI-1227 B":
 		{
@@ -117434,6 +118113,28 @@
 			"RA": "5h18m5s",
 			"DE": "-80d57m51.7s"
 		},
+		"TOI-1291":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.45089,
+					"period": 7.16199,
+					"discovered": 2019,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 428.123,
+			"stype": "F8IV",
+			"smass": 1.2,
+			"Vmag": 11.5,
+			"sradius": 1.81,
+			"effectiveTemp": 6230.0,
+			"starAltNames": "TIC 198186769",
+			"RA": "16h23m16.3s",
+			"DE": "+62d55m30.4s"
+		},
 		"TOI-1294":
 		{
 			"exoplanets":
@@ -117540,6 +118241,28 @@
 			"effectiveTemp": 5889.0,
 			"RA": "16h5m18s",
 			"DE": "+70d11m23s"
+		},
+		"TOI-1301":
+		{
+			"exoplanets":
+			[
+				{
+					"period": 6.096407209,
+					"semiAxis": 0.05986,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 90.87,
+			"stype": "K2V",
+			"smass": 0.77,
+			"Vmag": 11.3,
+			"sradius": 0.731,
+			"effectiveTemp": 4781.0,
+			"starAltNames": "TIC 356867115",
+			"RA": "18h23m27s",
+			"DE": "+71d34m54.2s"
 		},
 		"TOI-132 A":
 		{
@@ -118277,6 +119000,28 @@
 			"RA": "17h12m53.7s",
 			"DE": "+57d11m52s"
 		},
+		"TOI-1466":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.21474,
+					"period": 1.8718991,
+					"discovered": 2019,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 86.58,
+			"stype": "K7V",
+			"smass": 0.66,
+			"Vmag": 12.2,
+			"sradius": 0.75,
+			"effectiveTemp": 4201.0,
+			"starAltNames": "TIC 237086564",
+			"RA": "20h29m35.1s",
+			"DE": "+61d33m2.6s"
+		},
 		"TOI-1467":
 		{
 			"exoplanets":
@@ -118877,6 +119622,7 @@
 			"smass": 1.03,
 			"sradius": 1.0,
 			"effectiveTemp": 5760.0,
+			"starAltNames": "BD+86 279",
 			"RA": "18h9m36.9s",
 			"DE": "+86d51m37.1s"
 		},
@@ -119051,6 +119797,51 @@
 			"RA": "7h0m19.9s",
 			"DE": "+56d48m27.1s"
 		},
+		"TOI-1718":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.37854,
+					"period": 5.5870396,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 52.304,
+			"stype": "G7V",
+			"smass": 0.93,
+			"smetal": 0.2,
+			"Vmag": 8.96,
+			"sradius": 0.94,
+			"effectiveTemp": 5378.0,
+			"starAltNames": "HD 58727",
+			"RA": "7h28m4.3s",
+			"DE": "+30d19m18.2s"
+		},
+		"TOI-1722":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.34481,
+					"period": 9.605,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 136.42,
+			"stype": "F8V",
+			"smass": 1.162,
+			"Vmag": 10.0,
+			"sradius": 1.094,
+			"effectiveTemp": 6137.0,
+			"starAltNames": "BD+61 982",
+			"RA": "7h37m22.8s",
+			"DE": "+61d9m14.1s"
+		},
 		"TOI-1723":
 		{
 			"exoplanets":
@@ -119122,6 +119913,27 @@
 			"effectiveTemp": 5644.0,
 			"RA": "21h6m32s",
 			"DE": "-26d41m34s"
+		},
+		"TOI-1732":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.19832,
+					"period": 4.11922311925856,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 74.76,
+			"stype": "M0V",
+			"smass": 0.614,
+			"Vmag": 12.9,
+			"sradius": 0.632,
+			"effectiveTemp": 3876.0,
+			"RA": "7h27m12.3s",
+			"DE": "+53d2m42.9s"
 		},
 		"TOI-1736 A":
 		{
@@ -119304,6 +120116,27 @@
 			"RA": "18h50m57s",
 			"DE": "+64d25m10s"
 		},
+		"TOI-1750":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.23365,
+					"period": 11.3373613975694,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 162.46,
+			"stype": "K2V",
+			"smass": 0.767,
+			"Vmag": 12.65,
+			"sradius": 0.768,
+			"effectiveTemp": 4765.0,
+			"RA": "16h1m12.4s",
+			"DE": "+68d56m14.2s"
+		},
 		"TOI-1751":
 		{
 			"exoplanets":
@@ -119349,6 +120182,28 @@
 			"effectiveTemp": 5700.0,
 			"RA": "16h49m52.7s",
 			"DE": "+61d10m24.8s"
+		},
+		"TOI-1756":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1526,
+					"period": 2.78301136608212,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 86.716,
+			"stype": "M1V",
+			"smass": 0.556,
+			"Vmag": 13.9,
+			"sradius": 0.562,
+			"effectiveTemp": 3756.0,
+			"starAltNames": "TIC 364074068",
+			"RA": "20h25m18.9s",
+			"DE": "+77d38m11s"
 		},
 		"TOI-1758":
 		{
@@ -119470,6 +120325,37 @@
 			"starAltNames": "HD 77946, HIP 44746",
 			"RA": "9h7m6.7s",
 			"DE": "+46d40m21.3s"
+		},
+		"TOI-1782":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.16407,
+					"period": 1.829024227,
+					"semiAxis": 0.02574,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				},
+				{
+					"radius": 0.21126,
+					"period": 4.987641028,
+					"semiAxis": 0.05024,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "c"
+				}
+			],
+			"distance": 95.265,
+			"stype": "K6V",
+			"smass": 0.68,
+			"Vmag": 12.33,
+			"sradius": 0.668,
+			"effectiveTemp": 4336.0,
+			"starAltNames": "TIC 160045097",
+			"RA": "14h12m18.9s",
+			"DE": "+74d24m42.4s"
 		},
 		"TOI-1789":
 		{
@@ -119806,6 +120692,27 @@
 			"RA": "12h35m41s",
 			"DE": "+27d12m52s"
 		},
+		"TOI-1814":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.4586,
+					"period": 6.36846268332472,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 362.522,
+			"stype": "K0IV",
+			"smetal": 0.33,
+			"Vmag": 11.2,
+			"sradius": 2.39,
+			"effectiveTemp": 4971.0,
+			"RA": "15h47m16s",
+			"DE": "+77d13m57.5s"
+		},
 		"TOI-181":
 		{
 			"exoplanets":
@@ -119907,31 +120814,6 @@
 			"starAltNames": "BD+62 1281",
 			"RA": "13h10m55.3s",
 			"DE": "+61d44m41.1s"
-		},
-		"TOI-1828":
-		{
-			"exoplanets":
-			[
-				{
-					"mass": 0.1841,
-					"radius": 0.769,
-					"period": 9.0941045,
-					"semiAxis": 0.08587,
-					"eccentricity": 0.31,
-					"discovered": 2024,
-					"detectionMethod": "Primary Transit",
-					"planetName": "b"
-				}
-			],
-			"distance": 369.986,
-			"stype": "G0IV",
-			"smass": 1.04,
-			"smetal": 0.14,
-			"Vmag": 11.97,
-			"sradius": 1.562,
-			"effectiveTemp": 5809.0,
-			"RA": "16h6m14.9s",
-			"DE": "+69d37m18.1s"
 		},
 		"TOI-1836 A":
 		{
@@ -120172,6 +121054,28 @@
 			"starAltNames": "TIC 323295479",
 			"RA": "8h43m11.6s",
 			"DE": "-83d3m39.6s"
+		},
+		"TOI-1873":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.27692,
+					"period": 7.00568049251826,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 182.014,
+			"stype": "G3V",
+			"smass": 1.015,
+			"Vmag": 11.2,
+			"sradius": 0.971,
+			"effectiveTemp": 5700.0,
+			"starAltNames": "TIC 328933398",
+			"RA": "14h10m16.4s",
+			"DE": "+84d22m18.6s"
 		},
 		"TOI-1883 A":
 		{
@@ -120719,6 +121623,28 @@
 			"RA": "15h51m42s",
 			"DE": "+52d18m23s"
 		},
+		"TOI-205":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1936,
+					"period": 4.252985694067112,
+					"discovered": 2018,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 177.76,
+			"stype": "F8IV-V",
+			"smass": 1.2,
+			"smetal": 0.13,
+			"Vmag": 9.9,
+			"sradius": 1.454,
+			"effectiveTemp": 6222.0,
+			"RA": "0h31m54.1s",
+			"DE": "-56d57m54.2s"
+		},
 		"TOI-2068 A":
 		{
 			"exoplanets":
@@ -120766,6 +121692,28 @@
 			"effectiveTemp": 3383.0,
 			"RA": "4h54m56.9s",
 			"DE": "-62d31m20.5s"
+		},
+		"TOI-2071":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2308,
+					"period": 5.6739336,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 231.311,
+			"stype": "G1V",
+			"smass": 1.063,
+			"smetal": 0.048,
+			"Vmag": 11.5,
+			"sradius": 1.0,
+			"effectiveTemp": 5873.0,
+			"RA": "17h6m24.2s",
+			"DE": "+57d39m39.7s"
 		},
 		"TOI-2076":
 		{
@@ -120892,6 +121840,28 @@
 			"effectiveTemp": 4902.0,
 			"RA": "17h25m29.8s",
 			"DE": "+75d52m56.1s"
+		},
+		"TOI-2092 A":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.23776,
+					"period": 4.303264160073913,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "a"
+				}
+			],
+			"distance": 176.76,
+			"stype": "G5V",
+			"smass": 0.956,
+			"smetal": -0.122,
+			"Vmag": 11.3,
+			"sradius": 1.052,
+			"effectiveTemp": 5468.0,
+			"RA": "14h10m11.4s",
+			"DE": "+45d33m49.9s"
 		},
 		"TOI-2093":
 		{
@@ -121022,6 +121992,49 @@
 			"effectiveTemp": 3285.0,
 			"RA": "10h6m29s",
 			"DE": "+74d49m38s"
+		},
+		"TOI-209":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.20653,
+					"period": 4.3794297785579,
+					"discovered": 2018,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 113.387,
+			"stype": "K1V",
+			"smass": 0.81,
+			"smetal": 11.7,
+			"sradius": 0.742,
+			"effectiveTemp": 4916.0,
+			"RA": "1h17m34.6s",
+			"DE": "-66d54m8.8s"
+		},
+		"TOI-2104":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1213,
+					"period": 5.904369,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 76.742,
+			"stype": "K1V",
+			"smass": 0.8,
+			"Vmag": 10.84,
+			"sradius": 0.724,
+			"effectiveTemp": 4907.0,
+			"starAltNames": "TIC 367630162",
+			"RA": "10h6m26.9s",
+			"DE": "+83d5m16.2s"
 		},
 		"TOI-2107":
 		{
@@ -121376,6 +122389,32 @@
 			"RA": "4h55m55.2s",
 			"DE": "-63d15m36.2s"
 		},
+		"TOI-2179":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 1.942,
+					"radius": 1.117,
+					"period": 15.168865,
+					"semiAxis": 0.1207,
+					"eccentricity": 0.575,
+					"inclination": 87.0,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 309.6,
+			"stype": "G2V",
+			"smass": 1.026,
+			"smetal": 0.14,
+			"sradius": 1.088,
+			"effectiveTemp": 5788.0,
+			"starAltNames": "TIC 237913194",
+			"RA": "1h29m47s",
+			"DE": "-60d44m24s"
+		},
 		"TOI-2180":
 		{
 			"exoplanets":
@@ -121602,6 +122641,52 @@
 			"effectiveTemp": 5298.0,
 			"RA": "6h7m12s",
 			"DE": "-61d59m49s"
+		},
+		"TOI-2211":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.13926,
+					"period": 3.092686757,
+					"semiAxis": 0.04011,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 70.293,
+			"stype": "G8V",
+			"smass": 0.9,
+			"Vmag": 10.0,
+			"sradius": 0.834,
+			"effectiveTemp": 5253.0,
+			"starAltNames": "HD 195755",
+			"RA": "20h34m9.2s",
+			"DE": "-29d40m19.5s"
+		},
+		"TOI-2227":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2516,
+					"period": 4.2217717,
+					"discovered": 2020,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 165.441,
+			"stype": "G2IV-V",
+			"smass": 1.03,
+			"smetal": -0.05,
+			"Vmag": 10.5,
+			"sradius": 1.208,
+			"effectiveTemp": 5763.0,
+			"starAltNames": "TIC 405425498",
+			"RA": "22h30m4.2s",
+			"DE": "-67d51m0.5s"
 		},
 		"TOI-2236":
 		{
@@ -122551,6 +123636,27 @@
 			"RA": "4h31m56.2s",
 			"DE": "-34d27m19.9s"
 		},
+		"TOI-2453":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.27,
+					"period": 4.44,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 81.9,
+			"stype": "M1V",
+			"smass": 0.5,
+			"Vmag": 14.4,
+			"sradius": 0.502,
+			"effectiveTemp": 3609.0,
+			"RA": "4h59m21s",
+			"DE": "+12d56m10.8s"
+		},
 		"TOI-2458":
 		{
 			"exoplanets":
@@ -122683,6 +123789,27 @@
 			"RA": "6h21m39.8s",
 			"DE": "+11d15m5.9s"
 		},
+		"TOI-2518":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.19502,
+					"period": 6.898,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 160.825,
+			"stype": "F9/G0V",
+			"smass": 1.11,
+			"Vmag": 10.95,
+			"sradius": 0.993,
+			"effectiveTemp": 6016.0,
+			"RA": "7h1m46.7s",
+			"DE": "-34d55m10.8s"
+		},
 		"TOI-251":
 		{
 			"exoplanets":
@@ -122789,6 +123916,59 @@
 			"Vmag": 11.5,
 			"RA": "7h55m58.9s",
 			"DE": "-52d21m16.9s"
+		},
+		"TOI-2530":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 16.9,
+					"radius": 0.955,
+					"period": 175.532,
+					"semiAxis": 0.553,
+					"eccentricity": 0.51,
+					"inclination": 89.685,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 218.0,
+			"stype": "K4.5V",
+			"smass": 0.73,
+			"smetal": -0.07,
+			"Vmag": 13.8,
+			"sradius": 0.72,
+			"effectiveTemp": 4479.0,
+			"starAltNames": "UCAC4 109-000906, TIC 52059926",
+			"RA": "1h7m5.4s",
+			"DE": "-68d22m4.9s"
+		},
+		"TOI-2533":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 72.0,
+					"radius": 0.85,
+					"period": 6.6847,
+					"eccentricity": 0.195,
+					"inclination": 88.01,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 369.3,
+			"stype": "F8V",
+			"smass": 1.02,
+			"smetal": -0.3,
+			"Vmag": 11.75,
+			"sradius": 1.11,
+			"effectiveTemp": 6180.0,
+			"starAltNames": "TYC 2010-124-1",
+			"RA": "14h10m33.3s",
+			"DE": "+26d25m24s"
 		},
 		"TOI-2537":
 		{
@@ -124693,27 +125873,6 @@
 			"RA": "9h16m27s",
 			"DE": "+69d4m27s"
 		},
-		"TOI-3813":
-		{
-			"exoplanets":
-			[
-				{
-					"radius": 1.1402,
-					"period": 3.7176,
-					"discovered": 2021,
-					"detectionMethod": "Primary Transit",
-					"planetName": "b"
-				}
-			],
-			"distance": 940.296,
-			"stype": "F8V",
-			"smass": 1.22,
-			"Vmag": 13.95,
-			"sradius": 1.235,
-			"effectiveTemp": 6268.0,
-			"RA": "7h52m14.4s",
-			"DE": "+31d38m49s"
-		},
 		"TOI-3819":
 		{
 			"exoplanets":
@@ -124857,28 +126016,6 @@
 			"RA": "12h6m17s",
 			"DE": "+12d30m25s"
 		},
-		"TOI-3892":
-		{
-			"exoplanets":
-			[
-				{
-					"radius": 1.1089,
-					"period": 4.5808535,
-					"discovered": 2022,
-					"detectionMethod": "Primary Transit",
-					"planetName": "b"
-				}
-			],
-			"distance": 366.405,
-			"stype": "G5V",
-			"smass": 0.97,
-			"smetal": 0.168,
-			"Vmag": 12.6,
-			"sradius": 1.14,
-			"effectiveTemp": 5528.68,
-			"RA": "11h25m43.8s",
-			"DE": "+18d7m7.8s"
-		},
 		"TOI-3894":
 		{
 			"exoplanets":
@@ -124897,6 +126034,27 @@
 			],
 			"RA": "13h25m29.9s",
 			"DE": "+52d46m5s"
+		},
+		"TOI-3896 A":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2552,
+					"period": 4.3773,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "a"
+				}
+			],
+			"distance": 181.653,
+			"stype": "G9/K0V",
+			"smass": 0.86,
+			"Vmag": 12.4,
+			"sradius": 0.748,
+			"effectiveTemp": 5127.0,
+			"RA": "12h31m43.2s",
+			"DE": "+63d54m30.7s"
 		},
 		"TOI-3912":
 		{
@@ -125119,6 +126277,28 @@
 			"effectiveTemp": 5104.0,
 			"RA": "1h20m52s",
 			"DE": "+66d4m20s"
+		},
+		"TOI-4029":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.59016,
+					"period": 5.8850401,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 274.436,
+			"stype": "G3V",
+			"smass": 1.018,
+			"smetal": 0.1,
+			"Vmag": 11.55,
+			"sradius": 1.178,
+			"effectiveTemp": 5712.0,
+			"RA": "15h56m56s",
+			"DE": "+16d58m49s"
 		},
 		"TOI-402 A":
 		{
@@ -125367,12 +126547,40 @@
 			"RA": "21h42m32.6s",
 			"DE": "+77d44m3.7s"
 		},
+		"TOI-4156":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2266,
+					"period": 4.46,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				},
+				{
+					"radius": 0.2605,
+					"period": 12.82,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "c"
+				}
+			],
+			"distance": 213.72,
+			"stype": "G0V",
+			"smass": 1.1,
+			"Vmag": 11.5,
+			"sradius": 1.04,
+			"effectiveTemp": 5986.0,
+			"RA": "15h23m7.5s",
+			"DE": "+76d19m54.2s"
+		},
 		"TOI-4184":
 		{
 			"exoplanets":
 			[
 				{
-					"mass": 6.6,
+					"mass": 0.0208,
 					"radius": 0.2168,
 					"period": 4.9019804,
 					"semiAxis": 0.0336,
@@ -125421,6 +126629,7 @@
 			"exoplanets":
 			[
 				{
+					"radius": 1.093,
 					"period": 4.7463,
 					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
@@ -125755,6 +126964,28 @@
 			"RA": "19h28m33.5s",
 			"DE": "+47d8m59.9s"
 		},
+		"TOI-4363":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.16344,
+					"period": 2.11865900761235,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 77.775,
+			"stype": "M0V",
+			"smass": 0.62,
+			"Vmag": 12.7,
+			"sradius": 0.691,
+			"effectiveTemp": 4002.0,
+			"starAltNames": "TIC 325682877",
+			"RA": "2h28m26.5s",
+			"DE": "-12d32m57.7s"
+		},
 		"TOI-4364":
 		{
 			"exoplanets":
@@ -125831,6 +127062,28 @@
 			"starAltNames": "TIC 97766057, 2MASS J16481150-3226012",
 			"RA": "16h48m11.5s",
 			"DE": "-32d26m1.2s"
+		},
+		"TOI-4405":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.25676,
+					"period": 5.92142305135093,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 155.5,
+			"stype": "K6V",
+			"smass": 0.68,
+			"Vmag": 13.5,
+			"sradius": 0.687,
+			"effectiveTemp": 4361.0,
+			"starAltNames": "TIC 177254988",
+			"RA": "6h46m22.8s",
+			"DE": "-75d26m38.8s"
 		},
 		"TOI-4406":
 		{
@@ -126216,6 +127469,49 @@
 			"RA": "5h21m48.3s",
 			"DE": "-69d59m17.5s"
 		},
+		"TOI-4511":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.51459,
+					"period": 10.9776867,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 121.832,
+			"stype": "G3V",
+			"smass": 1.017,
+			"Vmag": 10.54,
+			"sradius": 1.0,
+			"effectiveTemp": 5708.0,
+			"starAltNames": "BD+14 546, TIC 333674399",
+			"RA": "3h17m13.2s",
+			"DE": "+15d30m6.2s"
+		},
+		"TOI-4513":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.19877,
+					"period": 9.7607632,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 102.61,
+			"stype": "G5V",
+			"smass": 0.979,
+			"Vmag": 10.7,
+			"sradius": 0.796,
+			"effectiveTemp": 5558.0,
+			"RA": "1h12m21.7s",
+			"DE": "+13d45m18.2s"
+		},
 		"TOI-4515":
 		{
 			"exoplanets":
@@ -126375,6 +127671,13 @@
 					"planetName": "b"
 				}
 			],
+			"distance": 27.38,
+			"stype": "M4.5V",
+			"smass": 0.262,
+			"smetal": -0.07,
+			"Vmag": 14.44,
+			"sradius": 0.287,
+			"starAltNames": "TIC 248250955, 2MASS J17385163-4738056",
 			"RA": "17h38m51.4s",
 			"DE": "-47d38m13.3s"
 		},
@@ -126401,6 +127704,27 @@
 			"effectiveTemp": 3558.0,
 			"RA": "14h4m3s",
 			"DE": "-30d0m51s"
+		},
+		"TOI-4561":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1802,
+					"period": 8.94,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 179.0,
+			"stype": "G4V",
+			"smass": 1.0,
+			"Vmag": 12.1,
+			"sradius": 0.852,
+			"effectiveTemp": 5631.0,
+			"RA": "4h3m50.8s",
+			"DE": "-76d1m17.2s"
 		},
 		"TOI-4562":
 		{
@@ -126436,6 +127760,26 @@
 			"effectiveTemp": 6096.0,
 			"RA": "7h28m2s",
 			"DE": "-63d31m4s"
+		},
+		"TOI-4578":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.26033,
+					"period": 8.624,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 182.25,
+			"stype": "G1V",
+			"smass": 1.077,
+			"sradius": 0.878,
+			"effectiveTemp": 5917.0,
+			"RA": "12h16m50.6s",
+			"DE": "+75d8m24.8s"
 		},
 		"TOI-4582 A":
 		{
@@ -126620,6 +127964,51 @@
 			"RA": "17h7m22.2s",
 			"DE": "+62d28m33s"
 		},
+		"TOI-4638":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.26167,
+					"period": 10.283918787,
+					"semiAxis": 0.093013,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 168.248,
+			"stype": "G4V",
+			"smass": 1.015,
+			"Vmag": 11.66,
+			"sradius": 0.894,
+			"effectiveTemp": 5700.0,
+			"starAltNames": "TIC 58824746",
+			"RA": "0h51m16.9s",
+			"DE": "+12d47m16.7s"
+		},
+		"TOI-4640":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.25533,
+					"period": 2.685722911326,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 245.09,
+			"stype": "G0V",
+			"smass": 1.1,
+			"Vmag": 11.6,
+			"sradius": 1.067,
+			"effectiveTemp": 5978.0,
+			"starAltNames": "TIC 337216118",
+			"RA": "2h32m49.2s",
+			"DE": "+10d4m20.8s"
+		},
 		"TOI-4641":
 		{
 			"exoplanets":
@@ -126644,6 +128033,27 @@
 			"effectiveTemp": 6500.0,
 			"RA": "2h50m14s",
 			"DE": "+25d20m1s"
+		},
+		"TOI-4662":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2302,
+					"period": 4.7034187,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 111.047,
+			"stype": "K6V",
+			"smass": 0.703,
+			"Vmag": 12.4,
+			"sradius": 0.694,
+			"effectiveTemp": 4481.0,
+			"RA": "3h50m3.8s",
+			"DE": "-31d5m38.4s"
 		},
 		"TOI-4666":
 		{
@@ -126717,6 +128127,33 @@
 			"RA": "6h12m14s",
 			"DE": "-14d38m58s"
 		},
+		"TOI-4701":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 19.4,
+					"radius": 0.817,
+					"period": 8.5821566,
+					"semiAxis": 0.0815,
+					"eccentricity": 0.029,
+					"inclination": 88.95,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 528.1,
+			"stype": "G3V",
+			"smass": 0.98,
+			"smetal": 0.1,
+			"Vmag": 13.3,
+			"sradius": 1.06,
+			"effectiveTemp": 5703.0,
+			"starAltNames": "UCAC4 408-007293, TIC 9344899",
+			"RA": "4h51m10.5s",
+			"DE": "-8d26m50.4s"
+		},
 		"TOI-470 A":
 		{
 			"exoplanets":
@@ -126764,6 +128201,27 @@
 			"effectiveTemp": 6070.0,
 			"RA": "6h1m25.9s",
 			"DE": "+12d32m52.3s"
+		},
+		"TOI-4747":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.34205,
+					"period": 5.2192426,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 304.615,
+			"stype": "G3V",
+			"smass": 1.01,
+			"Vmag": 12.4,
+			"sradius": 0.988,
+			"effectiveTemp": 5688.0,
+			"RA": "5h45m42.6s",
+			"DE": "-45d1m45.2s"
 		},
 		"TOI-4773":
 		{
@@ -126940,6 +128398,27 @@
 			"RA": "12h14m15s",
 			"DE": "-13d10m29s"
 		},
+		"TOI-4898":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.311,
+					"period": 2.765,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 98.596,
+			"stype": "M0V",
+			"smass": 0.62,
+			"Vmag": 13.6,
+			"sradius": 0.64,
+			"effectiveTemp": 3830.0,
+			"RA": "13h9m21.9s",
+			"DE": "-32d49m46s"
+		},
 		"TOI-4914":
 		{
 			"exoplanets":
@@ -126965,6 +128444,28 @@
 			"effectiveTemp": 5805.0,
 			"RA": "13h38m10.2s",
 			"DE": "-28d8m34.2s"
+		},
+		"TOI-4930":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.52467,
+					"period": 6.7789159,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 413.76,
+			"stype": "G2V",
+			"smass": 1.04,
+			"Vmag": 12.7,
+			"sradius": 1.16,
+			"effectiveTemp": 5804.0,
+			"starAltNames": "TIC 307221757",
+			"RA": "13h54m34s",
+			"DE": "-45d9m16.1s"
 		},
 		"TOI-4940":
 		{
@@ -127151,6 +128652,27 @@
 			"effectiveTemp": 7639.0,
 			"RA": "8h17m17s",
 			"DE": "+12d36m5s"
+		},
+		"TOI-5042":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.6242,
+					"period": 5.6316098,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 489.651,
+			"stype": "G1IV",
+			"smass": 1.04,
+			"Vmag": 11.75,
+			"sradius": 2.32,
+			"effectiveTemp": 5784.0,
+			"RA": "14h3m56.5s",
+			"DE": "-78d46m20.8s"
 		},
 		"TOI-5076 A":
 		{
@@ -127407,6 +128929,50 @@
 			"effectiveTemp": 6300.0,
 			"RA": "6h6m10s",
 			"DE": "-19d57m12s"
+		},
+		"TOI-5159":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1439,
+					"period": 5.83650984428885,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 55.179,
+			"stype": "G8V",
+			"smass": 0.9,
+			"Vmag": 9.37,
+			"sradius": 0.854,
+			"effectiveTemp": 5260.0,
+			"starAltNames": "BD+20 2330",
+			"RA": "9h31m8.6s",
+			"DE": "+20d1m9.6s"
+		},
+		"TOI-5160":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1989,
+					"period": 4.28,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 151.465,
+			"stype": "G3V",
+			"smass": 1.0,
+			"smetal": 0.204,
+			"Vmag": 10.85,
+			"sradius": 1.033,
+			"effectiveTemp": 5653.0,
+			"RA": "7h38m33.4s",
+			"DE": "+31d23m39.9s"
 		},
 		"TOI-5174":
 		{
@@ -127844,6 +129410,27 @@
 			"RA": "5h40m19.2s",
 			"DE": "+11d33m45.4s"
 		},
+		"TOI-5335":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.3648,
+					"period": 3.6139919,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 331.289,
+			"stype": "G6V",
+			"smass": 0.945,
+			"Vmag": 13.4,
+			"sradius": 0.916,
+			"effectiveTemp": 5427.0,
+			"RA": "3h7m48.5s",
+			"DE": "+15d21m32.6s"
+		},
 		"TOI-5340":
 		{
 			"exoplanets":
@@ -127920,6 +129507,28 @@
 			"starAltNames": "UCAC4 559-012271",
 			"RA": "4h57m36.5s",
 			"DE": "+21d36m7.1s"
+		},
+		"TOI-5380":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.2792,
+					"period": 3.7723119,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 286.781,
+			"stype": "F5IV-V",
+			"smass": 1.343,
+			"Vmag": 10.6,
+			"sradius": 1.562,
+			"effectiveTemp": 6525.0,
+			"starAltNames": "TIC 441587756",
+			"RA": "7h31m2.6s",
+			"DE": "+73d7m43.6s"
 		},
 		"TOI-5386 A":
 		{
@@ -128160,6 +129769,48 @@
 			"RA": "8h34m45.9s",
 			"DE": "+11d29m22.1s"
 		},
+		"TOI-5502":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.35936,
+					"period": 11.626,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 248.654,
+			"stype": "F7V",
+			"smass": 1.244,
+			"Vmag": 10.9,
+			"sradius": 1.323,
+			"effectiveTemp": 6317.0,
+			"RA": "9h0m48.9s",
+			"DE": "+27d59m53.9s"
+		},
+		"TOI-5515":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.22277,
+					"period": 8.59263328645,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 135.46,
+			"stype": "G6V",
+			"smass": 0.963,
+			"Vmag": 11.1,
+			"sradius": 0.835,
+			"effectiveTemp": 5494.0,
+			"RA": "9h18m27.9s",
+			"DE": "+16d59m23.8s"
+		},
 		"TOI-5527 A":
 		{
 			"exoplanets":
@@ -128184,6 +129835,27 @@
 			"starAltNames": "HD 286626, BD+09 545, TIC 438727861, TYC 0670-00465-1",
 			"RA": "4h11m24.7s",
 			"DE": "+10d16m37.9s"
+		},
+		"TOI-5532":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.24382,
+					"period": 5.65396888659613,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 91.0,
+			"stype": "M0V",
+			"smass": 0.636,
+			"Vmag": 13.1,
+			"sradius": 0.662,
+			"effectiveTemp": 3975.0,
+			"RA": "2h45m31.3s",
+			"DE": "+5d9m2.6s"
 		},
 		"TOI-5542":
 		{
@@ -128301,6 +129973,7 @@
 			"exoplanets":
 			[
 				{
+					"radius": 0.698,
 					"period": 19.8727,
 					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
@@ -128368,6 +130041,49 @@
 			"RA": "7h6m43.2s",
 			"DE": "+65d51m26s"
 		},
+		"TOI-5595":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.42074,
+					"period": 5.9900508,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 136.955,
+			"stype": "K8V",
+			"smass": 0.645,
+			"Vmag": 13.3,
+			"sradius": 0.743,
+			"effectiveTemp": 4120.0,
+			"starAltNames": "TIC 302908969",
+			"RA": "7h21m50.4s",
+			"DE": "+35d13m19.1s"
+		},
+		"TOI-5599":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.546,
+					"period": 5.44,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 547.95,
+			"stype": "F7IV",
+			"smass": 1.21,
+			"Vmag": 11.78,
+			"sradius": 1.913,
+			"effectiveTemp": 6246.0,
+			"RA": "13h17m18.3s",
+			"DE": "+55d40m53.6s"
+		},
 		"TOI-559":
 		{
 			"exoplanets":
@@ -128393,6 +130109,28 @@
 			"RA": "3h7m17s",
 			"DE": "-31d9m46s"
 		},
+		"TOI-5605":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.21287,
+					"period": 5.9133875,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 4375.0,
+			"stype": "K6V",
+			"smass": 0.68,
+			"Vmag": 12.1,
+			"sradius": 0.736,
+			"effectiveTemp": -0.027,
+			"starAltNames": "TIC 252469648",
+			"RA": "10h2m9.1s",
+			"DE": "+50d8m43.3s"
+		},
 		"TOI-5610":
 		{
 			"exoplanets":
@@ -128417,6 +130155,27 @@
 			"effectiveTemp": 3618.0,
 			"RA": "10h24m5.4s",
 			"DE": "+48d14m53.9s"
+		},
+		"TOI-5614":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.28843,
+					"period": 4.172,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 223.0,
+			"stype": "K7V",
+			"smass": 0.674,
+			"Vmag": 14.1,
+			"sradius": 0.735,
+			"effectiveTemp": 4313.0,
+			"RA": "12h37m43.7s",
+			"DE": "+69d27m30.3s"
 		},
 		"TOI-5616":
 		{
@@ -128513,6 +130272,50 @@
 			"RA": "9h52m44s",
 			"DE": "+6d12m58s"
 		},
+		"TOI-5624":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.196,
+					"period": 3.38677,
+					"discovered": 2025,
+					"detectionMethod": "Primary Transit",
+					"planetName": "c"
+				}
+			],
+			"distance": 101.9,
+			"stype": "G8V",
+			"smass": 0.92,
+			"Vmag": 10.8,
+			"sradius": 0.83,
+			"effectiveTemp": 5342.0,
+			"starAltNames": "BD+50 1888",
+			"RA": "12h3m22.6s",
+			"DE": "+49d15m4.4s"
+		},
+		"TOI-5630":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1853,
+					"period": 3.2220038,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 134.05,
+			"stype": "G7V",
+			"smass": 0.934,
+			"smetal": 0.135,
+			"Vmag": 10.9,
+			"sradius": 0.933,
+			"effectiveTemp": 5382.0,
+			"RA": "15h45m48.9s",
+			"DE": "+40d22m29.4s"
+		},
 		"TOI-5634 A":
 		{
 			"exoplanets":
@@ -128539,6 +130342,28 @@
 			"starAltNames": "TIC 119585136, 2MASS J11423454+205755",
 			"RA": "11h42m34.4s",
 			"DE": "+20d57m55s"
+		},
+		"TOI-5645":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.635,
+					"period": 4.5362433,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 473.18,
+			"stype": "G4IV-V",
+			"smass": 1.0,
+			"smetal": 0.131,
+			"Vmag": 13.1,
+			"sradius": 1.206,
+			"effectiveTemp": 5620.0,
+			"RA": "11h48m51s",
+			"DE": "+35d32m51s"
 		},
 		"TOI-564 A":
 		{
@@ -128741,6 +130566,29 @@
 			"RA": "16h23m7s",
 			"DE": "+50d20m39.1s"
 		},
+		"TOI-5726":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.22785,
+					"period": 5.491125215,
+					"semiAxis": 0.062186,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 108.848,
+			"stype": "G1V",
+			"smass": 1.064,
+			"Vmag": 9.74,
+			"sradius": 1.106,
+			"effectiveTemp": 5874.0,
+			"starAltNames": "BD+69 458",
+			"RA": "8h13m34.8s",
+			"DE": "+68d34m28.5s"
+		},
 		"TOI-5728":
 		{
 			"exoplanets":
@@ -128814,6 +130662,27 @@
 			"effectiveTemp": 3949.0,
 			"RA": "14h15m2s",
 			"DE": "+49d30m4.6s"
+		},
+		"TOI-5777":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.22473,
+					"period": 6.9171675,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 114.277,
+			"stype": "K7V",
+			"smass": 0.658,
+			"Vmag": 13.0,
+			"sradius": 0.672,
+			"effectiveTemp": 4208.0,
+			"RA": "9h24m0.5s",
+			"DE": "+82d51m31.3s"
 		},
 		"TOI-5786":
 		{
@@ -129073,6 +130942,7 @@
 			"exoplanets":
 			[
 				{
+					"radius": 1.222,
 					"period": 2.66881,
 					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
@@ -129092,6 +130962,7 @@
 			"exoplanets":
 			[
 				{
+					"radius": 1.04,
 					"period": 8.449876,
 					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
@@ -129111,6 +130982,7 @@
 			"exoplanets":
 			[
 				{
+					"radius": 1.167,
 					"period": 3.99524,
 					"discovered": 2022,
 					"detectionMethod": "Primary Transit",
@@ -129130,6 +131002,7 @@
 			"exoplanets":
 			[
 				{
+					"radius": 1.638,
 					"period": 1.343636,
 					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
@@ -129173,9 +131046,10 @@
 			"exoplanets":
 			[
 				{
+					"radius": 1.112,
 					"period": 2.40132,
 					"discovered": 2023,
-					"detectionMethod": "Radial Velocity",
+					"detectionMethod": "Primary Transit",
 					"planetName": "b"
 				}
 			],
@@ -129206,6 +131080,27 @@
 			"effectiveTemp": 3504.0,
 			"RA": "21h41m12s",
 			"DE": "+9d35m57s"
+		},
+		"TOI-5926":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.658,
+					"period": 3.8116176,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 275.1,
+			"stype": "G6V",
+			"smass": 0.946,
+			"Vmag": 12.6,
+			"sradius": 0.89,
+			"effectiveTemp": 5430.0,
+			"RA": "20h32m18.8s",
+			"DE": "+15d30m11s"
 		},
 		"TOI-5990":
 		{
@@ -129336,6 +131231,7 @@
 			"exoplanets":
 			[
 				{
+					"radius": 1.587,
 					"period": 1.9281027,
 					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
@@ -129579,6 +131475,27 @@
 			"effectiveTemp": 3493.0,
 			"RA": "5h19m42s",
 			"DE": "+48d8m9s"
+		},
+		"TOI-6080":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.30137,
+					"period": 8.056,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 188.183,
+			"stype": "G3V",
+			"smass": 1.01,
+			"Vmag": 11.1,
+			"sradius": 1.062,
+			"effectiveTemp": 5680.0,
+			"RA": "17h46m25s",
+			"DE": "+38d4m43.3s"
 		},
 		"TOI-6086":
 		{
@@ -130021,6 +131938,27 @@
 			"RA": "4h1m41.8s",
 			"DE": "+60d53m29.7s"
 		},
+		"TOI-6393":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.23419,
+					"period": 9.532,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 186.23,
+			"stype": "K0V",
+			"smass": 0.835,
+			"Vmag": 12.5,
+			"sradius": 0.766,
+			"effectiveTemp": 5022.0,
+			"RA": "9h24m58.4s",
+			"DE": "+68d47m17.9s"
+		},
 		"TOI-640 A":
 		{
 			"exoplanets":
@@ -130311,6 +132249,27 @@
 			"RA": "23h46m30.9s",
 			"DE": "-48d57m29.2s"
 		},
+		"TOI-6677":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.7423,
+					"period": 5.4496736,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 340.52,
+			"stype": "F2V",
+			"smass": 1.45,
+			"Vmag": 10.77,
+			"sradius": 1.57,
+			"effectiveTemp": 6760.0,
+			"RA": "19h21m53.2s",
+			"DE": "-46d52m29.8s"
+		},
 		"TOI-6690 A":
 		{
 			"exoplanets":
@@ -130405,6 +132364,28 @@
 			"RA": "8h38m17.2s",
 			"DE": "-23d33m0.8s"
 		},
+		"TOI-6699":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.34276,
+					"period": 5.322002,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 85.846,
+			"stype": "K3V",
+			"smass": 0.75,
+			"Vmag": 11.5,
+			"sradius": 0.753,
+			"effectiveTemp": 4716.0,
+			"starAltNames": "TIC 341405597",
+			"RA": "21h8m16.7s",
+			"DE": "-63d15m1.8s"
+		},
 		"TOI-669":
 		{
 			"exoplanets":
@@ -130425,6 +132406,28 @@
 			"effectiveTemp": 5625.0,
 			"RA": "10h35m36s",
 			"DE": "-5d10m53s"
+		},
+		"TOI-6707":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.5054,
+					"period": 3.83472822512614,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 641.47,
+			"stype": "F9/G0IV",
+			"smass": 1.14,
+			"smetal": -0.08,
+			"Vmag": 12.93,
+			"sradius": 1.582,
+			"effectiveTemp": 6088.0,
+			"RA": "7h19m3.2s",
+			"DE": "-58d6m55.8s"
 		},
 		"TOI-6716":
 		{
@@ -130502,6 +132505,33 @@
 			"effectiveTemp": 3505.0,
 			"RA": "10h58m21s",
 			"DE": "-36d51m29s"
+		},
+		"TOI-6752":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 1.29,
+					"radius": 0.97,
+					"period": 11.364929,
+					"semiAxis": 0.106,
+					"eccentricity": 0.12,
+					"inclination": 87.3,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 399.1,
+			"stype": "F8IV-V",
+			"smass": 1.239,
+			"smetal": 0.16,
+			"Vmag": 11.98,
+			"sradius": 1.489,
+			"effectiveTemp": 6150.0,
+			"starAltNames": "TYC 7912-829-1, TIC 87422071",
+			"RA": "18h12m8.3s",
+			"DE": "-44d14m35.9s"
 		},
 		"TOI-677":
 		{
@@ -130599,6 +132629,30 @@
 			"RA": "20h41m10s",
 			"DE": "+3d38m17.8s"
 		},
+		"TOI-6884":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.8431,
+					"period": 14.42177,
+					"semiAxis": 0.12,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 562.376,
+			"stype": "F9/G0IV",
+			"smass": 1.12,
+			"smetal": -0.0936,
+			"Vmag": 12.0,
+			"sradius": 1.919,
+			"effectiveTemp": 6026.94,
+			"starAltNames": "TIC 156514476",
+			"RA": "12h52m2.1s",
+			"DE": "+26d40m26.2s"
+		},
 		"TOI-6894":
 		{
 			"exoplanets":
@@ -130624,6 +132678,29 @@
 			"starAltNames": "TIC 67512645",
 			"RA": "11h33m52.5s",
 			"DE": "+12d27m3.9s"
+		},
+		"TOI-6954":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.33438,
+					"period": 4.0207557,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 190.042,
+			"stype": "G9/K0V",
+			"smass": 0.834,
+			"smetal": 0.03,
+			"Vmag": 12.3,
+			"sradius": 0.947,
+			"effectiveTemp": 5020.0,
+			"starAltNames": "TIC 443607377",
+			"RA": "11h13m17.7s",
+			"DE": "-2d47m15.9s"
 		},
 		"TOI-697 A":
 		{
@@ -130689,6 +132766,27 @@
 			"starAltNames": "TIC 149302744",
 			"RA": "5h33m31.7s",
 			"DE": "-62d6m32.8s"
+		},
+		"TOI-7008":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.4416,
+					"period": 0.84,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 410.467,
+			"stype": "G9/K0V",
+			"smass": 0.88,
+			"Vmag": 13.6,
+			"sradius": 0.952,
+			"effectiveTemp": 5170.0,
+			"RA": "14h27m57.2s",
+			"DE": "+79d27m1s"
 		},
 		"TOI-700":
 		{
@@ -130984,6 +133082,27 @@
 			"RA": "16h18m57.1s",
 			"DE": "+19d10m33.5s"
 		},
+		"TOI-7155":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.19244,
+					"period": 3.8949005,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 144.751,
+			"stype": "K3V",
+			"smass": 0.755,
+			"Vmag": 12.7,
+			"sradius": 0.67,
+			"effectiveTemp": 4718.0,
+			"RA": "0h49m46.9s",
+			"DE": "+79d17m16.2s"
+		},
 		"TOI-715":
 		{
 			"exoplanets":
@@ -131040,6 +133159,76 @@
 			"RA": "21h22m43.3s",
 			"DE": "+8d53m21.8s"
 		},
+		"TOI-7169":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.41,
+					"radius": 1.475,
+					"period": 3.4373125,
+					"semiAxis": 0.0428,
+					"eccentricity": 0.055,
+					"inclination": 84.62,
+					"discovered": 2026,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 453.1,
+			"stype": "G3V",
+			"smass": 0.885,
+			"smetal": -0.72,
+			"Vmag": 12.1,
+			"sradius": 1.5,
+			"effectiveTemp": 5714.0,
+			"starAltNames": "TIC 372048733",
+			"RA": "23h24m13.1s",
+			"DE": "+36d49m3.2s"
+		},
+		"TOI-7173":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.6486,
+					"period": 0.6256828,
+					"semiAxis": 0.012,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 161.939,
+			"stype": "M2V",
+			"smass": 0.582,
+			"sradius": 0.593,
+			"effectiveTemp": 3718.0,
+			"RA": "23h11m49.6s",
+			"DE": "+65d13m48s"
+		},
+		"TOI-7333":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1668,
+					"period": 6.2644714,
+					"discovered": 2025,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 157.217,
+			"stype": "K5V",
+			"smass": 0.721,
+			"Vmag": 13.1,
+			"sradius": 0.666,
+			"effectiveTemp": 4568.0,
+			"starAltNames": "TIC 160585062",
+			"RA": "16h14m7.6s",
+			"DE": "+75d54m59.8s"
+		},
 		"TOI-733":
 		{
 			"exoplanets":
@@ -131090,6 +133279,29 @@
 			"starAltNames": "TIC 192833836, UCAC4 251-006761, WISE J053224.78- 395002.7, 2MASS J05322483-3950016, Gaia DR2 4808732662634331520",
 			"RA": "5h32m24.7s",
 			"DE": "-39d50m3.2s"
+		},
+		"TOI-7464":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.9296,
+					"period": 20.04169,
+					"semiAxis": 0.116,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 113.903,
+			"stype": "M2V",
+			"smass": 0.517,
+			"Vmag": 15.218,
+			"sradius": 0.52,
+			"effectiveTemp": 3560.0,
+			"starAltNames": "TIC 251090642",
+			"RA": "9h19m10.5s",
+			"DE": "+53d35m41.9s"
 		},
 		"TOI-7475":
 		{
@@ -131299,6 +133511,29 @@
 			"RA": "11h4m18.1s",
 			"DE": "-47d49m17s"
 		},
+		"TOI-7639":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.277,
+					"period": 10.45465,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 182.1,
+			"stype": "G8V",
+			"smass": 0.9,
+			"smetal": -0.09,
+			"Vmag": 11.95,
+			"sradius": 0.997,
+			"effectiveTemp": 5241.0,
+			"starAltNames": "TIC 270471727",
+			"RA": "6h28m50.7s",
+			"DE": "-78d28m23s"
+		},
 		"TOI-763 A":
 		{
 			"exoplanets":
@@ -131333,6 +133568,28 @@
 			"effectiveTemp": 5450.0,
 			"RA": "12h57m52s",
 			"DE": "-39d45m28s"
+		},
+		"TOI-7689":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.8725,
+					"period": 1.482641,
+					"semiAxis": 0.0154,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 48.844,
+			"stype": "M4V",
+			"smass": 0.222,
+			"sradius": 0.251,
+			"effectiveTemp": 3478.0,
+			"starAltNames": "WT 2313, TIC 12999193",
+			"RA": "23h7m25.6s",
+			"DE": "-28d21m14.3s"
 		},
 		"TOI-771":
 		{
@@ -131402,6 +133659,29 @@
 			"effectiveTemp": 3709.0,
 			"RA": "11h54m18s",
 			"DE": "-37d33m10s"
+		},
+		"TOI-777":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.6531,
+					"period": 16.6,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 182.314,
+			"stype": "F8IV",
+			"smass": 1.18,
+			"smetal": 0.115,
+			"Vmag": 9.84,
+			"sradius": 1.6,
+			"effectiveTemp": 6187.0,
+			"starAltNames": "HD 106100",
+			"RA": "12h12m28.5s",
+			"DE": "-49d0m27.8s"
 		},
 		"TOI-778":
 		{
@@ -131523,6 +133803,49 @@
 			"starAltNames": "TIC 306472057",
 			"RA": "7h53m44.3s",
 			"DE": "-69d42m6.4s"
+		},
+		"TOI-799":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.17352,
+					"period": 5.54516606201839,
+					"discovered": 2019,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 158.526,
+			"stype": "G4V",
+			"smass": 1.0,
+			"Vmag": 11.2,
+			"sradius": 0.915,
+			"effectiveTemp": 5624.0,
+			"starAltNames": "TIC 255685030",
+			"RA": "6h33m52.5s",
+			"DE": "-52d27m37s"
+		},
+		"TOI-808":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.21,
+					"period": 9.736402,
+					"discovered": 2021,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 98.185,
+			"stype": "G9/K0V",
+			"smass": 0.87,
+			"Vmag": 10.73,
+			"sradius": 0.833,
+			"effectiveTemp": 5154.0,
+			"RA": "8h54m59.6s",
+			"DE": "-44d17m19s"
 		},
 		"TOI-811 A":
 		{
@@ -132096,6 +134419,93 @@
 			"starAltNames": "CD-80 565",
 			"RA": "15h38m17.6s",
 			"DE": "-80d48m13.6s"
+		},
+		"TOI-921":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.30119,
+					"period": 5.12872650603197,
+					"discovered": 2019,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 294.015,
+			"stype": "F9/G0V",
+			"smass": 1.13,
+			"smetal": -0.058,
+			"Vmag": 11.8,
+			"sradius": 1.141,
+			"effectiveTemp": 6055.0,
+			"RA": "6h38m41.8s",
+			"DE": "-56d13m13.9s"
+		},
+		"TOI-929 A":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.24133,
+					"period": 5.830149,
+					"discovered": 2019,
+					"detectionMethod": "Primary Transit",
+					"planetName": "a"
+				}
+			],
+			"distance": 114.421,
+			"stype": "K6V",
+			"smass": 0.7,
+			"Vmag": 12.5,
+			"sradius": 0.717,
+			"effectiveTemp": 4451.0,
+			"starAltNames": "LP 994-39 A",
+			"RA": "3h3m37.7s",
+			"DE": "-39d55m50.7s"
+		},
+		"TOI-938 A":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.36498,
+					"period": 8.8073507,
+					"discovered": 2019,
+					"detectionMethod": "Primary Transit",
+					"planetName": "a"
+				}
+			],
+			"distance": 215.034,
+			"stype": "G0V",
+			"smass": 1.1,
+			"Vmag": 11.4,
+			"sradius": 0.985,
+			"effectiveTemp": 5981.0,
+			"starAltNames": "TIC 332660150",
+			"RA": "4h12m7.7s",
+			"DE": "-12d7m7.8s"
+		},
+		"TOI-941":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.62058,
+					"period": 8.5145626,
+					"discovered": 2019,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 263.386,
+			"stype": "G0V",
+			"smass": 1.078,
+			"Vmag": 11.45,
+			"sradius": 1.185,
+			"effectiveTemp": 5920.0,
+			"RA": "5h13m12.1s",
+			"DE": "+6d32m45.2s"
 		},
 		"TOI-942":
 		{

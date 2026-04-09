@@ -1017,6 +1017,19 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	}
 }
 
+void StelMainScriptAPI::waitForKeypress()
+{
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QCoreApplication::processEvents();
+	QEventLoop* loop = scriptMgr->getWaitEventLoop();
+	KeypressFilter filter(loop);
+	qApp->installEventFilter(&filter);
+	if( loop->exec() != 0 )
+	{
+		emit requestExit();
+	}
+	qApp->removeEventFilter(&filter);
+}
 
 void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {

@@ -1012,6 +1012,10 @@ public slots:
 	//! @param spec "local" or "utc"
 	void waitFor(const QString& dt, const QString& spec="utc");
 
+	//! Pauses script until key is pressed
+	//! enables interactive control of scripts in planetarium presentations.
+	void waitForKeypress();
+
 	//! Retrieve value of environment variable @param name.
 	//! On desktop Windows and Qt before 5.10, this call may result in data loss if the original
 	//! string contains Unicode characters not representable in the ANSI encoding.

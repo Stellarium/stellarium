@@ -46,12 +46,13 @@ enum class RegionType
 	NONE = 0,		// (delete this when multiple regions are used)
 	WORLD,			// (delete this when multiple regions are used)
 	//WORLD = 0,	// (uncomment this when multiple regions are used)
+	ANTARCTICA,
 	EASTERN_EUROPE,
 	NORTHERN_EUROPE,
 	SOUTHERN_EUROPE,
 	WESTERN_EUROPE,
 	EASTERN_AFRICA,
-	MIDDLE_AFRICA,
+	CENTRAL_AFRICA,
 	NORTHERN_AFRICA,
 	SOUTHERN_AFRICA,
 	WESTERN_AFRICA,
@@ -59,6 +60,7 @@ enum class RegionType
 	CENTRAL_AMERICA,
 	NORTHERN_AMERICA,
 	SOUTH_AMERICA,
+	NORTHERN_ASIA,
 	CENTRAL_ASIA,
 	EASTERN_ASIA,
 	SOUTH_EASTERN_ASIA,
@@ -67,19 +69,21 @@ enum class RegionType
 	AUSTRALASIA,
 	MELANESIA,
 	MICRONESIA,
-	POLYNESIA
+	POLYNESIA,
+	OTHER
 };
 
 //! Map of region types to their corresponding name and description
 const std::map<RegionType, Region> REGIONS = {
 	{RegionType::NONE, Region("None", "Please select a valid region.")}, // (delete this when multiple regions are used)
 	{RegionType::WORLD, Region("World", "Unofficial region intended only for cultures that operate globally and cannot be assigned to a single location. (e.g. Modern)")},
-	{RegionType::EASTERN_EUROPE, Region("Eastern Europe", "This region includes the whole of russia (even the parts on the asian continent).")},
+	{RegionType::ANTARCTICA, Region("Antarctica", "")},
+	{RegionType::EASTERN_EUROPE, Region("Eastern Europe", "")},
 	{RegionType::NORTHERN_EUROPE, Region("Northern Europe", "")},
 	{RegionType::SOUTHERN_EUROPE, Region("Southern Europe", "")},
 	{RegionType::WESTERN_EUROPE, Region("Western Europe", "")},
 	{RegionType::EASTERN_AFRICA, Region("Eastern Africa", "")},
-	{RegionType::MIDDLE_AFRICA, Region("Middle Africa", "")},
+	{RegionType::CENTRAL_AFRICA, Region("Central Africa", "")},
 	{RegionType::NORTHERN_AFRICA, Region("Northern Africa", "")},
 	{RegionType::SOUTHERN_AFRICA, Region("Southern Africa", "")},
 	{RegionType::WESTERN_AFRICA, Region("Western Africa", "")},
@@ -87,6 +91,7 @@ const std::map<RegionType, Region> REGIONS = {
 	{RegionType::CENTRAL_AMERICA, Region("Central America", "")},
 	{RegionType::NORTHERN_AMERICA, Region("Northern America", "This region includes USA, Canada and Greenland.")},
 	{RegionType::SOUTH_AMERICA, Region("South America", "")},
+	{RegionType::NORTHERN_ASIA, Region("Northern Asia", "This unoffical subregion covers the entire geographical region of Siberia.")},
 	{RegionType::CENTRAL_ASIA, Region("Central Asia", "")},
 	{RegionType::EASTERN_ASIA, Region("Eastern Asia", "")},
 	{RegionType::SOUTH_EASTERN_ASIA, Region("South-eastern Asia", "")},
@@ -95,7 +100,8 @@ const std::map<RegionType, Region> REGIONS = {
 	{RegionType::AUSTRALASIA, Region("Australasia", "")},
 	{RegionType::MELANESIA, Region("Melanesia", "")},
 	{RegionType::MICRONESIA, Region("Micronesia", "")},
-	{RegionType::POLYNESIA, Region("Polynesia", "")}
+	{RegionType::POLYNESIA, Region("Polynesia", "")},
+	{RegionType::OTHER, Region("Other", "Use this region for skycultures not located on our earth (e.g. fictional earth). You can edit the file manually later and specify the region as you like.")}
 };
 
 } // namespace scm

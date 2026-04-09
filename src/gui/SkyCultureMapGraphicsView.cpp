@@ -96,7 +96,7 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 	for (const auto &currentCulture : cultureIds)
 	{
 		// find path of file
-		const QString filePath = StelFileMgr::findFile("skyCultures/" + currentCulture + "/territory.geojson");
+		const QString filePath = StelFileMgr::findFile("skycultures/" + currentCulture + "/territory.geojson");
 		if (filePath.isEmpty())
 		{
 			// There is just no point to emit a warning in V26.1.
@@ -149,7 +149,8 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 					geometry << QPointF(pointArray[0].toDouble(), pointArray[1].toDouble());
 				}
 
-				SkyCulturePolygonItem *item = new SkyCulturePolygonItem(cultureIdToTranslationMap.value(currentCulture), beginTime, endTime);
+				SkyCulturePolygonItem *item = new SkyCulturePolygonItem(currentCulture, beginTime, endTime);
+				item->setToolTip(cultureIdToTranslationMap.value(currentCulture));
 				item->setPolygon(convertLatLonToMeter(geometry));
 				scene()->addItem(item);
 			}
@@ -295,7 +296,7 @@ void SkyCultureMapGraphicsView::mouseReleaseEvent( QMouseEvent *e )
 			{
 				// if so, select all polygons of the respective culture, emit the cultureSelected Signal and set the oldSkyCulture to currentSkyCulture
 				selectAllCulturePolygon(currentSkyCulture);
-				emit cultureSelected(currentSkyCulture);
+				emit cultureSelected(scPolyItem->toolTip());
 			}
 		}
 	}
@@ -331,10 +332,25 @@ void SkyCultureMapGraphicsView::showEvent(QShowEvent *e)
 void SkyCultureMapGraphicsView::scaleView(double factor)
 {
 	// calculate requested zoom before executing the zoom operation to limit the min / max zoom level
-	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
+	QRectF viewRect = viewport()->rect().adjusted(2, 2, - 2, - 2);
+	QRectF sceneRect = transform().scale(factor, factor).mapRect(QRectF(2, 2, defaultRect.width() * 1.3, defaultRect.height() * 1.3));
+	const double currentTransform = transform().mapRect(QRectF(0, 0, 1, 1)).width();
+	const double scaledTransform = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
+	const double windowMapRatio = calculateScaleRatio(defaultRect.width() * 1.3, defaultRect.height() * 1.3);
+	const double scaledWindowMapRatio = std::min(viewRect.width() / sceneRect.width(), viewRect.height() / sceneRect.height());
 
-	if (scaling < 0.16 || scaling > 500.0) // scaling < min or scaling > max zoom level
-		return;
+	if (factor < 1) // zoom out operation
+	{
+		if (scaledWindowMapRatio > 1.0)
+		{
+			factor = windowMapRatio;
+		}
+	}
+	else // zoom in operation
+	{
+		if (scaledTransform > 500.0)
+			factor = 500.0 / currentTransform;
+	}
 
 	scale(factor, factor);
 }
@@ -404,8 +420,9 @@ void SkyCultureMapGraphicsView::selectAllCulturePolygon(const QString &skyCultur
 	oldSkyCulture = skyCultureId;
 }
 
-void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int beginTime)
+void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureName, int beginTime)
 {
+	QString skyCultureId = "";
 	QList<QGraphicsItem *> currentTimeItems = QList<QGraphicsItem *>();
 	QList<QGraphicsItem *> beginTimeItems = QList<QGraphicsItem *>();
 
@@ -419,8 +436,9 @@ void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int b
 			continue;
 		}
 
-		if(skyCultureId == scPolyItem->getSkyCultureId())
+		if(skyCultureName == scPolyItem->toolTip())
 		{
+			skyCultureId = scPolyItem->getSkyCultureId();
 			if (scPolyItem->existsAtPointInTime(currentYear))
 			{
 				currentTimeItems.append(item);
@@ -443,10 +461,21 @@ void SkyCultureMapGraphicsView::selectCulture(const QString &skyCultureId, int b
 		smoothFitInView(calculateBoundingBox(beginTimeItems));
 		emit timeValueChanged(beginTime);
 	}
-	else
+}
+
+void SkyCultureMapGraphicsView::translatePolygons()
+{
+	StelApp& app = StelApp::getInstance();
+	QMap<QString, QString> cultureIdToTranslationMap = app.getSkyCultureMgr().getDirToI18Map();
+	const auto itemList = scene()->items();
+	for(const auto &item : itemList)
 	{
-		qInfo() << "couldn't find any polygon with name [" << skyCultureId << "]!";
-		return;
+		SkyCulturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyCulturePolygonItem *>(item);
+		if(!scPolyItem)
+		{
+			continue;
+		}
+		scPolyItem->setToolTip(cultureIdToTranslationMap.value(scPolyItem->getSkyCultureId()));
 	}
 }
 

@@ -258,8 +258,6 @@ const QString &scm::ScmSkyCulture::getId() const
 
 void scm::ScmSkyCulture::mergeLocations()
 {
-	int contValue = QDateTime::currentDateTime().date().year() + 1;
-
 	for (int currentLocationIdx = 0; currentLocationIdx < (locations.size() - 1); currentLocationIdx++)
 	{
 		// compare current location to others in list
