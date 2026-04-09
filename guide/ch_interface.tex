@@ -948,30 +948,14 @@ version in the description before you use sky cultures for
 broadcasting! See section~\ref{sec:skycultures:licenses} for details.}}}
 
 
-\begin{figure}[p]
-\centering\includegraphics[width=\textwidth]{view_dialog_skyculture_tab.png}
-\caption{View Settings Window: Sky Culture Tab, Details and Appearance}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.85\textwidth]{view_dialog_skyculture_tab.png}
+\caption{View Settings Window: Sky Culture Tab}
 \label{fig:gui:view:skyculture}
 \end{figure}
 
-\begin{figure}[p]
-\centering\includegraphics[width=\textwidth]{view_dialog_skyculture_map.png}
-\caption{View Settings Window: Sky Culture Tab, Exploration and Selection}
-\label{fig:gui:view:skyculture:map}
-\end{figure}
-
-
-The Sky Culture tab of the View window provides two sub-tabs\newFeature{26.1}:
-\begin{description}
-\item[Details and Appearance] (Fig.~\ref{fig:gui:view:skyculture}) provides textual information about the currently selected skyculture, 
-and user interface elements to fine-tune the display of available data.
-\item[Exploration and Selection] (Fig.~\ref{fig:gui:view:skyculture:map}) provides a list of available skycultures, sorted into blocks of geographic regions, 
-together with a world map on which the available cultures are displayed\footnote{As of version 26.1 this is a new feature, and only Norse (Edda) so far has the polygons available.}. 
-Clicking on a polygon will select the respective skyculture.
-\end{description}
-
-On the tab ``Details and Appearance'', you find numerous
-controls to configure how the current culture's constellations and bright star names will be
+The Sky Culture tab of the View window (Fig.~\ref{fig:gui:view:skyculture})
+controls which culture's constellations and bright star names will be
 used in the main display.  Some cultures have constellation art (e.g.,
 Modern or Inuit), and the rest do not. Configurable options include
 \begin{description}
@@ -991,7 +975,7 @@ in the skyculture's original (\emph{native}) language. If such a culture uses no
 non-native users need a \emph{transliteration} that also helps pronunciation, which even depends on user language. 
 Then there are \emph{scientific transliteration} systems for some cases. 
 Finally, a pronunciation aid can be given using the \emph{International Phonetic Alphabet} (IPA).
-And, after the actual \emph{translation}, for reference, you may want to add the commonly used \emph{modern} name to an object like star or planet. 
+And, for reference, you may want to add the commonly used \emph{modern} name to an object. 
 
 There are two sets of settings, for the screen label and for the label used in the information area in the top-left. 
 The currently configured settings are immediately stored per-skyculture and retrieved when you load another skyculture, 
@@ -999,7 +983,7 @@ so that you can adapt the system to your knowledge of languages and character sy
 
 \item[Abbreviated names] To provide a less cluttered screen in case constellation names are long, you can show abbreviations. 
 The Modern skycultures use the 3-letter codes given by the IAU, for the other skycultures we depend on our skyculture authors 
-to define unique short labels that help memorizing. Some skycultures still just show legacy numbers.
+to define unique short labels that help memorizing. Some skycultures still just show numbers.
  
 \item[Select single constellation/Isolated] See section~\ref{sec:skyculture:singleConstellations} for details.
 \item[Constellation labels] Activate display of constellation labels, like
@@ -1350,18 +1334,6 @@ You can export the calculated ephemeris into an XLSX or CSV file.
 	\label{fig:gui:AstroCalc:Ephemeris:Asteroids}
 \end{figure}
 
-\begin{figure}[p]
-	\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_ephemeris_sun_at_altitude.png}
-	\caption{Astronomical Calculations (AstroCalc): Venus when Sun is at the end of civil twilight (-6°)}
-	\label{fig:gui:AstroCalc:Ephemeris:SunAtAltitude}
-\end{figure}
-
-\begin{figure}[p]
-	\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_ephemeris_planet_opposition.png}
-	\caption{Astronomical Calculations (AstroCalc): Points of Saturn's oppositions during a few decades}
-	\label{fig:gui:AstroCalc:Ephemeris:PlanetOpposition}
-\end{figure}
-
 Another interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
 In this mode, the circle marks are not linked to the sky, but to the horizontal coordinate system.
 For example, you can get an analemma of the Sun for any location (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Analemma}
@@ -1375,20 +1347,6 @@ two objects at the same time and define custom time step for the ephemeris
 Note: The ephemeris is computed with the current settings for atmosphere, topocentric correction etc. 
 In consequence, e.g.\ magnitudes may be affected by atmospheric absorption and may show unexpected values. 
 Remember to switch off atmosphere etc.\ to create extinction free geocentric mean positions as found in almanachs.
-
-Two time steps \newFeature{26.2} require a bit of care to display well. The \emph{Sun at altitude} displays
-an object's position when the Sun is at a specific altitude relative to the horizon (only values ≤ 0° are valid).
-The value can be changed in the \emph{Extra options} window (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:SunAtAltitude}).
-Using it as intented requires the ephemeris to be drawn in horizontal coordinates!
-
-The other time step that requires some care is the \emph{Planet at opposition}. This is useful for displaying where
-and when a planet will be at its opposition for a given year in relation to background stars. For it to make sense, 
-the planet in question needs to be selected both in the ephemeris list and in the \emph{Extra options} window 
-(under the title "Opposition of planet", Fig.~\ref{fig:gui:AstroCalc:Ephemeris:PlanetOpposition}).
-
-It is only applicable for the outer planets, i.e. Mars through Neptune. The computation is quite intense, so showing 
-e.g. Neptune oppositions throughout its 165 year orbit might take a while if you're on a weak system.
-
 
 \subsection{The ``Risings, Transits, and Settings'' (RTS) Tab}
 \label{sec:gui:AstroCalc:RTS}
@@ -1492,11 +1450,6 @@ This tool was introduced for planning yearly observations (Fig.~\ref{fig:gui:Ast
 \caption{Astronomical Calculations (AstroCalc): Graphs}
 \label{fig:gui:AstroCalc:Graphs:Graphs}
 \end{figure}
-\begin{figure}[p]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_ad.jpg}
-\caption{Astronomical Calculations (AstroCalc): Graphs / Lunar Elongation}
-\label{fig:gui:AstroCalc:Graphs:LE}
-\end{figure}
   
 This subtab \newFeature{0.16.0} can show two functions over time for
 the current month or for up to 30 years\newFeature{0.19.3/0.22.2} and draw graphs
@@ -1526,6 +1479,11 @@ or expect a long delay where the program may seem unresponsive.
 \subsubsection{The ``Lunar Elongation'' Subtab}
 \label{sec:gui:AstroCalc:Graphs:LE}
 
+\begin{figure}[p]
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_ad.jpg}
+\caption{Astronomical Calculations (AstroCalc): Graphs / Lunar Elongation}
+\label{fig:gui:AstroCalc:Graphs:LE}
+\end{figure}
 
 This subtab (Fig.~\ref{fig:gui:AstroCalc:Graphs:LE})
 \newFeature{0.18.3} can show a ``Lunar Elongation''
