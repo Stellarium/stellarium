@@ -26,6 +26,7 @@
 #include "StelObjectMgr.hpp"
 #include "Planes.hpp"
 #include "StelUtils.hpp"
+#include <algorithm>
 
 FlightMgr::FlightMgr(QObject *parent) :
 	QObject(parent), dataSource(nullptr), displayBrightness(0), lastSelectedObject(nullptr)
@@ -196,14 +197,14 @@ StelObjectP FlightMgr::searchByName(const QString &name) const
 	return nullptr;
 }
 
-QStringList FlightMgr::listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> FlightMgr::listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	return listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 }
 
-QStringList FlightMgr::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> FlightMgr::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList results;
+	QVector<QPair<QString,StelObjectP>> results;
 	if (!GETSTELMODULE(Planes)->isEnabled() || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !dataSource)
 	{
 		return results;
@@ -222,16 +223,18 @@ QStringList FlightMgr::listMatchingObjects(const QString &objPrefix, int maxNbIt
 			if (useStartOfWords && (f->getCallsign().startsWith(objPrefix, Qt::CaseInsensitive)
 									|| f->getAddress().startsWith(objPrefix, Qt::CaseInsensitive)))
 			{
-				results.append(f->getEnglishName());
+				results.append(QPair<QString,StelObjectP>(f->getEnglishName(), f));
 			}
 			else if (!useStartOfWords && (f->getCallsign().contains(objPrefix, Qt::CaseInsensitive)
 											|| f->getAddress().contains(objPrefix, Qt::CaseInsensitive)))
 			{
-				results.append(f->getEnglishName());
+				results.append(QPair<QString,StelObjectP>(f->getEnglishName(), f));
 			}
 		}
 	}
-	results.sort();
+	// TODO: This used to be a QStringList only. sort() should sort by the String, not by pointer.
+	//results.sort();
+	std::sort(results.begin(), results.end());
 	if (results.size() > maxNbItem)
 	{
 		results.erase(results.begin() + maxNbItem, results.end());
@@ -239,9 +242,9 @@ QStringList FlightMgr::listMatchingObjects(const QString &objPrefix, int maxNbIt
 	return results;
 }
 
-QStringList FlightMgr::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> FlightMgr::listAllObjects(bool inEnglish) const
 {
-	QStringList list;
+	QVector<QPair<QString,StelObjectP>> list;
 	if (!dataSource)
 	{
 		return list;
@@ -256,11 +259,11 @@ QStringList FlightMgr::listAllObjects(bool inEnglish) const
 		const FlightP f = l->at(i);
 		if (inEnglish)
 		{
-			list.append(f->getEnglishName());
+			list.append((QPair<QString,StelObjectP>(f->getEnglishName(), f)));
 		}
 		else
 		{
-			list.append(f->getNameI18n());
+			list.append((QPair<QString,StelObjectP>(f->getEnglishName(), f)));
 		}
 	}
 	return list;

@@ -58,14 +58,14 @@ public:
 
 	//! Find objects with partially matching names (translated).
 	//! Calls listMatchingObjects() as names aren't translated.
-	QStringList listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const;
+	QVector<QPair<QString,StelObjectP>> listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const;
 
 	//! Find objects with partially matching names.
 	//! Compares to callsign and mode s hex address
-	QStringList listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const;
+	QVector<QPair<QString,StelObjectP>> listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const;
 
 	//! Returns a list of all objects.
-	QStringList listAllObjects(bool inEnglish) const;
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const;
 
 	//! Change the data source.
 	//! @param source a pointer to the data source to use.

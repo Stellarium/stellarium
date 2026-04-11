@@ -97,17 +97,17 @@ public:
 		return searchByName(id);
 	}
 
-	QStringList listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
+	QVector<QPair<QString,StelObjectP>> listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
 	{
 		return flightMgr.listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
 	}
 
-	QStringList listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const override
+	QVector<QPair<QString,StelObjectP>> listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const override
 	{
 		return flightMgr.listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 	}
 
-	QStringList listAllObjects(bool inEnglish) const override
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override
 	{
 		return flightMgr.listAllObjects(inEnglish);
 	}
