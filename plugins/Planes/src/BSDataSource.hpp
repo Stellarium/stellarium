@@ -184,7 +184,7 @@ private:
 	//! @param end end position of the message to parse
 	void parseMsg(QByteArray &buf, int start, int end);
 
-	QList<FlightP> relevantFlights; //!< List of flights returned to FlightMgr
+	QList<FlightP> relevantFlights; //!< List of flights returned to Planes
 	QHash<int, FlightP> flights; //!< Hash of flights used to keep track of data received by socket
 	QHash<QString, FlightP> dbFlights; //!< Hash of flights used to keep track of data received by database
 

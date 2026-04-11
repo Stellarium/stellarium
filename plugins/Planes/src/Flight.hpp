@@ -32,7 +32,6 @@ class Planes;
 //! @class Flight
 //! Represents a series of ADS-B Datapoints that make up a flight event.
 //! Handles information and rendering for flights.
-//! Flights are managed by the FlightMgr.
 //! @author Felix Zeltner
 class Flight : public StelObject
 {

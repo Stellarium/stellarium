@@ -51,7 +51,7 @@ public:
 	//! @param fwd is the time moving forward or backward
 	virtual void updateRelevantFlights(double jd, double rate) = 0;
 
-	//! Called from FlightMgr::update()
+	//! Called from Planes::update()
 	void update(double deltaTime, double jd, double rate)
 	{
 		time +=  deltaTime;

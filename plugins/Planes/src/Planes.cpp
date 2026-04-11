@@ -22,6 +22,7 @@
 #include "StelCore.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelTexture.hpp"
@@ -40,7 +41,8 @@ StelTextureSP Planes::planeTexture;
 
 
 
-Planes::Planes(): labelsVisible(true), displayFader(true), connectOnStartup(false)
+Planes::Planes(): labelsVisible(true), displayFader(true), connectOnStartup(false),
+	dataSource(nullptr), displayBrightness(0), lastSelectedObject(nullptr)
 {
 	setObjectName("Planes");
 	// Register metatypes so they can be passed on signals/slots across threads
@@ -48,6 +50,11 @@ Planes::Planes(): labelsVisible(true), displayFader(true), connectOnStartup(fals
 	qRegisterMetaType<QList<ADSBFrame> >();
 	qRegisterMetaType<QList<FlightID> >();
 	settingsDialog = new PlanesDialog();
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	Flight::updateObserverPos(StelApp::getInstance().getCore()->getCurrentLocation());
+	this->connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), SLOT(updateSelectedObject()));
+
 }
 
 Planes::~Planes()
@@ -123,6 +130,7 @@ void Planes::deinit()
 	//qDebug() << "Planes deinit()";
 	saveSettings();
 	planeTexture.clear();
+	texPointer.clear();
 	bsDataSource.deinit();
 	bsRecordingDataSource.deinit();
 }
@@ -137,7 +145,28 @@ void Planes::update(double deltaTime)
 	// Faders
 	displayFader.update((int)(deltaTime * 1000));
 
-	flightMgr.update(deltaTime);
+	double jdate = StelApp::getInstance().getCore()->getJD();
+	if (dataSource)
+	{
+		dataSource->update(deltaTime, jdate, StelApp::getInstance().getCore()->getTimeRate());
+	}
+	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
+	{
+		return;
+	}
+	if (!dataSource)
+	{
+		return;
+	}
+	QList<FlightP> *l = dataSource->getRelevantFlights();
+	if (!l)
+	{
+		return;
+	}
+	for (int i = 0; i < l->size(); ++i)
+	{
+		(*l)[i]->update(jdate);
+	}
 }
 
 void Planes::draw(StelCore *core)
@@ -146,10 +175,70 @@ void Planes::draw(StelCore *core)
 	{
 		return;
 	}
+	setBrightness(displayFader.getInterstate());
 
-	flightMgr.setBrightness(displayFader.getInterstate());
+	const bool labelsVisible=GETSTELMODULE(Planes)->getFlagShowLabels();
+	// Don't render anything if we aren't on earth or before the year 2000
+	if (core->getCurrentLocation().planetName != earth->getEnglishName() ||
+			core->getJD() < 2451545.0)
+	{
+		return;
+	}
+	StelProjectorP projection = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	StelPainter painter(projection);
+	painter.setColor(Flight::getFlightInfoColor(), displayBrightness);
+	painter.setBlending(true);
+	Planes::planeTexture->bind();
+	Flight::numPaths = 0;
+	Flight::numVisible = 0;
+	if (dataSource)
+	{
+		QList<FlightP> *l = dataSource->getRelevantFlights();
+		if (l)
+		{
+			for (int i = 0; i < l->size(); ++i)
+			{
+				l->at(i)->draw(core, painter, Flight::getPathDrawMode(), labelsVisible);
+			}
+		}
+	}
+	//qDebug() << Flight::numVisible << " visible, " << Flight::numPaths << " paths";
 
-	flightMgr.draw(core);
+	// Draw selection rectangle
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	{
+		drawPointer(core, painter);
+	}
+}
+
+void Planes::drawPointer(StelCore *core, StelPainter &painter)
+{
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionOff);
+
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject(QStringLiteral("Flight"));
+	if (!newSelected.empty())
+	{
+		const StelObjectP obj = newSelected[0];
+		FlightP flight = obj.staticCast<Flight>();
+		Vec3d pos=obj->getJ2000EquatorialPos(core);
+		Vec3d screenpos;
+
+		// Compute 2D pos and return if outside screen
+		if (!prj->project(pos, screenpos) || !flight->isVisible())
+			return;
+		texPointer->bind();
+
+		painter.setBlending(true);
+
+		// Size on screen
+		float size = 2.f*obj->getAngularRadius(core)*M_PI_180f*prj->getPixelPerRadAtCenter();
+		size += 12.f + 3.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
+		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
+		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
+		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
+	}
 }
 
 double Planes::getCallOrder(StelModule::StelModuleActionName actionName) const
@@ -186,6 +275,185 @@ bool Planes::configureGui(bool show)
 		settingsDialog->setVisible(true);
 	}
 	return true;
+}
+
+StelObjectP Planes::searchByNameI18n(const QString &nameI18n) const
+{
+	return searchByName(nameI18n);
+}
+
+StelObjectP Planes::searchByName(const QString &name) const
+{
+	if (!GETSTELMODULE(Planes)->isEnabled() || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !dataSource)
+	{
+		return nullptr;
+	}
+
+	QList<FlightP> *l = dataSource->getRelevantFlights();
+	if (!l)
+	{
+		return nullptr;
+	}
+	for (int i = 0; i < l->size(); ++i)
+	{
+		const FlightP f = l->at(i);
+		if (f->isVisible() && (f->getCallsign().toUpper() == name.toUpper()
+							   || f->getAddress().toUpper() == name.toUpper()))
+		{
+			return qSharedPointerCast<StelObject>(f);
+		}
+	}
+	return nullptr;
+}
+
+QList<StelObjectP> Planes::searchAround(const Vec3d &av, double limitFov, const StelCore *core) const
+{
+	QList<StelObjectP> results;
+	if (!GETSTELMODULE(Planes)->isEnabled() || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !dataSource)
+	{
+		return results;
+	}
+
+	Vec3d v(av);
+	v.normalize();
+	double cosLimFov = cos(limitFov * M_PI/180.);
+	Vec3d equPos;
+
+	QList<FlightP> *l = dataSource->getRelevantFlights();
+	if (!l)
+	{
+		return results;
+	}
+	for (int i = 0; i < l->size(); ++i)
+	{
+		const FlightP f = l->at(i);
+		if (f->isVisible())
+		{
+			equPos = f->getJ2000EquatorialPos(StelApp::getInstance().getCore());
+			equPos.normalize();
+			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+			{
+				results.append(qSharedPointerCast<StelObject>(f));
+			}
+		}
+	}
+	return results;
+}
+
+QVector<QPair<QString,StelObjectP>> Planes::listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
+{
+	return listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
+}
+
+QVector<QPair<QString,StelObjectP>> Planes::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
+{
+	QVector<QPair<QString,StelObjectP>> results;
+	if (!GETSTELMODULE(Planes)->isEnabled() || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !dataSource)
+	{
+		return results;
+	}
+
+	QList<FlightP> *l = dataSource->getRelevantFlights();
+	if (!l)
+	{
+		return results;
+	}
+	for (int i = 0; i < l->size(); ++i)
+	{
+		const FlightP f = l->at(i);
+		if (f->isVisible())
+		{
+			if (useStartOfWords && (f->getCallsign().startsWith(objPrefix, Qt::CaseInsensitive)
+									|| f->getAddress().startsWith(objPrefix, Qt::CaseInsensitive)))
+			{
+				results.append({f->getEnglishName(), StelObjectP(f)});
+			}
+			else if (!useStartOfWords && (f->getCallsign().contains(objPrefix, Qt::CaseInsensitive)
+											|| f->getAddress().contains(objPrefix, Qt::CaseInsensitive)))
+			{
+				results.append({f->getEnglishName(), StelObjectP(f)});
+			}
+		}
+	}
+	std::sort(results.begin(), results.end(), [](auto& a, auto& b){ return a.first < b.first; });
+	if (results.size() > maxNbItem)
+	{
+		results.erase(results.begin() + maxNbItem, results.end());
+	}
+	return results;
+}
+
+QVector<QPair<QString,StelObjectP>> Planes::listAllObjects(bool inEnglish) const
+{
+	QVector<QPair<QString,StelObjectP>> list;
+	if (!dataSource)
+	{
+		return list;
+	}
+	QList<FlightP> *l = dataSource->getRelevantFlights();
+	if (!l)
+	{
+		return list;
+	}
+	for (int i = 0; i < l->size(); ++i)
+	{
+		const FlightP f = l->at(i);
+		if (inEnglish)
+		{
+			list.append({f->getEnglishName(), StelObjectP(f)});
+		}
+		else
+		{
+			list.append({f->getEnglishName(), StelObjectP(f)});
+		}
+	}
+	return list;
+}
+
+void Planes::setDataSource(FlightDataSource *source)
+{
+	if (dataSource != source)
+	{
+		if (dataSource)
+		{
+			dataSource->deinit();
+		}
+		dataSource = source;
+		dataSource->init();
+		dataSource->updateRelevantFlights(StelApp::getInstance().getCore()->getJD(), StelApp::getInstance().getCore()->getTimeRate());
+	}
+}
+
+void Planes::updateSelectedObject()
+{
+	qDebug() << "selectedObjectChanged()";
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	{
+		const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject(QStringLiteral("Flight"));
+		if (!newSelected.empty())
+		{
+			const StelObjectP obj = newSelected[0];
+			qDebug() << obj->getType();
+			FlightP flight = obj.staticCast<Flight>();
+			if (flight != lastSelectedObject)
+			{
+				if (lastSelectedObject)
+				{
+					lastSelectedObject->setFlightSelected(false);
+				}
+				flight->setFlightSelected(true);
+				lastSelectedObject = flight;
+			}
+		}
+		else
+		{
+			if (lastSelectedObject)
+			{
+				lastSelectedObject->setFlightSelected(false);
+			}
+			lastSelectedObject = FlightP(nullptr);
+		}
+	}
 }
 
 void Planes::loadSettings()
@@ -283,13 +551,13 @@ void Planes::setDBCreds(DBCredentials creds)
 
 void Planes::openBSRecording(QString file)
 {
-	flightMgr.setDataSource(&bsRecordingDataSource);
+	setDataSource(&bsRecordingDataSource);
 	bsRecordingDataSource.loadFile(file);
 }
 
 void Planes::connectDBBS()
 {
-	flightMgr.setDataSource(&bsDataSource);
+	setDataSource(&bsDataSource);
 	bsDataSource.connectDBBS(bsHost, bsPort, dbc);
 }
 

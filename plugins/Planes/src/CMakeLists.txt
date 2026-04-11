@@ -14,8 +14,6 @@ SET(Planes_SRCS
   DBCredentials.hpp
   ADS-B.hpp
   ADS-B.cpp
-  FlightMgr.hpp
-  FlightMgr.cpp
   Flight.hpp
   Flight.cpp
   Planes.hpp

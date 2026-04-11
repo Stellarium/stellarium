@@ -19,8 +19,8 @@
 #ifndef PLANES_HPP_
 #define PLANES_HPP_
 
+#include "StelFader.hpp"
 #include "StelObjectModule.hpp"
-#include "FlightMgr.hpp"
 #include "StelGui.hpp"
 #include "BSRecordingDataSource.hpp"
 #include "BSDataSource.hpp"
@@ -33,14 +33,16 @@ Q_DECLARE_METATYPE(DBCredentials)
 
 //! @class Planes
 //! This class is the entry point for the plugin.
-//! It handles the integration with Stellarium.
+//! It handles the integration with Stellarium, manages updating, drawing and searching for Flight objects.
+//! Accesses a FlightDataSource
+
 class Planes : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool enabled          READ isEnabled               WRITE enablePlanes            NOTIFY enabledChanged)
 	Q_PROPERTY(bool connectOnStartup READ isConnectOnStartup      WRITE setConnectOnStartup     NOTIFY connectOnStartupChanged)
-	Q_PROPERTY(bool showLabels       READ getFlagShowLabels       WRITE setFlagShowLabels       NOTIFY showLabelsChanged)                // From FlightMgr
-	Q_PROPERTY(bool useInterpolation READ getFlagUseInterpolation WRITE setFlagUseInterpolation NOTIFY useInterpolationChanged)          // From FlightMgr
+	Q_PROPERTY(bool showLabels       READ getFlagShowLabels       WRITE setFlagShowLabels       NOTIFY showLabelsChanged)
+	Q_PROPERTY(bool useInterpolation READ getFlagUseInterpolation WRITE setFlagUseInterpolation NOTIFY useInterpolationChanged)
 	Q_PROPERTY(Flight::PathColorMode pathColorMode READ getPathColorMode WRITE setPathColorMode NOTIFY pathColorModeChanged)
 	Q_PROPERTY(Flight::PathDrawMode pathDrawMode   READ getPathDrawMode   WRITE setPathDrawMode   NOTIFY pathDrawModeChanged)
 	Q_PROPERTY(double maxVertRate READ getMaxVertRate WRITE setMaxVertRate NOTIFY maxVertRateChanged)
@@ -51,7 +53,6 @@ class Planes : public StelObjectModule
 	Q_PROPERTY(double minHeight   READ getMinHeight   WRITE setMinHeight   NOTIFY minHeightChanged)
 	Q_PROPERTY(Vec3f infoColor   READ getFlightInfoColor  WRITE setFlightInfoColor  NOTIFY flightInfoColorChanged)
 
-	friend class FlightMgr;
 public:
 	Planes();
 	~Planes() override;
@@ -73,21 +74,11 @@ public:
 	////////////////////////////////////////////////////////////////////////////
 	//!@{
 	//! Methods defined in StelObjectModule
-	//! Forward requests to FlightMgr
-	QList<StelObjectP> searchAround(const Vec3d &v, double limitFov, const StelCore *core) const override
-	{
-		return flightMgr.searchAround(v, limitFov , core);
-	}
+	QList<StelObjectP> searchAround(const Vec3d &v, double limitFov, const StelCore *core) const override;
 
-	StelObjectP searchByNameI18n(const QString &nameI18n) const override
-	{
-		return flightMgr.searchByNameI18n(nameI18n);
-	}
+	StelObjectP searchByNameI18n(const QString &nameI18n) const override;
 
-	StelObjectP searchByName(const QString &name) const override
-	{
-		return flightMgr.searchByName(name);
-	}
+	StelObjectP searchByName(const QString &name) const override;
 
 	//! Return the StelObject with the given ID if exists or the empty StelObject if not found
 	//! @param name the english object name
@@ -97,20 +88,11 @@ public:
 		return searchByName(id);
 	}
 
-	QVector<QPair<QString,StelObjectP>> listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
-	{
-		return flightMgr.listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
-	}
+	QVector<QPair<QString,StelObjectP>> listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const;
 
-	QVector<QPair<QString,StelObjectP>> listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const override
-	{
-		return flightMgr.listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
-	}
+	QVector<QPair<QString,StelObjectP>> listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const override;
 
-	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override
-	{
-		return flightMgr.listAllObjects(inEnglish);
-	}
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override;
 	//!@}
 
 	//! Return the name of this StelObject.
@@ -137,6 +119,13 @@ public:
 	//! Save the settings to the stellarium config file
 	void saveSettings();
 
+	//! Draws the selection rectangle
+	void drawPointer(StelCore *core, StelPainter &painter);
+
+	//! Change the data source.
+	//! @param source a pointer to the data source to use.
+	void setDataSource(FlightDataSource *source);
+
 	//! Is the database source enabled?
 	bool isUsingDB() const
 	{
@@ -161,12 +150,6 @@ public:
 		return dbc;
 	}
 
-	//! Get the FlightMgr object
-	const FlightMgr *getFlightMgr() const
-	{
-		return &flightMgr;
-	}
-
 	//! Get the hostname for the BaseStation data port
 	QString getBSHost() const
 	{
@@ -178,7 +161,6 @@ public:
 	{
 		return bsPort;
 	}
-
 
 	//! Should the data port attempt to reconnect on connection loss?
 	bool isReconnectOnConnectionLossEnabled() const
@@ -310,11 +292,21 @@ public slots:
 		emit pathColorModeChanged(mode);
 	}
 
+	//! Set the brightness of the renderer, used to fade in and out
+	void setBrightness(double b)
+	{
+		displayBrightness = b;
+	}
+
+	//! User clicked on an object, check if the object is a Flight.
+	//! If it is, draw selection rectagle and mark as selected.
+	//! If not, mark last selected Flight as no longer selected.
+	void updateSelectedObject();
+
 private:
 	bool labelsVisible; //!< are labels shown
 
 	static StelTextureSP planeTexture; //!< the texture used for drawing the plane icons
-	FlightMgr flightMgr; //!< The FlightMgr
 	LinearFader displayFader; //!< Fader to fade in and out on enable/disable
 
 	PlanesDialog *settingsDialog; //!< Configuration window
@@ -328,8 +320,13 @@ private:
 	QString bsHost; //!< data port hostname
 	quint16 bsPort; //!< data port port
 	bool connectOnStartup; //!< connect on startup setting
-};
 
+	StelTextureSP texPointer; //!< Selection rectangle
+	FlightDataSource *dataSource; //!< current data source
+	QSharedPointer<Planet> earth; //!< Reference to planet earth, to check if we are on earth
+	double displayBrightness; //!< brightness for rendering / fading
+	FlightP lastSelectedObject; //!< the last selected Flight
+};
 
 
 #include <QObject>

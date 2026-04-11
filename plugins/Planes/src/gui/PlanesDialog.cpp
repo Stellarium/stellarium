@@ -26,7 +26,6 @@
 #include "StelMainView.hpp"
 #include "Planes.hpp"
 #include "Flight.hpp"
-#include "FlightMgr.hpp"
 
 PlanesDialog::PlanesDialog()
 {
