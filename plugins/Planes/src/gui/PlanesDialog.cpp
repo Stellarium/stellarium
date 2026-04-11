@@ -131,8 +131,9 @@ void PlanesDialog::createDialogContent()
 	ui->bsStatus->setText(cachedBSStatus);
 	ui->dbStatus->setText(cachedDBStatus);
 
-	this->connect(ui->closeStelWindow, SIGNAL(clicked()), SLOT(close()));
 	this->connect(&StelApp::getInstance(), SIGNAL(languageChanged()), SLOT(retranslate()));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	this->connect(ui->col_solid, SIGNAL(clicked()), SLOT(setSolidCol()));
 	this->connect(ui->col_height, SIGNAL(clicked()), SLOT(setHeightCol()));
 	this->connect(ui->col_velocity, SIGNAL(clicked()), SLOT(setVelocityCol()));
@@ -166,7 +167,7 @@ void PlanesDialog::createDialogContent()
 	connectBoolProperty(ui->connectOnStartup, "Planes.connectOnStartup");
 	this->connect(ui->reconnectOnConnectionLoss, SIGNAL(clicked(bool)), SLOT(setReconnectOnConnectionLoss(bool)));
 
-	connectColorButton(ui->infoTextColorButton, "Planes.infoColor", "Planes/planes_color");
+	ui->infoTextColorButton->setup("Planes.infoColor", "Planes/planes_color");
 
 	setAboutHtml();
 }
