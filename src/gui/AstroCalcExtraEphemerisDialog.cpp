@@ -51,14 +51,19 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->skipDataCheckBox, SIGNAL(clicked()), this, SLOT(setOptionStatus()));
-	connect(ui->smartDatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
+	connect(ui->smartDatesRadio,  SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
+	connect(ui->customDateRadio,  SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
 	connect(ui->firstOfMonthOnlyCheckBox, SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
 	connect(ui->antiClutterCheckBox, SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
 
 	connectBoolProperty(ui->skipDataCheckBox,	"SolarSystem.ephemerisSkippedData");
 	connectBoolProperty(ui->skipMarkersCheckBox,	"SolarSystem.ephemerisSkippedMarkers");
 	connectIntProperty(ui->dataStepSpinBox,		"SolarSystem.ephemerisDataStep");
-	connectBoolProperty(ui->smartDatesCheckBox,	"SolarSystem.ephemerisSmartDates");
+	// Date format radio buttons — QRadioButton inherits QAbstractButton, so
+	// connectBoolProperty works directly. smartDatesRadio maps to the smart-dates
+	// property (true = smart on); customDateRadio is the logical inverse and is
+	// driven automatically by Qt's radio-button exclusivity within the group box.
+	connectBoolProperty(ui->smartDatesRadio, "SolarSystem.ephemerisSmartDates");
 	connectBoolProperty(ui->scaleMarkersCheckBox,	"SolarSystem.ephemerisScaleMarkersDisplayed");
 	connectBoolProperty(ui->alwaysOnCheckBox,	"SolarSystem.ephemerisAlwaysOn");
 	connectBoolProperty(ui->currentLocationCheckBox,"SolarSystem.ephemerisNow" );
@@ -113,10 +118,16 @@ void AstroCalcExtraEphemerisDialog::setOptionStatus()
 {
 	ui->skipMarkersCheckBox->setEnabled(ui->skipDataCheckBox->isChecked());
 
-	// When "smart dates" is on, the per-component checkboxes are not used
-	const bool smartDates = ui->smartDatesCheckBox->isChecked();
+	// When "smart dates" radio is on, the per-component checkboxes are not used
+	const bool smartDates = ui->smartDatesRadio->isChecked();
 	const bool firstOfMonth = ui->firstOfMonthOnlyCheckBox->isChecked();
-	ui->labelComponentsGroupBox->setEnabled(!smartDates && !firstOfMonth);
+	const bool enableComponents = !smartDates && !firstOfMonth;
+	ui->labelYearCheckBox->setEnabled(enableComponents);
+	ui->labelMonthCheckBox->setEnabled(enableComponents);
+	ui->labelDayCheckBox->setEnabled(enableComponents);
+	ui->labelHourCheckBox->setEnabled(enableComponents);
+	ui->labelMinuteCheckBox->setEnabled(enableComponents);
+	ui->labelSecondCheckBox->setEnabled(enableComponents);
 
 	// Anti-clutter spinbox enabled only when anti-clutter checkbox is checked
 	ui->antiClutterSpinBox->setEnabled(ui->antiClutterCheckBox->isChecked());
