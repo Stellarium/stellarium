@@ -51,9 +51,13 @@ class KeypressFilter : public QObject {
 public:
 	KeypressFilter(QEventLoop* l) : loop(l) {}
 	bool eventFilter(QObject* obj, QEvent* event) override {
-		if (event->type() == QEvent::KeyPress) {
-			loop->quit();
-			return true;
+		if(event->type() == QEvent::KeyPress) {
+			QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+			if (!keyEvent->isAutoRepeat()) {
+				loop->quit();
+				keyEvent->accept();
+				return true;
+			}
 		}
 		return QObject::eventFilter(obj, event);
 	}
