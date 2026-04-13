@@ -1360,15 +1360,18 @@ Note: The ephemeris is computed with the current settings for atmosphere, topoce
 In consequence, e.g.\ magnitudes may be affected by atmospheric absorption and may show unexpected values. 
 Remember to switch off atmosphere etc.\ to create extinction free geocentric mean positions as found in almanachs.
 
-Two time steps \newFeature{26.2} require a bit of care to display well. The \emph{Sun at altitude} displays
-an object's position when the Sun is at a specific altitude relative to the horizon (only values $ \le 0^\circ$ are valid).
-The value can be changed in the \guibutton[0.6]{0.1}{uibtSettings.png}~\emph{Extra options} window (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:SunAtAltitude}).
+Two time steps \newFeature{26.2} require a bit of care to display well. The \emph{Sun at preset altitude} displays
+an object's position when the Sun is at a specific altitude relative to the horizon. Once selected from the list of time steps, 
+the \guibutton[0.6]{0.1}{uibtSettings.png}~\emph{Custom interval} window is enabled, and a preset solar altitude can be selected 
+(only values $ \le 0^\circ$ are valid), and the ephemeris is computed accordingly. If the Sun never reaches the altitude selected,
+during the specified interval, e.g. $ -12^\circ$ during Scandinavian summer solstice, no marker is drawn. 
+(Fig.~\ref{fig:gui:AstroCalc:Ephemeris:SunAtAltitude}).
 Using it as intended requires the ephemeris to be drawn in horizontal coordinates!
 
-The other time step that requires some care is the \emph{Planet at opposition}. This is useful for displaying where
+The other time step that requires some care is the \emph{Opposition of planet}. This is useful for displaying where
 and when a planet will be at its opposition for a given year in relation to background stars. For it to make sense, 
-the planet in question needs to be selected both in the ephemeris list and in the \emph{Extra options} window 
-(under the title ``Opposition of planet'', Fig.~\ref{fig:gui:AstroCalc:Ephemeris:PlanetOpposition}).
+the planet in question needs to be selected both in the ephemeris list and in the \emph{Custom interval} window 
+Fig.~\ref{fig:gui:AstroCalc:Ephemeris:PlanetOpposition}.
 
 It is only applicable for the outer planets, i.e. Mars through Neptune. The computation is quite intense, so showing 
 e.g. Neptune oppositions throughout its 165 year orbit might take a while if you're on a weak system.
