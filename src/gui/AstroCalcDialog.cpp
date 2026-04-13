@@ -5300,13 +5300,16 @@ void AstroCalcDialog::saveEphemerisFlagNakedEyePlanets(bool flag)
 
 void AstroCalcDialog::enableCustomEphemerisTimeStepButton()
 {
-	// The Custom Interval dialog is always accessible so users can pre-configure
-	// the time step, sun altitude, and opposition planet before selecting those modes.
-	ui->pushButtonCustomStepsDialog->setEnabled(true);
+	// Enable the dialog button only for the three steps that have configurable options.
+	const int stepId = ui->ephemerisStepComboBox->currentData(Qt::UserRole).toInt();
+	const bool configurable = (stepId == 0   // custom interval
+	                        || stepId == 41  // Sun at altitude
+	                        || stepId == 42); // Opposition of planet
+	ui->pushButtonCustomStepsDialog->setEnabled(configurable);
 
 	// Keep the dialog in sync if it is already open
 	if (customStepsDialog != nullptr && customStepsDialog->visible())
-		customStepsDialog->setActiveTimeStep(ui->ephemerisStepComboBox->currentData(Qt::UserRole).toInt());
+		customStepsDialog->setActiveTimeStep(stepId);
 }
 
 void AstroCalcDialog::enableEphemerisButtons(bool enable)
