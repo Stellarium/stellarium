@@ -84,33 +84,6 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	// First-of-month-only
 	connectBoolProperty(ui->firstOfMonthOnlyCheckBox, "SolarSystem.ephemerisFirstOfMonthOnly");
 
-	// Sun at altitude settings (stored directly in conf, read by AstroCalcDialog::generateEphemeris)
-	// Save defaults to conf immediately so generateEphemeris() can read them even if user doesn't touch the spinbox
-	const double savedAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
-	ui->sunAltitudeSpinBox->setValue(savedAlt);
-	conf->setValue("astrocalc/ephemeris_sun_altitude", savedAlt);
-
-	// Populate the crossing combobox: 0 = Evening, 1 = Morning
-	ui->sunAltCrossingComboBox->addItem(q_("Evening"), 0);
-	ui->sunAltCrossingComboBox->addItem(q_("Morning"), 1);
-	const int savedCrossing = conf->value("astrocalc/ephemeris_sun_altitude_evening", 0).toInt();
-	ui->sunAltCrossingComboBox->setCurrentIndex(savedCrossing);
-	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", savedCrossing);
-	connect(ui->sunAltitudeSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveSunAltitude(double)));
-	connect(ui->sunAltCrossingComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveSunAltitudeCrossing(int)));
-
-	// Opposition planet combobox
-	ui->oppositionPlanetComboBox->addItem(q_("Mars"),    "Mars");
-	ui->oppositionPlanetComboBox->addItem(q_("Jupiter"), "Jupiter");
-	ui->oppositionPlanetComboBox->addItem(q_("Saturn"),  "Saturn");
-	ui->oppositionPlanetComboBox->addItem(q_("Uranus"),  "Uranus");
-	ui->oppositionPlanetComboBox->addItem(q_("Neptune"), "Neptune");
-	const QString savedOppPlanet = conf->value("astrocalc/ephemeris_opposition_planet", "Mars").toString();
-	int oppIdx = ui->oppositionPlanetComboBox->findData(savedOppPlanet);
-	if (oppIdx < 0) oppIdx = 0;
-	ui->oppositionPlanetComboBox->setCurrentIndex(oppIdx);
-	connect(ui->oppositionPlanetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveOppositionPlanet(int)));
-
 	setOptionStatus();
 }
 
@@ -133,18 +106,4 @@ void AstroCalcExtraEphemerisDialog::setOptionStatus()
 	ui->antiClutterSpinBox->setEnabled(ui->antiClutterCheckBox->isChecked());
 }
 
-void AstroCalcExtraEphemerisDialog::saveSunAltitude(double alt)
-{
-	conf->setValue("astrocalc/ephemeris_sun_altitude", alt);
-}
-
-void AstroCalcExtraEphemerisDialog::saveSunAltitudeCrossing(int index)
-{
-	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", index);
-}
-
-void AstroCalcExtraEphemerisDialog::saveOppositionPlanet(int index)
-{
-	conf->setValue("astrocalc/ephemeris_opposition_planet",
-	               ui->oppositionPlanetComboBox->itemData(index).toString());
-}
+// (Sun altitude crossing and opposition planet are now handled by AstroCalcCustomStepsDialog)

@@ -22,6 +22,7 @@
 #include "StelDialog.hpp"
 
 #include <QObject>
+#include <QSettings>
 
 class Ui_astroCalcCustomStepsDialogForm;
 
@@ -40,6 +41,15 @@ public slots:
 	void populateUnitMeasurementsList();
 	void saveTimeStep(double value);
 	void saveUnitMeasurement(int index);
+	void saveSunAltitude(double alt);
+	void saveSunAltitudeCrossing(int index);
+	void saveOppositionPlanet(int index);
+
+	//! Show or hide the Sun-at-altitude / Opposition group boxes depending on
+	//! which time step is currently selected in the main ephemeris combo box.
+	//! Call this from AstroCalcDialog whenever the step selection changes, and
+	//! also just before making the dialog visible.
+	void setActiveTimeStep(int stepId);
 
 private:
 	QSettings* conf;
