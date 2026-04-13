@@ -2004,7 +2004,7 @@ void AstroCalcDialog::generateEphemeris()
 	firstJD -= core->getUTCOffset(firstJD) / 24.;
 	double secondJD = firstJD + ui->dateToDurationSpinBox->value()*getEphemerisTimeDuration();
 
-	// Detect "Sun at altitude" mode
+	// Detect "Sun at preset altitude" mode
 	const bool sunAtAltitudeMode = (ui->ephemerisStepComboBox->currentData().toInt() == EphemerisTimeStepSunAtAltitude);
 	double sunTargetAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
 	// Crossing: 0 = evening (default), 1 = morning
@@ -5196,7 +5196,7 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 		{q_("30 Julian days"), "16"}, {q_("60 Julian days"), "17"}, {q_("100 Julian days"), "26"}, {q_("1 Julian year"), "28"},
 		{q_("1 Gaussian year"), "29"}, {q_("1 synodic month"), "30"}, {q_("1 draconic month"), "31"}, {q_("1 mean tropical month"), "32"},
 		{q_("1 anomalistic month"), "33"} ,{q_("1 anomalistic year"), "34"}, {q_("1 saros"), "35"}, {q_("custom interval"), "0"},
-		{q_("Sun at altitude"), "41"},
+		{q_("Sun at preset altitude"), "41"},
 		{q_("Opposition of planet"), "42"}
 	};
 	Q_ASSERT(ui->ephemerisStepComboBox);
@@ -5303,7 +5303,7 @@ void AstroCalcDialog::enableCustomEphemerisTimeStepButton()
 	// Enable the dialog button only for the three steps that have configurable options.
 	const int stepId = ui->ephemerisStepComboBox->currentData(Qt::UserRole).toInt();
 	const bool configurable = (stepId == 0   // custom interval
-	                        || stepId == 41  // Sun at altitude
+	                        || stepId == 41  // Sun at preset altitude
 	                        || stepId == 42); // Opposition of planet
 	ui->pushButtonCustomStepsDialog->setEnabled(configurable);
 
