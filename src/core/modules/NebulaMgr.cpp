@@ -52,7 +52,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-const QString NebulaMgr::StellariumDSOCatalogVersion = QStringLiteral("3.22");
+const QString NebulaMgr::StellariumDSOCatalogVersion = QStringLiteral("3.23");
 
 namespace
 {
@@ -2206,7 +2206,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("M %1").arg(n->M_nb);
@@ -2227,7 +2227,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws2 = QString("Melotte%1").arg(n->Mel_nb).mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Mel %1").arg(n->Mel_nb);
@@ -2248,7 +2248,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("IC %1").arg(n->IC_nb);
@@ -2266,7 +2266,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 		QString constws = constw.mid(0, objUpper.size());
 		if (constws.toUpper()==objUpper)
 		{
-			result.append({constws, StelObjectP(n)});
+			result.append({constw, StelObjectP(n)});
 			continue;
 		}
 		constw = QString("NGC %1").arg(n->NGC_nb);
@@ -2285,7 +2285,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});	// Prevent adding both forms for name
+				result.append({constw, StelObjectP(n)});	// Prevent adding both forms for name
 				continue;
 			}
 			constw = QString("PGC %1").arg(n->PGC_nb);
@@ -2305,7 +2305,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("UGC %1").arg(n->UGC_nb);
@@ -2325,7 +2325,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("C %1").arg(n->C_nb);
@@ -2346,7 +2346,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws2 = QString("Collinder%1").arg(n->Cr_nb).mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Cr %1").arg(n->Cr_nb);
@@ -2367,7 +2367,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Ced %1").arg(n->Ced_nb);
@@ -2387,7 +2387,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("B %1").arg(n->B_nb);
@@ -2407,7 +2407,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("SH 2-%1").arg(n->Sh2_nb);
@@ -2427,7 +2427,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("vdB %1").arg(n->VdB_nb);
@@ -2447,7 +2447,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("RCW %1").arg(n->RCW_nb);
@@ -2467,7 +2467,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("LDN %1").arg(n->LDN_nb);
@@ -2487,7 +2487,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("LBN %1").arg(n->LBN_nb);
@@ -2507,7 +2507,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Arp %1").arg(n->Arp_nb);
@@ -2527,7 +2527,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("VV %1").arg(n->VV_nb);
@@ -2547,7 +2547,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("PK %1").arg(n->PK_nb);
@@ -2567,7 +2567,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("PN G%1").arg(n->PNG_nb);
@@ -2587,7 +2587,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("SNR G%1").arg(n->SNRG_nb);
@@ -2608,7 +2608,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws2 = QString("ACO%1").arg(n->ACO_nb).mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Abell %1").arg(n->ACO_nb);
@@ -2629,7 +2629,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("HCG %1").arg(n->HCG_nb);
@@ -2649,7 +2649,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("ESO %1").arg(n->ESO_nb);
@@ -2669,7 +2669,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("vdBH %1").arg(n->VdBH_nb);
@@ -2689,7 +2689,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("DWB %1").arg(n->DWB_nb);
@@ -2710,7 +2710,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws2 = QString("Trumpler%1").arg(n->Tr_nb).mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Tr %1").arg(n->Tr_nb);
@@ -2732,7 +2732,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws2 = QString("Stock%1").arg(n->St_nb).mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("St %1").arg(n->St_nb);
@@ -2754,7 +2754,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws2 = QString("Ruprecht%1").arg(n->Ru_nb).mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Ru %1").arg(n->Ru_nb);
@@ -2775,7 +2775,7 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listMatchingObjects(const QString
 			QString constws = constw.mid(0, objUpper.size());
 			if (constws.toUpper()==objUpper)
 			{
-				result.append({constws, StelObjectP(n)});
+				result.append({constw, StelObjectP(n)});
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("vdB-Ha %1").arg(n->VdBHa_nb);
