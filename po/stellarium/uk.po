@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-04-14 18:33+0700\n"
+"POT-Creation-Date: 2026-04-14 23:00+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -9638,11 +9638,11 @@ msgstr "1 сарос"
 msgid "custom interval"
 msgstr "нетиповий інтервал"
 
-#: src/gui/AstroCalcDialog.cpp:5199 src/ui_astroCalcCustomStepsDialog.h:210
+#: src/gui/AstroCalcDialog.cpp:5199 src/ui_astroCalcCustomStepsDialog.h:212
 msgid "Sun at preset altitude"
 msgstr "Сонце на попередньо встановленій висоті"
 
-#: src/gui/AstroCalcDialog.cpp:5200 src/ui_astroCalcCustomStepsDialog.h:214
+#: src/gui/AstroCalcDialog.cpp:5200 src/ui_astroCalcCustomStepsDialog.h:215
 msgid "Opposition of planet"
 msgstr "Протистояння планети"
 
@@ -15091,7 +15091,7 @@ msgstr "Автовибір ландшафтів"
 msgid "New Location"
 msgstr "Нове розташування"
 
-#: src/ui_locationDialogGui.h:448 src/ui_astroCalcCustomStepsDialog.h:215
+#: src/ui_locationDialogGui.h:448 src/ui_astroCalcCustomStepsDialog.h:216
 msgid "Planet:"
 msgstr "Планета:"
 
@@ -18478,11 +18478,11 @@ msgstr "хвилини"
 msgid "to the next"
 msgstr "до наступного"
 
-#: src/ui_astroCalcDialog.h:2432 src/ui_astroCalcCustomStepsDialog.h:208
+#: src/ui_astroCalcDialog.h:2432 src/ui_astroCalcCustomStepsDialog.h:210
 msgid "Time step:"
 msgstr "Крок часу:"
 
-#: src/ui_astroCalcDialog.h:2434 src/ui_astroCalcCustomStepsDialog.h:207
+#: src/ui_astroCalcDialog.h:2434 src/ui_astroCalcCustomStepsDialog.h:209
 msgid "Custom time step for ephemeris visualization"
 msgstr "Нетиповий крок за часом для візуалізації ефемерид"
 
@@ -18898,24 +18898,20 @@ msgstr "Секунда"
 msgid "Smart format"
 msgstr "Розумний формат"
 
-#: src/ui_astroCalcCustomStepsDialog.h:206
+#: src/ui_astroCalcCustomStepsDialog.h:208
 msgid "Custom interval"
 msgstr "Нетиповий інтервал"
 
-#: src/ui_astroCalcCustomStepsDialog.h:209
+#: src/ui_astroCalcCustomStepsDialog.h:211
 msgid "Unit of measurement:"
 msgstr "Одиниця виміру:"
 
-#: src/ui_astroCalcCustomStepsDialog.h:211
+#: src/ui_astroCalcCustomStepsDialog.h:213
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1210
 msgid "Solar altitude:"
 msgstr "Сонячна висота:"
 
-#: src/ui_astroCalcCustomStepsDialog.h:212
-msgid "°"
-msgstr "°"
-
-#: src/ui_astroCalcCustomStepsDialog.h:213
+#: src/ui_astroCalcCustomStepsDialog.h:214
 msgid "Twilight:"
 msgstr "Сутінки:"
 
@@ -33140,12 +33136,12 @@ msgstr ""
 "чи ресурсам, у яких ви брали інтерв'ю, які вам допомогли?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:848
-msgid "start Time"
-msgstr "час початку"
+msgid "Start Time"
+msgstr "Час початку"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:849
-msgid "end Time"
-msgstr "час завершення"
+msgid "End Time"
+msgstr "Час завершення"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:852
 msgid "Number of digitized polygons:"
