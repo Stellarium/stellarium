@@ -160,7 +160,10 @@
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
           <property name="suffix">
-           <string>°</string>
+           <string notr="true">°</string>
+          </property>
+          <property name="decimals">
+           <number>1</number>
           </property>
           <property name="minimum">
            <double>-90.000000000000000</double>
