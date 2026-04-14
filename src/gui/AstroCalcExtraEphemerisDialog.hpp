@@ -22,6 +22,7 @@
 #include "StelDialog.hpp"
 
 #include <QObject>
+#include <QSettings>
 
 class Ui_astroCalcExtraEphemerisDialogForm;
 
@@ -44,6 +45,9 @@ protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_astroCalcExtraEphemerisDialogForm *ui;
+
+private:
+	QSettings* conf;
 };
 
 #endif // ASTROCALCEXTRAEPHEMERISDIALOG_HPP
