@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QTimer>
 #include <QEventLoop>
+#include <QKeyEvent>
 #include <QMap>
 #include <QPair>
 #include <QSet>
