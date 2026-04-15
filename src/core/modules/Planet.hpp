@@ -740,6 +740,13 @@ protected:
 
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
+	struct StelPainterLight
+	{
+		Vec3d position;
+		Vec3f diffuse;
+		Vec3f ambient;
+	};
+
 	//! Used in drawSphere() to compute shadows, and inside a function to derive eclipse sizes.
 	//! @param solarEclipseCase For reasons currently unknown we must handle solar eclipses as special case.
 	void computeModelMatrix(Mat4d &result, bool solarEclipseCase) const;
@@ -762,19 +769,19 @@ protected:
 	//! Draws the OBJ model, assuming it is available
 	//! @param screenRd radius in screen pixels.
 	//! @return false if the model can currently not be drawn (not loaded)
-	bool drawObjModel(StelPainter* painter, float screenRd);
+	bool drawObjModel(const StelPainterLight& light, StelPainter* painter, float screenRd);
 
-	bool drawObjShadowMap(StelPainter* painter, QMatrix4x4 &shadowMatrix);
+	bool drawObjShadowMap(const Vec3d& lightPosition, StelPainter *painter, QMatrix4x4& shadowMatrix);
 
 	//! Starts the OBJ loading process, if it has not been done yet.
 	//! Returns true when the OBJ is ready to draw
 	bool ensureObjLoaded();
 
 	//! Draw the 3D sphere
-	void drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing=false);
+	void drawSphere(const StelPainterLight& light, StelPainter* painter, float screenRd, bool drawOnlyRing=false);
 
 	//! Draw the Hips survey.
-	void drawSurvey(StelCore* core, StelPainter* painter);
+	void drawSurvey(const StelPainterLight& light, StelCore* core, StelPainter* painter);
 
 	//! Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, StelPainter &sPainter, const QFont& planetNameFont);
@@ -960,8 +967,8 @@ private:
 	};
 
 	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
-	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader,
-	                                   const PlanetShaderVars& shaderVars, bool hasNormalMap, bool hasHorizonMap);
+	RenderData setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars,
+	                                   const StelPainterLight& light, bool hasNormalMap, bool hasHorizonMap);
 
 	static PlanetShaderVars planetShaderVars;
 	static QOpenGLShaderProgram* planetShaderProgram;

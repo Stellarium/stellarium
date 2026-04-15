@@ -60,6 +60,35 @@ void AstroCalcCustomStepsDialog::createDialogContent()
 
 	populateUnitMeasurementsList();
 	connect(ui->unitMeasurementComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveUnitMeasurement(int)));
+
+	// Sun at altitude settings
+	const double savedAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
+	ui->sunAltitudeSpinBox->setValue(savedAlt);
+	conf->setValue("astrocalc/ephemeris_sun_altitude", savedAlt);
+
+	ui->sunAltCrossingComboBox->addItem(q_("Evening"), 0);
+	ui->sunAltCrossingComboBox->addItem(q_("Morning"), 1);
+	const int savedCrossing = conf->value("astrocalc/ephemeris_sun_altitude_evening", 0).toInt();
+	ui->sunAltCrossingComboBox->setCurrentIndex(savedCrossing);
+	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", savedCrossing);
+	connect(ui->sunAltitudeSpinBox,    SIGNAL(valueChanged(double)), this, SLOT(saveSunAltitude(double)));
+	connect(ui->sunAltCrossingComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveSunAltitudeCrossing(int)));
+
+	// Opposition planet settings
+	ui->oppositionPlanetComboBox->addItem(q_("Mars"),    "Mars");
+	ui->oppositionPlanetComboBox->addItem(q_("Jupiter"), "Jupiter");
+	ui->oppositionPlanetComboBox->addItem(q_("Saturn"),  "Saturn");
+	ui->oppositionPlanetComboBox->addItem(q_("Uranus"),  "Uranus");
+	ui->oppositionPlanetComboBox->addItem(q_("Neptune"), "Neptune");
+	const QString savedOppPlanet = conf->value("astrocalc/ephemeris_opposition_planet", "Mars").toString();
+	int oppIdx = ui->oppositionPlanetComboBox->findData(savedOppPlanet);
+	if (oppIdx < 0) oppIdx = 0;
+	ui->oppositionPlanetComboBox->setCurrentIndex(oppIdx);
+	connect(ui->oppositionPlanetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveOppositionPlanet(int)));
+
+	// Both conditional group boxes start hidden; caller must invoke setActiveTimeStep()
+	ui->sunAtAltitudeGroupBox->setVisible(false);
+	ui->oppositionGroupBox->setVisible(false);
 }
 
 void AstroCalcCustomStepsDialog::populateUnitMeasurementsList()
@@ -110,4 +139,41 @@ void AstroCalcCustomStepsDialog::saveUnitMeasurement(int index)
 void AstroCalcCustomStepsDialog::saveTimeStep(double value)
 {
 	conf->setValue("astrocalc/custom_time_step", value);
+}
+
+void AstroCalcCustomStepsDialog::saveSunAltitude(double alt)
+{
+	conf->setValue("astrocalc/ephemeris_sun_altitude", alt);
+}
+
+void AstroCalcCustomStepsDialog::saveSunAltitudeCrossing(int index)
+{
+	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", index);
+}
+
+void AstroCalcCustomStepsDialog::saveOppositionPlanet(int index)
+{
+	conf->setValue("astrocalc/ephemeris_opposition_planet",
+	               ui->oppositionPlanetComboBox->itemData(index).toString());
+}
+
+void AstroCalcCustomStepsDialog::setActiveTimeStep(int stepId)
+{
+	// May be called before createDialogContent() if the dialog hasn't been shown yet
+	if (!ui || !dialog)
+		return;
+
+	// Show only the group box that is relevant for the current time step.
+	// Both are hidden for every other step so the dialog stays compact.
+	const bool isSunAlt     = (stepId == 41); // EphemerisTimeStepSunAtAltitude
+	const bool isOpposition = (stepId == 42); // EphemerisTimeStepOpposition
+	const bool isCustom     = (stepId == 0);  // custom interval
+
+	ui->customStepsGroupBox->setVisible(isCustom);
+	ui->sunAtAltitudeGroupBox->setVisible(isSunAlt);
+	ui->oppositionGroupBox->setVisible(isOpposition);
+
+	// Resize the dialog to fit only the visible content
+	if (dialog)
+		dialog->adjustSize();
 }

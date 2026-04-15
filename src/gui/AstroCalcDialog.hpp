@@ -276,6 +276,11 @@ public:
 		Years	= 6
 	};
 
+	//! Special time step mode: place markers at the moment when the Sun reaches a given altitude each day
+	static constexpr int EphemerisTimeStepSunAtAltitude = 41;
+	//! Special time step mode: place markers at each opposition of a selected outer planet
+	static constexpr int EphemerisTimeStepOpposition = 42;
+
 	AstroCalcDialog(QObject* parent);
 	~AstroCalcDialog() override;
 
@@ -607,6 +612,24 @@ private:
 	void enableCustomEphemerisTimeStepButton();
 	double getCustomTimeStep();
 	void reGenerateEphemeris(bool withSelection);
+
+	//! Find the JD at which the Sun reaches a given altitude (degrees) on a given day.
+	//! Uses bisection on the Sun's altitude in the local frame.
+	//! @param dayJD the Julian Date of the start of the day (0h UT)
+	//! @param targetAltDeg the target Sun altitude in degrees (typically negative)
+	//! @param evening if true, search the evening crossing; if false, the morning crossing
+	//! @param[out] resultJD the JD at which the Sun reaches targetAltDeg
+	//! @return true if a solution was found, false if the Sun never reaches the target altitude
+	bool findSunAtAltitude(double dayJD, double targetAltDeg, bool evening, double &resultJD);
+
+	//! Find the next opposition of a given outer planet after startJD.
+	//! Opposition is when the Sun-planet angular separation reaches 180° (minimising π − angle).
+	//! @param planet the outer planet (Mars, Jupiter, Saturn, Uranus, Neptune)
+	//! @param startJD Julian Date to start searching from
+	//! @param endJD Julian Date to stop searching at
+	//! @param[out] resultJD the JD of the opposition
+	//! @return true if an opposition was found in the range, false otherwise
+	bool findNextOpposition(const PlanetP &planet, double startJD, double endJD, double &resultJD);
 
 	//! Finding and selecting an object by its name in specific JD
 	void goToObject(const QString &name, const double JD);
