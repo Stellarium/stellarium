@@ -2229,9 +2229,10 @@ double getDeltaTByJPLHorizons(const double jDay)
 	// In this second time range from 721BC to 1962-01-20 the algorithm is based
 	// on the cubic spline polynomials as given by Stephenson, Morrison, Hohenkerk & Zawilski (2020).
 	// JD_UT >= 1458077.5 or 721BC-01-01 00:00
-	// JD_UT <  2437684.5 or  1962-01-20 00:00
+	// JD_UT <  2437684.0 or  1962-01-19 12:00 <-- See note below dated 2026-Apr-15
 	// deltaT values correspond to DeltaT = TDB - UT1 in this time range.
-	else if (1458077.5 <= jDay && jDay < 2437684.5)
+	// (SS) 2026-Apr-15 Change upper limit from 2437684.5 to 2437684.0 to be consistent with JPL Horizons app.
+	else if (1458077.5 <= jDay && jDay < 2437684.0) 
 	{
 		int i = 0;
 		while (StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[i][1] < y)	i++;
@@ -2278,7 +2279,8 @@ double getDeltaTByJPLHorizons(const double jDay)
 	// TDB - UT1 we need to subtract DUT1 = (UT1 - UTC). The DUT1 values are typically provided by
 	// IERS bulletins and is of the order of +/- one second. JPL Horizons app do not
 	// apply this correction, and we won't do it here neither.
-	else if (2437684.5 <= jDay && jDay <= 5373482.5)
+	// (SS) 2026-Apr-15 Change lower limit from 2437684.5 to 2437684.0 to be consistent with JPL Horizons app.
+	else if (2437684.0 <= jDay && jDay <= 5373482.5)
 	{
 		const int TTmTDB_id = 17; // TT - TDB (JPL ID)
 		double xyz[6];
