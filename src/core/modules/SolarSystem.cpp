@@ -72,6 +72,10 @@
 #include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 #include <cmath>
 
 
@@ -765,6 +769,19 @@ void SolarSystem::loadPlanets()
 	for (const auto& planet : std::as_const(systemPlanets))
 		if(planet->parent != sun || !planet->satellites.isEmpty())
 			shadowPlanetCount++;
+
+	// Load extended multi-epoch asteroid ephemeris if available.
+	// The file is optional — if absent, all asteroids use their standard
+	// single-epoch KeplerOrbit from ssystem_minor.ini as normal, and the
+	// Solar System Editor plugin continues to work without any changes.
+	const QString ephemFile = StelFileMgr::findFile(
+	    "data/asteroid_ephemeris.json",
+	    static_cast<StelFileMgr::Flags>(StelFileMgr::File));
+	if (!ephemFile.isEmpty())
+		loadExtendedAsteroidEphemeris(ephemFile);
+	else
+		qInfo() << "ExtendedEphemeris: asteroid_ephemeris.json not found"
+		        << "— asteroids using standard single-epoch orbits.";
 }
 
 unsigned char SolarSystem::BvToColorIndex(double bV)
@@ -2869,6 +2886,17 @@ void SolarSystem::update(double deltaTime)
 	{
 		p->update(static_cast<int>(deltaTime*1000));
 	}
+
+	// Extended ephemeris: swap in interpolated KeplerOrbit when needed.
+	// Only acts on minor planets that have an epoch table loaded; the guard
+	// inside updateEpochOrbit() makes this negligible cost for the rest.
+	const double jde = StelApp::getInstance().getCore()->getJDE();
+	for (const auto& p : std::as_const(systemPlanets))
+	{
+		QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+		if (mp && mp->hasEpochElements())
+			mp->updateEpochOrbit(jde);
+	}
 	markerFader.update(deltaTime*1000);
 
 	// Dynamic Moon scaling: interpolate between 1× (at moonScaleMinFov) and moonScale (at moonScaleMaxFov).
@@ -4606,4 +4634,123 @@ void SolarSystem::enableSurvey(const HipsSurveyP& colors, const HipsSurveyP& nor
 	if (!pl) return;
 
 	pl->setSurvey(colors, normals, horizons);
+}
+
+// Extended asteroid ephemeris loader
+
+bool SolarSystem::loadExtendedAsteroidEphemeris(const QString& filePath)
+{
+	QFile file(filePath);
+	if (!file.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "ExtendedEphemeris: cannot open" << filePath;
+		return false;
+	}
+
+	QJsonParseError parseError;
+	const QJsonDocument doc = QJsonDocument::fromJson(file.readAll(), &parseError);
+	file.close();
+
+	if (doc.isNull())
+	{
+		qWarning() << "ExtendedEphemeris: JSON parse error in"
+		           << filePath << ":" << parseError.errorString();
+		return false;
+	}
+
+	const QJsonObject root = doc.object();
+
+	if (root.value("format").toString() != QLatin1String("stellarium_asteroid_ephemeris"))
+	{
+		qWarning() << "ExtendedEphemeris: unrecognised format in" << filePath;
+		return false;
+	}
+	if (root.value("version").toInt() != 1)
+	{
+		qWarning() << "ExtendedEphemeris: unsupported version in" << filePath;
+		return false;
+	}
+
+	const QJsonArray asteroids = root.value("asteroids").toArray();
+	if (asteroids.isEmpty())
+	{
+		qWarning() << "ExtendedEphemeris: no asteroids array in" << filePath;
+		return false;
+	}
+
+	// Pre-build a lookup map: bare english name -> MinorPlanet pointer.
+	// Stellarium stores names as e.g. "Ceres", "Pallas" — without number or
+	// IAU designation.  The JSON has "1 Ceres (A801 AA)"; we strip both ends.
+	// We also map "N Name" (no designation) in case some entries differ.
+	static const QRegularExpression reName(
+	    R"(^\d+\s+(.+?)(?:\s+\([^)]+\))?\s*$)");
+
+	QHash<QString, QSharedPointer<MinorPlanet>> nameMap;
+	for (const auto& p : std::as_const(systemPlanets))
+	{
+		QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+		if (mp)
+			nameMap.insert(mp->getCommonEnglishName(), mp);
+	}
+
+	int loaded  = 0;
+	int skipped = 0;
+
+	for (const QJsonValue& val : asteroids)
+	{
+		const QJsonObject ast = val.toObject();
+
+		// Extract bare name from e.g. "1 Ceres (A801 AA)" -> "Ceres"
+		const QString fullName = ast.value("name").toString();
+		const QRegularExpressionMatch m = reName.match(fullName);
+		const QString bareName = m.hasMatch() ? m.captured(1) : fullName;
+
+		QSharedPointer<MinorPlanet> mp = nameMap.value(bareName);
+		if (!mp)
+		{
+			++skipped;
+			continue;
+		}
+
+		const QJsonArray epochArray = ast.value("epochs").toArray();
+		if (epochArray.isEmpty())
+			continue;
+
+		QVector<AsteroidEpochElements> elements;
+		elements.reserve(epochArray.size());
+
+		for (const QJsonValue& ev : epochArray)
+		{
+			const QJsonObject ep = ev.toObject();
+			AsteroidEpochElements e;
+			e.epochJDE           = ep.value("epoch_jde").toDouble();
+			e.pericenterDistance = ep.value("pericenter_distance").toDouble();
+			e.eccentricity       = ep.value("eccentricity").toDouble();
+			// JSON stores angles in degrees; KeplerOrbit wants radians
+			e.inclination        = ep.value("inclination").toDouble()      * M_PI / 180.0;
+			e.ascendingNode      = ep.value("ascending_node").toDouble()   * M_PI / 180.0;
+			e.argOfPericenter    = ep.value("arg_of_pericenter").toDouble()* M_PI / 180.0;
+			// Use mean_anomaly (degrees at epoch) rather than time_at_pericenter (JDE).
+			// Tp is ambiguous across multi-year brackets — it jumps by one full orbital
+			// period each time a perihelion passage falls between two epochs, making
+			// linear interpolation produce errors of many tens of degrees in position.
+			// MA has no such ambiguity; t0 is reconstructed inside interpolatedOrbit()
+			// as:  t0 = epochJDE - meanAnomalyAtEpoch / meanMotion
+			e.meanAnomalyAtEpoch = ep.value("mean_anomaly").toDouble()     * M_PI / 180.0;
+			// mean_motion in JSON is degrees/day; KeplerOrbit wants radians/day
+			e.meanMotion         = ep.value("mean_motion").toDouble()      * M_PI / 180.0;
+			elements.append(e);
+		}
+
+		// Sun-parented objects: all three VSOP87 rotation params are zero
+		mp->setEpochElements(elements, 0.0, 0.0, 0.0);
+		++loaded;
+	}
+
+	qInfo() << "ExtendedEphemeris: loaded epoch tables for"
+	        << loaded << "asteroids from"
+	        << QDir::toNativeSeparators(filePath)
+	        << "(" << skipped << "not matched in ssystem_minor.ini)";
+
+	return loaded > 0;
 }

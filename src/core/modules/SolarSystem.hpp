@@ -1169,6 +1169,12 @@ private:
 	//! Load planet data from the given file
 	bool loadPlanets(const QString& filePath);
 
+	//! Load multi-epoch orbital element tables from the extended asteroid
+	//! ephemeris pack (asteroid_ephemeris.json).  Called at the end of
+	//! loadPlanets() if the file exists in the user or installation data dir.
+	//! @returns true if at least one asteroid received an epoch table.
+	bool loadExtendedAsteroidEphemeris(const QString& filePath);
+
 	Vec3f getEphemerisMarkerColor(int index) const;
 
 	//! Calculate a color of Solar system bodies

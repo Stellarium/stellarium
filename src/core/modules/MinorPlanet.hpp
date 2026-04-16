@@ -22,6 +22,28 @@
 #define MINORPLANET_HPP
 
 #include "Planet.hpp"
+#include <QVector>
+
+//! One snapshot of Keplerian orbital elements at a specific epoch,
+//! used by the extended asteroid ephemeris pack.
+//! Angles are in radians, distances in AU, time in JDE.
+//!
+//! meanAnomalyAtEpoch is stored instead of timeAtPericenter (Tp) because
+//! Tp from JPL Horizons always refers to the nearest perihelion to the query
+//! date and is therefore not a stable value to store per-epoch.  We derive
+//! the equivalent t0 on demand as:
+//! t0 = epochJDE - meanAnomalyAtEpoch / meanMotion
+struct AsteroidEpochElements
+{
+	double epochJDE;            //!< JDE epoch of these elements
+	double pericenterDistance;  //!< AU
+	double eccentricity;
+	double inclination;         //!< radians
+	double ascendingNode;       //!< radians
+	double argOfPericenter;     //!< radians
+	double meanAnomalyAtEpoch;  //!< radians at epochJDE (replaces timeAtPericenter)
+	double meanMotion;          //!< radians/day
+};
 
 /*! \class MinorPlanet
 	\author Bogdan Marinov
@@ -121,6 +143,27 @@ public:
 	//! get sidereal period for minor planet
 	double getSiderealPeriod() const override;
 
+	// Multi-epoch ephemeris support
+
+	//! Load a table of orbital element snapshots from the extended ephemeris pack.
+	//! @param elements  Vector of epoch snapshots, must be sorted ascending by epochJDE.
+	//! @param parentRotObliquity      [radians] VSOP87 frame rotation parameter for the Sun.
+	//! @param parentRotAscendingNode  [radians]
+	//! @param parentRotJ2000Longitude [radians]
+	void setEpochElements(const QVector<AsteroidEpochElements>& elements,
+	                      double parentRotObliquity,
+	                      double parentRotAscendingNode,
+	                      double parentRotJ2000Longitude);
+
+	//! Returns true if this object has a multi-epoch ephemeris table loaded.
+	bool hasEpochElements() const { return !epochElements.isEmpty(); }
+
+	//! Update the active KeplerOrbit to the nearest epoch snapshot for @p jde.
+	//! A cheap guard prevents redundant rebuilds during normal playback.
+	//! Pass @p force = true to bypass the guard — used by AstroCalc so that
+	//! each ephemeris step gets the correct snapshot regardless of step size.
+	void updateEpochOrbit(double jde, bool force = false);
+
 protected:
 	// components for Planet::getInfoString() that are overridden here:
 	QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const override;
@@ -141,6 +184,24 @@ private:
 
 	float b_v;
 	QString specT, specB;
+
+	// Multi-epoch ephemeris
+
+	//! Epoch snapshots loaded from the ephemeris pack, sorted by epochJDE.
+	QVector<AsteroidEpochElements> epochElements;
+
+	//! VSOP87-frame rotation parameters, same for all epochs of this object.
+	double epochParentRotObliquity      = 0.0;
+	double epochParentRotAscendingNode  = 0.0;
+	double epochParentRotJ2000Longitude = 0.0;
+
+	//! JDE at the last updateEpochOrbit() call — used to skip redundant rebuilds.
+	double lastEpochUpdateJDE = -1e100;
+
+	//! The interpolated KeplerOrbit currently installed as the active orbit.
+	//! This object owns it; Planet::orbitPtr points at the same instance.
+	//! nullptr until the first updateEpochOrbit() call.
+	KeplerOrbit* activeEpochOrbit = nullptr;
 };
 
 #endif // MINORPLANET_HPP
