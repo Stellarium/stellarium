@@ -68,6 +68,16 @@ QString scm::ScmConstellation::getEnglishName() const
 	return englishName;
 }
 
+void scm::ScmConstellation::setByname(const std::optional<QString> &byname)
+{
+	scm::ScmConstellation::byname = byname;
+}
+
+std::optional<QString> scm::ScmConstellation::getByname() const
+{
+	return byname;
+}
+
 void scm::ScmConstellation::setNativeName(const std::optional<QString> &name)
 {
 	nativeName = name;
@@ -235,6 +245,10 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const boo
 	// Assemble common name object
 	QJsonObject commonNameObj;
 	commonNameObj["english"] = englishName;
+	if (byname.has_value())
+	{
+		commonNameObj["byname"] = byname.value();
+	}
 	if (nativeName.has_value())
 	{
 		commonNameObj["native"] = nativeName.value();

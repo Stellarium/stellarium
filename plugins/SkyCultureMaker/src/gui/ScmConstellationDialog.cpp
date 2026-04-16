@@ -75,6 +75,7 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	constellationId              = constellation->getId();
 	constellationEnglishName     = constellation->getEnglishName();
 	constellationPlaceholderId   = constellation->getId();
+	constellationByname 		 = constellation->getByname();
 	constellationNativeName      = constellation->getNativeName();
 	constellationPronounce       = constellation->getPronounce();
 	constellationTransliteration = constellation->getTransliteration();
@@ -83,6 +84,7 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 
 	ui->enNameLE->setText(constellationEnglishName);
 	ui->idLE->setText(constellationId);
+	ui->bynameLE->setText(constellationByname.value_or(""));
 	ui->natNameLE->setText(constellationNativeName.value_or(""));
 	ui->pronounceLE->setText(constellationPronounce.value_or(""));
 	ui->translitLE->setText(constellationTransliteration.value_or(""));
@@ -224,6 +226,15 @@ void ScmConstellationDialog::createDialogContent()
 			ui->idLE->setPlaceholderText(newConstId);
 		});
 	connect(ui->idLE, &QLineEdit::textChanged, this, [this]() { constellationId = ui->idLE->text(); });
+	connect(ui->bynameLE, &QLineEdit::textChanged, this,
+	        [this]()
+	        {
+			constellationByname = ui->bynameLE->text();
+			if (constellationByname->isEmpty())
+			{
+				constellationByname = std::nullopt;
+			}
+		});
 	connect(ui->natNameLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
@@ -522,6 +533,7 @@ void ScmConstellationDialog::saveConstellation()
 		                                                                 isDarkConstellation);
 
 		constellation.setEnglishName(constellationEnglishName);
+		constellation.setByname(constellationByname);
 		constellation.setNativeName(constellationNativeName);
 		constellation.setPronounce(constellationPronounce);
 		constellation.setTransliteration(constellationTransliteration);
@@ -563,6 +575,9 @@ void ScmConstellationDialog::resetDialog()
 
 	constellationEnglishName.clear();
 	ui->enNameLE->clear();
+
+	constellationByname = std::nullopt;
+	ui->bynameLE->clear();
 
 	constellationNativeName = std::nullopt;
 	ui->natNameLE->clear();

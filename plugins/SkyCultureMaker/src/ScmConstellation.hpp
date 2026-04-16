@@ -73,6 +73,20 @@ public:
 	QString getEnglishName() const;
 
 	/**
+	* @brief Sets the byname of the constellation
+	* 
+	* @param byname The byname
+	*/
+	void setByname(const std::optional<QString> &byname);
+
+	/**
+	 * @brief Gets the byname of the constellation
+	 * 
+	 * @return The byname
+	 */
+	std::optional<QString> getByname() const;
+
+	/**
     * @brief Sets the native name of the constellation
     * 
     * @param name The native name
@@ -234,13 +248,16 @@ private:
 	/// The english name
 	QString englishName;
 
+	/// The byname
+	std::optional<QString> byname;
+
 	/// The native name
 	std::optional<QString> nativeName;
 
 	/// Native name in European glyphs, if needed. For Chinese, expect Pinyin here.
 	std::optional<QString> pronounce;
 
-	/// The scientiﬁc Latin-character based transliteration.
+	/// The scientific Latin-character based transliteration.
 	std::optional<QString> transliteration;
 
 	/// The native name in IPA (International Phonetic Alphabet)
