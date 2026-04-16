@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>305</width>
-    <height>209</height>
+    <width>370</width>
+    <height>330</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -95,38 +95,67 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <widget class="QCheckBox" name="skipMarkersCheckBox">
+        <property name="text">
+         <string>Only draw labelled markers</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="firstOfMonthOnlyCheckBox">
+        <property name="text">
+         <string>Show only labels for 1st of each month</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="antiClutterLayout">
         <item>
-         <spacer name="horizontalSpacer_3">
+         <widget class="QCheckBox" name="antiClutterCheckBox">
+          <property name="text">
+           <string>Anti-clutter labels, min. distance</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="antiClutterSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>20</width>
+            <width>40</width>
             <height>20</height>
            </size>
           </property>
          </spacer>
         </item>
         <item>
-         <widget class="QCheckBox" name="skipMarkersCheckBox">
-          <property name="text">
-           <string>Skip draw the unlabelled markers also</string>
+         <widget class="QSpinBox" name="antiClutterSpinBox">
+          <property name="maximumSize">
+           <size>
+            <width>65</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="suffix">
+           <string comment="pixels">px</string>
+          </property>
+          <property name="minimum">
+           <number>5</number>
+          </property>
+          <property name="maximum">
+           <number>200</number>
+          </property>
+          <property name="value">
+           <number>20</number>
           </property>
          </widget>
         </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="smartDatesCheckBox">
-        <property name="text">
-         <string>Use smart format for dates</string>
-        </property>
-       </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="scaleMarkersCheckBox">
@@ -194,6 +223,100 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="dateFormatGroupBox">
+        <property name="title">
+         <string>Date format</string>
+        </property>
+        <layout class="QVBoxLayout" name="dateFormatVLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="customDateLayout">
+           <item>
+            <widget class="QRadioButton" name="customDateRadio">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="labelYearCheckBox">
+             <property name="text">
+              <string>Year</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="labelMonthCheckBox">
+             <property name="text">
+              <string>Month</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="labelDayCheckBox">
+             <property name="text">
+              <string>Day</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="labelHourCheckBox">
+             <property name="text">
+              <string>Hour</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="labelMinuteCheckBox">
+             <property name="text">
+              <string>Min</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="labelSecondCheckBox">
+             <property name="text">
+              <string>Sec</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="customDateSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="smartDatesRadio">
+           <property name="text">
+            <string>Smart format</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
       <item>
        <spacer name="verticalSpacer">

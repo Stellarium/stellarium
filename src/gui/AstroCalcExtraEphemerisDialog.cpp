@@ -20,10 +20,12 @@
 #include "ui_astroCalcExtraEphemerisDialog.h"
 
 #include "Dialog.hpp"
+#include "StelApp.hpp"
 
 AstroCalcExtraEphemerisDialog::AstroCalcExtraEphemerisDialog() : StelDialog("AstroCalcExtraEphemeris")
 {
 	ui = new Ui_astroCalcExtraEphemerisDialogForm;
+	conf = StelApp::getInstance().getSettings();
 }
 
 AstroCalcExtraEphemerisDialog::~AstroCalcExtraEphemerisDialog()
@@ -49,15 +51,38 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->skipDataCheckBox, SIGNAL(clicked()), this, SLOT(setOptionStatus()));
+	connect(ui->smartDatesRadio,  SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
+	connect(ui->customDateRadio,  SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
+	connect(ui->firstOfMonthOnlyCheckBox, SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
+	connect(ui->antiClutterCheckBox, SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
 
 	connectBoolProperty(ui->skipDataCheckBox,	"SolarSystem.ephemerisSkippedData");
 	connectBoolProperty(ui->skipMarkersCheckBox,	"SolarSystem.ephemerisSkippedMarkers");
 	connectIntProperty(ui->dataStepSpinBox,		"SolarSystem.ephemerisDataStep");
-	connectBoolProperty(ui->smartDatesCheckBox,	"SolarSystem.ephemerisSmartDates");
+	// Date format radio buttons — QRadioButton inherits QAbstractButton, so
+	// connectBoolProperty works directly. smartDatesRadio maps to the smart-dates
+	// property (true = smart on); customDateRadio is the logical inverse and is
+	// driven automatically by Qt's radio-button exclusivity within the group box.
+	connectBoolProperty(ui->smartDatesRadio, "SolarSystem.ephemerisSmartDates");
 	connectBoolProperty(ui->scaleMarkersCheckBox,	"SolarSystem.ephemerisScaleMarkersDisplayed");
 	connectBoolProperty(ui->alwaysOnCheckBox,	"SolarSystem.ephemerisAlwaysOn");
 	connectBoolProperty(ui->currentLocationCheckBox,"SolarSystem.ephemerisNow" );
 	connectIntProperty(ui->lineThicknessSpinBox,	"SolarSystem.ephemerisLineThickness");
+
+	// Label date component checkboxes
+	connectBoolProperty(ui->labelYearCheckBox,	"SolarSystem.ephemerisLabelYear");
+	connectBoolProperty(ui->labelMonthCheckBox,	"SolarSystem.ephemerisLabelMonth");
+	connectBoolProperty(ui->labelDayCheckBox,	"SolarSystem.ephemerisLabelDay");
+	connectBoolProperty(ui->labelHourCheckBox,	"SolarSystem.ephemerisLabelHour");
+	connectBoolProperty(ui->labelMinuteCheckBox,	"SolarSystem.ephemerisLabelMinute");
+	connectBoolProperty(ui->labelSecondCheckBox,	"SolarSystem.ephemerisLabelSecond");
+
+	// Anti-clutter
+	connectBoolProperty(ui->antiClutterCheckBox,	"SolarSystem.ephemerisLabelAntiClutter");
+	connectIntProperty(ui->antiClutterSpinBox,	"SolarSystem.ephemerisLabelAntiClutterPx");
+
+	// First-of-month-only
+	connectBoolProperty(ui->firstOfMonthOnlyCheckBox, "SolarSystem.ephemerisFirstOfMonthOnly");
 
 	setOptionStatus();
 }
@@ -65,4 +90,20 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 void AstroCalcExtraEphemerisDialog::setOptionStatus()
 {
 	ui->skipMarkersCheckBox->setEnabled(ui->skipDataCheckBox->isChecked());
+
+	// When "smart dates" radio is on, the per-component checkboxes are not used
+	const bool smartDates = ui->smartDatesRadio->isChecked();
+	const bool firstOfMonth = ui->firstOfMonthOnlyCheckBox->isChecked();
+	const bool enableComponents = !smartDates && !firstOfMonth;
+	ui->labelYearCheckBox->setEnabled(enableComponents);
+	ui->labelMonthCheckBox->setEnabled(enableComponents);
+	ui->labelDayCheckBox->setEnabled(enableComponents);
+	ui->labelHourCheckBox->setEnabled(enableComponents);
+	ui->labelMinuteCheckBox->setEnabled(enableComponents);
+	ui->labelSecondCheckBox->setEnabled(enableComponents);
+
+	// Anti-clutter spinbox enabled only when anti-clutter checkbox is checked
+	ui->antiClutterSpinBox->setEnabled(ui->antiClutterCheckBox->isChecked());
 }
+
+// (Sun altitude crossing and opposition planet are now handled by AstroCalcCustomStepsDialog)

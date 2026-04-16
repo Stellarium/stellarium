@@ -595,7 +595,7 @@ Vec3f Exoplanet::getInfoColor(void) const
 float Exoplanet::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core)
-	return (distributionMode ? 4.f : (isVMagnitudeDefined() ? static_cast<float>(Vmag) : 6.f));
+	return (isVMagnitudeDefined() ? static_cast<float>(Vmag) : 6.f);
 }
 
 bool Exoplanet::isVMagnitudeDefined() const
@@ -641,7 +641,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	const float mlimit = sd->getLimitMagnitude();
-	const float mag = getVMagnitudeWithExtinction(core);
+	const float mag = (distributionMode ? 4.f : getVMagnitudeWithExtinction(core));
 	const float shift = 8.f;
 
 	if (mag <= mlimit)
