@@ -18,6 +18,7 @@
 
 
 #include "OLE.hpp"
+#include "TelescopeControl.hpp"
 #include "ASCOMSupport.hpp"
 
 
@@ -53,7 +54,7 @@ bool ASCOMSupport::isASCOMSupported()
 
 int ASCOMSupport::getASCOMMajorVersion()
 {
-	#ifdef Q_OS_WIN
+#ifdef Q_OS_WIN
 
 	VARIANT v1;
 	HRESULT hResult;
@@ -65,26 +66,33 @@ int ASCOMSupport::getASCOMMajorVersion()
 
 	// OLE Problem
 	if (FAILED(hResult) || !initResult) {
+		qCCritical(Telescopes).nospace().noquote() << "ASCOM getASCOMMajorVersion(): initResult = " << initResult
+							   << ", hResult = 0x" << QString::number(unsigned(hResult), 16)
+							   << " = " << QString::number((hResult), 10);
+		qCCritical(Telescopes) << "Problem with ASCOM. Presumably not installed properly?";
 		return false;
 	}
 
 	hResult = OlePropertyGet(utilDispatch, &v1, const_cast<wchar_t*>(LPlatformVersion));
+	if (hResult != 0)
+		qCInfo(Telescopes) << "ASCOM platformversion call returns (0 = call successful)" << hResult;
 	QString version = QString::fromStdWString(v1.bstrVal);
-	QString majorVersion = "";
+	QString majorVersion;
 
 	static const QRegularExpression versionRx("^([^\\.]*)\\.([^\\.]*)$");
 	QRegularExpressionMatch versionMatch=versionRx.match(version);
 	if (versionMatch.hasMatch())
 	{
 		majorVersion = versionMatch.captured(1).trimmed();
+		qCInfo(Telescopes) << "ASCOM platformversion returns version" << version << ", major:" << majorVersion;
 		return majorVersion.toInt();
 	}
 
 	return 0;
 
-	#else // Q_OS_WIN
+#else // Q_OS_WIN
 	return 0;
-	#endif // Q_OS_WIN
+#endif // Q_OS_WIN
 }
 
 const wchar_t* ASCOMSupport::LPlatformVersion = L"PlatformVersion";

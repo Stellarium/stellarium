@@ -395,6 +395,26 @@ void HelpDialog::updateHelpText(void) const
 			htmlText += "<tr><td>" + q_("Activate TUI") + "</td>";
 			htmlText += "<td><b>" + hotkeyTextWrapper("Alt+T") + "</b></td></tr>\n";
 		}
+		else if (group.second=="Scenery3d: 3D landscapes") // 3D scenery movement keys that don't have actions
+		{
+#ifdef Q_OS_MACOS
+			const QString altitudeCombo = hotkeyTextWrapper("Alt+PgUp") + "/" + hotkeyTextWrapper("Alt+PgDown");
+			const QString movementCombo = q_("⌥+Arrow keys");
+			const QString baseMultiplier = "⌘";
+#else
+			const QString altitudeCombo = hotkeyTextWrapper("Ctrl+PgUp") + "/" + hotkeyTextWrapper("Ctrl+PgDown");
+			const QString movementCombo = q_("Ctrl+Arrow keys");
+			const QString baseMultiplier = "Alt";
+#endif
+			htmlText += "<tr><td>" + q_("Move camera forward/backward/left/right").toHtmlEscaped() + "</td>";
+			htmlText += "<td><b>" + movementCombo.toHtmlEscaped() + "</b></td></tr>\n";
+			htmlText += "<tr><td>" + q_("Speed up camera movement by 5×").toHtmlEscaped() + "</td>";
+			htmlText += "<td><b>" + baseMultiplier.toHtmlEscaped() + "</b></td></tr>\n";
+			htmlText += "<tr><td>" + q_("Speed up camera movement by 10×").toHtmlEscaped() + "</td>";
+			htmlText += "<td><b>" + q_("Shift").toHtmlEscaped() + "</b></td></tr>\n";
+			htmlText += "<tr><td>" + q_("Move camera up/down").toHtmlEscaped() + "</td>";
+			htmlText += "<td><b>" + altitudeCombo.toHtmlEscaped() + "</b></td></tr>\n";
+		}
 	}
 
 	htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
@@ -493,13 +513,14 @@ void HelpDialog::updateAboutText(void) const
 	typedef QPair<QString, int> donator;
 	QVector<donator> financialContributors = {
 	        // Individuals
-	        { "Daniel", 2400 }, { "Bryan", 1000 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 620 }, { "Jeff Moe", 512 },
-	        { "Peter Reigber", 400 }, { "Incognito", 345 }, { "Vernon Hermsen", 324 }, { "Michel Payette", 320 },  { "Incognito", 300 },
-	        { "James Lattis", 300 }, { "Walter Dörfler", 300 },  { "Raul Prisacariu", 310 }, { "Salvatore Ficicchia", 306 }, { "Satish Mallesh", 260 },
-	        { "Philippe Renoux", 250 },  { "Fito Martin", 250 }, { "SuEllen Shepard", 250 },  { "Vlad Magdalin", 250  },
+	        { "Daniel", 3100 }, { "Bryan", 1000 }, { "Laurence Holt", 1000 }, { "Marla Pinaire", 690 }, { "John Bellora", 670 }, { "Jeff Moe", 512 },
+	        { "Peter Reigber", 400 }, { "Incognito", 345 }, { "Salvatore Ficicchia", 341 }, { "Vernon Hermsen", 324 }, { "Michel Payette", 320 },  
+	        { "Raul Prisacariu", 310 }, { "Incognito", 300 },  { "James Lattis", 300 }, { "Walter Dörfler", 300 },  { "Satish Mallesh", 260 },
+	        { "Philippe Renoux", 250 },  { "Fito Martin", 250 }, { "SuEllen Shepard", 250 },  { "Vlad Magdalin", 250  }, { "Eric Laflamme", 250  },
+	        { "JF Coffin IV", 250  },
 	        // Organizations
-	        { "BairesDev", 14000 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 880 },
-	        { "SSSTwitter", 500 }, { "Triplebyte", 280 }
+	        { "BairesDev", 17000 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 950 },
+	        { "LITSLINK", 500 }, { "SSSTwitter", 500 }, { "Triplebyte", 280 }, { "Urania-Sternwarte", 270 }
 	};
 	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
 	QStringList bestFinancialContributors;

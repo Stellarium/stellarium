@@ -467,10 +467,15 @@ void ObsListDialog::loadSelectedList()
 
 	QVariantList listOfObjects;
 
+	// Display selected name in combo box
+	int index = ui->obsListComboBox->findData(selectedOlud);
+	ui->obsListComboBox->setCurrentIndex(index);
+
 	// Display description and creation date
 	currentListName=observingListMap.value(KEY_NAME).toString();
+	currentListDescription=observingListMap.value(KEY_DESCRIPTION).toString();
 	ui->listNameLineEdit->setText(currentListName);
-	ui->descriptionLineEdit->setText(observingListMap.value(KEY_DESCRIPTION).toString());
+	ui->descriptionLineEdit->setText(currentListDescription);
 	ui->creationDateLineEdit->setText(observingListMap.value(KEY_CREATION_DATE).toString());
 	ui->lastEditLineEdit->setText(observingListMap.value(KEY_LAST_EDIT, observingListMap.value(KEY_CREATION_DATE)).toString());
 
@@ -1307,9 +1312,13 @@ void ObsListDialog::removeObjectButtonPressed()
 {
 	Q_ASSERT(isEditMode);
 
-	int number = ui->treeView->currentIndex().row();
-	QString uuid = itemModel->index(number, ColumnUUID).data().toString();
-	itemModel->removeRow(number);
+	//Convert selected UI row (potentially sorted) into itemModel row (unsorted)
+	QModelIndex index = ui->treeView->currentIndex();
+	QSortFilterProxyModel* proxy = qobject_cast<QSortFilterProxyModel*>(ui->treeView->model());
+	int sourceRow = proxy ? proxy->mapToSource(index).row() : index.row();
+
+	QString uuid = itemModel->index(sourceRow, ColumnUUID).data().toString();
+	itemModel->removeRow(sourceRow);
 	currentItemCollection.remove(uuid);
 	tainted=true;
 }
@@ -1339,7 +1348,11 @@ void ObsListDialog::saveButtonPressed()
 		return;
 	}
 
-	// Last chance to detect any change: Just list name changed?
+	// Last chance to detect any change: Just list name or description changed?
+	QString listDescription = ui->descriptionLineEdit->text().trimmed();
+	if(currentListDescription!=listDescription)
+		tainted=true;
+
 	if (currentListName!=listName)
 		tainted=true;
 
@@ -1348,6 +1361,7 @@ void ObsListDialog::saveButtonPressed()
 
 	//OK, we save this and keep it as current list.
 	currentListName=listName;
+	currentListDescription=listDescription;
 
 	QFile jsonFile(observingListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text))
@@ -1505,7 +1519,7 @@ QVariantMap ObsListDialog::prepareCurrentList(QHash<QString, observingListItem> 
 	QVariantMap currentList = {
 		// Name, description, current date for the list, current sorting
 		{KEY_NAME,          currentListName},
-		{KEY_DESCRIPTION,   ui->descriptionLineEdit->text()},
+		{KEY_DESCRIPTION,   currentListDescription},
 		{KEY_SORTING,       sorting},
 		{KEY_CREATION_DATE, ui->creationDateLineEdit->text()},
 		{KEY_LAST_EDIT,     lastEditDate }

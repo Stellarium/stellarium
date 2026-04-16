@@ -443,26 +443,29 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 // Test if a shape in clipping coordinate is clipped or not.
 static bool isClipped(int n, double (*pos)[4])
 {
-    // The six planes equations:
-    const int P[6][4] = {
-        {-1, 0, 0, -1}, {1, 0, 0, -1},
-        {0, -1, 0, -1}, {0, 1, 0, -1},
-        {0, 0, -1, -1}, {0, 0, 1, -1}
-    };
-    int i, p;
-    for (p = 0; p < 6; p++) {
-        for (i = 0; i < n; i++) {
-            if (    P[p][0] * pos[i][0] +
-                    P[p][1] * pos[i][1] +
-                    P[p][2] * pos[i][2] +
-                    P[p][3] * pos[i][3] <= 0) {
-                break;
-            }
-        }
-        if (i == n) // All the points are outside a clipping plane.
-            return true;
-    }
-    return false;
+	// The six planes equations:
+	const int P[6][4] =
+	{
+	        {-1, 0, 0, -1}, {1, 0, 0, -1},
+	        {0, -1, 0, -1}, {0, 1, 0, -1},
+	        {0, 0, -1, -1}, {0, 0, 1, -1}
+	};
+	int i, p;
+	for (p = 0; p < 6; p++)
+	{
+		for (i = 0; i < n; i++)
+		{
+			if (    P[p][0] * pos[i][0] +
+			                P[p][1] * pos[i][1] +
+			                P[p][2] * pos[i][2] +
+			                P[p][3] * pos[i][3] <= 0) {
+				break;
+			}
+		}
+		if (i == n) // All the points are outside a clipping plane.
+			return true;
+	}
+	return false;
 }
 
 bool HipsSurvey::bindTextures(HipsTile& tile, const int orderMin, Vec2f& texCoordShift, float& texCoordScale, bool& tileIsLoaded)

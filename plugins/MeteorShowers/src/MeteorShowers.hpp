@@ -81,7 +81,7 @@ public:
 	StelObjectP searchByName(const QString& name) const override;
 	StelObjectP searchByID(const QString &id) const override;
 
-	QStringList listAllObjects(bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override;
 	QString getName() const  override{ return "Meteor Showers"; }
 	QString getStelObjectType() const override { return MeteorShower::METEORSHOWER_TYPE; }
 

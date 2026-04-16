@@ -516,15 +516,15 @@ StelObjectP AsterismMgr::searchByName(const QString& name) const
 	return nullptr;
 }
 
-QStringList AsterismMgr::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> AsterismMgr::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (inEnglish)
 	{
 		for (auto* asterism : asterisms)
 		{
 			if (asterism->isAsterism())
-				result << asterism->getEnglishName();
+				result.append({asterism->getEnglishName(), StelObjectP(asterism)});
 		}
 	}
 	else
@@ -532,7 +532,7 @@ QStringList AsterismMgr::listAllObjects(bool inEnglish) const
 		for (auto* asterism : asterisms)
 		{
 			if (asterism->isAsterism())
-				result << asterism->getNameI18n();
+				result.append({asterism->getNameI18n(), StelObjectP(asterism)});
 		}
 	}
 	return result;

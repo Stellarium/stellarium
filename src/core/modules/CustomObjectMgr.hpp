@@ -66,7 +66,7 @@ public:
 
 	StelObjectP searchByID(const QString &id) const override { return qSharedPointerCast<StelObject>(searchByEnglishName(id)); }
 
-	QStringList listAllObjects(bool inEnglish) const override;
+	QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish) const override;
 	QString getName() const override { return "Custom Objects"; }
 	QString getStelObjectType() const override { return CustomObject::CUSTOMOBJECT_TYPE; }
 

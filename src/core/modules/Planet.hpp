@@ -681,19 +681,31 @@ public:
 protected:
 	// These components for getInfoString() can be overridden in subclasses
 	virtual QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const;
+	virtual QString getNarrationName(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual QString getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const;
-	//! Any flag=Extra information to be displayed after the magnitude strings
-	virtual QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const;
+	virtual QString getNarrationAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const;
 	//! Any flag=Size information to be displayed
 	virtual QString getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Any flag=Size information to be narrated
+	virtual QString getNarrationSize(const StelCore *core, const InfoStringGroup& flags) const;
 	//! Return elongation and phase angle when flags=Elongation
 	virtual QString getInfoStringEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const;
+	//! Return elongation and phase angle when flags=Elongation
+	virtual QString getNarrationEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const;
 	//! Return sidereal and synodic periods when flags=Extra
 	virtual QString getInfoStringPeriods(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Return sidereal and synodic periods when flags=Extra
+	virtual QString getNarrationPeriods(const StelCore *core, const InfoStringGroup& flags) const;
 	//! Any flag=Extra information to be displayed at the end
 	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Any flag=Extra information to be displayed at the end
+	virtual QString getNarrationExtra(const StelCore *core, const InfoStringGroup& flags) const;
 
 	virtual QString getDiscoveryCircumstances() const;
+	//! Format discovery information for display
+	virtual QString getDiscoveryInfoString() const;
+	//! Format discovery information to be narrated
+	virtual QString getDiscoveryNarration() const;
 
 protected:
 	struct PlanetOBJModel
@@ -728,6 +740,13 @@ protected:
 
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
+	struct StelPainterLight
+	{
+		Vec3d position;
+		Vec3f diffuse;
+		Vec3f ambient;
+	};
+
 	//! Used in drawSphere() to compute shadows, and inside a function to derive eclipse sizes.
 	//! @param solarEclipseCase For reasons currently unknown we must handle solar eclipses as special case.
 	void computeModelMatrix(Mat4d &result, bool solarEclipseCase) const;
@@ -750,19 +769,19 @@ protected:
 	//! Draws the OBJ model, assuming it is available
 	//! @param screenRd radius in screen pixels.
 	//! @return false if the model can currently not be drawn (not loaded)
-	bool drawObjModel(StelPainter* painter, float screenRd);
+	bool drawObjModel(const StelPainterLight& light, StelPainter* painter, float screenRd);
 
-	bool drawObjShadowMap(StelPainter* painter, QMatrix4x4 &shadowMatrix);
+	bool drawObjShadowMap(const Vec3d& lightPosition, StelPainter *painter, QMatrix4x4& shadowMatrix);
 
 	//! Starts the OBJ loading process, if it has not been done yet.
 	//! Returns true when the OBJ is ready to draw
 	bool ensureObjLoaded();
 
 	//! Draw the 3D sphere
-	void drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing=false);
+	void drawSphere(const StelPainterLight& light, StelPainter* painter, float screenRd, bool drawOnlyRing=false);
 
 	//! Draw the Hips survey.
-	void drawSurvey(StelCore* core, StelPainter* painter);
+	void drawSurvey(const StelPainterLight& light, StelCore* core, StelPainter* painter);
 
 	//! Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, StelPainter &sPainter, const QFont& planetNameFont);
@@ -948,8 +967,8 @@ private:
 	};
 
 	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
-	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader,
-	                                   const PlanetShaderVars& shaderVars, bool hasNormalMap, bool hasHorizonMap);
+	RenderData setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars,
+	                                   const StelPainterLight& light, bool hasNormalMap, bool hasHorizonMap);
 
 	static PlanetShaderVars planetShaderVars;
 	static QOpenGLShaderProgram* planetShaderProgram;

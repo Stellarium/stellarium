@@ -28,8 +28,6 @@
 #include <QElapsedTimer>
 #include <QMutex>
 
-class QNetworkReply;
-class QThread;
 class QThreadPool;
 
 //! @class StelTextureMgr

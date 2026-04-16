@@ -247,9 +247,9 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList MeteorShowers::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> MeteorShowers::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (!m_mgr->getEnablePlugin())
 		return result;
 
@@ -257,14 +257,14 @@ QStringList MeteorShowers::listAllObjects(bool inEnglish) const
 	{
 		for (const auto& ms : m_meteorShowers)
 		{
-			result.append(ms->getEnglishName());
+			result.append({ms->getEnglishName(), StelObjectP(ms)});
 		}
 	}
 	else
 	{
 		for (const auto& ms : m_meteorShowers)
 		{
-			result.append(ms->getNameI18n());
+			result.append({ms->getNameI18n(), StelObjectP(ms)});
 		}
 	}
 	return result;

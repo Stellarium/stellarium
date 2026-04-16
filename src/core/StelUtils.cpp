@@ -162,7 +162,7 @@ QString daysFloatToDHMSnarration(float days)
 	int m = static_cast<int> (remain); remain -= m;
 	remain *= 60.0f;
 
-	auto r = QString("%1%2 %3%4 %5%6 %7 %8%9 ").arg(
+	auto r = QString("%1 %2 %3 %4 %5 %6 %7 %8 %9").arg(
 			QString::number(d),        qc_("days", "duration"),
 			QString::number(h),        qc_("hours", "duration"),
 			QString::number(m),        qc_("minutes", "duration"), qc_("and", "object narration"),
@@ -489,13 +489,15 @@ QString decDegToDmsNarration(const double angle, bool sayPlus)
 	double s;
 	unsigned int d, m;
 	decDegToDms(angle, sign, d, m, s);
-	return QString("%1 %2 %3, %4 %5, %6 %7 %8").arg(sign ? (sayPlus ? q_("plus") : "") : q_("minus"),
-			QString::number(d),
-			q_("degrees"),
-			QString::number(m),
-			q_("minutes"), q_("and"),
-			QString::number(static_cast<unsigned int>(s)),
-			q_("seconds"));
+	QString res(sign ? (sayPlus ? q_("plus") : "") : q_("minus"));
+	if (d>0)
+		res.append(QString(" %1 %2,").arg(QString::number(d), q_("degrees")));
+	if (m>0)
+		res.append(QString(" %1 %2,").arg(QString::number(m), qc_("arc minutes", "object narration")));
+	if (d>0 || m>0)
+		res.append(" " + q_("and"));
+	res.append(QString(" %1 %2. ").arg(QString::number(static_cast<unsigned int>(s)), qc_("arc seconds", "object narration")));
+	return res;
 }
 
 // Convert latitude in decimal degrees to a dms formatted string.
@@ -1643,6 +1645,8 @@ QString narrateDecimal(double num, int decimals)
 	QString lang=StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	if (lang=="de") // TODO: Which other languages use comma or other non-C-locale formulation when speaking?
 		numStr=numStr.replace('.', ',');
+	if (num<0.)
+		numStr.prepend(q_("minus") + " ");
 	return numStr;
 }
 

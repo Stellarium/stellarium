@@ -69,7 +69,7 @@ Q_GLOBAL_STATIC(QStringList, objtype_array);
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always match the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 26;
+static const int StarCatalogFormatVersion = 27;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -386,6 +386,8 @@ void StarMgr::init()
 
 	populateStarsDesignations();
 	populateHipparcosLists();
+	populateDoubleStarsList();
+	populateVariableStarsList();
 
 	setFontSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -683,6 +685,64 @@ void StarMgr::populateHipparcosLists()
         qInfo().nospace() << "Lists of stars: " << hipparcosStars.count() << " HIP stars, " << doubleHipStars.count() << " are binaries, " << variableHipStars.count()
                           << " variable (" << algolTypeStars.count() << " Algol-type, " << classicalCepheidsTypeStars.count() << " Cepheids), " << carbonStars.count()
                           << " Carbon stars, " << bariumStars.count() << " Barium stars, and " << hipStarsHighPM.count() << " have PM>1000mas/yr.";
+}
+
+void StarMgr::populateDoubleStarsList()
+{
+	static const char*const names[][2] = {
+		{"16 Cyg A", "HIP 96895"}, {"21 Tau", "HIP 17579"}, {"27 Tau", "HIP 17847"},
+		{"36 Oph", "HIP 84405 A"}, {"42 Ori", "HIP 26237"}, {"44 Boo", "HIP 73695"},
+		{"55 Aqr", "HIP 110960 A"}, {"55 Cnc", "HIP 43587"}, {"61 Cyg B", "HIP 104217"},
+		{"65 UMa", "HIP 58112"}, {"70 Oph", "HIP 88601 A"}, {"77 Tau", "HIP 20885"},
+		{"HIP 28393", "HIP 28393"}, {"HIP 84709", "HIP 84709"}, {"T Dra", "HIP 87820"},
+		{"V1016 Ori", "HIP 26220"}, {"α Gem", "HIP 36850 A"}, {"α Leo", "HIP 49669"},
+		{"α UMi", "HIP 11767"}, {"α1 Cen", "HIP 71683"}, {"α1 Cru", "HIP 60718"},
+		{"α1 Her", "HIP 84345 A"}, {"α2 CVn", "HIP 63125"}, {"α2 Cap", "HIP 100064"},
+		{"α2 Lib", "HIP 72622"}, {"β Mon", "HIP 30867 A"}, {"β Ori", "HIP 24436"},
+		{"β1 Cyg", "HIP 95947"}, {"β1 Sco", "HIP 78820"}, {"γ Vir", "HIP 61941"},
+		{"γ1 And", "HIP 9640"}, {"γ1 Ari", "HIP 8832 A"}, {"γ1 Del", "HIP 102531"},
+		{"γ1 Leo", "HIP 50583"}, {"δ1 Lyr", "HIP 92728"}, {"δ1 Tau", "HIP 20455"},
+		{"ε Ari", "HIP 13914"}, {"ε Boo", "HIP 72105"}, {"ε1 Lyr", "HIP 91919 A"},
+		{"ε2 Lyr", "HIP 91926 A"}, {"ζ Crv", "HIP 60189"}, {"ζ Her", "HIP 81693 A"},
+		{"ζ UMa", "HIP 65378 A"}, {"ζ1 Cnc", "HIP 40167"}, {"ζ1 Sco", "HIP 82671"},
+		{"η Cas", "HIP 3821"}, {"ι Cas", "HIP 11569 A"}, {"ι Ori", "HIP 26241"},
+		{"κ Vel", "HIP 45941"}, {"λ Sco", "HIP 85927"}, {"μ1 Sco", "HIP 82514"},
+		{"ν1 Dra", "HIP 85819"}, {"ν1 Sgr", "HIP 92761"}, {"ξ Boo", "HIP 72659 A"},
+		{"ο1 Cyg", "HIP 99675"}, {"ο2 Cyg", "HIP 99848"}, {"ο2 Eri", "HIP 19849"},
+		{"σ Cas", "HIP 118243 A"}, {"σ2 UMa", "HIP 45038 A"}, {"φ2 Cnc", "HIP 41404 A"},
+		{"ω1 Sco", "HIP 78933"}
+	};
+	for (const auto& [name,searchable] : names)
+		doubleStars[name] = searchByID(searchable);
+}
+
+void StarMgr::populateVariableStarsList()
+{
+	static const char*const names[][2] = {
+		{"30 Her", "HIP 80704"}, {"68 Her", "HIP 84573"}, {"AE Aur", "HIP 24575"},
+		{"EU Del", "HIP 101810"}, {"R And", "HIP 1901"}, {"R Aql", "HIP 93820"},
+		{"R Aqr", "HIP 117054"}, {"R Aur", "HIP 24645"}, {"R CMa", "HIP 35487"},
+		{"R CrB", "HIP 77442"}, {"R Cru", "HIP 60455"}, {"R Gem", "HIP 34356"},
+		{"R Hor", "HIP 13502"}, {"R Hya", "HIP 65835"}, {"R Leo", "HIP 48036"},
+		{"R Lep", "HIP 23203"}, {"R Sct", "HIP 92202"}, {"RR Lyr", "HIP 95497"},
+		{"RY Sgr", "HIP 94730"}, {"S Cen", "HIP 60534"}, {"S Cnc", "HIP 42853"},
+		{"SU Cyg", "HIP 97150"}, {"T Cep", "HIP 104451"}, {"T CrB", "HIP 78322"},
+		{"U Ant", "HIP 51821"}, {"U Cep", "HIP 4843"}, {"U CrB", "HIP 74881"},
+		{"U Mon", "HIP 36521"}, {"U Sgr", "HIP 90836"}, {"V Aql", "HIP 93666"},
+		{"VV Ori", "HIP 26063"}, {"VY CMa", "HIP 35793"}, {"VZ Cam", "HIP 36547"},
+		{"W Boo", "HIP 71995"}, {"W UMa", "HIP 47727"}, {"WZ Cas", "HIP 99"},
+		{"l Car", "HIP 47854"}, {"α Cen C", "HIP 70890"}, {"α CrB", "HIP 76267"},
+		{"α Ori", "HIP 27989"}, {"α UMi", "HIP 11767"}, {"α1 Her", "HIP 84345 A"},
+		{"β Dor", "HIP 26069"}, {"β Lyr", "HIP 92420"}, {"β Peg", "HIP 113881"},
+		{"β Per", "HIP 14576"}, {"γ Cas", "HIP 4427"}, {"δ Cep", "HIP 110991"},
+		{"δ Ori", "HIP 25930"}, {"ε Aur", "HIP 23416"}, {"ε Peg", "HIP 107315"},
+		{"ζ Gem", "HIP 34088"}, {"ζ Phe", "HIP 5348"}, {"η Aql", "HIP 97804"},
+		{"η Gem", "HIP 29655"}, {"θ Aps", "HIP 68815"}, {"κ Pav", "HIP 93015"},
+		{"λ Tau", "HIP 18724"}, {"μ Cep", "HIP 107259"}, {"ο Cet", "HIP 10826"},
+		{"χ Cyg", "HIP 97629"}
+	};
+	for (const auto& [name, searchable] : names)
+		variableStars[name] = searchByID(searchable);
 }
 
 // Load common names from file
@@ -1759,9 +1819,9 @@ StelObjectP StarMgr::searchByID(const QString &id) const
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
-QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (maxNbItem <= 0 || !getFlagStars())
 		return result;
 
@@ -1781,8 +1841,14 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			result.append(getCommonNameI18n(i.value()));
-			--maxNbItem;
+			const StarId id = i.value();
+			const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+			assert(star);
+			if(star)
+			{
+				result.append({getCommonNameI18n(id), star});
+				--maxNbItem;
+			}
 		}
 	}
 
@@ -1798,8 +1864,14 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			result.append(getCommonEnglishName(j.value()));
-			--maxNbItem;
+			const StarId id = j.value();
+			const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+			assert(star);
+			if(star)
+			{
+				result.append({getCommonEnglishName(id), star});
+				--maxNbItem;
+			}
 		}
 	}
 
@@ -1845,8 +1917,14 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 					finalName=name;
 				}
 
-				result.append(finalName);
-				--maxNbItem;
+				const StarId id = it.value();
+				const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+				assert(star);
+				if(star)
+				{
+					result.append({finalName, star});
+					--maxNbItem;
+				}
 			}
 		}
 	}
@@ -1873,18 +1951,23 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			QStringList names = getSciDesignation(it.value()).split(" - ");
+			const StarId id = it.value();
+			QStringList names = getSciDesignation(id).split(" - ");
 			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
 				else found = (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive));
 
-				if (found)
+				if (!found) continue;
+
+				const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+				assert(star);
+				if(star)
 				{
 					if (maxNbItem<=0)
 						break;
-					result.append(name);
+					result.append({name, star});
 					--maxNbItem;
 				}
 			}
@@ -1901,18 +1984,23 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			QStringList names = getSciDesignation(it.value()).split(" - ");
+			const StarId id = it.value();
+			QStringList names = getSciDesignation(id).split(" - ");
 			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
 				else found = (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive));
 
-				if (found)
+				if (!found) continue;
+
+				const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+				assert(star);
+				if(star)
 				{
 					if (maxNbItem<=0)
 						break;
-					result.append(name);
+					result.append({name, star});
 					--maxNbItem;
 				}
 			}
@@ -1929,18 +2017,23 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			QStringList names = getSciExtraDesignation(ite.value()).split(" - ");
+			const StarId id = ite.value();
+			QStringList names = getSciExtraDesignation(id).split(" - ");
 			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
 				else found = (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive));
 
-				if (found)
+				if (!found) continue;
+
+				const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+				assert(star);
+				if(star)
 				{
 					if (maxNbItem<=0)
 						break;
-					result.append(name);
+					result.append({name, star});
 					--maxNbItem;
 				}
 			}
@@ -1957,18 +2050,23 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			QStringList names = getSciExtraDesignation(ite.value()).split(" - ");
+			const StarId id = ite.value();
+			QStringList names = getSciExtraDesignation(id).split(" - ");
 			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
 				else found = (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive));
 
-				if (found)
+				if (!found) continue;
+
+				const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+				assert(star);
+				if(star)
 				{
 					if (maxNbItem<=0)
 						break;
-					result.append(name);
+					result.append({name, star});
 					--maxNbItem;
 				}
 			}
@@ -1986,8 +2084,14 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			result << getGcvsDesignation(itv.value());
-			--maxNbItem;
+			const StarId id = itv.value();
+			const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+			assert(star);
+			if(star)
+			{
+				result.append({getGcvsDesignation(itv.value()), star});
+				--maxNbItem;
+			}
 		}
 		else
 			break;
@@ -2006,7 +2110,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			StelObjectP s = searchHP(hpNum);
 			if (s && maxNbItem>0)
 			{
-				result << QString("HIP%1").arg(hpNum);
+				result.append({QString("HIP%1").arg(hpNum), s});
 				maxNbItem--;
 			}
 		}
@@ -2024,7 +2128,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			StelObjectP s =  (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 			if (s && maxNbItem>0)
 			{
-				result << QString("SAO%1").arg(saoNum);
+				result.append({QString("SAO%1").arg(saoNum), s});
 				maxNbItem--;
 			}
 		}
@@ -2042,7 +2146,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			StelObjectP s =  (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 			if (s && maxNbItem>0)
 			{
-				result << QString("HD%1").arg(hdNum);
+				result.append({QString("HD%1").arg(hdNum), s});
 				maxNbItem--;
 			}
 		}
@@ -2060,7 +2164,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			StelObjectP s =  (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 			if (s && maxNbItem>0)
 			{
-				result << QString("HR%1").arg(hrNum);
+				result.append({QString("HR%1").arg(hrNum), s});
 				maxNbItem--;
 			}
 		}
@@ -2078,8 +2182,14 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem==0)
 					break;
-				result << getWdsDesignation(wds.value());
-				--maxNbItem;
+				const StarId id = wds.value();
+				const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+				assert(star);
+				if(star)
+				{
+					result.append({getWdsDesignation(wds.value()), star});
+					--maxNbItem;
+				}
 			}
 			else
 				break;
@@ -2098,13 +2208,13 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			StelObjectP s = searchGaia(gaiaNum);
 			if (s && maxNbItem>0)
 			{
-				result << QString("Gaia DR3 %1").arg(gaiaNum);
+				result.append({QString("Gaia DR3 %1").arg(gaiaNum), s});
 				maxNbItem--;
 			}
 		}
 	}
 
-	result.sort();	
+	std::sort(result.begin(), result.end(), [](auto& a, auto& b){ return a.first < b.first; });
 	return result;
 }
 
@@ -2327,12 +2437,19 @@ void StarMgr::populateStarsDesignations()
 		loadBinaryOrbitalData(filePath);
 }
 
-QStringList StarMgr::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> StarMgr::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QMap<QString,StelObjectP> map;
 	if (inEnglish)
 	{
-		result = commonNamesMap.values();
+		for (auto it = commonNamesMap.constKeyValueBegin(); it != commonNamesMap.constKeyValueEnd(); ++it)
+		{
+			const StarId id = (*it).first;
+			const QString name = (*it).second;
+			const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+			assert(star);
+			if(star) map[name] = star;
+		}
 
 #if  (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 		QHashIterator<StarId, StelObject::CulturalName> ci(culturalNamesMap);
@@ -2342,15 +2459,28 @@ QStringList StarMgr::listAllObjects(bool inEnglish) const
 		while (ci.hasNext())
 		{
 			ci.next();
-			result << ci.value().native;
-			result << ci.value().translated;
-			result << ci.value().pronounce;
-			result << ci.value().transliteration;
+			const StarId id = ci.key();
+			const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+			assert(star);
+			if (star)
+			{
+				map[ci.value().native] = star;
+				map[ci.value().translated] = star;
+				map[ci.value().pronounce] = star;
+				map[ci.value().transliteration] = star;
+			}
 		}
 	}
 	else
 	{
-		result=commonNamesI18nMap.values();
+		for (auto it = commonNamesI18nMap.constKeyValueBegin(); it != commonNamesI18nMap.constKeyValueEnd(); ++it)
+		{
+			const StarId id = (*it).first;
+			const QString name = (*it).second;
+			const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+			assert(star);
+			if(star) map[name] = star;
+		}
 
 #if  (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 		QHashIterator<StarId, StelObject::CulturalName> ci(culturalNamesMap);
@@ -2360,21 +2490,28 @@ QStringList StarMgr::listAllObjects(bool inEnglish) const
 		while (ci.hasNext())
 		{
 			ci.next();
-			result << ci.value().native;
-			result << ci.value().translatedI18n;
-			result << ci.value().pronounceI18n;
-			result << ci.value().transliteration;
+			const StarId id = ci.key();
+			const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+			assert(star);
+			if (star)
+			{
+				map[ci.value().native] = star;
+				map[ci.value().translatedI18n] = star;
+				map[ci.value().pronounceI18n] = star;
+				map[ci.value().transliteration] = star;
+			}
 		}
 	}
-	result.removeDuplicates();
-	result.removeAll(QString(""));
-	result.removeAll(QString());
+	map.remove("");
+	QVector<QPair<QString,StelObjectP>> result;
+	for (auto it = map.constKeyValueBegin(); it != map.constKeyValueEnd(); ++it)
+		result.append({(*it).first, (*it).second});
 	return result;
 }
 
-QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
-	QStringList result;	
+	QMap<QString,StelObjectP> map;
 	// type 1
 	bool isStarT1 = false;
 	QList<StelObjectP> starsT1;
@@ -2386,35 +2523,12 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	{
 		case 0: // Interesting double stars
 		{
-			static const QStringList doubleStars = {
-				"21 Tau", "27 Tau", "77 Tau", "δ1 Tau", "V1016 Ori",
-				"42 Ori", "ι Ori", "ζ Crv", "ζ UMa", "α2 Lib", "α1 Cru",
-				"ω1 Sco", "λ Sco", "μ1 Sco", "ζ1 Sco", "ε1 Lyr", "ε2 Lyr",
-				"δ1 Lyr", 	"ν1 Sgr", "ο1 Cyg", "ο2 Cyg", "α2 Cap", "β1 Cyg",
-				"β Ori", "γ1 And", "ξ Boo", "α1 Her", "T Dra", "ν1 Dra",
-				"70 Oph", "α Gem", "ζ Her", "ο2 Eri", "γ1 Ari", "γ Vir",
-				"γ1 Leo", "β Mon", "ε Boo", "44 Boo", "β1 Sco", "ζ1 Cnc",
-				"φ2 Cnc", "α Leo", "α2 CVn", "ι Cas", "ε Ari", "κ Vel", "γ1 Del",
-				"61 Cyg B", "55 Aqr", "σ Cas", "η Cas", "α UMi", "36 Oph",
-				"α1 Cen",  "65 UMa", "σ2 UMa", "55 Cnc", "16 Cyg A",
-				"HIP 28393", "HIP 84709"};
-			result = doubleStars;
+			map = doubleStars;
 			break;
 		}
 		case 1: // Interesting variable stars
 		{
-			static const QStringList variableStars = {
-				"δ Cep", "β Per", "ο Cet", "λ Tau", "β Lyr", "ζ Gem", "μ Cep",
-				"α1 Her", "η Gem", "η Aql", "γ Cas", "α Ori", "R And",
-				"U Ant", "θ Aps", "R Aql", "V Aql", "R Aqr", "ε Aur", "R Aur",
-				"AE Aur", "W Boo", "VZ Cam", "l Car", "WZ Cas",	"S Cen",
-				"α Cen C", "T Cep", "U Cep", "R CMa", "VY CMa",
-				"S Cnc", "α CrB", "R CrB", "T CrB", "U CrB", "R Cru",
-				"SU Cyg", "EU Del", "β Dor", "R Gem", "30 Her", "68 Her",
-				"R Hor", "R Lep", "R Leo", "RR Lyr", "U Mon", "R Hya", "χ Cyg",
-				"δ Ori", "VV Ori", "κ Pav", "β Peg", "ε Peg", "ζ Phe", "R Sct",
-				"U Sgr", "RY Sgr", "W UMa", "α UMi"};
-			result = variableStars;
+			map = variableStars;
 			break;
 		}
 		case 2: // Bright double stars
@@ -2473,9 +2587,9 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		{
 			starName = inEnglish ? star->getEnglishName() : star->getNameI18n();
 			if (!starName.isEmpty())
-				result << starName;
+				map[starName] = star;
 			else
-				result << star->getID();
+				map[star->getID()] = star;
 		}
 	}
 
@@ -2485,13 +2599,15 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		{
 			starName = inEnglish ? star.first->getEnglishName() : star.first->getNameI18n();
 			if (!starName.isEmpty())
-				result << starName;
+				map[starName] = star.first;
 			else
-				result << star.first->getID();
+				map[star.first->getID()] = star.first;
 		}
 	}
 
-	result.removeDuplicates();
+	QVector<QPair<QString,StelObjectP>> result;	
+	for (auto it = map.constKeyValueBegin(); it != map.constKeyValueEnd(); ++it)
+		result.append({(*it).first, (*it).second});
 	return result;
 }
 

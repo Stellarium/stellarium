@@ -102,9 +102,9 @@ public:
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object names by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	QVector<QPair<QString,StelObjectP>> listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
-	QStringList listAllModuleObjects(const QString& moduleId, bool inEnglish) const;
+	QVector<QPair<QString,StelObjectP>> listAllModuleObjects(const QString& moduleId, bool inEnglish) const;
 	QMap<QString, QString> objectModulesMap() const;
 
 	//! Return whether an object was selected during last selection related event.

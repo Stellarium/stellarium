@@ -517,7 +517,7 @@ void StelSkyCultureSkyPartition::updateI18n()
 QString StelSkyCultureSkyPartition::getCulturalName() const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
-	return scMgr->createCulturalLabel(name, StelObject::CulturalDisplayStyle::Pronounce, names.length()==12 ? q_("Zodiac") : q_("Lunar Station"));
+	return scMgr->createCulturalLabel(name,  names.length()==12 ? scMgr->getZodiacLabelStyle() : scMgr->getLunarSystemLabelStyle(), names.length()==12 ? q_("Zodiac") : q_("Lunar Station"));
 }
 
 QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos, bool narration) const
@@ -526,7 +526,6 @@ QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos, bool na
 	const QString sDegrees=qc_("degrees", "object narration");
 	const QString sMinutes=qc_("minutes", "object narration");
 	const QString sAnd=qc_("and", "object narration");
-	const QString sSeconds=qc_("seconds", "object narration");
 	const QString sPada=qc_("pada", "object narration; quarter part of nakshatra");
 
 	double ra, dec;

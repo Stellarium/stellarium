@@ -195,6 +195,50 @@ flag\_show\_crossed\_lines & bool    & Show crossed lines under mouse cursor.\\\
 
 \newpage
 
+\section{Time Navigator Plugin}
+\label{sec:plugins:TimeNavigator}
+ 
+\begin{figure}[th]\centering
+\includegraphics[height=74mm]{TimeNavigatorplugin_tab1.jpg}
+%\hfill
+\includegraphics[height=74mm]{TimeNavigatorplugin_tab2.jpg}
+%\hfill
+\includegraphics[height=74mm]{TimeNavigatorplugin_tab3.jpg}
+
+\caption{Interface of Time Navigator plugin: Time Steps tab (left), Specific Time tab (center), and Planetary Events (right)}
+\label{fig:TimeNavigator}
+\end{figure}
+ 
+\noindent The Time Navigator plugin brings a convenient GUI to many different
+astronomical time steps and allows addition or subtraction of one (1)
+unit of any of these periods interactively.
+If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), click on
+the plugin button \guibutton{0.6}{bt_TimeNavigator_Off.png} on the
+bottom toolbar to open the plugin window.
+ 
+The first tab \menu{Time Steps} shows step buttons for different
+definitions of days, months and years, and even longer cycles such as
+the Saros. The second tab \menu{Specific Time} shows buttons to jump
+to the previous, current or next event of the selected object, e.g.\
+its meridian transit, as well as buttons for specific twilight moments.
+
+
+%\newpage
+
+The third tab \menu{Planetary Events} shows step buttons for some interesting
+planetary events, such as oppositions for outer planets and greatest elongations
+for inner planets. For the Moon, the four phases (new, first quarter, full, last quarter)
+and times for apogee and perigee are shown, as well as times for Earth aphelion 
+and perihelion. Clicking any of these buttons sets the time to that of the event.
+
+%\begin{figure}[th]\centering
+%\includegraphics[width=.6\textwidth]{TimeNavigatorplugin_tab3.jpg}
+%\caption{The Planetary Events tab}
+%\label{fig:TimeNavigator:PEvents}
+%\end{figure}
+ 
+\newpage
+
 \section{Text User Interface Plugin}
 \label{sec:plugins:TextUserInterface}
 
@@ -203,9 +247,6 @@ flag\_show\_crossed\_lines & bool    & Show crossed lines under mouse cursor.\\\
 This plugin re-implements the ``TUI'' of the pre-0.10 versions of
 Stellarium, an unobtrusive menu used primarily by planetarium system
 operators to change settings, run scripts and so on.
-
-A full list of the commands for the TUI plugin is
-given in section~\ref{sec:plugins:TUI:commands}. 
 
 \subsection{Using the Text User Interface}
 \label{sec:plugins:TUI:using}
@@ -799,6 +840,12 @@ disable\_webview     &boolean&false \\
 }
 \end{center}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\input{plg_skyculturemaker}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
 \section{Solar System Editor Plugin}
@@ -869,6 +916,7 @@ Once MPC data has been downloaded, the user can select objects for updating the 
 \newpage
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 
 \section{Nebula Textures Plugin}

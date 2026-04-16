@@ -277,12 +277,12 @@ program download (the \emph{standard edition} of Stellarium DSO catalog\footnote
 number in the version of Stellarium DSO catalog means version of catalog structure, 
 and the second number means version of data.}, see section \ref{sec:dso:catalog}), 
 but an \emph{extended edition} of DSO catalog with over one million objects (up to $20.0^m$ for galaxies) may be downloaded
-from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.22}}:
+from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.23}}:
 
 \noindent\begin{tabular}{lllr}
 \toprule
 \emph{Version; Edition} & \emph{Filename} & \emph{MD5 hash} & \emph{Size}\\\midrule
-3.22; extended & \file{catalog-3.22.dat} & \texttt{c4820d050791046baf1460b186fa23c6} & 28MB\\\bottomrule
+3.23; extended & \file{catalog-3.23.dat} & \texttt{56dfcdcedc3bfc18ce730984ab039308} & 28MB\\\bottomrule
 \end{tabular}
 
 The file can be placed in a folder named \file{nebulae/default} inside the \emph{user directory}
@@ -707,7 +707,7 @@ or if you are developing scripts and videos don't play, try if this helps:
 QT_LOGGING_RULES=*.debug=false;stel.Media.debug=true;
 \end{configfile}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{GUI Customizations}
 
 Some users have difficulties to read Stellarium's rather dark user
@@ -778,6 +778,7 @@ Note that, as Stellarium evolves, these files also may change from
 version to version. We cannot give any guarantees that one customized
 file will work without adaptation on later or earlier versions of Stellarium.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Spout}\newFeature{0.15.1} 
 \label{sec:CommandLineOptions:Special:Spout}
@@ -798,6 +799,49 @@ On a notebook with Nvidia Optimus technology, make sure to launch Stellarium \em
 For permanent setting, use the Nvidia configuration dialog to configure Stellarium and the target application explicitly to run always on the Nvidia card.
 
 Note that Spout use disables any multisampling setting (see Appendix~\ref{sec:config.ini:video}). 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iffalse
+
+%% NOTE: We cannot provide accurate documentation on this topic at this time. 
+%% Ubuntu (and maybe other Debian-based distributions) could install Piper in a virtual environment, but how would this be setup system-wide at startup?
+%% Other distributions may differ. 
+
+
+\section{Advanced Text To Speech output}
+\label{sec:CommandLineOptions:Special:TTS-Piper}
+
+While speech output on Windows is not bad, the default voices on Linux leave room for improvement. 
+We can improve this by configuring better voices with \program{speech-dispatcher}. 
+One viable solution uses \program{Piper}\footnote{\url{https://github.com/OHF-Voice/piper1-gpl}}. 
+We stick to official documentation.\footnote{\url{https://github.com/OHF-Voice/piper1-gpl/blob/main/docs/CLI.md}}
+
+\begin{commands}
+pip install piper-tts
+\end{commands}
+
+List voices with:
+
+\begin{commands}
+python3 -m piper.download_voices
+\end{commands}
+
+Choose a voice (\url{https://rhasspy.github.io/piper-samples/}) and download. For example:
+
+\begin{commands}
+python3 -m piper.download_voices en_US-lessac-medium
+\end{commands}
+
+This will download to the current directory. Override with \texttt{--data-dir <DIR>}
+
+Piper runs a web server which allows integration to \program{speechd}.
+
+\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{Spherical Mirror Mode for Planetarium Use}
 \label{sec:CommandLineOptions:SphericalMirror}

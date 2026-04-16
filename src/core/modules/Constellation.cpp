@@ -358,10 +358,12 @@ QString Constellation::getNarration(const StelCore *core, const InfoStringGroup 
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
 
 	QString toBeSpoken=trans.qtranslate(narration);
-	// Strip away markdown elements like underscores or stars.
+	// Strip away HTML and markdown elements like underscores or stars.
+	static const QRegularExpression br("<br/?>");
+	static const QRegularExpression img("<img .*>");
 	static const QRegularExpression latin("_([^_]{0,50})_");
 	static const QRegularExpression star("\\*([^\\*]{0,50})\\*");
-	QString stripped=toBeSpoken.replace(latin, "\\1").replace(star, "\\1");
+	QString stripped=toBeSpoken.remove(br).remove(img).replace(latin, "\\1").replace(star, "\\1");
 
 	qCDebug(Speech) << "Constellation name" << getEnglishName() << "narration:" << stripped;
 
@@ -578,6 +580,9 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 	Q_UNUSED(core)
 	QString str;
 	QTextStream oss(&str);
+	// Strip away HTML elements break and image.
+	static const QRegularExpression br("<br/?>");
+	static const QRegularExpression img("<img .*>");
 
 	if (flags&Name)
 	{
@@ -590,7 +595,7 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 	oss << getSolarLunarInfoString(core, flags);
 
 	if (flags&Extra && !narration.isEmpty())
-		oss << QString("%1: ").arg(qc_("Legend", "constellation origin")) << StelUtils::wrapText(StelSkyCultureMgr::markdownToHTML(narration));
+		oss << QString("%1: ").arg(qc_("Legend", "constellation origin")) << StelUtils::wrapText(StelSkyCultureMgr::markdownToHTML(narration).remove(br).remove(img));
 	postProcessInfoString(str, flags);
 
 	return str;

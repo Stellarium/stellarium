@@ -22,11 +22,7 @@
 #include "StelTextureMgr.hpp"
 
 #include <QFileInfo>
-#include <QFile>
-#include <QDebug>
-#include <QNetworkRequest>
 #include <QThread>
-#include <QSettings>
 #include <cstdlib>
 #include <QOpenGLContext>
 #include <QThreadPool>

@@ -417,9 +417,9 @@ StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> NomenclatureMgr::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 
 	if (getFlagShowNomenclature())
 	{
@@ -430,7 +430,7 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 			{
 				niType = nItem->getNomenclatureType();
 				if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest)
-					result << nItem->getEnglishName();
+					result.append({nItem->getEnglishName(), StelObjectP(nItem)});
 			}
 		}
 		else
@@ -439,16 +439,16 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 			{
 				niType = nItem->getNomenclatureType();
 				if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest)
-					result << nItem->getNameI18n();
+					result.append({nItem->getNameI18n(), StelObjectP(nItem)});
 			}
 		}
 	}
 	return result;
 }
 
-QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> NomenclatureMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
-	QStringList result;
+	QMap<QString,StelObjectP> map;
 
 	if (getFlagShowNomenclature())
 	{
@@ -464,9 +464,9 @@ QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool i
 					if (nItem->getPlanet()->getEnglishName().contains(objType, Qt::CaseSensitive) && niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest)
 					{
 						if (inEnglish)
-							result << nItem->getEnglishName();
+							map[nItem->getEnglishName()] = StelObjectP(nItem);
 						else
-							result << nItem->getNameI18n();
+							map[nItem->getNameI18n()] = StelObjectP(nItem);
 					}
 				}
 				break;
@@ -478,17 +478,19 @@ QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool i
 					if (nItem->getNomenclatureType()==type)
 					{
 						if (inEnglish)
-							result << nItem->getEnglishName();
+							map[nItem->getEnglishName()] = StelObjectP(nItem);
 						else
-							result << nItem->getNameI18n();
+							map[nItem->getNameI18n()] = StelObjectP(nItem);
 					}
 				}
 				break;
 			}
 		}
-		result.removeDuplicates();
 	}
 
+	QVector<QPair<QString,StelObjectP>> result;
+	for (auto it = map.constKeyValueBegin(); it != map.constKeyValueEnd(); ++it)
+		result.append({(*it).first, (*it).second});
 	return result;
 }
 

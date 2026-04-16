@@ -54,4 +54,5 @@ sed -e 's/Qt::FocusPolicy::NoFocus/Qt::NoFocus/g' \
 	-e 's/QSlider::TickPosition::NoTicks/QSlider::NoTicks/g' \
 	-e 's/Qt::TextInteractionFlag::TextSelectableByMouse/Qt::TextSelectableByMouse/g' \
 	-e 's/Qt::TextInteractionFlag::NoTextInteraction/Qt::NoTextInteraction/g' \
+	-e 's/QTabWidget::TabPosition::South/QTabWidget::South/g' \
 	   $1

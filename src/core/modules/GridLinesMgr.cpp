@@ -59,12 +59,15 @@ public:
 	bool isDisplayed() const {return fader;}
 	void setLineThickness(const float thickness) {lineThickness = thickness;}
 	float getLineThickness() const {return lineThickness;}
+	void setSpacingMultiplier(double multiplier) { spacingMultiplier = multiplier; }
+	double getSpacingMultiplier() const { return spacingMultiplier; }
 private:
 	Vec3f color;
 	StelCore::FrameType frameType;
 	int fontSize;
 	LinearFader fader;
 	float lineThickness;
+	double spacingMultiplier;
 };
 
 //! @class SkyPoint
@@ -123,7 +126,7 @@ private:
 
 
 // rms added color as parameter
-SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2f,0.2f,0.2f), frameType(frame), lineThickness(1)
+SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2f,0.2f,0.2f), frameType(frame), lineThickness(1), spacingMultiplier(1.0)
 {
 	// Font size is 12
 	fontSize = StelApp::getInstance().getScreenFontSize()-1;
@@ -143,27 +146,29 @@ static const double STEP_SIZES_DMS[] = {0.05, 0.2, 1., 5., 10., 60., 300., 600.,
 static const double STEP_SIZES_HMS[] = {0.05, 0.2, 1.5, 7.5, 15., 15.*5., 15.*10., 15.*60., 15.*60.*5., 15.*60*10., 15.*60*60};
 
 //! Return the angular grid step in degree which best fits the given scale
-static double getClosestResolutionDMS(double pixelPerRad)
+static double getClosestResolutionDMS(double pixelPerRad, double spacingMultiplier)
 {
-	double minResolution = 80.;
+	// Apply spacing multiplier: higher values = denser grid
+	double minResolution = 80.0 / spacingMultiplier;
 	double minSizeArcsec = minResolution/pixelPerRad*M_180_PI*3600;
 	for (unsigned int i=0;i<12;++i)
 	{
-		if (STEP_SIZES_DMS[i]>minSizeArcsec)
-			return STEP_SIZES_DMS[i]/3600.;
+			if (STEP_SIZES_DMS[i]>minSizeArcsec)
+				return STEP_SIZES_DMS[i]/3600.;
 	}
 	return 10.;
 }
 
 //! Return the angular grid step in degree which best fits the given scale
-static double getClosestResolutionHMS(double pixelPerRad)
+static double getClosestResolutionHMS(double pixelPerRad, double spacingMultiplier)
 {
-	double minResolution = 80.;
+	// Apply spacing multiplier: higher values = denser grid
+	double minResolution = 80.0 / spacingMultiplier;
 	double minSizeArcsec = minResolution/pixelPerRad*M_180_PI*3600;
 	for (unsigned int i=0;i<11;++i)
 	{
-		if (STEP_SIZES_HMS[i]>minSizeArcsec)
-			return STEP_SIZES_HMS[i]/3600.;
+			if (STEP_SIZES_HMS[i]>minSizeArcsec)
+				return STEP_SIZES_HMS[i]/3600.;
 	}
 	return 15.;
 }
@@ -337,15 +342,15 @@ void SkyGrid::draw(const StelCore* core) const
 	double lon2, lat2;
 	StelUtils::rectToSphe(&lon2, &lat2, centerV);
 
-	const double gridStepParallelRad = M_PI_180*getClosestResolutionDMS(static_cast<double>(prj->getPixelPerRadAtCenter()));
+	const double gridStepParallelRad = M_PI_180*getClosestResolutionDMS(static_cast<double>(prj->getPixelPerRadAtCenter()), spacingMultiplier);
 	double gridStepMeridianRad;
 	if (northPoleInViewport || southPoleInViewport)
 		gridStepMeridianRad = (frameType==StelCore::FrameAltAz) ? M_PI_180 * 10. : M_PI_180 * 15.;
 	else
 	{
 		const double closestResLon = (frameType==StelCore::FrameAltAz) ?
-					getClosestResolutionDMS(static_cast<double>(prj->getPixelPerRadAtCenter())*std::cos(lat2)) :
-					getClosestResolutionHMS(static_cast<double>(prj->getPixelPerRadAtCenter())*std::cos(lat2));
+						getClosestResolutionDMS(static_cast<double>(prj->getPixelPerRadAtCenter())*std::cos(lat2), spacingMultiplier) :
+						getClosestResolutionHMS(static_cast<double>(prj->getPixelPerRadAtCenter())*std::cos(lat2), spacingMultiplier);
 		gridStepMeridianRad = M_PI_180 * closestResLon;
 	}
 
@@ -1766,7 +1771,7 @@ void SkyPoint::draw(StelCore *core) const
 
 
 GridLinesMgr::GridLinesMgr()
-	: gridlinesDisplayed(true)
+	: gridlinesDisplayed(true), gridSpacingMultiplier(1.0)
 {
 	setObjectName("GridLinesMgr");
 	SkyLine::init();
@@ -1987,6 +1992,8 @@ void GridLinesMgr::init()
 	setPartThickness(conf->value("viewing/part_thickness", 1.f).toFloat());
 	// Set the point size
 	setPointSize(conf->value("viewing/point_size", 5.f).toFloat());
+	// Set gridline spacing
+	setGridSpacingMultiplier(conf->value("viewing/grid_spacing_multiplier", 1.0).toDouble());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
@@ -4177,4 +4184,27 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	solsticePoints->setFontSize(pointFontSize);
 	apexPoints->setFontSize(pointFontSize);
 	umbraCenterPoint->setFontSize(pointFontSize);
+}
+double GridLinesMgr::getGridSpacingMultiplier() const
+{
+	return gridSpacingMultiplier;
+}
+
+void GridLinesMgr::setGridSpacingMultiplier(double multiplier)
+{
+	if (multiplier != gridSpacingMultiplier)
+	{
+		gridSpacingMultiplier = multiplier;
+		// Update all grids with new spacing
+		if (equGrid) equGrid->setSpacingMultiplier(multiplier);
+		if (equJ2000Grid) equJ2000Grid->setSpacingMultiplier(multiplier);
+		if (fixedEquatorialGrid) fixedEquatorialGrid->setSpacingMultiplier(multiplier);
+		if (galacticGrid) galacticGrid->setSpacingMultiplier(multiplier);
+		if (supergalacticGrid) supergalacticGrid->setSpacingMultiplier(multiplier);
+		if (eclGrid) eclGrid->setSpacingMultiplier(multiplier);
+		if (eclJ2000Grid) eclJ2000Grid->setSpacingMultiplier(multiplier);
+		if (aziGrid) aziGrid->setSpacingMultiplier(multiplier);
+
+		emit gridSpacingMultiplierChanged(multiplier);
+	}
 }

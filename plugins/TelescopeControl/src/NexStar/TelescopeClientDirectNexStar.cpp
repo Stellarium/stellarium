@@ -61,16 +61,16 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 	}
 	else
 	{
-		qWarning() << "ERROR creating TelescopeClientDirectNexStar: invalid parameters.";
+		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: invalid parameters.";
 		return;
 	}
 	
-	qDebug() << "TelescopeClientDirectNexStar parameters: port, time_delay:" << serialDeviceName << time_delay;
+	qCDebug(Telescopes) << "TelescopeClientDirectNexStar parameters: port, time_delay:" << serialDeviceName << time_delay;
 	
 	//Validation: Time delay
 	if (time_delay <= 0 || time_delay > 10000000)
 	{
-		qWarning() << "ERROR creating TelescopeClientDirectNexStar: time_delay not valid (should be less than 10000000)";
+		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: time_delay not valid (should be less than 10000000)";
 		return;
 	}
 	
@@ -85,7 +85,7 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 	nexstar = new NexStarConnection(*this, qPrintable(serialDeviceName));
 	if (nexstar->isClosed())
 	{
-		qWarning() << "ERROR creating TelescopeClientDirectNexStar: cannot open serial device" << serialDeviceName;
+		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: cannot open serial device" << serialDeviceName;
 		return;
 	}
 	

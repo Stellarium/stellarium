@@ -592,9 +592,9 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type) const
 /*****************************************************************************************
  Find and return the list of at most maxNbItem objects auto-completing passed object name
 *******************************************************************************************/
-QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> StelObjectMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (maxNbItem <= 0)
 		return result;
 
@@ -602,19 +602,19 @@ QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, int max
 	for (const auto* m : objectsModules)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
+		const auto matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 		result += matchingObj;
 	}
 
-	result.sort();
+	std::sort(result.begin(), result.end(), [](auto& a, auto& b){ return a.first < b.first; });
 	return result;
 }
 
-QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool inEnglish) const
 {
 	// search for module
 	StelObjectModule* module = Q_NULLPTR;
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	QString objModule, objType;
 	bool subSet = false;
 	if (moduleId.contains(":"))
@@ -641,7 +641,7 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 	if (module == Q_NULLPTR)
 	{
 		qWarning() << "Can't find module with id " << objModule;
-		return QStringList();
+		return {};
 	}
 	if (subSet)
 		result = module->listAllObjectsByType(objType, inEnglish);

@@ -65,25 +65,6 @@
 	//we use WIN32_LEAN_AND_MEAN so this needs to be included
 	//to use timeBeginPeriod/timeEndPeriod
 	#include <mmsystem.h>
-
-	// Default to High Performance Mode on machines with hybrid graphics
-	// Details: https://stackoverflow.com/questions/44174859/how-to-give-an-option-to-select-graphics-adapter-in-a-directx-11-application
-	extern "C"
-	{
-	#ifdef _MSC_VER
-		__declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
-		__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 0x00000001;
-	#else
-		__attribute__((dllexport)) DWORD NvOptimusEnablement = 0x00000001;
-		__attribute__((dllexport)) int AmdPowerXpressRequestHighPerformance = 0x00000001;
-	#endif
-	}
-#else
-	extern "C"
-	{
-		int NvOptimusEnablement = 1;
-		int AmdPowerXpressRequestHighPerformance = 1;
-	}
 #endif //Q_OS_WIN
 
 //! @class CustomQTranslator
@@ -469,12 +450,17 @@ int main(int argc, char **argv)
 	}
 	const auto qscreen = qApp->screens().at(screen);
 	const QRect screenGeom = qscreen->geometry();
-	const auto pixelRatio = qscreen->devicePixelRatio();
 
 	const auto virtSize = QSize(confSettings->value("video/screen_w", screenGeom.width()).toInt(),
 								confSettings->value("video/screen_h", screenGeom.height()).toInt());
+#ifdef Q_OS_WIN
+	const auto size = QSize(std::lround(virtSize.width()),
+				    std::lround(virtSize.height()));
+#else
+	const auto pixelRatio = qscreen->devicePixelRatio();
 	const auto size = QSize(std::lround(virtSize.width()/pixelRatio),
-							std::lround(virtSize.height()/pixelRatio));
+				    std::lround(virtSize.height()/pixelRatio));
+#endif
 	mainWin.resize(size);
 
 	const bool fullscreen = confSettings->value("video/fullscreen", true).toBool();
@@ -492,8 +478,13 @@ int main(int argc, char **argv)
 	{
 		const int x = confSettings->value("video/screen_x", 0).toInt();
 		const int y = confSettings->value("video/screen_y", 0).toInt();
+#ifdef Q_OS_WIN
+		mainWin.move(screenGeom.x() + x,
+			     screenGeom.y() + y);
+#else
 		mainWin.move(screenGeom.x() + x/pixelRatio,
 			     screenGeom.y() + y/pixelRatio);
+#endif
 	}
 
 	mainWin.show();

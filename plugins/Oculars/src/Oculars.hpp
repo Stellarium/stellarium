@@ -128,6 +128,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagUseMediumFocuserOverlay READ getFlagUseMediumFocuserOverlay	WRITE setFlagUseMediumFocuserOverlay NOTIFY flagUseMediumFocuserOverlayChanged)
 	Q_PROPERTY(bool flagUseLargeFocuserOverlay  READ getFlagUseLargeFocuserOverlay	WRITE setFlagUseLargeFocuserOverlay  NOTIFY flagUseLargeFocuserOverlayChanged)
 	Q_PROPERTY(Vec3f focuserColor               READ getFocuserColor                WRITE setFocuserColor                NOTIFY focuserColorChanged)
+	Q_PROPERTY(bool flagShowOAGLimits      READ getFlagShowOAGLimits	WRITE setFlagShowOAGLimits      NOTIFY flagShowOAGLimitsChanged)
 
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
@@ -320,6 +321,9 @@ public slots:
 
 	void setFlagUseLargeFocuserOverlay(const bool b);
 	bool getFlagUseLargeFocuserOverlay(void) const;
+	
+	void setFlagShowOAGLimits(const bool b);
+	bool getFlagShowOAGLimits(void) const;
 
 signals:
 	void enableOcularChanged(bool value);
@@ -367,6 +371,7 @@ signals:
 	void flagUseSmallFocuserOverlayChanged(bool value);
 	void flagUseMediumFocuserOverlayChanged(bool value);
 	void flagUseLargeFocuserOverlayChanged(bool value);
+	void flagShowOAGLimitsChanged(bool value);
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
@@ -580,6 +585,7 @@ private:
 	bool flagUseSmallFocuserOverlay;	//!< Flag used to track if a small-sized focuser (1.25") overlay should be shown.
 	bool flagUseMediumFocuserOverlay;	//!< Flag used to track if a medium-sized focuser (2.0") overlay should be shown.
 	bool flagUseLargeFocuserOverlay;	//!< Flag used to track if a large-sized focuser (3.3") overlay should be shown.
+	bool flagShowOAGLimits;		//!< Flag used to track if the OAG agnular limits should be shown.
 };
 
 

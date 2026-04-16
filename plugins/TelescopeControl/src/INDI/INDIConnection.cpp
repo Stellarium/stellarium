@@ -29,6 +29,8 @@
 #include <libindi/basedevice.h>
 #include <libindi/inditelescope.h>
 
+#include "TelescopeControl.hpp"
+
 const int INDIConnection::SLEW_STOP = INDI::Telescope::SLEW_GUIDE - 1;
 
 INDIConnection::INDIConnection(QObject *parent) : QObject(parent)
@@ -58,7 +60,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 
 	if (!mTelescope.isConnected())
 	{
-		qDebug() << "Error: Telescope not connected";
+		qCWarning(Telescopes) << "Error: Telescope not connected";
 		return;
 	}
 
@@ -66,7 +68,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 	auto switchVector = mTelescope.getSwitch("ON_COORD_SET");
 	if (!switchVector.isValid())
 	{
-		qDebug() << "Error: unable to find Telescope or ON_COORD_SET switch...";
+		qCWarning(Telescopes) << "Error: unable to find Telescope or ON_COORD_SET switch...";
 		return;
 	}
 	// Note that confusingly there is a SLEW switch member as well that will move but not track.
@@ -81,7 +83,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 	auto property = mTelescope.getNumber("EQUATORIAL_EOD_COORD");
 	if (!property.isValid())
 	{
-		qDebug() << "Error: unable to find Telescope or EQUATORIAL_EOD_COORD property...";
+		qCWarning(Telescopes) << "Error: unable to find Telescope or EQUATORIAL_EOD_COORD property...";
 		return;
 	}
 
@@ -98,7 +100,7 @@ void INDIConnection::syncPosition(INDIConnection::Coordinates coords)
 
 	if (!mTelescope.isConnected())
 	{
-		qDebug() << "Error: Telescope not connected";
+		qCWarning(Telescopes) << "Error: Telescope not connected";
 		return;
 	}
 
@@ -106,7 +108,7 @@ void INDIConnection::syncPosition(INDIConnection::Coordinates coords)
 	auto switchVector = mTelescope.getSwitch("ON_COORD_SET");
 	if (!switchVector.isValid())
 	{
-		qDebug() << "Error: unable to find Telescope or ON_COORD_SET switch...";
+		qCWarning(Telescopes) << "Error: unable to find Telescope or ON_COORD_SET switch...";
 		return;
 	}
 
@@ -121,7 +123,7 @@ void INDIConnection::syncPosition(INDIConnection::Coordinates coords)
 	auto property = mTelescope.getNumber("EQUATORIAL_EOD_COORD");
 	if (!property.isValid())
 	{
-		qDebug() << "Error: unable to find Telescope or EQUATORIAL_EOD_COORD property...";
+		qCWarning(Telescopes) << "Error: unable to find Telescope or EQUATORIAL_EOD_COORD property...";
 		return;
 	}
 
@@ -160,7 +162,7 @@ void INDIConnection::unParkTelescope()
 	auto switchVector = mTelescope.getSwitch("TELESCOPE_PARK");
 	if (!switchVector.isValid())
 	{
-		qDebug() << "Error: unable to find Telescope or TELESCOPE_PARK switch...";
+		qCWarning(Telescopes) << "Error: unable to find Telescope or TELESCOPE_PARK switch...";
 		return;
 	}
 
@@ -192,7 +194,7 @@ void INDIConnection::parkTelescope()
 	auto switchVector = mTelescope.getSwitch("TELESCOPE_PARK");
 	if (!switchVector.isValid())
 	{
-		qDebug() << "Error: unable to find Telescope or TELESCOPE_PARK switch...";
+		qCWarning(Telescopes) << "Error: unable to find Telescope or TELESCOPE_PARK switch...";
 		return;
 	}
 
@@ -221,7 +223,7 @@ void INDIConnection::moveNorth(int speed)
 	auto switchVector = mTelescope.getSwitch("TELESCOPE_MOTION_NS");
 	if (!switchVector.isValid())
 	{
-		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_NS switch...";
+		qCWarning(Telescopes) << "Error: unable to find Telescope or TELESCOPE_MOTION_NS switch...";
 		return;
 	}
 
@@ -247,7 +249,7 @@ void INDIConnection::moveEast(int speed)
 	auto switchVector = mTelescope.getSwitch("TELESCOPE_MOTION_WE");
 	if (!switchVector.isValid())
 	{
-		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_WE switch...";
+		qCWarning(Telescopes) << "Error: unable to find Telescope or TELESCOPE_MOTION_WE switch...";
 		return;
 	}
 
@@ -273,7 +275,7 @@ void INDIConnection::moveSouth(int speed)
 	auto switchVector = mTelescope.getSwitch("TELESCOPE_MOTION_NS");
 	if (!switchVector.isValid())
 	{
-		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_NS switch...";
+		qCWarning(Telescopes) << "Error: unable to find Telescope or TELESCOPE_MOTION_NS switch...";
 		return;
 	}
 
@@ -299,7 +301,7 @@ void INDIConnection::moveWest(int speed)
 	auto switchVector = mTelescope.getSwitch("TELESCOPE_MOTION_WE");
 	if (!switchVector.isValid())
 	{
-		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_WE switch...";
+		qCWarning(Telescopes) << "Error: unable to find Telescope or TELESCOPE_MOTION_WE switch...";
 		return;
 	}
 
@@ -337,7 +339,7 @@ void INDIConnection::newDevice(INDI::BaseDevice dp)
 
 	QString name(dp.getDeviceName());
 
-	qDebug().noquote() << "INDIConnection::newDevice| New Device... " << name;
+	qCDebug(Telescopes).noquote() << "INDIConnection::newDevice| New Device... " << name;
 
 	mDevices.append(name);
 	mTelescope = dp;
@@ -371,13 +373,13 @@ void INDIConnection::newProperty(INDI::Property property)
 
 	QString name(property.getName());
 
-	qDebug().noquote() << "INDIConnection::newProperty| " << name;
+	qCDebug(Telescopes).noquote() << "INDIConnection::newProperty| " << name;
 
 	if (!mTelescope.isConnected())
 	{
 		connectDevice(mTelescope.getDeviceName());
 		if (mTelescope.isConnected())
-			qDebug() << "connected\n";
+			qCDebug(Telescopes) << "connected\n";
 	}
 }
 

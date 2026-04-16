@@ -278,56 +278,60 @@ StelObjectP Novae::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QVector<QPair<QString,StelObjectP>> Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (maxNbItem <= 0)
 		return result;
 
-	QStringList names;
+	QVector<QPair<QString,StelObjectP>> names;
 	for (const auto& n : nova)
 	{
-		names.append(n->getNameI18n());
-		names.append(n->getEnglishName());
-		names.append(n->getDesignation());
+		names.append({n->getNameI18n(), StelObjectP(n)});
+		names.append({n->getEnglishName(), StelObjectP(n)});
+		names.append({n->getDesignation(), StelObjectP(n)});
 	}
 
-	QString fullMatch = "";
-	for (const auto& name : names)
+	QString fullMatchName;
+	StelObjectP fullMatchP;
+	for (const auto& [name,obj] : names)
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 			continue;
 
 		if (name==objPrefix)
-			fullMatch = name;
+		{
+			fullMatchName = name;
+			fullMatchP = obj;
+		}
 		else
-			result.append(name);
+			result.append({name, obj});
 
 		if (result.size() >= maxNbItem)
 			break;
 	}
 
-	result.sort();
-	if (!fullMatch.isEmpty())
-		result.prepend(fullMatch);
+	std::sort(result.begin(), result.end(), [](auto& a, auto& b){ return a.first < b.first; });
+	if (!fullMatchName.isEmpty())
+		result.prepend({fullMatchName, fullMatchP});
 	return result;
 }
 
-QStringList Novae::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> Novae::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (inEnglish)
 	{
 		for (const auto& n : nova)
 		{
-			result << n->getEnglishName();
+			result.append({n->getEnglishName(), StelObjectP(n)});
 		}
 	}
 	else
 	{
 		for (const auto& n : nova)
 		{
-			result << n->getNameI18n();
+			result.append({n->getNameI18n(), StelObjectP(n)});
 		}
 	}
 	return result;

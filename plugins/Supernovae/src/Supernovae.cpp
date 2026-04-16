@@ -280,21 +280,21 @@ StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Supernovae::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> Supernovae::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 	if (inEnglish)
 	{
 		for (const auto& sn : snstar)
 		{
-			result << sn->getEnglishName();
+			result.append({sn->getEnglishName(), StelObjectP(sn)});
 		}
 	}
 	else
 	{
 		for (const auto& sn : snstar)
 		{
-			result << sn->getNameI18n();
+			result.append({sn->getNameI18n(), StelObjectP(sn)});
 		}
 	}
 	return result;

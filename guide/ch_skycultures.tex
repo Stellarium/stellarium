@@ -8,7 +8,7 @@
 
 
 
-\chapter{Adding Sky Cultures}
+\chapter{Sky Cultures}
 \label{ch:SkyCultures}
 \chapterauthor*{Georg Zotti, with additions by Alexander Wolf and Susanne M. Hoffmann}
 
@@ -37,6 +37,7 @@ A \indexterm{sky culture} in Stellarium is the entity that consists of
 \begin{itemize}
 \item a description of the role these constellations and other celestial features (clouds, polar lights (aurorae), meteors, comets, \ldots) 
       had or still have for the human culture that used or use these constellations, including some relevant background on the culture.
+\item (optional) a definition\newFeature{26.1} of geographic distribution of the skyculture over time (see \ref{SC:territory.geojson})
 \item a set of names for constellations 
 \item stick figure definitions connecting stars into those constellations
 \item (optional) a list of names for individual stars
@@ -305,8 +306,9 @@ Tags not described here may be used in other programs but are ignored by Stellar
 \label{SC:region}
 
 The ``region'' tag marks the origin region of the respective sky culture.
-It allows some form of additional grouping. The names of regions are following the United Nations
-geoscheme UN~M49\footnote{Standard country or area codes for statistical use (M49) -- \url{https://unstats.un.org/unsd/methodology/m49/}}:
+It allows some form of additional grouping. The names of regions are largely following the United Nations
+geoscheme UN~M49\footnote{Standard country or area codes for statistical use (M49) -- \url{https://unstats.un.org/unsd/methodology/m49/}}, 
+but with some deviations:
 \begin{description}
 	\item[Northern Africa] -- Algeria, Egypt, Libya, Morocco, Sudan, Tunisia, Western Sahara.
 	\item[Eastern Africa] -- British Indian Ocean Territory, Burundi, Comoros, Djibouti, Eritrea, Ethiopia, French Southern Territories, Kenya,
@@ -320,7 +322,7 @@ geoscheme UN~M49\footnote{Standard country or area codes for statistical use (M4
           Saint Kitts and Nevis, Saint Lucia, Saint Martin (French Part), Saint Vincent and the Grenadines, Sint Maarten (Dutch part),
           Trinidad and Tobago, Turks and Caicos Islands, United States Virgin Islands.
 	\item[Central America] -- Belize, Costa Rica, El Salvador, Guatemala, Honduras, Mexico, Nicaragua, Panama.
-	\item[Southern America] -- Argentina, Bolivia (Plurinational State of), Bouvet Island, Brazil, Chile, Colombia, Ecuador,
+	\item[South America] -- Argentina, Bolivia (Plurinational State of), Bouvet Island, Brazil, Chile, Colombia, Ecuador,
           Falkland Islands (Malvinas), French Guiana, Guyana, Paraguay, Peru, South Georgia and the South Sandwich Islands, Suriname,
           Uruguay, Venezuela (Bolivarian Republic of).
 	\item[Northern America] -- Bermuda, Canada, Greenland, Saint Pierre and Miquelon, United States of America.
@@ -345,7 +347,9 @@ geoscheme UN~M49\footnote{Standard country or area codes for statistical use (M4
 	\item[Polynesia] -- American Samoa, Cook Islands, French Polynesia, Niue, Pitcairn, Samoa, Tokelau, Tonga, Tuvalu, Wallis and Futuna Islands.
 \end{description}
 
-\noindent For ``modern'' sky cultures we use the special region name \textbf{World} to define worldwide applicable data.
+\noindent For ``modern'' sky cultures we use the special region name \textbf{World} to define worldwide applicable data. 
+
+In case you are illustrating a fictional sky culture not actually used on Earth, you can use \textbf{Other} or even whatever else you like. They will be listed in the ``Other'' category in the View dialog.
 
 \begin{figure}[htbp]
 	\centering\includegraphics[width=0.75\textwidth]{Africa-regions.png}
@@ -1075,6 +1079,48 @@ Here, \texttt{modern} names the skyculture, and the comma-separated entries are 
 the file \file{description.md} or asterism abbreviations you want to be ignored.
 
 
+\section{Territory description}
+\label{sec:skycultures:territory}
+\label{SC:territory.geojson}
+
+Most traditional skycultures are regional.\newFeature{26.1} The map interface in the View dialog should indicate where on Earth a skyculture is located. 
+Stellarium makes use of a file in the GeoJSON format, \file{territory.geojson}, to encode where and when this culture is located. 
+In case a cultural group can be traced over a longer time and the culture has moved or spread, the time slider below the map will show the changes in the geographic regions.  
+
+GeoJSON is a flexible and simple JSON-based format to encode a collection of geographic features (points, lines and polygons) with geographic coordinates (pairs of longitude/latitude in decimal degrees, WGS84). 
+Additional properties can be given in a \jtag{properties} dictionary.  Stellarium only uses polygonal features, and stores \jtag{beginDate} and \jtag{endDate} data (calendar years) for each polygon. 
+If the end date should be ``now'', this is indicated by a special value \texttt{9146}.
+
+% Internal documentation: Moritz Rätz previously used a self-coined JSON format with string properties. It used "INFINITY SYMBOL" as special value.   9-14-6 = I-N-F 
+
+An example (Norse (Edda) SC):
+
+\begin{jsonfile}[\scriptsize]
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+	                  "beginTime": 800,
+	                  "endTime": 1400	      
+      },
+      "geometry": {
+        "coordinates": [
+           [
+                [ -22.746442921526324, 64.13294959328397 ],
+                [ -22.437762179297245, 64.03176502170129 ],
+                ...
+                [ -22.81812760274378, 64.08885223306777 ]
+           ]
+        ],
+        "type": "Polygon"
+      }
+    },
+    ...
+  ]
+}
+\end{jsonfile}
 
 \section{The Skyculture Converter}
 \label{ch:SkyCultures:converter}

@@ -28,6 +28,7 @@
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "types/Classification.hpp"
+#include "types/CulturePolygon.hpp"
 #include "types/ConstellationLine.hpp"
 #include "types/Description.hpp"
 #include "types/License.hpp"
@@ -52,6 +53,12 @@ public:
 	 */
 	const QString &getId() const;
 
+	/// Sets the start time of the sky culture
+	void setBeginTime(int beginTime);
+
+	/// Sets the end time of the sky culture
+	void setEndTime(int endTime);
+
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
 
@@ -60,8 +67,14 @@ public:
 									   const std::vector<ConstellationLine> &lines, 
 									   const bool isDarkConstellation);
 
+	/// Adds a location to the sky culture
+	void addLocation(const scm::CulturePolygon &polygon);
+
 	/// Removes a constellation from the sky culture by its ID
 	void removeConstellation(const QString &id);
+
+	/// Removes a location from the sky culture by its ID
+	void removeLocation(int id);
 
 	/// Gets a constellation from the sky culture by its ID
 	ScmConstellation *getConstellation(const QString &id);
@@ -77,6 +90,11 @@ public:
 	* @param mergeLines Whether to merge the lines of the constellations into polylines where possible.
 	*/
 	QJsonObject toJson(const bool mergeLines) const;
+
+	/**
+	* @brief Returns the territory of the sky culture as a (Geo)JSON object
+	*/
+	QJsonObject getTerritoryGeoJson() const;
 
 	/**
 	* @brief Draws the sky culture.
@@ -105,6 +123,11 @@ public:
 	 */
 	bool saveIllustrations(const QString &directory);
 
+	/**
+	* @brief Checks whether the polygons of locations overlap and merges them if necessary.
+	*/
+	void mergeLocations();
+
 private:
 	/// Sky culture identifier
 	QString id;
@@ -117,6 +140,25 @@ private:
 
 	/// The description of the sky culture
 	scm::Description description;
+
+	/// The geographical location (as polygons) of the sky culture
+	QList<CulturePolygon> locations;
+
+	/// The earliest year associated with a territory of the sky culture
+	int beginTime;
+
+	/// The latest year associated with a territory of the sky culture
+	int endTime;
+
+	/**
+	 * @brief Evaluates which action shoud be taken after a merge operation and updates the respective location.
+	 *
+	 * @param idx The current index of the respective polygon in locations.
+	 * @param mergeBeginTime The beginTime of the new polygon that was created in the merge process.
+	 * @param mergeEndTime The endTime of the new polygon that was created in the merge process.
+	 * @return True if a deletion was performed, false otherwise.
+	 */
+	bool updateLocationAfterMerge(int idx, int mergeBeginTime, int mergeEndTime);
 };
 
 } // namespace scm

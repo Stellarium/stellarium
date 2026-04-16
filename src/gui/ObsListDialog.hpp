@@ -250,6 +250,7 @@ private:
 
 	QList<QString> listNames; //!< List names, used for the ComboBox
 	QString currentListName;  //!< Name of list with selectedOlud
+	QString currentListDescription; //!< Description of list with selectedOlud
 	QString sorting;	  //!< Sorting of the list ex: right ascension
 
 	bool flagUseJD;         //!< Property. Store/retrieve date

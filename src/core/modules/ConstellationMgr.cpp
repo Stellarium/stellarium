@@ -1824,32 +1824,36 @@ StelObjectP ConstellationMgr::searchByID(const QString &id) const
 	return nullptr;
 }
 
-QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> ConstellationMgr::listAllObjects(bool inEnglish) const
 {
 	// TODO: This is needed for the search dialog.
-	QStringList result;
+	QMap<QString,StelObjectP> map;
 	if (inEnglish)
 	{
 		for (auto* constellation : constellations)
 		{
-			result << constellation->getEnglishName();
-			result << constellation->culturalName.pronounce;
-			result << constellation->culturalName.transliteration;
-			result << constellation->culturalName.native;
+			const StelObjectP obj(constellation);
+			map[constellation->getEnglishName()] = obj;
+			map[constellation->culturalName.pronounce] = obj;
+			map[constellation->culturalName.transliteration] = obj;
+			map[constellation->culturalName.native] = obj;
 		}
 	}
 	else
 	{
 		for (auto* constellation : constellations)
 		{
-			result << constellation->getNameI18n();
-			result << constellation->culturalName.pronounceI18n;
-			result << constellation->culturalName.native;
+			const StelObjectP obj(constellation);
+			map[constellation->getNameI18n()] = obj;
+			map[constellation->culturalName.pronounceI18n] = obj;
+			map[constellation->culturalName.native] = obj;
 		}
 	}
-	result.removeDuplicates();
-	result.removeOne(QString(""));
-	result.removeOne(QString());
+	map.remove("");
+	map.remove(QString{});
+	QVector<QPair<QString,StelObjectP>> result;
+	for (auto it = map.constKeyValueBegin(); it != map.constKeyValueEnd(); ++it)
+		result.append({(*it).first, (*it).second});
 	return result;
 }
 

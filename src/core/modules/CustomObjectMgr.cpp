@@ -495,30 +495,30 @@ StelObjectP CustomObjectMgr::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList CustomObjectMgr::listAllObjects(bool inEnglish) const
+QVector<QPair<QString,StelObjectP>> CustomObjectMgr::listAllObjects(bool inEnglish) const
 {
-	QStringList result;
+	QVector<QPair<QString,StelObjectP>> result;
 
 	if (inEnglish)
 	{
 		for (const auto& cObj : customObjects)
 		{
-			result << cObj->getEnglishName();
+			result.append({cObj->getEnglishName(), StelObjectP(cObj)});
 		}
 		for (const auto& pObj : persistentObjects)
 		{
-			result << pObj->getEnglishName();
+			result.append({pObj->getEnglishName(), StelObjectP(pObj)});
 		}
 	}
 	else
 	{
 		for (const auto& cObj : customObjects)
 		{
-			result << cObj->getNameI18n();
+			result.append({cObj->getNameI18n(), StelObjectP(cObj)});
 		}
 		for (const auto& pObj : persistentObjects)
 		{
-			result << pObj->getNameI18n();
+			result.append({pObj->getNameI18n(), StelObjectP(pObj)});
 		}
 	}
 	return result;
