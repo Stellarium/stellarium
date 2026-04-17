@@ -404,8 +404,8 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	}
 
 	// It is okay for the constellationId to be empty, as long as the constellationPlaceholderId is set
-	QString finalId = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
-	if (finalId.isEmpty())
+	QString finalId = constellationId.trimmed().isEmpty() ? constellationPlaceholderId : constellationId;
+	if (finalId.trimmed().isEmpty())
 	{
 		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
 		                            q_("Could not save: Constellation ID is empty"));
@@ -490,7 +490,7 @@ void ScmConstellationDialog::saveConstellation()
 		scm::ScmConstellation &constellation = culture->addConstellation(id, lines,
 		                                                                 isDarkConstellation);
 
-		constellation.setCommonName(constellationCommonName);
+		constellation.setCommonName(constellationCommonName.trimmed());
 		constellation.setDescription(constellationDescription);
 		if (imageItem->isVisible() && imageItem->getArtwork().getHasArt())
 		{

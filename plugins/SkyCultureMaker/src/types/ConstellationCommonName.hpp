@@ -35,6 +35,7 @@ struct ConstellationCommonName
 	QString transliteration;
 	QString ipa;
 
+	//! Clears all fields of the common name.
 	void clear()
 	{
 		english.clear();
@@ -45,6 +46,7 @@ struct ConstellationCommonName
 		ipa.clear();
 	}
 
+	//! Converts the common name to a JSON object.
 	QJsonObject toJson() const
 	{
 		QJsonObject json;
@@ -65,6 +67,19 @@ struct ConstellationCommonName
 		addIfNotEmpty("ipa", ipa);
 
 		return json;
+	}
+
+	//! Returns a trimmed version of the common name, i.e. with all fields trimmed.
+	ConstellationCommonName trimmed() const
+	{
+		ConstellationCommonName result = *this;
+		result.english = result.english.trimmed();
+		result.byname = result.byname.trimmed();
+		result.native = result.native.trimmed();
+		result.pronounce = result.pronounce.trimmed();
+		result.transliteration = result.transliteration.trimmed();
+		result.ipa = result.ipa.trimmed();
+		return result;
 	}
 };
 
