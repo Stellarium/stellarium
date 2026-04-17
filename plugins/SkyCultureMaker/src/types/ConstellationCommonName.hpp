@@ -20,7 +20,6 @@
 #ifndef SCM_CONSTELLATION_COMMON_NAME_HPP
 #define SCM_CONSTELLATION_COMMON_NAME_HPP
 
-#include <optional>
 #include <QJsonObject>
 #include <QString>
 
@@ -30,20 +29,20 @@ namespace scm
 struct ConstellationCommonName
 {
 	QString english;
-	std::optional<QString> byname;
-	std::optional<QString> native;
-	std::optional<QString> pronounce;
-	std::optional<QString> transliteration;
-	std::optional<QString> ipa;
+	QString byname;
+	QString native;
+	QString pronounce;
+	QString transliteration;
+	QString ipa;
 
 	void clear()
 	{
 		english.clear();
-		byname = std::nullopt;
-		native = std::nullopt;
-		pronounce = std::nullopt;
-		transliteration = std::nullopt;
-		ipa = std::nullopt;
+		byname.clear();
+		native.clear();
+		pronounce.clear();
+		transliteration.clear();
+		ipa.clear();
 	}
 
 	QJsonObject toJson() const
@@ -51,19 +50,19 @@ struct ConstellationCommonName
 		QJsonObject json;
 		json["english"] = english;
 
-		auto addIfPresent = [&json](const char *key, const std::optional<QString> &value)
+		auto addIfNotEmpty = [&json](const char *key, const QString &value)
 		{
-			if (value.has_value())
+			if (!value.isEmpty())
 			{
-				json[key] = value.value();
+				json[key] = value;
 			}
 		};
 
-		addIfPresent("byname", byname);
-		addIfPresent("native", native);
-		addIfPresent("pronounce", pronounce);
-		addIfPresent("transliteration", transliteration);
-		addIfPresent("ipa", ipa);
+		addIfNotEmpty("byname", byname);
+		addIfNotEmpty("native", native);
+		addIfNotEmpty("pronounce", pronounce);
+		addIfNotEmpty("transliteration", transliteration);
+		addIfNotEmpty("ipa", ipa);
 
 		return json;
 	}

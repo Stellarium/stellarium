@@ -79,11 +79,11 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 
 	ui->enNameLE->setText(constellationCommonName.english);
 	ui->idLE->setText(constellationId);
-	ui->bynameLE->setText(constellationCommonName.byname.value_or(""));
-	ui->natNameLE->setText(constellationCommonName.native.value_or(""));
-	ui->pronounceLE->setText(constellationCommonName.pronounce.value_or(""));
-	ui->translitLE->setText(constellationCommonName.transliteration.value_or(""));
-	ui->ipaLE->setText(constellationCommonName.ipa.value_or(""));
+	ui->bynameLE->setText(constellationCommonName.byname);
+	ui->natNameLE->setText(constellationCommonName.native);
+	ui->pronounceLE->setText(constellationCommonName.pronounce);
+	ui->translitLE->setText(constellationCommonName.transliteration);
+	ui->ipaLE->setText(constellationCommonName.ipa);
 	ui->description->setText(constellationDescription);
 
 	// Hide the original constellation while editing
@@ -190,13 +190,11 @@ void ScmConstellationDialog::createDialogContent()
 	imageItem->setAnchorPositionChangedCallback([this]() { this->updateArtwork(); });
 
 	// artwork tool tip
-  updateTranslatableStrings();
+	updateTranslatableStrings();
 	ui->tooltipLabel->setText(artworkToolTip);
 	ui->tooltipLabel->raise();
 	ui->tooltipLabel->hide();
-	connect(ui->tooltipBtn, &QToolButton::clicked, this, [this]() {
-		ui->tooltipLabel->show();
-	});
+	connect(ui->tooltipBtn, &QToolButton::clicked, this, [this]() { ui->tooltipLabel->show(); });
 	connect(ui->tooltipLabel, &QPushButton::clicked, this, [this]() { ui->tooltipLabel->hide(); });
 	updateTranslatableStrings();
 	ui->tooltipBtn->setToolTip(artworkToolTip);
@@ -222,50 +220,14 @@ void ScmConstellationDialog::createDialogContent()
 		});
 	connect(ui->idLE, &QLineEdit::textChanged, this, [this]() { constellationId = ui->idLE->text(); });
 	connect(ui->bynameLE, &QLineEdit::textChanged, this,
-	        [this]()
-	        {
-			constellationCommonName.byname = ui->bynameLE->text();
-			if (constellationCommonName.byname->isEmpty())
-			{
-				constellationCommonName.byname = std::nullopt;
-			}
-		});
+	        [this]() { constellationCommonName.byname = ui->bynameLE->text(); });
 	connect(ui->natNameLE, &QLineEdit::textChanged, this,
-	        [this]()
-	        {
-			constellationCommonName.native = ui->natNameLE->text();
-			if (constellationCommonName.native->isEmpty())
-			{
-				constellationCommonName.native = std::nullopt;
-			}
-		});
+	        [this]() { constellationCommonName.native = ui->natNameLE->text(); });
 	connect(ui->pronounceLE, &QLineEdit::textChanged, this,
-	        [this]()
-	        {
-			constellationCommonName.pronounce = ui->pronounceLE->text();
-			if (constellationCommonName.pronounce->isEmpty())
-			{
-				constellationCommonName.pronounce = std::nullopt;
-			}
-		});
+	        [this]() { constellationCommonName.pronounce = ui->pronounceLE->text(); });
 	connect(ui->translitLE, &QLineEdit::textChanged, this,
-			[this]()
-			{
-				constellationCommonName.transliteration = ui->translitLE->text();
-				if (constellationCommonName.transliteration->isEmpty())
-				{
-					constellationCommonName.transliteration = std::nullopt;
-				}
-			});
-	connect(ui->ipaLE, &QLineEdit::textChanged, this,
-	        [this]()
-	        {
-			constellationCommonName.ipa = ui->ipaLE->text();
-			if (constellationCommonName.ipa->isEmpty())
-			{
-				constellationCommonName.ipa = std::nullopt;
-			}
-		});
+	        [this]() { constellationCommonName.transliteration = ui->translitLE->text(); });
+	connect(ui->ipaLE, &QLineEdit::textChanged, this, [this]() { constellationCommonName.ipa = ui->ipaLE->text(); });
 	connect(ui->description, &QTextEdit::textChanged, this,
 	        [this]() { constellationDescription = ui->description->toPlainText(); });
 }
@@ -432,7 +394,8 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 		return false;
 	}
 
-	if (constellationCommonName.english.isEmpty())
+	// English name is required and whitespace-only is not allowed
+	if (constellationCommonName.english.trimmed().isEmpty())
 	{
 		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
 		                            q_("Could not save: English name is empty"));
@@ -613,14 +576,14 @@ void ScmConstellationDialog::updateTranslatableStrings()
 	}
 
 #if defined(Q_OS_MAC)
-	helpDrawInfoPen = q_("Use RightClick or Control + Click to draw a connected line.\n"
-	                     "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
-	                     "Use Command + F to search and connect stars.");
+	helpDrawInfoPen    = q_("Use RightClick or Control + Click to draw a connected line.\n"
+	                        "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
+	                        "Use Command + F to search and connect stars.");
 	helpDrawInfoEraser = q_("Hold RightClick or Control + Click to delete the line under the cursor.\n");
 #else
-	helpDrawInfoPen = q_("Use RightClick to draw a connected line.\n"
-	                     "Use Double-RightClick to stop drawing the line.\n"
-	                     "Use CTRL + F to search and connect stars.");
+	helpDrawInfoPen    = q_("Use RightClick to draw a connected line.\n"
+	                        "Use Double-RightClick to stop drawing the line.\n"
+	                        "Use CTRL + F to search and connect stars.");
 	helpDrawInfoEraser = q_("Hold RightClick to delete the line under the cursor.\n");
 #endif
 
