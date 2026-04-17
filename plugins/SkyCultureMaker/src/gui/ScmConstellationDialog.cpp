@@ -72,23 +72,18 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	// Save the constellation that is currently being edited
 	constellationBeingEdited = constellation;
 
-	constellationId              = constellation->getId();
-	constellationEnglishName     = constellation->getEnglishName();
-	constellationPlaceholderId   = constellation->getId();
-	constellationByname 		 = constellation->getByname();
-	constellationNativeName      = constellation->getNativeName();
-	constellationPronounce       = constellation->getPronounce();
-	constellationTransliteration = constellation->getTransliteration();
-	constellationIPA             = constellation->getIPA();
-	constellationDescription     = constellation->getDescription();
+	constellationId            = constellation->getId();
+	constellationPlaceholderId = constellation->getId();
+	constellationCommonName    = constellation->getCommonName();
+	constellationDescription   = constellation->getDescription();
 
-	ui->enNameLE->setText(constellationEnglishName);
+	ui->enNameLE->setText(constellationCommonName.english);
 	ui->idLE->setText(constellationId);
-	ui->bynameLE->setText(constellationByname.value_or(""));
-	ui->natNameLE->setText(constellationNativeName.value_or(""));
-	ui->pronounceLE->setText(constellationPronounce.value_or(""));
-	ui->translitLE->setText(constellationTransliteration.value_or(""));
-	ui->ipaLE->setText(constellationIPA.value_or(""));
+	ui->bynameLE->setText(constellationCommonName.byname.value_or(""));
+	ui->natNameLE->setText(constellationCommonName.native.value_or(""));
+	ui->pronounceLE->setText(constellationCommonName.pronounce.value_or(""));
+	ui->translitLE->setText(constellationCommonName.transliteration.value_or(""));
+	ui->ipaLE->setText(constellationCommonName.ipa.value_or(""));
 	ui->description->setText(constellationDescription);
 
 	// Hide the original constellation while editing
@@ -219,9 +214,9 @@ void ScmConstellationDialog::createDialogContent()
 	connect(ui->enNameLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			constellationEnglishName = ui->enNameLE->text();
+			constellationCommonName.english = ui->enNameLE->text();
 
-			QString newConstId         = constellationEnglishName.toLower().replace(" ", "_");
+			QString newConstId         = constellationCommonName.english.toLower().replace(" ", "_");
 			constellationPlaceholderId = newConstId;
 			ui->idLE->setPlaceholderText(newConstId);
 		});
@@ -229,46 +224,46 @@ void ScmConstellationDialog::createDialogContent()
 	connect(ui->bynameLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			constellationByname = ui->bynameLE->text();
-			if (constellationByname->isEmpty())
+			constellationCommonName.byname = ui->bynameLE->text();
+			if (constellationCommonName.byname->isEmpty())
 			{
-				constellationByname = std::nullopt;
+				constellationCommonName.byname = std::nullopt;
 			}
 		});
 	connect(ui->natNameLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			constellationNativeName = ui->natNameLE->text();
-			if (constellationNativeName->isEmpty())
+			constellationCommonName.native = ui->natNameLE->text();
+			if (constellationCommonName.native->isEmpty())
 			{
-				constellationNativeName = std::nullopt;
+				constellationCommonName.native = std::nullopt;
 			}
 		});
 	connect(ui->pronounceLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			constellationPronounce = ui->pronounceLE->text();
-			if (constellationPronounce->isEmpty())
+			constellationCommonName.pronounce = ui->pronounceLE->text();
+			if (constellationCommonName.pronounce->isEmpty())
 			{
-				constellationPronounce = std::nullopt;
+				constellationCommonName.pronounce = std::nullopt;
 			}
 		});
 	connect(ui->translitLE, &QLineEdit::textChanged, this,
 			[this]()
 			{
-				constellationTransliteration = ui->translitLE->text();
-				if (constellationTransliteration->isEmpty())
+				constellationCommonName.transliteration = ui->translitLE->text();
+				if (constellationCommonName.transliteration->isEmpty())
 				{
-					constellationTransliteration = std::nullopt;
+					constellationCommonName.transliteration = std::nullopt;
 				}
 			});
 	connect(ui->ipaLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			constellationIPA = ui->ipaLE->text();
-			if (constellationIPA->isEmpty())
+			constellationCommonName.ipa = ui->ipaLE->text();
+			if (constellationCommonName.ipa->isEmpty())
 			{
-				constellationIPA = std::nullopt;
+				constellationCommonName.ipa = std::nullopt;
 			}
 		});
 	connect(ui->description, &QTextEdit::textChanged, this,
@@ -437,7 +432,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 		return false;
 	}
 
-	if (constellationEnglishName.isEmpty())
+	if (constellationCommonName.english.isEmpty())
 	{
 		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
 		                            q_("Could not save: English name is empty"));
@@ -532,12 +527,7 @@ void ScmConstellationDialog::saveConstellation()
 		scm::ScmConstellation &constellation = culture->addConstellation(id, lines,
 		                                                                 isDarkConstellation);
 
-		constellation.setEnglishName(constellationEnglishName);
-		constellation.setByname(constellationByname);
-		constellation.setNativeName(constellationNativeName);
-		constellation.setPronounce(constellationPronounce);
-		constellation.setTransliteration(constellationTransliteration);
-		constellation.setIPA(constellationIPA);
+		constellation.setCommonName(constellationCommonName);
 		constellation.setDescription(constellationDescription);
 		if (imageItem->isVisible() && imageItem->getArtwork().getHasArt())
 		{
@@ -573,22 +563,12 @@ void ScmConstellationDialog::resetDialog()
 	constellationPlaceholderId.clear();
 	ui->idLE->setPlaceholderText("");
 
-	constellationEnglishName.clear();
+	constellationCommonName.clear();
 	ui->enNameLE->clear();
-
-	constellationByname = std::nullopt;
 	ui->bynameLE->clear();
-
-	constellationNativeName = std::nullopt;
 	ui->natNameLE->clear();
-
-	constellationPronounce = std::nullopt;
 	ui->pronounceLE->clear();
-
-	constellationTransliteration = std::nullopt;
 	ui->translitLE->clear();
-
-	constellationIPA = std::nullopt;
 	ui->ipaLE->clear();
 
 	constellationDescription.clear();

@@ -27,6 +27,7 @@
 #include "ScmConstellationImage.hpp"
 #include "SkyCultureMaker.hpp"
 #include "StelDialogSeparate.hpp"
+#include "types/ConstellationCommonName.hpp"
 #include "types/DrawTools.hpp"
 #include <array>
 #include <optional>
@@ -80,18 +81,8 @@ private:
 	QString constellationId;
 	/// Placeholder identifier of the constellation
 	QString constellationPlaceholderId;
-	/// English name of the constellation
-	QString constellationEnglishName;
-	/// The byname of the constellation
-	std::optional<QString> constellationByname;
-	/// Native name of the constellation
-	std::optional<QString> constellationNativeName;
-	/// Pronunciation of the constellation
-	std::optional<QString> constellationPronounce;
-	/// Transliteration representation of the constellation
-	std::optional<QString> constellationTransliteration;
-	/// IPA representation of the constellation
-	std::optional<QString> constellationIPA;
+	/// Common name of the constellation
+	scm::ConstellationCommonName constellationCommonName;
 	/// The currently displayed artwork
 	ScmConstellationImage *imageItem;
 	/// Holds the last used directory
