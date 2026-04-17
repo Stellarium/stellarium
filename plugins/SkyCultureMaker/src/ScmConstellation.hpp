@@ -61,16 +61,16 @@ public:
 	QString getId() const;
 
 	/**
-	 * @brief Sets the complete common name payload of the constellation.
+	 * @brief Sets the common name of the constellation.
 	 *
-	 * @param commonName The full common name data.
+	 * @param commonName The common name data.
 	 */
 	void setCommonName(const ConstellationCommonName &commonName);
 
 	/**
-	 * @brief Gets the complete common name payload of the constellation.
+	 * @brief Gets the common name of the constellation.
 	 *
-	 * @return The full common name data.
+	 * @return The common name data.
 	 */
 	const ConstellationCommonName &getCommonName() const;
 
