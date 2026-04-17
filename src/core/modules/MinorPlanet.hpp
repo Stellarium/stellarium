@@ -32,7 +32,7 @@
 //! Tp from JPL Horizons always refers to the nearest perihelion to the query
 //! date and is therefore not a stable value to store per-epoch.  We derive
 //! the equivalent t0 on demand as:
-//! t0 = epochJDE - meanAnomalyAtEpoch / meanMotion
+//!   t0 = epochJDE - meanAnomalyAtEpoch / meanMotion
 struct AsteroidEpochElements
 {
 	double epochJDE;            //!< JDE epoch of these elements
@@ -143,7 +143,7 @@ public:
 	//! get sidereal period for minor planet
 	double getSiderealPeriod() const override;
 
-	// Multi-epoch ephemeris support
+	// Multi-epoch ephemeris support (extended ephemeris pack)-
 
 	//! Load a table of orbital element snapshots from the extended ephemeris pack.
 	//! @param elements  Vector of epoch snapshots, must be sorted ascending by epochJDE.
@@ -185,7 +185,7 @@ private:
 	float b_v;
 	QString specT, specB;
 
-	// Multi-epoch ephemeris
+	// Multi-epoch ephemeris (empty unless extended pack is loaded)
 
 	//! Epoch snapshots loaded from the ephemeris pack, sorted by epochJDE.
 	QVector<AsteroidEpochElements> epochElements;

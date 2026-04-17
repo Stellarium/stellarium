@@ -346,7 +346,6 @@ QString MinorPlanet::renderIAUDesignationinHtml(const QString &plainTextName)
 		return QString(); //plainTextName;
 }
 
-
 // Multi-epoch ephemeris support
 
 void MinorPlanet::setEpochElements(const QVector<AsteroidEpochElements>& elements,
@@ -367,7 +366,6 @@ void MinorPlanet::setEpochElements(const QVector<AsteroidEpochElements>& element
 	          });
 }
 
-// ---------------------------------------------------------------------------
 // orbitFromSnapshot — build a KeplerOrbit from a single epoch snapshot.
 //
 // KeplerOrbit propagates position as:  M(JDE) = n * (JDE - t0)
@@ -377,19 +375,31 @@ void MinorPlanet::setEpochElements(const QVector<AsteroidEpochElements>& element
 // This gives the perihelion passage closest to epochJDE, which is exactly
 // what we want for forward/backward propagation from that snapshot.
 //
-// orbitGood is passed as 0.0 (= always valid).  The epoch table covers the
-// full simulation window, so the single-snapshot staleness concept does not
-// apply: we never want Stellarium to suppress the position or show the
-// "outdated elements" warning just because time has advanced since the last
-// updateEpochOrbit() rebuild.  The rebuild guard in updateEpochOrbit() is
-// what controls how often we switch to a closer snapshot.
-// ---------------------------------------------------------------------------
+// orbitGood is set to the distance from this snapshot's epoch to the
+// nearest edge of the epoch table (tableStart or tableEnd).  For any
+// snapshot that is not at the table boundary this value is large, so
+// objectDateValid() always passes and no warning is shown.  Once jde
+// moves outside the table entirely, the nearest snapshot is the first
+// or last one, whose orbitGood equals the half-interval to its neighbour.
+// At that point |jde - epochJDE| > orbitGood and the normal "outdated
+// elements" warning fires, correctly signalling that we are extrapolating
+// beyond the covered window.
+
 static KeplerOrbit* orbitFromSnapshot(const AsteroidEpochElements& snap,
+                                       double tableStart, double tableEnd,
+                                       double halfInterval,
                                        double rotObl, double rotAsc, double rotJ2000)
 {
 	const double tp = (snap.meanMotion > 0.0)
 	                ? (snap.epochJDE - snap.meanAnomalyAtEpoch / snap.meanMotion)
 	                : snap.epochJDE;
+
+	// Distance from this snapshot to the nearest table boundary, floored
+	// at halfInterval so boundary snapshots never receive orbitGood=0
+	// (which we treat as "always valid", suppressing the warning).
+	const double orbitGood = std::max(halfInterval,
+	                                  std::min(snap.epochJDE - tableStart,
+	                                           tableEnd      - snap.epochJDE));
 
 	return new KeplerOrbit(
 		snap.epochJDE,
@@ -399,7 +409,7 @@ static KeplerOrbit* orbitFromSnapshot(const AsteroidEpochElements& snap,
 		snap.ascendingNode,
 		snap.argOfPericenter,
 		tp,
-		0.0,  // orbitGood=0 means always valid — epoch table covers full window
+		orbitGood,
 		snap.meanMotion,
 		rotObl, rotAsc, rotJ2000,
 		1.0   // central mass: Sun = 1 solar mass
@@ -439,8 +449,17 @@ void MinorPlanet::updateEpochOrbit(double jde, bool force)
 		if (d < bestDist) { bestDist = d; best = i; }
 	}
 
+	const double tableStart   = epochElements.first().epochJDE;
+	const double tableEnd     = epochElements.last().epochJDE;
+	// Half the spacing between the first two snapshots, used as a floor
+	// for orbitGood so the boundary snapshots never get orbitGood=0
+	// (which we interpret as "always valid").
+	const double halfInterval = (n > 1)
+	    ? std::fabs(epochElements[1].epochJDE - epochElements[0].epochJDE) * 0.5
+	    : 365.0;
 	KeplerOrbit* newOrbit = orbitFromSnapshot(
 		epochElements[best],
+		tableStart, tableEnd, halfInterval,
 		epochParentRotObliquity,
 		epochParentRotAscendingNode,
 		epochParentRotJ2000Longitude);
