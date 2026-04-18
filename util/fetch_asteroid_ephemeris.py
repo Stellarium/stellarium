@@ -28,7 +28,7 @@ QUICK START
     pip install requests
     python fetch_asteroid_ephemeris.py
 
-This fetches the first 500 numbered asteroids with 6-month epoch intervals
+This fetches the first 500 numbered asteroids with 1-year epoch intervals
 spanning 200 years (1926-2126).
 
 Place the output file in the user data folder (same location as
@@ -343,7 +343,7 @@ def main():
     parser.add_argument("--numbers",  type=str,   default=None,
                         help="Comma-separated asteroid numbers, e.g. 1,2,4,433,1036. "
                              "Overrides --count and --start-at.")
-    parser.add_argument("--epochs",   type=int,   default=400,
+    parser.add_argument("--epochs",   type=int,   default=200,
                         help="Epochs per asteroid for normal asteroids (default 400 = "
                              "6-month intervals over 200 years).")
     parser.add_argument("--center",   type=float, default=2026.0)
@@ -355,6 +355,7 @@ def main():
                         help="Dump raw Horizons response for asteroid 1 and exit.")
     args = parser.parse_args()
 
+    start_time = time.monotonic()
     default_epochs = build_epoch_list(args.center, args.span, args.epochs)
 
     # Build the target list — explicit numbers take priority over range
@@ -488,9 +489,12 @@ def main():
 
     import os
     size = os.path.getsize(args.out)
+    elapsed = time.monotonic() - start_time
+    minutes, seconds = divmod(int(elapsed), 60)
     print()
     print(f"Done.  {success_count} asteroids written to {args.out}")
     print(f"File size: {size/1024:.0f} KB uncompressed")
+    print(f"Finished in {minutes} min {seconds} sec")
 
 
 if __name__ == "__main__":
