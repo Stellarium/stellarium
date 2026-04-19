@@ -299,9 +299,10 @@ private slots:
 
 private:
 	MeteorShowers* m_meteorShowers;
+#ifndef NO_GUI
 	MSConfigDialog* m_configDialog;
 	MSSearchDialog* m_searchDialog;
-
+#endif
 	int m_fontSize;
 	QSettings* m_conf;
 	QString m_catalogPath;

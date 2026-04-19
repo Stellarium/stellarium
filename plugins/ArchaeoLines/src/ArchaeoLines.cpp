@@ -95,7 +95,9 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCustomDeclination1(false)
 	, flagShowCustomDeclination2(false)
 	, lastJDE(0.0)
+	#ifndef NO_GUI
 	, toolbarButton(Q_NULLPTR)
+	#endif
 {
 	setObjectName("ArchaeoLines");
 	core=StelApp::getInstance().getCore();
@@ -140,7 +142,9 @@ ArchaeoLines::ArchaeoLines()
 	customDeclination1Line = new ArchaeoLine(ArchaeoLine::CustomDeclination1, 0.0);
 	customDeclination2Line = new ArchaeoLine(ArchaeoLine::CustomDeclination2, 0.0);
 
+#ifndef NO_GUI
 	configDialog = new ArchaeoLinesDialog();
+#endif
 	conf = StelApp::getInstance().getSettings();
 
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
@@ -180,14 +184,20 @@ ArchaeoLines::~ArchaeoLines()
 	delete customDeclination1Line; customDeclination1Line=Q_NULLPTR;
 	delete customDeclination2Line; customDeclination2Line=Q_NULLPTR;
 
+#ifndef NO_GUI
 	delete configDialog; configDialog=Q_NULLPTR;
+#endif
 }
 
 bool ArchaeoLines::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 
 //! Determine which "layer" the plugin's drawing will happen on.
@@ -269,8 +279,8 @@ void ArchaeoLines::init()
 	// Create action for enable/disable & hook up signals
 	QString section=N_("ArchaeoLines");
 	addAction("actionShow_ArchaeoLines",         section, N_("ArchaeoLines"), "enabled", "Ctrl+U");
+#ifndef NO_GUI
 	addAction("actionShow_ArchaeoLines_dialog",  section, N_("Show settings dialog"),  configDialog,  "visible",           "Ctrl+Shift+U");
-
 	// Add a toolbar button
 	StelApp& app=StelApp::getInstance();
 	try
@@ -292,6 +302,7 @@ void ArchaeoLines::init()
 	{
 		qWarning() << "Unable to create toolbar button for ArchaeoLines plugin: " << e.what();
 	}
+#endif
 	addAction("actionAL_showEquinoxLine",          section, N_("Show Line for Equinox"),            "flagShowEquinox"         ); // No Shortcuts configured.
 	addAction("actionAL_showSolsticeLines",        section, N_("Show Line for Solstices"),          "flagShowSolstices"       ); // No Shortcuts configured.
 	addAction("actionAL_showCrossquarterLines",    section, N_("Show Line for Crossquarter"),       "flagShowCrossquarters"   ); // No Shortcuts configured.

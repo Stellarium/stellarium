@@ -179,7 +179,9 @@ private:
 	static double gnomonicChordSeparationSquared(const QPointF& p1, const QPointF& p2);
 
 	StelGui* gui;
+#ifndef NO_GUI
 	MosaicCameraDialog* configDialog;
+#endif
 	StelButton* toolbarButton;
 	StelCore* core;
 };

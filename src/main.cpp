@@ -147,7 +147,9 @@ int main(int argc, char **argv)
 	                                     "%{if-critical}CRIT%{endif}"
 	                                     "%{if-fatal}FATAL%{endif}] %{message}");
 	Q_INIT_RESOURCE(mainRes);
+#ifndef NO_GUI
 	Q_INIT_RESOURCE(guiRes);
+#endif
 
 	// Log command line arguments.
 	QString argStr;

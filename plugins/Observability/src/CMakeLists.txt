@@ -10,6 +10,9 @@ LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 SET(Observability_SRCS
      Observability.hpp
      Observability.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND Observability_SRCS
      gui/ObservabilityDialog.hpp
      gui/ObservabilityDialog.cpp
 )
@@ -19,13 +22,18 @@ SET(Observability_SRCS
 SET(ObservabilityDialog_UIS
      gui/ObservabilityDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 SET(Observability_RES ../Observability.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(ObservabilityDialog_UIS_H ${ObservabilityDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(ObservabilityDialog_UIS_H ${ObservabilityDialog_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(Observability_RES_CXX ${Observability_RES})
 ELSE()
-     QT_WRAP_UI(ObservabilityDialog_UIS_H ${ObservabilityDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(ObservabilityDialog_UIS_H ${ObservabilityDialog_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(Observability_RES_CXX ${Observability_RES})
 ENDIF()
 

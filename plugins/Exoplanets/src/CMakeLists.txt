@@ -12,6 +12,9 @@ SET(Exoplanets_SRCS
      Exoplanets.cpp
      Exoplanet.hpp
      Exoplanet.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND Exoplanets_SRCS
      gui/ExoplanetsDialog.hpp
      gui/ExoplanetsDialog.cpp
 )
@@ -19,13 +22,18 @@ SET(Exoplanets_SRCS
 SET(ExoplanetsDialog_UIS
      gui/exoplanetsDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 SET(Exoplanets_RES ../resources/Exoplanets.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(ExoplanetsDialog_UIS_H ${ExoplanetsDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(ExoplanetsDialog_UIS_H ${ExoplanetsDialog_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(Exoplanets_RES_CXX ${Exoplanets_RES})
 ELSE()
-     QT_WRAP_UI(ExoplanetsDialog_UIS_H ${ExoplanetsDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(ExoplanetsDialog_UIS_H ${ExoplanetsDialog_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(Exoplanets_RES_CXX ${Exoplanets_RES})
 ENDIF()
 

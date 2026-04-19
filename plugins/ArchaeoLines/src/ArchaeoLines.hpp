@@ -568,15 +568,15 @@ private:
 	ArchaeoLine * customAltitude2Line;
 	ArchaeoLine * customDeclination1Line;
 	ArchaeoLine * customDeclination2Line;
-
-	StelButton* toolbarButton;
   
 	QSettings* conf;
-
-	// GUI
-	ArchaeoLinesDialog* configDialog;
 	StelCore* core; // used quite often, better keep a reference...
 	StelObjectMgr* objMgr;
+
+#ifndef NO_GUI
+	ArchaeoLinesDialog* configDialog;
+	StelButton* toolbarButton;
+#endif
 };
 
 

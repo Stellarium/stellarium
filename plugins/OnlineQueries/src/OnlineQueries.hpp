@@ -105,7 +105,9 @@ private:
 	void createToolbarButton() const;
 	void setOutputHtml(const QString &html); //!< Forward html to GUI dialog
 	void setOutputUrl(const QUrl &url);      //!< Forward URL to GUI dialog
+#ifndef NO_GUI
 	OnlineQueriesDialog* dialog;
+#endif
 	QSettings* conf;
 	bool enabled;                     //!< show dialog?
 	bool disableWebView;              //!< Disable the webview on platforms where QtWebView compiles, but fails to work properly. (Seen on Odroid boards.)

@@ -3167,5 +3167,43 @@ QString narrateGreekChars(const QString &input)
 	return res;
 }
 
+QString substituteGreek(const QString& keyString)
+{
+	if (!keyString.contains(' '))
+		return getGreekLetterByName(keyString);
+	else
+	{
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		QStringList nameComponents = keyString.split(" ", Qt::SkipEmptyParts);
+		#else
+		QStringList nameComponents = keyString.split(" ", QString::SkipEmptyParts);
+		#endif
+		if(!nameComponents.empty())
+			nameComponents[0] = getGreekLetterByName(nameComponents[0]);
+		return nameComponents.join(" ");
+	}
+}
+
+QString getGreekLetterByName(const QString& potentialGreekLetterName)
+{
+	if(StelUtils::greekLetters.contains(potentialGreekLetterName))
+		return StelUtils::greekLetters[potentialGreekLetterName];
+
+	// There can be indices (e.g. "α1 Cen" instead of "α Cen A"), so strip
+	// any trailing digit.
+	int lastCharacterIndex = potentialGreekLetterName.length()-1;
+	if(potentialGreekLetterName.at(lastCharacterIndex).isDigit())
+	{
+		QChar digit = potentialGreekLetterName.at(lastCharacterIndex);
+		QString name = potentialGreekLetterName.left(lastCharacterIndex);
+		if(StelUtils::greekLetters.contains(name))
+			return StelUtils::greekLetters[name] + digit;
+	}
+
+	return potentialGreekLetterName;
+}
+
+
+
 } // end of the StelUtils namespace
 

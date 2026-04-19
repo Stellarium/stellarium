@@ -23,10 +23,12 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
-#include "SkyGui.hpp"
 #include "StelModuleMgr.hpp"
+#ifndef NO_GUI
+#include "SkyGui.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#endif
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "PointerCoordinates.hpp"
@@ -61,8 +63,11 @@ StelPluginInfo PointerCoordinatesStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-PointerCoordinates::PointerCoordinates()
-	: currentPlace(TopRight)
+PointerCoordinates::PointerCoordinates():
+#ifndef NO_GUI
+	  toolbarButton(Q_NULLPTR),
+#endif
+	  currentPlace(TopRight)
 	, currentCoordinateSystem(RaDecJ2000)
 	, flagShowCoordinates(false)
 	, flagEnableAtStartup(false)
@@ -73,18 +78,21 @@ PointerCoordinates::PointerCoordinates()
 	, textColor(Vec3f(1,0.5,0))
 	, coordinatesPoint(Vec3d(0,0,0))
 	, fontSize(14)
-	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("PointerCoordinates");
-	mainWindow = new PointerCoordinatesWindow();
 	StelApp &app = StelApp::getInstance();
 	conf = app.getSettings();
+#ifndef NO_GUI
+	mainWindow = new PointerCoordinatesWindow();
 	gui = dynamic_cast<StelGui*>(app.getGui());
+#endif
 }
 
 PointerCoordinates::~PointerCoordinates()
 {
+#ifndef NO_GUI
 	delete mainWindow;
+#endif
 }
 
 void PointerCoordinates::init()
@@ -99,8 +107,9 @@ void PointerCoordinates::init()
 	loadConfiguration();
 
 	addAction("actionShow_MousePointer_Coordinates",        N_("Pointer Coordinates"), N_("Show coordinates of the mouse pointer"), "enabled", "");
+#ifndef NO_GUI
 	addAction("actionShow_MousePointer_Coordinates_dialog", N_("Pointer Coordinates"), N_("Show settings dialog"), mainWindow, "visible");
-
+#endif
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	enableCoordinates(getFlagEnableAtStartup());
@@ -304,8 +313,9 @@ void PointerCoordinates::draw(StelCore *core)
 		constel=QString(" (%1)").arg(core->getIAUConstellation(core->j2000ToEquinoxEqu(mousePosition)));
 	}
 	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem, cxt, cyt, constel);
-	x = getCoordinatesPlace(coordsText).first;
-	y = getCoordinatesPlace(coordsText).second;
+	QPair<int, int>coordPlace=getCoordinatesPlace(coordsText);
+	x = coordPlace.first;
+	y = coordPlace.second;
 	if (getCurrentCoordinatesPlace()!=Custom)
 	{
 		x *= ppx;
@@ -372,12 +382,16 @@ double PointerCoordinates::getCallOrder(StelModuleActionName actionName) const
 
 bool PointerCoordinates::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 	{
 		mainWindow->setVisible(true);
 	}
 
 	return true;
+#endif
 }
 
 void PointerCoordinates::restoreDefaultConfiguration(void)
@@ -445,6 +459,7 @@ void PointerCoordinates::setFontColor(const Vec3f &c)
 
 void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 {
+#ifndef NO_GUI
 	if (gui!=Q_NULLPTR)
 	{
 		if (b==true) {
@@ -463,6 +478,7 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 			gui->getButtonBar()->hideButton("actionShow_MousePointer_Coordinates");
 		}
 	}
+#endif
 	flagShowCoordinatesButton = b;
 }
 
@@ -501,23 +517,25 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(const QString &text, int
 	QFontMetrics fm(font);
 	const QSize fs = fm.size(Qt::TextSingleLine, text);
 	height = (line>1) ? static_cast<int>((line-1)*fs.height() + fs.height()*coeff) : static_cast<int>(fs.height()*coeff);
+	StelProjector::StelProjectorParams params = StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
+
 	switch(getCurrentCoordinatesPlace())
 	{
 		case TopCenter:
 		{
-			x = gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2;
-			y = gui->getSkyGui()->getSkyGuiHeight() - height;
+			x = params.viewportXywh[2]/2 - fs.width()/2;
+			y = params.viewportXywh[3] - height;
 			break;
 		}
 		case TopRight:
 		{
-			x = 3*gui->getSkyGui()->getSkyGuiWidth()/4 - fs.width()/2;
-			y = gui->getSkyGui()->getSkyGuiHeight() - height;
+			x = 3*params.viewportXywh[2]/4 - fs.width()/2;
+			y = params.viewportXywh[3] - height;
 			break;
 		}
 		case RightBottomCorner:
 		{
-			x = gui->getSkyGui()->getSkyGuiWidth() - static_cast<int>(fs.width() + 10*coeff);
+			x = params.viewportXywh[2] - static_cast<int>(fs.width() + 10*coeff);
 			y = line*fs.height();
 			break;
 		}
@@ -526,14 +544,14 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(const QString &text, int
 			QPoint m = StelMainView::getInstance().getMousePos();
 			x = m.x() + 3;
 			if (line>1) { shift = line*fs.height() - fs.height(); }
-			y = gui->getSkyGui()->getSkyGuiHeight() - m.y() + 5 - shift;
+			y = params.viewportXywh[3] - m.y() + 5 - shift;
 			break;
 		}
 		case Custom:
 		{
 			QPair<int, int> xy = getCustomCoordinatesPlace();
 			x = xy.first;
-			y = gui->getSkyGui()->getSkyGuiHeight() - xy.second - line*fs.height();
+			y = params.viewportXywh[3] - xy.second - line*fs.height();
 			break;
 		}
 	}

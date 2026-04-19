@@ -947,9 +947,9 @@ private:
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	int iridiumFlaresPredictionDepth;
 #endif
-	// GUI
+#ifndef NO_GUI
 	SatellitesDialog* configDialog;
-
+#endif
 	QMultiMap<QString, QString> satSuperGroupsMap;
 
 	static QString SatellitesCatalogVersion;
