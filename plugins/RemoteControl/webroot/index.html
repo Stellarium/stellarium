@@ -36,13 +36,15 @@
         <li><a href="#tab_dso"><?= tr("DSO")?></a></li>
         <li><a href="#tab_landscape"><?= tr("Landscape")?></a></li>
         <li><a href="#tab_skyculture"><?= tr("Sky Culture")?></a></li>
+				<li><a href="#tab_skyculture_stats"><?= tr("Statistics & Analysis")?></a></li>
         <li><a href="#tab_actions"><?= tr("Actions and scripts")?></a></li>
         <li><a href="#tab_location"><?= tr("Location")?></a></li>
         <li><a href="#tab_projection"><?= tr("Projection")?></a></li>
         <li class="stelplugin" data-plugin="Scenery3d"><a href="#tab_scenery3d"><?= tr("Scenery3d")?></a></li>
 				<li><a href="#tab_gamepad"><?= tr("Gamepad Controller")?></a></li>
       </ul>
-      <div id="tab_main">
+     
+		 <div id="tab_main">
         <div class="flex">
           <!-- part of ui/time.js -->
           <section id="time" class="block flex-noshrink">
@@ -206,7 +208,8 @@
           </section>
         </div>
       </div>
-      <div id="tab_selection">
+      
+			<div id="tab_selection">
         <div class="flex flex-wrap">
           <!-- part of ui/search.js -->
           <section id="search" class="block">
@@ -265,7 +268,8 @@
           </section>
         </div>
       </div>
-      <!-- handled by ui/viewoptions.js -->
+     
+		 <!-- handled by ui/viewoptions.js -->
       <div id="tab_view">
         <div class="flex flex-wrap">
           <div id="vo_stars" class="smallblock blocklabel">
@@ -512,7 +516,8 @@
           </div>
         </div>
       </div>
-      <div id="tab_dso">
+     
+		 <div id="tab_dso">
         <div class="flex flex-wrap">
           <div id="vo_dsocatalog" class="smallblock">
             <h3><?= tr("Display objects from catalogs")?></h3>
@@ -670,7 +675,8 @@
           </div>
         </div>
       </div>
-      <!-- also handled by ui/viewoptions.js -->
+     
+			<!-- also handled by ui/viewoptions.js -->
       <div id="tab_landscape">
         <div class="smallblock">
           <h3><?= tr("Options")?></h3>
@@ -698,246 +704,498 @@
           <iframe id="vo_landscapeinfo" class="flex-expand" src="/api/view/landscapedescription/"></iframe>
         </div>
       </div>
-<!-- Sky Culture Tab - Restructured like tab_gamepad -->
-<div id="tab_skyculture">
-    <div class="flex flex-wrap" style="gap: 20px;">
-           
-<!-- Sky Culture Options Section -->
-<div class="skyculture-options-panel">
-    <h3><?= tr("Options")?></h3>
-    
-    <div class="options-grid">
-        <!-- 1. Constellation Labels -->
-        <div class="option-item">
-            <label class="option-label">
-                <input type="checkbox" class="stelproperty" name="ConstellationMgr.namesDisplayed" />
-                <span><?= tr("Label constellations with font size")?></span>
-            </label>
-            <div class="option-controls">
-                <span class="stelproperty" data-prop="ConstellationMgr.fontSize" data-numberformat="n0"></span>
-                <div id="constellation-fontsize" class="slider stelproperty" 
-                     data-prop="ConstellationMgr.fontSize" data-min="8" data-max="40" 
-                     data-step="1" data-numberformat="n0"></div>
-            </div>
-        </div>
-        
-        <!-- 2. Constellation Lines -->
-        <div class="option-item">
-            <label class="option-label">
-                <input type="checkbox" class="stelproperty" name="ConstellationMgr.linesDisplayed" />
-                <span><?= tr("Show lines with thickness")?></span>
-            </label>
-            <div class="option-controls">
-                <span class="stelproperty" data-prop="ConstellationMgr.constellationLineThickness" data-numberformat="n0"></span>
-                <div id="constellation-linethickness" class="slider stelproperty" 
-                     data-prop="ConstellationMgr.constellationLineThickness" data-min="1" data-max="5" 
-                     data-step="1" data-numberformat="n0"></div>
-            </div>
-        </div>
-        
-        <!-- 3. Asterism Labels -->
-        <div class="option-item">
-            <label class="option-label">
-                <input type="checkbox" class="stelproperty" name="AsterismMgr.namesDisplayed" />
-                <span><?= tr("Label asterisms with font size")?></span>
-            </label>
-            <div class="option-controls">
-                <span class="stelproperty" data-prop="AsterismMgr.fontSize" data-numberformat="n0"></span>
-                <div id="asterism-fontsize" class="slider stelproperty" 
-                     data-prop="AsterismMgr.fontSize" data-min="8" data-max="40" 
-                     data-step="1" data-numberformat="n0"></div>
-            </div>
-        </div>
-        
-        <!-- 4. Asterism Lines -->
-        <div class="option-item">
-            <label class="option-label">
-                <input type="checkbox" class="stelproperty" name="AsterismMgr.linesDisplayed" />
-                <span><?= tr("Show asterisms with thickness")?></span>
-            </label>
-            <div class="option-controls">
-                <span class="stelproperty" data-prop="AsterismMgr.asterismLineThickness" data-numberformat="n0"></span>
-                <div id="asterism-linethickness" class="slider stelproperty" 
-                     data-prop="AsterismMgr.asterismLineThickness" data-min="1" data-max="5" 
-                     data-step="1" data-numberformat="n0"></div>
-            </div>
-        </div>
-        
-        <!-- 5. Ray Helpers -->
-        <div class="option-item">
-            <label class="option-label">
-                <input type="checkbox" class="stelproperty" name="AsterismMgr.rayHelpersDisplayed" />
-                <span><?= tr("Show ray helpers with thickness")?></span>
-            </label>
-            <div class="option-controls">
-                <span class="stelproperty" data-prop="AsterismMgr.rayHelperThickness" data-numberformat="n0"></span>
-                <div id="rayhelper-thickness" class="slider stelproperty" 
-                     data-prop="AsterismMgr.rayHelperThickness" data-min="1" data-max="5" 
-                     data-step="1" data-numberformat="n0"></div>
-            </div>
-        </div>
-        
-        <!-- 6. Constellation Art -->
-        <div class="option-item">
-            <label class="option-label">
-                <input type="checkbox" class="stelproperty" name="ConstellationMgr.artDisplayed" />
-                <span><?= tr("Show art in brightness")?></span>
-            </label>
-            <div class="option-controls">
-                <span class="stelproperty" data-prop="ConstellationMgr.artIntensity" data-numberformat="n2"></span>
-                <div id="art-intensity" class="slider stelproperty" 
-                     data-prop="ConstellationMgr.artIntensity" data-min="0" data-max="1" 
-                     data-step="0.05" data-numberformat="n2"></div>
-            </div>
-        </div>
-        
-        <!-- 7. Constellation Boundaries -->
-        <div class="option-item">
-            <label class="option-label">
-                <input type="checkbox" class="stelproperty" name="ConstellationMgr.boundariesDisplayed" />
-                <span><?= tr("Show boundaries with thickness")?></span>
-            </label>
-            <div class="option-controls">
-                <span class="stelproperty" data-prop="ConstellationMgr.constellationBoundariesThickness" data-numberformat="n0"></span>
-                <div id="boundaries-thickness" class="slider stelproperty" 
-                     data-prop="ConstellationMgr.constellationBoundariesThickness" data-min="1" data-max="5" 
-                     data-step="1" data-numberformat="n0"></div>
-            </div>
-        </div>
-        
-        <!-- 8. Zodiac -->
-        <div class="option-item">
-            <label class="option-label">
-                <input type="checkbox" class="stelproperty" name="ConstellationMgr.zodiacDisplayed" />
-                <span><?= tr("Show zodiac with thickness")?></span>
-            </label>
-            <div class="option-controls">
-                <span class="stelproperty" data-prop="ConstellationMgr.zodiacThickness" data-numberformat="n0"></span>
-                <div id="zodiac-thickness" class="slider stelproperty" 
-                     data-prop="ConstellationMgr.zodiacThickness" data-min="1" data-max="5" 
-                     data-step="1" data-numberformat="n0"></div>
-            </div>
-        </div>
-        
-        <!-- 9. Lunar System -->
-        <div class="option-item">
-            <label class="option-label">
-                <input type="checkbox" class="stelproperty" name="ConstellationMgr.lunarSystemDisplayed" />
-                <span><?= tr("Show lunar stations/mansions with thickness")?></span>
-            </label>
-            <div class="option-controls">
-                <span class="stelproperty" data-prop="ConstellationMgr.lunarSystemThickness" data-numberformat="n0"></span>
-                <div id="lunar-thickness" class="slider stelproperty" 
-                     data-prop="ConstellationMgr.lunarSystemThickness" data-min="1" data-max="5" 
-                     data-step="1" data-numberformat="n0"></div>
-            </div>
-        </div>
-    </div> <!-- نهاية options-grid -->
+      
+			<!-- also handled by ui/viewoptions.js -->
+			<div id="tab_skyculture">
+					<div class="flex flex-wrap" style="gap: 10px;">
+							
+							<!-- LEFT PANEL: Culture Selector and Patterns -->
+							<div class="skyculture-panel" style="flex: 1 1 100%; max-width: 100%;">
+									
+									<!-- Section Header with Culture Count -->
+									<h3>
+											<?= tr("Current sky culture")?>
+											<span id="skyculture-culture-count" class="pattern-count"></span>
+									</h3>
+									
+									<!-- Culture Buttons Container -->
+									<div id="skyculture-buttons-container" class="skyculture-buttons-container">
+											<div class="loading-placeholder"><?= tr("Loading sky cultures...")?></div>
+									</div>
+									
+									<!-- HORIZONTAL PATTERNS TABS - 6 Tab Navigation -->
+									<div id="skyculture-patterns-tabs" class="skyculture-patterns-tabs" style="margin-top: 20px;">
+											
+											<ul>
+													<li><a href="#patterns-tab-constellations"><?= tr("Constellations")?> <span id="constellations-count" class="pattern-count"></span></a></li>
+													<li><a href="#patterns-tab-asterisms"><?= tr("Asterisms")?> <span id="asterisms-count" class="pattern-count"></span></a></li>
+													<li><a href="#patterns-tab-zodiac"><?= tr("Zodiac Signs")?> <span id="zodiac-count" class="pattern-count"></span></a></li>
+													<li><a href="#patterns-tab-lunar"><?= tr("Lunar Mansions")?> <span id="lunar-count" class="pattern-count"></span></a></li>
+													<li><a href="#patterns-tab-stars"><?= tr("Notable Stars")?> <span id="stars-count" class="pattern-count"></span></a></li>
+													<li><a href="#patterns-tab-description"><?= tr("Description")?></a></li>
+											</ul>
+											
+											<!-- Constellations Tab -->
+											<div id="patterns-tab-constellations" class="patterns-tab-content">
+													<p class="patterns-note"><?= tr("Click on any constellation to highlight and isolate it")?></p>
+													<div id="constellations-buttons-container" class="patterns-buttons-container">
+															<div class="loading-placeholder"><?= tr("Select a sky culture to view constellations")?></div>
+													</div>
+											</div>
+											
+											<!-- Asterisms Tab -->
+											<div id="patterns-tab-asterisms" class="patterns-tab-content">
+													<p class="patterns-note"><?= tr("Traditional star patterns within constellations")?></p>
+													<div id="asterisms-buttons-container" class="patterns-buttons-container">
+															<div class="loading-placeholder"><?= tr("No asterisms available")?></div>
+													</div>
+											</div>
+											
+											<!-- Zodiac Tab -->
+											<div id="patterns-tab-zodiac" class="patterns-tab-content">
+													<p class="patterns-note"><?= tr("The 12 signs of the zodiac")?></p>
+													<div id="zodiac-buttons-container" class="patterns-buttons-container">
+															<div class="loading-placeholder"><?= tr("No zodiac data available")?></div>
+													</div>
+											</div>
+											
+											<!-- Lunar Mansions Tab -->
+											<div id="patterns-tab-lunar" class="patterns-tab-content">
+													<p class="patterns-note"><?= tr("Traditional lunar stations (mansions)")?></p>
+													<div id="lunar-buttons-container" class="patterns-buttons-container">
+															<div class="loading-placeholder"><?= tr("No lunar mansions data available")?></div>
+													</div>
+											</div>
+											
+											<!-- Notable Stars Tab -->
+											<div id="patterns-tab-stars" class="patterns-tab-content">
+													<p class="patterns-note"><?= tr("Named stars with cultural significance")?></p>
+													<div id="stars-buttons-container" class="patterns-buttons-container">
+															<div class="loading-placeholder"><?= tr("No star name data available")?></div>
+													</div>
+											</div>
+											
+											<!-- Description Tab with iframe -->
+											<div id="patterns-tab-description" class="patterns-tab-content">
+													<iframe id="vo_skycultureinfo" class="skyculture-info-frame" src="/api/view/skyculturedescription/"></iframe>
+											</div>
+											
+									</div><!-- END #skyculture-patterns-tabs -->
+									
+							</div><!-- END .skyculture-panel -->
+							
+							<!-- RIGHT PANEL: Sky Culture Options -->
+							<div class="skyculture-options-panel">
+									
+									<h3><?= tr("Options")?></h3>
+									
+									<div class="options-grid">
+											
+											<!-- 1. Constellation Labels -->
+											<div class="option-item">
+													<label class="option-label">
+															<input type="checkbox" class="stelproperty" name="ConstellationMgr.namesDisplayed" />
+															<span><?= tr("Label constellations with font size")?></span>
+													</label>
+													<div class="option-controls">
+															<span class="stelproperty" data-prop="ConstellationMgr.fontSize" data-numberformat="n0"></span>
+															<div id="constellation-fontsize" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.fontSize" data-min="8" data-max="40" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+											</div>
+											
+											<!-- 2. Constellation Lines -->
+											<div class="option-item">
+													<label class="option-label">
+															<input type="checkbox" class="stelproperty" name="ConstellationMgr.linesDisplayed" />
+															<span><?= tr("Show lines with thickness")?></span>
+													</label>
+													<div class="option-controls">
+															<span class="stelproperty" data-prop="ConstellationMgr.constellationLineThickness" data-numberformat="n0"></span>
+															<div id="constellation-linethickness" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.constellationLineThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+											</div>
+											
+											<!-- 3. Asterism Labels -->
+											<div class="option-item">
+													<label class="option-label">
+															<input type="checkbox" class="stelproperty" name="AsterismMgr.namesDisplayed" />
+															<span><?= tr("Label asterisms with font size")?></span>
+													</label>
+													<div class="option-controls">
+															<span class="stelproperty" data-prop="AsterismMgr.fontSize" data-numberformat="n0"></span>
+															<div id="asterism-fontsize" class="slider stelproperty" 
+																	 data-prop="AsterismMgr.fontSize" data-min="8" data-max="40" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+											</div>
+											
+											<!-- 4. Asterism Lines -->
+											<div class="option-item">
+													<label class="option-label">
+															<input type="checkbox" class="stelproperty" name="AsterismMgr.linesDisplayed" />
+															<span><?= tr("Show asterisms with thickness")?></span>
+													</label>
+													<div class="option-controls">
+															<span class="stelproperty" data-prop="AsterismMgr.asterismLineThickness" data-numberformat="n0"></span>
+															<div id="asterism-linethickness" class="slider stelproperty" 
+																	 data-prop="AsterismMgr.asterismLineThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+											</div>
+											
+											<!-- 5. Ray Helpers -->
+											<div class="option-item">
+													<label class="option-label">
+															<input type="checkbox" class="stelproperty" name="AsterismMgr.rayHelpersDisplayed" />
+															<span><?= tr("Show ray helpers with thickness")?></span>
+													</label>
+													<div class="option-controls">
+															<span class="stelproperty" data-prop="AsterismMgr.rayHelperThickness" data-numberformat="n0"></span>
+															<div id="rayhelper-thickness" class="slider stelproperty" 
+																	 data-prop="AsterismMgr.rayHelperThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+											</div>
+											
+											<!-- 6. Constellation Art -->
+											<div class="option-item">
+													<label class="option-label">
+															<input type="checkbox" class="stelproperty" name="ConstellationMgr.artDisplayed" />
+															<span><?= tr("Show art in brightness")?></span>
+													</label>
+													<div class="option-controls">
+															<span class="stelproperty" data-prop="ConstellationMgr.artIntensity" data-numberformat="n2"></span>
+															<div id="art-intensity" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.artIntensity" data-min="0" data-max="1" 
+																	 data-step="0.05" data-numberformat="n2"></div>
+													</div>
+											</div>
+											
+											<!-- 7. Constellation Boundaries -->
+											<div class="option-item">
+													<label class="option-label">
+															<input type="checkbox" class="stelproperty" name="ConstellationMgr.boundariesDisplayed" />
+															<span><?= tr("Show boundaries with thickness")?></span>
+													</label>
+													<div class="option-controls">
+															<span class="stelproperty" data-prop="ConstellationMgr.boundariesThickness" data-numberformat="n0"></span>
+															<div id="boundaries-thickness" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.boundariesThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+											</div>
+											
+											<!-- 8. Zodiac -->
+											<div class="option-item">
+													<label class="option-label">
+															<input type="checkbox" class="stelproperty" name="ConstellationMgr.zodiacDisplayed" />
+															<span><?= tr("Show zodiac with thickness")?></span>
+													</label>
+													<div class="option-controls">
+															<span class="stelproperty" data-prop="ConstellationMgr.zodiacThickness" data-numberformat="n0"></span>
+															<div id="zodiac-thickness" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.zodiacThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+											</div>
+											
+											<!-- 9. Lunar System -->
+											<div class="option-item">
+													<label class="option-label">
+															<input type="checkbox" class="stelproperty" name="ConstellationMgr.lunarSystemDisplayed" />
+															<span><?= tr("Show lunar stations/mansions with thickness")?></span>
+													</label>
+													<div class="option-controls">
+															<span class="stelproperty" data-prop="ConstellationMgr.lunarSystemThickness" data-numberformat="n0"></span>
+															<div id="lunar-thickness" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.lunarSystemThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+											</div>
+											
+									</div><!-- END .options-grid -->
+									
+									<!-- Additional Options -->
+									<div class="skyculture-additional-options">
+											
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="StelSkyCultureMgr.flagUseAbbreviatedNames" />
+													<span><?= tr("Short labels")?></span>
+											</label>
+											
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.isolateSelected" />
+													<span><?= tr("Constellation selection isolated")?></span>
+											</label>
+											
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.flagConstellationPick" />
+													<span><?= tr("Only last selected")?></span>
+											</label>
+											
+									</div>
+									
+							</div><!-- END .skyculture-options-panel -->
+							
+					</div>
+			</div><!-- END #tab_skyculture -->
 
-    <!-- الخيارات الإضافية (الصف السفلي) -->
-    <div class="skyculture-additional-options" style="margin-top: 20px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.1); display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-start;">
-        <label class="option-label">
-            <input type="checkbox" class="stelproperty" name="StelSkyCultureMgr.flagUseAbbreviatedNames" />
-            <span><?= tr("Short labels")?></span>
-        </label>
-        <label class="option-label">
-            <input type="checkbox" class="stelproperty" name="ConstellationMgr.isolateSelected" />
-            <span><?= tr("Constellation selection isolated")?></span>
-        </label>
-        <label class="option-label">
-            <input type="checkbox" class="stelproperty" name="ConstellationMgr.flagConstellationPick" />
-            <span><?= tr("Only last selected")?></span>
-        </label>
-    </div>
-</div>        
-    </div>
+			<!-- TAB: Culture Data Inspector (Raw index.json Explorer) -->
+			<div id="tab_skyculture_stats">
+					<div class="flex flex-wrap" style="gap: 20px;">
+							
+							<!-- Info Bar - What is this section? -->
+							<div class="stats-bar stats-info-bar" style="width: 100%;">
+									<div class="stat-item" style="flex: 1; background: rgba(0, 0, 0, 0.15);">
+											<span class="stat-label" style="display: block; margin-bottom: 8px; color: #DCDBDA; font-size: 13px;"><?= tr("Culture Data Inspector")?></span>
+											<span class="stat-description" style="color: #B4B7B0; font-size: 11px; line-height: 1.6;">
+													<?= tr("This inspector displays the complete, unfiltered dataset extracted directly from the culture's")?> 
+													<code style="background: #2A2C2E; padding: 2px 5px; border-radius: 3px;">index.json</code> 
+													<?= tr("file. Use this view to:")?>
+													<ul style="margin: 8px 0 0 20px; padding: 0; color: #B4B7B0; font-size: 11px;">
+															<li><?= tr("Verify exact constellation and asterism counts (including ray helpers)")?></li>
+															<li><?= tr("Inspect raw IDs, native names, pronunciations, and IPA values")?></li>
+															<li><?= tr("Cross-reference star IDs (HIP, NGC, etc.) with their cultural names")?></li>
+															<li><?= tr("Export complete datasets to CSV/JSON for external analysis")?></li>
+															<li><?= tr("Search across all fields to quickly locate specific entries")?></li>
+													</ul>
+													<span style="display: block; margin-top: 8px; color: #8A8C8E; font-style: italic;">
+															<?= tr("Each row is interactive — click to select and navigate to the object in Stellarium.")?>
+													</span>
+											</span>
+									</div>
+							</div>
 
-    <!-- First Row: Culture Selector and Description -->
-    <div class="flex flex-wrap" style="gap: 20px;">
-        
-        <!-- Sky Culture Buttons Section -->
-        <div class="skyculture-panel">
-            <h3><?= tr("Current sky culture")?></h3>
-            <div id="skyculture-buttons-container" class="skyculture-buttons-container">
-                <div class="loading-placeholder"><?= tr("Loading sky cultures...")?></div>
-            </div>
-            <iframe id="vo_skycultureinfo" class="skyculture-info-frame" src="/api/view/skyculturedescription/"></iframe>
-        </div>
-      </div>
-       
-				<!-- Constellations Section -->
-				<div class="skyculture-panel">
-						<h3>
-								<?= tr("Constellations")?>
-								<span class="pattern-count" id="constellations-count"></span>
-						</h3>
-						<p class="patterns-note"><?= tr("Click on any constellation to highlight and isolate it")?></p>
-						<div id="constellations-buttons-container" class="patterns-buttons-container">
-								<div class="loading-placeholder"><?= tr("Select a sky culture to view constellations")?></div>
-						</div>
-				</div>
+							<!-- Culture Selector Panel -->
+							<div class="culture-selector-panel" style="width: 100%;">
+									<h3>
+											<?= tr("Select Sky Culture")?>
+											<span id="skyculture-stats-count" class="pattern-count"></span>
+									</h3>
+									<div id="skyculture-stats-buttons" class="skyculture-buttons-grid">
+											<div class="loading-placeholder"><?= tr("Loading sky cultures...")?></div>
+									</div>
+									
+									<!-- Total Summary Bar -->
+									<div class="stats-bar" style="width: 100%; justify-content: space-around; margin-top: 15px;">
+											<div class="stat-item">
+													<span class="stat-label"><?= tr("Constellations")?>:</span>
+													<span class="stat-value" id="stats-total-constellations">0</span>
+											</div>
+											<div class="stat-item">
+													<span class="stat-label"><?= tr("Asterisms")?>:</span>
+													<span class="stat-value" id="stats-total-asterisms">0</span>
+											</div>
+											<div class="stat-item">
+													<span class="stat-label"><?= tr("Ray Helpers")?>:</span>
+													<span class="stat-value" id="stats-total-ray-helpers">0</span>
+											</div>
+											<div class="stat-item">
+													<span class="stat-label"><?= tr("Zodiac Signs")?>:</span>
+													<span class="stat-value" id="stats-total-zodiac">0</span>
+											</div>
+											<div class="stat-item">
+													<span class="stat-label"><?= tr("Lunar Mansions")?>:</span>
+													<span class="stat-value" id="stats-total-lunar">0</span>
+											</div>
+											<div class="stat-item">
+													<span class="stat-label"><?= tr("Named Objects")?>:</span>
+													<span class="stat-value" id="stats-total-stars">0</span>
+											</div>
+									</div>
+							</div>
+							
+							<!-- Data Tables Tabs -->
+							<div id="skyculture-stats-tabs" class="skyculture-patterns-tabs" style="width: 100%;">
+									
+									<ul>
+											<li><a href="#stats-tab-constellations"><?= tr("Constellations")?> <span id="constellations-stats-count" class="pattern-count"></span></a></li>
+											<li><a href="#stats-tab-asterisms"><?= tr("Asterisms")?> <span id="asterisms-stats-count" class="pattern-count"></span></a></li>
+											<li><a href="#stats-tab-zodiac"><?= tr("Zodiac Signs")?> <span id="zodiac-stats-count" class="pattern-count"></span></a></li>
+											<li><a href="#stats-tab-lunar"><?= tr("Lunar Mansions")?> <span id="lunar-stats-count" class="pattern-count"></span></a></li>
+											<li><a href="#stats-tab-stars"><?= tr("Notable Stars & Objects")?> <span id="stars-stats-count" class="pattern-count"></span></a></li>
+											<li><a href="#stats-tab-description"><?= tr("Description")?></a></li>
+									</ul>
+									
+									<!-- Constellations Table -->
+									<div id="stats-tab-constellations" class="tab-content">
+											<div class="table-header">
+													<input type="text" class="search-box" id="search-constellations-stats" placeholder="<?= tr("Search constellations... (click row to isolate at 60° FOV) | ESC to reset")?>">
+													<div class="export-buttons">
+															<button class="export-btn" id="export-constellations-csv">CSV</button>
+															<button class="export-btn" id="export-constellations-json">JSON</button>
+													</div>
+											</div>
+											<p style="margin: 5px 0 10px 0; font-size: 10px; color: #8A8C8E;">
+													<?= tr("Complete constellation definitions from index.json. Click any row to isolate and highlight in Stellarium.")?>
+											</p>
+											<div class="table-container">
+													<table class="stats-table">
+															<thead>
+																	<tr>
+																			<th>#</th>
+																			<th><?= tr("ID")?></th>
+																			<th><?= tr("Native")?></th>
+																			<th><?= tr("English Name")?></th>
+																			<th><?= tr("Translation")?></th>
+																			<th><?= tr("Pronounce")?></th>
+																			<th><?= tr("Stars")?></th>
+																			<th><?= tr("Star IDs")?></th>
+																	</tr>
+															</thead>
+															<tbody id="constellations-stats-body"></tbody>
+													</table>
+											</div>
+									</div>
+									
+									<!-- Asterisms Table -->
+									<div id="stats-tab-asterisms" class="tab-content">
+											<div class="table-header">
+													<input type="text" class="search-box" id="search-asterisms-stats" placeholder="<?= tr("Search asterisms... (click row to center at 30° FOV) | ESC to reset")?>">
+													<div class="export-buttons">
+															<button class="export-btn" id="export-asterisms-csv">CSV</button>
+															<button class="export-btn" id="export-asterisms-json">JSON</button>
+													</div>
+											</div>
+											<p style="margin: 5px 0 10px 0; font-size: 10px; color: #8A8C8E;">
+													<?= tr("All asterisms from index.json (ray helpers are excluded from this list). Click any row to center view.")?>
+											</p>
+											<div class="table-container">
+													<table class="stats-table">
+															<thead>
+																	<tr>
+																			<th>#</th>
+																			<th><?= tr("ID")?></th>
+																			<th><?= tr("Native")?></th>
+																			<th><?= tr("English Name")?></th>
+																			<th><?= tr("Translation")?></th>
+																			<th><?= tr("Pronounce")?></th>
+																			<th><?= tr("Stars")?></th>
+																			<th><?= tr("Star IDs")?></th>
+																	</tr>
+															</thead>
+															<tbody id="asterisms-stats-body"></tbody>
+													</table>
+											</div>
+									</div>
+									
+									<!-- Zodiac Table -->
+									<div id="stats-tab-zodiac" class="tab-content">
+											<div class="table-container">
+													<table class="stats-table">
+															<thead>
+																	<tr>
+																			<th>#</th>
+																			<th><?= tr("Symbol")?></th>
+																			<th><?= tr("Native")?></th>
+																			<th><?= tr("English Name")?></th>
+																			<th><?= tr("Translation")?></th>
+																			<th><?= tr("Pronounce")?></th>
+																	</tr>
+															</thead>
+															<tbody id="zodiac-stats-body"></tbody>
+													</table>
+											</div>
+											<p style="margin: 10px 0 0 0; font-size: 10px; color: #8A8C8E;">
+													<?= tr("Zodiac signs defined in this culture. Click to center on the constellation.")?>
+											</p>
+									</div>
+									
+									<!-- Lunar Mansions Table -->
+									<div id="stats-tab-lunar" class="tab-content">
+											<div class="table-container">
+													<table class="stats-table">
+															<thead>
+																	<tr>
+																			<th>#</th>
+																			<th><?= tr("Symbol")?></th>
+																			<th><?= tr("Native")?></th>
+																			<th><?= tr("English Name")?></th>
+																			<th><?= tr("Translation")?></th>
+																			<th><?= tr("Pronounce")?></th>
+																	</tr>
+															</thead>
+															<tbody id="lunar-stats-body"></tbody>
+													</table>
+											</div>
+											<p style="margin: 10px 0 0 0; font-size: 10px; color: #8A8C8E;">
+													<?= tr("Lunar mansions (stations) defined in this culture. Click to center view.")?>
+											</p>
+									</div>
+									
+									<!-- Notable Stars & Objects Table -->
+									<div id="stats-tab-stars" class="tab-content">
+											<div class="table-header">
+													<input type="text" class="search-box" id="search-stars-stats" placeholder="<?= tr("Search stars & objects... (click row to center at 15° FOV) | ESC to reset")?>">
+													<div class="export-buttons">
+															<button class="export-btn" id="export-stars-csv">CSV</button>
+															<button class="export-btn" id="export-stars-json">JSON</button>
+													</div>
+											</div>
+											<p style="margin: 5px 0 10px 0; font-size: 10px; color: #8A8C8E;">
+													<?= tr("All named celestial objects (stars, planets, deep-sky) defined in this culture's common_names section.")?>
+											</p>
+											<div class="table-container">
+													<table class="stats-table">
+															<thead>
+																	<tr>
+																			<th>#</th>
+																			<th><?= tr("Original ID")?></th>
+																			<th><?= tr("Type")?></th>
+																			<th><?= tr("Native")?></th>
+																			<th><?= tr("English Name")?></th>
+																			<th><?= tr("Translation")?></th>
+																			<th><?= tr("Pronounce")?></th>
+																			<th>IPA</th>
+																	</tr>
+															</thead>
+															<tbody id="stars-stats-body"></tbody>
+													</table>
+											</div>
+									</div>
+									
+									<!-- Description Tab -->
+									<div id="stats-tab-description" class="tab-content">
+											<iframe id="stats-vo-skycultureinfo" class="skyculture-info-frame" src="/api/view/skyculturedescription/"></iframe>
+									</div>
+									
+							</div><!-- END #skyculture-stats-tabs -->
+							
+					</div>
+			</div><!-- END #tab_skyculture_stats -->
 
-				<!-- Asterisms Section -->
-				<div class="skyculture-panel asterisms-panel" style="display: none;">
-						<h3>
-								<?= tr("Asterisms")?>
-								<span class="pattern-count" id="asterisms-count"></span>
-						</h3>
-						<p class="patterns-note"><?= tr("Traditional star patterns within constellations")?></p>
-						<div id="asterisms-buttons-container" class="patterns-buttons-container">
-								<div class="loading-placeholder"><?= tr("No asterisms available")?></div>
-						</div>
-				</div>
-
-				<!-- Zodiac Signs Section -->
-				<div class="skyculture-panel zodiac-panel" style="display: none;">
-						<h3>
-								<?= tr("Zodiac Signs")?>
-								<span class="pattern-count" id="zodiac-count"></span>
-						</h3>
-						<p class="patterns-note"><?= tr("The 12 signs of the zodiac")?></p>
-						<div id="zodiac-buttons-container" class="patterns-buttons-container">
-								<div class="loading-placeholder"><?= tr("No zodiac data available")?></div>
-						</div>
-				</div>
-
-				<!-- Lunar Mansions Section -->
-				<div class="skyculture-panel lunar-panel" style="display: none;">
-						<h3>
-								<?= tr("Lunar Mansions")?>
-								<span class="pattern-count" id="lunar-count"></span>
-						</h3>
-						<p class="patterns-note"><?= tr("Traditional lunar stations (mansions)")?></p>
-						<div id="lunar-buttons-container" class="patterns-buttons-container">
-								<div class="loading-placeholder"><?= tr("No lunar mansions data available")?></div>
-						</div>
-				</div>
-
-				<!-- Notable Stars Section -->
-				<div class="skyculture-panel stars-panel" style="display: none;">
-						<h3>
-								<?= tr("Notable Stars")?>
-								<span class="pattern-count" id="stars-count"></span>
-						</h3>
-						<p class="patterns-note"><?= tr("Named stars with cultural significance")?></p>
-						<div id="stars-buttons-container" class="patterns-buttons-container">
-								<div class="loading-placeholder"><?= tr("No star name data available")?></div>
-						</div>
-				</div>    
-
-</div>  
-	<!-- handled by ui/actions.js -->
+			<!-- handled by ui/actions.js -->
       <div id="tab_actions">
         <div class="flex flex-wrap">
-          <section id="scripts" class="block flex flex-expand">
-            <header><h2><?= tr("Scripts")?></h2></header>
-            <div class="flex flex-column">
-              <select id="scriptlist" class="scrollselect flex-expand" size="10"></select>
-              <div class="textcenter"><?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span></div>
-              <div><button id="bt_runscript" disabled="disabled"><?= tr("Run selected script")?></button><button id="bt_stopscript" disabled="disabled"><?= tr("Stop current script")?></button></div>
-            </div>
-            <iframe id="scriptinfo" class="flex-expand"></iframe>
-          </section>
+				
+					<!-- SCRIPTS SECTION - Enhanced with Visual Indicators, Icons, and Reset View	-->
+					<section id="scripts" class="block flex flex-expand">
+							<header><h2><?= tr("Scripts")?></h2></header>
+							<div class="flex flex-column">
+									<!-- Script Selection List -->
+									<select id="scriptlist" class="scrollselect flex-expand" size="10"></select>
+									
+									<!-- Active Script Display -->
+									<div class="active-script-display">
+											<?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span>
+									</div>
+									
+									<!-- Script Control Buttons with Icons -->
+									<div class="script-controls">
+											<button id="bt_runscript" class="script-control-btn icon32" disabled="disabled" title="<?= tr("Run selected script")?>"></button>
+											<button id="bt_stopscript" class="script-control-btn icon32" disabled="disabled" title="<?= tr("Stop current script")?>"></button>
+											<button id="bt_script_resetview" class="script-control-btn icon32" title="<?= tr("Reset to natural sky appearance (South, 40°, FOV 90°)")?>"></button>
+									</div>
+							</div>
+							
+							<!-- Script Information IFrame - Gets pulsing border when script is running -->
+							<iframe id="scriptinfo" class="flex-expand"></iframe>
+					</section>
+
 					<section id="stelaction" class="block flex flex-column">
 							<header><h2><?= tr("Actions")?></h2></header>
 							<div class="action-search-container" style="display: flex; gap: 10px; margin-bottom: 10px;">
@@ -949,6 +1207,7 @@
 					</section>
         </div>
       </div>
+			
       <!-- handled by ui/location.js -->
       <div id="tab_location">
         <section id="location" class="inline-block smallblock">
@@ -977,7 +1236,8 @@
           </div>
         </section>
       </div>
-      <!-- also handled by ui/viewoptions.js -->
+      
+			<!-- also handled by ui/viewoptions.js -->
       <div id="tab_projection">
         <div class="smallblock flex landscapeblock">
           <h3><?= tr("Projection")?></h3>
@@ -991,7 +1251,8 @@
 			  <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="StelMovementMgr.viewportVerticalOffsetTarget"></span>
         </div>		
       </div>
-      <div id="tab_scenery3d" class="stelplugin" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
+      
+			<div id="tab_scenery3d" class="stelplugin" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
           <div class="flex">
               <div class="smallblock">
                   <h3><?= tr("Interaction")?></h3>
@@ -1032,7 +1293,8 @@
             <iframe id="s3d_info" class="flex-expand">No scene selected</iframe>
           </div>
       </div>		
-			<!-- Gamepad Controller Section - Built on W3C Gamepad API/gpcontroller.js module v2.6.0 -->
+			
+			<!-- Gamepad Controller Section - Built on W3C Gamepad ui/gpcontroller.js module v2.6.0 -->
 			<div id="tab_gamepad">
 					<section id="gp-controller" class="block">
 							<header>
@@ -1264,7 +1526,8 @@
 							</div>
 					</section>
 			</div>
-	 </div>
+		</div>
+		
     <ul class="ui-corner-all ui-widget-content button32list margin-vertical">
       <li title="<?= tr("Constellation lines")?>"><button class="stelaction icon32 btConstellationLines" name="actionShow_Constellation_Lines"></button></li>
       <li title="<?= tr("Constellation boundaries")?>"><button class="stelaction icon32 btConstellationBoundaries" name="actionShow_Constellation_Boundaries"></button></li>
@@ -1284,6 +1547,7 @@
       <li title="<?= tr("Go to home")?>"><button class="stelaction icon32 btGotoHome" name="actionGo_Home_Global"></button></li>
     </ul>
   </div>
+	
   <!-- handled by mainui.js -->
   <div id="noresponse" title='<?= tr("No response from server")?>'>
     <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><?= tr("No response from server for %1 seconds. Is Stellarium still running?","<span id='noresponsetime'>0</span>")?></p>

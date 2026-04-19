@@ -1,11 +1,12 @@
 /* jshint expr: true */
 
 define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
-	"api/properties", "./time", "./joystickqueue", "./actions", "./viewoptions",
-	"./scripts", "./viewcontrol", "./location", "./search", "ui/skyculture", "./gpcontroller", "jquery-ui"
+    "api/properties", "./time", "./joystickqueue", "./actions", "./viewoptions",
+    "./scripts", "./viewcontrol", "./location", "./search", "ui/skyculture", 
+    "ui/skyculture-stats", "./gpcontroller", "jquery-ui"
 ], function($, settings, globalize, rc, actionApi, propApi, timeui,
-	JoystickQueue, actionsui, viewoptionsui, scriptsui, viewcontrolui, locationui,
-	searchui, skyculture, gpcontroller) {
+    JoystickQueue, actionsui, viewoptionsui, scriptsui, viewcontrolui, locationui,
+    searchui, skyculture, skycultureStats, gpcontroller) {
 	"use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
@@ -366,7 +367,8 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 								skyculture.init(
 										"#skyculture-buttons-container",    // Culture buttons container
 										containers,                         // Patterns containers object
-										"#vo_skycultureinfo"                // iframe skyculture info container
+										"#vo_skycultureinfo",                // iframe skyculture info container
+										{ cultureCount: "#skyculture-culture-count" } // skyculture count
 								);
 								console.log("[MainUI] Sky culture buttons module initialized with multi-panel support");
 						} else {
@@ -375,6 +377,37 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 				}, 100);
 		} else {
 				console.warn("[MainUI] Sky culture module not available");
+		}
+		
+		// =====================================================================
+		// INITIALIZE SKY CULTURE STATISTICS MODULE
+		// =====================================================================
+		if (typeof skycultureStats !== 'undefined' && skycultureStats && typeof skycultureStats.init === 'function') {
+				setTimeout(function() {
+						skycultureStats.init({
+								cultureContainer: "#skyculture-stats-buttons",
+								cultureCount: "#skyculture-stats-count",
+								totalCultures: "#stats-total-cultures",
+								totalConstellations: "#stats-total-constellations",
+								totalAsterisms: "#stats-total-asterisms",
+								totalRayHelpers: "#stats-total-ray-helpers",
+								totalZodiac: "#stats-total-zodiac",
+								totalLunar: "#stats-total-lunar",
+								totalStars: "#stats-total-stars",
+								constellationsBody: "#constellations-stats-body",
+								asterismsBody: "#asterisms-stats-body",
+								zodiacBody: "#zodiac-stats-body",
+								lunarBody: "#lunar-stats-body",
+								starsBody: "#stars-stats-body",
+								constellationsCount: "#constellations-stats-count",
+								asterismsCount: "#asterisms-stats-count",
+								zodiacCount: "#zodiac-stats-count",
+								lunarCount: "#lunar-stats-count",
+								starsCount: "#stars-stats-count",
+								descriptionContent: "#stats-description-content"
+						});
+						console.log("[MainUI] Sky culture statistics module initialized");
+				}, 200);
 		}
     
     // =====================================================================

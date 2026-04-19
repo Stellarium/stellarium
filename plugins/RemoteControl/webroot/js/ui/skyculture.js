@@ -1,203 +1,372 @@
 /* ========================================================================
- * skyculture.js - Sky Culture Manager with Multi-Panel Data Visualization
+ * skyculture.js - Sky Culture Manager with Direct Index.json Data Loading
  * ========================================================================
  * 
  * This module provides a complete UI for managing sky cultures and their
- * associated astronomical data in Stellarium Remote Control.
+ * associated astronomical data in the Stellarium Remote Control plugin.
  * 
- * Features:
+ * =========================================================================
+ * TABLE OF CONTENTS
+ * =========================================================================
+ * 1. Overview and Architecture
+ * 2. Key Features
+ * 3. Data Flow Diagram
+ * 4. API Endpoints Used
+ * 5. Module Dependencies
+ * 6. Constants and Configuration
+ * 7. Private Variables
+ * 8. Helper Functions
+ * 9. Data Extraction Functions (Direct from index.json)
+ * 10. Panel Rendering Functions
+ * 11. Culture Management Functions
+ * 12. Synchronization Listeners
+ * 13. Initialization
+ * 14. Public API
  * 
- * 1. Sky Culture Buttons - Replaces the traditional select dropdown with a
- *    responsive button grid for selecting different sky cultures.
- *    - Uses /api/view/listskyculture endpoint (official Stellarium API)
- *    - Real-time synchronization with server-side changes
- *    - Visual feedback for active culture
+ * =========================================================================
+ * 1. OVERVIEW AND ARCHITECTURE
+ * =========================================================================
  * 
- * 2. Dynamic Data Panels - Automatically displays available data types:
- *    - Constellations: Traditional star groupings with isolation/highlight
- *    - Asterisms: Star patterns within constellations (non-IAU)
- *    - Zodiac Signs: The 12 ecliptic signs (when defined in culture)
- *    - Lunar Mansions: Traditional lunar stations (when defined)
- *    - Notable Stars: Named stars with cultural significance
+ * The Sky Culture Manager provides a multi-panel tabbed interface for
+ * exploring astronomical data across different cultural traditions. It
+ * replaces the traditional dropdown selector with an interactive button
+ * grid and organizes cultural patterns into categorized panels.
  * 
- * 3. Smart Panel Management:
- *    - Panels appear only when data is available in index.json
- *    - Count badges show number of items per category
- *    - Empty panels are automatically hidden
+ * DATA SOURCE PHILOSOPHY:
+ * -----------------------
+ * This module uses index.json as the SINGLE SOURCE OF TRUTH for all
+ * culture-specific data. This architectural decision was made because:
  * 
- * Technical Architecture:
- * - Uses Stellarium's official REST API for all data access
- * - Property system for real-time synchronization
- * - Event-driven architecture with jQuery custom events
- * - Responsive grid layout for all screen sizes
- * - Shared utilities module for navigation and isolation
+ * 1. The Stellarium API's listobjectsbytype endpoint does not properly
+ *    filter constellation and asterism names by culture/language.
+ * 2. The API may return inconsistent results (mixing English and native
+ *    names, missing entries, or incorrect counts).
+ * 3. index.json contains the complete, authoritative data for each culture.
  * 
- * API Endpoints Used:
- * - GET  /api/view/listskyculture                    - List all sky cultures
- * - GET  /api/view/skyculturedescription/            - Get culture description (iframe)
- * - GET  /api/view/skyculturedescription/index.json  - Get culture-specific data
- * - POST /api/stelproperty/set                       - Set current sky culture
+ * By loading directly from index.json, we guarantee:
+ * - Correct constellation and asterism counts
+ * - Proper display name selection (English preferred, native as fallback)
+ * - Functional search using the English name
+ * - Consistent behavior across all 54+ sky cultures
  * 
- * Data Extraction:
- * - Constellations: from data.constellations array
- * - Asterisms: from data.asterisms array (filters out is_ray_helper)
- * - Zodiac: from data.zodiac.names array
- * - Lunar Mansions: from data.lunar_system.names array
- * - Star Names: from data.common_names object
+ * ARCHITECTURE FLOW:
+ * ------------------
  * 
- * Dependencies:
- * - jQuery 3.x
- * - Stellarium API modules (properties, remotecontrol, actions)
- * - stellarium-utils (shared utilities for navigation and isolation)
+ *   ┌─────────────────┐
+ *   │ listskyculture   │  (GET /api/view/listskyculture)
+ *   │ (API)           │  → Returns translated culture names
+ *   └────────┬────────┘
+ *            │
+ *            ▼
+ *   ┌─────────────────┐
+ *   │ Culture Buttons  │  (User selects a culture)
+ *   │ (UI Grid)        │
+ *   └────────┬────────┘
+ *            │
+ *            ▼
+ *   ┌─────────────────┐     ┌─────────────────┐
+ *   │ setSkyCulture    │────▶│ StelProperty    │  (POST /api/stelproperty/set)
+ *   │                  │     │ Update          │
+ *   └────────┬────────┘     └─────────────────┘
+ *            │
+ *            ▼
+ *   ┌─────────────────┐
+ *   │ index.json       │  (GET /api/view/skyculturedescription/index.json)
+ *   │ (Single Source)  │  → Complete culture data
+ *   └────────┬────────┘
+ *            │
+ *            ├──────────────────────────────────────┐
+ *            │                                      │
+ *            ▼                                      ▼
+ *   ┌─────────────────┐                    ┌─────────────────┐
+ *   │ Constellations   │                    │ Asterisms       │
+ *   │ (extract from    │                    │ (extract from   │
+ *   │  index.json)     │                    │  index.json)    │
+ *   └─────────────────┘                    └─────────────────┘
+ *            │                                      │
+ *            ▼                                      ▼
+ *   ┌─────────────────┐                    ┌─────────────────┐
+ *   │ Zodiac Signs    │                    │ Lunar Mansions  │
+ *   │ (extract from   │                    │ (extract from   │
+ *   │  index.json)    │                    │  index.json)    │
+ *   └─────────────────┘                    └─────────────────┘
+ *            │                                      │
+ *            ▼                                      ▼
+ *   ┌─────────────────┐                    ┌─────────────────┐
+ *   │ Notable Stars   │                    │ Description     │
+ *   │ (extract from   │                    │ (iframe)        │
+ *   │  index.json)    │                    │                 │
+ *   └─────────────────┘                    └─────────────────┘
+ *            │                                      │
+ *            └──────────────┬───────────────────────┘
+ *                           ▼
+ *                  ┌─────────────────┐
+ *                  │ RENDER PANELS   │
+ *                  │ (Button Grids)  │
+ *                  └─────────────────┘
  * 
- * @module skyculture
- * @requires jquery
- * @requires api/properties
- * @requires api/remotecontrol
- * @requires api/actions
- * @requires stellarium-utils
+ * =========================================================================
+ * 2. KEY FEATURES
+ * =========================================================================
+ * 
+ * - Sky culture selection via responsive, scrollable button grid
+ * - Six-panel tabbed interface (Constellations, Asterisms, Zodiac Signs,
+ *   Lunar Mansions, Notable Stars, Description)
+ * - Direct data extraction from index.json (no API filtering issues)
+ * - Constellation isolation with automatic state preservation
+ * - Type-specific FOV zoom levels (constellations: 60°, asterisms: 30°, etc.)
+ * - Real-time synchronization with server-side culture changes
+ * - Automatic selection clearing to prevent view conflicts
+ * - Translation support for culture names (via listskyculture API)
+ * - Lazy loading with visual loading placeholders
+ * - Responsive design with mobile/touch support
+ * 
+ * =========================================================================
+ * 3. DATA FLOW DIAGRAM
+ * =========================================================================
+ * 
+ * User Action                Module Response              Server Interaction
+ * ─────────────────────────────────────────────────────────────────────────
+ * 
+ * Page Load
+ *     │
+ *     ▼
+ * init() ─────────────────────────────────────────────▶ GET /listskyculture
+ *     │                                                      │
+ *     │                                                      ▼
+ *     │                                            Translated culture names
+ *     │                                                      │
+ *     ▼                                                      ▼
+ * renderCultureButtons() ◀─────────────────────────── availableCultures[]
+ *     │
+ *     ▼
+ * loadAllCultureData() ──────────────────────────────▶ GET /index.json
+ *     │                                                      │
+ *     │                                                      ▼
+ *     │                                            Complete culture data
+ *     │                                                      │
+ *     ├── loadConstellationsFromIndexJson() ◀────────────────┤
+ *     ├── loadAsterismsFromIndexJson()    ◀──────────────────┤
+ *     ├── extractZodiac()                 ◀──────────────────┤
+ *     ├── extractLunarMansions()          ◀──────────────────┤
+ *     └── extractStarNames()              ◀──────────────────┤
+ *     │                                                      │
+ *     ▼                                                      │
+ * renderConstellationsPanel()                                │
+ * renderAsterismsPanel()                                     │
+ * renderZodiacPanel()                                        │
+ * renderLunarPanel()                                         │
+ * renderStarsPanel()                                         │
+ *     │                                                      │
+ *     ▼                                                      │
+ * User clicks constellation ──────────────────────────────────┤
+ *     │                                                      │
+ *     ▼                                                      │
+ * stelUtils.toggleConstellationHighlight() ──────────────────┼──▶ POST /main/focus
+ *                                                            │    POST /stelproperty/set
+ *                                                            │
+ * =========================================================================
+ * 4. API ENDPOINTS USED
+ * =========================================================================
+ * 
+ * | Endpoint                                      | Method | Purpose                    |
+ * |-----------------------------------------------|--------|----------------------------|
+ * | /api/view/listskyculture                      | GET    | List all cultures (translated) |
+ * | /api/view/skyculturedescription/index.json    | GET    | Complete culture data (source of truth) |
+ * | /api/stelproperty/set                         | POST   | Change current culture     |
+ * | /api/view/skyculturedescription/              | GET    | Culture HTML description (iframe) |
+ * 
+ * Note: /api/objects/listobjectsbytype is NOT used for constellations
+ * and asterisms due to inconsistent filtering behavior across cultures.
+ * 
+ * =========================================================================
+ * 5. MODULE DEPENDENCIES
+ * =========================================================================
+ * 
+ * @requires jquery               - DOM manipulation and AJAX
+ * @requires api/properties       - StelProperty access
+ * @requires api/remotecontrol    - Server communication and translation
+ * @requires ui/stellarium-utils  - Shared navigation utilities
+ * 
+ * =========================================================================
+ * 6. AUTHOR AND VERSION
+ * =========================================================================
  * 
  * @author kutaibaa akraa (GitHub: @kutaibaa-akraa)
- * @date 2026-04-08
+ * @date 2026-04-18
  * @license GPLv2+
- * @version 2.2.0
+ * @version 4.0.0 - Direct index.json loading (eliminates API filtering issues)
  * 
  * ======================================================================== */
 
-define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stellarium-utils"], 
-    function($, propApi, rc, actions, stelUtils) {
+define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"], 
+    function($, propApi, rc, stelUtils) {
     "use strict";
 
     // =====================================================================
-    // SECTION 1: CONSTANTS AND CONFIGURATION
+    // 6. CONSTANTS AND CONFIGURATION
     // =====================================================================
 
     /**
-     * Default IAU Constellations (88 standard constellations)
-     * Used as fallback when a sky culture doesn't have an index.json file
-     * Sorted alphabetically for consistent display
-     * @constant {Array<string>}
+     * Default FOV (Field of View) values for different object types.
+     * These values provide optimal viewing angles for each category.
+     * @constant {Object.<string, number>}
      */
-    var DEFAULT_IAU_CONSTELLATIONS = [
-        "Andromeda", "Antlia", "Apus", "Aquarius", "Aquila", "Ara", "Aries", "Auriga",
-        "Bootes", "Caelum", "Camelopardalis", "Cancer", "Canes Venatici", "Canis Major",
-        "Canis Minor", "Capricornus", "Carina", "Cassiopeia", "Centaurus", "Cepheus",
-        "Cetus", "Chamaeleon", "Circinus", "Columba", "Coma Berenices", "Corona Australis",
-        "Corona Borealis", "Corvus", "Crater", "Crux", "Cygnus", "Delphinus", "Dorado",
-        "Draco", "Equuleus", "Eridanus", "Fornax", "Gemini", "Grus", "Hercules",
-        "Horologium", "Hydra", "Hydrus", "Indus", "Lacerta", "Leo", "Leo Minor", "Lepus",
-        "Libra", "Lupus", "Lynx", "Lyra", "Mensa", "Microscopium", "Monoceros", "Musca",
-        "Norma", "Octans", "Ophiuchus", "Orion", "Pavo", "Pegasus", "Perseus", "Phoenix",
-        "Pictor", "Pisces", "Piscis Austrinus", "Puppis", "Pyxis", "Reticulum", "Sagitta",
-        "Sagittarius", "Scorpius", "Sculptor", "Scutum", "Serpens", "Sextans", "Taurus",
-        "Telescopium", "Triangulum", "Triangulum Australe", "Tucana", "Ursa Major",
-        "Ursa Minor", "Vela", "Virgo", "Volans", "Vulpecula"
-    ];
-
-    /**
-     * Cache for parsed culture data to avoid redundant API calls
-     * Stores the full extracted data object for each culture
-     * @constant {Object.<string, Object>}
-     */
-    var CULTURE_DATA_CACHE = {};
+    var DEFAULT_FOV = {
+        constellation: 60,
+        asterism: 30,
+        zodiac: 40,
+        lunar: 30,
+        star: 15
+    };
 
     // =====================================================================
-    // SECTION 2: PRIVATE VARIABLES
+    // 7. PRIVATE VARIABLES
     // =====================================================================
 
+    // ---------------------------------------------------------------------
     // DOM Elements
-    var $cultureContainer = null;           // Container for sky culture buttons
-    var $constellationsContainer = null;    // Container for constellation buttons
-    var $asterismsContainer = null;         // Container for asterism buttons
-    var $zodiacContainer = null;            // Container for zodiac sign buttons
-    var $lunarContainer = null;             // Container for lunar mansion buttons
-    var $starsContainer = null;             // Container for star name buttons
-    var $infoFrame = null;                  // Iframe for culture description
+    // ---------------------------------------------------------------------
 
+    /** @type {jQuery} Container for culture selection buttons */
+    var $cultureContainer = null;
+    
+    /** @type {jQuery} Container for constellation buttons */
+    var $constellationsContainer = null;
+    
+    /** @type {jQuery} Container for asterism buttons */
+    var $asterismsContainer = null;
+    
+    /** @type {jQuery} Container for zodiac buttons */
+    var $zodiacContainer = null;
+    
+    /** @type {jQuery} Container for lunar mansion buttons */
+    var $lunarContainer = null;
+    
+    /** @type {jQuery} Container for star buttons */
+    var $starsContainer = null;
+    
+    /** @type {jQuery} iframe for culture description */
+    var $infoFrame = null;
+    
+    /** @type {jQuery} Element displaying culture count badge */
+    var $cultureCount = null;
+
+    // ---------------------------------------------------------------------
     // State Variables
-    var currentCultureId = null;            // Currently selected culture ID
-    var availableCultures = [];              // Array of {id, name} objects
-    var selectedPattern = null;              // Currently selected pattern name
-    var isInitialized = false;               // Module initialization flag
-    var isUpdating = false;                  // Prevents concurrent updates
+    // ---------------------------------------------------------------------
 
-    // =====================================================================
-    // SECTION 3: HELPER FUNCTIONS
-    // =====================================================================
-
-    /**
-     * Translation helper with fallback support
-     * @param {string} text - Text to translate
-     * @param {...*} args - Optional arguments for string replacement
-     * @returns {string} Translated text
+    /** @type {string} Currently active culture ID (e.g., "korean", "arabic_al-sufi") */
+    var currentCultureId = null;
+    
+    /** @type {string} Current Stellarium language code (e.g., 'en', 'ar', 'fr') */
+    var currentLanguage = 'en';
+    
+    /** @type {Array<{id: string, name: string}>} List of all available cultures */
+    var availableCultures = [];
+    
+    /** @type {string} Name of the currently selected pattern (for UI highlighting) */
+    var selectedPattern = null;
+    
+    /** @type {string} ID of the currently selected pattern */
+    var selectedPatternId = null;
+    
+    /** 
+     * Current patterns organized by type.
+     * @type {Object.<string, Array>}
      */
-    function _tr(text) {
-        if (typeof window.tr === 'function') {
-            return window.tr.apply(window, arguments);
-        }
-        if (typeof rc !== 'undefined' && rc && typeof rc.tr === 'function') {
-            return rc.tr.apply(rc, arguments);
-        }
-        if (arguments.length > 1) {
-            var args = Array.prototype.slice.call(arguments, 1);
-            return text.replace(/%(\d+)/g, function(match, num) {
-                return typeof args[num] != 'undefined' ? args[num] : match;
-            });
-        }
-        return text;
-    }
+    var currentPatternsData = { 
+        constellations: [], 
+        asterisms: [], 
+        zodiac: [], 
+        lunar: [], 
+        stars: [] 
+    };
+    
+    /** @type {Object} Raw culture data from index.json (cached for star navigation) */
+    var currentCultureRawData = null;
+    
+    /** @type {boolean} Module initialization state */
+    var isInitialized = false;
+    
+    /** @type {boolean} Synchronization enabled flag (can be toggled for debugging) */
+    var syncEnabled = true;
+
+    // ---------------------------------------------------------------------
+    // Translation Function
+    // ---------------------------------------------------------------------
+    
+    /** @type {Function} Translation function from remotecontrol module */
+    var _tr = rc.tr;
+
+    // =====================================================================
+    // 8. HELPER FUNCTIONS
+    // =====================================================================
 
     /**
-     * Escape HTML special characters to prevent XSS
-     * Handles &, <, >, ", and ' characters
-     * @param {string} str - String to escape
-     * @returns {string} Escaped string
+     * Escape HTML special characters to prevent XSS attacks.
+     * Converts the characters & < > " ' to their HTML entity equivalents.
+     * 
+     * @param {string} str - The string to escape
+     * @returns {string} The escaped string, safe for HTML insertion
      */
     function escapeHtml(str) {
         if (!str) return '';
-        return str.replace(/[&<>"']/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            if (m === '"') return '&quot;';
-            if (m === "'") return '&#39;';
-            return m;
-        });
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
     }
 
     /**
-     * Updates the count badge for a specific pattern type
-     * @param {string} type - Pattern type: "constellations", "asterisms", "zodiac", "lunar", "stars"
-     * @param {number} count - Number of items
+     * Update the pattern count badge displayed in tab headers.
+     * 
+     * @param {string} type - Pattern type (constellations, asterisms, zodiac, lunar, stars)
+     * @param {number} count - Number of items to display
      */
     function updatePatternCount(type, count) {
         var $countElement = $("#" + type + "-count");
         if ($countElement && $countElement.length) {
-            if (count > 0) {
-                $countElement.text("(" + count + ")");
-            } else {
-                $countElement.text("");
-            }
+            $countElement.text(count > 0 ? "(" + count + ")" : "");
         }
     }
 
     /**
-     * Updates the visual state of all pattern buttons
-     * Removes active class from all buttons and adds it to the currently selected pattern
+     * Clear active state from all pattern buttons across all containers.
+     * Called when selection is cleared or culture is changed.
+     */
+    function clearAllActiveButtons() {
+        var containers = [
+            $constellationsContainer, $asterismsContainer, 
+            $zodiacContainer, $lunarContainer, $starsContainer
+        ];
+        for (var i = 0; i < containers.length; i++) {
+            if (containers[i] && containers[i].length) {
+                containers[i].find(".pattern-btn").removeClass("active");
+            }
+        }
+        selectedPattern = null;
+        selectedPatternId = null;
+    }
+
+    /**
+     * Update button active states based on current selection.
+     * Ensures only the button matching selectedPatternId is highlighted.
      */
     function updateAllButtonStates() {
         var containers = [
             $constellationsContainer, $asterismsContainer, 
             $zodiacContainer, $lunarContainer, $starsContainer
         ];
-        
         for (var c = 0; c < containers.length; c++) {
             var container = containers[c];
             if (container && container.length) {
                 container.find(".pattern-btn").removeClass("active");
-                if (selectedPattern) {
+                if (selectedPatternId) {
                     container.find(".pattern-btn").each(function() {
-                        if ($(this).data("pattern-name") === selectedPattern) {
+                        if ($(this).data("pattern-id") === selectedPatternId) {
                             $(this).addClass("active");
                         }
                     });
@@ -207,555 +376,671 @@ define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stel
     }
 
     /**
-     * Renders a button grid for a pattern container
-     * @param {jQuery} $container - jQuery object of the container element
-     * @param {Array} patterns - Array of pattern objects {id, name, type}
-     * @param {string} containerName - Name of the container for logging
-     * @param {Function} onClickHandler - Callback function when button is clicked
+     * Get the current Stellarium language from StelProperty.
+     * 
+     * @returns {string} Language code (e.g., 'en', 'ar', 'fr')
+     */
+    function getCurrentLanguage() {
+        if (propApi) {
+            var lang = propApi.getStelProp("StelLocaleMgr.appLanguage");
+            if (lang) {
+                currentLanguage = lang;
+                return lang;
+            }
+        }
+        return currentLanguage;
+    }
+
+    /**
+     * Render buttons in a container with click handlers.
+     * This is the core UI rendering function used by all pattern panels.
+     * 
+     * @param {jQuery} $container - Container element to populate
+     * @param {Array} patterns - Array of pattern objects with properties:
+     *                           {id, name, searchName, type}
+     * @param {string} containerName - Name of container type (for placeholder text)
+     * @param {Function} onClickHandler - Click handler function(patternName, patternType, searchName, patternId)
      */
     function renderButtons($container, patterns, containerName, onClickHandler) {
         if (!$container || !$container.length) return;
-        
         $container.empty();
         
+        // Handle empty state
         if (!patterns || patterns.length === 0) {
-            var placeholderText = "";
-            if (containerName === "constellations") placeholderText = _tr("No constellations available");
-            else if (containerName === "asterisms") placeholderText = _tr("No asterisms available");
-            else if (containerName === "zodiac") placeholderText = _tr("No zodiac data available");
-            else if (containerName === "lunar") placeholderText = _tr("No lunar mansions data available");
-            else if (containerName === "stars") placeholderText = _tr("No star name data available");
-            else placeholderText = _tr("No data available");
+            var placeholderText = _tr("No data available");
+            if (containerName === "constellations") {
+                placeholderText = _tr("No constellations available for this culture");
+            } else if (containerName === "asterisms") {
+                placeholderText = _tr("No asterisms available for this culture");
+            } else if (containerName === "zodiac") {
+                placeholderText = _tr("No zodiac data available for this culture");
+            } else if (containerName === "lunar") {
+                placeholderText = _tr("No lunar mansions data available for this culture");
+            } else if (containerName === "stars") {
+                placeholderText = _tr("No star name data available for this culture");
+            }
             
             $container.html('<div class="loading-placeholder">' + placeholderText + '</div>');
             return;
         }
         
+        // Build button grid
         var buttonsHtml = '<div class="patterns-buttons-grid">';
-        
         for (var i = 0; i < patterns.length; i++) {
             var pattern = patterns[i];
-            var displayName = pattern.name;
-            var isActive = (selectedPattern === pattern.name);
+            var isActive = (selectedPatternId === pattern.id);
+            var tooltip = pattern.type === "star" ? ' title="' + escapeHtml(pattern.id) + '"' : '';
             
-            buttonsHtml += '<button type="button" class="pattern-btn' + 
-                (isActive ? ' active' : '') + '" data-pattern-name="' + 
-                escapeHtml(pattern.name) + '" data-pattern-type="' + 
-                escapeHtml(pattern.type) + '" data-pattern-id="' + 
-                escapeHtml(pattern.id) + '">' + escapeHtml(displayName) + '</button>';
+            buttonsHtml += '<button type="button" class="pattern-btn' + (isActive ? ' active' : '') + 
+                '" data-pattern-id="' + escapeHtml(pattern.id) + 
+                '" data-pattern-name="' + escapeHtml(pattern.name) + 
+                '" data-pattern-type="' + escapeHtml(pattern.type) + 
+                '" data-search-name="' + escapeHtml(pattern.searchName || pattern.name) + '"' + 
+                tooltip + '>' + escapeHtml(pattern.name) + '</button>';
         }
-        
         buttonsHtml += '</div>';
         $container.html(buttonsHtml);
         
         // Attach click handlers
         $container.find(".pattern-btn").on("click", function() {
-            var patternName = $(this).data("pattern-name");
-            var patternType = $(this).data("pattern-type");
-            if (patternName && onClickHandler) {
-                onClickHandler(patternName, patternType);
+            var $btn = $(this);
+            var patternId = $btn.data("pattern-id");
+            var patternName = $btn.data("pattern-name");
+            var patternType = $btn.data("pattern-type");
+            var searchName = $btn.data("search-name");
+            
+            if ($btn.hasClass('active')) {
+                // Toggle OFF: Deselect and clear highlight
+                $container.find(".pattern-btn").removeClass("active");
+                selectedPattern = null;
+                selectedPatternId = null;
+                if (patternType === "constellation") {
+                    stelUtils.clearConstellationHighlight();
+                }
+            } else {
+                // Toggle ON: Select and execute action
+                $container.find(".pattern-btn").removeClass("active");
+                $btn.addClass("active");
+                selectedPattern = patternName;
+                selectedPatternId = patternId;
+                if (patternName && onClickHandler) {
+                    onClickHandler(patternName, patternType, searchName, patternId);
+                }
             }
         });
     }
 
     // =====================================================================
-    // SECTION 4: DATA EXTRACTION FUNCTIONS
+    // 9. DATA EXTRACTION FUNCTIONS (Direct from index.json)
+    // =====================================================================
+    // 
+    // These functions extract data directly from the index.json structure.
+    // This bypasses the Stellarium API's inconsistent filtering behavior
+    // and guarantees correct data for all 54+ sky cultures.
     // =====================================================================
 
     /**
-     * Extracts constellations from index.json data
-     * @param {Object} data - Parsed index.json content
-     * @returns {Array|null} Array of constellation pattern objects or null if not present
+     * Load constellations directly from index.json data.
+     * 
+     * Display Name Priority:
+     * 1. English name (if available) - preferred for consistency
+     * 2. Native name (if available) - fallback when English missing
+     * 3. Constellation ID - absolute fallback
+     * 
+     * Search Name: Always uses English name (or fallback) for reliable
+     * Stellarium object lookup.
+     * 
+     * @param {Object} cultureData - The culture data from index.json
+     * @returns {Array} Constellation pattern objects with properties:
+     *                  {id, name, searchName, type, englishName, nativeName}
      */
-    function extractConstellations(data) {
-        if (!data.constellations || !Array.isArray(data.constellations) || data.constellations.length === 0) {
-            return null;
-        }
-        
+    function loadConstellationsFromIndexJson(cultureData) {
         var patterns = [];
         
-        for (var i = 0; i < data.constellations.length; i++) {
-            var cons = data.constellations[i];
-            var consName = null;
-            
-            if (cons.common_name) {
-                if (cons.common_name.english) {
-                    consName = cons.common_name.english;
-                } else if (cons.common_name.native) {
-                    consName = cons.common_name.native;
-                }
-            }
-            
-            if (!consName && cons.id) {
-                consName = cons.id;
-            }
-            
-            if (consName) {
-                patterns.push({
-                    id: cons.id,
-                    name: consName,
-                    type: "constellation"
-                });
-            }
+        if (!cultureData || !cultureData.constellations || !Array.isArray(cultureData.constellations)) {
+            console.warn("[SkyCulture] No constellations array in culture data");
+            return patterns;
         }
         
-        if (patterns.length === 0) return null;
+        var totalConstellations = cultureData.constellations.length;
         
+        for (var i = 0; i < totalConstellations; i++) {
+            var con = cultureData.constellations[i];
+            var id = con.id;
+            
+            if (!id) {
+                console.warn("[SkyCulture] Constellation missing ID at index", i);
+                continue;
+            }
+            
+            // Extract name components
+            var englishName = (con.common_name && con.common_name.english) 
+                ? con.common_name.english.trim() 
+                : null;
+            var nativeName = (con.common_name && con.common_name.native) 
+                ? con.common_name.native.trim() 
+                : null;
+            
+            // Determine display name: English preferred, then native, then ID
+            var displayName = englishName || nativeName || id;
+            
+            // Search name: English preferred for reliable Stellarium lookup
+            var searchName = englishName || displayName;
+            
+            patterns.push({
+                id: id,
+                name: displayName,
+                searchName: searchName,
+                type: "constellation",
+                englishName: englishName,
+                nativeName: nativeName
+            });
+        }
+        
+        // Sort alphabetically by display name
         patterns.sort(function(a, b) {
             return a.name.localeCompare(b.name);
         });
+        
+        console.log("[SkyCulture] Loaded " + patterns.length + " constellations from index.json " +
+            "(total in file: " + totalConstellations + ")");
         
         return patterns;
     }
 
     /**
-     * Extracts asterisms from index.json data (skip ray helpers)
-     * @param {Object} data - Parsed index.json content
-     * @returns {Array|null} Array of asterism pattern objects or null if not present
+     * Load asterisms directly from index.json data.
+     * 
+     * This function filters out "ray helpers" (is_ray_helper === true) which
+     * are auxiliary lines rather than proper asterisms.
+     * 
+     * Display Name Priority: Same as constellations (English → Native → ID)
+     * 
+     * @param {Object} cultureData - The culture data from index.json
+     * @returns {Array} Asterism pattern objects
      */
-    function extractAsterisms(data) {
-        if (!data.asterisms || !Array.isArray(data.asterisms) || data.asterisms.length === 0) {
-            return null;
-        }
-        
+    function loadAsterismsFromIndexJson(cultureData) {
         var patterns = [];
         
-        for (var i = 0; i < data.asterisms.length; i++) {
-            var aster = data.asterisms[i];
-            
-            // Skip ray helpers (these are just visual guides, not real patterns)
-            if (aster.is_ray_helper === true) continue;
-            
-            var asterName = null;
-            
-            if (aster.common_name) {
-                if (aster.common_name.english) {
-                    asterName = aster.common_name.english;
-                } else if (aster.common_name.native) {
-                    asterName = aster.common_name.native;
-                }
-            }
-            
-            if (asterName && asterName.length > 0) {
-                patterns.push({
-                    id: aster.id,
-                    name: asterName,
-                    type: "asterism"
-                });
-            }
+        if (!cultureData || !cultureData.asterisms || !Array.isArray(cultureData.asterisms)) {
+            console.warn("[SkyCulture] No asterisms array in culture data");
+            return patterns;
         }
         
-        if (patterns.length === 0) return null;
+        var totalAsterisms = cultureData.asterisms.length;
+        var skippedRayHelpers = 0;
         
+        for (var i = 0; i < totalAsterisms; i++) {
+            var ast = cultureData.asterisms[i];
+            
+            // Skip ray helpers - they are auxiliary lines, not proper asterisms
+            if (ast.is_ray_helper === true) {
+                skippedRayHelpers++;
+                continue;
+            }
+            
+            var id = ast.id;
+            if (!id) {
+                console.warn("[SkyCulture] Asterism missing ID at index", i);
+                continue;
+            }
+            
+            // Extract name components
+            var englishName = (ast.common_name && ast.common_name.english) 
+                ? ast.common_name.english.trim() 
+                : null;
+            var nativeName = (ast.common_name && ast.common_name.native) 
+                ? ast.common_name.native.trim() 
+                : null;
+            
+            // Determine display name: English preferred, then native, then ID
+            var displayName = englishName || nativeName || id;
+            
+            // Search name: English preferred for reliable Stellarium lookup
+            var searchName = englishName || displayName;
+            
+            patterns.push({
+                id: id,
+                name: displayName,
+                searchName: searchName,
+                type: "asterism",
+                englishName: englishName,
+                nativeName: nativeName
+            });
+        }
+        
+        // Sort alphabetically by display name
         patterns.sort(function(a, b) {
             return a.name.localeCompare(b.name);
         });
+        
+        console.log("[SkyCulture] Loaded " + patterns.length + " asterisms from index.json " +
+            "(total: " + totalAsterisms + ", skipped " + skippedRayHelpers + " ray helpers)");
         
         return patterns;
     }
 
     /**
-     * Extracts zodiac signs from index.json data
-     * @param {Object} data - Parsed index.json content
-     * @returns {Array|null} Array of zodiac pattern objects or null if not present
+     * Extract zodiac signs from culture data.
+     * 
+     * Note: Zodiac signs are always extracted from index.json as there is
+     * no API endpoint for this data type.
+     * 
+     * @param {Object} cultureData - The culture data from index.json
+     * @returns {Array|null} Zodiac pattern objects or null if not available
      */
-    function extractZodiac(data) {
-        if (!data.zodiac || !data.zodiac.names || !Array.isArray(data.zodiac.names) || data.zodiac.names.length === 0) {
+    function extractZodiac(cultureData) {
+        if (!cultureData || !cultureData.zodiac || !cultureData.zodiac.names || 
+            !cultureData.zodiac.names.length) {
             return null;
         }
         
         var patterns = [];
+        var zodiacNames = cultureData.zodiac.names;
         
-        for (var i = 0; i < data.zodiac.names.length; i++) {
-            var sign = data.zodiac.names[i];
+        for (var i = 0; i < zodiacNames.length; i++) {
+            var sign = zodiacNames[i];
             var signName = sign.english || sign.native || ("Sign " + (i + 1));
             
-            patterns.push({
-                id: "zodiac_" + (i + 1),
-                name: signName,
-                type: "zodiac"
+            patterns.push({ 
+                id: signName.toLowerCase().replace(/\s+/g, '_'), 
+                name: signName, 
+                searchName: signName, 
+                type: "zodiac" 
             });
         }
         
-        if (patterns.length === 0) return null;
-        
+        console.log("[SkyCulture] Extracted " + patterns.length + " zodiac signs");
         return patterns;
     }
 
     /**
-     * Extracts lunar mansions from index.json data
-     * @param {Object} data - Parsed index.json content
-     * @returns {Array|null} Array of lunar mansion pattern objects or null if not present
+     * Extract lunar mansions from culture data.
+     * 
+     * Note: Lunar mansions are always extracted from index.json as there is
+     * no API endpoint for this data type.
+     * 
+     * @param {Object} cultureData - The culture data from index.json
+     * @returns {Array|null} Lunar mansion pattern objects or null if not available
      */
-    function extractLunarMansions(data) {
-        if (!data.lunar_system || !data.lunar_system.names || !Array.isArray(data.lunar_system.names) || data.lunar_system.names.length === 0) {
+    function extractLunarMansions(cultureData) {
+        if (!cultureData || !cultureData.lunar_system || !cultureData.lunar_system.names || 
+            !cultureData.lunar_system.names.length) {
             return null;
         }
         
         var patterns = [];
+        var lunarNames = cultureData.lunar_system.names;
         
-        for (var i = 0; i < data.lunar_system.names.length; i++) {
-            var mansion = data.lunar_system.names[i];
+        for (var i = 0; i < lunarNames.length; i++) {
+            var mansion = lunarNames[i];
             var mansionName = mansion.english || mansion.native || ("Mansion " + (i + 1));
             
+            patterns.push({ 
+                id: "lunar_" + (i + 1), 
+                name: mansionName, 
+                searchName: mansionName, 
+                type: "lunar" 
+            });
+        }
+        
+        console.log("[SkyCulture] Extracted " + patterns.length + " lunar mansions");
+        return patterns;
+    }
+
+    /**
+     * Extract notable star names from culture data.
+     * 
+     * Handles multiple name variants for the same star (HIP ID) and combines
+     * them for display. Limits results to 3200 entries to prevent UI
+     * performance degradation with extremely large datasets (e.g., Chinese
+     * culture with 3000+ star names).
+     * 
+     * @param {Object} cultureData - The culture data from index.json
+     * @returns {Array|null} Star pattern objects or null if not available
+     */
+    function extractStarNames(cultureData) {
+        if (!cultureData || !cultureData.common_names || 
+            typeof cultureData.common_names !== 'object' || 
+            Object.keys(cultureData.common_names).length === 0) {
+            return null;
+        }
+        
+        var patterns = [];
+        var commonNames = cultureData.common_names;
+        
+        for (var hipId in commonNames) {
+            if (!commonNames.hasOwnProperty(hipId)) continue;
+            
+            var entries = commonNames[hipId];
+            if (!entries || !Array.isArray(entries) || entries.length === 0) continue;
+            
+            var displayNames = [];
+            var primaryName = null;
+            var primaryNativeName = null;
+            
+            // Collect all valid names for this star
+            for (var i = 0; i < entries.length; i++) {
+                var entry = entries[i];
+                
+                // Collect English names (skip codes like ARA_01)
+                if (entry.english && entry.english.trim()) {
+                    var name = entry.english.trim();
+                    if (!name.match(/^[A-Z]+_[0-9]+$/)) {
+                        displayNames.push({ type: 'english', value: name });
+                        if (primaryName === null) primaryName = name;
+                    }
+                }
+                
+                // Collect native names as fallback
+                if (entry.native && entry.native.trim()) {
+                    var nativeName = entry.native.trim();
+                    if (primaryNativeName === null) primaryNativeName = nativeName;
+                    var exists = displayNames.some(function(dn) { 
+                        return dn.value === nativeName; 
+                    });
+                    if (!exists) {
+                        displayNames.push({ type: 'native', value: nativeName });
+                    }
+                }
+            }
+            
+            // Determine display and search names
+            var displayName = '';
+            var searchName = '';
+            
+            if (displayNames.length === 0) {
+                displayName = hipId;
+                searchName = hipId;
+            } else {
+                displayName = displayNames[0].value;
+                searchName = primaryName || primaryNativeName || displayNames[0].value;
+                
+                // Combine multiple names for compact display
+                if (displayNames.length === 2) {
+                    displayName = displayNames[0].value + " - " + displayNames[1].value;
+                } else if (displayNames.length >= 3) {
+                    displayName = displayNames[0].value + " - " + displayNames[1].value;
+                    var additional = displayNames.slice(2).map(function(dn) { 
+                        return dn.value; 
+                    }).join(" / ");
+                    displayName += " (" + additional + ")";
+                }
+                
+                // Truncate extremely long display names
+                if (displayName.length > 140) {
+                    displayName = displayName.substring(0, 137) + "...";
+                }
+            }
+            
             patterns.push({
-                id: "lunar_" + (i + 1),
-                name: mansionName,
-                type: "lunar"
+                id: hipId,
+                name: displayName,
+                searchName: searchName,
+                type: "star"
             });
         }
         
         if (patterns.length === 0) return null;
         
-        return patterns;
+        // Sort alphabetically and limit to prevent UI lag
+        patterns.sort(function(a, b) { return a.name.localeCompare(b.name); });
+        var limitedPatterns = patterns.slice(0, 3200);
+        
+        console.log("[SkyCulture] Extracted " + limitedPatterns.length + " star names " +
+            (patterns.length > 3200 ? "(limited from " + patterns.length + ")" : ""));
+        
+        return limitedPatterns;
     }
 
-		/**
-		 * Extracts notable star names from index.json data
-		 * Combines multiple English names for the same star into a single entry for display
-		 * Uses only the first English name for search/centering
-		 * 
-		 * @param {Object} data - Parsed index.json content
-		 * @returns {Array|null} Array of star pattern objects or null if not present
-		 */
-		function extractStarNames(data) {
-				if (!data.common_names || typeof data.common_names !== 'object' || Object.keys(data.common_names).length === 0) {
-						return null;
-				}
-				
-				var patterns = [];
-				
-				for (var starId in data.common_names) {
-						if (data.common_names.hasOwnProperty(starId)) {
-								var entries = data.common_names[starId];
-								
-								if (!entries || !Array.isArray(entries) || entries.length === 0) continue;
-								
-								// Collect all English names for this star
-								var englishNames = [];
-								var primaryName = null;
-								
-								for (var i = 0; i < entries.length; i++) {
-										var entry = entries[i];
-										
-										// Only use "english" field, ignore "native"
-										if (entry.english && entry.english.trim()) {
-												var name = entry.english.trim();
-												englishNames.push(name);
-												
-												// First English name becomes the primary name (used for search)
-												if (primaryName === null) {
-														primaryName = name;
-												}
-										}
-								}
-								
-								if (englishNames.length === 0) continue;
-								
-								// Build display name by combining all English names
-								var displayName = englishNames[0];
-								
-								if (englishNames.length === 2) {
-										// Two names: "Name1 - Name2"
-										displayName = englishNames[0] + " - " + englishNames[1];
-								} else if (englishNames.length >= 3) {
-										// Three or more names: "Name1 - Name2 (Name3)"
-										displayName = englishNames[0] + " - " + englishNames[1];
-										for (var j = 2; j < englishNames.length; j++) {
-												if (j === 2) {
-														displayName += " (" + englishNames[j];
-												} else {
-														displayName += " / " + englishNames[j];
-												}
-										}
-										displayName += ")";
-								}
-								
-								// Limit display name length to avoid huge buttons
-								if (displayName.length > 85) {
-										displayName = displayName.substring(0, 80) + "...";
-								}
-								
-								patterns.push({
-										id: starId,
-										name: displayName,           // For display on button
-										searchName: primaryName,     // For actual search/centering
-										type: "star"
-								});
-						}
-				}
-				
-				if (patterns.length === 0) return null;
-				
-				// Sort by display name
-				patterns.sort(function(a, b) {
-						return a.name.localeCompare(b.name);
-				});
-				
-				// Limit to first 200 star names
-				patterns = patterns.slice(0, 4000);
-				
-				return patterns;
-		}
-
     // =====================================================================
-    // SECTION 5: PANEL RENDERING FUNCTIONS
+    // 10. PANEL RENDERING FUNCTIONS
     // =====================================================================
 
     /**
-     * Renders the constellations panel
-     * @param {Array|null} patterns - Array of patterns or null if not available
+     * Render the Constellations panel.
+     * 
+     * @param {Array} patterns - Constellation pattern objects
      */
     function renderConstellationsPanel(patterns) {
-        var $panel = $constellationsContainer ? $constellationsContainer.closest('.skyculture-panel') : null;
-        
-        if (!patterns || patterns.length === 0) {
-            if ($panel) $panel.hide();
+        if (!patterns || !patterns.length) {
+            if ($constellationsContainer) {
+                $constellationsContainer.html('<div class="loading-placeholder">' + 
+                    _tr("No constellations available for this culture") + '</div>');
+            }
             updatePatternCount("constellations", 0);
+            currentPatternsData.constellations = [];
             return;
         }
         
-        if ($panel) $panel.show();
         updatePatternCount("constellations", patterns.length);
-        renderButtons($constellationsContainer, patterns, "constellations", function(patternName, patternType) {
-            stelUtils.toggleConstellationHighlight(patternName);
-            selectedPattern = patternName;
-            updateAllButtonStates();
-        });
+        currentPatternsData.constellations = patterns;
+        
+        renderButtons($constellationsContainer, patterns, "constellations", 
+            function(patternName, patternType, searchName) {
+                stelUtils.toggleConstellationHighlight(searchName || patternName);
+                updateAllButtonStates();
+            });
     }
 
     /**
-     * Renders the asterisms panel
-     * @param {Array|null} patterns - Array of patterns or null if not available
+     * Render the Asterisms panel.
+     * 
+     * @param {Array} patterns - Asterism pattern objects
      */
     function renderAsterismsPanel(patterns) {
-        var $panel = $asterismsContainer ? $asterismsContainer.closest('.asterisms-panel') : null;
-        
-        if (!patterns || patterns.length === 0) {
-            if ($panel) $panel.hide();
+        if (!patterns || !patterns.length) {
+            if ($asterismsContainer) {
+                $asterismsContainer.html('<div class="loading-placeholder">' + 
+                    _tr("No asterisms available for this culture") + '</div>');
+            }
             updatePatternCount("asterisms", 0);
+            currentPatternsData.asterisms = [];
             return;
         }
         
-        if ($panel) $panel.show();
         updatePatternCount("asterisms", patterns.length);
-        renderButtons($asterismsContainer, patterns, "asterisms", function(patternName, patternType) {
-            stelUtils.goToAsterism(patternName);
-            selectedPattern = patternName;
-            updateAllButtonStates();
-        });
+        currentPatternsData.asterisms = patterns;
+        
+        renderButtons($asterismsContainer, patterns, "asterisms", 
+            function(patternName, patternType, searchName, patternId) {
+                stelUtils.goToAsterism(searchName || patternName, patternId);
+                updateAllButtonStates();
+            });
     }
 
     /**
-     * Renders the zodiac panel
-     * @param {Array|null} patterns - Array of patterns or null if not available
+     * Render the Zodiac Signs panel.
+     * 
+     * @param {Array} patterns - Zodiac pattern objects
      */
     function renderZodiacPanel(patterns) {
-        var $panel = $zodiacContainer ? $zodiacContainer.closest('.zodiac-panel') : null;
-        
-        if (!patterns || patterns.length === 0) {
-            if ($panel) $panel.hide();
+        if (!patterns || !patterns.length) {
+            if ($zodiacContainer) {
+                $zodiacContainer.html('<div class="loading-placeholder">' + 
+                    _tr("No zodiac signs available for this culture") + '</div>');
+            }
             updatePatternCount("zodiac", 0);
+            currentPatternsData.zodiac = [];
             return;
         }
         
-        if ($panel) $panel.show();
         updatePatternCount("zodiac", patterns.length);
-        renderButtons($zodiacContainer, patterns, "zodiac", function(patternName, patternType) {
-            stelUtils.goToZodiacSign(patternName);
-            selectedPattern = patternName;
-            updateAllButtonStates();
-        });
+        currentPatternsData.zodiac = patterns;
+        
+        renderButtons($zodiacContainer, patterns, "zodiac", 
+            function(patternName, patternType, searchName, patternId) {
+                stelUtils.goToZodiacSign(searchName || patternName, patternId);
+                updateAllButtonStates();
+            });
     }
 
     /**
-     * Renders the lunar mansions panel
-     * @param {Array|null} patterns - Array of patterns or null if not available
+     * Render the Lunar Mansions panel.
+     * 
+     * @param {Array} patterns - Lunar mansion pattern objects
      */
     function renderLunarPanel(patterns) {
-        var $panel = $lunarContainer ? $lunarContainer.closest('.lunar-panel') : null;
-        
-        if (!patterns || patterns.length === 0) {
-            if ($panel) $panel.hide();
+        if (!patterns || !patterns.length) {
+            if ($lunarContainer) {
+                $lunarContainer.html('<div class="loading-placeholder">' + 
+                    _tr("No lunar mansions available for this culture") + '</div>');
+            }
             updatePatternCount("lunar", 0);
+            currentPatternsData.lunar = [];
             return;
         }
         
-        if ($panel) $panel.show();
         updatePatternCount("lunar", patterns.length);
-        renderButtons($lunarContainer, patterns, "lunar", function(patternName, patternType) {
-            stelUtils.goToLunarMansion(patternName);
-            selectedPattern = patternName;
-            updateAllButtonStates();
-        });
-    }
-	
-		/**
-		 * Renders the stars panel
-		 * @param {Array|null} patterns - Array of patterns or null if not available
-		 */
-		function renderStarsPanel(patterns) {
-				var $panel = $starsContainer ? $starsContainer.closest('.stars-panel') : null;
-				
-				if (!patterns || patterns.length === 0) {
-						if ($panel) $panel.hide();
-						updatePatternCount("stars", 0);
-						return;
-				}
-				
-				if ($panel) $panel.show();
-				updatePatternCount("stars", patterns.length);
-				renderButtons($starsContainer, patterns, "stars", function(patternName, patternType) {
-						// Find the pattern object to get the searchName
-						var pattern = null;
-						for (var i = 0; i < patterns.length; i++) {
-								if (patterns[i].name === patternName) {
-										pattern = patterns[i];
-										break;
-								}
-						}
-						
-						// Use searchName for centering, not the display name
-						var searchTerm = pattern ? (pattern.searchName || patternName) : patternName;
-						stelUtils.goToStar(searchTerm, 15);
-						selectedPattern = patternName;
-						updateAllButtonStates();
-				});
-		}
-
-    /**
-     * Processes culture data and renders all panels
-     * @param {Object} data - Parsed index.json data
-     */
-    function processCultureData(data) {
-        if (!data) return;
+        currentPatternsData.lunar = patterns;
         
-        // Extract all pattern types (returns null if not present)
-        var constellations = extractConstellations(data);
-        var asterisms = extractAsterisms(data);
-        var zodiac = extractZodiac(data);
-        var lunar = extractLunarMansions(data);
-        var stars = extractStarNames(data);
-        
-        // Render each panel (null values will hide the panel)
-        renderConstellationsPanel(constellations);
-        renderAsterismsPanel(asterisms);
-        renderZodiacPanel(zodiac);
-        renderLunarPanel(lunar);
-        renderStarsPanel(stars);
-        
-        console.log("[SkyCulture] Processed culture data:", {
-            constellations: constellations ? constellations.length : 0,
-            asterisms: asterisms ? asterisms.length : 0,
-            zodiac: zodiac ? zodiac.length : 0,
-            lunar: lunar ? lunar.length : 0,
-            stars: stars ? stars.length : 0
-        });
+        renderButtons($lunarContainer, patterns, "lunar", 
+            function(patternName, patternType, searchName, patternId) {
+                stelUtils.goToLunarMansion(searchName || patternName, patternId);
+                updateAllButtonStates();
+            });
     }
 
     /**
-     * Loads constellation/asterism data for the current sky culture
-     * Uses the official API endpoint /api/view/skyculturedescription/index.json
-     * Falls back to default IAU list if index.json doesn't exist or has no data
+     * Render the Notable Stars panel.
      * 
-     * @param {function} callback - Optional callback function
+     * @param {Array} patterns - Star pattern objects
      */
-    function loadCultureData(callback) {
-        if (!currentCultureId) {
-            console.warn("[SkyCulture] No sky culture selected");
-            if (callback) callback(false);
+    function renderStarsPanel(patterns) {
+        if (!patterns || !patterns.length) {
+            if ($starsContainer) {
+                $starsContainer.html('<div class="loading-placeholder">' + 
+                    _tr("No star names available for this culture") + '</div>');
+            }
+            updatePatternCount("stars", 0);
+            currentPatternsData.stars = [];
             return;
         }
+        
+        updatePatternCount("stars", patterns.length);
+        currentPatternsData.stars = patterns;
+        
+        renderButtons($starsContainer, patterns, "stars", 
+            function(patternName, patternType, searchName, patternId) {
+                stelUtils.goToObject(patternId, DEFAULT_FOV.star, 'star', currentCultureRawData);
+                updateAllButtonStates();
+            });
+    }
 
-        console.log("[SkyCulture] Loading data for culture: " + currentCultureId);
-        
-        // Check cache first
-        if (CULTURE_DATA_CACHE[currentCultureId]) {
-            console.log("[SkyCulture] Using cached data for " + currentCultureId);
-            processCultureData(CULTURE_DATA_CACHE[currentCultureId]);
-            if (callback) callback(true);
-            return;
+    // =====================================================================
+    // 11. MAIN DATA LOADING FUNCTION
+    // =====================================================================
+
+    /**
+     * Load all culture data and render all panels.
+     * 
+     * This is the main orchestration function that:
+     * 1. Updates the current language
+     * 2. Shows loading placeholders in all panels
+     * 3. Fetches index.json (single source of truth)
+     * 4. Extracts and renders all data types
+     * 
+     * @param {Function} callback - Optional callback when loading completes
+     */
+    function loadAllCultureData(callback) {
+        if (!currentCultureId) { 
+            if (callback) callback(false); 
+            return; 
         }
         
-        var indexPath = "/api/view/skyculturedescription/index.json";
+        // Update current language
+        getCurrentLanguage();
         
+        // Show loading states in all panels
+        if ($constellationsContainer) {
+            $constellationsContainer.html('<div class="loading-placeholder">' + 
+                _tr("Loading constellations...") + '</div>');
+        }
+        if ($asterismsContainer) {
+            $asterismsContainer.html('<div class="loading-placeholder">' + 
+                _tr("Loading asterisms...") + '</div>');
+        }
+        if ($zodiacContainer) {
+            $zodiacContainer.html('<div class="loading-placeholder">' + 
+                _tr("Loading zodiac signs...") + '</div>');
+        }
+        if ($lunarContainer) {
+            $lunarContainer.html('<div class="loading-placeholder">' + 
+                _tr("Loading lunar mansions...") + '</div>');
+        }
+        if ($starsContainer) {
+            $starsContainer.html('<div class="loading-placeholder">' + 
+                _tr("Loading star names...") + '</div>');
+        }
+        
+        // Reset counters and clear active selections
+        updatePatternCount("constellations", 0);
+        updatePatternCount("asterisms", 0);
+        updatePatternCount("zodiac", 0);
+        updatePatternCount("lunar", 0);
+        updatePatternCount("stars", 0);
+        clearAllActiveButtons();
+        
+        // Fetch index.json - the SINGLE SOURCE OF TRUTH
         $.ajax({
-            url: indexPath,
+            url: "/api/view/skyculturedescription/index.json",
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-                CULTURE_DATA_CACHE[currentCultureId] = data;
-                processCultureData(data);
+                currentCultureRawData = data;
+                
+                console.log("[SkyCulture] Successfully loaded index.json for culture:", currentCultureId);
+                
+                // Extract all data types directly from index.json
+                var constellations = loadConstellationsFromIndexJson(data);
+                var asterisms = loadAsterismsFromIndexJson(data);
+                var zodiac = extractZodiac(data);
+                var lunar = extractLunarMansions(data);
+                var stars = extractStarNames(data);
+                
+                // Render all panels
+                renderConstellationsPanel(constellations);
+                renderAsterismsPanel(asterisms);
+                renderZodiacPanel(zodiac);
+                renderLunarPanel(lunar);
+                renderStarsPanel(stars);
+                
+                console.log("[SkyCulture] All panels rendered for culture:", currentCultureId);
                 if (callback) callback(true);
             },
             error: function(xhr, status, errorThrown) {
-                console.warn("[SkyCulture] Error loading index.json: " + errorThrown);
-                useDefaultData();
+                console.error("[SkyCulture] Failed to load index.json:", errorThrown);
+                
+                // Show error states in all panels
+                renderConstellationsPanel([]);
+                renderAsterismsPanel([]);
+                renderZodiacPanel(null);
+                renderLunarPanel(null);
+                renderStarsPanel(null);
+                
                 if (callback) callback(false);
             }
         });
     }
-    
-    /**
-     * Uses the default IAU constellation list as fallback
-     */
-    function useDefaultData() {
-        var defaultPatterns = [];
-        
-        for (var i = 0; i < DEFAULT_IAU_CONSTELLATIONS.length; i++) {
-            defaultPatterns.push({
-                id: DEFAULT_IAU_CONSTELLATIONS[i].toLowerCase(),
-                name: DEFAULT_IAU_CONSTELLATIONS[i],
-                type: "constellation"
-            });
-        }
-        
-        console.log("[SkyCulture] Using " + defaultPatterns.length + " default IAU constellations");
-        
-        // Render only constellations panel with default data
-        renderConstellationsPanel(defaultPatterns);
-        
-        // Hide all other panels
-        renderAsterismsPanel(null);
-        renderZodiacPanel(null);
-        renderLunarPanel(null);
-        renderStarsPanel(null);
-    }
-
-    /**
-     * Refreshes the culture data (called when sky culture changes)
-     */
-    function refreshCultureData() {
-        if (isUpdating) return;
-        isUpdating = true;
-        
-        selectedPattern = null;
-        loadCultureData(function() {
-            isUpdating = false;
-        });
-    }
 
     // =====================================================================
-    // SECTION 6: SKY CULTURE MANAGEMENT
+    // 12. SKY CULTURE MANAGEMENT FUNCTIONS
     // =====================================================================
 
     /**
-     * Updates the iframe content with culture description
-     * @param {string} cultureId - Culture identifier
+     * Update the info iframe with the current culture description.
      */
-    function updateInfoFrame(cultureId) {
+    function updateInfoFrame() {
         if ($infoFrame && $infoFrame.length) {
-            var url = "/api/view/skyculturedescription/";
-            $infoFrame.attr("src", url);
+            $infoFrame.attr("src", "/api/view/skyculturedescription/");
         }
     }
 
     /**
-     * Updates the active state of culture buttons
+     * Update culture button active states based on currentCultureId.
      */
     function updateCultureButtonStates() {
         if (!$cultureContainer) return;
-        
         $cultureContainer.find(".skyculture-btn").removeClass("active");
         $cultureContainer.find(".skyculture-btn").each(function() {
             if ($(this).data("culture-id") === currentCultureId) {
@@ -765,35 +1050,39 @@ define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stel
     }
 
     /**
-     * Renders the sky culture button grid
-     * @param {Array} cultures - Array of {id, name} objects
-     * @param {string} activeCulture - Currently active culture identifier
+     * Render culture selection buttons.
+     * Names are automatically translated by the server.
+     * 
+     * @param {Array} cultures - Available cultures with translated names
+     * @param {string} activeCulture - Currently active culture ID
      */
     function renderCultureButtons(cultures, activeCulture) {
         if (!$cultureContainer) return;
-        
         $cultureContainer.empty();
         
-        if (!cultures || cultures.length === 0) {
-            $cultureContainer.html('<div class="loading-placeholder">' + _tr("No sky cultures available") + '</div>');
+        if (!cultures || !cultures.length) {
+            $cultureContainer.html('<div class="loading-placeholder">' + 
+                _tr("No sky cultures available") + '</div>');
             return;
         }
         
-        var buttonsHtml = '<div class="skyculture-buttons-grid">';
+        if ($cultureCount && $cultureCount.length) {
+            $cultureCount.text('(' + cultures.length + ')');
+        }
         
+        var buttonsHtml = '<div class="skyculture-buttons-grid">';
         for (var i = 0; i < cultures.length; i++) {
             var culture = cultures[i];
             var isActive = (culture.id === activeCulture);
-            
+            // culture.name is already translated by the server
             buttonsHtml += '<button type="button" class="skyculture-btn' + 
-                (isActive ? ' active' : '') + '" data-culture-id="' + 
-                escapeHtml(culture.id) + '">' + escapeHtml(culture.name) + '</button>';
+                (isActive ? ' active' : '') + 
+                '" data-culture-id="' + escapeHtml(culture.id) + '">' + 
+                escapeHtml(culture.name) + '</button>';
         }
-        
         buttonsHtml += '</div>';
         $cultureContainer.html(buttonsHtml);
         
-        // Attach click handlers
         $cultureContainer.find(".skyculture-btn").on("click", function() {
             var cultureId = $(this).data("culture-id");
             if (cultureId && cultureId !== currentCultureId) {
@@ -803,9 +1092,10 @@ define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stel
     }
 
     /**
-     * Loads available sky cultures from Stellarium
-     * Uses official API endpoint /api/view/listskyculture
-     * @param {function} callback - Optional callback function
+     * Load available sky cultures from server.
+     * Names are automatically translated based on Stellarium's current language.
+     * 
+     * @param {Function} callback - Optional callback when loading completes
      */
     function loadSkyCultures(callback) {
         $.ajax({
@@ -816,39 +1106,34 @@ define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stel
                 var culturesArray = [];
                 for (var id in data) {
                     if (data.hasOwnProperty(id)) {
-                        culturesArray.push({
-                            id: id,
-                            name: data[id]
-                        });
+                        // data[id] contains the translated name
+                        culturesArray.push({ id: id, name: data[id] });
                     }
                 }
-                
-                culturesArray.sort(function(a, b) {
-                    return a.name.localeCompare(b.name);
+                culturesArray.sort(function(a, b) { 
+                    return a.name.localeCompare(b.name); 
                 });
-                
                 availableCultures = culturesArray;
-                console.log("[SkyCulture] Loaded " + availableCultures.length + " sky cultures");
+                
+                console.log("[SkyCulture] Loaded " + availableCultures.length + 
+                    " sky cultures with translated names");
                 
                 if (propApi) {
-                    var current = propApi.getStelProp("StelSkyCultureMgr.currentSkyCultureID");
-                    if (current && current !== currentCultureId) {
-                        currentCultureId = current;
-                    } else if (!currentCultureId && availableCultures.length > 0) {
-                        currentCultureId = availableCultures[0].id;
-                    }
+                    currentCultureId = propApi.getStelProp("StelSkyCultureMgr.currentSkyCultureID") || 
+                                      (availableCultures.length > 0 ? availableCultures[0].id : null);
                 }
                 
                 renderCultureButtons(availableCultures, currentCultureId);
-                updateInfoFrame(currentCultureId);
-                loadCultureData();
+                updateInfoFrame();
+                loadAllCultureData();
                 
                 if (callback) callback(true);
             },
             error: function(xhr, status, errorThrown) {
-                console.error("[SkyCulture] Error loading sky cultures: " + errorThrown);
+                console.error("[SkyCulture] Failed to load sky cultures:", errorThrown);
                 if ($cultureContainer) {
-                    $cultureContainer.html('<div class="loading-placeholder">' + _tr("Error loading sky cultures") + '</div>');
+                    $cultureContainer.html('<div class="loading-placeholder">' + 
+                        _tr("Error loading sky cultures") + '</div>');
                 }
                 if (callback) callback(false);
             }
@@ -856,9 +1141,9 @@ define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stel
     }
 
     /**
-     * Sets the current sky culture
-     * Uses Stellarium's property system for synchronization
-     * @param {string} cultureId - Culture identifier to activate
+     * Set the current sky culture.
+     * 
+     * @param {string} cultureId - Culture ID to set (e.g., "korean", "arabic_al-sufi")
      */
     function setSkyCulture(cultureId) {
         if (!cultureId || cultureId === currentCultureId) return;
@@ -871,108 +1156,170 @@ define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stel
         
         currentCultureId = cultureId;
         updateCultureButtonStates();
-        updateInfoFrame(cultureId);
+        updateInfoFrame();
         
-        // Clear selection and reload data
         selectedPattern = null;
-        refreshCultureData();
+        selectedPatternId = null;
+        
+        loadAllCultureData();
     }
 
     /**
-     * Refreshes the entire module (reloads from server)
+     * Refresh all data by reloading cultures.
      */
     function refresh() {
-        // Clear cache to force fresh data
-        for (var key in CULTURE_DATA_CACHE) {
-            delete CULTURE_DATA_CACHE[key];
-        }
         loadSkyCultures();
     }
 
     // =====================================================================
-    // SECTION 7: EVENT HANDLERS
+    // 13. SYNCHRONIZATION LISTENERS
     // =====================================================================
 
     /**
-     * Sets up property change listener for real-time synchronization
-     * Listens for sky culture changes from Stellarium server
+     * Setup synchronization listeners for culture and selection changes.
+     * Ensures the UI stays in sync with Stellarium's state.
      */
-    function setupPropertyListener() {
-        if (!propApi) return;
-        
-        $(propApi).on("stelPropertyChanged:StelSkyCultureMgr.currentSkyCultureID", function(evt, data) {
-            var newCultureId = data.value;
-            if (newCultureId && newCultureId !== currentCultureId) {
-                console.log("[SkyCulture] Property changed from server: " + newCultureId);
-                currentCultureId = newCultureId;
-                updateCultureButtonStates();
-                updateInfoFrame(currentCultureId);
-                selectedPattern = null;
-                refreshCultureData();
+    function setupSyncListeners() {
+        // Listen to objectSelected events from tables and other components
+        $(document).on("objectSelected", function(evt, data) {
+            if (!syncEnabled) return;
+            
+            if (!data || !data.type || data.type === 'none' || !data.name) {
+                clearAllActiveButtons();
+                return;
             }
+            
+            var found = false;
+            var patternGroups = [
+                { container: $constellationsContainer, patterns: currentPatternsData.constellations },
+                { container: $asterismsContainer, patterns: currentPatternsData.asterisms },
+                { container: $zodiacContainer, patterns: currentPatternsData.zodiac },
+                { container: $lunarContainer, patterns: currentPatternsData.lunar },
+                { container: $starsContainer, patterns: currentPatternsData.stars }
+            ];
+            
+            for (var g = 0; g < patternGroups.length; g++) {
+                var group = patternGroups[g];
+                var $container = group.container;
+                var patterns = group.patterns;
+                if (!$container || !$container.length || !patterns) continue;
+                
+                for (var i = 0; i < patterns.length; i++) {
+                    var pattern = patterns[i];
+                    var match = (data.id && pattern.id === data.id) || 
+                                (data.name && (pattern.name === data.name || 
+                                 pattern.searchName === data.name));
+                    
+                    if (match) {
+                        $container.find(".pattern-btn").removeClass("active");
+                        $container.find(".pattern-btn").each(function() {
+                            if ($(this).data("pattern-id") === pattern.id) {
+                                $(this).addClass("active");
+                                selectedPattern = pattern.name;
+                                selectedPatternId = pattern.id;
+                                found = true;
+                            }
+                        });
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+            
+            if (!found) clearAllActiveButtons();
         });
+        
+        // Listen to culture changes from server
+        if (propApi) {
+            $(propApi).on("stelPropertyChanged:StelSkyCultureMgr.currentSkyCultureID", 
+                function(evt, data) {
+                    var newCultureId = data.value;
+                    if (newCultureId && newCultureId !== currentCultureId) {
+                        console.log("[SkyCulture] Culture changed from server to: " + newCultureId);
+                        currentCultureId = newCultureId;
+                        updateCultureButtonStates();
+                        updateInfoFrame();
+                        selectedPattern = null;
+                        selectedPatternId = null;
+                        loadAllCultureData();
+                    }
+                });
+            
+            // Listen to language changes
+            $(propApi).on("stelPropertyChanged:StelLocaleMgr.appLanguage", 
+                function(evt, data) {
+                    var newLang = data.value;
+                    if (newLang && newLang !== currentLanguage) {
+                        console.log("[SkyCulture] Language changed to: " + newLang);
+                        currentLanguage = newLang;
+                        // Reload cultures to get newly translated names
+                        refresh();
+                    }
+                });
+        }
     }
 
     // =====================================================================
-    // SECTION 8: INITIALIZATION
+    // 14. INITIALIZATION
     // =====================================================================
 
     /**
-     * Initializes the Sky Culture Manager module
+     * Initialize the sky culture module.
      * 
-     * @param {string|jQuery} cultureContainerSelector - CSS selector for culture buttons container
-     * @param {Object} patternsContainers - Object with selectors for all pattern containers
-     *        Example: {
-     *            constellations: "#constellations-buttons-container",
-     *            asterisms: "#asterisms-buttons-container",
-     *            zodiac: "#zodiac-buttons-container",
-     *            lunar: "#lunar-buttons-container",
-     *            stars: "#stars-buttons-container"
-     *        }
-     * @param {string|jQuery} iframeSelector - CSS selector for info iframe
+     * @param {string} cultureContainerSelector - Selector for culture buttons container
+     * @param {Object} patternsContainers - Selectors for pattern containers
+     * @param {string} iframeSelector - Selector for info iframe
+     * @param {Object} options - Additional options
      */
-    function init(cultureContainerSelector, patternsContainers, iframeSelector) {
+    function init(cultureContainerSelector, patternsContainers, iframeSelector, options) {
         if (isInitialized) {
             console.warn("[SkyCulture] Module already initialized");
             return;
         }
         
-        // Initialize DOM references
         $cultureContainer = $(cultureContainerSelector || "#skyculture-buttons-container");
+        options = options || {};
+        $cultureCount = $(options.cultureCount || "#skyculture-culture-count");
         
         if (patternsContainers) {
-            $constellationsContainer = $(patternsContainers.constellations || "#constellations-buttons-container");
-            $asterismsContainer = $(patternsContainers.asterisms || "#asterisms-buttons-container");
-            $zodiacContainer = $(patternsContainers.zodiac || "#zodiac-buttons-container");
-            $lunarContainer = $(patternsContainers.lunar || "#lunar-buttons-container");
-            $starsContainer = $(patternsContainers.stars || "#stars-buttons-container");
+            $constellationsContainer = $(patternsContainers.constellations || 
+                "#constellations-buttons-container");
+            $asterismsContainer = $(patternsContainers.asterisms || 
+                "#asterisms-buttons-container");
+            $zodiacContainer = $(patternsContainers.zodiac || 
+                "#zodiac-buttons-container");
+            $lunarContainer = $(patternsContainers.lunar || 
+                "#lunar-buttons-container");
+            $starsContainer = $(patternsContainers.stars || 
+                "#stars-buttons-container");
         }
         
         $infoFrame = $(iframeSelector || "#vo_skycultureinfo");
         
-        // Validate required containers
         if (!$cultureContainer || !$cultureContainer.length) {
             console.error("[SkyCulture] Culture container not found");
             return;
         }
         
-        // Set up event listeners
-        setupPropertyListener();
+        // Get initial language
+        getCurrentLanguage();
         
-        // Load data and initialize
-        loadSkyCultures(function(success) {
+        setupSyncListeners();
+        
+        if ($("#skyculture-patterns-tabs").length) {
+            $("#skyculture-patterns-tabs").tabs({ heightStyle: "content" });
+        }
+        
+        loadSkyCultures(function(success) { 
             if (success) {
                 isInitialized = true;
-                console.log("[SkyCulture] Module initialized successfully version 2.2.0");
-                $(document).trigger("skyculture:ready", [currentCultureId, availableCultures]);
-            } else {
-                console.error("[SkyCulture] Failed to initialize");
+                console.log("[SkyCulture] Module initialized successfully v4.0.0 - Direct index.json loading");
             }
         });
     }
 
     // =====================================================================
-    // SECTION 9: PUBLIC API
+    // 15. PUBLIC API
     // =====================================================================
 
     return {
@@ -985,8 +1332,18 @@ define(["jquery", "api/properties", "api/remotecontrol", "api/actions", "ui/stel
         getCurrentCulture: function() { return currentCultureId; },
         getAvailableCultures: function() { return availableCultures.slice(); },
         
-        // Pattern management
+        // Pattern selection
         getSelectedPattern: function() { return selectedPattern; },
-        refreshData: refreshCultureData
+        getSelectedPatternId: function() { return selectedPatternId; },
+        
+        // Data refresh
+        refreshData: function() { loadAllCultureData(); },
+        
+        // Synchronization control
+        isSyncEnabled: function() { return syncEnabled; },
+        setSyncEnabled: function(enabled) { syncEnabled = enabled; },
+        
+        // Language
+        getCurrentLanguage: getCurrentLanguage
     };
 });

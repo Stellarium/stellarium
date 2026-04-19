@@ -1003,91 +1003,138 @@ button.button32:active {
 }
 
 /* ========================================================================
- * Sky Culture Tab - Stellarium Original Colors
+ * Sky Culture Tab - Fully Responsive Styles
+ * ========================================================================
+ * 
+ * This section provides comprehensive responsive styling for the Sky Culture
+ * tab interface, including culture selection panels, options grids, and
+ * pattern button containers. The design adapts fluidly across all viewport
+ * sizes from desktop (with zoom support) to mobile phones.
+ * 
+ * Key Responsive Features:
+ * - Desktop: Multi-column grid layouts (3 columns for options)
+ * - Tablet: Reduced column counts and adjusted spacing
+ * - Mobile: Single column layouts with vertical stacking
+ * - Zoom Support: Uses relative units (rem, %, vw) and flexible containers
+ * - Touch-friendly: Larger tap targets on smaller screens
+ * 
+ * @author kutaibaa akraa (GitHub: @kutaibaa-akraa)
+ * @version 2.7.0
+ * @license GPLv2+
+ * 
  * ======================================================================== */
 
-/* Main tab container - uses default Stellarium colors */
+/* ========================================================================
+ * BASE PANEL STYLES (Desktop First)
+ * ======================================================================== */
 
-/* Sky Culture Panel (Left side) */
+/* 
+ * Sky Culture Panel (Left side - Culture selector)
+ * Uses flexible width constraints that adapt to container size.
+ * The flex property allows it to grow/shrink as needed.
+ */
 .skyculture-panel {
-    flex: 1;
+    flex: 1 1 300px;        /* Grow, shrink, base width */
+    min-width: 100%;        /* Prevent panel from becoming too narrow */
+    max-width: 100%;         /* Full width on small screens */
+    background: rgba(149, 150, 152, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-style: inset;
+    border-radius: 10px;
+    padding: clamp(10px, 2vw, 15px);
+    padding-top: clamp(28px, 4vw, 35px);
+    margin-bottom: 15px;
+    position: relative;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.skyculture-panel h3 {
+    position: absolute;
+    left: clamp(12px, 2vw, 17px);
+    top: clamp(8px, 1.5vw, 10px);
+    margin: 0;
+    color: #000000;
+    font-size: clamp(12px, 1.8vw, 14px);
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* 
+ * Sky Culture Options Panel (Right side - Settings)
+ * Larger flex factor to occupy more space when available.
+ */
+.skyculture-options-panel {
+    flex: 2 1 400px;         /* Grow more, shrink, base width */
     min-width: 100%;
     max-width: 100%;
     background: rgba(149, 150, 152, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-style: inset;
     border-radius: 10px;
-    padding: 15px;
-    padding-top: 35px;
+    padding: clamp(10px, 2vw, 15px);
+    padding-top: clamp(28px, 4vw, 35px);
     margin-bottom: 15px;
     position: relative;
-}
-
-.skyculture-panel h3 {
-    position: absolute;
-    left: 17px;
-    top: 10px;
-    margin: 0;
-    color: #000000;
-    font-size: 14px;
-    font-weight: bold;
-    display: inline-block;
-}
-
-/* Sky Culture Options Panel (Right side) */
-.skyculture-options-panel {
-    flex: 2;
-    min-width: 100%;
-    max-width: calc(100% - 300px);
-    background: rgba(149, 150, 152, 0.2);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-style: inset;
-    border-radius: 10px;
-    padding: 15px;
-    padding-top: 35px;
-    margin-bottom: 15px;
-    position: relative;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
 }
 
 .skyculture-options-panel h3 {
     position: absolute;
-    left: 17px;
-    top: 10px;
+    left: clamp(12px, 2vw, 17px);
+    top: clamp(8px, 1.5vw, 10px);
     margin: 0;
     color: #000000;
-    font-size: 14px;
+    font-size: clamp(12px, 1.8vw, 14px);
     font-weight: bold;
     display: inline-block;
 }
 
-/* Buttons Container */
+/* ========================================================================
+ * BUTTONS CONTAINER (Culture Selection)
+ * ======================================================================== */
+
 .skyculture-buttons-container {
     width: 100%;
     margin-bottom: 15px;
 }
 
+/* 
+ * Flexible button grid that wraps naturally.
+ * No fixed heights - uses max-height with overflow for very long lists.
+ */
 .skyculture-buttons-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    padding: 10px;
+    gap: clamp(4px, 1vw, 8px);
+    padding: clamp(6px, 1.5vw, 10px);
     background: rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     justify-content: flex-start;
     align-items: center;
+    max-height: 500px;        /* Scrollable if many cultures */
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
+/* 
+ * Culture buttons - responsive sizing with clamp().
+ * white-space: nowrap prevents text wrapping inside buttons.
+ */
 .skyculture-btn {
     background: linear-gradient(#5D5F62, #3A3C3E);
     color: #000000;
     border: 1px solid #2A2C2E;
-    border-radius: 4px;
-    padding: 5px 12px;
-    font-size: 11px;
+    border-radius: clamp(3px, 0.5vw, 4px);
+    padding: clamp(3px, 0.8vw, 5px) clamp(8px, 1.5vw, 12px);
+    font-size: clamp(9px, 1.4vw, 11px);
     font-weight: bold;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    touch-action: manipulation;  /* Improve touch response */
+    user-select: none;
 }
 
 .skyculture-btn:hover {
@@ -1107,62 +1154,86 @@ button.button32:active {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Info Frame */
+/* ========================================================================
+ * INFO FRAME (Culture Description)
+ * ======================================================================== */
+
 .skyculture-info-frame {
     width: 100%;
     min-width: 100%;
-    min-height: 500px;
+    min-height: clamp(250px, 40vh, 500px);
+    max-height: 60vh;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     background: rgba(0, 0, 0, 0.05);
     margin-top: 10px;
+    box-sizing: border-box;
 }
 
 /* ========================================================================
- * Options Grid - 3 columns on desktop
+ * OPTIONS GRID - Responsive Multi-Column Layout
  * ======================================================================== */
+
+/* 
+ * Desktop: 3 columns.
+ * Uses CSS Grid with auto-fit for true responsiveness.
+ * min() function ensures columns don't get too narrow.
+ */
 .options-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(8px, 1.5vw, 15px);
     padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* ========================================================================
- * IMPROVED: Option Item - Horizontal layout (checkbox, label, slider, value in one row)
+ * OPTION ITEM - Flexible Horizontal/Vertical Layout
  * ======================================================================== */
+
+/* 
+ * Each option item adapts between horizontal (desktop) and vertical (mobile).
+ * Uses flex-wrap: wrap for graceful degradation on narrow containers.
+ */
 .option-item {
     background: rgba(0, 0, 0, 0.08);
-    border-radius: 6px;
-    padding: 10px 12px;
-    /* Horizontal layout - all elements in one row */
+    border-radius: clamp(4px, 0.8vw, 6px);
+    padding: clamp(8px, 1.2vw, 10px) clamp(10px, 1.5vw, 12px);
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 12px;
-    flex-wrap: nowrap;
+    gap: clamp(8px, 1.2vw, 12px);
+    flex-wrap: wrap;           /* Allows stacking when space is tight */
+    box-sizing: border-box;
+    width: 100%;
 }
 
-/* Option Label - Checkbox + Text (fixed width, doesn't shrink) */
+/* 
+ * Label area - contains checkbox and text.
+ * Uses flex-wrap to allow text to wrap on small screens.
+ */
 .option-label {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: clamp(6px, 1vw, 8px);
     color: #000000;
-    font-size: 12px;
+    font-size: clamp(10px, 1.4vw, 12px);
     font-weight: bold;
     cursor: pointer;
-    flex-shrink: 0;
-    /* Allow label text to wrap if needed, but prefer not to */
+    flex: 0 1 auto;
+    min-width: 140px;          /* Ensure label has space */
     white-space: normal;
     word-break: break-word;
-    max-width: 45%;
+    line-height: 1.4;
 }
 
 .option-label input[type="checkbox"] {
     margin: 0;
     cursor: pointer;
     flex-shrink: 0;
+    width: clamp(14px, 1.8vw, 16px);
+    height: clamp(14px, 1.8vw, 16px);
 }
 
 .option-label span {
@@ -1170,21 +1241,27 @@ button.button32:active {
     line-height: 1.3;
 }
 
-/* Option Controls - Slider + Value (takes remaining space) */
+/* 
+ * Controls area - slider and value display.
+ * Flex: 1 allows it to take remaining space.
+ * min-width: 0 prevents flex overflow issues.
+ */
 .option-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
-    flex: 1;
-    min-width: 0; /* Allows flex item to shrink below content size */
+    gap: clamp(8px, 1.2vw, 10px);
+    flex: 2 1 200px;
+    min-width: 0;
 }
 
-/* Slider styling - flexible width */
+/* 
+ * Slider styling - fully responsive width.
+ * Uses flex: 1 to fill available space.
+ */
 .option-controls .slider {
     flex: 1;
     min-width: 80px;
-    max-width: 200px;
-    height: 11px;
+    height: clamp(8px, 1.2vw, 11px);
     -webkit-appearance: none;
     appearance: none;
     background: #3a3c3f;
@@ -1193,12 +1270,11 @@ button.button32:active {
     cursor: pointer;
 }
 
-/* Slider thumb (the handle) */
 .option-controls .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 14px;
-    height: 14px;
+    width: clamp(12px, 1.8vw, 14px);
+    height: clamp(12px, 1.8vw, 14px);
     border-radius: 50%;
     background: #5D5F62;
     border: 1px solid #2A2C2E;
@@ -1211,10 +1287,9 @@ button.button32:active {
     transform: scale(1.1);
 }
 
-/* Firefox support */
 .option-controls .slider::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
+    width: clamp(12px, 1.8vw, 14px);
+    height: clamp(12px, 1.8vw, 14px);
     border-radius: 50%;
     background: #5D5F62;
     border: 1px solid #2A2C2E;
@@ -1223,41 +1298,34 @@ button.button32:active {
 
 .option-controls .slider::-moz-range-track {
     background: #3a3c3f;
-    height: 4px;
+    height: clamp(3px, 0.5vw, 4px);
     border-radius: 3px;
 }
 
-/* Value display next to slider */
+/* Value display - fixed width with responsive font */
 .option-controls span {
-    min-width: 35px;
+    min-width: clamp(28px, 5vw, 35px);
     text-align: right;
     color: #000000;
     font-family: monospace;
-    font-size: 11px;
+    font-size: clamp(9px, 1.2vw, 11px);
     font-weight: bold;
     background: rgba(0, 0, 0, 0.15);
-    padding: 2px 6px;
+    padding: clamp(1px, 0.3vw, 2px) clamp(4px, 0.8vw, 6px);
     border-radius: 4px;
     flex-shrink: 0;
 }
 
-/* Checkbox-only items (no slider) */
-.option-checkbox-only {
-    justify-content: flex-start;
-}
+/* ========================================================================
+ * ADDITIONAL OPTIONS ROW (Bottom checkboxes)
+ * ======================================================================== */
 
-.option-checkbox-only .option-label {
-    justify-content: flex-start;
-    flex-shrink: 0;
-}
-
-/* Additional options row (bottom) */
 .skyculture-additional-options {
-    margin-top: 20px;
-    padding-top: 15px;
+    margin-top: clamp(15px, 2vw, 20px);
+    padding-top: clamp(10px, 1.5vw, 15px);
     border-top: 1px solid rgba(0, 0, 0, 0.15);
     display: flex;
-    gap: 25px;
+    gap: clamp(15px, 2.5vw, 25px);
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
@@ -1267,139 +1335,274 @@ button.button32:active {
     margin: 0;
     padding: 0;
     gap: 8px;
-    flex-shrink: 0;
-}
-
-/* Loading placeholder */
-.loading-placeholder {
-    text-align: left;
-    padding: 30px;
-    color: #666;
-    font-style: italic;
-    font-size: 11px;
+    min-width: auto;
 }
 
 /* ========================================================================
- * Responsive Design
+ * PATTERNS BUTTONS (Constellations, Asterisms, Zodiac, Lunar, Stars)
  * ======================================================================== */
 
-/* Large Desktop */
+/* 
+ * Common grid container for all pattern types.
+ * Scrollable with max-height to handle large datasets.
+ */
+.patterns-buttons-grid,
+.constellations-buttons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(4px, 0.8vw, 8px);
+    padding: clamp(6px, 1.2vw, 10px);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    justify-content: flex-start;
+    align-items: center;
+    max-height: clamp(150px, 30vh, 300px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 
+ * Pattern button - shared styling with culture buttons.
+ * Responsive sizing using clamp().
+ */
+.pattern-btn,
+.constellation-btn {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+    border: 1px solid #2A2C2E;
+    border-radius: clamp(3px, 0.5vw, 4px);
+    padding: clamp(3px, 0.7vw, 5px) clamp(8px, 1.3vw, 12px);
+    font-size: clamp(9px, 1.3vw, 11px);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.pattern-btn:hover,
+.constellation-btn:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+    border-color: #B4B7B0;
+    transform: translateY(-1px);
+}
+
+.pattern-btn:active,
+.constellation-btn:active {
+    transform: translateY(1px);
+}
+
+.pattern-btn.active,
+.constellation-btn.active {
+    background: linear-gradient(#DCDBDA, #8A8C8E);
+    border-color: #000000;
+    color: #000000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================================================
+ * PATTERN NOTE (Description text)
+ * ======================================================================== */
+
+.patterns-note {
+    font-size: clamp(9px, 1.2vw, 11px);
+    color: #8A8C8E;
+    margin: 0 0 10px 0;
+    padding: clamp(4px, 0.8vw, 5px) clamp(8px, 1.2vw, 10px);
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* ========================================================================
+ * PATTERN COUNT BADGE
+ * ======================================================================== */
+
+.pattern-count {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.25);
+    color: #DCDBDA;
+    font-size: clamp(8px, 1.1vw, 10px);
+    font-weight: normal;
+    padding: clamp(1px, 0.3vw, 2px) clamp(6px, 1vw, 8px);
+    border-radius: 12px;
+    margin-left: 8px;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+/* ========================================================================
+ * LOADING PLACEHOLDER
+ * ======================================================================== */
+
+.loading-placeholder {
+    text-align: center;
+    padding: clamp(20px, 4vw, 30px);
+    color: #666;
+    font-style: italic;
+    font-size: clamp(10px, 1.3vw, 11px);
+    width: 100%;
+}
+
+/* ========================================================================
+ * TOOLTIP FOR STAR BUTTONS (HIP IDs)
+ * ======================================================================== */
+
+.pattern-btn[title] {
+    position: relative;
+}
+
+.pattern-btn[title]:hover:after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2A2C2E;
+    color: #DCDBDA;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: clamp(8px, 1vw, 10px);
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+    margin-bottom: 5px;
+    border: 1px solid #5D5F62;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Hide tooltip on touch devices to prevent stuck tooltips */
+@media (hover: none) and (pointer: coarse) {
+    .pattern-btn[title]:hover:after {
+        display: none;
+    }
+}
+
+/* ========================================================================
+ * RESPONSIVE BREAKPOINTS - FINE-TUNED ADJUSTMENTS
+ * ======================================================================== */
+
+/* 
+ * Large Desktop (≥1400px)
+ * More generous spacing and larger max-widths for options panel.
+ */
 @media (min-width: 1400px) {
     .skyculture-options-panel {
-        min-width: 500px;
-        max-width: 800px;
+        flex: 2 1 100%;
+        max-width: 100%;
     }
     
     .skyculture-panel {
-        min-width: 320px;
-        max-width: 450px;
+        flex: 1 1 100%;
+        max-width: 100%;
     }
     
     .options-grid {
+        grid-template-columns: repeat(3, 1fr);
         gap: 20px;
     }
     
     .option-controls .slider {
-        min-width: 120px;
-        max-width: 250px;
+        min-width: 150px;
+        max-width: 300px;
     }
 }
 
-/* Medium screens - keep 3 columns */
-@media (min-width: 900px) and (max-width: 1399px) {
+/* 
+ * Medium-Large Desktop (1025px - 1399px)
+ * Maintain 3 columns but with tighter spacing.
+ */
+@media (min-width: 1025px) and (max-width: 1399px) {
     .options-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 12px;
     }
     
-    .option-controls .slider {
-        min-width: 80px;
+    .option-label {
+        min-width: 130px;
     }
 }
 
-/* Small desktop / Tablet landscape - switch to 2 columns */
-@media (min-width: 600px) and (max-width: 899px) {
-    .skyculture-panel,
-    .skyculture-options-panel {
-        min-width: 100%;
-        max-width: 100%;
-        width: 100%;
-    }
-    
+/* 
+ * Tablet Landscape / Small Desktop (769px - 1024px)
+ * Switch to 2 columns for options grid.
+ */
+@media (min-width: 769px) and (max-width: 1024px) {
     .options-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
     
-    /* Keep horizontal layout, just reduce gaps */
+    .skyculture-panel,
+    .skyculture-options-panel {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    
     .option-item {
         gap: 10px;
-        padding: 8px 10px;
     }
     
     .option-label {
+        min-width: 120px;
         font-size: 11px;
-        max-width: 40%;
-    }
-    
-    .option-controls {
-        gap: 8px;
     }
     
     .option-controls .slider {
         min-width: 70px;
     }
-    
-    .option-controls span {
-        font-size: 10px;
-        min-width: 30px;
-        padding: 2px 4px;
-    }
 }
 
-/* Tablet portrait - 2 columns */
+/* 
+ * Tablet Portrait (481px - 768px)
+ * Full width panels, 2 columns where possible, but allow wrapping.
+ */
 @media (max-width: 768px) {
     .skyculture-panel,
     .skyculture-options-panel {
+        flex: 1 1 100%;
         min-width: 100%;
         max-width: 100%;
         width: 100%;
-        padding: 12px;
-        padding-top: 30px;
+        padding: 10px;
+        padding-top: 28px;
     }
     
     .options-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 10px;
     }
     
-    .skyculture-buttons-grid {
+    .skyculture-buttons-grid,
+    .patterns-buttons-grid,
+    .constellations-buttons-grid {
         justify-content: center;
-    }
-    
-    .skyculture-btn {
-        padding: 4px 10px;
-        font-size: 10px;
+        max-height: 200px;
     }
     
     .skyculture-info-frame {
-        min-height: 300px;
+        min-height: 250px;
+        max-height: 400px;
     }
     
-    /* Keep horizontal layout on tablets */
     .option-item {
         flex-direction: row;
-        gap: 10px;
+        flex-wrap: wrap;
+        gap: 8px;
         padding: 8px 10px;
     }
     
     .option-label {
+        min-width: 120px;
         font-size: 10px;
-        max-width: 40%;
         gap: 6px;
     }
     
     .option-controls {
+        flex: 2 1 180px;
         gap: 8px;
     }
     
@@ -1408,25 +1611,31 @@ button.button32:active {
     }
     
     .option-controls span {
-        font-size: 10px;
+        font-size: 9px;
         min-width: 28px;
-        padding: 2px 4px;
+    }
+    
+    .skyculture-additional-options {
+        gap: 15px;
     }
 }
 
-/* Mobile phones - Switch to vertical layout (one column) */
+/* 
+ * Mobile Phones (≤480px)
+ * Single column, vertical stacking for all components.
+ */
 @media (max-width: 480px) {
     .skyculture-panel,
     .skyculture-options-panel {
-        padding: 10px;
-        padding-top: 28px;
+        padding: 8px;
+        padding-top: 26px;
     }
     
     .skyculture-panel h3,
     .skyculture-options-panel h3 {
-        font-size: 12px;
-        left: 12px;
-        top: 8px;
+        font-size: 11px;
+        left: 10px;
+        top: 6px;
     }
     
     .options-grid {
@@ -1434,58 +1643,69 @@ button.button32:active {
         gap: 8px;
     }
     
-    /* Change to VERTICAL layout on mobile phones */
+    /* Vertical layout for option items on mobile */
     .option-item {
         flex-direction: column;
         align-items: stretch;
-        gap: 10px;
+        gap: 8px;
         padding: 10px;
     }
     
     .option-label {
+        min-width: auto;
         max-width: 100%;
         font-size: 11px;
         gap: 8px;
     }
     
-    .option-label span {
-        font-size: 11px;
-    }
-    
     .option-controls {
         padding-left: 0;
-        gap: 10px;
+        gap: 8px;
         width: 100%;
+        flex: auto;
     }
     
     .option-controls .slider {
-        min-width: 120px;
+        min-width: 100px;
         flex: 1;
     }
     
-    .option-controls span {
-        min-width: 35px;
-        font-size: 10px;
-        padding: 2px 6px;
-    }
-    
-    .skyculture-btn {
+    .skyculture-btn,
+    .pattern-btn,
+    .constellation-btn {
         padding: 4px 8px;
         font-size: 9px;
     }
     
     .skyculture-info-frame {
-        min-height: 250px;
+        min-height: 200px;
+        max-height: 300px;
     }
     
     .skyculture-additional-options {
-        gap: 12px;
+        gap: 10px;
         flex-direction: column;
         align-items: flex-start;
     }
+    
+    .skyculture-buttons-grid,
+    .patterns-buttons-grid,
+    .constellations-buttons-grid {
+        max-height: 180px;
+        gap: 4px;
+        padding: 6px;
+    }
+    
+    .patterns-note {
+        font-size: 8px;
+        padding: 4px 6px;
+    }
 }
 
-/* Extra small devices - maintain vertical layout */
+/* 
+ * Extra Small Devices (≤360px)
+ * Further optimizations for very narrow screens.
+ */
 @media (max-width: 360px) {
     .option-controls {
         flex-wrap: wrap;
@@ -1502,191 +1722,657 @@ button.button32:active {
         text-align: left;
         align-self: flex-start;
     }
-}
-
-/* ========================================================================
- * Constellations Buttons - Same style as sky culture buttons
- * ======================================================================== */
-
-.constellations-buttons-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
-    justify-content: flex-start;
-    align-items: center;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.constellation-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #000000;
-    border: 1px solid #2A2C2E;
-    border-radius: 4px;
-    padding: 5px 12px;
-    font-size: 11px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-}
-
-.constellation-btn:hover {
-    background: linear-gradient(#C4C4C7, #6D6F72);
-    border-color: #B4B7B0;
-    transform: translateY(-1px);
-}
-
-.constellation-btn:active {
-    transform: translateY(1px);
-}
-
-.constellation-btn.active {
-    background: linear-gradient(#DCDBDA, #8A8C8E);
-    border-color: #000000;
-    color: #000000;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive adjustments for constellations buttons */
-@media (max-width: 768px) {
-    .constellations-buttons-grid {
-        max-height: 250px;
-        gap: 6px;
-        padding: 8px;
-    }
     
+    .skyculture-btn,
+    .pattern-btn,
     .constellation-btn {
-        padding: 4px 10px;
-        font-size: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .constellations-buttons-grid {
-        max-height: 200px;
-        gap: 5px;
-        padding: 6px;
-    }
-    
-    .constellation-btn {
-        padding: 4px 8px;
-        font-size: 9px;
-    }
-    
-    .constellations-note {
-        font-size: 9px;
+        padding: 3px 6px;
+        font-size: 8px;
     }
 }
 
 /* ========================================================================
- * Patterns Buttons - Common styles for all pattern types
+ * ZOOM SUPPORT - Viewport Scaling
  * ======================================================================== */
 
-.patterns-buttons-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
-    justify-content: flex-start;
-    align-items: center;
-    max-height: 300px;
-    overflow-y: auto;
+/* 
+ * Ensure proper scaling when browser zoom is used.
+ * All dimensions use relative units (rem, em, %, vw, vh).
+ * The use of clamp() throughout ensures minimum/maximum sizes.
+ */
+
+/* Base font size adjustment for better zoom handling */
+@media screen and (min-resolution: 120dpi) {
+    .skyculture-panel,
+    .skyculture-options-panel {
+        font-size: 0.95rem;
+    }
 }
 
-.pattern-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #000000;
-    border: 1px solid #2A2C2E;
-    border-radius: 4px;
-    padding: 5px 12px;
-    font-size: 11px;
+/* ========================================================================
+ * SCROLLBAR STYLING (Consistent with gamepad.css)
+ * ======================================================================== */
+
+.skyculture-buttons-grid::-webkit-scrollbar,
+.patterns-buttons-grid::-webkit-scrollbar,
+.constellations-buttons-grid::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.skyculture-buttons-grid::-webkit-scrollbar-track,
+.patterns-buttons-grid::-webkit-scrollbar-track,
+.constellations-buttons-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.skyculture-buttons-grid::-webkit-scrollbar-thumb,
+.patterns-buttons-grid::-webkit-scrollbar-thumb,
+.constellations-buttons-grid::-webkit-scrollbar-thumb {
+    background: #5D5F62;
+    border-radius: 3px;
+}
+
+.skyculture-buttons-grid::-webkit-scrollbar-thumb:hover,
+.patterns-buttons-grid::-webkit-scrollbar-thumb:hover,
+.constellations-buttons-grid::-webkit-scrollbar-thumb:hover {
+    background: #B4B7B0;
+}
+
+/* ========================================================================
+ * FLEX LAYOUT FIXES
+ * ======================================================================== */
+
+/* 
+ * Ensure parent flex containers don't restrict children.
+ * These classes are used in index.html for the tab layout.
+ */
+#tab_skyculture .flex.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(15px, 2vw, 10px);
+    width: 100%;
+    box-sizing: border-box;
+    align-items: stretch;
+}
+
+/* Ensure panels inside the flex container can grow properly */
+#tab_skyculture .flex.flex-wrap > * {
+    flex: 1 1 300px;
+    min-width: 280px;
+}
+
+/* ========================================================================
+ * ANIMATIONS
+ * ======================================================================== */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.skyculture-panel,
+.skyculture-options-panel {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ========================================================================
+ * PRINT STYLES
+ * ======================================================================== */
+
+@media print {
+    .skyculture-panel,
+    .skyculture-options-panel {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        border: 1px solid #000;
+        background: #fff;
+    }
+    
+    .skyculture-btn,
+    .pattern-btn,
+    .constellation-btn {
+        border: 1px solid #000;
+        background: #f0f0f0;
+        color: #000;
+    }
+    
+    .skyculture-buttons-grid,
+    .patterns-buttons-grid {
+        max-height: none;
+        overflow: visible;
+    }
+}
+
+/* ========================================================================
+ * SKY CULTURE PATTERNS TABS - Horizontal tabs for pattern types
+ * ======================================================================== */
+
+.skyculture-patterns-tabs {
+    margin-top: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.skyculture-patterns-tabs ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.skyculture-patterns-tabs ul li {
+    margin: 0;
+    padding: 0;
+    flex: 0 1 auto;
+}
+
+.skyculture-patterns-tabs ul li a {
+    display: block;
+    padding: 8px 16px;
+    font-size: clamp(10px, 1.3vw, 12px);
     font-weight: bold;
-    cursor: pointer;
+    color: #3A3C3E;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.05);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
     white-space: nowrap;
 }
 
-.pattern-btn:hover {
-    background: linear-gradient(#C4C4C7, #6D6F72);
-    border-color: #B4B7B0;
-    transform: translateY(-1px);
+.skyculture-patterns-tabs ul li:last-child a {
+    border-right: none;
 }
 
-.pattern-btn:active {
-    transform: translateY(1px);
-}
-
-.pattern-btn.active {
-    background: linear-gradient(#DCDBDA, #8A8C8E);
-    border-color: #000000;
+.skyculture-patterns-tabs ul li a:hover {
+    background: rgba(180, 183, 176, 0.15);
     color: #000000;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.patterns-note {
-    font-size: 11px;
-    color: #8A8C8E;
-    margin: 0 0 10px 0;
-    padding: 5px 10px;
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: 4px;
-    text-align: center;
+.skyculture-patterns-tabs ul li.ui-tabs-active a {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    color: #000000;
+    border-bottom: 2px solid #B4B7B0;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .patterns-buttons-grid {
-        max-height: 200px;
-        gap: 6px;
-        padding: 8px;
-    }
-    
-    .pattern-btn {
-        padding: 4px 10px;
-        font-size: 10px;
-    }
+.skyculture-patterns-tabs .patterns-tab-content {
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.02);
 }
 
-@media (max-width: 480px) {
-    .patterns-buttons-grid {
-        max-height: 150px;
-        gap: 5px;
-        padding: 6px;
-    }
-    
-    .pattern-btn {
-        padding: 4px 8px;
-        font-size: 9px;
-    }
-    
-    .patterns-note {
-        font-size: 9px;
-    }
+.skyculture-patterns-tabs .patterns-tab-content .patterns-note {
+    margin-top: 0;
+    margin-bottom: 12px;
 }
 
-/* Pattern count badge styling */
-.pattern-count {
+/* Pattern count badge inside tab headers */
+.skyculture-patterns-tabs ul li a .pattern-count {
     display: inline-block;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.3);
     color: #DCDBDA;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: normal;
-    padding: 2px 8px;
-    border-radius: 12px;
-    margin-left: 8px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-left: 6px;
     vertical-align: middle;
-    font-family: monospace;
 }
 
-/* Optional: Different colors for different sections */
-/*#constellations-count { background: rgba(76, 175, 80, 0.3); color: #4CAF50; }
-#asterisms-count { background: rgba(33, 150, 243, 0.3); color: #2196F3; }
-#zodiac-count { background: rgba(255, 193, 7, 0.3); color: #FFC107; }
-#lunar-count { background: rgba(156, 39, 176, 0.3); color: #9C27B0; }
-#stars-count { background: rgba(255, 152, 0, 0.3); color: #FF9800; }*/
+/* Responsive adjustments for tabs */
+@media (max-width: 768px) {
+    .skyculture-patterns-tabs ul {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .skyculture-patterns-tabs ul li a {
+        padding: 6px 12px;
+        font-size: 10px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .skyculture-patterns-tabs ul li a {
+        padding: 5px 8px;
+        font-size: 9px;
+    }
+    
+    .skyculture-patterns-tabs ul li a .pattern-count {
+        font-size: 8px;
+        padding: 1px 4px;
+        margin-left: 4px;
+    }
+    
+    .skyculture-patterns-tabs .patterns-tab-content {
+        padding: 10px;
+    }
+}
+
+/* ========================================================================
+ * SCRIPT PANEL VISUAL INDICATORS & BUTTON STYLES
+ * ======================================================================== */
+
+/**
+ * Pulsing border effect for the script info iframe when a script is running.
+ * Uses Stellarium's silver/gray color palette for consistency.
+ * The animation creates a subtle breathing effect to draw attention.
+ */
+#scriptinfo.script-running {
+    border: 2px solid #B4B7B0 !important;
+    box-shadow: 0 0 8px rgba(180, 183, 176, 0.4);
+    animation: script-pulse 2.5s ease-in-out infinite;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+@keyframes script-pulse {
+    0% {
+        border-color: #8A8C8E;
+        box-shadow: 0 0 5px rgba(138, 140, 142, 0.2);
+    }
+    50% {
+        border-color: #DCDBDA;
+        box-shadow: 0 0 12px rgba(220, 219, 218, 0.5);
+    }
+    100% {
+        border-color: #8A8C8E;
+        box-shadow: 0 0 5px rgba(138, 140, 142, 0.2);
+    }
+}
+
+/**
+ * Highlight style for the active script in the selection list.
+ * Uses a subtle gradient background matching Stellarium's theme.
+ */
+#scriptlist option.active-script {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    color: #DCDBDA;
+    font-weight: bold;
+}
+
+/**
+ * Script controls container - horizontal button layout.
+ */
+.script-controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/**
+ * Script control buttons - base styles for icon buttons.
+ */
+.script-controls .script-control-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    background-image: url("images/icons.png");
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.script-controls .script-control-btn:hover {
+    background-image: url("images/icons-active.png");
+    transform: translateY(-1px);
+}
+
+.script-controls .script-control-btn:active {
+    transform: translateY(1px);
+}
+
+.script-controls .script-control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    background-image: url("images/icons.png");
+}
+
+/* Individual button icon positions */
+.script-controls #bt_runscript {
+    background-position: -629px 0; /* btScriptRun */
+}
+
+.script-controls #bt_stopscript {
+    background-position: -703px 0; /* btScriptStop */
+}
+
+.script-controls #bt_script_resetview {
+    background-position: -922px 0; /* btGotoHome - repurposed for Reset View */
+}
+
+/**
+ * Active script display area.
+ */
+.active-script-display {
+    margin: 8px 0;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 11px;
+    text-align: center;
+    color: #000000;
+}
+
+.active-script-display span {
+    font-weight: bold;
+    color: #DCDBDA;
+}
+
+/**
+ * Responsive adjustments for script controls.
+ */
+@media (max-width: 768px) {
+    .script-controls {
+        gap: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .script-controls {
+        gap: 4px;
+    }
+}
+
+/* ========================================================================
+ * Sky Culture Statistics Tables - Additional Styles
+ * ======================================================================== */
+
+.stats-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 15px;
+    background: rgba(149, 150, 152, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-style: inset;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 8px 15px;
+    border-radius: 6px;
+}
+
+.stat-label {
+    color: #000;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.stat-value {
+    background: #3A3C3E;
+    color: #DCDBDA;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.culture-selector-panel {
+    background: rgba(149, 150, 152, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-style: inset;
+    border-radius: 10px;
+    padding: 15px;
+    padding-top: 35px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.culture-selector-panel h3 {
+    position: absolute;
+    left: 17px;
+    top: 10px;
+    margin: 0;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.stats-table th {
+    background: linear-gradient(#5D5F62, #4A4C4E);
+    color: #000;
+    font-weight: bold;
+    padding: 10px 8px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 2px solid #2A2C2E;
+    white-space: nowrap;
+}
+
+.stats-table td {
+    padding: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    vertical-align: top;
+    color: #1a1a1a;
+}
+
+.stats-table tr:hover {
+    background: rgba(180, 183, 176, 0.1);
+}
+
+.stats-table .clickable-row {
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.stats-table .clickable-row:hover {
+    background: rgba(180, 183, 176, 0.2);
+}
+
+.stats-table .row-number {
+    text-align: center;
+    font-weight: bold;
+    color: #2A2C2E;
+    width: 40px;
+}
+
+.stats-table .id-cell {
+    font-family: 'DejaVuSansMono', monospace;
+    font-size: 11px;
+    color: #1a1a2e;
+}
+
+.stats-table .native-name {
+    font-weight: bold;
+    color: #000;
+}
+
+.stats-table .pronounce {
+    color: #1a1a2e;
+    font-size: 10px;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.stats-table .ipa-value {
+    color: #1a1a2e;
+    font-size: 10px;
+    font-family: 'DejaVuSansMono', monospace;
+    font-weight: 500;
+}
+
+.stats-table .ids-display {
+    max-width: 300px;
+    font-size: 10px;
+    color: #2A2C2E;
+    line-height: 1.5;
+}
+
+.id-type-badge {
+    display: inline-block;
+    background: #3A3C3E;
+    color: #DCDBDA;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 9px;
+    margin-right: 5px;
+}
+
+.stats-table .selected-row {
+    background: linear-gradient(#DCDBDA, #8A8C8E) !important;
+    color: #000 !important;
+}
+
+.stats-table .selected-row td {
+    color: #000 !important;
+}
+
+.stats-table .selected-row .native-name {
+    color: #000 !important;
+}
+
+.stats-table .selected-row .pronounce,
+.stats-table .selected-row .ipa-value,
+.stats-table .selected-row .id-cell {
+    color: #1a1a2e !important;
+}
+
+.id-type-badge.hip { background: #2A4A6A; }
+.id-type-badge.dso { background: #4A2A6A; }
+.id-type-badge.ngc { background: #2A6A4A; }
+.id-type-badge.ic { background: #3A6A5A; }
+.id-type-badge.pgc { background: #5A3A6A; }
+.id-type-badge.ugc { background: #6A5A3A; }
+.id-type-badge.eso { background: #3A5A6A; }
+.id-type-badge.aco { background: #6A3A5A; }
+.id-type-badge.sh2 { background: #4A5A3A; }
+.id-type-badge.pk { background: #5A4A3A; }
+.id-type-badge.png { background: #3A4A5A; }
+.id-type-badge.cr { background: #5A3A4A; }
+.id-type-badge.b { background: #4A3A5A; }
+.id-type-badge.messier { background: #6A2A4A; }
+.id-type-badge.gaia { background: #4A6A2A; }
+.id-type-badge.solar { background: #6A4A2A; }
+.id-type-badge.constellation { background: #2A5A5A; }
+.id-type-badge.asterism { background: #5A2A5A; }
+.id-type-badge.other { background: #4A4A4A; }
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.table-header .search-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 12px;
+    background: #3A3C3E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.table-header .search-box:focus {
+    outline: none;
+    border-color: #B4B7B0;
+}
+
+.table-header .search-box::placeholder {
+    color: #B4B7B0;
+}
+
+.export-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.export-btn {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000;
+    border: 1px solid #2A2C2E;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.export-btn:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+}
+
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.no-data {
+    text-align: center;
+    padding: 20px;
+    color: #8A8C8E;
+}
+
+.loading-placeholder {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-style: italic;
+    width: 100%;
+}
+
+.description-content {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    padding: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+    line-height: 1.6;
+    color: #1a1a1a;
+}
+
+/* Sky culture info frame inside patterns tab */
+#vo_skycultureinfo {
+    width: 100%;
+    min-height: 400px;
+    max-height: 600px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+#stats-vo-skycultureinfo {
+    width: 100%;
+    min-height: 400px;
+    max-height: 600px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.05);
+}
