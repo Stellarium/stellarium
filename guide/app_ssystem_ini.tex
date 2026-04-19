@@ -735,7 +735,7 @@ increasingly inaccurate.
  
 For those interested in tracking accurate asteroid positions over many
 decades or centuries, an optional extended ephemeris file can be
-provided.  When a file named \file{asteroid\_ephemeris.json} is present
+provided.  When a file named \file{asteroid\_elements.json} is present
 in the user \file{data/} directory (see
 chapter~\ref{sec:FilesAndDirectories}), Stellarium loads a table of
 orbital snapshots for each asteroid listed in it.  At any simulated
@@ -749,10 +749,10 @@ Note that an asteroid must already be present in
 JSON file provides additional orbital snapshots for existing entries; it
 cannot be used to introduce new asteroids.
  
-\subsubsection{Generating the ephemeris file}
+\subsubsection{Generating the orbital elements file}
 \label{sec:ssystem.ini:MultiEpoch:Script}
  
-A Python script, \file{fetch\_asteroid\_ephemeris.py}, is provided in
+A Python script, \file{fetch\_asteroid\_elements.py}, is provided in
 the \file{util/} folder of the installation directory.  It queries the
 \indexterm{JPL Horizons} web service for osculating orbital elements at
 regular intervals across a chosen time window and writes the results to
@@ -765,7 +765,7 @@ fetches the first 500 numbered asteroids at 6-month intervals across a
 52\,MB in around 20 minutes:
  
 \begin{commands}
-python3 fetch_asteroid_ephemeris.py
+python3 fetch_asteroid_elements.py
 \end{commands}
  
 \noindent If the run is interrupted it can be resumed without losing
@@ -773,7 +773,7 @@ progress; the script saves its output every ten asteroids and skips
 entries that are already present in the output file:
  
 \begin{commands}
-python3 fetch_asteroid_ephemeris.py --start-at 247
+python3 fetch_asteroid_elements.py --start-at 247
 \end{commands}
  
 \noindent The time window, epoch density, and target asteroids can all
@@ -810,7 +810,7 @@ listed below.
   (${\approx}$6-month intervals over 200 years).
  
 \item[\texttt{--out} \textit{FILE}] Output filename.  Default:
-  \texttt{asteroid\_ephemeris.json}.
+  \texttt{asteroid\_elements.json}.
  
 \item[\texttt{--delay} \textit{SECS}] Pause between consecutive
   Horizons requests, in seconds.  Increase this value if the server
@@ -826,7 +826,7 @@ automatically, so any value of \texttt{--epochs} is supported.
 Fetch the five historically significant early-discovered asteroids and
 Eros with 6-month intervals spanning the years 1800--2100:
 \begin{commands}
-python3 fetch_asteroid_ephemeris.py \
+python3 fetch_asteroid_elements.py \
     --numbers 1,2,3,4,433 \
     --epochs 600 --span 300 --center 1950
 \end{commands}
@@ -834,7 +834,7 @@ python3 fetch_asteroid_ephemeris.py \
 \noindent Fetch 1000 asteroids at yearly intervals over 200 years,
 saving to a custom filename:
 \begin{commands}
-python3 fetch_asteroid_ephemeris.py \
+python3 fetch_asteroid_elements.py \
     --count 1000 --epochs 200 --out my_ephemeris.json
 \end{commands}
 
