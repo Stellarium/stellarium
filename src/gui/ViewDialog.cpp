@@ -341,6 +341,7 @@ void ViewDialog::createDialogContent()
 	connectIntProperty(ui->planetTrailsThicknessSpinBox, "SolarSystem.trailsThickness");	
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
 	connectIntProperty(ui->planetIsolatedTrailsSpinBox, "SolarSystem.numberIsolatedTrails");
+	connectIntProperty(ui->trailsDurationSpinBox, "SolarSystem.maxTrailTimeExtent");
 	connectBoolProperty(ui->drawMoonHaloCheckBox, "SolarSystem.flagDrawMoonHalo");
 	connectBoolProperty(ui->minorPlanetMarkersCheckBox, "SolarSystem.flagMarkers");
 	connectDoubleProperty(ui->minorPlanetMarkerMagThresholdSpinBox, "SolarSystem.markerMagThreshold");
