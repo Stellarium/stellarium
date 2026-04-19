@@ -23,6 +23,7 @@
 
 #include "Planet.hpp"
 #include <QVector>
+#include <memory>
 
 //! One snapshot of Keplerian orbital elements at a specific epoch,
 //! used by the extended asteroid ephemeris pack.
@@ -143,7 +144,7 @@ public:
 	//! get sidereal period for minor planet
 	double getSiderealPeriod() const override;
 
-	// Multi-epoch ephemeris support (extended ephemeris pack)-
+	// Multi-epoch elements support (extended ephemeris pack)-
 
 	//! Load a table of orbital element snapshots from the extended ephemeris pack.
 	//! @param elements  Vector of epoch snapshots, must be sorted ascending by epochJDE.
@@ -201,7 +202,7 @@ private:
 	//! The interpolated KeplerOrbit currently installed as the active orbit.
 	//! This object owns it; Planet::orbitPtr points at the same instance.
 	//! nullptr until the first updateEpochOrbit() call.
-	KeplerOrbit* activeEpochOrbit = nullptr;
+	std::unique_ptr<KeplerOrbit> activeEpochOrbit;
 };
 
 #endif // MINORPLANET_HPP

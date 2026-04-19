@@ -1170,7 +1170,7 @@ private:
 	bool loadPlanets(const QString& filePath);
 
 	//! Load multi-epoch orbital element tables from the extended asteroid
-	//! ephemeris pack (asteroid_ephemeris.json).  Called at the end of
+	//! ephemeris pack (asteroid_elements.json).  Called at the end of
 	//! loadPlanets() if the file exists in the user or installation data dir.
 	//! @returns true if at least one asteroid received an epoch table.
 	bool loadExtendedAsteroidEphemeris(const QString& filePath);

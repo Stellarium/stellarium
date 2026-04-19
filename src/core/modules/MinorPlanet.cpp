@@ -90,15 +90,11 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 
 MinorPlanet::~MinorPlanet()
 {
-	// If we installed an interpolated orbit, make sure Planet::orbitPtr no
-	// longer dangles before we delete the object it points to.
-	if (activeEpochOrbit)
-	{
-		if (orbitPtr == activeEpochOrbit)
-			orbitPtr = nullptr;
-		delete activeEpochOrbit;
-		activeEpochOrbit = nullptr;
-	}
+	// Clear orbitPtr so Planet::~Planet() does not dereference a dangling
+	// pointer. activeEpochOrbit (unique_ptr) deletes the KeplerOrbit
+	// automatically when this MinorPlanet is destroyed.
+	if (orbitPtr == activeEpochOrbit.get())
+		orbitPtr = nullptr;
 }
 
 void MinorPlanet::setSpectralType(const QString &sT, const QString &sB)
@@ -346,7 +342,7 @@ QString MinorPlanet::renderIAUDesignationinHtml(const QString &plainTextName)
 		return QString(); //plainTextName;
 }
 
-// Multi-epoch ephemeris support
+// Multi-epoch elements support
 
 void MinorPlanet::setEpochElements(const QVector<AsteroidEpochElements>& elements,
                                     double parentRotObliquity,
@@ -440,7 +436,7 @@ void MinorPlanet::updateEpochOrbit(double jde, bool force)
 	const int n = epochElements.size();
 
 	// Find the snapshot whose epoch is nearest to jde.
-	// We do a simple linear scan; with at most ~20 epochs this is trivial.
+	// We do a simple linear scan.
 	int best = 0;
 	double bestDist = std::fabs(jde - epochElements[0].epochJDE);
 	for (int i = 1; i < n; ++i)
@@ -465,11 +461,10 @@ void MinorPlanet::updateEpochOrbit(double jde, bool force)
 		epochParentRotJ2000Longitude);
 
 	// Swap in the new orbit; clear the old one safely.
-	if (orbitPtr == activeEpochOrbit)
+	if (orbitPtr == activeEpochOrbit.get())
 		orbitPtr = nullptr;
-	delete activeEpochOrbit;
-	activeEpochOrbit = newOrbit;
-	orbitPtr = activeEpochOrbit;
+	activeEpochOrbit.reset(newOrbit); // takes ownership, deletes old orbit
+	orbitPtr = activeEpochOrbit.get();
 
 	// Recompute closeOrbit and deltaOrbitJDE from the new orbit's elements.
 	// This ensures the orbit ellipse is drawn correctly (full ellipse for

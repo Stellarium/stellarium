@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-fetch_asteroid_ephemeris.py
+fetch_asteroid_elements.py
 ===========================
 Fetches multi-epoch Keplerian orbital elements for numbered asteroids from
-JPL Horizons and writes them to asteroid_ephemeris.json for use with
+JPL Horizons and writes them to asteroid_elements.json for use with
 Stellarium's extended ephemeris system.
 
 BACKGROUND
@@ -26,7 +26,7 @@ multi-epoch table requires.
 QUICK START
 -----------
     pip install requests
-    python fetch_asteroid_ephemeris.py
+    python fetch_asteroid_elements.py
 
 This fetches the first 500 numbered asteroids with 1-year epoch intervals
 spanning 200 years (1926-2126).
@@ -57,7 +57,7 @@ PARAMETERS
       Rule of thumb: aim for an interval shorter than the orbital period of the
       fastest target in your set.  Eros (period 1.76 yr) needs <1-yr intervals;
       for main-belt asteroids (periods 3-6 yr) 1-yr intervals are fine.
-      Default: 400  (= ~6-month intervals over the default 200-year span).
+      Default: 200  (= 1-year intervals over the default 200-year span).
 
   --span YEARS
       Total time window width in years, centred on --center.
@@ -72,7 +72,7 @@ PARAMETERS
   --out FILE
       Output filename.  If the file already exists (e.g. from a previous
       interrupted run) the script resumes automatically, skipping asteroids
-      already present.  Default: asteroid_ephemeris.json
+      already present.  Default: asteroid_elements.json
 
   --delay SECS
       Pause between consecutive Horizons API requests, in seconds.  Also
@@ -106,23 +106,23 @@ At 0.6 s delay, 500 asteroids at 400 epochs takes roughly 30 minutes.
 
 SCALING EXAMPLES
 ----------------
-  First 500 asteroids, default settings (~52 MB, ~20 min):
-      python fetch_asteroid_ephemeris.py
+  First 500 asteroids, default settings:
+      python fetch_asteroid_elements.py
 
-  First 1000 asteroids, same density (~104 MB, ~40 min):
-      python fetch_asteroid_ephemeris.py --count 1000
+  First 1000 asteroids, same density:
+      python fetch_asteroid_elements.py --count 1000
 
-  Tighter 3-month intervals over 200 years (~104 MB, ~40 min):
-      python fetch_asteroid_ephemeris.py --epochs 800
+  Tighter 3-month intervals over 200 years:
+      python fetch_asteroid_elements.py --epochs 800
 
-  800-year window for everything, 1-year intervals (~52 MB, ~40 min):
-      python fetch_asteroid_ephemeris.py --span 800 --epochs 800 --center 2000
+  800-year window for everything, 1-year intervals:
+      python fetch_asteroid_elements.py --span 800 --epochs 800 --center 2000
 
   Specific asteroids only:
-      python fetch_asteroid_ephemeris.py --numbers 1,2,3,4,433 --no-special
+      python fetch_asteroid_elements.py --numbers 1,2,3,4,433
 
   Resume an interrupted run:
-      python fetch_asteroid_ephemeris.py --start-at 247
+      python fetch_asteroid_elements.py --start-at 247
 
 REQUIREMENTS
 ------------
@@ -133,7 +133,6 @@ Horizons API reference: https://ssd-api.jpl.nasa.gov/doc/horizons.html
 
 import argparse
 import json
-import math
 import sys
 import time
 import requests
@@ -344,11 +343,11 @@ def main():
                         help="Comma-separated asteroid numbers, e.g. 1,2,4,433,1036. "
                              "Overrides --count and --start-at.")
     parser.add_argument("--epochs",   type=int,   default=200,
-                        help="Epochs per asteroid for normal asteroids (default 400 = "
-                             "6-month intervals over 200 years).")
+                        help="Epochs per asteroid (default 200 = "
+                             "1-year intervals over 200 years).")
     parser.add_argument("--center",   type=float, default=2026.0)
     parser.add_argument("--span",     type=float, default=200.0)
-    parser.add_argument("--out",      type=str,   default="asteroid_ephemeris.json")
+    parser.add_argument("--out",      type=str,   default="asteroid_elements.json")
     parser.add_argument("--delay",    type=float, default=0.6)
     parser.add_argument("--start-at", type=int,   default=1, dest="start_at")
     parser.add_argument("--debug",    action="store_true",
@@ -364,7 +363,7 @@ def main():
     else:
         target_numbers = list(range(args.start_at, args.count + 1))
 
-    print("Stellarium Extended Asteroid Ephemeris Fetcher  (Horizons backend)")
+    print("Stellarium Extended Asteroid Elements Fetcher  (Horizons backend)")
     if args.numbers:
         print(f"  Asteroids : {target_numbers}")
     else:
@@ -376,13 +375,12 @@ def main():
     print()
 
     output = {
-        "format":      "stellarium_asteroid_ephemeris",
-        "version":     1,
-        "generator":   "fetch_asteroid_ephemeris.py (Horizons)",
+        "format":      "stellarium_asteroid_elements",
+        "version":     1.0,
+        "generator":   "fetch_asteroid_elements.py (Horizons)",
         "generated":   datetime.now(timezone.utc).isoformat(),
         "center_year": args.center,
         "span_years":  args.span,
-        "epoch_jdes":  default_epochs,
         "asteroids":   []
     }
 

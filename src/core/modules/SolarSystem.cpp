@@ -771,16 +771,18 @@ void SolarSystem::loadPlanets()
 			shadowPlanetCount++;
 
 	// Load extended multi-epoch asteroid ephemeris if available.
-	// The file is optional — if absent, all asteroids use their standard
-	// single-epoch KeplerOrbit from ssystem_minor.ini as normal, and the
-	// Solar System Editor plugin continues to work without any changes.
-	const QString ephemFile = StelFileMgr::findFile(
-	    "data/asteroid_ephemeris.json",
+	// findFileInAllPaths checks the user data directory first, then the
+	// installation directory, so a user-provided file overrides the bundled one.
+	// If no file is found at all, all asteroids fall back to their standard
+	// single-epoch KeplerOrbit from ssystem_minor.ini without any change in
+	// behaviour, and the Solar System Editor plugin continues to work normally.
+	const QStringList ephemFiles = StelFileMgr::findFileInAllPaths(
+	    "data/asteroid_elements.json",
 	    static_cast<StelFileMgr::Flags>(StelFileMgr::File));
-	if (!ephemFile.isEmpty())
-		loadExtendedAsteroidEphemeris(ephemFile);
+	if (!ephemFiles.isEmpty())
+		loadExtendedAsteroidEphemeris(ephemFiles.first()); // first = user dir (highest priority)
 	else
-		qInfo() << "ExtendedEphemeris: asteroid_ephemeris.json not found"
+		qInfo() << "ExtendedEphemeris: asteroid_elements.json not found"
 		        << "— asteroids using standard single-epoch orbits.";
 }
 
@@ -4636,7 +4638,7 @@ void SolarSystem::enableSurvey(const HipsSurveyP& colors, const HipsSurveyP& nor
 	pl->setSurvey(colors, normals, horizons);
 }
 
-// Extended asteroid ephemeris loader
+// Extended asteroid elements loader
 
 bool SolarSystem::loadExtendedAsteroidEphemeris(const QString& filePath)
 {
@@ -4660,7 +4662,7 @@ bool SolarSystem::loadExtendedAsteroidEphemeris(const QString& filePath)
 
 	const QJsonObject root = doc.object();
 
-	if (root.value("format").toString() != QLatin1String("stellarium_asteroid_ephemeris"))
+	if (root.value("format").toString() != QLatin1String("stellarium_asteroid_elements"))
 	{
 		qWarning() << "ExtendedEphemeris: unrecognised format in" << filePath;
 		return false;
