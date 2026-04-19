@@ -9,18 +9,18 @@
 # Tomas Marklund, 2025
 # Ruslan Kabatsaev, 2025
 # spcsmrf <spcsmrf@gmail.com>, 2026
-# Daniel Nylander <po@danielnylander.se>, 2026
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2026
 # Karl Birgersson <birgerssonkarl@outlook.com>, 2026
+# Daniel Nylander <po@danielnylander.se>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-04-14 18:33+0700\n"
+"POT-Creation-Date: 2026-04-14 23:00+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2026\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9598,11 +9598,11 @@ msgstr "1 saros"
 msgid "custom interval"
 msgstr "anpassat intervall"
 
-#: src/gui/AstroCalcDialog.cpp:5199 src/ui_astroCalcCustomStepsDialog.h:210
+#: src/gui/AstroCalcDialog.cpp:5199 src/ui_astroCalcCustomStepsDialog.h:212
 msgid "Sun at preset altitude"
 msgstr "Solen vid fördefinierad höjd"
 
-#: src/gui/AstroCalcDialog.cpp:5200 src/ui_astroCalcCustomStepsDialog.h:214
+#: src/gui/AstroCalcDialog.cpp:5200 src/ui_astroCalcCustomStepsDialog.h:215
 msgid "Opposition of planet"
 msgstr "Planets opposition"
 
@@ -15035,7 +15035,7 @@ msgstr "Välj landskap automatiskt"
 msgid "New Location"
 msgstr "Ny plats"
 
-#: src/ui_locationDialogGui.h:448 src/ui_astroCalcCustomStepsDialog.h:215
+#: src/ui_locationDialogGui.h:448 src/ui_astroCalcCustomStepsDialog.h:216
 msgid "Planet:"
 msgstr "Planet:"
 
@@ -18387,11 +18387,11 @@ msgstr "Minuter"
 msgid "to the next"
 msgstr "under de nästkommande"
 
-#: src/ui_astroCalcDialog.h:2432 src/ui_astroCalcCustomStepsDialog.h:208
+#: src/ui_astroCalcDialog.h:2432 src/ui_astroCalcCustomStepsDialog.h:210
 msgid "Time step:"
 msgstr "Tidssteg:"
 
-#: src/ui_astroCalcDialog.h:2434 src/ui_astroCalcCustomStepsDialog.h:207
+#: src/ui_astroCalcDialog.h:2434 src/ui_astroCalcCustomStepsDialog.h:209
 msgid "Custom time step for ephemeris visualization"
 msgstr "Anpassat tidssteg för visualisering av efemerider"
 
@@ -18805,24 +18805,20 @@ msgstr "Sek"
 msgid "Smart format"
 msgstr "Smart format"
 
-#: src/ui_astroCalcCustomStepsDialog.h:206
+#: src/ui_astroCalcCustomStepsDialog.h:208
 msgid "Custom interval"
 msgstr "Anpassat intervall"
 
-#: src/ui_astroCalcCustomStepsDialog.h:209
+#: src/ui_astroCalcCustomStepsDialog.h:211
 msgid "Unit of measurement:"
 msgstr "Mätenhet:"
 
-#: src/ui_astroCalcCustomStepsDialog.h:211
+#: src/ui_astroCalcCustomStepsDialog.h:213
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1210
 msgid "Solar altitude:"
 msgstr "Solhöjd:"
 
-#: src/ui_astroCalcCustomStepsDialog.h:212
-msgid "°"
-msgstr "°"
-
-#: src/ui_astroCalcCustomStepsDialog.h:213
+#: src/ui_astroCalcCustomStepsDialog.h:214
 msgid "Twilight:"
 msgstr "Tidpunkt:"
 
@@ -32961,12 +32957,12 @@ msgstr ""
 "eller källor som hjälpt dig?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:848
-msgid "start Time"
-msgstr "starttid"
+msgid "Start Time"
+msgstr "Starttid"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:849
-msgid "end Time"
-msgstr "sluttid"
+msgid "End Time"
+msgstr "Sluttid"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:852
 msgid "Number of digitized polygons:"
