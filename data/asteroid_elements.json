@@ -2,7 +2,7 @@
   "format": "stellarium_asteroid_elements",
   "version": 1.0,
   "generator": "fetch_asteroid_elements.py (Horizons)",
-  "generated": "2026-04-19T16:42:17.673385+00:00",
+  "generated": "2026-04-20T18:24:42.435395+00:00",
   "center_year": 1950.0,
   "span_years": 300.0,
   "asteroids": [
@@ -11,7 +11,7 @@
       "name": "1 Ceres (A801 AA)",
       "absolute_magnitude": 3.35,
       "slope_parameter": 0.12,
-      "epochs": [
+      "elements": [
         {
           "epoch_jde": 2378495.0,
           "semi_major_axis": 2.765628318825633,
@@ -3619,7 +3619,7 @@
       "name": "2 Pallas (A802 FA)",
       "absolute_magnitude": 4.11,
       "slope_parameter": 0.11,
-      "epochs": [
+      "elements": [
         {
           "epoch_jde": 2378495.0,
           "semi_major_axis": 2.768410839036767,
@@ -7227,7 +7227,7 @@
       "name": "3 Juno (A804 RA)",
       "absolute_magnitude": 5.19,
       "slope_parameter": 0.32,
-      "epochs": [
+      "elements": [
         {
           "epoch_jde": 2378495.0,
           "semi_major_axis": 2.669979630048048,
@@ -10835,7 +10835,7 @@
       "name": "4 Vesta (A807 FA)",
       "absolute_magnitude": 3.25,
       "slope_parameter": 0.32,
-      "epochs": [
+      "elements": [
         {
           "epoch_jde": 2378495.0,
           "semi_major_axis": 2.361195092956714,
