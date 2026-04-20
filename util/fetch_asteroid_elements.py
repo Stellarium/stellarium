@@ -469,7 +469,7 @@ def main():
             "name":               info["name"],
             "absolute_magnitude": info["absolute_magnitude"],
             "slope_parameter":    info["slope_parameter"],
-            "epochs":             epoch_data,
+            "elements":             epoch_data,
         }
         output["asteroids"].append(entry)
         success_count += 1
