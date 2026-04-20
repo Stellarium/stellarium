@@ -780,9 +780,9 @@ void SolarSystem::loadPlanets()
 	    "data/asteroid_elements.json",
 	    static_cast<StelFileMgr::Flags>(StelFileMgr::File));
 	if (!ephemFiles.isEmpty())
-		loadExtendedAsteroidEphemeris(ephemFiles.first()); // first = user dir (highest priority)
+		loadExtendedAsteroidElements(ephemFiles.first()); // first = user dir (highest priority)
 	else
-		qInfo() << "ExtendedEphemeris: asteroid_elements.json not found"
+		qInfo() << "ExtendedElements: asteroid_elements.json not found"
 		        << "— asteroids using standard single-epoch orbits.";
 }
 
@@ -4640,12 +4640,12 @@ void SolarSystem::enableSurvey(const HipsSurveyP& colors, const HipsSurveyP& nor
 
 // Extended asteroid elements loader
 
-bool SolarSystem::loadExtendedAsteroidEphemeris(const QString& filePath)
+bool SolarSystem::loadExtendedAsteroidElements(const QString& filePath)
 {
 	QFile file(filePath);
 	if (!file.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "ExtendedEphemeris: cannot open" << filePath;
+		qWarning() << "ExtendedElements: cannot open" << filePath;
 		return false;
 	}
 
@@ -4655,7 +4655,7 @@ bool SolarSystem::loadExtendedAsteroidEphemeris(const QString& filePath)
 
 	if (doc.isNull())
 	{
-		qWarning() << "ExtendedEphemeris: JSON parse error in"
+		qWarning() << "ExtendedElements: JSON parse error in"
 		           << filePath << ":" << parseError.errorString();
 		return false;
 	}
@@ -4664,19 +4664,19 @@ bool SolarSystem::loadExtendedAsteroidEphemeris(const QString& filePath)
 
 	if (root.value("format").toString() != QLatin1String("stellarium_asteroid_elements"))
 	{
-		qWarning() << "ExtendedEphemeris: unrecognised format in" << filePath;
+		qWarning() << "ExtendedElements: unrecognised format in" << filePath;
 		return false;
 	}
 	if (root.value("version").toInt() != 1)
 	{
-		qWarning() << "ExtendedEphemeris: unsupported version in" << filePath;
+		qWarning() << "ExtendedElements: unsupported version in" << filePath;
 		return false;
 	}
 
 	const QJsonArray asteroids = root.value("asteroids").toArray();
 	if (asteroids.isEmpty())
 	{
-		qWarning() << "ExtendedEphemeris: no asteroids array in" << filePath;
+		qWarning() << "ExtendedElements: no asteroids array in" << filePath;
 		return false;
 	}
 
@@ -4749,7 +4749,7 @@ bool SolarSystem::loadExtendedAsteroidEphemeris(const QString& filePath)
 		++loaded;
 	}
 
-	qInfo() << "ExtendedEphemeris: loaded epoch tables for"
+	qInfo() << "ExtendedElements: loaded epoch tables for"
 	        << loaded << "asteroids from"
 	        << QDir::toNativeSeparators(filePath)
 	        << "(" << skipped << "not matched in ssystem_minor.ini)";

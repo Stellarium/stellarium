@@ -435,14 +435,24 @@ void MinorPlanet::updateEpochOrbit(double jde, bool force)
 	lastEpochUpdateJDE = jde;
 	const int n = epochElements.size();
 
-	// Find the snapshot whose epoch is nearest to jde.
-	// We do a simple linear scan.
-	int best = 0;
-	double bestDist = std::fabs(jde - epochElements[0].epochJDE);
-	for (int i = 1; i < n; ++i)
+	// Find the snapshot whose epoch is nearest to jde using binary search.
+	// std::lower_bound finds the first element >= jde in O(log n), then we
+	// check whether the element before it is closer.
+	const auto it = std::lower_bound(
+		epochElements.begin(), epochElements.end(), jde,
+		[](const AsteroidEpochElements& e, double val) { return e.epochJDE < val; });
+	int best;
+	if (it == epochElements.end())
+		best = n - 1; // jde is beyond the last epoch
+	else if (it == epochElements.begin())
+		best = 0;     // jde is before or at the first epoch
+	else
 	{
-		const double d = std::fabs(jde - epochElements[i].epochJDE);
-		if (d < bestDist) { bestDist = d; best = i; }
+		// it points to the first epoch >= jde; check if the one before is closer
+		const auto prev = std::prev(it);
+		best = (jde - prev->epochJDE <= it->epochJDE - jde)
+		       ? static_cast<int>(prev - epochElements.begin())
+		       : static_cast<int>(it  - epochElements.begin());
 	}
 
 	const double tableStart   = epochElements.first().epochJDE;

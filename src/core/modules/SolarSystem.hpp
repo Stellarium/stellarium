@@ -1173,7 +1173,7 @@ private:
 	//! ephemeris pack (asteroid_elements.json).  Called at the end of
 	//! loadPlanets() if the file exists in the user or installation data dir.
 	//! @returns true if at least one asteroid received an epoch table.
-	bool loadExtendedAsteroidEphemeris(const QString& filePath);
+	bool loadExtendedAsteroidElements(const QString& filePath);
 
 	Vec3f getEphemerisMarkerColor(int index) const;
 
