@@ -449,9 +449,9 @@ private:
 class StelGui : public StelGuiBase
 {
 public:
-	StelGui(): dummyInfoTextFilter(StelObject::InfoStringGroup::None), visible(false) {;}
+	StelGui(): dummyInfoTextFilter(StelObject::InfoStringGroupFlags::None), visible(false) {;}
 	~StelGui() {;}
-	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget) {;}
+	virtual void init(QGraphicsWidget* topLevelGraphicsWidget) {;}
 	virtual void updateI18n() {;}
 	virtual void setStelStyle(const QString& section) {;}
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {dummyInfoTextFilter=aflags;}

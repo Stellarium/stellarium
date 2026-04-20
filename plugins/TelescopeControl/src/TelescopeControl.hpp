@@ -438,9 +438,10 @@ private:
 	//! Fontsize used to draw telescope text labels
 	int labelFontSize;
 
+#ifndef NO_GUI
 	// Toolbar button to toggle the Slew window
 	StelButton* toolbarButton;
-
+#endif
 	//! Telescope reticle texture
 	StelTextureSP reticleTexture;
 	//! Telescope selection marker texture
@@ -465,10 +466,10 @@ private:
 	bool useServerExecutables;
 	QString serverExecutablesDirectoryPath;
 
-	// GUI
+#ifndef NO_GUI
 	TelescopeDialog* telescopeDialog;
 	SlewDialog* slewDialog;
-
+#endif
 	//! Used internally. Checks if the argument is a valid slot number.
 	static bool isValidSlotNumber(int slot);
 	static bool isValidPort(uint port);

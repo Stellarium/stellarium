@@ -16,24 +16,32 @@ SET(MeteorShowers_SRCS
      MeteorShowersMgr.cpp
      MeteorObj.hpp
      MeteorObj.cpp
+     translations.h
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND MeteorShowers_SRCS
      gui/MSConfigDialog.hpp
      gui/MSConfigDialog.cpp
      gui/MSSearchDialog.hpp
      gui/MSSearchDialog.cpp
-     translations.h
 )
 
 SET(MeteorShowersDialog_UIS
      gui/MSConfigDialog.ui
      gui/MSSearchDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 SET(MeteorShowers_RES ../resources/MeteorShower.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(MeteorShowersDialog_UIS_H ${MeteorShowersDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(MeteorShowersDialog_UIS_H ${MeteorShowersDialog_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(MeteorShowers_RES_CXX ${MeteorShowers_RES})
 ELSE()
-     QT_WRAP_UI(MeteorShowersDialog_UIS_H ${MeteorShowersDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(MeteorShowersDialog_UIS_H ${MeteorShowersDialog_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(MeteorShowers_RES_CXX ${MeteorShowers_RES})
 ENDIF()
 

@@ -24,7 +24,9 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "RemoteControl.hpp"
+#ifndef NO_GUI
 #include "RemoteControlDialog.hpp"
+#endif
 #include "RequestHandler.hpp"
 #include "StelTranslator.hpp"
 
@@ -78,7 +80,9 @@ RemoteControl::RemoteControl()
 {
 	setObjectName("RemoteControl");
 
+#ifndef NO_GUI
 	configDialog = new RemoteControlDialog();
+#endif
 
 	//needed to ensure clean shutdown of server before threading errors can occur
 	connect(&StelApp::getInstance(), &StelApp::aboutToQuit, this, &RemoteControl::stopServer, Qt::DirectConnection);
@@ -86,7 +90,9 @@ RemoteControl::RemoteControl()
 
 RemoteControl::~RemoteControl()
 {
+#ifndef NO_GUI
 	delete configDialog;
+#endif
 	if(httpListener)
 	{
 		//we manually delete the listener here to make sure
@@ -98,9 +104,13 @@ RemoteControl::~RemoteControl()
 
 bool RemoteControl::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 
 //! Determine which "layer" the plugin's drawing will happen on.
@@ -143,12 +153,13 @@ void RemoteControl::init()
 	requestHandler = new RequestHandler(settings, this);
 
 	StelApp& app = StelApp::getInstance();
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	// Create action for enable/disable & hook up signals	
 	addAction("actionShow_Remote_Control",        N_("Remote Control"), N_("Remote control"), "enabled");
-	addAction("actionShow_Remote_Control_dialog", N_("Remote Control"), N_("Remote control config"), configDialog, "visible");
 
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+#ifndef NO_GUI
+	addAction("actionShow_Remote_Control_dialog", N_("Remote Control"), N_("Remote control config"), configDialog, "visible");
 
 	// Add a toolbar button. Right-click opens the config.
 	try
@@ -170,7 +181,7 @@ void RemoteControl::init()
 	{
 		qWarning() << "Unable to create toolbar button for RemoteControl plugin: " << e.what();
 	}
-
+#endif
 	if(autoStart)
 		setFlagEnabled(true);
 }

@@ -10,6 +10,9 @@ LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 SET(MosaicCamera_SRCS
     MosaicCamera.hpp
     MosaicCamera.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND MosaicCamera_SRCS
     gui/MosaicCameraDialog.hpp
     gui/MosaicCameraDialog.cpp
 )
@@ -17,14 +20,19 @@ SET(MosaicCamera_SRCS
 SET(MosaicCamera_UIS
     gui/mosaicCameraDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 ################# compiles resources files ############
 SET(MosaicCamera_RES ../resources/MosaicCamera.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-    QT5_WRAP_UI(MosaicCamera_UIS_H ${MosaicCamera_UIS})
+    IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+        QT5_WRAP_UI(MosaicCamera_UIS_H ${MosaicCamera_UIS})
+    ENDIF()
     QT5_ADD_RESOURCES(MosaicCamera_RES_CXX ${MosaicCamera_RES})
 ELSE()
-    QT_WRAP_UI(MosaicCamera_UIS_H ${MosaicCamera_UIS})
+    IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+        QT_WRAP_UI(MosaicCamera_UIS_H ${MosaicCamera_UIS})
+    ENDIF()
     QT_ADD_RESOURCES(MosaicCamera_RES_CXX ${MosaicCamera_RES})
 ENDIF()
 

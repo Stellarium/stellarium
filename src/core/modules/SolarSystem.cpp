@@ -49,7 +49,10 @@
 #include "TrailGroup.hpp"
 #include "StelMovementMgr.hpp"
 
+#ifndef NO_GUI
 #include "AstroCalcDialog.hpp"
+#endif
+
 #include "StelObserver.hpp"
 
 #include <algorithm>
@@ -137,6 +140,8 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisMarsMarkerColor(Vec3f(1.0f, 0.0f, 0.0f))
 	, ephemerisJupiterMarkerColor(Vec3f(0.3f, 1.0f, 1.0f))
 	, ephemerisSaturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
+        , ephemerisUranusMarkerColor(Vec3f(0.2f, 0.5f, 0.3f))
+        , ephemerisNeptuneMarkerColor(Vec3f(0.2f, 0.3f, 0.5f))
 	, allTrails(Q_NULLPTR)
 	, conf(StelApp::getInstance().getSettings())
 	, extraThreads(0)
@@ -340,14 +345,16 @@ void SolarSystem::init()
 	setFlagEphemerisFirstOfMonthOnly(conf->value("astrocalc/flag_ephemeris_first_of_month", false).toBool());
 	setFlagEphemerisLabelAntiClutter(conf->value("astrocalc/flag_ephemeris_anticlutter", false).toBool());
 	setEphemerisLabelAntiClutterPx(conf->value("astrocalc/ephemeris_anticlutter_px", 20).toInt());
-	setEphemerisGenericMarkerColor( Vec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
-	setEphemerisSecondaryMarkerColor( Vec3f(conf->value("color/ephemeris_secondary_marker_color", "0.7,0.7,1.0").toString()));
-	setEphemerisSelectedMarkerColor(Vec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
-	setEphemerisMercuryMarkerColor( Vec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
-	setEphemerisVenusMarkerColor(   Vec3f(conf->value("color/ephemeris_venus_marker_color", "1.0,1.0,1.0").toString()));
-	setEphemerisMarsMarkerColor(    Vec3f(conf->value("color/ephemeris_mars_marker_color", "1.0,0.0,0.0").toString()));
-	setEphemerisJupiterMarkerColor( Vec3f(conf->value("color/ephemeris_jupiter_marker_color", "0.3,1.0,1.0").toString()));
-	setEphemerisSaturnMarkerColor(  Vec3f(conf->value("color/ephemeris_saturn_marker_color", "0.0,1.0,0.0").toString()));
+	setEphemerisGenericMarkerColor(  Vec3f(conf->value("color/ephemeris_generic_marker_color",   "1.0,1.0,0.0").toString()));
+	setEphemerisSecondaryMarkerColor(Vec3f(conf->value("color/ephemeris_secondary_marker_color", "0.7,0.7,1.0").toString()));
+	setEphemerisSelectedMarkerColor( Vec3f(conf->value("color/ephemeris_selected_marker_color",  "1.0,0.7,0.0").toString()));
+	setEphemerisMercuryMarkerColor(  Vec3f(conf->value("color/ephemeris_mercury_marker_color",   "1.0,1.0,0.0").toString()));
+	setEphemerisVenusMarkerColor(    Vec3f(conf->value("color/ephemeris_venus_marker_color",     "1.0,1.0,1.0").toString()));
+	setEphemerisMarsMarkerColor(     Vec3f(conf->value("color/ephemeris_mars_marker_color",      "1.0,0.0,0.0").toString()));
+	setEphemerisJupiterMarkerColor(  Vec3f(conf->value("color/ephemeris_jupiter_marker_color",   "0.3,1.0,1.0").toString()));
+	setEphemerisSaturnMarkerColor(   Vec3f(conf->value("color/ephemeris_saturn_marker_color",    "0.0,1.0,0.0").toString()));
+	setEphemerisUranusMarkerColor(   Vec3f(conf->value("color/ephemeris_uranus_marker_color",    "0.2,0.5,0.3").toString()));
+	setEphemerisNeptuneMarkerColor(  Vec3f(conf->value("color/ephemeris_neptune_marker_color",   "0.2,0.3,0.5").toString()));
 
 	setOrbitsThickness(conf->value("astro/object_orbits_thickness", 1).toInt());
 	setTrailsThickness(conf->value("astro/object_trails_thickness", 1).toInt());
@@ -387,20 +394,21 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
 	addAction("actionShow_Planets_ShowMinorBodyMarkers", displayGroup, N_("Mark minor bodies"), "flagMarkers");
 
+#ifndef NO_GUI
 	// Fill ephemeris dates
-	connect(this, SIGNAL(requestEphemerisVisualization()), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisDataStepChanged(int)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSkipDataChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSkipMarkersChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSmartDatesChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelYearChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelMonthChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelDayChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelHourChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelMinuteChanged(bool)), this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelSecondChanged(bool)), this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(requestEphemerisVisualization()),        this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisDataStepChanged(int)),          this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisSkipDataChanged(bool)),         this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisSkipMarkersChanged(bool)),      this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisSmartDatesChanged(bool)),       this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelYearChanged(bool)),        this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelMonthChanged(bool)),       this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelDayChanged(bool)),         this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelHourChanged(bool)),        this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelMinuteChanged(bool)),      this, SLOT(fillEphemerisDates()));
+	connect(this, SIGNAL(ephemerisLabelSecondChanged(bool)),      this, SLOT(fillEphemerisDates()));
 	connect(this, SIGNAL(ephemerisFirstOfMonthOnlyChanged(bool)), this, SLOT(fillEphemerisDates()));
-
+#endif
 
 	// Create shader program for mass drawing of asteroid markers
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
@@ -525,10 +533,19 @@ void SolarSystem::setTextureForPlanet(const QString& planetName, const QString& 
 
 void SolarSystem::recreateTrails()
 {
+	const QMap<QString, Vec3f>colorMap={
+		{"Mercury", ephemerisMercuryMarkerColor},
+		{"Venus",   ephemerisVenusMarkerColor},
+		{"Mars",    ephemerisMarsMarkerColor},
+		{"Jupiter", ephemerisJupiterMarkerColor},
+		{"Saturn",  ephemerisSaturnMarkerColor},
+		{"Uranus",  ephemerisUranusMarkerColor},
+		{"Neptune", ephemerisNeptuneMarkerColor},
+	};
 	// Create a trail group containing all the planets orbiting the sun (not including satellites)
 	if (allTrails!=Q_NULLPTR)
 		delete allTrails;
-	allTrails = new TrailGroup(maxTrailTimeExtent * 365.f, maxTrailPoints);
+	allTrails = new TrailGroup(maxTrailTimeExtent * 365.f, maxTrailTimeExtent * maxTrailPoints);
 
 	unsigned long cnt = static_cast<unsigned long>(selectedSSO.size());
 	if (cnt>0 && getFlagIsolatedTrails())
@@ -539,7 +556,10 @@ void SolarSystem::recreateTrails()
 		for (unsigned long i=0; i<limit; i++)
 		{
 			if (selectedSSO[cnt - i - 1]->getPlanetType() != Planet::isObserver)
-				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(selectedSSO[cnt - i - 1]), &trailsColor);
+			{
+				Vec3f trailColor=colorMap.value(selectedSSO[cnt - i - 1]->getEnglishName(), trailsColor);
+				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(selectedSSO[cnt - i - 1]), &trailColor);
+			}
 		}
 	}
 	else
@@ -547,7 +567,10 @@ void SolarSystem::recreateTrails()
 		for (const auto& p : std::as_const(getSun()->satellites))
 		{
 			if (p->getPlanetType() != Planet::isObserver)
-				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailsColor);
+			{
+				Vec3f trailColor=colorMap.value(p->getEnglishName(), trailsColor);
+				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailColor);
+			}
 		}
 		// Add moons of current planet
 		StelCore *core=StelApp::getInstance().getCore();
@@ -1924,8 +1947,10 @@ struct biggerDistance : public StelUtils::binary_function<PlanetP, PlanetP, bool
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core)
 {
+#ifndef NO_GUI
 	// AstroCalcDialog
 	drawEphemerisItems(core);
+#endif
 
 	if (!flagShow)
 		return;
@@ -2040,6 +2065,7 @@ bool SolarSystem::drawAsteroidMarker(StelCore* core, StelPainter* sPainter, cons
 	return true;
 }
 
+#ifndef NO_GUI
 void SolarSystem::drawEphemerisItems(const StelCore* core)
 {
 	if (flagShow || (!flagShow && getFlagEphemerisAlwaysOn()))
@@ -2417,6 +2443,7 @@ void SolarSystem::fillEphemerisDates()
 		}
 	}
 }
+#endif
 
 PlanetP SolarSystem::searchByEnglishName(const QString &planetEnglishName) const
 {
@@ -2967,7 +2994,7 @@ QVector<QPair<QString,StelObjectP>> SolarSystem::listAllObjects(bool inEnglish) 
 			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 			c = mp->getExtraDesignations();
 		}
-		for (const auto& name : c)
+		for (const auto& name : std::as_const(c))
 			map[name] = StelObjectP(p);
 	}
 	map.remove("");
@@ -3028,7 +3055,7 @@ QVector<QPair<QString,StelObjectP>> SolarSystem::listAllObjectsByType(const QStr
 				QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 				c = mp->getExtraDesignations();
 			}
-			for (const auto& name : c)
+			for (const auto& name : std::as_const(c))
 				map[name] = StelObjectP(p);
 		}
 	}
@@ -3516,6 +3543,36 @@ void SolarSystem::setEphemerisSaturnMarkerColor(const Vec3f& color)
 Vec3f SolarSystem::getEphemerisSaturnMarkerColor() const
 {
 	return ephemerisSaturnMarkerColor;
+}
+
+void SolarSystem::setEphemerisUranusMarkerColor(const Vec3f& color)
+{
+	if (color!=ephemerisUranusMarkerColor)
+	{
+		ephemerisUranusMarkerColor = color;
+		StelApp::immediateSave("color/ephemeris_uranus_marker_color", color.toStr());
+		emit ephemerisUranusMarkerColorChanged(color);
+	}
+}
+
+Vec3f SolarSystem::getEphemerisUranusMarkerColor() const
+{
+	return ephemerisUranusMarkerColor;
+}
+
+void SolarSystem::setEphemerisNeptuneMarkerColor(const Vec3f& color)
+{
+	if (color!=ephemerisNeptuneMarkerColor)
+	{
+		ephemerisNeptuneMarkerColor = color;
+		StelApp::immediateSave("color/ephemeris_neptune_marker_color", color.toStr());
+		emit ephemerisNeptuneMarkerColorChanged(color);
+	}
+}
+
+Vec3f SolarSystem::getEphemerisNeptuneMarkerColor() const
+{
+	return ephemerisNeptuneMarkerColor;
 }
 
 void SolarSystem::setFlagIsolatedTrails(bool b)

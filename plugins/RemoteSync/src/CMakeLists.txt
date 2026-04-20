@@ -18,6 +18,9 @@ SET(RemoteSync_SRCS
   SyncServerEventSenders.cpp
   SyncServerHandlers.hpp
   SyncServerHandlers.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND RemoteSync_SRCS
   gui/RemoteSyncDialog.hpp
   gui/RemoteSyncDialog.cpp
 )
@@ -25,15 +28,20 @@ SET(RemoteSync_SRCS
 SET(RemoteSync_UIS
   gui/remoteSyncDialog.ui
 )
+ENDIF(STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 ################# compiles resources files ############
 SET(RemoteSync_RES ../RemoteSync.qrc)
 
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
 ELSE()
-     QT_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
 ENDIF()
 

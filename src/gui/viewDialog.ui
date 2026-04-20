@@ -1159,6 +1159,13 @@
                 </widget>
                </item>
                <item>
+                <widget class="QLabel" name="trailsThicknessLabel">
+                 <property name="text">
+                  <string>Thickness:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QSpinBox" name="planetTrailsThicknessSpinBox">
                  <property name="toolTip">
                   <string>Trails thickness in pixels</string>
@@ -1362,10 +1369,39 @@
                   <number>1</number>
                  </property>
                  <property name="maximum">
-                  <number>5</number>
+                  <number>9</number>
                  </property>
                  <property name="value">
                   <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="trailsDurationLabel">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Duration (years):</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="trailsDurationSpinBox">
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>250</number>
                  </property>
                 </widget>
                </item>
@@ -6704,12 +6740,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

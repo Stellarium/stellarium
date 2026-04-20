@@ -22,10 +22,10 @@
 #define STOREDVIEWDIALOG_HPP
 
 #include "StelDialog.hpp"
-#include "ui_storedViewDialog.h"
 
 class Scenery3d;
 class StoredViewModel;
+class Ui_storedViewDialogForm;
 
 class StoredViewDialog : public StelDialog
 {

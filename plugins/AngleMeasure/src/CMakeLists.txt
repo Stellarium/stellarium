@@ -4,6 +4,9 @@ LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 SET(AngleMeasure_SRCS
      AngleMeasure.hpp
      AngleMeasure.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND AngleMeasure_SRCS
      gui/AngleMeasureDialog.hpp
      gui/AngleMeasureDialog.cpp
 )
@@ -11,14 +14,19 @@ SET(AngleMeasure_SRCS
 SET(AngleMeasure_UIS
      gui/angleMeasureDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 ################# compiles resources files ############
 SET(AngleMeasure_RES ../AngleMeasure.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(AngleMeasure_UIS_H ${AngleMeasure_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(AngleMeasure_UIS_H ${AngleMeasure_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(AngleMeasure_RES_CXX ${AngleMeasure_RES})
 ELSE()
-     QT_WRAP_UI(AngleMeasure_UIS_H ${AngleMeasure_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(AngleMeasure_UIS_H ${AngleMeasure_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(AngleMeasure_RES_CXX ${AngleMeasure_RES})
 ENDIF()
 

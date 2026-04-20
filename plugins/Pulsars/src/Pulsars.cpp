@@ -100,7 +100,9 @@ Pulsars::Pulsars()
 	, progressBar(Q_NULLPTR)
 {
 	setObjectName("Pulsars");
+#ifndef NO_GUI
 	configDialog = new PulsarsDialog();
+#endif
 	conf = StelApp::getInstance().getSettings();
 	setFontSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -111,7 +113,9 @@ Pulsars::Pulsars()
 */
 Pulsars::~Pulsars()
 {
+#ifndef NO_GUI
 	delete configDialog;
+#endif
 
 	if (GlowIcon)
 		delete GlowIcon;
@@ -170,7 +174,9 @@ void Pulsars::init()
 		// key bindings and other actions
 		QString section = N_("Pulsars");
 		addAction("actionShow_Pulsars", section, N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
+#ifndef NO_GUI
 		addAction("actionShow_Pulsars_dialog", section, N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
+#endif
 		// no default hotkeys
 		addAction("actionShow_Pulsars_Distribution", section, N_("Enable display of distribution for pulsars"), "flagDisplayMode");
 		addAction("actionShow_Pulsars_Glitch", section, N_("Use separate color for pulsars with glitches"), "flagGlitchMode");
@@ -578,9 +584,13 @@ PulsarP Pulsars::getByID(const QString& id) const
 
 bool Pulsars::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 
 void Pulsars::restoreDefaults(void)
@@ -818,6 +828,7 @@ void Pulsars::upgradeConfigIni(void)
 // Define whether the button toggling pulsars should be visible
 void Pulsars::setFlagShowPulsarsButton(bool b)
 {
+#ifndef NO_GUI
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=Q_NULLPTR)
 	{
@@ -831,6 +842,7 @@ void Pulsars::setFlagShowPulsarsButton(bool b)
 			gui->getButtonBar()->hideButton("actionShow_Pulsars");
 		}
 	}
+#endif
 	flagShowPulsarsButton = b;
 }
 

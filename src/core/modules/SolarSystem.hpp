@@ -142,7 +142,7 @@ class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 	Q_PROPERTY(Vec3f saturnOrbitColor		READ getSaturnOrbitColor		WRITE setSaturnOrbitColor		NOTIFY saturnOrbitColorChanged)
 	Q_PROPERTY(Vec3f uranusOrbitColor		READ getUranusOrbitColor		WRITE setUranusOrbitColor		NOTIFY uranusOrbitColorChanged)
 	Q_PROPERTY(Vec3f neptuneOrbitColor		READ getNeptuneOrbitColor		WRITE setNeptuneOrbitColor		NOTIFY neptuneOrbitColorChanged)
-	// Ephemeris-related properties
+	// Ephemeris-related properties. The colors are used in AstroCalc, but also for Trails.
 	Q_PROPERTY(Vec3f ephemerisGenericMarkerColor	READ getEphemerisGenericMarkerColor	WRITE setEphemerisGenericMarkerColor	NOTIFY ephemerisGenericMarkerColorChanged)
 	Q_PROPERTY(Vec3f ephemerisSecondaryMarkerColor	READ getEphemerisSecondaryMarkerColor	WRITE setEphemerisSecondaryMarkerColor	NOTIFY ephemerisSecondaryMarkerColorChanged)
 	Q_PROPERTY(Vec3f ephemerisSelectedMarkerColor	READ getEphemerisSelectedMarkerColor	WRITE setEphemerisSelectedMarkerColor	NOTIFY ephemerisSelectedMarkerColorChanged)
@@ -151,6 +151,8 @@ class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 	Q_PROPERTY(Vec3f ephemerisMarsMarkerColor	READ getEphemerisMarsMarkerColor	WRITE setEphemerisMarsMarkerColor	NOTIFY ephemerisMarsMarkerColorChanged)
 	Q_PROPERTY(Vec3f ephemerisJupiterMarkerColor	READ getEphemerisJupiterMarkerColor	WRITE setEphemerisJupiterMarkerColor	NOTIFY ephemerisJupiterMarkerColorChanged)
 	Q_PROPERTY(Vec3f ephemerisSaturnMarkerColor	READ getEphemerisSaturnMarkerColor	WRITE setEphemerisSaturnMarkerColor	NOTIFY ephemerisSaturnMarkerColorChanged)
+	Q_PROPERTY(Vec3f ephemerisUranusMarkerColor	READ getEphemerisUranusMarkerColor	WRITE setEphemerisUranusMarkerColor	NOTIFY ephemerisUranusMarkerColorChanged)
+	Q_PROPERTY(Vec3f ephemerisNeptuneMarkerColor	READ getEphemerisNeptuneMarkerColor	WRITE setEphemerisNeptuneMarkerColor	NOTIFY ephemerisNeptuneMarkerColorChanged)
 	// Color style
 	Q_PROPERTY(QString orbitColorStyle		READ getOrbitColorStyle			WRITE setOrbitColorStyle		NOTIFY orbitColorStyleChanged)
 	Q_PROPERTY(QString apparentMagnitudeAlgorithmOnEarth	READ getApparentMagnitudeAlgorithmOnEarth	WRITE setApparentMagnitudeAlgorithmOnEarth	NOTIFY apparentMagnitudeAlgorithmOnEarthChanged)
@@ -915,6 +917,8 @@ signals:
 	void ephemerisMarsMarkerColorChanged(const Vec3f & color);
 	void ephemerisJupiterMarkerColorChanged(const Vec3f & color);
 	void ephemerisSaturnMarkerColorChanged(const Vec3f & color);
+	void ephemerisUranusMarkerColorChanged(const Vec3f & color);
+	void ephemerisNeptuneMarkerColorChanged(const Vec3f & color);
 
 	void orbitColorStyleChanged(const QString &style);
 	void apparentMagnitudeAlgorithmOnEarthChanged(const QString &algorithm);
@@ -1131,8 +1135,16 @@ private slots:
 	void setEphemerisSaturnMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisSaturnMarkerColor(void) const;
 
+	void setEphemerisUranusMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisUranusMarkerColor(void) const;
+
+	void setEphemerisNeptuneMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisNeptuneMarkerColor(void) const;
+
+#ifndef NO_GUI
 	//! Taking the JD dates for each ephemeride and preparation the human readable dates according to the settings for dates
 	void fillEphemerisDates();
+#endif
 
 	//! When some aspect of orbit drawing changes, update their configuration
 	void reconfigureOrbits();
@@ -1151,14 +1163,16 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
+#ifndef NO_GUI
 	//! Draw ephemeris lines and markers
 	void drawEphemerisItems(const StelCore* core);
 
-	//! Draw a nice markers for ephemeris of objects.
+	//! Draw nice markers for ephemeris of objects.
 	void drawEphemerisMarkers(const StelCore* core);
 
-	//! Draw a line, who connected markers for ephemeris of objects.
+	//! Draw a line which connects markers for ephemeris of objects.
 	void drawEphemerisLine(const StelCore* core);
+#endif
 
 	//! Load planet data from the Solar System configuration files.
 	//! This function attempts to load every possible instance of the
@@ -1238,7 +1252,7 @@ private:
 	bool flagIsolatedTrails;
 	int numberIsolatedTrails;
 	int maxTrailPoints;                         // limit trails to a manageable size.
-	int maxTrailTimeExtent;
+	int maxTrailTimeExtent;                     // max age of trail points, years
 	int trailsThickness;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbits;				// Show orbits of the major planets, regardless of other orbit settings
@@ -1276,11 +1290,13 @@ private:
 	Vec3f ephemerisMarsMarkerColor;
 	Vec3f ephemerisJupiterMarkerColor;
 	Vec3f ephemerisSaturnMarkerColor;
+	Vec3f ephemerisUranusMarkerColor;
+	Vec3f ephemerisNeptuneMarkerColor;
 
 	class TrailGroup* allTrails;
 	QSettings* conf;
 	LinearFader trailFader;
-	Vec3f trailsColor;
+	Vec3f trailsColor;                           // Generic trail color for non-planets
 	Vec3f pointerColor;
 
 	static const QMap<Planet::ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;

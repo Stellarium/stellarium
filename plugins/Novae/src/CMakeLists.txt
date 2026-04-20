@@ -12,6 +12,10 @@ SET(Novae_SRCS
      Novae.cpp
      Nova.hpp
      Nova.cpp
+)
+
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND Novae_SRCS
      gui/NovaeDialog.hpp
      gui/NovaeDialog.cpp
 )
@@ -19,13 +23,18 @@ SET(Novae_SRCS
 SET(NovaeDialog_UIS
      gui/novaeDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 SET(Novae_RES ../resources/Novae.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(NovaeDialog_UIS_H ${NovaeDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(NovaeDialog_UIS_H ${NovaeDialog_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(Novae_RES_CXX ${Novae_RES})
 ELSE()
-     QT_WRAP_UI(NovaeDialog_UIS_H ${NovaeDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(NovaeDialog_UIS_H ${NovaeDialog_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(Novae_RES_CXX ${Novae_RES})
 ENDIF()
 

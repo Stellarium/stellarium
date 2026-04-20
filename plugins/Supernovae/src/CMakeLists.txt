@@ -12,6 +12,10 @@ SET(Supernovae_SRCS
      Supernovae.cpp
      Supernova.hpp
      Supernova.cpp
+)
+
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND Supernovae_SRCS
      gui/SupernovaeDialog.hpp
      gui/SupernovaeDialog.cpp
 )
@@ -19,13 +23,18 @@ SET(Supernovae_SRCS
 SET(SupernovaeDialog_UIS
      gui/supernovaeDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 SET(Supernovae_RES ../resources/Supernovae.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(SupernovaeDialog_UIS_H ${SupernovaeDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(SupernovaeDialog_UIS_H ${SupernovaeDialog_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(Supernovae_RES_CXX ${Supernovae_RES})
 ELSE()
-     QT_WRAP_UI(SupernovaeDialog_UIS_H ${SupernovaeDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(SupernovaeDialog_UIS_H ${SupernovaeDialog_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(Supernovae_RES_CXX ${Supernovae_RES})
 ENDIF()
 

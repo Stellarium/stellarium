@@ -102,7 +102,9 @@ Quasars::Quasars()
 
 {
 	setObjectName("Quasars");
+#ifndef NO_GUI
 	configDialog = new QuasarsDialog();
+#endif
 	conf = StelApp::getInstance().getSettings();
 	setFontSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -113,7 +115,9 @@ Quasars::Quasars()
 */
 Quasars::~Quasars()
 {
+#ifndef NO_GUI
 	delete configDialog;
+#endif
 
 	if (GlowIcon)
 		delete GlowIcon;
@@ -171,7 +175,9 @@ void Quasars::init()
 		// key bindings and other actions
 		QString section = N_("Quasars");
 		addAction("actionShow_Quasars", section, N_("Show quasars"), "quasarsVisible", "Ctrl+Alt+Q");
+#ifndef NO_GUI
 		addAction("actionShow_Quasars_dialog", section, N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
+#endif
 		// no default hotkeys
 		addAction("actionShow_Quasars_Distribution", section, N_("Enable display of distribution for quasars"), "flagDisplayMode");
 		addAction("actionShow_Quasars_Markers", section, N_("Use markers for quasars"), "flagMarkersMode");
@@ -544,9 +550,13 @@ QuasarP Quasars::getByID(const QString& id) const
 
 bool Quasars::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 
 void Quasars::restoreDefaults(void)
@@ -773,6 +783,7 @@ void Quasars::upgradeConfigIni(void)
 // Define whether the button toggling quasars should be visible
 void Quasars::setFlagShowQuasarsButton(bool b)
 {
+#ifndef NO_GUI
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=Q_NULLPTR)
 	{
@@ -786,6 +797,7 @@ void Quasars::setFlagShowQuasarsButton(bool b)
 			gui->getButtonBar()->hideButton("actionShow_Quasars");
 		}
 	}
+#endif
 	flagShowQuasarsButton = b;
 }
 

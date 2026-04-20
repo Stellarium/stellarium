@@ -1001,11 +1001,13 @@ void StelMainView::init()
 	// The script manager can only be fully initialized after the plugins have loaded.
 	stelApp->initScriptMgr();
 
+#ifndef NO_GUI
 	// Set the global stylesheet, this is only useful for the tooltips.
 	StelGui* sgui = dynamic_cast<StelGui*>(stelApp->getGui());
 	if (sgui!=Q_NULLPTR)
 		setStyleSheet(sgui->getStelStyle().qtStyleSheet);
 	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
+#endif
 
 	// I doubt this will have any effect on framerate, but may cause problems elsewhere?
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
@@ -1784,10 +1786,12 @@ void StelMainView::doScreenshot(void)
 	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 	stelScene->setSceneRect(0, 0, virtImgWidth, virtImgHeight);
 
+#ifndef NO_GUI
 	// push the button bars back to the sides where they belong, and fix root item clipping its children.
 	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, virtImgWidth, virtImgHeight);
 	rootItem->setSize(QSize(virtImgWidth, virtImgHeight));
 	dynamic_cast<StelGui*>(gui)->forceRefreshGui(); // refresh bar position.
+#endif
 
 	stelScene->render(&painter, QRectF(), QRectF(0,0,virtImgWidth,virtImgHeight) , Qt::KeepAspectRatio);
 	painter.end();
@@ -1811,13 +1815,14 @@ void StelMainView::doScreenshot(void)
 	nightModeEffect->setEnabled(nightModeWasEnabled);
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
+#ifndef NO_GUI
 	StelGui* stelGui = dynamic_cast<StelGui*>(gui);
 	if (stelGui)
 	{
 		stelGui->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 		stelGui->forceRefreshGui();
 	}
-
+#endif
 	if (nightModeWasEnabled)
 	{
 		for (int row=0; row<im.height(); ++row)

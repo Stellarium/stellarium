@@ -341,8 +341,10 @@ private:
 
     // the other "main" objects
     S3DRenderer* renderer;
+#ifndef NO_GUI
     Scenery3dDialog* scenery3dDialog;
     StoredViewDialog* storedViewDialog;
+#endif
 
     QSettings* conf;
     QString defaultScenery3dID;

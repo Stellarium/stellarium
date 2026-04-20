@@ -75,12 +75,16 @@ NavStars::NavStars()
 	setObjectName("NavStars");
 	conf = StelApp::getInstance().getSettings();
 	propMgr = StelApp::getInstance().getStelPropertyManager();
+#ifndef NO_GUI
 	mainWindow = new NavStarsWindow();
+#endif
 }
 
 NavStars::~NavStars()
 {
+#ifndef NO_GUI
 	delete mainWindow;
+#endif
 }
 
 double NavStars::getCallOrder(StelModuleActionName actionName) const
@@ -117,12 +121,14 @@ void NavStars::init()
 
 	// key bindings and other actions
 	addAction("actionShow_NavStars",        N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible");
+#ifndef NO_GUI
 	addAction("actionShow_NavStars_dialog", N_("Navigational Stars"), N_("Show settings dialog"),        mainWindow, "visible");
-
+#endif
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setUseDecimalDegrees(bool)));
 	setUseDecimalDegrees(StelApp::getInstance().getFlagShowDecimalDegrees());
 
+#ifndef NO_GUI
 	// Toolbar button
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=Q_NULLPTR)
@@ -140,6 +146,7 @@ void NavStars::init()
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
+#endif
 }
 
 void NavStars::deinit()
@@ -153,12 +160,16 @@ void NavStars::deinit()
 
 bool NavStars::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 	{
 		mainWindow->setVisible(true);
 	}
 
 	return true;
+#endif
 }
 
 void NavStars::draw(StelCore* core)
