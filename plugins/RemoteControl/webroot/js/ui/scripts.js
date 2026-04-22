@@ -60,6 +60,12 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
     
     /** @type {jQuery} Iframe displaying script description */
     var $scriptinfo;
+    
+    /** @type {string|null} Currently active script name */
+    var currentActiveScript = null;
+    
+    /** @type {number} Timer ID for polling script status */
+    var statusPollTimer = null;
 
     // =====================================================================
     // SCRIPT LIST POPULATION
@@ -80,6 +86,11 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
             $.each(data.sort(), function(idx, elem) {
                 $("<option/>").text(elem).val(elem).appendTo($scriptlist);
             });
+            
+            // Re-apply active script highlight after list is populated
+            if (currentActiveScript) {
+                updateActiveScriptIndicators(currentActiveScript);
+            }
         });
     }
 
@@ -198,6 +209,9 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
     function updateActiveScriptIndicators(scriptName) {
         var hasActiveScript = !!scriptName;
         
+        // Store current active script
+        currentActiveScript = scriptName || null;
+        
         // 1. Pulsing border effect on info frame
         if ($scriptinfo && $scriptinfo.length) {
             if (hasActiveScript) {
@@ -246,6 +260,81 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
     }
 
     // =====================================================================
+    // SCRIPT STATUS POLLING
+    // =====================================================================
+    
+    /**
+     * Polls the server for current script status.
+     * This ensures UI stays in sync even if property change events are missed.
+     * Called periodically when a script is running or stopped.
+     */
+    function pollScriptStatus() {
+        $.ajax({
+            url: "/api/scripts/status",
+            method: "GET",
+            dataType: "json",
+            timeout: 3000
+        }).done(function(data) {
+            var scriptName = data.runningScriptId || "";
+            var isRunning = data.scriptIsRunning || false;
+            
+            // Update indicators if state changed
+            if ((isRunning && scriptName !== currentActiveScript) || 
+                (!isRunning && currentActiveScript !== null)) {
+                
+                if (isRunning) {
+                    updateActiveScriptIndicators(scriptName);
+                    // Notify scriptApi to keep it in sync
+                    $(scriptApi).trigger("activeScriptChanged", scriptName);
+                } else {
+                    updateActiveScriptIndicators("");
+                    // Notify scriptApi to keep it in sync
+                    $(scriptApi).trigger("activeScriptChanged", "");
+                }
+            }
+            
+            // Schedule next poll if script is running or we don't have confirmation of stop
+            if (isRunning) {
+                scheduleStatusPoll();
+            } else {
+                // If script is not running, stop polling
+                stopStatusPoll();
+            }
+        }).fail(function() {
+            // On failure, try again in 2 seconds
+            scheduleStatusPoll(2000);
+        });
+    }
+    
+    /**
+     * Schedules the next status poll.
+     * 
+     * @param {number} delay - Delay in milliseconds before next poll (default: 1000)
+     */
+    function scheduleStatusPoll(delay) {
+        stopStatusPoll();
+        statusPollTimer = setTimeout(pollScriptStatus, delay || 1000);
+    }
+    
+    /**
+     * Stops the status polling timer.
+     */
+    function stopStatusPoll() {
+        if (statusPollTimer) {
+            clearTimeout(statusPollTimer);
+            statusPollTimer = null;
+        }
+    }
+    
+    /**
+     * Starts status polling when a script is likely running.
+     * Called after runScript and when activeScriptChanged event is received.
+     */
+    function startStatusPoll() {
+        scheduleStatusPoll(500);
+    }
+
+    // =====================================================================
     // INITIALIZATION OF SCRIPT BUTTONS
     // =====================================================================
 
@@ -287,11 +376,14 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
 
         /**
          * Runs the currently selected script from the list.
+         * Starts status polling to track script completion.
          */
         var runscriptfn = function() {
             var selection = $scriptlist.val();
             if (selection) {
                 scriptApi.runScript(selection);
+                // Start polling to track script status
+                startStatusPoll();
             }
         };
 
@@ -302,14 +394,25 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
             $scriptinfo.attr('src', "/api/scripts/info?html=true&id=" + encodeURIComponent(selection));
 
             // Enable run button only if no script is currently running
-            var hasActiveScript = !!($activescript.text() && $activescript.text() !== rc.tr("-none-"));
+            var hasActiveScript = !!currentActiveScript;
             $bt_runscript.prop('disabled', hasActiveScript);
             
             console.log("selected: " + selection);
         }).dblclick(runscriptfn);
 
         $bt_runscript.click(runscriptfn);
-        $bt_stopscript.click(scriptApi.stopScript);
+        
+        /**
+         * Stops the currently running script.
+         * Updates UI immediately and starts polling to confirm stop.
+         */
+        $bt_stopscript.click(function() {
+            scriptApi.stopScript();
+            // Update UI immediately for responsiveness
+            updateActiveScriptIndicators("");
+            // Start polling to confirm script actually stopped
+            startStatusPoll();
+        });
         
         // Reset View button - restores natural sky appearance
         if ($bt_resetview && $bt_resetview.length) {
@@ -321,7 +424,10 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
         // Set initial button states
         $bt_stopscript.prop('disabled', true);
         
-        console.log("[Scripts] Controls initialized with working reset function");
+        // Get initial script status
+        pollScriptStatus();
+        
+        console.log("[Scripts] Controls initialized with working reset function and status polling");
     }
 
     // =====================================================================
@@ -331,9 +437,19 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
     /**
      * Handles activeScriptChanged event from scriptApi.
      * Updates UI to reflect the currently running script.
+     * Starts status polling when a script becomes active.
      */
     $(scriptApi).on("activeScriptChanged", function(evt, script) {
-        updateActiveScriptIndicators(script || "");
+        var scriptName = script || "";
+        updateActiveScriptIndicators(scriptName);
+        
+        // Start polling if script is running
+        if (scriptName) {
+            startStatusPoll();
+        } else {
+            // Script stopped, we can stop polling after one more check
+            scheduleStatusPoll(1000);
+        }
     });
 
     /**
@@ -346,6 +462,13 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
         
         // Also notify scriptApi to keep it in sync
         $(scriptApi).trigger("activeScriptChanged", scriptName);
+        
+        // Start polling if script is running
+        if (scriptName) {
+            startStatusPoll();
+        } else {
+            scheduleStatusPoll(1000);
+        }
     });
 
     // =====================================================================
@@ -354,6 +477,11 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
 
     $(function() {
         initControls();
+    });
+    
+    // Cleanup on page unload
+    $(window).on('beforeunload', function() {
+        stopStatusPoll();
     });
 
     // Queue script list loading as soon as this script is loaded instead of ready event
@@ -372,7 +500,13 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
          * Manually trigger the natural sky reset function.
          * @function
          */
-        resetToNaturalSky: resetToNaturalSky
+        resetToNaturalSky: resetToNaturalSky,
+        
+        /**
+         * Manually check script status.
+         * @function
+         */
+        checkStatus: pollScriptStatus
     };
 
     // =====================================================================
