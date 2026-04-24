@@ -99,12 +99,16 @@ struct ScmCulturalName : public StelObject::CulturalName
 	ScmCulturalName trimmed() const
 	{
 		ScmCulturalName result = *this;
-		result.translated      = result.translated.trimmed();
-		result.byname          = result.byname.trimmed();
-		result.native          = result.native.trimmed();
-		result.pronounce       = result.pronounce.trimmed();
-		result.transliteration = result.transliteration.trimmed();
-		result.IPA             = result.IPA.trimmed();
+		auto trim = [](QString &field) { field = field.trimmed(); };
+		trim(result.native);
+		trim(result.pronounce);
+		trim(result.pronounceI18n);
+		trim(result.transliteration);
+		trim(result.translated);
+		trim(result.translatedI18n);
+		trim(result.IPA);
+		trim(result.byname);
+		trim(result.bynameI18n);
 		return result;
 	}
 };
