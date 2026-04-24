@@ -58,14 +58,14 @@ QString scm::ScmConstellation::getId() const
 	return id;
 }
 
-void scm::ScmConstellation::setCommonName(const ConstellationCommonName &commonName)
+void scm::ScmConstellation::setCulturalName(const ScmCulturalName &culturalName)
 {
-	ScmConstellation::commonName = commonName;
+	ScmConstellation::culturalName = culturalName;
 }
 
-const scm::ConstellationCommonName &scm::ScmConstellation::getCommonName() const
+const scm::ScmCulturalName &scm::ScmConstellation::getCulturalName() const
 {
-	return commonName;
+	return culturalName;
 }
 
 void scm::ScmConstellation::setArtwork(const ScmConstellationArtwork &artwork)
@@ -145,8 +145,8 @@ void scm::ScmConstellation::drawName(StelCore *core, StelPainter &sPainter, cons
 	}
 
 	sPainter.setColor(nameColor, 1.0f);
-	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), commonName.english, 0.,
-	                  -sPainter.getFontMetrics().boundingRect(commonName.english).width() / 2, 0, false);
+	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), culturalName.translated, 0.,
+	                  -sPainter.getFontMetrics().boundingRect(culturalName.translated).width() / 2, 0, false);
 }
 
 void scm::ScmConstellation::drawArtwork(StelCore *core, StelPainter &sPainter) const
@@ -192,7 +192,7 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const boo
 		json["image"] = artwork.toJson("illustrations/" + fileInfo.fileName());
 	}
 
-	json["common_name"] = commonName.toJson();
+	json["common_name"] = culturalName.toJson();
 
 	return json;
 }

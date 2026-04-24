@@ -74,16 +74,16 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 
 	constellationId            = constellation->getId();
 	constellationPlaceholderId = constellation->getId();
-	constellationCommonName    = constellation->getCommonName();
+	constellationCulturalName  = constellation->getCulturalName();
 	constellationDescription   = constellation->getDescription();
 
-	ui->enNameLE->setText(constellationCommonName.english);
+	ui->enNameLE->setText(constellationCulturalName.translated);
 	ui->idLE->setText(constellationId);
-	ui->bynameLE->setText(constellationCommonName.byname);
-	ui->natNameLE->setText(constellationCommonName.native);
-	ui->pronounceLE->setText(constellationCommonName.pronounce);
-	ui->translitLE->setText(constellationCommonName.transliteration);
-	ui->ipaLE->setText(constellationCommonName.ipa);
+	ui->bynameLE->setText(constellationCulturalName.byname);
+	ui->natNameLE->setText(constellationCulturalName.native);
+	ui->pronounceLE->setText(constellationCulturalName.pronounce);
+	ui->translitLE->setText(constellationCulturalName.transliteration);
+	ui->ipaLE->setText(constellationCulturalName.IPA);
 	ui->description->setText(constellationDescription);
 
 	// Hide the original constellation while editing
@@ -212,22 +212,22 @@ void ScmConstellationDialog::createDialogContent()
 	connect(ui->enNameLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			constellationCommonName.english = ui->enNameLE->text();
+			constellationCulturalName.translated = ui->enNameLE->text();
 
-			QString newConstId         = constellationCommonName.english.toLower().replace(" ", "_");
+			QString newConstId         = constellationCulturalName.translated.toLower().replace(" ", "_");
 			constellationPlaceholderId = newConstId;
 			ui->idLE->setPlaceholderText(newConstId);
 		});
 	connect(ui->idLE, &QLineEdit::textChanged, this, [this]() { constellationId = ui->idLE->text(); });
 	connect(ui->bynameLE, &QLineEdit::textChanged, this,
-	        [this]() { constellationCommonName.byname = ui->bynameLE->text(); });
+	        [this]() { constellationCulturalName.byname = ui->bynameLE->text(); });
 	connect(ui->natNameLE, &QLineEdit::textChanged, this,
-	        [this]() { constellationCommonName.native = ui->natNameLE->text(); });
+	        [this]() { constellationCulturalName.native = ui->natNameLE->text(); });
 	connect(ui->pronounceLE, &QLineEdit::textChanged, this,
-	        [this]() { constellationCommonName.pronounce = ui->pronounceLE->text(); });
+	        [this]() { constellationCulturalName.pronounce = ui->pronounceLE->text(); });
 	connect(ui->translitLE, &QLineEdit::textChanged, this,
-	        [this]() { constellationCommonName.transliteration = ui->translitLE->text(); });
-	connect(ui->ipaLE, &QLineEdit::textChanged, this, [this]() { constellationCommonName.ipa = ui->ipaLE->text(); });
+	        [this]() { constellationCulturalName.transliteration = ui->translitLE->text(); });
+	connect(ui->ipaLE, &QLineEdit::textChanged, this, [this]() { constellationCulturalName.IPA = ui->ipaLE->text(); });
 	connect(ui->description, &QTextEdit::textChanged, this,
 	        [this]() { constellationDescription = ui->description->toPlainText(); });
 }
@@ -395,7 +395,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	}
 
 	// English name is required and whitespace-only is not allowed
-	if (constellationCommonName.english.trimmed().isEmpty())
+	if (constellationCulturalName.translated.trimmed().isEmpty())
 	{
 		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
 		                            q_("Could not save: English name is empty"));
@@ -490,7 +490,7 @@ void ScmConstellationDialog::saveConstellation()
 		scm::ScmConstellation &constellation = culture->addConstellation(id, lines,
 		                                                                 isDarkConstellation);
 
-		constellation.setCommonName(constellationCommonName.trimmed());
+		constellation.setCulturalName(constellationCulturalName.trimmed());
 		constellation.setDescription(constellationDescription);
 		if (imageItem->isVisible() && imageItem->getArtwork().getHasArt())
 		{
@@ -526,7 +526,7 @@ void ScmConstellationDialog::resetDialog()
 	constellationPlaceholderId.clear();
 	ui->idLE->setPlaceholderText("");
 
-	constellationCommonName.clear();
+	constellationCulturalName.clear();
 	ui->enNameLE->clear();
 	ui->bynameLE->clear();
 	ui->natNameLE->clear();

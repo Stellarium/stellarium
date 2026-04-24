@@ -26,7 +26,7 @@
 
 #include "ScmConstellationArtwork.hpp"
 #include "VecMath.hpp"
-#include "types/ConstellationCommonName.hpp"
+#include "types/ScmCulturalName.hpp"
 #include "types/ConstellationLine.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
@@ -61,18 +61,18 @@ public:
 	QString getId() const;
 
 	/**
-	 * @brief Sets the common name of the constellation.
+	 * @brief Sets the cultural name of the constellation.
 	 *
-	 * @param commonName The common name data.
+	 * @param culturalName The cultural name data.
 	 */
-	void setCommonName(const ConstellationCommonName &commonName);
+	void setCulturalName(const ScmCulturalName &culturalName);
 
 	/**
-	 * @brief Gets the common name of the constellation.
+	 * @brief Gets the cultural name of the constellation.
 	 *
-	 * @return The common name data.
+	 * @return The cultural name data.
 	 */
-	const ConstellationCommonName &getCommonName() const;
+	const ScmCulturalName &getCulturalName() const;
 
 	/**
 	* @brief Sets the description of the constellation.
@@ -178,7 +178,7 @@ private:
 	QString id;
 
 	/// Name and spelling metadata used in common_name JSON export.
-	ConstellationCommonName commonName;
+	ScmCulturalName culturalName;
 
 	/// The lines forming the constellation
 	std::vector<ConstellationLine> lines;

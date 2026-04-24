@@ -465,7 +465,7 @@ void ScmSkyCultureDialog::updateRemovePolygonButton()
 
 QString ScmSkyCultureDialog::getDisplayNameFromConstellation(const scm::ScmConstellation &constellation) const
 {
-	return constellation.getCommonName().english + " (" + constellation.getId() + ")";
+	return constellation.getCulturalName().translated + " (" + constellation.getId() + ")";
 }
 
 void ScmSkyCultureDialog::resetReferences()
@@ -585,7 +585,7 @@ QString ScmSkyCultureDialog::makeConstellationsSection() const
 		if (!text.isEmpty())
 			text += "\n\n";
 		text += "##### ";
-		text += constellation->getCommonName().english;
+		text += constellation->getCulturalName().translated;
 		text += "\n\n";
 		text += descr;
 	}

@@ -27,7 +27,7 @@
 #include "ScmConstellationImage.hpp"
 #include "SkyCultureMaker.hpp"
 #include "StelDialogSeparate.hpp"
-#include "types/ConstellationCommonName.hpp"
+#include "types/ScmCulturalName.hpp"
 #include "types/DrawTools.hpp"
 #include <array>
 #include <optional>
@@ -81,8 +81,8 @@ private:
 	QString constellationId;
 	/// Placeholder identifier of the constellation
 	QString constellationPlaceholderId;
-	/// Common name of the constellation
-	scm::ConstellationCommonName constellationCommonName;
+	/// Cultural name of the constellation
+	scm::ScmCulturalName constellationCulturalName;
 	/// The currently displayed artwork
 	ScmConstellationImage *imageItem;
 	/// Holds the last used directory
