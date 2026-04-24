@@ -115,4 +115,4 @@ struct ScmCulturalName : public StelObject::CulturalName
 
 } // namespace scm
 
-#endif // SCM_CONSTELLATION_COMMON_NAME_HPP
+#endif // SCM_CULTURAL_NAME_HPP
