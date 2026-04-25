@@ -4714,7 +4714,7 @@ bool SolarSystem::loadExtendedAsteroidElements(const QString& filePath)
 			continue;
 		}
 
-		const QJsonArray epochArray = ast.value("epochs").toArray();
+		const QJsonArray epochArray = ast.value("elements").toArray();
 		if (epochArray.isEmpty())
 			continue;
 
