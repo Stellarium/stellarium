@@ -37,7 +37,6 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
-#include <QVector>
 
 namespace scm
 {
