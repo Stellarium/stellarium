@@ -777,8 +777,7 @@ void SolarSystem::loadPlanets()
 	// single-epoch KeplerOrbit from ssystem_minor.ini without any change in
 	// behaviour, and the Solar System Editor plugin continues to work normally.
 	const QStringList ephemFiles = StelFileMgr::findFileInAllPaths(
-	    "data/asteroid_elements.json",
-	    static_cast<StelFileMgr::Flags>(StelFileMgr::File));
+	    "data/asteroid_elements.json");
 	if (!ephemFiles.isEmpty())
 		loadExtendedAsteroidElements(ephemFiles.first()); // first = user dir (highest priority)
 	else
