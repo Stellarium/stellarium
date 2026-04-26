@@ -34,6 +34,7 @@
 #include "AngleSpinBox.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
+#include "MinorPlanet.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -2140,6 +2141,15 @@ void AstroCalcDialog::generateEphemeris()
 
 			Vec3d pos, sunPos;
 			core->setJD(JD);
+			// Install the correct epoch snapshot BEFORE core->update(0) computes
+			// positions. If this runs after, the first step uses the snapshot from
+			// the simulation's displayed date, causing a jump on the first marker.
+			for (const auto& p : std::as_const(solarSystem->getAllPlanets()))
+			{
+				QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+				if (mp && mp->hasEpochElements())
+					mp->updateEpochOrbit(JD, true);
+			}
 			core->update(0); // force update to get new coordinates
 
 			if (!ignoreDateTest && !obj->hasValidPositionalData(JD, Planet::PositionQuality::OrbitPlotting))

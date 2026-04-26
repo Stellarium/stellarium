@@ -722,6 +722,122 @@ slope_parameter                = 4
 \noindent The displayed trajectory should start at Voyager~2's encounter with Neptune on August 18, 1989 (JD 2447757.5). 
 The value of \texttt{orbit\_good=} ($2460554.5-2447757.5 = $) \texttt{12797} fulfills this idea. 
 
+\subsection{Multiple Epochs for Minor Planets}
+\label{sec:ssystem.ini:MultiEpoch}
+\indexterm{asteroid!multi-epoch ephemeris}
+\indexterm{JPL Horizons!multi-epoch script}
+ 
+As described in section~\ref{sec:ssystem.ini:minor}, asteroid orbital
+elements in \file{ssystem\_minor.ini} are valid only near their epoch.
+Gravitational perturbations, mainly from Jupiter, cause the elements to
+drift over the years, so positions computed far from the epoch become
+increasingly inaccurate.
+ 
+For those interested in tracking accurate asteroid positions over many
+decades or centuries, an optional extended ephemeris file can be
+provided.  When a file named \file{asteroid\_elements.json} is present
+in the user \file{data/} directory (see
+chapter~\ref{sec:FilesAndDirectories}), Stellarium loads a table of
+orbital snapshots for each asteroid listed in it.  At any simulated
+date, the snapshot nearest in time is selected and used as the basis for
+position computation.  If the file is absent, all asteroids fall back to
+their standard single-epoch orbit from \file{ssystem\_minor.ini}
+without any change in behaviour.
+ 
+Note that an asteroid must already be present in
+\file{ssystem\_minor.ini} for the extended data to take effect.  The
+JSON file provides additional orbital snapshots for existing entries; it
+cannot be used to introduce new asteroids.
+ 
+\subsubsection{Generating the orbital elements file}
+\label{sec:ssystem.ini:MultiEpoch:Script}
+ 
+A Python script, \file{fetch\_asteroid\_elements.py}, is provided in
+the \file{util/} folder of the installation directory.  It queries the
+\indexterm{JPL Horizons} web service for osculating orbital elements at
+regular intervals across a chosen time window and writes the results to
+\file{asteroid\_ephemeris.json}.  Python~3 and the \texttt{requests}
+library (\texttt{pip install requests}) are required.
+ 
+The script is run from the command line.  Without any arguments it
+fetches the first 500 numbered asteroids at 6-month intervals across a
+200-year window centred on 2026, which produces a file of approximately
+52\,MB in around 20 minutes:
+ 
+\begin{commands}
+python3 fetch_asteroid_elements.py
+\end{commands}
+ 
+\noindent If the run is interrupted it can be resumed without losing
+progress; the script saves its output every ten asteroids and skips
+entries that are already present in the output file:
+ 
+\begin{commands}
+python3 fetch_asteroid_elements.py --start-at 247
+\end{commands}
+ 
+\noindent The time window, epoch density, and target asteroids can all
+be controlled with command-line options.  The most useful ones are
+listed below.
+ 
+\begin{description}
+\item[\texttt{--count} \textit{N}] Fetch the first \textit{N}
+  consecutively numbered asteroids, starting from~1 (or from
+  \texttt{--start-at}).  Default: \texttt{500}.
+ 
+\item[\texttt{--numbers} \textit{N,N,...}] Fetch a specific,
+  comma-separated list of asteroid numbers instead of a sequential
+  range.  Useful for targeting a particular set of objects, such as the
+  343 asteroids used in the JPL DE431 planetary ephemeris.  Overrides
+  \texttt{--count} and \texttt{--start-at}.  Example:
+  \texttt{--numbers 1,2,3,4,433}.
+ 
+\item[\texttt{--span} \textit{YEARS}] Total width of the time window in
+  years, centred on \texttt{--center}.  Default: \texttt{200}.
+ 
+\item[\texttt{--center} \textit{YEAR}] Midpoint year of the time
+  window.  Fractional years are accepted.  Shifting the centre toward
+  the past improves coverage of historical events; shifting it toward
+  the future is better for long-range planning.  Default: \texttt{2026}.
+ 
+\item[\texttt{--epochs} \textit{N}] Number of orbital snapshots per
+  asteroid spread evenly across the time window.  More snapshots give
+  smoother and more accurate positions when the simulation date is far
+  from the nearest snapshot, at the cost of a larger file and a longer
+  download.  Together with \texttt{--span} this determines the interval
+  between snapshots: $\mathit{interval} = \mathit{span} /
+  (\mathit{epochs} - 1)$.  Default: \texttt{400}
+  (${\approx}$6-month intervals over 200 years).
+ 
+\item[\texttt{--out} \textit{FILE}] Output filename.  Default:
+  \texttt{asteroid\_elements.json}.
+ 
+\item[\texttt{--delay} \textit{SECS}] Pause between consecutive
+  Horizons requests, in seconds.  Increase this value if the server
+  returns rate-limit errors.  Default: \texttt{0.6}.
+\end{description}
+ 
+\noindent JPL Horizons caps the number of requested dates per query at
+80.  The script splits larger epoch lists into batches of~80
+automatically, so any value of \texttt{--epochs} is supported.
+ 
+\paragraph{Examples}
+ 
+Fetch the five historically significant early-discovered asteroids and
+Eros with 6-month intervals spanning the years 1800--2100:
+\begin{commands}
+python3 fetch_asteroid_elements.py \
+    --numbers 1,2,3,4,433 \
+    --epochs 600 --span 300 --center 1950
+\end{commands}
+ 
+\noindent Fetch 1000 asteroids at yearly intervals over 200 years,
+saving to a custom filename:
+\begin{commands}
+python3 fetch_asteroid_elements.py \
+    --count 1000 --epochs 200 --out my_ephemeris.json
+\end{commands}
+
 
 %%% Local Variables: 
 %%% mode: latex
