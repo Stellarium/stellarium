@@ -1182,7 +1182,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 				else if (visibility == gSatWrapper::PENUMBRAL)
 				{
 					txtMag = magSat - 3.f; // Oops... Artificial satellite is invisible, but let's make the label visible
-					painter.setColor(hintColor, 0.5*hintBrightness);
+					painter.setColor(0.5f*hintColor, hintBrightness);
 				}
 				else
 				{

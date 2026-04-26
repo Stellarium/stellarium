@@ -2925,7 +2925,7 @@ void Satellites::draw(StelCore* core)
 	painter.setFont(font);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
-	painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	painter.setBlending(true);
 	Satellite::hintTexture->bind();
 	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
 	for (const auto& sat : std::as_const(satellites))
@@ -2977,7 +2977,6 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 {
 	StelProjectorP saveProj = painter.getProjector();
 	painter.setProjector(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
-	painter.setBlending(true, GL_ONE, GL_ONE);
 	painter.setLineSmooth(true);
 	QFont font=QGuiApplication::font();
 	font.setPixelSize(labelFontSize);
@@ -3017,7 +3016,7 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 		rot.transfo(point);
 		umbra.vertex.append(pos+point);
 	}
-	painter.setColor(getUmbraColor(), 1.f);
+	painter.setColor(getUmbraColor(), hintFader.getInterstate());
 	painter.drawStelVertexArray(umbra, true);
 
 	// plot a center cross mark
@@ -3041,7 +3040,7 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 			penumbra.vertex.append(pos+point);
 		}
 
-		painter.setColor(getPenumbraColor(), 1.f);
+		painter.setColor(getPenumbraColor(), hintFader.getInterstate());
 		painter.drawStelVertexArray(penumbra, true);
 	}
 	painter.setProjector(saveProj);
