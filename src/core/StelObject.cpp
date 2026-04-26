@@ -428,8 +428,10 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app)
 
-	if (withTables)
+	if (withTables && (flags&(RaDecJ2000|RaDecOfDate|HourAngle|AltAzi|GalacticCoord|SupergalacticCoord|EclipticCoordJ2000) || ((flags&EclipticCoordOfDate) && (currentPlanet==L1S("Earth")))))
 		res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+	else
+		res+="<br/>";
 
 	QString RADec;
 	if (usePolarDistance)
