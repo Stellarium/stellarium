@@ -1,0 +1,1821 @@
+/* ========================================================================
+ * gamepad.css - Gamepad Controller Styles
+ * ========================================================================
+ * 
+ * Stylesheet for the Gamepad Controller module for Stellarium Remote Control.
+ * Provides comprehensive styling for gamepad configuration interface including:
+ * - Controller settings panel with device information
+ * - Joystick preview canvases with real-time visualization and zoom inversion support
+ * - Button customization grid with categorized groups and compact layout
+ * - Calibration interface with visual feedback
+ * - Responsive design for various screen sizes with adaptive grid columns
+ * - Vibration intensity controls with test functionality
+ * - Import/Export profile interface for backup and sharing
+ * - Live Input Monitor interface with 4-column button grid and visual axis meters
+ * - Real-time direction display for left stick movement
+ * - Compact spacing and improved mobile/tablet responsiveness
+ * 
+ * Version: 2.6.0
+ * Author: kutaibaa akraa (GitHub: @kutaibaa-akraa)
+ * Date: 2026-04-01
+ * License: GPLv2+
+ * 
+ * ======================================================================== */
+
+/* ========================================================================
+ * SECTION 1: GLOBAL CONTAINER STYLES
+ * ======================================================================== */
+
+/* Ensure all elements use border-box for consistent sizing */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+/* Main container for gamepad section with proper overflow handling */
+#gp-controller,
+#tab_gamepad,
+#tab_gamepad .block,
+#tab_gamepad .flex {
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* Flex container with proper gap and wrapping */
+.flex.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ========================================================================
+ * SECTION 2: CONTROLLER SETTINGS PANEL
+ * ======================================================================== */
+
+/**
+ * Main settings panel containing device info, calibration, and joystick preview.
+ * Uses flexible width with constraints for responsive behavior.
+ */
+.controller-settings-panel {
+    flex: 1;
+    min-width: 280px;
+    max-width: 420px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: all 0.2s ease;
+}
+
+.controller-settings-panel h3 {
+    color: #000000;
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #000000;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+
+/* Device Information Card */
+.device-info-card {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.device-info-row {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.device-info-row:last-child {
+    border-bottom: none;
+}
+
+.device-info-label {
+    min-width: 80px;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.device-info-value {
+    color: #DCDBDA;
+    font-weight: bold;
+    font-size: 10px;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Device Selector */
+.device-selector-row {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.device-selector-row label {
+    color: #000000;
+    font-size: 10px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+#gp-device-selector {
+    flex: 1;
+    min-width: 150px;
+    background: #3A3C3E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 4px;
+    padding: 6px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+#gp-device-selector:hover {
+    border-color: #B4B7B0;
+}
+
+/* ========================================================================
+ * SECTION 3: CALIBRATION SECTION
+ * ======================================================================== */
+
+.calibration-section {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calibration-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.calibration-header h4 {
+    margin: 0;
+    color: #000000;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.calibration-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.calibration-btn {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+    border: 1px solid #2A2C2E;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.calibration-btn:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+}
+
+.calibration-btn:active {
+    transform: translateY(1px);
+}
+
+.calibration-status {
+    font-size: 11px;
+    color: #B4B7B0;
+    margin-top: 8px;
+    padding: 8px;
+    background: rgba(180, 183, 176, 0.1);
+    border-radius: 4px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.calibration-values {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 11px;
+}
+
+.calibration-value-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.calibration-value-label {
+    color: #B4B7B0;
+    margin-right: 5px;
+}
+
+.calibration-value-number {
+    color: #DCDBDA;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+/* ========================================================================
+ * SECTION 4: JOYSTICK PREVIEW - TWO COLUMN LAYOUT
+ * ======================================================================== */
+
+/* Wrapper to override parent constraints */
+.joystick-preview-wrapper {
+    width: 100%;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.joystick-preview-wrapper > h4 {
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #000000;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+}
+
+/* Two column flex container */
+.joystick-preview-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Each joystick card */
+.joystick-preview {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+.joystick-preview canvas {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #5D5F62;
+    border-radius: 6px;
+    background: #222;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.stick-label {
+    font-size: 12px;
+    color: #B4B7B0;
+    text-align: center;
+}
+
+.stick-label strong {
+    color: #DCDBDA;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.stick-label small {
+    color: #8A8C8E;
+    font-size: 10px;
+}
+
+.joystick-info {
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    font-size: 11px;
+    color: #B4B7B0;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.joystick-info .info-label {
+    font-weight: bold;
+    color: #8A8C8E;
+}
+
+.joystick-info .info-value {
+    color: #DCDBDA;
+    font-family: monospace;
+}
+
+/* Stick options - inline checkboxes */
+.stick-options {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(180, 183, 176, 0.2);
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.option-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-size: 10px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.option-item input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+}
+
+.option-item input[type="checkbox"]:checked {
+    accent-color: #4CAF50;
+}
+
+.option-item:hover {
+    color: #DCDBDA;
+}
+
+/* Ensure the parent container doesn't restrict width */
+.controller-settings-panel .joystick-preview-wrapper {
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* ========================================================================
+ * SECTION 5: CONTROL SLIDERS AND INPUTS
+ * ======================================================================== */
+
+.control-slider-group {
+    margin: 15px 0;
+}
+
+.slider-row {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 4px 0;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.slider-label {
+    min-width: 100px;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.slider-container {
+    flex: 1;
+    margin: 0 12px;
+    min-width: 120px;
+}
+
+.slider-value {
+    min-width: 40px;
+    text-align: right;
+    color: #DCDBDA;
+    font-weight: bold;
+    font-size: 11px;
+    font-family: monospace;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+    display: flex;
+    gap: 15px;
+    margin: 12px 0;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    flex-wrap: wrap;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.checkbox-item label {
+    color: #B4B7B0;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.checkbox-item label:hover {
+    color: #DCDBDA;
+}
+
+.checkbox-item .help-text {
+    font-size: 9px;
+    color: #aaa;
+    margin-left: 6px;
+}
+
+.checkbox-item input[type="checkbox"]:checked + label {
+    color: #4CAF50;
+}
+
+/* Vibration Intensity Slider Row */
+#gp-vibration-intensity-row {
+    transition: opacity 0.2s ease;
+    margin: 8px 0 12px 0;
+    padding: 4px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#gp-vibration-intensity-row.hidden {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Test Vibration Button */
+.test-vibration-btn {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+    border: 1px solid #2A2C3E;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.test-vibration-btn:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+    transform: translateY(-1px);
+}
+
+.test-vibration-btn:active {
+    transform: translateY(1px);
+}
+
+/* ========================================================================
+ * SECTION 6: BUTTON CUSTOMIZATION PANEL
+ * ======================================================================== */
+
+/**
+ * Main panel for button mapping customization.
+ * Flexible width with responsive constraints to prevent overflow.
+ */
+.button-customization-panel {
+    flex: 2;
+    min-width: 100px;
+    max-width: calc(80% - 100px);
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: all 0.2s ease;
+}
+
+.button-customization-panel h3 {
+    color: #000000;
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #000000;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+
+.customization-note {
+    background: rgba(180, 183, 176, 0.1);
+    /*border-left: 3px solid #B4B7B0;*/
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    font-size: 11px;
+    color: #B4B7B0;
+    border-radius: 0 4px 4px 0;
+    word-wrap: break-word;
+}
+
+/* No Device Message */
+.no-device-message {
+    padding: 30px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    border: 1px dashed #B4B7B0;
+}
+
+.no-device-message p {
+    margin: 0;
+    font-size: 13px;
+    color: #000000;
+}
+
+/* Button Groups Container */
+.button-groups-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    max-height: 1200px;
+    overflow-y: auto;
+    padding: 5px;
+}
+
+/* Individual Button Group */
+.button-group {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 0;
+}
+
+.button-group-header {
+    margin: 0 0 10px 0;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(180, 183, 176, 0.3);
+    padding-bottom: 5px;
+}
+
+/* Button Item - Individual button mapping row */
+.button-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin: 3px 0;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    transition: background 0.2s;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.button-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.button-name {
+    min-width: 100px;
+    font-weight: bold;
+    color: #000000;
+    font-size: 11px;
+    flex-shrink: 0;
+}
+
+/**
+ * Dropdown select styling - Critical for preventing overflow issues.
+ * Uses text-overflow ellipsis to handle long text gracefully.
+ */
+.button-select {
+    flex: 1;
+    margin: 0 5px 0 8px;
+    padding: 5px;
+    background: #3A3C3E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    font-size: 10px;
+    cursor: pointer;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.button-select optgroup {
+    color: #000000;
+    background: #DCDBDA;
+    font-weight: bold;
+}
+
+.button-select option {
+    color: #000000;
+    background: #DCDBDA;
+}
+
+.button-select optgroup option {
+    color: #333333;
+    background: #DCDBDA;
+}
+
+.button-select:hover {
+    border-color: #B4B7B0;
+}
+
+.button-select:focus {
+    outline: none;
+    border-color: #B4B7B0;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    padding: 5px 12px;
+    border: 1px solid #2A2C2E;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn.reset {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+}
+
+.action-btn.reset:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+}
+
+.action-btn.save {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+}
+
+.action-btn.save:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+}
+
+.action-btn.export {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+}
+
+.action-btn.export:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+}
+
+.action-btn.import {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+}
+
+.action-btn.import:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+}
+
+/* Connect Button */
+/* ========================================================================
+ * Scan Button Animation
+ * ======================================================================== */
+
+#gp-connect {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #000000;
+    border: 1px solid #2A2C2E;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#gp-connect:hover {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    border-color: #B4B7B0;
+    transform: translateY(-1px);
+}
+
+#gp-connect:active {
+    transform: translateY(1px);
+}
+
+#gp-connect:disabled {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+}
+
+/* Scanning animation */
+#gp-connect.scanning {
+    position: relative;
+    background: linear-gradient(#3A6B3A, #2A4A2A);
+}
+
+#gp-connect.scanning::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: scan-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes scan-pulse {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Status indicator for scanning */
+#gp-connection-status.scanning {
+    animation: status-blink 1s ease-in-out infinite;
+}
+
+@keyframes status-blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Connection Status Styling */
+#gp-connection-status {
+    font-weight: bold;
+}
+
+/* Notification Message */
+.notification-message {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
+    border: 1px solid #B4B7B0;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+    max-width: 90%;
+    word-wrap: break-word;
+}
+
+/* ========================================================================
+ * SECTION 7: RESPONSIVE DESIGN - BREAKPOINTS
+ * ======================================================================== */
+
+/**
+ * Large screens (desktops, high resolution)
+ * 1400px and above: Large desktop monitors
+ */
+@media (min-width: 1400px) {
+    .button-customization-panel {
+        min-width: 500px;
+        max-width: 800px;
+    }
+    
+    .controller-settings-panel {
+        min-width: 320px;
+        max-width: 450px;
+    }
+    
+    .button-name {
+        font-size: 12px;
+    }
+    
+    .button-select {
+        font-size: 11px;
+    }
+}
+
+/**
+ * Medium screens (tablets, small desktops)
+ * 1025px - 1399px: Standard desktop/laptop screens
+ */
+@media (min-width: 1025px) and (max-width: 1399px) {
+    .button-customization-panel {
+        min-width: 400px;
+        max-width: calc(100% - 320px);
+    }
+    
+    .button-select {
+        font-size: 10px;
+        padding: 5px;
+    }
+    
+    .button-name {
+        font-size: 11px;
+        min-width: 95px;
+    }
+    
+    .slider-label {
+        font-size: 11px;
+        min-width: 90px;
+    }
+}
+
+/**
+ * Medium-small screens (small laptops, tablets landscape)
+ * 769px - 1024px: Tablet landscape and small laptops
+ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .button-customization-panel {
+        min-width: 320px;
+        max-width: calc(100% - 280px);
+    }
+    
+    .controller-settings-panel {
+        min-width: 260px;
+        max-width: 380px;
+    }
+    
+    .button-select {
+        font-size: 10px;
+        padding: 4px;
+    }
+    
+    .button-name {
+        min-width: 85px;
+        font-size: 10px;
+        color: #000000;
+    }
+    
+    .button-item {
+        flex-wrap: wrap;
+    }
+    
+    .button-select {
+        margin-left: 0;
+        margin-top: 4px;
+        width: 100%;
+    }
+    
+    .button-name {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+    
+    .slider-label {
+        min-width: 85px;
+        font-size: 11px;
+    }
+    
+    .slider-value {
+        font-size: 10px;
+        min-width: 35px;
+    }
+    
+    .joystick-preview-container {
+        gap: 15px;
+    }
+    
+    .joystick-preview canvas {
+        width: 85px;
+        height: 85px;
+    }
+    
+    .stick-options {
+        gap: 8px;
+    }
+    
+    .option-item {
+        font-size: 9px;
+    }
+    
+    .stick-label strong {
+        font-size: 11px;
+    }
+    
+    .stick-label small {
+        font-size: 9px;
+    }
+    
+    .joystick-info {
+        font-size: 10px;
+    }
+    
+    .calibration-btn,
+    .action-btn,
+    .test-vibration-btn,
+    #gp-connect {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+    
+    .checkbox-item label {
+        font-size: 10px;
+    }
+    
+    .button-group-header {
+        font-size: 11px;
+    }
+}
+
+/**
+ * Tablet portrait and small devices
+ * 481px - 768px: Tablets portrait, large phones
+ */
+@media (max-width: 768px) {
+    .controller-settings-panel,
+    .button-customization-panel {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+        padding: 12px;
+    }
+    
+    .button-groups-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .joystick-preview-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .joystick-preview {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .slider-row {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin: 8px 0;
+        gap: 5px;
+    }
+    
+    .slider-label {
+        width: 100%;
+        margin-bottom: 2px;
+        font-size: 11px;
+    }
+    
+    .slider-container {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .slider-value {
+        align-self: flex-end;
+        font-size: 10px;
+    }
+    
+    .checkbox-group {
+        flex-direction: column;
+        gap: 6px;
+        padding: 8px;
+    }
+    
+    .checkbox-item label {
+        font-size: 10px;
+    }
+    
+    .button-item {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        padding: 5px;
+    }
+    
+    .button-name {
+        width: 100%;
+        margin-bottom: 4px;
+        font-size: 10px;
+        color: #000000;
+    }
+    
+    .button-select {
+        width: 100%;
+        margin: 3px 0 0 0;
+        font-size: 10px;
+    }
+    
+    .calibration-header {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    .calibration-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .calibration-buttons .calibration-btn {
+        flex: 1;
+        text-align: center;
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+    
+    .calibration-status {
+        font-size: 10px;
+        padding: 6px;
+    }
+    
+    .action-buttons {
+        justify-content: center;
+        gap: 6px;
+    }
+    
+    .action-btn {
+        flex: 1;
+        min-width: 80px;
+        text-align: center;
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+    
+    .device-selector-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .device-selector-row label {
+        margin-bottom: 4px;
+        font-size: 11px;
+    }
+    
+    #gp-device-selector {
+        width: 100%;
+        font-size: 11px;
+        padding: 5px;
+    }
+    
+    .calibration-values {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .device-info-row {
+        padding: 4px 0;
+    }
+    
+    .device-info-label {
+        font-size: 11px;
+        min-width: 70px;
+    }
+    
+    .device-info-value {
+        font-size: 11px;
+    }
+    
+    .customization-note {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+    
+    .note {
+        font-size: 9px;
+    }
+    
+    .controller-settings-panel h3,
+    .button-customization-panel h3,
+    .joystick-preview-wrapper > h4 {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+    
+    .button-group-header {
+        font-size: 11px;
+    }
+    
+    .test-vibration-btn {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+    
+    #gp-connect {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+    
+    .stick-options {
+        gap: 10px;
+    }
+    
+    .option-item {
+        font-size: 9px;
+    }
+}
+
+/**
+ * Mobile phones
+ * 320px - 480px: Small mobile devices
+ */
+@media (max-width: 480px) {
+    .controller-settings-panel,
+    .button-customization-panel {
+        padding: 10px;
+    }
+    
+    .controller-settings-panel h3,
+    .button-customization-panel h3,
+    .joystick-preview-wrapper > h4 {
+        font-size: 12px;
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+    }
+    
+    .device-info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding: 4px 0;
+    }
+    
+    .device-info-label {
+        min-width: auto;
+        font-size: 10px;
+        color: #000000;
+    }
+    
+    .device-info-value {
+        font-size: 10px;
+    }
+    
+    .joystick-preview canvas {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .joystick-preview {
+        padding: 10px;
+        gap: 6px;
+    }
+    
+    .stick-label strong {
+        font-size: 11px;
+    }
+    
+    .stick-label small {
+        font-size: 8px;
+    }
+    
+    .joystick-info {
+        font-size: 9px;
+        padding: 3px 6px;
+    }
+    
+    .stick-options {
+        gap: 8px;
+    }
+    
+    .option-item {
+        font-size: 8px;
+    }
+    
+    .option-item input[type="checkbox"] {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .button-group-header {
+        font-size: 10px;
+        margin-bottom: 8px;
+    }
+    
+    .button-name {
+        font-size: 9px;
+        min-width: auto;
+        color: #000000;
+    }
+    
+    .button-select {
+        font-size: 9px;
+        padding: 4px;
+    }
+    
+    .action-btn {
+        padding: 4px 8px;
+        font-size: 9px;
+        min-width: 70px;
+    }
+    
+    .slider-label {
+        font-size: 10px;
+        min-width: auto;
+        color: #000000;
+    }
+    
+    .slider-value {
+        font-size: 9px;
+        min-width: 32px;
+    }
+    
+    .slider-container {
+        margin: 4px 0;
+    }
+    
+    .calibration-btn {
+        padding: 3px 6px;
+        font-size: 9px;
+    }
+    
+    .calibration-status {
+        font-size: 9px;
+        padding: 5px;
+    }
+    
+    .calibration-value-item {
+        font-size: 9px;
+        padding: 4px;
+    }
+    
+    .test-vibration-btn {
+        padding: 4px 8px;
+        font-size: 9px;
+    }
+    
+    .customization-note {
+        font-size: 9px;
+        padding: 5px 8px;
+    }
+    
+    .checkbox-item label {
+        font-size: 9px;
+    }
+    
+    .checkbox-item .help-text {
+        font-size: 8px;
+    }
+    
+    .note {
+        font-size: 8px;
+        margin-top: 8px;
+    }
+    
+    #gp-connect {
+        font-size: 9px;
+        padding: 3px 8px;
+    }
+    
+    .device-selector-row label {
+        font-size: 10px;
+    }
+    
+    #gp-device-selector {
+        font-size: 10px;
+        padding: 4px;
+    }
+}
+
+/* ========================================================================
+ * SECTION 8: UTILITY CLASSES AND STATES
+ * ======================================================================== */
+
+/* Loading and Calibration States */
+.calibrating .calibration-btn {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.calibrating .joystick-preview canvas {
+    opacity: 0.7;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { border-color: #B4B7B0; }
+    50% { border-color: #5D5F62; }
+    100% { border-color: #B4B7B0; }
+}
+
+/* Scrollbar Styling */
+.button-groups-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.button-groups-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.button-groups-container::-webkit-scrollbar-thumb {
+    background: #B4B7B0;
+    border-radius: 3px;
+}
+
+.button-groups-container::-webkit-scrollbar-thumb:hover {
+    background: #DCDBDA;
+}
+
+/* Help text styling */
+.help-text {
+    font-size: 9px;
+    color: #aaa;
+    margin-left: 6px;
+}
+
+/* Note text styling */
+.note {
+    font-size: 9px;
+    color: #aaa;
+    text-align: center;
+    margin-top: 8px;
+    word-wrap: break-word;
+}
+
+/* ========================================================================
+ * SECTION 9: PRINT STYLES
+ * ======================================================================== */
+
+@media print {
+    .controller-settings-panel,
+    .button-customization-panel {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .joystick-preview canvas {
+        border: 1px solid #000;
+    }
+    
+    .button-select {
+        border: 1px solid #000;
+        background: #fff;
+        color: #000;
+    }
+    
+    .calibration-btn,
+    .action-btn,
+    .test-vibration-btn,
+    #gp-connect {
+        border: 1px solid #000;
+        background: #fff;
+        color: #000000;
+    }
+}
+
+/* ========================================================================
+ * SECTION 10: Live Input Panel Styles
+ * ======================================================================== */
+
+.live-input-panel {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 0;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.live-input-header {
+    background: rgba(0, 0, 0, 0.15);
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(180, 183, 176, 0.3);
+}
+
+.live-input-header h4 {
+    margin: 0;
+    color: #000000;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.live-input-header p {
+    margin: 4px 0 0 0;
+    font-size: 10px;
+    color: #8A8C8E;
+}
+
+.live-input-content {
+    padding: 15px;
+}
+
+/* Two-column layout for Live Input */
+.live-input-two-columns {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.live-input-column {
+    flex: 1;
+    min-width: 200px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.live-input-column h5 {
+    margin: 0 0 8px 0;
+    padding-bottom: 5px;
+    color: #000000;
+    font-size: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(180, 183, 176, 0.3);
+}
+
+/* Buttons Grid - 4 columns for compact display */
+.live-input-grid-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+/* Axes Grid - with visual meter */
+.live-input-grid-axes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+/* Button Item - Compact */
+.live-input-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 6px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    font-size: 8px;
+    transition: background 0.1s ease;
+}
+
+.live-input-button .label {
+    color: #B4B7B0;
+    font-family: 'DejaVuSans', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.live-input-button .label .raw-id {
+    font-size: 7px;
+    color: #6A6C6E;
+    margin-left: 4px;
+}
+
+.live-input-button .value {
+    font-family: 'DejaVuSansMono', monospace;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 3px;
+    background: #2A2C2E;
+    min-width: 36px;
+    text-align: center;
+    font-size: 8px;
+    color: #DCDBDA;
+}
+
+.live-input-button .value.pressed {
+    background: #4A6A4A;
+    color: #FFFFFF;
+}
+
+/* Axis Item with Visual Meter */
+.live-input-axis {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+}
+
+.live-input-axis .label {
+    min-width: 70px;
+    color: #B4B7B0;
+    font-size: 9px;
+    font-family: 'DejaVuSans', sans-serif;
+}
+
+.live-input-axis .label .raw-id {
+    font-size: 7px;
+    color: #6A6C6E;
+    margin-left: 4px;
+}
+
+.live-input-axis .meter-container {
+    flex: 1;
+    height: 14px;
+    background: #2A2C2E;
+    border-radius: 7px;
+    overflow: hidden;
+    position: relative;
+}
+
+.live-input-axis .meter-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.05s linear;
+    border-radius: 7px;
+}
+
+.live-input-axis .meter-fill.positive {
+    background: #4A6A4A;
+}
+
+.live-input-axis .meter-fill.negative {
+    background: #6A4A4A;
+}
+
+.live-input-axis .value {
+    min-width: 38px;
+    text-align: right;
+    font-family: 'DejaVuSansMono', monospace;
+    font-size: 8px;
+    font-weight: bold;
+    color: #DCDBDA;
+    background: #2A2C2E;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+/* Device Info Section */
+.live-info-section {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 12px;
+}
+
+.live-info-section h5 {
+    margin: 0 0 8px 0;
+    padding-bottom: 5px;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(180, 183, 176, 0.3);
+}
+
+#gp-device-info-live {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 6px;
+}
+
+.device-info-live-row {
+    display: flex;
+    align-items: baseline;
+    padding: 4px 6px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.device-info-live-row .label {
+    min-width: 100px;
+    color: #000000;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.device-info-live-row .value {
+    color: #DCDBDA;
+    font-family: 'DejaVuSansMono', monospace;
+    font-size: 9px;
+    word-break: break-all;
+}
+
+.info-note-live {
+    background: rgba(180, 183, 176, 0.08);
+    padding: 8px 10px;
+    font-size: 9px;
+    color: #8A8C8E;
+    border-radius: 4px;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+.info-note-live strong {
+    color: #B4B7B0;
+    font-weight: bold;
+}
+
+/* Scrollbar Styling for Live Input */
+.live-input-grid-buttons::-webkit-scrollbar,
+.live-input-grid-axes::-webkit-scrollbar {
+    width: 5px;
+}
+
+.live-input-grid-buttons::-webkit-scrollbar-track,
+.live-input-grid-axes::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.live-input-grid-buttons::-webkit-scrollbar-thumb,
+.live-input-grid-axes::-webkit-scrollbar-thumb {
+    background: #5D5F62;
+    border-radius: 3px;
+}
+
+.live-input-grid-buttons::-webkit-scrollbar-thumb:hover,
+.live-input-grid-axes::-webkit-scrollbar-thumb:hover {
+    background: #B4B7B0;
+}
+
+/* Loading placeholder */
+.loading-placeholder {
+    text-align: center;
+    padding: 25px;
+    color: #8A8C8E;
+    font-style: italic;
+    font-size: 10px;
+}
+
+/* Responsive adjustments for Live Input */
+@media (max-width: 900px) {
+    .live-input-grid-buttons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .live-input-button {
+        font-size: 7px;
+        padding: 3px 5px;
+    }
+    
+    .live-input-button .value {
+        font-size: 7px;
+        min-width: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .live-input-two-columns {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .live-input-column {
+        min-width: auto;
+    }
+    
+    .live-input-grid-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: 280px;
+    }
+    
+    .live-input-header h4 {
+        font-size: 12px;
+    }
+    
+    .live-input-header p {
+        font-size: 9px;
+    }
+    
+    .live-input-column h5 {
+        font-size: 10px;
+        margin-bottom: 6px;
+    }
+    
+    .device-info-live-row {
+        flex-direction: column;
+        gap: 2px;
+    }
+    
+    .device-info-live-row .label {
+        min-width: auto;
+        font-size: 9px;
+    }
+    
+    .device-info-live-row .value {
+        font-size: 8px;
+    }
+    
+    .info-note-live {
+        font-size: 8px;
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .live-input-header {
+        padding: 8px 12px;
+    }
+    
+    .live-input-header h4 {
+        font-size: 11px;
+    }
+    
+    .live-input-header p {
+        font-size: 8px;
+    }
+    
+    .live-input-content {
+        padding: 10px;
+    }
+    
+    .live-input-column {
+        padding: 8px;
+    }
+    
+    .live-input-column h5 {
+        font-size: 9px;
+    }
+    
+    .live-input-grid-buttons {
+        grid-template-columns: 1fr;
+        max-height: 250px;
+    }
+    
+    .live-input-axis {
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 4px 6px;
+    }
+    
+    .live-input-axis .label {
+        width: 100%;
+        min-width: auto;
+        font-size: 8px;
+    }
+    
+    .meter-container {
+        width: 100%;
+        height: 12px;
+    }
+    
+    .live-input-axis .value {
+        font-size: 7px;
+        min-width: 32px;
+        padding: 1px 4px;
+    }
+    
+    .live-info-section h5 {
+        font-size: 10px;
+    }
+    
+    .device-info-live-row .label {
+        font-size: 8px;
+    }
+    
+    .device-info-live-row .value {
+        font-size: 7px;
+    }
+}
+
+/* ========================================================================
+ * END OF FILE
+ * ======================================================================== */
