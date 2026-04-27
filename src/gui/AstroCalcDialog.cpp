@@ -2405,7 +2405,11 @@ double AstroCalcDialog::getCustomTimeStep()
 			{11, 365.25*solarDay},		// Julian years
 			{12, 365.2568983*solarDay},	// Gaussian years
 			{13, 365.259636*solarDay},	// Anomalistic years
-			{14, 6585.321314219*solarDay}};	// 1 saros (223 synodic months)
+			{14, 6585.321314219*solarDay},	// 1 saros (223 synodic months)
+			{15, 10571.950809374*solarDay}, // 1 inex (358 synodic months)
+			{16, 3986.629495155*solarDay},	// 1 tritos (135 synodic months)
+			{17, 6939.688380455*solarDay}	// 1 Metonic Cycle (235 synodic months)
+	};
 	return timeStep*customTimeStepMap.value(customTimeStepKey);
 }
 
@@ -5244,7 +5248,7 @@ void AstroCalcDialog::populateEphemerisTimeUnitsList()
 	typedef QPair<QString, QString> itemPairs;
 	const QList<itemPairs> items = {
 		{qc_("minutes", "time unit measurement"), "1"}, {qc_( "hours", "time unit measurement"), "2"},
-		{qc_(      "days", "time unit measurement"), "3"}, {qc_("weeks", "time unit measurement"), "4"},
+		{qc_(   "days", "time unit measurement"), "3"}, {qc_( "weeks", "time unit measurement"), "4"},
 		{qc_( "months", "time unit measurement"), "5"}, {qc_( "years", "time unit measurement"), "6"}
 	};
 	Q_ASSERT(ui->dateToUnitsComboBox);

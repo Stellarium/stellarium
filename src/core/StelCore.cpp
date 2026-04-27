@@ -333,6 +333,8 @@ void StelCore::init()
 	actionsMgr->addAction("actionAdd_Synodic_Month", timeGroup, N_("Add 1 synodic month"), this, "addSynodicMonth()");
 	actionsMgr->addAction("actionAdd_Metonic_Cycle", timeGroup, N_("Add 1 Metonic cycle"), this, "addMetonicCycle()");
 	actionsMgr->addAction("actionAdd_Saros", timeGroup, N_("Add 1 saros"), this, "addSaros()");
+	actionsMgr->addAction("actionAdd_Inex", timeGroup, N_("Add 1 inex"), this, "addInex()");
+	actionsMgr->addAction("actionAdd_Tritos", timeGroup, N_("Add 1 tritos"), this, "addTritos()");
 	actionsMgr->addAction("actionAdd_Draconic_Month", timeGroup, N_("Add 1 draconic month"), this, "addDraconicMonth()");
 	actionsMgr->addAction("actionAdd_Draconic_Year", timeGroup, N_("Add 1 draconic year"), this, "addDraconicYear()");
 	actionsMgr->addAction("actionAdd_Anomalistic_Month", timeGroup, N_("Add 1 anomalistic month"), this, "addAnomalisticMonth()");
@@ -357,6 +359,8 @@ void StelCore::init()
 	actionsMgr->addAction("actionSubtract_Synodic_Month", timeGroup, N_("Subtract 1 synodic month"), this, "subtractSynodicMonth()");
 	actionsMgr->addAction("actionSubtract_Metonic_Cycle", timeGroup, N_("Subtract 1 Metonic cycle"), this, "subtractMetonicCycle()");
 	actionsMgr->addAction("actionSubtract_Saros", timeGroup, N_("Subtract 1 saros"), this, "subtractSaros()");
+	actionsMgr->addAction("actionSubtract_Inex", timeGroup, N_("Subtract 1 inex"), this, "subtractInex()");
+	actionsMgr->addAction("actionSubtract_Tritos", timeGroup, N_("Subtract 1 tritos"), this, "subtractTritos()");
 	actionsMgr->addAction("actionSubtract_Draconic_Month", timeGroup, N_("Subtract 1 draconic month"), this, "subtractDraconicMonth()");
 	actionsMgr->addAction("actionSubtract_Draconic_Year", timeGroup, N_("Subtract 1 draconic year"), this, "subtractDraconicYear()");
 	actionsMgr->addAction("actionSubtract_Anomalistic_Month", timeGroup, N_("Subtract 1 anomalistic month"), this, "subtractAnomalisticMonth()");
@@ -1847,6 +1851,18 @@ void StelCore::addSaros()
 	addSolarDays(223*29.530588853);
 }
 
+void StelCore::addInex()
+{
+	// 358 synodic months
+	addSolarDays(358*29.530588853);
+}
+
+void StelCore::addTritos()
+{
+	// 135 synodic months
+	addSolarDays(135*29.530588853);
+}
+
 void StelCore::addDraconicMonth()
 {
 	addSolarDays(27.212220817);
@@ -2017,6 +2033,18 @@ void StelCore::subtractSaros()
 {
 	// 223 synodic months
 	addSolarDays(-223*29.530588853);
+}
+
+void StelCore::subtractInex()
+{
+	// 358 synodic months
+	addSolarDays(-358*29.530588853);
+}
+
+void StelCore::subtractTritos()
+{
+	// 135 synodic months
+	addSolarDays(-135*29.530588853);
 }
 
 void StelCore::subtractDraconicMonth()
