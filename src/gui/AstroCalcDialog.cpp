@@ -1947,7 +1947,10 @@ double AstroCalcDialog::getEphemerisTimeStep(const PlanetP &planet)
 		{37, 500. * solarDay },
 		{38, StelCore::JD_MINUTE },
 		{39, 3. * siderealDay },
-		{40, 3. * solarDay }
+		{40, 3. * solarDay },
+		{43, 3986.629495155*solarDay },	// 1 tritos (135 synodic months)
+		{44, 6939.688380455*solarDay },	// 1 Metonic Cycle (235 synodic months)
+		{45, 10571.950809374*solarDay },// 1 inex (358 synodic months)
 	};
 	return timeStepMap.value(ui->ephemerisStepComboBox->currentData().toInt(), solarDay);
 }
@@ -5209,9 +5212,8 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 		{q_("1 sidereal year"), "27"}, {q_("1 Julian day"), "12"}, {q_("5 Julian days"), "13"}, {q_("10 Julian days"), "14"}, {q_("15 Julian days"), "15"},
 		{q_("30 Julian days"), "16"}, {q_("60 Julian days"), "17"}, {q_("100 Julian days"), "26"}, {q_("1 Julian year"), "28"},
 		{q_("1 Gaussian year"), "29"}, {q_("1 synodic month"), "30"}, {q_("1 draconic month"), "31"}, {q_("1 mean tropical month"), "32"},
-		{q_("1 anomalistic month"), "33"} ,{q_("1 anomalistic year"), "34"}, {q_("1 saros"), "35"}, {q_("custom interval"), "0"},
-		{q_("Sun at preset altitude"), "41"},
-		{q_("Opposition of planet"), "42"}
+		{q_("1 anomalistic month"), "33"} ,{q_("1 anomalistic year"), "34"}, {q_("1 tritos"), "43"}, {q_("1 saros"), "35"}, {q_("1 Metonic cycle"), "44"},
+		{q_("1  inex"), "45"}, {q_("custom interval"), "0"}, {q_("Sun at preset altitude"), "41"}, {q_("Opposition of planet"), "42"}
 	};
 	Q_ASSERT(ui->ephemerisStepComboBox);
 	QComboBox* steps = ui->ephemerisStepComboBox;
