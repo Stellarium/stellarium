@@ -346,7 +346,7 @@ void SatellitesImportDialog::populateList()
 			open = sourceFiles[f]->open(QFile::ReadOnly);
 		if (open)
 		{
-			satMgr->parseTleFile(*sourceFiles[f], newSatellites);
+			satMgr->parseDataFile(*sourceFiles[f], newSatellites);
 			sourceFiles[f]->close();
 		}
 		else
