@@ -35,6 +35,4 @@ TARGET_LINK_LIBRARIES(AngleMeasure-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VER
 # The library target "AngleMeasure-static" has a default OUTPUT_NAME of "AngleMeasure-static", so change it.
 SET_TARGET_PROPERTIES(AngleMeasure-static PROPERTIES OUTPUT_NAME "AngleMeasure")
 SET_TARGET_PROPERTIES(AngleMeasure-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins AngleMeasure-static)
-
 SET_TARGET_PROPERTIES(AngleMeasure-static PROPERTIES FOLDER "plugins/AngleMeasure")

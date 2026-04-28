@@ -43,7 +43,5 @@ ADD_LIBRARY(PointerCoordinates-static STATIC ${POINTERCOORDINATES_SRCS} ${POINTE
 TARGET_LINK_LIBRARIES(PointerCoordinates-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 SET_TARGET_PROPERTIES(PointerCoordinates-static PROPERTIES OUTPUT_NAME "PointerCoordinates")
 SET_TARGET_PROPERTIES(PointerCoordinates-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins PointerCoordinates-static)
-
 SET_TARGET_PROPERTIES(PointerCoordinates-static PROPERTIES FOLDER "plugins/PointerCoordinates")
 

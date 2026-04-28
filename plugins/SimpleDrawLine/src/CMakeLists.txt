@@ -34,7 +34,6 @@ ELSE()
      SET_TARGET_PROPERTIES(SimpleDrawLine-static PROPERTIES OUTPUT_NAME "SimpleDrawLine")
      TARGET_LINK_LIBRARIES(SimpleDrawLine-static ${StelMain} ${SimpleDrawLine_Qt_Libraries})
      SET_TARGET_PROPERTIES(SimpleDrawLine-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-     ADD_DEPENDENCIES(AllStaticPlugins SimpleDrawLine-static)
 ENDIF()
 
 SET_TARGET_PROPERTIES(SimpleDrawLine-static PROPERTIES FOLDER "plugins/SimpleDrawLine")
