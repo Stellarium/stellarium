@@ -2,8 +2,10 @@
 # to generate manual page:
 # pod2man --section=1 -r ${VERSION} --center=" " stellarium.pod stellarium.1
 
-IF(UNIX AND NOT WIN32 AND NOT APPLE)
-     ADD_CUSTOM_TARGET(ManPages ALL)
+IF(UNIX AND NOT WIN32 AND NOT APPLE AND NOT ANDROID)
+     ADD_CUSTOM_TARGET(ManPages ALL
+          DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1
+     )
 
      CONFIGURE_FILE(
           ${PROJECT_SOURCE_DIR}/cmake/stellarium.pod.cmake
@@ -11,15 +13,9 @@ IF(UNIX AND NOT WIN32 AND NOT APPLE)
      )
 
      ADD_CUSTOM_COMMAND(
-          TARGET ManPages
+          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1 
           COMMAND pod2man
           ARGS -s 1 -r ${VERSION} -center=" " ${CMAKE_CURRENT_BINARY_DIR}/stellarium.pod ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1
-          OUTPUTS ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1
-     )
-
-     ADD_CUSTOM_COMMAND(
-          TARGET ManPages
-          DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1
      )
 
      # default directory for manual page
