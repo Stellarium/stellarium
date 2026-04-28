@@ -29,10 +29,12 @@ QMutex StelLogger::fileMutex;
 
 void StelLogger::init(const QString& logFilePath)
 {
+#if !defined(Q_OS_ANDROID)
 	logFile.setFileName(logFilePath);
 
 	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
 		qInstallMessageHandler(StelLogger::debugLogHandler);
+#endif
 }
 
 void StelLogger::deinit()
@@ -79,9 +81,13 @@ void StelLogger::writeLog(QString msg)
 	if (!msg.endsWith('\n'))
 		msg.append(QLatin1Char('\n'));
 
+#if defined(Q_OS_ANDROID)
+	qDebug() << msg;
+#else
 	fileMutex.lock();
 	const auto utf8 = msg.toUtf8();
 	logFile.write(utf8.constData(), utf8.size());
 	log += msg;
 	fileMutex.unlock();
+#endif
 }
