@@ -74,14 +74,20 @@ public:
 		QString renderer;
 		QSurface* surface;
 		QOpenGLContext* mainContext;
-		QOpenGLFunctions* functions;
-		PFNGLMINSAMPLESHADINGPROC glMinSampleShading = nullptr;
+		QOpenGLFunctions *functions;
+#if QT_CONFIG(opengles2)
+		PFNGLMINSAMPLESHADINGOESPROC
+#else
+		PFNGLMINSAMPLESHADINGPROC
+#endif
+		glMinSampleShading = nullptr;
 		GLint maxAnisotropy = 0;
 		GLint maxTextureSize = 2048;
 		bool supportsLuminanceTextures = false;
 		bool isCoreProfile = false;
 		bool isHighGraphicsMode = false;
 		bool isGLES = false;
+		GLint majorVersion = 0;
 	};
 
 	StelMainView(QSettings* settings);

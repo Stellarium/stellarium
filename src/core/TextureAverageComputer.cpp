@@ -22,8 +22,6 @@
 
 #if !QT_CONFIG(opengles2) // This class uses glGetTexImage(), which is not supported in GLES2
 
-#include <QOpenGLFunctions_3_3_Core>
-
 Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, const int width, const int height)
 {
 	// Get average value of the pixels as the value of the deepest mipmap level

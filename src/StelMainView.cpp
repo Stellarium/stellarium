@@ -885,6 +885,7 @@ void StelMainView::init()
 	glInfo.supportsLuminanceTextures = format.profile() == QSurfaceFormat::CompatibilityProfile ||
 									   format.majorVersion() < 3;
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
+	glInfo.majorVersion = format.majorVersion();
 	qInfo().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
         #if defined Q_OS_HAIKU || defined Q_OS_SOLARIS
@@ -927,7 +928,7 @@ void StelMainView::init()
 		auto addr = glInfo.mainContext->getProcAddress("glMinSampleShading");
 		if(!addr)
 			addr = glInfo.mainContext->getProcAddress("glMinSampleShadingARB");
-		glInfo.glMinSampleShading = reinterpret_cast<PFNGLMINSAMPLESHADINGPROC>(addr);
+		glInfo.glMinSampleShading = reinterpret_cast<decltype(glInfo.glMinSampleShading)>(addr);
 	}
 	gl.glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInfo.maxTextureSize);
 	qInfo() << "Maximum 2D texture size:" << glInfo.maxTextureSize;

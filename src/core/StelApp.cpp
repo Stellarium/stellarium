@@ -88,7 +88,6 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLFramebufferObject>
-#include <QOpenGLFunctions_3_3_Core>
 #include <QString>
 #include <QStringList>
 #include <QSysInfo>
@@ -802,6 +801,7 @@ void main()
 	postProcessorUniformLocations.ditherPattern = postProcessorProgram->uniformLocation("ditherPattern");
 	postProcessorProgram->release();
 
+#if !QT_CONFIG(opengles2)
 	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
 	{
 		postProcessorProgramMS.reset(new QOpenGLShaderProgram);
@@ -836,6 +836,7 @@ void main()
 		postProcessorUniformLocationsMS.numMultiSamples   = postProcessorProgramMS->uniformLocation("numMultiSamples");
 		postProcessorProgramMS->release();
 	}
+#endif
 }
 
 void StelApp::highGraphicsModeDraw()
@@ -980,7 +981,7 @@ void StelApp::draw()
 
 	core->preDraw();
 
-	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode && !StelMainView::getInstance().getGLInformation().isGLES)
 	{
 		highGraphicsModeDraw();
 	}
