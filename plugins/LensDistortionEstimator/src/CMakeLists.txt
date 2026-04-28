@@ -75,6 +75,4 @@ ELSE()
 	TARGET_LINK_LIBRARIES(LensDistortionEstimator-static ${NLOPT_LIBRARIES})
 ENDIF()
 
-ADD_DEPENDENCIES(AllStaticPlugins LensDistortionEstimator-static)
-
 SET_TARGET_PROPERTIES(LensDistortionEstimator-static PROPERTIES FOLDER "plugins/LensDistortionEstimator")

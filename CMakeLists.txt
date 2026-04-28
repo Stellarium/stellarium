@@ -545,65 +545,38 @@ ELSE()
      SET(ISS_GUIDE "; No link to Stellarium User Guide")
 ENDIF()
 
-########### Plugin setup #############
-
-SET(STELLARIUM_PLUGINS) # Global list of all the plugins.
-MACRO(ADD_PLUGIN NAME DEFAULT)
-     STRING(TOUPPER ${NAME} NAME_UP)
-     SET(USE_PLUGIN_${NAME_UP} ${DEFAULT} CACHE BOOL "Define whether the ${NAME} plugin should be created.")
-     SET(STELLARIUM_PLUGINS ${STELLARIUM_PLUGINS} ${NAME})
-ENDMACRO()
-
-#### demo plugins ####
-ADD_PLUGIN(HelloStelModule 0)
-ADD_PLUGIN(SimpleDrawLine 0)
-#### work plugins ####
-ADD_PLUGIN(AngleMeasure 1)
-ADD_PLUGIN(ArchaeoLines 1)
-ADD_PLUGIN(Calendars 1)
-ADD_PLUGIN(Exoplanets 1)
-ADD_PLUGIN(EquationOfTime 1)
-ADD_PLUGIN(MeteorShowers 1)
-ADD_PLUGIN(MosaicCamera 1)
-ADD_PLUGIN(NavStars 1)
-ADD_PLUGIN(Novae 1)
-ADD_PLUGIN(Observability 1)
-ADD_PLUGIN(Oculars 1)
-ADD_PLUGIN(Oculus 0)
-ADD_PLUGIN(OnlineQueries 1)
-ADD_PLUGIN(PointerCoordinates 1)
-ADD_PLUGIN(Pulsars 1)
-ADD_PLUGIN(Quasars 1)
-IF(ENABLE_SCRIPTING)
-     ADD_PLUGIN(RemoteControl 1)
-ELSE()
-     ADD_PLUGIN(RemoteControl 0)
-ENDIF()
-ADD_PLUGIN(RemoteSync 1)
-ADD_PLUGIN(Satellites 1)
-ADD_PLUGIN(Scenery3d 1)
-ADD_PLUGIN(Supernovae 1)
-# Candidate to removing as an archaic plugin
-ADD_PLUGIN(TextUserInterface 1)
-ADD_PLUGIN(TelescopeControl 1)
-# These plugins are GUI heavy and just make no sense without:
-IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
-     ADD_PLUGIN(LensDistortionEstimator 1)
-     ADD_PLUGIN(NebulaTextures 1)
-     ADD_PLUGIN(SkyCultureMaker 1)
-     ADD_PLUGIN(SolarSystemEditor 1)
-     ADD_PLUGIN(TimeNavigator 1)
-ENDIF()
-
-ADD_PLUGIN(Vts 0)
-
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
 
-# Custom target used to manage dependencies of stellarium -> Static plugins
-# It is important that static plugins are compiled before stellarium main executable is linked
-ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
-SET_TARGET_PROPERTIES(AllStaticPlugins PROPERTIES FOLDER "plugins")
+SET(STELLARIUM_PLUGINS) # Global list of all the enabled plugins.
+file( GLOB pluginDirs plugins/* )
+FOREACH( pluginDir IN LISTS pluginDirs )
+	IF( IS_DIRECTORY ${pluginDir} )
+		GET_FILENAME_COMPONENT( NAME "${pluginDir}" NAME )
+
+		STRING( TOUPPER ${NAME} NAME_UP )
+		SET( DEFAULT TRUE )
+		
+		IF("${NAME_UP}" MATCHES "^REMOTECONTROL$")
+			IF( NOT ENABLE_SCRIPTING )
+				SET( DEFAULT FALSE )
+			ENDIF()
+		ELSEIF( "${NAME_UP}" MATCHES "^(LENSDISTORTIONESTIMATOR|NEBULATEXTURES|SKYCULTUREMAKER|SOLARSYSTEMEDITOR|TIMENAVIGATOR)$")
+			IF( NOT STELLARIUM_GUI_MODE STREQUAL "Standard" )
+				SET( DEFAULT FALSE )
+			ENDIF()
+		ELSEIF( "${NAME_UP}" MATCHES "^(HELLOSTELMODULE|SIMPLEDRAWLINE|OCULUS|VTS)$")
+			SET( DEFAULT FALSE )
+		ENDIF()
+
+		SET( USE_PLUGIN_${NAME_UP} ${DEFAULT} CACHE BOOL "Define whether the ${NAME} plugin should be created." )
+
+		IF(USE_PLUGIN_${NAME_UP})
+			SET(STELLARIUM_PLUGINS ${STELLARIUM_PLUGINS} ${NAME})
+			ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_${NAME_UP})
+		ENDIF()
+	ENDIF()
+ENDFOREACH()
 
 ########### Find packages ###########
 FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)

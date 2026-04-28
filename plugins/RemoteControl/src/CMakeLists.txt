@@ -90,6 +90,4 @@ ENDIF()
 # The library target "RemoteControl-static" has a default OUTPUT_NAME of "RemoteControl-static", so change it.
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES OUTPUT_NAME "RemoteControl")
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins RemoteControl-static)
-
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES FOLDER "plugins/RemoteControl")

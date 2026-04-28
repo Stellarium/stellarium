@@ -459,30 +459,6 @@ IF (STELLARIUM_GUI_MODE STREQUAL "None")
      ADD_DEFINITIONS(-DNO_GUI)
 ENDIF()
 
-
-###############################################################################################
-################## Static plugins need to be known by the file StelApp.cpp at compilation time
-################## so add the definitions to the compilation.
-################## Also add the full path to the .a libraries at compilation time.
-
-### demo plugins ###
-
-FOREACH(NAME ${STELLARIUM_PLUGINS})
-     STRING(TOUPPER ${NAME} NAME_UP)
-     IF(USE_PLUGIN_${NAME_UP})
-          SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${NAME}-static)
-          ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_${NAME_UP})
-     ENDIF()
-ENDFOREACH()
-
-IF(USE_PLUGIN_TELESCOPECONTROL)
-     # WinSock library
-     IF(WIN32)
-          SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ws2_32)
-     ENDIF()
-ENDIF()
-
-
 #############################################################################################
 ################################ Build main program #########################################
 #############################################################################################
@@ -516,10 +492,6 @@ IF(Qt6_FOUND)
      LIST(APPEND STELLARIUM_QT_LIBRARIES Qt6::SvgWidgets)
 ENDIF()
 
-IF(NOT USE_BUNDLED_QTCOMPRESS)
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::GuiPrivate)
-ELSE()
-ENDIF()
 IF(APPLE AND Qt6_FOUND)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::DBus)
 ENDIF()
@@ -559,7 +531,8 @@ IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
      CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 ENDIF()
 
-SET(STELMAIN_DEPS ${MD4C_STEL_LIBRARIES} ${ZLIB_LIBRARIES} glues_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY} ${STD_EXECUTION_LIBS})
+SET(STELMAIN_DEPS ${MD4C_STEL_LIBRARIES} ${ZLIB_LIBRARIES} glues_stel AllStaticPlugins ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY} ${STD_EXECUTION_LIBS})
+
 IF(USE_BUNDLED_QTCOMPRESS)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} qtcompress_stel)
 ENDIF()
@@ -612,8 +585,6 @@ ENDIF()
 TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${md4c_SOURCE_DIR}/src")
 
 SET_TARGET_PROPERTIES(stellarium PROPERTIES ENABLE_EXPORTS TRUE)
-
-ADD_DEPENDENCIES(stellarium AllStaticPlugins)
 
 # Adding manifest
 IF(MSVC)

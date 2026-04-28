@@ -38,6 +38,4 @@ TARGET_LINK_LIBRARIES(ArchaeoLines-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VER
 # The library target "ArchaeoLines-static" has a default OUTPUT_NAME of "ArchaeoLines-static", so change it.
 SET_TARGET_PROPERTIES(ArchaeoLines-static PROPERTIES OUTPUT_NAME "ArchaeoLines")
 SET_TARGET_PROPERTIES(ArchaeoLines-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins ArchaeoLines-static)
-
 SET_TARGET_PROPERTIES(ArchaeoLines-static PROPERTIES FOLDER "plugins/ArchaeoLines")

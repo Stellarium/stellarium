@@ -42,6 +42,4 @@ ADD_LIBRARY(Observability-static STATIC ${Observability_SRCS} ${Observability_RE
 TARGET_LINK_LIBRARIES(Observability-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 SET_TARGET_PROPERTIES(Observability-static PROPERTIES OUTPUT_NAME "Observability")
 SET_TARGET_PROPERTIES(Observability-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins Observability-static)
-
 SET_TARGET_PROPERTIES(Observability-static PROPERTIES FOLDER "plugins/Observability")

@@ -49,6 +49,4 @@ ADD_LIBRARY(MeteorShowers-static STATIC ${MeteorShowers_SRCS} ${MeteorShowers_MO
 TARGET_LINK_LIBRARIES(MeteorShowers-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 SET_TARGET_PROPERTIES(MeteorShowers-static PROPERTIES OUTPUT_NAME "MeteorShowers")
 SET_TARGET_PROPERTIES(MeteorShowers-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins MeteorShowers-static)
-
 SET_TARGET_PROPERTIES(MeteorShowers-static PROPERTIES FOLDER "plugins/MeteorShowers")

@@ -37,6 +37,4 @@ ENDIF()
 # The library target "TextUserInterface-static" has a default OUTPUT_NAME of "TextUserInterface-static", so change it.
 SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES OUTPUT_NAME "TextUserInterface")
 SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins TextUserInterface-static)
-
 SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES FOLDER "plugins/TextUserInterface")
