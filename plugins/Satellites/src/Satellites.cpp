@@ -2464,7 +2464,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	}
 	else
 	{
-		qWarning() << "[Satellites] FAILED to download" << reply->url().toString(QUrl::RemoveUserInfo) << "Error:" << reply->errorString();
+		qWarning().nospace() << "[Satellites] FAILED to download " << reply->url().toString(QUrl::RemoveUserInfo) << ". Error " << reply->error() << ": " << reply->errorString();
 		emit updateStateChanged(DownloadError);
 	}
 
