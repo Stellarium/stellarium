@@ -29,6 +29,7 @@ add_library(TelescopeControl_INDI STATIC
 target_link_libraries(TelescopeControl_INDI
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Network
+    Qt${QT_VERSION_MAJOR}::OpenGL
     indiclient
     TelescopeControl_common
     ${CMAKE_THREAD_LIBS_INIT}

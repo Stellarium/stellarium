@@ -40,6 +40,7 @@ SET(MosaicCamera_Qt_Libraries
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Gui
     Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::OpenGL
 )
 
 ADD_LIBRARY(MosaicCamera-static STATIC ${MosaicCamera_SRCS} ${MosaicCamera_RES_CXX} ${MosaicCamera_UIS_H})

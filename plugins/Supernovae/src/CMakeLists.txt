@@ -39,7 +39,7 @@ ELSE()
 ENDIF()
 
 ADD_LIBRARY(Supernovae-static STATIC ${Supernovae_SRCS} ${Supernovae_RES_CXX} ${SupernovaeDialog_UIS_H})
-TARGET_LINK_LIBRARIES(Supernovae-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(Supernovae-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 
 IF(ENABLE_TESTING)
     ADD_SUBDIRECTORY(test)

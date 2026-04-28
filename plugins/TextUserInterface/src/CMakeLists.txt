@@ -30,10 +30,9 @@ SET(TextUserInterface_SRCS
 )
 
 ADD_LIBRARY(TextUserInterface-static STATIC ${TextUserInterface_SRCS})
+TARGET_LINK_LIBRARIES(TextUserInterface-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 IF(ENABLE_SCRIPT_QML)
-TARGET_LINK_LIBRARIES(TextUserInterface-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Qml)
-ELSE()
-TARGET_LINK_LIBRARIES(TextUserInterface-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(TextUserInterface-static Qt${QT_VERSION_MAJOR}::Qml)
 ENDIF()
 # The library target "TextUserInterface-static" has a default OUTPUT_NAME of "TextUserInterface-static", so change it.
 SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES OUTPUT_NAME "TextUserInterface")
