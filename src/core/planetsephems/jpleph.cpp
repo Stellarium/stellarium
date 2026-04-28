@@ -75,6 +75,8 @@ details of the implementation encapsulated.
 // GZ patches for Large File Support for DE431 past AD10100...
 #if defined(Q_OS_WIN)
 #define FSeek(__FILE, __OFFSET, _MODE) _fseeki64(__FILE, __OFFSET, _MODE)
+#elif defined(Q_OS_ANDROID)
+#define FSeek(__FILE, __OFFSET, _MODE) fseek(__FILE, __OFFSET, _MODE)
 #else
 #define FSeek(__FILE, __OFFSET, _MODE) fseeko(__FILE, __OFFSET, _MODE)
 #endif
