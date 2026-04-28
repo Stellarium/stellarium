@@ -58,6 +58,13 @@
 #include <QFileOpenEvent>
 #endif
 
+#ifdef Q_OS_ANDROID
+#include <QJniObject>
+#include <QJniEnvironment>
+#include <QtCore/private/qjnihelpers_p.h>
+#include <QtCore/private/qandroidextras_p.h>
+#endif
+
 #include <clocale>
 
 #ifdef Q_OS_WIN
@@ -229,10 +236,24 @@ int main(int argc, char **argv)
 	setlocale(LC_NUMERIC, "C");
 
 #ifdef Q_OS_ANDROID
-    QFont newFont = QApplication::font();
-    newFont.setPixelSize(28);
-    QApplication::setFont(newFont);
+	QFont newFont = QApplication::font();
+	newFont.setPixelSize(28);
+	QApplication::setFont(newFont);
+
+	if (!QJniObject::callStaticMethod<jboolean>("android/os/Environment", "isExternalStorageManager"))
+	{
+		QJniEnvironment env;
+		QJniObject activity = QtAndroidPrivate::activity();
+		jclass android_content_Context =env->GetObjectClass(activity.object());
+		jmethodID midGetPackageName = env->GetMethodID(android_content_Context,"getPackageName", "()Ljava/lang/String;");
+		QJniObject packageName= env->CallObjectMethod(activity.object(), midGetPackageName);
+		QJniObject filepermit = QJniObject::getStaticObjectField( "android/provider/Settings", "ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION","Ljava/lang/String;" );
+		QJniObject parsedUri  = QJniObject::callStaticObjectMethod("android/net/Uri", "parse", "(Ljava/lang/String;)Landroid/net/Uri;", QJniObject::fromString("package:"+packageName.toString()).object());
+		QJniObject intent("android/content/Intent", "(Ljava/lang/String;Landroid/net/Uri;)V", filepermit.object<jstring>(), parsedUri.object());
+		QtAndroidPrivate::startActivity(intent, 0);
+	}
 #endif
+
 	// Init the file manager
 	StelFileMgr::init();
 
