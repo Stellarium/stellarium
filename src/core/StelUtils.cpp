@@ -3095,6 +3095,11 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 	return out;
 }
 
+bool isFilenameArchive(const QString& filename)
+{
+	return filename.endsWith(".gz") || filename.endsWith(".gzip");
+}
+
 qint64 getLongLong(const QJsonValue& v)
 {
 	const auto reportError = [&v]{

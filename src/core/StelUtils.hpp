@@ -1059,6 +1059,11 @@ namespace StelUtils
 	//! with other data.
 	QByteArray uncompress(QIODevice &device, qint64 maxBytes=-1);
 
+	//! Returns true if filename have the supported extension for "uncompress"
+	//! @param filename
+	//! @return true if supported (ends with ".gz" or ".gzip" for now)
+	bool isFilenameArchive(const QString& filename);
+
 	//! Greatest Common Divisor (Euclid's algorithm)
 	//! @param a first number
 	//! @param b second number

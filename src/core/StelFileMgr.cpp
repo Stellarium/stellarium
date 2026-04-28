@@ -39,6 +39,7 @@
 #endif
 
 #include "StelFileMgr.hpp"
+#include "StelUtils.hpp"
 
 // Initialize static members.
 QStringList StelFileMgr::fileLocations;
@@ -216,6 +217,18 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 		const QFileInfo finfo(i + "/" + path);
 		if (fileFlagsCheck(finfo, flags))
 			return i + "/" + path;
+	}
+
+	// Also, try to find file without the archive extension
+	if (StelUtils::isFilenameArchive(path))
+	{
+		QString baseName = path.left(path.lastIndexOf('.'));
+		for (const auto& i : std::as_const(fileLocations))
+		{
+			const QFileInfo finfo(i + "/" + baseName);
+			if (fileFlagsCheck(finfo, flags))
+				return i + "/" + baseName;
+		}
 	}
 
 	//FIXME: This line give false positive values for static plugins (trying search dynamic plugin first)
