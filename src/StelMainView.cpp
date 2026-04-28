@@ -59,8 +59,10 @@
 #include <QMessageBox>
 #include <QStandardPaths>
 #include <QStorageInfo>
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) || defined(Q_OS_ANDROID)
 	#include <QPinchGesture>
+#endif
+#ifdef Q_OS_WIN
 	#include <Windows.h>
 	#include <WinUser.h>
 #endif
@@ -366,10 +368,11 @@ public:
 
 		setAcceptHoverEvents(true);
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) || defined(Q_OS_ANDROID)
 		setAcceptTouchEvents(true);
 		grabGesture(Qt::PinchGesture);
 #endif
+
 		setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 		previousPaintTime = StelApp::getTotalRunTime();
 	}
@@ -490,8 +493,8 @@ protected:
 			mainView->thereWasAnEvent();
 	}
 
-	//*** Gesture and touch support, currently only for Windows
-#ifdef Q_OS_WIN
+	//*** Gesture and touch support, currently only for Windows and Android
+#if defined(Q_OS_WIN) || defined(Q_OS_ANDROID)
 	bool event(QEvent * e) override
 	{
 		bool r = false;
@@ -505,9 +508,15 @@ protected:
 
 				if (touchPoints.count() == 1)
 					setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
+				else
+					setAcceptedMouseButtons(Qt::NoButton);
 
+#if defined(Q_OS_WIN)
 				r = true;
 				break;
+#else
+				return QGraphicsObject::event(e);
+#endif
 			}
 			case QEvent::Gesture:
 				setAcceptedMouseButtons(Qt::NoButton);
