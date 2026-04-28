@@ -520,20 +520,26 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 
 	if (load)
 	{
-		ZoneArray* z = ZoneArray::create(catalogFilePath, true);
-		if (z)
-		{
-			if (z->level<gridLevels.size())
-			{
-				qWarning().noquote() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
-				delete z;
-				return true;
-			}
-			Q_ASSERT(z->level==maxGeodesicGridLevel+1);
-			Q_ASSERT(z->level==gridLevels.size());
-			++maxGeodesicGridLevel;
-			gridLevels.append(z);
-		}
+		bool useMmap;
+	
+		#if defined(Q_OS_ANDROID)
+			useMmap = false;
+		#else
+			useMmap = true;
+		#endif
+
+		    ZoneArray* z = ZoneArray::create( catalogFilePath, useMmap );
+		    if( z ) {
+			    if( z->level < gridLevels.size() ) {
+				    qWarning().noquote() << QDir::toNativeSeparators( catalogFileName ) << ", " << z->level << ": duplicate level";
+				    delete z;
+				    return true;
+			    }
+			    Q_ASSERT( z->level == maxGeodesicGridLevel + 1 );
+			    Q_ASSERT( z->level == gridLevels.size() );
+			    ++maxGeodesicGridLevel;
+			    gridLevels.append( z );
+		    }
 		return true;
 	}
 	else

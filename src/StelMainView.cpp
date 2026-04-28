@@ -927,7 +927,7 @@ void StelMainView::init()
 		auto addr = glInfo.mainContext->getProcAddress("glMinSampleShading");
 		if(!addr)
 			addr = glInfo.mainContext->getProcAddress("glMinSampleShadingARB");
-		glInfo.glMinSampleShading = reinterpret_cast<PFNGLMINSAMPLESHADINGPROC>(addr);
+		glInfo.glMinSampleShading = reinterpret_cast<decltype(glInfo.glMinSampleShading)>(addr);
 	}
 	gl.glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInfo.maxTextureSize);
 	qInfo() << "Maximum 2D texture size:" << glInfo.maxTextureSize;

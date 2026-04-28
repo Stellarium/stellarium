@@ -20,7 +20,9 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 
+#include <QOpenGLContext>
 #include <QPainter>
+#include <QSurface>
 #include <cmath>
 
 SplashScreen::SplashScreenWidget* SplashScreen::instance;
@@ -142,24 +144,53 @@ void setBestFontStretch(SplashTextHolder& h, QFont& font, const QString& text,
 		font.setStretch(max);
 }
 
+
+class OpenGLContextPresever
+{
+public:
+	QOpenGLContext * prevContext;
+	QSurface *       prevSurface;
+	
+	OpenGLContextPresever()
+	{
+		prevContext = QOpenGLContext::currentContext();
+		if (prevContext) {
+			prevSurface = prevContext->surface();
+		}
+	}
+	
+	~OpenGLContextPresever()
+	{
+		if (QOpenGLContext::currentContext() != prevContext) {
+			prevContext->makeCurrent(prevSurface);
+		}
+	}
+};
 }
 
 void SplashScreen::present(const double sizeRatio)
 {
+	OpenGLContextPresever preserver;
+	
 	Q_ASSERT(!instance);
 	instance=new SplashScreenWidget(sizeRatio);
 	instance->show();
+
+#if !defined(Q_OS_ANDROID)
 	instance->ensureFirstPaint();
+#endif
 }
 
 void SplashScreen::showMessage(QString const& message)
 {
+	OpenGLContextPresever contextPreserver;
 	Q_ASSERT(instance);
 	instance->showMessage(message, Qt::AlignLeft|Qt::AlignBottom, Qt::white);
 }
 
 void SplashScreen::finish(QWidget* mainWindow)
 {
+	OpenGLContextPresever contextPreserver;
 	Q_ASSERT(instance);
 	instance->hide();
 	instance->finish(mainWindow);
@@ -169,6 +200,7 @@ void SplashScreen::finish(QWidget* mainWindow)
 
 void SplashScreen::clearMessage()
 {
+	OpenGLContextPresever contextPreserver;
 	Q_ASSERT(instance);
 	instance->clearMessage();
 }
@@ -215,6 +247,7 @@ SplashScreen::SplashScreenWidget::SplashScreenWidget(const double sizeRatio)
 
 void SplashScreen::SplashScreenWidget::paintEvent(QPaintEvent* event)
 {
+	OpenGLContextPresever contextPreserver;
 	QSplashScreen::paintEvent(event);
 
 	QPainter p(this);

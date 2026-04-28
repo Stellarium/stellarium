@@ -2381,9 +2381,7 @@ void main()
 		// In Core profile wide lines (width>1px) are not supported, so this shader is used to render them with triangles.
 
 		// Common template for the geometry shader
-		const QByteArray geomSrc = 1+R"(
-#version 330
-
+		const QByteArray geomSrc = StelOpenGL::globalShaderPrefix(StelOpenGL::GEOMETRY_SHADER) + R"(
 layout(lines) in;
 layout(triangle_strip, max_vertices=4) out;
 uniform vec2 viewportSize;
@@ -2436,8 +2434,7 @@ void main()
 
 		// First a basic shader using constant line color
 		QOpenGLShader wideLineVertShader(QOpenGLShader::Vertex);
-		wideLineVertShader.compileSourceCode(1+R"(
-#version 330
+		wideLineVertShader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + R"(
 in vec3 vertex;
 uniform mat4 projectionMatrix;
 void main()
@@ -2454,8 +2451,7 @@ void main()
 			qWarning().noquote() << "StelPainter: Warnings while compiling wide line geometry shader: " << wideLineGeomShader.log();
 
 		QOpenGLShader wideLineFragShader(QOpenGLShader::Fragment);
-		wideLineFragShader.compileSourceCode(1+R"(
-#version 330
+		wideLineFragShader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + R"(
 uniform vec4 color;
 out vec4 outputColor;
 void main()
@@ -2478,8 +2474,7 @@ void main()
 
 		// Now a version of the shader that supports color interpolated along the line
 		QOpenGLShader colorfulWideLineVertShader(QOpenGLShader::Vertex);
-		colorfulWideLineVertShader.compileSourceCode(1+R"(
-#version 330
+		colorfulWideLineVertShader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + R"(
 in vec3 vertex;
 in vec4 color;
 out vec4 varyingColor;
@@ -2499,8 +2494,7 @@ void main()
 			qWarning().noquote() << "StelPainter: Warnings while compiling colorful wide line geometry shader: " << colorfulWideLineGeomShader.log();
 
 		QOpenGLShader colorfulWideLineFragShader(QOpenGLShader::Fragment);
-		colorfulWideLineFragShader.compileSourceCode(1+R"(
-#version 330
+		colorfulWideLineFragShader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + R"(
 in vec4 geomColor;
 out vec4 outputColor;
 void main()
