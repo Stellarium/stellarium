@@ -25,13 +25,13 @@
 #include "VecMath.hpp"
 #include <QOpenGLContext>
 #include <QOpenGLShaderProgram>
+#include "StelOpenGL.hpp"
 
 #if !QT_CONFIG(opengles2) // This class uses glGetTexImage(), which is not supported in GLES2
 
-class QOpenGLFunctions_3_3_Core;
 class TextureAverageComputer
 {
-	QOpenGLFunctions_3_3_Core& gl;
+	StelOpenGL::HighGraphicsFunctions& gl;
 	std::unique_ptr<QOpenGLShaderProgram> blitTexProgram;
 	GLuint potFBO = 0;
 	GLuint potTex = 0;
@@ -45,7 +45,7 @@ class TextureAverageComputer
 	Vec4f getTextureAverageWithWorkaround(GLuint texture);
 public:
 	Vec4f getTextureAverage(GLuint texture);
-    TextureAverageComputer(QOpenGLFunctions_3_3_Core&, int texW, int texH, GLenum internalFormat);
+	TextureAverageComputer(StelOpenGL::HighGraphicsFunctions&, int texW, int texH, GLenum internalFormat);
 	~TextureAverageComputer();
 };
 

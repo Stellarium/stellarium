@@ -931,6 +931,7 @@ void main()
 	postProcessorUniformLocations.ditherPattern = postProcessorProgram->uniformLocation("ditherPattern");
 	postProcessorProgram->release();
 
+#if !QT_CONFIG(opengles2)
 	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
 	{
 		postProcessorProgramMS.reset(new QOpenGLShaderProgram);
@@ -965,11 +966,11 @@ void main()
 		postProcessorUniformLocationsMS.numMultiSamples   = postProcessorProgramMS->uniformLocation("numMultiSamples");
 		postProcessorProgramMS->release();
 	}
+#endif
 }
 
 void StelApp::highGraphicsModeDraw()
 {
-#if !QT_CONFIG(opengles2)
 	const auto targetFBO = currentFbo;
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	const auto w = params.viewportXywh[2] * params.devicePixelsPerPixel;
@@ -982,11 +983,17 @@ void StelApp::highGraphicsModeDraw()
 		qInfo() << "OpenGL viewport size:" << viewport[2] << "x" << viewport[3];
 
 		qInfo().nospace() << "Creating scene FBO with size " << w << "x" << h;
+
+#if QT_CONFIG(opengles2)
+		const auto internalFormat = GL_RGBA16F;
+#else
 		const auto internalFormat = GL_RGBA16;
+#endif
 		QOpenGLFramebufferObjectFormat format;
 		format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 		format.setInternalTextureFormat(internalFormat);
 		sceneFBO.reset(new QOpenGLFramebufferObject(w, h, format));
+#if !QT_CONFIG(opengles2)
 		GLint maxSamples = 1;
 		GL(gl->glGetIntegerv(GL_MAX_SAMPLES, &maxSamples));
 		const auto samples = confSettings->value("video/multisampling", 0).toInt();
@@ -1025,6 +1032,7 @@ void StelApp::highGraphicsModeDraw()
 				                      << status;
 			}
 		}
+#endif
 	}
 
 	if(sceneMultisampledFBO)
@@ -1090,7 +1098,6 @@ void StelApp::highGraphicsModeDraw()
 	GL(gl->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
 	GL(gl->glDisable(GL_BLEND));
 	postProcessorVAO->release();
-#endif
 }
 
 //! Main drawing function called at each frame

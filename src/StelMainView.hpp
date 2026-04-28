@@ -85,6 +85,7 @@ public:
 		bool isCoreProfile = false;
 		bool isHighGraphicsMode = false;
 		bool isGLES = false;
+		GLint majorVersion = 0;
 	};
 
 	StelMainView(QSettings* settings);

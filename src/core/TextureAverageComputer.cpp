@@ -22,8 +22,6 @@
 
 #if !QT_CONFIG(opengles2) // This class uses glGetTexImage(), which is not supported in GLES2
 
-#include <QOpenGLFunctions_3_3_Core>
-
 Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, const int width, const int height)
 {
 	// Get average value of the pixels as the value of the deepest mipmap level
@@ -153,7 +151,7 @@ void TextureAverageComputer::init()
 }
 
 // Clobbers: GL_TEXTURE_BINDING_2D, GL_VERTEX_ARRAY_BINDING, GL_ARRAY_BUFFER_BINDING
-TextureAverageComputer::TextureAverageComputer(QOpenGLFunctions_3_3_Core& gl, const int texWidth, const int texHeight, const GLenum internalFormat)
+TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions& gl, const int texWidth, const int texHeight, const GLenum internalFormat)
 	: gl(gl)
 	, npotWidth(texWidth)
 	, npotHeight(texHeight)

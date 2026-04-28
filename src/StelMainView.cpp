@@ -885,13 +885,20 @@ void StelMainView::init()
 	glInfo.supportsLuminanceTextures = format.profile() == QSurfaceFormat::CompatibilityProfile ||
 									   format.majorVersion() < 3;
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
+	glInfo.majorVersion = format.majorVersion();
 	qInfo().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
         #if defined Q_OS_HAIKU || defined Q_OS_SOLARIS
         // Haiku OS/Solaris hasn't hardware acceleration and we shouldn't use High Graphics Mode here
         glInfo.isHighGraphicsMode = false;
         #else
-	glInfo.isHighGraphicsMode = !qApp->property("onetime_force_low_graphics").toBool() && !!StelOpenGL::highGraphicsFunctions();
+	// GLES will always provide high graphics functions due to our choice of QOpenGLExtraFunctions,
+	// so we also need to check that we have at least GLES3 to enable high graphics mode.
+	// For desktop OpenGL our target version is also at least 3, so it's compatible with this check.
+	// And we do need to check that high-graphics functions are available, since GL3.0 is not sufficient.
+	glInfo.isHighGraphicsMode = glInfo.majorVersion >= 3 && !!StelOpenGL::highGraphicsFunctions();
+	if (qApp->property("onetime_force_low_graphics").toBool())
+		glInfo.isHighGraphicsMode = false;
         #endif
 	qInfo() << "Running in" << (glInfo.isHighGraphicsMode ? "High" : "Low") << "Graphics Mode";
 

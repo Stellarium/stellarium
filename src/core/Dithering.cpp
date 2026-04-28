@@ -61,7 +61,8 @@ QString makeDitheringShader()
 	return 1+R"(
 #line 1 101
 uniform mediump vec3 rgbMaxValue;
-uniform sampler2D ditherPattern;
+uniform mediump sampler2D ditherPattern;
+
 mediump vec3 dither(mediump vec3 c)
 {
 	c = clamp(c, 0., 1.);
