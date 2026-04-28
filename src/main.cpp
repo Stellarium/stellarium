@@ -177,6 +177,10 @@ int main(int argc, char **argv)
 	// See https://github.com/Stellarium/stellarium/issues/4284
 	qputenv("QT_DISABLE_EMOJI_SEGMENTER", "1");
 
+#ifdef Q_OS_ANDROID
+	qputenv("QT_ENABLE_HIGHDPI_SCALING","0");
+#endif
+
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
@@ -196,7 +200,7 @@ int main(int argc, char **argv)
 	QDir appDir(appInfo.absolutePath());
 	appDir.cdUp();
 	QCoreApplication::addLibraryPath(appDir.absoluteFilePath("PlugIns"));
-	#elif defined(Q_OS_WIN)
+	#elif defined(Q_OS_WIN) || defined(Q_OS_ANDROID)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QCoreApplication::addLibraryPath(appInfo.absolutePath());
 	#endif	
@@ -224,6 +228,11 @@ int main(int argc, char **argv)
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
 
+#ifdef Q_OS_ANDROID
+    QFont newFont = QApplication::font();
+    newFont.setPixelSize(28);
+    QApplication::setFont(newFont);
+#endif
 	// Init the file manager
 	StelFileMgr::init();
 
@@ -444,6 +453,13 @@ int main(int argc, char **argv)
 
 	StelMainView mainWin(confSettings);
 
+	const bool fullscreen = confSettings->value("video/fullscreen", true).toBool();
+#if defined(Q_OS_ANDROID)
+	if (fullscreen)
+		mainWin.setFullScreen(true);
+	else
+		mainWin.showMaximized();
+#else
 	int screen = confSettings->value("video/screen_number", 0).toInt();
 	if (screen < 0 || screen >= qApp->screens().count())
 	{
@@ -465,7 +481,6 @@ int main(int argc, char **argv)
 #endif
 	mainWin.resize(size);
 
-	const bool fullscreen = confSettings->value("video/fullscreen", true).toBool();
 	if (fullscreen)
 	{
 		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
@@ -486,10 +501,11 @@ int main(int argc, char **argv)
 #else
 		mainWin.move(screenGeom.x() + x/pixelRatio,
 			     screenGeom.y() + y/pixelRatio);
+		mainWin.show();
 #endif
 	}
-
-	mainWin.show();
+	#endif
+	
 	SplashScreen::finish(&mainWin);
 	qDebug() << "Max thread count (Global Pool): " << QThreadPool::globalInstance()->maxThreadCount();
 	// Share available cores with the TextureLoader and other jobs
