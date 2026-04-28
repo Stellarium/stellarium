@@ -984,10 +984,9 @@ void StelMainView::init()
 	scene()->addItem(rootItem);
 	//set the default focus to the sky
 	focusSky();
-	nightModeEffect = new NightModeGraphicsEffect(this);
-	updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 	//install the effect on the whole view
-	rootItem->setGraphicsEffect(nightModeEffect);
+	rootItem->setGraphicsEffect(new NightModeGraphicsEffect(this));
+	updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 
 	flagInvertScreenShotColors = configuration->value("main/invert_screenshots_colors", false).toBool();
 	setScreenshotFormat(configuration->value("main/screenshot_format", "png").toString()); // includes check for supported formats.
@@ -1088,7 +1087,7 @@ void StelMainView::updateNightModeProperty(bool b)
 {
 	// So that the bottom bar tooltips get properly rendered in night mode.
 	setProperty("nightMode", b);
-	nightModeEffect->setEnabled(b);
+	rootItem->graphicsEffect()->setEnabled(b);
 }
 
 void StelMainView::reloadShaders()
@@ -1717,8 +1716,8 @@ void StelMainView::doScreenshot(void)
 	const auto pixelRatio = StelApp::getInstance().getDevicePixelsPerPixel();
 	int physImgWidth  = std::lround(stelScene->width() * pixelRatio);
 	int physImgHeight = std::lround(stelScene->height() * pixelRatio);
-	bool nightModeWasEnabled=nightModeEffect->isEnabled();
-	nightModeEffect->setEnabled(false);
+	bool effectWasEnabled=rootItem->graphicsEffect()->isEnabled();
+	rootItem->graphicsEffect()->setEnabled(false);
 	if (flagUseCustomScreenshotSize)
 	{
 		// Borrowed from Scenery3d renderer: determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
@@ -1822,7 +1821,7 @@ void StelMainView::doScreenshot(void)
 	delete fbObj;
 	// reset viewport and GUI
 	core->setCurrentStelProjectorParams(pParams);
-	nightModeEffect->setEnabled(nightModeWasEnabled);
+	rootItem->graphicsEffect()->setEnabled(effectWasEnabled);
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
 #ifndef NO_GUI
@@ -1833,7 +1832,7 @@ void StelMainView::doScreenshot(void)
 		stelGui->forceRefreshGui();
 	}
 #endif
-	if (nightModeWasEnabled)
+	if (rootItem->graphicsEffect() && rootItem->graphicsEffect()->isEnabled() && dynamic_cast<NightModeGraphicsEffect*>(rootItem->graphicsEffect()))
 	{
 		for (int row=0; row<im.height(); ++row)
 			for (int col=0; col<im.width(); ++col)
