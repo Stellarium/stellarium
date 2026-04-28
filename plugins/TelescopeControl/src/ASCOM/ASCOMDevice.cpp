@@ -20,6 +20,10 @@
 #include "TelescopeControl.hpp"
 #include <comdef.h>
 
+#ifdef _MSC_VER
+#include <atlcomcli.h>
+#endif // _MSC_VER
+
 ASCOMDevice::ASCOMDevice(QObject* parent, QString ascomDeviceId) : QObject(parent),
 	mAscomDeviceId(ascomDeviceId)
 {}
