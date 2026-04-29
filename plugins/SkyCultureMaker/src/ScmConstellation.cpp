@@ -58,54 +58,14 @@ QString scm::ScmConstellation::getId() const
 	return id;
 }
 
-void scm::ScmConstellation::setEnglishName(const QString &name)
+void scm::ScmConstellation::setCulturalName(const ScmCulturalName &culturalName)
 {
-	englishName = name;
+	ScmConstellation::culturalName = culturalName;
 }
 
-QString scm::ScmConstellation::getEnglishName() const
+const scm::ScmCulturalName &scm::ScmConstellation::getCulturalName() const
 {
-	return englishName;
-}
-
-void scm::ScmConstellation::setNativeName(const std::optional<QString> &name)
-{
-	nativeName = name;
-}
-
-std::optional<QString> scm::ScmConstellation::getNativeName() const
-{
-	return nativeName;
-}
-
-void scm::ScmConstellation::setPronounce(const std::optional<QString> &pronounce)
-{
-	ScmConstellation::pronounce = pronounce;
-}
-
-std::optional<QString> scm::ScmConstellation::getPronounce() const
-{
-	return pronounce;
-}
-
-void scm::ScmConstellation::setTransliteration(const std::optional<QString> &translit)
-{
-	ScmConstellation::transliteration = translit;
-}
-
-std::optional<QString> scm::ScmConstellation::getTransliteration() const
-{
-	return transliteration;
-}
-
-void scm::ScmConstellation::setIPA(const std::optional<QString> &ipa)
-{
-	ScmConstellation::ipa = ipa;
-}
-
-std::optional<QString> scm::ScmConstellation::getIPA() const
-{
-	return ipa;
+	return culturalName;
 }
 
 void scm::ScmConstellation::setArtwork(const ScmConstellationArtwork &artwork)
@@ -185,8 +145,8 @@ void scm::ScmConstellation::drawName(StelCore *core, StelPainter &sPainter, cons
 	}
 
 	sPainter.setColor(nameColor, 1.0f);
-	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), englishName, 0.,
-	                  -sPainter.getFontMetrics().boundingRect(englishName).width() / 2, 0, false);
+	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), culturalName.translated, 0.,
+	                  -sPainter.getFontMetrics().boundingRect(culturalName.translated).width() / 2, 0, false);
 }
 
 void scm::ScmConstellation::drawArtwork(StelCore *core, StelPainter &sPainter) const
@@ -232,35 +192,7 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const boo
 		json["image"] = artwork.toJson("illustrations/" + fileInfo.fileName());
 	}
 
-	// Assemble common name object
-	QJsonObject commonNameObj;
-	commonNameObj["english"] = englishName;
-	if (nativeName.has_value())
-	{
-		commonNameObj["native"] = nativeName.value();
-	}
-	if (pronounce.has_value())
-	{
-		commonNameObj["pronounce"] = pronounce.value();
-	}
-	if (transliteration.has_value())
-	{
-		commonNameObj["transliteration"] = transliteration.value();
-	}
-	if (ipa.has_value())
-	{
-		commonNameObj["ipa"] = ipa.value();
-	}
-	if (references.has_value() && !references->isEmpty())
-	{
-		QJsonArray refsArray;
-		for (const auto &ref : references.value())
-		{
-			refsArray.append(ref);
-		}
-		commonNameObj["references"] = refsArray;
-	}
-	json["common_name"] = commonNameObj;
+	json["common_name"] = culturalName.toJson();
 
 	return json;
 }

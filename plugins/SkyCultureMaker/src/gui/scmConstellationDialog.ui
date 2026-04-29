@@ -117,78 +117,132 @@
        <item>
         <widget class="QLabel" name="labelsTitle"/>
        </item>
+        <item>
+          <widget class="QLabel" name="constellationNameTabExplanationLbl">
+          <property name="text">
+            <string>Mandatory fields are marked with an asterisk (*).</string>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
+          </property>
+          </widget>
+        </item>
        <item>
         <widget class="QLabel" name="enNameLbl">
          <property name="text">
-          <string>English name</string>
+          <string>English name:*</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="enNameLE"/>
+        <widget class="QLineEdit" name="enNameLE">
+          <property name="placeholderText">
+            <string>Translation of the name’s meaning. This is translated to users’ language.</string>
+          </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="idLbl">
          <property name="text">
-          <string>ID (Do not include 'CON' or the sky culture name)</string>
+          <string>ID:*</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="idLE"/>
+        <widget class="QLineEdit" name="idLE">
+          <property name="placeholderText">
+            <string>Identifier of the constellation. Do not include 'CON' or the sky culture name.</string>
+          </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="bynameLbl">
+         <property name="text">
+          <string>Byname:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="bynameLE">
+          <property name="placeholderText">
+            <string>An optional explanatory addition to the name. May be helpful to explain mythological figures.</string>
+          </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="natNameLbl">
          <property name="text">
-          <string>Native name (optional)</string>
+          <string>Native name:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="natNameLE"/>
+        <widget class="QLineEdit" name="natNameLE">
+          <property name="placeholderText">
+            <string>Name in the original language of the skyculture.</string>
+          </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="pronounceLbl">
          <property name="text">
-          <string>Pronounciation (optional, European glyphs or Pinyin)</string>
+          <string>Pronounciation:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="pronounceLE"/>
+        <widget class="QLineEdit" name="pronounceLE">
+          <property name="placeholderText">
+            <string>Latin-character based transliteration/pronunciation aid, e.g. Pinyin for Chinese.</string>
+          </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="translitLbl">
          <property name="text">
-          <string>Transliteration (optional)</string>
+          <string>Transliteration:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="translitLE"/>
+        <widget class="QLineEdit" name="translitLE">
+          <property name="placeholderText">
+            <string>Scientific Latin-character based transliteration where applicable. This is not translatable or adaptable to user language conventions, but may include extended diacritics.</string>
+          </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="ipaLbl">
          <property name="text">
-          <string>IPA (optional)</string>
+          <string>IPA:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="ipaLE"/>
+        <widget class="QLineEdit" name="ipaLE">
+          <property name="placeholderText">
+            <string>Pronunciation in the International Phonetic Alphabet. This is not translatable or adaptable to user language conventions.</string>
+          </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Description (optional)</string>
+          <string>Description:</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QTextEdit" name="description">
+          <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
          <property name="acceptRichText">
           <bool>false</bool>
          </property>
+         <property name="placeholderText">
+            <string>Information on the constellation to be displayed in the description of the sky culture.</string>
+          </property>
         </widget>
        </item>
        <item>

@@ -26,6 +26,7 @@
 
 #include "ScmConstellationArtwork.hpp"
 #include "VecMath.hpp"
+#include "types/ScmCulturalName.hpp"
 #include "types/ConstellationLine.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
@@ -59,74 +60,18 @@ public:
 	QString getId() const;
 
 	/**
-    * @brief Sets the english name of the constellation
-    * 
-    * @param name The english name
-    */
-	void setEnglishName(const QString &name);
-
-	/**
-	* @brief Gets the english name of the constellation
-	* 
-	* @return The english name
-	*/
-	QString getEnglishName() const;
-
-	/**
-    * @brief Sets the native name of the constellation
-    * 
-    * @param name The native name
-    */
-	void setNativeName(const std::optional<QString> &name);
-
-	/**
-	* @brief Gets the native name of the constellation
-	* 
-	* @return The native name
-	*/
-	std::optional<QString> getNativeName() const;
-
-	/**
-    * @brief Sets the pronounciation of the constellation
-    * 
-    * @param pronounce The pronounciation
-    */
-	void setPronounce(const std::optional<QString> &pronounce);
-
-	/**
-	 * @brief Gets the pronounciation of the constellation
-	 * 
-	 * @return The pronounciation
-	 */
-	std::optional<QString> getPronounce() const;
-
-	/**
-	* @brief Sets the transliteration of the constellation.
-	*
-	* @param translit The optional transliteration
-	 */
-	void setTransliteration(const std::optional<QString> &translit);
-
-	/**
-	 * @brief Gets the Transliteration.
+	 * @brief Sets the cultural name of the constellation.
 	 *
-	 * @return The optional transliteration
+	 * @param culturalName The cultural name data.
 	 */
-	std::optional<QString> getTransliteration() const;
+	void setCulturalName(const ScmCulturalName &culturalName);
 
 	/**
-    * @brief Sets the IPA.
-    * 
-    * @param ipa The optional ipa
+	 * @brief Gets the cultural name of the constellation.
+	 *
+	 * @return The cultural name data.
 	 */
-	void setIPA(const std::optional<QString> &ipa);
-
-	/**
-	 * @brief Gets the IPA.
-	 * 
-	 * @return The optional ipa
-	 */
-	std::optional<QString> getIPA() const;
+	const ScmCulturalName &getCulturalName() const;
 
 	/**
 	* @brief Sets the description of the constellation.
@@ -231,23 +176,8 @@ private:
 	/// Identifier of the constellation
 	QString id;
 
-	/// The english name
-	QString englishName;
-
-	/// The native name
-	std::optional<QString> nativeName;
-
-	/// Native name in European glyphs, if needed. For Chinese, expect Pinyin here.
-	std::optional<QString> pronounce;
-
-	/// The scientiﬁc Latin-character based transliteration.
-	std::optional<QString> transliteration;
-
-	/// The native name in IPA (International Phonetic Alphabet)
-	std::optional<QString> ipa;
-
-	/// References to the sources of the name spellings
-	std::optional<QVector<int>> references;
+	/// Name and spelling metadata used in common_name JSON export.
+	ScmCulturalName culturalName;
 
 	/// The lines forming the constellation
 	std::vector<ConstellationLine> lines;
