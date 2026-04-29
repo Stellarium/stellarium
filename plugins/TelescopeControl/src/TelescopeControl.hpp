@@ -438,10 +438,6 @@ private:
 	//! Fontsize used to draw telescope text labels
 	int labelFontSize;
 
-#ifndef NO_GUI
-	// Toolbar button to toggle the Slew window
-	StelButton* toolbarButton;
-#endif
 	//! Telescope reticle texture
 	StelTextureSP reticleTexture;
 	//! Telescope selection marker texture
@@ -467,6 +463,8 @@ private:
 	QString serverExecutablesDirectoryPath;
 
 #ifndef NO_GUI
+	// Toolbar button to toggle the Slew window
+	StelButton* toolbarButton;
 	TelescopeDialog* telescopeDialog;
 	SlewDialog* slewDialog;
 #endif

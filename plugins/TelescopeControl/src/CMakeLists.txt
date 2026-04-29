@@ -1,3 +1,5 @@
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS SerialPort REQUIRED)
+
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(common)
@@ -50,12 +52,18 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::SerialPort
+    Qt${QT_VERSION_MAJOR}::OpenGL
     )
 IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 TARGET_LINK_LIBRARIES(TelescopeControl-static
     TelescopeControl_gui
     )
 ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+
+# WinSock library
+IF(WIN32)
+    TARGET_LINK_LIBRARIES(TelescopeControl-static ws2_32)
+ENDIF()
 
 IF(ENABLE_INDI)
     TARGET_LINK_LIBRARIES(TelescopeControl-static
@@ -69,6 +77,4 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
 ENDIF(WIN32)
 
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)
-
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES FOLDER "plugins/TelescopeControl")

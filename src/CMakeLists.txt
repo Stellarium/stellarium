@@ -459,30 +459,6 @@ IF (STELLARIUM_GUI_MODE STREQUAL "None")
      ADD_DEFINITIONS(-DNO_GUI)
 ENDIF()
 
-
-###############################################################################################
-################## Static plugins need to be known by the file StelApp.cpp at compilation time
-################## so add the definitions to the compilation.
-################## Also add the full path to the .a libraries at compilation time.
-
-### demo plugins ###
-
-FOREACH(NAME ${STELLARIUM_PLUGINS})
-     STRING(TOUPPER ${NAME} NAME_UP)
-     IF(USE_PLUGIN_${NAME_UP})
-          SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${NAME}-static)
-          ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_${NAME_UP})
-     ENDIF()
-ENDFOREACH()
-
-IF(USE_PLUGIN_TELESCOPECONTROL)
-     # WinSock library
-     IF(WIN32)
-          SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ws2_32)
-     ENDIF()
-ENDIF()
-
-
 #############################################################################################
 ################################ Build main program #########################################
 #############################################################################################
@@ -509,17 +485,13 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 # Setup Qt5/6 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Positioning)
+SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Positioning ${STEL_GLES_LIBS})
 
 IF(Qt6_FOUND)
 # Qt6 needs SvgWidgets, for Qt5 it's included in Svg
      LIST(APPEND STELLARIUM_QT_LIBRARIES Qt6::SvgWidgets)
 ENDIF()
 
-IF(NOT USE_BUNDLED_QTCOMPRESS)
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::GuiPrivate)
-ELSE()
-ENDIF()
 IF(APPLE AND Qt6_FOUND)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::DBus)
 ENDIF()
@@ -559,7 +531,8 @@ IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
      CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 ENDIF()
 
-SET(STELMAIN_DEPS ${MD4C_STEL_LIBRARIES} ${ZLIB_LIBRARIES} glues_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY} ${STD_EXECUTION_LIBS})
+SET(STELMAIN_DEPS ${MD4C_STEL_LIBRARIES} ${ZLIB_LIBRARIES} glues_stel AllStaticPlugins ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY} ${STD_EXECUTION_LIBS})
+
 IF(USE_BUNDLED_QTCOMPRESS)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} qtcompress_stel)
 ENDIF()
@@ -582,20 +555,28 @@ ENDIF()
 # Main executable/library setup
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
-     TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
+     TARGET_LINK_LIBRARIES(stelMain PUBLIC ${STELMAIN_DEPS})
      INSTALL(TARGETS stelMain DESTINATION bin)
      # WIN32 creates a windows app without console, no effect on non-win platforms
-     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
+     IF(${QT_VERSION_MAJOR} EQUAL "5")
+          ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
+     ELSE()
+          qt_add_executable(stellarium WIN32 ${stellarium_exe_SRCS})
+     ENDIF()
      #stelMain should be after the plug-ins, otherwise the build crashes
-     TARGET_LINK_LIBRARIES(stellarium stelMain ${winMMLib})
+     TARGET_LINK_LIBRARIES(stellarium PUBLIC stelMain ${winMMLib})
 ELSE()
      ADD_LIBRARY(stelMain STATIC ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
-     TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
-     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
-     TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS} stelMain)
+     TARGET_LINK_LIBRARIES(stelMain PUBLIC ${STELMAIN_DEPS})
+     IF(${QT_VERSION_MAJOR} EQUAL "5")
+          ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
+     ELSE()
+          qt_add_executable(stellarium WIN32 ${stellarium_exe_SRCS})
+     ENDIF()
+     TARGET_LINK_LIBRARIES(stellarium PUBLIC ${winMMLib} ${STELMAIN_DEPS} stelMain)
 
      IF(APPLE)
-	  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
+       SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
      ENDIF()
 ENDIF()
 if(ENABLE_PCH)
@@ -612,8 +593,6 @@ ENDIF()
 TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${md4c_SOURCE_DIR}/src")
 
 SET_TARGET_PROPERTIES(stellarium PROPERTIES ENABLE_EXPORTS TRUE)
-
-ADD_DEPENDENCIES(stellarium AllStaticPlugins)
 
 # Adding manifest
 IF(MSVC)
@@ -661,7 +640,11 @@ IF(APPLE)
 	  "
      )
 ELSE()
-     INSTALL(TARGETS stellarium DESTINATION bin)
+    IF( ANDROID )
+        INSTALL(TARGETS stellarium DESTINATION lib)
+    ELSE()
+        INSTALL(TARGETS stellarium DESTINATION bin)
+    ENDIF()
 ENDIF()
 IF(WIN32)
      IF((${QT_VERSION_MAJOR} EQUAL "5") AND (Qt5Core_VERSION VERSION_LESS "5.15"))

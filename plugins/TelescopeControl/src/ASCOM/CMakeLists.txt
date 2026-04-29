@@ -31,6 +31,7 @@ add_library(TelescopeControl_ASCOM STATIC
 target_link_libraries(TelescopeControl_ASCOM
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Network
+    Qt${QT_VERSION_MAJOR}::OpenGL
     TelescopeControl_common
     ${CMAKE_THREAD_LIBS_INIT}
     )

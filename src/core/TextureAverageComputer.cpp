@@ -20,10 +20,6 @@
 #include "TextureAverageComputer.hpp"
 #include "StelUtils.hpp"
 
-#if !QT_CONFIG(opengles2) // This class uses glGetTexImage(), which is not supported in GLES2
-
-#include <QOpenGLFunctions_3_3_Core>
-
 Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, const int width, const int height)
 {
 	// Get average value of the pixels as the value of the deepest mipmap level
@@ -36,17 +32,35 @@ Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, cons
 	const auto totalMipmapLevels = 1+std::floor(log2(max(width,height)));
 	const auto deepestLevel=totalMipmapLevels-1;
 
+	int deepestMipmapLevelWidth=-1, deepestMipmapLevelHeight=-1;
+#if ANDROID
+	deepestMipmapLevelWidth=1;
+	deepestMipmapLevelHeight=1;
+#else
 #ifndef NDEBUG
 	// Sanity check
-	int deepestMipmapLevelWidth=-1, deepestMipmapLevelHeight=-1;
 	gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, deepestLevel, GL_TEXTURE_WIDTH, &deepestMipmapLevelWidth);
 	gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, deepestLevel, GL_TEXTURE_HEIGHT, &deepestMipmapLevelHeight);
 	assert(deepestMipmapLevelWidth==1);
 	assert(deepestMipmapLevelHeight==1);
 #endif
+#endif
 
 	Vec4f pixel;
+#if defined(Q_OS_ANDROID)
+    GLint textureBinding;
+    gl.glGetIntegerv(GL_TEXTURE_BINDING_2D, &textureBinding);
+
+    GLuint fbo;
+    gl.glGenFramebuffers(1, &fbo); 
+    gl.glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    gl.glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureBinding, deepestLevel);
+    gl.glReadPixels(0, 0, deepestMipmapLevelWidth, deepestMipmapLevelHeight, GL_RGBA, GL_FLOAT, &pixel[0]);
+    gl.glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    gl.glDeleteFramebuffers(1, &fbo);
+#else
 	gl.glGetTexImage(GL_TEXTURE_2D, deepestLevel, GL_RGBA, GL_FLOAT, &pixel[0]);
+#endif
 	return pixel;
 }
 
@@ -153,7 +167,7 @@ void TextureAverageComputer::init()
 }
 
 // Clobbers: GL_TEXTURE_BINDING_2D, GL_VERTEX_ARRAY_BINDING, GL_ARRAY_BUFFER_BINDING
-TextureAverageComputer::TextureAverageComputer(QOpenGLFunctions_3_3_Core& gl, const int texWidth, const int texHeight, const GLenum internalFormat)
+TextureAverageComputer::TextureAverageComputer(StelOpenGL::Functions& gl, const int texWidth, const int texHeight, const GLenum internalFormat)
 	: gl(gl)
 	, npotWidth(texWidth)
 	, npotHeight(texHeight)
@@ -196,8 +210,7 @@ TextureAverageComputer::TextureAverageComputer(QOpenGLFunctions_3_3_Core& gl, co
 	gl.glBindVertexArray(0);
 
 	blitTexProgram.reset(new QOpenGLShaderProgram);
-    blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, 1+R"(
-#version 330
+    blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + R"(
 layout(location=0) in vec4 vertex;
 out vec2 texcoord;
 void main()
@@ -206,8 +219,7 @@ void main()
     texcoord = vertex.st*0.5+vec2(0.5);
 }
 )");
-	blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, 1+R"(
-#version 330
+	blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + R"(
 in vec2 texcoord;
 out vec4 color;
 uniform sampler2D tex;
@@ -231,5 +243,3 @@ TextureAverageComputer::~TextureAverageComputer()
 	gl.glDeleteVertexArrays(1, &vao);
 	gl.glDeleteBuffers(1, &vbo);
 }
-
-#endif

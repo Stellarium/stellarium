@@ -46,12 +46,12 @@
 
 Q_LOGGING_CATEGORY(onlineQueries,"stel.plugin.OnlineQueries")
 
-StelModule* OnlineQueriesPluginInterface::getStelModule() const
+StelModule* OnlineQueriesStelPluginInterface::getStelModule() const
 {
 	return new OnlineQueries();
 }
 
-StelPluginInfo OnlineQueriesPluginInterface::getPluginInfo() const
+StelPluginInfo OnlineQueriesStelPluginInterface::getPluginInfo() const
 {
 	// Allow to load the resources when used as a static plugin
 	Q_INIT_RESOURCE(OnlineQueries);

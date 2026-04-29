@@ -584,7 +584,7 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 		return res;
 	}
 
-	if (fileName.endsWith(".gz"))
+	if (StelUtils::isFilenameArchive(cityDataPath))
 	{
 		QDataStream in(StelUtils::uncompress(sourcefile.readAll()));
 		in.setVersion(QDataStream::Qt_5_2);

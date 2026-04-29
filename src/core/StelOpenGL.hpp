@@ -35,12 +35,28 @@
 # define GL(line) line
 #endif
 
-class QOpenGLFunctions_3_3_Core;
+#if defined(Q_OS_ANDROID)
+	#include <QOpenGLExtraFunctions>
+	#include <GLES3/gl32.h>
+	#define APIENTRY
+#else
+	#include <QOpenGLFunctions_1_0>
+	#include <QOpenGLFunctions_3_3_Core>
+#endif
 
 //! Namespace containing some OpenGL helpers
 namespace StelOpenGL
 {
-	//! The main context as created by the StelMainView (only used for debugging)
+
+	#if defined(Q_OS_ANDROID)
+	typedef QOpenGLExtraFunctions BaseFunctions;
+	typedef QOpenGLExtraFunctions Functions;
+	#else
+	typedef QOpenGLFunctions_1_0 BaseFunctions;
+	typedef QOpenGLFunctions_3_3_Core Functions;
+	#endif
+
+    //! The main context as created by the StelMainView (only used for debugging)
 	extern QOpenGLContext* mainContext;
 
 	//! Converts a GLenum from glGetError to a string
@@ -54,12 +70,13 @@ namespace StelOpenGL
 	{
 		VERTEX_SHADER,
 		FRAGMENT_SHADER,
+		GEOMETRY_SHADER,
 	};
 	//! Returns a prefix containing \#version directive and a few defines for
 	//  the GLSL version supported in current GL context.
 	QByteArray globalShaderPrefix(ShaderType);
 	//! Returns high-graphics OpenGL functions, for use in non-ANGLE/CompatProfile/etc. modes.
-	QOpenGLFunctions_3_3_Core* highGraphicsFunctions();
+	Functions* highGraphicsFunctions();
 }
 
 // This is still needed for the ARM platform (armhf)

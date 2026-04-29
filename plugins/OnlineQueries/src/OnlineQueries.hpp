@@ -137,7 +137,7 @@ private:
 #include "StelPluginInterface.hpp"
 
 //! This class is used by Qt to manage a plug-in interface
-class OnlineQueriesPluginInterface : public QObject, public StelPluginInterface
+class OnlineQueriesStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
