@@ -1,0 +1,365 @@
+{
+  "id": "potawatomi",
+  "region": "Northern America",
+  "classification": ["traditional"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON potawatomi 001",
+      "common_name": {
+        "english": "Big Snake",
+        "native": "Mshignébêk"
+      },
+      "lines": [[43813, 42799, 42313, 43109, 43813, 45336,
+                 46390, 49841, 52943, 56343, 57936, 64962]],
+      "image": {
+        "file": "illustrations/snake.png",
+        "size": [1024, 1024],
+        "anchors": [
+          { "pos": [50, 984], "hip": 64962 },
+          { "pos": [213, 327], "hip": 55434 },
+          { "pos": [770, 104], "hip": 43813 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 002",
+      "common_name": {
+        "english": "Underwater panther",
+        "native": "Nambezho"
+      },
+      "lines": [[47908, 48455, 50335, 50583, 49583, 49669],
+                [49583, 43109, 43813, 49669],
+                [43109, 42313, 42799, 43813]],
+      "image": {
+        "file": "illustrations/panther.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [288, 402], "hip": 57632 },
+          { "pos": [626, 161], "hip": 50335 },
+          { "pos": [683, 368], "hip": 49669 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 003",
+      "common_name": {
+        "english": "Wolf",
+        "native": "Mo’ëwé"
+      },
+      "lines": [[32349, 30324],
+                [32349, 33977, 34444, 33579],
+                [34444, 35904],
+                [32349, 33347, 34045, 33160, 33347]],
+      "image": {
+        "file": "illustrations/wolf.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [622, 242], "hip": 32349 },
+          { "pos": [648, 385], "hip": 30324 },
+          { "pos": [208, 167], "hip": 35904 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 004",
+      "common_name": {
+        "english": "Beaver",
+        "native": "Mëk"
+      },
+      "lines": [[37826, 36850, 36366, 34693, 32246, 30883,
+                 31681, 34088, 35550, 36962, 37826],
+                [37740, 36962, 36046, 34693, 33018],
+                [35350, 35550],
+                [34088, 32246, 30343]],
+      "image": {
+        "file": "illustrations/beaver.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [248, 372], "hip": 37826 },
+          { "pos": [219, 281], "hip": 36850 },
+          { "pos": [640, 250], "hip": 31681 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 005",
+      "common_name": {
+        "english": "Winter Maker / Bigfoot / Nanabozho",
+        "native": "Pondésé / Ktthe Sabé / Nenikboz"
+      },
+      "lines": [[26727, 26311, 25930],
+                [26727, 27366],
+                [25930, 25281, 24436],
+                [26727, 27989, 26207, 25336, 25930],
+                [27989, 28614, 29426, 28716],
+                [25336, 22449]],
+      "image": {
+        "file": "illustrations/bigfoot.png",
+        "size": [512, 1024],
+        "anchors": [
+          { "pos": [157, 445], "hip": 27989 },
+          { "pos": [343, 728], "hip": 24436 },
+          { "pos": [191, 757], "hip": 27366 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 008",
+      "common_name": {
+        "english": "Bison",
+        "native": "Bzhêké"
+      },
+      "lines": [[21421, 20894, 20205, 20455, 20889, 25428,
+                 26451, 21421]],
+      "image": {
+        "file": "illustrations/bison.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [306, 357], "hip": 26451 },
+          { "pos": [236, 173], "hip": 25428 },
+          { "pos": [709, 161], "hip": 20205 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 009",
+      "common_name": {
+        "english": "Sweat Lodge Stones",
+        "native": "Mdodo Senik"
+      },
+      "single_star_radius": 0.2,
+      "lines": [[17573, 17573],
+                [17847, 17847],
+                [17702, 17702],
+                [17608, 17608],
+                [17499, 17499]],
+      "image": {
+        "file": "illustrations/stones.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [415, 385], "hip": 17847 },
+          { "pos": [487, 415], "hip": 17608 },
+          { "pos": [512, 370], "hip": 17573 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 010",
+      "common_name": {
+        "english": "Three Brothers Floating in a Canoe",
+        "native": "Shkenigshêk égi-nsogmowat"
+      },
+      "lines": [[746, 3179, 4427, 6686, 8886]],
+      "image": {
+        "file": "illustrations/canoe.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [251, 190], "hip": 8886 },
+          { "pos": [627, 419], "hip": 3179 },
+          { "pos": [748, 275], "hip": 746 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 011",
+      "common_name": {
+        "english": "Turtle",
+        "native": "Mshiké"
+      },
+      "lines": [[24608, 23416, 23015, 25428, 28380, 28360, 24608]],
+      "image": {
+        "file": "illustrations/turtle.png",
+        "size": [512, 1024],
+        "anchors": [
+          { "pos": [124, 475], "hip": 28380 },
+          { "pos": [328, 327], "hip": 24608 },
+          { "pos": [342, 635], "hip": 23015 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 012",
+      "common_name": {
+        "english": "Fisher",
+        "native": "Wthik"
+      },
+      "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774],
+                [54061, 46733, 41704, 48319, 53910],
+                [58001, 57399],
+                [48319, 46853],
+                [65378, 68756]],
+      "image": {
+        "file": "illustrations/fisher.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [345, 82], "hip": 68756 },
+          { "pos": [382, 379], "hip": 57399 },
+          { "pos": [731, 275], "hip": 41704 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 013",
+      "common_name": {
+        "english": "Loon",
+        "native": "Mang"
+      },
+      "lines": [[11767, 85822, 82080, 77055, 79822, 75097, 72607, 77055]],
+      "image": {
+        "file": "illustrations/loon.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [345, 348], "hip": 72607 },
+          { "pos": [402, 225], "hip": 79822 },
+          { "pos": [727, 340], "hip": 11767 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 014",
+      "common_name": {
+        "english": "Crane / Swan / Human skeleton-like creature with wings",
+        "native": "Thethak / Wabzhi / Bgak"
+      },
+      "lines": [[102098, 100453, 98110, 95947],
+                [104732, 102488, 100453, 97165]],
+      "image": {
+        "file": "illustrations/crane.png",
+        "size": [512, 1024],
+        "anchors": [
+          { "pos": [139, 424], "hip": 102488 },
+          { "pos": [359, 412], "hip": 97165 },
+          { "pos": [250, 623], "hip": 95947 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 015",
+      "common_name": {
+        "english": "Moose",
+        "native": "Moz"
+      },
+      "lines": [[677, 113881, 113963, 1067, 677],
+                [113963, 112447, 112029, 109427],
+                [113881, 112158, 109352]],
+      "image": {
+        "file": "illustrations/moose.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [366, 272], "hip": 109427 },
+          { "pos": [630, 88], "hip": 1067 },
+          { "pos": [599, 422], "hip": 109410 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 016",
+      "common_name": {
+        "english": "Fish",
+        "native": "Gigo"
+      },
+      "lines": [[101769, 102281, 102532, 101958, 101769, 101421]],
+      "image": {
+        "file": "illustrations/fish.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [331, 111], "hip": 102532 },
+          { "pos": [535, 185], "hip": 101769 },
+          { "pos": [692, 421], "hip": 101421 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 017",
+      "common_name": {
+        "english": "Bear Head",
+        "native": "Mko Shtegwan"
+      },
+      "lines": [[91262, 97649, 102098, 91262]],
+      "image": {
+        "file": "illustrations/bear.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [491, 38], "hip": 102098 },
+          { "pos": [700, 222], "hip": 91262 },
+          { "pos": [406, 462], "hip": 97649 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 018",
+      "common_name": {
+        "english": "One Who is Exhausted",
+        "native": "Wénondeshik"
+      },
+      "lines": [[81833, 81693, 83207, 84380, 81833],
+                [84380, 85112, 87808],
+                [81833, 81126, 79992],
+                [83207, 84379],
+                [81693, 80816]],
+      "image": {
+        "file": "illustrations/exhausted.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [415, 267], "hip": 85112 },
+          { "pos": [449, 20], "hip": 79992 },
+          { "pos": [717, 317], "hip": 80816 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 019",
+      "common_name": {
+        "english": "Sweat Lodge",
+        "native": "Mdodoswen"
+      },
+      "lines": [[78159, 77512, 76952, 76267, 75695, 76127]],
+      "image": {
+        "file": "illustrations/sweatlodge.png",
+        "size": [1024, 512],
+        "anchors": [
+          { "pos": [292, 201], "hip": 78493 },
+          { "pos": [535, 439], "hip": 76952 },
+          { "pos": [680, 128], "hip": 76127 }
+        ]
+      }
+    },
+
+    {
+      "id": "CON potawatomi 020",
+      "common_name": {
+        "english": "Nanabozho",
+        "native": "Nenikboz"
+      },
+      "lines": [[78401, 80112, 80763, 81266, 82396, 82514, 82729,
+                 84143, 86228, 87073, 86670, 85927, 84970, 80763],
+                [78820, 78401, 78265]],
+      "image": {
+        "file": "illustrations/nanabozho.png",
+        "size": [512, 1024],
+        "anchors": [
+          { "pos": [198, 643], "hip": 85927 },
+          { "pos": [305, 647], "hip": 82729 },
+          { "pos": [293, 364], "hip": 78820 }
+        ]
+      }
+    }
+  ]
+}
