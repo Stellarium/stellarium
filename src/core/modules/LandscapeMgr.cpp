@@ -157,6 +157,9 @@ void Cardinals::setFadeDuration(float duration)
 // Handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude) const
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	// fun polar special cases: no cardinals!
 	if ((fabs(latitude - 90.0) < 1e-10) || (fabs(latitude + 90.0) < 1e-10))
 		return;
