@@ -1046,7 +1046,7 @@ void main(void)
 		drawFog(core, firstFreeTexSampler);
 
 		// Self-luminous layer (Light pollution etc). This looks striking!
-		if (lightScapeBrightness>0.0f && (illumFader.getInterstate()>0.f))
+		if (lightScapeBrightness>0.0f && (illumFader.getInterstate()>0.f) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 			drawDecor(core, firstFreeTexSampler, true);
@@ -1065,6 +1065,8 @@ void main(void)
 // Draw the horizon fog
 void LandscapeOldStyle::drawFog(StelCore*const core, const int firstFreeTexSampler) const
 {
+	if (!core->getFlagClearSky())
+		return;
 	if (fogFader.getInterstate()==0.f)
 		return;
 	if(landFader.getInterstate()==0.f)
@@ -1121,11 +1123,15 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 	}
 	else
         {
-                renderProgram->setUniformValue(shaderVars.brightness,
-                                                landscapeBrightness*landscapeTint[0],
-                                                landscapeBrightness*landscapeTint[1],
-                                                landscapeBrightness*landscapeTint[2],
-                                                (1.f-landscapeTransparency)*landFader.getInterstate());
+		if (core->getFlagClearSky())
+			renderProgram->setUniformValue(shaderVars.brightness,
+				                        landscapeBrightness*landscapeTint[0],
+					                landscapeBrightness*landscapeTint[1],
+						        landscapeBrightness*landscapeTint[2],
+							(1.f-landscapeTransparency)*landFader.getInterstate());
+		else
+			renderProgram->setUniformValue(shaderVars.brightness, 0, 0, 0,
+							(1.f-landscapeTransparency)*landFader.getInterstate());
         }
 
 	renderProgram->setUniformValue(shaderVars.tanMode, tanMode);
@@ -1494,11 +1500,15 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 
 	if (!onlyPolygon) // The only useful application of the onlyPolygon is a demo which does not fill the polygon
         {
-                sPainter.setColor(
-                                landscapeBrightness*groundColor[0]*landscapeTint[0],
-                                landscapeBrightness*groundColor[1]*landscapeTint[1],
-                                landscapeBrightness*groundColor[2]*landscapeTint[2],
-                                (1.f-landscapeTransparency)*landFader.getInterstate());
+		if (core->getFlagClearSky())
+			sPainter.setColor(
+				        landscapeBrightness*groundColor[0]*landscapeTint[0],
+					landscapeBrightness*groundColor[1]*landscapeTint[1],
+				        landscapeBrightness*groundColor[2]*landscapeTint[2],
+					(1.f-landscapeTransparency)*landFader.getInterstate());
+		else
+			sPainter.setColor(0, 0, 0, (1.f-landscapeTransparency)*landFader.getInterstate());
+
 #ifdef GL_MULTISAMPLE
 		const auto gl = sPainter.glFuncs();
 		if (multisamplingEnabled_)
@@ -1513,8 +1523,11 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 #endif
 	}
 
-	drawHorizonLine(core, sPainter);
-	drawLabels(core, &sPainter);
+	if (core->getFlagClearSky())
+	{
+		drawHorizonLine(core, sPainter);
+		drawLabels(core, &sPainter);
+	}
 }
 
 float LandscapePolygonal::getOpacity(Vec3d azalt) const
@@ -1704,11 +1717,16 @@ void main(void)
 	{
 		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
-                renderProgram->setUniformValue(shaderVars.brightness,
-                                                landscapeBrightness*landscapeTint[0],
-                                                landscapeBrightness*landscapeTint[1],
-                                                landscapeBrightness*landscapeTint[2],
-                                                landFader.getInterstate());
+		if (core->getFlagClearSky())
+			renderProgram->setUniformValue(shaderVars.brightness,
+				                        landscapeBrightness*landscapeTint[0],
+					                landscapeBrightness*landscapeTint[1],
+						        landscapeBrightness*landscapeTint[2],
+							landFader.getInterstate());
+		else
+			renderProgram->setUniformValue(shaderVars.brightness, 0, 0, 0,
+							landFader.getInterstate());
+
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
 		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);
@@ -1724,7 +1742,7 @@ void main(void)
 		gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		// NEW since 0.13: Fog also for fisheye...
-		if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()))
+		if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 			const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
@@ -1735,7 +1753,7 @@ void main(void)
 			gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		}
 
-		if (mapTexIllum && lightScapeBrightness>0.0f && (illumFader.getInterstate()>0.f))
+		if (mapTexIllum && lightScapeBrightness>0.0f && (illumFader.getInterstate()>0.f) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 			const float brightness = lightScapeBrightness*illumFader.getInterstate();
@@ -2059,16 +2077,17 @@ void main(void)
 	{
 		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
+		const float brightness=core->getFlagClearSky() ? landscapeBrightness : 0.0f;
 		renderProgram->setUniformValue(shaderVars.bottomCapColor,
-					       landscapeBrightness*bottomCapColor[0],
-					       landscapeBrightness*bottomCapColor[1],
-					       landscapeBrightness*bottomCapColor[2],
+					       brightness*bottomCapColor[0],
+					       brightness*bottomCapColor[1],
+					       brightness*bottomCapColor[2],
 					       bottomCapColor[0] < 0 ? 0 : landFader.getInterstate());
 
                 renderProgram->setUniformValue(shaderVars.brightness,
-                                               landscapeBrightness*landscapeTint[0],
-                                               landscapeBrightness*landscapeTint[1],
-                                               landscapeBrightness*landscapeTint[2],
+                                               brightness*landscapeTint[0],
+                                               brightness*landscapeTint[1],
+                                               brightness*landscapeTint[2],
                                                (1.f-landscapeTransparency)*landFader.getInterstate());
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
@@ -2087,7 +2106,7 @@ void main(void)
 		gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		// Since 0.13: Fog also for sphericals...
-		if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()))
+		if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 			const float brightness =
@@ -2104,7 +2123,7 @@ void main(void)
 		}
 
 		// Self-luminous layer (Light pollution etc). This looks striking!
-		if (mapTexIllum && (lightScapeBrightness>0.0f) && (illumFader.getInterstate()>0.0f))
+		if (mapTexIllum && (lightScapeBrightness>0.0f) && (illumFader.getInterstate()>0.0f) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 			const float brightness = lightScapeBrightness*illumFader.getInterstate();
