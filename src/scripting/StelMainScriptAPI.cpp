@@ -1024,10 +1024,14 @@ void StelMainScriptAPI::waitForKeypress()
 	QEventLoop* loop = scriptMgr->getWaitEventLoop();
 	KeypressFilter filter(loop);
 	qApp->installEventFilter(&filter);
+	LabelMgr* labelMgr = GETSTELMODULE(LabelMgr);
+	int labelId = labelMgr->labelScreen(q_("Press any key to continue..."),
+		30, 30, true, 20, "#ffffff", false, 0);
 	if( loop->exec() != 0 )
 	{
 		emit requestExit();
 	}
+	labelMgr->deleteLabel(labelId);
 	qApp->removeEventFilter(&filter);
 }
 
