@@ -387,7 +387,6 @@ void StelCore::init()
 	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
 
 	actionsMgr->addAction("actionClear_Background", displayGroup, N_("Toggle background clearing"), this, "flagClearSky", "Ctrl+Alt+C", "", true);
-
 }
 
 QString StelCore::getDefaultProjectionTypeKey() const
