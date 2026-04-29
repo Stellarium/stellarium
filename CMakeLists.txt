@@ -581,6 +581,7 @@ ELSE()
 ENDIF()
 ADD_PLUGIN(RemoteSync 1)
 ADD_PLUGIN(Satellites 1)
+ADD_PLUGIN(Planes 1)
 ADD_PLUGIN(Scenery3d 1)
 ADD_PLUGIN(Supernovae 1)
 # Candidate to removing as an archaic plugin
@@ -599,6 +600,11 @@ ADD_PLUGIN(Vts 0)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
+
+IF(USE_PLUGIN_PLANES)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Sql)
+     SET(QT_USE_QTSQL TRUE) # Planes plugin needs SQL module
+ENDIF()
 
 # Custom target used to manage dependencies of stellarium -> Static plugins
 # It is important that static plugins are compiled before stellarium main executable is linked
@@ -645,6 +651,52 @@ IF(WIN32)
      IF(STELLARIUM_BUILD_ARM64 AND ${QT_VERSION} VERSION_LESS "6.5.0")
        MESSAGE(FATAL_ERROR "Qt 6.5.0 or later is required for Windows on ARM builds.")
      ENDIF()
+
+     # Qt 5.9 (LTS) use OpenSSL 1.0* and Qt 5.12 (LTS) and newest version of Qt use OpenSSL 1.1*
+     # Source: https://lists.qt-project.org/pipermail/releasing/2019-March/002614.html
+     IF((${QT_VERSION_MAJOR} EQUAL "5") AND (Qt5Core_VERSION VERSION_LESS "5.10"))
+          # OK, it's Qt 5.9, let's try to find OpenSSL 1.0.x DLL's on Windows
+          FIND_FILE(OPENSSL_SSLEAY32_LIBRARY_DLL ssleay32.dll)
+          FIND_FILE(OPENSSL_LIBEAY32_LIBRARY_DLL libeay32.dll)
+          FIND_FILE(OPENSSL_LIBSSL32_LIBRARY_DLL libssl32.dll)
+          SET(ISS_OPENSSL_LIBS "; OpenSSL support")
+          IF(EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL})
+               MESSAGE(STATUS "Found ssleay32 library: ${OPENSSL_SSLEAY32_LIBRARY_DLL}")
+               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSLEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+          ENDIF()
+          IF(EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL})
+               MESSAGE(STATUS "Found libeay32 library: ${OPENSSL_LIBEAY32_LIBRARY_DLL}")
+               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+          ENDIF()
+          IF(EXISTS ${OPENSSL_LIBSSL32_LIBRARY_DLL})
+               MESSAGE(STATUS "Found libssl32 library: ${OPENSSL_LIBSSL32_LIBRARY_DLL}")
+               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBSSL32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+          ENDIF()
+          IF((NOT EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL}))
+               SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
+          ENDIF()
+     ELSE()
+          # Try found OpenSSL 1.1.x DLL's on Windows (newest Qt)
+          IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+               FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-1_1.dll)
+               FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-1_1.dll)
+          ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
+               FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-1_1-x64.dll)
+               FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-1_1-x64.dll)
+          ENDIF()
+          SET(ISS_OPENSSL_LIBS "; OpenSSL support")
+          IF(EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
+               MESSAGE(STATUS "Found OpenSSL SSL library: ${OPENSSL_SSL_LIBRARY_DLL}")
+               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSL_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+          ENDIF()
+          IF(EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
+               MESSAGE(STATUS "Found OpenSSL crypto library: ${OPENSSL_CRYPTO_LIBRARY_DLL}")
+               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_CRYPTO_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+          ENDIF()
+          IF((NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL}))
+               SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
+          ENDIF()
+    ENDIF()
 ENDIF()
 
 IF(APPLE)
