@@ -24,6 +24,7 @@
 #include <qopengl.h>
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
+#include "StelProjectorType.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelTranslator.hpp"
 #include "VecMath.hpp"
@@ -62,6 +63,13 @@ class QOpenGLFramebufferObject;
 #endif
 
 typedef QSharedPointer<class HipsSurvey> HipsSurveyP;
+
+struct Moon3DModel
+{
+	QVector<float> vertexArr;
+	QVector<uint32_t> indexArr;
+	bool attemptedToLoad = false;
+};
 
 // Class to manage rings for planets like Saturn
 class Ring
@@ -769,7 +777,7 @@ protected:
 	//! Draws the OBJ model, assuming it is available
 	//! @param screenRd radius in screen pixels.
 	//! @return false if the model can currently not be drawn (not loaded)
-	bool drawObjModel(const StelPainterLight& light, StelPainter* painter, float screenRd);
+	bool drawObjModel(const StelPainterLight& light, StelPainter* painter, bool isMoon, float screenRd);
 
 	bool drawObjShadowMap(const Vec3d& lightPosition, StelPainter *painter, QMatrix4x4& shadowMatrix);
 
@@ -780,11 +788,16 @@ protected:
 	//! Draw the 3D sphere
 	void drawSphere(const StelPainterLight& light, StelPainter* painter, float screenRd, bool drawOnlyRing=false);
 
+	//! Draw the Moon
+	bool drawMoon(const StelPainterLight& light, StelPainter& painter);
+
 	//! Draw the Hips survey.
 	void drawSurvey(const StelPainterLight& light, StelCore* core, StelPainter* painter);
 
 	//! Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, StelPainter &sPainter, const QFont& planetNameFont);
+
+	float computeEclipsePush() const;
 
 	PlanetOBJModel* loadObjModel() const;
 
@@ -891,6 +904,7 @@ private:
 
 	QList<StelObject::CulturalName> culturalNames; //!< names loaded from non-modern Skycultures. Usually just one, but there may be more!
 
+	Moon3DModel model;
 
 	QString texMapFileOrig;     //!< File path for texture; used for saving original filename
 	QString normalMapFileOrig;  //!< File path for normal map; used for saving original filename
@@ -898,11 +912,19 @@ private:
 
 	std::unique_ptr<QOpenGLVertexArrayObject> sphereVAO;
 	std::unique_ptr<QOpenGLVertexArrayObject> ringsVAO;
+	std::unique_ptr<QOpenGLVertexArrayObject> moonVAO;
 	GLuint sphereVBO=0;
 	GLuint ringsVBO=0;
+	GLuint moonVBO=0;
 
 	std::unique_ptr<QOpenGLVertexArrayObject> surveyVAO;
 	GLuint surveyVBO=0;
+
+	StelProjectorP prevProjector;
+
+	void setupMoonVAO();
+	void bindMoonVAO();
+	void releaseMoonVAO();
 
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;
@@ -929,6 +951,7 @@ private:
 		int skyBrightness;
 		int orenNayarParameters;
 		int outgasParameters;
+		int sphereScale;
 
 		// For Mars poles
 		int poleLat; // latitudes of edges of northern (x) and southern (y) polar cap [texture y, moving from 0 (S) to 1 (N)]. Only used for Mars, use [1, 0] for other objects.
@@ -940,6 +963,7 @@ private:
 		int horizonMap;
 		int hasNormalMap;
 		int hasHorizonMap;
+		int texCoordsFromFragment;
 
 		// Rings-specific variables
 		int isRing;
@@ -967,8 +991,8 @@ private:
 	};
 
 	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
-	RenderData setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars,
-	                                   const StelPainterLight& light, bool hasNormalMap, bool hasHorizonMap);
+	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars,
+                                           const StelPainterLight& light, bool hasNormalMap, bool hasHorizonMap, bool texCoordsFromFragment);
 
 	static PlanetShaderVars planetShaderVars;
 	static QOpenGLShaderProgram* planetShaderProgram;
@@ -976,6 +1000,9 @@ private:
 	static PlanetShaderVars ringPlanetShaderVars;
 	static QOpenGLShaderProgram* ringPlanetShaderProgram;
 	
+	static PlanetShaderVars sphereMoonShaderVars;
+	static QOpenGLShaderProgram* sphereMoonShaderProgram;
+
 	static PlanetShaderVars moonShaderVars;
 	static QOpenGLShaderProgram* moonShaderProgram;
 
