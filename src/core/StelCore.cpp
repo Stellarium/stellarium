@@ -1246,6 +1246,7 @@ void StelCore::setJD(double newJD)
 	JD.first=newJD;
 	JD.second=computeDeltaT(newJD);	
 	resetSync();
+	setClearSkyOnce();
 }
 
 double StelCore::getJD() const
@@ -1259,6 +1260,7 @@ void StelCore::setJDE(double newJDE)
 	JD.second=computeDeltaT(newJDE);
 	JD.first=newJDE-JD.second/86400.0;
 	resetSync();
+	setClearSkyOnce();
 }
 
 double StelCore::getJDE() const
