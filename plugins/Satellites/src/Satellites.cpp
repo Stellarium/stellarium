@@ -55,6 +55,7 @@
 #include <QFile>
 #include <QFont>
 #include <QTimer>
+#include <QTimeZone>
 #include <QVariantMap>
 #include <QVariant>
 #include <QDir>
@@ -64,6 +65,229 @@
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 #include <QtConcurrent>
 #endif
+
+namespace
+{
+
+struct SatCsvEntry
+{
+	QString object_id;
+	QString epoch;
+	double mean_motion;
+	double eccentricity;
+	double inclination;
+	double ra_of_asc_node;
+	double arg_of_pericenter;
+	double mean_anomaly;
+	int ephemeris_type;
+	QString classification_type;
+	int element_set_no;
+	int rev_at_epoch;
+	double bstar;
+	double mean_motion_dot;
+	double mean_motion_ddot;
+};
+
+void addTleChecksum(QString& line)
+{
+	int sum = 0;
+	for (const auto c : line)
+	{
+		const auto u = c.unicode();
+		if ('0' <= u && u <= '9')
+			sum += u - '0';
+		else if (u == '-')
+			sum += 1;
+	}
+	line += QString::number(sum % 10);
+}
+
+QString formatTleEpoch(const QString& epochFromCSV)
+{
+	const auto epoch = QDateTime::fromString(epochFromCSV.left(23) + " +0000", "yyyy-MM-ddTHH:mm:ss.z tt");
+	if (!epoch.isValid()) return {};
+	static const auto epoch0 = QDateTime(QDate(epoch.date().year(), 1, 1), QTime(0,0,0), QTimeZone(0));
+	const auto microsecTail = epochFromCSV.mid(23).toUInt();
+	// The +1 shifts refence to "Jan 0" instead of Jan 1
+	const auto diffInDays = 1 + (epoch0.msecsTo(epoch) + microsecTail * 1e-3) / 86400e3;
+	const auto epochYear = epoch.date().year();
+	const auto res = QString("%1%2").arg(epochYear % 100, 2, 10, QLatin1Char('0'))
+	                                .arg(diffInDays, 12, 'f', 8, QLatin1Char('0'));
+	return res;
+}
+
+// These are given at https://celestrak.org/NORAD/documentation/tle-fmt.php
+const QString TLE_LINE1_TEMPLATE = "1 NNNNNU NNNNNAAA NNNNN.NNNNNNNN +.NNNNNNNN +NNNNN-N +NNNNN-N N NNNNN";
+const QString TLE_LINE2_TEMPLATE = "2 NNNNN NNN.NNNN NNN.NNNN NNNNNNN NNN.NNNN NNN.NNNN NN.NNNNNNNNNNNNNN";
+
+bool tleLineValid(const QString& line, const QString& lineTemplate)
+{
+	if (line.size() != lineTemplate.size()) return false;
+
+	for (int n = 0; n < lineTemplate.size(); ++n)
+	{
+		const auto c = line[n].unicode();
+		const auto t = lineTemplate[n].unicode();
+		if (t == 'A' || t == 'U')
+			continue;
+		if (t == 'N')
+		{
+			if(c != ' ' && !('0' <= c && c <= '9'))
+				return false;
+		}
+		else if (t == '+' || t == '-')
+		{
+			if (c != '+' && c != '-' && c != ' ')
+				return false;
+		}
+		else if (t != c)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+#define TLE_POS_MUST_BE_AT(line,tleLineNum,N) { if (line.size() != N) { warn( \
+	QString("Invalid TLE line %1 is being generated for CSV data").arg(tleLineNum), \
+	QString("Current length must be %1, but is %2.\nCurrent incomplete line: \"%3\"").arg(N).arg(line.size()).arg(line)); \
+	return {}; } }
+#define TLE_POS_MUST_BE_LE(line,tleLineNum,N) { if (line.size() > N) { warn( \
+	QString("Invalid TLE line %1 is being generated for CSV data").arg(tleLineNum), \
+	QString("Current length must be <=%1, but is %2.\nCurrent incomplete line: \"%3\"").arg(N).arg(line.size()).arg(line)); \
+	return {}; } }
+
+QString generateTleLine1(const SatCsvEntry& data,
+                         const std::function<void(const QString&,const QString&)>& warn)
+{
+	QString tle1 = L1S("1 00000");
+	if (data.classification_type.size() == 1)
+	{
+		tle1 += data.classification_type;
+	}
+	else
+	{
+		warn("Bad classification type", "not one character. Assuming Unknown.");
+		tle1 += 'U';
+	}
+	tle1 += ' ';
+
+	auto object_id = data.object_id;
+	if (object_id.isEmpty())
+		object_id = "    -    ";
+	if (object_id.size() < 6)
+	{
+		warn("Bad object id",
+		     QString("too short: %1 chars. Skipping the object.").arg(object_id.size()));
+		return {};
+	}
+	// Skip the '-' in the object_id, and omit first two digits of the year
+	tle1 += object_id[2];
+	tle1 += object_id[3];
+	tle1 += object_id.mid(5, 6);
+	TLE_POS_MUST_BE_LE(tle1,1, 17);
+	tle1.resize(18, QLatin1Char(' ')); // pad to the next field
+	const auto epochStr = formatTleEpoch(data.epoch);
+	if (epochStr.isEmpty())
+	{
+		warn("Bad epoch", "failed to parse it according to the standard format");
+	}
+	tle1 += epochStr;
+	TLE_POS_MUST_BE_AT(tle1,1, 32);
+	tle1 += ' ';
+
+	auto meanMotionDotStr = QString("%1 ").arg(data.mean_motion_dot, 11, 'f', 8, QLatin1Char(' '));
+	meanMotionDotStr.replace("0.", ".");
+	tle1 += meanMotionDotStr;
+	TLE_POS_MUST_BE_AT(tle1,1, 44);
+
+	auto meanMotionDDotStr = QString("%1 ").arg(data.mean_motion_ddot * 10, 11, 'e', 4);
+	meanMotionDDotStr.replace(".", "")
+	                 .replace("e+00", "+0")
+	                 .replace("e-0", "-")
+	                 .replace("e+0", "+");
+	tle1 += meanMotionDDotStr;
+	TLE_POS_MUST_BE_AT(tle1,1, 53);
+
+	auto bstarStr = QString("%1 ").arg(data.bstar * 10, 11, 'e', 4);
+	bstarStr.replace(".", "")
+	        .replace("e+00", "+0")
+	        .replace("e-0", "-")
+	        .replace("e+0", "+");
+	tle1 += bstarStr;
+	TLE_POS_MUST_BE_AT(tle1,1, 62);
+
+	if (data.ephemeris_type > 9)
+	{
+		warn("Bad ephemeris type", "must be single-digit, but isn't. Skipping this object");
+		return {};
+	}
+	tle1 += QString::number(data.ephemeris_type);
+	TLE_POS_MUST_BE_AT(tle1,1, 63);
+	tle1 += ' ';
+
+	if (data.element_set_no > 9999)
+	{
+		warn("Bad element set number type",
+		     QString("%1 > 999. Skipping this object").arg(data.ephemeris_type));
+		return {};
+	}
+	tle1 += QString("%1").arg(data.element_set_no, 4);
+	TLE_POS_MUST_BE_AT(tle1,1, 68);
+
+	addTleChecksum(tle1);
+	TLE_POS_MUST_BE_AT(tle1,1, 69);
+
+	if (!tleLineValid(tle1, TLE_LINE1_TEMPLATE))
+	{
+		warn("Invalid TLE generated", QString("the following line doesn't match the template: \"%1\"").arg(tle1));
+		return {};
+	}
+
+	return tle1;
+}
+
+QString generateTleLine2(const SatCsvEntry& data,
+                         const std::function<void(const QString&,const QString&)>& warn)
+{
+	QString tle2 = L1S("2 00000 ");
+	tle2 += QString("%1 ").arg(data.inclination, 8, 'f', 4);
+	TLE_POS_MUST_BE_AT(tle2,2, 17);
+
+	tle2 += QString("%1 ").arg(data.ra_of_asc_node, 8, 'f', 4);
+	TLE_POS_MUST_BE_AT(tle2,2, 26);
+
+	tle2 += QString("%1 ").arg(data.eccentricity, 8, 'f', 7).replace("0.", "");
+	TLE_POS_MUST_BE_AT(tle2,2, 34);
+
+	tle2 += QString("%1 ").arg(data.arg_of_pericenter, 8, 'f', 4);
+	TLE_POS_MUST_BE_AT(tle2,2, 43);
+
+	tle2 += QString("%1 ").arg(data.mean_anomaly, 8, 'f', 4);
+	TLE_POS_MUST_BE_AT(tle2,2, 52);
+
+	tle2 += QString("%1").arg(data.mean_motion, 11, 'f', 8);
+	TLE_POS_MUST_BE_AT(tle2,2, 63);
+
+	tle2 += QString("%1").arg(data.rev_at_epoch, 5);
+	TLE_POS_MUST_BE_AT(tle2,2, 68);
+
+	addTleChecksum(tle2);
+	TLE_POS_MUST_BE_AT(tle2,2, 69);
+
+	if (!tleLineValid(tle2, TLE_LINE2_TEMPLATE))
+	{
+		warn("Invalid TLE generated", QString("the following line doesn't match the template: \"%1\"").arg(tle2));
+		return {};
+	}
+
+	return tle2;
+}
+
+#undef TLE_POS_MUST_BE_AT
+#undef TLE_POS_MUST_BE_LE
+
+}
 
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
@@ -676,7 +900,7 @@ void Satellites::restoreDefaultTleSources()
 	        { "qianfan", false },    { "hulianwang", false },   { "kuiper", false }
 	};
 	// Details: https://celestrak.org/NORAD/documentation/gp-data-formats.php
-	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=TLE";
+	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=CSV";
 	QStringList urls;
 	// TLE sources from Celestrak
 	for (auto group = celestrak.begin(); group != celestrak.end(); ++group)
@@ -812,7 +1036,7 @@ void Satellites::loadSettings()
 			if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.endsWith(".txt", Qt::CaseInsensitive))
 			{
 				url.replace("NORAD/elements/", "NORAD/elements/gp.php?GROUP=", Qt::CaseInsensitive);
-				url.replace(".txt", "&FORMAT=TLE", Qt::CaseInsensitive);
+				url.replace(".txt", "&FORMAT=CSV", Qt::CaseInsensitive);
 				urlWasUpdated = true;
 			}
 
@@ -852,7 +1076,7 @@ void Satellites::loadSettings()
 				if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.endsWith(".txt", Qt::CaseInsensitive))
 				{
 					url.replace("NORAD/elements/", "NORAD/elements/gp.php?GROUP=", Qt::CaseInsensitive);
-					url.replace(".txt", "&FORMAT=TLE", Qt::CaseInsensitive);
+					url.replace(".txt", "&FORMAT=CSV", Qt::CaseInsensitive);
 					urlWasUpdated = true;
 				}
 
@@ -1360,7 +1584,7 @@ bool Satellites::add(const TleData& tleData)
 		return false;
 
 	// Duplicates check
-	if (searchByID(getSatIdFromLine2(tleData.second.trimmed()))!=nullptr)
+	if (searchByID(tleData.id)!=nullptr)
 		return false;
 
 	QVariantList hintColor;
@@ -2491,7 +2715,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			continue;
 		if (updateSources[i].file->open(QFile::ReadOnly|QFile::Text))
 		{
-			parseTleFile(*updateSources[i].file, newData, updateSources[i].addNew, updateSources[i].url.toString(QUrl::None));
+			parseDataFile(*updateSources[i].file, newData, updateSources[i].addNew, updateSources[i].url.toString(QUrl::None));
 			updateSources[i].file->close();
 			delete updateSources[i].file;
 			updateSources[i].file = nullptr;
@@ -2549,7 +2773,7 @@ void Satellites::updateFromFiles(const QStringList &paths, bool deleteFiles)
 		QFile tleFile(tleFilePath);
 		if (tleFile.open(QIODevice::ReadOnly|QIODevice::Text))
 		{
-			parseTleFile(tleFile, newTleSets, autoAddEnabled);
+			parseDataFile(tleFile, newTleSets, autoAddEnabled);
 			tleFile.close();
 
 			if (deleteFiles)
@@ -2696,6 +2920,25 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount);
 }
 
+
+void Satellites::parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
+{
+	const QString line = openFile.readLine();
+	const auto firstLineEntries = line.trimmed().split(QLatin1Char(','));
+	if (firstLineEntries.contains(L1S("ARG_OF_PERICENTER")) &&
+	    firstLineEntries.contains(L1S("MEAN_MOTION_DDOT")))
+	{
+		// Two rather long names from the CSV header are present,
+		// we must be handling a CSV file rather than TLE.
+		parseCsvFile(openFile, firstLineEntries, tleList, addFlagValue, tleURL);
+	}
+	else
+	{
+		openFile.seek(0);
+		parseTleFile(openFile, tleList, addFlagValue, tleURL);
+	}
+}
+
 void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
@@ -2778,6 +3021,138 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 			else
 				qDebug() << "[Satellites] unprocessed line " << lineNumber <<  " in file " << QDir::toNativeSeparators(openFile.fileName());
 		}
+	}
+}
+
+void Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries, TleDataHash& tleList,
+                              bool addFlagValue, const QString &tleURL)
+{
+	if (!openFile.isOpen() || !openFile.isReadable())
+		return;
+
+	int OBJECT_NAME = -1;
+	int OBJECT_ID = -1;
+	int EPOCH = -1;
+	int MEAN_MOTION = -1;
+	int ECCENTRICITY = -1;
+	int INCLINATION = -1;
+	int RA_OF_ASC_NODE = -1;
+	int ARG_OF_PERICENTER = -1;
+	int MEAN_ANOMALY = -1;
+	int EPHEMERIS_TYPE = -1;
+	int CLASSIFICATION_TYPE = -1;
+	int NORAD_CAT_ID = -1;
+	int ELEMENT_SET_NO = -1;
+	int REV_AT_EPOCH = -1;
+	int BSTAR = -1;
+	int MEAN_MOTION_DOT = -1;
+	int MEAN_MOTION_DDOT = -1;
+	const auto warn = [&tleURL,&headerEntries](const QString& what, const QString& why, const QStringList& lineEntries)
+	{
+		qWarning().noquote().nospace() << what << " in " << tleURL << ": " << why;
+		qWarning() << "Header entries:" << headerEntries;
+		if (!lineEntries.isEmpty())
+			qWarning() << "Line entries:" << lineEntries;
+	};
+	for (int idx = 0; idx < headerEntries.size(); ++idx)
+	{
+		const auto& name = headerEntries[idx];
+		if (name == L1S("OBJECT_NAME")) OBJECT_NAME = idx;
+		if (name == L1S("OBJECT_ID")) OBJECT_ID = idx;
+		if (name == L1S("EPOCH")) EPOCH = idx;
+		if (name == L1S("MEAN_MOTION")) MEAN_MOTION = idx;
+		if (name == L1S("ECCENTRICITY")) ECCENTRICITY = idx;
+		if (name == L1S("INCLINATION")) INCLINATION = idx;
+		if (name == L1S("RA_OF_ASC_NODE")) RA_OF_ASC_NODE = idx;
+		if (name == L1S("ARG_OF_PERICENTER")) ARG_OF_PERICENTER = idx;
+		if (name == L1S("MEAN_ANOMALY")) MEAN_ANOMALY = idx;
+		if (name == L1S("EPHEMERIS_TYPE")) EPHEMERIS_TYPE = idx;
+		if (name == L1S("CLASSIFICATION_TYPE")) CLASSIFICATION_TYPE = idx;
+		if (name == L1S("NORAD_CAT_ID")) NORAD_CAT_ID = idx;
+		if (name == L1S("ELEMENT_SET_NO")) ELEMENT_SET_NO = idx;
+		if (name == L1S("REV_AT_EPOCH")) REV_AT_EPOCH = idx;
+		if (name == L1S("BSTAR")) BSTAR = idx;
+		if (name == L1S("MEAN_MOTION_DOT")) MEAN_MOTION_DOT = idx;
+		if (name == L1S("MEAN_MOTION_DDOT")) MEAN_MOTION_DDOT = idx;
+	}
+	if (OBJECT_NAME < 0 || OBJECT_ID < 0 || EPOCH < 0 ||
+	    MEAN_MOTION < 0 || ECCENTRICITY < 0 || INCLINATION < 0 ||
+	    RA_OF_ASC_NODE < 0 || ARG_OF_PERICENTER < 0 || MEAN_ANOMALY < 0 ||
+	    EPHEMERIS_TYPE < 0 || CLASSIFICATION_TYPE < 0 || NORAD_CAT_ID < 0 ||
+	    ELEMENT_SET_NO < 0 || REV_AT_EPOCH < 0 || BSTAR < 0 ||
+	    MEAN_MOTION_DOT < 0 || MEAN_MOTION_DDOT < 0)
+	{
+		warn("Bad satellite CSV header", "not all required fields are present", {});
+		return;
+	}
+
+	while (!openFile.atEnd())
+	{
+		const auto lineEntries = QString(openFile.readLine()).trimmed().split(QLatin1Char(','));
+		const auto warnAboutLine = [&warn, &lineEntries](const QString& what, const QString& why)
+		{
+			warn(what, why, lineEntries);
+		};
+		if (lineEntries.size() != headerEntries.size())
+		{
+			warnAboutLine("Bad CSV line",
+			              QString("number of entries %1  doesn't match number of header entries %2")
+			                      .arg(lineEntries.size()).arg(headerEntries.size()));
+			continue;
+		}
+		TleData data{};
+		data.addThis = addFlagValue;
+		data.sourceURL = tleURL;
+		data.name = lineEntries[OBJECT_NAME];
+		bool ok = false;
+		data.id = lineEntries[NORAD_CAT_ID];
+		data.id.toUInt(&ok);
+		if (!ok)
+		{
+			warnAboutLine("Bad CSV line", "failed to parse NORAD id of the object");
+			continue;
+		}
+
+		// Now generate a TLE from the CSV fields, except the NORAD id
+		// will be zeroed out, because it may be longer than 5 digits.
+		SatCsvEntry entry;
+		bool mmOK = false, eccOK = false, incOK = false, raaOK = false, aopOK = false, maOK = false;
+		bool etOK = false, esnOK = false, raeOK = false, bsOK = false, mmdOK = false, mmddOK = false;
+		entry.object_id           = lineEntries[OBJECT_ID].trimmed();
+		entry.epoch               = lineEntries[EPOCH].trimmed();
+		entry.mean_motion         = lineEntries[MEAN_MOTION].trimmed().toDouble(&mmOK);
+		entry.eccentricity        = lineEntries[ECCENTRICITY].trimmed().toDouble(&eccOK);
+		entry.inclination         = lineEntries[INCLINATION].trimmed().toDouble(&incOK);
+		entry.ra_of_asc_node      = lineEntries[RA_OF_ASC_NODE].trimmed().toDouble(&raaOK);
+		entry.arg_of_pericenter   = lineEntries[ARG_OF_PERICENTER].trimmed().toDouble(&aopOK);
+		entry.mean_anomaly        = lineEntries[MEAN_ANOMALY].trimmed().toDouble(&maOK);
+		entry.ephemeris_type      = lineEntries[EPHEMERIS_TYPE].trimmed().toUInt(&etOK);
+		entry.classification_type = lineEntries[CLASSIFICATION_TYPE].trimmed();
+		entry.element_set_no      = lineEntries[ELEMENT_SET_NO].trimmed().toUInt(&esnOK);
+		entry.rev_at_epoch        = lineEntries[REV_AT_EPOCH].trimmed().toUInt(&raeOK);
+		entry.bstar               = lineEntries[BSTAR].trimmed().toDouble(&bsOK);
+		entry.mean_motion_dot     = lineEntries[MEAN_MOTION_DOT].trimmed().toDouble(&mmdOK);
+		entry.mean_motion_ddot    = lineEntries[MEAN_MOTION_DDOT].trimmed().toDouble(&mmddOK);
+		if (!(mmOK && eccOK && incOK && raaOK && aopOK && maOK && etOK && esnOK && raeOK && bsOK && mmdOK && mmddOK))
+		{
+			warnAboutLine("Bad CSV line", "not all numbers are parsable");
+			continue;
+		}
+
+		data.first = generateTleLine1(entry, warnAboutLine);
+		if (data.first.isEmpty()) continue;
+
+		data.second = generateTleLine2(entry, warnAboutLine);
+		if (data.second.isEmpty()) continue;
+
+		// Some satellites can be listed in multiple files,
+		// and only some of those files may be marked for adding,
+		// so try to preserve the flag - if it's set,
+		// feel free to overwrite the existing value.
+		// If not, overwrite only if it's not in the list already.
+		// NOTE: Second case overwrite may need to check which TLE set is newer. 
+		if (data.addThis || !tleList.contains(data.id))
+			tleList.insert(data.id, data); // Overwrite if necessary
 	}
 }
 
