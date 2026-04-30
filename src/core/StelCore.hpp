@@ -386,6 +386,11 @@ public:
 	//! get vector used to compute aberration effect
 	Vec3d getAberrationVec(double JD) const;
 
+	//! Force clearing framebuffer on next redraw.
+	//! This should be called while in no-clear mode (painting diurnal star streaks) on major changes which destroy the view:
+	//! Dialog closing or moving, zooming, moving view etc.
+	void setClearSkyOnce();
+
 public slots:
 	//! Smoothly move the observer to the given location
 	//! @param target the target location
@@ -1057,5 +1062,6 @@ private:
 	Vec3d calculateAberrationVec(double JD) const; // Actual calculation
 
 	bool flagClearSky; // Keep this true unless you want to render star streaks.
+	int flagClearSkyOnce; // Set this true to force redraw. It will be reset to false automatically.
 };
 #endif // STELCORE_HPP

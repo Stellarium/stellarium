@@ -256,6 +256,7 @@ void StelMovementMgr::resetInitViewPos()
 
 		//qDebug() << "   upVectorMountFrame becomes " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::bindingFOVActions()
@@ -303,6 +304,7 @@ void StelMovementMgr::setEquatorialMount(bool b)
 		int yPosition = qRound(projectorParams.viewportCenter[1] - yPositionOffset - painter.getFontMetrics().height()/2);
 		lastMessageID = GETSTELMODULE(LabelMgr)->labelScreen(mode, xPosition, yPosition, true, StelApp::getInstance().getScreenFontSize() + 3, "#99FF99", true, 2000);
 	}
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
@@ -390,6 +392,7 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 			// We can hardly use the mouse exactly enough to go to the zenith/pole. Any mouse motion can safely reset the simplified up vector.
 			//qDebug() << "handleMouseMoves: resetting Up vector.";
 			setViewUpVector(Vec3d(0., 0., 1.));
+			core->setClearSkyOnce();
 			return true;
 		}
 	}
@@ -772,6 +775,7 @@ void StelMovementMgr::turnRight(bool s)
 	}
 	else
 		deltaAz = 0;
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::turnLeft(bool s)
@@ -784,6 +788,7 @@ void StelMovementMgr::turnLeft(bool s)
 	}
 	else
 		deltaAz = 0;
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::turnUp(bool s)
@@ -796,6 +801,7 @@ void StelMovementMgr::turnUp(bool s)
 	}
 	else
 		deltaAlt = 0;
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::turnDown(bool s)
@@ -808,19 +814,26 @@ void StelMovementMgr::turnDown(bool s)
 	}
 	else
 		deltaAlt = 0;
+	core->setClearSkyOnce();
 }
 
 
 void StelMovementMgr::zoomIn(bool s)
 {
 	if (flagEnableZoomKeys)
+	{
 		deltaFov = -1*(s!=0);
+		core->setClearSkyOnce();
+	}
 }
 
 void StelMovementMgr::zoomOut(bool s)
 {
 	if (flagEnableZoomKeys)
+	{
 		deltaFov = (s!=0);
+		core->setClearSkyOnce();
+	}
 }
 
 void StelMovementMgr::lookEast(bool zero)
