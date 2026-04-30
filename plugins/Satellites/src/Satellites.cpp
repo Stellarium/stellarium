@@ -900,7 +900,7 @@ void Satellites::restoreDefaultTleSources()
 	        { "qianfan", false },    { "hulianwang", false },   { "kuiper", false }
 	};
 	// Details: https://celestrak.org/NORAD/documentation/gp-data-formats.php
-	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=TLE";
+	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=CSV";
 	QStringList urls;
 	// TLE sources from Celestrak
 	for (auto group = celestrak.begin(); group != celestrak.end(); ++group)
@@ -1036,7 +1036,7 @@ void Satellites::loadSettings()
 			if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.endsWith(".txt", Qt::CaseInsensitive))
 			{
 				url.replace("NORAD/elements/", "NORAD/elements/gp.php?GROUP=", Qt::CaseInsensitive);
-				url.replace(".txt", "&FORMAT=TLE", Qt::CaseInsensitive);
+				url.replace(".txt", "&FORMAT=CSV", Qt::CaseInsensitive);
 				urlWasUpdated = true;
 			}
 
@@ -1076,7 +1076,7 @@ void Satellites::loadSettings()
 				if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.endsWith(".txt", Qt::CaseInsensitive))
 				{
 					url.replace("NORAD/elements/", "NORAD/elements/gp.php?GROUP=", Qt::CaseInsensitive);
-					url.replace(".txt", "&FORMAT=TLE", Qt::CaseInsensitive);
+					url.replace(".txt", "&FORMAT=CSV", Qt::CaseInsensitive);
 					urlWasUpdated = true;
 				}
 
