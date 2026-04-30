@@ -292,6 +292,7 @@ bool SpaceShipObserver::update(double deltaTime)
 	{
 		timeToGo = 0.;
 		currentLocation = moveTargetLocation;
+		StelApp::getInstance().getCore()->setClearSkyOnce();
 	}
 	else
 	{
