@@ -800,7 +800,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 void AtmosphereShowMySky::draw(StelCore* core)
 {
 	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
-	if (StelApp::getInstance().getVisionModeNight())
+	if (StelApp::getInstance().getVisionModeNight() || (!core->getFlagClearSky()))
 		return;
 
 	StelToneReproducer* eye = core->getToneReproducer();
