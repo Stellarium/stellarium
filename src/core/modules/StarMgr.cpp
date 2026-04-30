@@ -1371,6 +1371,7 @@ void StarMgr::draw(StelCore* core)
 
 	// Prepare a table for storing precomputed RCMag for all ZoneArrays
 	RCMag rcmag_table[RCMAG_TABLE_SIZE];
+	const float starStreakScale = core->getFlagClearSky()? 1.0f:0.6f;
 	
 	// Draw all the stars of all the selected zones
 	for (const auto* z : std::as_const(gridLevels))
@@ -1398,7 +1399,7 @@ void StarMgr::draw(StelCore* core)
 				}
 				break;
 			}
-			rcmag_table[i].radius *= starsFader.getInterstate();
+			rcmag_table[i].radius *= starsFader.getInterstate() * starStreakScale;
 		}
 		lastMaxSearchLevel = z->level;
 

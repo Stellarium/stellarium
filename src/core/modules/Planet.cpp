@@ -3895,12 +3895,16 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		// by putting here, only draw orbit if Planet is visible for clarity
 		drawOrbit(core);  // TODO - fade in here also...
 
-		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitudeWithExtinction(core, vMagnitude));
+		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitudeWithExtinction(core, vMagnitude) && core->getFlagClearSky())
+			labelsFader=true;
+		else
+			labelsFader=false;
 
 		{ // scope the StelPainter here!
 			const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 			StelPainter sPainter(prj);
-			drawHints(core, sPainter, planetNameFont);
+			if (core->getFlagClearSky())
+				drawHints(core, sPainter, planetNameFont);
 			// TODO: Decide whether isComet should be moved up in the enum list to allow exclusion!
 			if (pType>=Planet::isAsteroid)
 			{
@@ -4449,7 +4453,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	}
 
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
-	if (isSun && drawSunHalo && core->getSkyDrawer()->getFlagEarlySunHalo())
+	if (isSun && drawSunHalo && core->getSkyDrawer()->getFlagEarlySunHalo() && core->getFlagClearSky())
 	{
 		// Prepare openGL lighting parameters according to luminance
 		float surfArcMin2 = static_cast<float>(getSpheroidAngularRadius(core))*60.f;
@@ -4589,7 +4593,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		#endif
 	}
 
-	bool allowDrawHalo = !isSun || !core->getSkyDrawer()->getFlagEarlySunHalo(); // We had drawn the sun already before the sphere.
+	bool allowDrawHalo = core->getFlagClearSky() && ( !isSun || !core->getSkyDrawer()->getFlagEarlySunHalo()); // We had drawn the sun already before the sphere.
 	if (!isSun && !isMoon && currentLocationIsEarth)
 	{
 		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer).

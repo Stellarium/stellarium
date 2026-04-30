@@ -284,6 +284,9 @@ void AsterismMgr::setRayHelperThickness(const int thickness)
 
 void AsterismMgr::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	QFont font=QGuiApplication::font();

@@ -115,6 +115,8 @@ StelCore::StelCore()
 	, de441Available(false)
 	, de440Active(false)
 	, de441Active(false)
+	, flagClearSky(true)
+	, flagClearSkyOnce(0)
 {
 	setObjectName("StelCore");
 	registerMathMetaTypes();
@@ -384,6 +386,8 @@ void StelCore::init()
 
 	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
 	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
+
+	actionsMgr->addAction("actionClear_Background", displayGroup, N_("Toggle background clearing"), this, "flagClearSky", "Ctrl+Alt+C", "", true);
 }
 
 QString StelCore::getDefaultProjectionTypeKey() const
@@ -562,7 +566,27 @@ void StelCore::preDraw()
 	Vec3f backColor = StelMainView::getInstance().getSkyBackgroundColor();
 	QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
 	gl->glClearColor(backColor[0], backColor[1], backColor[2], 0.f);
-	gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	if (flagClearSkyOnce==1)
+	{
+		flagClearSky=false; // Allow drawing one frame with features
+		flagClearSkyOnce=0;
+	}
+
+	if (flagClearSky || (flagClearSkyOnce==2))
+	{
+		gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		if (flagClearSkyOnce==2)
+		{
+			flagClearSkyOnce=1;
+			flagClearSky=true; // Let other modules draw once!
+		}
+	}
+	else
+	{
+		// TODO: dim whole framebuffer to 90%, else we are overexposed much too fast.
+		gl->glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	}
 
 	skyDrawer->preDraw();
 }
@@ -3347,4 +3371,18 @@ void StelCore::setAberrationUniforms(QOpenGLShaderProgram& program) const
 		velocity = getAberrationFactor() * cachedAberrationVec;
 	}
 	program.setUniformValue("STELCORE_currentPlanetBarycentricEclipticVelocity", velocity.toQVector());
+}
+
+void StelCore::setFlagClearSky(const bool state)
+{
+	flagClearSky = state;
+	qDebug() << "flagClearSky now" << state;
+	emit flagClearSkyChanged(state);
+}
+
+// Initiate a reset chain for preDraw()
+void StelCore::setClearSkyOnce()
+{
+	if (!flagClearSky)
+		flagClearSkyOnce = 2;
 }

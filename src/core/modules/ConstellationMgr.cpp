@@ -692,6 +692,9 @@ void ConstellationMgr::loadLinesNamesAndArt(const StelSkyCulture &culture)
 
 void ConstellationMgr::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	//sPainter.setFont(asterFont);

@@ -157,6 +157,9 @@ void Cardinals::setFadeDuration(float duration)
 // Handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude) const
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	// fun polar special cases: no cardinals!
 	if ((fabs(latitude - 90.0) < 1e-10) || (fabs(latitude + 90.0) < 1e-10))
 		return;
@@ -673,7 +676,7 @@ void LandscapeMgr::draw(StelCore* core)
 	QFont font=QGuiApplication::font();
 
 	// Draw the atmosphere
-	if (!getFlagAtmosphereNoScatter())
+	if (!getFlagAtmosphereNoScatter() && core->getFlagClearSky())
 	    atmosphere->draw(core);
 
 	// GZ 2016-01: When we draw the atmosphere with a low sun, it is possible that the glaring red ball is overpainted and thus invisible.

@@ -583,6 +583,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>vMagnitude);
 
+		if (core->getFlagClearSky())
 		{ // encapsulate painter!
 			const StelProjectorP prjin = core->getProjection(StelCore::FrameJ2000);
 			StelPainter sPainter(prjin);

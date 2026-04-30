@@ -1038,10 +1038,17 @@ void StelApp::highGraphicsModeDraw()
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
 
-	for(auto* module : modules)
-	{
-		module->draw(core);
-	}
+	if (core->getFlagClearSky())
+		for (auto* module : modules)
+		{
+			module->draw(core);
+		}
+	else
+		for (auto* module : modules)
+		{
+			if (! QStringList({"MilkyWay", "ZodiacalLight", "GridLinesMgr", "NebulaMgr"}).contains(module->objectName()))
+				module->draw(core);
+		}
 
 	if(sceneMultisampledFBO)
 	{
@@ -1111,10 +1118,17 @@ void StelApp::draw()
 	else
 	{
 		const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
-		for (auto* module : modules)
-		{
-			module->draw(core);
-		}
+		if (core->getFlagClearSky())
+			for (auto* module : modules)
+			{
+				module->draw(core);
+			}
+		else
+			for (auto* module : modules)
+			{
+				if (! QStringList({"MilkyWay", "ZodiacalLight", "GridLinesMgr", "NebulaMgr"}).contains(module->objectName()))
+					module->draw(core);
+			}
 	}
 
 	core->postDraw();
@@ -1484,6 +1498,10 @@ void StelApp::setViewportEffect(const QString& name)
 	if (name == "sphericMirrorDistorter")
 	{
 		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(w, h);
+	}
+	else if (name == "viewportFaderEffect")
+	{
+		viewportEffect = new StelViewportFaderEffect();
 	}
 	else
 	{
