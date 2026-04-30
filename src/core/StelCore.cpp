@@ -573,12 +573,12 @@ void StelCore::preDraw()
 		flagClearSkyOnce=0;
 	}
 
-	if (flagClearSky || (flagClearSkyOnce==2))
+	if (flagClearSky || (flagClearSkyOnce==3))
 	{
 		gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-		if (flagClearSkyOnce==2)
+		if (flagClearSkyOnce>=2)
 		{
-			flagClearSkyOnce=1;
+			flagClearSkyOnce--;
 			flagClearSky=true; // Let other modules draw once!
 		}
 	}
@@ -1505,6 +1505,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 	else
 	{
 		setObserver(new StelObserver(target));
+		setClearSkyOnce();
 	}
 
 	// Auto-select observed planet for observer locations
@@ -3386,5 +3387,5 @@ void StelCore::setFlagClearSky(const bool state)
 void StelCore::setClearSkyOnce()
 {
 	if (!flagClearSky)
-		flagClearSkyOnce = 2;
+		flagClearSkyOnce = 3;
 }
