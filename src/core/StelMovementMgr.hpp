@@ -466,6 +466,7 @@ public slots:
 		else
 			currentFov=qBound(minFov, f, maxFov);
 
+		core->setClearSkyOnce();
 		emit currentFovChanged(currentFov);
 	}
 
