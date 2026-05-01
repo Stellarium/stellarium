@@ -378,6 +378,19 @@ public:
 	{
 		prepareGeometryChange();
 		rect.setSize(size);
+		StelApp *app=&StelApp::getInstance();
+		if (app)
+		{
+			qDebug() << "got app";
+			StelCore *core=app->getCore();
+			qDebug() << "got core";
+			if (core && core->getJD()!=0.0)
+			{
+				qDebug() << "call core";
+				core->setClearSkyOnce();
+			}
+			qDebug() << "after core";
+		}
 	}
 
 	//! Set the sky background color. Everything else than black creates a work of art!
