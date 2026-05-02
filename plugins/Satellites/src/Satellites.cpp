@@ -65,6 +65,46 @@
 #include <QtConcurrent>
 #endif
 
+namespace
+{
+
+QByteArray unzipData(const QByteArray& fd)
+{
+	QTemporaryFile zip;
+	if (!zip.open())
+	{
+		qWarning() << "[Satellites] Unable to open a temporary file";
+		return fd;
+	}
+
+	// qWarning() << "[Satellites] Processing a ZIP archive...";
+	zip.write(fd);
+	zip.close();
+	QString archive = zip.fileName();
+	QByteArray data;
+
+#if USE_BUNDLED_QTCOMPRESS
+	Stel::QZipReader reader(archive);
+	if (reader.status() != Stel::QZipReader::NoError)
+#else
+	QZipReader reader(archive);
+	if (reader.status() != QZipReader::NoError)
+#endif
+	{
+		qWarning() << "[Satellites] Unable to open as a ZIP archive";
+		return fd;
+	}
+	for (const auto& info : reader.fileInfoList())
+	{
+		// qWarning() << "[Satellites] Processing:" << info.filePath;
+		if (info.isFile)
+			data.append(reader.fileData(info.filePath));
+	}
+	return data;
+}
+
+}
+
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
 	return new Satellites();
@@ -2406,43 +2446,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			QByteArray fd = reply->readAll();
 			// qWarning() << "[Satellites] Processing an URL:" << reply->url().toString();
 			if (reply->url().toString().contains(".zip", Qt::CaseInsensitive))
-			{
-				QTemporaryFile zip;
-				if (zip.open())
-				{
-					// qWarning() << "[Satellites] Processing a ZIP archive...";
-					zip.write(fd);
-					zip.close();
-					QString archive = zip.fileName();
-					QByteArray data;
-
-					#if USE_BUNDLED_QTCOMPRESS
-					Stel::QZipReader reader(archive);
-					if (reader.status() != Stel::QZipReader::NoError)
-					#else
-					QZipReader reader(archive);
-					if (reader.status() != QZipReader::NoError)
-					#endif
-					{
-						qWarning() << "[Satellites] Unable to open as a ZIP archive";
-					}
-					else
-					{
-						for (const auto& info : reader.fileInfoList())
-						{
-							// qWarning() << "[Satellites] Processing:" << info.filePath;
-							if (info.isFile)
-								data.append(reader.fileData(info.filePath));
-						}
-						// qWarning() << "[Satellites] Extracted data:" << data;
-						fd = data;
-					}
-					reader.close();
-					zip.remove();
-				}
-				else
-					qWarning() << "[Satellites] Unable to open a temporary file";
-			}
+				fd = unzipData(fd);
 			tmpFile->write(fd);
 			tmpFile->close();
 			
