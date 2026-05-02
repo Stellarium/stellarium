@@ -466,7 +466,7 @@ void ConfigurationDialog::createDialogContent()
 		connectDoubleProperty(ui->spinBox_Rate         , "StelSpeechMgr.rate");
 
 		connect(ui->pushButton_SpeechSay,  &QPushButton::clicked, speechMgr, [this](){QString txt=ui->speechTextEdit->toPlainText(); qDebug() << txt; speechMgr->say(txt);});
-		connect(ui->pushButton_SpeechStop, &QPushButton::clicked, speechMgr, [this]{speechMgr->stop();});
+		connect(ui->pushButton_SpeechStop, &QPushButton::clicked, speechMgr, []{speechMgr->stop();});
 	}
 	else
 #endif
