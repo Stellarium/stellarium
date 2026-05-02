@@ -1813,6 +1813,14 @@ void Satellites::remove(const QStringList& idList)
 	if (satelliteListModel)
 		satelliteListModel->beginSatellitesChange();
 	
+	removeWithoutModelReset(idList);
+
+	if (satelliteListModel)
+		satelliteListModel->endSatellitesChange();
+}
+
+void Satellites::removeWithoutModelReset(const QStringList& idList)
+{
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 	int numRemoved = 0;
 	for (int i = 0; i < satellites.size(); i++)
@@ -1831,9 +1839,6 @@ void Satellites::remove(const QStringList& idList)
 		}
 	}
 	// As the satellite list is kept sorted, no need for re-sorting.
-	
-	if (satelliteListModel)
-		satelliteListModel->endSatellitesChange();
 
 	qDebug() << "[Satellites] "
 		 << idList.count() << "satellites proposed for removal, "
@@ -2671,7 +2676,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	if (autoRemoveEnabled && !toBeRemoved.isEmpty())
 	{
 		qWarning() << "[Satellites] purging objects that were not updated...";
-		remove(toBeRemoved);
+		removeWithoutModelReset(toBeRemoved);
 	}
 	
 	if (updatedCount > 0 ||
