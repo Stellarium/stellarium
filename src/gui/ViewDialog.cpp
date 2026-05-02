@@ -761,7 +761,7 @@ void ViewDialog::createDialogContent()
 	// Connect narration buttons. We might need to prepare the texts, though.
 	if (GETSTELMODULE(StelSpeechMgr)->enabled())
 	{
-		connect(ui->pushButtonLandscapes_say, &QPushButton::clicked, this, [this](){
+		connect(ui->pushButtonLandscapes_say, &QPushButton::clicked, this, [](){
 			static LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
 
 			QString pureContent=lmgr->getDescription();
@@ -772,16 +772,16 @@ void ViewDialog::createDialogContent()
 			QString stripped=pureContent.replace(htmlendH, ". . . ").remove(html1).remove(htmlend).remove(htmlbegin);
 
 			GETSTELMODULE(StelSpeechMgr)->say(stripped);});
-		connect(ui->pushButtonLandscapes_stop, &QPushButton::clicked, this, [this](){
+		connect(ui->pushButtonLandscapes_stop, &QPushButton::clicked, this, [](){
 			GETSTELMODULE(StelSpeechMgr)->stop();});
-		connect(ui->pushButtonSkyculture_say, &QPushButton::clicked, this, [this](){
+		connect(ui->pushButtonSkyculture_say, &QPushButton::clicked, this, [](){
 			StelApp& app = StelApp::getInstance();
 			QString md = app.getSkyCultureMgr().getCurrentSkyCultureNarration();
 			qDebug() << "MD as received: " << md;
 
 			GETSTELMODULE(StelSpeechMgr)->say(md);
 		});
-		connect(ui->pushButtonSkyculture_stop, &QPushButton::clicked, this, [this](){
+		connect(ui->pushButtonSkyculture_stop, &QPushButton::clicked, this, [](){
 			GETSTELMODULE(StelSpeechMgr)->stop();});
 	}
 	else
