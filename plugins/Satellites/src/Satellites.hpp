@@ -789,6 +789,9 @@ private slots:
 	void translateData();
 
 private:
+	//! The actual implementation of #remove, but without resetting
+	//! #satelliteListModel.
+	void removeWithoutModelReset(const QStringList& idList);
 	//! Drawing the circles of Earth's umbra and penumbra
 	void drawCircles(StelCore* core, StelPainter& painter);
 	//! Add to the current collection the satellite described by the data.
