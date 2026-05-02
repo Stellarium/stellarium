@@ -1211,7 +1211,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		}
 	}
 
-	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid)
+	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid && core->getFlagClearSky())
 		drawOrbit(core, painter);
 }
 

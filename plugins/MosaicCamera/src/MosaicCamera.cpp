@@ -608,7 +608,7 @@ void MosaicCamera::setCurrentVisibility(bool visible)
 
 void MosaicCamera::draw(StelCore* core)
 {
-	if (!isEnabled())
+	if (!isEnabled() || (!core->getFlagClearSky()))
 		return;
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);

@@ -233,7 +233,7 @@ void Pulsars::init()
 */
 void Pulsars::draw(StelCore* core)
 {
-	if (!flagShowPulsars)
+	if (!flagShowPulsars || (!core->getFlagClearSky()))
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);

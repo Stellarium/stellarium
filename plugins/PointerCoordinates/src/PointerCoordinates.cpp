@@ -121,7 +121,7 @@ void PointerCoordinates::init()
 
 void PointerCoordinates::draw(StelCore *core)
 {
-	if (!isEnabled())
+	if (!isEnabled() || (!core->getFlagClearSky()))
 		return;
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
