@@ -35,6 +35,7 @@
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
+#include <memory>
 #include <QLoggingCategory>
 #include <QFile>
 #include <QHash>
@@ -440,7 +441,7 @@ private:
 
 #ifndef NO_GUI
 	// Toolbar button to toggle the Slew window
-	StelButton* toolbarButton;
+	StelButton* toolbarButton = nullptr;
 #endif
 	//! Telescope reticle texture
 	StelTextureSP reticleTexture;
@@ -459,16 +460,16 @@ private:
 
 	QHash<ConnectionType, QString> connectionTypeNames;
 
-	bool useTelescopeServerLogs;
+	bool useTelescopeServerLogs = false;
 	QHash<int, QFile*> telescopeServerLogFiles;
 	QHash<int, QTextStream*> telescopeServerLogStreams;
 
-	bool useServerExecutables;
+	bool useServerExecutables = false;
 	QString serverExecutablesDirectoryPath;
 
 #ifndef NO_GUI
-	TelescopeDialog* telescopeDialog;
-	SlewDialog* slewDialog;
+	std::unique_ptr<TelescopeDialog> telescopeDialog;
+	std::unique_ptr<SlewDialog> slewDialog;
 #endif
 	//! Used internally. Checks if the argument is a valid slot number.
 	static bool isValidSlotNumber(int slot);

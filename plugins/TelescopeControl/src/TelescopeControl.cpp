@@ -91,14 +91,7 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
-	: useTelescopeServerLogs(false)
-	, useServerExecutables(false)
-	#ifndef NO_GUI
-	, toolbarButton(nullptr)
-	, telescopeDialog(nullptr)
-	, slewDialog(nullptr)
-	#endif
-	, actionGroupId("PluginTelescopeControl")
+	: actionGroupId("PluginTelescopeControl")
 	, moveToSelectedActionId("actionMove_Telescope_To_Selection_%1")
 	, syncActionId("actionSync_Telescope_To_Selection_%1")
 	, abortSlewActionId("actionAbortSlew_Telescope_Slew_%1")
@@ -118,10 +111,6 @@ TelescopeControl::TelescopeControl()
 
 TelescopeControl::~TelescopeControl()
 {
-#ifndef NO_GUI
-	delete slewDialog; slewDialog = nullptr;
-	delete telescopeDialog; telescopeDialog = nullptr;
-#endif
 }
 
 
@@ -207,10 +196,10 @@ void TelescopeControl::init()
 
 #ifndef NO_GUI
 		//Create and initialize dialog windows
-		telescopeDialog = new TelescopeDialog();
-		slewDialog = new SlewDialog();
-		addAction("actionShow_Slew_Window", N_("Telescope Control"), N_("Move a telescope to a given set of coordinates"), slewDialog, "visible", "Ctrl+0");
-		addAction("actionShow_TelescopeControl_dialog", N_("Telescope Control"), N_("Show settings dialog"), telescopeDialog, "visible");
+		telescopeDialog.reset(new TelescopeDialog());
+		slewDialog.reset(new SlewDialog());
+		addAction("actionShow_Slew_Window", N_("Telescope Control"), N_("Move a telescope to a given set of coordinates"), slewDialog.get(), "visible", "Ctrl+0");
+		addAction("actionShow_TelescopeControl_dialog", N_("Telescope Control"), N_("Show settings dialog"), telescopeDialog.get(), "visible");
 
 		//Create toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
