@@ -19,6 +19,8 @@ SET(Calendars_SRCS
     RevisedJulianCalendar.cpp
     RomanCalendar.hpp
     RomanCalendar.cpp
+    ByzantineCalendar.hpp
+    ByzantineCalendar.cpp
     OlympicCalendar.hpp
     OlympicCalendar.cpp
     GregorianCalendar.hpp

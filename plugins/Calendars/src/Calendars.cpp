@@ -39,6 +39,7 @@
 #include "ISOCalendar.hpp"
 #include "IcelandicCalendar.hpp"
 #include "RomanCalendar.hpp"
+#include "ByzantineCalendar.hpp"
 #include "OlympicCalendar.hpp"
 #include "EgyptianCalendar.hpp"
 #include "ArmenianCalendar.hpp"
@@ -113,6 +114,7 @@ Calendars::Calendars():
 	flagShowISO(true),
 	flagShowIcelandic(false),
 	flagShowRoman(false),
+	flagShowByzantine(false),
 	flagShowOlympic(false),
 	flagShowEgyptian(false),
 	flagShowArmenian(false),
@@ -261,6 +263,7 @@ void Calendars::init()
 	calendars.insert("ISO", new ISOCalendar(jd));
 	calendars.insert("Icelandic", new IcelandicCalendar(jd));
 	calendars.insert("Roman", new RomanCalendar(jd));
+	calendars.insert("Byzantine", new ByzantineCalendar(jd));
 	calendars.insert("Olympic", new OlympicCalendar(jd));
 	calendars.insert("Egyptian", new EgyptianCalendar(jd));
 	calendars.insert("Armenian", new ArmenianCalendar(jd));
@@ -330,6 +333,7 @@ void Calendars::loadSettings()
 	showISO(                conf->value("Calendars/show_iso", true).toBool());
 	showIcelandic(          conf->value("Calendars/show_icelandic", false).toBool());
 	showRoman(              conf->value("Calendars/show_roman", false).toBool());
+	showByzantine(          conf->value("Calendars/show_byzantine", false).toBool());
 	showOlympic(            conf->value("Calendars/show_olympic", false).toBool());
 	showEgyptian(           conf->value("Calendars/show_egyptian", false).toBool());
 	showArmenian(           conf->value("Calendars/show_armenian", false).toBool());
@@ -423,6 +427,7 @@ QString Calendars::createTableToDraw()
 	if (flagShowISO)                oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("ISO week",              "calendar"), getCal("ISO")->getFormattedDateString());
 	if (flagShowIcelandic)          oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Icelandic",             "calendar"), getCal("Icelandic")->getFormattedDateString());
 	if (flagShowRoman)              oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Roman",                 "calendar"), getCal("Roman")->getFormattedDateString());
+	if (flagShowByzantine)          oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Byzantine",             "calendar"), getCal("Byzantine")->getFormattedDateString());
 	if (flagShowOlympic)            oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Olympic",               "calendar"), getCal("Olympic")->getFormattedDateString());
 	if (flagShowEgyptian)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Egyptian",              "calendar"), getCal("Egyptian")->getFormattedDateString());
 	if (flagShowArmenian)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Armenian",              "calendar"), getCal("Armenian")->getFormattedDateString());
@@ -578,6 +583,17 @@ void Calendars::showRoman(bool b)
 		flagShowRoman=b;
 		conf->setValue("Calendars/show_roman", b);
 		emit showRomanChanged(b);
+	}
+}
+
+bool Calendars::isByzantineDisplayed() const { return flagShowByzantine;}
+void Calendars::showByzantine(bool b)
+{
+	if (b!=flagShowByzantine)
+	{
+		flagShowByzantine=b;
+		conf->setValue("Calendars/show_byzantine", b);
+		emit showByzantineChanged(b);
 	}
 }
 
