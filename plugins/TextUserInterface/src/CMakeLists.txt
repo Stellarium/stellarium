@@ -30,7 +30,7 @@ SET(TextUserInterface_SRCS
 )
 
 ADD_LIBRARY(TextUserInterface-static STATIC ${TextUserInterface_SRCS})
-TARGET_LINK_LIBRARIES(TextUserInterface-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(TextUserInterface-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 IF(ENABLE_SCRIPT_QML)
 TARGET_LINK_LIBRARIES(TextUserInterface-static Qt${QT_VERSION_MAJOR}::Qml)
 ENDIF()

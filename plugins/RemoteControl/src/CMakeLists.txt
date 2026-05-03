@@ -83,7 +83,7 @@ ENDIF()
 
 ADD_LIBRARY(RemoteControl-static STATIC ${RemoteControl_SRCS} ${RemoteControl_RES_CXX} ${RemoteControl_UIS_H} ${QtWebApp_SRCS})
 TARGET_INCLUDE_DIRECTORIES(RemoteControl-static PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
-TARGET_LINK_LIBRARIES(RemoteControl-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(RemoteControl-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 IF(ENABLE_SCRIPT_QML)
 TARGET_LINK_LIBRARIES(RemoteControl-static Qt${QT_VERSION_MAJOR}::Qml)
 ENDIF()

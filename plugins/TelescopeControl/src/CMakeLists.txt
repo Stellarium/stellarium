@@ -50,6 +50,7 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::SerialPort
+    Qt${QT_VERSION_MAJOR}::OpenGL
     )
 IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 TARGET_LINK_LIBRARIES(TelescopeControl-static

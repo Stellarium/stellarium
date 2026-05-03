@@ -38,7 +38,7 @@ ELSE()
 ENDIF()
 
 ADD_LIBRARY(NavStars-static STATIC ${NavStars_SRCS} ${NavStars_RES_CXX} ${NavStars_UIS_H})
-TARGET_LINK_LIBRARIES(NavStars-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(NavStars-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 
 IF(ENABLE_TESTING)
     add_definitions("-DWITH_TESTING_ON")

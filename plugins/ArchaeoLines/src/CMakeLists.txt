@@ -34,7 +34,7 @@ ELSE()
 ENDIF()
 
 ADD_LIBRARY(ArchaeoLines-static STATIC ${ArchaeoLines_SRCS} ${ArchaeoLines_RES_CXX} ${ArchaeoLines_UIS_H})
-TARGET_LINK_LIBRARIES(ArchaeoLines-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(ArchaeoLines-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 # The library target "ArchaeoLines-static" has a default OUTPUT_NAME of "ArchaeoLines-static", so change it.
 SET_TARGET_PROPERTIES(ArchaeoLines-static PROPERTIES OUTPUT_NAME "ArchaeoLines")
 SET_TARGET_PROPERTIES(ArchaeoLines-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

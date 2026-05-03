@@ -46,7 +46,7 @@ ELSE()
 ENDIF()
 
 ADD_LIBRARY(MeteorShowers-static STATIC ${MeteorShowers_SRCS} ${MeteorShowers_MOC_SRCS} ${MeteorShowers_RES_CXX} ${MeteorShowersDialog_UIS_H})
-TARGET_LINK_LIBRARIES(MeteorShowers-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(MeteorShowers-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 SET_TARGET_PROPERTIES(MeteorShowers-static PROPERTIES OUTPUT_NAME "MeteorShowers")
 SET_TARGET_PROPERTIES(MeteorShowers-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins MeteorShowers-static)
