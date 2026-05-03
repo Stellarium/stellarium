@@ -27,6 +27,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QLocale>
+#include <QTimeZone>
 #include <QRegularExpression>
 #include <QProcess>
 #include <QSysInfo>
@@ -2425,12 +2426,12 @@ double getDeltaTByIslamSadiqQureshi(const double jDay)
 	//year=qBound(1620, year, 2007);
 	if (year<1620)
 	{
-		const double j1620=qDateTimeToJd(QDateTime(QDate(1620, 1, 1), QTime(0, 0, 0), Qt::UTC));
+		const double j1620=qDateTimeToJd(QDateTime(QDate(1620, 1, 1), QTime(0, 0, 0), QTimeZone(0)));
 		ub=(j1620-2454101.0)/36525.0;
 	}
 	else if (year>2007)
 	{
-		const double j2008=qDateTimeToJd(QDateTime(QDate(2008, 1, 1), QTime(0, 0, 0), Qt::UTC));
+		const double j2008=qDateTimeToJd(QDateTime(QDate(2008, 1, 1), QTime(0, 0, 0), QTimeZone(0)));
 		ub=(j2008-2454101.0)/36525.0;
 	}
 	else

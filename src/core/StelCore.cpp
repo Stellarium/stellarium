@@ -1513,14 +1513,14 @@ double StelCore::getUTCOffset(const double JD) const
 		year = year - 1;
 	}
 	//getTime/DateFromJulianDay returns UTC time, not local time
-	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), Qt::UTC);
+	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), QTimeZone(0));
 	if (!universal.isValid())
 	{
 		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
 		// Assumes the GMT shift was always the same before year -4710
 		// NOTE: QDateTime has no year 0, and therefore likely different leap year rules.
 		// Under which circumstances do we get invalid universal?
-		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
+		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), QTimeZone(0));
 	}
 
 #if defined(Q_OS_WIN)
@@ -1531,7 +1531,7 @@ double StelCore::getUTCOffset(const double JD) const
 		// We assume a constant offset in this remote history,
 		// so we construct yet another date to get a valid offset.
 		// Application of the named time zones is inappropriate in any case.
-		universal = QDateTime(QDate(3, month, day), QTime(hour, minute, second), Qt::UTC);
+		universal = QDateTime(QDate(3, month, day), QTime(hour, minute, second), QTimeZone(0));
 	}
 #endif
 	StelLocation loc = getCurrentLocation();

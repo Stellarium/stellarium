@@ -172,14 +172,14 @@ double Calendar::localFromUniversal(double rd_ut, const StelLocation &loc)
 }
 double Calendar::standardFromUniversal(double rd_ut, const StelLocation &loc)
 {
-	static const QDateTime j2k(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
+	static const QDateTime j2k(QDate(2000, 1, 1), QTime(0, 0, 0), QTimeZone(0));
 	QTimeZone tz(loc.ianaTimeZone.toUtf8());
 	//qDebug() << "standardFromUniversal: Location " << loc.name << "TZ:" << loc.ianaTimeZone << tz.standardTimeOffset(j2k);
 	return rd_ut+tz.standardTimeOffset(j2k)/86400.;
 }
 double Calendar::universalFromStandard(double rd_zone, const StelLocation &loc)
 {
-	static const QDateTime j2k(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
+	static const QDateTime j2k(QDate(2000, 1, 1), QTime(0, 0, 0), QTimeZone(0));
 	QTimeZone tz(loc.ianaTimeZone.toUtf8());
 	//qDebug() << "universalFromStandard: Location " << loc.name << "TZ:" << loc.ianaTimeZone << tz.standardTimeOffset(j2k);
 	return rd_zone-tz.standardTimeOffset(j2k)/86400.;
@@ -995,7 +995,7 @@ double Calendar::moonrise(int rd, const StelLocation &loc)
 	const double lat=static_cast<double>(loc.getLatitude());
 	const double offset=alt/(4.*(90.-fabs(lat)));
 
-	static const QDateTime j2k(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
+	static const QDateTime j2k(QDate(2000, 1, 1), QTime(0, 0, 0), QTimeZone(0));
 	QTimeZone tz(loc.ianaTimeZone.toUtf8());
 	//qDebug() << "moonrise for: Location " << loc.name << "TZ:" << loc.ianaTimeZone << tz.standardTimeOffset(j2k);
 
