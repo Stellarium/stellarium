@@ -50,6 +50,4 @@ TARGET_LINK_LIBRARIES(RemoteSync-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSI
 # The library target "RemoteSync-static" has a default OUTPUT_NAME of "RemoteSync-static", so change it.
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES OUTPUT_NAME "RemoteSync")
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins RemoteSync-static)
-
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES FOLDER "plugins/RemoteSync")

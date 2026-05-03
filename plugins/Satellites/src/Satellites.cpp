@@ -3300,7 +3300,7 @@ void Satellites::update(double deltaTime)
 	}
 	else
 	{
-		const auto updateSat = [this, JD](QSharedPointer<Satellite>& sat){
+		const auto updateSat = [JD](QSharedPointer<Satellite>& sat){
 			if (sat->initialized && sat->displayed)
 				sat->update(core, JD);
 		};

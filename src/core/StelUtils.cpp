@@ -312,17 +312,15 @@ QString radToHmsNarration(const double angle, const bool decimal)
 	unsigned int h,m;
 	double s;
 	StelUtils::radToHms(angle, h, m, s);
-	int width, precision;
+	int precision;
 	QString carry;
 	if (decimal)
 	{
-		width=5;
 		precision=2;
 		carry="60.00";
 	}
 	else
 	{
-		width=4;
 		precision=1;
 		carry="60.0";
 	}
@@ -1651,9 +1649,9 @@ QString narrateDecimal(double num, int decimals)
 //! The method to splitting the text by substrings by some limit of string length
 QString wrapText(const QString& s, const int limit)
 {
-	static const uint32_t RLM32=U'\U0000200f'; // Right-Left-marker (starting Arab/Hebrew)
-	static const uint32_t LRM32=U'\U0000200e'; // Left-right-marker
-	static const uint32_t ZWS32=U'\U0000200b'; // Zero-width space
+	//static const uint32_t RLM32=U'\U0000200f'; // Right-Left-marker (starting Arab/Hebrew)
+	//static const uint32_t LRM32=U'\U0000200e'; // Left-right-marker
+	//static const uint32_t ZWS32=U'\U0000200b'; // Zero-width space
 	//static const QString LRM{"\u200e"}; // left-to-right mark: zero-width char
 	//static const QString RLM{"\u200f"}; // right-to-left mark: right to left zero-width non-Arabic char
 	static const QString ZWS{"\u200b"}; // zero-width space (we use them to combine cultural label groups)
@@ -3094,6 +3092,11 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 	}
 
 	return out;
+}
+
+bool isFilenameArchive(const QString& filename)
+{
+	return filename.endsWith(".gz") || filename.endsWith(".gzip");
 }
 
 qint64 getLongLong(const QJsonValue& v)

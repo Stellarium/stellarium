@@ -88,7 +88,6 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLFramebufferObject>
-#include <QOpenGLFunctions_3_3_Core>
 #include <QString>
 #include <QStringList>
 #include <QSysInfo>
@@ -108,130 +107,6 @@
 #ifdef ENABLE_SPOUT
 #include <QMessageBox>
 #include "SpoutSender.hpp"
-#endif
-
-#ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
-Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SIMPLEDRAWLINE
-Q_IMPORT_PLUGIN(SimpleDrawLineStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_ANGLEMEASURE
-Q_IMPORT_PLUGIN(AngleMeasureStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_ARCHAEOLINES
-Q_IMPORT_PLUGIN(ArchaeoLinesStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_CALENDARS
-Q_IMPORT_PLUGIN(CalendarsStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SATELLITES
-Q_IMPORT_PLUGIN(SatellitesStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_TEXTUSERINTERFACE
-Q_IMPORT_PLUGIN(TextUserInterfaceStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_OCULARS
-Q_IMPORT_PLUGIN(OcularsStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_OCULUS
-Q_IMPORT_PLUGIN(OculusStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_TELESCOPECONTROL
-Q_IMPORT_PLUGIN(TelescopeControlStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SOLARSYSTEMEDITOR
-Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_LENSDISTORTIONESTIMATOR
-Q_IMPORT_PLUGIN(LensDistortionEstimatorStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_METEORSHOWERS
-Q_IMPORT_PLUGIN(MeteorShowersStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_NAVSTARS
-Q_IMPORT_PLUGIN(NavStarsStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_NOVAE
-Q_IMPORT_PLUGIN(NovaeStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SUPERNOVAE
-Q_IMPORT_PLUGIN(SupernovaeStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_QUASARS
-Q_IMPORT_PLUGIN(QuasarsStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_PULSARS
-Q_IMPORT_PLUGIN(PulsarsStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_EXOPLANETS
-Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_EQUATIONOFTIME
-Q_IMPORT_PLUGIN(EquationOfTimeStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_POINTERCOORDINATES
-Q_IMPORT_PLUGIN(PointerCoordinatesStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_OBSERVABILITY
-Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SCENERY3D
-Q_IMPORT_PLUGIN(Scenery3dStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SKYCULTUREMAKER
-Q_IMPORT_PLUGIN(SkyCultureMakerStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_REMOTECONTROL
-Q_IMPORT_PLUGIN(RemoteControlStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_REMOTESYNC
-Q_IMPORT_PLUGIN(RemoteSyncStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_VTS
-Q_IMPORT_PLUGIN(VtsStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_ONLINEQUERIES
-Q_IMPORT_PLUGIN(OnlineQueriesPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_NEBULATEXTURES
-Q_IMPORT_PLUGIN(NebulaTexturesStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_MOSAICCAMERA
-Q_IMPORT_PLUGIN(MosaicCameraStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_TIMENAVIGATOR
-Q_IMPORT_PLUGIN(TimeNavigatorStelPluginInterface)
 #endif
 
 // Initialize static variables
@@ -926,6 +801,7 @@ void main()
 	postProcessorUniformLocations.ditherPattern = postProcessorProgram->uniformLocation("ditherPattern");
 	postProcessorProgram->release();
 
+#if !QT_CONFIG(opengles2)
 	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
 	{
 		postProcessorProgramMS.reset(new QOpenGLShaderProgram);
@@ -960,11 +836,11 @@ void main()
 		postProcessorUniformLocationsMS.numMultiSamples   = postProcessorProgramMS->uniformLocation("numMultiSamples");
 		postProcessorProgramMS->release();
 	}
+#endif
 }
 
 void StelApp::highGraphicsModeDraw()
 {
-#if !QT_CONFIG(opengles2)
 	const auto targetFBO = currentFbo;
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	const auto w = params.viewportXywh[2] * params.devicePixelsPerPixel;
@@ -977,11 +853,16 @@ void StelApp::highGraphicsModeDraw()
 		qInfo() << "OpenGL viewport size:" << viewport[2] << "x" << viewport[3];
 
 		qInfo().nospace() << "Creating scene FBO with size " << w << "x" << h;
+#if !QT_CONFIG(opengles2)
 		const auto internalFormat = GL_RGBA16;
+#else
+		const auto internalFormat = GL_RGBA;
+#endif
 		QOpenGLFramebufferObjectFormat format;
 		format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 		format.setInternalTextureFormat(internalFormat);
 		sceneFBO.reset(new QOpenGLFramebufferObject(w, h, format));
+#if !QT_CONFIG(opengles2)
 		GLint maxSamples = 1;
 		GL(gl->glGetIntegerv(GL_MAX_SAMPLES, &maxSamples));
 		const auto samples = confSettings->value("video/multisampling", 0).toInt();
@@ -1020,6 +901,7 @@ void StelApp::highGraphicsModeDraw()
 				                      << status;
 			}
 		}
+#endif
 	}
 
 	if(sceneMultisampledFBO)
@@ -1085,7 +967,6 @@ void StelApp::highGraphicsModeDraw()
 	GL(gl->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
 	GL(gl->glDisable(GL_BLEND));
 	postProcessorVAO->release();
-#endif
 }
 
 //! Main drawing function called at each frame
@@ -1104,7 +985,8 @@ void StelApp::draw()
 
 	core->preDraw();
 
-	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode &&
+	  (!StelMainView::getInstance().getGLInformation().isGLES || core->getDitheringMode() != DitheringMode::Disabled))
 	{
 		highGraphicsModeDraw();
 	}

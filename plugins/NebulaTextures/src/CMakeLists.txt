@@ -43,6 +43,4 @@ ADD_LIBRARY(NebulaTextures-static STATIC ${NebulaTextures_SRCS} ${NebulaTextures
 TARGET_LINK_LIBRARIES(NebulaTextures-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL) # Gui
 SET_TARGET_PROPERTIES(NebulaTextures-static PROPERTIES OUTPUT_NAME "NebulaTextures")
 SET_TARGET_PROPERTIES(NebulaTextures-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins NebulaTextures-static)
-
 SET_TARGET_PROPERTIES(NebulaTextures-static PROPERTIES FOLDER "plugins/NebulaTextures")

@@ -33,10 +33,19 @@ GLuint makeDitherPatternTexture(QOpenGLFunctions& gl)
 	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	// OpenGL ES has different defined formats. However, the shader will use the red channel, so this should work:
-	if(QOpenGLContext::currentContext()->isOpenGLES())
+	if (QOpenGLContext::currentContext()->isOpenGLES())
 	{
-		gl.glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, std::size(blueNoiseTriangleRemapped), std::size(blueNoiseTriangleRemapped[0]),
-						0, GL_LUMINANCE, GL_FLOAT, blueNoiseTriangleRemapped);
+		std::vector<uint8_t> tmpBuf(3 * sizeof(blueNoiseTriangleRemapped) /
+		                            sizeof(blueNoiseTriangleRemapped[0][0]));
+		for (size_t i = 0; i < tmpBuf.size(); i += 3)
+		{
+			tmpBuf[i + 0] = (reinterpret_cast<const float*>(blueNoiseTriangleRemapped)[i] + 1) / 2 * 255;
+			tmpBuf[i + 1] = 0;
+			tmpBuf[i + 2] = 0;
+		}
+
+		gl.glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, std::size(blueNoiseTriangleRemapped),
+		                std::size(blueNoiseTriangleRemapped[0]), 0, GL_RGB, GL_UNSIGNED_BYTE, tmpBuf.data());
 	}
 	else
 	{
@@ -70,7 +79,8 @@ QString makeDitheringShader()
 	return 1+R"(
 #line 1 101
 uniform mediump vec3 rgbMaxValue;
-uniform sampler2D ditherPattern;
+uniform mediump sampler2D ditherPattern;
+
 mediump vec3 dither(mediump vec3 c)
 {
 	c = clamp(c, 0., 1.);

@@ -12,6 +12,4 @@ ADD_LIBRARY(HelloStelModule-static STATIC ${HelloStelModule_SRCS})
 SET_TARGET_PROPERTIES(HelloStelModule-static PROPERTIES OUTPUT_NAME "HelloStelModule")
 TARGET_LINK_LIBRARIES(HelloStelModule-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui)
 SET_TARGET_PROPERTIES(HelloStelModule-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-ADD_DEPENDENCIES(AllStaticPlugins HelloStelModule-static)
-
 SET_TARGET_PROPERTIES(HelloStelModule-static PROPERTIES FOLDER "plugins/HelloStelModule")
