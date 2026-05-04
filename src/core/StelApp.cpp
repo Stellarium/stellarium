@@ -727,7 +727,10 @@ void StelApp::init(QSettings* conf)
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.).toDouble();
 
-	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
+	if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+	{
+		ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
+	}
 	setupPostProcessor();
 	
 #ifdef ENABLE_SPOUT
