@@ -1044,7 +1044,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(const QString &
 	{
 		if (minorPlanetNumber)
 		{
-			static const QRegularExpression asteroidName("^\\((\\d+)\\)\\s+(\\S.+)$");
+			static const QRegularExpression asteroidName("^\\((\\d+)\\)\\s+(\\S+)\\s*(\\d*)$");
 			QRegularExpressionMatch astMatch;
 			if (column.indexOf(asteroidName, 0, &astMatch) == 0)
 			{
