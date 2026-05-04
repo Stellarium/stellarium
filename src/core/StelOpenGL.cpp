@@ -19,7 +19,9 @@
 #include "StelOpenGL.hpp"
 #include <QDebug>
 #include "StelMainView.hpp"
-#include <QOpenGLFunctions_3_3_Core>
+#if !QT_CONFIG(opengles2)
+# include <QOpenGLFunctions_3_3_Core>
+#endif
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 # include <QOpenGLVersionFunctionsFactory>
 #endif

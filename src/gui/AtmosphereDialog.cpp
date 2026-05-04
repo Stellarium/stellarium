@@ -98,7 +98,7 @@ void AtmosphereDialog::createDialogContent()
 	else
 		ui->groupBox_experimental->hide();
 
-#ifdef ENABLE_SHOWMYSKY
+#if defined ENABLE_SHOWMYSKY && !QT_CONFIG(opengles2)
 	connect(ui->atmosphereModel, &QComboBox::currentTextChanged, this, &AtmosphereDialog::onModelChoiceChanged);
 	connect(ui->showMySky_pathToModelBrowseBtn, &QPushButton::clicked, this, &AtmosphereDialog::browsePathToModel);
 	connect(ui->showMySky_pathToModelEdit, &QLineEdit::textChanged, this, &AtmosphereDialog::onPathToModelChanged);

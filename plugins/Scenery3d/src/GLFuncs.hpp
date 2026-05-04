@@ -22,9 +22,9 @@
 #define GLFUNCS_HPP
 
 #include <QOpenGLContext>
-#include <QOpenGLFunctions_1_0>
 
 #if !QT_CONFIG(opengles2)
+#include <QOpenGLFunctions_1_0>
 //! Defines some OpenGL functions not resolved through StelOpenGL (which only contains base OpenGL ES2 functions)
 //! Using the QOpenGLFunctions_*_* directly would solve this better, but it conflicts with the
 //! current StelOpenGL header dramatically.

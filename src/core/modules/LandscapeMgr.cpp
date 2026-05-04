@@ -23,7 +23,9 @@
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
 #include "AtmospherePreetham.hpp"
-#include "AtmosphereShowMySky.hpp"
+#if !QT_CONFIG(opengles2)
+# include "AtmosphereShowMySky.hpp"
+#endif
 #include "StelApp.hpp"
 #include "SolarSystem.hpp"
 #include "StelCore.hpp"
@@ -480,7 +482,7 @@ void LandscapeMgr::update(double deltaTime)
 		if(loaded)
 		{
 			atmosphere = std::move(loadingAtmosphere);
-#ifdef ENABLE_SHOWMYSKY
+#if defined ENABLE_SHOWMYSKY && !QT_CONFIG(opengles2)
 			if(dynamic_cast<AtmosphereShowMySky*>(atmosphere.get()))
 				setAtmosphereShowMySkyStatusText(q_("Loaded successfully"));
 #endif
@@ -736,7 +738,7 @@ void LandscapeMgr::createAtmosphere()
 	{
 		loadingAtmosphere.reset(new AtmospherePreetham(skylight));
 	}
-#ifdef ENABLE_SHOWMYSKY
+#if defined ENABLE_SHOWMYSKY && !QT_CONFIG(opengles2)
 	else if(modelConfig==ATMOSPHERE_MODEL_CONF_VAL_SHOWMYSKY)
 	{
 		try
