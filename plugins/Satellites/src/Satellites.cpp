@@ -3862,7 +3862,7 @@ void Satellites::translations()
 	N_("intelsat");
 	// TRANSLATORS: Satellite group: Satellites belonging to the EUTELSAT satellites
 	// TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/gp.php?GROUP=eutelsat&FORMAT=csv
-	N_("intelsat");
+	N_("eutelsat");
 	// TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
 	// TRANSLATORS: CelesTrak source [SES]: https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=csv
 	N_("ses");

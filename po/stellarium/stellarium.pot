@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-06 00:24+0700\n"
+"POT-Creation-Date: 2026-05-06 00:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20517,11 +20517,14 @@ msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT satellites
 #. TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=csv
+#: plugins/Satellites/src/Satellites.cpp:3862
+msgid "intelsat"
+msgstr ""
+
 #. TRANSLATORS: Satellite group: Satellites belonging to the EUTELSAT satellites
 #. TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/gp.php?GROUP=eutelsat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3862
 #: plugins/Satellites/src/Satellites.cpp:3865
-msgid "intelsat"
+msgid "eutelsat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
