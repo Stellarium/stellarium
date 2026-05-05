@@ -578,6 +578,13 @@ IF(WIN32 AND NOT MSVC)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} wbemuuid)
 ENDIF()
 
+IF(ANDROID)
+	set(stellarium_exe_SRCS
+		${stellarium_exe_SRCS}
+		${CMAKE_SOURCE_DIR}/android/AndroidManifest.xml
+	)
+ENDIF()
+
 # Main executable/library setup
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
@@ -605,6 +612,7 @@ ELSE()
 	  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
      ENDIF()
 ENDIF()
+set_target_properties(stellarium PROPERTIES QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_SOURCE_DIR}/android")
 if(ENABLE_PCH)
      # prepend an include to each cpp file which itself includes the most frequently used includes.
      target_precompile_headers(stelMain PRIVATE
