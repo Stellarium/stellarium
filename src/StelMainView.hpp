@@ -67,6 +67,9 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(int maxFps	                   READ getMaxFps                     WRITE setMaxFps                     NOTIFY maxFpsChanged)
 	Q_PROPERTY(int minTimeBetweenFrames        READ getMinTimeBetweenFrames       WRITE setMinTimeBetweenFrames       NOTIFY minTimeBetweenFramesChanged)
 public:
+#if QT_CONFIG(opengles2)
+	using PFNGLMINSAMPLESHADINGPROC = PFNGLMINSAMPLESHADINGOESPROC;
+#endif
 	//! Contains some basic info about the OpenGL context used
 	struct GLInfo
 	{
