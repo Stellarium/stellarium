@@ -211,96 +211,125 @@ def read_sections(lines):
 
     return sections
 
-def main():
+def parse_args():
     example_text = '''example:
 
     python3 %(prog)s ../data/ssystem_major.ini himalia'''
 
     ap = argparse.ArgumentParser(
-        description="Updates Stellarium moon orbits via JPL Horizons. Check reslts carefully",
+        description="Updates Stellarium moon orbits via JPL Horizons. Check results carefully",
         epilog=example_text
     )
     ap.add_argument("file", help="ssystem_major.ini file")
     ap.add_argument("object", nargs="?", help="Optional: update only one named object")
+
     try:
         args = ap.parse_args()
-    except:
+    except SystemExit:
         ap.print_help()
         sys.exit(0)
-    
+
+    return args
+
+
+def warn(message):
+    print(f"WARN: {message}", file=sys.stderr)
+
+
+def get_section_lines(lines, sec):
+    return lines[sec["start"]:sec["end"]]
+
+
+def should_skip_section(sec_name, requested_object):
+    return requested_object and sec_name.lower() != requested_object.lower()
+
+
+def validate_moon_section(sec, lines):
+    sec_name = sec["name"]
+    keys = sec["keys"]
+
+    if "type" not in keys:
+        return f"type object for {sec_name} missing"
+
+    type_line = lines[keys["type"]]
+    parts = split_value_line(type_line)
+    if not parts or parts[2].strip() != "moon":
+        return f"ignoring object {sec_name}, not a moon"
+
+    if "parent" not in keys:
+        return f"parent object for {sec_name} missing"
+
+    parent = split_value_line(lines[keys["parent"]])[2].strip()
+    if parent not in PARENT_IDS:
+        return f"parent ID for {parent} in {sec_name} unknown"
+
+    if sec_name.lower() not in OBJECT_IDS:
+        return f"ID for {sec_name} unknown"
+
+    return None
+
+
+def get_parent(sec, lines):
+    return split_value_line(lines[sec["keys"]["parent"]])[2].strip()
+
+
+def update_orbit_lines(lines, sec, vals):
+    keys = sec["keys"]
+
+    for key in ORBIT_KEYS & set(keys):
+        idx = keys[key]
+        parts = split_value_line(lines[idx])
+        if not parts:
+            continue
+
+        prefix, _, _, suffix = parts
+        lines[idx] = prefix + format_value(key, vals[key]) + suffix
+
+
+def process_section(sec, lines, jd, requested_object):
+    sec_name = sec["name"]
+
+    if should_skip_section(sec_name, requested_object):
+        return False, []
+
+    error = validate_moon_section(sec, lines)
+    if error:
+        warn(error)
+        if requested_object:
+            return True, get_section_lines(lines, sec)
+        return False, []
+
+    parent = get_parent(sec, lines)
+    vals = fetch_elements(sec_name, parent, jd)
+    update_orbit_lines(lines, sec, vals)
+
+    return True, get_section_lines(lines, sec)
+
+
+def main():
+    args = parse_args()
 
     with open(args.file, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     jd = julian_date_now()
     sections = read_sections(lines)
-
     output_lines = []
 
     for sec in sections:
-        sec_name = sec["name"]
-        keys = sec["keys"]
+        matched, sec_output = process_section(sec, lines, jd, args.object)
 
-        # ignore everything when object set as argument
-        if args.object and sec_name.lower() != args.object.lower():
-            continue
-
-        sec_lines = lines[sec["start"]:sec["end"]]
-
-        if "type" not in keys:
-            if args.object:
-                output_lines.extend(sec_lines)
-            print(f"WARN: type object for {sec_name} missing", file=sys.stderr)
-            continue
-
-        type_line = lines[keys["type"]]
-        p = split_value_line(type_line)
-        if not p or p[2].strip() != "moon":
-            if args.object:
-                output_lines.extend(sec_lines)
-            print(f"WARN: ignoring object {sec_name}, not a moon", file=sys.stderr)
-            continue
-
-        if "parent" not in keys:
-            if args.object:
-                output_lines.extend(sec_lines)
-            print(f"WARN: parent object for {sec_name} missing", file=sys.stderr)
-            continue
-
-        parent = split_value_line(lines[keys["parent"]])[2].strip()
-        if parent not in PARENT_IDS:
-            if args.object:
-                output_lines.extend(sec_lines)
-            print(f"WARN: parent ID for {parent} in {sec_name} unknown", file=sys.stderr)
-            continue
-
-        if sec_name.lower() not in OBJECT_IDS:
-            print(f"WARN: ID for {sec_name} unknown", file=sys.stderr)
-            if args.object:
-                output_lines.extend(sec_lines)
-            continue
-
-        vals = fetch_elements(sec_name, parent, jd)
-
-        # only change orbit keys
-        for key in ORBIT_KEYS & set(keys):
-            idx = keys[key]
-            parts = split_value_line(lines[idx])
-            if parts:
-                prefix, _, _, suffix = parts
-                lines[idx] = prefix + format_value(key, vals[key]) + suffix
-
-        output_lines.extend(lines[sec["start"]:sec["end"]])
-
-        # when object name given as arg we are done now
         if args.object:
-            break
+            if matched:
+                output_lines.extend(sec_output)
+                break
+            continue
 
-    # read whole file 
     if not args.object:
         output_lines = lines
 
     sys.stdout.write("".join(output_lines))
+
 
 if __name__ == "__main__":
     main()
