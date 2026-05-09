@@ -31,7 +31,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Calendars Plug-in Configuration</string>
      </property>
     </widget>
@@ -51,13 +51,6 @@
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="5" column="0">
-          <widget class="QCheckBox" name="islamicCheckBox">
-           <property name="text">
-            <string comment="calendar">Islamic</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0">
           <widget class="QCheckBox" name="julianCheckBox">
            <property name="text">
@@ -167,13 +160,6 @@
           <widget class="QCheckBox" name="astroHinduSolarCheckBox">
            <property name="text">
             <string comment="calendar">Hindu Astro Solar</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QCheckBox" name="isoCheckBox">
-           <property name="text">
-            <string comment="calendar">ISO Week</string>
            </property>
           </widget>
          </item>
@@ -307,6 +293,27 @@
           <widget class="QCheckBox" name="vietnameseCheckBox">
            <property name="text">
             <string comment="calendar">Vietnamese</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="islamicCheckBox">
+           <property name="text">
+            <string comment="calendar">Islamic</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QCheckBox" name="isoCheckBox">
+           <property name="text">
+            <string comment="calendar">ISO Week</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QCheckBox" name="byzantineCheckBox">
+           <property name="text">
+            <string comment="calendar">Byzantine</string>
            </property>
           </widget>
          </item>

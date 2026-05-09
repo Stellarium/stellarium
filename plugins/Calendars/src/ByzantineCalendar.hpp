@@ -76,7 +76,8 @@ public slots:
 	static QVector<int> byzantineFromFixed(int rd);
 
 public:
-	constexpr static const int julianEpoch=-1; //! RD of January 1, AD1 (jul.).
+	//constexpr static const int julianEpoch=-1; //! RD of January 1, AD1 (jul.).
+	//static int byzantineEpoch=fixedFromJulian({5509, 9, 1}); //! RD of Sep 1, 5509BC (jul.).
 
 protected:
 	static QMap<int, QString> weekDayNames;

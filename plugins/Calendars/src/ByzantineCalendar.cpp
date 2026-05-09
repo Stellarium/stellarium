@@ -42,18 +42,19 @@ void ByzantineCalendar::retranslate()
 		{5, qc_("Day of Preparation", "long day name")},
 		{6, qc_("Sabbaton"          , "long day name")}};
 	monthNames={
-		{ 1, qc_("January"  , "long month name")},
-		{ 2, qc_("February" , "long month name")},
-		{ 3, qc_("March"    , "long month name")},
-		{ 4, qc_("April"    , "long month name")},
-		{ 5, qc_("May"      , "long month name")},
-		{ 6, qc_("June"     , "long month name")},
-		{ 7, qc_("July"     , "long month name")},
-		{ 8, qc_("August"   , "long month name")},
-		{ 9, qc_("September", "long month name")},
-		{10, qc_("October"  , "long month name")},
-		{11, qc_("November" , "long month name")},
-		{12, qc_("December" , "long month name")}};
+		{ 1, qc_("September", "long month name")},
+		{ 2, qc_("October"  , "long month name")},
+		{ 3, qc_("November" , "long month name")},
+		{ 4, qc_("December" , "long month name")},
+		{ 5, qc_("January"  , "long month name")},
+		{ 6, qc_("February" , "long month name")},
+		{ 7, qc_("March"    , "long month name")},
+		{ 8, qc_("April"    , "long month name")},
+		{ 9, qc_("May"      , "long month name")},
+		{10, qc_("June"     , "long month name")},
+		{11, qc_("July"     , "long month name")},
+		{12, qc_("August"   , "long month name")}
+	};
 }
 
 // Set a calendar date from the Julian day number
@@ -73,7 +74,7 @@ void ByzantineCalendar::setJD(double JD)
 QStringList ByzantineCalendar::getDateStrings() const
 {
 	QStringList list;
-	list << QString("%1 %2").arg(abs(parts.at(0))).arg(parts.at(0)>0 ? q_("A.D.") : q_("B.C."));
+	list << QString("%1 %2").arg(abs(parts.at(0))).arg(parts.at(0)>0 ? q_("A.M.") : q_("a.A.M."));
 	list << QString::number(parts.at(1));
 	list << QString::number(parts.at(2));
 	list << weekday(JD);
@@ -99,7 +100,7 @@ QString ByzantineCalendar::getFormattedDateString() const
 // Time is not changed!
 void ByzantineCalendar::setDate(const QVector<int> &parts)
 {
-	//qDebug() << "JulianCalendar::setDate:" << parts;
+	//qDebug() << "ByzantineCalendar::setDate:" << parts;
 	this->parts=parts;
 	// For the Julian calendar, we really have no year 0 in this plugin.
 	Q_ASSERT(parts.at(0) != 0);
@@ -128,12 +129,22 @@ QString ByzantineCalendar::weekday(double jd)
 int ByzantineCalendar::fixedFromByzantine(const QVector<int> &byzantine)
 {
 	const int year =byzantine.value(0);
-	const int month=byzantine.value(1);
+	int month=byzantine.value(1);
 	const int day  =byzantine.value(2);
-	const int y=(year<0 ? year+1 : year);
+	int y=(year<0 ? year+1 : year);
 
-	// TODO: Convert this to Julian calendar date
+	// Convert this to Julian calendar date
 
+	//
+	month += 8;
+	y += 5509;
+	if (month > 12)
+	{
+		month -= 12;
+		y++;
+	}
+
+	// From here, it's just Julian
 	int ret=julianEpoch-1+365*(y-1)+StelUtils::intFloorDiv(y-1, 4)
 			+StelUtils::intFloorDiv(367*month-362, 12)+day;
 	if (month>2)
@@ -149,12 +160,15 @@ QVector<int> ByzantineCalendar::byzantineFromFixed(int rd)
 	int correction=0;
 	if (rd>=fixedFromJulian({year, march, 1}))
 		correction=(isLeap(year) ? 1 : 2);
-	const int month=StelUtils::intFloorDiv(12*(priorDays+correction)+373, 367);
+	int month=StelUtils::intFloorDiv(12*(priorDays+correction)+373, 367);
 	const int day=rd-fixedFromJulian({year, month, 1})+1;
 
 	// TODO: Convert this to Byzantine calendar date
 	//
-	year += (month<9) ? 5508: 5507;
+	year += (month<9) ? 5508: 5509;
+	month -= 8;
+	if (month<1)
+		month +=12;
 
 	return {year, month, day};
 }

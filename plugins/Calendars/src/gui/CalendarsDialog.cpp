@@ -105,6 +105,7 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->isoCheckBox,                "Calendars.flagShowISO");
 	connectBoolProperty(ui->romanCheckBox,              "Calendars.flagShowRoman");
 	connectBoolProperty(ui->olympicCheckBox,            "Calendars.flagShowOlympic");
+	connectBoolProperty(ui->byzantineCheckBox,          "Calendars.flagShowByzantine");
 	connectBoolProperty(ui->egyptianCheckBox,           "Calendars.flagShowEgyptian");
 	connectBoolProperty(ui->armenianCheckBox,           "Calendars.flagShowArmenian");
 	connectBoolProperty(ui->zoroastrianCheckBox,        "Calendars.flagShowZoroastrian");
@@ -195,6 +196,7 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<li>" + q_("ISO Weeks") + "</li>";
 	html += "<li>" + q_("Icelandic calendar") + "</li>";
 	html += "<li>" + q_("Roman (Julian) calendar") + "</li>";
+	html += "<li>" + q_("Byzantine calendar (Annus Mundi)") + "</li>";
 	html += "<li>" + q_("Olympiad calendar") + "</li>";
 	html += "<li>" + q_("Egyptian calendar") + "</li>";
 	html += "<li>" + q_("Armenian calendar") + "</li>";
