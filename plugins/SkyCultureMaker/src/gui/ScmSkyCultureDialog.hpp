@@ -101,6 +101,12 @@ private slots:
 	void cancelAddPolygon();
 	// (uncomment when multiple regions are used)
 	//void checkMutExRegions(const QStringList checkedItems);
+	void cnUpdateVisibleField(int typeIndex);
+	void cnAddEntry();
+	void cnLoadEntry();
+	void cnRemoveEntry();
+	void cnSaveEntry();
+	void cnUpdateEntryButtons();
 
 private:
 	Ui_scmSkyCultureDialog *ui = nullptr;
@@ -202,6 +208,29 @@ private:
 	 *
 	 */
 	void initSkyCultureTime();
+
+	/**
+	 * @brief Clears the common names form.
+	 */
+	void cnClearForm();
+
+	/**
+	 * @brief Refreshes the common names table.
+	 */
+	void cnRefreshTable();
+
+	/**
+	 * @brief Reads the common name data from the form and returns it as a ScmCulturalName object.
+	 */
+	scm::ScmCulturalName cnReadForm() const;
+
+	/**
+	 * @brief Populates the common names form with data from a given ScmCulturalName object.
+	 */
+	void cnPopulateForm(const QString &key, const scm::ScmCulturalName &name);
+
+	/// Common names entries stored as (object key, name data) pairs.
+	QList<QPair<QString, scm::ScmCulturalName>> cnEntries;
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP

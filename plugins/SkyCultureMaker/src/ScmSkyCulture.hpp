@@ -25,6 +25,7 @@
 #define SCM_SKYCULTURE_HPP
 
 #include "ScmConstellation.hpp"
+#include "types/ScmCulturalName.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "types/Classification.hpp"
@@ -36,6 +37,8 @@
 #include <vector>
 #include <QFile>
 #include <QJsonObject>
+#include <QList>
+#include <QMap>
 #include <QObject>
 #include <QString>
 
@@ -108,6 +111,13 @@ public:
 	void setDescription(const scm::Description &description);
 
 	/**
+	 * @brief Sets the cultural names of stars, planets DSOs of the sky culture.
+	 * The map key is the object identifier (e.g. "HIP 1234", "NAME Venus", "M 31").
+	 * @param culturalNames Map of cultural names to set.
+	 */
+	void setCulturalNames(const QMap<QString, QList<ScmCulturalName>> &culturalNames);
+
+	/**
 	 * @brief Saves the current sky culture description as markdown text.
 	 * @param file The file to save the description to.
 	 * @return true if the description was saved successfully, false otherwise.
@@ -140,6 +150,10 @@ private:
 
 	/// The description of the sky culture
 	scm::Description description;
+
+	/// The cultural names of stars, planets DSOs of the sky culture.
+	/// Key: object identifier (e.g. "HIP 1234", "NAME Venus", "M 31").
+	QMap<QString, QList<ScmCulturalName>> culturalNames;
 
 	/// The geographical location (as polygons) of the sky culture
 	QList<CulturePolygon> locations;

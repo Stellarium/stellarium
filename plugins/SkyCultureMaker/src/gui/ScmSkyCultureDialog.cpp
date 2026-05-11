@@ -25,7 +25,10 @@
 #include "ScmPolygonInfoTreeItem.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
+#include <QHeaderView>
+#include <QMap>
 #include <QStyledItemDelegate>
+#include <QTableWidgetItem>
 #include <QDebug>
 
 namespace
@@ -274,6 +277,28 @@ void ScmSkyCultureDialog::createDialogContent()
 	connect(ui->moveRefUpBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::moveCurrentReferenceUp);
 	connect(ui->moveRefDownBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::moveCurrentReferenceDown);
 	connect(ui->referencesList, &QTreeWidget::currentItemChanged, this, &ScmSkyCultureDialog::updateReferencesButtons);
+
+	// Common Names Tab
+	ui->cnEntriesTable->horizontalHeader()->setStretchLastSection(false);
+	ui->cnEntriesTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+	ui->cnEntriesTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+	ui->cnEntriesTable->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+	ui->cnEntriesTable->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
+	ui->cnEntriesTable->setItemDelegate(new NoEditDelegate(ui->cnEntriesTable));
+	cnRefreshTable();
+	ui->cnVisibleCB->setEnabled(false);
+	ui->cnVisibleLbl->setEnabled(false);
+	ui->cnLoadEntryBtn->setEnabled(false);
+	ui->cnRemoveEntryBtn->setEnabled(false);
+	ui->cnSaveEntryBtn->setEnabled(false);
+	connect(ui->cnObjectTypeCB, QOverload<int>::of(&QComboBox::currentIndexChanged),
+	        this, &ScmSkyCultureDialog::cnUpdateVisibleField);
+	connect(ui->cnAddEntryBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnAddEntry);
+	connect(ui->cnLoadEntryBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnLoadEntry);
+	connect(ui->cnRemoveEntryBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnRemoveEntry);
+	connect(ui->cnSaveEntryBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnSaveEntry);
+	connect(ui->cnEntriesTable, &QTableWidget::itemSelectionChanged, this, &ScmSkyCultureDialog::cnUpdateEntryButtons);
+	cnUpdateVisibleField(0); // initial placeholder text
 }
 
 void ScmSkyCultureDialog::handleFontChanged()
@@ -306,13 +331,20 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	{
 		auto msg = q_("The sky culture description is not complete. The following fields are not filled correctly:\n");
 		for (const auto& field : incompFieldsList)
-			msg += u8" \u2022 " + field + "\n";
+			msg += QString(" \u2022 ") + field + "\n";
 		maker->showUserWarningMessage(dialog, ui->titleBar->title(), msg);
 		return;
 	}
 
 	// If valid, set the sky culture description
 	maker->setSkyCultureDescription(desc);
+
+	// Push common names into the sky culture object
+	QMap<QString, QList<scm::ScmCulturalName>> culturalNamesMap;
+	for (const auto &pair : cnEntries) {
+		culturalNamesMap[pair.first].append(pair.second);
+	}
+	maker->getCurrentSkyCulture()->setCulturalNames(culturalNamesMap);
 
 	// check wether at least 1 polygon was digitized
 	if (ui->polygonInfoTreeWidget->topLevelItemCount() < 1)
@@ -686,6 +718,10 @@ void ScmSkyCultureDialog::resetDialog()
 		ui->polygonInfoTreeWidget->clear(); // reset the location list
 		ui->scmGeoLocGraphicsView->reset(); // reset the map used for digitizing
 		updateRemovePolygonButton();
+
+		cnEntries.clear();
+		cnClearForm();
+		cnRefreshTable();
 	}
 }
 
@@ -913,4 +949,192 @@ void ScmSkyCultureDialog::confirmAddPolygon()
 void ScmSkyCultureDialog::cancelAddPolygon()
 {
 	hideAddPolygon();
+}
+
+void ScmSkyCultureDialog::cnUpdateVisibleField(int typeIndex)
+{
+	// typeIndex: 0=Star, 1=Planet, 2=DSO
+	const bool isPlanet = (typeIndex == 1);
+	ui->cnVisibleCB->setEnabled(isPlanet);
+	ui->cnVisibleLbl->setEnabled(isPlanet);
+
+	switch (typeIndex)
+	{
+		case 0:
+			ui->cnObjectIdLE->setPlaceholderText(q_("HIP number (e.g. 1234)"));
+			break;
+		case 1:
+			ui->cnObjectIdLE->setPlaceholderText(q_("Planet name (e.g. Venus)"));
+			break;
+		case 2:
+			ui->cnObjectIdLE->setPlaceholderText(q_("Catalog designation (e.g. M 31)"));
+			break;
+	}
+}
+
+void ScmSkyCultureDialog::cnClearForm()
+{
+	ui->cnObjectIdLE->clear();
+	ui->cnEnglishLE->clear();
+	ui->cnNativeLE->clear();
+	ui->cnPronounceLE->clear();
+	ui->cnTransliterationLE->clear();
+	ui->cnIpaLE->clear();
+	ui->cnBynameLE->clear();
+	ui->cnReferencesLE->clear();
+	ui->cnVisibleCB->setCurrentIndex(0);
+	ui->cnSaveEntryBtn->setEnabled(false);
+}
+
+scm::ScmCulturalName ScmSkyCultureDialog::cnReadForm() const
+{
+	scm::ScmCulturalName name;
+	name.translated       = ui->cnEnglishLE->text().trimmed();
+	name.native           = ui->cnNativeLE->text().trimmed();
+	name.pronounce        = ui->cnPronounceLE->text().trimmed();
+	name.transliteration  = ui->cnTransliterationLE->text().trimmed();
+	name.IPA              = ui->cnIpaLE->text().trimmed();
+	name.byname           = ui->cnBynameLE->text().trimmed();
+
+	const QString refsText = ui->cnReferencesLE->text().trimmed();
+	if (!refsText.isEmpty())
+	{
+		for (const auto &part : refsText.split(','))
+		{
+			bool ok = false;
+			const int ref = part.trimmed().toInt(&ok);
+			if (ok)
+			{
+				name.references.append(ref);
+			}
+		}
+	}
+
+	switch (ui->cnVisibleCB->currentIndex())
+	{
+		case 1: name.special = StelObject::CulturalNameSpecial::Morning; break;
+		case 2: name.special = StelObject::CulturalNameSpecial::Evening; break;
+		default: name.special = StelObject::CulturalNameSpecial::None;   break;
+	}
+	return name;
+}
+
+void ScmSkyCultureDialog::cnPopulateForm(const QString &key, const scm::ScmCulturalName &name)
+{
+	ui->cnObjectIdLE->setText(key);
+	ui->cnEnglishLE->setText(name.translated);
+	ui->cnNativeLE->setText(name.native);
+	ui->cnPronounceLE->setText(name.pronounce);
+	ui->cnTransliterationLE->setText(name.transliteration);
+	ui->cnIpaLE->setText(name.IPA);
+	ui->cnBynameLE->setText(name.byname);
+
+	QStringList refStrings;
+	for (int r : name.references)
+		refStrings.append(QString::number(r));
+	ui->cnReferencesLE->setText(refStrings.join(", "));
+
+	switch (name.special)
+	{
+		case StelObject::CulturalNameSpecial::Morning: ui->cnVisibleCB->setCurrentIndex(1); break;
+		case StelObject::CulturalNameSpecial::Evening: ui->cnVisibleCB->setCurrentIndex(2); break;
+		default:                                       ui->cnVisibleCB->setCurrentIndex(0); break;
+	}
+}
+
+void ScmSkyCultureDialog::cnRefreshTable()
+{
+	ui->cnEntriesTable->setRowCount(0);
+	for (const auto &pair : cnEntries)
+	{
+		const int row = ui->cnEntriesTable->rowCount();
+		ui->cnEntriesTable->insertRow(row);
+
+		QString displayKey = pair.first;
+		switch (pair.second.special)
+		{
+			case StelObject::CulturalNameSpecial::Morning:
+				displayKey += QLatin1String(" (morning)");
+				break;
+			case StelObject::CulturalNameSpecial::Evening:
+				displayKey += QLatin1String(" (evening)");
+				break;
+			default:
+				break;
+		}
+
+		ui->cnEntriesTable->setItem(row, 0, new QTableWidgetItem(displayKey));
+		ui->cnEntriesTable->setItem(row, 1, new QTableWidgetItem(pair.second.translated));
+		ui->cnEntriesTable->setItem(row, 2, new QTableWidgetItem(pair.second.native));
+		ui->cnEntriesTable->setItem(row, 3, new QTableWidgetItem(pair.second.pronounce));
+	}
+}
+
+void ScmSkyCultureDialog::cnAddEntry()
+{
+	const QString key = ui->cnObjectIdLE->text().trimmed();
+	if (key.isEmpty())
+	{
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please enter an object identifier."));
+		return;
+	}
+	const scm::ScmCulturalName name = cnReadForm();
+	if (name.translated.isEmpty())
+	{
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The \"English\" field is required."));
+		return;
+	}
+	cnEntries.append({key, name});
+	cnRefreshTable();
+	cnClearForm();
+}
+
+void ScmSkyCultureDialog::cnLoadEntry()
+{
+	const auto selectedRows = ui->cnEntriesTable->selectionModel()->selectedRows();
+	if (selectedRows.isEmpty()) return;
+	const int row = selectedRows.first().row();
+	cnPopulateForm(cnEntries[row].first, cnEntries[row].second);
+	ui->cnSaveEntryBtn->setEnabled(true);
+}
+
+void ScmSkyCultureDialog::cnRemoveEntry()
+{
+	const auto selectedRows = ui->cnEntriesTable->selectionModel()->selectedRows();
+	if (selectedRows.isEmpty()) return;
+	const int row = selectedRows.first().row();
+	cnEntries.removeAt(row);
+	cnRefreshTable();
+	cnClearForm();
+	cnUpdateEntryButtons();
+}
+
+void ScmSkyCultureDialog::cnSaveEntry()
+{
+	const auto selectedRows = ui->cnEntriesTable->selectionModel()->selectedRows();
+	if (selectedRows.isEmpty()) return;
+	const int row     = selectedRows.first().row();
+	const QString key = ui->cnObjectIdLE->text().trimmed();
+	if (key.isEmpty())
+	{
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please enter an object identifier."));
+		return;
+	}
+	const scm::ScmCulturalName name = cnReadForm();
+	if (name.translated.isEmpty())
+	{
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The \"English\" field is required."));
+		return;
+	}
+	cnEntries[row] = {key, name};
+	cnRefreshTable();
+	ui->cnEntriesTable->selectRow(row);
+}
+
+void ScmSkyCultureDialog::cnUpdateEntryButtons()
+{
+	const bool hasSelection = !ui->cnEntriesTable->selectionModel()->selectedRows().isEmpty();
+	ui->cnLoadEntryBtn->setEnabled(hasSelection);
+	ui->cnRemoveEntryBtn->setEnabled(hasSelection);
+	ui->cnSaveEntryBtn->setEnabled(hasSelection);
 }
