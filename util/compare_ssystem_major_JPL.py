@@ -642,13 +642,66 @@ def main():
             pdf.savefig(fig_s, bbox_inches="tight")
             plt.close(fig_s)
 
+        # Summary table page
+        stats = [
+            (name, sum(errs) / len(errs), max(errs))
+            for name, (_, errs) in all_results.items() if errs
+        ]
+        if stats:
+            stats.sort(key=lambda r: r[2], reverse=True)  # sort by max error desc
+            col_labels = ["Object", "Mean error (')", "Max error (')"]
+            table_data = [[name, f"{mean:.4f}", f"{peak:.4f}"]
+                          for name, mean, peak in stats]
+
+            # One table row is ~0.022 fig-height; fit ~40 rows per page
+            rows_per_page = 40
+            for page_start in range(0, len(table_data), rows_per_page):
+                chunk = table_data[page_start:page_start + rows_per_page]
+                fig_tb, ax_tb = plt.subplots(figsize=(9, max(3, len(chunk) * 0.32 + 1.2)))
+                ax_tb.axis("off")
+                tbl = ax_tb.table(
+                    cellText=chunk,
+                    colLabels=col_labels,
+                    cellLoc="center",
+                    loc="center",
+                )
+                tbl.auto_set_font_size(False)
+                tbl.set_fontsize(9)
+                tbl.auto_set_column_width([0, 1, 2])
+                # Style header row
+                for col in range(3):
+                    tbl[(0, col)].set_facecolor("#2a6ebb")
+                    tbl[(0, col)].set_text_props(color="white", fontweight="bold")
+                # Highlight rows that exceed max_error threshold
+                if args.max_error is not None:
+                    for row_idx, (name, mean, peak) in enumerate(
+                            stats[page_start:page_start + rows_per_page], start=1):
+                        if peak > args.max_error:
+                            for col in range(3):
+                                tbl[(row_idx, col)].set_facecolor("#ffe0e0")
+                page_label = (f" ({page_start // rows_per_page + 1})"
+                              if len(table_data) > rows_per_page else "")
+                title = f"Summary: Mean & Max Error per Object{page_label}"
+                if args.max_error is not None:
+                    title += f"  –  red: exceeds {args.max_error:.3f}'"
+                ax_tb.set_title(title, fontsize=11, fontweight="bold", pad=12)
+                fig_tb.tight_layout()
+                pdf.savefig(fig_tb, bbox_inches="tight")
+                plt.close(fig_tb)
+
         meta = pdf.infodict()
         meta["Title"]   = "Stellarium vs JPL Horizons Comparison"
         meta["Author"]  = "compare_ssystem.py"
         meta["Subject"] = "Moon ephemeris angular error"
 
-    n_pages = 1 + len(all_results) + (1 if len(successful) > 1 else 0)
+    n_pages = 1 + len(all_results) + (1 if len(successful) > 1 else 0) + (1 if stats else 0)
     print(f"Done. PDF saved: {args.out}  ({n_pages} pages)")
+
+    # CSV summary to stdout
+    if stats:
+        print("\nObject,Mean error (arcmin),Max error (arcmin)")
+        for name, mean, peak in stats:
+            print(f"{name},{mean:.4f},{peak:.4f}")
 
 
 if __name__ == "__main__":
