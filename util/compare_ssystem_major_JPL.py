@@ -160,14 +160,14 @@ def jd_to_datetime(jd):
     c = int((b - 122.1) / 365.25)
     d_int = int(365.25 * c)
     e = int((b - d_int) / 30.6001)
-    day   = b - d_int - int(30.6001 * e)
+    day = b - d_int - int(30.6001 * e)
     month = e - 1 if e < 14 else e - 13
-    year  = c - 4716 if month > 2 else c - 4715
+    year = c - 4716 if month > 2 else c - 4715
     fh = f * 24
-    h  = int(fh)
+    h = int(fh)
     fm = (fh - h) * 60
     m_ = int(fm)
-    s  = int((fm - m_) * 60)
+    s = int((fm - m_) * 60)
     return datetime(year, month, day, h, m_, s, tzinfo=timezone.utc)
 
 
@@ -266,7 +266,7 @@ def stellarium_get_time():
     time_block = data.get("time", {})
     if isinstance(time_block, dict):
         return float(time_block["jday"])
-    return float(data["jday"])  # fallback for older Stellarium versions
+    return float(data["jday"]) # fallback for older Stellarium versions
 
 
 def stellarium_get_location():
@@ -276,18 +276,18 @@ def stellarium_get_location():
     Reads from GET /api/main/status → location.
     """
     data = stellarium_status()
-    loc  = data.get("location", {})
-    lon  = float(loc.get("longitude", 0.0))
-    lat  = float(loc.get("latitude",  0.0))
-    alt  = float(loc.get("altitude",  0.0))  # Stellarium returns metres
+    loc = data.get("location", {})
+    lon = float(loc.get("longitude", 0.0))
+    lat = float(loc.get("latitude",  0.0))
+    alt = float(loc.get("altitude",  0.0))  # Stellarium returns metres
     return lon, lat, alt / 1000.0             # convert altitude to km for JPL
 
 
 def stellarium_set_time(jd):
     """Set Stellarium's simulation time to the given Julian Date."""
-    url  = f"{STELLARIUM_URL}/api/main/time"
+    url = f"{STELLARIUM_URL}/api/main/time"
     body = urlencode({"time": f"{jd:.6f}", "timerate": "0"}).encode()
-    req  = Request(url, data=body, method="POST")
+    req = Request(url, data=body, method="POST")
     with urlopen(req, timeout=10) as r:
         r.read()
 
