@@ -311,10 +311,8 @@ def stellarium_get_radec(name):
     ra_raw  = float(data["raJ2000"])
     dec_raw = float(data["decJ2000"])
 
-    # Values > 7 indicate degrees (older Stellarium), otherwise radians
-    if ra_raw > 7.0:
-        return ra_raw, dec_raw
-    return math.degrees(ra_raw), math.degrees(dec_raw)
+    return ra_raw, dec_raw
+
 
 # ── JPL Horizons OBSERVER ──────────────────────────────────────────────────────
 
