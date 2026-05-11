@@ -588,22 +588,28 @@ msgid ""
 "This inspector displays the complete, unfiltered dataset extracted directly "
 "from the culture's"
 msgstr ""
+"Этот инспектор отображает полный, нефильтрованный набор данных, извлеченный "
+"непосредственно из файла"
 
 #: index.html:958 tablet7in.html:1023
 msgid "file. Use this view to:"
-msgstr ""
+msgstr "культуры неба. Используйте это представление для:"
 
 #: index.html:960 tablet7in.html:1025
 msgid "Verify exact constellation and asterism counts (including ray helpers)"
 msgstr ""
+"Проверьте точное количество созвездий и астеризмов (включая направляющие)."
 
 #: index.html:961 tablet7in.html:1026
 msgid "Inspect raw IDs, native names, pronunciations, and IPA values"
 msgstr ""
+"Проверьте исходные идентификаторы, родные имена, произношение и значения МФА"
 
 #: index.html:962 tablet7in.html:1027
 msgid "Cross-reference star IDs (HIP, NGC, etc.) with their cultural names"
 msgstr ""
+"Перекрестные ссылки на идентификаторы звезд (HIP, NGC и т.д.) с их "
+"культурными названиями"
 
 #: index.html:963 tablet7in.html:1028
 msgid "Export complete datasets to CSV/JSON for external analysis"
@@ -611,13 +617,15 @@ msgstr "Экспорт полных наборов данных в формат 
 
 #: index.html:964 tablet7in.html:1029
 msgid "Search across all fields to quickly locate specific entries"
-msgstr ""
+msgstr "Выполните поиск по всем полям, чтобы быстро найти конкретные записи"
 
 #: index.html:967 tablet7in.html:1032
 msgid ""
 "Each row is interactive — click to select and navigate to the object in "
 "Stellarium."
 msgstr ""
+"Каждая строка интерактивна — нажмите, чтобы выбрать объект в Стеллариуме и "
+"перейти к нему."
 
 #: index.html:976 tablet7in.html:1041
 msgid "Select Sky Culture"
@@ -639,12 +647,16 @@ msgstr "Известные звезды и объекты"
 msgid ""
 "Search constellations... (click row to isolate at 60° FOV) | ESC to reset"
 msgstr ""
+"Поиск созвездий... (щелкните по строке, чтобы выделить точку в поле зрения "
+"60°) | ESC для сброса"
 
 #: index.html:1034 tablet7in.html:1099
 msgid ""
 "Complete constellation definitions from index.json. Click any row to isolate"
 " and highlight in Stellarium."
 msgstr ""
+"Полные определения созвездий можно найти в файле index.json. Щелкните любую "
+"строку, чтобы выделить ее в Stellarium."
 
 #: index.html:1041 index.html:1072 tablet7in.html:1106 tablet7in.html:1137
 msgid "ID"
@@ -681,12 +693,16 @@ msgstr "ID'ы звезды"
 #: index.html:1058 tablet7in.html:1123
 msgid "Search asterisms... (click row to center at 30° FOV) | ESC to reset"
 msgstr ""
+"Поиск астеризмов... (щелкните по строке, чтобы центрировать её в поле "
+"зрения30°) | ESC для сброса"
 
 #: index.html:1065 tablet7in.html:1130
 msgid ""
 "All asterisms from index.json (ray helpers are excluded from this list). "
 "Click any row to center view."
 msgstr ""
+"Все астеризмы из index.json (направляющие из этого списка исключены). "
+"Щелкните по любой строке, чтобы отцентрировать изображение."
 
 #: index.html:1104 tablet7in.html:1169
 msgid ""
@@ -699,6 +715,8 @@ msgstr ""
 msgid ""
 "Lunar mansions (stations) defined in this culture. Click to center view."
 msgstr ""
+"Лунные стоянки (станции), определенные в этой культуре. Щелкните для "
+"центрирования изображения по центру."
 
 #: index.html:1133 tablet7in.html:1198
 msgid ""
@@ -712,6 +730,8 @@ msgid ""
 "All named celestial objects (stars, planets, deep-sky) defined in this "
 "culture's common_names section."
 msgstr ""
+"Все именованные небесные объекты (звезды, планеты, объекты глубокого неба), "
+"определенные в разделе common_names для данной культуры."
 
 #: index.html:1147 tablet7in.html:1212
 msgid "Original ID"
@@ -824,7 +844,7 @@ msgstr "Левый джойстик"
 
 #: index.html:1351 tablet7in.html:1420
 msgid "View movement"
-msgstr ""
+msgstr "Просмотр движения"
 
 #: index.html:1354 tablet7in.html:1423
 msgid "Direction:"
@@ -832,7 +852,7 @@ msgstr "Направление:"
 
 #: index.html:1355 tablet7in.html:1424
 msgid "centered"
-msgstr ""
+msgstr "центрированный"
 
 #: index.html:1360 tablet7in.html:1429
 msgid "Invert X"
@@ -915,14 +935,16 @@ msgid ""
 "Each connected controller has its own independent profile. Select a device "
 "from 'Active Device' to customize."
 msgstr ""
+"Каждый подключенный контроллер имеет свой собственный независимый профиль. "
+"Выберите устройство в разделе \"Активное устройство\" для настройки."
 
 #: index.html:1479 tablet7in.html:1548
 msgid "Reset Mappings"
-msgstr ""
+msgstr "Сброс сопоставлений"
 
 #: index.html:1480 tablet7in.html:1549
 msgid "Save Mappings"
-msgstr ""
+msgstr "Сохранить сопоставления"
 
 #: index.html:1481 tablet7in.html:1550
 msgid "Export Profile"
@@ -937,10 +959,12 @@ msgid ""
 "Profiles are saved per device and can be exported/imported for backup or "
 "sharing"
 msgstr ""
+"Профили сохраняются для каждого устройства и могут быть экспортированы / "
+"импортированы для резервного копирования или совместного использования"
 
 #: index.html:1492 tablet7in.html:1561
 msgid "Live Input Monitor"
-msgstr ""
+msgstr "Монитор ввода в реальном времени"
 
 #: index.html:1493 tablet7in.html:1562
 msgid ""
@@ -948,6 +972,9 @@ msgid ""
 "state, Axes show visual meter. Use this panel to verify button and axis "
 "mappings."
 msgstr ""
+"Необработанные значения в реальном времени из Gamepad API браузера. Кнопки "
+"отображают состояние нажатия, оси - визуальный индикатор. Используйте эту "
+"панель для проверки соответствия кнопок и осей."
 
 #: index.html:1499 tablet7in.html:1568
 msgid "Buttons"
@@ -956,7 +983,7 @@ msgstr "Кнопки"
 #: index.html:1501 index.html:1508 index.html:1516 tablet7in.html:1570
 #: tablet7in.html:1577 tablet7in.html:1585
 msgid "Waiting for controller input..."
-msgstr ""
+msgstr "Ожидание ввода данных контроллером..."
 
 #: index.html:1506 tablet7in.html:1575
 msgid "Axes"
@@ -968,23 +995,28 @@ msgstr "Информация об устройстве"
 
 #: index.html:1519 tablet7in.html:1588
 msgid "Understanding Raw Values"
-msgstr ""
+msgstr "Понимание исходных значений"
 
 #: index.html:1520 tablet7in.html:1589
 msgid "Buttons: Range 0.0 (not pressed) to 1.0 (green = fully pressed)."
-msgstr ""
+msgstr "Кнопки: От 0.0 (не нажата) до 1.0 (зеленая = полностью нажата)."
 
 #: index.html:1521 tablet7in.html:1590
 msgid ""
 "Axes: -1.0 to 1.0 with visual meter Center position is 0.0. Triggers (L2/R2)"
 " show gradual values."
 msgstr ""
+"Оси: от -1,0 до 1,0, при этом центральное положение визуального измерителя "
+"равно 0,0. Триггеры (L2/R2) показывают постепенные значения."
 
 #: index.html:1522 tablet7in.html:1591
 msgid ""
 "Note: Different browsers may report the same physical button on different "
 "indices. Use this panel to identify the correct mapping for your setup."
 msgstr ""
+"Примечание: Разные браузеры могут указывать на одну и ту же физическую "
+"кнопку с разными индексами. Используйте эту панель, чтобы определить "
+"правильное отображение для вашей настройки."
 
 #: index.html:1552 tablet7in.html:1620
 msgid "No response from server"
