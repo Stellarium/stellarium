@@ -7,8 +7,8 @@
 # spcsmrf <spcsmrf@gmail.com>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # Daniel Nylander <po@danielnylander.se>, 2025
-# Karl Birgersson <birgerssonkarl@outlook.com>, 2025
 # cardinot <mcardinot@gmail.com>, 2026
+# Karl Birgersson <birgerssonkarl@outlook.com>, 2026
 # 
 #, fuzzy
 msgid ""
@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2026-04-26 17:27+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2026\n"
+"Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -126,7 +126,7 @@ msgstr "Det gick inte att hämta Scenery3d-listan"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:170 tablet7in.html:1242
 msgid "Search actions..."
-msgstr ""
+msgstr "Sök händelser..."
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:217
 #: plugins/RemoteControl/webroot/js/ui/actions.js:257
@@ -148,7 +148,7 @@ msgstr "Inmatningen matchade inte någon post"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:132
 msgid "No items available for this culture"
-msgstr ""
+msgstr "Inga objekt tillgängliga för denna kultur"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:432
 msgid "No current selection"
@@ -176,7 +176,7 @@ msgstr "DSO"
 
 #: index.html:39 tablet7in.html:44
 msgid "Statistics & Analysis"
-msgstr ""
+msgstr "Statistik och analys"
 
 #: index.html:40
 msgid "Actions and scripts"
@@ -188,7 +188,7 @@ msgstr "Scenery3d"
 
 #: index.html:44 index.html:1301 tablet7in.html:50 tablet7in.html:1370
 msgid "Gamepad Controller"
-msgstr ""
+msgstr "Gamepad-kontroll"
 
 #: index.html:83
 msgid "Pause"
@@ -478,61 +478,61 @@ msgstr "Nuvarande himmelskultur"
 
 #: index.html:723 index.html:980 tablet7in.html:789 tablet7in.html:1045
 msgid "Loading sky cultures..."
-msgstr ""
+msgstr "Laddar himmelskulturer..."
 
 #: index.html:732 index.html:998 index.html:1018 tablet7in.html:798
 #: tablet7in.html:1063 tablet7in.html:1083
 msgid "Zodiac Signs"
-msgstr ""
+msgstr "Zodiaktecken"
 
 #: index.html:733 index.html:1002 index.html:1019 tablet7in.html:799
 #: tablet7in.html:1067 tablet7in.html:1084
 msgid "Lunar Mansions"
-msgstr ""
+msgstr "Månhus"
 
 #: index.html:734 tablet7in.html:800
 msgid "Notable Stars"
-msgstr ""
+msgstr "Anmärkningsvärda stjärnor"
 
 #: index.html:740 tablet7in.html:806
 msgid "Click on any constellation to highlight and isolate it"
-msgstr ""
+msgstr "Klicka på en stjärnbild för att markera och isolera den"
 
 #: index.html:742 tablet7in.html:808
 msgid "Select a sky culture to view constellations"
-msgstr ""
+msgstr "Välj en himmelskultur för att visa stjärnbilder"
 
 #: index.html:748 tablet7in.html:814
 msgid "Traditional star patterns within constellations"
-msgstr ""
+msgstr "Traditionella stjärnmönster inom stjärnbilder"
 
 #: index.html:750 tablet7in.html:816
 msgid "No asterisms available"
-msgstr ""
+msgstr "Inga asterismer tillgängliga"
 
 #: index.html:756 tablet7in.html:822
 msgid "The 12 signs of the zodiac"
-msgstr ""
+msgstr "De 12 tecknen i zodiaken"
 
 #: index.html:758 tablet7in.html:824
 msgid "No zodiac data available"
-msgstr ""
+msgstr "Inga zodiakdata tillgängliga"
 
 #: index.html:764 tablet7in.html:830
 msgid "Traditional lunar stations (mansions)"
-msgstr ""
+msgstr "Traditionella månstationer (månhus)"
 
 #: index.html:766 tablet7in.html:832
 msgid "No lunar mansions data available"
-msgstr ""
+msgstr "Inga månhusdata tillgängliga"
 
 #: index.html:772 tablet7in.html:838
 msgid "Named stars with cultural significance"
-msgstr ""
+msgstr "Namngivna stjärnor med kulturell betydelse"
 
 #: index.html:774 tablet7in.html:840
 msgid "No star name data available"
-msgstr ""
+msgstr "Inga stjärnnamnsdata tillgängliga"
 
 #: index.html:798 tablet7in.html:864
 msgid "Label constellations with font size"
@@ -584,74 +584,83 @@ msgstr "Endast senast valda"
 
 #: index.html:954 tablet7in.html:1019
 msgid "Culture Data Inspector"
-msgstr ""
+msgstr "Kulturdatainspektion"
 
 #: index.html:956 tablet7in.html:1021
 msgid ""
 "This inspector displays the complete, unfiltered dataset extracted directly "
 "from the culture's"
 msgstr ""
+"Denna inspektion visar det kompletta, ofiltrerade datasetet extraherat "
+"direkt från kulturens"
 
 #: index.html:958 tablet7in.html:1023
 msgid "file. Use this view to:"
-msgstr ""
+msgstr "fil. Använd denna vy för att:"
 
 #: index.html:960 tablet7in.html:1025
 msgid "Verify exact constellation and asterism counts (including ray helpers)"
 msgstr ""
+"Verifiera exakt antal stjärnbilder och asterismer (hjälplinjer inkluderat)"
 
 #: index.html:961 tablet7in.html:1026
 msgid "Inspect raw IDs, native names, pronunciations, and IPA values"
-msgstr ""
+msgstr "Inspektera råa ID:n, inhemska namn, uttal och IPA-värden"
 
 #: index.html:962 tablet7in.html:1027
 msgid "Cross-reference star IDs (HIP, NGC, etc.) with their cultural names"
-msgstr ""
+msgstr "Korsreferera stjärn-ID:n (HIP, NGC etc) med deras kulturella namn"
 
 #: index.html:963 tablet7in.html:1028
 msgid "Export complete datasets to CSV/JSON for external analysis"
-msgstr ""
+msgstr "Exportera kompletta datasetet till CSV/JSON för extern analys"
 
 #: index.html:964 tablet7in.html:1029
 msgid "Search across all fields to quickly locate specific entries"
-msgstr ""
+msgstr "Sök över alla fält för att snabbt lokalisera specifika inmatningar"
 
 #: index.html:967 tablet7in.html:1032
 msgid ""
 "Each row is interactive — click to select and navigate to the object in "
 "Stellarium."
 msgstr ""
+"Varje rad är interaktiv — klicka för att selektera och navigera till "
+"objektet i Stellarium."
 
 #: index.html:976 tablet7in.html:1041
 msgid "Select Sky Culture"
-msgstr ""
+msgstr "Välj himmelskultur"
 
 #: index.html:994 tablet7in.html:1059
 msgid "Ray Helpers"
-msgstr ""
+msgstr "Hjälplinjer"
 
 #: index.html:1006 tablet7in.html:1071
 msgid "Named Objects"
-msgstr ""
+msgstr "Namngivna objekt"
 
 #: index.html:1020 tablet7in.html:1085
 msgid "Notable Stars & Objects"
-msgstr ""
+msgstr "Anmärkningsvärda stjärnor och objekt"
 
 #: index.html:1027 tablet7in.html:1092
 msgid ""
 "Search constellations... (click row to isolate at 60° FOV) | ESC to reset"
 msgstr ""
+"Välj stjärnbilder... (klicka på en rad för att isolera vid 60° synfält) | "
+"ESC återställer"
 
 #: index.html:1034 tablet7in.html:1099
 msgid ""
 "Complete constellation definitions from index.json. Click any row to isolate"
 " and highlight in Stellarium."
 msgstr ""
+"Kompletta stjärnbildsdefinitioner från index.json. Klicka på en rad för att "
+"isolera och markera i Stellarium"
 
 #: index.html:1041 index.html:1072 tablet7in.html:1106 tablet7in.html:1137
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: index.html:1042 index.html:1073 index.html:1094 index.html:1116
 #: index.html:1149 tablet7in.html:1107 tablet7in.html:1138 tablet7in.html:1159
@@ -663,58 +672,70 @@ msgstr "Inbyggd"
 #: index.html:1150 tablet7in.html:1108 tablet7in.html:1139 tablet7in.html:1160
 #: tablet7in.html:1182 tablet7in.html:1215
 msgid "English Name"
-msgstr ""
+msgstr "Engelskt namn"
 
 #: index.html:1044 index.html:1075 index.html:1096 index.html:1118
 #: index.html:1151 tablet7in.html:1109 tablet7in.html:1140 tablet7in.html:1161
 #: tablet7in.html:1183 tablet7in.html:1216
 msgid "Translation"
-msgstr ""
+msgstr "Översättning"
 
 #: index.html:1045 index.html:1076 index.html:1097 index.html:1119
 #: index.html:1152 tablet7in.html:1110 tablet7in.html:1141 tablet7in.html:1162
 #: tablet7in.html:1184 tablet7in.html:1217
 msgid "Pronounce"
-msgstr ""
+msgstr "Uttal"
 
 #: index.html:1047 index.html:1078 tablet7in.html:1112 tablet7in.html:1143
 msgid "Star IDs"
-msgstr ""
+msgstr "Stjärn-ID:n"
 
 #: index.html:1058 tablet7in.html:1123
 msgid "Search asterisms... (click row to center at 30° FOV) | ESC to reset"
 msgstr ""
+"Välj asterismer... (klicka på en rad för att isolera vid 30° synfält) | ESC "
+"återställer"
 
 #: index.html:1065 tablet7in.html:1130
 msgid ""
 "All asterisms from index.json (ray helpers are excluded from this list). "
 "Click any row to center view."
 msgstr ""
+"Alla asterismer från index.json (hjälplinjer är exkluderade från denna "
+"lista). Klicka på en rad för att centrera vyn."
 
 #: index.html:1104 tablet7in.html:1169
 msgid ""
 "Zodiac signs defined in this culture. Click to center on the constellation."
 msgstr ""
+"Zodiaktecken definierade i denna kultur. Klicka för att centrera på "
+"stjärnbilden."
 
 #: index.html:1126 tablet7in.html:1191
 msgid ""
 "Lunar mansions (stations) defined in this culture. Click to center view."
 msgstr ""
+"Månhus (månstationer) definierade i denna kultur. Klicka för att centrera "
+"vy."
 
 #: index.html:1133 tablet7in.html:1198
 msgid ""
 "Search stars & objects... (click row to center at 15° FOV) | ESC to reset"
 msgstr ""
+"Välj stjärnor och objekt... (klicka på en rad för att isolera vid 15° "
+"synfält) | ESC återställer"
 
 #: index.html:1140 tablet7in.html:1205
 msgid ""
 "All named celestial objects (stars, planets, deep-sky) defined in this "
 "culture's common_names section."
 msgstr ""
+"Alla namngivna himmelsobjekt (stjärnor, planeter, djuprymdsobjekt) "
+"definierade i denna kulturs common_names-sektion."
 
 #: index.html:1147 tablet7in.html:1212
 msgid "Original ID"
-msgstr ""
+msgstr "Ursprungligt ID"
 
 #: index.html:1184 tablet7in.html:1261
 msgid "Active script:"
@@ -731,6 +752,7 @@ msgstr "Stoppa aktuellt skript"
 #: index.html:1191 tablet7in.html:1268
 msgid "Reset to natural sky appearance (South, 40°, FOV 90°)"
 msgstr ""
+"Återställ naturligt himmelsutseende (sydlig riktning, 40°, synfält 90°)"
 
 #: index.html:1200 tablet7in.html:45 tablet7in.html:1240
 msgid "Actions"
@@ -782,161 +804,167 @@ msgstr "Läs in vald scen"
 
 #: index.html:1304 tablet7in.html:1373
 msgid "Scan"
-msgstr ""
+msgstr "Scanna"
 
 #: index.html:1311 tablet7in.html:1380
 msgid "Controller Settings"
-msgstr ""
+msgstr "Kontrollinställningar"
 
 #: index.html:1314 tablet7in.html:1383
 msgid "Active Device:"
-msgstr ""
+msgstr "Aktiv enhet:"
 
 #: index.html:1316 tablet7in.html:1385
 msgid "No devices connected"
-msgstr ""
+msgstr "Inga enheter kopplade"
 
 #: index.html:1322 tablet7in.html:1391
 msgid "Device:"
-msgstr ""
+msgstr "Enhet:"
 
 #: index.html:1330 tablet7in.html:1399
 msgid "Vendor:"
-msgstr ""
+msgstr "Märke:"
 
 #: index.html:1334 tablet7in.html:1403
 msgid "Device ID:"
-msgstr ""
+msgstr "Enhets-ID:"
 
 #: index.html:1338 tablet7in.html:1407
 msgid "Buttons/Axes:"
-msgstr ""
+msgstr "Knappar/axlar:"
 
 #: index.html:1344 tablet7in.html:1413
 msgid "Joystick Preview"
-msgstr ""
+msgstr "Förhandsvisning styrspak"
 
 #: index.html:1350 tablet7in.html:1419
 msgid "Left Stick"
-msgstr ""
+msgstr "Vänster styrspak"
 
 #: index.html:1351 tablet7in.html:1420
 msgid "View movement"
-msgstr ""
+msgstr "Vyrörelse"
 
 #: index.html:1354 tablet7in.html:1423
 msgid "Direction:"
-msgstr ""
+msgstr "Riktning:"
 
 #: index.html:1355 tablet7in.html:1424
 msgid "centered"
-msgstr ""
+msgstr "centrerad"
 
 #: index.html:1360 tablet7in.html:1429
 msgid "Invert X"
-msgstr ""
+msgstr "Invertera x-axeln"
 
 #: index.html:1364 index.html:1383 tablet7in.html:1433 tablet7in.html:1452
 msgid "Invert Y"
-msgstr ""
+msgstr "Invertera y-axeln"
 
 #: index.html:1373 tablet7in.html:1442
 msgid "Right Stick"
-msgstr ""
+msgstr "Höger styrspak"
 
 #: index.html:1374 tablet7in.html:1443
 msgid "Continuous zoom"
-msgstr ""
+msgstr "Kontinuerlig inzoomning"
 
 #: index.html:1377 tablet7in.html:1446
 msgid "Current FOV:"
-msgstr ""
+msgstr "Nuvarande synfält:"
 
 #: index.html:1392 tablet7in.html:1461
 msgid "Joystick Calibration"
-msgstr ""
+msgstr "Styrspakskalibrering"
 
 #: index.html:1394 tablet7in.html:1463
 msgid "Calibrate"
-msgstr ""
+msgstr "Kalibrera"
 
 #: index.html:1400 tablet7in.html:1469
 msgid ""
 "Move joysticks in circles to calibrate center position. Press any button to "
 "finish."
 msgstr ""
+"Rör styrspaken i cirklar för att kalibrera centrumpositionen. Tryck på "
+"valfri knapp för att avsluta."
 
 #: index.html:1409 tablet7in.html:1478
 msgid "Test Vibration"
-msgstr ""
+msgstr "Testa vibration"
 
 #: index.html:1410 tablet7in.html:1479
 msgid "Manual test (uses full intensity)"
-msgstr ""
+msgstr "Manuellt test (använd full intensitet)"
 
 #: index.html:1415 tablet7in.html:1484
 msgid "Vibration Feedback"
-msgstr ""
+msgstr "Vibrationsåterkoppling"
 
 #: index.html:1416 tablet7in.html:1485
 msgid "works in Chrome/Edge"
-msgstr ""
+msgstr "fungerar i Chrome/Edge"
 
 #: index.html:1422 tablet7in.html:1491
 msgid "Vibration Intensity:"
-msgstr ""
+msgstr "Vibrationsintensitet:"
 
 #: index.html:1431 tablet7in.html:1500
 msgid "Sensitivity:"
-msgstr ""
+msgstr "Känslighet:"
 
 #: index.html:1440 tablet7in.html:1509
 msgid "Deadzone:"
-msgstr ""
+msgstr "Dödzon:"
 
 #: index.html:1449 tablet7in.html:1518
 msgid "Zoom Speed:"
-msgstr ""
+msgstr "Zoomhastighet:"
 
 #: index.html:1458 tablet7in.html:1527
 msgid "Movement Speed:"
-msgstr ""
+msgstr "Rörelsehastighet:"
 
 #: index.html:1468 tablet7in.html:1537
 msgid "Button Customization"
-msgstr ""
+msgstr "Knappinställningar"
 
 #: index.html:1475 tablet7in.html:1544
 msgid ""
 "Each connected controller has its own independent profile. Select a device "
 "from 'Active Device' to customize."
 msgstr ""
+"Varje inkopplad kontroll har sin egen oberoende profil. Välj en enhet från "
+"'Aktiv enhet' för att anpassa den."
 
 #: index.html:1479 tablet7in.html:1548
 msgid "Reset Mappings"
-msgstr ""
+msgstr "Återställ mappning"
 
 #: index.html:1480 tablet7in.html:1549
 msgid "Save Mappings"
-msgstr ""
+msgstr "Spara mappning"
 
 #: index.html:1481 tablet7in.html:1550
 msgid "Export Profile"
-msgstr ""
+msgstr "Exportera profil"
 
 #: index.html:1482 tablet7in.html:1551
 msgid "Import Profile"
-msgstr ""
+msgstr "Importera profil"
 
 #: index.html:1485 tablet7in.html:1554
 msgid ""
 "Profiles are saved per device and can be exported/imported for backup or "
 "sharing"
 msgstr ""
+"Profiler sparas per enhet och kan exporteras/importeras för backup eller "
+"delning"
 
 #: index.html:1492 tablet7in.html:1561
 msgid "Live Input Monitor"
-msgstr ""
+msgstr "Övervakning för liveinput"
 
 #: index.html:1493 tablet7in.html:1562
 msgid ""
@@ -944,43 +972,51 @@ msgid ""
 "state, Axes show visual meter. Use this panel to verify button and axis "
 "mappings."
 msgstr ""
+"Råa värden i realtid från webbläsarens gamepad-API. Knappar visar status för"
+" nedtryck, axlar visar visuell mätare. Använd denna panel för att verifiera "
+"knapp- och axelmappning."
 
 #: index.html:1499 tablet7in.html:1568
 msgid "Buttons"
-msgstr ""
+msgstr "Knappar"
 
 #: index.html:1501 index.html:1508 index.html:1516 tablet7in.html:1570
 #: tablet7in.html:1577 tablet7in.html:1585
 msgid "Waiting for controller input..."
-msgstr ""
+msgstr "Väntar på kontrollinput..."
 
 #: index.html:1506 tablet7in.html:1575
 msgid "Axes"
-msgstr ""
+msgstr "Axlar"
 
 #: index.html:1514 tablet7in.html:1583
 msgid "Device Information"
-msgstr ""
+msgstr "Enhetsinformation"
 
 #: index.html:1519 tablet7in.html:1588
 msgid "Understanding Raw Values"
-msgstr ""
+msgstr "Förstår råa värden"
 
 #: index.html:1520 tablet7in.html:1589
 msgid "Buttons: Range 0.0 (not pressed) to 1.0 (green = fully pressed)."
-msgstr ""
+msgstr "Knappar: Omfång 0.0 (ej nedtryckt) till 1.0 (grön = fullt nedtryckt)."
 
 #: index.html:1521 tablet7in.html:1590
 msgid ""
 "Axes: -1.0 to 1.0 with visual meter Center position is 0.0. Triggers (L2/R2)"
 " show gradual values."
 msgstr ""
+"Axlar: -1.0 till 1.0 med visuell mätares centerposition på 0.0. "
+"Triggerknappar (L2/R2) visar gradvisa värden."
 
 #: index.html:1522 tablet7in.html:1591
 msgid ""
 "Note: Different browsers may report the same physical button on different "
 "indices. Use this panel to identify the correct mapping for your setup."
 msgstr ""
+"Notera: Olika webbläsare kan rapportera samma fysiska knappt på olika index."
+" Använd denna panel för att identifiera korrekt mappning för din "
+"uppsättning."
 
 #: index.html:1552 tablet7in.html:1620
 msgid "No response from server"
