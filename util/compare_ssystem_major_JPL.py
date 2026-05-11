@@ -2,7 +2,7 @@
 """
 compare_ssystem.py – Compare Stellarium object positions with JPL Horizons OBSERVER data.
 
-For each moon in ssystem_major.ini, RA/Dec positions are fetched from JPL Horizons
+For each moon and planet in ssystem_major.ini, RA/Dec positions are fetched from JPL Horizons
 and from the locally running Stellarium instance over a configurable time range
 (default: 2 years, weekly). The angular error in arcminutes is plotted per object
 and saved as a multi-page PDF.
@@ -201,9 +201,10 @@ def read_sections(lines):
     return sections
 
 
-def get_moon_sections(lines, requested_object=None):
+def get_objects(lines, requested_object=None):
     """
-    Return all sections with type=moon, a known parent, and a known OBJECT_ID.
+    Return all sections with type=moon or type=planet that have a known OBJECT_ID.
+    Moons additionally require a known parent. Planets have no parent.
     If requested_object is given, return only that one section.
     """
     sections = read_sections(lines)
@@ -217,18 +218,27 @@ def get_moon_sections(lines, requested_object=None):
             continue
         if "type" not in keys:
             continue
+
         type_val = split_value_line(lines[keys["type"]])
-        if not type_val or type_val[2].strip() != "moon":
+        if not type_val:
             continue
-        if "parent" not in keys:
+        obj_type = type_val[2].strip()
+
+        if obj_type == "moon":
+            if "parent" not in keys:
+                continue
+            parent = split_value_line(lines[keys["parent"]])[2].strip()
+            if parent not in PARENT_IDS:
+                continue
+        elif obj_type == "planet":
+            parent = None
+        else:
             continue
-        parent = split_value_line(lines[keys["parent"]])[2].strip()
-        if parent not in PARENT_IDS:
-            continue
+
         if name.lower() not in OBJECT_IDS:
             continue
 
-        result.append({"name": name, "parent": parent})
+        result.append({"name": name, "type": obj_type, "parent": parent})
 
     return result
 
@@ -479,7 +489,7 @@ def make_plot(ax, name, dates, errors):
 def parse_args():
     ap = argparse.ArgumentParser(
         description=(
-            "Compare Stellarium moon positions with JPL Horizons OBSERVER data "
+            "Compare Stellarium moon and planet positions with JPL Horizons OBSERVER data "
             "and write a PDF with one error plot per object."
         ),
         epilog=(
@@ -542,14 +552,14 @@ def main():
     with open(args.file, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
-    objects = get_moon_sections(lines, args.object)
+    objects = get_objects(lines, args.object)
 
     if not objects:
         if args.object:
             print(f"ERROR: Object '{args.object}' not found in {args.file} "
-                  f"or not a valid moon.", file=sys.stderr)
+                  f"or not a valid moon or planet.", file=sys.stderr)
         else:
-            print("ERROR: No comparable moon objects found in the INI file.",
+            print("ERROR: No comparable moon or planet objects found in the INI file.",
                   file=sys.stderr)
         sys.exit(1)
 
