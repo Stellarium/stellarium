@@ -126,7 +126,9 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 		{
 			QJsonArray namesArray;
 			for (const auto &name : it.value())
+			{
 				namesArray.append(name.toJson());
+			}
 			commonNamesObj[it.key()] = namesArray;
 		}
 		scJsonObj["common_names"] = commonNamesObj;

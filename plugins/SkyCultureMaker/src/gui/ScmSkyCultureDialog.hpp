@@ -229,6 +229,12 @@ private:
 	 */
 	void cnPopulateForm(const QString &key, const scm::ScmCulturalName &name);
 
+	/**
+	 * @brief Builds the normalized object key from the type combo box and the identifier line edit.
+	 *        Stars: "HIP <id>", Planets: "NAME <id>", DSOs: "<id>".
+	 */
+	QString cnBuildKey() const;
+
 	/// Common names entries stored as (object key, name data) pairs.
 	QList<QPair<QString, scm::ScmCulturalName>> cnEntries;
 };

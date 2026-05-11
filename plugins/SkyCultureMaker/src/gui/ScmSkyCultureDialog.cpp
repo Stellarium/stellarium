@@ -960,15 +960,25 @@ void ScmSkyCultureDialog::cnUpdateVisibleField(int typeIndex)
 
 	switch (typeIndex)
 	{
-		case 0:
-			ui->cnObjectIdLE->setPlaceholderText(q_("HIP number (e.g. 1234)"));
-			break;
-		case 1:
-			ui->cnObjectIdLE->setPlaceholderText(q_("Planet name (e.g. Venus)"));
-			break;
-		case 2:
-			ui->cnObjectIdLE->setPlaceholderText(q_("Catalog designation (e.g. M 31)"));
-			break;
+	case 0: ui->cnObjectIdLE->setPlaceholderText(q_("HIP number (e.g. 1234)")); break;
+	case 1: ui->cnObjectIdLE->setPlaceholderText(q_("Planet name (e.g. Venus)")); break;
+	case 2: ui->cnObjectIdLE->setPlaceholderText(q_("Catalog designation (e.g. M31)")); break;
+	}
+}
+
+QString ScmSkyCultureDialog::cnBuildKey() const
+{
+	QString id = ui->cnObjectIdLE->text().trimmed();
+	switch (ui->cnObjectTypeCB->currentIndex())
+	{
+	// removal and re-addition of prefix to ensure correct casing and spacing
+	case 0:
+		if (id.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive)) id = id.mid(3).trimmed();
+		return QLatin1String("HIP ") + id;
+	case 1:
+		if (id.startsWith(QLatin1String("NAME"), Qt::CaseInsensitive)) id = id.mid(4).trimmed();
+		return QLatin1String("NAME ") + id;
+	default: return id;
 	}
 }
 
@@ -989,19 +999,19 @@ void ScmSkyCultureDialog::cnClearForm()
 scm::ScmCulturalName ScmSkyCultureDialog::cnReadForm() const
 {
 	scm::ScmCulturalName name;
-	name.translated       = ui->cnEnglishLE->text().trimmed();
-	name.native           = ui->cnNativeLE->text().trimmed();
-	name.pronounce        = ui->cnPronounceLE->text().trimmed();
-	name.transliteration  = ui->cnTransliterationLE->text().trimmed();
-	name.IPA              = ui->cnIpaLE->text().trimmed();
-	name.byname           = ui->cnBynameLE->text().trimmed();
+	name.translated      = ui->cnEnglishLE->text().trimmed();
+	name.native          = ui->cnNativeLE->text().trimmed();
+	name.pronounce       = ui->cnPronounceLE->text().trimmed();
+	name.transliteration = ui->cnTransliterationLE->text().trimmed();
+	name.IPA             = ui->cnIpaLE->text().trimmed();
+	name.byname          = ui->cnBynameLE->text().trimmed();
 
 	const QString refsText = ui->cnReferencesLE->text().trimmed();
 	if (!refsText.isEmpty())
 	{
 		for (const auto &part : refsText.split(','))
 		{
-			bool ok = false;
+			bool ok       = false;
 			const int ref = part.trimmed().toInt(&ok);
 			if (ok)
 			{
@@ -1012,9 +1022,9 @@ scm::ScmCulturalName ScmSkyCultureDialog::cnReadForm() const
 
 	switch (ui->cnVisibleCB->currentIndex())
 	{
-		case 1: name.special = StelObject::CulturalNameSpecial::Morning; break;
-		case 2: name.special = StelObject::CulturalNameSpecial::Evening; break;
-		default: name.special = StelObject::CulturalNameSpecial::None;   break;
+	case 1: name.special = StelObject::CulturalNameSpecial::Morning; break;
+	case 2: name.special = StelObject::CulturalNameSpecial::Evening; break;
+	default: name.special = StelObject::CulturalNameSpecial::None; break;
 	}
 	return name;
 }
@@ -1036,9 +1046,9 @@ void ScmSkyCultureDialog::cnPopulateForm(const QString &key, const scm::ScmCultu
 
 	switch (name.special)
 	{
-		case StelObject::CulturalNameSpecial::Morning: ui->cnVisibleCB->setCurrentIndex(1); break;
-		case StelObject::CulturalNameSpecial::Evening: ui->cnVisibleCB->setCurrentIndex(2); break;
-		default:                                       ui->cnVisibleCB->setCurrentIndex(0); break;
+	case StelObject::CulturalNameSpecial::Morning: ui->cnVisibleCB->setCurrentIndex(1); break;
+	case StelObject::CulturalNameSpecial::Evening: ui->cnVisibleCB->setCurrentIndex(2); break;
+	default: ui->cnVisibleCB->setCurrentIndex(0); break;
 	}
 }
 
@@ -1053,14 +1063,9 @@ void ScmSkyCultureDialog::cnRefreshTable()
 		QString displayKey = pair.first;
 		switch (pair.second.special)
 		{
-			case StelObject::CulturalNameSpecial::Morning:
-				displayKey += QLatin1String(" (morning)");
-				break;
-			case StelObject::CulturalNameSpecial::Evening:
-				displayKey += QLatin1String(" (evening)");
-				break;
-			default:
-				break;
+		case StelObject::CulturalNameSpecial::Morning: displayKey += QLatin1String(" (morning)"); break;
+		case StelObject::CulturalNameSpecial::Evening: displayKey += QLatin1String(" (evening)"); break;
+		default: break;
 		}
 
 		ui->cnEntriesTable->setItem(row, 0, new QTableWidgetItem(displayKey));
@@ -1072,12 +1077,26 @@ void ScmSkyCultureDialog::cnRefreshTable()
 
 void ScmSkyCultureDialog::cnAddEntry()
 {
-	const QString key = ui->cnObjectIdLE->text().trimmed();
-	if (key.isEmpty())
+	const QString id = ui->cnObjectIdLE->text().trimmed();
+	if (id.isEmpty())
 	{
 		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please enter an object identifier."));
 		return;
 	}
+	if (ui->cnObjectTypeCB->currentIndex() == 0)
+	{
+		QString hipId = id;
+		if (hipId.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive)) hipId = hipId.mid(3).trimmed();
+		bool ok = false;
+		hipId.toInt(&ok);
+		if (!ok)
+		{
+			maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+			                              q_("The HIP identifier must be a valid integer (e.g. 1234)."));
+			return;
+		}
+	}
+	const QString key               = cnBuildKey();
 	const scm::ScmCulturalName name = cnReadForm();
 	if (name.translated.isEmpty())
 	{
@@ -1113,13 +1132,27 @@ void ScmSkyCultureDialog::cnSaveEntry()
 {
 	const auto selectedRows = ui->cnEntriesTable->selectionModel()->selectedRows();
 	if (selectedRows.isEmpty()) return;
-	const int row     = selectedRows.first().row();
-	const QString key = ui->cnObjectIdLE->text().trimmed();
-	if (key.isEmpty())
+	const int row    = selectedRows.first().row();
+	const QString id = ui->cnObjectIdLE->text().trimmed();
+	if (id.isEmpty())
 	{
 		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please enter an object identifier."));
 		return;
 	}
+	if (ui->cnObjectTypeCB->currentIndex() == 0)
+	{
+		QString hipId = id;
+		if (hipId.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive)) hipId = hipId.mid(3).trimmed();
+		bool ok = false;
+		hipId.toInt(&ok);
+		if (!ok)
+		{
+			maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+			                              q_("The HIP identifier must be a valid integer (e.g. 1234)."));
+			return;
+		}
+	}
+	const QString key               = cnBuildKey();
 	const scm::ScmCulturalName name = cnReadForm();
 	if (name.translated.isEmpty())
 	{
