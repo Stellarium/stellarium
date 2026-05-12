@@ -1160,7 +1160,7 @@ void ScmSkyCultureDialog::cnUpdateEntryButtons()
 	ui->cnSaveEntryBtn->setEnabled(hasSelection);
 }
 
-bool isValidHIPIdentifier(const QString &id)
+bool ScmSkyCultureDialog::isValidHIPIdentifier(const QString &id) const
 {
 	QString hipId = id;
 	if (hipId.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive))
