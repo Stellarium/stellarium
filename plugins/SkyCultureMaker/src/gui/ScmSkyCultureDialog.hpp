@@ -237,6 +237,11 @@ private:
 
 	/// Common names entries stored as (object key, name data) pairs.
 	QList<QPair<QString, scm::ScmCulturalName>> cnEntries;
+
+	/**
+	 * @brief Validates the HIP identifier.
+	 */
+	bool isValidHIPIdentifier(const QString &id) const;
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP

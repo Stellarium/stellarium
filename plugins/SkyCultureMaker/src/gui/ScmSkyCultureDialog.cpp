@@ -1041,7 +1041,9 @@ void ScmSkyCultureDialog::cnPopulateForm(const QString &key, const scm::ScmCultu
 
 	QStringList refStrings;
 	for (int r : name.references)
+	{
 		refStrings.append(QString::number(r));
+	}
 	ui->cnReferencesLE->setText(refStrings.join(", "));
 
 	switch (name.special)
@@ -1083,18 +1085,11 @@ void ScmSkyCultureDialog::cnAddEntry()
 		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please enter an object identifier."));
 		return;
 	}
-	if (ui->cnObjectTypeCB->currentIndex() == 0)
+	if (ui->cnObjectTypeCB->currentIndex() == 0 && !isValidHIPIdentifier(id))
 	{
-		QString hipId = id;
-		if (hipId.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive)) hipId = hipId.mid(3).trimmed();
-		bool ok = false;
-		hipId.toInt(&ok);
-		if (!ok)
-		{
-			maker->showUserWarningMessage(dialog, ui->titleBar->title(),
-			                              q_("The HIP identifier must be a valid integer (e.g. 1234)."));
-			return;
-		}
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		                              q_("The HIP identifier must be a valid integer (e.g. 1234)."));
+		return;
 	}
 	const QString key               = cnBuildKey();
 	const scm::ScmCulturalName name = cnReadForm();
@@ -1139,18 +1134,11 @@ void ScmSkyCultureDialog::cnSaveEntry()
 		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please enter an object identifier."));
 		return;
 	}
-	if (ui->cnObjectTypeCB->currentIndex() == 0)
+	if (ui->cnObjectTypeCB->currentIndex() == 0 && !isValidHIPIdentifier(id))
 	{
-		QString hipId = id;
-		if (hipId.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive)) hipId = hipId.mid(3).trimmed();
-		bool ok = false;
-		hipId.toInt(&ok);
-		if (!ok)
-		{
-			maker->showUserWarningMessage(dialog, ui->titleBar->title(),
-			                              q_("The HIP identifier must be a valid integer (e.g. 1234)."));
-			return;
-		}
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		                              q_("The HIP identifier must be a valid integer (e.g. 1234)."));
+		return;
 	}
 	const QString key               = cnBuildKey();
 	const scm::ScmCulturalName name = cnReadForm();
@@ -1170,4 +1158,16 @@ void ScmSkyCultureDialog::cnUpdateEntryButtons()
 	ui->cnLoadEntryBtn->setEnabled(hasSelection);
 	ui->cnRemoveEntryBtn->setEnabled(hasSelection);
 	ui->cnSaveEntryBtn->setEnabled(hasSelection);
+}
+
+bool isValidHIPIdentifier(const QString &id)
+{
+	QString hipId = id;
+	if (hipId.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive))
+	{
+		hipId = hipId.mid(3).trimmed();
+	}
+	bool ok = false;
+	hipId.toInt(&ok);
+	return ok;
 }
