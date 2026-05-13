@@ -34,7 +34,7 @@ jobs:
                             libnlopt-cxx-dev libmd4c-dev libmd4c-html0-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Configure CMake
       shell: bash
@@ -79,7 +79,7 @@ jobs:
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Configure CMake
       shell: bash
@@ -124,7 +124,7 @@ jobs:
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Configure CMake
       shell: bash
@@ -172,7 +172,7 @@ jobs:
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Configure CMake
       shell: bash
@@ -194,7 +194,7 @@ jobs:
   # CI on macOS (Qt6)
   ci-macos-silicon-qt6:
     name: "macOS (arm64; qt6)"
-    runs-on: macos-15
+    runs-on: macos-26
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
@@ -213,7 +213,7 @@ jobs:
         brew install qt@6 nlopt exiv2 tidy-html5
 
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Configure CMake
       shell: bash
@@ -246,7 +246,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
@@ -287,7 +287,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v4

@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Build AppImage
       working-directory: ${{ github.workspace }}
@@ -45,7 +45,7 @@ jobs:
         cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
 
     - name: Upload AppImage
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       if: success()
       with:
         name: 'Stellarium-latest-qt5-x86_64'
@@ -59,7 +59,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Build AppImage
       working-directory: ${{ github.workspace }}
@@ -89,7 +89,7 @@ jobs:
         cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
 
     - name: Upload AppImage
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       if: success()
       with:
         name: 'Stellarium-latest-qt6-x86_64'
