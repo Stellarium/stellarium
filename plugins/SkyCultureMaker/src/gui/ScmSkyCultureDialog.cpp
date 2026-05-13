@@ -1065,8 +1065,8 @@ void ScmSkyCultureDialog::cnRefreshTable()
 		QString displayKey = pair.first;
 		switch (pair.second.special)
 		{
-		case StelObject::CulturalNameSpecial::Morning: displayKey += QLatin1String(" (morning)"); break;
-		case StelObject::CulturalNameSpecial::Evening: displayKey += QLatin1String(" (evening)"); break;
+		case StelObject::CulturalNameSpecial::Morning: displayKey += QLatin1String(" (") + q_("morning") + QLatin1String(")"); break;
+		case StelObject::CulturalNameSpecial::Evening: displayKey += QLatin1String(" (") + q_("evening") + QLatin1String(")"); break;
 		default: break;
 		}
 
