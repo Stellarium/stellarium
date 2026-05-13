@@ -19,31 +19,6 @@ Constellation artwork by Pokagon Band Potawatomi illustrator, Aaron Martin, alig
 
 Please be aware that the artistic renderings of the constellations are the interpretations by one artist. That is, figures may be interpreted differently from community to community and even from person to person within the same community. Because this traditional knowledge spans tribes, bands, and even international borders, we encourage users of this sky culture to respectfully engage with alternative visions of the Potawatomi sky.
 
-### Licenses and Permissions Justification
-
-The artist, Aaron Martin, holds the copyright to his artwork. However, with his permission the visual elements of this sky culture have been made available to the public for educational purposes. We use both a Creative Commons License and Traditional Knowledge Labels to ensure respectful terms of use that align with Potawatomi cultural protocols. For more information, please visit: https://creativecommons.org/ and https://localcontexts.org/labels/traditional-knowledge-labels/
-
-Neshnabé Nengosêk Kenomagéwen (Potawatomi Star Knowledge) Constellation Artwork © 2025 by Aaron Martin is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/
-
-#### TK Seasonal (TK S)
-
-This Label is being used to indicate that this material traditionally and usually is heard and/or utilized at a particular time of year and in response to specific seasonal changes and conditions. For instance, many important ceremonies are held at very specific times of the year. This Label is being used to indicate sophisticated relationships between land and knowledge creation. It is also being used to highlight the relationships between recorded material and the specific contexts where it derives, especially the interconnected and embodied teachings that it conveys.
-
-#### TK Non-Commercial (TK NC)
-
-This material has been designated as being available for non-commercial use. You are allowed to use this material for non-commercial purposes including for research, study, or public presentation and/or online in blogs or non-commercial websites. This Label asks you to think and act with fairness and responsibility towards this material and the original custodians.
-
-#### TK Creative (TK CR)
-
-This Label is being used to acknowledge the relationship between the creative practices of Aaron Martin and Pokagon Band of Potawatomi Indians and the larger Potawatomi nation and the associated cultural responsibilities.
-
-#### TK Community Voice (TK CV)
-
-This Label is being used to encourage the sharing of stories and voices about this material. The Label indicates that existing knowledge or descriptions are incomplete or partial. Any community member is invited and welcome to contribute to our community knowledge about this event, photograph, recording or heritage item. Sharing our voices helps us reclaim our histories and knowledge. This sharing is an internal process.
-
-### Curation Decisions
-
-Several Potawatomi constellations can be represented by different figures and names depending on season and story (e.g., Western “Orion” as Ktthe Sabé, Nenikboz, or Pondésé). For visual clarity in Stellarium, we selected one stick figure and one artwork per constellation but have documented alternatives in this sky culture description so learners understand the plural nature of the tradition rather than a single fixed mapping. Please see the full list of Potawatomi constellations below.
 
 ## Constellations
 
@@ -202,3 +177,29 @@ The artwork in this Sky Culture may be shared, copied, redistributed, and adapte
 License (Sky Culture): GNU GPL v2.0
 
 This Sky Culture is provided under GNU General Public License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.
+
+### Licenses and Permissions Justification
+
+The artist, Aaron Martin, holds the copyright to his artwork. However, with his permission the visual elements of this sky culture have been made available to the public for educational purposes. We use both a Creative Commons License and Traditional Knowledge Labels to ensure respectful terms of use that align with Potawatomi cultural protocols. For more information, please visit: https://creativecommons.org/ and https://localcontexts.org/labels/traditional-knowledge-labels/
+
+Neshnabé Nengosêk Kenomagéwen (Potawatomi Star Knowledge) Constellation Artwork © 2025 by Aaron Martin is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+#### TK Seasonal (TK S)
+
+This Label is being used to indicate that this material traditionally and usually is heard and/or utilized at a particular time of year and in response to specific seasonal changes and conditions. For instance, many important ceremonies are held at very specific times of the year. This Label is being used to indicate sophisticated relationships between land and knowledge creation. It is also being used to highlight the relationships between recorded material and the specific contexts where it derives, especially the interconnected and embodied teachings that it conveys.
+
+#### TK Non-Commercial (TK NC)
+
+This material has been designated as being available for non-commercial use. You are allowed to use this material for non-commercial purposes including for research, study, or public presentation and/or online in blogs or non-commercial websites. This Label asks you to think and act with fairness and responsibility towards this material and the original custodians.
+
+#### TK Creative (TK CR)
+
+This Label is being used to acknowledge the relationship between the creative practices of Aaron Martin and Pokagon Band of Potawatomi Indians and the larger Potawatomi nation and the associated cultural responsibilities.
+
+#### TK Community Voice (TK CV)
+
+This Label is being used to encourage the sharing of stories and voices about this material. The Label indicates that existing knowledge or descriptions are incomplete or partial. Any community member is invited and welcome to contribute to our community knowledge about this event, photograph, recording or heritage item. Sharing our voices helps us reclaim our histories and knowledge. This sharing is an internal process.
+
+### Curation Decisions
+
+Several Potawatomi constellations can be represented by different figures and names depending on season and story (e.g., Western “Orion” as Ktthe Sabé, Nenikboz, or Pondésé). For visual clarity in Stellarium, we selected one stick figure and one artwork per constellation but have documented alternatives in this sky culture description so learners understand the plural nature of the tradition rather than a single fixed mapping. Please see the full list of Potawatomi constellations below.
