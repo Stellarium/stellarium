@@ -283,6 +283,28 @@ def stellarium_get_location():
     return lon, lat, alt / 1000.0             # convert altitude to km for JPL
 
 
+def stellarium_get_property(prop_id):
+    """
+    Return the current value of a Stellarium property.
+    Uses GET /api/stelproperty/list (no single-property GET endpoint available).
+    """
+    import requests
+    response = requests.get(f"{STELLARIUM_URL}/api/stelproperty/list", timeout=10)
+    return response.json().get(prop_id, {}).get("value")
+
+
+def stellarium_set_property(prop_id, value):
+    """
+    Set a Stellarium property via POST /api/stelproperty/set.
+    value is passed as a string ('true' / 'false' for booleans).
+    """
+    params = urlencode({"id": prop_id, "value": str(value).lower()})
+    url = f"{STELLARIUM_URL}/api/stelproperty/set?{params}"
+    req = Request(url, data=b"", method="POST")
+    with urlopen(req, timeout=10) as r:
+        r.read()
+
+
 def stellarium_set_time(jd):
     """Set Stellarium's simulation time to the given Julian Date."""
     url = f"{STELLARIUM_URL}/api/main/time"
@@ -540,6 +562,14 @@ def main():
     # Save current Stellarium time to restore it afterwards
     original_jd = stellarium_get_time()
 
+    # Disable aberration correction for the duration of the comparison.
+    # JPL OBSERVER positions do not apply this correction, so both sides must
+    # use the same convention. We restore the original state when done.
+    ABERRATION_PROP = "StelCore.flagUseAberration"
+    original_aberration = stellarium_get_property(ABERRATION_PROP)
+    stellarium_set_property(ABERRATION_PROP, "false")
+    print(f"  StelCore.flagAberration: {original_aberration} → false")
+
     # Read observer location from Stellarium and use it for JPL too
     observer_location = stellarium_get_location()
     lon, lat, alt_km = observer_location
@@ -585,10 +615,12 @@ def main():
                       f"peak {peak:.3f}' > {args.max_error:.3f}' "
                       f"(on {peak_date})", file=sys.stderr)
 
-    # Restore Stellarium time
+    # Restore Stellarium aberration flag and time
     try:
         stellarium_set_time(original_jd)
+        stellarium_set_property(ABERRATION_PROP, original_aberration)
         print(f"\nStellarium time restored (JD {original_jd:.4f}).")
+        print(f"StelCore.flagAberration restored to {original_aberration}.")
     except Exception:
         pass
 
