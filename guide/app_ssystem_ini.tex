@@ -722,6 +722,117 @@ slope_parameter                = 4
 \noindent The displayed trajectory should start at Voyager~2's encounter with Neptune on August 18, 1989 (JD 2447757.5). 
 The value of \texttt{orbit\_good=} ($2460554.5-2447757.5 = $) \texttt{12797} fulfills this idea. 
 
+\subsubsection{How to check and update moons orbital elements}
+\label{sec:ssystem.ini:MoonsOrbitalElements}
+
+Moons orbiting planets are modelled in Stellarium using Keplerian orbits. While this
+approach is computationally efficient, it does not account for gravitational perturbations
+caused by other planets and the Sun. Over longer time spans these perturbations cause the
+predicted positions to drift noticeably from the true positions, so the orbital elements
+need to be refreshed periodically.
+
+Two Python scripts are provided to support this process. Both scripts require the path to
+\texttt{ssystem\_major.ini} as their first argument.
+
+The scripts require the Python libraries \texttt{requests} and \texttt{matplotlib}, which
+can be installed via:
+\begin{commands}
+pip3 install requests matplotlib
+\end{commands}
+
+\paragraph{Comparing positions against JPL Horizons}
+
+
+\texttt{compare\_ssystem\_major\_JPL.py} queries the JPL Horizons system for reference
+positions and compares them with the positions currently computed by Stellarium. It
+produces a PDF report containing one angular-error plot per object as well as a summary
+on the last pages. In addition, a CSV-formatted summary is printed to the console.
+
+\texttt{compare\_ssystem\_major\_JPL.py} requires a running instance of Stellarium with
+the \textbf{Remote Control Plugin} enabled and active.
+
+For maximum positional accuracy when comparing, the following options can be set in
+Stellarium before running the script:
+\begin{itemize}
+  \item Geocentric coordinates: \textit{Tools:} uncheck \textit{Topocentric coordinates}
+  \item Apparent coordinates (equinox of date)
+  \item TT timescale: \textit{Time:} \textit{Time correction} $\rightarrow$ \textit{Without correction}
+\end{itemize}
+However, for the sole purpose of assessing moon orbital parameters -- for example with a
+maximum allowed error of 2\,arcmin -- these settings are not required.
+
+\begin{commands}
+python3 compare_ssystem_major_JPL.py [options] <file> [object]
+
+positional arguments:
+  file        Path to ssystem_major.ini
+  object      Optional: compare only this named object
+
+options:
+  --years     Time range in years (default: 2)
+  --step      Step size in days (default: 7)
+  --out       Output PDF filename (default: ssystem_compare.pdf)
+  --stellarium  Stellarium base URL (default: http://localhost:8090)
+  --delay     Seconds to wait after setting Stellarium time
+              (default: 0.05)
+  --max-error Warn if maximum angular error exceeds this value in
+              arcminutes
+
+# Examples:
+python3 compare_ssystem_major_JPL.py ./ssystem_major.ini
+python3 compare_ssystem_major_JPL.py ./ssystem_major.ini himalia
+python3 compare_ssystem_major_JPL.py ./ssystem_major.ini --years 1\
+  --out compare.pdf
+\end{commands}
+
+If no object name is given, all objects defined in \texttt{ssystem\_major.ini} are
+evaluated. The \texttt{--max-error} option can be used to flag objects whose maximum
+error exceeds a chosen threshold, making it easy to identify moons that require updated
+elements.
+
+\paragraph{Fetching updated orbital elements from JPL Horizons}
+
+\texttt{fetch\_ssystem\_major.py} retrieves updated orbital elements from JPL Horizons
+and prints a modified version of \texttt{ssystem\_major.ini} to the console. Only the
+orbital parameters are updated; all other entries remain unchanged. The output can be
+reviewed and then manually merged into \texttt{ssystem\_major.ini}.
+
+\begin{commands}
+python3 fetch_ssystem_major.py [options] <file> [object]
+
+positional arguments:
+  file        Path to ssystem_major.ini
+  object      Optional: update only one named object
+
+# Example:
+python3 fetch_ssystem_major.py ./ssystem_major.ini himalia
+\end{commands}
+
+Again, omitting the object name causes all objects in the file to be updated.
+
+Always review the updated elements carefully before committing them. Freshly fetched
+parameters are valid near the current epoch but may not improve long-term accuracy for
+all objects equally.
+
+Note that the newly fetched elements are fitted to the current epoch. Deviations will
+therefore still appear over time, both in the past and in the future, and will be visible
+in a subsequent comparison run. These residual errors should, however, be smaller than
+those produced by the previously stored orbital elements for current time.
+
+\paragraph{Recommended workflow}
+
+\begin{enumerate}
+  \item Run \texttt{compare\_ssystem\_major\_JPL.py} over the full object list and inspect
+        the resulting PDF to identify moons with large angular errors.
+  \item For each problematic moon, run \texttt{fetch\_ssystem\_major.py} with the object
+        name to fetch updated elements from JPL Horizons.
+  \item Run \texttt{compare\_ssystem\_major\_JPL.py} again for the same object to verify
+        that the new elements reduce the error. Comparing the before and after plots
+        provides a clear picture of the improvement.
+  \item Repeat as needed for additional objects.
+\end{enumerate}
+
+
 \subsection{Multiple Epochs for Minor Planets}
 \label{sec:ssystem.ini:MultiEpoch}
 \indexterm{asteroid!multi-epoch ephemeris}
