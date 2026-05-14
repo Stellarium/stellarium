@@ -1640,6 +1640,12 @@ const QString ObsListDialog::CUSTOM_OBJECT = QStringLiteral("CustomObject");
 
 const QString ObsListDialog::DASH = QString(QChar(0x2014));
 
+ObsListDialogSortFilterProxyModel::ObsListDialogSortFilterProxyModel()
+{
+    m_collator.setNumericMode(true);
+    m_collator.setCaseSensitivity(Qt::CaseInsensitive);
+}
+
 bool ObsListDialogSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
     if (sortColumn() == ObsListDialog::ColumnRa)
@@ -1659,6 +1665,12 @@ bool ObsListDialogSortFilterProxyModel::lessThan(const QModelIndex &left, const 
         QString magLeft = sourceModel()->data(left).toString();
         QString magRight = sourceModel()->data(right).toString();
         return magLeft.toDouble() < magRight.toDouble();
+    }
+    if (sortColumn() == ObsListDialog::ColumnDesignation)
+    {
+        QString desigLeft  = sourceModel()->data(left).toString();
+        QString desigRight = sourceModel()->data(right).toString();
+        return m_collator.compare(desigLeft, desigRight) < 0;
     }
     return QSortFilterProxyModel::lessThan(left, right);
 }
