@@ -1027,8 +1027,6 @@ void StelMovementMgr::setFOVDeg(float fov)
 // Increment/decrement smoothly the vision field and position
 void StelMovementMgr::updateMotion(double deltaTime)
 {
-	updateVisionVector(deltaTime);
-
 	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	// the more it is zoomed, the lower the moving speed is (in angle)
 	double depl=keyMoveSpeed*deltaTime*1000*currentFov;
@@ -1083,11 +1081,13 @@ void StelMovementMgr::updateMotion(double deltaTime)
 		deltaAlt = rateY*M_PI_180*deltaTime;
 	}
 
+	updateVisionVector(deltaTime);
 	panView(deltaAz, deltaAlt);
 	updateAutoZoom(deltaTime);
 }
 
-// called at begin of updateMotion()
+// Called after manual FOV changes so viewport-offset tracking uses the FOV
+// that will be rendered for this frame.
 void StelMovementMgr::updateVisionVector(double deltaTime)
 {
 	// Specialized setups cannot use this functionality!
