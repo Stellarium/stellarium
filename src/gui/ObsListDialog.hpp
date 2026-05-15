@@ -438,7 +438,7 @@ public:
 protected:
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 private:
-    mutable QCollator m_collator;
+    QCollator m_collator;
 };
 
 #endif // OBSLISTDIALOG_H

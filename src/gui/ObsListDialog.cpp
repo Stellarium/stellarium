@@ -1469,9 +1469,12 @@ void ObsListDialog::sortObsListTreeViewByColumnName(const QString &columnName)
 		{SORTING_BY_LOCATION,      ColumnLocation},
 		{SORTING_BY_LANDSCAPE_ID,  ColumnLandscapeID}
 	};
+    QAbstractItemModel *previousModel = ui->treeView->model();
     ObsListDialogSortFilterProxyModel *proxyModel = new ObsListDialogSortFilterProxyModel;
     proxyModel->setSourceModel(itemModel);
     ui->treeView->setModel(proxyModel);
+    if (qobject_cast<ObsListDialogSortFilterProxyModel *>(previousModel))
+        delete previousModel;
     proxyModel->sort(map.value(columnName), Qt::AscendingOrder);
 }
 
@@ -1639,6 +1642,7 @@ const QString ObsListDialog::DASH = QString(QChar(0x2014));
 
 ObsListDialogSortFilterProxyModel::ObsListDialogSortFilterProxyModel()
 {
+    m_collator.setLocale(QLocale::c());
     m_collator.setNumericMode(true);
     m_collator.setCaseSensitivity(Qt::CaseInsensitive);
 }
