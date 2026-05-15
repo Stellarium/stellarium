@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Georg Zotti
+ * Copyright (C) 2026 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,9 +32,17 @@
 //! @note this implementation adheres to Calendrical Calculation's style of omitting a year zero. Negative years represent years B.C.E.
 //!       This is very much in contrast to Stellarium's usual behaviour, and also different from a year zero in CC's implementation of the Gregorian calendar.
 //!
-//! The Byzantine calendar's years start on September 1st. Their year count was understood so that Christ was born in 5500 of the Byzantine era (B.E.).
+//! The year count (Annus Mundi) was understood to originate with the creation of the world, and so that Christ was born around 5500 of the Byzantine era (B.E.).
+//! This implementation of the Byzantine calendar is based on years starting on September 1st. This is the form observed in Russia from 1492 (7000AM) to 1700 when Tsar Peter introduced the Julian Calendar, moving New Year to January 1st.
+//! An earlier tradition had years start with March 1.
 //! More accurate reckoning allows saying a Julian date between January and August of Y is in Y+5509, from September to December it is Y+5508.
-//! TODO: Verify these offsets!
+//! Byzantine date 1-1-1 was September 1, 5509 BC (Julian)
+//! The implementation then uses year zero and negative years, which do not make any sense in a calendar that assumes to start on the day of Creation.
+//!
+//! Further reading:
+//! https://en.wikipedia.org/wiki/Byzantine_calendar
+//! https://sites.google.com/site/seesscm/eastern-slavic-and-russian-calendar-systems
+//!
 
 class ByzantineCalendar : public JulianCalendar
 {
@@ -74,10 +82,6 @@ public slots:
 	static int fixedFromByzantine(const QVector<int> &byzantine);
 	//! find date in the Julian calendar from RD number (may be used in other calendars!)
 	static QVector<int> byzantineFromFixed(int rd);
-
-public:
-	//constexpr static const int julianEpoch=-1; //! RD of January 1, AD1 (jul.).
-	//static int byzantineEpoch=fixedFromJulian({5509, 9, 1}); //! RD of Sep 1, 5509BC (jul.).
 
 protected:
 	static QMap<int, QString> weekDayNames;

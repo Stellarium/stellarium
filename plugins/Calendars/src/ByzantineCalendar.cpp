@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Georg Zotti
+ * Copyright (C) 2026 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,11 +70,11 @@ void ByzantineCalendar::setJD(double JD)
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // Year, Month, MonthName, Day, DayName
-// Again, in this plugin only, note no year zero, and AD/BC counting.
+// In this plugin we use year zero and negative for the (unthinkable) years before creation.
 QStringList ByzantineCalendar::getDateStrings() const
 {
 	QStringList list;
-	list << QString("%1 %2").arg(abs(parts.at(0))).arg(parts.at(0)>0 ? q_("A.M.") : q_("a.A.M."));
+	list << QString("%1 %2").arg(abs(parts.at(0))).arg(qc_("A.M.", "Annus Mundi"));
 	list << QString::number(parts.at(1));
 	list << QString::number(parts.at(2));
 	list << weekday(JD);
@@ -102,8 +102,6 @@ void ByzantineCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "ByzantineCalendar::setDate:" << parts;
 	this->parts=parts;
-	// For the Julian calendar, we really have no year 0 in this plugin.
-	Q_ASSERT(parts.at(0) != 0);
 
 	double rd=fixedFromByzantine(parts);
 	// restore time from JD!
@@ -113,10 +111,10 @@ void ByzantineCalendar::setDate(const QVector<int> &parts)
 	emit jdChanged(JD);
 }
 
-// returns true for leap years. Note that for a calendar without year 0, we must do it more complicated.
+// returns true for leap years. Coincidentally, same rule as Julian (but without the zero exception).
 bool ByzantineCalendar::isLeap(int year)
 {
-	return (StelUtils::imod(year, 4) == (year > 0 ? 0 : 3) );
+	return (StelUtils::imod(year, 4) == 0 );
 }
 
 // return name of week day
@@ -128,16 +126,15 @@ QString ByzantineCalendar::weekday(double jd)
 
 int ByzantineCalendar::fixedFromByzantine(const QVector<int> &byzantine)
 {
-	const int year =byzantine.value(0);
+	int year =byzantine.value(0);
 	int month=byzantine.value(1);
 	const int day  =byzantine.value(2);
-	int y=(year<0 ? year+1 : year);
+	//int y=(year<5510 ? year+1 : year);
+	int y=year-5509;
 
 	// Convert this to Julian calendar date
 
-	//
 	month += 8;
-	y += 5509;
 	if (month > 12)
 	{
 		month -= 12;
@@ -148,7 +145,7 @@ int ByzantineCalendar::fixedFromByzantine(const QVector<int> &byzantine)
 	int ret=julianEpoch-1+365*(y-1)+StelUtils::intFloorDiv(y-1, 4)
 			+StelUtils::intFloorDiv(367*month-362, 12)+day;
 	if (month>2)
-		ret+= (isLeap(year) ? -1 : -2);
+		ret+= (isLeap(y) ? -1 : -2);
 	return ret;
 }
 
@@ -161,14 +158,30 @@ QVector<int> ByzantineCalendar::byzantineFromFixed(int rd)
 	if (rd>=fixedFromJulian({year, march, 1}))
 		correction=(isLeap(year) ? 1 : 2);
 	int month=StelUtils::intFloorDiv(12*(priorDays+correction)+373, 367);
-	const int day=rd-fixedFromJulian({year, month, 1})+1;
+	int day=rd-fixedFromJulian({year, month, 1})+1;
 
-	// TODO: Convert this to Byzantine calendar date
-	//
-	year += (month<9) ? 5508: 5509;
+	//From here, convert this to Byzantine calendar date
+	const int yCorr=(year < 0 ? 1 : 0); // enable year 0
+	year += (month<9 ? 5508: 5509) + yCorr;
 	month -= 8;
 	if (month<1)
 		month +=12;
+
+	// In some cases this now has day==0. Adjust to last day of previous month.
+	if (day==0)
+	{
+		month--;
+		if (month<=0)
+		{
+			month=12;
+			year--;
+		}
+		Q_ASSERT(month<13);
+		static const int mLength[] = {30, 31, 30, 31, 31, 28, 31, 30, 31, 30, 31, 31};
+		day = mLength[month-1];
+		if (isLeap(year) && month==6)
+			day=29;
+	}
 
 	return {year, month, day};
 }
