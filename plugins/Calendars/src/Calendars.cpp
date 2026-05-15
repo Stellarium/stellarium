@@ -500,7 +500,11 @@ Calendar* Calendars::getCal(const QString &name)
 
 void Calendars::update(double)
 {
-	if (!enabled && (configDialog && !configDialog->visible())) // allow playing in dialog while main display is off! (#4917)
+	if (!enabled
+#ifndef NO_GUI
+			&& (configDialog && !configDialog->visible())
+#endif
+			) // allow playing in dialog while main display is off! (#4917)
 		return;
 	const double jd=StelApp::getInstance().getCore()->getJD();
 	foreach (Calendar* cal, calendars)
