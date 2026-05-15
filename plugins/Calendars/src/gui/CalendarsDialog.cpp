@@ -144,26 +144,26 @@ void CalendarsDialog::createDialogContent()
 	ui->textcolorToolButton->setup("Calendars.textColor", "Calendars/text_color");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
-	connect(ui->julianYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
-	connect(ui->julianMonthSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
-	connect(ui->julianDaySpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
-	connect(ui->revisedJulianYearSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(revisedJulianChanged()));
-	connect(ui->revisedJulianMonthSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(revisedJulianChanged()));
-	connect(ui->revisedJulianDaySpinBox,	SIGNAL(valueChanged(int)), this, SLOT(revisedJulianChanged()));
-	connect(ui->gregorianYearSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
-	connect(ui->gregorianMonthSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
-	connect(ui->gregorianDaySpinBox,	SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
-	connect(ui->byzantineYearSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(byzantineChanged()));
-	connect(ui->byzantineMonthSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(byzantineChanged()));
-	connect(ui->byzantineDaySpinBox,	SIGNAL(valueChanged(int)), this, SLOT(byzantineChanged()));
-	connect(ui->isoYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
-	connect(ui->isoWeekSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
-	connect(ui->isoDaySpinBox,		SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
-	connect(ui->baktunSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	connect(ui->katunSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	connect(ui->tunSpinBox,			SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	connect(ui->uinalSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	connect(ui->kinSpinBox,			SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->julianYearSpinBox,		&QSpinBox::valueChanged, this, &CalendarsDialog::julianChanged);
+	connect(ui->julianMonthSpinBox,		&QSpinBox::valueChanged, this, &CalendarsDialog::julianChanged);
+	connect(ui->julianDaySpinBox,		&QSpinBox::valueChanged, this, &CalendarsDialog::julianChanged);
+	connect(ui->revisedJulianYearSpinBox,	&QSpinBox::valueChanged, this, &CalendarsDialog::revisedJulianChanged);
+	connect(ui->revisedJulianMonthSpinBox,	&QSpinBox::valueChanged, this, &CalendarsDialog::revisedJulianChanged);
+	connect(ui->revisedJulianDaySpinBox,	&QSpinBox::valueChanged, this, &CalendarsDialog::revisedJulianChanged);
+	connect(ui->gregorianYearSpinBox,	&QSpinBox::valueChanged, this, &CalendarsDialog::gregorianChanged);
+	connect(ui->gregorianMonthSpinBox,	&QSpinBox::valueChanged, this, &CalendarsDialog::gregorianChanged);
+	connect(ui->gregorianDaySpinBox,	&QSpinBox::valueChanged, this, &CalendarsDialog::gregorianChanged);
+	connect(ui->byzantineYearSpinBox,	&QSpinBox::valueChanged, this, &CalendarsDialog::byzantineChanged);
+	connect(ui->byzantineMonthSpinBox,	&QSpinBox::valueChanged, this, &CalendarsDialog::byzantineChanged);
+	connect(ui->byzantineDaySpinBox,	&QSpinBox::valueChanged, this, &CalendarsDialog::byzantineChanged);
+	connect(ui->isoYearSpinBox,		&QSpinBox::valueChanged, this, &CalendarsDialog::isoChanged);
+	connect(ui->isoWeekSpinBox,		&QSpinBox::valueChanged, this, &CalendarsDialog::isoChanged);
+	connect(ui->isoDaySpinBox,		&QSpinBox::valueChanged, this, &CalendarsDialog::isoChanged);
+	connect(ui->baktunSpinBox,		&QSpinBox::valueChanged, this, &CalendarsDialog::mayaLongCountChanged);
+	connect(ui->katunSpinBox,		&QSpinBox::valueChanged, this, &CalendarsDialog::mayaLongCountChanged);
+	connect(ui->tunSpinBox,			&QSpinBox::valueChanged, this, &CalendarsDialog::mayaLongCountChanged);
+	connect(ui->uinalSpinBox,		&QSpinBox::valueChanged, this, &CalendarsDialog::mayaLongCountChanged);
+	connect(ui->kinSpinBox,			&QSpinBox::valueChanged, this, &CalendarsDialog::mayaLongCountChanged);
 	// TODO: Indirect handling of Haab/Tzolkin and Xihuitl/Tonalpohualli, with going back and forth to dates set in the GUI elements.
 	//connect(ui->haabMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaHaabChanged()));
 	//connect(ui->haabDaySpinBox,   SIGNAL(valueChanged(int)), this, SLOT(mayaHaabChanged()));
