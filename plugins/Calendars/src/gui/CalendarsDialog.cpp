@@ -89,16 +89,16 @@ void CalendarsDialog::createDialogContent()
 #endif
 
 	// MAKE SURE to connect each calendar's partsChanged to a respective populate... method here.
-	connect(cal->getCal("Julian"),             SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateJulianParts(QVector<int>)));
-	connect(cal->getCal("RevisedJulian"),      SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateRevisedJulianParts(QVector<int>)));
-	connect(cal->getCal("Gregorian"),          SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateGregorianParts(QVector<int>)));
-	connect(cal->getCal("Byzantine"),          SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateByzantineParts(QVector<int>)));
-	connect(cal->getCal("ISO"),                SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateISOParts(QVector<int>)));
-	connect(cal->getCal("MayaLongCount"),      SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaLongCountParts(QVector<int>)));
-	connect(cal->getCal("MayaHaab"),           SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaHaabParts(QVector<int>)));
-	connect(cal->getCal("MayaTzolkin"),        SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaTzolkinParts(QVector<int>)));
-	connect(cal->getCal("AztecXihuitl"),       SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateAztecXihuitlParts(QVector<int>)));
-	connect(cal->getCal("AztecTonalpohualli"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateAztecTonalpohualliParts(QVector<int>)));
+	connect(cal->getCal("Julian"),             &Calendar::partsChanged, this, &CalendarsDialog::populateJulianParts);
+	connect(cal->getCal("RevisedJulian"),      &Calendar::partsChanged, this, &CalendarsDialog::populateRevisedJulianParts);
+	connect(cal->getCal("Gregorian"),          &Calendar::partsChanged, this, &CalendarsDialog::populateGregorianParts);
+	connect(cal->getCal("Byzantine"),          &Calendar::partsChanged, this, &CalendarsDialog::populateByzantineParts);
+	connect(cal->getCal("ISO"),                &Calendar::partsChanged, this, &CalendarsDialog::populateISOParts);
+	connect(cal->getCal("MayaLongCount"),      &Calendar::partsChanged, this, &CalendarsDialog::populateMayaLongCountParts);
+	connect(cal->getCal("MayaHaab"),           &Calendar::partsChanged, this, &CalendarsDialog::populateMayaHaabParts);
+	connect(cal->getCal("MayaTzolkin"),        &Calendar::partsChanged, this, &CalendarsDialog::populateMayaTzolkinParts);
+	connect(cal->getCal("AztecXihuitl"),       &Calendar::partsChanged, this, &CalendarsDialog::populateAztecXihuitlParts);
+	connect(cal->getCal("AztecTonalpohualli"), &Calendar::partsChanged, this, &CalendarsDialog::populateAztecTonalpohualliParts);
 	//connect(cal->getCal("Chinese"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateChineseParts(QVector<int>)));
 
 	connectBoolProperty(ui->julianCheckBox,             "Calendars.flagShowJulian");
