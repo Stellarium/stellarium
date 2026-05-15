@@ -305,6 +305,27 @@ def stellarium_set_property(prop_id, value):
         r.read()
 
 
+def stellarium_run_script(code):
+    """
+    Run a one-liner StelScript via POST /api/scripts/direct.
+    Returns the raw response text (script output via core.output()).
+    """
+    body = urlencode({"code": code}).encode()
+    req  = Request(f"{STELLARIUM_URL}/api/scripts/direct", data=body, method="POST")
+    with urlopen(req, timeout=10) as r:
+        return r.read().decode("utf-8").strip()
+
+
+def stellarium_get_deltаT_algorithm():
+    """Return the currently active DeltaT algorithm name."""
+    return stellarium_run_script("core.output(core.getDeltaTAlgorithm());")
+
+
+def stellarium_set_deltаT_algorithm(name):
+    """Set the DeltaT algorithm by name (e.g. 'EspenakMeeus')."""
+    stellarium_run_script(f'core.setDeltaTAlgorithm("{name}");')
+
+
 def stellarium_set_time(jd):
     """Set Stellarium's simulation time to the given Julian Date."""
     url = f"{STELLARIUM_URL}/api/main/time"
@@ -562,13 +583,43 @@ def main():
     # Save current Stellarium time to restore it afterwards
     original_jd = stellarium_get_time()
 
-    # Disable aberration correction for the duration of the comparison.
-    # JPL OBSERVER positions do not apply this correction, so both sides must
-    # use the same convention. We restore the original state when done.
+    # ── Save and configure Stellarium settings for comparison ─────────────────
+    # All four properties are saved, set to the required value, and restored
+
+    # (1) Aberration – disable; JPL OBSERVER does not apply aberration correction
     ABERRATION_PROP = "StelCore.flagUseAberration"
     original_aberration = stellarium_get_property(ABERRATION_PROP)
     stellarium_set_property(ABERRATION_PROP, "false")
-    print(f"  StelCore.flagAberration: {original_aberration} → false")
+    print(f"  {ABERRATION_PROP}: {original_aberration} → false")
+
+    # (2) Apparent coordinates equinox of date – enable for comparison with JPL
+    #     apparent RA/Dec (equinox of date). Stellarium property for the
+    #     coordinate frame: "Equatorial" = equinox of date, "EquatorialJ2000" = J2000
+    FRAME_PROP = "StelCore.currentFrameType"
+    original_frame = stellarium_get_property(FRAME_PROP)
+    stellarium_set_property(FRAME_PROP, "Equatorial")
+    print(f"  {FRAME_PROP}: {original_frame} → Equatorial")
+
+    # (3) TT timescale – "Without correction" matches JPL's TDB/TT timescale.
+    #     Stellarium property values: "None" = no correction (TT), "ELP2000-82B", etc.
+    TIMECORR_PROP = "StelCore.currentTimeCorrectionAlgorithm"
+    original_timecorr = stellarium_get_property(TIMECORR_PROP)
+    stellarium_set_property(TIMECORR_PROP, "None")
+    print(f"  {TIMECORR_PROP}: {original_timecorr} → None")
+
+    # (4) DE440 ephemeris – must match the JPL source ephemeris.
+    #     Stellarium property values: "DE440", "DE421", "DE406", etc.
+    #     DE440 must be installed by the user
+    #EPHEM_PROP = "SolarSystem.currentEphemerisMethod"
+    #original_ephem = stellarium_get_property(EPHEM_PROP)
+    #stellarium_set_property(EPHEM_PROP, "DE440")
+    #print(f"  {EPHEM_PROP}: {original_ephem} → DE440")
+
+    # (5) DeltaT algorithm – set via StelScript API (no stelproperty equivalent).
+    #     "EspenakMeeus" matches JPL's default ΔT model.
+    original_deltat = stellarium_get_deltаT_algorithm()
+    stellarium_set_deltаT_algorithm("EspenakMeeus")
+    print(f"  DeltaT algorithm: {original_deltat} → EspenakMeeus")
 
     # Read observer location from Stellarium and use it for JPL too
     observer_location = stellarium_get_location()
@@ -615,12 +666,20 @@ def main():
                       f"peak {peak:.3f}' > {args.max_error:.3f}' "
                       f"(on {peak_date})", file=sys.stderr)
 
-    # Restore Stellarium aberration flag and time
+    # ── Restore all Stellarium settings ───────────────────────────────────────
     try:
         stellarium_set_time(original_jd)
-        stellarium_set_property(ABERRATION_PROP, original_aberration)
+        stellarium_set_property(ABERRATION_PROP,  original_aberration)
+        stellarium_set_property(FRAME_PROP,        original_frame)
+        stellarium_set_property(TIMECORR_PROP,     original_timecorr)
+        #stellarium_set_property(EPHEM_PROP,        original_ephem)
+        stellarium_set_deltаT_algorithm(original_deltat)
         print(f"\nStellarium time restored (JD {original_jd:.4f}).")
-        print(f"StelCore.flagAberration restored to {original_aberration}.")
+        print(f"  {ABERRATION_PROP} → {original_aberration}")
+        print(f"  {FRAME_PROP} → {original_frame}")
+        print(f"  {TIMECORR_PROP} → {original_timecorr}")
+        #   print(f"  {EPHEM_PROP} → {original_ephem}")
+        print(f"  DeltaT algorithm → {original_deltat}")
     except Exception:
         pass
 
