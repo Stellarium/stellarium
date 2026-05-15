@@ -1133,6 +1133,7 @@ void ScmSkyCultureDialog::cnLoadEntry()
 	const auto selectedRows = ui->cnEntriesTable->selectionModel()->selectedRows();
 	if (selectedRows.isEmpty()) return;
 	const int row = selectedRows.first().row();
+	Q_ASSERT(row >= 0 && row < cnEntries.size());
 	cnPopulateForm(cnEntries[row].first, cnEntries[row].second);
 	ui->cnSaveEntryBtn->setEnabled(true);
 }
@@ -1142,6 +1143,7 @@ void ScmSkyCultureDialog::cnRemoveEntry()
 	const auto selectedRows = ui->cnEntriesTable->selectionModel()->selectedRows();
 	if (selectedRows.isEmpty()) return;
 	const int row = selectedRows.first().row();
+	Q_ASSERT(row >= 0 && row < cnEntries.size());
 	cnEntries.removeAt(row);
 	cnRefreshTable();
 	cnClearForm();
@@ -1153,6 +1155,7 @@ void ScmSkyCultureDialog::cnSaveEntry()
 	const auto selectedRows = ui->cnEntriesTable->selectionModel()->selectedRows();
 	if (selectedRows.isEmpty()) return;
 	const int row = selectedRows.first().row();
+	Q_ASSERT(row >= 0 && row < cnEntries.size());
 	QString key;
 	scm::ScmCulturalName name;
 	if (!cnValidateForm(key, name)) return;
