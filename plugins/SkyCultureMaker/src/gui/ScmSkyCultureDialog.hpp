@@ -239,9 +239,13 @@ private:
 	QList<QPair<QString, scm::ScmCulturalName>> cnEntries;
 
 	/**
-	 * @brief Validates the HIP identifier.
+	 * @brief Validates the common names form and builds the key and name if valid.
+	 *        Shows a warning message and returns false on the first validation failure.
+	 * @param outKey   Receives the normalized object key on success.
+	 * @param outName  Receives the cultural name data on success.
+	 * @return true if all validation checks pass, false otherwise.
 	 */
-	bool isValidHIPIdentifier(const QString &id) const;
+	bool cnValidateForm(QString &outKey, scm::ScmCulturalName &outName);
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP

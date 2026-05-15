@@ -1065,8 +1065,14 @@ void ScmSkyCultureDialog::cnRefreshTable()
 		QString displayKey = pair.first;
 		switch (pair.second.special)
 		{
-		case StelObject::CulturalNameSpecial::Morning: displayKey += QLatin1String(" (") + q_("morning") + QLatin1String(")"); break;
-		case StelObject::CulturalNameSpecial::Evening: displayKey += QLatin1String(" (") + q_("evening") + QLatin1String(")"); break;
+		case StelObject::CulturalNameSpecial::Morning:
+			displayKey += QLatin1String(" (") + qc_("morning", "celestial object visibility period") +
+			              QLatin1String(")");
+			break;
+		case StelObject::CulturalNameSpecial::Evening:
+			displayKey += QLatin1String(" (") + qc_("evening", "celestial object visibility period") +
+			              QLatin1String(")");
+			break;
 		default: break;
 		}
 
@@ -1077,27 +1083,46 @@ void ScmSkyCultureDialog::cnRefreshTable()
 	}
 }
 
-void ScmSkyCultureDialog::cnAddEntry()
+bool ScmSkyCultureDialog::cnValidateForm(QString &outKey, scm::ScmCulturalName &outName)
 {
 	const QString id = ui->cnObjectIdLE->text().trimmed();
 	if (id.isEmpty())
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please enter an object identifier."));
-		return;
-	}
-	if (ui->cnObjectTypeCB->currentIndex() == 0 && !isValidHIPIdentifier(id))
-	{
 		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
-		                              q_("The HIP identifier must be a valid integer (e.g. 1234)."));
-		return;
+		                              qc_("Please enter an object identifier.",
+		                                  "Prompt for missing celestial object identifier (e.g. HIP number, "
+		                                  "planet name, DSO catalog designation)"));
+		return false;
 	}
-	const QString key               = cnBuildKey();
-	const scm::ScmCulturalName name = cnReadForm();
-	if (name.translated.isEmpty())
+	if (ui->cnObjectTypeCB->currentIndex() == 0)
+	{
+		QString hipId = id;
+		if (hipId.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive)) hipId = hipId.mid(3).trimmed();
+		bool ok = false;
+		hipId.toInt(&ok);
+		if (!ok)
+		{
+			maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+			                              q_("The HIP identifier must be a valid integer (e.g. 1234)."));
+			return false;
+		}
+	}
+	outKey  = cnBuildKey();
+	outName = cnReadForm();
+	if (outName.translated.isEmpty())
 	{
 		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The \"English\" field is required."));
-		return;
+		return false;
 	}
+
+	return true;
+}
+
+void ScmSkyCultureDialog::cnAddEntry()
+{
+	QString key;
+	scm::ScmCulturalName name;
+	if (!cnValidateForm(key, name)) return;
 	cnEntries.append({key, name});
 	cnRefreshTable();
 	cnClearForm();
@@ -1127,26 +1152,10 @@ void ScmSkyCultureDialog::cnSaveEntry()
 {
 	const auto selectedRows = ui->cnEntriesTable->selectionModel()->selectedRows();
 	if (selectedRows.isEmpty()) return;
-	const int row    = selectedRows.first().row();
-	const QString id = ui->cnObjectIdLE->text().trimmed();
-	if (id.isEmpty())
-	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please enter an object identifier."));
-		return;
-	}
-	if (ui->cnObjectTypeCB->currentIndex() == 0 && !isValidHIPIdentifier(id))
-	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
-		                              q_("The HIP identifier must be a valid integer (e.g. 1234)."));
-		return;
-	}
-	const QString key               = cnBuildKey();
-	const scm::ScmCulturalName name = cnReadForm();
-	if (name.translated.isEmpty())
-	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The \"English\" field is required."));
-		return;
-	}
+	const int row = selectedRows.first().row();
+	QString key;
+	scm::ScmCulturalName name;
+	if (!cnValidateForm(key, name)) return;
 	cnEntries[row] = {key, name};
 	cnRefreshTable();
 	ui->cnEntriesTable->selectRow(row);
@@ -1158,16 +1167,4 @@ void ScmSkyCultureDialog::cnUpdateEntryButtons()
 	ui->cnLoadEntryBtn->setEnabled(hasSelection);
 	ui->cnRemoveEntryBtn->setEnabled(hasSelection);
 	ui->cnSaveEntryBtn->setEnabled(hasSelection);
-}
-
-bool ScmSkyCultureDialog::isValidHIPIdentifier(const QString &id) const
-{
-	QString hipId = id;
-	if (hipId.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive))
-	{
-		hipId = hipId.mid(3).trimmed();
-	}
-	bool ok = false;
-	hipId.toInt(&ok);
-	return ok;
 }
