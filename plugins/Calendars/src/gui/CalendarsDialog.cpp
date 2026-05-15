@@ -33,6 +33,7 @@
 #include "JulianCalendar.hpp"
 #include "RevisedJulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
+#include "ByzantineCalendar.hpp"
 //#include "MayaHaabCalendar.hpp"
 //#include "MayaTzolkinCalendar.hpp"
 //#include "AztecXihuitlCalendar.hpp"
@@ -91,6 +92,7 @@ void CalendarsDialog::createDialogContent()
 	connect(cal->getCal("Julian"),             SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateJulianParts(QVector<int>)));
 	connect(cal->getCal("RevisedJulian"),      SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateRevisedJulianParts(QVector<int>)));
 	connect(cal->getCal("Gregorian"),          SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateGregorianParts(QVector<int>)));
+	connect(cal->getCal("Byzantine"),          SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateByzantineParts(QVector<int>)));
 	connect(cal->getCal("ISO"),                SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateISOParts(QVector<int>)));
 	connect(cal->getCal("MayaLongCount"),      SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaLongCountParts(QVector<int>)));
 	connect(cal->getCal("MayaHaab"),           SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaHaabParts(QVector<int>)));
@@ -105,6 +107,7 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->isoCheckBox,                "Calendars.flagShowISO");
 	connectBoolProperty(ui->romanCheckBox,              "Calendars.flagShowRoman");
 	connectBoolProperty(ui->olympicCheckBox,            "Calendars.flagShowOlympic");
+	connectBoolProperty(ui->byzantineCheckBox,          "Calendars.flagShowByzantine");
 	connectBoolProperty(ui->egyptianCheckBox,           "Calendars.flagShowEgyptian");
 	connectBoolProperty(ui->armenianCheckBox,           "Calendars.flagShowArmenian");
 	connectBoolProperty(ui->zoroastrianCheckBox,        "Calendars.flagShowZoroastrian");
@@ -150,6 +153,9 @@ void CalendarsDialog::createDialogContent()
 	connect(ui->gregorianYearSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
 	connect(ui->gregorianMonthSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
 	connect(ui->gregorianDaySpinBox,	SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
+	connect(ui->byzantineYearSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(byzantineChanged()));
+	connect(ui->byzantineMonthSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(byzantineChanged()));
+	connect(ui->byzantineDaySpinBox,	SIGNAL(valueChanged(int)), this, SLOT(byzantineChanged()));
 	connect(ui->isoYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
 	connect(ui->isoWeekSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
 	connect(ui->isoDaySpinBox,		SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
@@ -195,6 +201,7 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<li>" + q_("ISO Weeks") + "</li>";
 	html += "<li>" + q_("Icelandic calendar") + "</li>";
 	html += "<li>" + q_("Roman (Julian) calendar") + "</li>";
+	html += "<li>" + q_("Byzantine calendar (Annus Mundi)") + "</li>";
 	html += "<li>" + q_("Olympiad calendar") + "</li>";
 	html += "<li>" + q_("Egyptian calendar") + "</li>";
 	html += "<li>" + q_("Armenian calendar") + "</li>";
@@ -298,6 +305,17 @@ void CalendarsDialog::populateGregorianParts(QVector<int> parts)
 		ui->gregorianWeekdayLineEdit->setText(greg->weekday(greg->getJD()));
 }
 
+void CalendarsDialog::populateByzantineParts(QVector<int> parts)
+{
+	ui->byzantineYearSpinBox->setValue(parts.at(0));
+	ui->byzantineMonthSpinBox->setValue(parts.at(1));
+	ui->byzantineDaySpinBox->setValue(parts.at(2));
+
+	ByzantineCalendar *cal=dynamic_cast<ByzantineCalendar*>(sender());
+	if (cal)
+		ui->byzantineWeekdayLineEdit->setText(cal->weekday(cal->getJD()));
+}
+
 void CalendarsDialog::populateISOParts(QVector<int> parts)
 {
 	ui->isoYearSpinBox->setValue(parts.at(0));
@@ -373,6 +391,13 @@ void CalendarsDialog::gregorianChanged()
 	cal->getCal("Gregorian")->setDate({ui->gregorianYearSpinBox->value(),
 					   ui->gregorianMonthSpinBox->value(),
 					   ui->gregorianDaySpinBox->value()});
+}
+
+void CalendarsDialog::byzantineChanged()
+{
+	cal->getCal("Byzantine")->setDate({ui->byzantineYearSpinBox->value(),
+					   ui->byzantineMonthSpinBox->value(),
+					   ui->byzantineDaySpinBox->value()});
 }
 
 void CalendarsDialog::isoChanged()
