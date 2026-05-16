@@ -9204,10 +9204,11 @@ QList<PlanetP> AstroCalcDialog::getSelectedMinorPlanets()
 
 void AstroCalcDialog::goToObject(const QString &name, const double JD)
 {
-	if (objectMgr->findAndSelectI18n(name, "Planet") || objectMgr->findAndSelect(name, "Planet"))
+	const QString objtype = "Planet";
+	if (objectMgr->findAndSelectI18n(name, objtype) || objectMgr->findAndSelect(name, objtype))
 	{
 		core->setJD(JD);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject(objtype);
 		if (!newSelected.empty())
 		{
 			// Can't point to home planet
