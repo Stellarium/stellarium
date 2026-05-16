@@ -51,8 +51,12 @@ sed -e 's/Qt::FocusPolicy::NoFocus/Qt::NoFocus/g' \
 	-e 's/QListView::ResizeMode::Adjust/QListView::Adjust/g' \
 	-e 's/QListView::LayoutMode::SinglePass/QListView::SinglePass/g' \
 	-e 's/QListView::ViewMode::IconMode/QListView::IconMode/g' \
+	-e 's/QPlainTextEdit::LineWrapMode::NoWrap/QPlainTextEdit::NoWrap/' \
 	-e 's/QSlider::TickPosition::NoTicks/QSlider::NoTicks/g' \
+	-e 's/Qt::ScrollBarPolicy::ScrollBarAlwaysOn/Qt::ScrollBarAlwaysOn/' \
 	-e 's/Qt::TextInteractionFlag::TextSelectableByMouse/Qt::TextSelectableByMouse/g' \
 	-e 's/Qt::TextInteractionFlag::NoTextInteraction/Qt::NoTextInteraction/g' \
+	-e 's/QTabWidget::TabPosition::North/QTabWidget::North/g' \
 	-e 's/QTabWidget::TabPosition::South/QTabWidget::South/g' \
 	   $1
+	   
