@@ -584,7 +584,6 @@ void StelCore::preDraw()
 	}
 	else
 	{
-		// TODO: dim whole framebuffer to 90%, else we are overexposed much too fast.
 		gl->glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}
 

@@ -237,7 +237,7 @@ void ZodiacalLight::setIntensity(double aintensity)
 
 void ZodiacalLight::draw(StelCore* core)
 {
-	if ((fader->getInterstate() == 0.f) || (getIntensity()<0.01) || !(propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool()))
+	if ((fader->getInterstate() == 0.f) || (getIntensity()<0.01) || !(propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool()) || (!core->getFlagClearSky()))
 		return;
 
 	// Test if we are not on Earth. Texture would not fit, so don't draw then.
