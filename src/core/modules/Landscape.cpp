@@ -765,7 +765,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 {
-	if(!StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER).contains("textureGrad_SUPPORTED"))
+	if(!StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER).contains("textureGrad_SUPPORTED") || (!core->getFlagClearSky()))
 	{
 		drawLowGL(core, onlyPolygon);
 		return;
@@ -1204,7 +1204,7 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 // Draw the ground, assuming full-screen-quad VAO is bound and the common uniforms are configured
 void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSampler) const
 {
-	if (landFader.getInterstate()==0.f  || !core->getFlagClearSky())
+	if (landFader.getInterstate()==0.f  || (!core->getFlagClearSky()))
 		return;
 
 	if (!groundTex)
@@ -1226,11 +1226,21 @@ void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSa
 	renderProgram->setUniformValue(shaderVars.mapTex, texSampler);
 	renderProgram->setUniformValue(shaderVars.vshift, vshift);
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
-	renderProgram->setUniformValue(shaderVars.brightness,
+
+	// Repetition. Does not help :-(
+	//gl.glEnable(GL_BLEND);
+	//gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	if (core->getFlagClearSky())
+		renderProgram->setUniformValue(shaderVars.brightness,
 				       landscapeBrightness*landscapeTint[0],
 				       landscapeBrightness*landscapeTint[1],
 				       landscapeBrightness*landscapeTint[2],
 				       (1.f-landscapeTransparency)*landFader.getInterstate());
+	else
+		renderProgram->setUniformValue(shaderVars.brightness, 0, 0, 0,
+					       (1.f-landscapeTransparency)*landFader.getInterstate());
+
 	prj->setUnProjectUniforms(*renderProgram);
 	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
@@ -1285,6 +1295,8 @@ void LandscapeOldStyle::drawFogLowGL(StelCore* core, StelPainter& sPainter) cons
 		return;
 	if (!(core->getSkyDrawer()->getFlagHasAtmosphere()))
 		return;
+	if (!core->getFlagClearSky())
+		return;
 
 	const float vpos = static_cast<float>(radius) * ((tanMode||calibrated) ? std::tan(fogAngleShift*M_PI_180f) : std::sin(fogAngleShift*M_PI_180f));
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
@@ -1317,8 +1329,10 @@ void LandscapeOldStyle::drawDecorLowGL(StelCore* core, StelPainter& sPainter, co
 	if (drawLight)
 		sPainter.setColor(Vec3f(illumFader.getInterstate()*lightScapeBrightness),
 				  (1.f-landscapeTransparency)*landFader.getInterstate());
-	else
+	else if (core->getFlagClearSky())
 		sPainter.setColor(Vec3f(landscapeBrightness), (1.f-landscapeTransparency)*landFader.getInterstate());
+	else
+		sPainter.setColor(Vec3f(0.f), (1.f-landscapeTransparency)*landFader.getInterstate());
 
 	for (const auto& side : precomputedSides)
 	{
@@ -1342,8 +1356,13 @@ void LandscapeOldStyle::drawGroundLowGL(StelCore* core, StelPainter& sPainter) c
 			  Mat4d::translation(Vec3d(0,0,static_cast<double>(vshift))));
 
 	sPainter.setProjector(core->getProjection(transfo));
-	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness,
+	if (core->getFlagClearSky())
+		sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness,
 			  (1.f-landscapeTransparency)*landFader.getInterstate());
+	else
+		sPainter.setColor(0, 0, 0,
+			  (1.f-landscapeTransparency)*landFader.getInterstate());
+
 
 	if(groundTex.isNull())
 	{
