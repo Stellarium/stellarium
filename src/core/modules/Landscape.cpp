@@ -1204,7 +1204,7 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 // Draw the ground, assuming full-screen-quad VAO is bound and the common uniforms are configured
 void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSampler) const
 {
-	if (landFader.getInterstate()==0.f)
+	if (landFader.getInterstate()==0.f  || !core->getFlagClearSky())
 		return;
 
 	if (!groundTex)
