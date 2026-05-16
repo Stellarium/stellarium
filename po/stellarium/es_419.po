@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-06 00:33+0700\n"
+"POT-Creation-Date: 2026-05-15 20:22+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2026\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/stellarium/teams/80998/es_419/)\n"
@@ -73,7 +73,7 @@ msgstr "asterismo"
 #: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:158
 #: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:715
 #: src/core/StelCore.cpp:310 src/core/StelSkyLayerMgr.cpp:83
-#: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:969
+#: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:976
 msgid "Display Options"
 msgstr "Opciones de visualización"
 
@@ -1288,7 +1288,7 @@ msgstr "Cambio cíclico en la contaminación lumínica"
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:123
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:474
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:193
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1752
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:304
@@ -3090,7 +3090,7 @@ msgid "Toggle DSO type filter"
 msgstr "Conmutar tipo de filtro para OEP"
 
 #: src/core/modules/NebulaMgr.cpp:1572 src/gui/StelDialog.cpp:336
-#: src/gui/ObsListDialog.cpp:602 src/StelMainView.cpp:1069
+#: src/gui/ObsListDialog.cpp:602 src/StelMainView.cpp:1076
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid "Attention!"
 msgstr "¡Atención!"
@@ -3379,7 +3379,7 @@ msgstr "La distancia angular de %1 es %2"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:1099 src/core/StelUtils.cpp:164
-#: src/gui/AstroCalcDialog.cpp:8789 src/gui/AstroCalcAlmanacWidget.cpp:254
+#: src/gui/AstroCalcDialog.cpp:8789 src/gui/AstroCalcAlmanacWidget.cpp:256
 msgctxt "duration"
 msgid "days"
 msgstr "días"
@@ -5954,7 +5954,7 @@ msgid "The Moon's azimuth is %1, and its altitude is %2."
 msgstr "El acimut de la Luna es %1 y su altitud es %2."
 
 #: src/core/StelObjectMgr.cpp:51 src/core/StelMovementMgr.cpp:194
-#: src/gui/StelGui.cpp:274 src/StelMainView.cpp:967 src/StelMainView.cpp:968
+#: src/gui/StelGui.cpp:274 src/StelMainView.cpp:974 src/StelMainView.cpp:975
 msgid "Miscellaneous"
 msgstr "Miscelánea"
 
@@ -6274,7 +6274,7 @@ msgstr ""
 #: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:232
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:303
@@ -7097,7 +7097,7 @@ msgstr "Contacto"
 #: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:231
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:302
@@ -10578,58 +10578,58 @@ msgid "Metonic cycle"
 msgstr "Ciclo metónico"
 
 #. TRANSLATORS: The name of season
-#: src/gui/AstroCalcAlmanacWidget.cpp:213
-#: src/gui/AstroCalcAlmanacWidget.cpp:229 src/ui_astroCalcAlmanacWidget.h:1086
+#: src/gui/AstroCalcAlmanacWidget.cpp:215
+#: src/gui/AstroCalcAlmanacWidget.cpp:231 src/ui_astroCalcAlmanacWidget.h:1086
 msgctxt "season"
 msgid "Spring"
 msgstr "Primavera"
 
 #. TRANSLATORS: The name of season
-#: src/gui/AstroCalcAlmanacWidget.cpp:215
-#: src/gui/AstroCalcAlmanacWidget.cpp:231 src/ui_astroCalcAlmanacWidget.h:1058
+#: src/gui/AstroCalcAlmanacWidget.cpp:217
+#: src/gui/AstroCalcAlmanacWidget.cpp:233 src/ui_astroCalcAlmanacWidget.h:1058
 msgctxt "season"
 msgid "Summer"
 msgstr "Verano"
 
 #. TRANSLATORS: The name of season
-#: src/gui/AstroCalcAlmanacWidget.cpp:217
-#: src/gui/AstroCalcAlmanacWidget.cpp:225 src/ui_astroCalcAlmanacWidget.h:1070
+#: src/gui/AstroCalcAlmanacWidget.cpp:219
+#: src/gui/AstroCalcAlmanacWidget.cpp:227 src/ui_astroCalcAlmanacWidget.h:1070
 msgctxt "season"
 msgid "Fall"
 msgstr "Otoño"
 
 #. TRANSLATORS: The name of season
-#: src/gui/AstroCalcAlmanacWidget.cpp:219
-#: src/gui/AstroCalcAlmanacWidget.cpp:227 src/ui_astroCalcAlmanacWidget.h:1009
+#: src/gui/AstroCalcAlmanacWidget.cpp:221
+#: src/gui/AstroCalcAlmanacWidget.cpp:229 src/ui_astroCalcAlmanacWidget.h:1009
 msgctxt "season"
 msgid "Winter"
 msgstr "Invierno"
 
 #. TRANSLATORS: full phrase is "The Sun is XX° below the horizon"
-#: src/gui/AstroCalcAlmanacWidget.cpp:394
+#: src/gui/AstroCalcAlmanacWidget.cpp:396
 #, qt-format
 msgid "The Sun is %1 below the horizon"
 msgstr "El Sol está %1 debajo del horizonte"
 
-#: src/gui/AstroCalcAlmanacWidget.cpp:398
+#: src/gui/AstroCalcAlmanacWidget.cpp:400
 msgid "The duration of daytime"
 msgstr "La duración del día"
 
-#: src/gui/AstroCalcAlmanacWidget.cpp:399
+#: src/gui/AstroCalcAlmanacWidget.cpp:401
 msgid "The duration of the astronomical night"
 msgstr "La duración de la noche astronómica"
 
-#: src/gui/AstroCalcAlmanacWidget.cpp:400
+#: src/gui/AstroCalcAlmanacWidget.cpp:402
 msgid "The duration of morning and evening twilights"
 msgstr "La duración de los crepúsculos matutinos y vespertinos"
 
 #. TRANSLATORS: duration in minutes
-#: src/gui/AstroCalcAlmanacWidget.cpp:406
+#: src/gui/AstroCalcAlmanacWidget.cpp:408
 msgctxt "duration, suffix"
 msgid "m"
 msgstr "min"
 
-#: src/gui/AstroCalcAlmanacWidget.cpp:489 src/ui_astroCalcAlmanacWidget.h:1115
+#: src/gui/AstroCalcAlmanacWidget.cpp:491 src/ui_astroCalcAlmanacWidget.h:1115
 #: plugins/NavStars/src/ui_navStarsWindow.h:546
 msgid "Today"
 msgstr "Hoy"
@@ -10839,19 +10839,19 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Atajo"
 
-#: src/StelMainView.cpp:967
+#: src/StelMainView.cpp:974
 msgid "Save screenshot"
 msgstr "Guardar captura de pantalla"
 
-#: src/StelMainView.cpp:968
+#: src/StelMainView.cpp:975
 msgid "Reload shaders (for development)"
 msgstr "Recargar sombras (para desarrollo)"
 
-#: src/StelMainView.cpp:969
+#: src/StelMainView.cpp:976
 msgid "Full-screen mode"
 msgstr "Modo pantalla completa"
 
-#: src/StelMainView.cpp:1069
+#: src/StelMainView.cpp:1076
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -10859,7 +10859,7 @@ msgstr ""
 "¡Los atajos tienen conflicto! Presione F7 luego de iniciar el programa y "
 "verifique las siguientes asignaciones múltiples"
 
-#: src/StelMainView.cpp:1154
+#: src/StelMainView.cpp:1161
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -10868,7 +10868,7 @@ msgstr ""
 "hardware de gráficos, o utilizar la opción --modo de ángulo (o modo --mesa-)"
 " ."
 
-#: src/StelMainView.cpp:1156
+#: src/StelMainView.cpp:1163
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -10876,14 +10876,14 @@ msgstr ""
 "Versión de OpenGL insuficiente. Actualice los controladores, gráficos de "
 "hardware o use la opción --modo-mesa."
 
-#: src/StelMainView.cpp:1160
+#: src/StelMainView.cpp:1167
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Versión OpenGL insuficiente. Actualice los controladores o el hardware de "
 "gráficos."
 
-#: src/StelMainView.cpp:1203
+#: src/StelMainView.cpp:1210
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -10891,7 +10891,7 @@ msgstr ""
 "Su subsistema DirectX/OpenGL ES tienen problemas. Vea el registro para detalles.\n"
 "¿Ignorar y suprimir este aviso en el futuro, y tratar de continuar de todas formas en el modo degradado?"
 
-#: src/StelMainView.cpp:1254
+#: src/StelMainView.cpp:1261
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -10899,7 +10899,7 @@ msgstr ""
 "Su subsistema OpenGL/Mesa tienen problemas. Vea el registro para detalles.\n"
 "¿Ignorar y suprimir este aviso en el futuro, y tratar de continuar de todas formas en el modo degradado?"
 
-#: src/StelMainView.cpp:1314
+#: src/StelMainView.cpp:1321
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -10907,7 +10907,7 @@ msgstr ""
 "Su subsistema OpenGL tiene problemas. Vea el registro para detalles.\n"
 "¿Ignorar y suprimir este aviso en el futuro, y tratar de continuar de todas formas en el modo degradado?"
 
-#: src/StelMainView.cpp:1355
+#: src/StelMainView.cpp:1362
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -17216,7 +17216,7 @@ msgstr "Restaurar la configuración predeterminada"
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:400
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:709
-#: plugins/Calendars/src/ui_calendarsDialog.h:943
+#: plugins/Calendars/src/ui_calendarsDialog.h:996
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:785
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:538
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1274
@@ -18537,13 +18537,13 @@ msgstr "Desde:"
 
 #: src/ui_astroCalcDialog.h:2416 src/ui_astroCalcDialog.h:2444
 #: src/ui_astroCalcDialog.h:2464 src/ui_astroCalcExtraEphemerisDialog.h:267
-#: plugins/Calendars/src/ui_calendarsDialog.h:946
+#: plugins/Calendars/src/ui_calendarsDialog.h:999
 msgid "Month"
 msgstr "Mes"
 
 #: src/ui_astroCalcDialog.h:2419 src/ui_astroCalcExtraEphemerisDialog.h:268
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:98
-#: plugins/Calendars/src/ui_calendarsDialog.h:949
+#: plugins/Calendars/src/ui_calendarsDialog.h:1005
 msgid "Day"
 msgstr "Día"
 
@@ -18961,7 +18961,7 @@ msgstr "Formato de hora"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:266
 #: src/ui_astroCalcAlmanacWidget.h:1028
-#: plugins/Calendars/src/ui_calendarsDialog.h:948
+#: plugins/Calendars/src/ui_calendarsDialog.h:1002
 msgid "Year"
 msgstr "Año"
 
@@ -20107,7 +20107,7 @@ msgstr "Permitir ajuste al objeto seleccionado"
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:259
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:781
-#: plugins/Calendars/src/ui_calendarsDialog.h:995
+#: plugins/Calendars/src/ui_calendarsDialog.h:1049
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:787
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:545
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1277
@@ -20232,7 +20232,7 @@ msgstr "Mira telrad"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:111
 #: plugins/Scenery3d/src/Scenery3d.cpp:344
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:283
-#: plugins/Calendars/src/Calendars.cpp:224
+#: plugins/Calendars/src/Calendars.cpp:226
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:93
 msgid "Show settings dialog"
 msgstr "Mostrar diálogo configuración"
@@ -26861,14 +26861,14 @@ msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:229
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:236
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:197
 msgid "Publications"
 msgstr "Publicaciones"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:161
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:244
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:230
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:237
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:198
 msgid "If you use this plugin in your publications, please cite:"
 msgstr "Si utiliza este complemento en sus publicaciones, por favor cite:"
@@ -33744,258 +33744,264 @@ msgstr "Vts"
 msgid "Allow to use Stellarium as a plugin in CNES VTS."
 msgstr "Permitir usar Stellarium como complemento en CNES VTS."
 
-#: plugins/Calendars/src/Calendars.cpp:90
-#: plugins/Calendars/src/Calendars.cpp:221
-#: plugins/Calendars/src/Calendars.cpp:222
+#: plugins/Calendars/src/Calendars.cpp:91
+#: plugins/Calendars/src/Calendars.cpp:223
+#: plugins/Calendars/src/Calendars.cpp:224
 msgid "Calendars"
 msgstr "Calendarios"
 
-#: plugins/Calendars/src/Calendars.cpp:93
+#: plugins/Calendars/src/Calendars.cpp:94
 msgid "Calendars of the world"
 msgstr "Calendarios del mundo"
 
-#: plugins/Calendars/src/Calendars.cpp:227
+#: plugins/Calendars/src/Calendars.cpp:229
 msgid "Export to Calendars.html"
 msgstr "Exportar a Calendars.html"
 
-#: plugins/Calendars/src/Calendars.cpp:420
-#: plugins/Calendars/src/ui_calendarsDialog.h:933
-#: plugins/Calendars/src/ui_calendarsDialog.h:953
+#: plugins/Calendars/src/Calendars.cpp:424
+#: plugins/Calendars/src/ui_calendarsDialog.h:981
+#: plugins/Calendars/src/ui_calendarsDialog.h:1003
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr "Gregoriano"
 
-#: plugins/Calendars/src/Calendars.cpp:421
-#: plugins/Calendars/src/ui_calendarsDialog.h:905
-#: plugins/Calendars/src/ui_calendarsDialog.h:954
+#: plugins/Calendars/src/Calendars.cpp:425
+#: plugins/Calendars/src/ui_calendarsDialog.h:956
+#: plugins/Calendars/src/ui_calendarsDialog.h:1006
 msgctxt "calendar"
 msgid "Julian"
 msgstr "Juliano"
 
-#: plugins/Calendars/src/Calendars.cpp:422
-#: plugins/Calendars/src/ui_calendarsDialog.h:931
-#: plugins/Calendars/src/ui_calendarsDialog.h:955
+#: plugins/Calendars/src/Calendars.cpp:426
+#: plugins/Calendars/src/ui_calendarsDialog.h:979
+#: plugins/Calendars/src/ui_calendarsDialog.h:1001
 msgctxt "calendar"
 msgid "Revised Julian"
 msgstr "Juliano revisado"
 
-#: plugins/Calendars/src/Calendars.cpp:423
+#: plugins/Calendars/src/Calendars.cpp:427
 msgctxt "calendar"
 msgid "ISO week"
 msgstr "Semana ISO"
 
-#: plugins/Calendars/src/Calendars.cpp:424
-#: plugins/Calendars/src/ui_calendarsDialog.h:937
+#: plugins/Calendars/src/Calendars.cpp:428
+#: plugins/Calendars/src/ui_calendarsDialog.h:985
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr "Islandés"
 
-#: plugins/Calendars/src/Calendars.cpp:425
-#: plugins/Calendars/src/ui_calendarsDialog.h:930
+#: plugins/Calendars/src/Calendars.cpp:429
+#: plugins/Calendars/src/ui_calendarsDialog.h:978
 msgctxt "calendar"
 msgid "Roman"
 msgstr "Romano"
 
-#: plugins/Calendars/src/Calendars.cpp:426
-#: plugins/Calendars/src/ui_calendarsDialog.h:917
+#: plugins/Calendars/src/Calendars.cpp:430
+#: plugins/Calendars/src/ui_calendarsDialog.h:989
+msgctxt "calendar"
+msgid "Byzantine"
+msgstr "Bizantino"
+
+#: plugins/Calendars/src/Calendars.cpp:431
+#: plugins/Calendars/src/ui_calendarsDialog.h:967
 msgctxt "calendar"
 msgid "Olympic"
 msgstr "Olímpico"
 
-#: plugins/Calendars/src/Calendars.cpp:427
-#: plugins/Calendars/src/ui_calendarsDialog.h:906
+#: plugins/Calendars/src/Calendars.cpp:432
+#: plugins/Calendars/src/ui_calendarsDialog.h:957
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "Egipcio"
 
-#: plugins/Calendars/src/Calendars.cpp:428
-#: plugins/Calendars/src/ui_calendarsDialog.h:909
+#: plugins/Calendars/src/Calendars.cpp:433
+#: plugins/Calendars/src/ui_calendarsDialog.h:960
 msgctxt "calendar"
 msgid "Armenian"
 msgstr "Armenio"
 
-#: plugins/Calendars/src/Calendars.cpp:429
-#: plugins/Calendars/src/ui_calendarsDialog.h:923
+#: plugins/Calendars/src/Calendars.cpp:434
+#: plugins/Calendars/src/ui_calendarsDialog.h:972
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr "Zoroastriano"
 
-#: plugins/Calendars/src/Calendars.cpp:430
-#: plugins/Calendars/src/ui_calendarsDialog.h:908
+#: plugins/Calendars/src/Calendars.cpp:435
+#: plugins/Calendars/src/ui_calendarsDialog.h:959
 msgctxt "calendar"
 msgid "Coptic"
 msgstr "Copto"
 
-#: plugins/Calendars/src/Calendars.cpp:431
-#: plugins/Calendars/src/ui_calendarsDialog.h:907
+#: plugins/Calendars/src/Calendars.cpp:436
+#: plugins/Calendars/src/ui_calendarsDialog.h:958
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr "Etiope"
 
-#: plugins/Calendars/src/Calendars.cpp:432
+#: plugins/Calendars/src/Calendars.cpp:437
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
 msgstr "Rev. francesa (astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:433
+#: plugins/Calendars/src/Calendars.cpp:438
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
 msgstr "Rev. francesa (aritm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:434
-#: plugins/Calendars/src/ui_calendarsDialog.h:904
+#: plugins/Calendars/src/Calendars.cpp:439
+#: plugins/Calendars/src/ui_calendarsDialog.h:992
 msgctxt "calendar"
 msgid "Islamic"
 msgstr "Islámico"
 
-#: plugins/Calendars/src/Calendars.cpp:435
-#: plugins/Calendars/src/ui_calendarsDialog.h:914
+#: plugins/Calendars/src/Calendars.cpp:440
+#: plugins/Calendars/src/ui_calendarsDialog.h:993
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "Hebreo"
 
-#: plugins/Calendars/src/Calendars.cpp:436
+#: plugins/Calendars/src/Calendars.cpp:441
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
 msgstr "Persa (aritm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:437
+#: plugins/Calendars/src/Calendars.cpp:442
 msgctxt "calendar"
 msgid "Persian (Astron.)"
 msgstr "Persa (astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:438
+#: plugins/Calendars/src/Calendars.cpp:443
 msgctxt "calendar"
 msgid "Bahá’í (Arithm.)"
 msgstr "Bahá’í (Aritm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:439
+#: plugins/Calendars/src/Calendars.cpp:444
 msgctxt "calendar"
 msgid "Bahá’í (Astron.)"
 msgstr "Bahá’í (Astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:440
-#: plugins/Calendars/src/ui_calendarsDialog.h:910
+#: plugins/Calendars/src/Calendars.cpp:445
+#: plugins/Calendars/src/ui_calendarsDialog.h:961
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr "Viejo solar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:441
+#: plugins/Calendars/src/Calendars.cpp:446
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
 msgstr "Viejo lunisolar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:442
-#: plugins/Calendars/src/ui_calendarsDialog.h:913
+#: plugins/Calendars/src/Calendars.cpp:447
+#: plugins/Calendars/src/ui_calendarsDialog.h:964
 msgctxt "calendar"
 msgid "New Hindu Solar"
 msgstr "Nuevo solar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:443
+#: plugins/Calendars/src/Calendars.cpp:448
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
 msgstr "Nuevo lunisolar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:444
+#: plugins/Calendars/src/Calendars.cpp:449
 msgctxt "calendar"
 msgid "New Hindu Panchang"
 msgstr "Nuevo panchang hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:446
-#: plugins/Calendars/src/ui_calendarsDialog.h:920
+#: plugins/Calendars/src/Calendars.cpp:451
+#: plugins/Calendars/src/ui_calendarsDialog.h:970
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
 msgstr "Astro solar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:447
-#: plugins/Calendars/src/ui_calendarsDialog.h:927
+#: plugins/Calendars/src/Calendars.cpp:452
+#: plugins/Calendars/src/ui_calendarsDialog.h:975
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
 msgstr "Astro lunisolar hindú"
 
-#: plugins/Calendars/src/Calendars.cpp:448
-#: plugins/Calendars/src/ui_calendarsDialog.h:929
+#: plugins/Calendars/src/Calendars.cpp:453
+#: plugins/Calendars/src/ui_calendarsDialog.h:977
 msgctxt "calendar"
 msgid "Tibetan"
 msgstr "Tibetano"
 
-#: plugins/Calendars/src/Calendars.cpp:450
-#: plugins/Calendars/src/ui_calendarsDialog.h:934
-#: plugins/Calendars/src/ui_calendarsDialog.h:957
+#: plugins/Calendars/src/Calendars.cpp:455
+#: plugins/Calendars/src/ui_calendarsDialog.h:982
+#: plugins/Calendars/src/ui_calendarsDialog.h:1011
 msgctxt "calendar"
 msgid "Chinese"
 msgstr "Chino"
 
-#: plugins/Calendars/src/Calendars.cpp:451
+#: plugins/Calendars/src/Calendars.cpp:456
 msgctxt "calendar"
 msgid "Chinese Solar Terms"
 msgstr "Términos solares chinos"
 
-#: plugins/Calendars/src/Calendars.cpp:454
-#: plugins/Calendars/src/ui_calendarsDialog.h:911
+#: plugins/Calendars/src/Calendars.cpp:459
+#: plugins/Calendars/src/ui_calendarsDialog.h:962
 msgctxt "calendar"
 msgid "Japanese"
 msgstr "Japonés"
 
-#: plugins/Calendars/src/Calendars.cpp:455
+#: plugins/Calendars/src/Calendars.cpp:460
 msgctxt "calendar"
 msgid "Japanese Solar Terms"
 msgstr "Términos solares japoneses"
 
-#: plugins/Calendars/src/Calendars.cpp:458
-#: plugins/Calendars/src/ui_calendarsDialog.h:938
+#: plugins/Calendars/src/Calendars.cpp:463
+#: plugins/Calendars/src/ui_calendarsDialog.h:986
 msgctxt "calendar"
 msgid "Korean"
 msgstr "Coreano"
 
-#: plugins/Calendars/src/Calendars.cpp:459
+#: plugins/Calendars/src/Calendars.cpp:464
 msgctxt "calendar"
 msgid "Korean Solar Terms"
 msgstr "Términos solares coreanos"
 
-#: plugins/Calendars/src/Calendars.cpp:462
-#: plugins/Calendars/src/ui_calendarsDialog.h:940
+#: plugins/Calendars/src/Calendars.cpp:467
+#: plugins/Calendars/src/ui_calendarsDialog.h:988
 msgctxt "calendar"
 msgid "Vietnamese"
 msgstr "Vietnamita"
 
-#: plugins/Calendars/src/Calendars.cpp:463
+#: plugins/Calendars/src/Calendars.cpp:468
 msgctxt "calendar"
 msgid "Vietnamese Solar Terms"
 msgstr "Términos solares vietnamitas"
 
-#: plugins/Calendars/src/Calendars.cpp:465
-#: plugins/Calendars/src/ui_calendarsDialog.h:918
+#: plugins/Calendars/src/Calendars.cpp:470
+#: plugins/Calendars/src/ui_calendarsDialog.h:968
 msgctxt "calendar"
 msgid "Balinese Pawukon"
 msgstr "Balinese Pawukon"
 
-#: plugins/Calendars/src/Calendars.cpp:466
-#: plugins/Calendars/src/ui_calendarsDialog.h:925
+#: plugins/Calendars/src/Calendars.cpp:471
+#: plugins/Calendars/src/ui_calendarsDialog.h:974
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "Cuenta Larga Maya"
 
-#: plugins/Calendars/src/Calendars.cpp:467
-#: plugins/Calendars/src/ui_calendarsDialog.h:939
+#: plugins/Calendars/src/Calendars.cpp:472
+#: plugins/Calendars/src/ui_calendarsDialog.h:987
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "Haab Maya"
 
-#: plugins/Calendars/src/Calendars.cpp:468
-#: plugins/Calendars/src/ui_calendarsDialog.h:915
+#: plugins/Calendars/src/Calendars.cpp:473
+#: plugins/Calendars/src/ui_calendarsDialog.h:965
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "Tzolkin Maya"
 
-#: plugins/Calendars/src/Calendars.cpp:469
-#: plugins/Calendars/src/ui_calendarsDialog.h:936
+#: plugins/Calendars/src/Calendars.cpp:474
+#: plugins/Calendars/src/ui_calendarsDialog.h:984
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "Xihuitl mexica"
 
-#: plugins/Calendars/src/Calendars.cpp:470
-#: plugins/Calendars/src/ui_calendarsDialog.h:924
+#: plugins/Calendars/src/Calendars.cpp:475
+#: plugins/Calendars/src/ui_calendarsDialog.h:973
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
 msgstr "Tonalpohualli mexica"
@@ -38082,11 +38088,11 @@ msgctxt "Vietnamese calendar: Minor Solar Term"
 msgid "Minor"
 msgstr "Menor"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:190
 msgid "Calendars Plug-in"
 msgstr "Complemento de Calendarios"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:197
 msgid ""
 "The Calendars plugin provides an interface to various calendars used around "
 "the world."
@@ -38094,131 +38100,135 @@ msgstr ""
 "El complemento de calendarios proporciona una interfaz a varios calendarios "
 "utilizados alrededor del mundo."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:198
 msgid "Julian Calendar"
 msgstr "Calendario Juliano"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:193
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:199
 msgid "Gregorian Calendar"
 msgstr "Calendario Gregoriano"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:194
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:200
 msgid "Revised Julian Calendar (Milankovi&#x107;)"
 msgstr "Calendario juliano revisado (Milankovi&#x107;)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:201
 msgid "ISO Weeks"
 msgstr "Semanas ISO"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:196
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
 msgid "Icelandic calendar"
 msgstr "Calendario islandés"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:197
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:203
 msgid "Roman (Julian) calendar"
 msgstr "Calendario Romano (Juliano)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:198
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:204
+msgid "Byzantine calendar (Annus Mundi)"
+msgstr "Calendario bizantino (Annus Mundi)"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:205
 msgid "Olympiad calendar"
 msgstr "Calendario olímpico"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:199
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
 msgid "Egyptian calendar"
 msgstr "Calendario egipcio"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:200
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:207
 msgid "Armenian calendar"
 msgstr "Calendario armenio"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:201
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:208
 msgid "Zoroastrian calendar"
 msgstr "Calendario zoroastriano"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid "Coptic calendar"
 msgstr "Calendario copto"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:203
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
 msgid "Ethiopic calendar"
 msgstr "Calendario etiope"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:205
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:212
 msgid "Islamic Calendar (algorithmic)"
 msgstr "Calendario Islámico (algorítmico)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:213
 msgid "Hebrew Calendar"
 msgstr "Calendario Hebreo"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:207
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:214
 msgid "French Revolution calendar (astronomical version of 1793)"
 msgstr "Calendario de la Revolución Francesa (versión astronómica de 1793)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:208
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:215
 msgid "French Revolution calendar (arithmetic version of 1795)"
 msgstr "Calendario de la Revolución Francesa (versión aritmética de 1795)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:216
 msgid "Persian calendar (arithmetic version)"
 msgstr "Calendario persa (versión aritmética)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:217
 msgid "Persian calendar (astronomical version)"
 msgstr "Calendario persa (versión astronómica)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:218
 msgid "Bahá’í calendar (arithmetic version)"
 msgstr "Calendario Bahá’í (versión aritmética)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:212
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:219
 msgid "Bahá’í calendar (astronomical version)"
 msgstr "Calendario Bahá’í (versión astronómica)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:214
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:221
 msgid "Old Hindu Solar and Lunar calendars"
 msgstr "Calendarios solares y lunares hindúes viejos"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:215
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:222
 msgid "New Hindu Solar and Lunar calendars"
 msgstr "Calendarios solares y lunares hindúes nuevos"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:216
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:223
 msgid "Astronomically 'accurate' Hindu Solar and Lunar calendars"
 msgstr "Calendarios solares y lunares hindúes astronómicamente 'precisos'"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:217
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:224
 msgid "Tibetan (Phuglugs, Phug-pa, K&#x101;lacakra) calendar"
 msgstr "Calendario tibetano (Phuglugs, Phug-pa, K&#x101;lacakra)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:218
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:225
 msgid "Chinese calendar"
 msgstr "Calendario chino"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:219
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:226
 msgid "Japanese calendar"
 msgstr "Calendario japonés"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:220
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
 msgid "Korean calendar"
 msgstr "Calendario coreano"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:221
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:228
 msgid "Vietnamese calendar"
 msgstr "Calendario vietnamita"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:222
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:229
 msgid "Balinese Pawukon calendar"
 msgstr "Calendario Balinese Pawukon"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:223
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:230
 msgid "Maya calendars"
 msgstr "Calendarios mayas"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:224
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:231
 msgid "Aztec calendars"
 msgstr "Calendarios mexicas"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:226
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:233
 msgid ""
 "The plugin is still under development. Please cross-check results and report"
 " errors."
@@ -38226,7 +38236,7 @@ msgstr ""
 "El complemento está en desarrollo. Por favor verifique los resultados y "
 "reporte los errores."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:234
 msgid ""
 "For some calendars, we welcome proper formatting suggestions by actual "
 "users."
@@ -38234,164 +38244,168 @@ msgstr ""
 "Para algunos calendarios, recibimos sugerencias de formatos correctos por "
 "usuarios actuales."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:236
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:243
 msgid "References"
 msgstr "Referencias"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:237
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:244
 msgid "This plugin is based on:"
 msgstr "El complemento está basado en:"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:902
+#: plugins/Calendars/src/ui_calendarsDialog.h:954
 msgid "Calendars Configuration"
 msgstr "Configuración de calendarios"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:903
+#: plugins/Calendars/src/ui_calendarsDialog.h:955
 msgid "Calendars Plug-in Configuration"
 msgstr "Configuración del complemento Calendarios"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:912
+#: plugins/Calendars/src/ui_calendarsDialog.h:963
 msgctxt "calendar"
 msgid "French Revolution (arithmetic)"
 msgstr "Revolución Francesa (aritmético)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:916
+#: plugins/Calendars/src/ui_calendarsDialog.h:966
 msgctxt "calendar"
 msgid "Persian (astronomical)"
 msgstr "Persa (astronómico)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:919
+#: plugins/Calendars/src/ui_calendarsDialog.h:969
 msgctxt "calendar"
 msgid "Persian (arithmetic)"
 msgstr "Persa (aritmético)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:921
-#: plugins/Calendars/src/ui_calendarsDialog.h:947
-msgctxt "calendar"
-msgid "ISO Week"
-msgstr "Semana ISO"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:922
+#: plugins/Calendars/src/ui_calendarsDialog.h:971
 msgctxt "calendar"
 msgid "Bahá’í (arithmetic)"
 msgstr "Bahá’í (aritmético)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:926
-msgctxt "calendar"
-msgid "French Revolution (astronomical)"
-msgstr "Revolución Francesa (astronómico)"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:928
+#: plugins/Calendars/src/ui_calendarsDialog.h:976
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
 msgstr "Viejo lunar hindú"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:932
+#: plugins/Calendars/src/ui_calendarsDialog.h:980
 msgctxt "calendar"
 msgid "New Hindu Lunar"
 msgstr "Nuevo lunar hindú"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:935
+#: plugins/Calendars/src/ui_calendarsDialog.h:983
 msgctxt "calendar"
 msgid "Bahá’í (astronomical)"
 msgstr "Bahá’í (astronómico)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:942
+#: plugins/Calendars/src/ui_calendarsDialog.h:990
+msgctxt "calendar"
+msgid "French Revolution (astronomical)"
+msgstr "Revolución Francesa (astronómico)"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:991
+#: plugins/Calendars/src/ui_calendarsDialog.h:1000
+msgctxt "calendar"
+msgid "ISO Week"
+msgstr "Semana ISO"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:995
 msgid "Override automatic text color"
 msgstr "Anular el color del texto automático"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:944
+#: plugins/Calendars/src/ui_calendarsDialog.h:997
 msgid "Display"
 msgstr "Mostrar"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:945
+#: plugins/Calendars/src/ui_calendarsDialog.h:998
 msgid "Weekday"
 msgstr "Día de semana"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:951
+#: plugins/Calendars/src/ui_calendarsDialog.h:1004
+msgid "Byzantine"
+msgstr "Bizantino"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:1008
 msgctxt "calendar"
 msgid "Negative years here mark years B.C."
 msgstr "Los años negativos aquí marcan los años a.C."
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:956
+#: plugins/Calendars/src/ui_calendarsDialog.h:1010
 msgid "Lunisolar"
 msgstr "Lunisolar"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:958
+#: plugins/Calendars/src/ui_calendarsDialog.h:1012
 msgctxt "calendar"
 msgid "Katun"
 msgstr "Katun"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:959
+#: plugins/Calendars/src/ui_calendarsDialog.h:1013
 msgctxt "calendar"
 msgid "Xihuitl"
 msgstr "Xihuitl"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:960
+#: plugins/Calendars/src/ui_calendarsDialog.h:1014
 msgctxt "calendar"
 msgid "Maya"
 msgstr "Maya"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:961
+#: plugins/Calendars/src/ui_calendarsDialog.h:1015
 msgctxt "calendar"
 msgid "Haab"
 msgstr "Haab"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:962
+#: plugins/Calendars/src/ui_calendarsDialog.h:1016
 msgctxt "calendar"
 msgid "Tun"
 msgstr "Tun"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:963
+#: plugins/Calendars/src/ui_calendarsDialog.h:1017
 msgctxt "calendar"
 msgid "Kin"
 msgstr "Kin"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:964
+#: plugins/Calendars/src/ui_calendarsDialog.h:1018
 msgctxt "calendar"
 msgid "Uinal"
 msgstr "Uinal"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:965
+#: plugins/Calendars/src/ui_calendarsDialog.h:1019
 msgctxt "calendar"
 msgid "Baktun"
 msgstr "Baktun"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:966
+#: plugins/Calendars/src/ui_calendarsDialog.h:1020
 msgctxt "calendar"
 msgid "Long Count"
 msgstr "Cuenta Larga"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:968
-#: plugins/Calendars/src/ui_calendarsDialog.h:971
-#: plugins/Calendars/src/ui_calendarsDialog.h:986
-#: plugins/Calendars/src/ui_calendarsDialog.h:992
+#: plugins/Calendars/src/ui_calendarsDialog.h:1022
+#: plugins/Calendars/src/ui_calendarsDialog.h:1025
+#: plugins/Calendars/src/ui_calendarsDialog.h:1040
+#: plugins/Calendars/src/ui_calendarsDialog.h:1046
 msgid "Step forward"
 msgstr "Adelantar"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:974
-#: plugins/Calendars/src/ui_calendarsDialog.h:977
-#: plugins/Calendars/src/ui_calendarsDialog.h:983
-#: plugins/Calendars/src/ui_calendarsDialog.h:989
+#: plugins/Calendars/src/ui_calendarsDialog.h:1028
+#: plugins/Calendars/src/ui_calendarsDialog.h:1031
+#: plugins/Calendars/src/ui_calendarsDialog.h:1037
+#: plugins/Calendars/src/ui_calendarsDialog.h:1043
 msgid "Step backward"
 msgstr "Retroceder"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:979
+#: plugins/Calendars/src/ui_calendarsDialog.h:1033
 msgctxt "calendar"
 msgid "Aztec"
 msgstr "Mexica"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:980
+#: plugins/Calendars/src/ui_calendarsDialog.h:1034
 msgctxt "calendar"
 msgid "Tzolkin"
 msgstr "Tzolkin"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:981
+#: plugins/Calendars/src/ui_calendarsDialog.h:1035
 msgctxt "calendar"
 msgid "Tonalpohualli"
 msgstr "Tonalpohualli"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:994
+#: plugins/Calendars/src/ui_calendarsDialog.h:1048
 msgctxt "calendar"
 msgid "Mesoamerica"
 msgstr "Mesoamérica"
