@@ -1473,7 +1473,7 @@ void ObsListDialog::sortObsListTreeViewByColumnName(const QString &columnName)
     ObsListDialogSortFilterProxyModel *proxyModel = new ObsListDialogSortFilterProxyModel;
     proxyModel->setSourceModel(itemModel);
     ui->treeView->setModel(proxyModel);
-    if (qobject_cast<ObsListDialogSortFilterProxyModel *>(previousModel))
+    if (previousModel && previousModel != itemModel)
         delete previousModel;
     proxyModel->sort(map.value(columnName), Qt::AscendingOrder);
 }
