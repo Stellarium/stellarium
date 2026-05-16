@@ -155,6 +155,29 @@ still run without or with just minor modifications as described in this section.
 
 The Qt6-based builds (version 1.0 and later) do not offer a way to pause and resume a script as was available in the Qt5-based builds (0.10 to 0.22). 
 
+However, \texttt{core.waitForKeypress()}\newFeature{26.2} can be used to pause a script until a key is pressed, 
+which is particularly useful for planetarium presentations with a Bluetooth or wireless remote clicker. 
+A visual indicator \emph{``Press key to continue...''} can be displayed on screen while the script is paused.
+To advance, press  \key{SPACE} or the advance key on the remote clicker (which triggers \key{PgDn}).
+While the script is paused, you can operate all other hotkeys (except what you have configured as \key{SPACE} action).  
+
+Example usage:
+\begin{script}
+core.goToObject("Orion");
+core.waitForKeypress();
+core.goToObject("Sirius");
+core.waitForKeypress();
+\end{script}
+
+Displaying the \emph{``Press key to continue...''} message is fine for private use, but may not be wanted in a show environment. 
+You can switch it off in the Script Console (F12) or in \file{config.ini}:
+
+\begin{configfile}
+[scripts]
+flag_show_continue_message = false
+\end{configfile}
+
+
 \subsection{The Vec3f problem}
 \label{sec:scripting:differences:Vec3f}
 

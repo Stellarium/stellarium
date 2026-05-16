@@ -145,6 +145,8 @@ void ScriptConsole::createDialogContent()
 	ui->allowStoreAbsoluteCheckBox->setChecked(StelApp::getInstance().getScriptMgr().getFlagAllowWriteAbsolutePaths());
 	connect(ui->allowStoreAbsoluteCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagAllowWriteAbsolutePaths(bool)));
 
+	ui->showWaitMessageCheckBox->setChecked(StelApp::getInstance().getScriptMgr().getFlagShowContinueMessage());
+	connect(ui->showWaitMessageCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagShowContinueMessage(bool)));
 
 	dirty = false;
 }
