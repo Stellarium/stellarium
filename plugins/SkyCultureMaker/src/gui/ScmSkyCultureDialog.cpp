@@ -22,14 +22,16 @@
  */
 
 #include "ScmSkyCultureDialog.hpp"
+#include "NebulaMgr.hpp"
 #include "ScmPolygonInfoTreeItem.hpp"
+#include "StelObjectMgr.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
+#include <QDebug>
 #include <QHeaderView>
 #include <QMap>
 #include <QStyledItemDelegate>
 #include <QTableWidgetItem>
-#include <QDebug>
 
 namespace
 {
@@ -288,16 +290,31 @@ void ScmSkyCultureDialog::createDialogContent()
 	cnRefreshTable();
 	ui->cnVisibleCB->setEnabled(false);
 	ui->cnVisibleLbl->setEnabled(false);
-	ui->cnLoadEntryBtn->setEnabled(false);
 	ui->cnRemoveEntryBtn->setEnabled(false);
-	ui->cnSaveEntryBtn->setEnabled(false);
-	connect(ui->cnObjectTypeCB, QOverload<int>::of(&QComboBox::currentIndexChanged),
-	        this, &ScmSkyCultureDialog::cnUpdateVisibleField);
-	connect(ui->cnAddEntryBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnAddEntry);
-	connect(ui->cnLoadEntryBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnLoadEntry);
+	connect(ui->cnObjectTypeCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+	        &ScmSkyCultureDialog::cnUpdateVisibleField);
 	connect(ui->cnRemoveEntryBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnRemoveEntry);
-	connect(ui->cnSaveEntryBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnSaveEntry);
-	connect(ui->cnEntriesTable, &QTableWidget::itemSelectionChanged, this, &ScmSkyCultureDialog::cnUpdateEntryButtons);
+	connect(ui->cnUseSelectionBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnUseSelectedObject);
+	connect(ui->cnAddNewBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnAddNew);
+	connect(ui->cnSaveChangesBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnSaveChanges);
+	ui->cnSaveChangesBtn->setEnabled(false);
+	// Enable Save Changes when the user edits any form field while a row is selected
+	const auto onFormEdited = [this]()
+	{
+		if (cnEditingRow >= 0) ui->cnSaveChangesBtn->setEnabled(true);
+	};
+	connect(ui->cnObjectTypeCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this, onFormEdited);
+	connect(ui->cnObjectIdLE, &QLineEdit::textChanged, this, onFormEdited);
+	connect(ui->cnEnglishLE, &QLineEdit::textChanged, this, onFormEdited);
+	connect(ui->cnNativeLE, &QLineEdit::textChanged, this, onFormEdited);
+	connect(ui->cnPronounceLE, &QLineEdit::textChanged, this, onFormEdited);
+	connect(ui->cnTransliterationLE, &QLineEdit::textChanged, this, onFormEdited);
+	connect(ui->cnIpaLE, &QLineEdit::textChanged, this, onFormEdited);
+	connect(ui->cnBynameLE, &QLineEdit::textChanged, this, onFormEdited);
+	connect(ui->cnReferencesLE, &QLineEdit::textChanged, this, onFormEdited);
+	connect(ui->cnVisibleCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this, onFormEdited);
+	connect(ui->cnEntriesTable, &QTableWidget::itemSelectionChanged, this,
+	        &ScmSkyCultureDialog::cnOnTableSelectionChanged);
 	cnUpdateVisibleField(0); // initial placeholder text
 }
 
@@ -720,6 +737,7 @@ void ScmSkyCultureDialog::resetDialog()
 		updateRemovePolygonButton();
 
 		cnEntries.clear();
+		cnEditingRow = -1;
 		cnClearForm();
 		cnRefreshTable();
 	}
@@ -956,11 +974,12 @@ void ScmSkyCultureDialog::cnUpdateVisibleField(int typeIndex)
 	// typeIndex: 0=Star, 1=Planet, 2=DSO
 	const bool isPlanet = (typeIndex == 1);
 	ui->cnVisibleCB->setEnabled(isPlanet);
+	if(!isPlanet) ui->cnVisibleCB->setCurrentIndex(0); // disabling the CB should reset the value
 	ui->cnVisibleLbl->setEnabled(isPlanet);
 
 	switch (typeIndex)
 	{
-	case 0: ui->cnObjectIdLE->setPlaceholderText(q_("HIP number (e.g. 1234)")); break;
+	case 0: ui->cnObjectIdLE->setPlaceholderText(q_("HIP or Gaia DR3 ID (e.g. HIP 1234 or Gaia DR3 1234567890)")); break;
 	case 1: ui->cnObjectIdLE->setPlaceholderText(q_("Planet name (e.g. Venus)")); break;
 	case 2: ui->cnObjectIdLE->setPlaceholderText(q_("Catalog designation (e.g. M31)")); break;
 	}
@@ -974,6 +993,9 @@ QString ScmSkyCultureDialog::cnBuildKey() const
 	// removal and re-addition of prefix to ensure correct casing and spacing
 	case 0:
 		if (id.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive)) id = id.mid(3).trimmed();
+		// Normalize Gaia DR3 prefix casing; keep the numeric part as-is
+		if (id.startsWith(QLatin1String("Gaia DR3"), Qt::CaseInsensitive))
+			return QLatin1String("Gaia DR3 ") + id.mid(8).trimmed();
 		return QLatin1String("HIP ") + id;
 	case 1:
 		if (id.startsWith(QLatin1String("NAME"), Qt::CaseInsensitive)) id = id.mid(4).trimmed();
@@ -984,6 +1006,7 @@ QString ScmSkyCultureDialog::cnBuildKey() const
 
 void ScmSkyCultureDialog::cnClearForm()
 {
+	ui->cnObjectTypeCB->setCurrentIndex(0);
 	ui->cnObjectIdLE->clear();
 	ui->cnEnglishLE->clear();
 	ui->cnNativeLE->clear();
@@ -993,7 +1016,7 @@ void ScmSkyCultureDialog::cnClearForm()
 	ui->cnBynameLE->clear();
 	ui->cnReferencesLE->clear();
 	ui->cnVisibleCB->setCurrentIndex(0);
-	ui->cnSaveEntryBtn->setEnabled(false);
+	cnUpdateVisibleField(0);
 }
 
 scm::ScmCulturalName ScmSkyCultureDialog::cnReadForm() const
@@ -1031,6 +1054,20 @@ scm::ScmCulturalName ScmSkyCultureDialog::cnReadForm() const
 
 void ScmSkyCultureDialog::cnPopulateForm(const QString &key, const scm::ScmCulturalName &name)
 {
+	// Determine type from key
+	if (key.startsWith(QLatin1String("HIP "), Qt::CaseInsensitive) ||
+	    key.startsWith(QLatin1String("Gaia DR3 "), Qt::CaseInsensitive))
+	{
+		ui->cnObjectTypeCB->setCurrentIndex(0);
+	}
+	else if (key.startsWith(QLatin1String("NAME "), Qt::CaseInsensitive))
+	{
+		ui->cnObjectTypeCB->setCurrentIndex(1);
+	}
+	else
+	{
+		ui->cnObjectTypeCB->setCurrentIndex(2);
+	}
 	ui->cnObjectIdLE->setText(key);
 	ui->cnEnglishLE->setText(name.translated);
 	ui->cnNativeLE->setText(name.native);
@@ -1083,28 +1120,47 @@ void ScmSkyCultureDialog::cnRefreshTable()
 	}
 }
 
+bool ScmSkyCultureDialog::cnIsDuplicate(const QString &key, StelObject::CulturalNameSpecial special, int excludeRow) const
+{
+	for (int i = 0; i < cnEntries.size(); ++i)
+	{
+		if (i == excludeRow) continue;
+		if (cnEntries[i].first == key && cnEntries[i].second.special == special)
+			return true;
+	}
+	return false;
+}
+
 bool ScmSkyCultureDialog::cnValidateForm(QString &outKey, scm::ScmCulturalName &outName)
 {
 	const QString id = ui->cnObjectIdLE->text().trimmed();
 	if (id.isEmpty())
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
-		                              qc_("Please enter an object identifier.",
-		                                  "Prompt for missing celestial object identifier (e.g. HIP number, "
-		                                  "planet name, DSO catalog designation)"));
+		maker->showUserWarningMessage(
+			dialog, ui->titleBar->title(),
+			qc_("Please enter an object identifier.",
+		            "Prompt for missing celestial object identifier (e.g. HIP number, Gaia DR3 ID, or"
+		            "planet name, DSO catalog designation)"));
 		return false;
 	}
 	if (ui->cnObjectTypeCB->currentIndex() == 0)
 	{
-		QString hipId = id;
-		if (hipId.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive)) hipId = hipId.mid(3).trimmed();
-		bool ok = false;
-		hipId.toInt(&ok);
-		if (!ok)
+		if (!id.startsWith(QLatin1String("Gaia DR3 "), Qt::CaseInsensitive))
 		{
-			maker->showUserWarningMessage(dialog, ui->titleBar->title(),
-			                              q_("The HIP identifier must be a valid integer (e.g. 1234)."));
-			return false;
+			// HIP: strip optional prefix, then validate the numeric part
+			// Component letter suffixes are allowed (e.g. "32349 A" for multiple-star systems)
+			QString numStr = id;
+			if (numStr.startsWith(QLatin1String("HIP"), Qt::CaseInsensitive))
+				numStr = numStr.mid(3).trimmed();
+			bool ok = false;
+			numStr.split(' ').first().toInt(&ok);
+			if (!ok)
+			{
+				maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+				                              q_("The star identifier must be a HIP number (e.g. 1234 or HIP 1234 A) "
+				                                 "or a Gaia DR3 ID (e.g. Gaia DR3 1234567890)."));
+				return false;
+			}
 		}
 	}
 	outKey  = cnBuildKey();
@@ -1118,24 +1174,45 @@ bool ScmSkyCultureDialog::cnValidateForm(QString &outKey, scm::ScmCulturalName &
 	return true;
 }
 
-void ScmSkyCultureDialog::cnAddEntry()
+void ScmSkyCultureDialog::cnAddNew()
 {
 	QString key;
 	scm::ScmCulturalName name;
 	if (!cnValidateForm(key, name)) return;
+
+	if (cnIsDuplicate(key, name.special))
+	{
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		                              q_("An entry for this object already exists."));
+		return;
+	}
+
 	cnEntries.append({key, name});
+	const int newRow = cnEntries.size() - 1;
 	cnRefreshTable();
-	cnClearForm();
+	ui->cnEntriesTable->selectRow(newRow);
 }
 
-void ScmSkyCultureDialog::cnLoadEntry()
+void ScmSkyCultureDialog::cnSaveChanges()
 {
-	const auto selectedRows = ui->cnEntriesTable->selectionModel()->selectedRows();
-	if (selectedRows.isEmpty()) return;
-	const int row = selectedRows.first().row();
-	Q_ASSERT(row >= 0 && row < cnEntries.size());
-	cnPopulateForm(cnEntries[row].first, cnEntries[row].second);
-	ui->cnSaveEntryBtn->setEnabled(true);
+	if (cnEditingRow < 0 || cnEditingRow >= cnEntries.size()) return;
+
+	QString key;
+	scm::ScmCulturalName name;
+	if (!cnValidateForm(key, name)) return;
+
+	if (cnIsDuplicate(key, name.special, cnEditingRow))
+	{
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		                              q_("An entry for this object already exists."));
+		return;
+	}
+
+	cnEntries[cnEditingRow] = {key, name};
+	// capture before cnRefreshTable resets selection
+	const int savedRow = cnEditingRow;
+	cnRefreshTable();
+	ui->cnEntriesTable->selectRow(savedRow);
 }
 
 void ScmSkyCultureDialog::cnRemoveEntry()
@@ -1145,29 +1222,72 @@ void ScmSkyCultureDialog::cnRemoveEntry()
 	const int row = selectedRows.first().row();
 	Q_ASSERT(row >= 0 && row < cnEntries.size());
 	cnEntries.removeAt(row);
+	cnEditingRow = -1;
 	cnRefreshTable();
-	cnClearForm();
-	cnUpdateEntryButtons();
+	// Select the next entry if possible, otherwise clear the form
+	if (!cnEntries.isEmpty())
+	{
+		ui->cnEntriesTable->selectRow(qMin(row, static_cast<int>(cnEntries.size()) - 1));
+	}
+	else
+	{
+		cnClearForm();
+	}
 }
 
-void ScmSkyCultureDialog::cnSaveEntry()
+void ScmSkyCultureDialog::cnUseSelectedObject()
+{
+	StelObjectMgr *objMgr              = GETSTELMODULE(StelObjectMgr);
+	const QList<StelObjectP> &selected = objMgr->getSelectedObject();
+	if (selected.isEmpty())
+	{
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		                              q_("No object is currently selected in Stellarium."));
+		return;
+	}
+
+	cnClearForm();
+	const StelObjectP &obj = selected.first();
+	const QString type     = obj->getType();
+
+	if (type == QLatin1String("Star"))
+	{
+		ui->cnObjectTypeCB->setCurrentIndex(0);
+		ui->cnObjectIdLE->setText(obj->getID());
+	}
+	else if (type == QLatin1String("Planet"))
+	{
+		ui->cnObjectTypeCB->setCurrentIndex(1);
+		ui->cnObjectIdLE->setText(QLatin1String("NAME ") + obj->getEnglishName());
+		ui->cnEnglishLE->setText(obj->getEnglishName());
+	}
+	else
+	{
+		ui->cnObjectTypeCB->setCurrentIndex(2);
+		QString id = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
+		if (id.isEmpty()) id = obj->getEnglishName();
+		ui->cnObjectIdLE->setText(id);
+	}
+}
+
+void ScmSkyCultureDialog::cnOnTableSelectionChanged()
 {
 	const auto selectedRows = ui->cnEntriesTable->selectionModel()->selectedRows();
-	if (selectedRows.isEmpty()) return;
-	const int row = selectedRows.first().row();
-	Q_ASSERT(row >= 0 && row < cnEntries.size());
-	QString key;
-	scm::ScmCulturalName name;
-	if (!cnValidateForm(key, name)) return;
-	cnEntries[row] = {key, name};
-	cnRefreshTable();
-	ui->cnEntriesTable->selectRow(row);
-}
+	const bool hasSelection = !selectedRows.isEmpty();
 
-void ScmSkyCultureDialog::cnUpdateEntryButtons()
-{
-	const bool hasSelection = !ui->cnEntriesTable->selectionModel()->selectedRows().isEmpty();
-	ui->cnLoadEntryBtn->setEnabled(hasSelection);
 	ui->cnRemoveEntryBtn->setEnabled(hasSelection);
-	ui->cnSaveEntryBtn->setEnabled(hasSelection);
+	ui->cnSaveChangesBtn->setEnabled(false);
+
+	if (hasSelection)
+	{
+		const int row = selectedRows.first().row();
+		Q_ASSERT(row >= 0 && row < cnEntries.size());
+		cnEditingRow = -1; // suppress form-change signals during populate
+		cnPopulateForm(cnEntries[row].first, cnEntries[row].second);
+		cnEditingRow = row;
+	}
+	else
+	{
+		cnEditingRow = -1; // no row selected, so edits should not enable Save Changes
+	}
 }

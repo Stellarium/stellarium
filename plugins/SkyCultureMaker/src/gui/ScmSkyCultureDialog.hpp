@@ -102,11 +102,11 @@ private slots:
 	// (uncomment when multiple regions are used)
 	//void checkMutExRegions(const QStringList checkedItems);
 	void cnUpdateVisibleField(int typeIndex);
-	void cnAddEntry();
-	void cnLoadEntry();
+	void cnAddNew();
+	void cnSaveChanges();
 	void cnRemoveEntry();
-	void cnSaveEntry();
-	void cnUpdateEntryButtons();
+	void cnUseSelectedObject();
+	void cnOnTableSelectionChanged();
 
 private:
 	Ui_scmSkyCultureDialog *ui = nullptr;
@@ -238,6 +238,9 @@ private:
 	/// Common names entries stored as (object key, name data) pairs.
 	QList<QPair<QString, scm::ScmCulturalName>> cnEntries;
 
+	/// Index of the entry currently loaded in the form (-1 = new entry).
+	int cnEditingRow = -1;
+
 	/**
 	 * @brief Validates the common names form and builds the key and name if valid.
 	 *        Shows a warning message and returns false on the first validation failure.
@@ -246,6 +249,12 @@ private:
 	 * @return true if all validation checks pass, false otherwise.
 	 */
 	bool cnValidateForm(QString &outKey, scm::ScmCulturalName &outName);
+
+	/**
+	 * @brief Returns true if cnEntries already contains an entry with the given key and special value.
+	 * @param excludeRow Row index to skip during the search (-1 to check all rows).
+	 */
+	bool cnIsDuplicate(const QString &key, StelObject::CulturalNameSpecial special, int excludeRow = -1) const;
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP
