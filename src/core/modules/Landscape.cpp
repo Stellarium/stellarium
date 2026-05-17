@@ -1204,7 +1204,7 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 // Draw the ground, assuming full-screen-quad VAO is bound and the common uniforms are configured
 void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSampler) const
 {
-	if (landFader.getInterstate()==0.f  || !core->getFlagClearSky())
+	if (landFader.getInterstate()==0.f)
 		return;
 
 	if (!groundTex)
@@ -1226,11 +1226,14 @@ void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSa
 	renderProgram->setUniformValue(shaderVars.mapTex, texSampler);
 	renderProgram->setUniformValue(shaderVars.vshift, vshift);
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
-	renderProgram->setUniformValue(shaderVars.brightness,
-				       landscapeBrightness*landscapeTint[0],
-				       landscapeBrightness*landscapeTint[1],
-				       landscapeBrightness*landscapeTint[2],
-				       (1.f-landscapeTransparency)*landFader.getInterstate());
+	if (core->getFlagClearSky())
+		renderProgram->setUniformValue(shaderVars.brightness,
+					       landscapeBrightness*landscapeTint[0],
+					       landscapeBrightness*landscapeTint[1],
+					       landscapeBrightness*landscapeTint[2],
+					       (1.f-landscapeTransparency)*landFader.getInterstate());
+	else
+		renderProgram->setUniformValue(shaderVars.brightness, 0, 0, 0, 1);
 	prj->setUnProjectUniforms(*renderProgram);
 	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
