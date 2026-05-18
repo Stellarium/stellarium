@@ -484,7 +484,10 @@ void ArchaeoLines::update(double deltaTime)
 //! Draw any parts on the screen which are for our module
 void ArchaeoLines::draw(StelCore* core)
 {
-	if (core->getCurrentPlanet()->getEnglishName()!="Earth" || !core->getFlagClearSky())
+	if (!core->getFlagClearSky())
+		return;
+
+	if (core->getCurrentPlanet()->getEnglishName()!="Earth")
 		return;
 
 	equinoxLine->draw(core, lineFader.getInterstate());

@@ -234,7 +234,10 @@ void Exoplanets::init()
 
 void Exoplanets::draw(StelCore* core)
 {
-	if (!flagShowExoplanets || (!core->getFlagClearSky()))
+	if (!core->getFlagClearSky())
+		return;
+
+	if (!flagShowExoplanets)
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);

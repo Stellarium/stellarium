@@ -1124,14 +1124,17 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 	else
         {
 		if (core->getFlagClearSky())
+		{
 			renderProgram->setUniformValue(shaderVars.brightness,
-				                        landscapeBrightness*landscapeTint[0],
-					                landscapeBrightness*landscapeTint[1],
-						        landscapeBrightness*landscapeTint[2],
-							(1.f-landscapeTransparency)*landFader.getInterstate());
+			                               landscapeBrightness*landscapeTint[0],
+			                               landscapeBrightness*landscapeTint[1],
+			                               landscapeBrightness*landscapeTint[2],
+			                               (1.f-landscapeTransparency)*landFader.getInterstate());
+		}
 		else
-			renderProgram->setUniformValue(shaderVars.brightness, 0, 0, 0,
-							(1.f-landscapeTransparency)*landFader.getInterstate());
+		{
+			renderProgram->setUniformValue(shaderVars.brightness, 0, 0, 0, 1);
+		}
         }
 
 	renderProgram->setUniformValue(shaderVars.tanMode, tanMode);
@@ -1227,13 +1230,17 @@ void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSa
 	renderProgram->setUniformValue(shaderVars.vshift, vshift);
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
 	if (core->getFlagClearSky())
+	{
 		renderProgram->setUniformValue(shaderVars.brightness,
-					       landscapeBrightness*landscapeTint[0],
-					       landscapeBrightness*landscapeTint[1],
-					       landscapeBrightness*landscapeTint[2],
-					       (1.f-landscapeTransparency)*landFader.getInterstate());
+		                               landscapeBrightness*landscapeTint[0],
+		                               landscapeBrightness*landscapeTint[1],
+		                               landscapeBrightness*landscapeTint[2],
+		                               (1.f-landscapeTransparency)*landFader.getInterstate());
+	}
 	else
+	{
 		renderProgram->setUniformValue(shaderVars.brightness, 0, 0, 0, 1);
+	}
 	prj->setUnProjectUniforms(*renderProgram);
 	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
@@ -1504,13 +1511,16 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 	if (!onlyPolygon) // The only useful application of the onlyPolygon is a demo which does not fill the polygon
         {
 		if (core->getFlagClearSky())
-			sPainter.setColor(
-				        landscapeBrightness*groundColor[0]*landscapeTint[0],
-					landscapeBrightness*groundColor[1]*landscapeTint[1],
-				        landscapeBrightness*groundColor[2]*landscapeTint[2],
-					(1.f-landscapeTransparency)*landFader.getInterstate());
+		{
+			sPainter.setColor(landscapeBrightness*groundColor[0]*landscapeTint[0],
+			                  landscapeBrightness*groundColor[1]*landscapeTint[1],
+			                  landscapeBrightness*groundColor[2]*landscapeTint[2],
+			                  (1.f-landscapeTransparency)*landFader.getInterstate());
+		}
 		else
-			sPainter.setColor(0, 0, 0, (1.f-landscapeTransparency)*landFader.getInterstate());
+		{
+			sPainter.setColor(0, 0, 0, 1);
+		}
 
 #ifdef GL_MULTISAMPLE
 		const auto gl = sPainter.glFuncs();
@@ -1721,14 +1731,17 @@ void main(void)
 		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
 		if (core->getFlagClearSky())
+		{
 			renderProgram->setUniformValue(shaderVars.brightness,
-				                        landscapeBrightness*landscapeTint[0],
-					                landscapeBrightness*landscapeTint[1],
-						        landscapeBrightness*landscapeTint[2],
-							landFader.getInterstate());
+			                               landscapeBrightness*landscapeTint[0],
+			                               landscapeBrightness*landscapeTint[1],
+			                               landscapeBrightness*landscapeTint[2],
+			                               landFader.getInterstate());
+		}
 		else
-			renderProgram->setUniformValue(shaderVars.brightness, 0, 0, 0,
-							landFader.getInterstate());
+		{
+			renderProgram->setUniformValue(shaderVars.brightness, 0, 0, 0, 1);
+		}
 
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
@@ -2082,10 +2095,10 @@ void main(void)
 		renderProgram->bind();
 		const float brightness=core->getFlagClearSky() ? landscapeBrightness : 0.0f;
 		renderProgram->setUniformValue(shaderVars.bottomCapColor,
-					       brightness*bottomCapColor[0],
-					       brightness*bottomCapColor[1],
-					       brightness*bottomCapColor[2],
-					       bottomCapColor[0] < 0 ? 0 : landFader.getInterstate());
+		                               brightness*bottomCapColor[0],
+		                               brightness*bottomCapColor[1],
+		                               brightness*bottomCapColor[2],
+		                               bottomCapColor[0] < 0 ? 0 : landFader.getInterstate());
 
                 renderProgram->setUniformValue(shaderVars.brightness,
                                                brightness*landscapeTint[0],

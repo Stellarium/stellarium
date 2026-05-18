@@ -390,7 +390,9 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 // Draw the atmosphere using the precalc values stored in tab_sky
 void AtmospherePreetham::draw(StelCore* core)
 {
-	if (StelApp::getInstance().getVisionModeNight() || (!core->getFlagClearSky()))
+	if (!core->getFlagClearSky())
+		return;
+	if (StelApp::getInstance().getVisionModeNight())
 		return;
 
 	const float atm_intensity = fader.getInterstate();

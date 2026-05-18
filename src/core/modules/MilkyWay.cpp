@@ -204,7 +204,10 @@ void MilkyWay::setColor(const Vec3f& c)
 
 void MilkyWay::draw(StelCore* core)
 {
-	if (!fader->getInterstate() || (!core->getFlagClearSky()))
+	if (!core->getFlagClearSky())
+		return;
+
+	if (!fader->getInterstate())
 		return;
 
 	const auto modelView = core->getJ2000ModelViewTransform();

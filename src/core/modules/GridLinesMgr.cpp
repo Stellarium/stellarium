@@ -2155,7 +2155,9 @@ void GridLinesMgr::update(double deltaTime)
 
 void GridLinesMgr::draw(StelCore* core)
 {
-	if (!gridlinesDisplayed  || (!core->getFlagClearSky()))
+	if (!core->getFlagClearSky())
+		return;
+	if (!gridlinesDisplayed)
 		return;
 
 	// Draw elements from the outside in.

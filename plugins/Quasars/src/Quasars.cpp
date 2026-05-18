@@ -234,7 +234,10 @@ void Quasars::init()
 */
 void Quasars::draw(StelCore* core)
 {
-	if (!flagShowQuasars || (!core->getFlagClearSky()))
+	if (!core->getFlagClearSky())
+		return;
+
+	if (!flagShowQuasars)
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
