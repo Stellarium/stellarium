@@ -104,6 +104,9 @@ ORBIT_KEYS = {
     "orbit_SemiMajorAxis",
 }
 
+# Mapping for case-insensitive Lookup
+ORBIT_KEYS_MAP = {k.lower(): k for k in ORBIT_KEYS}
+
 def julian_date_now():
     dt = datetime.now(timezone.utc)
 
@@ -187,10 +190,15 @@ def split_value_line(line):
     return m.group(1), m.group(2), m.group(3), m.group(4)
 
 def format_value(key, val):
-    if key == "orbit_Epoch":
+    # Normalize key for case-insensitive comparison
+    key = key.lower()
+
+    if key == "orbit_epoch":
         return "%.1f" % val
-    if key == "orbit_Eccentricity":
+
+    if key == "orbit_eccentricity":
         return "%.16g" % val
+
     return "%.15g" % val
 
 def read_sections(lines):
@@ -273,17 +281,52 @@ def get_parent(sec, lines):
     return split_value_line(lines[sec["keys"]["parent"]])[2].strip()
 
 
+def replace_key_in_prefix(prefix, canonical_key):
+    # Typical INI format:
+    # "orbit_Ascendingnode = "
+    # Everything before the first "=" is treated as the key.
+    if "=" not in prefix:
+        return prefix
+
+    key_part, sep, rest = prefix.partition("=")
+
+    # Preserve original indentation/whitespace before the key
+    leading = key_part[:len(key_part) - len(key_part.lstrip())]
+
+    return leading + canonical_key + sep + rest
+
+
 def update_orbit_lines(lines, sec, vals):
     keys = sec["keys"]
 
-    for key in ORBIT_KEYS & set(keys):
-        idx = keys[key]
+    print(
+        f" ** Updating orbit lines for {sec['name']} "
+        f"with keys {keys} and values {vals}",
+        file=sys.stderr
+    )
+
+    for key, idx in keys.items():
+        # Perform case-insensitive lookup
+        canonical_key = ORBIT_KEYS_MAP.get(key.lower())
+
+        # Skip keys that are not orbit-related
+        if not canonical_key:
+            continue
+
         parts = split_value_line(lines[idx])
         if not parts:
             continue
 
         prefix, _, _, suffix = parts
-        lines[idx] = prefix + format_value(key, vals[key]) + suffix
+
+        # Replace key name with canonical capitalization
+        prefix = replace_key_in_prefix(prefix, canonical_key)
+
+        lines[idx] = (
+            prefix
+            + format_value(canonical_key, vals[canonical_key])
+            + suffix
+        )
 
 
 def process_section(sec, lines, jd, requested_object):
