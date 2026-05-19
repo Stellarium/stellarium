@@ -609,9 +609,9 @@ float Satellite::getVMagnitude(const StelCore* core) const
 		vmag = 5.0;
 
 	if (!iconicModeFlag && visibility != gSatWrapper::VISIBLE)
-		vmag = (visibility == gSatWrapper::PENUMBRAL ? 10.f : 17.f); // Artificial satellite is invisible and 17 is hypothetical value of magnitude
+		vmag = (visibility == gSatWrapper::PENUMBRAL ? 8.f : 17.f); // Artificial satellite is invisible and 17 is hypothetical value of magnitude
 
-	if (visibility==gSatWrapper::VISIBLE && pSatWrapper)
+	if ((visibility==gSatWrapper::VISIBLE || visibility==gSatWrapper::PENUMBRAL) && pSatWrapper)
 	{
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 		sunReflAngle = -1.;
@@ -746,6 +746,9 @@ float Satellite::getVMagnitude(const StelCore* core) const
 
 			vmag = static_cast<float>(-26.74 - 2.5*std::log10(fdiff));
 		}
+
+		if (visibility==gSatWrapper::PENUMBRAL)
+			vmag += 2.0f;
 	}
 	return vmag;
 }
