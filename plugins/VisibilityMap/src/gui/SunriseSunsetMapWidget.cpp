@@ -1,5 +1,5 @@
 /*
- * Daylight Map plug-in for Stellarium
+ * Visibility Map plug-in for Stellarium
  *
  * Copyright (C) 2026 Atque
  *
