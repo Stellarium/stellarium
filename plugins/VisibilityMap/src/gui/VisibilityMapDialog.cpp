@@ -27,6 +27,7 @@
 #include <QComboBox>
 #include <QListView>
 #include <QDateTime>
+#include <QDoubleSpinBox>
 #include <QSpinBox>
 #include <QEvent>
 #include <QHBoxLayout>
@@ -63,6 +64,7 @@ VisibilityMapDialog::VisibilityMapDialog()
 	, stepCombo(Q_NULLPTR)
 	, isolineBodyCombo(Q_NULLPTR)
 	, isolineModeCombo(Q_NULLPTR)
+	, isolineUtcSpin(Q_NULLPTR)
 	, twilightGridCheckBox(Q_NULLPTR)
 	, twilightAutoSyncCheckBox(Q_NULLPTR)
 	, isolineGridCheckBox(Q_NULLPTR)
@@ -77,6 +79,8 @@ VisibilityMapDialog::VisibilityMapDialog()
 	, daylightAltitudeCombo(Q_NULLPTR)
 	, calculateButton(Q_NULLPTR)
 	, starViewToggleButton(Q_NULLPTR)
+	, starVisLocationButton(Q_NULLPTR)
+	, starVisResetButton(Q_NULLPTR)
 	, currentTimeLabel(Q_NULLPTR)
 	, stepValueLabel(Q_NULLPTR)
 	, core(Q_NULLPTR)
@@ -121,6 +125,8 @@ void VisibilityMapDialog::createDialogContent()
 	mainLayout->setSpacing(6);
 
 	titleBar = new TitleBar(dialog);
+	titleBar->setObjectName(QStringLiteral("titleBar"));
+	titleBar->setTitle(q_("Visibility Map"));
 	mainLayout->addWidget(titleBar);
 	connect(titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 	connect(titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
@@ -257,7 +263,7 @@ void VisibilityMapDialog::createDialogContent()
 	        });
 
 	QPushButton* syncButton = new QPushButton(q_("Sync from Stellarium"), isolineTab);
-	syncButton->setToolTip(q_("Copy current Stellarium time to this map (does not change the planetarium)"));
+	syncButton->setToolTip(q_("Copy current Stellarium time and location timezone to this map"));
 	isolineControls->addWidget(syncButton);
 	connect(syncButton, &QPushButton::clicked, this, &VisibilityMapDialog::syncIsolineFromCore);
 
@@ -265,6 +271,38 @@ void VisibilityMapDialog::createDialogContent()
 	sendButton->setToolTip(q_("Push this map's time back to the planetarium"));
 	isolineControls->addWidget(sendButton);
 	connect(sendButton, &QPushButton::clicked, this, &VisibilityMapDialog::sendIsolineToCore);
+
+	// UTC offset override — lets users explore times in any timezone
+	// without changing their Stellarium observer location.
+	isolineControls->addWidget(new QLabel(q_("UTC:"), isolineTab));
+	isolineUtcSpin = new QDoubleSpinBox(isolineTab);
+	isolineUtcSpin->setRange(-12.0, 14.0);
+	isolineUtcSpin->setSingleStep(0.5);
+	isolineUtcSpin->setDecimals(1);
+	isolineUtcSpin->setSuffix(QStringLiteral("h"));
+	isolineUtcSpin->setValue(0.0);
+	isolineUtcSpin->setToolTip(q_("UTC offset for isoline time labels.\n"
+	                               "Automatically updated when syncing from Stellarium or changing location.\n"
+	                               "Override manually to see times in a different timezone."));
+	isolineControls->addWidget(isolineUtcSpin);
+	connect(isolineUtcSpin, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	        isolineMapWidget, &SunriseSunsetMapWidget::setUtcOffsetHours);
+	// Keep spinbox in sync when auto-update changes the offset
+	connect(isolineMapWidget, &SunriseSunsetMapWidget::utcOffsetChanged,
+	        this, [this](double h) {
+		        isolineUtcSpin->blockSignals(true);
+		        isolineUtcSpin->setValue(h);
+		        isolineUtcSpin->blockSignals(false);
+	        });
+	// Auto-update UTC offset when Stellarium location changes
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		connect(core, &StelCore::locationChanged,
+		        this, [this](const StelLocation&) {
+			        if (isolineMapWidget)
+			        	isolineMapWidget->resetUtcOffsetToLocation();
+		        });
+	}
 
 	isolineGridCheckBox = new QCheckBox(q_("Grid"), isolineTab);
 	isolineGridCheckBox->setToolTip(q_("Show geographic grid, tropics, and polar circles"));
@@ -372,16 +410,26 @@ void VisibilityMapDialog::createDialogContent()
 	        starVisibilityMapWidget, &StarVisibilityMapWidget::setFlagShowCities);
 
 	// Zoom to current location
-	QPushButton* starVisLocationButton = new QPushButton(q_("Current location"), starVisTab);
+	starVisLocationButton = new QPushButton(q_("Current location"), starVisTab);
 	starVisControls->addWidget(starVisLocationButton);
 	connect(starVisLocationButton, &QPushButton::clicked,
 	        this, &VisibilityMapDialog::zoomStarVisibilityToCurrentLocation);
 
 	// Reset / world view
-	QPushButton* starVisResetButton = new QPushButton(q_("World"), starVisTab);
+	starVisResetButton = new QPushButton(q_("World"), starVisTab);
 	starVisControls->addWidget(starVisResetButton);
 	connect(starVisResetButton, &QPushButton::clicked,
 	        this, &VisibilityMapDialog::resetStarVisibilityView);
+
+	starVisControls->addWidget(new QLabel(q_("Min. altitude:"), starVisTab));
+	QSpinBox* goodAltSpin = new QSpinBox(starVisTab);
+	goodAltSpin->setRange(1, 89);
+	goodAltSpin->setValue(5);
+	goodAltSpin->setSuffix(QStringLiteral("°"));
+	goodAltSpin->setToolTip(q_("Minimum altitude for the \"good visibility\" dash-dot line"));
+	starVisControls->addWidget(goodAltSpin);
+	connect(goodAltSpin, QOverload<int>::of(&QSpinBox::valueChanged),
+	        starVisibilityMapWidget, &StarVisibilityMapWidget::setGoodVisibilityAltitude);
 
 	starVisControls->addStretch(1);
 
@@ -753,7 +801,17 @@ void VisibilityMapDialog::syncIsolineFromCore()
 		isolineMapWidget->setBodyMode(isolineBodyCombo->currentData().toInt());
 		isolineMapWidget->setEventMode(isolineModeCombo->currentData().toInt());
 		isolineMapWidget->syncFromCore();
+		// Reset to location timezone — clears any manual override.
+		isolineMapWidget->resetUtcOffsetToLocation();
 		isolineMapWidget->zoomToCurrentLocation();
+	}
+
+	// Update the UTC spinbox to reflect the (now synced) offset.
+	if (isolineUtcSpin && isolineMapWidget)
+	{
+		isolineUtcSpin->blockSignals(true);
+		isolineUtcSpin->setValue(isolineMapWidget->getUtcOffsetHours());
+		isolineUtcSpin->blockSignals(false);
 	}
 
 	updateLabels();
@@ -779,18 +837,18 @@ void VisibilityMapDialog::onTwilightAutoSyncToggled(bool checked)
 
 	if (checked)
 	{
-		// Connect core's dateChanged signal so the map tracks Stellarium in real time.
-		connect(core, &StelCore::dateChanged,
-		        mapWidget, &EarthShadowMapWidget::syncFromCore,
+		// timeSyncOccurred fires on any JD change (time panel, animation,
+		// scripts) — more responsive than dateChanged which only fires on
+		// calendar-date boundaries.
+		connect(core, &StelCore::timeSyncOccurred,
+		        mapWidget, [this](double) { mapWidget->syncFromCore(); },
 		        Qt::UniqueConnection);
-		// Immediately sync to current Stellarium time.
 		mapWidget->syncFromCore();
 	}
 	else
 	{
-		// Disconnect — map keeps its current localJD independently.
-		disconnect(core, &StelCore::dateChanged,
-		           mapWidget, &EarthShadowMapWidget::syncFromCore);
+		disconnect(core, &StelCore::timeSyncOccurred,
+		           mapWidget, nullptr);
 	}
 }
 
@@ -865,6 +923,13 @@ void VisibilityMapDialog::toggleStarView()
 	starViewToggleButton->setText(calendarMode
 	    ? q_("World map")
 	    : q_("Best visibility calendar"));
+
+	// Hide the map navigation buttons in calendar mode — they act on the
+	// world map which is not visible.
+	if (starVisLocationButton) starVisLocationButton->setVisible(!calendarMode);
+	if (starVisResetButton)    starVisResetButton->setVisible(!calendarMode);
+	if (starVisGridCheckBox)   starVisGridCheckBox->setVisible(!calendarMode);
+	if (starVisCitiesCheckBox) starVisCitiesCheckBox->setVisible(!calendarMode);
 }
 
 void VisibilityMapDialog::onStarVisSelectionChanged(bool objectAvailable)

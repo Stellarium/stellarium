@@ -83,6 +83,7 @@ StarVisibilityMapWidget::StarVisibilityMapWidget(QWidget* parent)
 	, core(StelApp::getInstance().getCore())
 	, showGrid(false)
 	, showCities(true)
+	, goodVisibilityAltDeg(5)
 	, centerLongitudeDeg(mapCenterLongitudeDeg)
 	, centerLatitudeDeg(0.)
 	, longitudeSpanDeg(360.)
@@ -90,6 +91,7 @@ StarVisibilityMapWidget::StarVisibilityMapWidget(QWidget* parent)
 	, sceneCacheDirty(true)
 	, pendingObjectAvailable(false)
 	, hasCalculation(false)
+	, solarSystemSelected(false)
 	, m_objectDecDeg(0.)
 	, m_objectRaDeg(0.)
 	, calcYear(2000)
@@ -138,9 +140,13 @@ void StarVisibilityMapWidget::calculateVisibility()
 	const QString objType = obj->getType();
 	if (objType != QStringLiteral("Star") && objType != QStringLiteral("Nebula"))
 	{
+		solarSystemSelected = true;
+		invalidateSceneCache();
+		update();
 		emit solarSystemObjectSelected();
 		return;
 	}
+	solarSystemSelected = false;
 
 	// getEquinoxEquatorialPos() applies precession AND proper motion for the
 	// current JD, giving true-of-date coordinates. This is what we want for
@@ -182,6 +188,15 @@ void StarVisibilityMapWidget::setFlagShowCities(bool show)
 {
 	if (showCities == show) return;
 	showCities = show;
+	invalidateSceneCache();
+	update();
+}
+
+void StarVisibilityMapWidget::setGoodVisibilityAltitude(int altDeg)
+{
+	const int clamped = qBound(1, altDeg, 89);
+	if (goodVisibilityAltDeg == clamped) return;
+	goodVisibilityAltDeg = clamped;
 	invalidateSceneCache();
 	update();
 }
@@ -251,7 +266,7 @@ void StarVisibilityMapWidget::paintEvent(QPaintEvent* event)
 		painter.setBrush(QColor(255, 255, 255, 190));
 		painter.drawRect(captionRect);
 		painter.setPen(Qt::black);
-		painter.setFont(QFont(painter.font().family(), 8, QFont::Bold));
+		painter.setFont(QFont(painter.font().family(), qMax(6, qRound(8.0 * StelApp::getInstance().guiFontSizeRatio())), QFont::Bold));
 		painter.drawText(captionRect, Qt::AlignVCenter | Qt::AlignHCenter, caption);
 		painter.setClipping(false);
 		painter.restore();
@@ -307,14 +322,19 @@ void StarVisibilityMapWidget::wheelEvent(QWheelEvent* event)
 	const QRectF mapRect = rect().adjusted(10, 10, -10, -34);
 	double cursorLon = centerLongitudeDeg;
 	double cursorLat = centerLatitudeDeg;
-	screenToLonLat(event->position(), mapRect, cursorLon, cursorLat);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	const QPointF eventPos = event->position();
+#else
+	const QPointF eventPos = event->posF();
+#endif
+	screenToLonLat(eventPos, mapRect, cursorLon, cursorLat);
 
 	const double factor = event->angleDelta().y() > 0 ? 0.78 : 1.28;
 	longitudeSpanDeg = qBound(20.0, longitudeSpanDeg * factor, 360.0);
 
 	const double latSpan = longitudeSpanDeg * mapRect.height() / mapRect.width();
-	const double xFrac   = (event->position().x() - mapRect.left()) / mapRect.width() - 0.5;
-	const double yFrac   = 0.5 - (event->position().y() - mapRect.top()) / mapRect.height();
+	const double xFrac   = (eventPos.x() - mapRect.left()) / mapRect.width() - 0.5;
+	const double yFrac   = 0.5 - (eventPos.y() - mapRect.top()) / mapRect.height();
 	centerLongitudeDeg   = normalizeLongitudeDeg(cursorLon - xFrac * longitudeSpanDeg);
 	centerLatitudeDeg    = cursorLat - yFrac * latSpan;
 	constrainView();
@@ -566,13 +586,14 @@ void StarVisibilityMapWidget::drawVisibilityLines(QPainter& painter, const QRect
 	const QPen symbolPen(blue, 1.5);
 
 	// ── Compute latitudes ────────────────────────────────────────────────────
-	const double visNorth = validLat( 90.0 - qAbs(dec));   // line 1 north
-	const double visSouth = validLat(-90.0 + qAbs(dec));   // line 1 south
-	const double extNorth = validLat(dec + 85.0);          // line 2 north
-	const double extSouth = validLat(dec - 85.0);          // line 2 south
-	const double zenith   = validLat(dec);                 // line 3
-	const double circN    = validLat(90.0 - dec);          // line 4
-	const double circS    = validLat(-90.0 - dec);         // line 5
+	const double visNorth  = validLat( 90.0 - qAbs(dec));                      // line 1 north
+	const double visSouth  = validLat(-90.0 + qAbs(dec));                      // line 1 south
+	const double goodLimit = 90.0 - static_cast<double>(goodVisibilityAltDeg);
+	const double extNorth  = validLat(dec + goodLimit);                         // line 2 north
+	const double extSouth  = validLat(dec - goodLimit);                         // line 2 south
+	const double zenith    = validLat(dec);                                     // line 3
+	const double circN     = validLat(90.0 - dec);                              // line 4
+	const double circS     = validLat(-90.0 - dec);                             // line 5
 
 	painter.setClipRect(mapRect);
 
@@ -583,9 +604,9 @@ void StarVisibilityMapWidget::drawVisibilityLines(QPainter& painter, const QRect
 	// 1b. Visibility limit south
 	drawLatitudeLine(painter, mapRect, visSouth, solidPen);
 
-	// 2a. Extinction-free north
+	// 2a. Good visibility north (configurable altitude, default 5°)
 	drawLatitudeLine(painter, mapRect, extNorth, dashDotPen);
-	// 2b. Extinction-free south
+	// 2b. Good visibility south
 	drawLatitudeLine(painter, mapRect, extSouth, dashDotPen);
 
 	// 3. Zenith passage (plus symbols)
@@ -621,19 +642,21 @@ void StarVisibilityMapWidget::drawLegend(QPainter& painter, const QRectF& mapRec
 
 	const QVector<Entry> entries = {
 	    {-1,  false, q_("Limit of visibility")},
-	    {-2,  true,  q_("Extinction free (5° above horizon)")},
+	    {-2,  true,  q_("Good visibility (%1° above horizon)").arg(goodVisibilityAltDeg)},
 	    {SymbolPlus,         false, q_("Passes zenith")},
 	    {SymbolTriangleUp,   false, q_("Circumpolar limit (N hemisphere)")},
 	    {SymbolTriangleDown, false, q_("Circumpolar limit (S hemisphere)")},
 	};
 
-	const int lineLen = 30;
-	const int rowH    = 18;
-	const int padding = 6;
+	const double scale   = StelApp::getInstance().guiFontSizeRatio();
+	const int lineLen = qRound(30 * scale);
+	const int rowH    = qRound(18 * scale);
+	const int padding = qRound(6  * scale);
 	const int textOff = lineLen + padding + 4;
+	const int fontSize = qMax(6, qRound(7.0 * scale));
 
 	painter.save();
-	painter.setFont(QFont(painter.font().family(), 7));
+	painter.setFont(QFont(painter.font().family(), fontSize));
 	const QFontMetrics fm(painter.font());
 
 	// Measure widest label
@@ -716,8 +739,13 @@ void StarVisibilityMapWidget::drawNoObjectMessage(QPainter& painter, const QRect
 {
 	painter.save();
 	painter.setPen(QColor(60, 60, 60));
-	painter.drawText(mapRect, Qt::AlignCenter,
-	                 q_("Select an object in Stellarium, then click\n\"Calculate visibility\""));
+	if (solarSystemSelected)
+		painter.drawText(mapRect, Qt::AlignCenter,
+		                 q_("Solar system objects move too fast for a yearly visibility map.\n"
+		                    "Please select a star or deep-sky object."));
+	else
+		painter.drawText(mapRect, Qt::AlignCenter,
+		                 q_("Select a star or deep-sky object in Stellarium,\nthen click \"Calculate\""));
 	painter.restore();
 }
 
@@ -777,7 +805,7 @@ void StarVisibilityMapWidget::drawLocationLabels(QPainter& painter, const QRectF
 	        });
 
 	painter.save();
-	painter.setFont(QFont(painter.font().family(), longitudeSpanDeg < 45.0 ? 8 : 7));
+	painter.setFont(QFont(painter.font().family(), qMax(6, qRound((longitudeSpanDeg < 45.0 ? 8.0 : 7.0) * StelApp::getInstance().guiFontSizeRatio()))));
 	QVector<QRectF> usedRects;
 	int drawn = 0;
 	const int maxLabels = longitudeSpanDeg < 45.0 ? 35 : 20;

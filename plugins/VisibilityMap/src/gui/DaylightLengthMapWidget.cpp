@@ -403,14 +403,19 @@ void DaylightLengthMapWidget::wheelEvent(QWheelEvent* event)
 	const QRectF mapRect = rect().adjusted(10, 10, -10, -34);
 	double cursorLon = centerLongitudeDeg;
 	double cursorLat = centerLatitudeDeg;
-	screenToLonLat(event->position(), mapRect, cursorLon, cursorLat);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	const QPointF eventPos = event->position();
+#else
+	const QPointF eventPos = event->posF();
+#endif
+	screenToLonLat(eventPos, mapRect, cursorLon, cursorLat);
 
 	const double factor = event->angleDelta().y() > 0 ? 0.78 : 1.28;
 	longitudeSpanDeg = qBound(10.0, longitudeSpanDeg * factor, 360.0);
 
 	const double latSpan = longitudeSpanDeg * mapRect.height() / mapRect.width();
-	const double xFrac   = (event->position().x() - mapRect.left()) / mapRect.width() - 0.5;
-	const double yFrac   = 0.5 - (event->position().y() - mapRect.top()) / mapRect.height();
+	const double xFrac   = (eventPos.x() - mapRect.left()) / mapRect.width() - 0.5;
+	const double yFrac   = 0.5 - (eventPos.y() - mapRect.top()) / mapRect.height();
 	centerLongitudeDeg   = normalizeLongitudeDeg(cursorLon - xFrac * longitudeSpanDeg);
 	centerLatitudeDeg    = cursorLat - yFrac * latSpan;
 	constrainView();
@@ -713,7 +718,7 @@ void DaylightLengthMapWidget::drawEdgeLabel(QPainter& painter, const QPointF& po
                                             const QRectF& mapRect, const QString& text) const
 {
 	painter.save();
-	painter.setFont(QFont(painter.font().family(), 7));
+	painter.setFont(QFont(painter.font().family(), qMax(6, qRound(7.0 * StelApp::getInstance().guiFontSizeRatio()))));
 	const QFontMetrics fm(painter.font());
 	const int tw = fm.horizontalAdvance(text) + 6;
 	const int th = fm.height() + 2;
@@ -763,7 +768,7 @@ void DaylightLengthMapWidget::drawPolarAnnotations(QPainter& painter, const QRec
 	};
 
 	painter.save();
-	painter.setFont(QFont(painter.font().family(), 8, QFont::Bold));
+	painter.setFont(QFont(painter.font().family(), qMax(6, qRound(8.0 * StelApp::getInstance().guiFontSizeRatio())), QFont::Bold));
 	painter.setClipRect(mapRect);
 
 	// Fill the band between a pole and its boundary latitude, draw the
@@ -839,7 +844,7 @@ void DaylightLengthMapWidget::drawCities(QPainter& painter, const QRectF& mapRec
 	          });
 
 	painter.save();
-	painter.setFont(QFont(painter.font().family(), longitudeSpanDeg < 45.0 ? 8 : 7));
+	painter.setFont(QFont(painter.font().family(), qMax(6, qRound((longitudeSpanDeg < 45.0 ? 8.0 : 7.0) * StelApp::getInstance().guiFontSizeRatio()))));
 	QVector<QRectF> usedRects;
 	int drawn = 0;
 	const int maxLabels = longitudeSpanDeg < 45.0 ? 35 : 20;
@@ -920,7 +925,7 @@ void DaylightLengthMapWidget::drawLegend(QPainter& painter, const QRectF& mapRec
 	const int padding = 5;
 
 	painter.save();
-	painter.setFont(QFont(painter.font().family(), 7));
+	painter.setFont(QFont(painter.font().family(), qMax(6, qRound(7.0 * StelApp::getInstance().guiFontSizeRatio()))));
 	const QFontMetrics fm(painter.font());
 	int maxW = 0;
 	for (const Entry& e : entries)

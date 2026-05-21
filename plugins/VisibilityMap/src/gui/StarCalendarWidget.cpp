@@ -98,12 +98,19 @@ void StarCalendarWidget::paintEvent(QPaintEvent*)
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 
+	// Scale all metrics with the GUI font size
+	const double scale = StelApp::getInstance().guiFontSizeRatio();
+	const int mLeft   = qRound(kMarginLeft   * scale);
+	const int mRight  = qRound(kMarginRight  * scale);
+	const int mTop    = qRound(kMarginTop    * scale);
+	const int mBottom = qRound(kMarginBottom * scale);
+
 	// Overall background
 	painter.fillRect(rect(), QColor(15, 18, 30));
 
-	const QRectF plotRect(kMarginLeft, kMarginTop,
-	                      width()  - kMarginLeft - kMarginRight,
-	                      height() - kMarginTop  - kMarginBottom);
+	const QRectF plotRect(mLeft, mTop,
+	                      width()  - mLeft - mRight,
+	                      height() - mTop  - mBottom);
 	if (plotRect.width() < 10 || plotRect.height() < 10)
 		return;
 
@@ -277,9 +284,11 @@ QPointF StarCalendarWidget::toPixel(const QRectF& plotRect,
 // ---------------------------------------------------------------------------
 void StarCalendarWidget::drawAxes(QPainter& painter, const QRectF& plotRect) const
 {
+	const double gs = StelApp::getInstance().guiFontSizeRatio();
+	const int fs = qMax(6, qRound(9.0 * gs));
 	painter.save();
 	painter.setPen(QColor(200, 205, 215));
-	painter.setFont(QFont(painter.font().family(), 9));
+	painter.setFont(QFont(painter.font().family(), fs));
 	const QFontMetrics fm(painter.font());
 
 	// ── Left Y-axis: observer latitude ──────────────────────────────────────
@@ -323,7 +332,7 @@ void StarCalendarWidget::drawAxes(QPainter& painter, const QRectF& plotRect) con
 	painter.save();
 	painter.translate(width() - 10, plotRect.center().y());
 	painter.rotate(90);
-	painter.setFont(QFont(painter.font().family(), 9));
+	painter.setFont(QFont(painter.font().family(), fs));
 	painter.drawText(QRectF(-50, -8, 100, 16), Qt::AlignCenter,
 	                 q_("Culmination altitude"));
 	painter.restore();
@@ -360,7 +369,7 @@ void StarCalendarWidget::drawAxes(QPainter& painter, const QRectF& plotRect) con
 	// Year label — use BCE/CE notation for historical/future epochs
 	{
 		const QPointF p = toPixel(plotRect, 355, kLatMin);
-		painter.setFont(QFont(painter.font().family(), 9));
+		painter.setFont(QFont(painter.font().family(), fs));
 		QString yearStr;
 		if (objectYear <= 0)
 			yearStr = QString::number(1 - objectYear) + QStringLiteral(" BCE");
@@ -378,6 +387,8 @@ void StarCalendarWidget::drawAxes(QPainter& painter, const QRectF& plotRect) con
 // ---------------------------------------------------------------------------
 void StarCalendarWidget::drawContourLines(QPainter& painter, const QRectF& plotRect) const
 {
+	const double gs = StelApp::getInstance().guiFontSizeRatio();
+	const int fs = qMax(6, qRound(9.0 * gs));
 	// For each threshold altitude (degrees), trace the iso-contour across the plot.
 	// We sample day by day and connect the latitude at which sunAlt == threshold.
 	// Since sunAlt varies smoothly, a simple linear interpolation between adjacent
@@ -460,7 +471,7 @@ void StarCalendarWidget::drawContourLines(QPainter& painter, const QRectF& plotR
 						lo2 = mid;
 				}
 				const QPointF lp = toPixel(plotRect, labelDay, (lo2 + hi2) / 2.0);
-				painter.setFont(QFont(painter.font().family(), 9, QFont::Bold));
+				painter.setFont(QFont(painter.font().family(), fs, QFont::Bold));
 				painter.setPen(c.color);
 				painter.drawText(lp + QPointF(2, -3), c.label);
 			}
@@ -494,7 +505,8 @@ void StarCalendarWidget::drawObserverLine(QPainter& painter,
 
 	// Label on the left margin
 	painter.setClipping(false);
-	painter.setFont(QFont(painter.font().family(), 9, QFont::Bold));
+	const int obsFs = qMax(6, qRound(9.0 * StelApp::getInstance().guiFontSizeRatio()));
+	painter.setFont(QFont(painter.font().family(), obsFs, QFont::Bold));
 	painter.setPen(QColor(255, 255, 80));
 	const QString lbl = QString::asprintf("%.1f°", obsLat);
 	painter.drawText(QRectF(0, left.y() - 8, kMarginLeft - 2, 16),
@@ -509,7 +521,7 @@ void StarCalendarWidget::drawCaption(QPainter& painter,
                                      const QRectF& plotRect) const
 {
 	painter.save();
-	painter.setFont(QFont(painter.font().family(), 11, QFont::Bold));
+	painter.setFont(QFont(painter.font().family(), qMax(8, qRound(11.0 * StelApp::getInstance().guiFontSizeRatio())), QFont::Bold));
 	painter.setPen(QColor(230, 235, 245));
 
 	// Show BCE/CE suffix for clarity at historical/future epochs

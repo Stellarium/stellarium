@@ -26,6 +26,7 @@ class QPushButton;
 class QStackedWidget;
 class QTabWidget;
 class QSpinBox;
+class QDoubleSpinBox;
 class TitleBar;
 class StelCore;
 
@@ -87,6 +88,7 @@ private:
 	QComboBox*              stepCombo;
 	QComboBox*              isolineBodyCombo;
 	QComboBox*              isolineModeCombo;
+	QDoubleSpinBox*         isolineUtcSpin;    //!< Manual UTC offset override for isolines
 	QCheckBox*              twilightGridCheckBox;
 	QCheckBox*              twilightAutoSyncCheckBox;
 	QCheckBox*              isolineGridCheckBox;
@@ -99,8 +101,10 @@ private:
 	QSpinBox*               daylightMonthSpin;
 	QSpinBox*               daylightDaySpin;
 	QComboBox*              daylightAltitudeCombo;
-	QPushButton*            calculateButton;   //!< "Calculate visibility" — enabled only when an object is selected
-	QPushButton*            starViewToggleButton; //!< Switch between world map and calendar diagram
+	QPushButton*            calculateButton;
+	QPushButton*            starViewToggleButton;
+	QPushButton*            starVisLocationButton;  //!< hidden in calendar mode
+	QPushButton*            starVisResetButton;     //!< hidden in calendar mode
 	QLabel*                 currentTimeLabel;
 	QLabel*                 stepValueLabel;
 	StelCore*               core;

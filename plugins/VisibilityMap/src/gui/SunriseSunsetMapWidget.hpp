@@ -1,5 +1,5 @@
 /*
- * Visibility Map plug-in for Stellarium
+ * Daylight Map plug-in for Stellarium
  *
  * Copyright (C) 2026 Atque
  *
@@ -48,6 +48,9 @@ public:
 
 	explicit SunriseSunsetMapWidget(QWidget* parent = Q_NULLPTR);
 
+	double getUtcOffsetHours() const { return utcOffsetHours; }
+	bool   isManualUtcOffset() const { return manualUtcOffset; }
+
 public slots:
 	void updateFromCore();
 	//! Copy the current Stellarium JD into the widget's local clock.
@@ -56,12 +59,19 @@ public slots:
 	void syncToCore();
 	void setBodyMode(int mode);
 	void setEventMode(int mode);
+	void setUtcOffsetHours(double hours);    //!< Override the UTC offset manually.
+	void resetUtcOffsetToLocation();         //!< Restore UTC offset from current Stellarium location.
 	void setFlagShowGrid(bool show);
 	void setFlagShowCities(bool show);
 	void resetView();
 	void zoomToCurrentLocation();
 	void addDays(int days);
 	void addMonths(int months);
+
+signals:
+	//! Emitted when the UTC offset is updated automatically (e.g. location change).
+	//! The dialog uses this to update the spinbox without triggering a feedback loop.
+	void utcOffsetChanged(double hours);
 
 protected:
 	void paintEvent(QPaintEvent* event) override;
@@ -107,7 +117,7 @@ private:
 	void drawIsolines(QPainter& painter, const QRectF& mapRect);
 	void drawPolarShading(QPainter& painter, const QRectF& mapRect);
 	void drawContour(QPainter& painter, const QVector<QVector<Sample> >& grid, const QRectF& mapRect,
-	                 double level, const QPen& pen, bool labelEdges);
+	                 double yTopPx, double ySpanPx, double level, const QPen& pen, bool labelEdges);
 	void drawEdgeLabel(QPainter& painter, const QPointF& point, const QRectF& mapRect, const QString& text);
 	void rebuildSceneCache(const QRectF& mapRect);
 	void invalidateSceneCache();
@@ -140,6 +150,7 @@ private:
 	double localJD;        //!< Widget's own clock — decoupled from the planetarium.
 	double currentJD;      //!< Alias for localJD used internally (kept for compatibility).
 	double utcOffsetHours;
+	bool   manualUtcOffset;
 	int year;
 	int month;
 	int day;

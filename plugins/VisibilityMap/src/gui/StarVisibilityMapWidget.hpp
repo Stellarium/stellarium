@@ -79,6 +79,7 @@ public slots:
 
 	void setFlagShowGrid(bool show);
 	void setFlagShowCities(bool show);
+	void setGoodVisibilityAltitude(int altDeg);  //!< Set the minimum altitude for the "good visibility" line (default 5°).
 	void resetView();
 	void zoomToCurrentLocation();
 
@@ -122,6 +123,7 @@ private:
 
 	bool   showGrid;
 	bool   showCities;
+	int    goodVisibilityAltDeg;  //!< Minimum altitude for "good visibility" line, degrees (default 5)
 	double centerLongitudeDeg;
 	double centerLatitudeDeg;
 	double longitudeSpanDeg;
@@ -137,6 +139,7 @@ private:
 
 	// ── Calculated / displayed result (set by calculateVisibility) ────────────
 	bool    hasCalculation;         //!< true when lines have been calculated at least once
+	bool    solarSystemSelected;    //!< true when last Calculate attempt was on a solar system object
 	double  m_objectDecDeg;           //!< declination in degrees (J2000 + precession at calc time)
 	double  m_objectRaDeg;            //!< RA in degrees (for caption only)
 	QString objectName;             //!< localised name shown in the caption

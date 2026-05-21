@@ -1,5 +1,5 @@
 /*
- * Visibility Map plug-in for Stellarium
+ * Daylight Map plug-in for Stellarium
  *
  * Copyright (C) 2026 Atque
  *
@@ -327,16 +327,16 @@ void EarthShadowMapWidget::rebuildContourCache(const QSize& cacheSize, const Bod
 	contourCache.fill(Qt::transparent);
 
 	QPainter painter(&contourCache);
-	painter.setRenderHint(QPainter::Antialiasing, false);
+	painter.setRenderHint(QPainter::Antialiasing, true);
 	const QRectF cacheRect(0., 0., cacheSize.width(), cacheSize.height());
 	drawAltitudeContour(painter, cacheRect, sun, astronomicalTwilightAltitudeDeg,
-	                     QPen(QColor(245, 245, 245, 170), 1.0));
+	                     QPen(QColor( 30,  90, 220, 210), 1.0));
 	drawAltitudeContour(painter, cacheRect, sun, nauticalTwilightAltitudeDeg,
-	                     QPen(QColor(245, 245, 245, 185), 1.0));
+	                     QPen(QColor( 80, 150, 255, 210), 1.0));
 	drawAltitudeContour(painter, cacheRect, sun, civilTwilightAltitudeDeg,
-	                     QPen(QColor(245, 245, 245, 200), 1.0));
+	                     QPen(QColor(140, 200, 255, 210), 1.0));
 	drawAltitudeContour(painter, cacheRect, sun, sunriseSunsetAltitudeDeg,
-	                     QPen(QColor(255, 255, 255, 230), 1.2));
+	                     QPen(QColor(255, 220, 120, 230), 1.2));
 }
 
 void EarthShadowMapWidget::drawAltitudeContour(QPainter& painter, const QRectF& mapRect, const BodyPoint& sun,
@@ -401,7 +401,7 @@ void EarthShadowMapWidget::drawGeographicGrid(QPainter& painter, const QRectF& m
 {
 	painter.save();
 	painter.setClipRect(mapRect);
-	painter.setRenderHint(QPainter::Antialiasing);
+	painter.setRenderHint(QPainter::Antialiasing, false);
 
 	const QPen ordinaryPen(QColor(255, 255, 255, 75), 0.8);
 	const QPen equatorPen(QColor(255, 255, 255, 125), 1.2);

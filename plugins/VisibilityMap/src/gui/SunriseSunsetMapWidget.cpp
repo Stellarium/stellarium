@@ -1,5 +1,5 @@
 /*
- * Visibility Map plug-in for Stellarium
+ * Daylight Map plug-in for Stellarium
  *
  * Copyright (C) 2026 Atque
  *
@@ -74,6 +74,7 @@ SunriseSunsetMapWidget::SunriseSunsetMapWidget(QWidget* parent)
 	, localJD(core ? core->getJD() : 0.)
 	, currentJD(localJD)
 	, utcOffsetHours(0.)
+	, manualUtcOffset(false)
 	, year(2000)
 	, month(1)
 	, day(1)
@@ -109,6 +110,28 @@ void SunriseSunsetMapWidget::updateFromCore()
 void SunriseSunsetMapWidget::setBodyMode(int mode)
 {
 	bodyMode = (mode == Moon) ? Moon : Sun;
+	invalidateSceneCache();
+	update();
+}
+
+void SunriseSunsetMapWidget::setUtcOffsetHours(double hours)
+{
+	manualUtcOffset = true;
+	const double clamped = qBound(-12.0, hours, 14.0);
+	if (qFuzzyCompare(utcOffsetHours, clamped)) return;
+	utcOffsetHours = clamped;
+	invalidateSceneCache();
+	update();
+}
+
+void SunriseSunsetMapWidget::resetUtcOffsetToLocation()
+{
+	manualUtcOffset = false;
+	if (!core) return;
+	const double fromCore = core->getUTCOffset(localJD);
+	if (qFuzzyCompare(utcOffsetHours, fromCore)) return;
+	utcOffsetHours = fromCore;
+	emit utcOffsetChanged(utcOffsetHours);
 	invalidateSceneCache();
 	update();
 }
@@ -271,14 +294,19 @@ void SunriseSunsetMapWidget::wheelEvent(QWheelEvent* event)
 	const QRectF mapRect = rect().adjusted(10, 10, -10, -34);
 	double cursorLon = centerLongitudeDeg;
 	double cursorLat = centerLatitudeDeg;
-	screenToLonLat(event->position(), mapRect, cursorLon, cursorLat);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	const QPointF eventPos = event->position();
+#else
+	const QPointF eventPos = event->posF();
+#endif
+	screenToLonLat(eventPos, mapRect, cursorLon, cursorLat);
 
 	const double factor = event->angleDelta().y() > 0 ? 0.78 : 1.28;
 	longitudeSpanDeg = qBound(20.0, longitudeSpanDeg * factor, 360.0);
 
 	const double latitudeSpanDeg = longitudeSpanDeg * mapRect.height() / mapRect.width();
-	const double xFrac = (event->position().x() - mapRect.left()) / mapRect.width() - 0.5;
-	const double yFrac = 0.5 - (event->position().y() - mapRect.top()) / mapRect.height();
+	const double xFrac = (eventPos.x() - mapRect.left()) / mapRect.width() - 0.5;
+	const double yFrac = 0.5 - (eventPos.y() - mapRect.top()) / mapRect.height();
 	centerLongitudeDeg = normalizeLongitudeDeg(cursorLon - xFrac * longitudeSpanDeg);
 	centerLatitudeDeg = cursorLat - yFrac * latitudeSpanDeg;
 	constrainView();
@@ -526,66 +554,54 @@ void SunriseSunsetMapWidget::drawBaseMap(QPainter& painter, const QRectF& mapRec
 
 void SunriseSunsetMapWidget::drawPolarShading(QPainter& painter, const QRectF& mapRect)
 {
-	// Only the Sun has twilight thresholds; for the Moon use standard horizon.
-	// Skip polar shading for Moon mode — polar moonrise/set is complex and
-	// changes rapidly with the lunar month.
-	if (bodyMode == Moon)
-		return;
-
-	// The threshold altitude for the current event mode (radians).
-	const double threshRad = eventThresholdAltitudeRad();
-
-	// Build samples for the target day so we can query the sun's declination
-	// and — crucially — the refraction+semi-diameter corrected horizon altitude.
-	// Using the same horizonAltitudeRad as the isoline solver ensures the
-	// polar day/night boundary aligns exactly with the northernmost/southernmost
-	// isolines.
+	// Build the same samples the isoline solver uses.
 	const QVector<BodySample> samples = buildBodySamples();
 	if (samples.isEmpty())
 		return;
 
+	// Use the same localSampledEventMinutes() that the isoline solver uses.
+	// At polar latitudes this returns NaN.  We determine whether NaN means
+	// "never rises" or "never sets" by checking the body's altitude at upper
+	// culmination (H=0) using the noon sample.
 	const BodySample& noonSample = samples[samples.size() / 2];
-	const double decRad = noonSample.declinationRad;
+	const double threshRad = (bodyMode == Moon) ? 0.0 : eventThresholdAltitudeRad();
 
-	// Total effective altitude threshold = twilight depression + horizon correction.
-	// For Sunrise/Sunset: threshRad == 0, so effectiveThresh == horizonAltitudeRad
-	// (i.e. the refraction+semi-diameter correction, ~−0.833° for the Sun).
-	// For twilight modes: threshRad is the depression angle (negative), and
-	// horizonAltitudeRad is negligible compared to it, but we include it anyway
-	// for strict consistency with the isoline solver.
-	const double effectiveThreshRad = threshRad + noonSample.horizonAltitudeRad;
-
-	// Boundary latitude for polar day (body never sets below threshold):
-	//   sin(φ)·sin(δ) − cos(φ)·cos(δ) = sin(threshold)   at H = 180°
-	//   → sin(φ+δ) = −sin(threshold)  →  φ = −δ − arcsin(−sin(threshold)) − 90°
-	// Simplified: body is always above threshold when φ > 90° − δ − threshold (N)
-	//             or φ < −90° − δ − threshold (S, if δ > 0 → S polar night)
-	// We use a direct numerical check for clarity.
-	auto isAlwaysAboveThreshold = [&](double latDeg) -> bool {
+	auto culminationAltitude = [&](double latDeg) -> double {
 		const double latRad = latDeg * M_PI / 180.0;
-		const double minAlt = qAsin(qBound(-1.0,
-		    qSin(latRad) * qSin(decRad) - qCos(latRad) * qCos(decRad), 1.0));
-		return minAlt >= effectiveThreshRad;
-	};
-	auto isAlwaysBelowThreshold = [&](double latDeg) -> bool {
-		const double latRad = latDeg * M_PI / 180.0;
-		const double maxAlt = qAsin(qBound(-1.0,
-		    qSin(latRad) * qSin(decRad) + qCos(latRad) * qCos(decRad), 1.0));
-		return maxAlt < effectiveThreshRad;
+		const double sinAlt = qSin(latRad) * qSin(noonSample.declinationRad) +
+		                      qCos(latRad) * qCos(noonSample.declinationRad);
+		return qAsin(qBound(-1.0, sinAlt, 1.0))
+		       - noonSample.horizonAltitudeRad - threshRad;
 	};
 
-	// Binary search for the boundary latitude.
-	auto findBoundary = [&](double poleLat, auto condition) -> double {
-		double lo = 0.0, hi = qAbs(poleLat);
-		const double sign = poleLat > 0 ? 1.0 : -1.0;
-		for (int i = 0; i < 50; ++i) {
+	// Check a latitude: +1=never sets, -1=never rises, 0=normal.
+	auto polarType = [&](double latDeg) -> int {
+		const double v = localSampledEventMinutes(latDeg, centerLongitudeDeg, samples);
+		if (!qIsNaN(v))
+			return 0;
+		return culminationAltitude(latDeg) > 0.0 ? +1 : -1;
+	};
+
+	// Binary search for boundary between normal (type 0) and polar region.
+	auto findBoundary = [&](double normalLat, double poleLat) -> double {
+		double lo = qMin(normalLat, poleLat);
+		double hi = qMax(normalLat, poleLat);
+		const bool poleIsHigh = (poleLat > normalLat);
+		for (int i = 0; i < 40; ++i)
+		{
 			const double mid = (lo + hi) / 2.0;
-			if (condition(sign * mid)) hi = mid; else lo = mid;
+			if (polarType(mid) == 0)
+			{
+				if (poleIsHigh) lo = mid; else hi = mid;
+			}
+			else
+			{
+				if (poleIsHigh) hi = mid; else lo = mid;
+			}
 		}
-		return sign * (lo + hi) / 2.0;
+		return (lo + hi) / 2.0;
 	};
 
-	// Helper: fill a horizontal band and draw a boundary line + label.
 	auto shadeBand = [&](double poleLat, double boundaryLat,
 	                     const QColor& fill, const QColor& line,
 	                     const QString& label)
@@ -606,38 +622,37 @@ void SunriseSunsetMapWidget::drawPolarShading(QPainter& painter, const QRectF& m
 		const double labelY = (yTop + yBottom) / 2.0;
 		painter.save();
 		painter.setPen(line);
-		painter.setFont(QFont(painter.font().family(), 8, QFont::Bold));
+		painter.setFont(QFont(painter.font().family(),
+		                      qMax(6, qRound(8.0 * StelApp::getInstance().guiFontSizeRatio())),
+		                      QFont::Bold));
 		painter.drawText(QRectF(mapRect.left(), labelY - 10, mapRect.width(), 20),
 		                 Qt::AlignHCenter | Qt::AlignVCenter, label);
 		painter.restore();
 	};
 
+	const bool isMoon = (bodyMode == Moon);
+	const QString aboveLabel = isMoon ? q_("No moonset")  : q_("Polar day");
+	const QString belowLabel = isMoon ? q_("No moonrise") : q_("Polar night");
+	const QColor aboveFill = isMoon ? QColor(200, 200, 220,  70) : QColor(255, 200,  50,  60);
+	const QColor aboveLine = isMoon ? QColor(180, 180, 220, 200) : QColor(220, 140,   0, 200);
+	const QColor belowFill = isMoon ? QColor( 80,  80, 120,  80) : QColor( 20,  30, 100,  80);
+	const QColor belowLine = isMoon ? QColor(140, 140, 200, 200) : QColor( 60,  80, 200, 200);
+
 	painter.save();
 	painter.setClipRect(mapRect);
 
-	// Northern polar day
-	if (isAlwaysAboveThreshold(89.9))
-		shadeBand(90.0, findBoundary(90.0, isAlwaysAboveThreshold),
-		          QColor(255, 200, 50,  60), QColor(220, 140, 0, 200),
-		          q_("Polar day"));
+	const int northType = polarType(89.9);
+	const int southType = polarType(-89.9);
 
-	// Southern polar day
-	if (isAlwaysAboveThreshold(-89.9))
-		shadeBand(-90.0, findBoundary(-90.0, isAlwaysAboveThreshold),
-		          QColor(255, 200, 50,  60), QColor(220, 140, 0, 200),
-		          q_("Polar day"));
+	if (northType == +1)
+		shadeBand(90.0,  findBoundary(0.0,  89.9), aboveFill, aboveLine, aboveLabel);
+	else if (northType == -1)
+		shadeBand(90.0,  findBoundary(0.0,  89.9), belowFill, belowLine, belowLabel);
 
-	// Northern polar night
-	if (isAlwaysBelowThreshold(89.9))
-		shadeBand(90.0, findBoundary(90.0, isAlwaysBelowThreshold),
-		          QColor( 20,  30, 100, 80), QColor(60, 80, 200, 200),
-		          q_("Polar night"));
-
-	// Southern polar night
-	if (isAlwaysBelowThreshold(-89.9))
-		shadeBand(-90.0, findBoundary(-90.0, isAlwaysBelowThreshold),
-		          QColor( 20,  30, 100, 80), QColor(60, 80, 200, 200),
-		          q_("Polar night"));
+	if (southType == +1)
+		shadeBand(-90.0, findBoundary(0.0, -89.9), aboveFill, aboveLine, aboveLabel);
+	else if (southType == -1)
+		shadeBand(-90.0, findBoundary(0.0, -89.9), belowFill, belowLine, belowLabel);
 
 	painter.setClipping(false);
 	painter.restore();
@@ -651,13 +666,16 @@ void SunriseSunsetMapWidget::drawIsolines(QPainter& painter, const QRectF& mapRe
 	                                  : qBound(50, qRound(mapRect.height() / 5.0), 140);
 	const QVector<BodySample> bodySamples = buildBodySamples();
 	const double latitudeSpanDeg = longitudeSpanDeg * mapRect.height() / mapRect.width();
+	const double gridLatTop    = qMin( 90.0, centerLatitudeDeg + latitudeSpanDeg / 2.0);
+	const double gridLatBottom = qMax(-90.0, centerLatitudeDeg - latitudeSpanDeg / 2.0);
+	const double gridLatSpan   = gridLatTop - gridLatBottom;
 	QVector<QVector<Sample> > grid(rows + 1, QVector<Sample>(columns + 1));
 
 	double minValue = 1.0e9;
 	double maxValue = -1.0e9;
 	for (int y = 0; y <= rows; ++y)
 	{
-		const double lat = centerLatitudeDeg + latitudeSpanDeg / 2.0 - static_cast<double>(y) * latitudeSpanDeg / rows;
+		const double lat = gridLatTop - static_cast<double>(y) * gridLatSpan / rows;
 		for (int x = 0; x <= columns; ++x)
 		{
 			const double lon = normalizeLongitudeDeg(centerLongitudeDeg - longitudeSpanDeg / 2.0 +
@@ -687,6 +705,12 @@ void SunriseSunsetMapWidget::drawIsolines(QPainter& painter, const QRectF& mapRe
 	const double start = qFloor(minValue / minorStep) * minorStep;
 	const double stop = qCeil(maxValue / minorStep) * minorStep;
 
+	const double yTopPx  = mapRect.top() +
+	    (latitudeSpanDeg > 0.0 ? (centerLatitudeDeg + latitudeSpanDeg / 2.0 - gridLatTop)
+	                              / latitudeSpanDeg : 0.0) * mapRect.height();
+	const double ySpanPx = (latitudeSpanDeg > 0.0 ? gridLatSpan / latitudeSpanDeg : 1.0)
+	                        * mapRect.height();
+
 	for (double level = start; level <= stop; level += minorStep)
 	{
 		if (level > 0.0 && qAbs(std::fmod(level, minutesPerDay)) < 1.0e-6)
@@ -695,12 +719,13 @@ void SunriseSunsetMapWidget::drawIsolines(QPainter& painter, const QRectF& mapRe
 		const bool major = qFuzzyIsNull(std::fmod(qAbs(level), majorStep));
 		const QPen pen(major ? QColor(0, 0, 0, 220) : QColor(0, 0, 0, 115),
 		               major ? 2.2 : 0.8);
-		drawContour(painter, grid, mapRect, level, pen, major);
+		drawContour(painter, grid, mapRect, yTopPx, ySpanPx, level, pen, major);
 	}
 }
 
 void SunriseSunsetMapWidget::drawContour(QPainter& painter, const QVector<QVector<Sample> >& grid,
-                                         const QRectF& mapRect, double level, const QPen& pen, bool labelEdges)
+                                         const QRectF& mapRect, double yTopPx, double ySpanPx,
+                                         double level, const QPen& pen, bool labelEdges)
 {
 	const int rows = grid.size() - 1;
 	const int columns = grid[0].size() - 1;
@@ -708,7 +733,7 @@ void SunriseSunsetMapWidget::drawContour(QPainter& painter, const QVector<QVecto
 
 	auto pointAt = [&](int ix, int iy) {
 		return QPointF(mapRect.left() + static_cast<double>(ix) * mapRect.width() / columns,
-		               mapRect.top() + static_cast<double>(iy) * mapRect.height() / rows);
+		               yTopPx + static_cast<double>(iy) * ySpanPx / rows);
 	};
 
 	int labelsDrawn = 0;
@@ -781,11 +806,17 @@ void SunriseSunsetMapWidget::drawContour(QPainter& painter, const QVector<QVecto
 
 void SunriseSunsetMapWidget::drawEdgeLabel(QPainter& painter, const QPointF& point, const QRectF& mapRect, const QString& text)
 {
+	const double scale = StelApp::getInstance().guiFontSizeRatio();
+	const double lw = 44.0 * scale;
+	const double lh = 18.0 * scale;
+	const int    fs = qMax(6, qRound(8.0 * scale));
+
 	painter.save();
+	painter.setFont(QFont(painter.font().family(), fs));
 	painter.setPen(Qt::NoPen);
 	painter.setBrush(QColor(255, 255, 255, 210));
 
-	QRectF labelRect(point.x() - 20., point.y() - 9., 40., 18.);
+	QRectF labelRect(point.x() - lw / 2., point.y() - lh / 2., lw, lh);
 	if (qAbs(point.x() - mapRect.left()) < 1.5)
 		labelRect.moveLeft(mapRect.left() + 3.);
 	else if (qAbs(point.x() - mapRect.right()) < 1.5)
@@ -795,7 +826,7 @@ void SunriseSunsetMapWidget::drawEdgeLabel(QPainter& painter, const QPointF& poi
 	else if (qAbs(point.y() - mapRect.bottom()) < 1.5)
 		labelRect.moveBottom(mapRect.bottom() - 3.);
 
-	painter.drawRect(labelRect);
+	painter.drawRoundedRect(labelRect, 2., 2.);
 	painter.setPen(Qt::black);
 	painter.drawText(labelRect, Qt::AlignCenter, text);
 	painter.restore();
@@ -869,7 +900,9 @@ void SunriseSunsetMapWidget::drawLocationLabels(QPainter& painter, const QRectF&
 	});
 
 	painter.save();
-	painter.setFont(QFont(painter.font().family(), longitudeSpanDeg < 45.0 ? 8 : 7));
+	const double gsLocale = StelApp::getInstance().guiFontSizeRatio();
+	painter.setFont(QFont(painter.font().family(),
+	                      qMax(6, qRound((longitudeSpanDeg < 45.0 ? 8.0 : 7.0) * gsLocale))));
 	QVector<QRectF> usedRects;
 	int drawn = 0;
 	const int maxLabels = longitudeSpanDeg < 45.0 ? 35 : 20;
@@ -915,7 +948,7 @@ void SunriseSunsetMapWidget::drawGeographicGrid(QPainter& painter, const QRectF&
 {
 	painter.save();
 	painter.setClipRect(mapRect);
-	painter.setRenderHint(QPainter::Antialiasing);
+	painter.setRenderHint(QPainter::Antialiasing, false);
 
 	const QPen ordinaryPen(QColor(0, 0, 0, 70), 0.8);
 	const QPen equatorPen(QColor(0, 0, 0, 115), 1.1);
@@ -985,7 +1018,10 @@ void SunriseSunsetMapWidget::updateDateCache()
 		return;
 
 	currentJD = localJD;
-	utcOffsetHours = core->getUTCOffset(currentJD);
+	// Only pull the UTC offset from core when the user has not manually
+	// overridden it via the spinbox.
+	if (!manualUtcOffset)
+		utcOffsetHours = core->getUTCOffset(currentJD);
 	int hour = 0;
 	int minute = 0;
 	int second = 0;
