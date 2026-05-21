@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-15 20:22+0700\n"
+"POT-Creation-Date: 2026-05-21 22:13+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2026\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -1287,7 +1287,7 @@ msgstr "Réduire la pollution lumineuse"
 msgid "Cyclic change in light pollution"
 msgstr "Changement cyclique de la pollution lumineuse"
 
-#: src/core/modules/LandscapeMgr.cpp:1529 src/scripting/StelScriptMgr.cpp:646
+#: src/core/modules/LandscapeMgr.cpp:1529 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:629
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:257
@@ -6263,7 +6263,7 @@ msgstr ""
 
 #: src/core/StelSkyCultureMgr.cpp:526 src/core/StelSkyCultureMgr.cpp:533
 #: src/core/StelSkyCultureMgr.cpp:540 src/gui/ConfigurationDialog.cpp:1595
-#: src/scripting/StelScriptMgr.cpp:651
+#: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:628
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
@@ -7085,7 +7085,7 @@ msgid "Contact"
 msgstr "Contact"
 
 #: src/gui/ConfigurationDialog.cpp:1594 src/gui/HelpDialog.cpp:537
-#: src/scripting/StelScriptMgr.cpp:656
+#: src/scripting/StelScriptMgr.cpp:657
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
@@ -7605,19 +7605,19 @@ msgstr ""
 "Tous ces raccourcis claviers sont disponibles localement lorsqu'une fenêtre "
 "ou un onglet spécifique est ouvert."
 
-#: src/gui/HelpDialog.cpp:423 src/ui_scriptConsole.h:345
+#: src/gui/HelpDialog.cpp:423 src/ui_scriptConsole.h:351
 msgid "Script console"
 msgstr "Console de script"
 
-#: src/gui/HelpDialog.cpp:424 src/ui_scriptConsole.h:347
+#: src/gui/HelpDialog.cpp:424 src/ui_scriptConsole.h:353
 msgid "Load script from file"
 msgstr "Charger un script depuis un fichier"
 
-#: src/gui/HelpDialog.cpp:426 src/ui_scriptConsole.h:351
+#: src/gui/HelpDialog.cpp:426 src/ui_scriptConsole.h:357
 msgid "Save script to file"
 msgstr "Exporter le script"
 
-#: src/gui/HelpDialog.cpp:428 src/ui_scriptConsole.h:369
+#: src/gui/HelpDialog.cpp:428 src/ui_scriptConsole.h:375
 msgid "Run script"
 msgstr "Lancer un script"
 
@@ -7851,7 +7851,7 @@ msgstr ""
 "Vous pouvez également {télécharger le fichier BibTeX} pour créer un autre "
 "format de citation."
 
-#: src/gui/StelGui.cpp:249 src/scripting/StelScriptMgr.cpp:520
+#: src/gui/StelGui.cpp:249 src/scripting/StelScriptMgr.cpp:521
 #: src/ui_configurationDialog.h:2361
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:528
 msgid "Scripts"
@@ -8271,11 +8271,11 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Magnitude visuelle en fonction de l'angle de phase et de l'albédo."
 
-#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:972
+#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:975
 msgid "Get location from GPS or system service"
 msgstr "Obtenir la position avec un GPS ou un service système"
 
-#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:974
+#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:977
 #: src/ui_locationDialogGui.h:432
 msgid "Get location from GPS"
 msgstr "Obtenir la position avec un GPS"
@@ -8303,23 +8303,23 @@ msgstr ""
 "horaire). Après usage, désactiver cette fonction pour permettre aux autres "
 "programmes d'accéder à l'appareil GPS."
 
-#: src/gui/LocationDialog.cpp:916
+#: src/gui/LocationDialog.cpp:919
 msgid "GPS listening..."
 msgstr "Écoute GPS..."
 
-#: src/gui/LocationDialog.cpp:923
+#: src/gui/LocationDialog.cpp:926
 msgid "GPS disconnecting..."
 msgstr "Déconnexion GPS..."
 
-#: src/gui/LocationDialog.cpp:945
+#: src/gui/LocationDialog.cpp:948
 msgid "2D location fix"
 msgstr "Correction de position 2D"
 
-#: src/gui/LocationDialog.cpp:950
+#: src/gui/LocationDialog.cpp:953
 msgid "3D location fix"
 msgstr "Correction de position 3D"
 
-#: src/gui/LocationDialog.cpp:959
+#: src/gui/LocationDialog.cpp:962
 msgid "GPS:FAILED"
 msgstr "GPS:FAILED"
 
@@ -8456,52 +8456,52 @@ msgctxt "command"
 msgid "clear map: supergalactic"
 msgstr "initialiser la carte : super-galactique"
 
-#: src/gui/ScriptConsole.cpp:184 src/gui/ScriptConsole.cpp:259
+#: src/gui/ScriptConsole.cpp:186 src/gui/ScriptConsole.cpp:261
 msgid "Caution!"
 msgstr "Attention !"
 
-#: src/gui/ScriptConsole.cpp:184
+#: src/gui/ScriptConsole.cpp:186
 msgid "Are you sure you want to load script without saving changes?"
 msgstr ""
 "Voulez-vous vraiment charger le script sans enregistrer les modifications ?"
 
-#: src/gui/ScriptConsole.cpp:198
+#: src/gui/ScriptConsole.cpp:200
 msgid "Stellarium Script Files"
 msgstr "Fichiers de scripts Stellarium"
 
-#: src/gui/ScriptConsole.cpp:201
+#: src/gui/ScriptConsole.cpp:203
 msgid "Load Script"
 msgstr "Charger le script"
 
-#: src/gui/ScriptConsole.cpp:222 src/gui/ScriptConsole.cpp:421
+#: src/gui/ScriptConsole.cpp:224 src/gui/ScriptConsole.cpp:423
 msgid "Stellarium Script"
 msgstr "Script Stellarium"
 
-#: src/gui/ScriptConsole.cpp:227
+#: src/gui/ScriptConsole.cpp:229
 msgid "Save Script"
 msgstr "Enregistrer le script"
 
-#: src/gui/ScriptConsole.cpp:259
+#: src/gui/ScriptConsole.cpp:261
 msgid "Are you sure you want to clear script?"
 msgstr "Voulez-vous vraiment effacer le script ?"
 
-#: src/gui/ScriptConsole.cpp:369
+#: src/gui/ScriptConsole.cpp:371
 msgid "Select Script Include Directory"
 msgstr "Sélectionner le dossier des scripts"
 
 #. TRANSLATORS: The first letter of word "Row"
-#: src/gui/ScriptConsole.cpp:403
+#: src/gui/ScriptConsole.cpp:405
 msgctxt "text cursor"
 msgid "R"
 msgstr "R"
 
 #. TRANSLATORS: The first letter of word "Column"
-#: src/gui/ScriptConsole.cpp:405
+#: src/gui/ScriptConsole.cpp:407
 msgctxt "text cursor"
 msgid "C"
 msgstr "C"
 
-#: src/gui/ScriptConsole.cpp:423
+#: src/gui/ScriptConsole.cpp:425
 msgid "Include File"
 msgstr "Inclure fichier"
 
@@ -10863,9 +10863,13 @@ msgstr ""
 "Classe Bortle %1 : %2\n"
 "Magnitude limite à l'œil nu : %3"
 
-#: src/scripting/StelScriptMgr.cpp:661
+#: src/scripting/StelScriptMgr.cpp:662
 msgid "Shortcut"
 msgstr "Raccourci clavier"
+
+#: src/scripting/StelMainScriptAPI.hpp:1017
+msgid "Press key to continue..."
+msgstr "Presser une touche pour continuer…"
 
 #: src/StelMainView.cpp:974
 msgid "Save screenshot"
@@ -15072,7 +15076,7 @@ msgstr "Aide"
 msgid "About"
 msgstr "À propos"
 
-#: src/ui_helpDialogGui.h:244 src/ui_scriptConsole.h:377
+#: src/ui_helpDialogGui.h:244 src/ui_scriptConsole.h:383
 msgid "Log"
 msgstr "Journal"
 
@@ -15855,7 +15859,7 @@ msgstr "Seulement pour la hauteur du Soleil"
 msgid "Minimum Solar altitude"
 msgstr "Hauteur solaire minimale"
 
-#: src/ui_viewDialog.h:4446 src/ui_scriptConsole.h:396
+#: src/ui_viewDialog.h:4446 src/ui_scriptConsole.h:403
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 msgid "..."
 msgstr "…"
@@ -17253,7 +17257,7 @@ msgstr "Rétablir les réglages par défaut de Stellarium"
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:400
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:709
-#: plugins/Calendars/src/ui_calendarsDialog.h:996
+#: plugins/Calendars/src/ui_calendarsDialog.h:1000
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:785
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:538
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1274
@@ -18057,7 +18061,7 @@ msgstr "Vitesse :"
 msgid "Volume:"
 msgstr "Volume :"
 
-#: src/ui_configurationDialog.h:2854 src/ui_scriptConsole.h:380
+#: src/ui_configurationDialog.h:2854 src/ui_scriptConsole.h:386
 msgid "Close window when script runs"
 msgstr "Fermer la fenêtre au lancement des scripts"
 
@@ -18276,39 +18280,39 @@ msgstr "Ouvrir le site web JUPOS"
 msgid "View recent GRS measurements"
 msgstr "Afficher les mesures récentes GRS"
 
-#: src/ui_scriptConsole.h:355
+#: src/ui_scriptConsole.h:361
 msgid "Clear"
 msgstr "Effacer"
 
-#: src/ui_scriptConsole.h:359
+#: src/ui_scriptConsole.h:365
 msgid "Pre-process script using SSC preprocessor"
 msgstr "Pré-traiter le script à l'aide du préprocesseur SSC"
 
-#: src/ui_scriptConsole.h:364
+#: src/ui_scriptConsole.h:370
 msgid "Execute:"
 msgstr "Lancer :"
 
-#: src/ui_scriptConsole.h:373
+#: src/ui_scriptConsole.h:379
 msgid "Stop script"
 msgstr "Stopper le script"
 
-#: src/ui_scriptConsole.h:376
+#: src/ui_scriptConsole.h:382
 msgid "Script"
 msgstr "Script"
 
-#: src/ui_scriptConsole.h:378
+#: src/ui_scriptConsole.h:384
 msgid "Output"
 msgstr "Sortie"
 
-#: src/ui_scriptConsole.h:379
+#: src/ui_scriptConsole.h:385
 msgid "Load scripts from the User Directory by default"
 msgstr "Charger par défaut les scripts depuis le dossier utilisateur"
 
-#: src/ui_scriptConsole.h:381
+#: src/ui_scriptConsole.h:387
 msgid "Clear output before script runs"
 msgstr "Effacer la sortie avant de lancer le script"
 
-#: src/ui_scriptConsole.h:383
+#: src/ui_scriptConsole.h:389
 msgid ""
 "If disabled, all screenshots go to the directory set in the Configuration "
 "dialog."
@@ -18316,13 +18320,13 @@ msgstr ""
 "Si ce réglage est désactivé, toutes les captures d'écran sont enregistrées "
 "dans le dossier spécifié dans la fenêtre de configuration."
 
-#: src/ui_scriptConsole.h:385
+#: src/ui_scriptConsole.h:391
 msgid "Allow scripts to store screenshots to other directories"
 msgstr ""
 "Autoriser les scripts à enregistrer des captures d'écran dans d'autres "
 "dossiers"
 
-#: src/ui_scriptConsole.h:387
+#: src/ui_scriptConsole.h:393
 msgid ""
 "If disabled, all output goes to the user data directory. Enabling this bears"
 " some risks!"
@@ -18331,12 +18335,16 @@ msgstr ""
 "dossier de données utilisateur. L'activation de ce réglage comporte certains"
 " risques."
 
-#: src/ui_scriptConsole.h:389
+#: src/ui_scriptConsole.h:395
 msgid "Allow scripts to store output to arbitrary directories"
 msgstr ""
 "Autoriser les scripts à enregistrer leur sortie dans d'autres dossiers"
 
-#: src/ui_scriptConsole.h:390
+#: src/ui_scriptConsole.h:396
+msgid "Show screen message in WaitForKey() calls"
+msgstr "Afficher le message d'écran dans les appels de WaitForKey()"
+
+#: src/ui_scriptConsole.h:397
 #: plugins/Satellites/src/ui_satellitesDialog.h:1266
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:207
 #: plugins/NavStars/src/ui_navStarsWindow.h:495
@@ -18350,15 +18358,15 @@ msgstr ""
 msgid "Settings"
 msgstr "Réglages"
 
-#: src/ui_scriptConsole.h:392
+#: src/ui_scriptConsole.h:399
 msgid "Cursor position"
 msgstr "Position du pointeur"
 
-#: src/ui_scriptConsole.h:394
+#: src/ui_scriptConsole.h:401
 msgid "R:0 C:0"
 msgstr "R:0 C:0"
 
-#: src/ui_scriptConsole.h:395
+#: src/ui_scriptConsole.h:402
 msgid "Include dir:"
 msgstr "Inclure le dossier :"
 
@@ -18577,13 +18585,13 @@ msgstr "De :"
 
 #: src/ui_astroCalcDialog.h:2416 src/ui_astroCalcDialog.h:2444
 #: src/ui_astroCalcDialog.h:2464 src/ui_astroCalcExtraEphemerisDialog.h:267
-#: plugins/Calendars/src/ui_calendarsDialog.h:999
+#: plugins/Calendars/src/ui_calendarsDialog.h:1003
 msgid "Month"
 msgstr "Mois"
 
 #: src/ui_astroCalcDialog.h:2419 src/ui_astroCalcExtraEphemerisDialog.h:268
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:98
-#: plugins/Calendars/src/ui_calendarsDialog.h:1005
+#: plugins/Calendars/src/ui_calendarsDialog.h:1009
 msgid "Day"
 msgstr "Jour"
 
@@ -19001,7 +19009,7 @@ msgstr "Format de date"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:266
 #: src/ui_astroCalcAlmanacWidget.h:1028
-#: plugins/Calendars/src/ui_calendarsDialog.h:1002
+#: plugins/Calendars/src/ui_calendarsDialog.h:1006
 msgid "Year"
 msgstr "Année"
 
@@ -20144,7 +20152,7 @@ msgstr "Permettre l'ancrage à l'objet sélectionné"
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:259
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:781
-#: plugins/Calendars/src/ui_calendarsDialog.h:1049
+#: plugins/Calendars/src/ui_calendarsDialog.h:1053
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:787
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:545
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1277
@@ -22319,42 +22327,42 @@ msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:762
+#: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
 msgid "operational"
 msgstr "Opérationnel"
 
-#: plugins/Satellites/src/Satellite.cpp:763
+#: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "non-operational"
 msgstr "Non opérationnel"
 
-#: plugins/Satellites/src/Satellite.cpp:764
+#: plugins/Satellites/src/Satellite.cpp:767
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "Partiellement opérationnel"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:768
 msgctxt "operational status"
 msgid "standby"
 msgstr "En attente"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:769
 msgctxt "operational status"
 msgid "spare"
 msgstr "Intermittent"
 
-#: plugins/Satellites/src/Satellite.cpp:767
+#: plugins/Satellites/src/Satellite.cpp:770
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "Mission prolongée"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:771
 msgctxt "operational status"
 msgid "decayed"
 msgstr "Retombé"
 
-#: plugins/Satellites/src/Satellite.cpp:770
+#: plugins/Satellites/src/Satellite.cpp:773
 msgctxt "operational status"
 msgid "unknown"
 msgstr "Inconnu"
@@ -26660,8 +26668,8 @@ msgid "Annual parallax"
 msgstr "Parallaxe annuelle"
 
 #: plugins/Pulsars/src/Pulsar.cpp:262
-msgid "Distance based on electron density model"
-msgstr "Distance basée sur le modèle de densité d'électrons"
+msgid "Distance based on an association with another object"
+msgstr "Distance fondée sur l'association avec un autre objet"
 
 #: plugins/Pulsars/src/Pulsar.cpp:274
 #, no-c-format
@@ -33820,22 +33828,22 @@ msgid "Export to Calendars.html"
 msgstr "Exporter vers Calendars.html"
 
 #: plugins/Calendars/src/Calendars.cpp:424
-#: plugins/Calendars/src/ui_calendarsDialog.h:981
-#: plugins/Calendars/src/ui_calendarsDialog.h:1003
+#: plugins/Calendars/src/ui_calendarsDialog.h:985
+#: plugins/Calendars/src/ui_calendarsDialog.h:1007
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr "Grégorien"
 
 #: plugins/Calendars/src/Calendars.cpp:425
-#: plugins/Calendars/src/ui_calendarsDialog.h:956
-#: plugins/Calendars/src/ui_calendarsDialog.h:1006
+#: plugins/Calendars/src/ui_calendarsDialog.h:960
+#: plugins/Calendars/src/ui_calendarsDialog.h:1010
 msgctxt "calendar"
 msgid "Julian"
 msgstr "Julien"
 
 #: plugins/Calendars/src/Calendars.cpp:426
-#: plugins/Calendars/src/ui_calendarsDialog.h:979
-#: plugins/Calendars/src/ui_calendarsDialog.h:1001
+#: plugins/Calendars/src/ui_calendarsDialog.h:983
+#: plugins/Calendars/src/ui_calendarsDialog.h:1005
 msgctxt "calendar"
 msgid "Revised Julian"
 msgstr "Julien révisé"
@@ -33846,55 +33854,55 @@ msgid "ISO week"
 msgstr "Semaine ISO"
 
 #: plugins/Calendars/src/Calendars.cpp:428
-#: plugins/Calendars/src/ui_calendarsDialog.h:985
+#: plugins/Calendars/src/ui_calendarsDialog.h:989
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr "Islandais"
 
 #: plugins/Calendars/src/Calendars.cpp:429
-#: plugins/Calendars/src/ui_calendarsDialog.h:978
+#: plugins/Calendars/src/ui_calendarsDialog.h:982
 msgctxt "calendar"
 msgid "Roman"
 msgstr "Romain"
 
 #: plugins/Calendars/src/Calendars.cpp:430
-#: plugins/Calendars/src/ui_calendarsDialog.h:989
+#: plugins/Calendars/src/ui_calendarsDialog.h:993
 msgctxt "calendar"
 msgid "Byzantine"
 msgstr "Byzantin"
 
 #: plugins/Calendars/src/Calendars.cpp:431
-#: plugins/Calendars/src/ui_calendarsDialog.h:967
+#: plugins/Calendars/src/ui_calendarsDialog.h:971
 msgctxt "calendar"
 msgid "Olympic"
 msgstr "Olympique"
 
 #: plugins/Calendars/src/Calendars.cpp:432
-#: plugins/Calendars/src/ui_calendarsDialog.h:957
+#: plugins/Calendars/src/ui_calendarsDialog.h:961
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "Égyptien"
 
 #: plugins/Calendars/src/Calendars.cpp:433
-#: plugins/Calendars/src/ui_calendarsDialog.h:960
+#: plugins/Calendars/src/ui_calendarsDialog.h:964
 msgctxt "calendar"
 msgid "Armenian"
 msgstr "Arménien"
 
 #: plugins/Calendars/src/Calendars.cpp:434
-#: plugins/Calendars/src/ui_calendarsDialog.h:972
+#: plugins/Calendars/src/ui_calendarsDialog.h:976
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr "Zoroastrien"
 
 #: plugins/Calendars/src/Calendars.cpp:435
-#: plugins/Calendars/src/ui_calendarsDialog.h:959
+#: plugins/Calendars/src/ui_calendarsDialog.h:963
 msgctxt "calendar"
 msgid "Coptic"
 msgstr "Copte"
 
 #: plugins/Calendars/src/Calendars.cpp:436
-#: plugins/Calendars/src/ui_calendarsDialog.h:958
+#: plugins/Calendars/src/ui_calendarsDialog.h:962
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr "Éthiopien"
@@ -33910,13 +33918,13 @@ msgid "French Rev. (Arithm.)"
 msgstr "Révol. français (arithm.)"
 
 #: plugins/Calendars/src/Calendars.cpp:439
-#: plugins/Calendars/src/ui_calendarsDialog.h:992
+#: plugins/Calendars/src/ui_calendarsDialog.h:996
 msgctxt "calendar"
 msgid "Islamic"
 msgstr "Islamique"
 
 #: plugins/Calendars/src/Calendars.cpp:440
-#: plugins/Calendars/src/ui_calendarsDialog.h:993
+#: plugins/Calendars/src/ui_calendarsDialog.h:997
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "Hébraïque"
@@ -33942,7 +33950,7 @@ msgid "Bahá’í (Astron.)"
 msgstr "Bahá’í (astron.)"
 
 #: plugins/Calendars/src/Calendars.cpp:445
-#: plugins/Calendars/src/ui_calendarsDialog.h:961
+#: plugins/Calendars/src/ui_calendarsDialog.h:965
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr "Ancien hindou solaire"
@@ -33953,7 +33961,7 @@ msgid "Old Hindu Lunisolar"
 msgstr "Ancien hindou lunisolaire"
 
 #: plugins/Calendars/src/Calendars.cpp:447
-#: plugins/Calendars/src/ui_calendarsDialog.h:964
+#: plugins/Calendars/src/ui_calendarsDialog.h:968
 msgctxt "calendar"
 msgid "New Hindu Solar"
 msgstr "Nouveau solaire hindou"
@@ -33969,26 +33977,26 @@ msgid "New Hindu Panchang"
 msgstr "Nouveau hindou Panchang"
 
 #: plugins/Calendars/src/Calendars.cpp:451
-#: plugins/Calendars/src/ui_calendarsDialog.h:970
+#: plugins/Calendars/src/ui_calendarsDialog.h:974
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
 msgstr "Astro solaire hindou"
 
 #: plugins/Calendars/src/Calendars.cpp:452
-#: plugins/Calendars/src/ui_calendarsDialog.h:975
+#: plugins/Calendars/src/ui_calendarsDialog.h:979
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
 msgstr "Astro lunisolaire hindou"
 
 #: plugins/Calendars/src/Calendars.cpp:453
-#: plugins/Calendars/src/ui_calendarsDialog.h:977
+#: plugins/Calendars/src/ui_calendarsDialog.h:981
 msgctxt "calendar"
 msgid "Tibetan"
 msgstr "Tibétain"
 
 #: plugins/Calendars/src/Calendars.cpp:455
-#: plugins/Calendars/src/ui_calendarsDialog.h:982
-#: plugins/Calendars/src/ui_calendarsDialog.h:1011
+#: plugins/Calendars/src/ui_calendarsDialog.h:986
+#: plugins/Calendars/src/ui_calendarsDialog.h:1015
 msgctxt "calendar"
 msgid "Chinese"
 msgstr "Chinois"
@@ -33999,7 +34007,7 @@ msgid "Chinese Solar Terms"
 msgstr "Termes solaires chinois"
 
 #: plugins/Calendars/src/Calendars.cpp:459
-#: plugins/Calendars/src/ui_calendarsDialog.h:962
+#: plugins/Calendars/src/ui_calendarsDialog.h:966
 msgctxt "calendar"
 msgid "Japanese"
 msgstr "Japonais"
@@ -34010,7 +34018,7 @@ msgid "Japanese Solar Terms"
 msgstr "Termes solaires japonais"
 
 #: plugins/Calendars/src/Calendars.cpp:463
-#: plugins/Calendars/src/ui_calendarsDialog.h:986
+#: plugins/Calendars/src/ui_calendarsDialog.h:990
 msgctxt "calendar"
 msgid "Korean"
 msgstr "Coréen"
@@ -34021,7 +34029,7 @@ msgid "Korean Solar Terms"
 msgstr "Termes solaires coréens"
 
 #: plugins/Calendars/src/Calendars.cpp:467
-#: plugins/Calendars/src/ui_calendarsDialog.h:988
+#: plugins/Calendars/src/ui_calendarsDialog.h:992
 msgctxt "calendar"
 msgid "Vietnamese"
 msgstr "Vietnamien"
@@ -34032,37 +34040,37 @@ msgid "Vietnamese Solar Terms"
 msgstr "Termes solaires vietnamiens"
 
 #: plugins/Calendars/src/Calendars.cpp:470
-#: plugins/Calendars/src/ui_calendarsDialog.h:968
+#: plugins/Calendars/src/ui_calendarsDialog.h:972
 msgctxt "calendar"
 msgid "Balinese Pawukon"
 msgstr "Balinais Pawukon"
 
 #: plugins/Calendars/src/Calendars.cpp:471
-#: plugins/Calendars/src/ui_calendarsDialog.h:974
+#: plugins/Calendars/src/ui_calendarsDialog.h:978
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "Maya compte long"
 
 #: plugins/Calendars/src/Calendars.cpp:472
-#: plugins/Calendars/src/ui_calendarsDialog.h:987
+#: plugins/Calendars/src/ui_calendarsDialog.h:991
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "Maya Haab"
 
 #: plugins/Calendars/src/Calendars.cpp:473
-#: plugins/Calendars/src/ui_calendarsDialog.h:965
+#: plugins/Calendars/src/ui_calendarsDialog.h:969
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "Maya Tzolk'in"
 
 #: plugins/Calendars/src/Calendars.cpp:474
-#: plugins/Calendars/src/ui_calendarsDialog.h:984
+#: plugins/Calendars/src/ui_calendarsDialog.h:988
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "Aztèque Xihuitl"
 
 #: plugins/Calendars/src/Calendars.cpp:475
-#: plugins/Calendars/src/ui_calendarsDialog.h:973
+#: plugins/Calendars/src/ui_calendarsDialog.h:977
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
 msgstr "Aztèque Tonalpohualli"
@@ -38313,160 +38321,160 @@ msgstr "Références"
 msgid "This plugin is based on:"
 msgstr "Ce plugin est fondé sur :"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:954
+#: plugins/Calendars/src/ui_calendarsDialog.h:958
 msgid "Calendars Configuration"
 msgstr "Configuration des calendriers"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:955
+#: plugins/Calendars/src/ui_calendarsDialog.h:959
 msgid "Calendars Plug-in Configuration"
 msgstr "Plugin Calendriers"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:963
+#: plugins/Calendars/src/ui_calendarsDialog.h:967
 msgctxt "calendar"
 msgid "French Revolution (arithmetic)"
 msgstr "Révolutionnaire français (arithmétique)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:966
+#: plugins/Calendars/src/ui_calendarsDialog.h:970
 msgctxt "calendar"
 msgid "Persian (astronomical)"
 msgstr "Persan (astronomique)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:969
+#: plugins/Calendars/src/ui_calendarsDialog.h:973
 msgctxt "calendar"
 msgid "Persian (arithmetic)"
 msgstr "Persan (arithmétique)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:971
+#: plugins/Calendars/src/ui_calendarsDialog.h:975
 msgctxt "calendar"
 msgid "Bahá’í (arithmetic)"
 msgstr "Bahá’í (arithmétique)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:976
+#: plugins/Calendars/src/ui_calendarsDialog.h:980
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
 msgstr "Ancien lunaire hindou"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:980
+#: plugins/Calendars/src/ui_calendarsDialog.h:984
 msgctxt "calendar"
 msgid "New Hindu Lunar"
 msgstr "Nouveau lunaire hindou"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:983
+#: plugins/Calendars/src/ui_calendarsDialog.h:987
 msgctxt "calendar"
 msgid "Bahá’í (astronomical)"
 msgstr "Bahá’í (astronomique)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:990
+#: plugins/Calendars/src/ui_calendarsDialog.h:994
 msgctxt "calendar"
 msgid "French Revolution (astronomical)"
 msgstr "Révolutionnaire français (astronomique)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:991
-#: plugins/Calendars/src/ui_calendarsDialog.h:1000
+#: plugins/Calendars/src/ui_calendarsDialog.h:995
+#: plugins/Calendars/src/ui_calendarsDialog.h:1004
 msgctxt "calendar"
 msgid "ISO Week"
 msgstr "Semaine ISO"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:995
+#: plugins/Calendars/src/ui_calendarsDialog.h:999
 msgid "Override automatic text color"
 msgstr "Remplacer la couleur du texte"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:997
+#: plugins/Calendars/src/ui_calendarsDialog.h:1001
 msgid "Display"
 msgstr "Affichage"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:998
+#: plugins/Calendars/src/ui_calendarsDialog.h:1002
 msgid "Weekday"
 msgstr "Jour de la semaine"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1004
+#: plugins/Calendars/src/ui_calendarsDialog.h:1008
 msgid "Byzantine"
 msgstr "Byzantin"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1008
+#: plugins/Calendars/src/ui_calendarsDialog.h:1012
 msgctxt "calendar"
 msgid "Negative years here mark years B.C."
 msgstr "Les années négatives indiquent ici les années avant J.C."
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1010
+#: plugins/Calendars/src/ui_calendarsDialog.h:1014
 msgid "Lunisolar"
 msgstr "Lunisolaire"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1012
+#: plugins/Calendars/src/ui_calendarsDialog.h:1016
 msgctxt "calendar"
 msgid "Katun"
 msgstr "Katun"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1013
+#: plugins/Calendars/src/ui_calendarsDialog.h:1017
 msgctxt "calendar"
 msgid "Xihuitl"
 msgstr "Xihuitl"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1014
+#: plugins/Calendars/src/ui_calendarsDialog.h:1018
 msgctxt "calendar"
 msgid "Maya"
 msgstr "Maya"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1015
+#: plugins/Calendars/src/ui_calendarsDialog.h:1019
 msgctxt "calendar"
 msgid "Haab"
 msgstr "Haab"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1016
+#: plugins/Calendars/src/ui_calendarsDialog.h:1020
 msgctxt "calendar"
 msgid "Tun"
 msgstr "Tun"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1017
+#: plugins/Calendars/src/ui_calendarsDialog.h:1021
 msgctxt "calendar"
 msgid "Kin"
 msgstr "Kin"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1018
+#: plugins/Calendars/src/ui_calendarsDialog.h:1022
 msgctxt "calendar"
 msgid "Uinal"
 msgstr "Uinal"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1019
+#: plugins/Calendars/src/ui_calendarsDialog.h:1023
 msgctxt "calendar"
 msgid "Baktun"
 msgstr "Baktun"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1020
+#: plugins/Calendars/src/ui_calendarsDialog.h:1024
 msgctxt "calendar"
 msgid "Long Count"
 msgstr "Compte long"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1022
-#: plugins/Calendars/src/ui_calendarsDialog.h:1025
-#: plugins/Calendars/src/ui_calendarsDialog.h:1040
-#: plugins/Calendars/src/ui_calendarsDialog.h:1046
+#: plugins/Calendars/src/ui_calendarsDialog.h:1026
+#: plugins/Calendars/src/ui_calendarsDialog.h:1029
+#: plugins/Calendars/src/ui_calendarsDialog.h:1044
+#: plugins/Calendars/src/ui_calendarsDialog.h:1050
 msgid "Step forward"
 msgstr "Un pas en avant"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1028
-#: plugins/Calendars/src/ui_calendarsDialog.h:1031
-#: plugins/Calendars/src/ui_calendarsDialog.h:1037
-#: plugins/Calendars/src/ui_calendarsDialog.h:1043
+#: plugins/Calendars/src/ui_calendarsDialog.h:1032
+#: plugins/Calendars/src/ui_calendarsDialog.h:1035
+#: plugins/Calendars/src/ui_calendarsDialog.h:1041
+#: plugins/Calendars/src/ui_calendarsDialog.h:1047
 msgid "Step backward"
 msgstr "Un pas en arrière"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1033
+#: plugins/Calendars/src/ui_calendarsDialog.h:1037
 msgctxt "calendar"
 msgid "Aztec"
 msgstr "Aztèque"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1034
+#: plugins/Calendars/src/ui_calendarsDialog.h:1038
 msgctxt "calendar"
 msgid "Tzolkin"
 msgstr "Tzolkin"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1035
+#: plugins/Calendars/src/ui_calendarsDialog.h:1039
 msgctxt "calendar"
 msgid "Tonalpohualli"
 msgstr "Tonalpohualli"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:1048
+#: plugins/Calendars/src/ui_calendarsDialog.h:1052
 msgctxt "calendar"
 msgid "Mesoamerica"
 msgstr "Mésoamérique"
