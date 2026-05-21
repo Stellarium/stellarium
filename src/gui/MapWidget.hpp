@@ -25,6 +25,7 @@
 #include <QRect>
 #include <QWidget>
 #include <QPixmap>
+#include <QPainterPath>
 
 //! @class MapWidget
 //! Special widget that shows a world map
@@ -40,6 +41,12 @@ public:
 	void setMarkerPos(double longitude, double latitude);
 	//! allow hiding the location arrow (if sitting on an observer)
 	void setMarkerVisible(bool visible);
+	//! Set the search circle to mark the locations available
+	//! @param longitude longitude in degrees in the range [-180;180[
+	//! @param latitude latitude in degrees in the range [-90;90]
+	//! @param searchRadius search radius in degrees in the range ]0;180].
+	//! If \p searchRadius is set to 180, filtering is considered disabled.
+	void setLocationFilter(double longitude, double latitude, double searchRadius);
 
 	void setMap(const QPixmap &map);
 	
@@ -50,9 +57,15 @@ signals:
 protected:
 	void mousePressEvent(QMouseEvent* event) override;
 	void paintEvent(QPaintEvent* event) override;
+	void resizeEvent(QResizeEvent* event) override;
+
+private:
+	void makeSearchAreaOutline(int width, int height);
 
 private:
 	double markerLat=0, markerLon=0;
+	double searchCenterLon=0, searchCenterLat=0, searchRadius=180;
+	QPainterPath searchAreaOutline;
 	QPixmap map;
 	QPixmap locationMarker;
 	QRectF mapRect; // in device pixels

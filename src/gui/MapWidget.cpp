@@ -50,6 +50,15 @@ void MapWidget::setMarkerPos(double longitude, double latitude)
 	update();
 }
 
+void MapWidget::setLocationFilter(double longitude, double latitude, double newSearchRadius)
+{
+	searchCenterLon = longitude;
+	searchCenterLat = latitude;
+	searchRadius = newSearchRadius;
+	searchAreaOutline = {};
+	update();
+}
+
 void MapWidget::mousePressEvent(QMouseEvent* event)
 {
 	const double ratio = devicePixelRatioF();
@@ -73,6 +82,126 @@ void MapWidget::setMap(const QPixmap &map)
 	update();
 }
 
+void MapWidget::makeSearchAreaOutline(const int width, const int height)
+{
+	constexpr double nMax = 128;
+	std::vector<QPointF> points;
+	for (double n = 0; n < nMax; ++n)
+	{
+		const auto bearing = n / nMax * 360;
+		const auto point3d = StelLocation::pointAtDistanceDegrees(searchCenterLon, searchCenterLat, searchRadius, bearing);
+		double lon, lat;
+		StelUtils::rectToSphe(&lon, &lat, point3d);
+		lon *= M_180_PI;
+		lat *= M_180_PI;
+
+		const auto x = mapRect.left() + (lon + 180) /  360. * width;
+		const auto y = mapRect.top()  + (lat -  90) / -180. * height;
+		points.emplace_back(x, y);
+	}
+
+	// Special handling for poles, because they won't be
+	// included in the path if connect the points naively.
+	if (searchCenterLat + searchRadius > 90)
+	{
+		searchAreaOutline.moveTo(mapRect.topRight());
+		searchAreaOutline.lineTo(mapRect.topLeft());
+		std::sort(points.begin(), points.end(),
+		          [](auto& a, auto& b){ return a.x() < b.x(); });
+		searchAreaOutline.lineTo(mapRect.left(), points.front().y());
+		for (const auto& p : points)
+			searchAreaOutline.lineTo(p);
+		searchAreaOutline.lineTo(mapRect.right(), points.back().y());
+		searchAreaOutline.closeSubpath();
+	}
+	else if (searchCenterLat - searchRadius < -90)
+	{
+		searchAreaOutline.moveTo(mapRect.bottomRight());
+		searchAreaOutline.lineTo(mapRect.bottomLeft());
+		std::sort(points.begin(), points.end(),
+		          [](auto& a, auto& b){ return a.x() < b.x(); });
+		searchAreaOutline.lineTo(mapRect.left(), points.front().y());
+		for (const auto& p : points)
+			searchAreaOutline.lineTo(p);
+		searchAreaOutline.lineTo(mapRect.right(), points.back().y());
+		searchAreaOutline.closeSubpath();
+	}
+	else
+	{
+		// Handle possible split over longitude ±180°
+		std::vector<QPointF> pointsWest, pointsEast;
+		bool lastPointWasWest;
+		if (points[0].x() < mapRect.left() + width / 2.)
+		{
+			pointsWest.push_back(points[0]);
+			lastPointWasWest = true;
+		}
+		else
+		{
+			pointsEast.push_back(points[0]);
+			lastPointWasWest = false;
+		}
+
+		for (size_t n = 1; n < points.size(); ++n)
+		{
+			const auto& p = points[n];
+			if (lastPointWasWest)
+			{
+				const auto& prevP = pointsWest.back();
+				if (std::abs(p.x() - width - prevP.x()) < std::abs(p.x() - prevP.x()))
+				{
+					// Switching over to the east, need to make
+					// the western path cross the left side.
+					pointsWest.emplace_back(p.x() - width, p.y());
+					// Also we need to make the eastern part
+					// to continue from the right side.
+					pointsEast.emplace_back(prevP.x() + width, prevP.y());
+					lastPointWasWest = false;
+					pointsEast.emplace_back(p);
+				}
+				else
+				{
+					pointsWest.emplace_back(p);
+				}
+			}
+			else
+			{
+				const auto& prevP = pointsEast.back();
+				if (std::abs(p.x() + width - prevP.x()) < std::abs(p.x() - prevP.x()))
+				{
+					// Switching over to the west, need to make
+					// the eastern path cross the right side.
+					pointsEast.emplace_back(p.x() + width, p.y());
+					// Also we need to make the western part
+					// to continue from the left side.
+					pointsWest.emplace_back(prevP.x() - width, prevP.y());
+					lastPointWasWest = true;
+					pointsWest.emplace_back(p);
+				}
+				else
+				{
+					pointsEast.emplace_back(p);
+				}
+			}
+		}
+
+		if (!pointsWest.empty())
+		{
+			searchAreaOutline.moveTo(pointsWest[0]);
+			for (const auto& p : pointsWest)
+				searchAreaOutline.lineTo(p);
+			searchAreaOutline.closeSubpath();
+		}
+		if (!pointsEast.empty())
+		{
+			searchAreaOutline.moveTo(pointsEast[0]);
+			for (const auto& p : pointsEast)
+				searchAreaOutline.lineTo(p);
+			searchAreaOutline.closeSubpath();
+		}
+	}
+}
+
 void MapWidget::paintEvent(QPaintEvent*)
 {
 	QPainter painter(this);
@@ -86,6 +215,7 @@ void MapWidget::paintEvent(QPaintEvent*)
 							 std::round((height()*ratio-scaledMap.height()) / 2.)),
 					 scaledMap.size());
 
+	painter.setClipRect(mapRect);
 	painter.drawPixmap(mapRect.topLeft(), scaledMap);
 
 	if (markerVisible)
@@ -103,4 +233,27 @@ void MapWidget::paintEvent(QPaintEvent*)
 				   markerCenterPosY - scaledMarker.height(),
 				   scaledMarker);
 	}
+
+	if (searchRadius < 180)
+	{
+		if (searchAreaOutline.isEmpty())
+			makeSearchAreaOutline(scaledMap.width(), scaledMap.height());
+		// Outline
+		painter.setPen(QColor(0, 127, 255, 255));
+		painter.setBrush(Qt::transparent);
+		painter.setRenderHint(QPainter::Antialiasing);
+		painter.drawPath(searchAreaOutline);
+
+		// Darken the areas that are filtered out
+		auto path = searchAreaOutline;
+		path.addRect(mapRect);
+		painter.setPen(Qt::transparent);
+		painter.setBrush(QColor(0,0,0,127));
+		painter.drawPath(path);
+	}
+}
+
+void MapWidget::resizeEvent(QResizeEvent* event)
+{
+	searchAreaOutline = {};
 }

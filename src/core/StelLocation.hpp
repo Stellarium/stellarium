@@ -22,6 +22,7 @@
 #include <QString>
 #include <QVariant>
 #include <QMetaType>
+#include "VecMath.hpp"
 
 class Planet;
 
@@ -120,6 +121,10 @@ public:
 	//! Parse a location from a line serialization
 	static StelLocation createFromLine(const QString& line);
 
+	//! \brief Compute a point at \p distDeg degrees away from the center along the great circle with the given \p bearing
+	//!
+	//! To compute latitude and longitude from this Cartesian point, use #StelUtils::rectToSphe.
+	static Vec3d pointAtDistanceDegrees(const double centerLon, const double centerLat, const double distDeg, const double bearing);
 	//! Compute great-circle distance between two locations on a spherical body
 	//! arguments given in decimal degrees
 	static float distanceDegrees(const float long1, const float lat1, const float long2, const float lat2);
