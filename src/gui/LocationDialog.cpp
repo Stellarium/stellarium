@@ -640,10 +640,12 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude, const
 		ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
 
 	// Filter location list for nearby sites. I assume Earth locations are better known. With only few locations on other planets in the list, 30 degrees seem OK.
-	LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, longitude, latitude, loc.planetName=="Earth" ? 5.0f: 30.0f);
+	const auto searchRadius = loc.planetName=="Earth" ? 5.0f: 30.0f;
+	LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, longitude, latitude, searchRadius);
 	pickedModel->setStringList(results.keys());
 	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
+	ui->mapWidget->setLocationFilter(longitude, latitude, searchRadius);
 	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 }
 
@@ -686,6 +688,7 @@ void LocationDialog::moveToAnotherPlanet()
 			//	ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
 		}
 		proxyModel->sort(0, Qt::AscendingOrder);
+		ui->mapWidget->setLocationFilter(0, 0, 180);
 		ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 		ui->citySearchLineEdit->setFocus();
 
@@ -1000,6 +1003,7 @@ void LocationDialog::resetLocationList()
 	}
 
 	proxyModel->sort(0, Qt::AscendingOrder);
+	ui->mapWidget->setLocationFilter(0, 0, 180);
 }
 
 // called when user clicks in the region combobox and selects a region. The locations in the list are updated to select only sites in that region.

@@ -229,6 +229,18 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	return loc;
 }
 
+Vec3d StelLocation::pointAtDistanceDegrees(const double centerLon, const double centerLat, const double distDeg, const double bearing)
+{
+	Vec3d centerPoint;
+	StelUtils::spheToRect(centerLon * M_PI_180, centerLat * M_PI_180, centerPoint);
+	const Mat3d R = Mat4d::rotation(centerPoint, -bearing * M_PI_180).upper3x3();
+
+	Vec3d pointNorthOfCenter;
+	StelUtils::spheToRect(centerLon * M_PI_180, (centerLat + distDeg) * M_PI_180, pointNorthOfCenter);
+
+	return R * pointNorthOfCenter;
+}
+
 // Compute great-circle distance between two locations
 float StelLocation::distanceDegrees(const float long1, const float lat1, const float long2, const float lat2)
 {
