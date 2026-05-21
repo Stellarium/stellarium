@@ -10,6 +10,7 @@ Exoplanets                          = true
 MeteorShowers                       = true
 Novae                               = true
 FOV                                 = true
+Planes                              = false
 
 [video]
 fullscreen                          = true
