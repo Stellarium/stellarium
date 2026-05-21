@@ -131,6 +131,7 @@ private:
 	bool enabled;
 	bool showLabels;
 	bool showButton;
+	bool lastRealtimeState;
 	int labelMode;
 	QString lastStatus;
 	QString lastSuccessfulUpdate;

@@ -32,7 +32,6 @@
 #include <QDesktopServices>
 #include <QSpinBox>
 #include <QUrl>
-#include <QVBoxLayout>
 
 namespace
 {
@@ -78,11 +77,6 @@ void PlanesDialog::createDialogContent()
 	planes = GETSTELMODULE(Planes);
 	ui->setupUi(dialog);
 
-	TitleBar* titleBar = new TitleBar(dialog);
-	titleBar->setTitle(q_("Planes Plug-in Configuration"));
-	if (auto* layout = qobject_cast<QVBoxLayout*>(dialog->layout()))
-		layout->insertWidget(0, titleBar);
-
 	ui->refreshIntervalSpinBox->setMinimum(15);
 	ui->refreshIntervalSpinBox->setMaximum(60);
 	ui->refreshIntervalSpinBox->setSingleStep(5);
@@ -110,8 +104,8 @@ void PlanesDialog::createDialogContent()
 	}
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->enabledCheckBox, &QCheckBox::toggled, this, &PlanesDialog::setEnabledFlag);
 	connect(ui->showLabelsCheckBox, &QCheckBox::toggled, this, &PlanesDialog::setShowLabels);

@@ -76,6 +76,7 @@ constexpr int kMaxPublishedAircraft = 200;
 constexpr double kFeetToMeters = 0.3048;
 constexpr double kKnotsToMetersPerSecond = 0.514444;
 constexpr double kFeetPerMinuteToMetersPerSecond = 0.00508;
+const QString kRealtimeOnlyStatus = QStringLiteral("Live aircraft are shown only in real-time mode.");
 
 ProviderDefinition providerDefinition(const QString& providerId)
 {
@@ -186,6 +187,11 @@ QJsonArray aircraftArrayFromResponse(const QJsonObject& root)
 		return aircraftArray;
 	return root.value("ac").toArray();
 }
+
+bool isRealtimeMode(const StelCore* core)
+{
+	return core && core->getIsTimeNow();
+}
 }
 
 StelModule* PlanesStelPluginInterface::getStelModule() const
@@ -222,6 +228,7 @@ Planes::Planes()
 	, enabled(false)
 	, showLabels(false)
 	, showButton(true)
+	, lastRealtimeState(true)
 	, labelMode(kLabelModeFlightNumber)
 	, lastStatus(QStringLiteral("idle"))
 	, lastSuccessfulUpdate(QStringLiteral("Never"))
@@ -275,7 +282,7 @@ void Planes::init()
 	Q_INIT_RESOURCE(Planes);
 	loadSettings();
 	planeTexture = StelApp::getInstance().getTextureManager().createTexture(":/planes/plane.png");
-	pointerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+	pointerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 
 	networkMgr = new QNetworkAccessManager(this);
 	connect(networkMgr, &QNetworkAccessManager::finished, this, &Planes::onReply);
@@ -291,18 +298,29 @@ void Planes::init()
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 	connect(StelApp::getInstance().getCore(), &StelCore::locationChanged, this, &Planes::onLocationChanged);
+	lastRealtimeState = isRealtimeMode(StelApp::getInstance().getCore());
 
 	addAction("actionShow_Planes", N_("Planes"), N_("Show Planes"), "enabled", "Shift+P");
 #ifndef NO_GUI
 	addAction("actionShow_Planes_dialog", N_("Planes"), N_("Show settings dialog"), configDialog, "visible", "Ctrl+P");
 	applyButtonVisibility();
 #endif
-	updateStatus(enabled ? QStringLiteral("enabled") : QStringLiteral("disabled; live updates are off"));
-
 	if (enabled)
 	{
 		fetchTimer->start();
-		QTimer::singleShot(1500, this, &Planes::fetchAircraft);
+		if (lastRealtimeState)
+		{
+			updateStatus(QStringLiteral("Waiting for first update..."));
+			QTimer::singleShot(1500, this, &Planes::fetchAircraft);
+		}
+		else
+		{
+			updateStatus(kRealtimeOnlyStatus);
+		}
+	}
+	else
+	{
+		updateStatus(QStringLiteral("disabled; live updates are off"));
 	}
 }
 
@@ -319,6 +337,25 @@ void Planes::deinit()
 void Planes::update(double deltaTime)
 {
 	Q_UNUSED(deltaTime)
+
+	StelCore* core = StelApp::getInstance().getCore();
+	const bool realtimeNow = isRealtimeMode(core);
+	if (realtimeNow == lastRealtimeState)
+		return;
+
+	lastRealtimeState = realtimeNow;
+	if (!enabled)
+		return;
+
+	if (realtimeNow)
+	{
+		updateStatus(QStringLiteral("Returned to real-time mode."));
+		scheduleRefresh(0);
+	}
+	else
+	{
+		updateStatus(kRealtimeOnlyStatus);
+	}
 }
 
 QString Planes::buildRequestUrl(const StelCore* core) const
@@ -367,6 +404,9 @@ void Planes::fetchAircraft()
 		return;
 
 	StelCore* core = StelApp::getInstance().getCore();
+	if (!isRealtimeMode(core))
+		return;
+
 	const QString url = buildRequestUrl(core);
 	if (url.isEmpty())
 	{
@@ -396,6 +436,12 @@ void Planes::onReply(QNetworkReply* reply)
 	const bool shouldRefreshAgain = pendingRefresh && enabled;
 	pendingRefresh = false;
 	reply->deleteLater();
+
+	if (!isRealtimeMode(StelApp::getInstance().getCore()))
+	{
+		updateStatus(kRealtimeOnlyStatus);
+		return;
+	}
 
 	if (reply->error() != QNetworkReply::NoError)
 	{
@@ -457,7 +503,7 @@ void Planes::onLocationChanged(const StelLocation& loc)
 
 void Planes::draw(StelCore* core)
 {
-	if (!core || !enabled)
+	if (!core || !enabled || !isRealtimeMode(core))
 		return;
 
 	StelProjectorP projection = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
@@ -483,12 +529,20 @@ void Planes::draw(StelCore* core)
 	if (!pointerPainter.getProjector()->project(object->getJ2000EquatorialPos(core).toVec3f(), screenPos))
 		return;
 
-	pointerPainter.setColor(object->getInfoColor());
+	pointerPainter.setColor(0.4f, 0.5f, 0.8f);
 	pointerTexture->bind();
 	pointerPainter.setBlending(true);
-	const float angle = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 40.0f;
 	const float scale = StelApp::getInstance().getScreenScale();
-	pointerPainter.drawSprite2dModeNoDeviceScale(screenPos[0], screenPos[1], 13.0f * scale, angle);
+	float size = static_cast<float>(object->getAngularRadius(core) * (2. * M_PI_180) *
+		static_cast<double>(pointerPainter.getProjector()->getPixelPerRadAtCenter()));
+	size += (12.f + 3.f * std::sin(2. * StelApp::getInstance().getTotalRunTime())) * scale;
+	const float radius = 20.f * scale;
+	const float x = screenPos[0];
+	const float y = screenPos[1];
+	pointerPainter.drawSprite2dModeNoDeviceScale(x - size / 2.f, y - size / 2.f, radius, 90.f);
+	pointerPainter.drawSprite2dModeNoDeviceScale(x - size / 2.f, y + size / 2.f, radius, 0.f);
+	pointerPainter.drawSprite2dModeNoDeviceScale(x + size / 2.f, y + size / 2.f, radius, -90.f);
+	pointerPainter.drawSprite2dModeNoDeviceScale(x + size / 2.f, y - size / 2.f, radius, -180.f);
 }
 
 double Planes::getCallOrder(StelModuleActionName actionName) const
@@ -535,8 +589,15 @@ void Planes::setEnabled(bool value)
 	{
 		if (fetchTimer)
 			fetchTimer->start();
-		updateStatus(QStringLiteral("Waiting for first update..."));
-		scheduleRefresh(0);
+		if (isRealtimeMode(StelApp::getInstance().getCore()))
+		{
+			updateStatus(QStringLiteral("Waiting for first update..."));
+			scheduleRefresh(0);
+		}
+		else
+		{
+			updateStatus(kRealtimeOnlyStatus);
+		}
 	}
 	emit enabledChanged(enabled);
 }
@@ -617,12 +678,19 @@ void Planes::setRadiusNm(int nm)
 void Planes::refreshNow()
 {
 	if (enabled)
+	{
+		if (!isRealtimeMode(StelApp::getInstance().getCore()))
+		{
+			updateStatus(kRealtimeOnlyStatus);
+			return;
+		}
 		fetchAircraft();
+	}
 }
 
 void Planes::scheduleRefresh(int delayMs)
 {
-	if (!enabled || !refreshDebounceTimer)
+	if (!enabled || !refreshDebounceTimer || !isRealtimeMode(StelApp::getInstance().getCore()))
 		return;
 
 	refreshDebounceTimer->start(delayMs);

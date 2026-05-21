@@ -38,6 +38,7 @@ constexpr double kMaxDeadReckoningSeconds = 30.0;
 constexpr double kHeadingProbeSeconds = 1.0;
 constexpr double kMetersToFeet = 3.280839895;
 constexpr double kMetersPerSecondToKnots = 1.943844492;
+constexpr double kMetersPerSecondToFeetPerMinute = 196.8503937;
 constexpr float kPlaneSpriteSize = 16.0f;
 constexpr float kSpriteHeadingOffsetDegrees = -180.0f;
 
@@ -191,8 +192,9 @@ QString AircraftObject::getInfoString(const StelCore* core, const InfoStringGrou
 		const QString groundSpeed = QString("%1 m/s / %2 kt")
 			.arg(QString::number(currentRecord.groundSpeedMs, 'f', 0),
 			     QString::number(currentRecord.groundSpeedMs * kMetersPerSecondToKnots, 'f', 0));
-		const QString verticalRate = QString("%1 m/s")
-			.arg(QString::number(currentRecord.verticalRateMs, 'f', 1));
+		const QString verticalRate = QString("%1 m/s / %2 ft/min")
+			.arg(QString::number(currentRecord.verticalRateMs, 'f', 1),
+			     QString::number(currentRecord.verticalRateMs * kMetersPerSecondToFeetPerMinute, 'f', 0));
 
 		stream << QString("%1: <b>%2</b><br />").arg(q_("Identifier"), aircraftRecord.icao24.toHtmlEscaped());
 		if (!aircraftRecord.callsign.isEmpty())
