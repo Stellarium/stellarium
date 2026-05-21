@@ -237,11 +237,11 @@ float StelLocation::distanceDegrees(const float long1, const float lat1, const f
 			  std::cos(lat1*DEGREES)*std::cos(lat2*DEGREES) *
 			  std::cos((long1-long2)*DEGREES) ) / DEGREES;
 }
-double StelLocation::distanceKm(Planet *planet, const double long1, const double lat1, const double long2, const double lat2)
+double StelLocation::distanceKm(const Planet& planet, const double long1, const double lat1, const double long2, const double lat2)
 {
 	static const double DEGREES=M_PI/180.0;
-	const double f = 1.0 - planet->getOneMinusOblateness(); // flattening
-	const double a = planet->getEquatorialRadius()*AU;
+	const double f = 1.0 - planet.getOneMinusOblateness(); // flattening
+	const double a = planet.getEquatorialRadius()*AU;
 
 	const double F = (lat1+lat2)*0.5*DEGREES;
 	const double G = (lat1-lat2)*0.5*DEGREES;
@@ -260,7 +260,7 @@ double StelLocation::distanceKm(Planet *planet, const double long1, const double
 double StelLocation::distanceKm(const double otherLong, const double otherLat) const
 {
 	PlanetP planet=GETSTELMODULE(SolarSystem)->searchByEnglishName(planetName);
-	return distanceKm(planet.data(), static_cast<double>(longitude), static_cast<double>(latitude), otherLong, otherLat);
+	return distanceKm(*planet, static_cast<double>(longitude), static_cast<double>(latitude), otherLong, otherLat);
 }
 
 double StelLocation::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget)

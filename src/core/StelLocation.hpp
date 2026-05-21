@@ -126,7 +126,7 @@ public:
 	//! Compute great-circle distance between two locations on the current planet (takes flattening into account)
 	//! arguments given in decimal degrees
 	//! Source: Jean Meeus, Astronomical Algorithms, 2nd edition, ch.11.
-	static double distanceKm(Planet *planet, const double long1, const double lat1, const double long2, const double lat2);
+	static double distanceKm(const Planet& planet, const double long1, const double lat1, const double long2, const double lat2);
 	//! Compute azimuth from Obs towards Target. All angles (args and result) are in degrees.
 	//! @return azimuth counted from north or south as set in the StelApp preferences, in [0...360].
 	static double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);
