@@ -121,8 +121,8 @@ void VisibilityMapDialog::createDialogContent()
 	dialog->setFocusPolicy(Qt::StrongFocus);
 
 	QVBoxLayout* mainLayout = new QVBoxLayout(dialog);
-	mainLayout->setContentsMargins(8, 8, 8, 8);
-	mainLayout->setSpacing(6);
+	mainLayout->setContentsMargins(0, 0, 0, 0);
+	mainLayout->setSpacing(0);
 
 	titleBar = new TitleBar(dialog);
 	titleBar->setObjectName(QStringLiteral("titleBar"));
@@ -168,8 +168,8 @@ void VisibilityMapDialog::createDialogContent()
 
 	stepValueLabel = new QLabel(dialog);
 	stepValueLabel->setAlignment(Qt::AlignCenter);
-	stepValueLabel->setMinimumWidth(120);
-	timeLayout->addWidget(stepValueLabel, 1);
+	stepValueLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+	timeLayout->addWidget(stepValueLabel);
 
 	QToolButton* forwardButton = new QToolButton(dialog);
 	forwardButton->setText(QStringLiteral(">"));
@@ -202,6 +202,8 @@ void VisibilityMapDialog::createDialogContent()
 	timeLayout->addWidget(twilightAutoSyncCheckBox);
 	connect(twilightAutoSyncCheckBox, &QCheckBox::toggled,
 	        this, &VisibilityMapDialog::onTwilightAutoSyncToggled);
+
+	timeLayout->addStretch(1);
 
 	QHBoxLayout* labelLayout = new QHBoxLayout;
 	labelLayout->setSpacing(8);
