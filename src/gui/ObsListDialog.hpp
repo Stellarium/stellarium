@@ -20,7 +20,6 @@
 #ifndef OBSLISTDIALOG_H
 #define OBSLISTDIALOG_H
 
-#include <QCollator>
 #include <QObject>
 #include <QStandardItemModel>
 #include <QSortFilterProxyModel>
@@ -433,12 +432,8 @@ private:
 
 class ObsListDialogSortFilterProxyModel : public QSortFilterProxyModel
 {
-public:
-    ObsListDialogSortFilterProxyModel();
 protected:
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
-private:
-    QCollator m_collator;
+	bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 };
 
 #endif // OBSLISTDIALOG_H

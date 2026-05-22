@@ -600,10 +600,21 @@ void ObsListDialog::loadSelectedList()
 		return;
 	}
 
-	// Sorting for the objects list.
-	QString sortingBy = observingListMap.value(KEY_SORTING).toString();
+	// Always install the proxy so custom sort logic (numeric designation,
+	// RA/Dec angle comparison, magnitude) is available for interactive sorting.
+	if (!qobject_cast<ObsListDialogSortFilterProxyModel*>(ui->treeView->model()))
+	{
+		auto *proxy = new ObsListDialogSortFilterProxyModel;
+		proxy->setSourceModel(itemModel);
+		ui->treeView->setModel(proxy);
+	}
+	// Apply saved sort order, or clear any sort retained from a previous list.
+	const QString sortingBy = observingListMap.value(KEY_SORTING).toString();
+	sorting = sortingBy;
 	if (!sortingBy.isEmpty())
 		sortObsListTreeViewByColumnName(sortingBy);
+	else
+		ui->treeView->sortByColumn(-1, Qt::AscendingOrder);
 
 	// Restore selection that was active before calling this
 	if (existingSelectionToRestore.length()>0)
@@ -1642,38 +1653,65 @@ const QString ObsListDialog::CUSTOM_OBJECT = QStringLiteral("CustomObject");
 
 const QString ObsListDialog::DASH = QString(QChar(0x2014));
 
-ObsListDialogSortFilterProxyModel::ObsListDialogSortFilterProxyModel()
+// Natural-number sort: compares alternating non-digit/digit segments so that
+// "NGC 9" sorts before "NGC 10". Does not depend on an ICU-backed QCollator.
+static bool naturalLessThan(const QString &a, const QString &b)
 {
-    m_collator.setLocale(QLocale::c());
-    m_collator.setNumericMode(true);
-    m_collator.setCaseSensitivity(Qt::CaseInsensitive);
+	int ia = 0, ib = 0;
+	while (ia < a.size() && ib < b.size())
+	{
+		if (a[ia].isDigit() && b[ib].isDigit())
+		{
+			int ja = ia, jb = ib;
+			while (ja < a.size() && a[ja].isDigit()) ++ja;
+			while (jb < b.size() && b[jb].isDigit()) ++jb;
+			const qlonglong numA = a.mid(ia, ja - ia).toLongLong();
+			const qlonglong numB = b.mid(ib, jb - ib).toLongLong();
+			if (numA != numB)
+				return numA < numB;
+			ia = ja;
+			ib = jb;
+		}
+		else
+		{
+			const QChar ca = a[ia].toLower(), cb = b[ib].toLower();
+			if (ca != cb)
+				return ca < cb;
+			++ia; ++ib;
+		}
+	}
+	return a.size() < b.size();
 }
 
 bool ObsListDialogSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-    if (sortColumn() == ObsListDialog::ColumnRa)
-    {
-        QString raLeft = sourceModel()->data(left).toString();
-        QString raRight = sourceModel()->data(right).toString();
-        return StelUtils::getDecAngle(raLeft) < StelUtils::getDecAngle(raRight);
-    }
-    if (sortColumn() == ObsListDialog::ColumnDec)
-    {
-        QString decLeft = sourceModel()->data(left).toString();
-        QString decRight = sourceModel()->data(right).toString();
-        return StelUtils::getDecAngle(decLeft) < StelUtils::getDecAngle(decRight);
-    }
-    if (sortColumn() == ObsListDialog::ColumnMagnitude)
-    {
-        QString magLeft = sourceModel()->data(left).toString();
-        QString magRight = sourceModel()->data(right).toString();
-        return magLeft.toDouble() < magRight.toDouble();
-    }
-    if (sortColumn() == ObsListDialog::ColumnDesignation)
-    {
-        QString desigLeft  = sourceModel()->data(left).toString();
-        QString desigRight = sourceModel()->data(right).toString();
-        return m_collator.compare(desigLeft, desigRight) < 0;
-    }
-    return QSortFilterProxyModel::lessThan(left, right);
+	switch (sortColumn())
+	{
+	case ObsListDialog::ColumnRa:
+	{
+		const QString raLeft  = sourceModel()->data(left).toString();
+		const QString raRight = sourceModel()->data(right).toString();
+		return StelUtils::getDecAngle(raLeft) < StelUtils::getDecAngle(raRight);
+	}
+	case ObsListDialog::ColumnDec:
+	{
+		const QString decLeft  = sourceModel()->data(left).toString();
+		const QString decRight = sourceModel()->data(right).toString();
+		return StelUtils::getDecAngle(decLeft) < StelUtils::getDecAngle(decRight);
+	}
+	case ObsListDialog::ColumnMagnitude:
+	{
+		const QString magLeft  = sourceModel()->data(left).toString();
+		const QString magRight = sourceModel()->data(right).toString();
+		return magLeft.toDouble() < magRight.toDouble();
+	}
+	case ObsListDialog::ColumnDesignation:
+	{
+		const QString desigLeft  = sourceModel()->data(left).toString();
+		const QString desigRight = sourceModel()->data(right).toString();
+		return naturalLessThan(desigLeft, desigRight);
+	}
+	default:
+		return QSortFilterProxyModel::lessThan(left, right);
+	}
 }
