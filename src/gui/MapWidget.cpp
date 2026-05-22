@@ -28,6 +28,16 @@
 namespace
 {
 constexpr int GUI_PIXMAPS_SCALE = 5;
+
+template<typename Event>
+QPointF position(const Event* event, const double devPixelRatio)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	return event->position() * devPixelRatio;
+#else
+	return QPointF(event->pos()) * devPixelRatio;
+#endif
+}
 }
 
 MapWidget::MapWidget(QWidget* parent)
@@ -36,7 +46,7 @@ MapWidget::MapWidget(QWidget* parent)
 	, locationMarker(":/graphicGui/uieMapPointer.png")
 	, markerVisible(true)
 {
-	updateScaledMap();
+	updateScaledMapAndRect();
 }
 
 void MapWidget::setMarkerVisible(bool visible)
@@ -76,8 +86,34 @@ QPointF MapWidget::lonLatToMapPoint(const double lon, const double lat) const
 
 void MapWidget::mousePressEvent(QMouseEvent* event)
 {
-	const double ratio = devicePixelRatioF();
-	const auto pos = QPointF(event->pos()) * ratio;
+	if (event->button() != Qt::LeftButton) return;
+
+	dragStart = position(event, devicePixelRatioF());
+	currentDragShift = QPointF(0,0);
+}
+
+void MapWidget::mouseMoveEvent(QMouseEvent* event)
+{
+	if (!(event->buttons() & Qt::LeftButton)) return;
+
+	currentDragShift = position(event, devicePixelRatioF()) - dragStart;
+	updateScaledMapAndRect();
+}
+
+void MapWidget::mouseReleaseEvent(QMouseEvent* event)
+{
+	if (event->button() != Qt::LeftButton) return;
+
+	const auto pos = position(event, devicePixelRatioF());
+	currentDragShift = pos - dragStart;
+	shift += currentDragShift;
+	const bool moved = currentDragShift.x() != 0 || currentDragShift.y() != 0;
+	currentDragShift = QPointF(0,0);
+	if (moved)
+	{
+		updateScaledMapAndRect();
+		return;
+	}
 
 	if(!mapRect.contains(pos))
 		return;
@@ -87,14 +123,37 @@ void MapWidget::mousePressEvent(QMouseEvent* event)
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
 	QColor color=locationMgr->getColorForCoordinates(lon, lat);
 
+	dragStart = QPointF(-1,-1);
+
 	emit positionChanged(lon, lat, color);
+}
+
+void MapWidget::wheelEvent(QWheelEvent* event)
+{
+	if (event->buttons() & Qt::LeftButton) return;
+
+	const double delta = event->angleDelta().y();
+	const auto pos = position(event, devicePixelRatioF());
+	const auto offset = pos - QPointF(width(), height()) / 2.;
+
+	double zoomFactor = std::pow(2., delta / 120.);
+	const auto oldZoom = zoom;
+	zoom = oldZoom * zoomFactor;
+	if (zoom < 1)
+	{
+		zoom = 1;
+		zoomFactor = zoom / oldZoom;
+	}
+
+	shift = (shift - offset) * zoomFactor + offset;
+
+	updateScaledMapAndRect();
 }
 
 void MapWidget::setMap(const QPixmap &map)
 {
 	this->map = map;
-	updateScaledMap();
-	update();
+	updateScaledMapAndRect();
 }
 
 void MapWidget::makeSearchAreaOutline(const int width, const int height)
@@ -223,7 +282,7 @@ void MapWidget::paintEvent(QPaintEvent*)
 	painter.scale(1/ratio, 1/ratio); // Work in units of device pixels
 
 	painter.setClipRect(mapRect);
-	painter.drawPixmap(mapRect.topLeft(), scaledMap);
+	painter.drawPixmap(mapRect.toRect(), scaledMap);
 
 	if (markerVisible)
 	{
@@ -261,21 +320,38 @@ void MapWidget::paintEvent(QPaintEvent*)
 
 void MapWidget::resizeEvent(QResizeEvent* event)
 {
-	updateScaledMap();
-	searchAreaOutline = {};
+	updateScaledMapAndRect();
 }
 
-void MapWidget::updateScaledMap()
+void MapWidget::updateScaledMapAndRect()
 {
 	const double ratio = devicePixelRatioF();
-	const auto newSize = size() * ratio;
-	if (scaledMap.size() != newSize)
+	const auto virtualSize = height() * QSize(2, 1) * (ratio * zoom);
+	QSize realSize;
+	if (virtualSize.width() > map.width() || virtualSize.height() > map.height())
+		realSize = map.size();
+	else
+		realSize = virtualSize;
+
+	if (scaledMap.size() != realSize)
 	{
 		// QPixmap::scaled() gives higher quality of resampling than QPainter::drawPixmap()
-		scaledMap = map.scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+		scaledMap = map.scaled(realSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 	}
 
-	mapRect = QRectF(QPointF(std::round(( width()*ratio-scaledMap.width ()) / 2.),
-	                         std::round((height()*ratio-scaledMap.height()) / 2.)),
-	                 scaledMap.size());
+	auto topLeft = QPointF(std::round(( width()*ratio-virtualSize.width ()) / 2.),
+	                       std::round((height()*ratio-virtualSize.height()) / 2.));
+	topLeft += shift + currentDragShift;
+
+	const auto topLeftBeforeFix = topLeft;
+	if (topLeft.y() > 0)
+		topLeft.setY(0);
+	else if (topLeft.y() + virtualSize.height() < height())
+		topLeft.setY(height() - virtualSize.height());
+	shift += topLeft - topLeftBeforeFix;
+
+	mapRect = QRectF(topLeft, virtualSize);
+
+	searchAreaOutline = {};
+	update();
 }
