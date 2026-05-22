@@ -60,6 +60,20 @@ void MapWidget::setLocationFilter(double longitude, double latitude, double newS
 	update();
 }
 
+QPointF MapWidget::mapPointToLonLat(const QPointF& mapPoint) const
+{
+	const auto lat = (mapPoint.y() - mapRect.center().y()) / mapRect.height() * -180;
+	const auto lon = (mapPoint.x() - mapRect.center().x()) / mapRect.width()  * 360;
+	return {lon, lat};
+}
+
+QPointF MapWidget::lonLatToMapPoint(const double lon, const double lat) const
+{
+	const auto x = mapRect.left() + (lon + 180) /  360. * mapRect.width();
+	const auto y = mapRect.top()  + (lat -  90) / -180. * mapRect.height();
+	return {x,y};
+}
+
 void MapWidget::mousePressEvent(QMouseEvent* event)
 {
 	const double ratio = devicePixelRatioF();
@@ -68,8 +82,7 @@ void MapWidget::mousePressEvent(QMouseEvent* event)
 	if(!mapRect.contains(pos))
 		return;
 
-	const auto lat = (pos.y() - mapRect.center().y()) / mapRect.height() * -180;
-	const auto lon = (pos.x() - mapRect.center().x()) / mapRect.width()  * 360;
+	const auto [lon, lat] = mapPointToLonLat(pos);
 
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
 	QColor color=locationMgr->getColorForCoordinates(lon, lat);
@@ -97,8 +110,7 @@ void MapWidget::makeSearchAreaOutline(const int width, const int height)
 		lon *= M_180_PI;
 		lat *= M_180_PI;
 
-		const auto x = mapRect.left() + (lon + 180) /  360. * width;
-		const auto y = mapRect.top()  + (lat -  90) / -180. * height;
+		const auto [x, y] = lonLatToMapPoint(lon, lat);
 		points.emplace_back(x, y);
 	}
 
@@ -221,12 +233,11 @@ void MapWidget::paintEvent(QPaintEvent*)
 			++locMarkerWidth;
 		const auto scaledMarker = locationMarker.scaledToWidth(locMarkerWidth, Qt::SmoothTransformation);
 
-		const auto markerCenterPosX = std::lround(mapRect.left() + (markerLon + 180) /  360. * scaledMap.width() );
-		const auto markerCenterPosY = std::lround(mapRect.top()  + (markerLat -  90) / -180. * scaledMap.height());
+		const auto [markerCenterPosX, markerCenterPosY] = lonLatToMapPoint(markerLon, markerLat);
 
-		painter.drawPixmap(markerCenterPosX - scaledMarker.width()/2,
-				   markerCenterPosY - scaledMarker.height(),
-				   scaledMarker);
+		painter.drawPixmap(std::lround(markerCenterPosX) - scaledMarker.width()/2,
+		                   std::lround(markerCenterPosY) - scaledMarker.height(),
+		                   scaledMarker);
 	}
 
 	if (searchRadius < 180)
