@@ -59,6 +59,9 @@ protected:
 	void paintEvent(QPaintEvent* event) override;
 	void resizeEvent(QResizeEvent* event) override;
 
+	QPointF mapPointToLonLat(const QPointF& mapPoint) const;
+	QPointF lonLatToMapPoint(double lon, double lat) const;
+
 private:
 	void makeSearchAreaOutline(int width, int height);
 	void updateScaledMap();
