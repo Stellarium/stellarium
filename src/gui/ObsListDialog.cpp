@@ -1469,13 +1469,14 @@ void ObsListDialog::sortObsListTreeViewByColumnName(const QString &columnName)
 		{SORTING_BY_LOCATION,      ColumnLocation},
 		{SORTING_BY_LANDSCAPE_ID,  ColumnLandscapeID}
 	};
-    QAbstractItemModel *previousModel = ui->treeView->model();
-    ObsListDialogSortFilterProxyModel *proxyModel = new ObsListDialogSortFilterProxyModel;
-    proxyModel->setSourceModel(itemModel);
-    ui->treeView->setModel(proxyModel);
-    if (previousModel && previousModel != itemModel)
-        delete previousModel;
-    proxyModel->sort(map.value(columnName), Qt::AscendingOrder);
+	if (!qobject_cast<ObsListDialogSortFilterProxyModel*>(ui->treeView->model()))
+	{
+		auto *proxy = new ObsListDialogSortFilterProxyModel;
+		proxy->setSourceModel(itemModel);
+		ui->treeView->setModel(proxy);
+	}
+	// Use sortByColumn so the header sort indicator is updated along with the data.
+	ui->treeView->sortByColumn(map.value(columnName), Qt::AscendingOrder);
 }
 
 void ObsListDialog::setFlagUseJD(bool b)
@@ -1555,9 +1556,10 @@ void ObsListDialog::headerClicked(int index)
 		{ColumnDate,          SORTING_BY_DATE},
 		{ColumnLocation,      SORTING_BY_LOCATION},
 		{ColumnLandscapeID,   SORTING_BY_LANDSCAPE_ID}};
-	sorting=map.value(index, "");
-	//qCDebug(ObsLists) << "Sorting = " << sorting;
-	sortObsListTreeViewByColumnName(sorting);
+	sorting = map.value(index, "");
+	// Qt's setSortingEnabled(true) handles sort direction toggling via
+	// sortIndicatorChanged -> sortByColumn. Avoid recreating the proxy here
+	// as that resets QHeaderView::sortIndicatorTrackedSection and breaks toggling.
 }
 
 // Get the magnitude from selected object (or a dash if unavailable)
