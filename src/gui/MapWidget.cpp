@@ -36,6 +36,7 @@ MapWidget::MapWidget(QWidget* parent)
 	, locationMarker(":/graphicGui/uieMapPointer.png")
 	, markerVisible(true)
 {
+	updateScaledMap();
 }
 
 void MapWidget::setMarkerVisible(bool visible)
@@ -79,6 +80,7 @@ void MapWidget::mousePressEvent(QMouseEvent* event)
 void MapWidget::setMap(const QPixmap &map)
 {
 	this->map = map;
+	updateScaledMap();
 	update();
 }
 
@@ -208,13 +210,6 @@ void MapWidget::paintEvent(QPaintEvent*)
 	const double ratio = devicePixelRatioF();
 	painter.scale(1/ratio, 1/ratio); // Work in units of device pixels
 
-	// QPixmap::scaled() gives higher quality of resampling than QPainter::drawPixmap()
-	const auto scaledMap = map.scaled(size() * ratio, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-	mapRect = QRectF(QPointF(std::round(( width()*ratio-scaledMap.width ()) / 2.),
-							 std::round((height()*ratio-scaledMap.height()) / 2.)),
-					 scaledMap.size());
-
 	painter.setClipRect(mapRect);
 	painter.drawPixmap(mapRect.topLeft(), scaledMap);
 
@@ -255,5 +250,21 @@ void MapWidget::paintEvent(QPaintEvent*)
 
 void MapWidget::resizeEvent(QResizeEvent* event)
 {
+	updateScaledMap();
 	searchAreaOutline = {};
+}
+
+void MapWidget::updateScaledMap()
+{
+	const double ratio = devicePixelRatioF();
+	const auto newSize = size() * ratio;
+	if (scaledMap.size() != newSize)
+	{
+		// QPixmap::scaled() gives higher quality of resampling than QPainter::drawPixmap()
+		scaledMap = map.scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	}
+
+	mapRect = QRectF(QPointF(std::round(( width()*ratio-scaledMap.width ()) / 2.),
+	                         std::round((height()*ratio-scaledMap.height()) / 2.)),
+	                 scaledMap.size());
 }

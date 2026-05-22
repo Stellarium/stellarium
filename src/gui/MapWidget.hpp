@@ -61,12 +61,13 @@ protected:
 
 private:
 	void makeSearchAreaOutline(int width, int height);
+	void updateScaledMap();
 
 private:
 	double markerLat=0, markerLon=0;
 	double searchCenterLon=0, searchCenterLat=0, searchRadius=180;
 	QPainterPath searchAreaOutline;
-	QPixmap map;
+	QPixmap map, scaledMap;
 	QPixmap locationMarker;
 	QRectF mapRect; // in device pixels
 	bool markerVisible;
