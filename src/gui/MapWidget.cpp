@@ -88,7 +88,7 @@ void MapWidget::makeSearchAreaOutline(const int width, const int height)
 {
 	constexpr double nMax = 128;
 	std::vector<QPointF> points;
-	for (double n = 0; n < nMax; ++n)
+	for (double n = 0; n <= nMax; ++n)
 	{
 		const auto bearing = n / nMax * 360;
 		const auto point3d = StelLocation::pointAtDistanceDegrees(searchCenterLon, searchCenterLat, searchRadius, bearing);
