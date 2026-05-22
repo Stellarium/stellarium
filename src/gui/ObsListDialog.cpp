@@ -607,6 +607,7 @@ void ObsListDialog::loadSelectedList()
 		auto *proxy = new ObsListDialogSortFilterProxyModel;
 		proxy->setSourceModel(itemModel);
 		ui->treeView->setModel(proxy);
+		ui->treeView->hideColumn(ColumnUUID); // setModel() resets header visibility
 	}
 	// Apply saved sort order, or clear any sort retained from a previous list.
 	const QString sortingBy = observingListMap.value(KEY_SORTING).toString();
@@ -1485,6 +1486,7 @@ void ObsListDialog::sortObsListTreeViewByColumnName(const QString &columnName)
 		auto *proxy = new ObsListDialogSortFilterProxyModel;
 		proxy->setSourceModel(itemModel);
 		ui->treeView->setModel(proxy);
+		ui->treeView->hideColumn(ColumnUUID); // setModel() resets header visibility
 	}
 	// Use sortByColumn so the header sort indicator is updated along with the data.
 	ui->treeView->sortByColumn(map.value(columnName), Qt::AscendingOrder);
@@ -1657,12 +1659,12 @@ const QString ObsListDialog::DASH = QString(QChar(0x2014));
 // "NGC 9" sorts before "NGC 10". Does not depend on an ICU-backed QCollator.
 static bool naturalLessThan(const QString &a, const QString &b)
 {
-	int ia = 0, ib = 0;
+	qsizetype ia = 0, ib = 0;
 	while (ia < a.size() && ib < b.size())
 	{
 		if (a[ia].isDigit() && b[ib].isDigit())
 		{
-			int ja = ia, jb = ib;
+			qsizetype ja = ia, jb = ib;
 			while (ja < a.size() && a[ja].isDigit()) ++ja;
 			while (jb < b.size() && b[jb].isDigit()) ++jb;
 			const qlonglong numA = a.mid(ia, ja - ia).toLongLong();
