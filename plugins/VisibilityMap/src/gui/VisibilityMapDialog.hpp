@@ -27,6 +27,7 @@ class QStackedWidget;
 class QTabWidget;
 class QSpinBox;
 class QDoubleSpinBox;
+class QToolButton;
 class TitleBar;
 class StelCore;
 
@@ -88,7 +89,13 @@ private:
 	QComboBox*              stepCombo;
 	QComboBox*              isolineBodyCombo;
 	QComboBox*              isolineModeCombo;
-	QDoubleSpinBox*         isolineUtcSpin;    //!< Manual UTC offset override for isolines
+	QDoubleSpinBox*         isolineUtcSpin;
+	QPushButton*            isolineSyncButton;
+	QPushButton*            isolineSendButton;
+	QToolButton*            isolinePrevDayButton;
+	QToolButton*            isolineNextDayButton;
+	QPushButton*            isolineLocationButton;
+	QPushButton*            isolineResetButton;
 	QCheckBox*              twilightGridCheckBox;
 	QCheckBox*              twilightAutoSyncCheckBox;
 	QCheckBox*              isolineGridCheckBox;
@@ -97,16 +104,25 @@ private:
 	QCheckBox*              starVisCitiesCheckBox;
 	QCheckBox*              daylightGridCheckBox;
 	QCheckBox*              daylightCitiesCheckBox;
+	QCheckBox*              setLocationCheckBox;
 	QSpinBox*               daylightYearSpin;
 	QSpinBox*               daylightMonthSpin;
 	QSpinBox*               daylightDaySpin;
 	QComboBox*              daylightAltitudeCombo;
 	QPushButton*            calculateButton;
 	QPushButton*            starViewToggleButton;
-	QPushButton*            starVisLocationButton;  //!< hidden in calendar mode
-	QPushButton*            starVisResetButton;     //!< hidden in calendar mode
+	QPushButton*            starVisLocationButton;
+	QPushButton*            starVisResetButton;
+	QPushButton*            daylightSyncButton;
+	QPushButton*            daylightLocationButton;
+	QPushButton*            daylightResetButton;
 	QLabel*                 currentTimeLabel;
 	QLabel*                 stepValueLabel;
+	QLabel*                 stepLabel;
+	QLabel*                 isolineUtcLabel;
+	QLabel*                 starVisAltLabel;
+	QPushButton*            nowButton;
+	QPushButton*            sendTwilightButton;
 	StelCore*               core;
 };
 

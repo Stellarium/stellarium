@@ -63,9 +63,11 @@ public slots:
 	void resetUtcOffsetToLocation();         //!< Restore UTC offset from current Stellarium location.
 	void setFlagShowGrid(bool show);
 	void setFlagShowCities(bool show);
+	void setFlagSetLocationOnClick(bool enable) { flagSetLocationOnClick = enable; }
 	void resetView();
 	void zoomToCurrentLocation();
 	void addDays(int days);
+	void invalidateCache() { invalidateSceneCache(); update(); }
 	void addMonths(int months);
 
 signals:
@@ -75,6 +77,7 @@ signals:
 
 protected:
 	void paintEvent(QPaintEvent* event) override;
+	void changeEvent(QEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void mouseReleaseEvent(QMouseEvent* event) override;
@@ -137,12 +140,14 @@ private:
 	BodyMode bodyMode;
 	EventMode eventMode;
 	bool showGrid;
+	bool flagSetLocationOnClick;
 	bool showCities;
 	double centerLongitudeDeg;
 	double centerLatitudeDeg;
 	double longitudeSpanDeg;
 	bool dragging;
 	QPoint lastMousePos;
+	QPoint pressPos;      //!< Position at button-press — for click vs drag detection.
 	QPixmap sceneCache;
 	QSize sceneCacheSize;
 	bool sceneCacheDirty;

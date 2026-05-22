@@ -65,6 +65,12 @@ VisibilityMapDialog::VisibilityMapDialog()
 	, isolineBodyCombo(Q_NULLPTR)
 	, isolineModeCombo(Q_NULLPTR)
 	, isolineUtcSpin(Q_NULLPTR)
+	, isolineSyncButton(Q_NULLPTR)
+	, isolineSendButton(Q_NULLPTR)
+	, isolinePrevDayButton(Q_NULLPTR)
+	, isolineNextDayButton(Q_NULLPTR)
+	, isolineLocationButton(Q_NULLPTR)
+	, isolineResetButton(Q_NULLPTR)
 	, twilightGridCheckBox(Q_NULLPTR)
 	, twilightAutoSyncCheckBox(Q_NULLPTR)
 	, isolineGridCheckBox(Q_NULLPTR)
@@ -73,6 +79,7 @@ VisibilityMapDialog::VisibilityMapDialog()
 	, starVisCitiesCheckBox(Q_NULLPTR)
 	, daylightGridCheckBox(Q_NULLPTR)
 	, daylightCitiesCheckBox(Q_NULLPTR)
+	, setLocationCheckBox(Q_NULLPTR)
 	, daylightYearSpin(Q_NULLPTR)
 	, daylightMonthSpin(Q_NULLPTR)
 	, daylightDaySpin(Q_NULLPTR)
@@ -81,8 +88,16 @@ VisibilityMapDialog::VisibilityMapDialog()
 	, starViewToggleButton(Q_NULLPTR)
 	, starVisLocationButton(Q_NULLPTR)
 	, starVisResetButton(Q_NULLPTR)
+	, daylightSyncButton(Q_NULLPTR)
+	, daylightLocationButton(Q_NULLPTR)
+	, daylightResetButton(Q_NULLPTR)
 	, currentTimeLabel(Q_NULLPTR)
 	, stepValueLabel(Q_NULLPTR)
+	, stepLabel(Q_NULLPTR)
+	, isolineUtcLabel(Q_NULLPTR)
+	, starVisAltLabel(Q_NULLPTR)
+	, nowButton(Q_NULLPTR)
+	, sendTwilightButton(Q_NULLPTR)
 	, core(Q_NULLPTR)
 {
 }
@@ -96,18 +111,115 @@ void VisibilityMapDialog::retranslate()
 	if (!dialog)
 		return;
 
+	// Note: q_() strings will only be translated once this plugin is added
+	// to Stellarium's po/stellarium-visibilitymap/ translation catalogue.
+	// Until then, retranslate() ensures the UI is consistent after a language
+	// change even if strings remain in English.
 	titleBar->setTitle(q_("Visibility Map"));
 
-	const int idx = stepCombo->currentIndex();
-	stepCombo->blockSignals(true);
-	stepCombo->clear();
-	stepCombo->addItem(q_("Minute"), StepMinute);
-	stepCombo->addItem(q_("Hour"), StepHour);
-	stepCombo->addItem(q_("Day"), StepDay);
-	stepCombo->addItem(q_("Calendar month"), StepCalendarMonth);
-	stepCombo->addItem(q_("Calendar year"), StepCalendarYear);
-	stepCombo->setCurrentIndex(qBound(0, idx, stepCombo->count() - 1));
-	stepCombo->blockSignals(false);
+	// Tab labels
+	if (tabWidget)
+	{
+		tabWidget->setTabText(0, q_("Twilight zones"));
+		tabWidget->setTabText(1, q_("Rise/set isolines"));
+		tabWidget->setTabText(2, q_("Object visibility"));
+		tabWidget->setTabText(3, q_("Daylight length"));
+	}
+
+	// Shared checkbox
+	if (setLocationCheckBox)
+		setLocationCheckBox->setText(q_("Click map to set location"));
+
+	// ── Twilight tab ─────────────────────────────────────────────────────────
+	{
+		const int idx = stepCombo->currentIndex();
+		stepCombo->blockSignals(true);
+		stepCombo->clear();
+		stepCombo->addItem(q_("Minute"),         StepMinute);
+		stepCombo->addItem(q_("Hour"),           StepHour);
+		stepCombo->addItem(q_("Day"),            StepDay);
+		stepCombo->addItem(q_("Calendar month"), StepCalendarMonth);
+		stepCombo->addItem(q_("Calendar year"),  StepCalendarYear);
+		stepCombo->setCurrentIndex(qBound(0, idx, stepCombo->count() - 1));
+		stepCombo->blockSignals(false);
+	}
+	if (twilightGridCheckBox)    twilightGridCheckBox->setText(q_("Grid"));
+	if (twilightAutoSyncCheckBox) twilightAutoSyncCheckBox->setText(q_("Sync with Stellarium"));
+	if (stepLabel)               stepLabel->setText(q_("Step"));
+	if (nowButton)               nowButton->setText(q_("Now"));
+	if (sendTwilightButton)      sendTwilightButton->setText(q_("Send to Stellarium"));
+
+	// ── Isolines tab ─────────────────────────────────────────────────────────
+	if (isolineBodyCombo)
+	{
+		const int bodyIdx = isolineBodyCombo->currentIndex();
+		isolineBodyCombo->blockSignals(true);
+		isolineBodyCombo->clear();
+		isolineBodyCombo->addItem(q_("Sun"),  SunriseSunsetMapWidget::Sun);
+		isolineBodyCombo->addItem(q_("Moon"), SunriseSunsetMapWidget::Moon);
+		isolineBodyCombo->setCurrentIndex(qBound(0, bodyIdx, isolineBodyCombo->count() - 1));
+		isolineBodyCombo->blockSignals(false);
+	}
+	if (isolineModeCombo)
+	{
+		const int modeIdx = isolineModeCombo->currentIndex();
+		isolineModeCombo->blockSignals(true);
+		isolineModeCombo->clear();
+		isolineModeCombo->addItem(q_("Rise"),                  SunriseSunsetMapWidget::Sunrise);
+		isolineModeCombo->addItem(q_("Set"),                   SunriseSunsetMapWidget::Sunset);
+		isolineModeCombo->addItem(q_("Civil dawn (−6°)"),      SunriseSunsetMapWidget::CivilDawn);
+		isolineModeCombo->addItem(q_("Civil dusk (−6°)"),      SunriseSunsetMapWidget::CivilDusk);
+		isolineModeCombo->addItem(q_("Nautical dawn (−12°)"),  SunriseSunsetMapWidget::NauticalDawn);
+		isolineModeCombo->addItem(q_("Nautical dusk (−12°)"),  SunriseSunsetMapWidget::NauticalDusk);
+		isolineModeCombo->addItem(q_("Astro. dawn (−18°)"),    SunriseSunsetMapWidget::AstronomicalDawn);
+		isolineModeCombo->addItem(q_("Astro. dusk (−18°)"),    SunriseSunsetMapWidget::AstronomicalDusk);
+		isolineModeCombo->setCurrentIndex(qBound(0, modeIdx, isolineModeCombo->count() - 1));
+		isolineModeCombo->blockSignals(false);
+	}
+	if (isolineSyncButton)     isolineSyncButton->setText(q_("Sync from Stellarium"));
+	if (isolineSendButton)     isolineSendButton->setText(q_("Send to Stellarium"));
+	if (isolineUtcLabel)       isolineUtcLabel->setText(q_("UTC:"));
+	if (isolineGridCheckBox)   isolineGridCheckBox->setText(q_("Grid"));
+	if (isolineCitiesCheckBox) isolineCitiesCheckBox->setText(q_("Cities"));
+	if (isolineLocationButton) isolineLocationButton->setText(q_("Current location"));
+	if (isolineResetButton)    isolineResetButton->setText(q_("World"));
+
+	// ── Object visibility tab ────────────────────────────────────────────────
+	if (calculateButton)       calculateButton->setText(q_("Calculate"));
+	if (starVisGridCheckBox)   starVisGridCheckBox->setText(q_("Grid"));
+	if (starVisCitiesCheckBox) starVisCitiesCheckBox->setText(q_("Cities"));
+	if (starVisLocationButton) starVisLocationButton->setText(q_("Current location"));
+	if (starVisResetButton)    starVisResetButton->setText(q_("World"));
+	if (starVisAltLabel)       starVisAltLabel->setText(q_("Min. altitude:"));
+	if (starViewToggleButton)
+		starViewToggleButton->setText(starViewToggleButton->isChecked()
+		    ? q_("World map") : q_("Best visibility calendar"));
+
+	// ── Daylight length tab ──────────────────────────────────────────────────
+	if (daylightAltitudeCombo)
+	{
+		const int altIdx = daylightAltitudeCombo->currentIndex();
+		daylightAltitudeCombo->blockSignals(true);
+		daylightAltitudeCombo->clear();
+		daylightAltitudeCombo->addItem(q_("Sunrise/sunset (standard)"),    DaylightLengthMapWidget::PresetSunrise);
+		daylightAltitudeCombo->addItem(q_("Civil twilight (−6°)"),         DaylightLengthMapWidget::PresetCivil);
+		daylightAltitudeCombo->addItem(q_("Nautical twilight (−12°)"),     DaylightLengthMapWidget::PresetNautical);
+		daylightAltitudeCombo->addItem(q_("Astronomical twilight (−18°)"), DaylightLengthMapWidget::PresetAstronomical);
+		daylightAltitudeCombo->setCurrentIndex(qBound(0, altIdx, daylightAltitudeCombo->count() - 1));
+		daylightAltitudeCombo->blockSignals(false);
+	}
+	if (daylightGridCheckBox)   daylightGridCheckBox->setText(q_("Grid"));
+	if (daylightCitiesCheckBox) daylightCitiesCheckBox->setText(q_("Cities"));
+	if (daylightSyncButton)     daylightSyncButton->setText(q_("Use Stellarium date"));
+	if (daylightLocationButton) daylightLocationButton->setText(q_("Current location"));
+	if (daylightResetButton)    daylightResetButton->setText(q_("World"));
+
+	// Invalidate all widget caches — translated strings are baked into them.
+	if (mapWidget)               mapWidget->update();
+	if (isolineMapWidget)        isolineMapWidget->invalidateCache();
+	if (starVisibilityMapWidget) starVisibilityMapWidget->invalidateCache();
+	if (starCalendarWidget)    { starCalendarWidget->setCacheDirty(); starCalendarWidget->update(); }
+	if (daylightLengthMapWidget) daylightLengthMapWidget->invalidateCache();
 
 	updateLabels();
 }
@@ -133,6 +245,15 @@ void VisibilityMapDialog::createDialogContent()
 
 	tabWidget = new QTabWidget(dialog);
 	tabWidget->setTabPosition(QTabWidget::South);
+
+	// "Click to set location" checkbox — shared across all map tabs.
+	setLocationCheckBox = new QCheckBox(q_("Click map to set location"), dialog);
+	setLocationCheckBox->setToolTip(
+	        q_("When checked, clicking anywhere on the map instantly moves the "
+	           "Stellarium observer to that geographic location."));
+	setLocationCheckBox->setChecked(false);
+	tabWidget->setCornerWidget(setLocationCheckBox, Qt::TopRightCorner);
+
 	mainLayout->addWidget(tabWidget, 1);
 
 	// ── Tab 1: Twilight zones ─────────────────────────────────────────────
@@ -150,7 +271,7 @@ void VisibilityMapDialog::createDialogContent()
 	timeLayout->setSpacing(6);
 	twilightLayout->addLayout(timeLayout);
 
-	QLabel* stepLabel = new QLabel(q_("Step"), dialog);
+	stepLabel = new QLabel(q_("Step"), dialog);
 	timeLayout->addWidget(stepLabel);
 
 	stepCombo = new QComboBox(dialog);
@@ -180,11 +301,11 @@ void VisibilityMapDialog::createDialogContent()
 	timeLayout->addWidget(forwardButton);
 	connect(forwardButton, &QToolButton::clicked, this, &VisibilityMapDialog::stepForward);
 
-	QPushButton* nowButton = new QPushButton(q_("Now"), dialog);
+	nowButton = new QPushButton(q_("Now"), dialog);
 	timeLayout->addWidget(nowButton);
 	connect(nowButton, &QPushButton::clicked, this, &VisibilityMapDialog::setToCurrentSystemTime);
 
-	QPushButton* sendTwilightButton = new QPushButton(q_("Send to Stellarium"), dialog);
+	sendTwilightButton = new QPushButton(q_("Send to Stellarium"), dialog);
 	sendTwilightButton->setToolTip(q_("Push the twilight map's current time to the planetarium"));
 	timeLayout->addWidget(sendTwilightButton);
 	connect(sendTwilightButton, &QPushButton::clicked, this, &VisibilityMapDialog::sendTwilightToCore);
@@ -264,19 +385,20 @@ void VisibilityMapDialog::createDialogContent()
 		        	isolineModeCombo->setCurrentIndex(0);
 	        });
 
-	QPushButton* syncButton = new QPushButton(q_("Sync from Stellarium"), isolineTab);
-	syncButton->setToolTip(q_("Copy current Stellarium time and location timezone to this map"));
-	isolineControls->addWidget(syncButton);
-	connect(syncButton, &QPushButton::clicked, this, &VisibilityMapDialog::syncIsolineFromCore);
+	isolineSyncButton = new QPushButton(q_("Sync from Stellarium"), isolineTab);
+	isolineSyncButton->setToolTip(q_("Copy current Stellarium time and location timezone to this map"));
+	isolineControls->addWidget(isolineSyncButton);
+	connect(isolineSyncButton, &QPushButton::clicked, this, &VisibilityMapDialog::syncIsolineFromCore);
 
-	QPushButton* sendButton = new QPushButton(q_("Send to Stellarium"), isolineTab);
-	sendButton->setToolTip(q_("Push this map's time back to the planetarium"));
-	isolineControls->addWidget(sendButton);
-	connect(sendButton, &QPushButton::clicked, this, &VisibilityMapDialog::sendIsolineToCore);
+	isolineSendButton = new QPushButton(q_("Send to Stellarium"), isolineTab);
+	isolineSendButton->setToolTip(q_("Push this map's time back to the planetarium"));
+	isolineControls->addWidget(isolineSendButton);
+	connect(isolineSendButton, &QPushButton::clicked, this, &VisibilityMapDialog::sendIsolineToCore);
 
 	// UTC offset override — lets users explore times in any timezone
 	// without changing their Stellarium observer location.
-	isolineControls->addWidget(new QLabel(q_("UTC:"), isolineTab));
+	isolineUtcLabel = new QLabel(q_("UTC:"), isolineTab);
+	isolineControls->addWidget(isolineUtcLabel);
 	isolineUtcSpin = new QDoubleSpinBox(isolineTab);
 	isolineUtcSpin->setRange(-12.0, 14.0);
 	isolineUtcSpin->setSingleStep(0.5);
@@ -318,35 +440,35 @@ void VisibilityMapDialog::createDialogContent()
 	connect(isolineCitiesCheckBox, &QCheckBox::toggled,
 	        isolineMapWidget, &SunriseSunsetMapWidget::setFlagShowCities);
 
-	QToolButton* previousDayButton = new QToolButton(isolineTab);
-	previousDayButton->setText(QStringLiteral("<"));
-	previousDayButton->setToolTip(q_("Previous day"));
-	previousDayButton->setAutoRepeat(true);
-	previousDayButton->setAutoRepeatDelay(350);
-	previousDayButton->setAutoRepeatInterval(90);
-	isolineControls->addWidget(previousDayButton);
-	connect(previousDayButton, &QToolButton::clicked, this, &VisibilityMapDialog::previousIsolineDay);
+	isolinePrevDayButton = new QToolButton(isolineTab);
+	isolinePrevDayButton->setText(QStringLiteral("<"));
+	isolinePrevDayButton->setToolTip(q_("Previous day"));
+	isolinePrevDayButton->setAutoRepeat(true);
+	isolinePrevDayButton->setAutoRepeatDelay(350);
+	isolinePrevDayButton->setAutoRepeatInterval(90);
+	isolineControls->addWidget(isolinePrevDayButton);
+	connect(isolinePrevDayButton, &QToolButton::clicked, this, &VisibilityMapDialog::previousIsolineDay);
 
 	QLabel* dayLabel = new QLabel(q_("Day"), isolineTab);
 	dayLabel->setAlignment(Qt::AlignCenter);
 	isolineControls->addWidget(dayLabel);
 
-	QToolButton* nextDayButton = new QToolButton(isolineTab);
-	nextDayButton->setText(QStringLiteral(">"));
-	nextDayButton->setToolTip(q_("Next day"));
-	nextDayButton->setAutoRepeat(true);
-	nextDayButton->setAutoRepeatDelay(350);
-	nextDayButton->setAutoRepeatInterval(90);
-	isolineControls->addWidget(nextDayButton);
-	connect(nextDayButton, &QToolButton::clicked, this, &VisibilityMapDialog::nextIsolineDay);
+	isolineNextDayButton = new QToolButton(isolineTab);
+	isolineNextDayButton->setText(QStringLiteral(">"));
+	isolineNextDayButton->setToolTip(q_("Next day"));
+	isolineNextDayButton->setAutoRepeat(true);
+	isolineNextDayButton->setAutoRepeatDelay(350);
+	isolineNextDayButton->setAutoRepeatInterval(90);
+	isolineControls->addWidget(isolineNextDayButton);
+	connect(isolineNextDayButton, &QToolButton::clicked, this, &VisibilityMapDialog::nextIsolineDay);
 
-	QPushButton* currentLocationButton = new QPushButton(q_("Current location"), isolineTab);
-	isolineControls->addWidget(currentLocationButton);
-	connect(currentLocationButton, &QPushButton::clicked, this, &VisibilityMapDialog::zoomIsolineViewToCurrentLocation);
+	isolineLocationButton = new QPushButton(q_("Current location"), isolineTab);
+	isolineControls->addWidget(isolineLocationButton);
+	connect(isolineLocationButton, &QPushButton::clicked, this, &VisibilityMapDialog::zoomIsolineViewToCurrentLocation);
 
-	QPushButton* resetViewButton = new QPushButton(q_("World"), isolineTab);
-	isolineControls->addWidget(resetViewButton);
-	connect(resetViewButton, &QPushButton::clicked, this, &VisibilityMapDialog::resetIsolineView);
+	isolineResetButton = new QPushButton(q_("World"), isolineTab);
+	isolineControls->addWidget(isolineResetButton);
+	connect(isolineResetButton, &QPushButton::clicked, this, &VisibilityMapDialog::resetIsolineView);
 	isolineControls->addStretch(1);
 
 	tabWidget->addTab(isolineTab, q_("Rise/set isolines"));
@@ -423,7 +545,8 @@ void VisibilityMapDialog::createDialogContent()
 	connect(starVisResetButton, &QPushButton::clicked,
 	        this, &VisibilityMapDialog::resetStarVisibilityView);
 
-	starVisControls->addWidget(new QLabel(q_("Min. altitude:"), starVisTab));
+	starVisAltLabel = new QLabel(q_("Min. altitude:"), starVisTab);
+	starVisControls->addWidget(starVisAltLabel);
 	QSpinBox* goodAltSpin = new QSpinBox(starVisTab);
 	goodAltSpin->setRange(1, 89);
 	goodAltSpin->setValue(5);
@@ -545,10 +668,10 @@ void VisibilityMapDialog::createDialogContent()
 	        [this]() { daylightLengthMapWidget->stepMonths(1); });
 
 	// Sync from Stellarium
-	QPushButton* dlSyncButton = new QPushButton(q_("Use Stellarium date"), daylightLenTab);
-	dlSyncButton->setToolTip(q_("Copy today's date from the Stellarium clock (does not change the planetarium view)"));
-	daylightDateRow->addWidget(dlSyncButton);
-	connect(dlSyncButton, &QPushButton::clicked,
+	daylightSyncButton = new QPushButton(q_("Use Stellarium date"), daylightLenTab);
+	daylightSyncButton->setToolTip(q_("Copy today's date from the Stellarium clock (does not change the planetarium view)"));
+	daylightDateRow->addWidget(daylightSyncButton);
+	connect(daylightSyncButton, &QPushButton::clicked,
 	        this, &VisibilityMapDialog::syncDaylightDateFromCore);
 
 	daylightDateRow->addStretch(1);
@@ -584,19 +707,29 @@ void VisibilityMapDialog::createDialogContent()
 	connect(daylightCitiesCheckBox, &QCheckBox::toggled,
 	        daylightLengthMapWidget, &DaylightLengthMapWidget::setFlagShowCities);
 
-	QPushButton* dlLocationButton = new QPushButton(q_("Current location"), daylightLenTab);
-	daylightOptRow->addWidget(dlLocationButton);
-	connect(dlLocationButton, &QPushButton::clicked,
+	daylightLocationButton = new QPushButton(q_("Current location"), daylightLenTab);
+	daylightOptRow->addWidget(daylightLocationButton);
+	connect(daylightLocationButton, &QPushButton::clicked,
 	        daylightLengthMapWidget, &DaylightLengthMapWidget::zoomToCurrentLocation);
 
-	QPushButton* dlResetButton = new QPushButton(q_("World"), daylightLenTab);
-	daylightOptRow->addWidget(dlResetButton);
-	connect(dlResetButton, &QPushButton::clicked,
+	daylightResetButton = new QPushButton(q_("World"), daylightLenTab);
+	daylightOptRow->addWidget(daylightResetButton);
+	connect(daylightResetButton, &QPushButton::clicked,
 	        daylightLengthMapWidget, &DaylightLengthMapWidget::resetView);
 
 	daylightOptRow->addStretch(1);
 
 	tabWidget->addTab(daylightLenTab, q_("Daylight length"));
+
+	// Connect "click to set location" checkbox to all map widgets.
+	connect(setLocationCheckBox, &QCheckBox::toggled,
+	        mapWidget,              &EarthShadowMapWidget::setFlagSetLocationOnClick);
+	connect(setLocationCheckBox, &QCheckBox::toggled,
+	        isolineMapWidget,       &SunriseSunsetMapWidget::setFlagSetLocationOnClick);
+	connect(setLocationCheckBox, &QCheckBox::toggled,
+	        starVisibilityMapWidget,&StarVisibilityMapWidget::setFlagSetLocationOnClick);
+	connect(setLocationCheckBox, &QCheckBox::toggled,
+	        daylightLengthMapWidget,&DaylightLengthMapWidget::setFlagSetLocationOnClick);
 
 	// ── Connections for object-selection changes ──────────────────────────
 	// When the user clicks a different object, only the button enable-state

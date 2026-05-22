@@ -78,9 +78,11 @@ public:
 
 	//! Show the "no object" placeholder.
 	void clearObject();
+	void setCacheDirty() { cacheDirty = true; }
 
 protected:
 	void paintEvent(QPaintEvent* event) override;
+	void changeEvent(QEvent* event) override;
 	void resizeEvent(QResizeEvent* event) override;
 
 private:

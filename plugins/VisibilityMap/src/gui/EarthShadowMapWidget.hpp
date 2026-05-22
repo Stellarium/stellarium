@@ -1,5 +1,5 @@
 /*
- * Visibility Map plug-in for Stellarium
+ * Daylight Map plug-in for Stellarium
  *
  * Copyright (C) 2026 Atque
  *
@@ -32,9 +32,13 @@ public slots:
 	void syncToCore();
 	void addDays(double days);
 	void setFlagShowGrid(bool show);
+	void setFlagSetLocationOnClick(bool enable) { flagSetLocationOnClick = enable; }
 
 protected:
 	void paintEvent(QPaintEvent* event) override;
+	void changeEvent(QEvent* event) override;
+	void mousePressEvent(QMouseEvent* event) override;
+	void mouseReleaseEvent(QMouseEvent* event) override;
 
 private:
 	struct BodyPoint
@@ -69,6 +73,8 @@ private:
 	QPixmap earthMap;
 	StelCore* core;
 	bool showGrid;
+	bool flagSetLocationOnClick;
+	QPoint pressPos;
 	double localJD;
 	double localJDE;
 

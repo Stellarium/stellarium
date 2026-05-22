@@ -85,8 +85,10 @@ public slots:
 	//! Set the solar altitude threshold.
 	//! @param preset  One of the AltitudePreset enum values.
 	void setAltitudeThreshold(int preset);
+	void invalidateCache() { invalidateSceneCache(); update(); }
 
 	void setFlagShowCities(bool show);
+	void setFlagSetLocationOnClick(bool enable) { flagSetLocationOnClick = enable; }
 	void setFlagShowGrid(bool show);
 	void resetView();
 	void zoomToCurrentLocation();
@@ -96,6 +98,7 @@ public slots:
 
 protected:
 	void paintEvent(QPaintEvent* event) override;
+	void changeEvent(QEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void mouseReleaseEvent(QMouseEvent* event) override;
@@ -171,11 +174,13 @@ private:
 	// View
 	bool   showGrid;
 	bool   showCities;
+	bool   flagSetLocationOnClick;
 	double centerLongitudeDeg;
 	double centerLatitudeDeg;
 	double longitudeSpanDeg;
 	bool   dragging;
 	QPoint lastMousePos;
+	QPoint pressPos;
 
 	// Scene cache
 	QPixmap sceneCache;

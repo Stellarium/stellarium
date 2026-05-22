@@ -65,6 +65,7 @@ SunriseSunsetMapWidget::SunriseSunsetMapWidget(QWidget* parent)
 	, bodyMode(Sun)
 	, eventMode(Sunrise)
 	, showGrid(false)
+	, flagSetLocationOnClick(false)
 	, showCities(true)
 	, centerLongitudeDeg(mapCenterLongitudeDeg)
 	, centerLatitudeDeg(0.)
@@ -246,12 +247,24 @@ void SunriseSunsetMapWidget::paintEvent(QPaintEvent* event)
 	                 Qt::AlignCenter, titleText());
 }
 
+void SunriseSunsetMapWidget::changeEvent(QEvent* event)
+{
+	if (event->type() == QEvent::LanguageChange)
+	{
+		invalidateSceneCache();
+		update();
+	}
+	QWidget::changeEvent(event);
+}
+
+
 void SunriseSunsetMapWidget::mousePressEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton)
 	{
-		dragging = true;
+		dragging     = true;
 		lastMousePos = event->pos();
+		pressPos     = event->pos();
 		event->accept();
 		return;
 	}
@@ -282,7 +295,31 @@ void SunriseSunsetMapWidget::mouseReleaseEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton)
 	{
+		// If the mouse barely moved, treat as a click rather than a drag end.
+		const bool wasClick = (event->pos() - pressPos).manhattanLength() < 5;
 		dragging = false;
+
+		if (flagSetLocationOnClick && wasClick)
+		{
+			const QRectF mapRect = rect().adjusted(10, 10, -10, -34);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			const QPointF eventPos = event->position();
+#else
+			const QPointF eventPos = event->posF();
+#endif
+			double lon = 0., lat = 0.;
+			screenToLonLat(eventPos, mapRect, lon, lat);
+			StelLocation loc;
+			loc.planetName = QStringLiteral("Earth");
+			loc.name       = QString();
+			loc.setLongitude(static_cast<float>(lon));
+			loc.setLatitude(static_cast<float>(lat));
+			loc.altitude      = 0;
+			loc.isUserLocation = true;
+			StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0);
+			event->accept();
+			return;
+		}
 		event->accept();
 		return;
 	}
@@ -660,10 +697,10 @@ void SunriseSunsetMapWidget::drawPolarShading(QPainter& painter, const QRectF& m
 
 void SunriseSunsetMapWidget::drawIsolines(QPainter& painter, const QRectF& mapRect)
 {
-	const int columns = bodyMode == Moon ? qBound(60, qRound(mapRect.width() / 8.0), 140)
-	                                     : qBound(80, qRound(mapRect.width() / 5.0), 220);
-	const int rows = bodyMode == Moon ? qBound(40, qRound(mapRect.height() / 8.0), 90)
-	                                  : qBound(50, qRound(mapRect.height() / 5.0), 140);
+	const int columns = bodyMode == Moon ? qBound(80,  qRound(mapRect.width()  / 5.0), 180)
+	                                     : qBound(120, qRound(mapRect.width()  / 3.0), 300);
+	const int rows    = bodyMode == Moon ? qBound(50,  qRound(mapRect.height() / 5.0), 120)
+	                                     : qBound( 80, qRound(mapRect.height() / 3.0), 200);
 	const QVector<BodySample> bodySamples = buildBodySamples();
 	const double latitudeSpanDeg = longitudeSpanDeg * mapRect.height() / mapRect.width();
 	const double gridLatTop    = qMin( 90.0, centerLatitudeDeg + latitudeSpanDeg / 2.0);

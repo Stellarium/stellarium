@@ -140,6 +140,17 @@ void StarCalendarWidget::paintEvent(QPaintEvent*)
 	drawCaption(painter, plotRect);
 }
 
+void StarCalendarWidget::changeEvent(QEvent* event)
+{
+	if (event->type() == QEvent::LanguageChange)
+	{
+		cacheDirty = true;
+		update();
+	}
+	QWidget::changeEvent(event);
+}
+
+
 // ---------------------------------------------------------------------------
 // Background image — the expensive pixel loop (run once, cached)
 // ---------------------------------------------------------------------------
@@ -407,9 +418,6 @@ void StarCalendarWidget::drawContourLines(QPainter& painter, const QRectF& plotR
 	    {kNauticalTw,     QColor( 80, 150, 255), q_("Nautical (−12°)")},
 	    {kAstronomicalTw, QColor( 30,  90, 220), q_("Astronomical (−18°)")},
 	};
-
-	const int latSteps = 180;
-	const double latStep = (kLatMax - kLatMin) / latSteps;
 
 	painter.save();
 	painter.setClipRect(plotRect);

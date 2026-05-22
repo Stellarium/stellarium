@@ -23,6 +23,7 @@
 
 #include <QPainter>
 #include <QPaintEvent>
+#include <QMouseEvent>
 #include <QtMath>
 #include <algorithm>
 
@@ -56,6 +57,7 @@ EarthShadowMapWidget::EarthShadowMapWidget(QWidget* parent)
 	, earthMap(QStringLiteral(":/DaylightMap/earth_map.jpg"))
 	, core(StelApp::getInstance().getCore())
 	, showGrid(false)
+	, flagSetLocationOnClick(false)
 	, localJD(core ? core->getJD() : 0.)
 	, localJDE(core ? core->getJDE() : 0.)
 	, cachedJD(0.)
@@ -171,6 +173,77 @@ void EarthShadowMapWidget::paintEvent(QPaintEvent* event)
 
 }
 
+void EarthShadowMapWidget::changeEvent(QEvent* event)
+{
+	if (event->type() == QEvent::LanguageChange)
+	{
+		// Polar annotations contain translated strings —
+		// they're drawn in paintEvent directly so just trigger a repaint.
+		update();
+	}
+	QWidget::changeEvent(event);
+}
+
+void EarthShadowMapWidget::pointToLonLat(const QPointF& point, const QRectF& mapRect,
+                                          double& longitudeDeg, double& latitudeDeg) const
+{
+	// The twilight tab always shows the full world (360° × 180°).
+	longitudeDeg = -180.0 + (point.x() - mapRect.left()) / mapRect.width() * 360.0;
+	latitudeDeg  =  90.0 - (point.y() - mapRect.top())  / mapRect.height() * 180.0;
+}
+
+void EarthShadowMapWidget::mousePressEvent(QMouseEvent* event)
+{
+	if (event->button() == Qt::LeftButton)
+	{
+		pressPos = event->pos();
+		event->accept();
+		return;
+	}
+	QWidget::mousePressEvent(event);
+}
+
+void EarthShadowMapWidget::mouseReleaseEvent(QMouseEvent* event)
+{
+	if (event->button() == Qt::LeftButton)
+	{
+		if (flagSetLocationOnClick && (event->pos() - pressPos).manhattanLength() < 5)
+		{
+			const QRectF available = rect().adjusted(10, 10, -10, -10);
+			const double targetRatio = 2.0;
+			double mapWidth = available.width();
+			double mapHeight = mapWidth / targetRatio;
+			if (mapHeight > available.height())
+			{ mapHeight = available.height(); mapWidth = mapHeight * targetRatio; }
+			const QRectF mapRect(available.center().x() - mapWidth / 2.0,
+			                     available.center().y() - mapHeight / 2.0,
+			                     mapWidth, mapHeight);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			const QPointF pos = event->position();
+#else
+			const QPointF pos = event->posF();
+#endif
+			if (mapRect.contains(pos))
+			{
+				double lon = 0., lat = 0.;
+				pointToLonLat(pos, mapRect, lon, lat);
+				StelLocation loc;
+				loc.planetName     = QStringLiteral("Earth");
+				loc.name           = QString();
+				loc.setLongitude(static_cast<float>(lon));
+				loc.setLatitude(static_cast<float>(lat));
+				loc.altitude       = 0;
+				loc.isUserLocation = true;
+				StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0);
+			}
+		}
+		event->accept();
+		return;
+	}
+	QWidget::mouseReleaseEvent(event);
+}
+
+
 EarthShadowMapWidget::BodyPoint EarthShadowMapWidget::computeSubPoint(bool sun) const
 {
 	BodyPoint result;
@@ -277,33 +350,37 @@ void EarthShadowMapWidget::rebuildSceneCache(const QSize& mapSize)
 
 void EarthShadowMapWidget::rebuildBaseMapCache(const QSize& mapSize)
 {
+	const double dpr = devicePixelRatioF();
+	const QSize physSize(qCeil(mapSize.width() * dpr), qCeil(mapSize.height() * dpr));
 	cachedMapSize = mapSize;
-	baseMapCache = QPixmap(mapSize);
+	baseMapCache = QPixmap(physSize);
+	baseMapCache.setDevicePixelRatio(dpr);
 	baseMapCache.fill(Qt::transparent);
 
 	QPainter painter(&baseMapCache);
 	painter.setRenderHint(QPainter::SmoothPixmapTransform);
 	if (!earthMap.isNull())
-		painter.drawPixmap(QRect(QPoint(0, 0), mapSize),
-		                   earthMap.scaled(mapSize, Qt::IgnoreAspectRatio,
+		painter.drawPixmap(QRect(QPoint(0, 0), physSize),
+		                   earthMap.scaled(physSize, Qt::IgnoreAspectRatio,
 		                                   Qt::SmoothTransformation));
 }
 
 void EarthShadowMapWidget::rebuildTwilightOverlayCache(const QSize& cacheSize, const BodyPoint& sun)
 {
-	// Use Format_ARGB32 (straight alpha), NOT Format_ARGB32_Premultiplied.
-	// With premultiplied format, qRgba() straight values are misinterpreted
-	// by Qt's compositor, causing colour shifts (e.g. civil twilight appears red).
-	twilightOverlayCache = QImage(cacheSize, QImage::Format_ARGB32);
+	// Use Format_ARGB32 (straight alpha) at physical pixel resolution for HiDPI sharpness.
+	const double dprOvl = devicePixelRatioF();
+	const int pw = qMax(1, qRound(cacheSize.width()  * dprOvl));
+	const int ph = qMax(1, qRound(cacheSize.height() * dprOvl));
+	twilightOverlayCache = QImage(pw, ph, QImage::Format_ARGB32);
 	twilightOverlayCache.fill(Qt::transparent);
 
-	for (int y = 0; y < cacheSize.height(); ++y)
+	for (int y = 0; y < ph; ++y)
 	{
 		QRgb* line = reinterpret_cast<QRgb*>(twilightOverlayCache.scanLine(y));
-		const double lat = 90.0 - (static_cast<double>(y) + 0.5) * 180.0 / cacheSize.height();
-		for (int x = 0; x < cacheSize.width(); ++x)
+		const double lat = 90.0 - (static_cast<double>(y) + 0.5) * 180.0 / ph;
+		for (int x = 0; x < pw; ++x)
 		{
-			const double lon = -180.0 + (static_cast<double>(x) + 0.5) * 360.0 / cacheSize.width();
+			const double lon = -180.0 + (static_cast<double>(x) + 0.5) * 360.0 / pw;
 			const double alt = solarAltitudeDeg(lat, lon, sun);
 
 			// Grey shading — four zones of increasing darkness toward night.
@@ -323,7 +400,10 @@ void EarthShadowMapWidget::rebuildTwilightOverlayCache(const QSize& cacheSize, c
 
 void EarthShadowMapWidget::rebuildContourCache(const QSize& cacheSize, const BodyPoint& sun)
 {
-	contourCache = QPixmap(cacheSize);
+	const double dpr = devicePixelRatioF();
+	const QSize physSize(qCeil(cacheSize.width() * dpr), qCeil(cacheSize.height() * dpr));
+	contourCache = QPixmap(physSize);
+	contourCache.setDevicePixelRatio(dpr);
 	contourCache.fill(Qt::transparent);
 
 	QPainter painter(&contourCache);
@@ -346,8 +426,8 @@ void EarthShadowMapWidget::drawAltitudeContour(QPainter& painter, const QRectF& 
 	painter.setPen(pen);
 	painter.setBrush(Qt::NoBrush);
 
-	const int columns = qMax(80, qRound(mapRect.width() / 4.0));
-	const int rows = qMax(40, qRound(mapRect.height() / 4.0));
+	const int columns = qMax(180, qRound(mapRect.width()  / 2.0));
+	const int rows    = qMax( 90, qRound(mapRect.height() / 2.0));
 
 	auto valueAt = [&](int ix, int iy) {
 		const double lon = -180.0 + static_cast<double>(ix) * 360.0 / columns;

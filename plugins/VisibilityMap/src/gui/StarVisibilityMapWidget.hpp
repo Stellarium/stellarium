@@ -79,12 +79,15 @@ public slots:
 
 	void setFlagShowGrid(bool show);
 	void setFlagShowCities(bool show);
+	void setFlagSetLocationOnClick(bool enable) { flagSetLocationOnClick = enable; }
 	void setGoodVisibilityAltitude(int altDeg);  //!< Set the minimum altitude for the "good visibility" line (default 5°).
+	void invalidateCache() { invalidateSceneCache(); update(); }
 	void resetView();
 	void zoomToCurrentLocation();
 
 protected:
 	void paintEvent(QPaintEvent* event) override;
+	void changeEvent(QEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void mouseReleaseEvent(QMouseEvent* event) override;
@@ -123,12 +126,14 @@ private:
 
 	bool   showGrid;
 	bool   showCities;
+	bool   flagSetLocationOnClick;
 	int    goodVisibilityAltDeg;  //!< Minimum altitude for "good visibility" line, degrees (default 5)
 	double centerLongitudeDeg;
 	double centerLatitudeDeg;
 	double longitudeSpanDeg;
 	bool   dragging;
 	QPoint lastMousePos;
+	QPoint pressPos;
 
 	QPixmap sceneCache;
 	QSize   sceneCacheSize;

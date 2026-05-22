@@ -83,6 +83,7 @@ StarVisibilityMapWidget::StarVisibilityMapWidget(QWidget* parent)
 	, core(StelApp::getInstance().getCore())
 	, showGrid(false)
 	, showCities(true)
+	, flagSetLocationOnClick(false)
 	, goodVisibilityAltDeg(5)
 	, centerLongitudeDeg(mapCenterLongitudeDeg)
 	, centerLatitudeDeg(0.)
@@ -273,12 +274,24 @@ void StarVisibilityMapWidget::paintEvent(QPaintEvent* event)
 	}
 }
 
+void StarVisibilityMapWidget::changeEvent(QEvent* event)
+{
+	if (event->type() == QEvent::LanguageChange)
+	{
+		invalidateSceneCache();
+		update();
+	}
+	QWidget::changeEvent(event);
+}
+
+
 void StarVisibilityMapWidget::mousePressEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton)
 	{
 		dragging     = true;
 		lastMousePos = event->pos();
+		pressPos     = event->pos();
 		event->accept();
 		return;
 	}
@@ -310,7 +323,28 @@ void StarVisibilityMapWidget::mouseReleaseEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton)
 	{
+		const bool wasClick = (event->pos() - pressPos).manhattanLength() < 5;
 		dragging = false;
+
+		if (flagSetLocationOnClick && wasClick)
+		{
+			const QRectF mapRect = rect().adjusted(10, 10, -10, -34);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			const QPointF eventPos = event->position();
+#else
+			const QPointF eventPos = event->posF();
+#endif
+			double lon = 0., lat = 0.;
+			screenToLonLat(eventPos, mapRect, lon, lat);
+			StelLocation loc;
+			loc.planetName = QStringLiteral("Earth");
+			loc.name       = QString();
+			loc.setLongitude(static_cast<float>(lon));
+			loc.setLatitude(static_cast<float>(lat));
+			loc.altitude       = 0;
+			loc.isUserLocation = true;
+			StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0);
+		}
 		event->accept();
 		return;
 	}
@@ -484,9 +518,12 @@ void StarVisibilityMapWidget::drawLatitudeLine(QPainter& painter, const QRectF& 
 	pts.reserve(segments + 1);
 	for (int i = 0; i <= segments; ++i)
 	{
+		// Pass the raw unwrapped longitude — lonLatToPoint normalises
+		// relative to centerLongitudeDeg internally.  Normalising here
+		// first causes discontinuities when the line crosses ±180°.
 		const double lon = centerLongitudeDeg - longitudeSpanDeg / 2.0 +
 		                   static_cast<double>(i) * longitudeSpanDeg / segments;
-		pts << lonLatToPoint(normalizeLongitudeDeg(lon), latitudeDeg, mapRect);
+		pts << lonLatToPoint(lon, latitudeDeg, mapRect);
 	}
 	painter.drawPolyline(pts.constData(), pts.size());
 }
