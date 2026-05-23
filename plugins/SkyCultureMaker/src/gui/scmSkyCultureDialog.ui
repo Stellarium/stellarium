@@ -798,7 +798,7 @@
              <item row="0" column="0" colspan="2">
               <widget class="QPushButton" name="cnUseFromSelectionBtn">
                <property name="text">
-                <string>Use Selected Object</string>
+                <string>Copy Data From Selected Object</string>
                </property>
                <property name="toolTip">
                 <string>Fill Type, Identifier and English name from the currently selected object</string>
@@ -942,7 +942,7 @@
             <item>
              <widget class="QPushButton" name="cnAddNewBtn">
               <property name="text">
-               <string>Add As New Entry</string>
+               <string>Save As New Entry</string>
               </property>
               <property name="toolTip">
                <string>Add the current form as a new entry</string>

@@ -1314,10 +1314,9 @@ void ScmSkyCultureDialog::cnUseSelectedObject()
 		const QString engId = obj->getEnglishName();
 		if (engId.startsWith(QLatin1String("HIP "), Qt::CaseInsensitive))
 		{
-			bool ok = false;
+			bool ok          = false;
 			const StarId hip = engId.mid(4).toULongLong(&ok);
-			if (ok)
-				englishName = StarMgr::getCommonEnglishName(hip);
+			if (ok) englishName = StarMgr::getCommonEnglishName(hip);
 		}
 	}
 	else if (type == QLatin1String("Planet"))
