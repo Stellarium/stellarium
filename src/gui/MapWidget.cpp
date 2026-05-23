@@ -28,6 +28,7 @@
 namespace
 {
 constexpr int GUI_PIXMAPS_SCALE = 5;
+constexpr int THRESHOLD_FOR_CLICK = 5;
 
 template<typename Event>
 QPointF position(const Event* event, const double devPixelRatio)
@@ -107,7 +108,7 @@ void MapWidget::mouseReleaseEvent(QMouseEvent* event)
 	const auto pos = position(event, devicePixelRatioF());
 	currentDragShift = pos - dragStart;
 	shift += currentDragShift;
-	const bool moved = currentDragShift.x() != 0 || currentDragShift.y() != 0;
+	const bool moved = currentDragShift.manhattanLength() > THRESHOLD_FOR_CLICK * StelApp::getInstance().guiFontSizeRatio();
 	currentDragShift = QPointF(0,0);
 	if (moved)
 	{
