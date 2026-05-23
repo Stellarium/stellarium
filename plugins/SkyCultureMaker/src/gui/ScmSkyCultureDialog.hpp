@@ -82,6 +82,9 @@ public slots:
 protected slots:
 	void handleFontChanged();
 
+private:
+	enum class CnObjectType { Star = 0, Planet = 1, DSO = 2 };
+
 private slots:
 	void saveSkyCulture();
 	void openConstellationDialog(bool isDarkConstellation);
@@ -101,7 +104,7 @@ private slots:
 	void cancelAddPolygon();
 	// (uncomment when multiple regions are used)
 	//void checkMutExRegions(const QStringList checkedItems);
-	void cnUpdateVisibleField(int typeIndex);
+	void cnUpdateVisibleField(CnObjectType type);
 	void cnAddNew();
 	void cnSaveChanges();
 	void cnRemoveEntry();
