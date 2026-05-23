@@ -361,7 +361,7 @@ def fetch_jpl_observer(name, jd_start, jd_stop, step_days=7):
         "COMMAND":     f"'{cmd}'",
         "EPHEM_TYPE":  "'OBSERVER'",
         "CENTER":      "'500@399'",      # geocentric earth
-        "START_TIME":  f"'{jd_to_date_str(jd_start)}'",
+        "START_TIME":  f"'{jd_to_date_str(jd_start)} TT'",
         "STOP_TIME":   f"'{jd_to_date_str(jd_stop)}'",
         "STEP_SIZE":   f"'{step_days} d'",
         "QUANTITIES":  "'1'",              # RA/Dec (ICRF)
