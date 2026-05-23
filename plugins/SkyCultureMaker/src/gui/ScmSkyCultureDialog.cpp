@@ -24,6 +24,7 @@
 #include "ScmSkyCultureDialog.hpp"
 #include "NebulaMgr.hpp"
 #include "ScmPolygonInfoTreeItem.hpp"
+#include "StarMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
@@ -297,7 +298,7 @@ void ScmSkyCultureDialog::createDialogContent()
 	connect(ui->cnObjectTypeCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
 	        [this](int i) { cnUpdateVisibleField(static_cast<CnObjectType>(i)); });
 	connect(ui->cnRemoveEntryBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnRemoveEntry);
-	connect(ui->cnUseSelectionBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnUseSelectedObject);
+	connect(ui->cnUseFromSelectionBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnUseSelectedObject);
 	connect(ui->cnAddNewBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnAddNew);
 	connect(ui->cnSaveChangesBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::cnSaveChanges);
 	ui->cnSaveChangesBtn->setEnabled(false);
@@ -1301,20 +1302,30 @@ void ScmSkyCultureDialog::cnUseSelectedObject()
 		return;
 	}
 
-	cnClearForm();
 	const StelObjectP &obj = selected.first();
 	const QString type     = obj->getType();
 
+	QString englishName;
 	if (type == QLatin1String("Star"))
 	{
 		ui->cnObjectTypeCB->setCurrentIndex(static_cast<int>(CnObjectType::Star));
 		ui->cnObjectIdLE->setText(obj->getID());
+		// StarWrapper1::getEnglishName() returns the catalog designation ("HIP XXXXX"),
+		// not the common proper name. Use StarMgr to look it up from the HIP number.
+		const QString engId = obj->getEnglishName();
+		if (engId.startsWith(QLatin1String("HIP "), Qt::CaseInsensitive))
+		{
+			bool ok = false;
+			const StarId hip = engId.mid(4).toULongLong(&ok);
+			if (ok)
+				englishName = StarMgr::getCommonEnglishName(hip);
+		}
 	}
 	else if (type == QLatin1String("Planet"))
 	{
 		ui->cnObjectTypeCB->setCurrentIndex(static_cast<int>(CnObjectType::Planet));
 		ui->cnObjectIdLE->setText(QLatin1String("NAME ") + obj->getEnglishName());
-		ui->cnEnglishLE->setText(obj->getEnglishName());
+		englishName = obj->getEnglishName();
 	}
 	else
 	{
@@ -1322,7 +1333,9 @@ void ScmSkyCultureDialog::cnUseSelectedObject()
 		QString id = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
 		if (id.isEmpty()) id = obj->getEnglishName();
 		ui->cnObjectIdLE->setText(id);
+		englishName = obj->getEnglishName();
 	}
+	ui->cnEnglishLE->setText(englishName);
 }
 
 void ScmSkyCultureDialog::cnOnTableSelectionChanged()
