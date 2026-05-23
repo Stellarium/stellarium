@@ -1242,9 +1242,8 @@ void ScmSkyCultureDialog::cnAddNew()
 	if (!cnCheckObjectExists(key)) return;
 
 	cnEntries.append({key, name});
-	const int newRow = cnEntries.size() - 1;
 	cnRefreshTable();
-	ui->cnEntriesTable->selectRow(newRow);
+	cnClearForm();
 }
 
 void ScmSkyCultureDialog::cnSaveChanges()

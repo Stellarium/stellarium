@@ -798,7 +798,7 @@
              <item row="0" column="0" colspan="2">
               <widget class="QPushButton" name="cnUseFromSelectionBtn">
                <property name="text">
-                <string>Copy Data From Selected Object</string>
+                <string>Use Selected Object</string>
                </property>
                <property name="toolTip">
                 <string>Fill Type, Identifier and English name from the currently selected object</string>
@@ -942,7 +942,7 @@
             <item>
              <widget class="QPushButton" name="cnAddNewBtn">
               <property name="text">
-               <string>Add New</string>
+               <string>Add As New Entry</string>
               </property>
               <property name="toolTip">
                <string>Add the current form as a new entry</string>
@@ -952,7 +952,7 @@
             <item>
              <widget class="QPushButton" name="cnSaveChangesBtn">
               <property name="text">
-               <string>Save Changes</string>
+               <string>Update Selected Entry</string>
               </property>
               <property name="toolTip">
                <string>Save the edited fields back to the selected entry</string>
@@ -962,7 +962,7 @@
             <item>
              <widget class="QPushButton" name="cnRemoveEntryBtn">
               <property name="text">
-               <string>Remove</string>
+               <string>Remove Selected Entry</string>
               </property>
              </widget>
             </item>
