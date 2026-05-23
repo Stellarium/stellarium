@@ -254,8 +254,11 @@ void MapWidget::paintEvent(QPaintEvent*)
 	const QPoint horizShift(mapWidth, 0);
 	const int kMin = -1 - mainRect.x() / mapWidth + (mainRect.x() % mapWidth == 0);
 	const int kMax = (windowWidth - mainRect.x()) / mapWidth;
+	if (mapRect.width() > scaledMap.width())
+		painter.setRenderHint(QPainter::SmoothPixmapTransform);
 	for (int k = kMin; k <= kMax; ++k)
 		painter.drawPixmap(QRect(mainRect.topLeft() + k * horizShift, mainRect.size()), scaledMap);
+	painter.setRenderHint(QPainter::SmoothPixmapTransform, false);
 
 	if (markerVisible)
 	{
