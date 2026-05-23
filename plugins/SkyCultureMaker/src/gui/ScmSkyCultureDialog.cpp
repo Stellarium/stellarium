@@ -27,9 +27,12 @@
 #include "StelObjectMgr.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
+#include <QCheckBox>
 #include <QDebug>
 #include <QHeaderView>
 #include <QMap>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QStyledItemDelegate>
 #include <QTableWidgetItem>
 
@@ -739,6 +742,7 @@ void ScmSkyCultureDialog::resetDialog()
 
 		cnEntries.clear();
 		cnEditingRow = -1;
+		cnSkipObjectExistCheck = false;
 		cnClearForm();
 		cnRefreshTable();
 	}
@@ -1177,6 +1181,50 @@ bool ScmSkyCultureDialog::cnValidateForm(QString &outKey, scm::ScmCulturalName &
 	return true;
 }
 
+bool ScmSkyCultureDialog::cnCheckObjectExists(const QString &key)
+{
+	if (cnSkipObjectExistCheck) return true;
+
+	StelObjectMgr *objMgr = GETSTELMODULE(StelObjectMgr);
+	StelObjectP obj;
+
+	if (key.startsWith(QLatin1String("HIP "), Qt::CaseInsensitive) ||
+	    key.startsWith(QLatin1String("Gaia DR3 "), Qt::CaseInsensitive))
+	{
+		obj = objMgr->searchByID(QLatin1String("Star"), key);
+	}
+	else if (key.startsWith(QLatin1String("NAME "), Qt::CaseInsensitive))
+	{
+		obj = objMgr->searchByID(QLatin1String("Planet"), key.mid(5).trimmed());
+	}
+	else
+	{
+		obj = objMgr->searchByID(QLatin1String("Nebula"), key);
+	}
+
+	// the object was found
+	if (obj) return true;
+
+	QMessageBox msgBox(dialog);
+	msgBox.setIcon(QMessageBox::Warning);
+	msgBox.setText(q_("The object \"%1\" could not be found in the current Stellarium database.").arg(key));
+	msgBox.setInformativeText(q_("Do you still want to save this entry?"));
+
+	auto *dontShowAgainCB = new QCheckBox(q_("Don't show this warning again"), &msgBox);
+	msgBox.setCheckBox(dontShowAgainCB);
+
+	QPushButton *saveAnywayBtn = msgBox.addButton(q_("Save Anyway"), QMessageBox::AcceptRole);
+	QPushButton *dontSaveBtn   = msgBox.addButton(q_("Don't Save"), QMessageBox::RejectRole);
+	msgBox.setDefaultButton(dontSaveBtn);
+
+	msgBox.exec();
+
+	// deactivate this check in the current session
+	if (dontShowAgainCB->isChecked()) cnSkipObjectExistCheck = true;
+
+	return msgBox.clickedButton() == saveAnywayBtn;
+}
+
 void ScmSkyCultureDialog::cnAddNew()
 {
 	QString key;
@@ -1189,6 +1237,8 @@ void ScmSkyCultureDialog::cnAddNew()
 		                              q_("An entry for this object already exists."));
 		return;
 	}
+
+	if (!cnCheckObjectExists(key)) return;
 
 	cnEntries.append({key, name});
 	const int newRow = cnEntries.size() - 1;
@@ -1210,6 +1260,8 @@ void ScmSkyCultureDialog::cnSaveChanges()
 		                              q_("An entry for this object already exists."));
 		return;
 	}
+
+	if (!cnCheckObjectExists(key)) return;
 
 	cnEntries[cnEditingRow] = {key, name};
 	// capture before cnRefreshTable resets selection

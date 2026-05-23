@@ -258,6 +258,16 @@ private:
 	 * @param excludeRow Row index to skip during the search (-1 to check all rows).
 	 */
 	bool cnIsDuplicate(const QString &key, StelObject::CulturalNameSpecial special, int excludeRow = -1) const;
+
+	/**
+	 * @brief Checks whether the object identified by the key exists in the current Stellarium database.
+	 *        If not found, a warning dialog is shown to the user, allowing them to either proceed with 
+	 * 		  saving the entry or cancel and fix the key.
+	 */
+	bool cnCheckObjectExists(const QString &key);
+
+	/// When true, the warning for objects that don't exist is suppressed for the rest of the session.
+	bool cnSkipObjectExistCheck = false;
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP
