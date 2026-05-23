@@ -269,20 +269,6 @@ def stellarium_get_time():
     return float(data["jday"]) # fallback for older Stellarium versions
 
 
-def stellarium_get_location():
-    """
-    Return the observer location configured in Stellarium as
-    (longitude_deg, latitude_deg, altitude_km).
-    Reads from GET /api/main/status → location.
-    """
-    data = stellarium_status()
-    loc = data.get("location", {})
-    lon = float(loc.get("longitude", 0.0))
-    lat = float(loc.get("latitude",  0.0))
-    alt = float(loc.get("altitude",  0.0))  # Stellarium returns metres
-    return lon, lat, alt / 1000.0             # convert altitude to km for JPL
-
-
 def stellarium_get_property(prop_id):
     """
     Return the current value of a Stellarium property.
@@ -359,27 +345,22 @@ def stellarium_get_radec(name):
 
 # ── JPL Horizons OBSERVER ──────────────────────────────────────────────────────
 
-def fetch_jpl_observer(name, jd_start, jd_stop, observer_location, step_days=7):
+def fetch_jpl_observer(name, jd_start, jd_stop, step_days=7):
     """
     Fetch RA/Dec (ICRF, degrees) from JPL Horizons OBSERVER.
 
-    observer_location: (longitude_deg, latitude_deg, altitude_km)
-        Uses geodetic surface coordinates (COORD_TYPE=GEODETIC, CENTER=coord@399)
-        matching Stellarium's configured observer location exactly.
+    observer_location: geocentric
 
     Returns: list of (jd, ra_deg, dec_deg)
     """
     cmd = OBJECT_IDS[name.lower()]
-    lon, lat, alt_km = observer_location
 
     params = {
         "format":      "json",
         "MAKE_EPHEM":  "'YES'",
         "COMMAND":     f"'{cmd}'",
         "EPHEM_TYPE":  "'OBSERVER'",
-        "CENTER":      "'coord@399'",      # geodetic surface observer on Earth
-        "COORD_TYPE":  "'GEODETIC'",
-        "SITE_COORD":  f"'{lon:.6f},{lat:.6f},{alt_km:.4f}'",
+        "CENTER":      "'500@399'",      # geocentric earth
         "START_TIME":  f"'{jd_to_date_str(jd_start)}'",
         "STOP_TIME":   f"'{jd_to_date_str(jd_stop)}'",
         "STEP_SIZE":   f"'{step_days} d'",
@@ -439,7 +420,7 @@ def angular_distance_arcmin(ra1_deg, dec1_deg, ra2_deg, dec2_deg):
 
 # ── Per-object comparison ──────────────────────────────────────────────────────
 
-def compare_object(name, jd_start, jd_stop, observer_location, step_days=7, verbose=True):
+def compare_object(name, jd_start, jd_stop, step_days=7, verbose=True):
     """
     Compare JPL OBSERVER vs Stellarium for one object.
 
@@ -454,7 +435,7 @@ def compare_object(name, jd_start, jd_stop, observer_location, step_days=7, verb
     log("  Fetching JPL data ...")
 
     try:
-        jpl_data = fetch_jpl_observer(name, jd_start, jd_stop, observer_location, step_days)
+        jpl_data = fetch_jpl_observer(name, jd_start, jd_stop, step_days)
     except Exception as e:
         print(f"  ERROR (JPL) for {name}: {e}", file=sys.stderr)
         return [], []
@@ -590,6 +571,10 @@ def main():
     ABERRATION_PROP = "StelCore.flagUseAberration"
     original_aberration = stellarium_get_property(ABERRATION_PROP)
     stellarium_set_property(ABERRATION_PROP, "false")
+    if stellarium_get_property(ABERRATION_PROP) != False:
+        print(f"  WARNING: Failed to set {ABERRATION_PROP} to false. "
+              f"Positions may include aberration and not match JPL's non-aberrated observer.",
+              file=sys.stderr)
     print(f"  {ABERRATION_PROP}: {original_aberration} → false")
 
     # (2) Apparent coordinates equinox of date – enable for comparison with JPL
@@ -618,14 +603,19 @@ def main():
     # (5) DeltaT algorithm – set via StelScript API (no stelproperty equivalent).
     #     "EspenakMeeus" matches JPL's default ΔT model.
     original_deltat = stellarium_get_deltаT_algorithm()
-    stellarium_set_deltаT_algorithm("EspenakMeeus")
-    print(f"  DeltaT algorithm: {original_deltat} → EspenakMeeus")
+    stellarium_set_deltаT_algorithm("None")
+    print(f"  DeltaT algorithm: {original_deltat} → None")
 
-    # Read observer location from Stellarium and use it for JPL too
-    observer_location = stellarium_get_location()
-    lon, lat, alt_km = observer_location
-    print(f"  Observer : lon={lon:.4f}°  lat={lat:.4f}°  alt={alt_km*1000:.0f} m")
-    print(f"  (same coordinates passed to JPL Horizons)")
+    # (6) Topocentric coordinates – disable so positions are geocentric,
+    #     matching the JPL observer at the surface point (coord@399).
+    TOPOCENTRIC_PROP = "StelCore.flagUseTopocentricCoordinates"
+    original_topocentric = stellarium_get_property(TOPOCENTRIC_PROP)
+    stellarium_set_property(TOPOCENTRIC_PROP, "false")
+    if stellarium_get_property(TOPOCENTRIC_PROP) != False:
+        print(f"  WARNING: Failed to set {TOPOCENTRIC_PROP} to false. "
+              f"Positions may be topocentric and not match JPL's geocentric observer.",
+              file=sys.stderr)
+    print(f"  {TOPOCENTRIC_PROP}: {original_topocentric} → false")
 
     # Read INI file
     with open(args.file, "r", encoding="utf-8") as f:
@@ -654,7 +644,7 @@ def main():
     for obj in objects:
         name = obj["name"]
         dates, errors = compare_object(
-            name, jd_start, jd_stop, observer_location, args.step
+            name, jd_start, jd_stop, args.step
         )
         all_results[name] = (dates, errors)
 
@@ -674,18 +664,21 @@ def main():
         stellarium_set_property(TIMECORR_PROP,     original_timecorr)
         #stellarium_set_property(EPHEM_PROP,        original_ephem)
         stellarium_set_deltаT_algorithm(original_deltat)
+        stellarium_set_property(TOPOCENTRIC_PROP,   original_topocentric)
         print(f"\nStellarium time restored (JD {original_jd:.4f}).")
         print(f"  {ABERRATION_PROP} → {original_aberration}")
         print(f"  {FRAME_PROP} → {original_frame}")
         print(f"  {TIMECORR_PROP} → {original_timecorr}")
         #   print(f"  {EPHEM_PROP} → {original_ephem}")
         print(f"  DeltaT algorithm → {original_deltat}")
+        print(f"  {TOPOCENTRIC_PROP} → {original_topocentric}")
+
     except Exception:
         pass
 
     # Build PDF
     print(f"\nWriting PDF '{args.out}' ...")
-    observer_str = f"lon={lon:.4f}°  lat={lat:.4f}°  alt={alt_km*1000:.0f} m"
+    observer_str = f"geocentric observer"
 
     with PdfPages(args.out) as pdf:
 
