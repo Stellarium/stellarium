@@ -1577,6 +1577,13 @@ float StelApp::getScreenScale() const
 	return dppRatio * fontRatio;
 }
 
+float StelApp::getGuiScale() const
+{
+	const float dppRatio = StelApp::getInstance().getDevicePixelsPerPixel();
+	const float fontRatio = StelApp::getInstance().guiFontSizeRatio();
+	return dppRatio * fontRatio;
+}
+
 void StelApp::setAppFont(QFont font)
 {
 	int oldSize=QGuiApplication::font().pixelSize();
