@@ -214,10 +214,10 @@ QString AircraftObject::getInfoString(const StelCore* core, const InfoStringGrou
 		const QString altitude = QString("%1 %2 (%3 %4)").arg(QString::number(currentRecord.altitudeMeters, 'f', 0), m,
 		                                                      QString::number(currentRecord.altitudeMeters * kMetersToFeet, 'f', 0), ft);
 
-		const QString groundSpeed = QString("%1 %3 (%3 %4)").arg(QString::number(currentRecord.groundSpeedMs, 'f', 0), mps,
+		const QString groundSpeed = QString("%1 %2 (%3 %4)").arg(QString::number(currentRecord.groundSpeedMs, 'f', 0), mps,
 		                                                         QString::number(currentRecord.groundSpeedMs * kMetersPerSecondToKnots, 'f', 0), kt);
 
-		const QString verticalRate = QString("%1 %2 (%3 $4)").arg(QString::number(currentRecord.verticalRateMs, 'f', 1), mps,
+		const QString verticalRate = QString("%1 %2 (%3 %4)").arg(QString::number(currentRecord.verticalRateMs, 'f', 1), mps,
 		                                                          QString::number(currentRecord.verticalRateMs * kMetersPerSecondToFeetPerMinute, 'f', 0), ftpm);
 
 		const QString heading = QString("%1° (%2)").arg(QString::number(normalizeDegrees(currentRecord.trackDegrees), 'f', 0), qc_(headingToCompass(currentRecord.trackDegrees), "compass direction"));
