@@ -179,40 +179,72 @@ QString AircraftObject::getInfoString(const StelCore* core, const InfoStringGrou
 
 	if (flags & Name)
 		stream << QString("<h2>%1</h2>").arg(labelText().toHtmlEscaped());
-	if (flags & ObjectType)
-		stream << QString("%1: <b>%2</b><br />").arg(q_("Type"), getObjectTypeI18n());
-	if (flags & Extra)
-	{
-		const double dataAgeSeconds = getElapsedSeconds();
-		const QString heading = QString("%1° (%2)")
-			.arg(QString::number(normalizeDegrees(currentRecord.trackDegrees), 'f', 0), headingToCompass(currentRecord.trackDegrees));
-		const QString altitude = QString("%1 m / %2 ft")
-			.arg(QString::number(currentRecord.altitudeMeters, 'f', 0),
-			     QString::number(currentRecord.altitudeMeters * kMetersToFeet, 'f', 0));
-		const QString groundSpeed = QString("%1 m/s / %2 kt")
-			.arg(QString::number(currentRecord.groundSpeedMs, 'f', 0),
-			     QString::number(currentRecord.groundSpeedMs * kMetersPerSecondToKnots, 'f', 0));
-		const QString verticalRate = QString("%1 m/s / %2 ft/min")
-			.arg(QString::number(currentRecord.verticalRateMs, 'f', 1),
-			     QString::number(currentRecord.verticalRateMs * kMetersPerSecondToFeetPerMinute, 'f', 0));
 
-		stream << QString("%1: <b>%2</b><br />").arg(q_("Identifier"), aircraftRecord.icao24.toHtmlEscaped());
+	if (flags & CatalogNumber)
+	{
+		stream << QString("%1: %2").arg(q_("Identifier"), aircraftRecord.icao24.toHtmlEscaped());
 		if (!aircraftRecord.callsign.isEmpty())
-			stream << QString("%1: <b>%2</b><br />").arg(q_("Flight"), aircraftRecord.callsign.toHtmlEscaped());
+			stream << QString("; %1: %2").arg(q_("Flight"), aircraftRecord.callsign.toHtmlEscaped());
 		if (!aircraftRecord.aircraftType.isEmpty())
-			stream << QString("%1: <b>%2</b><br />").arg(q_("Model"), aircraftRecord.aircraftType.toHtmlEscaped());
-		stream << "<br />";
-		stream << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
-		stream << QString("<tr><td>%1:</td><td><b>%2</b></td></tr>").arg(q_("Altitude"), altitude);
-		stream << QString("<tr><td>%1:</td><td><b>%2</b></td></tr>").arg(q_("Ground speed"), groundSpeed);
-		stream << QString("<tr><td>%1:</td><td><b>%2</b></td></tr>").arg(q_("Vertical rate"), verticalRate);
-		stream << QString("<tr><td>%1:</td><td><b>%2</b></td></tr>").arg(q_("Track"), heading);
-		stream << QString("<tr><td>%1:</td><td><b>%2 s</b></td></tr>")
-			.arg(q_("Data age"), QString::number(dataAgeSeconds, 'f', dataAgeSeconds < 10.0 ? 1 : 0));
-		stream << "</table>";
+			stream << QString("; %1: %2").arg(q_("Model"), aircraftRecord.aircraftType.toHtmlEscaped());
+		stream << "<br/><br/>";
 	}
 
+	if (flags & ObjectType)
+		stream << QString("%1: <b>%2</b><br />").arg(q_("Type"), getObjectTypeI18n());
+
 	stream << getCommonInfoString(core, flags);
+
+	if (flags&Extra)
+	{
+		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
+		// TRANSLATORS: Unit of measure for distance - meters
+		QString m = qc_("m", "distance");
+		// TRANSLATORS: Unit of measure for distance - feets
+		QString ft = qc_("ft", "distance");
+		// TRANSLATORS: Unit of measure for speed - meters per second
+		QString mps = qc_("m/s", "speed");
+		// TRANSLATORS: Unit of measure for speed - knots
+		QString kt = qc_("kt", "speed");
+		// TRANSLATORS: Unit of measure for speed - feets per minute
+		QString ftpm = qc_("ft/min", "speed");
+		// TRANSLATORS: Unit of measure for time - seconds
+		QString s = qc_("s", "time");
+
+		const QString altitude = QString("%1 %2 (%3 %4)").arg(QString::number(currentRecord.altitudeMeters, 'f', 0), m,
+		                                                      QString::number(currentRecord.altitudeMeters * kMetersToFeet, 'f', 0), ft);
+
+		const QString groundSpeed = QString("%1 %3 (%3 %4)").arg(QString::number(currentRecord.groundSpeedMs, 'f', 0), mps,
+		                                                         QString::number(currentRecord.groundSpeedMs * kMetersPerSecondToKnots, 'f', 0), kt);
+
+		const QString verticalRate = QString("%1 %2 (%3 $4)").arg(QString::number(currentRecord.verticalRateMs, 'f', 1), mps,
+		                                                          QString::number(currentRecord.verticalRateMs * kMetersPerSecondToFeetPerMinute, 'f', 0), ftpm);
+
+		const QString heading = QString("%1° (%2)").arg(QString::number(normalizeDegrees(currentRecord.trackDegrees), 'f', 0), qc_(headingToCompass(currentRecord.trackDegrees), "compass direction"));
+
+		const double dataAgeSeconds = getElapsedSeconds();
+		const QString dataAge = QString("%1 %2").arg(QString::number(dataAgeSeconds, 'f', dataAgeSeconds < 10.0 ? 1 : 0), s);
+
+		if (withTables)
+		{
+			stream << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Altitude"), altitude);
+			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Ground speed"), groundSpeed);
+			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Vertical rate"), verticalRate);
+			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Track"), heading);
+			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Data age"), dataAge);
+			stream << "</table><br/>";
+		}
+		else
+		{
+			stream << QString("%1: %2<br/>").arg(q_("Altitude"), altitude);
+			stream << QString("%1: %2<br/>").arg(q_("Ground speed"), groundSpeed);
+			stream << QString("%1: %2<br/>").arg(q_("Vertical rate"), verticalRate);
+			stream << QString("%1: %2<br/>").arg(q_("Track"), heading);
+			stream << QString("%1: %2<br/>").arg(q_("Data age"), dataAge);
+		}
+	}
+
 	postProcessInfoString(str, flags);
 	return str;
 }

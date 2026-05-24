@@ -60,6 +60,16 @@ void PlanesDialog::updateComboTexts()
 
 	ui->labelModeComboBox->setItemText(0, q_("Flight number"));
 	ui->labelModeComboBox->setItemText(1, q_("Aircraft model"));
+
+	QString vr = q_("Valid range");
+	// TRANSLATORS: duration in seconds
+	QString s = qc_("s","time");
+	ui->refreshIntervalSpinBox->setSuffix(QString(" %1").arg(s));
+	ui->refreshIntervalSpinBox->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->refreshIntervalSpinBox->minimum()), QString::number(ui->refreshIntervalSpinBox->maximum()), s));
+
+	QString nm = qc_("NM","radius");
+	ui->radiusSpinBox->setSuffix(QString(" %1").arg(nm));
+	ui->radiusSpinBox->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->radiusSpinBox->minimum()), QString::number(ui->radiusSpinBox->maximum()), nm));
 }
 
 void PlanesDialog::retranslate()
@@ -80,11 +90,9 @@ void PlanesDialog::createDialogContent()
 	ui->refreshIntervalSpinBox->setMinimum(15);
 	ui->refreshIntervalSpinBox->setMaximum(60);
 	ui->refreshIntervalSpinBox->setSingleStep(5);
-	ui->refreshIntervalSpinBox->setSuffix(QStringLiteral(" s"));
 	ui->radiusSpinBox->setMinimum(25);
 	ui->radiusSpinBox->setMaximum(500);
 	ui->radiusSpinBox->setSingleStep(25);
-	ui->radiusSpinBox->setSuffix(QStringLiteral(" NM"));
 	ui->providerComboBox->clear();
 	ui->providerComboBox->addItem(QStringLiteral("adsb.fi"), QStringLiteral("adsb_fi"));
 	ui->providerComboBox->addItem(QStringLiteral("airplanes.live"), QStringLiteral("airplanes_live"));
