@@ -1,0 +1,421 @@
+/*
+ * Object Visibility plug-in for Stellarium
+ *
+ * Copyright (C) 2026 Atque
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
+ */
+
+#include "ObjectVisibilityDialog.hpp"
+#include "ObjectVisibility.hpp"
+#include "ObjectVisibilityMapWidget.hpp"
+#include "ui_objectVisibilityDialog.h"
+
+#include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "StelGui.hpp"
+#include "StelLocation.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelTranslator.hpp"
+#include "StelUtils.hpp"
+
+#include <QDebug>
+#include <QSpinBox>
+#include <QCheckBox>
+#include <QPushButton>
+#include <QSignalBlocker>
+#include <cmath>
+
+ObjectVisibilityDialog::ObjectVisibilityDialog()
+	: StelDialog("ObjectVisibility")
+	, ui(new Ui_objectVisibilityDialog())
+	, plugin(nullptr)
+{
+}
+
+ObjectVisibilityDialog::~ObjectVisibilityDialog()
+{
+	delete ui;
+	ui = nullptr;
+}
+
+void ObjectVisibilityDialog::retranslate()
+{
+	if (dialog)
+	{
+		ui->retranslateUi(dialog);
+		setAboutHtml();
+		refreshTitleLabel();
+	}
+}
+
+void ObjectVisibilityDialog::setVisible(bool v)
+{
+	// On hide: clear the "armed" state of click-to-set mode so the
+	// user can't accidentally set their location after reopening the
+	// dialog.
+	if (!v && ui && ui->setLocationByClickCheckBox)
+	{
+		if (ui->setLocationByClickCheckBox->isChecked())
+		{
+			QSignalBlocker block(ui->setLocationByClickCheckBox);
+			ui->setLocationByClickCheckBox->setChecked(false);
+		}
+		if (ui->mapWidget)
+			ui->mapWidget->setClickSetsLocationMode(false);
+	}
+	StelDialog::setVisible(v);
+}
+
+//
+// =================== Construction ====================
+//
+
+void ObjectVisibilityDialog::createDialogContent()
+{
+	plugin = GETSTELMODULE(ObjectVisibility);
+	Q_ASSERT(plugin);
+	ui->setupUi(dialog);
+
+	// Standard kinetic scrolling for the About browser.
+	kineticScrollingList << ui->aboutTextBrowser;
+	StelGui* gui = static_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)),
+		        this, SLOT(enableKineticScrolling(bool)));
+	}
+
+	// Localisation + close button.
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+	        this, SLOT(retranslate()));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)),
+	        this, SLOT(handleMovedTo(QPoint)));
+
+	// "Good visibility" spinbox.
+	ui->goodVisibilityLimitSpinBox->setRange(1, 89);
+	ui->goodVisibilityLimitSpinBox->setSingleStep(1);
+	ui->goodVisibilityLimitSpinBox->setValue(plugin->getGoodVisibilityLimit());
+	connect(ui->goodVisibilityLimitSpinBox,
+	        QOverload<int>::of(&QSpinBox::valueChanged),
+	        this, &ObjectVisibilityDialog::onGoodVisibilityLimitChanged);
+	// Push the same value back into the map widget at startup so the
+	// dashed line uses the correct altitude limit straight away.
+	ui->mapWidget->setGoodVisibilityAltitude(plugin->getGoodVisibilityLimit());
+
+	// Buttons.
+	connect(ui->calculatePushButton, &QPushButton::clicked,
+	        this, &ObjectVisibilityDialog::calculate);
+	connect(ui->setLocationByClickCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onSetLocationByClickToggled);
+	connect(ui->resetSettingsPushButton, &QPushButton::clicked,
+	        this, &ObjectVisibilityDialog::onResetSettings);
+
+	// Map clicks while in "set location" mode.
+	connect(ui->mapWidget, &ObjectVisibilityMapWidget::locationPicked,
+	        this, &ObjectVisibilityDialog::onLocationPicked);
+
+	// Track Stellarium's selection so we can enable/disable Calculate.
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	if (objMgr)
+	{
+		connect(objMgr,
+		        SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
+		        this, SLOT(onSelectedObjectChanged()));
+	}
+
+	// Keep the marker on the map in sync with the observer's current
+	// position — whether the user moved it from our dialog, from the
+	// Location dialog, or from any other source.
+	StelCore* core = StelApp::getInstance().getCore();
+	connect(core, &StelCore::locationChanged,
+	        this, &ObjectVisibilityDialog::syncMarkerToObserver);
+	syncMarkerToObserver();
+
+	setAboutHtml();
+	refreshTitleLabel();
+	updateCalculateButtonEnabled();
+}
+
+//
+// =================== Actions ====================
+//
+
+bool ObjectVisibilityDialog::isAcceptableType(const QString& type)
+{
+	// "Star" covers normal stars (StarWrapper) and "Nebula" covers all
+	// DSOs in Stellarium's nomenclature.  We deliberately exclude
+	// planets, moons, comets, asteroids, satellites, etc.
+	return (type == QStringLiteral("Star")) ||
+	       (type == QStringLiteral("Nebula"));
+}
+
+void ObjectVisibilityDialog::onSelectedObjectChanged()
+{
+	updateCalculateButtonEnabled();
+}
+
+void ObjectVisibilityDialog::updateCalculateButtonEnabled()
+{
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	bool acceptable = false;
+	if (objMgr && !objMgr->getSelectedObject().isEmpty())
+	{
+		const StelObjectP sel = objMgr->getSelectedObject().first();
+		acceptable = isAcceptableType(sel->getType());
+	}
+	ui->calculatePushButton->setEnabled(acceptable);
+	if (acceptable)
+	{
+		ui->calculatePushButton->setToolTip(
+			q_("Compute visibility for the selected object."));
+	}
+	else
+	{
+		ui->calculatePushButton->setToolTip(
+			q_("Only stars and DSOs may be used in this plugin!"));
+	}
+}
+
+void ObjectVisibilityDialog::calculate()
+{
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	if (!objMgr || objMgr->getSelectedObject().isEmpty())
+		return;
+
+	const StelObjectP sel = objMgr->getSelectedObject().first();
+	if (!isAcceptableType(sel->getType()))
+		return;
+
+	// Remember which object we computed for, so the title label can
+	// be refreshed on retranslate without re-running the geometry.
+	// We use getID() because it is the only identifier guaranteed to
+	// be unique within a type (e.g. "HIP 32349" for Sirius).
+	lockedObjectId          = sel->getID();
+	lockedObjectType        = sel->getType();
+	lockedObjectNameI18n    = sel->getNameI18n();
+	if (lockedObjectNameI18n.isEmpty())
+		lockedObjectNameI18n = sel->getEnglishName();
+	if (lockedObjectNameI18n.isEmpty())
+		lockedObjectNameI18n = lockedObjectId;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	// getEquinoxEquatorialPos() returns the equatorial coordinates at
+	// the *current* equinox (date), which is exactly what the spec requires:
+	// precession and (where applicable) proper motion are folded in,
+	// so plotting Sirius at 10000 BCE uses Sirius's position at that
+	// time, not its J2000 position.
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, sel->getEquinoxEquatorialPos(core));
+	const double decDeg = dec * 180.0 / M_PI;
+
+	ui->mapWidget->setDeclination(decDeg);
+	refreshTitleLabel();
+}
+
+void ObjectVisibilityDialog::onGoodVisibilityLimitChanged(int degrees)
+{
+	plugin->setGoodVisibilityLimit(degrees);
+	ui->mapWidget->setGoodVisibilityAltitude(degrees);
+}
+
+void ObjectVisibilityDialog::onSetLocationByClickToggled(bool on)
+{
+	ui->mapWidget->setClickSetsLocationMode(on);
+}
+
+void ObjectVisibilityDialog::onLocationPicked(double longitude,
+                                              double latitude,
+                                              const QColor &color)
+{
+	Q_UNUSED(color);
+	// Note: we deliberately do NOT exit click-to-set mode here.
+	// The user explicitly enabled the checkbox so they can pick as
+	// many locations as they like; they uncheck when they're done.
+
+	// Move the observer to the picked spot.  We keep the rest of the
+	// current location (planet, altitude, name) untouched.
+	StelCore* core = StelApp::getInstance().getCore();
+	StelLocation loc = core->getCurrentLocation();
+	if (loc.planetName != QStringLiteral("Earth"))
+	{
+		// User changed to a non-Earth observation point.  Object
+		// Visibility is Earth-only; we still set the location since
+		// that's what the user asked, but we don't try to interpret it.
+	}
+	loc.setLatitude(static_cast<float>(latitude));
+	loc.setLongitude(static_cast<float>(longitude));
+	loc.name = QString("%1, %2")
+	           .arg(loc.getLatitude())
+	           .arg(loc.getLongitude());
+	// Quick move (no animation) so it feels responsive.
+	core->moveObserverTo(loc, 0.0, 0.0);
+
+	// Move the on-map marker immediately, without waiting for
+	// StelCore::locationChanged to arrive — that signal is emitted
+	// after the (async) move completes, which would feel laggy.
+	ui->mapWidget->setMarkerPos(longitude, latitude);
+}
+
+void ObjectVisibilityDialog::onResetSettings()
+{
+	if (!askConfirmation())
+		return;
+	plugin->restoreDefaultSettings();
+	// Refresh the visible controls so they match what we just wrote.
+	const int g = plugin->getGoodVisibilityLimit();
+	ui->goodVisibilityLimitSpinBox->setValue(g);
+	ui->mapWidget->setGoodVisibilityAltitude(g);
+}
+
+void ObjectVisibilityDialog::syncMarkerToObserver()
+{
+	if (!ui || !ui->mapWidget) return;
+	const StelLocation& loc =
+	    StelApp::getInstance().getCore()->getCurrentLocation();
+	// suppressObserver=true: even when the observer is on a planet
+	// other than Earth (role 'o'), use the actual latitude/longitude
+	// values instead of the special "north pole" overrides.  The
+	// plug-in is Earth-only conceptually, but we still want the
+	// marker to track sensibly.
+	const float lat = loc.getLatitude(true);
+	const float lon = loc.getLongitude(true);
+	ui->mapWidget->setMarkerPos(static_cast<double>(lon),
+	                            static_cast<double>(lat));
+}
+
+//
+// =================== Helpers ====================
+//
+
+int ObjectVisibilityDialog::currentYear(StelCore* core)
+{
+	int y = 2000, m = 1, d = 1;
+	StelUtils::getDateFromJulianDay(core->getJD(), &y, &m, &d);
+	Q_UNUSED(m);
+	Q_UNUSED(d);
+	return y;
+}
+
+void ObjectVisibilityDialog::refreshTitleLabel()
+{
+	if (!ui) return;
+	if (lockedObjectId.isEmpty())
+	{
+		ui->titleLabel->setText(
+			q_("Select a star or DSO, then click Calculate."));
+		return;
+	}
+	StelCore* core = StelApp::getInstance().getCore();
+	const int year = currentYear(core);
+	// Use a single translatable template so translators can adapt
+	// word order (e.g., German verb-final).  %1 = object name,
+	// %2 = year (astronomical: 2026, -1000 for 1001 BCE, ...).
+	ui->titleLabel->setText(
+		QString(q_("Visibility of %1 in %2"))
+		.arg(lockedObjectNameI18n)
+		.arg(year));
+}
+
+void ObjectVisibilityDialog::setAboutHtml()
+{
+	QString html = "<html><head></head><body>";
+	html += "<h2>" + q_("Object Visibility Plug-in") + "</h2>";
+	html += "<table class='layout' width=\"90%\">";
+	html += "<tr><td><strong>" + q_("Version") + ":</strong></td><td>"
+	        + QString(OBJECTVISIBILITY_PLUGIN_VERSION) + "</td></tr>";
+	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>"
+	        + QString(OBJECTVISIBILITY_PLUGIN_LICENSE) + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Atque</td></tr>";
+	html += "</table>";
+
+	html += "<p>" + q_("This plug-in shows on a world map where on Earth a "
+	                   "selected star or deep-sky object is visible.  Given "
+	                   "an object with declination &delta; at the current "
+	                   "epoch (precession and proper motion taken into "
+	                   "account), five lines are drawn at fixed "
+	                   "geographic latitudes:") + "</p>";
+	html += "<ul>";
+	html += "<li><strong>" + q_("Limit of visibility") + "</strong>: "
+	        + q_("&phi; = &delta; &plusmn; 90&deg;.  The object never rises "
+	             "above the horizon at latitudes outside this band.")
+	        + "</li>";
+	html += "<li><strong>" + q_("Extinction free / good visibility") + "</strong>: "
+	        + q_("&phi; = &delta; &plusmn; (90&deg; &minus; h).  At latitudes "
+	             "inside this band the object reaches at least altitude h "
+	             "at upper culmination.  The default h is 5&deg;; you may "
+	             "increase it if you observe from a mountainous site or "
+	             "want a larger safety margin.")
+	        + "</li>";
+	html += "<li><strong>" + q_("Passes zenith") + "</strong>: "
+	        + q_("&phi; = &delta;.  At this latitude the object passes "
+	             "through the zenith.")
+	        + "</li>";
+	html += "<li><strong>" + q_("Circumpolar limit, northern hemisphere") + "</strong>: "
+	        + q_("&phi; = 90&deg; &minus; &delta;.  North of this latitude "
+	             "the object never sets.")
+	        + "</li>";
+	html += "<li><strong>" + q_("Circumpolar limit, southern hemisphere") + "</strong>: "
+	        + q_("&phi; = &minus;90&deg; &minus; &delta;.  South of this "
+	             "latitude the object never sets.")
+	        + "</li>";
+	html += "</ul>";
+
+	html += "<p>" + q_("Planets, moons, asteroids, comets and artificial "
+	                   "satellites are intentionally not supported: their "
+	                   "rapid daily motion (and, for some, parallax) would "
+	                   "make a single snapshot misleading.")
+	        + "</p>";
+
+	html += "<p>" + q_("Because stellar positions change over time through "
+	                   "precession and proper motion, the lines are always "
+	                   "computed for the date currently shown in the "
+	                   "planetarium.  To see Sirius's visibility in "
+	                   "10&thinsp;000 BCE, set the planetarium's date "
+	                   "first, then press Calculate.")
+	        + "</p>";
+
+	html += "<h3>" + q_("Credits") + "</h3>";
+	html += "<p>" + q_("The whole concept of these visibility lines on a "
+	                   "world map – and in particular the choice of the "
+	                   "five line types and their visual style – comes "
+	                   "from Astro-Geo-GIS, in the article "
+	                   "<em>The 49 brightest stars in the night sky – when "
+	                   "and where can we see them?</em>")
+	        + "</p>";
+	html += "<p><a href=\"https://astro-geo-gis.com/the-49-brightest-stars"
+	        "-in-the-night-sky-when-and-where-can-we-see-them/\">"
+	        + q_("Read the original article")
+	        + "</a><br/>"
+	        + "<a href=\"https://astro-geo-gis.com/\">"
+	        + q_("Astro-Geo-GIS website")
+	        + "</a></p>";
+
+	html += StelApp::getInstance().getModuleMgr()
+	        .getStandardSupportLinksInfo("Object Visibility plug-in");
+
+	html += "</body></html>";
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		QString stylesheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(stylesheet);
+	}
+	ui->aboutTextBrowser->setHtml(html);
+}

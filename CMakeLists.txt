@@ -594,6 +594,7 @@ IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
      ADD_PLUGIN(SkyCultureMaker 1)
      ADD_PLUGIN(SolarSystemEditor 1)
      ADD_PLUGIN(TimeNavigator 1)
+     ADD_PLUGIN(ObjectVisibility 1)
 ENDIF()
 
 ADD_PLUGIN(Vts 0)
