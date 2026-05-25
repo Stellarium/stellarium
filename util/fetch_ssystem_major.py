@@ -1,5 +1,22 @@
 #!/usr/bin/env python3
-import sys, re, json, csv, argparse
+"""
+fetch_ssystem_major.py -- Update Stellarium moon orbital elements via JPL
+Horizons.
+
+Reads ssystem_major.ini, fetches current osculating elements for each known
+moon from JPL Horizons (ELEMENTS ephemeris type), and writes the updated INI
+back to stdout. Check results carefully before replacing the original file.
+
+Usage:
+    python3 fetch_ssystem_major.py ../data/ssystem_major.ini
+    python3 fetch_ssystem_major.py ../data/ssystem_major.ini himalia
+"""
+
+import argparse
+import csv
+import json
+import re
+import sys
 from datetime import datetime, timezone
 from urllib.parse import urlencode
 from urllib.request import urlopen
@@ -14,10 +31,8 @@ OBJECT_IDS = {
     "saturn": "699",
     "neptune": "899",
     "pluto": "999",
-
     "phobos": "401",
     "deimos": "402",
-
     "io": "501",
     "europa": "502",
     "ganymede": "503",
@@ -34,7 +49,6 @@ OBJECT_IDS = {
     "thebe": "514",
     "adrastea": "515",
     "metis": "516",
-
     "mimas": "601",
     "enceladus": "602",
     "tethys": "603",
@@ -53,7 +67,6 @@ OBJECT_IDS = {
     "prometheus": "616",
     "pandora": "617",
     "pan": "618",
-
     "ariel": "701",
     "umbriel": "702",
     "titania": "703",
@@ -65,7 +78,6 @@ OBJECT_IDS = {
     "desdemona": "710",
     "juliet": "711",
     "puck": "715",
-
     "triton": "801",
     "nereid": "802",
     "naiad": "803",
@@ -79,7 +91,6 @@ OBJECT_IDS = {
     "sao": "811",
     "laomedeia": "812",
     "neso": "813",
-
     "charon": "901",
     "nix": "902",
     "hydra": "903",
@@ -88,8 +99,14 @@ OBJECT_IDS = {
 }
 
 PARENT_IDS = {
-    "Mercury": "199", "Venus": "299", "Earth": "399", "Mars": "499",
-    "Jupiter": "599", "Saturn": "699", "Uranus": "799", "Neptune": "899",
+    "Mercury": "199",
+    "Venus": "299",
+    "Earth": "399",
+    "Mars": "499",
+    "Jupiter": "599",
+    "Saturn": "699",
+    "Uranus": "799",
+    "Neptune": "899",
     "Pluto": "999",
 }
 
@@ -104,14 +121,15 @@ ORBIT_KEYS = {
     "orbit_SemiMajorAxis",
 }
 
-# Mapping for case-insensitive Lookup
+# Mapping for case-insensitive lookup
 ORBIT_KEYS_MAP = {k.lower(): k for k in ORBIT_KEYS}
 
-def julian_date_now():
-    dt = datetime.now(timezone.utc)
 
+def julian_date_now():
+    """Return today's date as Julian Date at 0:00 UTC."""
+    dt = datetime.now(timezone.utc)
     y, m = dt.year, dt.month
-    d = dt.day  # remove time
+    d = dt.day
 
     if m <= 2:
         y -= 1
@@ -120,14 +138,27 @@ def julian_date_now():
     a = y // 100
     b = 2 - a + a // 4
 
-    jd = int(365.25 * (y + 4716)) + int(30.6001 * (m + 1)) + d + b - 1524.5
+    # Result is always *.5 (midnight UTC)
+    jd = (
+        int(365.25 * (y + 4716))
+        + int(30.6001 * (m + 1))
+        + d + b - 1524.5
+    )
+    return jd
 
-    return jd  # result is always *.5 (0:00 UTC)
 
 def norm_angle(x):
+    """Normalise an angle to the range [0, 360)."""
     return x % 360.0
 
+
 def fetch_elements(name, parent, jd):
+    """
+    Fetch osculating orbital elements for *name* from JPL Horizons.
+
+    The query uses EPHEM_TYPE=ELEMENTS relative to the body-centred frame
+    of *parent*. Returns a dict of Stellarium orbit_* key-value pairs.
+    """
     cmd = OBJECT_IDS[name.lower()]
     center = "500@" + PARENT_IDS[parent]
 
@@ -152,12 +183,14 @@ def fetch_elements(name, parent, jd):
     text = data["result"]
 
     if "$$SOE" not in text:
-        raise RuntimeError("Keine Elements-Daten von Horizons für %s:\n%s" % (name, text[:1000]))
+        raise RuntimeError(
+            f"No element data from Horizons for '{name}':\n{text[:1000]}"
+        )
 
     block = text.split("$$SOE", 1)[1].split("$$EOE", 1)[0].strip()
     row = next(csv.reader([block.splitlines()[0]], skipinitialspace=True))
 
-    # CSV columns bei ELEMENTS:
+    # CSV columns for ELEMENTS:
     # JDTDB, Calendar Date, EC, QR, IN, OM, W, Tp, N, MA, TA, A, AD, PR
     ec = float(row[2])
     inc = float(row[4])
@@ -183,32 +216,51 @@ def fetch_elements(name, parent, jd):
         "orbit_SemiMajorAxis": a,
     }
 
+
 def split_value_line(line):
+    """
+    Parse a key = value line from the INI file.
+
+    Returns (prefix, key, value, suffix) or None if the line does not match.
+    """
     m = re.match(r"^(\s*([^=\s#]+)\s*=\s*)(.*?)(\s*(?:#.*)?\n?)$", line)
     if not m:
         return None
     return m.group(1), m.group(2), m.group(3), m.group(4)
 
+
 def format_value(key, val):
-    # Normalize key for case-insensitive comparison
+    """Return *val* formatted as a string appropriate for *key*."""
     key = key.lower()
 
     if key == "orbit_epoch":
-        return "%.1f" % val
+        return f"{val:.1f}"
 
     if key == "orbit_eccentricity":
-        return "%.16g" % val
+        return f"{val:.16g}"
 
-    return "%.15g" % val
+    return f"{val:.15g}"
+
 
 def read_sections(lines):
+    """
+    Parse *lines* into a list of section dicts.
+
+    Each dict contains: name, start (line index), end (line index),
+    keys (dict mapping key name to line index).
+    """
     sections = []
     current = None
 
     for i, line in enumerate(lines):
         m = re.match(r"^\s*\[([^\]]+)\]", line)
         if m:
-            current = {"name": m.group(1), "start": i, "end": len(lines), "keys": {}}
+            current = {
+                "name": m.group(1),
+                "start": i,
+                "end": len(lines),
+                "keys": {},
+            }
             sections.append(current)
             if len(sections) > 1:
                 sections[-2]["end"] = i
@@ -219,17 +271,27 @@ def read_sections(lines):
 
     return sections
 
-def parse_args():
-    example_text = '''example:
 
-    python3 %(prog)s ../data/ssystem_major.ini himalia'''
+def parse_args():
+    """Parse and return command-line arguments."""
+    example_text = (
+        "example:\n\n"
+        "  python3 %(prog)s ../data/ssystem_major.ini himalia"
+    )
 
     ap = argparse.ArgumentParser(
-        description="Updates Stellarium moon orbits via JPL Horizons. Check results carefully",
-        epilog=example_text
+        description=(
+            "Updates Stellarium moon orbits via JPL Horizons. "
+            "Check results carefully."
+        ),
+        epilog=example_text,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     ap.add_argument("file", help="ssystem_major.ini file")
-    ap.add_argument("object", nargs="?", help="Optional: update only one named object")
+    ap.add_argument(
+        "object", nargs="?",
+        help="Optional: update only this named object",
+    )
 
     try:
         args = ap.parse_args()
@@ -241,23 +303,31 @@ def parse_args():
 
 
 def warn(message):
+    """Print a warning message to stderr."""
     print(f"WARN: {message}", file=sys.stderr)
 
 
 def get_section_lines(lines, sec):
+    """Return the raw lines belonging to *sec*."""
     return lines[sec["start"]:sec["end"]]
 
 
 def should_skip_section(sec_name, requested_object):
+    """Return True if this section should be skipped for the given filter."""
     return requested_object and sec_name.lower() != requested_object.lower()
 
 
 def validate_moon_section(sec, lines):
+    """
+    Validate that *sec* describes a moon with a known parent and object ID.
+
+    Returns an error string if validation fails, or None on success.
+    """
     sec_name = sec["name"]
     keys = sec["keys"]
 
     if "type" not in keys:
-        return f"type object for {sec_name} missing"
+        return f"type key for {sec_name} missing"
 
     type_line = lines[keys["type"]]
     parts = split_value_line(type_line)
@@ -265,7 +335,7 @@ def validate_moon_section(sec, lines):
         return f"ignoring object {sec_name}, not a moon"
 
     if "parent" not in keys:
-        return f"parent object for {sec_name} missing"
+        return f"parent key for {sec_name} missing"
 
     parent = split_value_line(lines[keys["parent"]])[2].strip()
     if parent not in PARENT_IDS:
@@ -278,31 +348,41 @@ def validate_moon_section(sec, lines):
 
 
 def get_parent(sec, lines):
+    """Return the parent body name for *sec*."""
     return split_value_line(lines[sec["keys"]["parent"]])[2].strip()
 
 
 def replace_key_in_prefix(prefix, canonical_key):
-    # Typical INI format:
-    # "orbit_Ascendingnode = "
-    # Everything before the first "=" is treated as the key.
+    """
+    Replace the key name in an INI prefix string with *canonical_key*.
+
+    Preserves the original leading whitespace. The prefix is the part of
+    an INI line up to and including the '=' sign.
+    """
     if "=" not in prefix:
         return prefix
 
     key_part, sep, rest = prefix.partition("=")
 
     # Preserve original indentation/whitespace before the key
-    leading = key_part[:len(key_part) - len(key_part.lstrip())]
+    leading = key_part[: len(key_part) - len(key_part.lstrip())]
 
     return leading + canonical_key + sep + rest
 
 
 def update_orbit_lines(lines, sec, vals):
+    """
+    Update the orbit_* lines in *lines* for *sec* with values from *vals*.
+
+    Keys are matched case-insensitively; only recognised orbit keys are
+    updated.
+    """
     keys = sec["keys"]
 
     print(
         f" ** Updating orbit lines for {sec['name']} "
         f"with keys {keys} and values {vals}",
-        file=sys.stderr
+        file=sys.stderr,
     )
 
     for key, idx in keys.items():
@@ -319,7 +399,7 @@ def update_orbit_lines(lines, sec, vals):
 
         prefix, _, _, suffix = parts
 
-        # Replace key name with canonical capitalization
+        # Replace key name with canonical capitalisation
         prefix = replace_key_in_prefix(prefix, canonical_key)
 
         lines[idx] = (
@@ -330,6 +410,11 @@ def update_orbit_lines(lines, sec, vals):
 
 
 def process_section(sec, lines, jd, requested_object):
+    """
+    Fetch and apply updated elements for one INI section.
+
+    Returns (matched: bool, output_lines: list).
+    """
     sec_name = sec["name"]
 
     if should_skip_section(sec_name, requested_object):
@@ -350,6 +435,7 @@ def process_section(sec, lines, jd, requested_object):
 
 
 def main():
+    """Entry point: parse arguments, process all sections, write output."""
     args = parse_args()
 
     with open(args.file, "r", encoding="utf-8") as f:
