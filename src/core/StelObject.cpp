@@ -759,7 +759,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 		res += getExtraInfoStrings(flags&SiderealTime).join("");
 		res += omgr->getExtraInfoStrings(flags&SiderealTime).join("");
-		if (withTables && !(flags&RTSTime && !onTransitionToNewLocation && getType()!=L1S("Satellite") && currentLocation.role!='o'))
+		if (withTables && !(flags&RTSTime && !onTransitionToNewLocation && getType()!=L1S("Satellite") && getType()!=L1S("Flight") && currentLocation.role!='o'))
 			res += "</table>";
 	}
 
@@ -1347,7 +1347,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		//res += omgr->getExtraInfoStrings(flags&SiderealTime).join("");
 	}
 
-	if (flags&RTSTime && getType()!=L1S("Satellite") && currentLocation.role!='o' && !onTransitionToNewLocation)
+	if (flags&RTSTime && getType()!=L1S("Satellite") && getType()!=L1S("Flight") && currentLocation.role!='o' && !onTransitionToNewLocation)
 	{
 		static int prevYear, prevMonth, prevDay;
 		static QString prevObjStr, prevPlanet;
