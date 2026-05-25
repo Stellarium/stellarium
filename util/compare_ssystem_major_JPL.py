@@ -334,13 +334,14 @@ def stellarium_run_script(code):
         return r.read().decode("utf-8").strip()
 
 
-def stellarium_get_deltaT_algorithm():
-    """Return the currently active DeltaT algorithm name."""
-    return stellarium_run_script("core.output(core.getDeltaTAlgorithm());")
-
-
 def stellarium_set_deltaT_algorithm(name):
     """Set the DeltaT algorithm by name (e.g. 'EspenakMeeus')."""
+    print(
+        "WARNING:  deltaT algorithm can not be read from"
+        " Stellarium API. It will be reset to"
+        " Espenak & Meeus, when script finishes",
+        file=sys.stderr,
+    )
     stellarium_run_script(f'core.setDeltaTAlgorithm("{name}");')
 
 
@@ -656,23 +657,6 @@ def main():
         )
     print(f"  {ABERRATION_PROP}: {original_aberration} -> false")
 
-    # (2) Apparent coordinates equinox of date -- enable for comparison with
-    #     JPL apparent RA/Dec (equinox of date). Stellarium property for the
-    #     coordinate frame: "Equatorial" = equinox of date,
-    #     "EquatorialJ2000" = J2000.
-    FRAME_PROP = "StelCore.currentFrameType"
-    original_frame = stellarium_get_property(FRAME_PROP)
-    stellarium_set_property(FRAME_PROP, "Equatorial")
-    print(f"  {FRAME_PROP}: {original_frame} -> Equatorial")
-
-    # (3) TT timescale -- "Without correction" matches JPL's TDB/TT timescale.
-    #     Stellarium property values: "None" = no correction (TT),
-    #     "ELP2000-82B", etc.
-    TIMECORR_PROP = "StelCore.currentTimeCorrectionAlgorithm"
-    original_timecorr = stellarium_get_property(TIMECORR_PROP)
-    stellarium_set_property(TIMECORR_PROP, "None")
-    print(f"  {TIMECORR_PROP}: {original_timecorr} -> None")
-
     # (4) DE440 ephemeris -- must match the JPL source ephemeris.
     #     Stellarium property values: "DE440", "DE421", "DE406", etc.
     #     DE440 must be installed by the user.
@@ -682,10 +666,9 @@ def main():
     # print(f"  {EPHEM_PROP}: {original_ephem} -> DE440")
 
     # (5) DeltaT algorithm -- set via StelScript API (no stelproperty
-    #     equivalent). "EspenakMeeus" matches JPL's default delta-T model.
-    original_deltat = stellarium_get_deltaT_algorithm()
-    stellarium_set_deltaT_algorithm("None")
-    print(f"  DeltaT algorithm: {original_deltat} -> None")
+    #     equivalent). "WithoutCorrection" matches JPL's default delta-T model.
+    stellarium_set_deltaT_algorithm("WithoutCorrection")
+    print("  DeltaT algorithm: -> WithoutCorrection")
 
     # (6) Topocentric coordinates -- disable so positions are geocentric,
     #     matching the JPL observer at the surface point (coord@399).
@@ -754,17 +737,11 @@ def main():
     try:
         stellarium_set_time(original_jd)
         stellarium_set_property(ABERRATION_PROP, original_aberration)
-        stellarium_set_property(FRAME_PROP, original_frame)
-        stellarium_set_property(TIMECORR_PROP, original_timecorr)
-        # stellarium_set_property(EPHEM_PROP, original_ephem)
-        stellarium_set_deltaT_algorithm(original_deltat)
+        stellarium_set_deltaT_algorithm('EspenakMeeus')  # default model
         stellarium_set_property(TOPOCENTRIC_PROP, original_topocentric)
         print(f"\nStellarium time restored (JD {original_jd:.4f}).")
         print(f"  {ABERRATION_PROP} -> {original_aberration}")
-        print(f"  {FRAME_PROP} -> {original_frame}")
-        print(f"  {TIMECORR_PROP} -> {original_timecorr}")
-        # print(f"  {EPHEM_PROP} -> {original_ephem}")
-        print(f"  DeltaT algorithm -> {original_deltat}")
+        print("  DeltaT algorithm -> EspenakMeeus")
         print(f"  {TOPOCENTRIC_PROP} -> {original_topocentric}")
     except Exception:
         pass
