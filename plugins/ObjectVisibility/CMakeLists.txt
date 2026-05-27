@@ -1,8 +1,4 @@
 # This is the cmake config file for the Object Visibility plugin
-#
-# Versions:
-# 0.1.0   Initial release.
-#
 SET(OBJECTVISIBILITY_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DOBJECTVISIBILITY_PLUGIN_VERSION="${OBJECTVISIBILITY_VERSION}")
 ADD_DEFINITIONS(-DOBJECTVISIBILITY_PLUGIN_LICENSE="GNU GPLv2 or later")

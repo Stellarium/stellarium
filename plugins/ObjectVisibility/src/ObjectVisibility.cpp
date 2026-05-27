@@ -56,8 +56,10 @@ StelPluginInfo ObjectVisibilityStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Object Visibility");
 	info.authors     = "Atque";
 	info.contact     = "https://github.com/Atque";
-	info.description = N_("Shows on a world map where on Earth a selected "
-	                      "star or deep-sky object is visible, based on the "
+	info.description = N_("Shows on a planet map where a selected star or "
+	                      "deep-sky object is visible.  Supports observation "
+	                      "from Earth, the Moon, the eight planets, Pluto, "
+	                      "and the four Galilean moons.  Based on the "
 	                      "geometric criteria of the Astro-Geo-GIS article "
 	                      "\"The 49 brightest stars in the night sky – when "
 	                      "and where can we see them?\"");

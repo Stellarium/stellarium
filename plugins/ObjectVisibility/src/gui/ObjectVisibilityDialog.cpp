@@ -25,12 +25,15 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelLocation.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+#include "modules/Planet.hpp"
+#include "modules/SolarSystem.hpp"
 
 #include <QDebug>
 #include <QSpinBox>
@@ -173,23 +176,31 @@ void ObjectVisibilityDialog::onSelectedObjectChanged()
 void ObjectVisibilityDialog::updateCalculateButtonEnabled()
 {
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
-	bool acceptable = false;
+	bool typeOk = false;
 	if (objMgr && !objMgr->getSelectedObject().isEmpty())
 	{
 		const StelObjectP sel = objMgr->getSelectedObject().first();
-		acceptable = isAcceptableType(sel->getType());
+		typeOk = isAcceptableType(sel->getType());
 	}
+
+	StelCore* core = StelApp::getInstance().getCore();
+	const QString planet = core->getCurrentLocation().planetName;
+	const bool planetOk = isSupportedPlanet(planet);
+
+	const bool acceptable = typeOk && planetOk;
 	ui->calculatePushButton->setEnabled(acceptable);
-	if (acceptable)
-	{
-		ui->calculatePushButton->setToolTip(
-			q_("Compute visibility for the selected object."));
-	}
+
+	QString tip;
+	if (!typeOk)
+		tip = q_("Only stars and DSOs may be used in this plugin!");
+	else if (!planetOk)
+		tip = q_("This plug-in supports observation from Earth, the "
+		         "Moon, the eight planets, Pluto and the four Galilean "
+		         "moons.  The current observing body (%1) is not "
+		         "supported.").arg(planet);
 	else
-	{
-		ui->calculatePushButton->setToolTip(
-			q_("Only stars and DSOs may be used in this plugin!"));
-	}
+		tip = q_("Compute visibility for the selected object.");
+	ui->calculatePushButton->setToolTip(tip);
 }
 
 void ObjectVisibilityDialog::calculate()
@@ -252,12 +263,6 @@ void ObjectVisibilityDialog::onLocationPicked(double longitude,
 	// current location (planet, altitude, name) untouched.
 	StelCore* core = StelApp::getInstance().getCore();
 	StelLocation loc = core->getCurrentLocation();
-	if (loc.planetName != QStringLiteral("Earth"))
-	{
-		// User changed to a non-Earth observation point.  Object
-		// Visibility is Earth-only; we still set the location since
-		// that's what the user asked, but we don't try to interpret it.
-	}
 	loc.setLatitude(static_cast<float>(latitude));
 	loc.setLongitude(static_cast<float>(longitude));
 	loc.name = QString("%1, %2")
@@ -288,15 +293,80 @@ void ObjectVisibilityDialog::syncMarkerToObserver()
 	if (!ui || !ui->mapWidget) return;
 	const StelLocation& loc =
 	    StelApp::getInstance().getCore()->getCurrentLocation();
-	// suppressObserver=true: even when the observer is on a planet
-	// other than Earth (role 'o'), use the actual latitude/longitude
-	// values instead of the special "north pole" overrides.  The
-	// plug-in is Earth-only conceptually, but we still want the
-	// marker to track sensibly.
+
+	// (1) If the user has moved to a different planet since we last
+	// loaded a texture, swap the map texture.  We mirror LocationDialog's
+	// approach: Earth uses miscWorldMap.jpg (no clouds); other bodies
+	// use Stellarium's stored planet texture identified by their
+	// englishName.
+	if (loc.planetName != cachedPlanetName)
+	{
+		QPixmap pixmap;
+		if (loc.planetName == QStringLiteral("Earth"))
+		{
+			pixmap = QPixmap(":/graphicGui/miscWorldMap.jpg");
+		}
+		else
+		{
+			SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+			PlanetP p = ssm ? ssm->searchByEnglishName(loc.planetName) : PlanetP();
+			if (p)
+			{
+				QString path = StelFileMgr::findFile(
+					"textures/" + p->getTextMapName());
+				if (!path.isEmpty())
+					pixmap = QPixmap(path);
+				else
+					qWarning() << "[ObjectVisibility] "
+					              "no texture for planet"
+					           << loc.planetName;
+			}
+		}
+		if (!pixmap.isNull())
+			ui->mapWidget->setMap(pixmap);
+		cachedPlanetName = loc.planetName;
+	}
+
+	// (2) Update the location marker.  getLatitude(true)/
+	// getLongitude(true) returns the *configured* position even when
+	// the observer is on a planet other than Earth, which is exactly
+	// what we want here.
 	const float lat = loc.getLatitude(true);
 	const float lon = loc.getLongitude(true);
 	ui->mapWidget->setMarkerPos(static_cast<double>(lon),
 	                            static_cast<double>(lat));
+
+	// (3) Refresh the Calculate-enabled state and title label, since
+	// both depend on whether the current planet is supported.
+	updateCalculateButtonEnabled();
+	refreshTitleLabel();
+}
+
+bool ObjectVisibilityDialog::isSupportedPlanet(const QString& englishName)
+{
+	// Bodies whose rotation-pole orientation is reliably known in
+	// Stellarium.  Limiting to these guarantees the visibility lines
+	// reflect the body's real geometry.  Other bodies may have
+	// approximate or default-equatorial poles which would give
+	// misleading lines.
+	static const QStringList supported = {
+		QStringLiteral("Earth"),
+		QStringLiteral("Moon"),
+		QStringLiteral("Mercury"),
+		QStringLiteral("Venus"),
+		QStringLiteral("Mars"),
+		QStringLiteral("Jupiter"),
+		QStringLiteral("Saturn"),
+		QStringLiteral("Uranus"),
+		QStringLiteral("Neptune"),
+		QStringLiteral("Pluto"),
+		// Galilean moons
+		QStringLiteral("Io"),
+		QStringLiteral("Europa"),
+		QStringLiteral("Ganymede"),
+		QStringLiteral("Callisto")
+	};
+	return supported.contains(englishName);
 }
 
 //
@@ -323,13 +393,27 @@ void ObjectVisibilityDialog::refreshTitleLabel()
 	}
 	StelCore* core = StelApp::getInstance().getCore();
 	const int year = currentYear(core);
-	// Use a single translatable template so translators can adapt
-	// word order (e.g., German verb-final).  %1 = object name,
-	// %2 = year (astronomical: 2026, -1000 for 1001 BCE, ...).
-	ui->titleLabel->setText(
-		QString(q_("Visibility of %1 in %2"))
-		.arg(lockedObjectNameI18n)
-		.arg(year));
+	const QString planet = core->getCurrentLocation().planetName;
+
+	// Two translatable templates: the Earth case keeps the original
+	// phrasing; the non-Earth case adds the planet name.  Splitting
+	// them lets translators adapt word order independently for each
+	// language.  %1 = object name, %2 = year, %3 = planet name.
+	QString text;
+	if (planet == QStringLiteral("Earth"))
+	{
+		text = QString(q_("Visibility of %1 in %2"))
+		       .arg(lockedObjectNameI18n)
+		       .arg(year);
+	}
+	else
+	{
+		text = QString(q_("Visibility of %1 from %3 in %2"))
+		       .arg(lockedObjectNameI18n)
+		       .arg(year)
+		       .arg(q_(planet.toUtf8().constData()));
+	}
+	ui->titleLabel->setText(text);
 }
 
 void ObjectVisibilityDialog::setAboutHtml()
@@ -344,12 +428,12 @@ void ObjectVisibilityDialog::setAboutHtml()
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Atque</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("This plug-in shows on a world map where on Earth a "
-	                   "selected star or deep-sky object is visible.  Given "
-	                   "an object with declination &delta; at the current "
-	                   "epoch (precession and proper motion taken into "
-	                   "account), five lines are drawn at fixed "
-	                   "geographic latitudes:") + "</p>";
+	html += "<p>" + q_("This plug-in shows on a planet map where on the "
+	                   "observer's planet a selected star or deep-sky "
+	                   "object is visible.  Given an object with declination "
+	                   "&delta; at the current epoch (precession and proper "
+	                   "motion taken into account), five lines are drawn at "
+	                   "fixed geographic latitudes:") + "</p>";
 	html += "<ul>";
 	html += "<li><strong>" + q_("Limit of visibility") + "</strong>: "
 	        + q_("&phi; = &delta; &plusmn; 90&deg;.  The object never rises "
@@ -377,9 +461,19 @@ void ObjectVisibilityDialog::setAboutHtml()
 	html += "</ul>";
 
 	html += "<p>" + q_("Planets, moons, asteroids, comets and artificial "
-	                   "satellites are intentionally not supported: their "
-	                   "rapid daily motion (and, for some, parallax) would "
-	                   "make a single snapshot misleading.")
+	                   "satellites are intentionally not supported as the "
+	                   "selected <em>target</em>: their rapid daily motion "
+	                   "(and, for some, parallax) would make a single "
+	                   "snapshot misleading.")
+	        + "</p>";
+
+	html += "<p>" + q_("The plug-in does support observation from any of "
+	                   "the following bodies: Earth, the Moon, the eight "
+	                   "planets (Mercury through Neptune), Pluto, and the "
+	                   "four Galilean moons of Jupiter (Io, Europa, "
+	                   "Ganymede, Callisto).  Change observer body via "
+	                   "Stellarium's Location dialog; the map updates "
+	                   "automatically.")
 	        + "</p>";
 
 	html += "<p>" + q_("Because stellar positions change over time through "

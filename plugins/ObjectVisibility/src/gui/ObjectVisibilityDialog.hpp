@@ -72,9 +72,9 @@ private slots:
 	//! Reset settings button.
 	void onResetSettings();
 
-	//! Re-sync the location marker from StelCore's current observer
-	//! position.  Called on startup and whenever StelCore reports a
-	//! location change.
+	//! Re-sync the location marker AND the planet texture from
+	//! StelCore's current observer.  Called on startup and whenever
+	//! StelCore reports a location change.
 	void syncMarkerToObserver();
 
 private:
@@ -90,6 +90,12 @@ private:
 	QString  lockedObjectType;        // "Star" or "Nebula"
 	QString  lockedObjectNameI18n;    // for label
 
+	//! Cached english name of the planet whose texture is currently
+	//! displayed in the map widget.  We compare against this to avoid
+	//! reloading the same texture when the observer just changes
+	//! geographic position on the same planet.
+	QString  cachedPlanetName;
+
 	void setAboutHtml();
 	void refreshTitleLabel();
 	void updateCalculateButtonEnabled();
@@ -100,6 +106,12 @@ private:
 
 	//! True iff the given StelObject type is a star or a DSO (nebula).
 	static bool isAcceptableType(const QString& type);
+
+	//! True iff the given (English) planet name is in our supported
+	//! list.  We restrict to bodies whose rotation-pole orientation is
+	//! reliably known in Stellarium: Earth, Moon, the eight planets,
+	//! Pluto, and the four Galilean moons.
+	static bool isSupportedPlanet(const QString& englishName);
 };
 
 #endif // OBJECTVISIBILITYDIALOG_HPP
