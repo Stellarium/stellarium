@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-24 18:47+0700\n"
+"POT-Creation-Date: 2026-05-28 01:33+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2026\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -6290,7 +6290,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
-#: plugins/Planes/src/gui/PlanesDialog.cpp:246
+#: plugins/Planes/src/gui/PlanesDialog.cpp:247
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:303
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:270
@@ -7082,7 +7082,7 @@ msgstr "Remerciements"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
-#: plugins/Planes/src/gui/PlanesDialog.cpp:247
+#: plugins/Planes/src/gui/PlanesDialog.cpp:248
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:271
 msgid "Authors"
 msgstr "Auteurs"
@@ -7114,7 +7114,7 @@ msgstr "Contact"
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
-#: plugins/Planes/src/gui/PlanesDialog.cpp:245
+#: plugins/Planes/src/gui/PlanesDialog.cpp:246
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:302
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:269
@@ -15626,6 +15626,7 @@ msgid "Trails thickness in pixels"
 msgstr "Épaisseur des trajectoires, en pixels"
 
 #: src/ui_viewDialog.h:4331
+#, c-format
 msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
 "slightly different model"
@@ -38676,8 +38677,8 @@ msgid "Queries"
 msgstr "Requêtes"
 
 #: plugins/Planes/src/AircraftObject.cpp:185
-msgid "Identifier"
-msgstr "Identifiant"
+msgid "ICAO Identifier"
+msgstr "Identifiant ICAO"
 
 #: plugins/Planes/src/AircraftObject.cpp:187
 msgid "Flight"
@@ -38746,21 +38747,22 @@ msgstr "No de vol"
 msgid "Aircraft model"
 msgstr "Modèle d'avion"
 
-#: plugins/Planes/src/gui/PlanesDialog.cpp:70
-msgctxt "radius"
+#. TRANSLATORS: Unit of measure for distance - nautical miles
+#: plugins/Planes/src/gui/PlanesDialog.cpp:71
+msgctxt "distance"
 msgid "NM"
 msgstr "NM"
 
-#: plugins/Planes/src/gui/PlanesDialog.cpp:244
+#: plugins/Planes/src/gui/PlanesDialog.cpp:245
 msgid "Planes Plug-in"
 msgstr "Plugin Avions"
 
-#: plugins/Planes/src/gui/PlanesDialog.cpp:249
+#: plugins/Planes/src/gui/PlanesDialog.cpp:250
 msgid "This plug-in shows live ADS-B aircraft as native Stellarium objects."
 msgstr ""
 "Ce plugin affiche en temps réel les avions ADS-B comme objets Stellarium."
 
-#: plugins/Planes/src/gui/PlanesDialog.cpp:250
+#: plugins/Planes/src/gui/PlanesDialog.cpp:251
 msgid ""
 "It provides basic visibility, label, and refresh controls for a live "
 "aircraft feed around the current observer location."
@@ -38768,7 +38770,7 @@ msgstr ""
 "Il permet d'afficher le nom et la commande d'actualisation d'un flux en "
 "direct des avions autour du lieu de l'observateur actuel."
 
-#: plugins/Planes/src/gui/PlanesDialog.cpp:251
+#: plugins/Planes/src/gui/PlanesDialog.cpp:252
 msgid ""
 "Live requests remain disabled until you enable aircraft display. When "
 "enabled, the plugin sends the current observer latitude, longitude, and "
@@ -38778,7 +38780,7 @@ msgstr ""
 "est inactif. Une fois activé, le plugin envoie à la source de données la "
 "latitude et la longitude de l'observateur, ainsi que le rayon de recherche."
 
-#: plugins/Planes/src/gui/PlanesDialog.cpp:252
+#: plugins/Planes/src/gui/PlanesDialog.cpp:253
 msgid ""
 "The plugin is not loaded at Stellarium startup unless you explicitly enable "
 "it in the plug-in manager."
