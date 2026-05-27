@@ -182,7 +182,7 @@ QString AircraftObject::getInfoString(const StelCore* core, const InfoStringGrou
 
 	if (flags & CatalogNumber)
 	{
-		stream << QString("%1: %2").arg(q_("Identifier"), aircraftRecord.icao24.toHtmlEscaped());
+		stream << QString("%1: %2").arg(q_("ICAO Identifier"), aircraftRecord.icao24.toHtmlEscaped());
 		if (!aircraftRecord.callsign.isEmpty())
 			stream << QString("; %1: %2").arg(q_("Flight"), aircraftRecord.callsign.toHtmlEscaped());
 		if (!aircraftRecord.aircraftType.isEmpty())
