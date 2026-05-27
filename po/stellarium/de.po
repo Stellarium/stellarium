@@ -14,19 +14,19 @@
 # Alexander Stohr <alexander.stohr@gmx.de>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
 # xilentura <vdevelopment@posteo.de>, 2026
-# cardinot <mcardinot@gmail.com>, 2026
-# Latein Lebt, 2026
 # Luca-Philipp Grumbach, 2026
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2026
+# cardinot <mcardinot@gmail.com>, 2026
+# Latein Lebt, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-21 22:13+0700\n"
+"POT-Creation-Date: 2026-05-24 18:47+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2026\n"
+"Last-Translator: Latein Lebt, 2026\n"
 "Language-Team: German (https://app.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,6 +63,7 @@ msgstr "Benutzerdef. Objekt"
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
 #: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/MeteorShowers/src/MeteorShower.cpp:553
+#: plugins/Planes/src/AircraftObject.cpp:194
 msgid "Type"
 msgstr "Typ"
 
@@ -83,7 +84,7 @@ msgstr "Asterismus"
 #: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:386
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
 #: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:158
-#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:715
+#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:719
 #: src/core/StelCore.cpp:310 src/core/StelSkyLayerMgr.cpp:83
 #: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:976
 msgid "Display Options"
@@ -685,6 +686,8 @@ msgstr "Erster Vertikal"
 #: src/gui/AstroCalcChart.cpp:83 src/gui/AstroCalcChart.cpp:421
 #: src/ui_viewDialog.h:5012 plugins/Satellites/src/Satellite.cpp:365
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1543
+#: plugins/Planes/src/AircraftObject.cpp:231
+#: plugins/Planes/src/AircraftObject.cpp:240
 msgid "Altitude"
 msgstr "Höhe"
 
@@ -1307,10 +1310,12 @@ msgid "Author"
 msgstr "Autor"
 
 #. TRANSLATORS: Unit of measure for distance - meter
+#. TRANSLATORS: Unit of measure for distance - meters
 #: src/core/modules/LandscapeMgr.cpp:1535 src/gui/StelGuiItems.cpp:950
 #: plugins/Satellites/src/Satellite.cpp:436
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
+#: plugins/Planes/src/AircraftObject.cpp:202
 msgctxt "distance"
 msgid "m"
 msgstr "m"
@@ -3410,7 +3415,7 @@ msgid "The synodic period is %1 days or %2 years"
 msgstr "Der Synodische Umlauf beträgt %1 Tage oder %2 Jahre"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1227
+#: src/core/modules/Planet.cpp:1227 plugins/Planes/src/AircraftObject.cpp:206
 msgctxt "speed"
 msgid "m/s"
 msgstr "m/s"
@@ -4521,147 +4526,147 @@ msgstr "Dezember-Sonnenwende im nächsten Jahr"
 msgid "December solstice at previous year"
 msgstr "Dezember-Sonnenwende im vorigen Jahr"
 
-#: src/core/StelApp.cpp:490
+#: src/core/StelApp.cpp:494
 msgid "Initializing textures..."
 msgstr "Initialisiere Texturen..."
 
-#: src/core/StelApp.cpp:494
+#: src/core/StelApp.cpp:498
 msgid "Initializing network access..."
 msgstr "Initialisiere Netzwerkzugang..."
 
-#: src/core/StelApp.cpp:497
+#: src/core/StelApp.cpp:501
 msgid "Initializing network disk cache..."
 msgstr "Initialisiere Netzwerkcache..."
 
-#: src/core/StelApp.cpp:511
+#: src/core/StelApp.cpp:515
 msgid "Initializing network proxy..."
 msgstr "Initialisiere Netzwerkproxy..."
 
-#: src/core/StelApp.cpp:527
+#: src/core/StelApp.cpp:531
 msgid "Initializing Object Database..."
 msgstr "Initialisiere Objektdatenbank..."
 
-#: src/core/StelApp.cpp:533
+#: src/core/StelApp.cpp:537
 msgid "Initializing HiPS survey..."
 msgstr "Initialisiere HiPS-Gesamtbilder..."
 
-#: src/core/StelApp.cpp:539
+#: src/core/StelApp.cpp:543
 msgid "Initializing Solar System objects..."
 msgstr "Initialisiere Sonnensystemobjekte..."
 
-#: src/core/StelApp.cpp:545
+#: src/core/StelApp.cpp:549
 msgid "Initializing planetary nomenclature..."
 msgstr "Initialisiere Planeten-Topographiebezeichnungen..."
 
-#: src/core/StelApp.cpp:551
+#: src/core/StelApp.cpp:555
 msgid "Initializing stars..."
 msgstr "Initialisiere Sterne..."
 
-#: src/core/StelApp.cpp:556
+#: src/core/StelApp.cpp:560
 msgid "Initializing core..."
 msgstr "Initialisiere Kern..."
 
-#: src/core/StelApp.cpp:560
+#: src/core/StelApp.cpp:564
 msgid "Initializing deep-sky objects..."
 msgstr "Initialisiere Deep-Sky-Objekte..."
 
-#: src/core/StelApp.cpp:566
+#: src/core/StelApp.cpp:570
 msgid "Initializing Milky Way..."
 msgstr "Initialisiere Milchstraße..."
 
-#: src/core/StelApp.cpp:572
+#: src/core/StelApp.cpp:576
 msgid "Initializing zodiacal light..."
 msgstr "Initialisiere Zodiakallicht..."
 
-#: src/core/StelApp.cpp:578
+#: src/core/StelApp.cpp:582
 msgid "Initializing sky image layer..."
 msgstr "Initialisiere Sky Image Layer..."
 
-#: src/core/StelApp.cpp:584
+#: src/core/StelApp.cpp:588
 msgid "Initializing TOAST surveys..."
 msgstr "Initialisiere TOAST-Gesamtbild..."
 
-#: src/core/StelApp.cpp:598
+#: src/core/StelApp.cpp:602
 msgid "Initializing audio..."
 msgstr "Initialisiere Audio..."
 
-#: src/core/StelApp.cpp:606
+#: src/core/StelApp.cpp:610
 msgid "Initializing video..."
 msgstr "Initialisiere Video..."
 
-#: src/core/StelApp.cpp:614
+#: src/core/StelApp.cpp:618
 msgid "Initializing speech output..."
 msgstr "Initialisiere Sprachausgabe..."
 
-#: src/core/StelApp.cpp:621
+#: src/core/StelApp.cpp:625
 msgid "Initializing constellations..."
 msgstr "Initialisiere Sternbilder..."
 
-#: src/core/StelApp.cpp:627
+#: src/core/StelApp.cpp:631
 msgid "Initializing asterisms..."
 msgstr "Initialisiere Asterismen..."
 
-#: src/core/StelApp.cpp:633
+#: src/core/StelApp.cpp:637
 msgid "Initializing landscape..."
 msgstr "Initialisiere Landschaft..."
 
-#: src/core/StelApp.cpp:646
+#: src/core/StelApp.cpp:650
 msgid "Initializing grid lines..."
 msgstr "Initialisiere Koordinatenlinien..."
 
-#: src/core/StelApp.cpp:651
+#: src/core/StelApp.cpp:655
 msgid "Initializing special markers..."
 msgstr "Initialisiere Sondermarkierungen..."
 
-#: src/core/StelApp.cpp:657
+#: src/core/StelApp.cpp:661
 msgid "Initializing sporadic meteors..."
 msgstr "Initialisiere sporadische Meteore..."
 
-#: src/core/StelApp.cpp:663
+#: src/core/StelApp.cpp:667
 msgid "Initializing user labels..."
 msgstr "Initialisiere benutzerdefinierte Bezeichner..."
 
-#: src/core/StelApp.cpp:668
+#: src/core/StelApp.cpp:672
 msgid "Initializing sky cultures..."
 msgstr "Initialisiere Sternbildkulturen..."
 
-#: src/core/StelApp.cpp:672
+#: src/core/StelApp.cpp:676
 msgid "Initializing user markers..."
 msgstr "Initialisiere benutzerdefinierte Markierungen..."
 
-#: src/core/StelApp.cpp:678
+#: src/core/StelApp.cpp:682
 msgid "Initializing custom objects..."
 msgstr "Initialisiere benutzerdefinierte Objekte..."
 
-#: src/core/StelApp.cpp:684
+#: src/core/StelApp.cpp:688
 msgid "Initializing highlights..."
 msgstr "Initialisiere Highlights..."
 
-#: src/core/StelApp.cpp:690
+#: src/core/StelApp.cpp:694
 msgid "Initializing specific time..."
 msgstr "Initialisiere bestimmte Zeiten..."
 
-#: src/core/StelApp.cpp:698
+#: src/core/StelApp.cpp:702
 msgid "Initializing scripting..."
 msgstr "Initialisiere Skript-System..."
 
-#: src/core/StelApp.cpp:703
+#: src/core/StelApp.cpp:707
 msgid "Initializing color scheme..."
 msgstr "Initialisiere Farbschema..."
 
-#: src/core/StelApp.cpp:715 src/ui_configurationDialog.h:2658
+#: src/core/StelApp.cpp:719 src/ui_configurationDialog.h:2658
 msgid "Night mode"
 msgstr "Nachtmodus"
 
-#: src/core/StelApp.cpp:750
+#: src/core/StelApp.cpp:754
 msgid "Initializing SPOUT sender..."
 msgstr "Initialisiere SPOUT-Sender..."
 
-#: src/core/StelApp.cpp:760
+#: src/core/StelApp.cpp:764
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Spout-Sender nicht möglich. Details im Logfile."
 
-#: src/core/StelApp.cpp:787
+#: src/core/StelApp.cpp:791
 msgid "Loading plugin"
 msgstr "Lade Plugin"
 
@@ -6285,6 +6290,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
+#: plugins/Planes/src/gui/PlanesDialog.cpp:246
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:303
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:270
@@ -7077,6 +7083,7 @@ msgstr "Danksagungen"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
+#: plugins/Planes/src/gui/PlanesDialog.cpp:247
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:271
 msgid "Authors"
 msgstr "Autoren"
@@ -7108,6 +7115,7 @@ msgstr "Ansprechpartner"
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
+#: plugins/Planes/src/gui/PlanesDialog.cpp:245
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:302
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:269
@@ -8676,6 +8684,7 @@ msgstr "Gültige Jahre:"
 #: src/gui/AstroCalcDialog.cpp:635 src/gui/AstroCalcDialog.cpp:1982
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1188
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:136
+#: plugins/Planes/src/gui/PlanesDialog.cpp:64
 msgid "Valid range"
 msgstr "Wertebereich"
 
@@ -15059,6 +15068,7 @@ msgstr "Hilfe"
 
 #: src/ui_helpDialogGui.h:242
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:200
+#: plugins/Planes/src/ui_planesDialog.h:276
 msgid "About"
 msgstr "Über"
 
@@ -15595,7 +15605,6 @@ msgid "Trails thickness in pixels"
 msgstr "Strichstärke für Spuren, Pixels"
 
 #: src/ui_viewDialog.h:4331
-#, c-format
 msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
 "slightly different model"
@@ -18298,6 +18307,7 @@ msgstr "Bildschirmnachricht bei WaitForKey() anzeigen"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:317
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:563
 #: plugins/Observability/src/ui_ObservabilityDialog.h:309
+#: plugins/Planes/src/ui_planesDialog.h:275
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:786
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1276
 msgid "Settings"
@@ -20209,7 +20219,7 @@ msgstr "Telrad-Sucher"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:111
 #: plugins/Scenery3d/src/Scenery3d.cpp:344
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:283
-#: plugins/Calendars/src/Calendars.cpp:226
+#: plugins/Calendars/src/Calendars.cpp:226 plugins/Planes/src/Planes.cpp:305
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:93
 msgid "Show settings dialog"
 msgstr "Zeige Einstellungsdialog"
@@ -20313,9 +20323,13 @@ msgstr "Max. Belichtung"
 
 #. TRANSLATORS: duration in seconds
 #. TRANSLATORS: seconds.
+#. TRANSLATORS: Unit of measure for time - seconds
+#. TRANSLATORS: duration in seconds
 #: plugins/Oculars/src/Oculars.cpp:2079
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1193
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:234
+#: plugins/Planes/src/AircraftObject.cpp:212
+#: plugins/Planes/src/gui/PlanesDialog.cpp:66
 msgctxt "time"
 msgid "s"
 msgstr "s"
@@ -21145,6 +21159,7 @@ msgstr "Aktiviere Autozoom, wenn zum Telrad gewechselt wird"
 #: plugins/Oculars/src/ui_ocularDialog.h:1535
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:228
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:401
+#: plugins/Planes/src/ui_planesDialog.h:256
 msgid "General"
 msgstr "Allgemein"
 
@@ -22784,6 +22799,7 @@ msgstr "[neue Quelle]"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:727
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:534
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
+#: plugins/Planes/src/ui_planesDialog.h:274
 msgid "Update now"
 msgstr "Jetzt aktualisieren"
 
@@ -24717,6 +24733,7 @@ msgid "#"
 msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:530
+#: plugins/Planes/src/ui_planesDialog.h:272
 msgid "Status"
 msgstr "Zustand"
 
@@ -38512,6 +38529,188 @@ msgstr "(Benutzerdefiniert 2)"
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:199
 msgid "Queries"
 msgstr "Abfragen"
+
+#: plugins/Planes/src/AircraftObject.cpp:185
+msgid "Identifier"
+msgstr "Kennung"
+
+#: plugins/Planes/src/AircraftObject.cpp:187
+msgid "Flight"
+msgstr "Flug"
+
+#: plugins/Planes/src/AircraftObject.cpp:189
+msgid "Model"
+msgstr "Model"
+
+#. TRANSLATORS: Unit of measure for distance - feets
+#: plugins/Planes/src/AircraftObject.cpp:204
+msgctxt "distance"
+msgid "ft"
+msgstr "ft"
+
+#. TRANSLATORS: Unit of measure for speed - knots
+#: plugins/Planes/src/AircraftObject.cpp:208
+msgctxt "speed"
+msgid "kt"
+msgstr "kt"
+
+#. TRANSLATORS: Unit of measure for speed - feets per minute
+#: plugins/Planes/src/AircraftObject.cpp:210
+msgctxt "speed"
+msgid "ft/min"
+msgstr "ft/min"
+
+#: plugins/Planes/src/AircraftObject.cpp:232
+#: plugins/Planes/src/AircraftObject.cpp:241
+msgid "Ground speed"
+msgstr "Geschwindigkeit über Grund"
+
+#: plugins/Planes/src/AircraftObject.cpp:233
+#: plugins/Planes/src/AircraftObject.cpp:242
+msgid "Vertical rate"
+msgstr "Vertikale Rate"
+
+#: plugins/Planes/src/AircraftObject.cpp:234
+#: plugins/Planes/src/AircraftObject.cpp:243
+msgid "Track"
+msgstr "Weg"
+
+#: plugins/Planes/src/AircraftObject.cpp:235
+#: plugins/Planes/src/AircraftObject.cpp:244
+msgid "Data age"
+msgstr "Datenalter"
+
+#: plugins/Planes/src/Planes.cpp:206 plugins/Planes/src/Planes.cpp:303
+#: plugins/Planes/src/Planes.cpp:305
+msgid "Planes"
+msgstr "Flugzeuge"
+
+#: plugins/Planes/src/Planes.cpp:209
+msgid "Display live ADS-B aircraft in the sky."
+msgstr "ADS-B-Flugzeuge in Echtzeit am Himmel anzeigen."
+
+#: plugins/Planes/src/Planes.cpp:303
+msgid "Show Planes"
+msgstr "Flugzeuge zeigen"
+
+#: plugins/Planes/src/gui/PlanesDialog.cpp:61
+msgid "Flight number"
+msgstr "Flugnummer"
+
+#: plugins/Planes/src/gui/PlanesDialog.cpp:62
+msgid "Aircraft model"
+msgstr "Flugzeugmodell"
+
+#: plugins/Planes/src/gui/PlanesDialog.cpp:70
+msgctxt "radius"
+msgid "NM"
+msgstr "NM"
+
+#: plugins/Planes/src/gui/PlanesDialog.cpp:244
+msgid "Planes Plug-in"
+msgstr "Flugzeuge-Erweiterung"
+
+#: plugins/Planes/src/gui/PlanesDialog.cpp:249
+msgid "This plug-in shows live ADS-B aircraft as native Stellarium objects."
+msgstr ""
+"Diese Erweiterung zeigt ADS-B-Flugzeuge in Echtzeit als native "
+"Stellariumobjekte."
+
+#: plugins/Planes/src/gui/PlanesDialog.cpp:250
+msgid ""
+"It provides basic visibility, label, and refresh controls for a live "
+"aircraft feed around the current observer location."
+msgstr ""
+"Es bietet grundlegende Funktionen zur Anzeige, Beschriftung und "
+"Aktualisierung eines Echtzeitfeeds der Flugzeuge rund um den aktuellen "
+"Standort des Betrachters."
+
+#: plugins/Planes/src/gui/PlanesDialog.cpp:251
+msgid ""
+"Live requests remain disabled until you enable aircraft display. When "
+"enabled, the plugin sends the current observer latitude, longitude, and "
+"search radius to the configured data source."
+msgstr ""
+"Echtzeitanfragen bleiben deaktiviert, bis die Flugzeuganzeige aktiviert "
+"wird. Sobald sie aktiviert ist, sendet die Erweiterung die Breite, Länge und"
+" den Suchradius des aktuellen Beobachters an die eingestellten Datenquelle."
+
+#: plugins/Planes/src/gui/PlanesDialog.cpp:252
+msgid ""
+"The plugin is not loaded at Stellarium startup unless you explicitly enable "
+"it in the plug-in manager."
+msgstr ""
+"Die Erweiterung wird nicht beim Start von Stellarium geladen, sofern es "
+"nicht explizit in der Erweiterungsverwaltung aktiviert wurde."
+
+#: plugins/Planes/src/ui_planesDialog.h:254
+#: plugins/Planes/src/ui_planesDialog.h:255
+msgid "Planes Plug-in Configuration"
+msgstr "Konfiguration für die Flugzeuge-Erweiterung"
+
+#: plugins/Planes/src/ui_planesDialog.h:257
+msgid "Show live aircraft"
+msgstr "Flugzeuge in Echtzeit anzeigen"
+
+#: plugins/Planes/src/ui_planesDialog.h:258
+msgid ""
+"When enabled, Stellarium requests live ADS-B positions around the current "
+"observer location."
+msgstr ""
+"Wenn aktiviert ist, ruft Stellarium Echtzeit-ADS-B-Positionen in der "
+"Umgebung des aktuellen Standorts des Beobachters ab."
+
+#: plugins/Planes/src/ui_planesDialog.h:259
+msgid "Show aircraft labels"
+msgstr "Flugzeugbeschriftungen anzeigen"
+
+#: plugins/Planes/src/ui_planesDialog.h:260
+msgid "Label content"
+msgstr "Beschriftungsinhalt"
+
+#: plugins/Planes/src/ui_planesDialog.h:261
+msgid "Show toolbar button"
+msgstr "Schaltfläche für Werkzeugleiste anzeigen"
+
+#: plugins/Planes/src/ui_planesDialog.h:262
+msgid "Live Data"
+msgstr "Echtzeitdaten"
+
+#: plugins/Planes/src/ui_planesDialog.h:263
+msgid "Search radius"
+msgstr "Suchradius"
+
+#: plugins/Planes/src/ui_planesDialog.h:264
+msgid "Refresh interval"
+msgstr "Aktualisierungsintervall"
+
+#: plugins/Planes/src/ui_planesDialog.h:266
+msgid ""
+"Intervals below 15 seconds are disabled to reduce the risk of provider rate "
+"limits."
+msgstr ""
+"Um das Risiko von Ratenbeschränkungen seitens der Anbieter zu verringern, "
+"sind Intervalle kürzer als 15 Sekunden deaktiviert."
+
+#: plugins/Planes/src/ui_planesDialog.h:267
+msgid "Provider"
+msgstr "Anbieter"
+
+#: plugins/Planes/src/ui_planesDialog.h:268
+msgid "Provider website"
+msgstr "Anbieterwebsite"
+
+#: plugins/Planes/src/ui_planesDialog.h:270
+msgid "Last successful update"
+msgstr "Letzte erfolgreiche Aktualisierung"
+
+#: plugins/Planes/src/ui_planesDialog.h:271
+msgid "Never"
+msgstr "Niemals"
+
+#: plugins/Planes/src/ui_planesDialog.h:273
+msgid "idle"
+msgstr "untätig"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:59
 msgid "Lens distortion estimator"
