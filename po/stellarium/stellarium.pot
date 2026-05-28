@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-28 01:33+0700\n"
+"POT-Creation-Date: 2026-05-28 19:22+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
 #: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/MeteorShowers/src/MeteorShower.cpp:553
-#: plugins/Planes/src/AircraftObject.cpp:194
+#: plugins/Planes/src/AircraftObject.cpp:195
 msgid "Type"
 msgstr ""
 
@@ -669,8 +669,8 @@ msgstr ""
 #: src/gui/AstroCalcChart.cpp:83 src/gui/AstroCalcChart.cpp:421
 #: src/ui_viewDialog.h:5012 plugins/Satellites/src/Satellite.cpp:365
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1543
-#: plugins/Planes/src/AircraftObject.cpp:231
-#: plugins/Planes/src/AircraftObject.cpp:240
+#: plugins/Planes/src/AircraftObject.cpp:232
+#: plugins/Planes/src/AircraftObject.cpp:241
 msgid "Altitude"
 msgstr ""
 
@@ -1296,7 +1296,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:436
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
-#: plugins/Planes/src/AircraftObject.cpp:202
+#: plugins/Planes/src/AircraftObject.cpp:203
 msgctxt "distance"
 msgid "m"
 msgstr ""
@@ -3362,7 +3362,7 @@ msgid "The synodic period is %1 days or %2 years"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1227 plugins/Planes/src/AircraftObject.cpp:206
+#: src/core/modules/Planet.cpp:1227 plugins/Planes/src/AircraftObject.cpp:207
 msgctxt "speed"
 msgid "m/s"
 msgstr ""
@@ -4988,8 +4988,8 @@ msgstr ""
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
-"article <em>Long-term changes in the rotation of the earth - 700 B.C. to A."
-"D. 1980</em> (%1)."
+"article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
+"A.D. 1980</em> (%1)."
 msgstr ""
 
 #: src/core/StelCore.cpp:2768
@@ -11602,9 +11602,10 @@ msgstr ""
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:578
 msgid ""
-"Look at each installed sky culture. Label style is forced to be 'Native,"
-"Translated,Modern' regardless of user setting, unless environment variable "
-"STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is restored at end.)"
+"Look at each installed sky culture. Label style is forced to be "
+"'Native,Translated,Modern' regardless of user setting, unless environment "
+"variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is "
+"restored at end.)"
 msgstr ""
 
 #: src/translations.h:579
@@ -11686,9 +11687,10 @@ msgstr ""
 
 #: src/translations.h:592
 msgid ""
-"A tour of the modern constellations. Label style is forced to be 'Native,"
-"Translated,Modern' regardless of user setting, unless environment variable "
-"STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is restored at end.)"
+"A tour of the modern constellations. Label style is forced to be "
+"'Native,Translated,Modern' regardless of user setting, unless environment "
+"variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is "
+"restored at end.)"
 msgstr ""
 
 #: src/translations.h:593
@@ -14756,7 +14758,6 @@ msgid "Trails thickness in pixels"
 msgstr ""
 
 #: src/ui_viewDialog.h:4331
-#, c-format
 msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
 "slightly different model"
@@ -19279,7 +19280,7 @@ msgstr ""
 #: plugins/Oculars/src/Oculars.cpp:2079
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1193
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:234
-#: plugins/Planes/src/AircraftObject.cpp:212
+#: plugins/Planes/src/AircraftObject.cpp:213
 #: plugins/Planes/src/gui/PlanesDialog.cpp:66
 msgctxt "time"
 msgid "s"
@@ -24721,8 +24722,8 @@ msgstr ""
 #: plugins/Quasars/src/Quasars.cpp:76
 msgid ""
 "A plugin that shows some quasars brighter than visual magnitude 18. The "
-"catalogue of quasars was compiled from 'Quasars and Active Galactic "
-"Nuclei' (13th Ed.) (Veron+ 2010)"
+"catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
+"(13th Ed.) (Veron+ 2010)"
 msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:177
@@ -29713,8 +29714,8 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:293
 msgid ""
-"This will speed up rendering, but the appearance will look &quot;"
-"broken&quot; until you stop moving."
+"This will speed up rendering, but the appearance will look "
+"&quot;broken&quot; until you stop moving."
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:294
@@ -29724,8 +29725,8 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:296
 msgid ""
-"This updates a second face, so that the visual appearance seems less &quot;"
-"broken&quot;."
+"This updates a second face, so that the visual appearance seems less "
+"&quot;broken&quot;."
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:305
@@ -30357,8 +30358,8 @@ msgid ""
 "of life. Please describe specifics of the source (book/clay tablet/"
 "parchment/...) or of the culture: e.g. sun-focussed, moon-focussed, climate "
 "of the region, geographic specifics. Did members of the culture build "
-"pyramids or any other well-known thing? What did they do with astronomy (e."
-"g. time keeping, calendar making, weather predictions...)? Are there "
+"pyramids or any other well-known thing? What did they do with astronomy "
+"(e.g. time keeping, calendar making, weather predictions...)? Are there "
 "connections to other cultures? Is this version a didactic reduction or is it "
 "derived from a specific other source?"
 msgstr ""
@@ -30366,9 +30367,9 @@ msgstr ""
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:824
 msgid ""
 "What special features did/does this culture use, what shall the user watch "
-"out for? Is it worthwhile to click a specific button rather than others - e."
-"g. divisions of the ecliptic, super-constellations, dark constellations, all-"
-"sky-constellations, zoom into the Pleiades, etc.? Do the constellations "
+"out for? Is it worthwhile to click a specific button rather than others - "
+"e.g. divisions of the ecliptic, super-constellations, dark constellations, "
+"all-sky-constellations, zoom into the Pleiades, etc.? Do the constellations "
 "change with the months or remain the same throughout the year? What is "
 "actually 'correct' about your presentation? Did they really use stick "
 "figures? Did they paint images (or just use names of stars)? Did they use "
@@ -30514,8 +30515,8 @@ msgid ""
 "1. You fully agree that the Sky Culture will be subject to the license you "
 "have selected.\n"
 "2. You have described the Sky Culture as elaborately as possible.\n"
-"3. You have the necessary rights to use and share all included content (e."
-"g., artwork, descriptions).\n"
+"3. You have the necessary rights to use and share all included content "
+"(e.g., artwork, descriptions).\n"
 "4. All information provided is accurate to the best of your knowledge.\n"
 "5. The content is shared in good faith, with respect for cultural "
 "significance and sensitivities.\n"
@@ -35769,53 +35770,54 @@ msgstr ""
 msgid "Queries"
 msgstr ""
 
-#: plugins/Planes/src/AircraftObject.cpp:185
+#. TRANSLATORS: International Civil Aviation Organization (ICAO) 24-bit identifier
+#: plugins/Planes/src/AircraftObject.cpp:186
 msgid "ICAO Identifier"
 msgstr ""
 
-#: plugins/Planes/src/AircraftObject.cpp:187
+#: plugins/Planes/src/AircraftObject.cpp:188
 msgid "Flight"
 msgstr ""
 
-#: plugins/Planes/src/AircraftObject.cpp:189
+#: plugins/Planes/src/AircraftObject.cpp:190
 msgid "Model"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - feets
-#: plugins/Planes/src/AircraftObject.cpp:204
+#: plugins/Planes/src/AircraftObject.cpp:205
 msgctxt "distance"
 msgid "ft"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - knots
-#: plugins/Planes/src/AircraftObject.cpp:208
+#: plugins/Planes/src/AircraftObject.cpp:209
 msgctxt "speed"
 msgid "kt"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - feets per minute
-#: plugins/Planes/src/AircraftObject.cpp:210
+#: plugins/Planes/src/AircraftObject.cpp:211
 msgctxt "speed"
 msgid "ft/min"
 msgstr ""
 
-#: plugins/Planes/src/AircraftObject.cpp:232
-#: plugins/Planes/src/AircraftObject.cpp:241
-msgid "Ground speed"
-msgstr ""
-
 #: plugins/Planes/src/AircraftObject.cpp:233
 #: plugins/Planes/src/AircraftObject.cpp:242
-msgid "Vertical rate"
+msgid "Ground speed"
 msgstr ""
 
 #: plugins/Planes/src/AircraftObject.cpp:234
 #: plugins/Planes/src/AircraftObject.cpp:243
-msgid "Track"
+msgid "Vertical rate"
 msgstr ""
 
 #: plugins/Planes/src/AircraftObject.cpp:235
 #: plugins/Planes/src/AircraftObject.cpp:244
+msgid "Track"
+msgstr ""
+
+#: plugins/Planes/src/AircraftObject.cpp:236
+#: plugins/Planes/src/AircraftObject.cpp:245
 msgid "Data age"
 msgstr ""
 

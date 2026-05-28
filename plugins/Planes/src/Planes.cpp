@@ -421,7 +421,7 @@ void Planes::fetchAircraft()
 	}
 
 	QNetworkRequest request{QUrl(url)};
-	request.setRawHeader("User-Agent", QString("Stellarium-Planes/%1").arg(kPluginVersion).toUtf8());
+	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 	request.setRawHeader("Accept", "application/json");
 	inFlightReply = networkMgr->get(request);
 	pendingRefresh = false;
