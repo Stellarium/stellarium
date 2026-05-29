@@ -21,8 +21,8 @@
 # The Qt constant names used in UI XML definition of user interfaces have been extended in Qt6.8.  
 # This command resets the Qt constants from Qt6.8 to remain compatible with Qt5 or earlier versions of Qt6.
 
-# Before committing  some 'myGui'.ui file into our git repository, rename it to 'myGui'_Qt68.ui, then run 
-# ./RESET_UI_TO_QT5.sh 'myGui'_Qt68.ui > 'myGui'.ui
+# Before committing  some 'myGui'.ui file into our git repository, run
+# ./RESET_UI_TO_QT5.sh -i 'myGui'.ui
 # Then check in git gui (or whatever you use) for remaining changed constant names and extend this tool where needed.
 
 sed -e 's/Qt::FocusPolicy::NoFocus/Qt::NoFocus/g' \
