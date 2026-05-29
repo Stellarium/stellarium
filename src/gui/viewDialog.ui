@@ -6561,15 +6561,12 @@
           <property name="spacing">
            <number>3</number>
           </property>
-          <item row="0" column="1" rowspan="3">
+          <item row="0" column="2" rowspan="3">
            <widget class="QTextBrowser" name="surveysTextBrowser">
             <property name="openExternalLinks">
              <bool>true</bool>
             </property>
            </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QComboBox" name="surveyTypeComboBox"/>
           </item>
           <item row="1" column="0">
            <widget class="QLineEdit" name="surveysFilter">
@@ -6581,7 +6578,17 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="listOnlyEnabledSurveys">
+            <property name="text">
+             <string extracomment="Short for &quot;list only enabled surveys&quot;">Enabled only</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QComboBox" name="surveyTypeComboBox"/>
+          </item>
+          <item row="2" column="0" colspan="2">
            <widget class="QTreeWidget" name="surveysTreeWidget">
             <property name="horizontalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOff</enum>

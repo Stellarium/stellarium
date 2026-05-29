@@ -747,6 +747,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHipsText, Qt::QueuedConnection);
 	connect(ui->surveysTreeWidget, &QTreeWidget::itemChanged, this, &ViewDialog::hipsListItemChanged);
 	connect(ui->surveysFilter, &QLineEdit::textChanged, this, &ViewDialog::filterSurveys);
+	connect(ui->listOnlyEnabledSurveys, &QCheckBox::toggled, this, &ViewDialog::filterSurveys);
 	updateHips();
 
 	updateTabBarListWidgetWidth();
@@ -1088,6 +1089,44 @@ void ViewDialog::toggleHipsDialog()
 	}
 }
 
+void ViewDialog::updateSurveyFilteredState(QTreeWidgetItem& item, const QString& filterPattern) const
+{
+	const QString text = item.text(0).simplified();
+	bool show = filterPattern.isEmpty() || text.contains(filterPattern, Qt::CaseInsensitive);
+	if (ui->listOnlyEnabledSurveys->isChecked())
+	{
+		switch (item.data(0, HipsRole::ItemType).toInt())
+		{
+		case HipsItemType::Survey:
+		{
+			if (item.checkState(0) != Qt::Checked)
+				show = false;
+			break;
+		}
+		case HipsItemType::Planet:
+		{
+			bool planetHasEnabledGroup = false;
+			for (int n = 0; n < item.childCount(); ++n)
+			{
+				const auto groupItem = item.child(n);
+				Q_ASSERT(groupItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Group);
+				if (groupItem->checkState(0) == Qt::Checked)
+				{
+					planetHasEnabledGroup = true;
+					break;
+				}
+			}
+			if (!planetHasEnabledGroup)
+				show = false;
+			break;
+		}
+		default:
+			break;
+		}
+	}
+	item.setHidden(!show);
+}
+
 void ViewDialog::filterSurveys()
 {
 	const QString pattern = ui->surveysFilter->text().simplified();
@@ -1095,9 +1134,7 @@ void ViewDialog::filterSurveys()
 	for (int row = 0; row < list.topLevelItemCount(); ++row)
 	{
 		auto& item = *list.topLevelItem(row);
-		const QString text = item.text(0).simplified();
-		const bool show = pattern.isEmpty() || text.contains(pattern, Qt::CaseInsensitive);
-		item.setHidden(!show);
+		updateSurveyFilteredState(item, pattern);
 	}
 }
 
@@ -1148,12 +1185,12 @@ void ViewDialog::hipsListItemChanged(QTreeWidgetItem* item)
 	}
 	case HipsItemType::Group:
 	{
+		const auto planetItem = item->parent();
+		Q_ASSERT(planetItem);
+		Q_ASSERT(planetItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Planet);
 		// First, uncheck all the sibling groups except the one we're enabling
 		if (item->checkState(0) == Qt::Checked)
 		{
-			const auto planetItem = item->parent();
-			Q_ASSERT(planetItem);
-			Q_ASSERT(planetItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Planet);
 			for (int n = 0; n < planetItem->childCount(); ++n)
 			{
 				const auto groupItem = planetItem->child(n);
@@ -1166,6 +1203,7 @@ void ViewDialog::hipsListItemChanged(QTreeWidgetItem* item)
 				}
 			}
 		}
+		updateSurveyFilteredState(*planetItem, ui->surveysFilter->text().simplified());
 
 		// Now configure the survey chosen
 		HipsSurveyP colors;
