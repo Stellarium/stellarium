@@ -1645,14 +1645,19 @@ const QString ObsListDialog::DASH = QString(QChar(0x2014));
 
 // Natural-number sort: compares alternating non-digit/digit segments so that
 // "NGC 9" sorts before "NGC 10". Does not depend on an ICU-backed QCollator.
+//
+// Indices are int (not qsizetype) so QString::operator[] resolves unambiguously
+// on Qt 5.12 + MSVC x64 — where qsizetype is long long but operator[] is only
+// overloaded for int/uint, causing C2593 'operator [' is ambiguous. Catalog
+// designations are short, so the int range is more than enough.
 static bool naturalLessThan(const QString &a, const QString &b)
 {
-	qsizetype ia = 0, ib = 0;
+	int ia = 0, ib = 0;
 	while (ia < a.size() && ib < b.size())
 	{
 		if (a[ia].isDigit() && b[ib].isDigit())
 		{
-			qsizetype ja = ia, jb = ib;
+			int ja = ia, jb = ib;
 			while (ja < a.size() && a[ja].isDigit()) ++ja;
 			while (jb < b.size() && b[jb].isDigit()) ++jb;
 			const qlonglong numA = a.mid(ia, ja - ia).toLongLong();
