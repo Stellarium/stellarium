@@ -6285,7 +6285,7 @@
                       <enum>Qt::Horizontal</enum>
                      </property>
                      <property name="tickPosition">
-                      <enum>QSlider::TickPosition::TicksBelow</enum>
+                      <enum>QSlider::TicksBelow</enum>
                      </property>
                      <property name="tickInterval">
                       <number>150</number>
@@ -6359,7 +6359,7 @@
                       <enum>Qt::Horizontal</enum>
                      </property>
                      <property name="sizeType">
-                      <enum>QSizePolicy::Policy::Expanding</enum>
+                      <enum>QSizePolicy::Expanding</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
