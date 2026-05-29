@@ -52,7 +52,8 @@ sed -e 's/Qt::FocusPolicy::NoFocus/Qt::NoFocus/g' \
 	-e 's/QListView::LayoutMode::SinglePass/QListView::SinglePass/g' \
 	-e 's/QListView::ViewMode::IconMode/QListView::IconMode/g' \
 	-e 's/QPlainTextEdit::LineWrapMode::NoWrap/QPlainTextEdit::NoWrap/' \
-	-e 's/QSlider::TickPosition::NoTicks/QSlider::NoTicks/g' \
+	-e 's/QSlider::TickPosition::\([A-Za-z]*\)\>/QSlider::\1/g' \
+	-e 's/QSizePolicy::Policy::\([A-Za-z]*\)\>/QSizePolicy::\1/g' \
 	-e 's/Qt::ScrollBarPolicy::ScrollBarAlwaysOn/Qt::ScrollBarAlwaysOn/' \
 	-e 's/Qt::TextInteractionFlag::TextSelectableByMouse/Qt::TextSelectableByMouse/g' \
 	-e 's/Qt::TextInteractionFlag::NoTextInteraction/Qt::NoTextInteraction/g' \
