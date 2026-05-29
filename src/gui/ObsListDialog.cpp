@@ -144,7 +144,11 @@ void ObsListDialog::createDialogContent()
 	//obsListCombo settings: A change in the combobox loads the list.
 	connect(ui->obsListComboBox, SIGNAL(activated(int)), this, SLOT(loadSelectedObservingList(int)));
 
-	ui->treeView->setModel(itemModel);
+	{
+		auto *proxy = new ObsListDialogSortFilterProxyModel;
+		proxy->setSourceModel(itemModel);
+		ui->treeView->setModel(proxy);
+	}
 	ui->treeView->header()->setSectionsMovable(false);
 	ui->treeView->hideColumn(ColumnUUID);
 	for (int c=ColumnDesignation; c<=ColumnLandscapeID; c++)
@@ -600,15 +604,6 @@ void ObsListDialog::loadSelectedList()
 		return;
 	}
 
-	// Always install the proxy so custom sort logic (numeric designation,
-	// RA/Dec angle comparison, magnitude) is available for interactive sorting.
-	if (!qobject_cast<ObsListDialogSortFilterProxyModel*>(ui->treeView->model()))
-	{
-		auto *proxy = new ObsListDialogSortFilterProxyModel;
-		proxy->setSourceModel(itemModel);
-		ui->treeView->setModel(proxy);
-		ui->treeView->hideColumn(ColumnUUID); // setModel() resets header visibility
-	}
 	// Apply saved sort order, or clear any sort retained from a previous list.
 	const QString sortingBy = observingListMap.value(KEY_SORTING).toString();
 	sorting = sortingBy;
@@ -1481,13 +1476,6 @@ void ObsListDialog::sortObsListTreeViewByColumnName(const QString &columnName)
 		{SORTING_BY_LOCATION,      ColumnLocation},
 		{SORTING_BY_LANDSCAPE_ID,  ColumnLandscapeID}
 	};
-	if (!qobject_cast<ObsListDialogSortFilterProxyModel*>(ui->treeView->model()))
-	{
-		auto *proxy = new ObsListDialogSortFilterProxyModel;
-		proxy->setSourceModel(itemModel);
-		ui->treeView->setModel(proxy);
-		ui->treeView->hideColumn(ColumnUUID); // setModel() resets header visibility
-	}
 	// Use sortByColumn so the header sort indicator is updated along with the data.
 	ui->treeView->sortByColumn(map.value(columnName), Qt::AscendingOrder);
 }
