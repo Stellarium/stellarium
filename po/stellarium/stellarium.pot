@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-29 21:11+0700\n"
+"POT-Creation-Date: 2026-05-30 14:40+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4988,8 +4988,8 @@ msgstr ""
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
-"article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
-"A.D. 1980</em> (%1)."
+"article <em>Long-term changes in the rotation of the earth - 700 B.C. to A."
+"D. 1980</em> (%1)."
 msgstr ""
 
 #: src/core/StelCore.cpp:2768
@@ -11602,10 +11602,9 @@ msgstr ""
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:578
 msgid ""
-"Look at each installed sky culture. Label style is forced to be "
-"'Native,Translated,Modern' regardless of user setting, unless environment "
-"variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is "
-"restored at end.)"
+"Look at each installed sky culture. Label style is forced to be 'Native,"
+"Translated,Modern' regardless of user setting, unless environment variable "
+"STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is restored at end.)"
 msgstr ""
 
 #: src/translations.h:579
@@ -11687,10 +11686,9 @@ msgstr ""
 
 #: src/translations.h:592
 msgid ""
-"A tour of the modern constellations. Label style is forced to be "
-"'Native,Translated,Modern' regardless of user setting, unless environment "
-"variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is "
-"restored at end.)"
+"A tour of the modern constellations. Label style is forced to be 'Native,"
+"Translated,Modern' regardless of user setting, unless environment variable "
+"STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is restored at end.)"
 msgstr ""
 
 #: src/translations.h:593
@@ -14758,6 +14756,7 @@ msgid "Trails thickness in pixels"
 msgstr ""
 
 #: src/ui_viewDialog.h:4337
+#, c-format
 msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
 "slightly different model"
@@ -16145,6 +16144,7 @@ msgid "Filter"
 msgstr ""
 
 #: src/ui_viewDialog.h:5386
+msgctxt "Short for \"list only enabled surveys\""
 msgid "Enabled only"
 msgstr ""
 
@@ -24726,8 +24726,8 @@ msgstr ""
 #: plugins/Quasars/src/Quasars.cpp:76
 msgid ""
 "A plugin that shows some quasars brighter than visual magnitude 18. The "
-"catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
-"(13th Ed.) (Veron+ 2010)"
+"catalogue of quasars was compiled from 'Quasars and Active Galactic "
+"Nuclei' (13th Ed.) (Veron+ 2010)"
 msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:177
@@ -29718,8 +29718,8 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:293
 msgid ""
-"This will speed up rendering, but the appearance will look "
-"&quot;broken&quot; until you stop moving."
+"This will speed up rendering, but the appearance will look &quot;"
+"broken&quot; until you stop moving."
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:294
@@ -29729,8 +29729,8 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:296
 msgid ""
-"This updates a second face, so that the visual appearance seems less "
-"&quot;broken&quot;."
+"This updates a second face, so that the visual appearance seems less &quot;"
+"broken&quot;."
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:305
@@ -30362,8 +30362,8 @@ msgid ""
 "of life. Please describe specifics of the source (book/clay tablet/"
 "parchment/...) or of the culture: e.g. sun-focussed, moon-focussed, climate "
 "of the region, geographic specifics. Did members of the culture build "
-"pyramids or any other well-known thing? What did they do with astronomy "
-"(e.g. time keeping, calendar making, weather predictions...)? Are there "
+"pyramids or any other well-known thing? What did they do with astronomy (e."
+"g. time keeping, calendar making, weather predictions...)? Are there "
 "connections to other cultures? Is this version a didactic reduction or is it "
 "derived from a specific other source?"
 msgstr ""
@@ -30371,9 +30371,9 @@ msgstr ""
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:824
 msgid ""
 "What special features did/does this culture use, what shall the user watch "
-"out for? Is it worthwhile to click a specific button rather than others - "
-"e.g. divisions of the ecliptic, super-constellations, dark constellations, "
-"all-sky-constellations, zoom into the Pleiades, etc.? Do the constellations "
+"out for? Is it worthwhile to click a specific button rather than others - e."
+"g. divisions of the ecliptic, super-constellations, dark constellations, all-"
+"sky-constellations, zoom into the Pleiades, etc.? Do the constellations "
 "change with the months or remain the same throughout the year? What is "
 "actually 'correct' about your presentation? Did they really use stick "
 "figures? Did they paint images (or just use names of stars)? Did they use "
@@ -30519,8 +30519,8 @@ msgid ""
 "1. You fully agree that the Sky Culture will be subject to the license you "
 "have selected.\n"
 "2. You have described the Sky Culture as elaborately as possible.\n"
-"3. You have the necessary rights to use and share all included content "
-"(e.g., artwork, descriptions).\n"
+"3. You have the necessary rights to use and share all included content (e."
+"g., artwork, descriptions).\n"
 "4. All information provided is accurate to the best of your knowledge.\n"
 "5. The content is shared in good faith, with respect for cultural "
 "significance and sensitivities.\n"
