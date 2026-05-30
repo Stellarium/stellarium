@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-29 21:11+0700\n"
+"POT-Creation-Date: 2026-05-30 14:40+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2026\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -15626,6 +15626,7 @@ msgid "Trails thickness in pixels"
 msgstr "Épaisseur des trajectoires, en pixels"
 
 #: src/ui_viewDialog.h:4337
+#, c-format
 msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
 "slightly different model"
@@ -17093,8 +17094,9 @@ msgid "Filter"
 msgstr "Filtre"
 
 #: src/ui_viewDialog.h:5386
+msgctxt "Short for \"list only enabled surveys\""
 msgid "Enabled only"
-msgstr "Actives seulement"
+msgstr "Activées seulement"
 
 #: src/ui_configurationDialog.h:2338
 msgid "Configuration"
