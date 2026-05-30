@@ -205,7 +205,10 @@ private:
 	Vec3d perp2EndPointHor;
 	double angleHorizontal;
 
+#ifndef NO_GUI
+	AngleMeasureDialog* configDialog;
 	StelButton* toolbarButton;
+#endif
 
 	void calculateEnds();
 	void calculateEndsOneLine(const Vec3d &start, const Vec3d &end, Vec3d &perp1Start, Vec3d &perp1End, Vec3d &perp2Start, Vec3d &perp2End, double &angleEquatorial);
@@ -219,9 +222,6 @@ private:
 	void drawOne(StelCore *core, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor);
 
 	QSettings* conf;
-
-	// GUI
-	AngleMeasureDialog* configDialog;
 };
 
 #include <QObject>

@@ -116,6 +116,9 @@ void AstroCalcCustomStepsDialog::populateUnitMeasurementsList()
 	steps->addItem(qc_("Gaussian year","unit of measurement"), "12");
 	steps->addItem(qc_("anomalistic year","unit of measurement"), "13");
 	steps->addItem(qc_("saros","unit of measurement"), "14");
+	steps->addItem(qc_("inex","unit of measurement"), "15");
+	steps->addItem(qc_("tritos","unit of measurement"), "16");
+	steps->addItem(qc_("Metonic cycle","unit of measurement"), "17");
 
 	index = steps->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0) // read config data

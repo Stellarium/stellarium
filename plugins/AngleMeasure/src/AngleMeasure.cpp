@@ -80,7 +80,9 @@ AngleMeasure::AngleMeasure()
 	, flagShowHorizontalStartSkylinked(false)
 	, flagShowHorizontalEndSkylinked(false)
 	, angleHorizontal(0.)
+#ifndef NO_GUI
 	, toolbarButton(Q_NULLPTR)
+	#endif
 {
 	startPoint.set(0.,0.,0.);
 	endPoint.set(0.,0.,0.);
@@ -98,7 +100,9 @@ AngleMeasure::AngleMeasure()
 
 	setObjectName("AngleMeasure");
 
+#ifndef NO_GUI
 	configDialog = new AngleMeasureDialog();
+#endif
 	conf = StelApp::getInstance().getSettings();
 
 	messageTimer = new QTimer(this);
@@ -110,14 +114,20 @@ AngleMeasure::AngleMeasure()
 
 AngleMeasure::~AngleMeasure()
 {
+#ifndef NO_GUI
 	delete configDialog;
+#endif
 }
 
 bool AngleMeasure::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 
 //! Determine which "layer" the plugin's drawing will happen on.
@@ -141,13 +151,15 @@ void AngleMeasure::init()
 
 	// Create action for enable/disable & hook up signals	
 	addAction("actionShow_Angle_Measure",        N_("Angle Measure"), N_("Angle measure"),                          "enabled", "Ctrl+A");
+#ifndef NO_GUI
 	addAction("actionShow_Angle_Measure_dialog", N_("Angle Measure"), N_("Angle measure settings"),  configDialog,  "visible" ); // no default hotkey
-
+#endif
 	// Initialize the message strings and make sure they are translated when
 	// the language changes.
 	updateMessageText();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateMessageText()));
 
+#ifndef NO_GUI
 	// Add a toolbar button
 	try
 	{
@@ -168,6 +180,7 @@ void AngleMeasure::init()
 	{
 		qWarning() << "Unable create toolbar button for AngleMeasure plugin: " << e.what();
 	}
+#endif
 }
 
 // handle time updates

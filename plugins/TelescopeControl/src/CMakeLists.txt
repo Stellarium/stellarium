@@ -1,7 +1,10 @@
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(common)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 add_subdirectory(gui)
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+
 add_subdirectory(Lx200)
 add_subdirectory(NexStar)
 add_subdirectory(Rts2)
@@ -40,7 +43,6 @@ ENDIF(ENABLE_PCH)
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
 
 TARGET_LINK_LIBRARIES(TelescopeControl-static
-    TelescopeControl_gui
     TelescopeControl_Lx200
     TelescopeControl_NexStar
     TelescopeControl_Rts2
@@ -48,7 +50,13 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::SerialPort
+    Qt${QT_VERSION_MAJOR}::OpenGL
     )
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+TARGET_LINK_LIBRARIES(TelescopeControl-static
+    TelescopeControl_gui
+    )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 IF(ENABLE_INDI)
     TARGET_LINK_LIBRARIES(TelescopeControl-static

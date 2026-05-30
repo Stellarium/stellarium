@@ -34,6 +34,7 @@
 #include "AngleSpinBox.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
+#include "MinorPlanet.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -279,7 +280,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(currentCelestialPositions()));
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
-
+	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(currentCelestialPositions()));
+	
 	ui->hecSelectedMinorPlanetsCheckBox->setChecked(conf->value("astrocalc/flag_hec_minor_planets", false).toBool());
 	connect(ui->hecSelectedMinorPlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveHECFlagMinorPlanets(bool)));
 
@@ -1946,7 +1948,10 @@ double AstroCalcDialog::getEphemerisTimeStep(const PlanetP &planet)
 		{37, 500. * solarDay },
 		{38, StelCore::JD_MINUTE },
 		{39, 3. * siderealDay },
-		{40, 3. * solarDay }
+		{40, 3. * solarDay },
+		{43, 3986.629495155*solarDay },	// 1 tritos (135 synodic months)
+		{44, 6939.688380455*solarDay },	// 1 Metonic Cycle (235 synodic months)
+		{45, 10571.950809374*solarDay },// 1 inex (358 synodic months)
 	};
 	return timeStepMap.value(ui->ephemerisStepComboBox->currentData().toInt(), solarDay);
 }
@@ -2140,6 +2145,15 @@ void AstroCalcDialog::generateEphemeris()
 
 			Vec3d pos, sunPos;
 			core->setJD(JD);
+			// Install the correct epoch snapshot BEFORE core->update(0) computes
+			// positions. If this runs after, the first step uses the snapshot from
+			// the simulation's displayed date, causing a jump on the first marker.
+			for (const auto& p : std::as_const(solarSystem->getAllPlanets()))
+			{
+				QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+				if (mp && mp->hasEpochElements())
+					mp->updateEpochOrbit(JD, true);
+			}
 			core->update(0); // force update to get new coordinates
 
 			if (!ignoreDateTest && !obj->hasValidPositionalData(JD, Planet::PositionQuality::OrbitPlotting))
@@ -2395,7 +2409,11 @@ double AstroCalcDialog::getCustomTimeStep()
 			{11, 365.25*solarDay},		// Julian years
 			{12, 365.2568983*solarDay},	// Gaussian years
 			{13, 365.259636*solarDay},	// Anomalistic years
-			{14, 6585.321314219*solarDay}};	// 1 saros (223 synodic months)
+			{14, 6585.321314219*solarDay},	// 1 saros (223 synodic months)
+			{15, 10571.950809374*solarDay}, // 1 inex (358 synodic months)
+			{16, 3986.629495155*solarDay},	// 1 tritos (135 synodic months)
+			{17, 6939.688380455*solarDay}	// 1 Metonic Cycle (235 synodic months)
+	};
 	return timeStep*customTimeStepMap.value(customTimeStepKey);
 }
 
@@ -5195,9 +5213,8 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 		{q_("1 sidereal year"), "27"}, {q_("1 Julian day"), "12"}, {q_("5 Julian days"), "13"}, {q_("10 Julian days"), "14"}, {q_("15 Julian days"), "15"},
 		{q_("30 Julian days"), "16"}, {q_("60 Julian days"), "17"}, {q_("100 Julian days"), "26"}, {q_("1 Julian year"), "28"},
 		{q_("1 Gaussian year"), "29"}, {q_("1 synodic month"), "30"}, {q_("1 draconic month"), "31"}, {q_("1 mean tropical month"), "32"},
-		{q_("1 anomalistic month"), "33"} ,{q_("1 anomalistic year"), "34"}, {q_("1 saros"), "35"}, {q_("custom interval"), "0"},
-		{q_("Sun at preset altitude"), "41"},
-		{q_("Opposition of planet"), "42"}
+		{q_("1 anomalistic month"), "33"} ,{q_("1 anomalistic year"), "34"}, {q_("1 tritos"), "43"}, {q_("1 saros"), "35"}, {q_("1 Metonic cycle"), "44"},
+		{q_("1  inex"), "45"}, {q_("custom interval"), "0"}, {q_("Sun at preset altitude"), "41"}, {q_("Opposition of planet"), "42"}
 	};
 	Q_ASSERT(ui->ephemerisStepComboBox);
 	QComboBox* steps = ui->ephemerisStepComboBox;
@@ -5234,7 +5251,7 @@ void AstroCalcDialog::populateEphemerisTimeUnitsList()
 	typedef QPair<QString, QString> itemPairs;
 	const QList<itemPairs> items = {
 		{qc_("minutes", "time unit measurement"), "1"}, {qc_( "hours", "time unit measurement"), "2"},
-		{qc_(      "days", "time unit measurement"), "3"}, {qc_("weeks", "time unit measurement"), "4"},
+		{qc_(   "days", "time unit measurement"), "3"}, {qc_( "weeks", "time unit measurement"), "4"},
 		{qc_( "months", "time unit measurement"), "5"}, {qc_( "years", "time unit measurement"), "6"}
 	};
 	Q_ASSERT(ui->dateToUnitsComboBox);
@@ -9187,10 +9204,11 @@ QList<PlanetP> AstroCalcDialog::getSelectedMinorPlanets()
 
 void AstroCalcDialog::goToObject(const QString &name, const double JD)
 {
-	if (objectMgr->findAndSelectI18n(name, "Planet") || objectMgr->findAndSelect(name, "Planet"))
+	const QString objtype = "Planet";
+	if (objectMgr->findAndSelectI18n(name, objtype) || objectMgr->findAndSelect(name, objtype))
 	{
 		core->setJD(JD);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject(objtype);
 		if (!newSelected.empty())
 		{
 			// Can't point to home planet

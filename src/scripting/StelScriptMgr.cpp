@@ -507,6 +507,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	QSettings *conf=StelApp::getInstance().getSettings();
 	flagAllowExternalScreenshotDir=conf->value("scripts/flag_allow_screenshots_dir", false).toBool();
 	flagAllowWriteAbsolutePaths=conf->value("scripts/flag_allow_write_absolute_path", false).toBool();
+	flagShowContinueMessage=conf->value("scripts/flag_show_continue_message", true).toBool();
 }
 
 void StelScriptMgr::initActions()
@@ -1212,5 +1213,17 @@ void StelScriptMgr::setFlagAllowWriteAbsolutePaths(bool flag)
 		conf->setValue("scripts/flag_allow_write_absolute_path", flag);
 		conf->sync();
 		emit flagAllowWriteAbsolutePathsChanged(flag);
+	}
+}
+
+void StelScriptMgr::setFlagShowContinueMessage(bool flag)
+{
+	if (flag!=flagShowContinueMessage)
+	{
+		flagShowContinueMessage=flag;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("scripts/flag_show_continue_message", flag);
+		conf->sync();
+		emit flagShowContinueMessageChanged(flag);
 	}
 }

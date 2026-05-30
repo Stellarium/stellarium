@@ -28,6 +28,7 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
+#include "ui_onlineQueriesDialog.h"
 
 OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
 	StelDialogSeparate("OnlineQueries", parent),

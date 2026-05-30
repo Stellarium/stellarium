@@ -681,6 +681,12 @@ public slots:
 	//! Add one saros (223 synodic months) to the simulation time.
 	void addSaros();
 
+	//! Add one inex (358 synodic months) to the simulation time.
+	void addInex();
+
+	//! Add one tritos (135 synodic months) to the simulation time.
+	void addTritos();
+
 	//! Add one draconic year to the simulation time.
 	void addDraconicYear();
 	//! Add one draconic month to the simulation time.
@@ -733,6 +739,12 @@ public slots:
 
 	//! Subtract one saros (223 synodic months) from the simulation time.
 	void subtractSaros();
+
+	//! Subtract one inex (358 synodic months) from the simulation time.
+	void subtractInex();
+
+	//! Subtract one tritos (135 synodic months) from the simulation time.
+	void subtractTritos();
 
 	//! Subtract one draconic year from the simulation time.
 	void subtractDraconicYear();

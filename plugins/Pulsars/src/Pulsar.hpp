@@ -67,7 +67,7 @@ public:
 	//! - s400: mean flux density at 400 MHz (mJy)
 	//! - s600: mean flux density at 1400 MHz (mJy)
 	//! - s1400: mean flux density at 2000 MHz (mJy)
-	//! - distance: best estimate of the pulsar distance using the YMW16 DM-based distance as default (kpc)
+	//! - distance: based on an association with another object (e.g., globular cluster, supernova remnant, Large or Small Magellanic Cloud) (kpc)
 	//! - glitch: number of glitches
 	//! - notes: pulsar types
 	QVariantMap getMap(void) const;
@@ -139,17 +139,17 @@ private:
 	double pmDE;		//! proper motion by declination (mas/yr)
 	float parallax;		//! Annual parallax (mas)
 	double period;		//! Barycentric period of the pulsar (s)
-	double frequency;	//! Barycentric rotation frequency (Hz)
+	double frequency;		//! Barycentric rotation frequency (Hz)
 	double pfrequency;	//! Time derivative of barycentric rotation frequency (s^-2)
 	double pderivative;	//! Time derivative of barcycentric period (dimensionless)
-	double dmeasure;	//! Dispersion measure (cm-3 pc)
+	double dmeasure;		//! Dispersion measure (cm-3 pc)
 	double bperiod;		//! Binary period of pulsar (days)
 	double eccentricity;	//! Eccentricity	
 	float w50;		//! Profile width at 50% of peak in ms
 	float s400;		//! Time averaged flux density at 400MHz in mJy
 	float s600;		//! Time averaged flux density at 600MHz in mJy
 	float s1400;		//! Time averaged flux density at 1400MHz in mJy
-	float distance;		//! Distance based on electron density model in kpc
+	float distance;		//! Distance based on an association with another object (e.g., globular cluster, supernova remnant, Large or Small Magellanic Cloud) in kpc
 	int glitch;		//! Number of glitches
 	QString notes;		//! Notes to pulsar (Type of pulsar)
 

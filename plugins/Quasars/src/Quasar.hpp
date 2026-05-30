@@ -86,10 +86,12 @@ public:
 	//! @param flags a set of flags with information types to include.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap().
-	// TODO: Describe the fields.
-	//! - amag
-	//! - bV
-	//! - redshift
+	//! - amag: absolute magnitude of quasar
+	//! - bV: B-V color index
+	//! - redshift: redshift value
+	//! - f6: radio flux density around 5GHz (6cm) [Jy = Jansky (10^-26W/m2/Hz)]
+	//! - f20: radio flux density around 1.4GHz (21cm) [Jy = Jansky (10^-26W/m2/Hz)]
+	//! - sclass: spectral class
 	QVariantMap getInfoMap(const StelCore *core) const override;
 	Vec3f getInfoColor(void) const override;
 	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;

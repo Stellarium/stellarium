@@ -528,13 +528,14 @@ private:
 	bool flipHorzMain;               //!< keep track of screen flip in main program
 
 	// for toolbar button
+	bool flagShowOcularsButton;
+#ifndef NO_GUI
 	QPixmap * pxmapGlow;
 	QPixmap * pxmapOnIcon;
 	QPixmap * pxmapOffIcon;
 	StelButton * toolbarButton;
-	bool flagShowOcularsButton;
-
 	OcularDialog *ocularDialog;
+#endif
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 
 	StelAction * actionShowOcular;
@@ -548,7 +549,9 @@ private:
 	StelAction * actionOcularIncrement;
 	StelAction * actionOcularDecrement;
 
+#ifndef NO_GUI
 	class OcularsGuiPanel * guiPanel;
+#endif
 	int guiPanelFontSize;
 	Vec3f textColor;
 	Vec3f lineColor;

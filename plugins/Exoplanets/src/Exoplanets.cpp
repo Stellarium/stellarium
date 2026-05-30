@@ -99,11 +99,13 @@ Exoplanets::Exoplanets()
 	, enableAtStartup(false)
 	, flagShowExoplanets(false)
 	, flagShowExoplanetsButton(false)
-	, toolbarButton(Q_NULLPTR)
+	#ifndef NO_GUI
+	, exoplanetsConfigDialog(new ExoplanetsDialog)
 	, progressBar(Q_NULLPTR)
+	, toolbarButton(Q_NULLPTR)
+	#endif
 {
 	setObjectName("Exoplanets");
-	exoplanetsConfigDialog = new ExoplanetsDialog();
 	conf = StelApp::getInstance().getSettings();
 	setFontSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -116,7 +118,9 @@ Exoplanets::~Exoplanets()
 {
 	StelApp::getInstance().getStelObjectMgr().unSelect();
 
+#ifndef NO_GUI
 	delete exoplanetsConfigDialog;
+#endif
 }
 
 void Exoplanets::deinit()
@@ -173,7 +177,9 @@ void Exoplanets::init()
 		// key bindings and other actions
 		QString section = N_("Exoplanets");
 		addAction("actionShow_Exoplanets", section, N_("Show exoplanets"), "showExoplanets", "Ctrl+Alt+E");
+#ifndef NO_GUI
 		addAction("actionShow_Exoplanets_ConfigDialog", section, N_("Show settings dialog"), exoplanetsConfigDialog, "visible", "Alt+E");
+#endif
 		// no default hotkeys
 		addAction("actionShow_Exoplanets_Distribution", section, N_("Enable display of distribution for exoplanets"), "flagDisplayMode");
 		addAction("actionShow_Exoplanets_Timeline", section, N_("Enable timeline discovery of exoplanets"), "flagTimelineMode");
@@ -695,9 +701,13 @@ ExoplanetP Exoplanets::getByID(const QString& id) const
 
 bool Exoplanets::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		exoplanetsConfigDialog->setVisible(true);
 	return true;
+#endif
 }
 
 void Exoplanets::restoreDefaults(void)
@@ -810,6 +820,7 @@ void Exoplanets::upgradeConfigIni(void)
 // Define whether the button toggling exoplanets should be visible
 void Exoplanets::setFlagShowExoplanetsButton(bool b)
 {
+#ifndef NO_GUI
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=Q_NULLPTR)
 	{
@@ -830,6 +841,7 @@ void Exoplanets::setFlagShowExoplanetsButton(bool b)
 			gui->getButtonBar()->hideButton("actionShow_Exoplanets");
 		}
 	}
+#endif
 	flagShowExoplanetsButton = b;
 }
 
@@ -939,6 +951,7 @@ QString Exoplanets::getCurrentTemperatureScaleKey() const
 
 void Exoplanets::deleteDownloadProgressBar()
 {
+#ifndef NO_GUI
 	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
 
 	if (progressBar)
@@ -946,6 +959,7 @@ void Exoplanets::deleteDownloadProgressBar()
 		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = Q_NULLPTR;
 	}
+#endif
 }
 
 void Exoplanets::startDownload(const QString &urlString)
@@ -957,11 +971,12 @@ void Exoplanets::startDownload(const QString &urlString)
 		return;
 	}
 
-	if (progressBar == Q_NULLPTR)
+#ifndef NO_GUI
+	if (!progressBar)
 		progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setValue(0);
 	progressBar->setRange(0, 0);
-
+#endif
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
@@ -978,7 +993,8 @@ void Exoplanets::startDownload(const QString &urlString)
 
 void Exoplanets::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
-	if (progressBar == Q_NULLPTR)
+#ifndef NO_GUI
+	if (!progressBar)
 		return;
 
 	int currentValue = 0;
@@ -998,6 +1014,7 @@ void Exoplanets::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 
 	progressBar->setValue(currentValue);
 	progressBar->setRange(0, endValue);
+#endif
 }
 
 void Exoplanets::downloadComplete(QNetworkReply *reply)

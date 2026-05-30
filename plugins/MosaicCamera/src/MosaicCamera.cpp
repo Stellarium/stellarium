@@ -70,7 +70,9 @@ MosaicCamera::MosaicCamera()
         : toolbarButton(Q_NULLPTR)
 {
 	setObjectName("MosaicCamera");
+#ifndef NO_GUI
 	configDialog = new MosaicCameraDialog();
+#endif
 	StelApp &app = StelApp::getInstance();
 	conf = app.getSettings();
 	core = app.getCore();
@@ -82,7 +84,9 @@ MosaicCamera::MosaicCamera()
 *************************************************************************/
 MosaicCamera::~MosaicCamera()
 {
+#ifndef NO_GUI
 	delete configDialog;
+#endif
 }
 
 void MosaicCamera::loadSettings()
@@ -173,7 +177,9 @@ void MosaicCamera::init()
 	loadBuiltInCameras();
 
 	addAction("actionShow_MosaicCamera", N_("Mosaic Camera"), N_("Show Mosaic Camera"), "enabled", "");
+#ifndef NO_GUI
 	addAction("actionShow_MosaicCamera_dialog", N_("Mosaic Camera"), N_("Show settings dialog"), configDialog, "visible");
+#endif
 	addAction("actionSetRADecToView", N_("Mosaic Camera"), N_("Set RA/Dec to current view"), "setRADecToView()", "");
 	addAction("actionSetRADecToObject", N_("Mosaic Camera"), N_("Set RA/Dec to current object"), "setRADecToObject()", "");
 	addAction("actionSetViewToCamera", N_("Mosaic Camera"), N_("Set view to current camera"), "setViewToCamera()", "");
@@ -210,6 +216,7 @@ void MosaicCamera::initializeUserData()
 
 void MosaicCamera::setFlagShowButton(bool b)
 {
+#ifndef NO_GUI
 	if (gui != Q_NULLPTR)
 	{
 		if (b == true)
@@ -231,6 +238,7 @@ void MosaicCamera::setFlagShowButton(bool b)
 			gui->getButtonBar()->hideButton("actionShow_MosaicCamera");
 		}
 	}
+#endif
 	flagShowButton = b;
 }
 
@@ -411,11 +419,13 @@ void MosaicCamera::setRA(const QString& cameraName, double ra)
 	if (cameras.contains(cameraName))
 	{
 		cameras[cameraName].ra = ra;
+#ifndef NO_GUI
 		if(configDialog->visible())
 		{
 			if (configDialog->getCurrentCameraName() == cameraName)
 				configDialog->setRA(ra);
 		}
+#endif
 	}
 }
 
@@ -424,11 +434,13 @@ void MosaicCamera::setDec(const QString& cameraName, double dec)
 	if (cameras.contains(cameraName))
 	{
 		cameras[cameraName].dec = dec;
+#ifndef NO_GUI
 		if(configDialog->visible())
 		{
 			if (configDialog->getCurrentCameraName() == cameraName)
 				configDialog->setDec(dec);
 		}
+#endif
 	}
 }
 
@@ -437,11 +449,13 @@ void MosaicCamera::setRotation(const QString& cameraName, double rotation)
 	if (cameras.contains(cameraName))
 	{
 		cameras[cameraName].rotation = rotation;
+#ifndef NO_GUI
 		if(configDialog->visible())
 		{
 			if (configDialog->getCurrentCameraName() == cameraName)
 				configDialog->setRotation(rotation);
 		}
+#endif
 	}
 }
 
@@ -450,11 +464,13 @@ void MosaicCamera::setVisibility(const QString& cameraName, bool visible)
 	if (cameras.contains(cameraName))
 	{
 		cameras[cameraName].visible = visible;
+#ifndef NO_GUI
 		if(configDialog->visible())
 		{
 			if (configDialog->getCurrentCameraName() == cameraName)
 				configDialog->setVisibility(visible);
 		}
+#endif
 	}
 }
 
@@ -559,8 +575,10 @@ void MosaicCamera::setCurrentCamera(const QString& cameraName)
 	{
 		currentCamera = cameraName;
 		emit currentCameraChanged(cameraName);
+#ifndef NO_GUI
 		if(configDialog->visible())
 			configDialog->setCurrentCameraName(cameraName, cameras[cameraName].cameraName, cameras[cameraName].cameraDescription, cameras[cameraName].cameraURLDetails);
+#endif
 	}
 }
 
@@ -677,7 +695,11 @@ QStringList MosaicCamera::getCameraNames() const
 
 bool MosaicCamera::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }

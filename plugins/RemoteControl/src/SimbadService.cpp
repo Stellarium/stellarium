@@ -105,7 +105,11 @@ private:
 SimbadService::SimbadService(QObject *parent) : AbstractAPIService(parent)
 {
 	//this is run in the main thread
-	simbadServerUrl = StelApp::getInstance().getSettings()->value("search/simbad_server_url", SearchDialog::DEF_SIMBAD_URL).toString();
+	simbadServerUrl = StelApp::getInstance().getSettings()->value("search/simbad_server_url"
+							      #ifndef NO_GUI
+								      , SearchDialog::DEF_SIMBAD_URL
+							      #endif
+								      ).toString();
 }
 
 void SimbadService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)

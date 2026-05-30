@@ -41,6 +41,7 @@
 #include "../CopticCalendar.hpp"
 #include "../EthiopicCalendar.hpp"
 #include "../RomanCalendar.hpp"
+#include "../ByzantineCalendar.hpp"
 #include "../FrenchArithmeticCalendar.hpp"
 #include "../IslamicCalendar.hpp"
 #include "../HebrewCalendar.hpp"
@@ -938,6 +939,21 @@ void TestCalendars::testRoman()
 	QVERIFY(RomanCalendar::romanFromFixed( 728714)==QVector<int>({1996,  2, 3,  2, 0}));
 	QVERIFY(RomanCalendar::romanFromFixed( 744313)==QVector<int>({2038, 11, 1,  5, 0}));
 	QVERIFY(RomanCalendar::romanFromFixed( 764652)==QVector<int>({2094,  7, 2,  3, 0}));
+
+	QVERIFY(ByzantineCalendar::fixedFromByzantine({7534, 8, 29}) == GregorianCalendar::fixedFromGregorian({2026, 5, 12}));
+	QVERIFY(ByzantineCalendar::fixedFromByzantine({7534, 9,  1}) == GregorianCalendar::fixedFromGregorian({2026, 5, 14}));
+	QVERIFY(ByzantineCalendar::byzantineFromFixed(GregorianCalendar::fixedFromGregorian({2026, 5, 14}))==QVector<int>({7534, 9,  1}));
+	QVERIFY(ByzantineCalendar::byzantineFromFixed(GregorianCalendar::fixedFromGregorian({2026, 5, 12}))==QVector<int>({7534, 8, 29}));
+	QVERIFY(ByzantineCalendar::fixedFromByzantine({5509, 5, 3}) == 1);
+	QVERIFY(ByzantineCalendar::byzantineFromFixed(1) == QVector<int>({5509, 5, 3}));
+	QVERIFY(ByzantineCalendar::fixedFromByzantine({5510, 1, 1}) == JulianCalendar::fixedFromJulian({1, 9, 1}));
+	QVERIFY(ByzantineCalendar::fixedFromByzantine({5511, 1, 1}) == JulianCalendar::fixedFromJulian({2, 9, 1}));
+	QVERIFY(ByzantineCalendar::fixedFromByzantine({5509, 1, 1}) == JulianCalendar::fixedFromJulian({-1, 9, 1}));
+	QVERIFY(ByzantineCalendar::fixedFromByzantine({5508, 1, 1}) == JulianCalendar::fixedFromJulian({-2, 9, 1}));
+	QVERIFY(ByzantineCalendar::fixedFromByzantine({5509, 7, 1}) == JulianCalendar::fixedFromJulian({1, 3, 1}));
+
+	QVERIFY(ByzantineCalendar::fixedFromByzantine({20, 12, 0}) == JulianCalendar::fixedFromJulian({-5489, 7, 31}));
+	QVERIFY(ByzantineCalendar::fixedFromByzantine({20, 11, 31}) == JulianCalendar::fixedFromJulian({-5489, 7, 31}));
 }
 
 void TestCalendars::testFrenchRevolution()

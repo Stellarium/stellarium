@@ -22,6 +22,7 @@
 #include <QString>
 #include <QVariant>
 #include <QMetaType>
+#include "VecMath.hpp"
 
 class Planet;
 
@@ -120,13 +121,17 @@ public:
 	//! Parse a location from a line serialization
 	static StelLocation createFromLine(const QString& line);
 
+	//! \brief Compute a point at \p distDeg degrees away from the center along the great circle with the given \p bearing
+	//!
+	//! To compute latitude and longitude from this Cartesian point, use #StelUtils::rectToSphe.
+	static Vec3d pointAtDistanceDegrees(const double centerLon, const double centerLat, const double distDeg, const double bearing);
 	//! Compute great-circle distance between two locations on a spherical body
 	//! arguments given in decimal degrees
 	static float distanceDegrees(const float long1, const float lat1, const float long2, const float lat2);
 	//! Compute great-circle distance between two locations on the current planet (takes flattening into account)
 	//! arguments given in decimal degrees
 	//! Source: Jean Meeus, Astronomical Algorithms, 2nd edition, ch.11.
-	static double distanceKm(Planet *planet, const double long1, const double lat1, const double long2, const double lat2);
+	static double distanceKm(const Planet& planet, const double long1, const double lat1, const double long2, const double lat2);
 	//! Compute azimuth from Obs towards Target. All angles (args and result) are in degrees.
 	//! @return azimuth counted from north or south as set in the StelApp preferences, in [0...360].
 	static double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);

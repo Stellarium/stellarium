@@ -885,13 +885,20 @@ void StelMainView::init()
 	glInfo.supportsLuminanceTextures = format.profile() == QSurfaceFormat::CompatibilityProfile ||
 									   format.majorVersion() < 3;
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
+	glInfo.majorVersion = format.majorVersion();
 	qInfo().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
         #if defined Q_OS_HAIKU || defined Q_OS_SOLARIS
         // Haiku OS/Solaris hasn't hardware acceleration and we shouldn't use High Graphics Mode here
         glInfo.isHighGraphicsMode = false;
         #else
-	glInfo.isHighGraphicsMode = !qApp->property("onetime_force_low_graphics").toBool() && !!StelOpenGL::highGraphicsFunctions();
+	// GLES will always provide high graphics functions due to our choice of QOpenGLExtraFunctions,
+	// so we also need to check that we have at least GLES3 to enable high graphics mode.
+	// For desktop OpenGL our target version is also at least 3, so it's compatible with this check.
+	// And we do need to check that high-graphics functions are available, since GL3.0 is not sufficient.
+	glInfo.isHighGraphicsMode = glInfo.majorVersion >= 3 && !!StelOpenGL::highGraphicsFunctions();
+	if (qApp->property("onetime_force_low_graphics").toBool())
+		glInfo.isHighGraphicsMode = false;
         #endif
 	qInfo() << "Running in" << (glInfo.isHighGraphicsMode ? "High" : "Low") << "Graphics Mode";
 
@@ -927,7 +934,7 @@ void StelMainView::init()
 		auto addr = glInfo.mainContext->getProcAddress("glMinSampleShading");
 		if(!addr)
 			addr = glInfo.mainContext->getProcAddress("glMinSampleShadingARB");
-		glInfo.glMinSampleShading = reinterpret_cast<PFNGLMINSAMPLESHADINGPROC>(addr);
+		glInfo.glMinSampleShading = reinterpret_cast<decltype(glInfo.glMinSampleShading)>(addr);
 	}
 	gl.glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInfo.maxTextureSize);
 	qInfo() << "Maximum 2D texture size:" << glInfo.maxTextureSize;
@@ -1001,11 +1008,13 @@ void StelMainView::init()
 	// The script manager can only be fully initialized after the plugins have loaded.
 	stelApp->initScriptMgr();
 
+#ifndef NO_GUI
 	// Set the global stylesheet, this is only useful for the tooltips.
 	StelGui* sgui = dynamic_cast<StelGui*>(stelApp->getGui());
 	if (sgui!=Q_NULLPTR)
 		setStyleSheet(sgui->getStelStyle().qtStyleSheet);
 	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
+#endif
 
 	// I doubt this will have any effect on framerate, but may cause problems elsewhere?
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
@@ -1784,10 +1793,12 @@ void StelMainView::doScreenshot(void)
 	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 	stelScene->setSceneRect(0, 0, virtImgWidth, virtImgHeight);
 
+#ifndef NO_GUI
 	// push the button bars back to the sides where they belong, and fix root item clipping its children.
 	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, virtImgWidth, virtImgHeight);
 	rootItem->setSize(QSize(virtImgWidth, virtImgHeight));
 	dynamic_cast<StelGui*>(gui)->forceRefreshGui(); // refresh bar position.
+#endif
 
 	stelScene->render(&painter, QRectF(), QRectF(0,0,virtImgWidth,virtImgHeight) , Qt::KeepAspectRatio);
 	painter.end();
@@ -1811,13 +1822,14 @@ void StelMainView::doScreenshot(void)
 	nightModeEffect->setEnabled(nightModeWasEnabled);
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
+#ifndef NO_GUI
 	StelGui* stelGui = dynamic_cast<StelGui*>(gui);
 	if (stelGui)
 	{
 		stelGui->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 		stelGui->forceRefreshGui();
 	}
-
+#endif
 	if (nightModeWasEnabled)
 	{
 		for (int row=0; row<im.height(); ++row)

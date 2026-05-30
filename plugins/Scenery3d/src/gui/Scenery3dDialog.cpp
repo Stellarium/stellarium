@@ -29,6 +29,7 @@
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "ui_scenery3dDialog.h"
 
 #include <QLineEdit>
 #include <QStandardItemModel>

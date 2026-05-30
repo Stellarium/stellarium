@@ -22,12 +22,10 @@
 
 #include "LabelMgr.hpp"
 #include "SkyGui.hpp"
-#include "StelActionMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
-#include "StelGuiItems.hpp"
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -40,6 +38,10 @@
 #include "NebulaMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelPropertyMgr.hpp"
+#ifndef NO_GUI
+#include "StelActionMgr.hpp"
+#include "StelGuiItems.hpp"
+#endif
 
 #include <QAction>
 #include <QDebug>
@@ -140,12 +142,14 @@ Oculars::Oculars()
 	, flagRayHelpersLinesMain(true)
 	, flipVertMain(false)
 	, flipHorzMain(false)
+	, flagShowOcularsButton(false)
+	#ifndef NO_GUI
 	, pxmapGlow(Q_NULLPTR)
 	, pxmapOnIcon(Q_NULLPTR)
 	, pxmapOffIcon(Q_NULLPTR)
 	, toolbarButton(Q_NULLPTR)
-	, flagShowOcularsButton(false)
 	, ocularDialog(Q_NULLPTR)
+	#endif
 	, ready(false)
 	, actionShowOcular(Q_NULLPTR)
 	, actionShowCrosshairs(Q_NULLPTR)
@@ -157,7 +161,9 @@ Oculars::Oculars()
 	, actionTelescopeDecrement(Q_NULLPTR)
 	, actionOcularIncrement(Q_NULLPTR)
 	, actionOcularDecrement(Q_NULLPTR)
+	#ifndef NO_GUI
 	, guiPanel(Q_NULLPTR)
+	#endif
 	, guiPanelFontSize(StelApp::getInstance().getScreenFontSize() * GUI_PANEL_FONT_SIZE_FACTOR)
 	, textColor(0.)
 	, lineColor(0.)
@@ -208,16 +214,18 @@ Oculars::Oculars()
 
 Oculars::~Oculars()
 {
+#ifndef NO_GUI
 	delete ocularDialog;
 	ocularDialog = Q_NULLPTR;
-	if (guiPanel)
-		delete guiPanel;
 	if (pxmapGlow)
 		delete pxmapGlow;
 	if (pxmapOnIcon)
 		delete pxmapOnIcon;
 	if (pxmapOffIcon)
 		delete pxmapOffIcon;
+	if (guiPanel)
+		delete guiPanel;
+#endif
 	
 	qDeleteAll(ccds);
 	ccds.clear();
@@ -236,12 +244,15 @@ QSettings* Oculars::getSettings()
 
 bool Oculars::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 	{
 		ocularDialog->setVisible(true);
 	}
-
 	return ready;
+#endif
 }
 
 void Oculars::deinit()
@@ -341,8 +352,10 @@ void Oculars::setFontSize(const int fontSize, const int guiPanelFontSize)
 	this->fontSize = fontSize;
 
 	this->guiPanelFontSize = guiPanelFontSize;
+#ifndef NO_GUI
 	if (guiPanel)
 		guiPanel->setFontSize(guiPanelFontSize);
+#endif
 }
 
 void Oculars::setFontSizeFromApp(const int size)
@@ -423,6 +436,7 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	const auto eventPosY = event->y();
 #endif
 
+#ifndef NO_GUI
 	if (guiPanel)
 	{
 		const auto ratio = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
@@ -433,7 +447,7 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 			return;
 		}
 	}
-
+#endif
 	// In case we show oculars with black circle, ignore mouse presses outside image circle:
 	// https://sourceforge.net/p/stellarium/discussion/278769/thread/57893bb3/?limit=25#75c0
 	if ((flagShowOculars) ) //&& !getFlagUseSemiTransparency()) // Not sure: ignore or allow selection of semi-hidden stars?
@@ -606,16 +620,18 @@ void Oculars::init()
 		}
 		selectedLensIndex=settings->value("lens_index", -1).toInt(); // Lens is not selected by default!
 
+#ifndef NO_GUI
 		pxmapGlow = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
 		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
 
 		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes, &lenses);
+#endif
+		const int defaultGuiPanelFontSize = StelApp::getInstance().getScreenFontSize() * GUI_PANEL_FONT_SIZE_FACTOR;
+		guiPanelFontSize=settings->value("gui_panel_fontsize", defaultGuiPanelFontSize).toInt();
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 
-		const int defaultGuiPanelFontSize = StelApp::getInstance().getScreenFontSize() * GUI_PANEL_FONT_SIZE_FACTOR;
-		guiPanelFontSize=settings->value("gui_panel_fontsize", defaultGuiPanelFontSize).toInt();
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
 		textColor=Vec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
 		lineColor=Vec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
@@ -757,6 +773,7 @@ void Oculars::setScreenFOVForCCD()
 
 void Oculars::enableGuiPanel(bool enable)
 {
+#ifndef NO_GUI
 	if (enable)
 	{
 		if (!guiPanel)
@@ -781,6 +798,7 @@ void Oculars::enableGuiPanel(bool enable)
 			guiPanel = Q_NULLPTR;
 		}
 	}
+#endif
 	flagGuiPanelEnabled = enable;
 	settings->setValue("enable_control_panel", enable);
 	settings->sync();
@@ -789,6 +807,7 @@ void Oculars::enableGuiPanel(bool enable)
 
 void Oculars::retranslateGui()
 {
+#ifndef NO_GUI
 	if (guiPanel)
 	{
 		// TODO: Fix this hack!
@@ -808,6 +827,7 @@ void Oculars::retranslateGui()
 				guiPanel->showCcdGui();
 		}
 	}
+#endif
 }
 
 void Oculars::updateOcularReticle(void)
@@ -1025,8 +1045,10 @@ void Oculars::enableOcular(bool enableOcularMode)
 			flagShowOculars = enableOcularMode;
 			zoom(false);
 			//BM: I hope this is the right place...
+#ifndef NO_GUI
 			if (guiPanel)
 				guiPanel->showOcularGui();
+#endif
 		}
 	}
 
@@ -1156,16 +1178,19 @@ void Oculars::displayPopupMenu()
 			popup->addSeparator();
 		}
 
+#ifndef NO_GUI
 		QAction* action = popup->addAction(q_("Toggle &crosshair"));
 		action->setCheckable(true);
 		action->setChecked(flagShowCrosshairs);
 		connect(action, SIGNAL(toggled(bool)), actionShowCrosshairs, SLOT(setChecked(bool)));
+#endif
 	}
 	else
 	{
 		// We are not in ocular mode
 		// We want to show the CCD's, and if a CCD is selected, the telescopes
 		//(as a CCD requires a telescope) and the general menu items.
+#ifndef NO_GUI
 		QAction* action = new QAction(q_("Configure &Oculars"), popup);
 		action->setCheckable(true);
 		action->setChecked(ocularDialog->visible());
@@ -1188,7 +1213,8 @@ void Oculars::displayPopupMenu()
 			action->setChecked(flagShowTelrad);
 			connect(action, SIGNAL(toggled(bool)), actionShowTelrad, SLOT(setChecked(bool)));
 		}
-		
+#endif
+
 		popup->addSeparator();
 		if (flagShowCCD && selectedCCDIndex > -1 && selectedTelescopeIndex > -1)
 		{
@@ -1430,10 +1456,12 @@ void Oculars::toggleCCD(bool show)
 		skyDrawer->setRelativeStarScale(relativeStarScaleCCD);
 		skyDrawer->setAbsoluteStarScale(absoluteStarScaleCCD);
 
+#ifndef NO_GUI
 		if (guiPanel)
 		{
 			guiPanel->showCcdGui();
 		}
+#endif
 	}
 	else
 	{
@@ -1459,10 +1487,12 @@ void Oculars::toggleCCD(bool show)
 			propMgr->setStelPropertyValue("StelMovementMgr.equatorialMount", equatorialMountEnabledMain);
 		}
 
+#ifndef NO_GUI
 		if (guiPanel)
 		{
 			guiPanel->foldGui();
 		}
+#endif
 	}
 
 	emit enableCCDChanged(flagShowCCD);
@@ -1524,7 +1554,9 @@ void Oculars::initializeActivationActions()
 	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", ocularsGroup, N_("Show crosshairs"), "enableCrosshairs", "Alt+C");
 	actionShowSensor = addAction("actionShow_Sensor", ocularsGroup, N_("Image sensor frame"), "enableCCD");
 	actionShowTelrad = addAction("actionShow_Telrad", ocularsGroup, N_("Telrad sight"), "enableTelrad", "Ctrl+B");
+#ifndef NO_GUI
 	actionConfiguration = addAction("actionShow_Oculars_dialog", ocularsGroup, N_("Show settings dialog"), ocularDialog, "visible", ""); // Allow assign shortkey
+#endif
 	addAction("actionShow_Oculars_GUI", ocularsGroup, N_("Toggle Oculars button bar"), "flagGuiPanelEnabled"); // Allow assign shortkey
 	// Select next telescope via keyboard
 	addAction("actionShow_Telescope_Increment", ocularsGroup, N_("Select next telescope"), "incrementTelescopeIndex()");
@@ -3256,6 +3288,7 @@ QString Oculars::getDimensionsString(double fovX, double fovY) const
 // Define whether the button toggling eyepieces should be visible
 void Oculars::setFlagShowOcularsButton(bool b)
 {
+#ifndef NO_GUI
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
@@ -3269,6 +3302,7 @@ void Oculars::setFlagShowOcularsButton(bool b)
 			gui->getButtonBar()->hideButton("actionShow_Oculars");
 		}
 	}
+#endif
 	flagShowOcularsButton = b;
 	settings->setValue("show_toolbar_button", b);
 	settings->sync();
@@ -3279,6 +3313,7 @@ void Oculars::setFlagShowOcularsButton(bool b)
 
 void Oculars::setGuiPanelFontSize(int size)
 {
+#ifndef NO_GUI
 	// This forces a redraw of the panel.
 	if (size!=guiPanelFontSize)
 	{
@@ -3293,6 +3328,7 @@ void Oculars::setGuiPanelFontSize(int size)
 		settings->sync();
 		emit guiPanelFontSizeChanged(size);
 	}
+#endif
 }
 
 void Oculars::toggleCropOverlay()

@@ -18,6 +18,8 @@
  */
 
 #ifdef ENABLE_SHOWMYSKY
+#include <QApplication>
+#if !QT_CONFIG(opengles2)
 
 #include "AtmosphereShowMySky.hpp"
 #include "StelUtils.hpp"
@@ -34,14 +36,12 @@
 #include <cassert>
 #include <cstring>
 
-#include <QApplication>
 #include <QDir>
 #include <QFile>
 #include <QDebug>
 #include <QVector>
 #include <QSettings>
 #include <QOpenGLShaderProgram>
-#include <QOpenGLFunctions_3_3_Core>
 
 // ShowMySky library API is documented online at https://10110111.github.io/CalcMySky/showmysky-api.html
 // Or you can build the documentation from the CalcMySky sources, using CMake doc target: `cmake --build . --target doc`
@@ -863,4 +863,5 @@ auto AtmosphereShowMySky::stepDataLoading() -> LoadingStatus
 	}
 }
 
-#endif // ENABLE_SHOWMYSKY
+#endif // !QT_CONFIG(opengles2)
+#endif // defined ENABLE_SHOWMYSKY

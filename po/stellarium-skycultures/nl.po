@@ -2,18 +2,18 @@
 # Gerard Prins <gejepe@manquehue.net>, 2025
 # Lisa -, 2025
 # alex <alex.a.nder.duy.tschaever@gmail.com>, 2025
-# Alex Rijckaert, 2025
 # bb4713398ff25b15ca398fdfd7cd6958_563a200 <e3e20db5fb3e1853af1e851959210c55_710271>, 2025
 # Filip Questier, 2026
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2026
 # cardinot <mcardinot@gmail.com>, 2026
 # Harry Mensch, 2026
+# Alex Rijckaert, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"Last-Translator: Harry Mensch, 2026\n"
+"Last-Translator: Alex Rijckaert, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13934,7 +13934,7 @@ msgstr "De zuidelijke ster aan de achterkant"
 
 #. Arabic (Al-Sufi) name for HIP 98823, native: عقب_١
 msgid "Aql_1"
-msgstr ""
+msgstr "Aql_1"
 
 #. Arabic (Al-Sufi) name for HIP 98823, native: الذي في وسط الرأس
 #. Greek (Almagest) name for HIP 98823
@@ -69758,13 +69758,19 @@ msgid "Sculptor"
 msgstr "Beeldhouwer"
 
 #. Modern (Chinese) constellation, native: Ara
+#. Added context to avoid conflict with minor planet name
 #. Modern (O. Hlad) constellation, native: Ara
+#. Added context to avoid conflict with minor planet name
 #. Modern (Journey to the West) constellation, native: 火焰山, pronounce: Huǒ Yàn
 #. Shān, English: Flaming Mountains
+#. Added context for byname value to avoid conflict with minor planet name
 #. Modern (H.A. Rey) constellation, native: ALTAR
+#. Added context to avoid conflict with minor planet name
 #. Modern (Sternenkarten) constellation, native: Ara
+#. Added context to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Ara"
-msgstr "Ara"
+msgstr ""
 
 #. Modern (Chinese) constellation, native: Scutum
 #. Modern (O. Hlad) constellation, native: Scutum
@@ -69802,12 +69808,18 @@ msgid "Chamaeleon"
 msgstr "Kameleon"
 
 #. Modern (Chinese) constellation, native: Carina
+#. Added context to avoid conflict with minor planet name
 #. Modern (O. Hlad) constellation, native: Carina
+#. Added context to avoid conflict with minor planet name
 #. Modern (Journey to the West) constellation, English: Car
+#. Added context for byname value to avoid conflict with minor planet name
 #. Modern (H.A. Rey) constellation, native: SHIP'S KEEL
+#. Added context to avoid conflict with minor planet name
 #. Modern (Sternenkarten) constellation, native: Carina
+#. Added context to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Carina"
-msgstr "Kiel"
+msgstr ""
 
 #. Modern (Chinese) constellation, native: Cassiopeia
 #. Modern (O. Hlad) constellation, native: Cassiopeia
@@ -69954,13 +69966,19 @@ msgid "Draco"
 msgstr "Draak"
 
 #. Modern (Chinese) constellation, native: Norma
+#. Added context to avoid conflict with minor planet name
 #. Modern (O. Hlad) constellation, native: Norma
+#. Added context to avoid conflict with minor planet name
 #. Modern (Journey to the West) constellation, native: 戒尺, pronounce: Jiè Chǐ,
 #. English: Ferule
+#. Added context for byname value to avoid conflict with minor planet name
 #. Modern (H.A. Rey) constellation, native: SQUARE
+#. Added context to avoid conflict with minor planet name
 #. Modern (Sternenkarten) constellation, native: Norma
+#. Added context to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Norma"
-msgstr "Winkelhaak"
+msgstr ""
 
 #. Modern (Chinese) constellation, native: Eridanus
 #. Modern (O. Hlad) constellation, native: Eridanus
@@ -70787,11 +70805,15 @@ msgstr ""
 
 #. Modern (Journey to the West) constellation, native: 火焰山, pronounce: Huǒ Yàn
 #. Shān, byname: Ara
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Flaming Mountains"
 msgstr ""
 
 #. Pronounce entry for Modern (Journey to the West) constellation, native:
 #. 火焰山, English: Flaming Mountains, byname: Ara
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Huǒ Yàn Shān"
 msgstr ""
 
@@ -70891,6 +70913,8 @@ msgid "Yù Lóng Huà Bái Mǎ"
 msgstr ""
 
 #. Modern (Journey to the West) constellation, byname: Carina
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Car"
 msgstr ""
 
@@ -71057,11 +71081,15 @@ msgstr ""
 
 #. Modern (Journey to the West) constellation, native: 戒尺, pronounce: Jiè Chǐ,
 #. byname: Norma
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Ferule"
 msgstr ""
 
 #. Pronounce entry for Modern (Journey to the West) constellation, native: 戒尺,
 #. English: Ferule, byname: Norma
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Jiè Chǐ"
 msgstr ""
 

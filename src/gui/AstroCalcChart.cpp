@@ -25,6 +25,7 @@
 #include <QGraphicsSceneEvent>
 #include <QGraphicsLayout>
 #include <QDateTime>
+#include <QTimeZone>
 #include <math.h>
 #include <QDebug>
 #include <QAbstractSeries>
@@ -251,7 +252,7 @@ void AstroCalcChart::showToolTip(const QPointF &point, const bool show)
 		QLineSeries *series=dynamic_cast<QLineSeries *>(sender());
 		AstroCalcChart::Series seriesCode=map.key(series);
 		QString units("°");
-		QDateTime date=QDateTime::fromMSecsSinceEpoch(qint64(point.x()), Qt::UTC);
+		QDateTime date=QDateTime::fromMSecsSinceEpoch(qint64(point.x()), QTimeZone(0));
 		double jd=StelUtils::qDateTimeToJd(date);
 		if (QList<Series>({CurrentTime, TransitTime, AltVsTime, AzVsTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight}).contains(seriesCode))
 		{
@@ -304,7 +305,7 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			break;
 		case AstroCalcChart::MonthlyElevation:
 			StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-			startDate=QDateTime(QDate(year, 1, 1), QTime(0, 0), Qt::UTC);
+			startDate=QDateTime(QDate(year, 1, 1), QTime(0, 0), QTimeZone(0));
 			endDate=startDate.addDays(372); // So that we have integral partitions that run along midnight!
 			break;
 		case AstroCalcChart::LunarElongation:
@@ -318,7 +319,7 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			break;
 		default: // 2-curves page
 			StelUtils::getDateFromJulianDay(baseJD, &year, &month, &day);
-			startDate=QDateTime(QDate(year, month, 1), QTime(0, 0), Qt::UTC);
+			startDate=QDateTime(QDate(year, month, 1), QTime(0, 0), QTimeZone(0));
 			endDate=startDate.addDays(30*periods);
 			break;
 	}
@@ -681,7 +682,7 @@ void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	if (event)
 	{
 		const QPointF pt=mapToValue(event->pos());
-		const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()), Qt::UTC);
+		const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()), QTimeZone(0));
 
 		//qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
 

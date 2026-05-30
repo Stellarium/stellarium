@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QOpenGLFunctions_1_0>
 #include "Constellation.hpp"
 #include "ConstellationMgr.hpp"
 #include "StelApp.hpp"
@@ -65,6 +64,9 @@
 #include <QOpenGLVertexArrayObject>
 #ifdef DEBUG_SHADOWMAP
 #include <QOpenGLFramebufferObject>
+#endif
+#if !QT_CONFIG(opengles2)
+# include <QOpenGLFunctions_1_0>
 #endif
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 #include <QOpenGLVersionFunctionsFactory>

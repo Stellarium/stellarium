@@ -244,4 +244,12 @@ void HipsMgr::setFlagShow(bool b)
 		visible = b;
 		emit showChanged(b);
 	}
+	if (!b)
+	{
+		for (auto &survey: surveys)
+		{
+			if (survey->isVisible())
+				survey->hideProgressBar();
+		}
+	}
 }

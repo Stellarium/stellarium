@@ -509,7 +509,7 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 # Setup Qt5/6 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Positioning)
+SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::OpenGL Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Positioning)
 
 IF(Qt6_FOUND)
 # Qt6 needs SvgWidgets, for Qt5 it's included in Svg
@@ -518,7 +518,6 @@ ENDIF()
 
 IF(NOT USE_BUNDLED_QTCOMPRESS)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::GuiPrivate)
-ELSE()
 ENDIF()
 IF(APPLE AND Qt6_FOUND)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::DBus)
@@ -581,25 +580,41 @@ IF(WIN32 AND NOT MSVC)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} wbemuuid)
 ENDIF()
 
+IF(ANDROID)
+	set(stellarium_exe_SRCS
+		${stellarium_exe_SRCS}
+		${CMAKE_SOURCE_DIR}/android/AndroidManifest.xml
+	)
+ENDIF()
+
 # Main executable/library setup
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
-     TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
+     TARGET_LINK_LIBRARIES(stelMain PUBLIC ${STELMAIN_DEPS})
      INSTALL(TARGETS stelMain DESTINATION bin)
      # WIN32 creates a windows app without console, no effect on non-win platforms
-     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
+     IF(${QT_VERSION_MAJOR} EQUAL "5")
+          ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
+     ELSE()
+          qt_add_executable(stellarium WIN32 ${stellarium_exe_SRCS})
+     ENDIF()
      #stelMain should be after the plug-ins, otherwise the build crashes
-     TARGET_LINK_LIBRARIES(stellarium stelMain ${winMMLib})
+     TARGET_LINK_LIBRARIES(stellarium PUBLIC stelMain ${winMMLib})
 ELSE()
      ADD_LIBRARY(stelMain STATIC ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
-     TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
-     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
-     TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS} stelMain)
+     TARGET_LINK_LIBRARIES(stelMain PUBLIC ${STELMAIN_DEPS})
+     IF(${QT_VERSION_MAJOR} EQUAL "5")
+          ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
+     ELSE()
+          qt_add_executable(stellarium WIN32 ${stellarium_exe_SRCS})
+     ENDIF()
+     TARGET_LINK_LIBRARIES(stellarium PUBLIC ${winMMLib} ${STELMAIN_DEPS} stelMain)
 
      IF(APPLE)
 	  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
      ENDIF()
 ENDIF()
+set_target_properties(stellarium PROPERTIES QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_SOURCE_DIR}/android")
 if(ENABLE_PCH)
      # prepend an include to each cpp file which itself includes the most frequently used includes.
      target_precompile_headers(stelMain PRIVATE
@@ -662,6 +677,8 @@ IF(APPLE)
 	  MESSAGE(STATUS \"Fixing Qt' paths for macOS bundle...\")
 	  "
      )
+ELSEIF(ANDROID)
+     INSTALL(TARGETS stellarium DESTINATION lib)
 ELSE()
      INSTALL(TARGETS stellarium DESTINATION bin)
 ENDIF()

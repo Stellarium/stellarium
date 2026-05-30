@@ -92,7 +92,9 @@ Supernovae::Supernovae()
 	, updateFrequencyDays(0)
 {
 	setObjectName("Supernovae");
+#ifndef NO_GUI
 	configDialog = new SupernovaeDialog();
+#endif
 	conf = StelApp::getInstance().getSettings();
 	setFontSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -103,7 +105,9 @@ Supernovae::Supernovae()
 */
 Supernovae::~Supernovae()
 {
+#ifndef NO_GUI
 	delete configDialog;
+#endif
 }
 
 void Supernovae::deinit()
@@ -148,7 +152,9 @@ void Supernovae::init()
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
 		// key bindings and other actions
+#ifndef NO_GUI
 		addAction("actionShow_Supernovae_ConfigDialog", N_("Historical Supernovae"), N_("Historical Supernovae configuration window"), configDialog, "visible", ""); // Allow assign shortkey
+#endif
 	}
 	catch (std::runtime_error &e)
 	{
@@ -519,9 +525,13 @@ SupernovaP Supernovae::getByID(const QString& id) const
 
 bool Supernovae::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 
 void Supernovae::restoreDefaults(void)
@@ -725,7 +735,7 @@ QString Supernovae::getSupernovaeList() const
 	int year, month, day;
 	QList<double> vals = snlist.values();
 	std::sort(vals.begin(), vals.end());
-	for (auto val : vals)
+	for (auto val : std::as_const(vals))
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
 		out << QString("%1 (%2 %3)").arg(snlist.key(val)).arg(day).arg(StelLocaleMgr::longGenitiveMonthName(month));

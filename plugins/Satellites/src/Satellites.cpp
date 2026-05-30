@@ -55,6 +55,7 @@
 #include <QFile>
 #include <QFont>
 #include <QTimer>
+#include <QTimeZone>
 #include <QVariantMap>
 #include <QVariant>
 #include <QDir>
@@ -64,6 +65,287 @@
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 #include <QtConcurrent>
 #endif
+
+namespace
+{
+
+QByteArray unzipData(const QByteArray& fd)
+{
+	QTemporaryFile zip;
+	if (!zip.open())
+	{
+		qWarning() << "[Satellites] Unable to open a temporary file";
+		return fd;
+	}
+
+	// qWarning() << "[Satellites] Processing a ZIP archive...";
+	zip.write(fd);
+	zip.close();
+	QString archive = zip.fileName();
+	QByteArray data;
+
+#if USE_BUNDLED_QTCOMPRESS
+	Stel::QZipReader reader(archive);
+	if (reader.status() != Stel::QZipReader::NoError)
+#else
+	QZipReader reader(archive);
+	if (reader.status() != QZipReader::NoError)
+#endif
+	{
+		qWarning() << "[Satellites] Unable to open as a ZIP archive";
+		return fd;
+	}
+	for (const auto& info : reader.fileInfoList())
+	{
+		// qWarning() << "[Satellites] Processing:" << info.filePath;
+		if (info.isFile)
+			data.append(reader.fileData(info.filePath));
+	}
+	return data;
+}
+
+struct SatCsvEntry
+{
+	QString object_id;
+	QString epoch;
+	double mean_motion;
+	double eccentricity;
+	double inclination;
+	double ra_of_asc_node;
+	double arg_of_pericenter;
+	double mean_anomaly;
+	int ephemeris_type;
+	QString classification_type;
+	int element_set_no;
+	int rev_at_epoch;
+	double bstar;
+	double mean_motion_dot;
+	double mean_motion_ddot;
+};
+
+void addTleChecksum(QString& line)
+{
+	int sum = 0;
+	for (const auto c : line)
+	{
+		const auto u = c.unicode();
+		if ('0' <= u && u <= '9')
+			sum += u - '0';
+		else if (u == '-')
+			sum += 1;
+	}
+	line += QString::number(sum % 10);
+}
+
+QString formatTleEpoch(const QString& epochFromCSV)
+{
+	// The expected format is QDateTime's "yyyy-MM-ddTHH:mm:ss.z", followed by 3 digits of microseconds.
+	// But parsing this using QDateTime::fromString() is awfully slow (more than 70× slower than this code).
+	if (epochFromCSV.size() != 26 ||
+	    epochFromCSV[4] != '-' ||
+	    epochFromCSV[7] != '-' ||
+	    epochFromCSV[10] != 'T' ||
+	    epochFromCSV[13] != ':' ||
+	    epochFromCSV[16] != ':' ||
+	    epochFromCSV[19] != '.')
+	{
+		return {};
+	}
+	bool yOK = false, mthOK = false, dOK = false, hOK = false, minOK = false, sOK = false, usOK = false;
+	const auto year = epochFromCSV.mid(0, 4).toUInt(&yOK);
+	const auto month = epochFromCSV.mid(5, 2).toUInt(&mthOK);
+	const auto day = epochFromCSV.mid(8, 2).toUInt(&dOK);
+	const auto hour = epochFromCSV.mid(11, 2).toUInt(&hOK);
+	const auto minute = epochFromCSV.mid(14, 2).toUInt(&minOK);
+	const auto second = epochFromCSV.mid(17, 2).toUInt(&sOK);
+	const auto microsecond = epochFromCSV.mid(20, 6).toUInt(&usOK);
+	if (!yOK|| !mthOK|| !dOK|| !hOK|| !minOK|| !sOK|| !usOK) return {};
+
+	const auto ms = microsecond / 1000;
+	const auto microsecTail = microsecond - ms * 1000;
+	const auto epoch = QDateTime(QDate(year, month, day), QTime(hour, minute, second, ms), QTimeZone(0));
+	if (!epoch.isValid()) return {};
+	static const auto epoch0 = QDateTime(QDate(year, 1, 1), QTime(0,0,0), QTimeZone(0));
+	// The +1 shifts refence to "Jan 0" instead of Jan 1
+	const auto diffInDays = 1 + (epoch0.msecsTo(epoch) + microsecTail * 1e-3) / 86400e3;
+	const auto epochYear = epoch.date().year();
+	const auto res = QString("%1%2").arg(epochYear % 100, 2, 10, QLatin1Char('0'))
+	                                .arg(diffInDays, 12, 'f', 8, QLatin1Char('0'));
+	return res;
+}
+
+// These are given at https://celestrak.org/NORAD/documentation/tle-fmt.php
+const QString TLE_LINE1_TEMPLATE = "1 NNNNNU NNNNNAAA NNNNN.NNNNNNNN +.NNNNNNNN +NNNNN-N +NNNNN-N N NNNNN";
+const QString TLE_LINE2_TEMPLATE = "2 NNNNN NNN.NNNN NNN.NNNN NNNNNNN NNN.NNNN NNN.NNNN NN.NNNNNNNNNNNNNN";
+
+bool tleLineValid(const QString& line, const QString& lineTemplate)
+{
+	if (line.size() != lineTemplate.size()) return false;
+
+	for (int n = 0; n < lineTemplate.size(); ++n)
+	{
+		const auto c = line[n].unicode();
+		const auto t = lineTemplate[n].unicode();
+		if (t == 'A' || t == 'U')
+			continue;
+		if (t == 'N')
+		{
+			if(c != ' ' && !('0' <= c && c <= '9'))
+				return false;
+		}
+		else if (t == '+' || t == '-')
+		{
+			if (c != '+' && c != '-' && c != ' ')
+				return false;
+		}
+		else if (t != c)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+#define TLE_POS_MUST_BE_AT(line,tleLineNum,N) { if (line.size() != N) { warn( \
+	QString("Invalid TLE line %1 is being generated for CSV data").arg(tleLineNum), \
+	QString("Current length must be %1, but is %2.\nCurrent incomplete line: \"%3\"").arg(N).arg(line.size()).arg(line)); \
+	return {}; } }
+#define TLE_POS_MUST_BE_LE(line,tleLineNum,N) { if (line.size() > N) { warn( \
+	QString("Invalid TLE line %1 is being generated for CSV data").arg(tleLineNum), \
+	QString("Current length must be <=%1, but is %2.\nCurrent incomplete line: \"%3\"").arg(N).arg(line.size()).arg(line)); \
+	return {}; } }
+
+QString generateTleLine1(const SatCsvEntry& data,
+                         const std::function<void(const QString&,const QString&)>& warn)
+{
+	QString line = L1S("1 00000");
+	if (data.classification_type.size() == 1)
+	{
+		line += data.classification_type;
+	}
+	else
+	{
+		warn("Bad classification type", "not one character. Assuming Unknown.");
+		line += 'U';
+	}
+	line += ' ';
+
+	auto object_id = data.object_id;
+	if (object_id.isEmpty())
+		object_id = "    -    ";
+	if (object_id.size() < 6)
+	{
+		warn("Bad object id",
+		     QString("too short: %1 chars. Skipping the object.").arg(object_id.size()));
+		return {};
+	}
+	// Skip the '-' in the object_id, and omit first two digits of the year
+	line += object_id[2];
+	line += object_id[3];
+	line += object_id.mid(5, 6);
+	TLE_POS_MUST_BE_LE(line,1, 17);
+	line.resize(18, QLatin1Char(' ')); // pad to the next field
+	const auto epochStr = formatTleEpoch(data.epoch);
+	if (epochStr.isEmpty())
+	{
+		warn("Bad epoch", "failed to parse it according to the standard format");
+	}
+	line += epochStr;
+	TLE_POS_MUST_BE_AT(line,1, 32);
+	line += ' ';
+
+	auto meanMotionDotStr = QString("%1 ").arg(data.mean_motion_dot, 11, 'f', 8, QLatin1Char(' '));
+	meanMotionDotStr.replace("0.", ".");
+	line += meanMotionDotStr;
+	TLE_POS_MUST_BE_AT(line,1, 44);
+
+	auto meanMotionDDotStr = QString("%1 ").arg(data.mean_motion_ddot * 10, 11, 'e', 4);
+	meanMotionDDotStr.replace(".", "")
+	                 .replace("e+00", "+0")
+	                 .replace("e-0", "-")
+	                 .replace("e+0", "+");
+	line += meanMotionDDotStr;
+	TLE_POS_MUST_BE_AT(line,1, 53);
+
+	auto bstarStr = QString("%1 ").arg(data.bstar * 10, 11, 'e', 4);
+	bstarStr.replace(".", "")
+	        .replace("e+00", "+0")
+	        .replace("e-0", "-")
+	        .replace("e+0", "+");
+	line += bstarStr;
+	TLE_POS_MUST_BE_AT(line,1, 62);
+
+	if (data.ephemeris_type > 9)
+	{
+		warn("Bad ephemeris type", "must be single-digit, but isn't. Skipping this object");
+		return {};
+	}
+	line += QString::number(data.ephemeris_type);
+	TLE_POS_MUST_BE_AT(line,1, 63);
+	line += ' ';
+
+	if (data.element_set_no > 9999)
+	{
+		warn("Bad element set number type",
+		     QString("%1 > 999. Skipping this object").arg(data.ephemeris_type));
+		return {};
+	}
+	line += QString("%1").arg(data.element_set_no, 4);
+	TLE_POS_MUST_BE_AT(line,1, 68);
+
+	addTleChecksum(line);
+	TLE_POS_MUST_BE_AT(line,1, 69);
+
+	if (!tleLineValid(line, TLE_LINE1_TEMPLATE))
+	{
+		warn("Invalid TLE generated", QString("the following line doesn't match the template: \"%1\"").arg(line));
+		return {};
+	}
+
+	return line;
+}
+
+QString generateTleLine2(const SatCsvEntry& data,
+                         const std::function<void(const QString&,const QString&)>& warn)
+{
+	QString line = L1S("2 00000 ");
+	line += QString("%1 ").arg(data.inclination, 8, 'f', 4);
+	TLE_POS_MUST_BE_AT(line,2, 17);
+
+	line += QString("%1 ").arg(data.ra_of_asc_node, 8, 'f', 4);
+	TLE_POS_MUST_BE_AT(line,2, 26);
+
+	line += QString("%1 ").arg(data.eccentricity, 8, 'f', 7).replace("0.", "");
+	TLE_POS_MUST_BE_AT(line,2, 34);
+
+	line += QString("%1 ").arg(data.arg_of_pericenter, 8, 'f', 4);
+	TLE_POS_MUST_BE_AT(line,2, 43);
+
+	line += QString("%1 ").arg(data.mean_anomaly, 8, 'f', 4);
+	TLE_POS_MUST_BE_AT(line,2, 52);
+
+	line += QString("%1").arg(data.mean_motion, 11, 'f', 8);
+	TLE_POS_MUST_BE_AT(line,2, 63);
+
+	line += QString("%1").arg(data.rev_at_epoch, 5);
+	TLE_POS_MUST_BE_AT(line,2, 68);
+
+	addTleChecksum(line);
+	TLE_POS_MUST_BE_AT(line,2, 69);
+
+	if (!tleLineValid(line, TLE_LINE2_TEMPLATE))
+	{
+		warn("Invalid TLE generated", QString("the following line doesn't match the template: \"%1\"").arg(line));
+		return {};
+	}
+
+	return line;
+}
+
+#undef TLE_POS_MUST_BE_AT
+#undef TLE_POS_MUST_BE_LE
+
+}
 
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
@@ -118,7 +400,9 @@ Satellites::Satellites()
 	#endif
 {
 	setObjectName("Satellites");
+#ifndef NO_GUI
 	configDialog = new SatellitesDialog();
+#endif
 }
 
 void Satellites::deinit()
@@ -130,7 +414,9 @@ void Satellites::deinit()
 
 Satellites::~Satellites()
 {
+#ifndef NO_GUI
 	delete configDialog;
+#endif
 }
 
 
@@ -173,6 +459,7 @@ void Satellites::init()
 		QString satGroup = N_("Satellites");
 		addAction("actionShow_Satellite_Hints", satGroup, N_("Artificial satellites"), "flagHintsVisible", "Ctrl+Z");
 		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "flagLabelsVisible", "Alt+Shift+Z");
+#ifndef NO_GUI
 		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Show settings dialog"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
@@ -188,13 +475,13 @@ void Satellites::init()
 						       "actionShow_Satellite_ConfigDialog_Global");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
+#endif
 	}
 	catch (std::runtime_error &e)
 	{
 		qWarning() << "[Satellites] init error: " << e.what();
 		return;
 	}
-
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo::exists(catalogPath))
 	{
@@ -635,9 +922,13 @@ QVector<QPair<QString,StelObjectP>> Satellites::listAllObjects(bool inEnglish) c
 
 bool Satellites::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 
 void Satellites::restoreDefaults(void)
@@ -653,21 +944,25 @@ void Satellites::restoreDefaultTleSources()
 {
 	// Format: group name, auto-add flag
 	const QMap<QString, bool> celestrak = {
-		{ "visual", true },      { "stations", true },      { "last-30-days", false }, { "active", false },
-		{ "analyst", false },    { "science", true },       { "noaa", false },         { "goes", false },
-		{ "amateur", true },     { "gnss", true },          { "gps-ops", true },       { "galileo", true },
-		{ "iridium", false },    { "iridium-NEXT", false }, { "geo", false },          { "weather", false },
-		{ "resource", false },   { "sarsat", false },       { "dmc", false },          { "tdrss", false },
-		{ "argos", false },      { "intelsat", false },     { "gorizont", false },     { "raduga", false },
-		{ "molniya", false },    { "orbcomm", false },      { "globalstar", false },   { "x-comm", false },
-		{ "other-comm", false }, { "glo-ops", true },       { "beidou", true },        { "sbas", false },
-		{ "nnss", false },       { "engineering", false },  { "education", false },    { "geodetic", false },
-		{ "radar", false },      { "cubesat", false },      { "other", false },        { "oneweb", true },
-	        { "starlink", true },    { "planet", false },       { "spire", false },        { "swarm", false },
-	        { "qianfan", false },    { "hulianwang", false },   { "kuiper", false }
+	        // Special-Interest Satellites
+	        { "last-30-days", false }, { "stations", true }, { "visual", true  }, { "active", false }, { "analyst", false },
+	        // Weather & Earth Resources Satellites
+	        { "weather", false }, { "resource", false }, { "sarsat", false }, { "dmc", false }, { "tdrss", false },
+	        { "argos", false }, { "planet", false }, { "spire", false },
+	        // Communications Satellites
+	        { "geo", false }, { "gpz", false }, { "gpz-plus", false }, { "intelsat", false }, { "eutelsat", false }, { "starlink", true  }, 
+	        { "qianfan", false }, { "kuiper", false }, { "orbcomm", false }, { "amateur", true  }, { "x-comm", false }, 
+	        { "ses", false }, { "telesat", false }, { "oneweb", true  }, { "hulianwang", false }, { "iridium-NEXT", false }, 
+	        { "globalstar", false }, { "satnogs", false }, { "other-comm", false },
+	        // Navigation Satellites
+	        { "gnss", true  }, { "gps-ops", true  }, { "galileo", true  }, { "glo-ops", true  }, { "beidou", true  }, { "sbas", false },
+	        // Scientific Satellites
+	        { "science", true  }, { "geodetic", false },{ "engineering", false }, { "education", false },
+	        // Miscellaneous Satellites
+	        { "military", false }, { "radar", false }, { "cubesat", false }
 	};
 	// Details: https://celestrak.org/NORAD/documentation/gp-data-formats.php
-	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=TLE";
+	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=CSV";
 	QStringList urls;
 	// TLE sources from Celestrak
 	for (auto group = celestrak.begin(); group != celestrak.end(); ++group)
@@ -803,7 +1098,7 @@ void Satellites::loadSettings()
 			if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.endsWith(".txt", Qt::CaseInsensitive))
 			{
 				url.replace("NORAD/elements/", "NORAD/elements/gp.php?GROUP=", Qt::CaseInsensitive);
-				url.replace(".txt", "&FORMAT=TLE", Qt::CaseInsensitive);
+				url.replace(".txt", "&FORMAT=CSV", Qt::CaseInsensitive);
 				urlWasUpdated = true;
 			}
 
@@ -843,7 +1138,7 @@ void Satellites::loadSettings()
 				if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.endsWith(".txt", Qt::CaseInsensitive))
 				{
 					url.replace("NORAD/elements/", "NORAD/elements/gp.php?GROUP=", Qt::CaseInsensitive);
-					url.replace(".txt", "&FORMAT=TLE", Qt::CaseInsensitive);
+					url.replace(".txt", "&FORMAT=CSV", Qt::CaseInsensitive);
 					urlWasUpdated = true;
 				}
 
@@ -1351,7 +1646,7 @@ bool Satellites::add(const TleData& tleData)
 		return false;
 
 	// Duplicates check
-	if (searchByID(getSatIdFromLine2(tleData.second.trimmed()))!=nullptr)
+	if (searchByID(tleData.id)!=nullptr)
 		return false;
 
 	QVariantList hintColor;
@@ -1395,7 +1690,7 @@ bool Satellites::add(const TleData& tleData)
 		}
 	}
 
-	QList<CommLink> comms = getCommunicationData(tleData);
+	const QList<CommLink> comms = getCommunicationData(tleData);
 	if (!comms.isEmpty())
 	{
 		QVariantList communications;
@@ -1520,15 +1815,12 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 
 QList<CommLink> Satellites::getCommunicationData(const QString &id)
 {
-	QList<CommLink> comms;
-
 	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized && sat->getID() == id)
-			comms = sat->comms;
+			return sat->comms;
 	}
-
-	return comms;
+	return QList<CommLink>();
 }
 
 QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
@@ -1807,6 +2099,14 @@ void Satellites::remove(const QStringList& idList)
 	if (satelliteListModel)
 		satelliteListModel->beginSatellitesChange();
 	
+	removeWithoutModelReset(idList);
+
+	if (satelliteListModel)
+		satelliteListModel->endSatellitesChange();
+}
+
+void Satellites::removeWithoutModelReset(const QStringList& idList)
+{
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 	int numRemoved = 0;
 	for (int i = 0; i < satellites.size(); i++)
@@ -1825,9 +2125,6 @@ void Satellites::remove(const QStringList& idList)
 		}
 	}
 	// As the satellite list is kept sorted, no need for re-sorting.
-	
-	if (satelliteListModel)
-		satelliteListModel->endSatellitesChange();
 
 	qDebug() << "[Satellites] "
 		 << idList.count() << "satellites proposed for removal, "
@@ -2395,43 +2692,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			QByteArray fd = reply->readAll();
 			// qWarning() << "[Satellites] Processing an URL:" << reply->url().toString();
 			if (reply->url().toString().contains(".zip", Qt::CaseInsensitive))
-			{
-				QTemporaryFile zip;
-				if (zip.open())
-				{
-					// qWarning() << "[Satellites] Processing a ZIP archive...";
-					zip.write(fd);
-					zip.close();
-					QString archive = zip.fileName();
-					QByteArray data;
-
-					#if USE_BUNDLED_QTCOMPRESS
-					Stel::QZipReader reader(archive);
-					if (reader.status() != Stel::QZipReader::NoError)
-					#else
-					QZipReader reader(archive);
-					if (reader.status() != QZipReader::NoError)
-					#endif
-					{
-						qWarning() << "[Satellites] Unable to open as a ZIP archive";
-					}
-					else
-					{
-						for (const auto& info : reader.fileInfoList())
-						{
-							// qWarning() << "[Satellites] Processing:" << info.filePath;
-							if (info.isFile)
-								data.append(reader.fileData(info.filePath));
-						}
-						// qWarning() << "[Satellites] Extracted data:" << data;
-						fd = data;
-					}
-					reader.close();
-					zip.remove();
-				}
-				else
-					qWarning() << "[Satellites] Unable to open a temporary file";
-			}
+				fd = unzipData(fd);
 			tmpFile->write(fd);
 			tmpFile->close();
 			
@@ -2458,7 +2719,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	}
 	else
 	{
-		qWarning() << "[Satellites] FAILED to download" << reply->url().toString(QUrl::RemoveUserInfo) << "Error:" << reply->errorString();
+		qWarning().nospace() << "[Satellites] FAILED to download " << reply->url().toString(QUrl::RemoveUserInfo) << ". Error " << reply->error() << ": " << reply->errorString();
 		emit updateStateChanged(DownloadError);
 	}
 
@@ -2485,7 +2746,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			continue;
 		if (updateSources[i].file->open(QFile::ReadOnly|QFile::Text))
 		{
-			parseTleFile(*updateSources[i].file, newData, updateSources[i].addNew, updateSources[i].url.toString(QUrl::None));
+			parseDataFile(*updateSources[i].file, newData, updateSources[i].addNew, updateSources[i].url.toString(QUrl::None));
 			updateSources[i].file->close();
 			delete updateSources[i].file;
 			updateSources[i].file = nullptr;
@@ -2543,7 +2804,7 @@ void Satellites::updateFromFiles(const QStringList &paths, bool deleteFiles)
 		QFile tleFile(tleFilePath);
 		if (tleFile.open(QIODevice::ReadOnly|QIODevice::Text))
 		{
-			parseTleFile(tleFile, newTleSets, autoAddEnabled);
+			parseDataFile(tleFile, newTleSets, autoAddEnabled);
 			tleFile.close();
 
 			if (deleteFiles)
@@ -2665,7 +2926,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	if (autoRemoveEnabled && !toBeRemoved.isEmpty())
 	{
 		qWarning() << "[Satellites] purging objects that were not updated...";
-		remove(toBeRemoved);
+		removeWithoutModelReset(toBeRemoved);
 	}
 	
 	if (updatedCount > 0 ||
@@ -2688,6 +2949,25 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 
 	emit updateStateChanged(updateState);
 	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount);
+}
+
+
+void Satellites::parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
+{
+	const QString line = openFile.readLine();
+	const auto firstLineEntries = line.trimmed().split(QLatin1Char(','));
+	if (firstLineEntries.contains(L1S("ARG_OF_PERICENTER")) &&
+	    firstLineEntries.contains(L1S("MEAN_MOTION_DDOT")))
+	{
+		// Two rather long names from the CSV header are present,
+		// we must be handling a CSV file rather than TLE.
+		parseCsvFile(openFile, firstLineEntries, tleList, addFlagValue, tleURL);
+	}
+	else
+	{
+		openFile.seek(0);
+		parseTleFile(openFile, tleList, addFlagValue, tleURL);
+	}
 }
 
 void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
@@ -2770,8 +3050,141 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 				//TODO: Error warnings? --BM
 			}
 			else
-				qDebug() << "[Satellites] unprocessed line " << lineNumber <<  " in file " << QDir::toNativeSeparators(openFile.fileName());
+				qWarning().nospace() << "[Satellites] unprocessed line " << lineNumber << " in file "
+					<< QDir::toNativeSeparators(openFile.fileName()) << ": " << line;
 		}
+	}
+}
+
+void Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries, TleDataHash& tleList,
+                              bool addFlagValue, const QString &tleURL)
+{
+	if (!openFile.isOpen() || !openFile.isReadable())
+		return;
+
+	int OBJECT_NAME = -1;
+	int OBJECT_ID = -1;
+	int EPOCH = -1;
+	int MEAN_MOTION = -1;
+	int ECCENTRICITY = -1;
+	int INCLINATION = -1;
+	int RA_OF_ASC_NODE = -1;
+	int ARG_OF_PERICENTER = -1;
+	int MEAN_ANOMALY = -1;
+	int EPHEMERIS_TYPE = -1;
+	int CLASSIFICATION_TYPE = -1;
+	int NORAD_CAT_ID = -1;
+	int ELEMENT_SET_NO = -1;
+	int REV_AT_EPOCH = -1;
+	int BSTAR = -1;
+	int MEAN_MOTION_DOT = -1;
+	int MEAN_MOTION_DDOT = -1;
+	const auto warn = [&tleURL,&headerEntries](const QString& what, const QString& why, const QStringList& lineEntries)
+	{
+		qWarning().noquote().nospace() << what << " in " << tleURL << ": " << why;
+		qWarning() << "Header entries:" << headerEntries;
+		if (!lineEntries.isEmpty())
+			qWarning() << "Line entries:" << lineEntries;
+	};
+	for (int idx = 0; idx < headerEntries.size(); ++idx)
+	{
+		const auto& name = headerEntries[idx];
+		if (name == L1S("OBJECT_NAME")) OBJECT_NAME = idx;
+		if (name == L1S("OBJECT_ID")) OBJECT_ID = idx;
+		if (name == L1S("EPOCH")) EPOCH = idx;
+		if (name == L1S("MEAN_MOTION")) MEAN_MOTION = idx;
+		if (name == L1S("ECCENTRICITY")) ECCENTRICITY = idx;
+		if (name == L1S("INCLINATION")) INCLINATION = idx;
+		if (name == L1S("RA_OF_ASC_NODE")) RA_OF_ASC_NODE = idx;
+		if (name == L1S("ARG_OF_PERICENTER")) ARG_OF_PERICENTER = idx;
+		if (name == L1S("MEAN_ANOMALY")) MEAN_ANOMALY = idx;
+		if (name == L1S("EPHEMERIS_TYPE")) EPHEMERIS_TYPE = idx;
+		if (name == L1S("CLASSIFICATION_TYPE")) CLASSIFICATION_TYPE = idx;
+		if (name == L1S("NORAD_CAT_ID")) NORAD_CAT_ID = idx;
+		if (name == L1S("ELEMENT_SET_NO")) ELEMENT_SET_NO = idx;
+		if (name == L1S("REV_AT_EPOCH")) REV_AT_EPOCH = idx;
+		if (name == L1S("BSTAR")) BSTAR = idx;
+		if (name == L1S("MEAN_MOTION_DOT")) MEAN_MOTION_DOT = idx;
+		if (name == L1S("MEAN_MOTION_DDOT")) MEAN_MOTION_DDOT = idx;
+	}
+	if (OBJECT_NAME < 0 || OBJECT_ID < 0 || EPOCH < 0 ||
+	    MEAN_MOTION < 0 || ECCENTRICITY < 0 || INCLINATION < 0 ||
+	    RA_OF_ASC_NODE < 0 || ARG_OF_PERICENTER < 0 || MEAN_ANOMALY < 0 ||
+	    EPHEMERIS_TYPE < 0 || CLASSIFICATION_TYPE < 0 || NORAD_CAT_ID < 0 ||
+	    ELEMENT_SET_NO < 0 || REV_AT_EPOCH < 0 || BSTAR < 0 ||
+	    MEAN_MOTION_DOT < 0 || MEAN_MOTION_DDOT < 0)
+	{
+		warn("Bad satellite CSV header", "not all required fields are present", {});
+		return;
+	}
+
+	while (!openFile.atEnd())
+	{
+		const auto lineEntries = QString(openFile.readLine()).trimmed().split(QLatin1Char(','));
+		const auto warnAboutLine = [&warn, &lineEntries](const QString& what, const QString& why)
+		{
+			warn(what, why, lineEntries);
+		};
+		if (lineEntries.size() != headerEntries.size())
+		{
+			warnAboutLine("Bad CSV line",
+			              QString("number of entries %1  doesn't match number of header entries %2")
+			                      .arg(lineEntries.size()).arg(headerEntries.size()));
+			continue;
+		}
+		TleData data{};
+		data.addThis = addFlagValue;
+		data.sourceURL = tleURL;
+		data.name = lineEntries[OBJECT_NAME];
+		bool ok = false;
+		data.id = lineEntries[NORAD_CAT_ID];
+		data.id.toUInt(&ok);
+		if (!ok)
+		{
+			warnAboutLine("Bad CSV line", "failed to parse NORAD id of the object");
+			continue;
+		}
+
+		// Now generate a TLE from the CSV fields, except the NORAD id
+		// will be zeroed out, because it may be longer than 5 digits.
+		SatCsvEntry entry;
+		bool mmOK = false, eccOK = false, incOK = false, raaOK = false, aopOK = false, maOK = false;
+		bool etOK = false, esnOK = false, raeOK = false, bsOK = false, mmdOK = false, mmddOK = false;
+		entry.object_id           = lineEntries[OBJECT_ID].trimmed();
+		entry.epoch               = lineEntries[EPOCH].trimmed();
+		entry.mean_motion         = lineEntries[MEAN_MOTION].trimmed().toDouble(&mmOK);
+		entry.eccentricity        = lineEntries[ECCENTRICITY].trimmed().toDouble(&eccOK);
+		entry.inclination         = lineEntries[INCLINATION].trimmed().toDouble(&incOK);
+		entry.ra_of_asc_node      = lineEntries[RA_OF_ASC_NODE].trimmed().toDouble(&raaOK);
+		entry.arg_of_pericenter   = lineEntries[ARG_OF_PERICENTER].trimmed().toDouble(&aopOK);
+		entry.mean_anomaly        = lineEntries[MEAN_ANOMALY].trimmed().toDouble(&maOK);
+		entry.ephemeris_type      = lineEntries[EPHEMERIS_TYPE].trimmed().toUInt(&etOK);
+		entry.classification_type = lineEntries[CLASSIFICATION_TYPE].trimmed();
+		entry.element_set_no      = lineEntries[ELEMENT_SET_NO].trimmed().toUInt(&esnOK);
+		entry.rev_at_epoch        = lineEntries[REV_AT_EPOCH].trimmed().toUInt(&raeOK);
+		entry.bstar               = lineEntries[BSTAR].trimmed().toDouble(&bsOK);
+		entry.mean_motion_dot     = lineEntries[MEAN_MOTION_DOT].trimmed().toDouble(&mmdOK);
+		entry.mean_motion_ddot    = lineEntries[MEAN_MOTION_DDOT].trimmed().toDouble(&mmddOK);
+		if (!(mmOK && eccOK && incOK && raaOK && aopOK && maOK && etOK && esnOK && raeOK && bsOK && mmdOK && mmddOK))
+		{
+			warnAboutLine("Bad CSV line", "not all numbers are parsable");
+			continue;
+		}
+
+		data.first = generateTleLine1(entry, warnAboutLine);
+		if (data.first.isEmpty()) continue;
+
+		data.second = generateTleLine2(entry, warnAboutLine);
+		if (data.second.isEmpty()) continue;
+
+		// Some satellites can be listed in multiple files,
+		// and only some of those files may be marked for adding,
+		// so try to preserve the flag - if it's set,
+		// feel free to overwrite the existing value.
+		// If not, overwrite only if it's not in the list already.
+		// NOTE: Second case overwrite may need to check which TLE set is newer. 
+		if (data.addThis || !tleList.contains(data.id))
+			tleList.insert(data.id, data); // Overwrite if necessary
 	}
 }
 
@@ -2891,7 +3304,7 @@ void Satellites::update(double deltaTime)
 	}
 	else
 	{
-		const auto updateSat = [this, JD](QSharedPointer<Satellite>& sat){
+		const auto updateSat = [JD](QSharedPointer<Satellite>& sat){
 			if (sat->initialized && sat->displayed)
 				sat->update(core, JD);
 		};
@@ -2919,7 +3332,7 @@ void Satellites::draw(StelCore* core)
 	painter.setFont(font);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
-	painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	painter.setBlending(true);
 	Satellite::hintTexture->bind();
 	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
 	for (const auto& sat : std::as_const(satellites))
@@ -2971,7 +3384,6 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 {
 	StelProjectorP saveProj = painter.getProjector();
 	painter.setProjector(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
-	painter.setBlending(true, GL_ONE, GL_ONE);
 	painter.setLineSmooth(true);
 	QFont font=QGuiApplication::font();
 	font.setPixelSize(labelFontSize);
@@ -3011,7 +3423,7 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 		rot.transfo(point);
 		umbra.vertex.append(pos+point);
 	}
-	painter.setColor(getUmbraColor(), 1.f);
+	painter.setColor(getUmbraColor(), hintFader.getInterstate());
 	painter.drawStelVertexArray(umbra, true);
 
 	// plot a center cross mark
@@ -3035,7 +3447,7 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 			penumbra.vertex.append(pos+point);
 		}
 
-		painter.setColor(getPenumbraColor(), 1.f);
+		painter.setColor(getPenumbraColor(), hintFader.getInterstate());
 		painter.drawStelVertexArray(penumbra, true);
 	}
 	painter.setProjector(saveProj);
@@ -3294,58 +3706,60 @@ void Satellites::createSuperGroupsList()
 	QString communications = "communications", navigation = "navigation", scientific = "scientific",
 		earthresources = "earth resources", gps = "gps", glonass = "glonass", geostationary = "geostationary";
 	satSuperGroupsMap = {
-		{ "geo", communications },
-		{ "geo", geostationary },
-		{ "gpz", communications },
-		{ "gpz", geostationary },
-		{ "gpz-plus", communications },
-		{ "gpz-plus", geostationary },
-		{ "intelsat", communications },
-		{ "ses", communications },
-		{ "iridium", communications },
-		{ "iridium-NEXT", communications },
-		{ "starlink", communications },
+	        { "geo", communications },
+	        { "geo", geostationary },
+	        { "gpz", communications },
+	        { "gpz", geostationary },
+	        { "gpz-plus", communications },
+	        { "gpz-plus", geostationary },
+	        { "intelsat", communications },
+	        { "eutelsat", communications },
+	        { "telesat", communications },	        
+	        { "ses", communications },
+	        { "iridium", communications },
+	        { "iridium-NEXT", communications },
+	        { "starlink", communications },
 	        { "qianfan", communications },
 	        { "hulianwang", communications },
 	        { "kuiper", communications },
 	        { "yamal", communications },
-		{ "oneweb", communications },
-		{ "orbcomm", communications },
-		{ "globalstar", communications },
-		{ "swarm", communications },
-		{ "amateur", communications },
-		{ "x-comm", communications },
-		{ "other-comm", communications },
-		{ "satnogs", communications },
-		{ "gorizont", communications },
-		{ "raduga", communications },
-		{ "raduga", geostationary },
-		{ "molniya", communications },
-		{ "gnss", navigation },
-		{ "gps", navigation },
-		{ "gps-ops", navigation },
-		{ "gps-ops", gps },
-		{ "glonass", navigation },
-		{ "glo-ops", navigation },
-		{ "glo-ops", glonass },
-		{ "galileo", navigation },
-		{ "beidou", navigation },
-		{ "sbas", navigation },
-		{ "nnss", navigation },
-		{ "musson", navigation },
-		{ "science", scientific },
-		{ "geodetic", scientific },
-		{ "engineering", scientific },
-		{ "education", scientific },
-		{ "goes", scientific },
-		{ "goes", earthresources },
-		{ "resource", earthresources },
-		{ "sarsat", earthresources },
-		{ "dmc", earthresources },
-		{ "tdrss", earthresources },
-		{ "argos", earthresources },
-		{ "planet", earthresources },
-		{ "spire", earthresources }
+	        { "oneweb", communications },
+	        { "orbcomm", communications },
+	        { "globalstar", communications },
+	        { "swarm", communications },
+	        { "amateur", communications },
+	        { "x-comm", communications },
+	        { "other-comm", communications },
+	        { "satnogs", communications },
+	        { "gorizont", communications },
+	        { "raduga", communications },
+	        { "raduga", geostationary },
+	        { "molniya", communications },
+	        { "gnss", navigation },
+	        { "gps", navigation },
+	        { "gps-ops", navigation },
+	        { "gps-ops", gps },
+	        { "glonass", navigation },
+	        { "glo-ops", navigation },
+	        { "glo-ops", glonass },
+	        { "galileo", navigation },
+	        { "beidou", navigation },
+	        { "sbas", navigation },
+	        { "nnss", navigation },
+	        { "musson", navigation },
+	        { "science", scientific },
+	        { "geodetic", scientific },
+	        { "engineering", scientific },
+	        { "education", scientific },
+	        { "goes", scientific },
+	        { "goes", earthresources },
+	        { "resource", earthresources },
+	        { "sarsat", earthresources },
+	        { "dmc", earthresources },
+	        { "tdrss", earthresources },
+	        { "argos", earthresources },
+	        { "planet", earthresources },
+	        { "spire", earthresources }
 	};
 }
 
@@ -3390,259 +3804,181 @@ void Satellites::translations()
 	// *** Special-Interest Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Last 30 Days' Launches
-	// TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: https://celestrak.org/NORAD/elements/tle-new.txt
-	N_("tle-new");
-	// TRANSLATORS: Satellite group: Last 30 Days' Launches
-	// TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=csv
 	N_("last-30-days");
 	// TRANSLATORS: Satellite group: Space stations	
-	// TRANSLATORS: CelesTrak source [Space Stations]: https://celestrak.org/NORAD/elements/stations.txt
-	// TRANSLATORS: CelesTrak source [Space Stations]: https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Space Stations]: https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=csv
 	N_("stations");
 	// TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-	// TRANSLATORS: CelesTrak source [100 (or so) Brightest]: https://celestrak.org/NORAD/elements/visual.txt
-	// TRANSLATORS: CelesTrak source [100 (or so) Brightest]: https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [100 (or so) Brightest]: https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=csv
 	N_("visual");
 	// TRANSLATORS: Satellite group: Active Satellites
-	// TRANSLATORS: CelesTrak source [Active Satellites]: https://celestrak.org/NORAD/elements/active.txt
-	// TRANSLATORS: CelesTrak source [Active Satellites]: https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Active Satellites]: https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=csv
 	N_("active");
 	// TRANSLATORS: Satellite group: Analyst Satellites
-	// TRANSLATORS: CelesTrak source [Analyst Satellites]: https://celestrak.org/NORAD/elements/analyst.txt
-	// TRANSLATORS: CelesTrak source [Analyst Satellites]: https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Analyst Satellites]: https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=csv
 	N_("analyst");
 	//
 	// *** Weather & Earth Resources Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Weather (meteorological) satellites
-	// TRANSLATORS: CelesTrak source [Weather]: https://celestrak.org/NORAD/elements/weather.txt
-	// TRANSLATORS: CelesTrak source [Weather]: https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Weather]: https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=csv
 	N_("weather");
-	// TRANSLATORS: Satellite group: Satellites belonging to the NOAA satellites
-	// TRANSLATORS: CelesTrak source [NOAA]: https://celestrak.org/NORAD/elements/noaa.txt
-	// TRANSLATORS: CelesTrak source [NOAA]: https://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
-	N_("noaa");
-	// TRANSLATORS: Satellite group: Satellites belonging to the GOES satellites
-	// TRANSLATORS: CelesTrak source [GOES]: https://celestrak.org/NORAD/elements/goes.txt
-	// TRANSLATORS: CelesTrak source [GOES]: https://celestrak.org/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle
-	N_("goes");
 	// TRANSLATORS: Satellite group: Earth Resources satellites
-	// TRANSLATORS: CelesTrak source [Earth Resources]: https://celestrak.org/NORAD/elements/resource.txt
-	// TRANSLATORS: CelesTrak source [Earth Resources]: https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Earth Resources]: https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=csv
 	N_("resource");
 	// TRANSLATORS: Satellite group: Search & Rescue (SARSAT) satellites
-	// TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: https://celestrak.org/NORAD/elements/sarsat.txt
-	// TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=csv
 	N_("sarsat");
 	// TRANSLATORS: Satellite group: Disaster Monitoring satellites
-	// TRANSLATORS: CelesTrak source [Disaster Monitoring]: https://celestrak.org/NORAD/elements/dmc.txt
-	// TRANSLATORS: CelesTrak source [Disaster Monitoring]: https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Disaster Monitoring]: https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=csv
 	N_("dmc");
 	// TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System (TDRSS) is a network of communications satellites and ground stations used by NASA for space communications.
-	// TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: https://celestrak.org/NORAD/elements/tdrss.txt
-	// TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=csv
 	N_("tdrss");
 	// TRANSLATORS: Satellite group: ARGOS Data Collection System satellites
-	// TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: https://celestrak.org/NORAD/elements/argos.txt
-	// TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=csv
 	N_("argos");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
-	// TRANSLATORS: CelesTrak source [Planet]: https://celestrak.org/NORAD/elements/planet.txt
-	// TRANSLATORS: CelesTrak source [Planet]: https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [Planet TLEs]: https://celestrak.org/NORAD/elements/supplemental/planet.txt
+	// TRANSLATORS: CelesTrak source [Planet]: https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=csv
 	N_("planet");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Spire constellation (LEMUR satellites)
-	// TRANSLATORS: CelesTrak source [Spire]: https://celestrak.org/NORAD/elements/spire.txt
-	// TRANSLATORS: CelesTrak source [Spire]: https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Spire]: https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=csv
 	N_("spire");	
 	//
 	// *** Communications Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Active Geosynchronous Satellites
-	// TRANSLATORS: CelesTrak source [Active Geosynchronous]: https://celestrak.org/NORAD/elements/geo.txt
-	// TRANSLATORS: CelesTrak source [Active Geosynchronous]: https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Active Geosynchronous]: https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=csv
 	N_("geo");
 	// TRANSLATORS: Satellite group: GEO Protected Zone
-	// TRANSLATORS: CelesTrak source [GEO Protected Zone]: https://celestrak.org/satcat/gpz.php
-	// TRANSLATORS: CelesTrak source [GEO Protected Zone]: https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [GEO Protected Zone]: https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=csv
 	N_("gpz");
 	// TRANSLATORS: Satellite group: GEO Protected Zone Plus
-	// TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: https://celestrak.org/satcat/gpz-plus.php
-	// TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=csv
 	N_("gpz-plus");
 	// TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT satellites
-	// TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/intelsat.txt
-	// TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]: https://celestrak.org/NORAD/elements/supplemental/intelsat.txt
+	// TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=csv
 	N_("intelsat");
+	// TRANSLATORS: Satellite group: Satellites belonging to the EUTELSAT satellites
+	// TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/gp.php?GROUP=eutelsat&FORMAT=csv
+	N_("eutelsat");
 	// TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
-	// TRANSLATORS: CelesTrak source [SES]: https://celestrak.org/NORAD/elements/ses.txt
-	// TRANSLATORS: CelesTrak source [SES]: https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [SES TLEs]: https://celestrak.org/NORAD/elements/supplemental/ses.txt
+	// TRANSLATORS: CelesTrak source [SES]: https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=csv
 	N_("ses");
-	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-	// TRANSLATORS: CelesTrak source [Iridium]: https://celestrak.org/NORAD/elements/iridium.txt
-	// TRANSLATORS: CelesTrak source [Iridium]: https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
-	N_("iridium");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
-	// TRANSLATORS: CelesTrak source [Iridium NEXT]: https://celestrak.org/NORAD/elements/iridium-NEXT.txt
-	// TRANSLATORS: CelesTrak source [Iridium NEXT]: https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Iridium NEXT]: https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=csv
 	N_("iridium-NEXT");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Starlink constellation (Starlink is a proper name)
-	// TRANSLATORS: CelesTrak source [Starlink]: https://celestrak.org/NORAD/elements/starlink.txt
-	// TRANSLATORS: CelesTrak source [Starlink]: https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]: https://celestrak.org/NORAD/elements/supplemental/starlink.txt
+	// TRANSLATORS: CelesTrak source [Starlink]: https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=csv
 	N_("starlink");
 	// TRANSLATORS: Satellite group: Satellites belonging to the OneWeb constellation (OneWeb is a proper name)
-	// TRANSLATORS: CelesTrak source [OneWeb]: https://celestrak.org/NORAD/elements/oneweb.txt
-	// TRANSLATORS: CelesTrak source [OneWeb]: https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]: https://celestrak.org/NORAD/elements/supplemental/oneweb.txt
+	// TRANSLATORS: CelesTrak source [OneWeb]: https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=csv
 	N_("oneweb");
 	// TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM satellites
-	// TRANSLATORS: CelesTrak source [Orbcomm]: https://celestrak.org/NORAD/elements/orbcomm.txt
-	// TRANSLATORS: CelesTrak source [Orbcomm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]: https://celestrak.org/NORAD/elements/supplemental/orbcomm.txt
+	// TRANSLATORS: CelesTrak source [Orbcomm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=csv
 	N_("orbcomm");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR satellites
-	// TRANSLATORS: CelesTrak source [Globalstar]: https://celestrak.org/NORAD/elements/globalstar.txt
-	// TRANSLATORS: CelesTrak source [Globalstar]: https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Globalstar]: https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=csv
 	N_("globalstar");
-	// TRANSLATORS: Satellite group: Satellites belonging to the SWARM satellites
-	// TRANSLATORS: CelesTrak source [Swarm]: https://celestrak.org/NORAD/elements/swarm.txt
-	// TRANSLATORS: CelesTrak source [Swarm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
-	N_("swarm");
 	// TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-	// TRANSLATORS: CelesTrak source [Amateur Radio]: https://celestrak.org/NORAD/elements/amateur.txt
-	// TRANSLATORS: CelesTrak source [Amateur Radio]: https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Amateur Radio]: https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=csv
 	N_("amateur");
 	// TRANSLATORS: Satellite group: Experimental communication satellites
-	// TRANSLATORS: CelesTrak source [Experimental]: https://celestrak.org/NORAD/elements/x-comm.txt
-	// TRANSLATORS: CelesTrak source [Experimental]: https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Experimental]: https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=csv
 	N_("x-comm");
 	// TRANSLATORS: Satellite group: Other communication satellites
-	// TRANSLATORS: CelesTrak source [Other Comm]: https://celestrak.org/NORAD/elements/other-comm.txt
-	// TRANSLATORS: CelesTrak source [Other Comm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Other Comm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=csv
 	N_("other-comm");
 	// TRANSLATORS: Satellite group: Satellites belonging to the SatNOGS satellites
-	// TRANSLATORS: CelesTrak source [SatNOGS]: https://celestrak.org/NORAD/elements/satnogs.txt
-	// TRANSLATORS: CelesTrak source [SatNOGS]: https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [SatNOGS]: https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=csv
 	N_("satnogs");
-	// TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT satellites
-	// TRANSLATORS: CelesTrak source [Gorizont]: https://celestrak.org/NORAD/elements/gorizont.txt
-	// TRANSLATORS: CelesTrak source [Gorizont]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
-	N_("gorizont");
-	// TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-	// TRANSLATORS: CelesTrak source [Raduga]: https://celestrak.org/NORAD/elements/raduga.txt
-	// TRANSLATORS: CelesTrak source [Raduga]: https://celestrak.org/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
-	N_("raduga");
-	// TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA satellites
-	// TRANSLATORS: CelesTrak source [Molniya]: https://celestrak.org/NORAD/elements/molniya.txt
-	// TRANSLATORS: CelesTrak source [Molniya]: https://celestrak.org/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
-	N_("molniya");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Qianfan constellation (Qianfan is a proper name)
-	// TRANSLATORS: CelesTrak source [Qianfan]: https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Qianfan]: https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=csv
 	N_("qianfan");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Hulianwang constellation (Hulianwang is a proper name)
-	// TRANSLATORS: CelesTrak source [Hulianwang Digui]: https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Hulianwang Digui]: https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=csv
 	N_("hulianwang");
-	// TRANSLATORS: CelesTrak source [Kuiper]: https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Kuiper]: https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=csv
 	N_("kuiper");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Yamal satellites
 	N_("yamal");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Gorizont satellites
+	N_("gorizont");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Raduga satellites
+	N_("raduga");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Molniya satellites
+	N_("molniya");
 	//
 	// *** Navigation Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Satellites belonging to the GNSS satellites
 	// TRANSLATORS: CelesTrak source [GNSS]: https://celestrak.org/NORAD/elements/gnss.txt
-	// TRANSLATORS: CelesTrak source [GNSS]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [GNSS]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=csv
 	N_("gnss");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-	// TRANSLATORS: CelesTrak supplemental source [GPS TLEs]: https://celestrak.org/NORAD/elements/supplemental/gps.txt
 	N_("gps");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-	// TRANSLATORS: CelesTrak source [GPS Operational]: https://celestrak.org/NORAD/elements/gps-ops.txt
-	// TRANSLATORS: CelesTrak source [GPS Operational]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [GPS Operational]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=csv
 	N_("gps-ops");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-	// TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]: https://celestrak.org/NORAD/elements/supplemental/glonass.txt
 	N_("glonass");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-	// TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: https://celestrak.org/NORAD/elements/glo-ops.txt
-	// TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
+	// TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=csv
 	N_("glo-ops");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-	// TRANSLATORS: CelesTrak source [Galileo]: https://celestrak.org/NORAD/elements/galileo.txt
-	// TRANSLATORS: CelesTrak source [Galileo]: https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Galileo]: https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=csv
 	N_("galileo");
 	// TRANSLATORS: Satellite group: Satellites belonging to the BeiDou constellation (BeiDou Navigation Satellite System)
-	// TRANSLATORS: CelesTrak source [Beidou]: https://celestrak.org/NORAD/elements/beidou.txt
-	// TRANSLATORS: CelesTrak source [Beidou]: https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Beidou]: https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=csv
 	N_("beidou");
 	// TRANSLATORS: Satellite group: Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)
-	// TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: https://celestrak.org/NORAD/elements/sbas.txt
-	// TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=csv
 	N_("sbas");
 	// TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
-	// TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: https://celestrak.org/NORAD/elements/nnss.txt
-	// TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
 	N_("nnss");
 	// TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
-	// TRANSLATORS: CelesTrak source [Russian LEO Navigation]: https://celestrak.org/NORAD/elements/musson.txt
-	// TRANSLATORS: CelesTrak source [Russian LEO Navigation]: https://celestrak.org/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
 	N_("musson");
 	//
 	// *** Scientific Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Space & Earth Science satellites
-	// TRANSLATORS: CelesTrak source [Space & Earth Science]: https://celestrak.org/NORAD/elements/science.txt
-	// TRANSLATORS: CelesTrak source [Space & Earth Science]: https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Space & Earth Science]: https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=csv
 	N_("science");
 	// TRANSLATORS: Satellite group: Geodetic satellites
-	// TRANSLATORS: CelesTrak source [Geodetic]: https://celestrak.org/NORAD/elements/geodetic.txt
-	// TRANSLATORS: CelesTrak source [Geodetic]: https://celestrak.org/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
 	N_("geodetic");
 	// TRANSLATORS: Satellite group: Engineering satellites
-	// TRANSLATORS: CelesTrak source [Engineering]: https://celestrak.org/NORAD/elements/engineering.txt
-	// TRANSLATORS: CelesTrak source [Engineering]: https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Engineering]: https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=csv
 	N_("engineering");
 	// TRANSLATORS: Satellite group: Education satellites
-	// TRANSLATORS: CelesTrak source [Education]: https://celestrak.org/NORAD/elements/education.txt
-	// TRANSLATORS: CelesTrak source [Education]: https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Education]: https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=csv
 	N_("education");
 	//
 	// *** Miscellaneous Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Military satellites
-	// TRANSLATORS: CelesTrak source [Miscellaneous Military]: https://celestrak.org/NORAD/elements/military.txt
-	// TRANSLATORS: CelesTrak source [Miscellaneous Military]: https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Miscellaneous Military]: https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=csv
 	N_("military");
 	// TRANSLATORS: Satellite group: Radar Calibration satellites
-	// TRANSLATORS: CelesTrak source [Radar Calibration]: https://celestrak.org/NORAD/elements/radar.txt
-	// TRANSLATORS: CelesTrak source [Radar Calibration]: https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Radar Calibration]: https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=csv
 	N_("radar");
 	// TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
-	// TRANSLATORS: CelesTrak source [CubeSats]: https://celestrak.org/NORAD/elements/cubesat.txt
-	// TRANSLATORS: CelesTrak source [CubeSats]: https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [CubeSats]: https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=csv
 	N_("cubesat");
 	// TRANSLATORS: Satellite group: Other satellites
-	// TRANSLATORS: CelesTrak source [Other]: https://celestrak.org/NORAD/elements/other.txt
-	// TRANSLATORS: CelesTrak source [Other]: https://celestrak.org/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
 	N_("other");
 	//
 	// *** Supplemental Two-Line Element Sets [CelesTrak groups]
 	//
 	// Probably the meteorological satellites
 	// TRANSLATORS: Satellite group: Meteosat
-	// TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]: https://celestrak.org/NORAD/elements/supplemental/meteosat.txt
 	N_("meteosat");
 	// Probably the communications satellites
 	// TRANSLATORS: Satellite group: Telesat
-	// TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]: https://celestrak.org/NORAD/elements/supplemental/telesat.txt
 	N_("telesat");
 	// TRANSLATORS: Satellite group: ISS Segments
-	// TRANSLATORS: CelesTrak supplemental source [ISS TLEs]: https://celestrak.org/NORAD/elements/supplemental/iss.txt
 	N_("iss");
 	// TRANSLATORS: Satellite group: CPF
-	// TRANSLATORS: CelesTrak supplemental source [CPF TLEs]: https://celestrak.org/NORAD/elements/supplemental/cpf.txt
 	N_("cpf");
 
 	// Satellite names - a few famous objects only

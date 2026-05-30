@@ -520,7 +520,15 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 
 	if (load)
 	{
-		ZoneArray* z = ZoneArray::create(catalogFilePath, true);
+		bool useMmap;
+
+#if defined(Q_OS_ANDROID)
+		useMmap = false;
+#else
+		useMmap = true;
+#endif
+
+		ZoneArray* z = ZoneArray::create(catalogFilePath, useMmap);
 		if (z)
 		{
 			if (z->level<gridLevels.size())

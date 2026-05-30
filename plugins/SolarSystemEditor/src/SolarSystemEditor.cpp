@@ -1039,12 +1039,12 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(const QString &
 	}
 
 	//In case the longer format is used, extract the human-readable name
-	column = oneLineElements.mid(166, 28).trimmed();
+	column = oneLineElements.mid(166).trimmed();
 	if (!column.isEmpty())
 	{
 		if (minorPlanetNumber)
 		{
-			static const QRegularExpression asteroidName("^\\((\\d+)\\)\\s+(\\S.+)$");
+			static const QRegularExpression asteroidName("^\\((\\d+)\\)\\s+(\\S+)\\s*(\\d*)$");
 			QRegularExpressionMatch astMatch;
 			if (column.indexOf(asteroidName, 0, &astMatch) == 0)
 			{

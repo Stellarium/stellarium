@@ -53,10 +53,10 @@ the configuration window; if using flags, implement them properly w Qt.
 class Observability : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool flagShowReport
-		   READ isShownReport
-		   WRITE showReport
-		   NOTIFY flagReportVisibilityChanged
+	Q_PROPERTY(bool flagEnabled
+		   READ isEnabled
+		   WRITE setEnabled
+		   NOTIFY flagEnabledChanged
 		   )
 public:
 	Observability();
@@ -90,10 +90,10 @@ public:
 	//! Get the user-defined altitude of the visual horizon.
 	int getHorizonAltitude();
 
-	bool isShownReport() const {return flagShowReport;}
+	bool isEnabled() const {return flagEnabled;}
 
 signals:
-	void flagReportVisibilityChanged(bool b);
+	void flagEnabledChanged(bool b);
 
 public slots:
 	//! Restore and reload the default plug-in settings.
@@ -141,7 +141,7 @@ public slots:
 	void setHorizonAltitude(int altitude);
 	
 	//! Controls whether an observability report will be displayed.
-	void showReport(bool b);
+	void setEnabled(bool b);
     //! Get a JSON string representation of the report.
     QString getReportAsJson(); 
 
@@ -169,9 +169,6 @@ private:
     bool shouldShowYear();
     //! Perform logic dependent on language updates.
     void onLanguageChanged(); 
-
-	//! Configuration window.
-	ObservabilityDialog* configDialog;
 
 	//! Returns whether the first object in the selection is the moon.
 	//! @param List of selected objects.
@@ -420,9 +417,13 @@ private:
 	//! @{
 	//! Parameters for the graphics.
 	Vec3f fontColor;
-	bool flagShowReport;
+	bool flagEnabled;
 	int fontSize;
+#ifndef NO_GUI
+	//! Configuration dialog.
+	ObservabilityDialog* configDialog;
 	StelButton* button;
+#endif
 	//! @}
 
 	//! @name Cached translated GUI strings.

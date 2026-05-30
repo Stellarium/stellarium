@@ -2978,7 +2978,6 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listAllObjectsByType(const QStrin
 			for (unsigned int i = 0; i < sizeof(DWARF_GALAXIES) / sizeof(DWARF_GALAXIES[0]); i++)
 			{
 				const auto n = searchPGC(DWARF_GALAXIES[i]);
-				assert(n);
 				if(n) map[QString("PGC %1").arg(DWARF_GALAXIES[i])] = StelObjectP(n);
 			}
 			break;
@@ -2988,7 +2987,6 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listAllObjectsByType(const QStrin
 			for (unsigned int i = 0; i < sizeof(H400_LIST) / sizeof(H400_LIST[0]); i++)
 			{
 				const auto n = searchNGC(H400_LIST[i]);
-				assert(n);
 				if(n) map[QString("NGC %1").arg(H400_LIST[i])] = StelObjectP(n);
 			}
 			break;
@@ -2998,7 +2996,6 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listAllObjectsByType(const QStrin
 			for (unsigned int i = 0; i < sizeof(BENNETT_LIST) / sizeof(BENNETT_LIST[0]); i++)
 			{
 				const auto n = searchNGC(BENNETT_LIST[i]);
-				assert(n);
 				if(n) map[QString("NGC %1").arg(BENNETT_LIST[i])] = StelObjectP(n);
 			}
 
@@ -3017,7 +3014,6 @@ QVector<QPair<QString,StelObjectP>> NebulaMgr::listAllObjectsByType(const QStrin
 			for (unsigned int i = 0; i < sizeof(DUNLOP_LIST) / sizeof(DUNLOP_LIST[0]); i++)
 			{
 				const auto n = searchNGC(DUNLOP_LIST[i]);
-				assert(n);
 				if(n) map[QString("NGC %1").arg(DUNLOP_LIST[i])] = StelObjectP(n);
 			}
 			break;

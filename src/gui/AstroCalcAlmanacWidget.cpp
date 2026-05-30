@@ -86,6 +86,8 @@ void AstroCalcAlmanacWidget::setup()
 	connect(core, &StelCore::currentTimeZoneChanged, this, [=](const QString&){ setSeasonTimes(); setTodayTimes(); });
 	// update the data when "Now" button is pressed or date is changed
 	connect(core, &StelCore::dateChanged, this, [=](){ setSeasonTimes(); setTodayTimes(); });
+	// update the data when time rate is changed - it's hook for GH: #4906
+	connect(core, &StelCore::timeRateChanged, this, [=](){ setSeasonTimes(); setTodayTimes(); });
 	connect(specMgr, SIGNAL(eventYearChanged()), this, SLOT(setSeasonTimes()));
 	connect(specMgr, SIGNAL(eventYearChanged()), this, SLOT(setTodayTimes()));
 

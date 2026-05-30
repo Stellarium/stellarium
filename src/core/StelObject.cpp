@@ -428,8 +428,10 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app)
 
-	if (withTables)
+	if (withTables && (flags&(RaDecJ2000|RaDecOfDate|HourAngle|AltAzi|GalacticCoord|SupergalacticCoord|EclipticCoordJ2000) || ((flags&EclipticCoordOfDate) && (currentPlanet==L1S("Earth")))))
 		res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+	else
+		res+="<br/>";
 
 	QString RADec;
 	if (usePolarDistance)
@@ -757,11 +759,11 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 		res += getExtraInfoStrings(flags&SiderealTime).join("");
 		res += omgr->getExtraInfoStrings(flags&SiderealTime).join("");
-		if (withTables && !(flags&RTSTime && !onTransitionToNewLocation && getType()!=L1S("Satellite") && currentLocation.role!='o'))
+		if (withTables && !(flags&RTSTime && !onTransitionToNewLocation && getType()!=L1S("Satellite") && getType()!=L1S("Flight") && currentLocation.role!='o'))
 			res += "</table>";
 	}
 
-	if (flags&RTSTime && getType()!=L1S("Satellite") && currentLocation.role!='o' && !onTransitionToNewLocation)
+	if (flags&RTSTime && getType()!=L1S("Satellite") && getType()!=L1S("Flight") && currentLocation.role!='o' && !onTransitionToNewLocation)
 	{
 		static int prevYear, prevMonth, prevDay;
 		static QString prevObjStr, prevPlanet;
@@ -1345,7 +1347,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		//res += omgr->getExtraInfoStrings(flags&SiderealTime).join("");
 	}
 
-	if (flags&RTSTime && getType()!=L1S("Satellite") && currentLocation.role!='o' && !onTransitionToNewLocation)
+	if (flags&RTSTime && getType()!=L1S("Satellite") && getType()!=L1S("Flight") && currentLocation.role!='o' && !onTransitionToNewLocation)
 	{
 		static int prevYear, prevMonth, prevDay;
 		static QString prevObjStr, prevPlanet;

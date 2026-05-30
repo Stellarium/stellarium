@@ -28,17 +28,22 @@ SET(Scenery3d_SRCS
      Scenery3dRemoteControlService.cpp
      S3DRenderer.hpp
      S3DRenderer.cpp
+     ShaderManager.hpp
+     ShaderManager.cpp
+     Heightmap.hpp
+     Heightmap.cpp
+)
+
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND Scenery3d_SRCS
      gui/Scenery3dDialog.hpp
      gui/Scenery3dDialog_p.hpp
      gui/Scenery3dDialog.cpp
      gui/StoredViewDialog.hpp
      gui/StoredViewDialog_p.hpp
      gui/StoredViewDialog.cpp
-     ShaderManager.hpp
-     ShaderManager.cpp
-     Heightmap.hpp
-     Heightmap.cpp
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 # CMake < 3.0 does not AUTOMOC Q_GADGET which S3DEnum.hpp uses, so we have to manually add it
 # Wrap it in an IF to prevent some linker warnings about symbols defined twice (on MSVC13 at least)
@@ -51,15 +56,22 @@ ENDIF()
 SET(Scenery3d_RES ../resources/Scenery3d.qrc)
 
 ################# compiles .ui files ############
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 SET(Scenery3d_UIS
      gui/scenery3dDialog.ui
      gui/storedViewDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(Scenery3d_RES_CXX ${Scenery3d_RES})
 ELSE()
-     QT_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(Scenery3d_RES_CXX ${Scenery3d_RES})
 ENDIF()
 ############### For building the static library ######################

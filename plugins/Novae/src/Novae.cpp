@@ -93,7 +93,9 @@ Novae::Novae()
 	, updateFrequencyDays(0)
 {
 	setObjectName("Novae");
+#ifndef NO_GUI
 	configDialog = new NovaeDialog();
+#endif
 	conf = StelApp::getInstance().getSettings();
 	setFontSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -104,7 +106,9 @@ Novae::Novae()
 */
 Novae::~Novae()
 {
+#ifndef NO_GUI
 	delete configDialog;
+#endif
 }
 
 /*
@@ -142,7 +146,9 @@ void Novae::init()
 			return;
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+#ifndef NO_GUI
 		addAction("actionShow_Novae_ConfigDialog", N_("Bright Novae"), N_("Bright Novae configuration window"), configDialog, "visible", ""); // Allow assign shortkey
+#endif
 	}
 	catch (std::runtime_error &e)
 	{
@@ -526,9 +532,13 @@ NovaP Novae::getByID(const QString& id) const
 
 bool Novae::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 
 void Novae::restoreDefaults(void)
@@ -733,7 +743,7 @@ QString Novae::getNovaeList()
 	int year, month, day;
 	QList<double> vals = novalist.values();
 	std::sort(vals.begin(), vals.end());
-	for (auto val : vals)
+	for (auto val : std::as_const(vals))
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
 		out << QString("%1 (%2 %3 %4)").arg(novalist.key(val)).arg(day).arg(StelLocaleMgr::longGenitiveMonthName(month)).arg(year);

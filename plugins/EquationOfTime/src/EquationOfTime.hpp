@@ -73,7 +73,6 @@ public:
 	~EquationOfTime() override;
 
 	void init() override;
-	void deinit() override;
 	void draw(StelCore *core) override;
 	double getCallOrder(StelModuleActionName actionName) const override;
 	bool configureGui(bool show) override;
@@ -149,9 +148,12 @@ private:
 	// if existing, delete EquationOfTime section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
 
-	EquationOfTimeWindow* mainWindow;
-	QSettings* conf;
+#ifndef NO_GUI
 	StelGui* gui;
+	EquationOfTimeWindow* mainWindow;
+	StelButton* toolbarButton;
+#endif
+	QSettings* conf;
 
 	bool flagShowSolutionEquationOfTime;
 	bool flagUseInvertedValue;
@@ -163,7 +165,6 @@ private:
 	QString messageEquationSeconds;
 	Vec3f textColor;
 	int fontSize;
-	StelButton* toolbarButton;
 };
 
 

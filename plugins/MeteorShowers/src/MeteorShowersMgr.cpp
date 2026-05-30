@@ -24,8 +24,11 @@
 #include <QTimer>
 
 #include "LabelMgr.hpp"
+#ifndef NO_GUI
 #include "MSConfigDialog.hpp"
 #include "MSSearchDialog.hpp"
+#endif
+#include "MeteorShowers.hpp"
 #include "MeteorShowersMgr.hpp"
 #include "Planet.hpp"
 #include "StelActionMgr.hpp"
@@ -40,8 +43,10 @@
 
 MeteorShowersMgr::MeteorShowersMgr()
 	: m_meteorShowers(Q_NULLPTR)
+	#ifndef NO_GUI
 	, m_configDialog(Q_NULLPTR)
 	, m_searchDialog(Q_NULLPTR)
+	#endif
 	, m_conf(StelApp::getInstance().getSettings())
 	, m_onEarth(false)
 	, m_enablePlugin(false)
@@ -65,8 +70,10 @@ MeteorShowersMgr::MeteorShowersMgr()
 
 MeteorShowersMgr::~MeteorShowersMgr()
 {
+#ifndef NO_GUI
 	delete m_configDialog;
 	delete m_searchDialog;
+#endif
 }
 
 void MeteorShowersMgr::init()
@@ -74,9 +81,10 @@ void MeteorShowersMgr::init()
 	loadTextures();
 
 	m_meteorShowers = new MeteorShowers(this);
+#ifndef NO_GUI
 	m_configDialog = new MSConfigDialog(this);
 	m_searchDialog = new MSSearchDialog(this);
-
+#endif
 	createActions();
 	loadConfig();
 
@@ -119,10 +127,12 @@ void MeteorShowersMgr::deinit()
 	m_pointerTexture.clear();
 	delete m_meteorShowers;
 	m_meteorShowers = Q_NULLPTR;
+#ifndef NO_GUI
 	delete m_configDialog;
 	m_configDialog = Q_NULLPTR;
 	delete m_searchDialog;
 	m_searchDialog = Q_NULLPTR;
+#endif
 }
 
 double MeteorShowersMgr::getCallOrder(StelModuleActionName actionName) const
@@ -136,11 +146,15 @@ double MeteorShowersMgr::getCallOrder(StelModuleActionName actionName) const
 
 bool MeteorShowersMgr::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 	{
 		m_configDialog->setVisible(show);
 	}
 	return true;
+#endif
 }
 
 void MeteorShowersMgr::createActions()
@@ -148,8 +162,10 @@ void MeteorShowersMgr::createActions()
 	QString msGroup = N_("Meteor Showers");
 	addAction("actionShow_MeteorShowers",               msGroup, N_("Toggle meteor showers"), this,           "enablePlugin", "Ctrl+Shift+M");
 	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Toggle radiant labels"), this,           "enableLabels", "Shift+M");
+#ifndef NO_GUI
 	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show settings dialog"),  m_configDialog, "visible",      "Ctrl+Alt+Shift+M");
 	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show meteor showers search dialog"),    m_searchDialog, "visible",      "Ctrl+Alt+M");
+#endif
 }
 
 void MeteorShowersMgr::loadConfig()
@@ -241,7 +257,9 @@ void MeteorShowersMgr::restoreDefaultSettings()
 	m_conf->endGroup();
 	loadConfig();
 	restoreDefaultCatalog(m_catalogPath);
+#ifndef NO_GUI
 	m_configDialog->init();
+#endif
 }
 
 bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
@@ -464,6 +482,7 @@ void MeteorShowersMgr::setActiveRadiantOnly(const bool& b)
 
 void MeteorShowersMgr::setShowEnableButton(const bool& show)
 {
+#ifndef NO_GUI
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -493,12 +512,14 @@ void MeteorShowersMgr::setShowEnableButton(const bool& show)
 		qWarning() << "MeteorShowersMgr : unable to create toolbar buttons for MeteorShowers plugin!"
 			   << e.what();
 	}
+#endif
 	m_showEnableButton = show;
 	m_conf->setValue(MS_CONFIG_PREFIX + "/show_enable_button", show);
 }
 
 void MeteorShowersMgr::setShowSearchButton(const bool& show)
 {
+#ifndef NO_GUI
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -526,6 +547,7 @@ void MeteorShowersMgr::setShowSearchButton(const bool& show)
 		qWarning() << "MeteorShowersMgr : unable to create toolbar buttons for MeteorShowers plugin!"
 			   << e.what();
 	}
+#endif
 	m_showSearchButton = show;
 	m_conf->setValue(MS_CONFIG_PREFIX + "/show_search_button", show);
 }

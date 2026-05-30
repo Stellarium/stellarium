@@ -104,6 +104,7 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 
 void CalendarsInfoPanel::updatePosition(bool resetPos)
 {
+#ifndef NO_GUI
 	qreal bottomBoundingHeight = static_cast<SkyGui*>(parentWidget)->getBottomBarHeight()+5.;
 
 	if (sender() || resetPos)
@@ -116,6 +117,7 @@ void CalendarsInfoPanel::updatePosition(bool resetPos)
 	qreal yPosCand = parentWidget->size().height() - boundingRect().height() - bottomBoundingHeight;
 	yPos=qMin(yPos, yPosCand);
 	setPos(xPos, yPos);
+#endif
 }
 
 void CalendarsInfoPanel::setColorScheme(const QString &schemeName)

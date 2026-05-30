@@ -1014,7 +1014,7 @@ public slots:
 
 	//! Pauses script until key is pressed
 	//! enables interactive control of scripts in planetarium presentations.
-	void waitForKeypress();
+	void waitForKeypress(const QString message=q_("Press key to continue..."));
 
 	//! Retrieve value of environment variable @param name.
 	//! On desktop Windows and Qt before 5.10, this call may result in data loss if the original

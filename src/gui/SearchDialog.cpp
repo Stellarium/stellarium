@@ -148,7 +148,7 @@ void CompletionListModel::selectFirst()
 void CompletionListModel::updateText()
 {
 	QStringList lst;
-	for (const auto& v : values)
+	for (const auto& v : std::as_const(values))
 		lst << v.name;
 	setStringList(lst);
 }
@@ -201,7 +201,7 @@ QVariant CompletionListModel::data(const QModelIndex &index, int role) const
 // Start of members for class SearchDialog
 
 const char* SearchDialog::DEF_SIMBAD_URL = "https://simbad.u-strasbg.fr/";
-SearchDialog::SearchDialogStaticData SearchDialog::staticData;
+//SearchDialog::SearchDialogStaticData SearchDialog::staticData;
 QString SearchDialog::extSearchText = "";
 
 SearchDialog::SearchDialog(QObject* parent)
@@ -964,7 +964,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		QVector<ObjectFound> matches;
 		QVector<ObjectFound> recentMatches;
 
-		QString greekText = substituteGreek(trimmedText);
+		QString greekText = StelUtils::substituteGreek(trimmedText);
 
 		int trimmedTextMaxNbItem = 50;
 		int greekTextMaxMbItem = 0;
@@ -1000,7 +1000,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		// hard coded
 		maxNbItem  = qMax(greekTextMaxMbItem, trimmedTextMaxNbItem);
 
-		for (const auto& [name,obj] : matchesWithPointers)
+		for (const auto& [name,obj] : std::as_const(matchesWithPointers))
 			matches.append({name, obj->getType(), obj->getObjectTypeI18n()});
 
 		// Clean up matches
@@ -1225,7 +1225,7 @@ void SearchDialog::saveRecentSearches()
 	QVariantMap rslDataList;
 	rslDataList.insert("maxSize", recentObjectSearchesData.maxSize);
 	QVariantList recentList;
-	for(const auto& entry : recentObjectSearchesData.recentList)
+	for(const auto& entry : std::as_const(recentObjectSearchesData.recentList))
 	{
 		QVariantMap map;
 		map["name"] = entry.name;
@@ -1566,42 +1566,6 @@ bool SearchDialog::eventFilter(QObject*, QEvent *event)
 		}
 	}
 	return false;
-}
-
-QString SearchDialog::substituteGreek(const QString& keyString)
-{
-	if (!keyString.contains(' '))
-		return getGreekLetterByName(keyString);
-	else
-	{
-		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QStringList nameComponents = keyString.split(" ", Qt::SkipEmptyParts);
-		#else
-		QStringList nameComponents = keyString.split(" ", QString::SkipEmptyParts);
-		#endif
-		if(!nameComponents.empty())
-			nameComponents[0] = getGreekLetterByName(nameComponents[0]);
-		return nameComponents.join(" ");
-	}
-}
-
-QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterName)
-{
-	if(staticData.greekLetters.contains(potentialGreekLetterName))
-		return staticData.greekLetters[potentialGreekLetterName];
-
-	// There can be indices (e.g. "α1 Cen" instead of "α Cen A"), so strip
-	// any trailing digit.
-	int lastCharacterIndex = potentialGreekLetterName.length()-1;
-	if(potentialGreekLetterName.at(lastCharacterIndex).isDigit())
-	{
-		QChar digit = potentialGreekLetterName.at(lastCharacterIndex);
-		QString name = potentialGreekLetterName.left(lastCharacterIndex);
-		if(staticData.greekLetters.contains(name))
-			return staticData.greekLetters[name] + digit;
-	}
-
-	return potentialGreekLetterName;
 }
 
 void SearchDialog::populateSimbadServerList()

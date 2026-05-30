@@ -71,9 +71,10 @@ Scenery3d::Scenery3d() :
 	currentLoadFuture(this)
 {
 	setObjectName("Scenery3d");
+#ifndef NO_GUI
 	scenery3dDialog = new Scenery3dDialog();
 	storedViewDialog = new StoredViewDialog();
-
+#endif
 	messageFader.setDuration(500);
 	messageTimer = new QTimer(this);
 	messageTimer->setInterval(2000);
@@ -99,8 +100,10 @@ Scenery3d::~Scenery3d()
 	if(!cleanedUp)
 		Scenery3d::deinit();
 
+#ifndef NO_GUI
 	delete storedViewDialog;
 	delete scenery3dDialog;
+#endif
 }
 
 double Scenery3d::getCallOrder(StelModuleActionName actionName) const
@@ -337,8 +340,10 @@ void Scenery3d::createActions()
 
 	//enable action will be set checkable if a scene was loaded
 	addAction("actionShow_Scenery3d",                  groupName, N_("Toggle 3D landscape"),      this,          "enableScene",       "Ctrl+W");
+#ifndef NO_GUI
 	addAction("actionShow_Scenery3d_dialog",           groupName, N_("Show settings dialog"),  scenery3dDialog,  "visible",           "Ctrl+Shift+W");
 	addAction("actionShow_Scenery3d_storedViewDialog", groupName, N_("Show viewpoint dialog"), storedViewDialog, "visible",           "Ctrl+Alt+W");
+#endif
 	addAction("actionShow_Scenery3d_shadows",          groupName, N_("Toggle shadows"),           this,          "enableShadows",     "Ctrl+R, S");
 	addAction("actionShow_Scenery3d_debuginfo",        groupName, N_("Toggle debug information"), this,          "enableDebugInfo",   "Ctrl+R, D");
 	addAction("actionShow_Scenery3d_locationinfo",     groupName, N_("Toggle location text"),     this,          "enableLocationInfo","Ctrl+R, T");
@@ -347,6 +352,7 @@ void Scenery3d::createActions()
 
 void Scenery3d::createToolbarButtons() const
 {
+#ifndef NO_GUI
 	// Add 3 toolbar buttons (copy/paste widely from AngleMeasure): activate, settings, and viewpoints.
 	try
 	{
@@ -375,6 +381,7 @@ void Scenery3d::createToolbarButtons() const
 	{
 		qCWarning(scenery3d) << "Unable to create toolbar buttons for Scenery3d plugin: " << e.what();
 	}
+#endif
 }
 
 void Scenery3d::relativeMove(const Vec3d &move)
@@ -395,14 +402,20 @@ void Scenery3d::reloadShaders()
 
 bool Scenery3d::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		scenery3dDialog->setVisible(show);
 	return true;
+#endif
 }
 
 void Scenery3d::showStoredViewDialog()
 {
+#ifndef NO_GUI
 	storedViewDialog->setVisible(true);
+#endif
 }
 
 void Scenery3d::updateProgress(const QString &str, int val, int min, int max) const

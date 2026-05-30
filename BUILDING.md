@@ -804,6 +804,16 @@ the default target - in our case, building Stellarium, its tests, the localizati
 | package        | Create a binary packages for distributions on linux/UNIX
 | installer      | Create a binary packages for distributions on Windows
 
+
+### GUI-less Stellarium 
+
+If you run Stellarium in an environment that should never show a GUI dialog or information text output panel to an auditorium, you can build a version without interface. 
+This is not intended to be controlled directly then, but by means of the RemoteControl Web interface, or just by scripting. 
+Note that even information text output requires the User Interface, but the information about the selected object will be displayed in the web interface.
+To build this lightweight version that also lacks a few GUI-heavy plugins, call any cmake run with the argument `STELLARIUM_GUI_MODE="None"`. 
+
+This is also starting point for experimenting with alternative GUI solutions.
+
 Thanks!
 
 \- *The Stellarium development team*

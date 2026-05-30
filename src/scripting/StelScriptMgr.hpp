@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QTimer>
 #include <QEventLoop>
+#include <QKeyEvent>
 #include <QMap>
 #include <QPair>
 #include <QSet>
@@ -51,9 +52,16 @@ class KeypressFilter : public QObject {
 public:
 	KeypressFilter(QEventLoop* l) : loop(l) {}
 	bool eventFilter(QObject* obj, QEvent* event) override {
-		if (event->type() == QEvent::KeyPress) {
-			loop->quit();
-			return true;
+		// A presenter's clicker device sends PgUp/PgDn events as ShortcutOverride.
+		if((event->type() == QEvent::KeyRelease) || (event->type() == QEvent::ShortcutOverride))
+		{
+			QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+			if (QList<Qt::Key>({Qt::Key::Key_Space, Qt::Key::Key_PageDown, Qt::Key::Key_PageUp}).contains(static_cast<Qt::Key>(keyEvent->key())))
+			{
+				loop->quit();
+				keyEvent->accept();
+				return true;
+			}
 		}
 		return QObject::eventFilter(obj, event);
 	}
@@ -76,6 +84,7 @@ class StelScriptMgr : public QObject
 	// CAVEAT: Do not convert this class to a StelModule: The Qt properties (esp. the following 2) should not be available in the StelProperty system (and the object should not be scriptable)!
 	Q_PROPERTY(bool flagAllowExternalScreenshotDir READ getFlagAllowExternalScreenshotDir WRITE setFlagAllowExternalScreenshotDir NOTIFY flagAllowExternalScreenshotDirChanged)
 	Q_PROPERTY(bool flagAllowWriteAbsolutePaths READ getFlagAllowWriteAbsolutePaths WRITE setFlagAllowWriteAbsolutePaths NOTIFY flagAllowWriteAbsolutePathsChanged)
+	Q_PROPERTY(bool flagShowContinueMessage     READ getFlagShowContinueMessage     WRITE setFlagShowContinueMessage     NOTIFY flagShowContinueMessageChanged)
 
 #ifdef ENABLE_SCRIPT_CONSOLE
 friend class ScriptConsole;
@@ -281,6 +290,11 @@ public slots:
 	bool getFlagAllowWriteAbsolutePaths() const {return flagAllowWriteAbsolutePaths;}
 	void setFlagAllowWriteAbsolutePaths(bool flag);
 
+	//! Flag setter/getter for deciding whether to show the continue message in WaitForKey()
+	bool getFlagShowContinueMessage() const {return flagShowContinueMessage;}
+	void setFlagShowContinueMessage(bool flag);
+
+
 private slots:
 	//! Called at the end of the running threa
 	void scriptEnded();
@@ -301,6 +315,8 @@ signals:
 	void flagAllowExternalScreenshotDirChanged(bool flag);
 	//! Notification that flag to allow scripts to write to absolute paths changed
 	void flagAllowWriteAbsolutePathsChanged(bool flag);
+	//! Notification that the "press key to continue" has been toggled
+	void flagShowContinueMessageChanged(bool flag);
 
 private:
 	// Utility functions for preprocessor. DEAD CODE!
@@ -338,7 +354,8 @@ private:
 
 	//! Event filter to detect keypress for waitForKeypress()
 	QObject* keypressEventFilter;
-	
+	bool flagShowContinueMessage; // property flag deciding whether to show the continue... message in waitForKeypress()
+
 	QString scriptFileName;
 	
 

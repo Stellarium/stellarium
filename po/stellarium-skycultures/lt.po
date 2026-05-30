@@ -40260,6 +40260,7 @@ msgstr "Žanče zen"
 #. Chinese name for HIP 72607, native: 帝
 #. Pinyin transliteration
 #. Chinese Chenzhuo Sky (3rd Century) name for HIP 72607, native: 帝
+#. Chinese Manchu name for HIP 72607, native: ᡥᠠᠨ ᡠᠰᡳᡥᠠ
 #. Chinese Song Dynasty Sky name for HIP 72607, native: 帝
 #. Chinese Xianglin Star Chart name for HIP 72607, native: 帝
 #. Modern (Chinese) name for HIP 72607
@@ -48715,6 +48716,7 @@ msgstr "22M"
 
 #. Pronounce entry for Chinese Chenzhuo Sky (3rd Century) constellation,
 #. native: 孙, English: Grandson
+#. Chinese Manchu name for NAME Sun, native: Šun
 #. Korean constellation, native: iil
 #. Maori name for NAME Sun, native: Te Ra
 #. Mongolian name for NAME Sun, native: Nar
@@ -51004,10 +51006,6 @@ msgstr "Bì / Bingha"
 msgid "Nail Star"
 msgstr "Vinių žvaigždė"
 
-#. Chinese Manchu name for HIP 72607, native: ᡥᠠᠨ ᡠᠰᡳᡥᠠ
-msgid "Emporor"
-msgstr "Empororas"
-
 #. Pronounce entry for Chinese Manchu name for HIP 72607
 #. Chinese Manchu name for HIP 72607, native: ᡥᠠᠨ ᡠᠰᡳᡥᠠ
 msgid "Han usiha"
@@ -51096,14 +51094,10 @@ msgstr "Bija"
 msgid "Boihon usiha"
 msgstr "Boihon usiha"
 
+#. Pronounce entry for Chinese Manchu name for NAME Sun
 #. Chinese Manchu name for NAME Sun, native: Šun
 msgid "Šun"
 msgstr "Šun"
-
-#. Pronounce entry for Chinese Manchu name for NAME Sun
-#. Chinese Manchu name for NAME Sun, native: Šun
-msgid "ᡧᡠᠨ"
-msgstr "ᡧᡠᠨ"
 
 #. Pronounce entry for Chinese Manchu name for NAME Venus
 #. Chinese Manchu name for NAME Venus, native: ᠠᡳᠰᡳᠨ ᡠᠰᡳᡥᠠ
@@ -69677,11 +69671,17 @@ msgid "Sculptor"
 msgstr "Skulptorius"
 
 #. Modern (Chinese) constellation, native: Ara
+#. Added context to avoid conflict with minor planet name
 #. Modern (O. Hlad) constellation, native: Ara
+#. Added context to avoid conflict with minor planet name
 #. Modern (Journey to the West) constellation, native: 火焰山, pronounce: Huǒ Yàn
 #. Shān, English: Flaming Mountains
+#. Added context for byname value to avoid conflict with minor planet name
 #. Modern (H.A. Rey) constellation, native: ALTAR
+#. Added context to avoid conflict with minor planet name
 #. Modern (Sternenkarten) constellation, native: Ara
+#. Added context to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Ara"
 msgstr "Aukuras"
 
@@ -69721,12 +69721,18 @@ msgid "Chamaeleon"
 msgstr "Chameleonas"
 
 #. Modern (Chinese) constellation, native: Carina
+#. Added context to avoid conflict with minor planet name
 #. Modern (O. Hlad) constellation, native: Carina
+#. Added context to avoid conflict with minor planet name
 #. Modern (Journey to the West) constellation, English: Car
+#. Added context for byname value to avoid conflict with minor planet name
 #. Modern (H.A. Rey) constellation, native: SHIP'S KEEL
+#. Added context to avoid conflict with minor planet name
 #. Modern (Sternenkarten) constellation, native: Carina
+#. Added context to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Carina"
-msgstr "Laivo Kilis"
+msgstr "Laivo kilis"
 
 #. Modern (Chinese) constellation, native: Cassiopeia
 #. Modern (O. Hlad) constellation, native: Cassiopeia
@@ -69873,11 +69879,17 @@ msgid "Draco"
 msgstr "Slibinas"
 
 #. Modern (Chinese) constellation, native: Norma
+#. Added context to avoid conflict with minor planet name
 #. Modern (O. Hlad) constellation, native: Norma
+#. Added context to avoid conflict with minor planet name
 #. Modern (Journey to the West) constellation, native: 戒尺, pronounce: Jiè Chǐ,
 #. English: Ferule
+#. Added context for byname value to avoid conflict with minor planet name
 #. Modern (H.A. Rey) constellation, native: SQUARE
+#. Added context to avoid conflict with minor planet name
 #. Modern (Sternenkarten) constellation, native: Norma
+#. Added context to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Norma"
 msgstr "Matuoklė"
 
@@ -70706,13 +70718,17 @@ msgstr "Tōng Xíng Bǎo Yìn"
 
 #. Modern (Journey to the West) constellation, native: 火焰山, pronounce: Huǒ Yàn
 #. Shān, byname: Ara
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Flaming Mountains"
 msgstr "Liepsnojantys kalnai"
 
 #. Pronounce entry for Modern (Journey to the West) constellation, native:
 #. 火焰山, English: Flaming Mountains, byname: Ara
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Huǒ Yàn Shān"
-msgstr "Huǒ Yàn Shān"
+msgstr "Huo Jen Šan"
 
 #. Modern (Journey to the West) constellation, native: 行李担, pronounce: Xíng Li
 #. Dān, byname: Libra
@@ -70810,6 +70826,8 @@ msgid "Yù Lóng Huà Bái Mǎ"
 msgstr "Yù Lóng Huà Bái Mǎ"
 
 #. Modern (Journey to the West) constellation, byname: Carina
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Car"
 msgstr "Vežimas"
 
@@ -70976,13 +70994,17 @@ msgstr "Dōng Hǎi Lóng Wáng Áo Guǎng"
 
 #. Modern (Journey to the West) constellation, native: 戒尺, pronounce: Jiè Chǐ,
 #. byname: Norma
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Ferule"
-msgstr "Auklėjimo lazda"
+msgstr "Antgalis"
 
 #. Pronounce entry for Modern (Journey to the West) constellation, native: 戒尺,
 #. English: Ferule, byname: Norma
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Jiè Chǐ"
-msgstr "Jiè Chǐ"
+msgstr "Džiė Či"
 
 #. Modern (Journey to the West) constellation, native: 流沙河, pronounce: Liú Shā
 #. Hé, byname: Eridanus
@@ -73777,7 +73799,7 @@ msgstr "2.Jautis / 9.Beždžionė"
 
 #. Mongolian name for HIP 54061
 msgid "1.Rat / 8.Sheep/Goat"
-msgstr "1. Žiurkė / 8. Avis/Ožka"
+msgstr "1. Žiurkė /8. Avis/Ožka"
 
 #. Mongolian name for HIP 58001
 msgid "3.Tiger / 10.Rooster"
@@ -73853,7 +73875,7 @@ msgstr "Pirmasis lieknasis"
 
 #. Norse constellation
 msgid "Aurvandil's Toe"
-msgstr "Aurvandil kojos pirštas"
+msgstr "Aurvandilio kojos pirštas"
 
 #. Norse constellation
 msgid "Wolf's Mouth"
@@ -74425,7 +74447,7 @@ msgstr "Remas"
 
 #. Romanian name for HIP 65477
 msgid "The Little Bitch"
-msgstr "Mažoji šunsnukė"
+msgstr "Mažoji kalė"
 
 #. Romanian name for HIP 91262
 msgid "The Shepherd (The Stars Queen)"
@@ -74611,7 +74633,7 @@ msgstr "Favdnos lankas ir strėlė"
 
 #. Sami constellation
 msgid "Galla's Sons"
-msgstr "Gallo sūnūs"
+msgstr "Galos sūnūs"
 
 #. Sami constellation
 msgid "Sky Support"
@@ -74635,7 +74657,7 @@ msgstr "Galla"
 
 #. Sami constellation
 msgid "The Ski Runners"
-msgstr "Slidininkas"
+msgstr "Slidininkai"
 
 #. Samoan constellation, native: Sumu
 msgid "Triggerfish"
@@ -74865,7 +74887,7 @@ msgstr "Nya"
 
 #. Pronounce entry for Tibetan constellation, English: Sagittarius
 msgid "Zhu"
-msgstr "Zhu"
+msgstr "Žu"
 
 #. Pronounce entry for Tibetan constellation, English: Scorpius
 msgid "Dikpa"
@@ -75610,7 +75632,7 @@ msgstr "Keturi keliai"
 #. Vanuatu (Netwar) constellation, native: Nowaswas Lapnuman, Neperawen
 #. Lapnuman
 msgid "Young Boys from Lapnuman, Young Girls from Lapnuman"
-msgstr "Jauni berniukai iš Lapnuman, jaunos mergaitės iš Lapnuman"
+msgstr "Jauni berniukai iš Lapnumano, jaunos mergaitės iš Lapnumano"
 
 #. Vanuatu (Netwar) constellation, native: Nowanuman
 #. Vanuatu (Netwar) constellation, native: Nowanuman
