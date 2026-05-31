@@ -432,9 +432,8 @@ private:
 
 class ObsListDialogSortFilterProxyModel : public QSortFilterProxyModel
 {
-	Q_OBJECT
 protected:
-	bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 };
 
 #endif // OBSLISTDIALOG_H

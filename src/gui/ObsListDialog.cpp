@@ -144,11 +144,9 @@ void ObsListDialog::createDialogContent()
 	//obsListCombo settings: A change in the combobox loads the list.
 	connect(ui->obsListComboBox, SIGNAL(activated(int)), this, SLOT(loadSelectedObservingList(int)));
 
-	{
-		auto *proxy = new ObsListDialogSortFilterProxyModel;
-		proxy->setSourceModel(itemModel);
-		ui->treeView->setModel(proxy);
-	}
+	auto *proxy = new ObsListDialogSortFilterProxyModel;
+	proxy->setSourceModel(itemModel);
+	ui->treeView->setModel(proxy);
 	ui->treeView->header()->setSectionsMovable(false);
 	ui->treeView->hideColumn(ColumnUUID);
 	for (int c=ColumnDesignation; c<=ColumnLandscapeID; c++)
@@ -1643,69 +1641,19 @@ const QString ObsListDialog::CUSTOM_OBJECT = QStringLiteral("CustomObject");
 
 const QString ObsListDialog::DASH = QString(QChar(0x2014));
 
-// Natural-number sort: compares alternating non-digit/digit segments so that
-// "NGC 9" sorts before "NGC 10". Does not depend on an ICU-backed QCollator.
-//
-// Indices are int (not qsizetype) so QString::operator[] resolves unambiguously
-// on Qt 5.12 + MSVC x64 — where qsizetype is long long but operator[] is only
-// overloaded for int/uint, causing C2593 'operator [' is ambiguous. Catalog
-// designations are short, so the int range is more than enough.
-static bool naturalLessThan(const QString &a, const QString &b)
-{
-	int ia = 0, ib = 0;
-	while (ia < a.size() && ib < b.size())
-	{
-		if (a[ia].isDigit() && b[ib].isDigit())
-		{
-			int ja = ia, jb = ib;
-			while (ja < a.size() && a[ja].isDigit()) ++ja;
-			while (jb < b.size() && b[jb].isDigit()) ++jb;
-			const qlonglong numA = a.mid(ia, ja - ia).toLongLong();
-			const qlonglong numB = b.mid(ib, jb - ib).toLongLong();
-			if (numA != numB)
-				return numA < numB;
-			ia = ja;
-			ib = jb;
-		}
-		else
-		{
-			const QChar ca = a[ia].toLower(), cb = b[ib].toLower();
-			if (ca != cb)
-				return ca < cb;
-			++ia; ++ib;
-		}
-	}
-	return a.size() < b.size();
-}
-
 bool ObsListDialogSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
+	const QString l = sourceModel()->data(left).toString();
+	const QString r = sourceModel()->data(right).toString();
 	switch (sortColumn())
 	{
 	case ObsListDialog::ColumnRa:
-	{
-		const QString raLeft  = sourceModel()->data(left).toString();
-		const QString raRight = sourceModel()->data(right).toString();
-		return StelUtils::getDecAngle(raLeft) < StelUtils::getDecAngle(raRight);
-	}
 	case ObsListDialog::ColumnDec:
-	{
-		const QString decLeft  = sourceModel()->data(left).toString();
-		const QString decRight = sourceModel()->data(right).toString();
-		return StelUtils::getDecAngle(decLeft) < StelUtils::getDecAngle(decRight);
-	}
+		return StelUtils::getDecAngle(l) < StelUtils::getDecAngle(r);
 	case ObsListDialog::ColumnMagnitude:
-	{
-		const QString magLeft  = sourceModel()->data(left).toString();
-		const QString magRight = sourceModel()->data(right).toString();
-		return magLeft.toDouble() < magRight.toDouble();
-	}
+		return l.toDouble() < r.toDouble();
 	case ObsListDialog::ColumnDesignation:
-	{
-		const QString desigLeft  = sourceModel()->data(left).toString();
-		const QString desigRight = sourceModel()->data(right).toString();
-		return naturalLessThan(desigLeft, desigRight);
-	}
+		return StelUtils::naturalLessThan(l, r);
 	default:
 		return QSortFilterProxyModel::lessThan(left, right);
 	}

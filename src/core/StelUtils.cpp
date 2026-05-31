@@ -764,6 +764,38 @@ double getDecAngle(const QString& str)
 	return -0.0;
 }
 
+bool naturalLessThan(const QString& a, const QString& b)
+{
+	// Indices are int (not qsizetype) so QString::operator[] resolves
+	// unambiguously on Qt 5.12 + MSVC x64 — where qsizetype is long long but
+	// operator[] is only overloaded for int/uint, causing C2593 'operator ['
+	// is ambiguous. Catalog designations are short, so int range is enough.
+	int ia = 0, ib = 0;
+	while (ia < a.size() && ib < b.size())
+	{
+		if (a[ia].isDigit() && b[ib].isDigit())
+		{
+			int ja = ia, jb = ib;
+			while (ja < a.size() && a[ja].isDigit()) ++ja;
+			while (jb < b.size() && b[jb].isDigit()) ++jb;
+			const qlonglong numA = a.mid(ia, ja - ia).toLongLong();
+			const qlonglong numB = b.mid(ib, jb - ib).toLongLong();
+			if (numA != numB)
+				return numA < numB;
+			ia = ja;
+			ib = jb;
+		}
+		else
+		{
+			const QChar ca = a[ia].toLower(), cb = b[ib].toLower();
+			if (ca != cb)
+				return ca < cb;
+			++ia; ++ib;
+		}
+	}
+	return a.size() < b.size();
+}
+
 int getBiggerPowerOfTwo(int value)
 {
 	int p=1;

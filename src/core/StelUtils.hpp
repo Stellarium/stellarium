@@ -426,6 +426,13 @@ namespace StelUtils
 	//! @return the angle in radians.
 	double getDecAngle(const QString& str);
 
+	//! Natural ("human") comparison of two strings: alternating non-digit and
+	//! digit segments are compared so that e.g. "NGC 9" sorts before "NGC 10".
+	//! Letter comparison is case-insensitive. Does not depend on an ICU-backed
+	//! QCollator, so it behaves identically on all platforms.
+	//! @return true if @p a should be ordered before @p b.
+	bool naturalLessThan(const QString& a, const QString& b);
+
 	//! Check if a number is a power of 2.
 	inline bool isPowerOfTwo(const int value){
 		return (value & -value) == value;
