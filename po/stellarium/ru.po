@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-30 14:40+0700\n"
+"POT-Creation-Date: 2026-05-31 21:35+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2026\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -45,7 +45,7 @@ msgstr "пользовательский объект"
 #: src/gui/AstroCalcDialog.cpp:957 src/gui/AstroCalcDialog.cpp:2694
 #: src/gui/AstroCalcDialog.cpp:3286 src/gui/AstroCalcDialog.cpp:3318
 #: src/gui/AstroCalcDialog.cpp:3642 src/gui/AstroCalcDialog.cpp:7935
-#: src/gui/ObsListDialog.cpp:297 src/ui_configurationDialog.h:2517
+#: src/gui/ObsListDialog.cpp:296 src/ui_configurationDialog.h:2517
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
@@ -1310,7 +1310,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "м"
 
-#: src/core/modules/LandscapeMgr.cpp:1538 src/gui/ObsListDialog.cpp:303
+#: src/core/modules/LandscapeMgr.cpp:1538 src/gui/ObsListDialog.cpp:302
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:416
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -1520,8 +1520,8 @@ msgstr "Его планетографические координаты"
 #: src/core/modules/Planet.cpp:2224 src/core/StelObject.cpp:1561
 #: src/core/StelSkyCultureSkyPartition.cpp:528 src/core/StelUtils.cpp:166
 #: src/core/StelUtils.cpp:344 src/core/StelUtils.cpp:440
-#: src/core/StelUtils.cpp:521 src/core/StelUtils.cpp:570
-#: src/core/StelUtils.cpp:1537
+#: src/core/StelUtils.cpp:523 src/core/StelUtils.cpp:571
+#: src/core/StelUtils.cpp:1578
 msgctxt "object narration"
 msgid "and"
 msgstr "и"
@@ -1533,8 +1533,8 @@ msgstr "Высота Солнца над этим объектом состав�
 
 #: src/core/modules/NomenclatureItem.cpp:405
 #: src/core/StelSkyCultureSkyPartition.cpp:526 src/core/StelUtils.cpp:228
-#: src/core/StelUtils.cpp:429 src/core/StelUtils.cpp:518
-#: src/core/StelUtils.cpp:529 src/core/StelUtils.cpp:567
+#: src/core/StelUtils.cpp:429 src/core/StelUtils.cpp:520
+#: src/core/StelUtils.cpp:531 src/core/StelUtils.cpp:568
 msgctxt "object narration"
 msgid "degrees"
 msgstr "градусов"
@@ -2383,7 +2383,7 @@ msgstr "объект неизвестной природы"
 #: src/core/modules/Nebula.cpp:180 src/core/StelObject.cpp:350
 #: src/gui/AstroCalcChart.cpp:98 src/gui/AstroCalcChart.cpp:108
 #: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
-#: src/gui/ObsListDialog.cpp:300 plugins/Supernovae/src/Supernova.cpp:128
+#: src/gui/ObsListDialog.cpp:299 plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
 msgstr "Звёздная величина"
 
@@ -3089,7 +3089,7 @@ msgid "Toggle DSO type filter"
 msgstr "Переключить фильтр типа ОГК"
 
 #: src/core/modules/NebulaMgr.cpp:1572 src/gui/StelDialog.cpp:336
-#: src/gui/ObsListDialog.cpp:602 src/StelMainView.cpp:1076
+#: src/gui/ObsListDialog.cpp:601 src/StelMainView.cpp:1076
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid "Attention!"
 msgstr "Внимание!"
@@ -5355,12 +5355,12 @@ msgstr ""
 "пользователем."
 
 #: src/core/StelCore.cpp:2837 src/core/SimbadSearcher.cpp:186
-#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:986
-#: src/gui/ObsListDialog.cpp:1010 src/gui/ObsListDialog.cpp:1059
-#: src/gui/ObsListDialog.cpp:1075 src/gui/ObsListDialog.cpp:1116
-#: src/gui/ObsListDialog.cpp:1128 src/gui/ObsListDialog.cpp:1137
-#: src/gui/ObsListDialog.cpp:1155 src/gui/ObsListDialog.cpp:1175
-#: src/gui/ObsListDialog.cpp:1342 src/gui/ObsListDialog.cpp:1347
+#: src/gui/ObsListDialog.cpp:84 src/gui/ObsListDialog.cpp:988
+#: src/gui/ObsListDialog.cpp:1012 src/gui/ObsListDialog.cpp:1061
+#: src/gui/ObsListDialog.cpp:1077 src/gui/ObsListDialog.cpp:1118
+#: src/gui/ObsListDialog.cpp:1130 src/gui/ObsListDialog.cpp:1139
+#: src/gui/ObsListDialog.cpp:1157 src/gui/ObsListDialog.cpp:1177
+#: src/gui/ObsListDialog.cpp:1344 src/gui/ObsListDialog.cpp:1349
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Ошибка"
@@ -5992,8 +5992,8 @@ msgid "Lunar Station"
 msgstr "Лунная стоянка"
 
 #: src/core/StelSkyCultureSkyPartition.cpp:527 src/core/StelUtils.cpp:343
-#: src/core/StelUtils.cpp:519 src/core/StelUtils.cpp:568
-#: src/core/StelUtils.cpp:1536
+#: src/core/StelUtils.cpp:521 src/core/StelUtils.cpp:569
+#: src/core/StelUtils.cpp:1577
 msgctxt "object narration"
 msgid "minutes"
 msgstr "минут"
@@ -6734,255 +6734,255 @@ msgctxt "duration"
 msgid "seconds"
 msgstr "сек."
 
-#: src/core/StelUtils.cpp:342 src/core/StelUtils.cpp:1535
+#: src/core/StelUtils.cpp:342 src/core/StelUtils.cpp:1576
 msgctxt "object narration"
 msgid "hours"
 msgstr "часов"
 
-#: src/core/StelUtils.cpp:345 src/core/StelUtils.cpp:520
-#: src/core/StelUtils.cpp:569 src/core/StelUtils.cpp:1538
+#: src/core/StelUtils.cpp:345 src/core/StelUtils.cpp:522
+#: src/core/StelUtils.cpp:570 src/core/StelUtils.cpp:1579
 msgctxt "object narration"
 msgid "seconds"
 msgstr "секунд"
 
-#: src/core/StelUtils.cpp:436 src/core/StelUtils.cpp:488
-#: src/core/StelUtils.cpp:1645
+#: src/core/StelUtils.cpp:436 src/core/StelUtils.cpp:489
+#: src/core/StelUtils.cpp:1687
 msgid "minus"
 msgstr "минус"
 
-#: src/core/StelUtils.cpp:440 src/core/StelUtils.cpp:492
+#: src/core/StelUtils.cpp:440 src/core/StelUtils.cpp:493
 msgctxt "object narration"
 msgid "arc minutes"
 msgstr "угловых минут"
 
-#: src/core/StelUtils.cpp:443 src/core/StelUtils.cpp:495
+#: src/core/StelUtils.cpp:443 src/core/StelUtils.cpp:496
 msgctxt "object narration"
 msgid "arc seconds"
 msgstr "угловых секунд"
 
-#: src/core/StelUtils.cpp:488
+#: src/core/StelUtils.cpp:489
 msgid "plus"
 msgstr "плюс"
 
-#: src/core/StelUtils.cpp:490
+#: src/core/StelUtils.cpp:491
 msgid "degrees"
 msgstr "градуов"
 
-#: src/core/StelUtils.cpp:494 src/ui_astroCalcDialog.h:2352
+#: src/core/StelUtils.cpp:495 src/ui_astroCalcDialog.h:2352
 #: src/ui_astroCalcDialog.h:2454 plugins/Satellites/src/Satellite.cpp:493
 msgid "and"
 msgstr "и"
 
-#: src/core/StelUtils.cpp:527 src/core/StelUtils.cpp:529
+#: src/core/StelUtils.cpp:529 src/core/StelUtils.cpp:531
 msgctxt "object narration"
 msgid "North"
 msgstr "северной"
 
-#: src/core/StelUtils.cpp:527 src/core/StelUtils.cpp:529
+#: src/core/StelUtils.cpp:529 src/core/StelUtils.cpp:531
 msgctxt "object narration"
 msgid "South"
 msgstr "южной"
 
-#: src/core/StelUtils.cpp:575 src/core/StelUtils.cpp:581
+#: src/core/StelUtils.cpp:576 src/core/StelUtils.cpp:582
 msgctxt "object narration"
 msgid "East"
 msgstr "восточной"
 
-#: src/core/StelUtils.cpp:576 src/core/StelUtils.cpp:582
+#: src/core/StelUtils.cpp:577 src/core/StelUtils.cpp:583
 msgctxt "object narration"
 msgid "West"
 msgstr "западной"
 
-#: src/core/StelUtils.cpp:3129
+#: src/core/StelUtils.cpp:3169
 msgid "Alpha"
 msgstr "Альфа"
 
-#: src/core/StelUtils.cpp:3129 src/ui_searchDialogGui.h:774
+#: src/core/StelUtils.cpp:3169 src/ui_searchDialogGui.h:774
 msgid "alpha"
 msgstr "альфа"
 
-#: src/core/StelUtils.cpp:3130
+#: src/core/StelUtils.cpp:3170
 msgid "Beta"
 msgstr "Бета"
 
-#: src/core/StelUtils.cpp:3130 src/ui_searchDialogGui.h:777
+#: src/core/StelUtils.cpp:3170 src/ui_searchDialogGui.h:777
 msgid "beta"
 msgstr "бета"
 
-#: src/core/StelUtils.cpp:3131 src/gui/AstroCalcDialog.cpp:2695
+#: src/core/StelUtils.cpp:3171 src/gui/AstroCalcDialog.cpp:2695
 #: src/gui/AstroCalcDialog.cpp:3287
 msgid "Gamma"
 msgstr "Гамма"
 
-#: src/core/StelUtils.cpp:3131 src/ui_searchDialogGui.h:780
+#: src/core/StelUtils.cpp:3171 src/ui_searchDialogGui.h:780
 msgid "gamma"
 msgstr "гамма"
 
-#: src/core/StelUtils.cpp:3132
+#: src/core/StelUtils.cpp:3172
 msgid "Delta"
 msgstr "Дельта"
 
-#: src/core/StelUtils.cpp:3132 src/ui_searchDialogGui.h:783
+#: src/core/StelUtils.cpp:3172 src/ui_searchDialogGui.h:783
 msgid "delta"
 msgstr "дельта"
 
-#: src/core/StelUtils.cpp:3133
+#: src/core/StelUtils.cpp:3173
 msgid "Epsilon"
 msgstr "Эпсилон"
 
-#: src/core/StelUtils.cpp:3133 src/ui_searchDialogGui.h:786
+#: src/core/StelUtils.cpp:3173 src/ui_searchDialogGui.h:786
 msgid "epsilon"
 msgstr "эпсилон"
 
-#: src/core/StelUtils.cpp:3135
+#: src/core/StelUtils.cpp:3175
 msgid "Zeta"
 msgstr "Дзета"
 
-#: src/core/StelUtils.cpp:3135 src/ui_searchDialogGui.h:789
+#: src/core/StelUtils.cpp:3175 src/ui_searchDialogGui.h:789
 msgid "zeta"
 msgstr "дзета"
 
-#: src/core/StelUtils.cpp:3136
+#: src/core/StelUtils.cpp:3176
 msgid "Eta"
 msgstr "Эта"
 
-#: src/core/StelUtils.cpp:3136 src/ui_searchDialogGui.h:792
+#: src/core/StelUtils.cpp:3176 src/ui_searchDialogGui.h:792
 msgid "eta"
 msgstr "эта"
 
-#: src/core/StelUtils.cpp:3137
+#: src/core/StelUtils.cpp:3177
 msgid "Theta"
 msgstr "Тэта"
 
-#: src/core/StelUtils.cpp:3137 src/ui_searchDialogGui.h:795
+#: src/core/StelUtils.cpp:3177 src/ui_searchDialogGui.h:795
 msgid "theta"
 msgstr "тэта"
 
-#: src/core/StelUtils.cpp:3138
+#: src/core/StelUtils.cpp:3178
 msgid "Iota"
 msgstr "Йота"
 
-#: src/core/StelUtils.cpp:3138 src/ui_searchDialogGui.h:771
+#: src/core/StelUtils.cpp:3178 src/ui_searchDialogGui.h:771
 msgid "iota"
 msgstr "йота"
 
-#: src/core/StelUtils.cpp:3139
+#: src/core/StelUtils.cpp:3179
 msgid "Kappa"
 msgstr "Каппа"
 
-#: src/core/StelUtils.cpp:3139 src/ui_searchDialogGui.h:798
+#: src/core/StelUtils.cpp:3179 src/ui_searchDialogGui.h:798
 msgid "kappa"
 msgstr "каппа"
 
-#: src/core/StelUtils.cpp:3141
+#: src/core/StelUtils.cpp:3181
 msgid "Lambda"
 msgstr "Лямбда"
 
-#: src/core/StelUtils.cpp:3141 src/ui_searchDialogGui.h:801
+#: src/core/StelUtils.cpp:3181 src/ui_searchDialogGui.h:801
 msgid "lambda"
 msgstr "лямбда"
 
-#: src/core/StelUtils.cpp:3142
+#: src/core/StelUtils.cpp:3182
 msgid "Mu"
 msgstr "Мю"
 
-#: src/core/StelUtils.cpp:3142 src/ui_searchDialogGui.h:804
+#: src/core/StelUtils.cpp:3182 src/ui_searchDialogGui.h:804
 msgid "mu"
 msgstr "мю"
 
-#: src/core/StelUtils.cpp:3143
+#: src/core/StelUtils.cpp:3183
 msgid "Nu"
 msgstr "Ню"
 
-#: src/core/StelUtils.cpp:3143 src/ui_searchDialogGui.h:807
+#: src/core/StelUtils.cpp:3183 src/ui_searchDialogGui.h:807
 msgid "nu"
 msgstr "ню"
 
-#: src/core/StelUtils.cpp:3144
+#: src/core/StelUtils.cpp:3184
 msgid "Xi"
 msgstr "Кси"
 
-#: src/core/StelUtils.cpp:3144 src/ui_searchDialogGui.h:810
+#: src/core/StelUtils.cpp:3184 src/ui_searchDialogGui.h:810
 msgid "xi"
 msgstr "кси"
 
-#: src/core/StelUtils.cpp:3145
+#: src/core/StelUtils.cpp:3185
 msgid "Omicron"
 msgstr "Омикрон"
 
-#: src/core/StelUtils.cpp:3145 src/ui_searchDialogGui.h:813
+#: src/core/StelUtils.cpp:3185 src/ui_searchDialogGui.h:813
 msgid "omicron"
 msgstr "омикрон"
 
-#: src/core/StelUtils.cpp:3147
+#: src/core/StelUtils.cpp:3187
 msgid "Pi"
 msgstr "Пи"
 
-#: src/core/StelUtils.cpp:3147 src/ui_searchDialogGui.h:816
+#: src/core/StelUtils.cpp:3187 src/ui_searchDialogGui.h:816
 msgid "pi"
 msgstr "пи"
 
-#: src/core/StelUtils.cpp:3148
+#: src/core/StelUtils.cpp:3188
 msgid "Rho"
 msgstr "Ро"
 
-#: src/core/StelUtils.cpp:3148 src/ui_searchDialogGui.h:819
+#: src/core/StelUtils.cpp:3188 src/ui_searchDialogGui.h:819
 msgid "rho"
 msgstr "ро"
 
-#: src/core/StelUtils.cpp:3149
+#: src/core/StelUtils.cpp:3189
 msgid "Sigma"
 msgstr "Сигма"
 
-#: src/core/StelUtils.cpp:3149 src/ui_searchDialogGui.h:822
+#: src/core/StelUtils.cpp:3189 src/ui_searchDialogGui.h:822
 msgid "sigma"
 msgstr "сигма"
 
-#: src/core/StelUtils.cpp:3150
+#: src/core/StelUtils.cpp:3190
 msgid "Tau"
 msgstr "Tau"
 
-#: src/core/StelUtils.cpp:3150 src/ui_searchDialogGui.h:825
+#: src/core/StelUtils.cpp:3190 src/ui_searchDialogGui.h:825
 msgid "tau"
 msgstr "тау"
 
-#: src/core/StelUtils.cpp:3151
+#: src/core/StelUtils.cpp:3191
 msgid "Upsilon"
 msgstr "Ипсилон"
 
-#: src/core/StelUtils.cpp:3151 src/ui_searchDialogGui.h:828
+#: src/core/StelUtils.cpp:3191 src/ui_searchDialogGui.h:828
 msgid "upsilon"
 msgstr "ипсилон"
 
-#: src/core/StelUtils.cpp:3153
+#: src/core/StelUtils.cpp:3193
 msgid "Phi"
 msgstr "Фи"
 
-#: src/core/StelUtils.cpp:3153 src/ui_searchDialogGui.h:831
+#: src/core/StelUtils.cpp:3193 src/ui_searchDialogGui.h:831
 msgid "phi"
 msgstr "фи"
 
-#: src/core/StelUtils.cpp:3154
+#: src/core/StelUtils.cpp:3194
 msgid "Chi"
 msgstr "Хи"
 
-#: src/core/StelUtils.cpp:3154 src/ui_searchDialogGui.h:834
+#: src/core/StelUtils.cpp:3194 src/ui_searchDialogGui.h:834
 msgid "chi"
 msgstr "хи"
 
-#: src/core/StelUtils.cpp:3155
+#: src/core/StelUtils.cpp:3195
 msgid "Psi"
 msgstr "Пси"
 
-#: src/core/StelUtils.cpp:3155 src/ui_searchDialogGui.h:837
+#: src/core/StelUtils.cpp:3195 src/ui_searchDialogGui.h:837
 msgid "psi"
 msgstr "пси"
 
-#: src/core/StelUtils.cpp:3156
+#: src/core/StelUtils.cpp:3196
 msgid "Omega"
 msgstr "Омега"
 
-#: src/core/StelUtils.cpp:3156 src/ui_searchDialogGui.h:840
+#: src/core/StelUtils.cpp:3196 src/ui_searchDialogGui.h:840
 msgid "omega"
 msgstr "омега"
 
@@ -8508,7 +8508,7 @@ msgid "Ecliptic (J2000.0)"
 msgstr "Эклиптическая (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:346 src/gui/AstroCalcChart.cpp:446
-#: src/gui/AstroCalcChart.cpp:472 src/gui/ObsListDialog.cpp:298
+#: src/gui/AstroCalcChart.cpp:472 src/gui/ObsListDialog.cpp:297
 msgid "Right ascension"
 msgstr "Прямое восхождение"
 
@@ -8518,7 +8518,7 @@ msgstr "Полярное расстояние"
 
 #: src/gui/SearchDialog.cpp:349 src/gui/AstroCalcChart.cpp:94
 #: src/gui/AstroCalcChart.cpp:104 src/gui/AstroCalcChart.cpp:429
-#: src/gui/AstroCalcChart.cpp:455 src/gui/ObsListDialog.cpp:299
+#: src/gui/AstroCalcChart.cpp:455 src/gui/ObsListDialog.cpp:298
 msgid "Declination"
 msgstr "Склонение"
 
@@ -9183,7 +9183,7 @@ msgstr ""
 "Продолжительность наибольшей фазы полного или кольцеобразного затмения"
 
 #: src/gui/AstroCalcDialog.cpp:3641 src/gui/AstroCalcChart.cpp:381
-#: src/gui/ObsListDialog.cpp:302 src/ui_obsListDialog.h:412
+#: src/gui/ObsListDialog.cpp:301 src/ui_obsListDialog.h:412
 msgid "Date"
 msgstr "Дата"
 
@@ -10610,89 +10610,89 @@ msgstr "м"
 msgid "Today"
 msgstr "Сегодня"
 
-#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:1137
+#: src/gui/ObsListDialog.cpp:84 src/gui/ObsListDialog.cpp:1139
 msgid "Cannot open observingLists.json to write"
 msgstr "Не могу открыть файл observingLists.json на запись"
 
-#: src/gui/ObsListDialog.cpp:186
+#: src/gui/ObsListDialog.cpp:185
 msgctxt "default name for observing list if none is available"
 msgid "new list"
 msgstr "Новый список"
 
-#: src/gui/ObsListDialog.cpp:228
+#: src/gui/ObsListDialog.cpp:227
 msgid "Select observing lists directory"
 msgstr "Выберите папку для списков наблюдения"
 
-#: src/gui/ObsListDialog.cpp:295
+#: src/gui/ObsListDialog.cpp:294
 msgid "Object designation"
 msgstr "Обозначение объекта"
 
-#: src/gui/ObsListDialog.cpp:296
+#: src/gui/ObsListDialog.cpp:295
 msgid "Object name"
 msgstr "Название объекта"
 
-#: src/gui/ObsListDialog.cpp:301 src/ui_configurationDialog.h:2547
+#: src/gui/ObsListDialog.cpp:300 src/ui_configurationDialog.h:2547
 msgid "Constellation"
 msgstr "Созвездие"
 
-#: src/gui/ObsListDialog.cpp:304 src/ui_viewDialog.h:4233
+#: src/gui/ObsListDialog.cpp:303 src/ui_viewDialog.h:4233
 #: src/ui_obsListDialog.h:420
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:475
 msgid "Landscape"
 msgstr "Ландшафт"
 
-#: src/gui/ObsListDialog.cpp:602
+#: src/gui/ObsListDialog.cpp:601
 msgid "Error during conversion. Please see logfile for details."
 msgstr "Ошибка во время конвертации. Подробности смотрите в журнале."
 
-#: src/gui/ObsListDialog.cpp:714
+#: src/gui/ObsListDialog.cpp:716
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:225
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Note"
 msgstr "Примечание"
 
-#: src/gui/ObsListDialog.cpp:714
+#: src/gui/ObsListDialog.cpp:716
 msgid "Some bookmarked objects were not found. See logfile for details."
 msgstr ""
 "Некоторые объекты из закладок не найдены. Подробности смотрите в журнале."
 
-#: src/gui/ObsListDialog.cpp:964
+#: src/gui/ObsListDialog.cpp:966
 msgid "New Observation List"
 msgstr "Новый список наблюдений"
 
-#: src/gui/ObsListDialog.cpp:965
+#: src/gui/ObsListDialog.cpp:967
 msgid "Observing list creation mode"
 msgstr "Режим создания списка наблюдений"
 
-#: src/gui/ObsListDialog.cpp:981
+#: src/gui/ObsListDialog.cpp:983
 msgid "Observing list editor mode"
 msgstr "Режим правки списка наблюдений"
 
-#: src/gui/ObsListDialog.cpp:986
+#: src/gui/ObsListDialog.cpp:988
 msgid "selectedOlud empty. This is a bug"
 msgstr "selectedOlud пуст. Это ошибка"
 
-#: src/gui/ObsListDialog.cpp:998
+#: src/gui/ObsListDialog.cpp:1000
 msgid "Export observing list as..."
 msgstr "Экспортировать список наблюдений как..."
 
-#: src/gui/ObsListDialog.cpp:1010
+#: src/gui/ObsListDialog.cpp:1012
 msgid "Cannot export. See logfile for details."
 msgstr "Не могу экспортировать. Смотри подробности в журнале."
 
-#: src/gui/ObsListDialog.cpp:1047
+#: src/gui/ObsListDialog.cpp:1049
 msgid "Import observing list"
 msgstr "Импортировать список наблюдений"
 
-#: src/gui/ObsListDialog.cpp:1059
+#: src/gui/ObsListDialog.cpp:1061
 msgid "Cannot open selected file for import"
 msgstr "Не могу открыть для импорта указанный файл"
 
-#: src/gui/ObsListDialog.cpp:1075
+#: src/gui/ObsListDialog.cpp:1077
 msgid "Empty list."
 msgstr "Пустой список."
 
-#: src/gui/ObsListDialog.cpp:1097
+#: src/gui/ObsListDialog.cpp:1099
 #, qt-format
 msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
@@ -10701,44 +10701,44 @@ msgstr ""
 "Список с названием '%1' датированный %2 и измененный %3 перезапишет "
 "существующий список '%4', датированный %5 и измененный %6. Согласны?"
 
-#: src/gui/ObsListDialog.cpp:1116
+#: src/gui/ObsListDialog.cpp:1118
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "Файл пуст или не содержит устаревших закладок."
 
-#: src/gui/ObsListDialog.cpp:1128
+#: src/gui/ObsListDialog.cpp:1130
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr "Файл не содержит списков наблюдений или устаревших закладок."
 
-#: src/gui/ObsListDialog.cpp:1155
+#: src/gui/ObsListDialog.cpp:1157
 msgid "File format is wrong!"
 msgstr "Неверный формат файла!"
 
-#: src/gui/ObsListDialog.cpp:1175
+#: src/gui/ObsListDialog.cpp:1177
 msgid "Cannot open JSON output file. Will not delete."
 msgstr "Не удается открыть выходной файл JSON. Не будет удалять."
 
-#: src/gui/ObsListDialog.cpp:1199 src/ui_configurationDialog.h:2345
+#: src/gui/ObsListDialog.cpp:1201 src/ui_configurationDialog.h:2345
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:390
 msgid "Information"
 msgstr "Информация"
 
-#: src/gui/ObsListDialog.cpp:1199
+#: src/gui/ObsListDialog.cpp:1201
 msgid "You cannot delete the default or the last list."
 msgstr "Вы не можете удалить список по умолчанию или последний список."
 
-#: src/gui/ObsListDialog.cpp:1255
+#: src/gui/ObsListDialog.cpp:1257
 msgid "Unnamed object"
 msgstr "Безымянный объект"
 
-#: src/gui/ObsListDialog.cpp:1342
+#: src/gui/ObsListDialog.cpp:1344
 msgid "Empty name"
 msgstr "Нет названия"
 
-#: src/gui/ObsListDialog.cpp:1347
+#: src/gui/ObsListDialog.cpp:1349
 msgid "List name already exists"
 msgstr "Список с таким названием уже есть"
 
-#: src/gui/ObsListDialog.cpp:1417 src/ui_configurationDialog.h:2610
+#: src/gui/ObsListDialog.cpp:1419 src/ui_configurationDialog.h:2610
 #: src/ui_obsListDialog.h:361
 msgid "Observing lists"
 msgstr "Списки наблюдений"
@@ -38477,6 +38477,10 @@ msgstr "Путь"
 msgid "Data age"
 msgstr "Возраст данных"
 
+#: plugins/Planes/src/AircraftObject.hpp:42
+msgid "aircraft"
+msgstr "воздушное судно"
+
 #: plugins/Planes/src/Planes.cpp:206 plugins/Planes/src/Planes.cpp:303
 #: plugins/Planes/src/Planes.cpp:305
 msgid "Planes"
@@ -38484,7 +38488,7 @@ msgstr "Самолёты"
 
 #: plugins/Planes/src/Planes.cpp:209
 msgid "Display live ADS-B aircraft in the sky."
-msgstr "Показывать в реальном времени ADS-B летательные аппараты в небе."
+msgstr "Показывать в реальном времени ADS-B воздушные суда в небе."
 
 #: plugins/Planes/src/Planes.cpp:303
 msgid "Show Planes"
@@ -38496,7 +38500,7 @@ msgstr "Номер рейса"
 
 #: plugins/Planes/src/gui/PlanesDialog.cpp:62
 msgid "Aircraft model"
-msgstr "Модель летат. аппарата"
+msgstr "Модель воздушного судна"
 
 #. TRANSLATORS: Unit of measure for distance - nautical miles
 #: plugins/Planes/src/gui/PlanesDialog.cpp:71
@@ -38511,8 +38515,8 @@ msgstr "Плагин \"Самолёты\""
 #: plugins/Planes/src/gui/PlanesDialog.cpp:250
 msgid "This plug-in shows live ADS-B aircraft as native Stellarium objects."
 msgstr ""
-"Этот плагин отображает летательные аппараты ADS-B в режиме реального времени"
-" как собственные объекты Stellarium."
+"Этот плагин отображает воздушные суда ADS-B в режиме реального времени как "
+"собственные объекты Stellarium."
 
 #: plugins/Planes/src/gui/PlanesDialog.cpp:251
 msgid ""
@@ -38520,7 +38524,7 @@ msgid ""
 "aircraft feed around the current observer location."
 msgstr ""
 "Он обеспечивает основные элементы управления видимостью, маркировкой и "
-"обновлением для прямой трансляции с летательного аппарата в районе текущего "
+"обновлением для прямой трансляции с воздушного судна в районе текущего "
 "местоположения наблюдателя."
 
 #: plugins/Planes/src/gui/PlanesDialog.cpp:252
@@ -38530,7 +38534,7 @@ msgid ""
 "search radius to the configured data source."
 msgstr ""
 "Запросы в реальном времени остаются отключенными до тех пор, пока вы не "
-"включите отображение летательного аппарата. При включении плагин отправляет "
+"включите отображение воздушных судов. При включении плагин отправляет "
 "текущую широту, долготу и радиус поиска наблюдателя в настроенный источник "
 "данных."
 
@@ -38549,7 +38553,7 @@ msgstr "Настройка плагина \"Самолёты\""
 
 #: plugins/Planes/src/ui_planesDialog.h:257
 msgid "Show live aircraft"
-msgstr "Показывать самолёты в режиме реального времени"
+msgstr "Показывать воздушные суда в режиме реального времени"
 
 #: plugins/Planes/src/ui_planesDialog.h:258
 msgid ""
@@ -38561,7 +38565,7 @@ msgstr ""
 
 #: plugins/Planes/src/ui_planesDialog.h:259
 msgid "Show aircraft labels"
-msgstr "Показывать названия летательных аппаратов"
+msgstr "Показывать названия воздушных судов"
 
 #: plugins/Planes/src/ui_planesDialog.h:260
 msgid "Label content"
