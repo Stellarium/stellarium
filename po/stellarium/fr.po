@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-30 14:40+0700\n"
+"POT-Creation-Date: 2026-05-31 21:35+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2026\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -59,7 +59,7 @@ msgstr "objet personnalisé"
 #: src/gui/AstroCalcDialog.cpp:957 src/gui/AstroCalcDialog.cpp:2694
 #: src/gui/AstroCalcDialog.cpp:3286 src/gui/AstroCalcDialog.cpp:3318
 #: src/gui/AstroCalcDialog.cpp:3642 src/gui/AstroCalcDialog.cpp:7935
-#: src/gui/ObsListDialog.cpp:297 src/ui_configurationDialog.h:2517
+#: src/gui/ObsListDialog.cpp:296 src/ui_configurationDialog.h:2517
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
@@ -1324,7 +1324,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1538 src/gui/ObsListDialog.cpp:303
+#: src/core/modules/LandscapeMgr.cpp:1538 src/gui/ObsListDialog.cpp:302
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:416
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -1534,8 +1534,8 @@ msgstr "Ses coordonnées planétographiques sont"
 #: src/core/modules/Planet.cpp:2224 src/core/StelObject.cpp:1561
 #: src/core/StelSkyCultureSkyPartition.cpp:528 src/core/StelUtils.cpp:166
 #: src/core/StelUtils.cpp:344 src/core/StelUtils.cpp:440
-#: src/core/StelUtils.cpp:521 src/core/StelUtils.cpp:570
-#: src/core/StelUtils.cpp:1537
+#: src/core/StelUtils.cpp:523 src/core/StelUtils.cpp:571
+#: src/core/StelUtils.cpp:1578
 msgctxt "object narration"
 msgid "and"
 msgstr "et"
@@ -1547,8 +1547,8 @@ msgstr "La hauteur du Soleil au-dessus de la structure est"
 
 #: src/core/modules/NomenclatureItem.cpp:405
 #: src/core/StelSkyCultureSkyPartition.cpp:526 src/core/StelUtils.cpp:228
-#: src/core/StelUtils.cpp:429 src/core/StelUtils.cpp:518
-#: src/core/StelUtils.cpp:529 src/core/StelUtils.cpp:567
+#: src/core/StelUtils.cpp:429 src/core/StelUtils.cpp:520
+#: src/core/StelUtils.cpp:531 src/core/StelUtils.cpp:568
 msgctxt "object narration"
 msgid "degrees"
 msgstr "degrés"
@@ -2399,7 +2399,7 @@ msgstr "objet de nature inconnue"
 #: src/core/modules/Nebula.cpp:180 src/core/StelObject.cpp:350
 #: src/gui/AstroCalcChart.cpp:98 src/gui/AstroCalcChart.cpp:108
 #: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
-#: src/gui/ObsListDialog.cpp:300 plugins/Supernovae/src/Supernova.cpp:128
+#: src/gui/ObsListDialog.cpp:299 plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
 msgstr "Magnitude"
 
@@ -3098,7 +3098,7 @@ msgid "Toggle DSO type filter"
 msgstr "Activer le filtre DSO"
 
 #: src/core/modules/NebulaMgr.cpp:1572 src/gui/StelDialog.cpp:336
-#: src/gui/ObsListDialog.cpp:602 src/StelMainView.cpp:1076
+#: src/gui/ObsListDialog.cpp:601 src/StelMainView.cpp:1076
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid "Attention!"
 msgstr "Attention !"
@@ -5375,12 +5375,12 @@ msgstr ""
 "définis par l'utilisateur."
 
 #: src/core/StelCore.cpp:2837 src/core/SimbadSearcher.cpp:186
-#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:986
-#: src/gui/ObsListDialog.cpp:1010 src/gui/ObsListDialog.cpp:1059
-#: src/gui/ObsListDialog.cpp:1075 src/gui/ObsListDialog.cpp:1116
-#: src/gui/ObsListDialog.cpp:1128 src/gui/ObsListDialog.cpp:1137
-#: src/gui/ObsListDialog.cpp:1155 src/gui/ObsListDialog.cpp:1175
-#: src/gui/ObsListDialog.cpp:1342 src/gui/ObsListDialog.cpp:1347
+#: src/gui/ObsListDialog.cpp:84 src/gui/ObsListDialog.cpp:988
+#: src/gui/ObsListDialog.cpp:1012 src/gui/ObsListDialog.cpp:1061
+#: src/gui/ObsListDialog.cpp:1077 src/gui/ObsListDialog.cpp:1118
+#: src/gui/ObsListDialog.cpp:1130 src/gui/ObsListDialog.cpp:1139
+#: src/gui/ObsListDialog.cpp:1157 src/gui/ObsListDialog.cpp:1177
+#: src/gui/ObsListDialog.cpp:1344 src/gui/ObsListDialog.cpp:1349
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Erreur"
@@ -6017,8 +6017,8 @@ msgid "Lunar Station"
 msgstr "Station lunaire"
 
 #: src/core/StelSkyCultureSkyPartition.cpp:527 src/core/StelUtils.cpp:343
-#: src/core/StelUtils.cpp:519 src/core/StelUtils.cpp:568
-#: src/core/StelUtils.cpp:1536
+#: src/core/StelUtils.cpp:521 src/core/StelUtils.cpp:569
+#: src/core/StelUtils.cpp:1577
 msgctxt "object narration"
 msgid "minutes"
 msgstr "minutes"
@@ -6764,255 +6764,255 @@ msgctxt "duration"
 msgid "seconds"
 msgstr "secondes"
 
-#: src/core/StelUtils.cpp:342 src/core/StelUtils.cpp:1535
+#: src/core/StelUtils.cpp:342 src/core/StelUtils.cpp:1576
 msgctxt "object narration"
 msgid "hours"
 msgstr "heures"
 
-#: src/core/StelUtils.cpp:345 src/core/StelUtils.cpp:520
-#: src/core/StelUtils.cpp:569 src/core/StelUtils.cpp:1538
+#: src/core/StelUtils.cpp:345 src/core/StelUtils.cpp:522
+#: src/core/StelUtils.cpp:570 src/core/StelUtils.cpp:1579
 msgctxt "object narration"
 msgid "seconds"
 msgstr "secondes"
 
-#: src/core/StelUtils.cpp:436 src/core/StelUtils.cpp:488
-#: src/core/StelUtils.cpp:1645
+#: src/core/StelUtils.cpp:436 src/core/StelUtils.cpp:489
+#: src/core/StelUtils.cpp:1687
 msgid "minus"
 msgstr "moins"
 
-#: src/core/StelUtils.cpp:440 src/core/StelUtils.cpp:492
+#: src/core/StelUtils.cpp:440 src/core/StelUtils.cpp:493
 msgctxt "object narration"
 msgid "arc minutes"
 msgstr "arc minutes"
 
-#: src/core/StelUtils.cpp:443 src/core/StelUtils.cpp:495
+#: src/core/StelUtils.cpp:443 src/core/StelUtils.cpp:496
 msgctxt "object narration"
 msgid "arc seconds"
 msgstr "arc secondes"
 
-#: src/core/StelUtils.cpp:488
+#: src/core/StelUtils.cpp:489
 msgid "plus"
 msgstr "plus"
 
-#: src/core/StelUtils.cpp:490
+#: src/core/StelUtils.cpp:491
 msgid "degrees"
 msgstr "degrés"
 
-#: src/core/StelUtils.cpp:494 src/ui_astroCalcDialog.h:2352
+#: src/core/StelUtils.cpp:495 src/ui_astroCalcDialog.h:2352
 #: src/ui_astroCalcDialog.h:2454 plugins/Satellites/src/Satellite.cpp:493
 msgid "and"
 msgstr "et"
 
-#: src/core/StelUtils.cpp:527 src/core/StelUtils.cpp:529
+#: src/core/StelUtils.cpp:529 src/core/StelUtils.cpp:531
 msgctxt "object narration"
 msgid "North"
 msgstr "Nord"
 
-#: src/core/StelUtils.cpp:527 src/core/StelUtils.cpp:529
+#: src/core/StelUtils.cpp:529 src/core/StelUtils.cpp:531
 msgctxt "object narration"
 msgid "South"
 msgstr "Sud"
 
-#: src/core/StelUtils.cpp:575 src/core/StelUtils.cpp:581
+#: src/core/StelUtils.cpp:576 src/core/StelUtils.cpp:582
 msgctxt "object narration"
 msgid "East"
 msgstr "Est"
 
-#: src/core/StelUtils.cpp:576 src/core/StelUtils.cpp:582
+#: src/core/StelUtils.cpp:577 src/core/StelUtils.cpp:583
 msgctxt "object narration"
 msgid "West"
 msgstr "Ouest"
 
-#: src/core/StelUtils.cpp:3129
+#: src/core/StelUtils.cpp:3169
 msgid "Alpha"
 msgstr "Alpha"
 
-#: src/core/StelUtils.cpp:3129 src/ui_searchDialogGui.h:774
+#: src/core/StelUtils.cpp:3169 src/ui_searchDialogGui.h:774
 msgid "alpha"
 msgstr "alpha"
 
-#: src/core/StelUtils.cpp:3130
+#: src/core/StelUtils.cpp:3170
 msgid "Beta"
 msgstr "Bêta"
 
-#: src/core/StelUtils.cpp:3130 src/ui_searchDialogGui.h:777
+#: src/core/StelUtils.cpp:3170 src/ui_searchDialogGui.h:777
 msgid "beta"
 msgstr "bêta"
 
-#: src/core/StelUtils.cpp:3131 src/gui/AstroCalcDialog.cpp:2695
+#: src/core/StelUtils.cpp:3171 src/gui/AstroCalcDialog.cpp:2695
 #: src/gui/AstroCalcDialog.cpp:3287
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/core/StelUtils.cpp:3131 src/ui_searchDialogGui.h:780
+#: src/core/StelUtils.cpp:3171 src/ui_searchDialogGui.h:780
 msgid "gamma"
 msgstr "gamma"
 
-#: src/core/StelUtils.cpp:3132
+#: src/core/StelUtils.cpp:3172
 msgid "Delta"
 msgstr "Delta"
 
-#: src/core/StelUtils.cpp:3132 src/ui_searchDialogGui.h:783
+#: src/core/StelUtils.cpp:3172 src/ui_searchDialogGui.h:783
 msgid "delta"
 msgstr "delta"
 
-#: src/core/StelUtils.cpp:3133
+#: src/core/StelUtils.cpp:3173
 msgid "Epsilon"
 msgstr "Epsilon"
 
-#: src/core/StelUtils.cpp:3133 src/ui_searchDialogGui.h:786
+#: src/core/StelUtils.cpp:3173 src/ui_searchDialogGui.h:786
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/core/StelUtils.cpp:3135
+#: src/core/StelUtils.cpp:3175
 msgid "Zeta"
 msgstr "Zêta"
 
-#: src/core/StelUtils.cpp:3135 src/ui_searchDialogGui.h:789
+#: src/core/StelUtils.cpp:3175 src/ui_searchDialogGui.h:789
 msgid "zeta"
 msgstr "zêta"
 
-#: src/core/StelUtils.cpp:3136
+#: src/core/StelUtils.cpp:3176
 msgid "Eta"
 msgstr "Êta"
 
-#: src/core/StelUtils.cpp:3136 src/ui_searchDialogGui.h:792
+#: src/core/StelUtils.cpp:3176 src/ui_searchDialogGui.h:792
 msgid "eta"
 msgstr "êta"
 
-#: src/core/StelUtils.cpp:3137
+#: src/core/StelUtils.cpp:3177
 msgid "Theta"
 msgstr "Thêta"
 
-#: src/core/StelUtils.cpp:3137 src/ui_searchDialogGui.h:795
+#: src/core/StelUtils.cpp:3177 src/ui_searchDialogGui.h:795
 msgid "theta"
 msgstr "thêta"
 
-#: src/core/StelUtils.cpp:3138
+#: src/core/StelUtils.cpp:3178
 msgid "Iota"
 msgstr "Iota"
 
-#: src/core/StelUtils.cpp:3138 src/ui_searchDialogGui.h:771
+#: src/core/StelUtils.cpp:3178 src/ui_searchDialogGui.h:771
 msgid "iota"
 msgstr "iota"
 
-#: src/core/StelUtils.cpp:3139
+#: src/core/StelUtils.cpp:3179
 msgid "Kappa"
 msgstr "Kappa"
 
-#: src/core/StelUtils.cpp:3139 src/ui_searchDialogGui.h:798
+#: src/core/StelUtils.cpp:3179 src/ui_searchDialogGui.h:798
 msgid "kappa"
 msgstr "kappa"
 
-#: src/core/StelUtils.cpp:3141
+#: src/core/StelUtils.cpp:3181
 msgid "Lambda"
 msgstr "Lambda"
 
-#: src/core/StelUtils.cpp:3141 src/ui_searchDialogGui.h:801
+#: src/core/StelUtils.cpp:3181 src/ui_searchDialogGui.h:801
 msgid "lambda"
 msgstr "lambda"
 
-#: src/core/StelUtils.cpp:3142
+#: src/core/StelUtils.cpp:3182
 msgid "Mu"
 msgstr "Mu"
 
-#: src/core/StelUtils.cpp:3142 src/ui_searchDialogGui.h:804
+#: src/core/StelUtils.cpp:3182 src/ui_searchDialogGui.h:804
 msgid "mu"
 msgstr "mu"
 
-#: src/core/StelUtils.cpp:3143
+#: src/core/StelUtils.cpp:3183
 msgid "Nu"
 msgstr "Nu"
 
-#: src/core/StelUtils.cpp:3143 src/ui_searchDialogGui.h:807
+#: src/core/StelUtils.cpp:3183 src/ui_searchDialogGui.h:807
 msgid "nu"
 msgstr "nu"
 
-#: src/core/StelUtils.cpp:3144
+#: src/core/StelUtils.cpp:3184
 msgid "Xi"
 msgstr "Xi"
 
-#: src/core/StelUtils.cpp:3144 src/ui_searchDialogGui.h:810
+#: src/core/StelUtils.cpp:3184 src/ui_searchDialogGui.h:810
 msgid "xi"
 msgstr "xi"
 
-#: src/core/StelUtils.cpp:3145
+#: src/core/StelUtils.cpp:3185
 msgid "Omicron"
 msgstr "Omicron"
 
-#: src/core/StelUtils.cpp:3145 src/ui_searchDialogGui.h:813
+#: src/core/StelUtils.cpp:3185 src/ui_searchDialogGui.h:813
 msgid "omicron"
 msgstr "omicron"
 
-#: src/core/StelUtils.cpp:3147
+#: src/core/StelUtils.cpp:3187
 msgid "Pi"
 msgstr "Pi"
 
-#: src/core/StelUtils.cpp:3147 src/ui_searchDialogGui.h:816
+#: src/core/StelUtils.cpp:3187 src/ui_searchDialogGui.h:816
 msgid "pi"
 msgstr "pi"
 
-#: src/core/StelUtils.cpp:3148
+#: src/core/StelUtils.cpp:3188
 msgid "Rho"
 msgstr "Rhô"
 
-#: src/core/StelUtils.cpp:3148 src/ui_searchDialogGui.h:819
+#: src/core/StelUtils.cpp:3188 src/ui_searchDialogGui.h:819
 msgid "rho"
 msgstr "rhô"
 
-#: src/core/StelUtils.cpp:3149
+#: src/core/StelUtils.cpp:3189
 msgid "Sigma"
 msgstr "Sigma"
 
-#: src/core/StelUtils.cpp:3149 src/ui_searchDialogGui.h:822
+#: src/core/StelUtils.cpp:3189 src/ui_searchDialogGui.h:822
 msgid "sigma"
 msgstr "sigma"
 
-#: src/core/StelUtils.cpp:3150
+#: src/core/StelUtils.cpp:3190
 msgid "Tau"
 msgstr "Tau"
 
-#: src/core/StelUtils.cpp:3150 src/ui_searchDialogGui.h:825
+#: src/core/StelUtils.cpp:3190 src/ui_searchDialogGui.h:825
 msgid "tau"
 msgstr "tau"
 
-#: src/core/StelUtils.cpp:3151
+#: src/core/StelUtils.cpp:3191
 msgid "Upsilon"
 msgstr "Upsilon"
 
-#: src/core/StelUtils.cpp:3151 src/ui_searchDialogGui.h:828
+#: src/core/StelUtils.cpp:3191 src/ui_searchDialogGui.h:828
 msgid "upsilon"
 msgstr "upsilon"
 
-#: src/core/StelUtils.cpp:3153
+#: src/core/StelUtils.cpp:3193
 msgid "Phi"
 msgstr "Phi"
 
-#: src/core/StelUtils.cpp:3153 src/ui_searchDialogGui.h:831
+#: src/core/StelUtils.cpp:3193 src/ui_searchDialogGui.h:831
 msgid "phi"
 msgstr "phi"
 
-#: src/core/StelUtils.cpp:3154
+#: src/core/StelUtils.cpp:3194
 msgid "Chi"
 msgstr "Chi"
 
-#: src/core/StelUtils.cpp:3154 src/ui_searchDialogGui.h:834
+#: src/core/StelUtils.cpp:3194 src/ui_searchDialogGui.h:834
 msgid "chi"
 msgstr "chi"
 
-#: src/core/StelUtils.cpp:3155
+#: src/core/StelUtils.cpp:3195
 msgid "Psi"
 msgstr "Psi"
 
-#: src/core/StelUtils.cpp:3155 src/ui_searchDialogGui.h:837
+#: src/core/StelUtils.cpp:3195 src/ui_searchDialogGui.h:837
 msgid "psi"
 msgstr "psi"
 
-#: src/core/StelUtils.cpp:3156
+#: src/core/StelUtils.cpp:3196
 msgid "Omega"
 msgstr "Oméga"
 
-#: src/core/StelUtils.cpp:3156 src/ui_searchDialogGui.h:840
+#: src/core/StelUtils.cpp:3196 src/ui_searchDialogGui.h:840
 msgid "omega"
 msgstr "oméga"
 
@@ -8549,7 +8549,7 @@ msgid "Ecliptic (J2000.0)"
 msgstr "Écliptique (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:346 src/gui/AstroCalcChart.cpp:446
-#: src/gui/AstroCalcChart.cpp:472 src/gui/ObsListDialog.cpp:298
+#: src/gui/AstroCalcChart.cpp:472 src/gui/ObsListDialog.cpp:297
 msgid "Right ascension"
 msgstr "Ascension droite"
 
@@ -8559,7 +8559,7 @@ msgstr "Distance polaire"
 
 #: src/gui/SearchDialog.cpp:349 src/gui/AstroCalcChart.cpp:94
 #: src/gui/AstroCalcChart.cpp:104 src/gui/AstroCalcChart.cpp:429
-#: src/gui/AstroCalcChart.cpp:455 src/gui/ObsListDialog.cpp:299
+#: src/gui/AstroCalcChart.cpp:455 src/gui/ObsListDialog.cpp:298
 msgid "Declination"
 msgstr "Déclinaison"
 
@@ -9234,7 +9234,7 @@ msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "Durée de la phase totale ou annulaire lors de l'éclipse maximale"
 
 #: src/gui/AstroCalcDialog.cpp:3641 src/gui/AstroCalcChart.cpp:381
-#: src/gui/ObsListDialog.cpp:302 src/ui_obsListDialog.h:412
+#: src/gui/ObsListDialog.cpp:301 src/ui_obsListDialog.h:412
 msgid "Date"
 msgstr "Date"
 
@@ -10666,94 +10666,94 @@ msgstr "min"
 msgid "Today"
 msgstr "Cette date"
 
-#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:1137
+#: src/gui/ObsListDialog.cpp:84 src/gui/ObsListDialog.cpp:1139
 msgid "Cannot open observingLists.json to write"
 msgstr "Impossible d'écrire observingLists.json"
 
-#: src/gui/ObsListDialog.cpp:186
+#: src/gui/ObsListDialog.cpp:185
 msgctxt "default name for observing list if none is available"
 msgid "new list"
 msgstr "nouvelle liste"
 
-#: src/gui/ObsListDialog.cpp:228
+#: src/gui/ObsListDialog.cpp:227
 msgid "Select observing lists directory"
 msgstr "Sélectionner le dossier des listes d'observation"
 
-#: src/gui/ObsListDialog.cpp:295
+#: src/gui/ObsListDialog.cpp:294
 msgid "Object designation"
 msgstr "Désignation de l'objet"
 
-#: src/gui/ObsListDialog.cpp:296
+#: src/gui/ObsListDialog.cpp:295
 msgid "Object name"
 msgstr "Nom de l'objet"
 
-#: src/gui/ObsListDialog.cpp:301 src/ui_configurationDialog.h:2547
+#: src/gui/ObsListDialog.cpp:300 src/ui_configurationDialog.h:2547
 msgid "Constellation"
 msgstr "Constellation"
 
-#: src/gui/ObsListDialog.cpp:304 src/ui_viewDialog.h:4233
+#: src/gui/ObsListDialog.cpp:303 src/ui_viewDialog.h:4233
 #: src/ui_obsListDialog.h:420
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:475
 msgid "Landscape"
 msgstr "Paysage"
 
-#: src/gui/ObsListDialog.cpp:602
+#: src/gui/ObsListDialog.cpp:601
 msgid "Error during conversion. Please see logfile for details."
 msgstr ""
 "Erreur durant la conversion. Consulter le fichier de journalisation pour "
 "plus de détails."
 
-#: src/gui/ObsListDialog.cpp:714
+#: src/gui/ObsListDialog.cpp:716
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:225
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Note"
 msgstr "Remarque"
 
-#: src/gui/ObsListDialog.cpp:714
+#: src/gui/ObsListDialog.cpp:716
 msgid "Some bookmarked objects were not found. See logfile for details."
 msgstr ""
 "Certains objets marqués n'ont pas été trouvés. Consulter le fichier de "
 "journalisation pour plus de détails."
 
-#: src/gui/ObsListDialog.cpp:964
+#: src/gui/ObsListDialog.cpp:966
 msgid "New Observation List"
 msgstr "Nouvelle liste d'observation"
 
-#: src/gui/ObsListDialog.cpp:965
+#: src/gui/ObsListDialog.cpp:967
 msgid "Observing list creation mode"
 msgstr "Mode de création de liste d'observation"
 
-#: src/gui/ObsListDialog.cpp:981
+#: src/gui/ObsListDialog.cpp:983
 msgid "Observing list editor mode"
 msgstr "Mode éditeur de liste d'observation"
 
-#: src/gui/ObsListDialog.cpp:986
+#: src/gui/ObsListDialog.cpp:988
 msgid "selectedOlud empty. This is a bug"
 msgstr "selectedOlud vide. Il s'agit d'un bogue"
 
-#: src/gui/ObsListDialog.cpp:998
+#: src/gui/ObsListDialog.cpp:1000
 msgid "Export observing list as..."
 msgstr "Exporter liste d'observation…"
 
-#: src/gui/ObsListDialog.cpp:1010
+#: src/gui/ObsListDialog.cpp:1012
 msgid "Cannot export. See logfile for details."
 msgstr ""
 "Impossible d'exporter. Consulter le fichier de journalisation pour plus de "
 "détails."
 
-#: src/gui/ObsListDialog.cpp:1047
+#: src/gui/ObsListDialog.cpp:1049
 msgid "Import observing list"
 msgstr "Importer liste d'observation"
 
-#: src/gui/ObsListDialog.cpp:1059
+#: src/gui/ObsListDialog.cpp:1061
 msgid "Cannot open selected file for import"
 msgstr "Impossible d'ouvrir le fichier sélectionné pour l'importer"
 
-#: src/gui/ObsListDialog.cpp:1075
+#: src/gui/ObsListDialog.cpp:1077
 msgid "Empty list."
 msgstr "Liste vide."
 
-#: src/gui/ObsListDialog.cpp:1097
+#: src/gui/ObsListDialog.cpp:1099
 #, qt-format
 msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
@@ -10763,48 +10763,48 @@ msgstr ""
 "liste existante « %4 », datant de %5 et modifiée le %6. Voulez-vous "
 "continuer ?"
 
-#: src/gui/ObsListDialog.cpp:1116
+#: src/gui/ObsListDialog.cpp:1118
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "Le fichier est vide ou ne contient pas de marquages obsolètes."
 
-#: src/gui/ObsListDialog.cpp:1128
+#: src/gui/ObsListDialog.cpp:1130
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr ""
 "Le fichier ne contient pas de listes d'observation ou de marquages "
 "obsolètes."
 
-#: src/gui/ObsListDialog.cpp:1155
+#: src/gui/ObsListDialog.cpp:1157
 msgid "File format is wrong!"
 msgstr "Le format de fichier est incorrect !"
 
-#: src/gui/ObsListDialog.cpp:1175
+#: src/gui/ObsListDialog.cpp:1177
 msgid "Cannot open JSON output file. Will not delete."
 msgstr ""
 "Impossible d'ouvrir le fichier JSON de sortie. Il ne sera pas supprimé."
 
-#: src/gui/ObsListDialog.cpp:1199 src/ui_configurationDialog.h:2345
+#: src/gui/ObsListDialog.cpp:1201 src/ui_configurationDialog.h:2345
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:390
 msgid "Information"
 msgstr "Informations"
 
-#: src/gui/ObsListDialog.cpp:1199
+#: src/gui/ObsListDialog.cpp:1201
 msgid "You cannot delete the default or the last list."
 msgstr ""
 "Vous ne pouvez pas supprimer la dernière liste ou la liste par défaut."
 
-#: src/gui/ObsListDialog.cpp:1255
+#: src/gui/ObsListDialog.cpp:1257
 msgid "Unnamed object"
 msgstr "Objet sans nom"
 
-#: src/gui/ObsListDialog.cpp:1342
+#: src/gui/ObsListDialog.cpp:1344
 msgid "Empty name"
 msgstr "Nom vide"
 
-#: src/gui/ObsListDialog.cpp:1347
+#: src/gui/ObsListDialog.cpp:1349
 msgid "List name already exists"
 msgstr "Une liste de ce nom existe déjà"
 
-#: src/gui/ObsListDialog.cpp:1417 src/ui_configurationDialog.h:2610
+#: src/gui/ObsListDialog.cpp:1419 src/ui_configurationDialog.h:2610
 #: src/ui_obsListDialog.h:361
 msgid "Observing lists"
 msgstr "Liste d'observation"
@@ -38732,6 +38732,10 @@ msgstr "Route"
 #: plugins/Planes/src/AircraftObject.cpp:245
 msgid "Data age"
 msgstr "Âge des données"
+
+#: plugins/Planes/src/AircraftObject.hpp:42
+msgid "aircraft"
+msgstr "avion"
 
 #: plugins/Planes/src/Planes.cpp:206 plugins/Planes/src/Planes.cpp:303
 #: plugins/Planes/src/Planes.cpp:305
