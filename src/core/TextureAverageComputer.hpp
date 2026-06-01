@@ -41,10 +41,12 @@ class TextureAverageComputer
 	static inline bool workaroundNeeded = false;
 
     void init();
-	Vec4f getTextureAverageSimple(GLuint texture, int width, int height);
 	Vec4f getTextureAverageWithWorkaround(GLuint texture);
 public:
+	//!< The function to use for arbitrary NPOT textures
 	Vec4f getTextureAverage(GLuint texture);
+	//!< Can be used for power-of-two textures
+	Vec4f getTextureAverageSimple(GLuint texture, int width, int height);
 	TextureAverageComputer(StelOpenGL::HighGraphicsFunctions&, int texW, int texH, GLenum internalFormat);
 	~TextureAverageComputer();
 };
