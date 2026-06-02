@@ -15,6 +15,7 @@ ADD_SUBDIRECTORY( chinese_chenzhuo )
 ADD_SUBDIRECTORY( chinese_manchu )
 ADD_SUBDIRECTORY( chinese_song_dynasty )
 ADD_SUBDIRECTORY( chinese_xianglin )
+ADD_SUBDIRECTORY( chinese_yuan_dynasty )
 # Exclude from standard package
 # ADD_SUBDIRECTORY( egyptian )
 ADD_SUBDIRECTORY( egyptian_dendera )
