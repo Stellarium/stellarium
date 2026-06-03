@@ -86,7 +86,7 @@ Shibukawa Harumi deeply understood that the accuracy of a calendar relies on rel
 
 The most critical turning point in Harumi's star-chart production came when he obtained a copy of the Yuan-Dynasty Chinese star catalog (i.e., the *Sanyuan Lieshe Ruxiu Quji Ji*, also known as the *Tianwen Huichao* star catalog) in the 1690s. According to the research of Takesako Shinobu, the stellar data that Harumi used in his late star charts show almost perfect agreement with the coordinates of the Yuan catalog after precession correction. In Tenmon Kyūtō (天文瓊統, 1698), the coordinates of more than 600 successfully identified Chinese stars are consistent with those of the Yuan catalog. The fundamental reason he so heavily relied on this catalog was its high accuracy: the Yuan catalog used a graduation of 0.1 degree, with an error of only about 0.1 degree, far surpassing any material Harumi had previously encountered.
 
-<br><img height="600" src="../chinese_yuan_dynasty/illustrations/sanyuanlieshe2.png"/> <img height="600" src="illustrations/tenmon_kyuto1.png"/>
+<br><img height="600" src="illustrations/sanyuanlieshe2.png"/> <img height="600" src="illustrations/tenmon_kyuto1.png"/>
 
 *Left image: Tianwen Huichao star chart and catalogue (China)*
 
@@ -96,13 +96,9 @@ Harumi adopted the most unique presentational format of the Yuan-Dynasty Chinese
 
 Shibukawa Harumi also constructed the earliest celestial globe in Japan; one of them was dedicated to Ise Jingū in 1690 and remains an important cultural heritage asset today.
 
-<br><img width="1000" src="../chinese_yuan_dynasty/illustrations/tianwenhuichao_catalog1.png"/>
-
-*The positions of coordinates in the Tianwen Huichao star catalog (Completed in the late Yuan Dynasty in China, 14th century). The green crosses represent the data from the original source, while the other colors represent the results of scholars' corrections to the coordinates.*
-
 <br><img width="1000" src="illustrations/tenmon_kyuto2.png"/>
 
-*The positions of coordinates in Harumi's Tenmon Kyūtō star catalog. The green crosses represent Chinese constellations, and the yellow crosses represent the 61 new Japanese constellations added by Yasui.*
+*The positions of coordinates in Harumi's Tenmon Kyūtō star catalog. The green crosses represent Chinese constellations, and the yellow crosses represent the 61 new Japanese constellations added by Harumi.*
 
 ## Constellations
 
@@ -356,6 +352,7 @@ The guard division tasked with the security of the right side of the imperial pa
  - [#2]: Study of the Star Charts made by Harumi Shibukawa (<notr>[PDF](http://www.kotenmon.com/dld/20250621/%E6%B8%8B%E5%B7%9D%E6%98%A5%E6%B5%B7%E3%81%AE%E6%98%9F%E5%9B%B3_20250621F.pdf)</notr>|<notr>[Youtube](https://youtu.be/fnyyRLhAZzM)</notr>) by Takesako Shinobu
  - [#3]: <notr>[Harumi Shibukawa's Tenmon Kyūtō Star Catalog (Japanese)](https://www.kotenmon.com/star/catalog/harumi.html)</notr>
  - [#4]: <notr>[Identification of Chinese Constellations Using Medieval Star Charts, Star Catalogs, and Xingfan (Star Encroachment) Records (Japanese)](https://www.kotenmon.com/str/china/china.html)</notr>
+ - [#5]: Osaki, S. (1987). *Chūgoku no seiza no rekishi* [History of Chinese Constellations]. Tokyo: Yūzankaku. ISBN 4-639-00647-0.
 
 ## Authors
 
