@@ -1731,7 +1731,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				for (int t = 0; t < extras; ++t)
 					futures.append(QtConcurrent::run(stripe, t));
 				stripe(extras);                            // main thread's share
-				for (auto& f : futures) f.waitForFinished();
+				for (auto& f : futures) f.waitForFinished();  // TODO: FIX HANG HERE
 			};
 
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
@@ -1778,12 +1778,13 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 
 			// Run `bodyOp` on every body of `level` in parallel and return
 			// only once all workers have finished.
-			const auto runLevelParallel = [totalThreads, extras]
-				(const QVector<PlanetP>& level, auto bodyOp)
+			const auto runLevelParallel = [totalThreads, extras](const QVector<PlanetP>& level, auto bodyOp)
 			{
+				//qDebug() << "level size:" << level.length();
 				if (level.isEmpty()) return;
 				const auto stripe = [&level, totalThreads, &bodyOp](int offset)
 				{
+					//qDebug() << "Stripe: level length" << level.length() << "totThr" << totalThreads;
 					for (int i = offset; i < level.size(); i += totalThreads)
 						bodyOp(level[i]);
 				};
@@ -1792,14 +1793,18 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				for (int t = 0; t < extras; ++t)
 					futures.append(QtConcurrent::run(stripe, t));
 				stripe(extras);                            // main thread's share
-				for (auto& f : futures) f.waitForFinished();
+				for (auto& f : futures) f.waitForFinished(); // TODO: Fix always waiting here...
 			};
 
 			// ---- Pass 1: first approximation at dateJDE -----------------
+			qDebug() << "Pass 1";
+			int lev=0;
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
 			{
+				//qDebug() << "Lev" << lev++;
 				runLevelParallel(level, [obs, dateJDE](const PlanetP& p)
 				{
+					//qDebug() << p->getEnglishName();
 					p->computePosition(obs, dateJDE, Vec3d(0.));
 				});
 			}
@@ -1821,8 +1826,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			// when observed from Earth -- presumably the used ephemerides
 			// already provide aberration-corrected positions for the Moon.
 			const auto lightTimeStep =
-				[obs, dateJDE, obsPosJDE, aberrationPushSpeed,
-				 withAberration, observerPlanetIsEarth, this](const PlanetP& p)
+				[obs, dateJDE, obsPosJDE, aberrationPushSpeed, withAberration, observerPlanetIsEarth, this](const PlanetP& p)
 			{
 				const Vec3d planetPos      = p->getHeliocentricEclipticPos();
 				const double lightTimeDays = (planetPos - obsPosJDE).norm()
@@ -1834,15 +1838,23 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			};
 
 			// ---- Pass 2: light-time + aberration correction -------------
+			qDebug() << "Pass 2";
+			lev=0;
+
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
+			{
+				//qDebug() << "Lev" << lev++;
 				runLevelParallel(level, lightTimeStep);
+			}
 
 			// ---- Pass 3: refinement (and rotation element corrections) --
+			qDebug() << "Pass 3";
+			lev=0;
+
 			// The next call may already do nothing if the time difference to
 			// the previous round is not large enough.
 			const auto lightTimeStepWithRotation =
-				[obs, dateJDE, obsPosJDE, aberrationPushSpeed,
-				 withAberration, observerPlanetIsEarth, this](const PlanetP& p)
+				[obs, dateJDE, obsPosJDE, aberrationPushSpeed, withAberration, observerPlanetIsEarth, this](const PlanetP& p)
 			{
 				const Vec3d planetPos      = p->getHeliocentricEclipticPos();
 				const double lightTimeDays = (planetPos - obsPosJDE).norm()
@@ -1861,7 +1873,10 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				else if (p->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
 			};
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
+			{
+				//qDebug() << "Lev" << lev++;
 				runLevelParallel(level, lightTimeStepWithRotation);
+			}
 
 			computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 		}
