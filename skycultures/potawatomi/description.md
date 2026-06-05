@@ -28,11 +28,15 @@ English Translation: Crane / Swan / Human skeleton-like creature with wings
 
 Corresponding Western Constellation: Summer Cross
 
+<p><img src="illustrations/crane.png" width="150" alt="Human skeleton-like creature with wings" /></p>
+
 ##### Bzhêké
 
 English Translation: Bison
 
 Corresponding Western Constellation: Taurus
+
+<p><img src="illustrations/bison.png" width="150" alt="Bison" /></p>
 
 ##### Gigo
 
@@ -40,11 +44,15 @@ English Translation: Fish
 
 Corresponding Western Constellation: Delphinus
 
+<p><img src="illustrations/fish.png" width="150" alt="Fish" /></p>
+
 ##### Pondésé / Ktthe Sabé / Nenikboz
 
 English Translation: Winter Maker / Bigfoot / Nanabozho
 
 Corresponding Western Constellation: Orion (does not have a bow like Nenikboz/Nanabozho does)
+
+<p><img src="illustrations/bigfoot.png" width="150" alt="Bigfoot" /></p>
 
 ##### Mang
 
@@ -52,11 +60,15 @@ English Translation: Loon
 
 Corresponding Western Constellation: Ursa Minor
 
+<p><img src="illustrations/loon.png" width="150" alt="Loon" /></p>
+
 ##### Mdodo Senik
 
 English Translation: Sweat Lodge Stones
 
 Corresponding Western Constellation: Pleiades
+
+<p><img src="illustrations/stones.png" width="150" alt="Sweat Lodge Stones" /></p>
 
 ##### Mdodoswen
 
@@ -64,11 +76,15 @@ English Translation: Sweat Lodge
 
 Corresponding Western Constellation: Corona Borealis
 
+<p><img src="illustrations/sweatlodge.png" width="150" alt="Sweat Lodge" /></p>
+
 ##### Mëk
 
 English Translation: Beaver
 
 Corresponding Western Constellation: Gemini
+
+<p><img src="illustrations/beaver.png" width="150" alt="Beaver" /></p>
 
 ##### Mko Shtegwan
 
@@ -76,11 +92,15 @@ English Translation: Bear Head
 
 Corresponding Western Constellation: Summer Triangle
 
+<p><img src="illustrations/bear.png" width="150" alt="Bear Head" /></p>
+
 ##### Mo’ëwé
 
 English Translation: Wolf
 
 Corresponding Western Constellation: Canis Major
+
+<p><img src="illustrations/wolf.png" width="150" alt="Wolf" /></p>
 
 ##### Moz
 
@@ -88,11 +108,15 @@ English Translation: Moose
 
 Corresponding Western Constellation: Pegasus
 
+<p><img src="illustrations/moose.png" width="150" alt="Moose" /></p>
+
 ##### Mshignébêk
 
 English Translation: Big Snake
 
 Corresponding Western Constellation: Hydra
+
+<p><img src="illustrations/snake.png" width="150" alt="Big Snake" /></p>
 
 ##### Mshiké
 
@@ -100,11 +124,15 @@ English Translation: Turtle
 
 Corresponding Western Constellation: Auriga
 
+<p><img src="illustrations/turtle.png" width="150" alt="Turtle" /></p>
+
 ##### Nambezho
 
 English Translation: Underwater panther
 
 Corresponding Western Constellation: Leo
+
+<p><img src="illustrations/panther.png" width="150" alt="Underwater Panther" /></p>
 
 ##### Nenikboz
 
@@ -112,11 +140,15 @@ English Translation: Nanabozho
 
 Corresponding Western Constellation: Scorpius
 
+<p><img src="illustrations/nanabozho.png" width="150" alt="Nanabozho" /></p>
+
 ##### Shkenigshêk égi-nsogmowat
 
 English Translation: Three Brothers Floating in a Canoe
 
 Corresponding Western Constellation: Cassiopeia
+
+<p><img src="illustrations/canoe.png" width="150" alt="Three Brothers Floating in a Canoe" /></p>
 
 ##### Wénondeshik
 
@@ -124,11 +156,15 @@ English Translation: One Who is Exhausted
 
 Corresponding Western Constellation: Hercules
 
+<p><img src="illustrations/exhausted.png" width="150" alt="One Who is Exhausted" /></p>
+
 ##### Wthik
 
 English Translation: Fisher
 
 Corresponding Western Constellation: Ursa Major
+
+<p><img src="illustrations/fisher.png" width="150" alt="Fisher" /></p>
 
 
 
