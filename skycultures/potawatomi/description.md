@@ -20,6 +20,11 @@ Constellation artwork by Pokagon Band Potawatomi illustrator, Aaron Martin, alig
 Please be aware that the artistic renderings of the constellations are the interpretations by one artist. That is, figures may be interpreted differently from community to community and even from person to person within the same community. Because this traditional knowledge spans tribes, bands, and even international borders, we encourage users of this sky culture to respectfully engage with alternative visions of the Potawatomi sky.
 
 
+### Curation Decisions
+
+Several Potawatomi constellations can be represented by different figures and names depending on season and story (e.g., Western “Orion” as Ktthe Sabé, Nenikboz, or Pondésé). For visual clarity in Stellarium, we selected one stick figure and one artwork per constellation but have documented alternatives in this sky culture description so learners understand the plural nature of the tradition rather than a single fixed mapping. Please see the full list of Potawatomi constellations below.
+
+
 ## Constellations
 
 ##### Thethak / Wabzhi / Bgak
@@ -235,7 +240,3 @@ This Label is being used to acknowledge the relationship between the creative pr
 #### TK Community Voice (TK CV)
 
 This Label is being used to encourage the sharing of stories and voices about this material. The Label indicates that existing knowledge or descriptions are incomplete or partial. Any community member is invited and welcome to contribute to our community knowledge about this event, photograph, recording or heritage item. Sharing our voices helps us reclaim our histories and knowledge. This sharing is an internal process.
-
-### Curation Decisions
-
-Several Potawatomi constellations can be represented by different figures and names depending on season and story (e.g., Western “Orion” as Ktthe Sabé, Nenikboz, or Pondésé). For visual clarity in Stellarium, we selected one stick figure and one artwork per constellation but have documented alternatives in this sky culture description so learners understand the plural nature of the tradition rather than a single fixed mapping. Please see the full list of Potawatomi constellations below.
