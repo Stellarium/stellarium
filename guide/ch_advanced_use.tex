@@ -802,6 +802,54 @@ Note that Spout use disables any multisampling setting (see Appendix~\ref{sec:co
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Show effects} 
+\label{sec:CommandLineOptions:Special:Show}
+
+\subsection{Sky Background}
+\label{sec:CommandLineOptions:Special:ColoredBackground}
+
+Stellarium is sometimes used for entertainment or artistic music performances. 
+From this community a request was placed to allow a non-black background. We can do that, but you must revert the color yourself.
+Setting a background color is not available in the usual GUI to avoid inadvertent changes that later confuse users. 
+You can play with the sky background in the Text User Interface (see section \ref{sec:plugins:TUI:commands}, feature 5.26). 
+In \file{config.ini}, it is stored in
+
+\begin{configfile}
+[color]
+sky_background_color  = 0.000000,0.000000,0.000000
+\end{configfile}
+
+\subsection{Star Trails}
+\label{sec:CommandLineOptions:Special:StarTrails}
+
+One of the oldest\newFeature{26.2}  and previously simplest techniques from the time of film-based night photography is the recording 
+of Earth's rotation by long-time exposure with an untracked camera. 
+This will, for example, identify the Polar Star as just not quite on the north celestial pole, but else show thousands of circular star trails. 
+While an exposure time of many hours is possible under dark skies, when the sky is too bright by remaining twilight or light pollution, 
+the exposure time meanwhile is often limited to minutes, else the picture is just flooded with unwanted background. 
+
+Stellarium can be made to simulate such images by a somewhat ``dirty trick'': Usually the image area is cleared between frames, 
+then the Milky Way, stars, Zodiacal light, grids, planets, atmosphere, landscape etc., and finally GUI panels are rendered into the scene. 
+By not clearing the image area, we can just add up everything that is rendered on-screen, like in a long-time exposure. 
+However, just as cars, airplanes, satellites or people with flashlights can ruin your awesome star trail photo, 
+some elements usually visible in Stellarium's sky would also create unwanted views. 
+Image a celestial grid or the Milky Way rotating with the sky, and twilight stacking all up and flooding the long-time exposure. 
+The trick implemented in this special mode draws one frame in ``normal'' mode, and then suppresses those elements and other details 
+which cause only smeared images like screen labels. A moderately long ``exposure'' can therefore still successfully show constellations or star labels.  
+
+This is an option probably only used by instructors or presenters and therefore not preconfigured for beginners. 
+To make use of it, you must assign a keyboard shortcut to the action ``Toggle star trails''
+found in the ``Display Options'' key shortcut actions (see \ref{sec:gui:help:hotkeys}). 
+While the mode is on, tapping \key{Ctrl} resets the trails. 
+It can make a nice ending scene in a presentation: show a moderately slow moving sky, and activate it.  
+The sky will fill with curves, hopefully impressing your audience. 
+You can also utilize it when talking about the problem of satellite constellations now destroying the sky. (Use realistic view, not icons, for satellites.) 
+Here your time speed should not be too fast, else satellites will just show up as dot chain. 
+
+Note that screenshots have to be made with system means while this mode is running. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \iffalse
 
 %% NOTE: We cannot provide accurate documentation on this topic at this time. 
@@ -849,7 +897,7 @@ Piper runs a web server which allows integration to \program{speechd}.
 
 With Stellarium it’s very easy to project the sky on a dome and create your own planetarium.
 
-\subsubsection{360° Projection}
+\subsection{360° Projection}
 You can use either a very expensive fisheye lens projector -- or a standard projector with a spherical mirror.
 Not only is spherical mirror projection less expensive, 
 but it produces a higher resolution image on the dome\footnote{\url{https://domeclub.com/#PxComp}},
@@ -872,7 +920,7 @@ it's quite easy to build your
 own\footnote{\url{https://docs.worldwidetelescope.org/diy-planetarium-dome/1/dome/#setting-up-the-projector-and-mirrors}} 
 -- and you can use a cheap convex safety mirror for testing before investing in a first-surface mirror.
 
-\subsubsection{Projector Specifications}
+\subsection{Projector Specifications}
 A major challenge with digital planetariums (360° cinemas) is the cross-reflection of light on the dome. 
 This is why projector \emph{contrast ratio} and \emph{colour saturation} are more important than brightness (lumens). 
 Light `bouncing' around the dome causes the planetarium image to `wash out' (lose colour) -- 
@@ -882,7 +930,7 @@ Similarly, the higher the contrast ratio, the sharper and crisper the planetariu
 4K projectors are now very affordable, allowing you to deliver the same high-quality visuals in your small
 dome as large planetariums!
 
-\subsubsection{Computer Configuration}
+\subsection{Computer Configuration}
 The best way to operate a planetarium is with a dual display arrangement, i.e., 
 computer screen as the primary (main) display, and projector as the secondary (extended) display.
 
@@ -893,7 +941,7 @@ the dome (even with no application open), use a high-resolution image of stars a
 To function as a planetarium, Stellarium should be configured to open in full screen mode on the extended
 display (see below).
 
-\subsubsection{System Configuration}
+\subsection{System Configuration}
 To minimise image distortion at the back of the dome, it’s worth carrying out the slightly complex
 \program{Meshmapper} configuration\footnote{\url{https://paulbourke.net/dome/meshmapper}}. 
 This creates a custom distortion file for your specific system (i.e., your dome
@@ -901,7 +949,7 @@ diameter, stand height, spherical mirror dimensions);
 and the image improvement will be remarkable\footnote{\url{https://domeclub.com/images/Meshmapper-1152w.jpg}}. 
 This custom distortion file (‘warp mesh data file’) can then be used with dome applications like Stellarium.
 
-\subsubsection{Stellarium Configuration}
+\subsection{Stellarium Configuration}
 To enable planetarium spherical mirror projection, the \file{config.ini} file needs to include the following:
 
 \begin{configfile}
@@ -962,7 +1010,7 @@ star_twinkle_amount = 0.50
 \end{configfile}
 
 
-\subsubsection{Further notes}
+\subsection{Further notes}
 This feature is rarely used by the current developers and cannot be tested on standard hardware. 
 See ongoing discussion on Github\footnote{\url{https://github.com/Stellarium/stellarium/issues/1914} and \\
 \url{https://github.com/Stellarium/stellarium/issues/3535}} and get involved.

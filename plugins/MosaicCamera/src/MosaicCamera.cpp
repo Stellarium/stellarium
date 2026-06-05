@@ -608,6 +608,9 @@ void MosaicCamera::setCurrentVisibility(bool visible)
 
 void MosaicCamera::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	if (!isEnabled())
 		return;
 

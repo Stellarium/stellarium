@@ -2155,6 +2155,8 @@ void GridLinesMgr::update(double deltaTime)
 
 void GridLinesMgr::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
 	if (!gridlinesDisplayed)
 		return;
 

@@ -3341,6 +3341,10 @@ void Satellites::draw(StelCore* core)
 			sat->draw(core, painter);
 	}
 
+	// In screen accumulation mode (star trails), circles or pointer should be suppressed.
+	if (!core->getFlagClearSky())
+		return;
+
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
 

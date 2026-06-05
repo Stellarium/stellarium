@@ -758,7 +758,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		// TODO: compute eclipse factor also for Lunar eclipses! (lp:#1471546)
 
 		// No need to calculate if not visible
-		if (!fader.getInterstate())
+		if (!fader.getInterstate() || !core->getFlagClearSky())
 		{
 			// GZ 20180114: Why did we add light pollution if atmosphere was not visible?????
 			// And what is the meaning of 0.001? Approximate contribution of stellar background? Then why is it 0.0001 below???
@@ -800,6 +800,8 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 void AtmosphereShowMySky::draw(StelCore* core)
 {
 	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
+	if (!core->getFlagClearSky())
+		return;
 	if (StelApp::getInstance().getVisionModeNight())
 		return;
 
