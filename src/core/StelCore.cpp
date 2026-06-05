@@ -116,7 +116,7 @@ StelCore::StelCore()
 	, de440Active(false)
 	, de441Active(false)
 	, flagClearSky(true)
-	, flagClearSkyOnce(0)
+	, clearSkyOnceCounter(0)
 {
 	setObjectName("StelCore");
 	registerMathMetaTypes();
@@ -567,18 +567,18 @@ void StelCore::preDraw()
 	QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
 	gl->glClearColor(backColor[0], backColor[1], backColor[2], 0.f);
 
-	if (flagClearSkyOnce==1)
+	if (clearSkyOnceCounter==1)
 	{
 		flagClearSky=false; // Allow drawing one frame with features
-		flagClearSkyOnce=0;
+		clearSkyOnceCounter=0;
 	}
 
-	if (flagClearSky || (flagClearSkyOnce==3))
+	if (flagClearSky || (clearSkyOnceCounter==3))
 	{
 		gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-		if (flagClearSkyOnce>=2)
+		if (clearSkyOnceCounter>=2)
 		{
-			flagClearSkyOnce--;
+			clearSkyOnceCounter--;
 			flagClearSky=true; // Let other modules draw once!
 		}
 	}
@@ -3383,8 +3383,12 @@ void StelCore::setFlagClearSky(const bool state)
 }
 
 // Initiate a reset chain for preDraw()
+// The counter is started at 3 to draw 2 sky (atmosphere) frames before clearing and suppressing further area light components.
+// See preDraw() for the logic. (Improvements possible!)
+// The last before suppressing atmosphere is supposed to provide a sky background for the star trails.
+// A deep twilight looks good with satellite streaks.
 void StelCore::setClearSkyOnce()
 {
 	if (!flagClearSky)
-		flagClearSkyOnce = 3;
+		clearSkyOnceCounter = 3;
 }

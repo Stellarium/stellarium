@@ -831,7 +831,7 @@ the exposure time meanwhile is often limited to minutes, else the picture is jus
 Stellarium can be made to simulate such images by a somewhat ``dirty trick'': Usually the image area is cleared between frames, 
 then the Milky Way, stars, Zodiacal light, grids, planets, atmosphere, landscape etc., and finally GUI panels are rendered into the scene. 
 By not clearing the image area, we can just add up everything that is rendered on-screen, like in a long-time exposure. 
-However, just as cars, airplanes, satellites or people with flashlights can ruin your awesome star streak photo, 
+However, just as cars, airplanes, satellites or people with flashlights can ruin your awesome star trail photo, 
 some elements usually visible in Stellarium's sky would also create unwanted views. 
 Image a celestial grid or the Milky Way rotating with the sky, and twilight stacking all up and flooding the long-time exposure. 
 The trick implemented in this special mode draws one frame in ``normal'' mode, and then suppresses those elements and other details 
@@ -839,7 +839,12 @@ which cause only smeared images like screen labels. A moderately long ``exposure
 
 This is an option probably only used by instructors or presenters and therefore not preconfigured for beginners. 
 To make use of it, you must assign a keyboard shortcut to the action ``Toggle star trails''
-found in the ``Display Options'' key shortcut actions (see \ref{sec:gui:help:hotkeys}).
+found in the ``Display Options'' key shortcut actions (see \ref{sec:gui:help:hotkeys}). 
+While the mode is on, tapping \key{Ctrl} resets the trails. 
+It can make a nice ending scene in a presentation: show a moderately slow moving sky, and activate it.  
+The sky will fill with curves, hopefully impressing your audience. 
+You can also utilize it when talking about the problem of satellite constellations now destroying the sky. (Use realistic view, not icons, for satellites.) 
+Here your time speed should not be too fast, else satellites will just show up as dot chain. 
 
 Note that screenshots have to be made with system means while this mode is running. 
 

@@ -387,7 +387,7 @@ public:
 	Vec3d getAberrationVec(double JD) const;
 
 	//! Force clearing framebuffer on next redraw.
-	//! This should be called while in no-clear mode (painting diurnal star streaks) on major changes which destroy the view:
+	//! This should also be called while in no-clear mode (painting diurnal star streaks) on major changes which destroy the view:
 	//! Dialog closing or moving, zooming, moving view etc.
 	void setClearSkyOnce();
 
@@ -1062,6 +1062,6 @@ private:
 	Vec3d calculateAberrationVec(double JD) const; // Actual calculation
 
 	bool flagClearSky; // Keep this true unless you want to render star trails.
-	int flagClearSkyOnce; // used to force full redraw during star trail mode.
+	int clearSkyOnceCounter; // used to force full redraw during star trail mode.
 };
 #endif // STELCORE_HPP
