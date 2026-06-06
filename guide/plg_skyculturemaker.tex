@@ -37,8 +37,49 @@ Once activated, a toolbar button \guibutton{0.5}{bt_SCM_Off.png} will appear.
 This button is also an indicator of whether the SCM is currently open: pressing it toggles the icon to a glowing version and opens the start dialog shown in Figure~\ref{fig:plugins:SCM:DialogStart}.
 
 The \textit{Create} button opens the main dialog where you can build a new sky culture.
-Although there is an \textit{Edit} button present already, it is disabled because the SCM does currently not support editing existing sky cultures.
+If the Sky Culture Converter was enabled at build time, a \textit{Convert} button also appears (see section~\ref{sec:plugins:SCM:Converting} for details).
+The \textit{Edit} button may be present already, but it is disabled because the SCM does currently not support editing existing sky cultures.
 This feature is planned for a future release.
+
+\subsection{Converting an Existing Sky Culture}
+\label{sec:plugins:SCM:Converting}
+
+The SCM includes a UI for the \textit{Sky Culture Converter} (section~\ref{ch:SkyCultures:converter}) that transforms legacy sky cultures using the old \file{.fab} format into the new JSON-based format (Chapter~\ref{ch:SkyCultures}).
+
+\subsubsection*{Build-time requirement}
+The converter is not built by default.
+To enable it, pass \texttt{-DSCM\_SHOULD\_ENABLE\_CONVERTER=ON} to CMake when configuring the build.
+The converter requires Qt~6 or later and it is automatically disabled for Qt~5 builds and Windows ARM64 targets.
+It also depends on \href{https://www.html-tidy.org/}{Tidy HTML}, \href{https://www.gnu.org/software/gettext/}{GNU gettext}, and \href{https://www.zlib.net}{zlib}. 
+CMake will download the converter library automatically via CPM.
+
+\subsubsection*{Using the converter}
+When the converter has been built, a \textit{Convert} button appears in the SCM start dialog alongside the \textit{Create} button (Figure~\ref{fig:plugins:SCM:DialogStartConverter}).
+
+\begin{figure}[ht]
+\centering\includegraphics[width=0.35\columnwidth]{scm_dialog_start_converter.png}
+\caption{SCM plugin: start dialog with convert button}
+\label{fig:plugins:SCM:DialogStartConverter}
+\end{figure}
+
+\begin{enumerate}
+\item Press \textit{Convert} in the start dialog.
+\item A file-chooser opens (Figure~\ref{fig:plugins:SCM:DialogStartConverterFile}). Select an archive that contains the old sky culture files.
+Supported formats: \texttt{.zip}, \texttt{.rar}, \texttt{.tar}, \texttt{.7z}.
+Note that only plain \texttt{.tar} archives are supported. 
+Compressed variants such as \texttt{.tar.gz} or \texttt{.tar.bz2} are not.
+\item The converter processes the archive and writes the resulting files directly into Stellarium's \directory{skycultures} directory.
+If the application does not have write permission there, a dialog prompts you to choose an alternative output folder.
+\end{enumerate}
+
+\begin{figure}[ht]
+\centering\includegraphics[width=0.35\columnwidth]{scm_dialog_converter_file.png}
+\caption{SCM plugin: file-chooser of converter dialog}
+\label{fig:plugins:SCM:DialogStartConverterFile}
+\end{figure}
+
+\noindent\textbf{Note:} Sky culture identifiers are case-sensitive.
+For example, \texttt{chinese\_chenzhuo} and \texttt{chinese\_Chenzhuo} are treated as different cultures.
 
 \subsection{Creating a New Sky Culture}
 \label{sec:plugins:SCM:CreatingSkyCulture}
@@ -287,6 +328,8 @@ under the supervision of Jan Heinrich Merker and with Susanne M.\ Hoffmann as pr
 
 If you use this plugin in scientific publications, please cite this User Guide and \citet{Zotti-etal:IAUS399}.
 
+%% so that all pics for this chapter come before the next plugin's chapter
+\clearpage
 
 %%% Local Variables: 
 %%% mode: latex
