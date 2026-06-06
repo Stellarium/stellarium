@@ -378,10 +378,10 @@ public:
 	{
 		prepareGeometryChange();
 		rect.setSize(size);
-		StelApp *app=&StelApp::getInstance();
-		if (app)
+		if (StelApp::isInitialized())
 		{
-			StelCore *core=app->getCore();
+			const auto& app = StelApp::getInstance();
+			StelCore *core = app.getCore();
 			if (core && core->getJD()!=0.0)
 				core->setClearSkyOnce();
 		}
