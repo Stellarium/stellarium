@@ -6,9 +6,8 @@
 \newpage
 \section{Sky Culture Maker Plugin}
 \label{sec:plugins:SCM}
+\sectionauthor*{Luca-Philipp Grumbach}
 \sectionauthor*{Susanne M. Hoffmann}
-
-
 
 \subsection{Introduction}
 \label{sec:plugins:SCM:Introduction}
@@ -23,6 +22,212 @@ and audio information output of sky culture info for the user), the requirements
 The plugin is still in development, originally set up as a student project in a software development course, 
 but tests with other students (from the humanities faculty) and researchers in cultural astronomy showed that it is already useful for users who are able to edit the source code. 
 Future versions will hopefully improve the SCM. 
+
+\subsection{Getting Started}
+\label{sec:plugin:SCM:GettingStarted}
+
+The SCM plugin is disabled by default. 
+In order to use it, you will need to activate it first according to section~\ref{sec:Plugins:EnablingPlugins}.
+Once activated, a tool bar button for the SCM will appear: \guibutton{0.5}{bt_SCM_Off.png}.
+This button not only serves as your entry point to the SCM, but also as an indicator of whether the SCM is currently open or closed.
+Pressing the button will change the icon into a glowing version and you will be greeted by the start dialog:
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.3\columnwidth]{scm_dialog_start.png}
+\caption{UI of the SCM plugin: start dialog}
+\label{fig:plugins:SCM:DialogStart}
+\end{figure}
+
+The \textit{Create} button will open the main dialog, where you can create new sky cultures.
+Although there is an \textit{Edit} button present already, it is disabled because the SCM does currently not support editing existing sky cultures. 
+We hope to implement this feature in a future update.
+
+\subsection{Creating a new sky culture}
+\label{sec:plugin:SCM:CreatingSkyCulture}
+
+After pressing \textit{Create} in the start dialog, you will be greeted by the \textit{Overview} tab of the main dialog.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_skyculture_overview.png}
+\caption{UI of the SCM plugin: Overview tab of the main dialog}
+\label{fig:plugins:SCM:TabOverview}
+\end{figure}
+
+In the first text input, you may enter a name for your new sky culture. This field is mandatory.
+Below, you will find a list of constellations of the current sky culture.
+Since we have not yet created anything, this list is empty.
+Before we change that by creating a new constellation, we will have a look at the other tabs of the main dialog.
+
+The \textit{Description} tab is used to write down textual information on the sky culture that you would like to create.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_skyculture_description.png}
+\caption{UI of the SCM plugin: Description tab of the main dialog}
+\label{fig:plugins:SCM:TabDescription}
+\end{figure}
+
+Here you will find dropdown menus, as well as optional and mandatory text input fields.
+Make sure to scroll all the way down and provide as much information as possible.
+Your inputs will be used to generate a sky culture description file, which will be displayed inside Stellarium.
+
+The next tab is the \textit{Common Names} tab.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_skyculture_common-names.png}
+\caption{UI of the SCM plugin: Common Names tab of the main dialog}
+\label{fig:plugins:SCM:TabCommonNames}
+\end{figure}
+
+The table at the top shows you which common name entries you have created for this sky culture.
+Below that, you will find input fields for new common names.
+In order to automatically fill in the type, identifier and the english name, you may select an object inside Stellarium and then press the \textit{Copy Data From Selected Object} button.
+Similarly to the \textit{Description} tab, mandatory fields are marked with an asterisk.
+Note that in some cultures, planets can have different names depending on the time of day.
+The \textit{Visible} dropdown can be used to select whether the name will always be visible, or only during morning or evening.
+For other objects, the value is set to \textit{Always visible} and can not be changed.
+
+To actually save the data from the input fields, press \textit{Save As New Entry}. Beware that this will clear the input fields.
+If you wish to edit a common name that you have already saved, select it in the table and the input fields will be filled with the current values.
+Make your edits and press \textit{Update Selected Enty} to override the previous values of the selected common name.
+In order to remove a common name from the list, select it in the table and press \textit{Remove Selected Entry}.
+Note that this is irreversable.
+
+The last tab is used to specify the \textit{Location} of the new sky culture.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_skyculture_location.png}
+\caption{UI of the SCM plugin: Location tab of the main dialog}
+\label{fig:plugins:SCM:TabLocation}
+\end{figure}
+
+TODO
+
+\subsection{Creating a new constellation}
+\label{sec:plugin:SCM:CreatingConstellation}
+
+In the following steps we will fill the constellation list of the \textit{Overview} tab by creating a simple constellation.
+In order to do that, head back to the \textit{Overview} tab and press the \textit{Add Constellation} button below the constellation list.
+This will open the \textit{Constellation Editor} dialog.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_constedit_drawing.png}
+\caption{UI of the SCM plugin: Drawing tab of the Constellation Editor}
+\label{fig:plugins:SCM:DialogConstEditTabDrawing}
+\end{figure}
+
+Here you can see three tabs. The \textit{Drawing} tab provides you with the necessary tools to draw constellations in the sky of Stellarium.
+To start drawing, press the \textit{Pen} button and hover over a star.
+You will notice that there is a snapping feature which automatically selects objects near your cursor.
+With a right click you can start drawing from the selected object. 
+Move your mouse to another object and finish drawing the line with another right click.
+In order to stop drawing, make a double right click or simply press the \textit{Pen} button again.
+Using this workflow, you can draw complex stick figures for your constellation.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.3\columnwidth]{scm_drawing.png}
+\caption{Example constellation drawing}
+\label{fig:plugins:SCM:Drawing}
+\end{figure}
+
+Mistakes can be fixed either using the \textit{Undo} button or the \textit{Eraser} tool.
+To erase lines, press the \textit{Eraser} button and then keep your right mouse button pressed while crossing the lines you would like to erase.
+
+In the second tab, you can specify innformation about the new constellation.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_constedit_information.png}
+\caption{UI of the SCM plugin: Information tab of the Constellation Editor}
+\label{fig:plugins:SCM:DialogConstEditTabInformation}
+\end{figure}
+
+The only mandatory fields are the english name and the unique identifier of the constellation.
+However, we recommend filling as many fields as possible.
+A possibler identifier is automatically created from the english name, however you may change it if needed.
+
+In the third tab, you can upload an \textit{Artwork} for the constellation.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_constedit_artwork.png}
+\caption{UI of the SCM plugin: Artwork tab of the Constellation Editor}
+\label{fig:plugins:SCM:DialogConstEditTabArtwork}
+\end{figure}
+
+For this example, I have chosen the \textit{xonecuilli} image from the \textit{aztec} sky culture by pressing \textit{Upload Image} and then selected the file in the file browser.
+To align this image with the constellation lines, there are three anchor points, represented as blue dots that appear on the image.
+Select an anchor point and then select an object in Stellarium, for example a star of the constellation.
+By pressing ``Bind Star``, the selected object will be bound to the anchor point.
+Now you can move the anchor point to the spot in the image that the object represents.
+In this example it looks like this:
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.3\columnwidth]{scm_drawing_artwork.png}
+\caption{Example constellation drawing with artwork}
+\label{fig:plugins:SCM:Drawing}
+\end{figure}
+
+If no image is visible, try moving the anchor points in the artwork tab.
+The SCM does not draw the image if it becomes too distorted.
+
+If you are done with the constellation, press the \textit{Save} button and you will be back in the main dialog.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{scm_test_constellations.png}
+\caption{UI of the SCM plugin: Main dialog with example constellations}
+\label{fig:plugins:SCM:TestConstellations}
+\end{figure}
+
+In this example there are two constellations shown in the list.
+You can select one by clicking on it and then choose to \textit{Edit} the constellation or \textit{Remove} it.
+
+Note that there is also a button for adding a dark constellation.
+The process is very similar to adding a normal constellation, with the difference that in the \textit{Dark Constellation Editor} you can not select sky objects.
+To draw lines, you simply click anywhere in the sky and the coordinate of that point is used.
+
+When you are done with the sky culture, you need to choose a license from the dropdown menu in the overview tab.
+Next, you may proceed by pressing the \textit{Export Sky Culture} button.
+If you have not filled all required fields correctly, an error message will appear and notify you about the missing information.
+Otherwise, you will be presented the \textit{Export Dialog}. 
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_export.png}
+\caption{UI of the SCM plugin: Export dialog}
+\label{fig:plugins:SCM:DialogExport}
+\end{figure}
+
+Here, please read through the six points and make sure you followed them.
+There is also a checkbox, allowing you to turn off automatic merging of polylines.
+If this is checked, for example the two lines [123,456] and [456,789] would be merged into one [123,456,789].
+It is recommended to keep this setting checked.
+
+You may now proceed to either \textit{Export} the sky culture, which will keep the SCM open, or \textit{Export and Exit} which will also close the SCM plugin.
+
+\subsection{Closing the plugin}
+
+You may close the plugin either by using the \textit{X} icon in the top right corner of dialog windows or by pressing \textit{Cancel} wherever possible.
+This will prompt you with the following dialog:
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_close.png}
+\caption{UI of the SCM plugin: Close dialog}
+\label{fig:plugins:SCM:DialogClose}
+\end{figure}
+
+Pressing \textit{Hide editor} will hide all windows of the SCM but keep all data intact.
+If you open the SCM again by pressing the tool bar button, everything will be in the state that you left it in.
+However, pressing \textit{Close without saving} will shut down the SCM plugin and all data that you have not saved yet will be lost.
+You may abort this dialog without stopping the plugin by pressing \textit{Don't close}.
+
+\subsection{Further development}
+The plugin and its description here are still in development: in the current state, it provides some fundamental aids, but isn't fully functional (beta). 
+When you test the wizard, please let us know what you miss or what isn't working. We hope to find the time to continue development.   
+
+\subsection{Acknowledgments}
+Fabian Hofer, Vincent Gerlach, Luca-Philipp Grumbach, Richard Hofmann, and Mher Mnatsakanyan developed this plugin in 2025 at the University of Jena 
+under supervision of Jan Heinrich Merker and with Susanne M. Hoffmann as product owner. 
+
+If you are using this plugin in scientific publications, please cite this User Guide and \citet{Zotti-etal:IAUS399}. 
+
+%% OLD
 
 \subsection{An Example}
 \label{sec:plugin:SCM:example}
@@ -67,22 +272,6 @@ Once you'll be done with all constellations of your sky culture, press \button{E
 Select the \file{skycultures} sub-folder inside your user data directory (create it if necessary) and press \button{save}. 
 This outputs a new folder with the files \file{index.json}, \file{description.md}, \file{territory.geojson}, 
 \file{CMakeFile.txt} and a sub-folder \file{illustrations} that stores all the uploaded images (likely renamed). 
-
-% Copying the new folder to your Stellarium programm folder will bring up your new contribution in the sky culture menu of your (local) Stellarium installation. 
-% \textbf{Attention!} This requires administrator rights. 
-%% SORRY BUT NO! As a user you never copy anything into the program folder. 
-
-\textbf{Note:} Unfortunately, it is currently not yet possible to edit an existing sky culture in the wizard. Further changes need to be done manually. 
-
-\subsection{Further development}
-The plugin and its description here are still in development: in the current state, it provides some fundamental aids, but isn't fully functional (beta). 
-When you test the wizard, please let us know what you miss or what isn't working. We hope to find the time to continue development.   
-
-\subsection{Acknowledgments}
-Fabian Hofer, Vincent Gerlach, Luca-Philipp Grumbach, Richard Hofmann, and Mher Mnatsakanyan developed this plugin in 2025 at the University of Jena 
-under supervision of Jan Heinrich Merker and with Susanne M. Hoffmann as product owner. 
-
-If you are using this plugin in scientific publications, please cite this User Guide and \citet{Zotti-etal:IAUS399}. 
 
 %%% Local Variables: 
 %%% mode: latex
