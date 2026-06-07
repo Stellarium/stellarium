@@ -99,25 +99,27 @@ void TextureAverageComputer::init()
 	GL(gl.glActiveTexture(GL_TEXTURE0));
 	GL(gl.glBindTexture(GL_TEXTURE_2D, texture));
 
-	std::vector<Vec4f> data;
+	std::vector<Vector4<uint8_t>> data;
+	constexpr uint8_t M = 255;
 	for(int n=0; n<10; ++n)
-		data.emplace_back(1,1,1,1);
+		data.emplace_back(M,M,M,M);
 	for(int n=0; n<10; ++n)
-		data.emplace_back(1,1,1,0);
+		data.emplace_back(M,M,M,0);
 	for(int n=0; n<10; ++n)
-		data.emplace_back(1,1,0,0);
+		data.emplace_back(M,M,0,0);
 	for(int n=0; n<10; ++n)
-		data.emplace_back(1,0,0,0);
+		data.emplace_back(M,0,0,0);
 
 	constexpr int width = 63;
 	for(int n=data.size(); n<width; ++n)
 		data.emplace_back(0,0,0,0);
 
-	GL(gl.glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,data.size(),1,0,GL_RGBA,GL_FLOAT,&data[0][0]));
+	GL(gl.glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,data.size(),1,0,GL_RGBA,GL_UNSIGNED_BYTE,&data[0][0]));
 	const auto mipmapAverage = getTextureAverageSimple(texture, width, 1);
 
-	const auto sum = std::accumulate(data.begin(), data.end(), Vec4f(0,0,0,0));
-	const auto trueAverage = sum / float(data.size());
+	const auto sum = std::accumulate(data.begin(), data.end(), Vec4f(0,0,0,0),
+	                                 [](const Vec4f& left, const Vector4<uint8_t>& right) { return left + Vec4f(right); });
+	const auto trueAverage = Vec4f(sum) / float(data.size()) / M;
 	qDebug().nospace() << "Test texture true average: "
 					   << trueAverage[0] << ", "
 					   << trueAverage[1] << ", "
