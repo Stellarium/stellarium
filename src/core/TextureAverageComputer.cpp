@@ -25,9 +25,9 @@
 Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, const int width, const int height)
 {
 	// Get average value of the pixels as the value of the deepest mipmap level
-	gl.glActiveTexture(GL_TEXTURE0);
-	gl.glBindTexture(GL_TEXTURE_2D, texture);
-	gl.glGenerateMipmap(GL_TEXTURE_2D);
+	GL(gl.glActiveTexture(GL_TEXTURE0));
+	GL(gl.glBindTexture(GL_TEXTURE_2D, texture));
+	GL(gl.glGenerateMipmap(GL_TEXTURE_2D));
 
 	using namespace std;
 	// Formula from the glspec, "Mipmapping" subsection in section 3.8.11 Texture Minification
@@ -37,14 +37,14 @@ Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, cons
 #ifndef NDEBUG
 	// Sanity check
 	int deepestMipmapLevelWidth=-1, deepestMipmapLevelHeight=-1;
-	gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, deepestLevel, GL_TEXTURE_WIDTH, &deepestMipmapLevelWidth);
-	gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, deepestLevel, GL_TEXTURE_HEIGHT, &deepestMipmapLevelHeight);
+	GL(gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, deepestLevel, GL_TEXTURE_WIDTH, &deepestMipmapLevelWidth));
+	GL(gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, deepestLevel, GL_TEXTURE_HEIGHT, &deepestMipmapLevelHeight));
 	assert(deepestMipmapLevelWidth==1);
 	assert(deepestMipmapLevelHeight==1);
 #endif
 
 	Vec4f pixel;
-	gl.glGetTexImage(GL_TEXTURE_2D, deepestLevel, GL_RGBA, GL_FLOAT, &pixel[0]);
+	GL(gl.glGetTexImage(GL_TEXTURE_2D, deepestLevel, GL_RGBA, GL_FLOAT, &pixel[0]));
 	return pixel;
 }
 
@@ -58,26 +58,26 @@ Vec4f TextureAverageComputer::getTextureAverageWithWorkaround(const GLuint textu
 	const auto potWidth  = StelUtils::getSmallerPowerOfTwo(npotWidth);
 	const auto potHeight = StelUtils::getSmallerPowerOfTwo(npotHeight);
 
-	gl.glActiveTexture(GL_TEXTURE0);
-	gl.glBindTexture(GL_TEXTURE_2D, texture);
-	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	GL(gl.glActiveTexture(GL_TEXTURE0));
+	GL(gl.glBindTexture(GL_TEXTURE_2D, texture));
+	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 
 	blitTexProgram->bind();
 
 	GLint oldViewport[4];
-	gl.glGetIntegerv(GL_VIEWPORT, oldViewport);
+	GL(gl.glGetIntegerv(GL_VIEWPORT, oldViewport));
 	GLint oldFBO=-1;
-	gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO);
+	GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
 
-	gl.glBindFramebuffer(GL_FRAMEBUFFER, potFBO);
-	gl.glViewport(0,0,potWidth,potHeight);
+	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, potFBO));
+	GL(gl.glViewport(0,0,potWidth,potHeight));
 
-	gl.glBindVertexArray(vao);
-	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	gl.glBindVertexArray(0);
+	GL(gl.glBindVertexArray(vao));
+	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
+	GL(gl.glBindVertexArray(0));
 
-	gl.glViewport(oldViewport[0], oldViewport[1], oldViewport[2], oldViewport[3]);
-	gl.glBindFramebuffer(GL_FRAMEBUFFER, oldFBO);
+	GL(gl.glViewport(oldViewport[0], oldViewport[1], oldViewport[2], oldViewport[3]));
+	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, oldFBO));
 
 	blitTexProgram->release();
 
@@ -94,10 +94,10 @@ Vec4f TextureAverageComputer::getTextureAverage(const GLuint texture)
 void TextureAverageComputer::init()
 {
 	GLuint texture = -1;
-	gl.glGenTextures(1, &texture);
+	GL(gl.glGenTextures(1, &texture));
 	Q_ASSERT(texture>0);
-	gl.glActiveTexture(GL_TEXTURE0);
-	gl.glBindTexture(GL_TEXTURE_2D, texture);
+	GL(gl.glActiveTexture(GL_TEXTURE0));
+	GL(gl.glBindTexture(GL_TEXTURE_2D, texture));
 
 	std::vector<Vec4f> data;
 	for(int n=0; n<10; ++n)
@@ -113,7 +113,7 @@ void TextureAverageComputer::init()
 	for(int n=data.size(); n<width; ++n)
 		data.emplace_back(0,0,0,0);
 
-	gl.glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,data.size(),1,0,GL_RGBA,GL_FLOAT,&data[0][0]);
+	GL(gl.glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,data.size(),1,0,GL_RGBA,GL_FLOAT,&data[0][0]));
 	const auto mipmapAverage = getTextureAverageSimple(texture, width, 1);
 
 	const auto sum = std::accumulate(data.begin(), data.end(), Vec4f(0,0,0,0));
@@ -144,8 +144,8 @@ void TextureAverageComputer::init()
 		qDebug() << "Mipmap average works correctly";
 	}
 
-	gl.glBindTexture(GL_TEXTURE_2D, 0);
-	gl.glDeleteTextures(1, &texture);
+	GL(gl.glBindTexture(GL_TEXTURE_2D, 0));
+	GL(gl.glDeleteTextures(1, &texture));
 
 	inited = true;
 }
@@ -160,25 +160,25 @@ TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions
 	if(!workaroundNeeded) return;
 
 	GLint oldFBO=-1;
-	gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO);
+	GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
 
-	gl.glGenFramebuffers(1, &potFBO);
-	gl.glGenTextures(1, &potTex);
-	gl.glBindTexture(GL_TEXTURE_2D, potTex);
+	GL(gl.glGenFramebuffers(1, &potFBO));
+	GL(gl.glGenTextures(1, &potTex));
+	GL(gl.glBindTexture(GL_TEXTURE_2D, potTex));
 	const auto potWidth  = StelUtils::getSmallerPowerOfTwo(npotWidth);
 	const auto potHeight = StelUtils::getSmallerPowerOfTwo(npotHeight);
-	gl.glTexImage2D(GL_TEXTURE_2D,0,internalFormat,potWidth,potHeight,0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
-	gl.glBindTexture(GL_TEXTURE_2D,0);
-	gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,potFBO);
-	gl.glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,potTex,0);
+	GL(gl.glTexImage2D(GL_TEXTURE_2D,0,internalFormat,potWidth,potHeight,0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr));
+	GL(gl.glBindTexture(GL_TEXTURE_2D,0));
+	GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,potFBO));
+	GL(gl.glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,potTex,0));
 	[[maybe_unused]] const auto status=gl.glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
 	Q_ASSERT(status==GL_FRAMEBUFFER_COMPLETE);
-	gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+	GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0));
 
-	gl.glGenVertexArrays(1, &vao);
-	gl.glBindVertexArray(vao);
-	gl.glGenBuffers(1, &vbo);
-	gl.glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	GL(gl.glGenVertexArrays(1, &vao));
+	GL(gl.glBindVertexArray(vao));
+	GL(gl.glGenBuffers(1, &vbo));
+	GL(gl.glBindBuffer(GL_ARRAY_BUFFER, vbo));
 	const GLfloat vertices[]=
 	{
 		-1, -1,
@@ -186,12 +186,12 @@ TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions
 		-1,  1,
 		 1,  1,
 	};
-	gl.glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW);
+	GL(gl.glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW));
 	constexpr GLuint attribIndex=0;
 	constexpr int coordsPerVertex=2;
-	gl.glVertexAttribPointer(attribIndex, coordsPerVertex, GL_FLOAT, false, 0, 0);
-	gl.glEnableVertexAttribArray(attribIndex);
-	gl.glBindVertexArray(0);
+	GL(gl.glVertexAttribPointer(attribIndex, coordsPerVertex, GL_FLOAT, false, 0, 0));
+	GL(gl.glEnableVertexAttribArray(attribIndex));
+	GL(gl.glBindVertexArray(0));
 
 	blitTexProgram.reset(new QOpenGLShaderProgram);
     blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, 1+R"(
@@ -219,15 +219,15 @@ void main()
 	blitTexProgram->setUniformValue("tex", 0);
 	blitTexProgram->release();
 
-	gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, oldFBO);
+	GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, oldFBO));
 }
 
 TextureAverageComputer::~TextureAverageComputer()
 {
-	gl.glDeleteTextures(1, &potTex);
-	gl.glDeleteFramebuffers(1, &potFBO);
-	gl.glDeleteVertexArrays(1, &vao);
-	gl.glDeleteBuffers(1, &vbo);
+	GL(gl.glDeleteTextures(1, &potTex));
+	GL(gl.glDeleteFramebuffers(1, &potFBO));
+	GL(gl.glDeleteVertexArrays(1, &vao));
+	GL(gl.glDeleteBuffers(1, &vbo));
 }
 
 #endif
