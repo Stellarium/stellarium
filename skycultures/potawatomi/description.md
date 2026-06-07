@@ -2,7 +2,22 @@
 
 ## Introduction
 
-Potawatomi (also called Bodwéwadmi and Neshnabé among others) people are Indigenous to North America with ancestral homelands that span the north east to just west of the Great Lakes region and currently reside in both the United States and Canada. While there are dozens of individual tribes or bands within the larger Potawatomi nation, the Potawatomi Star Knowledge project team members who developed this sky culture are enrolled citizens of the Pokagon Band of Potawatomi, a federally recognized tribe located in southwestern Michigan.
+Potawatomi (also called Bodwéwadmi and Neshnabé among others) people are Indigenous to North America with ancestral homelands that span the north east to just west of the Great Lakes region and currently reside in both the United States and Canada. While there are dozens of individual tribes or bands within the larger Potawatomi nation, the Potawatomi Star Knowledge project team members who developed this sky culture are enrolled citizens of the Pokagon Band of Potawatomi, a federally recognized tribe located in southwestern Michigan. You can learn more about the Pokégnêk Bodwéwadmik (Pokagon Potawatomi \[people\]) by visiting their government website at: https://www.pokagonband-nsn.gov/
+
+For more information about Potawatomi history and culture, consider the following sources (not an exhaustive list):
+
+ - Everett Claspy, _The Dowagiac-Sister Lakes Resort Area: And More about Its Potawatomi Indians_ (1966)
+ - James A. Clifton, _The Pokagons, 1683-1983_ (University Press Of America, 1984)
+ - James Clifton et al., _People of the Three Fires: The Ottawa, Potawatomi, and Ojibway of Michigan_ (Gritc Pub, 1986)
+ - James A. Clifton and Frank W. Porter, _Potawatomi_ (Chelsea House Pub, 1987)
+ - R. David Edmunds, _The Potawatomis: Keepers of the Fire_, Reprint edition (University of Oklahoma Press, 1987)
+ - Raymond C. C. Lantz, _Potawatomi Indians of Michigan, 1843-1904, Including Some Ottawa and Chippewa, 1843-1866, and Potawatomi of Indiana, 1869 and 1885_ (Heritage Books, Inc, 2019)
+ - John N. Low, _Imprints: The Pokagon Band of Potawatomi Indians and the City of Chicago_, 1st edition (Michigan State University Press, 2016)
+ - Blaire Morseau, _[Mapping Neshnabé Futurity: Celestial Currents of Sovereignty in Potawatomi Skies, Lands, and Waters](https://uapress.arizona.edu/book/mapping-neshnabe-futurity)_ (University of Arizona Press, 2025)
+ - Benjamin Secunda, _[In the Shadow of Eagle’s Wings: The Effects of Removal on the Unremoved Potawatomi](https://www.librarything.com/work/14044896)_ (University of Notre Dame, 2008)
+ - Jim Thunder, Sr. and Mary Jane Thunder, Wete Yathmownen, _[Real Stories: Potawatomi Oral History](https://shop.fcpotawatomi.com/products/wete-yathmownen-real-stories-potawatomi-oral-history/)_ (2018)
+ - Wetzel, _Gathering the Potawatomi Nation_, First edition (OUP, 2016)
+
 
 ## Description
 
