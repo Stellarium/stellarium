@@ -724,15 +724,16 @@ The value of \texttt{orbit\_good=} ($2460554.5-2447757.5 = $) \texttt{12797} ful
 
 \subsubsection{How to check and update moons orbital elements}
 \label{sec:ssystem.ini:MoonsOrbitalElements}
+\sectionauthor*{Stefan Schöfegger}
 
-Moons orbiting planets are modelled in Stellarium using Keplerian orbits. While this
+If not handled by dedicated orbital functions, moons orbiting planets are modelled in Stellarium using Keplerian orbits. While this
 approach is computationally efficient, it does not account for gravitational perturbations
 caused by other planets and the Sun. Over longer time spans these perturbations cause the
 predicted positions to drift noticeably from the true positions, so the orbital elements
 need to be refreshed periodically.
 
-Two Python scripts are provided to support this process. Both scripts require the path to
-\texttt{ssystem\_major.ini} as their first argument.
+Two Python scripts are provided to support this process. Both scripts require as their first
+argument the path to \texttt{ssystem\_major.ini}.
 
 The scripts require the Python libraries \texttt{requests} and \texttt{matplotlib}, which
 can be installed via:
@@ -835,8 +836,8 @@ those produced by the previously stored orbital elements for current time.
 
 \subsection{Multiple Epochs for Minor Planets}
 \label{sec:ssystem.ini:MultiEpoch}
-\indexterm{asteroid!multi-epoch ephemeris}
-\indexterm{JPL Horizons!multi-epoch script}
+\indexterm[asteroid!multi-epoch ephemeris]{}
+\indexterm[JPL Horizons!multi-epoch script]{}
  
 As described in section~\ref{sec:ssystem.ini:minor}, asteroid orbital
 elements in \file{ssystem\_minor.ini} are valid only near their epoch.
