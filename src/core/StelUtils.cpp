@@ -44,6 +44,11 @@
 #include <sys/utsname.h>
 #endif
 
+namespace
+{
+double sqr(double x) { return x*x; }
+}
+
 namespace StelUtils
 {
 //! Return the full name of stellarium, e.g. "Stellarium 23.1"
@@ -3240,6 +3245,38 @@ QString getGreekLetterByName(const QString& potentialGreekLetterName)
 	}
 
 	return potentialGreekLetterName;
+}
+
+double circlesIntersectionArea(double R1, double R2, double d)
+{
+	using namespace std;
+	if(d+min(R1,R2)<max(R1,R2)) return M_PI*sqr(min(R1,R2));
+	if(d>=R1+R2) return 0;
+
+	// Return area of the lens with radii R1 and R2 and offset d
+	return sqr(R1)*acos(clamp( (sqr(d)+sqr(R1)-sqr(R2))/(2*d*R1) ,-1.,1.)) +
+	       sqr(R2)*acos(clamp( (sqr(d)+sqr(R2)-sqr(R1))/(2*d*R2) ,-1.,1.)) -
+	       0.5*sqrt(max( (-d+R1+R2)*(d+R1-R2)*(d-R1+R2)*(d+R1+R2) ,0.));
+}
+
+double visibleSolidAngleOfSun(const double sunAngularRadius, const double moonAngularRadius, const double angleBetweenSunAndMoon)
+{
+	const double Rs = sunAngularRadius;
+	const double Rm = moonAngularRadius;
+	double visibleSolidAngle = M_PI*sqr(Rs);
+
+	const double dSM = angleBetweenSunAndMoon;
+	if(dSM < Rs+Rm)
+	{
+		visibleSolidAngle -= circlesIntersectionArea(Rm,Rs,dSM);
+	}
+
+	return visibleSolidAngle;
+}
+
+double sunVisibilityDueToMoon(const double sunAngularRadius, const double moonAngularRadius, const double angleBetweenSunAndMoon)
+{
+	return visibleSolidAngleOfSun(sunAngularRadius, moonAngularRadius, angleBetweenSunAndMoon)/(M_PI*sqr(sunAngularRadius));
 }
 
 } // end of the StelUtils namespace
