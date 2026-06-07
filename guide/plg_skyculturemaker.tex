@@ -38,7 +38,7 @@ This button is also an indicator of whether the SCM is currently open: pressing 
 
 The \textit{Create} button opens the main dialog where you can build a new sky culture.
 If the Sky Culture Converter was enabled at build time, a \textit{Convert} button also appears (see section~\ref{sec:plugins:SCM:Converting} for details).
-The \textit{Edit} button may be present already, but it is disabled because the SCM does currently not support editing existing sky cultures.
+The \textit{Edit} button may be present already, but it is disabled because the SCM currently does not support editing existing sky cultures.
 This feature is planned for a future release.
 
 \subsection{Converting an Existing Sky Culture}
@@ -57,26 +57,26 @@ CMake will download the converter library automatically via CPM.
 When the converter has been built, a \textit{Convert} button appears in the SCM start dialog alongside the \textit{Create} button (Figure~\ref{fig:plugins:SCM:DialogStartConverter}).
 
 \begin{figure}[ht]
-\centering\includegraphics[width=0.35\columnwidth]{scm_dialog_start_converter.png}
-\caption{SCM plugin: start dialog with convert button}
+\centering
+\begin{tabular}{cc}
+\includegraphics[width=0.35\columnwidth]{scm_dialog_start_converter.png} &
+\includegraphics[width=0.35\columnwidth]{scm_dialog_converter_file.png} \\
+(a) Start dialog with \textit{Convert} button & (b) Converter file chooser
+\end{tabular}
+\caption{SCM plugin: converter workflow dialogs}
 \label{fig:plugins:SCM:DialogStartConverter}
 \end{figure}
 
 \begin{enumerate}
 \item Press \textit{Convert} in the start dialog.
-\item A file-chooser opens (Figure~\ref{fig:plugins:SCM:DialogStartConverterFile}). Select an archive that contains the old sky culture files.
+\item A file chooser opens (Figure~\ref{fig:plugins:SCM:DialogStartConverter}, panel b). Select an archive that contains the old sky culture files.
 Supported formats: \texttt{.zip}, \texttt{.rar}, \texttt{.tar}, \texttt{.7z}.
+Selecting a plain directory is not supported by the converter.
 Note that only plain \texttt{.tar} archives are supported. 
 Compressed variants such as \texttt{.tar.gz} or \texttt{.tar.bz2} are not.
 \item The converter processes the archive and writes the resulting files directly into Stellarium's \directory{skycultures} directory.
 If the application does not have write permission there, a dialog prompts you to choose an alternative output folder.
 \end{enumerate}
-
-\begin{figure}[ht]
-\centering\includegraphics[width=0.35\columnwidth]{scm_dialog_converter_file.png}
-\caption{SCM plugin: file-chooser of converter dialog}
-\label{fig:plugins:SCM:DialogStartConverterFile}
-\end{figure}
 
 \noindent\textbf{Note:} Sky culture identifiers are case-sensitive.
 For example, \texttt{chinese\_chenzhuo} and \texttt{chinese\_Chenzhuo} are treated as different cultures.
@@ -84,38 +84,35 @@ For example, \texttt{chinese\_chenzhuo} and \texttt{chinese\_Chenzhuo} are treat
 \subsection{Creating a New Sky Culture}
 \label{sec:plugins:SCM:CreatingSkyCulture}
 
-After pressing \textit{Create} in the start dialog, you will be greeted by the \textit{Overview} tab of the main dialog (Figure~\ref{fig:plugins:SCM:TabOverview}).
+After pressing \textit{Create} in the start dialog, you will be greeted by the \textit{Overview} tab of the main dialog (Figure~\ref{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation}, panel a).
+This dialog is different from most dialogs in Stellarium, as you can drag it onto a second monitor for more workspace. To resize it on Windows, you must drag the tiny square handle in the bottom-right corner.
 In the first text input, you may enter a name for your new sky culture. This field is mandatory.
 Below the name field is the constellation list, which is empty until you create constellations (see section~\ref{sec:plugins:SCM:CreatingConstellation}).
 Before doing that, it is worth browsing the remaining tabs.
 
-\begin{figure}[ht]
-\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_skyculture_overview.png}
-\caption{SCM plugin: Overview tab of the main dialog}
-\label{fig:plugins:SCM:TabOverview}
+\begin{figure}[p]
+\centering
+\begin{tabular}{cc}
+\includegraphics[height=57mm]{scm_dialog_skyculture_overview.png} &
+\includegraphics[height=57mm]{scm_dialog_skyculture_description.png} \\
+(a) Overview tab & (b) Description tab \\
+\includegraphics[height=57mm]{scm_dialog_skyculture_common-names.png} &
+\includegraphics[height=57mm]{scm_dialog_skyculture_location.png} \\
+(c) Common Names tab & (d) Location tab
+\end{tabular}
+\caption{SCM plugin: main dialog tabs for creating a sky culture}
+\label{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation}
 \end{figure}
 
 \paragraph{Description tab}
-The \textit{Description} tab (Figure~\ref{fig:plugins:SCM:TabDescription}) collects textual information about the sky culture.
+The \textit{Description} tab (Figure~\ref{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation}, panel b) collects textual information about the sky culture.
 It contains dropdown menus as well as mandatory (marked with an asterisk) and optional text fields.
 Scroll through all fields and supply as much information as possible.
 Your inputs are used to generate the sky culture description file (\file{description.md}), which Stellarium will use to display certain information to users.
 For details on the expected content and structure of this file, see section~\ref{sec:skycultures:description}.
 
-\begin{figure}[ht]
-\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_skyculture_description.png}
-\caption{SCM plugin: Description tab of the main dialog}
-\label{fig:plugins:SCM:TabDescription}
-\end{figure}
-
 \paragraph{Common Names tab}
-The \textit{Common Names} tab (Figure~\ref{fig:plugins:SCM:TabCommonNames}) manages culture-specific names for stars, planets, and deep-sky objects.
-
-\begin{figure}[ht]
-\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_skyculture_common-names.png}
-\caption{SCM plugin: Common Names tab of the main dialog}
-\label{fig:plugins:SCM:TabCommonNames}
-\end{figure}
+The \textit{Common Names} tab (Figure~\ref{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation}, panel c) manages culture-specific names for stars, planets, and deep-sky objects.
 
 The table at the top lists the common name entries you have already created.
 The input fields below are used to enter new names.
@@ -136,21 +133,15 @@ For the full specification of common names for stars, planets and deep-sky objec
 \end{itemize}
 
 \paragraph{Location tab}
-The \textit{Location} tab (Figure~\ref{fig:plugins:SCM:TabLocation}) specifies where and when the sky culture was practiced.
-
-\begin{figure}[ht]
-\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_skyculture_location.png}
-\caption{SCM plugin: Location tab of the main dialog}
-\label{fig:plugins:SCM:TabLocation}
-\end{figure}
+The \textit{Location} tab (Figure~\ref{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation}, panel d) specifies where and when the sky culture was or is practiced.
 
 The upper part of the tab shows a world map, which allows you to digitize the geographic territory of the culture by drawing polygons.
 Simply click on the map to register corners and extend the polygon.
 \begin{itemize}
-\item At least one polygon is required before exporting the sky culture.
+\item At least one polygon is required before exporting the sky culture. You can later edit or refine the GeoJSON format in your GIS applications.
 \item Press \keys{\ctrl+Z} to undo the last click.
 \item Press \keys{Esc} to discard the entire current polygon.
-\item Double-right-click to finish the polygon. A dialog then asks for the start and end year during which the culture was practiced.
+\item Double-right-click to finish the polygon. A dialog then asks for the start and end year during which the culture was or is practiced. The special value \texttt{9146} indicates that the culture is still practiced.
 \end{itemize}
 The polygon data is then saved to a \file{territory.geojson} file.
 For details on its format see section~\ref{sec:skycultures:territory}.
@@ -159,15 +150,22 @@ For information on geoscheme regions, see section~\ref{sec:skycultures:region}.
 \subsection{Creating a New Constellation}
 \label{sec:plugins:SCM:CreatingConstellation}
 
-Head back to the \textit{Overview} tab and press \textit{Add Constellation} to open the \textit{Constellation Editor} (Figure~\ref{fig:plugins:SCM:DialogConstEditTabDrawing}).
+Head back to the \textit{Overview} tab and press \textit{Add Constellation} to open the \textit{Constellation Editor} (Figure~\ref{fig:plugins:SCM:ConstellationEditorPanels}, panel a). 
+This editor consists of three tabs. 
 
-\begin{figure}[ht]
-\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_constedit_drawing.png}
-\caption{SCM plugin: Drawing tab of the Constellation Editor}
-\label{fig:plugins:SCM:DialogConstEditTabDrawing}
+\begin{figure}[p]
+\centering
+\begin{tabular}{cc}
+\includegraphics[height=50mm]{scm_dialog_constedit_drawing.png} &
+\includegraphics[height=50mm]{scm_dialog_constedit_information.png} \\
+(a) Drawing tab & (b) Information tab \\
+\includegraphics[height=50mm]{scm_dialog_constedit_artwork.png} &
+\includegraphics[height=50mm]{scm_drawing.png} \\
+(c) Artwork tab & (d) Example drawing in progress
+\end{tabular}
+\caption{SCM plugin: Constellation Editor tabs and drawing workflow}
+\label{fig:plugins:SCM:ConstellationEditorPanels}
 \end{figure}
-
-The editor has three tabs.
 
 \paragraph{Drawing tab}
 The \textit{Drawing} tab lets you draw constellation lines directly on the Stellarium sky map (see also section~\ref{sec:skycultures:constellations} for the underlying data format).
@@ -180,36 +178,18 @@ The \textit{Drawing} tab lets you draw constellation lines directly on the Stell
 \item To stop drawing, double-right-click or simply press the \textit{Pen} button again.
 \end{enumerate}
 
-Using this workflow you can build complex stick figures (see Figure~\ref{fig:plugins:SCM:Drawing}).
+Using this workflow you can build complex stick figures (see Figure~\ref{fig:plugins:SCM:ConstellationEditorPanels}, panel d).
 Mistakes can be undone with the \textit{Undo} button (one segment at a time) or erased with the \textit{Eraser} tool: 
 press \textit{Eraser}, then hold the right mouse button and drag through any line segment to remove it.
 
-\begin{figure}[ht]
-\centering\includegraphics[width=0.35\columnwidth]{scm_drawing.png}
-\caption{Example constellation drawing in progress}
-\label{fig:plugins:SCM:Drawing}
-\end{figure}
-
 \paragraph{Information tab}
-The \textit{Information} tab (Figure~\ref{fig:plugins:SCM:DialogConstEditTabInformation}) records metadata about the constellation.
+The \textit{Information} tab (Figure~\ref{fig:plugins:SCM:ConstellationEditorPanels}, panel b) records metadata about the constellation.
 The English name and the unique identifier are mandatory; all other fields are optional but recommended.
 A possible identifier is generated automatically from the English name, but you may change it manually as well.
 
-\begin{figure}[ht]
-\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_constedit_information.png}
-\caption{SCM plugin: Information tab of the Constellation Editor}
-\label{fig:plugins:SCM:DialogConstEditTabInformation}
-\end{figure}
-
 \paragraph{Artwork tab}
-The \textit{Artwork} tab (Figure~\ref{fig:plugins:SCM:DialogConstEditTabArtwork}) lets you attach an illustration to the constellation.
+The \textit{Artwork} tab (Figure~\ref{fig:plugins:SCM:ConstellationEditorPanels}, panel c) lets you attach an illustration to the constellation.
 For background on artwork and its role in sky cultures, see section~\ref{sec:skycultures:artwork}.
-
-\begin{figure}[ht]
-\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_constedit_artwork.png}
-\caption{SCM plugin: Artwork tab of the Constellation Editor}
-\label{fig:plugins:SCM:DialogConstEditTabArtwork}
-\end{figure}
 
 Press \textit{Upload Image} and select an image file.
 Three blue anchor points appear on the image.
@@ -263,7 +243,7 @@ Otherwise the \textit{Export Dialog} (Figure~\ref{fig:plugins:SCM:DialogExport})
 \end{figure}
 
 Read through the checklist items and confirm you have followed them.
-The checkbox \textit{Merge constellation lines into polylines on export} (checked by default) merges consecutive line segments that share an endpoint: for example, \texttt{[1,2]} and \texttt{[2,3]} become \texttt{[1,2,3]} in the json output, producing a cleaner file.
+The checkbox \textit{Merge constellation lines into polylines on export} (checked by default) merges consecutive line segments that share an endpoint: for example, \texttt{[1,2]} and \texttt{[2,3]} become \texttt{[1,2,3]} in the JSON output, producing a cleaner file.
 It is recommended to leave this option enabled.
 
 Choose \textit{Export} to export while keeping the SCM open, or \textit{Export and Exit} to export and close the plugin.
