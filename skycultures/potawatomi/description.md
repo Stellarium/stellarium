@@ -215,9 +215,10 @@ License (artwork): CC BY-NC-SA 4.0
 
 The artwork in this Sky Culture may be shared, copied, redistributed, and adapted (remix, tweak, build upon) for non-commercial purposes. It requires proper attribution to the creator, indication of changes made, and that new creations are licensed under identical terms.
 
-License (Sky Culture): GNU GPL v2.0
+License (Sky Culture): CC BY-SA 4.0
 
-This Sky Culture is provided under GNU General Public License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.
+The information in this Sky Culture may be shared, copied, redistributed, and adapted (remix, tweak, build upon) for commercial and non-commercial purposes. It requires proper attribution to the creator, indication of changes made, and that new creations are licensed under identical terms.
+
 
 ### Licenses and Permissions Justification
 
