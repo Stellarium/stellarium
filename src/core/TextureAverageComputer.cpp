@@ -18,17 +18,63 @@
  */
 
 #include "TextureAverageComputer.hpp"
+#include "StelMainView.hpp"
 #include "StelUtils.hpp"
 
-#if !QT_CONFIG(opengles2) // This class uses glGetTexImage(), which is not supported in GLES2
-
-Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, const int width, const int height)
+namespace
 {
-	// Get average value of the pixels as the value of the deepest mipmap level
-	GL(gl.glActiveTexture(GL_TEXTURE0));
-	GL(gl.glBindTexture(GL_TEXTURE_2D, texture));
-	GL(gl.glGenerateMipmap(GL_TEXTURE_2D));
+class FBORestorer
+{
+	StelOpenGL::HighGraphicsFunctions& gl;
+	GLint oldFBO=-1;
+public:
+	FBORestorer(StelOpenGL::HighGraphicsFunctions& gl)
+		: gl(gl)
+	{
+	}
+	void capture()
+	{
+		GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
+	}
+	~FBORestorer()
+	{
+		if (oldFBO >= 0)
+			GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, oldFBO));
+	}
+};
+}
 
+Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const int width, const int height) const
+{
+	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
+
+	blitTexProgram->bind();
+
+	GLint oldViewport[4];
+	GL(gl.glGetIntegerv(GL_VIEWPORT, oldViewport));
+	GLint oldFBO=-1;
+	GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
+
+	glesFBO->bind();
+	GL(gl.glViewport(0,0,1,1));
+
+	GL(gl.glBindVertexArray(vao));
+	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
+	GL(gl.glBindVertexArray(0));
+
+	blitTexProgram->release();
+	Vec4f pixel(NAN,NAN,NAN,NAN);
+	GL(gl.glReadPixels(0,0,1,1,GL_RGBA,GL_FLOAT,&pixel[0]));
+
+	GL(gl.glViewport(oldViewport[0], oldViewport[1], oldViewport[2], oldViewport[3]));
+	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, oldFBO));
+
+	return pixel;
+}
+
+Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGL(const int width, const int height) const
+{
+#if !QT_CONFIG(opengles2)
 	using namespace std;
 	// Formula from the glspec, "Mipmapping" subsection in section 3.8.11 Texture Minification
 	const auto totalMipmapLevels = 1+std::floor(log2(max(width,height)));
@@ -46,6 +92,22 @@ Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, cons
 	Vec4f pixel;
 	GL(gl.glGetTexImage(GL_TEXTURE_2D, deepestLevel, GL_RGBA, GL_FLOAT, &pixel[0]));
 	return pixel;
+#else
+	return {NAN, NAN, NAN, NAN};
+#endif
+}
+
+Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, const int width, const int height)
+{
+	// Get average value of the pixels as the value of the deepest mipmap level
+	GL(gl.glActiveTexture(GL_TEXTURE0));
+	GL(gl.glBindTexture(GL_TEXTURE_2D, texture));
+	GL(gl.glGenerateMipmap(GL_TEXTURE_2D));
+
+	if (isGLES)
+		return getCurrentTextureDeepestMipLevelPixelGLES(width, height);
+	else
+		return getCurrentTextureDeepestMipLevelPixelGL(width, height);
 }
 
 // Clobbers:
@@ -86,12 +148,12 @@ Vec4f TextureAverageComputer::getTextureAverageWithWorkaround(const GLuint textu
 
 Vec4f TextureAverageComputer::getTextureAverage(const GLuint texture)
 {
-	if(workaroundNeeded)
+	if(npotWorkaroundNeeded)
 		return getTextureAverageWithWorkaround(texture);
 	return getTextureAverageSimple(texture, npotWidth, npotHeight);
 }
 
-void TextureAverageComputer::init()
+void TextureAverageComputer::checkNeedForWorkaround()
 {
 	GLuint texture = -1;
 	GL(gl.glGenTextures(1, &texture));
@@ -134,9 +196,9 @@ void TextureAverageComputer::init()
 	const auto diff = mipmapAverage - trueAverage;
 	using std::abs;
 	const auto maxDiff = std::max({abs(diff[0]),abs(diff[1]),abs(diff[2]),abs(diff[3])});
-	workaroundNeeded = maxDiff >= 2./255.;
+	npotWorkaroundNeeded = maxDiff >= 2./255.;
 
-	if(workaroundNeeded)
+	if(npotWorkaroundNeeded)
 	{
 		qDebug() << "Mipmap average is unusable, will resize textures to "
 					"power-of-two size when average value is required.";
@@ -149,7 +211,7 @@ void TextureAverageComputer::init()
 	GL(gl.glBindTexture(GL_TEXTURE_2D, 0));
 	GL(gl.glDeleteTextures(1, &texture));
 
-	inited = true;
+	needForWorkaroundChecked = true;
 }
 
 // Clobbers: GL_TEXTURE_BINDING_2D, GL_VERTEX_ARRAY_BINDING, GL_ARRAY_BUFFER_BINDING
@@ -158,24 +220,7 @@ TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions
 	, npotWidth(texWidth)
 	, npotHeight(texHeight)
 {
-	if(!inited) init();
-	if(!workaroundNeeded) return;
-
-	GLint oldFBO=-1;
-	GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
-
-	GL(gl.glGenFramebuffers(1, &potFBO));
-	GL(gl.glGenTextures(1, &potTex));
-	GL(gl.glBindTexture(GL_TEXTURE_2D, potTex));
-	const auto potWidth  = StelUtils::getSmallerPowerOfTwo(npotWidth);
-	const auto potHeight = StelUtils::getSmallerPowerOfTwo(npotHeight);
-	GL(gl.glTexImage2D(GL_TEXTURE_2D,0,internalFormat,potWidth,potHeight,0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr));
-	GL(gl.glBindTexture(GL_TEXTURE_2D,0));
-	GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,potFBO));
-	GL(gl.glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,potTex,0));
-	[[maybe_unused]] const auto status=gl.glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
-	Q_ASSERT(status==GL_FRAMEBUFFER_COMPLETE);
-	GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0));
+	isGLES = StelMainView::getInstance().getGLInformation().isGLES;
 
 	GL(gl.glGenVertexArrays(1, &vao));
 	GL(gl.glBindVertexArray(vao));
@@ -196,32 +241,60 @@ TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions
 	GL(gl.glBindVertexArray(0));
 
 	blitTexProgram.reset(new QOpenGLShaderProgram);
-    blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, 1+R"(
-#version 330
-layout(location=0) in vec4 vertex;
-out vec2 texcoord;
+	blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Vertex,
+		StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+		R"(
+ATTRIBUTE vec4 vertex;
+VARYING vec2 texcoord;
 void main()
 {
     gl_Position = vertex;
     texcoord = vertex.st*0.5+vec2(0.5);
 }
 )");
-	blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, 1+R"(
-#version 330
-in vec2 texcoord;
-out vec4 color;
+	blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Fragment,
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+		R"(
+VARYING vec2 texcoord;
 uniform sampler2D tex;
 void main()
 {
-    color = texture(tex, texcoord);
+    FRAG_COLOR = texture2D(tex, texcoord);
 }
 )");
+	blitTexProgram->bindAttributeLocation("vertex", 0);
 	blitTexProgram->link();
 	blitTexProgram->bind();
 	blitTexProgram->setUniformValue("tex", 0);
 	blitTexProgram->release();
 
-	GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, oldFBO));
+	FBORestorer fboRestorer(gl);
+	if (isGLES)
+	{
+		fboRestorer.capture();
+		glesFBO.reset(new QOpenGLFramebufferObject(1, 1, QOpenGLFramebufferObject::NoAttachment,
+		                                           GL_TEXTURE_2D, internalFormat));
+	}
+
+	if(!needForWorkaroundChecked) checkNeedForWorkaround();
+
+	if(npotWorkaroundNeeded)
+	{
+		fboRestorer.capture();
+
+		GL(gl.glGenFramebuffers(1, &potFBO));
+		GL(gl.glGenTextures(1, &potTex));
+		GL(gl.glBindTexture(GL_TEXTURE_2D, potTex));
+		const auto potWidth  = StelUtils::getSmallerPowerOfTwo(npotWidth);
+		const auto potHeight = StelUtils::getSmallerPowerOfTwo(npotHeight);
+		GL(gl.glTexImage2D(GL_TEXTURE_2D,0,internalFormat,potWidth,potHeight,0,GL_RGBA,GL_FLOAT,nullptr));
+		GL(gl.glBindTexture(GL_TEXTURE_2D,0));
+		GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,potFBO));
+		GL(gl.glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,potTex,0));
+		[[maybe_unused]] const auto status=gl.glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
+		Q_ASSERT(status==GL_FRAMEBUFFER_COMPLETE);
+		GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0));
+	}
 }
 
 TextureAverageComputer::~TextureAverageComputer()
@@ -231,5 +304,3 @@ TextureAverageComputer::~TextureAverageComputer()
 	GL(gl.glDeleteVertexArrays(1, &vao));
 	GL(gl.glDeleteBuffers(1, &vbo));
 }
-
-#endif
