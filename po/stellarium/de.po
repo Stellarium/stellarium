@@ -14,19 +14,19 @@
 # Alexander Stohr <alexander.stohr@gmx.de>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
 # xilentura <vdevelopment@posteo.de>, 2026
-# Luca-Philipp Grumbach, 2026
-# cardinot <mcardinot@gmail.com>, 2026
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2026
+# cardinot <mcardinot@gmail.com>, 2026
 # Latein Lebt, 2026
+# Luca-Philipp Grumbach, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-05-31 21:35+0700\n"
+"POT-Creation-Date: 2026-06-04 23:28+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Latein Lebt, 2026\n"
+"Last-Translator: Luca-Philipp Grumbach, 2026\n"
 "Language-Team: German (https://app.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1324,7 +1324,7 @@ msgstr "m"
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:416
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:863
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1124
 msgid "Location"
 msgstr "Standort"
 
@@ -5760,7 +5760,7 @@ msgstr "IAU-Sternbild"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/StelObject.cpp:1028 src/translations.h:59
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:805
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1016
 msgid "Constellations"
 msgstr "Sternbilder"
 
@@ -9394,6 +9394,7 @@ msgstr "Zeitpunkt der Transitmitte"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 #: src/gui/AstroCalcDialog.cpp:4351
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1071
 msgid "Planet"
 msgstr "Planet"
 
@@ -15206,6 +15207,7 @@ msgid "Use tab key for select of found items"
 msgstr "Verwende Tab-Taste zum Auswählen der gefundenen Einträge"
 
 #: src/ui_searchDialogGui.h:843
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1061
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
 msgid "Object"
 msgstr "Objekt"
@@ -15338,7 +15340,7 @@ msgstr "Löscht alle kürzlich gesuchten Objektdaten"
 #: src/ui_configurationDialog.h:2852 src/ui_configurationDialog.h:2863
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:304
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:418
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:850
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1111
 msgid "Options"
 msgstr "Einstellungen"
 
@@ -15347,7 +15349,7 @@ msgid "View"
 msgstr "Ansicht"
 
 #: src/ui_viewDialog.h:4219 src/ui_viewDialog.h:4240
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:823
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1034
 msgid "Sky"
 msgstr "Himmel"
 
@@ -16865,6 +16867,7 @@ msgid "native"
 msgstr "Original"
 
 #: src/ui_viewDialog.h:5240 src/ui_viewDialog.h:5246
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1089
 msgid "International Phonetic Alphabet"
 msgstr "Internationales Phonetisches Alphabet"
 
@@ -17011,7 +17014,7 @@ msgid "Details and Appearance"
 msgstr "Details und Erscheinungsbild"
 
 #: src/ui_viewDialog.h:5375
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:851
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1112
 msgid "Current time"
 msgstr "Aktuelle Zeit"
 
@@ -18061,8 +18064,8 @@ msgstr "Nach der Installation zu der neuen Landschaft wechseln"
 
 #: src/ui_addRemoveLandscapesDialog.h:234
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:236
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:809
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:840
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1020
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1051
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -20333,7 +20336,7 @@ msgstr "Max. Belichtung"
 #. TRANSLATORS: duration in seconds
 #: plugins/Oculars/src/Oculars.cpp:2079
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1193
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:234
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:245
 #: plugins/Planes/src/AircraftObject.cpp:213
 #: plugins/Planes/src/gui/PlanesDialog.cpp:66
 msgctxt "time"
@@ -20771,7 +20774,7 @@ msgid "Pixel grid feature"
 msgstr "Pixelgitter"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:640
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:812
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1023
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "Übersicht"
@@ -21174,7 +21177,7 @@ msgstr "Allgemein"
 #: plugins/Oculars/src/ui_ocularDialog.h:1551
 #: plugins/Oculars/src/ui_ocularDialog.h:1570
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:837
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1048
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -22755,7 +22758,7 @@ msgstr "< 1 Minute"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:159
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:693
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:232
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:243
 msgctxt "time"
 msgid "m"
 msgstr "Min."
@@ -23100,7 +23103,7 @@ msgid "Add communication data"
 msgstr "Füge Kommunikationsdaten hinzu"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:126
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:847
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1058
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -30517,7 +30520,7 @@ msgstr "Daten der vorigen und nächsten Vollmonde"
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:49
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:97
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:99
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:230
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:241
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:207
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:208
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:220
@@ -32557,7 +32560,7 @@ msgstr "Name:"
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:163
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:260
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:803
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1014
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
 msgid "Sky Culture Maker"
 msgstr "Himmelskultur-Ersteller"
@@ -32601,11 +32604,11 @@ msgstr ""
 "Konvertieren von Himmelskulturen aus dem veralteten (fab) Format in das neue"
 " (json) Format"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:300
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:347
 msgid "Please select a license for the sky culture."
 msgstr "Bitte wählen Sie eine Lizenz für die Himmelskultur."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:307
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:354
 msgid ""
 "The sky culture description is not complete. The following fields are not "
 "filled correctly:\n"
@@ -32613,13 +32616,106 @@ msgstr ""
 "Die Beschreibung der Himmelskultur ist unvollständig. Bitte füllen Sie diese"
 " erforderlichen Felder noch aus:\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:320
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:374
 msgid ""
 "The sky culture territory is not complete. Please digitize at least one "
 "polygon in geographical location tab."
 msgstr ""
 "Die territoriale Verortung der Himmelskultur ist unvollständig. Bitte setzen"
 " Sie zumindest ein Polygon im Geolokations-Reiter."
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:988
+msgid "HIP or Gaia DR3 ID (e.g. HIP 1234 or Gaia DR3 1234567890)"
+msgstr "HIP- oder Gaia-DR3-ID (z. B. HIP 1234 oder Gaia DR3 1234567890)"
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:990
+msgid "Planet name (e.g. Venus)"
+msgstr "Planetenname (z. B. Venus)"
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:991
+msgid "Catalog designation (e.g. M31)"
+msgstr "Katalogbezeichnung (z. B. M31)"
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1113
+msgctxt "celestial object visibility period"
+msgid "morning"
+msgstr "morgens"
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1117
+msgctxt "celestial object visibility period"
+msgid "evening"
+msgstr "abends"
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1148
+msgctxt ""
+"Prompt for missing celestial object identifier (e.g. HIP number, Gaia DR3 "
+"ID, orplanet name, DSO catalog designation)"
+msgid "Please enter an object identifier."
+msgstr "Bitte geben Sie eine Objektkennung ein."
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1168
+msgid ""
+"The star identifier must be a HIP number (e.g. 1234 or HIP 1234 A) or a Gaia"
+" DR3 ID (e.g. Gaia DR3 1234567890)."
+msgstr ""
+"Die Sternkennung muss eine HIP-Nummer (z. B. 1234 oder HIP 1234 A) oder eine"
+" Gaia-DR3-ID (z. B. Gaia DR3 1234567890) sein."
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1178
+msgid "The \"English\" field is required."
+msgstr "Das Feld ‚Englisch‘ ist erforderlich."
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1211
+#, qt-format
+msgid "The object \"%1\" could not be found in the current Stellarium database."
+msgstr ""
+"Das Objekt „%1“ konnte in der aktuellen Stellarium-Datenbank nicht gefunden "
+"werden."
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1212
+msgid "Do you still want to save this entry?"
+msgstr "Möchten Sie diesen Eintrag trotzdem speichern?"
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1214
+msgid "Don't show this warning again"
+msgstr "Diese Warnung nicht nochmal anzeigen"
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1217
+msgid "Save Anyway"
+msgstr "Trotzdem speichern"
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1218
+msgid "Don't Save"
+msgstr "Nicht speichern"
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1238
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1260
+msgid "An entry for this object already exists."
+msgstr "Ein Eintrag für dieses Objekt existiert bereits."
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1300
+msgid "No object is currently selected in Stellarium."
+msgstr "Kein Objekt in Stellarium derzeit ausgewählt."
+
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.hpp:126
+msgid ""
+"Controls:\n"
+"LMB / RMB: Set a new vertex for the active polygon\n"
+"SHIFT + LMB / MMB: Navigate the Map\n"
+"Double RMB: Save the active polygon\n"
+"CTRL + Z / DELETE: Remove the last point of the active polygon\n"
+"ESC: Remove all points of the active polygon\n"
+"Scroll UP / DOWN: Zoom in / out of the map\n"
+"CTRL + Scroll: Fine grained zoom"
+msgstr ""
+"Steuerung:\n"
+"LMB / RMB: Neuen Punkt zum aktiven Polygon hinzufügen\n"
+"Umschalt + LMB / MMB: Karte navigieren\n"
+"Doppelklick RMB: Aktives Polygon speichern\n"
+"Strg + Z / Entf: Letzten Punkt des aktiven Polygons entfernen\n"
+"Esc: Alle Punkte des aktiven Polygons entfernen\n"
+"Scrollrad hoch / runter: In die Karte hinein- / herauszoomen\n"
+"Strg + Scrollrad: Fein abgestuftes Zoomen"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:104
 msgid "No sky culture is set."
@@ -32829,7 +32925,7 @@ msgid "Not implemented yet."
 msgstr "Noch nicht implementiert."
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:146
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:808
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1019
 msgid "Edit"
 msgstr "Editieren"
 
@@ -32858,7 +32954,7 @@ msgid "Drawing"
 msgstr "Zeichnung"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:373
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:814
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1025
 msgid "Mandatory fields are marked with an asterisk (*)."
 msgstr "Pflichtfelder sind mit einem Sternchen (*) gekennzeichnet."
 
@@ -32886,6 +32982,7 @@ msgstr ""
 "der Himmelskultur."
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:378
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1090
 msgid "Byname:"
 msgstr "Beiname:"
 
@@ -32918,6 +33015,7 @@ msgstr ""
 "z. B. Pinyin für Chinesisch."
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:384
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1086
 msgid "Transliteration:"
 msgstr "Transliteration:"
 
@@ -32932,6 +33030,7 @@ msgstr ""
 "anpassbar, kann jedoch erweiterte diakritische Zeichen enthalten."
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:386
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1088
 msgid "IPA:"
 msgstr "IPA:"
 
@@ -32967,61 +33066,61 @@ msgstr "Bild entfernen"
 msgid "Artwork"
 msgstr "Sternbild-Hintergrundbild"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:804
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1015
 msgid "Name of the Sky Culture"
 msgstr "Name der Himmelskultur"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:806
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1017
 msgid "Add Constellation"
 msgstr "Sternbild hinzufügen"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:807
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1018
 msgid "Add Dark Constellation"
 msgstr "Dunkelsternbild hinzufügen"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:810
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1021
 msgid "License of the Sky Culture"
 msgstr "Lizenz der Himmelskultur"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:811
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1022
 msgid "Export Sky Culture"
 msgstr "Himmelskultur exportieren"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:813
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1024
 msgid "Please describe the Sky Culture"
 msgstr "Bitte beschreiben Sie die Himmelskultur"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:815
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1026
 msgid "General Information"
 msgstr "Allgemeine Informationen"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:816
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1027
 msgid "Classification of the Sky Culture*"
 msgstr "Klassifikation der Himmelskultur*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:817
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1028
 msgid "Introduction:*"
 msgstr "Einleitung:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:818
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1029
 msgid " A summary that could ideally be shown on a small screen entirely."
 msgstr ""
 "Eine Zusammenfassung, die idealerweise vollständig auf einem kleinen "
 "Bildschirm angezeigt werden könnte."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:819
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1030
 msgid "Region of the Sky Culture*"
 msgstr "Geographische Region der Himmelskultur*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:820
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1031
 msgid "Description (What can the user see here?)"
 msgstr "Beschreibung (Was kann der Benutzer hier sehen?)"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:821
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1032
 msgid "Culture Description:*"
 msgstr "Beschreibung der Kultur:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:822
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1033
 msgid ""
 "Give a short introduction about the culture: time, location, circumstances "
 "of life. Please describe specifics of the source (book/clay "
@@ -33042,7 +33141,7 @@ msgstr ""
 "es sich bei dieser Version um eine didaktische Reduktion oder stammt sie aus"
 " einer bestimmten anderen Quelle?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:824
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1035
 msgid ""
 "What special features did/does this culture use, what shall the user watch "
 "out for? Is it worthwhile to click a specific button rather than others - "
@@ -33063,32 +33162,32 @@ msgstr ""
 " verwendet)? Haben sie überhaupt Sterne verwendet oder bevorzugten sie "
 "dunkle/helle Wolken der Milchstraße?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:825
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1036
 msgid "Moon & Sun:"
 msgstr "Mond & Sonne:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:826
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1037
 msgid "How did they determine their calendar? Did they observe phases?"
 msgstr ""
 "Wie haben sie ihren Kalender festgelegt? Haben sie die Mondphasen "
 "beobachtet?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:827
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1038
 msgid "Planets:"
 msgstr "Planeten:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:828
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1039
 msgid ""
 "Were the planets deified? What deities connect, what meaning do they have?"
 msgstr ""
 "Wurden die Planeten vergöttert? Welche Gottheiten verbinden sich "
 "miteinander, welche Bedeutung haben sie?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:829
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1040
 msgid "Zodiac / Lunar System:"
 msgstr "Tierkreis-/Mondsystem:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:830
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1041
 msgid ""
 "Did they have the (Bab.) zodiac system or any other division of the \"path "
 "of the Moon\"? If so, was it a (equal or unequal) division of the ecliptic "
@@ -33099,19 +33198,19 @@ msgstr ""
 "oder ungleiche) Einteilung der Ekliptik oder um eine andere Art der "
 "Einteilung?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:831
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1042
 msgid "Milky Way:"
 msgstr "Milchstraße:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:832
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1043
 msgid "Was the Milky Way deified? What meaning did it have?"
 msgstr "Wurde die Milchstraße vergöttert? Welche Bedeutung hatte sie?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:833
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1044
 msgid "Other Celestial Objects:"
 msgstr "Andere Himmelskörper:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:834
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1045
 msgid ""
 "What other celestial objects were significant? E.g what about shooting "
 "stars, aurorae? Did they observe stellar transients, e.g. supernovae, that "
@@ -33122,19 +33221,19 @@ msgstr ""
 "Himmelsphänomene wie Supernovae, die nur in einem bestimmten Jahr sichtbar "
 "waren?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:835
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1046
 msgid "Credits and References"
 msgstr "Quellenangaben und Referenzen"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:836
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1047
 msgid "References:*"
 msgstr "Referenzen:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:841
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1052
 msgid "Authors:*"
 msgstr "Autoren:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:842
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1053
 msgid ""
 "Who are you and what is your background (native person, researcher, ...)? "
 "Ideally, please provide an email-address as well."
@@ -33142,11 +33241,11 @@ msgstr ""
 "Wer sind Sie und welchen Hintergrund haben Sie (Muttersprachler, Forscher, "
 "...)? Idealerweise geben Sie bitte auch eine E-Mail-Adresse an."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:843
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1054
 msgid "About the sky culture:*"
 msgstr "Über die Himmelskultur:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:844
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1055
 msgid ""
 "How do you know about this Sky Culture? Is this contribution based on your "
 "own or other people's research? Is it based on interviews with Elders or "
@@ -33156,11 +33255,11 @@ msgstr ""
 "eigenen Forschungen oder denen anderer Personen? Basiert er auf Interviews "
 "mit Ältesten oder auf der Lektüre alter Texte usw.?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:845
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1056
 msgid "Acknowledgements:"
 msgstr "Danksagungen:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:846
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1057
 msgid ""
 "What acknowledgements would you like to make? E.g. to interviewed people, "
 "organizations, or resources that helped you?"
@@ -33168,43 +33267,174 @@ msgstr ""
 "Wem möchten Sie danken? Z. B. den befragten Personen, Organisationen oder "
 "Ressourcen, die Ihnen geholfen haben?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:848
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1059
+msgid "Name Entries:"
+msgstr "Namenseinträge:"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1063
+msgid "English"
+msgstr "Englisch"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1065
+msgid "Native"
+msgstr "Original"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1067
+msgid "Pronounce"
+msgstr "Aussprache"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1068
+msgid "Entry Fields"
+msgstr "Eintragsfelder"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1069
+msgid "Type:*"
+msgstr "Typ:*"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1070
+msgid "Star"
+msgstr "Stern"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1072
+msgid "Deep-Sky Object"
+msgstr "Deep-Sky-Objekt"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1074
+msgid "Identifier:*"
+msgstr "Kennung:*"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1075
+msgid "HIP number (e.g. 1234)"
+msgstr "HIP-Nummer (z.B. 1234)"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1076
+msgid "Copy Data From Selected Object"
+msgstr "Daten vom ausgewählten Objekt kopieren"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1078
+msgid ""
+"Fill Type, Identifier and English name from the currently selected object"
+msgstr ""
+"Übernimmt den Typ, die Kennung und den englischen Namen vom aktuell "
+"ausgewählten Objekt"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1080
+msgid "English:*"
+msgstr "Englisch:*"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1081
+msgid "Name translated to English"
+msgstr "Englische Übersetzung des Namens"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1082
+msgid "Native:"
+msgstr "Original:"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1083
+msgid "Name in the original language"
+msgstr "Name in der Originalsprache"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1084
+msgid "Pronounce:"
+msgstr "Aussprache"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1085
+msgid "Latin-character pronunciation guide (e.g. Pinyin)"
+msgstr "Aussprachehilfe auf Basis lateinischer Schriftzeichen (z. B. Pinyin)"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1087
+msgid "Scientific transliteration (e.g. Wylie for Tibetan)"
+msgstr "Wissenschaftliche Transliteration (z.B. Wylie für Tibetisch)"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1091
+msgid "Explanatory addition to the name (e.g. mythological role)"
+msgstr "Ergänzende Erklärung zum Namen (z.B. mythologische Rolle)"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1092
+msgid "References:"
+msgstr "Referenzen:"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1093
+msgid "Comma-separated reference numbers (e.g. 1, 3, 5)"
+msgstr "Kommagetrennte Referenznummern (z. B. 1, 3, 5)"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1094
+msgid "Visible (planets only):"
+msgstr "Sichtbar (nur Planeten):"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1095
+msgid "Always visible"
+msgstr "Immer sichtbar"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1096
+msgid "Morning only"
+msgstr "Nur morgens"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1097
+msgid "Evening only"
+msgstr "Nur abends"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1099
+msgid "Save As New Entry"
+msgstr "Als neuen Eintrag speichern"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1101
+msgid "Add the current form as a new entry"
+msgstr "Aktuelle Eingaben als neuen Eintrag hinzufügen"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1103
+msgid "Update Selected Entry"
+msgstr "Ausgewählten Eintrag aktualisieren"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1105
+msgid "Save the edited fields back to the selected entry"
+msgstr "Bearbeitete Felder im ausgewählten Eintrag speichern"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1107
+msgid "Remove Selected Entry"
+msgstr "Ausgewählten Eintrag entfernen"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1108
+msgid "Common Names"
+msgstr "Eigennamen"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1109
 msgid "Start Time"
 msgstr "Startzeit"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:849
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1110
 msgid "End Time"
 msgstr "Endzeit"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:852
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1113
 msgid "Number of digitized polygons:"
 msgstr "Anzahl digitalisierter Polygone:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:853
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1114
 msgid "0"
 msgstr "0"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:854
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1115
 msgid "Start time of the culture:"
 msgstr "Anfangsjahr der Kultur:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:856
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1117
 msgid "End time of the culture:"
 msgstr "Endjahr der Kultur:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:858
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1119
 msgid "Delete selected polygon"
 msgstr "Lösche gewähltes Polygon"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:860
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1121
 msgid "Vertex count"
 msgstr "Knotenzahl"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:861
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1122
 msgid "End time"
 msgstr "Endjahr"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:862
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1123
 msgid "Start time"
 msgstr "Anfangsjahr"
 
