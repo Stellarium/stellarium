@@ -264,7 +264,18 @@ def get_objects(lines, requested_object=None):
         if name.lower() not in OBJECT_IDS:
             continue
 
-        result.append({"name": name, "type": obj_type, "parent": parent})
+        iau_moon_number = None
+        if "iau_moon_number" in keys:
+            iau_val = split_value_line(lines[keys["iau_moon_number"]])
+            if iau_val:
+                iau_moon_number = iau_val[2].strip()
+
+        result.append({
+            "name": name,
+            "type": obj_type,
+            "parent": parent,
+            "iau_moon_number": iau_moon_number,
+        })
 
     return result
 
@@ -518,7 +529,7 @@ def compare_object(name, jd_start, jd_stop, step_days=7, verbose=True):
 # -- Plot ---------------------------------------------------------------------
 
 
-def make_plot(ax, name, dates, errors):
+def make_plot(ax, name, dates, errors, iau_moon_number=None):
     """Draw the error curve for one object onto the given Axes."""
     if not dates:
         ax.text(
@@ -539,7 +550,8 @@ def make_plot(ax, name, dates, errors):
         label=f"Mean: {mean_err:.3f}'",
     )
 
-    ax.set_title(name, fontsize=13, fontweight="bold")
+    title = name if not iau_moon_number else f"{name}  ({iau_moon_number})"
+    ax.set_title(title, fontsize=13, fontweight="bold")
     ax.set_ylabel("Angular error (arcminutes)")
     ax.set_xlabel("Date (UTC)")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
@@ -719,8 +731,9 @@ def main():
     all_results = {}
     for obj in objects:
         name = obj["name"]
+        iau_moon_number = obj.get("iau_moon_number")
         dates, errors = compare_object(name, jd_start, jd_stop, args.step)
-        all_results[name] = (dates, errors)
+        all_results[name] = (dates, errors, iau_moon_number)
 
         if errors and args.max_error is not None:
             peak = max(errors)
@@ -774,9 +787,9 @@ def main():
         plt.close(fig_t)
 
         # One page per object
-        for name, (dates, errors) in all_results.items():
+        for name, (dates, errors, iau_moon_number) in all_results.items():
             fig, ax = plt.subplots(figsize=(11, 5))
-            make_plot(ax, name, dates, errors)
+            make_plot(ax, name, dates, errors, iau_moon_number)
             fig.tight_layout()
             pdf.savefig(fig, bbox_inches="tight")
             plt.close(fig)
@@ -786,7 +799,7 @@ def main():
         if len(successful) > 1:
             fig_s, ax_s = plt.subplots(figsize=(13, 6))
             cmap = matplotlib.colormaps.get_cmap("tab20")
-            for idx, (name, (dates, errors)) in enumerate(
+            for idx, (name, (dates, errors, _iau)) in enumerate(
                 successful.items()
             ):
                 ax_s.plot(
@@ -811,15 +824,15 @@ def main():
 
         # Summary table page
         stats = [
-            (name, sum(errs) / len(errs), max(errs))
-            for name, (_, errs) in all_results.items() if errs
+            (name, iau, sum(errs) / len(errs), max(errs))
+            for name, (_, errs, iau) in all_results.items() if errs
         ]
         if stats:
-            stats.sort(key=lambda r: r[2], reverse=True)  # sort by max desc
-            col_labels = ["Object", "Mean error (')", "Max error (')"]
+            stats.sort(key=lambda r: r[3], reverse=True)  # sort by max desc
+            col_labels = ["Object", "IAU No.", "Mean error (')", "Max error (')"]
             table_data = [
-                [name, f"{mean:.4f}", f"{peak:.4f}"]
-                for name, mean, peak in stats
+                [name, iau or "—", f"{mean:.4f}", f"{peak:.4f}"]
+                for name, iau, mean, peak in stats
             ]
 
             # One table row is ~0.022 fig-height; fit ~40 rows per page.
@@ -838,21 +851,21 @@ def main():
                 )
                 tbl.auto_set_font_size(False)
                 tbl.set_fontsize(9)
-                tbl.auto_set_column_width([0, 1, 2])
+                tbl.auto_set_column_width([0, 1, 2, 3])
                 # Style header row
-                for col in range(3):
+                for col in range(4):
                     tbl[(0, col)].set_facecolor("#2a6ebb")
                     tbl[(0, col)].set_text_props(
                         color="white", fontweight="bold"
                     )
                 # Highlight rows that exceed max_error threshold
                 if args.max_error is not None:
-                    for row_idx, (name, mean, peak) in enumerate(
+                    for row_idx, (name, iau, mean, peak) in enumerate(
                         stats[page_start:page_start + rows_per_page],
                         start=1,
                     ):
                         if peak > args.max_error:
-                            for col in range(3):
+                            for col in range(4):
                                 tbl[(row_idx, col)].set_facecolor("#ffe0e0")
                 page_label = (
                     f" ({page_start // rows_per_page + 1})"
@@ -884,9 +897,9 @@ def main():
 
     # CSV summary to stdout
     if stats:
-        print("\nObject,Mean error (arcmin),Max error (arcmin)")
-        for name, mean, peak in stats:
-            print(f"{name},{mean:.4f},{peak:.4f}")
+        print("\nObject,IAU No.,Mean error (arcmin),Max error (arcmin)")
+        for name, iau, mean, peak in stats:
+            print(f"{name},{iau or ''},{ mean:.4f},{peak:.4f}")
 
 
 if __name__ == "__main__":
