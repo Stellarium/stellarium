@@ -44,6 +44,8 @@ Several Potawatomi constellations can be represented by different figures and na
 
 ##### Thethak / Wabzhi / Bgak
 
+Potawatomi: Thethak ([pronunciation](https://wiwkwebthegen.com/dictionary-word/thethak-n%C3%ABgos)) / Wabzhi ([pronunciation](https://wiwkwebthegen.com/dictionary-word/wabzhi)) / Bgak
+
 English Translation: Crane / Swan / Human skeleton-like creature with wings
 
 Corresponding Western Constellation: Summer Cross
@@ -51,6 +53,8 @@ Corresponding Western Constellation: Summer Cross
 <p><img src="illustrations/crane.png" width="150" alt="Human skeleton-like creature with wings" /></p>
 
 ##### Bzhêké
+
+Potawatomi: Bzhêké ([pronunciation](https://wiwkwebthegen.com/dictionary-word/bzh%C3%AAk%C3%A9-n%C3%ABgos))
 
 English Translation: Bison
 
@@ -60,6 +64,8 @@ Corresponding Western Constellation: Taurus
 
 ##### Gigo
 
+Potawatomi: Gigo ([pronunciation](https://wiwkwebthegen.com/dictionary-word/gigo-n%C3%ABgos))
+
 English Translation: Fish
 
 Corresponding Western Constellation: Delphinus
@@ -67,6 +73,8 @@ Corresponding Western Constellation: Delphinus
 <p><img src="illustrations/fish.png" width="150" alt="Fish" /></p>
 
 ##### Pondésé / Ktthe Sabé / Nenikboz
+
+Potawatomi: Pondésé ([pronunciation](https://wiwkwebthegen.com/dictionary-word/pond%C3%A9s%C3%A9-n%C3%ABgos)) / Ktthe Sabé ([pronunciation](https://wiwkwebthegen.com/dictionary-word/ktthe-sab%C3%A9-n%C3%ABgos)) / Nenikboz ([pronunciation](https://wiwkwebthegen.com/dictionary-word/nenikboz-n%C3%ABgos))
 
 English Translation: Winter Maker / Bigfoot / Nanabozho
 
@@ -76,6 +84,8 @@ Corresponding Western Constellation: Orion (does not have a bow like Nenikboz/Na
 
 ##### Mang
 
+Potawatomi: Mang ([pronunciation](https://wiwkwebthegen.com/dictionary-word/mang-n%C3%ABgos))
+
 English Translation: Loon
 
 Corresponding Western Constellation: Ursa Minor
@@ -83,6 +93,8 @@ Corresponding Western Constellation: Ursa Minor
 <p><img src="illustrations/loon.png" width="150" alt="Loon" /></p>
 
 ##### Mdodo Senik
+
+Potawatomi: Mdodo Senik ([pronunciation](https://wiwkwebthegen.com/dictionary-word/mdodosenik))
 
 English Translation: Sweat Lodge Stones
 
@@ -92,6 +104,8 @@ Corresponding Western Constellation: Pleiades
 
 ##### Mdodoswen
 
+Potawatomi: Mdodoswen ([pronunciation](https://wiwkwebthegen.com/dictionary-word/mdodoswen))
+
 English Translation: Sweat Lodge
 
 Corresponding Western Constellation: Corona Borealis
@@ -99,6 +113,8 @@ Corresponding Western Constellation: Corona Borealis
 <p><img src="illustrations/sweatlodge.png" width="150" alt="Sweat Lodge" /></p>
 
 ##### Mëk
+
+Potawatomi: Mëk ([pronunciation](https://wiwkwebthegen.com/dictionary-word/m%C3%ABk-n%C3%ABgos))
 
 English Translation: Beaver
 
@@ -108,6 +124,8 @@ Corresponding Western Constellation: Gemini
 
 ##### Mko Shtegwan
 
+Potawatomi: Mko Shtegwan ([pronunciation](https://wiwkwebthegen.com/dictionary-word/mko-shtegwan))
+
 English Translation: Bear Head
 
 Corresponding Western Constellation: Summer Triangle
@@ -115,6 +133,8 @@ Corresponding Western Constellation: Summer Triangle
 <p><img src="illustrations/bear.png" width="150" alt="Bear Head" /></p>
 
 ##### Mo’ëwé
+
+Potawatomi: Mo’ëwé ([pronunciation](https://wiwkwebthegen.com/dictionary-word/mo%E2%80%99%C3%ABw%C3%A9-n%C3%ABgos))
 
 English Translation: Wolf
 
@@ -124,6 +144,8 @@ Corresponding Western Constellation: Canis Major
 
 ##### Moz
 
+Potawatomi: Moz ([pronunciation](https://wiwkwebthegen.com/dictionary-word/moz-n%C3%ABgos))
+
 English Translation: Moose
 
 Corresponding Western Constellation: Pegasus
@@ -131,6 +153,8 @@ Corresponding Western Constellation: Pegasus
 <p><img src="illustrations/moose.png" width="150" alt="Moose" /></p>
 
 ##### Mshignébêk
+
+Potawatomi: Mshignébêk ([pronunciation](https://wiwkwebthegen.com/dictionary-word/mshign%C3%A9b%C3%AAk-n%C3%ABgos))
 
 English Translation: Big Snake
 
@@ -140,6 +164,8 @@ Corresponding Western Constellation: Hydra
 
 ##### Mshiké
 
+Potawatomi: Mshiké ([pronunciation](https://wiwkwebthegen.com/dictionary-word/mshik%C3%A9))
+
 English Translation: Turtle
 
 Corresponding Western Constellation: Auriga
@@ -147,6 +173,8 @@ Corresponding Western Constellation: Auriga
 <p><img src="illustrations/turtle.png" width="150" alt="Turtle" /></p>
 
 ##### Nambezho
+
+Potawatomi: Nambezho ([pronunciation](https://wiwkwebthegen.com/dictionary-word/nambezho-n%C3%ABgos))
 
 English Translation: Underwater panther
 
@@ -156,6 +184,8 @@ Corresponding Western Constellation: Leo
 
 ##### Nenikboz
 
+Potawatomi: Nenikboz ([pronunciation](https://wiwkwebthegen.com/dictionary-word/nenikboz-n%C3%ABgos-0))
+
 English Translation: Nanabozho
 
 Corresponding Western Constellation: Scorpius
@@ -163,6 +193,8 @@ Corresponding Western Constellation: Scorpius
 <p><img src="illustrations/nanabozho.png" width="150" alt="Nanabozho" /></p>
 
 ##### Shkenigshêk égi-nsogmowat
+
+Potawatomi: Shkenigshêk égi-nsogmowat ([pronunciation](https://wiwkwebthegen.com/dictionary-word/shkenigsh%C3%AAk-gi-nsogmowat))
 
 English Translation: Three Brothers Floating in a Canoe
 
@@ -172,6 +204,8 @@ Corresponding Western Constellation: Cassiopeia
 
 ##### Wénondeshik
 
+Potawatomi: Wénondeshik ([pronunciation](https://wiwkwebthegen.com/dictionary-word/w%C3%A9nondeshik))
+
 English Translation: One Who is Exhausted
 
 Corresponding Western Constellation: Hercules
@@ -180,31 +214,31 @@ Corresponding Western Constellation: Hercules
 
 ##### Wthik
 
+Potawatomi: Wthik ([pronunciation](https://wiwkwebthegen.com/dictionary-word/wthik-n%C3%ABgos))
+
 English Translation: Fisher
 
 Corresponding Western Constellation: Ursa Major
 
 <p><img src="illustrations/fisher.png" width="150" alt="Fisher" /></p>
 
-
-
 ## List of Potawatomi Moons (Months)
 
-| Potawatomi Moon Name | English Translation                 | Corresponding Gregorian Month(s) |
-|----------------------|-------------------------------------|----------------------------------|
-| Mko gizes            | Bear moon                           | January                          |
-| Gon gizes            | Snow moon                           | February                         |
-| Thethak gizes        | Crane moon                          | March                            |
-| Bkonké gizes         | Making separate (of tree bark) moon | April                            |
-| É'démnëké gizes      | Strawberry picking moon             | May                              |
-| Mskwëmnëké gizes     | Raspberry picking moon              | June                             |
-| Nibnë gizes          | Summer (plentiful) moon             | July                             |
-| Nmégwzé gizes        | Lake trout moon                     | August                           |
-| Mzhéwé gizes         | Elk moon                            | September                        |
-| Mnomnëké gizes       | Wild rice harvesting moon           | September/October                |
-| Damno gizes          | Active deer moon                    | October                          |
-| Bné ona gizes        | Smoked turkey moon                  | November                         |
-| Ktthë mko gizes      | Big bear moon                       | December                         |
+| Potawatomi Moon Name                                                                                  | English Translation                 | Corresponding Gregorian Month(s) |
+|-------------------------------------------------------------------------------------------------------|-------------------------------------|----------------------------------|
+| Mko gizes ([pr](https://wiwkwebthegen.com/dictionary-word/mko-gizes-mi))                              | Bear moon                           | January                          |
+| Gon gizes ([pr](https://wiwkwebthegen.com/dictionary-word/gon-gizes-mi))                              | Snow moon                           | February                         |
+| Thethak gizes ([pr](https://wiwkwebthegen.com/dictionary-word/thethak-gizes-mi))                      | Crane moon                          | March                            |
+| Bkonké gizes ([pr](https://wiwkwebthegen.com/dictionary-word/bkonk%C3%A9-gizes-mi))                   | Making separate (of tree bark) moon | April                            |
+| É'démnëké gizes ([pr](https://wiwkwebthegen.com/dictionary-word/ed%C3%A9mn%C3%ABk%C3%A9-gizes-mi))    | Strawberry picking moon             | May                              |
+| Mskwëmnëké gizes ([pr](https://wiwkwebthegen.com/dictionary-word/mskw%C3%ABmn%C3%ABk%C3%A9-gizes-mi)) | Raspberry picking moon              | June                             |
+| Nibnë gizes ([pr](https://wiwkwebthegen.com/dictionary-word/nibn%C3%AB-gizes-mi))                     | Summer (plentiful) moon             | July                             |
+| Nmégwzé gizes ([pr](https://wiwkwebthegen.com/dictionary-word/nm%C3%A9gwz%C3%A9-gizes-mi))            | Lake trout moon                     | August                           |
+| Mzhéwé gizes ([pr](https://wiwkwebthegen.com/dictionary-word/mzh%C3%A9w%C3%A9-gizes-mi))              | Elk moon                            | September                        |
+| Mnomnëké gizes ([pr](https://wiwkwebthegen.com/dictionary-word/mnomn%C3%ABk%C3%A9))                   | Wild rice harvesting moon           | September/October                |
+| Damno gizes ([pr](https://wiwkwebthegen.com/dictionary-word/damno-gizes-mi))                          | Active deer moon                    | October                          |
+| Bné ona gizes ([pr](https://wiwkwebthegen.com/dictionary-word/bn%C3%A9-ona-gizes-mi))                 | Smoked turkey moon                  | November                         |
+| Ktthë mko gizes ([pr](https://wiwkwebthegen.com/dictionary-word/ktthe-mko-gizes-mi))                  | Big bear moon                       | December                         |
 
 This list derives from Daniel Bourassa (1843)[^1] who was educated at Carey Mission in Niles, and later in New York and Oklahoma. Different Potawatomi communities (and different families) may have other names for these months.
 
