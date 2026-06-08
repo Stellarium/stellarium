@@ -1529,9 +1529,41 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 						}
 						
 						if (!found) clearAllActiveButtons();
-				});
-				
-				// ... rest of setupSyncListeners (culture change, language change listeners remain the same)
+				});				
+    
+				// ============================================================
+				// LISTEN TO CULTURE CHANGES FROM SERVER (NEW)
+				// ============================================================
+				if (propApi) {
+						$(propApi).on("stelPropertyChanged:StelSkyCultureMgr.currentSkyCultureID", 
+								function(evt, data) {
+										var newCultureId = data.value;
+										if (newCultureId && newCultureId !== currentCultureId) {
+												console.log("[SkyCulture] Culture changed from server to: " + newCultureId);
+												currentCultureId = newCultureId;
+												// Find the culture name from availableCultures
+												var culture = availableCultures.find(function(c) { return c.id === newCultureId; });
+												if (culture) currentCultureName = culture.name;
+												updateCultureButtonStates();
+												updateInfoFrame();
+												selectedPattern = null;
+												selectedPatternId = null;
+												loadAllCultureData();
+										}
+								});
+						
+						// Listen to language changes
+						$(propApi).on("stelPropertyChanged:StelLocaleMgr.appLanguage", 
+								function(evt, data) {
+										var newLang = data.value;
+										if (newLang && newLang !== currentLanguage) {
+												console.log("[SkyCulture] Language changed to: " + newLang);
+												currentLanguage = newLang;
+												// Reload cultures to get newly translated names
+												refresh();
+										}
+								});
+				}
 		}
 
     // =====================================================================
