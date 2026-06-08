@@ -1820,7 +1820,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			};
 
 			// ---- Pass 1: first approximation at dateJDE -----------------
-			qDebug() << "Pass 1";
+			//qDebug() << "Pass 1";
 			//int lev=0;
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
 			{
@@ -1862,17 +1862,17 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			};
 
 			// ---- Pass 2: light-time + aberration correction -------------
-			qDebug() << "Pass 2";
+			//qDebug() << "Pass 2";
 			//lev=0;
 
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
 			{
 				//qDebug() << "Lev" << lev++;
-				runLevelParallel(level, lightTimeStep);
+				runLevelParallel(level, lightTimeStep); // <-- FIXME: Now it can hang here!
 			}
 
 			// ---- Pass 3: refinement (and rotation element corrections) --
-			qDebug() << "Pass 3";
+			//qDebug() << "Pass 3";
 			//lev=0;
 
 			// The next call may already do nothing if the time difference to
