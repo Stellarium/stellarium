@@ -1206,6 +1206,18 @@ namespace StelUtils
 	//! Returns the Greek unicode character for the specified letter string (i.e. "alpha", "beta", ...)
 	QString getGreekLetterByName(const QString& potentialGreekLetterName);
 
+	//! @brief Computes the area of intersection of two circles with given parameters
+	//!
+	//! @param R1 radius of the second circle
+	//! @param R2 radius of the second circle
+	//! @param d distance between centers of the circles
+	double circlesIntersectionArea(double R1, double R2, double d);
+
+	//! @brief Compute solid angle of the Sun visible taking into account eclipsing by the (assumed spherical) Moon
+	double visibleSolidAngleOfSun(double sunAngularRadius, double moonAngularRadius, double angleBetweenSunAndMoon);
+
+	//! @brief Compute percentage of the Sun visible taking into account eclipsing by the (assumed spherical) Moon
+	double sunVisibilityDueToMoon(double sunAngularRadius, double moonAngularRadius, double angleBetweenSunAndMoon);
 }
 
 #endif // STELUTILS_HPP

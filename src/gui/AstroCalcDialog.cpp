@@ -9208,6 +9208,9 @@ void AstroCalcDialog::goToObject(const QString &name, const double JD)
 	if (objectMgr->findAndSelectI18n(name, objtype) || objectMgr->findAndSelect(name, objtype))
 	{
 		core->setJD(JD);
+		core->update(0.0); // Force update ...
+		// ... and repeat selection to trigger correct single-constellation selection (GH:#4874)
+		(objectMgr->findAndSelectI18n(name, objtype) || objectMgr->findAndSelect(name, objtype));
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject(objtype);
 		if (!newSelected.empty())
 		{
