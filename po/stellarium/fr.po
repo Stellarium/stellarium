@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-06-07 23:08+0700\n"
+"POT-Creation-Date: 2026-06-08 07:12+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2026\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -1531,11 +1531,11 @@ msgid "Its planetographic coordinates are"
 msgstr "Ses coordonnées planétographiques sont"
 
 #: src/core/modules/NomenclatureItem.cpp:402 src/core/modules/Planet.cpp:619
-#: src/core/modules/Planet.cpp:2224 src/core/StelObject.cpp:1561
-#: src/core/StelSkyCultureSkyPartition.cpp:528 src/core/StelUtils.cpp:166
-#: src/core/StelUtils.cpp:344 src/core/StelUtils.cpp:440
-#: src/core/StelUtils.cpp:523 src/core/StelUtils.cpp:571
-#: src/core/StelUtils.cpp:1578
+#: src/core/modules/Planet.cpp:2224 src/core/StelObject.cpp:1636
+#: src/core/StelSkyCultureSkyPartition.cpp:528 src/core/StelUtils.cpp:171
+#: src/core/StelUtils.cpp:349 src/core/StelUtils.cpp:445
+#: src/core/StelUtils.cpp:528 src/core/StelUtils.cpp:576
+#: src/core/StelUtils.cpp:1583
 msgctxt "object narration"
 msgid "and"
 msgstr "et"
@@ -1546,9 +1546,9 @@ msgid "Solar altitude over the feature is"
 msgstr "La hauteur du Soleil au-dessus de la structure est"
 
 #: src/core/modules/NomenclatureItem.cpp:405
-#: src/core/StelSkyCultureSkyPartition.cpp:526 src/core/StelUtils.cpp:228
-#: src/core/StelUtils.cpp:429 src/core/StelUtils.cpp:520
-#: src/core/StelUtils.cpp:531 src/core/StelUtils.cpp:568
+#: src/core/StelSkyCultureSkyPartition.cpp:526 src/core/StelUtils.cpp:233
+#: src/core/StelUtils.cpp:434 src/core/StelUtils.cpp:525
+#: src/core/StelUtils.cpp:536 src/core/StelUtils.cpp:573
 msgctxt "object narration"
 msgid "degrees"
 msgstr "degrés"
@@ -3386,7 +3386,7 @@ msgid "The angular distance from %1 is %2"
 msgstr "La distance angulaire de %1 est %2"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:1099 src/core/StelUtils.cpp:164
+#: src/core/modules/Planet.cpp:1099 src/core/StelUtils.cpp:169
 #: src/gui/AstroCalcDialog.cpp:8789 src/gui/AstroCalcAlmanacWidget.cpp:256
 msgctxt "duration"
 msgid "days"
@@ -4035,7 +4035,7 @@ msgctxt "object narration: reduced magnitude by extinction"
 msgid "reduced to %1 by %2 airmasses of atmospheric extinction"
 msgstr "réduit à %1 par %2 de masses d'air d'extinction atmosphérique"
 
-#: src/core/modules/Planet.cpp:2223 src/core/StelObject.cpp:1560
+#: src/core/modules/Planet.cpp:2223 src/core/StelObject.cpp:1635
 msgctxt "object narration"
 msgid "In this skyculture, it lies within the area of"
 msgstr "Dans cette culture céleste, elle se trouve dans la zone de "
@@ -4045,7 +4045,7 @@ msgstr "Dans cette culture céleste, elle se trouve dans la zone de "
 #. TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
 #. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
 #: src/core/modules/Planet.cpp:2231 src/core/modules/Planet.cpp:2238
-#: src/core/StelObject.cpp:1569 src/core/StelObject.cpp:1576
+#: src/core/StelObject.cpp:1644 src/core/StelObject.cpp:1651
 #, qt-format
 msgctxt "object narration"
 msgid "Its %1 Position is %2"
@@ -5608,364 +5608,413 @@ msgctxt "object narration"
 msgid "Its B minus V Color Index is %1"
 msgstr "Son indice de couleur B moins V est %1"
 
-#: src/core/StelObject.cpp:408 src/core/StelObject.cpp:1065
+#: src/core/StelObject.cpp:408 src/core/StelObject.cpp:1140
 msgid "(apparent)"
 msgstr "(apparent)"
 
+#. TRANSLATORS: Designations for Right ascension/Polar distance
+#: src/core/StelObject.cpp:442
+msgctxt "celestial coordinate system"
+msgid "&alpha;/p"
+msgstr "&alpha;/p"
+
 #. TRANSLATORS: Right ascension/Polar distance
-#: src/core/StelObject.cpp:440
+#: src/core/StelObject.cpp:447
 msgctxt "celestial coordinate system"
 msgid "RA/PD"
 msgstr "AD/DP"
 
+#. TRANSLATORS: Designations for Right ascension/Declination
+#: src/core/StelObject.cpp:455
+msgctxt "celestial coordinate system"
+msgid "&alpha;/&delta;"
+msgstr "&alpha;/&delta;"
+
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:445
+#: src/core/StelObject.cpp:460
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "AD/Déc"
 
+#. TRANSLATORS: Designations for Hour angle/Polar distance
+#: src/core/StelObject.cpp:551
+msgctxt "celestial coordinate system"
+msgid "h/p"
+msgstr "h/p"
+
 #. TRANSLATORS: Hour angle/Polar distance
-#: src/core/StelObject.cpp:530
+#: src/core/StelObject.cpp:556
 msgctxt "celestial coordinate system"
 msgid "HA/PD"
 msgstr "AH/DP"
 
+#. TRANSLATORS: Designations for Hour angle/Declination
+#: src/core/StelObject.cpp:564
+msgctxt "celestial coordinate system"
+msgid "h/&delta;"
+msgstr "h/&delta;"
+
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:532
+#: src/core/StelObject.cpp:569
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "AH/Déc"
 
+#. TRANSLATORS: Designations for Azimuth/Altitude
+#: src/core/StelObject.cpp:623
+msgctxt "celestial coordinate system"
+msgid "A/a"
+msgstr "A/h"
+
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:581
+#: src/core/StelObject.cpp:628
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "Az./Haut."
 
+#. TRANSLATORS: Designations for Galactic longitude/latitude
+#: src/core/StelObject.cpp:658
+msgctxt "celestial coordinate system"
+msgid "l/b"
+msgstr "l/b"
+
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:607
+#: src/core/StelObject.cpp:663
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "Long./lat. gal."
 
+#. TRANSLATORS: Designations for Supergalactic longitude/latitude
+#: src/core/StelObject.cpp:693
+msgctxt "celestial coordinate system"
+msgid "SGL/SGB"
+msgstr "SGL/SGB"
+
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:632
+#: src/core/StelObject.cpp:698
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "Long./lat. supergal."
 
-#: src/core/StelObject.cpp:650
+#. TRANSLATORS: Designations for Ecliptic longitude/latitude
+#: src/core/StelObject.cpp:719
+msgctxt "celestial coordinate system"
+msgid "&lambda;/&beta;"
+msgstr "&lambda;/&beta;"
+
+#. TRANSLATORS: Ecliptic longitude/latitude
+#: src/core/StelObject.cpp:724
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "Long./lat. écl."
 
-#: src/core/StelObject.cpp:709
+#: src/core/StelObject.cpp:784
 msgid "Ecliptic obliquity"
 msgstr "Obliquité de l'écliptique"
 
-#: src/core/StelObject.cpp:738
+#: src/core/StelObject.cpp:813
 msgid "Mean Sidereal Time"
 msgstr "Temps sidéral moyen"
 
-#: src/core/StelObject.cpp:753
+#: src/core/StelObject.cpp:828
 msgid "Apparent Sidereal Time"
 msgstr "Temps sidéral apparent"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:791 src/gui/AstroCalcDialog.cpp:951
+#: src/core/StelObject.cpp:866 src/gui/AstroCalcDialog.cpp:951
 #: src/gui/AstroCalcDialog.cpp:2442 src/gui/AstroCalcDialog.cpp:7919
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Culmination"
 
-#: src/core/StelObject.cpp:792 src/gui/AstroCalcDialog.cpp:2441
+#: src/core/StelObject.cpp:867 src/gui/AstroCalcDialog.cpp:2441
 #: src/gui/AstroCalcDialog.cpp:7918
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Lever"
 
-#: src/core/StelObject.cpp:793 src/gui/AstroCalcDialog.cpp:2443
+#: src/core/StelObject.cpp:868 src/gui/AstroCalcDialog.cpp:2443
 #: src/gui/AstroCalcDialog.cpp:7922
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Coucher"
 
-#: src/core/StelObject.cpp:861
+#: src/core/StelObject.cpp:936
 msgctxt "celestial event"
 msgid "Morning twilight"
 msgstr "Aube"
 
-#: src/core/StelObject.cpp:862
+#: src/core/StelObject.cpp:937
 msgctxt "celestial event"
 msgid "Evening twilight"
 msgstr "Crépuscule"
 
-#: src/core/StelObject.cpp:883 plugins/NavStars/src/ui_navStarsWindow.h:532
+#: src/core/StelObject.cpp:958 plugins/NavStars/src/ui_navStarsWindow.h:532
 msgid "Daytime"
 msgstr "Jour"
 
-#: src/core/StelObject.cpp:897
+#: src/core/StelObject.cpp:972
 msgid "Polar night"
 msgstr "Nuit polaire"
 
-#: src/core/StelObject.cpp:899 src/core/StelObject.cpp:1451
+#: src/core/StelObject.cpp:974 src/core/StelObject.cpp:1526
 msgid "This object never rises"
 msgstr "Cet objet ne se lève jamais"
 
-#: src/core/StelObject.cpp:904
+#: src/core/StelObject.cpp:979
 msgid "Polar day"
 msgstr "Jour polaire"
 
-#: src/core/StelObject.cpp:906
+#: src/core/StelObject.cpp:981
 msgid "Circumpolar (never sets)"
 msgstr "Circumpolaire (ne se couche jamais)"
 
 #. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
 #. with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:924
+#: src/core/StelObject.cpp:999
 msgid "Max. E. Digression"
 msgstr "Digression max. E"
 
 #. TRANSLATORS: azimuth (abbrev.)
-#: src/core/StelObject.cpp:926
+#: src/core/StelObject.cpp:1001
 msgctxt "celestial coordinate system"
 msgid "A"
 msgstr "A"
 
-#: src/core/StelObject.cpp:926
+#: src/core/StelObject.cpp:1001
 msgctxt "celestial coordinate system"
 msgid "Az."
 msgstr "Az."
 
-#: src/core/StelObject.cpp:928
+#: src/core/StelObject.cpp:1003
 msgctxt "celestial coordinate system"
 msgid "h"
 msgstr "h"
 
-#: src/core/StelObject.cpp:928
+#: src/core/StelObject.cpp:1003
 msgctxt "celestial coordinate system"
 msgid "HA"
 msgstr "AH"
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
 #. stars with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:954
+#: src/core/StelObject.cpp:1029
 msgid "Max. W. Digression"
 msgstr "Digression max. W"
 
-#: src/core/StelObject.cpp:997
+#: src/core/StelObject.cpp:1072
 msgid "Parallactic Angle"
 msgstr "Angle parallactique"
 
-#: src/core/StelObject.cpp:1006 src/core/StelObject.cpp:1542
+#: src/core/StelObject.cpp:1081 src/core/StelObject.cpp:1617
 #: src/gui/AstroCalcDialog.cpp:8017
 msgid "IAU Constellation"
 msgstr "Constellation UAI"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/StelObject.cpp:1028 src/translations.h:59
+#: src/core/StelObject.cpp:1103 src/translations.h:59
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1016
 msgid "Constellations"
 msgstr "Constellations"
 
-#: src/core/StelObject.cpp:1105
+#: src/core/StelObject.cpp:1180
 msgctxt "object narration"
 msgid "Equatorial coordinates for J2000: "
 msgstr "Coordonnées équatoriales pour J2000 :"
 
-#: src/core/StelObject.cpp:1106 src/core/StelObject.cpp:1131
+#: src/core/StelObject.cpp:1181 src/core/StelObject.cpp:1206
 #, qt-format
 msgctxt "object narration"
 msgid "Right Ascension %1, and %2 %3. "
 msgstr "Ascension droite %1 et %2 %3"
 
-#: src/core/StelObject.cpp:1107 src/core/StelObject.cpp:1132
-#: src/core/StelObject.cpp:1171
+#: src/core/StelObject.cpp:1182 src/core/StelObject.cpp:1207
+#: src/core/StelObject.cpp:1246
 msgctxt "object narration"
 msgid "Polar Distance"
 msgstr "Distance polaire"
 
-#: src/core/StelObject.cpp:1107 src/core/StelObject.cpp:1132
-#: src/core/StelObject.cpp:1171
+#: src/core/StelObject.cpp:1182 src/core/StelObject.cpp:1207
+#: src/core/StelObject.cpp:1246
 msgctxt "object narration"
 msgid "Declination"
 msgstr "Déclinaison"
 
-#: src/core/StelObject.cpp:1130
+#: src/core/StelObject.cpp:1205
 msgctxt "object narration"
 msgid "Equatorial coordinates of date: "
 msgstr "Coordonnées équatoriales de la date :"
 
-#: src/core/StelObject.cpp:1169
+#: src/core/StelObject.cpp:1244
 msgctxt "object narration"
 msgid "Fixed-Equatorial coordinates of date:"
 msgstr "Coordonnées équatoriales fixes de la date :"
 
-#: src/core/StelObject.cpp:1170
+#: src/core/StelObject.cpp:1245
 #, qt-format
 msgctxt "object narration"
 msgid "Hour Angle %1, and %2 %3. "
 msgstr "Angle horaire %1 et %2 %3"
 
-#: src/core/StelObject.cpp:1216
+#: src/core/StelObject.cpp:1291
 msgctxt "object narration"
 msgid "Azimuthal coordinates are:"
 msgstr "Les coordonnées azimutales sont"
 
-#: src/core/StelObject.cpp:1217
+#: src/core/StelObject.cpp:1292
 #, qt-format
 msgctxt "object narration"
 msgid "Azimuth %1, and altitude %2. "
 msgstr "Azimut %1 et hauteur %2. "
 
-#: src/core/StelObject.cpp:1237
+#: src/core/StelObject.cpp:1312
 msgctxt "object narration"
 msgid "Galactic coordinates are:"
 msgstr "Les coordonnées galactiques sont"
 
-#: src/core/StelObject.cpp:1238 src/core/StelObject.cpp:1259
-#: src/core/StelObject.cpp:1288 src/core/StelObject.cpp:1313
+#: src/core/StelObject.cpp:1313 src/core/StelObject.cpp:1334
+#: src/core/StelObject.cpp:1363 src/core/StelObject.cpp:1388
 #, qt-format
 msgctxt "object narration"
 msgid "Longitude %1, and latitude %2. "
 msgstr "Longitude %1 et latitude %2. "
 
-#: src/core/StelObject.cpp:1258
+#: src/core/StelObject.cpp:1333
 msgctxt "object narration"
 msgid "Supergalactic coordinates are:"
 msgstr "Les coordonnées supergalactiques sont"
 
-#: src/core/StelObject.cpp:1287
+#: src/core/StelObject.cpp:1362
 msgctxt "object narration"
 msgid "Ecliptical coordinates for Equinox 2000 are:"
 msgstr "Les coordonnées écliptiques pour l'équinoxe 2000 sont"
 
-#: src/core/StelObject.cpp:1312
+#: src/core/StelObject.cpp:1387
 msgctxt "object narration"
 msgid "Ecliptical coordinates of date are:"
 msgstr "Les coordonnées écliptiques de la date sont"
 
-#: src/core/StelObject.cpp:1317
+#: src/core/StelObject.cpp:1392
 msgctxt "object narration"
 msgid "The Ecliptic obliquity of date is"
 msgstr "L'obliquité de l'écliptique de la date est"
 
-#: src/core/StelObject.cpp:1333
+#: src/core/StelObject.cpp:1408
 msgctxt "object narration"
 msgid "The Mean Sidereal Time is"
 msgstr "Le temps sidéral moyen est"
 
-#: src/core/StelObject.cpp:1342
+#: src/core/StelObject.cpp:1417
 msgctxt "object narration"
 msgid "The Apparent Sidereal Time is"
 msgstr "Le temps sidéral apparent est"
 
-#: src/core/StelObject.cpp:1375
+#: src/core/StelObject.cpp:1450
 msgctxt "object narration; celestial event; passage across a meridian"
 msgid "Transit on this day is at:"
 msgstr "La culmination ce jour-ci est à :"
 
-#: src/core/StelObject.cpp:1376
+#: src/core/StelObject.cpp:1451
 msgctxt "object narration"
 msgid "Rise on this day is at:"
 msgstr "Le lever ce jour-ci est à :"
 
-#: src/core/StelObject.cpp:1377
+#: src/core/StelObject.cpp:1452
 msgctxt "object narration"
 msgid "Set on this day is at:"
 msgstr "Le coucher ce jour-ci est à :"
 
-#: src/core/StelObject.cpp:1387
+#: src/core/StelObject.cpp:1462
 msgctxt "object narration"
 msgid "The object does not rise on this day."
 msgstr "L'objet ne se ève pas ce jour-ci"
 
-#: src/core/StelObject.cpp:1401
+#: src/core/StelObject.cpp:1476
 msgctxt "object narration"
 msgid "There is no meridian transit on this day."
 msgstr "Il n'y a pas de culmination ce jour-ci"
 
-#: src/core/StelObject.cpp:1413
+#: src/core/StelObject.cpp:1488
 msgctxt "object narration"
 msgid "The object does not set on this day."
 msgstr "L'objet ne se couche pas ce jour-ci"
 
-#: src/core/StelObject.cpp:1429
+#: src/core/StelObject.cpp:1504
 #, qt-format
 msgctxt "celestial event"
 msgid "Morning twilight for a Solar altitude of %1 degrees begins at %2. "
 msgstr "L'aube commence à %2 pour une hauteur du Soleil de %1 degrés."
 
-#: src/core/StelObject.cpp:1430
+#: src/core/StelObject.cpp:1505
 #, qt-format
 msgctxt "celestial event"
 msgid "Evening twilight for a Solar altitude of %1 degrees ends at %2. "
 msgstr "Le crépuscule commence à %2 pour une hauteur du Soleil de %1 degrés."
 
-#: src/core/StelObject.cpp:1441
+#: src/core/StelObject.cpp:1516
 msgctxt "object narration"
 msgid "Duration of Daytime"
 msgstr "Durée du jour"
 
-#: src/core/StelObject.cpp:1449
+#: src/core/StelObject.cpp:1524
 msgctxt "object narration"
 msgid "It is Polar night"
 msgstr "C'est la nuit polaire"
 
-#: src/core/StelObject.cpp:1456
+#: src/core/StelObject.cpp:1531
 msgid "It is Polar day"
 msgstr "C'est le jour polaire"
 
-#: src/core/StelObject.cpp:1458
+#: src/core/StelObject.cpp:1533
 msgid "This object is circumpolar and so never sets"
 msgstr "Cet objet est circumpolaire et ne se couche jamais"
 
-#: src/core/StelObject.cpp:1492
+#: src/core/StelObject.cpp:1567
 #, qt-format
 msgctxt "object narration"
 msgid "Greatest Eastern Digression is at Azimuth %1, Hour Angle %2"
 msgstr "La plus grande digression Est est à l'azimut %1, angle horaire %2"
 
-#: src/core/StelObject.cpp:1506
+#: src/core/StelObject.cpp:1581
 #, qt-format
 msgctxt "object narration"
 msgid "Greatest Western Digression is at Azimuth %1, Hour Angle %2"
 msgstr "La plus grande digression Ouest est à l'azimut %1, angle horaire %2"
 
-#: src/core/StelObject.cpp:1531
+#: src/core/StelObject.cpp:1606
 msgctxt "object narration"
 msgid "The Parallactic Angle is"
 msgstr "L'angle parallactique est de"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1962
+#: src/core/StelObject.cpp:2037
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "A/H solaire"
 
-#: src/core/StelObject.cpp:1962
+#: src/core/StelObject.cpp:2037
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "Az./Haut. solaire"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1980
+#: src/core/StelObject.cpp:2055
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "A/H lunaire"
 
-#: src/core/StelObject.cpp:1980
+#: src/core/StelObject.cpp:2055
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "Az./Haut. lunaire"
 
-#: src/core/StelObject.cpp:2018
+#: src/core/StelObject.cpp:2093
 #, qt-format
 msgctxt "object narration"
 msgid "The Sun's azimuth is %1, and its altitude is %2."
 msgstr "L'azimut du Soleil est %1 et sa hauteur est %2. "
 
-#: src/core/StelObject.cpp:2029
+#: src/core/StelObject.cpp:2104
 #, qt-format
 msgctxt "object narration"
 msgid "The Moon's azimuth is %1, and its altitude is %2."
@@ -6020,9 +6069,9 @@ msgstr "Zodiaque"
 msgid "Lunar Station"
 msgstr "Station lunaire"
 
-#: src/core/StelSkyCultureSkyPartition.cpp:527 src/core/StelUtils.cpp:343
-#: src/core/StelUtils.cpp:521 src/core/StelUtils.cpp:569
-#: src/core/StelUtils.cpp:1577
+#: src/core/StelSkyCultureSkyPartition.cpp:527 src/core/StelUtils.cpp:348
+#: src/core/StelUtils.cpp:526 src/core/StelUtils.cpp:574
+#: src/core/StelUtils.cpp:1582
 msgctxt "object narration"
 msgid "minutes"
 msgstr "minutes"
@@ -6733,290 +6782,290 @@ msgid "Further information can be found in the {developer documentation}."
 msgstr ""
 "D'autres informations se trouvent dans la {documentation développeur}."
 
-#: src/core/StelUtils.cpp:145
+#: src/core/StelUtils.cpp:150
 msgctxt "duration"
 msgid "d"
 msgstr "j"
 
-#: src/core/StelUtils.cpp:146
+#: src/core/StelUtils.cpp:151
 msgctxt "duration"
 msgid "h"
 msgstr "h"
 
-#: src/core/StelUtils.cpp:147
+#: src/core/StelUtils.cpp:152
 msgctxt "duration"
 msgid "m"
 msgstr "min"
 
-#: src/core/StelUtils.cpp:148
+#: src/core/StelUtils.cpp:153
 msgctxt "duration"
 msgid "s"
 msgstr "s"
 
-#: src/core/StelUtils.cpp:165
+#: src/core/StelUtils.cpp:170
 msgctxt "duration"
 msgid "hours"
 msgstr "heures"
 
-#: src/core/StelUtils.cpp:166
+#: src/core/StelUtils.cpp:171
 msgctxt "duration"
 msgid "minutes"
 msgstr "minutes"
 
-#: src/core/StelUtils.cpp:167
+#: src/core/StelUtils.cpp:172
 msgctxt "duration"
 msgid "seconds"
 msgstr "secondes"
 
-#: src/core/StelUtils.cpp:342 src/core/StelUtils.cpp:1576
+#: src/core/StelUtils.cpp:347 src/core/StelUtils.cpp:1581
 msgctxt "object narration"
 msgid "hours"
 msgstr "heures"
 
-#: src/core/StelUtils.cpp:345 src/core/StelUtils.cpp:522
-#: src/core/StelUtils.cpp:570 src/core/StelUtils.cpp:1579
+#: src/core/StelUtils.cpp:350 src/core/StelUtils.cpp:527
+#: src/core/StelUtils.cpp:575 src/core/StelUtils.cpp:1584
 msgctxt "object narration"
 msgid "seconds"
 msgstr "secondes"
 
-#: src/core/StelUtils.cpp:436 src/core/StelUtils.cpp:489
-#: src/core/StelUtils.cpp:1687
+#: src/core/StelUtils.cpp:441 src/core/StelUtils.cpp:494
+#: src/core/StelUtils.cpp:1692
 msgid "minus"
 msgstr "moins"
 
-#: src/core/StelUtils.cpp:440 src/core/StelUtils.cpp:493
+#: src/core/StelUtils.cpp:445 src/core/StelUtils.cpp:498
 msgctxt "object narration"
 msgid "arc minutes"
 msgstr "arc minutes"
 
-#: src/core/StelUtils.cpp:443 src/core/StelUtils.cpp:496
+#: src/core/StelUtils.cpp:448 src/core/StelUtils.cpp:501
 msgctxt "object narration"
 msgid "arc seconds"
 msgstr "arc secondes"
 
-#: src/core/StelUtils.cpp:489
+#: src/core/StelUtils.cpp:494
 msgid "plus"
 msgstr "plus"
 
-#: src/core/StelUtils.cpp:491
+#: src/core/StelUtils.cpp:496
 msgid "degrees"
 msgstr "degrés"
 
-#: src/core/StelUtils.cpp:495 src/ui_astroCalcDialog.h:2352
+#: src/core/StelUtils.cpp:500 src/ui_astroCalcDialog.h:2352
 #: src/ui_astroCalcDialog.h:2454 plugins/Satellites/src/Satellite.cpp:493
 msgid "and"
 msgstr "et"
 
-#: src/core/StelUtils.cpp:529 src/core/StelUtils.cpp:531
+#: src/core/StelUtils.cpp:534 src/core/StelUtils.cpp:536
 msgctxt "object narration"
 msgid "North"
 msgstr "Nord"
 
-#: src/core/StelUtils.cpp:529 src/core/StelUtils.cpp:531
+#: src/core/StelUtils.cpp:534 src/core/StelUtils.cpp:536
 msgctxt "object narration"
 msgid "South"
 msgstr "Sud"
 
-#: src/core/StelUtils.cpp:576 src/core/StelUtils.cpp:582
+#: src/core/StelUtils.cpp:581 src/core/StelUtils.cpp:587
 msgctxt "object narration"
 msgid "East"
 msgstr "Est"
 
-#: src/core/StelUtils.cpp:577 src/core/StelUtils.cpp:583
+#: src/core/StelUtils.cpp:582 src/core/StelUtils.cpp:588
 msgctxt "object narration"
 msgid "West"
 msgstr "Ouest"
 
-#: src/core/StelUtils.cpp:3169
+#: src/core/StelUtils.cpp:3174
 msgid "Alpha"
 msgstr "Alpha"
 
-#: src/core/StelUtils.cpp:3169 src/ui_searchDialogGui.h:774
+#: src/core/StelUtils.cpp:3174 src/ui_searchDialogGui.h:774
 msgid "alpha"
 msgstr "alpha"
 
-#: src/core/StelUtils.cpp:3170
+#: src/core/StelUtils.cpp:3175
 msgid "Beta"
 msgstr "Bêta"
 
-#: src/core/StelUtils.cpp:3170 src/ui_searchDialogGui.h:777
+#: src/core/StelUtils.cpp:3175 src/ui_searchDialogGui.h:777
 msgid "beta"
 msgstr "bêta"
 
-#: src/core/StelUtils.cpp:3171 src/gui/AstroCalcDialog.cpp:2695
+#: src/core/StelUtils.cpp:3176 src/gui/AstroCalcDialog.cpp:2695
 #: src/gui/AstroCalcDialog.cpp:3287
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/core/StelUtils.cpp:3171 src/ui_searchDialogGui.h:780
+#: src/core/StelUtils.cpp:3176 src/ui_searchDialogGui.h:780
 msgid "gamma"
 msgstr "gamma"
 
-#: src/core/StelUtils.cpp:3172
+#: src/core/StelUtils.cpp:3177
 msgid "Delta"
 msgstr "Delta"
 
-#: src/core/StelUtils.cpp:3172 src/ui_searchDialogGui.h:783
+#: src/core/StelUtils.cpp:3177 src/ui_searchDialogGui.h:783
 msgid "delta"
 msgstr "delta"
 
-#: src/core/StelUtils.cpp:3173
+#: src/core/StelUtils.cpp:3178
 msgid "Epsilon"
 msgstr "Epsilon"
 
-#: src/core/StelUtils.cpp:3173 src/ui_searchDialogGui.h:786
+#: src/core/StelUtils.cpp:3178 src/ui_searchDialogGui.h:786
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/core/StelUtils.cpp:3175
+#: src/core/StelUtils.cpp:3180
 msgid "Zeta"
 msgstr "Zêta"
 
-#: src/core/StelUtils.cpp:3175 src/ui_searchDialogGui.h:789
+#: src/core/StelUtils.cpp:3180 src/ui_searchDialogGui.h:789
 msgid "zeta"
 msgstr "zêta"
 
-#: src/core/StelUtils.cpp:3176
+#: src/core/StelUtils.cpp:3181
 msgid "Eta"
 msgstr "Êta"
 
-#: src/core/StelUtils.cpp:3176 src/ui_searchDialogGui.h:792
+#: src/core/StelUtils.cpp:3181 src/ui_searchDialogGui.h:792
 msgid "eta"
 msgstr "êta"
 
-#: src/core/StelUtils.cpp:3177
+#: src/core/StelUtils.cpp:3182
 msgid "Theta"
 msgstr "Thêta"
 
-#: src/core/StelUtils.cpp:3177 src/ui_searchDialogGui.h:795
+#: src/core/StelUtils.cpp:3182 src/ui_searchDialogGui.h:795
 msgid "theta"
 msgstr "thêta"
 
-#: src/core/StelUtils.cpp:3178
+#: src/core/StelUtils.cpp:3183
 msgid "Iota"
 msgstr "Iota"
 
-#: src/core/StelUtils.cpp:3178 src/ui_searchDialogGui.h:771
+#: src/core/StelUtils.cpp:3183 src/ui_searchDialogGui.h:771
 msgid "iota"
 msgstr "iota"
 
-#: src/core/StelUtils.cpp:3179
+#: src/core/StelUtils.cpp:3184
 msgid "Kappa"
 msgstr "Kappa"
 
-#: src/core/StelUtils.cpp:3179 src/ui_searchDialogGui.h:798
+#: src/core/StelUtils.cpp:3184 src/ui_searchDialogGui.h:798
 msgid "kappa"
 msgstr "kappa"
 
-#: src/core/StelUtils.cpp:3181
+#: src/core/StelUtils.cpp:3186
 msgid "Lambda"
 msgstr "Lambda"
 
-#: src/core/StelUtils.cpp:3181 src/ui_searchDialogGui.h:801
+#: src/core/StelUtils.cpp:3186 src/ui_searchDialogGui.h:801
 msgid "lambda"
 msgstr "lambda"
 
-#: src/core/StelUtils.cpp:3182
+#: src/core/StelUtils.cpp:3187
 msgid "Mu"
 msgstr "Mu"
 
-#: src/core/StelUtils.cpp:3182 src/ui_searchDialogGui.h:804
+#: src/core/StelUtils.cpp:3187 src/ui_searchDialogGui.h:804
 msgid "mu"
 msgstr "mu"
 
-#: src/core/StelUtils.cpp:3183
+#: src/core/StelUtils.cpp:3188
 msgid "Nu"
 msgstr "Nu"
 
-#: src/core/StelUtils.cpp:3183 src/ui_searchDialogGui.h:807
+#: src/core/StelUtils.cpp:3188 src/ui_searchDialogGui.h:807
 msgid "nu"
 msgstr "nu"
 
-#: src/core/StelUtils.cpp:3184
+#: src/core/StelUtils.cpp:3189
 msgid "Xi"
 msgstr "Xi"
 
-#: src/core/StelUtils.cpp:3184 src/ui_searchDialogGui.h:810
+#: src/core/StelUtils.cpp:3189 src/ui_searchDialogGui.h:810
 msgid "xi"
 msgstr "xi"
 
-#: src/core/StelUtils.cpp:3185
+#: src/core/StelUtils.cpp:3190
 msgid "Omicron"
 msgstr "Omicron"
 
-#: src/core/StelUtils.cpp:3185 src/ui_searchDialogGui.h:813
+#: src/core/StelUtils.cpp:3190 src/ui_searchDialogGui.h:813
 msgid "omicron"
 msgstr "omicron"
 
-#: src/core/StelUtils.cpp:3187
+#: src/core/StelUtils.cpp:3192
 msgid "Pi"
 msgstr "Pi"
 
-#: src/core/StelUtils.cpp:3187 src/ui_searchDialogGui.h:816
+#: src/core/StelUtils.cpp:3192 src/ui_searchDialogGui.h:816
 msgid "pi"
 msgstr "pi"
 
-#: src/core/StelUtils.cpp:3188
+#: src/core/StelUtils.cpp:3193
 msgid "Rho"
 msgstr "Rhô"
 
-#: src/core/StelUtils.cpp:3188 src/ui_searchDialogGui.h:819
+#: src/core/StelUtils.cpp:3193 src/ui_searchDialogGui.h:819
 msgid "rho"
 msgstr "rhô"
 
-#: src/core/StelUtils.cpp:3189
+#: src/core/StelUtils.cpp:3194
 msgid "Sigma"
 msgstr "Sigma"
 
-#: src/core/StelUtils.cpp:3189 src/ui_searchDialogGui.h:822
+#: src/core/StelUtils.cpp:3194 src/ui_searchDialogGui.h:822
 msgid "sigma"
 msgstr "sigma"
 
-#: src/core/StelUtils.cpp:3190
+#: src/core/StelUtils.cpp:3195
 msgid "Tau"
 msgstr "Tau"
 
-#: src/core/StelUtils.cpp:3190 src/ui_searchDialogGui.h:825
+#: src/core/StelUtils.cpp:3195 src/ui_searchDialogGui.h:825
 msgid "tau"
 msgstr "tau"
 
-#: src/core/StelUtils.cpp:3191
+#: src/core/StelUtils.cpp:3196
 msgid "Upsilon"
 msgstr "Upsilon"
 
-#: src/core/StelUtils.cpp:3191 src/ui_searchDialogGui.h:828
+#: src/core/StelUtils.cpp:3196 src/ui_searchDialogGui.h:828
 msgid "upsilon"
 msgstr "upsilon"
 
-#: src/core/StelUtils.cpp:3193
+#: src/core/StelUtils.cpp:3198
 msgid "Phi"
 msgstr "Phi"
 
-#: src/core/StelUtils.cpp:3193 src/ui_searchDialogGui.h:831
+#: src/core/StelUtils.cpp:3198 src/ui_searchDialogGui.h:831
 msgid "phi"
 msgstr "phi"
 
-#: src/core/StelUtils.cpp:3194
+#: src/core/StelUtils.cpp:3199
 msgid "Chi"
 msgstr "Chi"
 
-#: src/core/StelUtils.cpp:3194 src/ui_searchDialogGui.h:834
+#: src/core/StelUtils.cpp:3199 src/ui_searchDialogGui.h:834
 msgid "chi"
 msgstr "chi"
 
-#: src/core/StelUtils.cpp:3195
+#: src/core/StelUtils.cpp:3200
 msgid "Psi"
 msgstr "Psi"
 
-#: src/core/StelUtils.cpp:3195 src/ui_searchDialogGui.h:837
+#: src/core/StelUtils.cpp:3200 src/ui_searchDialogGui.h:837
 msgid "psi"
 msgstr "psi"
 
-#: src/core/StelUtils.cpp:3196
+#: src/core/StelUtils.cpp:3201
 msgid "Omega"
 msgstr "Oméga"
 
-#: src/core/StelUtils.cpp:3196 src/ui_searchDialogGui.h:840
+#: src/core/StelUtils.cpp:3201 src/ui_searchDialogGui.h:840
 msgid "omega"
 msgstr "oméga"
 
