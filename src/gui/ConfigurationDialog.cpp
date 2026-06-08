@@ -1478,6 +1478,18 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("main/screenshot_custom_width",                  propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
         conf->setValue("main/screenshot_custom_height",                 propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
 
+#ifdef ENABLE_SPEECH
+	// TextToSpeech settings
+	StelSpeechMgr *speechMgr=GETSTELMODULE(StelSpeechMgr);
+
+	StelApp::immediateSave("speech/engine", speechMgr->getEngine());
+	StelApp::immediateSave("speech/rate",   propMgr->getStelPropertyValue("StelSpeechMgr.rate").toDouble());
+	StelApp::immediateSave("speech/pitch",  propMgr->getStelPropertyValue("StelSpeechMgr.pitch").toDouble());
+	StelApp::immediateSave("speech/volume", propMgr->getStelPropertyValue("StelSpeechMgr.volume").toDouble());
+
+	saveCustomSelectedNarration();
+#endif
+
 	QWidget& mainWindow = StelMainView::getInstance();
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	QScreen *mainScreen = mainWindow.windowHandle()->screen();
