@@ -1731,7 +1731,19 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				for (int t = 0; t < extras; ++t)
 					futures.append(QtConcurrent::run(stripe, t));
 				stripe(extras);                            // main thread's share
-				for (auto& f : futures) f.waitForFinished();  // TODO: FIX HANG HERE
+
+				// The main thread is about to go idle in waitForFinished().  Yield its slot
+				// back to the global pool for the duration of the wait so a queued stripe
+				// can run in its place; without this, if the pool is already saturated by
+				// other subsystems (very likely during init / the first frame) the
+				// QtConcurrent::run() tasks above stay queued, nothing picks them up, and we
+				// wait forever.  This mirrors what QtConcurrent::blockingMap (used in
+				// case 1) does internally.
+				QThreadPool* const pool = QThreadPool::globalInstance();
+				pool->releaseThread();
+				const auto reserveGuard = qScopeGuard([pool]{ pool->reserveThread(); });
+
+				for (auto& f : futures) f.waitForFinished();
 			};
 
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
@@ -1793,16 +1805,27 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				for (int t = 0; t < extras; ++t)
 					futures.append(QtConcurrent::run(stripe, t));
 				stripe(extras);                            // main thread's share
-				for (auto& f : futures) f.waitForFinished(); // TODO: Fix always waiting here: Pass 1, Level 2, i.e. planet moons (or observers?).
+
+				// The main thread is about to go idle in waitForFinished().  Yield its slot
+				// back to the global pool for the duration of the wait so a queued stripe
+				// can run in its place; without this, if the pool is already saturated by
+				// other subsystems (very likely during init / the first frame) the
+				// QtConcurrent::run() tasks above stay queued, nothing picks them up, and we
+				// wait forever.  This mirrors what QtConcurrent::blockingMap (used in
+				// case 1) does internally.
+				QThreadPool* const pool = QThreadPool::globalInstance();
+				pool->releaseThread();
+				const auto reserveGuard = qScopeGuard([pool]{ pool->reserveThread(); });
+				for (auto& f : futures) f.waitForFinished();
 			};
 
 			// ---- Pass 1: first approximation at dateJDE -----------------
 			qDebug() << "Pass 1";
-			int lev=0;
+			//int lev=0;
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
 			{
-				qDebug() << "Lev" << lev++;
-				runLevelParallel(level, [obs, dateJDE, lev](const PlanetP& p)
+				//qDebug() << "Lev" << lev++;
+				runLevelParallel(level, [obs, dateJDE](const PlanetP& p)
 				{
 					//if (lev==2)
 					//	qDebug() << p->getEnglishName();
@@ -1840,7 +1863,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 
 			// ---- Pass 2: light-time + aberration correction -------------
 			qDebug() << "Pass 2";
-			lev=0;
+			//lev=0;
 
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
 			{
@@ -1850,7 +1873,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 
 			// ---- Pass 3: refinement (and rotation element corrections) --
 			qDebug() << "Pass 3";
-			lev=0;
+			//lev=0;
 
 			// The next call may already do nothing if the time difference to
 			// the previous round is not large enough.
