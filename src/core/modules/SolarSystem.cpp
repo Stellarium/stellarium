@@ -1793,7 +1793,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				for (int t = 0; t < extras; ++t)
 					futures.append(QtConcurrent::run(stripe, t));
 				stripe(extras);                            // main thread's share
-				for (auto& f : futures) f.waitForFinished(); // TODO: Fix always waiting here...
+				for (auto& f : futures) f.waitForFinished(); // TODO: Fix always waiting here: Pass 1, Level 2, i.e. planet moons (or observers?).
 			};
 
 			// ---- Pass 1: first approximation at dateJDE -----------------
@@ -1801,10 +1801,11 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			int lev=0;
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
 			{
-				//qDebug() << "Lev" << lev++;
-				runLevelParallel(level, [obs, dateJDE](const PlanetP& p)
+				qDebug() << "Lev" << lev++;
+				runLevelParallel(level, [obs, dateJDE, lev](const PlanetP& p)
 				{
-					//qDebug() << p->getEnglishName();
+					//if (lev==2)
+					//	qDebug() << p->getEnglishName();
 					p->computePosition(obs, dateJDE, Vec3d(0.));
 				});
 			}
