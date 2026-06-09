@@ -857,11 +857,8 @@ Territory of Dog (Chinese: 狗国, Pinyin: Gǒu Guó) consists of 4 stars southe
  - [#4]: Chen, Y. (1986). The Star Catalog in *Tianwen Huichao* and Guo Shoujing's Stellar Observational Work. *Studies in the History of Natural Sciences*, (4), 331–340.
  - [#5]: Sun, X. (1996). A Study of the *Tianwen Huichao* Star Catalog. In Chen, M. (Ed.), *Star Charts in Ancient China* (pp. 79–108). Shenyang: Liaoning Education Press. ISBN 7538246843.
  - [#6]: Cao, J. (2019). *"Sanyuan Lieshe Rusu Quji Ji" Xingbiao Tushi* 《三垣列舍入宿去极集》星表图示 (Illustration of the Star Catalog Collection of Lunar-Mansion Longitudes and Polar Distances for the Three Enclosures and Twenty-Eight Mansions). *Astronomy Lover*, (6), 80–85.
-
-### External links
-
- - [wikipedia - Guo Shoujing](https://en.wikipedia.org/wiki/Guo_Shoujing)
- - [Complete machine-readable data of Tianwen Huichao star catalog (JSON format, Chinese)](https://github.com/Guanjin0562/stellarium/blob/chinese-skyculture-enhancement/starcatalog/English%20titles/Tianwen_Huichao_(14th_century).json)
+ - [#7]: [Guo Shoujing (Wikipedia)](https://en.wikipedia.org/wiki/Guo_Shoujing)
+ - [#8]: [Complete machine-readable data of Tianwen Huichao star catalog (JSON format, Chinese)](https://github.com/Guanjin0562/stellarium/blob/chinese-skyculture-enhancement/starcatalog/English%20titles/Tianwen_Huichao_(14th_century).json)
 
 ## Authors
 
