@@ -87,13 +87,13 @@ QByteArray StelProjectorPerspective::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorForwardTransform(vec3 v)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
-	const float FLT_MAX = 3.4028235e38;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
+	const highp float FLT_MAX = 3.4028235e38;
 
-	float r = length(v);
+	highp float r = length(v);
 	if(v[2] < 0.)
 	{
 		v[0] *= -widthStretch/v[2];
@@ -122,10 +122,10 @@ QByteArray StelProjectorPerspective::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	v[0] /= widthStretch;
 	v[2] = sqrt(1.0/(1.0+v[0]*v[0]+v[1]*v[1]));
@@ -197,13 +197,13 @@ QByteArray StelProjectorEqualArea::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorForwardTransform(vec3 v)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
-	float r = length(v);
-	float f = sqrt(2./(r*(r-v[2])));
+	highp float r = length(v);
+	highp float f = sqrt(2./(r*(r-v[2])));
 	v[0] *= f*widthStretch;
 	v[1] *= f;
 	v[2] = r;
@@ -217,14 +217,14 @@ QByteArray StelProjectorEqualArea::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	v[0] /= widthStretch;
-	float dq = v[0]*v[0] + v[1]*v[1];
-	float l = 1.0 - 0.25*dq;
+	highp float dq = v[0]*v[0] + v[1]*v[1];
+	highp float l = 1.0 - 0.25*dq;
 	if (l < 0.)
 	{
 		v[0] = 0.0;
@@ -302,22 +302,22 @@ QByteArray StelProjectorStereographic::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorForwardTransform(vec3 v)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-	const float FLT_MAX = 3.4028235e38;
-	const float FLT_MIN = 1.1754943508e-38;
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	const highp float FLT_MAX = 3.4028235e38;
+	const highp float FLT_MIN = 1.1754943508e-38;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
-	float r = length(v);
-	float h = 0.5*(r-v[2]);
+	highp float r = length(v);
+	highp float h = 0.5*(r-v[2]);
 	if (h <= 0.) {
 		v[0] = FLT_MAX;
 		v[1] = FLT_MAX;
 		v[2] = -FLT_MIN;
 		return v;
 	}
-	float f = 1. / h;
+	highp float f = 1. / h;
 	v[0] *= f*widthStretch;
 	v[1] *= f;
 	v[2] = r;
@@ -331,13 +331,13 @@ QByteArray StelProjectorStereographic::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	v[0] /= widthStretch;
-	float lqq = 0.25*(v[0]*v[0] + v[1]*v[1]);
+	highp float lqq = 0.25*(v[0]*v[0] + v[1]*v[1]);
 	v[2] = lqq - 1.0;
 	v *= 1.0 / (lqq + 1.0);
 	ok = true;
@@ -398,17 +398,17 @@ QByteArray StelProjectorFisheye::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorForwardTransform(vec3 v)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-	const float FLT_MAX = 3.4028235e38;
-	const float FLT_MIN = 1.1754943508e-38;
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	const highp float FLT_MAX = 3.4028235e38;
+	const highp float FLT_MIN = 1.1754943508e-38;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
-	float rq1 = v[0]*v[0] + v[1]*v[1];
+	highp float rq1 = v[0]*v[0] + v[1]*v[1];
 	if (rq1 > 0.) {
-		float h = sqrt(rq1);
-		float f = atan(h,-v[2]) / h;
+		highp float h = sqrt(rq1);
+		highp float f = atan(h,-v[2]) / h;
 		v[0] *= f*widthStretch;
 		v[1] *= f;
 		v[2] = sqrt(rq1 + v[2]*v[2]);
@@ -433,15 +433,15 @@ QByteArray StelProjectorFisheye::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-	const float PI = 3.14159265;
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	const highp float PI = 3.14159265;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	v[0] /= widthStretch;
-	float a = sqrt(v[0]*v[0]+v[1]*v[1]);
-	float f = (a > 0.0) ? (sin(a) / a) : 1.0;
+	highp float a = sqrt(v[0]*v[0]+v[1]*v[1]);
+	highp float f = (a > 0.0) ? (sin(a) / a) : 1.0;
 	v[0] *= f;
 	v[1] *= f;
 	v[2] = -cos(a);
@@ -497,17 +497,17 @@ QByteArray StelProjectorHammer::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorForwardTransform(vec3 v)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-	const float M_SQRT2 = 1.41421356;
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	const highp float M_SQRT2 = 1.41421356;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	// Hammer Aitoff
-	float r = length(v);
-	float alpha = atan(v[0],-v[2]);
-	float cosDelta = sqrt(1.-v[1]*v[1]/(r*r));
-	float z = sqrt(1.+cosDelta*cos(alpha/2.));
+	highp float r = length(v);
+	highp float alpha = atan(v[0],-v[2]);
+	highp float cosDelta = sqrt(1.-v[1]*v[1]/(r*r));
+	highp float z = sqrt(1.+cosDelta*cos(alpha/2.));
 	v[0] = 2.*M_SQRT2*cosDelta*sin(alpha/2.)/z * widthStretch;
 	v[1] = M_SQRT2*v[1]/r/z;
 	v[2] = r;
@@ -522,18 +522,18 @@ QByteArray StelProjectorHammer::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	v[0] /= widthStretch;
-	float zsq = 1.-0.25*0.25*v[0]*v[0]-0.5*0.5*v[1]*v[1];
-	float z = zsq<0. ? 0. : sqrt(zsq);
+	highp float zsq = 1.-0.25*0.25*v[0]*v[0]-0.5*0.5*v[1]*v[1];
+	highp float z = zsq<0. ? 0. : sqrt(zsq);
 	ok = 0.25*v[0]*v[0]+v[1]*v[1]<2.0; // This is stolen from glunatic
-	float alpha = 2.*atan(z*v[0],(2.*(2.*zsq-1.)));
-	float delta = asin(v[1]*z);
-	float cd = cos(delta);
+	highp float alpha = 2.*atan(z*v[0],(2.*(2.*zsq-1.)));
+	highp float delta = asin(v[1]*z);
+	highp float cd = cos(delta);
 	v[2] = - cd * cos(alpha);
 	v[0] = cd * sin(alpha);
 	v[1] = v[1]*z;
@@ -616,28 +616,28 @@ QByteArray StelProjectorMollweide::getForwardTransformShader() const
 {
     return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorForwardTransform(vec3 v)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-    const float M_SQRT2 = 1.41421356;
-    const float PI = 3.14159265;
-    float widthStretch = PROJECTOR_FWD_widthStretch;
+    const highp float M_SQRT2 = 1.41421356;
+    const highp float PI = 3.14159265;
+    highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
-    float r = length(v);
-    float lambda = atan(v[0], -v[2]);
-    float sinDelta = v[1] / r;
-    float delta = asin(sinDelta);
+    highp float r = length(v);
+    highp float lambda = atan(v[0], -v[2]);
+    highp float sinDelta = v[1] / r;
+    highp float delta = asin(sinDelta);
 
     // Newton-Raphson iterations for theta
-    float theta = delta;
+    highp float theta = delta;
     for (int i=0; i<5; i++)
     {
-        float f = 2.0*theta + sin(2.0*theta) - PI * sinDelta;
-        float df = 2.0 + 2.0*cos(2.0*theta);
+        highp float f = 2.0*theta + sin(2.0*theta) - PI * sinDelta;
+        highp float df = 2.0 + 2.0*cos(2.0*theta);
         theta = theta - f/df;
     }
 
-    float cosTheta = cos(theta);
+    highp float cosTheta = cos(theta);
     v[0] = (2.0 * M_SQRT2 / PI) * lambda * cosTheta * widthStretch;
     v[1] = M_SQRT2 * sin(theta);
     v[2] = r;
@@ -651,23 +651,23 @@ QByteArray StelProjectorMollweide::getBackwardTransformShader() const
 {
     return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-    float widthStretch = PROJECTOR_FWD_widthStretch;
+    highp float widthStretch = PROJECTOR_FWD_widthStretch;
     v[0] /= widthStretch;
-    float x = v[0];
-    float y = v[1];
+    highp float x = v[0];
+    highp float y = v[1];
 
     ok = (x*x + 4.0*y*y <= 8.0);
 
-    float y_clamped = clamp(y, -1.41421356, 1.41421356);
-    float theta = asin(y_clamped / 1.41421356);
+    highp float y_clamped = clamp(y, -1.41421356, 1.41421356);
+    highp float theta = asin(y_clamped / 1.41421356);
 
-    float cosTheta = cos(theta);
+    highp float cosTheta = cos(theta);
 
     // Handle potential division by zero when cosTheta is near zero (at poles)
-    float lambda;
+    highp float lambda;
     if (abs(cosTheta) < 0.0000001)
     {
         lambda = 0.0; // arbitrary value when at poles
@@ -676,10 +676,10 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
         lambda = (x * 3.14159265) / (2.0 * 1.41421356 * cosTheta);
     }
 
-    float sinDelta = (2.0*theta + sin(2.0*theta)) / 3.14159265;
-    float delta = asin(sinDelta);
+    highp float sinDelta = (2.0*theta + sin(2.0*theta)) / 3.14159265;
+    highp float delta = asin(sinDelta);
 
-    float cosDelta = cos(delta);
+    highp float cosDelta = cos(delta);
     v[0] = cosDelta * sin(lambda);
     v[1] = sinDelta;
     v[2] = -cosDelta * cos(lambda);
@@ -728,15 +728,15 @@ QByteArray StelProjectorCylinder::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorForwardTransform(vec3 v)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
-	float r = length(v);
+	highp float r = length(v);
 	bool rval = (-r < v[1] && v[1] < r);
-	float alpha = atan(v[0],-v[2]);
-	float delta = asin(v[1]/r);
+	highp float alpha = atan(v[0],-v[2]);
+	highp float delta = asin(v[1]/r);
 	v[0] = alpha*widthStretch;
 	v[1] = delta;
 	v[2] = r;
@@ -751,16 +751,16 @@ QByteArray StelProjectorCylinder::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-	const float PI = 3.14159265;
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	const highp float PI = 3.14159265;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	v[0] /= widthStretch;
 	ok = v[1]<PI/2. && v[1]>-PI/2. && v[0]>-PI && v[0]<PI;
-	float cd = cos(v[1]);
-	float alpha=v[0];
+	highp float cd = cos(v[1]);
+	highp float alpha=v[0];
 	v[2] = - cd * cos(alpha);
 	v[0] = cd * sin(alpha);
 	v[1] = sin(v[1]);
@@ -823,14 +823,14 @@ QByteArray StelProjectorMercator::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorForwardTransform(vec3 v)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
-	float r = length(v);
+	highp float r = length(v);
 	bool rval = (-r < v[1] && v[1] < r);
-	float sin_delta = v[1]/r;
+	highp float sin_delta = v[1]/r;
 	v[0] = atan(v[0],-v[2]) * widthStretch;
 	v[1] = 0.5*log((1.+sin_delta)/(1.-sin_delta));
 	v[2] = r;
@@ -845,19 +845,19 @@ QByteArray StelProjectorMercator::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-	const float PI = 3.14159265;
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	const highp float PI = 3.14159265;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	v[0] /= widthStretch;
 	ok = v[0]>-PI && v[0]<PI;
-	float E = exp(v[1]);
-	float h = E*E;
-	float h1 = 1.0/(1.0+h);
-	float sin_delta = (h-1.0)*h1;
-	float cos_delta = 2.0*E*h1;
+	highp float E = exp(v[1]);
+	highp float h = E*E;
+	highp float h1 = 1.0/(1.0+h);
+	highp float sin_delta = (h-1.0)*h1;
+	highp float cos_delta = 2.0*E*h1;
 	v[2] = - cos_delta * cos(v[0]);
 	v[0] = cos_delta * sin(v[0]);
 	v[1] = sin_delta;
@@ -919,13 +919,13 @@ QByteArray StelProjectorOrthographic::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorForwardTransform(vec3 v)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
-	float r = length(v);
-	float h = 1./r;
+	highp float r = length(v);
+	highp float h = 1./r;
 	v[0] *= h * widthStretch;
 	v[1] *= h;
 	v[2] = r;
@@ -939,14 +939,14 @@ QByteArray StelProjectorOrthographic::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	v[0] /= widthStretch;
-	float dq = v[0]*v[0] + v[1]*v[1];
-	float h = 1.0 - dq;
+	highp float dq = v[0]*v[0] + v[1]*v[1];
+	highp float h = 1.0 - dq;
 	if (h < 0.) {
 		h = 1.0/sqrt(dq);
 		v[0] *= h;
@@ -1010,15 +1010,15 @@ QByteArray StelProjectorSinusoidal::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorForwardTransform(vec3 v)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
-	float r = length(v);
+	highp float r = length(v);
 	bool rval = (-r < v[1] && v[1] < r);
-	float alpha = atan(v[0],-v[2]);
-	float delta = asin(v[1]/r);
+	highp float alpha = atan(v[0],-v[2]);
+	highp float delta = asin(v[1]/r);
 	v[0] = alpha*cos(delta) * widthStretch;
 	v[1] = delta;
 	v[2] = r;
@@ -1033,16 +1033,16 @@ QByteArray StelProjectorSinusoidal::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+uniform highp float PROJECTOR_FWD_widthStretch;
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-	const float PI = 3.14159265;
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	const highp float PI = 3.14159265;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	v[0] /= widthStretch;
 	bool rval = v[1]<PI/2. && v[1]>-PI/2. && v[0]>-PI && v[0]<PI;
-	float cd = cos(v[1]);
-	float pcd = v[0]/cd;
+	highp float cd = cos(v[1]);
+	highp float pcd = v[0]/cd;
 	if (v[0]<-PI*cd || v[0]>PI*cd)
 	{
 		v[0] = -cd;
@@ -1103,21 +1103,21 @@ QByteArray StelProjectorMiller::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
 #line 1 102
-uniform float PROJECTOR_FWD_widthStretch;
+uniform highp float PROJECTOR_FWD_widthStretch;
 
-float asinh(float x)
+highp float asinh(highp float x)
 {
 	return log(x+sqrt(1.+x*x));
 }
 
-vec3 projectorForwardTransform(vec3 v)
+highp vec3 projectorForwardTransform(highp vec3 v)
 {
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
-	float r = length(v);
+	highp float r = length(v);
 	bool rval = (-r < v[1] && v[1] < r);
-	float sin_delta = v[1]/r;
-	float delta=asin(sin_delta);
+	highp float sin_delta = v[1]/r;
+	highp float delta=asin(sin_delta);
 	v[0] = atan(v[0],-v[2]) * widthStretch;
 	v[1] = 1.25*asinh(tan(0.8*delta));
 	v[2] = r;
@@ -1132,30 +1132,30 @@ QByteArray StelProjectorMiller::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
-uniform float PROJECTOR_FWD_widthStretch;
+uniform highp float PROJECTOR_FWD_widthStretch;
 
-float asinh(float x)
+highp float asinh(highp float x)
 {
 	return log(x+sqrt(1.+x*x));
 }
 
-float sinh(float x)
+highp float sinh(highp float x)
 {
-	float ex = exp(x);
+	highp float ex = exp(x);
 	return (ex*ex-1.)/(2.*ex);
 }
 
-vec3 projectorBackwardTransform(vec3 v, out bool ok)
+highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {
-	const float PI = 3.14159265;
-	float widthStretch = PROJECTOR_FWD_widthStretch;
+	const highp float PI = 3.14159265;
+	highp float widthStretch = PROJECTOR_FWD_widthStretch;
 
 	v[0] /= widthStretch;
-	float yMax=1.25*asinh(tan(PI*2.0/5.0));
+	highp float yMax=1.25*asinh(tan(PI*2.0/5.0));
 	ok = v[1]<yMax && v[1]>-yMax && v[0]>-PI && v[0]<PI;
-	float lat = 1.25*atan(sinh(0.8*v[1]));
-	float lng = v[0];
-	float cos_lat=cos(lat);
+	highp float lat = 1.25*atan(sinh(0.8*v[1]));
+	highp float lng = v[0];
+	highp float cos_lat=cos(lat);
 	v[0] = cos_lat*sin(lng);
 	v[1] = sin(lat);
 	v[2]= -cos_lat*cos(lng);
