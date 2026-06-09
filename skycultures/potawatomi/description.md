@@ -245,17 +245,19 @@ This list derives from Daniel Bourassa (1843)[^1] who was educated at Carey Miss
 [^1]: “A Vocabulary of the Po-Da-Wahd-Mih Language for Project 6697 | Smithsonian Digital Volunteers,” accessed February 17, 2026, https://transcription.si.edu/project/6697.
 
 
-## Authors and Project Team
+## Authors
 
-Neshnabé Nengosêk Kenomagéwen (Potawatomi Star Knowledge) Project Team:
+### Neshnabé Nengosêk Kenomagéwen (Potawatomi Star Knowledge) Project Team
 
 Blaire Morseau, PI morseaub@msu.edu
-
-John Foerch, Programmmer
 
 Aaron Martin, Artist
 
 Advisory Board: Michael Zimmerman Jr., Bmejwen Kyle Malott, DeJonay Morseau
+
+### Programming and data formatting
+
+John Foerch
 
 
 ## License
