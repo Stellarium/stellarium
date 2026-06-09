@@ -292,3 +292,11 @@ This Label is being used to acknowledge the relationship between the creative pr
 #### TK Community Voice (TK CV)
 
 This Label is being used to encourage the sharing of stories and voices about this material. The Label indicates that existing knowledge or descriptions are incomplete or partial. Any community member is invited and welcome to contribute to our community knowledge about this event, photograph, recording or heritage item. Sharing our voices helps us reclaim our histories and knowledge. This sharing is an internal process.
+
+### Note on Planetarium, Museum, and Public Education Use
+
+Planetariums, museums, science centers, schools, universities, libraries, and similar educational or cultural institutions may use this sky culture and its artwork in public programming, including ticketed shows, where the primary purpose is education, interpretation, cultural learning, or public outreach rather than commercial exploitation of the artwork or traditional knowledge.
+
+Ticket fees, cost recovery, staff compensation, venue operations, or standard admission fees do not automatically make a use inappropriate, provided the sky culture is presented respectfully, accurately, and with full attribution.
+
+Institutions using this material in ticketed or public programming are encouraged to notify the contributors and, where appropriate, consult with the listed contact to ensure the presentation aligns with community protocols.
