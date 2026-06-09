@@ -1105,11 +1105,6 @@ QByteArray StelProjectorMiller::getForwardTransformShader() const
 #line 1 102
 uniform highp float PROJECTOR_FWD_widthStretch;
 
-highp float asinh(highp float x)
-{
-	return log(x+sqrt(1.+x*x));
-}
-
 highp vec3 projectorForwardTransform(highp vec3 v)
 {
 	highp float widthStretch = PROJECTOR_FWD_widthStretch;
@@ -1133,17 +1128,6 @@ QByteArray StelProjectorMiller::getBackwardTransformShader() const
 	return modelViewTransform->getBackwardTransformShader() + R"(
 #line 1 103
 uniform highp float PROJECTOR_FWD_widthStretch;
-
-highp float asinh(highp float x)
-{
-	return log(x+sqrt(1.+x*x));
-}
-
-highp float sinh(highp float x)
-{
-	highp float ex = exp(x);
-	return (ex*ex-1.)/(2.*ex);
-}
 
 highp vec3 projectorBackwardTransform(highp vec3 v, out bool ok)
 {

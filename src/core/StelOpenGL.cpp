@@ -91,7 +91,18 @@ QByteArray StelOpenGL::globalShaderPrefix(const ShaderType type)
 			  "#define texture2DProj_3(a,b,c) texture2DProj(a,b,c)\n"
 			  "#define shadow2D_x(a,b) shadow2D(a,b).x\n"
 			  "#define shadow2DProj_x(a,b) shadow2DProj(a,b).x\n"
-			  "#define textureCube_3(a,b,c) textureCube(a,b,c)\n";
+			  "#define textureCube_3(a,b,c) textureCube(a,b,c)\n"
+			  "\n"
+			  "highp float asinh(highp float x)\n"
+			  "{\n"
+			  "	return log(x+sqrt(1.+x*x));\n"
+			  "}\n"
+			  "\n"
+			  "highp float sinh(highp float x)\n"
+			  "{\n"
+			  "	highp float ex = exp(x);\n"
+			  "	return (ex*ex-1.)/(2.*ex);\n"
+			  "}\n";
 	}
 
 	if (glInfo.isGLES)
