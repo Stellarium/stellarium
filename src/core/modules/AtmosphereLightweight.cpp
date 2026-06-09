@@ -92,10 +92,10 @@ AtmosphereLightweight::AtmosphereLightweight()
 	               QOpenGLFramebufferObject::NoAttachment, GL_TEXTURE_2D, getInternalFormatForFBO()))
 	, luminanceProbeFBO_(new QOpenGLFramebufferObject(LUM_PROBE_FBO_WIDTH, LUM_PROBE_FBO_HEIGHT,
 	                                                  QOpenGLFramebufferObject::NoAttachment,
-	                                                  GL_TEXTURE_2D, getInternalFormatForFBO()))
+	                                                  GL_TEXTURE_2D, GL_RGBA))
 	, textureAverager_(new TextureAverageComputer(*StelOpenGL::highGraphicsFunctions(),
 	                                              LUM_PROBE_FBO_WIDTH, LUM_PROBE_FBO_HEIGHT,
-	                                              getInternalFormatForFBO()))
+	                                              GL_RGBA, false))
 {
 	setFadeDuration(1.5f);
 
@@ -404,7 +404,7 @@ void main()
 VARYING mediump vec3 ndcPos;
 uniform mat4 projectionMatrixInverse;
 uniform vec3 sunDir;
-uniform highp float colorScale;
+uniform bool isMoon;
 uniform sampler2D atmoTex;
 const highp float PI = 3.14159265;
 
@@ -430,7 +430,7 @@ void main()
 	elevTC = sqrt(elevTC); // elevation coordinate is stretched by squaring it
 	float azimuthTC = relAzimuth / PI;
 	vec3 color_xyY = texture2D(atmoTex, vec2(azimuthTC, elevTC)).xyz;
-	FRAG_COLOR = vec4(color_xyY.xy, color_xyY.z * colorScale, 1);
+	FRAG_COLOR = vec4(isMoon ? 0. : color_xyY.z, isMoon ? color_xyY.z : 0., 0, 1);
 }
 )";
 
@@ -453,9 +453,9 @@ void main()
 	luminanceProbeProgram_->bindAttributeLocation("screenVertex", SCREEN_VERTEX_ATTRIB_LOC);
 	StelPainter::linkProg(luminanceProbeProgram_.get(), "Lightweight atmosphere luminance probe");
 
+	GL(luminanceProbeUniformLocations_.isMoon                  = luminanceProbeProgram_->uniformLocation("isMoon"));
 	GL(luminanceProbeUniformLocations_.sunDir                  = luminanceProbeProgram_->uniformLocation("sunDir"));
 	GL(luminanceProbeUniformLocations_.atmoTex                 = luminanceProbeProgram_->uniformLocation("atmoTex"));
-	GL(luminanceProbeUniformLocations_.colorScale              = luminanceProbeProgram_->uniformLocation("colorScale"));
 	GL(luminanceProbeUniformLocations_.projectionMatrixInverse = luminanceProbeProgram_->uniformLocation("projectionMatrixInverse"));
 
 	bindVAO(VAO_RENDER);
@@ -497,8 +497,8 @@ float AtmosphereLightweight::computeAverageLuminance(const StelCore* core)
 	for (int i = 0; i < DRAW_PARAM_COUNT; ++i)
 	{
 		const auto& p = drawParams[i];
-		luminanceProbeProgram_->setUniformValue(luminanceProbeUniformLocations_.colorScale,
-		                                        p.relativeBrightness * p.eclipseFactor * p.fboColorScale);
+		luminanceProbeProgram_->setUniformValue(luminanceProbeUniformLocations_.isMoon,
+		                                        i == DRAW_PARAM_MOON);
 		luminanceProbeProgram_->setUniformValue(luminanceProbeUniformLocations_.sunDir, p.dir);
 		GL(gl.glBindTexture(GL_TEXTURE_2D, p.fbo->texture()));
 		GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
@@ -515,7 +515,13 @@ float AtmosphereLightweight::computeAverageLuminance(const StelCore* core)
 
 	const auto texAvg = textureAverager_->getTextureAverageSimple(luminanceProbeFBO_->texture(),
 	                                                              LUM_PROBE_FBO_WIDTH, LUM_PROBE_FBO_HEIGHT);
-	return texAvg[2];
+	float lum = 0;
+	for (int i = 0; i < DRAW_PARAM_COUNT; ++i)
+	{
+		const auto& p = drawParams[i];
+		lum += texAvg[i] * p.relativeBrightness * p.eclipseFactor * p.fboColorScale;
+	}
+	return lum;
 }
 
 void AtmosphereLightweight::computeDrawParams(const StelCore* core, const Planet* lightSource, const Planet* moon,

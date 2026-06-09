@@ -20,6 +20,7 @@
 #include "TextureAverageComputer.hpp"
 #include "StelMainView.hpp"
 #include "StelUtils.hpp"
+#include <array>
 
 namespace
 {
@@ -64,7 +65,16 @@ Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const in
 
 	blitTexProgram->release();
 	Vec4f pixel(NAN,NAN,NAN,NAN);
-	GL(gl.glReadPixels(0,0,1,1,GL_RGBA,GL_FLOAT,&pixel[0]));
+	if (textureIsFloat)
+	{
+		GL(gl.glReadPixels(0,0,1,1,GL_RGBA,GL_FLOAT,&pixel[0]));
+	}
+	else
+	{
+		std::array<uint8_t, 4> data{};
+		GL(gl.glReadPixels(0,0,1,1,GL_RGBA,GL_UNSIGNED_BYTE,&data[0]));
+		pixel = {data[0] / 255.f, data[1] / 255.f, data[2] / 255.f, data[3] / 255.f};
+	}
 
 	GL(gl.glViewport(oldViewport[0], oldViewport[1], oldViewport[2], oldViewport[3]));
 	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, oldFBO));
@@ -215,10 +225,11 @@ void TextureAverageComputer::checkNeedForWorkaround()
 }
 
 // Clobbers: GL_TEXTURE_BINDING_2D, GL_VERTEX_ARRAY_BINDING, GL_ARRAY_BUFFER_BINDING
-TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions& gl, const int texWidth, const int texHeight, const GLenum internalFormat)
+TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions& gl, const int texWidth, const int texHeight, const GLenum internalFormat, const bool textureIsFloat)
 	: gl(gl)
 	, npotWidth(texWidth)
 	, npotHeight(texHeight)
+	, textureIsFloat(textureIsFloat)
 {
 	isGLES = StelMainView::getInstance().getGLInformation().isGLES;
 
@@ -287,7 +298,8 @@ void main()
 		GL(gl.glBindTexture(GL_TEXTURE_2D, potTex));
 		const auto potWidth  = StelUtils::getSmallerPowerOfTwo(npotWidth);
 		const auto potHeight = StelUtils::getSmallerPowerOfTwo(npotHeight);
-		GL(gl.glTexImage2D(GL_TEXTURE_2D,0,internalFormat,potWidth,potHeight,0,GL_RGBA,GL_FLOAT,nullptr));
+		GL(gl.glTexImage2D(GL_TEXTURE_2D,0,internalFormat,potWidth,potHeight,0,GL_RGBA,
+		                   textureIsFloat ? GL_FLOAT : GL_UNSIGNED_BYTE,nullptr));
 		GL(gl.glBindTexture(GL_TEXTURE_2D,0));
 		GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,potFBO));
 		GL(gl.glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,potTex,0));
