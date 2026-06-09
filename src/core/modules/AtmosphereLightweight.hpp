@@ -100,9 +100,9 @@ private:
 
 	struct
 	{
+		int isMoon;
 		int sunDir;
 		int atmoTex;
-		int colorScale;
 		int projectionMatrixInverse;
 	} luminanceProbeUniformLocations_;
 

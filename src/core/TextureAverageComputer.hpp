@@ -38,6 +38,7 @@ class TextureAverageComputer
 	GLuint potTex = 0;
 	GLuint vbo = 0, vao = 0;
 	GLint npotWidth, npotHeight;
+	bool textureIsFloat = false;
 	bool isGLES = false;
 	static inline bool needForWorkaroundChecked = false;
 	static inline bool npotWorkaroundNeeded = false;
@@ -51,7 +52,8 @@ public:
 	Vec4f getTextureAverage(GLuint texture);
 	//!< Can be used for power-of-two textures
 	Vec4f getTextureAverageSimple(GLuint texture, int width, int height);
-	TextureAverageComputer(StelOpenGL::HighGraphicsFunctions&, int texW, int texH, GLenum internalFormat);
+	TextureAverageComputer(StelOpenGL::HighGraphicsFunctions&, int texW, int texH,
+	                       GLenum internalFormat, bool textureIsFloat);
 	~TextureAverageComputer();
 };
 
