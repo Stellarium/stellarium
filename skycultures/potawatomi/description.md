@@ -263,19 +263,19 @@ The artist, Aaron Martin, holds the copyright to his artwork. However, with his 
 
 Neshnabé Nengosêk Kenomagéwen (Potawatomi Star Knowledge) Constellation Artwork © 2025 by Aaron Martin is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-#### TK Seasonal (TK S)
+**TK Seasonal (TK S)**
 
 This Label is being used to indicate that this material traditionally and usually is heard and/or utilized at a particular time of year and in response to specific seasonal changes and conditions. For instance, many important ceremonies are held at very specific times of the year. This Label is being used to indicate sophisticated relationships between land and knowledge creation. It is also being used to highlight the relationships between recorded material and the specific contexts where it derives, especially the interconnected and embodied teachings that it conveys.
 
-#### TK Non-Commercial (TK NC)
+**TK Non-Commercial (TK NC)**
 
 This material has been designated as being available for non-commercial use. You are allowed to use this material for non-commercial purposes including for research, study, or public presentation and/or online in blogs or non-commercial websites. This Label asks you to think and act with fairness and responsibility towards this material and the original custodians.
 
-#### TK Creative (TK CR)
+**TK Creative (TK CR)**
 
 This Label is being used to acknowledge the relationship between the creative practices of Aaron Martin and Pokagon Band of Potawatomi Indians and the larger Potawatomi nation and the associated cultural responsibilities.
 
-#### TK Community Voice (TK CV)
+**TK Community Voice (TK CV)**
 
 This Label is being used to encourage the sharing of stories and voices about this material. The Label indicates that existing knowledge or descriptions are incomplete or partial. Any community member is invited and welcome to contribute to our community knowledge about this event, photograph, recording or heritage item. Sharing our voices helps us reclaim our histories and knowledge. This sharing is an internal process.
 
