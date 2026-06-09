@@ -134,25 +134,25 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
             "core.setDate(\"now\"); core.setTimeRate(1);",
             
             // Part 2: Basic cleanup
-            "core.clear(\"natural\"); LabelMgr.deleteAllLabels(); MarkerMgr.deleteAllMarkers(); core.clearSelection();",
+            "core.clear(\"natural\"); LabelMgr.deleteAllLabels(); MarkerMgr.deleteAllMarkers();",
             
             // Part 3: Movement settings
             "StelMovementMgr.setFlagTracking(false); StelMovementMgr.setEquatorialMount(false); core.goHome();",
             
             // Part 4: Landscape and stars
-            "LandscapeMgr.setFlagLandscape(true); LandscapeMgr.setFlagAtmosphere(true); StarMgr.setStars(true);",
+            "LandscapeMgr.setFlagLandscape(true); LandscapeMgr.setFlagAtmosphere(true); StarMgr.setFlagStars(true);",
             
             // Part 5: Solar system
-            "SolarSystem.setPlanets(true); SolarSystem.setPlanetsLabels(true);",
+            "SolarSystem.setFlagPlanets(true); SolarSystem.setFlagLabels(true);",
             
             // Part 6: Nebulae and Milky Way
-            "NebulaMgr.setNebulas(true); MilkyWay.setMilkyWay(true);",
+            "NebulaMgr.setFlagShow(true); MilkyWay.setFlagShow(true);",
             
             // Part 7: Constellations
-            "ConstellationMgr.setLines(true); ConstellationMgr.setLabels(true); ConstellationMgr.setBoundaries(false); ConstellationMgr.setArt(false); ConstellationMgr.setIsolateSelected(false); ConstellationMgr.setFlagConstellationPick(false);",
+            "ConstellationMgr.setFlagLines(false); ConstellationMgr.setFlagLabels(false); ConstellationMgr.setFlagBoundaries(false); ConstellationMgr.setFlagArt(false); ConstellationMgr.setFlagIsolateSelected(false); ConstellationMgr.setFlagConstellationPick(false);",
             
             // Part 8: Grids
-            "GridLinesMgr.setEquatorialGrid(false); GridLinesMgr.setAzimuthalGrid(false); GridLinesMgr.setCardinalPoints(true);",
+            "GridLinesMgr.setFlagEquatorGrid(false); GridLinesMgr.setFlagAzimuthalGrid(false); LandscapeMgr.setFlagCardinalPoints(false);",
             
             // Part 9: Interface and night mode
             "core.setNightMode(false); core.setGuiVisible(true); core.setDiskViewport(false);",
@@ -278,30 +278,29 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
             var scriptName = data.runningScriptId || "";
             var isRunning = data.scriptIsRunning || false;
             
+            // Create a unique identifier for the current running state
+            var currentStateId = scriptName || (isRunning ? "__direct__" : "");
+            var previousStateId = currentActiveScript || (currentActiveScript === null ? "" : "__direct__");
+            
             // Update indicators if state changed
-            if ((isRunning && scriptName !== currentActiveScript) || 
-                (!isRunning && currentActiveScript !== null)) {
+            if (isRunning !== (currentActiveScript !== null) || currentStateId !== previousStateId) {
                 
                 if (isRunning) {
                     updateActiveScriptIndicators(scriptName);
-                    // Notify scriptApi to keep it in sync
                     $(scriptApi).trigger("activeScriptChanged", scriptName);
                 } else {
                     updateActiveScriptIndicators("");
-                    // Notify scriptApi to keep it in sync
                     $(scriptApi).trigger("activeScriptChanged", "");
                 }
             }
             
-            // Schedule next poll if script is running or we don't have confirmation of stop
+            // Schedule next poll if script is running
             if (isRunning) {
                 scheduleStatusPoll();
             } else {
-                // If script is not running, stop polling
                 stopStatusPoll();
             }
         }).fail(function() {
-            // On failure, try again in 2 seconds
             scheduleStatusPoll(2000);
         });
     }

@@ -53,35 +53,35 @@
  * ------------------
  * 
  *   ┌─────────────────┐
- *   │ listskyculture   │  (GET /api/view/listskyculture)
- *   │ (API)           │  → Returns translated culture names
+ *   │ listskyculture  │  (GET /api/view/listskyculture)
+ *   │ (API)           │  → Returns translated culture names (needs new Api) right now English names only
  *   └────────┬────────┘
  *            │
  *            ▼
  *   ┌─────────────────┐
- *   │ Culture Buttons  │  (User selects a culture)
- *   │ (UI Grid)        │
+ *   │ Culture Buttons │  (User selects a culture)
+ *   │ (UI Grid)       │
  *   └────────┬────────┘
  *            │
  *            ▼
  *   ┌─────────────────┐     ┌─────────────────┐
- *   │ setSkyCulture    │────▶│ StelProperty    │  (POST /api/stelproperty/set)
- *   │                  │     │ Update          │
+ *   │ setSkyCulture   │───▶│ StelProperty    │  (POST /api/stelproperty/set)
+ *   │                 │     │ Update          │
  *   └────────┬────────┘     └─────────────────┘
  *            │
  *            ▼
  *   ┌─────────────────┐
- *   │ index.json       │  (GET /api/view/skyculturedescription/index.json)
- *   │ (Single Source)  │  → Complete culture data
+ *   │ index.json      │  (GET /api/view/skyculturedescription/index.json)
+ *   │ (Single Source) │  → Complete culture data
  *   └────────┬────────┘
  *            │
  *            ├──────────────────────────────────────┐
  *            │                                      │
  *            ▼                                      ▼
  *   ┌─────────────────┐                    ┌─────────────────┐
- *   │ Constellations   │                    │ Asterisms       │
- *   │ (extract from    │                    │ (extract from   │
- *   │  index.json)     │                    │  index.json)    │
+ *   │ Constellations  │                    │ Asterisms       │
+ *   │ (extract from   │                    │ (extract from   │
+ *   │  index.json)    │                    │  index.json)    │
  *   └─────────────────┘                    └─────────────────┘
  *            │                                      │
  *            ▼                                      ▼
@@ -262,6 +262,9 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
     /** @type {string} Current Stellarium language code (e.g., 'en', 'ar', 'fr') */
     var currentLanguage = 'en';
     
+    /** @type {string} Name of the currently active culture (translated) */
+    var currentCultureName = null;
+    
     /** @type {Array<{id: string, name: string}>} List of all available cultures */
     var availableCultures = [];
     
@@ -292,13 +295,14 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
     /** @type {boolean} Synchronization enabled flag (can be toggled for debugging) */
     var syncEnabled = true;
 
+
     // ---------------------------------------------------------------------
     // Translation Function
     // ---------------------------------------------------------------------
     
     /** @type {Function} Translation function from remotecontrol module */
     var _tr = rc.tr;
-
+		
     // =====================================================================
     // 8. HELPER FUNCTIONS
     // =====================================================================
@@ -351,29 +355,129 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         selectedPatternId = null;
     }
 
-    /**
-     * Update button active states based on current selection.
-     * Ensures only the button matching selectedPatternId is highlighted.
-     */
-    function updateAllButtonStates() {
-        var containers = [
-            $constellationsContainer, $asterismsContainer, 
-            $zodiacContainer, $lunarContainer, $starsContainer
-        ];
-        for (var c = 0; c < containers.length; c++) {
-            var container = containers[c];
-            if (container && container.length) {
-                container.find(".pattern-btn").removeClass("active");
-                if (selectedPatternId) {
-                    container.find(".pattern-btn").each(function() {
-                        if ($(this).data("pattern-id") === selectedPatternId) {
-                            $(this).addClass("active");
-                        }
-                    });
-                }
-            }
-        }
-    }
+		/**
+		 * Update button active states based on current selection.
+		 * Ensures only the button matching selectedPatternId is highlighted.
+		 * 
+		 * Enhanced matching logic:
+		 * - Exact match (most reliable)
+		 * - Composite ID number extraction for zodiac and lunar mansions
+		 * - Name-based match as final fallback
+		 * 
+		 * @function updateAllButtonStates
+		 */
+		function updateAllButtonStates() {
+				var containers = [
+						$constellationsContainer, $asterismsContainer, 
+						$zodiacContainer, $lunarContainer, $starsContainer
+				];
+				
+				for (var c = 0; c < containers.length; c++) {
+						var container = containers[c];
+						if (container && container.length) {
+								container.find(".pattern-btn").removeClass("active");
+								
+								if (selectedPatternId) {
+										container.find(".pattern-btn").each(function() {
+												var $btn = $(this);
+												var btnPatternId = $btn.data("pattern-id");
+												
+												var match = false;
+												
+												// ============================================================
+												// METHOD 1: EXACT MATCH (MOST RELIABLE)
+												// ============================================================
+												if (btnPatternId === selectedPatternId) {
+														match = true;
+												}
+												
+												// ============================================================
+												// METHOD 2: ZODIAC COMPOSITE ID MATCHING
+												// Prevents "zodiac_modern_0" from matching "zodiac_modern_1"
+												// Extracts and compares the numeric index
+												// ============================================================
+												if (!match && btnPatternId && selectedPatternId) {
+														// Check if both are zodiac composite IDs
+														if (btnPatternId.indexOf('zodiac_') === 0 && 
+																selectedPatternId.indexOf('zodiac_') === 0) {
+																var btnParts = btnPatternId.split('_');
+																var selectedParts = selectedPatternId.split('_');
+																var btnNum = parseInt(btnParts[btnParts.length - 1], 10);
+																var selectedNum = parseInt(selectedParts[selectedParts.length - 1], 10);
+																if (btnNum === selectedNum) {
+																		match = true;
+																}
+														}
+														// ========================================================
+														// METHOD 3: LUNAR MANSION COMPOSITE ID MATCHING
+														// Prevents "lunar_1" from matching "lunar_16"
+														// ========================================================
+														else if (btnPatternId.indexOf('lunar_') === 0 && 
+																		 selectedPatternId.indexOf('lunar_') === 0) {
+																var btnNum = parseInt(btnPatternId.split('_')[1], 10);
+																var selectedNum = parseInt(selectedPatternId.split('_')[1], 10);
+																if (btnNum === selectedNum) {
+																		match = true;
+																}
+														}
+														// ========================================================
+														// METHOD 4: CONSTELLATION ABBREVIATION MATCHING
+														// For CON prefix IDs (e.g., "CON chinese_manchu Borboho")
+														// ========================================================
+														else if (btnPatternId.indexOf('CON ') === 0 && 
+																		 selectedPatternId.indexOf('CON ') === 0) {
+																var btnParts = btnPatternId.split(' ');
+																var selectedParts = selectedPatternId.split(' ');
+																if (btnParts.length >= 3 && selectedParts.length >= 3) {
+																		if (btnParts[2] === selectedParts[2]) {
+																				match = true;
+																		}
+																}
+														}
+														// ========================================================
+														// METHOD 5: ASTERISM ABBREVIATION MATCHING
+														// For AST prefix IDs (e.g., "AST chinese_manchu 001")
+														// ========================================================
+														else if (btnPatternId.indexOf('AST ') === 0 && 
+																		 selectedPatternId.indexOf('AST ') === 0) {
+																var btnParts = btnPatternId.split(' ');
+																var selectedParts = selectedPatternId.split(' ');
+																if (btnParts.length >= 3 && selectedParts.length >= 3) {
+																		if (btnParts[2] === selectedParts[2]) {
+																				match = true;
+																		}
+																}
+														}
+														// ========================================================
+														// METHOD 6: SIMPLE ID MATCHING (for backward compatibility)
+														// ========================================================
+														else if (btnPatternId === selectedPatternId) {
+																match = true;
+														}
+												}
+												
+												// ============================================================
+												// METHOD 7: MATCH BY NAME (FINAL FALLBACK)
+												// Used when ID matching fails
+												// ============================================================
+												if (!match && selectedPattern) {
+														var btnName = $btn.data("pattern-name");
+														var btnSearchName = $btn.data("search-name");
+														if (btnName === selectedPattern || btnSearchName === selectedPattern) {
+																match = true;
+																console.log("[SkyCulture] Matched by name fallback:", btnName);
+														}
+												}
+												
+												if (match) {
+														$btn.addClass("active");
+														console.log("[SkyCulture] Activated button:", $btn.data("pattern-name"), "ID:", btnPatternId);
+												}
+										});
+								}
+						}
+				}
+		}
 
     /**
      * Get the current Stellarium language from StelProperty.
@@ -400,8 +504,9 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
      *                           {id, name, searchName, type}
      * @param {string} containerName - Name of container type (for placeholder text)
      * @param {Function} onClickHandler - Click handler function(patternName, patternType, searchName, patternId)
+     * @param {boolean} disableOriginalHandler - If true, skip attaching the original handler (for multi-select mode)
      */
-    function renderButtons($container, patterns, containerName, onClickHandler) {
+    function renderButtons($container, patterns, containerName, onClickHandler, disableOriginalHandler) {
         if (!$container || !$container.length) return;
         $container.empty();
         
@@ -441,33 +546,35 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         buttonsHtml += '</div>';
         $container.html(buttonsHtml);
         
-        // Attach click handlers
-        $container.find(".pattern-btn").on("click", function() {
-            var $btn = $(this);
-            var patternId = $btn.data("pattern-id");
-            var patternName = $btn.data("pattern-name");
-            var patternType = $btn.data("pattern-type");
-            var searchName = $btn.data("search-name");
-            
-            if ($btn.hasClass('active')) {
-                // Toggle OFF: Deselect and clear highlight
-                $container.find(".pattern-btn").removeClass("active");
-                selectedPattern = null;
-                selectedPatternId = null;
-                if (patternType === "constellation") {
-                    stelUtils.clearConstellationHighlight();
+        // Attach click handlers - ONLY if not disabled
+        if (!disableOriginalHandler) {
+            $container.find(".pattern-btn").on("click", function() {
+                var $btn = $(this);
+                var patternId = $btn.data("pattern-id");
+                var patternName = $btn.data("pattern-name");
+                var patternType = $btn.data("pattern-type");
+                var searchName = $btn.data("search-name");
+                
+                if ($btn.hasClass('active')) {
+                    // Toggle OFF: Deselect and clear highlight
+                    $container.find(".pattern-btn").removeClass("active");
+                    selectedPattern = null;
+                    selectedPatternId = null;
+                    if (patternType === "constellation") {
+                        stelUtils.clearConstellationHighlight();
+                    }
+                } else {
+                    // Toggle ON: Select and execute action
+                    $container.find(".pattern-btn").removeClass("active");
+                    $btn.addClass("active");
+                    selectedPattern = patternName;
+                    selectedPatternId = patternId;
+                    if (patternName && onClickHandler) {
+                        onClickHandler(patternName, patternType, searchName, patternId);
+                    }
                 }
-            } else {
-                // Toggle ON: Select and execute action
-                $container.find(".pattern-btn").removeClass("active");
-                $btn.addClass("active");
-                selectedPattern = patternName;
-                selectedPatternId = patternId;
-                if (patternName && onClickHandler) {
-                    onClickHandler(patternName, patternType, searchName, patternId);
-                }
-            }
-        });
+            });
+        }
     }
 
     // =====================================================================
@@ -476,7 +583,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
     // 
     // These functions extract data directly from the index.json structure.
     // This bypasses the Stellarium API's inconsistent filtering behavior
-    // and guarantees correct data for all 54+ sky cultures.
+    // and guarantees correct data for all 56+ sky cultures.
     // =====================================================================
 
     /**
@@ -620,39 +727,60 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         return patterns;
     }
 
-    /**
-     * Extract zodiac signs from culture data.
-     * 
-     * Note: Zodiac signs are always extracted from index.json as there is
-     * no API endpoint for this data type.
-     * 
-     * @param {Object} cultureData - The culture data from index.json
-     * @returns {Array|null} Zodiac pattern objects or null if not available
-     */
-    function extractZodiac(cultureData) {
-        if (!cultureData || !cultureData.zodiac || !cultureData.zodiac.names || 
-            !cultureData.zodiac.names.length) {
-            return null;
-        }
-        
-        var patterns = [];
-        var zodiacNames = cultureData.zodiac.names;
-        
-        for (var i = 0; i < zodiacNames.length; i++) {
-            var sign = zodiacNames[i];
-            var signName = sign.english || sign.native || ("Sign " + (i + 1));
-            
-            patterns.push({ 
-                id: signName.toLowerCase().replace(/\s+/g, '_'), 
-                name: signName, 
-                searchName: signName, 
-                type: "zodiac" 
-            });
-        }
-        
-        console.log("[SkyCulture] Extracted " + patterns.length + " zodiac signs");
-        return patterns;
-    }
+		/**
+		 * Extract zodiac signs from culture data.
+		 * 
+		 * Note: Zodiac signs are always extracted from index.json as there is
+		 * no API endpoint for this data type.
+		 * 
+		 * IMPORTANT: This function now generates composite IDs in the format
+		 * "zodiac_cultureId_index" to prevent partial matching issues.
+		 * For backward compatibility, the simple ID is also stored.
+		 * 
+		 * Example IDs:
+		 * - compositeId: "zodiac_modern_0" (for Aries)
+		 * - simpleId: "aries" (for backward compatibility)
+		 * 
+		 * @param {Object} cultureData - The culture data from index.json
+		 * @returns {Array|null} Zodiac pattern objects with properties:
+		 *                       {id, compositeId, name, searchName, type, englishName, nativeName, symbol}
+		 */
+		function extractZodiac(cultureData) {
+				if (!cultureData || !cultureData.zodiac || !cultureData.zodiac.names || 
+						!cultureData.zodiac.names.length) {
+						return null;
+				}
+				
+				var patterns = [];
+				var zodiacNames = cultureData.zodiac.names;
+				var cultureId = currentCultureId || 'unknown';
+				
+				for (var i = 0; i < zodiacNames.length; i++) {
+						var sign = zodiacNames[i];
+						var signName = sign.english || sign.native || ("Sign " + (i + 1));
+						
+						// Create simple ID for backward compatibility (e.g., "aries")
+						var simpleId = signName.toLowerCase().replace(/\s+/g, '_');
+						
+						// Create composite ID to prevent partial matching issues
+						// Format: "zodiac_cultureId_index" (e.g., "zodiac_modern_0")
+						var compositeId = "zodiac_" + cultureId + "_" + i;
+						
+						patterns.push({ 
+								id: compositeId,           // Primary ID for matching (prevents partial matches)
+								simpleId: simpleId,        // Legacy ID for backward compatibility
+								name: signName,            // Display name
+								searchName: signName,      // Name used for API lookup
+								type: "zodiac",
+								englishName: sign.english || null,
+								nativeName: sign.native || null,
+								symbol: sign.symbol || null
+						});
+				}
+				
+				console.log("[SkyCulture] Extracted " + patterns.length + " zodiac signs with composite IDs");
+				return patterns;
+		}
 
     /**
      * Extract lunar mansions from culture data.
@@ -688,110 +816,136 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         return patterns;
     }
 
-    /**
-     * Extract notable star names from culture data.
-     * 
-     * Handles multiple name variants for the same star (HIP ID) and combines
-     * them for display. Limits results to 3200 entries to prevent UI
-     * performance degradation with extremely large datasets (e.g., Chinese
-     * culture with 3000+ star names).
-     * 
-     * @param {Object} cultureData - The culture data from index.json
-     * @returns {Array|null} Star pattern objects or null if not available
-     */
-    function extractStarNames(cultureData) {
-        if (!cultureData || !cultureData.common_names || 
-            typeof cultureData.common_names !== 'object' || 
-            Object.keys(cultureData.common_names).length === 0) {
-            return null;
-        }
-        
-        var patterns = [];
-        var commonNames = cultureData.common_names;
-        
-        for (var hipId in commonNames) {
-            if (!commonNames.hasOwnProperty(hipId)) continue;
-            
-            var entries = commonNames[hipId];
-            if (!entries || !Array.isArray(entries) || entries.length === 0) continue;
-            
-            var displayNames = [];
-            var primaryName = null;
-            var primaryNativeName = null;
-            
-            // Collect all valid names for this star
-            for (var i = 0; i < entries.length; i++) {
-                var entry = entries[i];
-                
-                // Collect English names (skip codes like ARA_01)
-                if (entry.english && entry.english.trim()) {
-                    var name = entry.english.trim();
-                    if (!name.match(/^[A-Z]+_[0-9]+$/)) {
-                        displayNames.push({ type: 'english', value: name });
-                        if (primaryName === null) primaryName = name;
-                    }
-                }
-                
-                // Collect native names as fallback
-                if (entry.native && entry.native.trim()) {
-                    var nativeName = entry.native.trim();
-                    if (primaryNativeName === null) primaryNativeName = nativeName;
-                    var exists = displayNames.some(function(dn) { 
-                        return dn.value === nativeName; 
-                    });
-                    if (!exists) {
-                        displayNames.push({ type: 'native', value: nativeName });
-                    }
-                }
-            }
-            
-            // Determine display and search names
-            var displayName = '';
-            var searchName = '';
-            
-            if (displayNames.length === 0) {
-                displayName = hipId;
-                searchName = hipId;
-            } else {
-                displayName = displayNames[0].value;
-                searchName = primaryName || primaryNativeName || displayNames[0].value;
-                
-                // Combine multiple names for compact display
-                if (displayNames.length === 2) {
-                    displayName = displayNames[0].value + " - " + displayNames[1].value;
-                } else if (displayNames.length >= 3) {
-                    displayName = displayNames[0].value + " - " + displayNames[1].value;
-                    var additional = displayNames.slice(2).map(function(dn) { 
-                        return dn.value; 
-                    }).join(" / ");
-                    displayName += " (" + additional + ")";
-                }
-                
-                // Truncate extremely long display names
-                if (displayName.length > 140) {
-                    displayName = displayName.substring(0, 137) + "...";
-                }
-            }
-            
-            patterns.push({
-                id: hipId,
-                name: displayName,
-                searchName: searchName,
-                type: "star"
-            });
-        }
-        
-        if (patterns.length === 0) return null;
-        
-        // Sort alphabetically and limit to prevent UI lag
-        patterns.sort(function(a, b) { return a.name.localeCompare(b.name); });
-        var limitedPatterns = patterns.slice(0, 3200);
-        
-        console.log("[SkyCulture] Extracted " + limitedPatterns.length + " star names " +
-            (patterns.length > 3200 ? "(limited from " + patterns.length + ")" : ""));
-        
-        return limitedPatterns;
-    }
+		/**
+		 * Extract notable star names from culture data.
+		 * 
+		 * Handles multiple name variants for the same star (HIP ID) and combines
+		 * them for display. Limits results to 3200 entries to prevent UI
+		 * performance degradation with extremely large datasets.
+		 * 
+		 * IMPORTANT: This function also handles special prefixes like "NAME"
+		 * which are used for planets and solar system objects. For these,
+		 * we extract the actual object name (e.g., "NAME Venus" -> "Venus")
+		 * to ensure proper navigation in Stellarium.
+		 * 
+		 * @param {Object} cultureData - The culture data from index.json
+		 * @returns {Array|null} Star pattern objects or null if not available
+		 */
+		function extractStarNames(cultureData) {
+				if (!cultureData || !cultureData.common_names || 
+						typeof cultureData.common_names !== 'object' || 
+						Object.keys(cultureData.common_names).length === 0) {
+						return null;
+				}
+				
+				var patterns = [];
+				var commonNames = cultureData.common_names;
+				
+				for (var hipId in commonNames) {
+						if (!commonNames.hasOwnProperty(hipId)) continue;
+						
+						var entries = commonNames[hipId];
+						if (!entries || !Array.isArray(entries) || entries.length === 0) continue;
+						
+						var displayNames = [];
+						var primaryName = null;
+						var primaryNativeName = null;
+						
+						// Process the ID - handle "NAME" prefix for solar system objects
+						var searchId = hipId;
+						var originalId = hipId;
+						var isSolarSystemObject = false;
+						
+						// Check if this is a solar system object (NAME prefix)
+						if (hipId.indexOf('NAME ') === 0) {
+								isSolarSystemObject = true;
+								// Extract the actual object name (e.g., "NAME Mars" -> "Mars")
+								searchId = hipId.substring(5).trim();
+								console.log("[SkyCulture] Solar system object detected:", hipId, "-> search ID:", searchId);
+						}
+						
+						// Collect all valid names for this star/object
+						for (var i = 0; i < entries.length; i++) {
+								var entry = entries[i];
+								
+								// Collect English names (skip codes like ARA_01)
+								if (entry.english && entry.english.trim()) {
+										var name = entry.english.trim();
+										if (!name.match(/^[A-Z]+_[0-9]+$/)) {
+												displayNames.push({ type: 'english', value: name });
+												if (primaryName === null) primaryName = name;
+										}
+								}
+								
+								// Collect native names as fallback
+								if (entry.native && entry.native.trim()) {
+										var nativeName = entry.native.trim();
+										if (primaryNativeName === null) primaryNativeName = nativeName;
+										var exists = displayNames.some(function(dn) { 
+												return dn.value === nativeName; 
+										});
+										if (!exists) {
+												displayNames.push({ type: 'native', value: nativeName });
+										}
+								}
+						}
+						
+						// Determine display and search names
+						var displayName = '';
+						var finalSearchName = '';
+						
+						if (displayNames.length === 0) {
+								displayName = searchId;
+								finalSearchName = searchId;
+						} else {
+								displayName = displayNames[0].value;
+								finalSearchName = primaryName || primaryNativeName || displayNames[0].value;
+								
+								// Combine multiple names for compact display
+								if (displayNames.length === 2) {
+										displayName = displayNames[0].value + " - " + displayNames[1].value;
+								} else if (displayNames.length >= 3) {
+										displayName = displayNames[0].value + " - " + displayNames[1].value;
+										var additional = displayNames.slice(2).map(function(dn) { 
+												return dn.value; 
+										}).join(" / ");
+										displayName += " (" + additional + ")";
+								}
+								
+								// Truncate extremely long display names
+								if (displayName.length > 140) {
+										displayName = displayName.substring(0, 137) + "...";
+								}
+						}
+						
+						// For solar system objects, ensure search name is the actual object name
+						if (isSolarSystemObject) {
+								finalSearchName = searchId;
+						}
+						
+						patterns.push({
+								id: searchId,                    // Use cleaned ID for navigation (e.g., "Mars" not "NAME Mars")
+								originalId: originalId,          // Keep original ID for reference (e.g., "NAME Mars")
+								name: displayName,
+								searchName: finalSearchName,
+								type: "star",
+								isSolarSystem: isSolarSystemObject,
+								englishName: primaryName,
+								nativeName: primaryNativeName
+						});
+				}
+				
+				if (patterns.length === 0) return null;
+				
+				// Sort alphabetically and limit to prevent UI lag
+				patterns.sort(function(a, b) { return a.name.localeCompare(b.name); });
+				var limitedPatterns = patterns.slice(0, 3200);
+				
+				console.log("[SkyCulture] Extracted " + limitedPatterns.length + " star names " +
+						(patterns.length > 3200 ? "(limited from " + patterns.length + ")" : ""));
+				
+				return limitedPatterns;
+		}
 
     // =====================================================================
     // 10. PANEL RENDERING FUNCTIONS
@@ -801,8 +955,9 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
      * Render the Constellations panel.
      * 
      * @param {Array} patterns - Constellation pattern objects
+     * @param {boolean} disableHandler - If true, skip attaching the original click handler
      */
-    function renderConstellationsPanel(patterns) {
+    function renderConstellationsPanel(patterns, disableHandler) {
         if (!patterns || !patterns.length) {
             if ($constellationsContainer) {
                 $constellationsContainer.html('<div class="loading-placeholder">' + 
@@ -817,10 +972,13 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         currentPatternsData.constellations = patterns;
         
         renderButtons($constellationsContainer, patterns, "constellations", 
-            function(patternName, patternType, searchName) {
-                stelUtils.toggleConstellationHighlight(searchName || patternName);
+            function(patternName, patternType, searchName, patternId) {
+                // IMPORTANT: Pass BOTH name and original ID
+                stelUtils.toggleConstellationHighlight(searchName || patternName, patternId);
                 updateAllButtonStates();
-            });
+            },
+            disableHandler === true
+        );
     }
 
     /**
@@ -849,31 +1007,35 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
             });
     }
 
-    /**
-     * Render the Zodiac Signs panel.
-     * 
-     * @param {Array} patterns - Zodiac pattern objects
-     */
-    function renderZodiacPanel(patterns) {
-        if (!patterns || !patterns.length) {
-            if ($zodiacContainer) {
-                $zodiacContainer.html('<div class="loading-placeholder">' + 
-                    _tr("No zodiac signs available for this culture") + '</div>');
-            }
-            updatePatternCount("zodiac", 0);
-            currentPatternsData.zodiac = [];
-            return;
-        }
-        
-        updatePatternCount("zodiac", patterns.length);
-        currentPatternsData.zodiac = patterns;
-        
-        renderButtons($zodiacContainer, patterns, "zodiac", 
-            function(patternName, patternType, searchName, patternId) {
-                stelUtils.goToZodiacSign(searchName || patternName, patternId);
-                updateAllButtonStates();
-            });
-    }
+		/**
+		 * Render the Zodiac Signs panel.
+		 * 
+		 * IMPORTANT: This function passes the patternId (composite ID) to the
+		 * navigation handler to ensure proper bidirectional synchronization.
+		 * 
+		 * @param {Array} patterns - Zodiac pattern objects with composite IDs
+		 */
+		function renderZodiacPanel(patterns) {
+				if (!patterns || !patterns.length) {
+						if ($zodiacContainer) {
+								$zodiacContainer.html('<div class="loading-placeholder">' + 
+										_tr("No zodiac signs available for this culture") + '</div>');
+						}
+						updatePatternCount("zodiac", 0);
+						currentPatternsData.zodiac = [];
+						return;
+				}
+				
+				updatePatternCount("zodiac", patterns.length);
+				currentPatternsData.zodiac = patterns;
+				
+				renderButtons($zodiacContainer, patterns, "zodiac", 
+						function(patternName, patternType, searchName, patternId) {
+								console.log("[SkyCulture] Zodiac button clicked:", patternName, "ID:", patternId);
+								stelUtils.goToZodiacSign(searchName || patternName, patternId);
+								updateAllButtonStates();
+						});
+		}
 
     /**
      * Render the Lunar Mansions panel.
@@ -1004,7 +1166,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
                 renderZodiacPanel(zodiac);
                 renderLunarPanel(lunar);
                 renderStarsPanel(stars);
-                
+								
                 console.log("[SkyCulture] All panels rendered for culture:", currentCultureId);
                 if (callback) callback(true);
             },
@@ -1121,7 +1283,11 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
                 if (propApi) {
                     currentCultureId = propApi.getStelProp("StelSkyCultureMgr.currentSkyCultureID") || 
                                       (availableCultures.length > 0 ? availableCultures[0].id : null);
+                								
+								    var culture = availableCultures.find(function(c) { return c.id === currentCultureId; });
+                    currentCultureName = culture ? culture.name : currentCultureId;
                 }
+        
                 
                 renderCultureButtons(availableCultures, currentCultureId);
                 updateInfoFrame();
@@ -1155,7 +1321,11 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         }
         
         currentCultureId = cultureId;
-        updateCultureButtonStates();
+				
+				var culture = availableCultures.find(function(c) { return c.id === cultureId; });
+        currentCultureName = culture ? culture.name : cultureId;
+        
+				updateCultureButtonStates();
         updateInfoFrame();
         
         selectedPattern = null;
@@ -1175,89 +1345,226 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
     // 13. SYNCHRONIZATION LISTENERS
     // =====================================================================
 
-    /**
-     * Setup synchronization listeners for culture and selection changes.
-     * Ensures the UI stays in sync with Stellarium's state.
-     */
-    function setupSyncListeners() {
-        // Listen to objectSelected events from tables and other components
-        $(document).on("objectSelected", function(evt, data) {
-            if (!syncEnabled) return;
-            
-            if (!data || !data.type || data.type === 'none' || !data.name) {
-                clearAllActiveButtons();
-                return;
-            }
-            
-            var found = false;
-            var patternGroups = [
-                { container: $constellationsContainer, patterns: currentPatternsData.constellations },
-                { container: $asterismsContainer, patterns: currentPatternsData.asterisms },
-                { container: $zodiacContainer, patterns: currentPatternsData.zodiac },
-                { container: $lunarContainer, patterns: currentPatternsData.lunar },
-                { container: $starsContainer, patterns: currentPatternsData.stars }
-            ];
-            
-            for (var g = 0; g < patternGroups.length; g++) {
-                var group = patternGroups[g];
-                var $container = group.container;
-                var patterns = group.patterns;
-                if (!$container || !$container.length || !patterns) continue;
-                
-                for (var i = 0; i < patterns.length; i++) {
-                    var pattern = patterns[i];
-                    var match = (data.id && pattern.id === data.id) || 
-                                (data.name && (pattern.name === data.name || 
-                                 pattern.searchName === data.name));
-                    
-                    if (match) {
-                        $container.find(".pattern-btn").removeClass("active");
-                        $container.find(".pattern-btn").each(function() {
-                            if ($(this).data("pattern-id") === pattern.id) {
-                                $(this).addClass("active");
-                                selectedPattern = pattern.name;
-                                selectedPatternId = pattern.id;
-                                found = true;
-                            }
-                        });
-                        break;
-                    }
-                }
-                if (found) break;
-            }
-            
-            if (!found) clearAllActiveButtons();
-        });
-        
-        // Listen to culture changes from server
-        if (propApi) {
-            $(propApi).on("stelPropertyChanged:StelSkyCultureMgr.currentSkyCultureID", 
-                function(evt, data) {
-                    var newCultureId = data.value;
-                    if (newCultureId && newCultureId !== currentCultureId) {
-                        console.log("[SkyCulture] Culture changed from server to: " + newCultureId);
-                        currentCultureId = newCultureId;
-                        updateCultureButtonStates();
-                        updateInfoFrame();
-                        selectedPattern = null;
-                        selectedPatternId = null;
-                        loadAllCultureData();
-                    }
-                });
-            
-            // Listen to language changes
-            $(propApi).on("stelPropertyChanged:StelLocaleMgr.appLanguage", 
-                function(evt, data) {
-                    var newLang = data.value;
-                    if (newLang && newLang !== currentLanguage) {
-                        console.log("[SkyCulture] Language changed to: " + newLang);
-                        currentLanguage = newLang;
-                        // Reload cultures to get newly translated names
-                        refresh();
-                    }
-                });
-        }
-    }
+		/**
+		 * Setup synchronization listeners for culture and selection changes.
+		 * Ensures the UI stays in sync with Stellarium's state.
+		 * 
+		 * Enhanced matching logic for zodiac signs:
+		 * - Exact match by composite ID
+		 * - Numeric index extraction from composite IDs
+		 * - Name-based matching as fallback
+		 * - Support for both new composite IDs and legacy simple IDs
+		 */
+		function setupSyncListeners() {
+				// Listen to objectSelected events from tables and other components
+				$(document).on("objectSelected", function(evt, data) {
+						if (!syncEnabled) return;
+						
+						if (!data || !data.type || data.type === 'none' || !data.name) {
+								clearAllActiveButtons();
+								return;
+						}
+						
+						var found = false;
+						var patternGroups = [
+								{ container: $constellationsContainer, patterns: currentPatternsData.constellations, type: "constellation" },
+								{ container: $asterismsContainer, patterns: currentPatternsData.asterisms, type: "asterism" },
+								{ container: $zodiacContainer, patterns: currentPatternsData.zodiac, type: "zodiac" },
+								{ container: $lunarContainer, patterns: currentPatternsData.lunar, type: "lunar" },
+								{ container: $starsContainer, patterns: currentPatternsData.stars, type: "star" }
+						];
+						
+						for (var g = 0; g < patternGroups.length; g++) {
+								var group = patternGroups[g];
+								var $container = group.container;
+								var patterns = group.patterns;
+								if (!$container || !$container.length || !patterns) continue;
+								
+								for (var i = 0; i < patterns.length; i++) {
+										var pattern = patterns[i];
+										var match = false;
+										
+										// ============================================================
+										// ZODIAC MATCHING LOGIC
+										// ============================================================
+										if (group.type === "zodiac") {
+												// METHOD 1: Match by composite ID (most reliable)
+												if (data.id && pattern.id && data.id === pattern.id) {
+														match = true;
+												}
+												// METHOD 2: Match by numeric index from composite ID
+												else if (data.id && pattern.id && 
+																 data.id.indexOf('zodiac_') === 0 && 
+																 pattern.id.indexOf('zodiac_') === 0) {
+														var dataParts = data.id.split('_');
+														var patternParts = pattern.id.split('_');
+														var dataIndex = parseInt(dataParts[dataParts.length - 1], 10);
+														var patternIndex = parseInt(patternParts[patternParts.length - 1], 10);
+														if (dataIndex === patternIndex) {
+																match = true;
+														}
+												}
+												// METHOD 3: Match by simple ID (legacy support)
+												else if (data.id && pattern.simpleId && data.id === pattern.simpleId) {
+														match = true;
+												}
+												// METHOD 4: Match by name (fallback)
+												else if (data.name) {
+														match = (pattern.name === data.name || 
+																		 pattern.searchName === data.name ||
+																		 (pattern.englishName && pattern.englishName === data.name));
+												}
+										}
+										// ============================================================
+										// LUNAR MANSION MATCHING LOGIC
+										// ============================================================
+										else if (group.type === "lunar") {
+												// Exact match
+												if (data.id && pattern.id && data.id === pattern.id) {
+														match = true;
+												}
+												// Match by numeric index
+												else if (data.id && pattern.id && 
+																 data.id.indexOf('lunar_') === 0 && 
+																 pattern.id.indexOf('lunar_') === 0) {
+														var dataNum = parseInt(data.id.split('_')[1], 10);
+														var patternNum = parseInt(pattern.id.split('_')[1], 10);
+														if (dataNum === patternNum) {
+																match = true;
+														}
+												}
+												// Match by name
+												else if (data.name) {
+														match = (pattern.name === data.name || 
+																		 pattern.searchName === data.name);
+												}
+										}
+										// ============================================================
+										// CONSTELLATION MATCHING LOGIC
+										// ============================================================
+										else if (group.type === "constellation") {
+												// Match by original ID
+												if (data.id && pattern.id) {
+														if (pattern.id === data.id) {
+																match = true;
+														}
+														// Match by abbreviation (last part of CON ID)
+														else if (pattern.id.indexOf('CON ') === 0 && 
+																		 data.id.indexOf('CON ') === 0) {
+																var patternParts = pattern.id.split(' ');
+																var dataParts = data.id.split(' ');
+																if (patternParts.length >= 3 && dataParts.length >= 3) {
+																		if (patternParts[2] === dataParts[2]) {
+																				match = true;
+																		}
+																}
+														}
+												}
+												// Match by name
+												if (!match && data.name) {
+														match = (pattern.name === data.name || 
+																		 pattern.searchName === data.name ||
+																		 (pattern.englishName && pattern.englishName === data.name));
+												}
+										}
+										// ============================================================
+										// ASTERISM MATCHING LOGIC
+										// ============================================================
+										else if (group.type === "asterism") {
+												if (data.id && pattern.id) {
+														if (pattern.id === data.id) {
+																match = true;
+														}
+														// Match by abbreviation (last part of AST ID)
+														else if (pattern.id.indexOf('AST ') === 0 && 
+																		 data.id.indexOf('AST ') === 0) {
+																var patternParts = pattern.id.split(' ');
+																var dataParts = data.id.split(' ');
+																if (patternParts.length >= 3 && dataParts.length >= 3) {
+																		if (patternParts[2] === dataParts[2]) {
+																				match = true;
+																		}
+																}
+														}
+												}
+												if (!match && data.name) {
+														match = (pattern.name === data.name || 
+																		 pattern.searchName === data.name);
+												}
+										}
+										// ============================================================
+										// STAR MATCHING LOGIC
+										// ============================================================
+										else if (group.type === "star") {
+												if (data.id && pattern.id && pattern.id === data.id) {
+														match = true;
+												}
+												else if (data.name && pattern.name === data.name) {
+														match = true;
+												}
+												else if (data.name && pattern.searchName === data.name) {
+														match = true;
+												}
+										}
+										
+										if (match) {
+												$container.find(".pattern-btn").removeClass("active");
+												$container.find(".pattern-btn").each(function() {
+														var $btn = $(this);
+														var btnPatternId = $btn.data("pattern-id");
+														// Exact match only for button activation
+														if (btnPatternId === pattern.id || 
+																(pattern.simpleId && btnPatternId === pattern.simpleId)) {
+																$btn.addClass("active");
+																selectedPattern = pattern.name;
+																selectedPatternId = pattern.id;
+																found = true;
+																console.log("[SkyCulture] ObjectSelected matched:", pattern.name, "ID:", pattern.id);
+														}
+												});
+												break;
+										}
+								}
+								if (found) break;
+						}
+						
+						if (!found) clearAllActiveButtons();
+				});				
+    
+				// ============================================================
+				// LISTEN TO CULTURE CHANGES FROM SERVER (NEW)
+				// ============================================================
+				if (propApi) {
+						$(propApi).on("stelPropertyChanged:StelSkyCultureMgr.currentSkyCultureID", 
+								function(evt, data) {
+										var newCultureId = data.value;
+										if (newCultureId && newCultureId !== currentCultureId) {
+												console.log("[SkyCulture] Culture changed from server to: " + newCultureId);
+												currentCultureId = newCultureId;
+												// Find the culture name from availableCultures
+												var culture = availableCultures.find(function(c) { return c.id === newCultureId; });
+												if (culture) currentCultureName = culture.name;
+												updateCultureButtonStates();
+												updateInfoFrame();
+												selectedPattern = null;
+												selectedPatternId = null;
+												loadAllCultureData();
+										}
+								});
+						
+						// Listen to language changes
+						$(propApi).on("stelPropertyChanged:StelLocaleMgr.appLanguage", 
+								function(evt, data) {
+										var newLang = data.value;
+										if (newLang && newLang !== currentLanguage) {
+												console.log("[SkyCulture] Language changed to: " + newLang);
+												currentLanguage = newLang;
+												// Reload cultures to get newly translated names
+												refresh();
+										}
+								});
+				}
+		}
 
     // =====================================================================
     // 14. INITIALIZATION
@@ -1316,6 +1623,8 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
                 console.log("[SkyCulture] Module initialized successfully v4.0.0 - Direct index.json loading");
             }
         });
+				
+
     }
 
     // =====================================================================
