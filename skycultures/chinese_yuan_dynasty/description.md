@@ -77,6 +77,14 @@ It should be noted that if a given constellation has no star with data at all, i
 
 Additionally, the coordinates of two constellations, *Bodu* (Textile Ruler) and *Tusi* (Butcher's Shops), completely overlap. In the Stellarium implementation, only *Tusi* (Butcher's Shops) is displayed, while *Bodu* (Textile Ruler) is not shown.
 
+### Note on Constellation IDs for East Asian Sky Cultures
+
+China, Japan, and Korea share the same constellation system. The Chinese characters used for constellation names are largely identical, but their English translations differ, and the pronunciations in each language are completely different. Given the unique consistency of East Asian sky cultures, it is necessary to have an identical field as a primary key to identify the same constellation across different cultures. This will facilitate further comparative cultural research based on Stellarium.
+
+According to Stellarium's specification, constellation IDs (Abbreviated names) should use pronunciation-based abbreviations for ease of memorization, rather than plain numbers. However, as noted above, using a numeric ID as a common primary key across East Asian sky cultures is a more suitable choice. Therefore, we have decided to use numeric IDs instead of pronunciation-based abbreviations — not only because pronunciations vary across regions, but also because a dedicated `pronounce` field already exists, so there is no need for a redundant ID that reflects pronunciation.
+
+The order of constellation IDs in the current East Asian sky culture is derived from the Tang-Dynasty Chinese constellation poem *Bu Tian Ge* (Song of the Sky Pacers). This poem is widely known, and the constellation sequence it records is regarded as a conventional standard. Specifically, all 283 constellations are divided into 31 groups based on the Three Enclosures and the 28 Mansions. The Three Enclosures each use an initial letter (P, S, H) as a prefix, followed by numbers for the constellations within each Enclosure. Here P stands for the Purple Forbidden Enclosure, S for the Supreme Palace Enclosure, and H for the Heavenly Market Enclosure. In contrast, the 28 Mansions are numbered from 01 to 28, and the constellations within each mansion are named with letters. For example, 01A denotes the first constellation of the Horn Mansion.
+
 ## Constellations
 
 ##### Purple Forbidden Enclosure
