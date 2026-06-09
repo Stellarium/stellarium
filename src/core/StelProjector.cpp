@@ -92,11 +92,11 @@ QByteArray StelProjector::Mat4dTransform::getForwardTransformShader() const
 #line 1 104
 uniform mat4 PROJECTOR_vertexToAltAzPosMatrix;
 uniform mat4 PROJECTOR_modelViewMatrix;
-vec3 modelViewForwardTransform(vec3 v)
+vec3 modelViewForwardTransform(highp vec3 v)
 {
 	return (PROJECTOR_modelViewMatrix * vec4(v,1)).xyz;
 }
-vec3 vertexToAltAzPos(vec3 v)
+vec3 vertexToAltAzPos(highp vec3 v)
 {
 	return (PROJECTOR_vertexToAltAzPosMatrix * vec4(v,1)).xyz;
 }
@@ -466,21 +466,21 @@ QByteArray StelProjector::getProjectShader() const
 {
 	static const char*const projectSrc = 1+R"(
 #line 1 106
-uniform vec2 PROJECTOR_viewportCenter;
-uniform vec2 PROJECTOR_flip;
-uniform float PROJECTOR_pixelPerRad;
-uniform float PROJECTOR_zNear;
-uniform float PROJECTOR_oneOverZNearMinusZFar;
-vec3 project(vec3 modelSpacePoint)
+uniform highp vec2 PROJECTOR_viewportCenter;
+uniform highp vec2 PROJECTOR_flip;
+uniform highp float PROJECTOR_pixelPerRad;
+uniform highp float PROJECTOR_zNear;
+uniform highp float PROJECTOR_oneOverZNearMinusZFar;
+highp vec3 project(highp vec3 modelSpacePoint)
 {
-	float flipHorz = PROJECTOR_flip.x, flipVert = PROJECTOR_flip.y;
-	vec2  viewportCenter = PROJECTOR_viewportCenter;
-	float pixelPerRad = PROJECTOR_pixelPerRad;
-	float zNear = PROJECTOR_zNear;
-	float oneOverZNearMinusZFar = PROJECTOR_oneOverZNearMinusZFar;
+	highp float flipHorz = PROJECTOR_flip.x, flipVert = PROJECTOR_flip.y;
+	highp vec2  viewportCenter = PROJECTOR_viewportCenter;
+	highp float pixelPerRad = PROJECTOR_pixelPerRad;
+	highp float zNear = PROJECTOR_zNear;
+	highp float oneOverZNearMinusZFar = PROJECTOR_oneOverZNearMinusZFar;
 
-	vec3 worldSpacePoint = modelViewForwardTransform(modelSpacePoint);
-	vec3 v = projectorForwardTransform(worldSpacePoint);
+	highp vec3 worldSpacePoint = modelViewForwardTransform(modelSpacePoint);
+	highp vec3 v = projectorForwardTransform(worldSpacePoint);
 	return vec3(viewportCenter[0] + flipHorz * pixelPerRad * v[0],
 	            viewportCenter[1] + flipVert * pixelPerRad * v[1],
 	            (v[2] - zNear) * oneOverZNearMinusZFar);
@@ -504,25 +504,25 @@ QByteArray StelProjector::getUnProjectShader() const
 {
 	static const char*const projectSrc = 1+R"(
 #line 1 107
-uniform vec2 PROJECTOR_viewportCenter;
-uniform vec2 PROJECTOR_flip;
-uniform float PROJECTOR_pixelPerRad;
-vec3 winPosToWorldPos(float x, float y, out bool ok)
+uniform highp vec2 PROJECTOR_viewportCenter;
+uniform highp vec2 PROJECTOR_flip;
+uniform highp float PROJECTOR_pixelPerRad;
+highp vec3 winPosToWorldPos(highp float x, highp float y, out bool ok)
 {
-	float flipHorz = PROJECTOR_flip.x, flipVert = PROJECTOR_flip.y;
-	vec2  viewportCenter = PROJECTOR_viewportCenter;
-	float pixelPerRad = PROJECTOR_pixelPerRad;
+	highp float flipHorz = PROJECTOR_flip.x, flipVert = PROJECTOR_flip.y;
+	highp vec2  viewportCenter = PROJECTOR_viewportCenter;
+	highp float pixelPerRad = PROJECTOR_pixelPerRad;
 
-	vec3 v;
+	highp vec3 v;
 	v[0] = flipHorz * (x - viewportCenter[0]) / pixelPerRad;
 	v[1] = flipVert * (y - viewportCenter[1]) / pixelPerRad;
 	v[2] = 0.;
 	return projectorBackwardTransform(v, ok);
 }
 
-vec3 unProject(float x, float y, out bool ok)
+highp vec3 unProject(highp float x, highp float y, out bool ok)
 {
-	vec3 worldPos = winPosToWorldPos(x, y, ok);
+	highp vec3 worldPos = winPosToWorldPos(x, y, ok);
 	// Even when the reprojected point comes from a region of the screen,
 	// where nothing is projected to (rval=false), we finish reprojecting.
 	// This looks good for atmosphere rendering, and it helps avoiding
