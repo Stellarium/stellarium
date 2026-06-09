@@ -5,7 +5,7 @@
 # 
 # Translators:
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
-# cardinot <mcardinot@gmail.com>, 2026
+# cardinot <mcardinot@gmail.com>, 2025
 # Yuri Chornoivan <yurchor@ukr.net>, 2026
 # 
 #, fuzzy
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-04-26 17:27+0700\n"
+"POT-Creation-Date: 2026-06-09 22:17+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -81,11 +81,6 @@ msgstr "Помилка (%1)"
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
 msgstr "Помилка під час спроби виконати пошук Simbad"
-
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:230
-#: tablet7in.html:245
-msgid "idle"
-msgstr "бездіяльність"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:291
 msgid "Error loading object types"
@@ -663,12 +658,6 @@ msgstr ""
 msgid "ID"
 msgstr "Ідентифікатор"
 
-#: index.html:1042 index.html:1073 index.html:1094 index.html:1116
-#: index.html:1149 tablet7in.html:1107 tablet7in.html:1138 tablet7in.html:1159
-#: tablet7in.html:1181 tablet7in.html:1214
-msgid "Native"
-msgstr "Рідною мовою"
-
 #: index.html:1043 index.html:1074 index.html:1095 index.html:1117
 #: index.html:1150 tablet7in.html:1108 tablet7in.html:1139 tablet7in.html:1160
 #: tablet7in.html:1182 tablet7in.html:1215
@@ -680,12 +669,6 @@ msgstr "Назва українською або англійською"
 #: tablet7in.html:1183 tablet7in.html:1216
 msgid "Translation"
 msgstr "Переклад"
-
-#: index.html:1045 index.html:1076 index.html:1097 index.html:1119
-#: index.html:1152 tablet7in.html:1110 tablet7in.html:1141 tablet7in.html:1162
-#: tablet7in.html:1184 tablet7in.html:1217
-msgid "Pronounce"
-msgstr "Вимова"
 
 #: index.html:1047 index.html:1078 tablet7in.html:1112 tablet7in.html:1143
 msgid "Star IDs"
