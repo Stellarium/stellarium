@@ -93,7 +93,7 @@ AtmosphereLightweight::AtmosphereLightweight()
 	, luminanceProbeFBO_(new QOpenGLFramebufferObject(LUM_PROBE_FBO_WIDTH, LUM_PROBE_FBO_HEIGHT,
 	                                                  QOpenGLFramebufferObject::NoAttachment,
 	                                                  GL_TEXTURE_2D, GL_RGBA))
-	, textureAverager_(new TextureAverageComputer(*StelOpenGL::highGraphicsFunctions(),
+	, textureAverager_(new TextureAverageComputer(StelOpenGL::highGraphicsFunctions(),
 	                                              LUM_PROBE_FBO_WIDTH, LUM_PROBE_FBO_HEIGHT,
 	                                              GL_RGBA, false))
 {
