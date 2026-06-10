@@ -436,12 +436,7 @@ IF(ENABLE_XLSX)
 ENDIF()
 
 # Activate support for INDI client in Telescope Control plugin
-IF(WIN32)
-     # Disable support for INDI client in Windows
-     SET(ENABLE_INDI 0)
-ELSE()
-     SET(ENABLE_INDI 1 CACHE BOOL "Define whether to use INDI client in Telescope Control plugin.")
-ENDIF()
+SET(ENABLE_INDI 1 CACHE BOOL "Define whether to use INDI client in Telescope Control plugin.")
 IF(ENABLE_INDI)
      ADD_DEFINITIONS(-DENABLE_INDI)
 ENDIF()
