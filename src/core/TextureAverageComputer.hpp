@@ -30,7 +30,8 @@
 
 class TextureAverageComputer
 {
-	StelOpenGL::HighGraphicsFunctions& gl;
+	QOpenGLExtraFunctions& gl;
+	StelOpenGL::HighGraphicsFunctions* hiGL;
 	std::unique_ptr<QOpenGLShaderProgram> blitTexProgram;
 	//! This FBO is used for getting the deepest mipmap levels of textures in GLES mode.
 	std::unique_ptr<QOpenGLFramebufferObject> glesFBO;
@@ -52,7 +53,7 @@ public:
 	Vec4f getTextureAverage(GLuint texture);
 	//!< Can be used for power-of-two textures
 	Vec4f getTextureAverageSimple(GLuint texture, int width, int height);
-	TextureAverageComputer(StelOpenGL::HighGraphicsFunctions&, int texW, int texH,
+	TextureAverageComputer(StelOpenGL::HighGraphicsFunctions*, int texW, int texH,
 	                       GLenum internalFormat, bool textureIsFloat);
 	~TextureAverageComputer();
 };

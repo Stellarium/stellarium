@@ -21,15 +21,16 @@
 #include "StelMainView.hpp"
 #include "StelUtils.hpp"
 #include <array>
+#include <QOpenGLExtraFunctions>
 
 namespace
 {
 class FBORestorer
 {
-	StelOpenGL::HighGraphicsFunctions& gl;
+	QOpenGLExtraFunctions& gl;
 	GLint oldFBO=-1;
 public:
-	FBORestorer(StelOpenGL::HighGraphicsFunctions& gl)
+	FBORestorer(QOpenGLExtraFunctions& gl)
 		: gl(gl)
 	{
 	}
@@ -100,7 +101,7 @@ Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGL(const int 
 #endif
 
 	Vec4f pixel;
-	GL(gl.glGetTexImage(GL_TEXTURE_2D, deepestLevel, GL_RGBA, GL_FLOAT, &pixel[0]));
+	GL(hiGL->glGetTexImage(GL_TEXTURE_2D, deepestLevel, GL_RGBA, GL_FLOAT, &pixel[0]));
 	return pixel;
 #else
 	return {NAN, NAN, NAN, NAN};
@@ -225,13 +226,14 @@ void TextureAverageComputer::checkNeedForWorkaround()
 }
 
 // Clobbers: GL_TEXTURE_BINDING_2D, GL_VERTEX_ARRAY_BINDING, GL_ARRAY_BUFFER_BINDING
-TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions& gl, const int texWidth, const int texHeight, const GLenum internalFormat, const bool textureIsFloat)
-	: gl(gl)
+TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions* hiGL, const int texWidth, const int texHeight, const GLenum internalFormat, const bool textureIsFloat)
+	: gl(*QOpenGLContext::currentContext()->extraFunctions())
+	, hiGL(hiGL)
 	, npotWidth(texWidth)
 	, npotHeight(texHeight)
 	, textureIsFloat(textureIsFloat)
 {
-	isGLES = StelMainView::getInstance().getGLInformation().isGLES;
+	isGLES = StelMainView::getInstance().getGLInformation().isGLES || !hiGL;
 
 	GL(gl.glGenVertexArrays(1, &vao));
 	GL(gl.glBindVertexArray(vao));
