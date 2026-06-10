@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# cardinot <mcardinot@gmail.com>, 2026
+# cardinot <mcardinot@gmail.com>, 2024
 # 殳玮 孙 <itun@qq.com>, 2026
 # 
 #, fuzzy
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-04-26 17:27+0700\n"
+"POT-Creation-Date: 2026-06-09 22:17+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2026\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -81,11 +81,6 @@ msgstr "错误 (%1)"
 msgid "Error performing Simbad lookup"
 msgstr "执行Simbad查找时出错"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:230
-#: tablet7in.html:245
-msgid "idle"
-msgstr "空闲"
-
 #: plugins/RemoteControl/webroot/js/api/search.js:291
 msgid "Error loading object types"
 msgstr "加载对象类型时出错"
@@ -123,7 +118,7 @@ msgstr "无法搜索场景3d列表"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:170 tablet7in.html:1242
 msgid "Search actions..."
-msgstr ""
+msgstr "搜索..."
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:217
 #: plugins/RemoteControl/webroot/js/ui/actions.js:257
@@ -145,7 +140,7 @@ msgstr "无匹配项"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:132
 msgid "No items available for this culture"
-msgstr ""
+msgstr "没有适用于该文化的项目"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:432
 msgid "No current selection"
@@ -173,7 +168,7 @@ msgstr "深空天体"
 
 #: index.html:39 tablet7in.html:44
 msgid "Statistics & Analysis"
-msgstr ""
+msgstr "统计与分析"
 
 #: index.html:40
 msgid "Actions and scripts"
@@ -185,7 +180,7 @@ msgstr "场景3d"
 
 #: index.html:44 index.html:1301 tablet7in.html:50 tablet7in.html:1370
 msgid "Gamepad Controller"
-msgstr ""
+msgstr "游戏控制器"
 
 #: index.html:83
 msgid "Pause"
@@ -472,61 +467,61 @@ msgstr "星空文化"
 
 #: index.html:723 index.html:980 tablet7in.html:789 tablet7in.html:1045
 msgid "Loading sky cultures..."
-msgstr ""
+msgstr "正在加载星空文化..."
 
 #: index.html:732 index.html:998 index.html:1018 tablet7in.html:798
 #: tablet7in.html:1063 tablet7in.html:1083
 msgid "Zodiac Signs"
-msgstr ""
+msgstr "黄道带"
 
 #: index.html:733 index.html:1002 index.html:1019 tablet7in.html:799
 #: tablet7in.html:1067 tablet7in.html:1084
 msgid "Lunar Mansions"
-msgstr ""
+msgstr "月宿"
 
 #: index.html:734 tablet7in.html:800
 msgid "Notable Stars"
-msgstr ""
+msgstr "主要恒星"
 
 #: index.html:740 tablet7in.html:806
 msgid "Click on any constellation to highlight and isolate it"
-msgstr ""
+msgstr "点击任意星座以高亮并单独显示"
 
 #: index.html:742 tablet7in.html:808
 msgid "Select a sky culture to view constellations"
-msgstr ""
+msgstr "选择一种星空文化来查看星座"
 
 #: index.html:748 tablet7in.html:814
 msgid "Traditional star patterns within constellations"
-msgstr ""
+msgstr "星座内的传统恒星排布"
 
 #: index.html:750 tablet7in.html:816
 msgid "No asterisms available"
-msgstr ""
+msgstr "无可用星群"
 
 #: index.html:756 tablet7in.html:822
 msgid "The 12 signs of the zodiac"
-msgstr ""
+msgstr "黄道十二宫"
 
 #: index.html:758 tablet7in.html:824
 msgid "No zodiac data available"
-msgstr ""
+msgstr "无黄道带数据"
 
 #: index.html:764 tablet7in.html:830
 msgid "Traditional lunar stations (mansions)"
-msgstr ""
+msgstr "传统月站（月宿）"
 
 #: index.html:766 tablet7in.html:832
 msgid "No lunar mansions data available"
-msgstr ""
+msgstr "无月宿数据"
 
 #: index.html:772 tablet7in.html:838
 msgid "Named stars with cultural significance"
-msgstr ""
+msgstr "具有文化意义的命名恒星"
 
 #: index.html:774 tablet7in.html:840
 msgid "No star name data available"
-msgstr ""
+msgstr "无可用恒星名称数据"
 
 #: index.html:798 tablet7in.html:864
 msgid "Label constellations with font size"
@@ -578,47 +573,47 @@ msgstr "仅最后选择"
 
 #: index.html:954 tablet7in.html:1019
 msgid "Culture Data Inspector"
-msgstr ""
+msgstr "文化数据检查器"
 
 #: index.html:956 tablet7in.html:1021
 msgid ""
 "This inspector displays the complete, unfiltered dataset extracted directly "
 "from the culture's"
-msgstr ""
+msgstr "此检查器显示直接从文化文件中提取的完整、未经过滤的数据集。"
 
 #: index.html:958 tablet7in.html:1023
 msgid "file. Use this view to:"
-msgstr ""
+msgstr "使用此视图可以："
 
 #: index.html:960 tablet7in.html:1025
 msgid "Verify exact constellation and asterism counts (including ray helpers)"
-msgstr ""
+msgstr "验证精确的星座和星群数量（包括射线辅助线）"
 
 #: index.html:961 tablet7in.html:1026
 msgid "Inspect raw IDs, native names, pronunciations, and IPA values"
-msgstr ""
+msgstr "检查原始ID、原生名称、发音和IPA值"
 
 #: index.html:962 tablet7in.html:1027
 msgid "Cross-reference star IDs (HIP, NGC, etc.) with their cultural names"
-msgstr ""
+msgstr "将恒星ID（HIP、NGC等）与其文化名称进行交叉对照"
 
 #: index.html:963 tablet7in.html:1028
 msgid "Export complete datasets to CSV/JSON for external analysis"
-msgstr ""
+msgstr "将完整数据集导出为CSV/JSON，供外部分析"
 
 #: index.html:964 tablet7in.html:1029
 msgid "Search across all fields to quickly locate specific entries"
-msgstr ""
+msgstr "在所有字段中搜索，快速定位特定条目"
 
 #: index.html:967 tablet7in.html:1032
 msgid ""
 "Each row is interactive — click to select and navigate to the object in "
 "Stellarium."
-msgstr ""
+msgstr "每一行都可交互 — 单击可在Stellarium中选择并导航到该天体。"
 
 #: index.html:976 tablet7in.html:1041
 msgid "Select Sky Culture"
-msgstr ""
+msgstr "选择星空文化"
 
 #: index.html:994 tablet7in.html:1059
 msgid "Ray Helpers"
@@ -626,38 +621,32 @@ msgstr "导航辅助线"
 
 #: index.html:1006 tablet7in.html:1071
 msgid "Named Objects"
-msgstr ""
+msgstr "命名天体"
 
 #: index.html:1020 tablet7in.html:1085
 msgid "Notable Stars & Objects"
-msgstr ""
+msgstr "显著恒星与天体"
 
 #: index.html:1027 tablet7in.html:1092
 msgid ""
 "Search constellations... (click row to isolate at 60° FOV) | ESC to reset"
-msgstr ""
+msgstr "搜索星座...（单击行将在60°视场中单独显示）| ESC 重置"
 
 #: index.html:1034 tablet7in.html:1099
 msgid ""
 "Complete constellation definitions from index.json. Click any row to isolate"
 " and highlight in Stellarium."
-msgstr ""
+msgstr "来自index.json的完整星座定义。单击任意行可在Stellarium中单独显示并高亮。"
 
 #: index.html:1041 index.html:1072 tablet7in.html:1106 tablet7in.html:1137
 msgid "ID"
 msgstr "ID"
 
-#: index.html:1042 index.html:1073 index.html:1094 index.html:1116
-#: index.html:1149 tablet7in.html:1107 tablet7in.html:1138 tablet7in.html:1159
-#: tablet7in.html:1181 tablet7in.html:1214
-msgid "Native"
-msgstr "原生"
-
 #: index.html:1043 index.html:1074 index.html:1095 index.html:1117
 #: index.html:1150 tablet7in.html:1108 tablet7in.html:1139 tablet7in.html:1160
 #: tablet7in.html:1182 tablet7in.html:1215
 msgid "English Name"
-msgstr ""
+msgstr "英文名称"
 
 #: index.html:1044 index.html:1075 index.html:1096 index.html:1118
 #: index.html:1151 tablet7in.html:1109 tablet7in.html:1140 tablet7in.html:1161
@@ -665,50 +654,44 @@ msgstr ""
 msgid "Translation"
 msgstr "英译"
 
-#: index.html:1045 index.html:1076 index.html:1097 index.html:1119
-#: index.html:1152 tablet7in.html:1110 tablet7in.html:1141 tablet7in.html:1162
-#: tablet7in.html:1184 tablet7in.html:1217
-msgid "Pronounce"
-msgstr ""
-
 #: index.html:1047 index.html:1078 tablet7in.html:1112 tablet7in.html:1143
 msgid "Star IDs"
-msgstr ""
+msgstr "恒星ID"
 
 #: index.html:1058 tablet7in.html:1123
 msgid "Search asterisms... (click row to center at 30° FOV) | ESC to reset"
-msgstr ""
+msgstr "搜索星群...（单击行将在30°视场中居中显示）| ESC 重置"
 
 #: index.html:1065 tablet7in.html:1130
 msgid ""
 "All asterisms from index.json (ray helpers are excluded from this list). "
 "Click any row to center view."
-msgstr ""
+msgstr "来自index.json的所有星群（此列表不包括射线辅助线）。单击任意行可居中视图。"
 
 #: index.html:1104 tablet7in.html:1169
 msgid ""
 "Zodiac signs defined in this culture. Click to center on the constellation."
-msgstr ""
+msgstr "本文化中定义的黄道带。单击可居中显示星座。"
 
 #: index.html:1126 tablet7in.html:1191
 msgid ""
 "Lunar mansions (stations) defined in this culture. Click to center view."
-msgstr ""
+msgstr "本文化中定义的月站（月宿）。单击可居中视图。"
 
 #: index.html:1133 tablet7in.html:1198
 msgid ""
 "Search stars & objects... (click row to center at 15° FOV) | ESC to reset"
-msgstr ""
+msgstr "搜索恒星与天体...（单击行将在15°视场中居中显示）| ESC 重置"
 
 #: index.html:1140 tablet7in.html:1205
 msgid ""
 "All named celestial objects (stars, planets, deep-sky) defined in this "
 "culture's common_names section."
-msgstr ""
+msgstr "本文化的 common_names 部分中定义的所有已命名天体（恒星、行星、深空天体）。"
 
 #: index.html:1147 tablet7in.html:1212
 msgid "Original ID"
-msgstr ""
+msgstr "原始ID"
 
 #: index.html:1184 tablet7in.html:1261
 msgid "Active script:"
@@ -724,7 +707,7 @@ msgstr "停止当前脚本"
 
 #: index.html:1191 tablet7in.html:1268
 msgid "Reset to natural sky appearance (South, 40°, FOV 90°)"
-msgstr ""
+msgstr "重置为自然天空外观（南方，40°，视场90°）"
 
 #: index.html:1200 tablet7in.html:45 tablet7in.html:1240
 msgid "Actions"
@@ -776,205 +759,205 @@ msgstr "加载所有场景"
 
 #: index.html:1304 tablet7in.html:1373
 msgid "Scan"
-msgstr ""
+msgstr "扫描"
 
 #: index.html:1311 tablet7in.html:1380
 msgid "Controller Settings"
-msgstr ""
+msgstr "控制器设置"
 
 #: index.html:1314 tablet7in.html:1383
 msgid "Active Device:"
-msgstr ""
+msgstr "活动设备："
 
 #: index.html:1316 tablet7in.html:1385
 msgid "No devices connected"
-msgstr ""
+msgstr "未连接设备"
 
 #: index.html:1322 tablet7in.html:1391
 msgid "Device:"
-msgstr ""
+msgstr "设备："
 
 #: index.html:1330 tablet7in.html:1399
 msgid "Vendor:"
-msgstr ""
+msgstr "厂商："
 
 #: index.html:1334 tablet7in.html:1403
 msgid "Device ID:"
-msgstr ""
+msgstr "设备ID："
 
 #: index.html:1338 tablet7in.html:1407
 msgid "Buttons/Axes:"
-msgstr ""
+msgstr "按键/轴："
 
 #: index.html:1344 tablet7in.html:1413
 msgid "Joystick Preview"
-msgstr ""
+msgstr "摇杆预览"
 
 #: index.html:1350 tablet7in.html:1419
 msgid "Left Stick"
-msgstr ""
+msgstr "左摇杆"
 
 #: index.html:1351 tablet7in.html:1420
 msgid "View movement"
-msgstr ""
+msgstr "左摇杆"
 
 #: index.html:1354 tablet7in.html:1423
 msgid "Direction:"
-msgstr ""
+msgstr "方向："
 
 #: index.html:1355 tablet7in.html:1424
 msgid "centered"
-msgstr ""
+msgstr "居中"
 
 #: index.html:1360 tablet7in.html:1429
 msgid "Invert X"
-msgstr ""
+msgstr "反转 X 轴"
 
 #: index.html:1364 index.html:1383 tablet7in.html:1433 tablet7in.html:1452
 msgid "Invert Y"
-msgstr ""
+msgstr "反转 Y 轴"
 
 #: index.html:1373 tablet7in.html:1442
 msgid "Right Stick"
-msgstr ""
+msgstr "右摇杆"
 
 #: index.html:1374 tablet7in.html:1443
 msgid "Continuous zoom"
-msgstr ""
+msgstr "连续缩放"
 
 #: index.html:1377 tablet7in.html:1446
 msgid "Current FOV:"
-msgstr ""
+msgstr "当前视场："
 
 #: index.html:1392 tablet7in.html:1461
 msgid "Joystick Calibration"
-msgstr ""
+msgstr "摇杆校准"
 
 #: index.html:1394 tablet7in.html:1463
 msgid "Calibrate"
-msgstr ""
+msgstr "校准"
 
 #: index.html:1400 tablet7in.html:1469
 msgid ""
 "Move joysticks in circles to calibrate center position. Press any button to "
 "finish."
-msgstr ""
+msgstr "转动摇杆画圈以校准中心位置。按任意按钮完成。"
 
 #: index.html:1409 tablet7in.html:1478
 msgid "Test Vibration"
-msgstr ""
+msgstr "测试振动"
 
 #: index.html:1410 tablet7in.html:1479
 msgid "Manual test (uses full intensity)"
-msgstr ""
+msgstr "手动测试（使用最大强度）"
 
 #: index.html:1415 tablet7in.html:1484
 msgid "Vibration Feedback"
-msgstr ""
+msgstr "振动反馈"
 
 #: index.html:1416 tablet7in.html:1485
 msgid "works in Chrome/Edge"
-msgstr ""
+msgstr "适用于 Chrome/Edge"
 
 #: index.html:1422 tablet7in.html:1491
 msgid "Vibration Intensity:"
-msgstr ""
+msgstr "振动强度："
 
 #: index.html:1431 tablet7in.html:1500
 msgid "Sensitivity:"
-msgstr ""
+msgstr "灵敏度："
 
 #: index.html:1440 tablet7in.html:1509
 msgid "Deadzone:"
-msgstr ""
+msgstr "死区："
 
 #: index.html:1449 tablet7in.html:1518
 msgid "Zoom Speed:"
-msgstr ""
+msgstr "缩放速度："
 
 #: index.html:1458 tablet7in.html:1527
 msgid "Movement Speed:"
-msgstr ""
+msgstr "移动速度："
 
 #: index.html:1468 tablet7in.html:1537
 msgid "Button Customization"
-msgstr ""
+msgstr "按键自定义"
 
 #: index.html:1475 tablet7in.html:1544
 msgid ""
 "Each connected controller has its own independent profile. Select a device "
 "from 'Active Device' to customize."
-msgstr ""
+msgstr "每个已连接的控制器都有自己独立的配置文件。从“活动设备”中选择一个设备进行自定义。"
 
 #: index.html:1479 tablet7in.html:1548
 msgid "Reset Mappings"
-msgstr ""
+msgstr "重置映射"
 
 #: index.html:1480 tablet7in.html:1549
 msgid "Save Mappings"
-msgstr ""
+msgstr "保存映射"
 
 #: index.html:1481 tablet7in.html:1550
 msgid "Export Profile"
-msgstr ""
+msgstr "导出配置文件"
 
 #: index.html:1482 tablet7in.html:1551
 msgid "Import Profile"
-msgstr ""
+msgstr "导入配置文件"
 
 #: index.html:1485 tablet7in.html:1554
 msgid ""
 "Profiles are saved per device and can be exported/imported for backup or "
 "sharing"
-msgstr ""
+msgstr "配置文件按设备保存，可导出/导入用于备份或分享"
 
 #: index.html:1492 tablet7in.html:1561
 msgid "Live Input Monitor"
-msgstr ""
+msgstr "实时输入监视器"
 
 #: index.html:1493 tablet7in.html:1562
 msgid ""
 "Real-time raw values from the browser's Gamepad API. Buttons show press "
 "state, Axes show visual meter. Use this panel to verify button and axis "
 "mappings."
-msgstr ""
+msgstr "来自浏览器 Gamepad API 的实时原始值。按钮显示按下状态，轴显示可视化计量条。使用此面板验证按钮和轴映射。"
 
 #: index.html:1499 tablet7in.html:1568
 msgid "Buttons"
-msgstr ""
+msgstr "按钮"
 
 #: index.html:1501 index.html:1508 index.html:1516 tablet7in.html:1570
 #: tablet7in.html:1577 tablet7in.html:1585
 msgid "Waiting for controller input..."
-msgstr ""
+msgstr "等待控制器输入..."
 
 #: index.html:1506 tablet7in.html:1575
 msgid "Axes"
-msgstr ""
+msgstr "轴"
 
 #: index.html:1514 tablet7in.html:1583
 msgid "Device Information"
-msgstr ""
+msgstr "设备信息"
 
 #: index.html:1519 tablet7in.html:1588
 msgid "Understanding Raw Values"
-msgstr ""
+msgstr "理解原始值"
 
 #: index.html:1520 tablet7in.html:1589
 msgid "Buttons: Range 0.0 (not pressed) to 1.0 (green = fully pressed)."
-msgstr ""
+msgstr "按钮：范围 0.0（未按下）至 1.0（绿色 = 完全按下）。"
 
 #: index.html:1521 tablet7in.html:1590
 msgid ""
 "Axes: -1.0 to 1.0 with visual meter Center position is 0.0. Triggers (L2/R2)"
 " show gradual values."
-msgstr ""
+msgstr "轴：-1.0 至 1.0，带有可视化计量条。中心位置为 0.0。扳机键（L2/R2）显示渐变值。"
 
 #: index.html:1522 tablet7in.html:1591
 msgid ""
 "Note: Different browsers may report the same physical button on different "
 "indices. Use this panel to identify the correct mapping for your setup."
-msgstr ""
+msgstr "注意：不同浏览器可能在同一物理按钮上报告不同的索引。请使用此面板为您的设置确定正确的映射。"
 
 #: index.html:1552 tablet7in.html:1620
 msgid "No response from server"
