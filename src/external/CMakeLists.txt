@@ -111,6 +111,13 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
 		VERSION 2.1.3
 		DOWNLOAD_ONLY YES)
 
+	# remove GCCisms
+	file(READ ${indiclient_SOURCE_DIR}/libs/indibase/defaultdevice.h DEFAULTDEVICE_H)
+	string(REPLACE "__attribute__((deprecated))" "" DEFAULTDEVICE_H "${DEFAULTDEVICE_H}")
+	string(REPLACE "__attribute__((deprecated))" "" DEFAULTDEVICE_H "${DEFAULTDEVICE_H}")
+	file(WRITE ${indiclient_SOURCE_DIR}/libs/indibase/defaultdevice.h.new "${DEFAULTDEVICE_H}")
+	configure_file(${indiclient_SOURCE_DIR}/libs/indibase/defaultdevice.h.new ${indiclient_SOURCE_DIR}/libs/indibase/defaultdevice.h COPYONLY)
+
 	# remove missing definitions
 	file(READ ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c INDICOM_C)
 	string(REPLACE "case 576000: bps = B576000; break;" "" INDICOM_C "${INDICOM_C}")
@@ -145,7 +152,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
 
         # Fix build in windows
 	file(READ ${indiclient_SOURCE_DIR}/libs/indibase/indilogger.h INDILOGGER_H)
-	string(REGEX REPLACE "#include <sys/time.h>" "#ifdef Q_OS_WIN\n# include <windows.h>\n#else\n# include <sys/time.h>\n#endif" INDILOGGER_H "${INDILOGGER_H}")
+	string(REGEX REPLACE "#include <sys/time.h>" "#ifdef Q_OS_WIN\nstruct timeval { long long tv_sec; long long tv_usec; };\n#else\n# include <sys/time.h>\n#endif" INDILOGGER_H "${INDILOGGER_H}")
 	file(WRITE ${indiclient_SOURCE_DIR}/indilogger.h.new "${INDILOGGER_H}")
 	configure_file(${indiclient_SOURCE_DIR}/indilogger.h.new ${indiclient_SOURCE_DIR}/libs/indibase/indilogger.h COPYONLY)
 
