@@ -23,6 +23,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "TextureAverageComputer.hpp"
@@ -78,6 +79,9 @@ void read(QFile& file, const QString& path, void* buf, qsizetype size)
 
 inline GLenum getInternalFormatForFBO()
 {
+	const auto& glInfo = StelMainView::getInstance().getGLInformation();
+	if (glInfo.isGLES && glInfo.majorVersion == 2)
+		return GL_RGBA;
 	return GL_RGBA16F;
 }
 
