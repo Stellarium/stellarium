@@ -145,7 +145,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
 
         # Fix build in windows
 	file(READ ${indiclient_SOURCE_DIR}/libs/indibase/indilogger.h INDILOGGER_H)
-	string(REGEX REPLACE "#include <sys/time.h>" "#ifdef Q_OS_WIN\n#include <windows.h>\n#else\n#include <sys/time.h>\n#endif" INDILOGGER_H "${INDILOGGER_H}")
+	string(REGEX REPLACE "#include <sys/time.h>" "#ifdef Q_OS_WIN\n# include <windows.h>\n#else\n# include <sys/time.h>\n#endif" INDILOGGER_H "${INDILOGGER_H}")
 	file(WRITE ${indiclient_SOURCE_DIR}/indilogger.h.new "${INDILOGGER_H}")
 	configure_file(${indiclient_SOURCE_DIR}/indilogger.h.new ${indiclient_SOURCE_DIR}/libs/indibase/indilogger.h COPYONLY)
 
