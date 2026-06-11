@@ -59,8 +59,8 @@ When the converter has been built, a \textit{Convert} button appears in the SCM 
 \begin{figure}[ht]
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=0.35\columnwidth]{scm_dialog_start_converter.png} &
-\includegraphics[width=0.35\columnwidth]{scm_dialog_converter_file.png} \\
+\includegraphics[height=30mm]{scm_dialog_start_converter.png} &
+\includegraphics[height=30mm]{scm_dialog_converter_file.png} \\
 (a) Start dialog with \textit{Convert} button & (b) Converter file chooser
 \end{tabular}
 \caption{SCM plugin: converter workflow dialogs}
@@ -92,27 +92,40 @@ Before doing that, it is worth browsing the remaining tabs.
 
 \begin{figure}[p]
 \centering
-\begin{tabular}{cc}
-\includegraphics[height=57mm]{scm_dialog_skyculture_overview.png} &
-\includegraphics[height=57mm]{scm_dialog_skyculture_description.png} \\
+\begin{tabular}{c@{\,}c}
+\includegraphics[height=55mm]{scm_dialog_skyculture_overview.png} &
+\includegraphics[height=55mm]{scm_dialog_skyculture_description.png} \\
 (a) Overview tab & (b) Description tab \\
-\includegraphics[height=57mm]{scm_dialog_skyculture_common-names.png} &
-\includegraphics[height=57mm]{scm_dialog_skyculture_location.png} \\
+\includegraphics[height=55mm]{scm_dialog_skyculture_common-names.png} &
+\includegraphics[height=55mm]{scm_dialog_skyculture_location.png} \\
 (c) Common Names tab & (d) Location tab
 \end{tabular}
 \caption{SCM plugin: main dialog tabs for creating a sky culture}
 \label{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation}
 \end{figure}
 
+\begin{figure}[p]
+\centering
+\begin{tabular}{c@{\,}c@{\,}c}
+\includegraphics[height=50mm]{scm_dialog_constedit_drawing.png} &
+\includegraphics[height=50mm]{scm_dialog_constedit_information.png} &
+\includegraphics[height=50mm]{scm_dialog_constedit_artwork.png} \\
+(a) Drawing tab & (b) Information tab & (c) Artwork tab \\
+\end{tabular}
+\caption{SCM plugin: Constellation Editor tabs and drawing workflow}
+\label{fig:plugins:SCM:ConstellationEditorPanels}
+\end{figure}
+
+
 \paragraph{Description tab}
-The \textit{Description} tab (Figure~\ref{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation}, panel b) collects textual information about the sky culture.
+The \textit{Description} tab (Figure~\ref{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation} b) collects textual information about the sky culture.
 It contains dropdown menus as well as mandatory (marked with an asterisk) and optional text fields.
 Scroll through all fields and supply as much information as possible.
 Your inputs are used to generate the sky culture description file (\file{description.md}), which Stellarium will use to display certain information to users.
 For details on the expected content and structure of this file, see section~\ref{sec:skycultures:description}.
 
 \paragraph{Common Names tab}
-The \textit{Common Names} tab (Figure~\ref{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation}, panel c) manages culture-specific names for stars, planets, and deep-sky objects.
+The \textit{Common Names} tab (Figure~\ref{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation} c) manages culture-specific names for stars, planets, and deep-sky objects.
 
 The table at the top lists the common name entries you have already created.
 The input fields below are used to enter new names.
@@ -153,19 +166,6 @@ For information on geoscheme regions, see section~\ref{sec:skycultures:region}.
 Head back to the \textit{Overview} tab and press \textit{Add Constellation} to open the \textit{Constellation Editor} (Figure~\ref{fig:plugins:SCM:ConstellationEditorPanels}, panel a). 
 This editor consists of three tabs. 
 
-\begin{figure}[p]
-\centering
-\begin{tabular}{cc}
-\includegraphics[height=50mm]{scm_dialog_constedit_drawing.png} &
-\includegraphics[height=50mm]{scm_dialog_constedit_information.png} \\
-(a) Drawing tab & (b) Information tab \\
-\includegraphics[height=50mm]{scm_dialog_constedit_artwork.png} &
-\includegraphics[height=50mm]{scm_drawing.png} \\
-(c) Artwork tab & (d) Example drawing in progress
-\end{tabular}
-\caption{SCM plugin: Constellation Editor tabs and drawing workflow}
-\label{fig:plugins:SCM:ConstellationEditorPanels}
-\end{figure}
 
 \paragraph{Drawing tab}
 The \textit{Drawing} tab lets you draw constellation lines directly on the Stellarium sky map (see also section~\ref{sec:skycultures:constellations} for the underlying data format).
@@ -178,17 +178,17 @@ The \textit{Drawing} tab lets you draw constellation lines directly on the Stell
 \item To stop drawing, double-right-click or simply press the \textit{Pen} button again.
 \end{enumerate}
 
-Using this workflow you can build complex stick figures (see Figure~\ref{fig:plugins:SCM:ConstellationEditorPanels}, panel d).
+Using this workflow you can build complex stick figures (see Figure~\ref{fig:plugins:SCM:DrawingArtwork} a).
 Mistakes can be undone with the \textit{Undo} button (one segment at a time) or erased with the \textit{Eraser} tool: 
 press \textit{Eraser}, then hold the right mouse button and drag through any line segment to remove it.
 
 \paragraph{Information tab}
-The \textit{Information} tab (Figure~\ref{fig:plugins:SCM:ConstellationEditorPanels}, panel b) records metadata about the constellation.
+The \textit{Information} tab (Figure~\ref{fig:plugins:SCM:ConstellationEditorPanels} b) records metadata about the constellation.
 The English name and the unique identifier are mandatory; all other fields are optional but recommended.
 A possible identifier is generated automatically from the English name, but you may change it manually as well.
 
 \paragraph{Artwork tab}
-The \textit{Artwork} tab (Figure~\ref{fig:plugins:SCM:ConstellationEditorPanels}, panel c) lets you attach an illustration to the constellation.
+The \textit{Artwork} tab (Figure~\ref{fig:plugins:SCM:ConstellationEditorPanels} c) lets you attach an illustration to the constellation.
 For background on artwork and its role in sky cultures, see section~\ref{sec:skycultures:artwork}.
 
 Press \textit{Upload Image} and select an image file.
@@ -206,8 +206,13 @@ If the image is not visible on the sky map, try repositioning the anchor points.
 The SCM does not draw images that become too distorted.
 
 \begin{figure}[ht]
-\centering\includegraphics[width=0.35\columnwidth]{scm_drawing_artwork.png}
-\caption{Example constellation drawing with artwork aligned}
+\centering
+\begin{tabular}{cc}
+\includegraphics[width=30mm, angle=90]{scm_drawing.png} &
+\includegraphics[width=30mm, angle=90]{scm_drawing_artwork.png}\\
+(a) & (b) 
+\end{tabular}
+\caption{Example constellation drawing (a) in progress and (b) with artwork aligned}
 \label{fig:plugins:SCM:DrawingArtwork}
 \end{figure}
 
@@ -222,7 +227,7 @@ When you save a constellation, it is added to the list in the \textit{Overview} 
 Select a constellation in the list to \textit{Edit} or \textit{Remove} it.
 
 \begin{figure}[ht]
-\centering\includegraphics[width=0.8\columnwidth]{scm_test_constellations.png}
+\centering\includegraphics[width=0.85\columnwidth]{scm_test_constellations.png}
 \caption{SCM plugin: Overview tab with two example constellations}
 \label{fig:plugins:SCM:TestConstellations}
 \end{figure}
@@ -237,7 +242,7 @@ If any mandatory fields are incomplete, an error message identifies what is miss
 Otherwise the \textit{Export Dialog} (Figure~\ref{fig:plugins:SCM:DialogExport}) opens.
 
 \begin{figure}[ht]
-\centering\includegraphics[width=0.8\columnwidth]{scm_dialog_export.png}
+\centering\includegraphics[width=0.85\columnwidth]{scm_dialog_export.png}
 \caption{SCM plugin: Export dialog}
 \label{fig:plugins:SCM:DialogExport}
 \end{figure}
@@ -262,7 +267,7 @@ Press the \textit{X} icon in a dialog's title bar or \textit{Cancel} wherever av
 This opens the dialog shown in Figure~\ref{fig:plugins:SCM:DialogClose}, offering three choices:
 
 \begin{figure}[ht]
-\centering\includegraphics[width=0.55\columnwidth]{scm_dialog_close.png}
+\centering\includegraphics[width=0.75\columnwidth]{scm_dialog_close.png}
 \caption{SCM plugin: Close dialog}
 \label{fig:plugins:SCM:DialogClose}
 \end{figure}
