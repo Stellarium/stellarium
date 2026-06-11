@@ -137,7 +137,9 @@ AtmosphereLightweight::AtmosphereLightweight()
 	                               "VARYING mediump vec3 skyColor;\n"
 	                               "void main()\n"
 	                               "{\n"
-	                               "   FRAG_COLOR = vec4(skyColor, 1.);\n"
+	                               "   // sqrt is a gamma-like mapping to reduce banding\n"
+	                               "   // on GLESv2 where we use RGBA8 textures\n"
+	                               "   FRAG_COLOR = vec4(skyColor.xy, sqrt(skyColor.z), 1.);\n"
 	                               "}"))
 	{
 		qFatal("Error while compiling Lightweight atmosphere fragment shader: %s", fShader.log().toLatin1().constData());
@@ -362,6 +364,8 @@ void main()
 	elevTC = sqrt(elevTC); // elevation coordinate is stretched by squaring it
 	float azimuthTC = relAzimuth / PI;
 	vec3 color_xyY = texture2D(atmoTex, vec2(azimuthTC, elevTC)).xyz;
+	// Undo the sqrt
+	color_xyY.z *= color_xyY.z;
 	vec3 color_RGB = xyYToRGB(color_xyY.x, color_xyY.y, color_xyY.z * colorScale);
 	FRAG_COLOR = vec4(color_RGB, 1);
 }
@@ -445,6 +449,8 @@ void main()
 	elevTC = sqrt(elevTC); // elevation coordinate is stretched by squaring it
 	float azimuthTC = relAzimuth / PI;
 	vec3 color_xyY = texture2D(atmoTex, vec2(azimuthTC, elevTC)).xyz;
+	// Undo the sqrt
+	color_xyY.z *= color_xyY.z;
 	FRAG_COLOR = vec4(isMoon ? 0. : color_xyY.z, isMoon ? color_xyY.z : 0., 0, 1);
 }
 )";
