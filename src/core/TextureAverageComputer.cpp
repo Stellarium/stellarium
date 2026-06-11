@@ -36,12 +36,12 @@ public:
 	}
 	void capture()
 	{
-		GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
+		GL(gl.glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFBO));
 	}
 	~FBORestorer()
 	{
 		if (oldFBO >= 0)
-			GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, oldFBO));
+			GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, oldFBO));
 	}
 };
 }
@@ -55,7 +55,7 @@ Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const in
 	GLint oldViewport[4];
 	GL(gl.glGetIntegerv(GL_VIEWPORT, oldViewport));
 	GLint oldFBO=-1;
-	GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
+	GL(gl.glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFBO));
 
 	glesFBO->bind();
 	GL(gl.glViewport(0,0,1,1));
@@ -140,7 +140,7 @@ Vec4f TextureAverageComputer::getTextureAverageWithWorkaround(const GLuint textu
 	GLint oldViewport[4];
 	GL(gl.glGetIntegerv(GL_VIEWPORT, oldViewport));
 	GLint oldFBO=-1;
-	GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
+	GL(gl.glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFBO));
 
 	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, potFBO));
 	GL(gl.glViewport(0,0,potWidth,potHeight));
@@ -303,11 +303,11 @@ void main()
 		GL(gl.glTexImage2D(GL_TEXTURE_2D,0,internalFormat,potWidth,potHeight,0,GL_RGBA,
 		                   textureIsFloat ? GL_FLOAT : GL_UNSIGNED_BYTE,nullptr));
 		GL(gl.glBindTexture(GL_TEXTURE_2D,0));
-		GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,potFBO));
-		GL(gl.glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,potTex,0));
-		[[maybe_unused]] const auto status=gl.glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
+		GL(gl.glBindFramebuffer(GL_FRAMEBUFFER,potFBO));
+		GL(gl.glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,potTex,0));
+		[[maybe_unused]] const auto status=gl.glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		Q_ASSERT(status==GL_FRAMEBUFFER_COMPLETE);
-		GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0));
+		GL(gl.glBindFramebuffer(GL_FRAMEBUFFER,0));
 	}
 }
 

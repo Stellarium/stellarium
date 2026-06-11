@@ -650,7 +650,7 @@ void AtmosphereLightweight::computeColor(StelCore* core, const double JD, const 
 	computeDrawParams(core, moon, moon, DRAW_PARAM_MOON, noScatter);
 
 	GLint origFBO=-1;
-	GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &origFBO));
+	GL(gl.glGetIntegerv(GL_FRAMEBUFFER_BINDING, &origFBO));
 	preparationShaderProgram_->bind();
 
 	GLint origViewport[4];
@@ -701,7 +701,7 @@ void AtmosphereLightweight::computeColor(StelCore* core, const double JD, const 
 		averageLuminance = bgLum + (meanY + lightPollutionLuminance) * fader.getInterstate();
 	}
 
-	GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, origFBO));
+	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, origFBO));
 	GL(gl.glViewport(origViewport[0], origViewport[1], origViewport[2], origViewport[3]));
 }
 
