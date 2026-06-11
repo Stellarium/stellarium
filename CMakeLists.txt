@@ -793,8 +793,7 @@ ELSE()
      MESSAGE(STATUS "GPS: disabled.")
 ENDIF()
 
-IF(ENABLE_MEDIA OR USE_PLUGIN_SCENERY3D)
-     # The Scenery3D plugin requires it directly and the QtMultimediaWidgets module requires it internally
+IF(ENABLE_MEDIA OR USE_PLUGIN_SCENERY3D OR STELLARIUM_GUI_MODE STREQUAL "Standard")
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS OpenGL REQUIRED)
 ENDIF()
 
