@@ -685,7 +685,7 @@ void AtmosphereLightweight::computeColor(StelCore* core, const double JD, const 
 			                                           1.f / maxValue);
 			bindVAO(layer);
 			GL(indexBuffer_.bind());
-			const auto indicesOffset = layerIndexOffsetsInBuffer_[layer];
+			const uintptr_t indicesOffset = layerIndexOffsetsInBuffer_[layer];
 			assert(layer+1 < layerIndexOffsetsInBuffer_.size());
 			const auto indicesEnd = layerIndexOffsetsInBuffer_[layer + 1];
 			const auto numIndices = (indicesEnd - indicesOffset) / sizeof(IndexType);
