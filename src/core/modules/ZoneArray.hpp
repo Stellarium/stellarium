@@ -91,6 +91,9 @@ public:
 	//! Get the total number of stars in this catalog.
 	unsigned int getNrOfStars() const { return nr_of_stars; }
 
+	//! Get the total number of zones in this level.
+	unsigned int getNrOfZones() const { return nr_of_zones; }
+
 	//! Dummy method that does nothing. See subclass implementation.
 	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex)}
 

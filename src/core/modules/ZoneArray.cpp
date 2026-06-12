@@ -18,6 +18,7 @@
  */
 
 #include "ZoneArray.hpp"
+#include "DynamicZoneArray.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
@@ -214,6 +215,11 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			if (major > MAX_MAJOR_FILE_VERSION)
 			{
 				dbStr += "warning - unsupported version ";
+			}
+			else if (static_cast<int>(level) > 8 || static_cast<int>(mag_min) >= 18000)
+			{
+				// Use DynamicZoneArray for faint stars (level > 8 or mag >= 18.0)
+				rval = new DynamicZoneArray(catalogFilePath, file, static_cast<int>(level), static_cast<int>(mag_min));
 			}
 			else
 			{
