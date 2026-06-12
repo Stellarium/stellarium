@@ -65,6 +65,8 @@ extern "C" {
 #define TASS17_TITAN     5
 #define TASS17_HYPERION  7
 #define TASS17_IAPETUS   6
+// need to multiply various data arrays for multithreaded solutions.
+#define TASS17_NMOONS 8
 
 // xyz and xyzdot are 3-vectors (position&speed)
 void GetTass17Coor(double jd, int body, double *xyz, double *xyzdot);
