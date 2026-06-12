@@ -25,6 +25,9 @@
 
 namespace
 {
+constexpr GLuint VERTEX_ATTRIB_INDEX = 0;
+constexpr int COORDS_PER_VERTEX = 2;
+
 class FBORestorer
 {
 	QOpenGLExtraFunctions& gl;
@@ -46,7 +49,7 @@ public:
 };
 }
 
-Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const int width, const int height) const
+Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const int width, const int height)
 {
 	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
 
@@ -60,9 +63,9 @@ Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const in
 	glesFBO->bind();
 	GL(gl.glViewport(0,0,1,1));
 
-	GL(gl.glBindVertexArray(vao));
+	bindVAO();
 	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
-	GL(gl.glBindVertexArray(0));
+	releaseVAO();
 
 	blitTexProgram->release();
 	Vec4f pixel(NAN,NAN,NAN,NAN);
@@ -83,7 +86,7 @@ Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const in
 	return pixel;
 }
 
-Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGL(const int width, const int height) const
+Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGL(const int width, const int height)
 {
 #if !QT_CONFIG(opengles2)
 	using namespace std;
@@ -145,9 +148,9 @@ Vec4f TextureAverageComputer::getTextureAverageWithWorkaround(const GLuint textu
 	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, potFBO));
 	GL(gl.glViewport(0,0,potWidth,potHeight));
 
-	GL(gl.glBindVertexArray(vao));
+	bindVAO();
 	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
-	GL(gl.glBindVertexArray(0));
+	releaseVAO();
 
 	GL(gl.glViewport(oldViewport[0], oldViewport[1], oldViewport[2], oldViewport[3]));
 	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, oldFBO));
@@ -235,8 +238,8 @@ TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions
 {
 	isGLES = StelMainView::getInstance().getGLInformation().isGLES || !hiGL;
 
-	GL(gl.glGenVertexArrays(1, &vao));
-	GL(gl.glBindVertexArray(vao));
+	GL(vao.create());
+	bindVAO();
 	GL(gl.glGenBuffers(1, &vbo));
 	GL(gl.glBindBuffer(GL_ARRAY_BUFFER, vbo));
 	const GLfloat vertices[]=
@@ -247,11 +250,8 @@ TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions
 		 1,  1,
 	};
 	GL(gl.glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW));
-	constexpr GLuint attribIndex=0;
-	constexpr int coordsPerVertex=2;
-	GL(gl.glVertexAttribPointer(attribIndex, coordsPerVertex, GL_FLOAT, false, 0, 0));
-	GL(gl.glEnableVertexAttribArray(attribIndex));
-	GL(gl.glBindVertexArray(0));
+	setupCurrentVAO();
+	releaseVAO();
 
 	blitTexProgram.reset(new QOpenGLShaderProgram);
 	blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Vertex,
@@ -311,10 +311,33 @@ void main()
 	}
 }
 
+void TextureAverageComputer::setupCurrentVAO()
+{
+	GL(gl.glBindBuffer(GL_ARRAY_BUFFER, vbo));
+	GL(gl.glVertexAttribPointer(VERTEX_ATTRIB_INDEX, COORDS_PER_VERTEX, GL_FLOAT, false, 0, 0));
+	GL(gl.glBindBuffer(GL_ARRAY_BUFFER, 0));
+	GL(gl.glEnableVertexAttribArray(VERTEX_ATTRIB_INDEX));
+}
+
+void TextureAverageComputer::bindVAO()
+{
+	if(vao.isCreated())
+		vao.bind();
+	else
+		setupCurrentVAO();
+}
+
+void TextureAverageComputer::releaseVAO()
+{
+	if(vao.isCreated())
+		vao.release();
+	else
+		gl.glDisableVertexAttribArray(VERTEX_ATTRIB_INDEX);
+}
+
 TextureAverageComputer::~TextureAverageComputer()
 {
 	GL(gl.glDeleteTextures(1, &potTex));
 	GL(gl.glDeleteFramebuffers(1, &potFBO));
-	GL(gl.glDeleteVertexArrays(1, &vao));
 	GL(gl.glDeleteBuffers(1, &vbo));
 }
