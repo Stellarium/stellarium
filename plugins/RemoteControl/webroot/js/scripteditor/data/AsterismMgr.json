@@ -1,0 +1,617 @@
+[
+    {
+        "name": "setLinesColor",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "setLinesColor(Vec3f color)",
+        "description": "Sets the color of asterism lines. Asterism lines connect stars to form recognizable patterns like the Summer Triangle or Big Dipper. The color is specified as an RGB vector with values between 0 and 1.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector (R, G, B) where each component ranges from 0.0 to 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Set asterism lines to bright red\nvar red = core.vec3f(1.0, 0.0, 0.0);\nAsterismMgr.setLinesColor(red);\n\n// Set to golden color\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nAsterismMgr.setLinesColor(gold);\n\n// Set to cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nAsterismMgr.setLinesColor(cyan);\n\n// Save current color to restore later\nvar savedColor = AsterismMgr.getLinesColor();\nAsterismMgr.setLinesColor(savedColor);"
+    },
+    {
+        "name": "getLinesColor",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "Vec3f getLinesColor()",
+        "description": "Returns the current color of asterism lines as an RGB vector. Each component (R, G, B) ranges from 0.0 to 1.0.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector (R, G, B) of the current line color",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var lineColor = AsterismMgr.getLinesColor();\ncore.debug(\"Current line color - R: \" + lineColor[0] + \", G: \" + lineColor[1] + \", B: \" + lineColor[2]);\n\n// Store color for later use\nvar storedColor = AsterismMgr.getLinesColor();\n\n// Check if lines are currently red\nif(lineColor[0] > 0.8 && lineColor[1] < 0.2 && lineColor[2] < 0.2) {\n    core.debug(\"Lines are red\");\n}"
+    },
+    {
+        "name": "setRayHelpersColor",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "setRayHelpersColor(Vec3f color)",
+        "description": "Sets the color of ray helpers - auxiliary lines that show extensions of asterism patterns or additional cultural connections between stars.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector (R, G, B) with values between 0.0 and 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Set ray helpers to light green\nvar lightGreen = core.vec3f(0.5, 1.0, 0.5);\nAsterismMgr.setRayHelpersColor(lightGreen);\n\n// Set to orange\nvar orange = core.vec3f(1.0, 0.65, 0.0);\nAsterismMgr.setRayHelpersColor(orange);\n\n// Set to white for better visibility\nvar white = core.vec3f(1.0, 1.0, 1.0);\nAsterismMgr.setRayHelpersColor(white);"
+    },
+    {
+        "name": "getRayHelpersColor",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "Vec3f getRayHelpersColor()",
+        "description": "Returns the current color of ray helper lines as an RGB vector.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector (R, G, B) of the current ray helper color",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var rayColor = AsterismMgr.getRayHelpersColor();\ncore.debug(\"Ray helpers color - RGB(\" + rayColor[0].toFixed(2) + \", \" + rayColor[1].toFixed(2) + \", \" + rayColor[2].toFixed(2) + \")\");"
+    },
+    {
+        "name": "setLabelsColor",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "setLabelsColor(Vec3f color)",
+        "description": "Sets the color of asterism labels (names). Labels appear next to star patterns showing names like 'Summer Triangle', 'Big Dipper', or 'Northern Cross'.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector (R, G, B) with values between 0.0 and 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Set labels to pure white\nvar white = core.vec3f(1.0, 1.0, 1.0);\nAsterismMgr.setLabelsColor(white);\n\n// Set to light yellow for better contrast\nvar lightYellow = core.vec3f(1.0, 1.0, 0.6);\nAsterismMgr.setLabelsColor(lightYellow);\n\n// Set to cyan for a modern look\nvar cyan = core.vec3f(0.0, 1.0, 1.0);\nAsterismMgr.setLabelsColor(cyan);"
+    },
+    {
+        "name": "getLabelsColor",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "Vec3f getLabelsColor()",
+        "description": "Returns the current color of asterism labels as an RGB vector.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector (R, G, B) of the current label color",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var labelColor = AsterismMgr.getLabelsColor();\ncore.debug(\"Label color - R: \" + labelColor[0] + \", G: \" + labelColor[1] + \", B: \" + labelColor[2]);"
+    },
+    {
+        "name": "setFontSize",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "setFontSize(int newFontSize)",
+        "description": "Sets the font size used for displaying asterism labels (names). Larger sizes make text more readable, smaller sizes reduce visual clutter.",
+        "parameters": [
+            {
+                "name": "newFontSize",
+                "type": "int",
+                "description": "Font size in pixels (recommended range: 10 to 24)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Large font for presentations\nAsterismMgr.setFontSize(20);\n\n// Default medium size\nAsterismMgr.setFontSize(14);\n\n// Small font for minimal interface\nAsterismMgr.setFontSize(10);\n\nvar currentSize = AsterismMgr.getFontSize();\ncore.debug(\"Current font size: \" + currentSize + \" pixels\");"
+    },
+    {
+        "name": "getFontSize",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "int getFontSize()",
+        "description": "Returns the current font size for asterism labels in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Font size in pixels",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var fontSize = AsterismMgr.getFontSize();\ncore.debug(\"Label font size: \" + fontSize + \" px\");"
+    },
+    {
+        "name": "setAsterismLineThickness",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "setAsterismLineThickness(int thickness)",
+        "description": "Sets the thickness of asterism lines in pixels. Thicker lines are more visible, thinner lines look more elegant and less intrusive.",
+        "parameters": [
+            {
+                "name": "thickness",
+                "type": "int",
+                "description": "Line thickness in pixels (minimum 1, recommended: 1-5)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Thin and elegant lines\nAsterismMgr.setAsterismLineThickness(1);\n\n// Default medium thickness\nAsterismMgr.setAsterismLineThickness(2);\n\n// Thick lines for presentations\nAsterismMgr.setAsterismLineThickness(3);\n\nvar thickness = AsterismMgr.getAsterismLineThickness();\ncore.debug(\"Line thickness: \" + thickness + \" px\");"
+    },
+    {
+        "name": "getAsterismLineThickness",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "int getAsterismLineThickness()",
+        "description": "Returns the current thickness of asterism lines in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Line thickness in pixels (minimum 1)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var thickness = AsterismMgr.getAsterismLineThickness();\ncore.debug(\"Current line thickness: \" + thickness);"
+    },
+    {
+        "name": "setRayHelperThickness",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "setRayHelperThickness(int thickness)",
+        "description": "Sets the thickness of ray helper lines in pixels. These auxiliary lines are typically thinner than main asterism lines.",
+        "parameters": [
+            {
+                "name": "thickness",
+                "type": "int",
+                "description": "Ray helper line thickness in pixels (minimum 1)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Very thin helpers (subtle)\nAsterismMgr.setRayHelperThickness(1);\n\n// More visible helpers\nAsterismMgr.setRayHelperThickness(2);\n\nvar rayThickness = AsterismMgr.getRayHelperThickness();\ncore.debug(\"Ray helper thickness: \" + rayThickness);"
+    },
+    {
+        "name": "getRayHelperThickness",
+        "category": "Asterisms - Colors & Appearance",
+        "signature": "int getRayHelperThickness()",
+        "description": "Returns the current thickness of ray helper lines in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Ray helper line thickness in pixels",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var rayThickness = AsterismMgr.getRayHelperThickness();\ncore.debug(\"Ray helper thickness: \" + rayThickness + \" px\");"
+    },
+    {
+        "name": "setFlagLines",
+        "category": "Asterisms - Display Control",
+        "signature": "setFlagLines(bool displayed)",
+        "description": "Shows or hides asterism lines. When enabled, lines connecting stars to form recognizable patterns become visible.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show lines, false to hide them",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Show asterism lines\nAsterismMgr.setFlagLines(true);\n\n// Hide asterism lines\nAsterismMgr.setFlagLines(false);\n\n// Toggle current state\nvar current = AsterismMgr.getFlagLines();\nAsterismMgr.setFlagLines(!current);"
+    },
+    {
+        "name": "getFlagLines",
+        "category": "Asterisms - Display Control",
+        "signature": "bool getFlagLines()",
+        "description": "Returns whether asterism lines are currently visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if lines are visible, false if hidden",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(AsterismMgr.getFlagLines()) {\n    core.debug(\"Asterism lines are visible\");\n} else {\n    core.debug(\"Asterism lines are hidden\");\n    AsterismMgr.setFlagLines(true);\n}"
+    },
+    {
+        "name": "setFlagLabels",
+        "category": "Asterisms - Display Control",
+        "signature": "setFlagLabels(bool displayed)",
+        "description": "Shows or hides asterism labels (names). When enabled, names like 'Summer Triangle' or 'Big Dipper' appear next to the star patterns.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide them",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Show asterism labels\nAsterismMgr.setFlagLabels(true);\n\n// Show both lines and labels together\nAsterismMgr.setFlagLines(true);\nAsterismMgr.setFlagLabels(true);\n\n// Hide labels but keep lines\nAsterismMgr.setFlagLabels(false);"
+    },
+    {
+        "name": "getFlagLabels",
+        "category": "Asterisms - Display Control",
+        "signature": "bool getFlagLabels()",
+        "description": "Returns whether asterism labels are currently visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if labels are visible, false if hidden",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(AsterismMgr.getFlagLabels()) {\n    core.debug(\"Asterism labels are visible\");\n}"
+    },
+    {
+        "name": "setFlagRayHelpers",
+        "category": "Asterisms - Display Control",
+        "signature": "setFlagRayHelpers(bool displayed)",
+        "description": "Shows or hides ray helpers - auxiliary lines that show extensions of asterism patterns or additional cultural star connections.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show ray helpers, false to hide them",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Show ray helpers\nAsterismMgr.setFlagRayHelpers(true);\n\n// Hide ray helpers\nAsterismMgr.setFlagRayHelpers(false);\n\n// Show main lines with ray helpers\nAsterismMgr.setFlagLines(true);\nAsterismMgr.setFlagRayHelpers(true);"
+    },
+    {
+        "name": "getFlagRayHelpers",
+        "category": "Asterisms - Display Control",
+        "signature": "bool getFlagRayHelpers()",
+        "description": "Returns whether ray helpers are currently visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if ray helpers are visible, false if hidden",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(AsterismMgr.getFlagRayHelpers()) {\n    core.debug(\"Ray helpers are visible\");\n} else {\n    core.debug(\"Ray helpers are hidden\");\n}"
+    },
+    {
+        "name": "setLinesFadeDuration",
+        "category": "Asterisms - Fade & Transitions",
+        "signature": "setLinesFadeDuration(float duration)",
+        "description": "Sets the fade duration for asterism lines when they appear or disappear. Controls how smoothly lines transition between visible and hidden states.",
+        "parameters": [
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Fade duration in seconds (0 = instant, 1 = one second, 3 = slow fade)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Fast fade (0.5 seconds)\nAsterismMgr.setLinesFadeDuration(0.5);\nAsterismMgr.setFlagLines(true);\n\n// Slow dramatic fade (3 seconds)\nAsterismMgr.setLinesFadeDuration(3.0);\nAsterismMgr.setFlagLines(false);\n\n// Instant change (no fade)\nAsterismMgr.setLinesFadeDuration(0);\nAsterismMgr.setFlagLines(true);\n\nvar fadeDuration = AsterismMgr.getLinesFadeDuration();\ncore.debug(\"Line fade duration: \" + fadeDuration + \" seconds\");"
+    },
+    {
+        "name": "getLinesFadeDuration",
+        "category": "Asterisms - Fade & Transitions",
+        "signature": "float getLinesFadeDuration()",
+        "description": "Returns the current fade duration for asterism lines in seconds.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Fade duration in seconds",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var fadeTime = AsterismMgr.getLinesFadeDuration();\ncore.debug(\"Line fade duration: \" + fadeTime + \" s\");"
+    },
+    {
+        "name": "setLabelsFadeDuration",
+        "category": "Asterisms - Fade & Transitions",
+        "signature": "setLabelsFadeDuration(float duration)",
+        "description": "Sets the fade duration for asterism labels when they appear or disappear. Provides smooth transitions for label visibility changes.",
+        "parameters": [
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Fade duration in seconds",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Slow fade for labels\nAsterismMgr.setLabelsFadeDuration(2.0);\nAsterismMgr.setFlagLabels(true);\n\n// Quick fade\nAsterismMgr.setLabelsFadeDuration(0.3);\nAsterismMgr.setFlagLabels(false);\n\nvar labelFade = AsterismMgr.getLabelsFadeDuration();\ncore.debug(\"Label fade duration: \" + labelFade);"
+    },
+    {
+        "name": "getLabelsFadeDuration",
+        "category": "Asterisms - Fade & Transitions",
+        "signature": "float getLabelsFadeDuration()",
+        "description": "Returns the current fade duration for asterism labels in seconds.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Fade duration in seconds",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var labelFade = AsterismMgr.getLabelsFadeDuration();\ncore.debug(\"Label fade duration: \" + labelFade + \" s\");"
+    },
+    {
+        "name": "setRayHelpersFadeDuration",
+        "category": "Asterisms - Fade & Transitions",
+        "signature": "setRayHelpersFadeDuration(float duration)",
+        "description": "Sets the fade duration for ray helpers when they appear or disappear.",
+        "parameters": [
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Fade duration in seconds",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "AsterismMgr.setRayHelpersFadeDuration(1.5);\nAsterismMgr.setFlagRayHelpers(true);\n\nvar rayFade = AsterismMgr.getRayHelpersFadeDuration();\ncore.debug(\"Ray helpers fade duration: \" + rayFade);"
+    },
+    {
+        "name": "getRayHelpersFadeDuration",
+        "category": "Asterisms - Fade & Transitions",
+        "signature": "float getRayHelpersFadeDuration()",
+        "description": "Returns the current fade duration for ray helpers in seconds.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Fade duration in seconds",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var rayFade = AsterismMgr.getRayHelpersFadeDuration();\ncore.debug(\"Ray helpers fade duration: \" + rayFade + \" s\");"
+    },
+    {
+        "name": "selectAsterism",
+        "category": "Asterisms - Selection & Isolation",
+        "signature": "selectAsterism(QString englishName)",
+        "description": "Selects an asterism by its English name. This automatically enables isolation mode if not already active, hiding all other asterisms.",
+        "parameters": [
+            {
+                "name": "englishName",
+                "type": "QString",
+                "description": "English name of the asterism (e.g., 'Summer Triangle', 'Big Dipper', 'Northern Cross', 'Winter Hexagon', 'Spring Diamond')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Select and display only the Summer Triangle\nAsterismMgr.selectAsterism(\"Summer Triangle\");\ncore.moveToObject(\"Altair\", 2);\n\n// Select the Big Dipper\nAsterismMgr.selectAsterism(\"Big Dipper\");\n\n// Select the Northern Cross\nAsterismMgr.selectAsterism(\"Northern Cross\");\n\n// Select the Winter Hexagon\nAsterismMgr.selectAsterism(\"Winter Hexagon\");"
+    },
+    {
+        "name": "deselectAsterism",
+        "category": "Asterisms - Selection & Isolation",
+        "signature": "deselectAsterism(QString englishName)",
+        "description": "Removes a specific asterism from the selected list. If this was the only selected asterism and isolation mode is active, all asterisms will become hidden.",
+        "parameters": [
+            {
+                "name": "englishName",
+                "type": "QString",
+                "description": "English name of the asterism to deselect",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Select then deselect\nAsterismMgr.selectAsterism(\"Summer Triangle\");\ncore.wait(3);\nAsterismMgr.deselectAsterism(\"Summer Triangle\");\n\n// Select multiple then remove one\nAsterismMgr.selectAsterism(\"Big Dipper\");\nAsterismMgr.selectAsterism(\"Little Dipper\");\nAsterismMgr.deselectAsterism(\"Big Dipper\");\n// Only 'Little Dipper' remains visible"
+    },
+    {
+        "name": "deselectAsterisms",
+        "category": "Asterisms - Selection & Isolation",
+        "signature": "deselectAsterisms()",
+        "description": "Deselects all asterisms. If isolation mode is active, all asterisms will be hidden.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Clear all asterism selections\nAsterismMgr.deselectAsterisms();\n\n// In a presentation workflow\nAsterismMgr.selectAsterism(\"Summer Triangle\");\ncore.wait(5);\nAsterismMgr.deselectAsterisms();\ncore.debug(\"Asterism presentation ended\");"
+    },
+    {
+        "name": "selectAllAsterisms",
+        "category": "Asterisms - Selection & Isolation",
+        "signature": "selectAllAsterisms()",
+        "description": "Selects all asterisms in the sky. Useful for displaying all available star patterns at once.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Display all asterisms in the current sky culture\nAsterismMgr.selectAllAsterisms();\n\n// Change culture then show all\ncore.setSkyCulture(\"western\");\nAsterismMgr.selectAllAsterisms();\ncore.debug(\"All western asterisms are now visible\");"
+    },
+    {
+        "name": "setFlagIsolateAsterismSelected",
+        "category": "Asterisms - Selection & Isolation",
+        "signature": "setFlagIsolateAsterismSelected(bool isolate)",
+        "description": "Enables or disables isolation mode for selected asterisms. When enabled, only selected asterisms are shown; all others are hidden.",
+        "parameters": [
+            {
+                "name": "isolate",
+                "type": "bool",
+                "description": "true to enable isolation mode, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Enable isolation mode\nAsterismMgr.setFlagIsolateAsterismSelected(true);\nAsterismMgr.selectAsterism(\"Summer Triangle\");\n\n// Disable isolation mode (all asterisms become visible)\nAsterismMgr.setFlagIsolateAsterismSelected(false);\n\nvar isIsolated = AsterismMgr.getFlagIsolateAsterismSelected();\ncore.debug(\"Isolation mode active: \" + isIsolated);"
+    },
+    {
+        "name": "getFlagIsolateAsterismSelected",
+        "category": "Asterisms - Selection & Isolation",
+        "signature": "bool getFlagIsolateAsterismSelected()",
+        "description": "Returns whether isolation mode for selected asterisms is currently active.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if isolation mode is active, false otherwise",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(AsterismMgr.getFlagIsolateAsterismSelected()) {\n    core.debug(\"Isolation mode is active - non-selected asterisms are hidden\");\n} else {\n    core.debug(\"Isolation mode is inactive - all asterisms are visible\");\n}"
+    },
+    {
+        "name": "isLinesDefined",
+        "category": "Asterisms - Information & Utilities",
+        "signature": "bool isLinesDefined()",
+        "description": "Checks whether asterism lines are defined in the current sky culture. Some cultures may not have asterisms, or may have different definitions.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if asterisms exist in the current culture, false otherwise",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Check before attempting to display asterisms\nif(AsterismMgr.isLinesDefined()) {\n    core.debug(\"Current sky culture has asterisms\");\n    AsterismMgr.setFlagLines(true);\n    AsterismMgr.setFlagLabels(true);\n} else {\n    core.debug(\"No asterisms in current sky culture\");\n    core.debug(\"Switching to western culture...\");\n    core.setSkyCulture(\"western\");\n    core.wait(1);\n    if(AsterismMgr.isLinesDefined()) {\n        AsterismMgr.setFlagLines(true);\n    }\n}"
+    }
+]

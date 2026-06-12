@@ -1435,19 +1435,6 @@ button.button32:active {
 }
 
 /* ========================================================================
- * LOADING PLACEHOLDER
- * ======================================================================== */
-
-.loading-placeholder {
-    text-align: center;
-    padding: clamp(20px, 4vw, 30px);
-    color: #666;
-    font-style: italic;
-    font-size: clamp(10px, 1.3vw, 11px);
-    width: 100%;
-}
-
-/* ========================================================================
  * TOOLTIP FOR STAR BUTTONS (HIP IDs)
  * ======================================================================== */
 
@@ -2340,11 +2327,16 @@ button.button32:active {
     color: #8A8C8E;
 }
 
+/* ========================================================================
+ * LOADING PLACEHOLDER
+ * ======================================================================== */
+
 .loading-placeholder {
     text-align: center;
-    padding: 30px;
+    padding: clamp(20px, 4vw, 30px);
     color: #666;
     font-style: italic;
+    font-size: clamp(10px, 1.3vw, 11px);
     width: 100%;
 }
 
@@ -2376,3 +2368,500 @@ button.button32:active {
     border-radius: 6px;
     background: rgba(0, 0, 0, 0.05);
 }
+
+/* ========================================================================
+ * TOUR TOOLBAR STYLES - Constellation Tour Controls
+ * ======================================================================== */
+
+.tour-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tour-toolbar .jquerybutton {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    border: 1px solid #2A2C2E;
+    border-radius: 3px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tour-toolbar .jquerybutton:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+    transform: translateY(-1px);
+}
+
+.tour-toolbar .jquerybutton:active {
+    transform: translateY(1px);
+}
+
+.tour-toolbar .jquerybutton.active {
+    background: linear-gradient(#DCDBDA, #8A8C8E);
+    border-color: #000000;
+    color: #000000;
+}
+
+.tour-toolbar .jquerybutton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.tour-toolbar label {
+    color: #000000;
+    font-size: 11px;
+}
+
+.tour-toolbar input[type="number"] {
+    background: #3A3C3E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    padding: 3px 5px;
+    width: 55px;
+    font-size: 11px;
+}
+
+.tour-toolbar input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+.tour-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
+    padding: 8px 15px;
+    border-radius: 4px;
+    z-index: 10000;
+    font-size: 11px;
+    border: 1px solid #2A2C2E;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tour-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .tour-toolbar > div {
+        margin-left: 0 !important;
+        justify-content: space-between;
+    }
+    
+    .tour-toolbar .jquerybutton {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Tour controls container in constellations tab */
+.tour-controls-container {
+    margin: 10px 0 15px 0;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tour-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    justify-content: flex-start;
+}
+
+.tour-toolbar .jquerybutton {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    border: 1px solid #2A2C2E;
+    border-radius: 3px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tour-toolbar .jquerybutton:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+    transform: translateY(-1px);
+}
+
+.tour-toolbar .jquerybutton:active {
+    transform: translateY(1px);
+}
+
+.tour-toolbar .jquerybutton.active {
+    background: linear-gradient(#DCDBDA, #8A8C8E);
+    border-color: #000000;
+    color: #000000;
+}
+
+.tour-toolbar .jquerybutton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.tour-toolbar label {
+    color: #000000;
+    font-size: 11px;
+}
+
+.tour-toolbar input[type="number"] {
+    background: #3A3C3E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    padding: 3px 5px;
+    width: 55px;
+    font-size: 11px;
+}
+
+.tour-toolbar input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+.tour-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
+    padding: 8px 15px;
+    border-radius: 4px;
+    z-index: 10000;
+    font-size: 11px;
+    border: 1px solid #2A2C2E;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tour-toolbar {
+        gap: 8px;
+    }
+    
+    .tour-toolbar .jquerybutton {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+}
+
+/* ========================================================================
+ * MULTI-SELECT MODE STYLES
+ * ======================================================================== */
+
+/* Selected constellation button style in multi-select mode */
+.pattern-btn.selected-constellation {
+    background: linear-gradient(#DCDBDA, #8A8C8E) !important;
+    border: 1px solid #000000 !important;
+    color: #000000 !important;
+    box-shadow: 0 0 6px rgba(253, 216, 134, 0.6);
+}
+
+.pattern-btn.selected-constellation:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72) !important;
+    transform: translateY(-1px);
+}
+
+/* ============================================================
+ * ASTERISMS MULTI-SELECT MODE STYLES
+ * Soft purple/lavender theme matching the constellation style
+ * ============================================================ */
+
+/**
+ * Selected asterism button style in multi-select mode.
+ * Uses a soft purple gradient that mirrors the constellation style,
+ * maintaining the same visual hierarchy and subdued appearance.
+ */
+.pattern-btn.selected-asterism {
+    background: linear-gradient(#D9D0E3, #A595B8) !important;
+    border: 1px solid #3A2A4A !important;
+    color: #000000 !important;
+    box-shadow: 0 0 6px rgba(155, 89, 182, 0.35);
+}
+
+.pattern-btn.selected-asterism:hover {
+    background: linear-gradient(#E8E0F0, #B8A8CB) !important;
+    transform: translateY(-1px);
+}
+
+.pattern-btn.selected-asterism:active {
+    transform: translateY(1px);
+}
+
+/* ============================================================
+ * MULTI-SELECT UI CONTROLS
+ * ============================================================ */
+
+/* Multi-select mode indicator for constellations */
+#const-multi-select-mode {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+#const-multi-select-mode:checked {
+    accent-color: #FD971F;
+}
+
+/* Multi-select mode indicator for asterisms - soft purple theme */
+#aster-multi-select-mode {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+#aster-multi-select-mode:checked {
+    accent-color: #9B59B6;
+}
+
+/* Selection count badge for constellations */
+#const-selection-count {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+/* Selection count badge for asterisms - soft purple theme */
+#aster-selection-count {
+    font-family: monospace;
+    font-weight: bold;
+    background: rgba(155, 89, 182, 0.2);
+    color: #FFC5FF;
+    border-radius: 12px;
+    padding: 2px 8px;
+}
+
+/* ============================================================
+ * MULTI-SELECT CONTAINERS
+ * Matching the existing style but with color accents
+ * ============================================================ */
+
+/**
+ * Container for multi-select controls in constellations tab.
+ * Maintains existing gold/amber accent.
+ */
+.const-multi-select-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(253, 216, 134, 0.15);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/**
+ * Container for multi-select controls in asterisms tab.
+ * Uses subtle purple accent matching the button style.
+ */
+.aster-multi-select-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(155, 89, 182, 0.12);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/* ============================================================
+ * SELECTION TRANSITION ANIMATIONS
+ * ============================================================ */
+
+/**
+ * Smooth transition for selection/deselection of buttons.
+ */
+.pattern-btn.selected-constellation,
+.pattern-btn.selected-asterism {
+    transition: all 0.2s ease-in-out;
+}
+
+/**
+ * Subtle pulse effect for newly selected buttons.
+ */
+@keyframes selectPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.01);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pattern-btn.selected-constellation,
+.pattern-btn.selected-asterism {
+    animation: selectPulse 0.2s ease-out;
+}
+
+.pattern-btn.selected-constellation:hover,
+.pattern-btn.selected-asterism:hover {
+    animation: none;
+}
+
+/* ============================================================
+ * LUNAR MANSIONS MULTI-SELECT MODE STYLES
+ * Kiwi/Light Green Theme - Fresh and Natural
+ * ============================================================ */
+
+/**
+ * Selected lunar mansion button style in multi-select mode.
+ * Uses a fresh kiwi/light green gradient that maintains the same
+ * visual hierarchy and subdued appearance as constellations.
+ * Color scheme: #C8E6C9 (light green) to #81C784 (medium green)
+ */
+.pattern-btn.selected-lunar {
+    background: linear-gradient(#C8E6C9, #81C784) !important;
+    border: 1px solid #2E5A2E !important;
+    color: #1A3B1A !important;
+    box-shadow: 0 0 6px rgba(129, 199, 132, 0.5);
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.pattern-btn.selected-lunar:hover {
+    background: linear-gradient(#D4EAD5, #95D598) !important;
+    transform: translateY(-1px);
+}
+
+.pattern-btn.selected-lunar:active {
+    transform: translateY(1px);
+}
+
+/**
+ * Alternative selected style for ray helpers or special mansions.
+ * Slightly darker green to differentiate from regular mansions.
+ */
+.pattern-btn.selected-lunar-special {
+    background: linear-gradient(#A5D6A7, #66BB6A) !important;
+    border: 1px solid #1B5E20 !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+ * LUNAR MANSIONS MULTI-SELECT UI CONTROLS
+ * ============================================================ */
+
+/**
+ * Multi-select mode indicator for lunar mansions.
+ * Uses a matching kiwi green accent color.
+ */
+#lunar-multi-select-mode {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+#lunar-multi-select-mode:checked {
+    accent-color: #81C784;
+}
+
+/**
+ * Selection count badge for lunar mansions.
+ * Light green background with dark green text.
+ */
+#lunar-selection-count {
+    font-family: monospace;
+    font-weight: bold;
+    background: rgba(129, 199, 132, 0.2);
+    color: #2E6B2E;
+    border-radius: 12px;
+    padding: 2px 8px;
+    transition: all 0.2s ease;
+}
+
+#lunar-selection-count:hover {
+    background: rgba(129, 199, 132, 0.35);
+}
+
+/**
+ * Multi-select container for lunar mansions toolbar.
+ * Subtle green background matching the theme.
+ */
+.lunar-multi-select-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(129, 199, 132, 0.12);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/* ============================================================
+ * LUNAR TOUR TOOLBAR SPECIFIC STYLES
+ * ============================================================ */
+
+/**
+ * Special note box for lunar mansions information.
+ */
+.lunar-info-note {
+    background: rgba(129, 199, 132, 0.08);
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid rgba(129, 199, 132, 0.2);
+}
+
+.lunar-info-note .info-title {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #81C784;
+}
+
+/* ============================================================
+ * STARS MULTI-SELECT MODE STYLES
+ * ============================================================ */
+
+/* Selected star button style in multi-select mode */
+.pattern-btn.selected-star {
+    background: linear-gradient(#FDEBD0, #F5B041) !important;
+    border: 1px solid #D35400 !important;
+    color: #1A1A2E !important;
+    box-shadow: 0 0 6px rgba(245, 176, 65, 0.6);
+}
+
+.pattern-btn.selected-star:hover {
+    background: linear-gradient(#FEF9E7, #F39C12) !important;
+    transform: translateY(-1px);
+}
+
+/* Multi-select mode indicator for stars */
+#stars-multi-select-mode {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+#stars-multi-select-mode:checked {
+    accent-color: #F39C12;
+}
+
+/* Selection count badge for stars */
+#stars-selection-count {
+    font-family: monospace;
+    font-weight: bold;
+    background: rgba(243, 156, 18, 0.2);
+    color: #D35400;
+}
+

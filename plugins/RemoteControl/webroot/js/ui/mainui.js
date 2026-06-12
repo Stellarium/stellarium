@@ -3,11 +3,14 @@
 define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
     "api/properties", "./time", "./joystickqueue", "./actions", "./viewoptions",
     "./scripts", "./viewcontrol", "./location", "./search", "ui/skyculture", 
-    "ui/skyculture-stats", "./gpcontroller", "jquery-ui"
+    "ui/skyculture-stats", "./gpcontroller", 
+    "scripteditor/scriptEditor", "scripteditor/codeGenerator",
+		"scripteditor/apiExplorer", "scripteditor/actionsCategorized", "scripteditor/tour-generator", "jquery-ui"
 ], function($, settings, globalize, rc, actionApi, propApi, timeui,
     JoystickQueue, actionsui, viewoptionsui, scriptsui, viewcontrolui, locationui,
-    searchui, skyculture, skycultureStats, gpcontroller) {
-	"use strict";
+    searchui, skyculture, skycultureStats, gpcontroller,
+    scriptEditor, codeGenerator, apiExplorer, actionsCategorized, tourGenerator) {
+    "use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
 	//controls
@@ -420,6 +423,129 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
     } else {
         console.warn("[MainUI] Gamepad controller module not available");
     }
+		
+		// =====================================================================
+		// INITIALIZE SUB-TABS IN ACTIONS PANEL
+		// =====================================================================
+		if ($("#actions-sub-tabs").length) {
+				$("#actions-sub-tabs").tabs({
+						active: 0,
+						heightStyle: "content",
+						activate: function(evt, ui) {
+								// Refresh CodeMirror when switching to editor tab
+								var newPanel = ui.newPanel;
+								if (newPanel && newPanel.attr('id') === 'sub-tab-scripts-editor') {
+										// Trigger CodeMirror refresh after tab switch
+										setTimeout(function() {
+												if (window._stelCodeMirrorInstance) {
+														window._stelCodeMirrorInstance.refresh();
+														console.log('[MainUI] CodeMirror refreshed after tab switch');
+												} else if (window._cm) {
+														window._cm.refresh();
+												} else if (window.CodeMirror) {
+														var cmElements = document.querySelectorAll('.CodeMirror');
+														for (var i = 0; i < cmElements.length; i++) {
+																if (cmElements[i].CodeMirror) {
+																		cmElements[i].CodeMirror.refresh();
+																}
+														}
+												}
+										}, 150);
+								}
+						}
+				});
+				console.log("[MainUI] Actions sub-tabs initialized");
+		}
+
+		// =====================================================================
+		// INITIALIZE SCRIPT EDITOR MODULE
+		// =====================================================================
+		if (typeof require !== 'undefined') {
+				require(["scripteditor/scriptEditor"], function(scriptEditor) {
+						if (scriptEditor && typeof scriptEditor.init === 'function') {
+								scriptEditor.init();
+								console.log("[MainUI] Script Editor module initialized");
+						} else {
+								console.warn("[MainUI] Script Editor module not available");
+						}
+				});
+		}
+
+		// =====================================================================
+		// INITIALIZE CODE GENERATOR MODULE
+		// =====================================================================
+		if (typeof require !== 'undefined') {
+				require(["scripteditor/codeGenerator"], function(codeGenerator) {
+						if (codeGenerator && typeof codeGenerator.init === 'function') {
+								codeGenerator.init();
+								console.log("[MainUI] Code Generator module initialized");
+						} else {
+								console.warn("[MainUI] Code Generator module not available");
+						}
+				});
+		}
+
+		// =====================================================================
+		// INITIALIZE API EXPLORER MODULE
+		// =====================================================================
+		if (typeof require !== 'undefined') {
+				require(["scripteditor/apiExplorer"], function(apiExplorer) {
+						if (apiExplorer && typeof apiExplorer.init === 'function') {
+								apiExplorer.init();
+								console.log("[MainUI] API Explorer module initialized");
+						} else {
+								console.warn("[MainUI] API Explorer module not available");
+						}
+				});
+		}
+		
+
+		// =====================================================================
+		// INITIALIZE ACTIONS CATEGORIZED BUTTONS MODULE
+		// =====================================================================
+		if (typeof actionsCategorized !== 'undefined' && actionsCategorized && 
+				typeof actionsCategorized.init === 'function') {
+				
+				setTimeout(function() {
+						if ($('#stelaction-categorized').length) {
+								actionsCategorized.init({
+										containerSelector: '#stelaction-categorized',
+										categoryTabsId: 'actions-category-tabs',
+										categoryTabListId: 'actions-category-tab-list',
+										categoryPanelsId: 'actions-category-panels',
+										searchInputId: 'categorized-action-search',
+										countDisplayId: 'categorized-action-count',
+										doubleClickToExecute: true,
+										autoRefreshStates: false,
+										refreshInterval: 0,
+										animateChanges: true,
+										showTriggerIcons: true,
+										apiEndpoint: '/api/stelaction/list',
+										apiActionEndpoint: '/api/stelaction/do',
+										loadingText: 'Loading actions...',
+										errorText: 'Failed to load actions. Check Stellarium connection.',
+										onActionExecuted: function(actionId, success) {
+												console.log('[MainUI] Action executed:', actionId, success ? '✓' : '✗');
+										},
+										onActionsLoaded: function(totalActions, totalCategories) {
+												console.log('[MainUI] Actions loaded:', totalActions, 'in', totalCategories, 'categories');
+										},
+										onCategoryChanged: function(categoryName) {
+												console.log('[MainUI] Category changed to:', categoryName);
+										},
+										onError: function(error) {
+												console.error('[MainUI] Actions error:', error);
+										}
+								});
+								console.log("[MainUI] Actions Categorized module initialized");
+						} else {
+								console.warn("[MainUI] Actions container #stelaction not found");
+						}
+				}, 100);
+		} else {
+				console.warn("[MainUI] Actions Categorized module not available");
+		}
+		
 	});
 
 	//new server data
