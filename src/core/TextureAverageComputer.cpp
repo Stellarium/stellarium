@@ -190,7 +190,7 @@ void TextureAverageComputer::checkNeedForWorkaround()
 	for(int n=data.size(); n<width; ++n)
 		data.emplace_back(0,0,0,0);
 
-	GL(gl.glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,data.size(),1,0,GL_RGBA,GL_UNSIGNED_BYTE,&data[0][0]));
+	GL(gl.glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,data.size(),1,0,GL_RGBA,GL_UNSIGNED_BYTE,&data[0][0]));
 	const auto mipmapAverage = getTextureAverageSimple(texture, width, 1);
 
 	const auto sum = std::accumulate(data.begin(), data.end(), Vec4f(0,0,0,0),
