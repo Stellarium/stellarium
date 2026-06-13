@@ -340,9 +340,10 @@ compass\_marks\_color                   & \ccbox{0.5,0.5,0.7} & compass marks. \
 \end{longtable}
 
 \subsection{\big[custom\_selected\_info\big]}
-%\label{sec:config.ini:custom_selected_info}
+\label{sec:config.ini:custom_selected_info}
 
 You can fine-tune the bits of information to display for the selected object in this section. Set the entry to \emph{true} to display it.
+Similar flags for selecting narration bits are named \texttt{flag\_narration\_name} etc.
 
 \begin{longtable}{l|l|l}\toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
@@ -798,6 +799,23 @@ simbad\_server\_url  & string & URL for SIMBAD mirror\\%\midrule
 flag\_start\_words   & bool   & If \emph{false}, Stellarium will be search phrase only from start of words\\%\midrule
 coordinate\_system   & string & Specifies the coordinate system. 
                                 \emph{Possible values:} equatorialJ2000, equatorial, horizontal, galactic. \emph{Default value:} equatorialJ2000.\\
+\bottomrule
+\end{tabularx}
+
+\subsection{\big[speech\big]}
+\label{sec:config.ini:speech}
+
+These are the settings for the Text-to-Speech engine. 
+Further settings are in section \texttt{custom\_selected\_info} (\ref{sec:config.ini:custom_selected_info}).
+
+\noindent
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
+\emph{ID} & \emph{Type} &  \emph{Description}\\\midrule
+engine    & string &  speech engine. OS dependent. \\
+pitch     & float  &  [-1.0\ldots1.0] modify voice a bit \\
+rate      & float  &  [-1.0\ldots1.0] modify speed \\
+voice     & string &  Depends on engine and system language. \\
+volume    & float  &  [0.0\ldots1.0]\\
 \bottomrule
 \end{tabularx}
 
