@@ -796,10 +796,10 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 	//if on an GLES build, do not set the format
 	const auto openGLModuleType = QOpenGLContext::openGLModuleType();
 	qInfo() << "OpenGL module type:" << (openGLModuleType==QOpenGLContext::LibGL
-										  ? "desktop OpenGL"
-										  : openGLModuleType==QOpenGLContext::LibGL
-											? "OpenGL ES 2 or higher"
-											: std::to_string(openGLModuleType).c_str());
+	                                      ? "desktop OpenGL"
+	                                      : openGLModuleType==QOpenGLContext::LibGL
+	                                        ? "OpenGL ES 2 or higher"
+	                                        : std::to_string(openGLModuleType).c_str());
 	if (openGLModuleType==QOpenGLContext::LibGL)
 	{
 		fmt.setRenderableType(QSurfaceFormat::OpenGL);
@@ -864,7 +864,7 @@ void StelMainView::init()
 		{
 			qInfo()<<"OpenGL debug logger initialized";
 			glLogger->disableMessages(QOpenGLDebugMessage::AnySource, QOpenGLDebugMessage::AnyType,
-									  QOpenGLDebugMessage::NotificationSeverity);
+			                          QOpenGLDebugMessage::NotificationSeverity);
 			glLogger->startLogging(QOpenGLDebugLogger::SynchronousLogging);
 			//the internal log buffer may not be empty, so check it
 			for (const auto& msg : glLogger->loggedMessages())
@@ -890,7 +890,7 @@ void StelMainView::init()
 	glInfo.renderer = QString(reinterpret_cast<const char*>(glInfo.functions->glGetString(GL_RENDERER)));
 	const auto format = glInfo.mainContext->format();
 	glInfo.supportsLuminanceTextures = format.profile() == QSurfaceFormat::CompatibilityProfile ||
-									   format.majorVersion() < 3;
+	                                   format.majorVersion() < 3;
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
 	glInfo.majorVersion = format.majorVersion();
 	qInfo().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
@@ -1215,7 +1215,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 					qInfo() << "But more than likely problems will persist.";
 					QMessageBox::StandardButton answerButton=
 					QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Your DirectX/OpenGL ES subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
-							      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
+					                      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
 					if (answerButton == QMessageBox::Abort)
 					{
 						qCritical() << "Aborting due to ANGLE OpenGL ES / DirectX vs or ps version problems.";
@@ -1266,7 +1266,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 					qInfo() << "But more than likely problems will persist.";
 					QMessageBox::StandardButton answerButton=
                                         QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Your OpenGL/Mesa subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
-							      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
+					                      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
 					if (answerButton == QMessageBox::Abort)
 					{
                                                 qCritical() << "Aborting due to OpenGL/Mesa insufficient version problems.";
@@ -1326,7 +1326,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 				qInfo() << "But more than likely problems will persist.";
 				QMessageBox::StandardButton answerButton=
 				QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Your OpenGL subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
-						      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
+				                      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
 				if (answerButton == QMessageBox::Abort)
 				{
 					qCritical() << "Aborting due to OpenGL/GLSL version problems.";
@@ -1367,7 +1367,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 				qInfo() << "But more than likely problems will persist.";
 				QMessageBox::StandardButton answerButton=
 				QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Your OpenGL ES subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
-						      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
+				                      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
 				if (answerButton == QMessageBox::Abort)
 				{
 					qCritical() << "Aborting due to OpenGL ES/GLSL ES version problems.";
@@ -1703,7 +1703,7 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 {
 	screenShotPrefix = QFileInfo(filePrefix).fileName(); // Strip away any path elements (Security issue!)
 	if (screenShotPrefix.isEmpty())
-			screenShotPrefix = "stellarium-";
+		screenShotPrefix = "stellarium-";
 	screenShotDir = saveDir;
 	flagOverwriteScreenshots=overwrite;
 	emit screenshotRequested();
@@ -1743,10 +1743,10 @@ void StelMainView::doScreenshot(void)
 			GLint freeGLmemoryAMD[4];
 			context->functions()->glGetIntegerv(GL_RENDERBUFFER_FREE_MEMORY_ATI, freeGLmemoryAMD);
 			qCDebug(mainview)<<"Free GPU memory (AMD version):" << static_cast<uint>(freeGLmemoryAMD[1])/1024 << "+"
-					  << static_cast<uint>(freeGLmemoryAMD[3])/1024 << " of "
-					  << static_cast<uint>(freeGLmemoryAMD[0])/1024 << "+"
-					  << static_cast<uint>(freeGLmemoryAMD[2])/1024 << "kB -- we ask for "
-					  << customScreenshotWidth*customScreenshotHeight*8 / 1024 <<"kB";
+			                 << static_cast<uint>(freeGLmemoryAMD[3])/1024 << " of "
+			                 << static_cast<uint>(freeGLmemoryAMD[0])/1024 << "+"
+			                 << static_cast<uint>(freeGLmemoryAMD[2])/1024 << "kB -- we ask for "
+			                 << customScreenshotWidth*customScreenshotHeight*8 / 1024 <<"kB";
 #endif
 #endif
 			GLint texSize,viewportSize[2],rbSize;
@@ -1790,7 +1790,7 @@ void StelMainView::doScreenshot(void)
 	sParams.viewportXywh[3] = virtImgHeight;
 
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*virtImgWidth,
-							   0.0+(0.5+pParams.viewportCenterOffset.v[1])*virtImgHeight);
+	                           0.0+(0.5+pParams.viewportCenterOffset.v[1])*virtImgHeight);
 	sParams.viewportFovDiameter = qMin(virtImgWidth,virtImgHeight);
 	core->setCurrentStelProjectorParams(sParams);
 
