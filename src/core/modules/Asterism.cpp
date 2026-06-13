@@ -135,6 +135,7 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 		culturalName.pronounce = names["pronounce"].toString().trimmed();
 		culturalName.IPA = names["IPA"].toString().trimmed();
 		culturalName.transliteration = names["transliteration"].toString().trimmed();
+		context = names["context"].toString().trimmed();
 	}
 	const QJsonArray polylines = data["lines"].toArray();
 	asterism.clear();
