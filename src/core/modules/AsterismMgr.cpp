@@ -164,7 +164,7 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 					it.remove();
 				}
 			}
-			qInfo() << "Skyculture" << currentSkyCultureID << "configured to exclude asterisms referenced from" << excludeRefs;
+			qInfo() << "AsterismMgr: Skyculture" << currentSkyCultureID << "configured to exclude asterisms referenced from" << excludeRefs;
 		}
 
 		for (unsigned n = 0, m=0; n < asterisms.size(); ++n, ++m)
