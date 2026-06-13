@@ -65,17 +65,28 @@ public:
 	const Star3* loadZone(int zone_index) const;
 
 	//! Get star count for a zone (0 if empty).
-	uint32_t zoneStarCount(int zone_index) const { return starCounts_[zone_index]; }
+	uint32_t zoneStarCount(int zone_index) const { return zoneCounts_[zone_index]; }
+
+	//! Prefetch zones in the given viewport region (async-friendly).
+	//! Zones already in cache are skipped. Call after draw() to warm the cache
+	//! for anticipated user scrolling.
+	void prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const;
 
 private:
-	//! Pre-computed byte offsets for each zone's star data in the .cat file.
-	std::vector<uint64_t> offsets_;
+	//! Zone size granularity for the block-based offset table.
+	//! Smaller values = smaller block table, faster per-zone block-local summation.
+	static constexpr int BLOCK_SIZE = 128;
 
-	//! Star counts per zone (cached from zone table).
-	std::vector<uint32_t> starCounts_;
+	//! Mmap'd zone table from the .cat file (star count per zone, N × 4 bytes).
+	const uint32_t* zoneCounts_;
 
-	//! Open file handle for on-demand reads.
-	mutable QFile* starFile_;
+	//! Mmap start for zone table unmap.
+	uchar* zoneTableMmapStart_;
+
+	//! Block-level cumulative star data offsets.
+	//! blockOffsets_[b] = byte offset of the first star in zone b*BLOCK_SIZE,
+	//! relative to the star data area start.
+	std::vector<uint64_t> blockOffsets_;
 
 	//! LRU cache of zone data (zone index → raw Star3 buffer).
 	//! QCache takes ownership and deletes on eviction.
