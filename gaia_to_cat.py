@@ -167,7 +167,10 @@ def iter_skychart(dat_path):
         sid = struct.unpack_from('<Q',data,off+8)[0]
         ra  = struct.unpack_from('<I',data,off)[0]/3600000.0
         dec = struct.unpack_from('<I',data,off+4)[0]/3600000.0 - 90.0
-        yield (sid, ra, dec, g, bp-rp if bp is not None else None, bp, rp)
+        pmra  = struct.unpack_from('<f', data, off+22)[0]
+        pmdec = struct.unpack_from('<f', data, off+26)[0]
+        plx   = struct.unpack_from('<f', data, off+30)[0]
+        yield (sid, ra, dec, g, bp-rp if bp is not None else None, bp, rp, pmra, pmdec, plx)
 
 # ── Pass 1: scan + count + write intermediate files ─────────────
 
@@ -188,7 +191,7 @@ def _pass1_worker(args):
         it = iter_skychart(fpath)
         if it is None:
             continue
-        for sid, ra, dec, g, c, bp, rp in it:
+        for sid, ra, dec, g, c, bp, rp, pmra, pmdec, plx in it:
             if c is None:
                 continue
             v = g_to_v(g, c)
@@ -200,10 +203,6 @@ def _pass1_worker(args):
                     d = counts[cfg["name"]]
                     d[zone] = d.get(zone, 0) + 1
                     bv = bp_rp_to_bv(c)
-                    # Pass pmra/pmdec/plx from SkyChart 38B record
-                    pmra = struct.unpack_from('<f', data, off+22)[0] if off+26 <= len(data) else 0.0
-                    pmdec = struct.unpack_from('<f', data, off+26)[0] if off+30 <= len(data) else 0.0
-                    plx = struct.unpack_from('<f', data, off+30)[0] if off+34 <= len(data) else 0.0
 
                     inter_fhs[cfg["name"]].write(BUCKET_FMT_STAR2.pack(
                         zone, int(round(v*1000)), int(round(bv*1000)),
