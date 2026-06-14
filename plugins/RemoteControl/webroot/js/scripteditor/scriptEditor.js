@@ -211,108 +211,6 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				var lineCount = getCurrentLineCount();
 				updateLineCountDisplay(lineCount);
 		}
-		
-    // =====================================================================
-    // SCRIPT TEMPLATES
-    // =====================================================================
-
-    var scriptTemplates = {
-        'template-basic': {
-            name: 'Basic Template',
-            code: '// Basic Stellarium Script Template\n\n' +
-                  'core.setDate("2025-01-01T00:00:00", "utc");\n' +
-                  'core.wait(1);\n' +
-                  'core.debug("Date changed!");\n'
-        },
-        'template-move': {
-            name: 'Move View',
-            code: '// Move view to specific coordinates\n\n' +
-                  'core.moveToAltAzi(180, 45, 2);\n' +
-                  'core.wait(2);\n\n' +
-                  'core.moveToObject("Mars", 3);\n' +
-                  'core.wait(3);\n'
-        },
-        'template-time': {
-            name: 'Time Control',
-            code: '// Time control script\n\n' +
-                  'core.setDate("2025-06-21T12:00:00", "utc");\n' +
-                  'core.wait(1);\n' +
-                  'core.setTimeRate(3600);\n' +
-                  'core.wait(2);\n' +
-                  'core.setTimeRate(1);\n' +
-                  'core.debug("Time demo complete!");\n'
-        },
-        'template-location': {
-            name: 'Change Location',
-            code: '// Change observer location\n\n' +
-                  'core.setObserverLocation("Cairo, Egypt", "Earth");\n' +
-                  'core.wait(1);\n' +
-                  'core.setObserverLocation("Paris, France", "Earth");\n' +
-                  'core.wait(1);\n' +
-                  'core.debug("Location changed!");\n'
-        },
-        'template-object': {
-            name: 'Target Object',
-            code: '// Find and target an object\n\n' +
-                  'var obj = core.getObject("M31");\n' +
-                  'if (obj) {\n' +
-                  '    core.debug("Found Andromeda Galaxy");\n' +
-                  '    core.moveToObject("M31", 2);\n' +
-                  '    core.wait(2);\n' +
-                  '    for (var fov = 30; fov > 1; fov -= 5) {\n' +
-                  '        StelMovementMgr.setFov(fov);\n' +
-                  '        core.wait(0.2);\n' +
-                  '    }\n' +
-                  '}\n'
-        },
-        'template-loop': {
-            name: 'Loop Animation',
-            code: '// Looping animation\n\n' +
-                  'core.debug("Starting loop animation...");\n\n' +
-                  'for (var i = 0; i < 360; i += 30) {\n' +
-                  '    core.moveToAltAzi(i, 30, 1);\n' +
-                  '    core.wait(1.5);\n' +
-                  '    core.debug("Azimuth: " + i);\n' +
-                  '}\n\n' +
-                  'core.debug("Animation complete!");\n'
-        },
-        'template-tour': {
-            name: 'Object Tour',
-            code: '// Tour of celestial objects\n\n' +
-                  'var objects = ["Moon", "Mars", "Jupiter", "Saturn", "M31", "M42"];\n\n' +
-                  'for (var i = 0; i < objects.length; i++) {\n' +
-                  '    core.debug("Moving to: " + objects[i]);\n' +
-                  '    core.moveToObject(objects[i], 2);\n' +
-                  '    core.wait(3);\n' +
-                  '    StelMovementMgr.zoomTo(10, 2);\n' +
-                  '    core.wait(4);\n' +
-                  '    StelMovementMgr.zoomTo(60, 2);\n' +
-                  '    core.wait(2);\n' +
-                  '}\n\n' +
-                  'core.debug("Tour complete!");\n'
-        },
-        'template-constellation': {
-            name: 'Constellation Tour',
-            code: '// Tour of constellations\n\n' +
-                  'core.clear("starchart");\n' +
-                  'ConstellationMgr.setFlagLines(true);\n' +
-                  'ConstellationMgr.setFlagLabels(true);\n' +
-                  'ConstellationMgr.setFlagBoundaries(true);\n' +
-                  'ConstellationMgr.setFlagIsolateSelected(true);\n\n' +
-                  'var constellations = ["Orion", "Taurus", "Gemini", "Cancer", "Leo"];\n\n' +
-                  'for (var i = 0; i < constellations.length; i++) {\n' +
-                  '    core.selectConstellationByName(constellations[i]);\n' +
-                  '    StelMovementMgr.autoZoomIn(6);\n' +
-                  '    core.wait(1);\n' +
-                  '    StelMovementMgr.zoomTo(40, 8);\n' +
-                  '    core.wait(1);\n' +
-                  '    ConstellationMgr.setFlagArt(true);\n' +
-                  '    core.wait(8);\n' +
-                  '    ConstellationMgr.setFlagArt(false);\n' +
-                  '}\n\n' +
-                  'core.clear("natural");\n'
-        }
-    };
 
 		/**
 		 * Build snippets section from scriptReference data
@@ -1233,36 +1131,6 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 		}
 
 		/**
-		 * Debug function to check quick reference items
-		 */
-		function debugQuickReference() {
-				console.log('[QuickRef Debug] ========== QUICK REFERENCE DEBUG ==========');
-				
-				var $items = $('.ref-item');
-				console.log('[QuickRef Debug] Total ref items:', $items.length);
-				
-				$items.each(function(i, item) {
-						var $item = $(item);
-						var hasFuncData = $item.data('func-data') !== undefined;
-						var hasSnippetData = $item.data('snippet-data') !== undefined;
-						var hasFuncIndex = $item.data('func-index') !== undefined;
-						
-						if (hasFuncData || hasSnippetData || hasFuncIndex) {
-								console.log('[QuickRef Debug] Item ' + i + ' has data:', {
-										funcData: hasFuncData,
-										snippetData: hasSnippetData,
-										funcIndex: hasFuncIndex,
-										text: $item.find('.ref-name').text()
-								});
-						} else {
-								console.warn('[QuickRef Debug] Item ' + i + ' has NO data!', $item.html());
-						}
-				});
-				
-				console.log('[QuickRef Debug] ===========================================');
-		}
-
-		/**
 		 * Setup search/filter functionality for Quick Reference
 		 */
 		function setupQuickReferenceSearch() {
@@ -1887,311 +1755,12 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 
 		/**
 		 * Provides autocomplete suggestions based on current cursor context.
-		 * INTELLIGENT VERSION: Filters by namespace when a dot (.) is detected
-		 * FIXED: Preserves full data for info panel
-		 * 
-		 * @param {CodeMirror} cm - CodeMirror editor instance
-		 * @returns {Object|null} Hint object with list, from, to, and data properties
-		 */
-		function getAutocompleteHints_1(cm) {
-				console.log('[AutoComplete] getAutocompleteHints called');
-				
-				if (typeof scriptReference === 'undefined') {
-						console.log('[AutoComplete] scriptReference is undefined!');
-						return null;
-				}
-				
-				if (!scriptReference.isLoaded()) {
-						console.log('[AutoComplete] scriptReference not loaded yet, loading...');
-						scriptReference.init().then(function() {
-								if (cm.state.completionActive) {
-										cm.execCommand('autocomplete');
-								} else {
-										CodeMirror.commands.autocomplete(cm);
-								}
-						});
-						return null;
-				}
-				
-				var cursor = cm.getCursor();
-				var token = cm.getTokenAt(cursor);
-				var start = token.start;
-				var end = cursor.ch;
-				var line = cm.getLine(cursor.line);
-				var typedText = line.substring(start, end);
-				
-				console.log('[AutoComplete] Typed: "' + typedText + '", start: ' + start + ', end: ' + end);
-				
-				// ================================================================
-				// DETECT IF WE ARE AFTER A DOT (namespace completion)
-				// ================================================================
-				var isAfterDot = false;
-				var namespace = '';
-				var searchText = typedText;
-				
-				// Check if the character before the current position is a dot
-				if (start > 0 && line.charAt(start - 1) === '.') {
-						isAfterDot = true;
-						
-						// Find the namespace before the dot
-						var dotIndex = start - 1;
-						var nsStart = dotIndex;
-						
-						// Go backwards to find the start of the namespace
-						while (nsStart > 0 && /[\w$]/.test(line.charAt(nsStart - 1))) {
-								nsStart--;
-						}
-						
-						namespace = line.substring(nsStart, dotIndex);
-						searchText = typedText;
-						
-						console.log('[AutoComplete] 🎯 Dot completion detected!');
-						console.log('[AutoComplete]    Namespace: "' + namespace + '"');
-						console.log('[AutoComplete]    Search: "' + searchText + '"');
-				}
-				
-				// ================================================================
-				// GET ALL AUTOCOMPLETE ITEMS
-				// ================================================================
-				var allItems = scriptReference.getAutocompleteItems();
-				console.log('[AutoComplete] Total items available: ' + allItems.length);
-				
-				if (allItems.length === 0) {
-						console.log('[AutoComplete] No items found!');
-						return null;
-				}
-				
-				// ================================================================
-				// CASE 1: AFTER DOT (.) - Show only functions for that namespace
-				// ================================================================
-				if (isAfterDot && namespace) {
-						console.log('[AutoComplete] 🔍 Filtering by namespace: "' + namespace + '"');
-						
-						var results = [];
-						var resultsData = [];
-						var seenNames = {};
-						
-						// Build the expected prefix (e.g., "core.")
-						var nsPrefix = namespace + '.';
-						
-						for (var i = 0; i < allItems.length; i++) {
-								var item = allItems[i];
-								var fullName = item.fullName || item.prefix || '';
-								
-								// Check if this function belongs to the namespace
-								if (fullName.indexOf(nsPrefix) === 0) {
-										// Extract the part after the namespace (the function name)
-										var afterDotPart = fullName.substring(nsPrefix.length);
-										
-										// Filter by typed text if any
-										if (searchText === '' || afterDotPart.toLowerCase().indexOf(searchText.toLowerCase()) === 0) {
-												if (!seenNames[fullName]) {
-														seenNames[fullName] = true;
-														
-														// IMPORTANT: Preserve the full item data for info panel
-														// Create a copy with additional display properties
-														var enhancedItem = {
-																...item,  // Keep all original data
-																displayName: afterDotPart,
-																originalFullName: fullName,
-																namespace: namespace,
-																// Ensure these exist for info panel
-																fullName: fullName,
-																prefix: fullName,
-																name: afterDotPart
-														};
-														
-														results.push(afterDotPart);  // Show only function name in list
-														resultsData.push(enhancedItem);  // Keep full data for info panel
-												}
-										}
-								}
-						}
-						
-						// Sort alphabetically by function name
-						results.sort(function(a, b) {
-								return a.toLowerCase().localeCompare(b.toLowerCase());
-						});
-						
-						console.log('[AutoComplete] ✅ Found ' + results.length + ' functions for namespace "' + namespace + '"');
-						
-						if (results.length > 0) {
-								currentAutocompleteData = resultsData.slice();
-								
-								return {
-										list: results,
-										from: { line: cursor.line, ch: start },
-										to: { line: cursor.line, ch: end },
-										data: resultsData  // This is crucial for the info panel!
-								};
-						}
-						
-						console.log('[AutoComplete] ⚠️ No functions found for namespace "' + namespace + '"');
-						return null;
-				}
-				
-				// ================================================================
-				// CASE 2: MANUAL INVOCATION (Ctrl+Space) - Show ALL functions
-				// ================================================================
-				var isManual = cm.state.completionActive === undefined || 
-											 (cm.state.completionActive && cm.state.completionActive.isOpen === false);
-				
-				if (isManual) {
-						console.log('[AutoComplete] 📋 Manual invocation - showing all functions');
-						
-						var results = [];
-						var resultsData = [];
-						var seenNames = {};
-						
-						for (var i = 0; i < allItems.length; i++) {
-								var item = allItems[i];
-								var name = item.fullName || item.prefix;
-								
-								if (!seenNames[name]) {
-										seenNames[name] = true;
-										results.push(name);
-										resultsData.push(item);  // Keep full data
-								}
-						}
-						
-						// Add user variables at the end
-						var userVars = getUserVariables(cm);
-						for (var v = 0; v < userVars.length; v++) {
-								var varName = userVars[v];
-								if (!seenNames[varName]) {
-										seenNames[varName] = true;
-										results.push(varName);
-										resultsData.push({
-												prefix: varName,
-												name: varName,
-												fullName: varName,
-												desc: 'User variable',
-												category: 'variables',
-												type: 'variable',
-												parameters: [],
-												firstExample: ''
-										});
-								}
-						}
-						
-						results.sort(function(a, b) {
-								return a.toLowerCase().localeCompare(b.toLowerCase());
-						});
-						
-						console.log('[AutoComplete] 📋 Manual: ' + results.length + ' total items');
-						
-						currentAutocompleteData = resultsData.slice();
-						return {
-								list: results,
-								from: { line: cursor.line, ch: start },
-								to: { line: cursor.line, ch: end },
-								data: resultsData
-						};
-				}
-				
-				// ================================================================
-				// CASE 3: NORMAL TYPING - Smart filtering
-				// ================================================================
-				if (searchText.length < 1) return null;
-				
-				console.log('[AutoComplete] 🔍 Searching for: "' + searchText + '"');
-				
-				var results = [];
-				var resultsData = [];
-				var seenNames = {};
-				
-				var containsDot = searchText.indexOf('.') !== -1;
-				
-				for (var i = 0; i < allItems.length; i++) {
-						var item = allItems[i];
-						var fullName = item.fullName || item.prefix;
-						
-						if (containsDot) {
-								if (fullName.toLowerCase().indexOf(searchText.toLowerCase()) === 0) {
-										if (!seenNames[fullName]) {
-												seenNames[fullName] = true;
-												results.push(fullName);
-												resultsData.push(item);
-										}
-								}
-						} else {
-								if (fullName.toLowerCase().indexOf(searchText.toLowerCase()) !== -1) {
-										if (!seenNames[fullName]) {
-												seenNames[fullName] = true;
-												results.push(fullName);
-												resultsData.push(item);
-										}
-								}
-						}
-				}
-				
-				// Add user variables that match
-				var userVars = getUserVariables(cm);
-				for (var v = 0; v < userVars.length; v++) {
-						var varName = userVars[v];
-						if (varName.toLowerCase().indexOf(searchText.toLowerCase()) !== -1 && !seenNames[varName]) {
-								seenNames[varName] = true;
-								results.push(varName);
-								resultsData.push({
-										prefix: varName,
-										name: varName,
-										fullName: varName,
-										desc: 'User variable',
-										category: 'variables',
-										type: 'variable',
-										parameters: [],
-										firstExample: ''
-								});
-						}
-				}
-				
-				// Sort by relevance
-				results.sort(function(a, b) {
-						var idxA = a.toLowerCase().indexOf(searchText.toLowerCase());
-						var idxB = b.toLowerCase().indexOf(searchText.toLowerCase());
-						if (idxA !== idxB) return idxA - idxB;
-						return a.toLowerCase().localeCompare(b.toLowerCase());
-				});
-				
-				// Sort resultsData to match results order
-				var sortedData = [];
-				for (var r = 0; r < results.length; r++) {
-						var resultName = results[r];
-						for (var d = 0; d < resultsData.length; d++) {
-								var dataName = resultsData[d].fullName || resultsData[d].prefix || resultsData[d].name;
-								if (dataName === resultName) {
-										sortedData.push(resultsData[d]);
-										break;
-								}
-						}
-				}
-				resultsData = sortedData;
-				
-				console.log('[AutoComplete] ✅ Found ' + results.length + ' matches');
-				
-				if (results.length === 0) return null;
-				
-				currentAutocompleteData = resultsData.slice();
-				return {
-						list: results,
-						from: { line: cursor.line, ch: start },
-						to: { line: cursor.line, ch: end },
-						data: resultsData
-				};
-		}
-
-		/**
-		 * Provides autocomplete suggestions based on current cursor context.
 		 * FIXED: Reliable dot detection using line text, not tokens.
 		 * FIXED: Correct insertion for namespace functions.
 		 * 
 		 * @param {CodeMirror} cm - CodeMirror editor instance
 		 * @returns {Object|null} Hint object with list, from, to, data, render, select
 		 */
-
-		// Variable to control displaying the info panel while navigating
-		var autoCompleteNavHandler = null;
-
 		function getAutocompleteHints(cm) {
 				console.log('[AutoComplete] getAutocompleteHints called');
 
@@ -2209,47 +1778,217 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				var line = cm.getLine(cursor.line);
 				var curPos = cursor.ch;
 
-				// Determine context (whether after a dot or not)
+				// ============================================================
+				// DETECT CONTEXT
+				// ============================================================
+				
+				// Check if we are inside function parentheses
+				var isInsideParens = false;
+				var parenDepth = 0;
+				for (var i = 0; i < curPos; i++) {
+						if (line[i] === '(') parenDepth++;
+						else if (line[i] === ')') parenDepth--;
+				}
+				isInsideParens = (parenDepth > 0);
+				
+				// Check if we are after a dot
 				var dotPos = -1;
 				for (var i = curPos - 1; i >= 0; i--) {
 						if (line[i] === '.') { dotPos = i; break; }
 				}
-
-				var afterDot = false;
-				var namespace = '';
-				var partial = '';
-				var fromCh, toCh;
-
+				
+				// Check if there is an opening parenthesis before the dot
+				var hasOpenParenBeforeDot = false;
 				if (dotPos !== -1) {
-						afterDot = true;
+						for (var i = 0; i < dotPos; i++) {
+								if (line[i] === '(') {
+										hasOpenParenBeforeDot = true;
+										break;
+								}
+						}
+				}
+				
+				var isVariableContext = isInsideParens && (dotPos === -1 || dotPos < getLastOpenParenPos(line, curPos));
+				
+				function getLastOpenParenPos(line, pos) {
+						for (var i = pos - 1; i >= 0; i--) {
+								if (line[i] === '(') return i;
+						}
+						return -1;
+				}
+				
+				// ============================================================
+				// CASE 1: Variable context (inside parentheses)
+				// ============================================================
+				if (isVariableContext) {
+						// ========================================================
+						// STEP 1: Find the FULL variable name if it exists (for replacement)
+						// ========================================================
+						// Find start of current word (where variable name begins)
+						var wordStart = curPos;
+						while (wordStart > 0 && /[a-zA-Z_$][a-zA-Z0-9_$]*/.test(line[wordStart - 1])) wordStart--;
+						
+						// Find end of current word (where variable name ends)
+						var wordEnd = wordStart;
+						while (wordEnd < line.length && /[a-zA-Z_$][a-zA-Z0-9_$]*/.test(line[wordEnd])) {
+								wordEnd++;
+						}						
+											
+						// ========================================================
+						// STEP 2: Determine search text (what user typed) vs replacement range
+						// ========================================================
+						var partialText = line.substring(wordStart, curPos);  // What user typed (for search)
+						var fromCh, toCh;
+						
+						// Check if cursor is inside an existing variable name
+						if (wordEnd > wordStart && curPos >= wordStart && curPos <= wordEnd) {
+								// Cursor inside existing variable name -> replace the WHOLE name
+								fromCh = wordStart;
+								toCh = wordEnd;
+						} else {
+								// Cursor at end, typing new variable name -> replace only typed part
+								fromCh = wordStart;
+								toCh = curPos;
+						}
+						
+						// ========================================================
+						// STEP 3: Get user variables and literals
+						// ========================================================
+						var userVars = getUserVariables(cm);
+						var results = [], resultsData = [], seen = {};
+						
+						// Add user variables (search based on partialText)
+						for (var v = 0; v < userVars.length; v++) {
+								var varName = userVars[v];
+								if (partialText === '' || varName.toLowerCase().indexOf(partialText.toLowerCase()) !== -1) {
+										if (!seen[varName]) {
+												seen[varName] = true;
+												results.push(varName);
+												resultsData.push({
+														fullName: varName,
+														name: varName,
+														desc: 'User variable',
+														moduleId: 'variables',
+														category: 'variables',
+														type: 'variable'
+												});
+										}
+								}
+						}
+						
+						// Add literals (true, false, null)
+						//var literals = ['true', 'false', 'null'];
+						var literals = getDynamicLiterals();
+						for (var l = 0; l < literals.length; l++) {
+								var lit = literals[l];
+								if (partialText === '' || lit.toLowerCase().indexOf(partialText.toLowerCase()) !== -1) {
+										if (!seen[lit]) {
+												seen[lit] = true;
+												results.push(lit);
+												resultsData.push({
+														fullName: lit,
+														name: lit,
+														desc: 'Literal value',
+														moduleId: 'literals',
+														category: 'literals',
+														type: 'literal'
+												});
+										}
+								}
+						}
+						
+						// Sort by relevance: those starting with partialText first
+						results.sort(function(a, b) {
+								var aLow = a.toLowerCase(), bLow = b.toLowerCase();
+								var pLow = partialText.toLowerCase();
+								var aStarts = aLow.indexOf(pLow) === 0;
+								var bStarts = bLow.indexOf(pLow) === 0;
+								if (aStarts && !bStarts) return -1;
+								if (!aStarts && bStarts) return 1;
+								return aLow.localeCompare(bLow);
+						});
+						
+						if (results.length === 0) return null;
+						currentAutocompleteData = resultsData.slice();
+						
+						return {
+								list: results,
+								from: CodeMirror.Pos(cursor.line, fromCh),
+								to: CodeMirror.Pos(cursor.line, toCh),
+								data: resultsData,
+								render: function(el, self, data) {
+										var item = data[self.pos];
+										var name = self.list[self.pos];
+										var type = item ? (item.type || '') : '';
+										var additionalClass = (type === 'variable') ? ' autocomplete-variable' : (type === 'literal' ? ' autocomplete-literal' : '');
+										el.innerHTML = '<span class="autocomplete-name' + additionalClass + '">' + escapeHtml(name) + '</span>' +
+																	 '<span class="autocomplete-category">' + escapeHtml(type) + '</span>';
+								},
+								select: function(selected, self) {
+										var cmInst = self.cm;
+										var from = self.from;
+										var to = self.to;
+										// Replace the entire variable name if needed
+										cmInst.replaceRange(selected, from, to);
+										var newPos = { line: from.line, ch: from.ch + selected.length };
+										cmInst.setCursor(newPos);
+								}
+						};
+				}
+				
+				// ============================================================
+				// CASE 2: Function context (after dot)
+				// ============================================================
+				if (dotPos !== -1 && !isVariableContext) {
+						// Extract namespace
 						var nsStart = dotPos - 1;
 						while (nsStart >= 0 && /[a-zA-Z_$][a-zA-Z0-9_$]*/.test(line[nsStart])) nsStart--;
 						nsStart++;
-						namespace = line.substring(nsStart, dotPos);
-						partial = line.substring(dotPos + 1, curPos);
-						fromCh = dotPos + 1;
-						toCh = curPos;
-				} else {
-						var start = curPos;
-						while (start > 0 && /[a-zA-Z_$][a-zA-Z0-9_$]*/.test(line[start - 1])) start--;
-						partial = line.substring(start, curPos);
-						fromCh = start;
-						toCh = curPos;
-				}
-
-				var allItems = scriptReference.getAutocompleteItems();
-				if (!allItems.length) return null;
-
-				var results = [], resultsData = [], seen = {};
-
-				if (afterDot && namespace) {
+						var namespace = line.substring(nsStart, dotPos);
+						
+						// ========================================================
+						// IMPORTANT: For search, use only the text the user typed
+						// ========================================================
+						// Find the start of the current word (what user is typing)
+						var wordStart = curPos;
+						while (wordStart > dotPos + 1 && /[a-zA-Z_$][a-zA-Z0-9_$]*/.test(line[wordStart - 1])) wordStart--;
+						var partialText = line.substring(wordStart, curPos);
+						
+						// ========================================================
+						// For replacement range, find the FULL function name if it exists
+						// ========================================================
+						var funcStart = dotPos + 1;
+						var funcEnd = funcStart;
+						while (funcEnd < line.length && /[a-zA-Z_$][a-zA-Z0-9_$]*/.test(line[funcEnd])) {
+								funcEnd++;
+						}
+						
+						var fromCh, toCh;
+						
+						// Check if there's an existing function name and cursor is inside it
+						if (funcEnd > funcStart && curPos >= funcStart && curPos <= funcEnd) {
+								// Cursor inside existing function name -> replace the WHOLE name
+								fromCh = funcStart;
+								toCh = funcEnd;
+						} else {
+								// Cursor at end, typing new function name -> replace only typed part
+								fromCh = wordStart;
+								toCh = curPos;
+						}
+						
+						var allItems = scriptReference.getAutocompleteItems();
+						if (!allItems.length) return null;
+						
+						var results = [], resultsData = [], seen = {};
 						var prefix = namespace + '.';
+						
 						for (var i = 0; i < allItems.length; i++) {
 								var item = allItems[i];
 								var full = item.fullName;
 								if (full && full.indexOf(prefix) === 0) {
 										var funcPart = full.substring(prefix.length);
-										if (partial === '' || funcPart.toLowerCase().indexOf(partial.toLowerCase()) === 0) {
+										// Search based on what user typed (partialText), not the full name
+										if (partialText === '' || funcPart.toLowerCase().indexOf(partialText.toLowerCase()) !== -1) {
 												if (!seen[funcPart]) {
 														seen[funcPart] = true;
 														results.push(funcPart);
@@ -2258,65 +1997,82 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 										}
 								}
 						}
-						results.sort(function(a, b) { return a.toLowerCase().localeCompare(b.toLowerCase()); });
-				} else {
-						var isManual = (cm.state.completionActive === undefined || !cm.state.completionActive.isOpen) && partial === '';
-						for (var i = 0; i < allItems.length; i++) {
-								var item = allItems[i];
-								var full = item.fullName;
-								if (!full) continue;
-								if (isManual) {
-										if (!seen[full]) { seen[full] = true; results.push(full); resultsData.push(item); }
-								} else if (partial && full.toLowerCase().indexOf(partial.toLowerCase()) !== -1) {
-										if (!seen[full]) { seen[full] = true; results.push(full); resultsData.push(item); }
-								}
-						}
+						
+						// Sort by relevance: those starting with partialText first
 						results.sort(function(a, b) {
 								var aLow = a.toLowerCase(), bLow = b.toLowerCase();
-								var aStarts = aLow.indexOf(partial.toLowerCase()) === 0;
-								var bStarts = bLow.indexOf(partial.toLowerCase()) === 0;
+								var pLow = partialText.toLowerCase();
+								var aStarts = aLow.indexOf(pLow) === 0;
+								var bStarts = bLow.indexOf(pLow) === 0;
 								if (aStarts && !bStarts) return -1;
 								if (!aStarts && bStarts) return 1;
 								return aLow.localeCompare(bLow);
 						});
+						
+						if (results.length === 0) return null;
+						currentAutocompleteData = resultsData.slice();
+						
+						return {
+								list: results,
+								from: CodeMirror.Pos(cursor.line, fromCh),
+								to: CodeMirror.Pos(cursor.line, toCh),
+								data: resultsData,
+								render: function(el, self, data) {
+										var item = data[self.pos];
+										var name = self.list[self.pos];
+										var cat = item ? (item.moduleId || '') : '';
+										el.innerHTML = '<span class="autocomplete-name">' + escapeHtml(name) + '</span>' +
+																	 '<span class="autocomplete-category">' + escapeHtml(cat) + '</span>';
+								},
+								select: function(selected, self) {
+										var cmInst = self.cm;
+										var from = self.from;
+										var to = self.to;
+										cmInst.replaceRange(selected, from, to);
+										cmInst.setCursor({ line: from.line, ch: from.ch + selected.length });
+								}
+						};
 				}
-
+				
+				// ============================================================
+				// CASE 3: Manual invocation (Ctrl+Space)
+				// ============================================================
+				var start = curPos;
+				while (start > 0 && /[a-zA-Z_$][a-zA-Z0-9_$]*/.test(line[start - 1])) start--;
+				var partialText = line.substring(start, curPos);
+				var fromCh = start;
+				var toCh = curPos;
+				
+				var allItems = scriptReference.getAutocompleteItems();
+				if (!allItems.length) return null;
+				
+				var results = [], resultsData = [], seen = {};
+				var isManual = (cm.state.completionActive === undefined || !cm.state.completionActive.isOpen) && partialText === '';
+				
+				for (var i = 0; i < allItems.length; i++) {
+						var item = allItems[i];
+						var full = item.fullName;
+						if (!full) continue;
+						if (isManual) {
+								if (!seen[full]) { seen[full] = true; results.push(full); resultsData.push(item); }
+						} else if (partialText && full.toLowerCase().indexOf(partialText.toLowerCase()) !== -1) {
+								if (!seen[full]) { seen[full] = true; results.push(full); resultsData.push(item); }
+						}
+				}
+				
+				results.sort(function(a, b) {
+						var aLow = a.toLowerCase(), bLow = b.toLowerCase();
+						var pLow = partialText.toLowerCase();
+						var aStarts = aLow.indexOf(pLow) === 0;
+						var bStarts = bLow.indexOf(pLow) === 0;
+						if (aStarts && !bStarts) return -1;
+						if (!aStarts && bStarts) return 1;
+						return aLow.localeCompare(bLow);
+				});
+				
 				if (results.length === 0) return null;
-
-				// Update public data for the info panel
 				currentAutocompleteData = resultsData.slice();
-
-				// Remove any previous listener
-				if (autoCompleteNavHandler) {
-						cm.off('keydown', autoCompleteNavHandler);
-				}
-
-				// New listener for navigating between items (ArrowUp/ArrowDown)
-				autoCompleteNavHandler = function(cm, event) {
-						if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-								setTimeout(function() {
-										var $active = $('.CodeMirror-hints-active');
-										if ($active.length) {
-												var index = $('.CodeMirror-hint').index($active);
-												if (index >= 0 && index < currentAutocompleteData.length) {
-														showSimpleAutocompleteInfo(currentAutocompleteData[index]);
-												}
-										}
-								}, 10);
-						}
-				};
-				cm.on('keydown', autoCompleteNavHandler);
-
-				// Close listener when the list is hidden (after completion)
-				var closeHandler = function() {
-						if (autoCompleteNavHandler) {
-								cm.off('keydown', autoCompleteNavHandler);
-								autoCompleteNavHandler = null;
-						}
-						cm.off('endCompletion', closeHandler);
-				};
-				cm.on('endCompletion', closeHandler);
-
+				
 				return {
 						list: results,
 						from: CodeMirror.Pos(cursor.line, fromCh),
@@ -2334,380 +2090,98 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 								var from = self.from;
 								var to = self.to;
 								cmInst.replaceRange(selected, from, to);
-								var newPos = { line: from.line, ch: from.ch + selected.length };
-								cmInst.setCursor(newPos);
-								var item = self.data[self.pos];
-								if (item && showSimpleAutocompleteInfo) {
-										showSimpleAutocompleteInfo(item);
-								}
-								// Remove listener on insertion
-								if (autoCompleteNavHandler) {
-										cmInst.off('keydown', autoCompleteNavHandler);
-										autoCompleteNavHandler = null;
-								}
-								cmInst.off('endCompletion', closeHandler);
+								cmInst.setCursor({ line: from.line, ch: from.ch + selected.length });
 						}
 				};
 		}
 
-    // =====================================================================
-    // AUTOCOMPLETE INFO PANEL - Fixed arrow key tracking
-    // =====================================================================
-
-    /**
-     * Hides the autocomplete info panel.
-     * 
-     * @returns {void}
-     */
-    function hideAutocompleteInfo() {
-        if (autocompleteInfoPanel) {
-            autocompleteInfoPanel.hide();
-        }
-    }
-		
 		/**
-		 * Shows a simple info panel for autocomplete items.
-		 * FIXED: Properly handles enhanced items from namespace filtering
-		 * 
-		 * @param {Object} itemData - The function data object
-		 * @returns {void}
+		 * Get dynamic literals from scriptReference and hardcoded constants
+		 * @returns {Array} Array of literal values for autocomplete
 		 */
-		function showSimpleAutocompleteInfo(itemData) {
-				if (!itemData) return;
-				
-				console.log('[InfoPanel] Showing info for:', itemData.displayName || itemData.fullName || itemData.name);
-				
-				if (!autocompleteInfoPanel || !autocompleteInfoPanel.length) {
-						autocompleteInfoPanel = $(
-								'<div id="autocomplete-info-panel" class="autocomplete-info-panel" style="display: none;">' +
-								'<div class="autocomplete-info-header">' +
-								'<div class="autocomplete-info-header-left">' +
-								'<span class="autocomplete-info-title">Function Info</span>' +
-								'</div>' +
-								'<div class="autocomplete-info-header-right">' +
-								'<button class="autocomplete-info-pin" title="Pin panel">📌 Pin</button>' +
-								'<button class="autocomplete-info-close" title="Close">✕</button>' +
-								'</div>' +
-								'</div>' +
-								'<div class="autocomplete-info-content"></div>' +
-								'</div>'
-						);
-						$('body').append(autocompleteInfoPanel);
+		function getDynamicLiterals() {
+				// Hardcoded JavaScript literals and Stellarium constants
+				var literals = [
+						// JavaScript built-in literals
+						'true', 'false', 'null', 'undefined', 'NaN', 'Infinity',
 						
-						autocompleteInfoPanel.off('click.pin').on('click.pin', '.autocomplete-info-pin', function() {
-								var $btn = $(this);
-								autocompleteInfoPanel.toggleClass('pinned');
+						// Mathematical constants
+						'PI', 'TWO_PI', 'DEG_TO_RAD', 'RAD_TO_DEG', 'E', 'LN2', 'LN10', 
+						'LOG2E', 'LOG10E', 'SQRT1_2', 'SQRT2',
+						
+						// Stellarium color constants (Vec3f presets)
+						'Color_White', 'Color_Black', 'Color_Red', 'Color_Green', 'Color_Blue',
+						'Color_Yellow', 'Color_Cyan', 'Color_Magenta', 'Color_Orange', 'Color_Purple',
+						
+						// Direction constants
+						'North', 'South', 'East', 'West', 'Center', 'Zenith', 'Nadir',
+						
+						// Common string values used in Stellarium API
+						'utc', 'local', 'J2000', 'B1950', 'now', 'auto', 'none', 'all',
+						'Earth', 'Moon', 'Sun', 'Mars', 'Jupiter', 'Saturn', 'Mercury', 'Venus',
+						
+						// Frame types (for loadSkyImage)
+						'EqJ2000', 'EqDate', 'AzAlt', 'Galactic', 'Supergalactic',
+						
+						// Projection types (for setProjectionMode)
+						'ProjectionPerspective', 'ProjectionFisheye', 'ProjectionMercator',
+						'ProjectionHammer', 'ProjectionMollweide', 'ProjectionCylinder',
+						'ProjectionOrthographic', 'ProjectionStereographic', 'ProjectionEqualArea',
+						'ProjectionMiller', 'ProjectionSinusoidal',
+						
+						// Sky culture label styles
+						'none', 'modern', 'byname', 'ipa', 'translated', 'translit', 'pronounce', 'native',
+						
+						// Clear states
+						'natural', 'starchart', 'deepspace', 'galactic', 'supergalactic',
+						
+						// Selected object info levels
+						'AllInfo', 'DefaultInfo', 'ShortInfo', 'None', 'Custom',
+						
+						// Mount modes
+						'equatorial', 'azimuthal'
+				];
+				
+				// Try to extract additional literals from scriptReference if loaded
+				if (scriptReference && scriptReference.isLoaded()) {
+						var allItems = scriptReference.getAutocompleteItems();
+						var extractedLiterals = [];
+						
+						for (var i = 0; i < allItems.length; i++) {
+								var item = allItems[i];
+								if (!item.parameters) continue;
 								
-								if (autocompleteInfoPanel.hasClass('pinned')) {
-										$btn.html('📌 Pinned');
-										$btn.addClass('active');
-										autocompleteInfoPanel.css('box-shadow', '0 4px 20px rgba(0,0,0,0.5), 0 0 0 2px #FD971F');
-										try {
-												localStorage.setItem('stellarium-autocomplete-pinned', 'true');
-										} catch(e) {}
-								} else {
-										$btn.html('📌 Pin');
-										$btn.removeClass('active');
-										autocompleteInfoPanel.css('box-shadow', '');
-										try {
-												localStorage.setItem('stellarium-autocomplete-pinned', 'false');
-										} catch(e) {}
-								}
-						});
-						
-						autocompleteInfoPanel.off('click.close').on('click.close', '.autocomplete-info-close', function() {
-								autocompleteInfoPanel.removeClass('pinned').hide();
-								try {
-										localStorage.setItem('stellarium-autocomplete-pinned', 'false');
-								} catch(e) {}
-						});
-						
-						try {
-								var savedPinned = localStorage.getItem('stellarium-autocomplete-pinned');
-								if (savedPinned === 'true') {
-										autocompleteInfoPanel.addClass('pinned');
-										autocompleteInfoPanel.find('.autocomplete-info-pin').html('📌 Pinned').addClass('active');
-								}
-						} catch(e) {}
-				}
-				
-				// Extract function name - handle both original and enhanced items
-				var funcName = itemData.displayName || 
-											 (itemData.fullName ? itemData.fullName.split('.').pop() : null) ||
-											 itemData.name || 
-											 (itemData.prefix ? itemData.prefix.split('.').pop() : 'function');
-				
-				var signature = itemData.fullSignature || itemData.signature || itemData.prefix || funcName;
-				var description = itemData.desc || itemData.description || 'No description available.';
-				var example = itemData.firstExample || (itemData.examples && itemData.examples[0]) || '';
-				var namespace = itemData.namespace || (itemData.fullName ? itemData.fullName.split('.')[0] : '');
-				
-				var escapedFuncName = escapeHtml(funcName);
-				var escapedSignature = escapeHtml(signature);
-				var escapedDescription = escapeHtml(description);
-				var escapedNamespace = escapeHtml(namespace);
-				
-				var html = '<div class="simple-info-content">';
-				html += '<div class="simple-info-header">';
-				html += '<span class="simple-info-name">' + escapedFuncName + '</span>';
-				if (namespace) {
-						html += '<span class="simple-info-namespace" style="margin-left: 8px; font-size: 9px; color: #FD971F;">' + escapedNamespace + '</span>';
-				}
-				html += '</div>';
-				
-				html += '<div class="simple-info-signature">';
-				html += '<pre class="simple-info-code">' + escapedSignature + '</pre>';
-				html += '</div>';
-				
-				if (escapedDescription && escapedDescription !== 'No description available.') {
-						html += '<div class="simple-info-desc">';
-						html += '<div class="simple-info-label">Description</div>';
-						html += '<div class="simple-info-text">' + escapedDescription + '</div>';
-						html += '</div>';
-				}
-				
-				if (example) {
-						var formattedExample = formatExampleForDisplay(example);
-						var escapedExample = escapeHtml(formattedExample);
-						
-						html += '<div class="simple-info-example">';
-						html += '<div class="simple-info-label">Example</div>';
-						html += '<pre class="simple-info-code">' + escapedExample + '</pre>';
-						
-						var exampleCacheId = 'ex_' + (++exampleCounter) + '_' + Date.now();
-						exampleCodeCache[exampleCacheId] = example;
-						setTimeout(function() {
-								if (exampleCodeCache[exampleCacheId]) {
-										delete exampleCodeCache[exampleCacheId];
-								}
-						}, 300000);
-						
-						html += '<button class="simple-info-copy" data-example-cache-id="' + exampleCacheId + '">Copy Example</button>';
-						html += '</div>';
-				}
-				
-				html += '</div>';
-				
-				var $content = autocompleteInfoPanel.find('.autocomplete-info-content');
-				$content.html(html);
-				
-				$content.find('.simple-info-copy').off('click').on('click', function() {
-						var $btn = $(this);
-						var cacheId = $btn.data('example-cache-id');
-						var exampleCode = cacheId && exampleCodeCache[cacheId] ? exampleCodeCache[cacheId] : example;
-						
-						if (exampleCode && exampleCode.trim()) {
-								copyToClipboard(exampleCode);
-								var originalText = $btn.html();
-								$btn.html('✓ Copied!');
-								setTimeout(function() { $btn.html(originalText); }, 2000);
-						}
-				});
-				
-				autocompleteInfoPanel.show();
-				positionSimpleInfoPanel();
-		}
-
-		/**
-		 * Position the simple info panel next to the autocomplete dropdown.
-		 * 
-		 * @returns {void}
-		 */
-		function positionSimpleInfoPanel() {
-				var $autocomplete = $('.CodeMirror-hints');
-				if (!$autocomplete.length || !$autocomplete.is(':visible')) {
-						if (autocompleteInfoPanel && !autocompleteInfoPanel.hasClass('pinned')) {
-								autocompleteInfoPanel.hide();
-						}
-						return;
-				}
-				
-				var autocompleteRect = $autocomplete[0].getBoundingClientRect();
-				var viewportWidth = window.innerWidth;
-				var viewportHeight = window.innerHeight;
-				
-				var PANEL_WIDTH = 350;
-				var PANEL_HEIGHT = 250;
-				
-				// Try right side first
-				var left = autocompleteRect.right + 8;
-				var top = autocompleteRect.top;
-				
-				// Check if panel fits on the right
-				if (left + PANEL_WIDTH > viewportWidth) {
-						// Try left side
-						left = autocompleteRect.left - PANEL_WIDTH - 8;
-						if (left < 0) {
-								// Fallback: below dropdown
-								left = autocompleteRect.left;
-								top = autocompleteRect.bottom + 8;
-								if (top + PANEL_HEIGHT > viewportHeight) {
-										// Fallback: above dropdown
-										top = autocompleteRect.top - PANEL_HEIGHT - 8;
-										if (top < 0) {
-												top = 8;
-												left = 8;
-										}
-								}
-						}
-				}
-				
-				// Ensure panel stays within viewport
-				if (top + PANEL_HEIGHT > viewportHeight) {
-						top = viewportHeight - PANEL_HEIGHT - 8;
-				}
-				if (top < 0) top = 8;
-				if (left + PANEL_WIDTH > viewportWidth) {
-						left = viewportWidth - PANEL_WIDTH - 8;
-				}
-				if (left < 0) left = 8;
-				
-				autocompleteInfoPanel.css({
-						position: 'fixed',
-						left: left,
-						top: top,
-						display: 'block'
-				});
-		}		
-
-		/**
-		 * Sets up reliable tracking for autocomplete navigation.
-		 * FIXED: Properly handles enhanced items and preserves info panel display
-		 * 
-		 * @param {CodeMirror} cm - CodeMirror editor instance
-		 * @returns {void}
-		 */
-		function setupAutocompleteTracking(cm) {
-				if (!cm) return;
-				
-				var lastSelectedIndex = -1;
-				var hintsObserver = null;
-				var hintsContainer = null;
-				
-				// Function to update info panel based on current selection
-				function updateInfoPanelFromSelection() {
-						var $hints = $('.CodeMirror-hints');
-						if (!$hints.length || !$hints.is(':visible')) {
-								return false;
-						}
-						
-						var $active = $('.CodeMirror-hints-active');
-						if ($active.length && currentAutocompleteData) {
-								var $allHints = $('.CodeMirror-hints .CodeMirror-hint');
-								var index = $allHints.index($active);
-								
-								if (index >= 0 && index < currentAutocompleteData.length && index !== lastSelectedIndex) {
-										lastSelectedIndex = index;
-										var selectedData = currentAutocompleteData[index];
-										console.log('[Tracking] Selected item', index, selectedData.displayName || selectedData.fullName);
-										showSimpleAutocompleteInfo(selectedData);
-										return true;
-								}
-						}
-						return false;
-				}
-				
-				// Override the default autocomplete command
-				var originalAutocomplete = CodeMirror.commands.autocomplete;
-				
-				CodeMirror.commands.autocomplete = function(cmInstance) {
-						originalAutocomplete(cmInstance);
-						
-						setTimeout(function() {
-								// Enhance the hint items with namespace badges
-								var $hints = $('.CodeMirror-hints');
-								if ($hints.length && currentAutocompleteData) {
-										$hints.find('.CodeMirror-hint').each(function(index, el) {
-												var $el = $(el);
-												var data = currentAutocompleteData[index];
-												if (data) {
-														var displayName = data.displayName || 
-																						 (data.fullName ? data.fullName.split('.').pop() : null) ||
-																						 data.name || 
-																						 (data.prefix ? data.prefix.split('.').pop() : $el.text());
-														
-														var namespace = data.namespace || 
-																					(data.fullName ? data.fullName.split('.')[0] : '');
-														
-														if (namespace) {
-																$el.html(
-																		'<div class="autocomplete-item">' +
-																		'<span class="autocomplete-name">' + escapeHtml(displayName) + '</span>' +
-																		'<span class="autocomplete-category">' + escapeHtml(namespace) + '</span>' +
-																		'</div>'
-																);
-														} else {
-																$el.html(
-																		'<div class="autocomplete-item">' +
-																		'<span class="autocomplete-name">' + escapeHtml(displayName) + '</span>' +
-																		'</div>'
-																);
+								for (var p = 0; p < item.parameters.length; p++) {
+										var param = item.parameters[p];
+										var desc = param.description || '';
+										
+										// Extract quoted string literals from parameter descriptions
+										var quotedMatches = desc.match(/'([^']+)'/g);
+										if (quotedMatches) {
+												for (var q = 0; q < quotedMatches.length; q++) {
+														var literal = quotedMatches[q].replace(/'/g, '');
+														if (extractedLiterals.indexOf(literal) === -1 && 
+																literal.length > 0 && literal !== 'true' && literal !== 'false') {
+																extractedLiterals.push(literal);
 														}
 												}
-										});
-								}
-								
-								hintsContainer = document.querySelector('.CodeMirror-hints');
-								if (hintsContainer && !hintsContainer._observer) {
-										hintsObserver = new MutationObserver(function(mutations) {
-												mutations.forEach(function(mutation) {
-														if (mutation.attributeName === 'class') {
-																updateInfoPanelFromSelection();
-														}
-												});
-										});
-										
-										hintsObserver.observe(hintsContainer, { attributes: true, attributeFilter: ['class'] });
-										hintsContainer._observer = hintsObserver;
-										
-										if (currentAutocompleteData && currentAutocompleteData.length > 0) {
-												showSimpleAutocompleteInfo(currentAutocompleteData[0]);
-												lastSelectedIndex = 0;
 										}
 								}
-						}, 50);
-				};
-				
-				// Handle arrow key presses for immediate feedback
-				cm.on('keydown', function(cmInstance, event) {
-						if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-								var $hints = $('.CodeMirror-hints');
-								if ($hints.length && $hints.is(':visible')) {
-										setTimeout(updateInfoPanelFromSelection, 10);
-								}
 						}
 						
-						if (event.key === 'Escape') {
-								if (autocompleteInfoPanel && !autocompleteInfoPanel.hasClass('pinned')) {
-										hideAutocompleteInfo();
-								}
-						}
-				});
+						// Add extracted literals
+						literals = literals.concat(extractedLiterals);
+				}
 				
-				// Clean up when autocomplete closes
-				cm.on('endCompletion', function() {
-						if (hintsObserver && hintsContainer) {
-								hintsObserver.disconnect();
-								if (hintsContainer._observer) {
-										delete hintsContainer._observer;
-								}
-								hintsObserver = null;
-								hintsContainer = null;
+				// Remove duplicates
+				var uniqueLiterals = [];
+				for (var l = 0; l < literals.length; l++) {
+						if (uniqueLiterals.indexOf(literals[l]) === -1) {
+								uniqueLiterals.push(literals[l]);
 						}
-						
-						if (autocompleteInfoPanel && !autocompleteInfoPanel.hasClass('pinned')) {
-								hideAutocompleteInfo();
-						}
-						
-						currentAutocompleteData = null;
-						lastSelectedIndex = -1;
-				});
+				}
 				
-				$(window).off('resize.autocompletePanel').on('resize.autocompletePanel', function() {
-						if (autocompleteInfoPanel && autocompleteInfoPanel.is(':visible')) {
-								positionSimpleInfoPanel();
-						}
-				});
+				return uniqueLiterals;
 		}
 
 		/**
@@ -2718,6 +2192,13 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 		 * @returns {void}
 		 */
 		function setupParameterHints(cm) {
+			
+			    if (!cm) {
+        console.warn('[ParamHints] No CodeMirror instance');
+        return;
+    }
+    console.log('[ParamHints] Initializing parameter hints...');
+
 				if (!cm) return;
 				
 				var paramPopup = null;
@@ -2913,154 +2394,6 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				return Object.keys(variables);
 		}
 
-		/**
-		 * Validates if a function name exists in the Stellarium API.
-		 * Used for syntax highlighting (red for invalid, green for valid).
-		 * 
-		 * @param {string} funcName - Full function name (e.g., "core.setDate")
-		 * @returns {boolean} True if function exists in API
-		 */
-		function isValidStellariumFunction(funcName) {
-				if (!scriptReference.isLoaded()) return true; // Assume valid while loading
-				
-				var allItems = scriptReference.getAutocompleteItems();
-				for (var i = 0; i < allItems.length; i++) {
-						if (allItems[i].fullName === funcName || allItems[i].name === funcName) {
-								return true;
-						}
-				}
-				return false;
-		}
-		
-		// =====================================================================
-    // ENHANCED AUTOCOMPLETE INFO PANEL - NEW FUNCTIONS
-    // =====================================================================
-
-    /**
-     * Calculates optimal position for info panel based on viewport constraints.
-     * Tries right, left, bottom, top in order of preference.
-     * 
-     * @param {Object} autocompleteRect - DOMRect of autocomplete dropdown
-     * @param {number} viewportWidth - Window inner width
-     * @param {number} viewportHeight - Window inner height
-     * @returns {Object} Position object with x, y, and side properties
-     */
-    function getOptimalPanelPosition(autocompleteRect, viewportWidth, viewportHeight) {
-        var PANEL_WIDTH = 380;
-        var PANEL_HEIGHT = 300; // Estimated typical height
-        
-        // Define all possible positions with their calculations
-        var positions = [
-            {
-                side: 'right',
-                x: autocompleteRect.right + 8,
-                y: autocompleteRect.top,
-                width: PANEL_WIDTH,
-                height: PANEL_HEIGHT
-            },
-            {
-                side: 'left',
-                x: autocompleteRect.left - PANEL_WIDTH - 8,
-                y: autocompleteRect.top,
-                width: PANEL_WIDTH,
-                height: PANEL_HEIGHT
-            },
-            {
-                side: 'bottom',
-                x: autocompleteRect.left,
-                y: autocompleteRect.bottom + 8,
-                width: PANEL_WIDTH,
-                height: PANEL_HEIGHT
-            },
-            {
-                side: 'top',
-                x: autocompleteRect.left,
-                y: autocompleteRect.top - PANEL_HEIGHT - 8,
-                width: PANEL_WIDTH,
-                height: PANEL_HEIGHT
-            }
-        ];
-        
-        // Find first position that fits entirely in viewport
-        for (var i = 0; i < positions.length; i++) {
-            var pos = positions[i];
-            if (pos.x >= 0 && 
-                pos.x + pos.width <= viewportWidth &&
-                pos.y >= 0 && 
-                pos.y + pos.height <= viewportHeight) {
-                return pos;
-            }
-        }
-        
-        // Fallback: center of viewport
-        return {
-            side: 'center',
-            x: (viewportWidth - PANEL_WIDTH) / 2,
-            y: (viewportHeight - PANEL_HEIGHT) / 2
-        };
-    }
-
-    /**
-     * Adds a visual pointer arrow to the info panel pointing to autocomplete dropdown.
-     * Creates a small triangle that visually connects the info panel to the dropdown.
-     * 
-     * @param {string} side - Position side ('right', 'left', 'bottom', 'top', 'center')
-     * @param {Object} autocompleteRect - DOMRect of autocomplete dropdown
-     * @returns {void}
-     */
-    function addPointerArrowToPanel(side, autocompleteRect) {
-        if (!autocompleteInfoPanel || !autocompleteInfoPanel.length) return;
-        
-        // Remove any existing arrow first
-        autocompleteInfoPanel.find('.info-panel-arrow').remove();
-        
-        // Don't add arrow for center position
-        if (side === 'center') return;
-        
-        // Get panel position to calculate alignment
-        var panelOffset = autocompleteInfoPanel.offset();
-        var panelHeight = autocompleteInfoPanel.outerHeight();
-        
-        if (!panelOffset) return;
-        
-        var arrowStyle = '';
-        var arrowClass = '';
-        var arrowPosition = {};
-        
-        // Calculate vertical alignment (center of the panel's top section)
-        var arrowTopOffset = 25; // Position arrow near the top of the panel
-        
-        switch (side) {
-            case 'right':
-                // Arrow points LEFT (from panel to dropdown on the left)
-                arrowClass = 'arrow-left';
-                arrowStyle = 'left: -8px; top: ' + arrowTopOffset + 'px; border-right-color: #B4B7B0;';
-                break;
-            case 'left':
-                // Arrow points RIGHT (from panel to dropdown on the right)
-                arrowClass = 'arrow-right';
-                arrowStyle = 'right: -8px; top: ' + arrowTopOffset + 'px; border-left-color: #B4B7B0;';
-                break;
-            case 'bottom':
-                // Arrow points UP (panel is below dropdown)
-                arrowClass = 'arrow-top';
-                arrowStyle = 'top: -8px; left: 20px; border-bottom-color: #B4B7B0;';
-                break;
-            case 'top':
-                // Arrow points DOWN (panel is above dropdown)
-                arrowClass = 'arrow-bottom';
-                arrowStyle = 'bottom: -8px; left: 20px; border-top-color: #B4B7B0;';
-                break;
-        }
-        
-        // Create the arrow element
-        var $arrow = $('<div class="info-panel-arrow ' + arrowClass + '" style="' + arrowStyle + '"></div>');
-        autocompleteInfoPanel.append($arrow);
-        
-        // Verify arrow was added (debug)
-        console.log('[InfoPanel] Arrow added:', side, arrowClass);
-    }
-
 		// =====================================================================
     // PINNABLE INFO PANEL WITH FIXED COPY FUNCTIONALITY
     // =====================================================================
@@ -3127,209 +2460,6 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						
 						addOutput('success', 'Example inserted at line ' + (targetLineIndex + 1));
 				}
-		}
-    
-    /**
-     * Copies example code to clipboard with visual feedback.
-     * 
-     * @param {string} code - The example code to copy
-     * @param {jQuery} $btn - The button element for visual feedback
-     * @returns {void}
-     */
-    function copyExampleToClipboard(code, $btn) {
-        // Use the global copy function if available
-        if (typeof copyToClipboard === 'function') {
-            copyToClipboard(code);
-            showCopyButtonFeedback($btn, '✓ Copied!', 2000);
-            console.log('[InfoPanel] Example copied via copyToClipboard');
-            return;
-        }
-        
-        // Fallback: use clipboard API
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(code).then(function() {
-                showCopyButtonFeedback($btn, '✓ Copied!', 2000);
-                console.log('[InfoPanel] Example copied via Clipboard API');
-            }).catch(function(err) {
-                console.error('[InfoPanel] Clipboard API failed:', err);
-                fallbackCopyToClipboard(code, $btn);
-            });
-        } else {
-            fallbackCopyToClipboard(code, $btn);
-        }
-    }
-    
-    /**
-     * Fallback copy method using textarea.
-     * 
-     * @param {string} text - The text to copy
-     * @param {jQuery} $btn - The button element for visual feedback
-     * @returns {void}
-     */
-    function fallbackCopyToClipboard(text, $btn) {
-        var textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.left = '-9999px';
-        textarea.style.top = '-9999px';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        textarea.setSelectionRange(0, text.length);
-        
-        try {
-            var success = document.execCommand('copy');
-            if (success) {
-                showCopyButtonFeedback($btn, '✓ Copied!', 2000);
-                console.log('[InfoPanel] Example copied via execCommand');
-            } else {
-                showCopyButtonFeedback($btn, '⚠️ Copy Failed', 1500);
-                console.error('[InfoPanel] execCommand copy failed');
-            }
-        } catch(e) {
-            console.error('[InfoPanel] Copy error:', e);
-            showCopyButtonFeedback($btn, '⚠️ Error', 1500);
-        }
-        
-        document.body.removeChild(textarea);
-    }
-    
-    /**
-     * Shows visual feedback on the copy button.
-     * 
-     * @param {jQuery} $btn - The button element
-     * @param {string} message - The message to display
-     * @param {number} duration - Duration in milliseconds
-     * @returns {void}
-     */
-    function showCopyButtonFeedback($btn, message, duration) {
-        var originalText = $btn.html();
-        var originalClass = $btn.attr('class');
-        
-        $btn.html(message);
-        $btn.addClass('copied-feedback');
-        
-        setTimeout(function() {
-            $btn.html(originalText);
-            $btn.removeClass('copied-feedback');
-            // Restore original class if needed
-            if (originalClass) {
-                $btn.attr('class', originalClass);
-            }
-        }, duration);
-    }
-    
-		/**
-		 * Builds enhanced HTML for info panel with better structure and styling.
-		 * Now includes an "Insert to Line" button with line number input.
-		 * 
-		 * @param {AutocompleteItem} itemData - The function data
-		 * @param {string|null} exampleCacheId - Optional cache ID for the example
-		 * @returns {string} HTML string for the panel
-		 */
-		function buildEnhancedInfoPanelHtml(itemData, exampleCacheId) {
-				var funcName = (itemData.prefix || itemData.name || '').split('(')[0];
-				var signature = itemData.prefix || itemData.name || funcName;
-				var description = itemData.desc || itemData.description || 'No description available.';
-				var example = itemData.example || '';
-				var category = itemData.category || '';
-				var returnType = itemData.returns || 'void';
-				var params = itemData.params || [];
-				
-				// Get total lines and current line number for the placeholder
-				var totalLines = codeMirrorInstance ? codeMirrorInstance.lineCount() : 1000;
-				var currentLine = getCurrentLineNumber();
-				var linePlaceholder = '1-' + totalLines;
-				
-				// Escape all content
-				var escapedFuncName = escapeHtml(funcName);
-				var escapedSignature = escapeHtml(signature);
-				var escapedDescription = escapeHtml(description);
-				var escapedCategory = escapeHtml(category);
-				var escapedReturnType = escapeHtml(returnType);
-				
-				var html = '<div class="info-function-header">' +
-												'<div class="info-function-name">' + escapedFuncName + '</div>' +
-												(category ? '<span class="info-category-badge">' + escapedCategory + '</span>' : '') +
-												'</div>';
-				
-				// Signature
-				html += '<div class="info-signature">' +
-												'<div class="info-label">Signature</div>' +
-												'<pre class="info-code">' + escapedSignature + '</pre>' +
-												'</div>';
-				
-				// Description
-				if (escapedDescription && escapedDescription !== 'No description available.') {
-						html += '<div class="info-description">' +
-														'<div class="info-label">Description</div>' +
-														'<div class="info-text">' + escapedDescription + '</div>' +
-														'</div>';
-				}
-				
-				// Parameters (if any)
-				if (params && params.length > 0) {
-						html += '<div class="info-params">' +
-														'<div class="info-label">Parameters</div>' +
-														'<div class="info-params-list">';
-						
-						for (var i = 0; i < params.length; i++) {
-								var p = params[i];
-								var pName = escapeHtml(p.name || 'param' + i);
-								var pType = escapeHtml(p.type || 'any');
-								var pDesc = escapeHtml(p.description || p.desc || '');
-								var isRequired = p.required === true;
-								
-								html += '<div class="info-param-item">' +
-																'<div class="info-param-name">' + pName + 
-																(isRequired ? '<span class="param-required-badge">required</span>' : '<span class="param-optional-badge">optional</span>') +
-																'</div>' +
-																'<div class="info-param-type">Type: ' + pType + '</div>' +
-																(pDesc ? '<div class="info-param-desc">' + pDesc + '</div>' : '') +
-																'</div>';
-						}
-						
-						html += '</div></div>';
-				}
-				
-				// Return type
-				if (escapedReturnType && escapedReturnType !== 'void') {
-						html += '<div class="info-returns">' +
-														'<div class="info-label">Returns</div>' +
-														'<div class="info-return-value"><code>' + escapedReturnType + '</code></div>' +
-														'</div>';
-				}
-				
-				// Example section with line number input (THE CRITICAL PART)
-				if (example) {
-						var formattedExample = formatExampleForDisplay(example);
-						var escapedExample = escapeHtml(formattedExample);
-						
-						html += '<div class="info-example">' +
-														'<div class="info-label">Example</div>' +
-														'<pre class="info-code info-example-code">' + escapedExample + '</pre>' +
-														'<div class="info-example-actions">' +
-														'<div class="info-example-footer">';
-						
-						// Copy button
-						if (exampleCacheId) {
-								html += '<button class="info-copy-example jquerybutton" data-example-cache-id="' + escapeAttr(exampleCacheId) + '">Copy Example</button>';
-						} else {
-								var exampleJson = JSON.stringify(example).replace(/</g, '\\u003c').replace(/>/g, '\\u003e');
-								html += '<button class="info-copy-example jquerybutton" data-example-json=\'' + exampleJson + '\'>Copy Example</button>';
-						}
-						
-						// Insert at Line button with line number input
-						html += '<div class="info-insert-line-container">' +
-														'<span class="info-insert-line-label">at line:</span>' +
-														'<input type="number" id="info-insert-line-num" class="info-insert-line-input" value="' + currentLine + '" min="1" max="' + totalLines + '" placeholder="' + linePlaceholder + '">' +
-														'<button class="info-insert-example jquerybutton" data-example-cache-id="' + (exampleCacheId || '') + '">Insert at Line</button>' +
-														'</div>';
-						
-						html += '</div></div></div>';
-				}
-				
-				return html;
 		}
 
 		/**
@@ -3579,9 +2709,9 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 										codeMirrorInstance.refresh();
 										console.log('[CodeMirror] Module names and functions map updated');
 										// Revalidate after module names are loaded
-										setTimeout(function() {
-												fullRevalidateAllFunctions();
-										}, 500);
+										//setTimeout(function() {
+										//		fullRevalidateAllFunctions();
+										//}, 500);
 								}
 						});
 				}
@@ -3756,6 +2886,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						matchBrackets: true,
 						autoCloseBrackets: true,
 						theme: 'default',
+				    placeholder: '// Write Stellarium script code here...\n// Example:\n// core.setDate("2026-01-01T00:00:00", "utc");\n// core.moveToObject("Mars", 2);\n// core.wait(3);',
 						
 						extraKeys: {
 								'Ctrl-Enter': function(cm) { runScript(); },
@@ -3781,47 +2912,47 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				});
 				
 				// =====================================================================
-// LINE COUNTER - Update on changes
-// =====================================================================
+				// LINE COUNTER - Update on changes
+				// =====================================================================
 
-// تحديث عداد الأسطر عند تحميل المحتوى
-setTimeout(function() {
-    refreshLineCount();
-}, 100);
+				// Update line counter when content loads
+				setTimeout(function() {
+						refreshLineCount();
+				}, 100);
 
-// تحديث عند تغيير المحتوى
-codeMirrorInstance.on('change', function(cm) {
-    refreshLineCount();
-});
+				// Update when content changes
+				codeMirrorInstance.on('change', function(cm) {
+						refreshLineCount();
+				});
 
-// تحديث عند إجراء عمليات مثل تبديل الأسطر أو الإضافة/الحذف
-codeMirrorInstance.on('swapLineUp', function(cm) {
-    refreshLineCount();
-});
+				// Update when performing operations like swapping lines or adding/deleting
+				codeMirrorInstance.on('swapLineUp', function(cm) {
+						refreshLineCount();
+				});
 
-codeMirrorInstance.on('swapLineDown', function(cm) {
-    refreshLineCount();
-});
+				codeMirrorInstance.on('swapLineDown', function(cm) {
+						refreshLineCount();
+				});
 
-codeMirrorInstance.on('deleteLine', function(cm) {
-    refreshLineCount();
-});
+				codeMirrorInstance.on('deleteLine', function(cm) {
+						refreshLineCount();
+				});
 
-// تحديث عند اللصق أو القص
-codeMirrorInstance.on('paste', function(cm) {
-    setTimeout(function() { refreshLineCount(); }, 10);
-});
+				// Update on paste or cut operations
+				codeMirrorInstance.on('paste', function(cm) {
+						setTimeout(function() { refreshLineCount(); }, 10);
+				});
 
-// تحديث عند الحذف (Ctrl+Shift+K أو Ctrl+K)
-codeMirrorInstance.on('keydown', function(cm, event) {
-    // التأكد من أن العمليات التي تؤثر على عدد الأسطر يتم تحديثها
-    setTimeout(function() { refreshLineCount(); }, 5);
-});
+				// Update on delete operations (Ctrl+Shift+D or Ctrl+D)
+				codeMirrorInstance.on('keydown', function(cm, event) {
+						// Ensure that operations affecting line count are updated
+						setTimeout(function() { refreshLineCount(); }, 5);
+				});
 
-// تحديث عند التركيز (للتأكد بعد أي عملية خارجية)
-codeMirrorInstance.on('focus', function() {
-    refreshLineCount();
-});
+				// Update on focus (to ensure after any external operations)
+				codeMirrorInstance.on('focus', function() {
+						refreshLineCount();
+				});
 				
 				function toggleLineComment(cm) {
 						var cursor = cm.getCursor();
@@ -3874,26 +3005,25 @@ codeMirrorInstance.on('focus', function() {
 				}
 				
 				// =====================================================================
-				// STEP 6: CORE VALIDATION FUNCTIONS (CASE-SENSITIVE)
-				// AUTO-VALIDATION TOGGLE (OFF by default)
+				// STEP 6:  VALIDATION SYSTEM (CASE-SENSITIVE)
 				// =====================================================================
-				var autoValidationEnabled = false;  // ← disabled by default
-				var validationTimeout = null;
 
-				var $autoValidationCheckbox = $('#auto-validation-checkbox');
+				// --- 6.1 Auto-validation Toggle (OFF by default) ---
+				let autoValidationEnabled = false;
+				let validationTimeout = null;
+
+				const $autoValidationCheckbox = $('#auto-validation-checkbox');
 				if ($autoValidationCheckbox.length) {
-						// Ensure the checkbox reflects the correct state
 						$autoValidationCheckbox.prop('checked', autoValidationEnabled);
 						
 						$autoValidationCheckbox.on('change', function() {
 								autoValidationEnabled = $(this).is(':checked');
-								console.log('[AutoValidation] ' + (autoValidationEnabled ? 'ENABLED' : 'DISABLED'));
+								console.log(`[AutoValidation] ${autoValidationEnabled ? 'ENABLED' : 'DISABLED'}`);
 								
 								if (typeof addOutput === 'function') {
-										addOutput('info', 'Auto-validation ' + (autoValidationEnabled ? 'enabled' : 'disabled'));
+										addOutput('info', `Auto-validation ${autoValidationEnabled ? 'enabled' : 'disabled'}`);
 								}
 								
-								// Popup notification
 								if (typeof showNotification === 'function') {
 										if (autoValidationEnabled) {
 												showNotification(_tr("Auto-validation enabled - functions will be colored as you type"), "success");
@@ -3902,260 +3032,134 @@ codeMirrorInstance.on('focus', function() {
 										}
 								}
 								
-								// If enabled, immediately validate the current line
 								if (autoValidationEnabled && codeMirrorInstance) {
-										setTimeout(function() {
-												validateCurrentLine(codeMirrorInstance);
-										}, 100);
+										setTimeout(() => validateCurrentLine(codeMirrorInstance), 100);
 								}
 						});
 				}
 
-				function shouldAutoValidate() {
-						return autoValidationEnabled;
-				}
-				
-				/**
-				 * Extract namespace and function name from a position in the document
-				 * This is the ENHANCED version that correctly identifies the context
-				 */
-				function getFunctionContextAtPosition(cm, line, ch) {
-						var lineText = cm.getLine(line);
-						
-						// Find the dot before current position
-						var dotPos = -1;
-						for (var i = ch - 1; i >= 0; i--) {
-								if (lineText[i] === '.') {
-										dotPos = i;
-										break;
+				function shouldAutoValidate() { return autoValidationEnabled; }
+
+				// --- 6.2 Helper: Clear all validation marks ---
+				function clearAllValidationMarks(cm) {
+						if (!cm) return 0;
+						const marks = cm.getAllMarks();
+						let count = 0;
+						for (const mark of marks) {
+								const className = mark.className;
+								if (className && (
+										className.includes('function-valid') ||
+										className.includes('function-invalid') ||
+										className.includes('function-pending') ||
+										className.includes('function-case-error')
+								)) {
+										mark.clear();
+										count++;
 								}
 						}
-						
-						if (dotPos === -1) return null;
-						
-						// Find namespace start (before dot)
-						var nsStart = dotPos - 1;
-						while (nsStart >= 0 && /[a-zA-Z_$][a-zA-Z0-9_$]/.test(lineText[nsStart])) {
-								nsStart--;
-						}
-						nsStart++;
-						
-						var namespace = lineText.substring(nsStart, dotPos);
-						
-						// Find function name (after dot, until non-identifier char)
-						var funcStart = dotPos + 1;
-						var funcEnd = funcStart;
-						while (funcEnd < lineText.length && /[a-zA-Z_$][a-zA-Z0-9_$]/.test(lineText[funcEnd])) {
-								funcEnd++;
-						}
-						
-						// Only validate if we're at or after the function name
-						if (ch < funcStart) return null;
-						
-						var funcName = lineText.substring(funcStart, funcEnd);
-						
-						return {
-								namespace: namespace,
-								funcName: funcName,
-								funcStart: funcStart,
-								funcEnd: funcEnd,
-								fullContext: lineText.substring(nsStart, funcEnd)
-						};
+						if (count > 0) console.log(`[Validation] Cleared ${count} marks`);
+						return count;
 				}
-				
-				/**
-				 * Validate a single function and apply color (CASE-SENSITIVE)
-				 */
-				function validateSingleFunction(cm, funcName, namespace, line, startCh, endCh) {
+
+				// --- 6.3 Core Logic: Validate a single function using scriptReference ---
+				function validateSingleFunction(cm, namespace, funcName, lineNum, startCh, endCh) {
 						if (!funcName || funcName.trim() === '') return false;
 						
-						var isValid = false;
-						var isCaseError = false;
+						let isValid = false;
+						let isCaseError = false;
+						let isPending = false;
 						
-						// Only validate if scriptReference is loaded
 						if (scriptReference && scriptReference.isLoaded()) {
-								isValid = isValidFunctionCaseSensitive(funcName, namespace);
-								
-								// Check if it's a case error (function exists but with different case)
+								isValid = scriptReference.isValidFunction(funcName, namespace);
 								if (!isValid) {
-										for (var i = 0; i < allValidFunctions.length; i++) {
-												if (allValidFunctions[i].namespace.toLowerCase() === namespace.toLowerCase() &&
-														allValidFunctions[i].function.toLowerCase() === funcName.toLowerCase()) {
-														isCaseError = true;
-														break;
-												}
-										}
+										isCaseError = scriptReference.isCaseError(funcName, namespace);
 								}
-						}
-						
-						var from = {line: line, ch: startCh};
-						var to = {line: line, ch: endCh};
-						
-						// Remove existing marks
-						var existingMarks = cm.findMarks(from, to);
-						for (var i = 0; i < existingMarks.length; i++) {
-								existingMarks[i].clear();
-						}
-						
-						// Apply appropriate class
-						var className = '';
-						if (!scriptReference || !scriptReference.isLoaded()) {
-								className = 'function-pending';
-						} else if (isValid) {
-								className = 'function-valid';
-						} else if (isCaseError) {
-								className = 'function-case-error';
 						} else {
-								className = 'function-invalid';
+								isPending = true; // API not loaded yet
 						}
+						
+						let className = '';
+						if (isPending) className = 'function-pending';
+						else if (isValid) className = 'function-valid';
+						else if (isCaseError) className = 'function-case-error';
+						else className = 'function-invalid';
+						
+						const from = { line: lineNum, ch: startCh };
+						const to = { line: lineNum, ch: endCh };
+						
+						// Remove existing marks to avoid duplicates
+						cm.findMarks(from, to).forEach(mark => mark.clear());
 						
 						cm.markText(from, to, {
-								className: 'cm-' + className,
+								className: `cm-${className}`,
 								atomic: false,
 								clearOnEnter: true
 						});
 						
 						return isValid;
 				}
-				
-				/**
-				 * Find and validate all namespace.function patterns in a line
-				 */
-				function validateLineFunctions(cm, lineNum) {
-						if (!cm) cm = codeMirrorInstance;
+
+				// --- 6.4 Validate all functions in a single line ---
+				function validateLine(cm, lineNum) {
 						if (!cm) return { count: 0, valid: 0, invalid: 0, caseErrors: 0 };
-						
-						var lineText = cm.getLine(lineNum);
+						const lineText = cm.getLine(lineNum);
 						if (!lineText) return { count: 0, valid: 0, invalid: 0, caseErrors: 0 };
 						
-						// Pattern for namespace.function
-						var dotPattern = /([a-zA-Z_$][a-zA-Z0-9_$]*)\.([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
-						var match;
-						var validCount = 0;
-						var invalidCount = 0;
-						var caseErrorCount = 0;
-						var totalCount = 0;
+						const pattern = /([a-zA-Z_$][a-zA-Z0-9_$]*)\.([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
+						let match;
+						const stats = { count: 0, valid: 0, invalid: 0, caseErrors: 0 };
 						
-						while ((match = dotPattern.exec(lineText)) !== null) {
-								var namespace = match[1];
-								var funcName = match[2];
-								var funcStart = match.index + namespace.length + 1;
-								var funcEnd = funcStart + funcName.length;
+						while ((match = pattern.exec(lineText)) !== null) {
+								const namespace = match[1];
+								const funcName = match[2];
+								const funcStart = match.index + namespace.length + 1;
+								const funcEnd = funcStart + funcName.length;
 								
-								totalCount++;
-								
-								var isValid = false;
-								var isCaseError = false;
-								
-								if (scriptReference && scriptReference.isLoaded()) {
-										isValid = isValidFunctionCaseSensitive(funcName, namespace);
-										
-										// Check for case error
-										if (!isValid) {
-												for (var i = 0; i < allValidFunctions.length; i++) {
-														if (allValidFunctions[i].namespace.toLowerCase() === namespace.toLowerCase() &&
-																allValidFunctions[i].function.toLowerCase() === funcName.toLowerCase()) {
-																isCaseError = true;
-																break;
-														}
-												}
-										}
-								}
+								stats.count++;
+								const isValid = validateSingleFunction(cm, namespace, funcName, lineNum, funcStart, funcEnd);
 								
 								if (isValid) {
-										validCount++;
-								} else if (isCaseError) {
-										caseErrorCount++;
-										invalidCount++;
-								} else if (scriptReference && scriptReference.isLoaded()) {
-										invalidCount++;
+										stats.valid++;
+								} else {
+										stats.invalid++;
+										if (scriptReference && scriptReference.isLoaded() && scriptReference.isCaseError(funcName, namespace)) {
+												stats.caseErrors++;
+										}
 								}
-								
-								validateSingleFunction(cm, funcName, namespace, lineNum, funcStart, funcEnd);
 						}
-						
-						return { 
-								count: totalCount, 
-								valid: validCount, 
-								invalid: invalidCount,
-								caseErrors: caseErrorCount
-						};
+						return stats;
 				}
-				
-				/**
-				 * Validate current line only
-				 */
+
+				// --- 6.5 Validate current line only (for auto-validation) ---
 				function validateCurrentLine(cm) {
-						if (!cm) cm = codeMirrorInstance;
 						if (!cm) return;
-						
-						var cursor = cm.getCursor();
-						var lineNum = cursor.line;
-						
-						var result = validateLineFunctions(cm, lineNum);
-						
-						if (result.count > 0 && window._debugValidation) {
-								console.log('[AutoValidation] Line ' + (lineNum + 1) + ': ' + 
-														result.valid + ' valid, ' + result.invalid + ' invalid (' +
-														result.caseErrors + ' case errors)');
+						const cursor = cm.getCursor();
+						const result = validateLine(cm, cursor.line);
+						if (window._debugValidation && result.count > 0) {
+								console.log(`[AutoValidation] Line ${cursor.line + 1}: ${result.valid} valid, ${result.invalid} invalid (${result.caseErrors} case errors)`);
 						}
 				}
-				
-				/**
-				 * Clear all validation marks
-				 */
-				function clearAllValidationMarks(cm) {
-						if (!cm) cm = codeMirrorInstance;
-						if (!cm) return 0;
-						
-						var marks = cm.getAllMarks();
-						var count = 0;
-						
-						for (var i = 0; i < marks.length; i++) {
-								var mark = marks[i];
-								var className = mark.className;
-								if (className && (className.indexOf('function-valid') !== -1 || 
-																	className.indexOf('function-invalid') !== -1 ||
-																	className.indexOf('function-pending') !== -1 ||
-																	className.indexOf('function-case-error') !== -1)) {
-										mark.clear();
-										count++;
-								}
-						}
-						
-						console.log('[Validation] Cleared ' + count + ' validation marks');
-						return count;
-				}
-				
-				/**
-				 * FULL revalidation of all functions (CASE-SENSITIVE)
-				 * This is called by the Revalidate button
-				 */
+
+				// --- 6.6 Perform full document validation (for Revalidate button) ---
 				function fullRevalidateAllFunctions() {
 						if (!codeMirrorInstance) {
 								console.warn('[Revalidate] No editor instance');
-								showNotification(_tr("Editor not ready for revalidation"), "error");
+								if (typeof showNotification === 'function') {
+										showNotification(_tr("Editor not ready for revalidation"), "error");
+								}
 								return;
 						}
 						
-						showNotification(_tr("Revalidating functions..."), "info");
-						
 						console.log('[Revalidate] ========== STARTING FULL CASE-SENSITIVE REVALIDATION ==========');
-						
 						if (typeof addOutput === 'function') {
 								addOutput('info', '⟳ Revalidating all functions (case-sensitive)...');
 						}
-						
-						// Ensure functions map is built
-						if (Object.keys(functionsMap).length === 0) {
-								buildFunctionsMap();
+						if (typeof showNotification === 'function') {
+								showNotification(_tr("Revalidating functions..."), "info");
 						}
 						
-						// Clear all existing validation marks
-						var clearedCount = clearAllValidationMarks(codeMirrorInstance);
-						console.log('[Revalidate] Cleared ' + clearedCount + ' existing marks');
-						
-						// Force refresh to reset token colors
+						// Clear all existing marks and force refresh
+						clearAllValidationMarks(codeMirrorInstance);
 						codeMirrorInstance.refresh();
 						
 						// If scriptReference is not loaded yet, wait for it
@@ -4165,151 +3169,74 @@ codeMirrorInstance.on('focus', function() {
 										addOutput('info', 'Waiting for API reference to load...');
 								}
 								if (scriptReference && scriptReference.init) {
-										scriptReference.init().then(function() {
-												updateModuleNames();
-												buildFunctionsMap();
-												var result = performFullValidation(codeMirrorInstance);
-												codeMirrorInstance.refresh();
-												displayValidationResults(result);
-												
-												// Notification of results
-												if (result.caseErrors && result.caseErrors.length > 0) {
-														showNotification(_tr("Revalidation: ") + result.valid + " valid, " + result.invalid + " invalid (" + result.caseErrors.length + " case errors)", "warning");
-												} else if (result.invalid > 0) {
-														showNotification(_tr("Revalidation: ") + result.valid + " valid, " + result.invalid + " invalid", "warning");
-												} else {
-														showNotification(_tr("Revalidation complete: All functions valid"), "success");
-												}
-										}).catch(function(err) {
-												console.error('[Revalidate] Failed to load scriptReference:', err);
-												showNotification(_tr("Revalidation failed: API reference not loaded"), "error");
-										});
-								}
-						} else {
-								var result = performFullValidation(codeMirrorInstance);
-								codeMirrorInstance.refresh();
-								displayValidationResults(result);
-								
-								// Notification of results
-								if (result.caseErrors && result.caseErrors.length > 0) {
-										showNotification(_tr("Revalidation: ") + result.valid + " valid, " + result.invalid + " invalid (" + result.caseErrors.length + " case errors)", "warning");
-								} else if (result.invalid > 0) {
-										showNotification(_tr("Revalidation: ") + result.valid + " valid, " + result.invalid + " invalid", "warning");
-								} else {
-										showNotification(_tr("Revalidation complete: All functions valid"), "success");
-								}
-						}
-						
-						console.log('[Revalidate] ========== REVALIDATION COMPLETE ==========');
-				}
-				
-				/**
-				 * Perform full validation on all lines
-				 */
-				function performFullValidation(cm) {
-						if (!cm) cm = codeMirrorInstance;
-						if (!cm) return { total: 0, valid: 0, invalid: 0, caseErrors: [] };
-						
-						var lineCount = cm.lineCount();
-						var totalValid = 0;
-						var totalInvalid = 0;
-						var totalCount = 0;
-						var caseErrors = [];
-						
-						console.log('[Validation] Starting full document validation (case-sensitive)...');
-						
-						for (var i = 0; i < lineCount; i++) {
-								var lineText = cm.getLine(i);
-								if (!lineText) continue;
-								
-								var dotPattern = /([a-zA-Z_$][a-zA-Z0-9_$]*)\.([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
-								var match;
-								
-								while ((match = dotPattern.exec(lineText)) !== null) {
-										var namespace = match[1];
-										var funcName = match[2];
-										var funcStart = match.index + namespace.length + 1;
-										var funcEnd = funcStart + funcName.length;
-										
-										totalCount++;
-										
-										var isValid = isValidFunctionCaseSensitive(funcName, namespace);
-										
-										if (isValid) {
-												totalValid++;
-										} else {
-												totalInvalid++;
-												
-												// Check if it's a case error
-												for (var j = 0; j < allValidFunctions.length; j++) {
-														if (allValidFunctions[j].namespace.toLowerCase() === namespace.toLowerCase() &&
-																allValidFunctions[j].function.toLowerCase() === funcName.toLowerCase()) {
-																caseErrors.push({
-																		line: i + 1,
-																		wrong: namespace + '.' + funcName,
-																		correct: allValidFunctions[j].fullName
-																});
-																break;
+										scriptReference.init()
+												.then(() => performFullRevalidation())
+												.catch(err => {
+														console.error('[Revalidate] Failed to load scriptReference:', err);
+														if (typeof showNotification === 'function') {
+																showNotification(_tr("Revalidation failed: API reference not loaded"), "error");
 														}
-												}
+												});
+								}
+								return;
+						}
+						
+						performFullRevalidation();
+						
+						function performFullRevalidation() {
+								const lineCount = codeMirrorInstance.lineCount();
+								let totalStats = { count: 0, valid: 0, invalid: 0, caseErrors: 0 };
+								
+								for (let i = 0; i < lineCount; i++) {
+										const lineStats = validateLine(codeMirrorInstance, i);
+										totalStats.count += lineStats.count;
+										totalStats.valid += lineStats.valid;
+										totalStats.invalid += lineStats.invalid;
+										totalStats.caseErrors += lineStats.caseErrors;
+								}
+								
+								codeMirrorInstance.refresh();
+								
+								console.log(`[Revalidate] Complete: ${totalStats.valid} valid, ${totalStats.invalid} invalid (${totalStats.caseErrors} case errors)`);
+								
+								if (typeof addOutput === 'function') {
+										if (totalStats.caseErrors > 0) {
+												addOutput('warning', `✅ Revalidation: ${totalStats.valid} valid, ${totalStats.invalid} invalid (${totalStats.caseErrors} case errors)`);
+										} else if (totalStats.invalid > 0) {
+												addOutput('warning', `✅ Revalidation: ${totalStats.valid} valid, ${totalStats.invalid} invalid`);
+										} else {
+												addOutput('success', `✅ Revalidation complete: ${totalStats.valid} valid functions found`);
 										}
-										
-										validateSingleFunction(cm, funcName, namespace, i, funcStart, funcEnd);
+								}
+								
+								if (typeof showNotification === 'function') {
+										if (totalStats.caseErrors > 0) {
+												showNotification(_tr(`Revalidation: ${totalStats.valid} valid, ${totalStats.invalid} invalid (${totalStats.caseErrors} case errors)`), "warning");
+										} else if (totalStats.invalid > 0) {
+												showNotification(_tr(`Revalidation: ${totalStats.valid} valid, ${totalStats.invalid} invalid`), "warning");
+										} else {
+												showNotification(_tr("Revalidation complete: All functions valid"), "success");
+										}
 								}
 						}
-						
-						console.log('[Validation] ========== VALIDATION SUMMARY ==========');
-						console.log('[Validation] Total functions found: ' + totalCount);
-						console.log('[Validation] Valid functions: ' + totalValid + ' ✓');
-						console.log('[Validation] Invalid functions: ' + totalInvalid + ' ✗');
-						
-						if (caseErrors.length > 0) {
-								console.log('[Validation] Case errors detected:');
-								caseErrors.forEach(function(err) {
-										console.log('[Validation]   Line ' + err.line + ': "' + err.wrong + '" → "' + err.correct + '"');
-								});
-						}
-						
-						return { total: totalCount, valid: totalValid, invalid: totalInvalid, caseErrors: caseErrors };
 				}
-				
-				/**
-				 * Display validation results in output panel
-				 */
-				function displayValidationResults(result) {
-						if (typeof addOutput !== 'function') return;
-						
-						if (result.caseErrors && result.caseErrors.length > 0) {
-								addOutput('warning', 'Revalidation: ' + result.valid + ' valid, ' + result.invalid + ' invalid (' + result.caseErrors.length + ' case errors)');
-								result.caseErrors.slice(0, 5).forEach(function(err) {
-										addOutput('error', '  ⚠️ Line ' + err.line + ': "' + err.wrong + '" → "' + err.correct + '"');
-								});
-								if (result.caseErrors.length > 5) {
-										addOutput('info', '  ... and ' + (result.caseErrors.length - 5) + ' more case errors');
-								}
-						} else if (result.invalid > 0) {
-								addOutput('warning', 'Revalidation complete: ' + result.valid + ' valid, ' + result.invalid + ' invalid');
-						} else {
-								addOutput('success', '✅ Revalidation complete: ' + result.valid + ' valid functions found');
-						}
-				}
-				
-				// Expose functions globally
+
+				// --- 6.7 Expose global functions for buttons and debugging ---
 				window.revalidateStelFunctions = fullRevalidateAllFunctions;
-				window._validateAll = function() { fullRevalidateAllFunctions(); };
-				window._validateLine = function() { validateCurrentLine(codeMirrorInstance); };
+				window._validateAll = fullRevalidateAllFunctions;
+				window._validateLine = () => validateCurrentLine(codeMirrorInstance);
 				window._debugValidation = false;  // Set to true to enable debug logs
-				window._getValidFunctions = function() { return allValidFunctions; };
-				
+
 				// =====================================================================
-				// STEP 7: REAL-TIME VALIDATION ON TYPING
+				// STEP 7: REAL-TIME VALIDATION & EVENT HANDLERS
 				// =====================================================================
-				
-				codeMirrorInstance.on('inputRead', function(cm, change) {
+
+				// 7.1 Trigger validation on typing (only if auto-validation is enabled)
+				codeMirrorInstance.on('inputRead', (cm, change) => {
 						// Trigger autocomplete on dot
 						if (change.text && change.text.length === 1 && change.text[0] === '.') {
-								setTimeout(function() {
-										if (cm.state.completionActive === undefined || !cm.state.completionActive) {
+								setTimeout(() => {
+										if (!cm.state.completionActive) {
 												CodeMirror.commands.autocomplete(cm);
 										}
 								}, 50);
@@ -4317,35 +3244,30 @@ codeMirrorInstance.on('focus', function() {
 						
 						if (!shouldAutoValidate()) return;
 						
-						// Validate when function name is completed
+						// Validate when a function name is likely completed
 						if (change.text && change.text.length === 1) {
-								var typedChar = change.text[0];
-								var isCompletionChar = (typedChar === '(' || typedChar === ')' || 
-																				typedChar === ' ' || typedChar === ';' ||
-																				typedChar === ',' || typedChar === '\n');
-								
+								const typedChar = change.text[0];
+								const isCompletionChar = ['(', ')', ' ', ';', ',', '\n'].includes(typedChar);
 								if (isCompletionChar) {
-										setTimeout(function() {
-												validateCurrentLine(cm);
-										}, 50);
+										setTimeout(() => validateCurrentLine(cm), 50);
 								}
 						}
 				});
-				
-				var lastValidatedLine = -1;
-				codeMirrorInstance.on('cursorActivity', function(cm) {
+
+				// 7.2 Validate when cursor moves to a new line (only if auto-validation is enabled)
+				let lastValidatedLine = -1;
+				codeMirrorInstance.on('cursorActivity', (cm) => {
 						if (!shouldAutoValidate()) return;
-						
-						var cursor = cm.getCursor();
+						const cursor = cm.getCursor();
 						if (lastValidatedLine !== cursor.line) {
 								lastValidatedLine = cursor.line;
-								setTimeout(function() {
-										validateCurrentLine(cm);
-								}, 100);
+								setTimeout(() => validateCurrentLine(cm), 100);
 						}
 				});
-				
-				codeMirrorInstance.on('change', function(cm) {
+
+				// 7.3 Validate after content changes (with debouncing, only if auto-validation is enabled)
+				codeMirrorInstance.on('change', (cm) => {
+						// Save to localStorage on every change
 						try {
 								localStorage.setItem('stellarium-script-editor', cm.getValue());
 						} catch(e) {}
@@ -4353,43 +3275,47 @@ codeMirrorInstance.on('focus', function() {
 						if (!shouldAutoValidate()) return;
 						
 						if (validationTimeout) clearTimeout(validationTimeout);
-						validationTimeout = setTimeout(function() {
+						validationTimeout = setTimeout(() => {
 								validateCurrentLine(cm);
 								validationTimeout = null;
 						}, 1000);
 				});
-				
+
+				// 7.4 Trigger autocomplete on dot (additional handler)
+				codeMirrorInstance.on('keyup', (cm, event) => {
+						if (event.key === '.' && (!cm.state.completionActive || !cm.state.completionActive.isOpen)) {
+								setTimeout(() => CodeMirror.commands.autocomplete(cm), 10);
+						}
+				});
+
 				// =====================================================================
-				// STEP 8: Load saved content
+				// STEP 8: Load saved content from localStorage
 				// =====================================================================
 				try {
-						var savedCode = localStorage.getItem('stellarium-script-editor');
+						const savedCode = localStorage.getItem('stellarium-script-editor');
 						if (savedCode && savedCode.trim()) {
 								codeMirrorInstance.setValue(savedCode);
-								setTimeout(function() {
-										fullRevalidateAllFunctions();
+								setTimeout(() => {
 										refreshLineCount();
+										// Optional: auto-validate on load (disabled by default to save performance)
+										// fullRevalidateAllFunctions();
 								}, 500);
 						}
 				} catch(e) {
 						console.warn('[CodeMirror] Could not load from localStorage:', e);
 				}
-				
+
 				// =====================================================================
-				// STEP 9: Setup autocomplete tracking
+				// STEP 9: Setup parameter hints (if available)
 				// =====================================================================
-				/* if (typeof setupAutocompleteTracking === 'function') {
-						setupAutocompleteTracking(codeMirrorInstance);
-				}*/
-				
 				if (typeof setupParameterHints === 'function') {
 						setupParameterHints(codeMirrorInstance);
 				}
-				
+
 				// =====================================================================
 				// STEP 10: Keyboard shortcuts
 				// =====================================================================
-				codeMirrorInstance.on('keydown', function(cm, event) {
+				codeMirrorInstance.on('keydown', (cm, event) => {
 						if (event.ctrlKey && event.key === 's') {
 								event.preventDefault();
 								saveScriptToFile();
@@ -4413,198 +3339,50 @@ codeMirrorInstance.on('focus', function() {
 								runSelection();
 						}
 				});
-				
+
 				// =====================================================================
-				// STEP 11: Focus/blur handlers
+				// STEP 11: Focus/blur handlers for styling
 				// =====================================================================
-				codeMirrorInstance.on('focus', function() {
+				codeMirrorInstance.on('focus', () => {
 						$('.script-editor-container').addClass('editor-focused');
 				});
-				
-				codeMirrorInstance.on('blur', function() {
+				codeMirrorInstance.on('blur', () => {
 						$('.script-editor-container').removeClass('editor-focused');
 				});
-				
+
 				// =====================================================================
 				// STEP 12: Expose for debugging
 				// =====================================================================
 				window._cm = codeMirrorInstance;
 				window._stelCodeMirrorInstance = codeMirrorInstance;
-				window._getModuleNames = function() { return moduleNames; };
-				
+
 				// =====================================================================
-				// STEP 13: Final refresh
+				// STEP 13: Final refresh and resize handler
 				// =====================================================================
-				setTimeout(function() {
+				setTimeout(() => {
 						codeMirrorInstance.refresh();
-						codeMirrorInstance.setCursor({line: 0, ch: 0});
+						codeMirrorInstance.setCursor({ line: 0, ch: 0 });
 				}, 100);
-				
-				$(window).on('resize.codemirror', function() {
+
+				$(window).on('resize.codemirror', () => {
 						if (codeMirrorInstance) {
 								codeMirrorInstance.refresh();
 						}
 				});
-				
-				console.log('[CodeMirror] Initialized with CASE-SENSITIVE validation');
-				console.log('[CodeMirror] Available namespaces:', moduleNames.join(', '));
-				console.log('[CodeMirror] Valid functions loaded:', allValidFunctions.length);
+
+				console.log('[CodeMirror] Initialized with UNIFIED CASE-SENSITIVE validation');
 				console.log('[CodeMirror] Features:');
-				console.log('  - ✓ Case-sensitive validation');
-				console.log('  - ✓ Real-time validation on typing');
+				console.log('  - ✓ Case-sensitive validation (using scriptReference)');
+				console.log('  - ✓ Real-time validation (optional, disabled by default)');
 				console.log('  - ✓ Revalidate button with full case checking');
 				console.log('  - ✓ Auto-validation toggle');
 				console.log('  - Valid function: GREEN bold');
 				console.log('  - Invalid function: RED underline');
 				console.log('  - Case error: ORANGE underline');
 				console.log('  - Pending function: LIGHT GREEN italic');
+
 		}
 
-    // =====================================================================
-    // REVALIDATE ALL FUNCTIONS
-    // =====================================================================
-
-    /**
-     * Clear all validation marks from the editor.
-     * Removes all cm-function-valid and cm-function-invalid marks.
-     */
-    function clearAllValidationMarks() {
-        if (!codeMirrorInstance) return;
-        
-        var marks = codeMirrorInstance.getAllMarks();
-        var count = 0;
-        
-        for (var i = 0; i < marks.length; i++) {
-            var mark = marks[i];
-            var className = mark.className;
-            
-            // Remove only validation-related marks
-            if (className && (className.indexOf('function-valid') !== -1 || 
-                              className.indexOf('function-invalid') !== -1)) {
-                mark.clear();
-                count++;
-            }
-        }
-        
-        console.log('[Revalidate] Cleared ' + count + ' validation marks');
-        return count;
-    }
-
-    /**
-     * Revalidate all functions in the entire document.
-     * This clears existing marks and applies fresh validation.
-     */
-    function revalidateAllFunctions() {
-        if (!codeMirrorInstance) {
-            console.warn('[Revalidate] No editor instance');
-            return;
-        }
-        
-        console.log('[Revalidate] Starting full revalidation...');
-        
-        // Show status in output
-        addOutput('info', 'Revalidating all functions...');
-        
-        // Clear all existing validation marks
-        var clearedCount = clearAllValidationMarks();
-        
-        // If scriptReference is not loaded yet, wait for it
-        if (scriptReference && !scriptReference.isLoaded()) {
-            addOutput('info', 'Waiting for API reference to load...');
-            scriptReference.init().then(function() {
-                performFullRevalidation();
-            }).catch(function() {
-                addOutput('error', 'Failed to load API reference. Using basic validation.');
-                performFullRevalidation();
-            });
-        } else {
-            performFullRevalidation();
-        }
-        
-        function performFullRevalidation() {
-            // Force refresh of CodeMirror to reset token-based colors
-            codeMirrorInstance.refresh();
-            
-            // Validate all functions
-            validateAllFunctions(codeMirrorInstance);
-            
-            // Force another refresh to ensure colors are updated
-            setTimeout(function() {
-                codeMirrorInstance.refresh();
-                addOutput('success', 'Revalidation complete. All function colors updated.');
-            }, 100);
-        }
-    }
-
-    /**
-     * Validate all functions in the entire document (for revalidation)
-     * This is an enhanced version of the existing validateAllFunctions
-     */
-    function validateAllFunctions(cm) {
-        if (!cm) cm = codeMirrorInstance;
-        if (!cm) return;
-        
-        var lineCount = cm.lineCount();
-        var validatedCount = 0;
-        var validCount = 0;
-        var invalidCount = 0;
-        
-        // Pattern to match namespace.function
-        var dotPattern = /([a-zA-Z_$][a-zA-Z0-9_$]*)\.([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
-        
-        for (var i = 0; i < lineCount; i++) {
-            var lineText = cm.getLine(i);
-            if (!lineText) continue;
-            
-            // Reset pattern for each line
-            dotPattern.lastIndex = 0;
-            var match;
-            
-            while ((match = dotPattern.exec(lineText)) !== null) {
-                var namespace = match[1];
-                var funcName = match[2];
-                var funcStart = match.index + namespace.length + 1;
-                var funcEnd = funcStart + funcName.length;
-                
-                validatedCount++;
-                
-                // Check if function is valid
-                var isValid = false;
-                if (scriptReference && scriptReference.isLoaded()) {
-                    isValid = scriptReference.isValidFunction(funcName, namespace);
-                }
-                
-                if (isValid) {
-                    validCount++;
-                } else {
-                    invalidCount++;
-                }
-                
-                // Apply the appropriate color
-                var from = {line: i, ch: funcStart};
-                var to = {line: i, ch: funcEnd};
-                
-                // Remove existing marks in this range
-                var existingMarks = cm.findMarks(from, to);
-                for (var m = 0; m < existingMarks.length; m++) {
-                    existingMarks[m].clear();
-                }
-                
-                var className = isValid ? 'function-valid' : 'function-invalid';
-                cm.markText(from, to, {
-                    className: 'cm-' + className,
-                    atomic: false,
-                    clearOnEnter: true
-                });
-            }
-        }
-        
-        console.log('[Revalidate] Validated ' + validatedCount + ' functions: ' + 
-                    validCount + ' valid, ' + invalidCount + ' invalid');
-        
-        return { total: validatedCount, valid: validCount, invalid: invalidCount };
-    }
-		
     // =====================================================================
     // METADATA DIALOG
     // =====================================================================
@@ -4663,29 +3441,6 @@ codeMirrorInstance.on('focus', function() {
         });
         $(document).on('keydown.metadataDialog', function(e) { if (e.key === 'Escape') { overlay.remove(); $(document).off('keydown.metadataDialog'); } });
     }
-
-    // =====================================================================
-    // INITIALIZATION
-    // =====================================================================
-		/**
-		 * Debug function to check autocomplete status
-		 */
-		function debugAutocompleteStatus() {
-				console.log('[AutoComplete Debug] ========== STATUS ==========');
-				console.log('[AutoComplete Debug] scriptReference.isLoaded():', scriptReference ? scriptReference.isLoaded() : 'scriptReference undefined');
-				
-				if (scriptReference && scriptReference.isLoaded()) {
-						var items = scriptReference.getAutocompleteItems();
-						console.log('[AutoComplete Debug] getAutocompleteItems count:', items ? items.length : 'null');
-						if (items && items.length > 0) {
-								console.log('[AutoComplete Debug] First 5 items:', items.slice(0, 5).map(function(i) { 
-										return i.fullName || i.prefix; 
-								}));
-						}
-				}
-				
-				console.log('[AutoComplete Debug] =================================');
-		}
 
 		// =====================================================================
 		// COLLECT EXAMPLES FROM MODULE JSON FILES
@@ -4906,6 +3661,10 @@ codeMirrorInstance.on('focus', function() {
 				});
 		}
 
+    // =====================================================================
+    // INITIALIZATION
+    // =====================================================================
+
 		/**
 		 * Initialize the Script Editor module.
 		 * FIXED: Wait for scriptReference to load before initializing CodeMirror
@@ -5104,22 +3863,35 @@ codeMirrorInstance.on('focus', function() {
 						showShortcutsHelpDialog();
 				});
 				
-				        if (dom.$btnRevalidate) {
-            dom.$btnRevalidate.off('click').on('click', function(e) {
-                e.preventDefault();
-                revalidateAllFunctions();
-            });
-        } else {
-            // In case dom.$btnRevalidate is not defined yet
-						$('#btn-editor-revalidate').off('click').on('click', function(e) {
-								e.preventDefault();
-								revalidateAllFunctions();
-						});
-        }
+		// Revalidate button - using the validation system
+		if (dom.$btnRevalidate) {
+				dom.$btnRevalidate.off('click').on('click', function(e) {
+						e.preventDefault();
+						if (typeof window.revalidateStelFunctions === 'function') {
+								window.revalidateStelFunctions();
+						} else {
+								console.error('[Revalidate] window.revalidateStelFunctions not defined!');
+								// Fallback
+								if (codeMirrorInstance && typeof fullRevalidateAllFunctions === 'function') {
+										fullRevalidateAllFunctions();
+								} else {
+										console.error('[Revalidate] No validation function available!');
+								}
+						}
+				});
+		} else {
+				// Fallback if dom.$btnRevalidate is not defined
+				$('#btn-editor-revalidate').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (typeof window.revalidateStelFunctions === 'function') {
+								window.revalidateStelFunctions();
+						}
+				});
+		}
     }
     
     // =====================================================================
-    // CONTINUOUS SCRIPT STATUS MONITORING (SIMPLE VERSION)
+    // CONTINUOUS SCRIPT STATUS MONITORING
     // =====================================================================
     
     var scriptPollingInterval = null;
@@ -5189,7 +3961,5 @@ codeMirrorInstance.on('focus', function() {
         loadInstalledScripts: loadInstalledScripts,
         saveScriptToFile: saveScriptToFile,
         openScriptFromFile: openScriptFromFile,
-				revalidateAllFunctions: revalidateAllFunctions,
-        clearAllValidationMarks: clearAllValidationMarks
     };
 });
