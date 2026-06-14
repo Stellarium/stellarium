@@ -1,0 +1,755 @@
+[
+    {
+        "name": "labelObject",
+        "category": "Labels - Object Labels",
+        "signature": "labelObject(QString text, QString objectName, bool visible, float fontSize, QString fontColor, QString side, double labelDistance, QString style, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label attached to a celestial object (star, planet, galaxy, constellation, etc.). The label follows the object as it moves across the sky and can be positioned relative to the object with an optional connection line.",
+        "parameters": [
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Text content to display as the label",
+                "required": true
+            },
+            {
+                "name": "objectName",
+                "type": "QString",
+                "description": "English name of the celestial object to attach the label to (e.g., 'Mars', 'Sirius', 'Andromeda Galaxy', 'Orion')",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "If true, the label starts visible; if false, starts hidden",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "fontSize",
+                "type": "float",
+                "description": "Font size in pixels",
+                "required": false,
+                "default": "14"
+            },
+            {
+                "name": "fontColor",
+                "type": "QString",
+                "description": "HTML-like color specification (e.g., '#ffff00' for yellow) or RGB values as '#RRGGBB'",
+                "required": false,
+                "default": "\"#999999\""
+            },
+            {
+                "name": "side",
+                "type": "QString",
+                "description": "Position relative to object: 'N' (above), 'S' (below), 'E' (right), 'W' (left), 'NE', 'NW', 'SE', 'SW'",
+                "required": false,
+                "default": "\"E\""
+            },
+            {
+                "name": "labelDistance",
+                "type": "double",
+                "description": "Distance offset from object in pixels (negative or -1 for automatic placement based on object size)",
+                "required": false,
+                "default": "-1.0"
+            },
+            {
+                "name": "style",
+                "type": "QString",
+                "description": "Label style: 'TextOnly' or 'Line' (draws a line from text to object)",
+                "required": false,
+                "default": "\"TextOnly\""
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, the label is automatically deleted after being displayed once",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "If non-zero, automatically deletes the label after this many milliseconds",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique label ID (returns -1 if object not found)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Create a label on Mars with a line connecting text to planet\nvar marsLabel = LabelMgr.labelObject(\"Mars - Red Planet\", \"Mars\", true, 16, \"#ff6666\", \"NE\", -1, \"Line\");\ncore.debug(\"Mars label ID: \" + marsLabel);\n\n// Create a simple label attached to Sirius\nvar siriusLabel = LabelMgr.labelObject(\"Sirius\", \"Sirius\", true, 14, \"#ffffff\", \"E\");\n\n// Create a label that auto-deletes after 5 seconds\nvar tempLabel = LabelMgr.labelObject(\"Temporary Note\", \"Jupiter\", true, 12, \"#ffff00\", \"N\", -1, \"TextOnly\", false, 5000);\n\n// Hide the label later\nLabelMgr.setLabelShow(marsLabel, false);\n\n// Change text dynamically\nLabelMgr.setLabelText(marsLabel, \"Mars - Now Visible!\");"
+    },
+    {
+        "name": "labelObject",
+        "category": "Labels - Object Labels",
+        "signature": "labelObject(QString text, QString objectName, bool visible, float fontSize, Vec3f fontColor, QString side, double labelDistance, QString style, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label attached to a celestial object using a Vec3f color vector. The label follows the object as it moves across the sky.",
+        "parameters": [
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Text content to display as the label",
+                "required": true
+            },
+            {
+                "name": "objectName",
+                "type": "QString",
+                "description": "English name of the celestial object to attach the label to",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "If true, the label starts visible; if false, starts hidden",
+                "required": true
+            },
+            {
+                "name": "fontSize",
+                "type": "float",
+                "description": "Font size in pixels",
+                "required": true
+            },
+            {
+                "name": "fontColor",
+                "type": "Vec3f",
+                "description": "RGB color vector (R, G, B) with values between 0.0 and 1.0",
+                "required": true
+            },
+            {
+                "name": "side",
+                "type": "QString",
+                "description": "Position relative to object: 'N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW'",
+                "required": false,
+                "default": "\"E\""
+            },
+            {
+                "name": "labelDistance",
+                "type": "double",
+                "description": "Distance offset from object in pixels (-1 for automatic)",
+                "required": false,
+                "default": "-1.0"
+            },
+            {
+                "name": "style",
+                "type": "QString",
+                "description": "Label style: 'TextOnly' or 'Line'",
+                "required": false,
+                "default": "\"TextOnly\""
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, the label is automatically deleted after being displayed once",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "Auto-delete timeout in milliseconds",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique label ID (returns -1 if object not found)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Create a gold-colored label on Venus\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nvar venusLabel = LabelMgr.labelObject(\"Evening Star\", \"Venus\", true, 16, gold, \"NW\");\n\n// Create a bright red label with a line to the Moon\nvar red = core.vec3f(1.0, 0.0, 0.0);\nvar moonLabel = LabelMgr.labelObject(\"🌙 Moon\", \"Moon\", true, 18, red, \"N\", -1, \"Line\");\n\n// Create a purple label for Jupiter\nvar purple = core.vec3f(0.7, 0.3, 0.8);\nvar jupiterLabel = LabelMgr.labelObject(\"Jupiter\", \"Jupiter\", true, 14, purple, \"SE\");"
+    },
+    {
+        "name": "labelHorizon",
+        "category": "Labels - Horizon Labels",
+        "signature": "labelHorizon(QString text, float az, float alt, bool visible, float fontSize, QString fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label fixed to a specific Altitude/Azimuth (horizontal) coordinate. The label stays at that compass direction and altitude as the sky rotates, useful for marking landscape features or cardinal directions.",
+        "parameters": [
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Text content to display as the label",
+                "required": true
+            },
+            {
+                "name": "az",
+                "type": "float",
+                "description": "Azimuth angle in degrees (0° = North, 90° = East, 180° = South, 270° = West)",
+                "required": true
+            },
+            {
+                "name": "alt",
+                "type": "float",
+                "description": "Altitude angle in degrees (0° = horizon, 90° = zenith)",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "If true, the label starts visible; if false, starts hidden",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "fontSize",
+                "type": "float",
+                "description": "Font size in pixels",
+                "required": false,
+                "default": "14"
+            },
+            {
+                "name": "fontColor",
+                "type": "QString",
+                "description": "HTML-like color specification (e.g., '#00ff00' for green)",
+                "required": false,
+                "default": "\"#999999\""
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, the label is automatically deleted after being displayed once",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "Auto-delete timeout in milliseconds",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Horizon labels introduced in Stellarium 0.15.0"
+        },
+        "example": "// Label the North point on the horizon\nvar northLabel = LabelMgr.labelHorizon(\"North\", 0, 0, true, 16, \"#ffffff\");\n\n// Label the East point\nvar eastLabel = LabelMgr.labelHorizon(\"East\", 90, 0, true, 16, \"#ffffff\");\n\n// Label the South point\nvar southLabel = LabelMgr.labelHorizon(\"South\", 180, 0, true, 16, \"#ffffff\");\n\n// Label the West point\nvar westLabel = LabelMgr.labelHorizon(\"West\", 270, 0, true, 16, \"#ffffff\");\n\n// Label a mountain peak at 30° altitude toward the southwest\nvar mountainLabel = LabelMgr.labelHorizon(\"Mount Everest\", 225, 30, true, 14, \"#88ff88\");\n\n// Create a temporary zenith marker (disappears after 10 seconds)\nvar zenithLabel = LabelMgr.labelHorizon(\"ZENITH\", 0, 90, true, 12, \"#ffff00\", false, 10000);"
+    },
+    {
+        "name": "labelHorizon",
+        "category": "Labels - Horizon Labels",
+        "signature": "labelHorizon(QString text, float az, float alt, bool visible, float fontSize, Vec3f fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label fixed to a specific Altitude/Azimuth (horizontal) coordinate using a Vec3f color vector.",
+        "parameters": [
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Text content to display as the label",
+                "required": true
+            },
+            {
+                "name": "az",
+                "type": "float",
+                "description": "Azimuth angle in degrees",
+                "required": true
+            },
+            {
+                "name": "alt",
+                "type": "float",
+                "description": "Altitude angle in degrees",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "If true, the label starts visible; if false, starts hidden",
+                "required": true
+            },
+            {
+                "name": "fontSize",
+                "type": "float",
+                "description": "Font size in pixels",
+                "required": true
+            },
+            {
+                "name": "fontColor",
+                "type": "Vec3f",
+                "description": "RGB color vector (R, G, B) with values between 0.0 and 1.0",
+                "required": true
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, the label is automatically deleted after being displayed once",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "Auto-delete timeout in milliseconds",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Horizon labels introduced in Stellarium 0.15.0"
+        },
+        "example": "// Create a cyan-colored label at the celestial equator on the horizon\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nvar equatorLabel = LabelMgr.labelHorizon(\"Equator crossing\", 90, 0, true, 14, cyan);\n\n// Create a bright orange label for sunset direction\nvar orange = core.vec3f(1.0, 0.65, 0.0);\nvar sunsetLabel = LabelMgr.labelHorizon(\"Sunset\", 270, 0, true, 16, orange);\n\n// Create a green label for a landmark\nvar green = core.vec3f(0.3, 0.9, 0.3);\nvar landmarkLabel = LabelMgr.labelHorizon(\"My House\", 120, 5, true, 12, green);"
+    },
+    {
+        "name": "labelEquatorial",
+        "category": "Labels - Equatorial Labels",
+        "signature": "labelEquatorial(QString text, QString ra, QString dec, bool visible, float fontSize, QString fontColor, QString side, double labelDistance, bool autoDelete, int autoDeleteTimeoutMs, bool j2000epoch)",
+        "description": "Creates a text label fixed to a specific Equatorial coordinate (Right Ascension/Declination). Useful for marking deep-sky object positions or celestial coordinates that stay fixed relative to the stars.",
+        "parameters": [
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Text content to display as the label",
+                "required": true
+            },
+            {
+                "name": "ra",
+                "type": "QString",
+                "description": "Right Ascension (e.g., '5h10m31s', '82.5°', '2h30m')",
+                "required": true
+            },
+            {
+                "name": "dec",
+                "type": "QString",
+                "description": "Declination (e.g., '25d30m30s', '-45°', '+30d15m')",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "If true, the label starts visible; if false, starts hidden",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "fontSize",
+                "type": "float",
+                "description": "Font size in pixels",
+                "required": false,
+                "default": "14"
+            },
+            {
+                "name": "fontColor",
+                "type": "QString",
+                "description": "HTML-like color specification (e.g., '#ffaa00')",
+                "required": false,
+                "default": "\"#999999\""
+            },
+            {
+                "name": "side",
+                "type": "QString",
+                "description": "Position relative to coordinate point: 'N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW'",
+                "required": false,
+                "default": "\"\""
+            },
+            {
+                "name": "labelDistance",
+                "type": "double",
+                "description": "Distance offset in pixels (-1 for automatic)",
+                "required": false,
+                "default": "-1.0"
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, automatically deleted after display",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "Auto-delete timeout in milliseconds",
+                "required": false,
+                "default": "0"
+            },
+            {
+                "name": "j2000epoch",
+                "type": "bool",
+                "description": "If true, coordinates are treated as J2000.0 epoch; if false, as current date coordinates",
+                "required": false,
+                "default": "true"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Mark the position of the Andromeda Galaxy (M31)\nvar m31Label = LabelMgr.labelEquatorial(\"Andromeda Galaxy (M31)\", \"0h42m44s\", \"+41°16′09″\", true, 14, \"#ffcc88\", \"NE\");\n\n// Mark the position of the Orion Nebula (M42)\nvar m42Label = LabelMgr.labelEquatorial(\"Orion Nebula (M42)\", \"5h35m17s\", \"-5°23′28″\", true, 12, \"#ff8888\", \"NW\");\n\n// Mark the North Celestial Pole (J2000)\nvar ncpLabel = LabelMgr.labelEquatorial(\"North Celestial Pole\", \"0h\", \"+90°\", true, 14, \"#ffffff\", \"C\");\n\n// Mark the Pleiades (M45)\nvar m45Label = LabelMgr.labelEquatorial(\"Pleiades (M45)\", \"3h47m24s\", \"+24°07′00″\", true, 13, \"#88ccff\", \"N\");\n\n// Mark a position in current date coordinates (not J2000)\nvar customLabel = LabelMgr.labelEquatorial(\"Custom Point\", \"12h30m\", \"+45°\", true, 12, \"#00ff00\", \"E\", -1, false, 0, false);"
+    },
+    {
+        "name": "labelEquatorial",
+        "category": "Labels - Equatorial Labels",
+        "signature": "labelEquatorial(QString text, QString ra, QString dec, bool visible, float fontSize, Vec3f fontColor, QString side, double labelDistance, bool autoDelete, int autoDeleteTimeoutMs, bool j2000epoch)",
+        "description": "Creates a text label fixed to a specific Equatorial coordinate using a Vec3f color vector.",
+        "parameters": [
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Text content to display as the label",
+                "required": true
+            },
+            {
+                "name": "ra",
+                "type": "QString",
+                "description": "Right Ascension (e.g., '5h10m31s' or '82.5°')",
+                "required": true
+            },
+            {
+                "name": "dec",
+                "type": "QString",
+                "description": "Declination (e.g., '25d30m30s' or '-45°')",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "If true, the label starts visible; if false, starts hidden",
+                "required": true
+            },
+            {
+                "name": "fontSize",
+                "type": "float",
+                "description": "Font size in pixels",
+                "required": true
+            },
+            {
+                "name": "fontColor",
+                "type": "Vec3f",
+                "description": "RGB color vector (R, G, B) with values between 0.0 and 1.0",
+                "required": true
+            },
+            {
+                "name": "side",
+                "type": "QString",
+                "description": "Position relative to coordinate point",
+                "required": false,
+                "default": "\"\""
+            },
+            {
+                "name": "labelDistance",
+                "type": "double",
+                "description": "Distance offset in pixels (-1 for automatic)",
+                "required": false,
+                "default": "-1.0"
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, automatically deleted after display",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "Auto-delete timeout in milliseconds",
+                "required": false,
+                "default": "0"
+            },
+            {
+                "name": "j2000epoch",
+                "type": "bool",
+                "description": "If true, coordinates are treated as J2000.0 epoch",
+                "required": false,
+                "default": "true"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Mark the galactic center position in gold\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nvar galacticCenter = LabelMgr.labelEquatorial(\"Galactic Center\", \"17h45m40s\", \"-29°00′28″\", true, 16, gold, \"C\");\n\n// Mark the Vega position in light blue\nvar lightBlue = core.vec3f(0.5, 0.7, 1.0);\nvar vegaLabel = LabelMgr.labelEquatorial(\"Vega (α Lyrae)\", \"18h36m56s\", \"+38°47′01″\", true, 14, lightBlue, \"NE\");\n\n// Mark the Crab Nebula (M1) in orange\nvar orange = core.vec3f(1.0, 0.65, 0.0);\nvar crabLabel = LabelMgr.labelEquatorial(\"Crab Nebula (M1)\", \"5h34m32s\", \"+22°00′52″\", true, 12, orange, \"NW\");"
+    },
+    {
+        "name": "labelScreen",
+        "category": "Labels - Screen Labels",
+        "signature": "labelScreen(QString text, int x, int y, bool visible, float fontSize, QString fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label fixed to a specific pixel position on the screen. The label stays at the same screen coordinates regardless of sky movement, useful for UI messages, headers, or status displays.",
+        "parameters": [
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Text content to display as the label",
+                "required": true
+            },
+            {
+                "name": "x",
+                "type": "int",
+                "description": "X coordinate in pixels from the left edge of the screen",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "int",
+                "description": "Y coordinate in pixels from the top edge of the screen",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "If true, the label starts visible; if false, starts hidden",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "fontSize",
+                "type": "float",
+                "description": "Font size in pixels",
+                "required": false,
+                "default": "14"
+            },
+            {
+                "name": "fontColor",
+                "type": "QString",
+                "description": "HTML-like color specification (e.g., '#ffffff' for white)",
+                "required": false,
+                "default": "\"#999999\""
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, the label is automatically deleted after being displayed once",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "Auto-delete timeout in milliseconds",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Create a title banner at the top of the screen\nvar titleLabel = LabelMgr.labelScreen(\"★ My Stellarium Presentation ★\", 10, 10, true, 20, \"#ffcc00\");\n\n// Get screen dimensions using core functions\nvar screenWidth = core.getScreenWidth();\nvar screenHeight = core.getScreenHeight();\n\n// Create a status message at the bottom-left corner\nvar statusLabel = LabelMgr.labelScreen(\"Tracking Mars...\", 10, screenHeight - 30, true, 12, \"#88ff88\");\n\n// Create a centered title\nvar centeredTitle = LabelMgr.labelScreen(\"Welcome!\", screenWidth / 2 - 50, 50, true, 24, \"#ffffff\");\n\n// Create a temporary notification (auto-deletes after 3 seconds)\nvar notification = LabelMgr.labelScreen(\"Event recorded!\", 100, 100, true, 16, \"#ffffff\", false, 3000);\n\n// Hide the title later\nLabelMgr.setLabelShow(titleLabel, false);\n\n// Update label text dynamically\nLabelMgr.setLabelText(statusLabel, \"Tracking Jupiter...\");"
+    },
+    {
+        "name": "labelScreen",
+        "category": "Labels - Screen Labels",
+        "signature": "labelScreen(QString text, int x, int y, bool visible, float fontSize, Vec3f fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label fixed to a specific pixel position on the screen using a Vec3f color vector.",
+        "parameters": [
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Text content to display as the label",
+                "required": true
+            },
+            {
+                "name": "x",
+                "type": "int",
+                "description": "X coordinate in pixels from the left edge",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "int",
+                "description": "Y coordinate in pixels from the top edge",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "If true, the label starts visible; if false, starts hidden",
+                "required": true
+            },
+            {
+                "name": "fontSize",
+                "type": "float",
+                "description": "Font size in pixels",
+                "required": true
+            },
+            {
+                "name": "fontColor",
+                "type": "Vec3f",
+                "description": "RGB color vector (R, G, B) with values between 0.0 and 1.0",
+                "required": true
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, the label is automatically deleted after being displayed once",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "Auto-delete timeout in milliseconds",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Create a centered title in gold color\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nvar screenWidth = core.getScreenWidth();\nvar titleLabel = LabelMgr.labelScreen(\"Welcome to Stellarium\", screenWidth / 2 - 100, 20, true, 24, gold);\n\n// Create a footer in cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nvar screenHeight = core.getScreenHeight();\nvar footerLabel = LabelMgr.labelScreen(\"Press F1 for help\", 10, screenHeight - 25, true, 10, cyan);\n\n// Create a warning message in red\nvar red = core.vec3f(1.0, 0.2, 0.2);\nvar warningLabel = LabelMgr.labelScreen(\"⚠ Warning: Low Battery\", screenWidth - 200, 10, true, 12, red, false, 5000);"
+    },
+    {
+        "name": "getLabelShow",
+        "category": "Labels - Control",
+        "signature": "bool getLabelShow(int id)",
+        "description": "Returns whether a label is currently visible (shown) or hidden. Returns false if the label ID does not exist.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "The unique label ID returned by one of the label creation functions",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the label is visible, false if hidden or label does not exist",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var labelId = LabelMgr.labelObject(\"Test Label\", \"Mars\", true);\n\nif(LabelMgr.getLabelShow(labelId)) {\n    core.debug(\"Label is visible\");\n} else {\n    core.debug(\"Label is hidden\");\n}\n\n// Check if a label exists (returns false for invalid IDs)\nif(!LabelMgr.getLabelShow(99999)) {\n    core.debug(\"Label ID 99999 does not exist\");\n}"
+    },
+    {
+        "name": "setLabelShow",
+        "category": "Labels - Control",
+        "signature": "setLabelShow(int id, bool show)",
+        "description": "Shows or hides an existing label by its ID. The label fades in/out smoothly.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "The unique label ID returned by one of the label creation functions",
+                "required": true
+            },
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show the label, false to hide it",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var labelId = LabelMgr.labelObject(\"Temporary Label\", \"Jupiter\", true);\n\ncore.wait(2);\n// Hide the label after 2 seconds\nLabelMgr.setLabelShow(labelId, false);\n\ncore.wait(2);\n// Show it again after another 2 seconds\nLabelMgr.setLabelShow(labelId, true);"
+    },
+    {
+        "name": "setLabelText",
+        "category": "Labels - Control",
+        "signature": "setLabelText(int id, QString newText)",
+        "description": "Changes the text content of an existing label. Useful for updating status messages, counters, or dynamic information without creating a new label.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "The unique label ID returned by one of the label creation functions",
+                "required": true
+            },
+            {
+                "name": "newText",
+                "type": "QString",
+                "description": "The new text to display in the label",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Create a label that updates dynamically\nvar counterLabel = LabelMgr.labelScreen(\"Count: 0\", 10, 10, true, 14, \"#ffffff\");\n\n// Simple counter using loop (Note: core.wait in loop may not work as expected in all versions)\nLabelMgr.setLabelText(counterLabel, \"Count: 1\");\ncore.wait(1);\nLabelMgr.setLabelText(counterLabel, \"Count: 2\");\ncore.wait(1);\nLabelMgr.setLabelText(counterLabel, \"Count: 3\");\n\n// Update an object label with current altitude information\nvar marsLabel = LabelMgr.labelObject(\"Mars\", \"Mars\", true);\nvar marsInfo = core.getObjectInfo(\"Mars\");\nif(marsInfo) {\n    var altDegrees = parseFloat(marsInfo[\"altitude\"]);\n    LabelMgr.setLabelText(marsLabel, \"Mars - Alt: \" + altDegrees.toFixed(1) + \"°\");\n}"
+    },
+    {
+        "name": "deleteLabel",
+        "category": "Labels - Control",
+        "signature": "deleteLabel(int id)",
+        "description": "Permanently deletes a label by its ID. The label is removed from memory and will no longer be displayed. Useful for cleaning up labels that are no longer needed.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "The unique label ID returned by one of the label creation functions",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Create a temporary label\nvar tempLabel = LabelMgr.labelObject(\"Temporary Note\", \"Saturn\", true);\n\n// Wait 5 seconds (simulate a long operation)\ncore.debug(\"Label created, waiting 5 seconds...\");\n\n// In a real script, you would use core.wait() or a timer\n// For this example, we assume 5 seconds have passed\n\n// Delete it\nLabelMgr.deleteLabel(tempLabel);\ncore.debug(\"Label deleted\");\n\n// Safe deletion with existence check (deleteLabel does nothing for invalid IDs)\nLabelMgr.deleteLabel(99999); // No error, just ignored"
+    },
+    {
+        "name": "deleteAllLabels",
+        "category": "Labels - Control",
+        "signature": "int deleteAllLabels()",
+        "description": "Deletes all custom labels created by the script. Returns the number of labels that were deleted. Useful for cleaning up at the end of a presentation or script.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Number of labels deleted",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Create multiple labels\nvar label1 = LabelMgr.labelObject(\"Label 1\", \"Mars\", true);\nvar label2 = LabelMgr.labelObject(\"Label 2\", \"Jupiter\", true);\nvar label3 = LabelMgr.labelHorizon(\"Label 3\", 90, 30, true);\nvar label4 = LabelMgr.labelScreen(\"Label 4\", 10, 10, true, 12, \"#ffffff\");\n\ncore.debug(\"Created 4 labels\");\n\n// Clean up all labels at the end of the script\nvar deletedCount = LabelMgr.deleteAllLabels();\ncore.debug(\"Deleted \" + deletedCount + \" labels\");\n\n// Use at the end of a presentation\nfunction cleanup() {\n    var count = LabelMgr.deleteAllLabels();\n    core.debug(\"Presentation cleanup complete. Removed \" + count + \" labels.\");\n}\n\n// Call cleanup when done\n// cleanup();"
+    }
+]

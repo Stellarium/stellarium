@@ -1,0 +1,357 @@
+[
+    {
+        "name": "enabled",
+        "category": "ArchaeoLines - Core",
+        "signature": "bool enabled",
+        "type": "property",
+        "access": "read-write",
+        "description": "Enable or disable the ArchaeoLines plugin.",
+        "example": "// Enable the plugin\ncore.setStelProperty(\"ArchaeoLines.enabled\", true);\n\n// Check if enabled\nvar isEnabled = core.getStelProperty(\"ArchaeoLines.enabled\");\n//Show response on stellarium Help:log\nconsole.log(\"ArchaeoLines enabled:\", isEnabled);\n//Show response on debug log\ncore.debug(\"ArchaeoLines enabled:\" + isEnabled);"
+    },
+    {
+        "name": "flagShowEquinox",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowEquinox",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the Equinox line (Celestial Equator).",
+        "example": "// Show the equinox line\ncore.setStelProperty(\"ArchaeoLines.flagShowEquinox\", true);"
+    },
+    {
+        "name": "flagShowSolstices",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowSolstices",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the Solstice lines (Summer and Winter).",
+        "example": "// Hide solstice lines\ncore.setStelProperty(\"ArchaeoLines.flagShowSolstices\", false);"
+    },
+    {
+        "name": "flagShowCrossquarters",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowCrossquarters",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the Cross-quarter day lines (days midway between solstices and equinoxes).",
+        "example": "// Show cross-quarter lines\ncore.setStelProperty(\"ArchaeoLines.flagShowCrossquarters\", true);"
+    },
+    {
+        "name": "flagShowMajorStandstills",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowMajorStandstills",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the Major Lunar Standstill lines.",
+        "example": "// Show major lunar standstill lines\ncore.setStelProperty(\"ArchaeoLines.flagShowMajorStandstills\", true);"
+    },
+    {
+        "name": "flagShowMinorStandstills",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowMinorStandstills",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the Minor Lunar Standstill lines.",
+        "example": "// Show minor lunar standstill lines\ncore.setStelProperty(\"ArchaeoLines.flagShowMinorStandstills\", true);"
+    },
+    {
+        "name": "flagShowPolarCircles",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowPolarCircles",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the Polar Circles (Arctic and Antarctic).",
+        "example": "// Show polar circles\ncore.setStelProperty(\"ArchaeoLines.flagShowPolarCircles\", true);"
+    },
+    {
+        "name": "flagShowZenithPassage",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowZenithPassage",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the Zenith Passage line (the declination line that passes through the zenith at the observer's latitude).",
+        "example": "// Show zenith passage line\ncore.setStelProperty(\"ArchaeoLines.flagShowZenithPassage\", true);"
+    },
+    {
+        "name": "flagShowNadirPassage",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowNadirPassage",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the Nadir Passage line.",
+        "example": "// Show nadir passage line\ncore.setStelProperty(\"ArchaeoLines.flagShowNadirPassage\", true);"
+    },
+    {
+        "name": "flagShowSelectedObject",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowSelectedObject",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the declination line of the currently selected object.",
+        "example": "// Show selected object's declination line\ncore.setStelProperty(\"ArchaeoLines.flagShowSelectedObject\", true);"
+    },
+    {
+        "name": "flagShowSelectedObjectAzimuth",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowSelectedObjectAzimuth",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the azimuth line of the currently selected object.",
+        "example": "// Show selected object's azimuth line\ncore.setStelProperty(\"ArchaeoLines.flagShowSelectedObjectAzimuth\", true);"
+    },
+    {
+        "name": "flagShowSelectedObjectHourAngle",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowSelectedObjectHourAngle",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the hour angle line of the currently selected object.",
+        "example": "// Show selected object's hour angle line\ncore.setStelProperty(\"ArchaeoLines.flagShowSelectedObjectHourAngle\", true);"
+    },
+    {
+        "name": "flagShowCurrentSun",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowCurrentSun",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the current declination line of the Sun.",
+        "example": "// Show Sun's current declination line\ncore.setStelProperty(\"ArchaeoLines.flagShowCurrentSun\", true);"
+    },
+    {
+        "name": "flagShowCurrentMoon",
+        "category": "ArchaeoLines - Display",
+        "signature": "bool flagShowCurrentMoon",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the current declination line of the Moon.",
+        "example": "// Show Moon's current declination line\ncore.setStelProperty(\"ArchaeoLines.flagShowCurrentMoon\", true);"
+    },
+    {
+        "name": "flagShowGeographicLocation1",
+        "category": "ArchaeoLines - Geographic",
+        "signature": "bool flagShowGeographicLocation1",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the azimuth line pointing to the first geographic location (e.g., Mecca).",
+        "example": "// Show Qibla direction (Mecca)\ncore.setStelProperty(\"ArchaeoLines.flagShowGeographicLocation1\", true);"
+    },
+    {
+        "name": "flagShowGeographicLocation2",
+        "category": "ArchaeoLines - Geographic",
+        "signature": "bool flagShowGeographicLocation2",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the azimuth line pointing to the second geographic location (e.g., Jerusalem).",
+        "example": "// Show direction to second location\ncore.setStelProperty(\"ArchaeoLines.flagShowGeographicLocation2\", true);"
+    },
+    {
+        "name": "geographicLocation1Longitude",
+        "category": "ArchaeoLines - Geographic",
+        "signature": "double geographicLocation1Longitude",
+        "type": "property",
+        "access": "read-write",
+        "description": "Longitude (in degrees) for the first geographic location.",
+        "example": "// Set Mecca longitude (East positive)\ncore.setStelProperty(\"ArchaeoLines.geographicLocation1Longitude\", 39.826175);"
+    },
+    {
+        "name": "geographicLocation1Latitude",
+        "category": "ArchaeoLines - Geographic",
+        "signature": "double geographicLocation1Latitude",
+        "type": "property",
+        "access": "read-write",
+        "description": "Latitude (in degrees) for the first geographic location.",
+        "example": "// Set Mecca latitude\ncore.setStelProperty(\"ArchaeoLines.geographicLocation1Latitude\", 21.422476);"
+    },
+    {
+        "name": "geographicLocation1Label",
+        "category": "ArchaeoLines - Geographic",
+        "signature": "QString geographicLocation1Label",
+        "type": "property",
+        "access": "read-write",
+        "description": "Label text displayed for the first geographic location line.",
+        "example": "// Change the label\ncore.setStelProperty(\"ArchaeoLines.geographicLocation1Label\", \"Mecca (Qibla)\");"
+    },
+    {
+        "name": "flagShowCustomAzimuth1",
+        "category": "ArchaeoLines - Custom",
+        "signature": "bool flagShowCustomAzimuth1",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the first custom azimuth line.",
+        "example": "// Show custom azimuth line\ncore.setStelProperty(\"ArchaeoLines.flagShowCustomAzimuth1\", true);"
+    },
+    {
+        "name": "customAzimuth1",
+        "category": "ArchaeoLines - Custom",
+        "signature": "double customAzimuth1",
+        "type": "property",
+        "access": "read-write",
+        "description": "Angle in degrees for the first custom azimuth line (measured from North towards East).",
+        "example": "// Set custom azimuth to 45 degrees (NE)\ncore.setStelProperty(\"ArchaeoLines.customAzimuth1\", 45.0);"
+    },
+    {
+        "name": "customAzimuth1Label",
+        "category": "ArchaeoLines - Custom",
+        "signature": "QString customAzimuth1Label",
+        "type": "property",
+        "access": "read-write",
+        "description": "Label text for the first custom azimuth line.",
+        "example": "// Label the custom line\ncore.setStelProperty(\"ArchaeoLines.customAzimuth1Label\", \"My Alignment\");"
+    },
+    {
+        "name": "flagShowCustomAltitude1",
+        "category": "ArchaeoLines - Custom",
+        "signature": "bool flagShowCustomAltitude1",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the first custom altitude line (circle of constant altitude).",
+        "example": "// Show custom altitude circle\ncore.setStelProperty(\"ArchaeoLines.flagShowCustomAltitude1\", true);"
+    },
+    {
+        "name": "customAltitude1",
+        "category": "ArchaeoLines - Custom",
+        "signature": "double customAltitude1",
+        "type": "property",
+        "access": "read-write",
+        "description": "Altitude angle in degrees for the first custom altitude line.",
+        "example": "// Set altitude circle at 30 degrees\ncore.setStelProperty(\"ArchaeoLines.customAltitude1\", 30.0);"
+    },
+    {
+        "name": "flagShowCustomDeclination1",
+        "category": "ArchaeoLines - Custom",
+        "signature": "bool flagShowCustomDeclination1",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide the first custom declination line.",
+        "example": "// Show custom declination line\ncore.setStelProperty(\"ArchaeoLines.flagShowCustomDeclination1\", true);"
+    },
+    {
+        "name": "customDeclination1",
+        "category": "ArchaeoLines - Custom",
+        "signature": "double customDeclination1",
+        "type": "property",
+        "access": "read-write",
+        "description": "Declination angle in degrees for the first custom declination line.",
+        "example": "// Set declination line at +20 degrees\ncore.setStelProperty(\"ArchaeoLines.customDeclination1\", 20.0);"
+    },
+    {
+        "name": "equinoxColor",
+        "category": "ArchaeoLines - Colors",
+        "signature": "Vec3f equinoxColor",
+        "type": "property",
+        "access": "read-write (via method)",
+        "description": "Color of the Equinox line. To set: use ArchaeoLines.setEquinoxColor(). To read: use core.getStelProperty().",
+        "example": "// Change equinox color to cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nArchaeoLines.setEquinoxColor(cyan);\n\n// Read current color\nvar colorStr = core.getStelProperty(\"ArchaeoLines.equinoxColor\");\nconsole.log(\"Current equinox color:\", colorStr);"
+    },
+    {
+        "name": "solsticesColor",
+        "category": "ArchaeoLines - Colors",
+        "signature": "Vec3f solsticesColor",
+        "type": "property",
+        "access": "read-write (via method)",
+        "description": "Color of the Solstice lines.",
+        "example": "// Change solstice colors to red\nvar red = core.vec3f(1.0, 0.2, 0.2);\nArchaeoLines.setSolsticesColor(red);"
+    },
+    {
+        "name": "currentSunColor",
+        "category": "ArchaeoLines - Colors",
+        "signature": "Vec3f currentSunColor",
+        "type": "property",
+        "access": "read-write (via method)",
+        "description": "Color of the Sun's current declination line.",
+        "example": "// Change Sun's line color to yellow\nvar yellow = core.vec3f(1.0, 1.0, 0.0);\nArchaeoLines.setCurrentSunColor(yellow);"
+    },
+    {
+        "name": "lineWidth",
+        "category": "ArchaeoLines - Appearance",
+        "signature": "int lineWidth",
+        "type": "property",
+        "access": "read-write",
+        "description": "Width of all ArchaeoLines in pixels (default: 1, range: 1-8).",
+        "example": "// Increase line thickness for better visibility\ncore.setStelProperty(\"ArchaeoLines.lineWidth\", 3);"
+    },
+    {
+        "name": "enableArchaeoLines",
+        "category": "ArchaeoLines - Core",
+        "signature": "void enableArchaeoLines(bool b)",
+        "type": "slot",
+        "description": "Enables or disables the ArchaeoLines plugin. Equivalent to setting the 'enabled' property.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to enable, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Enable using slot\nArchaeoLines.enableArchaeoLines(true);"
+    },
+    {
+        "name": "showCurrentPlanetNamed",
+        "category": "ArchaeoLines - Planets",
+        "signature": "void showCurrentPlanetNamed(const QString &planet)",
+        "type": "slot",
+        "description": "Selects which planet's current declination line to display.",
+        "parameters": [
+            {
+                "name": "planet",
+                "type": "QString",
+                "description": "Planet name: 'none', 'Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn'",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Track Mars\nArchaeoLines.showCurrentPlanetNamed(\"Mars\");\n\n// Stop tracking planets\nArchaeoLines.showCurrentPlanetNamed(\"none\");"
+    },
+    {
+        "name": "setEquinoxColor",
+        "category": "ArchaeoLines - Colors",
+        "signature": "void setEquinoxColor(Vec3f color)",
+        "type": "slot",
+        "description": "Sets the color of the Equinox line. Use core.vec3f(r, g, b) to create the color vector.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector (values 0.0 to 1.0)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Set equinox line to bright green\nvar green = core.vec3f(0.2, 0.9, 0.2);\nArchaeoLines.setEquinoxColor(green);"
+    },
+    {
+        "name": "setSolsticesColor",
+        "category": "ArchaeoLines - Colors",
+        "signature": "void setSolsticesColor(Vec3f color)",
+        "type": "slot",
+        "description": "Sets the color of the Solstice lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "var orange = core.vec3f(1.0, 0.65, 0.0);\nArchaeoLines.setSolsticesColor(orange);"
+    },
+    {
+        "name": "setCurrentSunColor",
+        "category": "ArchaeoLines - Colors",
+        "signature": "void setCurrentSunColor(Vec3f color)",
+        "type": "slot",
+        "description": "Sets the color of the Sun's current declination line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "var gold = core.vec3f(1.0, 0.84, 0.0);\nArchaeoLines.setCurrentSunColor(gold);"
+    }
+]
