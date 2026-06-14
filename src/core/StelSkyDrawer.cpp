@@ -519,20 +519,105 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 }
 
 // Draw's the Sun's corona during a solar eclipse on Earth.
-void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color, const float alpha, const float angle)
+// painter: in FrameJ2000
+// pos: solar position, J2000
+// radius: angular dimension of the square texture, not the sun. --> NEW: angular radius of the sun, radians
+// color: attenuated sunlight color (extinction may have reddened the sun)
+// alpha: transparency
+// angle is 0 for an equatorial sky view, solar parallactic angle for an azimuthal mount.
+void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, const float radius, const Vec3f& color, const float alpha, const float angle)
 {
 	texSunCorona->bind();
 	painter->setBlending(true, GL_ONE, GL_ONE);
 
-	Vec3f win;
-	painter->getProjector()->project(v, win);
+	//Vec3f win;
+	//painter->getProjector()->project(v, win);
+	//// For some reason we must mix color with the given alpha as well, else mixing does not work.
+	//painter->setColor(color*alpha, alpha);
+	//// pre-compensate the automatic scaling of sprite painting on HiDPI screens
+	//radius /= static_cast<float>(painter->getProjector()->getDevicePixelsPerPixel());
+	//// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equator angle from that date of 15.43 degrees.
+	//painter->drawSprite2dMode(win[0], win[1], radius, -angle+44.65f-15.43f);
+
+	// TODO: Create a 5x5 mesh with texture coordinates to display a texture quad.
+	// Partly copied from Constellation artwork.
+
+	double ra=0, dec=0;
+	StelUtils::rectToSphe(&ra, &dec, pos);
+
+	// Tessellate texture into an equispaced 5x5 field
+	static const int nbPoints=5;
+	QVector<Vec2f> texCoords((nbPoints-1)*(nbPoints-1)*6);
+	//static bool texInitialized=false;
+	//if (!texInitialized)
+	{
+		texCoords.clear();
+		for (int j=0;j<nbPoints-1;++j)
+		{
+			for (int i=0;i<nbPoints-1;++i)
+			{
+				texCoords << Vec2f((float(i))/(nbPoints-1),     (float(j))/(nbPoints-1));
+				texCoords << Vec2f((float(i)+1.f)/(nbPoints-1), (float(j))/(nbPoints-1));
+				texCoords << Vec2f((float(i))/(nbPoints-1),     (float(j)+1.f)/(nbPoints-1));
+				texCoords << Vec2f((float(i)+1.f)/(nbPoints-1), (float(j))/(nbPoints-1));
+				texCoords << Vec2f((float(i)+1.f)/(nbPoints-1), (float(j)+1.f)/(nbPoints-1));
+				texCoords << Vec2f((float(i))/(nbPoints-1),     (float(j)+1.f)/(nbPoints-1));
+			}
+		}
+	//	texInitialized=true;
+	}
+
+	QVector<Vec3d> contour(texCoords.size());
+	contour.clear();
+	const int centerPoint=nbPoints/2; // point 5:2=2 is the point index in sun's center
+	//qDebug() << "centerpoint:" << centerPoint;
+	for (int j=-centerPoint;j<nbPoints-1-centerPoint;++j)
+	{
+		for (int i=-centerPoint;i<nbPoints-1-centerPoint;++i)
+		{
+			Vec3d vertex;
+			StelUtils::spheToRect(ra-i*(2.f*radius/4),     dec+j*(2.f*radius/(nbPoints-1)), vertex);
+			//qDebug() << "LL vertex:" <<  StelUtils::hoursToHmsStr(StelUtils::fmodpos(ra-i*(2.f*radius/4)  *M_180_PI/15, 24.)) << "/" << StelUtils::decDegToDmsStr(dec+j*2.f*radius/(nbPoints-1)  *M_180_PI);
+			contour << vertex;
+			StelUtils::spheToRect(ra-(i+1)*(2.f*radius/(nbPoints-1)), dec+j*(2.f*radius/(nbPoints-1)), vertex);
+			contour << vertex;
+			StelUtils::spheToRect(ra-i*(2.f*radius/(nbPoints-1)),     dec+(j+1)*(2.f*radius/(nbPoints-1)), vertex);
+			contour << vertex;
+			StelUtils::spheToRect(ra-(i+1)*(2.f*radius/4), dec+j*(2.f*radius/(nbPoints-1)), vertex);
+			contour << vertex;
+			StelUtils::spheToRect(ra-(i+1)*(2.f*radius/4), dec+(j+1)*(2.f*radius/(nbPoints-1)), vertex);
+			//qDebug() << "UR vertex:" <<  StelUtils::hoursToHmsStr(ra-(i+1)*(2.f*radius/4)  *M_180_PI/15) << "/" << StelUtils::decDegToDmsStr(dec+(j+1)*2.f*radius/(nbPoints-1)  *M_180_PI);
+			contour << vertex;
+			StelUtils::spheToRect(ra-i*(2.f*radius/4),     dec+(j+1)*(2.f*radius/(nbPoints-1)), vertex);
+			contour << vertex;
+		}
+	}
+
+	qDebug() << "RAcenter:" << StelUtils::hoursToHmsStr(ra*M_180_PI/15);
+	qDebug() << "DEcenter:" << StelUtils::decDegToDmsStr(dec*M_180_PI);
+	qDebug() << "Image radius" << StelUtils::decDegToDmsStr(radius*M_180_PI);
+	qDebug() << "RA from:" << StelUtils::hoursToHmsStr(StelUtils::fmodpos((ra+2*radius/(nbPoints-1))  *M_180_PI/15, 24.)) << "to:" << StelUtils::hoursToHmsStr(StelUtils::fmodpos((ra-2*radius/(nbPoints-1))  *M_180_PI/15, 24));
+
+
+	qDebug() << "texCoords: " << texCoords.length();
+	qDebug() << "Contours: " << contour.length();
+	//Q_ASSERT(contour.length()==texCoords.length());
+
+
+	coronaPolygon.vertex=contour;
+	coronaPolygon.texCoords=texCoords;
+	coronaPolygon.primitiveType=StelVertexArray::Triangles;
+
+
+	Vec3d aberration(0.);
 	// For some reason we must mix color with the given alpha as well, else mixing does not work.
 	painter->setColor(color*alpha, alpha);
-	// pre-compensate the automatic scaling of sprite painting on HiDPI screens
-	radius /= static_cast<float>(painter->getProjector()->getDevicePixelsPerPixel());
-	// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equator angle from that date of 15.43 degrees.
-	painter->drawSprite2dMode(win[0], win[1], radius, -angle+44.65f-15.43f);
+	//painter->setBlending(true, GL_ONE, GL_ONE);
+	painter->setCullFace(false);
 
+	painter->drawStelVertexArray(coronaPolygon, false, aberration);
+
+	 // GZ: WHY DO WE NEED THIS?
 	postDrawPointSource(painter);
 }
 
