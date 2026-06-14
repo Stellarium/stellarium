@@ -21,9 +21,11 @@ except ImportError:
 
 FILE_MAGIC      = 0x835F040A
 CATALOG_EPOCH   = 2457389.0
-STAR3_REC_SIZE  = 16
+STAR2_REC_SIZE  = 32
 SKYCHART_REC    = 38
-BUCKET_FMT      = struct.Struct('<I h h i i q')  # zone(4)+vmag_i16(2)+bv_i16(2)+ra_i32(4)+dec_i32(4)+gaia_id(8)=24B
+# Intermediate bucket format for Star2: adds pmra(4), pmdec(4), plx(4) to the 24B base
+BUCKET_FMT_24   = struct.Struct('<I h h i i q')           # routing format (24B)
+BUCKET_FMT_STAR2 = struct.Struct('<I h h i i q i i i')    # full Star2 data (36B)
 
 LEVELS = [
     {"name": "stars_8",  "level": 8,  "mag_lo": 16.75, "mag_hi": 18.50, "buckets": 8},
@@ -198,9 +200,16 @@ def _pass1_worker(args):
                     d = counts[cfg["name"]]
                     d[zone] = d.get(zone, 0) + 1
                     bv = bp_rp_to_bv(c)
-                    inter_fhs[cfg["name"]].write(BUCKET_FMT.pack(
+                    # Pass pmra/pmdec/plx from SkyChart 38B record
+                    pmra = struct.unpack_from('<f', data, off+22)[0] if off+26 <= len(data) else 0.0
+                    pmdec = struct.unpack_from('<f', data, off+26)[0] if off+30 <= len(data) else 0.0
+                    plx = struct.unpack_from('<f', data, off+30)[0] if off+34 <= len(data) else 0.0
+
+                    inter_fhs[cfg["name"]].write(BUCKET_FMT_STAR2.pack(
                         zone, int(round(v*1000)), int(round(bv*1000)),
-                        int(round(ra*3600000)), int(round(dec*3600000)), sid))
+                        int(round(ra*3600000)), int(round(dec*3600000)), sid,
+                        int(round(pmra*1000)), int(round(pmdec*1000)),
+                        int(round(plx*100))))
                     break
         grid.clear_cache()
 
@@ -255,13 +264,13 @@ def _sort_bucket(args):
     n = len(zone_count)
     with open(bpath, 'rb') as fb:
         data = fb.read()
-    n_rec = len(data) // BUCKET_FMT.size
+    n_rec = len(data) // BUCKET_FMT_STAR2.size
     records = [(0, 0, b'')] * n_rec
     for i in range(n_rec):
-        off = i * BUCKET_FMT.size
+        off = i * BUCKET_FMT_STAR2.size
         zone = struct.unpack_from('<I', data, off)[0]
         vmag = struct.unpack_from('<h', data, off+4)[0]
-        records[i] = (zone, vmag, data[off:off+BUCKET_FMT.size])
+        records[i] = (zone, vmag, data[off:off+BUCKET_FMT_STAR2.size])
     records.sort(key=lambda r: (r[0], r[1]))
     del data  # free 1.2 GB raw bytes before sort temp memory kicks in
 
@@ -279,19 +288,18 @@ def _sort_bucket(args):
                     break
             if cur_zone >= n:
                 continue
+            # Decode 36B intermediate -> Star2 32B
             gid   = struct.unpack_from('<q', raw, 16)[0]
             ra_i  = struct.unpack_from('<i', raw, 8)[0]
             dec_i = struct.unpack_from('<i', raw, 12)[0]
             bv_i  = struct.unpack_from('<h', raw, 6)[0]
-            v_d   = struct.unpack_from('<h', raw, 4)[0] / 1000.0
-            bv_d  = bv_i / 1000.0
-            ra_d  = ra_i / 3600000.0
-            dec_d = dec_i / 3600000.0
-            buf += struct.pack('<q', gid)
-            buf += struct.pack('<I', int(round(ra_d*36000)) & 0xFFFFFF)[:3]
-            buf += struct.pack('<I', int(round((dec_d+90.0)*36000)) & 0xFFFFFF)[:3]
-            buf.append(max(0, min(255, int(round((bv_d+1.0)/0.025)))))
-            buf.append(max(0, min(255, int(round((v_d-16.0)/0.02)))))
+            vm_i  = struct.unpack_from('<h', raw, 4)[0]
+            pmra_i = struct.unpack_from('<i', raw, 24)[0]
+            pmdec_i = struct.unpack_from('<i', raw, 28)[0]
+            plx_i  = struct.unpack_from('<i', raw, 32)[0]
+            # Star2: gaia_id(8) + ra_i32(4) + dec_i32(4) + pmra_i32(4) + pmdec_i32(4) + b_v_i16(2) + vmag_i16(2) + plx_u16(2) + plx_err_u16(2)
+            buf += struct.pack('<q i i i i h h H H', gid, ra_i, dec_i, pmra_i, pmdec_i, bv_i, vm_i,
+                              max(0, min(65535, plx_i)), 0)
         if cur_zone >= 0 and len(buf) > 0 and cur_zone < n:
             fcat.seek(offsets[cur_zone])
             fcat.write(buf)
@@ -312,19 +320,19 @@ def pass2_to_cat(inter_files, cfg, counts, out_dir, bucket_dir=None):
     total_stars = sum(counts)
     offsets = [28 + nr_zones*4]
     for z in range(1, nr_zones):
-        offsets.append(offsets[-1] + counts[z-1]*STAR3_REC_SIZE)
+        offsets.append(offsets[-1] + counts[z-1]*STAR2_REC_SIZE)
 
     # Step 1: Write .cat header + zone table
     with open(cat_path, 'wb') as fcat:
         fcat.write(struct.pack('<I', FILE_MAGIC))
-        fcat.write(struct.pack('<I', 2))
+        fcat.write(struct.pack('<I', 1))  # type=1 (Star2)
         fcat.write(struct.pack('<I', 0)); fcat.write(struct.pack('<I', 1))
         fcat.write(struct.pack('<I', level))
         fcat.write(struct.pack('<i', int(cfg["mag_lo"]*1000)))
         fcat.write(struct.pack('<f', CATALOG_EPOCH))
         for sz in counts:
             fcat.write(struct.pack('<I', sz))
-        fcat.seek(offsets[-1] + counts[-1]*STAR3_REC_SIZE - 1)
+        fcat.seek(offsets[-1] + counts[-1]*STAR2_REC_SIZE - 1)
         fcat.write(b'\x00')
 
     # Step 2: Route intermediate files -> bucket files
@@ -338,12 +346,12 @@ def pass2_to_cat(inter_files, cfg, counts, out_dir, bucket_dir=None):
             continue
         with open(ipath, 'rb') as sf:
             data = sf.read()
-        for i in range(len(data)//BUCKET_FMT.size):
-            off = i*BUCKET_FMT.size
+        for i in range(len(data)//BUCKET_FMT_STAR2.size):
+            off = i*BUCKET_FMT_STAR2.size
             zone = struct.unpack_from('<I', data, off)[0]
             b = zone // zones_per_bucket
             if b >= n_buckets: b = n_buckets-1
-            bucket_fhs[b].write(data[off:off+BUCKET_FMT.size])
+            bucket_fhs[b].write(data[off:off+BUCKET_FMT_STAR2.size])
             routed += 1
         if (fi+1)%50 == 0:
             print(f"  routed {routed:,} records from {fi+1}/{len(inter_files)} files")
@@ -421,8 +429,8 @@ def main():
                     if not os.path.exists(cp):
                         with open(fpath, "rb") as fh:
                             data = fh.read()
-                        for i in range(len(data) // BUCKET_FMT.size):
-                            zone = struct.unpack_from('<I', data, i * BUCKET_FMT.size)[0]
+                        for i in range(len(data) // BUCKET_FMT_STAR2.size):
+                            zone = struct.unpack_from('<I', data, i * BUCKET_FMT_STAR2.size)[0]
                             counts[name][zone] += 1
             inter_files[name] = sorted(iplist)
             s = sum(counts[name])

@@ -206,9 +206,29 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			{
 				dbStr += "warning - unsupported version ";
 			}
+			else if (static_cast<int>(level) >= 8)
+			{
+				// Use DynamicZoneArray for faint Star2 levels (level >= 8)
+				rval = new DynamicZoneArray(catalogFilePath, file, static_cast<int>(level), static_cast<int>(mag_min));
+			}
 			else
 			{
 				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
+			}
+			break;
+		case 2:
+			if (major > MAX_MAJOR_FILE_VERSION)
+			{
+				dbStr += "warning - unsupported version ";
+			}
+			else if (static_cast<int>(level) >= 8)
+			{
+				// Also support Star3 DynamicZoneArray if needed
+				rval = new DynamicZoneArray(catalogFilePath, file, static_cast<int>(level), static_cast<int>(mag_min));
+			}
+			else
+			{
+				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
 			}
 			break;
 		case 2:

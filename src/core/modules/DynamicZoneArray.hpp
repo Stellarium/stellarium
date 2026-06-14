@@ -30,9 +30,8 @@
 
 //! @class DynamicZoneArray
 //! ZoneArray variant that loads star data on demand from disk.
-//! Only supports Star3 (type=2) records for faint stars (mag >= 18).
-//! Zone table is fully mmap'd; star data is fetched per-zone via seek+read
-//! and cached in an LRU QCache.
+//! Supports Star2 (type=1) records. Zone table is mmap'd; star data is
+//! fetched per-zone via seek+read and cached in an LRU QCache.
 class DynamicZoneArray : public ZoneArray
 {
 public:
@@ -61,8 +60,8 @@ public:
 				  double & RA, double & DEC, double & Plx,
 				  double & pmra, double & pmdec, double & RV) const override;
 
-	//! Load zone data from disk into memory. Returns pointer to Star3 array.
-	const Star3* loadZone(int zone_index) const;
+	//! Load zone data from disk into memory. Returns pointer to Star2 array.
+	const Star2* loadZone(int zone_index) const;
 
 	//! Get star count for a zone (0 if empty).
 	uint32_t zoneStarCount(int zone_index) const { return zoneCounts_[zone_index]; }

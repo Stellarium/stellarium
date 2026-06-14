@@ -61,7 +61,7 @@ DynamicZoneArray::DynamicZoneArray(const QString& fname, QFile* file, int level,
 		for (unsigned int z = b * BLOCK_SIZE; z < zEnd; ++z)
 		{
 			nr_of_stars += zoneCounts_[z];
-			runningOffset += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star3);
+			runningOffset += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star2);
 		}
 		blockOffsets_[b + 1] = runningOffset;
 	}
@@ -98,7 +98,7 @@ DynamicZoneArray::~DynamicZoneArray()
 	}
 }
 
-const Star3* DynamicZoneArray::loadZone(int zoneIndex) const
+const Star2* DynamicZoneArray::loadZone(int zoneIndex) const
 {
 	if (!file || !file->isOpen())
 		return nullptr;
@@ -110,19 +110,19 @@ const Star3* DynamicZoneArray::loadZone(int zoneIndex) const
 	// Check cache first
 	QByteArray* cached = zoneCache_[zoneIndex];
 	if (cached)
-		return reinterpret_cast<const Star3*>(cached->constData());
+		return reinterpret_cast<const Star2*>(cached->constData());
 
 	// Compute byte offset using block table + block-local sum
 	const unsigned int block = zoneIndex / BLOCK_SIZE;
 	uint64_t off = blockOffsets_[block];  // base offset for this block
 	const unsigned int zStart = block * BLOCK_SIZE;
 	for (unsigned int z = zStart; z < static_cast<unsigned int>(zoneIndex); ++z)
-		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star3);
+		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star2);
 
 	// Add star data area base
 	const qint64 starDataBase = 28 + static_cast<qint64>(sizeof(uint32_t)) * nr_of_zones;
 	const qint64 fileOffset = starDataBase + static_cast<qint64>(off);
-	const qint64 size = static_cast<qint64>(count) * sizeof(Star3);
+	const qint64 size = static_cast<qint64>(count) * sizeof(Star2);
 
 	auto* data = new QByteArray(size, Qt::Uninitialized);
 	file->seek(fileOffset);
@@ -135,7 +135,7 @@ const Star3* DynamicZoneArray::loadZone(int zoneIndex) const
 	}
 
 	zoneCache_.insert(zoneIndex, data, data->size());
-	return reinterpret_cast<const Star3*>(data->constData());
+	return reinterpret_cast<const Star2*>(data->constData());
 }
 
 void DynamicZoneArray::prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const
@@ -176,7 +176,7 @@ void DynamicZoneArray::draw(StelPainter* sPainter, int index, bool isInsideViewp
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return;
 
-	const Star3* stars = loadZone(index);
+	const Star2* stars = loadZone(index);
 	if (!stars)
 		return;
 
@@ -207,7 +207,7 @@ void DynamicZoneArray::draw(StelPainter* sPainter, int index, bool isInsideViewp
 
 	for (uint32_t i = 0; i < zoneSize; ++i)
 	{
-		const Star3& s = stars[i];
+		const Star2& s = stars[i];
 
 		int mag = s.getMag();
 		int magIndex = static_cast<int>((mag - (mag_min - 7000.)) * 0.02);
@@ -218,9 +218,8 @@ void DynamicZoneArray::draw(StelPainter* sPainter, int index, bool isInsideViewp
 				break;
 		}
 
-		double RA = s.getX0();
-		double DEC = s.getX1();
-		StelUtils::spheToRect(RA, DEC, v);
+		// Star2: use getJ2000Pos for proper motion
+		s.getJ2000Pos(dyrs, v);
 
 		if (withAberration)
 		{
@@ -282,7 +281,7 @@ void DynamicZoneArray::searchAround(const StelCore* core, int index, const Vec3d
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return;
 
-	const Star3* stars = loadZone(index);
+	const Star2* stars = loadZone(index);
 	if (!stars)
 		return;
 
@@ -318,7 +317,7 @@ void DynamicZoneArray::searchWithin(const StelCore* core, int index,
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return;
 
-	const Star3* stars = loadZone(index);
+	const Star2* stars = loadZone(index);
 	if (!stars)
 		return;
 
@@ -353,7 +352,7 @@ StelObjectP DynamicZoneArray::searchGaiaID(int index, const StarId source_id,
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return StelObjectP();
 
-	const Star3* stars = loadZone(index);
+	const Star2* stars = loadZone(index);
 	if (!stars)
 		return StelObjectP();
 
@@ -376,7 +375,7 @@ void DynamicZoneArray::searchGaiaIDepochPos(const StarId source_id, float dyrs,
 	(void)dyrs;
 	for (unsigned int z = 0; z < nr_of_zones; ++z)
 	{
-		const Star3* stars = loadZone(z);
+		const Star2* stars = loadZone(z);
 		if (!stars)
 			continue;
 
