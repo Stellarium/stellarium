@@ -216,9 +216,9 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			{
 				dbStr += "warning - unsupported version ";
 			}
-			else if (static_cast<int>(level) > 8 || static_cast<int>(mag_min) >= 18000)
+			else if (static_cast<int>(level) >= 8 && type == 2)
 			{
-				// Use DynamicZoneArray for faint stars (level > 8 or mag >= 18.0)
+				// Use DynamicZoneArray for all faint star levels (level >= 8, Star3)
 				rval = new DynamicZoneArray(catalogFilePath, file, static_cast<int>(level), static_cast<int>(mag_min));
 			}
 			else

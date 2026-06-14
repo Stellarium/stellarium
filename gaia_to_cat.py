@@ -26,8 +26,9 @@ SKYCHART_REC    = 38
 BUCKET_FMT      = struct.Struct('<I h h i i q')  # zone(4)+vmag_i16(2)+bv_i16(2)+ra_i32(4)+dec_i32(4)+gaia_id(8)=24B
 
 LEVELS = [
-    {"name": "stars_9",  "level": 9,  "mag_lo": 18.0, "mag_hi": 20.0, "buckets": 12},
-    {"name": "stars_10", "level": 10, "mag_lo": 20.0, "mag_hi": 22.0, "buckets": 48},
+    {"name": "stars_8",  "level": 8,  "mag_lo": 16.75, "mag_hi": 18.50, "buckets": 8},
+    {"name": "stars_9",  "level": 9,  "mag_lo": 18.50, "mag_hi": 20.25, "buckets": 10},
+    {"name": "stars_10", "level": 10, "mag_lo": 20.25, "mag_hi": 23.00, "buckets": 48},
 ]
 
 # ── Geodesic Grid (lazy + per-file cache) ───────────────────────
@@ -381,7 +382,7 @@ def main():
 
     # Find files in gaia3+gaia4 (G<21)
     files = []
-    for sub in ['gaia3','gaia4']:
+    for sub in ['gaia2','gaia3','gaia4']:
         d = os.path.join(args.skychart, sub)
         if os.path.isdir(d):
             for zdir in sorted(os.listdir(d)):
