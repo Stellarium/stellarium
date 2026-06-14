@@ -1189,6 +1189,21 @@ private:
 	//! @returns true if at least one asteroid received an epoch table.
 	bool loadExtendedAsteroidElements(const QString& filePath);
 
+	//! (Re)build systemPlanetsByLevel from the parent pointers of every body
+	//! in systemPlanets.  Level 0 is the Sun, level 1 is every body whose
+	//! parent is the Sun, level 2 is every body whose parent is a level-1
+	//! body, and so on.  computePositions() walks these levels sequentially
+	//! and parallelises only across the siblings of one level, which makes
+	//! the read of a parent's heliocentric position happen-before any child
+	//! reads it -- removing the data race that existed when the parallel
+	//! work was striped across the flat systemPlanets list.
+	//!
+	//! Cheap (O(N * avgDepth), no allocations beyond the level buckets).
+	//! Must be kept in sync with systemPlanets; called from loadPlanets()
+	//! and re-run defensively from computePositions() if the cache size
+	//! ever disagrees with systemPlanets.size().
+	void rebuildDependencyLevels();
+
 	Vec3f getEphemerisMarkerColor(int index) const;
 
 	//! Calculate a color of Solar system bodies
@@ -1240,6 +1255,12 @@ private:
 	QList<PlanetP> systemPlanets;
 	//! List of all the minor bodies of the solar system.
 	QList<PlanetP> systemMinorBodies;
+	//! Bodies of systemPlanets bucketed by their depth in the parent chain.
+	//! Index = depth (0 = Sun, 1 = Sun's children, 2 = moons of planets, ...).
+	//! Used by computePositions() to drive race-free parallelisation: each
+	//! bucket is processed in parallel; buckets are processed in order.
+	//! Maintained by rebuildDependencyLevels(); do not edit by hand.
+	QVector<QVector<PlanetP>> systemPlanetsByLevel;
 
 	// Master settings
 	bool flagOrbits;
