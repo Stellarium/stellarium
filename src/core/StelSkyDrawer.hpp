@@ -131,7 +131,9 @@ public:
 	//! @param radius of current disk size of the sun [radians].
 	//! @param alpha opacity value. Set 1 for full visibility, but usually keep close to 0 except during solar eclipses.
 	// -- NO MORE: @param angle includes parallactic angle (if alt/azimuth frame) and angle between solar polar axis and celestial equator.
-	void drawSunCorona(StelPainter* painter, const Vec3d& v, double radius, const Vec3f& color, const float alpha);
+	//! @param eclipticAngle intersection angle between ecliptic and equatorial coordinates of date (not J2000!).
+	//! This has to be applied to the image, so that the corona is aligned along the ecliptic.
+	void drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, double radius, const Vec3f& color, const float alpha, const double eclipticAngle);
 
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param p the StelPainter instance to use for this drawing operation

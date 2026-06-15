@@ -520,12 +520,14 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 
 // Draw's the Sun's corona during a solar eclipse on Earth.
 // painter: in FrameJ2000
-// pos: solar position, J2000
+// posJ2000: solar position, J2000
 // radius: angular dimension of the square texture, not the sun. --> NEW: angular radius of the sun, radians
 // color: attenuated sunlight color (extinction may have reddened the sun)
 // alpha: transparency
 // NO MORE: angle is 0 for an equatorial sky view, solar parallactic angle for an azimuthal mount.
-void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, double radius, const Vec3f& color, const float alpha)
+// eclipticAngle intersection angle between ecliptic and equatorial coordinates of date (not J2000!).
+// This has to be applied to the image, so that the corona is aligned along the ecliptic.
+void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, double radius, const Vec3f& color, const float alpha, const double eclipticAngle)
 {
 	radius *= (512.f/193.f); // Texture size is 1024, solar radius within is 192 or 193. Increase radius to the width/height of actual image, in radians.
 	texSunCorona->bind();
@@ -544,7 +546,7 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, double
 	// Partly copied from Constellation artwork.
 
 	double ra=0, dec=0;
-	StelUtils::rectToSphe(&ra, &dec, pos);
+	StelUtils::rectToSphe(&ra, &dec, posJ2000);
 
 	// Tessellate texture into an equispaced 5x5 field
 	static const int nbPoints=5;
@@ -568,6 +570,17 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, double
 		texInitialized=true;
 	}
 
+	// Define a rotation matrix that adjusts image rotation in the sky. We must unrotate from the original image orientation and adjust for the new angle of J2000 vs. ecliptic.
+	// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equator angle from that date of 15.43 degrees.
+	// https://en.wikipedia.org/wiki/Rotation_matrix
+	const double theta=(44.65-15.43)*M_PI_180 - eclipticAngle; // dynamical rotation angle!
+	const double cTh=cos(theta);
+	const double mcTh=1.-cTh;
+	const double sTh=sin(theta);
+	const Mat3d R3(posJ2000[0]*posJ2000[0]*mcTh+cTh,        posJ2000[0]*posJ2000[1]*mcTh-posJ2000[2]*sTh, posJ2000[0]*posJ2000[2]*mcTh+posJ2000[1]*sTh,
+		       posJ2000[0]*posJ2000[1]*mcTh+posJ2000[2]*sTh, posJ2000[1]*posJ2000[1]*mcTh+cTh,        posJ2000[1]*posJ2000[2]*mcTh-posJ2000[0]*sTh,
+		       posJ2000[0]*posJ2000[2]*mcTh-posJ2000[1]*sTh, posJ2000[1]*posJ2000[2]*mcTh+posJ2000[0]*sTh, posJ2000[2]*posJ2000[2]*mcTh+cTh);
+
 	static QVector<Vec3d> contour(texCoords.size());
 	contour.clear();
 	const int centerPoint=nbPoints/2; // point 5:2=2 is the point index in sun's center
@@ -585,17 +598,17 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, double
 
 			Vec3d vertex;
 			StelUtils::spheToRect(ra-dRA0*cDecJ0, decJ0, vertex);
-			contour << vertex;
+			contour << R3*vertex;
 			StelUtils::spheToRect(ra-dRA1*cDecJ0, decJ0, vertex);
-			contour << vertex;
+			contour << R3*vertex;
 			StelUtils::spheToRect(ra-dRA0*cDecJ1, decJ1, vertex);
-			contour << vertex;
+			contour << R3*vertex;
 			StelUtils::spheToRect(ra-dRA1*cDecJ0, decJ0, vertex);
-			contour << vertex;
+			contour << R3*vertex;
 			StelUtils::spheToRect(ra-dRA1*cDecJ1, decJ1, vertex);
-			contour << vertex;
+			contour << R3*vertex;
 			StelUtils::spheToRect(ra-dRA0*cDecJ1, decJ1, vertex);
-			contour << vertex;
+			contour << R3*vertex;
 		}
 	}
 

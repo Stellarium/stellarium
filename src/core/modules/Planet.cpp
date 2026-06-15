@@ -4454,13 +4454,18 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		rotationAngle -= q0*static_cast<float>(180.0/M_PI);
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-		const Vec3d pos = getJ2000EquatorialPos(core);
+		const Vec3d pos2000 = getJ2000EquatorialPos(core);
+		Vec3d posNow = getEquinoxEquatorialPos(core); posNow.normalize();
+		double raNow, deNow;
+		StelUtils::rectToSphe(&raNow, &deNow, posNow);
 
 		// Find new extincted color for halo. The method is again rather ad-hoc, but does not look too bad.
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
 		Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 		//core->getSkyDrawer()->drawSunCorona(&sPainter, pos, 512.f/192.f*screenRd, color, alpha*alpha, rotationAngle);
-		core->getSkyDrawer()->drawSunCorona(&sPainter, pos, getAngularRadius(core) * M_PI_180, color, alpha*alpha);
+		double eclAngle=ssm->getEarth() ->getRotObliquity(core->getJDE())*cos(raNow);
+
+		core->getSkyDrawer()->drawSunCorona(&sPainter, pos2000, getAngularRadius(core) * M_PI_180, color, alpha*alpha, eclAngle);
 	}
 
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
