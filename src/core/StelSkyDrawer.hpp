@@ -127,10 +127,11 @@ public:
 	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false, float twinkleFactor=1.0f);
 
 	//! Draw an image of the solar corona onto the screen at position v.
-	//! @param radius depends on the actually used texture and current disk size of the sun.
+	// OLD: @param radius depends on the actually used texture and current disk size of the sun.
+	//! @param radius of current disk size of the sun [radians].
 	//! @param alpha opacity value. Set 1 for full visibility, but usually keep close to 0 except during solar eclipses.
-	//! @param angle includes parallactic angle (if alt/azimuth frame) and angle between solar polar axis and celestial equator.
-	void drawSunCorona(StelPainter* painter, const Vec3d& v, const float radius, const Vec3f& color, const float alpha, const float angle);
+	// -- NO MORE: @param angle includes parallactic angle (if alt/azimuth frame) and angle between solar polar axis and celestial equator.
+	void drawSunCorona(StelPainter* painter, const Vec3d& v, double radius, const Vec3f& color, const float alpha);
 
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param p the StelPainter instance to use for this drawing operation

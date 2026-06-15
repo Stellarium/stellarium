@@ -524,9 +524,10 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 // radius: angular dimension of the square texture, not the sun. --> NEW: angular radius of the sun, radians
 // color: attenuated sunlight color (extinction may have reddened the sun)
 // alpha: transparency
-// angle is 0 for an equatorial sky view, solar parallactic angle for an azimuthal mount.
-void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, const float radius, const Vec3f& color, const float alpha, const float angle)
+// NO MORE: angle is 0 for an equatorial sky view, solar parallactic angle for an azimuthal mount.
+void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, double radius, const Vec3f& color, const float alpha)
 {
+	radius *= (512.f/193.f); // Texture size is 1024, solar radius within is 192 or 193. Increase radius to the width/height of actual image, in radians.
 	texSunCorona->bind();
 	painter->setBlending(true, GL_ONE, GL_ONE);
 
@@ -539,7 +540,7 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, const 
 	//// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equator angle from that date of 15.43 degrees.
 	//painter->drawSprite2dMode(win[0], win[1], radius, -angle+44.65f-15.43f);
 
-	// TODO: Create a 5x5 mesh with texture coordinates to display a texture quad.
+	// Create a 5x5 mesh with texture coordinates to display a texture quad.
 	// Partly copied from Constellation artwork.
 
 	double ra=0, dec=0;
@@ -547,9 +548,9 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, const 
 
 	// Tessellate texture into an equispaced 5x5 field
 	static const int nbPoints=5;
-	QVector<Vec2f> texCoords((nbPoints-1)*(nbPoints-1)*6);
-	//static bool texInitialized=false;
-	//if (!texInitialized)
+	static QVector<Vec2f> texCoords((nbPoints-1)*(nbPoints-1)*6);
+	static bool texInitialized=false;
+	if (!texInitialized)
 	{
 		texCoords.clear();
 		for (int j=0;j<nbPoints-1;++j)
@@ -564,10 +565,10 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, const 
 				texCoords << Vec2f((float(i))/(nbPoints-1),     (float(j)+1.f)/(nbPoints-1));
 			}
 		}
-	//	texInitialized=true;
+		texInitialized=true;
 	}
 
-	QVector<Vec3d> contour(texCoords.size());
+	static QVector<Vec3d> contour(texCoords.size());
 	contour.clear();
 	const int centerPoint=nbPoints/2; // point 5:2=2 is the point index in sun's center
 	//qDebug() << "centerpoint:" << centerPoint;
@@ -575,32 +576,37 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, const 
 	{
 		for (int i=-centerPoint;i<nbPoints-1-centerPoint;++i)
 		{
+			const double decJ0=dec+j    *(2.0*radius/(nbPoints-1));
+			const double decJ1=dec+(j+1)*(2.0*radius/(nbPoints-1));
+			const double cDecJ0=1./cos(decJ0);
+			const double cDecJ1=1./cos(decJ1);
+			const double dRA0=i*(2.0*radius/(nbPoints-1));
+			const double dRA1=(i+1)*(2.0*radius/(nbPoints-1));
+
 			Vec3d vertex;
-			StelUtils::spheToRect(ra-i*(2.0*radius/4.0),     dec+j*(2.0*radius/(nbPoints-1)), vertex);
-			//qDebug() << "LL vertex:" <<  StelUtils::hoursToHmsStr(StelUtils::fmodpos(ra-i*(2.0*radius/4.0)  *M_180_PI/15, 24.)) << "/" << StelUtils::decDegToDmsStr(dec+j*2.0*radius/(nbPoints-1)  *M_180_PI);
+			StelUtils::spheToRect(ra-dRA0*cDecJ0, decJ0, vertex);
 			contour << vertex;
-			StelUtils::spheToRect(ra-(i+1)*(2.0*radius/(nbPoints-1)), dec+j*(2.0*radius/(nbPoints-1)), vertex);
+			StelUtils::spheToRect(ra-dRA1*cDecJ0, decJ0, vertex);
 			contour << vertex;
-			StelUtils::spheToRect(ra-i*(2.0*radius/(nbPoints-1)),     dec+(j+1)*(2.0*radius/(nbPoints-1)), vertex);
+			StelUtils::spheToRect(ra-dRA0*cDecJ1, decJ1, vertex);
 			contour << vertex;
-			StelUtils::spheToRect(ra-(i+1)*(2.0*radius/4.0), dec+j*(2.0*radius/(nbPoints-1)), vertex);
+			StelUtils::spheToRect(ra-dRA1*cDecJ0, decJ0, vertex);
 			contour << vertex;
-			StelUtils::spheToRect(ra-(i+1)*(2.0*radius/4.0), dec+(j+1)*(2.0*radius/(nbPoints-1)), vertex);
-			//qDebug() << "UR vertex:" <<  StelUtils::hoursToHmsStr(ra-(i+1)*(2.0*radius/4.0)  *M_180_PI/15) << "/" << StelUtils::decDegToDmsStr(dec+(j+1)*2.0*radius/(nbPoints-1)  *M_180_PI);
+			StelUtils::spheToRect(ra-dRA1*cDecJ1, decJ1, vertex);
 			contour << vertex;
-			StelUtils::spheToRect(ra-i*(2.0*radius/4.0),     dec+(j+1)*(2.0*radius/(nbPoints-1)), vertex);
+			StelUtils::spheToRect(ra-dRA0*cDecJ1, decJ1, vertex);
 			contour << vertex;
 		}
 	}
 
-	qDebug() << "RAcenter:" << StelUtils::hoursToHmsStr(ra*M_180_PI/15);
-	qDebug() << "DEcenter:" << StelUtils::decDegToDmsStr(dec*M_180_PI);
-	qDebug() << "Image radius" << StelUtils::decDegToDmsStr(radius*M_180_PI);
-	qDebug() << "RA from:" << StelUtils::hoursToHmsStr(StelUtils::fmodpos((ra+2*radius/(nbPoints-1))  *M_180_PI/15, 24.)) << "to:" << StelUtils::hoursToHmsStr(StelUtils::fmodpos((ra-2*radius/(nbPoints-1))  *M_180_PI/15, 24));
+	//qDebug() << "RAcenter:" << StelUtils::hoursToHmsStr(ra*M_180_PI/15);
+	//qDebug() << "DEcenter:" << StelUtils::decDegToDmsStr(dec*M_180_PI);
+	//qDebug() << "Image radius" << StelUtils::decDegToDmsStr(radius*M_180_PI);
+	//qDebug() << "RA from:" << StelUtils::hoursToHmsStr(StelUtils::fmodpos((ra+2*radius/(nbPoints-1))  *M_180_PI/15, 24.)) << "to:" << StelUtils::hoursToHmsStr(StelUtils::fmodpos((ra-2*radius/(nbPoints-1))  *M_180_PI/15, 24));
 
 
-	qDebug() << "texCoords: " << texCoords.length();
-	qDebug() << "Contours: " << contour.length();
+	//qDebug() << "texCoords: " << texCoords.length();
+	//qDebug() << "Contours: " << contour.length();
 	//Q_ASSERT(contour.length()==texCoords.length());
 
 
@@ -609,7 +615,7 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, const 
 	coronaPolygon.primitiveType=StelVertexArray::Triangles;
 
 
-	Vec3d aberration(0.);
+	Vec3d aberration(0.); // TODO!
 	// For some reason we must mix color with the given alpha as well, else mixing does not work.
 	painter->setColor(color*alpha, alpha);
 	//painter->setBlending(true, GL_ONE, GL_ONE);
