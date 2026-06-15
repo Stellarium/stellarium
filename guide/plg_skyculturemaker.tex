@@ -41,6 +41,10 @@ If the Sky Culture Converter was enabled at build time, a \textit{Convert} butto
 The \textit{Edit} button may be present already, but it is disabled because the SCM currently does not support editing existing sky cultures.
 This feature is planned for a future release.
 
+\textbf{Saving partial results:} Since editing an existing sky culture is not yet supported, the following workaround is needed to save partial work and resume later.
+Ensure all metadata is complete so the SCM allows you to export.
+When resuming, create a new temporary sky culture, continue your work there, and then manually merge the two exported JSON files by copying the relevant entries.
+
 \subsection{Converting an Existing Sky Culture}
 \label{sec:plugins:SCM:Converting}
 
@@ -85,7 +89,14 @@ For example, \texttt{chinese\_chenzhuo} and \texttt{chinese\_Chenzhuo} are treat
 \label{sec:plugins:SCM:CreatingSkyCulture}
 
 After pressing \textit{Create} in the start dialog, you will be greeted by the \textit{Overview} tab of the main dialog (Figure~\ref{fig:plugins:SCM:TabsOverviewDescriptionCommonNamesLocation}, panel a).
-This dialog is different from most dialogs in Stellarium, as you can drag it onto a second monitor for more workspace. To resize it on Windows, you must drag the tiny square handle in the bottom-right corner.
+This dialog is different from most dialogs in Stellarium, as it is an independent window that can be moved outside the Stellarium application, including onto a second monitor for more workspace.
+To resize it on Windows, you must drag the tiny square handle in the bottom-right corner.
+
+\noindent\textbf{Note:} Because the dialog is an independent window, it may open \emph{behind} the Stellarium main window and therefore not be immediately visible.
+If nothing seems to have happened after pressing \textit{Create}, the dialog has most likely opened in the background or on another monitor.
+Try clicking once on the Stellarium main window to bring the SCM dialog to the front.
+If that does not work, try minimizing the Stellarium main window.
+The same behaviour applies to the \textit{Constellation Editor} described in section~\ref{sec:plugins:SCM:CreatingConstellation}.
 In the first text input, you may enter a name for your new sky culture. This field is mandatory.
 Below the name field is the constellation list, which is empty until you create constellations (see section~\ref{sec:plugins:SCM:CreatingConstellation}).
 Before doing that, it is worth browsing the remaining tabs.
@@ -152,9 +163,11 @@ The upper part of the tab shows a world map, which allows you to digitize the ge
 Simply click on the map to register corners and extend the polygon.
 \begin{itemize}
 \item At least one polygon is required before exporting the sky culture. You can later edit or refine the GeoJSON format in your GIS applications.
+\item Hold \keys{\shift} and drag with the left mouse button to move the map while drawing.
 \item Press \keys{\ctrl+Z} to undo the last click.
 \item Press \keys{Esc} to discard the entire current polygon.
 \item Double-right-click to finish the polygon. A dialog then asks for the start and end year during which the culture was or is practiced. The special value \texttt{9146} indicates that the culture is still practiced.
+\item A short help summary for all map interactions is available by clicking the \textbf{?} button in the bottom-right corner of the map.
 \end{itemize}
 The polygon data is then saved to a \file{territory.geojson} file.
 For details on its format see section~\ref{sec:skycultures:territory}.
