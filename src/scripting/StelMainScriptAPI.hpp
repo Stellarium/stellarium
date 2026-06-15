@@ -375,6 +375,13 @@ public slots:
 	//! @endcode
 	static QVariantMap getRTS(const QString &objectName, const double altitude=0.);
 
+	//! Get current Equation of Time
+	//! @return current value of equation of time in seconds.
+	//! Equation of time describes the difference between mean time (described by a fictitious mean sun) and apparent time (described by the observable sun).
+	//! Only the apparent (visible) meridian transit of the real sun describes 12:00 Noon in Local True Solar Time (displayed by ordinary sundials).
+	//! A negative value means the apparent (observable, real) sun crosses the meridian after the mean sun which is modelled by ordinary mechanical clocks.
+	static double getEquationOfTime();
+
 	//! Set value for some StelProperty.
 	//! @note This method may be very helpful for change the values in the plugins to avoid crashes when some plugin is not loaded.
 	//! @note See also @ref isModuleLoaded() method
@@ -654,18 +661,18 @@ public slots:
 
 	//! Find out the current sky culture
 	//! @return the ID of the current sky culture (i.e. the name of the directory in
-	//! which the current sky cultures files are found, e.g. "western")
+	//! which the current sky cultures files are found, e.g. "modern")
 	static QString getSkyCulture();
 
 	//! Set the current sky culture
-	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
+	//! @param id the ID of the sky culture to set, e.g. "modern" or "inuit" etc.
 	void setSkyCulture(const QString& id);
 
-	//! Find out the current sky culture and get it English name
+	//! Find out the current sky culture and get its English name
 	//! @return the English name of the current sky culture
 	static QString getSkyCultureName();
 
-	//! Find out the current sky culture and get it localized name
+	//! Find out the current sky culture and get its localized name
 	//! @return the translated name of the current sky culture
 	static QString getSkyCultureNameI18n();
 
