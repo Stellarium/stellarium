@@ -84,6 +84,14 @@ DynamicZoneArray::DynamicZoneArray(const QString& fname, QFile* file, int level,
 
 DynamicZoneArray::~DynamicZoneArray()
 {
+	// Signal async workers to abort, then wait for them
+	fileValid_ = false;
+	for (auto it = pendingLoads_.begin(); it != pendingLoads_.end(); ++it)
+	{
+		it.value().waitForFinished();
+		delete it.value().result();  // free leaked QByteArray from cancelled workers
+	}
+	pendingLoads_.clear();
 	zoneCache_.clear();
 	if (zoneTableMmapStart_ && file)
 	{
@@ -98,43 +106,137 @@ DynamicZoneArray::~DynamicZoneArray()
 	}
 }
 
-const Star2* DynamicZoneArray::loadZone(int zoneIndex) const
+void DynamicZoneArray::drainPendingLoads() const
 {
-	if (!file || !file->isOpen())
-		return nullptr;
+	// Move completed async loads into cache, discard unfinished ones
+	QMutableHashIterator<int, QFuture<QByteArray*>> it(pendingLoads_);
+	while (it.hasNext())
+	{
+		it.next();
+		if (!it.value().isFinished())
+			continue;
+		QByteArray* data = it.value().result();
+		if (data)
+			zoneCache_.insert(it.key(), data, data->size());
+		it.remove();
+	}
+}
 
-	uint32_t count = zoneCounts_[zoneIndex];
-	if (count == 0)
-		return nullptr;
+const Star2* DynamicZoneArray::loadZone(int zone_index) const
+{
+	// Drain completed async loads first
+	drainPendingLoads();
 
-	// Check cache first
-	QByteArray* cached = zoneCache_[zoneIndex];
+	// Check cache
+	QByteArray* cached = zoneCache_[zone_index];
 	if (cached)
 		return reinterpret_cast<const Star2*>(cached->constData());
 
-	// Compute byte offset using block table + block-local sum
-	const unsigned int block = zoneIndex / BLOCK_SIZE;
-	uint64_t off = blockOffsets_[block];  // base offset for this block
+	uint32_t count = zoneCounts_[zone_index];
+	if (count == 0 || !file || !file->isOpen())
+		return nullptr;
+
+	// Check if already being loaded
+	if (pendingLoads_.contains(zone_index))
+		return nullptr;
+
+	if (!fileValid_)
+		return nullptr;
+
+	// Check if already being loaded
+	if (pendingLoads_.contains(zone_index))
+		return nullptr;  // still loading, skip this frame
+
+	if (!fileValid_)
+		return nullptr;
+
+	// Compute offset (same as sync version)
+	const unsigned int block = zone_index / BLOCK_SIZE;
+	uint64_t off = blockOffsets_[block];
 	const unsigned int zStart = block * BLOCK_SIZE;
-	for (unsigned int z = zStart; z < static_cast<unsigned int>(zoneIndex); ++z)
+	for (unsigned int z = zStart; z < static_cast<unsigned int>(zone_index); ++z)
 		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star2);
 
-	// Add star data area base
+	const qint64 starDataBase = 28 + static_cast<qint64>(sizeof(uint32_t)) * nr_of_zones;
+	const qint64 fileOffset = starDataBase + static_cast<qint64>(off);
+	const qint64 size = static_cast<qint64>(count) * sizeof(Star2);
+
+	// Start async load — open own file handle to avoid QFile thread-safety issues
+	auto future = QtConcurrent::run([this, fileOffset, size]() -> QByteArray* {
+		if (!fileValid_)
+			return nullptr;
+		QFile localFile(fname);
+		if (!localFile.open(QIODevice::ReadOnly))
+			return nullptr;
+		auto* data = new QByteArray(size, Qt::Uninitialized);
+		localFile.seek(fileOffset);
+		if (localFile.read(data->data(), size) != size)
+		{
+			delete data;
+			return nullptr;
+		}
+		return data;
+	});
+
+	pendingLoads_.insert(zone_index, future);
+	return nullptr;  // not ready this frame
+}
+
+const Star2* DynamicZoneArray::loadZoneSync(int zone_index) const
+{
+	// For search operations: must block until data is ready
+	drainPendingLoads();
+
+	QByteArray* cached = zoneCache_[zone_index];
+	if (cached)
+		return reinterpret_cast<const Star2*>(cached->constData());
+
+	uint32_t count = zoneCounts_[zone_index];
+	if (count == 0 || !file || !file->isOpen())
+		return nullptr;
+
+	// If async load is in progress, wait for it
+	if (pendingLoads_.contains(zone_index))
+	{
+		QFuture<QByteArray*> f = pendingLoads_.take(zone_index);
+		f.waitForFinished();
+		QByteArray* data = f.result();
+		if (data)
+		{
+			zoneCache_.insert(zone_index, data, data->size());
+			return reinterpret_cast<const Star2*>(data->constData());
+		}
+		return nullptr;
+	}
+
+	// No async pending - do synchronous load
+	const unsigned int block = zone_index / BLOCK_SIZE;
+	uint64_t off = blockOffsets_[block];
+	const unsigned int zStart = block * BLOCK_SIZE;
+	for (unsigned int z = zStart; z < static_cast<unsigned int>(zone_index); ++z)
+		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star2);
+
 	const qint64 starDataBase = 28 + static_cast<qint64>(sizeof(uint32_t)) * nr_of_zones;
 	const qint64 fileOffset = starDataBase + static_cast<qint64>(off);
 	const qint64 size = static_cast<qint64>(count) * sizeof(Star2);
 
 	auto* data = new QByteArray(size, Qt::Uninitialized);
-	file->seek(fileOffset);
-	if (file->read(data->data(), size) != size)
 	{
-		qWarning() << "DynamicZoneArray: read error for zone" << zoneIndex
-			    << "at offset" << fileOffset;
-		delete data;
-		return nullptr;
+		QMutexLocker locker(&fileMutex_);
+		if (!file || !file->isOpen() || !fileValid_)
+		{
+			delete data;
+			return nullptr;
+		}
+		file->seek(fileOffset);
+		if (file->read(data->data(), size) != size)
+		{
+			qWarning() << "DynamicZoneArray::loadZoneSync: read error for zone" << zone_index;
+			delete data;
+			return nullptr;
+		}
 	}
-
-	zoneCache_.insert(zoneIndex, data, data->size());
+	zoneCache_.insert(zone_index, data, data->size());
 	return reinterpret_cast<const Star2*>(data->constData());
 }
 
@@ -176,17 +278,9 @@ void DynamicZoneArray::draw(StelPainter* sPainter, int index, bool isInsideViewp
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return;
 
-	const Star2* stars = loadZone(index);
-	if (!stars)
-		return;
-
 	StelSkyDrawer* drawer = core->getSkyDrawer();
-	const float dyrs = static_cast<float>(core->getJDE() - STAR_CATALOG_JDEPOCH) / 365.25f;
 
-	const Extinction& extinction = drawer->getExtinction();
-	const bool withExtinction = drawer->getFlagHasAtmosphere() &&
-				    extinction.getExtinctionCoefficient() >= 0.01f;
-
+	// Compute cutoff before loadZone() to avoid I/O when catalog is too faint
 	int cutoffMagStep = limitMagIndex;
 	float cutoffMag = 999999.f;
 	if (drawer->getFlagStarMagnitudeLimit())
@@ -196,6 +290,20 @@ void DynamicZoneArray::draw(StelPainter* sPainter, int index, bool isInsideViewp
 		if (cutoffMagStep > limitMagIndex)
 			cutoffMagStep = limitMagIndex;
 	}
+
+	// Minimum possible magIndex = (mag_min - (mag_min - 7000)) * 0.02 = 140
+	if (cutoffMagStep < 140)
+		return;
+
+	const Star2* stars = loadZone(index);
+	if (!stars)
+		return;
+
+	const float dyrs = static_cast<float>(core->getJDE() - STAR_CATALOG_JDEPOCH) / 365.25f;
+
+	const Extinction& extinction = drawer->getExtinction();
+	const bool withExtinction = drawer->getFlagHasAtmosphere() &&
+				    extinction.getExtinctionCoefficient() >= 0.01f;
 
 	Q_ASSERT_X(cutoffMagStep <= RCMAG_TABLE_SIZE, "DynamicZoneArray::draw",
 		   QString("RCMAG_TABLE_SIZE: %1, cutoffMagStep: %2")
@@ -281,7 +389,7 @@ void DynamicZoneArray::searchAround(const StelCore* core, int index, const Vec3d
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return;
 
-	const Star2* stars = loadZone(index);
+	const Star2* stars = loadZoneSync(index);
 	if (!stars)
 		return;
 
@@ -317,7 +425,7 @@ void DynamicZoneArray::searchWithin(const StelCore* core, int index,
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return;
 
-	const Star2* stars = loadZone(index);
+	const Star2* stars = loadZoneSync(index);
 	if (!stars)
 		return;
 
@@ -352,7 +460,7 @@ StelObjectP DynamicZoneArray::searchGaiaID(int index, const StarId source_id,
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return StelObjectP();
 
-	const Star2* stars = loadZone(index);
+	const Star2* stars = loadZoneSync(index);
 	if (!stars)
 		return StelObjectP();
 
@@ -375,7 +483,7 @@ void DynamicZoneArray::searchGaiaIDepochPos(const StarId source_id, float dyrs,
 	(void)dyrs;
 	for (unsigned int z = 0; z < nr_of_zones; ++z)
 	{
-		const Star2* stars = loadZone(z);
+		const Star2* stars = loadZoneSync(z);
 		if (!stars)
 			continue;
 

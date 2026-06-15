@@ -26,6 +26,10 @@
 #include <QCache>
 #include <QFile>
 #include <QByteArray>
+#include <QFuture>
+#include <QHash>
+#include <QMutex>
+#include <QtConcurrent>
 #include <vector>
 
 //! @class DynamicZoneArray
@@ -63,6 +67,9 @@ public:
 	//! Load zone data from disk into memory. Returns pointer to Star2 array.
 	const Star2* loadZone(int zone_index) const;
 
+	//! Synchronous load — blocks until data is ready. For search operations.
+	const Star2* loadZoneSync(int zone_index) const;
+
 	//! Get star count for a zone (0 if empty).
 	uint32_t zoneStarCount(int zone_index) const { return zoneCounts_[zone_index]; }
 
@@ -87,9 +94,21 @@ private:
 	//! relative to the star data area start.
 	std::vector<uint64_t> blockOffsets_;
 
-	//! LRU cache of zone data (zone index → raw Star3 buffer).
+	//! LRU cache of zone data (zone index → raw Star2 buffer).
 	//! QCache takes ownership and deletes on eviction.
 	mutable QCache<int, QByteArray> zoneCache_;
+
+	//! Pending async loads (zone index → future QByteArray*).
+	mutable QHash<int, QFuture<QByteArray*>> pendingLoads_;
+
+	//! Mutex protecting file seek+read from concurrent async loads.
+	mutable QMutex fileMutex_;
+
+	//! Shutdown flag: set to false in destructor, checked by async workers.
+	mutable bool fileValid_{true};
+
+	//! Drain completed async loads into the cache. Call from the main thread.
+	void drainPendingLoads() const;
 };
 
 #endif // DYNAMICZONEARRAY_HPP

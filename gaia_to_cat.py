@@ -192,8 +192,6 @@ def _pass1_worker(args):
         if it is None:
             continue
         for sid, ra, dec, g, c, bp, rp, pmra, pmdec, plx in it:
-            if c is None:
-                continue
             v = g_to_v(g, c)
             for cfg in levels:
                 if cfg["mag_lo"] <= v < cfg["mag_hi"]:
