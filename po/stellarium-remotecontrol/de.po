@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# cardinot <mcardinot@gmail.com>, 2025
 # Luca-Philipp Grumbach, 2025
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2026
-# cardinot <mcardinot@gmail.com>, 2026
 # Latein Lebt, 2026
 # 
 #, fuzzy
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-04-26 17:27+0700\n"
+"POT-Creation-Date: 2026-06-09 22:17+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Latein Lebt, 2026\n"
 "Language-Team: German (https://app.transifex.com/stellarium/teams/80998/de/)\n"
@@ -82,11 +82,6 @@ msgstr "Fehler (%1)"
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
 msgstr "Fehler bei der SIMBAD-Suche"
-
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:230
-#: tablet7in.html:245
-msgid "idle"
-msgstr "untätig"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:291
 msgid "Error loading object types"
@@ -585,43 +580,54 @@ msgstr "Nur die letzte Auswahl"
 
 #: index.html:954 tablet7in.html:1019
 msgid "Culture Data Inspector"
-msgstr ""
+msgstr "Kulturdatenprüfer"
 
 #: index.html:956 tablet7in.html:1021
 msgid ""
 "This inspector displays the complete, unfiltered dataset extracted directly "
 "from the culture's"
 msgstr ""
+"Der Prüfer zeigt den vollständigen, ungefilterten Datensatz, der direkt aus "
+"der Kulturdatei extrahiert wurde."
 
 #: index.html:958 tablet7in.html:1023
 msgid "file. Use this view to:"
-msgstr ""
+msgstr "Verwenden Sie diese Ansicht für:"
 
 #: index.html:960 tablet7in.html:1025
 msgid "Verify exact constellation and asterism counts (including ray helpers)"
 msgstr ""
+"Das Überprüfen der genauen Anzahl der Sternbilder und Asterismen "
+"(einschließlich der Hilfslinien)"
 
 #: index.html:961 tablet7in.html:1026
 msgid "Inspect raw IDs, native names, pronunciations, and IPA values"
 msgstr ""
+"Das Untersuchen der Roh-IDs, der ursprünglichen Namen, Aussprachen und IPA-"
+"Werte"
 
 #: index.html:962 tablet7in.html:1027
 msgid "Cross-reference star IDs (HIP, NGC, etc.) with their cultural names"
 msgstr ""
+"Die Zuordnung von Stern-IDs (HIP, NGC usw.) zu ihren kulturellen Namen"
 
 #: index.html:963 tablet7in.html:1028
 msgid "Export complete datasets to CSV/JSON for external analysis"
 msgstr ""
+"Das Exportieren der vollständigen Datensätze als CSV/JSON für eine externe "
+"Analyse"
 
 #: index.html:964 tablet7in.html:1029
 msgid "Search across all fields to quickly locate specific entries"
-msgstr ""
+msgstr "Das Durchsuchen aller Felder, um bestimmte Einträge schnell zu finden"
 
 #: index.html:967 tablet7in.html:1032
 msgid ""
 "Each row is interactive — click to select and navigate to the object in "
 "Stellarium."
 msgstr ""
+"Jede Zeile ist interaktiv – klicken Sie darauf, um das Objekt auszuwählen "
+"und in Stellarium anzuzeigen."
 
 #: index.html:976 tablet7in.html:1041
 msgid "Select Sky Culture"
@@ -629,7 +635,7 @@ msgstr "Himmelskultur auswählen"
 
 #: index.html:994 tablet7in.html:1059
 msgid "Ray Helpers"
-msgstr ""
+msgstr "Hilfslinien"
 
 #: index.html:1006 tablet7in.html:1071
 msgid "Named Objects"
@@ -654,12 +660,6 @@ msgstr ""
 msgid "ID"
 msgstr "ID"
 
-#: index.html:1042 index.html:1073 index.html:1094 index.html:1116
-#: index.html:1149 tablet7in.html:1107 tablet7in.html:1138 tablet7in.html:1159
-#: tablet7in.html:1181 tablet7in.html:1214
-msgid "Native"
-msgstr "Original"
-
 #: index.html:1043 index.html:1074 index.html:1095 index.html:1117
 #: index.html:1150 tablet7in.html:1108 tablet7in.html:1139 tablet7in.html:1160
 #: tablet7in.html:1182 tablet7in.html:1215
@@ -671,12 +671,6 @@ msgstr "Englischer Name"
 #: tablet7in.html:1183 tablet7in.html:1216
 msgid "Translation"
 msgstr "Übersetzung"
-
-#: index.html:1045 index.html:1076 index.html:1097 index.html:1119
-#: index.html:1152 tablet7in.html:1110 tablet7in.html:1141 tablet7in.html:1162
-#: tablet7in.html:1184 tablet7in.html:1217
-msgid "Pronounce"
-msgstr "Aussprache"
 
 #: index.html:1047 index.html:1078 tablet7in.html:1112 tablet7in.html:1143
 msgid "Star IDs"
@@ -712,6 +706,8 @@ msgid ""
 "All named celestial objects (stars, planets, deep-sky) defined in this "
 "culture's common_names section."
 msgstr ""
+"Alle benannten Himmelsobjekte (Sterne, Planeten und Deep-Sky) sind im "
+"Abschnitt common_names der Kultur definiert."
 
 #: index.html:1147 tablet7in.html:1212
 msgid "Original ID"
@@ -971,7 +967,7 @@ msgstr "Geräteinformation"
 
 #: index.html:1519 tablet7in.html:1588
 msgid "Understanding Raw Values"
-msgstr ""
+msgstr "Rohwerte verstehen"
 
 #: index.html:1520 tablet7in.html:1589
 msgid "Buttons: Range 0.0 (not pressed) to 1.0 (green = fully pressed)."

@@ -808,7 +808,7 @@ void LandscapeMgr::createAtmosphere()
 	{
 		// We've failed to apply the setting, so reset to the fallback value
 		const auto conf=StelApp::getInstance().getSettings();
-		conf->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_PREETHAM);
+		conf->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_DEFAULT);
 	}
 
 	needToRecreateAtmosphere=false;
@@ -816,7 +816,7 @@ void LandscapeMgr::createAtmosphere()
 
 void LandscapeMgr::resetToFallbackAtmosphere()
 {
-	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_PREETHAM);
+	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_DEFAULT);
 	atmosphere.reset();
 	createAtmosphere();
 }

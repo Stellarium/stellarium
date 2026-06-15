@@ -20,31 +20,36 @@
 #include "TextureAverageComputer.hpp"
 #include "StelMainView.hpp"
 #include "StelUtils.hpp"
+#include <array>
+#include <QOpenGLExtraFunctions>
 
 namespace
 {
+constexpr GLuint VERTEX_ATTRIB_INDEX = 0;
+constexpr int COORDS_PER_VERTEX = 2;
+
 class FBORestorer
 {
-	StelOpenGL::HighGraphicsFunctions& gl;
+	QOpenGLExtraFunctions& gl;
 	GLint oldFBO=-1;
 public:
-	FBORestorer(StelOpenGL::HighGraphicsFunctions& gl)
+	FBORestorer(QOpenGLExtraFunctions& gl)
 		: gl(gl)
 	{
 	}
 	void capture()
 	{
-		GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
+		GL(gl.glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFBO));
 	}
 	~FBORestorer()
 	{
 		if (oldFBO >= 0)
-			GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, oldFBO));
+			GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, oldFBO));
 	}
 };
 }
 
-Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const int width, const int height) const
+Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const int width, const int height)
 {
 	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
 
@@ -53,18 +58,27 @@ Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const in
 	GLint oldViewport[4];
 	GL(gl.glGetIntegerv(GL_VIEWPORT, oldViewport));
 	GLint oldFBO=-1;
-	GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
+	GL(gl.glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFBO));
 
 	glesFBO->bind();
 	GL(gl.glViewport(0,0,1,1));
 
-	GL(gl.glBindVertexArray(vao));
+	bindVAO();
 	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
-	GL(gl.glBindVertexArray(0));
+	releaseVAO();
 
 	blitTexProgram->release();
 	Vec4f pixel(NAN,NAN,NAN,NAN);
-	GL(gl.glReadPixels(0,0,1,1,GL_RGBA,GL_FLOAT,&pixel[0]));
+	if (textureIsFloat)
+	{
+		GL(gl.glReadPixels(0,0,1,1,GL_RGBA,GL_FLOAT,&pixel[0]));
+	}
+	else
+	{
+		std::array<uint8_t, 4> data{};
+		GL(gl.glReadPixels(0,0,1,1,GL_RGBA,GL_UNSIGNED_BYTE,&data[0]));
+		pixel = {data[0] / 255.f, data[1] / 255.f, data[2] / 255.f, data[3] / 255.f};
+	}
 
 	GL(gl.glViewport(oldViewport[0], oldViewport[1], oldViewport[2], oldViewport[3]));
 	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, oldFBO));
@@ -72,7 +86,7 @@ Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const in
 	return pixel;
 }
 
-Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGL(const int width, const int height) const
+Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGL(const int width, const int height)
 {
 #if !QT_CONFIG(opengles2)
 	using namespace std;
@@ -90,7 +104,7 @@ Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGL(const int 
 #endif
 
 	Vec4f pixel;
-	GL(gl.glGetTexImage(GL_TEXTURE_2D, deepestLevel, GL_RGBA, GL_FLOAT, &pixel[0]));
+	GL(hiGL->glGetTexImage(GL_TEXTURE_2D, deepestLevel, GL_RGBA, GL_FLOAT, &pixel[0]));
 	return pixel;
 #else
 	return {NAN, NAN, NAN, NAN};
@@ -129,14 +143,14 @@ Vec4f TextureAverageComputer::getTextureAverageWithWorkaround(const GLuint textu
 	GLint oldViewport[4];
 	GL(gl.glGetIntegerv(GL_VIEWPORT, oldViewport));
 	GLint oldFBO=-1;
-	GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &oldFBO));
+	GL(gl.glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFBO));
 
 	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, potFBO));
 	GL(gl.glViewport(0,0,potWidth,potHeight));
 
-	GL(gl.glBindVertexArray(vao));
+	bindVAO();
 	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
-	GL(gl.glBindVertexArray(0));
+	releaseVAO();
 
 	GL(gl.glViewport(oldViewport[0], oldViewport[1], oldViewport[2], oldViewport[3]));
 	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, oldFBO));
@@ -176,7 +190,7 @@ void TextureAverageComputer::checkNeedForWorkaround()
 	for(int n=data.size(); n<width; ++n)
 		data.emplace_back(0,0,0,0);
 
-	GL(gl.glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,data.size(),1,0,GL_RGBA,GL_UNSIGNED_BYTE,&data[0][0]));
+	GL(gl.glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,data.size(),1,0,GL_RGBA,GL_UNSIGNED_BYTE,&data[0][0]));
 	const auto mipmapAverage = getTextureAverageSimple(texture, width, 1);
 
 	const auto sum = std::accumulate(data.begin(), data.end(), Vec4f(0,0,0,0),
@@ -215,15 +229,17 @@ void TextureAverageComputer::checkNeedForWorkaround()
 }
 
 // Clobbers: GL_TEXTURE_BINDING_2D, GL_VERTEX_ARRAY_BINDING, GL_ARRAY_BUFFER_BINDING
-TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions& gl, const int texWidth, const int texHeight, const GLenum internalFormat)
-	: gl(gl)
+TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions* hiGL, const int texWidth, const int texHeight, const GLenum internalFormat, const bool textureIsFloat)
+	: gl(*QOpenGLContext::currentContext()->extraFunctions())
+	, hiGL(hiGL)
 	, npotWidth(texWidth)
 	, npotHeight(texHeight)
+	, textureIsFloat(textureIsFloat)
 {
-	isGLES = StelMainView::getInstance().getGLInformation().isGLES;
+	isGLES = StelMainView::getInstance().getGLInformation().isGLES || !hiGL;
 
-	GL(gl.glGenVertexArrays(1, &vao));
-	GL(gl.glBindVertexArray(vao));
+	GL(vao.create());
+	bindVAO();
 	GL(gl.glGenBuffers(1, &vbo));
 	GL(gl.glBindBuffer(GL_ARRAY_BUFFER, vbo));
 	const GLfloat vertices[]=
@@ -234,11 +250,8 @@ TextureAverageComputer::TextureAverageComputer(StelOpenGL::HighGraphicsFunctions
 		 1,  1,
 	};
 	GL(gl.glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW));
-	constexpr GLuint attribIndex=0;
-	constexpr int coordsPerVertex=2;
-	GL(gl.glVertexAttribPointer(attribIndex, coordsPerVertex, GL_FLOAT, false, 0, 0));
-	GL(gl.glEnableVertexAttribArray(attribIndex));
-	GL(gl.glBindVertexArray(0));
+	setupCurrentVAO();
+	releaseVAO();
 
 	blitTexProgram.reset(new QOpenGLShaderProgram);
 	blitTexProgram->addShaderFromSourceCode(QOpenGLShader::Vertex,
@@ -287,20 +300,44 @@ void main()
 		GL(gl.glBindTexture(GL_TEXTURE_2D, potTex));
 		const auto potWidth  = StelUtils::getSmallerPowerOfTwo(npotWidth);
 		const auto potHeight = StelUtils::getSmallerPowerOfTwo(npotHeight);
-		GL(gl.glTexImage2D(GL_TEXTURE_2D,0,internalFormat,potWidth,potHeight,0,GL_RGBA,GL_FLOAT,nullptr));
+		GL(gl.glTexImage2D(GL_TEXTURE_2D,0,internalFormat,potWidth,potHeight,0,GL_RGBA,
+		                   textureIsFloat ? GL_FLOAT : GL_UNSIGNED_BYTE,nullptr));
 		GL(gl.glBindTexture(GL_TEXTURE_2D,0));
-		GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,potFBO));
-		GL(gl.glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,potTex,0));
-		[[maybe_unused]] const auto status=gl.glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
+		GL(gl.glBindFramebuffer(GL_FRAMEBUFFER,potFBO));
+		GL(gl.glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,potTex,0));
+		[[maybe_unused]] const auto status=gl.glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		Q_ASSERT(status==GL_FRAMEBUFFER_COMPLETE);
-		GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0));
+		GL(gl.glBindFramebuffer(GL_FRAMEBUFFER,0));
 	}
+}
+
+void TextureAverageComputer::setupCurrentVAO()
+{
+	GL(gl.glBindBuffer(GL_ARRAY_BUFFER, vbo));
+	GL(gl.glVertexAttribPointer(VERTEX_ATTRIB_INDEX, COORDS_PER_VERTEX, GL_FLOAT, false, 0, 0));
+	GL(gl.glBindBuffer(GL_ARRAY_BUFFER, 0));
+	GL(gl.glEnableVertexAttribArray(VERTEX_ATTRIB_INDEX));
+}
+
+void TextureAverageComputer::bindVAO()
+{
+	if(vao.isCreated())
+		vao.bind();
+	else
+		setupCurrentVAO();
+}
+
+void TextureAverageComputer::releaseVAO()
+{
+	if(vao.isCreated())
+		vao.release();
+	else
+		gl.glDisableVertexAttribArray(VERTEX_ATTRIB_INDEX);
 }
 
 TextureAverageComputer::~TextureAverageComputer()
 {
 	GL(gl.glDeleteTextures(1, &potTex));
 	GL(gl.glDeleteFramebuffers(1, &potFBO));
-	GL(gl.glDeleteVertexArrays(1, &vao));
 	GL(gl.glDeleteBuffers(1, &vbo));
 }

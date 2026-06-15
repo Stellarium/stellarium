@@ -1190,6 +1190,12 @@ QVariantMap StelMainScriptAPI::getRTS(const QString &objectName, const double al
 	return map;
 }
 
+double StelMainScriptAPI::getEquationOfTime()
+{
+	return StelApp::getInstance().getCore()->getSolutionEquationOfTime()*60.0;
+}
+
+
 void StelMainScriptAPI::setStelProperty(const QString& propertyName, QVariant propertyValue)
 {
 	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propertyName, propertyValue);

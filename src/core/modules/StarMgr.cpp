@@ -872,7 +872,7 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 				continue;
 		}
 
-		const StelObject::CulturalName cName {
+		StelObject::CulturalName cName {
 			entry["native"].toString(),
 			entry["pronounce"].toString(),
 			trans.qTranslateStarPronounce(entry["pronounce"].toString()),
@@ -884,6 +884,11 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 			QString(),
 			StelObject::CulturalNameSpecial::None
 		};
+		QString byname=entry["byname"].toString();
+		if (!byname.isEmpty())
+		{
+			cName.byname = byname;
+		}
 
 		//if (culturalNamesMap.contains(HIP))
 		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;

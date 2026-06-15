@@ -281,8 +281,8 @@ void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 	const int physWidth = width/atmoRes;
 	const int physHeight = height/atmoRes;
 	renderer_->resizeEvent(physWidth, physHeight);
-	textureAverager_.reset(new TextureAverageComputer(*StelOpenGL::highGraphicsFunctions(),
-	                                                  physWidth, physHeight, GL_RGBA32F));
+	textureAverager_.reset(new TextureAverageComputer(StelOpenGL::highGraphicsFunctions(),
+	                                                  physWidth, physHeight, GL_RGBA32F, true));
 
 	prevWidth_=width;
 	prevHeight_=height;

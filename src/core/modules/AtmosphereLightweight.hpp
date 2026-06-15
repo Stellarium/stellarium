@@ -54,6 +54,7 @@ private:
 	std::unique_ptr<class QOpenGLFramebufferObject> luminanceProbeFBO_;
 	std::unique_ptr<TextureAverageComputer> textureAverager_;
 	std::vector<float> layerSolarElevations_;
+	std::vector<float> layerValueMaxima_;
 	std::vector<float> layerNorms_;
 	std::vector<unsigned> layerVertexOffsetsInVBO_;
 	std::vector<unsigned> layerIndexOffsetsInBuffer_;
@@ -100,11 +101,16 @@ private:
 
 	struct
 	{
+		int isMoon;
 		int sunDir;
 		int atmoTex;
-		int colorScale;
 		int projectionMatrixInverse;
 	} luminanceProbeUniformLocations_;
+
+	struct
+	{
+		int colorScale;
+	} prepProgramUniformLocations_;
 
 	void loadMesh();
 	//! Negative are special labels to denote single VAOs, others are offsets in #vaos_

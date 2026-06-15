@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-06-08 07:12+0700\n"
+"POT-Creation-Date: 2026-06-15 12:22+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Gediminas Tauras, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
@@ -34,11 +34,11 @@ msgid "custom object"
 msgstr "pasirinktinis objektas"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:444
+#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:445
 #: src/core/modules/Constellation.cpp:593
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:293
-#: src/core/modules/Nebula.cpp:295 src/core/modules/Planet.cpp:664
-#: src/core/modules/Planet.cpp:667 src/core/modules/StarWrapper.cpp:51
+#: src/core/modules/Nebula.cpp:295 src/core/modules/Planet.cpp:670
+#: src/core/modules/Planet.cpp:673 src/core/modules/StarWrapper.cpp:51
 #: src/core/modules/StarWrapper.cpp:238 src/core/modules/StarWrapper.cpp:240
 #: src/core/modules/StarWrapper.cpp:582 src/core/modules/StarWrapper.cpp:584
 #: src/core/modules/StarWrapper.cpp:738 src/core/modules/StarWrapper.cpp:740
@@ -69,7 +69,7 @@ msgstr "asterizmas"
 #: src/core/modules/ConstellationMgr.cpp:149 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:2048
 #: src/core/modules/SpecialMarkersMgr.cpp:314
-#: src/core/modules/LandscapeMgr.cpp:888
+#: src/core/modules/LandscapeMgr.cpp:894
 #: src/core/modules/NomenclatureMgr.cpp:90 src/core/modules/NebulaMgr.cpp:469
 #: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:386
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
@@ -797,8 +797,8 @@ msgid "Antapex"
 msgstr "Antapeksas"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1634 src/core/modules/Planet.cpp:807
-#: src/core/modules/Planet.cpp:1225 src/core/modules/StarWrapper.cpp:282
+#: src/core/modules/GridLinesMgr.cpp:1634 src/core/modules/Planet.cpp:813
+#: src/core/modules/Planet.cpp:1231 src/core/modules/StarWrapper.cpp:282
 #: src/gui/AstroCalcDialog.cpp:8818 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/Satellite.cpp:406
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
@@ -1006,279 +1006,279 @@ msgid "Compass marks"
 msgstr "Kompaso žymos"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1349
+#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1355
 msgctxt "compass direction"
 msgid "N"
 msgstr "Š"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1341
+#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1347
 msgctxt "compass direction"
 msgid "S"
 msgstr "P"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1353
+#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1359
 msgctxt "compass direction"
 msgid "E"
 msgstr "R"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1345
+#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1351
 msgctxt "compass direction"
 msgid "W"
 msgstr "V"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1351
+#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1357
 msgctxt "compass direction"
 msgid "NE"
 msgstr "ŠR"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1355
+#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1361
 msgctxt "compass direction"
 msgid "SE"
 msgstr "PR"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1343
+#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1349
 msgctxt "compass direction"
 msgid "SW"
 msgstr "PV"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1347
+#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1353
 msgctxt "compass direction"
 msgid "NW"
 msgstr "ŠV"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1350
+#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1356
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "ŠŠR"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1352
+#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1358
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "RŠR"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1354
+#: src/core/modules/LandscapeMgr.cpp:311 src/core/modules/Planet.cpp:1360
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "RPR"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:311 src/core/modules/Planet.cpp:1356
+#: src/core/modules/LandscapeMgr.cpp:313 src/core/modules/Planet.cpp:1362
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "PPR"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:313 src/core/modules/Planet.cpp:1342
+#: src/core/modules/LandscapeMgr.cpp:315 src/core/modules/Planet.cpp:1348
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "PPV"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:315 src/core/modules/Planet.cpp:1344
+#: src/core/modules/LandscapeMgr.cpp:317 src/core/modules/Planet.cpp:1350
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "VPV"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:317 src/core/modules/Planet.cpp:1346
+#: src/core/modules/LandscapeMgr.cpp:319 src/core/modules/Planet.cpp:1352
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "VŠV"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:319 src/core/modules/Planet.cpp:1348
+#: src/core/modules/LandscapeMgr.cpp:321 src/core/modules/Planet.cpp:1354
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "ŠŠV"
 
 #. TRANSLATORS: North by east
-#: src/core/modules/LandscapeMgr.cpp:321
+#: src/core/modules/LandscapeMgr.cpp:323
 msgctxt "compass direction"
 msgid "NbE"
 msgstr "ŠįR"
 
 #. TRANSLATORS: Northeast by north
-#: src/core/modules/LandscapeMgr.cpp:323
+#: src/core/modules/LandscapeMgr.cpp:325
 msgctxt "compass direction"
 msgid "NEbN"
 msgstr "ŠRįŠ"
 
 #. TRANSLATORS: Northeast by east
-#: src/core/modules/LandscapeMgr.cpp:325
+#: src/core/modules/LandscapeMgr.cpp:327
 msgctxt "compass direction"
 msgid "NEbE"
 msgstr "ŠRįR"
 
 #. TRANSLATORS: East by north
-#: src/core/modules/LandscapeMgr.cpp:327
+#: src/core/modules/LandscapeMgr.cpp:329
 msgctxt "compass direction"
 msgid "EbN"
 msgstr "RįŠ"
 
 #. TRANSLATORS: East by south
-#: src/core/modules/LandscapeMgr.cpp:329
+#: src/core/modules/LandscapeMgr.cpp:331
 msgctxt "compass direction"
 msgid "EbS"
 msgstr "RįP"
 
 #. TRANSLATORS: Southeast by east
-#: src/core/modules/LandscapeMgr.cpp:331
+#: src/core/modules/LandscapeMgr.cpp:333
 msgctxt "compass direction"
 msgid "SEbE"
 msgstr "PRįP"
 
 #. TRANSLATORS: Southeast by south
-#: src/core/modules/LandscapeMgr.cpp:333
+#: src/core/modules/LandscapeMgr.cpp:335
 msgctxt "compass direction"
 msgid "SEbS"
 msgstr "PRįP"
 
 #. TRANSLATORS: South by east
-#: src/core/modules/LandscapeMgr.cpp:335
+#: src/core/modules/LandscapeMgr.cpp:337
 msgctxt "compass direction"
 msgid "SbE"
 msgstr "PįR"
 
 #. TRANSLATORS: South by west
-#: src/core/modules/LandscapeMgr.cpp:337
+#: src/core/modules/LandscapeMgr.cpp:339
 msgctxt "compass direction"
 msgid "SbW"
 msgstr "PįV"
 
 #. TRANSLATORS: Southwest by south
-#: src/core/modules/LandscapeMgr.cpp:339
+#: src/core/modules/LandscapeMgr.cpp:341
 msgctxt "compass direction"
 msgid "SWbS"
 msgstr "PVįP"
 
 #. TRANSLATORS: Southwest by west
-#: src/core/modules/LandscapeMgr.cpp:341
+#: src/core/modules/LandscapeMgr.cpp:343
 msgctxt "compass direction"
 msgid "SWbW"
 msgstr "PVįV"
 
 #. TRANSLATORS: West by south
-#: src/core/modules/LandscapeMgr.cpp:343
+#: src/core/modules/LandscapeMgr.cpp:345
 msgctxt "compass direction"
 msgid "WbS"
 msgstr "VįP"
 
 #. TRANSLATORS: West by north
-#: src/core/modules/LandscapeMgr.cpp:345
+#: src/core/modules/LandscapeMgr.cpp:347
 msgctxt "compass direction"
 msgid "WbN"
 msgstr "VįŠ"
 
 #. TRANSLATORS: Northwest by west
-#: src/core/modules/LandscapeMgr.cpp:347
+#: src/core/modules/LandscapeMgr.cpp:349
 msgctxt "compass direction"
 msgid "NWbW"
 msgstr "ŠVįV"
 
 #. TRANSLATORS: Northwest by north
-#: src/core/modules/LandscapeMgr.cpp:349
+#: src/core/modules/LandscapeMgr.cpp:351
 msgctxt "compass direction"
 msgid "NWbN"
 msgstr "ŠVįŠ"
 
 #. TRANSLATORS: North by west
-#: src/core/modules/LandscapeMgr.cpp:351
+#: src/core/modules/LandscapeMgr.cpp:353
 msgctxt "compass direction"
 msgid "NbW"
 msgstr "ŠįV"
 
-#: src/core/modules/LandscapeMgr.cpp:444 src/core/modules/LandscapeMgr.cpp:767
+#: src/core/modules/LandscapeMgr.cpp:446 src/core/modules/LandscapeMgr.cpp:773
 #: src/gui/ViewDialog.cpp:922
 msgid "Loading..."
 msgstr "Kraunama..."
 
-#: src/core/modules/LandscapeMgr.cpp:444 src/core/modules/LandscapeMgr.cpp:767
+#: src/core/modules/LandscapeMgr.cpp:446 src/core/modules/LandscapeMgr.cpp:773
 msgctxt "percentage of done"
 msgid "done"
 msgstr "paruošta"
 
-#: src/core/modules/LandscapeMgr.cpp:449
+#: src/core/modules/LandscapeMgr.cpp:451
 msgid "Switching models..."
 msgstr "Perjungiami modeliai..."
 
-#: src/core/modules/LandscapeMgr.cpp:490 src/core/modules/LandscapeMgr.cpp:762
+#: src/core/modules/LandscapeMgr.cpp:492 src/core/modules/LandscapeMgr.cpp:768
 msgid "Loaded successfully"
 msgstr "Įkrauta sėkmingai"
 
-#: src/core/modules/LandscapeMgr.cpp:543
+#: src/core/modules/LandscapeMgr.cpp:545
 msgid ""
 "ShowMySky atmosphere model crashed. Loading Preetham model as a fallback."
 msgstr ""
 "ShowMySky atmosferos modelis sustojo. Įkeliamas Preetham modelis kaip "
 "pakaitinis."
 
-#: src/core/modules/LandscapeMgr.cpp:889
+#: src/core/modules/LandscapeMgr.cpp:895
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/core/modules/LandscapeMgr.cpp:890
+#: src/core/modules/LandscapeMgr.cpp:896
 msgid "Fog"
 msgstr "Rūkas"
 
-#: src/core/modules/LandscapeMgr.cpp:891 src/ui_viewDialog.h:5040
+#: src/core/modules/LandscapeMgr.cpp:897 src/ui_viewDialog.h:5040
 #: src/ui_configurationDialog.h:2630
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:338
 msgid "Cardinal points"
 msgstr "Pasaulio kryptys"
 
-#: src/core/modules/LandscapeMgr.cpp:892
+#: src/core/modules/LandscapeMgr.cpp:898
 msgid "Ordinal (Intercardinal) points"
 msgstr "Tarpinės (\"tarpkardinalinės\") pasaulio kryptys"
 
-#: src/core/modules/LandscapeMgr.cpp:893
+#: src/core/modules/LandscapeMgr.cpp:899
 msgid "Secondary Intercardinal points"
 msgstr "Antrinės tarpinės pasulio kryptys"
 
-#: src/core/modules/LandscapeMgr.cpp:894
+#: src/core/modules/LandscapeMgr.cpp:900
 msgid "Tertiary Intercardinal points"
 msgstr "Tretinės tarpinės pasaulio kryptys"
 
-#: src/core/modules/LandscapeMgr.cpp:895
+#: src/core/modules/LandscapeMgr.cpp:901
 msgid "Ground"
 msgstr "Žemė"
 
-#: src/core/modules/LandscapeMgr.cpp:896
+#: src/core/modules/LandscapeMgr.cpp:902
 msgid "Landscape illumination"
 msgstr "Kraštovaizdžio apšvietimas"
 
-#: src/core/modules/LandscapeMgr.cpp:897 src/ui_viewDialog.h:5199
+#: src/core/modules/LandscapeMgr.cpp:903 src/ui_viewDialog.h:5199
 msgid "Landscape labels"
 msgstr "Kraštovaizdžio žymės"
 
-#: src/core/modules/LandscapeMgr.cpp:898
+#: src/core/modules/LandscapeMgr.cpp:904
 msgid "Light pollution data from locations database"
 msgstr "Šviesos taršos informacija iš vietovių duomenų bazės"
 
-#: src/core/modules/LandscapeMgr.cpp:900
+#: src/core/modules/LandscapeMgr.cpp:906
 msgid "Increase light pollution"
 msgstr "Padidinti šviesos taršą"
 
-#: src/core/modules/LandscapeMgr.cpp:901
+#: src/core/modules/LandscapeMgr.cpp:907
 msgid "Reduce light pollution"
 msgstr "Sumažinti šviesos taršą"
 
-#: src/core/modules/LandscapeMgr.cpp:902
+#: src/core/modules/LandscapeMgr.cpp:908
 msgid "Cyclic change in light pollution"
 msgstr "Cikliškas šviesos taršos kitimas"
 
-#: src/core/modules/LandscapeMgr.cpp:1532 src/scripting/StelScriptMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:1538 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:629
+#: plugins/Oculars/src/gui/OcularDialog.cpp:630
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:257
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -1301,7 +1301,7 @@ msgstr "Autorius"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #. TRANSLATORS: Unit of measure for distance - meters
-#: src/core/modules/LandscapeMgr.cpp:1538 src/gui/StelGuiItems.cpp:950
+#: src/core/modules/LandscapeMgr.cpp:1544 src/gui/StelGuiItems.cpp:950
 #: plugins/Satellites/src/Satellite.cpp:436
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -1310,7 +1310,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1541 src/gui/ObsListDialog.cpp:302
+#: src/core/modules/LandscapeMgr.cpp:1547 src/gui/ObsListDialog.cpp:302
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:416
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -1319,36 +1319,36 @@ msgid "Location"
 msgstr "Vietovė"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1563
+#: src/core/modules/LandscapeMgr.cpp:1569
 msgctxt "pressure"
 msgid "hPa"
 msgstr "hPa"
 
-#: src/core/modules/LandscapeMgr.cpp:1573
+#: src/core/modules/LandscapeMgr.cpp:1579
 msgid "extinction coefficient"
 msgstr "ekstinkcijos koeficientas"
 
-#: src/core/modules/LandscapeMgr.cpp:1576
+#: src/core/modules/LandscapeMgr.cpp:1582
 msgid "Atmospheric conditions"
 msgstr "Atmosferos būsena"
 
-#: src/core/modules/LandscapeMgr.cpp:1583
+#: src/core/modules/LandscapeMgr.cpp:1589
 msgid "cd/m<sup>2</sup>"
 msgstr "cd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1587
+#: src/core/modules/LandscapeMgr.cpp:1593
 msgid "ncd/m<sup>2</sup>"
 msgstr "ncd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1592
+#: src/core/modules/LandscapeMgr.cpp:1598
 msgid "&mu;cd/m<sup>2</sup>"
 msgstr "&mu;cd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1597
+#: src/core/modules/LandscapeMgr.cpp:1603
 msgid "mcd/m<sup>2</sup>"
 msgstr "mcd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1599
+#: src/core/modules/LandscapeMgr.cpp:1605
 #, qt-format
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr "<b>Šviesos tarša</b>: %1 %2 (NELM: %3; Bortle klasė: %4)"
@@ -1396,14 +1396,14 @@ msgstr "geologinis terminas"
 msgid "Linear size"
 msgstr "Tiesinis matmuo"
 
-#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:902
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:908
 msgid "Diameter"
 msgstr "Skersmuo"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:758
-#: src/core/modules/Planet.cpp:779 src/core/modules/Planet.cpp:903
-#: src/core/modules/Planet.cpp:1552 src/core/modules/Comet.cpp:229
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:764
+#: src/core/modules/Planet.cpp:785 src/core/modules/Planet.cpp:909
+#: src/core/modules/Planet.cpp:1558 src/core/modules/Comet.cpp:229
 #: src/core/modules/Comet.cpp:239 src/gui/StelGuiItems.cpp:978
 #: src/gui/AstroCalcDialog.cpp:3437 src/gui/AstroCalcDialog.cpp:3985
 #: src/gui/AstroCalcDialog.cpp:8753 plugins/Satellites/src/Satellites.cpp:3440
@@ -1439,8 +1439,8 @@ msgstr "Saulės altitudė"
 msgid "Origin of name"
 msgstr "Vardo kilmė"
 
-#: src/core/modules/NomenclatureItem.cpp:312 src/core/modules/Planet.cpp:2297
-#: src/core/modules/Planet.cpp:2320
+#: src/core/modules/NomenclatureItem.cpp:312 src/core/modules/Planet.cpp:2303
+#: src/core/modules/Planet.cpp:2326
 msgctxt "object narration"
 msgid "or"
 msgstr "arba"
@@ -1493,7 +1493,7 @@ msgctxt "object narration"
 msgid "is a %1 on %2"
 msgstr "yra %1 objekte %2"
 
-#: src/core/modules/NomenclatureItem.cpp:366 src/core/modules/Planet.cpp:967
+#: src/core/modules/NomenclatureItem.cpp:366 src/core/modules/Planet.cpp:973
 #, qt-format
 msgctxt "object narration"
 msgid "Its diameter is %1 kilometers"
@@ -1519,8 +1519,8 @@ msgctxt "object narration"
 msgid "Its planetographic coordinates are"
 msgstr "Jos planetografinės koordinatės yra"
 
-#: src/core/modules/NomenclatureItem.cpp:402 src/core/modules/Planet.cpp:619
-#: src/core/modules/Planet.cpp:2224 src/core/StelObject.cpp:1636
+#: src/core/modules/NomenclatureItem.cpp:402 src/core/modules/Planet.cpp:625
+#: src/core/modules/Planet.cpp:2230 src/core/StelObject.cpp:1636
 #: src/core/StelSkyCultureSkyPartition.cpp:528 src/core/StelUtils.cpp:171
 #: src/core/StelUtils.cpp:349 src/core/StelUtils.cpp:445
 #: src/core/StelUtils.cpp:528 src/core/StelUtils.cpp:576
@@ -2351,7 +2351,7 @@ msgstr "galimas planetinis ūkas"
 msgid "protoplanetary nebula"
 msgstr "protoplanetinis ūkas"
 
-#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:137
+#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:139
 #: src/core/modules/StarWrapper.cpp:107
 msgid "star"
 msgstr "žvaigždė"
@@ -2418,12 +2418,12 @@ msgstr "per"
 msgid "Airmasses"
 msgstr "oro masės"
 
-#: src/core/modules/Nebula.cpp:280 src/core/modules/Planet.cpp:641
+#: src/core/modules/Nebula.cpp:280 src/core/modules/Planet.cpp:647
 #: src/core/modules/StarWrapper.cpp:220
 msgid "Additional names: "
 msgstr "Papildomi pavadinimai:"
 
-#: src/core/modules/Nebula.cpp:286 src/core/modules/Planet.cpp:648
+#: src/core/modules/Nebula.cpp:286 src/core/modules/Planet.cpp:654
 #: src/core/modules/StarWrapper.cpp:226 src/core/modules/StarWrapper.cpp:411
 msgid "Additional catalog numbers: "
 msgstr "Papildomi katalogo numeriai: "
@@ -2481,7 +2481,7 @@ msgstr "švs. met."
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:389 src/core/modules/Nebula.cpp:435
-#: src/core/modules/Planet.cpp:791 src/core/modules/Planet.cpp:797
+#: src/core/modules/Planet.cpp:797 src/core/modules/Planet.cpp:803
 #: src/gui/AstroCalcDialog.cpp:992 src/gui/AstroCalcChart.cpp:95
 #: src/gui/AstroCalcChart.cpp:105 src/gui/AstroCalcChart.cpp:431
 #: src/gui/AstroCalcChart.cpp:457 src/ui_configurationDialog.h:2537
@@ -2819,7 +2819,7 @@ msgstr "nedokumentuotas tipas"
 msgid "called"
 msgstr "pavadinta"
 
-#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:2180
+#: src/core/modules/Nebula.cpp:1750 src/core/modules/Planet.cpp:2186
 msgid "is"
 msgstr "yra"
 
@@ -2864,7 +2864,7 @@ msgctxt "object narration"
 msgid "Million light years"
 msgstr "Milijonų šviesmečių"
 
-#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:2204
+#: src/core/modules/Nebula.cpp:1825 src/core/modules/Planet.cpp:2210
 msgctxt "object narration"
 msgid "in the constellation of"
 msgstr "žvaigždyne "
@@ -3130,126 +3130,126 @@ msgstr "angliškas"
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
 #. TRANSLATORS: CelesTrak source [Planet]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=csv
-#: src/core/modules/Planet.cpp:138 plugins/Satellites/src/Satellites.cpp:3848
+#: src/core/modules/Planet.cpp:140 plugins/Satellites/src/Satellites.cpp:3848
 msgid "planet"
 msgstr "planeta"
 
-#: src/core/modules/Planet.cpp:139
+#: src/core/modules/Planet.cpp:141
 msgid "moon"
 msgstr "palydovas"
 
-#: src/core/modules/Planet.cpp:140
+#: src/core/modules/Planet.cpp:142
 msgid "observer"
 msgstr "stebėtojas"
 
-#: src/core/modules/Planet.cpp:141
+#: src/core/modules/Planet.cpp:143
 msgid "artificial"
 msgstr "dirbtinis"
 
-#: src/core/modules/Planet.cpp:142
+#: src/core/modules/Planet.cpp:144
 msgid "asteroid"
 msgstr "asteroidas"
 
-#: src/core/modules/Planet.cpp:143
+#: src/core/modules/Planet.cpp:145
 msgid "plutino"
 msgstr "plutinas"
 
-#: src/core/modules/Planet.cpp:144
+#: src/core/modules/Planet.cpp:146
 msgid "comet"
 msgstr "kometa"
 
-#: src/core/modules/Planet.cpp:145
+#: src/core/modules/Planet.cpp:147
 msgid "dwarf planet"
 msgstr "nykštukinė planeta"
 
-#: src/core/modules/Planet.cpp:146
+#: src/core/modules/Planet.cpp:148
 msgid "cubewano"
 msgstr "kubevanas"
 
-#: src/core/modules/Planet.cpp:147
+#: src/core/modules/Planet.cpp:149
 msgid "scattered disc object"
 msgstr "išsklaidyto disko formos objektas"
 
-#: src/core/modules/Planet.cpp:148
+#: src/core/modules/Planet.cpp:150
 msgid "Oort cloud object"
 msgstr "Orto debesies objektas"
 
-#: src/core/modules/Planet.cpp:149
+#: src/core/modules/Planet.cpp:151
 msgid "sednoid"
 msgstr "sednoidas"
 
-#: src/core/modules/Planet.cpp:150
+#: src/core/modules/Planet.cpp:152
 msgid "interstellar object"
 msgstr "tarpžvaigždinės erdvės objektas"
 
 #. TRANSLATORS: Moon is the word for a planet moon, not Earth's Moon.
-#: src/core/modules/Planet.cpp:584
+#: src/core/modules/Planet.cpp:590
 #, qt-format
 msgctxt "add-on to planet name in planet narration"
 msgid " (Moon %1)"
 msgstr "(Mėnulis %1)"
 
-#: src/core/modules/Planet.cpp:587
+#: src/core/modules/Planet.cpp:593
 #, qt-format
 msgctxt "planet narration"
 msgid "(enlarged %1 times)"
 msgstr "(padidinta %1 kart.)"
 
-#: src/core/modules/Planet.cpp:600 src/core/modules/Comet.cpp:203
+#: src/core/modules/Planet.cpp:606 src/core/modules/Comet.cpp:203
 #: src/core/modules/StarWrapper.cpp:263 src/core/modules/StarWrapper.cpp:597
 #: plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "Absoliutusis ryškis"
 
-#: src/core/modules/Planet.cpp:603
+#: src/core/modules/Planet.cpp:609
 msgid "Mean Opposition Magnitude"
 msgstr "Vidutinis opozicijos ryškis"
 
-#: src/core/modules/Planet.cpp:616
+#: src/core/modules/Planet.cpp:622
 #, qt-format
 msgctxt "planet narration"
 msgid "Its absolute Magnitude is %1"
 msgstr "Jos absoliutusis ryškis yra %1"
 
-#: src/core/modules/Planet.cpp:619
+#: src/core/modules/Planet.cpp:625
 #, qt-format
 msgctxt "planet narration"
 msgid "Its mean Opposition Magnitude is %1"
 msgstr "Jos vidutinis opozicijos ryškis yra %1"
 
-#: src/core/modules/Planet.cpp:655
+#: src/core/modules/Planet.cpp:661
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "neperiod."
 
-#: src/core/modules/Planet.cpp:660
+#: src/core/modules/Planet.cpp:666
 msgctxt "type of comet"
 msgid "short-period"
 msgstr "trumpo periodo"
 
-#: src/core/modules/Planet.cpp:662
+#: src/core/modules/Planet.cpp:668
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "period."
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:721 src/core/modules/Planet.cpp:723
+#: src/core/modules/Planet.cpp:727 src/core/modules/Planet.cpp:729
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "Ekliptikos"
 
-#: src/core/modules/Planet.cpp:732 src/core/modules/Planet.cpp:733
+#: src/core/modules/Planet.cpp:738 src/core/modules/Planet.cpp:739
 msgid "Hourly motion"
 msgstr "Valandinis poslinkis"
 
-#: src/core/modules/Planet.cpp:732 src/core/modules/Planet.cpp:1402
-#: src/core/modules/Planet.cpp:1411 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/Planet.cpp:738 src/core/modules/Planet.cpp:1408
+#: src/core/modules/Planet.cpp:1417 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "link"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:747 src/gui/AstroCalcDialog.cpp:938
+#: src/core/modules/Planet.cpp:753 src/gui/AstroCalcDialog.cpp:938
 #: src/gui/AstroCalcDialog.cpp:1251 src/gui/AstroCalcDialog.cpp:1549
 #: src/gui/AstroCalcDialog.cpp:1825 src/gui/AstroCalcDialog.cpp:1990
 #: src/gui/AstroCalcDialog.cpp:8778 src/gui/AstroCalcChart.cpp:431
@@ -3262,478 +3262,478 @@ msgid "AU"
 msgstr "Astr. vnt."
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:749
+#: src/core/modules/Planet.cpp:755
 msgid "Light time"
 msgstr "Šviesos sklidimo laikas"
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:765 src/core/modules/Planet.cpp:786
+#: src/core/modules/Planet.cpp:771 src/core/modules/Planet.cpp:792
 #: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:8755
 msgctxt "distance"
 msgid "M km"
 msgstr "M km"
 
-#: src/core/modules/Planet.cpp:769 src/core/modules/Planet.cpp:771
+#: src/core/modules/Planet.cpp:775 src/core/modules/Planet.cpp:777
 msgid "Distance from Sun"
 msgstr "Atstumas nuo saulės"
 
-#: src/core/modules/Planet.cpp:814
+#: src/core/modules/Planet.cpp:820
 msgid "Orbital velocity"
 msgstr "Orbitinis greitis"
 
-#: src/core/modules/Planet.cpp:817
+#: src/core/modules/Planet.cpp:823
 msgid "Heliocentric velocity"
 msgstr "Heliocentrinis greitis"
 
-#: src/core/modules/Planet.cpp:832
+#: src/core/modules/Planet.cpp:838
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
 "PASTABA:  epoch %1  elementai   tikriausiai pasenę. Atnaujinkite duomenis!"
 
-#: src/core/modules/Planet.cpp:870
+#: src/core/modules/Planet.cpp:876
 msgid "with rings"
 msgstr "su žiedais"
 
-#: src/core/modules/Planet.cpp:887
+#: src/core/modules/Planet.cpp:893
 msgid "scaled up to"
 msgstr "padidintas iki"
 
-#: src/core/modules/Planet.cpp:897
+#: src/core/modules/Planet.cpp:903
 msgid "Apparent diameter"
 msgstr "Matomas skersmuo"
 
-#: src/core/modules/Planet.cpp:902
+#: src/core/modules/Planet.cpp:908
 msgid "Equatorial diameter"
 msgstr "Pusiaujo skersmuo"
 
 #. TRANSLATORS: a planet's angular diameter is %1, or %2 with rings
-#: src/core/modules/Planet.cpp:936
+#: src/core/modules/Planet.cpp:942
 #, qt-format
 msgctxt "planet narration"
 msgid "%1, or, with rings, %2"
 msgstr "%1 arba, su žiedais, %2"
 
-#: src/core/modules/Planet.cpp:962
+#: src/core/modules/Planet.cpp:968
 #, qt-format
 msgctxt "planet narration"
 msgid "The apparent diameter of %1 is %2"
 msgstr "%1-o Matomasis skersmuo yra %2"
 
-#: src/core/modules/Planet.cpp:967
+#: src/core/modules/Planet.cpp:973
 #, qt-format
 msgctxt "object narration"
 msgid "Its equatorial diameter is %1 kilometers"
 msgstr "Jos pusiaujo skersmuo yra %1 km."
 
-#: src/core/modules/Planet.cpp:1007 src/core/modules/Planet.cpp:1008
-#: src/core/modules/Planet.cpp:1016 src/gui/AstroCalcChart.cpp:96
+#: src/core/modules/Planet.cpp:1013 src/core/modules/Planet.cpp:1014
+#: src/core/modules/Planet.cpp:1022 src/gui/AstroCalcChart.cpp:96
 #: src/gui/AstroCalcChart.cpp:106 src/gui/AstroCalcChart.cpp:433
 #: src/gui/AstroCalcChart.cpp:459 src/ui_configurationDialog.h:2505
 msgid "Elongation"
 msgstr "Elongacija"
 
-#: src/core/modules/Planet.cpp:1009 src/core/modules/Planet.cpp:1018
+#: src/core/modules/Planet.cpp:1015 src/core/modules/Planet.cpp:1024
 #: src/gui/AstroCalcChart.cpp:99 src/gui/AstroCalcChart.cpp:109
 #: src/gui/AstroCalcChart.cpp:442 src/gui/AstroCalcChart.cpp:468
 #: plugins/Satellites/src/Satellite.cpp:411
 msgid "Phase angle"
 msgstr "Fazinis kampas"
 
-#: src/core/modules/Planet.cpp:1011 src/core/modules/Planet.cpp:1020
+#: src/core/modules/Planet.cpp:1017 src/core/modules/Planet.cpp:1026
 msgid "Illuminated"
 msgstr "Apšviestas"
 
-#: src/core/modules/Planet.cpp:1017
+#: src/core/modules/Planet.cpp:1023
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:355
 msgid "Elong. in Ecl.Long."
 msgstr "Pailg. Ekl. ilgumoje"
 
-#: src/core/modules/Planet.cpp:1032 src/gui/AstroCalcDialog.cpp:8988
+#: src/core/modules/Planet.cpp:1038 src/gui/AstroCalcDialog.cpp:8988
 #: src/gui/AstroCalcChart.cpp:476
 msgid "Angular distance"
 msgstr "Kampinis atstumas"
 
-#: src/core/modules/Planet.cpp:1067
+#: src/core/modules/Planet.cpp:1073
 #, qt-format
 msgctxt "planet narration"
 msgid "Elongation from the Sun is %1, or %2 in ecliptical longitude"
 msgstr "Atstumas nuo Saulės yra %1 arba %2 ekliptikos ilgumos"
 
-#: src/core/modules/Planet.cpp:1068
+#: src/core/modules/Planet.cpp:1074
 #, qt-format
 msgctxt "planet narration"
 msgid "Phase angle is %1"
 msgstr "Fazinis kampas yra %1"
 
-#: src/core/modules/Planet.cpp:1070
+#: src/core/modules/Planet.cpp:1076
 #, qt-format
 msgctxt "planet narration"
 msgid "The illuminated fraction is %1 percent"
 msgstr "Apšviesta dalis yra %1 proc."
 
-#: src/core/modules/Planet.cpp:1081
+#: src/core/modules/Planet.cpp:1087
 #, qt-format
 msgctxt "planet narration"
 msgid "The angular distance from %1 is %2"
 msgstr "Kampinis atstumas nuo %1-ojo yra %2"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:1099 src/core/StelUtils.cpp:169
+#: src/core/modules/Planet.cpp:1105 src/core/StelUtils.cpp:169
 #: src/gui/AstroCalcDialog.cpp:8789 src/gui/AstroCalcAlmanacWidget.cpp:256
 msgctxt "duration"
 msgid "days"
 msgstr "dienos"
 
-#: src/core/modules/Planet.cpp:1108
+#: src/core/modules/Planet.cpp:1114
 msgid "Sidereal period"
 msgstr "Žvaigždinis periodas"
 
-#: src/core/modules/Planet.cpp:1117
+#: src/core/modules/Planet.cpp:1123
 msgid "Synodic period"
 msgstr "Sinodinis periodas"
 
-#: src/core/modules/Planet.cpp:1138
+#: src/core/modules/Planet.cpp:1144
 #, qt-format
 msgctxt "planet narration"
 msgid "The Sidereal period is %1 days or %2 years"
 msgstr "Siderinis laikotarpis yra %1 dienų arba %2 metų."
 
-#: src/core/modules/Planet.cpp:1146
+#: src/core/modules/Planet.cpp:1152
 #, qt-format
 msgctxt "planet narration"
 msgid "The synodic period is %1 days or %2 years"
 msgstr "Sinodinis periodas yra %1 dienų arba %2 metų."
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1227 plugins/Planes/src/AircraftObject.cpp:207
+#: src/core/modules/Planet.cpp:1233 plugins/Planes/src/AircraftObject.cpp:207
 msgctxt "speed"
 msgid "m/s"
 msgstr "m/s"
 
-#: src/core/modules/Planet.cpp:1242
+#: src/core/modules/Planet.cpp:1248
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1048
 msgid "Sidereal day"
 msgstr "Žvaigždinė diena"
 
-#: src/core/modules/Planet.cpp:1244
+#: src/core/modules/Planet.cpp:1250
 msgid "Mean solar day"
 msgstr "Vidutinė saulės diena"
 
-#: src/core/modules/Planet.cpp:1250 src/core/modules/Planet.cpp:1622
+#: src/core/modules/Planet.cpp:1256 src/core/modules/Planet.cpp:1628
 msgid "The period of rotation is chaotic"
 msgstr "Sukimosi periodas chaotiškas."
 
-#: src/core/modules/Planet.cpp:1256 src/core/modules/Planet.cpp:1258
-#: src/core/modules/Planet.cpp:1264 src/core/modules/Planet.cpp:1266
+#: src/core/modules/Planet.cpp:1262 src/core/modules/Planet.cpp:1264
+#: src/core/modules/Planet.cpp:1270 src/core/modules/Planet.cpp:1272
 msgid "Equatorial rotation velocity"
 msgstr "Ekvatorinis sukimosi greitis"
-
-#: src/core/modules/Planet.cpp:1292 src/core/modules/Planet.cpp:1665
-#: src/core/modules/Planet.cpp:2099
-msgctxt "Moon phase"
-msgid "New Moon"
-msgstr "Jaunatis"
-
-#: src/core/modules/Planet.cpp:1294 src/core/modules/Planet.cpp:1667
-#: src/core/modules/Planet.cpp:2101
-msgctxt "Moon phase"
-msgid "Waxing Crescent"
-msgstr "Priešpilnis"
-
-#: src/core/modules/Planet.cpp:1296 src/core/modules/Planet.cpp:1669
-#: src/core/modules/Planet.cpp:2103
-msgctxt "Moon phase"
-msgid "First Quarter"
-msgstr "Pirmasis ketvirtis"
 
 #: src/core/modules/Planet.cpp:1298 src/core/modules/Planet.cpp:1671
 #: src/core/modules/Planet.cpp:2105
 msgctxt "Moon phase"
-msgid "Waxing Gibbous"
-msgstr "Vos didėjantis mėnulis"
+msgid "New Moon"
+msgstr "Jaunatis"
 
 #: src/core/modules/Planet.cpp:1300 src/core/modules/Planet.cpp:1673
 #: src/core/modules/Planet.cpp:2107
 msgctxt "Moon phase"
-msgid "Full Moon"
-msgstr "Pilnatis"
+msgid "Waxing Crescent"
+msgstr "Priešpilnis"
 
 #: src/core/modules/Planet.cpp:1302 src/core/modules/Planet.cpp:1675
 #: src/core/modules/Planet.cpp:2109
 msgctxt "Moon phase"
-msgid "Waning Gibbous"
-msgstr "Dylantis mėnulis"
+msgid "First Quarter"
+msgstr "Pirmasis ketvirtis"
 
 #: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1677
 #: src/core/modules/Planet.cpp:2111
 msgctxt "Moon phase"
-msgid "Third Quarter"
-msgstr "Trečias ketvirtis"
+msgid "Waxing Gibbous"
+msgstr "Vos didėjantis mėnulis"
 
 #: src/core/modules/Planet.cpp:1306 src/core/modules/Planet.cpp:1679
 #: src/core/modules/Planet.cpp:2113
 msgctxt "Moon phase"
+msgid "Full Moon"
+msgstr "Pilnatis"
+
+#: src/core/modules/Planet.cpp:1308 src/core/modules/Planet.cpp:1681
+#: src/core/modules/Planet.cpp:2115
+msgctxt "Moon phase"
+msgid "Waning Gibbous"
+msgstr "Dylantis mėnulis"
+
+#: src/core/modules/Planet.cpp:1310 src/core/modules/Planet.cpp:1683
+#: src/core/modules/Planet.cpp:2117
+msgctxt "Moon phase"
+msgid "Third Quarter"
+msgstr "Trečias ketvirtis"
+
+#: src/core/modules/Planet.cpp:1312 src/core/modules/Planet.cpp:1685
+#: src/core/modules/Planet.cpp:2119
+msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Delčia"
 
-#: src/core/modules/Planet.cpp:1314
+#: src/core/modules/Planet.cpp:1320
 msgid "Moon age"
 msgstr "Mėnulio amžius"
 
-#: src/core/modules/Planet.cpp:1314
+#: src/core/modules/Planet.cpp:1320
 msgid "days old"
 msgstr "d. senumo"
 
-#: src/core/modules/Planet.cpp:1334 src/core/modules/Planet.cpp:1337
+#: src/core/modules/Planet.cpp:1340 src/core/modules/Planet.cpp:1343
 msgid "Position angle of bright limb"
 msgstr "Ryškios kraštinės padėties kampas"
 
-#: src/core/modules/Planet.cpp:1401 src/core/modules/Planet.cpp:1410
-#: src/core/modules/Planet.cpp:1446 src/core/modules/Planet.cpp:1453
+#: src/core/modules/Planet.cpp:1407 src/core/modules/Planet.cpp:1416
+#: src/core/modules/Planet.cpp:1452 src/core/modules/Planet.cpp:1459
 msgid "Position Angle of axis"
 msgstr "Ašies pozicijos kampas "
 
-#: src/core/modules/Planet.cpp:1402 src/core/modules/Planet.cpp:1403
-#: src/core/modules/Planet.cpp:1411 src/core/modules/Planet.cpp:1412
+#: src/core/modules/Planet.cpp:1408 src/core/modules/Planet.cpp:1409
+#: src/core/modules/Planet.cpp:1417 src/core/modules/Planet.cpp:1418
 msgid "Libration"
 msgstr "Libracija"
 
-#: src/core/modules/Planet.cpp:1404 src/core/modules/Planet.cpp:1413
-#: src/core/modules/Planet.cpp:1448 src/core/modules/Planet.cpp:1455
+#: src/core/modules/Planet.cpp:1410 src/core/modules/Planet.cpp:1419
+#: src/core/modules/Planet.cpp:1454 src/core/modules/Planet.cpp:1461
 msgid "Subsolar point"
 msgstr "Posaulinis taškas"
 
-#: src/core/modules/Planet.cpp:1405 src/core/modules/Planet.cpp:1414
+#: src/core/modules/Planet.cpp:1411 src/core/modules/Planet.cpp:1420
 msgid "Colongitude"
 msgstr "ko-ilguma"
 
-#: src/core/modules/Planet.cpp:1447 src/core/modules/Planet.cpp:1454
+#: src/core/modules/Planet.cpp:1453 src/core/modules/Planet.cpp:1460
 msgid "Center point"
 msgstr "Centro taškas"
 
-#: src/core/modules/Planet.cpp:1478
+#: src/core/modules/Planet.cpp:1484
 msgid "Eclipse magnitude"
 msgstr "Užtemimo stiprumas"
 
-#: src/core/modules/Planet.cpp:1481
+#: src/core/modules/Planet.cpp:1487
 msgid "Eclipse obscuration"
 msgstr "Užtemimo užtemdymas"
 
-#: src/core/modules/Planet.cpp:1483
+#: src/core/modules/Planet.cpp:1489
 msgid "Crescent angle"
 msgstr "Pusmėnulio kampas"
 
-#: src/core/modules/Planet.cpp:1511
+#: src/core/modules/Planet.cpp:1517
 msgid "Moon/Sun diameter ratio"
 msgstr "Mėnulio/Saulės skersmens santykis"
 
-#: src/core/modules/Planet.cpp:1514
+#: src/core/modules/Planet.cpp:1520
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(metinis)"
 
-#: src/core/modules/Planet.cpp:1516
+#: src/core/modules/Planet.cpp:1522
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(bendras)"
 
-#: src/core/modules/Planet.cpp:1527
+#: src/core/modules/Planet.cpp:1533
 msgid "Central eclipse duration"
 msgstr "Centrinio užtemimo trukmė"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1529
+#: src/core/modules/Planet.cpp:1535
 #: plugins/Observability/src/Observability.cpp:159
 msgid "m"
 msgstr "m"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1531
+#: src/core/modules/Planet.cpp:1537
 #: plugins/Observability/src/Observability.cpp:161
 msgid "s"
 msgstr "s"
 
-#: src/core/modules/Planet.cpp:1532
+#: src/core/modules/Planet.cpp:1538
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Saulės užtemimo centras (Plat./Ilg.)"
 
-#: src/core/modules/Planet.cpp:1542
+#: src/core/modules/Planet.cpp:1548
 msgid "Shadow center point is"
 msgstr "Šešėlio vidurio taškas yra"
 
-#: src/core/modules/Planet.cpp:1544
+#: src/core/modules/Planet.cpp:1550
 msgid "km towards azimuth"
 msgstr "km link azimuto"
 
-#: src/core/modules/Planet.cpp:1547
+#: src/core/modules/Planet.cpp:1553
 msgid "Width of antumbra"
 msgstr "Antumbros plotis"
 
-#: src/core/modules/Planet.cpp:1549
+#: src/core/modules/Planet.cpp:1555
 msgid "Width of umbra"
 msgstr "Umbros/Šešėlio plotis"
 
-#: src/core/modules/Planet.cpp:1567
+#: src/core/modules/Planet.cpp:1573
 msgid "Penumbral eclipse magnitude"
 msgstr "Dalinio užtemimo dydis"
 
-#: src/core/modules/Planet.cpp:1570
+#: src/core/modules/Planet.cpp:1576
 msgid "Umbral eclipse magnitude"
 msgstr "Pilno užtemimo dydis"
 
-#: src/core/modules/Planet.cpp:1577 src/core/modules/Planet.cpp:1915
+#: src/core/modules/Planet.cpp:1583 src/core/modules/Planet.cpp:1921
 #: src/gui/ViewDialog.cpp:982
 msgid "Albedo"
 msgstr "Albedas"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/Planet.cpp:1604
+#: src/core/modules/Planet.cpp:1610
 msgctxt "speed"
 msgid "kilometers per second"
 msgstr "kilometrai(ų) per sekundę"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1606
+#: src/core/modules/Planet.cpp:1612
 msgctxt "speed"
 msgid "meters per second"
 msgstr "metrai per sekundę"
 
-#: src/core/modules/Planet.cpp:1613
+#: src/core/modules/Planet.cpp:1619
 #, qt-format
 msgctxt "planet narration"
 msgid "A rotation takes %1."
 msgstr "Vienas apsisukimas trunka %1."
 
-#: src/core/modules/Planet.cpp:1615
+#: src/core/modules/Planet.cpp:1621
 #, qt-format
 msgctxt "planet narration"
 msgid "A rotation takes %1, while a Mean Solar Day takes %2."
 msgstr "Vienas apsisukimas trunka %1, o vidutinė saulės diena trunka %2."
 
-#: src/core/modules/Planet.cpp:1628 src/core/modules/Planet.cpp:1630
-#: src/core/modules/Planet.cpp:1637 src/core/modules/Planet.cpp:1639
+#: src/core/modules/Planet.cpp:1634 src/core/modules/Planet.cpp:1636
+#: src/core/modules/Planet.cpp:1643 src/core/modules/Planet.cpp:1645
 #, qt-format
 msgctxt "planet narration"
 msgid "The Equatorial rotation velocity is %1 %2"
 msgstr "Pusiaujo sukimosi greitis yra %1 %2"
 
-#: src/core/modules/Planet.cpp:1688
+#: src/core/modules/Planet.cpp:1694
 #, qt-format
 msgctxt "planet narration"
 msgid "The Moon is %1 days old and appears as %2"
 msgstr "Mėnulis yra %1 d. senumo ir atrodo kaip %2"
 
-#: src/core/modules/Planet.cpp:1690
+#: src/core/modules/Planet.cpp:1696
 #, qt-format
 msgctxt "planet narration"
 msgid "The Moon is %1 days old"
 msgstr "Mėnulis yra %1 d. senumo"
 
-#: src/core/modules/Planet.cpp:1705
+#: src/core/modules/Planet.cpp:1711
 #, qt-format
 msgctxt "planet narration"
 msgid "The position angle of the bright limb is %1"
 msgstr "Ryškaus krašto padėties kampas yra %1"
 
-#: src/core/modules/Planet.cpp:1710
+#: src/core/modules/Planet.cpp:1716
 msgctxt "compass direction narration"
 msgid "South"
 msgstr "Pietūs"
 
-#: src/core/modules/Planet.cpp:1711
+#: src/core/modules/Planet.cpp:1717
 msgctxt "compass direction narration"
 msgid "South South West"
 msgstr "Pietų PietVakariai"
 
-#: src/core/modules/Planet.cpp:1712
+#: src/core/modules/Planet.cpp:1718
 msgctxt "compass direction narration"
 msgid "South West"
 msgstr "Pietvakariai"
 
-#: src/core/modules/Planet.cpp:1713
+#: src/core/modules/Planet.cpp:1719
 msgctxt "compass direction narration"
 msgid "West South West"
 msgstr "Vakarų PietVakariai"
 
-#: src/core/modules/Planet.cpp:1714
+#: src/core/modules/Planet.cpp:1720
 msgctxt "compass direction narration"
 msgid "West"
 msgstr "Vakarai"
 
-#: src/core/modules/Planet.cpp:1715
+#: src/core/modules/Planet.cpp:1721
 msgctxt "compass direction narration"
 msgid "West North West"
 msgstr "Vakarų Šiaurės Vakarai"
 
-#: src/core/modules/Planet.cpp:1716
+#: src/core/modules/Planet.cpp:1722
 msgctxt "compass direction narration"
 msgid "North West"
 msgstr "Šiaurės Vakarai"
 
-#: src/core/modules/Planet.cpp:1717
+#: src/core/modules/Planet.cpp:1723
 msgctxt "compass direction narration"
 msgid "North North West"
 msgstr "Šiaurės Šiaurės Vakarai"
 
-#: src/core/modules/Planet.cpp:1718
+#: src/core/modules/Planet.cpp:1724
 msgctxt "compass direction narration"
 msgid "North"
 msgstr "Šiaurė"
 
-#: src/core/modules/Planet.cpp:1719
+#: src/core/modules/Planet.cpp:1725
 msgctxt "compass direction narration"
 msgid "North North East"
 msgstr "Šiaurės Šiaurės Rytai"
 
-#: src/core/modules/Planet.cpp:1720
+#: src/core/modules/Planet.cpp:1726
 msgctxt "compass direction narration"
 msgid "North East"
 msgstr "Šiaurės Rytai"
 
-#: src/core/modules/Planet.cpp:1721
+#: src/core/modules/Planet.cpp:1727
 msgctxt "compass direction narration"
 msgid "East North East"
 msgstr "Rytų Šiaurės Rytai"
 
-#: src/core/modules/Planet.cpp:1722
+#: src/core/modules/Planet.cpp:1728
 msgctxt "compass direction narration"
 msgid "East"
 msgstr "Rytai"
 
-#: src/core/modules/Planet.cpp:1723
+#: src/core/modules/Planet.cpp:1729
 msgctxt "compass direction narration"
 msgid "East South East"
 msgstr "Rytų Pietų Rytai"
 
-#: src/core/modules/Planet.cpp:1724
+#: src/core/modules/Planet.cpp:1730
 msgctxt "compass direction narration"
 msgid "South East"
 msgstr "Pietryčiai"
 
-#: src/core/modules/Planet.cpp:1725
+#: src/core/modules/Planet.cpp:1731
 msgctxt "compass direction narration"
 msgid "South South East"
 msgstr "Pietų Pietryčiai"
 
-#: src/core/modules/Planet.cpp:1740
+#: src/core/modules/Planet.cpp:1746
 msgctxt "object narration: emphasis stage 1/3"
 msgid "nicely"
 msgstr "gražiai"
 
-#: src/core/modules/Planet.cpp:1742
+#: src/core/modules/Planet.cpp:1748
 msgctxt "object narration: emphasis stage 2/3"
 msgid "strongly"
 msgstr "stipriai"
 
-#: src/core/modules/Planet.cpp:1744
+#: src/core/modules/Planet.cpp:1750
 msgctxt "object narration: emphasis stage 3/3"
 msgid "extremely"
 msgstr "išskirtinai"
 
-#: src/core/modules/Planet.cpp:1768
+#: src/core/modules/Planet.cpp:1774
 #, qt-format
 msgctxt "planet narration"
 msgid "The position angle of the Moon's axis is at %1"
@@ -3741,98 +3741,98 @@ msgstr "Mėnulio ašies padėties kampas yra %1"
 
 #. TRANSLATORS: "Libration is [X degrees] towards [Y degrees], which
 #. [-/nicely/strongly/extremely] prefers the limb at [compass rose direction]"
-#: src/core/modules/Planet.cpp:1770
+#: src/core/modules/Planet.cpp:1776
 #, qt-format
 msgctxt "planet narration"
 msgid "The libration is %1 towards %2, which %3 prefers the limb at the %4"
 msgstr "Libracija yra %1 link %2, o %3 teikia pirmenybę ribai ties %4"
 
-#: src/core/modules/Planet.cpp:1771
+#: src/core/modules/Planet.cpp:1777
 #, qt-format
 msgctxt "planet narration"
 msgid "The Libration in longitude is %1, and in latitude %2"
 msgstr "Libracija ilgumoje yra %1, o platumoje %2."
 
-#: src/core/modules/Planet.cpp:1772
+#: src/core/modules/Planet.cpp:1778
 #, qt-format
 msgctxt "planet narration"
 msgid "The subsolar point is at longitude %1 and latitude %2"
 msgstr "Taškas po saule yra %1 ilgumos ir %2 platumos."
 
-#: src/core/modules/Planet.cpp:1773
+#: src/core/modules/Planet.cpp:1779
 #, qt-format
 msgctxt "planet narration"
 msgid "The colongitude is %1"
 msgstr "Ko-ilguma yra %1"
 
-#: src/core/modules/Planet.cpp:1784
+#: src/core/modules/Planet.cpp:1790
 msgctxt "Jupiter longitude system II, narration"
 msgid "in system two"
 msgstr "antroje sistemoje"
 
-#: src/core/modules/Planet.cpp:1785
+#: src/core/modules/Planet.cpp:1791
 msgctxt "Saturn longitude system III, narration"
 msgid "in system three"
 msgstr "trečioje sistemoje"
 
-#: src/core/modules/Planet.cpp:1802
+#: src/core/modules/Planet.cpp:1808
 #, qt-format
 msgid "The position Angle of the rotation axis is at %1"
 msgstr "Sukimosi ašies padėties kampas yra ties %1"
 
-#: src/core/modules/Planet.cpp:1804
+#: src/core/modules/Planet.cpp:1810
 #, qt-format
 msgctxt "planet narration"
 msgid "The Center point %1 has longitude %2 and latitude %3"
 msgstr "Centrinis taškas %1 yra %2 ilgumos ir %3 platumos"
 
-#: src/core/modules/Planet.cpp:1805
+#: src/core/modules/Planet.cpp:1811
 #, qt-format
 msgctxt "planet narration"
 msgid "The Subsolar point %1 has longitude %2 and latitude %3"
 msgstr "Subsoliarinis taškas %1 yra %2 ilgumos ir %3 platumos."
 
-#: src/core/modules/Planet.cpp:1827
+#: src/core/modules/Planet.cpp:1833
 #, qt-format
 msgctxt "planet narration"
 msgid "We have a Solar eclipse of magnitude %1"
 msgstr "Turime %1 stiprumo saulės užtemimą"
 
-#: src/core/modules/Planet.cpp:1830
+#: src/core/modules/Planet.cpp:1836
 #, qt-format
 msgctxt "planet narration"
 msgid "The eclipse obscuration is %1 percent"
 msgstr "Užtemimas sudaro %1 proc. padengimo"
 
-#: src/core/modules/Planet.cpp:1832
+#: src/core/modules/Planet.cpp:1838
 #, qt-format
 msgctxt "planet narration"
 msgid "The crescent angle is at %1 degrees"
 msgstr "Pusmėnulio kampas yra %1 laipsnių"
 
-#: src/core/modules/Planet.cpp:1859
+#: src/core/modules/Planet.cpp:1865
 #, qt-format
 msgctxt "planet narration"
 msgid "The Moon to Sun diameter ratio is %1"
 msgstr "Mėnulio ir Saulės skersmenų santykis yra %1"
 
-#: src/core/modules/Planet.cpp:1862
+#: src/core/modules/Planet.cpp:1868
 msgctxt "type of solar eclipse"
 msgid "(globally, the eclipse is annular)"
 msgstr "(globaliai, užtemimas yra žiedinis)"
 
-#: src/core/modules/Planet.cpp:1864
+#: src/core/modules/Planet.cpp:1870
 msgctxt "type of solar eclipse"
 msgid "(globally, the eclipse is total)"
 msgstr "(globaliai, užtemimas yra pilnas)"
 
-#: src/core/modules/Planet.cpp:1874
+#: src/core/modules/Planet.cpp:1880
 #, qt-format
 msgctxt "planet narration"
 msgid "The duration of the Central eclipse is %1 minutes and %2 seconds"
 msgstr "Centrinio užtemimo trukmė yra %1 min. ir %2 sek."
 
-#: src/core/modules/Planet.cpp:1877
+#: src/core/modules/Planet.cpp:1883
 #, qt-format
 msgctxt "planet narration"
 msgid ""
@@ -3841,50 +3841,50 @@ msgid ""
 msgstr ""
 "Saulės užtemimo centras yra %1 laipsn. platumos ir %2  laipsn. ilgumos"
 
-#: src/core/modules/Planet.cpp:1880
+#: src/core/modules/Planet.cpp:1886
 #, qt-format
 msgctxt "planet narration"
 msgid "The center of the solar eclipse is at latitude %1 and longitude %2"
 msgstr "Saulės užtemimo centras yra %1 platumos ir %2 ilgumos "
 
-#: src/core/modules/Planet.cpp:1886
+#: src/core/modules/Planet.cpp:1892
 #, qt-format
 msgctxt "object narration"
 msgid "The shadow center point is %1 km towards azimuth %2 degrees"
 msgstr "Šešėlio centras yra %1 km azimuto %2 laipsnių kryptimi"
 
-#: src/core/modules/Planet.cpp:1889
+#: src/core/modules/Planet.cpp:1895
 #, qt-format
 msgctxt "planet narration"
 msgid "The width of the antumbra is %1 kilometers"
 msgstr "Antumbros plotis yra %1 km."
 
-#: src/core/modules/Planet.cpp:1891
+#: src/core/modules/Planet.cpp:1897
 #, qt-format
 msgctxt "planet narration"
 msgid "The width of the umbra is %1 kilometers"
 msgstr "Umbros plotis yra %1 km."
 
-#: src/core/modules/Planet.cpp:1907
+#: src/core/modules/Planet.cpp:1913
 #, qt-format
 msgctxt "planet narration"
 msgid "The penumbral eclipse magnitude is %1 percent"
 msgstr "Dalinio užtemimo stiprumas yra 1 proc."
 
-#: src/core/modules/Planet.cpp:1909
+#: src/core/modules/Planet.cpp:1915
 #, qt-format
 msgctxt "planet narration"
 msgid "The umbral eclipse magnitude is %1 percent"
 msgstr "Umbros užtemimo stiprumas yra %1 proc."
 
-#: src/core/modules/Planet.cpp:1926
+#: src/core/modules/Planet.cpp:1932
 msgid "Discovered"
 msgstr "Atrasta"
 
 #. TRANSLATORS: Narration, %1=planet name, day of discovery given in %2=day
 #. number, %3=month name, %4=year. Many languages change from American word
 #. order used here!
-#: src/core/modules/Planet.cpp:1943
+#: src/core/modules/Planet.cpp:1949
 #, qt-format
 msgctxt "planet narration"
 msgid "%1 was discovered on %3 %2, %4"
@@ -3892,14 +3892,14 @@ msgstr "%1 buvo atrasta %3 %2, %4 "
 
 #. TRANSLATORS: Narration, %1=planet name, only year and month of discovery
 #. given in %2
-#: src/core/modules/Planet.cpp:1948
+#: src/core/modules/Planet.cpp:1954
 #, qt-format
 msgctxt "planet narration"
 msgid "%1 was discovered in %2 of %3"
 msgstr "%1 buvo atrasta %3 m. %2 mėn. "
 
 #. TRANSLATORS: Narration, %1=planet name, only year of discovery given in %2
-#: src/core/modules/Planet.cpp:1953
+#: src/core/modules/Planet.cpp:1959
 #, qt-format
 msgctxt "planet narration"
 msgid "%1 was discovered in %2"
@@ -3908,7 +3908,7 @@ msgstr "%1 buvo atrasta %2"
 #. TRANSLATORS: Narration, %1=planet name, day of discovery given in %2=day
 #. number, %3=month name, %4=year. Many languages change from American word
 #. order used here! %5 is discoverer name.
-#: src/core/modules/Planet.cpp:1961
+#: src/core/modules/Planet.cpp:1967
 #, qt-format
 msgctxt "planet narration"
 msgid "%1 was discovered on %3 %2, %4 by %5"
@@ -3916,7 +3916,7 @@ msgstr "%5 atrado %1 -ą %4 - %3 - %2 "
 
 #. TRANSLATORS: Narration, %1=planet name, only month %2 and year %3 of
 #. discovery given. %4 is discoverer name.
-#: src/core/modules/Planet.cpp:1966
+#: src/core/modules/Planet.cpp:1972
 #, qt-format
 msgctxt "planet narration"
 msgid "%1 was discovered in %2 of %3 by %4"
@@ -3924,105 +3924,105 @@ msgstr "%4 atrado %1 -ą %3 m. %2 mėn. "
 
 #. TRANSLATORS: Narration, %1=planet name, only year of discovery given in %2.
 #. %3 is discoverer name.
-#: src/core/modules/Planet.cpp:1971
+#: src/core/modules/Planet.cpp:1977
 #, qt-format
 msgctxt "planet narration"
 msgid "%1 was discovered in %2 by %3"
 msgstr "%3 atrado %1ą %2"
 
-#: src/core/modules/Planet.cpp:2157
+#: src/core/modules/Planet.cpp:2163
 msgctxt "object narration"
 msgid "called"
 msgstr "vadinama"
 
-#: src/core/modules/Planet.cpp:2164 src/translations.h:1020
+#: src/core/modules/Planet.cpp:2170 src/translations.h:1020
 msgctxt "object narration"
 msgid "a star"
 msgstr "žvaigždė"
 
-#: src/core/modules/Planet.cpp:2165 src/translations.h:1021
+#: src/core/modules/Planet.cpp:2171 src/translations.h:1021
 msgctxt "object narration"
 msgid "a major planet"
 msgstr "didžioji planeta"
 
-#: src/core/modules/Planet.cpp:2166 src/translations.h:1022
+#: src/core/modules/Planet.cpp:2172 src/translations.h:1022
 msgctxt "object narration"
 msgid "a planet moon"
 msgstr "planetos palydovas"
 
-#: src/core/modules/Planet.cpp:2167 src/translations.h:1023
+#: src/core/modules/Planet.cpp:2173 src/translations.h:1023
 msgctxt "object narration"
 msgid "an observer"
 msgstr "stebėtojas"
 
-#: src/core/modules/Planet.cpp:2168 src/translations.h:1024
+#: src/core/modules/Planet.cpp:2174 src/translations.h:1024
 msgctxt "object narration"
 msgid "an artificial object"
 msgstr "dirbtinis objektas"
 
-#: src/core/modules/Planet.cpp:2169 src/translations.h:1025
+#: src/core/modules/Planet.cpp:2175 src/translations.h:1025
 msgctxt "object narration"
 msgid "an asteroid"
 msgstr "asteroidas"
 
-#: src/core/modules/Planet.cpp:2170 src/translations.h:1026
+#: src/core/modules/Planet.cpp:2176 src/translations.h:1026
 msgctxt "object narration"
 msgid "a plutino"
 msgstr "plutinas"
 
-#: src/core/modules/Planet.cpp:2171 src/translations.h:1027
+#: src/core/modules/Planet.cpp:2177 src/translations.h:1027
 msgctxt "object narration"
 msgid "a comet"
 msgstr "kometa"
 
-#: src/core/modules/Planet.cpp:2172 src/translations.h:1028
+#: src/core/modules/Planet.cpp:2178 src/translations.h:1028
 msgctxt "object narration"
 msgid "a dwarf planet"
 msgstr "nykštukinė planeta"
 
-#: src/core/modules/Planet.cpp:2173 src/translations.h:1029
+#: src/core/modules/Planet.cpp:2179 src/translations.h:1029
 msgctxt "object narration"
 msgid "a cubewano"
 msgstr "kubevanas"
 
-#: src/core/modules/Planet.cpp:2174 src/translations.h:1030
+#: src/core/modules/Planet.cpp:2180 src/translations.h:1030
 msgctxt "object narration"
 msgid "a scattered disc object"
 msgstr "sklaidyto disko objektas"
 
-#: src/core/modules/Planet.cpp:2175 src/translations.h:1031
+#: src/core/modules/Planet.cpp:2181 src/translations.h:1031
 msgctxt "object narration"
 msgid "an Oort Cloud Object"
 msgstr "Oorto debesies objektas"
 
-#: src/core/modules/Planet.cpp:2176 src/translations.h:1032
+#: src/core/modules/Planet.cpp:2182 src/translations.h:1032
 msgctxt "object narration"
 msgid "a sednoid"
 msgstr "sednoidas"
 
-#: src/core/modules/Planet.cpp:2177 src/translations.h:1033
+#: src/core/modules/Planet.cpp:2183 src/translations.h:1033
 msgctxt "object narration"
 msgid "an interstellar object"
 msgstr "tarpžvaigždinis objektas"
 
-#: src/core/modules/Planet.cpp:2178 src/core/modules/Planet.cpp:2180
+#: src/core/modules/Planet.cpp:2184 src/core/modules/Planet.cpp:2186
 #: src/translations.h:1034
 msgctxt "object narration"
 msgid "an object of undefined type"
 msgstr "neapibrėžto tipo objektas"
 
-#: src/core/modules/Planet.cpp:2190
+#: src/core/modules/Planet.cpp:2196
 msgctxt "object narration"
 msgid "currently at visual magnitude of"
 msgstr "šiuo metu vizualinio dydžio"
 
-#: src/core/modules/Planet.cpp:2193 src/core/StelObject.cpp:370
+#: src/core/modules/Planet.cpp:2199 src/core/StelObject.cpp:370
 #, qt-format
 msgctxt "object narration: reduced magnitude by extinction"
 msgid "reduced to %1 by %2 airmasses of atmospheric extinction"
 msgstr "sumažintas iki %1 dėl %2 atmosferos oro masių slopinimo"
 
-#: src/core/modules/Planet.cpp:2223 src/core/StelObject.cpp:1635
+#: src/core/modules/Planet.cpp:2229 src/core/StelObject.cpp:1635
 msgctxt "object narration"
 msgid "In this skyculture, it lies within the area of"
 msgstr "Šioje dangaus kultūroje ji yra"
@@ -4031,14 +4031,14 @@ msgstr "Šioje dangaus kultūroje ji yra"
 #. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
 #. TRANSLATORS: Its Zodiacal position is ... (with %1=zodiac system name)
 #. TRANSLATORS: Its lunar station position is ... (with %1=lunar system name)
-#: src/core/modules/Planet.cpp:2231 src/core/modules/Planet.cpp:2238
+#: src/core/modules/Planet.cpp:2237 src/core/modules/Planet.cpp:2244
 #: src/core/StelObject.cpp:1644 src/core/StelObject.cpp:1651
 #, qt-format
 msgctxt "object narration"
 msgid "Its %1 Position is %2"
 msgstr "Jo %1 padėtis yra %2"
 
-#: src/core/modules/Planet.cpp:2259
+#: src/core/modules/Planet.cpp:2265
 #, qt-format
 msgctxt "planet narration"
 msgid ""
@@ -4049,46 +4049,46 @@ msgstr ""
 "kryptimi ir %5 deklinacijos kryptimi."
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:2273
+#: src/core/modules/Planet.cpp:2279
 msgctxt "distance, astronomical unit"
 msgid "Astronomical Units"
 msgstr "Astronominiai vienetai"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:2275
+#: src/core/modules/Planet.cpp:2281
 msgctxt "object narration"
 msgid "or, in light time,"
 msgstr "arba, šviesos laiku,"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/Planet.cpp:2284 src/core/modules/Planet.cpp:2307
+#: src/core/modules/Planet.cpp:2290 src/core/modules/Planet.cpp:2313
 msgctxt "distance"
 msgid "kilometers"
 msgstr "kilometrų"
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
-#: src/core/modules/Planet.cpp:2291 src/core/modules/Planet.cpp:2314
+#: src/core/modules/Planet.cpp:2297 src/core/modules/Planet.cpp:2320
 msgctxt "distance"
 msgid "Million kilometers"
 msgstr "Milijonai(ų) kilometrų"
 
-#: src/core/modules/Planet.cpp:2294
+#: src/core/modules/Planet.cpp:2300
 msgctxt "object narration"
 msgid "The current distance from the Sun amounts to"
 msgstr "Dabartinis atstumas nuo Saulės yra lygus"
 
-#: src/core/modules/Planet.cpp:2317
+#: src/core/modules/Planet.cpp:2323
 msgctxt "object narration"
 msgid "The current distance amounts to"
 msgstr "Dabartinis atstumas yra lygus"
 
-#: src/core/modules/Planet.cpp:2331
+#: src/core/modules/Planet.cpp:2337
 #, qt-format
 msgctxt "planet narration"
 msgid "The orbital velocity of %1 is %2 kilometers per second"
 msgstr "%1 orbitinis greitis yra %2 km/sek."
 
-#: src/core/modules/Planet.cpp:2335
+#: src/core/modules/Planet.cpp:2341
 #, qt-format
 msgctxt "planet narration"
 msgid "while the heliocentric velocity is %1 kilometers per second"
@@ -6292,10 +6292,10 @@ msgstr ""
 "keisti."
 
 #: src/core/StelSkyCultureMgr.cpp:526 src/core/StelSkyCultureMgr.cpp:533
-#: src/core/StelSkyCultureMgr.cpp:540 src/gui/ConfigurationDialog.cpp:1595
+#: src/core/StelSkyCultureMgr.cpp:540 src/gui/ConfigurationDialog.cpp:1610
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
-#: plugins/Oculars/src/gui/OcularDialog.cpp:628
+#: plugins/Oculars/src/gui/OcularDialog.cpp:629
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:256
@@ -6723,11 +6723,11 @@ msgctxt "genitive"
 msgid "November"
 msgstr "Lapkritis"
 
-#: src/core/StelModuleMgr.cpp:312
+#: src/core/StelModuleMgr.cpp:328
 msgid "Links"
 msgstr "Nuorodos"
 
-#: src/core/StelModuleMgr.cpp:313
+#: src/core/StelModuleMgr.cpp:329
 #, qt-format
 msgid ""
 "Support is provided via the Github website.  Be sure to put \"%1\" in the "
@@ -6737,17 +6737,17 @@ msgstr ""
 "pranešimą, į temą įtraukėte \"%1\"."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/core/StelModuleMgr.cpp:316
+#: src/core/StelModuleMgr.cpp:332
 msgid "If you have a question, you can {get an answer here}."
 msgstr "Jei turite klausimą, galite {gauti atsakymą čia}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/core/StelModuleMgr.cpp:318
+#: src/core/StelModuleMgr.cpp:334
 msgid "Bug reports and feature requests can be made {here}."
 msgstr "Klaidų pranešimus ir funkcijų užklausas galima pateikti {čia}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/core/StelModuleMgr.cpp:324
+#: src/core/StelModuleMgr.cpp:340
 msgid "Further information can be found in the {developer documentation}."
 msgstr "Papildomos informacijos galima rasti {kūrėjo dokumentacijoje}."
 
@@ -7069,8 +7069,8 @@ msgid "Select screenshot directory"
 msgstr "Nurodykite katalogą ekrano nuotraukoms"
 
 #: src/gui/ConfigurationDialog.cpp:1036
-#: plugins/Oculars/src/gui/OcularDialog.cpp:593
-#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#: plugins/Oculars/src/gui/OcularDialog.cpp:594
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
 msgctxt "millimeters"
 msgid "mm"
 msgstr "mm"
@@ -7083,22 +7083,22 @@ msgstr "Pikselių skaičius colyje (vaizdo metaduomenims)."
 msgid "Current designated print size"
 msgstr "Dabartinis nustatytas spausdinimo dydis"
 
-#: src/gui/ConfigurationDialog.cpp:1512
+#: src/gui/ConfigurationDialog.cpp:1527
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Pradinis apžvalgos laukas: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:1520
+#: src/gui/ConfigurationDialog.cpp:1535
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Pradinė Az/Alt vaizdo kryptis: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1589
+#: src/gui/ConfigurationDialog.cpp:1604
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
 msgid "Acknowledgments"
 msgstr "Padėkos"
 
-#: src/gui/ConfigurationDialog.cpp:1591
+#: src/gui/ConfigurationDialog.cpp:1606
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
@@ -7109,14 +7109,14 @@ msgstr "Padėkos"
 msgid "Authors"
 msgstr "Autoriai"
 
-#: src/gui/ConfigurationDialog.cpp:1592
+#: src/gui/ConfigurationDialog.cpp:1607
 msgid "Contact"
 msgstr "Susisiekite"
 
-#: src/gui/ConfigurationDialog.cpp:1594 src/gui/HelpDialog.cpp:537
+#: src/gui/ConfigurationDialog.cpp:1609 src/gui/HelpDialog.cpp:537
 #: src/scripting/StelScriptMgr.cpp:657
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
-#: plugins/Oculars/src/gui/OcularDialog.cpp:627
+#: plugins/Oculars/src/gui/OcularDialog.cpp:628
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
@@ -7143,20 +7143,20 @@ msgstr "Susisiekite"
 msgid "Version"
 msgstr "Versija"
 
-#: src/gui/ConfigurationDialog.cpp:1599
+#: src/gui/ConfigurationDialog.cpp:1614
 msgctxt "license"
 msgid "unknown"
 msgstr "nežinoma"
 
-#: src/gui/ConfigurationDialog.cpp:1711
+#: src/gui/ConfigurationDialog.cpp:1726
 msgid "Running script: "
 msgstr "Vykdomas scenarijus: "
 
-#: src/gui/ConfigurationDialog.cpp:1718
+#: src/gui/ConfigurationDialog.cpp:1733
 msgid "Running script: [none]"
 msgstr "Vykdomas scenarijus: [nėra]"
 
-#: src/gui/ConfigurationDialog.cpp:1783
+#: src/gui/ConfigurationDialog.cpp:1798
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -7164,16 +7164,16 @@ msgstr ""
 "Naujų žvaigždžių katalogų siuntimas baigtas!\n"
 "Norėdami juos pamatyti, paleiskite Stellarium iš naujo."
 
-#: src/gui/ConfigurationDialog.cpp:1787
+#: src/gui/ConfigurationDialog.cpp:1802
 msgid "All available star catalogs have been installed."
 msgstr "Visi galimi žvaigždžių katalogai įdiegti."
 
-#: src/gui/ConfigurationDialog.cpp:1792
+#: src/gui/ConfigurationDialog.cpp:1807
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Parsiųsti katalogą %1 iš %2"
 
-#: src/gui/ConfigurationDialog.cpp:1799
+#: src/gui/ConfigurationDialog.cpp:1814
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -7182,7 +7182,7 @@ msgstr ""
 "Siunčiama %1...\n"
 "(Jūs galite uždaryti šį langą.)"
 
-#: src/gui/ConfigurationDialog.cpp:1806
+#: src/gui/ConfigurationDialog.cpp:1821
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -7193,7 +7193,7 @@ msgstr ""
 "Žvaigždžių skaičius: %2 milijonai\n"
 "Ryškio intervalas: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1852 src/gui/ConfigurationDialog.cpp:1893
+#: src/gui/ConfigurationDialog.cpp:1867 src/gui/ConfigurationDialog.cpp:1908
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -7202,11 +7202,11 @@ msgstr ""
 "Klaida siunčiant %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1946
+#: src/gui/ConfigurationDialog.cpp:1961
 msgid "Verifying file integrity..."
 msgstr "Tikrinamas failų vientisumas..."
 
-#: src/gui/ConfigurationDialog.cpp:1950
+#: src/gui/ConfigurationDialog.cpp:1965
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -7215,23 +7215,23 @@ msgstr ""
 "Klaida siunčiant %1:\n"
 "Failas sugadintas."
 
-#: src/gui/ConfigurationDialog.cpp:2034 src/gui/ConfigurationDialog.cpp:2046
-#: src/gui/ConfigurationDialog.cpp:2058 src/gui/ConfigurationDialog.cpp:2070
+#: src/gui/ConfigurationDialog.cpp:2049 src/gui/ConfigurationDialog.cpp:2061
+#: src/gui/ConfigurationDialog.cpp:2073 src/gui/ConfigurationDialog.cpp:2085
 msgid "Available"
 msgstr "Prieinami"
 
-#: src/gui/ConfigurationDialog.cpp:2036 src/gui/ConfigurationDialog.cpp:2048
-#: src/gui/ConfigurationDialog.cpp:2060 src/gui/ConfigurationDialog.cpp:2072
+#: src/gui/ConfigurationDialog.cpp:2051 src/gui/ConfigurationDialog.cpp:2063
+#: src/gui/ConfigurationDialog.cpp:2075 src/gui/ConfigurationDialog.cpp:2087
 msgid "Not Available"
 msgstr "Neprieinama"
 
-#: src/gui/ConfigurationDialog.cpp:2147
+#: src/gui/ConfigurationDialog.cpp:2162
 msgid "Annual proper motion (stars) or hourly motion (solar system objects)"
 msgstr ""
 "Metinis tinkamas judėjimas (žvaigždės) arba valandinis judėjimas (saules "
 "sistemos objektai)"
 
-#: src/gui/ConfigurationDialog.cpp:2148
+#: src/gui/ConfigurationDialog.cpp:2163
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
@@ -7240,214 +7240,214 @@ msgstr ""
 "leidimosi įvykiai yra apibrėžti dangaus kūno viršutiniu kraštu."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:2189
+#: src/gui/ConfigurationDialog.cpp:2204
 msgid "Algorithm of"
 msgstr "Algoritmas"
 
-#: src/gui/ConfigurationDialog.cpp:2200
+#: src/gui/ConfigurationDialog.cpp:2215
 msgid "Without correction"
 msgstr "Be pataisymų"
 
-#: src/gui/ConfigurationDialog.cpp:2201
+#: src/gui/ConfigurationDialog.cpp:2216
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:2202
+#: src/gui/ConfigurationDialog.cpp:2217
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:2203
+#: src/gui/ConfigurationDialog.cpp:2218
 msgid "IAU (1952)"
 msgstr "TAS (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:2204
+#: src/gui/ConfigurationDialog.cpp:2219
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronominės efemeridės (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:2205
+#: src/gui/ConfigurationDialog.cpp:2220
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) ir Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:2206
+#: src/gui/ConfigurationDialog.cpp:2221
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller ir Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:2207
+#: src/gui/ConfigurationDialog.cpp:2222
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:2208
+#: src/gui/ConfigurationDialog.cpp:2223
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel ir Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:2209
+#: src/gui/ConfigurationDialog.cpp:2224
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison ir Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:2210
+#: src/gui/ConfigurationDialog.cpp:2225
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson ir Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:2211
+#: src/gui/ConfigurationDialog.cpp:2226
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson ir Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:2212
+#: src/gui/ConfigurationDialog.cpp:2227
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:2213
+#: src/gui/ConfigurationDialog.cpp:2228
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:2214
+#: src/gui/ConfigurationDialog.cpp:2229
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel ir Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:2215
+#: src/gui/ConfigurationDialog.cpp:2230
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze ir Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:2216
+#: src/gui/ConfigurationDialog.cpp:2231
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson ir Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:2217
+#: src/gui/ConfigurationDialog.cpp:2232
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:2219
+#: src/gui/ConfigurationDialog.cpp:2234
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (su Chapront, Chapront-Touze ir Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:2220
+#: src/gui/ConfigurationDialog.cpp:2235
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:2221
+#: src/gui/ConfigurationDialog.cpp:2236
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus ir Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:2222
+#: src/gui/ConfigurationDialog.cpp:2237
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck ir Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:2223
+#: src/gui/ConfigurationDialog.cpp:2238
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold & Dershowitz (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:2224
+#: src/gui/ConfigurationDialog.cpp:2239
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison ir Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:2225
+#: src/gui/ConfigurationDialog.cpp:2240
 msgid "Espenak & Meeus (2006, 2014)"
 msgstr "Espenak ir Meeus (2006, 2014)"
 
-#: src/gui/ConfigurationDialog.cpp:2228
+#: src/gui/ConfigurationDialog.cpp:2243
 msgid "Espenak & Meeus (2006, 2014) no extra moon acceleration"
 msgstr "Espenak ir Meeus (2006, 2014) be papildomo mėnulio pagreitėjimo"
 
-#: src/gui/ConfigurationDialog.cpp:2231
+#: src/gui/ConfigurationDialog.cpp:2246
 msgid "Modified Espenak & Meeus (2006, 2014, 2023)"
 msgstr "Modifikuotas Espenako ir Meeus (2006, 2014, 2023)"
 
-#: src/gui/ConfigurationDialog.cpp:2232
+#: src/gui/ConfigurationDialog.cpp:2247
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:2233
+#: src/gui/ConfigurationDialog.cpp:2248
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:2234
+#: src/gui/ConfigurationDialog.cpp:2249
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq ir Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:2235
+#: src/gui/ConfigurationDialog.cpp:2250
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana ir Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:2236
+#: src/gui/ConfigurationDialog.cpp:2251
 msgid "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 msgstr "Stephenson, Morrison ir Hohenkerk (2016, 2021)"
 
-#: src/gui/ConfigurationDialog.cpp:2237
+#: src/gui/ConfigurationDialog.cpp:2252
 msgid "Henriksson (2017)"
 msgstr "Henriksson (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:2238
+#: src/gui/ConfigurationDialog.cpp:2253
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Vartotojo lygtis %1T"
 
-#: src/gui/ConfigurationDialog.cpp:2294 src/gui/ConfigurationDialog.cpp:2333
+#: src/gui/ConfigurationDialog.cpp:2309 src/gui/ConfigurationDialog.cpp:2348
 #: src/gui/StelGuiItems.cpp:872 src/gui/LocationDialog.cpp:557
 msgid "System default"
 msgstr "Sistemos numatytasis"
 
-#: src/gui/ConfigurationDialog.cpp:2295
+#: src/gui/ConfigurationDialog.cpp:2310
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "mmmm-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:2296
+#: src/gui/ConfigurationDialog.cpp:2311
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-mmmm"
 
-#: src/gui/ConfigurationDialog.cpp:2297
+#: src/gui/ConfigurationDialog.cpp:2312
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-mmmm"
 
-#: src/gui/ConfigurationDialog.cpp:2298
+#: src/gui/ConfigurationDialog.cpp:2313
 msgid "ww, yyyy-mm-dd"
 msgstr "ss, mmmm-mm-dd"
 
-#: src/gui/ConfigurationDialog.cpp:2299
+#: src/gui/ConfigurationDialog.cpp:2314
 msgid "ww, dd-mm-yyyy"
 msgstr "ss, dd-mm-mmmm"
 
-#: src/gui/ConfigurationDialog.cpp:2300
+#: src/gui/ConfigurationDialog.cpp:2315
 msgid "ww, mm-dd-yyyy"
 msgstr "ss, mm-dd-mmmm"
 
-#: src/gui/ConfigurationDialog.cpp:2334
+#: src/gui/ConfigurationDialog.cpp:2349
 msgid "12-hour format"
 msgstr "12 valandų formatas"
 
-#: src/gui/ConfigurationDialog.cpp:2335
+#: src/gui/ConfigurationDialog.cpp:2350
 msgid "24-hour format"
 msgstr "24 valandų formatas"
 
-#: src/gui/ConfigurationDialog.cpp:2365
+#: src/gui/ConfigurationDialog.cpp:2380
 msgctxt "disabled"
 msgid "None"
 msgstr "Nėra"
 
-#: src/gui/ConfigurationDialog.cpp:2366
+#: src/gui/ConfigurationDialog.cpp:2381
 msgid "5/6/5 bits"
 msgstr "5/6/5 bitai"
 
-#: src/gui/ConfigurationDialog.cpp:2367
+#: src/gui/ConfigurationDialog.cpp:2382
 msgid "6/6/6 bits"
 msgstr "6/6/6 bitai"
 
-#: src/gui/ConfigurationDialog.cpp:2368
+#: src/gui/ConfigurationDialog.cpp:2383
 msgid "8/8/8 bits"
 msgstr "8/8/8 bitai"
 
-#: src/gui/ConfigurationDialog.cpp:2369
+#: src/gui/ConfigurationDialog.cpp:2384
 msgid "10/10/10 bits"
 msgstr "10/10/10 bitai"
 
-#: src/gui/ConfigurationDialog.cpp:2381
+#: src/gui/ConfigurationDialog.cpp:2396
 msgid "Unsupported"
 msgstr "Nepalaikoma"
 
-#: src/gui/ConfigurationDialog.cpp:2383
+#: src/gui/ConfigurationDialog.cpp:2398
 msgid "Unsupported in low-graphics mode"
 msgstr "Nepalaikoma esant žemai grafinei raiškai."
 
-#: src/gui/ConfigurationDialog.cpp:2496
+#: src/gui/ConfigurationDialog.cpp:2511
 msgid "Speech output disabled. No engine found?"
 msgstr "Kalbos išvestis išjungta. Nerastas variklis?"
 
@@ -7805,7 +7805,7 @@ msgstr "Nuolatinė integracija: %1"
 
 #: src/gui/HelpDialog.cpp:588
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:630
+#: plugins/Oculars/src/gui/OcularDialog.cpp:631
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:258
@@ -8135,8 +8135,8 @@ msgstr "s"
 
 #: src/gui/ViewDialog.cpp:1486 src/ui_astroCalcExtraEphemerisDialog.h:258
 #: src/ui_astroCalcExtraEphemerisDialog.h:263
-#: plugins/Oculars/src/Oculars.cpp:2061
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/Oculars.cpp:2064
+#: plugins/Oculars/src/gui/OcularDialog.cpp:601
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1199
 #: plugins/Satellites/src/ui_satellitesDialog.h:1255
 msgctxt "pixels"
@@ -13382,10 +13382,10 @@ msgstr "&Kopijuoti"
 msgid "&Paste"
 msgstr "&Įklijuoti"
 
-#: src/translations.h:841 plugins/Oculars/src/ui_ocularDialog.h:1537
-#: plugins/Oculars/src/ui_ocularDialog.h:1546
-#: plugins/Oculars/src/ui_ocularDialog.h:1552
-#: plugins/Oculars/src/ui_ocularDialog.h:1571
+#: src/translations.h:841 plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: plugins/Oculars/src/ui_ocularDialog.h:1589
 msgid "Delete"
 msgstr "Pašalinti"
 
@@ -18081,59 +18081,59 @@ msgstr "Taikyti"
 msgid "Restore All Defaults"
 msgstr "Atstatyti visus pradinius nustatymus"
 
-#: src/ui_atmosphereDialog.h:355
+#: src/ui_atmosphereDialog.h:356
 msgid "Atmosphere Details"
 msgstr "Atmosferos nustatymai"
 
-#: src/ui_atmosphereDialog.h:356
+#: src/ui_atmosphereDialog.h:357
 msgid "Visual Model"
 msgstr "Vizualinis modelis"
 
-#: src/ui_atmosphereDialog.h:357
+#: src/ui_atmosphereDialog.h:358
 msgid "Choose &model:"
 msgstr "Pasirinkti &modelį:"
 
-#: src/ui_atmosphereDialog.h:360
+#: src/ui_atmosphereDialog.h:361
 msgid "Path to &data:"
 msgstr "Kelias į &duomenis:"
 
-#: src/ui_atmosphereDialog.h:362
+#: src/ui_atmosphereDialog.h:363
 msgid "Eclipse simulation &quality:"
 msgstr "Užtemimo simuliacija ir &kokybė:"
 
-#: src/ui_atmosphereDialog.h:363
+#: src/ui_atmosphereDialog.h:364
 msgid "Show debugging options"
 msgstr "Rodyti derinimo parinktis"
 
-#: src/ui_atmosphereDialog.h:364
+#: src/ui_atmosphereDialog.h:365
 msgid "Render zero-order scattering"
 msgstr "Atvaizduoti nulinės eilės sklaidą"
 
-#: src/ui_atmosphereDialog.h:365
+#: src/ui_atmosphereDialog.h:366
 msgid "Render single scattering"
 msgstr "Atvaizduoti pavienę sklaidą"
 
-#: src/ui_atmosphereDialog.h:366
+#: src/ui_atmosphereDialog.h:367
 msgid "Render multiple scattering"
 msgstr "Atvaizduoti daugkartinę sklaidą"
 
-#: src/ui_atmosphereDialog.h:367
+#: src/ui_atmosphereDialog.h:368
 msgid "Mirror the sky under the horizon"
 msgstr "Veidrodinis dangus po horizontu"
 
-#: src/ui_atmosphereDialog.h:368
+#: src/ui_atmosphereDialog.h:369
 msgid "Refraction Settings"
 msgstr "Refrakcijos nustatymai"
 
-#: src/ui_atmosphereDialog.h:369
+#: src/ui_atmosphereDialog.h:370
 msgid "Pressure (mbar):"
 msgstr "Slėgis (mbar):"
 
-#: src/ui_atmosphereDialog.h:370
+#: src/ui_atmosphereDialog.h:371
 msgid "Temperature (C):"
 msgstr "Temperatūra (C):"
 
-#: src/ui_atmosphereDialog.h:375 src/ui_greatRedSpotDialog.h:146
+#: src/ui_atmosphereDialog.h:376 src/ui_greatRedSpotDialog.h:146
 #: src/ui_tonemappingDialog.h:169
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
@@ -18145,11 +18145,11 @@ msgstr ""
 "atmosferų skaičius, kurias tenka praeiti šviesai (zenite: 1, horizonte: apie"
 " 40)."
 
-#: src/ui_atmosphereDialog.h:377
+#: src/ui_atmosphereDialog.h:378
 msgid "Extinction Coefficient (k):"
 msgstr "Išsklaidymo koeficientas (k):"
 
-#: src/ui_atmosphereDialog.h:379
+#: src/ui_atmosphereDialog.h:380
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -18157,27 +18157,27 @@ msgstr ""
 "Naudokite maždaug 0,12, puikiose kalnų viršūnėse, 0,2 - geram kaimo "
 "kraštovaizdžiui, 0,35 - niūrioms sąlygoms."
 
-#: src/ui_atmosphereDialog.h:382
+#: src/ui_atmosphereDialog.h:383
 msgid "Set the International Standard Atmosphere at the height 0 km MSL"
 msgstr "Nustatykite tarptautinę standartinę atmosferą 0 km VJL aukštyje"
 
-#: src/ui_atmosphereDialog.h:384
+#: src/ui_atmosphereDialog.h:385
 msgid "Standard Atmosphere"
 msgstr "Standartinė atmosfera"
 
-#: src/ui_atmosphereDialog.h:385
+#: src/ui_atmosphereDialog.h:386
 msgid "Experimental"
 msgstr "Eksperimentinis"
 
-#: src/ui_atmosphereDialog.h:386
+#: src/ui_atmosphereDialog.h:387
 msgid "Suppress scattering (only refraction/extinction)"
 msgstr "Slopinti sklaidą (tik refrakcija / ekstinkcija)"
 
-#: src/ui_atmosphereDialog.h:387
+#: src/ui_atmosphereDialog.h:388
 msgid "T=25(k-0.16)+1 -- or T="
 msgstr "T=25(k-0.16)+1 -- arba T="
 
-#: src/ui_atmosphereDialog.h:388
+#: src/ui_atmosphereDialog.h:389
 msgid "T=2/5(default)/6 at k=0.16/0.32/0.36. "
 msgstr "T=2/5(numatytasis)/6 k=0.16/0.32/0.36."
 
@@ -20063,7 +20063,7 @@ msgid "Allow snap to selected object"
 msgstr "Leisti pririšti prie pasirinkto objekto"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
-#: plugins/Oculars/src/ui_ocularDialog.h:1579
+#: plugins/Oculars/src/ui_ocularDialog.h:1597
 #: plugins/Satellites/src/ui_satellitesDialog.h:1384
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:240
@@ -20089,8 +20089,8 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Apie"
 
-#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1551
-#: plugins/Oculars/src/ui_ocularDialog.h:1419
+#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1432
 msgid "Oculars"
 msgstr "Okuliarai"
 
@@ -20104,59 +20104,59 @@ msgstr ""
 " didinimas ir regėjimo laukas). Taip pat gali rodyti sensoriaus rėmelį ir "
 "Telrad ieškiklį."
 
-#: plugins/Oculars/src/Oculars.cpp:1029
+#: plugins/Oculars/src/Oculars.cpp:1032
 msgid "Please select an object before switching to ocular view."
 msgstr "Prašome pasirinkti objektą prieš perjungiant į okuliaro rodinį."
 
-#: plugins/Oculars/src/Oculars.cpp:1137
+#: plugins/Oculars/src/Oculars.cpp:1140
 msgid "&Previous ocular"
 msgstr "Ankstesnis okuliaras"
 
-#: plugins/Oculars/src/Oculars.cpp:1138
+#: plugins/Oculars/src/Oculars.cpp:1141
 msgid "&Next ocular"
 msgstr "Kitas okuliaras"
 
-#: plugins/Oculars/src/Oculars.cpp:1139
+#: plugins/Oculars/src/Oculars.cpp:1142
 msgid "Select &ocular"
 msgstr "Pasirinkite &okuliarą"
 
-#: plugins/Oculars/src/Oculars.cpp:1182
+#: plugins/Oculars/src/Oculars.cpp:1185
 msgid "Toggle &crosshair"
 msgstr "Perjungti &kryžminį taikiklį"
 
-#: plugins/Oculars/src/Oculars.cpp:1194
+#: plugins/Oculars/src/Oculars.cpp:1197
 msgid "Configure &Oculars"
 msgstr "Konfigūruokite &Okuliarus"
 
-#: plugins/Oculars/src/Oculars.cpp:1203
+#: plugins/Oculars/src/Oculars.cpp:1206
 msgid "Toggle &CCD"
 msgstr "Perjungti &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1211
+#: plugins/Oculars/src/Oculars.cpp:1214
 msgid "Toggle &Telrad"
 msgstr "Perjungti &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1221
+#: plugins/Oculars/src/Oculars.cpp:1224
 msgid "&Previous CCD"
 msgstr "&Ankstesnis CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1222
+#: plugins/Oculars/src/Oculars.cpp:1225
 msgid "&Next CCD"
 msgstr "&Kitas CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1223
+#: plugins/Oculars/src/Oculars.cpp:1226
 msgid "&Select CCD"
 msgstr "&Pasirinkti CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1244
+#: plugins/Oculars/src/Oculars.cpp:1247
 msgid "&Rotate CCD"
 msgstr "&Pasukti CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1256
+#: plugins/Oculars/src/Oculars.cpp:1259
 msgid "&Reset rotation"
 msgstr "&Atstatyti sukimosi kampą"
 
-#: plugins/Oculars/src/Oculars.cpp:1420
+#: plugins/Oculars/src/Oculars.cpp:1423
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:135
 #: plugins/Oculars/src/gui/OcularDialog.cpp:152
@@ -20165,35 +20165,35 @@ msgstr "&Atstatyti sukimosi kampą"
 msgid "Warning!"
 msgstr "Dėmesio!"
 
-#: plugins/Oculars/src/Oculars.cpp:1420
+#: plugins/Oculars/src/Oculars.cpp:1423
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr ""
 "Nepavyksta rodyti jutiklio ribos: Nėra apibrėžti jokie jutikliai ar "
 "teleskopai."
 
-#: plugins/Oculars/src/Oculars.cpp:1552
-#: plugins/Oculars/src/ui_ocularDialog.h:1453
+#: plugins/Oculars/src/Oculars.cpp:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1471
 msgid "Ocular view"
 msgstr "Okuliaro vaizdas"
 
-#: plugins/Oculars/src/Oculars.cpp:1553
+#: plugins/Oculars/src/Oculars.cpp:1556
 msgid "Oculars popup menu"
 msgstr "Iššokantis okuliarų meniu"
 
-#: plugins/Oculars/src/Oculars.cpp:1554
+#: plugins/Oculars/src/Oculars.cpp:1557
 msgid "Show crosshairs"
 msgstr "Rodyti taikiklio kryželį"
 
-#: plugins/Oculars/src/Oculars.cpp:1555
+#: plugins/Oculars/src/Oculars.cpp:1558
 msgid "Image sensor frame"
 msgstr "Vaizdo jutiklio kadras"
 
-#: plugins/Oculars/src/Oculars.cpp:1556
+#: plugins/Oculars/src/Oculars.cpp:1559
 msgid "Telrad sight"
 msgstr "Telrad taikiklis"
 
-#: plugins/Oculars/src/Oculars.cpp:1558
+#: plugins/Oculars/src/Oculars.cpp:1561
 #: plugins/Satellites/src/Satellites.cpp:463
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:202
 #: plugins/NavStars/src/NavStars.cpp:125 plugins/Quasars/src/Quasars.cpp:179
@@ -20211,92 +20211,92 @@ msgstr "Telrad taikiklis"
 msgid "Show settings dialog"
 msgstr "Rodyti nustatymų dialogą"
 
-#: plugins/Oculars/src/Oculars.cpp:1560
+#: plugins/Oculars/src/Oculars.cpp:1563
 msgid "Toggle Oculars button bar"
 msgstr "Perjungti okuliarų mygtukų juostą"
 
-#: plugins/Oculars/src/Oculars.cpp:1562
+#: plugins/Oculars/src/Oculars.cpp:1565
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Select next telescope"
 msgstr "Pasirinkti kitą teleskopą"
 
-#: plugins/Oculars/src/Oculars.cpp:1564
+#: plugins/Oculars/src/Oculars.cpp:1567
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
 msgid "Select previous telescope"
 msgstr "Pasirinkti ankstesnį teleskopą"
 
-#: plugins/Oculars/src/Oculars.cpp:1566
+#: plugins/Oculars/src/Oculars.cpp:1569
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
 msgid "Select next eyepiece"
 msgstr "Pasirinkti kitą okuliarą"
 
-#: plugins/Oculars/src/Oculars.cpp:1568
+#: plugins/Oculars/src/Oculars.cpp:1571
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Select previous eyepiece"
 msgstr "Pasirinkti ankstesnį okuliarą"
 
-#: plugins/Oculars/src/Oculars.cpp:1570
+#: plugins/Oculars/src/Oculars.cpp:1573
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Select next lens"
 msgstr "Pasirinkti kitą objektyvą."
 
-#: plugins/Oculars/src/Oculars.cpp:1572
+#: plugins/Oculars/src/Oculars.cpp:1575
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Select previous lens"
 msgstr "Pasirinkti ankstesnį objektyvą."
 
-#: plugins/Oculars/src/Oculars.cpp:1574
+#: plugins/Oculars/src/Oculars.cpp:1577
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Select next CCD frame"
 msgstr "Pasirinkti kitą CCD kadrą."
 
-#: plugins/Oculars/src/Oculars.cpp:1576
+#: plugins/Oculars/src/Oculars.cpp:1579
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Select previous CCD frame"
 msgstr "Pasirinkti ankstesnį CCD kadrą"
 
-#: plugins/Oculars/src/Oculars.cpp:1577
+#: plugins/Oculars/src/Oculars.cpp:1580
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr " Pasukti okuliaro tinklelio raštą pagal laikrodžio rodyklę"
 
-#: plugins/Oculars/src/Oculars.cpp:1578
+#: plugins/Oculars/src/Oculars.cpp:1581
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr " Pasukti okuliaro tinklelio raštą prieš laikrodžio rodyklę"
 
-#: plugins/Oculars/src/Oculars.cpp:1579
+#: plugins/Oculars/src/Oculars.cpp:1582
 msgid "Toggle sensor crop overlay"
 msgstr " Jutiklio perdangos perjungimas"
 
-#: plugins/Oculars/src/Oculars.cpp:1580
+#: plugins/Oculars/src/Oculars.cpp:1583
 msgid "Toggle sensor pixel grid"
 msgstr " Jutiklio taškų tinklelio perjungimas"
 
-#: plugins/Oculars/src/Oculars.cpp:1581
+#: plugins/Oculars/src/Oculars.cpp:1584
 msgid "Toggle focuser overlay"
 msgstr " Fokusatoriaus perdangos perjungimas"
 
-#: plugins/Oculars/src/Oculars.cpp:1584
+#: plugins/Oculars/src/Oculars.cpp:1587
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1289
 msgid "Reset the sensor frame rotation"
 msgstr "Atstatyti jutiklio rėmo pasukimą"
 
-#: plugins/Oculars/src/Oculars.cpp:1585
+#: plugins/Oculars/src/Oculars.cpp:1588
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1292
 msgid "Reset the prism rotation"
 msgstr "Atstatyti prizmės pasukimą."
 
-#: plugins/Oculars/src/Oculars.cpp:1978
+#: plugins/Oculars/src/Oculars.cpp:1981
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt of cross"
 msgstr "Kryžiaus Az/Alt"
 
-#: plugins/Oculars/src/Oculars.cpp:1998
+#: plugins/Oculars/src/Oculars.cpp:2001
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "Kryžiaus RA/Dec (J2000.0)"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:2042
+#: plugins/Oculars/src/Oculars.cpp:2045
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:562
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 msgid "\"/px"
@@ -20304,7 +20304,7 @@ msgstr "\"/tšk"
 
 #. TRANSLATORS: "Max exposure" is short version of phrase "Max time of
 #. exposure"
-#: plugins/Oculars/src/Oculars.cpp:2079
+#: plugins/Oculars/src/Oculars.cpp:2082
 msgid "Max exposure"
 msgstr "Ilgiausia ekspozicija"
 
@@ -20312,7 +20312,7 @@ msgstr "Ilgiausia ekspozicija"
 #. TRANSLATORS: seconds.
 #. TRANSLATORS: Unit of measure for time - seconds
 #. TRANSLATORS: duration in seconds
-#: plugins/Oculars/src/Oculars.cpp:2079
+#: plugins/Oculars/src/Oculars.cpp:2082
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1193
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:245
 #: plugins/Planes/src/AircraftObject.cpp:213
@@ -20321,125 +20321,125 @@ msgctxt "time"
 msgid "s"
 msgstr "s"
 
-#: plugins/Oculars/src/Oculars.cpp:2326
+#: plugins/Oculars/src/Oculars.cpp:2324
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:352
 msgid "Binocular"
 msgstr "Binoklis"
 
-#: plugins/Oculars/src/Oculars.cpp:2326
+#: plugins/Oculars/src/Oculars.cpp:2324
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
 msgid "Ocular"
 msgstr "Okuliaras"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2346
+#: plugins/Oculars/src/Oculars.cpp:2344
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:395
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Okuliaro židinio nuotolis: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2353
+#: plugins/Oculars/src/Oculars.cpp:2351
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:404
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Okuliaro  aRL: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2364
+#: plugins/Oculars/src/Oculars.cpp:2362
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:434
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lęšis #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2368
+#: plugins/Oculars/src/Oculars.cpp:2366
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:438
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lęšis #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2373
+#: plugins/Oculars/src/Oculars.cpp:2371
 msgid "Lens: none"
 msgstr "Lęšis: nenurodytas"
 
-#: plugins/Oculars/src/Oculars.cpp:2388 plugins/Oculars/src/Oculars.cpp:2449
+#: plugins/Oculars/src/Oculars.cpp:2386 plugins/Oculars/src/Oculars.cpp:2447
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskopas #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2397
+#: plugins/Oculars/src/Oculars.cpp:2395
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Didinimas: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2404
+#: plugins/Oculars/src/Oculars.cpp:2402
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Išėjimo vyzdys: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2411
+#: plugins/Oculars/src/Oculars.cpp:2409
 #, qt-format
 msgid "FOV: %1"
 msgstr "Matymo laukas: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2432
+#: plugins/Oculars/src/Oculars.cpp:2430
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Matmenys: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2433
+#: plugins/Oculars/src/Oculars.cpp:2431
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 msgid "Binning"
 msgstr "Suskirstymas"
 
-#: plugins/Oculars/src/Oculars.cpp:2437
+#: plugins/Oculars/src/Oculars.cpp:2435
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:510
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensorius #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2441
+#: plugins/Oculars/src/Oculars.cpp:2439
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensorius #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2454
+#: plugins/Oculars/src/Oculars.cpp:2452
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskopas #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2797
+#: plugins/Oculars/src/Oculars.cpp:2795
 msgid "&Lens"
 msgstr "&Lęšiai"
 
-#: plugins/Oculars/src/Oculars.cpp:2798
+#: plugins/Oculars/src/Oculars.cpp:2796
 msgid "&Previous lens"
 msgstr "&Ankstesnis lęšis"
 
-#: plugins/Oculars/src/Oculars.cpp:2799
+#: plugins/Oculars/src/Oculars.cpp:2797
 msgid "&Next lens"
 msgstr "&Kitas lęšis"
 
-#: plugins/Oculars/src/Oculars.cpp:2801
+#: plugins/Oculars/src/Oculars.cpp:2799
 msgid "None"
 msgstr "Nieko"
 
-#: plugins/Oculars/src/Oculars.cpp:2828
+#: plugins/Oculars/src/Oculars.cpp:2826
 msgid "&Telescope"
 msgstr "&Teleskopas"
 
-#: plugins/Oculars/src/Oculars.cpp:2829
+#: plugins/Oculars/src/Oculars.cpp:2827
 msgid "&Previous telescope"
 msgstr "&Ankstesnis teleskopas"
 
-#: plugins/Oculars/src/Oculars.cpp:2830
+#: plugins/Oculars/src/Oculars.cpp:2828
 msgid "&Next telescope"
 msgstr "&Kitas teleskopas"
 
@@ -20707,60 +20707,60 @@ msgid "Cannot delete the last telescope."
 msgstr "Negalima ištrinti paskutinio teleskopo."
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:582
+#: plugins/Oculars/src/gui/OcularDialog.cpp:583
 msgid "tFOV:"
 msgstr "tRL:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:584
+#: plugins/Oculars/src/gui/OcularDialog.cpp:585
 msgid "Magnification factor:"
 msgstr "Padidinimo faktorius: "
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:585
-#: plugins/Oculars/src/ui_ocularDialog.h:1576
+#: plugins/Oculars/src/gui/OcularDialog.cpp:586
+#: plugins/Oculars/src/ui_ocularDialog.h:1594
 msgid "Diameter:"
 msgstr "Skersmuo:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:590
-#: plugins/Oculars/src/ui_ocularDialog.h:1541
+#: plugins/Oculars/src/gui/OcularDialog.cpp:591
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "aFOV:"
 msgstr "aRL:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:591
-#: plugins/Oculars/src/ui_ocularDialog.h:1542
-#: plugins/Oculars/src/ui_ocularDialog.h:1577
+#: plugins/Oculars/src/gui/OcularDialog.cpp:592
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
+#: plugins/Oculars/src/ui_ocularDialog.h:1595
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:770
 msgid "Focal length:"
 msgstr "Fokalinis nuotolis:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:592
-#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/gui/OcularDialog.cpp:593
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Field stop:"
 msgstr "Lauko diafragma:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:626
+#: plugins/Oculars/src/gui/OcularDialog.cpp:627
 msgid "Oculars Plug-in"
 msgstr "Okuliarų įskiepis"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:634
+#: plugins/Oculars/src/gui/OcularDialog.cpp:635
 msgid "Barlow lens feature"
 msgstr "Barlow lęšių funkcija"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:635
+#: plugins/Oculars/src/gui/OcularDialog.cpp:636
 msgid "Sensor crop overlay feature"
 msgstr "Jutiklio apkarpymo funkcija"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:636
+#: plugins/Oculars/src/gui/OcularDialog.cpp:637
 msgid "Pixel grid feature"
 msgstr " Taškų tinklelio funkcija"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:640
+#: plugins/Oculars/src/gui/OcularDialog.cpp:641
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1023
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "Apžvalga"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:642
+#: plugins/Oculars/src/gui/OcularDialog.cpp:643
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -20772,11 +20772,11 @@ msgstr ""
 "ištrinti okuliarus ir teleskopus, taip pat CCD jutiklius. Pirmą kartą "
 "paleidus programą, bus užpildyti keli pavyzdžiai, kad galėtumėte pradėti."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:643
+#: plugins/Oculars/src/gui/OcularDialog.cpp:644
 msgid "You can choose to scale the image you see on the screen."
 msgstr "Galite pasirinkti keisti ekrane matomo paveikslo mastelį."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:644
+#: plugins/Oculars/src/gui/OcularDialog.cpp:645
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -20784,7 +20784,7 @@ msgstr ""
 "Tai skirta parodyti jums geresnį palyginimą, kaip viena okuliaro/teleskopo "
 "kombinacija yra palyginama su kita."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:645
+#: plugins/Oculars/src/gui/OcularDialog.cpp:646
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -20792,7 +20792,7 @@ msgstr ""
 "Toks pats okuliaras dviejuose skirtingų fokusavimo nuotolio teleskopuose "
 "sukurs du skirtingus išėjimo vyzdžio dydžius, keičiant šiek tiek vaizdą ."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:646
+#: plugins/Oculars/src/gui/OcularDialog.cpp:647
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -20800,18 +20800,18 @@ msgstr ""
 " Tai reiškia, kad, sumažinus vaizdą, didelė ekrano dalis gali būti "
 "nepanaudota."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:647
+#: plugins/Oculars/src/gui/OcularDialog.cpp:648
 msgid ""
 "Therefore we recommend that you leave it off, unless you feel you have a "
 "need for it."
 msgstr ""
 "Todėl rekomenduojame jo nenaudoti, nebent manote, kad jis jums reikalingas."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:648
+#: plugins/Oculars/src/gui/OcularDialog.cpp:649
 msgid "You can toggle a crosshair in the view."
 msgstr "Jūs galite perjungti kryžminį taikiklį vaizde."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:649
+#: plugins/Oculars/src/gui/OcularDialog.cpp:650
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder. This feature draws three concentric circles "
@@ -20822,7 +20822,7 @@ msgstr ""
 "koncentrinius 0,5 %1, 2,0 %1 ir 4,0 %1 apskritimus, padedančius matyti tai, "
 "ką tikitės pamatyti plika akimi per \"Telrad\" (ar panašų) ieškiklį."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:650
+#: plugins/Oculars/src/gui/OcularDialog.cpp:651
 msgid ""
 "You can adjust the diameters or even add a fourth circle if you have a "
 "different finder, or revert to the Telrad standard sizes."
@@ -20830,16 +20830,16 @@ msgstr ""
 "Jei turite kitokį ieškiklį, galite koreguoti skersmenis ar net pridėti "
 "ketvirtą apskritimą arba grįžti prie \"Telrad\" standartinių dydžių."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:651
+#: plugins/Oculars/src/gui/OcularDialog.cpp:652
 msgid "If you find any issues, please let me know. Enjoy!"
 msgstr "Jei pastebėsite kokių nors klaidų, praneškite man. Mėgaukitės!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:654
+#: plugins/Oculars/src/gui/OcularDialog.cpp:655
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
 msgid "Hot Keys"
 msgstr "Karštieji klavišai"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:655
+#: plugins/Oculars/src/gui/OcularDialog.cpp:656
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
@@ -20847,14 +20847,14 @@ msgstr ""
 " Įskiepio klavišų susiejimą galima redaguoti klaviatūros nuorodų "
 "redaktoriuje (F7)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:658
+#: plugins/Oculars/src/gui/OcularDialog.cpp:659
 #: plugins/Pulsars/src/Pulsar.cpp:297
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:616
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Notes"
 msgstr "Pastabos"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:659
+#: plugins/Oculars/src/gui/OcularDialog.cpp:660
 msgid ""
 "The sensor view has a feature to show a sensor crop overlay with information"
 " about the crop size. The size of this rectangle may be adjusted when "
@@ -20866,7 +20866,7 @@ msgstr ""
 "būti koreguojamas, kai veikia suskirstymas (pvz., 100 px apkarpymo dydis bus"
 " pakoreguotas iki 99 px, kai bus taikomas suskirstymas 3)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:660
+#: plugins/Oculars/src/gui/OcularDialog.cpp:661
 #, qt-format
 msgid ""
 "In this case, information about crop size overlay will be marked by %1."
@@ -20874,14 +20874,14 @@ msgstr ""
 " Šiuo atveju informacija apie apkarpyto ploto dydžio perdangą bus pažymėta "
 "%1."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:661
+#: plugins/Oculars/src/gui/OcularDialog.cpp:662
 msgid ""
 "This mark is also displayed if the crop size is larger than the sensor size."
 msgstr ""
 " Šis ženklas taip pat rodomas, jei apkarpymo dydis yra didesnis už jutiklio "
 "dydį."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:662
+#: plugins/Oculars/src/gui/OcularDialog.cpp:663
 msgid ""
 "The sensor view has also a feature to show a max time of exposure for "
 "selected solar system objects (the mount has sidereal speed enabled) to "
@@ -20891,15 +20891,15 @@ msgstr ""
 "Saulės sistemos objektų ekspozicijos laiką (įrenginyje įjungtas siderinis "
 "greitis), kad būtų išvengta didesnio nei 1 taško pločio poslinkio."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1420
+#: plugins/Oculars/src/ui_ocularDialog.h:1433
 msgid "Interface"
 msgstr "Sąsaja"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1424
+#: plugins/Oculars/src/ui_ocularDialog.h:1437
 msgid "Arrow button scale (requires restart)"
 msgstr " Rodyklės mygtuko mastelis (reikia paleisti iš naujo)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1426
+#: plugins/Oculars/src/ui_ocularDialog.h:1439
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
@@ -20907,28 +20907,28 @@ msgstr ""
 " Pažymėti, jei norite, kad RL vertė būtų tokia pati kaip paleidžiant "
 "„Stellarium“."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1428
+#: plugins/Oculars/src/ui_ocularDialog.h:1441
 msgid "Restore FOV to initial values"
 msgstr "Atkurti RL į pradines vertes"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1429
+#: plugins/Oculars/src/ui_ocularDialog.h:1442
 msgid "Show resolution criteria"
 msgstr " Rodyti skiriamosios gebos kriterijus"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1430
+#: plugins/Oculars/src/ui_ocularDialog.h:1443
 msgid "On-screen control panel"
 msgstr "Valdymo skydelis ekrane"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
-#: plugins/Oculars/src/ui_ocularDialog.h:1436
+#: plugins/Oculars/src/ui_ocularDialog.h:1445
+#: plugins/Oculars/src/ui_ocularDialog.h:1449
 msgid "Font size of text on on-screen control panel"
 msgstr "Teksto šrifto dydis valdymo skydelio ekrane "
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1434
+#: plugins/Oculars/src/ui_ocularDialog.h:1447
 msgid "...font size"
 msgstr "...šrifto dydis"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
@@ -20936,101 +20936,109 @@ msgstr ""
 "Pažymėkite jį, jei norite, kad krypties reikšmė būtų tokia pati kaip "
 "paleidžiant „Stellarium“."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1454
 msgid "Restore direction to initial values"
 msgstr " Atstatyti kryptį į pradines vertes"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1443
+#: plugins/Oculars/src/ui_ocularDialog.h:1456
 msgid "Color for ocular circles and sensor frames"
 msgstr "Spalva okuliarų apskritimams ir jutiklio rėmeliams"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1446
+#: plugins/Oculars/src/ui_ocularDialog.h:1459
 msgid "Line Color"
 msgstr "Linijos spalva"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1448
-msgid "Color for text which is shown only when GUI is switched off."
-msgstr "Teksto, rodomo kai išjungta GVS, spalva."
+#: plugins/Oculars/src/ui_ocularDialog.h:1461
+msgid "Color for text which is shown only when GUI is switched off"
+msgstr "Teksto spalva, rodoma tik tada, kai GVS yra išjungta"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1451
+#: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Text Color"
 msgstr "Teksto spalva"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1466
+msgid "Color for reticle and crosshair"
+msgstr "Tikrinimo tinklelio ir kryželio spalva"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1469
+msgid "Reticle Color"
+msgstr "Tikrinimo tinklelio spalva"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1470
 msgid "Show oculars button on toolbar"
 msgstr "Rodyti okuliarų mygtuką įrankių juostoje"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1455
+#: plugins/Oculars/src/ui_ocularDialog.h:1473
 msgid ""
 "Show FOV circles relative to the apparent FOV of the widest-angle ocular"
 msgstr ""
 "Rodyti RL apskritimus atsižvelgiant į plačiausio kampo okuliaro matomą RL."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1457
+#: plugins/Oculars/src/ui_ocularDialog.h:1475
 msgid "Scale image circle"
 msgstr " Masteliuoto vaizdo apskritimas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1476
 msgid "Hide grids and lines when enabled"
 msgstr "Slėpti tinklelius ir linijas, kai įjungta"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1459
+#: plugins/Oculars/src/ui_ocularDialog.h:1477
 msgid "Enable only if an object is selected"
 msgstr "Įjungti tik tada, jei yra pasirinktas objektas."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1461
+#: plugins/Oculars/src/ui_ocularDialog.h:1479
 msgid "Show border circle"
 msgstr "Rodyti ribos apskritimą"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1463
+#: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Show FOV outline"
 msgstr "Rodyti RL kontūrą"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1465
+#: plugins/Oculars/src/ui_ocularDialog.h:1483
 msgid "Apply limit for stellar magnitude based on telescope aperture"
 msgstr "Taikyti žvaigždės ryškio ribą pagal teleskopo apertūrą"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1467
+#: plugins/Oculars/src/ui_ocularDialog.h:1485
 msgid "Auto-limit stellar magnitude"
 msgstr "Automatinė žvaigždės ryškio riba"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1469
+#: plugins/Oculars/src/ui_ocularDialog.h:1487
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr "Rodyti kryptis ekvatorialinėje koordinačių sistemoje"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1471
+#: plugins/Oculars/src/ui_ocularDialog.h:1489
 msgid "Show compass rose"
 msgstr "Rodyti kompaso rožę"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1473
+#: plugins/Oculars/src/ui_ocularDialog.h:1491
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "Sulygiuoti kryžminį taikiklį ekvatorinėje koordinačių sistemoje"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1475
+#: plugins/Oculars/src/ui_ocularDialog.h:1493
 msgid "Align crosshair"
 msgstr "Lyguoti kryžminį taikiklį"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1477
+#: plugins/Oculars/src/ui_ocularDialog.h:1495
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "Okuliaro režimo metu leiskite tam tikrą matomumą už okuliaro ratelio."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1479
+#: plugins/Oculars/src/ui_ocularDialog.h:1497
 msgid "Use semi-transparent mask"
 msgstr "Naudoti pusiau permatomą kaukę"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1499
 msgid "Opacity of semi-transparent mask"
 msgstr "Pusiau permatomo kaukės skaidrumas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1501
 msgid "Sensor view"
 msgstr "Jutiklio vaizdas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1484
+#: plugins/Oculars/src/ui_ocularDialog.h:1502
 msgid "Use size of focuser:"
 msgstr "Naudoti fokusatoriaus dydį:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1486
+#: plugins/Oculars/src/ui_ocularDialog.h:1504
 msgid ""
 "Enable a rectangular overlay showing the effective size of a number of "
 "pixels."
@@ -21038,52 +21046,52 @@ msgstr ""
 "Įjungti stačiakampio formos perdangą, rodančią naudingųjų taškų skaičiaus "
 "dydį."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1488
+#: plugins/Oculars/src/ui_ocularDialog.h:1506
 msgid "Show sensor crop overlay"
 msgstr " Rodyti jutiklio apkarpymo perdangą"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1489
+#: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "Overlay size (px)"
 msgstr "Perdangos dydis (px)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1491
+#: plugins/Oculars/src/ui_ocularDialog.h:1509
 msgid "Horizontal size (width)"
 msgstr "Horizontalus dydis (plotis)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1494
+#: plugins/Oculars/src/ui_ocularDialog.h:1512
 msgid "Vertical size (height)"
 msgstr "Vertikalus dydis (aukštis)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1497
+#: plugins/Oculars/src/ui_ocularDialog.h:1515
 msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
 msgstr ""
 " Įjungti jutiklio suskirstytų taškų tinklelį jutiklio apkarpyto vaizdo "
 "sluoksnyje."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1499
+#: plugins/Oculars/src/ui_ocularDialog.h:1517
 msgid "Show pixel grid"
 msgstr "Rodyti taškų tinklelį"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1500
+#: plugins/Oculars/src/ui_ocularDialog.h:1518
 msgid "Enable autozoom when switching CCD"
 msgstr " Įjungti automatinį priartinimą perjungiant CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1502
+#: plugins/Oculars/src/ui_ocularDialog.h:1520
 msgid ""
 "Show maximum exposure time for Solar system objects to avoid movement streak"
 msgstr ""
 " Rodyti maksimalų Saulės sistemos objektų ekspozicijos laiką, kad būtų "
 "išvengta judėjimo dryžių"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1504
+#: plugins/Oculars/src/ui_ocularDialog.h:1522
 msgid "Show max exposure time for moving objects"
 msgstr " Rodyti maksimalų ekspozicijos laiką judantiems objektams"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1505
+#: plugins/Oculars/src/ui_ocularDialog.h:1523
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Naudokite laipsnius ir minutes CCD RL."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1507
+#: plugins/Oculars/src/ui_ocularDialog.h:1525
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -21091,98 +21099,98 @@ msgstr ""
 "Įjunkite automatinį montavimo tipo perjungimą iš teleskopo nustatymų "
 "horizontaliai CCD kadro orientacijai."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1509
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
 msgid "Enable automatic switch of mount type"
 msgstr "Įgalinti automatinį montuotės tipo perjungimą"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1511
+#: plugins/Oculars/src/ui_ocularDialog.h:1529
 msgid "Color for focuser overlay line"
 msgstr "Fokusatoriaus perdangos linijos spalva"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1513
+#: plugins/Oculars/src/ui_ocularDialog.h:1531
 msgid "Show focuser overlay"
 msgstr "Rodyti fokusatoriaus perdangą"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1514
+#: plugins/Oculars/src/ui_ocularDialog.h:1532
 msgid "Use horizontal coordinates instead equatorial coordinates"
 msgstr "Naudokite horizontalias koordinates vietoj ekvatorinių koordinačių"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1515
+#: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid "Show angular limits of the off-axis guide"
 msgstr "Rodyti neašinio vedlio kampinius ribinius dydžius"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1516
+#: plugins/Oculars/src/ui_ocularDialog.h:1534
 msgid "Telrad view"
 msgstr "Telrad peržiūra"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1520
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr "RL:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1522
+#: plugins/Oculars/src/ui_ocularDialog.h:1540
 msgid "FOV for circle 1"
 msgstr "RL apskritimui 1"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1525
+#: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "FOV for circle 2"
 msgstr "RL apskritimui 2"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1528
+#: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "FOV for circle 3"
 msgstr "RL apskritimui 3"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1531
+#: plugins/Oculars/src/ui_ocularDialog.h:1549
 msgid "FOV for circle 4"
 msgstr "RL apskritimui 4"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1533
+#: plugins/Oculars/src/ui_ocularDialog.h:1551
 msgid "Restore original Telrad FOV"
 msgstr "Atkurti originalų Telrad RL"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1534
+#: plugins/Oculars/src/ui_ocularDialog.h:1552
 msgid "Enable autozoom when switching Telrad"
 msgstr "Įjungti automatinį priartinimą, kai perjungiama į Telrad."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1535
+#: plugins/Oculars/src/ui_ocularDialog.h:1553
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:228
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:401
 #: plugins/Planes/src/ui_planesDialog.h:256
 msgid "General"
 msgstr "Bendras"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1536
-#: plugins/Oculars/src/ui_ocularDialog.h:1545
-#: plugins/Oculars/src/ui_ocularDialog.h:1551
-#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1588
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1048
 msgid "Add"
 msgstr "Pridėti"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1557
 msgid "Has permanent cross-hairs"
 msgstr "Turi nuolatinį kryžminį tinklelį"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Binoculars"
 msgstr "Binoklis"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1543
-#: plugins/Oculars/src/ui_ocularDialog.h:1547
-#: plugins/Oculars/src/ui_ocularDialog.h:1557
-#: plugins/Oculars/src/ui_ocularDialog.h:1572
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1575
+#: plugins/Oculars/src/ui_ocularDialog.h:1590
 #: plugins/Satellites/src/ui_satellitesDialog.h:1295
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
 msgstr "Pavadinimas:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1544
+#: plugins/Oculars/src/ui_ocularDialog.h:1562
 msgid "Eyepieces"
 msgstr "Okuliarai"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1548
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -21190,85 +21198,85 @@ msgstr ""
 "Daugiau nei 1 daugiklio vertė išplečia fokusavimo nuotolį (Barlou lęšis). "
 "Mažesnė nei 1 daugiklio vertė sumažina fokusavimo nuotolį (Šaplėjaus lęšis)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1549
+#: plugins/Oculars/src/ui_ocularDialog.h:1567
 msgid "Multiplier:"
 msgstr "Daugiklis:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1550
+#: plugins/Oculars/src/ui_ocularDialog.h:1568
 msgid "Lenses"
 msgstr "Lęšiai"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1553
+#: plugins/Oculars/src/ui_ocularDialog.h:1571
 msgid "Off-Axis guider"
 msgstr "Off-Axis taikiklis"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1572
 msgid "Resolution y:"
 msgstr "Raiška y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1573
 msgid "Binning x:"
 msgstr " Suskirstymas x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1556
+#: plugins/Oculars/src/ui_ocularDialog.h:1574
 msgid "Resolution x:"
 msgstr "Raiška x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1558
+#: plugins/Oculars/src/ui_ocularDialog.h:1576
 msgid "Prism/CCD height:"
 msgstr "Prizmės/CCD aukštis:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1560
+#: plugins/Oculars/src/ui_ocularDialog.h:1578
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the center of "
 "the Prism"
 msgstr "Tai yra atstumas nuo vaizdo jutiklio centro iki prizmės centro."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1562
+#: plugins/Oculars/src/ui_ocularDialog.h:1580
 msgid "Prism/CCD distance:"
 msgstr "Prizmės/CCD atstumas:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: plugins/Oculars/src/ui_ocularDialog.h:1581
 msgid "Rotation Angle:"
 msgstr "Pasukimo kampas:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1582
 msgid "Binning y:"
 msgstr " Suskirstymas y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1583
 msgid "Prism/CCD width:"
 msgstr "Prizmės/CCD plotis:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1566
+#: plugins/Oculars/src/ui_ocularDialog.h:1584
 msgid "Chip height:"
 msgstr "Lusto aukštis:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1567
+#: plugins/Oculars/src/ui_ocularDialog.h:1585
 msgid "Chip width:"
 msgstr "Lusto plotis:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1568
+#: plugins/Oculars/src/ui_ocularDialog.h:1586
 msgid "Position angle:"
 msgstr "Pozicijos kampas:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1587
 msgid "Sensors"
 msgstr "Jutikliai"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1573
+#: plugins/Oculars/src/ui_ocularDialog.h:1591
 msgid "Horizontal flip"
 msgstr "Horizontalus apvertimas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1574
+#: plugins/Oculars/src/ui_ocularDialog.h:1592
 msgid "Vertical flip"
 msgstr "Vertikalus pasukimas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1575
+#: plugins/Oculars/src/ui_ocularDialog.h:1593
 msgid "Equatorial Mount"
 msgstr "Ekvatorinė montuotė"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1578
+#: plugins/Oculars/src/ui_ocularDialog.h:1596
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:395
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes"

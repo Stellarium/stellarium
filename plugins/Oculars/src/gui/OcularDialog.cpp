@@ -339,6 +339,7 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxShowOAGLimits,		"Oculars.flagShowOAGLimits");
 	ui->textColorToolButton->setup("Oculars.textColor", "text_color", "Oculars");
 	ui->lineColorToolButton->setup("Oculars.lineColor", "line_color", "Oculars");
+	ui->reticleColorToolButton->setup("Oculars.reticleColor", "reticle_color", "Oculars");
 	ui->focuserColorToolButton->setup("Oculars.focuserColor", "focuser_color", "Oculars");
 
 	setupTelradFOVspins(plugin->getTelradFOV());

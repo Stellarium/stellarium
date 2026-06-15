@@ -23,10 +23,12 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "TextureAverageComputer.hpp"
 
+#include <limits>
 #include <cstring>
 #include <stdexcept>
 #include <QDir>
@@ -78,6 +80,9 @@ void read(QFile& file, const QString& path, void* buf, qsizetype size)
 
 inline GLenum getInternalFormatForFBO()
 {
+	const auto& glInfo = StelMainView::getInstance().getGLInformation();
+	if (glInfo.isGLES && glInfo.majorVersion == 2)
+		return GL_RGBA;
 	return GL_RGBA16F;
 }
 
@@ -92,10 +97,10 @@ AtmosphereLightweight::AtmosphereLightweight()
 	               QOpenGLFramebufferObject::NoAttachment, GL_TEXTURE_2D, getInternalFormatForFBO()))
 	, luminanceProbeFBO_(new QOpenGLFramebufferObject(LUM_PROBE_FBO_WIDTH, LUM_PROBE_FBO_HEIGHT,
 	                                                  QOpenGLFramebufferObject::NoAttachment,
-	                                                  GL_TEXTURE_2D, getInternalFormatForFBO()))
-	, textureAverager_(new TextureAverageComputer(*StelOpenGL::highGraphicsFunctions(),
+	                                                  GL_TEXTURE_2D, GL_RGBA))
+	, textureAverager_(new TextureAverageComputer(StelOpenGL::highGraphicsFunctions(),
 	                                              LUM_PROBE_FBO_WIDTH, LUM_PROBE_FBO_HEIGHT,
-	                                              getInternalFormatForFBO()))
+	                                              GL_RGBA, false))
 {
 	setFadeDuration(1.5f);
 
@@ -117,10 +122,11 @@ AtmosphereLightweight::AtmosphereLightweight()
 		"ATTRIBUTE mediump float color_Y;\n"
 		"ATTRIBUTE mediump vec2 azimuthAndElevation;\n"
 		"VARYING mediump vec3 skyColor;\n"
+		"uniform mediump float colorScale;\n"
 		"void main()\n"
 		"{\n"
 		"	gl_Position = vec4(2. * azimuthAndElevation - 1., 0., 1.);\n"
-		"	skyColor=vec3(color_xy.x, color_xy.y, color_Y);\n"
+		"	skyColor=vec3(color_xy.x, color_xy.y, color_Y * colorScale);\n"
 		"}\n";
 	if (!vShader.compileSourceCode(vSrc))
 		qFatal("Error while compiling atmosphere vertex shader: %s", vShader.log().toUtf8().constData());
@@ -131,7 +137,9 @@ AtmosphereLightweight::AtmosphereLightweight()
 	                               "VARYING mediump vec3 skyColor;\n"
 	                               "void main()\n"
 	                               "{\n"
-	                               "   FRAG_COLOR = vec4(skyColor, 1.);\n"
+	                               "   // sqrt is a gamma-like mapping to reduce banding\n"
+	                               "   // on GLESv2 where we use RGBA8 textures\n"
+	                               "   FRAG_COLOR = vec4(skyColor.xy, sqrt(skyColor.z), 1.);\n"
 	                               "}"))
 	{
 		qFatal("Error while compiling Lightweight atmosphere fragment shader: %s", fShader.log().toLatin1().constData());
@@ -147,6 +155,8 @@ AtmosphereLightweight::AtmosphereLightweight()
 	preparationShaderProgram_->bindAttributeLocation("color_xy", COLOR_XY_ATTRIB_LOC);
 	preparationShaderProgram_->bindAttributeLocation("color_Y", COLOR_Y_ATTRIB_LOC);
 	StelPainter::linkProg(preparationShaderProgram_.get(), "Lightweight atmosphere");
+
+	GL(prepProgramUniformLocations_.colorScale = preparationShaderProgram_->uniformLocation("colorScale"));
 
 	preparationVBO_.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	preparationVBO_.create();
@@ -206,6 +216,12 @@ void AtmosphereLightweight::loadMesh()
 			allVertices.resize(allVertices.size() + numVertices);
 			read(file, path, allVertices.data() + oldVertSize, numVertices * sizeof allVertices[0]);
 			layerVertexOffsetsInVBO_.push_back(oldVertSize * sizeof allVertices[0]);
+			const auto max = std::max_element(allVertices.data() + oldVertSize,
+			                                  allVertices.data() + oldVertSize + numVertices,
+			                                  [](const auto& a, const auto& b)
+			                                  { return a.color_Y < b.color_Y; });
+			constexpr float maxPossibleColorY = std::numeric_limits<decltype(max->color_Y)>::max();
+			layerValueMaxima_.push_back(max->color_Y / maxPossibleColorY);
 
 			const auto oldIndSize = allIndices.size();
 			allIndices.resize(allIndices.size() + numIndices);
@@ -235,6 +251,7 @@ void AtmosphereLightweight::loadMesh()
 
 		vaos_.clear();
 		layerNorms_.clear();
+		layerValueMaxima_.clear();
 		layerSolarElevations_.clear();
 		layerVertexOffsetsInVBO_.clear();
 		layerIndexOffsetsInBuffer_.clear();
@@ -347,6 +364,8 @@ void main()
 	elevTC = sqrt(elevTC); // elevation coordinate is stretched by squaring it
 	float azimuthTC = relAzimuth / PI;
 	vec3 color_xyY = texture2D(atmoTex, vec2(azimuthTC, elevTC)).xyz;
+	// Undo the sqrt
+	color_xyY.z *= color_xyY.z;
 	vec3 color_RGB = xyYToRGB(color_xyY.x, color_xyY.y, color_xyY.z * colorScale);
 	FRAG_COLOR = vec4(color_RGB, 1);
 }
@@ -404,7 +423,7 @@ void main()
 VARYING mediump vec3 ndcPos;
 uniform mat4 projectionMatrixInverse;
 uniform vec3 sunDir;
-uniform highp float colorScale;
+uniform bool isMoon;
 uniform sampler2D atmoTex;
 const highp float PI = 3.14159265;
 
@@ -430,7 +449,9 @@ void main()
 	elevTC = sqrt(elevTC); // elevation coordinate is stretched by squaring it
 	float azimuthTC = relAzimuth / PI;
 	vec3 color_xyY = texture2D(atmoTex, vec2(azimuthTC, elevTC)).xyz;
-	FRAG_COLOR = vec4(color_xyY.xy, color_xyY.z * colorScale, 1);
+	// Undo the sqrt
+	color_xyY.z *= color_xyY.z;
+	FRAG_COLOR = vec4(isMoon ? 0. : color_xyY.z, isMoon ? color_xyY.z : 0., 0, 1);
 }
 )";
 
@@ -453,9 +474,9 @@ void main()
 	luminanceProbeProgram_->bindAttributeLocation("screenVertex", SCREEN_VERTEX_ATTRIB_LOC);
 	StelPainter::linkProg(luminanceProbeProgram_.get(), "Lightweight atmosphere luminance probe");
 
+	GL(luminanceProbeUniformLocations_.isMoon                  = luminanceProbeProgram_->uniformLocation("isMoon"));
 	GL(luminanceProbeUniformLocations_.sunDir                  = luminanceProbeProgram_->uniformLocation("sunDir"));
 	GL(luminanceProbeUniformLocations_.atmoTex                 = luminanceProbeProgram_->uniformLocation("atmoTex"));
-	GL(luminanceProbeUniformLocations_.colorScale              = luminanceProbeProgram_->uniformLocation("colorScale"));
 	GL(luminanceProbeUniformLocations_.projectionMatrixInverse = luminanceProbeProgram_->uniformLocation("projectionMatrixInverse"));
 
 	bindVAO(VAO_RENDER);
@@ -497,8 +518,8 @@ float AtmosphereLightweight::computeAverageLuminance(const StelCore* core)
 	for (int i = 0; i < DRAW_PARAM_COUNT; ++i)
 	{
 		const auto& p = drawParams[i];
-		luminanceProbeProgram_->setUniformValue(luminanceProbeUniformLocations_.colorScale,
-		                                        p.relativeBrightness * p.eclipseFactor * p.fboColorScale);
+		luminanceProbeProgram_->setUniformValue(luminanceProbeUniformLocations_.isMoon,
+		                                        i == DRAW_PARAM_MOON);
 		luminanceProbeProgram_->setUniformValue(luminanceProbeUniformLocations_.sunDir, p.dir);
 		GL(gl.glBindTexture(GL_TEXTURE_2D, p.fbo->texture()));
 		GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
@@ -515,7 +536,17 @@ float AtmosphereLightweight::computeAverageLuminance(const StelCore* core)
 
 	const auto texAvg = textureAverager_->getTextureAverageSimple(luminanceProbeFBO_->texture(),
 	                                                              LUM_PROBE_FBO_WIDTH, LUM_PROBE_FBO_HEIGHT);
-	return texAvg[2];
+	float lum = 0;
+	for (int i = 0; i < DRAW_PARAM_COUNT; ++i)
+	{
+		const auto& p = drawParams[i];
+		auto currLum = texAvg[i] * p.relativeBrightness * p.eclipseFactor * p.fboColorScale;
+		const float maxValue = std::max(layerValueMaxima_[p.layerToDrawA],
+		                                layerValueMaxima_[p.layerToDrawB]);
+		currLum *= maxValue; // restore the scale we used when creating the preparation FBO
+		lum += currLum;
+	}
+	return lum;
 }
 
 void AtmosphereLightweight::computeDrawParams(const StelCore* core, const Planet* lightSource, const Planet* moon,
@@ -625,7 +656,7 @@ void AtmosphereLightweight::computeColor(StelCore* core, const double JD, const 
 	computeDrawParams(core, moon, moon, DRAW_PARAM_MOON, noScatter);
 
 	GLint origFBO=-1;
-	GL(gl.glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &origFBO));
+	GL(gl.glGetIntegerv(GL_FRAMEBUFFER_BINDING, &origFBO));
 	preparationShaderProgram_->bind();
 
 	GLint origViewport[4];
@@ -636,6 +667,8 @@ void AtmosphereLightweight::computeColor(StelCore* core, const double JD, const 
 	{
 		const auto& p = drawParams[i];
 		p.fbo->bind();
+		const float maxValue = std::max(layerValueMaxima_[p.layerToDrawA],
+		                                layerValueMaxima_[p.layerToDrawB]);
 		for (const auto layer : {p.layerToDrawA, p.layerToDrawB})
 		{
 			if (layer == p.layerToDrawB)
@@ -648,9 +681,11 @@ void AtmosphereLightweight::computeColor(StelCore* core, const double JD, const 
 			{
 				GL(gl.glDisable(GL_BLEND));
 			}
+			preparationShaderProgram_->setUniformValue(prepProgramUniformLocations_.colorScale,
+			                                           1.f / maxValue);
 			bindVAO(layer);
 			GL(indexBuffer_.bind());
-			const auto indicesOffset = layerIndexOffsetsInBuffer_[layer];
+			const uintptr_t indicesOffset = layerIndexOffsetsInBuffer_[layer];
 			assert(layer+1 < layerIndexOffsetsInBuffer_.size());
 			const auto indicesEnd = layerIndexOffsetsInBuffer_[layer + 1];
 			const auto numIndices = (indicesEnd - indicesOffset) / sizeof(IndexType);
@@ -672,7 +707,7 @@ void AtmosphereLightweight::computeColor(StelCore* core, const double JD, const 
 		averageLuminance = bgLum + (meanY + lightPollutionLuminance) * fader.getInterstate();
 	}
 
-	GL(gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, origFBO));
+	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, origFBO));
 	GL(gl.glViewport(origViewport[0], origViewport[1], origViewport[2], origViewport[3]));
 }
 
@@ -729,10 +764,15 @@ void AtmosphereLightweight::draw(StelCore*const core)
 	for (int i = 0; i < DRAW_PARAM_COUNT; ++i)
 	{
 		const auto& p = drawParams[i];
+		const float maxValue = std::max(layerValueMaxima_[p.layerToDrawA],
+		                                layerValueMaxima_[p.layerToDrawB]);
 		GL(gl.glBindTexture(GL_TEXTURE_2D, p.fbo->texture()));
-		renderShaderProgram_->setUniformValue(renderUniformLocations_.colorScale,
-		                                      p.fboColorScale * p.relativeBrightness * p.eclipseFactor);
 		renderShaderProgram_->setUniformValue(renderUniformLocations_.sunDir, p.dir);
+
+		float colorScale = p.fboColorScale * p.relativeBrightness * p.eclipseFactor;
+		colorScale *= maxValue; // restore the scale we used when creating the preparation FBO
+		renderShaderProgram_->setUniformValue(renderUniformLocations_.colorScale, colorScale);
+
 		GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
 	}
 

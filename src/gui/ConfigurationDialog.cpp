@@ -1123,7 +1123,10 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("viewing/flag_draw_sun_halo",                    propMgr->getStelPropertyValue("SolarSystem.flagDrawSunHalo").toBool());
         conf->setValue("viewing/flag_draw_sun_corona",                  propMgr->getStelPropertyValue("SolarSystem.flagPermanentSolarCorona").toBool());
         conf->setValue("viewing/flag_moon_scaled",                      propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool());
-        conf->setValue("viewing/moon_scale",                            QString::number(propMgr->getStelPropertyValue("SolarSystem.moonScale").toDouble(), 'f', 2));
+	conf->setValue("viewing/flag_dynamic_moon_scale",               propMgr->getStelPropertyValue("SolarSystem.flagDynamicMoonScale").toBool());
+	conf->setValue("viewing/moon_scale_min_fov",                    QString::number(propMgr->getStelPropertyValue("SolarSystem.moonScaleMinFov").toDouble(), 'f', 2));
+	conf->setValue("viewing/moon_scale_max_fov",                    QString::number(propMgr->getStelPropertyValue("SolarSystem.moonScaleMaxFov").toDouble(), 'f', 2));
+	conf->setValue("viewing/moon_scale",                            QString::number(propMgr->getStelPropertyValue("SolarSystem.moonScale").toDouble(), 'f', 2));
         conf->setValue("viewing/flag_minorbodies_scaled",               propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool());
         conf->setValue("viewing/minorbodies_scale",                     QString::number(propMgr->getStelPropertyValue("SolarSystem.minorBodyScale").toDouble(), 'f', 2));
         conf->setValue("viewing/flag_planets_scaled",                   propMgr->getStelPropertyValue("SolarSystem.flagPlanetScale").toBool());
