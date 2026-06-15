@@ -576,19 +576,19 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& pos, const 
 		for (int i=-centerPoint;i<nbPoints-1-centerPoint;++i)
 		{
 			Vec3d vertex;
-			StelUtils::spheToRect(ra-i*(2.f*radius/4),     dec+j*(2.f*radius/(nbPoints-1)), vertex);
-			//qDebug() << "LL vertex:" <<  StelUtils::hoursToHmsStr(StelUtils::fmodpos(ra-i*(2.f*radius/4)  *M_180_PI/15, 24.)) << "/" << StelUtils::decDegToDmsStr(dec+j*2.f*radius/(nbPoints-1)  *M_180_PI);
+			StelUtils::spheToRect(ra-i*(2.0*radius/4.0),     dec+j*(2.0*radius/(nbPoints-1)), vertex);
+			//qDebug() << "LL vertex:" <<  StelUtils::hoursToHmsStr(StelUtils::fmodpos(ra-i*(2.0*radius/4.0)  *M_180_PI/15, 24.)) << "/" << StelUtils::decDegToDmsStr(dec+j*2.0*radius/(nbPoints-1)  *M_180_PI);
 			contour << vertex;
-			StelUtils::spheToRect(ra-(i+1)*(2.f*radius/(nbPoints-1)), dec+j*(2.f*radius/(nbPoints-1)), vertex);
+			StelUtils::spheToRect(ra-(i+1)*(2.0*radius/(nbPoints-1)), dec+j*(2.0*radius/(nbPoints-1)), vertex);
 			contour << vertex;
-			StelUtils::spheToRect(ra-i*(2.f*radius/(nbPoints-1)),     dec+(j+1)*(2.f*radius/(nbPoints-1)), vertex);
+			StelUtils::spheToRect(ra-i*(2.0*radius/(nbPoints-1)),     dec+(j+1)*(2.0*radius/(nbPoints-1)), vertex);
 			contour << vertex;
-			StelUtils::spheToRect(ra-(i+1)*(2.f*radius/4), dec+j*(2.f*radius/(nbPoints-1)), vertex);
+			StelUtils::spheToRect(ra-(i+1)*(2.0*radius/4.0), dec+j*(2.0*radius/(nbPoints-1)), vertex);
 			contour << vertex;
-			StelUtils::spheToRect(ra-(i+1)*(2.f*radius/4), dec+(j+1)*(2.f*radius/(nbPoints-1)), vertex);
-			//qDebug() << "UR vertex:" <<  StelUtils::hoursToHmsStr(ra-(i+1)*(2.f*radius/4)  *M_180_PI/15) << "/" << StelUtils::decDegToDmsStr(dec+(j+1)*2.f*radius/(nbPoints-1)  *M_180_PI);
+			StelUtils::spheToRect(ra-(i+1)*(2.0*radius/4.0), dec+(j+1)*(2.0*radius/(nbPoints-1)), vertex);
+			//qDebug() << "UR vertex:" <<  StelUtils::hoursToHmsStr(ra-(i+1)*(2.0*radius/4.0)  *M_180_PI/15) << "/" << StelUtils::decDegToDmsStr(dec+(j+1)*2.0*radius/(nbPoints-1)  *M_180_PI);
 			contour << vertex;
-			StelUtils::spheToRect(ra-i*(2.f*radius/4),     dec+(j+1)*(2.f*radius/(nbPoints-1)), vertex);
+			StelUtils::spheToRect(ra-i*(2.0*radius/4.0),     dec+(j+1)*(2.0*radius/(nbPoints-1)), vertex);
 			contour << vertex;
 		}
 	}
