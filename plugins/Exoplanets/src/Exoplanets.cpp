@@ -234,6 +234,9 @@ void Exoplanets::init()
 
 void Exoplanets::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	if (!flagShowExoplanets)
 		return;
 

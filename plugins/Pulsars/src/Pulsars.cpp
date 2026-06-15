@@ -233,6 +233,9 @@ void Pulsars::init()
 */
 void Pulsars::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	if (!flagShowPulsars)
 		return;
 

@@ -121,6 +121,9 @@ void PointerCoordinates::init()
 
 void PointerCoordinates::draw(StelCore *core)
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	if (!isEnabled())
 		return;
 

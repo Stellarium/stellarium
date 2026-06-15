@@ -871,7 +871,7 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 				continue;
 		}
 
-		const StelObject::CulturalName cName {
+		StelObject::CulturalName cName {
 			entry["native"].toString(),
 			entry["pronounce"].toString(),
 			trans.qTranslateStarPronounce(entry["pronounce"].toString()),
@@ -883,6 +883,11 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 			QString(),
 			StelObject::CulturalNameSpecial::None
 		};
+		QString byname=entry["byname"].toString();
+		if (!byname.isEmpty())
+		{
+			cName.byname = byname;
+		}
 
 		//if (culturalNamesMap.contains(HIP))
 		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;
@@ -1379,6 +1384,7 @@ void StarMgr::draw(StelCore* core)
 
 	// Prepare a table for storing precomputed RCMag for all ZoneArrays
 	RCMag rcmag_table[RCMAG_TABLE_SIZE];
+	const float starStreakScale = core->getFlagClearSky()? 1.0f:0.6f;
 	
 	// Draw all the stars of all the selected zones
 	for (const auto* z : std::as_const(gridLevels))
@@ -1406,7 +1412,8 @@ void StarMgr::draw(StelCore* core)
 				}
 				break;
 			}
-			rcmag_table[i].radius *= starsFader.getInterstate();
+			rcmag_table[i].radius *= starsFader.getInterstate() * starStreakScale;
+			rcmag_table[i].luminance *= starStreakScale;
 		}
 		lastMaxSearchLevel = z->level;
 

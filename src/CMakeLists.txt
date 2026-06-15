@@ -178,6 +178,8 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de441.hpp
      core/planetsephems/htc20b.c
      core/planetsephems/htc20b.h
+     core/modules/AtmosphereLightweight.cpp
+     core/modules/AtmosphereLightweight.hpp
      core/modules/AtmospherePreetham.cpp
      core/modules/AtmospherePreetham.hpp
      core/modules/AtmosphereShowMySky.cpp

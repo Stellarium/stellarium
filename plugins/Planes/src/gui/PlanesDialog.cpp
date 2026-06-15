@@ -67,7 +67,8 @@ void PlanesDialog::updateComboTexts()
 	ui->refreshIntervalSpinBox->setSuffix(QString(" %1").arg(s));
 	ui->refreshIntervalSpinBox->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->refreshIntervalSpinBox->minimum()), QString::number(ui->refreshIntervalSpinBox->maximum()), s));
 
-	QString nm = qc_("NM","radius");
+	// TRANSLATORS: Unit of measure for distance - nautical miles
+	QString nm = qc_("NM","distance");
 	ui->radiusSpinBox->setSuffix(QString(" %1").arg(nm));
 	ui->radiusSpinBox->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->radiusSpinBox->minimum()), QString::number(ui->radiusSpinBox->maximum()), nm));
 }

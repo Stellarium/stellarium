@@ -167,6 +167,7 @@ Oculars::Oculars()
 	, guiPanelFontSize(StelApp::getInstance().getScreenFontSize() * GUI_PANEL_FONT_SIZE_FACTOR)
 	, textColor(0.)
 	, lineColor(0.)
+	, reticleColor(0.)
 	, focuserColor(0.)
 	, selectedSSO(Q_NULLPTR)
 	, actualFOV(0.)
@@ -334,6 +335,7 @@ void Oculars::deinit()
 	settings->setValue("limit_stellar_magnitude_oculars", flagLimitStarsOculars);
 	settings->setValue("text_color", textColor.toStr());
 	settings->setValue("line_color", lineColor.toStr());
+	settings->setValue("reticle_color", reticleColor.toStr());
 	settings->setValue("focuser_color", focuserColor.toStr());
 	settings->sync();
 
@@ -635,6 +637,7 @@ void Oculars::init()
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
 		textColor=Vec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
 		lineColor=Vec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
+		reticleColor=Vec3f(settings->value("reticle_color", "1.00,0.00,0.00").toString());
 		telradFOV=Vec4f(settings->value("telrad_fov", "0.5,2.0,4.0,0.0").toString());
 		focuserColor=Vec3f(settings->value("focuser_color", "0.0,0.67,1.0").toString());
 
@@ -2135,7 +2138,7 @@ void Oculars::paintCrosshairs()
 	}
 	// Draw the lines
 	StelPainter painter(projector);
-	painter.setColor(lineColor);
+	painter.setColor(reticleColor);
 	QPoint a, b;
 	int hw = qRound(length);
 	QTransform ch_transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-polarAngle);
@@ -2187,13 +2190,8 @@ void Oculars::paintOcularMask(const StelCore *core)
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
-		//painter.setColor(lineColor); // let's use original color
-		reticleTexture->bind();
-		/* Why it need?
-		int textureHeight;
-		int textureWidth;
-		reticleTexture->getDimensions(textureWidth, textureHeight);
-		*/
+		painter.setColor(reticleColor);
+		reticleTexture->bind();		
 		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], static_cast<float>(inner / params.devicePixelsPerPixel), static_cast<float>(reticleRotation));
 	}
 

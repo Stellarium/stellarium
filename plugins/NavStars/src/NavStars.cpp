@@ -174,6 +174,8 @@ bool NavStars::configureGui(bool show)
 
 void NavStars::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
 	// Drawing is enabled?
 	if (markerFader.getInterstate() <= 0.0f)
 	{

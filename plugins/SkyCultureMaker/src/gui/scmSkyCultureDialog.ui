@@ -682,6 +682,307 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="commonNamesTab">
+         <attribute name="title">
+          <string>Common Names</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="cnTabLayout">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="cnEntriesLbl">
+            <property name="text">
+             <string>Name Entries:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="cnEntriesTable">
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+            </property>
+            <property name="showGrid">
+             <bool>true</bool>
+            </property>
+            <attribute name="verticalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
+            <column>
+             <property name="text">
+              <string>Object</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>English</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Native</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Pronounce</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QGroupBox" name="cnFormGroup">
+            <property name="title">
+             <string>Entry Fields</string>
+            </property>
+            <layout class="QGridLayout" name="cnFormGridLayout">
+             <item row="1" column="0">
+              <widget class="QLabel" name="cnObjectTypeLbl">
+               <property name="text">
+                <string>Type:*</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cnObjectTypeCB">
+               <item>
+                <property name="text">
+                 <string>Star</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Planet</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Deep-Sky Object</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="cnObjectIdLbl">
+               <property name="text">
+                <string>Identifier:*</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="cnObjectIdLE">
+               <property name="placeholderText">
+                <string>HIP number (e.g. 1234)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" colspan="2">
+              <widget class="QPushButton" name="cnUseFromSelectionBtn">
+               <property name="text">
+                <string>Copy Data From Selected Object</string>
+               </property>
+               <property name="toolTip">
+                <string>Fill Type, Identifier and English name from the currently selected object</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/btGotoSelectedObject-on.png</normaloff>
+                 <disabledoff>:/graphicGui/btGotoSelectedObject-off.png</disabledoff>:/graphicGui/btGotoSelectedObject-on.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="cnEnglishLbl">
+               <property name="text">
+                <string>English:*</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="cnEnglishLE">
+               <property name="placeholderText">
+                <string>Name translated to English</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="cnNativeLbl">
+               <property name="text">
+                <string>Native:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="cnNativeLE">
+               <property name="placeholderText">
+                <string>Name in the original language</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="cnPronounceLbl">
+               <property name="text">
+                <string>Pronounce:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="cnPronounceLE">
+               <property name="placeholderText">
+                <string>Latin-character pronunciation guide (e.g. Pinyin)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="cnTransliterationLbl">
+               <property name="text">
+                <string>Transliteration:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QLineEdit" name="cnTransliterationLE">
+               <property name="placeholderText">
+                <string>Scientific transliteration (e.g. Wylie for Tibetan)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLabel" name="cnIpaLbl">
+               <property name="text">
+                <string>IPA:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QLineEdit" name="cnIpaLE">
+               <property name="placeholderText">
+                <string>International Phonetic Alphabet</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="cnBynameLbl">
+               <property name="text">
+                <string>Byname:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QLineEdit" name="cnBynameLE">
+               <property name="placeholderText">
+                <string>Explanatory addition to the name (e.g. mythological role)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="cnReferencesLbl">
+               <property name="text">
+                <string>References:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QLineEdit" name="cnReferencesLE">
+               <property name="placeholderText">
+                <string>Comma-separated reference numbers (e.g. 1, 3, 5)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="cnVisibleLbl">
+               <property name="text">
+                <string>Visible (planets only):</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1">
+              <widget class="QComboBox" name="cnVisibleCB">
+               <item>
+                <property name="text">
+                 <string>Always visible</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Morning only</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Evening only</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="cnActionBtnLayout">
+            <item>
+             <widget class="QPushButton" name="cnAddNewBtn">
+              <property name="text">
+               <string>Save As New Entry</string>
+              </property>
+              <property name="toolTip">
+               <string>Add the current form as a new entry</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="cnSaveChangesBtn">
+              <property name="text">
+               <string>Update Selected Entry</string>
+              </property>
+              <property name="toolTip">
+               <string>Save the edited fields back to the selected entry</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="cnRemoveEntryBtn">
+              <property name="text">
+               <string>Remove Selected Entry</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="cnActionBtnSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
         <widget class="QWidget" name="geoLocTab">
          <attribute name="title">
           <string>Location</string>

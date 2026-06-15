@@ -260,7 +260,7 @@
                <item>
                 <widget class="ColorButton" name="textColorToolButton">
                  <property name="toolTip">
-                  <string>Color for text which is shown only when GUI is switched off.</string>
+                  <string>Color for text which is shown only when GUI is switched off</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -271,6 +271,23 @@
                 <widget class="QLabel" name="textColorLabel">
                  <property name="text">
                   <string>Text Color</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="ColorButton" name="reticleColorToolButton">
+                 <property name="toolTip">
+                  <string>Color for reticle and crosshair</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="reticleColorLabel">
+                 <property name="text">
+                  <string>Reticle Color</string>
                  </property>
                 </widget>
                </item>
@@ -485,7 +502,7 @@
                   <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeType">
-                  <enum>QSizePolicy::Policy::Fixed</enum>
+                  <enum>QSizePolicy::Fixed</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -556,7 +573,7 @@
                   <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeType">
-                  <enum>QSizePolicy::Policy::Fixed</enum>
+                  <enum>QSizePolicy::Fixed</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -2052,6 +2069,7 @@
   <tabstop>arrowButtonScaleSpinBox</tabstop>
   <tabstop>lineColorToolButton</tabstop>
   <tabstop>textColorToolButton</tabstop>
+  <tabstop>reticleColorToolButton</tabstop>
   <tabstop>checkBoxCCDFOVScaling</tabstop>
   <tabstop>checkBoxDMSDegrees</tabstop>
   <tabstop>checkBoxTypeOfMount</tabstop>

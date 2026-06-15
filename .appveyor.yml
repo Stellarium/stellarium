@@ -42,8 +42,10 @@ environment:
     VSPATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\SDK\ScopeCppSDK\VC\bin
     QT_VERSION_MAJOR: 5
     QT_BASEDIR: C:\Qt\5.12\msvc2017_64
-    CMAKE_GENERATOR: Visual Studio 15 2017 Win64
-    CMAKE_ARGS: --
+    CMAKE_GENERATOR: Visual Studio 15 2017
+    CMAKE_ARGS: -A x64
+    cmakeURL: https://github.com/Kitware/CMake/releases/download/v3.18.6/cmake-3.18.6-win64-x64.zip
+    cmakeBaseName: cmake-3.18.6-win64-x64
     exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc64.zip
     exiv2baseName: exiv2-0.28.0-2017msvc64
     scConverterEnabled: false
@@ -113,6 +115,10 @@ before_build:
 
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
+  - ps: if($env:cmakeURL -ne $null) { appveyor DownloadFile $env:cmakeURL -FileName c:\$env:cmakeBaseName.zip }
+  - ps: if($env:cmakeURL -ne $null) { 7z e c:\$env:cmakeBaseName.zip -spf -oc:\ }
+  - ps: if($env:cmakeURL -ne $null) { $env:PATH="c:\$env:cmakeBaseName\bin;$env:PATH" }
+
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
 
   - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip }

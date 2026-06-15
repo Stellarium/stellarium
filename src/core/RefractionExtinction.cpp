@@ -282,13 +282,30 @@ QByteArray Refraction::getForwardTransformShader() const
 {
 	return QByteArray(1+R"(
 uniform float REFRACTION_press_temp_corr;
-vec3 innerRefractionForward(vec3 altAzPos)
+// Workaround for Intel's unusable implementation of sin & cos, which leads to broken geometry of the Moon every 0.9° of elevation.
+highp float REFRACTION_sin(highp float x)
 {
 	const float PI = 3.14159265;
-	const float M_180_PI = 180./PI;
-	const float M_PI_180 = PI/180.;
-	const float MIN_GEO_ALTITUDE_DEG=@MIN_GEO_ALTITUDE_DEG@;
-	const float TRANSITION_WIDTH_GEO_DEG=@TRANSITION_WIDTH_GEO_DEG@;
+	x = mod(x+PI, 2.0*PI)-PI;
+	return x*(0.999999599920672 + x*x*(-0.166665526354071 + x*x*(0.00833240298869917 + x*x*(-0.0001980863334175 + x*x*(2.69971463693744e-6 - 2.03622449118901e-8*x*x)))));
+}
+// Workaround for Intel's and AMD's unusable implementation of asin, which leads to time-dependent shifts of the Moon from its refracted positions.
+highp float REFRACTION_asin(highp float x)
+{
+	float sign = x < 0. ? -1. : 1.;
+	if(x < 0.) x = -x;
+	x = 2. * sqrt(1. - x) - 1.;
+	float v = 0.848061881596496 + x*(-0.755929497461161 + x*(-0.0539853235799928 + x*(-0.025701166121295 + x*(-0.00723634508887381 +
+	           x*(-0.00314276748524976 + x*(-0.00101365621070969 + x*(-0.000411380592372285 + x*(-0.000428167561924693 - 0.000213293541786718*x))))))));
+	return v * sign;
+}
+highp vec3 innerRefractionForward(highp vec3 altAzPos)
+{
+	const highp float PI = 3.14159265;
+	const highp float M_180_PI = 180./PI;
+	const highp float M_PI_180 = PI/180.;
+	const highp float MIN_GEO_ALTITUDE_DEG=@MIN_GEO_ALTITUDE_DEG@;
+	const highp float TRANSITION_WIDTH_GEO_DEG=@TRANSITION_WIDTH_GEO_DEG@;
 
 	float press_temp_corr = REFRACTION_press_temp_corr;
 
@@ -299,13 +316,13 @@ vec3 innerRefractionForward(vec3 altAzPos)
 		return altAzPos;
 	}
 
-	float sinGeo = altAzPos[2]/len;
-	float geom_alt_rad = asin(sinGeo);
-	float geom_alt_deg = M_180_PI*geom_alt_rad;
+	highp float sinGeo = altAzPos[2]/len;
+	highp float geom_alt_rad = REFRACTION_asin(sinGeo);
+	highp float geom_alt_deg = M_180_PI*geom_alt_rad;
 	if (geom_alt_deg > MIN_GEO_ALTITUDE_DEG)
 	{
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
-		float r=press_temp_corr * ( 1.02 / tan((geom_alt_deg+10.3/(geom_alt_deg+5.11))*M_PI_180) + 0.0019279);
+		highp float r=press_temp_corr * ( 1.02 / tan((geom_alt_deg+10.3/(geom_alt_deg+5.11))*M_PI_180) + 0.0019279);
 		geom_alt_deg += r;
 		if (geom_alt_deg > 90.)
 			geom_alt_deg=90.;
@@ -313,18 +330,18 @@ vec3 innerRefractionForward(vec3 altAzPos)
 	else if(geom_alt_deg>MIN_GEO_ALTITUDE_DEG-TRANSITION_WIDTH_GEO_DEG)
 	{
 		// Avoids the jump below -5 by interpolating linearly between MIN_GEO_ALTITUDE_DEG and bottom of transition zone
-		float r_m5=press_temp_corr * ( 1.02 / tan((MIN_GEO_ALTITUDE_DEG+10.3/(MIN_GEO_ALTITUDE_DEG+5.11))*M_PI_180) + 0.0019279);
+		highp float r_m5=press_temp_corr * ( 1.02 / tan((MIN_GEO_ALTITUDE_DEG+10.3/(MIN_GEO_ALTITUDE_DEG+5.11))*M_PI_180) + 0.0019279);
 		geom_alt_deg += r_m5*(geom_alt_deg-(MIN_GEO_ALTITUDE_DEG-TRANSITION_WIDTH_GEO_DEG))/TRANSITION_WIDTH_GEO_DEG;
 	}
 	else return altAzPos;
 	// At this point we have corrected geometric altitude. Note that if we just change altAzPos[2], we would change vector length, so this would change our angles.
 	// We have to shorten X,Y components of the vector as well by the change in cosines of altitude, or (sqrt(1-sin(alt))
 
-	float refr_alt_rad=geom_alt_deg*M_PI_180;
-	float sinRef=sin(refr_alt_rad);
+	highp float refr_alt_rad=geom_alt_deg*M_PI_180;
+	highp float sinRef = REFRACTION_sin(refr_alt_rad);
 
 	// FIXME: do we really need double's mantissa length here as a comment in the C++ code says?
-	float shortenxy = abs(sinGeo)>=1.0 ? 1.0 : sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo));
+	highp float shortenxy = abs(sinGeo)>=1.0 ? 1.0 : sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo));
 
 	altAzPos[0]*=shortenxy;
 	altAzPos[1]*=shortenxy;
@@ -333,18 +350,18 @@ vec3 innerRefractionForward(vec3 altAzPos)
 	return altAzPos;
 }
 
-uniform mat4 REFRACTION_preTransfoMat;
-uniform mat4 REFRACTION_postTransfoMat;
+uniform highp mat4 REFRACTION_preTransfoMat;
+uniform highp mat4 REFRACTION_postTransfoMat;
 
-vec3 vertexToAltAzPos(vec3 v)
+highp vec3 vertexToAltAzPos(highp vec3 v)
 {
-	vec3 altAzPosNotRefracted = (REFRACTION_preTransfoMat * vec4(v,1)).xyz;
+	highp vec3 altAzPosNotRefracted = (REFRACTION_preTransfoMat * vec4(v,1)).xyz;
 	return innerRefractionForward(altAzPosNotRefracted);
 }
 
-vec3 modelViewForwardTransform(vec3 v)
+highp vec3 modelViewForwardTransform(highp vec3 v)
 {
-	vec3 altAzPos = vertexToAltAzPos(v);
+	highp vec3 altAzPos = vertexToAltAzPos(v);
 	return (REFRACTION_postTransfoMat * vec4(altAzPos, 1)).xyz;
 }
 

@@ -164,7 +164,7 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 					it.remove();
 				}
 			}
-			qInfo() << "Skyculture" << currentSkyCultureID << "configured to exclude asterisms referenced from" << excludeRefs;
+			qInfo() << "AsterismMgr: Skyculture" << currentSkyCultureID << "configured to exclude asterisms referenced from" << excludeRefs;
 		}
 
 		for (unsigned n = 0, m=0; n < asterisms.size(); ++n, ++m)
@@ -284,6 +284,9 @@ void AsterismMgr::setRayHelperThickness(const int thickness)
 
 void AsterismMgr::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	QFont font=QGuiApplication::font();

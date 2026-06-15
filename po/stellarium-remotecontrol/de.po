@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# cardinot <mcardinot@gmail.com>, 2025
 # Luca-Philipp Grumbach, 2025
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2026
-# cardinot <mcardinot@gmail.com>, 2026
 # Latein Lebt, 2026
 # 
 #, fuzzy
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-04-26 17:27+0700\n"
+"POT-Creation-Date: 2026-06-09 22:17+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Latein Lebt, 2026\n"
 "Language-Team: German (https://app.transifex.com/stellarium/teams/80998/de/)\n"
@@ -83,11 +83,6 @@ msgstr "Fehler (%1)"
 msgid "Error performing Simbad lookup"
 msgstr "Fehler bei der SIMBAD-Suche"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:230
-#: tablet7in.html:245
-msgid "idle"
-msgstr "untätig"
-
 #: plugins/RemoteControl/webroot/js/api/search.js:291
 msgid "Error loading object types"
 msgstr "Fehler beim Laden von Objekttypen"
@@ -125,7 +120,7 @@ msgstr "Konnte Liste der 3D-Szenen nicht abrufen"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:170 tablet7in.html:1242
 msgid "Search actions..."
-msgstr ""
+msgstr "Suche Aktionen ..."
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:217
 #: plugins/RemoteControl/webroot/js/ui/actions.js:257
@@ -147,7 +142,7 @@ msgstr "Eingabe paßt zu keinem Punkt"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:132
 msgid "No items available for this culture"
-msgstr ""
+msgstr "Für diese Kultur sind keine Einträge vorhanden"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:432
 msgid "No current selection"
@@ -175,7 +170,7 @@ msgstr "DSO"
 
 #: index.html:39 tablet7in.html:44
 msgid "Statistics & Analysis"
-msgstr ""
+msgstr "Statistiken & Analysen"
 
 #: index.html:40
 msgid "Actions and scripts"
@@ -187,7 +182,7 @@ msgstr "Scenery3d"
 
 #: index.html:44 index.html:1301 tablet7in.html:50 tablet7in.html:1370
 msgid "Gamepad Controller"
-msgstr ""
+msgstr "Gamepad-Controller"
 
 #: index.html:83
 msgid "Pause"
@@ -477,17 +472,17 @@ msgstr "Aktuelle Himmelskultur"
 
 #: index.html:723 index.html:980 tablet7in.html:789 tablet7in.html:1045
 msgid "Loading sky cultures..."
-msgstr ""
+msgstr "Lade Himmelskulturen ..."
 
 #: index.html:732 index.html:998 index.html:1018 tablet7in.html:798
 #: tablet7in.html:1063 tablet7in.html:1083
 msgid "Zodiac Signs"
-msgstr ""
+msgstr "Tierkreiszeichen"
 
 #: index.html:733 index.html:1002 index.html:1019 tablet7in.html:799
 #: tablet7in.html:1067 tablet7in.html:1084
 msgid "Lunar Mansions"
-msgstr ""
+msgstr "Mondstationen/-häuser"
 
 #: index.html:734 tablet7in.html:800
 msgid "Notable Stars"
@@ -496,42 +491,44 @@ msgstr ""
 #: index.html:740 tablet7in.html:806
 msgid "Click on any constellation to highlight and isolate it"
 msgstr ""
+"Klicken Sie auf ein beliebiges Sternbild, um es hervorzuheben und zu "
+"isolieren"
 
 #: index.html:742 tablet7in.html:808
 msgid "Select a sky culture to view constellations"
-msgstr ""
+msgstr "Um Sternbilder anzuzeigen, wählen Sie eine Himmelskultur aus"
 
 #: index.html:748 tablet7in.html:814
 msgid "Traditional star patterns within constellations"
-msgstr ""
+msgstr "Traditionelle Sternenmuster in den Sternbildern"
 
 #: index.html:750 tablet7in.html:816
 msgid "No asterisms available"
-msgstr ""
+msgstr "Keine Asterismen verfügbar"
 
 #: index.html:756 tablet7in.html:822
 msgid "The 12 signs of the zodiac"
-msgstr ""
+msgstr "Die 12 Tierkreiszeichen"
 
 #: index.html:758 tablet7in.html:824
 msgid "No zodiac data available"
-msgstr ""
+msgstr "Keine Tierkreiszeichendaten verfügbar"
 
 #: index.html:764 tablet7in.html:830
 msgid "Traditional lunar stations (mansions)"
-msgstr ""
+msgstr "Traditionelle Mondstationen (-häuser)"
 
 #: index.html:766 tablet7in.html:832
 msgid "No lunar mansions data available"
-msgstr ""
+msgstr "Keine Mondstationendaten verfügbar"
 
 #: index.html:772 tablet7in.html:838
 msgid "Named stars with cultural significance"
-msgstr ""
+msgstr "Benannte Sterne mit kultureller Bedeutung"
 
 #: index.html:774 tablet7in.html:840
 msgid "No star name data available"
-msgstr ""
+msgstr "Keine Sternennamendaten verfügbar"
 
 #: index.html:798 tablet7in.html:864
 msgid "Label constellations with font size"
@@ -583,55 +580,66 @@ msgstr "Nur die letzte Auswahl"
 
 #: index.html:954 tablet7in.html:1019
 msgid "Culture Data Inspector"
-msgstr ""
+msgstr "Kulturdatenprüfer"
 
 #: index.html:956 tablet7in.html:1021
 msgid ""
 "This inspector displays the complete, unfiltered dataset extracted directly "
 "from the culture's"
 msgstr ""
+"Der Prüfer zeigt den vollständigen, ungefilterten Datensatz, der direkt aus "
+"der Kulturdatei extrahiert wurde."
 
 #: index.html:958 tablet7in.html:1023
 msgid "file. Use this view to:"
-msgstr ""
+msgstr "Verwenden Sie diese Ansicht für:"
 
 #: index.html:960 tablet7in.html:1025
 msgid "Verify exact constellation and asterism counts (including ray helpers)"
 msgstr ""
+"Das Überprüfen der genauen Anzahl der Sternbilder und Asterismen "
+"(einschließlich der Hilfslinien)"
 
 #: index.html:961 tablet7in.html:1026
 msgid "Inspect raw IDs, native names, pronunciations, and IPA values"
 msgstr ""
+"Das Untersuchen der Roh-IDs, der ursprünglichen Namen, Aussprachen und IPA-"
+"Werte"
 
 #: index.html:962 tablet7in.html:1027
 msgid "Cross-reference star IDs (HIP, NGC, etc.) with their cultural names"
 msgstr ""
+"Die Zuordnung von Stern-IDs (HIP, NGC usw.) zu ihren kulturellen Namen"
 
 #: index.html:963 tablet7in.html:1028
 msgid "Export complete datasets to CSV/JSON for external analysis"
 msgstr ""
+"Das Exportieren der vollständigen Datensätze als CSV/JSON für eine externe "
+"Analyse"
 
 #: index.html:964 tablet7in.html:1029
 msgid "Search across all fields to quickly locate specific entries"
-msgstr ""
+msgstr "Das Durchsuchen aller Felder, um bestimmte Einträge schnell zu finden"
 
 #: index.html:967 tablet7in.html:1032
 msgid ""
 "Each row is interactive — click to select and navigate to the object in "
 "Stellarium."
 msgstr ""
+"Jede Zeile ist interaktiv – klicken Sie darauf, um das Objekt auszuwählen "
+"und in Stellarium anzuzeigen."
 
 #: index.html:976 tablet7in.html:1041
 msgid "Select Sky Culture"
-msgstr ""
+msgstr "Himmelskultur auswählen"
 
 #: index.html:994 tablet7in.html:1059
 msgid "Ray Helpers"
-msgstr ""
+msgstr "Hilfslinien"
 
 #: index.html:1006 tablet7in.html:1071
 msgid "Named Objects"
-msgstr ""
+msgstr "Benannte Objekte"
 
 #: index.html:1020 tablet7in.html:1085
 msgid "Notable Stars & Objects"
@@ -652,12 +660,6 @@ msgstr ""
 msgid "ID"
 msgstr "ID"
 
-#: index.html:1042 index.html:1073 index.html:1094 index.html:1116
-#: index.html:1149 tablet7in.html:1107 tablet7in.html:1138 tablet7in.html:1159
-#: tablet7in.html:1181 tablet7in.html:1214
-msgid "Native"
-msgstr "Original"
-
 #: index.html:1043 index.html:1074 index.html:1095 index.html:1117
 #: index.html:1150 tablet7in.html:1108 tablet7in.html:1139 tablet7in.html:1160
 #: tablet7in.html:1182 tablet7in.html:1215
@@ -670,15 +672,9 @@ msgstr "Englischer Name"
 msgid "Translation"
 msgstr "Übersetzung"
 
-#: index.html:1045 index.html:1076 index.html:1097 index.html:1119
-#: index.html:1152 tablet7in.html:1110 tablet7in.html:1141 tablet7in.html:1162
-#: tablet7in.html:1184 tablet7in.html:1217
-msgid "Pronounce"
-msgstr ""
-
 #: index.html:1047 index.html:1078 tablet7in.html:1112 tablet7in.html:1143
 msgid "Star IDs"
-msgstr ""
+msgstr "Stern-IDs"
 
 #: index.html:1058 tablet7in.html:1123
 msgid "Search asterisms... (click row to center at 30° FOV) | ESC to reset"
@@ -710,6 +706,8 @@ msgid ""
 "All named celestial objects (stars, planets, deep-sky) defined in this "
 "culture's common_names section."
 msgstr ""
+"Alle benannten Himmelsobjekte (Sterne, Planeten und Deep-Sky) sind im "
+"Abschnitt common_names der Kultur definiert."
 
 #: index.html:1147 tablet7in.html:1212
 msgid "Original ID"
@@ -785,153 +783,159 @@ msgstr ""
 
 #: index.html:1311 tablet7in.html:1380
 msgid "Controller Settings"
-msgstr ""
+msgstr "Controllereinstellungen"
 
 #: index.html:1314 tablet7in.html:1383
 msgid "Active Device:"
-msgstr ""
+msgstr "Aktives Gerät:"
 
 #: index.html:1316 tablet7in.html:1385
 msgid "No devices connected"
-msgstr ""
+msgstr "Kein Gerät verbunden"
 
 #: index.html:1322 tablet7in.html:1391
 msgid "Device:"
-msgstr ""
+msgstr "Gerät:"
 
 #: index.html:1330 tablet7in.html:1399
 msgid "Vendor:"
-msgstr ""
+msgstr "Hersteller:"
 
 #: index.html:1334 tablet7in.html:1403
 msgid "Device ID:"
-msgstr ""
+msgstr "Geräte-ID:"
 
 #: index.html:1338 tablet7in.html:1407
 msgid "Buttons/Axes:"
-msgstr ""
+msgstr "Tasten/Achsen:"
 
 #: index.html:1344 tablet7in.html:1413
 msgid "Joystick Preview"
-msgstr ""
+msgstr "Joystick-Vorschau"
 
 #: index.html:1350 tablet7in.html:1419
 msgid "Left Stick"
-msgstr ""
+msgstr "Linker Stick"
 
 #: index.html:1351 tablet7in.html:1420
 msgid "View movement"
-msgstr ""
+msgstr "Bewegung anzeigen"
 
 #: index.html:1354 tablet7in.html:1423
 msgid "Direction:"
-msgstr ""
+msgstr "Richtung:"
 
 #: index.html:1355 tablet7in.html:1424
 msgid "centered"
-msgstr ""
+msgstr "zentriert"
 
 #: index.html:1360 tablet7in.html:1429
 msgid "Invert X"
-msgstr ""
+msgstr "X invertieren"
 
 #: index.html:1364 index.html:1383 tablet7in.html:1433 tablet7in.html:1452
 msgid "Invert Y"
-msgstr ""
+msgstr "Y invertieren"
 
 #: index.html:1373 tablet7in.html:1442
 msgid "Right Stick"
-msgstr ""
+msgstr "Rechter Stick"
 
 #: index.html:1374 tablet7in.html:1443
 msgid "Continuous zoom"
-msgstr ""
+msgstr "Stufenloser Zoom"
 
 #: index.html:1377 tablet7in.html:1446
 msgid "Current FOV:"
-msgstr ""
+msgstr "Aktuelles Gesichtsfeld:"
 
 #: index.html:1392 tablet7in.html:1461
 msgid "Joystick Calibration"
-msgstr ""
+msgstr "Joystick-Justierung"
 
 #: index.html:1394 tablet7in.html:1463
 msgid "Calibrate"
-msgstr ""
+msgstr "Justieren"
 
 #: index.html:1400 tablet7in.html:1469
 msgid ""
 "Move joysticks in circles to calibrate center position. Press any button to "
 "finish."
 msgstr ""
+"Bewegen Sie die Joysticks im Kreis, um die Mittelposition zu justieren. "
+"Drücken Sie eine beliebige Taste zum Abschließen."
 
 #: index.html:1409 tablet7in.html:1478
 msgid "Test Vibration"
-msgstr ""
+msgstr "Vibration testen"
 
 #: index.html:1410 tablet7in.html:1479
 msgid "Manual test (uses full intensity)"
-msgstr ""
+msgstr "Manueller Test (bei voller Stärke)"
 
 #: index.html:1415 tablet7in.html:1484
 msgid "Vibration Feedback"
-msgstr ""
+msgstr "Vibrationsrückmeldung"
 
 #: index.html:1416 tablet7in.html:1485
 msgid "works in Chrome/Edge"
-msgstr ""
+msgstr "funktioniert mit Chrome/Edge"
 
 #: index.html:1422 tablet7in.html:1491
 msgid "Vibration Intensity:"
-msgstr ""
+msgstr "Vibrationsstärke:"
 
 #: index.html:1431 tablet7in.html:1500
 msgid "Sensitivity:"
-msgstr ""
+msgstr "Empfindlichkeit:"
 
 #: index.html:1440 tablet7in.html:1509
 msgid "Deadzone:"
-msgstr ""
+msgstr "Totzone:"
 
 #: index.html:1449 tablet7in.html:1518
 msgid "Zoom Speed:"
-msgstr ""
+msgstr "Zoomgeschwindigkeit:"
 
 #: index.html:1458 tablet7in.html:1527
 msgid "Movement Speed:"
-msgstr ""
+msgstr "Bewegungsgeschwindigkeit:"
 
 #: index.html:1468 tablet7in.html:1537
 msgid "Button Customization"
-msgstr ""
+msgstr "Tastenanpassung"
 
 #: index.html:1475 tablet7in.html:1544
 msgid ""
 "Each connected controller has its own independent profile. Select a device "
 "from 'Active Device' to customize."
 msgstr ""
+"Jeder verbundene Controller verfügt über ein eigenes, unabhängiges Profil. "
+"Wählen Sie ein Gerät unter „Aktives Gerät“ aus, um es anzupassen."
 
 #: index.html:1479 tablet7in.html:1548
 msgid "Reset Mappings"
-msgstr ""
+msgstr "Zuordnungen zurücksetzen"
 
 #: index.html:1480 tablet7in.html:1549
 msgid "Save Mappings"
-msgstr ""
+msgstr "Zuordnungen speichern"
 
 #: index.html:1481 tablet7in.html:1550
 msgid "Export Profile"
-msgstr ""
+msgstr "Profil exportieren"
 
 #: index.html:1482 tablet7in.html:1551
 msgid "Import Profile"
-msgstr ""
+msgstr "Profil importieren"
 
 #: index.html:1485 tablet7in.html:1554
 msgid ""
 "Profiles are saved per device and can be exported/imported for backup or "
 "sharing"
 msgstr ""
+"Profile werden gerätebezogen gespeichert und können zu Sicherungszwecken "
+"oder zur Weitergabe exportiert bzw. importiert werden"
 
 #: index.html:1492 tablet7in.html:1561
 msgid "Live Input Monitor"
@@ -946,24 +950,24 @@ msgstr ""
 
 #: index.html:1499 tablet7in.html:1568
 msgid "Buttons"
-msgstr ""
+msgstr "Tasten"
 
 #: index.html:1501 index.html:1508 index.html:1516 tablet7in.html:1570
 #: tablet7in.html:1577 tablet7in.html:1585
 msgid "Waiting for controller input..."
-msgstr ""
+msgstr "Warte auf Controllereingabe ..."
 
 #: index.html:1506 tablet7in.html:1575
 msgid "Axes"
-msgstr ""
+msgstr "Achsen"
 
 #: index.html:1514 tablet7in.html:1583
 msgid "Device Information"
-msgstr ""
+msgstr "Geräteinformation"
 
 #: index.html:1519 tablet7in.html:1588
 msgid "Understanding Raw Values"
-msgstr ""
+msgstr "Rohwerte verstehen"
 
 #: index.html:1520 tablet7in.html:1589
 msgid "Buttons: Range 0.0 (not pressed) to 1.0 (green = fully pressed)."

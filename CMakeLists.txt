@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.18)
 # CMake 3.20+ is required if x-compiling for Windows on ARM
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
@@ -436,12 +436,7 @@ IF(ENABLE_XLSX)
 ENDIF()
 
 # Activate support for INDI client in Telescope Control plugin
-IF(WIN32)
-     # Disable support for INDI client in Windows
-     SET(ENABLE_INDI 0)
-ELSE()
-     SET(ENABLE_INDI 1 CACHE BOOL "Define whether to use INDI client in Telescope Control plugin.")
-ENDIF()
+SET(ENABLE_INDI 1 CACHE BOOL "Define whether to use INDI client in Telescope Control plugin.")
 IF(ENABLE_INDI)
      ADD_DEFINITIONS(-DENABLE_INDI)
 ENDIF()
@@ -799,8 +794,7 @@ ELSE()
      MESSAGE(STATUS "GPS: disabled.")
 ENDIF()
 
-IF(ENABLE_MEDIA OR USE_PLUGIN_SCENERY3D)
-     # The Scenery3D plugin requires it directly and the QtMultimediaWidgets module requires it internally
+IF(ENABLE_MEDIA OR USE_PLUGIN_SCENERY3D OR STELLARIUM_GUI_MODE STREQUAL "Standard")
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS OpenGL REQUIRED)
 ENDIF()
 
@@ -1142,16 +1136,13 @@ ADD_SUBDIRECTORY( skycultures )
 ADD_SUBDIRECTORY( nebulae )
 ADD_SUBDIRECTORY( stars )
 ADD_SUBDIRECTORY( plugins )
+ADD_SUBDIRECTORY( atmosphere )
 IF(ENABLE_SCRIPTING)
      ADD_SUBDIRECTORY( scripts )
 ENDIF()
 IF(USE_PLUGIN_SCENERY3D)
      # add scenery3d scenes
      ADD_SUBDIRECTORY( scenery3d )
-ENDIF()
-IF(ENABLE_SHOWMYSKY)
-     # add atmosphere models
-     ADD_SUBDIRECTORY( atmosphere )
 ENDIF()
 IF(ENABLE_NLS AND ENABLE_PODIR)
      ADD_SUBDIRECTORY( po )

@@ -39,7 +39,7 @@ public:
 	void updateRecord(const AircraftRecord& record);
 
 	QString getType() const override { return STEL_TYPE; }
-	QString getObjectType() const override { return N_("plane"); }
+	QString getObjectType() const override { return N_("aircraft"); }
 	QString getObjectTypeI18n() const override;
 	QString getID() const override;
 	QString getEnglishName() const override;

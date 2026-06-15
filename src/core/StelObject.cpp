@@ -436,13 +436,29 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	QString RADec;
 	if (usePolarDistance)
 	{
-		// TRANSLATORS: Right ascension/Polar distance
-		RADec = withDesignations ? QString("&alpha;/p") : qc_("RA/PD", "celestial coordinate system");
+		if (withDesignations)
+		{
+			// TRANSLATORS: Designations for Right ascension/Polar distance
+			RADec = qc_("&alpha;/p", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Right ascension/Polar distance
+			RADec = qc_("RA/PD", "celestial coordinate system");
+		}
 	}
 	else
 	{
-		// TRANSLATORS: Right ascension/Declination
-		RADec = withDesignations ? QString("&alpha;/&delta;") : qc_("RA/Dec", "celestial coordinate system");
+		if (withDesignations)
+		{
+			// TRANSLATORS: Designations for Right ascension/Declination
+			RADec = qc_("&alpha;/&delta;", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Right ascension/Declination
+			RADec = qc_("RA/Dec", "celestial coordinate system");
+		}
 	}
 
 	if (flags&RaDecJ2000)
@@ -525,11 +541,34 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			secondCoordinate = StelUtils::radToDmsStr(dec_sidereal,true);
 		}
 
-		const QString HADec = usePolarDistance ?
-			// TRANSLATORS: Hour angle/Polar distance
-			( withDesignations ? QString("h/p")       : qc_("HA/PD",  "celestial coordinate system")) :
-			// TRANSLATORS: Hour angle/Declination
-			( withDesignations ? QString("h/&delta;") : qc_("HA/Dec", "celestial coordinate system"));
+		QString HADec;
+		
+		if (usePolarDistance)
+		{
+			if (withDesignations)
+			{
+				// TRANSLATORS: Designations for Hour angle/Polar distance
+				HADec = qc_("h/p", "celestial coordinate system");
+			}
+			else
+			{
+				// TRANSLATORS: Hour angle/Polar distance
+				HADec = qc_("HA/PD",  "celestial coordinate system");
+			}
+		}
+		else
+		{
+			if (withDesignations)
+			{
+				// TRANSLATORS: Designations for Hour angle/Declination
+				HADec = qc_("h/&delta;", "celestial coordinate system");
+			}
+			else
+			{
+				// TRANSLATORS: Hour angle/Declination
+				HADec = qc_("HA/Dec", "celestial coordinate system");
+			}
+		}
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(HADec, firstCoordinate, secondCoordinate, apparent);
@@ -577,8 +616,17 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			}
 		}
 
-		// TRANSLATORS: Azimuth/Altitude
-		const QString AzAlt = (withDesignations ? "A/a" : qc_("Az./Alt.", "celestial coordinate system"));
+		QString AzAlt;
+		if (withDesignations)
+		{
+			// TRANSLATORS: Designations for Azimuth/Altitude
+			AzAlt = qc_("A/a", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Azimuth/Altitude
+			AzAlt = qc_("Az./Alt.", "celestial coordinate system");
+		}
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(AzAlt, firstCoordinate, secondCoordinate, apparent);
@@ -603,8 +651,18 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			secondCoordinate = StelUtils::radToDmsStr(glat, true);
 		}
 
-		// TRANSLATORS: Galactic longitude/latitude
-		const QString GalLongLat = (withDesignations ? "l/b" : qc_("Gal. long./lat.", "celestial coordinate system"));
+		QString GalLongLat;
+		if (withDesignations)
+		{
+			// TRANSLATORS: Designations for Galactic longitude/latitude
+			GalLongLat = qc_("l/b", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Galactic longitude/latitude
+			GalLongLat = qc_("Gal. long./lat.", "celestial coordinate system");
+		}
+		
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(GalLongLat, firstCoordinate, secondCoordinate);
 		else
@@ -628,8 +686,17 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			secondCoordinate = StelUtils::radToDmsStr(sglat, true);
 		}
 
-		// TRANSLATORS: Supergalactic longitude/latitude
-		const QString SGalLongLat = (withDesignations ? "SGL/SGB" : qc_("Supergal. long./lat.", "celestial coordinate system"));
+		QString SGalLongLat;
+		if (withDesignations)
+		{
+			// TRANSLATORS: Designations for Supergalactic longitude/latitude
+			SGalLongLat = qc_("SGL/SGB", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Supergalactic longitude/latitude
+			SGalLongLat = qc_("Supergal. long./lat.", "celestial coordinate system");
+		}
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(SGalLongLat, firstCoordinate, secondCoordinate);
@@ -645,9 +712,17 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	// or ever displayed the coordinates in the observer planet's equivalent to Earth's ecliptical coordinates.
 	// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0 (except if crossing the node...).
 
-	// TRANSLATORS: Ecliptic longitude/latitude
-	const QString EqlLongLat = (withDesignations ? QString("&lambda;/&beta;") :
-						       qc_("Ecl. long./lat.", "celestial coordinate system") );
+	QString EqlLongLat;
+	if (withDesignations)
+	{
+		// TRANSLATORS: Designations for Ecliptic longitude/latitude
+		EqlLongLat = qc_("&lambda;/&beta;", "celestial coordinate system");
+	}
+	else
+	{
+		// TRANSLATORS: Ecliptic longitude/latitude
+		EqlLongLat = qc_("Ecl. long./lat.", "celestial coordinate system");
+	}
 
 	if (flags&EclipticCoordJ2000)
 	{

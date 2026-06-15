@@ -19,6 +19,7 @@
 
 
 #include "StelDialog.hpp"
+#include "StelCore.hpp"
 #include "StelDialog_p.hpp"
 #include "StelMainView.hpp"
 #include "StelGui.hpp"
@@ -200,6 +201,7 @@ void StelDialog::setVisible(bool v)
 		dialog->hide();
 		//proxy->clearFocus();
 		StelMainView::getInstance().focusSky();
+		StelApp::getInstance().getCore()->setClearSkyOnce();
 	}
 	emit visibleChanged(v);
 }

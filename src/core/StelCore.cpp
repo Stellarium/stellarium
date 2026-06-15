@@ -115,6 +115,8 @@ StelCore::StelCore()
 	, de441Available(false)
 	, de440Active(false)
 	, de441Active(false)
+	, flagClearSky(true)
+	, clearSkyOnceCounter(0)
 {
 	setObjectName("StelCore");
 	registerMathMetaTypes();
@@ -384,6 +386,8 @@ void StelCore::init()
 
 	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
 	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
+
+	actionsMgr->addAction("actionClear_Background", displayGroup, N_("Toggle star trails"), this, "flagClearSky", "", "", true);
 }
 
 QString StelCore::getDefaultProjectionTypeKey() const
@@ -562,7 +566,26 @@ void StelCore::preDraw()
 	Vec3f backColor = StelMainView::getInstance().getSkyBackgroundColor();
 	QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
 	gl->glClearColor(backColor[0], backColor[1], backColor[2], 0.f);
-	gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	if (clearSkyOnceCounter==1)
+	{
+		flagClearSky=false; // Allow drawing one frame with features
+		clearSkyOnceCounter=0;
+	}
+
+	if (flagClearSky || (clearSkyOnceCounter==3))
+	{
+		gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		if (clearSkyOnceCounter>=2)
+		{
+			clearSkyOnceCounter--;
+			flagClearSky=true; // Let other modules draw once!
+		}
+	}
+	else
+	{
+		gl->glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	}
 
 	skyDrawer->preDraw();
 }
@@ -1222,6 +1245,7 @@ void StelCore::setJD(double newJD)
 	JD.first=newJD;
 	JD.second=computeDeltaT(newJD);	
 	resetSync();
+	setClearSkyOnce();
 }
 
 double StelCore::getJD() const
@@ -1235,6 +1259,7 @@ void StelCore::setJDE(double newJDE)
 	JD.second=computeDeltaT(newJDE);
 	JD.first=newJDE-JD.second/86400.0;
 	resetSync();
+	setClearSkyOnce();
 }
 
 double StelCore::getJDE() const
@@ -1479,6 +1504,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 	else
 	{
 		setObserver(new StelObserver(target));
+		setClearSkyOnce();
 	}
 
 	// Auto-select observed planet for observer locations
@@ -3347,4 +3373,22 @@ void StelCore::setAberrationUniforms(QOpenGLShaderProgram& program) const
 		velocity = getAberrationFactor() * cachedAberrationVec;
 	}
 	program.setUniformValue("STELCORE_currentPlanetBarycentricEclipticVelocity", velocity.toQVector());
+}
+
+void StelCore::setFlagClearSky(const bool state)
+{
+	flagClearSky = state;
+	qDebug() << "flagClearSky now" << state;
+	emit flagClearSkyChanged(state);
+}
+
+// Initiate a reset chain for preDraw()
+// The counter is started at 3 to draw 2 sky (atmosphere) frames before clearing and suppressing further area light components.
+// See preDraw() for the logic. (Improvements possible!)
+// The last before suppressing atmosphere is supposed to provide a sky background for the star trails.
+// A deep twilight looks good with satellite streaks.
+void StelCore::setClearSkyOnce()
+{
+	if (!flagClearSky)
+		clearSkyOnceCounter = 3;
 }

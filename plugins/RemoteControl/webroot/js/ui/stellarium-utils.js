@@ -144,12 +144,23 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
      * the current Stellarium selection state.
      * 
      * @param {string} name - Display name of the object
-     * @param {string} id - Unique identifier (HIP ID, constellation ID, etc.)
+     * @param {string} id - Unique identifier (original ID from index.json)
      * @param {string} type - Object type: "constellation", "asterism", "zodiac", "star", "lunar"
+     * @param {string} displayName - Optional display name for UI
      */
-    function emitObjectSelected(name, id, type) {
-        $(document).trigger("objectSelected", { name: name, id: id, type: type });
-        console.log("[StelUtils] Emitted objectSelected event:", { name, id, type });
+    function emitObjectSelected(name, id, type, displayName) {
+        // Ensure we always have a proper ID for matching
+        var emitId = id || name;
+        var emitName = displayName || name;
+        
+        $(document).trigger("objectSelected", { 
+            name: emitName, 
+            id: emitId, 
+            type: type,
+            originalName: name,
+            originalId: id
+        });
+        console.log("[StelUtils] Emitted objectSelected event:", { name: emitName, id: emitId, type });
     }
 
     // =====================================================================
@@ -224,34 +235,40 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         }, 50);
     }
 
-    /**
-     * Centers on object and zooms to specified FOV.
-     * Clears any existing selection first.
-     * 
-     * @param {string} objectName - Name of the object
-     * @param {number} zoomFov - Target zoom level (default: 60)
-     * @param {number} duration - Transition duration (default: 2)
-     * @param {string} objectId - Unique identifier for the object (optional)
-     * @param {string} objectType - Type of object (optional)
-     * @param {function} callback - Optional callback after centering and zooming
-     */
-    function centerAndZoom(objectName, zoomFov, duration, objectId, objectType, callback) {
-        duration = duration || 2;
-        zoomFov = zoomFov || 60;
-        clearSelection();
-        
-        setTimeout(function() {
-            rc.postCmd("/api/scripts/direct", {
-                code: "core.moveToObject(\"" + objectName + "\", " + duration + "); StelMovementMgr.zoomTo(" + zoomFov + ", " + duration + ")",
-                useIncludes: false
-            }, null, function() {
-                if (objectId || objectName) {
-                    emitObjectSelected(objectName, objectId || objectName, objectType || "object");
-                }
-                if (callback) callback();
-            });
-        }, 50);
-    }
+		/**
+		 * Centers on object and zooms to specified FOV.
+		 * Clears any existing selection first.
+		 * 
+		 * @param {string} objectName - Name of the object
+		 * @param {number} zoomFov - Target zoom level (default: 60)
+		 * @param {number} duration - Transition duration (default: 2)
+		 * @param {string} objectId - Unique identifier for the object (optional)
+		 * @param {string} objectType - Type of object (optional)
+		 * @param {function} callback - Optional callback after centering and zooming
+		 */
+		function centerAndZoom(objectName, zoomFov, duration, objectId, objectType, callback) {
+				duration = duration || 2;
+				zoomFov = zoomFov || 60;
+				clearSelection();
+				
+				setTimeout(function() {
+						rc.postCmd("/api/scripts/direct", {
+								code: "core.moveToObject(\"" + objectName + "\", " + duration + "); StelMovementMgr.zoomTo(" + zoomFov + ", " + duration + ")",
+								useIncludes: false
+						}, null, function() {
+								// CRITICAL: Emit event with both name and ID for bidirectional sync
+								if (objectId || objectName) {
+										emitObjectSelected(objectName, objectId || objectName, objectType || "object");
+										console.log("[StelUtils] Emitted objectSelected from centerAndZoom:", {
+												name: objectName,
+												id: objectId || objectName,
+												type: objectType || "object"
+										});
+								}
+								if (callback) callback();
+						});
+				}, 50);
+		}
 
     /**
      * Parse and normalize an object ID for search.
@@ -498,22 +515,54 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         goToObject(starId, zoomFov, 'star', cultureData, callback);
     }
 
-    /**
-     * Navigates to a zodiac sign (constellation).
-     * Clears any existing selection first.
-     * Emits objectSelected event for bidirectional sync.
-     * 
-     * @param {string} signName - Name of the zodiac sign
-     * @param {string} signId - Unique identifier for the sign (optional)
-     * @param {function} callback - Optional callback
-     */
-    function goToZodiacSign(signName, signId, callback) {
-        clearSelection();
-        setTimeout(function() {
-            centerAndZoom(signName, 40, 2, signId || signName, "zodiac", callback);
-            showNotification(_tr("Centering on zodiac sign: ") + signName);
-        }, 50);
-    }
+		/**
+		 * Navigates to a zodiac sign (constellation) with proper bidirectional sync support.
+		 * 
+		 * CRITICAL: This function now accepts an optional signId parameter
+		 * which is used for the objectSelected event. This enables proper
+		 * synchronization with both button and table interfaces.
+		 * 
+		 * The signId can be:
+		 * - Composite ID like "zodiac_modern_0" (from enhanced skyculture.js)
+		 * - Simple ID like "aries" (legacy format)
+		 * - undefined (when called with name only)
+		 * - Any other identifier that should be passed through the event
+		 * 
+		 * Flow:
+		 * 1. Clear any existing selection
+		 * 2. Center view on the zodiac sign by its English name
+		 * 3. Zoom to optimal FOV (40 degrees)
+		 * 4. Emit objectSelected event with the provided signId
+		 * 5. Both button and table UIs update based on this event
+		 * 
+		 * @param {string} signName - Name of the zodiac sign (English name preferred)
+		 * @param {string} signId - Unique identifier (composite ID like "zodiac_modern_0") - OPTIONAL
+		 * @param {function} callback - Optional callback after navigation
+		 */
+		function goToZodiacSign(signName, signId, callback) {
+				// Handle optional parameters
+				if (typeof signId === 'function') {
+						callback = signId;
+						signId = null;
+				}
+				
+				console.log("[StelUtils] goToZodiacSign called with:", {
+						signName: signName,
+						signId: signId
+				});
+				
+				// Clear any existing selection to prevent view conflicts
+				clearSelection();
+				
+				setTimeout(function() {
+						// Center and zoom to the zodiac sign
+						// Use signName for navigation, signId for the emitted event
+						centerAndZoom(signName, 40, 2, signId || signName, "zodiac", callback);
+						
+						// Show notification to user
+						showNotification(_tr("Center on zodiac sign: ") + signName);
+				}, 50);
+		}
 
     /**
      * Navigates to an asterism.
@@ -532,22 +581,53 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         }, 50);
     }
 
-    /**
-     * Navigates to a lunar mansion.
-     * Clears any existing selection first.
-     * Emits objectSelected event for bidirectional sync.
-     * 
-     * @param {string} mansionName - Name of the lunar mansion
-     * @param {string} mansionId - Unique identifier for the mansion (optional)
-     * @param {function} callback - Optional callback
-     */
-    function goToLunarMansion(mansionName, mansionId, callback) {
-        clearSelection();
-        setTimeout(function() {
-            centerAndZoom(mansionName, 30, 2, mansionId || mansionName, "lunar", callback);
-            showNotification(_tr("Centering on lunar mansion: ") + mansionName);
-        }, 50);
-    }
+		/**
+		 * Navigates to a lunar mansion with proper bidirectional sync support.
+		 * 
+		 * CRITICAL: This function now accepts an optional mansionId parameter
+		 * which is used for the objectSelected event. This enables proper
+		 * synchronization with both button and table interfaces.
+		 * 
+		 * The mansionId can be:
+		 * - Composite ID like "lunar_16" (from skyculture.js buttons)
+		 * - undefined (when called with name only)
+		 * - Any other identifier that should be passed through the event
+		 * 
+		 * Flow:
+		 * 1. Clear any existing selection
+		 * 2. Center view on the mansion by its English name
+		 * 3. Zoom to optimal FOV (30 degrees)
+		 * 4. Emit objectSelected event with the provided mansionId
+		 * 5. Both button and table UIs update based on this event
+		 * 
+		 * @param {string} mansionName - Name of the lunar mansion (English name preferred)
+		 * @param {string} mansionId - Unique identifier (composite ID like "lunar_16") - OPTIONAL
+		 * @param {function} callback - Optional callback after navigation
+		 */
+		function goToLunarMansion(mansionName, mansionId, callback) {
+				// Handle optional parameters
+				if (typeof mansionId === 'function') {
+						callback = mansionId;
+						mansionId = null;
+				}
+				
+				console.log("[StelUtils] goToLunarMansion called with:", {
+						mansionName: mansionName,
+						mansionId: mansionId
+				});
+				
+				// Clear any existing selection to prevent view conflicts
+				clearSelection();
+				
+				setTimeout(function() {
+						// Center and zoom to the lunar mansion
+						// Use mansionName for navigation, mansionId for the emitted event
+						centerAndZoom(mansionName, 30, 2, mansionId || mansionName, "lunar", callback);
+						
+						// Show notification to user
+						showNotification(_tr("Center on lunar mansion: ") + mansionName);
+				}, 50);
+		}
 
     // =====================================================================
     // CONSTELLATION DISPLAY STATE MANAGEMENT
@@ -651,9 +731,10 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
      * Emits objectSelected event for bidirectional sync.
      * 
      * @param {string} constellationName - Name of the constellation
+     * @param {string} constellationId - Optional ID of the constellation (from index.json)
      * @returns {boolean} True if constellation was highlighted, false if cleared
      */
-    function toggleConstellationHighlight(constellationName) {
+    function toggleConstellationHighlight(constellationName, constellationId) {
         var searchTerm = constellationName.replace(/_/g, ' ');
         searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
         
@@ -693,7 +774,9 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
                         code: "core.moveToObject(\"" + searchTerm + "\", 2); StelMovementMgr.zoomTo(60, 2);",
                         useIncludes: false
                     });
-                    emitObjectSelected(searchTerm, searchTerm, "constellation");
+                    // Use constellationId if provided, otherwise use searchTerm
+                    var emitId = constellationId || searchTerm;
+                    emitObjectSelected(searchTerm, emitId, "constellation");
                     showNotification(_tr("Isolating constellation: ") + searchTerm);
                 }, 150);
             }, 100);

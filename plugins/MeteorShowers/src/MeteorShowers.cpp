@@ -50,6 +50,9 @@ void MeteorShowers::update(double deltaTime)
 
 void MeteorShowers::draw(StelCore* core)
 {
+	if(!core->getFlagClearSky())
+		return;
+
 	for (const auto& ms : std::as_const(m_meteorShowers))
 	{
 		ms->draw(core);

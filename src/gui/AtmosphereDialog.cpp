@@ -98,7 +98,6 @@ void AtmosphereDialog::createDialogContent()
 	else
 		ui->groupBox_experimental->hide();
 
-#if defined ENABLE_SHOWMYSKY && !QT_CONFIG(opengles2)
 	connect(ui->atmosphereModel, &QComboBox::currentTextChanged, this, &AtmosphereDialog::onModelChoiceChanged);
 	connect(ui->showMySky_pathToModelBrowseBtn, &QPushButton::clicked, this, &AtmosphereDialog::browsePathToModel);
 	connect(ui->showMySky_pathToModelEdit, &QLineEdit::textChanged, this, &AtmosphereDialog::onPathToModelChanged);
@@ -110,9 +109,18 @@ void AtmosphereDialog::createDialogContent()
 	connectBoolProperty(ui->showMySky_multipleScatteringEnabled, "LandscapeMgr.flagAtmosphereMultipleScattering");
 	connectBoolProperty(ui->showMySky_pseudoMirrorEnabled, "LandscapeMgr.flagAtmospherePseudoMirror");
 	connectIntProperty(ui->showMySky_eclipseSimulationQualitySpinBox, ECLIPSE_SIM_QUALITY_PROPERTY);
-#else
-	ui->visualModelConfigGroup->hide();
-#endif
+
+	if (StelMainView::getInstance().getGLInformation().isGLES)
+	{
+		for (int row = 0; row < ui->atmosphereModel->count(); ++row)
+		{
+			if (ui->atmosphereModel->itemText(row).toLower() == "showmysky")
+			{
+				ui->atmosphereModel->removeItem(row);
+				break;
+			}
+		}
+	}
 
 	setCurrentValues();
 }

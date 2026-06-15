@@ -102,101 +102,75 @@ void StelFileMgr::init()
 
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
-	
+
 	// Determine install data directory location
-	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-	QString envRoot = env.value("STELLARIUM_DATA_ROOT", ".");
+	QStringList searchPaths;
 
-	if (QFileInfo::exists(envRoot + QDir::separator() + QString(CHECK_FILE)))
+	searchPaths += QProcessEnvironment::systemEnvironment().value("STELLARIUM_DATA_ROOT", ".");
+
+#if defined(Q_OS_ANDROID)
+	searchPaths += "assets:";
+	for (QFileInfo info : QDir("/storage").entryInfoList(QDir::Dirs|QDir::NoDotDot))
 	{
-		installDir = envRoot;
-	}	
-	else
+		searchPaths += info.absoluteFilePath() + "/stellarium";
+		searchPaths += info.absoluteFilePath() + "/0/stellarium";
+	}
+	searchPaths += "/sdcard/stellarium";
+#elif defined(Q_OS_MACOS)
+	QString relativePath = "/../Resources";
+	if (QCoreApplication::applicationDirPath().contains("src")) {
+		relativePath = "/../..";
+	}
+	QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + relativePath);
+	// These two lines are used to see if the Qt bug still exists.
+	// The output from C: should simply be the parent of what is show for B:
+	// qDebug() << "B: " << MacOSdir.absolutePath();
+	// qDebug() << "C: " << MacOSdir.dir().absolutePath();
+
+	QDir ResourcesDir(MacOSdir.absolutePath());
+	if (!QCoreApplication::applicationDirPath().contains("src")) {
+		ResourcesDir.cd(QString("Resources"));
+	}
+	searchPaths += ResourcesDir.absolutePath();
+#elif defined(Q_OS_WIN)
+	searchPaths += QCoreApplication::applicationDirPath();
+#else
+	// Linux, BSD, Solaris etc.
+	// We use the value from the config.h filesystem
+	searchPaths += QFile::decodeName(INSTALL_DATADIR);
+#endif
+
+#ifndef NDEBUG
+	searchPaths += INSTALL_DATADIR_FOR_DEBUG;
+#endif
+
+#if !defined(Q_OS_ANDROID)
+	searchPaths += QCoreApplication::applicationDirPath() + QString("/../share/stellarium");
+	searchPaths += STELLARIUM_SOURCE_DIR;
+#endif
+
+	for (auto & path : searchPaths)
 	{
-	#if defined(Q_OS_MACOS)
-		QString relativePath = "/../Resources";
-		if (QCoreApplication::applicationDirPath().contains("src")) {
-			relativePath = "/../..";
-		}
-		QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + relativePath);
-		// These two lines are used to see if the Qt bug still exists.
-		// The output from C: should simply be the parent of what is show for B:
-		// qDebug() << "B: " << MacOSdir.absolutePath();
-		// qDebug() << "C: " << MacOSdir.dir().absolutePath();
-
-		QDir ResourcesDir(MacOSdir.absolutePath());
-		if (!QCoreApplication::applicationDirPath().contains("src")) {
-			ResourcesDir.cd(QString("Resources"));
-		}
-		QFileInfo installLocation(ResourcesDir.absolutePath());
-		QFileInfo checkFile(installLocation.filePath() + QDir::separator() + QString(CHECK_FILE));
-	#elif defined(Q_OS_WIN)		
-		QFileInfo installLocation(QCoreApplication::applicationDirPath());
-		QFileInfo checkFile(installLocation.filePath() + QDir::separator() + QString(CHECK_FILE));
-	#else
-		// Linux, BSD, Solaris etc.
-		// We use the value from the config.h filesystem
-		QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
-		QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
-	#endif
-
-	#ifndef NDEBUG
-		if (!checkFile.exists())
-		{	// for DEBUG use sources location 
-			QString debugDataPath = INSTALL_DATADIR_FOR_DEBUG;
-			checkFile = QFileInfo(debugDataPath + QDir::separator() + CHECK_FILE);
-			installLocation = QFileInfo(debugDataPath);
-		}
-	#endif
-
+		QFileInfo checkFile(path + QDir::separator() + CHECK_FILE);
 		if (checkFile.exists())
 		{
-			installDir = installLocation.filePath();
+			qInfo() << "StelFileMgr found install location" << path;
+			installDir = path;
+			break;
 		}
-		else
+	}
+
+	if (installDir.isEmpty())
+	{
+#ifndef UNIT_TEST
+		for (auto & path : searchPaths)
 		{
-			qWarning().noquote() << "Could not find install location:"
-					     << QDir::toNativeSeparators(installLocation.filePath())
-					     << " (we checked for "
-					     << QDir::toNativeSeparators(checkFile.filePath()) << ").";
-
-			qWarning() << "Maybe this is AppImage or something similar? Let's check relative path...";
-			// This hook has been added after reverse-engineering an AppImage application
-			QString relativePath =  QCoreApplication::applicationDirPath() + QString("/../share/stellarium");
-			checkFile = QFileInfo(relativePath + QDir::separator() + CHECK_FILE);
-			if (checkFile.exists())
-			{
-				installDir = relativePath;
-			}
-			else
-			{
-				qWarning().noquote() << "Could not find install location:"
-						     << QDir::toNativeSeparators(relativePath)
-						     << " (we checked for "
-						     << QDir::toNativeSeparators(checkFile.filePath()) << ").";
-
-				qWarning() << "Maybe this is development environment? Let's check source directory path...";
-
-				QString sourceDirPath = STELLARIUM_SOURCE_DIR; // The variable is defined in CMakeLists.txt file
-				checkFile = QFileInfo(sourceDirPath + QDir::separator() + CHECK_FILE);
-				if (checkFile.exists())
-				{
-					installDir = sourceDirPath;
-				}
-				else
-				{
-					qWarning().noquote() << "Could not find install location:"
-							     << QDir::toNativeSeparators(sourceDirPath)
-							     << " (we checked for "
-							     << QDir::toNativeSeparators(checkFile.filePath()) << ").";
-
-					#ifndef UNIT_TEST
-					// NOTE: Hook for buildbots (using within testEphemeris)
-					qFatal("Couldn't find install directory location.");
-					#endif
-				}
-			}
+			qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
+			           << QDir::toNativeSeparators(path) << " (we checked for " << CHECK_FILE << ").";
 		}
+		// NOTE: Hook for buildbots (using within testEphemeris)
+		qFatal("Couldn't find install directory location.");
+#endif
 	}
 
 	// Then add the installation directory to the search path

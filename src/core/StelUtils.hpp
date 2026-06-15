@@ -426,6 +426,13 @@ namespace StelUtils
 	//! @return the angle in radians.
 	double getDecAngle(const QString& str);
 
+	//! Natural ("human") comparison of two strings: alternating non-digit and
+	//! digit segments are compared so that e.g. "NGC 9" sorts before "NGC 10".
+	//! Letter comparison is case-insensitive. Does not depend on an ICU-backed
+	//! QCollator, so it behaves identically on all platforms.
+	//! @return true if @p a should be ordered before @p b.
+	bool naturalLessThan(const QString& a, const QString& b);
+
 	//! Check if a number is a power of 2.
 	inline bool isPowerOfTwo(const int value){
 		return (value & -value) == value;
@@ -1199,6 +1206,18 @@ namespace StelUtils
 	//! Returns the Greek unicode character for the specified letter string (i.e. "alpha", "beta", ...)
 	QString getGreekLetterByName(const QString& potentialGreekLetterName);
 
+	//! @brief Computes the area of intersection of two circles with given parameters
+	//!
+	//! @param R1 radius of the second circle
+	//! @param R2 radius of the second circle
+	//! @param d distance between centers of the circles
+	double circlesIntersectionArea(double R1, double R2, double d);
+
+	//! @brief Compute solid angle of the Sun visible taking into account eclipsing by the (assumed spherical) Moon
+	double visibleSolidAngleOfSun(double sunAngularRadius, double moonAngularRadius, double angleBetweenSunAndMoon);
+
+	//! @brief Compute percentage of the Sun visible taking into account eclipsing by the (assumed spherical) Moon
+	double sunVisibilityDueToMoon(double sunAngularRadius, double moonAngularRadius, double angleBetweenSunAndMoon);
 }
 
 #endif // STELUTILS_HPP

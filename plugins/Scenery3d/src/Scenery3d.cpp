@@ -226,6 +226,9 @@ void Scenery3d::update(double deltaTime)
 
 void Scenery3d::draw(StelCore* core)
 {
+	if(!core->getFlagClearSky())
+		return;
+
 	if (flagEnabled && currentScene)
 	{
 		renderer->draw(core,*currentScene);

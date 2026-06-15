@@ -238,47 +238,6 @@ jobs:
         working-directory: build
         run: ctest --output-on-failure
 
-  # CI on Windows (Qt5)
-  ci-windows-qt5:
-    name: "Windows (x86_64; qt5)"
-    runs-on: windows-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v6
-
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v4
-      with:
-        aqtversion: '==3.3.*'
-        version: '5.12.12'
-        host: 'windows'
-        target: 'desktop'
-        cache: true
-        arch: 'win64_msvc2017_64'
-        modules: 'debug_info qtcharts qtscript qtvirtualkeyboard qtwebengine'
-
-    # Packages should be automatically downloaded using vcpkg through the toolchain
-    - name: Configure CMake
-      env:
-        CMAKE_PREFIX_PATH: ${{env.QT_ROOT_DIR}}
-      # Choose CMakeLists.text from a specific source directory with -S.
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: |
-        cmake -B build -S "${{ github.workspace }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On -DCMAKE_INSTALL_PREFIX=stellarium-bin -G "Visual Studio 17 2022" -A x64
-
-    - name: Build
-      # Build your program with the given configuration
-      run: |
-        cmake --build build --config RelWithDebInfo -j ${{env.parallel_processes}} --target install
-
-#    - name: Run unit tests
-#      run: |
-#        cd ${{ github.workspace }}\build
-#        ctest --output-on-failure -C RelWithDebInfo
-
  # CI on Windows (Qt6)
   ci-windows-qt6:
     name: "Windows (x86_64; qt6)"
@@ -308,7 +267,7 @@ jobs:
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: |
-        cmake -B build -S "${{ github.workspace }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On -DCMAKE_INSTALL_PREFIX=stellarium-bin -DSCM_SHOULD_ENABLE_CONVERTER=OFF -G "Visual Studio 17 2022" -A x64
+        cmake -B build -S "${{ github.workspace }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On -DCMAKE_INSTALL_PREFIX=stellarium-bin -DSCM_SHOULD_ENABLE_CONVERTER=OFF -G "Visual Studio 18 2026" -A x64
 
     - name: Build
       # Build your program with the given configuration
