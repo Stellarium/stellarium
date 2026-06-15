@@ -501,7 +501,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 			else
 			{
 #if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
-				md5Hash.addData(QByteArrayView(reinterpret_cast<const char*>(cat), static_cast<int>(cat_sz)));
+				md5Hash.addData(QByteArrayView(reinterpret_cast<const char*>(cat), static_cast<qsizetype>(cat_sz)));
 #else
 				md5Hash.addData(reinterpret_cast<const char*>(cat), static_cast<int>(cat_sz));
 #endif
