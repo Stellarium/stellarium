@@ -136,7 +136,25 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	}
 	texImgHalo=QImage(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
 	texImgHaloSpiky=QImage(StelFileMgr::getInstallationDir()+"/textures/star16x16_rays.png");
+
+	// Tessellate texture into an equispaced 5x5 field. Vertices have to be computed per frame.
+	coronaTextureCoords.clear();
+	for (int j=0;j<coronaMeshDim-1;++j)
+	{
+		for (int i=0;i<coronaMeshDim-1;++i)
+		{
+			coronaTextureCoords << Vec2f((float(i))/(coronaMeshDim-1),     (float(j))/(coronaMeshDim-1));
+			coronaTextureCoords << Vec2f((float(i)+1.f)/(coronaMeshDim-1), (float(j))/(coronaMeshDim-1));
+			coronaTextureCoords << Vec2f((float(i))/(coronaMeshDim-1),     (float(j)+1.f)/(coronaMeshDim-1));
+			coronaTextureCoords << Vec2f((float(i)+1.f)/(coronaMeshDim-1), (float(j))/(coronaMeshDim-1));
+			coronaTextureCoords << Vec2f((float(i)+1.f)/(coronaMeshDim-1), (float(j)+1.f)/(coronaMeshDim-1));
+			coronaTextureCoords << Vec2f((float(i))/(coronaMeshDim-1),     (float(j)+1.f)/(coronaMeshDim-1));
+		}
+	}
 }
+
+const int StelSkyDrawer::coronaMeshDim=5;
+QVector<Vec2f> StelSkyDrawer::coronaTextureCoords((coronaMeshDim-1)*(coronaMeshDim-1)*6);
 
 StelSkyDrawer::~StelSkyDrawer()
 {
@@ -531,28 +549,6 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, d
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, posJ2000);
 
-	// Tessellate texture into an equispaced 5x5 field.
-	static const int nbPoints=5;
-	static QVector<Vec2f> texCoords((nbPoints-1)*(nbPoints-1)*6);
-	static bool texInitialized=false;
-	if (!texInitialized)
-	{
-		texCoords.clear();
-		for (int j=0;j<nbPoints-1;++j)
-		{
-			for (int i=0;i<nbPoints-1;++i)
-			{
-				texCoords << Vec2f((float(i))/(nbPoints-1),     (float(j))/(nbPoints-1));
-				texCoords << Vec2f((float(i)+1.f)/(nbPoints-1), (float(j))/(nbPoints-1));
-				texCoords << Vec2f((float(i))/(nbPoints-1),     (float(j)+1.f)/(nbPoints-1));
-				texCoords << Vec2f((float(i)+1.f)/(nbPoints-1), (float(j))/(nbPoints-1));
-				texCoords << Vec2f((float(i)+1.f)/(nbPoints-1), (float(j)+1.f)/(nbPoints-1));
-				texCoords << Vec2f((float(i))/(nbPoints-1),     (float(j)+1.f)/(nbPoints-1));
-			}
-		}
-		texInitialized=true;
-	}
-
 	// Define a rotation matrix around the sun that adjusts image rotation in the sky. We must unrotate from the original image orientation and adjust for the new angle of J2000 vs. ecliptic.
 	// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equatorial angle from that date of 15.43 degrees.
 	// https://en.wikipedia.org/wiki/Rotation_matrix
@@ -565,19 +561,19 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, d
 		       posJ2000[0]*posJ2000[1]*mcTh+posJ2000[2]*sTh, posJ2000[1]*posJ2000[1]*mcTh+cTh,        posJ2000[1]*posJ2000[2]*mcTh-posJ2000[0]*sTh,
 		       posJ2000[0]*posJ2000[2]*mcTh-posJ2000[1]*sTh, posJ2000[1]*posJ2000[2]*mcTh+posJ2000[0]*sTh, posJ2000[2]*posJ2000[2]*mcTh+cTh);
 
-	static QVector<Vec3d> contour(texCoords.size());
+	static QVector<Vec3d> contour(coronaTextureCoords.size());
 	contour.clear();
-	const int centerPoint=nbPoints/2; // point 5:2=2 is the point index in sun's center
-	for (int j=-centerPoint;j<nbPoints-1-centerPoint;++j)
+	const int centerPoint=coronaMeshDim/2; // point 5:2=2 is the point index in sun's center
+	for (int j=-centerPoint;j<coronaMeshDim-1-centerPoint;++j)
 	{
-		for (int i=-centerPoint;i<nbPoints-1-centerPoint;++i)
+		for (int i=-centerPoint;i<coronaMeshDim-1-centerPoint;++i)
 		{
-			const double decJ0=dec+j    *(2.0*radius/(nbPoints-1));
-			const double decJ1=dec+(j+1)*(2.0*radius/(nbPoints-1));
+			const double decJ0=dec+j    *(2.0*radius/(coronaMeshDim-1));
+			const double decJ1=dec+(j+1)*(2.0*radius/(coronaMeshDim-1));
 			const double cDecJ0=1./cos(decJ0);
 			const double cDecJ1=1./cos(decJ1);
-			const double dRA0=i*(2.0*radius/(nbPoints-1));
-			const double dRA1=(i+1)*(2.0*radius/(nbPoints-1));
+			const double dRA0=i*(2.0*radius/(coronaMeshDim-1));
+			const double dRA1=(i+1)*(2.0*radius/(coronaMeshDim-1));
 
 			Vec3d vertex;
 			StelUtils::spheToRect(ra-dRA0*cDecJ0, decJ0, vertex);
@@ -594,17 +590,17 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, d
 			contour << R3*vertex;
 		}
 	}
-	Q_ASSERT(contour.length()==texCoords.length());
+	Q_ASSERT(contour.length()==coronaTextureCoords.length());
 
-	coronaPolygon.vertex=contour;
-	coronaPolygon.texCoords=texCoords;
-	coronaPolygon.primitiveType=StelVertexArray::Triangles;
+	coronaMesh.vertex=contour;
+	coronaMesh.texCoords=coronaTextureCoords;
+	coronaMesh.primitiveType=StelVertexArray::Triangles;
 
 	texSunCorona->bind();
 	// For some reason we must mix color with the given alpha as well, else mixing does not work.
 	painter->setColor(color*alpha, alpha);
 	painter->setBlending(true, GL_ONE, GL_ONE);
-	painter->drawStelVertexArray(coronaPolygon, false);
+	painter->drawStelVertexArray(coronaMesh, false);
 
 	// GZ: WHY DO WE NEED THIS?
 	postDrawPointSource(painter);

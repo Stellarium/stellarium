@@ -540,7 +540,9 @@ private:
 	StelTextureSP texBigHalo;
 	StelTextureSP texSunHalo;
 	StelTextureSP texSunCorona;
-	StelVertexArray coronaPolygon; // area textured with texSunCorona
+	StelVertexArray coronaMesh; // area textured with texSunCorona
+	static const int coronaMeshDim;
+	static QVector<Vec2f> coronaTextureCoords;
 
 	//! Simulate the eye's luminance adaptation?
 	bool flagLuminanceAdaptation;
