@@ -78,6 +78,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	nbPointSources(0),
 	maxLum(0.f),
 	oldLum(-1.f),
+	coronaMeshDim(5), // low odd number: 3/5/7
 	flagLuminanceAdaptation(false),
 	daylightLabelThreshold(250.0),
 	big3dModelHaloRadius(150.f)
@@ -138,7 +139,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	texImgHaloSpiky=QImage(StelFileMgr::getInstallationDir()+"/textures/star16x16_rays.png");
 
 	// Tessellate texture into an equispaced 5x5 field. Vertices have to be computed per frame.
-	coronaTextureCoords.clear();
+	coronaTextureCoords=QVector<Vec2f>((coronaMeshDim-1)*(coronaMeshDim-1)*6); coronaTextureCoords.clear();
 	for (int j=0;j<coronaMeshDim-1;++j)
 	{
 		for (int i=0;i<coronaMeshDim-1;++i)
@@ -152,9 +153,6 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 		}
 	}
 }
-
-const int StelSkyDrawer::coronaMeshDim=5;
-QVector<Vec2f> StelSkyDrawer::coronaTextureCoords((coronaMeshDim-1)*(coronaMeshDim-1)*6);
 
 StelSkyDrawer::~StelSkyDrawer()
 {
