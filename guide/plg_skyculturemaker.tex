@@ -41,7 +41,7 @@ If the Sky Culture Converter was enabled at build time, a \textit{Convert} butto
 The \textit{Edit} button may be present already, but it is disabled because the SCM currently does not support editing existing sky cultures.
 This feature is planned for a future release.
 
-\textbf{Saving partial results:} Since editing an existing sky culture is not yet supported, the following workaround is needed to save partial work and resume later.
+\noindent\textbf{Saving partial results:} Since editing an existing sky culture is not yet supported, the following workaround is needed to save partial work and resume later.
 Ensure all metadata is complete so the SCM allows you to export.
 When resuming, create a new temporary sky culture, continue your work there, and then manually merge the two exported JSON files by copying the relevant entries.
 
@@ -169,6 +169,22 @@ Simply click on the map to register corners and extend the polygon.
 \item Double-right-click to finish the polygon. A dialog then asks for the start and end year during which the culture was or is practiced. The special value \texttt{9146} indicates that the culture is still practiced.
 \item A short help summary for all map interactions is available by clicking the \textbf{?} button in the bottom-right corner of the map.
 \end{itemize}
+
+\noindent\textbf{Instruction for creating geo-polygons:}
+The polygons are meant to indicate the origin of the astronomical culture that is represented in Stellarium.
+We regard this information as educational in terms of understanding the reasons for the selection of specific images, because the specific fauna and flora, and the geological features of the area influence cultural habits (astronomy is used for forecasting seasonal weather, encounters with migrating birds, fish, and other animals that might be depicted in the constellations).
+For that reason, the polygons of historical indigenous settlements or the extent of empires are more important than modern borders of states or enclosures.
+For instance, in a modern state (like the USA) there might be reserves for indigenous nations (e.g.\ the Navajo), but for our purpose these legal boundaries are less important than the original area where their sky cultures had been developed in pre-Columbian America.
+
+\noindent\textbf{Note the Time Slider!}
+You have the option to simulate the movement of a culture over time.
+For instance, the Indian Vedic culture developed in the Indus Valley first, then spread to the Ganges Plateau and then to the entire Indian subcontinent (and with Hinduism even beyond).
+So, we defined three time steps for the Indian Vedic culture with different geographical extents.
+This may help in understanding both where any specific culture is practiced today and where it stems from.
+
+\noindent Note that the time slider does not affect the display in the Stellarium main simulation, i.e.\ the display of the sky.
+It is only meant to illustrate the evolution of cultures.
+
 The polygon data is then saved to a \file{territory.geojson} file.
 For details on its format see section~\ref{sec:skycultures:territory}.
 For information on geoscheme regions, see section~\ref{sec:skycultures:region}.
@@ -191,7 +207,7 @@ The \textit{Drawing} tab lets you draw constellation lines directly on the Stell
 \item To stop drawing, double-right-click or simply press the \textit{Pen} button again.
 \end{enumerate}
 
-Using this workflow you can build complex stick figures (see Figure~\ref{fig:plugins:SCM:DrawingArtwork} a).
+\noindent Using this workflow you can build complex stick figures (see Figure~\ref{fig:plugins:SCM:DrawingArtwork} a).
 Mistakes can be undone with the \textit{Undo} button (one segment at a time) or erased with the \textit{Eraser} tool: 
 press \textit{Eraser}, then hold the right mouse button and drag through any line segment to remove it.
 
@@ -214,7 +230,7 @@ To align the artwork with the sky:
 \item Drag the anchor point to the position in the image that the star represents.
 \item Repeat for the remaining anchor points.
 \end{enumerate}
-An example result is shown in Figure~\ref{fig:plugins:SCM:DrawingArtwork}.
+\noindent An example result is shown in Figure~\ref{fig:plugins:SCM:DrawingArtwork}.
 If the image is not visible on the sky map, try repositioning the anchor points.
 The SCM does not draw images that become too distorted.
 
