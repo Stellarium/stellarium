@@ -121,7 +121,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 
 	// four extras for finetuning
 	setFlagDrawSunAfterAtmosphere(conf->value("landscape/draw_sun_after_atmosphere",false).toBool());
-	setFlagEarlySunHalo(conf->value("landscape/early_solar_halo",false).toBool());
+	setFlagEarlySunHalo(conf->value("landscape/early_solar_halo",true).toBool());
 	setFlagTfromK(conf->value("landscape/use_T_from_k",false).toBool());
 	setT(conf->value("landscape/turbidity",5.).toDouble());
 
