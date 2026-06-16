@@ -451,12 +451,14 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 }
 
 // Finalize the drawing of point sources
-void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
+void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter, bool drawInCorona)
 {
 	Q_ASSERT(sPainter);
 
 	if (nbPointSources==0)
 		return;
+	if (drawInCorona)
+		qDebug() << "Called in corona. Find what for?";
 	if (flagStarSpiky)
 		texHaloRayed->bind();
 	else
@@ -603,7 +605,7 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, d
 	painter->drawStelVertexArray(coronaMesh, false);
 
 	// GZ: WHY DO WE NEED THIS?
-	postDrawPointSource(painter);
+	postDrawPointSource(painter, true);
 }
 
 // Terminate drawing of a 3D model, draw the halo

@@ -101,7 +101,8 @@ public:
 	void preDrawPointSource(StelPainter* p);
 
 	//! Finalize the drawing of point sources
-	void postDrawPointSource(StelPainter* sPainter);
+	//! Temporary: test if calling this in corona makes any sense.
+	void postDrawPointSource(StelPainter* sPainter, bool drawInCorona=false);
 
 	//! Draw a point source halo.
 	//! @param sPainter the StelPainter to use for drawing.
