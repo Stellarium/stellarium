@@ -95,7 +95,6 @@ void ObjectVisibilityMapWidget::onPositionChanged(double longitude,
 
 namespace
 {
-constexpr double EPS = 1e-9;
 // Colour matching the screenshots in the article: solid blue line, a
 // slightly lighter dashed line, blue plus marks and triangle markers.
 const QColor LINE_COLOR     = QColor(0,  60, 220, 255);
@@ -108,7 +107,7 @@ void ObjectVisibilityMapWidget::drawLatitudeLine(QPainter& painter,
                                                  double latitudeDeg,
                                                  const QPen& pen) const
 {
-	if (latitudeDeg < -90.0 - EPS || latitudeDeg > 90.0 + EPS) return;
+	if (latitudeDeg < -90.0 || latitudeDeg > 90.0) return;
 
 	// Use the inherited helper from MapWidget to convert lat/lon to
 	// pixel space.  The helper returns coordinates in DEVICE pixels.
@@ -131,7 +130,7 @@ void ObjectVisibilityMapWidget::drawLatitudeMarkers(QPainter& painter,
                                                     const QChar& marker,
                                                     const QColor& color) const
 {
-	if (latitudeDeg < -90.0 - EPS || latitudeDeg > 90.0 + EPS) return;
+	if (latitudeDeg < -90.0 || latitudeDeg > 90.0) return;
 
 	const auto p = lonLatToMapPoint(0.0, latitudeDeg);
 	const double ratio = devicePixelRatioF();

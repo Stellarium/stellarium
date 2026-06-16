@@ -65,24 +65,6 @@ void ObjectVisibilityDialog::retranslate()
 	}
 }
 
-void ObjectVisibilityDialog::setVisible(bool v)
-{
-	// On hide: clear the "armed" state of click-to-set mode so the
-	// user can't accidentally set their location after reopening the
-	// dialog.
-	if (!v && ui && ui->setLocationByClickCheckBox)
-	{
-		if (ui->setLocationByClickCheckBox->isChecked())
-		{
-			QSignalBlocker block(ui->setLocationByClickCheckBox);
-			ui->setLocationByClickCheckBox->setChecked(false);
-		}
-		if (ui->mapWidget)
-			ui->mapWidget->setClickSetsLocationMode(false);
-	}
-	StelDialog::setVisible(v);
-}
-
 //
 // =================== Construction ====================
 //
@@ -99,16 +81,21 @@ void ObjectVisibilityDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)),
-		        this, SLOT(enableKineticScrolling(bool)));
+		// enableKineticScrolling is protected in StelDialog, so we
+		// can't take its address from outside the class hierarchy.
+		// Calling it from inside a lambda works because the lambda
+		// is a member-function context with access to inherited
+		// protected members.
+		connect(gui, &StelGui::flagUseKineticScrollingChanged,
+		        this, [this](bool b){ enableKineticScrolling(b); });
 	}
 
 	// Localisation + close button.
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged,
+	        this, &ObjectVisibilityDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)),
-	        this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo,
+	        this, &StelDialog::handleMovedTo);
 
 	// "Good visibility" spinbox.
 	ui->goodVisibilityLimitSpinBox->setRange(1, 89);
@@ -133,13 +120,16 @@ void ObjectVisibilityDialog::createDialogContent()
 	connect(ui->mapWidget, &ObjectVisibilityMapWidget::locationPicked,
 	        this, &ObjectVisibilityDialog::onLocationPicked);
 
-	// Track Stellarium's selection so we can enable/disable Calculate.
+	// Track Stellarium's selection so we can enable/disable Calculate
+	// and update the prompt label.  The signal carries a
+	// StelModuleSelectAction enum we don't care about — drop it with
+	// a lambda so the slot can stay parameter-free.
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 	if (objMgr)
 	{
-		connect(objMgr,
-		        SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
-		        this, SLOT(onSelectedObjectChanged()));
+		connect(objMgr, &StelObjectMgr::selectedObjectChanged,
+		        this, [this](StelModule::StelModuleSelectAction)
+		        { onSelectedObjectChanged(); });
 	}
 
 	// Keep the marker on the map in sync with the observer's current
@@ -171,6 +161,12 @@ bool ObjectVisibilityDialog::isAcceptableType(const QString& type)
 void ObjectVisibilityDialog::onSelectedObjectChanged()
 {
 	updateCalculateButtonEnabled();
+	// In the pre-Calculate state, the label depends on what's
+	// selected — refresh it so the user gets immediate feedback
+	// about whether the new selection is acceptable.  Once
+	// Calculate has been pressed, the label shows the result
+	// and is unaffected by subsequent selection changes.
+	refreshTitleLabel();
 }
 
 void ObjectVisibilityDialog::updateCalculateButtonEnabled()
@@ -385,12 +381,73 @@ int ObjectVisibilityDialog::currentYear(StelCore* core)
 void ObjectVisibilityDialog::refreshTitleLabel()
 {
 	if (!ui) return;
+
+	// Pre-Calculate state: the label reflects what's currently selected
+	// in Stellarium so the user knows why Calculate is enabled or not.
+	// Three cases:
+	//   1. nothing selected           → generic prompt
+	//   2. acceptable object selected → confirm with name
+	//   3. wrong-type object selected → say so explicitly, including
+	//      the localised type name, so the user understands why
+	//      Calculate is disabled.  Tooltips on disabled buttons are
+	//      not always discoverable; the label is.
 	if (lockedObjectId.isEmpty())
 	{
-		ui->titleLabel->setText(
-			q_("Select a star or DSO, then click Calculate."));
+		StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+		if (!objMgr || objMgr->getSelectedObject().isEmpty())
+		{
+			ui->titleLabel->setText(
+				q_("Select a star or DSO, then click Calculate."));
+			return;
+		}
+		const StelObjectP sel = objMgr->getSelectedObject().first();
+		if (isAcceptableType(sel->getType()))
+		{
+			QString name = sel->getNameI18n();
+			if (name.isEmpty()) name = sel->getEnglishName();
+			if (name.isEmpty()) name = sel->getID();
+			ui->titleLabel->setText(
+				QString(q_("%1 is selected. Click Calculate."))
+				.arg(name));
+		}
+		else
+		{
+			// Map Stellarium's internal type string to a user-friendly
+			// localised description.  We could ask the object itself
+			// via getObjectType() but that returns finer-grained
+			// English text ("star", "open cluster", ...) that may not
+			// be the most useful thing to surface in a "wrong type"
+			// message; a class-level descriptor reads more naturally.
+			const QString type = sel->getType();
+			QString typeName;
+			if      (type == QStringLiteral("Planet"))
+				typeName = q_("a planet, moon or the Sun");
+			else if (type == QStringLiteral("Comet"))
+				typeName = q_("a comet");
+			else if (type == QStringLiteral("MinorPlanet"))
+				typeName = q_("a minor planet");
+			else if (type == QStringLiteral("Satellite"))
+				typeName = q_("an artificial satellite");
+			else if (type == QStringLiteral("NomenclatureItem"))
+				typeName = q_("a surface feature");
+			else if (type == QStringLiteral("Meteor"))
+				typeName = q_("a meteor");
+			else
+				typeName = q_("not a star or deep-sky object");
+
+			QString name = sel->getNameI18n();
+			if (name.isEmpty()) name = sel->getEnglishName();
+			if (name.isEmpty()) name = sel->getID();
+			ui->titleLabel->setText(
+				QString(q_("%1 is %2. This plug-in only supports stars "
+				           "and deep-sky objects."))
+				.arg(name)
+				.arg(typeName));
+		}
 		return;
 	}
+
+	// Post-Calculate state: show what we computed.
 	StelCore* core = StelApp::getInstance().getCore();
 	const int year = currentYear(core);
 	const QString planet = core->getCurrentLocation().planetName;

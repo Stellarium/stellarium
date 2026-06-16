@@ -35,6 +35,7 @@
 #include <QDebug>
 #include <QPixmap>
 #include <QSettings>
+#include <algorithm>
 #include <stdexcept>
 
 //
@@ -173,7 +174,7 @@ void ObjectVisibility::loadSettings()
 	conf->beginGroup("ObjectVisibility");
 	const int v = conf->value("good_visibility_limit", 5).toInt();
 	conf->endGroup();
-	setGoodVisibilityLimit(std::max(1, std::min(89, v)));
+	setGoodVisibilityLimit(std::clamp(v, 1, 89));
 }
 
 void ObjectVisibility::restoreDefaultSettings()
@@ -188,7 +189,7 @@ void ObjectVisibility::restoreDefaultSettings()
 
 void ObjectVisibility::setGoodVisibilityLimit(int degrees)
 {
-	degrees = std::max(1, std::min(89, degrees));
+	degrees = std::clamp(degrees, 1, 89);
 	if (degrees == goodVisibilityLimit)
 		return;
 	goodVisibilityLimit = degrees;

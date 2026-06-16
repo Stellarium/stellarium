@@ -40,10 +40,6 @@ public:
 
 public slots:
 	void retranslate() override;
-	//! Reset transient state (click-to-set mode) on dialog hide so
-	//! it isn't accidentally still armed the next time the user
-	//! opens the dialog.
-	void setVisible(bool v) override;
 
 protected:
 	void createDialogContent() override;
