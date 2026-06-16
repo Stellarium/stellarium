@@ -29,6 +29,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelMainView.hpp"
+#include "precession.h"
 
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -521,34 +522,16 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 // Draw's the Sun's corona during a solar eclipse on Earth.
 // painter: in FrameJ2000
 // posJ2000: solar position, J2000
-// radius: angular dimension of the square texture, not the sun. --> NEW: angular radius of the sun, radians
+// radius: angular radius of the sun, radians
 // color: attenuated sunlight color (extinction may have reddened the sun)
 // alpha: transparency
-// NO MORE: angle is 0 for an equatorial sky view, solar parallactic angle for an azimuthal mount.
-// eclipticAngle intersection angle between ecliptic and equatorial coordinates of date (not J2000!).
-// This has to be applied to the image, so that the corona is aligned along the ecliptic.
-void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, double radius, const Vec3f& color, const float alpha, const double eclipticAngle)
+void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, double radius, const Vec3f& color, const float alpha)
 {
 	radius *= (512.f/193.f); // Texture size is 1024, solar radius within is 192 or 193. Increase radius to the width/height of actual image, in radians.
-	texSunCorona->bind();
-	painter->setBlending(true, GL_ONE, GL_ONE);
-
-	//Vec3f win;
-	//painter->getProjector()->project(v, win);
-	//// For some reason we must mix color with the given alpha as well, else mixing does not work.
-	//painter->setColor(color*alpha, alpha);
-	//// pre-compensate the automatic scaling of sprite painting on HiDPI screens
-	//radius /= static_cast<float>(painter->getProjector()->getDevicePixelsPerPixel());
-	//// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equator angle from that date of 15.43 degrees.
-	//painter->drawSprite2dMode(win[0], win[1], radius, -angle+44.65f-15.43f);
-
-	// Create a 5x5 mesh with texture coordinates to display a texture quad.
-	// Partly copied from Constellation artwork.
-
-	double ra=0, dec=0;
+	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, posJ2000);
 
-	// Tessellate texture into an equispaced 5x5 field
+	// Tessellate texture into an equispaced 5x5 field.
 	static const int nbPoints=5;
 	static QVector<Vec2f> texCoords((nbPoints-1)*(nbPoints-1)*6);
 	static bool texInitialized=false;
@@ -570,10 +553,11 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, d
 		texInitialized=true;
 	}
 
-	// Define a rotation matrix that adjusts image rotation in the sky. We must unrotate from the original image orientation and adjust for the new angle of J2000 vs. ecliptic.
-	// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equator angle from that date of 15.43 degrees.
+	// Define a rotation matrix around the sun that adjusts image rotation in the sky. We must unrotate from the original image orientation and adjust for the new angle of J2000 vs. ecliptic.
+	// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equatorial angle from that date of 15.43 degrees.
 	// https://en.wikipedia.org/wiki/Rotation_matrix
-	const double theta=(44.65-15.43)*M_PI_180 - eclipticAngle; // dynamical rotation angle!
+	const double eclAngle=getPrecessionAngleVondrakCurrentEpsilonA()*cos(ra);
+	const double theta=(44.65-15.43)*M_PI_180 - eclAngle; // dynamical rotation angle!
 	const double cTh=cos(theta);
 	const double mcTh=1.-cTh;
 	const double sTh=sin(theta);
@@ -584,7 +568,6 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, d
 	static QVector<Vec3d> contour(texCoords.size());
 	contour.clear();
 	const int centerPoint=nbPoints/2; // point 5:2=2 is the point index in sun's center
-	//qDebug() << "centerpoint:" << centerPoint;
 	for (int j=-centerPoint;j<nbPoints-1-centerPoint;++j)
 	{
 		for (int i=-centerPoint;i<nbPoints-1-centerPoint;++i)
@@ -611,32 +594,19 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, d
 			contour << R3*vertex;
 		}
 	}
-
-	//qDebug() << "RAcenter:" << StelUtils::hoursToHmsStr(ra*M_180_PI/15);
-	//qDebug() << "DEcenter:" << StelUtils::decDegToDmsStr(dec*M_180_PI);
-	//qDebug() << "Image radius" << StelUtils::decDegToDmsStr(radius*M_180_PI);
-	//qDebug() << "RA from:" << StelUtils::hoursToHmsStr(StelUtils::fmodpos((ra+2*radius/(nbPoints-1))  *M_180_PI/15, 24.)) << "to:" << StelUtils::hoursToHmsStr(StelUtils::fmodpos((ra-2*radius/(nbPoints-1))  *M_180_PI/15, 24));
-
-
-	//qDebug() << "texCoords: " << texCoords.length();
-	//qDebug() << "Contours: " << contour.length();
-	//Q_ASSERT(contour.length()==texCoords.length());
-
+	Q_ASSERT(contour.length()==texCoords.length());
 
 	coronaPolygon.vertex=contour;
 	coronaPolygon.texCoords=texCoords;
 	coronaPolygon.primitiveType=StelVertexArray::Triangles;
 
-
-	Vec3d aberration(0.); // TODO!
+	texSunCorona->bind();
 	// For some reason we must mix color with the given alpha as well, else mixing does not work.
 	painter->setColor(color*alpha, alpha);
-	//painter->setBlending(true, GL_ONE, GL_ONE);
-	painter->setCullFace(false);
+	painter->setBlending(true, GL_ONE, GL_ONE);
+	painter->drawStelVertexArray(coronaPolygon, false);
 
-	painter->drawStelVertexArray(coronaPolygon, false, aberration);
-
-	 // GZ: WHY DO WE NEED THIS?
+	// GZ: WHY DO WE NEED THIS?
 	postDrawPointSource(painter);
 }
 
