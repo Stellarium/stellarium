@@ -79,6 +79,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	maxLum(0.f),
 	oldLum(-1.f),
 	coronaMeshDim(5), // low odd number: 3/5/7
+	coronaTextureCoords(),
 	flagLuminanceAdaptation(false),
 	daylightLabelThreshold(250.0),
 	big3dModelHaloRadius(150.f)
@@ -121,7 +122,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 
 	// four extras for finetuning
 	setFlagDrawSunAfterAtmosphere(conf->value("landscape/draw_sun_after_atmosphere",false).toBool());
-	setFlagEarlySunHalo(conf->value("landscape/early_solar_halo",true).toBool());
+	setFlagEarlySunHalo(conf->value("landscape/early_solar_halo",false).toBool());
 	setFlagTfromK(conf->value("landscape/use_T_from_k",false).toBool());
 	setT(conf->value("landscape/turbidity",5.).toDouble());
 
@@ -139,7 +140,6 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	texImgHaloSpiky=QImage(StelFileMgr::getInstallationDir()+"/textures/star16x16_rays.png");
 
 	// Tessellate texture into an equispaced 5x5 field. Vertices have to be computed per frame.
-	coronaTextureCoords=QVector<Vec2f>((coronaMeshDim-1)*(coronaMeshDim-1)*6); coronaTextureCoords.clear();
 	for (int j=0;j<coronaMeshDim-1;++j)
 	{
 		for (int i=0;i<coronaMeshDim-1;++i)
@@ -456,7 +456,10 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter, bool drawInCorona
 	if (nbPointSources==0)
 		return;
 	if (drawInCorona)
-		qDebug() << "Called in corona. Find what for?";
+	{
+		// Test whether this call is misplaced. TODO: Cleanup in summer of 2026.
+		Q_ASSERT(0);
+	}
 	if (flagStarSpiky)
 		texHaloRayed->bind();
 	else
