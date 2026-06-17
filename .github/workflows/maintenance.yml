@@ -62,5 +62,4 @@ jobs:
         run: find ${{github.workspace}}/{src,plugins,nebulae,skycultures} -iname '*.json' -exec jsonlint -S {} +
       
       - name: Linting GeoJSON
-        run: find ${{github.workspace}}/{skycultures} -iname '*.geojson' -exec jsonlint -S {} +
-
+        run: find ${{github.workspace}}/skycultures -iname '*.geojson' -exec jsonlint -S {} +
