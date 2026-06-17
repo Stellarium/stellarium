@@ -3776,6 +3776,11 @@ double Planet::getAngularRadius(const StelCore* core) const
 	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).norm()) * M_180_PI;
 }
 
+double Planet::getAngularRadiusNoScale(const StelCore* core) const
+{
+	const double rad = (rings ? rings->getSize() : equatorialRadius);
+	return std::atan2(rad, getJ2000EquatorialPos(core).norm()) * M_180_PI;
+}
 
 double Planet::getSpheroidAngularRadius(const StelCore* core) const
 {
@@ -6228,7 +6233,7 @@ Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) con
 	{
 		StelCore* core1 = StelApp::getInstance().getCore();
 		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-		double ho = - getAngularRadius(core1) * M_PI_180; // semidiameter;
+		double ho = - getAngularRadiusNoScale(core1) * M_PI_180; // semidiameter;
 		double hoRefraction = 0.; 
 
 		if (core1->getSkyDrawer()->getFlagHasAtmosphere())
@@ -6292,7 +6297,7 @@ Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) con
 		{
 			core1->setJD(currentJD+mr);
 			core1->update(0);
-			ho = - getAngularRadius(core1) * M_PI_180; // semidiameter;
+			ho = - getAngularRadiusNoScale(core1) * M_PI_180; // semidiameter;
 			ho += hoRefraction;
 			if (altitude != 0.)
 				ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
@@ -6322,7 +6327,7 @@ Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) con
 		{
 			core1->setJD(currentJD+ms);
 			core1->update(0);
-			ho = - getAngularRadius(core1) * M_PI_180; // semidiameter;
+			ho = - getAngularRadiusNoScale(core1) * M_PI_180; // semidiameter;
 			if (core1->getSkyDrawer()->getFlagHasAtmosphere())
 			ho += hoRefraction;
 			if (altitude != 0.)
@@ -6356,7 +6361,7 @@ Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) con
 		//StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 		double ho = 0.;
 		if (getEnglishName()==L1S("Sun"))
-			ho = - getAngularRadius(core) * M_PI_180; // semidiameter; Canonical value 16', but this is accurate even from other planets...
+			ho = - getAngularRadiusNoScale(core) * M_PI_180; // semidiameter; Canonical value 16', but this is accurate even from other planets...
 
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		{
