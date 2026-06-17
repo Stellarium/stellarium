@@ -289,6 +289,8 @@ public:
 
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
 	double getAngularRadius(const StelCore* core) const override;
+	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), upscale factor is ignored.
+	double getAngularRadiusNoScale(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
 	//! Returns whether planet positions are valid and useful for the current simulation time.
