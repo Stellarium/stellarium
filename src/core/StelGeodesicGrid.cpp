@@ -255,15 +255,15 @@ void StelGeodesicGrid::visitTriangles(int lev,int index,
                                   void *context) const
 {
 	(*func)(lev,index,c0,c1,c2,context);
-	Triangle &t(triangles[lev][index]);
+	Triangle* t = &triangles[lev][index];
 	lev++;
 	if (lev <= maxVisitLevel)
 	{
 		index *= 4;
-		visitTriangles(lev,index+0,c0,t.e2,t.e1,maxVisitLevel,func,context);
-		visitTriangles(lev,index+1,t.e2,c1,t.e0,maxVisitLevel,func,context);
-		visitTriangles(lev,index+2,t.e1,t.e0,c2,maxVisitLevel,func,context);
-		visitTriangles(lev,index+3,t.e0,t.e1,t.e2,maxVisitLevel,func,context);
+		visitTriangles(lev,index+0,c0,t->e2,t->e1,maxVisitLevel,func,context);
+		visitTriangles(lev,index+1,t->e2,c1,t->e0,maxVisitLevel,func,context);
+		visitTriangles(lev,index+2,t->e1,t->e0,c2,maxVisitLevel,func,context);
+		visitTriangles(lev,index+3,t->e0,t->e1,t->e2,maxVisitLevel,func,context);
 	}
 }
 
