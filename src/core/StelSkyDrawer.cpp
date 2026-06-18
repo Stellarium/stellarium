@@ -560,9 +560,9 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, d
 	const double cTh=cos(theta);
 	const double mcTh=1.-cTh;
 	const double sTh=sin(theta);
-	const Mat3d R3(posJ2000[0]*posJ2000[0]*mcTh+cTh,        posJ2000[0]*posJ2000[1]*mcTh-posJ2000[2]*sTh, posJ2000[0]*posJ2000[2]*mcTh+posJ2000[1]*sTh,
-		       posJ2000[0]*posJ2000[1]*mcTh+posJ2000[2]*sTh, posJ2000[1]*posJ2000[1]*mcTh+cTh,        posJ2000[1]*posJ2000[2]*mcTh-posJ2000[0]*sTh,
-		       posJ2000[0]*posJ2000[2]*mcTh-posJ2000[1]*sTh, posJ2000[1]*posJ2000[2]*mcTh+posJ2000[0]*sTh, posJ2000[2]*posJ2000[2]*mcTh+cTh);
+	const Mat3d R3(posJ2000[0]*posJ2000[0]*mcTh+cTh,             posJ2000[0]*posJ2000[1]*mcTh-posJ2000[2]*sTh, posJ2000[0]*posJ2000[2]*mcTh+posJ2000[1]*sTh,
+	               posJ2000[0]*posJ2000[1]*mcTh+posJ2000[2]*sTh, posJ2000[1]*posJ2000[1]*mcTh+cTh,             posJ2000[1]*posJ2000[2]*mcTh-posJ2000[0]*sTh,
+	               posJ2000[0]*posJ2000[2]*mcTh-posJ2000[1]*sTh, posJ2000[1]*posJ2000[2]*mcTh+posJ2000[0]*sTh, posJ2000[2]*posJ2000[2]*mcTh+cTh);
 
 	static QVector<Vec3d> contour(coronaTextureCoords.size());
 	contour.clear();
