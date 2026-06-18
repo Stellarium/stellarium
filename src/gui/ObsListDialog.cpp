@@ -64,10 +64,10 @@ ObsListDialog::ObsListDialog(QObject *parent) :
 	setObservingListHeaderNames();
 
 	QSettings* conf  = StelApp::getInstance().getSettings();
-	flagUseJD        = conf->value("bookmarks/useJD", false).toBool();
-	flagUseLandscape = conf->value("bookmarks/useLandscape", false).toBool();
-	flagUseLocation  = conf->value("bookmarks/useLocation", false).toBool();
-	flagUseFov       = conf->value("bookmarks/useFOV", false).toBool();
+	flagUseJD        = conf->value("bookmarks/useJD", flagUseJD).toBool();
+	flagUseLandscape = conf->value("bookmarks/useLandscape", flagUseLandscape).toBool();
+	flagUseLocation  = conf->value("bookmarks/useLocation", flagUseLocation).toBool();
+	flagUseFov       = conf->value("bookmarks/useFOV", flagUseFov).toBool();
 
 	observingListJsonPath = StelFileMgr::findFile(conf->value("main/observinglists_dir", "data").toString(), static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/" + JSON_FILE_NAME;
 }
