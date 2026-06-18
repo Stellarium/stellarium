@@ -4445,26 +4445,15 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
 		// But without atmosphere we should indeed draw a visible corona by default!
 		const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
-		static StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
-		float rotationAngle=(mmgr->getEquatorialMount() ? 0.0f : getParallacticAngle(core) * M_180_PIf);
-
-		// Add ecliptic/equator angle. Meeus, Astr. Alg. 2nd, p100.
-		const double jde=core->getJDE();
-		const double eclJDE = ssm->getEarth()->getRotObliquity(jde);
-		double ra_equ, dec_equ, lambdaJDE, betaJDE;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
-		StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
-		// We can safely assume beta=0 and ignore nutation.
-		const float q0=static_cast<float>(atan(-cos(lambdaJDE)*tan(eclJDE)));
-		rotationAngle -= q0*static_cast<float>(180.0/M_PI);
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-		const Vec3f pos = getJ2000EquatorialPos(core).toVec3f();
+		const Vec3d pos2000 = getJ2000EquatorialPos(core);
 
 		// Find new extincted color for halo. The method is again rather ad-hoc, but does not look too bad.
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
 		Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
-		core->getSkyDrawer()->drawSunCorona(&sPainter, pos, 512.f/192.f*screenRd, color, alpha*alpha, rotationAngle);
+
+		core->getSkyDrawer()->drawSunCorona(&sPainter, pos2000, getAngularRadius(core) * M_PI_180, color, alpha*alpha);
 	}
 
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
