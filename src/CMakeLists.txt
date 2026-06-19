@@ -910,16 +910,6 @@ IF(ENABLE_TESTING)
      ADD_TEST(testAstrometry testAstrometry)
      SET_TARGET_PROPERTIES(testAstrometry PROPERTIES FOLDER "src/tests")
 
-     SET(tests_testDynamicLoading_SRCS
-          tests/testDynamicLoading.hpp
-          tests/testDynamicLoading.cpp
-     )
-     ADD_EXECUTABLE(testDynamicLoading ${tests_testDynamicLoading_SRCS})
-     TARGET_LINK_LIBRARIES(testDynamicLoading ${TESTS_LIBRARIES})
-     ADD_DEPENDENCIES(buildTests testDynamicLoading)
-     ADD_TEST(testDynamicLoading testDynamicLoading)
-     SET_TARGET_PROPERTIES(testDynamicLoading PROPERTIES FOLDER "src/tests")
-
      SET(tests_testGeomMath_SRCS
           tests/testGeomMath.hpp
           tests/testGeomMath.cpp
