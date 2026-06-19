@@ -28,15 +28,14 @@
 #include <QDebug>
 #include <QFile>
 
-template<class Star>
-DynamicZoneArray<Star>::DynamicZoneArray(const QString& fname, QFile* file, int level, int mag_min)
+template<class StarType>
+DynamicZoneArray<StarType>::DynamicZoneArray(const QString& fname, QFile* file, int level, int mag_min)
 	: ZoneArray(fname, file, level, mag_min)
 	, zoneCounts_(nullptr)
 	, zoneTableMmapStart_(nullptr)
 {
 	nr_of_zones = static_cast<unsigned int>(StelGeodesicGrid::nrOfZones(level));
 
-	// Mmap the zone table (star count per zone, 4 bytes each) — no heap copy
 	const qint64 zoneTableSize = static_cast<qint64>(sizeof(uint32_t)) * nr_of_zones;
 	zoneTableMmapStart_ = file->map(28, zoneTableSize);
 	if (!zoneTableMmapStart_)
@@ -48,30 +47,24 @@ DynamicZoneArray<Star>::DynamicZoneArray(const QString& fname, QFile* file, int 
 	}
 	zoneCounts_ = reinterpret_cast<const uint32_t*>(zoneTableMmapStart_);
 
-	// Build block-level prefix-sum offset table.
-	// Block k covers zones k*BLOCK_SIZE .. (k+1)*BLOCK_SIZE - 1.
-	// blockOffsets_[k] = sum(zoneCounts[0 .. k*BLOCK_SIZE-1]) × 16.
 	const unsigned int numBlocks = (nr_of_zones + BLOCK_SIZE - 1) / BLOCK_SIZE + 1;
 	blockOffsets_.resize(numBlocks);
 
 	uint64_t runningOffset = 0;
-	blockOffsets_[0] = 0;  // zone 0 starts at star data area begin
+	blockOffsets_[0] = 0;
 	for (unsigned int b = 0; b < numBlocks - 1; ++b)
 	{
 		const unsigned int zEnd = std::min((b + 1) * BLOCK_SIZE, nr_of_zones);
 		for (unsigned int z = b * BLOCK_SIZE; z < zEnd; ++z)
 		{
 			nr_of_stars += zoneCounts_[z];
-			runningOffset += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star);
+			runningOffset += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(StarType);
 		}
 		blockOffsets_[b + 1] = runningOffset;
 	}
 
-	// Star data area begins immediately after the zone table
 	const qint64 starDataBase = 28 + zoneTableSize;
 
-	// Keep file open for on-demand reads
-	// Set up cache: ~128 MB capacity
 	zoneCache_.setMaxCost(128 * 1024 * 1024);
 
 	qInfo().noquote() << QString("DynamicZoneArray: %1 zones, %2 stars, %3 MB zone table (mmap), "
@@ -83,14 +76,14 @@ DynamicZoneArray<Star>::DynamicZoneArray(const QString& fname, QFile* file, int 
 		.arg(zoneCache_.maxCost() / (1024 * 1024));
 }
 
-DynamicZoneArray<Star>::~DynamicZoneArray()
+template<class StarType>
+DynamicZoneArray<StarType>::~DynamicZoneArray()
 {
-	// Signal async workers to abort, then wait for them
 	fileValid_ = false;
 	for (auto it = pendingLoads_.begin(); it != pendingLoads_.end(); ++it)
 	{
 		it.value().waitForFinished();
-		delete it.value().result();  // free leaked QByteArray from cancelled workers
+		delete it.value().result();
 	}
 	pendingLoads_.clear();
 	zoneCache_.clear();
@@ -107,9 +100,9 @@ DynamicZoneArray<Star>::~DynamicZoneArray()
 	}
 }
 
-void DynamicZoneArray<Star>::drainPendingLoads() const
+template<class StarType>
+void DynamicZoneArray<StarType>::drainPendingLoads() const
 {
-	// Move completed async loads into cache, discard unfinished ones
 	QMutableHashIterator<int, QFuture<QByteArray*>> it(pendingLoads_);
 	while (it.hasNext())
 	{
@@ -123,46 +116,35 @@ void DynamicZoneArray<Star>::drainPendingLoads() const
 	}
 }
 
-const Star* DynamicZoneArray<Star>::loadZone(int zone_index) const
+template<class StarType>
+const StarType* DynamicZoneArray<StarType>::loadZone(int zone_index) const
 {
-	// Drain completed async loads first
 	drainPendingLoads();
 
-	// Check cache
 	QByteArray* cached = zoneCache_[zone_index];
 	if (cached)
-		return reinterpret_cast<const Star*>(cached->constData());
+		return reinterpret_cast<const StarType*>(cached->constData());
 
 	uint32_t count = zoneCounts_[zone_index];
 	if (count == 0 || !file || !file->isOpen())
 		return nullptr;
 
-	// Check if already being loaded
 	if (pendingLoads_.contains(zone_index))
 		return nullptr;
 
 	if (!fileValid_)
 		return nullptr;
 
-	// Check if already being loaded
-	if (pendingLoads_.contains(zone_index))
-		return nullptr;  // still loading, skip this frame
-
-	if (!fileValid_)
-		return nullptr;
-
-	// Compute offset (same as sync version)
 	const unsigned int block = zone_index / BLOCK_SIZE;
 	uint64_t off = blockOffsets_[block];
 	const unsigned int zStart = block * BLOCK_SIZE;
 	for (unsigned int z = zStart; z < static_cast<unsigned int>(zone_index); ++z)
-		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star);
+		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(StarType);
 
 	const qint64 starDataBase = 28 + static_cast<qint64>(sizeof(uint32_t)) * nr_of_zones;
 	const qint64 fileOffset = starDataBase + static_cast<qint64>(off);
-	const qint64 size = static_cast<qint64>(count) * sizeof(Star);
+	const qint64 size = static_cast<qint64>(count) * sizeof(StarType);
 
-	// Start async load — open own file handle to avoid QFile thread-safety issues
 	auto future = QtConcurrent::run([this, fileOffset, size]() -> QByteArray* {
 		if (!fileValid_)
 			return nullptr;
@@ -180,23 +162,22 @@ const Star* DynamicZoneArray<Star>::loadZone(int zone_index) const
 	});
 
 	pendingLoads_.insert(zone_index, future);
-	return nullptr;  // not ready this frame
+	return nullptr;
 }
 
-const Star* DynamicZoneArray<Star>::loadZoneSync(int zone_index) const
+template<class StarType>
+const StarType* DynamicZoneArray<StarType>::loadZoneSync(int zone_index) const
 {
-	// For search operations: must block until data is ready
 	drainPendingLoads();
 
 	QByteArray* cached = zoneCache_[zone_index];
 	if (cached)
-		return reinterpret_cast<const Star*>(cached->constData());
+		return reinterpret_cast<const StarType*>(cached->constData());
 
 	uint32_t count = zoneCounts_[zone_index];
 	if (count == 0 || !file || !file->isOpen())
 		return nullptr;
 
-	// If async load is in progress, wait for it
 	if (pendingLoads_.contains(zone_index))
 	{
 		QFuture<QByteArray*> f = pendingLoads_.take(zone_index);
@@ -205,21 +186,20 @@ const Star* DynamicZoneArray<Star>::loadZoneSync(int zone_index) const
 		if (data)
 		{
 			zoneCache_.insert(zone_index, data, data->size());
-			return reinterpret_cast<const Star*>(data->constData());
+			return reinterpret_cast<const StarType*>(data->constData());
 		}
 		return nullptr;
 	}
 
-	// No async pending - do synchronous load
 	const unsigned int block = zone_index / BLOCK_SIZE;
 	uint64_t off = blockOffsets_[block];
 	const unsigned int zStart = block * BLOCK_SIZE;
 	for (unsigned int z = zStart; z < static_cast<unsigned int>(zone_index); ++z)
-		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star);
+		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(StarType);
 
 	const qint64 starDataBase = 28 + static_cast<qint64>(sizeof(uint32_t)) * nr_of_zones;
 	const qint64 fileOffset = starDataBase + static_cast<qint64>(off);
-	const qint64 size = static_cast<qint64>(count) * sizeof(Star);
+	const qint64 size = static_cast<qint64>(count) * sizeof(StarType);
 
 	auto* data = new QByteArray(size, Qt::Uninitialized);
 	{
@@ -232,16 +212,17 @@ const Star* DynamicZoneArray<Star>::loadZoneSync(int zone_index) const
 		file->seek(fileOffset);
 		if (file->read(data->data(), size) != size)
 		{
-			qWarning() << "DynamicZoneArray<Star>::loadZoneSync: read error for zone" << zone_index;
+			qWarning() << "DynamicZoneArray::loadZoneSync: read error for zone" << zone_index;
 			delete data;
 			return nullptr;
 		}
 	}
 	zoneCache_.insert(zone_index, data, data->size());
-	return reinterpret_cast<const Star*>(data->constData());
+	return reinterpret_cast<const StarType*>(data->constData());
 }
 
-void DynamicZoneArray<Star>::prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const
+template<class StarType>
+void DynamicZoneArray<StarType>::prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const
 {
 	auto* core = StelApp::getInstance().getCore();
 	const GeodesicSearchResult* result =
@@ -268,7 +249,8 @@ void DynamicZoneArray<Star>::prefetchRegion(const QVector<SphericalCap>& caps, i
 		qDebug().noquote() << QString("DynamicZoneArray level %1: prefetched %2 zones").arg(level).arg(prefetched);
 }
 
-void DynamicZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport,
+template<class StarType>
+void DynamicZoneArray<StarType>::draw(StelPainter* sPainter, int index, bool isInsideViewport,
 			     const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
 			     int maxMagStarName, float names_brightness,
 			     const QVector<SphericalCap>& boundingCaps,
@@ -281,7 +263,6 @@ void DynamicZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 
-	// Compute cutoff before loadZone() to avoid I/O when catalog is too faint
 	int cutoffMagStep = limitMagIndex;
 	float cutoffMag = 999999.f;
 	if (drawer->getFlagStarMagnitudeLimit())
@@ -292,11 +273,10 @@ void DynamicZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			cutoffMagStep = limitMagIndex;
 	}
 
-	// Minimum possible magIndex = (mag_min - (mag_min - 7000)) * 0.02 = 140
 	if (cutoffMagStep < 140)
 		return;
 
-	const Star* stars = loadZone(index);
+	const StarType* stars = loadZone(index);
 	if (!stars)
 		return;
 
@@ -306,7 +286,7 @@ void DynamicZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	const bool withExtinction = drawer->getFlagHasAtmosphere() &&
 				    extinction.getExtinctionCoefficient() >= 0.01f;
 
-	Q_ASSERT_X(cutoffMagStep <= RCMAG_TABLE_SIZE, "DynamicZoneArray<Star>::draw",
+	Q_ASSERT_X(cutoffMagStep <= RCMAG_TABLE_SIZE, "DynamicZoneArray::draw",
 		   QString("RCMAG_TABLE_SIZE: %1, cutoffMagStep: %2")
 			   .arg(QString::number(RCMAG_TABLE_SIZE), QString::number(cutoffMagStep)).toLatin1());
 
@@ -316,7 +296,7 @@ void DynamicZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 
 	for (uint32_t i = 0; i < zoneSize; ++i)
 	{
-		const Star2& s = stars[i];
+		const StarType& s = stars[i];
 
 		int mag = s.getMag();
 		int magIndex = static_cast<int>((mag - (mag_min - 7000.)) * 0.02);
@@ -327,7 +307,6 @@ void DynamicZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				break;
 		}
 
-		// Star2: use getJ2000Pos for proper motion
 		s.getJ2000Pos(dyrs, v);
 
 		if (withAberration)
@@ -345,13 +324,8 @@ void DynamicZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				{
 					isVisible = false;
 					break;
-	}
-}
-
-// Explicit instantiations
-template class DynamicZoneArray<Star1>;
-template class DynamicZoneArray<Star2>;
-template class DynamicZoneArray<Star3>;
+				}
+			}
 			if (!isVisible)
 				continue;
 		}
@@ -388,14 +362,15 @@ template class DynamicZoneArray<Star3>;
 	}
 }
 
-void DynamicZoneArray<Star>::searchAround(const StelCore* core, int index, const Vec3d &v,
+template<class StarType>
+void DynamicZoneArray<StarType>::searchAround(const StelCore* core, int index, const Vec3d &v,
 				     const double withParallax, const Vec3d diffPos,
 				     double cosLimFov, QList<StelObjectP> &result)
 {
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return;
 
-	const Star* stars = loadZoneSync(index);
+	const StarType* stars = loadZoneSync(index);
 	if (!stars)
 		return;
 
@@ -422,7 +397,8 @@ void DynamicZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	}
 }
 
-void DynamicZoneArray<Star>::searchWithin(const StelCore* core, int index,
+template<class StarType>
+void DynamicZoneArray<StarType>::searchWithin(const StelCore* core, int index,
 				     const SphericalRegionP region,
 				     const double withParallax, const Vec3d diffPos,
 				     const bool /*hipOnly*/, const float maxMag,
@@ -431,7 +407,7 @@ void DynamicZoneArray<Star>::searchWithin(const StelCore* core, int index,
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return;
 
-	const Star* stars = loadZoneSync(index);
+	const StarType* stars = loadZoneSync(index);
 	if (!stars)
 		return;
 
@@ -460,13 +436,14 @@ void DynamicZoneArray<Star>::searchWithin(const StelCore* core, int index,
 	}
 }
 
-StelObjectP DynamicZoneArray<Star>::searchGaiaID(int index, const StarId source_id,
+template<class StarType>
+StelObjectP DynamicZoneArray<StarType>::searchGaiaID(int index, const StarId source_id,
 					    int& matched) const
 {
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return StelObjectP();
 
-	const Star* stars = loadZoneSync(index);
+	const StarType* stars = loadZoneSync(index);
 	if (!stars)
 		return StelObjectP();
 
@@ -482,14 +459,15 @@ StelObjectP DynamicZoneArray<Star>::searchGaiaID(int index, const StarId source_
 	return StelObjectP();
 }
 
-void DynamicZoneArray<Star>::searchGaiaIDepochPos(const StarId source_id, float dyrs,
+template<class StarType>
+void DynamicZoneArray<StarType>::searchGaiaIDepochPos(const StarId source_id, float dyrs,
 					     double & RA, double & DEC, double & Plx,
 					     double & pmra, double & pmdec, double & RV) const
 {
 	(void)dyrs;
 	for (unsigned int z = 0; z < nr_of_zones; ++z)
 	{
-		const Star* stars = loadZoneSync(z);
+		const StarType* stars = loadZoneSync(z);
 		if (!stars)
 			continue;
 
@@ -509,3 +487,7 @@ void DynamicZoneArray<Star>::searchGaiaIDepochPos(const StarId source_id, float 
 		}
 	}
 }
+
+template class DynamicZoneArray<Star1>;
+template class DynamicZoneArray<Star2>;
+template class DynamicZoneArray<Star3>;

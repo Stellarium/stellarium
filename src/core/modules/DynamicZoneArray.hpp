@@ -34,9 +34,9 @@
 
 //! @class DynamicZoneArray
 //! ZoneArray variant that loads star data on demand from disk.
-//! @tparam Star either Star1, Star2 or Star3. Zone table is mmap'd;
+//! @tparam StarType either Star1, Star2 or Star3. Zone table is mmap'd;
 //!   star data is fetched per-zone via seek+read and cached in an LRU QCache.
-template<class Star>
+template<class StarType>
 class DynamicZoneArray : public ZoneArray
 {
 public:
@@ -66,10 +66,10 @@ public:
 				  double & pmra, double & pmdec, double & RV) const override;
 
 	//! Load zone data from disk into memory. Returns pointer to Star array.
-	const Star* loadZone(int zone_index) const;
+	const StarType* loadZone(int zone_index) const;
 
 	//! Synchronous load — blocks until data is ready. For search operations.
-	const Star* loadZoneSync(int zone_index) const;
+	const StarType* loadZoneSync(int zone_index) const;
 
 	//! Get star count for a zone (0 if empty).
 	uint32_t zoneStarCount(int zone_index) const { return zoneCounts_[zone_index]; }
