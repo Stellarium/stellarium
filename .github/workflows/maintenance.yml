@@ -58,5 +58,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Linting JSON
-        run: find ${{github.workspace}}/{src,plugins,nebulae,skycultures} -iname '*.json' -exec jsonlint -S {} +
+      - name: Linting JSON/GeoJSON
+        run: find ${{github.workspace}}/{src,plugins,nebulae,skycultures} -iname '*.*json' -exec jsonlint -S {} +
+        

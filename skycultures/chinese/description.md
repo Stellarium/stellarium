@@ -527,7 +527,7 @@ The cultural connotations of the name cannot be explained perfectly, because tho
 
 This sky culture was initially contributed by *Karrie Berglund* of Digitalis Education Solutions, Inc. based on Hong Kong Space Museum star maps (no longer available online).
 
-Sun Shuwei [sunshuwei.hi@foxmail.com](mailto:sunshuwei.hi@foxmail.com) replenishes more than 200 Xingguans and more than 3,000 stars, based primarily on the book*Chinese and Western Contrast Star Chart and Catalogue 1950.0* by Yi Shitong, and add the description.
+Sun Shuwei [sunshuwei.hi@foxmail.com](mailto:sunshuwei.hi@foxmail.com) replenishes more than 200 Xingguans and more than 3,000 stars, based primarily on the book *Chinese and Western Contrast Star Chart and Catalogue 1950.0* by Yi Shitong, and add the description.
 
 ## License
 
