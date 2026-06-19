@@ -4607,7 +4607,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			allowDrawHalo = false;
 	}
 
-	if (isMoon && !drawMoonHalo)
+	if (isMoon && (!drawMoonHalo||eclipseFactor<0.1))
 		allowDrawHalo = false;
 
 	// Draw the halo if enabled in the ssystem_*.ini files (+ special case for backward compatible for the Sun)
