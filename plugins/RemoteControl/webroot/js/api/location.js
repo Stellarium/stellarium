@@ -119,10 +119,10 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
                 url: "/api/location/regionlist",
                 success: callback,
                 error: function(xhr, status, errorThrown) {
-                    console.log("Error updating country list");
+                    console.log("Error updating region list");
                     console.log("Error: " + errorThrown.message);
                     console.log("Status: " + status);
-                    alert(rc.tr("Could not retrieve country list"));
+                    alert(rc.tr("Could not retrieve region list"));
                 }
             });
         },
