@@ -34,8 +34,9 @@
 
 //! @class DynamicZoneArray
 //! ZoneArray variant that loads star data on demand from disk.
-//! Supports Star2 (type=1) records. Zone table is mmap'd; star data is
-//! fetched per-zone via seek+read and cached in an LRU QCache.
+//! @tparam Star either Star1, Star2 or Star3. Zone table is mmap'd;
+//!   star data is fetched per-zone via seek+read and cached in an LRU QCache.
+template<class Star>
 class DynamicZoneArray : public ZoneArray
 {
 public:
@@ -64,50 +65,30 @@ public:
 				  double & RA, double & DEC, double & Plx,
 				  double & pmra, double & pmdec, double & RV) const override;
 
-	//! Load zone data from disk into memory. Returns pointer to Star2 array.
-	const Star2* loadZone(int zone_index) const;
+	//! Load zone data from disk into memory. Returns pointer to Star array.
+	const Star* loadZone(int zone_index) const;
 
 	//! Synchronous load — blocks until data is ready. For search operations.
-	const Star2* loadZoneSync(int zone_index) const;
+	const Star* loadZoneSync(int zone_index) const;
 
 	//! Get star count for a zone (0 if empty).
 	uint32_t zoneStarCount(int zone_index) const { return zoneCounts_[zone_index]; }
 
 	//! Prefetch zones in the given viewport region (async-friendly).
-	//! Zones already in cache are skipped. Call after draw() to warm the cache
-	//! for anticipated user scrolling.
 	void prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const;
 
 private:
-	//! Zone size granularity for the block-based offset table.
-	//! Smaller values = smaller block table, faster per-zone block-local summation.
 	static constexpr int BLOCK_SIZE = 128;
 
-	//! Mmap'd zone table from the .cat file (star count per zone, N × 4 bytes).
 	const uint32_t* zoneCounts_;
-
-	//! Mmap start for zone table unmap.
 	uchar* zoneTableMmapStart_;
-
-	//! Block-level cumulative star data offsets.
-	//! blockOffsets_[b] = byte offset of the first star in zone b*BLOCK_SIZE,
-	//! relative to the star data area start.
 	std::vector<uint64_t> blockOffsets_;
 
-	//! LRU cache of zone data (zone index → raw Star2 buffer).
-	//! QCache takes ownership and deletes on eviction.
 	mutable QCache<int, QByteArray> zoneCache_;
-
-	//! Pending async loads (zone index → future QByteArray*).
 	mutable QHash<int, QFuture<QByteArray*>> pendingLoads_;
-
-	//! Mutex protecting file seek+read from concurrent async loads.
 	mutable QMutex fileMutex_;
-
-	//! Shutdown flag: set to false in destructor, checked by async workers.
 	mutable bool fileValid_{true};
 
-	//! Drain completed async loads into the cache. Call from the main thread.
 	void drainPendingLoads() const;
 };
 

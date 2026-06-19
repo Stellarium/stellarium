@@ -29,7 +29,7 @@ void TestDynamicLoading::initTestCase()
 		dir.setNameFilters(QStringList(p));
 		auto files = dir.entryList(QDir::Files);
 		return files.isEmpty() ? nullptr
-			: dynamic_cast<DynamicZoneArray*>(ZoneArray::create(dir.path()+"/"+files[0], false));
+			: dynamic_cast<DynamicZoneArray<Star2>*>(ZoneArray::create(dir.path()+"/"+files[0], false));
 	};
 	stars9  = load("stars_9_*.cat");
 	stars10 = load("stars_10_*.cat");

@@ -97,6 +97,9 @@ public:
 	//! Dummy method that does nothing. See subclass implementation.
 	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex)}
 
+	//! Dummy method that does nothing. Overridden by DynamicZoneArray.
+	virtual void prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const {Q_UNUSED(caps); Q_UNUSED(maxGridLevel);}
+
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax, const Vec3d diffPos,
 							  double cosLimFov, QList<StelObjectP > &result) = 0;

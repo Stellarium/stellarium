@@ -24,6 +24,9 @@
 
 class DynamicZoneArray;
 
+template<class Star>
+class DynamicZoneArray;
+
 class TestDynamicLoading : public QObject
 {
 	Q_OBJECT
@@ -37,8 +40,8 @@ private slots:
 	void testCacheReuse();
 
 private:
-	DynamicZoneArray* stars9  = nullptr;
-	DynamicZoneArray* stars10 = nullptr;
+	DynamicZoneArray<Star2>* stars9  = nullptr;
+	DynamicZoneArray<Star2>* stars10 = nullptr;
 };
 
 #endif // TESTDYNAMICLOADING_HPP

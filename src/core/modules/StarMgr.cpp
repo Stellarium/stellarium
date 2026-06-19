@@ -1459,13 +1459,10 @@ void StarMgr::draw(StelCore* core)
 		expandedCaps.append(core->getVisibleSkyArea());
 		for (auto* z : gridLevels)
 		{
-			auto* dynZ = dynamic_cast<DynamicZoneArray*>(z);
-			if (!dynZ) continue;
-			// Skip if this level's brightest star is invisible at the current FOV
 			RCMag dummy;
 			if (!skyDrawer->computeRCMag(0.001f * z->mag_min, &dummy))
 				continue;
-			dynZ->prefetchRegion(expandedCaps, maxSearchLevel);
+			z->prefetchRegion(expandedCaps, maxSearchLevel);
 		}
 	}
 
