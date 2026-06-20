@@ -422,8 +422,8 @@ Implemented by LocationService::getImpl
 \paragraph rcLocationServiceList list
 Returns the list of all stored location IDs (keys of StelLocationMgr::getAllMap) as JSON string array
 
-\paragraph rcLocationServiceCountrylist countrylist
-Returns the list of all known countries (StelLocaleMgr::getAllCountryNames), as a JSON array of objects of format
+\paragraph rcLocationServiceRegionlist regionlist
+Returns the list of all known regions (StelLocationMgr::getRegionNames), as a JSON array of objects of format
 @code
 {
     name, //the english country name
