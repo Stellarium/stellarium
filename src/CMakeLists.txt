@@ -255,8 +255,6 @@ SET(stellarium_lib_SRCS
      core/modules/StarWrapper.hpp
      core/modules/ToastMgr.hpp
      core/modules/ToastMgr.cpp
-     core/modules/DynamicZoneArray.cpp
-     core/modules/DynamicZoneArray.hpp
      core/modules/ZoneArray.cpp
      core/modules/ZodiacalLight.hpp
      core/modules/ZodiacalLight.cpp

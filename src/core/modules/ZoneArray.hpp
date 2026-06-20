@@ -32,7 +32,14 @@
 
 #include <QString>
 #include <QFile>
+#include <QCache>
+#include <QByteArray>
+#include <QFuture>
+#include <QHash>
+#include <QMutex>
+#include <QtConcurrent>
 #include <QDebug>
+#include <vector>
 
 #ifdef __OpenBSD__
 #include <unistd.h>
@@ -225,6 +232,59 @@ public:
 	//! Add Hipparcos information for all stars in this catalog into @em hipIndex.
 	//! @param hipIndex array of Hipparcos info structs
 	void updateHipIndex(HipIndexStruct hipIndex[]) const override;
+};
+
+//! @class DynamicZoneArray
+//! ZoneArray variant that loads star data on demand from disk.
+//! @tparam StarType either Star1, Star2 or Star3. Zone table is mmap'd;
+//!   star data is fetched per-zone via seek+read and cached in an LRU QCache.
+template<class StarType>
+class DynamicZoneArray : public ZoneArray
+{
+public:
+	DynamicZoneArray(const QString& fname, QFile* file, int level, int mag_min, bool byte_swap);
+	~DynamicZoneArray(void) override;
+
+	void draw(StelPainter* sPainter, int index, bool isInsideViewport,
+		  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
+		  int maxMagStarName, float names_brightness,
+		  const QVector<SphericalCap>& boundingCaps,
+		  const bool withAberration, const Vec3d vel, const double withParallax,
+		  const Vec3d diffPos, const bool withCommonNameI18n) const override;
+
+	void searchAround(const StelCore* core, int index, const Vec3d &v,
+			  const double withParallax, const Vec3d diffPos,
+			  double cosLimFov, QList<StelObjectP> &result) override;
+
+	void searchWithin(const StelCore* core, int index, const SphericalRegionP region,
+			  const double withParallax, const Vec3d diffPos,
+			  const bool hipOnly, const float maxMag,
+			  QList<StelObjectP> &result) const override;
+
+	StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const override;
+
+	void searchGaiaIDepochPos(const StarId source_id, float dyrs,
+				  double & RA, double & DEC, double & Plx,
+				  double & pmra, double & pmdec, double & RV) const override;
+
+	const StarType* loadZone(int zone_index) const;
+	const StarType* loadZoneSync(int zone_index) const;
+	uint32_t zoneStarCount(int zone_index) const { return zoneCounts_[zone_index]; }
+	void prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const;
+
+private:
+	static constexpr int BLOCK_SIZE = 128;
+
+	uint32_t* zoneCounts_;
+	uchar* zoneTableMmapStart_;
+	std::vector<uint64_t> blockOffsets_;
+
+	mutable QCache<int, QByteArray> zoneCache_;
+	mutable QHash<int, QFuture<QByteArray*>> pendingLoads_;
+	mutable QMutex fileMutex_;
+	mutable bool fileValid_{true};
+
+	void drainPendingLoads() const;
 };
 
 #endif // ZONEARRAY_HPP
