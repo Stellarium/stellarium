@@ -69,6 +69,7 @@ Pulsar::Pulsar(const QVariantMap& map)
 	, s600(0.)
 	, s1400(0.)
 	, distance(0.)
+	, adistance(0.)
 	, glitch(-1)
 	, notes("")
 {
@@ -98,7 +99,8 @@ Pulsar::Pulsar(const QVariantMap& map)
 	s400 = map.value("s400").toFloat();
 	s600 = map.value("s600").toFloat();
 	s1400 = map.value("s1400").toFloat();
-	distance = map.value("adistance").toFloat();
+	distance = map.value("distance").toFloat();
+	adistance = map.value("adistance").toFloat();
 	glitch = map.value("glitch").toInt();
 	notes = map.value("notes").toString();
 
@@ -143,7 +145,8 @@ QVariantMap Pulsar::getMap(void) const
 	map["s400"] = s400;
 	map["s600"] = s600;
 	map["s1400"] = s1400;
-	map["adistance"] = distance;
+	map["distance"] = distance;
+	map["adistance"] = adistance;
 	map["glitch"] = glitch;
 	map["notes"] = notes;
 
@@ -259,11 +262,22 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (distance>0.f)
 		{
 			oss << QString("%1: %2 %3 (%4 %5)<br />")
-			       .arg(q_("Distance based on an association with another object"))
+			       .arg(q_("Distance based on electron density model"))
 			       .arg(distance)
 			       //TRANSLATORS: Unit of measure for distance - kiloparsecs
 			       .arg(qc_("kpc", "distance"))
 			       .arg(distance*3261.563777)
+			       //TRANSLATORS: Unit of measure for distance - light years
+			       .arg(qc_("ly", "distance"));
+		}
+		if (adistance>0.f)
+		{
+			oss << QString("%1: %2 %3 (%4 %5)<br />")
+			       .arg(q_("Distance based on an association with another object"))
+			       .arg(adistance)
+			       //TRANSLATORS: Unit of measure for distance - kiloparsecs
+			       .arg(qc_("kpc", "distance"))
+			       .arg(adistance*3261.563777)
 			       //TRANSLATORS: Unit of measure for distance - light years
 			       .arg(qc_("ly", "distance"));
 		}
@@ -319,6 +333,7 @@ QVariantMap Pulsar::getInfoMap(const StelCore *core) const
 	map["s600"] = s600;
 	map["s1400"] = s1400;
 	map["distance"] = distance;
+	map["adistance"] = adistance;
 	map["glitch"] = glitch;
 	map["notes"] = notes;
 	return map;
