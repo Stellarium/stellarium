@@ -28,8 +28,10 @@
 #include <QDebug>
 #include <QFile>
 
+extern unsigned int stel_bswap_32(unsigned int val);
+
 template<class StarType>
-DynamicZoneArray<StarType>::DynamicZoneArray(const QString& fname, QFile* file, int level, int mag_min)
+DynamicZoneArray<StarType>::DynamicZoneArray(const QString& fname, QFile* file, int level, int mag_min, bool byte_swap)
 	: ZoneArray(fname, file, level, mag_min)
 	, zoneCounts_(nullptr)
 	, zoneTableMmapStart_(nullptr)
@@ -45,7 +47,14 @@ DynamicZoneArray<StarType>::DynamicZoneArray(const QString& fname, QFile* file, 
 		nr_of_stars = 0;
 		return;
 	}
-	zoneCounts_ = reinterpret_cast<const uint32_t*>(zoneTableMmapStart_);
+
+	zoneCounts_ = reinterpret_cast<uint32_t*>(zoneTableMmapStart_);
+
+	if (byte_swap)
+	{
+		for (unsigned int z = 0; z < nr_of_zones; ++z)
+			zoneCounts_[z] = stel_bswap_32(zoneCounts_[z]);
+	}
 
 	const unsigned int numBlocks = (nr_of_zones + BLOCK_SIZE - 1) / BLOCK_SIZE + 1;
 	blockOffsets_.resize(numBlocks);
@@ -62,8 +71,6 @@ DynamicZoneArray<StarType>::DynamicZoneArray(const QString& fname, QFile* file, 
 		}
 		blockOffsets_[b + 1] = runningOffset;
 	}
-
-	const qint64 starDataBase = 28 + zoneTableSize;
 
 	zoneCache_.setMaxCost(128 * 1024 * 1024);
 

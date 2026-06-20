@@ -32,7 +32,7 @@
 #include <Windows.h>
 #endif
 
-static unsigned int stel_bswap_32(unsigned int val)
+unsigned int stel_bswap_32(unsigned int val)
 {
 	return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
 	       (((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
@@ -208,7 +208,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new DynamicZoneArray<Star2>(catalogFilePath, file, static_cast<int>(level), static_cast<int>(mag_min));
+				rval = new DynamicZoneArray<Star2>(catalogFilePath, file, static_cast<int>(level), static_cast<int>(mag_min), byte_swap);
 			}
 			break;
 		case 2:
@@ -218,7 +218,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new DynamicZoneArray<Star3>(catalogFilePath, file, static_cast<int>(level), static_cast<int>(mag_min));
+				rval = new DynamicZoneArray<Star3>(catalogFilePath, file, static_cast<int>(level), static_cast<int>(mag_min), byte_swap);
 			}
 			break;
 		default:

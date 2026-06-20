@@ -40,7 +40,7 @@ template<class StarType>
 class DynamicZoneArray : public ZoneArray
 {
 public:
-	DynamicZoneArray(const QString& fname, QFile* file, int level, int mag_min);
+	DynamicZoneArray(const QString& fname, QFile* file, int level, int mag_min, bool byte_swap);
 	~DynamicZoneArray(void) override;
 
 	void draw(StelPainter* sPainter, int index, bool isInsideViewport,
@@ -80,7 +80,7 @@ public:
 private:
 	static constexpr int BLOCK_SIZE = 128;
 
-	const uint32_t* zoneCounts_;
+	uint32_t* zoneCounts_;
 	uchar* zoneTableMmapStart_;
 	std::vector<uint64_t> blockOffsets_;
 
