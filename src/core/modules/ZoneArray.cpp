@@ -108,7 +108,7 @@ static inline int ReadFloat(QFile& file, float &x)
 #endif
 #endif
 
-ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, bool useDynamic)
+ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, bool use_dynamic)
 {
 	QString dbStr; // for debugging output.
 	QFile* file = new QFile(catalogFilePath);
@@ -206,7 +206,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, bool
 			{
 				dbStr += "warning - unsupported version ";
 			}
-			else if (useDynamic)
+			else if (use_dynamic)
 			{
 				rval = new DynamicZoneArray<Star2>(catalogFilePath, file, static_cast<int>(level), static_cast<int>(mag_min), byte_swap);
 			}
@@ -220,7 +220,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, bool
 			{
 				dbStr += "warning - unsupported version ";
 			}
-			else if (useDynamic)
+			else if (use_dynamic)
 			{
 				rval = new DynamicZoneArray<Star3>(catalogFilePath, file, static_cast<int>(level), static_cast<int>(mag_min), byte_swap);
 			}
