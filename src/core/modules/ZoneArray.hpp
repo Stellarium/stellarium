@@ -82,7 +82,7 @@ public:
 	//! @param extended_file_name path of the star catalog to load from
 	//! @param use_mmap whether or not to mmap the star catalog
 	//! @return an instance of SpecialZoneArray or HipZoneArray
-	static ZoneArray *create(const QString &extended_file_name, bool use_mmap);
+	static ZoneArray *create(const QString &extended_file_name, bool use_mmap, bool useDynamic = false);
 	virtual ~ZoneArray()
 	{
 		nr_of_zones = 0;
