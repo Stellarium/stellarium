@@ -153,7 +153,7 @@ public:
 	//! @return the converted display luminance in cd/m^2
 	float adaptLuminance(float worldLuminance) const
 	{
-		return std::pow(static_cast<float>(inputScale*worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2;
+		return std::pow(inputScale*worldLuminance*M_PIf*0.0001f, alphaWaOverAlphaDa) * term2;
 	}
 
 	//! Return adapted luminance from display to world
@@ -161,7 +161,7 @@ public:
 	//! @return the converted world luminance in cd/m^2
 	float reverseAdaptLuminance(float displayLuminance) const
 	{
-		return static_cast<float>(std::pow(static_cast<float>(displayLuminance/term2),1.f/alphaWaOverAlphaDa)/(inputScale*M_PI*0.0001f));
+		return std::pow(displayLuminance/term2, 1.f/alphaWaOverAlphaDa)/(inputScale*M_PIf*0.0001f);
 	}
 	
 	//! Return adapted luminance from world to display with 1 corresponding to full display white
@@ -186,7 +186,7 @@ public:
 	//! @return the converted display set at the pFact power. Luminance with 1 corresponding to full display white. The value can be more than 1 when saturated.
 	float adaptLuminanceScaledLn(float lnWorldLuminance, float pFact=0.5f) const
 	{
-		const float lnPix0p0001 = static_cast<float>(log(M_PI*1e-4)); //  -8.0656104861f; // conversion factor, log(lambert to cd/m^2). See Devlin et al. 4.2
+		const float lnPix0p0001 = std::log(M_PIf*1e-4f); //  -8.0656104861f; // conversion factor, log(lambert to cd/m^2). See Devlin et al. 4.2
 		return std::exp(((lnInputScale+lnWorldLuminance+lnPix0p0001)*alphaWaOverAlphaDa+lnTerm2+lnOneOverMaxdL)*pFact);
 	}
 	
