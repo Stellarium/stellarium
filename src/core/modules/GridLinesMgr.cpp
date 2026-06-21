@@ -860,7 +860,7 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 			// resizing the shadow together with the Moon would require considerable trickery.
 			// It seems better to just switch it off.
 			static SolarSystem *sSystem=GETSTELMODULE(SolarSystem);
-			if (sSystem->getFlagMoonScale()) return;
+			if (sSystem->getFlagMoonScale() && (sSystem->getMoon()->getSphereScale()!=1.0)) return;
 
 			// We compute the shadow circle attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
 			const Vec3d pos=earth->getEclipticPos();
