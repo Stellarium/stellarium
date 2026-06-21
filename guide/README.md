@@ -2,20 +2,20 @@
 
 Georg Zotti, December 28, 2017
 
-Stellarium's user guide (SUG) for versions 0.15 and later has been re-assembled from the Stellarium wiki by Alexander Wolf and Georg Zotti and greatly extended into what they thought was a complete and optimal format: hyperlinked PDF, created by PDFLaTeX. LaTeX is intimidating to the uninitiated, but the best system in the world for those who are. By V0.17 it had almost 350 pages and came as 28MB PDF file.
+Stellarium's user guide (SUG) for versions 0.15 and later has been re-assembled from the Stellarium wiki by Alexander Wolf and Georg Zotti and greatly extended into what they thought was a complete and optimal format: hyperlinked PDF, created by PDFLaTeX. LaTeX is intimidating to the uninitiated, but the best system in the world for those who are. By V0.17 it had almost 350 pages and came as 28MB PDF file. 
 
-During moving the project to Github some demand has been expressed for again providing an online version of the manual, i.e., HTML. Other developers discussed even leaving LaTeX, but the guide editors resist moving. We decided to widen our typesetting capabilities further by trying to make the PDF smaller, and to make also an HTML version using `htlatex` or something similar.
+During moving the project to Github some demand has been expressed for again providing an online version of the manual, i.e., HTML. Other developers discussed even leaving LaTeX, but the guide editors resist moving. We decided to widen our typesetting capabilities further by trying to make the PDF smaller, and to make also an HTML version using `htlatex` or something similar. 
 
 The interesting part is now getting all tools right to create the documents. Of course `make` is applied by using a Makefile. But regarding variants in TeX Systems, our multi-platform universe provides many options.
 
 ## Installation of tools
 ### Windows
 
-The classic TeX environment on Windows is MikTeX, a very complete TeX environment with its own package management system. Install it with the option to download missing packages as required.
+The classic TeX environment on Windows is MikTeX, a very complete TeX environment with its own package management system. Install it with the option to download missing packages as required. 
 
-Alternatively, to be inline with the other Systems, consider TeXlive also for Windows (https://www.tug.org/texlive/windows.html).
+Alternatively, to be inline with the other Systems, consider TeXlive also for Windows (https://www.tug.org/texlive/windows.html). 
 
-Windows is still the most common desktop platform in 2019, like it or not. However, its command shell is an embarrassing relic of the DOS era and a far cry from tools available on the tiniest Linux system.
+Windows is still the most common desktop platform in 2019, like it or not. However, its command shell is an embarrassing relic of the DOS era and a far cry from tools available on the tiniest Linux system. 
 The shortcomings of the command line have brought several Options for Linux-affine working:
 
 * GNUWin32 tools
@@ -23,13 +23,13 @@ The shortcomings of the command line have brought several Options for Linux-affi
 * MinGW
 * Windows Subsystem for Linux (WSL): Ubuntu for Windows 10. Consider installing Version 18.04 LTS.
 
-In addition, the GIT Version Control System brings its own MinGW-based git shell.
+In addition, the GIT Version Control System brings its own MinGW-based git shell. 
 
 The GNUWin32 project provides many important tools to fill in the gaps. From GnuWin32, we need to install make and uname. We also need to install GhostScript. Make sure the relevant programs are found in PATH. Also install Clink from http://mridgers.github.io/clink.
 
-Cygwin and Ubuntu can bring their own optional TeXLive installations, which may however be a bit outdated. If you have problems with the following setup, consider installing current TeXlive (see below). But if you have already MikTeX installed, you can use it from the MinGW/git, cygwin or Ubuntu bash shell and save the diskspace (up to a few gigabytes) for a TeX Installation. However, while cygwin and MinGW based shells will find executables in the Windows PATH called without the .exe extension, WSL/Ubuntu's shell needs the .exe in the called filenames.
+Cygwin and Ubuntu can bring their own optional TeXLive installations, which may however be a bit outdated. If you have problems with the following setup, consider installing current TeXlive (see below). But if you have already MikTeX installed, you can use it from the MinGW/git, cygwin or Ubuntu bash shell and save the diskspace (up to a few gigabytes) for a TeX Installation. However, while cygwin and MinGW based shells will find executables in the Windows PATH called without the .exe extension, WSL/Ubuntu's shell needs the .exe in the called filenames. 
 
-The Makefile is able to detect all these setups on Windows. You can check with
+The Makefile is able to detect all these setups on Windows. You can check with 
 
 ```
 make diag
@@ -41,7 +41,7 @@ whether your System is properly identified. Note that it does not check whether 
 
 These instructions are based on Ubuntu and TeXlive (https://www.tug.org/texlive/quickinstall.html). Find out and add the changes required for your System.
 
-On Ubuntu 22.04 and later the following should work:
+On Ubuntu 22.04 and later the following should work: 
 
 ```
 sudo apt-get install texlive-base texlive-bibtex-extra texlive-latex-recommended \
@@ -58,7 +58,7 @@ It is assumed that some system similar to TeXlive is available for macOS. See ht
 
 ## Building the PDF Guide
 
-if you run `make` or `make help`, you will see some instructions.
+if you run `make` or `make help`, you will see some instructions. 
 
 With a completely configured system, all that should be required is
 
@@ -66,7 +66,7 @@ With a completely configured system, all that should be required is
 make SUG
 ```
 
-* `make SUG` creates guide.pdf (full resolution) and a compressed version, SUG.pdf, which needs only about 33% of the size.
+* `make SUG` creates guide.pdf (full resolution) and a compressed version, SUG.pdf, which needs only about 33% of the size. 
 
 You will find guide.pdf (full resolution) and the compressed version, SUG.pdf.
 
@@ -81,7 +81,7 @@ make html
 make clean
 ```
 
-* `make html` creates the online version in a subdirectory.
+* `make html` creates the online version in a subdirectory. 
 * `make clean` removes intermediate files. PDF and HTML directory will remain.
 * `make distclean` deletes all created files, also the PDF and HTML files.
 
@@ -95,13 +95,13 @@ The Stellarium Online Guide currently is a set of HTML pages cut at the chapter 
 
 
 ### State
-From what we know already:
+From what we know already: 
 
-`htlatex` does not create HTML from the TeX files, but it creates a classical DVI file which is then further processed by the HTML creation process `ht4lt`. Therefore it seems useful to make sure a classical dvi file can be created. I added a dvi target for this.
+`htlatex` does not create HTML from the TeX files, but it creates a classical DVI file which is then further processed by the HTML creation process `ht4lt`. Therefore it seems useful to make sure a classical dvi file can be created. I added a dvi target for this. 
 
 ### Detect the processor
 
-We must discern pdflatex from Latex and htlatex.
+We must discern pdflatex from Latex and htlatex. 
 
 ```
 \ifpdf
@@ -146,7 +146,7 @@ However, now Biber complains with a Version clash about outdated biblatex. Biber
 
 In case you are on Cygwin: Install fontconfig, ghostscript, libXaw7 and ncurses from the Cygwin package Manager, then you can join Ubuntuists in the next step.
 
-I.e., download from http://tug.org/texlive/acquire-netinstall.html and run
+I.e., download from http://tug.org/texlive/acquire-netinstall.html and run 
 
 ```
 tar zxvf install-tl-DATE.tar.gz
@@ -170,7 +170,7 @@ To install some new package, e.g. titling, from TUG:
 tlmgr install titling
 ```
 
-To update,
+To update, 
 
 ```
 (sudo apt-get install xzdec)
@@ -181,7 +181,7 @@ tlmgr update --all
 
 ## Why biblatex&biber, and not the classic bibtex?
 
-biblatex&biber is much more flexible. See
+biblatex&biber is much more flexible. See 
 https://tex.stackexchange.com/questions/25701/bibtex-vs-biber-and-biblatex-vs-natbib/25702
 However, both packages need to be updated in sync.
 
@@ -216,13 +216,13 @@ sudo fmtutil-sys --all
 
 ## Forbidden things
 
-Very odd: It seems section labels must not contain the name ":config". Or we have far too many labels. This seems to be a problem in the chapters with many tables. I had to reduce the number of valid labels.  Else: stack size exceeded.
+Very odd: It seems section labels must not contain the name ":config". Or we have far too many labels. This seems to be a problem in the chapters with many tables. I had to reduce the number of valid labels.  Else: stack size exceeded. 
 
 # Help Wanted!
 
 If you have some experience with tex4ht to create a pleasing online version of Stellarium's User Guide, please feel free to contribute your TeXnical wisdom. Discuss with the team what kind of format is most useful. Apparently a frameset is possible but requires some extra work in the configuration. (And it is pretty 90ies-ish. But what's wrong with that? Do something better then.) "The LaTeX Web Companion" will be your best friend, it is surprising how little in-depth information is available online.
 
-Some info is in
+Some info is in 
 
-* https://tex.stackexchange.com/questions/317686/trouble-building-a-site-with-frames-using-tex4ht and also
+* https://tex.stackexchange.com/questions/317686/trouble-building-a-site-with-frames-using-tex4ht and also 
 * http://cvr.cc/?p=504.

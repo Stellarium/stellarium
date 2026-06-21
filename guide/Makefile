@@ -18,8 +18,8 @@
 # Debian, Ubuntu: apt-get install make texlive-full gs pdftk. 
 # Others: make sure to install the abovementioned packages for your distribution.
 #
-# MAC OS X
-# ==========
+# MACOS
+# =====
 # * TODO: please add instructions here.
 
 

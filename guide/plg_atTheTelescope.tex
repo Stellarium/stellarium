@@ -13,8 +13,8 @@ provides field of view hints for telescopes, oculars and sensors, and
 TelescopeControl (section~\ref{sec:plugins:TelescopeControl}), which
 allows you to send GOTO commands to most motorized telescope mounts. Other
 GOTO telescopes are supported by external programs which you must
-install separately: \program{RTS2} (\ref{sec:plugins:TelescopeControl:RTS2}),
-\program{INDI} (\ref{sec:plugins:TelescopeControl:INDI}) or \program{ASCOM} (\ref{sec:plugins:TelescopeControl:ASCOM}).
+install separately: \program{RTS2} (\ref{sec:plugins:TelescopeControl:RTS2}), 
+\program{INDI} (\ref{sec:plugins:TelescopeControl:INDI}) or \program{ASCOM} (\ref{sec:plugins:TelescopeControl:ASCOM}). 
 This can also help DIY hardware tinkerers who like to build their own control systems (section~\ref{sec:plugins:TelescopeControl:Other}).
 
 In addition, the Observability plugin (\ref{sec:plugins:Observability})
@@ -29,16 +29,16 @@ show the orientations of more complicated camera mosaics.
 
 This plugin serves several purposes:
 \begin{itemize}
-\item to see what the sky looks like through a particular combination of eyepiece,
-  lens (Barlow or Shapley types) and telescope. This plugin helps to get an idea of
-  what you should see when looking through a physical telescope, and understand why
-  one eyepiece may be better suited to observe a particular target than another.
-  This can also be very useful for deciding what telescope is best suited to a style of viewing.
+\item to see what the sky looks like through a particular combination of eyepiece, 
+  lens (Barlow or Shapley types) and telescope. This plugin helps to get an idea of 
+  what you should see when looking through a physical telescope, and understand why 
+  one eyepiece may be better suited to observe a particular target than another. 
+  This can also be very useful for deciding what telescope is best suited to a style of viewing. 
   And with the support for binoculars, you also have the ability to understand just about any type of optics-enhanced visual observing.
-\item to show what a particular combination of camera and telescope (or photographic lens) would be able to photograph of the sky.
-\item lastly, with the help of the Telrad sight, understand where object in the sky are in relation to each other.
+\item to show what a particular combination of camera and telescope (or photographic lens) would be able to photograph of the sky. 
+\item lastly, with the help of the Telrad sight, understand where object in the sky are in relation to each other. 
 %This can be very useful if you have a non-GOTO telescope, and to get an idea of how to star-hop from a known location to an area of interest.
-This can be helpful for star-hopping with a non-GOTO telescope.
+This can be helpful for star-hopping with a non-GOTO telescope. 
 \end{itemize}
 
 \noindent None of these activities can take the place of hands-on experience, but they are a good way to supplement your visual astronomy interests.
@@ -46,8 +46,8 @@ This can be helpful for star-hopping with a non-GOTO telescope.
 \subsection{Using the Ocular plugin}
 \label{sec:sec:plugins:Oculars:UsingPlugin}
 
-The plugin is controlled through a popup menu or through an on-screen control panel (see top right corner on screens in fig.~\ref{fig:plugins:Oculars:TeleVue}).
-By default, the hot key to display the popup is \keys{\Alt+O} (\keys{Option+O} for Mac users).
+The plugin is controlled through a popup menu or through an on-screen control panel (see top right corner on screens in fig.~\ref{fig:plugins:Oculars:TeleVue}). 
+By default, the hot key to display the popup is \keys{\Alt+O} (\keys{Option+O} for Mac users). 
 This can be changed in the \menu{Editing Keyboard Shortcuts} window (see section~\ref{sec:gui:help:hotkeys}). The menu will popup where your cursor is located.
 
 \begin{figure}[t]\centering
@@ -56,19 +56,19 @@ This can be changed in the \menu{Editing Keyboard Shortcuts} window (see section
 \label{fig:plugins:Oculars:Usage:Menu}
 \end{figure}
 
-The options available in the popup menu depend on what you are currently doing.
+The options available in the popup menu depend on what you are currently doing. 
 In the default menu, you can choose to configure the plugin, activate a CCD, or activate the Telrad finder (see fig.~\ref{fig:plugins:Oculars:Usage:Menu}).
-The menu is navigated by either the arrow keys on your keyboard or by your mouse.
-The \keys{\arrowkeyup} and \keys{\arrowkeydown} arrow keys move the selection up or down the menu,
+The menu is navigated by either the arrow keys on your keyboard or by your mouse. 
+The \keys{\arrowkeyup} and \keys{\arrowkeydown} arrow keys move the selection up or down the menu, 
 and the \keys{\arrowkeyleft} and \keys{\arrowkeyright}  arrow keys display or hide sub-menus. \keys{\return} activates an option.
 
 \paragraph{Telrad Finder}
 
-The Telrad view can be used without defining any of the items below.
-As a reflex sight is non-magnifying, this feature can only be enabled when no eyepiece is selected.
+The Telrad view can be used without defining any of the items below. 
+As a reflex sight is non-magnifying, this feature can only be enabled when no eyepiece is selected. 
 You still may want to zoom in a bit to better see which stars are in the circles (fig.~\ref{fig:plugins:Oculars:Usage:Telrad}).
-The three circles that appear in the center of the screen are $0.5\degree$, $2.0\degree$, and $4.0\degree$ in diameter.
-They stay centered in the screen, so move the ``telescope'' (click-drag the background) to center the circles on the object of interest.
+The three circles that appear in the center of the screen are $0.5\degree$, $2.0\degree$, and $4.0\degree$ in diameter. 
+They stay centered in the screen, so move the ``telescope'' (click-drag the background) to center the circles on the object of interest. 
 
 \begin{figure}[b]\centering
 \includegraphics[width=\textwidth]{oculars_usage_telrad.png}
@@ -93,20 +93,20 @@ While the Telrad finder is active, you can not activate a CCD with the popup men
 \label{fig:plugins:Oculars:Usage:CCD:Info}
 \end{figure}
 
-\noindent This is a great way to get an idea of what a particular camera will be able to capture when attached to a particular telescope or lens.
-For using camera lenses, describe them as telescope with the appropriate values for the lens.
-When active, this feature will display a red bounding box of the area that will be captured,
+\noindent This is a great way to get an idea of what a particular camera will be able to capture when attached to a particular telescope or lens. 
+For using camera lenses, describe them as telescope with the appropriate values for the lens. 
+When active, this feature will display a red bounding box of the area that will be captured, 
 as well as zoom in to give a better view of the surroundings. You can manually zoom in or out from there.
 
-The default CCD view will appear similar to fig. \ref{fig:plugins:Oculars:Usage:CCD} or,
-when you are working without the on-screen control panel, the information area in the upper right hand corner
+The default CCD view will appear similar to fig. \ref{fig:plugins:Oculars:Usage:CCD} or, 
+when you are working without the on-screen control panel, the information area in the upper right hand corner 
 also shows angular size captured by the CCD (see fig. \ref{fig:plugins:Oculars:Usage:CCD:Info}).
 
 
-When a CCD view is displayed, the popup menu changes  as seen in  fig. \ref{fig:plugins:Oculars:Usage:CCD:Menu}.
-You can select what telescope to use, as well as progress to the previous or next CCD, or go to a specific CCD.
-You can also rotate the CCD to better frame your subject, or to see if the CCD can be rotated in such a way as to
-catch your area of interest (see fig. \ref{fig:plugins:Oculars:Usage:CCD:RotMenu}).
+When a CCD view is displayed, the popup menu changes  as seen in  fig. \ref{fig:plugins:Oculars:Usage:CCD:Menu}. 
+You can select what telescope to use, as well as progress to the previous or next CCD, or go to a specific CCD. 
+You can also rotate the CCD to better frame your subject, or to see if the CCD can be rotated in such a way as to 
+catch your area of interest (see fig. \ref{fig:plugins:Oculars:Usage:CCD:RotMenu}). 
 Once rotated, the CCD frame on screen displays the new orientation (see fig. \ref{fig:plugins:Oculars:Usage:CCD:Rotation}).
 
 % THESE 3 should always be together on one float page.
@@ -136,14 +136,14 @@ Once rotated, the CCD frame on screen displays the new orientation (see fig. \re
 \begin{itemize}
 \item Define some eyepieces and telescope (see section \ref{sec:sec:plugins:Oculars:Configuration}).
 \item Select an object to view (i.e. a star, planet, etc.)
-\item Click the toolbar button \guibutton{0.6}{bt_ocular.png} for toggling the Ocular view,
+\item Click the toolbar button \guibutton{0.6}{bt_ocular.png} for toggling the Ocular view, 
       or press \keys{\ctrl+O} (\keys{\cmdmac+O} for Mac users).
 \item Swap between eye pieces and telescopes to see how the view changes.
 \end{itemize}
 
-This is really the area of interest to most telescopic observers.
-It is a great way to compare different eyepiece/telescope combinations, to see how they change the view of the sky.
-And it is easy to do so with binoculars too.
+This is really the area of interest to most telescopic observers. 
+It is a great way to compare different eyepiece/telescope combinations, to see how they change the view of the sky. 
+And it is easy to do so with binoculars too. 
 To show this, let us use the M37 cluster as target. Through a pair of Celestron 15x70 binoculars, it would look like in fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37Binos}.
 
 \begin{figure}[p]\centering
@@ -174,34 +174,34 @@ Not bad at all. But we like to see more! So we move the eyepiece to a C1400. See
 
 Very nice indeed! So for this target, the C1400 is going to be the best bet. However, if my target was the Pleiades, the C1400 with that eyepiece would not be good --- the 80EDF would do much better!
 
-When an eyepiece is active, the popup menu again changes.
+When an eyepiece is active, the popup menu again changes.  
 With a non-binocular eyepiece selected, you also have the ability to select a particular eyepiece or telescope.
-When a binocular is active, you can not select a telescope, as it is not relevant.
-Changing the eyepiece to a non-binocular will again allow the telescope to be selected.
+When a binocular is active, you can not select a telescope, as it is not relevant. 
+Changing the eyepiece to a non-binocular will again allow the telescope to be selected. 
 Also notice that when your mouse cursor is very near the right hand border of the screen, the popup menu's sub-menus display to the left, not the right.
 
 \subsubsection{Star Scales}
-As you know\newFeature{0.16.0} from section~\ref{sec:gui:view:sky}, the number and relative size of stars of various magnitudes
-can be adjusted to your personal preferences in the view settings window to approximate the appearance of the stars as seen by the naked eye.
-Some observers prefer to have a simulated ocular view with very small, or more, stars, quite different from what Stellarium usually shows.
-The Oculars plugin therefore keeps two additional sets of scaling values for ocular views and CCD views, which are activated
+As you know\newFeature{0.16.0} from section~\ref{sec:gui:view:sky}, the number and relative size of stars of various magnitudes 
+can be adjusted to your personal preferences in the view settings window to approximate the appearance of the stars as seen by the naked eye. 
+Some observers prefer to have a simulated ocular view with very small, or more, stars, quite different from what Stellarium usually shows. 
+The Oculars plugin therefore keeps two additional sets of scaling values for ocular views and CCD views, which are activated 
 automatically when you switch to ocular or CCD view, and which are stored immediately and permanently in the plugin's \file{ocular.ini} file.\footnote{%
-The appearance of stars may depend on various other factors: telescope type, ocular type, quality of optics, seeing, \ldots
+The appearance of stars may depend on various other factors: telescope type, ocular type, quality of optics, seeing, \ldots 
 Such details with all combinations cannot meaningfully be stored, though. These values should allow a rapid toggle on any single night.}
 
 \subsection{Configuration}
 \label{sec:sec:plugins:Oculars:Configuration}
-All configuration is done through the user interface in the application.
-To open the configuration dialog hit the \keys{\Alt+O} key,
+All configuration is done through the user interface in the application. 
+To open the configuration dialog hit the \keys{\Alt+O} key, 
 or click the \button{configure} button on the plugin setup dialog (available in the
-\menu{Plugins} tab of Stellarium's Configuration window (opened by
-pressing \keys{F2} or the \guibutton[0.25]{2}{btd_config.png} button in the left toolbar)),
-or the rightmost button of the on-screen panel (if displayed in the top right corner of screen).
+\menu{Plugins} tab of Stellarium's Configuration window (opened by 
+pressing \keys{F2} or the \guibutton[0.25]{2}{btd_config.png} button in the left toolbar)), 
+or the rightmost button of the on-screen panel (if displayed in the top right corner of screen). 
 There are six tabs in the configuration dialog: \emph{General}, \emph{Eyepieces}, \emph{Lenses}, \emph{Sensors}, \emph{Telescopes}, and \emph{About}. The first five are the ones we are interested in here.
 
 \paragraph{General}
 
-The first option allows you to define the general behavior of the plugin.
+The first option allows you to define the general behavior of the plugin. 
 The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view}, \emph{Sensor view} and \emph{Telrad view} (see figure \ref{fig:plugins:Oculars:Gui:General}).
 
 \begin{figure}[ht]\centering
@@ -215,12 +215,12 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view},
  \begin{description}
    \item[On-screen control panel:] show an additional GUI panel in the top-right corner of the screen to allow switching features of the plugin (in addition to the popup window).
    \item[Restore FOV to initial values] and
-   \item[Restore direction to initial values] options allow restoration field of view and direction of view, resp.,
+   \item[Restore direction to initial values] options allow restoration field of view and direction of view, resp., 
          to the initial values at program start at the end of the plugin usage (e.g., when disabling the view through CCD frame).
    \item[Show resolution criteria] compute and show Rayleigh criterion, Dawes', Abbe's and Sparrow's limits for combination of telescope, lens and eyepiece.
          In addition, this option will show visual resolution for selected ``setup''. This option may be very helpful for double star observers.
-   \item[Show oculars button on toolbar] option\newFeature{0.19.0} allows to toggle visibility the plugin button on main toolbar.
-   \item[Arrow button scale] allows to change the size of the arrow buttons in the ocular GUI panel.
+   \item[Show oculars button on toolbar] option\newFeature{0.19.0} allows to toggle visibility the plugin button on main toolbar. 
+   \item[Arrow button scale] allows to change the size of the arrow buttons in the ocular GUI panel. 
    \item[Line Color] Select \newFeature{0.20.0} color for ocular and sensor outlines and their labels.
    \item[Text Color] Select \newFeature{0.20.0} color for screen messages which are shown only when the on-screen control panel is not shown.
  \end{description}
@@ -234,10 +234,10 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view},
      view and main program are handled, and switching between ocular
      and main view also switches those values.
    \item[Hide grids and lines when enabled] allows to hide grids and lines when you observe the sky through the eyepiece and re-enables their visibility when leaving visual observation mode.
-   \item[Scale image circle] option allows you to define whether or not to scale the images based on apparent FOV. When deactivated, the image circle will fill your screen.
-         In general, we recommend you not select this, unless you have a need to, because it can really reduce the image size on the screen.
-		 It can however be very useful in comparing two eyepieces.
-		 If you set this option, the  on-screen image will be scaled based on the eyepieces and telescopes you define.
+   \item[Scale image circle] option allows you to define whether or not to scale the images based on apparent FOV. When deactivated, the image circle will fill your screen. 
+         In general, we recommend you not select this, unless you have a need to, because it can really reduce the image size on the screen. 
+		 It can however be very useful in comparing two eyepieces. 
+		 If you set this option, the  on-screen image will be scaled based on the eyepieces and telescopes you define. 
 		 See section \ref{sec:sec:plugins:Oculars:ScalingTheEyepieceView} for information on what scaling means, and why you might want to use it.
    \item[Use semi-transparent mask] uncheck this option if you want to see visible field of view as in real telescope. You may define level of transparency for mask\newFeature{0.20.3}.
    \item[Hide grids and lines when enabled] allows to hide grids and lines when you observe the sky through the eyepiece and re-enables their visibility when leaving visual observation mode.
@@ -247,11 +247,11 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view},
  \end{description}
 \item[Sensor view] is group of options allows to change behavior of the plugin for photographic observations mode.
   \begin{description}
-  \item[Enable autozoom when switching CCD]
+  \item[Enable autozoom when switching CCD]  
   \item[Use degrees and minutes for FOV of CCD] -- for many cases the use of decimal degrees for the value of the field of view is not comfortable, and this option allows to use the more human readable format for FOV.
   \item[Use horizontal coordinates instead of equatorial (J2000.0) coordinates] in the top left frame corner.
-  \item[Show max exposure time for moving objects] For solar system objects, the top right edge can indicate the maximum exposure time so
-         that the object moves less than a pixel against the stars.
+  \item[Show max exposure time for moving objects] For solar system objects, the top right edge can indicate the maximum exposure time so 
+         that the object moves less than a pixel against the stars.  
   \item[Enable automatic switch of mount type] allows to store the CCD frame orientation when the type of telescope mount is changed.
   \item[Show sensor crop overlay]\newFeature{0.19.0} toggles drawing a crop box within the CCD frame.
     In addition,\newFeature{0.20.3} a pixel grid can be drawn within the crop overlay especially for astrophotographers.
@@ -261,13 +261,13 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view},
 \item[Telrad view] is a group\newFeature{0.19.0} of options which allows to change behavior of the plugin for Telrad mode.
  \begin{description}
  \item[Enable autozoom when switching Telrad] option allows you to define whether or not to zoom the field of view to twice the size of the Telrad circles.
- \item[FOV:]\newFeature{0.20.2} If you don't use the original Telrad but a similar device, you may define up to 4 circles to show its specific FOV in the sky.
+ \item[FOV:]\newFeature{0.20.2} If you don't use the original Telrad but a similar device, you may define up to 4 circles to show its specific FOV in the sky. 
  \end{description}
 \end{description}
 
 \paragraph{Eyepieces}
 
-This is the tab used to enter your own eyepieces (see figures~\ref{fig:plugins:Oculars:Gui:Eyepieces} and \ref{fig:plugins:Oculars:Gui:Eyepieces_binos}).
+This is the tab used to enter your own eyepieces (see figures~\ref{fig:plugins:Oculars:Gui:Eyepieces} and \ref{fig:plugins:Oculars:Gui:Eyepieces_binos}). 
 By default, a few sample ones have been added; feel free to delete those once you've entered your own.
 
 \begin{figure}[p]\centering
@@ -302,17 +302,17 @@ When Binoculars are described, the relevant fields change to
 
 For binoculars, we're computed a few important factors in additional to the exit pupil\footnote{The exit pupil diameter is calculated by dividing the aperture by the magnification.} (these factors are visible in an on-screen control panel):
 \begin{description}
-\item[Relative Brightness.] This is the square of the diameter of the exit pupil.
-For example, for a 10x50 binocular, the exit pupil is 5 $\mm$ and relative brightness
-is $(50/10)^2=5^2=25$. However, the calculation for a 20x100 binocular, through which
-a great deal more can be seen, gives exactly the same relative brightness: $(100/20)^2=5^2=25$,
-so this is an inadequate rating to use for astronomical binoculars. Relative brightness
-is a number used to compare the brightness of binoculars of similar magnification.
-The larger the relative brightness number, the brighter the image.
-\item[Twilight Factor] (\textbf{Twilight Index} or \textbf{Twilight Performance Factor}).
-This was used by \textit{Carl Zeiss International} as an indication of the \textit{distance}
-at which comparable detail would be seen in different binoculars. It's calculated by
-finding the square root of the product of the magnification and aperture. For the
+\item[Relative Brightness.] This is the square of the diameter of the exit pupil. 
+For example, for a 10x50 binocular, the exit pupil is 5 $\mm$ and relative brightness 
+is $(50/10)^2=5^2=25$. However, the calculation for a 20x100 binocular, through which 
+a great deal more can be seen, gives exactly the same relative brightness: $(100/20)^2=5^2=25$, 
+so this is an inadequate rating to use for astronomical binoculars. Relative brightness 
+is a number used to compare the brightness of binoculars of similar magnification. 
+The larger the relative brightness number, the brighter the image. 
+\item[Twilight Factor] (\textbf{Twilight Index} or \textbf{Twilight Performance Factor}). 
+This was used by \textit{Carl Zeiss International} as an indication of the \textit{distance} 
+at which comparable detail would be seen in different binoculars. It's calculated by 
+finding the square root of the product of the magnification and aperture. For the 
 two binoculars above, the calculations are:
 
 \begin{center}
@@ -321,12 +321,12 @@ $\sqrt{(10*50)}=\sqrt{(500)}=22.36$
 $\sqrt{(20*100)}=\sqrt{(2000)}=44.72$
 \end{center}
 
-In this instance, the larger binocular has an index that is double that of the smaller
-binocular. Twilight factor is a number used to compare the effectiveness of binoculars
-used in low light. The larger the twilight factor, the more detail you can see in low
-light.
-\item[Bishop Index] (or \textbf{Visibility Factor}). This is due to Roy Bishop \citep{Bishop:2002}
-and is evaluated simply by multiplying the magnification by the aperture in \mm. For
+In this instance, the larger binocular has an index that is double that of the smaller 
+binocular. Twilight factor is a number used to compare the effectiveness of binoculars 
+used in low light. The larger the twilight factor, the more detail you can see in low 
+light. 
+\item[Bishop Index] (or \textbf{Visibility Factor}). This is due to Roy Bishop \citep{Bishop:2002} 
+and is evaluated simply by multiplying the magnification by the aperture in \mm. For 
 our two binocular above, we obtain:
 
 \begin{center}
@@ -336,7 +336,7 @@ $20*100=2000$
 \end{center}
 
 The larger binocular has a visibility factor four times greater than the smaller one.
-\item[Adler Index] (or \textbf{Astro Index}). This is due to Alan Adler \citep{Adler:2002} and
+\item[Adler Index] (or \textbf{Astro Index}). This is due to Alan Adler \citep{Adler:2002} and 
 is evaluated as the product of the magnification and the square root of the aperture in \mm.
 For our two binocular above, we obtain:
 \begin{center}
@@ -344,14 +344,14 @@ $10*\sqrt{50}=10*7.1=71$
 
 $20*\sqrt{100}=20*10=200$
 \end{center}
-This gives the larger binocular an Astro Index of 2.8x the smaller one. At the moment
-this is the best index to comparison of astronomical binoculars (of course for the
+This gives the larger binocular an Astro Index of 2.8x the smaller one. At the moment 
+this is the best index to comparison of astronomical binoculars (of course for the 
 simplest indexes, because others have tried to expand on these by including the effect of coatings, baffles, and other aspects of individual quality).
 \end{description}
 
 \paragraph{Lenses}
 
-This is the tab used to enter your own focal extender or reducer lenses (see figure \ref{fig:plugins:Oculars:Gui:Lenses}).
+This is the tab used to enter your own focal extender or reducer lenses (see figure \ref{fig:plugins:Oculars:Gui:Lenses}). 
 By default, a few sample ones have been added; feel free to delete them once you've entered your own.
 
 \begin{figure}[ht]\centering
@@ -363,14 +363,14 @@ By default, a few sample ones have been added; feel free to delete them once you
 The fields on this tab are:
 \begin{description}
 \item[Name] -- a free-text description of the lens. You could modify this to match your personal descriptions of lenses.
-\item[Multiplier] -- a factor larger than 1 expands the focal length, and lenses with this type are named Barlow lens;
+\item[Multiplier] -- a factor larger than 1 expands the focal length, and lenses with this type are named Barlow lens; 
                      a factor less   than 1 reduces the focal length, and lenses with this type are named Shapley lens or focus reducer.
 \end{description}
 
 \paragraph{Sensors}
 
-This tab allows you to define sensors for any camera you may have (see figure \ref{fig:plugins:Oculars:Gui:Sensors}).
-When defined and selected, this will draw a red bounding rectangle in the center of the eye piece view, showing what the CCD will capture.
+This tab allows you to define sensors for any camera you may have (see figure \ref{fig:plugins:Oculars:Gui:Sensors}). 
+When defined and selected, this will draw a red bounding rectangle in the center of the eye piece view, showing what the CCD will capture. 
 Because of the way floating point numbers are stored, sometimes you may see one of your defined values change (for example from 2.2 to 2.19999) but this should not affect what you see.
 
 \begin{figure}[ht]\centering
@@ -396,9 +396,9 @@ The fields on this tab are:
 \item[Position Angle] -- the position angle of the prism/CCD of Off-Axis Guider, in degrees.
 \end{description}
 
-\noindent The resolution is easy to find: these are simply the image dimensions of a (non-binned) frame.
-The chip size and pixel size may be more difficult, but the manual, or searching the Internet, should turn up these values.
-For a ``full-frame'' DSLR, this should be close to 36x24\mm, while APS-C should be around 22.5x15\mm.
+\noindent The resolution is easy to find: these are simply the image dimensions of a (non-binned) frame. 
+The chip size and pixel size may be more difficult, but the manual, or searching the Internet, should turn up these values.  
+For a ``full-frame'' DSLR, this should be close to 36x24\mm, while APS-C should be around 22.5x15\mm. 
 Some cameras may have unsquare pixels.
 
 \paragraph{Telescopes}
@@ -413,10 +413,10 @@ This is the tab used to enter your own telescopes and photographic objectives (s
 
 
 \begin{description}
-\item[Name] -- A free-text description of the telescope.
+\item[Name] -- A free-text description of the telescope. 
 \item[Focal Length] -- telescope focal length $f$ in \mm.
-\item[Diameter] -- telescope diameter (aperture $\diameter$) in \mm. If you add a photographic objective
-that does not provide this information but provides a largest f stop like ``100\mm~f/2.8'', you can estimate from $\diameter=f/s$,
+\item[Diameter] -- telescope diameter (aperture $\diameter$) in \mm. If you add a photographic objective 
+that does not provide this information but provides a largest f stop like ``100\mm~f/2.8'', you can estimate from $\diameter=f/s$, 
 where $s=2.8$ and thus $\diameter=100/2.8=35.7\mm$ in this example.
 \item[Horizontal flip] -- if the view through this telescope should flip horizontally.
 \item[Vertical flip] -- if the view through this telescope should flip vertically.
@@ -431,24 +431,24 @@ By default, the view drawn on your computer screen when the plugin is active fil
 
 If you are going to be observing any deep space object, it can be very important to choose the best eyepiece for that object. You will typically want an eyepiece that will magnify the object as much as possible, while showing all of the object in the eyepiece view. Getting this can be tricky, especially if you do not like changing eyepieces at the telescope. Or maybe you want to understand why one type of telescope may be better than another type for observing what you are interested in. This is where you will want to scale the image on screen based on your eyepiece.
 
-Different eyepieces generally have a different apparent field of view (aFOV). An easy way to think about this is: the larger the aFOV, the bigger the picture you see in the eyepiece.
-Older types of eyepiece (some types still built and in wide use today have been constructed in the 19th century) generally have their aFOV in the $50\degree$ range.
-Today, there are massive eyepieces available with $82\degree$, and recently even $100\degree$ aFOV!
-These eyepieces are huge, as they require a lot of very special glass to achieve their incredible fields of view.
+Different eyepieces generally have a different apparent field of view (aFOV). An easy way to think about this is: the larger the aFOV, the bigger the picture you see in the eyepiece. 
+Older types of eyepiece (some types still built and in wide use today have been constructed in the 19th century) generally have their aFOV in the $50\degree$ range. 
+Today, there are massive eyepieces available with $82\degree$, and recently even $100\degree$ aFOV! 
+These eyepieces are huge, as they require a lot of very special glass to achieve their incredible fields of view. 
 An eyepiece of the same focal length with a $100\degree$ aFOV will produce an image through the eyepiece that is twice as wide as one produced by a $50\degree$ eyepiece.
 
-Different telescopes, with an eyepiece of a given aFOV, will also produce a different true field of view.
-This is the actual size of the piece of sky that you see through the eyepiece.
-Getting these two ``just right'' can be very important.
-It's easy to assume that you want the biggest telescope you can get, with the eyepiece that gives you the highest magnification.
+Different telescopes, with an eyepiece of a given aFOV, will also produce a different true field of view. 
+This is the actual size of the piece of sky that you see through the eyepiece. 
+Getting these two ``just right'' can be very important. 
+It's easy to assume that you want the biggest telescope you can get, with the eyepiece that gives you the highest magnification. 
 This is never true in reality. Depending on where you live, and especially what you like to look at, a 100-120\mm\ quality refractor with a wide aFOV eyepiece may very well be better than a large SCT with the same eyepiece. This is something I learned the hard way.
 
-So how does scaling the eyepiece view help? The plugin will find the eyepiece you have with the largest aFOV. This aFOV becomes $100\%$ of the computer screen diameter.
+So how does scaling the eyepiece view help? The plugin will find the eyepiece you have with the largest aFOV. This aFOV becomes $100\%$ of the computer screen diameter. 
 Then, any other eyepiece will have its aFOV compared, and the view on screen will be scaled down accordingly. These $100\degree$ aFOV eyepieces makes the math here easy. If you have one, then when that eyepiece is used, the circle that represents the view through the eyepiece will take up $100\%$ of the screen diameter. Next, if you select an eyepiece with an $82\degree$ aFOV, its view will be scaled to $82\%$ of the screen, and a $62\degree$ aFOV eyepiece will be scaled to $62\%$ of the screen.
 
 \paragraph{Example in action}
 
-This is easier to understand in action, so let us look at an example that uses three eyepieces all with the same 17\mm\ focal length,
+This is easier to understand in action, so let us look at an example that uses three eyepieces all with the same 17\mm\ focal length, 
 so they all produce the same level of magnification (well, one has an 17.3\mm\ focal length, but its magnification is nearly identical) and see how the view changes.
 These example all use a Celestron C8 8" SCT telescope, and the target is the Great Orion Nebula.
 
@@ -466,9 +466,9 @@ These example all use a Celestron C8 8" SCT telescope, and the target is the Gre
 
 
 We can see from the images in fig.~\ref{fig:plugins:Oculars:TeleVue}
-that the target is all three images is the same size. The $100\degree$ image fills the screen,
-the $82\degree$ is smaller, and the $62\degree$ is smallest yet, filling $62\%$ of the computer screen.
-Note that in each image, the field of view that you see changes. The larger the aFOV, the more you can see of the sky.
+that the target is all three images is the same size. The $100\degree$ image fills the screen, 
+the $82\degree$ is smaller, and the $62\degree$ is smallest yet, filling $62\%$ of the computer screen. 
+Note that in each image, the field of view that you see changes. The larger the aFOV, the more you can see of the sky. 
 So in this example, if you had an 8" telescope, you would want to use the 17\mm\ $100\degree$ Ethos eyepiece to see as much of the nebula as possible.
 
 \newpage
@@ -480,7 +480,7 @@ telescope mounts. The user selects an object (i.e.\ by clicking on
 something -- a planet, a star etc.) and presses the telescope go-to
 key, and the telescope will be guided to the object.
 
-Multiple telescopes may be controlled simultaneously.
+Multiple telescopes may be controlled simultaneously. 
 
 \paragraph{WARNING}\emph{Stellarium cannot prevent your
 telescope from being pointed at the Sun. It is up to you to ensure
@@ -504,20 +504,20 @@ protection.
 This plug-in allows Stellarium to send 'slew' ('go to') commands
 to the device and to receive its current position. There are some scopes which
 additionally support 'sync' commands to be received in order to update the internal
-pointing model of the mount. Some scopes also have the ability to abort a previous
-slew command. However, users should always be aware of the possibility for mount
-collisions and similar situations. You should always make sure that a slew does
-not cause parts of the telescope to collide with the environment or mount itself.
+pointing model of the mount. Some scopes also have the ability to abort a previous 
+slew command. However, users should always be aware of the possibility for mount 
+collisions and similar situations. You should always make sure that a slew does 
+not cause parts of the telescope to collide with the environment or mount itself. 
 
-Currently this plug-in does not allow satellite tracking unless the controlled
-telescope is an RTS2 system (see section~\ref{sec:plugins:TelescopeControl:RTS2}),
-and is not very suitable for lunar or planetary observations.
-Many mounts can be set to a 'lunar' tracking speed, you may prefer this.
+Currently this plug-in does not allow satellite tracking unless the controlled 
+telescope is an RTS2 system (see section~\ref{sec:plugins:TelescopeControl:RTS2}), 
+and is not very suitable for lunar or planetary observations. 
+Many mounts can be set to a 'lunar' tracking speed, you may prefer this. 
 
-Some users are running Stellarium on little, low-power ``Telescope computers'' connected to
-their powerful indoor PCs via RemoteDesktop or similar setups. Keep in mind that Stellarium
+Some users are running Stellarium on little, low-power ``Telescope computers'' connected to 
+their powerful indoor PCs via RemoteDesktop or similar setups. Keep in mind that Stellarium 
 is a graphics-heavy program that may challenge the outdoor computer's graphics subsystem or network.
-See framerate intent settings on page~\pageref{sec:gui:configuration:tools:fps} for optimizing your screen refresh rates.
+See framerate intent settings on page~\pageref{sec:gui:configuration:tools:fps} for optimizing your screen refresh rates. 
 Better, run Stellarium on your indoor system and use INDI or ASCOM network protocols.
 
 \subsection{Using this plug-in}
@@ -622,7 +622,7 @@ Telescope controlled by:
   firmware updated and now interpret the coordinates they receive as
   coordinates that use the equinox of the date (EOD, also known as
   JNow), making necessary this setting. With ASCOM telescopes it's also
-  possible to use this setting to override the default device preference.
+  possible to use this setting to override the default device preference. 
 \item[Start/connect at startup] Check this option if you want
   Stellarium to attempt to connect to the telescope immediately after
   it starts. Otherwise, to start the telescope, you need to open the
@@ -634,13 +634,13 @@ Telescope controlled by:
 This section is active only for DIRECT connections (see above).
 
 \begin{description}
-\item[Serial port] sets the serial port used by the telescope.
+\item[Serial port] sets the serial port used by the telescope.  
   A pop-up box suggests some default values:
   \begin{itemize}
   \item On Windows, serial ports \texttt{COM1} to \texttt{COM10}
   \item On Linux, serial ports are labelled \texttt{/dev/ttyS0} to
     \texttt{/dev/ttyS3} and USB ports \texttt{/dev/ttyUSB0} to
-    \texttt{/dev/ttyUSB3}. Make sure you have read/write access to the \texttt{tty} device.
+    \texttt{/dev/ttyUSB3}. Make sure you have read/write access to the \texttt{tty} device. 
 	Depending on your flavour of Linux, this may e.g.\ require some group membership.
   \item On macOS, the list is empty as it names its ports in a
     peculiar way.
@@ -661,11 +661,11 @@ be somewhere in the list (for example,
 \end{description}
 
 \paragraph{Connection settings}
-Both fields here refer to INDIRECT connections, which implies communication over a network (TCP/IP).
+Both fields here refer to INDIRECT connections, which implies communication over a network (TCP/IP). 
 \begin{description}
 \item[Host] can be either a host name or an IPv4 address such as
   '127.0.0.1'.  The default value of 'localhost' means 'this
-  computer'.
+  computer'. 
 
   Modifying the default host name value makes sense only if you are
   attempting a remote connection over a network. In this case, it
@@ -753,10 +753,10 @@ and it appears as an object in the 'Search' window.
 To point a device to an object: Select an object (e.g. a star) and
 press the number of the device while holding down the \keys{\ctrl} key. (For
 example, \keys{\ctrl+1} for telescope \#1.) This will move the telescope to the
-selected object. Note that most telescopes can only execute a single command to
-move to that object's position, but if the telescope is an RTS2 telescope,
+selected object. Note that most telescopes can only execute a single command to 
+move to that object's position, but if the telescope is an RTS2 telescope, 
 you can even track a satellite (if the mount then is fast enough to support it).%
-\footnote{Actually, the TLE orbital elements of the selected satellite are transmitted
+\footnote{Actually, the TLE orbital elements of the selected satellite are transmitted 
 to RTS2, which does then compute the satellite position itself.}
 
 To point a device to the center of the view: Press the number of the
@@ -807,8 +807,8 @@ The device list contains the following:
 \end{description}
 
 \subsubsection{RTS2 telescopes}
-\newFeature{0.16.0}Setting up a robotic telescope and dome control system with RTS2
-is beyond the scope of this handbook, but see section~\ref{sec:plugins:TelescopeControl:RTS2}
+\newFeature{0.16.0}Setting up a robotic telescope and dome control system with RTS2 
+is beyond the scope of this handbook, but see section~\ref{sec:plugins:TelescopeControl:RTS2} 
 for a few notes to be able to connect and command the telescope with Stellarium.
 Please refer to the RTS2 Web pages\footnote{\url{https://rts2.org/}} for further details.
 
@@ -817,8 +817,8 @@ case for your username, the telescope marker will be painted red (or
 \texttt{color\_telescope\_readonly} from Stellarium's settings file).
 
 \subsubsection{INDI telescopes}
-\newFeature{0.17.0}Setting up a robotic telescope and dome control system with INDI
-is beyond the scope of this handbook, but see section~\ref{sec:plugins:TelescopeControl:INDI}
+\newFeature{0.17.0}Setting up a robotic telescope and dome control system with INDI 
+is beyond the scope of this handbook, but see section~\ref{sec:plugins:TelescopeControl:INDI} 
 for a few notes to be able to connect and command the telescope with Stellarium.
 Please refer to the INDI web pages\footnote{\url{https://indilib.org}} for further details.
 
@@ -834,7 +834,7 @@ the \menu{Telescope controlled by:} field. It will show a telescope reticle
 that will react in the same way as the reticle of a real telescope
 controlled by the plug-in.  See the section above about field of view
 indicators for a possible practical application (emulating 'Telrad'
-circles).
+circles).  
 
 %% We don't need this remark any longer after 5 years...
 %This feature is equivalent to the 'Dummy' type of telescope
@@ -844,61 +844,61 @@ circles).
 \subsection{RTS2}
 \label{sec:plugins:TelescopeControl:RTS2}
 
-\indexterm{RTS2}, \newFeature{0.16.0}the Remote Telescope System 2, is a complete robotic observatory control system for Linux
+\indexterm{RTS2}, \newFeature{0.16.0}the Remote Telescope System 2, is a complete robotic observatory control system for Linux 
 by Petr Kub\'{a}nek, who kindly provided the plugin code to make RTS2 interoperate with Stellarium.
-We cannot give a full manual or any further support for RTS2 here, please refer to its website\footnote{\url{https://rts2.org}}
-for complete instructions about dome control, cameras, filter wheels, weather sensors, etc.
-A few notes may be useful for beginners, though.
+We cannot give a full manual or any further support for RTS2 here, please refer to its website\footnote{\url{https://rts2.org}} 
+for complete instructions about dome control, cameras, filter wheels, weather sensors, etc. 
+A few notes may be useful for beginners, though. 
 
 RTS2's central piece is a daemon. Start the system:
 \begin{commands}
 sudo service rts2 start
 \end{commands}
-RTS2's main control screen is text-based, \program{rts2-mon}. For a quick check, switch on the system using \key{F9}.
-Telescope \texttt{T0} is a dummy telescope which you can select and operate with commands like \texttt{move 120 35}
+RTS2's main control screen is text-based, \program{rts2-mon}. For a quick check, switch on the system using \key{F9}. 
+Telescope \texttt{T0} is a dummy telescope which you can select and operate with commands like \texttt{move 120 35} 
 (this moves to RA=120°=8h, DEC=35°, but only when this position is above your horizon).
 
-Stellarium's Telescope plugin can communicate with RTS2 using the RTS2 web interface. You must run \program{rts2-httpd} for this,
-which may require the right permissions to write the lock files in \file{/var/run}. This program requires
-that a database has been created as described in the file \file{RUN} in RTS2's source directory and on the RTS2 website\footnote{\url{https://rts2.org/faq.html}}.
-Also, you must create a 'user' for RTS2. This is not a regular Linux account, but an entry in the RTS2 database.
-Create a user with \program{rts2-user -a <user>}. You should use a password different from your regular Linux password,
-as this will be transmitted in plain text between the computer running Stellarium and the RTS2 control computer,
-and may also be written into Stellarium's logfile. Then you can enable device control for the respective user.
-If you want to send slew commands from Stellarium, make sure to allow access to telescope \texttt{T0}.
-If not, Stellarium will be able to show the telescope marker, but you will not be able to control the telescope.
-To enable control for existing users in the default \file{stars} database,
+Stellarium's Telescope plugin can communicate with RTS2 using the RTS2 web interface. You must run \program{rts2-httpd} for this, 
+which may require the right permissions to write the lock files in \file{/var/run}. This program requires 
+that a database has been created as described in the file \file{RUN} in RTS2's source directory and on the RTS2 website\footnote{\url{https://rts2.org/faq.html}}.   
+Also, you must create a 'user' for RTS2. This is not a regular Linux account, but an entry in the RTS2 database. 
+Create a user with \program{rts2-user -a <user>}. You should use a password different from your regular Linux password, 
+as this will be transmitted in plain text between the computer running Stellarium and the RTS2 control computer, 
+and may also be written into Stellarium's logfile. Then you can enable device control for the respective user. 
+If you want to send slew commands from Stellarium, make sure to allow access to telescope \texttt{T0}. 
+If not, Stellarium will be able to show the telescope marker, but you will not be able to control the telescope. 
+To enable control for existing users in the default \file{stars} database, 
 \begin{commands}
 psql stars
 update users set allowed_devices = '*';
 \end{commands}
 
-In case you cannot properly connect to the RTS2 telescope or cannot send slew commands,
+In case you cannot properly connect to the RTS2 telescope or cannot send slew commands, 
 check Stellarium's logfile \file{log.txt} for some diagnostic messages.
 
-RTS2 is the only type of telescope supported by Stellarium which can autonomously track satellites.
-Tracking accuracy fully depends on Stellarium's TLE satellite elements being up-to-date
+RTS2 is the only type of telescope supported by Stellarium which can autonomously track satellites. 
+Tracking accuracy fully depends on Stellarium's TLE satellite elements being up-to-date 
 (see section~\ref{sec:plugins:Satellites}) and the accuracy of your RTS2 installation.
 
 \subsection{INDI}
 \label{sec:plugins:TelescopeControl:INDI}
-\indexterm{INDI}, \newFeature{0.17.0}the Instrument Neutral Distributed Interface,
-is a distributed control system (DCS) protocol to enable control, data acquisition
-and exchange among hardware devices and software front ends, emphasizing astronomical
+\indexterm{INDI}, \newFeature{0.17.0}the Instrument Neutral Distributed Interface, 
+is a distributed control system (DCS) protocol to enable control, data acquisition 
+and exchange among hardware devices and software front ends, emphasizing astronomical 
 instrumentation\footnote{\url{https://en.wikipedia.org/wiki/Instrument_Neutral_Distributed_Interface}}.
-
-INDI client (v1.6.0) has been incorporated into Stellarium's Telescope Control plugin
-by Alessandro Siniscalchi to allow Stellarium to communicate with INDI hardware drivers via INDI server.
-INDI server is a hub that sits between drivers and clients. It reroutes traffic for control and data across distributed networks.
-Each device or client in the network is a node and may communicate with other nodes whenever desired.
+ 
+INDI client (v1.6.0) has been incorporated into Stellarium's Telescope Control plugin 
+by Alessandro Siniscalchi to allow Stellarium to communicate with INDI hardware drivers via INDI server. 
+INDI server is a hub that sits between drivers and clients. It reroutes traffic for control and data across distributed networks. 
+Each device or client in the network is a node and may communicate with other nodes whenever desired. 
 The server supports broadcasting, chaining, and marshalling of data.
 
-Stellarium only supports INDI mounts (no other INDI devices), and you will need to select the correct INDI device
-to manage it at the stage of configuration of telescope.
-For this purpose the plug-in has a tool to getting the list of connected devices from the INDI server (when the server is working!).
-Please define hostname and port\footnote{The Internet Assigned Numbers Authority (IANA) has assigned to INDI
-the Transmission Control Protocol and User Datagram Protocol (TCP/UDP) port 7624.}
-in the ``INDI Settings'' block, press \button{Refresh devices} and select the required device in the list ``Devices''.
+Stellarium only supports INDI mounts (no other INDI devices), and you will need to select the correct INDI device 
+to manage it at the stage of configuration of telescope. 
+For this purpose the plug-in has a tool to getting the list of connected devices from the INDI server (when the server is working!). 
+Please define hostname and port\footnote{The Internet Assigned Numbers Authority (IANA) has assigned to INDI 
+the Transmission Control Protocol and User Datagram Protocol (TCP/UDP) port 7624.} 
+in the ``INDI Settings'' block, press \button{Refresh devices} and select the required device in the list ``Devices''. 
 
 List of telescope types supported by INDI\footnote{\url{https://indilib.org/devices/telescopes/all.html}}:
 \begin{itemize}
@@ -938,40 +938,40 @@ and most of the astronomy software and tools can communicate with
 ASCOM compatible devices.
 
 The ASCOM telescope support has been added to Stellarium's Telescope Control plugin by Gion Kunz in version 0.19.3.\footnote{%
-Unfortunately ASCOM version~6 seems to be incompatible with Qt6.
-After numerous error reports we had to disable ASCOM support on Qt6-based builds of version 24.3-24.4.
-However, preliminary tests showed that ASCOM~7 \emph{may} work again, so this way of connection is back.
-Without proper instruments, the maintainers depend on your feedback, though.
+Unfortunately ASCOM version~6 seems to be incompatible with Qt6. 
+After numerous error reports we had to disable ASCOM support on Qt6-based builds of version 24.3-24.4. 
+However, preliminary tests showed that ASCOM~7 \emph{may} work again, so this way of connection is back. 
+Without proper instruments, the maintainers depend on your feedback, though. 
 If you depend on ASCOM support, please update to ASCOM version 7, or use a Qt5-based build of the same version.}
 
 Note that in order for Stellarium to communicate with your ASCOM
 compatible mount, you will need to have the ASCOM platform installed
 on your Windows machine (version 7 or
-higher\footnote{\url{https://ascom-standards.org/Downloads/Index.htm}};
+higher\footnote{\url{https://ascom-standards.org/Downloads/Index.htm}}; 
 On Windows 11 for ARM64, ASCOM platform 7.1.2 or later is required.). Also,
 the ASCOM driver of your telescope mount needs to be installed before
 you can start using the telescope in Stellarium.
 
-\textbf{Important:} Most modern ASCOM drivers are written to run in 32bit and 64bit mode (any) and therefore are
+\textbf{Important:} Most modern ASCOM drivers are written to run in 32bit and 64bit mode (any) and therefore are 
 compatible with the 64bit and 32bit version of Stellarium. However, if you happen to have a 32bit or 64bit only
 driver for your telescope mount, you will also need to install the respective Stellarium version.
 
 In order to use your ASCOM telescope you need to select the correct device in the ASCOM chooser by clicking
 the button \button{Choose ASCOM telescope}. The selected device is shown below that button.
 
-By default, Stellarium is trying to ask the ASCOM driver in order to determine if JNow or J2000 coordinates
+By default, Stellarium is trying to ask the ASCOM driver in order to determine if JNow or J2000 coordinates 
 should be used for communicating with the mount. If you'd like to override this behavior and tell the ASCOM telescope
 to communicate in the coordinate system configured in the section \nameref{sec:plugins:TelescopeProperties}, you can
-switch the radio button \button{Let ASCOM device decide} to \button{Use Stellarium settings} in the ASCOM settings of
+switch the radio button \button{Let ASCOM device decide} to \button{Use Stellarium settings} in the ASCOM settings of 
 the Configure Telescope dialog.
 
 %\newpage
 \subsection{StellariumScope}
 \label{sec:plugins:StellariumScope}
-\program{StellariumScope} is a free add-on that enables you to control your ASCOM enabled telescope with Stellarium.
+\program{StellariumScope} is a free add-on that enables you to control your ASCOM enabled telescope with Stellarium. 
 
-Note that Stellarium supports ASCOM telescopes natively since version 0.19.3. There's no need to
-  use StellariumScope in order to use your ASCOM telescopes with Stellarium anymore. We are
+Note that Stellarium supports ASCOM telescopes natively since version 0.19.3. There's no need to 
+  use StellariumScope in order to use your ASCOM telescopes with Stellarium anymore. We are 
   encouraging our users to use the native ASCOM option unless they need particular features of StellariumScope.
 
 % \begin{figure}[htp]
@@ -985,7 +985,7 @@ Note that Stellarium supports ASCOM telescopes natively since version 0.19.3. Th
 
 The original \program{StellariumScope} program was designed and implemented by Scott of ByteArts
 % and is still available for download\footnote{\url{http://www.bytearts.com/stellarium/}}.
-but is no longer available.
+but is no longer available. 
 It is now maintained by and available for download from Welsh Dragon Computing
 \footnote{\url{https://welshdragoncomputing.ca/x/index.php/home/stellariumscope/about-stellariumscope}}.
 
@@ -1050,9 +1050,9 @@ One anonymous user sent a troubleshooting solution when connecting Stellarium to
 \subsubsection{Stellarium Telescope Protocol}
 \label{sec:plugins:TelescopeControl:Other:Protocol}
 
-In the early days of Stellarium, telescope control required standalone server programs.
-These were later integrated in the plugin. However, there are situations where external control servers are still useful,
-e.g.\ when they are running on some tiny telescope computer while the user sits in the warm control room in front of the powerful PC running Stellarium.
+In the early days of Stellarium, telescope control required standalone server programs. 
+These were later integrated in the plugin. However, there are situations where external control servers are still useful, 
+e.g.\ when they are running on some tiny telescope computer while the user sits in the warm control room in front of the powerful PC running Stellarium. 
 For you DIYers out there, figure~\ref{fig:plugins:TelescopeControl:Other:Protocol} shows the original protocol.
 
 
@@ -1070,10 +1070,10 @@ For you DIYers out there, figure~\ref{fig:plugins:TelescopeControl:Other:Protoco
 \section{Observability Plugin}
 \label{sec:plugins:Observability}
 
-This Plugin is activated with the button \guibutton[0.5]{0.3}{bt_observab_off.png}.
+This Plugin is activated with the button \guibutton[0.5]{0.3}{bt_observab_off.png}. 
 It analyzes the observability of the selected object (or the
-screen center, if no object is selected). The plugin can show
-% rise, transit, and set times, as well as
+screen center, if no object is selected). The plugin can show 
+% rise, transit, and set times, as well as 
 the best epoch of the year (i.e.,
 largest angular separation from the Sun), the date range when the
 source is above the horizon at dark night, and the dates of Acronychal
@@ -1097,7 +1097,7 @@ parallax effects are taken into account.
 \item[Acronychal/Cosmical/Heliacal rise/set] The days of Cosmical
   rise/set of an object are estimated as the days when the object
   rises (or sets) together with the rise/set of the Sun. The exact
-  dates of these events depend on the Observer's location.
+  dates of these events depend on the Observer's location. 
   In contrast, the Acronychal rise (or set) happens when the star
   rises/sets with the setting/rising of the Sun (i.e., opposite to the
   Sun). It is obvious that the source is hardly
@@ -1147,11 +1147,11 @@ parallax effects are taken into account.
 
 \subsection*{Note on Terminology}
 
-The (sparse) literature on terminology about computing these Heliacal, Acronychal or Cosmic events
-seems to disagree on which end of the night is to be computed. While all agree about
-Heliacal rises taking place in the morning, Acronychal and Cosmic are sometimes applied
-in reverse order from those described here. In case you use these data, make sure you
-keep this definition as well.
+The (sparse) literature on terminology about computing these Heliacal, Acronychal or Cosmic events 
+seems to disagree on which end of the night is to be computed. While all agree about 
+Heliacal rises taking place in the morning, Acronychal and Cosmic are sometimes applied 
+in reverse order from those described here. In case you use these data, make sure you 
+keep this definition as well. 
 
 \subsection*{Author}
 \label{sec:plugins:Observability:author}
@@ -1359,8 +1359,8 @@ Here's a short python script equivalent to the above example:
 \end{script}
 
 
-%%% Local Variables:
+%%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "guide"
-%%% End:
+%%% End: 
 

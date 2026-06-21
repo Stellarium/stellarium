@@ -88,7 +88,7 @@ appear.
 \end{table}
 
 OK, so lets go see the future! Click the mouse once on the increase time
-speed button \guibutton{0.6}{bt_timerate_increase.png}.
+speed button \guibutton{0.6}{bt_timerate_increase.png}. 
 Not a whole lot seems to happen. However, take a look at the clock in
 the status bar. You should see the time going by faster than a normal
 clock! Click the button a second time. Now the time is going by faster
@@ -100,7 +100,7 @@ on the button a third time. Now time is really flying!
 
 Let time move on at this fast speed for a little while. Notice how the
 stars move across the sky. If you wait a little while, you'll see the
-Sun rising and setting. It's a bit like a time-lapse movie.
+Sun rising and setting. It's a bit like a time-lapse movie. 
 
 Stellarium not only allows for moving forward through time -- you can
 go backwards too! Click on the real time speed button
@@ -115,12 +115,12 @@ a rate (about one day every ten seconds!).
 \label{sec:tour:timeDrag}
 
 Another way to quickly change time is \indexterm{time dragging}. Press
-\keys{\ctrl}, press the left mouse button, and slide the mouse along the direction of daily motion to go forward,
+\keys{\ctrl}, press the left mouse button, and slide the mouse along the direction of daily motion to go forward, 
 or to the other direction to go backward.
 
-\newFeature{0.15.1}Similarly, pressing \keys{\ctrl} and scrolling the mouse wheel will
-advance time by minutes, pressing \keys{\ctrl+\shift} and
-scrolling the mouse wheel will advance time by hours, \keys{\ctrl+\Alt} by days,
+\newFeature{0.15.1}Similarly, pressing \keys{\ctrl} and scrolling the mouse wheel will 
+advance time by minutes, pressing \keys{\ctrl+\shift} and 
+scrolling the mouse wheel will advance time by hours, \keys{\ctrl+\Alt} by days, 
 and finally \keys{\ctrl+\shift+\Alt} by calendar years.
 
 
@@ -140,7 +140,7 @@ Cursor keys \keys{\arrowkeyleft} \keys{\arrowkeyright} \keys{\arrowkeyup} \keys{
 Left mouse button                  & Select an object in the sky \\
 Right mouse button, \key{\ctrl+\space} & Clear selected object \\
 Centre mouse button (wheel press)  & Centre selected object and start tracking \\
-Mouse wheel                        & Zoom in and out \\
+Mouse wheel                        & Zoom in and out \\ 
 \key{\space}                       & Centre view on selected object \\
 Forward-slash (\key{/})            & Auto-zoom in to selected object \\
 Backslash (\key{\textbackslash{}}) & Auto-zoom out to original field of view \\\midrule
@@ -275,7 +275,7 @@ Flip view (horizontal)\textsuperscript{\ref{fn:activate-buttons}}   & \guibutton
 Flip view (vertical)\textsuperscript{\ref{fn:activate-buttons}}     & \guibutton[0.75]{2.5}{bt_flipv.png}      & \key{\ctrl+\shift+V} & Flip the image in the vertical plane.\\
 Quit Stellarium          & \guibutton[0.75]{2.5}{bt_quit.png}       & \key{\ctrl+Q} & Close Stellarium.\\
 Help Window              & \guibutton[0.5]{2.5}{btd_help.png}       & \key{F1} & Show the help window, with key bindings and other useful information \\
-Configuration Window     & \guibutton[0.5]{2.5}{btd_config.png}     & \key{F2} & Show the configuration window \\
+Configuration Window     & \guibutton[0.5]{2.5}{btd_config.png}     & \key{F2} & Show the configuration window \\ 
 Search Window            & \guibutton[0.5]{2.5}{btd_find.png}       & \key{F3} or \key{Ctrl+F} & Show the object search window \\
 View Window              & \guibutton[0.35]{2.5}{btd_view.png}       & \key{F4} & Show the view window \\
 Time Window              & \guibutton[0.5]{2.5}{btd_time.png}       & \key{F5} & Show the time window \\
@@ -292,7 +292,7 @@ AstroCalc Window         & \guibutton[0.5]{2.5}{btd_astrocalc.png}  & \key{F10} 
 You can save what is on the screen to a file by pressing
 \key{\ctrl+S}. Screenshots are taken in PNG format, and have filenames
 like \file{stellarium-000.png}, \file{stellarium-001.png} (the number
-increments to prevent overwriting existing files).
+increments to prevent overwriting existing files). 
 
 The screenshots are stored to a directory depending on your operating
 system, see section~\ref{sec:Directories} Files and Directories.  See
@@ -301,18 +301,18 @@ also section~\ref{sec:gui:configuration:tools} for more screenshot options.
 \section{Observing Lists (Bookmarks)}
 \label{sec:tour:bookmarks}
 
-You can store your favourite objects or views in observing lists.
+You can store your favourite objects or views in observing lists. 
 Press \key{Alt+B} or \guibutton[0.75]{2.5}{bt_bookmarks.png} to call
 up the dialog.  A bookmarks file from previous versions will be
 imported and converted to the new format. You can however create an
-arbitrary number of lists.
+arbitrary number of lists. 
 
 The list display shows all entries from the current list. A double
 click on an entry selects the object.  To add/remove an object to/from the list,
 press \menu{Edit list}. This changes the view. Highlight (select)
 your object in the sky and press \menu{Add object}. To remove an
 object from a list, select its entry in the list and press
-\menu{Remove object}.
+\menu{Remove object}. 
 
 Sometimes storing the object alone is not enough. Interesting views like
 planet conjunctions or eclipses require at least a time entry, if not
@@ -321,17 +321,17 @@ to restore. Additionally, the field of view may be relevant. To store
 these data and later retrieve them, use the respective checkboxes.
 
 You can also export the current list or all lists with the according
-button, or import such an exported list on another system.
+button, or import such an exported list on another system. 
 To export the current list, keep the default \texttt{.sol} file type in the filename dialog.
 To export all your lists, use the \texttt{.ol} file type in the filename dialog.
-Lists are identified with an
-Universally Unique Identifier (UUID) which we call OLUD (Observing List Unique Identifier).
-On importing a list, existing lists with the same OLUD may be replaced after a warning.
-During editing, storing a list with an existing name is prevented.
-The list import may however import a list with an existing name as long as the OLUD is different.
+Lists are identified with an 
+Universally Unique Identifier (UUID) which we call OLUD (Observing List Unique Identifier). 
+On importing a list, existing lists with the same OLUD may be replaced after a warning. 
+During editing, storing a list with an existing name is prevented. 
+The list import may however import a list with an existing name as long as the OLUD is different. 
 You may want to change one of the duplicate list names after import.
 To transfer all your lists to another system, export them as \texttt{.ol} file, or
-copy, rename and import (or just copy, to replace the existing) the full file \file{observingLists.json}
+copy, rename and import (or just copy, to replace the existing) the full file \file{observingLists.json} 
 from the \file{data/} subdirectory of your user directory (see section~\ref{sec:Directories}).
 
 
@@ -345,7 +345,7 @@ You can set temporary markers anywhere in the screen. These may be useful for va
 \emph{Actions}	                 & \emph{Description}\\\midrule
 \key{Shift} \& left click        & Add custom marker \\
 \key{Shift} \& right click       & Delete the one closest marker to mouse cursor\\
-\key{Alt+\shift} \& right click  & Delete all custom markers
+\key{Alt+\shift} \& right click  & Delete all custom markers 
 \\\bottomrule
 \end{tabular}
 \end{center}
@@ -362,12 +362,12 @@ limitations.
 \section{Speech Output}
 \label{ch:tour:speech}
 
-Sometimes you may have\newFeature{25.4} dimmed down your field laptop or the font may be too small.
-Object information can also be output audibly by a Text-to-Speech engine.
-After object selection, press \key{Shift+R} to let a voice read ot to you.
+Sometimes you may have\newFeature{25.4} dimmed down your field laptop or the font may be too small. 
+Object information can also be output audibly by a Text-to-Speech engine. 
+After object selection, press \key{Shift+R} to let a voice read ot to you. 
 See section~\ref{sec:gui:configuration:speech} for details and configuration.
 
-%%% Local Variables:
+%%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "guide"
-%%% End:
+%%% End: 
