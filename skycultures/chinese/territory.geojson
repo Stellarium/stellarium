@@ -3,6 +3,8 @@
 	"features": [
 		{
 			"type": "Feature", 
+			"caution": "This map only shows the approximate territory of the historical Qing dynasty (1644–1911). Modern borders of China may involve territorial disputes. The Regulations on Map Management stipulate that the drawing of China's national boundaries must comply with relevant rules, and the Specifications for the Content Representation of Public Maps require that the full map of China accurately reflect China's territorial extent. Electronic maps are subject to review and must not independently collect administrative boundary data. For these reasons, we should avoid sensitive content and not display any Chinese territory after 1911.",
+			"chinese_caution": "《地图管理条例》规定绘制中国国界必须遵守相关规定，另《公开地图内容表示规范》规定中国全图必须准确反映中国领土范围，电子地图需要审核且不得自行采集行政界线。基于以上理由，Stellarium应该避免出现敏感内容，不予显示1911年以后的中国范围。",
 			"properties": {
 				"name": "Qing_Dynasty(清朝)",
 				"beginTime": 1756,
