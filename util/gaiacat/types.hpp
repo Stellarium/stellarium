@@ -69,6 +69,3 @@ inline constexpr uint32_t  CATALOG_MAJOR  = 0;
 inline constexpr uint32_t  CATALOG_MINOR  = 1;
 inline constexpr double    CATALOG_EPOCH  = 2457389.0;  // STELLAR_CATALOG_JDEPOCH = J2016.0
 
-// Geodesic grid constants
-inline int nr_of_zones(int level) { return 20 * (1 << (level * 2)) + 1; }
-

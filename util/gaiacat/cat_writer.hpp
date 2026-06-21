@@ -1,6 +1,7 @@
 // .cat file writer: reads sorted bucket files, writes final Star2 catalog
 #pragma once
 #include "types.hpp"
+#include "geodesic.hpp"
 #include <string>
 #include <vector>
 #include <cstdint>

@@ -10,4 +10,4 @@
 int zone_number(double x, double y, double z, int level);
 
 // Number of zones at the given level: 20*4^level + 1
-int nr_of_zones(int level);
+inline int nr_of_zones(int level) { return 20 * (1 << (level * 2)) + 1; }

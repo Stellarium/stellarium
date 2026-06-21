@@ -76,10 +76,6 @@ void corners(int level, int index, double c0[3], double c1[3], double c2[3]) {
 
 } // anonymous namespace
 
-int nr_of_zones(int level) {
-	return 20 * (1 << (level * 2)) + 1;
-}
-
 int zone_number(double x, double y, double z, int level) {
 	const double pt[3] = {x, y, z};
 
