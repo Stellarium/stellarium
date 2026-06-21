@@ -457,7 +457,8 @@ void Comet::update(int deltaTime)
 
 
 	// To make comet more apparent in overviews, take field of view into account:
-	const float fov=core->getProjection(core->getAltAzModelViewTransform())->getFov();
+	static StelMovementMgr* mMgr=GETSTELMODULE(StelMovementMgr);
+	const float fov = mMgr->getCurrentFov();
 	if (fov>20)
 		aLum*= (fov/20.0f);
 
