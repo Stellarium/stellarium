@@ -273,6 +273,18 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
     
     /** @type {string} ID of the currently selected pattern */
     var selectedPatternId = null;
+		
+		/** @type {jQuery} Container for artwork images */
+		var $artworkContainer = null;
+
+		/** @type {Array} Current artwork data extracted from index.json */
+		var currentArtworkData = [];
+
+		/** @type {boolean} Flag to prevent multiple artwork click events */
+		var isArtworkClickLocked = false;
+		
+		/** @type {string|null} Currently selected artwork ID */
+		var selectedArtworkId = null;
     
     /** 
      * Current patterns organized by type.
@@ -633,23 +645,32 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         }
     }
 
-    /**
-     * Clear active state from all pattern buttons across all containers.
-     * Called when selection is cleared or culture is changed.
-     */
-    function clearAllActiveButtons() {
-        var containers = [
-            $constellationsContainer, $asterismsContainer, 
-            $zodiacContainer, $lunarContainer, $starsContainer
-        ];
-        for (var i = 0; i < containers.length; i++) {
-            if (containers[i] && containers[i].length) {
-                containers[i].find(".pattern-btn").removeClass("active");
-            }
-        }
-        selectedPattern = null;
-        selectedPatternId = null;
-    }
+		/**
+		 * Clear active state from all pattern buttons across all containers.
+		 * Called when selection is cleared or culture is changed.
+		 * Also clears selected artwork state.
+		 */
+		function clearAllActiveButtons() {
+				var containers = [
+						$constellationsContainer, $asterismsContainer, 
+						$zodiacContainer, $lunarContainer, $starsContainer
+				];
+				for (var i = 0; i < containers.length; i++) {
+						if (containers[i] && containers[i].length) {
+								containers[i].find(".pattern-btn").removeClass("active");
+						}
+				}
+				selectedPattern = null;
+				selectedPatternId = null;
+				
+				// ============================================================
+				// NEW: Clear artwork selection state
+				// ============================================================
+				if ($artworkContainer && $artworkContainer.length) {
+						$artworkContainer.find('.artwork-item').removeClass('selected-artwork');
+						selectedArtworkId = null;
+				}
+		}
 
 		/**
 		 * Update button active states based on current selection.
@@ -1243,6 +1264,103 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 				return limitedPatterns;
 		}
 
+		/**
+		 * Extract artwork data from culture data.
+		 * 
+		 * Extracts constellation illustrations from the index.json file.
+		 * Each artwork contains:
+		 * - id: Constellation ID
+		 * - name: Display name (English or native)
+		 * - searchName: Name used for Stellarium navigation
+		 * - imageFile: Path to image file (e.g., "illustrations/UMi.png")
+		 * - imagePath: Full API path to the image
+		 * - nativeName: Native name of the constellation (if available)
+		 * - englishName: English name of the constellation (if available)
+		 * 
+		 * Returns empty array if no illustrations are available.
+		 * 
+		 * @param {Object} cultureData - The culture data from index.json
+		 * @param {Array} constellations - Pre-loaded constellation patterns
+		 * @returns {Array} Array of artwork objects
+		 */
+		function extractArtworkFromIndexJson(cultureData, constellations) {
+				var artworks = [];
+				
+				// Early exit if no culture data or no constellations
+				if (!cultureData || !constellations || !constellations.length) {
+						console.log("[SkyCulture] No constellations data available for artwork extraction");
+						return artworks;
+				}
+				
+				// Check if constellations have image data
+				var hasImages = false;
+				if (cultureData.constellations && Array.isArray(cultureData.constellations)) {
+						for (var i = 0; i < cultureData.constellations.length; i++) {
+								if (cultureData.constellations[i].image && cultureData.constellations[i].image.file) {
+										hasImages = true;
+										break;
+								}
+						}
+				}
+				
+				if (!hasImages) {
+						console.log("[SkyCulture] No artwork images found in culture data");
+						return artworks;
+				}
+				
+				// Build a map of constellation IDs to patterns for quick lookup
+				var patternMap = {};
+				for (var i = 0; i < constellations.length; i++) {
+						patternMap[constellations[i].id] = constellations[i];
+				}
+				
+				// Extract artwork from constellations
+				for (var i = 0; i < cultureData.constellations.length; i++) {
+						var origCon = cultureData.constellations[i];
+						if (!origCon.image || !origCon.image.file) continue;
+						
+						// Find matching pattern in constellations array to get display names
+						var matchingPattern = patternMap[origCon.id] || null;
+						
+						// Get display name - prefer English from common_name, then native, then id
+						var displayName = origCon.id;
+						if (origCon.common_name) {
+								displayName = origCon.common_name.english || 
+															origCon.common_name.native || 
+															origCon.id;
+						}
+						
+						// Get search name (for Stellarium navigation) - prefer English
+						var searchName = origCon.id;
+						if (origCon.common_name) {
+								searchName = origCon.common_name.english || 
+														 origCon.common_name.native || 
+														 origCon.id;
+						}
+						
+						// Build artwork object
+						artworks.push({
+								id: origCon.id,
+								name: displayName,
+								searchName: searchName,
+								imageFile: origCon.image.file,
+								imagePath: '/api/view/skyculturedescription/' + origCon.image.file,
+								nativeName: origCon.common_name ? origCon.common_name.native || null : null,
+								englishName: origCon.common_name ? origCon.common_name.english || null : null,
+								// Store the original constellation data for reference
+								originalData: origCon
+						});
+				}
+				
+				// Sort alphabetically by display name
+				artworks.sort(function(a, b) {
+						return a.name.localeCompare(b.name);
+				});
+				
+				console.log("[SkyCulture] Extracted " + artworks.length + " artwork images from index.json");
+				return artworks;
+		}
+
     // =====================================================================
     // 10. PANEL RENDERING FUNCTIONS
     // =====================================================================
@@ -1385,6 +1503,211 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
             });
     }
 
+		/**
+		 * Render the Artwork panel with constellation images.
+		 * 
+		 * @param {Array} artworks - Array of artwork objects
+		 */
+		function renderArtworkPanel(artworks) {
+				if (!$artworkContainer || !$artworkContainer.length) {
+						return;
+				}
+				
+				$artworkContainer.empty();
+				updatePatternCount("artwork", artworks ? artworks.length : 0);
+				currentArtworkData = artworks || [];
+				
+				if (!artworks || !artworks.length) {
+						$artworkContainer.html('<div class="loading-placeholder">' + 
+								_tr("No artwork available for this culture") + '</div>');
+						selectedArtworkId = null;
+						return;
+				}
+				
+				// Build artwork grid
+				var gridHtml = '<div class="artwork-grid">';
+				
+				for (var i = 0; i < artworks.length; i++) {
+						var art = artworks[i];
+						// Check if this artwork is currently selected
+						var isSelected = (selectedArtworkId === art.id);
+						
+						gridHtml += '<div class="artwork-item' + (isSelected ? ' selected-artwork' : '') + 
+								'" data-artwork-id="' + escapeHtml(art.id) + 
+								'" data-search-name="' + escapeHtml(art.searchName) + 
+								'" data-artwork-name="' + escapeHtml(art.name) + '">';
+						
+						// Image
+						gridHtml += '<div class="artwork-image-wrapper">';
+						gridHtml += '<img src="' + escapeHtml(art.imagePath) + 
+								'" alt="' + escapeHtml(art.name) + 
+								'" class="artwork-image" loading="lazy" ' +
+								'onerror="this.style.display=\'none\'; this.parentNode.querySelector(\'.artwork-error\').style.display=\'flex\';" />';
+						gridHtml += '<div class="artwork-error" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;align-items:center;justify-content:center;background:rgba(0,0,0,0.1);color:#8A8C8E;font-size:11px;">' + _tr("Image not found") + '</div>';
+						// Zoom button
+						gridHtml += '<button class="artwork-zoom-btn" title="' + _tr("Zoom in") + '">' +
+								'<span class="artwork-zoom-icon">⊕</span>' +
+								'</button>';
+						gridHtml += '</div>';
+						
+						// Name label
+						gridHtml += '<div class="artwork-name">' + escapeHtml(art.name) + '</div>';
+						
+						// Native name (if available and different from display name)
+						if (art.nativeName && art.nativeName !== art.name) {
+								gridHtml += '<div class="artwork-native-name">' + escapeHtml(art.nativeName) + '</div>';
+						}
+						
+						gridHtml += '</div>';
+				}
+				
+				gridHtml += '</div>';
+				$artworkContainer.html(gridHtml);
+				
+				// ============================================================
+				// Attach click handlers for artwork items
+				// ============================================================
+				$artworkContainer.find('.artwork-item').on('click', function(e) {
+						// Check if click was on zoom button
+						if ($(e.target).closest('.artwork-zoom-btn').length) {
+								return;
+						}
+						
+						if (isArtworkClickLocked) return;
+						isArtworkClickLocked = true;
+						
+						var $item = $(this);
+						var searchName = $item.data('search-name');
+						var artworkId = $item.data('artwork-id');
+						var artworkName = $item.data('artwork-name');
+						
+						if (searchName) {
+								// Toggle constellation highlight - returns true if activated, false if deactivated
+								var isNowActive = stelUtils.toggleConstellationHighlight(searchName, artworkId);
+								
+								// ============================================================
+								// FIX: Explicitly manage state based on toggle result
+								// ============================================================
+								if (isNowActive) {
+										// Activated: mark as selected
+										selectedArtworkId = artworkId;
+										$artworkContainer.find('.artwork-item').removeClass('selected-artwork');
+										$item.addClass('selected-artwork');
+										
+										// Update button states
+										updateAllButtonStates();
+										
+										// Also update the constellations tab button state
+										updateConstellationButtonState(artworkId);
+								} else {
+										// Deactivated: clear everything
+										selectedArtworkId = null;
+										$artworkContainer.find('.artwork-item').removeClass('selected-artwork');
+										
+										// Clear pattern selection
+										selectedPattern = null;
+										selectedPatternId = null;
+										
+										// Explicitly clear button states
+										clearAllActiveButtons();
+										
+										// Ensure UI is updated
+										updateAllButtonStates();
+								}
+								
+								console.log("[SkyCulture] Artwork clicked:", artworkName, "ID:", artworkId, "Active:", isNowActive);
+						}
+						
+						setTimeout(function() {
+								isArtworkClickLocked = false;
+						}, 300);
+				});				
+
+				// ============================================================
+				// Zoom button handler
+				// ============================================================
+				$artworkContainer.find('.artwork-zoom-btn').on('click', function(e) {
+						e.preventDefault();
+						e.stopPropagation();
+						
+						var $item = $(this).closest('.artwork-item');
+						var imgSrc = $item.find('.artwork-image').attr('src');
+						var imgAlt = $item.find('.artwork-image').attr('alt');
+						
+						showArtworkModal(imgSrc, imgAlt);
+				});
+		}
+
+		/**
+		 * Update the active state of the corresponding constellation button
+		 * when an artwork is clicked.
+		 * 
+		 * @param {string} constellationId - The ID of the constellation
+		 */
+		function updateConstellationButtonState(constellationId) {
+				if (!$constellationsContainer) return;
+				
+				// Remove active class from all constellation buttons
+				$constellationsContainer.find('.pattern-btn').removeClass('active');
+				
+				// Find and activate the matching button
+				$constellationsContainer.find('.pattern-btn').each(function() {
+						var $btn = $(this);
+						var btnId = $btn.data('pattern-id');
+						if (btnId === constellationId) {
+								$btn.addClass('active');
+								selectedPattern = $btn.data('pattern-name');
+								selectedPatternId = constellationId;
+						}
+				});
+		}
+
+		/**
+		 * Show artwork in a modal dialog.
+		 * 
+		 * @param {string} imageSrc - The image source URL
+		 * @param {string} imageName - The name of the artwork
+		 */
+		function showArtworkModal(imageSrc, imageName) {
+				// Check if modal already exists
+				var $existingModal = $('#artwork-modal-overlay');
+				if ($existingModal.length) {
+						$existingModal.remove();
+				}
+				
+				var modalHtml = 
+						'<div id="artwork-modal-overlay" class="artwork-modal-overlay">' +
+								'<div class="artwork-modal-content">' +
+										'<button class="artwork-modal-close" title="' + _tr("Close") + '">✕</button>' +
+										'<div class="artwork-modal-image-wrapper">' +
+												'<img src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(imageName) + '" class="artwork-modal-image" />' +
+										'</div>' +
+										'<div class="artwork-modal-name">' + escapeHtml(imageName) + '</div>' +
+								'</div>' +
+						'</div>';
+				
+				$('body').append(modalHtml);
+				
+				// Close modal on click outside or on close button
+				$('#artwork-modal-overlay').on('click', function(e) {
+						if (e.target === this || $(e.target).closest('.artwork-modal-close').length) {
+								$(this).fadeOut(200, function() {
+										$(this).remove();
+								});
+						}
+				});
+				
+				// Close on Escape key
+				$(document).on('keydown.artworkModal', function(e) {
+						if (e.key === 'Escape') {
+								$('#artwork-modal-overlay').fadeOut(200, function() {
+										$(this).remove();
+										$(document).off('keydown.artworkModal');
+								});
+						}
+				});
+		}
+
     // =====================================================================
     // 11. MAIN DATA LOADING FUNCTION
     // =====================================================================
@@ -1408,7 +1731,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         
         // Update current language
         getCurrentLanguage();
-        
+				   
         // Show loading states in all panels
         if ($constellationsContainer) {
             $constellationsContainer.html('<div class="loading-placeholder">' + 
@@ -1430,6 +1753,12 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
             $starsContainer.html('<div class="loading-placeholder">' + 
                 _tr("Loading star names...") + '</div>');
         }
+				
+				    // Artwork loading placeholder
+				if ($artworkContainer) {
+						$artworkContainer.html('<div class="loading-placeholder">' + 
+								_tr("Loading artwork...") + '</div>');
+				}
         
         // Reset counters and clear active selections
         updatePatternCount("constellations", 0);
@@ -1437,7 +1766,13 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         updatePatternCount("zodiac", 0);
         updatePatternCount("lunar", 0);
         updatePatternCount("stars", 0);
-        clearAllActiveButtons();
+				updatePatternCount("artwork", 0);        
+				clearAllActiveButtons();
+				
+		    selectedArtworkId = null;
+				if ($artworkContainer && $artworkContainer.length) {
+						$artworkContainer.find('.artwork-item').removeClass('selected-artwork');
+				}
         
         // Fetch index.json - the SINGLE SOURCE OF TRUTH
         $.ajax({
@@ -1455,6 +1790,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
                 var zodiac = extractZodiac(data);
                 var lunar = extractLunarMansions(data);
                 var stars = extractStarNames(data);
+								var artworks = extractArtworkFromIndexJson(data, constellations);
                 
                 // Render all panels
                 renderConstellationsPanel(constellations);
@@ -1462,6 +1798,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
                 renderZodiacPanel(zodiac);
                 renderLunarPanel(lunar);
                 renderStarsPanel(stars);
+								renderArtworkPanel(artworks);								
 													
 								// Render all panels
                 renderConstellationsPanel(constellations, isMultiSelectModeActive);
@@ -1478,6 +1815,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
                 renderZodiacPanel(null);
                 renderLunarPanel(null);
                 renderStarsPanel(null);
+								renderArtworkPanel([]); // Clear artwork on error										
                 
                 if (callback) callback(false);
             }
@@ -1659,8 +1997,22 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 				$(document).on("objectSelected", function(evt, data) {
 						if (!syncEnabled) return;
 						
+						/*if (!data || !data.type || data.type === 'none' || !data.name) {
+								clearAllActiveButtons();
+								return;
+						}*/
+						
 						if (!data || !data.type || data.type === 'none' || !data.name) {
 								clearAllActiveButtons();
+								selectedPattern = null;
+								selectedPatternId = null;
+								
+								// Cleaar selection in Arwork tab
+								if ($artworkContainer && $artworkContainer.length) {
+										$artworkContainer.find('.artwork-item').removeClass('selected-artwork');
+										selectedArtworkId = null;
+								}
+								updateAllButtonStates();
 								return;
 						}
 						
@@ -1828,6 +2180,36 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 						}
 						
 						if (!found) clearAllActiveButtons();
+						
+						if (data.type === 'constellation' && data.id && $artworkContainer && $artworkContainer.length) {
+								var constellationId = data.id;
+								var found = false;
+								
+								$artworkContainer.find('.artwork-item').each(function() {
+										var $item = $(this);
+										var itemId = $item.data('artwork-id');
+										
+										if (itemId === constellationId) {
+												$artworkContainer.find('.artwork-item').removeClass('selected-artwork');
+												$item.addClass('selected-artwork');
+												selectedArtworkId = constellationId;
+												found = true;
+												console.log("[SkyCulture] Artwork synchronized from external event:", data.name);
+										}
+								});
+								
+								if (!found) {
+										// Clear selection , image not found
+										$artworkContainer.find('.artwork-item').removeClass('selected-artwork');
+										selectedArtworkId = null;
+								}
+						} else if (data.type !== 'constellation') {
+								// Unkown event, clear selection
+								if ($artworkContainer && $artworkContainer.length) {
+										$artworkContainer.find('.artwork-item').removeClass('selected-artwork');
+										selectedArtworkId = null;
+								}
+						}
 				});
 				
 				// ============================================================
@@ -1898,7 +2280,10 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
                 "#lunar-buttons-container");
             $starsContainer = $(patternsContainers.stars || 
                 "#stars-buttons-container");
-        }
+						// Artwork container
+						$artworkContainer = $(patternsContainers.artwork || 
+								"#artwork-container");
+				}
         
         $infoFrame = $(iframeSelector || "#vo_skycultureinfo");
         

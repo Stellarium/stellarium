@@ -5,11 +5,11 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
     "./scripts", "./viewcontrol", "./location", "./search", "ui/skyculture", 
     "ui/skyculture-stats", "./gpcontroller", 
     "scripteditor/scriptEditor", "scripteditor/codeGenerator",
-		"scripteditor/apiExplorer", "scripteditor/actionsCategorized", "scripteditor/tour-generator", "jquery-ui"
+		"scripteditor/apiExplorer", "scripteditor/actionsCategorized", "jquery-ui"
 ], function($, settings, globalize, rc, actionApi, propApi, timeui,
     JoystickQueue, actionsui, viewoptionsui, scriptsui, viewcontrolui, locationui,
     searchui, skyculture, skycultureStats, gpcontroller,
-    scriptEditor, codeGenerator, apiExplorer, actionsCategorized, tourGenerator) {
+    scriptEditor, codeGenerator, apiExplorer, actionsCategorized) {
     "use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
@@ -363,7 +363,8 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 										asterisms: "#asterisms-buttons-container",
 										zodiac: "#zodiac-buttons-container",
 										lunar: "#lunar-buttons-container",
-										stars: "#stars-buttons-container"
+										stars: "#stars-buttons-container",
+										artwork: "#artwork-container"  // Add artwork container
 								};
 								
 								// Initialize the skyculture module with culture selector, patterns containers, and info iframe

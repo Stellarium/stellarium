@@ -11,8 +11,8 @@
 	<link type="text/css" rel="stylesheet" href="/js/scripteditor/css/scriptEditor.css" />
 	
 	<!-- CodeMirror - Local Code Editor with Syntax Highlighting -->
-	<link rel="stylesheet" href="/js/scripteditor/codemirror/css/codemirror.min.css">
-	<link rel="stylesheet" href="/js/scripteditor/codemirror/css/dialog.min.css">
+	<link rel="stylesheet" href="/js/scripteditor/codemirror/css/codemirror.min.css"/>
+	<link rel="stylesheet" href="/js/scripteditor/codemirror/css/dialog.min.css"/>
 	<script src="/js/scripteditor/codemirror/js/codemirror.min.js"></script>
 	<script src="/js/scripteditor/codemirror/js/show-hint.min.js"></script>
 	<script src="/js/scripteditor/codemirror/js/closebrackets.min.js"></script>
@@ -747,6 +747,7 @@
 													<li><a href="#patterns-tab-lunar"><?= tr("Lunar Mansions")?> <span id="lunar-count" class="pattern-count"></span></a></li>
 													<li><a href="#patterns-tab-stars"><?= tr("Notable Stars")?> <span id="stars-count" class="pattern-count"></span></a></li>
 													<li><a href="#patterns-tab-description"><?= tr("Description")?></a></li>
+													<li><a href="#patterns-tab-artwork"><?= tr("Artwork")?> <span id="artwork-count" class="pattern-count"></span></a></li>
 											</ul>
 											
 											<!-- Constellations Tab -->
@@ -792,6 +793,14 @@
 											<!-- Description Tab with iframe -->
 											<div id="patterns-tab-description" class="patterns-tab-content">
 													<iframe id="vo_skycultureinfo" class="skyculture-info-frame" src="/api/view/skyculturedescription/"></iframe>
+											</div>
+											
+											<!-- Artwork Tab -->
+											<div id="patterns-tab-artwork" class="patterns-tab-content">
+													<p class="patterns-note"><?= tr("Constellation illustrations from the current sky culture. Click an image to locate the constellation in the sky.")?></p>
+													<div id="artwork-container" class="artwork-container">
+															<div class="loading-placeholder"><?= tr("No artwork available for this culture")?></div>
+													</div>
 											</div>
 											
 									</div><!-- END #skyculture-patterns-tabs -->
@@ -1265,13 +1274,7 @@
 													
 													<!-- Code Editor region - CodeMirror -->
 													<div id="script-editor-container" class="script-editor-container">
-															<textarea id="script-editor" placeholder="// <?= tr("Write Stellarium script code here...")?>
-// <?= tr("Example:")?>
-// core.setDate(&quot;2026-01-01T00:00:00&quot;, &quot;utc&quot;);
-// core.moveToObject(&quot;Mars&quot;, 2);
-// core.wait(3);
-// core.setFov(60);">
-														</textarea>
+															<textarea id="script-editor"></textarea>
 													</div>
 																										
 													<!-- Keyboard Shortcuts Panel -->
@@ -1292,6 +1295,7 @@
 															<!-- Group 3: Line Operations -->
 															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>D</kbd> <?= tr("Delete Line")?></span>
 															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>K</kbd> <?= tr("Kill to Line End")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>C</kbd> <?= tr("Copy Curret Line")?></span>
 															<span class="shortcut-item"><kbd>Alt</kbd>+<kbd>↑</kbd> <?= tr("Move Line Up")?></span>
 															<span class="shortcut-item"><kbd>Alt</kbd>+<kbd>↓</kbd> <?= tr("Move Line Down")?></span>
 															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>↑</kbd> <?= tr("Copy Line Up")?></span>
@@ -1426,7 +1430,7 @@
 															</div>
 															<!-- Script Control Buttons with Icons -->
 															<div class="script-controls">
-																	<button id="bt_runscript" class="script-control-btn icon32" disabled="disabled" title="<?= tr("Run selected script")?>"></button>
+																	<button id="bt_runscript" class="script-control-btn icon32 btScriptRun" disabled="disabled" title="<?= tr("Run selected script")?>"></button>
 																	<button id="bt_stopscript" class="script-control-btn icon32" disabled="disabled" title="<?= tr("Stop current script")?>"></button>
 																	<button id="bt_script_resetview" class="script-control-btn icon32" title="<?= tr("Reset to natural sky appearance (South, 40°, FOV 90°)")?>"></button>
 															</div>

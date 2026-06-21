@@ -1944,6 +1944,338 @@ button.button32:active {
 }
 
 /* ========================================================================
+ * ARTWORK / ILLUSTRATIONS STYLES
+ * ======================================================================== */
+
+.artwork-container {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 150px;
+}
+
+.artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.artwork-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 6px;
+    padding: 10px 8px 8px 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.artwork-item:hover {
+    background: rgba(180, 183, 176, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: rgba(180, 183, 176, 0.3);
+}
+
+.artwork-item:active {
+    transform: translateY(0px);
+}
+
+.artwork-item.active {
+    border-color: #000000;
+    background: rgba(180, 183, 176, 0.2);
+}
+
+.artwork-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.artwork-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.artwork-item:hover .artwork-image {
+    transform: scale(1.02);
+}
+
+/* Zoom button - appears on hover */
+.artwork-zoom-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.25s ease;
+    z-index: 2;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.artwork-item:hover .artwork-zoom-btn {
+    opacity: 1;
+}
+
+.artwork-zoom-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.artwork-zoom-btn:active {
+    transform: scale(0.95);
+}
+
+.artwork-zoom-icon {
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 300;
+    color: #FFFFFF;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.artwork-name {
+    font-size: 11px;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 6px;
+    line-height: 1.3;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.artwork-native-name {
+    font-size: 10px;
+    color: #5D5F62;
+    font-style: italic;
+    margin-top: 2px;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+/* ========================================================================
+ * ARTWORK MODAL (Lightbox)
+ * ======================================================================== */
+
+.artwork-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: artworkModalFadeIn 0.25s ease;
+    backdrop-filter: blur(4px);
+}
+
+@keyframes artworkModalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.artwork-modal-content {
+    position: relative;
+    background: rgba(48, 49, 52, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.artwork-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: #DCDBDA;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    z-index: 3;
+    line-height: 1;
+}
+
+.artwork-modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+    transform: scale(1.1);
+}
+
+.artwork-modal-image-wrapper {
+    max-width: 80vw;
+    max-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.artwork-modal-image {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.artwork-modal-name {
+    margin-top: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #DCDBDA;
+    text-align: center;
+    padding: 0 20px;
+}
+
+/* ========================================================================
+ * ARTWORK SELECTED STATE
+ * ======================================================================== */
+
+/* Highlight frame for the selected image */
+.artwork-item.selected-artwork {
+    border-color: #000000;
+    background: rgba(180, 183, 176, 0.2);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Clearer frame with a subtle effect */
+.artwork-item.selected-artwork .artwork-image {
+    filter: brightness(0.98);
+}
+
+/* Additional styling for the selected image - decorative border lines */
+.artwork-item.selected-artwork::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid #8A8C8E;
+    border-radius: 6px;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Hover styling for the selected image */
+.artwork-item.selected-artwork:hover {
+    border-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Alternative frame style for the selected image */
+.artwork-item.selected-artwork .artwork-image-wrapper {
+    box-shadow: 0 0 0 3px #B4B7B0, 0 0 0 6px rgba(180, 183, 176, 0.2);
+    border-radius: 4px;
+    transition: box-shadow 0.2s ease;
+}
+
+/* ========================================================================
+ * ARTWORK RESPONSIVE
+ * ======================================================================== */
+
+@media (max-width: 768px) {
+    .artwork-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
+    }
+    
+    .artwork-name {
+        font-size: 10px;
+    }
+    
+    .artwork-native-name {
+        font-size: 9px;
+    }
+    
+    .artwork-zoom-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        opacity: 0.8; /* Always visible on mobile */
+    }
+    
+    .artwork-modal-content {
+        padding: 15px;
+        max-width: 95vw;
+    }
+    
+    .artwork-modal-image-wrapper {
+        max-width: 90vw;
+        max-height: 60vh;
+    }
+    
+    .artwork-modal-image {
+        max-height: 60vh;
+    }
+    
+    .artwork-modal-name {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .artwork-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+    }
+    
+    .artwork-item {
+        padding: 6px 4px 6px 4px;
+    }
+    
+    .artwork-name {
+        font-size: 9px;
+    }
+    
+    .artwork-native-name {
+        font-size: 8px;
+    }
+}
+
+/* ========================================================================
  * SCRIPT PANEL VISUAL INDICATORS & BUTTON STYLES
  * ======================================================================== */
 
