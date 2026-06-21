@@ -148,10 +148,10 @@ static void dedup(const std::string& ref_path, const std::string& in_path,
 			auto it = ref_map.find(gid);
 			if (it != ref_map.end()) {
 				removed++;
-				if (verbose && printed < 100) {
+				if (verbose) {
 					auto in_info = Star2Info::decode(buf);
 					auto ref_info = Star2Info::decode(it->second.data());
-					printf("\n--- Duplicate #%d (zone %d) ---\n", ++printed, z);
+					printf("\n--- Duplicate #%llu (zone %d) ---\n", (unsigned long long)removed, z);
 					printf("Level %d (reference): ", level_ref); ref_info.print(); printf("\n");
 					printf("Level %d (input):     ", level_in);  in_info.print();  printf("\n");
 					printf("  Vmag diff=%.3f  B-V diff=%.4f  RA diff=%.6f deg  DEC diff=%.6f deg  plx diff=%.3f mas\n",
