@@ -1,23 +1,60 @@
 // Deduplicate a Stellarium .cat file against a reference catalog.
 // Stars whose Gaia ID appears in the reference are removed.
-// Single pass over input: unordered_set O(1) lookup, sequential output write.
+// Single pass over input. Supports verbose duplicate printing and dry-run.
 
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
 #include <vector>
-#include <unordered_set>
+#include <unordered_map>
 #include <string>
 #include <iostream>
+#include <cmath>
+#include <array>
 
 static int nr_of_zones(int level) {
 	return 20 * (1 << (level * 2)) + 1;
 }
 
-static void dedup(const std::string& ref_path, const std::string& in_path, const std::string& out_path) {
-	// ── Read reference: build unordered_set ──
-	std::unordered_set<uint64_t> ref_ids;
+struct Star2Info {
+	double ra_deg, dec_deg, vmag, bv, plx_mas, pmra, pmdec;
+	int64_t gaia_id;
+
+	static Star2Info decode(const uint8_t buf[32]) {
+		Star2Info s;
+		std::memcpy(&s.gaia_id, buf, 8);
+		int32_t x0, x1, dx0, dx1;
+		int16_t bv_i, vmag_i;
+		uint16_t plx_u;
+		std::memcpy(&x0,    buf + 8,  4);
+		std::memcpy(&x1,    buf + 12, 4);
+		std::memcpy(&dx0,   buf + 16, 4);
+		std::memcpy(&dx1,   buf + 20, 4);
+		std::memcpy(&bv_i,  buf + 24, 2);
+		std::memcpy(&vmag_i,buf + 26, 2);
+		std::memcpy(&plx_u, buf + 28, 2);
+		s.ra_deg  = x0 / 3600000.0;
+		s.dec_deg = x1 / 3600000.0 - 90.0;
+		s.vmag    = vmag_i / 1000.0;
+		s.bv      = bv_i / 1000.0;
+		s.plx_mas = plx_u / 100.0;
+		s.pmra    = dx0 / 1000.0;
+		s.pmdec   = dx1 / 1000.0;
+		return s;
+	}
+
+	void print() const {
+		printf("  Gaia %lld  RA=%.6f  DEC=%.6f  V=%.3f  B-V=%.3f  plx=%.2f mas  pm=(%.2f,%.2f) mas/yr",
+			(long long)gaia_id, ra_deg, dec_deg, vmag, bv, plx_mas, pmra, pmdec);
+	}
+};
+
+static void dedup(const std::string& ref_path, const std::string& in_path,
+		  const std::string& out_path, bool verbose, bool dry_run) {
+	// ── Load reference: gaia_id → packed 32B record ──
+	std::unordered_map<uint64_t, std::array<uint8_t, 32>> ref_map;
+	int level_ref = 0;
 
 	{
 		FILE* f = std::fopen(ref_path.c_str(), "rb");
@@ -26,7 +63,7 @@ static void dedup(const std::string& ref_path, const std::string& in_path, const
 		uint32_t hdr[6]; float ep;
 		std::fread(hdr, sizeof(uint32_t), 6, f);
 		std::fread(&ep, sizeof(float), 1, f);
-		int level_ref = static_cast<int>(hdr[4]);
+		level_ref = static_cast<int>(hdr[4]);
 		int nz = nr_of_zones(level_ref);
 		auto counts = std::vector<uint32_t>(nz);
 		fseeko(f, 28, SEEK_SET);
@@ -36,10 +73,11 @@ static void dedup(const std::string& ref_path, const std::string& in_path, const
 		for (auto c : counts) total_ref += c;
 		std::cout << "Reference: level=" << level_ref << ", " << total_ref << " stars\n";
 
+		if (verbose) ref_map.reserve(static_cast<size_t>(total_ref));
+
 		int64_t base = 28 + static_cast<int64_t>(nz) * 4;
 		int64_t off = base;
 		uint8_t buf[32];
-		ref_ids.reserve(static_cast<size_t>(total_ref));
 		for (int z = 0; z < nz; ++z) {
 			uint32_t cnt = counts[z];
 			if (cnt == 0) continue;
@@ -48,15 +86,21 @@ static void dedup(const std::string& ref_path, const std::string& in_path, const
 				std::fread(buf, 32, 1, f);
 				uint64_t gid;
 				std::memcpy(&gid, buf, 8);
-				ref_ids.insert(gid);
+				if (verbose) {
+					std::array<uint8_t, 32> rec;
+					std::memcpy(rec.data(), buf, 32);
+					ref_map[gid] = rec;
+				} else {
+					ref_map[gid] = {};
+				}
 			}
 			off += static_cast<int64_t>(cnt) * 32;
 		}
 		std::fclose(f);
-		std::cout << "  " << ref_ids.size() << " unique IDs loaded\n";
+		std::cout << "  " << ref_map.size() << " unique IDs loaded\n";
 	}
 
-	// ── Process input: zone-by-zone write to output ──
+	// ── Process input ──
 	FILE* fin = std::fopen(in_path.c_str(), "rb");
 	if (!fin) { std::cerr << "ERROR: cannot open " << in_path << "\n"; return; }
 
@@ -74,22 +118,23 @@ static void dedup(const std::string& ref_path, const std::string& in_path, const
 	for (auto c : in_counts) total_in += c;
 	std::cout << "Input:    level=" << level_in << ", " << total_in << " stars\n";
 
-	// Output: write header + placeholder zone table, then stream stars
-	FILE* fout = std::fopen(out_path.c_str(), "wb");
-	if (!fout) { std::cerr << "ERROR: cannot create " << out_path << "\n"; std::fclose(fin); return; }
-
-	std::fwrite(hdr, sizeof(uint32_t), 6, fout);
-	std::fwrite(&epoch, sizeof(float), 1, fout);
-
-	// Placeholder zone table (will be overwritten at the end)
-	auto out_counts = std::vector<uint32_t>(nz, 0);
-	std::fwrite(out_counts.data(), sizeof(uint32_t), nz, fout);
+	FILE* fout = nullptr;
+	std::vector<uint32_t> out_counts;
+	if (!dry_run) {
+		fout = std::fopen(out_path.c_str(), "wb");
+		if (!fout) { std::cerr << "ERROR: cannot create " << out_path << "\n"; std::fclose(fin); return; }
+		std::fwrite(hdr, sizeof(uint32_t), 6, fout);
+		std::fwrite(&epoch, sizeof(float), 1, fout);
+		out_counts.resize(nz, 0);
+		std::fwrite(out_counts.data(), sizeof(uint32_t), nz, fout);
+	}
 
 	int64_t in_base = 28 + static_cast<int64_t>(nz) * 4;
 	int64_t in_off = in_base;
 	uint64_t total_out = 0;
 	uint64_t removed = 0;
 	uint8_t buf[32];
+	int printed = 0;
 
 	for (int z = 0; z < nz; ++z) {
 		uint32_t cnt = in_counts[z];
@@ -100,36 +145,63 @@ static void dedup(const std::string& ref_path, const std::string& in_path, const
 			std::fread(buf, 32, 1, fin);
 			uint64_t gid;
 			std::memcpy(&gid, buf, 8);
-			if (ref_ids.find(gid) != ref_ids.end()) {
+			auto it = ref_map.find(gid);
+			if (it != ref_map.end()) {
 				removed++;
+				if (verbose && printed < 100) {
+					auto in_info = Star2Info::decode(buf);
+					auto ref_info = Star2Info::decode(it->second.data());
+					printf("\n--- Duplicate #%d (zone %d) ---\n", ++printed, z);
+					printf("Level %d (reference): ", level_ref); ref_info.print(); printf("\n");
+					printf("Level %d (input):     ", level_in);  in_info.print();  printf("\n");
+					printf("  Vmag diff=%.3f  B-V diff=%.4f  RA diff=%.6f deg  DEC diff=%.6f deg  plx diff=%.3f mas\n",
+						in_info.vmag - ref_info.vmag, in_info.bv - ref_info.bv,
+						in_info.ra_deg - ref_info.ra_deg, in_info.dec_deg - ref_info.dec_deg,
+						in_info.plx_mas - ref_info.plx_mas);
+				}
 			} else {
-				std::fwrite(buf, 32, 1, fout);
-				out_counts[z]++;
 				total_out++;
+				if (!dry_run) {
+					std::fwrite(buf, 32, 1, fout);
+					out_counts[z]++;
+				}
 			}
 		}
 		in_off += static_cast<int64_t>(cnt) * 32;
 	}
 
+	if (verbose && printed > 0)
+		printf("\n(Showing first %d duplicates)\n", printed);
+
 	// Write corrected zone table
-	fseeko(fout, 28, SEEK_SET);
-	std::fwrite(out_counts.data(), sizeof(uint32_t), nz, fout);
+	if (!dry_run) {
+		fseeko(fout, 28, SEEK_SET);
+		std::fwrite(out_counts.data(), sizeof(uint32_t), nz, fout);
+		std::fclose(fout);
+		auto size_mb = static_cast<double>(28 + nz*4 + total_out*32) / 1048576.0;
+		std::cout << "  Written: " << out_path << " (" << size_mb << " MB)\n";
+	}
 
 	std::fclose(fin);
-	std::fclose(fout);
-
 	std::cout << "  Removed: " << removed << " (" << (100.0*removed/(total_in?total_in:1)) << "%)\n";
 	std::cout << "  Output:  " << total_out << " stars\n";
-
-	auto size_mb = static_cast<double>(28 + nz*4 + total_out*32) / 1048576.0;
-	std::cout << "  Written: " << out_path << " (" << size_mb << " MB)\n";
 }
 
 int main(int argc, char** argv) {
-	if (argc != 4) {
-		std::cerr << "Usage: dedup_cat <reference.cat> <input.cat> <output.cat>\n";
+	bool verbose = false, dry_run = false;
+	std::string ref, input, output;
+	for (int i = 1; i < argc; ++i) {
+		std::string a = argv[i];
+		if (a == "--verbose") verbose = true;
+		else if (a == "--dry-run") dry_run = true;
+		else if (ref.empty()) ref = a;
+		else if (input.empty()) input = a;
+		else output = a;
+	}
+	if (ref.empty() || input.empty() || (!dry_run && output.empty())) {
+		std::cerr << "Usage: dedupcat [--verbose] [--dry-run] <reference.cat> <input.cat> [<output.cat>]\n";
 		return 1;
 	}
-	dedup(argv[1], argv[2], argv[3]);
+	dedup(ref, input, output, verbose, dry_run);
 	return 0;
 }
