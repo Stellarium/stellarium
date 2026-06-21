@@ -155,9 +155,9 @@ static void process_dat_file(
 				brec.ra_i    = static_cast<int32_t>(std::round(ra * 3600000.0));
 				brec.dec_i   = static_cast<int32_t>(std::round(dec * 3600000.0));
 				brec.gaia_id = r.gaia_id;
-				brec.pmra_i  = static_cast<int32_t>(std::round(r.pmra * 1000.0));
-				brec.pmdec_i = static_cast<int32_t>(std::round(r.pmdec * 1000.0));
-				brec.plx_i   = static_cast<int32_t>(std::round(r.plx  * 100.0));
+				brec.pmra_i  = static_cast<int32_t>(std::round(r.pmra * 1000000.0));
+				brec.pmdec_i = static_cast<int32_t>(std::round(r.pmdec * 1000000.0));
+				brec.plx_i   = static_cast<int32_t>(std::round(r.plx  * 100000.0));
 
 				bucket_writers[li]->push(brec);
 			}

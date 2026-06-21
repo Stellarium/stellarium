@@ -1,5 +1,5 @@
 // Photometric conversions: G→V and BP-RP→B-V
-// Formulas match Cartes du Ciel (cu_catalog.pas:6500-6530)
+// Formulas match Cartes du Ciel (cu_catalog.pas:6500-6540)
 
 #include "convert.hpp"
 #include <cmath>
@@ -14,8 +14,14 @@ double g_to_v(double g, double c)
 
 double bp_rp_to_bv(double c)
 {
+	// CdC sets B-V=0 when BP/RP is unavailable
 	if (std::isnan(c))
-		return 0.5;
+		return 0.0;
+
+	// Degradation: when BP-RP is outside the valid polynomial range
+	if (c < -0.3 || c > 3.0) {
+		return 0.5 * c;
+	}
 
 	double bt_vt = -0.006482 + 0.7865*c - 0.3631*c*c + 0.93192*c*c*c - 0.4843*c*c*c*c + 0.06814*c*c*c*c*c;
 
@@ -27,5 +33,5 @@ double bp_rp_to_bv(double c)
 	} else {
 		bv = 0.850 * bt_vt;
 	}
-	return std::max(0.0, std::min(bv, 5.35));
+	return bv;
 }
