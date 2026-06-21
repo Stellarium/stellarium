@@ -19,6 +19,10 @@ add_executable(dedupcat
 	dedup_cat.cpp
 )
 
+add_executable(cmpcat
+	cmpcat.cpp
+)
+
 # Link pthread on Linux
 if(UNIX AND NOT APPLE)
 	target_link_libraries(skychart2cat PRIVATE pthread)
