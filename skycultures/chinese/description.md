@@ -529,6 +529,8 @@ This sky culture was initially contributed by *Karrie Berglund* of Digitalis Edu
 
 Sun Shuwei [sunshuwei.hi@foxmail.com](mailto:sunshuwei.hi@foxmail.com) replenishes more than 200 Xingguans and more than 3,000 stars, based primarily on the book *Chinese and Western Contrast Star Chart and Catalogue 1950.0* by Yi Shitong, and add the description.
 
+**Statement**: The basic reference for the cultural map of China's sky cultures is Tan Qixiang's *Historical Atlas of China* (中国历史地图集). It does not reflect any modern borders, nor does it reflect the political intentions of the artist, and is for reference only. The boundaries shown on the map have been significantly simplified and only indicate general outlines, without reflecting any detailed demarcation. The cartographer does not guarantee the accuracy of these boundaries, and any improvements with better delineations are welcome.
+
 ## License
 
 CC BY-SA 4.0
