@@ -1798,10 +1798,17 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			// ---- Pass 1: first approximation at dateJDE -----------------
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
 			{
-				runLevelParallel(level, [obs, dateJDE](const PlanetP& p)
+				// If level is too small, splitting into threads is pointless and may cause more harm than good.
+				if (level.length() > 100)
+					runLevelParallel(level, [obs, dateJDE](const PlanetP& p)
+					{
+						p->computePosition(obs, dateJDE, Vec3d(0.));
+					});
+				else
 				{
-					p->computePosition(obs, dateJDE, Vec3d(0.));
-				});
+					for (const auto &p: std::as_const(level))
+						p->computePosition(obs, dateJDE, Vec3d(0.));
+				}
 			}
 
 			// Snapshot the observer's heliocentric state *by value* (NOT by
@@ -1835,7 +1842,14 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 
 			// ---- Pass 2: light-time + aberration correction -------------
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
-				runLevelParallel(level, lightTimeStep);
+				// If level is too small, splitting into threads is pointless and may cause more harm than good.
+				if (level.length() > 100)
+					runLevelParallel(level, lightTimeStep);
+			else
+				{
+					for (const auto& p: std::as_const(level))
+						lightTimeStep(p);
+				}
 
 			// ---- Pass 3: refinement (and rotation element corrections) --
 			// The next call may already do nothing if the time difference to
@@ -1861,7 +1875,14 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				else if (p->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
 			};
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
-				runLevelParallel(level, lightTimeStepWithRotation);
+				// If level is too small, splitting into threads is pointless and may cause more harm than good.
+				if (level.length() > 100)
+					runLevelParallel(level, lightTimeStepWithRotation);
+			else
+				{
+					for (const auto& p: std::as_const(level))
+						lightTimeStepWithRotation(p);
+				}
 
 			computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 		}
