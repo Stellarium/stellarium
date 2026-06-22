@@ -1513,6 +1513,9 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 						return;
 				}
 				
+				// ============================================================
+				// FIX: Force clear the container completely before rendering
+				// ============================================================
 				$artworkContainer.empty();
 				updatePatternCount("artwork", artworks ? artworks.length : 0);
 				currentArtworkData = artworks || [];
@@ -1524,13 +1527,21 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 						return;
 				}
 				
+				// ============================================================
+				// FIX: Add cache-busting parameter to prevent browser caching
+				// when switching between cultures with same image filenames
+				// ============================================================
+				var cacheBuster = '?t=' + new Date().getTime();
+				var cultureId = currentCultureId || 'unknown';
+				
 				// Build artwork grid
-				var gridHtml = '<div class="artwork-grid">';
+				var gridHtml = '<div class="artwork-grid" data-culture="' + escapeHtml(cultureId) + '">';
 				
 				for (var i = 0; i < artworks.length; i++) {
 						var art = artworks[i];
-						// Check if this artwork is currently selected
 						var isSelected = (selectedArtworkId === art.id);
+						// Add cache-busting parameter to image URL
+						var imageUrl = art.imagePath + cacheBuster;
 						
 						gridHtml += '<div class="artwork-item' + (isSelected ? ' selected-artwork' : '') + 
 								'" data-artwork-id="' + escapeHtml(art.id) + 
@@ -1539,7 +1550,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 						
 						// Image
 						gridHtml += '<div class="artwork-image-wrapper">';
-						gridHtml += '<img src="' + escapeHtml(art.imagePath) + 
+						gridHtml += '<img src="' + escapeHtml(imageUrl) + 
 								'" alt="' + escapeHtml(art.name) + 
 								'" class="artwork-image" loading="lazy" ' +
 								'onerror="this.style.display=\'none\'; this.parentNode.querySelector(\'.artwork-error\').style.display=\'flex\';" />';
@@ -1585,33 +1596,30 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 								// Toggle constellation highlight - returns true if activated, false if deactivated
 								var isNowActive = stelUtils.toggleConstellationHighlight(searchName, artworkId);
 								
-								// ============================================================
-								// FIX: Explicitly manage state based on toggle result
-								// ============================================================
+								// Update artwork selection state based on toggle result
 								if (isNowActive) {
 										// Activated: mark as selected
 										selectedArtworkId = artworkId;
 										$artworkContainer.find('.artwork-item').removeClass('selected-artwork');
 										$item.addClass('selected-artwork');
 										
-										// Update button states
+										// ============================================================
+										// CRITICAL: Update button states when activated
+										// ============================================================
 										updateAllButtonStates();
-										
-										// Also update the constellations tab button state
 										updateConstellationButtonState(artworkId);
+										
 								} else {
-										// Deactivated: clear everything
+										// Deactivated: clear selection
 										selectedArtworkId = null;
 										$artworkContainer.find('.artwork-item').removeClass('selected-artwork');
 										
-										// Clear pattern selection
+										// ============================================================
+										// CRITICAL: Clear pattern selection and button states when deactivated
+										// ============================================================
 										selectedPattern = null;
 										selectedPatternId = null;
-										
-										// Explicitly clear button states
 										clearAllActiveButtons();
-										
-										// Ensure UI is updated
 										updateAllButtonStates();
 								}
 								
@@ -1621,8 +1629,8 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 						setTimeout(function() {
 								isArtworkClickLocked = false;
 						}, 300);
-				});				
-
+				});
+				
 				// ============================================================
 				// Zoom button handler
 				// ============================================================
