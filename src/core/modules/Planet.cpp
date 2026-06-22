@@ -4437,12 +4437,14 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	const bool isSun  = this==ssm->getSun();
 	const bool isMoon = this==ssm->getMoon();
 	const bool currentLocationIsEarth = core->getCurrentLocation().planetName == L1S("Earth");
-	const float eclipseFactor = (screenRd>1.f || (isSun && currentLocationIsEarth)) ? static_cast<float>(solarEclipseFactor) : 1.;
+	const float eclipseFactor = (screenRd>1.f || (isSun && currentLocationIsEarth)) ? static_cast<float>(solarEclipseFactor) : 1.f;
+	//qDebug() << "Called with eclipseFactor" << eclipseFactor;
 
 	if (isSun && currentLocationIsEarth)
 	{
 		static LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-		const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
+		//const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first); // WHY REPEAT?
+		//qDebug() << "Replaced by eclipseFactor" << eclipseFactor;
 		// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
 		// But without atmosphere we should indeed draw a visible corona by default!
 		const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
