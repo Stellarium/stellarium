@@ -864,6 +864,8 @@ Territory of Dog (Chinese: 狗国, Pinyin: Gǒu Guó) consists of 4 stars southe
 
 This sky culture was contributed by Lyu Haocheng. [lvhc2016@126.com](mailto:lvhc2016@126.com)
 
+**Statement**: The basic reference for the cultural map of China's sky cultures is Tan Qixiang's *Historical Atlas of China* (中国历史地图集). It does not reflect any modern borders, nor does it reflect the political intentions of the artist, and is for reference only. The boundaries shown on the map have been significantly simplified and only indicate general outlines, without reflecting any detailed demarcation. The cartographer does not guarantee the accuracy of these boundaries, and any improvements with better delineations are welcome.
+
 ## License
 
 CC BY-SA 4.0
