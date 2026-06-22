@@ -27,7 +27,7 @@ struct Star2Brief {
 	void print(const char* label, int zone) const {
 		printf("  %s Gaia %lld  zone=%u  V=%.3f  B-V=%.3f  RA=%.6f  DEC=%.6f  pm=(%.2f,%.2f) mas/yr  plx=%.2f mas\n",
 			label, (long long)gaia_id, zone, vmag/1000.0, bv/1000.0,
-			x0/3600000.0, x1/3600000.0 - 90.0, dx0/1000.0, dx1/1000.0, plx/100.0);
+			x0/3600000.0, x1/3600000.0, dx0/1000.0, dx1/1000.0, plx/100.0);
 	}
 };
 

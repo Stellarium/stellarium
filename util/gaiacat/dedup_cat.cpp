@@ -24,7 +24,7 @@ struct Star2Info {
 		int32_t x0, x1, dx0, dx1; int16_t bv_i, vmag_i; uint16_t plx_u;
 		std::memcpy(&x0,buf+8,4); std::memcpy(&x1,buf+12,4); std::memcpy(&dx0,buf+16,4); std::memcpy(&dx1,buf+20,4);
 		std::memcpy(&bv_i,buf+24,2); std::memcpy(&vmag_i,buf+26,2); std::memcpy(&plx_u,buf+28,2);
-		s.ra_deg=x0/3600000.0; s.dec_deg=x1/3600000.0-90.0; s.vmag=vmag_i/1000.0;
+		s.ra_deg=x0/3600000.0; s.dec_deg=x1/3600000.0; s.vmag=vmag_i/1000.0;
 		s.bv=bv_i/1000.0; s.plx_mas=plx_u/100.0; s.pmra=dx0/1000.0; s.pmdec=dx1/1000.0;
 		return s;
 	}
