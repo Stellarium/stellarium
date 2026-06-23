@@ -5975,14 +5975,14 @@ Vec3f Planet::getCurrentOrbitColor() const
 		{ isSednoid,      &orbitSednoidsColor    },
 		{ isInterstellar, &orbitInterstellarColor}};
 	static const QMap<QString, Vec3f*>majorPlanetColorMap = {
-		{ "mercury", &orbitMercuryColor},
-		{ "venus",   &orbitVenusColor  },
-		{ "earth",   &orbitEarthColor  },
-		{ "mars",    &orbitMarsColor   },
-		{ "jupiter", &orbitJupiterColor},
-		{ "saturn",  &orbitSaturnColor },
-		{ "uranus",  &orbitUranusColor },
-		{ "neptune", &orbitNeptuneColor}};
+		{ "Mercury",  &orbitMercuryColor},
+		{ "Venus",    &orbitVenusColor  },
+		{ "Earth",    &orbitEarthColor  },
+		{ "Mars",     &orbitMarsColor   },
+		{ "Jupiter",  &orbitJupiterColor},
+		{ "Saturn",   &orbitSaturnColor },
+		{ "Uranus",   &orbitUranusColor },
+		{ "Neptune",  &orbitNeptuneColor}};
 
 	Vec3f orbColor = orbitColor;
 	switch(orbitColorStyle)
@@ -5994,15 +5994,13 @@ Vec3f Planet::getCurrentOrbitColor() const
 		}
 		case ocsMajorPlanets:
 		{
-			const QString pName = getEnglishName().toLower();
-			orbColor=*(majorPlanetColorMap.value(pName, &orbitColor));
+			orbColor=*(majorPlanetColorMap.value(englishName, &orbitColor));
 			break;
 		}
 		case ocsMajorPlanetsMinorTypes:
 		{
-			const QString pName = getEnglishName().toLower();
-			if (majorPlanetColorMap.contains(pName))
-				orbColor=*majorPlanetColorMap.value(pName, &orbitColor);
+			if (majorPlanetColorMap.contains(englishName))
+				orbColor = *majorPlanetColorMap.value(englishName, &orbitColor);
 			else
 				orbColor = *typeColorMap.value(pType, &orbitColor);
 			break;
