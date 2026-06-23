@@ -1521,7 +1521,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	e2 *= f;
 	e3 *= f;
 	// Search the triangles
-	SphericalConvexPolygon c(e3, e2, e2, e0);
+	SphericalConvexPolygon c(e3, e2, e1, e0);
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingSphericalCaps(),lastMaxSearchLevel);
 
 	double withParallax = core->getUseParallax() * core->getParallaxFactor();
@@ -1715,13 +1715,25 @@ StelObjectP StarMgr::searchGaia(StarId source_id) const
 	return searchGaiaPhase2(source_id, v, matched, maxSearchLevel);
 }
 
+// Phase 2: HEALPix center zone missed the star (occurs at high geodesic levels
+// where the pixel center falls in a different zone than the star's actual position).
+// Search all zones intersecting a small region around the HEALPix pixel center.
+// Phase 2 trigger rates:
+//   Level 8 : 4.5%
+//   Level 9 : 9.0%
+//   Level 10: 17.4%
 StelObjectP StarMgr::searchGaiaPhase2(StarId source_id, const Vec3d& v, int& matched, int maxSearchLevel) const
 {
 	StelObjectP so;
 	Vec3d vv(v);
 	vv.normalize();
-	const double limFov = 0.05;
-	double f = 1.4142136 * tan(limFov * M_PI_180);
+	// HEALPix Level 12 pixel radius is approximately 0.0102 degree on sky.
+	// We search a square region on the sphere centered at the pixel center.
+	// The square has vertices at arc-distance f from the center and an
+	// inscribed circle of radius healpixSearchRadius = arctan(tan(f) / 1.4142136).
+	// Set to 1.25x pixel radius (0.25 margin) to guarantee coverage at pixel boundaries.
+	constexpr double healpixSearchRadius = 0.0102 * 1.25;
+	double f = 1.4142136 * tan(healpixSearchRadius * M_PI_180);  // half-diagonal of the search square
 	int i;
 	{
 		const double a0 = fabs(vv[0]), a1 = fabs(vv[1]), a2 = fabs(vv[2]);
@@ -1736,7 +1748,7 @@ StelObjectP StarMgr::searchGaiaPhase2(StarId source_id, const Vec3d& v, int& mat
 	Vec3d e0 = vv + h0, e1 = vv + h1, e2 = vv - h0, e3 = vv - h1;
 	f = 1.0/e0.norm(); e0 *= f; e1 *= f; e2 *= f; e3 *= f;
 
-	SphericalConvexPolygon c(e3, e2, e2, e0);
+	SphericalConvexPolygon c(e3, e2, e1, e0);
 	const auto* geodesic_result =
 		StelApp::getInstance().getCore()->getGeodesicGrid(maxSearchLevel)
 			->search(c.getBoundingSphericalCaps(), maxSearchLevel);

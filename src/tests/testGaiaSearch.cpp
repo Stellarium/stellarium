@@ -1,6 +1,5 @@
-// Test: sample Gaia IDs, simulate StarMgr::searchGaia two-phase search.
-// Logic copied verbatim from StarMgr.cpp:1693-1778.
-// Uses the exact same SphericalConvexPolygon + geodesic_search as the main code.
+// Test: sample Gaia IDs, simulate StarMgr::searchGaia() two-phase search.
+// Phase 1 and Phase 2 logic match searchGaia() and searchGaiaPhase2() exactly.
 
 #include <QCoreApplication>
 #include <QElapsedTimer>
@@ -72,12 +71,12 @@ int main(int argc, char** argv)
 			if (!matched) cat->searchGaiaID((20 << (level << 1)), gid, matched);
 			if (matched) { phase1Hits++; continue; }
 
-			// Phase 2: small region search (StarMgr.cpp:1731-1778)
+			// Phase 2: see searchGaiaPhase2() for details
 			phase2Needed++;
-			Vec3d vv(v); vv.normalize();
-			const double limFov = 0.05;
-			double f = 1.4142136 * tan(limFov * M_PI / 180.0);
+			constexpr double healpixSearchRadius = 0.0102 * 1.25;
+			double f = 1.4142136 * tan(healpixSearchRadius * M_PI / 180.0);
 			int axis;
+			Vec3d vv(v); vv.normalize();
 			{ double a0=fabs(vv[0]), a1=fabs(vv[1]), a2=fabs(vv[2]);
 			  if (a0<=a1) { if (a0<=a2) axis=0; else axis=2; }
 			  else { if (a1<=a2) axis=1; else axis=2; } }
@@ -86,7 +85,7 @@ int main(int argc, char** argv)
 			h0 *= f; h1 *= f;
 			Vec3d e0 = vv + h0, e1 = vv + h1, e2 = vv - h0, e3 = vv - h1;
 			f = 1.0/e0.norm(); e0 *= f; e1 *= f; e2 *= f; e3 *= f;
-			SphericalConvexPolygon c(e3, e2, e2, e0);
+			SphericalConvexPolygon c(e3, e2, e1, e0);
 			const auto* geoResult = grid->search(c.getBoundingSphericalCaps(), maxSearchLevel);
 
 			int zonesChecked = 0;
