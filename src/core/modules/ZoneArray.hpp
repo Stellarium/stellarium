@@ -272,6 +272,13 @@ public:
 	uint32_t zoneStarCount(int zone_index) const { return zoneCounts_[zone_index]; }
 	void prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const;
 
+	//! Draw a single star and return whether it was drawn.
+	bool drawStar(const StarType& s, int magIndex, float dyrs, bool isInsideViewport,
+		  const QVector<SphericalCap>& boundingCaps, bool withAberration, StelCore* core,
+		  StelSkyDrawer* drawer, const Extinction& extinction, bool withExtinction,
+		  const RCMag* rcmag_table, int cutoffMagStep, int maxMagStarName,
+		  StelPainter* sPainter, float names_brightness, bool withCommonNameI18n) const;
+
 private:
 	static constexpr int BLOCK_SIZE = 128;
 

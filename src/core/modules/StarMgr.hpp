@@ -317,7 +317,6 @@ private:
 	StelObjectP searchGaiaPhase2(StarId source_id, const Vec3d& v, int& matched, int maxSearchLevel) const;
 
 public:
-
 	//! Get the scientific (Bayer/Flamsteed) name for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star

@@ -955,13 +955,17 @@ void DynamicZoneArray<StarType>::prefetchRegion(const QVector<SphericalCap>& cap
 
 template<class StarType>
 void DynamicZoneArray<StarType>::draw(StelPainter* sPainter, int index, bool isInsideViewport,
-			     const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
-			     int maxMagStarName, float names_brightness,
-			     const QVector<SphericalCap>& boundingCaps,
-			     const bool withAberration, const Vec3d vel,
-			     const double withParallax, const Vec3d diffPos,
-			     const bool withCommonNameI18n) const
+				     const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
+				     int maxMagStarName, float names_brightness,
+				     const QVector<SphericalCap>& boundingCaps,
+				     const bool withAberration, const Vec3d vel,
+				     const double withParallax, const Vec3d diffPos,
+				     const bool withCommonNameI18n) const
 {
+	(void)vel;
+	(void)withParallax;
+	(void)diffPos;
+
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return;
 
@@ -988,14 +992,12 @@ void DynamicZoneArray<StarType>::draw(StelPainter* sPainter, int index, bool isI
 		   QString("RCMAG_TABLE_SIZE: %1, cutoffMagStep: %2")
 			   .arg(QString::number(RCMAG_TABLE_SIZE), QString::number(cutoffMagStep)).toLatin1());
 
-	uint32_t zoneSize = zoneCounts_[index];
-	bool globalzone = (static_cast<unsigned int>(index) == nr_of_zones - 1);
-	Vec3d v;
+	const uint32_t zoneSize = zoneCounts_[index];
+	const bool globalzone = (static_cast<unsigned int>(index) == nr_of_zones - 1);
 
 	for (uint32_t i = 0; i < zoneSize; ++i)
 	{
 		const StarType& s = stars[i];
-
 		int mag = s.getMag();
 		int magIndex = static_cast<int>((mag - (mag_min - 7000.)) * 0.02);
 
@@ -1003,35 +1005,53 @@ void DynamicZoneArray<StarType>::draw(StelPainter* sPainter, int index, bool isI
 		{
 			if (std::fabs(dyrs) <= 5000.f || !globalzone)
 				break;
+			continue;
 		}
 
-		s.getJ2000Pos(dyrs, v);
-
-		if (withAberration)
-			applyAberration(v, core);
-
-		if (!isInsideViewport && !isVisibleInCaps(v, boundingCaps))
-			continue;
-
-		int extinctedMagIndex = magIndex;
-		float twinkleFactor = 1.f;
-		const RCMag* tmpRcmag = &rcmag_table[magIndex];
-
-		if (withExtinction && !applyExtinction(magIndex, cutoffMagStep, v, core, extinction, extinctedMagIndex, tmpRcmag, twinkleFactor))
-			continue;
-
-		if (drawer->drawPointSource(sPainter, v, *tmpRcmag, s.getBVIndex(),
-					    !isInsideViewport, twinkleFactor) &&
-		    core->getFlagClearSky() && s.hasName() &&
-		    extinctedMagIndex < maxMagStarName)
-		{
-			const float offset = tmpRcmag->radius * 0.7f;
-			const Vec3f color = StelSkyDrawer::indexToColor(s.getBVIndex()) * 0.75f;
-			sPainter->setColor(color, names_brightness);
-			sPainter->drawText(v, s.getScreenNameI18n(withCommonNameI18n),
-					   0, offset, offset, false);
-		}
+		drawStar(s, magIndex, dyrs, isInsideViewport, boundingCaps, withAberration, core,
+			 drawer, extinction, withExtinction, rcmag_table, cutoffMagStep,
+			 maxMagStarName, sPainter, names_brightness, withCommonNameI18n);
 	}
+}
+
+template<class StarType>
+bool DynamicZoneArray<StarType>::drawStar(const StarType& s, int magIndex, float dyrs,
+					  bool isInsideViewport, const QVector<SphericalCap>& boundingCaps,
+					  bool withAberration, StelCore* core,
+					  StelSkyDrawer* drawer, const Extinction& extinction,
+					  bool withExtinction, const RCMag* rcmag_table,
+					  int cutoffMagStep, int maxMagStarName,
+					  StelPainter* sPainter, float names_brightness,
+					  bool withCommonNameI18n) const
+{
+	Vec3d v;
+	s.getJ2000Pos(dyrs, v);
+
+	if (withAberration)
+		applyAberration(v, core);
+
+	if (!isInsideViewport && !isVisibleInCaps(v, boundingCaps))
+		return false;
+
+	int extinctedMagIndex = magIndex;
+	float twinkleFactor = 1.f;
+	const RCMag* tmpRcmag = &rcmag_table[magIndex];
+
+	if (withExtinction && !applyExtinction(magIndex, cutoffMagStep, v, core, extinction, extinctedMagIndex, tmpRcmag, twinkleFactor))
+		return false;
+
+	const bool drawn = drawer->drawPointSource(sPainter, v, *tmpRcmag, s.getBVIndex(),
+						   !isInsideViewport, twinkleFactor);
+	if (drawn && core->getFlagClearSky() && s.hasName() &&
+	    extinctedMagIndex < maxMagStarName)
+	{
+		const float offset = tmpRcmag->radius * 0.7f;
+		const Vec3f color = StelSkyDrawer::indexToColor(s.getBVIndex()) * 0.75f;
+		sPainter->setColor(color, names_brightness);
+		sPainter->drawText(v, s.getScreenNameI18n(withCommonNameI18n),
+				   0, offset, offset, false);
+	}
+	return drawn;
 }
 
 template<class StarType>
