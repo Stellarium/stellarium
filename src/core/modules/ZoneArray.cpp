@@ -1066,16 +1066,19 @@ void DynamicZoneArray<StarType>::searchAround(const StelCore* core, int index, c
 	if (!stars)
 		return;
 
-	uint32_t zoneSize = zoneCounts_[index];
+	const uint32_t zoneSize = zoneCounts_[index];
 	const float dyrs = static_cast<float>(core->getJDE() - STAR_CATALOG_JDEPOCH) / 365.25f;
 	Vec3d tmp;
 
-	(void)dyrs;
 	for (uint32_t i = 0; i < zoneSize; ++i)
 	{
-		double RA = stars[i].getX0();
-		double DEC = stars[i].getX1();
-		StelUtils::spheToRect(RA, DEC, tmp);
+		stars[i].getJ2000Pos(dyrs, tmp);
+
+		// in case it is in a binary system
+		stars[i].getBinaryOrbit(core->getJDE(), tmp);
+
+		stars[i].getPlxEffect(withParallax * stars[i].getPlx(), tmp, diffPos);
+		tmp.normalize();
 
 		if (core->getUseAberration())
 			applyAberration(tmp, core);
@@ -1099,8 +1102,9 @@ void DynamicZoneArray<StarType>::searchWithin(const StelCore* core, int index,
 	if (!stars)
 		return;
 
-	uint32_t zoneSize = zoneCounts_[index];
+	const uint32_t zoneSize = zoneCounts_[index];
 	const float maxMilliMag = 1000.f * maxMag;
+	const float dyrs = static_cast<float>(core->getJDE() - STAR_CATALOG_JDEPOCH) / 365.25f;
 	Vec3d tmp;
 
 	for (uint32_t i = 0; i < zoneSize; ++i)
@@ -1108,9 +1112,13 @@ void DynamicZoneArray<StarType>::searchWithin(const StelCore* core, int index,
 		if (stars[i].getMag() >= maxMilliMag)
 			continue;
 
-		double RA = stars[i].getX0();
-		double DEC = stars[i].getX1();
-		StelUtils::spheToRect(RA, DEC, tmp);
+		stars[i].getJ2000Pos(dyrs, tmp);
+
+		// in case it is in a binary system
+		stars[i].getBinaryOrbit(core->getJDE(), tmp);
+
+		stars[i].getPlxEffect(withParallax * stars[i].getPlx(), tmp, diffPos);
+		tmp.normalize();
 
 		if (core->getUseAberration())
 			applyAberration(tmp, core);
