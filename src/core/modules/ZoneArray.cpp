@@ -99,6 +99,122 @@ static void applyAberration(Vec3d& v, const StelCore* core)
 	v.normalize();
 }
 
+//! Draw a range of stars shared between SpecialZoneArray and DynamicZoneArray.
+//! @param first iterator to the first star
+//! @param last one-past-end iterator
+//! @param globalzone whether this zone is the global fallback zone
+//! @param sPainter the painter
+//! @param isInsideViewport true if the whole zone is inside the viewport
+//! @param rcmag_table radius/magnitude table
+//! @param cutoffMagStep maximum visible magnitude index
+//! @param cutoffMag precise magnitude cutoff in millimag
+//! @param mag_min catalog faint limit in millimag
+//! @param dyrs years since catalog epoch
+//! @param core the core
+//! @param drawer the sky drawer
+//! @param boundingCaps viewport caps for culling
+//! @param withAberration whether to apply annual aberration
+//! @param withParallax parallax scale factor
+//! @param diffPos Earth position offset for parallax
+//! @param maxMagStarName magnitude limit for labels
+//! @param names_brightness label brightness
+//! @param withExtinction whether atmosphere extinction is active
+//! @param extinction the extinction model
+//! @param withCommonNameI18n use common name when no cultural name
+
+template<class StarType>
+static void drawStarRange(const StarType* first, const StarType* last, bool globalzone,
+			  StelPainter* sPainter, bool isInsideViewport,
+			  const RCMag* rcmag_table, int cutoffMagStep, float cutoffMag,
+			  int mag_min, float dyrs,
+			  const StelCore* core, StelSkyDrawer* drawer,
+			  const QVector<SphericalCap>& boundingCaps,
+			  bool withAberration,
+			  double withParallax, const Vec3d& diffPos,
+			  int maxMagStarName, float names_brightness,
+			  bool withExtinction, const Extinction& extinction,
+			  bool withCommonNameI18n)
+{
+	for (const StarType* s = first; s < last; ++s)
+	{
+		float starMag = s->getMag();
+		int magIndex = static_cast<int>((starMag - (mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
+
+		// first part is check for Star1 and is global zone, so to keep looping for long-range prediction
+		// second part is old behavior, to skip stars below you that are too faint to display for Star2 and Star3
+		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag))
+		{
+			if (std::fabs(dyrs) <= 5000.f || !s->isVIP() || !globalzone)  // if any of these true, we should always break
+				break;
+		}
+
+		bool recomputeMag = s->getPreciseAstrometricFlag();
+		double Plx = s->getPlx();
+		Vec3d v;
+		if (recomputeMag)
+		{
+			// don't do full solution, can be very slow, just estimate here
+			// estimate parallax from radial velocity and total proper motion
+			double vr = s->getRV();
+			Vec3d pmvec0(s->getDx0(), s->getDx1(), s->getDx2());
+			pmvec0 = pmvec0 * MAS2RAD;
+			double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
+			double pmtotsqr = (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
+			double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0 * pmr0) * dyrs * dyrs);
+			Plx *= f;
+			float magOffset = 5.f * log10(1 / f);
+			starMag += magOffset * 1000.f;
+			// if we reach here we might as well compute the position too
+			Vec3d r(s->getX0(), s->getX1(), s->getX2());
+			Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
+			v.set(u[0], u[1], u[2]);
+		}
+
+		magIndex = static_cast<int>((starMag - (mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
+		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag))
+			continue;  // allow continue for other star that might became bright enough in the future
+
+		// Get the star position from the array, only do it if not already computed
+		// put it here because potentially cutoffMagStep bigger than magIndex and no computation needed
+		if (!recomputeMag)
+			s->getJ2000Pos(dyrs, v);
+
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), v);
+
+		if (withParallax)
+		{
+			s->getPlxEffect(withParallax * Plx, v, diffPos);
+			v.normalize();
+		}
+
+		// Aberration: v contains Equatorial J2000 position.
+		if (withAberration)
+			applyAberration(v, core);
+
+		// If the star zone is not strictly contained inside the viewport, eliminate from the
+		// beginning the stars actually outside viewport.
+		if (!isInsideViewport && !isVisibleInCaps(v, boundingCaps))
+			continue;
+
+		int extinctedMagIndex = magIndex;
+		float twinkleFactor = 1.0f; // allow height-dependent twinkle.
+		const RCMag* tmpRcmag = &rcmag_table[magIndex];
+
+		if (withExtinction && !applyExtinction(magIndex, cutoffMagStep, v, core, extinction, extinctedMagIndex, tmpRcmag, twinkleFactor))
+			continue;
+
+		if (drawer->drawPointSource(sPainter, v, *tmpRcmag, s->getBVIndex(), !isInsideViewport, twinkleFactor) &&
+		    core->getFlagClearSky() && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID() <= 1)
+		{
+			const float offset = tmpRcmag->radius * 0.7f;
+			const Vec3f color = StelSkyDrawer::indexToColor(s->getBVIndex()) * 0.75f;
+			sPainter->setColor(color, names_brightness);
+			sPainter->drawText(v, s->getScreenNameI18n(withCommonNameI18n), 0, offset, offset, false);
+		}
+	}
+}
+
 static unsigned int stel_bswap_32(unsigned int val)
 {
 	return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
@@ -511,12 +627,12 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos,
 				  const bool withCommonNameI18n) const
 {
+	(void)vel;
 	StelSkyDrawer* drawer = core->getSkyDrawer();
-	Vec3d v;
-	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+	const float dyrs = static_cast<float>(core->getJDE() - STAR_CATALOG_JDEPOCH) / 365.25f;
 
-	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
-	const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
+	const Extinction& extinction = drawer->getExtinction();
+	const bool withExtinction = drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient() >= 0.01f;
 
 	// Allow artificial cutoff:
 	// find the (integer) mag at which is just bright enough to be drawn.
@@ -524,93 +640,17 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	float cutoffMag;
 	computeMagnitudeCutoff(mag_min, limitMagIndex, drawer, cutoffMagStep, cutoffMag);
 
-	Q_ASSERT_X(cutoffMagStep<=RCMAG_TABLE_SIZE, "ZoneArray.cpp",
+	Q_ASSERT_X(cutoffMagStep <= RCMAG_TABLE_SIZE, "ZoneArray.cpp",
 		   QString("RCMAG_TABLE_SIZE: %1, cutoffmagStep: %2").arg(QString::number(RCMAG_TABLE_SIZE), QString::number(cutoffMagStep)).toLatin1());
-    
+
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
-	const Star* lastStar = zoneToDraw->getStars() + zoneToDraw->size;
-	bool globalzone;
-	for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
-	{
-		// check if this is a global zone
-		globalzone = zoneToDraw->isGlobal;
-		float starMag = s->getMag();
-		int magIndex = static_cast<int>((starMag - (mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
-
-		// first part is check for Star1 and is global zone, so to keep looping for long-range prediction
-		// second part is old behavior, to skip stars below you that are too faint to display for Star2 and Star3
-		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag)) { // should always use catalog magnitude, otherwise will mess up the order
-			if (fabs(dyrs) <= 5000. || !s->isVIP() || !globalzone)  // if any of these true, we should always break
-				break;
-		}
-		// Because of the test above, the star should always be visible from this point.
-		
-		// only recompute if has time dependence
-		bool recomputeMag = (s->getPreciseAstrometricFlag());
-		double Plx = s->getPlx();
-		if (recomputeMag) { 
-			// don't do full solution, can be very slow, just estimate here	
-			// estimate parallax from radial velocity and total proper motion
-			double vr = s->getRV();
-			Vec3d pmvec0(s->getDx0(), s->getDx1(), s->getDx2());
-			pmvec0 = pmvec0 * MAS2RAD;
-			double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
-			double pmtotsqr =  (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
-			double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
-			Plx *= f;
-			float magOffset = 5.f * log10(1/f);
-			starMag += magOffset * 1000.;
-			// if we reach here we might as well compute the position too
-			Vec3d r(s->getX0(), s->getX1(), s->getX2());
-			Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
-			v.set(u[0], u[1], u[2]);
-		}
-		// recompute magIndex with the new magnitude
-		magIndex = static_cast<int>((starMag - (mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
-
-		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag)) {  // check again with the new magIndex
-				continue;  // allow continue for other star that might became bright enough in the future
-		}
-		// Array of 2 numbers containing radius and magnitude
-		const RCMag* tmpRcmag = &rcmag_table[magIndex];
-		
-		// Get the star position from the array, only do it if not already computed
-		// put it here because potentially cutoffMagStep bigger than magIndex and no computation needed
-		if (!recomputeMag) {
-			s->getJ2000Pos(dyrs, v);
-		}
-
-		// in case it is in a binary system
-		s->getBinaryOrbit(core->getJDE(), v);
-
-		if (withParallax) {
-			s->getPlxEffect(withParallax * Plx, v, diffPos);
-			v.normalize();
-		}
-
-		// Aberration: vf contains Equatorial J2000 position.
-		if (withAberration)
-			applyAberration(v, core);
-		
-		// If the star zone is not strictly contained inside the viewport, eliminate from the 
-		// beginning the stars actually outside viewport.
-		if (!isInsideViewport && !isVisibleInCaps(v, boundingCaps))
-			continue;
-
-		int extinctedMagIndex = magIndex;
-		float twinkleFactor=1.0f; // allow height-dependent twinkle.
-		if (withExtinction && !applyExtinction(magIndex, cutoffMagStep, v, core, extinction, extinctedMagIndex, tmpRcmag, twinkleFactor))
-			continue;
-
-		if (drawer->drawPointSource(sPainter, v, *tmpRcmag, s->getBVIndex(), !isInsideViewport, twinkleFactor) && core->getFlagClearSky() && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
-		{
-			const float offset = tmpRcmag->radius*0.7f;
-			const Vec3f color = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
-			sPainter->setColor(color, names_brightness);
-			sPainter->drawText(v, s->getScreenNameI18n(withCommonNameI18n), 0, offset, offset, false);
-		}
-	}
+	drawStarRange(zoneToDraw->getStars(), zoneToDraw->getStars() + zoneToDraw->size,
+		      zoneToDraw->isGlobal,
+		      sPainter, isInsideViewport, rcmag_table, cutoffMagStep, cutoffMag,
+		      mag_min, dyrs, core, drawer, boundingCaps, withAberration,
+		      withParallax, diffPos, maxMagStarName, names_brightness,
+		      withExtinction, extinction, withCommonNameI18n);
 }
 
 template<class Star>
@@ -963,8 +1003,6 @@ void DynamicZoneArray<StarType>::draw(StelPainter* sPainter, int index, bool isI
 				     const bool withCommonNameI18n) const
 {
 	(void)vel;
-	(void)withParallax;
-	(void)diffPos;
 
 	if (index < 0 || static_cast<unsigned int>(index) >= nr_of_zones)
 		return;
@@ -995,63 +1033,11 @@ void DynamicZoneArray<StarType>::draw(StelPainter* sPainter, int index, bool isI
 	const uint32_t zoneSize = zoneCounts_[index];
 	const bool globalzone = (static_cast<unsigned int>(index) == nr_of_zones - 1);
 
-	for (uint32_t i = 0; i < zoneSize; ++i)
-	{
-		const StarType& s = stars[i];
-		int mag = s.getMag();
-		int magIndex = static_cast<int>((mag - (mag_min - 7000.)) * 0.02);
-
-		if ((magIndex > cutoffMagStep) || (static_cast<float>(mag) > cutoffMag))
-		{
-			if (std::fabs(dyrs) <= 5000.f || !globalzone)
-				break;
-			continue;
-		}
-
-		drawStar(s, magIndex, dyrs, isInsideViewport, boundingCaps, withAberration, core,
-			 drawer, extinction, withExtinction, rcmag_table, cutoffMagStep,
-			 maxMagStarName, sPainter, names_brightness, withCommonNameI18n);
-	}
-}
-
-template<class StarType>
-bool DynamicZoneArray<StarType>::drawStar(const StarType& s, int magIndex, float dyrs,
-					  bool isInsideViewport, const QVector<SphericalCap>& boundingCaps,
-					  bool withAberration, StelCore* core,
-					  StelSkyDrawer* drawer, const Extinction& extinction,
-					  bool withExtinction, const RCMag* rcmag_table,
-					  int cutoffMagStep, int maxMagStarName,
-					  StelPainter* sPainter, float names_brightness,
-					  bool withCommonNameI18n) const
-{
-	Vec3d v;
-	s.getJ2000Pos(dyrs, v);
-
-	if (withAberration)
-		applyAberration(v, core);
-
-	if (!isInsideViewport && !isVisibleInCaps(v, boundingCaps))
-		return false;
-
-	int extinctedMagIndex = magIndex;
-	float twinkleFactor = 1.f;
-	const RCMag* tmpRcmag = &rcmag_table[magIndex];
-
-	if (withExtinction && !applyExtinction(magIndex, cutoffMagStep, v, core, extinction, extinctedMagIndex, tmpRcmag, twinkleFactor))
-		return false;
-
-	const bool drawn = drawer->drawPointSource(sPainter, v, *tmpRcmag, s.getBVIndex(),
-						   !isInsideViewport, twinkleFactor);
-	if (drawn && core->getFlagClearSky() && s.hasName() &&
-	    extinctedMagIndex < maxMagStarName)
-	{
-		const float offset = tmpRcmag->radius * 0.7f;
-		const Vec3f color = StelSkyDrawer::indexToColor(s.getBVIndex()) * 0.75f;
-		sPainter->setColor(color, names_brightness);
-		sPainter->drawText(v, s.getScreenNameI18n(withCommonNameI18n),
-				   0, offset, offset, false);
-	}
-	return drawn;
+	drawStarRange(stars, stars + zoneSize, globalzone,
+		      sPainter, isInsideViewport, rcmag_table, cutoffMagStep, cutoffMag,
+		      mag_min, dyrs, core, drawer, boundingCaps, withAberration,
+		      withParallax, diffPos, maxMagStarName, names_brightness,
+		      withExtinction, extinction, withCommonNameI18n);
 }
 
 template<class StarType>
