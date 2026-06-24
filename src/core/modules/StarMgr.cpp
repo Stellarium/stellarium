@@ -1483,45 +1483,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	Vec3d v(vv);
 	v.normalize();
 
-	// find any vectors h0 and h1 (length 1), so that h0*v=h1*v=h0*h1=0
-	int i;
-	{
-		const double a0 = fabs(v[0]);
-		const double a1 = fabs(v[1]);
-		const double a2 = fabs(v[2]);
-		if (a0 <= a1)
-		{
-			if (a0 <= a2) i = 0;
-			else i = 2;
-		} else
-		{
-			if (a1 <= a2) i = 1;
-			else i = 2;
-		}
-	}
-	Vec3d h0(0.0,0.0,0.0);
-	h0[i] = 1.0;
-	Vec3d h1 = h0 ^ v;
-	h1.normalize();
-	h0 = h1 ^ v;
-	h0.normalize();
-
-	// Now we have h0*v=h1*v=h0*h1=0.
-	// Construct a region with 4 corners e0,e1,e2,e3 inside which all desired stars must be:
-	double f = 1.4142136 * tan(limFov * M_PI_180);
-	h0 *= f;
-	h1 *= f;
-	Vec3d e0 = v + h0;
-	Vec3d e1 = v + h1;
-	Vec3d e2 = v - h0;
-	Vec3d e3 = v - h1;
-	f = 1.0/e0.norm();
-	e0 *= f;
-	e1 *= f;
-	e2 *= f;
-	e3 *= f;
-	// Search the triangles
-	SphericalConvexPolygon c(e3, e2, e1, e0);
+	SphericalConvexPolygon c = getSphericalSearchSquare(v, limFov);
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingSphericalCaps(),lastMaxSearchLevel);
 
 	double withParallax = core->getUseParallax() * core->getParallaxFactor();
@@ -1530,8 +1492,8 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 		diffPos = core->getParallaxDiff(core->getJDE());
 	}
 
-	// Iterate over the stars inside the triangles
-	f = cos(limFov * M_PI/180.);
+	// Iterate over the stars inside the region.
+	double f = cos(limFov * M_PI/180.);
 	for (auto* z : gridLevels)
 	{
 		//qDebug() << "search inside(" << it->first << "):";
@@ -1725,30 +1687,14 @@ StelObjectP StarMgr::searchGaia(StarId source_id) const
 StelObjectP StarMgr::searchGaiaPhase2(StarId source_id, const Vec3d& v, int& matched, int maxSearchLevel) const
 {
 	StelObjectP so;
-	Vec3d vv(v);
-	vv.normalize();
 	// HEALPix Level 12 pixel radius is approximately 0.0102 degree on sky.
 	// We search a square region on the sphere centered at the pixel center.
 	// The square has vertices at arc-distance f from the center and an
 	// inscribed circle of radius healpixSearchRadius = arctan(tan(f) / 1.4142136).
 	// Set to 1.25x pixel radius (0.25 margin) to guarantee coverage at pixel boundaries.
 	constexpr double healpixSearchRadius = 0.0102 * 1.25;
-	double f = 1.4142136 * tan(healpixSearchRadius * M_PI_180);  // half-diagonal of the search square
-	int i;
-	{
-		const double a0 = fabs(vv[0]), a1 = fabs(vv[1]), a2 = fabs(vv[2]);
-		if (a0 <= a1) { if (a0 <= a2) i = 0; else i = 2; }
-		else { if (a1 <= a2) i = 1; else i = 2; }
-	}
-	Vec3d h0(0.0,0.0,0.0);
-	h0[i] = 1.0;
-	Vec3d h1 = h0 ^ vv; h1.normalize();
-	h0 = h1 ^ vv; h0.normalize();
-	h0 *= f; h1 *= f;
-	Vec3d e0 = vv + h0, e1 = vv + h1, e2 = vv - h0, e3 = vv - h1;
-	f = 1.0/e0.norm(); e0 *= f; e1 *= f; e2 *= f; e3 *= f;
+	SphericalConvexPolygon c = getSphericalSearchSquare(v, healpixSearchRadius);
 
-	SphericalConvexPolygon c(e3, e2, e1, e0);
 	const auto* geodesic_result =
 		StelApp::getInstance().getCore()->getGeodesicGrid(maxSearchLevel)
 			->search(c.getBoundingSphericalCaps(), maxSearchLevel);

@@ -948,5 +948,9 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3,
 //! @return the intersection point on the sphere (normalized) if ok is true, or undefined of ok is false.
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& nHalfSpace, bool& ok);
 
+//! Build a spherical square search region centered at direction v with the given angular radius (degrees).
+//! The square's vertices are at arc-distance radiusDeg from v and are ordered to form a valid SphericalConvexPolygon.
+SphericalConvexPolygon getSphericalSearchSquare(const Vec3d& vv, double radiusDeg);
+
 #endif // STELSPHEREGEOMETRY_HPP
 

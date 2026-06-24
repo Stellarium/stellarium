@@ -40,6 +40,9 @@ int main(int argc, char** argv)
 	const int maxSearchLevel = level;
 	auto* grid = new StelGeodesicGrid(maxSearchLevel);
 	uint64_t globalStarIdx = 0, tested = 0, phase1Hits = 0, phase2Needed = 0, phase2Zones = 0, phase2Max = 0;
+	int loggedCount = 0;
+	struct LogEntry { uint64_t gaiaId; unsigned int zone; uint32_t idx; float mag; int zonesChecked; };
+	LogEntry logBuf[10];
 	QElapsedTimer timer; timer.start();
 
 	for (unsigned int z = 0; z < nz && tested < maxTest; ++z) {
@@ -71,22 +74,11 @@ int main(int argc, char** argv)
 			if (!matched) cat->searchGaiaID((20 << (level << 1)), gid, matched);
 			if (matched) { phase1Hits++; continue; }
 
-			// Phase 2: see searchGaiaPhase2() for details
-			phase2Needed++;
-			constexpr double healpixSearchRadius = 0.0102 * 1.25;
-			double f = 1.4142136 * tan(healpixSearchRadius * M_PI / 180.0);
-			int axis;
-			Vec3d vv(v); vv.normalize();
-			{ double a0=fabs(vv[0]), a1=fabs(vv[1]), a2=fabs(vv[2]);
-			  if (a0<=a1) { if (a0<=a2) axis=0; else axis=2; }
-			  else { if (a1<=a2) axis=1; else axis=2; } }
-			Vec3d h0(0.0,0.0,0.0); h0[axis] = 1.0;
-			Vec3d h1 = h0 ^ vv; h1.normalize(); h0 = h1 ^ vv; h0.normalize();
-			h0 *= f; h1 *= f;
-			Vec3d e0 = vv + h0, e1 = vv + h1, e2 = vv - h0, e3 = vv - h1;
-			f = 1.0/e0.norm(); e0 *= f; e1 *= f; e2 *= f; e3 *= f;
-			SphericalConvexPolygon c(e3, e2, e1, e0);
-			const auto* geoResult = grid->search(c.getBoundingSphericalCaps(), maxSearchLevel);
+		// Phase 2: see searchGaiaPhase2() for details
+		phase2Needed++;
+		constexpr double healpixSearchRadius = 0.0102 * 1.25;
+		SphericalConvexPolygon c = getSphericalSearchSquare(v, healpixSearchRadius);
+		const auto* geoResult = grid->search(c.getBoundingSphericalCaps(), maxSearchLevel);
 
 			int zonesChecked = 0;
 			for (int lv = 0; lv <= maxSearchLevel; ++lv) {
@@ -101,6 +93,12 @@ int main(int argc, char** argv)
 			}
 			phase2Zones += zonesChecked;
 			if (zonesChecked > phase2Max) phase2Max = zonesChecked;
+			float mag = stars[i].getMag() * 0.001f;
+			if (matched && loggedCount < 10 && mag >= 17.0f && mag <= 17.5f)
+			{
+				logBuf[loggedCount] = { gid, z, i, mag, zonesChecked };
+				++loggedCount;
+			}
 			if (!matched) printf("BUG: star %llu in zone %u not found!\n", (unsigned long long)gid, z);
 
 			if (tested % 50000 == 0)
@@ -116,6 +114,11 @@ int main(int argc, char** argv)
 		(unsigned long long)tested, (unsigned long long)phase1Hits,
 		100.0*phase1Hits/(tested?tested:1), (unsigned long long)phase2Needed,
 		phase2Needed?(double)phase2Zones/phase2Needed:0.0, phase2Max, e);
+	printf("Phase2 stars mag 17-17.5 (up to 10):\n");
+	for (int j = 0; j < loggedCount; ++j)
+		printf("  gaiaId=%llu zone=%u idx=%u mag=%.3f zonesChecked=%d\n",
+		       (unsigned long long)logBuf[j].gaiaId, logBuf[j].zone, logBuf[j].idx,
+		       logBuf[j].mag, logBuf[j].zonesChecked);
 	delete grid; delete cat;
 	return 0;
 }

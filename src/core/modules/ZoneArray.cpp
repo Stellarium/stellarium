@@ -31,6 +31,74 @@
 #include <Windows.h>
 #endif
 
+//! Compute the magnitude cutoff step and precise magnitude cutoff.
+//! @param mag_min the catalog's lower magnitude bound in millimag
+//! @param limitMagIndex the maximum valid index in the rcmag table
+//! @param drawer the sky drawer
+//! @param[out] cutoffMagStep the computed cutoff step
+//! @param[out] cutoffMag the computed precise magnitude cutoff in millimag
+static void computeMagnitudeCutoff(int mag_min, int limitMagIndex, const StelSkyDrawer* drawer,
+				   int& cutoffMagStep, float& cutoffMag)
+{
+	cutoffMagStep = limitMagIndex;
+	cutoffMag = 999999.f;
+	if (drawer->getFlagStarMagnitudeLimit())
+	{
+		cutoffMag = drawer->getCustomStarMagnitudeLimit() * 1000.f;
+		cutoffMagStep = static_cast<int>((cutoffMag - (mag_min - 7000.)) * 0.02); // 1/(50 milli-mag)
+		if (cutoffMagStep > limitMagIndex)
+			cutoffMagStep = limitMagIndex;
+	}
+}
+
+//! Check whether the point v lies inside all spherical caps.
+static bool isVisibleInCaps(const Vec3d& v, const QVector<SphericalCap>& caps)
+{
+	for (const auto& cap : caps)
+	{
+		if (!cap.contains(v))
+			return false;
+	}
+	return true;
+}
+
+//! Apply atmospheric extinction to a star and update its magnitude index / twinkle factor.
+//! @param magIndex the original magnitude index
+//! @param cutoffMagStep the maximum allowed magnitude index
+//! @param v the star direction in J2000 frame
+//! @param core the core
+//! @param extinction the extinction model
+//! @param[out] extinctedMagIndex the updated magnitude index
+//! @param[out] tmpRcmag pointer into the rcmag table
+//! @param[out] twinkleFactor height-dependent twinkle factor
+//! @return false if the star is too faint after extinction and should be skipped
+static bool applyExtinction(int magIndex, int cutoffMagStep, const Vec3d& v, const StelCore* core,
+			    const Extinction& extinction, int& extinctedMagIndex,
+			    const RCMag*& tmpRcmag, float& twinkleFactor)
+{
+	extinctedMagIndex = magIndex;
+	twinkleFactor = 1.f;
+
+	Vec3d altAz(v);
+	altAz.normalize();
+	core->j2000ToAltAzInPlaceNoRefraction(&altAz);
+	float extMagShift = 0.f;
+	extinction.forward(altAz, &extMagShift);
+	extinctedMagIndex += static_cast<int>(extMagShift / 0.05f); // 0.05 mag MagStepIncrement
+	if (extinctedMagIndex >= cutoffMagStep || extinctedMagIndex < 0) // too faint or missing catalog
+		return false;
+	tmpRcmag += (extinctedMagIndex - magIndex);
+	twinkleFactor = qMin(1.f, 1.f - 0.9f * static_cast<float>(altAz[2])); // suppress twinkling at high altitudes
+	return true;
+}
+
+//! Apply annual aberration to a J2000 direction.
+static void applyAberration(Vec3d& v, const StelCore* core)
+{
+	v += core->getAberrationVec(core->getJDE());
+	v.normalize();
+}
+
 static unsigned int stel_bswap_32(unsigned int val)
 {
 	return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
@@ -449,18 +517,13 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
 	const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
-	
+
 	// Allow artificial cutoff:
 	// find the (integer) mag at which is just bright enough to be drawn.
-	int cutoffMagStep=limitMagIndex;  // for steps
-	float cutoffMag = 999999.;  // for precise magnitude cutoff
-	if (drawer->getFlagStarMagnitudeLimit())
-	{
-		cutoffMag = drawer->getCustomStarMagnitudeLimit() * 1000.0f;  // in milli-mag
-		cutoffMagStep = static_cast<int>((cutoffMag - (mag_min - 7000.))*0.02);  // 1/(50 milli-mag)
-		if (cutoffMagStep>limitMagIndex)
-			cutoffMagStep = limitMagIndex;
-	}
+	int cutoffMagStep;
+	float cutoffMag;
+	computeMagnitudeCutoff(mag_min, limitMagIndex, drawer, cutoffMagStep, cutoffMag);
+
 	Q_ASSERT_X(cutoffMagStep<=RCMAG_TABLE_SIZE, "ZoneArray.cpp",
 		   QString("RCMAG_TABLE_SIZE: %1, cutoffmagStep: %2").arg(QString::number(RCMAG_TABLE_SIZE), QString::number(cutoffMagStep)).toLatin1());
     
@@ -528,44 +591,17 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 
 		// Aberration: vf contains Equatorial J2000 position.
 		if (withAberration)
-		{
-			//Q_ASSERT_X(fabs(vf.lengthSquared()-1.0f)<0.0001f, "ZoneArray aberration", "vertex length not unity");
-			v += vel;
-			v.normalize();
-		}
+			applyAberration(v, core);
 		
 		// If the star zone is not strictly contained inside the viewport, eliminate from the 
 		// beginning the stars actually outside viewport.
-		if (!isInsideViewport)
-		{
-			bool isVisible = true;
-			for (const auto& cap : boundingCaps)
-			{
-				if (!cap.contains(v))
-				{
-					isVisible = false;
-					continue;
-				}
-			}
-			if (!isVisible)
-				continue;
-		}
+		if (!isInsideViewport && !isVisibleInCaps(v, boundingCaps))
+			continue;
 
 		int extinctedMagIndex = magIndex;
 		float twinkleFactor=1.0f; // allow height-dependent twinkle.
-		if (withExtinction)
-		{
-			Vec3d altAz(v);
-			altAz.normalize();
-			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
-			float extMagShift=0.0f;
-			extinction.forward(altAz, &extMagShift);
-			extinctedMagIndex += static_cast<int>(extMagShift/0.05f); // 0.05 mag MagStepIncrement
-			if (extinctedMagIndex >= cutoffMagStep || extinctedMagIndex<0) // i.e., if extincted it is dimmer than cutoff or extinctedMagIndex is negative (missing star catalog), so remove
-				continue;
-			tmpRcmag = &rcmag_table[extinctedMagIndex];
-			twinkleFactor=qMin(1.0, 1.0-0.9*altAz[2]); // suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
-		}
+		if (withExtinction && !applyExtinction(magIndex, cutoffMagStep, v, core, extinction, extinctedMagIndex, tmpRcmag, twinkleFactor))
+			continue;
 
 		if (drawer->drawPointSource(sPainter, v, *tmpRcmag, s->getBVIndex(), !isInsideViewport, twinkleFactor) && core->getFlagClearSky() && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
 		{
@@ -595,11 +631,7 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 		s->getPlxEffect(withParallax * Plx, tmp, diffPos);
 		tmp.normalize();
 		if (core->getUseAberration())
-		{
-			const Vec3d vel = core->getAberrationVec(core->getJDE());
-			tmp+=vel;
-			tmp.normalize();
-		}
+			applyAberration(tmp, core);
 		if (tmp * v >= cosLimFov)
 		{
 			// TODO: do not select stars that are too faint to display
@@ -638,11 +670,7 @@ void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const
 		tmp.normalize();
 		// TODO: Move vel into arg.list
 		if (core->getUseAberration())
-		{
-			const Vec3d vel = core->getAberrationVec(core->getJDE());
-			tmp+=vel;
-			tmp.normalize();
-		}
+			applyAberration(tmp, core);
 		// By trying, region is a SphericalPolygon. We are calling SphericalPolygon::contains(Vec3d)
 		if (region->contains(tmp) && (s->getMag() < maxMilliMag) )
 		{
@@ -939,15 +967,9 @@ void DynamicZoneArray<StarType>::draw(StelPainter* sPainter, int index, bool isI
 
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 
-	int cutoffMagStep = limitMagIndex;
-	float cutoffMag = 999999.f;
-	if (drawer->getFlagStarMagnitudeLimit())
-	{
-		cutoffMag = drawer->getCustomStarMagnitudeLimit() * 1000.f;
-		cutoffMagStep = static_cast<int>((cutoffMag - (mag_min - 7000.)) * 0.02);
-		if (cutoffMagStep > limitMagIndex)
-			cutoffMagStep = limitMagIndex;
-	}
+	int cutoffMagStep;
+	float cutoffMag;
+	computeMagnitudeCutoff(mag_min, limitMagIndex, drawer, cutoffMagStep, cutoffMag);
 
 	if (cutoffMagStep < 140)
 		return;
@@ -986,43 +1008,17 @@ void DynamicZoneArray<StarType>::draw(StelPainter* sPainter, int index, bool isI
 		s.getJ2000Pos(dyrs, v);
 
 		if (withAberration)
-		{
-			v += vel;
-			v.normalize();
-		}
+			applyAberration(v, core);
 
-		if (!isInsideViewport)
-		{
-			bool isVisible = true;
-			for (const auto& cap : boundingCaps)
-			{
-				if (!cap.contains(v))
-				{
-					isVisible = false;
-					break;
-				}
-			}
-			if (!isVisible)
-				continue;
-		}
+		if (!isInsideViewport && !isVisibleInCaps(v, boundingCaps))
+			continue;
 
 		int extinctedMagIndex = magIndex;
 		float twinkleFactor = 1.f;
 		const RCMag* tmpRcmag = &rcmag_table[magIndex];
 
-		if (withExtinction)
-		{
-			Vec3d altAz(v);
-			altAz.normalize();
-			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
-			float extMagShift = 0.f;
-			extinction.forward(altAz, &extMagShift);
-			extinctedMagIndex += static_cast<int>(extMagShift / 0.05f);
-			if (extinctedMagIndex >= cutoffMagStep || extinctedMagIndex < 0)
-				continue;
-			tmpRcmag = &rcmag_table[extinctedMagIndex];
-			twinkleFactor = qMin(1.f, 1.f - 0.9f * static_cast<float>(altAz[2]));
-		}
+		if (withExtinction && !applyExtinction(magIndex, cutoffMagStep, v, core, extinction, extinctedMagIndex, tmpRcmag, twinkleFactor))
+			continue;
 
 		if (drawer->drawPointSource(sPainter, v, *tmpRcmag, s.getBVIndex(),
 					    !isInsideViewport, twinkleFactor) &&
@@ -1062,11 +1058,7 @@ void DynamicZoneArray<StarType>::searchAround(const StelCore* core, int index, c
 		StelUtils::spheToRect(RA, DEC, tmp);
 
 		if (core->getUseAberration())
-		{
-			const Vec3d vel = core->getAberrationVec(core->getJDE());
-			tmp += vel;
-			tmp.normalize();
-		}
+			applyAberration(tmp, core);
 
 		if (tmp * v >= cosLimFov)
 			result.push_back(stars[i].createStelObject(nullptr, nullptr));
@@ -1101,11 +1093,7 @@ void DynamicZoneArray<StarType>::searchWithin(const StelCore* core, int index,
 		StelUtils::spheToRect(RA, DEC, tmp);
 
 		if (core->getUseAberration())
-		{
-			const Vec3d vel = core->getAberrationVec(core->getJDE());
-			tmp += vel;
-			tmp.normalize();
-		}
+			applyAberration(tmp, core);
 
 		if (region->contains(tmp))
 			result.push_back(stars[i].createStelObject(nullptr, nullptr));
