@@ -21,7 +21,7 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 ########### Project name ###########
 PROJECT(Stellarium C CXX)
 
-SET(STELLARIUM_RELEASE_BUILD 1 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
+SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 
 ########### Detect Qt version
 SET(ENABLE_QT6 1 CACHE BOOL "Whether to try building with Qt6. If Qt6 is not found, Qt5 will be used.")
