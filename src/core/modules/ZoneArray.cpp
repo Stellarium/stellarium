@@ -99,7 +99,7 @@ static void applyAberration(Vec3d& v, const StelCore* core)
 	v.normalize();
 }
 
-//! Draw a range of stars shared between SpecialZoneArray and DynamicZoneArray.
+//! Draw a contiguous range of stars shared between SpecialZoneArray and DynamicZoneArray.
 //! @param first iterator to the first star
 //! @param last one-past-end iterator
 //! @param globalzone whether this zone is the global fallback zone
@@ -108,32 +108,20 @@ static void applyAberration(Vec3d& v, const StelCore* core)
 //! @param rcmag_table radius/magnitude table
 //! @param cutoffMagStep maximum visible magnitude index
 //! @param cutoffMag precise magnitude cutoff in millimag
-//! @param mag_min catalog faint limit in millimag
 //! @param dyrs years since catalog epoch
 //! @param core the core
 //! @param drawer the sky drawer
-//! @param boundingCaps viewport caps for culling
-//! @param withAberration whether to apply annual aberration
-//! @param withParallax parallax scale factor
-//! @param diffPos Earth position offset for parallax
-//! @param maxMagStarName magnitude limit for labels
-//! @param names_brightness label brightness
-//! @param withExtinction whether atmosphere extinction is active
-//! @param extinction the extinction model
-//! @param withCommonNameI18n use common name when no cultural name
-
 template<class StarType>
-static void drawStarRange(const StarType* first, const StarType* last, bool globalzone,
-			  StelPainter* sPainter, bool isInsideViewport,
-			  const RCMag* rcmag_table, int cutoffMagStep, float cutoffMag,
-			  int mag_min, float dyrs,
-			  const StelCore* core, StelSkyDrawer* drawer,
-			  const QVector<SphericalCap>& boundingCaps,
-			  bool withAberration,
-			  double withParallax, const Vec3d& diffPos,
-			  int maxMagStarName, float names_brightness,
-			  bool withExtinction, const Extinction& extinction,
-			  bool withCommonNameI18n)
+void ZoneArray::drawStarRange(const StarType* first, const StarType* last, bool globalzone,
+			      StelPainter* sPainter, bool isInsideViewport,
+			      const RCMag* rcmag_table, int cutoffMagStep, float cutoffMag,
+			      float dyrs, StelCore* core, StelSkyDrawer* drawer,
+			      const QVector<SphericalCap>& boundingCaps,
+			      bool withAberration,
+			      double withParallax, const Vec3d& diffPos,
+			      int maxMagStarName, float names_brightness,
+			      bool withExtinction, const Extinction& extinction,
+			      bool withCommonNameI18n) const
 {
 	for (const StarType* s = first; s < last; ++s)
 	{
@@ -648,7 +636,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	drawStarRange(zoneToDraw->getStars(), zoneToDraw->getStars() + zoneToDraw->size,
 		      zoneToDraw->isGlobal,
 		      sPainter, isInsideViewport, rcmag_table, cutoffMagStep, cutoffMag,
-		      mag_min, dyrs, core, drawer, boundingCaps, withAberration,
+		      dyrs, core, drawer, boundingCaps, withAberration,
 		      withParallax, diffPos, maxMagStarName, names_brightness,
 		      withExtinction, extinction, withCommonNameI18n);
 }
@@ -1035,7 +1023,7 @@ void DynamicZoneArray<StarType>::draw(StelPainter* sPainter, int index, bool isI
 
 	drawStarRange(stars, stars + zoneSize, globalzone,
 		      sPainter, isInsideViewport, rcmag_table, cutoffMagStep, cutoffMag,
-		      mag_min, dyrs, core, drawer, boundingCaps, withAberration,
+		      dyrs, core, drawer, boundingCaps, withAberration,
 		      withParallax, diffPos, maxMagStarName, names_brightness,
 		      withExtinction, extinction, withCommonNameI18n);
 }

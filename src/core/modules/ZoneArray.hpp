@@ -113,7 +113,7 @@ public:
 	virtual void searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
 							  QList<StelObjectP > &result) const = 0;
 
-    virtual StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const = 0;
+	virtual StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const = 0;
 	virtual void searchGaiaIDepochPos(const StarId source_id, float dyrs,
                                                   double & RA,
                                                   double & DEC,
@@ -122,12 +122,26 @@ public:
                                                   double & pmdec,
                                                   double & RV) const = 0;
 
+	//! Draw a contiguous range of stars of type StarType. Shared implementation
+	//! used by SpecialZoneArray::draw() and DynamicZoneArray::draw().
+	template<class StarType>
+	void drawStarRange(const StarType* first, const StarType* last, bool globalzone,
+			   StelPainter* sPainter, bool isInsideViewport,
+			   const RCMag* rcmag_table, int cutoffMagStep, float cutoffMag,
+			   float dyrs, StelCore* core, StelSkyDrawer* drawer,
+			   const QVector<SphericalCap>& boundingCaps,
+			   bool withAberration,
+			   double withParallax, const Vec3d& diffPos,
+			   int maxMagStarName, float names_brightness,
+			   bool withExtinction, const Extinction& extinction,
+			   bool withCommonNameI18n) const;
+
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
-					  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
-					  int maxMagStarName, float names_brightness,
-					  const QVector<SphericalCap>& boundingCaps,
-					  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos, const bool withCommonNameI18n) const = 0;
+			  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
+			  int maxMagStarName, float names_brightness,
+			  const QVector<SphericalCap>& boundingCaps,
+			  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos, const bool withCommonNameI18n) const = 0;
 
 	//! Get whether or not the catalog was successfully loaded.
 	//! @return @c true if at least one zone was loaded, otherwise @c false
