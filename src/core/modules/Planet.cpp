@@ -5941,7 +5941,7 @@ void Planet::drawHints(const StelCore* core, StelPainter &sPainter, const QFont&
 	if (hintFader.getInterstate()<=0)
 		return;
 	tmp = qMax(1.0f, tmp - 10.f);
-	sPainter.setColor(labelColor,labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7f);
+	sPainter.setColor(labelColor,labelsFader.getInterstate()*hintFader.getInterstate()/tmp*scale*0.7f);
 
 	// Draw the 2D small circle
 	sPainter.setBlending(true);
