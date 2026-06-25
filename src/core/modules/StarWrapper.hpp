@@ -32,6 +32,7 @@
 
 #include <QString>
 
+class ZoneArray;
 template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
 
@@ -72,7 +73,7 @@ protected:
 template <class Star> class StarWrapper : public StarWrapperBase
 {
 protected:
-	StarWrapper(const SpecialZoneArray<Star> *array,
+	StarWrapper(const ZoneArray *array,
 		const SpecialZoneData<Star> *zone,
 		const Star *star) : a(array), z(zone), s(star) {}
 	virtual StarId getStarId() const {return s->getGaia();}
@@ -480,7 +481,7 @@ protected:
 	}
 
 protected:
-	const SpecialZoneArray<Star> *const a;
+	const ZoneArray *const a;
 	const SpecialZoneData<Star> *const z;
 	const Star *const s;
 };
@@ -489,7 +490,7 @@ protected:
 class StarWrapper1 : public StarWrapper<Star1>
 {
 public:
-	StarWrapper1(const SpecialZoneArray<Star1> *array,
+	StarWrapper1(const ZoneArray *array,
 		const SpecialZoneData<Star1> *zone,
 		const Star1 *star) : StarWrapper<Star1>(array,zone,star) {}
 	StarId getStarId() const override {return s->getHip() ?  s->getHip() : s->getGaia();}
@@ -525,7 +526,7 @@ public:
 class StarWrapper2 : public StarWrapper<Star2>
 {
 public:
-	StarWrapper2(const SpecialZoneArray<Star2> *array,
+	StarWrapper2(const ZoneArray *array,
 			   const SpecialZoneData<Star2> *zone,
 			   const Star2 *star) : StarWrapper<Star2>(array,zone,star) {}
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
@@ -537,7 +538,7 @@ public:
 class StarWrapper3 : public StarWrapper<Star3>
 {
 public:
-	StarWrapper3(const SpecialZoneArray<Star3> *array,
+	StarWrapper3(const ZoneArray *array,
 			   const SpecialZoneData<Star3> *zone,
 			   const Star3 *star) : StarWrapper<Star3>(array,zone,star) {}
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;

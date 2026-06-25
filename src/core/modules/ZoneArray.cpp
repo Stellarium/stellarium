@@ -95,23 +95,51 @@ static unsigned int stel_bswap_32(unsigned int val)
 
 static float stel_bswap_32f(float val)
 {
-	float f;
-	unsigned int u;
-	std::memcpy(&u, &val, sizeof(val));
-	u = (((u) & 0xff000000) >> 24) | (((u) & 0x00ff0000) >>  8) |
-	    (((u) & 0x0000ff00) <<  8) | (((u) & 0x000000ff) << 24);
-	std::memcpy(&f, &u, sizeof(u));
-	return f;
+    float f;
+    unsigned int u;
+    std::memcpy(&u, &val, sizeof(val));
+    u = (((u) & 0xff000000) >> 24) | (((u) & 0x00ff0000) >>  8) |
+        (((u) & 0x0000ff00) <<  8) | (((u) & 0x000000ff) << 24);
+    std::memcpy(&f, &u, sizeof(u));
+    return f;
+
+/*
+    // Create a union to access the float as an unsigned int
+    union {
+        float f;
+        unsigned int i;
+    } u;
+
+    // Assign the float value to the union
+    u.i = val;
+
+    // Perform the byte swap on the integer representation
+    u.i = (((u.i) & 0xff000000) >> 24) | (((u.i) & 0x00ff0000) >>  8) |
+          (((u.i) & 0x0000ff00) <<  8) | (((u.i) & 0x000000ff) << 24);
+
+    // Return the float value from the union
+    return u.f;
+*/
 }
 
-static const Vec3f north(0, 0, 1);
+static const Vec3f north(0,0,1);
 
 void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
 {
+	// shut compiler up about unused variables
 	(void)index;
 	(void)c0;
 	(void)c1;
 	(void)c2;
+
+	// we don't need them anymore for the new star catalogs
+	// initialize zone:
+	// ZoneData &z(zones[index]);
+	// z.center = c0+c1+c2;
+	// z.center.normalize();
+	// z.axis0 = north ^ z.center;
+	// z.axis0.normalize();
+	// z.axis1 = z.center ^ z.axis0;
 }
 
 static inline int ReadInt(QFile& file, unsigned int &x)
@@ -139,7 +167,7 @@ static inline int ReadFloat(QFile& file, float &x)
 
 ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, bool use_dynamic)
 {
-	QString dbStr;
+	QString dbStr; // for debugging output.
 	QFile* file = new QFile(catalogFilePath);
 	if (!file->open(QIODevice::ReadOnly))
 	{
@@ -147,25 +175,24 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, bool
 		return Q_NULLPTR;
 	}
 	dbStr = "Loading star catalog: " + QDir::toNativeSeparators(catalogFilePath) + " - ";
-
-	unsigned int magic, major, minor, type, level, mag_min;
+	unsigned int magic,major,minor,type,level,mag_min;
 	float epochJD;
-	if (ReadInt(*file, magic) < 0 ||
-	    ReadInt(*file, type) < 0 ||
-	    ReadInt(*file, major) < 0 ||
-	    ReadInt(*file, minor) < 0 ||
-	    ReadInt(*file, level) < 0 ||
-	    ReadInt(*file, mag_min) < 0 ||
-	    ReadFloat(*file, epochJD) < 0)
+	if (ReadInt(*file,magic) < 0 ||
+	    ReadInt(*file,type) < 0 ||
+	    ReadInt(*file,major) < 0 ||
+	    ReadInt(*file,minor) < 0 ||
+	    ReadInt(*file,level) < 0 ||
+	    ReadInt(*file,mag_min) < 0 ||
+	    ReadFloat(*file,epochJD) < 0)
 	{
 		dbStr += "error - file format is bad.";
 		qDebug().noquote() << dbStr;
 		return Q_NULLPTR;
 	}
-
 	const bool byte_swap = (magic == FILE_MAGIC_OTHER_ENDIAN);
 	if (byte_swap)
 	{
+		// ok, FILE_MAGIC_OTHER_ENDIAN, must swap
 		if (use_mmap)
 		{
 			dbStr += "warning - must convert catalogue ";
@@ -187,17 +214,21 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, bool
 	}
 	else if (magic == FILE_MAGIC)
 	{
+		// ok, FILE_MAGIC
 #if (!defined(__GNUC__) && !defined(_MSC_BUILD))
 		if (use_mmap)
 		{
+			// mmap only with gcc:
 			dbStr += "warning - you must convert catalogue to native format before mmap loading ";
 			qDebug(qPrintable(dbStr));
+
 			return 0;
 		}
 #endif
 	}
 	else if (magic == FILE_MAGIC_NATIVE)
 	{
+		// ok, will work for any architecture and any compiler
 	}
 	else
 	{
@@ -212,33 +243,48 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, bool
 		qDebug().noquote() << dbStr;
 		return Q_NULLPTR;
 	}
-
-	ZoneArray* rval = Q_NULLPTR;
+	ZoneArray *rval = Q_NULLPTR;
 	dbStr += QString("%1_%2v%3_%4; ").arg(level).arg(type).arg(major).arg(minor);
 
 	switch (type)
 	{
 		case 0:
 			if (major > MAX_MAJOR_FILE_VERSION)
+			{
 				dbStr += "warning - unsupported version ";
+			}
 			else
+			{
 				rval = new HipZoneArray(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
+			}
 			break;
 		case 1:
 			if (major > MAX_MAJOR_FILE_VERSION)
+			{
 				dbStr += "warning - unsupported version ";
+			}
 			else if (use_dynamic)
+			{
 				rval = new DynamicZoneArray<Star2>(file->fileName(), file, static_cast<int>(level), static_cast<int>(mag_min), byte_swap);
+			}
 			else
+			{
 				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
+			}
 			break;
 		case 2:
 			if (major > MAX_MAJOR_FILE_VERSION)
+			{
 				dbStr += "warning - unsupported version ";
+			}
 			else if (use_dynamic)
+			{
 				rval = new DynamicZoneArray<Star3>(file->fileName(), file, static_cast<int>(level), static_cast<int>(mag_min), byte_swap);
+			}
 			else
+			{
 				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
+			}
 			break;
 		default:
 			dbStr += "error - bad file type ";
@@ -263,8 +309,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap, bool
 }
 
 ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min)
-	: fname(fname), level(level), mag_min(mag_min),
-	  nr_of_stars(0), zones(Q_NULLPTR), file(file)
+			: fname(fname), level(level), mag_min(mag_min), nr_of_stars(0), zones(Q_NULLPTR), file(file)
 {
 	nr_of_zones = static_cast<unsigned int>(StelGeodesicGrid::nrOfZones(level));
 }
@@ -272,28 +317,27 @@ ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min)
 bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
 {
 	int parts = 256;
-	int part_size = static_cast<int>((size + (parts >> 1)) / parts);
-	if (part_size < 64 * 1024)
-		part_size = 64 * 1024;
+	int part_size = static_cast<int>((size + (parts>>1)) / parts);
+	if (part_size < 64*1024)
+	{
+		part_size = 64*1024;
+	}
 	while (size > 0)
 	{
 		const int to_read = (part_size < size) ? part_size : static_cast<int>(size);
 		const int read_rc = static_cast<int>(file.read(static_cast<char*>(data), to_read));
-		if (read_rc != to_read)
-			return false;
+		if (read_rc != to_read) return false;
 		size -= read_rc;
 		data = (static_cast<char*>(data)) + read_rc;
 	}
 	return true;
 }
 
-// ==================== HipZoneArray ====================
-
 void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 {
-	for (const SpecialZoneData<Star1> *z = getZones() + (nr_of_zones - 1); z >= getZones(); z--)
+	for (const SpecialZoneData<Star1> *z=getZones()+(nr_of_zones-1);z>=getZones();z--)
 	{
-		for (const Star1 *s = z->getStars() + z->size - 1; s >= z->getStars(); s--)
+		for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--)
 		{
 			const StarId hip = s->getHip();
 			if (hip > NR_OF_HIP)
@@ -303,8 +347,11 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 			}
 			if (hip != 0)
 			{
+				// check if a star is there already
 				if (hipIndex[hip].a)
 				{
+					// check if componentid is smaller or higher, we want smaller one (the main one)
+					// otherwise there can be case where Sirius B is stored as main star but not Sirius A
 					if (hipIndex[hip].s->getComponentIds() > s->getComponentIds())
 					{
 						hipIndex[hip].a = this;
@@ -325,15 +372,15 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 
 // ==================== SpecialZoneArray ====================
 
-template<class StarType>
-SpecialZoneArray<StarType>::SpecialZoneArray(QFile* file, bool byte_swap, bool use_mmap,
-					     int level, int mag_min)
+template<class Star>
+SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap, bool use_mmap,
+					 int level, int mag_min)
 	: Base(file->fileName(), file, level, mag_min),
 	  stars(Q_NULLPTR), mmap_start(Q_NULLPTR)
 {
 	if (this->nr_of_zones > 0)
 	{
-		this->zones = new SpecialZoneData<StarType>[this->nr_of_zones];
+		this->zones = new SpecialZoneData<Star>[this->nr_of_zones];
 
 		unsigned int *zone_size = new unsigned int[this->nr_of_zones];
 		if (static_cast<qint64>(sizeof(unsigned int) * this->nr_of_zones) !=
@@ -353,14 +400,16 @@ SpecialZoneArray<StarType>::SpecialZoneArray(QFile* file, bool byte_swap, bool u
 				this->nr_of_stars += tmp_spu_int32;
 				getZones()[z].size = static_cast<int>(tmp_spu_int32);
 			}
+			// last one is always the global zone
 			getZones()[this->nr_of_zones - 1].isGlobal = true;
 		}
+		// delete zone_size before allocating stars
+		// in order to avoid memory fragmentation:
 		delete[] zone_size;
 
 		if (this->nr_of_stars == 0)
 		{
-			if (this->zones)
-				delete[] getZones();
+			if (this->zones) delete[] getZones();
 			this->zones = Q_NULLPTR;
 			this->nr_of_zones = 0;
 		}
@@ -368,13 +417,13 @@ SpecialZoneArray<StarType>::SpecialZoneArray(QFile* file, bool byte_swap, bool u
 		{
 			if (use_mmap)
 			{
-				mmap_start = this->file->map(this->file->pos(), sizeof(StarType) * this->nr_of_stars);
+				mmap_start = this->file->map(this->file->pos(), sizeof(Star) * this->nr_of_stars);
 				if (mmap_start == Q_NULLPTR)
 				{
 					qDebug() << "ERROR: SpecialZoneArray(" << this->level
 						 << ")::SpecialZoneArray: QFile(" << this->file->fileName()
 						 << ".map(" << this->file->pos()
-						 << ',' << sizeof(StarType) * this->nr_of_stars
+						 << ',' << sizeof(Star) * this->nr_of_stars
 						 << ") failed: " << this->file->errorString();
 					stars = Q_NULLPTR;
 					this->nr_of_stars = 0;
@@ -384,8 +433,8 @@ SpecialZoneArray<StarType>::SpecialZoneArray(QFile* file, bool byte_swap, bool u
 				}
 				else
 				{
-					stars = reinterpret_cast<StarType*>(mmap_start);
-					StarType *s = stars;
+					stars = reinterpret_cast<Star*>(mmap_start);
+					Star *s = stars;
 					for (unsigned int z = 0; z < this->nr_of_zones; z++)
 					{
 						getZones()[z].stars = s;
@@ -396,8 +445,8 @@ SpecialZoneArray<StarType>::SpecialZoneArray(QFile* file, bool byte_swap, bool u
 			}
 			else
 			{
-				stars = new StarType[this->nr_of_stars];
-				if (!this->readFile(*this->file, stars, sizeof(StarType) * this->nr_of_stars))
+				stars = new Star[this->nr_of_stars];
+				if (!this->readFile(*this->file, stars, sizeof(Star) * this->nr_of_stars))
 				{
 					delete[] stars;
 					stars = Q_NULLPTR;
@@ -408,7 +457,7 @@ SpecialZoneArray<StarType>::SpecialZoneArray(QFile* file, bool byte_swap, bool u
 				}
 				else
 				{
-					StarType *s = stars;
+					Star *s = stars;
 					for (unsigned int z = 0; z < this->nr_of_zones; z++)
 					{
 						getZones()[z].stars = s;
@@ -421,15 +470,19 @@ SpecialZoneArray<StarType>::SpecialZoneArray(QFile* file, bool byte_swap, bool u
 	}
 }
 
-template<class StarType>
-SpecialZoneArray<StarType>::~SpecialZoneArray(void)
+template<class Star>
+SpecialZoneArray<Star>::~SpecialZoneArray(void)
 {
 	if (stars)
 	{
 		if (mmap_start != Q_NULLPTR)
+		{
 			this->file->unmap(mmap_start);
+		}
 		else
+		{
 			delete[] stars;
+		}
 		delete this->file;
 		stars = Q_NULLPTR;
 	}
@@ -442,8 +495,8 @@ SpecialZoneArray<StarType>::~SpecialZoneArray(void)
 	this->nr_of_stars = 0;
 }
 
-template<class StarType>
-bool SpecialZoneArray<StarType>::loadZoneDraw(int index, const StarType*& outStars,
+template<class Star>
+bool SpecialZoneArray<Star>::loadZoneDraw(int index, const Star*& outStars,
 					      uint32_t& size, bool& isGlobal) const
 {
 	auto* z = getZones() + index;
@@ -453,25 +506,24 @@ bool SpecialZoneArray<StarType>::loadZoneDraw(int index, const StarType*& outSta
 	return true;
 }
 
-template<class StarType>
-bool SpecialZoneArray<StarType>::loadZoneSearch(int index, const StarType*& outStars,
+template<class Star>
+bool SpecialZoneArray<Star>::loadZoneSearch(int index, const Star*& outStars,
 						uint32_t& size, bool& isGlobal) const
 {
 	return loadZoneDraw(index, outStars, size, isGlobal);
 }
 
-template<class StarType>
-StelObjectP SpecialZoneArray<StarType>::createStelObj(const StarType* s) const
+template<class Star>
+StelObjectP SpecialZoneArray<Star>::createStelObj(const Star* s, int zoneIndex) const
 {
-	// Zone data pointer not needed by createStelObject in this context
-	return s->createStelObject(static_cast<const SpecialZoneArray<StarType>*>(this),
-				   static_cast<const SpecialZoneData<StarType>*>(nullptr));
+	return s->createStelObject(static_cast<const ZoneArray*>(this),
+				   static_cast<const SpecialZoneData<Star>*>(getZones() + zoneIndex));
 }
 
 // ==================== DynamicZoneArray ====================
 
-template<class StarType>
-DynamicZoneArray<StarType>::DynamicZoneArray(const QString& fname, QFile* file,
+template<class Star>
+DynamicZoneArray<Star>::DynamicZoneArray(const QString& fname, QFile* file,
 					     int level, int mag_min, bool byte_swap)
 	: Base(fname, file, level, mag_min),
 	  zoneCounts_(Q_NULLPTR), zoneTableMmapStart_(Q_NULLPTR)
@@ -510,14 +562,14 @@ DynamicZoneArray<StarType>::DynamicZoneArray(const QString& fname, QFile* file,
 	blockOffsets_[numBlocks] = totalStars;
 
 	const qint64 starDataBase = 28 + static_cast<qint64>(sizeof(uint32_t)) * this->nr_of_zones;
-	this->file->seek(starDataBase + static_cast<qint64>(totalStars) * sizeof(StarType));
+	this->file->seek(starDataBase + static_cast<qint64>(totalStars) * sizeof(Star));
 
 	// Mark the file position as valid for future reads
 	fileValid_ = true;
 }
 
-template<class StarType>
-DynamicZoneArray<StarType>::~DynamicZoneArray(void)
+template<class Star>
+DynamicZoneArray<Star>::~DynamicZoneArray(void)
 {
 	if (zoneCounts_)
 	{
@@ -533,8 +585,8 @@ DynamicZoneArray<StarType>::~DynamicZoneArray(void)
 	this->nr_of_stars = 0;
 }
 
-template<class StarType>
-const StarType* DynamicZoneArray<StarType>::loadZone(int zone_index) const
+template<class Star>
+const Star* DynamicZoneArray<Star>::loadZone(int zone_index) const
 {
 	if (static_cast<unsigned int>(zone_index) >= this->nr_of_zones)
 		return nullptr;
@@ -543,21 +595,90 @@ const StarType* DynamicZoneArray<StarType>::loadZone(int zone_index) const
 	if (count == 0)
 		return nullptr;
 
-	// Check cache first
+	// Collect any finished async loads into the cache
+	drainPendingLoads();
+
+	// Already cached?
 	auto* cached = zoneCache_.object(zone_index);
 	if (cached)
-		return reinterpret_cast<const StarType*>(cached->constData());
+		return reinterpret_cast<const Star*>(cached->constData());
+
+	// Already loading asynchronously?
+	if (pendingLoads_.contains(zone_index))
+		return nullptr;
 
 	// Compute file offset
 	const uint32_t block = static_cast<uint32_t>(zone_index) / BLOCK_SIZE;
-	uint64_t off = blockOffsets_[block] * sizeof(StarType);
+	uint64_t off = blockOffsets_[block] * sizeof(Star);
 	const uint32_t zStart = block * BLOCK_SIZE;
 	for (uint32_t z = zStart; z < static_cast<uint32_t>(zone_index); ++z)
-		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(StarType);
+		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star);
 
 	const qint64 starDataBase = 28 + static_cast<qint64>(sizeof(uint32_t)) * this->nr_of_zones;
 	const qint64 fileOffset = starDataBase + static_cast<qint64>(off);
-	const qint64 size = static_cast<qint64>(count) * sizeof(StarType);
+	const qint64 size = static_cast<qint64>(count) * sizeof(Star);
+
+	// Launch async read
+	QFile* filePtr = this->file;
+	QMutex* mtx = &fileMutex_;
+	const bool* valid = &fileValid_;
+
+	auto future = QtConcurrent::run([filePtr, mtx, valid, fileOffset, size]() -> QByteArray* {
+		QMutexLocker locker(mtx);
+		if (!filePtr || !filePtr->isOpen() || !(*valid))
+			return nullptr;
+		auto* data = new QByteArray(static_cast<int>(size), Qt::Uninitialized);
+		filePtr->seek(fileOffset);
+		if (filePtr->read(data->data(), size) != size)
+		{
+			delete data;
+			return nullptr;
+		}
+		return data;
+	});
+	pendingLoads_.insert(zone_index, future);
+	return nullptr;
+}
+
+template<class Star>
+const Star* DynamicZoneArray<Star>::loadZoneSync(int zone_index) const
+{
+	if (static_cast<unsigned int>(zone_index) >= this->nr_of_zones)
+		return nullptr;
+
+	const uint32_t count = zoneCounts_[zone_index];
+	if (count == 0)
+		return nullptr;
+
+	// Already cached?
+	auto* cached = zoneCache_.object(zone_index);
+	if (cached)
+		return reinterpret_cast<const Star*>(cached->constData());
+
+	// If there is a pending async load, wait for it to finish
+	if (pendingLoads_.contains(zone_index))
+	{
+		QFuture<QByteArray*> future = pendingLoads_.take(zone_index);
+		future.waitForFinished();
+		auto* data = future.result();
+		if (data)
+		{
+			zoneCache_.insert(zone_index, data, data->size());
+			return reinterpret_cast<const Star*>(data->constData());
+		}
+		return nullptr;
+	}
+
+	// No pending load — do a synchronous read
+	const uint32_t block = static_cast<uint32_t>(zone_index) / BLOCK_SIZE;
+	uint64_t off = blockOffsets_[block] * sizeof(Star);
+	const uint32_t zStart = block * BLOCK_SIZE;
+	for (uint32_t z = zStart; z < static_cast<uint32_t>(zone_index); ++z)
+		off += static_cast<uint64_t>(zoneCounts_[z]) * sizeof(Star);
+
+	const qint64 starDataBase = 28 + static_cast<qint64>(sizeof(uint32_t)) * this->nr_of_zones;
+	const qint64 fileOffset = starDataBase + static_cast<qint64>(off);
+	const qint64 size = static_cast<qint64>(count) * sizeof(Star);
 
 	auto* data = new QByteArray(static_cast<int>(size), Qt::Uninitialized);
 	{
@@ -570,24 +691,17 @@ const StarType* DynamicZoneArray<StarType>::loadZone(int zone_index) const
 		this->file->seek(fileOffset);
 		if (this->file->read(data->data(), size) != size)
 		{
-			qWarning() << "DynamicZoneArray::loadZone: read error for zone" << zone_index;
+			qWarning() << "DynamicZoneArray::loadZoneSync: read error for zone" << zone_index;
 			delete data;
 			return nullptr;
 		}
 	}
 	zoneCache_.insert(zone_index, data, static_cast<int>(size));
-	return reinterpret_cast<const StarType*>(data->constData());
+	return reinterpret_cast<const Star*>(data->constData());
 }
 
-template<class StarType>
-const StarType* DynamicZoneArray<StarType>::loadZoneSync(int zone_index) const
-{
-	// Same as loadZone but without async concerns
-	return loadZone(zone_index);
-}
-
-template<class StarType>
-void DynamicZoneArray<StarType>::prefetchRegion(const QVector<SphericalCap>& caps,
+template<class Star>
+void DynamicZoneArray<Star>::prefetchRegion(const QVector<SphericalCap>& caps,
 						int maxGridLevel) const
 {
 	auto* core = StelApp::getInstance().getCore();
@@ -599,7 +713,7 @@ void DynamicZoneArray<StarType>::prefetchRegion(const QVector<SphericalCap>& cap
 	for (GeodesicSearchInsideIterator it(*result, this->level);
 	     (zone = it.next()) >= 0;)
 	{
-		if (zoneCache_.contains(zone))
+		if (zoneCache_.contains(zone) || pendingLoads_.contains(zone))
 			continue;
 		loadZone(zone);
 		++prefetched;
@@ -607,7 +721,7 @@ void DynamicZoneArray<StarType>::prefetchRegion(const QVector<SphericalCap>& cap
 	for (GeodesicSearchBorderIterator it(*result, this->level);
 	     (zone = it.next()) >= 0;)
 	{
-		if (zoneCache_.contains(zone))
+		if (zoneCache_.contains(zone) || pendingLoads_.contains(zone))
 			continue;
 		loadZone(zone);
 		++prefetched;
@@ -618,14 +732,26 @@ void DynamicZoneArray<StarType>::prefetchRegion(const QVector<SphericalCap>& cap
 				      .arg(this->level).arg(prefetched);
 }
 
-template<class StarType>
-void DynamicZoneArray<StarType>::drainPendingLoads() const
+template<class Star>
+void DynamicZoneArray<Star>::drainPendingLoads() const
 {
-	// Drain any pending async loads (placeholder)
+	QMutableHashIterator it(pendingLoads_);
+	while (it.hasNext())
+	{
+		it.next();
+		if (!it.value().isFinished())
+			continue;
+
+		const int zoneIdx = it.key();
+		auto* data = it.value().result();
+		it.remove();
+		if (data)
+			zoneCache_.insert(zoneIdx, data, data->size());
+	}
 }
 
-template<class StarType>
-bool DynamicZoneArray<StarType>::loadZoneDraw(int index, const StarType*& outStars,
+template<class Star>
+bool DynamicZoneArray<Star>::loadZoneDraw(int index, const Star*& outStars,
 					      uint32_t& size, bool& isGlobal) const
 {
 	if (static_cast<unsigned int>(index) >= this->nr_of_zones)
@@ -638,8 +764,8 @@ bool DynamicZoneArray<StarType>::loadZoneDraw(int index, const StarType*& outSta
 	return true;
 }
 
-template<class StarType>
-bool DynamicZoneArray<StarType>::loadZoneSearch(int index, const StarType*& outStars,
+template<class Star>
+bool DynamicZoneArray<Star>::loadZoneSearch(int index, const Star*& outStars,
 						uint32_t& size, bool& isGlobal) const
 {
 	if (static_cast<unsigned int>(index) >= this->nr_of_zones)
@@ -652,120 +778,39 @@ bool DynamicZoneArray<StarType>::loadZoneSearch(int index, const StarType*& outS
 	return true;
 }
 
-template<class StarType>
-StelObjectP DynamicZoneArray<StarType>::createStelObj(const StarType* s) const
+template<class Star>
+StelObjectP DynamicZoneArray<Star>::createStelObj(const Star* s, int /*zoneIndex*/) const
 {
-	return s->createStelObject(nullptr, nullptr);
+	return s->createStelObject(static_cast<const ZoneArray*>(this), nullptr);
 }
 
 // ==================== ZoneArrayImpl — shared draw/search ====================
 
-template<class Derived, class StarType>
-void ZoneArrayImpl<Derived, StarType>::drawStarRange(
-		const StarType* first, const StarType* last, bool globalzone,
-		StelPainter* sPainter, bool isInsideViewport,
-		const RCMag* rcmag_table, int cutoffMagStep, float cutoffMag,
-		float dyrs, StelCore* core, StelSkyDrawer* drawer,
-		const QVector<SphericalCap>& boundingCaps,
-		bool withAberration,
-		double withParallax, const Vec3d& diffPos,
-		int maxMagStarName, float names_brightness,
-		bool withExtinction, const Extinction& extinction,
-		bool withCommonNameI18n) const
+template<class Derived, class Star>
+void ZoneArrayImpl<Derived, Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
+				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness,
+				  const QVector<SphericalCap> &boundingCaps,
+				  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos,
+				  const bool withCommonNameI18n) const
 {
-	for (const StarType* s = first; s < last; ++s)
-	{
-		float starMag = s->getMag();
-		int magIndex = static_cast<int>((starMag - (this->mag_min - 7000.)) * 0.02);
-
-		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag))
-		{
-			if (std::fabs(dyrs) <= 5000.f || !s->isVIP() || !globalzone)
-				break;
-		}
-
-		bool recomputeMag = s->getPreciseAstrometricFlag();
-		double Plx = s->getPlx();
-		Vec3d v;
-		if (recomputeMag)
-		{
-			double vr = s->getRV();
-			Vec3d pmvec0(s->getDx0(), s->getDx1(), s->getDx2());
-			pmvec0 = pmvec0 * MAS2RAD;
-			double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
-			double pmtotsqr = (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
-			double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0 * pmr0) * dyrs * dyrs);
-			Plx *= f;
-			float magOffset = 5.f * log10(1 / f);
-			starMag += magOffset * 1000.f;
-			Vec3d r(s->getX0(), s->getX1(), s->getX2());
-			Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
-			v.set(u[0], u[1], u[2]);
-		}
-
-		magIndex = static_cast<int>((starMag - (this->mag_min - 7000.)) * 0.02);
-		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag))
-			continue;
-
-		if (!recomputeMag)
-			s->getJ2000Pos(dyrs, v);
-
-		s->getBinaryOrbit(core->getJDE(), v);
-
-		if (withParallax)
-		{
-			s->getPlxEffect(withParallax * Plx, v, diffPos);
-			v.normalize();
-		}
-
-		if (withAberration)
-			applyAberration(v, core);
-
-		if (!isInsideViewport && !isVisibleInCaps(v, boundingCaps))
-			continue;
-
-		int extinctedMagIndex = magIndex;
-		float twinkleFactor = 1.0f;
-		const RCMag* tmpRcmag = &rcmag_table[magIndex];
-
-		if (withExtinction && !applyExtinction(magIndex, cutoffMagStep, v, core, extinction, extinctedMagIndex, tmpRcmag, twinkleFactor))
-			continue;
-
-		if (drawer->drawPointSource(sPainter, v, *tmpRcmag, s->getBVIndex(), !isInsideViewport, twinkleFactor) &&
-		    core->getFlagClearSky() && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID() <= 1)
-		{
-			const float offset = tmpRcmag->radius * 0.7f;
-			const Vec3f color = StelSkyDrawer::indexToColor(s->getBVIndex()) * 0.75f;
-			sPainter->setColor(color, names_brightness);
-			sPainter->drawText(v, s->getScreenNameI18n(withCommonNameI18n), 0, offset, offset, false);
-		}
-	}
-}
-
-template<class Derived, class StarType>
-void ZoneArrayImpl<Derived, StarType>::draw(
-		StelPainter* sPainter, int index, bool isInsideViewport,
-		const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
-		int maxMagStarName, float names_brightness,
-		const QVector<SphericalCap>& boundingCaps,
-		const bool withAberration, const Vec3d vel,
-		const double withParallax, const Vec3d diffPos,
-		const bool withCommonNameI18n) const
-{
-	(void)vel;
-
 	StelSkyDrawer* drawer = core->getSkyDrawer();
+	Vec3d v;
+
+	// Allow artificial cutoff:
+	// find the (integer) mag at which is just bright enough to be drawn.
 	int cutoffMagStep;
 	float cutoffMag;
 	computeMagnitudeCutoff(this->mag_min, limitMagIndex, drawer, cutoffMagStep, cutoffMag);
-
+	Q_ASSERT_X(cutoffMagStep <= RCMAG_TABLE_SIZE, "ZoneArrayImpl::draw",
+			   QString("RCMAG_TABLE_SIZE: %1, cutoffMagStep: %2")
+				   .arg(QString::number(RCMAG_TABLE_SIZE), QString::number(cutoffMagStep)).toLatin1());
 	if (cutoffMagStep < 140)
 		return;
 
-	const StarType* stars = nullptr;
+	const Star* stars = nullptr;
 	uint32_t zoneSize = 0;
 	bool globalzone = false;
-	if (!zoneForDraw(index, stars, zoneSize, globalzone) || !stars)
+	if (!zoneForDraw(index, stars, zoneSize, globalzone))
 		return;
 
 	const float dyrs = static_cast<float>(core->getJDE() - STAR_CATALOG_JDEPOCH) / 365.25f;
@@ -774,27 +819,106 @@ void ZoneArrayImpl<Derived, StarType>::draw(
 	const bool withExtinction = drawer->getFlagHasAtmosphere() &&
 				    extinction.getExtinctionCoefficient() >= 0.01f;
 
-	Q_ASSERT_X(cutoffMagStep <= RCMAG_TABLE_SIZE, "ZoneArrayImpl::draw",
-		   QString("RCMAG_TABLE_SIZE: %1, cutoffMagStep: %2")
-			   .arg(QString::number(RCMAG_TABLE_SIZE), QString::number(cutoffMagStep)).toLatin1());
+	// Go through all stars, which are sorted by magnitude (bright stars first)
+	for (const Star* s = stars; s < stars + zoneSize; ++s)
+	{
+		// check if this is a global zone
+		float starMag = s->getMag();
+		int magIndex = static_cast<int>((starMag - (this->mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
 
-	drawStarRange(stars, stars + zoneSize, globalzone,
-		      sPainter, isInsideViewport, rcmag_table, cutoffMagStep, cutoffMag,
-		      dyrs, core, drawer, boundingCaps, withAberration,
-		      withParallax, diffPos, maxMagStarName, names_brightness,
-		      withExtinction, extinction, withCommonNameI18n);
+		// first part is check for Star1 and is global zone, so to keep looping for long-range prediction
+		// second part is old behavior, to skip stars below you that are too faint to display for Star2 and Star3
+		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag)) // should always use catalog magnitude, otherwise will mess up the order
+		{
+			if (fabs(dyrs) <= 5000. || !s->isVIP() || !globalzone)  // if any of these true, we should always break
+				break;
+		}
+		// Because of the test above, the star should always be visible from this point.
+
+		// only recompute if has time dependence
+		bool recomputeMag = (s->getPreciseAstrometricFlag());
+		double Plx = s->getPlx();
+		if (recomputeMag)
+		{
+			// don't do full solution, can be very slow, just estimate here
+			// estimate parallax from radial velocity and total proper motion
+			double vr = s->getRV();
+			Vec3d pmvec0(s->getDx0(), s->getDx1(), s->getDx2());
+			pmvec0 = pmvec0 * MAS2RAD;
+			double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
+			double pmtotsqr =  (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
+			double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
+			Plx *= f;
+			float magOffset = 5.f * log10(1/f);
+			starMag += magOffset * 1000.;
+			// if we reach here we might as well compute the position too
+			Vec3d r(s->getX0(), s->getX1(), s->getX2());
+			Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
+			v.set(u[0], u[1], u[2]);
+		}
+		// recompute magIndex with the new magnitude
+		magIndex = static_cast<int>((starMag - (this->mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
+
+		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag))  // check again with the new magIndex
+				continue;  // allow continue for other star that might became bright enough in the future
+
+		// Array of 2 numbers containing radius and magnitude
+		const RCMag* tmpRcmag = &rcmag_table[magIndex];
+
+		// Get the star position from the array, only do it if not already computed
+		// put it here because potentially cutoffMagStep bigger than magIndex and no computation needed
+		if (!recomputeMag)
+		{
+			s->getJ2000Pos(dyrs, v);
+		}
+
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), v);
+
+		if (withParallax)
+		{
+			s->getPlxEffect(withParallax * Plx, v, diffPos);
+			v.normalize();
+		}
+
+		// Aberration: vf contains Equatorial J2000 position.
+		if (withAberration)
+		{
+			applyAberration(v, core);
+		}
+
+		// If the star zone is not strictly contained inside the viewport, eliminate from the
+		// beginning the stars actually outside viewport.
+		if (!isInsideViewport && !isVisibleInCaps(v, boundingCaps))
+			continue;
+
+		int extinctedMagIndex = magIndex;
+		float twinkleFactor = 1.0f; // allow height-dependent twinkle.
+
+		if (withExtinction && !applyExtinction(magIndex, cutoffMagStep, v, core, extinction, extinctedMagIndex, tmpRcmag, twinkleFactor))
+			continue;
+
+		if (drawer->drawPointSource(sPainter, v, *tmpRcmag, s->getBVIndex(), !isInsideViewport, twinkleFactor) &&
+		    core->getFlagClearSky() && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID() <= 1)
+		{
+			const float offset = tmpRcmag->radius*0.7f;
+			const Vec3f color = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
+			sPainter->setColor(color, names_brightness);
+			sPainter->drawText(v, s->getScreenNameI18n(withCommonNameI18n), 0, offset, offset, false);
+		}
+	}
 }
 
-template<class Derived, class StarType>
-void ZoneArrayImpl<Derived, StarType>::searchAround(
+template<class Derived, class Star>
+void ZoneArrayImpl<Derived, Star>::searchAround(
 		const StelCore* core, int index, const Vec3d &v,
 		const double withParallax, const Vec3d diffPos,
 		double cosLimFov, QList<StelObjectP> &result)
 {
-	const StarType* stars = nullptr;
+	const Star* stars = nullptr;
 	uint32_t zoneSize = 0;
 	bool globalzone = false;
-	if (!zoneForSearch(index, stars, zoneSize, globalzone) || !stars)
+	if (!zoneForSearch(index, stars, zoneSize, globalzone))
 		return;
 
 	(void)globalzone;
@@ -803,27 +927,30 @@ void ZoneArrayImpl<Derived, StarType>::searchAround(
 
 	for (uint32_t i = 0; i < zoneSize; ++i)
 	{
-		stars[i].getJ2000Pos(dyrs, tmp);
+		double RA, DEC, Plx, pmra, pmdec, RadialVel;
+		stars[i].getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+		StelUtils::spheToRect(RA, DEC, tmp);
+		// stars[i]->getJ2000Pos(dyrs, tmp);
+		// in case it is in a binary system
 		stars[i].getBinaryOrbit(core->getJDE(), tmp);
-		stars[i].getPlxEffect(withParallax * stars[i].getPlx(), tmp, diffPos);
+		stars[i].getPlxEffect(withParallax * Plx, tmp, diffPos);
 		tmp.normalize();
-
 		if (core->getUseAberration())
 		{
 			const Vec3d vel = core->getAberrationVec(core->getJDE());
-			tmp += vel;
+			tmp+=vel;
 			tmp.normalize();
 		}
-
 		if (tmp * v >= cosLimFov)
 		{
+			// TODO: do not select stars that are too faint to display
 			result.push_back(wrapStar(&stars[i], static_cast<int>(i)));
 		}
 	}
 }
 
-template<class Derived, class StarType>
-void ZoneArrayImpl<Derived, StarType>::searchWithin(
+template<class Derived, class Star>
+void ZoneArrayImpl<Derived, Star>::searchWithin(
 		const StelCore* core, int index, const SphericalRegionP region,
 		const double withParallax, const Vec3d diffPos,
 		const bool hipOnly, const float maxMag,
@@ -831,11 +958,13 @@ void ZoneArrayImpl<Derived, StarType>::searchWithin(
 {
 	if (hipOnly && this->level > 3)
 		return;
-
-	const StarType* stars = nullptr;
+#ifndef NDEBUG
+	qDebug() << "ZoneArrayImpl<Derived, Star>::searchWithin: Level" << level << "MagMin" << mag_min << "fname" << fname << "nr_of_zones" << nr_of_zones << "nr_of_stars" << nr_of_stars;
+#endif
+	const Star* stars = nullptr;
 	uint32_t zoneSize = 0;
 	bool globalzone = false;
-	if (!zoneForSearch(index, stars, zoneSize, globalzone) || !stars)
+	if (!zoneForSearch(index, stars, zoneSize, globalzone))
 		return;
 
 	(void)globalzone;
@@ -848,33 +977,40 @@ void ZoneArrayImpl<Derived, StarType>::searchWithin(
 		if (stars[i].getMag() >= maxMilliMag)
 			continue;
 
-		stars[i].getJ2000Pos(dyrs, tmp);
+		double RA, DEC, Plx, pmra, pmdec, RadialVel;
+		stars[i].getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+		StelUtils::spheToRect(RA, DEC, tmp);
+		// in case it is in a binary system
 		stars[i].getBinaryOrbit(core->getJDE(), tmp);
-		stars[i].getPlxEffect(withParallax * stars[i].getPlx(), tmp, diffPos);
+		stars[i].getPlxEffect(withParallax * Plx, tmp, diffPos);
 		tmp.normalize();
 
+		// TODO: Move vel into arg.list
 		if (core->getUseAberration())
 		{
 			const Vec3d vel = core->getAberrationVec(core->getJDE());
 			tmp += vel;
 			tmp.normalize();
 		}
-
+		// By trying, region is a SphericalPolygon. We are calling SphericalPolygon::contains(Vec3d)
 		if (region->contains(tmp))
 		{
+#ifndef NDEBUG
+			//qDebug() << "Region match: " <<  s->getHip() << s->getGaia()  << "(Index (Zone):" << index << ", Level="<< level << ")";
+#endif
 			result.push_back(wrapStar(&stars[i], static_cast<int>(i)));
 		}
 	}
 }
 
-template<class Derived, class StarType>
-StelObjectP ZoneArrayImpl<Derived, StarType>::searchGaiaID(
+template<class Derived, class Star>
+StelObjectP ZoneArrayImpl<Derived, Star>::searchGaiaID(
 		int index, const StarId source_id, int& matched) const
 {
-	const StarType* stars = nullptr;
+	const Star* stars = nullptr;
 	uint32_t zoneSize = 0;
 	bool globalzone = false;
-	if (!zoneForSearch(index, stars, zoneSize, globalzone) || !stars)
+	if (!zoneForSearch(index, stars, zoneSize, globalzone))
 		return StelObjectP();
 
 	(void)globalzone;
@@ -889,18 +1025,18 @@ StelObjectP ZoneArrayImpl<Derived, StarType>::searchGaiaID(
 	return StelObjectP();
 }
 
-template<class Derived, class StarType>
-void ZoneArrayImpl<Derived, StarType>::searchGaiaIDepochPos(
+template<class Derived, class Star>
+void ZoneArrayImpl<Derived, Star>::searchGaiaIDepochPos(
 		const StarId source_id, float dyrs,
 		double & RA, double & DEC, double & Plx,
 		double & pmra, double & pmdec, double & RV) const
 {
 	for (unsigned int z = 0; z < this->nr_of_zones; ++z)
 	{
-		const StarType* stars = nullptr;
+		const Star* stars = nullptr;
 		uint32_t zoneSize = 0;
 		bool isGlobal = false;
-		if (!zoneForSearch(static_cast<int>(z), stars, zoneSize, isGlobal) || !stars)
+		if (!zoneForSearch(static_cast<int>(z), stars, zoneSize, isGlobal))
 			continue;
 
 		(void)isGlobal;
@@ -915,10 +1051,10 @@ void ZoneArrayImpl<Derived, StarType>::searchGaiaIDepochPos(
 	}
 }
 
-template<class Derived, class StarType>
-StelObjectP ZoneArrayImpl<Derived, StarType>::wrapStar(const StarType* s, int /*zoneIndex*/) const
+template<class Derived, class Star>
+StelObjectP ZoneArrayImpl<Derived, Star>::wrapStar(const Star* s, int zoneIndex) const
 {
-	return self().createStelObj(s);
+	return self().createStelObj(s, zoneIndex);
 }
 
 // ==================== Template instantiations ====================

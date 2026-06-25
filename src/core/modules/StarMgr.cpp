@@ -1656,10 +1656,11 @@ StelObjectP StarMgr::searchGaia(StarId source_id) const
 {
 	const int maxSearchLevel = maxGeodesicGridLevel;
 	int matched = 0;
+	// get the level 12 HEALPix index of the source
 	int lv12_pix = source_id / 34359738368;
 	Vec3d v;
 	StelObjectP so;
-	healpix_pix2vec(int(pow(2., 12.)), lv12_pix, v.v);
+	healpix_pix2vec(int(pow(2., 12.)), lv12_pix, v.v);  // search which pixel the source is in and turn to coordinates
 	Vec3f vf = v.toVec3f();
 
 	// Phase 1: search the zone containing the HEALPix pixel center (fast, O(1) per level)

@@ -34,7 +34,6 @@
 #include <QFile>
 #include <QCache>
 #include <QByteArray>
-#include <QFuture>
 #include <QHash>
 #include <QMutex>
 #include <QtConcurrent>
@@ -46,6 +45,8 @@
 #endif
 
 class StelPainter;
+
+template<class Star> class SpecialZoneArray;
 
 // Patch by Rainer Canavan for compilation on irix with mipspro compiler part 1
 #ifndef MAP_NORESERVE
@@ -81,44 +82,72 @@ struct HipIndexStruct
 class ZoneArray
 {
 public:
+	//! Named public constructor for ZoneArray. Opens a catalog, reads its
+	//! header info, and creates a SpecialZoneArray, HipZoneArray or
+	//! DynamicZoneArray for loading.
+	//! @param extended_file_name path of the star catalog to load from
+	//! @param use_mmap whether or not to mmap the star catalog
+	//! @param use_dynamic whether or not to use DynamicZoneArray
+	//! @return an instance of SpecialZoneArray or HipZoneArray
 	static ZoneArray *create(const QString &extended_file_name, bool use_mmap, bool use_dynamic = false);
-	virtual ~ZoneArray() { nr_of_zones = 0; }
+	virtual ~ZoneArray()
+	{
+		nr_of_zones = 0;
+	}
 
+	//! Get the total number of stars in this catalog.
 	unsigned int getNrOfStars() const { return nr_of_stars; }
 	unsigned int getNrOfZones() const { return nr_of_zones; }
 
-	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const { Q_UNUSED(hipIndex); }
+	//! Dummy method that does nothing. See subclass implementation.
+	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex)}
 	virtual void prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const { Q_UNUSED(caps); Q_UNUSED(maxGridLevel); }
 
-	virtual void searchAround(const StelCore* core, int index, const Vec3d &v,
-				  const double withParallax, const Vec3d diffPos,
-				  double cosLimFov, QList<StelObjectP> &result) = 0;
-	virtual void searchWithin(const StelCore* core, int index, const SphericalRegionP region,
-				  const double withParallax, const Vec3d diffPos,
-				  const bool hipOnly, const float maxMag,
-				  QList<StelObjectP> &result) const = 0;
+	//! Pure virtual method. See subclass implementation.
+	virtual void searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax, const Vec3d diffPos,
+							  double cosLimFov, QList<StelObjectP > &result) = 0;
+	virtual void searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
+							  QList<StelObjectP > &result) const = 0;
+
 	virtual StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const = 0;
 	virtual void searchGaiaIDepochPos(const StarId source_id, float dyrs,
-					  double & RA, double & DEC, double & Plx,
-					  double & pmra, double & pmdec, double & RV) const = 0;
+                                                  double & RA,
+                                                  double & DEC,
+                                                  double & Plx,
+                                                  double & pmra,
+                                                  double & pmdec,
+                                                  double & RV) const = 0;
 
-	virtual void draw(StelPainter* sPainter, int index, bool is_inside,
-			  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
-			  int maxMagStarName, float names_brightness,
-			  const QVector<SphericalCap>& boundingCaps,
-			  const bool withAberration, const Vec3d vel,
-			  const double withParallax, const Vec3d diffPos,
-			  const bool withCommonNameI18n) const = 0;
+	//! Pure virtual method. See subclass implementation.
+	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
+					  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
+					  int maxMagStarName, float names_brightness,
+					  const QVector<SphericalCap>& boundingCaps,
+					  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos, const bool withCommonNameI18n) const = 0;
 
-	bool isInitialized(void) const { return (nr_of_zones > 0); }
+	//! Get whether or not the catalog was successfully loaded.
+	//! @return @c true if at least one zone was loaded, otherwise @c false
+	bool isInitialized(void) const { return (nr_of_zones>0); }
+
+	//! Initialize the ZoneData struct at the given index.
 	void initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2);
 
+	//! File path of the catalog.
 	const QString fname;
+
+	//! Level in StelGeodesicGrid.
 	const int level;
+
+	//! Lower bound of magnitudes in this level at the catalog epoch. Units: millimag.
+	//! May be negative for brightest stars and stars might have different magnitudes in the past/future.
 	const int mag_min;
 
 protected:
+	//! Load a catalog and display its progress on the splash screen.
+	//! @return @c true if successful, or @c false if an error occurred
 	static bool readFile(QFile& file, void *data, qint64 size);
+
+	//! Protected constructor. Initializes fields and does not load anything.
 	ZoneArray(const QString& fname, QFile* file, int level, int mag_min);
 	unsigned int nr_of_zones;
 	unsigned int nr_of_stars;
@@ -129,131 +158,125 @@ protected:
 //! @class ZoneArrayImpl
 //! CRTP template that implements all ZoneArray virtual methods using shared logic.
 //! Derived classes only need to provide:
-//!   - loadZoneDraw(int index, const StarType*& stars, uint32_t& size, bool& isGlobal) const
-//!   - loadZoneSearch(int index, const StarType*& stars, uint32_t& size, bool& isGlobal) const
+//!   - loadZoneDraw(int index, const Star*& stars, uint32_t& size, bool& isGlobal) const
+//!   - loadZoneSearch(int index, const Star*& stars, uint32_t& size, bool& isGlobal) const
 //!   - numberOfZones() const → nr_of_zones
 //! And optionally override prefetchRegion(), updateHipIndex().
-template<class Derived, class StarType>
+template<class Derived, class Star>
 class ZoneArrayImpl : public ZoneArray
 {
 protected:
 	ZoneArrayImpl(const QString& fname, QFile* file, int level, int mag_min)
 		: ZoneArray(fname, file, level, mag_min) {}
 
-	//! Draw a contiguous range of stars. Shared between all subclasses.
-	void drawStarRange(const StarType* first, const StarType* last, bool globalzone,
-			   StelPainter* sPainter, bool isInsideViewport,
-			   const RCMag* rcmag_table, int cutoffMagStep, float cutoffMag,
-			   float dyrs, StelCore* core, StelSkyDrawer* drawer,
-			   const QVector<SphericalCap>& boundingCaps,
-			   bool withAberration,
-			   double withParallax, const Vec3d& diffPos,
-			   int maxMagStarName, float names_brightness,
-			   bool withExtinction, const Extinction& extinction,
-			   bool withCommonNameI18n) const;
-
 public:
 	// ----- ZoneArray virtual overrides (shared implementation) -----
 
+	//! Draw stars and their names onto the viewport.
+	//! @param sPainter the painter to use
+	//! @param index zone index to draw
+	//! @param isInsideViewport whether the zone is inside the current viewport. If false, we need to test more to skip stars.
+	//! @param rcmag_table table of magnitudes
+	//! @param limitMagIndex index from rcmag_table at which stars are not visible anymore
+	//! @param core core to use for drawing
+	//! @param maxMagStarName magnitude limit of stars that display labels
+	//! @param names_brightness brightness of labels
+	//! @param boundingCaps
+	//! @param withAberration true if aberration to be applied
+	//! @param vel velocity vector of observer planet
+	//! @param withCommonNameI18n Use commonNameI18n when there is no cultural name
 	void draw(StelPainter* sPainter, int index, bool isInsideViewport,
-		  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
+		  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
 		  int maxMagStarName, float names_brightness,
 		  const QVector<SphericalCap>& boundingCaps,
-		  const bool withAberration, const Vec3d vel,
-		  const double withParallax, const Vec3d diffPos,
-		  const bool withCommonNameI18n) const final;
+		  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos, const bool withCommonNameI18n) const override;
 
-	void searchAround(const StelCore* core, int index, const Vec3d &v,
-			  const double withParallax, const Vec3d diffPos,
-			  double cosLimFov, QList<StelObjectP> &result) final;
-
-	void searchWithin(const StelCore* core, int index, const SphericalRegionP region,
-			  const double withParallax, const Vec3d diffPos,
-			  const bool hipOnly, const float maxMag,
-			  QList<StelObjectP> &result) const final;
-
-	StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const final;
-
-	void searchGaiaIDepochPos(const StarId source_id, float dyrs,
-				  double & RA, double & DEC, double & Plx,
-				  double & pmra, double & pmdec, double & RV) const final;
-
-	StelObjectP wrapStar(const StarType* s, int zoneIndex) const;
+	void searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax,
+					  const Vec3d diffPos, double cosLimFov, QList<StelObjectP > &result) override;
+	void searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
+			  QList<StelObjectP > &result) const override;
+	StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const override;
+ 	void searchGaiaIDepochPos(const StarId source_id, float dyrs,
+                                                  double & RA,
+                                                  double & DEC,
+                                                  double & Plx,
+                                                  double & pmra,
+                                                  double & pmdec,
+                                                  double & RV) const override;
+	StelObjectP wrapStar(const Star* s, int zoneIndex) const;
 
 private:
 	// CRTP helpers that delegate to Derived
 	const Derived& self() const { return *static_cast<const Derived*>(this); }
 
 	// Load a zone for drawing (may be async for DynamicZoneArray).
-	bool zoneForDraw(int index, const StarType*& stars, uint32_t& size, bool& isGlobal) const
+	bool zoneForDraw(int index, const Star*& stars, uint32_t& size, bool& isGlobal) const
 	{
 		return self().loadZoneDraw(index, stars, size, isGlobal);
 	}
 
 	// Load a zone for search (synchronous).
-	bool zoneForSearch(int index, const StarType*& stars, uint32_t& size, bool& isGlobal) const
+	bool zoneForSearch(int index, const Star*& stars, uint32_t& size, bool& isGlobal) const
 	{
 		return self().loadZoneSearch(index, stars, size, isGlobal);
-	}
-
-	StelObjectP starToStelObject(const StarType* s) const
-	{
-		return self().createStelObj(s);
 	}
 };
 
 //! @class SpecialZoneArray
 //! ZoneArray that mmap's or reads the entire star catalog into memory.
-//! @tparam StarType either Star1, Star2 or Star3.
-template<class StarType>
-class SpecialZoneArray : public ZoneArrayImpl<SpecialZoneArray<StarType>, StarType>
+//! @tparam Star either Star1, Star2 or Star3.
+template<class Star>
+class SpecialZoneArray : public ZoneArrayImpl<SpecialZoneArray<Star>, Star>
 {
-	using Base = ZoneArrayImpl<SpecialZoneArray<StarType>, StarType>;
+	using Base = ZoneArrayImpl<SpecialZoneArray<Star>, Star>;
 	friend Base;
 public:
-	SpecialZoneArray(QFile* file, bool byte_swap, bool use_mmap, int level, int mag_min);
+	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min);
 	~SpecialZoneArray(void) override;
 protected:
-	SpecialZoneData<StarType> *getZones(void) const
+	SpecialZoneData<Star> *getZones(void) const
 	{
-		return static_cast<SpecialZoneData<StarType>*>(this->zones);
+		return static_cast<SpecialZoneData<Star>*>(this->zones);
 	}
-	StarType *stars;
+	Star *stars;
 private:
 	uchar *mmap_start;
 
-	// CRTP hooks for ZoneArrayImpl
-	bool loadZoneDraw(int index, const StarType*& outStars, uint32_t& size, bool& isGlobal) const;
-	bool loadZoneSearch(int index, const StarType*& outStars, uint32_t& size, bool& isGlobal) const;
-	StelObjectP createStelObj(const StarType* s) const;
+	bool loadZoneDraw(int index, const Star*& outStars, uint32_t& size, bool& isGlobal) const;
+	bool loadZoneSearch(int index, const Star*& outStars, uint32_t& size, bool& isGlobal) const;
+	StelObjectP createStelObj(const Star* s, int zoneIndex) const;
 };
 
 //! @class HipZoneArray
-//! ZoneArray of Hipparcos stars.
+//! ZoneArray of Hipparcos stars. It's just a SpecialZoneArray<Star1> that
+//! implements updateHipIndex(HipIndexStruct).
 class HipZoneArray : public SpecialZoneArray<Star1>
 {
 public:
-	HipZoneArray(QFile* file, bool byte_swap, bool use_mmap, int level, int mag_min)
-		: SpecialZoneArray<Star1>(file, byte_swap, use_mmap, level, mag_min) {}
+	HipZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min)
+			: SpecialZoneArray<Star1>(file,byte_swap,use_mmap,level,mag_min) {}
+
+	//! Add Hipparcos information for all stars in this catalog into @em hipIndex.
+	//! @param hipIndex array of Hipparcos info structs
 	void updateHipIndex(HipIndexStruct hipIndex[]) const override;
 };
 
 //! @class DynamicZoneArray
 //! ZoneArray that loads star data on demand from disk, cached in an LRU QCache.
-//! @tparam StarType either Star1, Star2 or Star3.
-template<class StarType>
-class DynamicZoneArray : public ZoneArrayImpl<DynamicZoneArray<StarType>, StarType>
+//! @tparam Star either Star1, Star2 or Star3.
+template<class Star>
+class DynamicZoneArray : public ZoneArrayImpl<DynamicZoneArray<Star>, Star>
 {
-	using Base = ZoneArrayImpl<DynamicZoneArray<StarType>, StarType>;
+	using Base = ZoneArrayImpl<DynamicZoneArray<Star>, Star>;
 	friend Base;
 public:
 	DynamicZoneArray(const QString& fname, QFile* file, int level, int mag_min, bool byte_swap);
 	~DynamicZoneArray(void) override;
 
-	const StarType* loadZone(int zone_index) const;
-	const StarType* loadZoneSync(int zone_index) const;
+	const Star* loadZone(int zone_index) const;
+	const Star* loadZoneSync(int zone_index) const;
 	uint32_t zoneStarCount(int zone_index) const { return zoneCounts_[zone_index]; }
-	void prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const;
+	void prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const override;
 
 private:
 	static constexpr int BLOCK_SIZE = 128;
@@ -269,10 +292,9 @@ private:
 
 	void drainPendingLoads() const;
 
-	// CRTP hooks for ZoneArrayImpl
-	bool loadZoneDraw(int index, const StarType*& outStars, uint32_t& size, bool& isGlobal) const;
-	bool loadZoneSearch(int index, const StarType*& outStars, uint32_t& size, bool& isGlobal) const;
-	StelObjectP createStelObj(const StarType* s) const;
+	bool loadZoneDraw(int index, const Star*& outStars, uint32_t& size, bool& isGlobal) const;
+	bool loadZoneSearch(int index, const Star*& outStars, uint32_t& size, bool& isGlobal) const;
+	StelObjectP createStelObj(const Star* s, int zoneIndex) const;
 };
 
 #endif // ZONEARRAY_HPP

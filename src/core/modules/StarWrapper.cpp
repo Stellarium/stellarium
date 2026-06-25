@@ -812,17 +812,17 @@ QString StarWrapper3::getNarration(const StelCore *core, const InfoStringGroup& 
 }
 #endif
 
-StelObjectP Star1::createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const
+StelObjectP Star1::createStelObject(const ZoneArray *a, const SpecialZoneData<Star1> *z) const
 {
 	return StelObjectP(new StarWrapper1(a,z,this), true);
 }
 
-StelObjectP Star2::createStelObject(const SpecialZoneArray<Star2> *a, const SpecialZoneData<Star2> *z) const
+StelObjectP Star2::createStelObject(const ZoneArray *a, const SpecialZoneData<Star2> *z) const
 {
 	return StelObjectP(new StarWrapper2(a,z,this), true);
 }
 
-StelObjectP Star3::createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const
+StelObjectP Star3::createStelObject(const ZoneArray *a, const SpecialZoneData<Star3> *z) const
 {
 	return StelObjectP(new StarWrapper3(a,z,this), true);
 }

@@ -40,8 +40,7 @@ extern const QString       STAR_TYPE;
 typedef short int          Int16;
 typedef unsigned short int Uint16;
 
-template<class Star>
-class SpecialZoneArray;
+class ZoneArray;
 template<class Star>
 struct SpecialZoneData;
 
@@ -472,7 +471,7 @@ private:
    } d;
 
 public:
-   StelObjectP   createStelObject(const SpecialZoneArray<Star1> * a, const SpecialZoneData<Star1> * z) const;
+   StelObjectP   createStelObject(const ZoneArray * a, const SpecialZoneData<Star1> * z) const;
    inline int    getMag() const { return qFromLittleEndian(d.vmag); } // in milli-mag
    inline int    getSpInt() const { return qFromLittleEndian(d.spInt); }
    inline double getX0() const { return qFromLittleEndian(d.x0) / 2.e9; }
@@ -557,7 +556,7 @@ public:
    {
       return sqrt((getDx0() * cos(getX1()) * getDx0() * cos(getX1())) + (getDx1() * getDx1()));
    }
-   StelObjectP    createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
+   StelObjectP    createStelObject(const ZoneArray * a, const SpecialZoneData<Star2> * z) const;
    StarId         getHip() const { return 0; }
    StarId         getGaia() const { return qFromLittleEndian(d.gaia_id); }
    float          getBV(void) const { return static_cast<float>(qFromLittleEndian(d.b_v)) / 1000.f; }
@@ -591,7 +590,7 @@ private:
    } d;
 
 public:
-   StelObjectP   createStelObject(const SpecialZoneArray<Star3> * a, const SpecialZoneData<Star3> * z) const;
+   StelObjectP   createStelObject(const ZoneArray * a, const SpecialZoneData<Star3> * z) const;
    inline double getX0() const
    {
       quint32 x0 = d.x0[0] | (d.x0[1] << 8) | (d.x0[2] << 16);
