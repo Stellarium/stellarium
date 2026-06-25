@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-06-15 12:22+0700\n"
+"POT-Creation-Date: 2026-06-25 01:49+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2026\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -64,8 +64,8 @@ msgstr "objet personnalisé"
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
-#: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
-#: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:320
+#: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:192
+#: plugins/Pulsars/src/Pulsar.cpp:194 plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/MeteorShowers/src/MeteorShower.cpp:553
 #: plugins/Planes/src/AircraftObject.cpp:195
 msgid "Type"
@@ -2482,7 +2482,8 @@ msgstr "Angle d'orientation"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:388 src/core/modules/Nebula.cpp:401
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
-#: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: plugins/Pulsars/src/Pulsar.cpp:271 plugins/Pulsars/src/Pulsar.cpp:282
+#: plugins/Exoplanets/src/Exoplanet.cpp:334
 msgctxt "distance"
 msgid "ly"
 msgstr "al"
@@ -2499,7 +2500,8 @@ msgid "Distance"
 msgstr "Distance"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:399 plugins/Pulsars/src/Pulsar.cpp:265
+#: src/core/modules/Nebula.cpp:399 plugins/Pulsars/src/Pulsar.cpp:268
+#: plugins/Pulsars/src/Pulsar.cpp:279
 msgctxt "distance"
 msgid "kpc"
 msgstr "kpc"
@@ -2525,7 +2527,7 @@ msgid "Parallax"
 msgstr "Parallaxe"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:460 plugins/Pulsars/src/Pulsar.cpp:257
+#: src/core/modules/Nebula.cpp:460 plugins/Pulsars/src/Pulsar.cpp:260
 msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
@@ -3247,7 +3249,7 @@ msgid "Hourly motion"
 msgstr "Mouvement horaire"
 
 #: src/core/modules/Planet.cpp:738 src/core/modules/Planet.cpp:1408
-#: src/core/modules/Planet.cpp:1417 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/Planet.cpp:1417 plugins/Pulsars/src/Pulsar.cpp:207
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "vers"
@@ -5027,8 +5029,8 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
-"Cette formule est fondée sur une étude des observations du Soleil, de la "
-"Lune et des planètes postérieures à 1650 par Spencer Jones (%1). Elle est "
+"Cette formule est basée sur une étude des observations du Soleil, de la Lune"
+" et des planètes postérieures à 1650 par Spencer Jones (%1). Elle est "
 "utilisée par Jean Meeus dans son ouvrage <em>Astronomical Formulae for "
 "Calculators</em>. Elle est également utilisée dans le logiciel SunTracker "
 "Pro."
@@ -5256,8 +5258,8 @@ msgstr ""
 "À partir de la longueur du jour (telle que déterminée par Stephenson & "
 "Morrison (%2)), Victor Reijs a tiré une formule de %1T en utilisant "
 "l'algorithme du simplexe avec un cosinus et une fonction carrée. Cette "
-"relation est fondée sur une possible périodicité décrite par Stephenson "
-"(%2). %3Plus d'informations%4."
+"relation est basée sur une possible périodicité décrite par Stephenson (%2)."
+" %3Plus d'informations%4."
 
 #: src/core/StelCore.cpp:2836
 #, qt-format
@@ -5303,7 +5305,7 @@ msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
 msgstr ""
-"Solution de F. Espenak et J. Meeus, fondée sur Morrison & Stephenson (2004) "
+"Solution de F. Espenak et J. Meeus, basée sur Morrison & Stephenson (2004) "
 "et sur un ajustement polynomial de données tabulées pour 1600-2000."
 
 #: src/core/StelCore.cpp:2845
@@ -6369,7 +6371,7 @@ msgid ""
 "with standardized boundaries and are used worldwide. The origins of these "
 "constellations are pan-European."
 msgstr ""
-"Toutes les cultures « modernes » sont fondées sur les 88 constellations de "
+"Toutes les cultures « modernes » sont basées sur les 88 constellations de "
 "l'UAI, avec leurs frontières standardisées et utilisées partout dans le "
 "monde. Les origines de ces constellations sont paneuropéennes."
 
@@ -7859,9 +7861,9 @@ msgid ""
 "Many individuals have made contributions to the project and their work has "
 "made Stellarium better. Alphabetically sorted list of all contributors: %1."
 msgstr ""
-"Beaucoup de personnes ont participé au projet et leur travail a contribué a "
-"rendre Stellarium meilleur. La liste de tous les contributeurs, par ordre "
-"alphabétique : %1"
+"De nombreuses personnes ont participé au projet et leur travail permis "
+"d'améliorer Stellarium. Voici une liste de tous les contributeurs, par ordre"
+" alphabétique : %1"
 
 #: src/gui/HelpDialog.cpp:590
 msgid "Financial support"
@@ -10930,7 +10932,7 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Raccourci clavier"
 
-#: src/scripting/StelMainScriptAPI.hpp:1017
+#: src/scripting/StelMainScriptAPI.hpp:1024
 msgid "Press key to continue..."
 msgstr "Presser une touche pour continuer…"
 
@@ -20464,125 +20466,125 @@ msgctxt "time"
 msgid "s"
 msgstr "s"
 
-#: plugins/Oculars/src/Oculars.cpp:2324
+#: plugins/Oculars/src/Oculars.cpp:2325
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:352
 msgid "Binocular"
 msgstr "Jumelle"
 
-#: plugins/Oculars/src/Oculars.cpp:2324
+#: plugins/Oculars/src/Oculars.cpp:2325
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
 msgid "Ocular"
 msgstr "Oculaire"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2344
+#: plugins/Oculars/src/Oculars.cpp:2345
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:395
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Focale : %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2351
+#: plugins/Oculars/src/Oculars.cpp:2352
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:404
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Champ visuel apparent : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2362
+#: plugins/Oculars/src/Oculars.cpp:2363
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:434
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lentille n°%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2366
+#: plugins/Oculars/src/Oculars.cpp:2367
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:438
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lentille n°%1 : %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2371
+#: plugins/Oculars/src/Oculars.cpp:2372
 msgid "Lens: none"
 msgstr "Lentille : aucune"
 
-#: plugins/Oculars/src/Oculars.cpp:2386 plugins/Oculars/src/Oculars.cpp:2447
+#: plugins/Oculars/src/Oculars.cpp:2387 plugins/Oculars/src/Oculars.cpp:2448
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Télescope #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2395
+#: plugins/Oculars/src/Oculars.cpp:2396
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Grossissement : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2402
+#: plugins/Oculars/src/Oculars.cpp:2403
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Pupille de sortie : %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2409
+#: plugins/Oculars/src/Oculars.cpp:2410
 #, qt-format
 msgid "FOV: %1"
 msgstr "Champ visuel : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2430
+#: plugins/Oculars/src/Oculars.cpp:2431
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensions : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2431
+#: plugins/Oculars/src/Oculars.cpp:2432
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 msgid "Binning"
 msgstr "Binning"
 
-#: plugins/Oculars/src/Oculars.cpp:2435
+#: plugins/Oculars/src/Oculars.cpp:2436
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:510
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Capteur #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2439
+#: plugins/Oculars/src/Oculars.cpp:2440
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Capteur #%1 : %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2452
+#: plugins/Oculars/src/Oculars.cpp:2453
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Télescope #%1 : %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2795
+#: plugins/Oculars/src/Oculars.cpp:2796
 msgid "&Lens"
 msgstr "&Lentille"
 
-#: plugins/Oculars/src/Oculars.cpp:2796
+#: plugins/Oculars/src/Oculars.cpp:2797
 msgid "&Previous lens"
 msgstr "Lentille &précédente"
 
-#: plugins/Oculars/src/Oculars.cpp:2797
+#: plugins/Oculars/src/Oculars.cpp:2798
 msgid "&Next lens"
 msgstr "Le&ntille suivante"
 
-#: plugins/Oculars/src/Oculars.cpp:2799
+#: plugins/Oculars/src/Oculars.cpp:2800
 msgid "None"
 msgstr "Aucune"
 
-#: plugins/Oculars/src/Oculars.cpp:2826
+#: plugins/Oculars/src/Oculars.cpp:2827
 msgid "&Telescope"
 msgstr "&Télescope"
 
-#: plugins/Oculars/src/Oculars.cpp:2827
+#: plugins/Oculars/src/Oculars.cpp:2828
 msgid "&Previous telescope"
 msgstr "&Télescope précédent"
 
-#: plugins/Oculars/src/Oculars.cpp:2828
+#: plugins/Oculars/src/Oculars.cpp:2829
 msgid "&Next telescope"
 msgstr "Télescope suiva&nt"
 
@@ -20990,7 +20992,7 @@ msgstr ""
 "raccourcis claviers (F7)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:659
-#: plugins/Pulsars/src/Pulsar.cpp:297
+#: plugins/Pulsars/src/Pulsar.cpp:311
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:616
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Notes"
@@ -22402,7 +22404,7 @@ msgstr "Communication radio"
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Satellites/src/Satellite.cpp:504
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:83
-#: plugins/Pulsars/src/Pulsar.cpp:283
+#: plugins/Pulsars/src/Pulsar.cpp:297
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
@@ -23637,7 +23639,7 @@ msgid "Min."
 msgstr "Min."
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:261
-#: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Exoplanets/src/Exoplanet.cpp:365
+#: plugins/Pulsars/src/Pulsar.cpp:252 plugins/Exoplanets/src/Exoplanet.cpp:365
 msgid "Eccentricity"
 msgstr "Excentricité"
 
@@ -26682,137 +26684,141 @@ msgstr "Activer l'affichage des pulsars"
 msgid "Use separate color for pulsars with glitches"
 msgstr "Utiliser une couleur distincte pour les pulsars avec glitches"
 
-#: plugins/Pulsars/src/Pulsar.cpp:191
+#: plugins/Pulsars/src/Pulsar.cpp:194
 msgid "registered glitches"
 msgstr "glitches enregistrés"
 
-#: plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:205
 msgid "Proper motion"
 msgstr "Mouvement propre"
 
-#: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/Pulsars/src/Pulsar.cpp:206 plugins/Pulsars/src/Pulsar.cpp:208
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "mas/a"
 
-#: plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/Pulsars/src/Pulsar.cpp:208
 msgid "Proper motions by axes"
 msgstr "Mouvement propre par axes"
 
-#: plugins/Pulsars/src/Pulsar.cpp:213
+#: plugins/Pulsars/src/Pulsar.cpp:216
 msgid "Barycentric period"
 msgstr "Période barycentrique"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:216
+#: plugins/Pulsars/src/Pulsar.cpp:219
 msgctxt "period"
 msgid "s"
 msgstr "s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:219
+#: plugins/Pulsars/src/Pulsar.cpp:222
 msgid "Time derivative of barycentric period"
 msgstr "Dérivée temporelle de la période barycentrique"
 
-#: plugins/Pulsars/src/Pulsar.cpp:224
+#: plugins/Pulsars/src/Pulsar.cpp:227
 msgid "Dispersion measure"
 msgstr "Mesure de la dispersion"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:227
+#: plugins/Pulsars/src/Pulsar.cpp:230
 msgctxt "distance"
 msgid "pc"
 msgstr "pc"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:229
+#: plugins/Pulsars/src/Pulsar.cpp:232
 msgctxt "distance"
 msgid "cm"
 msgstr "cm"
 
-#: plugins/Pulsars/src/Pulsar.cpp:235
+#: plugins/Pulsars/src/Pulsar.cpp:238
 msgid "Spin down energy loss rate"
 msgstr "Taux de perte d'énergie rotationnelle"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:238
+#: plugins/Pulsars/src/Pulsar.cpp:241
 msgctxt "power"
 msgid "ergs/s"
 msgstr "erg/s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:243
+#: plugins/Pulsars/src/Pulsar.cpp:246
 msgid "Binary period of pulsar"
 msgstr "Période binaire du pulsar"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:246 plugins/Exoplanets/src/Exoplanet.cpp:361
+#: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgctxt "time period"
 msgid "days"
 msgstr "jours"
 
-#: plugins/Pulsars/src/Pulsar.cpp:254
+#: plugins/Pulsars/src/Pulsar.cpp:257
 msgid "Annual parallax"
 msgstr "Parallaxe annuelle"
 
-#: plugins/Pulsars/src/Pulsar.cpp:262
-msgid "Distance based on an association with another object"
-msgstr "Distance fondée sur l'association avec un autre objet"
+#: plugins/Pulsars/src/Pulsar.cpp:265
+msgid "Distance based on electron density model"
+msgstr "Distance basée sur le modèle de densité d'électrons"
 
-#: plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Pulsars/src/Pulsar.cpp:276
+msgid "Distance based on an association with another object"
+msgstr "Distance basée sur l'association avec un autre objet"
+
+#: plugins/Pulsars/src/Pulsar.cpp:288
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr "Largeur du profil à mi-hauteur"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:277
+#: plugins/Pulsars/src/Pulsar.cpp:291
 msgctxt "time"
 msgid "ms"
 msgstr "ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:281
+#: plugins/Pulsars/src/Pulsar.cpp:295
 msgid "Time averaged flux density at"
 msgstr "Moyenne temporelle de la densité de flux à"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:285
+#: plugins/Pulsars/src/Pulsar.cpp:299
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:314
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr "mJy"
 
-#: plugins/Pulsars/src/Pulsar.cpp:386
+#: plugins/Pulsars/src/Pulsar.cpp:401
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 "pulsar de rayons X anormaux ou sursauteur gamma mou avec pulsations "
 "détectées"
 
-#: plugins/Pulsars/src/Pulsar.cpp:391
+#: plugins/Pulsars/src/Pulsar.cpp:406
 msgid "has one or more binary companions"
 msgstr "possède au moins un compagnon binaire"
 
-#: plugins/Pulsars/src/Pulsar.cpp:396
+#: plugins/Pulsars/src/Pulsar.cpp:411
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 "avec émission pulsée dans le domaine radio, dans l'infrarouge ou à des "
 "fréquences supérieures"
 
-#: plugins/Pulsars/src/Pulsar.cpp:401
+#: plugins/Pulsars/src/Pulsar.cpp:416
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 "avec émission pulsée seulement dans l'infrarouge ou à des fréquences "
 "supérieures"
 
-#: plugins/Pulsars/src/Pulsar.cpp:406
+#: plugins/Pulsars/src/Pulsar.cpp:421
 msgid "with pulsed emission in the radio band"
 msgstr "avec émission pulsée dans le domaine radio"
 
-#: plugins/Pulsars/src/Pulsar.cpp:411
+#: plugins/Pulsars/src/Pulsar.cpp:426
 msgid "with intermittently pulsed radio emission"
 msgstr "avec émission pulsée intermittente dans le domaine radio"
 
-#: plugins/Pulsars/src/Pulsar.cpp:416
+#: plugins/Pulsars/src/Pulsar.cpp:431
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -26820,11 +26826,11 @@ msgstr ""
 "étoile à neutrons isolée avec émission pulsée de rayons X thermiques mais "
 "sans émission radio détectable"
 
-#: plugins/Pulsars/src/Pulsar.hpp:84
+#: plugins/Pulsars/src/Pulsar.hpp:85
 msgid "pulsar"
 msgstr "pulsar"
 
-#: plugins/Pulsars/src/Pulsar.hpp:84
+#: plugins/Pulsars/src/Pulsar.hpp:85
 msgid "pulsar with glitches"
 msgstr "pulsar avec glitches"
 
@@ -38633,7 +38639,7 @@ msgstr "Références"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:244
 msgid "This plugin is based on:"
-msgstr "Ce plugin est fondé sur :"
+msgstr "Ce plugin est inspiré de :"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:958
 msgid "Calendars Configuration"
