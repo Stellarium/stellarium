@@ -305,11 +305,13 @@ StelApp::StelApp(StelMainView *parent)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
 	, flagUseNegativeHourAngles(false)
+	, flagUsePolarDistance(false)
 	, flagUseFormattingOutput(false)
 	, flagUseCCSDesignation(false)
 	, flagOverwriteInfoColor(false)
 	, overwriteInfoColor(Vec3f(1.f))
 	, daylightInfoColor(Vec3f(0.f))
+	, flagImmediateSave(false)
 	#ifdef ENABLE_SPOUT
 	, spoutSender(nullptr)
 	#endif

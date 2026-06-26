@@ -220,23 +220,23 @@ SearchDialog::SearchDialog(QObject* parent)
 
 	StelApp::getInstance().getStelPropertyManager()->registerObject(this);
 	conf = StelApp::getInstance().getSettings();
-	enableSimbadSearch(conf->value("search/flag_search_online", true).toBool());
-	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
-	useLengthSorting = conf->value("search/flag_sorting_length", false).toBool();
-	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
-	useFOVCenterMarker = conf->value("search/flag_fov_center_marker", true).toBool();
+	enableSimbadSearch(conf->value("search/flag_search_online", useSimbad).toBool());
+	useStartOfWords = conf->value("search/flag_start_words", useStartOfWords).toBool();
+	useLengthSorting = conf->value("search/flag_sorting_length", useLengthSorting).toBool();
+	useLockPosition = conf->value("search/flag_lock_position", useLockPosition).toBool();
+	useFOVCenterMarker = conf->value("search/flag_fov_center_marker", useFOVCenterMarker).toBool();
 	fovCenterMarkerState = GETSTELMODULE(SpecialMarkersMgr)->getFlagFOVCenterMarker();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
-        useAutoClosing = conf->value("search/flag_auto_closing", true).toBool();
+	useAutoClosing = conf->value("search/flag_auto_closing", useAutoClosing).toBool();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());	
 
-	setSimbadQueryDist( conf->value("search/simbad_query_dist",  30).toInt());
-	setSimbadQueryCount(conf->value("search/simbad_query_count",  3).toInt());
-	setSimbadGetsIds(   conf->value("search/simbad_query_IDs",        true ).toBool());
-	setSimbadGetsSpec(  conf->value("search/simbad_query_spec",       false).toBool());
-	setSimbadGetsMorpho(conf->value("search/simbad_query_morpho",     false).toBool());
-	setSimbadGetsTypes( conf->value("search/simbad_query_types",      false).toBool());
-	setSimbadGetsDims(  conf->value("search/simbad_query_dimensions", false).toBool());
+	setSimbadQueryDist( conf->value("search/simbad_query_dist",       simbadDist).toInt());
+	setSimbadQueryCount(conf->value("search/simbad_query_count",      simbadCount).toInt());
+	setSimbadGetsIds(   conf->value("search/simbad_query_IDs",        simbadGetIds).toBool());
+	setSimbadGetsSpec(  conf->value("search/simbad_query_spec",       simbadGetSpec).toBool());
+	setSimbadGetsMorpho(conf->value("search/simbad_query_morpho",     simbadGetMorpho).toBool());
+	setSimbadGetsTypes( conf->value("search/simbad_query_types",      simbadGetTypes).toBool());
+	setSimbadGetsDims(  conf->value("search/simbad_query_dimensions", simbadGetDims).toBool());
 
 	// Init CompletionListModel
 	searchListModel = new CompletionListModel();

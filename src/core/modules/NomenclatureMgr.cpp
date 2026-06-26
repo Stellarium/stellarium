@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -86,6 +87,9 @@ void NomenclatureMgr::init()
 
 	StelCore *core=app->getCore();
 	connect(core, &StelCore::locationChanged, this, [=](){setForceItems(true);});
+	// When zooming with stopped time, Moon may auto-rescale from fov change. We must then force the Nomenclatures to update.
+	StelMovementMgr *mmgr = core->getMovementMgr();
+	connect(mmgr, &StelMovementMgr::currentFovChanged, this, [=](double){setForceItems(true);});
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "flagShowNomenclature", "Alt+N");

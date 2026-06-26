@@ -2261,7 +2261,8 @@ void Oculars::paintOcularMask(const StelCore *core)
 		else
 			polarAngle -= 90.0;
 
-		//painter.setColor(lineColor); // let's use original color
+		// TODO: [v26.3] add ability to use user defined color of protractors
+		painter.setColor(1.f,0.f,0.f); // let's use red color for protractors
 		bool flipH = core->getFlipHorz();
 		bool flipV = core->getFlipVert();
 		if (flipH && flipV)

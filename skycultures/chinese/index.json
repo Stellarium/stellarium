@@ -3,7 +3,9 @@
   "region": "Eastern Asia",
   "classification": ["traditional"],
   "fallback_to_international_names": false,
-"constellations": [
+  "beginTime": 1752,
+  "endTime": 9146,
+  "constellations": [
     {
       "id": "CON chinese 001",
       "lines": [[20889, 20648, 20455, 20205], [21421, 20885, 20713, 20205, 18724], [21421, 21683]],
@@ -315,11 +317,6 @@
       "common_name": {"english": "Mausoleum", "native": "大陵", "pronounce": "Dà Líng"}
     },
     {
-      "id": "CON chinese 063",
-      "lines": [],
-      "common_name": {"english": "Celestial Temple", "native": "天庙", "pronounce": "Tiān Miào"}
-    },
-    {
       "id": "CON chinese 064",
       "lines": [[69226, 68478, 68103]],
       "common_name": {"english": "Mattress of the Emperor", "native": "帝席", "pronounce": "Dì Xí"}
@@ -458,11 +455,6 @@
       "id": "CON chinese 091",
       "lines": [[41037, 45556, 46974, 47854, 48002]],
       "common_name": {"english": "Sea Rock", "native": "海石", "pronounce": "Hǎi Shí"}
-    },
-    {
-      "id": "CON chinese 092",
-      "lines": [],
-      "common_name": {"english": "Military Gate", "native": "军门", "pronounce": "Jūn Mén"}
     },
     {
       "id": "CON chinese 093",
@@ -750,11 +742,6 @@
       "common_name": {"english": "South River", "native": "南河", "pronounce": "Nán Hé"}
     },
     {
-      "id": "CON chinese 150",
-      "lines": [],
-      "common_name": {"english": "Dongou", "native": "东瓯", "pronounce": "Dōng Ōu"}
-    },
-    {
       "id": "CON chinese 151",
       "lines": [[66657, 71683]],
       "common_name": {"english": "Southern Gate", "native": "南门", "pronounce": "Nán Mén"}
@@ -830,11 +817,6 @@
       "common_name": {"english": "Seven Excellencies", "native": "七公", "pronounce": "Qī Gōng"}
     },
     {
-      "id": "CON chinese 166",
-      "lines": [],
-      "common_name": {"english": "House for Musical Instruments", "native": "器府", "pronounce": "Qì Fǔ"}
-    },
-    {
       "id": "CON chinese 167",
       "lines": [[76297, 75141, 73334, 73273, 74117, 75264, 74911, 73807, 72683, 71860]],
       "common_name": {"english": "Imperial Guards", "native": "骑官", "pronounce": "Qí Guān"}
@@ -848,11 +830,6 @@
       "id": "CON chinese 169",
       "lines": [[110273, 110003]],
       "common_name": {"english": "Weeping", "native": "泣", "pronounce": "Qì"}
-    },
-    {
-      "id": "CON chinese 170",
-      "lines": [],
-      "common_name": {"english": "Celestial Cereals", "native": "天稷", "pronounce": "Tiān Jì"}
     },
     {
       "id": "CON chinese 171",
@@ -1318,11 +1295,6 @@
       "id": "CON chinese 263",
       "lines": [[746, 2599, 3821, 3179, 2505]],
       "common_name": {"english": "Wang Liang", "native": "王良", "pronounce": "Wáng Liáng"}
-    },
-    {
-      "id": "CON chinese 264",
-      "lines": [],
-      "common_name": {"english": "Master of Constructions (In Legs Mansion)", "native": "土司空(奎宿)", "pronounce": "Tǔ Sī Kōng"}
     },
     {
       "id": "CON chinese 265",

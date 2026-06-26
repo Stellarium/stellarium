@@ -431,6 +431,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Left:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLongitude(-5.);
+					updateMotion(0.0);
 				} else {
 					turnLeft(true);
 				}
@@ -438,12 +439,14 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Right:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLongitude(5.);
+					updateMotion(0.0);
 				} else
 				turnRight(true);
 				break;
 			case Qt::Key_Up:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLatitude(5.);
+					updateMotion(0.0);
 				}
 				else if (event->modifiers().testFlag(Qt::ControlModifier)){
 					zoomIn(true);
@@ -454,6 +457,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Down:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLatitude(-5.);
+					updateMotion(0.0);
 				}
 				else if (event->modifiers().testFlag(Qt::ControlModifier)) {
 					zoomOut(true);
@@ -473,12 +477,14 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
 				{
 					gimbal->addToDistance(gimbal->getDistance()*0.05);
+					updateMotion(0.0);
 				}
 				break;
 			case Qt::Key_Home:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
 				{
 					gimbal->addToDistance(-gimbal->getDistance()*0.05);
+					updateMotion(0.0);
 				}
 				break;
 			case Qt::Key_Shift:
@@ -911,7 +917,7 @@ void StelMovementMgr::lookNorth(bool zero)
 	}
 
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
-	cy = static_cast<float>(M_PI);
+	cy = M_PIf;
 	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 

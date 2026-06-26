@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-06-09 22:17+0700\n"
+"POT-Creation-Date: 2026-06-15 12:22+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2026\n"
 "Language-Team: Bengali (https://app.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -35,7 +35,7 @@ msgid "custom object"
 msgstr "অলীক বস্তু"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:444
+#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:445
 #: src/core/modules/Constellation.cpp:593
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:293
 #: src/core/modules/Nebula.cpp:295 src/core/modules/Planet.cpp:670
@@ -1277,7 +1277,7 @@ msgstr "আলোক দূষনের মান পরিবর্তন ক�
 
 #: src/core/modules/LandscapeMgr.cpp:1538 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:629
+#: plugins/Oculars/src/gui/OcularDialog.cpp:630
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:257
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -6237,10 +6237,10 @@ msgid ""
 msgstr ""
 
 #: src/core/StelSkyCultureMgr.cpp:526 src/core/StelSkyCultureMgr.cpp:533
-#: src/core/StelSkyCultureMgr.cpp:540 src/gui/ConfigurationDialog.cpp:1607
+#: src/core/StelSkyCultureMgr.cpp:540 src/gui/ConfigurationDialog.cpp:1610
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
-#: plugins/Oculars/src/gui/OcularDialog.cpp:628
+#: plugins/Oculars/src/gui/OcularDialog.cpp:629
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:256
@@ -7014,8 +7014,8 @@ msgid "Select screenshot directory"
 msgstr "দৃশ্যপট সংরক্ষণের স্থান নির্বাচন করুন"
 
 #: src/gui/ConfigurationDialog.cpp:1036
-#: plugins/Oculars/src/gui/OcularDialog.cpp:593
-#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#: plugins/Oculars/src/gui/OcularDialog.cpp:594
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
 msgctxt "millimeters"
 msgid "mm"
 msgstr "মিমি"
@@ -7028,22 +7028,22 @@ msgstr "ইঞ্চি প্রতি বিন্দু সংখ্যা (�
 msgid "Current designated print size"
 msgstr "মুদ্রণের আকার"
 
-#: src/gui/ConfigurationDialog.cpp:1524
+#: src/gui/ConfigurationDialog.cpp:1527
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "প্রারম্ভিক দৃষ্টিক্ষেত্রের সীমা : %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:1532
+#: src/gui/ConfigurationDialog.cpp:1535
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "দৃশ্যপটের প্রারম্ভিক দিক - দিগংশ / উন্নতি : %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1601
+#: src/gui/ConfigurationDialog.cpp:1604
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
 msgid "Acknowledgments"
 msgstr "কৃতজ্ঞতা স্বীকার"
 
-#: src/gui/ConfigurationDialog.cpp:1603
+#: src/gui/ConfigurationDialog.cpp:1606
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
@@ -7054,14 +7054,14 @@ msgstr "কৃতজ্ঞতা স্বীকার"
 msgid "Authors"
 msgstr "প্রস্তুতকারকবৃন্দ"
 
-#: src/gui/ConfigurationDialog.cpp:1604
+#: src/gui/ConfigurationDialog.cpp:1607
 msgid "Contact"
 msgstr "যোগাযোগ"
 
-#: src/gui/ConfigurationDialog.cpp:1606 src/gui/HelpDialog.cpp:537
+#: src/gui/ConfigurationDialog.cpp:1609 src/gui/HelpDialog.cpp:537
 #: src/scripting/StelScriptMgr.cpp:657
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
-#: plugins/Oculars/src/gui/OcularDialog.cpp:627
+#: plugins/Oculars/src/gui/OcularDialog.cpp:628
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
@@ -7088,20 +7088,20 @@ msgstr "যোগাযোগ"
 msgid "Version"
 msgstr "সংস্করণ"
 
-#: src/gui/ConfigurationDialog.cpp:1611
+#: src/gui/ConfigurationDialog.cpp:1614
 msgctxt "license"
 msgid "unknown"
 msgstr "অজ্ঞাত"
 
-#: src/gui/ConfigurationDialog.cpp:1723
+#: src/gui/ConfigurationDialog.cpp:1726
 msgid "Running script: "
 msgstr "চলমান কার্যলিপি : "
 
-#: src/gui/ConfigurationDialog.cpp:1730
+#: src/gui/ConfigurationDialog.cpp:1733
 msgid "Running script: [none]"
 msgstr "চলমান কার্যলিপি : [কিছুই না]"
 
-#: src/gui/ConfigurationDialog.cpp:1795
+#: src/gui/ConfigurationDialog.cpp:1798
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -7109,16 +7109,16 @@ msgstr ""
 "নতুন তারকাসূচি সংগ্রহ করা সম্পূর্ণ হয়েছে !\n"
 "এদের দেখার জন্য Stellarium নতুন করে চালু করুন ।"
 
-#: src/gui/ConfigurationDialog.cpp:1799
+#: src/gui/ConfigurationDialog.cpp:1802
 msgid "All available star catalogs have been installed."
 msgstr "সমস্ত উপলভ্য তারকাসূচি বহাল করা হয়ে গেছে ।"
 
-#: src/gui/ConfigurationDialog.cpp:1804
+#: src/gui/ConfigurationDialog.cpp:1807
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%1 নং (%2 টি থেকে) সূচিটি সংগ্রহ করুন ।"
 
-#: src/gui/ConfigurationDialog.cpp:1811
+#: src/gui/ConfigurationDialog.cpp:1814
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -7127,7 +7127,7 @@ msgstr ""
 "সংগ্রহ করা হচ্ছে %1...\n"
 "(এই অংশটি বন্ধ করা যেতে পারে)"
 
-#: src/gui/ConfigurationDialog.cpp:1818
+#: src/gui/ConfigurationDialog.cpp:1821
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -7138,7 +7138,7 @@ msgstr ""
 "তারকা সংখ্যা : %2 মিলিয়ন\n"
 "ঔজ্জ্বল্যতার সীমা : %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1864 src/gui/ConfigurationDialog.cpp:1905
+#: src/gui/ConfigurationDialog.cpp:1867 src/gui/ConfigurationDialog.cpp:1908
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -7147,11 +7147,11 @@ msgstr ""
 "%1 সূচিটি সংগ্রহে ত্রুটি হয়েছে :\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1958
+#: src/gui/ConfigurationDialog.cpp:1961
 msgid "Verifying file integrity..."
 msgstr "তালিকাটির তথ্যসমূহ পরীক্ষা করা হচ্ছে..."
 
-#: src/gui/ConfigurationDialog.cpp:1962
+#: src/gui/ConfigurationDialog.cpp:1965
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -7160,21 +7160,21 @@ msgstr ""
 "%1 তালিকাটি সংগ্রহে ত্রুটি দেখা দিয়েছে :\n"
 "তারকা সূচিটি নষ্ট হয়ে গেছে ।"
 
-#: src/gui/ConfigurationDialog.cpp:2046 src/gui/ConfigurationDialog.cpp:2058
-#: src/gui/ConfigurationDialog.cpp:2070 src/gui/ConfigurationDialog.cpp:2082
+#: src/gui/ConfigurationDialog.cpp:2049 src/gui/ConfigurationDialog.cpp:2061
+#: src/gui/ConfigurationDialog.cpp:2073 src/gui/ConfigurationDialog.cpp:2085
 msgid "Available"
 msgstr "তথ্য উপলভ্য"
 
-#: src/gui/ConfigurationDialog.cpp:2048 src/gui/ConfigurationDialog.cpp:2060
-#: src/gui/ConfigurationDialog.cpp:2072 src/gui/ConfigurationDialog.cpp:2084
+#: src/gui/ConfigurationDialog.cpp:2051 src/gui/ConfigurationDialog.cpp:2063
+#: src/gui/ConfigurationDialog.cpp:2075 src/gui/ConfigurationDialog.cpp:2087
 msgid "Not Available"
 msgstr "উপলভ্য নয়"
 
-#: src/gui/ConfigurationDialog.cpp:2159
+#: src/gui/ConfigurationDialog.cpp:2162
 msgid "Annual proper motion (stars) or hourly motion (solar system objects)"
 msgstr "বার্ষিক সরণ (তারাদের ক্ষেত্রে) কিংবা ঘন্টায় সরণ (সৌরজগতের ক্ষেত্রে)"
 
-#: src/gui/ConfigurationDialog.cpp:2160
+#: src/gui/ConfigurationDialog.cpp:2163
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
@@ -7183,214 +7183,214 @@ msgstr ""
 "বিন্দুটির হিসাবে উদয় ও অস্তের সময় পরিমাপ করা হয়েছে ।"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:2201
+#: src/gui/ConfigurationDialog.cpp:2204
 msgid "Algorithm of"
 msgstr "সংশোধন পদ্ধতি -"
 
-#: src/gui/ConfigurationDialog.cpp:2212
+#: src/gui/ConfigurationDialog.cpp:2215
 msgid "Without correction"
 msgstr "সংশোধন ছাড়া"
 
-#: src/gui/ConfigurationDialog.cpp:2213
+#: src/gui/ConfigurationDialog.cpp:2216
 msgid "Schoch (1931)"
 msgstr "Schoch (১৯৩১)"
 
-#: src/gui/ConfigurationDialog.cpp:2214
+#: src/gui/ConfigurationDialog.cpp:2217
 msgid "Clemence (1948)"
 msgstr "Clemence (১৯৪৮)"
 
-#: src/gui/ConfigurationDialog.cpp:2215
+#: src/gui/ConfigurationDialog.cpp:2218
 msgid "IAU (1952)"
 msgstr "IAU (১৯৫২)"
 
-#: src/gui/ConfigurationDialog.cpp:2216
+#: src/gui/ConfigurationDialog.cpp:2219
 msgid "Astronomical Ephemeris (1960)"
 msgstr "জ্যোতির্বৈজ্ঞানিক পঞ্জিকা (১৯৬০)"
 
-#: src/gui/ConfigurationDialog.cpp:2217
+#: src/gui/ConfigurationDialog.cpp:2220
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (১৯৬২, ১৯৬৪) এবং Goldstine (১৯৭৩)"
 
-#: src/gui/ConfigurationDialog.cpp:2218
+#: src/gui/ConfigurationDialog.cpp:2221
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller এবং Stephenson (১৯৭৫)"
 
-#: src/gui/ConfigurationDialog.cpp:2219
+#: src/gui/ConfigurationDialog.cpp:2222
 msgid "Stephenson (1978)"
 msgstr "Stephenson (১৯৭৮)"
 
-#: src/gui/ConfigurationDialog.cpp:2220
+#: src/gui/ConfigurationDialog.cpp:2223
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel এবং Zech (১৯৭৯)"
 
-#: src/gui/ConfigurationDialog.cpp:2221
+#: src/gui/ConfigurationDialog.cpp:2224
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison এবং Stephenson (১৯৮২)"
 
-#: src/gui/ConfigurationDialog.cpp:2222
+#: src/gui/ConfigurationDialog.cpp:2225
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson এবং Morrison (১৯৮৪)"
 
-#: src/gui/ConfigurationDialog.cpp:2223
+#: src/gui/ConfigurationDialog.cpp:2226
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson এবং Houlden (১৯৮৬)"
 
-#: src/gui/ConfigurationDialog.cpp:2224
+#: src/gui/ConfigurationDialog.cpp:2227
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (১৯৮৭, ১৯৮৯)"
 
-#: src/gui/ConfigurationDialog.cpp:2225
+#: src/gui/ConfigurationDialog.cpp:2228
 msgid "Borkowski (1988)"
 msgstr "Borkowski (১৯৮৮)"
 
-#: src/gui/ConfigurationDialog.cpp:2226
+#: src/gui/ConfigurationDialog.cpp:2229
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel এবং Zech (১৯৮৮)"
 
-#: src/gui/ConfigurationDialog.cpp:2227
+#: src/gui/ConfigurationDialog.cpp:2230
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze এবং Chapront (১৯৯১)"
 
-#: src/gui/ConfigurationDialog.cpp:2228
+#: src/gui/ConfigurationDialog.cpp:2231
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson এবং Morrison (১৯৯৫)"
 
-#: src/gui/ConfigurationDialog.cpp:2229
+#: src/gui/ConfigurationDialog.cpp:2232
 msgid "Stephenson (1997)"
 msgstr "Stephenson (১৯৯৭)"
 
-#: src/gui/ConfigurationDialog.cpp:2231
+#: src/gui/ConfigurationDialog.cpp:2234
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (১৯৯৮) (Chapront, Chapront-Touze এবং Francou (১৯৯৭) সহ)"
 
-#: src/gui/ConfigurationDialog.cpp:2232
+#: src/gui/ConfigurationDialog.cpp:2235
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:2233
+#: src/gui/ConfigurationDialog.cpp:2236
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus এবং Simons (২০০০)"
 
-#: src/gui/ConfigurationDialog.cpp:2234
+#: src/gui/ConfigurationDialog.cpp:2237
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck এবং Pfleger (২০০০)"
 
-#: src/gui/ConfigurationDialog.cpp:2235
+#: src/gui/ConfigurationDialog.cpp:2238
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold এবং Dershowitz (২০০২, ২০০৭, ২০১৮)"
 
-#: src/gui/ConfigurationDialog.cpp:2236
+#: src/gui/ConfigurationDialog.cpp:2239
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison এবং Stephenson (২০০৪, ২০০৫)"
 
-#: src/gui/ConfigurationDialog.cpp:2237
+#: src/gui/ConfigurationDialog.cpp:2240
 msgid "Espenak & Meeus (2006, 2014)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:2240
+#: src/gui/ConfigurationDialog.cpp:2243
 msgid "Espenak & Meeus (2006, 2014) no extra moon acceleration"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:2243
+#: src/gui/ConfigurationDialog.cpp:2246
 msgid "Modified Espenak & Meeus (2006, 2014, 2023)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:2244
+#: src/gui/ConfigurationDialog.cpp:2247
 msgid "Reijs (2006)"
 msgstr "Reijs (২০০৬)"
 
-#: src/gui/ConfigurationDialog.cpp:2245
+#: src/gui/ConfigurationDialog.cpp:2248
 msgid "Banjevic (2006)"
 msgstr "Banjevic (২০০৬)"
 
-#: src/gui/ConfigurationDialog.cpp:2246
+#: src/gui/ConfigurationDialog.cpp:2249
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq এবং Qureshi (২০০৮, ২০১৩)"
 
-#: src/gui/ConfigurationDialog.cpp:2247
+#: src/gui/ConfigurationDialog.cpp:2250
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana এবং Zaidi (২০১৪)"
 
-#: src/gui/ConfigurationDialog.cpp:2248
+#: src/gui/ConfigurationDialog.cpp:2251
 msgid "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 msgstr "Stephenson, Morrison এবং Hohenkerk (২০১৬, ২০২১)"
 
-#: src/gui/ConfigurationDialog.cpp:2249
+#: src/gui/ConfigurationDialog.cpp:2252
 msgid "Henriksson (2017)"
 msgstr "Henriksson (২০১৭)"
 
-#: src/gui/ConfigurationDialog.cpp:2250
+#: src/gui/ConfigurationDialog.cpp:2253
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T নির্ণয়ের পছন্দসই সমীকরণ"
 
-#: src/gui/ConfigurationDialog.cpp:2306 src/gui/ConfigurationDialog.cpp:2345
+#: src/gui/ConfigurationDialog.cpp:2309 src/gui/ConfigurationDialog.cpp:2348
 #: src/gui/StelGuiItems.cpp:872 src/gui/LocationDialog.cpp:557
 msgid "System default"
 msgstr "সিস্টেমে ব্যবহৃত"
 
-#: src/gui/ConfigurationDialog.cpp:2307
+#: src/gui/ConfigurationDialog.cpp:2310
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "বছর-মাস-দিন (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:2308
+#: src/gui/ConfigurationDialog.cpp:2311
 msgid "dd-mm-yyyy"
 msgstr "দিন-মাস-বছর"
 
-#: src/gui/ConfigurationDialog.cpp:2309
+#: src/gui/ConfigurationDialog.cpp:2312
 msgid "mm-dd-yyyy"
 msgstr "মাস-দিন-বছর"
 
-#: src/gui/ConfigurationDialog.cpp:2310
+#: src/gui/ConfigurationDialog.cpp:2313
 msgid "ww, yyyy-mm-dd"
 msgstr "সপ্তাহ, বছর-মাস-দিন"
 
-#: src/gui/ConfigurationDialog.cpp:2311
+#: src/gui/ConfigurationDialog.cpp:2314
 msgid "ww, dd-mm-yyyy"
 msgstr "সপ্তাহ, দিন-মাস-বছর"
 
-#: src/gui/ConfigurationDialog.cpp:2312
+#: src/gui/ConfigurationDialog.cpp:2315
 msgid "ww, mm-dd-yyyy"
 msgstr "সপ্তাহ, মাস-দিন-বছর"
 
-#: src/gui/ConfigurationDialog.cpp:2346
+#: src/gui/ConfigurationDialog.cpp:2349
 msgid "12-hour format"
 msgstr "১২ ঘন্টা"
 
-#: src/gui/ConfigurationDialog.cpp:2347
+#: src/gui/ConfigurationDialog.cpp:2350
 msgid "24-hour format"
 msgstr "২৪ ঘন্টা"
 
-#: src/gui/ConfigurationDialog.cpp:2377
+#: src/gui/ConfigurationDialog.cpp:2380
 msgctxt "disabled"
 msgid "None"
 msgstr "কিছুই না"
 
-#: src/gui/ConfigurationDialog.cpp:2378
+#: src/gui/ConfigurationDialog.cpp:2381
 msgid "5/6/5 bits"
 msgstr "5/6/5 bits"
 
-#: src/gui/ConfigurationDialog.cpp:2379
+#: src/gui/ConfigurationDialog.cpp:2382
 msgid "6/6/6 bits"
 msgstr "6/6/6 bits"
 
-#: src/gui/ConfigurationDialog.cpp:2380
+#: src/gui/ConfigurationDialog.cpp:2383
 msgid "8/8/8 bits"
 msgstr "8/8/8 bits"
 
-#: src/gui/ConfigurationDialog.cpp:2381
+#: src/gui/ConfigurationDialog.cpp:2384
 msgid "10/10/10 bits"
 msgstr "10/10/10 bits"
 
-#: src/gui/ConfigurationDialog.cpp:2393
+#: src/gui/ConfigurationDialog.cpp:2396
 msgid "Unsupported"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:2395
+#: src/gui/ConfigurationDialog.cpp:2398
 msgid "Unsupported in low-graphics mode"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:2508
+#: src/gui/ConfigurationDialog.cpp:2511
 msgid "Speech output disabled. No engine found?"
 msgstr ""
 
@@ -7743,7 +7743,7 @@ msgstr "নিরবিচ্ছিন্ন সাহায্য : %1"
 
 #: src/gui/HelpDialog.cpp:588
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:630
+#: plugins/Oculars/src/gui/OcularDialog.cpp:631
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:258
@@ -8073,8 +8073,8 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:1486 src/ui_astroCalcExtraEphemerisDialog.h:258
 #: src/ui_astroCalcExtraEphemerisDialog.h:263
-#: plugins/Oculars/src/Oculars.cpp:2061
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/Oculars.cpp:2064
+#: plugins/Oculars/src/gui/OcularDialog.cpp:601
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1199
 #: plugins/Satellites/src/ui_satellitesDialog.h:1255
 msgctxt "pixels"
@@ -13273,10 +13273,10 @@ msgstr "&অনুকরন করুন"
 msgid "&Paste"
 msgstr "অনুলে&পন করুন"
 
-#: src/translations.h:841 plugins/Oculars/src/ui_ocularDialog.h:1537
-#: plugins/Oculars/src/ui_ocularDialog.h:1546
-#: plugins/Oculars/src/ui_ocularDialog.h:1552
-#: plugins/Oculars/src/ui_ocularDialog.h:1571
+#: src/translations.h:841 plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: plugins/Oculars/src/ui_ocularDialog.h:1589
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
@@ -19848,7 +19848,7 @@ msgid "Allow snap to selected object"
 msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
-#: plugins/Oculars/src/ui_ocularDialog.h:1579
+#: plugins/Oculars/src/ui_ocularDialog.h:1597
 #: plugins/Satellites/src/ui_satellitesDialog.h:1384
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:240
@@ -19874,8 +19874,8 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "পরিচিতি"
 
-#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1551
-#: plugins/Oculars/src/ui_ocularDialog.h:1419
+#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1432
 msgid "Oculars"
 msgstr "দূরবীন অনুকরন"
 
@@ -19889,59 +19889,59 @@ msgstr ""
 " ও দৃষ্টিক্ষেত্রের আকার নির্ধারন করতে সক্ষম ।) তাছাড়া এটি সেন্সর ফ্রেম ও "
 "প্রতিফলনের সাহায্যে তাক করার প্রনালীও দেখাতে পারে ।"
 
-#: plugins/Oculars/src/Oculars.cpp:1029
+#: plugins/Oculars/src/Oculars.cpp:1032
 msgid "Please select an object before switching to ocular view."
 msgstr "দূরবীন দিয়ে দেখতে হলে আগে কোনো একটি জ্যোতিষ্ক নির্বাচন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1137
+#: plugins/Oculars/src/Oculars.cpp:1140
 msgid "&Previous ocular"
 msgstr "পূর্ব&বর্তী লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:1138
+#: plugins/Oculars/src/Oculars.cpp:1141
 msgid "&Next ocular"
 msgstr "প&রবর্তী লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:1139
+#: plugins/Oculars/src/Oculars.cpp:1142
 msgid "Select &ocular"
 msgstr "&লেন্স বাছুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1182
+#: plugins/Oculars/src/Oculars.cpp:1185
 msgid "Toggle &crosshair"
 msgstr "&নিশানা ক্রসটি দেখান"
 
-#: plugins/Oculars/src/Oculars.cpp:1194
+#: plugins/Oculars/src/Oculars.cpp:1197
 msgid "Configure &Oculars"
 msgstr "&রূপরেখা বিন্যাস করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1203
+#: plugins/Oculars/src/Oculars.cpp:1206
 msgid "Toggle &CCD"
 msgstr "&ফ্রেম প্রদর্শণ করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1211
+#: plugins/Oculars/src/Oculars.cpp:1214
 msgid "Toggle &Telrad"
 msgstr "&নিশানা বৃত্তটি দেখান"
 
-#: plugins/Oculars/src/Oculars.cpp:1221
+#: plugins/Oculars/src/Oculars.cpp:1224
 msgid "&Previous CCD"
 msgstr "পূর্ব&বর্তী ফ্রেম"
 
-#: plugins/Oculars/src/Oculars.cpp:1222
+#: plugins/Oculars/src/Oculars.cpp:1225
 msgid "&Next CCD"
 msgstr "প&রবর্তী ফ্রেম"
 
-#: plugins/Oculars/src/Oculars.cpp:1223
+#: plugins/Oculars/src/Oculars.cpp:1226
 msgid "&Select CCD"
 msgstr "ফ্রে&ম বাছুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1244
+#: plugins/Oculars/src/Oculars.cpp:1247
 msgid "&Rotate CCD"
 msgstr "ফ্রেম &ঘোরান"
 
-#: plugins/Oculars/src/Oculars.cpp:1256
+#: plugins/Oculars/src/Oculars.cpp:1259
 msgid "&Reset rotation"
 msgstr "&সোজা করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1420
+#: plugins/Oculars/src/Oculars.cpp:1423
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:135
 #: plugins/Oculars/src/gui/OcularDialog.cpp:152
@@ -19950,35 +19950,35 @@ msgstr "&সোজা করুন"
 msgid "Warning!"
 msgstr "সতর্কতা"
 
-#: plugins/Oculars/src/Oculars.cpp:1420
+#: plugins/Oculars/src/Oculars.cpp:1423
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr ""
 "সেন্সরের পরিসীমা দেখাতে ব্যর্থ : তালিকায় কোনো সেন্সর কিংবা দূরবীন যোগ করা "
 "নেই ।"
 
-#: plugins/Oculars/src/Oculars.cpp:1552
-#: plugins/Oculars/src/ui_ocularDialog.h:1453
+#: plugins/Oculars/src/Oculars.cpp:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1471
 msgid "Ocular view"
 msgstr "দূরবীন অনুকরন"
 
-#: plugins/Oculars/src/Oculars.cpp:1553
+#: plugins/Oculars/src/Oculars.cpp:1556
 msgid "Oculars popup menu"
 msgstr "দূরবীন ব্যবহারকালীন বিকল্প"
 
-#: plugins/Oculars/src/Oculars.cpp:1554
+#: plugins/Oculars/src/Oculars.cpp:1557
 msgid "Show crosshairs"
 msgstr "নিশানা ক্রস দেখান"
 
-#: plugins/Oculars/src/Oculars.cpp:1555
+#: plugins/Oculars/src/Oculars.cpp:1558
 msgid "Image sensor frame"
 msgstr "সেন্সর বা সংবেদক ফ্রেম"
 
-#: plugins/Oculars/src/Oculars.cpp:1556
+#: plugins/Oculars/src/Oculars.cpp:1559
 msgid "Telrad sight"
 msgstr "প্রতিফলকীয় নিশানা"
 
-#: plugins/Oculars/src/Oculars.cpp:1558
+#: plugins/Oculars/src/Oculars.cpp:1561
 #: plugins/Satellites/src/Satellites.cpp:463
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:202
 #: plugins/NavStars/src/NavStars.cpp:125 plugins/Quasars/src/Quasars.cpp:179
@@ -19996,92 +19996,92 @@ msgstr "প্রতিফলকীয় নিশানা"
 msgid "Show settings dialog"
 msgstr "তথ্য বিন্যাস বিভাগ"
 
-#: plugins/Oculars/src/Oculars.cpp:1560
+#: plugins/Oculars/src/Oculars.cpp:1563
 msgid "Toggle Oculars button bar"
 msgstr "দূরবীন অনুকরণ টুলবার চালু বা বন্ধ"
 
-#: plugins/Oculars/src/Oculars.cpp:1562
+#: plugins/Oculars/src/Oculars.cpp:1565
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Select next telescope"
 msgstr "পরবর্তী দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:1564
+#: plugins/Oculars/src/Oculars.cpp:1567
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
 msgid "Select previous telescope"
 msgstr "পূর্ববর্তী দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:1566
+#: plugins/Oculars/src/Oculars.cpp:1569
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
 msgid "Select next eyepiece"
 msgstr "পরবর্তী লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:1568
+#: plugins/Oculars/src/Oculars.cpp:1571
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Select previous eyepiece"
 msgstr "পূর্ববর্তী লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:1570
+#: plugins/Oculars/src/Oculars.cpp:1573
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Select next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1572
+#: plugins/Oculars/src/Oculars.cpp:1575
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Select previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1574
+#: plugins/Oculars/src/Oculars.cpp:1577
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Select next CCD frame"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1576
+#: plugins/Oculars/src/Oculars.cpp:1579
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Select previous CCD frame"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1577
+#: plugins/Oculars/src/Oculars.cpp:1580
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr "নিশানা ক্রশটি ঘড়ির দিকে ঘোরান"
 
-#: plugins/Oculars/src/Oculars.cpp:1578
+#: plugins/Oculars/src/Oculars.cpp:1581
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr "নিশানা ক্রশটি ঘড়ির বিপরীতে ঘোরান"
 
-#: plugins/Oculars/src/Oculars.cpp:1579
+#: plugins/Oculars/src/Oculars.cpp:1582
 msgid "Toggle sensor crop overlay"
 msgstr "ফোকাস নলের আকার নির্দেশক চালু বা বন্ধ করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1580
+#: plugins/Oculars/src/Oculars.cpp:1583
 msgid "Toggle sensor pixel grid"
 msgstr "প্রতিটি পিক্সেল দেখুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1581
+#: plugins/Oculars/src/Oculars.cpp:1584
 msgid "Toggle focuser overlay"
 msgstr "আকার পরিমাপক নির্দেশক চালু বা বন্ধ করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1584
+#: plugins/Oculars/src/Oculars.cpp:1587
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1289
 msgid "Reset the sensor frame rotation"
 msgstr "ফ্রেমটিকে আগের অবস্থায় ফিরিয়ে আনুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1585
+#: plugins/Oculars/src/Oculars.cpp:1588
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1292
 msgid "Reset the prism rotation"
 msgstr "প্রিজমটিকে আগের অবস্থায় ফিরিয়ে আনুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1978
+#: plugins/Oculars/src/Oculars.cpp:1981
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt of cross"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1998
+#: plugins/Oculars/src/Oculars.cpp:2001
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "নিশানা ক্রসের বিষুবাংশ / বিষুবলম্ব (J2000.0 অনুযায়ী)"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:2042
+#: plugins/Oculars/src/Oculars.cpp:2045
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:562
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 msgid "\"/px"
@@ -20089,7 +20089,7 @@ msgstr "\"/পিক্সেল"
 
 #. TRANSLATORS: "Max exposure" is short version of phrase "Max time of
 #. exposure"
-#: plugins/Oculars/src/Oculars.cpp:2079
+#: plugins/Oculars/src/Oculars.cpp:2082
 msgid "Max exposure"
 msgstr ""
 
@@ -20097,7 +20097,7 @@ msgstr ""
 #. TRANSLATORS: seconds.
 #. TRANSLATORS: Unit of measure for time - seconds
 #. TRANSLATORS: duration in seconds
-#: plugins/Oculars/src/Oculars.cpp:2079
+#: plugins/Oculars/src/Oculars.cpp:2082
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1193
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:245
 #: plugins/Planes/src/AircraftObject.cpp:213
@@ -20106,125 +20106,125 @@ msgctxt "time"
 msgid "s"
 msgstr "সেকেন্ড"
 
-#: plugins/Oculars/src/Oculars.cpp:2326
+#: plugins/Oculars/src/Oculars.cpp:2324
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:352
 msgid "Binocular"
 msgstr "দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:2326
+#: plugins/Oculars/src/Oculars.cpp:2324
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
 msgid "Ocular"
 msgstr "অভিনেত্র"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2346
+#: plugins/Oculars/src/Oculars.cpp:2344
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:395
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ফোকাস দূরত্ব : %1 মিলিমিটার"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2353
+#: plugins/Oculars/src/Oculars.cpp:2351
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:404
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "দৃষ্টিক্ষেত্র : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2364
+#: plugins/Oculars/src/Oculars.cpp:2362
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:434
 #, qt-format
 msgid "Lens #%1"
 msgstr "বিশেষ লেন্স #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2368
+#: plugins/Oculars/src/Oculars.cpp:2366
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:438
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "বিশেষ লেন্স #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2373
+#: plugins/Oculars/src/Oculars.cpp:2371
 msgid "Lens: none"
 msgstr "বিশেষ লেন্স : কিছু নেই"
 
-#: plugins/Oculars/src/Oculars.cpp:2388 plugins/Oculars/src/Oculars.cpp:2449
+#: plugins/Oculars/src/Oculars.cpp:2386 plugins/Oculars/src/Oculars.cpp:2447
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #, qt-format
 msgid "Telescope #%1"
 msgstr "দূরবীন #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2397
+#: plugins/Oculars/src/Oculars.cpp:2395
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 #, qt-format
 msgid "Magnification: %1"
 msgstr "বিবর্ধন : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2404
+#: plugins/Oculars/src/Oculars.cpp:2402
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "আপেক্ষিক রন্ধ্র : %1 মিমি"
 
-#: plugins/Oculars/src/Oculars.cpp:2411
+#: plugins/Oculars/src/Oculars.cpp:2409
 #, qt-format
 msgid "FOV: %1"
 msgstr "দৃষ্টিক্ষেত্র : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2432
+#: plugins/Oculars/src/Oculars.cpp:2430
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "মাত্রা : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2433
+#: plugins/Oculars/src/Oculars.cpp:2431
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 msgid "Binning"
 msgstr "পিক্সেল সংযুক্তি"
 
-#: plugins/Oculars/src/Oculars.cpp:2437
+#: plugins/Oculars/src/Oculars.cpp:2435
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:510
 #, qt-format
 msgid "Sensor #%1"
 msgstr "সংবেদক #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2441
+#: plugins/Oculars/src/Oculars.cpp:2439
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "সংবেদক #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2454
+#: plugins/Oculars/src/Oculars.cpp:2452
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "দূরবীন #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2797
+#: plugins/Oculars/src/Oculars.cpp:2795
 msgid "&Lens"
 msgstr "&বিশেষ লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:2798
+#: plugins/Oculars/src/Oculars.cpp:2796
 msgid "&Previous lens"
 msgstr "&পূর্ববর্তী বিশেষ লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:2799
+#: plugins/Oculars/src/Oculars.cpp:2797
 msgid "&Next lens"
 msgstr "&পরবর্তী বিশেষ লেন্স"
 
-#: plugins/Oculars/src/Oculars.cpp:2801
+#: plugins/Oculars/src/Oculars.cpp:2799
 msgid "None"
 msgstr "কিছুই না"
 
-#: plugins/Oculars/src/Oculars.cpp:2828
+#: plugins/Oculars/src/Oculars.cpp:2826
 msgid "&Telescope"
 msgstr "&দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:2829
+#: plugins/Oculars/src/Oculars.cpp:2827
 msgid "&Previous telescope"
 msgstr "&পূর্ববর্তী দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:2830
+#: plugins/Oculars/src/Oculars.cpp:2828
 msgid "&Next telescope"
 msgstr "&পরবর্তী দূরবীন"
 
@@ -20485,60 +20485,60 @@ msgid "Cannot delete the last telescope."
 msgstr "দূরবীনটিকে মুছে ফেলা যাচ্ছে না"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:582
+#: plugins/Oculars/src/gui/OcularDialog.cpp:583
 msgid "tFOV:"
 msgstr "প্রকৃত দৃষ্টিক্ষেত্র :"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:584
+#: plugins/Oculars/src/gui/OcularDialog.cpp:585
 msgid "Magnification factor:"
 msgstr "বিবর্ধণ গুণাঙ্ক :"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:585
-#: plugins/Oculars/src/ui_ocularDialog.h:1576
+#: plugins/Oculars/src/gui/OcularDialog.cpp:586
+#: plugins/Oculars/src/ui_ocularDialog.h:1594
 msgid "Diameter:"
 msgstr "ব্যাস :"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:590
-#: plugins/Oculars/src/ui_ocularDialog.h:1541
+#: plugins/Oculars/src/gui/OcularDialog.cpp:591
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "aFOV:"
 msgstr "আপাত দৃষ্টিক্ষেত্র :"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:591
-#: plugins/Oculars/src/ui_ocularDialog.h:1542
-#: plugins/Oculars/src/ui_ocularDialog.h:1577
+#: plugins/Oculars/src/gui/OcularDialog.cpp:592
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
+#: plugins/Oculars/src/ui_ocularDialog.h:1595
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:770
 msgid "Focal length:"
 msgstr "ফোকাস দূরত্ব :"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:592
-#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/gui/OcularDialog.cpp:593
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Field stop:"
 msgstr "ক্ষেত্র প্রতিবন্ধক :"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:626
+#: plugins/Oculars/src/gui/OcularDialog.cpp:627
 msgid "Oculars Plug-in"
 msgstr "দূরবীন অনুকরনের সরঞ্জাম"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:634
+#: plugins/Oculars/src/gui/OcularDialog.cpp:635
 msgid "Barlow lens feature"
 msgstr "বারলো লেন্স ব্যবস্থা"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:635
+#: plugins/Oculars/src/gui/OcularDialog.cpp:636
 msgid "Sensor crop overlay feature"
 msgstr "ছবিতে বস্তুর আকার পরিমাপক"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:636
+#: plugins/Oculars/src/gui/OcularDialog.cpp:637
 msgid "Pixel grid feature"
 msgstr "পিক্সেল গ্রিড"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:640
+#: plugins/Oculars/src/gui/OcularDialog.cpp:641
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1023
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "সারসংক্ষেপ"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:642
+#: plugins/Oculars/src/gui/OcularDialog.cpp:643
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -20549,19 +20549,19 @@ msgstr ""
 "করে অভিনেত্র, দূরবীন এমনকি আলোক সংবেদক পরিবর্তন, যোগ বা মুছে ফেলা যায় । "
 "প্রথমবার ব্যবহারের জন্য কিছু নমুনা নিজে থেকেই তৈরী হয়ে যাবে ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:643
+#: plugins/Oculars/src/gui/OcularDialog.cpp:644
 msgid "You can choose to scale the image you see on the screen."
 msgstr ""
 "তাছাড়া আপনি দূরবীন অনুযায়ী দৃষ্টিক্ষেত্রের ব্যাস পরিবর্তন করতে পারেন ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:644
+#: plugins/Oculars/src/gui/OcularDialog.cpp:645
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr ""
 "ফলে নানা দূরবীন অভিনেত্র জুটিটে আকাশ কিরকম দেখাবে তার তুলনা সহজেই করা যায় ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:645
+#: plugins/Oculars/src/gui/OcularDialog.cpp:646
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -20569,7 +20569,7 @@ msgstr ""
 "একই অভিনেত্র দুটি আলাদা ফোকাস দূরত্বের দূরবীনে দুটি আলাদা আপেক্ষিক রন্ধ্র "
 "তৈরি করে, ফলে দৃশ্যরূপের পরিবর্তন লক্ষ্য করা যায় ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:646
+#: plugins/Oculars/src/gui/OcularDialog.cpp:647
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -20577,7 +20577,7 @@ msgstr ""
 "তাই বিকল্পটি চালু করা থাকলে বেশির ভাগ ক্ষেত্রেই স্ক্রীনের অনেকটা অংশ ব্যবহৃত"
 " হয় না ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:647
+#: plugins/Oculars/src/gui/OcularDialog.cpp:648
 msgid ""
 "Therefore we recommend that you leave it off, unless you feel you have a "
 "need for it."
@@ -20585,11 +20585,11 @@ msgstr ""
 "আমরা সচরাচর এটিকে পরিবর্তন না করার পরামর্শ দিয়ে থাকি যদি না একান্ত প্রয়োজন "
 "থাকে ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:648
+#: plugins/Oculars/src/gui/OcularDialog.cpp:649
 msgid "You can toggle a crosshair in the view."
 msgstr "প্রয়োজনে নিশানা ক্রশ চালু বা বন্ধ করা যেতে পারে ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:649
+#: plugins/Oculars/src/gui/OcularDialog.cpp:650
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder. This feature draws three concentric circles "
@@ -20600,7 +20600,7 @@ msgstr ""
 "কৌণিক ব্যাসের তিনটি সমকেন্দ্রিক বৃত্ত দেখায় যা অনেকটা খালি চোখে প্রতিফলনের "
 "সাহায্যে তাক করার প্রনালীতে দেখার মতন ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:650
+#: plugins/Oculars/src/gui/OcularDialog.cpp:651
 msgid ""
 "You can adjust the diameters or even add a fourth circle if you have a "
 "different finder, or revert to the Telrad standard sizes."
@@ -20608,29 +20608,29 @@ msgstr ""
 "আপনি পছন্দ মত এগুলির আকার বদলাতে পারেন, এমনকি একটি চতুর্থ বৃত্ত যোগ করতেও "
 "পারেন ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:651
+#: plugins/Oculars/src/gui/OcularDialog.cpp:652
 msgid "If you find any issues, please let me know. Enjoy!"
 msgstr "কোনো সমস্যা খুঁজে পেলে আমাকে জানান । সরঞ্জামটির আনন্দ উপভোগ করুন ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:654
+#: plugins/Oculars/src/gui/OcularDialog.cpp:655
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
 msgid "Hot Keys"
 msgstr "চটজলদি ব্যবহারের উপায়"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:655
+#: plugins/Oculars/src/gui/OcularDialog.cpp:656
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr "সরঞ্জামের সহজ ব্যবহার পদ্ধতিগুলি পরিবর্তন করা যায় (F7) ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:658
+#: plugins/Oculars/src/gui/OcularDialog.cpp:659
 #: plugins/Pulsars/src/Pulsar.cpp:297
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:616
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Notes"
 msgstr "বিঃদ্রঃ"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:659
+#: plugins/Oculars/src/gui/OcularDialog.cpp:660
 msgid ""
 "The sensor view has a feature to show a sensor crop overlay with information"
 " about the crop size. The size of this rectangle may be adjusted when "
@@ -20641,211 +20641,219 @@ msgstr ""
 "থাকলে আকার সেই অনুযায়ী পরিবর্তিত হয়ে যাবে (যেমন ১০০ পিক্সেল আকার ৩ পিক্সেল "
 "সংযুক্তিতে ৩৩ পিক্সেল হবে মোট ৯৯ পিক্সেল ধরে)। "
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:660
+#: plugins/Oculars/src/gui/OcularDialog.cpp:661
 #, qt-format
 msgid ""
 "In this case, information about crop size overlay will be marked by %1."
 msgstr "এক্ষেত্রে এটি %1 দিয়ে নির্দেশিত হবে ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:661
+#: plugins/Oculars/src/gui/OcularDialog.cpp:662
 msgid ""
 "This mark is also displayed if the crop size is larger than the sensor size."
 msgstr ""
 "যদি এর আকার সংবেদকের থেকে বড় হয়, সেক্ষেত্রেও নির্দেশকটি প্রদর্শিত হবে ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:662
+#: plugins/Oculars/src/gui/OcularDialog.cpp:663
 msgid ""
 "The sensor view has also a feature to show a max time of exposure for "
 "selected solar system objects (the mount has sidereal speed enabled) to "
 "avoid a movement of more than 1 pixel width."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1420
+#: plugins/Oculars/src/ui_ocularDialog.h:1433
 msgid "Interface"
 msgstr "প্রেক্ষাপট"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1424
+#: plugins/Oculars/src/ui_ocularDialog.h:1437
 msgid "Arrow button scale (requires restart)"
 msgstr "অদলবদল বোতামের আকার (নতুন করে চালু করা আবশ্যিক)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1426
+#: plugins/Oculars/src/ui_ocularDialog.h:1439
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
 msgstr "ব্যবহার শেষে শুরুর সময়কার দৃষ্টিক্ষেত্রে ফিরতে হলে টিক মারুন ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1428
+#: plugins/Oculars/src/ui_ocularDialog.h:1441
 msgid "Restore FOV to initial values"
 msgstr "ব্যবহার শেষে প্রাথমিক দৃষ্টিক্ষেত্রে ফিরে আসবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1429
+#: plugins/Oculars/src/ui_ocularDialog.h:1442
 msgid "Show resolution criteria"
 msgstr "কৌণিক স্পষ্টতার সীমা দেখানো হবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1430
+#: plugins/Oculars/src/ui_ocularDialog.h:1443
 msgid "On-screen control panel"
 msgstr "দৃশ্যপটে এটি ব্যবহারের সরঞ্জাম দেখানো হবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
-#: plugins/Oculars/src/ui_ocularDialog.h:1436
+#: plugins/Oculars/src/ui_ocularDialog.h:1445
+#: plugins/Oculars/src/ui_ocularDialog.h:1449
 msgid "Font size of text on on-screen control panel"
 msgstr "স্ক্রিন টুলবারে হরফের আকার"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1434
+#: plugins/Oculars/src/ui_ocularDialog.h:1447
 msgid "...font size"
 msgstr "... হরফের আকার"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
 msgstr "ব্যবহার শেষে আগের অভিমুখে ফিরতে হলে এটি টিক মারুন ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1454
 msgid "Restore direction to initial values"
 msgstr "ব্যবহার শেষে আগের অভিমুখে ফিরে আসবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1443
+#: plugins/Oculars/src/ui_ocularDialog.h:1456
 msgid "Color for ocular circles and sensor frames"
 msgstr "সেনসর কিংবা দৃষ্টিক্ষেত্র বৃত্তের পরিসীমার রং"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1446
+#: plugins/Oculars/src/ui_ocularDialog.h:1459
 msgid "Line Color"
 msgstr "রেখার রং"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1448
-msgid "Color for text which is shown only when GUI is switched off."
-msgstr "গ্রাফিক্যাল ইন্টারফেস বন্ধ থাকা অবস্থায় হরফের রং"
+#: plugins/Oculars/src/ui_ocularDialog.h:1461
+msgid "Color for text which is shown only when GUI is switched off"
+msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1451
+#: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Text Color"
 msgstr "হরফের রং"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1466
+msgid "Color for reticle and crosshair"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1469
+msgid "Reticle Color"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1470
 msgid "Show oculars button on toolbar"
 msgstr "টুলবারে দূরবীন অনুকরণ বোতাম দেখান হবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1455
+#: plugins/Oculars/src/ui_ocularDialog.h:1473
 msgid ""
 "Show FOV circles relative to the apparent FOV of the widest-angle ocular"
 msgstr ""
 "অভিনেত্রে উপলব্ধ সর্বোচ্চ আপাত দৃষ্টিক্ষেত্রের অনুপাতে দৃষ্টিক্ষেত্র বৃত্ত "
 "গঠিত হবে ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1457
+#: plugins/Oculars/src/ui_ocularDialog.h:1475
 msgid "Scale image circle"
 msgstr "দূরবীনের গঠন অনুযায়ী দৃষ্টিক্ষেত্রের ব্যাসের পরিবর্তন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1476
 msgid "Hide grids and lines when enabled"
 msgstr "স্থানাঙ্ক ছক এবং নির্দেশক রেখা গুলি অদৃশ্য হবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1459
+#: plugins/Oculars/src/ui_ocularDialog.h:1477
 msgid "Enable only if an object is selected"
 msgstr "শুরুর পূর্বে জ্যোতিষ্কের আবশ্যিক নির্বাচন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1461
+#: plugins/Oculars/src/ui_ocularDialog.h:1479
 msgid "Show border circle"
 msgstr "দৃষ্টিক্ষেত্রের পরিসীমা বৃত্ত"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1463
+#: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Show FOV outline"
 msgstr "দৃষ্টিক্ষেত্রের পরিসীমা"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1465
+#: plugins/Oculars/src/ui_ocularDialog.h:1483
 msgid "Apply limit for stellar magnitude based on telescope aperture"
 msgstr ""
 "দূরবীনের অভিলক্ষ্য অনুযায়ী পর্যবেক্ষণ যোগ্য সর্বনিম্ন উজ্জ্বল্যতা নির্দিষ্ট "
 "হয়ে যায় ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1467
+#: plugins/Oculars/src/ui_ocularDialog.h:1485
 msgid "Auto-limit stellar magnitude"
 msgstr "ঔজ্জ্বল্যের সীমাবদ্ধতা"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1469
+#: plugins/Oculars/src/ui_ocularDialog.h:1487
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr "বিষুব স্থানাঙ্ক ব্যবস্থা অনুসারে দিক নির্দেশ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1471
+#: plugins/Oculars/src/ui_ocularDialog.h:1489
 msgid "Show compass rose"
 msgstr "দিক নির্দেশ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1473
+#: plugins/Oculars/src/ui_ocularDialog.h:1491
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "বিষুব স্থানাঙ্ক ব্যবস্থা অনুসারে নিশানা ক্রশ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1475
+#: plugins/Oculars/src/ui_ocularDialog.h:1493
 msgid "Align crosshair"
 msgstr "দিক অনুসারে নিশানা ক্রশ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1477
+#: plugins/Oculars/src/ui_ocularDialog.h:1495
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "দৃশ্য বৃত্তের বাইরের অংশ আবছা দেখা যাবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1479
+#: plugins/Oculars/src/ui_ocularDialog.h:1497
 msgid "Use semi-transparent mask"
 msgstr "অর্ধ স্বচ্ছ আচ্ছাদন ব্যবহার"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1499
 msgid "Opacity of semi-transparent mask"
 msgstr "অস্বচ্ছতার পরিমান"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1501
 msgid "Sensor view"
 msgstr "সেনসরে প্রাপ্ত ছবি বিষয়ক"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1484
+#: plugins/Oculars/src/ui_ocularDialog.h:1502
 msgid "Use size of focuser:"
 msgstr "নলের ব্যাস"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1486
+#: plugins/Oculars/src/ui_ocularDialog.h:1504
 msgid ""
 "Enable a rectangular overlay showing the effective size of a number of "
 "pixels."
 msgstr "পছন্দমত পিক্সেলের একটি চৌকো ছক প্রদর্শিত হবে ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1488
+#: plugins/Oculars/src/ui_ocularDialog.h:1506
 msgid "Show sensor crop overlay"
 msgstr "ছবিতে পছন্দসই বস্তুর আকার পরিমাপ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1489
+#: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "Overlay size (px)"
 msgstr "আকার (পিক্সেল)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1491
+#: plugins/Oculars/src/ui_ocularDialog.h:1509
 msgid "Horizontal size (width)"
 msgstr "আড়াআড়ি মাপ (দৈর্ঘ্য)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1494
+#: plugins/Oculars/src/ui_ocularDialog.h:1512
 msgid "Vertical size (height)"
 msgstr "উলম্ব মাপ (প্রস্থ)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1497
+#: plugins/Oculars/src/ui_ocularDialog.h:1515
 msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
 msgstr "প্রত্যেক পিক্সেল, সেগুলির সংযুক্তির সাথে দেখুন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1499
+#: plugins/Oculars/src/ui_ocularDialog.h:1517
 msgid "Show pixel grid"
 msgstr "পিক্সেলগুলি দেখুন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1500
+#: plugins/Oculars/src/ui_ocularDialog.h:1518
 msgid "Enable autozoom when switching CCD"
 msgstr "সংবেদক ব্যবহারে স্বয়ংক্রিয় জুম"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1502
+#: plugins/Oculars/src/ui_ocularDialog.h:1520
 msgid ""
 "Show maximum exposure time for Solar system objects to avoid movement streak"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1504
+#: plugins/Oculars/src/ui_ocularDialog.h:1522
 msgid "Show max exposure time for moving objects"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1505
+#: plugins/Oculars/src/ui_ocularDialog.h:1523
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "দৃষ্টিক্ষেত্র পরিমাপে ডিগ্রি ও মিনিট ব্যবহার"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1507
+#: plugins/Oculars/src/ui_ocularDialog.h:1525
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -20853,98 +20861,98 @@ msgstr ""
 "CCD সেন্সর বা আলোক সংবেদকের অনুভূমিক ঘুর্ণন অনুসারে দূরবীনের আলম্ব বা বিচলন "
 "স্বয়ংক্রিয় ভাবে নির্ধারিত হবে ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1509
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
 msgid "Enable automatic switch of mount type"
 msgstr "বিচলন বা আলম্বের স্বয়ংক্রিয় নির্ধারণ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1511
+#: plugins/Oculars/src/ui_ocularDialog.h:1529
 msgid "Color for focuser overlay line"
 msgstr "ফোকাস নলের আকার নির্দেশকের রং"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1513
+#: plugins/Oculars/src/ui_ocularDialog.h:1531
 msgid "Show focuser overlay"
 msgstr "ফোকাস নলের আকার নির্দেশক"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1514
+#: plugins/Oculars/src/ui_ocularDialog.h:1532
 msgid "Use horizontal coordinates instead equatorial coordinates"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1515
+#: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid "Show angular limits of the off-axis guide"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1516
+#: plugins/Oculars/src/ui_ocularDialog.h:1534
 msgid "Telrad view"
 msgstr "প্রতিফলকীয় নিশানা"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1520
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr "দৃষ্টিক্ষেত্র :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1522
+#: plugins/Oculars/src/ui_ocularDialog.h:1540
 msgid "FOV for circle 1"
 msgstr "দৃষ্টিক্ষেত্র বৃত্ত ১"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1525
+#: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "FOV for circle 2"
 msgstr "দৃষ্টিক্ষেত্র বৃত্ত ২"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1528
+#: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "FOV for circle 3"
 msgstr "দৃষ্টিক্ষেত্র বৃত্ত ৩"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1531
+#: plugins/Oculars/src/ui_ocularDialog.h:1549
 msgid "FOV for circle 4"
 msgstr "দৃষ্টিক্ষেত্র বৃত্ত ৪"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1533
+#: plugins/Oculars/src/ui_ocularDialog.h:1551
 msgid "Restore original Telrad FOV"
 msgstr "প্রাথমিক দৃষ্টিক্ষেত্রের মান ধার্য করুন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1534
+#: plugins/Oculars/src/ui_ocularDialog.h:1552
 msgid "Enable autozoom when switching Telrad"
 msgstr "প্রতিফলক বৃত্ত ব্যবহারে স্বয়ংক্রিয় জুম"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1535
+#: plugins/Oculars/src/ui_ocularDialog.h:1553
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:228
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:401
 #: plugins/Planes/src/ui_planesDialog.h:256
 msgid "General"
 msgstr "মূল বিভাগ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1536
-#: plugins/Oculars/src/ui_ocularDialog.h:1545
-#: plugins/Oculars/src/ui_ocularDialog.h:1551
-#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1588
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1048
 msgid "Add"
 msgstr "যোগ করুন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1557
 msgid "Has permanent cross-hairs"
 msgstr "সবসময় নিশানা ক্রসটি দেখাবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Binoculars"
 msgstr "দূরবীন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1543
-#: plugins/Oculars/src/ui_ocularDialog.h:1547
-#: plugins/Oculars/src/ui_ocularDialog.h:1557
-#: plugins/Oculars/src/ui_ocularDialog.h:1572
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1575
+#: plugins/Oculars/src/ui_ocularDialog.h:1590
 #: plugins/Satellites/src/ui_satellitesDialog.h:1295
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
 msgstr "নাম :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1544
+#: plugins/Oculars/src/ui_ocularDialog.h:1562
 msgid "Eyepieces"
 msgstr "অভিনেত্র"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1548
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -20952,85 +20960,85 @@ msgstr ""
 "বিবর্ধন >১ হলে (Barlow লেন্স) ফোকাস দূরত্ব বাড়ে এবং বিবর্ধকন <১হলে (Shapley "
 "লেন্স) ফোকাস দূরত্ব কমে ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1549
+#: plugins/Oculars/src/ui_ocularDialog.h:1567
 msgid "Multiplier:"
 msgstr "গুণক :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1550
+#: plugins/Oculars/src/ui_ocularDialog.h:1568
 msgid "Lenses"
 msgstr "বিশেষ লেন্স"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1553
+#: plugins/Oculars/src/ui_ocularDialog.h:1571
 msgid "Off-Axis guider"
 msgstr "অনুসন্ধান সহায়ক ক্যামেরা"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1572
 msgid "Resolution y:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1573
 msgid "Binning x:"
 msgstr "আড়াআড়ি সংযুক্তি :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1556
+#: plugins/Oculars/src/ui_ocularDialog.h:1574
 msgid "Resolution x:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1558
+#: plugins/Oculars/src/ui_ocularDialog.h:1576
 msgid "Prism/CCD height:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1560
+#: plugins/Oculars/src/ui_ocularDialog.h:1578
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the center of "
 "the Prism"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1562
+#: plugins/Oculars/src/ui_ocularDialog.h:1580
 msgid "Prism/CCD distance:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: plugins/Oculars/src/ui_ocularDialog.h:1581
 msgid "Rotation Angle:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1582
 msgid "Binning y:"
 msgstr "উলম্ব সংযুক্তি :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1583
 msgid "Prism/CCD width:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1566
+#: plugins/Oculars/src/ui_ocularDialog.h:1584
 msgid "Chip height:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1567
+#: plugins/Oculars/src/ui_ocularDialog.h:1585
 msgid "Chip width:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1568
+#: plugins/Oculars/src/ui_ocularDialog.h:1586
 msgid "Position angle:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1587
 msgid "Sensors"
 msgstr "সেন্সর"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1573
+#: plugins/Oculars/src/ui_ocularDialog.h:1591
 msgid "Horizontal flip"
 msgstr "আড়াআড়ি উল্টানো"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1574
+#: plugins/Oculars/src/ui_ocularDialog.h:1592
 msgid "Vertical flip"
 msgstr "লম্বালম্বি উল্টানো"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1575
+#: plugins/Oculars/src/ui_ocularDialog.h:1593
 msgid "Equatorial Mount"
 msgstr "বিষুব বিচলন বা আলম্ব"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1578
+#: plugins/Oculars/src/ui_ocularDialog.h:1596
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:395
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes"

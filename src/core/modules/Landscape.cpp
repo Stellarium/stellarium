@@ -680,7 +680,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 							: std::sin(decorAltAngle  *M_PI_180f)/stacks);
 	}
 
-	const float alpha = 2.f*static_cast<float>(M_PI)/(nbDecorRepeat*nbSide*slices_per_side); //delta_azimuth
+	const float alpha = 2.f*M_PIf/(nbDecorRepeat*nbSide*slices_per_side); //delta_azimuth
 	const float ca = std::cos(alpha);
 	const float sa = std::sin(alpha);
 	float y0 = static_cast<float>(radius);

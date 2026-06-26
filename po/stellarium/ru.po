@@ -7,6 +7,7 @@
 # Aleksey Kabanov <ak099@mail.ru>, 2022
 # Ruslan Kabatsaev, 2025
 # cardinot <mcardinot@gmail.com>, 2026
+# Dmitr Y, 2026
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2026
 # 
 #, fuzzy
@@ -14,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-06-09 22:17+0700\n"
+"POT-Creation-Date: 2026-06-25 01:49+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2026\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -34,7 +35,7 @@ msgid "custom object"
 msgstr "пользовательский объект"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:444
+#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:445
 #: src/core/modules/Constellation.cpp:593
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:293
 #: src/core/modules/Nebula.cpp:295 src/core/modules/Planet.cpp:670
@@ -50,8 +51,8 @@ msgstr "пользовательский объект"
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
-#: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
-#: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:320
+#: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:192
+#: plugins/Pulsars/src/Pulsar.cpp:194 plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/MeteorShowers/src/MeteorShower.cpp:553
 #: plugins/Planes/src/AircraftObject.cpp:195
 msgid "Type"
@@ -1278,7 +1279,7 @@ msgstr "Циклическое изменение засветки"
 
 #: src/core/modules/LandscapeMgr.cpp:1538 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:629
+#: plugins/Oculars/src/gui/OcularDialog.cpp:630
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:257
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -1537,7 +1538,7 @@ msgstr "Высота Солнца над этим объектом состав�
 #: src/core/StelUtils.cpp:536 src/core/StelUtils.cpp:573
 msgctxt "object narration"
 msgid "degrees"
-msgstr "градусов"
+msgstr "°"
 
 #: src/core/modules/NomenclatureItem.cpp:717
 #: src/core/modules/NomenclatureItem.cpp:718
@@ -2466,7 +2467,8 @@ msgstr "Угол ориентации"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:388 src/core/modules/Nebula.cpp:401
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
-#: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: plugins/Pulsars/src/Pulsar.cpp:271 plugins/Pulsars/src/Pulsar.cpp:282
+#: plugins/Exoplanets/src/Exoplanet.cpp:334
 msgctxt "distance"
 msgid "ly"
 msgstr "св. лет"
@@ -2483,7 +2485,8 @@ msgid "Distance"
 msgstr "Расстояние"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:399 plugins/Pulsars/src/Pulsar.cpp:265
+#: src/core/modules/Nebula.cpp:399 plugins/Pulsars/src/Pulsar.cpp:268
+#: plugins/Pulsars/src/Pulsar.cpp:279
 msgctxt "distance"
 msgid "kpc"
 msgstr "кпк"
@@ -2509,7 +2512,7 @@ msgid "Parallax"
 msgstr "Параллакс"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:460 plugins/Pulsars/src/Pulsar.cpp:257
+#: src/core/modules/Nebula.cpp:460 plugins/Pulsars/src/Pulsar.cpp:260
 msgctxt "parallax"
 msgid "mas"
 msgstr "мсд"
@@ -3027,12 +3030,12 @@ msgstr "молодый звёздный объект"
 #: src/core/modules/Nebula.cpp:1902 src/translations.h:1008
 msgctxt "Nebula narration"
 msgid "a Possible Quasar"
-msgstr "возможно квазар"
+msgstr "возможный квазар"
 
 #: src/core/modules/Nebula.cpp:1903 src/translations.h:1009
 msgctxt "Nebula narration"
 msgid "a Possible Planetary Nebula"
-msgstr "возможно планетарная туманность"
+msgstr "возможная планетарная туманность"
 
 #: src/core/modules/Nebula.cpp:1904 src/translations.h:1010
 msgctxt "Nebula narration"
@@ -3238,7 +3241,7 @@ msgid "Hourly motion"
 msgstr "Часовое движение"
 
 #: src/core/modules/Planet.cpp:738 src/core/modules/Planet.cpp:1408
-#: src/core/modules/Planet.cpp:1417 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/Planet.cpp:1417 plugins/Pulsars/src/Pulsar.cpp:207
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "в направлении"
@@ -3589,7 +3592,7 @@ msgstr "Альбедо"
 #: src/core/modules/Planet.cpp:1610
 msgctxt "speed"
 msgid "kilometers per second"
-msgstr "километров в секунду"
+msgstr "км/с"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
 #: src/core/modules/Planet.cpp:1612
@@ -3607,8 +3610,7 @@ msgstr "Вращение занимает %1"
 #, qt-format
 msgctxt "planet narration"
 msgid "A rotation takes %1, while a Mean Solar Day takes %2."
-msgstr ""
-"Вращение занимает %1, в то время как средний солнечный день занимает %2."
+msgstr "Вращение занимает %1, а средний солнечный день длится %2."
 
 #: src/core/modules/Planet.cpp:1634 src/core/modules/Planet.cpp:1636
 #: src/core/modules/Planet.cpp:1643 src/core/modules/Planet.cpp:1645
@@ -3621,7 +3623,7 @@ msgstr "Экваториальная скорость вращения равн�
 #, qt-format
 msgctxt "planet narration"
 msgid "The Moon is %1 days old and appears as %2"
-msgstr "Возраст Луны %1 дней и отображается как %2"
+msgstr "Возраст Луны %1 дн., выглядит как %2"
 
 #: src/core/modules/Planet.cpp:1696
 #, qt-format
@@ -4053,7 +4055,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:2279
 msgctxt "distance, astronomical unit"
 msgid "Astronomical Units"
-msgstr "Астрономических Единиц"
+msgstr "Астрономических единиц"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
 #: src/core/modules/Planet.cpp:2281
@@ -4065,13 +4067,13 @@ msgstr "или, световой промежуток"
 #: src/core/modules/Planet.cpp:2290 src/core/modules/Planet.cpp:2313
 msgctxt "distance"
 msgid "kilometers"
-msgstr "километров"
+msgstr "км"
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #: src/core/modules/Planet.cpp:2297 src/core/modules/Planet.cpp:2320
 msgctxt "distance"
 msgid "Million kilometers"
-msgstr "Миллионов километров"
+msgstr "млн км"
 
 #: src/core/modules/Planet.cpp:2300
 msgctxt "object narration"
@@ -4087,7 +4089,7 @@ msgstr "Текущее расстояние составляет"
 #, qt-format
 msgctxt "planet narration"
 msgid "The orbital velocity of %1 is %2 kilometers per second"
-msgstr "Орбитальная скорость %1 составляет %2 километров в секунду."
+msgstr "Орбитальная скорость %1 составляет %2 км/с"
 
 #: src/core/modules/Planet.cpp:2341
 #, qt-format
@@ -4269,13 +4271,13 @@ msgstr "с абсолютной звёздной величиной"
 #, qt-format
 msgctxt "object narration"
 msgid "Its radial velocity is %1 kilometers per second."
-msgstr "Лучевая скорость %1 километр в секунду."
+msgstr "Лучевая скорость %1 км/с."
 
 #: src/core/modules/StarWrapper.cpp:478
 #, qt-format
 msgctxt "object narration"
 msgid "Its position angle as given for %1 is %2 degrees."
-msgstr "Позиционный угол на дату %1 — %2 градусов."
+msgstr "Позиционный угол на дату %1 — %2°."
 
 #: src/core/modules/StarWrapper.cpp:479 src/core/modules/StarWrapper.cpp:486
 msgctxt "coordinates for current epoch"
@@ -4288,7 +4290,7 @@ msgstr "текущая дата"
 #, qt-format
 msgctxt "object narration"
 msgid "Its component separation for %1 is %2 arc-seconds (%3). "
-msgstr "Разделение компонентов на дату %1 — %2 секунд дуги (%3)."
+msgstr "Разделение компонентов на дату %1 — %2 угловых сек (%3)."
 
 #. TRANSLATORS: This is about the angular separation between components of a
 #. binary star.
@@ -4296,7 +4298,7 @@ msgstr "Разделение компонентов на дату %1 — %2 се
 #, qt-format
 msgctxt "object narration"
 msgid "Its component separation for %1 is %2 arc-seconds. "
-msgstr "Разделение компонентов на дату %1 — %2 секунд дуги."
+msgstr "Разделение компонентов на дату %1 — %2 угловых сек."
 
 #: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:789
 #, qt-format
@@ -6292,10 +6294,10 @@ msgstr ""
 "распространение и преобразование."
 
 #: src/core/StelSkyCultureMgr.cpp:526 src/core/StelSkyCultureMgr.cpp:533
-#: src/core/StelSkyCultureMgr.cpp:540 src/gui/ConfigurationDialog.cpp:1607
+#: src/core/StelSkyCultureMgr.cpp:540 src/gui/ConfigurationDialog.cpp:1610
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
-#: plugins/Oculars/src/gui/OcularDialog.cpp:628
+#: plugins/Oculars/src/gui/OcularDialog.cpp:629
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:256
@@ -7070,8 +7072,8 @@ msgid "Select screenshot directory"
 msgstr "Выберите папку для снимков экрана"
 
 #: src/gui/ConfigurationDialog.cpp:1036
-#: plugins/Oculars/src/gui/OcularDialog.cpp:593
-#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#: plugins/Oculars/src/gui/OcularDialog.cpp:594
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
 msgctxt "millimeters"
 msgid "mm"
 msgstr "мм"
@@ -7084,22 +7086,22 @@ msgstr "Точек на дюйм (для метаданных изображен
 msgid "Current designated print size"
 msgstr "Текущий назначенный размер печати"
 
-#: src/gui/ConfigurationDialog.cpp:1524
+#: src/gui/ConfigurationDialog.cpp:1527
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Начальное поле зрения: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:1532
+#: src/gui/ConfigurationDialog.cpp:1535
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Начальное направление обзора аз/выс: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1601
+#: src/gui/ConfigurationDialog.cpp:1604
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
 msgid "Acknowledgments"
 msgstr "Благодарности"
 
-#: src/gui/ConfigurationDialog.cpp:1603
+#: src/gui/ConfigurationDialog.cpp:1606
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
@@ -7110,14 +7112,14 @@ msgstr "Благодарности"
 msgid "Authors"
 msgstr "Авторы"
 
-#: src/gui/ConfigurationDialog.cpp:1604
+#: src/gui/ConfigurationDialog.cpp:1607
 msgid "Contact"
 msgstr "Обратная связь"
 
-#: src/gui/ConfigurationDialog.cpp:1606 src/gui/HelpDialog.cpp:537
+#: src/gui/ConfigurationDialog.cpp:1609 src/gui/HelpDialog.cpp:537
 #: src/scripting/StelScriptMgr.cpp:657
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
-#: plugins/Oculars/src/gui/OcularDialog.cpp:627
+#: plugins/Oculars/src/gui/OcularDialog.cpp:628
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
@@ -7144,20 +7146,20 @@ msgstr "Обратная связь"
 msgid "Version"
 msgstr "Версия"
 
-#: src/gui/ConfigurationDialog.cpp:1611
+#: src/gui/ConfigurationDialog.cpp:1614
 msgctxt "license"
 msgid "unknown"
 msgstr "неизвестная"
 
-#: src/gui/ConfigurationDialog.cpp:1723
+#: src/gui/ConfigurationDialog.cpp:1726
 msgid "Running script: "
 msgstr "Запущенный сценарий: "
 
-#: src/gui/ConfigurationDialog.cpp:1730
+#: src/gui/ConfigurationDialog.cpp:1733
 msgid "Running script: [none]"
 msgstr "Запущенный сценарий: [нет]"
 
-#: src/gui/ConfigurationDialog.cpp:1795
+#: src/gui/ConfigurationDialog.cpp:1798
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -7165,16 +7167,16 @@ msgstr ""
 "Загрузка новых каталогов звёзд завершена.\n"
 "Перезапустите Stellarium для их отображения."
 
-#: src/gui/ConfigurationDialog.cpp:1799
+#: src/gui/ConfigurationDialog.cpp:1802
 msgid "All available star catalogs have been installed."
 msgstr "Все доступные звёздные каталоги установлены."
 
-#: src/gui/ConfigurationDialog.cpp:1804
+#: src/gui/ConfigurationDialog.cpp:1807
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Получение каталога %1 из %2"
 
-#: src/gui/ConfigurationDialog.cpp:1811
+#: src/gui/ConfigurationDialog.cpp:1814
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -7183,7 +7185,7 @@ msgstr ""
 "Загрузка %1...\n"
 "(Вы можете закрыть это окно.)"
 
-#: src/gui/ConfigurationDialog.cpp:1818
+#: src/gui/ConfigurationDialog.cpp:1821
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -7194,7 +7196,7 @@ msgstr ""
 "Количество звёзд: %2 миллиона\n"
 "Диапазон звёздных величин: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1864 src/gui/ConfigurationDialog.cpp:1905
+#: src/gui/ConfigurationDialog.cpp:1867 src/gui/ConfigurationDialog.cpp:1908
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -7203,11 +7205,11 @@ msgstr ""
 "Ошибка при загрузке %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1958
+#: src/gui/ConfigurationDialog.cpp:1961
 msgid "Verifying file integrity..."
 msgstr "Проверка целостности файлов..."
 
-#: src/gui/ConfigurationDialog.cpp:1962
+#: src/gui/ConfigurationDialog.cpp:1965
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -7216,23 +7218,23 @@ msgstr ""
 "Ошибка при загрузке %1:\n"
 "Файл повреждён."
 
-#: src/gui/ConfigurationDialog.cpp:2046 src/gui/ConfigurationDialog.cpp:2058
-#: src/gui/ConfigurationDialog.cpp:2070 src/gui/ConfigurationDialog.cpp:2082
+#: src/gui/ConfigurationDialog.cpp:2049 src/gui/ConfigurationDialog.cpp:2061
+#: src/gui/ConfigurationDialog.cpp:2073 src/gui/ConfigurationDialog.cpp:2085
 msgid "Available"
 msgstr "Доступно"
 
-#: src/gui/ConfigurationDialog.cpp:2048 src/gui/ConfigurationDialog.cpp:2060
-#: src/gui/ConfigurationDialog.cpp:2072 src/gui/ConfigurationDialog.cpp:2084
+#: src/gui/ConfigurationDialog.cpp:2051 src/gui/ConfigurationDialog.cpp:2063
+#: src/gui/ConfigurationDialog.cpp:2075 src/gui/ConfigurationDialog.cpp:2087
 msgid "Not Available"
 msgstr "Недоступно"
 
-#: src/gui/ConfigurationDialog.cpp:2159
+#: src/gui/ConfigurationDialog.cpp:2162
 msgid "Annual proper motion (stars) or hourly motion (solar system objects)"
 msgstr ""
 "Годовое собственное движение (звёзды) или часовое движение (объекты "
 "Солнечной системы)"
 
-#: src/gui/ConfigurationDialog.cpp:2160
+#: src/gui/ConfigurationDialog.cpp:2163
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
@@ -7241,214 +7243,214 @@ msgstr ""
 "восхода и захода определяются верхним краем небесного тела. "
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:2201
+#: src/gui/ConfigurationDialog.cpp:2204
 msgid "Algorithm of"
 msgstr "Алгоритм"
 
-#: src/gui/ConfigurationDialog.cpp:2212
+#: src/gui/ConfigurationDialog.cpp:2215
 msgid "Without correction"
 msgstr "Без коррекции"
 
-#: src/gui/ConfigurationDialog.cpp:2213
+#: src/gui/ConfigurationDialog.cpp:2216
 msgid "Schoch (1931)"
 msgstr "Шох (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:2214
+#: src/gui/ConfigurationDialog.cpp:2217
 msgid "Clemence (1948)"
 msgstr "Клеменс (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:2215
+#: src/gui/ConfigurationDialog.cpp:2218
 msgid "IAU (1952)"
 msgstr "МАС (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:2216
+#: src/gui/ConfigurationDialog.cpp:2219
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Астрономические Эфемериды (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:2217
+#: src/gui/ConfigurationDialog.cpp:2220
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Тукерман (1962, 1964) и Голдштейн (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:2218
+#: src/gui/ConfigurationDialog.cpp:2221
 msgid "Muller & Stephenson (1975)"
 msgstr "Мюллер и Стивенсон (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:2219
+#: src/gui/ConfigurationDialog.cpp:2222
 msgid "Stephenson (1978)"
 msgstr "Стивенсон (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:2220
+#: src/gui/ConfigurationDialog.cpp:2223
 msgid "Schmadel & Zech (1979)"
 msgstr "Шмадель и Зах (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:2221
+#: src/gui/ConfigurationDialog.cpp:2224
 msgid "Morrison & Stephenson (1982)"
 msgstr "Моррисон и Стивенсон (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:2222
+#: src/gui/ConfigurationDialog.cpp:2225
 msgid "Stephenson & Morrison (1984)"
 msgstr "Стивенсон и Моррисон (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:2223
+#: src/gui/ConfigurationDialog.cpp:2226
 msgid "Stephenson & Houlden (1986)"
 msgstr "Стивенсон и Холден (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:2224
+#: src/gui/ConfigurationDialog.cpp:2227
 msgid "Espenak (1987, 1989)"
 msgstr "Эспенак (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:2225
+#: src/gui/ConfigurationDialog.cpp:2228
 msgid "Borkowski (1988)"
 msgstr "Борковски (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:2226
+#: src/gui/ConfigurationDialog.cpp:2229
 msgid "Schmadel & Zech (1988)"
 msgstr "Шмадель и Зах (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:2227
+#: src/gui/ConfigurationDialog.cpp:2230
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Шапрон-Таузи и Шапрон (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:2228
+#: src/gui/ConfigurationDialog.cpp:2231
 msgid "Stephenson & Morrison (1995)"
 msgstr "Стивенсон и Моррисон (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:2229
+#: src/gui/ConfigurationDialog.cpp:2232
 msgid "Stephenson (1997)"
 msgstr "Стивенсон (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:2231
+#: src/gui/ConfigurationDialog.cpp:2234
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Меёс (1998) (с Шапрон, Шапрон-Таузи и Франку (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:2232
+#: src/gui/ConfigurationDialog.cpp:2235
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:2233
+#: src/gui/ConfigurationDialog.cpp:2236
 msgid "Meeus & Simons (2000)"
 msgstr "Меёс и Симонс (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:2234
+#: src/gui/ConfigurationDialog.cpp:2237
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Монтенбрук и Пфлегер (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:2235
+#: src/gui/ConfigurationDialog.cpp:2238
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Рейнгольд и Дершовиц (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:2236
+#: src/gui/ConfigurationDialog.cpp:2239
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Моррисон и Стивенсон (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:2237
+#: src/gui/ConfigurationDialog.cpp:2240
 msgid "Espenak & Meeus (2006, 2014)"
 msgstr "Эспенак и Меёс (2006, 2014)"
 
-#: src/gui/ConfigurationDialog.cpp:2240
+#: src/gui/ConfigurationDialog.cpp:2243
 msgid "Espenak & Meeus (2006, 2014) no extra moon acceleration"
 msgstr "Эспенак и Меёс (2006, 2014) без дополнительного ускорения Луны"
 
-#: src/gui/ConfigurationDialog.cpp:2243
+#: src/gui/ConfigurationDialog.cpp:2246
 msgid "Modified Espenak & Meeus (2006, 2014, 2023)"
 msgstr "Модификация Эспенака и Меёса (2006, 2014, 2023)"
 
-#: src/gui/ConfigurationDialog.cpp:2244
+#: src/gui/ConfigurationDialog.cpp:2247
 msgid "Reijs (2006)"
 msgstr "Рьейс (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:2245
+#: src/gui/ConfigurationDialog.cpp:2248
 msgid "Banjevic (2006)"
 msgstr "Банжевич (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:2246
+#: src/gui/ConfigurationDialog.cpp:2249
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Ислам, Садик и Куреши (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:2247
+#: src/gui/ConfigurationDialog.cpp:2250
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Халид, Султана и Зайди (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:2248
+#: src/gui/ConfigurationDialog.cpp:2251
 msgid "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 msgstr "Стивенсон, Моррисон и Хункерк (2016, 2021)"
 
-#: src/gui/ConfigurationDialog.cpp:2249
+#: src/gui/ConfigurationDialog.cpp:2252
 msgid "Henriksson (2017)"
 msgstr "Хенрикссон (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:2250
+#: src/gui/ConfigurationDialog.cpp:2253
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Пользовательское уравнение %1T"
 
-#: src/gui/ConfigurationDialog.cpp:2306 src/gui/ConfigurationDialog.cpp:2345
+#: src/gui/ConfigurationDialog.cpp:2309 src/gui/ConfigurationDialog.cpp:2348
 #: src/gui/StelGuiItems.cpp:872 src/gui/LocationDialog.cpp:557
 msgid "System default"
 msgstr "Используемый системой"
 
-#: src/gui/ConfigurationDialog.cpp:2307
+#: src/gui/ConfigurationDialog.cpp:2310
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "гггг-мм-дд (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:2308
+#: src/gui/ConfigurationDialog.cpp:2311
 msgid "dd-mm-yyyy"
 msgstr "дд-мм-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:2309
+#: src/gui/ConfigurationDialog.cpp:2312
 msgid "mm-dd-yyyy"
 msgstr "мм-дд-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:2310
+#: src/gui/ConfigurationDialog.cpp:2313
 msgid "ww, yyyy-mm-dd"
 msgstr "нн, гггг-мм-дд"
 
-#: src/gui/ConfigurationDialog.cpp:2311
+#: src/gui/ConfigurationDialog.cpp:2314
 msgid "ww, dd-mm-yyyy"
 msgstr "нн, дд-мм-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:2312
+#: src/gui/ConfigurationDialog.cpp:2315
 msgid "ww, mm-dd-yyyy"
 msgstr "нн, мм-дд-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:2346
+#: src/gui/ConfigurationDialog.cpp:2349
 msgid "12-hour format"
 msgstr "12-часовой формат"
 
-#: src/gui/ConfigurationDialog.cpp:2347
+#: src/gui/ConfigurationDialog.cpp:2350
 msgid "24-hour format"
 msgstr "24-часовой формат"
 
-#: src/gui/ConfigurationDialog.cpp:2377
+#: src/gui/ConfigurationDialog.cpp:2380
 msgctxt "disabled"
 msgid "None"
 msgstr "Нет"
 
-#: src/gui/ConfigurationDialog.cpp:2378
+#: src/gui/ConfigurationDialog.cpp:2381
 msgid "5/6/5 bits"
 msgstr "5/6/5 бит"
 
-#: src/gui/ConfigurationDialog.cpp:2379
+#: src/gui/ConfigurationDialog.cpp:2382
 msgid "6/6/6 bits"
 msgstr "6/6/6 бит"
 
-#: src/gui/ConfigurationDialog.cpp:2380
+#: src/gui/ConfigurationDialog.cpp:2383
 msgid "8/8/8 bits"
 msgstr "8/8/8 бит"
 
-#: src/gui/ConfigurationDialog.cpp:2381
+#: src/gui/ConfigurationDialog.cpp:2384
 msgid "10/10/10 bits"
 msgstr "10/10/10 бит"
 
-#: src/gui/ConfigurationDialog.cpp:2393
+#: src/gui/ConfigurationDialog.cpp:2396
 msgid "Unsupported"
 msgstr "Не поддерживается"
 
-#: src/gui/ConfigurationDialog.cpp:2395
+#: src/gui/ConfigurationDialog.cpp:2398
 msgid "Unsupported in low-graphics mode"
 msgstr "Не поддерживается в скромном графическом режиме"
 
-#: src/gui/ConfigurationDialog.cpp:2508
+#: src/gui/ConfigurationDialog.cpp:2511
 msgid "Speech output disabled. No engine found?"
 msgstr "Синтез речи отключен. Не найден ни одного движка?"
 
@@ -7804,7 +7806,7 @@ msgstr "Непрерывная интеграция: %1"
 
 #: src/gui/HelpDialog.cpp:588
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:630
+#: plugins/Oculars/src/gui/OcularDialog.cpp:631
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:258
@@ -8136,8 +8138,8 @@ msgstr " с"
 
 #: src/gui/ViewDialog.cpp:1486 src/ui_astroCalcExtraEphemerisDialog.h:258
 #: src/ui_astroCalcExtraEphemerisDialog.h:263
-#: plugins/Oculars/src/Oculars.cpp:2061
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/Oculars.cpp:2064
+#: plugins/Oculars/src/gui/OcularDialog.cpp:601
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1199
 #: plugins/Satellites/src/ui_satellitesDialog.h:1255
 msgctxt "pixels"
@@ -10864,7 +10866,7 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Сочетание клавиш"
 
-#: src/scripting/StelMainScriptAPI.hpp:1017
+#: src/scripting/StelMainScriptAPI.hpp:1024
 msgid "Press key to continue..."
 msgstr "Нажмите клавишу для продолжения..."
 
@@ -13385,10 +13387,10 @@ msgstr "&Копировать"
 msgid "&Paste"
 msgstr "В&ставить"
 
-#: src/translations.h:841 plugins/Oculars/src/ui_ocularDialog.h:1537
-#: plugins/Oculars/src/ui_ocularDialog.h:1546
-#: plugins/Oculars/src/ui_ocularDialog.h:1552
-#: plugins/Oculars/src/ui_ocularDialog.h:1571
+#: src/translations.h:841 plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: plugins/Oculars/src/ui_ocularDialog.h:1589
 msgid "Delete"
 msgstr "Удалить"
 
@@ -20087,7 +20089,7 @@ msgid "Allow snap to selected object"
 msgstr "Разрешить привязку к выбранному объекту"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
-#: plugins/Oculars/src/ui_ocularDialog.h:1579
+#: plugins/Oculars/src/ui_ocularDialog.h:1597
 #: plugins/Satellites/src/ui_satellitesDialog.h:1384
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:240
@@ -20113,8 +20115,8 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "О плагине"
 
-#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1551
-#: plugins/Oculars/src/ui_ocularDialog.h:1419
+#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1432
 msgid "Oculars"
 msgstr "Окуляры"
 
@@ -20128,59 +20130,59 @@ msgstr ""
 "телескопа (моделируется поле зрения и увеличение). Дополнительно этот плагин"
 " может показать размер кадра сенсора и градусные круги Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:1029
+#: plugins/Oculars/src/Oculars.cpp:1032
 msgid "Please select an object before switching to ocular view."
 msgstr "Выберите объект до включения вида через окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1137
+#: plugins/Oculars/src/Oculars.cpp:1140
 msgid "&Previous ocular"
 msgstr "&Предыдущий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1138
+#: plugins/Oculars/src/Oculars.cpp:1141
 msgid "&Next ocular"
 msgstr "&Следующий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1139
+#: plugins/Oculars/src/Oculars.cpp:1142
 msgid "Select &ocular"
 msgstr "Выбрать &окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1182
+#: plugins/Oculars/src/Oculars.cpp:1185
 msgid "Toggle &crosshair"
 msgstr "Переключить пере&крестие"
 
-#: plugins/Oculars/src/Oculars.cpp:1194
+#: plugins/Oculars/src/Oculars.cpp:1197
 msgid "Configure &Oculars"
 msgstr "Настройка &окуляров"
 
-#: plugins/Oculars/src/Oculars.cpp:1203
+#: plugins/Oculars/src/Oculars.cpp:1206
 msgid "Toggle &CCD"
 msgstr "Переключить &ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1211
+#: plugins/Oculars/src/Oculars.cpp:1214
 msgid "Toggle &Telrad"
 msgstr "Переключить &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1221
+#: plugins/Oculars/src/Oculars.cpp:1224
 msgid "&Previous CCD"
 msgstr "&Предыдущая ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1222
+#: plugins/Oculars/src/Oculars.cpp:1225
 msgid "&Next CCD"
 msgstr "&Следующая ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1223
+#: plugins/Oculars/src/Oculars.cpp:1226
 msgid "&Select CCD"
 msgstr "&Выбрать ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1244
+#: plugins/Oculars/src/Oculars.cpp:1247
 msgid "&Rotate CCD"
 msgstr "По&вернуть ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1256
+#: plugins/Oculars/src/Oculars.cpp:1259
 msgid "&Reset rotation"
 msgstr "&Сбросить поворот"
 
-#: plugins/Oculars/src/Oculars.cpp:1420
+#: plugins/Oculars/src/Oculars.cpp:1423
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:135
 #: plugins/Oculars/src/gui/OcularDialog.cpp:152
@@ -20189,35 +20191,35 @@ msgstr "&Сбросить поворот"
 msgid "Warning!"
 msgstr "Предупреждение!"
 
-#: plugins/Oculars/src/Oculars.cpp:1420
+#: plugins/Oculars/src/Oculars.cpp:1423
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr ""
 "Невозможно отобразить рамку камеры: никаких камер или телескопов не "
 "определено."
 
-#: plugins/Oculars/src/Oculars.cpp:1552
-#: plugins/Oculars/src/ui_ocularDialog.h:1453
+#: plugins/Oculars/src/Oculars.cpp:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1471
 msgid "Ocular view"
 msgstr "Вид в окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1553
+#: plugins/Oculars/src/Oculars.cpp:1556
 msgid "Oculars popup menu"
 msgstr "Контекстное меню окуляров"
 
-#: plugins/Oculars/src/Oculars.cpp:1554
+#: plugins/Oculars/src/Oculars.cpp:1557
 msgid "Show crosshairs"
 msgstr "Показывать перекрестия"
 
-#: plugins/Oculars/src/Oculars.cpp:1555
+#: plugins/Oculars/src/Oculars.cpp:1558
 msgid "Image sensor frame"
 msgstr "Кадр сенсора"
 
-#: plugins/Oculars/src/Oculars.cpp:1556
+#: plugins/Oculars/src/Oculars.cpp:1559
 msgid "Telrad sight"
 msgstr "Поле зрения Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1558
+#: plugins/Oculars/src/Oculars.cpp:1561
 #: plugins/Satellites/src/Satellites.cpp:463
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:202
 #: plugins/NavStars/src/NavStars.cpp:125 plugins/Quasars/src/Quasars.cpp:179
@@ -20235,92 +20237,92 @@ msgstr "Поле зрения Telrad"
 msgid "Show settings dialog"
 msgstr "Показать диалог настройки"
 
-#: plugins/Oculars/src/Oculars.cpp:1560
+#: plugins/Oculars/src/Oculars.cpp:1563
 msgid "Toggle Oculars button bar"
 msgstr "Переключить панель инструментов плагина \"Окуляры\""
 
-#: plugins/Oculars/src/Oculars.cpp:1562
+#: plugins/Oculars/src/Oculars.cpp:1565
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Select next telescope"
 msgstr "Выбрать следующий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1564
+#: plugins/Oculars/src/Oculars.cpp:1567
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
 msgid "Select previous telescope"
 msgstr "Выбрать предыдущий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1566
+#: plugins/Oculars/src/Oculars.cpp:1569
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
 msgid "Select next eyepiece"
 msgstr "Выбрать следующий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1568
+#: plugins/Oculars/src/Oculars.cpp:1571
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Select previous eyepiece"
 msgstr "Выбрать предыдущий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1570
+#: plugins/Oculars/src/Oculars.cpp:1573
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Select next lens"
 msgstr "Выбрать следующую линзу"
 
-#: plugins/Oculars/src/Oculars.cpp:1572
+#: plugins/Oculars/src/Oculars.cpp:1575
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Select previous lens"
 msgstr "Выбрать предыдущую линзу"
 
-#: plugins/Oculars/src/Oculars.cpp:1574
+#: plugins/Oculars/src/Oculars.cpp:1577
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Select next CCD frame"
 msgstr "Выбрать следующую камеру"
 
-#: plugins/Oculars/src/Oculars.cpp:1576
+#: plugins/Oculars/src/Oculars.cpp:1579
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Select previous CCD frame"
 msgstr "Выбрать предыдущую камеру"
 
-#: plugins/Oculars/src/Oculars.cpp:1577
+#: plugins/Oculars/src/Oculars.cpp:1580
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr "Поворот сетки окуляра по часовой стрелке"
 
-#: plugins/Oculars/src/Oculars.cpp:1578
+#: plugins/Oculars/src/Oculars.cpp:1581
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr "Поворот сетки окуляра против часовой стрелки"
 
-#: plugins/Oculars/src/Oculars.cpp:1579
+#: plugins/Oculars/src/Oculars.cpp:1582
 msgid "Toggle sensor crop overlay"
 msgstr "Переключить кадрирование сенсора"
 
-#: plugins/Oculars/src/Oculars.cpp:1580
+#: plugins/Oculars/src/Oculars.cpp:1583
 msgid "Toggle sensor pixel grid"
 msgstr "Переключить пиксельную сетку"
 
-#: plugins/Oculars/src/Oculars.cpp:1581
+#: plugins/Oculars/src/Oculars.cpp:1584
 msgid "Toggle focuser overlay"
 msgstr "Переключить наложение фокусёра"
 
-#: plugins/Oculars/src/Oculars.cpp:1584
+#: plugins/Oculars/src/Oculars.cpp:1587
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1289
 msgid "Reset the sensor frame rotation"
 msgstr "Сбросить поворот рамки сенсора"
 
-#: plugins/Oculars/src/Oculars.cpp:1585
+#: plugins/Oculars/src/Oculars.cpp:1588
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1292
 msgid "Reset the prism rotation"
 msgstr "Сбросить поворот призмы"
 
-#: plugins/Oculars/src/Oculars.cpp:1978
+#: plugins/Oculars/src/Oculars.cpp:1981
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt of cross"
 msgstr "Аз./Выс. перекрестия"
 
-#: plugins/Oculars/src/Oculars.cpp:1998
+#: plugins/Oculars/src/Oculars.cpp:2001
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "П.В./Скл. (J2000.0) перекрестия"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:2042
+#: plugins/Oculars/src/Oculars.cpp:2045
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:562
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 msgid "\"/px"
@@ -20328,7 +20330,7 @@ msgstr "\"/пкс"
 
 #. TRANSLATORS: "Max exposure" is short version of phrase "Max time of
 #. exposure"
-#: plugins/Oculars/src/Oculars.cpp:2079
+#: plugins/Oculars/src/Oculars.cpp:2082
 msgid "Max exposure"
 msgstr "Макс. экпозиция"
 
@@ -20336,7 +20338,7 @@ msgstr "Макс. экпозиция"
 #. TRANSLATORS: seconds.
 #. TRANSLATORS: Unit of measure for time - seconds
 #. TRANSLATORS: duration in seconds
-#: plugins/Oculars/src/Oculars.cpp:2079
+#: plugins/Oculars/src/Oculars.cpp:2082
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1193
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:245
 #: plugins/Planes/src/AircraftObject.cpp:213
@@ -20345,125 +20347,125 @@ msgctxt "time"
 msgid "s"
 msgstr "с"
 
-#: plugins/Oculars/src/Oculars.cpp:2326
+#: plugins/Oculars/src/Oculars.cpp:2325
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:352
 msgid "Binocular"
 msgstr "Бинокль"
 
-#: plugins/Oculars/src/Oculars.cpp:2326
+#: plugins/Oculars/src/Oculars.cpp:2325
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
 msgid "Ocular"
 msgstr "Окуляр"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2346
+#: plugins/Oculars/src/Oculars.cpp:2345
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:395
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ФР окуляра: %1 мм"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2353
+#: plugins/Oculars/src/Oculars.cpp:2352
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:404
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Видимое ПЗ окуляра: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2364
+#: plugins/Oculars/src/Oculars.cpp:2363
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:434
 #, qt-format
 msgid "Lens #%1"
 msgstr "Линза #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2368
+#: plugins/Oculars/src/Oculars.cpp:2367
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:438
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Линза #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2373
+#: plugins/Oculars/src/Oculars.cpp:2372
 msgid "Lens: none"
 msgstr "Линза: нет"
 
-#: plugins/Oculars/src/Oculars.cpp:2388 plugins/Oculars/src/Oculars.cpp:2449
+#: plugins/Oculars/src/Oculars.cpp:2387 plugins/Oculars/src/Oculars.cpp:2448
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Телескоп #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2397
+#: plugins/Oculars/src/Oculars.cpp:2396
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Увеличение: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2404
+#: plugins/Oculars/src/Oculars.cpp:2403
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Выходной зрачок: %1 мм"
 
-#: plugins/Oculars/src/Oculars.cpp:2411
+#: plugins/Oculars/src/Oculars.cpp:2410
 #, qt-format
 msgid "FOV: %1"
 msgstr "Поле зрения: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2432
+#: plugins/Oculars/src/Oculars.cpp:2431
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Размеры: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2433
+#: plugins/Oculars/src/Oculars.cpp:2432
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 msgid "Binning"
 msgstr "Биннинг"
 
-#: plugins/Oculars/src/Oculars.cpp:2437
+#: plugins/Oculars/src/Oculars.cpp:2436
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:510
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Сенсор #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2441
+#: plugins/Oculars/src/Oculars.cpp:2440
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Сенсор #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2454
+#: plugins/Oculars/src/Oculars.cpp:2453
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Телескоп #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2797
+#: plugins/Oculars/src/Oculars.cpp:2796
 msgid "&Lens"
 msgstr "&Линза"
 
-#: plugins/Oculars/src/Oculars.cpp:2798
+#: plugins/Oculars/src/Oculars.cpp:2797
 msgid "&Previous lens"
 msgstr "&Предыдущая линза"
 
-#: plugins/Oculars/src/Oculars.cpp:2799
+#: plugins/Oculars/src/Oculars.cpp:2798
 msgid "&Next lens"
 msgstr "&Следующая линза"
 
-#: plugins/Oculars/src/Oculars.cpp:2801
+#: plugins/Oculars/src/Oculars.cpp:2800
 msgid "None"
 msgstr "Нет"
 
-#: plugins/Oculars/src/Oculars.cpp:2828
+#: plugins/Oculars/src/Oculars.cpp:2827
 msgid "&Telescope"
 msgstr "&Телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:2829
+#: plugins/Oculars/src/Oculars.cpp:2828
 msgid "&Previous telescope"
 msgstr "&Предыдущий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:2830
+#: plugins/Oculars/src/Oculars.cpp:2829
 msgid "&Next telescope"
 msgstr "&Следующий телескоп"
 
@@ -20728,60 +20730,60 @@ msgid "Cannot delete the last telescope."
 msgstr "Невозможно удалить последний телескоп."
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:582
+#: plugins/Oculars/src/gui/OcularDialog.cpp:583
 msgid "tFOV:"
 msgstr "Истинное поле зрения:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:584
+#: plugins/Oculars/src/gui/OcularDialog.cpp:585
 msgid "Magnification factor:"
 msgstr "Кратность:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:585
-#: plugins/Oculars/src/ui_ocularDialog.h:1576
+#: plugins/Oculars/src/gui/OcularDialog.cpp:586
+#: plugins/Oculars/src/ui_ocularDialog.h:1594
 msgid "Diameter:"
 msgstr "Диаметр:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:590
-#: plugins/Oculars/src/ui_ocularDialog.h:1541
+#: plugins/Oculars/src/gui/OcularDialog.cpp:591
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "aFOV:"
 msgstr "Видимое поле зрения:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:591
-#: plugins/Oculars/src/ui_ocularDialog.h:1542
-#: plugins/Oculars/src/ui_ocularDialog.h:1577
+#: plugins/Oculars/src/gui/OcularDialog.cpp:592
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
+#: plugins/Oculars/src/ui_ocularDialog.h:1595
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:770
 msgid "Focal length:"
 msgstr "Фокус:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:592
-#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/gui/OcularDialog.cpp:593
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Field stop:"
 msgstr "Полевая диафрагма:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:626
+#: plugins/Oculars/src/gui/OcularDialog.cpp:627
 msgid "Oculars Plug-in"
 msgstr "Плагин \"Окуляры\""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:634
+#: plugins/Oculars/src/gui/OcularDialog.cpp:635
 msgid "Barlow lens feature"
 msgstr "Функция линзы Барлоу"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:635
+#: plugins/Oculars/src/gui/OcularDialog.cpp:636
 msgid "Sensor crop overlay feature"
 msgstr "Функция наложения кадрирования сенсора"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:636
+#: plugins/Oculars/src/gui/OcularDialog.cpp:637
 msgid "Pixel grid feature"
 msgstr "Функция пиксельной сетки"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:640
+#: plugins/Oculars/src/gui/OcularDialog.cpp:641
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1023
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "Обзор"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:642
+#: plugins/Oculars/src/gui/OcularDialog.cpp:643
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -20794,11 +20796,11 @@ msgstr ""
 "и ПЗС-матриц. При первом запуске будут добавлены несколько распространенных "
 "окуляров, телскопов и цифровых приемников для работы плагина."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:643
+#: plugins/Oculars/src/gui/OcularDialog.cpp:644
 msgid "You can choose to scale the image you see on the screen."
 msgstr "Вы можете масштабировать изображение, которое вы видите на экране."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:644
+#: plugins/Oculars/src/gui/OcularDialog.cpp:645
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -20806,7 +20808,7 @@ msgstr ""
 "Это сделано для того, чтобы показать вам лучший способ для сравнения "
 "сочетания одного окуляра/телескопа по сравнению с другим сочетанием."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:645
+#: plugins/Oculars/src/gui/OcularDialog.cpp:646
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -20814,7 +20816,7 @@ msgstr ""
 "Одинаковый окуляр с двумя различными телескопами с различным фокусным "
 "расстоянием будет давать два разных поля зрения."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:646
+#: plugins/Oculars/src/gui/OcularDialog.cpp:647
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -20822,7 +20824,7 @@ msgstr ""
 "Компромисс в том, что при масштабировании изображения много места на экране "
 "может быть потрачено впустую."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:647
+#: plugins/Oculars/src/gui/OcularDialog.cpp:648
 msgid ""
 "Therefore we recommend that you leave it off, unless you feel you have a "
 "need for it."
@@ -20830,11 +20832,11 @@ msgstr ""
 "Для этого мы рекомендуем вам оставить его, если вы чувствуете, что у вас "
 "есть в этом потребность."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:648
+#: plugins/Oculars/src/gui/OcularDialog.cpp:649
 msgid "You can toggle a crosshair in the view."
 msgstr "Вы можете включать и выключать перекрестие в поле зрения окуляра."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:649
+#: plugins/Oculars/src/gui/OcularDialog.cpp:650
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder. This feature draws three concentric circles "
@@ -20846,7 +20848,7 @@ msgstr ""
 "вы ожидали бы увидеть невооруженным глазом через искатель Telrad (или "
 "аналогичный)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:650
+#: plugins/Oculars/src/gui/OcularDialog.cpp:651
 msgid ""
 "You can adjust the diameters or even add a fourth circle if you have a "
 "different finder, or revert to the Telrad standard sizes."
@@ -20854,18 +20856,18 @@ msgstr ""
 "Вы можете отрегулировать диаметры или даже добавить четвертый круг, если у "
 "вас есть другой искатель, или вернуться к стандартным размерам Telrad."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:651
+#: plugins/Oculars/src/gui/OcularDialog.cpp:652
 msgid "If you find any issues, please let me know. Enjoy!"
 msgstr ""
 "Если вы обнаружите какие-либо ошибки, пожалуйста, дайте мне знать. "
 "Наслаждайтесь!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:654
+#: plugins/Oculars/src/gui/OcularDialog.cpp:655
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
 msgid "Hot Keys"
 msgstr "Горячие клавиши"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:655
+#: plugins/Oculars/src/gui/OcularDialog.cpp:656
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
@@ -20873,14 +20875,14 @@ msgstr ""
 "Клавиатурные сочетания плагина можно отредактировать в Редакторе "
 "клавиатурных сокращений (F7)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:658
-#: plugins/Pulsars/src/Pulsar.cpp:297
+#: plugins/Oculars/src/gui/OcularDialog.cpp:659
+#: plugins/Pulsars/src/Pulsar.cpp:311
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:616
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Notes"
 msgstr "Примечания"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:659
+#: plugins/Oculars/src/gui/OcularDialog.cpp:660
 msgid ""
 "The sensor view has a feature to show a sensor crop overlay with information"
 " about the crop size. The size of this rectangle may be adjusted when "
@@ -20892,21 +20894,21 @@ msgstr ""
 " когда биннинг активен (например, размер кадрирования 100 пкс будет "
 "скорректирован до 99 пкс при биннинге 3)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:660
+#: plugins/Oculars/src/gui/OcularDialog.cpp:661
 #, qt-format
 msgid ""
 "In this case, information about crop size overlay will be marked by %1."
 msgstr ""
 "В этом случае информация о размере рамки кадрирования будет отмечена %1."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:661
+#: plugins/Oculars/src/gui/OcularDialog.cpp:662
 msgid ""
 "This mark is also displayed if the crop size is larger than the sensor size."
 msgstr ""
 "Эта метка также отображается, если размер кадрирования больше размера "
 "сенсора."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:662
+#: plugins/Oculars/src/gui/OcularDialog.cpp:663
 msgid ""
 "The sensor view has also a feature to show a max time of exposure for "
 "selected solar system objects (the mount has sidereal speed enabled) to "
@@ -20916,148 +20918,156 @@ msgstr ""
 "экспозиции для выбранных объектов солнечной системы (у монтировки включена "
 "звездная скорость), чтобы избежать движения более чем на 1 пиксель в ширину."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1420
+#: plugins/Oculars/src/ui_ocularDialog.h:1433
 msgid "Interface"
 msgstr "Внешний вид"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1424
+#: plugins/Oculars/src/ui_ocularDialog.h:1437
 msgid "Arrow button scale (requires restart)"
 msgstr "Масштаб кнопок-стрелок (требуется перезагрузка)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1426
+#: plugins/Oculars/src/ui_ocularDialog.h:1439
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
 msgstr ""
 "Отметьте это, если вы хотите использовать стартовое значение поля зрения."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1428
+#: plugins/Oculars/src/ui_ocularDialog.h:1441
 msgid "Restore FOV to initial values"
 msgstr "Восстановление поля зрения к исходному значению"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1429
+#: plugins/Oculars/src/ui_ocularDialog.h:1442
 msgid "Show resolution criteria"
 msgstr "Показывать критерии разрешения"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1430
+#: plugins/Oculars/src/ui_ocularDialog.h:1443
 msgid "On-screen control panel"
 msgstr "Экранная панель управления"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
-#: plugins/Oculars/src/ui_ocularDialog.h:1436
+#: plugins/Oculars/src/ui_ocularDialog.h:1445
+#: plugins/Oculars/src/ui_ocularDialog.h:1449
 msgid "Font size of text on on-screen control panel"
 msgstr "Размер шрифта текста экранной панели управления"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1434
+#: plugins/Oculars/src/ui_ocularDialog.h:1447
 msgid "...font size"
 msgstr "...размер шрифта"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
 msgstr ""
 "Отметьте это, если вы хотите использовать стартовое значение направления."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1454
 msgid "Restore direction to initial values"
 msgstr "Восстановление направления к исходному значению"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1443
+#: plugins/Oculars/src/ui_ocularDialog.h:1456
 msgid "Color for ocular circles and sensor frames"
 msgstr "Цвет для окулярных кругов и рамок сенсоров"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1446
+#: plugins/Oculars/src/ui_ocularDialog.h:1459
 msgid "Line Color"
 msgstr "Цвет линии"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1448
-msgid "Color for text which is shown only when GUI is switched off."
+#: plugins/Oculars/src/ui_ocularDialog.h:1461
+msgid "Color for text which is shown only when GUI is switched off"
 msgstr ""
 "Цвет текста, который отображается только при выключенном графическом "
-"интерфейсе."
+"интерфейсе"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1451
+#: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Text Color"
 msgstr "Цвет текста"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1466
+msgid "Color for reticle and crosshair"
+msgstr "Цвет прицельной сетки и перекрестия"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1469
+msgid "Reticle Color"
+msgstr "Цвет прицельной сетки"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1470
 msgid "Show oculars button on toolbar"
 msgstr "Показывать кнопку окуляров на панели инструментов"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1455
+#: plugins/Oculars/src/ui_ocularDialog.h:1473
 msgid ""
 "Show FOV circles relative to the apparent FOV of the widest-angle ocular"
 msgstr ""
 "Показывать круги поля зрения относительно видимого поля зрения самого "
 "широкоугольного окуляра"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1457
+#: plugins/Oculars/src/ui_ocularDialog.h:1475
 msgid "Scale image circle"
 msgstr "Масштабировать изображение по кругу"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1476
 msgid "Hide grids and lines when enabled"
 msgstr "Скрыть сетки и линии при включении"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1459
+#: plugins/Oculars/src/ui_ocularDialog.h:1477
 msgid "Enable only if an object is selected"
 msgstr "Включить, только если объект выбран"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1461
+#: plugins/Oculars/src/ui_ocularDialog.h:1479
 msgid "Show border circle"
 msgstr "Показывать круг границы"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1463
+#: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Show FOV outline"
 msgstr "Показывать окантовку ПЗ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1465
+#: plugins/Oculars/src/ui_ocularDialog.h:1483
 msgid "Apply limit for stellar magnitude based on telescope aperture"
 msgstr "Применить ограничение звездной величины на основе апертуры телескопа"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1467
+#: plugins/Oculars/src/ui_ocularDialog.h:1485
 msgid "Auto-limit stellar magnitude"
 msgstr "Ограничивать звёздную величину"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1469
+#: plugins/Oculars/src/ui_ocularDialog.h:1487
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr ""
 "Показать направления на стороны света в экваториальной системе координат"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1471
+#: plugins/Oculars/src/ui_ocularDialog.h:1489
 msgid "Show compass rose"
 msgstr "Показать розу компаса"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1473
+#: plugins/Oculars/src/ui_ocularDialog.h:1491
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "Ориентировать перекрестие в экваториальной системе координат"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1475
+#: plugins/Oculars/src/ui_ocularDialog.h:1493
 msgid "Align crosshair"
 msgstr "Ориентировать перекрестие"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1477
+#: plugins/Oculars/src/ui_ocularDialog.h:1495
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "Разрешить видимость вне круга поля зрения окуляра."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1479
+#: plugins/Oculars/src/ui_ocularDialog.h:1497
 msgid "Use semi-transparent mask"
 msgstr "Использовать полупрозрачную маску"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1499
 msgid "Opacity of semi-transparent mask"
 msgstr "Непрозрачность полупрозрачной маски"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1501
 msgid "Sensor view"
 msgstr "Вид в сенсор"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1484
+#: plugins/Oculars/src/ui_ocularDialog.h:1502
 msgid "Use size of focuser:"
 msgstr "Использовать размер фокусёра:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1486
+#: plugins/Oculars/src/ui_ocularDialog.h:1504
 msgid ""
 "Enable a rectangular overlay showing the effective size of a number of "
 "pixels."
@@ -21065,52 +21075,52 @@ msgstr ""
 "Включить прямоугольное наложение, показывающее эффективный размер количества"
 " пикселей."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1488
+#: plugins/Oculars/src/ui_ocularDialog.h:1506
 msgid "Show sensor crop overlay"
 msgstr "Показывать кадрирование сенсора"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1489
+#: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "Overlay size (px)"
 msgstr "Размер наложения (пкс)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1491
+#: plugins/Oculars/src/ui_ocularDialog.h:1509
 msgid "Horizontal size (width)"
 msgstr "Горизонтальный размер (ширина)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1494
+#: plugins/Oculars/src/ui_ocularDialog.h:1512
 msgid "Vertical size (height)"
 msgstr "Вертикальный размер (высота)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1497
+#: plugins/Oculars/src/ui_ocularDialog.h:1515
 msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
 msgstr ""
 "Включить пиксельную сетку объединенных (биннингированных) пикселей сенсора "
 "внутри рамки кадрирования сенсора."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1499
+#: plugins/Oculars/src/ui_ocularDialog.h:1517
 msgid "Show pixel grid"
 msgstr "Пиксельная сетка"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1500
+#: plugins/Oculars/src/ui_ocularDialog.h:1518
 msgid "Enable autozoom when switching CCD"
 msgstr "Включить автомасшабирование для ПЗС"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1502
+#: plugins/Oculars/src/ui_ocularDialog.h:1520
 msgid ""
 "Show maximum exposure time for Solar system objects to avoid movement streak"
 msgstr ""
 "Показывать максимальное время экспозиции для объектов Солнечной системы, "
 "чтобы избежать полосы движения"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1504
+#: plugins/Oculars/src/ui_ocularDialog.h:1522
 msgid "Show max exposure time for moving objects"
 msgstr "Показывать макс. время экспозиции для движущихся объектов"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1505
+#: plugins/Oculars/src/ui_ocularDialog.h:1523
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Использовать градусы и минуты для поля зрения сенсора"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1507
+#: plugins/Oculars/src/ui_ocularDialog.h:1525
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -21118,98 +21128,98 @@ msgstr ""
 "Включить автоматическое переключение типа монтировки из настроек телескопа "
 "для горизонтальной ориентации ПЗС кадра."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1509
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
 msgid "Enable automatic switch of mount type"
 msgstr "Включить автоматическое переключение типа монтировки"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1511
+#: plugins/Oculars/src/ui_ocularDialog.h:1529
 msgid "Color for focuser overlay line"
 msgstr "Цвет линии наложения фокусёра"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1513
+#: plugins/Oculars/src/ui_ocularDialog.h:1531
 msgid "Show focuser overlay"
 msgstr "Показывать наложение фокусёра"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1514
+#: plugins/Oculars/src/ui_ocularDialog.h:1532
 msgid "Use horizontal coordinates instead equatorial coordinates"
 msgstr "Использовать горизонт. вместо экваториальных координат"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1515
+#: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid "Show angular limits of the off-axis guide"
 msgstr "Показывать угловые пределы внеосевого гида"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1516
+#: plugins/Oculars/src/ui_ocularDialog.h:1534
 msgid "Telrad view"
 msgstr "Вид в Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1520
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr "ПЗ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1522
+#: plugins/Oculars/src/ui_ocularDialog.h:1540
 msgid "FOV for circle 1"
 msgstr "Поле зрения для первого круга"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1525
+#: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "FOV for circle 2"
 msgstr "Поле зрения для второго круга"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1528
+#: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "FOV for circle 3"
 msgstr "Поле зрения для третьего круга"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1531
+#: plugins/Oculars/src/ui_ocularDialog.h:1549
 msgid "FOV for circle 4"
 msgstr "Поле зрения для четвёртого круга"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1533
+#: plugins/Oculars/src/ui_ocularDialog.h:1551
 msgid "Restore original Telrad FOV"
 msgstr "Восстановить ПЗ оригинального Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1534
+#: plugins/Oculars/src/ui_ocularDialog.h:1552
 msgid "Enable autozoom when switching Telrad"
 msgstr "Включить автомасшабирование для Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1535
+#: plugins/Oculars/src/ui_ocularDialog.h:1553
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:228
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:401
 #: plugins/Planes/src/ui_planesDialog.h:256
 msgid "General"
 msgstr "Основные"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1536
-#: plugins/Oculars/src/ui_ocularDialog.h:1545
-#: plugins/Oculars/src/ui_ocularDialog.h:1551
-#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1588
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1048
 msgid "Add"
 msgstr "Добавить"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1557
 msgid "Has permanent cross-hairs"
 msgstr "Имеет постоянное перекрестие"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Binoculars"
 msgstr "Бинокль"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1543
-#: plugins/Oculars/src/ui_ocularDialog.h:1547
-#: plugins/Oculars/src/ui_ocularDialog.h:1557
-#: plugins/Oculars/src/ui_ocularDialog.h:1572
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1575
+#: plugins/Oculars/src/ui_ocularDialog.h:1590
 #: plugins/Satellites/src/ui_satellitesDialog.h:1295
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
 msgstr "Название:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1544
+#: plugins/Oculars/src/ui_ocularDialog.h:1562
 msgid "Eyepieces"
 msgstr "Окуляры"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1548
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -21217,85 +21227,85 @@ msgstr ""
 "Значение кратности >1 увеличивает фокусное расстояние (линза Барлоу). "
 "Значение кратности <1 уменьшает фокусное расстояние (линза Шэпли)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1549
+#: plugins/Oculars/src/ui_ocularDialog.h:1567
 msgid "Multiplier:"
 msgstr "Множитель:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1550
+#: plugins/Oculars/src/ui_ocularDialog.h:1568
 msgid "Lenses"
 msgstr "Линзы"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1553
+#: plugins/Oculars/src/ui_ocularDialog.h:1571
 msgid "Off-Axis guider"
 msgstr "Внеосевой гид"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1572
 msgid "Resolution y:"
 msgstr "Разрешение по y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1573
 msgid "Binning x:"
 msgstr "Биннинг по x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1556
+#: plugins/Oculars/src/ui_ocularDialog.h:1574
 msgid "Resolution x:"
 msgstr "Разрешение по x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1558
+#: plugins/Oculars/src/ui_ocularDialog.h:1576
 msgid "Prism/CCD height:"
 msgstr "Высота призмы/ПЗС:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1560
+#: plugins/Oculars/src/ui_ocularDialog.h:1578
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the center of "
 "the Prism"
 msgstr "Это расстояние между центрами сенсора и призмы"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1562
+#: plugins/Oculars/src/ui_ocularDialog.h:1580
 msgid "Prism/CCD distance:"
 msgstr "Расстояние до призмы/ПЗС:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: plugins/Oculars/src/ui_ocularDialog.h:1581
 msgid "Rotation Angle:"
 msgstr "Угол поворота:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1582
 msgid "Binning y:"
 msgstr "Биннинг по y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1583
 msgid "Prism/CCD width:"
 msgstr "Ширина призмы/ПЗС:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1566
+#: plugins/Oculars/src/ui_ocularDialog.h:1584
 msgid "Chip height:"
 msgstr "Высота чипа:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1567
+#: plugins/Oculars/src/ui_ocularDialog.h:1585
 msgid "Chip width:"
 msgstr "Ширина чипа:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1568
+#: plugins/Oculars/src/ui_ocularDialog.h:1586
 msgid "Position angle:"
 msgstr "Позиционный угол:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1587
 msgid "Sensors"
 msgstr "Сенсоры"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1573
+#: plugins/Oculars/src/ui_ocularDialog.h:1591
 msgid "Horizontal flip"
 msgstr "Горизонтальное отражение"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1574
+#: plugins/Oculars/src/ui_ocularDialog.h:1592
 msgid "Vertical flip"
 msgstr "Вертикальное отражение"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1575
+#: plugins/Oculars/src/ui_ocularDialog.h:1593
 msgid "Equatorial Mount"
 msgstr "Экваториальная монтировка"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1578
+#: plugins/Oculars/src/ui_ocularDialog.h:1596
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:395
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes"
@@ -22276,7 +22286,7 @@ msgstr "Радиосвязь"
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Satellites/src/Satellite.cpp:504
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:83
-#: plugins/Pulsars/src/Pulsar.cpp:283
+#: plugins/Pulsars/src/Pulsar.cpp:297
 msgctxt "frequency"
 msgid "MHz"
 msgstr "МГц"
@@ -23498,7 +23508,7 @@ msgid "Min."
 msgstr "Мин."
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:261
-#: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Exoplanets/src/Exoplanet.cpp:365
+#: plugins/Pulsars/src/Pulsar.cpp:252 plugins/Exoplanets/src/Exoplanet.cpp:365
 msgid "Eccentricity"
 msgstr "Эксцентриситет"
 
@@ -26529,136 +26539,140 @@ msgstr "Включить отображение распределения пу�
 msgid "Use separate color for pulsars with glitches"
 msgstr "Использовать отдельный цвет для пульсаров с глитчами"
 
-#: plugins/Pulsars/src/Pulsar.cpp:191
+#: plugins/Pulsars/src/Pulsar.cpp:194
 msgid "registered glitches"
 msgstr "зарегистрированных глитчей"
 
-#: plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:205
 msgid "Proper motion"
 msgstr "Собственное движение"
 
-#: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/Pulsars/src/Pulsar.cpp:206 plugins/Pulsars/src/Pulsar.cpp:208
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "мсд/год"
 
-#: plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/Pulsars/src/Pulsar.cpp:208
 msgid "Proper motions by axes"
 msgstr "Собственные движения по осям"
 
-#: plugins/Pulsars/src/Pulsar.cpp:213
+#: plugins/Pulsars/src/Pulsar.cpp:216
 msgid "Barycentric period"
 msgstr "Барицентрический период"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:216
+#: plugins/Pulsars/src/Pulsar.cpp:219
 msgctxt "period"
 msgid "s"
 msgstr "с"
 
-#: plugins/Pulsars/src/Pulsar.cpp:219
+#: plugins/Pulsars/src/Pulsar.cpp:222
 msgid "Time derivative of barycentric period"
 msgstr "Производная барицентрического периода по времени"
 
-#: plugins/Pulsars/src/Pulsar.cpp:224
+#: plugins/Pulsars/src/Pulsar.cpp:227
 msgid "Dispersion measure"
 msgstr "Дисперсия измерения"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:227
+#: plugins/Pulsars/src/Pulsar.cpp:230
 msgctxt "distance"
 msgid "pc"
 msgstr "пк"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:229
+#: plugins/Pulsars/src/Pulsar.cpp:232
 msgctxt "distance"
 msgid "cm"
 msgstr "см"
 
-#: plugins/Pulsars/src/Pulsar.cpp:235
+#: plugins/Pulsars/src/Pulsar.cpp:238
 msgid "Spin down energy loss rate"
 msgstr "Скорость потери энергии осевого вращения"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:238
+#: plugins/Pulsars/src/Pulsar.cpp:241
 msgctxt "power"
 msgid "ergs/s"
 msgstr "эрг/с"
 
-#: plugins/Pulsars/src/Pulsar.cpp:243
+#: plugins/Pulsars/src/Pulsar.cpp:246
 msgid "Binary period of pulsar"
 msgstr "Сидерический период обращения пульсара"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:246 plugins/Exoplanets/src/Exoplanet.cpp:361
+#: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgctxt "time period"
 msgid "days"
 msgstr "дн."
 
-#: plugins/Pulsars/src/Pulsar.cpp:254
+#: plugins/Pulsars/src/Pulsar.cpp:257
 msgid "Annual parallax"
 msgstr "Годичный параллакс"
 
-#: plugins/Pulsars/src/Pulsar.cpp:262
+#: plugins/Pulsars/src/Pulsar.cpp:265
+msgid "Distance based on electron density model"
+msgstr "Расстояние на основе электронной модели плотности"
+
+#: plugins/Pulsars/src/Pulsar.cpp:276
 msgid "Distance based on an association with another object"
 msgstr "Расстояние на основе связи с другим объектом"
 
-#: plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Pulsars/src/Pulsar.cpp:288
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr "Ширина профиля 50% от пика"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:277
+#: plugins/Pulsars/src/Pulsar.cpp:291
 msgctxt "time"
 msgid "ms"
 msgstr "мс"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:281
+#: plugins/Pulsars/src/Pulsar.cpp:295
 msgid "Time averaged flux density at"
 msgstr "Среднее время плотности потока на"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:285
+#: plugins/Pulsars/src/Pulsar.cpp:299
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:314
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr "мЯн"
 
-#: plugins/Pulsars/src/Pulsar.cpp:386
+#: plugins/Pulsars/src/Pulsar.cpp:401
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 "аномальный рентгеновский пульсар или мягкий гамма-репитер с выявленными "
 "пульсациями"
 
-#: plugins/Pulsars/src/Pulsar.cpp:391
+#: plugins/Pulsars/src/Pulsar.cpp:406
 msgid "has one or more binary companions"
 msgstr "двойной или кратный пульсар"
 
-#: plugins/Pulsars/src/Pulsar.cpp:396
+#: plugins/Pulsars/src/Pulsar.cpp:411
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 "с импульсами излучения от радио до инфракрасного диапазона или более высоких"
 " частот"
 
-#: plugins/Pulsars/src/Pulsar.cpp:401
+#: plugins/Pulsars/src/Pulsar.cpp:416
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 "с импульсами излучения в инфракрасном диапазоне или более высоких частот"
 
-#: plugins/Pulsars/src/Pulsar.cpp:406
+#: plugins/Pulsars/src/Pulsar.cpp:421
 msgid "with pulsed emission in the radio band"
 msgstr "с импульсами излучения в радиодиапазоне"
 
-#: plugins/Pulsars/src/Pulsar.cpp:411
+#: plugins/Pulsars/src/Pulsar.cpp:426
 msgid "with intermittently pulsed radio emission"
 msgstr "со сбоями в периоде в радиодиапазоне"
 
-#: plugins/Pulsars/src/Pulsar.cpp:416
+#: plugins/Pulsars/src/Pulsar.cpp:431
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -26666,11 +26680,11 @@ msgstr ""
 "изолированная нейтронная звезда с импульсами теплового рентгеновского "
 "излучения без радиоизлучения"
 
-#: plugins/Pulsars/src/Pulsar.hpp:84
+#: plugins/Pulsars/src/Pulsar.hpp:85
 msgid "pulsar"
 msgstr "пульсар"
 
-#: plugins/Pulsars/src/Pulsar.hpp:84
+#: plugins/Pulsars/src/Pulsar.hpp:85
 msgid "pulsar with glitches"
 msgstr "пульсар с глитчами"
 

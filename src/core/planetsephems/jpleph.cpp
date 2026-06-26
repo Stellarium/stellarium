@@ -151,6 +151,8 @@ double DLL_FUNC jpl_get_double(const void *ephem, const int value)
 int DLL_FUNC jpl_pleph(void *ephem, const double et, const int ntarg,
                       const int ncent, double rrd[], const int calc_velocity)
 {
+    QMutexLocker locker(&mutex);
+
     struct jpl_eph_data *eph = static_cast<struct jpl_eph_data *>(ephem);
     double pv[13][6]={{0.}};/* pv is the position/velocity array
                              NUMBERED FROM ZERO: 0=Mercury,1=Venus,...
@@ -588,8 +590,6 @@ static unsigned int dimension(const unsigned int idx)
 int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
                           double pv[][6], double nut[4], const int bary)
 {
-	QMutexLocker locker(&mutex);
-
 	struct jpl_eph_data *eph = static_cast<struct jpl_eph_data *>(ephem);
 	unsigned i, j, n_intervals;
 	double *buf = eph->cache;
