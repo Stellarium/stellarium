@@ -4055,7 +4055,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:2279
 msgctxt "distance, astronomical unit"
 msgid "Astronomical Units"
-msgstr "Астрономических Единиц"
+msgstr "Астрономических единиц"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
 #: src/core/modules/Planet.cpp:2281
@@ -4067,13 +4067,13 @@ msgstr "или, световой промежуток"
 #: src/core/modules/Planet.cpp:2290 src/core/modules/Planet.cpp:2313
 msgctxt "distance"
 msgid "kilometers"
-msgstr "километров"
+msgstr "км"
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #: src/core/modules/Planet.cpp:2297 src/core/modules/Planet.cpp:2320
 msgctxt "distance"
 msgid "Million kilometers"
-msgstr "Миллионов километров"
+msgstr "млн км"
 
 #: src/core/modules/Planet.cpp:2300
 msgctxt "object narration"
@@ -4089,7 +4089,7 @@ msgstr "Текущее расстояние составляет"
 #, qt-format
 msgctxt "planet narration"
 msgid "The orbital velocity of %1 is %2 kilometers per second"
-msgstr "Орбитальная скорость %1 составляет %2 километров в секунду."
+msgstr "Орбитальная скорость %1 составляет %2 км/с"
 
 #: src/core/modules/Planet.cpp:2341
 #, qt-format
@@ -4271,13 +4271,13 @@ msgstr "с абсолютной звёздной величиной"
 #, qt-format
 msgctxt "object narration"
 msgid "Its radial velocity is %1 kilometers per second."
-msgstr "Лучевая скорость %1 километр в секунду."
+msgstr "Лучевая скорость %1 км/с."
 
 #: src/core/modules/StarWrapper.cpp:478
 #, qt-format
 msgctxt "object narration"
 msgid "Its position angle as given for %1 is %2 degrees."
-msgstr "Позиционный угол на дату %1 — %2 градусов."
+msgstr "Позиционный угол на дату %1 — %2°."
 
 #: src/core/modules/StarWrapper.cpp:479 src/core/modules/StarWrapper.cpp:486
 msgctxt "coordinates for current epoch"
@@ -4290,7 +4290,7 @@ msgstr "текущая дата"
 #, qt-format
 msgctxt "object narration"
 msgid "Its component separation for %1 is %2 arc-seconds (%3). "
-msgstr "Разделение компонентов на дату %1 — %2 секунд дуги (%3)."
+msgstr "Разделение компонентов на дату %1 — %2 угловых сек (%3)."
 
 #. TRANSLATORS: This is about the angular separation between components of a
 #. binary star.
@@ -4298,7 +4298,7 @@ msgstr "Разделение компонентов на дату %1 — %2 се
 #, qt-format
 msgctxt "object narration"
 msgid "Its component separation for %1 is %2 arc-seconds. "
-msgstr "Разделение компонентов на дату %1 — %2 секунд дуги."
+msgstr "Разделение компонентов на дату %1 — %2 угловых сек."
 
 #: src/core/modules/StarWrapper.cpp:670 src/core/modules/StarWrapper.cpp:789
 #, qt-format
