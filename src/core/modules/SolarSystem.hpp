@@ -997,6 +997,11 @@ public:
 	//! Get the list of all minor bodies names.
 	const QStringList getMinorBodiesList() const { return minorBodies; }
 
+	//! Draw a tiny symbol at x/y
+	bool drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color);
+	//! return brightness for markers (from a fader, 0..1)
+	float getMarkerValue() const {return markerFader.getInterstate();}
+
 private slots:
 	//! Called when a new object is selected.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
@@ -1342,7 +1347,6 @@ private:
 	//! Number of additional threads. This could be automatically derived, but for now we can experiment.
 	int extraThreads = 0;
 
-	// BEGIN OF BLOCK RELATED TO MASS MARKER DISPLAY
 	// Variables used for GL optimization when displaying little markers for the minor bodies.
 	// These data structures were borrowed from StelSkyDrawer. However, we need only one color.
 	// Maybe, to extend the idea, have several such Arrays for category-colored main belt, Jupiter Trojans, NEA, KBO etc.
@@ -1386,12 +1390,6 @@ private:
 	StelTextureSP markerCircleTex; // An optional marker to have "something" in the sky even if object not visible.
 	LinearFader markerFader;         // Useful for markers displayed for minor bodies regardless of magnitude
 
-public:
-	//! Draw a tiny symbol at x/y
-	bool drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color);
-	//! return brightness for markers (from a fader, 0..1)
-	float getMarkerValue() const {return markerFader.getInterstate();}
-
 private:
 	//! absolute value of the dimmest SSO drawn by drawAsteroidMarker()
 	double markerMagThreshold = 15.0;
@@ -1402,7 +1400,6 @@ private:
 	//! 3: Ruslan's 1-pass loop (suspected to have a logical error.)
 	//! To configure the experimental new solution, add [devel]/compute_positions_algorithm=0|1|2|3. Default=2
 	int computePositionsAlgorithm;
-	// END OF BLOCK RELATED TO MASS MARKER DISPLAY
 };
 
 
