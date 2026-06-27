@@ -6331,20 +6331,24 @@
                    <property name="verticalSpacing">
                     <number>10</number>
                    </property>
-                   <item row="0" column="0">
-                    <widget class="QLabel" name="skyCultureMinTimeLabel">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
+                   <item row="3" column="0" colspan="2">
+                    <widget class="QLabel" name="selectedCultureMaxTimeLabel">
                      <property name="text">
-                      <string>Minimum year</string>
+                      <string>Selected culture end time:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="1">
+                   <item row="3" column="2">
+                    <widget class="QLabel" name="selectedCultureMaxTimeValueLabel">
+                     <property name="text">
+                      <string notr="true">0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1" colspan="2">
                     <widget class="QSpinBox" name="skyCultureMinTimeSpinBox">
                      <property name="alignment">
                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -6354,61 +6358,6 @@
                      </property>
                      <property name="maximum">
                       <number>2000</number>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="3" rowspan="4">
-                    <spacer name="timeOptionsHorizontalSpacer">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeType">
-                      <enum>QSizePolicy::Expanding</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item row="0" column="6">
-                    <widget class="QLabel" name="skyCultureMaxTimeLabel">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="text">
-                      <string>Maximum year</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="7">
-                    <widget class="QSpinBox" name="skyCultureMaxTimeSpinBox">
-                     <property name="alignment">
-                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                     </property>
-                     <property name="minimum">
-                      <number>-2000</number>
-                     </property>
-                     <property name="maximum">
-                      <number>2000</number>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="4" colspan="3">
-                    <widget class="QCheckBox" name="applyTimeOnListCheckBox">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="text">
-                      <string>Apply time interval limits to list</string>
                      </property>
                     </widget>
                    </item>
@@ -6429,20 +6378,84 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="0" colspan="2">
-                    <widget class="QLabel" name="selectedCultureMaxTimeLabel">
+                   <item row="0" column="3" rowspan="4">
+                    <spacer name="timeOptionsHorizontalSpacer">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Expanding</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="skyCultureMinTimeLabel">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
-                      <string>Selected culture end time:</string>
+                      <string>Minimum year</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="2">
-                    <widget class="QLabel" name="selectedCultureMaxTimeValueLabel">
-                     <property name="text">
-                      <string notr="true">0</string>
-                     </property>
+                   <item row="0" column="6">
+                    <widget class="QSpinBox" name="skyCultureMaxTimeSpinBox">
                      <property name="alignment">
-                      <set>Qt::AlignRight</set>
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="minimum">
+                      <number>-2000</number>
+                     </property>
+                     <property name="maximum">
+                      <number>2000</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="5">
+                    <widget class="QLabel" name="skyCultureMaxTimeLabel">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Maximum year</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="4">
+                    <spacer name="horizontalSpacer_14">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="2" column="4" colspan="3">
+                    <widget class="QCheckBox" name="applyTimeOnListCheckBox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Apply time interval limits to list</string>
                      </property>
                     </widget>
                    </item>
