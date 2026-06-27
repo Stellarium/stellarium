@@ -1376,6 +1376,13 @@
                  </property>
                 </widget>
                </item>
+              </layout>
+             </item>
+             <item row="14" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_20">
+               <property name="leftMargin">
+                <number>22</number>
+               </property>
                <item>
                 <widget class="QLabel" name="trailsDurationLabel">
                  <property name="sizePolicy">
@@ -1386,9 +1393,6 @@
                  </property>
                  <property name="text">
                   <string>Duration (years):</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
@@ -1564,7 +1568,7 @@
                </property>
               </widget>
              </item>
-             <item row="14" column="0">
+             <item row="15" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_15">
                <item>
                 <widget class="QPushButton" name="pushButtonGrsDetails">
@@ -1713,16 +1717,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="2" colspan="2">
-                <widget class="QCheckBox" name="moonScaleDynamicCheckBox">
-                 <property name="toolTip">
-                  <string>When enabled, the Moon scales smoothly between 1× (natural size) at the minimum FOV and the configured scale factor at the maximum FOV. Outside those bounds the scale is held constant.</string>
-                 </property>
-                 <property name="text">
-                  <string>Dynamic (FOV-based) Moon size</string>
-                 </property>
-                </widget>
-               </item>
                <item row="3" column="2">
                 <widget class="QLabel" name="moonScaleMinFovLabel">
                  <property name="toolTip">
@@ -1811,6 +1805,16 @@
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="2" column="2" colspan="4">
+                <widget class="QCheckBox" name="moonScaleDynamicCheckBox">
+                 <property name="toolTip">
+                  <string>When enabled, the Moon scales smoothly between 1× (natural size) at the minimum FOV and the configured scale factor at the maximum FOV. Outside those bounds the scale is held constant.</string>
+                 </property>
+                 <property name="text">
+                  <string>Dynamic (FOV-based) Moon size</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
