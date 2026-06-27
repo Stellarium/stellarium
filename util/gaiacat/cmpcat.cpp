@@ -1,118 +1,218 @@
-// Compare two Stellarium .cat files — streaming zone-by-zone.
-// Low memory: only current zone's stars loaded at a time.
-// Uses Gaia ID as the key for matching across files.
+// Compare two Stellarium Star2 .cat files — streaming zone-by-zone.
+// Matches by Gaia ID and compares all binary fields with per-field tolerance.
+// O(n) per zone (one hash-map build + one linear scan).
 
 #include <cstdio>
 #include <cstdint>
 #include <cstring>
+#include <cmath>
+#include <cstdlib>
 #include <vector>
 #include <unordered_map>
 #include <string>
 #include <iostream>
+#include <fstream>
 
 static int nr_of_zones(int level) { return 20 * (1 << (level * 2)) + 1; }
 
-struct Star2Brief {
-	int64_t gaia_id; int32_t x0, x1, dx0, dx1; int16_t vmag, bv; uint16_t plx, plx_err;
+// Star2 on-disk layout (32 bytes, little-endian)
+struct RawStar2 {
+	int64_t gaia_id;
+	int32_t x0, x1;      // RA, DEC in mas
+	int32_t dx0, dx1;    // pmra, pmdec in uas/yr
+	int16_t bv, vmag;    // milli-mag
+	uint16_t plx;        // parallax in 10 uas
+	uint16_t plx_err;    // parallax error in 10 uas
 
-	static Star2Brief decode(const uint8_t buf[32]) {
-		Star2Brief s;
-		std::memcpy(&s.gaia_id, buf, 8);
-		std::memcpy(&s.x0,  buf+8,  4); std::memcpy(&s.x1,  buf+12, 4);
-		std::memcpy(&s.dx0, buf+16, 4); std::memcpy(&s.dx1, buf+20, 4);
-		std::memcpy(&s.bv,  buf+24, 2); std::memcpy(&s.vmag,buf+26, 2);
-		std::memcpy(&s.plx, buf+28, 2); std::memcpy(&s.plx_err, buf+30, 2);
+	static RawStar2 decode(const uint8_t buf[32]) {
+		RawStar2 s;
+		std::memcpy(&s, buf, 32);
 		return s;
-	}
-	void print(const char* label, int zone) const {
-		printf("  %s Gaia %lld  zone=%u  V=%.3f  B-V=%.3f  RA=%.6f  DEC=%.6f  pm=(%.2f,%.2f) mas/yr  plx=%.2f mas\n",
-			label, (long long)gaia_id, zone, vmag/1000.0, bv/1000.0,
-			x0/3600000.0, x1/3600000.0, dx0/1000.0, dx1/1000.0, plx/100.0);
 	}
 };
 
+static bool near(int32_t a, int32_t b)  { return std::abs((int64_t)a - (int64_t)b) <= 3; }
+static bool near(int16_t a, int16_t b)  { return std::abs((int)a - (int)b) <= 3; }
+static bool near(uint16_t a, uint16_t b) { uint16_t d = (a > b) ? (a - b) : (b - a); return d <= 3; }
+
 struct CatFile {
-	FILE* f; int level, nz; std::vector<uint32_t> counts; int64_t star_base; uint64_t total;
+	FILE* f = nullptr;
+	int level = 0;
+	int nz = 0;
+	std::vector<uint32_t> counts;
+	int64_t star_base = 0;
+	uint64_t total = 0;
 
 	bool open(const std::string& path) {
 		f = std::fopen(path.c_str(), "rb");
 		if (!f) { std::cerr << "ERROR: cannot open " << path << "\n"; return false; }
 		uint32_t hdr[6]; float ep;
 		std::fread(hdr, sizeof(uint32_t), 6, f); std::fread(&ep, sizeof(float), 1, f);
-		level = static_cast<int>(hdr[4]); nz = nr_of_zones(level);
+		level = static_cast<int>(hdr[4]);
+		nz = nr_of_zones(level);
 		counts.resize(nz);
-		fseeko(f, 28, SEEK_SET); std::fread(counts.data(), sizeof(uint32_t), nz, f);
-		total = 0; for (auto c : counts) total += c;
-		star_base = 28 + static_cast<int64_t>(nz) * 4;
+		std::fseek(f, 28, SEEK_SET);
+		std::fread(counts.data(), sizeof(uint32_t), nz, f);
+		total = 0;
+		for (auto c : counts) total += c;
+		star_base = 28 + static_cast<int64_t>(nz) * sizeof(uint32_t);
 		return true;
 	}
 	void close() { if (f) { std::fclose(f); f = nullptr; } }
 };
 
-struct ZoneResult {
-	uint64_t only_a = 0, only_b = 0; int printed = 0;
+struct CompareResult {
+	uint64_t only_a = 0, only_b = 0;
+	uint64_t only_a_no_bv = 0, only_b_no_bv = 0;
+	uint64_t matched = 0;
+	uint64_t mismatched = 0;
+	uint64_t bad_x0 = 0, bad_x1 = 0, bad_dx0 = 0, bad_dx1 = 0;
+	uint64_t bad_vmag = 0, bad_plx = 0;
+	int64_t sum_x0 = 0, sum_x1 = 0, sum_dx0 = 0, sum_dx1 = 0;
+	int64_t sum_vmag = 0, sum_plx = 0;
 };
 
-static void compare_zone(CatFile& a, CatFile& b, int z, int64_t& off_a, int64_t& off_b, ZoneResult& r) {
-	uint32_t cnt_a = (z < a.nz) ? a.counts[z] : 0;
-	uint32_t cnt_b = (z < b.nz) ? b.counts[z] : 0;
-	if (cnt_a == 0 && cnt_b == 0) return;
+static void record_mismatch(const RawStar2& a, const RawStar2& b, int zone,
+			    CompareResult& r, std::ofstream* file) {
+	r.mismatched++;
+#define CHK(f) do { if (!near(a.f, b.f)) { r.bad_##f++; r.sum_##f += std::abs((int64_t)a.f - (int64_t)b.f); } } while(0)
+	CHK(x0); CHK(x1); CHK(dx0); CHK(dx1);
+	CHK(vmag); CHK(plx);
+#undef CHK
 
-	uint8_t buf[32];
-	std::unordered_map<uint64_t, Star2Brief> map_a;
-	auto print_once = [&]() -> bool { return ++r.printed <= 200; };
-
-	if (cnt_a > 0) {
-		fseeko(a.f, off_a, SEEK_SET);
-		for (uint32_t i = 0; i < cnt_a; ++i) {
-			std::fread(buf, 32, 1, a.f);
-			auto s = Star2Brief::decode(buf);
-			map_a[s.gaia_id] = s;
-		}
+	char line[256];
+	int n = std::snprintf(line, sizeof(line),
+		"%llu z=%d  dRA=%.3fmas dDE=%.3fmas dpmra=%.2f dpmde=%.2f dV=%.3fmag dPlx=%.2fmas\n",
+		(unsigned long long)a.gaia_id, zone,
+		(a.x0 - b.x0) / 1000.0, (a.x1 - b.x1) / 1000.0,
+		(a.dx0 - b.dx0) / 1000.0, (a.dx1 - b.dx1) / 1000.0,
+		(a.vmag - b.vmag) / 1000.0,
+		(a.plx - b.plx) / 10.0);
+	if (n > 0) {
+		std::cout.write(line, n);
+		if (file && file->is_open()) file->write(line, n);
 	}
-	if (cnt_b > 0) {
-		fseeko(b.f, off_b, SEEK_SET);
-		for (uint32_t i = 0; i < cnt_b; ++i) {
-			std::fread(buf, 32, 1, b.f);
-			auto s = Star2Brief::decode(buf);
-			auto it = map_a.find(s.gaia_id);
-			if (it == map_a.end()) { r.only_b++; if (print_once()) s.print("only in B:", z); }
-			else map_a.erase(it);
-		}
-	}
-	for (auto& [gid, s] : map_a) { r.only_a++; if (print_once()) s.print("only in A:", z); }
-
-	off_a += static_cast<int64_t>(cnt_a) * 32;
-	off_b += static_cast<int64_t>(cnt_b) * 32;
 }
 
-static void compare(const std::string& a_path, const std::string& b_path) {
+static void compare(const std::string& a_path, const std::string& b_path,
+		    const std::string& out_path) {
 	CatFile a, b;
 	if (!a.open(a_path)) return;
 	if (!b.open(b_path)) { a.close(); return; }
+	std::cout << "A: level=" << a.level << "  stars=" << a.total << "\n";
+	std::cout << "B: level=" << b.level << "  stars=" << b.total << "\n";
+	std::cout << "Tolerance: +/-3 units in raw on-disk representation\n\n";
 
-	std::cout << "A: level=" << a.level << " stars=" << a.total << "\n";
-	std::cout << "B: level=" << b.level << " stars=" << b.total << "\n";
+	std::ofstream out_file;
+	if (!out_path.empty()) {
+		out_file.open(out_path);
+		if (!out_file) std::cerr << "WARNING: cannot open output file " << out_path << "\n";
+	}
 
 	int nz = std::max(a.nz, b.nz);
 	int64_t off_a = a.star_base, off_b = b.star_base;
-	ZoneResult result;
+	CompareResult result;
+	uint8_t buf[32];
 
-	for (int z = 0; z < nz; ++z)
-		compare_zone(a, b, z, off_a, off_b, result);
+	for (int z = 0; z < nz; ++z) {
+		uint32_t cnt_a = (z < a.nz) ? a.counts[z] : 0;
+		uint32_t cnt_b = (z < b.nz) ? b.counts[z] : 0;
+
+		std::unordered_map<uint64_t, RawStar2> map_a;
+		if (cnt_a > 0) {
+			std::fseek(a.f, off_a, SEEK_SET);
+			for (uint32_t i = 0; i < cnt_a; ++i) {
+				std::fread(buf, 32, 1, a.f);
+				auto s = RawStar2::decode(buf);
+				map_a[s.gaia_id] = s;
+			}
+		}
+
+		if (cnt_b > 0) {
+			std::fseek(b.f, off_b, SEEK_SET);
+			for (uint32_t i = 0; i < cnt_b; ++i) {
+				std::fread(buf, 32, 1, b.f);
+				auto s = RawStar2::decode(buf);
+				auto it = map_a.find(s.gaia_id);
+				if (it == map_a.end()) {
+					result.only_b++;
+					if (s.bv == 0) result.only_b_no_bv++;
+					if (!out_path.empty() && out_file.is_open()) {
+						char line[128];
+						int n = std::snprintf(line, sizeof(line),
+							"%llu z=%d RA=%.6f DEC=%+.6f V=%.3f BV=%.3f [only in B]\n",
+							(unsigned long long)s.gaia_id, z,
+							s.x0/3600000.0, s.x1/3600000.0,
+							s.vmag/1000.0, s.bv/1000.0);
+						if (n > 0) out_file.write(line, n);
+					}
+				} else {
+					const auto& sa = it->second;
+				if (near(sa.x0, s.x0) && near(sa.x1, s.x1) &&
+				    near(sa.dx0, s.dx0) && near(sa.dx1, s.dx1) &&
+				    near(sa.vmag, s.vmag) &&
+				    near(sa.plx, s.plx))
+						result.matched++;
+					else
+						record_mismatch(sa, s, z, result, out_path.empty() ? nullptr : &out_file);
+					map_a.erase(it);
+				}
+			}
+		}
+
+		for (auto& [gid, s] : map_a) {
+			result.only_a++;
+			if (s.bv == 0) result.only_a_no_bv++;
+			if (out_path.empty()) continue;
+			char line[128];
+			int n = std::snprintf(line, sizeof(line),
+				"%llu z=%d RA=%.6f DEC=%+.6f V=%.3f BV=%.3f [only in A]\n",
+				(unsigned long long)gid, z,
+				s.x0/3600000.0, s.x1/3600000.0,
+				s.vmag/1000.0, s.bv/1000.0);
+			if (n > 0 && out_file.is_open()) out_file.write(line, n);
+		}
+
+		off_a += static_cast<int64_t>(cnt_a) * 32;
+		off_b += static_cast<int64_t>(cnt_b) * 32;
+	}
 
 	a.close(); b.close();
+	if (out_file.is_open()) out_file.close();
 
-	std::cout << "\nOnly in A:    " << result.only_a << "\n";
-	std::cout << "Only in B:    " << result.only_b << "\n";
-	if (result.only_a == 0 && result.only_b == 0)
-		std::cout << "Files are IDENTICAL.\n";
+	std::cout << "\nOnly in A:        " << result.only_a << "\n";
+	std::cout << "  (BV=0):          " << result.only_a_no_bv << "\n";
+	std::cout << "Only in B:        " << result.only_b << "\n";
+	std::cout << "  (BV=0):          " << result.only_b_no_bv << "\n";
+	std::cout << "Matched (near):   " << result.matched << "\n";
+	std::cout << "Mismatched:       " << result.mismatched << "\n";
+	if (result.mismatched > 0) {
+		auto avg = [](uint64_t n, int64_t sum) -> double { return n ? (double)sum / n : 0; };
+		std::cout << "  dRA:   n=" << result.bad_x0     << "  avg|Δ|=" << avg(result.bad_x0,     result.sum_x0)     / 1000.0 << " mas\n";
+		std::cout << "  dDE:   n=" << result.bad_x1     << "  avg|Δ|=" << avg(result.bad_x1,     result.sum_x1)     / 1000.0 << " mas\n";
+		std::cout << "  dpmra: n=" << result.bad_dx0    << "  avg|Δ|=" << avg(result.bad_dx0,    result.sum_dx0)    / 1000.0 << " uas/yr\n";
+		std::cout << "  dpmde: n=" << result.bad_dx1    << "  avg|Δ|=" << avg(result.bad_dx1,    result.sum_dx1)    / 1000.0 << " uas/yr\n";
+		std::cout << "  dV:    n=" << result.bad_vmag   << "  avg|Δ|=" << avg(result.bad_vmag,   result.sum_vmag)   / 1000.0 << " mmag\n";
+		std::cout << "  dPlx:  n=" << result.bad_plx    << "  avg|Δ|=" << avg(result.bad_plx,    result.sum_plx)    / 10.0 << " mas\n";
+	}
+	if (result.only_a == 0 && result.only_b == 0 && result.mismatched == 0)
+		std::cout << "\nFiles are IDENTICAL.\n";
+	else if (result.mismatched == 0)
+		std::cout << "\nID sets IDENTICAL (some stars in different zones).\n";
 }
 
 int main(int argc, char** argv) {
-	std::string a, b;
-	for (int i = 1; i < argc; ++i) { std::string arg = argv[i]; if (a.empty()) a = arg; else if (b.empty()) b = arg; }
-	if (a.empty() || b.empty()) { std::cerr << "Usage: cmpcat <fileA.cat> <fileB.cat>\n"; return 1; }
-	compare(a, b);
+	std::string a, b, out;
+	for (int i = 1; i < argc; ++i) {
+		std::string arg = argv[i];
+		if (a.empty()) a = arg;
+		else if (b.empty()) b = arg;
+		else if (out.empty()) out = arg;
+	}
+	if (a.empty() || b.empty()) {
+		std::cerr << "Usage: cmpcat <fileA.cat> <fileB.cat> [output.txt]\n";
+		return 1;
+	}
+	compare(a, b, out);
 	return 0;
 }

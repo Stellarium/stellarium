@@ -155,7 +155,7 @@ static void process_dat_file(
 				brec.ra_i    = static_cast<int32_t>(std::round(ra * 3600000.0));
 				brec.dec_i   = static_cast<int32_t>(std::round(dec * 3600000.0));
 				brec.gaia_id = r.gaia_id;
-				brec.pmra_i  = static_cast<int32_t>(std::round(r.pmra * 1000000.0 / std::max(0.01, std::cos(dec * M_PI / 180.0))));
+				brec.pmra_i  = static_cast<int32_t>(std::round(r.pmra * 1000000.0 / std::max(0.001, std::cos(dec * M_PI / 180.0))));
 				brec.pmdec_i = static_cast<int32_t>(std::round(r.pmdec * 1000000.0));
 				brec.plx_i   = static_cast<int32_t>(std::round(r.plx  * 100000.0));
 
@@ -197,9 +197,10 @@ int main(int argc, char** argv) {
 	}
 
 	std::vector<LevelConfig> levels = {
+		{"stars_7",  7, 15.50, 16.75, 256},
 		{"stars_8",  8, 16.75, 18.50, 256},
 		{"stars_9",  9, 18.50, 20.25, 256},
-		{"stars_10", 10, 20.25, 23.00, 256},
+		{"stars_10", 10, 20.25, 24.00, 256},
 	};
 
 	std::vector<std::string> dat_files;

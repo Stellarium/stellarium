@@ -19,7 +19,7 @@ public:
 	int num_buckets() const { return n_buckets_; }
 
 private:
-	static constexpr int MAX_OPEN = 128;
+	static constexpr int MAX_OPEN = 96;
 
 	struct Bucket {
 		std::string path;

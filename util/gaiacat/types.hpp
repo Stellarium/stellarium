@@ -22,9 +22,9 @@ struct alignas(1) SkyChartRecord {
 	int16_t  g_mag;         // 16: G magnitude × 1000
 	int16_t  bp_mag;        // 18: BP magnitude × 1000
 	int16_t  rp_mag;        // 20: RP magnitude × 1000
-	float    pmra;          // 22: mas/yr
-	float    pmdec;         // 26: mas/yr
-	float    plx;           // 30: mas
+	float    pmra;          // 22: mas/yr (Gaia DR3 units); actually arcsec/yr in SkyChart .dat
+	float    pmdec;         // 26: mas/yr (Gaia DR3 units); actually arcsec/yr in SkyChart .dat
+	float    plx;           // 30: mas (Gaia DR3 units); actually arcsec in SkyChart .dat
 	uint32_t _pad;          // 34: unused
 };
 #pragma pack(pop)
