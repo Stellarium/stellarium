@@ -86,7 +86,6 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, conf(StelApp::getInstance().getSettings())
 	, vao(new QOpenGLVertexArrayObject)
 	, vbo(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
-	, computePositionsAlgorithm(conf->value("devel/compute_positions_algorithm", 2).toInt())
 {
 	fontSize = StelApp::getInstance().getScreenFontSize();
 	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &SolarSystem::setFontSize);
@@ -176,6 +175,8 @@ void SolarSystem::init()
 	Q_ASSERT(conf);
 	StelApp *app = &StelApp::getInstance();
 	StelCore *core=app->getCore();
+
+	computePositionsAlgorithm = conf->value("devel/compute_positions_algorithm", computePositionsAlgorithm).toInt();
 
 	Planet::init();
 	loadPlanets();	// Load planets data

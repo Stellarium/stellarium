@@ -1399,7 +1399,7 @@ private:
 	//! 2: strided pool threads plus main thread
 	//! 3: Ruslan's 1-pass loop (suspected to have a logical error.)
 	//! To configure the experimental new solution, add [devel]/compute_positions_algorithm=0|1|2|3. Default=2
-	int computePositionsAlgorithm;
+	int computePositionsAlgorithm = 2;
 };
 
 
