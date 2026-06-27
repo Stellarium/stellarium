@@ -1,11 +1,12 @@
 /* jshint expr: true */
 
 define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
-	"api/properties", "./time", "./joystickqueue", "./actions", "./viewoptions",
-	"./scripts",
-	"./viewcontrol", "./location", "./search", "jquery-ui"
+    "api/properties", "./time", "./joystickqueue", "./actions", "./viewoptions",
+    "./scripts", "./viewcontrol", "./location", "./search", "ui/skyculture", 
+    "ui/skyculture-stats", "./gpcontroller", "jquery-ui"
 ], function($, settings, globalize, rc, actionApi, propApi, timeui,
-	JoystickQueue) {
+    JoystickQueue, actionsui, viewoptionsui, scriptsui, viewcontrolui, locationui,
+    searchui, skyculture, skycultureStats, gpcontroller) {
 	"use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
@@ -343,6 +344,82 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 
 		$("#loadoverlay").fadeOut();
 		$(rc).trigger("uiReady"); //signal other components that the main UI init is done (some may need the jQueryUI stuff set up)
+		
+		// =====================================================================
+		// INITIALIZE SKY CULTURE BUTTONS MODULE
+		// =====================================================================
+		// Check if skyculture module is available and initialize it with all required containers
+		// The module now supports multiple data panels: constellations, asterisms, zodiac, lunar mansions, and stars
+		if (typeof skyculture !== 'undefined' && skyculture && typeof skyculture.init === 'function') {
+				// Short delay to ensure DOM is fully ready and other modules are initialized
+				setTimeout(function() {
+						if ($("#skyculture-buttons-container").length) {
+								// Define all container selectors for the skyculture module
+								var containers = {
+										constellations: "#constellations-buttons-container",
+										asterisms: "#asterisms-buttons-container",
+										zodiac: "#zodiac-buttons-container",
+										lunar: "#lunar-buttons-container",
+										stars: "#stars-buttons-container"
+								};
+								
+								// Initialize the skyculture module with culture selector, patterns containers, and info iframe
+								skyculture.init(
+										"#skyculture-buttons-container",    // Culture buttons container
+										containers,                         // Patterns containers object
+										"#vo_skycultureinfo",                // iframe skyculture info container
+										{ cultureCount: "#skyculture-culture-count" } // skyculture count
+								);
+								console.log("[MainUI] Sky culture buttons module initialized with multi-panel support");
+						} else {
+								console.warn("[MainUI] Sky culture container not found, module not initialized");
+						}
+				}, 100);
+		} else {
+				console.warn("[MainUI] Sky culture module not available");
+		}
+		
+		// =====================================================================
+		// INITIALIZE SKY CULTURE STATISTICS MODULE
+		// =====================================================================
+		if (typeof skycultureStats !== 'undefined' && skycultureStats && typeof skycultureStats.init === 'function') {
+				setTimeout(function() {
+						skycultureStats.init({
+								cultureContainer: "#skyculture-stats-buttons",
+								cultureCount: "#skyculture-stats-count",
+								totalCultures: "#stats-total-cultures",
+								totalConstellations: "#stats-total-constellations",
+								totalAsterisms: "#stats-total-asterisms",
+								totalRayHelpers: "#stats-total-ray-helpers",
+								totalZodiac: "#stats-total-zodiac",
+								totalLunar: "#stats-total-lunar",
+								totalStars: "#stats-total-stars",
+								constellationsBody: "#constellations-stats-body",
+								asterismsBody: "#asterisms-stats-body",
+								zodiacBody: "#zodiac-stats-body",
+								lunarBody: "#lunar-stats-body",
+								starsBody: "#stars-stats-body",
+								constellationsCount: "#constellations-stats-count",
+								asterismsCount: "#asterisms-stats-count",
+								zodiacCount: "#zodiac-stats-count",
+								lunarCount: "#lunar-stats-count",
+								starsCount: "#stars-stats-count",
+								descriptionContent: "#stats-description-content"
+						});
+						console.log("[MainUI] Sky culture statistics module initialized");
+				}, 200);
+		}
+    
+    // =====================================================================
+    // INITIALIZE GAMEPAD CONTROLLER
+    // =====================================================================
+    // Initialize Gamepad controller after UI is ready
+    if (typeof gpcontroller !== 'undefined' && gpcontroller && typeof gpcontroller.init === 'function') {
+        gpcontroller.init();
+        console.log("[MainUI] Gamepad controller initialized");
+    } else {
+        console.warn("[MainUI] Gamepad controller module not available");
+    }
 	});
 
 	//new server data

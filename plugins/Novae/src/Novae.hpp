@@ -249,8 +249,9 @@ private:
 
 	QSettings* conf;
 
-	// GUI
-	NovaeDialog* configDialog;	
+#ifndef NO_GUI
+	NovaeDialog* configDialog;
+#endif
 
 private slots:
 	//! Check to see if an update is required.  This is called periodically by a timer

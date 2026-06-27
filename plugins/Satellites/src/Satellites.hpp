@@ -390,16 +390,9 @@ public:
 	//! modified by the method!
 	void updateSatellites(TleDataHash& newTleSets);
 	
-	//! Reads a TLE list from a file to the supplied hash.
-	//! If an entry with the same ID exists in the given hash, its contents
-	//! are overwritten with the new values.
-	//! \param openFile a reference to an \b open file.
-	//! @param[in,out] tleList a hash with satellite IDs as keys.
-	//! @param[in] addFlagValue value to be set to TleData::addThis for all.
-	//! @param[in] tleURL a URL of TLE's source (e.g. Celestrak URL)
-	//! @todo If this can accept a QIODevice, it will be able to read directly
-	//! QNetworkReply-s... --BM
-	static void parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue = false, const QString& tleURL = "");
+	//! Depending on file contents, calls either #parseTleFile or #parseCsvFile,
+	//! forwarding the arguments to the callee.
+	static void parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue = false, const QString& tleURL = "");
 
 	//! Insert a three line TLE into the hash array.
 	//! @param[in] line The second line from the TLE
@@ -789,6 +782,9 @@ private slots:
 	void translateData();
 
 private:
+	//! The actual implementation of #remove, but without resetting
+	//! #satelliteListModel.
+	void removeWithoutModelReset(const QStringList& idList);
 	//! Drawing the circles of Earth's umbra and penumbra
 	void drawCircles(StelCore* core, StelPainter& painter);
 	//! Add to the current collection the satellite described by the data.
@@ -804,6 +800,21 @@ private:
 	QPair<double, double> getStdMagRCS(const TleData& tleData);
 	QString getSatelliteDescription(int satID);
 	QList<CommLink> getCommunicationData(const TleData& tleData);
+
+	//! Reads a TLE list from a file to the supplied hash.
+	//! If an entry with the same ID exists in the given hash, its contents
+	//! are overwritten with the new values.
+	//! \param openFile a reference to an \b open file.
+	//! @param[in,out] tleList a hash with satellite IDs as keys.
+	//! @param[in] addFlagValue value to be set to TleData::addThis for all.
+	//! @param[in] tleURL a URL of TLE's source (e.g. Celestrak URL)
+	//! @todo If this can accept a QIODevice, it will be able to read directly
+	//! QNetworkReply-s... --BM
+	static void parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString& tleURL);
+
+	//! Same as #parseTleFile, but for the CelesTrak's CSV format
+	static void parseCsvFile(QFile& openFile, const QStringList& headerEntries, TleDataHash& tleList,
+                                 bool addFlagValue, const QString &tleURL);
 	
 	//! Delete Satellites section in main config.ini, then create with default values.
 	void restoreDefaultSettings();
@@ -947,9 +958,9 @@ private:
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	int iridiumFlaresPredictionDepth;
 #endif
-	// GUI
+#ifndef NO_GUI
 	SatellitesDialog* configDialog;
-
+#endif
 	QMultiMap<QString, QString> satSuperGroupsMap;
 
 	static QString SatellitesCatalogVersion;

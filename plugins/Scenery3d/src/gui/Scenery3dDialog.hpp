@@ -21,10 +21,11 @@
 #ifndef SCENERY3DDIALOG_HPP
 #define SCENERY3DDIALOG_HPP
 
+#include <QListWidgetItem>
 #include "StelDialog.hpp"
 #include "S3DEnum.hpp"
-#include "ui_scenery3dDialog.h"
 
+class Ui_scenery3dDialogForm;
 class Scenery3d;
 struct SceneInfo;
 

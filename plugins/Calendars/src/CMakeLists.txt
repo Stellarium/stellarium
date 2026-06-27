@@ -5,10 +5,6 @@ LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 SET(Calendars_SRCS
     Calendars.hpp
     Calendars.cpp
-    gui/CalendarsDialog.hpp
-    gui/CalendarsDialog.cpp
-    gui/CalendarsInfoPanel.hpp
-    gui/CalendarsInfoPanel.cpp
     Calendar.hpp
     Calendar.cpp
     EgyptianCalendar.hpp
@@ -23,6 +19,8 @@ SET(Calendars_SRCS
     RevisedJulianCalendar.cpp
     RomanCalendar.hpp
     RomanCalendar.cpp
+    ByzantineCalendar.hpp
+    ByzantineCalendar.cpp
     OlympicCalendar.hpp
     OlympicCalendar.cpp
     GregorianCalendar.hpp
@@ -85,19 +83,31 @@ SET(Calendars_SRCS
     KoreanCalendar.cpp
     VietnameseCalendar.hpp
     VietnameseCalendar.cpp
+    gui/CalendarsInfoPanel.hpp
+    gui/CalendarsInfoPanel.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND Calendars_SRCS
+    gui/CalendarsDialog.hpp
+    gui/CalendarsDialog.cpp
 )
 
 SET(Calendars_UIS
      gui/calendarsDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 ################# compiles resources files ############
 SET(Calendars_RES ../resources/Calendars.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(Calendars_UIS_H ${Calendars_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(Calendars_UIS_H ${Calendars_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(Calendars_RES_CXX ${Calendars_RES})
 ELSE()
-     QT_WRAP_UI(Calendars_UIS_H ${Calendars_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(Calendars_UIS_H ${Calendars_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(Calendars_RES_CXX ${Calendars_RES})
 ENDIF()
 
@@ -117,10 +127,9 @@ if(ENABLE_PCH)
      ENDIF()
 ENDIF(ENABLE_PCH)
 
+TARGET_LINK_LIBRARIES(Calendars-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 IF(ENABLE_SCRIPT_QML)
-TARGET_LINK_LIBRARIES(Calendars-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Qml)
-ELSE()
-TARGET_LINK_LIBRARIES(Calendars-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(Calendars-static Qt${QT_VERSION_MAJOR}::Qml)
 ENDIF()
 SET_TARGET_PROPERTIES(Calendars-static PROPERTIES OUTPUT_NAME "Calendars")
 SET_TARGET_PROPERTIES(Calendars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

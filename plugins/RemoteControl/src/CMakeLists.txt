@@ -53,32 +53,39 @@ SET(RemoteControl_SRCS
   StelPropertyService.cpp
   ViewService.hpp
   ViewService.cpp
+  ../include/RemoteControlServiceInterface.hpp # added here just so that it shows up in Qt creator
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND RemoteControl_SRCS
   gui/RemoteControlDialog.hpp
   gui/RemoteControlDialog.cpp
-  ../include/RemoteControlServiceInterface.hpp # added here just so that it shows up in Qt creator
 )
 
 SET(RemoteControl_UIS
   gui/remoteControlDialog.ui
 )
+ENDIF(STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 ################# compiles resources files ############
 SET(RemoteControl_RES ../RemoteControl.qrc)
 
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
 ELSE()
-     QT_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
 ENDIF()
 
 ADD_LIBRARY(RemoteControl-static STATIC ${RemoteControl_SRCS} ${RemoteControl_RES_CXX} ${RemoteControl_UIS_H} ${QtWebApp_SRCS})
 TARGET_INCLUDE_DIRECTORIES(RemoteControl-static PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
+TARGET_LINK_LIBRARIES(RemoteControl-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 IF(ENABLE_SCRIPT_QML)
-TARGET_LINK_LIBRARIES(RemoteControl-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Qml)
-ELSE()
-TARGET_LINK_LIBRARIES(RemoteControl-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(RemoteControl-static Qt${QT_VERSION_MAJOR}::Qml)
 ENDIF()
 # The library target "RemoteControl-static" has a default OUTPUT_NAME of "RemoteControl-static", so change it.
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES OUTPUT_NAME "RemoteControl")

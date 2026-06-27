@@ -25,15 +25,17 @@
 #include <QTimer>
 
 #include "Observability.hpp"
+#ifndef NO_GUI
 #include "ObservabilityDialog.hpp"
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"
+#endif
 
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
 //#include "StelActionMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -75,8 +77,7 @@ const double Observability::RefFullMoon = 2451564.696; // Reference Julian date 
 const double Observability::MoonPerilune = 0.0024236308; // Smallest Earth-Moon distance (in AU).
 
 Observability::Observability()
-	: configDialog(new ObservabilityDialog())
-	, nextFullMoon(0.)
+	: nextFullMoon(0.)
 	, prevFullMoon(0.)
 	, GMTShift(0.)
 	, Jan1stJD(0.)
@@ -112,9 +113,12 @@ Observability::Observability()
 	, show_Best_Night(false)
 	, show_Today(false)
 	, show_FullMoon(false)
-	, flagShowReport(false)
+	, flagEnabled(false)
 	, fontSize(14)
+#ifndef NO_GUI
+	, configDialog(new ObservabilityDialog())
 	, button(Q_NULLPTR)
+#endif
 {
 	setObjectName("Observability");
 
@@ -141,8 +145,10 @@ Observability::Observability()
 Observability::~Observability()
 {
 	// Shouldn't this be in the deinit()? --BM
-	if (configDialog != Q_NULLPTR)
+#ifndef NO_GUI
+	if (configDialog)
 		delete configDialog;
+#endif
 }
 
 void Observability::updateMessageText()
@@ -194,7 +200,8 @@ void Observability::init()
 {
 	loadConfiguration();
 
-	addAction("actionShow_Observability",        N_("Observability"), N_("Observability"),      "flagShowReport");
+	addAction("actionShow_Observability",        N_("Observability"), N_("Observability"),      "flagEnabled");
+#ifndef NO_GUI
 	addAction("actionShow_Observability_dialog", N_("Observability"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
 
     StelGui * gui = dynamic_cast<StelGui *>(StelApp::getInstance().getGui());
@@ -208,12 +215,12 @@ void Observability::init()
  			      "actionShow_Observability_dialog");
        gui->getButtonBar()->addButton(button, "065-pluginsGroup");
     }
-
+#endif
     updateMessageText();
     connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &Observability::onLanguageChanged);
     connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
 
-    connect(this, &Observability::flagReportVisibilityChanged, this, [&](bool enabled) {
+    connect(this, &Observability::flagEnabledChanged, this, [&](bool enabled) {
         if (enabled) {
             qDebug() << "[Observability] Creating plugin status dependent connections.";
             createConnections();
@@ -230,7 +237,7 @@ void Observability::init()
 // MAIN CODE:
 void Observability::draw(StelCore* core)
 {
-    if (!flagShowReport)
+    if (!flagEnabled)
        return; // Button is off.
 /////////////////////////////////////////////////////////////////
 // PRELIMINARS:
@@ -276,10 +283,7 @@ void Observability::draw(StelCore* core)
 	}
 
 // Add refraction, if necessary:
-	Vec3d TempRefr;
-	TempRefr[0] = std::cos(horizonAltitude);
-	TempRefr[1] = 0.0;
-	TempRefr[2] = std::sin(horizonAltitude);
+	Vec3d TempRefr(std::cos(horizonAltitude), 0.0, std::sin(horizonAltitude));
 	Vec3d CorrRefr = core->altAzToEquinoxEqu(TempRefr,StelCore::RefractionAuto);
 	TempRefr = core->equinoxEquToAltAz(CorrRefr,StelCore::RefractionOff);
 	double RefracAlt = std::asin(TempRefr[2]);
@@ -1433,9 +1437,13 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 bool Observability::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 
 void Observability::resetConfiguration()
@@ -1465,6 +1473,7 @@ void Observability::loadConfiguration()
 	show_FullMoon = conf->value("show_FullMoon", true).toBool();
 //	show_Crescent = conf->value("show_Crescent", true).toBool();
 //	show_SuperMoon = conf->value("show_SuperMoon", true).toBool();
+	flagEnabled = conf->value("enabled", false).toBool();
 
 	// For backwards compatibility, the value of this key is stored with
 	// inverted sign.
@@ -1602,12 +1611,13 @@ void Observability::setHorizonAltitude(int altitude)
 	configChanged = true;
 }
 
-void Observability::showReport(bool b)
+void Observability::setEnabled(bool b)
 {
-	if (b!=flagShowReport)
+	if (b!=flagEnabled)
 	{
-		flagShowReport = b;
-		emit flagReportVisibilityChanged(b);
+		flagEnabled = b;
+		StelApp::immediateSave("Observability/enabled", b);
+		emit flagEnabledChanged(b);
 	}
 }
 

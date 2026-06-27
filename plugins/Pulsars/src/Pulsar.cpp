@@ -69,6 +69,7 @@ Pulsar::Pulsar(const QVariantMap& map)
 	, s600(0.)
 	, s1400(0.)
 	, distance(0.)
+	, adistance(0.)
 	, glitch(-1)
 	, notes("")
 {
@@ -99,16 +100,17 @@ Pulsar::Pulsar(const QVariantMap& map)
 	s600 = map.value("s600").toFloat();
 	s1400 = map.value("s1400").toFloat();
 	distance = map.value("distance").toFloat();
+	adistance = map.value("adistance").toFloat();
 	glitch = map.value("glitch").toInt();
 	notes = map.value("notes").toString();
 
 	// If barycentric period not set then calculate it
-	if (qFuzzyCompare(period,0) && frequency>0)
+	if (qFuzzyCompare(period,0.) && frequency>0.)
 	{
 		period = 1/frequency;
 	}
 	// If barycentric period derivative not set then calculate it
-	if (qFuzzyCompare(pderivative,0))
+	if (qFuzzyCompare(pderivative,0.))
 	{
 		pderivative = getP1(period, pfrequency);
 	}
@@ -144,6 +146,7 @@ QVariantMap Pulsar::getMap(void) const
 	map["s600"] = s600;
 	map["s1400"] = s1400;
 	map["distance"] = distance;
+	map["adistance"] = adistance;
 	map["glitch"] = glitch;
 	map["notes"] = notes;
 
@@ -207,7 +210,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Extra)
 	{
-		if (period>0)
+		if (period>0.)
 		{
 			oss << QString("%1: %2 %3<br />").arg(
 			       q_("Barycentric period"),
@@ -215,10 +218,10 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       //TRANSLATORS: Unit of measure for period - seconds
 			       qc_("s", "period"));
 		}
-		if (pderivative>0)
+		if (pderivative>0.)
 			oss << QString("%1: %2<br />").arg(q_("Time derivative of barycentric period"), QString::number(pderivative, 'e', 5));
 
-		if (dmeasure>0)
+		if (dmeasure>0.)
 		{
 			oss << QString("%1: %2 %3/%4<sup>3</sup><br />").arg(
 				       q_("Dispersion measure"),
@@ -229,7 +232,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				       qc_("cm", "distance"));
 		}
 		double edot = getEdot(period, pderivative);
-		if (edot>0)
+		if (edot>0.)
 		{
 			oss << QString("%1: %2 %3<br />").arg(
 				       q_("Spin down energy loss rate"),
@@ -237,7 +240,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				       //TRANSLATORS: Unit of measure for power - erg per second
 				       qc_("ergs/s", "power"));
 		}
-		if (bperiod>0)
+		if (bperiod>0.)
 		{
 			oss << QString("%1: %2 %3<br />").arg(
 				       q_("Binary period of pulsar"),
@@ -245,10 +248,10 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				       //TRANSLATORS: Unit of measure for period - days
 				       qc_("days", "time period"));
 		}
-		if (eccentricity>0)
+		if (eccentricity>0.)
 			oss << QString("%1: %2<br />").arg(q_("Eccentricity"), QString::number(eccentricity, 'f', 10));
 
-		if (parallax>0)
+		if (parallax>0.f)
 		{
 			oss << QString("%1: %2 %3<br />").arg(
 				       q_("Annual parallax"),
@@ -256,7 +259,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				       //TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 				       qc_("mas", "parallax"));
 		}
-		if (distance>0)
+		if (distance>0.f)
 		{
 			oss << QString("%1: %2 %3 (%4 %5)<br />")
 			       .arg(q_("Distance based on electron density model"))
@@ -267,7 +270,18 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       //TRANSLATORS: Unit of measure for distance - light years
 			       .arg(qc_("ly", "distance"));
 		}
-		if (w50>0)
+		if (adistance>0.f)
+		{
+			oss << QString("%1: %2 %3 (%4 %5)<br />")
+			       .arg(q_("Distance based on an association with another object"))
+			       .arg(adistance)
+			       //TRANSLATORS: Unit of measure for distance - kiloparsecs
+			       .arg(qc_("kpc", "distance"))
+			       .arg(adistance*3261.563777)
+			       //TRANSLATORS: Unit of measure for distance - light years
+			       .arg(qc_("ly", "distance"));
+		}
+		if (w50>0.f)
 		{
 			oss << QString("%1: %2 %3<br />").arg(
 				       // xgettext:no-c-format
@@ -284,13 +298,13 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		// TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 		QString sfd  = qc_("mJy", "spectral flux density");
 
-		if (s400>0)
+		if (s400>0.f)
 			oss << QString("%1 %2%3: %4 %5<br />").arg(flux, QString::number(400), freq, QString::number(s400, 'f', 2), sfd);
 
-		if (s600>0)
+		if (s600>0.f)
 			oss << QString("%1 %2%3: %4 %5<br />").arg(flux, QString::number(600), freq, QString::number(s600, 'f', 2), sfd);
 
-		if (s1400>0)
+		if (s1400>0.f)
 			oss << QString("%1 %2%3: %4 %5<br />").arg(flux, QString::number(1400), freq, QString::number(s1400, 'f', 2), sfd);
 
 		if (!notes.isEmpty())
@@ -319,6 +333,7 @@ QVariantMap Pulsar::getInfoMap(const StelCore *core) const
 	map["s600"] = s600;
 	map["s1400"] = s1400;
 	map["distance"] = distance;
+	map["adistance"] = adistance;
 	map["glitch"] = glitch;
 	map["notes"] = notes;
 	return map;

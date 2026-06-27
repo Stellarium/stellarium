@@ -102,9 +102,9 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 				it.remove();
 			}
 		}
-		//qInfo() << "Skyculture" << scName << "configured to exclude asterisms referenced from" << excludeRefs;
+		//qInfo() << "Asterism: Skyculture" << scName << "configured to exclude asterisms referenced from references" << excludeRefs;
 
-		QVariantList refsVariants=data["references"].toArray().toVariantList();
+		QVariantList refsVariants=data["common_name"]["references"].toArray().toVariantList();
 		if (!refsVariants.isEmpty())
 		{
 			QSet<int> refs;
@@ -135,6 +135,7 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 		culturalName.pronounce = names["pronounce"].toString().trimmed();
 		culturalName.IPA = names["IPA"].toString().trimmed();
 		culturalName.transliteration = names["transliteration"].toString().trimmed();
+		context = names["context"].toString().trimmed();
 	}
 	const QJsonArray polylines = data["lines"].toArray();
 	asterism.clear();

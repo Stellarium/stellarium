@@ -253,10 +253,10 @@ private:
 	QString currentListDescription; //!< Description of list with selectedOlud
 	QString sorting;	  //!< Sorting of the list ex: right ascension
 
-	bool flagUseJD;         //!< Property. Store/retrieve date
-	bool flagUseLandscape;  //!< Property. Store/retrieve landscape
-	bool flagUseLocation;   //!< Property. Store/retrieve location
-	bool flagUseFov;        //!< Property. Store/retrieve field of view
+	bool flagUseJD = false;         //!< Property. Store/retrieve date
+	bool flagUseLandscape = false;  //!< Property. Store/retrieve landscape
+	bool flagUseLocation = false;   //!< Property. Store/retrieve location
+	bool flagUseFov = false;        //!< Property. Store/retrieve field of view
 
 	bool tainted;           //!< List has changed. Needs write on exit.
 	bool isEditMode;        //!< true if in Edit/Create New mode.

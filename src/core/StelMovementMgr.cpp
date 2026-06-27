@@ -256,6 +256,7 @@ void StelMovementMgr::resetInitViewPos()
 
 		//qDebug() << "   upVectorMountFrame becomes " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::bindingFOVActions()
@@ -303,6 +304,7 @@ void StelMovementMgr::setEquatorialMount(bool b)
 		int yPosition = qRound(projectorParams.viewportCenter[1] - yPositionOffset - painter.getFontMetrics().height()/2);
 		lastMessageID = GETSTELMODULE(LabelMgr)->labelScreen(mode, xPosition, yPosition, true, StelApp::getInstance().getScreenFontSize() + 3, "#99FF99", true, 2000);
 	}
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
@@ -390,6 +392,7 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 			// We can hardly use the mouse exactly enough to go to the zenith/pole. Any mouse motion can safely reset the simplified up vector.
 			//qDebug() << "handleMouseMoves: resetting Up vector.";
 			setViewUpVector(Vec3d(0., 0., 1.));
+			core->setClearSkyOnce();
 			return true;
 		}
 	}
@@ -428,6 +431,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Left:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLongitude(-5.);
+					updateMotion(0.0);
 				} else {
 					turnLeft(true);
 				}
@@ -435,12 +439,14 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Right:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLongitude(5.);
+					updateMotion(0.0);
 				} else
 				turnRight(true);
 				break;
 			case Qt::Key_Up:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLatitude(5.);
+					updateMotion(0.0);
 				}
 				else if (event->modifiers().testFlag(Qt::ControlModifier)){
 					zoomIn(true);
@@ -451,6 +457,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Down:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLatitude(-5.);
+					updateMotion(0.0);
 				}
 				else if (event->modifiers().testFlag(Qt::ControlModifier)) {
 					zoomOut(true);
@@ -470,12 +477,14 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
 				{
 					gimbal->addToDistance(gimbal->getDistance()*0.05);
+					updateMotion(0.0);
 				}
 				break;
 			case Qt::Key_Home:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
 				{
 					gimbal->addToDistance(-gimbal->getDistance()*0.05);
+					updateMotion(0.0);
 				}
 				break;
 			case Qt::Key_Shift:
@@ -772,6 +781,7 @@ void StelMovementMgr::turnRight(bool s)
 	}
 	else
 		deltaAz = 0;
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::turnLeft(bool s)
@@ -784,6 +794,7 @@ void StelMovementMgr::turnLeft(bool s)
 	}
 	else
 		deltaAz = 0;
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::turnUp(bool s)
@@ -796,6 +807,7 @@ void StelMovementMgr::turnUp(bool s)
 	}
 	else
 		deltaAlt = 0;
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::turnDown(bool s)
@@ -808,19 +820,26 @@ void StelMovementMgr::turnDown(bool s)
 	}
 	else
 		deltaAlt = 0;
+	core->setClearSkyOnce();
 }
 
 
 void StelMovementMgr::zoomIn(bool s)
 {
 	if (flagEnableZoomKeys)
+	{
 		deltaFov = -1*(s!=0);
+		core->setClearSkyOnce();
+	}
 }
 
 void StelMovementMgr::zoomOut(bool s)
 {
 	if (flagEnableZoomKeys)
+	{
 		deltaFov = (s!=0);
+		core->setClearSkyOnce();
+	}
 }
 
 void StelMovementMgr::lookEast(bool zero)
@@ -898,7 +917,7 @@ void StelMovementMgr::lookNorth(bool zero)
 	}
 
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
-	cy = static_cast<float>(M_PI);
+	cy = M_PIf;
 	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 
@@ -1027,8 +1046,6 @@ void StelMovementMgr::setFOVDeg(float fov)
 // Increment/decrement smoothly the vision field and position
 void StelMovementMgr::updateMotion(double deltaTime)
 {
-	updateVisionVector(deltaTime);
-
 	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	// the more it is zoomed, the lower the moving speed is (in angle)
 	double depl=keyMoveSpeed*deltaTime*1000*currentFov;
@@ -1083,11 +1100,13 @@ void StelMovementMgr::updateMotion(double deltaTime)
 		deltaAlt = rateY*M_PI_180*deltaTime;
 	}
 
+	updateVisionVector(deltaTime);
 	panView(deltaAz, deltaAlt);
 	updateAutoZoom(deltaTime);
 }
 
-// called at begin of updateMotion()
+// Called after manual FOV changes so viewport-offset tracking uses the FOV
+// that will be rendered for this frame.
 void StelMovementMgr::updateVisionVector(double deltaTime)
 {
 	// Specialized setups cannot use this functionality!

@@ -130,6 +130,38 @@ define(["jquery", "api/remotecontrol", "jquery-ui"], function($, rc) {
             this.input.autocomplete("instance").term = "";
         },
 
+        // NEW: Set value programmatically
+        setValue: function(value) {
+            var $option = this.element.find("option[value='" + value + "']");
+            if ($option.length) {
+                this.element.val(value);
+                this.input.val($option.text());
+                // Update selected property
+                this.element.find("option").prop("selected", false);
+                $option.prop("selected", true);
+                return true;
+            }
+            return false;
+        },
+
+        // NEW: Get current value
+        getValue: function() {
+            return this.element.val();
+        },
+
+        // NEW: Get current display text
+        getDisplayText: function() {
+            return this.input.val();
+        },
+
+        // NEW: Refresh the combobox display based on current selection
+        refresh: function() {
+            var selectedOption = this.element.find("option:selected");
+            if (selectedOption.length) {
+                this.input.val(selectedOption.text());
+            }
+        },
+
         _destroy: function() {
             this.wrapper.remove();
             this.element.show();

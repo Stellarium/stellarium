@@ -18,6 +18,9 @@ SET(RemoteSync_SRCS
   SyncServerEventSenders.cpp
   SyncServerHandlers.hpp
   SyncServerHandlers.cpp
+)
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND RemoteSync_SRCS
   gui/RemoteSyncDialog.hpp
   gui/RemoteSyncDialog.cpp
 )
@@ -25,20 +28,25 @@ SET(RemoteSync_SRCS
 SET(RemoteSync_UIS
   gui/remoteSyncDialog.ui
 )
+ENDIF(STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 ################# compiles resources files ############
 SET(RemoteSync_RES ../RemoteSync.qrc)
 
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
 ELSE()
-     QT_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
 ENDIF()
 
 ADD_LIBRARY(RemoteSync-static STATIC ${RemoteSync_SRCS} ${RemoteSync_UIS_H} ${RemoteSync_RES_CXX})
-TARGET_LINK_LIBRARIES(RemoteSync-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(RemoteSync-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 # The library target "RemoteSync-static" has a default OUTPUT_NAME of "RemoteSync-static", so change it.
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES OUTPUT_NAME "RemoteSync")
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

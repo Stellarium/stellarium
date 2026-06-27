@@ -27,6 +27,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QLocale>
+#include <QTimeZone>
 #include <QRegularExpression>
 #include <QProcess>
 #include <QSysInfo>
@@ -43,6 +44,11 @@
 #include <sys/utsname.h>
 #endif
 
+namespace
+{
+double sqr(double x) { return x*x; }
+}
+
 namespace StelUtils
 {
 //! Return the full name of stellarium, e.g. "Stellarium 23.1"
@@ -54,11 +60,11 @@ QString getApplicationName()
 //! Return the version of stellarium, e.g. "23.1.0"
 QString getApplicationVersion()
 {
-#ifdef GIT_REVISION
+	#ifdef GIT_REVISION
 	return QString("%1-%2 [%3]").arg(PACKAGE_VERSION, GIT_REVISION, GIT_BRANCH);
-#else
+	#else
 	return QString(PACKAGE_VERSION);
-#endif
+	#endif
 }
 
 //! Return the public version of stellarium, e.g. "23.1"
@@ -83,20 +89,20 @@ QString getOperatingSystemInfo()
 {
 	QString OS = QSysInfo::prettyProductName();
 
-#if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_SOLARIS
+	#if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_SOLARIS
 	struct utsname buff;
 	if (uname(&buff) != -1)
 		OS = QString("%1 %2").arg(buff.sysname, buff.release);
-#endif
+	#endif
 
-#ifdef Q_OS_HAIKU
+	#ifdef Q_OS_HAIKU
 	struct utsname buff;
 	if (uname(&buff) != -1)
 	{
 		QString revision = QString("%1").arg(buff.version).split(" ").first();
 		OS = QString("%1 %2 (%3)").arg(buff.sysname, buff.release, revision);
 	}
-#endif
+	#endif
 
 	if (OS.isEmpty() || OS==QStringLiteral("unknown"))
 		OS = "Unknown operating system";
@@ -107,9 +113,9 @@ QString getOperatingSystemInfo()
 QString getAddressingMode()
 {
 	QString mode("32-bit");
-        #if defined(__LP64__) || defined(_WIN64)
+	#if defined(__LP64__) || defined(_WIN64)
 	mode = "64-bit";
-        #endif
+	#endif
 	return mode;
 }
 
@@ -311,17 +317,15 @@ QString radToHmsNarration(const double angle, const bool decimal)
 	unsigned int h,m;
 	double s;
 	StelUtils::radToHms(angle, h, m, s);
-	int width, precision;
+	int precision;
 	QString carry;
 	if (decimal)
 	{
-		width=5;
 		precision=2;
 		carry="60.00";
 	}
 	else
 	{
-		width=4;
 		precision=1;
 		carry="60.0";
 	}
@@ -365,11 +369,11 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	os << (sign?'+':'-') << d << degsign;
 	if (std::fabs(s*100-static_cast<int>(s)*100)>=1)
 	{
-#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 		os << m << '\'' << Qt::fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
-#else
+		#else
 		os << m << '\'' << fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
-#endif
+		#endif
 	}
 	else if (static_cast<int>(s)!=0)
 	{
@@ -416,11 +420,11 @@ QString radToDmsPStr(const double angle, const int precision, const bool useD)
 	int width = 2;
 	if (precision>0)
 		width = 3 + precision;
-#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 	os << qSetRealNumberPrecision(precision) << Qt::fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
-#else
+	#else
 	os << qSetRealNumberPrecision(precision) << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
-#endif
+	#endif
 	return str;
 }
 
@@ -479,6 +483,7 @@ QString decDegToDmsStr(const double angle)
 	decDegToDms(angle, sign, d, m, s);
 	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(static_cast<unsigned int>(s),2,10,QLatin1Char('0'));
 }
+
 // Convert an angle in decimal degrees to a dms formatted string for narration
 QString decDegToDmsNarration(const double angle, bool sayPlus)
 {
@@ -513,6 +518,7 @@ QString decDegToLatitudeStr(const double latitude, bool dms)
 	else
 		return QString("%1%2%3").arg(sign ? 'N' : 'S').arg(QString::number(fabs(latitude), 'f', 4), QChar(0x00B0));
 }
+
 // Convert latitude in decimal degrees to a narration-formatted (verbose) string.
 QString decDegToLatitudeNarration(const double latitude, bool dms)
 {
@@ -529,7 +535,6 @@ QString decDegToLatitudeNarration(const double latitude, bool dms)
 	else
 		return QString("%1: %2 %3").arg((sign ? qc_("North", "object narration") : qc_("South", "object narration")), narrateDecimal(fabs(latitude), 2), qc_("degrees", "object narration"));
 }
-
 
 // default values as for Earth
 QString decDegToLongitudeStr(const double longitude, bool eastPositive, bool semiSphere, bool dms)
@@ -595,8 +600,6 @@ QString decDegToLongitudeNarration(const double longitude, bool eastPositive, bo
 		return QString("%1: %2 %3").arg((sign ? positive : negative), narrateDecimal(fabs(longMod), 2), degreesStr);
 }
 
-
-
 // Convert a dms formatted string to an angle in radian
 double dmsStrToRad(const QString& s)
 {
@@ -634,24 +637,24 @@ double getDecAngle(const QString& str)
 				   "\\s*([NSEW]?)"                       // [point] (9)
 				  );
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+	#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
 	QRegularExpression rex(QRegularExpression::anchoredPattern(reStr), QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch match=rex.match(str);
 	if( match.hasMatch() )
 	{
 		QStringList caps = match.capturedTexts();
-#else
+	#else
 	QRegExp rex(reStr, Qt::CaseInsensitive);
 	if( rex.exactMatch(str) )
 	{
 		QStringList caps = rex.capturedTexts();
-#endif
-#if 0
+	#endif
+	#if 0
 		qDebug() << "reg exp: ";
 		for( int i = 1; i <= rex.captureCount() ; ++i ){
 			qDebug() << i << "=\"" << caps.at(i) << "\" ";
 		}
-#endif
+	#endif
 		double d = 0;
 		double m = 0;
 		double s = 0;
@@ -765,6 +768,38 @@ double getDecAngle(const QString& str)
 	return -0.0;
 }
 
+bool naturalLessThan(const QString& a, const QString& b)
+{
+	// Indices are int (not qsizetype) so QString::operator[] resolves
+	// unambiguously on Qt 5.12 + MSVC x64 — where qsizetype is long long but
+	// operator[] is only overloaded for int/uint, causing C2593 'operator ['
+	// is ambiguous. Catalog designations are short, so int range is enough.
+	int ia = 0, ib = 0;
+	while (ia < a.size() && ib < b.size())
+	{
+		if (a[ia].isDigit() && b[ib].isDigit())
+		{
+			int ja = ia, jb = ib;
+			while (ja < a.size() && a[ja].isDigit()) ++ja;
+			while (jb < b.size() && b[jb].isDigit()) ++jb;
+			const qlonglong numA = a.mid(ia, ja - ia).toLongLong();
+			const qlonglong numB = b.mid(ib, jb - ib).toLongLong();
+			if (numA != numB)
+				return numA < numB;
+			ia = ja;
+			ib = jb;
+		}
+		else
+		{
+			const QChar ca = a[ia].toLower(), cb = b[ib].toLower();
+			if (ca != cb)
+				return ca < cb;
+			++ia; ++ib;
+		}
+	}
+	return a.size() < b.size();
+}
+
 int getBiggerPowerOfTwo(int value)
 {
 	int p=1;
@@ -787,7 +822,6 @@ int getSmallerPowerOfTwo(const int value)
 /*************************************************************************
  Convert a Qt QDateTime class to Julian Day
 *************************************************************************/
-
 QDateTime jdToQDateTime(const double& jd, const Qt::TimeSpec timeSpec)
 {
 	Q_ASSERT((timeSpec==Qt::UTC) || (timeSpec==Qt::LocalTime));
@@ -903,7 +937,6 @@ double getHoursFromJulianDay(const double julianDay)
 	getTimeFromJulianDay(julianDay, &hr, &min, &sec, &millis);
 	return static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec + millis/1000.)/3600.;
 }
-
 
 QString julianDayToISO8601String(const double jd, bool addMS)
 {
@@ -1051,17 +1084,17 @@ QString localeDateString(const int year, const int month, const int day, const i
 	QDate test(year, month, day);
 
 	// try to avoid QDate's non-astronomical time here, don't do BCE or year 0.
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	if (year > 0 && test.isValid() && !test.toString(QLocale().dateFormat(QLocale::ShortFormat)).isEmpty())
 	{
 		return test.toString(QLocale().dateFormat(QLocale::ShortFormat));
 	}
-#else
+	#else
 	if (year > 0 && test.isValid() && !test.toString(Qt::DefaultLocaleShortDate).isEmpty())
 	{
 		return test.toString(Qt::DefaultLocaleShortDate);
 	}
-#endif
+	#endif
 	else
 	{
 		return localeDateString(year,month,day,dayOfWeek,QLocale().dateFormat(QLocale::ShortFormat));
@@ -1104,7 +1137,6 @@ double getJDFromJulianEpoch(const double epoch)
 {
 	return 2451545.0 + (epoch - 2000.0) * 365.25;
 }
-
 
 double qTimeToJDFraction(const QTime& time)
 {
@@ -1321,40 +1353,47 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 {
 	bool change = false;
 
-	while ( os > 59 ) {
+	while ( os > 59 ) 
+	{
 		os -= 60;
 		omin += 1;
 		change = true;
 	}
-	while ( os < 0 ) {
+	while ( os < 0 ) 
+	{
 		os += 60;
 		omin -= 1;
 		change = true;
 	}
 
-	while (omin > 59 ) {
+	while (omin > 59 ) 
+	{
 		omin -= 60;
 		oh += 1;
 		change = true;
 	}
-	while (omin < 0 ) {
+	while (omin < 0 ) 
+	{
 		omin += 60;
 		oh -= 1;
 		change = true;
 	}
 
-	while ( oh > 23 ) {
+	while ( oh > 23 ) 
+	{
 		oh -= 24;
 		od += 1;
 		change = true;
 	}
-	while ( oh < 0 ) {
+	while ( oh < 0 ) 
+	{
 		oh += 24;
 		od -= 1;
 		change = true;
 	}
 
-	while ( od > numberOfDaysInMonthInYear(om, oy) ) {
+	while ( od > numberOfDaysInMonthInYear(om, oy) ) 
+	{
 		od -= numberOfDaysInMonthInYear(om, oy);
 		om++;
 		if ( om > 12 ) {
@@ -1363,7 +1402,8 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 		}
 		change = true;
 	}
-	while ( od < 1 ) {
+	while ( od < 1 ) 
+	{
 		od += numberOfDaysInMonthInYear(om-1,oy);
 		om--;
 		if ( om < 1 ) {
@@ -1373,24 +1413,28 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 		change = true;
 	}
 
-	while ( om > 12 ) {
+	while ( om > 12 ) 
+	{
 		om -= 12;
 		oy += 1;
 		change = true;
 	}
-	while ( om < 1 ) {
+	while ( om < 1 ) 
+	{
 		om += 12;
 		oy -= 1;
 		change = true;
 	}
 
 	// and the julian-gregorian epoch hole: round up to the 15th
-	if ( oy == 1582 && om == 10 && ( od > 4 && od < 15 ) ) {
+	if ( oy == 1582 && om == 10 && ( od > 4 && od < 15 ) ) 
+	{
 		od = 15;
 		change = true;
 	}
 
-	if ( change ) {
+	if ( change ) 
+	{
 		*ry = oy;
 		*rm = om;
 		*rd = od;
@@ -1403,13 +1447,13 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 
 void debugQVariantMap(const QVariant& m, const QString& indent, const QString& key)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	QMetaType t = m.metaType();
 	if (t == QMetaType(QMetaType::QVariantMap))
-#else
+	#else
 	QVariant::Type t = m.type();
 	if (t == QVariant::Map)
-#endif
+	#endif
 	{
 		qDebug() << indent + key + "(map):";
 		QList<QString> keys = m.toMap().keys();
@@ -1419,11 +1463,11 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 			debugQVariantMap(m.toMap()[k], indent + "    ", k);
 		}
 	}
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	else if (t == QMetaType(QMetaType::QVariantList))
-#else
+	#else
 	else if (t == QVariant::List)
-#endif
+	#endif
 	{
 		qDebug() << indent + key + "(list):";
 		const QList<QVariant> mList=m.toList();
@@ -1531,6 +1575,7 @@ QString hoursToHmsStr(const double hours, const bool minutesOnly, const bool col
 		return QString(format).arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
 	}
 }
+
 QString hoursToHmsNarration(const double hours, const bool minutesOnly, const bool colonFormat)
 {
 	const QString sHours=qc_("hours", "object narration");
@@ -1572,6 +1617,7 @@ QString hoursToHmsStr(const float hours, const bool minutesOnly, const bool colo
 {
 	return hoursToHmsStr(static_cast<double>(hours), minutesOnly, colonFormat);
 }
+
 QString hoursToHmsNarration(const float hours, const bool minutesOnly, const bool colonFormat)
 {
 	return hoursToHmsNarration(static_cast<double>(hours), minutesOnly, colonFormat);
@@ -1650,13 +1696,12 @@ QString narrateDecimal(double num, int decimals)
 //! The method to splitting the text by substrings by some limit of string length
 QString wrapText(const QString& s, const int limit)
 {
-	static const uint32_t RLM32=U'\U0000200f'; // Right-Left-marker (starting Arab/Hebrew)
-	static const uint32_t LRM32=U'\U0000200e'; // Left-right-marker
-	static const uint32_t ZWS32=U'\U0000200b'; // Zero-width space
+	//static const uint32_t RLM32=U'\U0000200f'; // Right-Left-marker (starting Arab/Hebrew)
+	//static const uint32_t LRM32=U'\U0000200e'; // Left-right-marker
+	//static const uint32_t ZWS32=U'\U0000200b'; // Zero-width space
 	//static const QString LRM{"\u200e"}; // left-to-right mark: zero-width char
 	//static const QString RLM{"\u200f"}; // right-to-left mark: right to left zero-width non-Arabic char
 	static const QString ZWS{"\u200b"}; // zero-width space (we use them to combine cultural label groups)
-
 
 	QString result = "";
 	if (s.length()<=limit)
@@ -1680,7 +1725,6 @@ QString wrapText(const QString& s, const int limit)
 
 	return result;
 }
-
 
 /* /////////////////// DELTA T VARIANTS
 // For the standard epochs for many formulae, we use
@@ -2119,7 +2163,8 @@ double getDeltaTByChaprontTouze(const double jDay)
 
 // Implementation of algorithm by JPL Horizons for DeltaT computation
 double getDeltaTByJPLHorizons(const double jDay)
-{ // FIXME: It does not make sense to have zeros after 1620 in a JPL Horizons compatible implementation!
+{ 
+	// FIXME: It does not make sense to have zeros after 1620 in a JPL Horizons compatible implementation!
 	int year, month, day;
 	double u;
 	double deltaT = 0.;
@@ -2425,17 +2470,16 @@ double getDeltaTByIslamSadiqQureshi(const double jDay)
 	//year=qBound(1620, year, 2007);
 	if (year<1620)
 	{
-		const double j1620=qDateTimeToJd(QDateTime(QDate(1620, 1, 1), QTime(0, 0, 0), Qt::UTC));
+		const double j1620=qDateTimeToJd(QDateTime(QDate(1620, 1, 1), QTime(0, 0, 0), QTimeZone(0)));
 		ub=(j1620-2454101.0)/36525.0;
 	}
 	else if (year>2007)
 	{
-		const double j2008=qDateTimeToJd(QDateTime(QDate(2008, 1, 1), QTime(0, 0, 0), Qt::UTC));
+		const double j2008=qDateTimeToJd(QDateTime(QDate(2008, 1, 1), QTime(0, 0, 0), QTimeZone(0)));
 		ub=(j2008-2454101.0)/36525.0;
 	}
 	else
 		ub=(jDay-2454101.0)/36525.0; // (2007-jan-0.5)
-
 
 	if (year <= 1698)
 	{
@@ -2844,7 +2888,7 @@ float* ComputeCosSinTheta(const unsigned int slices)
 	Q_ASSERT(slices<=MAX_SLICES);
 	
 	// Difference angle between the stops. Always use 2*M_PI/slices!
-	const float dTheta = 2.f * static_cast<float>(M_PI) / static_cast<float>(slices);
+	const float dTheta = 2.f * M_PIf / static_cast<float>(slices);
 	float *cos_sin = cos_sin_theta;
 	float *cos_sin_rev = cos_sin + 2*(slices+1);
 	const float c = std::cos(dTheta);
@@ -2878,7 +2922,7 @@ float* ComputeCosSinRho(const unsigned int segments)
 	Q_ASSERT(segments<=MAX_STACKS);
 	
 	// Difference angle between the stops. Always use M_PI/segments!
-	const float dRho = static_cast<float>(M_PI) / static_cast<float>(segments);
+	const float dRho = M_PIf / static_cast<float>(segments);
 	float *cos_sin = cos_sin_rho;
 	float *cos_sin_rev = cos_sin + 2*(segments+1);
 	const float c = cosf(dRho);
@@ -3165,6 +3209,74 @@ QString narrateGreekChars(const QString &input)
 	    res=res.replace(i.key(), i.value());
 	}
 	return res;
+}
+
+QString substituteGreek(const QString& keyString)
+{
+	if (!keyString.contains(' '))
+		return getGreekLetterByName(keyString);
+	else
+	{
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		QStringList nameComponents = keyString.split(" ", Qt::SkipEmptyParts);
+		#else
+		QStringList nameComponents = keyString.split(" ", QString::SkipEmptyParts);
+		#endif
+		if(!nameComponents.empty())
+			nameComponents[0] = getGreekLetterByName(nameComponents[0]);
+		return nameComponents.join(" ");
+	}
+}
+
+QString getGreekLetterByName(const QString& potentialGreekLetterName)
+{
+	if(StelUtils::greekLetters.contains(potentialGreekLetterName))
+		return StelUtils::greekLetters[potentialGreekLetterName];
+
+	// There can be indices (e.g. "α1 Cen" instead of "α Cen A"), so strip
+	// any trailing digit.
+	int lastCharacterIndex = potentialGreekLetterName.length()-1;
+	if(potentialGreekLetterName.at(lastCharacterIndex).isDigit())
+	{
+		QChar digit = potentialGreekLetterName.at(lastCharacterIndex);
+		QString name = potentialGreekLetterName.left(lastCharacterIndex);
+		if(StelUtils::greekLetters.contains(name))
+			return StelUtils::greekLetters[name] + digit;
+	}
+
+	return potentialGreekLetterName;
+}
+
+double circlesIntersectionArea(double R1, double R2, double d)
+{
+	using namespace std;
+	if(d+min(R1,R2)<max(R1,R2)) return M_PI*sqr(min(R1,R2));
+	if(d>=R1+R2) return 0;
+
+	// Return area of the lens with radii R1 and R2 and offset d
+	return sqr(R1)*acos(clamp( (sqr(d)+sqr(R1)-sqr(R2))/(2*d*R1) ,-1.,1.)) +
+	       sqr(R2)*acos(clamp( (sqr(d)+sqr(R2)-sqr(R1))/(2*d*R2) ,-1.,1.)) -
+	       0.5*sqrt(max( (-d+R1+R2)*(d+R1-R2)*(d-R1+R2)*(d+R1+R2) ,0.));
+}
+
+double visibleSolidAngleOfSun(const double sunAngularRadius, const double moonAngularRadius, const double angleBetweenSunAndMoon)
+{
+	const double Rs = sunAngularRadius;
+	const double Rm = moonAngularRadius;
+	double visibleSolidAngle = M_PI*sqr(Rs);
+
+	const double dSM = angleBetweenSunAndMoon;
+	if(dSM < Rs+Rm)
+	{
+		visibleSolidAngle -= circlesIntersectionArea(Rm,Rs,dSM);
+	}
+
+	return visibleSolidAngle;
+}
+
+double sunVisibilityDueToMoon(const double sunAngularRadius, const double moonAngularRadius, const double angleBetweenSunAndMoon)
+{
+	return visibleSolidAngleOfSun(sunAngularRadius, moonAngularRadius, angleBetweenSunAndMoon)/(M_PI*sqr(sunAngularRadius));
 }
 
 } // end of the StelUtils namespace

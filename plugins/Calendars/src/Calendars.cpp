@@ -39,6 +39,7 @@
 #include "ISOCalendar.hpp"
 #include "IcelandicCalendar.hpp"
 #include "RomanCalendar.hpp"
+#include "ByzantineCalendar.hpp"
 #include "OlympicCalendar.hpp"
 #include "EgyptianCalendar.hpp"
 #include "ArmenianCalendar.hpp"
@@ -100,7 +101,10 @@ StelPluginInfo CalendarsStelPluginInterface::getPluginInfo() const
  Constructor
 *************************************************************************/
 Calendars::Calendars():
+	infoPanel(nullptr),
+#ifndef NO_GUI
 	toolbarButton(nullptr),
+#endif
 	enabled(true),
 	flagTextColorOverride(false),
 	textColor(0.75f),
@@ -110,6 +114,7 @@ Calendars::Calendars():
 	flagShowISO(true),
 	flagShowIcelandic(false),
 	flagShowRoman(false),
+	flagShowByzantine(false),
 	flagShowOlympic(false),
 	flagShowEgyptian(false),
 	flagShowArmenian(false),
@@ -145,23 +150,28 @@ Calendars::Calendars():
 	setObjectName("Calendars");
 	int fontSize = StelApp::getInstance().getScreenFontSize();
 
-	configDialog = new CalendarsDialog();
 	conf = StelApp::getInstance().getSettings();
-
+#ifndef NO_GUI
+	configDialog = new CalendarsDialog();
 	infoPanel=new CalendarsInfoPanel(this, static_cast<StelGui*>(StelApp::getInstance().getGui())->getSkyGui());
+#endif
+
 	QFont pFont=QGuiApplication::font();
 	pFont.setPixelSize(fontSize);
-	infoPanel->setFont(pFont);
-	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, [=](const QFont &font){
-		QFont pFont=font;
-		pFont.setPixelSize(fontSize);
+	if (infoPanel)
+	{
 		infoPanel->setFont(pFont);
-		infoPanel->updatePosition(true);});
-	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int size){
-		QFont f=infoPanel->font();
-		f.setPixelSize(size);
-		infoPanel->setFont(f);
-		infoPanel->updatePosition(true);});
+		connect(&StelApp::getInstance(), &StelApp::fontChanged, this, [=](const QFont &font){
+			QFont pFont=font;
+			pFont.setPixelSize(fontSize);
+			infoPanel->setFont(pFont);
+			infoPanel->updatePosition(true);});
+		connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int size){
+			QFont f=infoPanel->font();
+			f.setPixelSize(size);
+			infoPanel->setFont(f);
+			infoPanel->updatePosition(true);});
+	}
 }
 
 /*************************************************************************
@@ -169,7 +179,9 @@ Calendars::Calendars():
 *************************************************************************/
 Calendars::~Calendars()
 {
+#ifndef NO_GUI
 	delete configDialog; configDialog=nullptr;
+#endif
 	QMutableMapIterator<QString, Calendar*> i(calendars);
 	while (i.hasNext())
 	{
@@ -182,9 +194,13 @@ Calendars::~Calendars()
 
 bool Calendars::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+#endif
 }
 /*************************************************************************
  Reimplementation of the getCallOrder method
@@ -206,10 +222,13 @@ void Calendars::init()
 	// Create action for enable/disable & hook up signals
 	QString section=N_("Calendars");
 	addAction("actionShow_Calendars",         section, N_("Calendars"), "enabled", "Alt+K");
+#ifndef NO_GUI
 	addAction("actionShow_Calendars_dialog",  section, N_("Show settings dialog"),  configDialog,  "visible",           "Alt+Shift+K");
+#endif
 	// No hotkey here, but users can define their own
 	addAction("actionShow_Calendars_export",  section, N_("Export to Calendars.html"),  this,  "exportCalendars()");
 
+#ifndef NO_GUI
 	// Add a toolbar button
 	StelApp& app=StelApp::getInstance();
 	try
@@ -235,7 +254,7 @@ void Calendars::init()
 	}
 
 	infoPanel->setPos(600, 300);
-
+#endif
 	const double jd=StelApp::getInstance().getCore()->getJD();
 	calendars.insert("Calendar", new Calendar(jd)); // For scripting use only.
 	calendars.insert("Julian", new JulianCalendar(jd));
@@ -244,6 +263,7 @@ void Calendars::init()
 	calendars.insert("ISO", new ISOCalendar(jd));
 	calendars.insert("Icelandic", new IcelandicCalendar(jd));
 	calendars.insert("Roman", new RomanCalendar(jd));
+	calendars.insert("Byzantine", new ByzantineCalendar(jd));
 	calendars.insert("Olympic", new OlympicCalendar(jd));
 	calendars.insert("Egyptian", new EgyptianCalendar(jd));
 	calendars.insert("Armenian", new ArmenianCalendar(jd));
@@ -313,6 +333,7 @@ void Calendars::loadSettings()
 	showISO(                conf->value("Calendars/show_iso", true).toBool());
 	showIcelandic(          conf->value("Calendars/show_icelandic", false).toBool());
 	showRoman(              conf->value("Calendars/show_roman", false).toBool());
+	showByzantine(          conf->value("Calendars/show_byzantine", false).toBool());
 	showOlympic(            conf->value("Calendars/show_olympic", false).toBool());
 	showEgyptian(           conf->value("Calendars/show_egyptian", false).toBool());
 	showArmenian(           conf->value("Calendars/show_armenian", false).toBool());
@@ -360,6 +381,7 @@ void Calendars::restoreDefaultSettings()
 **********************************************************************************/
 void Calendars::draw(StelCore* core)
 {
+	if (!infoPanel) return;
 	if (!enabled)
 	{
 		infoPanel->hide();
@@ -405,6 +427,7 @@ QString Calendars::createTableToDraw()
 	if (flagShowISO)                oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("ISO week",              "calendar"), getCal("ISO")->getFormattedDateString());
 	if (flagShowIcelandic)          oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Icelandic",             "calendar"), getCal("Icelandic")->getFormattedDateString());
 	if (flagShowRoman)              oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Roman",                 "calendar"), getCal("Roman")->getFormattedDateString());
+	if (flagShowByzantine)          oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Byzantine",             "calendar"), getCal("Byzantine")->getFormattedDateString());
 	if (flagShowOlympic)            oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Olympic",               "calendar"), getCal("Olympic")->getFormattedDateString());
 	if (flagShowEgyptian)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Egyptian",              "calendar"), getCal("Egyptian")->getFormattedDateString());
 	if (flagShowArmenian)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Armenian",              "calendar"), getCal("Armenian")->getFormattedDateString());
@@ -477,7 +500,11 @@ Calendar* Calendars::getCal(const QString &name)
 
 void Calendars::update(double)
 {
-	if (!enabled)
+	if (!enabled
+#ifndef NO_GUI
+			&& (configDialog && !configDialog->visible())
+#endif
+			) // allow playing in dialog while main display is off! (#4917)
 		return;
 	const double jd=StelApp::getInstance().getCore()->getJD();
 	foreach (Calendar* cal, calendars)
@@ -560,6 +587,17 @@ void Calendars::showRoman(bool b)
 		flagShowRoman=b;
 		conf->setValue("Calendars/show_roman", b);
 		emit showRomanChanged(b);
+	}
+}
+
+bool Calendars::isByzantineDisplayed() const { return flagShowByzantine;}
+void Calendars::showByzantine(bool b)
+{
+	if (b!=flagShowByzantine)
+	{
+		flagShowByzantine=b;
+		conf->setValue("Calendars/show_byzantine", b);
+		emit showByzantineChanged(b);
 	}
 }
 

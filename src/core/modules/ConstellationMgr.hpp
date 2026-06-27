@@ -529,7 +529,7 @@ private:
 	StarMgr* hipStarMgr;
 
 	bool isolateSelected; //!< true to pick individual constellations.
-	bool flagConstellationPick; // TODO: CLEAR DESCRIPTION
+	bool flagConstellationPick; //!< flag to set whether only one selected constellation must be displayed
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
 	static QMap<QString, QString>iauConstellationNames; //!< maps abbreviation to full (translated) name
 

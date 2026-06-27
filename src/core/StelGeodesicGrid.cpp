@@ -127,9 +127,9 @@ StelGeodesicGrid::~StelGeodesicGrid(void)
 }
 
 void StelGeodesicGrid::getTriangleCorners(int lev,int index,
-									  Vec3f &h0,
-									  Vec3f &h1,
-									  Vec3f &h2) const
+                                          Vec3f &h0,
+                                          Vec3f &h1,
+                                          Vec3f &h2) const
 {
 	if (lev <= 0)
 	{
@@ -203,9 +203,9 @@ int StelGeodesicGrid::getPartnerTriangle(int lev, int index) const
 }
 
 void StelGeodesicGrid::initTriangle(int lev,int index,
-								const Vec3f &c0,
-								const Vec3f &c1,
-								const Vec3f &c2)
+                                    const Vec3f &c0,
+                                    const Vec3f &c1,
+                                    const Vec3f &c2)
 {
 	Q_ASSERT((c0^c1)*c2 >= 0.0f);
 	Triangle &t(triangles[lev][index]);
@@ -247,23 +247,23 @@ void StelGeodesicGrid::visitTriangles(int maxVisitLevel,
 }
 
 void StelGeodesicGrid::visitTriangles(int lev,int index,
-								  const Vec3f &c0,
-								  const Vec3f &c1,
-								  const Vec3f &c2,
-                                  int maxVisitLevel,
-                                  VisitFunc *func,
-                                  void *context) const
+                                      const Vec3f &c0,
+                                      const Vec3f &c1,
+                                      const Vec3f &c2,
+                                      int maxVisitLevel,
+                                      VisitFunc *func,
+                                      void *context) const
 {
 	(*func)(lev,index,c0,c1,c2,context);
-	Triangle &t(triangles[lev][index]);
+	Triangle* t = &triangles[lev][index];
 	lev++;
 	if (lev <= maxVisitLevel)
 	{
 		index *= 4;
-		visitTriangles(lev,index+0,c0,t.e2,t.e1,maxVisitLevel,func,context);
-		visitTriangles(lev,index+1,t.e2,c1,t.e0,maxVisitLevel,func,context);
-		visitTriangles(lev,index+2,t.e1,t.e0,c2,maxVisitLevel,func,context);
-		visitTriangles(lev,index+3,t.e0,t.e1,t.e2,maxVisitLevel,func,context);
+		visitTriangles(lev,index+0,c0,t->e2,t->e1,maxVisitLevel,func,context);
+		visitTriangles(lev,index+1,t->e2,c1,t->e0,maxVisitLevel,func,context);
+		visitTriangles(lev,index+2,t->e1,t->e0,c2,maxVisitLevel,func,context);
+		visitTriangles(lev,index+3,t->e0,t->e1,t->e2,maxVisitLevel,func,context);
 	}
 }
 
@@ -355,13 +355,14 @@ void StelGeodesicGrid::searchZones(const QVector<SphericalCap>& convex,
 
 void StelGeodesicGrid::searchZones(int lev,int index,
 								   const QVector<SphericalCap>&convex,
-                               const int *indexOfUsedSphericalCaps,
-                               const int halfSpacesUsed,
-                               const bool *corner0_inside,
-                               const bool *corner1_inside,
-                               const bool *corner2_inside,
-                               int **inside_list,int **border_list,
-                               const int maxSearchLevel,const Vec3f vel) const
+								   const int *indexOfUsedSphericalCaps,
+								   const int halfSpacesUsed,
+								   const bool *corner0_inside,
+								   const bool *corner1_inside,
+								   const bool *corner2_inside,
+								   int **inside_list,int **border_list,
+								   const int maxSearchLevel,
+								   const Vec3f vel) const
 {
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	int *halfs_used = new int[static_cast<size_t>(halfSpacesUsed)];

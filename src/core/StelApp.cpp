@@ -88,7 +88,6 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLFramebufferObject>
-#include <QOpenGLFunctions_3_3_Core>
 #include <QString>
 #include <QStringList>
 #include <QSysInfo>
@@ -102,6 +101,9 @@
 #include <QRegularExpression>
 #include <QRandomGenerator>
 #include <QFontDatabase>
+#if !QT_CONFIG(opengles2)
+# include <QOpenGLFunctions_3_3_Core>
+#endif
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QImageReader>
 #endif
@@ -222,6 +224,10 @@ Q_IMPORT_PLUGIN(VtsStelPluginInterface)
 Q_IMPORT_PLUGIN(OnlineQueriesPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_PLANES
+Q_IMPORT_PLUGIN(PlanesStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_NEBULATEXTURES
 Q_IMPORT_PLUGIN(NebulaTexturesStelPluginInterface)
 #endif
@@ -295,11 +301,13 @@ StelApp::StelApp(StelMainView *parent)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
 	, flagUseNegativeHourAngles(false)
+	, flagUsePolarDistance(false)
 	, flagUseFormattingOutput(false)
 	, flagUseCCSDesignation(false)
 	, flagOverwriteInfoColor(false)
 	, overwriteInfoColor(Vec3f(1.f))
 	, daylightInfoColor(Vec3f(0.f))
+	, flagImmediateSave(false)
 	#ifdef ENABLE_SPOUT
 	, spoutSender(nullptr)
 	#endif
@@ -725,7 +733,10 @@ void StelApp::init(QSettings* conf)
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.).toDouble();
 
-	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
+	if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+	{
+		ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
+	}
 	setupPostProcessor();
 	
 #ifdef ENABLE_SPOUT
@@ -926,6 +937,7 @@ void main()
 	postProcessorUniformLocations.ditherPattern = postProcessorProgram->uniformLocation("ditherPattern");
 	postProcessorProgram->release();
 
+#if !QT_CONFIG(opengles2)
 	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
 	{
 		postProcessorProgramMS.reset(new QOpenGLShaderProgram);
@@ -960,11 +972,11 @@ void main()
 		postProcessorUniformLocationsMS.numMultiSamples   = postProcessorProgramMS->uniformLocation("numMultiSamples");
 		postProcessorProgramMS->release();
 	}
+#endif
 }
 
 void StelApp::highGraphicsModeDraw()
 {
-#if !QT_CONFIG(opengles2)
 	const auto targetFBO = currentFbo;
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	const auto w = params.viewportXywh[2] * params.devicePixelsPerPixel;
@@ -977,11 +989,17 @@ void StelApp::highGraphicsModeDraw()
 		qInfo() << "OpenGL viewport size:" << viewport[2] << "x" << viewport[3];
 
 		qInfo().nospace() << "Creating scene FBO with size " << w << "x" << h;
+
+#if QT_CONFIG(opengles2)
+		const auto internalFormat = GL_RGBA16F;
+#else
 		const auto internalFormat = GL_RGBA16;
+#endif
 		QOpenGLFramebufferObjectFormat format;
 		format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 		format.setInternalTextureFormat(internalFormat);
 		sceneFBO.reset(new QOpenGLFramebufferObject(w, h, format));
+#if !QT_CONFIG(opengles2)
 		GLint maxSamples = 1;
 		GL(gl->glGetIntegerv(GL_MAX_SAMPLES, &maxSamples));
 		const auto samples = confSettings->value("video/multisampling", 0).toInt();
@@ -1020,6 +1038,7 @@ void StelApp::highGraphicsModeDraw()
 				                      << status;
 			}
 		}
+#endif
 	}
 
 	if(sceneMultisampledFBO)
@@ -1085,7 +1104,6 @@ void StelApp::highGraphicsModeDraw()
 	GL(gl->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
 	GL(gl->glDisable(GL_BLEND));
 	postProcessorVAO->release();
-#endif
 }
 
 //! Main drawing function called at each frame
@@ -1565,6 +1583,13 @@ float StelApp::getScreenScale() const
 	return dppRatio * fontRatio;
 }
 
+float StelApp::getGuiScale() const
+{
+	const float dppRatio = StelApp::getInstance().getDevicePixelsPerPixel();
+	const float fontRatio = StelApp::getInstance().guiFontSizeRatio();
+	return dppRatio * fontRatio;
+}
+
 void StelApp::setAppFont(QFont font)
 {
 	int oldSize=QGuiApplication::font().pixelSize();
@@ -1585,8 +1610,10 @@ QString StelApp::getVersion() const
 
 void StelApp::enableBottomStelBarUpdates(bool enable)
 {
+#ifndef NO_GUI
 	StelGui *gui=dynamic_cast<StelGui*>(getGui());
 	gui->getButtonBar()->enableTopoCentricUpdate(enable);
+#endif
 }
 
 void StelApp::dumpFontInfo() const

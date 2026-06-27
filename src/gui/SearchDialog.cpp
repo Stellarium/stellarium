@@ -148,7 +148,7 @@ void CompletionListModel::selectFirst()
 void CompletionListModel::updateText()
 {
 	QStringList lst;
-	for (const auto& v : values)
+	for (const auto& v : std::as_const(values))
 		lst << v.name;
 	setStringList(lst);
 }
@@ -201,7 +201,7 @@ QVariant CompletionListModel::data(const QModelIndex &index, int role) const
 // Start of members for class SearchDialog
 
 const char* SearchDialog::DEF_SIMBAD_URL = "https://simbad.u-strasbg.fr/";
-SearchDialog::SearchDialogStaticData SearchDialog::staticData;
+//SearchDialog::SearchDialogStaticData SearchDialog::staticData;
 QString SearchDialog::extSearchText = "";
 
 SearchDialog::SearchDialog(QObject* parent)
@@ -220,23 +220,23 @@ SearchDialog::SearchDialog(QObject* parent)
 
 	StelApp::getInstance().getStelPropertyManager()->registerObject(this);
 	conf = StelApp::getInstance().getSettings();
-	enableSimbadSearch(conf->value("search/flag_search_online", true).toBool());
-	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
-	useLengthSorting = conf->value("search/flag_sorting_length", false).toBool();
-	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
-	useFOVCenterMarker = conf->value("search/flag_fov_center_marker", true).toBool();
+	enableSimbadSearch(conf->value("search/flag_search_online", useSimbad).toBool());
+	useStartOfWords = conf->value("search/flag_start_words", useStartOfWords).toBool();
+	useLengthSorting = conf->value("search/flag_sorting_length", useLengthSorting).toBool();
+	useLockPosition = conf->value("search/flag_lock_position", useLockPosition).toBool();
+	useFOVCenterMarker = conf->value("search/flag_fov_center_marker", useFOVCenterMarker).toBool();
 	fovCenterMarkerState = GETSTELMODULE(SpecialMarkersMgr)->getFlagFOVCenterMarker();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
-        useAutoClosing = conf->value("search/flag_auto_closing", true).toBool();
+	useAutoClosing = conf->value("search/flag_auto_closing", useAutoClosing).toBool();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());	
 
-	setSimbadQueryDist( conf->value("search/simbad_query_dist",  30).toInt());
-	setSimbadQueryCount(conf->value("search/simbad_query_count",  3).toInt());
-	setSimbadGetsIds(   conf->value("search/simbad_query_IDs",        true ).toBool());
-	setSimbadGetsSpec(  conf->value("search/simbad_query_spec",       false).toBool());
-	setSimbadGetsMorpho(conf->value("search/simbad_query_morpho",     false).toBool());
-	setSimbadGetsTypes( conf->value("search/simbad_query_types",      false).toBool());
-	setSimbadGetsDims(  conf->value("search/simbad_query_dimensions", false).toBool());
+	setSimbadQueryDist( conf->value("search/simbad_query_dist",       simbadDist).toInt());
+	setSimbadQueryCount(conf->value("search/simbad_query_count",      simbadCount).toInt());
+	setSimbadGetsIds(   conf->value("search/simbad_query_IDs",        simbadGetIds).toBool());
+	setSimbadGetsSpec(  conf->value("search/simbad_query_spec",       simbadGetSpec).toBool());
+	setSimbadGetsMorpho(conf->value("search/simbad_query_morpho",     simbadGetMorpho).toBool());
+	setSimbadGetsTypes( conf->value("search/simbad_query_types",      simbadGetTypes).toBool());
+	setSimbadGetsDims(  conf->value("search/simbad_query_dimensions", simbadGetDims).toBool());
 
 	// Init CompletionListModel
 	searchListModel = new CompletionListModel();
@@ -964,7 +964,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		QVector<ObjectFound> matches;
 		QVector<ObjectFound> recentMatches;
 
-		QString greekText = substituteGreek(trimmedText);
+		QString greekText = StelUtils::substituteGreek(trimmedText);
 
 		int trimmedTextMaxNbItem = 50;
 		int greekTextMaxMbItem = 0;
@@ -1000,7 +1000,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		// hard coded
 		maxNbItem  = qMax(greekTextMaxMbItem, trimmedTextMaxNbItem);
 
-		for (const auto& [name,obj] : matchesWithPointers)
+		for (const auto& [name,obj] : std::as_const(matchesWithPointers))
 			matches.append({name, obj->getType(), obj->getObjectTypeI18n()});
 
 		// Clean up matches
@@ -1225,7 +1225,7 @@ void SearchDialog::saveRecentSearches()
 	QVariantMap rslDataList;
 	rslDataList.insert("maxSize", recentObjectSearchesData.maxSize);
 	QVariantList recentList;
-	for(const auto& entry : recentObjectSearchesData.recentList)
+	for(const auto& entry : std::as_const(recentObjectSearchesData.recentList))
 	{
 		QVariantMap map;
 		map["name"] = entry.name;
@@ -1566,42 +1566,6 @@ bool SearchDialog::eventFilter(QObject*, QEvent *event)
 		}
 	}
 	return false;
-}
-
-QString SearchDialog::substituteGreek(const QString& keyString)
-{
-	if (!keyString.contains(' '))
-		return getGreekLetterByName(keyString);
-	else
-	{
-		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QStringList nameComponents = keyString.split(" ", Qt::SkipEmptyParts);
-		#else
-		QStringList nameComponents = keyString.split(" ", QString::SkipEmptyParts);
-		#endif
-		if(!nameComponents.empty())
-			nameComponents[0] = getGreekLetterByName(nameComponents[0]);
-		return nameComponents.join(" ");
-	}
-}
-
-QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterName)
-{
-	if(staticData.greekLetters.contains(potentialGreekLetterName))
-		return staticData.greekLetters[potentialGreekLetterName];
-
-	// There can be indices (e.g. "α1 Cen" instead of "α Cen A"), so strip
-	// any trailing digit.
-	int lastCharacterIndex = potentialGreekLetterName.length()-1;
-	if(potentialGreekLetterName.at(lastCharacterIndex).isDigit())
-	{
-		QChar digit = potentialGreekLetterName.at(lastCharacterIndex);
-		QString name = potentialGreekLetterName.left(lastCharacterIndex);
-		if(staticData.greekLetters.contains(name))
-			return staticData.greekLetters[name] + digit;
-	}
-
-	return potentialGreekLetterName;
 }
 
 void SearchDialog::populateSimbadServerList()

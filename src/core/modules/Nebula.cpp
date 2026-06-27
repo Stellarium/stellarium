@@ -290,9 +290,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	{
 		QString mt = getMorphologicalTypeString();
 		if (mt.isEmpty())
-			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br>";
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br/>";
 		else
-			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), mt) << "<br>";
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), mt) << "<br/>";
 		oss << getExtraInfoStrings(ObjectType).join("");
 	}
 
@@ -301,7 +301,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (flags&Extra)
 	{
 		if (vMag < 50 && bMag < 50)
-			oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(bMag-vMag, 'f', 2)) << "<br />";
+			oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(bMag-vMag, 'f', 2)) << "<br/>";
 	}
 	float mmag = qMin(vMag,bMag);
 	if (nType != NebDn && mmag < 50 && flags&Extra)
@@ -327,13 +327,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			if (getAirmass(core)>-1.f && getSurfaceBrightnessWithExtinction(core)<99.f) // Don't show extincted surface brightness much below horizon where model is meaningless.
 			{
 				oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
-				                                                          ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
+				                                                          ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br/>";
 			}
 			else
-				oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
+				oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br/>";
 
 			if (getContrastIndex(core)<99.f)
-				oss << QString("%1: %2").arg(q_("Contrast index"), QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
+				oss << QString("%1: %2").arg(q_("Contrast index"), QString::number(getContrastIndex(core), 'f', 2)) << "<br/>";
 		}
 	}
 
@@ -354,12 +354,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 
 		if (fuzzyEquals(majorAxisSize, minorAxisSize) || minorAxisSize==0.f)
-			oss << QString("%1: %2").arg(sizeAx, majorAxS) << "<br />";
+			oss << QString("%1: %2").arg(sizeAx, majorAxS) << "<br/>";
 		else
 		{
-			oss << QString("%1: %2 x %3").arg(sizeAx, majorAxS, minorAxS) << "<br />";
+			oss << QString("%1: %2 x %3").arg(sizeAx, majorAxS, minorAxS) << "<br/>";
 			if (orientationAngle>0)
-				oss << QString("%1: %2%3").arg(q_("Orientation angle")).arg(orientationAngle).arg(QChar(0x00B0)) << "<br />";
+				oss << QString("%1: %2%3").arg(q_("Orientation angle")).arg(orientationAngle).arg(QChar(0x00B0)) << "<br/>";
 		}
 	}
 	if (flags&Size)
@@ -386,7 +386,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			{
 				// TRANSLATORS: Unit of measure for distance - Light Years
 				QString ly = qc_("ly", "distance");
-				oss << QString("%1: %2 %3").arg(q_("Distance"), dx, ly) << "<br />";
+				oss << QString("%1: %2 %3").arg(q_("Distance"), dx, ly) << "<br/>";
 			}
 		}
 
@@ -432,7 +432,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				dy = QString("%1").arg(QString::number(distanceLY, 'f', ms));
 			}
 
-			oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), dx, dupc, dy, duly) << "<br />";
+			oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), dx, dupc, dy, duly) << "<br/>";
 		}
 		oss << getExtraInfoStrings(Distance).join("");
 	}
@@ -447,7 +447,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			else
 				z = QString("%1").arg(QString::number(redshift, 'f', 6));
 
-			oss << QString("%1: %2").arg(q_("Redshift"), z) << "<br />";
+			oss << QString("%1: %2").arg(q_("Redshift"), z) << "<br/>";
 		}
 		if (qAbs(parallax)>0.f)
 		{
@@ -457,12 +457,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			else
 				px = QString("%1").arg(QString::number(qAbs(parallax), 'f', 3));
 
-			oss << QString("%1: %2 %3").arg(q_("Parallax"), px, qc_("mas", "parallax")) << "<br />";
+			oss << QString("%1: %2 %3").arg(q_("Parallax"), px, qc_("mas", "parallax")) << "<br/>";
 		}
 		if (!discoverer.isEmpty())
-			oss << QString("%1: %2 (%3)").arg(q_("Discoverer"), discoverer, StelUtils::localeDiscoveryDateString(discoveryYear)) << "<br />";
+			oss << QString("%1: %2 (%3)").arg(q_("Discoverer"), discoverer, StelUtils::localeDiscoveryDateString(discoveryYear)) << "<br/>";
 		if (!getMorphologicalTypeDescription().isEmpty())
-			oss << StelUtils::wrapText(QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription())) << "<br />";
+			oss << StelUtils::wrapText(QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription())) << "<br/>";
 	}
 
 	oss << getSolarLunarInfoString(core, flags);

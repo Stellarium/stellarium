@@ -34,6 +34,10 @@ SET(Satellites_SRCS
      SatellitesListModel.cpp
      SatellitesListFilterModel.hpp
      SatellitesListFilterModel.cpp
+)
+
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+LIST(APPEND Satellites_SRCS
      gui/SatellitesDialog.hpp
      gui/SatellitesDialog.cpp
      gui/SatellitesImportDialog.hpp
@@ -50,13 +54,18 @@ SET(SatellitesDialog_UIS
      gui/satellitesFilterDialog.ui
      gui/satellitesCommDialog.ui
 )
+ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 SET(Satellites_RES ../resources/Satellites.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
-     QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
+     ENDIF()
      QT5_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 ELSE()
-     QT_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
+     IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+          QT_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
+     ENDIF()
      QT_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 ENDIF()
 
@@ -65,7 +74,7 @@ IF(ENABLE_TESTING)
 ENDIF(ENABLE_TESTING)
 
 ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
-SET(SATELLITES_DEPS Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)
+SET(SATELLITES_DEPS Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 IF(NOT USE_BUNDLED_QTCOMPRESS)
     SET(SATELLITES_DEPS ${SATELLITES_DEPS} Qt${QT_VERSION_MAJOR}::GuiPrivate)
 ENDIF()

@@ -327,8 +327,9 @@ private:
 
 	QSettings* conf;
 
-	// GUI
+#ifndef NO_GUI
 	PulsarsDialog* configDialog;
+#endif
 	bool flagShowPulsars;
 	bool flagShowPulsarsButton;	
 	QPixmap* OnIcon;

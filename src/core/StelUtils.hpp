@@ -426,6 +426,13 @@ namespace StelUtils
 	//! @return the angle in radians.
 	double getDecAngle(const QString& str);
 
+	//! Natural ("human") comparison of two strings: alternating non-digit and
+	//! digit segments are compared so that e.g. "NGC 9" sorts before "NGC 10".
+	//! Letter comparison is case-insensitive. Does not depend on an ICU-backed
+	//! QCollator, so it behaves identically on all platforms.
+	//! @return true if @p a should be ordered before @p b.
+	bool naturalLessThan(const QString& a, const QString& b);
+
 	//! Check if a number is a power of 2.
 	inline bool isPowerOfTwo(const int value){
 		return (value & -value) == value;
@@ -1161,6 +1168,56 @@ namespace StelUtils
 			}
 		}
 	}
+
+	//! Greek letters and strings
+	const QHash<QString, QString> greekLetters = {
+		{"alpha",   QString(QChar(0x03B1))},
+		{"beta",    QString(QChar(0x03B2))},
+		{"beta",    QString(QChar(0x03B2))},
+		{"gamma",   QString(QChar(0x03B3))},
+		{"delta",   QString(QChar(0x03B4))},
+		{"epsilon", QString(QChar(0x03B5))},
+
+		{"zeta",    QString(QChar(0x03B6))},
+		{"eta",     QString(QChar(0x03B7))},
+		{"theta",   QString(QChar(0x03B8))},
+		{"iota",    QString(QChar(0x03B9))},
+		{"kappa",   QString(QChar(0x03BA))},
+
+		{"lambda",  QString(QChar(0x03BB))},
+		{"mu",      QString(QChar(0x03BC))},
+		{"nu",      QString(QChar(0x03BD))},
+		{"xi",      QString(QChar(0x03BE))},
+		{"omicron", QString(QChar(0x03BF))},
+
+		{"pi",      QString(QChar(0x03C0))},
+		{"rho",     QString(QChar(0x03C1))},
+		{"sigma",   QString(QChar(0x03C3))}, // second lower-case sigma shouldn't affect anything
+		{"tau",     QString(QChar(0x03C4))},
+		{"upsilon", QString(QChar(0x03C5))},
+
+		{"phi",     QString(QChar(0x03C6))},
+		{"chi",     QString(QChar(0x03C7))},
+		{"psi",     QString(QChar(0x03C8))},
+		{"omega",   QString(QChar(0x03C9))} };
+	//! Replaces all occurrences of substrings describing Greek letters (i.e. "alpha", "beta", ...)
+	//! with the actual Greek unicode characters.
+	QString substituteGreek(const QString& keyString);
+	//! Returns the Greek unicode character for the specified letter string (i.e. "alpha", "beta", ...)
+	QString getGreekLetterByName(const QString& potentialGreekLetterName);
+
+	//! @brief Computes the area of intersection of two circles with given parameters
+	//!
+	//! @param R1 radius of the second circle
+	//! @param R2 radius of the second circle
+	//! @param d distance between centers of the circles
+	double circlesIntersectionArea(double R1, double R2, double d);
+
+	//! @brief Compute solid angle of the Sun visible taking into account eclipsing by the (assumed spherical) Moon
+	double visibleSolidAngleOfSun(double sunAngularRadius, double moonAngularRadius, double angleBetweenSunAndMoon);
+
+	//! @brief Compute percentage of the Sun visible taking into account eclipsing by the (assumed spherical) Moon
+	double sunVisibilityDueToMoon(double sunAngularRadius, double moonAngularRadius, double angleBetweenSunAndMoon);
 }
 
 #endif // STELUTILS_HPP

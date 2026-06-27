@@ -23,7 +23,10 @@
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
 #include "AtmospherePreetham.hpp"
-#include "AtmosphereShowMySky.hpp"
+#include "AtmosphereLightweight.hpp"
+#if !QT_CONFIG(opengles2)
+# include "AtmosphereShowMySky.hpp"
+#endif
 #include "StelApp.hpp"
 #include "SolarSystem.hpp"
 #include "StelCore.hpp"
@@ -62,6 +65,7 @@ constexpr char ATMOSPHERE_MODEL_PATH_CONFIG_KEY[]="landscape/atmosphere_model_pa
 constexpr char ATMOSPHERE_ECLIPSE_SIM_QUALITY_CONFIG_KEY[]="landscape/atmosphere_eclipse_simulation_quality";
 constexpr char ATMOSPHERE_MODEL_CONF_VAL_PREETHAM[]="preetham";
 constexpr char ATMOSPHERE_MODEL_CONF_VAL_SHOWMYSKY[]="showmysky";
+constexpr char ATMOSPHERE_MODEL_CONF_VAL_LIGHTWEIGHT[]="lightweight";
 constexpr char ATMOSPHERE_MODEL_CONF_VAL_DEFAULT[]="preetham";
 }
 
@@ -157,6 +161,9 @@ void Cardinals::setFadeDuration(float duration)
 // Handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude) const
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	// fun polar special cases: no cardinals!
 	if ((fabs(latitude - 90.0) < 1e-10) || (fabs(latitude + 90.0) < 1e-10))
 		return;
@@ -480,7 +487,7 @@ void LandscapeMgr::update(double deltaTime)
 		if(loaded)
 		{
 			atmosphere = std::move(loadingAtmosphere);
-#ifdef ENABLE_SHOWMYSKY
+#if defined ENABLE_SHOWMYSKY && !QT_CONFIG(opengles2)
 			if(dynamic_cast<AtmosphereShowMySky*>(atmosphere.get()))
 				setAtmosphereShowMySkyStatusText(q_("Loaded successfully"));
 #endif
@@ -673,7 +680,7 @@ void LandscapeMgr::draw(StelCore* core)
 	QFont font=QGuiApplication::font();
 
 	// Draw the atmosphere
-	if (!getFlagAtmosphereNoScatter())
+	if (!getFlagAtmosphereNoScatter() && core->getFlagClearSky())
 	    atmosphere->draw(core);
 
 	// GZ 2016-01: When we draw the atmosphere with a low sun, it is possible that the glaring red ball is overpainted and thus invisible.
@@ -736,7 +743,11 @@ void LandscapeMgr::createAtmosphere()
 	{
 		loadingAtmosphere.reset(new AtmospherePreetham(skylight));
 	}
-#ifdef ENABLE_SHOWMYSKY
+	else if(modelConfig==ATMOSPHERE_MODEL_CONF_VAL_LIGHTWEIGHT)
+	{
+		loadingAtmosphere.reset(new AtmosphereLightweight);
+	}
+#if defined ENABLE_SHOWMYSKY && !QT_CONFIG(opengles2)
 	else if(modelConfig==ATMOSPHERE_MODEL_CONF_VAL_SHOWMYSKY)
 	{
 		try
@@ -797,7 +808,7 @@ void LandscapeMgr::createAtmosphere()
 	{
 		// We've failed to apply the setting, so reset to the fallback value
 		const auto conf=StelApp::getInstance().getSettings();
-		conf->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_PREETHAM);
+		conf->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_DEFAULT);
 	}
 
 	needToRecreateAtmosphere=false;
@@ -805,7 +816,7 @@ void LandscapeMgr::createAtmosphere()
 
 void LandscapeMgr::resetToFallbackAtmosphere()
 {
-	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_PREETHAM);
+	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_DEFAULT);
 	atmosphere.reset();
 	createAtmosphere();
 }

@@ -25,30 +25,42 @@
 #include "VecMath.hpp"
 #include <QOpenGLContext>
 #include <QOpenGLShaderProgram>
+#include <QOpenGLFramebufferObject>
+#include <QOpenGLVertexArrayObject>
+#include "StelOpenGL.hpp"
 
-#if !QT_CONFIG(opengles2) // This class uses glGetTexImage(), which is not supported in GLES2
-
-class QOpenGLFunctions_3_3_Core;
 class TextureAverageComputer
 {
-	QOpenGLFunctions_3_3_Core& gl;
+	QOpenGLExtraFunctions& gl;
+	StelOpenGL::HighGraphicsFunctions* hiGL;
 	std::unique_ptr<QOpenGLShaderProgram> blitTexProgram;
+	//! This FBO is used for getting the deepest mipmap levels of textures in GLES mode.
+	std::unique_ptr<QOpenGLFramebufferObject> glesFBO;
 	GLuint potFBO = 0;
 	GLuint potTex = 0;
-	GLuint vbo = 0, vao = 0;
+	GLuint vbo = 0;
+	QOpenGLVertexArrayObject vao;
 	GLint npotWidth, npotHeight;
-	static inline bool inited = false;
-	static inline bool workaroundNeeded = false;
+	bool textureIsFloat = false;
+	bool isGLES = false;
+	static inline bool needForWorkaroundChecked = false;
+	static inline bool npotWorkaroundNeeded = false;
 
-    void init();
-	Vec4f getTextureAverageSimple(GLuint texture, int width, int height);
+	void bindVAO();
+	void releaseVAO();
+	void setupCurrentVAO();
+	void checkNeedForWorkaround();
 	Vec4f getTextureAverageWithWorkaround(GLuint texture);
+	Vec4f getCurrentTextureDeepestMipLevelPixelGL(const int width, const int height);
+	Vec4f getCurrentTextureDeepestMipLevelPixelGLES(const int width, const int height);
 public:
+	//!< The function to use for arbitrary NPOT textures
 	Vec4f getTextureAverage(GLuint texture);
-    TextureAverageComputer(QOpenGLFunctions_3_3_Core&, int texW, int texH, GLenum internalFormat);
+	//!< Can be used for power-of-two textures
+	Vec4f getTextureAverageSimple(GLuint texture, int width, int height);
+	TextureAverageComputer(StelOpenGL::HighGraphicsFunctions*, int texW, int texH,
+	                       GLenum internalFormat, bool textureIsFloat);
 	~TextureAverageComputer();
 };
-
-#endif
 
 #endif

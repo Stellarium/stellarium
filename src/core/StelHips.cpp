@@ -160,12 +160,18 @@ void HipsSurvey::setVisible(bool value)
 {
 	if (value == isVisible()) return;
 	fader = value;
-	if (!value && progressBar)
+	if (!value)
+		hideProgressBar();
+	emit visibleChanged(value);
+}
+
+void HipsSurvey::hideProgressBar()
+{
+	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = Q_NULLPTR;
 	}
-	emit visibleChanged(value);
 }
 
 int HipsSurvey::getPropertyInt(const QString& key, int fallback)
@@ -369,11 +375,11 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 
 void HipsSurvey::updateProgressBar(int nb, int total)
 {
-	if (nb == total && progressBar) {
-		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = Q_NULLPTR;
+	if (nb == total)
+	{
+		hideProgressBar();
+		return;
 	}
-	if (nb == total) return;
 
 	if (!progressBar)
 	{

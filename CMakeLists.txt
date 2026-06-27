@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.18)
 # CMake 3.20+ is required if x-compiling for Windows on ARM
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
@@ -43,7 +43,7 @@ ENDIF()
 # Note: Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 26)
 # Number of the release (0 is used before first release)
-SET(STELLARIUM_MINOR 1)
+SET(STELLARIUM_MINOR 2)
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
      SET(CMAKE_BUILD_TYPE Release)
@@ -436,12 +436,7 @@ IF(ENABLE_XLSX)
 ENDIF()
 
 # Activate support for INDI client in Telescope Control plugin
-IF(WIN32)
-     # Disable support for INDI client in Windows
-     SET(ENABLE_INDI 0)
-ELSE()
-     SET(ENABLE_INDI 1 CACHE BOOL "Define whether to use INDI client in Telescope Control plugin.")
-ENDIF()
+SET(ENABLE_INDI 1 CACHE BOOL "Define whether to use INDI client in Telescope Control plugin.")
 IF(ENABLE_INDI)
      ADD_DEFINITIONS(-DENABLE_INDI)
 ENDIF()
@@ -566,12 +561,12 @@ ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(MeteorShowers 1)
 ADD_PLUGIN(MosaicCamera 1)
 ADD_PLUGIN(NavStars 1)
-ADD_PLUGIN(NebulaTextures 1)
 ADD_PLUGIN(Novae 1)
 ADD_PLUGIN(Observability 1)
 ADD_PLUGIN(Oculars 1)
 ADD_PLUGIN(Oculus 0)
 ADD_PLUGIN(OnlineQueries 1)
+ADD_PLUGIN(Planes 1)
 ADD_PLUGIN(PointerCoordinates 1)
 ADD_PLUGIN(Pulsars 1)
 ADD_PLUGIN(Quasars 1)
@@ -583,14 +578,19 @@ ENDIF()
 ADD_PLUGIN(RemoteSync 1)
 ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(Scenery3d 1)
-ADD_PLUGIN(SkyCultureMaker 1)
-ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
-ADD_PLUGIN(LensDistortionEstimator 1)
 # Candidate to removing as an archaic plugin
 ADD_PLUGIN(TextUserInterface 1)
 ADD_PLUGIN(TelescopeControl 1)
-ADD_PLUGIN(TimeNavigator 1)
+# These plugins are GUI heavy and just make no sense without:
+IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
+     ADD_PLUGIN(LensDistortionEstimator 1)
+     ADD_PLUGIN(NebulaTextures 1)
+     ADD_PLUGIN(SkyCultureMaker 1)
+     ADD_PLUGIN(SolarSystemEditor 1)
+     ADD_PLUGIN(TimeNavigator 1)
+ENDIF()
+
 ADD_PLUGIN(Vts 0)
 
 ########## Static plugins need to define includes and libraries
@@ -793,8 +793,7 @@ ELSE()
      MESSAGE(STATUS "GPS: disabled.")
 ENDIF()
 
-IF(ENABLE_MEDIA OR USE_PLUGIN_SCENERY3D)
-     # The Scenery3D plugin requires it directly and the QtMultimediaWidgets module requires it internally
+IF(ENABLE_MEDIA OR USE_PLUGIN_SCENERY3D OR STELLARIUM_GUI_MODE STREQUAL "Standard")
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS OpenGL REQUIRED)
 ENDIF()
 
@@ -846,8 +845,8 @@ IF(ENABLE_XLSX)
           MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
      ELSE()
           CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
-               URL https://github.com/QtExcel/QXlsx/archive/9f545935a1effa0144ba76598e95a7597210553a.zip
-               URL_HASH SHA256=27dad1aa0e477b43990f6cbbfb30988f417a6f3629c880c397574ae17bfb4b34
+               URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.5.1.1.zip
+               URL_HASH SHA256=5358ec4605e0084ab99e79c993e83364c94cf42cce079db579ac29a6e5e07d5f
                EXCLUDE_FROM_ALL ON
                SOURCE_SUBDIR QXlsx)
      ENDIF()
@@ -1136,16 +1135,13 @@ ADD_SUBDIRECTORY( skycultures )
 ADD_SUBDIRECTORY( nebulae )
 ADD_SUBDIRECTORY( stars )
 ADD_SUBDIRECTORY( plugins )
+ADD_SUBDIRECTORY( atmosphere )
 IF(ENABLE_SCRIPTING)
      ADD_SUBDIRECTORY( scripts )
 ENDIF()
 IF(USE_PLUGIN_SCENERY3D)
      # add scenery3d scenes
      ADD_SUBDIRECTORY( scenery3d )
-ENDIF()
-IF(ENABLE_SHOWMYSKY)
-     # add atmosphere models
-     ADD_SUBDIRECTORY( atmosphere )
 ENDIF()
 IF(ENABLE_NLS AND ENABLE_PODIR)
      ADD_SUBDIRECTORY( po )

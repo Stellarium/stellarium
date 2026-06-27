@@ -77,6 +77,7 @@ public:
 	//! Define whether the survey should be visible.
 	void setVisible(bool value);
 	float getInterstate() const {return fader.getInterstate();}
+	void hideProgressBar();
 
 	//! Render the survey.
 	//! @param sPainter the painter to use.

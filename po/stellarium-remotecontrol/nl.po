@@ -7,17 +7,17 @@
 # bb4713398ff25b15ca398fdfd7cd6958_563a200 <e3e20db5fb3e1853af1e851959210c55_710271>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
 # alex <alex.a.nder.duy.tschaever@gmail.com>, 2024
-# Harry Mensch, 2025
-# Alex Rijckaert, 2025
+# Harry Mensch, 2026
+# Alex Rijckaert, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-01 14:32+0700\n"
+"POT-Creation-Date: 2026-06-09 22:17+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Alex Rijckaert, 2025\n"
+"Last-Translator: Alex Rijckaert, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +39,7 @@ msgstr "Fout bij sturen van activiteit '%1' naar server: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
-#: plugins/RemoteControl/webroot/js/api/search.js:188
+#: plugins/RemoteControl/webroot/js/api/search.js:381
 msgid "Error performing search"
 msgstr "Fout bij het uitvoeren van de zoekopdracht"
 
@@ -84,20 +84,15 @@ msgstr "Fout (%1)"
 msgid "Error performing Simbad lookup"
 msgstr "Fout tijdens doorzoeken Simbad database"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:225
-#: tablet7in.html:242
-msgid "idle"
-msgstr "inactief"
-
-#: plugins/RemoteControl/webroot/js/api/search.js:105
+#: plugins/RemoteControl/webroot/js/api/search.js:291
 msgid "Error loading object types"
 msgstr "Fout tijdens laden van object types"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:138
+#: plugins/RemoteControl/webroot/js/api/search.js:324
 msgid "Error getting object list"
 msgstr "Fout bij ophalen objectlijst"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:200
+#: plugins/RemoteControl/webroot/js/api/search.js:393
 msgid "waiting"
 msgstr "aan het wachten"
 
@@ -111,8 +106,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Kan landschaplijst niet ophalen"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:761
-#: index.html:823 tablet7in.html:845 tablet7in.html:905
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:242 index.html:1184
+#: index.html:1260 tablet7in.html:1261 tablet7in.html:1330
 msgid "-none-"
 msgstr "-geen-"
 
@@ -124,13 +119,17 @@ msgstr "(Momenteel wordt geladen: %1)"
 msgid "Could not retrieve Scenery3d list"
 msgstr "Kon de Scenery3d lijst niet ophalen"
 
-#: plugins/RemoteControl/webroot/js/ui/actions.js:44
-#: plugins/RemoteControl/webroot/js/ui/actions.js:77
+#: plugins/RemoteControl/webroot/js/ui/actions.js:170 tablet7in.html:1242
+msgid "Search actions..."
+msgstr "Zoekacties..."
+
+#: plugins/RemoteControl/webroot/js/ui/actions.js:217
+#: plugins/RemoteControl/webroot/js/ui/actions.js:257
 msgid "on"
 msgstr "aan"
 
-#: plugins/RemoteControl/webroot/js/ui/actions.js:44
-#: plugins/RemoteControl/webroot/js/ui/actions.js:77
+#: plugins/RemoteControl/webroot/js/ui/actions.js:217
+#: plugins/RemoteControl/webroot/js/ui/actions.js:257
 msgid "off"
 msgstr "uit"
 
@@ -142,7 +141,11 @@ msgstr "Alles tonen"
 msgid "Input did not match any item"
 msgstr "Geen passend onderwerp gevonden"
 
-#: plugins/RemoteControl/webroot/js/ui/search.js:294
+#: plugins/RemoteControl/webroot/js/ui/search.js:132
+msgid "No items available for this culture"
+msgstr "Geen items beschikbaar voor deze cultuur"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:432
 msgid "No current selection"
 msgstr "Nog geen keuze gemaakt"
 
@@ -150,643 +153,1017 @@ msgstr "Nog geen keuze gemaakt"
 msgid "Stellarium remote control plugin"
 msgstr "Stellarium afstandbediening plug-in"
 
-#: index.html:19 tablet7in.html:20
+#: index.html:20 tablet7in.html:21
 msgid "Please wait, loading"
 msgstr "Even wachten, bezig met laden...."
 
-#: index.html:28 tablet7in.html:29
+#: index.html:29 tablet7in.html:30
 msgid "Stellarium remote control"
 msgstr "Stellarium afstandbediening"
 
-#: index.html:32 tablet7in.html:33
+#: index.html:33 tablet7in.html:34
 msgid "Main controls"
 msgstr "Bediening"
 
-#: index.html:35 tablet7in.html:40
+#: index.html:36 tablet7in.html:41
 msgid "DSO"
 msgstr "DSO"
 
-#: index.html:38
+#: index.html:39 tablet7in.html:44
+msgid "Statistics & Analysis"
+msgstr "Statistieken & Analyse"
+
+#: index.html:40
 msgid "Actions and scripts"
 msgstr "Activiteiten en scripts"
 
-#: index.html:41 tablet7in.html:47
+#: index.html:43 tablet7in.html:49
 msgid "Scenery3d"
 msgstr "Scenery3d"
 
-#: index.html:79
+#: index.html:44 index.html:1301 tablet7in.html:50 tablet7in.html:1370
+msgid "Gamepad Controller"
+msgstr "Gamepad Controller"
+
+#: index.html:83
 msgid "Pause"
 msgstr "Pauze"
 
-#: index.html:84 tablet7in.html:185
+#: index.html:88 tablet7in.html:188
 msgid "Time jumps"
 msgstr "Tijd verschuiven"
 
-#: index.html:88 tablet7in.html:189
+#: index.html:92 tablet7in.html:192
 msgid "Solar hour"
 msgstr "Zonnetijd"
 
-#: index.html:89 tablet7in.html:190
-msgid "Solar day"
-msgstr "Zonnedag"
-
-#: index.html:90 tablet7in.html:191
-msgid "Solar week"
-msgstr "Zonneweek"
-
-#: index.html:92 tablet7in.html:193
-msgid "Calendar year"
-msgstr "Kalenderjaar"
-
-#: index.html:93 tablet7in.html:194
+#: index.html:97 tablet7in.html:197
 msgid "10 Calendar years"
 msgstr "10 Kalenderjaren"
 
-#: index.html:94 tablet7in.html:195
+#: index.html:98 tablet7in.html:198
 msgid "100 Calendar years"
 msgstr "100 Kalenderjaren"
 
-#: index.html:97 tablet7in.html:198
-msgid "Sidereal year"
-msgstr "Siderisch jaar"
-
-#: index.html:98 tablet7in.html:199
+#: index.html:102 tablet7in.html:202
 msgid "Sidereal century"
 msgstr "Siderische eeuw"
 
-#: index.html:100 tablet7in.html:201
-msgid "Synodic month"
-msgstr "Synodische maand"
-
-#: index.html:101 tablet7in.html:202
-msgid "Draconic month"
-msgstr "Nodale maand"
-
-#: index.html:102 tablet7in.html:203
-msgid "Draconic year"
-msgstr "Nodaal jaar"
-
-#: index.html:105 tablet7in.html:206
-msgid "Anomalistic month"
-msgstr "Anomalistische maand"
-
-#: index.html:106 tablet7in.html:207
-msgid "Anomalistic year"
-msgstr "Anomalistisch jaar"
-
-#: index.html:107 tablet7in.html:208
+#: index.html:111 tablet7in.html:211
 msgid "Anomalistic century"
 msgstr "Anomalistische eeuw"
 
-#: index.html:109 tablet7in.html:210
-msgid "Mean tropical month"
-msgstr "Gemiddelde tropische maand"
-
-#: index.html:110 tablet7in.html:211
-msgid "Mean tropical year"
-msgstr "Gemiddeld tropisch jaar"
-
-#: index.html:111 tablet7in.html:212
+#: index.html:115 tablet7in.html:215
 msgid "Mean tropical century"
 msgstr "Gemiddelde tropische eeuw"
 
-#: index.html:113 tablet7in.html:214
-msgid "Tropical year"
-msgstr "Tropisch jaar"
-
-#: index.html:114 tablet7in.html:215
-msgid "Julian year"
-msgstr "Juliaans jaar"
-
-#: index.html:115 tablet7in.html:216
+#: index.html:119 tablet7in.html:219
 msgid "Julian century"
 msgstr "Juliaanse eeuw"
 
-#: index.html:117 tablet7in.html:218
-msgid "Gaussian year"
-msgstr "Gauss jaar"
-
-#: index.html:129 tablet7in.html:103
+#: index.html:133 tablet7in.html:106
 msgid "View towards horizon at Azimuth"
 msgstr "Kijk naar horizon tijdens azimuteren"
 
-#: index.html:150 tablet7in.html:125
+#: index.html:154 tablet7in.html:128
 msgid "Vertical View offset"
 msgstr "Verticale zichtveldcompensatie"
 
-#: index.html:219 tablet7in.html:236
+#: index.html:224 tablet7in.html:239
 msgid "Enter search term. Use TAB to navigate results."
 msgstr "Voer zoekterm in. Gebruik TAB om door resultaten te navigeren."
 
-#: index.html:220 tablet7in.html:237
+#: index.html:225 tablet7in.html:240
 msgid "Select and focus"
 msgstr "Op selectie richten"
 
-#: index.html:245 tablet7in.html:265
+#: index.html:250 tablet7in.html:268
 msgid "Select current item"
 msgstr "Selecteer huidig item"
 
-#: index.html:249 tablet7in.html:269
+#: index.html:254 tablet7in.html:272
 msgid "Selection mode"
 msgstr "Selectie modus"
 
-#: index.html:249 tablet7in.html:269
+#: index.html:254 tablet7in.html:272
 msgid "Center on object"
 msgstr "Centreer op object"
 
-#: index.html:249 tablet7in.html:269
+#: index.html:254 tablet7in.html:272
 msgid "Center and zoom to object"
 msgstr "Centreer en zoom in op object"
 
-#: index.html:249 tablet7in.html:269
+#: index.html:254 tablet7in.html:272
 msgid "Just mark the object"
 msgstr "Het object markeren"
 
-#: index.html:251 tablet7in.html:271
+#: index.html:256 tablet7in.html:274
 msgid "Quick select"
 msgstr "Snelle selectie"
 
-#: index.html:255 tablet7in.html:275
-msgid "Earth"
-msgstr "Aarde"
-
-#: index.html:255 tablet7in.html:275
+#: index.html:260 tablet7in.html:278
 msgid "Pluto"
 msgstr "Pluto"
 
-#: index.html:261 tablet7in.html:304
+#: index.html:266 tablet7in.html:307
 msgid "Current selection"
 msgstr "Huidige selectie"
 
-#: index.html:278 tablet7in.html:332
+#: index.html:284 tablet7in.html:335
 msgid "Milky Way brightness:"
 msgstr "Helderheid melkweg"
 
-#: index.html:289 tablet7in.html:351
+#: index.html:295 tablet7in.html:354
 msgid "Dbl. stars"
 msgstr "Dbl. sterren"
 
-#: index.html:290 tablet7in.html:352
+#: index.html:296 tablet7in.html:355
 msgid "Var. stars"
 msgstr "Var. sterren"
 
-#: index.html:291 tablet7in.html:353
+#: index.html:297 tablet7in.html:356
 msgid "HIP"
 msgstr "HIP"
 
-#: index.html:294 tablet7in.html:357
+#: index.html:300 tablet7in.html:360
 msgid "Digitized Sky Survey"
 msgstr "Gedigitaliseerd hemeloverzicht"
 
-#: index.html:295 tablet7in.html:358
+#: index.html:301 tablet7in.html:361
 msgid "HiPS Survey"
 msgstr "Hips enquête"
 
-#: index.html:304 tablet7in.html:369
+#: index.html:310 tablet7in.html:372
 msgid "Include nutation"
 msgstr "Inclusief nutatie"
 
-#: index.html:306 tablet7in.html:371
+#: index.html:312 tablet7in.html:374
 msgid "Include parallax"
 msgstr "Parallax toevoegen"
 
-#: index.html:311 tablet7in.html:376
+#: index.html:317 tablet7in.html:379
 msgid "Include aberration"
 msgstr "Inclusief aberratie "
 
-#: index.html:319 tablet7in.html:390
+#: index.html:325 tablet7in.html:393
 msgid "Show planet markers"
 msgstr "Planeetmarkeringen weergeven"
 
-#: index.html:320 tablet7in.html:391
+#: index.html:326 tablet7in.html:394
 msgid "Show planet orbits"
 msgstr "Planeetbanen weergeven"
 
-#: index.html:321 tablet7in.html:392
+#: index.html:327 tablet7in.html:395
 msgid "Show planet orbits only"
 msgstr "Alleen planeetbanen weergeven"
 
-#: index.html:322 tablet7in.html:393
+#: index.html:328 tablet7in.html:396
 msgid "Show orbit for selected planet"
 msgstr "Alleen de baan van de  geselecteerde planeet weergeven"
 
-#: index.html:323 tablet7in.html:394
+#: index.html:329 tablet7in.html:397
 msgid "Show planet trails"
 msgstr "Planeetsporen weergeven"
 
-#: index.html:324 tablet7in.html:395
+#: index.html:330 tablet7in.html:398
 msgid "Show trail only for selected planet"
 msgstr "Alleen het spoor van de geselecteerde planeet weergeven"
 
-#: index.html:329 tablet7in.html:399
+#: index.html:335 tablet7in.html:402
 msgid "Scale Moon:"
 msgstr "Schaal maan:"
 
-#: index.html:330 tablet7in.html:403
+#: index.html:336 tablet7in.html:406
 msgid "Scale Sun:"
 msgstr "Zon herschalen:"
 
-#: index.html:331 tablet7in.html:407
+#: index.html:337 tablet7in.html:410
 msgid "Scale Planets:"
 msgstr "Planeten schalen:"
 
-#: index.html:332 tablet7in.html:411
+#: index.html:338 tablet7in.html:414
 msgid "Scale minor bodies:"
 msgstr "Kleinere hemellichamen schalen:"
 
-#: index.html:337
+#: index.html:343
 msgid "Mark minor bodies:"
 msgstr "Markeer kleine lichamen:"
 
-#: index.html:365 tablet7in.html:443
+#: index.html:371 tablet7in.html:446
 msgid "Bortle class:"
 msgstr "Bortle-klasse:"
 
-#: index.html:382 tablet7in.html:460
+#: index.html:388 tablet7in.html:463
 msgid "Extinction Coefficient:"
 msgstr "Extinctie coëfficiënt:"
 
-#: index.html:383 tablet7in.html:461
+#: index.html:389 tablet7in.html:464
 msgid "Only extinction/refraction, no blue skylight"
 msgstr "Alleen extinctie/refractie, geen blauw licht"
 
-#: index.html:383 tablet7in.html:462
+#: index.html:389 tablet7in.html:465
 msgid "Suppress scattering"
 msgstr "Verstrooiing onderdrukken"
 
-#: index.html:387 tablet7in.html:467
+#: index.html:393 tablet7in.html:470
 msgid "Shooting Stars"
 msgstr "Vallende sterren:"
 
-#: index.html:388 tablet7in.html:468
+#: index.html:394 tablet7in.html:471
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: index.html:435 tablet7in.html:520
+#: index.html:441 tablet7in.html:523
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr "Beweging van de aardas tijdens de beweging langs de ecliptische polen"
 
-#: index.html:452 tablet7in.html:537
+#: index.html:458 tablet7in.html:540
 msgid "Center"
 msgstr "Middelpunt"
 
-#: index.html:468 tablet7in.html:555
+#: index.html:474 tablet7in.html:558
 msgid "Solstices"
 msgstr "Zonnewenden"
 
-#: index.html:469 tablet7in.html:556
+#: index.html:475 tablet7in.html:559
 msgid "Crossquarters"
 msgstr "Seizoenskwartieren"
 
-#: index.html:470 tablet7in.html:557
+#: index.html:476 tablet7in.html:560
 msgid "Major Standstill"
 msgstr "Major Standstill"
 
-#: index.html:471 tablet7in.html:558
+#: index.html:477 tablet7in.html:561
 msgid "Minor Standstill"
 msgstr "Minor Standstill"
 
-#: index.html:475 tablet7in.html:563
+#: index.html:481 tablet7in.html:566
 msgid "Line width:"
 msgstr "Lijnbreedte:"
 
-#: index.html:485 tablet7in.html:573
+#: index.html:491 tablet7in.html:576
 msgid "Current Planet:"
 msgstr "Huidige planeet:"
 
-#: index.html:525 tablet7in.html:613
+#: index.html:532 tablet7in.html:616
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Catalogus van reflectie nevels (Van den Bergh, 1966)"
 
-#: index.html:572 tablet7in.html:631
+#: index.html:579 tablet7in.html:634
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
 "Catalogus van zuidelijke sterren ingebed in neveligheid (van den Bergh+, "
 "1975)"
 
-#: index.html:610
+#: index.html:617
 msgid "Objects without identifier"
 msgstr "Objecten zonder identificatie"
 
-#: index.html:628
+#: index.html:635
 msgid "Open Star clusters"
 msgstr "Open Ster clusters"
 
-#: index.html:629 tablet7in.html:699
+#: index.html:636 tablet7in.html:702
 msgid "Globular Star clusters"
 msgstr "Bolvormige Ster clusters"
 
-#: index.html:635 tablet7in.html:705
+#: index.html:642 tablet7in.html:708
 msgid "Bright Nebulae"
 msgstr "Heldere nevels"
 
-#: index.html:636 tablet7in.html:706
+#: index.html:643 tablet7in.html:709
 msgid "Dark Nebulae"
 msgstr "Donkere nevels"
 
-#: index.html:637 tablet7in.html:707
+#: index.html:644 tablet7in.html:710
 msgid "Planetary Nebulae"
 msgstr "Planetaire nevels"
 
-#: index.html:647 tablet7in.html:717
+#: index.html:654 tablet7in.html:720
 msgid "Labels and markers"
 msgstr "Teksten en merktekens"
 
-#: index.html:665 tablet7in.html:736
+#: index.html:672 tablet7in.html:739
 msgid "Limit angular size (arcmin):"
 msgstr "Hoekgrootte limiet (arcmin)"
 
-#: index.html:677 tablet7in.html:750
+#: index.html:685 tablet7in.html:753
 msgid "Use associated planet and position"
 msgstr "Gebruik de bijbehorende planeet en positie"
 
-#: index.html:687 tablet7in.html:758
+#: index.html:695 tablet7in.html:761
 msgid "Show landscape labels"
 msgstr "Landschap labels weergeven"
 
-#: index.html:688 tablet7in.html:759
+#: index.html:696 tablet7in.html:762
 msgid "Show illumination"
 msgstr "Toon verlichting"
 
-#: index.html:693 tablet7in.html:765
+#: index.html:701 tablet7in.html:768
 msgid "Current landscape"
 msgstr "Huidig landschap"
 
-#: index.html:704 tablet7in.html:777
-msgid "Label constellations with font size"
-msgstr "Label sterrenbeelden met lettergrootte"
-
-#: index.html:708 tablet7in.html:781
-msgid "Show lines with thickness"
-msgstr "Lijnen met dikte weergeven"
-
-#: index.html:712 tablet7in.html:785
-msgid "Label asterisms with font size"
-msgstr "Label asterismen met lettergrootte"
-
-#: index.html:716 tablet7in.html:789
-msgid "Show asterisms with thickness"
-msgstr "Asterismen met dikte weergeven"
-
-#: index.html:720 tablet7in.html:793
-msgid "Show ray helpers with thickness"
-msgstr "Ray helpers met dikte weergeven"
-
-#: index.html:724 tablet7in.html:797
-msgid "Show art in brightness"
-msgstr "Kunst weergeven in helderheid"
-
-#: index.html:728 tablet7in.html:801
-msgid "Show boundaries with thickness"
-msgstr "Grenzen met dikte weergeven"
-
-#: index.html:733 tablet7in.html:805
-msgid "Show zodiac with thickness"
-msgstr "Toon dierenriem met dikte"
-
-#: index.html:737 tablet7in.html:809
-msgid "Show lunar stations/mansions with thickness"
-msgstr "Maankringen/maanschakels met dikte weergeven"
-
-#: index.html:741 tablet7in.html:813
-msgid "Short labels"
-msgstr "Korte labels"
-
-#: index.html:742 tablet7in.html:814
-msgid "Constellation selection isolated"
-msgstr "Geïsoleerde sterrenbeeldselectie"
-
-#: index.html:743 tablet7in.html:815
-msgid "Only last selected"
-msgstr "Alleen laatst geselecteerd"
-
-#: index.html:748 tablet7in.html:820
+#: index.html:717 tablet7in.html:783
 msgid "Current sky culture"
 msgstr "Huidig benamingssysteem"
 
-#: index.html:761 tablet7in.html:845
+#: index.html:723 index.html:980 tablet7in.html:789 tablet7in.html:1045
+msgid "Loading sky cultures..."
+msgstr "Hemelculturen laden..."
+
+#: index.html:732 index.html:998 index.html:1018 tablet7in.html:798
+#: tablet7in.html:1063 tablet7in.html:1083
+msgid "Zodiac Signs"
+msgstr "Dierenriemtekens"
+
+#: index.html:733 index.html:1002 index.html:1019 tablet7in.html:799
+#: tablet7in.html:1067 tablet7in.html:1084
+msgid "Lunar Mansions"
+msgstr "Maanhuizen"
+
+#: index.html:734 tablet7in.html:800
+msgid "Notable Stars"
+msgstr "Bekende Sterren"
+
+#: index.html:740 tablet7in.html:806
+msgid "Click on any constellation to highlight and isolate it"
+msgstr "Klik op een sterrenbeeld om het te markeren en te isoleren"
+
+#: index.html:742 tablet7in.html:808
+msgid "Select a sky culture to view constellations"
+msgstr "Kies een hemelcultuur om sterrenbeelden te bekijken"
+
+#: index.html:748 tablet7in.html:814
+msgid "Traditional star patterns within constellations"
+msgstr "Traditionele sterrenpatronen binnen sterrenbeelden"
+
+#: index.html:750 tablet7in.html:816
+msgid "No asterisms available"
+msgstr "Geen asterismen beschikbaar"
+
+#: index.html:756 tablet7in.html:822
+msgid "The 12 signs of the zodiac"
+msgstr "De 12 tekens van de dierenriem"
+
+#: index.html:758 tablet7in.html:824
+msgid "No zodiac data available"
+msgstr "Geen dierenriemgegevens beschikbaar"
+
+#: index.html:764 tablet7in.html:830
+msgid "Traditional lunar stations (mansions)"
+msgstr "Traditionele maanstations (maanhuizen)"
+
+#: index.html:766 tablet7in.html:832
+msgid "No lunar mansions data available"
+msgstr "Geen gegevens over maanhuizen beschikbaar"
+
+#: index.html:772 tablet7in.html:838
+msgid "Named stars with cultural significance"
+msgstr "Bekende sterren met culturele betekenis"
+
+#: index.html:774 tablet7in.html:840
+msgid "No star name data available"
+msgstr "Geen sterrennaamgegevens beschikbaar"
+
+#: index.html:798 tablet7in.html:864
+msgid "Label constellations with font size"
+msgstr "Label sterrenbeelden met lettergrootte"
+
+#: index.html:812 tablet7in.html:878
+msgid "Show lines with thickness"
+msgstr "Lijnen met dikte weergeven"
+
+#: index.html:826 tablet7in.html:892
+msgid "Label asterisms with font size"
+msgstr "Label asterismen met lettergrootte"
+
+#: index.html:840 tablet7in.html:906
+msgid "Show asterisms with thickness"
+msgstr "Asterismen met dikte weergeven"
+
+#: index.html:854 tablet7in.html:920
+msgid "Show ray helpers with thickness"
+msgstr "Ray helpers met dikte weergeven"
+
+#: index.html:868 tablet7in.html:934
+msgid "Show art in brightness"
+msgstr "Kunst weergeven in helderheid"
+
+#: index.html:882 tablet7in.html:948
+msgid "Show boundaries with thickness"
+msgstr "Grenzen met dikte weergeven"
+
+#: index.html:896 tablet7in.html:962
+msgid "Show zodiac with thickness"
+msgstr "Toon dierenriem met dikte"
+
+#: index.html:910 tablet7in.html:976
+msgid "Show lunar stations/mansions with thickness"
+msgstr "Maankringen/maanschakels met dikte weergeven"
+
+#: index.html:927 tablet7in.html:993
+msgid "Short labels"
+msgstr "Korte labels"
+
+#: index.html:932 tablet7in.html:998
+msgid "Constellation selection isolated"
+msgstr "Geïsoleerde sterrenbeeldselectie"
+
+#: index.html:937 tablet7in.html:1003
+msgid "Only last selected"
+msgstr "Alleen laatst geselecteerd"
+
+#: index.html:954 tablet7in.html:1019
+msgid "Culture Data Inspector"
+msgstr "Hemelcultuur-gegevens Inspecteur"
+
+#: index.html:956 tablet7in.html:1021
+msgid ""
+"This inspector displays the complete, unfiltered dataset extracted directly "
+"from the culture's"
+msgstr ""
+"Deze inspector toont de volledige, ongefilterde dataset die rechtstreeks uit"
+" de cultuur is gehaald"
+
+#: index.html:958 tablet7in.html:1023
+msgid "file. Use this view to:"
+msgstr "bestand. Gebruik deze weergave om:"
+
+#: index.html:960 tablet7in.html:1025
+msgid "Verify exact constellation and asterism counts (including ray helpers)"
+msgstr ""
+"Controleer het exacte aantal sterrenbeelden en asterismen (inclusief "
+"straalhelpers)"
+
+#: index.html:961 tablet7in.html:1026
+msgid "Inspect raw IDs, native names, pronunciations, and IPA values"
+msgstr ""
+"Controleer ruwe ID’s, oorspronkelijke namen, uitspraken en IPA-waarden"
+
+#: index.html:962 tablet7in.html:1027
+msgid "Cross-reference star IDs (HIP, NGC, etc.) with their cultural names"
+msgstr "Koppel ster-ID’s (HIP, NGC, enz.) aan hun traditionele namen"
+
+#: index.html:963 tablet7in.html:1028
+msgid "Export complete datasets to CSV/JSON for external analysis"
+msgstr "Exporteer volledige datasets naar CSV/JSON voor externe analyse"
+
+#: index.html:964 tablet7in.html:1029
+msgid "Search across all fields to quickly locate specific entries"
+msgstr "Zoek in alle velden om snel specifieke vermeldingen te vinden"
+
+#: index.html:967 tablet7in.html:1032
+msgid ""
+"Each row is interactive — click to select and navigate to the object in "
+"Stellarium."
+msgstr ""
+"Elke rij is interactief — klik om te selecteren en naar het object in "
+"Stellarium te gaan."
+
+#: index.html:976 tablet7in.html:1041
+msgid "Select Sky Culture"
+msgstr "Kies Hemelcultuur"
+
+#: index.html:994 tablet7in.html:1059
+msgid "Ray Helpers"
+msgstr "Straal Helpers"
+
+#: index.html:1006 tablet7in.html:1071
+msgid "Named Objects"
+msgstr "Benoemde Objecten"
+
+#: index.html:1020 tablet7in.html:1085
+msgid "Notable Stars & Objects"
+msgstr "Opmerkelijke Sterren en Objecten"
+
+#: index.html:1027 tablet7in.html:1092
+msgid ""
+"Search constellations... (click row to isolate at 60° FOV) | ESC to reset"
+msgstr ""
+"Zoek naar sterrenbeelden... (klik op een rij om deze te isoleren bij een "
+"gezichtsveld van 60°) | ESC om te resetten"
+
+#: index.html:1034 tablet7in.html:1099
+msgid ""
+"Complete constellation definitions from index.json. Click any row to isolate"
+" and highlight in Stellarium."
+msgstr ""
+"Volledige sterrenbeelddefinities uit index.json. Klik op een willekeurige "
+"rij om deze in Stellarium te isoleren en te markeren."
+
+#: index.html:1041 index.html:1072 tablet7in.html:1106 tablet7in.html:1137
+msgid "ID"
+msgstr "ID"
+
+#: index.html:1043 index.html:1074 index.html:1095 index.html:1117
+#: index.html:1150 tablet7in.html:1108 tablet7in.html:1139 tablet7in.html:1160
+#: tablet7in.html:1182 tablet7in.html:1215
+msgid "English Name"
+msgstr "Engels naam - Nederlandse naam"
+
+#: index.html:1044 index.html:1075 index.html:1096 index.html:1118
+#: index.html:1151 tablet7in.html:1109 tablet7in.html:1140 tablet7in.html:1161
+#: tablet7in.html:1183 tablet7in.html:1216
+msgid "Translation"
+msgstr "Vertaling"
+
+#: index.html:1047 index.html:1078 tablet7in.html:1112 tablet7in.html:1143
+msgid "Star IDs"
+msgstr "Ster ID's"
+
+#: index.html:1058 tablet7in.html:1123
+msgid "Search asterisms... (click row to center at 30° FOV) | ESC to reset"
+msgstr ""
+"Zoek sterrenbeelden... (klik op de rij om het beeld te centreren bij een "
+"gezichtsveld van 30°) | ESC om te resetten"
+
+#: index.html:1065 tablet7in.html:1130
+msgid ""
+"All asterisms from index.json (ray helpers are excluded from this list). "
+"Click any row to center view."
+msgstr ""
+"Alle sterrenbeelden uit index.json (ray-helpers zijn niet in deze lijst "
+"opgenomen). Klik op een willekeurige rij om het beeld te centreren."
+
+#: index.html:1104 tablet7in.html:1169
+msgid ""
+"Zodiac signs defined in this culture. Click to center on the constellation."
+msgstr ""
+"Dierenriemtekens zoals ze in deze hemelcultuur worden gedefinieerd. Klik om "
+"het sterrenbeeld te centreren."
+
+#: index.html:1126 tablet7in.html:1191
+msgid ""
+"Lunar mansions (stations) defined in this culture. Click to center view."
+msgstr ""
+"Maanhuizen (stations) zoals gedefinieerd in deze hemelcultuur. Klik om het "
+"beeld te centreren."
+
+#: index.html:1133 tablet7in.html:1198
+msgid ""
+"Search stars & objects... (click row to center at 15° FOV) | ESC to reset"
+msgstr ""
+"Zoek sterren en objecten... (klik op de rij om het beeld te centreren bij "
+"een gezichtsveld van 15°) | ESC om te resetten"
+
+#: index.html:1140 tablet7in.html:1205
+msgid ""
+"All named celestial objects (stars, planets, deep-sky) defined in this "
+"culture's common_names section."
+msgstr ""
+"Alle benoemde hemellichamen (sterren, planeten, deep-sky-objecten) die zijn "
+"gedefinieerd in het gedeelte common_names van deze cultuur."
+
+#: index.html:1147 tablet7in.html:1212
+msgid "Original ID"
+msgstr "Oorspronkelijke ID"
+
+#: index.html:1184 tablet7in.html:1261
 msgid "Active script:"
 msgstr "Actief script:"
 
-#: index.html:762 tablet7in.html:846
+#: index.html:1189 tablet7in.html:1266
 msgid "Run selected script"
 msgstr "Geselecteerd script draaien"
 
-#: index.html:762 tablet7in.html:846
+#: index.html:1190 tablet7in.html:1267
 msgid "Stop current script"
 msgstr "Geselecteerd script stoppen"
 
-#: index.html:767 tablet7in.html:43 tablet7in.html:830
+#: index.html:1191 tablet7in.html:1268
+msgid "Reset to natural sky appearance (South, 40°, FOV 90°)"
+msgstr ""
+"Reset naar natuurlijk uiterlijk van de hemel (Zuid, 40°, gezichtsveld 90°)"
+
+#: index.html:1200 tablet7in.html:45 tablet7in.html:1240
 msgid "Actions"
 msgstr "Activiteiten"
 
-#: index.html:771 tablet7in.html:834
+#: index.html:1203 tablet7in.html:1243
 msgid "Run/toggle action"
 msgstr "Start/Stop activiteit"
 
-#: index.html:782 tablet7in.html:869
+#: index.html:1217 tablet7in.html:1294
 msgid "Planet map"
 msgstr "Planeetkaart"
 
-#: index.html:783 tablet7in.html:870
+#: index.html:1218 tablet7in.html:1295
 msgid "Planet map pointer"
 msgstr "Planeetkaart aanwijzer"
 
-#: index.html:787 tablet7in.html:874
+#: index.html:1222 tablet7in.html:1299
 msgid "Type to search location"
 msgstr "Zoeklocatie invoeren"
 
-#: index.html:821 tablet7in.html:903
+#: index.html:1258 tablet7in.html:1328
 msgid "Interaction"
 msgstr "Interactie"
 
-#: index.html:822 tablet7in.html:904
+#: index.html:1259 tablet7in.html:1329
 msgid "Current scene:"
 msgstr "Huidige scene:"
 
-#: index.html:825 tablet7in.html:907
+#: index.html:1262 tablet7in.html:1332
 msgid "View controls"
 msgstr "Beeldbedieningen"
 
-#: index.html:831 tablet7in.html:913
+#: index.html:1268 tablet7in.html:1338
 msgid "Movement controls"
 msgstr "Bewegingsbedieningen"
 
-#: index.html:843 tablet7in.html:925
+#: index.html:1280 tablet7in.html:1350
 msgid "Torchlight"
 msgstr "Toortslicht"
 
-#: index.html:850 tablet7in.html:932
+#: index.html:1287 tablet7in.html:1357
 msgid "Scene selection"
 msgstr "Scene selectie"
 
-#: index.html:854 tablet7in.html:936
+#: index.html:1291 tablet7in.html:1361
 msgid "Load selected scene"
 msgstr "Geselecteerde scene laden"
 
-#: index.html:880 tablet7in.html:963
+#: index.html:1304 tablet7in.html:1373
+msgid "Scan"
+msgstr "Scan"
+
+#: index.html:1311 tablet7in.html:1380
+msgid "Controller Settings"
+msgstr "Controller Instellingen"
+
+#: index.html:1314 tablet7in.html:1383
+msgid "Active Device:"
+msgstr "Actief Apparaat:"
+
+#: index.html:1316 tablet7in.html:1385
+msgid "No devices connected"
+msgstr "Geen apparaten aangesloten"
+
+#: index.html:1322 tablet7in.html:1391
+msgid "Device:"
+msgstr "Apparaat:"
+
+#: index.html:1330 tablet7in.html:1399
+msgid "Vendor:"
+msgstr "Leverancier:"
+
+#: index.html:1334 tablet7in.html:1403
+msgid "Device ID:"
+msgstr "Apparaat ID:"
+
+#: index.html:1338 tablet7in.html:1407
+msgid "Buttons/Axes:"
+msgstr "Knoppen/Assen:"
+
+#: index.html:1344 tablet7in.html:1413
+msgid "Joystick Preview"
+msgstr "Joystick Voorbeeld"
+
+#: index.html:1350 tablet7in.html:1419
+msgid "Left Stick"
+msgstr "Linker Stick"
+
+#: index.html:1351 tablet7in.html:1420
+msgid "View movement"
+msgstr "Bekijk beweging"
+
+#: index.html:1354 tablet7in.html:1423
+msgid "Direction:"
+msgstr "Richting:"
+
+#: index.html:1355 tablet7in.html:1424
+msgid "centered"
+msgstr "gecentreerd"
+
+#: index.html:1360 tablet7in.html:1429
+msgid "Invert X"
+msgstr "X Omdraaien"
+
+#: index.html:1364 index.html:1383 tablet7in.html:1433 tablet7in.html:1452
+msgid "Invert Y"
+msgstr "Y Omdraaien"
+
+#: index.html:1373 tablet7in.html:1442
+msgid "Right Stick"
+msgstr "Rechter Stick"
+
+#: index.html:1374 tablet7in.html:1443
+msgid "Continuous zoom"
+msgstr "Traploze zoom"
+
+#: index.html:1377 tablet7in.html:1446
+msgid "Current FOV:"
+msgstr "Huidige FOV:"
+
+#: index.html:1392 tablet7in.html:1461
+msgid "Joystick Calibration"
+msgstr "Joystick Kalibratie"
+
+#: index.html:1394 tablet7in.html:1463
+msgid "Calibrate"
+msgstr "Kalibratie"
+
+#: index.html:1400 tablet7in.html:1469
+msgid ""
+"Move joysticks in circles to calibrate center position. Press any button to "
+"finish."
+msgstr ""
+"Beweeg de joysticks in cirkels om de middenpositie te kalibreren. Druk op "
+"een willekeurige knop om te voltooien."
+
+#: index.html:1409 tablet7in.html:1478
+msgid "Test Vibration"
+msgstr "Trillingstest"
+
+#: index.html:1410 tablet7in.html:1479
+msgid "Manual test (uses full intensity)"
+msgstr "Handmatige test (met volledige intensiteit)"
+
+#: index.html:1415 tablet7in.html:1484
+msgid "Vibration Feedback"
+msgstr "Trillingsfeedback"
+
+#: index.html:1416 tablet7in.html:1485
+msgid "works in Chrome/Edge"
+msgstr "werkt in Chrome/Edge"
+
+#: index.html:1422 tablet7in.html:1491
+msgid "Vibration Intensity:"
+msgstr "Trillingsintensiteit:"
+
+#: index.html:1431 tablet7in.html:1500
+msgid "Sensitivity:"
+msgstr "Gevoeligheid:"
+
+#: index.html:1440 tablet7in.html:1509
+msgid "Deadzone:"
+msgstr "Dode zone:"
+
+#: index.html:1449 tablet7in.html:1518
+msgid "Zoom Speed:"
+msgstr "Zoom Snelheid:"
+
+#: index.html:1458 tablet7in.html:1527
+msgid "Movement Speed:"
+msgstr "Bewegingssnelheid:"
+
+#: index.html:1468 tablet7in.html:1537
+msgid "Button Customization"
+msgstr "Knopaanpassing"
+
+#: index.html:1475 tablet7in.html:1544
+msgid ""
+"Each connected controller has its own independent profile. Select a device "
+"from 'Active Device' to customize."
+msgstr ""
+"Elke aangesloten controller heeft zijn eigen onafhankelijke profiel. "
+"Selecteer een apparaat in ‘Actief apparaat’ om het aan te passen."
+
+#: index.html:1479 tablet7in.html:1548
+msgid "Reset Mappings"
+msgstr "Mappings Resetten"
+
+#: index.html:1480 tablet7in.html:1549
+msgid "Save Mappings"
+msgstr "Mappings Opslaan"
+
+#: index.html:1481 tablet7in.html:1550
+msgid "Export Profile"
+msgstr "Profiel Exporteren"
+
+#: index.html:1482 tablet7in.html:1551
+msgid "Import Profile"
+msgstr "Profiel Importeren"
+
+#: index.html:1485 tablet7in.html:1554
+msgid ""
+"Profiles are saved per device and can be exported/imported for backup or "
+"sharing"
+msgstr ""
+"Profielen worden per apparaat opgeslagen en kunnen worden geëxporteerd of "
+"geïmporteerd voor back-updoeleinden of om te delen"
+
+#: index.html:1492 tablet7in.html:1561
+msgid "Live Input Monitor"
+msgstr "Live Invoer Monitor"
+
+#: index.html:1493 tablet7in.html:1562
+msgid ""
+"Real-time raw values from the browser's Gamepad API. Buttons show press "
+"state, Axes show visual meter. Use this panel to verify button and axis "
+"mappings."
+msgstr ""
+"Realtime ruwe waarden uit de Gamepad API van de browser. Knoppen geven de "
+"indrukstatus weer, assen tonen een visuele meter. Gebruik dit paneel om de "
+"toewijzingen van knoppen en assen te controleren."
+
+#: index.html:1499 tablet7in.html:1568
+msgid "Buttons"
+msgstr "Knoppen"
+
+#: index.html:1501 index.html:1508 index.html:1516 tablet7in.html:1570
+#: tablet7in.html:1577 tablet7in.html:1585
+msgid "Waiting for controller input..."
+msgstr "Wachten op input van controller..."
+
+#: index.html:1506 tablet7in.html:1575
+msgid "Axes"
+msgstr "Assen"
+
+#: index.html:1514 tablet7in.html:1583
+msgid "Device Information"
+msgstr "Apparaatinformatie"
+
+#: index.html:1519 tablet7in.html:1588
+msgid "Understanding Raw Values"
+msgstr "Ruwe waarden begrijpen"
+
+#: index.html:1520 tablet7in.html:1589
+msgid "Buttons: Range 0.0 (not pressed) to 1.0 (green = fully pressed)."
+msgstr ""
+"Knoppen: bereik van 0,0 (niet ingedrukt) tot 1,0 (groen = volledig "
+"ingedrukt)."
+
+#: index.html:1521 tablet7in.html:1590
+msgid ""
+"Axes: -1.0 to 1.0 with visual meter Center position is 0.0. Triggers (L2/R2)"
+" show gradual values."
+msgstr ""
+"Assen: -1,0 tot 1,0 met visuele meter. De middelste positie is 0,0. De "
+"triggers (L2/R2) geven geleidelijke waarden weer."
+
+#: index.html:1522 tablet7in.html:1591
+msgid ""
+"Note: Different browsers may report the same physical button on different "
+"indices. Use this panel to identify the correct mapping for your setup."
+msgstr ""
+"Opmerking: Verschillende browsers kunnen dezelfde fysieke knop onder "
+"verschillende indexen weergeven. Gebruik dit venster om de juiste toewijzing"
+" voor uw configuratie te bepalen."
+
+#: index.html:1552 tablet7in.html:1620
 msgid "No response from server"
 msgstr "Server reageert niet"
 
-#: index.html:881 tablet7in.html:964
+#: index.html:1553 tablet7in.html:1621
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Al '%1' seconden geen reactie van de server. Draait Stellarium nog?"
 
-#: tablet7in.html:34
+#: tablet7in.html:35
 msgid "Time Jump"
 msgstr "Tijd verschuiving"
 
-#: tablet7in.html:39
+#: tablet7in.html:40
 msgid "Grids"
 msgstr "Rasters"
 
-#: tablet7in.html:99
+#: tablet7in.html:102
 msgid "Up/Left"
 msgstr "Omhoog/Links"
 
-#: tablet7in.html:99
+#: tablet7in.html:102
 msgid "Up"
 msgstr "Omhoog"
 
-#: tablet7in.html:99
+#: tablet7in.html:102
 msgid "Up/Right"
 msgstr "Omhoog/Rechts"
 
-#: tablet7in.html:99
+#: tablet7in.html:102
 msgid "Left"
 msgstr "Links"
 
-#: tablet7in.html:99
+#: tablet7in.html:102
 msgid "Focus on selected object"
 msgstr "Op geselecteerd object richten"
 
-#: tablet7in.html:99
+#: tablet7in.html:102
 msgid "Focus on selection"
 msgstr "Op selectie richten"
 
-#: tablet7in.html:99
+#: tablet7in.html:102
 msgid "Right"
 msgstr "Rechts"
 
-#: tablet7in.html:99
+#: tablet7in.html:102
 msgid "Down/Left"
 msgstr "Omlaag/Links"
 
-#: tablet7in.html:99
+#: tablet7in.html:102
 msgid "Down"
 msgstr "Omlaag"
 
-#: tablet7in.html:99
+#: tablet7in.html:102
 msgid "Down/Right"
 msgstr "Omlaag/Rechts"
 
-#: tablet7in.html:276
+#: tablet7in.html:279
 msgid "Sirius"
 msgstr "Sirius"
 
-#: tablet7in.html:277
+#: tablet7in.html:280
 msgid "Arcturus"
 msgstr "Arcturus"
 
-#: tablet7in.html:278
+#: tablet7in.html:281
 msgid "Capella"
 msgstr "Capella"
 
-#: tablet7in.html:279
+#: tablet7in.html:282
 msgid "Vega"
 msgstr "Vega"
 
-#: tablet7in.html:280
+#: tablet7in.html:283
 msgid "Deneb"
 msgstr "Deneb"
 
-#: tablet7in.html:281
+#: tablet7in.html:284
 msgid "Altair"
 msgstr "Altair"
 
-#: tablet7in.html:282
+#: tablet7in.html:285
 msgid "Andromeda Galaxy"
 msgstr "Andromedastelsel"
 
-#: tablet7in.html:283
+#: tablet7in.html:286
 msgid "Hercules Cluster"
 msgstr "Hercules cluster"
 
-#: tablet7in.html:284
+#: tablet7in.html:287
 msgid "Orion Nebula"
 msgstr "Orionnevel"
 
-#: tablet7in.html:285
+#: tablet7in.html:288
 msgid "Eta Carinae Nebula"
 msgstr "Eta Carinae nevel"
 
-#: tablet7in.html:286
+#: tablet7in.html:289
 msgid "47 Tucanae Cluster"
 msgstr "47 Tucanae sterrenhoop"
 
-#: tablet7in.html:287
+#: tablet7in.html:290
 msgid "Aries"
 msgstr "Ram"
 
-#: tablet7in.html:288
+#: tablet7in.html:291
 msgid "Taurus"
 msgstr "Stier"
 
-#: tablet7in.html:289
+#: tablet7in.html:292
 msgid "Gemini"
 msgstr "Gemini"
 
-#: tablet7in.html:290
+#: tablet7in.html:293
 msgid "Cancer"
 msgstr "Kreeft"
 
-#: tablet7in.html:291
+#: tablet7in.html:294
 msgid "Leo"
 msgstr "Leo"
 
-#: tablet7in.html:292
+#: tablet7in.html:295
 msgid "Virgo"
 msgstr "Maagd"
 
-#: tablet7in.html:293
+#: tablet7in.html:296
 msgid "Libra"
 msgstr "Weegschaal"
 
-#: tablet7in.html:294
+#: tablet7in.html:297
 msgid "Scorpius"
 msgstr "Schorpioen"
 
-#: tablet7in.html:295
+#: tablet7in.html:298
 msgid "Sagittarius"
 msgstr "Boogschutter"
 
-#: tablet7in.html:296
+#: tablet7in.html:299
 msgid "Capricornus"
 msgstr "Steenbok"
 
-#: tablet7in.html:297
+#: tablet7in.html:300
 msgid "Aquarius"
 msgstr "Aquarius"
 
-#: tablet7in.html:298
+#: tablet7in.html:301
 msgid "Pisces"
 msgstr "Vissen"
 
-#: tablet7in.html:854
+#: tablet7in.html:1279
 msgid "Favorites"
 msgstr "Favorieten"
 
-#: tablet7in.html:856
+#: tablet7in.html:1281
 msgid "Show 1"
 msgstr "Toon 1"
 
-#: tablet7in.html:857
+#: tablet7in.html:1282
 msgid "Remove Labels and Images"
 msgstr "Labels en afbeeldingen verwijderen"
 
-#: tablet7in.html:857
+#: tablet7in.html:1282
 msgid "Cleanup Screen"
 msgstr "Scherm opschonen"

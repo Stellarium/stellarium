@@ -466,7 +466,7 @@ void ConfigurationDialog::createDialogContent()
 		connectDoubleProperty(ui->spinBox_Rate         , "StelSpeechMgr.rate");
 
 		connect(ui->pushButton_SpeechSay,  &QPushButton::clicked, speechMgr, [this](){QString txt=ui->speechTextEdit->toPlainText(); qDebug() << txt; speechMgr->say(txt);});
-		connect(ui->pushButton_SpeechStop, &QPushButton::clicked, speechMgr, [this]{speechMgr->stop();});
+		connect(ui->pushButton_SpeechStop, &QPushButton::clicked, speechMgr, []{speechMgr->stop();});
 	}
 	else
 #endif
@@ -1123,7 +1123,10 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("viewing/flag_draw_sun_halo",                    propMgr->getStelPropertyValue("SolarSystem.flagDrawSunHalo").toBool());
         conf->setValue("viewing/flag_draw_sun_corona",                  propMgr->getStelPropertyValue("SolarSystem.flagPermanentSolarCorona").toBool());
         conf->setValue("viewing/flag_moon_scaled",                      propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool());
-        conf->setValue("viewing/moon_scale",                            QString::number(propMgr->getStelPropertyValue("SolarSystem.moonScale").toDouble(), 'f', 2));
+	conf->setValue("viewing/flag_dynamic_moon_scale",               propMgr->getStelPropertyValue("SolarSystem.flagDynamicMoonScale").toBool());
+	conf->setValue("viewing/moon_scale_min_fov",                    QString::number(propMgr->getStelPropertyValue("SolarSystem.moonScaleMinFov").toDouble(), 'f', 2));
+	conf->setValue("viewing/moon_scale_max_fov",                    QString::number(propMgr->getStelPropertyValue("SolarSystem.moonScaleMaxFov").toDouble(), 'f', 2));
+	conf->setValue("viewing/moon_scale",                            QString::number(propMgr->getStelPropertyValue("SolarSystem.moonScale").toDouble(), 'f', 2));
         conf->setValue("viewing/flag_minorbodies_scaled",               propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool());
         conf->setValue("viewing/minorbodies_scale",                     QString::number(propMgr->getStelPropertyValue("SolarSystem.minorBodyScale").toDouble(), 'f', 2));
         conf->setValue("viewing/flag_planets_scaled",                   propMgr->getStelPropertyValue("SolarSystem.flagPlanetScale").toBool());
@@ -1477,6 +1480,18 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("main/screenshot_custom_size",                   propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
         conf->setValue("main/screenshot_custom_width",                  propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
         conf->setValue("main/screenshot_custom_height",                 propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
+
+#ifdef ENABLE_SPEECH
+	// TextToSpeech settings
+	StelSpeechMgr *speechMgr=GETSTELMODULE(StelSpeechMgr);
+
+	StelApp::immediateSave("speech/engine", speechMgr->getEngine());
+	StelApp::immediateSave("speech/rate",   propMgr->getStelPropertyValue("StelSpeechMgr.rate").toDouble());
+	StelApp::immediateSave("speech/pitch",  propMgr->getStelPropertyValue("StelSpeechMgr.pitch").toDouble());
+	StelApp::immediateSave("speech/volume", propMgr->getStelPropertyValue("StelSpeechMgr.volume").toDouble());
+
+	saveCustomSelectedNarration();
+#endif
 
 	QWidget& mainWindow = StelMainView::getInstance();
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))

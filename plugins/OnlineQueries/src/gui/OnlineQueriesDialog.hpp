@@ -22,9 +22,9 @@
 #define ONLINEQUERIESDIALOG_HPP
 
 #include "StelDialogSeparate.hpp"
-#include "ui_onlineQueriesDialog.h"
 
 class OnlineQueries;
+class Ui_onlineQueriesDialogForm;
 
 class OnlineQueriesDialog : public StelDialogSeparate
 {

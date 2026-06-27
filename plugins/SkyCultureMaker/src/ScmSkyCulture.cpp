@@ -119,6 +119,21 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 	}
 	scJsonObj["constellations"] = constellationsArray;
 
+	if (!culturalNames.isEmpty())
+	{
+		QJsonObject commonNamesObj;
+		for (auto it = culturalNames.constBegin(); it != culturalNames.constEnd(); ++it)
+		{
+			QJsonArray namesArray;
+			for (const auto &name : it.value())
+			{
+				namesArray.append(name.toJson());
+			}
+			commonNamesObj[it.key()] = namesArray;
+		}
+		scJsonObj["common_names"] = commonNamesObj;
+	}
+
 	return scJsonObj;
 }
 
@@ -154,6 +169,11 @@ void scm::ScmSkyCulture::draw(StelCore *core) const
 void scm::ScmSkyCulture::setDescription(const scm::Description &description)
 {
 	ScmSkyCulture::description = description;
+}
+
+void scm::ScmSkyCulture::setCulturalNames(const QMap<QString, QList<ScmCulturalName>> &names)
+{
+	ScmSkyCulture::culturalNames = names;
 }
 
 bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)

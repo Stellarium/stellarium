@@ -116,6 +116,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(int guiPanelFontSize READ getGuiPanelFontSize WRITE setGuiPanelFontSize NOTIFY guiPanelFontSizeChanged)
 	Q_PROPERTY(Vec3f textColor      READ getTextColor        WRITE setTextColor        NOTIFY textColorChanged)
 	Q_PROPERTY(Vec3f lineColor      READ getLineColor        WRITE setLineColor        NOTIFY textColorChanged)
+	Q_PROPERTY(Vec3f reticleColor      READ getReticleColor        WRITE setReticleColor        NOTIFY reticleColorChanged)
 
 	Q_PROPERTY(bool flagShowCcdCropOverlay READ getFlagShowCcdCropOverlay  WRITE setFlagShowCcdCropOverlay NOTIFY flagShowCcdCropOverlayChanged)
 	Q_PROPERTY(bool flagShowCcdCropOverlayPixelGrid READ getFlagShowCcdCropOverlayPixelGrid WRITE setFlagShowCcdCropOverlayPixelGrid NOTIFY flagShowCcdCropOverlayPixelGridChanged)
@@ -223,6 +224,9 @@ public slots:
 
 	void setLineColor(const Vec3f &color) {lineColor=color; emit lineColorChanged(color);}
 	Vec3f getLineColor() const {return lineColor;}
+	
+	void setReticleColor(const Vec3f &color) {reticleColor=color; emit reticleColorChanged(color);}
+	Vec3f getReticleColor() const {return reticleColor;}
 
 	void setFocuserColor(const Vec3f &color) { focuserColor=color; emit focuserColorChanged(color);}
 	Vec3f getFocuserColor() const {return focuserColor;}
@@ -341,6 +345,7 @@ signals:
 	void guiPanelFontSizeChanged(int value);
 	void textColorChanged(const Vec3f &color);
 	void lineColorChanged(const Vec3f &color);
+	void reticleColorChanged(const Vec3f &color);
 	void focuserColorChanged(const Vec3f &color);
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
@@ -528,13 +533,14 @@ private:
 	bool flipHorzMain;               //!< keep track of screen flip in main program
 
 	// for toolbar button
+	bool flagShowOcularsButton;
+#ifndef NO_GUI
 	QPixmap * pxmapGlow;
 	QPixmap * pxmapOnIcon;
 	QPixmap * pxmapOffIcon;
 	StelButton * toolbarButton;
-	bool flagShowOcularsButton;
-
 	OcularDialog *ocularDialog;
+#endif
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 
 	StelAction * actionShowOcular;
@@ -548,10 +554,13 @@ private:
 	StelAction * actionOcularIncrement;
 	StelAction * actionOcularDecrement;
 
+#ifndef NO_GUI
 	class OcularsGuiPanel * guiPanel;
+#endif
 	int guiPanelFontSize;
 	Vec3f textColor;
 	Vec3f lineColor;
+	Vec3f reticleColor;
 	Vec3f focuserColor;
 
 	Planet* selectedSSO;

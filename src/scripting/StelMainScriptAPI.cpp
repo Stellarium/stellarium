@@ -1017,17 +1017,25 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	}
 }
 
-void StelMainScriptAPI::waitForKeypress()
+void StelMainScriptAPI::waitForKeypress(const QString message)
 {
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	LabelMgr* labelMgr = GETSTELMODULE(LabelMgr);
+	int labelId;
+
 	QCoreApplication::processEvents();
 	QEventLoop* loop = scriptMgr->getWaitEventLoop();
 	KeypressFilter filter(loop);
 	qApp->installEventFilter(&filter);
+	if (scriptMgr->getFlagShowContinueMessage())
+		labelId = labelMgr->labelScreen(message, 30, 30, true, 20, "#ffffff", false, 0);
+
 	if( loop->exec() != 0 )
 	{
 		emit requestExit();
 	}
+	if (scriptMgr->getFlagShowContinueMessage())
+		labelMgr->deleteLabel(labelId);
 	qApp->removeEventFilter(&filter);
 }
 
@@ -1181,6 +1189,12 @@ QVariantMap StelMainScriptAPI::getRTS(const QString &objectName, const double al
 	}
 	return map;
 }
+
+double StelMainScriptAPI::getEquationOfTime()
+{
+	return StelApp::getInstance().getCore()->getSolutionEquationOfTime()*60.0;
+}
+
 
 void StelMainScriptAPI::setStelProperty(const QString& propertyName, QVariant propertyValue)
 {

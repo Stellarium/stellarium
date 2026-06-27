@@ -38,18 +38,18 @@ extern "C" {
 #define L12_CALLISTO      3
 
 /*
- * Galilean satellites positions using l1.2 semi-analytic theory by
+ * Galilean satellites positions using l1.2 semi-analytic theory
  * by Valery LAINEY, Alain VIENNE and Luc DURIEZ.
  * ftp://ftp.imcce.fr/pub/ephem/satel/galilean/L1/L1.2/
  *
  * @param jd Input time in TT JD.
  * @param body Moon index from 0 (Io) to 3 (Callisto).
  * @param p Get the position of the body in Cartesian coordinates with origin the center of Jupiter
- *          and in the VSOP87 plan, in AU.
+ *          and in the VSOP87 frame, in AU.
  * @param v Get the speed of the body in Cartesian coordinates with origin the center of Jupiter
- *          and in the VSOP87 plan. in AU/d.
+ *          and in the VSOP87 frame. in AU/d.
  */
-void GetL12Coor(double jd, int body, double p[3], double v[3]);
+void GetL12Coor(const double jd, const int body, double p[3], double v[3]);
 
 #ifdef __cplusplus
 }

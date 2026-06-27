@@ -28,6 +28,8 @@
 #include <QRegularExpression>
 #include <QDebug>
 #include <QElapsedTimer>
+#include <QtMath>
+#include <algorithm>
 
 MinorPlanet::MinorPlanet(const QString& englishName,
 			 double radius,
@@ -88,7 +90,11 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 
 MinorPlanet::~MinorPlanet()
 {
-	//Do nothing for the moment
+	// Clear orbitPtr so Planet::~Planet() does not dereference a dangling
+	// pointer. activeEpochOrbit (unique_ptr) deletes the KeplerOrbit
+	// automatically when this MinorPlanet is destroyed.
+	if (orbitPtr == activeEpochOrbit.get())
+		orbitPtr = nullptr;
 }
 
 void MinorPlanet::setSpectralType(const QString &sT, const QString &sB)
@@ -336,3 +342,144 @@ QString MinorPlanet::renderIAUDesignationinHtml(const QString &plainTextName)
 		return QString(); //plainTextName;
 }
 
+// Multi-epoch elements support
+
+void MinorPlanet::setEpochElements(const QVector<AsteroidEpochElements>& elements,
+                                    double parentRotObliquity,
+                                    double parentRotAscendingNode,
+                                    double parentRotJ2000Longitude)
+{
+	epochElements                  = elements;
+	epochParentRotObliquity        = parentRotObliquity;
+	epochParentRotAscendingNode    = parentRotAscendingNode;
+	epochParentRotJ2000Longitude   = parentRotJ2000Longitude;
+	lastEpochUpdateJDE             = -1e100; // force rebuild on next update
+
+	// Ensure the table is sorted by epoch (it should be, but be defensive)
+	std::sort(epochElements.begin(), epochElements.end(),
+	          [](const AsteroidEpochElements& a, const AsteroidEpochElements& b) {
+	              return a.epochJDE < b.epochJDE;
+	          });
+}
+
+// orbitFromSnapshot — build a KeplerOrbit from a single epoch snapshot.
+//
+// KeplerOrbit propagates position as:  M(JDE) = n * (JDE - t0)
+// where t0 is the JDE of perihelion passage.  Our snapshots store
+// meanAnomalyAtEpoch (MA) instead of t0, so we derive:
+//   t0 = epochJDE - MA / n
+// This gives the perihelion passage closest to epochJDE, which is exactly
+// what we want for forward/backward propagation from that snapshot.
+//
+// orbitGood is set to the distance from this snapshot's epoch to the
+// nearest edge of the epoch table (tableStart or tableEnd).  For any
+// snapshot that is not at the table boundary this value is large, so
+// objectDateValid() always passes and no warning is shown.  Once jde
+// moves outside the table entirely, the nearest snapshot is the first
+// or last one, whose orbitGood equals the half-interval to its neighbour.
+// At that point |jde - epochJDE| > orbitGood and the normal "outdated
+// elements" warning fires, correctly signalling that we are extrapolating
+// beyond the covered window.
+
+static KeplerOrbit* orbitFromSnapshot(const AsteroidEpochElements& snap,
+                                       double tableStart, double tableEnd,
+                                       double halfInterval,
+                                       double rotObl, double rotAsc, double rotJ2000)
+{
+	const double tp = (snap.meanMotion > 0.0)
+	                ? (snap.epochJDE - snap.meanAnomalyAtEpoch / snap.meanMotion)
+	                : snap.epochJDE;
+
+	// Distance from this snapshot to the nearest table boundary, floored
+	// at halfInterval so boundary snapshots never receive orbitGood=0
+	// (which we treat as "always valid", suppressing the warning).
+	const double orbitGood = std::max(halfInterval,
+	                                  std::min(snap.epochJDE - tableStart,
+	                                           tableEnd      - snap.epochJDE));
+
+	return new KeplerOrbit(
+		snap.epochJDE,
+		snap.pericenterDistance,
+		snap.eccentricity,
+		snap.inclination,
+		snap.ascendingNode,
+		snap.argOfPericenter,
+		tp,
+		orbitGood,
+		snap.meanMotion,
+		rotObl, rotAsc, rotJ2000,
+		1.0   // central mass: Sun = 1 solar mass
+	);
+}
+
+void MinorPlanet::updateEpochOrbit(double jde, bool force)
+{
+	if (epochElements.isEmpty())
+		return;
+
+	// Guard: skip rebuild if the date has not moved far enough since the
+	// last rebuild.  Bypassed when force=true (e.g. AstroCalc ephemeris loop)
+	// so that every step gets the correct nearest snapshot.
+	if (!force && activeEpochOrbit && epochElements.size() > 1)
+	{
+		// Find minimum epoch spacing (cached on first call would be nicer,
+		// but the vector is small so a scan is negligible cost).
+		double minSpacing = std::fabs(epochElements[1].epochJDE - epochElements[0].epochJDE);
+		for (int i = 2; i < epochElements.size(); ++i)
+			minSpacing = std::min(minSpacing,
+			    std::fabs(epochElements[i].epochJDE - epochElements[i-1].epochJDE));
+		if (std::fabs(jde - lastEpochUpdateJDE) < minSpacing * 0.25)
+			return;
+	}
+
+	lastEpochUpdateJDE = jde;
+	const int n = epochElements.size();
+
+	// Find the snapshot whose epoch is nearest to jde using binary search.
+	// std::lower_bound finds the first element >= jde in O(log n), then we
+	// check whether the element before it is closer.
+	const auto it = std::lower_bound(
+		epochElements.begin(), epochElements.end(), jde,
+		[](const AsteroidEpochElements& e, double val) { return e.epochJDE < val; });
+	int best;
+	if (it == epochElements.end())
+		best = n - 1; // jde is beyond the last epoch
+	else if (it == epochElements.begin())
+		best = 0;     // jde is before or at the first epoch
+	else
+	{
+		// it points to the first epoch >= jde; check if the one before is closer
+		const auto prev = std::prev(it);
+		best = (jde - prev->epochJDE <= it->epochJDE - jde)
+		       ? static_cast<int>(prev - epochElements.begin())
+		       : static_cast<int>(it  - epochElements.begin());
+	}
+
+	const double tableStart   = epochElements.first().epochJDE;
+	const double tableEnd     = epochElements.last().epochJDE;
+	// Half the spacing between the first two snapshots, used as a floor
+	// for orbitGood so the boundary snapshots never get orbitGood=0
+	// (which we interpret as "always valid").
+	const double halfInterval = (n > 1)
+	    ? std::fabs(epochElements[1].epochJDE - epochElements[0].epochJDE) * 0.5
+	    : 365.0;
+	KeplerOrbit* newOrbit = orbitFromSnapshot(
+		epochElements[best],
+		tableStart, tableEnd, halfInterval,
+		epochParentRotObliquity,
+		epochParentRotAscendingNode,
+		epochParentRotJ2000Longitude);
+
+	// Swap in the new orbit; clear the old one safely.
+	if (orbitPtr == activeEpochOrbit.get())
+		orbitPtr = nullptr;
+	activeEpochOrbit.reset(newOrbit); // takes ownership, deletes old orbit
+	orbitPtr = activeEpochOrbit.get();
+
+	// Recompute closeOrbit and deltaOrbitJDE from the new orbit's elements.
+	// This ensures the orbit ellipse is drawn correctly (full ellipse for
+	// closed orbits, correct arc length for open ones) whenever we swap
+	// in a snapshot with slightly different semi-major axis or eccentricity.
+	// Passing 0 causes setSiderealPeriod() to recalculate from the orbit.
+	setSiderealPeriod(0.);
+}

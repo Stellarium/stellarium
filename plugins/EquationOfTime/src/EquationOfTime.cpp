@@ -55,25 +55,31 @@ StelPluginInfo EquationOfTimeStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-EquationOfTime::EquationOfTime()
-	: flagShowSolutionEquationOfTime(false)
+EquationOfTime::EquationOfTime():
+	#ifndef NO_GUI
+	  toolbarButton(Q_NULLPTR),
+	#endif
+	  flagShowSolutionEquationOfTime(false)
 	, flagUseInvertedValue(false)
 	, flagUseMsFormat(false)
 	, flagEnableAtStartup(false)
 	, flagShowEOTButton(false)
 	, fontSize(20)
-	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("EquationOfTime");
-	mainWindow = new EquationOfTimeWindow();
 	StelApp &app = StelApp::getInstance();
 	conf = app.getSettings();
+#ifndef NO_GUI
+	mainWindow = new EquationOfTimeWindow();
 	gui = dynamic_cast<StelGui*>(app.getGui());
+#endif
 }
 
 EquationOfTime::~EquationOfTime()
 {
+#ifndef NO_GUI
 	delete mainWindow;
+#endif
 }
 
 void EquationOfTime::init()
@@ -89,8 +95,9 @@ void EquationOfTime::init()
 	readSettingsFromConfig();
 
 	addAction("actionShow_EquationOfTime",        N_("Equation of Time"), N_("Show value of the equation of time"), "showEOT", "Ctrl+Alt+T");
+#ifndef NO_GUI
 	addAction("actionShow_EquationOfTime_dialog", N_("Equation of Time"), N_("Show settings dialog"), mainWindow, "visible");
-
+#endif
 	enableEquationOfTime(getFlagEnableAtStartup());
 	setFlagShowEOTButton(flagShowEOTButton);
 
@@ -99,11 +106,6 @@ void EquationOfTime::init()
 	updateMessageText();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateMessageText()));
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
-}
-
-void EquationOfTime::deinit()
-{
-	//
 }
 
 void EquationOfTime::draw(StelCore *core)
@@ -126,14 +128,25 @@ void EquationOfTime::draw(StelCore *core)
 	double eqTime = core->getSolutionEquationOfTime();
 
 	if (getFlagInvertedValue())
-		eqTime *= -1;
+		eqTime *= -1.;
 
 	if (getFlagMsFormat())
 	{
-		int seconds = qRound((eqTime - static_cast<int>(eqTime))*60);
-		QString messageSecondsValue = QString("%1").arg(qAbs(seconds), 2, 10, QLatin1Char('0'));
+		int minutes = qAbs(static_cast<int>(eqTime));
+		int seconds = qRound((qAbs(eqTime) - minutes)*60.);
 
-		timeText = QString("%1: %2%3%4%5%6").arg(messageEquation, (eqTime<0? QString(QLatin1Char('-')):QString()), QString::number(static_cast<int>(qAbs(eqTime))), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
+		if (seconds==60) // solution for rounding issue
+		{
+			seconds = 0;
+			minutes += 1;
+		}
+
+		QString messageSecondsValue = QString("%1").arg(seconds, 2, 10, QLatin1Char('0'));
+
+		if (minutes==0 && seconds==0) // 0m0s is always "positive"
+			timeText = QString("%1: %2%3%4%5").arg(messageEquation, QString::number(minutes), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
+		else
+			timeText = QString("%1: %2%3%4%5%6").arg(messageEquation, (eqTime<0.? QString(QLatin1Char('-')):QString()), QString::number(minutes), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
 	}
 	else
 		timeText = QString("%1: %2%3").arg(messageEquation, QString::number(eqTime, 'f', 2), messageEquationMinutes);
@@ -142,7 +155,11 @@ void EquationOfTime::draw(StelCore *core)
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, timeText);	
 
+#ifndef NO_GUI
 	sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()*ppx/2 - fs.width()*ppx/2, gui->getSkyGui()->getSkyGuiHeight()*ppx - fs.height()*ppx*1.5, timeText);
+#else
+	sPainter.drawText(params.viewportXywh[2]*ppx/2 - fs.width()*ppx/2, params.viewportXywh[3]*ppx - fs.height()*ppx*1.5, timeText);
+#endif
 
 	//qDebug() << timeText;
 }
@@ -156,12 +173,16 @@ double EquationOfTime::getCallOrder(StelModuleActionName actionName) const
 
 bool EquationOfTime::configureGui(bool show)
 {
+#ifdef NO_GUI
+	return false;
+#else
 	if (show)
 	{
 		mainWindow->setVisible(true);
 	}
 
 	return true;
+#endif
 }
 
 void EquationOfTime::restoreDefaults(void)
@@ -226,8 +247,9 @@ void EquationOfTime::updateMessageText()
 
 void EquationOfTime::setFlagShowEOTButton(bool b)
 {
+#ifndef NO_GUI
 	if (b==true) {
-		if (toolbarButton==Q_NULLPTR) {
+		if (!toolbarButton) {
 			// Create the button
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_On.png"),
@@ -241,6 +263,7 @@ void EquationOfTime::setFlagShowEOTButton(bool b)
 	} else {
 		gui->getButtonBar()->hideButton("actionShow_EquationOfTime");
 	}
+#endif
 	flagShowEOTButton = b;	
 }
 

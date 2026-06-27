@@ -23,7 +23,7 @@ jobs:
     if: "!contains(github.actor, 'transifex')"
     steps:
       - name: Check if PRs are dirty
-        uses: eps1lon/actions-label-merge-conflict@releases/2.x
+        uses: eps1lon/actions-label-merge-conflict@v3
         with:
           dirtyLabel: "has conflicts"
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
@@ -39,7 +39,7 @@ jobs:
     if: "!contains(github.actor, 'transifex')"
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Check CRLF line endings
         uses: erclu/check-crlf@master
@@ -56,7 +56,8 @@ jobs:
           sudo apt install -y jsonlint python3-demjson
 
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
-      - name: Linting JSON
-        run: find ${{github.workspace}}/{src,plugins,nebulae,skycultures} -iname '*.json' -exec jsonlint -S {} +
+      - name: Linting JSON/GeoJSON
+        run: find ${{github.workspace}}/{src,plugins,nebulae,skycultures} -iname '*.*json' -exec jsonlint -S {} +
+        

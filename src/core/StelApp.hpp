@@ -237,7 +237,10 @@ public:
 	//! Set the ratio (in percent) of screen button size to the default screen scale-dependent one
 	void setScreenButtonScale(double s);
 
-	//! Combines #getDevicePixelsPerPixel and #getScreenFontSize
+	//! Combines #getDevicePixelsPerPixel and #guiFontSizeRatio
+	float getGuiScale() const;
+
+	//! Combines #getDevicePixelsPerPixel and #screenFontSizeRatio
 	float getScreenScale() const;
 
 	//! Get the GUI instance implementing the abstract GUI interface.

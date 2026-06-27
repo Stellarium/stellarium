@@ -51,8 +51,10 @@
 #ifdef ENABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
+#ifndef NO_GUI
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"// Funny thing to include in a TEXT user interface...
+#endif
 
 #include <QKeyEvent>
 #include <QDebug>
@@ -598,7 +600,7 @@ void TextUserInterface::draw(StelCore* core)
 	if (!tuiActive && !tuiDateTime && !tuiObjInfo)
 		return;
 
-	int x = 0, y = 0;
+	int x = 50, y = 50;
 	int xVc = 0, yVc = 0;
 	int pixOffset = 15;
 	int fovOffsetX = 0, fovOffsetY=0;
@@ -606,6 +608,7 @@ void TextUserInterface::draw(StelCore* core)
 	QFont font=QGuiApplication::font();
 	font.setPixelSize(fontSize);
 
+#ifndef NO_GUI
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=Q_NULLPTR)
 	{
@@ -617,6 +620,7 @@ void TextUserInterface::draw(StelCore* core)
 			y = (bottomBar) ? qRound(bottomBar->boundingRect().height()) : 50;
 		}
 	}
+#endif
 
 	// Alternate x,y for Disk viewport
 	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)

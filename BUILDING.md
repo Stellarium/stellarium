@@ -305,9 +305,9 @@ https://github.com/Stellarium/stellarium/releases
 Do this command in a terminal (if you prefer, you might use arK or some other graphical archive tool): 
 
 ```
-$ tar zxf stellarium-26.1.tar.gz
+$ tar zxf stellarium-26.2.tar.gz
 ```
-You should now have a directory `stellarium-26.1` with the source code in it.
+You should now have a directory `stellarium-26.2` with the source code in it.
 
 
 ### Clone project from GitHub
@@ -346,7 +346,7 @@ GitHub by web.
 
 #### Windows specifics
 
-On Windows save the file (`master.zip` or `stellarium-26.1.tar.gz`) to the `C:/Devel` directory as 
+On Windows save the file (`master.zip` or `stellarium-26.2.tar.gz`) to the `C:/Devel` directory as 
 example. You will need a decompression program installed in Windows, for example [7-Zip](http://www.7-zip.org/). 
 The root of the source tree will be `C:/Devel/stellarium` for simplicity.
 
@@ -803,6 +803,16 @@ the default target - in our case, building Stellarium, its tests, the localizati
 | package_source | Create a source package for distributions
 | package        | Create a binary packages for distributions on linux/UNIX
 | installer      | Create a binary packages for distributions on Windows
+
+
+### GUI-less Stellarium 
+
+If you run Stellarium in an environment that should never show a GUI dialog or information text output panel to an auditorium, you can build a version without interface. 
+This is not intended to be controlled directly then, but by means of the RemoteControl Web interface, or just by scripting. 
+Note that even information text output requires the User Interface, but the information about the selected object will be displayed in the web interface.
+To build this lightweight version that also lacks a few GUI-heavy plugins, call any cmake run with the argument `STELLARIUM_GUI_MODE="None"`. 
+
+This is also starting point for experimenting with alternative GUI solutions.
 
 Thanks!
 
