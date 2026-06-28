@@ -564,6 +564,8 @@ DynamicZoneArray<Star>::DynamicZoneArray(const QString& fname, QFile* file,
 	const qint64 starDataBase = 28 + static_cast<qint64>(sizeof(uint32_t)) * this->nr_of_zones;
 	this->file->seek(starDataBase + static_cast<qint64>(totalStars) * sizeof(Star));
 
+	zoneCache_.setMaxCost(128 * 1024 * 1024);
+
 	// Mark the file position as valid for future reads
 	fileValid_ = true;
 }
@@ -618,18 +620,30 @@ const Star* DynamicZoneArray<Star>::loadZone(int zone_index) const
 	const qint64 fileOffset = starDataBase + static_cast<qint64>(off);
 	const qint64 size = static_cast<qint64>(count) * sizeof(Star);
 
-	// Launch async read
-	QFile* filePtr = this->file;
-	QMutex* mtx = &fileMutex_;
+	// Launch async read using a thread_local QFile — one fd per pool thread, no open/close overhead.
+	const QString fileName = this->fname;
 	const bool* valid = &fileValid_;
 
-	auto future = QtConcurrent::run([filePtr, mtx, valid, fileOffset, size]() -> QByteArray* {
-		QMutexLocker locker(mtx);
-		if (!filePtr || !filePtr->isOpen() || !(*valid))
+	auto future = QtConcurrent::run([fileName, valid, fileOffset, size]() -> QByteArray* {
+		if (!*valid)
 			return nullptr;
+
+		thread_local QFile localFile;
+
+		if (localFile.fileName() != fileName)
+		{
+			if (localFile.isOpen())
+				localFile.close();
+
+			localFile.setFileName(fileName);
+
+			if (!localFile.open(QIODevice::ReadOnly))
+				return nullptr;
+		}
+
 		auto* data = new QByteArray(static_cast<int>(size), Qt::Uninitialized);
-		filePtr->seek(fileOffset);
-		if (filePtr->read(data->data(), size) != size)
+		if (!localFile.seek(fileOffset) ||
+		    localFile.read(data->data(), size) != size)
 		{
 			delete data;
 			return nullptr;
@@ -794,6 +808,7 @@ void ZoneArrayImpl<Derived, Star>::draw(StelPainter* sPainter, int index, bool i
 				  const bool withCommonNameI18n) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
+	const float dyrs = static_cast<float>(core->getJDE() - STAR_CATALOG_JDEPOCH) / 365.25f;
 	Vec3d v;
 
 	// Allow artificial cutoff:
@@ -804,7 +819,9 @@ void ZoneArrayImpl<Derived, Star>::draw(StelPainter* sPainter, int index, bool i
 	Q_ASSERT_X(cutoffMagStep <= RCMAG_TABLE_SIZE, "ZoneArrayImpl::draw",
 			   QString("RCMAG_TABLE_SIZE: %1, cutoffMagStep: %2")
 				   .arg(QString::number(RCMAG_TABLE_SIZE), QString::number(cutoffMagStep)).toLatin1());
-	if (cutoffMagStep < 140)
+	const int minMagIndex = static_cast<int>((this->mag_min - (this->mag_min - 7000.)) * 0.02);
+	const bool isGlobalZone = (static_cast<unsigned int>(index) == this->nr_of_zones - 1);
+	if (!isGlobalZone && ((minMagIndex > cutoffMagStep) || (this->mag_min > cutoffMag)))
 		return;
 
 	const Star* stars = nullptr;
@@ -812,8 +829,6 @@ void ZoneArrayImpl<Derived, Star>::draw(StelPainter* sPainter, int index, bool i
 	bool globalzone = false;
 	if (!zoneForDraw(index, stars, zoneSize, globalzone))
 		return;
-
-	const float dyrs = static_cast<float>(core->getJDE() - STAR_CATALOG_JDEPOCH) / 365.25f;
 
 	const Extinction& extinction = drawer->getExtinction();
 	const bool withExtinction = drawer->getFlagHasAtmosphere() &&
