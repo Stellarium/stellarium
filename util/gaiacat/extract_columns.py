@@ -6,7 +6,7 @@ from multiprocessing import Pool
 
 COLS = ['source_id','ra','dec','parallax','parallax_error','pmra','pmdec','phot_g_mean_mag','bp_rp']
 REC_FMT = '<q d d d f d d f f'
-REC_SZ  = 60
+REC_SZ = 60
 
 def process_file(args):
     csv_path, out_dir = args
@@ -52,14 +52,17 @@ def main():
     if len(sys.argv) < 3:
         print(f"Usage: python {sys.argv[0]} <csv_dir> <out_dir> [workers]")
         sys.exit(1)
-    csv_dir = sys.argv[1]; out_dir = sys.argv[2]
+	csv_dir = sys.argv[1]
+	out_dir = sys.argv[2]
     workers = int(sys.argv[3]) if len(sys.argv) > 3 else os.cpu_count()
 
     os.makedirs(out_dir, exist_ok=True)
     files = sorted(glob.glob(os.path.join(csv_dir, 'GaiaSource_*.csv.gz')))
     print(f"Found {len(files)} files, {workers} workers, {REC_SZ}B/star\n")
 
-    total = 0; skipped = 0; errors = 0
+	total = 0
+	skipped = 0
+	errors = 0
     try:
         from tqdm import tqdm
         pbar = tqdm(total=len(files), unit='file', ncols=80)
