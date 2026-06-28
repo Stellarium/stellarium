@@ -715,38 +715,6 @@ const Star* DynamicZoneArray<Star>::loadZoneSync(int zone_index) const
 }
 
 template<class Star>
-void DynamicZoneArray<Star>::prefetchRegion(const QVector<SphericalCap>& caps,
-						int maxGridLevel) const
-{
-	auto* core = StelApp::getInstance().getCore();
-	const GeodesicSearchResult* result =
-		core->getGeodesicGrid(maxGridLevel)->search(caps, maxGridLevel);
-
-	int prefetched = 0;
-	int zone;
-	for (GeodesicSearchInsideIterator it(*result, this->level);
-	     (zone = it.next()) >= 0;)
-	{
-		if (zoneCache_.contains(zone) || pendingLoads_.contains(zone))
-			continue;
-		loadZone(zone);
-		++prefetched;
-	}
-	for (GeodesicSearchBorderIterator it(*result, this->level);
-	     (zone = it.next()) >= 0;)
-	{
-		if (zoneCache_.contains(zone) || pendingLoads_.contains(zone))
-			continue;
-		loadZone(zone);
-		++prefetched;
-	}
-
-	if (prefetched > 0)
-		qDebug().noquote() << QString("DynamicZoneArray level %1: prefetched %2 zones")
-				      .arg(this->level).arg(prefetched);
-}
-
-template<class Star>
 void DynamicZoneArray<Star>::drainPendingLoads() const
 {
 	QMutableHashIterator it(pendingLoads_);

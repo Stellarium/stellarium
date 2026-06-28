@@ -101,7 +101,6 @@ public:
 
 	//! Dummy method that does nothing. See subclass implementation.
 	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex)}
-	virtual void prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const { Q_UNUSED(caps); Q_UNUSED(maxGridLevel); }
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax, const Vec3d diffPos,
@@ -276,7 +275,6 @@ public:
 	const Star* loadZone(int zone_index) const;
 	const Star* loadZoneSync(int zone_index) const;
 	uint32_t zoneStarCount(int zone_index) const { return zoneCounts_[zone_index]; }
-	void prefetchRegion(const QVector<SphericalCap>& caps, int maxGridLevel) const override;
 
 private:
 	static constexpr int BLOCK_SIZE = 128;

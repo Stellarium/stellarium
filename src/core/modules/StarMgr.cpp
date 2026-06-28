@@ -1446,27 +1446,6 @@ void StarMgr::draw(StelCore* core)
 	// Finish drawing many stars
 	skyDrawer->postDrawPointSource(&sPainter);
 
-	// Prefetch: warm DynamicZoneArray caches for anticipated scrolling.
-	// Expand viewport to 2x width/height (4x area) beyond the current viewport.
-	// Only prefetch levels whose stars are actually visible (skip when zoomed out).
-	{
-		const double viewportWR = prj->getViewportWidth()  / prj->getPixelPerRadAtCenter();
-		const double viewportHR = prj->getViewportHeight() / prj->getPixelPerRadAtCenter();
-		const double halfDiagonal = 0.5 * std::max(viewportWR, viewportHR);
-		double prefetchMargin = margin + halfDiagonal;
-		QVector<SphericalCap> expandedCaps =
-			prj->getViewportConvexPolygon(prefetchMargin, prefetchMargin)
-				->getBoundingSphericalCaps();
-		expandedCaps.append(core->getVisibleSkyArea());
-		for (auto* z : gridLevels)
-		{
-			RCMag dummy;
-			if (!skyDrawer->computeRCMag(0.001f * z->mag_min, &dummy))
-				continue;
-			z->prefetchRegion(expandedCaps, maxSearchLevel);
-		}
-	}
-
 	if (objectMgr->getFlagSelectedObjectPointer())
 		drawPointer(sPainter, core);
 }
