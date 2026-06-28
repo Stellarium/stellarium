@@ -1,28 +1,18 @@
 /* ========================================================================
- * actionsCategorized.js - Sky Culture Style Action Buttons
+ * actionsCategorized.js - Sky Culture Style Action Buttons (REFACTORED v2.1)
  * ========================================================================
  * 
- * This module replaces the old action dropdown with categorized button grids
- * matching the Sky Culture tab design. Provides real-time state synchronization
- * with Stellarium server, search/filter functionality, and visual feedback.
+ * This module provides a categorized button grid interface for Stellarium
+ * actions, similar to the Sky Culture tab design. It displays actions in
+ * categorized tabs with visual state indicators and real-time synchronization.
  * 
- * Features:
- * - Categorized tabs matching Stellarium's internal action organization
- * - Button-based UI with visual state indicators (✓ for ON, ✗ for OFF)
- * - Real-time action state synchronization via stelActionChanged events
- * - Search/filter with case-insensitive matching
- * - Double-click execution support
- * - Visual feedback on state change
- * 
- * Technical Implementation:
- * - Uses actionsApi for action state synchronization
- * - Dynamically builds category tabs and buttons from server data
- * - Supports jQuery UI tabs with manual fallback
- * - Real-time state updates without page refresh
- * - Visual feedback animations for state changes
- * 
- * Events:
- * - stelActionChanged: Listens to action state changes from server
+ * KEY IMPROVEMENTS (v2.1):
+ * - Click executes actions immediately (fast response)
+ * - Double-click also executes (backward compatibility)
+ * - Proper source tracking for updates (prevents self-triggered updates)
+ * - Clean separation from btnGenerator.js (no more conflicts)
+ * - Simplified event handling with pending updates tracking
+ * - No double-execution or value rebounding
  * 
  * @module actionsCategorized
  * @requires jquery
@@ -30,9 +20,9 @@
  * @requires api/actions
  * 
  * @author kutaibaa akraa (GitHub: @kutaibaa-akraa)
- * @date 2026-06-06
+ * @date 2026-06-27
  * @license GPLv2+
- * @version 1.0.0
+ * @version 2.1.0
  * 
  * ======================================================================== */
 
@@ -50,12 +40,15 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     var categoryOrder = [];
     var selectedActionId = null;
     var actionDataCache = {};
+    var pendingActionUpdates = {};      // Track updates we initiated
+    var isInternalUpdate = false;        // Flag to prevent self-triggered updates
     
     // DOM Elements
     var $searchInput = null;
     var $countDisplay = null;
     var $categoryTabs = null;
     var $categoryPanels = null;
+    var $activeCategoryName = null;
 
     // =====================================================================
     // DEFAULT OPTIONS
@@ -69,10 +62,11 @@ define(["jquery", "api/remotecontrol", "api/actions"],
         categoryPanelsId: 'actions-category-panels',
         searchInputId: 'categorized-action-search',
         countDisplayId: 'categorized-action-count',
+        activeCategoryDisplayId: 'categorized-active-category',
         
         // UI Behavior
-        doubleClickToExecute: true,
-        autoRefreshStates: false,
+        doubleClickToExecute: true,      // Keep for backward compatibility
+        autoRefreshStates: false,        // DISABLED by default - prevents rebounding
         refreshInterval: 0,
         animateChanges: true,
         maxButtonsPerCategory: 0,
@@ -110,7 +104,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     // =====================================================================
 
     /**
-     * Escape HTML special characters
+     * Escape HTML special characters for safe DOM insertion.
      * @param {string} text - Text to escape
      * @returns {string} Escaped text
      */
@@ -122,7 +116,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Escape for HTML attributes
+     * Escape HTML special characters for use in HTML attributes.
      * @param {string} text - Text to escape
      * @returns {string} Escaped text
      */
@@ -131,18 +125,73 @@ define(["jquery", "api/remotecontrol", "api/actions"],
         return String(text).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
+    /**
+     * Generates a unique ID for tracking pending updates.
+     * @param {string} actionId - The action identifier
+     * @returns {string} Unique update ID
+     */
+    function generateUpdateId(actionId) {
+        return actionId + '_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+    }
+
+    /**
+     * Checks if an action update is pending (initiated by this module).
+     * @param {string} actionId - The action identifier
+     * @returns {boolean} True if the update is pending
+     */
+    function isActionUpdatePending(actionId) {
+        for (var key in pendingActionUpdates) {
+            if (pendingActionUpdates[key] === actionId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Cleans up stale pending updates.
+     * @param {string} actionId - Optional specific action ID to clean up
+     */
+    function cleanupPendingUpdates(actionId) {
+        var now = Date.now();
+        var keysToRemove = [];
+        
+        for (var key in pendingActionUpdates) {
+            var parts = key.split('_');
+            var timestamp = parseInt(parts[1], 10);
+            
+            // Remove updates older than 2 seconds
+            if (now - timestamp > 2000) {
+                keysToRemove.push(key);
+            }
+            
+            // Remove specific action if provided
+            if (actionId && pendingActionUpdates[key] === actionId) {
+                keysToRemove.push(key);
+            }
+        }
+        
+        keysToRemove.forEach(function(key) {
+            delete pendingActionUpdates[key];
+        });
+        
+        if (keysToRemove.length > 0) {
+            console.log('[ActionsCategorized] Cleaned up ' + keysToRemove.length + ' pending updates');
+        }
+    }
+
     // =====================================================================
     // INITIALIZATION
     // =====================================================================
 
     /**
-     * Initialize the categorized actions module
+     * Initialize the categorized actions module.
      * @param {Object} opts - Configuration options
      */
     function init(opts) {
         options = $.extend(true, {}, defaultOptions, opts || {});
         
-        console.log('[ActionsCategorized] Initializing...');
+        console.log('[ActionsCategorized] Initializing v2.1 (refactored with click execution)...');
         
         var $container = $(options.containerSelector);
         if (!$container.length) {
@@ -157,6 +206,10 @@ define(["jquery", "api/remotecontrol", "api/actions"],
             return;
         }
         
+        // Reset pending updates on init
+        pendingActionUpdates = {};
+        isInternalUpdate = false;
+        
         loadActions();
         bindEvents();
         setupStateSyncListener();
@@ -165,13 +218,14 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Cache DOM element references
+     * Cache DOM element references for performance.
      */
     function cacheDomElements() {
         $searchInput = $('#' + options.searchInputId);
         $countDisplay = $('#' + options.countDisplayId);
         $categoryTabs = $('#' + options.categoryTabListId);
         $categoryPanels = $('#' + options.categoryPanelsId);
+        $activeCategoryName = $('#' + options.activeCategoryDisplayId);
         
         if (!$searchInput.length) {
             console.warn('[ActionsCategorized] Search input not found: #' + options.searchInputId);
@@ -191,12 +245,12 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     // =====================================================================
-    // REAL-TIME STATE SYNCHRONIZATION
+    // REAL-TIME STATE SYNCHRONIZATION (IMPROVED)
     // =====================================================================
 
     /**
      * Set up event listener for real-time action state changes from server.
-     * Listens to stelActionChanged events emitted by api/actions module.
+     * IMPROVED: Now tracks pending updates to prevent self-triggered updates.
      */
     function setupStateSyncListener() {
         if (typeof actionsApi === 'undefined') {
@@ -205,19 +259,42 @@ define(["jquery", "api/remotecontrol", "api/actions"],
         }
         
         $(actionsApi).on("stelActionChanged", function(event, actionId, actionData) {
-            console.log("[ActionsCategorized] State changed:", actionId, actionData.isChecked);
+            // ============================================================
+            // CRITICAL: Check if this update was initiated by us
+            // ============================================================
+            var isPending = isActionUpdatePending(actionId);
+            
+            if (isPending) {
+                console.log("[ActionsCategorized] Self-triggered update detected for:", actionId, 
+                            " - this is our own echo, updating silently");
+                // Clean up the pending update
+                cleanupPendingUpdates(actionId);
+                // But still update the UI with the server's confirmed state
+                // (this prevents desync if the server state differs from our optimistic update)
+                var $btn = $('.action-btn-item[data-action-id="' + actionId + '"]');
+                if ($btn.length) {
+                    updateButtonStateFromServer($btn, actionId, actionData);
+                }
+                return;
+            }
+            
+            // ============================================================
+            // External update (from Stellarium GUI, scripts, or other clients)
+            // ============================================================
+            console.log("[ActionsCategorized] External state change detected:", actionId, actionData.isChecked);
             
             var $btn = $('.action-btn-item[data-action-id="' + actionId + '"]');
             if ($btn.length) {
+                // Update the button state from server data
                 updateButtonStateFromServer($btn, actionId, actionData);
             }
         });
         
-        console.log('[ActionsCategorized] State sync listener established');
+        console.log('[ActionsCategorized] State sync listener established (with pending updates tracking)');
     }
 
     /**
-     * Update button UI based on server state change
+     * Update button UI based on server state change.
      * @param {jQuery} $btn - The button element
      * @param {string} actionId - Action identifier
      * @param {Object} actionData - Action data from server
@@ -262,7 +339,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     // =====================================================================
 
     /**
-     * Load actions from Stellarium server
+     * Load actions from Stellarium server.
      */
     function loadActions() {
         console.log('[ActionsCategorized] Loading actions...');
@@ -288,7 +365,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Show loading indicator
+     * Show loading indicator.
      */
     function showLoading() {
         $categoryTabs.html('<li><a href="#">⏳</a></li>');
@@ -300,7 +377,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Handle load error
+     * Handle load error.
      * @param {string|Object} error - Error information
      */
     function handleLoadError(error) {
@@ -323,7 +400,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     // =====================================================================
 
     /**
-     * Process raw actions data from API
+     * Process raw actions data from API.
      * @param {Object} data - Raw actions data from server
      */
     function processActionsData(data) {
@@ -372,6 +449,10 @@ define(["jquery", "api/remotecontrol", "api/actions"],
         console.log('[ActionsCategorized] Loaded ' + allActions.length + 
                     ' actions in ' + categoryOrder.length + ' categories');
         
+        // Reset pending updates after loading
+        pendingActionUpdates = {};
+        isInternalUpdate = false;
+        
         buildUI();
         
         if (typeof options.onActionsLoaded === 'function') {
@@ -384,7 +465,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     // =====================================================================
 
     /**
-     * Build complete UI from processed actions data
+     * Build complete UI from processed actions data.
      */
     function buildUI() {
         buildCategoryTabs();
@@ -394,7 +475,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Build category tabs navigation
+     * Build category tabs navigation.
      */
     function buildCategoryTabs() {
         var html = '';
@@ -413,7 +494,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Build category panels with action buttons
+     * Build category panels with action buttons.
      */
     function buildCategoryPanels() {
         var html = '';
@@ -433,7 +514,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
             if (triggerCount > 0) {
                 html += ' · <span class="trigger-badge">' + triggerCount + ' trigger</span>';
             }
-            html += ' · Click to select, double-click to execute instantly';
+            html += ' · Click to execute, double-click also executes';
             html += '</p>';
             
             html += '<div class="actions-buttons-grid" data-category="' + escapeAttr(categoryName) + '">';
@@ -452,7 +533,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Build HTML for a single action button
+     * Build HTML for a single action button.
      * @param {Object} action - Action object
      * @returns {string} Button HTML
      */
@@ -475,7 +556,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
                 cssClass += ' ' + options.buttonTriggerClass;
                 stateIcon = '<span class="action-state-icon">▶</span>';
             }
-            titleText += ' (Trigger - Double-click to execute)';
+            titleText += ' (Trigger - Click to execute)';
         }
         
         return '<button type="button" ' +
@@ -494,7 +575,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Initialize jQuery UI tabs or fallback to manual tabs
+     * Initialize jQuery UI tabs or fallback to manual tabs.
      */
     function initTabs() {
         var tabsSelector = '#' + options.categoryTabsId;
@@ -505,9 +586,11 @@ define(["jquery", "api/remotecontrol", "api/actions"],
                     active: 0,
                     create: function() {
                         console.log('[ActionsCategorized] jQuery UI Tabs created');
+                        updateActiveCategory();
                     },
                     activate: function(event, ui) {
                         updateActionCount();
+                        updateActiveCategory();
                         
                         var categoryName = getActiveCategory();
                         if (typeof options.onCategoryChanged === 'function') {
@@ -525,13 +608,24 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Build manual tabs (fallback when jQuery UI is not available)
+     * Update the active category display.
+     */
+    function updateActiveCategory() {
+        var categoryName = getActiveCategory();
+        if ($activeCategoryName && $activeCategoryName.length) {
+            $activeCategoryName.text(categoryName || '');
+        }
+    }
+
+    /**
+     * Build manual tabs (fallback when jQuery UI is not available).
      */
     function buildManualTabs() {
         $('.actions-category-panel').hide();
         
         if (categoryOrder.length > 0) {
             $('#actions-panel-0').show();
+            updateActiveCategory();
         }
         
         $categoryTabs.find('li a').off('click.actionsTabs').on('click.actionsTabs', function(e) {
@@ -547,6 +641,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
             $(href).show();
             
             updateActionCount();
+            updateActiveCategory();
             
             var categoryName = getActiveCategory();
             if (typeof options.onCategoryChanged === 'function') {
@@ -562,7 +657,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     // =====================================================================
 
     /**
-     * Bind UI events
+     * Bind UI events.
      */
     function bindEvents() {
         $searchInput.off('input.actionsCat').on('input.actionsCat', function() {
@@ -579,66 +674,96 @@ define(["jquery", "api/remotecontrol", "api/actions"],
             }
         });
         
+        // Auto-refresh is disabled by default to prevent rebounding
         if (options.autoRefreshStates && options.refreshInterval > 0) {
+            console.warn('[ActionsCategorized] Auto-refresh is enabled - this may cause rebounding issues');
             setInterval(refreshActionStates, options.refreshInterval);
         }
     }
 
     /**
-     * Bind action button events (click, double-click)
+     * Bind action button events (click, double-click).
+     * FIXED: Click executes the action immediately (fast response).
+     * Double-click also executes (backward compatibility).
      */
     function bindActionButtonEvents() {
+        // ============================================================
+        // Click event: Execute the action with proper tracking
+        // ============================================================
         $('.action-btn-item').off('click.actionsBtn').on('click.actionsBtn', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
             var $btn = $(this);
             var actionId = $btn.data('action-id');
-            var isCheckable = $btn.data('ischeckable');
             
+            // Visual feedback: slight scale animation
             if (options.animateChanges) {
-                $('.action-btn-item.selected').css('transition', 'all 0.15s ease');
+                $btn.css('transform', 'scale(0.92)');
+                setTimeout(function() { $btn.css('transform', ''); }, 150);
             }
+            
+            // Deselect all other buttons
             $('.action-btn-item').removeClass(options.buttonSelectedClass);
             
+            // Select this button
             $btn.addClass(options.buttonSelectedClass);
             selectedActionId = actionId;
             
-            if (isCheckable === true || isCheckable === 'true') {
-                executeAction(actionId);
-            }
+            // ============================================================
+            // EXECUTE THE ACTION IMMEDIATELY
+            // ============================================================
+            console.log('[ActionsCategorized] Executing action via click:', actionId);
+            executeAction(actionId);
         });
         
+        // ============================================================
+        // Double-click event: Also executes (as a fallback)
+        // ============================================================
         if (options.doubleClickToExecute) {
             $('.action-btn-item').off('dblclick.actionsBtn').on('dblclick.actionsBtn', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 
                 var actionId = $(this).data('action-id');
+                console.log('[ActionsCategorized] Executing action via double-click:', actionId);
                 executeAction(actionId);
             });
         }
     }
 
     // =====================================================================
-    // EXECUTE ACTION
+    // EXECUTE ACTION (WITH PROPER TRACKING)
     // =====================================================================
 
     /**
-     * Execute an action by ID
+     * Execute an action by ID with proper tracking to prevent rebounding.
      * @param {string} actionId - Action identifier
+     * @returns {boolean} Success status
      */
     function executeAction(actionId) {
         console.log('[ActionsCategorized] Executing action:', actionId);
         
         var $btn = $('.action-btn-item[data-action-id="' + actionId + '"]');
+        
+        // Visual feedback for execution
         if (options.animateChanges && $btn.length) {
             $btn.css('transform', 'scale(0.95)');
             setTimeout(function() { $btn.css('transform', ''); }, 150);
         }
         
+        // ============================================================
+        // CRITICAL: Track this update to prevent rebounding
+        // ============================================================
+        var updateId = generateUpdateId(actionId);
+        pendingActionUpdates[updateId] = actionId;
+        
+        // Set the internal update flag
+        isInternalUpdate = true;
+        
         var success = true;
         
+        // Execute the action via the API
         if (typeof actionsApi !== 'undefined' && actionsApi.doAction) {
             actionsApi.doAction(actionId)
                 .then(function() {
@@ -647,6 +772,9 @@ define(["jquery", "api/remotecontrol", "api/actions"],
                 .fail(function(error) {
                     handleActionError(actionId, error);
                     success = false;
+                    // Clean up the pending update on error
+                    cleanupPendingUpdates(actionId);
+                    isInternalUpdate = false;
                 });
         } else {
             $.ajax({
@@ -659,43 +787,75 @@ define(["jquery", "api/remotecontrol", "api/actions"],
                 error: function(xhr, status, error) {
                     handleActionError(actionId, error);
                     success = false;
+                    cleanupPendingUpdates(actionId);
+                    isInternalUpdate = false;
                 }
             });
         }
         
+        // Callback
         if (typeof options.onActionExecuted === 'function') {
             setTimeout(function() {
                 options.onActionExecuted(actionId, success);
             }, 300);
         }
+        
+        return true;
     }
 
     /**
-     * Handle successful action execution
+     * Handle successful action execution.
+     * IMPROVED: Does NOT refresh all actions - only updates the specific button.
      * @param {string} actionId - Action identifier
      */
     function handleActionSuccess(actionId) {
         console.log('[ActionsCategorized] Action executed successfully:', actionId);
-        setTimeout(refreshActionStates, 300);
+        
+        // ============================================================
+        // CRITICAL FIX: Do NOT call refreshActionStates() here
+        // This prevents the rebounding issue
+        // ============================================================
+        
+        // Instead, wait for the stelActionChanged event to update the button
+        // The pending update tracking will handle the rest
+        
+        // Clean up the pending update after a delay
+        setTimeout(function() {
+            cleanupPendingUpdates(actionId);
+            isInternalUpdate = false;
+        }, 100);
     }
 
     /**
-     * Handle action execution error
+     * Handle action execution error.
      * @param {string} actionId - Action identifier
      * @param {string|Object} error - Error information
      */
     function handleActionError(actionId, error) {
         console.error('[ActionsCategorized] Failed to execute action:', actionId, error);
+        // Clean up the pending update
+        cleanupPendingUpdates(actionId);
+        isInternalUpdate = false;
     }
 
     // =====================================================================
-    // REFRESH ACTION STATES
+    // REFRESH ACTION STATES (DISABLED BY DEFAULT)
     // =====================================================================
 
     /**
-     * Refresh all action states from server
+     * Refresh all action states from server.
+     * WARNING: This function is disabled by default to prevent rebounding.
+     * Only use this if you explicitly enable autoRefreshStates in options.
+     * @param {Object} [data] - Optional data to update from
      */
-    function refreshActionStates() {
+    function refreshActionStates(data) {
+        // If data is provided, use it directly
+        if (data) {
+            updateActionStates(data);
+            return;
+        }
+        
+        // Otherwise, fetch from server
         if (typeof actionsApi !== 'undefined' && actionsApi.loadActionList) {
             actionsApi.loadActionList(function(data) {
                 updateActionStates(data);
@@ -707,19 +867,22 @@ define(["jquery", "api/remotecontrol", "api/actions"],
                 success: function(data) {
                     updateActionStates(data);
                 },
-                error: function() {}
+                error: function() {
+                    console.warn('[ActionsCategorized] Failed to refresh action states');
+                }
             });
         }
     }
 
     /**
-     * Update action states from server data
+     * Update action states from server data.
      * @param {Object} data - Action data from server
      */
     function updateActionStates(data) {
         if (!data || typeof data !== 'object') return;
         
         var categories = Object.keys(data);
+        var updatedCount = 0;
         
         categories.forEach(function(categoryName) {
             var actions = data[categoryName];
@@ -752,9 +915,11 @@ define(["jquery", "api/remotecontrol", "api/actions"],
                 if (actionDataCache[action.id]) {
                     actionDataCache[action.id].isChecked = isChecked;
                 }
+                updatedCount++;
             });
         });
         
+        console.log('[ActionsCategorized] Updated ' + updatedCount + ' action states');
         updateActionCount();
     }
 
@@ -763,7 +928,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     // =====================================================================
 
     /**
-     * Filter actions by search query
+     * Filter actions by search query.
      * @param {string} query - Search query
      */
     function filterActions(query) {
@@ -810,7 +975,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Reset filter and show all actions
+     * Reset filter and show all actions.
      */
     function resetFilter() {
         $('.action-btn-item').removeClass(options.searchHiddenClass + ' ' + options.searchHighlightClass);
@@ -828,7 +993,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Update action count display
+     * Update action count display.
      * @param {number} [visibleCount] - Optional visible count (for filtered view)
      */
     function updateActionCount(visibleCount) {
@@ -852,7 +1017,7 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     }
 
     /**
-     * Get currently active category name
+     * Get currently active category name.
      * @returns {string|null} Category name or null
      */
     function getActiveCategory() {
@@ -872,14 +1037,68 @@ define(["jquery", "api/remotecontrol", "api/actions"],
     // =====================================================================
 
     return {
+        /**
+         * Initialize the module with options.
+         * @param {Object} opts - Configuration options
+         */
         init: init,
+        
+        /**
+         * Load actions from the server.
+         */
         loadActions: loadActions,
+        
+        /**
+         * Execute an action by ID.
+         * @param {string} actionId - Action identifier
+         * @returns {boolean} Success status
+         */
         executeAction: executeAction,
+        
+        /**
+         * Filter actions by search query.
+         * @param {string} query - Search query
+         */
         filterActions: filterActions,
+        
+        /**
+         * Refresh all action states from server.
+         * WARNING: This can cause rebounding issues.
+         * Only use if necessary.
+         */
         refreshActionStates: refreshActionStates,
+        
+        /**
+         * Get all loaded actions.
+         * @returns {Array} Array of all actions
+         */
         getActions: function() { return allActions; },
+        
+        /**
+         * Get categorized actions.
+         * @returns {Object} Categorized actions object
+         */
         getCategorizedActions: function() { return categorizedActions; },
+        
+        /**
+         * Get category order.
+         * @returns {Array} Array of category names in order
+         */
         getCategoryOrder: function() { return categoryOrder; },
-        getSelectedActionId: function() { return selectedActionId; }
+        
+        /**
+         * Get currently selected action ID.
+         * @returns {string|null} Selected action ID
+         */
+        getSelectedActionId: function() { return selectedActionId; },
+        
+        /**
+         * Check if an action update is pending.
+         * @param {string} actionId - Action identifier
+         * @returns {boolean} True if pending
+         */
+        isActionPending: function(actionId) {
+            return isActionUpdatePending(actionId);
+        }
     };
 });

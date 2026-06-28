@@ -231,87 +231,6 @@ define(["jquery", "api/remotecontrol"],
                     },
                     sscTemplate: 'core.setJD({time});\ncore.setTimeRate({timerate});'
                 },
-								{
-										id: 'time-set-datetime',
-										name: 'Set Specific Time (Date & Time)',
-										name_en: 'Set Date & Time',
-										desc: 'Change simulation date and time using ISO 8601 format',
-										method: 'POST',
-										path: 'main/time',
-										source: 'MainService.cpp: time operation with ISO string',
-										params: {
-												time: {
-														type: 'datetime',
-														required: true,
-														desc: 'Date and time in ISO 8601 format',
-														hint: 'Example: 2025-01-01T00:00:00',
-														suggest: 'current'
-												},
-												timerate: {
-														type: 'number',
-														required: false,
-														desc: 'Time rate (optional, 1 = normal speed, 0 = pause)',
-														hint: 'Example: 1 (keep current speed), 0 (pause)',
-														defaultValue: 1
-												}
-										},
-										/**
-										 * Custom generator for date-time set with optional timerate.
-										 * Server requires timerate parameter even for ISO time strings.
-										 */
-										_generateCurl: function(params, baseUrl) {
-												var timeValue = params.time || '';
-												var timerateValue = (params.timerate !== undefined && params.timerate !== '') ? params.timerate : 1;
-												var serverTimerate = convertUserTimeRateToServer(parseFloat(timerateValue));
-												return 'curl -X POST -d "time=' + encodeURIComponent(timeValue) + '&timerate=' + serverTimerate + '" "' + baseUrl + '/api/main/time"';
-										},
-										_generatePython: function(params, baseUrl) {
-												var timeValue = params.time || '';
-												var timerateValue = (params.timerate !== undefined && params.timerate !== '') ? params.timerate : 1;
-												var serverTimerate = convertUserTimeRateToServer(parseFloat(timerateValue));
-												var lines = [];
-												lines.push('import requests');
-												lines.push('');
-												lines.push('# Set Date & Time');
-												lines.push('url = "' + baseUrl + '/api/main/time"');
-												lines.push('');
-												lines.push('data = {');
-												lines.push('    "time": "' + timeValue + '",');
-												lines.push('    "timerate": ' + serverTimerate);
-												lines.push('}');
-												lines.push('');
-												lines.push('response = requests.post(url, data=data)');
-												lines.push('');
-												lines.push('if response.status_code == 200:');
-												lines.push('    print("Success:", response.text)');
-												lines.push('else:');
-												lines.push('    print("Error:", response.status_code, response.text)');
-												return lines.join('\n');
-										},
-										_generateJavaScript: function(params, baseUrl) {
-												var timeValue = params.time || '';
-												var timerateValue = (params.timerate !== undefined && params.timerate !== '') ? params.timerate : 1;
-												var serverTimerate = convertUserTimeRateToServer(parseFloat(timerateValue));
-												return '// Set Date & Time\n' +
-															 'const url = "' + baseUrl + '/api/main/time";\n\n' +
-															 'fetch(url, {\n' +
-															 '    method: "POST",\n' +
-															 '    headers: { "Content-Type": "application/x-www-form-urlencoded" },\n' +
-															 '    body: "time=' + encodeURIComponent(timeValue) + '&timerate=' + serverTimerate + '"\n' +
-															 '})\n' +
-															 '    .then(response => response.text())\n' +
-															 '    .then(data => console.log("Success:", data))\n' +
-															 '    .catch(error => console.error("Error:", error));';
-										},
-										_generateSSC: function(params) {
-												var timeValue = params.time || '';
-												var code = 'core.setDate("' + timeValue + '", "utc");';
-												if (params.timerate !== undefined && params.timerate !== '' && params.timerate !== 1) {
-														code += '\ncore.setTimeRate(' + params.timerate + ');';
-												}
-												return code;
-										}
-								},
                 {
                     id: 'time-rate',
                     name: 'Change Time Speed Only',
@@ -353,7 +272,7 @@ define(["jquery", "api/remotecontrol"],
                             type: 'string',
                             required: true,
                             desc: 'Location name as stored in Stellarium database',
-                            hint: 'Example: Cairo, Egypt | Paris, France | Tokyo, Japan',
+                            hint: 'Example: Cairo, Northern Africa | Paris, Western Europe | Tokyo, Eastern Asia',
                             suggest: 'search'
                         }
                     },
@@ -677,7 +596,14 @@ define(["jquery", "api/remotecontrol"],
 										id: 'view-get-direction',
 										name: 'Get Current View Direction',
 										name_en: 'Get Current View Direction',
-										desc: 'Get current view direction vector in requested coordinate system',
+										desc: 'Get current view direction vector in requested coordinate system via HTTP API.\n\n' +
+													'For scripting, use the following functions:\n' +
+													'• core.getViewAltitudeAngle() - Altitude angle (degrees)\n' +
+													'• core.getViewAzimuthAngle() - Azimuth angle (degrees, 0=N, 90=E, 180=S, 270=W)\n' +
+													'• core.getViewRaAngle() - Right Ascension (degrees, current epoch)\n' +
+													'• core.getViewDecAngle() - Declination (degrees, current epoch)\n' +
+													'• core.getViewRaJ2000Angle() - Right Ascension (degrees, J2000)\n' +
+													'• core.getViewDecJ2000Angle() - Declination (degrees, J2000)',
 										method: 'GET',
 										path: 'main/view',
 										source: 'MainService.cpp: GET view operation',
@@ -695,7 +621,125 @@ define(["jquery", "api/remotecontrol"],
 														desc: 'Refraction mode for JNow'
 												}
 										},
-										sscTemplate: '// Get current view direction\nvar viewDir = core.getViewDirection();'
+										/**
+										 * Generates correct SSC code for getting view direction.
+										 * Uses the correct StelMainScriptAPI functions.
+										 */
+										_generateSSC: function(params) {
+												var coord = params.coord || '';
+												var ref = params.ref || '';
+												
+												var code = '';
+												var showAll = (coord === '');
+												
+												// ============================================================
+												// ALTITUDE AND AZIMUTH (always available)
+												// ============================================================
+												code += '// ============================================================\n';
+												code += '// CURRENT VIEW DIRECTION\n';
+												code += '// ============================================================\n\n';
+												
+												code += '// Get altitude and azimuth\n';
+												code += 'var alt = core.getViewAltitudeAngle();\n';
+												code += 'var azi = core.getViewAzimuthAngle();\n';
+												code += 'core.debug("Altitude: " + alt.toFixed(2) + "°");\n';
+												code += 'core.debug("Azimuth: " + azi.toFixed(2) + "°");\n\n';
+												
+												// Determine cardinal direction from azimuth
+												code += '// Determine cardinal direction\n';
+												code += 'var direction = "";\n';
+												code += 'if(azi >= 337.5 || azi < 22.5) direction = "North";\n';
+												code += 'else if(azi >= 22.5 && azi < 67.5) direction = "Northeast";\n';
+												code += 'else if(azi >= 67.5 && azi < 112.5) direction = "East";\n';
+												code += 'else if(azi >= 112.5 && azi < 157.5) direction = "Southeast";\n';
+												code += 'else if(azi >= 157.5 && azi < 202.5) direction = "South";\n';
+												code += 'else if(azi >= 202.5 && azi < 247.5) direction = "Southwest";\n';
+												code += 'else if(azi >= 247.5 && azi < 292.5) direction = "West";\n';
+												code += 'else if(azi >= 292.5 && azi < 337.5) direction = "Northwest";\n';
+												code += 'core.debug("Direction: " + direction + " (" + azi.toFixed(1) + "°)");\n\n';
+												
+												// ============================================================
+												// EQUATORIAL COORDINATES (current epoch)
+												// ============================================================
+												if (showAll || coord === 'jNow') {
+														code += '// Get equatorial coordinates (current epoch)\n';
+														code += 'var ra = core.getViewRaAngle();\n';
+														code += 'var dec = core.getViewDecAngle();\n';
+														code += 'core.debug("RA (JNow): " + ra.toFixed(4) + "°");\n';
+														code += 'core.debug("Dec (JNow): " + dec.toFixed(4) + "°");\n\n';
+														
+														// Convert RA to hours
+														code += '// RA in hours (15° = 1 hour)\n';
+														code += 'var raHours = ra / 15;\n';
+														code += 'core.debug("RA (hours): " + raHours.toFixed(2) + "h");\n\n';
+														
+														// Determine hemisphere from declination
+														code += '// Declination hemisphere\n';
+														code += 'var hemisphere = dec >= 0 ? "North" : "South";\n';
+														code += 'core.debug("Dec hemisphere: " + hemisphere);\n\n';
+												}
+												
+												// ============================================================
+												// EQUATORIAL COORDINATES (J2000)
+												// ============================================================
+												if (showAll || coord === 'j2000') {
+														code += '// Get equatorial coordinates (J2000 frame)\n';
+														code += 'var raJ2000 = core.getViewRaJ2000Angle();\n';
+														code += 'var decJ2000 = core.getViewDecJ2000Angle();\n';
+														code += 'core.debug("RA (J2000): " + raJ2000.toFixed(4) + "°");\n';
+														code += 'core.debug("Dec (J2000): " + decJ2000.toFixed(4) + "°");\n\n';
+														
+														// Compare J2000 vs current epoch
+														if (showAll) {
+																code += '// Difference between J2000 and current epoch (precession)\n';
+																code += 'var raCurrent = core.getViewRaAngle();\n';
+																code += 'var decCurrent = core.getViewDecAngle();\n';
+																code += 'core.debug("RA difference (J2000 - JNow): " + (raJ2000 - raCurrent).toFixed(4) + "°");\n';
+																code += 'core.debug("Dec difference (J2000 - JNow): " + (decJ2000 - decCurrent).toFixed(4) + "°");\n\n';
+														}
+												}
+												
+												// ============================================================
+												// ALTITUDE/AZIMUTH ONLY (coord = 'altAz')
+												// ============================================================
+												if (coord === 'altAz') {
+														// Only show altitude and azimuth (already included above)
+														// No additional code needed
+												}
+												
+												// ============================================================
+												// REFRACTION MODE (if specified)
+												// ============================================================
+												if (ref && ref !== '') {
+														code += '// Note: Refraction mode "' + ref + '" was requested.\n';
+														code += '// Refraction is automatically applied to view calculations.\n\n';
+												}
+												
+												// ============================================================
+												// SUMMARY
+												// ============================================================
+												code += '// ============================================================\n';
+												code += '// SUMMARY\n';
+												code += '// ============================================================\n';
+												code += 'core.debug("");\n';
+												code += 'core.debug("=== VIEW DIRECTION SUMMARY ===");\n';
+												code += 'core.debug("Altitude: " + alt.toFixed(2) + "°");\n';
+												code += 'core.debug("Azimuth: " + azi.toFixed(2) + "° (" + direction + ")");\n';
+												
+												if (showAll || coord === 'jNow') {
+														code += 'core.debug("RA (JNow): " + ra.toFixed(4) + "° (" + (ra/15).toFixed(2) + "h)");\n';
+														code += 'core.debug("Dec (JNow): " + dec.toFixed(4) + "°");\n';
+												}
+												
+												if (showAll || coord === 'j2000') {
+														code += 'core.debug("RA (J2000): " + raJ2000.toFixed(4) + "°");\n';
+														code += 'core.debug("Dec (J2000): " + decJ2000.toFixed(4) + "°");\n';
+												}
+												
+												code += 'core.debug("================================");\n';
+												
+												return code;
+										}
 								},
                 {
                     id: 'view-listlandscape',
@@ -739,7 +783,7 @@ define(["jquery", "api/remotecontrol"],
                     path: 'view/skyculturedescription/',
                     source: 'ViewService.cpp: skyculturedescription/ operation',
                     params: {},
-                    sscTemplate: '// Current culture description\n// StelSkyCultureMgr.getCurrentSkyCultureHtmlDescription()'
+                    sscTemplate: '// Current culture description\n// var fulldescription = StelSkyCultureMgr.getCurrentSkyCultureHtmlDescription();\ncore.debug("Sky culture description : " + fulldescription);'
                 },
                 {
                     id: 'view-listprojection',
@@ -750,7 +794,7 @@ define(["jquery", "api/remotecontrol"],
                     path: 'view/listprojection',
                     source: 'ViewService.cpp: listprojection operation',
                     params: {},
-                    sscTemplate: '// Use core.setProjectionMode() to change projection'
+                    sscTemplate: 'var projection = core.getProjectionMode();\ncore.debug("Current map projection: " + projection);\n// Use core.setProjectionMode() to change projection'
                 },
                 {
                     id: 'view-projectiondescription',
@@ -761,7 +805,7 @@ define(["jquery", "api/remotecontrol"],
                     path: 'view/projectiondescription',
                     source: 'ViewService.cpp: projectiondescription operation',
                     params: {},
-                    sscTemplate: '// Current projection description\n// core.getCurrentProjection().getHtmlSummary()'
+                    sscTemplate: '// No direct script equivalent to retrive projection description'
                 }
             ]
         },
@@ -1114,160 +1158,301 @@ define(["jquery", "api/remotecontrol"],
                 }
             ]
         },
-        {
-            id: 'actions',
-            name: 'StelActions',
-            name_en: 'StelActions',
-            icon: 'A',
-            desc: 'Execute and toggle Stellarium actions via StelActionService',
-            source: 'StelActionService.cpp, MainService.cpp',
-            actions: [
-                {
-                    id: 'action-list',
-                    name: 'List All Actions',
-                    name_en: 'List All Actions',
-                    desc: 'Get list of all registered actions with their current states',
-                    method: 'GET',
-                    path: 'stelaction/list',
-                    source: 'StelActionService.cpp: list operation',
-                    params: {},
-                    sscTemplate: '// No direct script equivalent\n// Use StelActionMgr.findAction("actionId") to access actions\n// Use StelActionMgr.getActionList() to list all actions'
-                },
-                {
-                    id: 'action-do',
-                    name: 'Execute Action',
-                    name_en: 'Execute Action',
-                    desc: 'Run or toggle a specific action (constellation lines, grids, etc.)',
-                    method: 'POST',
-                    path: 'stelaction/do',
-                    source: 'StelActionService.cpp: do operation',
-                    params: {
-                        id: {
-                            type: 'string',
-                            required: true,
-                            desc: 'Action identifier (e.g., actionShow_Constellation_Lines)',
-                            hint: 'Example: actionShow_Constellation_Lines, actionShow_Atmosphere',
-                            suggest: 'actions'
-                        }
-                    },
-                    /**
-                     * Generates the correct SSC code for executing a StelAction.
-                     * Uses the StelActionMgr API, not the non-existent core.setAction().
-                     *
-                     * @param {Object} params - The collected parameters (must include 'id')
-                     * @returns {string} Generated SSC code
-                     */
-                    _generateSSC: function(params) {
-                        var actionId = params.id || 'actionShow_Stars';
-                        return '// To toggle an action (if checkable, e.g. show/hide)\n' +
-                               'var action = StelActionMgr.findAction("' + actionId + '");\n' +
-                               'if (action && action.isCheckable()) {\n' +
-                               '    action.toggle();\n' +
-                               '    core.debug("Toggled: ' + actionId + '");\n' +
-                               '} else if (action) {\n' +
-                               '    // For non-checkable actions, just trigger\n' +
-                               '    action.trigger();\n' +
-                               '    core.debug("Triggered: ' + actionId + '");\n' +
-                               '}\n\n' +
-                               '// Alternative: set a specific state\n' +
-                               '// var action = StelActionMgr.findAction("' + actionId + '");\n' +
-                               '// if (action && action.isCheckable()) {\n' +
-                               '//     action.setChecked(true);  // Turn ON\n' +
-                               '//     action.setChecked(false); // Turn OFF\n' +
-                               '// }';
-                    }
-                }
-            ]
-        },
-        {
-            id: 'properties',
-            name: 'StelProperties',
-            name_en: 'StelProperties',
-            icon: 'P',
-            desc: 'Read and modify system properties via StelPropertyService',
-            source: 'StelPropertyService.cpp',
-            actions: [
-                {
-                    id: 'property-list',
-                    name: 'List All Properties',
-                    name_en: 'List All Properties',
-                    desc: 'Get list of all registered properties with values and types',
-                    method: 'GET',
-                    path: 'stelproperty/list',
-                    source: 'StelPropertyService.cpp: list operation',
-                    params: {},
-                    sscTemplate: '// Use core.getProperty() and core.setProperty()'
-                },
-                {
-                    id: 'property-set',
-                    name: 'Set Property Value',
-                    name_en: 'Set Property Value',
-                    desc: 'Set a new value for a specific StelProperty. Uses StelPropertyMgr via StelApp.',
-                    method: 'POST',
-                    path: 'stelproperty/set',
-                    source: 'StelPropertyService.cpp: set operation',
-                    params: {
-                        id: {
-                            type: 'string',
-                            required: true,
-                            desc: 'Property identifier (e.g., MilkyWay.intensity, ConstellationMgr.flagLines)',
-                            hint: 'Example: MilkyWay.intensity, StelSkyDrawer.absoluteStarScale',
-                            suggest: 'properties'
-                        },
-                        value: {
-                            type: 'string',
-                            required: true,
-                            desc: 'New value (auto-converted to appropriate type: bool, int, double, string)',
-                            hint: 'Example: 5.0, true, false, "western"'
-                        }
-                    },
-                    /**
-                     * Generates correct SSC code for setting a StelProperty.
-                     * Uses StelPropertyMgr.getStelPropertyValue/setStelPropertyValue
-                     * which is the correct public API, not the non-existent core.setProperty().
-                     *
-                     * @param {Object} params - The collected parameters (must include 'id' and 'value')
-                     * @returns {string} Generated SSC code
-                     */
-                    _generateSSC: function(params) {
-                        var propId = params.id || 'MilkyWay.intensity';
-                        var propValue = params.value || '1.0';
-                        
-                        // Determine if the value looks like a string or number/boolean
-                        var isStringValue = isNaN(propValue) && 
-                                            propValue !== 'true' && 
-                                            propValue !== 'false';
-                        
-                        var formattedValue;
-                        if (propValue === 'true' || propValue === 'false') {
-                            formattedValue = propValue; // boolean
-                        } else if (!isNaN(propValue)) {
-                            formattedValue = propValue; // number
-                        } else {
-                            formattedValue = '"' + propValue + '"'; // string
-                        }
-                        
-                        return '// Get reference to the Property Manager\n' +
-                               'var StelPropertyMgr = StelApp.getStelPropertyManager();\n\n' +
-                               '// Check current value first (optional, for logging)\n' +
-                               'var currentValue = StelPropertyMgr.getStelPropertyValue("' + propId + '");\n' +
-                               'core.debug("Current value of ' + propId + ': " + currentValue);\n\n' +
-                               '// Set the new value\n' +
-                               'var result = StelPropertyMgr.setStelPropertyValue("' + propId + '", ' + formattedValue + ');\n' +
-                               'if (result) {\n' +
-                               '    core.debug("Property ' + propId + ' set to ' + formattedValue + '");\n' +
-                               '} else {\n' +
-                               '    core.debug("Failed to set property ' + propId + ' (may be read-only or not found)");\n' +
-                               '}\n\n' +
-                               '// Alternative: Get the StelProperty object for more control\n' +
-                               '// var prop = StelPropertyMgr.getProperty("' + propId + '");\n' +
-                               '// if (prop && !prop.isReadOnly()) {\n' +
-                               '//     prop.setValue(' + formattedValue + ');\n' +
-                               '// }';
-                    }
-                }
-            ]
-        },
+				{
+						id: 'actions',
+						name: 'StelActions',
+						name_en: 'StelActions',
+						icon: 'A',
+						desc: 'Execute and toggle Stellarium actions via StelActionService',
+						source: 'StelActionService.cpp, StelActionMgr.cpp',
+						actions: [
+								{
+										id: 'action-list',
+										name: 'List All Actions',
+										name_en: 'List All Actions',
+										desc: 'Get list of all registered actions with their current states',
+										method: 'GET',
+										path: 'stelaction/list',
+										source: 'StelActionService.cpp: list operation',
+										params: {},
+										sscTemplate: `// List All Actions - Use API Explorer or cURL for this.
+		// StelActionMgr is NOT available in Stellarium Scripts.
+		// For script use, directly call the module functions:
+		// - SolarSystem.setFlagPlanets(true/false)
+		// - ConstellationMgr.setFlagLines(true/false)
+		// - StelMovementMgr.zoomTo(fov, duration)
+		// etc.`
+								},
+								{
+										id: 'action-do',
+										name: 'Execute Action',
+										name_en: 'Execute Action',
+										desc: 'Run or toggle a specific action (constellation lines, grids, etc.)',
+										method: 'POST',
+										path: 'stelaction/do',
+										source: 'StelActionService.cpp: do operation',
+										params: {
+												id: {
+														type: 'string',
+														required: true,
+														desc: 'Action identifier (e.g., actionShow_Constellation_Lines)',
+														hint: 'Example: actionShow_Constellation_Lines, actionShow_Atmosphere',
+														suggest: 'actions'
+												}
+										},
+										/**
+										 * Generates correct SSC code for StelAction operations.
+										 * StelActionMgr is NOT available in scripts - use direct module calls.
+										 */
+										_generateSSC: function(params) {
+												var actionId = params.id || 'actionShow_Stars';
+												
+												// Map action IDs to their equivalent script commands
+												var actionMap = {
+														'actionShow_Stars': {
+																module: 'StarMgr',
+																method: 'setFlagStars',
+																args: 'true/false'
+														},
+														'actionShow_Planets': {
+																module: 'SolarSystem',
+																method: 'setFlagPlanets',
+																args: 'true/false'
+														},
+														'actionShow_Planets_Labels': {
+																module: 'SolarSystem',
+																method: 'setFlagLabels',
+																args: 'true/false'
+														},
+														'actionShow_Planets_Orbits': {
+																module: 'SolarSystem',
+																method: 'setFlagOrbits',
+																args: 'true/false'
+														},
+														'actionShow_Planets_Hints': {
+																module: 'SolarSystem',
+																method: 'setFlagHints',
+																args: 'true/false'
+														},
+														'actionShow_Atmosphere': {
+																module: 'LandscapeMgr',
+																method: 'setFlagAtmosphere',
+																args: 'true/false'
+														},
+														'actionShow_Ground': {
+																module: 'LandscapeMgr',
+																method: 'setFlagGround',
+																args: 'true/false'
+														},
+														'actionShow_Fog': {
+																module: 'LandscapeMgr',
+																method: 'setFlagFog',
+																args: 'true/false'
+														},
+														'actionShow_Night_Mode': {
+																module: 'StelApp',
+																method: 'setNightMode',
+																args: 'true/false'
+														},
+														'actionShow_Equatorial_Grid': {
+																module: 'GridLinesMgr',
+																method: 'setFlagEquatorialGrid',
+																args: 'true/false'
+														},
+														'actionShow_Azimuthal_Grid': {
+																module: 'GridLinesMgr',
+																method: 'setFlagAzimuthalGrid',
+																args: 'true/false'
+														},
+														'actionShow_Constellation_Lines': {
+																module: 'ConstellationMgr',
+																method: 'setFlagLines',
+																args: 'true/false'
+														},
+														'actionShow_Constellation_Labels': {
+																module: 'ConstellationMgr',
+																method: 'setFlagLabels',
+																args: 'true/false'
+														},
+														'actionShow_Constellation_Boundaries': {
+																module: 'ConstellationMgr',
+																method: 'setFlagBoundaries',
+																args: 'true/false'
+														},
+														'actionShow_Constellation_Art': {
+																module: 'ConstellationMgr',
+																method: 'setFlagArt',
+																args: 'true/false'
+														},
+														'actionShow_Nebulas': {
+																module: 'NebulaMgr',
+																method: 'setFlagHints',
+																args: 'true/false'
+														},
+														'actionShow_MilkyWay': {
+																module: 'MilkyWay',
+																method: 'setFlagDisplayed',
+																args: 'true/false'
+														},
+														'actionSet_Full_Screen_Global': {
+																module: 'StelMainView',
+																method: 'setFullScreen',
+																args: 'true/false'
+														},
+														'actionGo_Home_Global': {
+																module: 'core',
+																method: 'goHome',
+																args: 'duration'
+														},
+														'actionSwitch_Equatorial_Mount': {
+																module: 'StelMovementMgr',
+																method: 'setEquatorialMount',
+																args: 'true/false'
+														}
+												};
+												
+												// Try to find a mapping for this action
+												var mapping = actionMap[actionId];
+												if (mapping) {
+														var code = '// ⚡ ' + actionId + ' - Use direct module call:\n';
+														code += '// ' + mapping.module + '.' + mapping.method + '(' + mapping.args + ')\n\n';
+														code += '// Example: Toggle ' + actionId + '\n';
+														if (mapping.args === 'true/false') {
+																code += '// Get current value (if available)\n';
+																code += '// var current = core.getStelProperty("' + actionId + '");\n';
+																code += '// core.debug("Current value: " + current);\n\n';
+																code += '// Toggle the setting\n';
+																code += '// ' + mapping.module + '.' + mapping.method + '(true);  // Turn ON\n';
+																code += '// ' + mapping.module + '.' + mapping.method + '(false); // Turn OFF\n';
+																code += '// core.debug("' + actionId + ' toggled");\n';
+														} else if (mapping.args === 'duration') {
+																code += '// ' + mapping.module + '.' + mapping.method + '(3); // Duration in seconds\n';
+																code += '// core.debug("Navigating to home view");\n';
+														}
+														return code;
+												}
+												
+												// For unmapped actions, provide a generic solution using core.getStelProperty/setStelProperty
+												var code = '// Action: ' + actionId + '\n';
+												code += '// StelActionMgr is NOT available in Stellarium Scripts.\n';
+												code += '// Use the following alternative approaches:\n\n';
+												code += '// Option 1: Use core.getStelProperty() and core.setStelProperty()\n';
+												code += '// var currentValue = core.getStelProperty("' + actionId + '");\n';
+												code += '// core.debug("Current value: " + currentValue);\n';
+												code += '// core.setStelProperty("' + actionId + '", !currentValue);\n\n';
+												code += '// Option 2: Use the appropriate module\'s public slot directly\n';
+												code += '// Example: SolarSystem.setFlagPlanets(true);\n';
+												code += '// Example: ConstellationMgr.setFlagLines(true);\n\n';
+												code += '// Option 3: For API calls, use cURL or the API Explorer\n';
+												code += '// curl -X POST -d "id=' + actionId + '" /api/stelaction/do\n';
+												
+												return code;
+										}
+								}
+						]
+				},
+				{
+						id: 'properties',
+						name: 'StelProperties',
+						name_en: 'StelProperties',
+						icon: 'P',
+						desc: 'Read and modify system properties via StelPropertyService',
+						source: 'StelPropertyService.cpp, StelMainScriptAPI',
+						actions: [
+								{
+										id: 'property-list',
+										name: 'List All Properties',
+										name_en: 'List All Properties',
+										desc: 'Get list of all registered properties with values and types via HTTP API.\n\n' +
+													'For scripting, use: var allProps = core.getPropertyList();',
+										method: 'GET',
+										path: 'stelproperty/list',
+										source: 'StelPropertyService.cpp: list operation',
+										params: {},
+										sscTemplate: '// List All Properties - Use core.getPropertyList()\n' +
+																 'var allProps = core.getPropertyList();\n' +
+																 'var sorted = allProps.sort();\n' +
+																 'core.debug("Total properties: " + sorted.length);\n\n' +
+																 '// Display first 20 properties\n' +
+																 'core.debug("First 20 properties:");\n' +
+																 'for (var i = 0; i < Math.min(20, sorted.length); i++) {\n' +
+																 '    core.debug((i+1) + ". " + sorted[i]);\n' +
+																 '}\n\n' +
+																 '// Save to output as comma-separated list\n' +
+																 'core.output(sorted.join(","));\n' +
+																 'core.debug("Saved to output");\n\n' +
+																 '// Save as script array\n' +
+																 'var arr = "const allProperties = [\\n";\n' +
+																 'for (var i = 0; i < sorted.length; i++) {\n' +
+																 '    arr += "    \'" + sorted[i] + "\'" + (i < sorted.length-1 ? "," : "") + "\\n";\n' +
+																 '}\n' +
+																 'arr += "];\\n// Total: " + sorted.length;\n' +
+																 'core.output(arr);\n' +
+																 'core.debug("Array saved to output");'
+								},
+								{
+										id: 'property-set',
+										name: 'Set Property Value',
+										name_en: 'Set Property Value',
+										desc: 'Set a new value for a specific StelProperty using the Stellarium Script API.\n\n' +
+													'Example: core.setStelProperty("MilkyWay.intensity", 2.5);',
+										method: 'POST',
+										path: 'stelproperty/set',
+										source: 'StelPropertyService.cpp: set operation',
+										params: {
+												id: {
+														type: 'string',
+														required: true,
+														desc: 'Property identifier (e.g., MilkyWay.intensity, ConstellationMgr.flagLines)',
+														hint: 'Example: MilkyWay.intensity, StelSkyDrawer.absoluteStarScale',
+														suggest: 'properties'
+												},
+												value: {
+														type: 'string',
+														required: true,
+														desc: 'New value (auto-converted to appropriate type: bool, int, double, string)',
+														hint: 'Example: 5.0, true, false, "western"'
+												}
+										},
+										/**
+										 * Generates correct SSC code for setting a StelProperty.
+										 * Uses core.setStelProperty() and core.getStelProperty() which are
+										 * the correct public APIs exposed via StelMainScriptAPI.
+										 *
+										 * @param {Object} params - The collected parameters (must include 'id' and 'value')
+										 * @returns {string} Generated SSC code
+										 */
+										_generateSSC: function(params) {
+												var propId = params.id || 'MilkyWay.intensity';
+												var propValue = params.value || '1.0';
+												
+												// Determine if the value looks like a string or number/boolean
+												var isStringValue = isNaN(propValue) && 
+																						propValue !== 'true' && 
+																						propValue !== 'false';
+												
+												var formattedValue;
+												if (propValue === 'true' || propValue === 'false') {
+														formattedValue = propValue; // boolean
+												} else if (!isNaN(propValue)) {
+														formattedValue = propValue; // number
+												} else {
+														formattedValue = '"' + propValue + '"'; // string
+												}
+												
+												return '// Read current value\n' +
+															 'var currentValue = core.getStelProperty("' + propId + '");\n' +
+															 'core.debug("Current value of ' + propId + ': " + currentValue);\n\n' +
+															 '// Set the new value\n' +
+															 'core.setStelProperty("' + propId + '", ' + formattedValue + ');\n' +
+															 'core.debug("Property ' + propId + ' set to ' + formattedValue + '");\n\n' +
+															 '// Verify the change\n' +
+															 'var newValue = core.getStelProperty("' + propId + '");\n' +
+															 'core.debug("New value of ' + propId + ': " + newValue);';
+										}
+								}
+						]
+				},
         {
             id: 'scripts',
             name: 'Scripts',
@@ -1329,7 +1514,7 @@ define(["jquery", "api/remotecontrol"],
                             suggest: 'scripts'
                         }
                     },
-                    sscTemplate: 'core.runScript("{id}");'
+                    sscTemplate: '// No direct equivalent to run ("{id}");'
                 },
 								{
 										id: 'script-direct',
@@ -1344,7 +1529,7 @@ define(["jquery", "api/remotecontrol"],
 														type: 'textarea',
 														required: true,
 														desc: 'Stellarium Script code',
-														hint: 'Example:\ncore.setDate("2025-01-01T00:00:00", "utc");\ncore.moveToObject("Mars", 2);'
+														hint: 'Example:\ncore.setDate(\"2025-01-01T00:00:00", \"utc\");\n\ncore.moveToObject(\"Mars\", 2);'
 												},
 												useIncludes: {
 														type: 'checkbox',
@@ -1366,7 +1551,7 @@ define(["jquery", "api/remotecontrol"],
                     path: 'scripts/status',
                     source: 'ScriptService.cpp: status operation',
                     params: {},
-                    sscTemplate: '// Use core.scriptIsRunning()\nvar running = core.scriptIsRunning();'
+                    sscTemplate: '// No direct equivalent in scripts;'
                 },
                 {
                     id: 'script-stop',
@@ -1377,7 +1562,7 @@ define(["jquery", "api/remotecontrol"],
                     path: 'scripts/stop',
                     source: 'ScriptService.cpp: stop operation',
                     params: {},
-                    sscTemplate: 'core.stopScript();'
+                    sscTemplate: '//Stops the current script completely and exits.\ncore.exit();'
                 }
             ]
 								},
@@ -1405,7 +1590,7 @@ define(["jquery", "api/remotecontrol"],
 																		hint: 'Example: Betelgeuse, M42, Andromeda'
 																}
 														},
-														sscTemplate: '// No direct equivalent in scripts\n// Use core.getObject() for local search'
+														sscTemplate: '// No direct equivalent in scripts\n// Use core.getObjectInfo("string"); for local search'
 												}
 										]
 								},
@@ -1448,7 +1633,7 @@ define(["jquery", "api/remotecontrol"],
                     path: 'main/plugins',
                     source: 'MainService.cpp: plugins operation',
                     params: {},
-                    sscTemplate: '// Use core.getModuleList() or StelModuleMgr'
+                    sscTemplate: '// Check if Satellites plugin is available\nif(core.isModuleLoaded("Satellites")) {\ncore.setStelProperty("Satellites.flagLabels", true);\ncore.debug("Satellites plugin active");\n} else {\ncore.debug("Satellites plugin not loaded - skipping");\n}\n// Check Exoplanets plugin\nif(core.isModuleLoaded("Exoplanets")) {\ncore.debug("Exoplanets plugin available");\n}\n// Check operating system platform\nvar platform = core.getPlatformName();\ncore.debug("Operating system: " + platform);'
                 },
                 {
                     id: 'main-window',
@@ -1486,7 +1671,7 @@ define(["jquery", "api/remotecontrol"],
      */
     var quickExamples = {
         'moon-tonight': {
-            name: 'View the Moon Tonight',
+            name: 'View the Moon',
             category: 'objects',
             action: 'objects-focus',
             params: { target: 'Moon', mode: 'zoom' }
@@ -1495,7 +1680,7 @@ define(["jquery", "api/remotecontrol"],
             name: 'Observe from Cairo, Egypt',
             category: 'location',
             action: 'location-set-by-id',
-            params: { id: 'Cairo, Egypt' }
+            params: { id: 'Cairo, Northern Africa' }
         },
         'view-jupiter': {
             name: 'Center View on Jupiter',
@@ -1520,9 +1705,7 @@ define(["jquery", "api/remotecontrol"],
             category: 'scripts',
             action: 'script-direct',
             params: { 
-                code: '// Take a screenshot and save to disk\n' +
-                      'core.screenshot("stellarium_screenshot", false, "", false, "png");\n' +
-                      'core.debug("Screenshot saved successfully.");'
+                code: '// Take a screenshot and save to disk\ncore.screenshot("stellarium_screenshot", false, "", false, "png");\ncore.debug("Screenshot saved successfully.");'
             }
         },
         'toggle-atmosphere': {
@@ -1530,12 +1713,6 @@ define(["jquery", "api/remotecontrol"],
             category: 'actions',
             action: 'action-do',
             params: { id: 'actionShow_Atmosphere' }
-        },
-        'set-time-now': {
-            name: 'Set Time to Current Moment',
-            category: 'time',
-            action: 'time-set-datetime',
-            params: { time: 'now' }
         },
         'toggle-constellation-lines': {
             name: 'Toggle Constellation Lines',
@@ -1742,21 +1919,6 @@ define(["jquery", "api/remotecontrol"],
     // =====================================================================
 
     /**
-     * SuggestionDropdown - Interactive autocomplete dropdown for parameter suggestions.
-     * 
-     * Replaces the old alert()-based suggestion system with a proper dropdown
-     * that fetches data from Stellarium APIs and allows clicking to select.
-     * 
-     * Features:
-     * - Fetches data from API endpoints on demand
-     * - Filterable/searchable list
-     * - Keyboard navigation (Arrow keys, Enter, Escape)
-     * - Click to select and auto-fill the associated input field
-     * - Loading and error states
-     * - Auto-positioning relative to the trigger element
-     */
-
-    /**
      * Create a suggestion dropdown for a parameter field.
      * 
      * @param {jQuery} $triggerElement - The suggestion link/button that was clicked
@@ -1853,142 +2015,204 @@ define(["jquery", "api/remotecontrol"],
         });
     }
 
-    /**
-     * Fetch suggestion data from the appropriate API endpoint.
-     * 
-     * @param {string} type - 'actions', 'properties', 'scripts', or 'locations'
-     * @param {function} callback - Called with array of {id, text} objects
-     */
-    function fetchSuggestions(type, callback) {
-        var endpoints = {
-            'actions': '/api/stelaction/list',
-            'properties': '/api/stelproperty/list',
-            'scripts': '/api/scripts/list',
-            'locations': '/api/location/list'
-        };
-        
-        var url = endpoints[type];
-        if (!url) {
-            callback([{ id: '', text: 'Unknown suggestion type: ' + type }]);
-            return;
-        }
-        
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            timeout: 5000
-        }).done(function(data) {
-            var items = [];
-            
-            if (type === 'actions') {
-                // Flatten categorized action list
-                for (var category in data) {
-                    if (data.hasOwnProperty(category) && Array.isArray(data[category])) {
-                        data[category].forEach(function(action) {
-                            items.push({
-                                id: action.id,
-                                text: action.id + (action.text ? ' (' + action.text + ')' : ''),
-                                category: category
-                            });
-                        });
-                    }
-                }
-            } else if (type === 'properties') {
-                // Properties come as flat object with id as key
-                for (var propId in data) {
-                    if (data.hasOwnProperty(propId)) {
-                        items.push({
-                            id: propId,
-                            text: propId
-                        });
-                    }
-                }
-            } else if (type === 'scripts' || type === 'locations') {
-                // Simple string arrays
-                if (Array.isArray(data)) {
-                    data.forEach(function(item) {
-                        var name = typeof item === 'string' ? item : (item.name || item.id || String(item));
-                        items.push({
-                            id: name,
-                            text: name
-                        });
-                    });
-                }
-            }
-            
-            // Sort alphabetically
-            items.sort(function(a, b) {
-                return a.text.localeCompare(b.text);
-            });
-            
-            callback(items);
-        }).fail(function() {
-            callback([{ id: '', text: 'Error loading suggestions. Check connection.' }]);
-        });
-    }
+		/**
+		 * Fetch suggestion data from the appropriate API endpoint.
+		 * 
+		 * @param {string} type - 'actions', 'properties', 'scripts', or 'locations'
+		 * @param {function} callback - Called with array of {id, text} objects
+		 */
+		function fetchSuggestions(type, callback) {
+				var endpoints = {
+						'actions': '/api/stelaction/list',
+						'properties': '/api/stelproperty/list',
+						'scripts': '/api/scripts/list',
+						'locations': '/api/location/list'
+				};
+				
+				var url = endpoints[type];
+				if (!url) {
+						callback([{ id: '', text: 'Unknown suggestion type: ' + type }]);
+						return;
+				}
+				
+				$.ajax({
+						url: url,
+						dataType: 'json',
+						timeout: 5000
+				}).done(function(data) {
+						var items = [];
+						
+						if (type === 'actions') {
+								// Flatten categorized action list with category sorting
+								var categories = Object.keys(data);
+								// Sort categories alphabetically
+								categories.sort(function(a, b) {
+										return a.localeCompare(b);
+								});
+								
+								categories.forEach(function(category) {
+										if (data.hasOwnProperty(category) && Array.isArray(data[category])) {
+												var actions = data[category];
+												// Sort actions within category by text
+												actions.sort(function(a, b) {
+														return (a.text || a.id).localeCompare(b.text || b.id);
+												});
+												
+												actions.forEach(function(action) {
+														items.push({
+																id: action.id,
+																text: action.id + (action.text ? ' (' + action.text + ')' : ''),
+																category: category,
+																isCheckable: action.isCheckable,
+																isChecked: action.isChecked
+														});
+												});
+										}
+								});
+						} else if (type === 'properties') {
+								// Properties come as flat object with id as key
+								var propIds = Object.keys(data);
+								propIds.sort(function(a, b) {
+										return a.localeCompare(b);
+								});
+								
+								propIds.forEach(function(propId) {
+										var propInfo = data[propId];
+										var displayText = propId;
+										if (propInfo && propInfo.value !== undefined) {
+												var valueStr = typeof propInfo.value === 'string' ? 
+														'"' + propInfo.value + '"' : 
+														String(propInfo.value);
+												if (valueStr.length > 30) {
+														valueStr = valueStr.substring(0, 27) + '...';
+												}
+												displayText = propId + ' = ' + valueStr;
+										}
+										items.push({
+												id: propId,
+												text: displayText,
+												category: null // No category for properties
+										});
+								});
+						} else if (type === 'scripts' || type === 'locations') {
+								// Simple string arrays
+								if (Array.isArray(data)) {
+										data.forEach(function(item) {
+												var name = typeof item === 'string' ? item : (item.name || item.id || String(item));
+												items.push({
+														id: name,
+														text: name,
+														category: null
+												});
+										});
+										items.sort(function(a, b) {
+												return a.text.localeCompare(b.text);
+										});
+								}
+						}
+						
+						callback(items);
+				}).fail(function() {
+						callback([{ id: '', text: 'Error loading suggestions. Check connection.' }]);
+				});
+		}
 
-    /**
-     * Render the suggestion list with clickable items.
-     * 
-     * @param {jQuery} $list - The list container
-     * @param {Array} items - Array of {id, text, category} objects
-     * @param {function} onSelect - Called with selected id when user clicks
-     */
-    function renderSuggestionList($list, items, onSelect) {
-        $list.empty();
-        
-        if (!items || items.length === 0) {
-            $list.html('<div class="suggestion-empty">No results found</div>');
-            return;
-        }
-        
-        var currentCategory = null;
-        
-        items.forEach(function(item) {
-            // Add category header if applicable
-            if (item.category && item.category !== currentCategory) {
-                currentCategory = item.category;
-                $list.append(
-                    '<div class="suggestion-category">' + 
-                    escapeHtml(item.category) + 
-                    '</div>'
-                );
-            }
-            
-            var $item = $('<div class="suggestion-item" data-value="' + escapeAttr(item.id) + '">' + 
-                    escapeHtml(item.text) + 
-                    '</div>');
-            
-            $item.on('click', function() {
-                onSelect($(this).data('value'));
-            });
-            
-            $list.append($item);
-        });
-    }
+		/**
+		 * Render the suggestion list with clickable items.
+		 * Categories are displayed as sticky headers with proper z-index.
+		 * 
+		 * @param {jQuery} $list - The list container
+		 * @param {Array} items - Array of {id, text, category, ...}
+		 * @param {function} onSelect - Called with selected id when user clicks
+		 */
+		function renderSuggestionList($list, items, onSelect) {
+				$list.empty();
+				
+				if (!items || items.length === 0) {
+						$list.html('<div class="suggestion-empty">No results found</div>');
+						return;
+				}
+				
+				var currentCategory = null;
+				
+				items.forEach(function(item) {
+						// Add category header if applicable (for actions)
+						if (item.category && item.category !== currentCategory) {
+								currentCategory = item.category;
+								var countInCategory = items.filter(function(i) { 
+										return i.category === currentCategory; 
+								}).length;
+								
+								// Category header with proper styling to prevent overlap
+								var $category = $('<div class="suggestion-category" data-category="' + escapeAttr(currentCategory) + '">' + 
+										escapeHtml(currentCategory) + 
+										' (' + countInCategory + ')' +
+										'</div>');
+								
+								// Apply sticky positioning with proper z-index and background
+								$category.css({
+										'position': 'sticky',
+										'top': '0',
+										'z-index': '10',
+										'background': '#4A4C4E', // Match the dropdown background
+										'padding': '5px 12px 3px 12px',
+										'font-size': '9px',
+										'font-weight': 'bold',
+										'color': '#FD971F',
+										'text-transform': 'uppercase',
+										'letter-spacing': '0.5px',
+										'border-bottom': '1px solid rgba(0,0,0,0.15)',
+										'border-top': '1px solid rgba(0,0,0,0.1)',
+										'margin': '0'
+								});
+								
+								$list.append($category);
+						}
+						
+						var $item = $('<div class="suggestion-item" data-value="' + escapeAttr(item.id) + '">' + 
+										escapeHtml(item.text) + 
+										'</div>');
+						
+						$item.on('click', function() {
+								onSelect($(this).data('value'));
+						});
+						
+						$list.append($item);
+				});
+		}
 
-    /**
-     * Update selection highlight in the dropdown list.
-     * 
-     * @param {jQuery} $items - The list items
-     * @param {number} index - Index to select
-     */
-    function updateSelection($items, index) {
-        $items.removeClass('suggestion-selected');
-        if (index >= 0 && index < $items.length) {
-            $items.eq(index).addClass('suggestion-selected');
-            // Scroll into view
-            var $selected = $items.eq(index);
-            var containerTop = $selected.parent().scrollTop();
-            var containerHeight = $selected.parent().height();
-            var itemTop = $selected.position().top;
-            var itemHeight = $selected.outerHeight();
-            
-            if (itemTop < 0 || itemTop + itemHeight > containerHeight) {
-                $selected.parent().scrollTop(containerTop + itemTop - containerHeight/2 + itemHeight/2);
-            }
-        }
-    }
+		/**
+		 * Update selection highlight in the dropdown list.
+		 * Scrolls the selected item into view properly.
+		 * 
+		 * @param {jQuery} $items - The list items
+		 * @param {number} index - Index to select
+		 */
+		function updateSelection($items, index) {
+				$items.removeClass('suggestion-selected');
+				if (index >= 0 && index < $items.length) {
+						var $selected = $items.eq(index);
+						$selected.addClass('suggestion-selected');
+						
+						// Scroll into view with proper offset for sticky headers
+						var container = $selected.parent();
+						var containerTop = container.scrollTop();
+						var containerHeight = container.height();
+						var itemTop = $selected.position().top;
+						var itemHeight = $selected.outerHeight();
+						
+						// Get the height of the sticky category header if visible
+						var $category = $selected.prevAll('.suggestion-category:first');
+						var headerHeight = $category.length && $category.position().top < 10 ? $category.outerHeight() : 0;
+						
+						// Adjust scroll position to account for sticky header
+						var adjustedItemTop = itemTop - headerHeight;
+						
+						if (adjustedItemTop < 0 || adjustedItemTop + itemHeight > containerHeight) {
+								container.scrollTop(containerTop + adjustedItemTop - containerHeight/2 + itemHeight/2 + headerHeight);
+						}
+				}
+		}
 
     /**
      * Create a suggestion button with consistent Stellarium styling.
@@ -2429,7 +2653,7 @@ define(["jquery", "api/remotecontrol"],
 				var params = collectParams(selectedAction);
 				
 				// Debug: Check timerate before conversion
-				if (selectedAction.id === 'time-rate' || selectedAction.id === 'time-set-jd' || selectedAction.id === 'time-set-datetime') {
+				if (selectedAction.id === 'time-rate' || selectedAction.id === 'time-set-jd') {
 						console.log('[CodeGenerator] BEFORE conversion - timerate:', params.timerate);
 						if (params.timerate !== undefined) {
 								var converted = convertUserTimeRateToServer(parseFloat(params.timerate));
@@ -2447,7 +2671,7 @@ define(["jquery", "api/remotecontrol"],
 				
 				// Create a display version of params with converted timerate values
 				var displayParams = {};
-				var isTimeAction = (selectedAction.id === 'time-rate' || selectedAction.id === 'time-set-jd' || selectedAction.id === 'time-set-datetime');
+				var isTimeAction = (selectedAction.id === 'time-rate' || selectedAction.id === 'time-set-jd');
 				
 				Object.keys(params).forEach(function(k) {
 						if (k === 'timerate' && isTimeAction) {
@@ -2478,7 +2702,7 @@ define(["jquery", "api/remotecontrol"],
 				var cmd = 'curl';
 				
 				// Check if this action involves timerate parameter
-				var isTimeAction = (action.id === 'time-rate' || action.id === 'time-set-jd' || action.id === 'time-set-datetime');
+				var isTimeAction = (action.id === 'time-rate' || action.id === 'time-set-jd');
 				
 				// Create a copy of params with converted timerate values
 				var convertedParams = {};
@@ -2587,7 +2811,7 @@ define(["jquery", "api/remotecontrol"],
 				lines.push('url = "' + baseUrl + '/api/' + action.path + '"');
 				lines.push('');
 				
-				var isTimeAction = (action.id === 'time-rate' || action.id === 'time-set-jd' || action.id === 'time-set-datetime');
+				var isTimeAction = (action.id === 'time-rate' || action.id === 'time-set-jd');
 				
 				// Create converted params for timerate
 				var convertedParams = {};
@@ -2692,7 +2916,7 @@ define(["jquery", "api/remotecontrol"],
 				lines.push('const url = "' + baseUrl + '/api/' + action.path + '";');
 				lines.push('');
 				
-				var isTimeAction = (action.id === 'time-rate' || action.id === 'time-set-jd' || action.id === 'time-set-datetime');
+				var isTimeAction = (action.id === 'time-rate' || action.id === 'time-set-jd');
 				
 				// Create converted params for timerate
 				var convertedParams = {};
@@ -2800,7 +3024,7 @@ define(["jquery", "api/remotecontrol"],
 								var displayValue;
 								
 								// For timerate parameter, show user-friendly explanation
-								if (k === 'timerate' && (action.id === 'time-rate' || action.id === 'time-set-jd' || action.id === 'time-set-datetime')) {
+								if (k === 'timerate' && (action.id === 'time-rate' || action.id === 'time-set-jd')) {
 										var userRate = parseFloat(params.timerate);
 										if (!isNaN(userRate)) {
 												if (userRate === 0) {
@@ -3049,7 +3273,7 @@ define(["jquery", "api/remotecontrol"],
 				var fullPath = selectedAction.path;
 				
 				// Check if this action involves timerate parameter
-				var isTimeAction = (selectedAction.id === 'time-rate' || selectedAction.id === 'time-set-jd' || selectedAction.id === 'time-set-datetime');
+				var isTimeAction = (selectedAction.id === 'time-rate' || selectedAction.id === 'time-set-jd');
 				
 				// Create a copy of params with converted timerate values for server
 				var serverParams = {};

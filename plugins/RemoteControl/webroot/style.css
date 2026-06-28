@@ -610,8 +610,9 @@ button.button32:active {
 .scrollselect {
 	padding: 1px 0;
 	min-height: 12em;
-	/* margin-left: auto; */
-	/* margin-right: auto; */
+	min-width: 200px;
+	margin-left: auto;
+	margin-right: auto; 
 	box-sizing: border-box;
 	display: block;
 }
@@ -1356,7 +1357,7 @@ button.button32:active {
     border-radius: 6px;
     justify-content: flex-start;
     align-items: center;
-    max-height: clamp(150px, 30vh, 300px);
+    max-height: clamp(200px, 30vh, 400px);
     overflow-y: auto;
     overflow-x: hidden;
     width: 100%;
@@ -2074,7 +2075,7 @@ button.button32:active {
 
 .artwork-native-name {
     font-size: 10px;
-    color: #5D5F62;
+    color: #FFE0C6;
     font-style: italic;
     margin-top: 2px;
     line-height: 1.2;

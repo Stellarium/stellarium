@@ -1043,7 +1043,7 @@ define(["jquery", "api/remotecontrol"],
 																									<li><code>altitude</code> (number, optional): Altitude above sea level in meters.</li>
 																									<li><code>planet</code> (string, optional): Planet name (e.g., "Earth", "Mars", "Moon").</li>
 																									<li><code>name</code> (string, optional): Custom name for the location. If omitted, a name is auto-generated from coordinates.</li>
-																									<li><code>region</code> (string, optional): Geographic region (e.g., "Africa", "Europe").</li>
+																									<li><code>region</code> (string, optional): Geographic region (e.g., "South Africa", "Western Europe").</li>
 																							</ul>
 																					</li>
 																			</ul>
@@ -1063,7 +1063,7 @@ define(["jquery", "api/remotecontrol"],
 																	<div style="margin-top: 10px;">
 																			<strong>Examples:</strong>
 																			<ul style="margin-top: 5px; padding-left: 20px;">
-																					<li><code>id=Cairo, Egypt</code> → Move to Cairo using its database entry.</li>
+																					<li><code>id=Paris, Western Europe</code> → Move to Paris using its database entry.</li>
 																					<li><code>latitude=48.8566&longitude=2.3522&name=Paris</code> → Move to Paris (France) with custom name.</li>
 																					<li><code>latitude=30.0444&longitude=31.2357&altitude=100&planet=Earth</code> → Set exact coordinates in Cairo with 100m altitude.</li>
 																					<li><code>latitude=0&longitude=0&planet=Mars</code> → Move to the Martian equator (0°N, 0°E).</li>
@@ -1123,7 +1123,7 @@ define(["jquery", "api/remotecontrol"],
 																			<ul style="margin-top: 5px; padding-left: 20px;">
 																					<li>An array of region objects, each containing:</li>
 																					<ul style="padding-left: 20px;">
-																							<li><code>name</code>: Internal region name (e.g., "Africa", "Europe").</li>
+																							<li><code>name</code>: Internal region name (e.g., "North Africa", "Eastern Europe").</li>
 																							<li><code>name_i18n</code>: Localized region name (translated to the current Stellarium language).</li>
 																					</ul>
 																			</ul>
@@ -1173,9 +1173,9 @@ define(["jquery", "api/remotecontrol"],
 																	<div style="margin-top: 10px;">
 																			<strong>Behavior:</strong>
 																			<ul style="margin-top: 5px; padding-left: 20px;">
-																					<li>Searches the full location name, including city, region, and country information.</li>
+																					<li>Searches the full location name, including city, and region information.</li>
 																					<li>Wildcard mode is enabled by default: "new*" matches "New York" and "New Delhi".</li>
-																					<li>Search is case-insensitive ("paris" matches "Paris, France").</li>
+																					<li>Search is case-insensitive ("paris*" matches "Paris, Western Europe" + and other locations containing "Paris".)</li>
 																					<li>Returns an array of matching location names (strings).</li>
 																					<li>Results are not sorted by relevance; the list is returned in the order stored in the database.</li>
 																			</ul>
@@ -1184,9 +1184,9 @@ define(["jquery", "api/remotecontrol"],
 																	<div style="margin-top: 10px;">
 																			<strong>Examples:</strong>
 																			<ul style="margin-top: 5px; padding-left: 20px;">
-																					<li><code>term=Paris</code> → Returns "Paris, France" and other locations containing "Paris".</li>
+																					<li><code>term=Paris*</code> → Returns "Paris, Western Europe" and other locations containing "Paris".</li>
 																					<li><code>term=New*</code> → Returns all locations starting with "New" (New York, New Delhi, etc.).</li>
-																					<li><code>term=*polis</code> → Returns all locations ending with "polis" (Indianapolis, Minneapolis, etc.).</li>
+																					<li><code>term=*polis*</code> → Returns all locations ending with "polis" (Indianapolis, Minneapolis, etc.).</li>
 																					<li><code>term=west*asia</code> → Returns locations matching "west" then "asia" (e.g., "Western Asia").</li>
 																			</ul>
 																	</div>
@@ -2061,8 +2061,9 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 														<div style="margin-top: 10px;">
 																<strong>Usage:</strong>
 																<ul style="margin-top: 5px; padding-left: 20px;">
-																		<li>Use the landscape ID with the <code>LandscapeMgr.currentLandscapeID</code> property to change landscapes.</li>
-																		<li><code>curl -X POST -d "id=LandscapeMgr.currentLandscapeID&value=mars" /api/stelproperty/set</code></li>
+																		<li>Use the landscape ID with the <code>LandscapeMgr.setCurrentLandscapeID</code> property to change landscapes.</li>
+																		<li><code>curl -d "id=LandscapeMgr.currentLandscapeID" -d "value=trees" http://localhost:8090/api/stelproperty/set</code></li>
+																		<li><code>curl -d "id=LandscapeMgr.currentLandscapeID" -d "value=guereins" http://localhost:8090/api/stelproperty/set</code></li>
 																</ul>
 														</div>`,
 														parameters: {}
@@ -2092,7 +2093,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 																<strong>Examples:</strong>
 																<ul style="margin-top: 5px; padding-left: 20px;">
 																		<li><code>GET /api/view/landscapedescription/</code> → Returns HTML description of current landscape.</li>
-																		<li><code>GET /api/view/landscapedescription/image.png</code> → Returns the image file from the current landscape folder.</li>
+																		<li><code>GET /api/view/landscapedescription/image.png</code> → Returns the image file from the current landscape folder(Example: guereins1.png, guereins2.png ..).</li>
 																</ul>
 														</div>`,
 														parameters: {},
@@ -2108,7 +2109,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 																<span style="color: #B4B7B0;">
 																		Sky cultures define how constellations, asterisms, and celestial patterns are represented in Stellarium. 
 																		Each culture provides its own set of constellation lines, names, and artistic interpretations from 
-																		different civilizations and time periods (e.g., Western, Chinese, Polynesian, Egyptian, etc.).
+																		different civilizations and time periods (e.g., Modern, Chinese, Tibetan, Egyptian (dendera), etc.).
 																</span>
 														</div>
 														
@@ -2120,15 +2121,25 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 																<strong>Returned Data:</strong>
 																<ul style="margin-top: 5px; padding-left: 20px;">
 																		<li>Returns a JSON object where each key is a sky culture ID, and each value is the culture name (localized).</li>
-																		<li>Example: <code>{"modern": "Modern", "western": "Western", "chinese": "Chinese", "polynesian": "Polynesian"}</code></li>
+																		<li>Example: <code>{"modern": "Modern", "arabic_al-sufi": "Arabic (Al-Sufi)", "chinese": "Chinese", "korean": "Korean"}</code></li>
 																</ul>
 														</div>
 														
 														<div style="margin-top: 10px;">
 																<strong>Usage:</strong>
 																<ul style="margin-top: 5px; padding-left: 20px;">
+																		<li>StelProperty method:</li>
 																		<li>Use the sky culture ID with the <code>StelSkyCultureMgr.currentSkyCultureID</code> property to change cultures.</li>
-																		<li><code>curl -X POST -d "id=StelSkyCultureMgr.currentSkyCultureID&value=chinese" /api/stelproperty/set</code></li>
+																		<li>curl -d "id=StelSkyCultureMgr.currentSkyCultureID" -d "value=chinese" http://localhost:8090/api/stelproperty/set</code></li>
+																		<li>curl -d "id=StelSkyCultureMgr.currentSkyCultureID" -d "value=modern" http://localhost:8090/api/stelproperty/set</code></li>
+																		<li>curl -d "id=StelSkyCultureMgr.currentSkyCultureID" -d "value=arabic_al-sufi" http://localhost:8090/api/stelproperty/set</code></li>
+																</ul>
+																<ul style="margin-top: 5px; padding-left: 20px;">																		
+																		<li>script method:</li>
+																		<li>Use the sky culture ID with the <code>StelSkyCultureMgr.setCurrentSkyCultureID</code> with (/api/scripts/direct) endpoint to change cultures.</li>
+																		<li>curl -d "code=StelSkyCultureMgr.setCurrentSkyCultureID(%22modern%22)%3B" -d "useIncludes=false" http://localhost:8090/api/scripts/direct</code></li>
+																		<li>curl -d "code=StelSkyCultureMgr.setCurrentSkyCultureID(%22arabic_al-sufi%22)%3B" -d "useIncludes=false" http://localhost:8090/api/scripts/direct</code></li>
+																		
 																</ul>
 														</div>`,
 														parameters: {}
@@ -2197,15 +2208,24 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 																<strong>Returned Data:</strong>
 																<ul style="margin-top: 5px; padding-left: 20px;">
 																		<li>Returns a JSON object where each key is a projection type key, and each value is the projection name (localized).</li>
-																		<li>Common projections: <code>ProjectionStereographic</code>, <code>ProjectionOrthographic</code>, <code>ProjectionFisheye</code>, <code>ProjectionMercator</code></li>
+																		<li>Common projections: <code>'ProjectionPerspective'</code>, <code>'ProjectionFisheye'</code>, <code>'ProjectionMercator'</code>, <code>'ProjectionHammer'</code>, <code>'ProjectionMollweide'</code>, <code>'ProjectionCylinder'</code>, <code>'ProjectionOrthographic'</code>, <code>'ProjectionStereographic'</code>, <code>'ProjectionEqualArea'</code>, <code>'ProjectionMiller'</code>, <code>'ProjectionSinusoidal'</code></li>
 																</ul>
 														</div>
 														
 														<div style="margin-top: 10px;">
-																<strong>Usage:</strong>
+																<strong>Usage: set Projection Type</strong>
 																<ul style="margin-top: 5px; padding-left: 20px;">
+																		<li>StelProperty method:</li>
 																		<li>Use the projection key with the <code>StelCore.currentProjectionTypeKey</code> property to change projections.</li>
-																		<li><code>curl -X POST -d "id=StelCore.currentProjectionTypeKey&value=ProjectionFisheye" /api/stelproperty/set</code></li>
+																		<li><code>curl -d "id=StelCore.currentProjectionTypeKey" -d "value=ProjectionFisheye" http://localhost:8090/api/stelproperty/set</code></li>
+																		<li><code>curl -d "id=StelCore.currentProjectionTypeKey" -d "value=ProjectionStereographic" http://localhost:8090/api/stelproperty/set</code></li>
+																</ul>
+																<ul style="margin-top: 5px; padding-left: 20px;">
+																<li>Script method:</li>
+																<li>Use the projection key with the <code>StelCore.setProjectionMode</code> function with endpoint:(/api/scripts/direct) to change projections.</li>
+																<li><code>curl -d "code=core.setProjectionMode('ProjectionStereographic')%3B" -d "useIncludes=false" http://localhost:8090/api/scripts/direct</code></li>
+																<li><code>curl -d "code=core.setProjectionMode('ProjectionEqualArea')%3B" -d "useIncludes=false" http://localhost:8090/api/scripts/direct</code></li>
+																<li><code>curl -d "code=core.setProjectionMode('ProjectionMercator')%3B" -d "useIncludes=false" http://localhost:8090/api/scripts/direct</code></li>
 																</ul>
 														</div>
 														
