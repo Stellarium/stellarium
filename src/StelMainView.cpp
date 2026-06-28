@@ -1719,8 +1719,8 @@ void StelMainView::doScreenshot(void)
 	// First, image size:
 	glWidget->makeCurrent();
 	const auto pixelRatio = StelApp::getInstance().getDevicePixelsPerPixel();
-	int physImgWidth  = std::lround(stelScene->width() * pixelRatio);
-	int physImgHeight = std::lround(stelScene->height() * pixelRatio);
+	int physImgWidth  = int(stelScene->width() * pixelRatio);
+	int physImgHeight = int(stelScene->height() * pixelRatio);
 	bool nightModeWasEnabled=nightModeEffect->isEnabled();
 	nightModeEffect->setEnabled(false);
 	if (flagUseCustomScreenshotSize)
@@ -1784,8 +1784,8 @@ void StelMainView::doScreenshot(void)
 	StelProjector::StelProjectorParams pParams=core->getCurrentStelProjectorParams();
 	StelProjector::StelProjectorParams sParams=pParams;
 	//qCDebug(mainview) << "Screenshot Viewport: x" << pParams.viewportXywh[0] << "/y" << pParams.viewportXywh[1] << "/w" << pParams.viewportXywh[2] << "/h" << pParams.viewportXywh[3];
-	const auto virtImgWidth  = physImgWidth  / pixelRatio;
-	const auto virtImgHeight = physImgHeight / pixelRatio;
+	const auto virtImgWidth  = std::ceil(physImgWidth  / pixelRatio);
+	const auto virtImgHeight = std::ceil(physImgHeight / pixelRatio);
 	sParams.viewportXywh[2] = virtImgWidth;
 	sParams.viewportXywh[3] = virtImgHeight;
 

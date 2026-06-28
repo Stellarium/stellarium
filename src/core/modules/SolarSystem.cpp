@@ -1348,6 +1348,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const QString normalMapName = ( hidden ? "" : englishName.toLower().append("_normals.png")); // no normal maps for invisible objects!
 			const QString horizonMapName = ( hidden ? "" : englishName.toLower().append("_normals.png")); // no normal maps for invisible objects!
 
+			assert(dynamic_cast<KeplerOrbit*>(orbitPtr));
 			newP = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/radius", 0.0).toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -1405,6 +1406,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		else if (type == L1S("comet"))
 		{
 			minorBodies << englishName;
+			assert(dynamic_cast<KeplerOrbit*>(orbitPtr));
 			newP = PlanetP(new Comet(englishName,
 					      pd.value(secname+"/radius", 5.0).toDouble()/AU,
 					      pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -1470,7 +1472,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/horizon_map", englishName.toLower().append("_horizon.png")).toString(),
 					       pd.value(secname+"/model").toString(),
 					       posfunc,
-					       static_cast<KeplerOrbit*>(orbitPtr), // This remains Q_NULLPTR for the major planets, or has a KeplerOrbit for planet moons.
+					       orbitPtr, // This remains nullptr for the major planets, or has a KeplerOrbit for planet moons, or gimbalOrbit for observers.
 					       osculatingFunc,
 					       closeOrbit,
 					       pd.value(secname+"/hidden", false).toBool(),
