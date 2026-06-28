@@ -807,7 +807,7 @@
 									
 							</div><!-- END .skyculture-panel -->
 							
-							<!-- RIGHT PANEL: Sky Culture Options -->
+							<!-- FOOTER PANEL: Sky Culture Options -->
 							<div class="skyculture-options-panel">
 									
 									<h3><?= tr("Options")?></h3>
@@ -1200,6 +1200,7 @@
 									<li><a href="#sub-tab-actions-legacy"><?= tr("Actions")?></a></li>
 									<li><a href="#sub-tab-scripts-legacy"><?= tr("Scripts")?></a></li>
 									<li><a href="#sub-tab-code-generator"><?= tr("Code Generator")?></a></li>
+									<li><a href="#btn-gen-container"><?= tr("Button Generator")?></a></li>
 									<li><a href="#sub-tab-api-explorer"><?= tr("API Explorer")?></a></li>
 							</ul>
 							
@@ -1526,31 +1527,133 @@
 													<div class="sidebar-section">
 															<header><h3><?= tr("Quick Examples")?></h3></header>
 															<div id="quick-examples" class="quick-examples-list">
-															<div class="quick-example" data-example="moon-tonight"><?= tr("View the Moon Tonight")?></div>
+															<div class="quick-example" data-example="moon-tonight"><?= tr("View the Moon")?></div>
 															<div class="quick-example" data-example="observe-from-cairo"><?= tr("Observe from Cairo, Egypt")?></div>
 															<div class="quick-example" data-example="view-jupiter"><?= tr("Center View on Jupiter")?></div>
 															<div class="quick-example" data-example="speed-up-time"><?= tr("Speed Up Time (1h/sec)")?></div>
 															<div class="quick-example" data-example="toggle-equatorial-grid"><?= tr("Toggle Equatorial Grid")?></div>
 															<div class="quick-example" data-example="capture-screenshot"><?= tr("Capture Screenshot")?></div>
 															<div class="quick-example" data-example="toggle-atmosphere"><?= tr("Toggle Atmosphere")?></div>
-															<div class="quick-example" data-example="set-time-now"><?= tr("Set Time to Now")?></div>
 															<div class="quick-example" data-example="toggle-constellation-lines"><?= tr("Toggle Constellation Lines")?></div>
 															<div class="quick-example" data-example="zoom-to-andromeda"><?= tr("Zoom to Andromeda Galaxy")?></div>
 													</div>
 													</div>
-													
+											</aside>													
 													<div class="sidebar-section">
 															<header><h3><?= tr("Recent Codes")?></h3></header>
 															<div id="recent-codes" class="recent-codes-list">
 																	<span class="output-placeholder"><?= tr("No codes generated yet")?></span>
 															</div>
 													</div>
-											</aside>
 									</div>
 							</div>
-							
 							<!-- ========================================== -->
-							<!-- Tab 4: API Explorer                        -->
+							<!-- Tab 5: Button Generator Two Columns Layout -->
+							<!-- ========================================== -->
+							<div id="btn-gen-container">
+									<div id="btn-gen-main" class="block">
+											<header>
+													<h2>Button Generator</h2>
+													<span id="btn-gen-status" class="btn-gen-status"></span>
+											</header>
+
+											<!-- Two Columns Layout -->
+											<div class="btn-gen-two-columns">
+													<!-- LEFT COLUMN -->
+													<div class="btn-gen-left-column">
+															<!-- Step 1: Select Type -->
+															<div class="btn-gen-step">
+																	<h3>1. Select Type</h3>
+																	<select id="btn-gen-category" class="btn-gen-select">
+																			<option value="">-- Select type --</option>
+																			<option value="action">Action (StelAction)</option>
+																			<option value="property">Property (StelProperty)</option>
+																	</select>
+																	<div class="btn-gen-search-wrap">
+																			<input id="btn-gen-search" class="btn-gen-search" type="text" placeholder="Search... (ESC to clear)" />
+																			<span id="btn-gen-count" class="btn-gen-count"></span>
+																	</div>
+															</div>
+
+															<!-- Step 2: Select Action -->
+															<div id="btn-gen-action-step" class="btn-gen-step" style="display:none;">
+																	<h3>2. Select an Action</h3>
+																	<select id="btn-gen-action-list" class="btn-gen-list" size="10"></select>
+															</div>
+
+															<!-- Step 2: Select Property -->
+															<div id="btn-gen-property-step" class="btn-gen-step" style="display:none;">
+																	<h3>2. Select a Property</h3>
+																	<select id="btn-gen-property-list" class="btn-gen-list" size="10"></select>
+																	
+																	<div class="btn-gen-label-wrap">
+																			<label for="btn-gen-custom-label">Custom Label:</label>
+																			<input id="btn-gen-custom-label" class="btn-gen-label-input" type="text" placeholder="Enter display name" />
+																	</div>
+																	
+																	<div id="btn-gen-property-info" class="btn-gen-property-info" style="display:none;"></div>
+															</div>
+													</div>
+
+													<!-- RIGHT COLUMN -->
+													<div class="btn-gen-right-column">
+															<!-- Preview -->
+															<div class="btn-gen-step">
+																	<h3>Preview</h3>
+																	<div id="btn-gen-preview" class="btn-gen-preview">
+																			<div class="btn-gen-placeholder">Select a category and item to see preview</div>
+																	</div>
+															</div>
+
+															<!-- Generated HTML Code -->
+															<div class="btn-gen-step">
+																	<h3>Generated HTML Code</h3>
+																	<button id="btn-gen-copy-html" class="btn-gen-copy-btn">Copy HTML</button>
+																	<div id="btn-gen-code" class="btn-gen-code-wrap">										
+																			<div class="btn-gen-code-header">
+																					<span>HTML Code</span>
+																			</div>
+																			<div class="btn-gen-code">Select an item to generate HTML</div>
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div>
+															<!-- Add Buttons -->
+															<div class="btn-gen-add-wrap">
+																	<button id="btn-gen-add-btn" class="btn-gen-add-btn">[+] Add to My Buttons</button>
+																	<button id="btn-gen-add-all-actions" class="btn-gen-add-all-btn">[A] Add All Actions</button>
+																	<button id="btn-gen-add-all-properties" class="btn-gen-add-all-btn">[P] Add All Properties</button>
+															</div>
+
+															<!-- Add Category Section -->
+															<div class="btn-gen-category-add-wrap">
+																	<select id="btn-gen-category-actions-select" class="btn-gen-select"></select>
+																	<button id="btn-gen-add-category-actions" class="btn-gen-add-all-btn">[A] Add Category Actions</button>
+																	<select id="btn-gen-category-properties-select" class="btn-gen-select"></select>
+																	<button id="btn-gen-add-category-properties" class="btn-gen-add-all-btn">[P] Add Category Properties</button>
+															</div> 									
+											<!-- Full Width: Custom Buttons Container -->
+											<div class="btn-gen-custom-section">
+													<header>
+															<h3>My Custom Buttons</h3>
+															<span id="btn-gen-custom-count" class="btn-gen-custom-count">0</span>
+													</header>
+													
+													<div id="btn-gen-custom-container" class="btn-gen-custom-container">
+															<div class="btn-gen-empty-state">No custom buttons yet. Add some from the generator above.</div>
+													</div>
+
+													<div class="btn-gen-custom-footer">
+															<button id="btn-gen-export" class="btn-gen-export-btn">[↓] Export JSON</button>
+															<button id="btn-gen-import" class="btn-gen-import-btn">[↑] Import JSON</button>
+															<button id="btn-gen-clear" class="btn-gen-clear-btn">[X] Clear All</button>
+													</div>
+										 </div>
+							</div>	
+
+							<!-- ========================================== -->
+							<!-- Tab 6: API Explorer                        -->
 							<!-- ========================================== -->
 							<div id="sub-tab-api-explorer">
 									<div class="flex flex-wrap">
@@ -1718,7 +1821,7 @@
 														</div>
 												</div>
 													<div id="api-operation-panel" style="display:none;">
-															<!-- Dynamicaly generatedً -->
+															<!-- Dynamicaly generated -->
 													</div>
 											</section>
 									</div>

@@ -5,11 +5,11 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
     "./scripts", "./viewcontrol", "./location", "./search", "ui/skyculture", 
     "ui/skyculture-stats", "./gpcontroller", 
     "scripteditor/scriptEditor", "scripteditor/codeGenerator",
-		"scripteditor/apiExplorer", "scripteditor/actionsCategorized", "jquery-ui"
+		"scripteditor/apiExplorer", "scripteditor/actionsCategorized", "scripteditor/btnGenerator", "jquery-ui"
 ], function($, settings, globalize, rc, actionApi, propApi, timeui,
     JoystickQueue, actionsui, viewoptionsui, scriptsui, viewcontrolui, locationui,
     searchui, skyculture, skycultureStats, gpcontroller,
-    scriptEditor, codeGenerator, apiExplorer, actionsCategorized) {
+    scriptEditor, codeGenerator, apiExplorer, actionsCategorized, btnGenerator) {
     "use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
@@ -500,6 +500,21 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 				});
 		}
 		
+		// =====================================================================
+		// INITIALIZE BUTTON GENERATOR MODULE
+		// =====================================================================
+		if (typeof require !== 'undefined') {
+				require(["scripteditor/btnGenerator"], function(btnGenerator) {
+						if (btnGenerator && typeof btnGenerator.init === 'function') {
+								setTimeout(function() {
+										btnGenerator.init();
+										console.log("[MainUI] Button Generator module initialized");
+								}, 200);
+						} else {
+								console.warn("[MainUI] Button Generator module not available or missing init()");
+						}
+				});
+		}
 
 		// =====================================================================
 		// INITIALIZE ACTIONS CATEGORIZED BUTTONS MODULE

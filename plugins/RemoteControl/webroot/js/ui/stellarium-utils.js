@@ -823,6 +823,30 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         return currentIsolatedConstellation === searchTerm;
     }
 
+		/**
+		 * Toggle a boolean StelProperty
+		 * @param {string} prop - Property name
+		 */
+		function toggleBooleanProperty(prop) {
+				require(["api/properties"], function(p) {
+						var current = p.getStelProp(prop);
+						p.setStelProp(prop, !current);
+				});
+		}
+
+		/**
+		 * Set a color StelProperty from RGB values
+		 * @param {string} prop - Property name
+		 * @param {number} r - Red (0-1)
+		 * @param {number} g - Green (0-1)
+		 * @param {number} b - Blue (0-1)
+		 */
+		function setColorProperty(prop, r, g, b) {
+				require(["api/properties"], function(p) {
+						p.setStelProp(prop, "[" + r + ", " + g + ", " + b + "]");
+				});
+		}
+
     // =====================================================================
     // INITIALIZATION
     // =====================================================================
