@@ -31,7 +31,7 @@
 //    * Fix to work under stellarium 0.19
 //    * Add change log, version, and author list to header
 // 2026-06-29   Nicolas Martignoni (martignoni)
-//    * Remove reference to core.getSkyLanguage and core.setSkyLanguage (removed in Stellarium 26.3)
+//    * Remove reference to core.getSkyLanguage and core.setSkyLanguage (removed in Stellarium 25.3)
 
 // declare a global variable to store saved state
 var savedStates = new Array();
