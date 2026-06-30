@@ -154,9 +154,15 @@ void ScmConstellationDialog::retranslate()
 
 void ScmConstellationDialog::close()
 {
+	if (constellationBeingEdited != nullptr)
+	{
+		// If we are editing a constellation, we need to show the original one again
+		constellationBeingEdited->isHidden = false;
+	}
 	setVisible(false);
 	maker->setIsLineDrawEnabled(false);
 	maker->setCanCreateConstellations(true);
+	resetDialog();
 }
 
 void ScmConstellationDialog::createDialogContent()
@@ -200,7 +206,7 @@ void ScmConstellationDialog::createDialogContent()
 	ui->tooltipBtn->setToolTip(artworkToolTip);
 
 	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmConstellationDialog::saveConstellation);
-	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmConstellationDialog::cancel);
+	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmConstellationDialog::close);
 
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmConstellationDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmConstellationDialog::handleFontChanged);
@@ -460,17 +466,6 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	return true;
 }
 
-void ScmConstellationDialog::cancel()
-{
-	if (constellationBeingEdited != nullptr)
-	{
-		// If we are editing a constellation, we need to show the original one again
-		constellationBeingEdited->isHidden = false;
-	}
-	resetDialog();
-	ScmConstellationDialog::close();
-}
-
 void ScmConstellationDialog::saveConstellation()
 {
 	if (canConstellationBeSaved())
@@ -498,7 +493,6 @@ void ScmConstellationDialog::saveConstellation()
 		}
 
 		maker->updateSkyCultureDialog();
-		resetDialog();
 		ScmConstellationDialog::close();
 	}
 }
