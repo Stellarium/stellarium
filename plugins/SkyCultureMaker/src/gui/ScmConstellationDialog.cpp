@@ -93,9 +93,11 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 
 	// Loads the artwork
 	imageItem->setArtwork(constellation->getArtwork());
-	ui->artwork_image->centerOn(imageItem);
-	ui->artwork_image->fitInView(imageItem, Qt::KeepAspectRatio);
-	ui->artwork_image->show();
+	if (imageItem->isVisible())
+	{
+		ui->artwork_image->fitInView(imageItem, Qt::KeepAspectRatio);
+		ui->artwork_image->show();
+	}
 
 	updateArtwork();
 }
@@ -376,10 +378,12 @@ void ScmConstellationDialog::bindSelectedStar()
 
 void ScmConstellationDialog::tabChanged(int index)
 {
-	Q_UNUSED(index);
 	ui->penBtn->setChecked(false);
 	ui->eraserBtn->setChecked(false);
 	maker->setDrawTool(scm::DrawTools::None);
+	// image needs to be fitted here so the scale is correct
+	if (index == 2 && imageItem->isVisible())
+		ui->artwork_image->fitInView(imageItem, Qt::KeepAspectRatio);
 }
 
 bool ScmConstellationDialog::canConstellationBeSaved() const

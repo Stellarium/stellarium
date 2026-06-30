@@ -124,6 +124,12 @@ public:
 	void setNewSkyCulture();
 
 	/**
+	 * @brief Sets the current sky culture.
+	 * @param skyCulture The sky culture to set.
+	 */
+	void setSkyCulture(scm::ScmSkyCulture *skyCulture);
+
+	/**
 	 * @brief Gets the current set sky culture.
 	 */
 	scm::ScmSkyCulture *getCurrentSkyCulture();
@@ -142,6 +148,12 @@ public:
 	 * @brief Triggers an update of the sky culture dialog.
 	 */
 	void updateSkyCultureDialog();
+
+	/**
+	 * @brief Populates all fields of the sky culture dialog from the current sky culture.
+	 *        Call this after setSkyCulture() when entering edit mode.
+	 */
+	void populateSkyCultureDialog();
 
 	/**
 	 * @brief Sets the current sky culture description.

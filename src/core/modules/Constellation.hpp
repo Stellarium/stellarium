@@ -52,7 +52,7 @@ class Constellation : public StelObject
 	friend class ConstellationMgr;
 public:
 	static const QString CONSTELLATION_TYPE;
-private:
+
 	Constellation();
 	~Constellation() override;
 
@@ -131,6 +131,17 @@ public:
 	void setNarration(const QString &narration);
 	//! retrieve narration text, i.e. the text from description.md. @param flags is ignored.
 	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
+
+	//! Returns true if this is a dark constellation (outline of a dark nebula).
+	bool isDarkConstellation() const { return !dark_constellation.empty(); }
+	//! Returns the flat line-point array (every consecutive pair is one segment).
+	//! For dark constellations use getDarkConstellationLines().
+	const std::vector<StelObjectP>& getConstellationLines() const { return constellation; }
+	//! Returns the flat dark-constellation line-point array.
+	const std::vector<StelObjectP>& getDarkConstellationLines() const { return dark_constellation; }
+	//! Full cultural-name record, including fields not exposed by the individual getters
+	//! (transliteration, IPA, byname, special).
+	const CulturalName& getCulturalNameData() const { return culturalName; }
 private:
 	//! Underlying worker
 	QString getCultureLabel(StelObject::CulturalDisplayStyle style) const;
