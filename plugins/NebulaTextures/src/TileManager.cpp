@@ -40,9 +40,8 @@ TileManager::TileManager() {}
 //! @return Pointer to the StelSkyImageTile if found, or nullptr otherwise.
 StelSkyImageTile* TileManager::getTile(const QString& key)
 {
-	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-	QString keyname = qc_(key, "dataset short name");
-	auto it = skyLayerMgr->allSkyLayers.find(keyname);
+	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);	
+	auto it = skyLayerMgr->allSkyLayers.find(key);
 	if (it == skyLayerMgr->allSkyLayers.end())
 		return Q_NULLPTR;
 

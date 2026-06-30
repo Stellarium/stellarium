@@ -54,7 +54,7 @@ public:
 
 	//! Return the short name for this image to be used in the loading bar.
 	//! Note: ShortName should be used in the same form by NebulaTexturesDialog::get_aTile (NebulaTextures Plugin).
-	QString getShortName() const override {return qc_(shortName, "dataset short name");}
+	QString getShortName() const override {return shortName;}
 
 	//! Return true if an error occurred while loading the data.
 	bool hasErrorOccured() const {return errorOccured;}
