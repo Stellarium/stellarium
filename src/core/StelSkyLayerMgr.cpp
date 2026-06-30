@@ -160,7 +160,7 @@ void StelSkyLayerMgr::removeSkyLayer(const QString& key)
 			// TODO: This list should contain all possible names of layers that are
 			//       not inserted by scripts and therefore should not be accidentally deleted.
 			//       So far I know of Nebulae, and maybe the custom nebulae from the NebulaeTextures plugin.
-			QStringList permanentList= {"Nebulae"};
+			QStringList permanentList= {q_("Nebulae")};
 			//qDebug() << "Removing SkyImage " << k;
 			if (! permanentList.contains(k))
 				removeSkyLayer(k);
