@@ -175,15 +175,13 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 		scm::ScmConstellation &constellation = sc->addConstellation(tempCons.getShortName(), lines, isDark);
 
 		// Copy name fields parsed by Constellation::read() into ScmCulturalName
-		const StelObject::CulturalName &base = tempCons.getCulturalNameData();
 		scm::ScmCulturalName cn;
-		cn.translated      = base.translated;
-		cn.native          = base.native;
-		cn.pronounce       = base.pronounce;
-		cn.transliteration = base.transliteration;
-		cn.IPA             = base.IPA;
-		cn.byname          = base.byname;
-		cn.special         = base.special;
+		cn.translated      = tempCons.getEnglishName();
+		cn.native          = tempCons.getNameNative();
+		cn.pronounce       = tempCons.getNamePronounce();
+		cn.transliteration = tempCons.getTransliteration();
+		cn.IPA             = tempCons.getIPA();
+		cn.byname          = tempCons.getByname();
 
 		// SCM-specific field not parsed by Constellation::read(): references
 		const QJsonObject nameObj = consObj["common_name"].toObject();

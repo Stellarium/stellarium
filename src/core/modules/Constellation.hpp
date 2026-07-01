@@ -114,14 +114,20 @@ public:
 	QString getNameI18n() const override {return culturalName.translatedI18n;}
 	//! Get the English name for the Constellation.
 	QString getEnglishName() const override {return culturalName.translated;}
-	//! Get the native name for the Constellation
+	//! Get the native name for the Constellation.
 	QString getNameNative() const override {return culturalName.native;}
-	//! Get (translated) pronouncement of the native name for the Constellation
+	//! Get (translated) pronouncement of the native name for the Constellation.
 	QString getNamePronounce() const override {return (culturalName.pronounceI18n.isEmpty() ? culturalName.native : culturalName.pronounceI18n);}
 	//! Get the short name for the Constellation (returns the translated version of abbreviation).
 	QString getShortNameI18n() const {return abbreviationI18n;}
 	//! Get the short name for the Constellation (returns the untranslated version of abbreviation).
 	QString getShortName() const {return abbreviation;}
+	//! Get the transliteration of the native name for the Constellation.
+	QString getTransliteration() const {return culturalName.transliteration;}
+	//! Get the IPA (International Phonetic Alphabet) representation of the native name for the Constellation.
+	QString getIPA() const {return culturalName.IPA;}
+	//! Get the byname for the Constellation.
+	QString getByname() const {return culturalName.byname;}
 
 	//! Combine screen label from various components, depending on settings in SkyCultureMgr
 	QString getScreenLabel() const override;
@@ -132,16 +138,13 @@ public:
 	//! retrieve narration text, i.e. the text from description.md. @param flags is ignored.
 	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
 
-	//! Returns true if this is a dark constellation (outline of a dark nebula).
+	//! Returns true if this is a dark constellation.
 	bool isDarkConstellation() const { return !dark_constellation.empty(); }
-	//! Returns the flat line-point array (every consecutive pair is one segment).
+	//! Returns the line-point array (every consecutive pair is one segment).
 	//! For dark constellations use getDarkConstellationLines().
 	const std::vector<StelObjectP>& getConstellationLines() const { return constellation; }
-	//! Returns the flat dark-constellation line-point array.
+	//! Returns the dark-constellation line-point array.
 	const std::vector<StelObjectP>& getDarkConstellationLines() const { return dark_constellation; }
-	//! Full cultural-name record, including fields not exposed by the individual getters
-	//! (transliteration, IPA, byname, special).
-	const CulturalName& getCulturalNameData() const { return culturalName; }
 private:
 	//! Underlying worker
 	QString getCultureLabel(StelObject::CulturalDisplayStyle style) const;
