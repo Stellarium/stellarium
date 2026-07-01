@@ -706,7 +706,8 @@ void ScmSkyCultureDialog::populateFromSkyCulture(scm::ScmSkyCulture *sc)
 
 	const scm::Description &desc = sc->getDescription();
 
-	// Name — block textChanged so the signal doesn't overwrite the loaded ID
+	// Name
+	// block textChanged so the signal doesnt overwrite the loaded ID
 	ui->skyCultureNameLE->blockSignals(true);
 	ui->skyCultureNameLE->setText(desc.name);
 	ui->skyCultureNameLE->blockSignals(false);
@@ -756,7 +757,7 @@ void ScmSkyCultureDialog::populateFromSkyCulture(scm::ScmSkyCulture *sc)
 		}
 	}
 
-	// References — parse " - [#N]: text" lines back into the tree widget
+	// References
 	resetReferences();
 	static const QRegularExpression refRx(R"(^\s*-\s*\[#\d+\]:\s*(.+)$)");
 	for (const QString &line : desc.references.split('\n'))
@@ -784,7 +785,7 @@ void ScmSkyCultureDialog::populateFromSkyCulture(scm::ScmSkyCulture *sc)
 	cnEditingRow = -1;
 	cnRefreshTable();
 
-	// Locations — restore to map view and tree without re-adding to sky culture (already there)
+	// Locations
 	ui->polygonInfoTreeWidget->clear();
 	ui->scmGeoLocGraphicsView->reset();
 	for (const auto &poly : sc->getLocations())

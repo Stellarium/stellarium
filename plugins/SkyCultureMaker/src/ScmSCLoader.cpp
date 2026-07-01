@@ -179,8 +179,8 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 		cn.translated      = tempCons.getEnglishName();
 		cn.native          = tempCons.getNameNative();
 		cn.pronounce       = tempCons.getNamePronounce();
-		cn.transliteration = tempCons.getTransliteration();
-		cn.IPA             = tempCons.getIPA();
+		cn.transliteration = tempCons.getNameTransliteration();
+		cn.IPA             = tempCons.getNameIPA();
 		cn.byname          = tempCons.getByname();
 
 		// SCM-specific field not parsed by Constellation::read(): references
@@ -426,6 +426,7 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 	desc.license              = scm::LicenseType::NONE;
 	for (const auto &lc : scm::LICENSES)
 	{
+		qDebug() << "ScmSCLoader: checking license" << lc.second.name << "against" << licenseName;
 		if (lc.second.name == licenseName)
 		{
 			desc.license = lc.first;

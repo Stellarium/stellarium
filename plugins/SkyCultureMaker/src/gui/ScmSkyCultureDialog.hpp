@@ -68,14 +68,16 @@ public:
 	 */
 	void resetDialog();
 
-	/**	 * @brief Populates all UI fields from an already-loaded sky culture.
+	/**	
+	 * @brief Populates all UI fields from a loaded sky culture.
 	 *        Call this after setSkyCulture() when entering edit mode.
 	 *
 	 * @param sc The sky culture to populate from (must not be nullptr).
 	 */
 	void populateFromSkyCulture(scm::ScmSkyCulture *sc);
 
-	/**	 * @brief Updates the add constellation button state.
+	/**	
+	 * @brief Updates the add constellation button state.
 	 *
 	 * @param enabled Whether the button should be enabled or disabled.
 	 */
