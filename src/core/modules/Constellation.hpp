@@ -116,12 +116,14 @@ public:
 	QString getEnglishName() const override {return culturalName.translated;}
 	//! Get the native name for the Constellation
 	QString getNameNative() const override {return culturalName.native;}
-	//! Get (translated) pronouncement of the native name for the Constellation
+	//! Get (translated) pronunciation of the native name for the Constellation
 	QString getNamePronounce() const override {return (culturalName.pronounceI18n.isEmpty() ? culturalName.native : culturalName.pronounceI18n);}
 	//! Get the short name for the Constellation (returns the translated version of abbreviation).
 	QString getShortNameI18n() const {return abbreviationI18n;}
 	//! Get the short name for the Constellation (returns the untranslated version of abbreviation).
 	QString getShortName() const {return abbreviation;}
+	//! Get the cultural name for the Constellation.	
+	const CulturalName& getCulturalName() const { return culturalName; }
 
 	//! Combine screen label from various components, depending on settings in SkyCultureMgr
 	QString getScreenLabel() const override;

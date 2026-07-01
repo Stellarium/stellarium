@@ -30,6 +30,9 @@ namespace scm
 
 struct ScmCulturalName : public StelObject::CulturalName
 {
+	ScmCulturalName() = default;
+	explicit ScmCulturalName(const StelObject::CulturalName &base) : StelObject::CulturalName(base) {}
+
 	//! Integers that refer to the references list in description.md.
 	QList<int> references;
 
