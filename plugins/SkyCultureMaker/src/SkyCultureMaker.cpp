@@ -428,8 +428,7 @@ void SkyCultureMaker::updateSkyCultureDialog()
 
 void SkyCultureMaker::populateSkyCultureDialog()
 {
-	if (!isValidDialog(scm::DialogID::SkyCultureDialog) || currentSkyCulture == nullptr)
-		return;
+	if (!isValidDialog(scm::DialogID::SkyCultureDialog) || currentSkyCulture == nullptr) return;
 	static_cast<ScmSkyCultureDialog *>(dialogMap[scm::DialogID::SkyCultureDialog])
 		->populateFromSkyCulture(currentSkyCulture);
 }

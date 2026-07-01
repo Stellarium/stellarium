@@ -37,6 +37,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QRegularExpression>
 #include <QTextStream>
 #include <QWidget>
 
@@ -45,7 +46,7 @@ scm::ScmSkyCulture *ScmSCLoader::loadFromDirectory(const QDir &dir, QString *err
 	if (!dir.exists())
 	{
 		if (errorMsg) *errorMsg = QObject::tr("Directory does not exist: %1").arg(dir.absolutePath());
-		qWarning() << "ScmSCLoader: directory does not exist:" << dir.absolutePath();
+		qWarning() << "SkyCultureMaker: directory does not exist:" << dir.absolutePath();
 		return nullptr;
 	}
 
@@ -79,7 +80,7 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 	if (!file.open(QIODevice::ReadOnly))
 	{
 		if (errorMsg) *errorMsg = QObject::tr("Cannot open index.json: %1").arg(file.errorString());
-		qWarning() << "ScmSCLoader: cannot open" << filePath << ":" << file.errorString();
+		qWarning() << "SkyCultureMaker: cannot open" << filePath << ":" << file.errorString();
 		return false;
 	}
 
@@ -90,7 +91,7 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 	if (parseError.error != QJsonParseError::NoError)
 	{
 		if (errorMsg) *errorMsg = QObject::tr("Failed to parse index.json: %1").arg(parseError.errorString());
-		qWarning() << "ScmSCLoader: JSON parse error in" << filePath << ":" << parseError.errorString();
+		qWarning() << "SkyCultureMaker: JSON parse error in" << filePath << ":" << parseError.errorString();
 		return false;
 	}
 	if (!doc.isObject())
@@ -135,7 +136,7 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 		sc->setDescription(desc);
 	}
 	const QJsonArray constellationsArr = root["constellations"].toArray();
-	if (constellationsArr.isEmpty()) qWarning() << "ScmSCLoader: no constellations in" << filePath;
+	if (constellationsArr.isEmpty()) qWarning() << "SkyCultureMaker: no constellations in" << filePath;
 
 	StarMgr *starMgr = GETSTELMODULE(StarMgr);
 	StelCore *core   = StelApp::getInstance().getCore();
@@ -146,7 +147,7 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 		Constellation tempCons;
 		if (!tempCons.read(consObj, starMgr))
 		{
-			qWarning() << "ScmSCLoader: failed to read constellation" << consObj["id"].toString();
+			qWarning() << "SkyCultureMaker: failed to read constellation" << consObj["id"].toString();
 			continue;
 		}
 
@@ -178,7 +179,7 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 		scm::ScmCulturalName cn;
 		cn.translated      = tempCons.getEnglishName();
 		cn.native          = tempCons.getNameNative();
-		cn.pronounce       = tempCons.getNamePronounce();
+		cn.pronounce       = tempCons.getNamePronounce(); // TODO: this returns the same as getNameNative()
 		cn.transliteration = tempCons.getNameTransliteration();
 		cn.IPA             = tempCons.getNameIPA();
 		cn.byname          = tempCons.getByname();
@@ -218,7 +219,7 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 				}
 				else
 				{
-					qWarning() << "ScmSCLoader: cannot load artwork image" << imgPath;
+					qWarning() << "SkyCultureMaker: cannot load artwork image" << imgPath;
 				}
 			}
 		}
@@ -271,7 +272,7 @@ bool ScmSCLoader::parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc)
 	QFile file(filePath);
 	if (!file.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "ScmSCLoader: cannot open" << filePath;
+		qWarning() << "SkyCultureMaker: cannot open" << filePath;
 		return false;
 	}
 
@@ -281,7 +282,7 @@ bool ScmSCLoader::parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc)
 
 	if (parseError.error != QJsonParseError::NoError || !doc.isObject())
 	{
-		qWarning() << "ScmSCLoader: failed to parse territory.geojson:" << parseError.errorString();
+		qWarning() << "SkyCultureMaker: failed to parse territory.geojson:" << parseError.errorString();
 		return false;
 	}
 
@@ -329,7 +330,7 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 	QFile file(filePath);
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "ScmSCLoader: cannot open" << filePath;
+		qWarning() << "SkyCultureMaker: cannot open" << filePath;
 		return false;
 	}
 
@@ -380,23 +381,32 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 	QHash<Section, QString> sectionContent;
 	QString name;
 
+	// scans for markdown headings with depth 1-6
+	static QRegularExpression headingRe("^(#{1,6})\\s+(.+)$");
+
 	for (const QString &rawLine : text.split('\n'))
 	{
-		if (rawLine.startsWith("# ") && name.isEmpty())
+		const QRegularExpressionMatch m = headingRe.match(rawLine);
+		if (m.hasMatch())
 		{
-			name = rawLine.mid(2).trimmed();
-			continue;
-		}
-		if (rawLine.startsWith("## "))
-		{
-			const Section s = sectionOf(rawLine.mid(3));
-			current         = (s != Section::None) ? s : Section::None;
-			continue;
-		}
-		if (rawLine.startsWith("### "))
-		{
-			const Section s = sectionOf(rawLine.mid(4));
-			current         = (s != Section::None) ? s : current;
+			const QString heading = m.captured(2).trimmed();
+			const Section s       = sectionOf(heading);
+			// heading matches a known section
+			if (s != Section::None)
+			{
+				current = s;
+			}
+			// heading does not match a known section and we haven't found the SC name yet
+			// -> becomes SC name
+			else if (name.isEmpty())
+			{
+				name    = heading;
+				current = Section::None;
+			}
+			else
+			{
+				current = Section::None;
+			}
 			continue;
 		}
 		if (current != Section::None) sectionContent[current] += rawLine + "\n";
@@ -426,7 +436,6 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 	desc.license              = scm::LicenseType::NONE;
 	for (const auto &lc : scm::LICENSES)
 	{
-		qDebug() << "ScmSCLoader: checking license" << lc.second.name << "against" << licenseName;
 		if (lc.second.name == licenseName)
 		{
 			desc.license = lc.first;
