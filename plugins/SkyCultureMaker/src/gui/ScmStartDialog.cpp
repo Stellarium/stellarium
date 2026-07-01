@@ -131,7 +131,7 @@ void ScmStartDialog::startScmEditingProcess()
 {
 	const QString defaultPath = StelFileMgr::getUserDir() + "/skycultures";
 	QString errorMsg;
-	scm::ScmSkyCulture *sc = ScmSCLoader::selectAndLoad(dialog, defaultPath, &errorMsg);
+	scm::ScmSkyCulture *sc = ScmSCLoader::selectAndLoad(nullptr, defaultPath, &errorMsg);
 	if (sc == nullptr)
 	{
 		if (!errorMsg.isEmpty())
