@@ -136,10 +136,10 @@ private:
 	QPolygonF convertViewToWGS84(const QPolygonF &viewCoordinatePolygon);
 
 	/**
-	 * @brief Convert the points of the given polygon from real-world (WGS84) coordinates
-	 *        to view coordinates. This is the exact inverse of convertViewToWGS84().
+	 * @brief Convert the points of the given polygon from real-world coordinates
+	 *        to view coordinates.
 	 *
-	 * @param A float point polygon in WGS84 (lon/lat) coordinates.
+	 * @param A float point polygon in real-world coordinates.
 	 * @return A float point polygon in view coordinates.
 	 */
 	QPolygonF convertWGS84ToView(const QPolygonF &wgs84Polygon);

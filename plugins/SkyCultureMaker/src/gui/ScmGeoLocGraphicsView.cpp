@@ -29,20 +29,18 @@
 #include <QJsonDocument>
 #include <cmath> // for M_PI
 
-namespace {
-// Web Mercator (EPSG:3857) constants — kept in one place so convertViewToWGS84
-// and convertWGS84ToView always use the same values.
-
-// Earth's equatorial circumference in metres (2π × WGS84 semi-major axis).
-constexpr double MERCATOR_CIRCUMFERENCE   = 40075014.1343236863613128;
+namespace
+{
+// Earth's equatorial circumference in metres (2π * WGS84 semi-major axis).
+constexpr double MERCATOR_CIRCUMFERENCE = 40075014.1343236863613128;
 // Half circumference: the x-extent of the map in Mercator metres.
-constexpr double MERCATOR_HALF_WIDTH      = 20037507.0671618431806564;
-// Semi-major axis × π, used by the standard Mercator Lon/Lat formula.
+constexpr double MERCATOR_HALF_WIDTH = 20037507.0671618431806564;
+// Semi-major axis * π, used by the standard Mercator Lon/Lat formula.
 constexpr double MERCATOR_HALF_WIDTH_PROJ = 20037508.3427892439067363739014;
 // Height of this particular SVG map in Mercator metres (y points downward).
-constexpr double MAP_HEIGHT_M             = 37274855.60442495346069336;
+constexpr double MAP_HEIGHT_M = 37274855.60442495346069336;
 // Mercator Y at the top edge of the SVG map (map y = 0).
-constexpr double MAP_TOP_M                = 18418386.3090785145759583;
+constexpr double MAP_TOP_M = 18418386.3090785145759583;
 } // namespace
 
 ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
@@ -421,12 +419,11 @@ QPolygonF ScmGeoLocGraphicsView::convertWGS84ToView(const QPolygonF &wgs84Polygo
 
 	for (const auto &pt : wgs84Polygon)
 	{
-		// Step 1: Lon/Lat (EPSG:4326) → Mercator metres (EPSG:3857)
+		// Step 1: Lon/Lat (EPSG:4326) to Mercator metres (EPSG:3857)
 		double xInMeter = pt.x() * MERCATOR_HALF_WIDTH_PROJ / 180.0;
-		double yInMeter = std::log(std::tan((pt.y() + 90.0) * M_PI / 360.0))
-		                  * MERCATOR_HALF_WIDTH_PROJ / M_PI;
+		double yInMeter = std::log(std::tan((pt.y() + 90.0) * M_PI / 360.0)) * MERCATOR_HALF_WIDTH_PROJ / M_PI;
 
-		// Step 2: Mercator metres → view coordinates
+		// Step 2: Mercator metres to view coordinates
 		double x = (xInMeter + MERCATOR_HALF_WIDTH) / MERCATOR_CIRCUMFERENCE * defaultRect.width();
 		double y = (yInMeter - MAP_TOP_M) / (-MAP_HEIGHT_M) * defaultRect.height();
 		result.append(QPointF(x, y));
@@ -437,8 +434,8 @@ QPolygonF ScmGeoLocGraphicsView::convertWGS84ToView(const QPolygonF &wgs84Polygo
 
 void ScmGeoLocGraphicsView::addExistingPolygon(const scm::CulturePolygon &polygon)
 {
-	ScmPreviewPolygonItem *poly = new ScmPreviewPolygonItem(
-		polygon.beginTime, polygon.endTime, convertWGS84ToView(polygon.polygon));
+	ScmPreviewPolygonItem *poly = new ScmPreviewPolygonItem(polygon.beginTime, polygon.endTime,
+	                                                        convertWGS84ToView(polygon.polygon));
 	scene()->addItem(poly);
 	polygonIdentifierMap.insert(polygon.id, poly);
 	updateCultureVisibility();
