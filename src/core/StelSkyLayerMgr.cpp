@@ -222,7 +222,7 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 		Q_ASSERT(elem->progressBar==Q_NULLPTR);
 		elem->progressBar = StelApp::getInstance().addProgressBar();
 		QString serverStr = elem->layer->getShortServerCredits();
-		QString shortName = elem->layer->getShortName();
+		QString shortName = qc_(elem->layer->getShortName(), "dataset short name");
 		if (serverStr.isEmpty())
 		{
 			// TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%'" in progress bar
