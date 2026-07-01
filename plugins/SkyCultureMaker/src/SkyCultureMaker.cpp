@@ -40,6 +40,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QMouseEvent>
 #include <QPixmap>
 

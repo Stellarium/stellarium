@@ -31,14 +31,10 @@
 #include "StelCore.hpp"
 #include "StelDialog.hpp"
 #include "StelModule.hpp"
-#include "StelObjectModule.hpp"
 #include "StelTranslator.hpp"
-#include "VecMath.hpp"
 #include "types/DialogID.hpp"
 #include <QDir>
-#include <QFile>
 #include <QFont>
-#include <QMessageBox>
 
 class QPixmap;
 class StelButton;

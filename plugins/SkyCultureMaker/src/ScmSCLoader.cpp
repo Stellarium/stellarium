@@ -37,6 +37,8 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QList>
+#include <QMap>
 #include <QRegularExpression>
 #include <QTextStream>
 #include <QWidget>
@@ -363,7 +365,7 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 	};
 
 	Section current = Section::None;
-	QHash<Section, QString> sectionContent;
+	QMap<Section, QString> sectionContent;
 	QString name;
 
 	// scans for markdown headings with depth 1-6
