@@ -699,13 +699,8 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	return desc;
 }
 
-void ScmSkyCultureDialog::populateFromSkyCulture(scm::ScmSkyCulture *sc)
+void ScmSkyCultureDialog::populateDescriptionTab(const scm::Description &desc)
 {
-	if (!sc || !ui || !dialog)
-		return;
-
-	const scm::Description &desc = sc->getDescription();
-
 	// Name
 	// block textChanged so the signal doesnt overwrite the loaded ID
 	ui->skyCultureNameLE->blockSignals(true);
@@ -756,54 +751,70 @@ void ScmSkyCultureDialog::populateFromSkyCulture(scm::ScmSkyCulture *sc)
 			break;
 		}
 	}
+}
 
-	// References
+void ScmSkyCultureDialog::populateReferences(const QString &references)
+{
 	resetReferences();
+	// matches lines like: " - [#1]: Reference text"
 	static const QRegularExpression refRx(R"(^\s*-\s*\[#\d+\]:\s*(.+)$)");
-	for (const QString &line : desc.references.split('\n'))
+	for (const QString &line : references.split('\n'))
 	{
 		const auto m = refRx.match(line.trimmed());
 		if (!m.hasMatch()) continue;
-		const int num    = ui->referencesList->topLevelItemCount() + 1;
-		auto *item       = new QTreeWidgetItem({QString("#%1").arg(num), m.captured(1).trimmed()});
+		const int num = ui->referencesList->topLevelItemCount() + 1;
+		auto *item    = new QTreeWidgetItem({QString("#%1").arg(num), m.captured(1).trimmed()});
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
 		ui->referencesList->addTopLevelItem(item);
 	}
 	updateReferencesButtons();
+}
 
-	// Constellations list
-	setConstellations(sc->getConstellations());
-	updateAddConstellationButtons(true);
-
-	// Common names
+void ScmSkyCultureDialog::populateCommonNames(const QMap<QString, QList<scm::ScmCulturalName>> &culturalNames)
+{
 	cnEntries.clear();
-	for (auto it = sc->getCulturalNames().constBegin(); it != sc->getCulturalNames().constEnd(); ++it)
+	for (auto it = culturalNames.constBegin(); it != culturalNames.constEnd(); ++it)
 	{
 		for (const auto &cn : it.value())
 			cnEntries.append({it.key(), cn});
 	}
 	cnEditingRow = -1;
 	cnRefreshTable();
+}
 
-	// Locations
+void ScmSkyCultureDialog::populateLocationsTab(scm::ScmSkyCulture *sc)
+{
 	ui->polygonInfoTreeWidget->clear();
 	ui->scmGeoLocGraphicsView->reset();
 	for (const auto &poly : sc->getLocations())
 	{
 		ui->scmGeoLocGraphicsView->addExistingPolygon(poly);
 		QString endTimeStr = QString::number(poly.endTime);
-		if (poly.endTime >= ui->skyCultureCurrentTimeSpinBox->maximum())
-			endTimeStr = "∞";
+		if (poly.endTime >= ui->skyCultureCurrentTimeSpinBox->maximum()) endTimeStr = "∞";
 		ui->polygonInfoTreeWidget->addTopLevelItem(
 			new ScmPolygonInfoTreeItem(poly.id, poly.beginTime, endTimeStr, poly.polygon.size()));
 	}
 	ui->polygonCountValueLabel->setText(QString::number(sc->getLocations().size()));
+}
+
+void ScmSkyCultureDialog::populateFromSkyCulture(scm::ScmSkyCulture *sc)
+{
+	if (!sc || !ui || !dialog) return;
+
+	const scm::Description &desc = sc->getDescription();
+	populateDescriptionTab(desc);
+	populateReferences(desc.references);
+
+	setConstellations(sc->getConstellations());
+	updateAddConstellationButtons(true);
+
+	populateCommonNames(sc->getCulturalNames());
+	populateLocationsTab(sc);
 
 	// Set the time slider to the sky culture's end year
-	int displayYear = sc->getEndTime();
+	int displayYear   = sc->getEndTime();
 	const int maxYear = QDateTime::currentDateTime().date().year();
-	if (displayYear <= 0 || displayYear > maxYear)
-		displayYear = maxYear;
+	if (displayYear <= 0 || displayYear > maxYear) displayYear = maxYear;
 	updateSkyCultureTimeValue(displayYear);
 }
 
