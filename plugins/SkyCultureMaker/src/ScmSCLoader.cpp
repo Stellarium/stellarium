@@ -68,8 +68,7 @@ scm::ScmSkyCulture *ScmSCLoader::selectAndLoad(QWidget *parent, const QString &d
 	const QString chosen = QFileDialog::getExistingDirectory(parent, QObject::tr("Select Sky Culture Directory"),
 	                                                         defaultPath.isEmpty() ? QDir::homePath() : defaultPath);
 
-	if (chosen.isEmpty()) return nullptr; // user cancelled
-
+	if (chosen.isEmpty()) return nullptr;
 	return loadFromDirectory(QDir(chosen), errorMsg);
 }
 
@@ -111,29 +110,29 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 	{
 		const QString classStr            = classArr[0].toString().toLower().trimmed();
 		scm::ClassificationType classType = scm::ClassificationType::NONE;
-		for (const auto &kv : scm::CLASSIFICATIONS)
+		for (const auto &cl : scm::CLASSIFICATIONS)
 		{
-			if (kv.second.name.toLower() == classStr)
+			if (cl.second.name.toLower() == classStr)
 			{
-				classType = kv.first;
+				classType = cl.first;
 				break;
 			}
 		}
-		scm::Description partialDesc;
-		partialDesc.classification = classType;
+		scm::Description desc;
+		desc.classification = classType;
 
 		// Region
 		const QString regionStr = root["region"].isArray() ? root["region"].toArray().first().toString()
 		                                                   : root["region"].toString();
-		for (const auto &kv : scm::REGIONS)
+		for (const auto &rg : scm::REGIONS)
 		{
-			if (kv.second.name == regionStr)
+			if (rg.second.name == regionStr)
 			{
-				partialDesc.region = kv.first;
+				desc.region = rg.first;
 				break;
 			}
 		}
-		sc->setDescription(partialDesc);
+		sc->setDescription(desc);
 	}
 	const QJsonArray constellationsArr = root["constellations"].toArray();
 	if (constellationsArr.isEmpty()) qWarning() << "ScmSCLoader: no constellations in" << filePath;
@@ -173,7 +172,7 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 
 		if (lines.empty()) continue;
 
-		scm::ScmConstellation &cons = sc->addConstellation(tempCons.getShortName(), lines, isDark);
+		scm::ScmConstellation &constellation = sc->addConstellation(tempCons.getShortName(), lines, isDark);
 
 		// Copy name fields parsed by Constellation::read() into ScmCulturalName
 		const StelObject::CulturalName &base = tempCons.getCulturalNameData();
@@ -192,7 +191,7 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 		for (const QJsonValue &ref : refs)
 			cn.references.append(ref.toInt());
 
-		cons.setCulturalName(cn);
+		constellation.setCulturalName(cn);
 
 		const QJsonValue imgVal = consObj["image"];
 		if (imgVal.isObject())
@@ -216,8 +215,8 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 						anchors[a].hip         = aObj["hip"].toInt();
 					}
 					scm::ScmConstellationArtwork artwork(anchors, image);
-					artwork.setupArt(); // build GL texture/vertices
-					cons.setArtwork(artwork);
+					artwork.setupArt();
+					constellation.setArtwork(artwork);
 				}
 				else
 				{
@@ -227,8 +226,6 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 		}
 	}
 
-	// ── Common names (stars / planets / DSOs) ─────────────────────────────────
-	// "visible" (morning/evening star) is meaningful here, not per-constellation.
 	const QJsonObject commonNamesObj = root["common_names"].toObject();
 	if (!commonNamesObj.isEmpty())
 	{
@@ -271,7 +268,7 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 bool ScmSCLoader::parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc)
 {
 	const QString filePath = dir.absoluteFilePath("territory.geojson");
-	if (!QFile::exists(filePath)) return true; // optional file, absence is not an error
+	if (!QFile::exists(filePath)) return true;
 
 	QFile file(filePath);
 	if (!file.open(QIODevice::ReadOnly))
@@ -314,7 +311,7 @@ bool ScmSCLoader::parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc)
 		{
 			const QJsonArray pt = ptVal.toArray();
 			if (pt.size() < 2) continue;
-			// GeoJSON spec requires the ring to be closed (last == first); skip the duplicate
+			// GeoJSON spec requires the ring to be closed (last == first), so we skip the duplicate
 			const QPointF point(pt[0].toDouble(), pt[1].toDouble());
 			if (!polygon.isEmpty() && polygon.last() == point) continue;
 			polygon.append(point);
@@ -329,7 +326,7 @@ bool ScmSCLoader::parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc)
 bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 {
 	const QString filePath = dir.absoluteFilePath("description.md");
-	if (!QFile::exists(filePath)) return true; // optional
+	if (!QFile::exists(filePath)) return true;
 
 	QFile file(filePath);
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -410,8 +407,7 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 	auto trimContent = [&sectionContent](Section s) { return sectionContent.value(s).trimmed(); };
 
 	// Start from the existing description so that fields already loaded from
-	// index.json (classification, region) are preserved — description.md does not
-	// contain those fields.
+	// index.json (classification, region) are preserved
 	scm::Description desc   = sc->getDescription();
 	desc.name               = name;
 	desc.introduction       = trimContent(Section::Introduction);
@@ -430,11 +426,11 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 
 	const QString licenseName = trimContent(Section::License);
 	desc.license              = scm::LicenseType::NONE;
-	for (const auto &kv : scm::LICENSES)
+	for (const auto &lc : scm::LICENSES)
 	{
-		if (kv.second.name == licenseName)
+		if (lc.second.name == licenseName)
 		{
-			desc.license = kv.first;
+			desc.license = lc.first;
 			break;
 		}
 	}

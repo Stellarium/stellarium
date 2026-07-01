@@ -33,16 +33,15 @@ class ScmSCLoader
 {
 public:
 	/**
-	 * @brief Loads a sky culture from @p dir.
+	 * @brief Loads a sky culture from a given directory.
 	 *
-	 * The directory must contain at least an @c index.json file.
-	 * @c territory.geojson and @c description.md are loaded when present.
+	 * The directory must contain at least an index.json file.
+	 * The files territory.geojson and description.md are loaded when present.
 	 *
-	 * @param dir       Directory that was previously exported by SkyCultureMaker.
+	 * @param dir       Sky culture directory to load.
 	 * @param errorMsg  If non-null, receives a human-readable error description
 	 *                  on failure.
 	 * @return Newly heap-allocated ScmSkyCulture on success, nullptr on failure.
-	 *         The caller is responsible for deleting the returned object.
 	 */
 	static scm::ScmSkyCulture *loadFromDirectory(const QDir &dir, QString *errorMsg = nullptr);
 
@@ -59,7 +58,6 @@ public:
 	                                         QString *errorMsg = nullptr);
 
 private:
-	// Parsing helpers – each returns true on success.
 	static bool parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QString *errorMsg);
 	static bool parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc);
 	static bool parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc);
