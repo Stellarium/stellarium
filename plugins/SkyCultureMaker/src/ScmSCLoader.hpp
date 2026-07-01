@@ -22,6 +22,8 @@
 
 #include "ScmSkyCulture.hpp"
 #include <QDir>
+#include <QJsonArray>
+#include <QJsonObject>
 #include <QString>
 
 class QWidget;
@@ -59,6 +61,9 @@ public:
 
 private:
 	static bool parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QString *errorMsg);
+	static void parseIndexJsonBasicFields(const QJsonObject &root, const QDir &dir, scm::ScmSkyCulture *sc);
+	static void parseIndexJsonConstellations(const QJsonArray &constellationsArr, const QDir &dir, scm::ScmSkyCulture *sc);
+	static void parseIndexJsonCommonNames(const QJsonObject &commonNamesObj, scm::ScmSkyCulture *sc);
 	static bool parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc);
 	static bool parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc);
 };

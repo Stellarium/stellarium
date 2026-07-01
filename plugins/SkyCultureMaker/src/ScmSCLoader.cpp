@@ -101,43 +101,62 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 	}
 
 	const QJsonObject root = doc.object();
-	const QString id       = root["id"].toString(dir.dirName());
-	sc->setId(id);
+	parseIndexJsonBasicFields(root, dir, sc);
+
+	const QJsonArray constellationsArr = root["constellations"].toArray();
+	if (constellationsArr.isEmpty())
+	{
+		qInfo() << "SkyCultureMaker: no constellations in" << filePath;
+	}
+	else
+	{
+		parseIndexJsonConstellations(constellationsArr, dir, sc);
+	}
+
+	parseIndexJsonCommonNames(root["common_names"].toObject(), sc);
+
+	return true;
+}
+
+void ScmSCLoader::parseIndexJsonBasicFields(const QJsonObject &root, const QDir &dir, scm::ScmSkyCulture *sc)
+{
+	sc->setId(root["id"].toString(dir.dirName()));
 	sc->setBeginTime(root["beginTime"].toInt());
 	sc->setEndTime(root["endTime"].toInt());
 	sc->setFallbackToInternationalNames(root["fallback_to_international_names"].toBool(false));
+
 	const QJsonArray classArr = root["classification"].toArray();
-	if (!classArr.isEmpty())
+	if (classArr.isEmpty()) return;
+
+	const QString classStr            = classArr[0].toString().toLower().trimmed();
+	scm::ClassificationType classType = scm::ClassificationType::NONE;
+	for (const auto &cl : scm::CLASSIFICATIONS)
 	{
-		const QString classStr            = classArr[0].toString().toLower().trimmed();
-		scm::ClassificationType classType = scm::ClassificationType::NONE;
-		for (const auto &cl : scm::CLASSIFICATIONS)
+		if (cl.second.name.toLower() == classStr)
 		{
-			if (cl.second.name.toLower() == classStr)
-			{
-				classType = cl.first;
-				break;
-			}
+			classType = cl.first;
+			break;
 		}
-		scm::Description desc;
-		desc.classification = classType;
-
-		// Region
-		const QString regionStr = root["region"].isArray() ? root["region"].toArray().first().toString()
-		                                                   : root["region"].toString();
-		for (const auto &rg : scm::REGIONS)
-		{
-			if (rg.second.name == regionStr)
-			{
-				desc.region = rg.first;
-				break;
-			}
-		}
-		sc->setDescription(desc);
 	}
-	const QJsonArray constellationsArr = root["constellations"].toArray();
-	if (constellationsArr.isEmpty()) qWarning() << "SkyCultureMaker: no constellations in" << filePath;
+	scm::Description desc;
+	desc.classification = classType;
 
+	const QString regionStr = root["region"].isArray() ? root["region"].toArray().first().toString()
+	                                                   : root["region"].toString();
+	for (const auto &rg : scm::REGIONS)
+	{
+		if (rg.second.name == regionStr)
+		{
+			desc.region = rg.first;
+			break;
+		}
+	}
+	sc->setDescription(desc);
+}
+
+void ScmSCLoader::parseIndexJsonConstellations(const QJsonArray &constellationsArr, const QDir &dir,
+                                               scm::ScmSkyCulture *sc)
+{
 	StarMgr *starMgr = GETSTELMODULE(StarMgr);
 	StelCore *core   = StelApp::getInstance().getCore();
 
@@ -176,7 +195,6 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 		scm::ScmConstellation &constellation = sc->addConstellation(tempCons.getShortName(), lines, isDark);
 		scm::ScmCulturalName cn(tempCons.getCulturalName());
 
-		// SCM-specific field not parsed by Constellation::read(): references
 		const QJsonObject nameObj = consObj["common_name"].toObject();
 		const QJsonArray refs     = nameObj["references"].toArray();
 		for (const QJsonValue &ref : refs)
@@ -185,75 +203,50 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 		constellation.setCulturalName(cn);
 
 		const QJsonValue imgVal = consObj["image"];
-		if (imgVal.isObject())
+		if (!imgVal.isObject()) continue;
+
+		const QJsonObject imgObj    = imgVal.toObject();
+		const QString imgFile       = imgObj["file"].toString();
+		const QJsonArray anchorsArr = imgObj["anchors"].toArray();
+		if (imgFile.isEmpty() || anchorsArr.size() < 3) continue;
+
+		const QString imgPath = dir.absoluteFilePath(imgFile);
+		const QImage image(imgPath);
+		if (image.isNull())
 		{
-			const QJsonObject imgObj    = imgVal.toObject();
-			const QString imgFile       = imgObj["file"].toString();
-			const QJsonArray anchorsArr = imgObj["anchors"].toArray();
-
-			if (!imgFile.isEmpty() && anchorsArr.size() >= 3)
-			{
-				const QString imgPath = dir.absoluteFilePath(imgFile);
-				const QImage image(imgPath);
-				if (!image.isNull())
-				{
-					std::array<scm::Anchor, 3> anchors;
-					for (int a = 0; a < 3; ++a)
-					{
-						const QJsonObject aObj = anchorsArr[a].toObject();
-						const QJsonArray pos   = aObj["pos"].toArray();
-						anchors[a].position    = Vec2i(pos[0].toInt(), pos[1].toInt());
-						anchors[a].hip         = aObj["hip"].toInt();
-					}
-					scm::ScmConstellationArtwork artwork(anchors, image);
-					artwork.setupArt();
-					constellation.setArtwork(artwork);
-				}
-				else
-				{
-					qWarning() << "SkyCultureMaker: cannot load artwork image" << imgPath;
-				}
-			}
+			qWarning() << "SkyCultureMaker: cannot load artwork image" << imgPath;
+			continue;
 		}
+		std::array<scm::Anchor, 3> anchors;
+		for (int a = 0; a < 3; ++a)
+		{
+			const QJsonObject aObj = anchorsArr[a].toObject();
+			const QJsonArray pos   = aObj["pos"].toArray();
+			anchors[a].position    = Vec2i(pos[0].toInt(), pos[1].toInt());
+			anchors[a].hip         = aObj["hip"].toInt();
+		}
+		scm::ScmConstellationArtwork artwork(anchors, image);
+		artwork.setupArt();
+		constellation.setArtwork(artwork);
 	}
+}
 
-	const QJsonObject commonNamesObj = root["common_names"].toObject();
-	if (!commonNamesObj.isEmpty())
+void ScmSCLoader::parseIndexJsonCommonNames(const QJsonObject &commonNamesObj, scm::ScmSkyCulture *sc)
+{
+	if (commonNamesObj.isEmpty()) return;
+
+	QMap<QString, QList<scm::ScmCulturalName>> culturalNames;
+	for (auto it = commonNamesObj.constBegin(); it != commonNamesObj.constEnd(); ++it)
 	{
-		QMap<QString, QList<scm::ScmCulturalName>> culturalNames;
-		for (auto it = commonNamesObj.constBegin(); it != commonNamesObj.constEnd(); ++it)
+		const QJsonArray namesArr = it.value().toArray();
+		QList<scm::ScmCulturalName> names;
+		for (const QJsonValue &nv : namesArr)
 		{
-			const QJsonArray namesArr = it.value().toArray();
-			QList<scm::ScmCulturalName> names;
-			for (const QJsonValue &nv : namesArr)
-			{
-				const QJsonObject nObj = nv.toObject();
-				scm::ScmCulturalName cn;
-				cn.translated      = nObj["english"].toString().trimmed();
-				cn.native          = nObj["native"].toString().trimmed();
-				cn.pronounce       = nObj["pronounce"].toString().trimmed();
-				cn.transliteration = nObj["transliteration"].toString().trimmed();
-				cn.IPA             = nObj["IPA"].toString().trimmed();
-				cn.byname          = nObj["byname"].toString().trimmed();
-
-				const QString visible = nObj["visible"].toString();
-				if (visible == "morning")
-					cn.special = StelObject::CulturalNameSpecial::Morning;
-				else if (visible == "evening")
-					cn.special = StelObject::CulturalNameSpecial::Evening;
-
-				const QJsonArray refs = nObj["references"].toArray();
-				for (const QJsonValue &ref : refs)
-					cn.references.append(ref.toInt());
-
-				names.append(cn);
-			}
-			if (!names.isEmpty()) culturalNames.insert(it.key(), names);
+			names.append(scm::ScmCulturalName::fromJson(nv.toObject()));
 		}
-		sc->setCulturalNames(culturalNames);
+		if (!names.isEmpty()) culturalNames.insert(it.key(), names);
 	}
-
-	return true;
+	sc->setCulturalNames(culturalNames);
 }
 
 bool ScmSCLoader::parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc)
