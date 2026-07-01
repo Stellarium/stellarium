@@ -991,7 +991,7 @@ button.button32:active {
 }
 
 .action-search-input::placeholder {
-    color: #8A8C8E;
+    color: #FFE0C6;
     font-size: 11px;
 }
 
@@ -1149,7 +1149,7 @@ button.button32:active {
 }
 
 .skyculture-btn.active {
-    background: linear-gradient(#DCDBDA, #8A8C8E);
+    background: linear-gradient(#DCDBDA, #FFE0C6);
     border-color: #000000;
     color: #000000;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -1171,151 +1171,6 @@ button.button32:active {
     box-sizing: border-box;
 }
 
-/* ========================================================================
- * OPTIONS GRID - Responsive Multi-Column Layout
- * ======================================================================== */
-
-/* 
- * Desktop: 3 columns.
- * Uses CSS Grid with auto-fit for true responsiveness.
- * min() function ensures columns don't get too narrow.
- */
-.options-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-    gap: clamp(8px, 1.5vw, 15px);
-    padding: 5px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* ========================================================================
- * OPTION ITEM - Flexible Horizontal/Vertical Layout
- * ======================================================================== */
-
-/* 
- * Each option item adapts between horizontal (desktop) and vertical (mobile).
- * Uses flex-wrap: wrap for graceful degradation on narrow containers.
- */
-.option-item {
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: clamp(4px, 0.8vw, 6px);
-    padding: clamp(8px, 1.2vw, 10px) clamp(10px, 1.5vw, 12px);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: clamp(8px, 1.2vw, 12px);
-    flex-wrap: wrap;           /* Allows stacking when space is tight */
-    box-sizing: border-box;
-    width: 100%;
-}
-
-/* 
- * Label area - contains checkbox and text.
- * Uses flex-wrap to allow text to wrap on small screens.
- */
-.option-label {
-    display: flex;
-    align-items: center;
-    gap: clamp(6px, 1vw, 8px);
-    color: #000000;
-    font-size: clamp(10px, 1.4vw, 12px);
-    font-weight: bold;
-    cursor: pointer;
-    flex: 0 1 auto;
-    min-width: 140px;          /* Ensure label has space */
-    white-space: normal;
-    word-break: break-word;
-    line-height: 1.4;
-}
-
-.option-label input[type="checkbox"] {
-    margin: 0;
-    cursor: pointer;
-    flex-shrink: 0;
-    width: clamp(14px, 1.8vw, 16px);
-    height: clamp(14px, 1.8vw, 16px);
-}
-
-.option-label span {
-    color: #000000;
-    line-height: 1.3;
-}
-
-/* 
- * Controls area - slider and value display.
- * Flex: 1 allows it to take remaining space.
- * min-width: 0 prevents flex overflow issues.
- */
-.option-controls {
-    display: flex;
-    align-items: center;
-    gap: clamp(8px, 1.2vw, 10px);
-    flex: 2 1 200px;
-    min-width: 0;
-}
-
-/* 
- * Slider styling - fully responsive width.
- * Uses flex: 1 to fill available space.
- */
-.option-controls .slider {
-    flex: 1;
-    min-width: 80px;
-    height: clamp(8px, 1.2vw, 11px);
-    -webkit-appearance: none;
-    appearance: none;
-    background: #3a3c3f;
-    border-radius: 3px;
-    outline: none;
-    cursor: pointer;
-}
-
-.option-controls .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: clamp(12px, 1.8vw, 14px);
-    height: clamp(12px, 1.8vw, 14px);
-    border-radius: 50%;
-    background: #5D5F62;
-    border: 1px solid #2A2C2E;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.option-controls .slider::-webkit-slider-thumb:hover {
-    background: #8A8C8E;
-    transform: scale(1.1);
-}
-
-.option-controls .slider::-moz-range-thumb {
-    width: clamp(12px, 1.8vw, 14px);
-    height: clamp(12px, 1.8vw, 14px);
-    border-radius: 50%;
-    background: #5D5F62;
-    border: 1px solid #2A2C2E;
-    cursor: pointer;
-}
-
-.option-controls .slider::-moz-range-track {
-    background: #3a3c3f;
-    height: clamp(3px, 0.5vw, 4px);
-    border-radius: 3px;
-}
-
-/* Value display - fixed width with responsive font */
-.option-controls span {
-    min-width: clamp(28px, 5vw, 35px);
-    text-align: right;
-    color: #000000;
-    font-family: monospace;
-    font-size: clamp(9px, 1.2vw, 11px);
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.15);
-    padding: clamp(1px, 0.3vw, 2px) clamp(4px, 0.8vw, 6px);
-    border-radius: 4px;
-    flex-shrink: 0;
-}
 
 /* ========================================================================
  * ADDITIONAL OPTIONS ROW (Bottom checkboxes)
@@ -1357,7 +1212,7 @@ button.button32:active {
     border-radius: 6px;
     justify-content: flex-start;
     align-items: center;
-    max-height: clamp(200px, 30vh, 400px);
+    max-height: clamp(300px, 30vh, 500px);
     overflow-y: auto;
     overflow-x: hidden;
     width: 100%;
@@ -1398,7 +1253,7 @@ button.button32:active {
 
 .pattern-btn.active,
 .constellation-btn.active {
-    background: linear-gradient(#DCDBDA, #8A8C8E);
+    background: linear-gradient(#DCDBDA, #FFE0C6);
     border-color: #000000;
     color: #000000;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -1410,7 +1265,7 @@ button.button32:active {
 
 .patterns-note {
     font-size: clamp(9px, 1.2vw, 11px);
-    color: #8A8C8E;
+    color: #FFE0C6;
     margin: 0 0 10px 0;
     padding: clamp(4px, 0.8vw, 5px) clamp(8px, 1.2vw, 10px);
     background: rgba(0, 0, 0, 0.08);
@@ -1471,12 +1326,304 @@ button.button32:active {
 
 /* ========================================================================
  * RESPONSIVE BREAKPOINTS - FINE-TUNED ADJUSTMENTS
+ *
+ * OPTIONS GRID - Responsive Multi-Column Layout
  * ======================================================================== */
 
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(8px, 1.5vw, 15px);
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ========================================================================
+ * OPTION ITEM - Base Styles
+ * ======================================================================== */
+
+.option-item {
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: clamp(4px, 0.8vw, 6px);
+    padding: clamp(8px, 1.2vw, 10px) clamp(10px, 1.5vw, 12px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(8px, 1.2vw, 12px);
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: clamp(6px, 1vw, 8px);
+    color: #000000;
+    font-size: clamp(10px, 1.4vw, 12px);
+    font-weight: bold;
+    cursor: pointer;
+    flex: 0 1 auto;
+    min-width: 140px;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+.option-label input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: clamp(14px, 1.8vw, 16px);
+    height: clamp(14px, 1.8vw, 16px);
+}
+
+.option-label span {
+    color: #000000;
+    line-height: 1.3;
+}
+
+.option-controls {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1.2vw, 10px);
+    flex: 2 1 200px;
+    min-width: 0;
+}
+
+.option-controls .slider {
+    flex: 1;
+    min-width: 80px;
+    height: clamp(8px, 1.2vw, 11px);
+    -webkit-appearance: none;
+    appearance: none;
+    background: #3a3c3f;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.option-controls .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: clamp(12px, 1.8vw, 14px);
+    height: clamp(12px, 1.8vw, 14px);
+    border-radius: 50%;
+    background: #5D5F62;
+    border: 1px solid #2A2C2E;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option-controls .slider::-webkit-slider-thumb:hover {
+    background: #FFE0C6;
+    transform: scale(1.1);
+}
+
+.option-controls .slider::-moz-range-thumb {
+    width: clamp(12px, 1.8vw, 14px);
+    height: clamp(12px, 1.8vw, 14px);
+    border-radius: 50%;
+    background: #5D5F62;
+    border: 1px solid #2A2C2E;
+    cursor: pointer;
+}
+
+.option-controls .slider::-moz-range-track {
+    background: #3a3c3f;
+    height: clamp(3px, 0.5vw, 4px);
+    border-radius: 3px;
+}
+
+.option-controls span {
+    min-width: clamp(28px, 5vw, 35px);
+    text-align: right;
+    color: #000000;
+    font-family: monospace;
+    font-size: clamp(9px, 1.2vw, 11px);
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.15);
+    padding: clamp(1px, 0.3vw, 2px) clamp(4px, 0.8vw, 6px);
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+/* ========================================================================
+ * GROUPED OPTION ITEMS - Combined Controls (Size/Thickness + Color)
+ * ======================================================================== */
+
+.option-item.option-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px 12px;
+    flex-wrap: wrap;
+    padding: 6px 12px;
+    min-height: 44px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: clamp(4px, 0.6vw, 6px);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.15s ease;
+}
+
+.option-item.option-group:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.option-item.option-group .option-label {
+    min-width: 130px;
+    max-width: 180px;
+    flex: 0 1 auto;
+    font-size: clamp(10px, 1.2vw, 12px);
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.option-item.option-group .option-label span {
+    white-space: nowrap;
+}
+
+.option-group-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px 14px;
+    flex: 1 1 280px;
+    min-width: 180px;
+    flex-wrap: wrap;
+}
+
+.option-group-controls.single-control {
+    flex: 1 1 200px;
+    min-width: 150px;
+}
+
+.option-sub-control {
+    display: flex;
+    align-items: center;
+    gap: 4px 8px;
+    flex: 1 1 100px;
+    min-width: 80px;
+    padding: 2px 4px;
+}
+
+.option-sub-control .slider {
+    flex: 1;
+    min-width: 50px;
+    max-width: 130px;
+    height: 6px;
+    margin: 0 2px;
+}
+
+.option-sub-control .slider .ui-slider-handle {
+    width: 14px;
+    height: 14px;
+    top: -5px;
+}
+
+.option-sub-control .stelproperty {
+    min-width: 28px;
+    text-align: center;
+    font-size: 10px;
+    font-family: monospace;
+    color: #DCDBDA;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+/* ========================================================================
+ * COLOR PICKER CONTROLS - Inside Grouped Options
+ * ======================================================================== */
+
+.option-sub-control.color-control {
+    flex: 0 1 180px;
+    min-width: 140px;
+    max-width: 220px;
+    padding: 0;
+}
+
+.option-item.option-group .color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 6px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 28px;
+    min-height: 26px;
+}
+
+.option-item.option-group .color-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    border: 2px solid #2A2C2E;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+}
+
+.option-item.option-group .color-swatch:hover {
+    transform: scale(1.08);
+}
+
+.option-item.option-group .color-inputs {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+    min-width: 60px;
+}
+
+.option-item.option-group .color-input {
+    width: 60px;
+    padding: 1px 2px;
+    background: #2A2C2E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 2px;
+    font-size: 9px;
+    text-align: center;
+    font-family: monospace;
+    height: 20px;
+    min-width: 50px;
+}
+
+.option-item.option-group .color-input:focus {
+    outline: none;
+    border-color: #B4B7B0;
+}
+
+.option-item.option-group .color-input-label {
+    font-size: 7px;
+    font-weight: bold;
+    color: #8A8C8E;
+    user-select: none;
+}
+
+.option-item.option-group .color-input-label-r { color: #F92672; }
+.option-item.option-group .color-input-label-g { color: #A6E22E; }
+.option-item.option-group .color-input-label-b { color: #66D9EF; }
+
 /* 
- * Large Desktop (≥1400px)
- * More generous spacing and larger max-widths for options panel.
- */
+ * HIGHLIGHT GROUP WHEN CHECKBOX IS CHECKED
+*/
+.option-item.option-group:has(input[type="checkbox"]:checked) {
+    border-left: 3px solid #B4B7B0;
+    padding-left: 9px;
+}
+
+/* ============================================================
+ * RESPONSIVE BREAKPOINTS
+ * ============================================================ */
+
+/* Large Desktop (≥1400px) */
 @media (min-width: 1400px) {
     .skyculture-options-panel {
         flex: 2 1 100%;
@@ -1497,12 +1644,52 @@ button.button32:active {
         min-width: 150px;
         max-width: 300px;
     }
+    
+    .option-item.option-group {
+        min-height: 48px;
+        padding: 6px 16px;
+        gap: 8px 16px;
+    }
+    
+    .option-item.option-group .option-label {
+        min-width: 150px;
+        max-width: 200px;
+    }
+    
+    .option-group-controls {
+        gap: 8px 18px;
+        min-width: 200px;
+    }
+    
+    .option-sub-control {
+        flex: 1 1 120px;
+        min-width: 100px;
+    }
+    
+    .option-sub-control .slider {
+        min-width: 70px;
+        max-width: 160px;
+    }
+    
+    .option-item.option-group .color-picker-wrapper {
+        height: 30px;
+        min-height: 28px;
+        padding: 1px 8px;
+    }
+    
+    .option-item.option-group .color-swatch {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .option-item.option-group .color-input {
+        width: 50px;
+        height: 20px;
+        font-size: 9px;
+    }
 }
 
-/* 
- * Medium-Large Desktop (1025px - 1399px)
- * Maintain 3 columns but with tighter spacing.
- */
+/* Medium-Large Desktop (1025px - 1399px) */
 @media (min-width: 1025px) and (max-width: 1399px) {
     .options-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -1512,12 +1699,53 @@ button.button32:active {
     .option-label {
         min-width: 130px;
     }
+    
+    .option-item.option-group {
+        min-height: 44px;
+        padding: 5px 12px;
+        gap: 6px 12px;
+    }
+    
+    .option-item.option-group .option-label {
+        min-width: 120px;
+        max-width: 160px;
+    }
+    
+    .option-group-controls {
+        gap: 6px 12px;
+        min-width: 160px;
+    }
+    
+    .option-sub-control {
+        flex: 1 1 90px;
+        min-width: 70px;
+    }
+    
+    .option-sub-control .slider {
+        min-width: 50px;
+        max-width: 120px;
+    }
+    
+    .option-item.option-group .color-picker-wrapper {
+        height: 26px;
+        min-height: 24px;
+        padding: 1px 6px;
+    }
+    
+    .option-item.option-group .color-swatch {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .option-item.option-group .color-input {
+        width: 50px;
+        height: 20px;
+        font-size: 8px;
+        min-width: 20px;
+    }
 }
 
-/* 
- * Tablet Landscape / Small Desktop (769px - 1024px)
- * Switch to 2 columns for options grid.
- */
+/* Tablet Landscape / Small Desktop (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
     .options-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1542,12 +1770,60 @@ button.button32:active {
     .option-controls .slider {
         min-width: 70px;
     }
+    
+    .option-item.option-group {
+        min-height: 42px;
+        padding: 4px 10px;
+        gap: 5px 10px;
+    }
+    
+    .option-item.option-group .option-label {
+        min-width: 110px;
+        max-width: 140px;
+        font-size: 10px;
+    }
+    
+    .option-group-controls {
+        gap: 5px 10px;
+        min-width: 150px;
+    }
+    
+    .option-sub-control {
+        flex: 1 1 80px;
+        min-width: 60px;
+    }
+    
+    .option-sub-control .slider {
+        min-width: 40px;
+        max-width: 100px;
+    }
+    
+    .option-item.option-group .color-picker-wrapper {
+        height: 24px;
+        min-height: 22px;
+        padding: 1px 5px;
+    }
+    
+    .option-item.option-group .color-swatch {
+        width: 16px;
+        height: 16px;
+        border-width: 1.5px;
+    }
+    
+    .option-item.option-group .color-input {
+        width: 50px;
+        height: 20px;
+        font-size: 8px;
+        min-width: 18px;
+    }
+    
+    .option-item.option-group .color-inputs {
+        min-width: 50px;
+        gap: 1px;
+    }
 }
 
-/* 
- * Tablet Portrait (481px - 768px)
- * Full width panels, 2 columns where possible, but allow wrapping.
- */
+/* Tablet Portrait (481px - 768px) */
 @media (max-width: 768px) {
     .skyculture-panel,
     .skyculture-options-panel {
@@ -1606,12 +1882,75 @@ button.button32:active {
     .skyculture-additional-options {
         gap: 15px;
     }
+    
+    /* Grouped options in tablet portrait */
+    .option-item.option-group {
+        flex-direction: column;
+        align-items: stretch;
+        min-height: auto;
+        padding: 8px 12px;
+        gap: 6px;
+    }
+    
+    .option-item.option-group .option-label {
+        min-width: auto;
+        max-width: none;
+        font-size: 10px;
+        white-space: normal;
+    }
+    
+    .option-item.option-group .option-label span {
+        white-space: normal;
+    }
+    
+    .option-group-controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px 10px;
+        min-width: auto;
+    }
+    
+    .option-group-controls.single-control {
+        flex: 1 1 100%;
+    }
+    
+    .option-sub-control {
+        flex: 1 1 130px;
+        min-width: 100px;
+        padding: 2px 0;
+    }
+    
+    .option-sub-control .slider {
+        min-width: 50px;
+        max-width: 100%;
+    }
+    
+    .option-item.option-group .color-picker-wrapper {
+        height: 24px;
+        min-height: 22px;
+        padding: 1px 5px;
+    }
+    
+    .option-item.option-group .color-swatch {
+        width: 16px;
+        height: 16px;
+        border-width: 1.5px;
+    }
+    
+    .option-item.option-group .color-input {
+        width: 50px;
+        height: 20px;
+        font-size: 8px;
+        min-width: 18px;
+    }
+    
+    .option-item.option-group .color-inputs {
+        min-width: 50px;
+        gap: 1px;
+    }
 }
 
-/* 
- * Mobile Phones (≤480px)
- * Single column, vertical stacking for all components.
- */
+/* Mobile Phones (≤480px) */
 @media (max-width: 480px) {
     .skyculture-panel,
     .skyculture-options-panel {
@@ -1631,7 +1970,6 @@ button.button32:active {
         gap: 8px;
     }
     
-    /* Vertical layout for option items on mobile */
     .option-item {
         flex-direction: column;
         align-items: stretch;
@@ -1688,12 +2026,80 @@ button.button32:active {
         font-size: 8px;
         padding: 4px 6px;
     }
+    
+    /* Grouped options in mobile */
+    .option-item.option-group {
+        flex-direction: column;
+        align-items: stretch;
+        min-height: auto;
+        padding: 6px 10px;
+        gap: 4px;
+    }
+    
+    .option-item.option-group .option-label {
+        min-width: auto;
+        max-width: none;
+        font-size: 10px;
+        white-space: normal;
+    }
+    
+    .option-item.option-group .option-label span {
+        white-space: normal;
+    }
+    
+    .option-group-controls {
+        flex-direction: column;
+        gap: 4px 0;
+        min-width: auto;
+    }
+    
+    .option-group-controls.single-control {
+        flex: 1 1 auto;
+    }
+    
+    .option-sub-control {
+        flex: 1 1 auto;
+        min-width: auto;
+        width: 100%;
+        padding: 2px 0;
+    }
+    
+    .option-sub-control .slider {
+        min-width: 50px;
+        max-width: 100%;
+    }
+    
+    .option-item.option-group .color-picker-wrapper {
+        height: 22px;
+        min-height: 20px;
+        padding: 1px 4px;
+    }
+    
+    .option-item.option-group .color-swatch {
+        width: 14px;
+        height: 14px;
+        border-width: 1px;
+    }
+    
+    .option-item.option-group .color-input {
+        width: 50px;
+        height: 18px;
+        font-size: 7px;
+        min-width: 40px;
+        padding: 0 1px;
+    }
+    
+    .option-item.option-group .color-inputs {
+        min-width: 40px;
+        gap: 1px;
+    }
+    
+    .option-item.option-group .color-input-label {
+        font-size: 6px;
+    }
 }
 
-/* 
- * Extra Small Devices (≤360px)
- * Further optimizations for very narrow screens.
- */
+/* Extra Small Devices (≤360px) */
 @media (max-width: 360px) {
     .option-controls {
         flex-wrap: wrap;
@@ -1716,6 +2122,24 @@ button.button32:active {
     .constellation-btn {
         padding: 3px 6px;
         font-size: 8px;
+    }
+    
+    .option-item.option-group {
+        padding: 4px 6px;
+        gap: 3px;
+    }
+    
+    .option-item.option-group .option-label {
+        font-size: 9px;
+    }
+    
+    .option-sub-control .slider {
+        min-width: 40px;
+    }
+    
+    .option-sub-control .stelproperty {
+        font-size: 8px;
+        min-width: 22px;
     }
 }
 
@@ -1744,7 +2168,7 @@ button.button32:active {
 .skyculture-buttons-grid::-webkit-scrollbar,
 .patterns-buttons-grid::-webkit-scrollbar,
 .constellations-buttons-grid::-webkit-scrollbar {
-    width: 5px;
+    width: 7px;
     height: 5px;
 }
 
@@ -2193,7 +2617,7 @@ button.button32:active {
     left: -2px;
     right: -2px;
     bottom: -2px;
-    border: 2px solid #8A8C8E;
+    border: 2px solid #FFE0C6;
     border-radius: 6px;
     pointer-events: none;
     opacity: 0.6;
@@ -2294,7 +2718,7 @@ button.button32:active {
 
 @keyframes script-pulse {
     0% {
-        border-color: #8A8C8E;
+        border-color: #FFE0C6;
         box-shadow: 0 0 5px rgba(138, 140, 142, 0.2);
     }
     50% {
@@ -2302,7 +2726,7 @@ button.button32:active {
         box-shadow: 0 0 12px rgba(220, 219, 218, 0.5);
     }
     100% {
-        border-color: #8A8C8E;
+        border-color: #FFE0C6;
         box-shadow: 0 0 5px rgba(138, 140, 142, 0.2);
     }
 }
@@ -2449,7 +2873,7 @@ button.button32:active {
 }
 
 .culture-selector-panel {
-    background: rgba(149, 150, 152, 0.2);
+    background: rgba(200, 200, 200, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-style: inset;
     border-radius: 10px;
@@ -2558,7 +2982,7 @@ button.button32:active {
 }
 
 .stats-table .selected-row {
-    background: linear-gradient(#DCDBDA, #8A8C8E) !important;
+    background: linear-gradient(#DCDBDA, #FFE0C6) !important;
     color: #000 !important;
 }
 
@@ -2651,13 +3075,13 @@ button.button32:active {
     overflow-x: auto;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 6px;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(100, 100, 100, 0.01);
 }
 
 .no-data {
     text-align: center;
     padding: 20px;
-    color: #8A8C8E;
+    color: #FFE0C6;
 }
 
 /* ========================================================================
@@ -2701,211 +3125,754 @@ button.button32:active {
     border-radius: 6px;
     background: rgba(0, 0, 0, 0.05);
 }
-
 /* ========================================================================
- * TOUR TOOLBAR STYLES - Constellation Tour Controls
+ * TOUR CONTROLS - Complete Styles for All Tour Generators
+ * ========================================================================
+ * 
+ * This stylesheet provides all styling for the tour generator toolbars
+ * across four tabs: Constellations, Asterisms, Lunar Mansions, and Stars.
+ * 
+ * The styles are organized by component type to avoid duplication and
+ * ensure consistency across all tour interfaces.
+ * 
+ * ========================================================================
+ * TABLE OF CONTENTS
+ * ========================================================================
+ * 1. Container & Layout Styles
+ * 2. Toolbar Grid & Flex Layouts
+ * 3. Section Headers & Color Accents
+ * 4. Button Styles (Generate, Action)
+ * 5. Input Controls (Number, Range, Checkbox)
+ * 6. Color Picker Groups
+ * 7. Multi-Select Mode Styles
+ * 8. Multi-Select Containers
+ * 9. Info Notes
+ * 10. Notification Toast
+ * 11. Responsive Adjustments
+ * 12. Animation Keyframes
  * ======================================================================== */
 
-.tour-toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    margin-top: 15px;
-    padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
+/* ========================================================================
+ * 1. CONTAINER & LAYOUT STYLES
+ * ======================================================================== */
 
-.tour-toolbar .jquerybutton {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    border: 1px solid #2A2C2E;
-    border-radius: 3px;
-    padding: 5px 12px;
-    font-size: 11px;
-    font-weight: bold;
-    color: #000000;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.tour-toolbar .jquerybutton:hover {
-    background: linear-gradient(#C4C4C7, #6D6F72);
-    transform: translateY(-1px);
-}
-
-.tour-toolbar .jquerybutton:active {
-    transform: translateY(1px);
-}
-
-.tour-toolbar .jquerybutton.active {
-    background: linear-gradient(#DCDBDA, #8A8C8E);
-    border-color: #000000;
-    color: #000000;
-}
-
-.tour-toolbar .jquerybutton:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.tour-toolbar label {
-    color: #000000;
-    font-size: 11px;
-}
-
-.tour-toolbar input[type="number"] {
-    background: #3A3C3E;
-    color: #DCDBDA;
-    border: 1px solid #5D5F62;
-    border-radius: 3px;
-    padding: 3px 5px;
-    width: 55px;
-    font-size: 11px;
-}
-
-.tour-toolbar input[type="checkbox"] {
-    margin: 0;
-    cursor: pointer;
-}
-
-.tour-notification {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #DCDBDA;
-    padding: 8px 15px;
-    border-radius: 4px;
-    z-index: 10000;
-    font-size: 11px;
-    border: 1px solid #2A2C2E;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    pointer-events: none;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .tour-toolbar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .tour-toolbar > div {
-        margin-left: 0 !important;
-        justify-content: space-between;
-    }
-    
-    .tour-toolbar .jquerybutton {
-        width: 100%;
-        text-align: center;
-    }
-}
-
-/* Tour controls container in constellations tab */
+/**
+ * Main container for all tour control toolbars.
+ * Used by: const-tour-controls-container, aster-tour-controls-container,
+ *          lunar-tour-controls-container, stars-tour-controls-container
+ */
 .tour-controls-container {
     margin: 10px 0 15px 0;
     padding: 8px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.tour-toolbar {
+/**
+ * Section title displayed above each tour generator.
+ * Used by: .tour-section-title
+ */
+.tour-section-title {
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #B4B7B0;
+}
+
+/* ========================================================================
+ * 2. TOOLBAR GRID & FLEX LAYOUTS
+ * ======================================================================== */
+
+/**
+ * Grid layout for tour toolbars (3 columns on desktop).
+ * Used by: .tour-toolbar-grid
+ */
+.tour-toolbar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+/**
+ * Flex column layout for tour toolbars (alternative layout).
+ * Used by: .tour-toolbar-flex
+ */
+.tour-toolbar-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+/**
+ * Individual column inside the grid layout.
+ * Used by: .tour-column
+ */
+.tour-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/**
+ * Standard row for grouping related controls.
+ * Used by: .tour-row
+ */
+.tour-row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
-    justify-content: flex-start;
+    gap: 8px;
 }
 
-.tour-toolbar .jquerybutton {
+/**
+ * Row with a bottom border separator (for visual grouping).
+ * Used by: .tour-row-separator
+ */
+.tour-row-separator {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(180, 183, 176, 0.2);
+}
+
+/**
+ * Row with a subtle background (for emphasis).
+ * Used by: .tour-row-subtle
+ */
+.tour-row-subtle {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+/**
+ * Single control group wrapper (contains label + input).
+ * Used by: .tour-control-group
+ */
+.tour-control-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #000000;
+}
+
+/**
+ * Highlighted control group (with subtle background).
+ * Used by: .tour-control-group-highlight
+ */
+.tour-control-group-highlight {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #000000;
+    background: rgba(0, 0, 0, 0.08);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/**
+ * Bold label inside control group.
+ * Used by: .tour-control-label-bold
+ */
+.tour-control-label-bold {
+    font-weight: bold;
+    color: #000000;
+}
+
+/**
+ * Regular label inside control group.
+ * Used by: .tour-control-label
+ */
+.tour-control-label {
+    color: #000000;
+}
+
+/* ========================================================================
+ * 3. SECTION HEADERS & COLOR ACCENTS
+ * ======================================================================== */
+
+/**
+ * Generic section header.
+ * Used by: .tour-section-header
+ */
+.tour-section-header {
+    font-size: 11px;
+    font-weight: bold;
+    color: #000000;
+}
+
+/**
+ * Section with blue accent border (for LINES).
+ * Used by: .tour-section-lines
+ */
+.tour-section-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    border-left: 3px solid #4DB2E6;
+}
+
+/**
+ * Section with green accent border (for LABELS).
+ * Used by: .tour-section-labels
+ */
+.tour-section-labels {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    border-left: 3px solid #007F00;
+}
+
+/**
+ * Section with neutral style (for ARTWORK).
+ * Used by: .tour-section-artwork
+ */
+.tour-section-artwork {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+/**
+ * Section with red accent border (for BOUNDARIES).
+ * Used by: .tour-section-boundaries
+ */
+.tour-section-boundaries {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    border-left: 3px solid #F92672;
+}
+
+/**
+ * Section with orange accent border (for HULLS).
+ * Used by: .tour-section-hulls
+ */
+.tour-section-hulls {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    border-left: 3px solid #FFB268;
+}
+
+/**
+ * Section with green accent border (for LUNAR SYSTEM).
+ * Used by: .tour-section-lunar
+ */
+.tour-section-lunar {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    border-left: 3px solid #81C784;
+}
+
+/* ========================================================================
+ * 4. BUTTON STYLES (Generate, Action)
+ * ======================================================================== */
+
+/**
+ * Primary generate button for all tour generators.
+ * Used by: .tour-generate-btn (applied to buttons with class)
+ */
+.tour-generate-btn {
     background: linear-gradient(#5D5F62, #3A3C3E);
     border: 1px solid #2A2C2E;
     border-radius: 3px;
-    padding: 5px 12px;
+    padding: 5px 10px;
     font-size: 11px;
     font-weight: bold;
     color: #000000;
     cursor: pointer;
     transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
-.tour-toolbar .jquerybutton:hover {
+.tour-generate-btn:hover {
     background: linear-gradient(#C4C4C7, #6D6F72);
     transform: translateY(-1px);
 }
 
-.tour-toolbar .jquerybutton:active {
+.tour-generate-btn:active {
     transform: translateY(1px);
 }
 
-.tour-toolbar .jquerybutton.active {
-    background: linear-gradient(#DCDBDA, #8A8C8E);
-    border-color: #000000;
-    color: #000000;
-}
-
-.tour-toolbar .jquerybutton:disabled {
+.tour-generate-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none;
 }
 
-.tour-toolbar label {
+.tour-generate-btn.active {
+    background: linear-gradient(#DCDBDA, #FFE0C6);
+    border-color: #000000;
     color: #000000;
-    font-size: 11px;
 }
 
-.tour-toolbar input[type="number"] {
+/* ========================================================================
+ * 5. INPUT CONTROLS (Number, Range, Checkbox)
+ * ======================================================================== */
+
+/**
+ * Number input fields inside tour controls.
+ * Used by: .tour-input-number
+ */
+.tour-input-number {
+    width: 50px;
     background: #3A3C3E;
     color: #DCDBDA;
     border: 1px solid #5D5F62;
     border-radius: 3px;
-    padding: 3px 5px;
-    width: 55px;
+    padding: 3px 4px;
     font-size: 11px;
 }
 
-.tour-toolbar input[type="checkbox"] {
-    margin: 0;
-    cursor: pointer;
-}
-
-.tour-notification {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #DCDBDA;
-    padding: 8px 15px;
-    border-radius: 4px;
-    z-index: 10000;
-    font-size: 11px;
-    border: 1px solid #2A2C2E;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    pointer-events: none;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .tour-toolbar {
-        gap: 8px;
-    }
-    
-    .tour-toolbar .jquerybutton {
-        padding: 4px 8px;
-        font-size: 10px;
-    }
+.tour-input-number:focus {
+    outline: none;
+    border-color: #B4B7B0;
 }
 
 /* ========================================================================
- * MULTI-SELECT MODE STYLES
+ * SLIDER STYLES - Enhanced Visibility (White track with blue accent)
  * ======================================================================== */
 
-/* Selected constellation button style in multi-select mode */
+/**
+ * Range slider inputs inside tour controls.
+ * Used by: .tour-input-range
+ * 
+ * Styling: White track with blue accent for better visibility
+ */
+.tour-input-range {
+    width: 80px;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    height: 6px;
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+.tour-input-range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    background: #FFFFFF;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.tour-input-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(#6DB3F2, #4A90D9);
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    margin-top: -5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tour-input-range::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    background: linear-gradient(#7DC3FF, #5AA0E9);
+    box-shadow: 0 1px 6px rgba(74, 144, 217, 0.4);
+}
+
+.tour-input-range::-webkit-slider-thumb:active {
+    transform: scale(0.95);
+    background: linear-gradient(#5A90D9, #3A70B9);
+}
+
+/* Firefox */
+.tour-input-range::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background: #FFFFFF;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.tour-input-range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(#6DB3F2, #4A90D9);
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tour-input-range::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    background: linear-gradient(#7DC3FF, #5AA0E9);
+}
+
+.tour-input-range::-moz-range-thumb:active {
+    transform: scale(0.95);
+    background: linear-gradient(#5A90D9, #3A70B9);
+}
+
+/**
+ * Range value display (shows current value).
+ * Used by: .tour-range-value
+ */
+.tour-range-value {
+    font-size: 10px;
+    color: #FFE0C6;
+    min-width: 30px;
+    font-family: monospace;
+}
+
+/**
+ * Checkbox inputs inside tour controls.
+ * Used by: input[type="checkbox"] inside .tour-control-group
+ */
+.tour-control-group input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+/**
+ * Hint text inside multi-select wrapper.
+ * Used by: .tour-multiselect-hint
+ */
+.tour-multiselect-hint {
+    font-size: 9px;
+    color: #FFE0C6;
+}
+
+/* ========================================================================
+ * 6. COLOR PICKER GROUPS
+ * ======================================================================== */
+
+/**
+ * Color control group (R, G, B sliders + preview).
+ * Used by: .tour-color-group
+ */
+.tour-color-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+/**
+ * Label inside color group.
+ * Used by: .tour-color-group-label
+ */
+.tour-color-group-label {
+    font-size: 10px;
+    font-weight: bold;
+    color: #DCDBDA;
+    margin-bottom: 2px;
+}
+
+/**
+ * Container for R, G, B sliders.
+ * Used by: .tour-color-sliders
+ */
+.tour-color-sliders {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+/**
+ * Color channel labels (R, G, B).
+ * Used by: .tour-color-channel
+ */
+.tour-color-channel {
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.tour-color-channel-r {
+    color: #F92672;
+}
+
+.tour-color-channel-g {
+    color: #A6E22E;
+}
+
+.tour-color-channel-b {
+    color: #66D9EF;
+}
+
+/* ========================================================================
+ * COLOR SLIDER STYLES (Smaller version for color pickers)
+ * ======================================================================== */
+
+/**
+ * Color channel slider (smaller than regular range).
+ * Used by: .tour-color-slider
+ * 
+ * Styling: White track with blue accent, smaller size
+ */
+.tour-color-slider {
+    width: 55px;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    height: 3px;
+}
+
+.tour-color-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.tour-color-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(#6DB3F2, #4A90D9);
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    margin-top: -5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tour-color-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    background: linear-gradient(#7DC3FF, #5AA0E9);
+}
+
+.tour-color-slider::-webkit-slider-thumb:active {
+    transform: scale(0.95);
+    background: linear-gradient(#5A90D9, #3A70B9);
+}
+
+/* Firefox */
+.tour-color-slider::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.tour-color-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(#6DB3F2, #4A90D9);
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tour-color-slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    background: linear-gradient(#7DC3FF, #5AA0E9);
+}
+
+.tour-color-slider::-moz-range-thumb:active {
+    transform: scale(0.95);
+    background: linear-gradient(#5A90D9, #3A70B9);
+}
+
+/**
+ * Color preview box.
+ * Used by: .tour-color-preview
+ */
+.tour-color-preview {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    border: 1px solid #2A2C2E;
+    margin-left: 4px;
+    flex-shrink: 0;
+}
+
+/**
+ * Color value display (RGB text).
+ * Used by: .tour-color-value
+ */
+.tour-color-value {
+    font-size: 9px;
+    color: #FFE0C6;
+    font-family: monospace;
+    margin-left: 6px;
+    min-width: 65px;
+}
+
+/* ========================================================================
+ * 7. MULTI-SELECT MODE STYLES
+ * ======================================================================== */
+
+/**
+ * Multi-select wrapper with gold accent (for Constellations).
+ * Used by: .tour-multiselect-gold
+ */
+.tour-multiselect-gold {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #000000;
+    background: rgba(253, 216, 134, 0.15);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/**
+ * Multi-select wrapper with purple accent (for Asterisms).
+ * Used by: .tour-multiselect-purple
+ */
+.tour-multiselect-purple {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #000000;
+    background: rgba(155, 89, 182, 0.15);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/**
+ * Multi-select wrapper with green accent (for Lunar Mansions).
+ * Used by: .tour-multiselect-green
+ */
+.tour-multiselect-green {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #000000;
+    background: rgba(129, 199, 132, 0.15);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/**
+ * Multi-select wrapper with orange accent (for Stars).
+ * Used by: .tour-multiselect-orange
+ */
+.tour-multiselect-orange {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #000000;
+    background: rgba(253, 216, 134, 0.15);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/**
+ * Selection count badge.
+ * Used by: .tour-selection-count
+ */
+.tour-selection-count {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 9px;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+/* Multi-select mode indicator for Constellations */
+#const-multi-select-mode {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+#const-multi-select-mode:checked {
+    accent-color: #FD971F;
+}
+
+/* Multi-select mode indicator for Asterisms - soft purple theme */
+#aster-multi-select-mode {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+#aster-multi-select-mode:checked {
+    accent-color: #9B59B6;
+}
+
+/* Multi-select mode indicator for Lunar Mansions - green theme */
+#lunar-multi-select-mode {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+#lunar-multi-select-mode:checked {
+    accent-color: #81C784;
+}
+
+/* Multi-select mode indicator for Stars - orange theme */
+#stars-multi-select-mode {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+#stars-multi-select-mode:checked {
+    accent-color: #F39C12;
+}
+
+/* ========================================================================
+ * 8. MULTI-SELECT SELECTED BUTTON STYLES
+ * ======================================================================== */
+
+/**
+ * Selected constellation button style in multi-select mode.
+ * Gold/amber theme.
+ */
 .pattern-btn.selected-constellation {
-    background: linear-gradient(#DCDBDA, #8A8C8E) !important;
+    background: linear-gradient(#DCDBDA, #FFE0C6) !important;
     border: 1px solid #000000 !important;
     color: #000000 !important;
     box-shadow: 0 0 6px rgba(253, 216, 134, 0.6);
@@ -2916,15 +3883,9 @@ button.button32:active {
     transform: translateY(-1px);
 }
 
-/* ============================================================
- * ASTERISMS MULTI-SELECT MODE STYLES
- * Soft purple/lavender theme matching the constellation style
- * ============================================================ */
-
 /**
  * Selected asterism button style in multi-select mode.
- * Uses a soft purple gradient that mirrors the constellation style,
- * maintaining the same visual hierarchy and subdued appearance.
+ * Soft purple/lavender theme.
  */
 .pattern-btn.selected-asterism {
     background: linear-gradient(#D9D0E3, #A595B8) !important;
@@ -2942,39 +3903,62 @@ button.button32:active {
     transform: translateY(1px);
 }
 
-/* ============================================================
- * MULTI-SELECT UI CONTROLS
- * ============================================================ */
-
-/* Multi-select mode indicator for constellations */
-#const-multi-select-mode {
-    cursor: pointer;
-    width: 14px;
-    height: 14px;
+/**
+ * Selected lunar mansion button style in multi-select mode.
+ * Kiwi/Light Green theme.
+ */
+.pattern-btn.selected-lunar {
+    background: linear-gradient(#C8E6C9, #81C784) !important;
+    border: 1px solid #2E5A2E !important;
+    color: #1A3B1A !important;
+    box-shadow: 0 0 6px rgba(129, 199, 132, 0.5);
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
 }
 
-#const-multi-select-mode:checked {
-    accent-color: #FD971F;
+.pattern-btn.selected-lunar:hover {
+    background: linear-gradient(#D4EAD5, #95D598) !important;
+    transform: translateY(-1px);
 }
 
-/* Multi-select mode indicator for asterisms - soft purple theme */
-#aster-multi-select-mode {
-    cursor: pointer;
-    width: 14px;
-    height: 14px;
+.pattern-btn.selected-lunar:active {
+    transform: translateY(1px);
 }
 
-#aster-multi-select-mode:checked {
-    accent-color: #9B59B6;
+/**
+ * Alternative selected style for special lunar mansions.
+ * Slightly darker green.
+ */
+.pattern-btn.selected-lunar-special {
+    background: linear-gradient(#A5D6A7, #66BB6A) !important;
+    border: 1px solid #1B5E20 !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Selection count badge for constellations */
+/**
+ * Selected star button style in multi-select mode.
+ * Orange/gold theme.
+ */
+.pattern-btn.selected-star {
+    background: linear-gradient(#FDEBD0, #F5B041) !important;
+    border: 1px solid #D35400 !important;
+    color: #1A1A2E !important;
+    box-shadow: 0 0 6px rgba(245, 176, 65, 0.6);
+}
+
+.pattern-btn.selected-star:hover {
+    background: linear-gradient(#FEF9E7, #F39C12) !important;
+    transform: translateY(-1px);
+}
+
+/**
+ * Selection count badges for specific types.
+ */
 #const-selection-count {
     font-family: monospace;
     font-weight: bold;
 }
 
-/* Selection count badge for asterisms - soft purple theme */
 #aster-selection-count {
     font-family: monospace;
     font-weight: bold;
@@ -2984,51 +3968,104 @@ button.button32:active {
     padding: 2px 8px;
 }
 
-/* ============================================================
- * MULTI-SELECT CONTAINERS
- * Matching the existing style but with color accents
- * ============================================================ */
+#lunar-selection-count {
+    font-family: monospace;
+    font-weight: bold;
+    background: rgba(129, 199, 132, 0.2);
+    color: #2E6B2E;
+    border-radius: 12px;
+    padding: 2px 8px;
+    transition: all 0.2s ease;
+}
+
+#lunar-selection-count:hover {
+    background: rgba(129, 199, 132, 0.35);
+}
+
+#stars-selection-count {
+    font-family: monospace;
+    font-weight: bold;
+    background: rgba(243, 156, 18, 0.2);
+    color: #D35400;
+}
+
+/* ========================================================================
+ * 9. INFO NOTES
+ * ======================================================================== */
 
 /**
- * Container for multi-select controls in constellations tab.
- * Maintains existing gold/amber accent.
+ * Info note box (used in Lunar Mansions tab).
+ * Used by: .tour-info-note
  */
-.const-multi-select-container {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(253, 216, 134, 0.15);
-    padding: 4px 10px;
+.tour-info-note {
+    background: rgba(129, 199, 132, 0.08);
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid rgba(129, 199, 132, 0.2);
+}
+
+.tour-info-note .info-title {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #81C784;
+}
+
+.tour-info-note .info-text {
+    font-size: 10px;
+    color: #FFE0C6;
+    line-height: 1.5;
+}
+
+/**
+ * Alternative info note (lunar-info-note - legacy, kept for compatibility).
+ */
+.lunar-info-note {
+    background: rgba(129, 199, 132, 0.08);
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid rgba(129, 199, 132, 0.2);
+}
+
+.lunar-info-note .info-title {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #81C784;
+}
+
+/* ========================================================================
+ * 10. NOTIFICATION TOAST
+ * ======================================================================== */
+
+/**
+ * Temporary notification shown when actions complete.
+ * Used by: .tour-notification (created dynamically)
+ */
+.tour-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    color: #DCDBDA;
+    padding: 8px 15px;
     border-radius: 4px;
+    z-index: 10000;
+    font-size: 11px;
+    border: 1px solid #2A2C2E;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    animation: tour-notification-fade-in 0.3s ease;
 }
 
-/**
- * Container for multi-select controls in asterisms tab.
- * Uses subtle purple accent matching the button style.
- */
-.aster-multi-select-container {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(155, 89, 182, 0.12);
-    padding: 4px 10px;
-    border-radius: 4px;
-}
-
-/* ============================================================
- * SELECTION TRANSITION ANIMATIONS
- * ============================================================ */
+/* ========================================================================
+ * 11. ANIMATION KEYFRAMES
+ * ======================================================================== */
 
 /**
- * Smooth transition for selection/deselection of buttons.
- */
-.pattern-btn.selected-constellation,
-.pattern-btn.selected-asterism {
-    transition: all 0.2s ease-in-out;
-}
-
-/**
- * Subtle pulse effect for newly selected buttons.
+ * Selection pulse animation for multi-select buttons.
  */
 @keyframes selectPulse {
     0% {
@@ -3052,149 +4089,355 @@ button.button32:active {
     animation: none;
 }
 
-/* ============================================================
- * LUNAR MANSIONS MULTI-SELECT MODE STYLES
- * Kiwi/Light Green Theme - Fresh and Natural
- * ============================================================ */
-
 /**
- * Selected lunar mansion button style in multi-select mode.
- * Uses a fresh kiwi/light green gradient that maintains the same
- * visual hierarchy and subdued appearance as constellations.
- * Color scheme: #C8E6C9 (light green) to #81C784 (medium green)
+ * Notification fade-in animation.
  */
-.pattern-btn.selected-lunar {
-    background: linear-gradient(#C8E6C9, #81C784) !important;
-    border: 1px solid #2E5A2E !important;
-    color: #1A3B1A !important;
-    box-shadow: 0 0 6px rgba(129, 199, 132, 0.5);
-    text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+@keyframes tour-notification-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.pattern-btn.selected-lunar:hover {
-    background: linear-gradient(#D4EAD5, #95D598) !important;
-    transform: translateY(-1px);
+/* ========================================================================
+ * 12. RESPONSIVE ADJUSTMENTS
+ * ======================================================================== */
+
+/* Medium screens (tablets, small laptops) */
+@media (max-width: 1024px) {
+    .tour-toolbar-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 12px;
+    }
+    
+    .tour-generate-btn {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
 }
 
-.pattern-btn.selected-lunar:active {
-    transform: translateY(1px);
+/* Small screens (tablets, large phones) */
+@media (max-width: 768px) {
+    .tour-toolbar-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .tour-controls-container {
+        margin: 8px 0 12px 0;
+        padding: 6px 0;
+    }
+    
+    .tour-section-title {
+        font-size: 10px;
+    }
+    
+    .tour-row,
+    .tour-row-separator,
+    .tour-row-subtle {
+        gap: 6px;
+    }
+    
+    .tour-control-group {
+        font-size: 10px;
+    }
+    
+    .tour-control-group-highlight {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+    
+    .tour-generate-btn {
+        padding: 4px 8px;
+        font-size: 10px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .tour-input-number {
+        width: 45px;
+        font-size: 10px;
+    }
+    
+    .tour-input-range {
+        width: 60px;
+    }
+    
+    .tour-color-slider {
+        width: 45px;
+    }
+    
+    .tour-color-value {
+        font-size: 8px;
+        min-width: 55px;
+    }
+    
+    .tour-multiselect-gold,
+    .tour-multiselect-purple,
+    .tour-multiselect-green,
+    .tour-multiselect-orange {
+        padding: 3px 8px;
+        font-size: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .tour-notification {
+        font-size: 10px;
+        padding: 6px 12px;
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .tour-section-lines,
+    .tour-section-labels,
+    .tour-section-artwork,
+    .tour-section-boundaries,
+    .tour-section-hulls,
+    .tour-section-lunar {
+        padding: 6px;
+    }
 }
 
-/**
- * Alternative selected style for ray helpers or special mansions.
- * Slightly darker green to differentiate from regular mansions.
- */
-.pattern-btn.selected-lunar-special {
-    background: linear-gradient(#A5D6A7, #66BB6A) !important;
-    border: 1px solid #1B5E20 !important;
-    color: #FFFFFF !important;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+/* Extra small screens (phones) */
+@media (max-width: 480px) {
+    .tour-toolbar-grid {
+        gap: 8px;
+    }
+    
+    .tour-controls-container {
+        margin: 6px 0 10px 0;
+        padding: 4px 0;
+    }
+    
+    .tour-section-title {
+        font-size: 9px;
+        margin-bottom: 6px;
+    }
+    
+    .tour-row,
+    .tour-row-separator,
+    .tour-row-subtle {
+        gap: 4px;
+        padding: 4px 0;
+    }
+    
+    .tour-control-group {
+        font-size: 9px;
+        gap: 3px;
+    }
+    
+    .tour-control-group-highlight {
+        font-size: 9px;
+        padding: 2px 6px;
+        gap: 4px;
+    }
+    
+    .tour-generate-btn {
+        padding: 3px 6px;
+        font-size: 9px;
+    }
+    
+    .tour-input-number {
+        width: 40px;
+        font-size: 9px;
+        padding: 2px 3px;
+    }
+    
+    .tour-input-range {
+        width: 50px;
+    }
+    
+    .tour-color-group {
+        padding: 4px 6px;
+    }
+    
+    .tour-color-group-label {
+        font-size: 9px;
+    }
+    
+    .tour-color-slider {
+        width: 35px;
+    }
+    
+    .tour-color-preview {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .tour-color-value {
+        font-size: 8px;
+        min-width: 45px;
+        margin-left: 4px;
+    }
+    
+    .tour-multiselect-gold,
+    .tour-multiselect-purple,
+    .tour-multiselect-green,
+    .tour-multiselect-orange {
+        padding: 2px 6px;
+        font-size: 9px;
+        gap: 4px;
+    }
+    
+    .tour-multiselect-hint {
+        font-size: 8px;
+    }
+    
+    .tour-selection-count {
+        font-size: 8px;
+        padding: 1px 6px;
+    }
+    
+    .tour-notification {
+        font-size: 9px;
+        padding: 5px 10px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .tour-section-lines,
+    .tour-section-labels,
+    .tour-section-artwork,
+    .tour-section-boundaries,
+    .tour-section-hulls,
+    .tour-section-lunar {
+        padding: 4px;
+        gap: 4px;
+    }
+    
+    .tour-section-header {
+        font-size: 9px;
+    }
+    
+    .tour-info-note,
+    .lunar-info-note {
+        padding: 6px 8px;
+        font-size: 9px;
+    }
+    
+    .tour-info-note .info-title,
+    .lunar-info-note .info-title {
+        font-size: 10px;
+    }
+    
+    .tour-info-note .info-text {
+        font-size: 9px;
+    }
 }
 
-/* ============================================================
- * LUNAR MANSIONS MULTI-SELECT UI CONTROLS
- * ============================================================ */
-
-/**
- * Multi-select mode indicator for lunar mansions.
- * Uses a matching kiwi green accent color.
- */
-#lunar-multi-select-mode {
-    cursor: pointer;
-    width: 14px;
-    height: 14px;
+/* Print styles - hide tour controls when printing */
+@media print {
+    .tour-controls-container {
+        display: none !important;
+    }
 }
 
-#lunar-multi-select-mode:checked {
-    accent-color: #81C784;
+/* ========================================================================
+ * RESPONSIVE ADJUSTMENTS FOR SLIDERS
+ * ======================================================================== */
+
+/* Small screens */
+@media (max-width: 768px) {
+    .tour-input-range {
+        width: 60px;
+        height: 5px;
+    }
+    
+    .tour-input-range::-webkit-slider-runnable-track {
+        height: 5px;
+    }
+    
+    .tour-input-range::-webkit-slider-thumb {
+        width: 14px;
+        height: 14px;
+        margin-top: -4px;
+    }
+    
+    .tour-input-range::-moz-range-track {
+        height: 5px;
+    }
+    
+    .tour-input-range::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .tour-color-slider {
+        width: 45px;
+        height: 4px;
+    }
+    
+    .tour-color-slider::-webkit-slider-runnable-track {
+        height: 4px;
+    }
+    
+    .tour-color-slider::-webkit-slider-thumb {
+        width: 12px;
+        height: 12px;
+        margin-top: -4px;
+    }
+    
+    .tour-color-slider::-moz-range-track {
+        height: 4px;
+    }
+    
+    .tour-color-slider::-moz-range-thumb {
+        width: 12px;
+        height: 12px;
+    }
 }
 
-/**
- * Selection count badge for lunar mansions.
- * Light green background with dark green text.
- */
-#lunar-selection-count {
-    font-family: monospace;
-    font-weight: bold;
-    background: rgba(129, 199, 132, 0.2);
-    color: #2E6B2E;
-    border-radius: 12px;
-    padding: 2px 8px;
-    transition: all 0.2s ease;
+/* Extra small screens */
+@media (max-width: 480px) {
+    .tour-input-range {
+        width: 50px;
+        height: 4px;
+    }
+    
+    .tour-input-range::-webkit-slider-runnable-track {
+        height: 4px;
+    }
+    
+    .tour-input-range::-webkit-slider-thumb {
+        width: 12px;
+        height: 12px;
+        margin-top: -4px;
+    }
+    
+    .tour-input-range::-moz-range-track {
+        height: 4px;
+    }
+    
+    .tour-input-range::-moz-range-thumb {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .tour-color-slider {
+        width: 35px;
+        height: 3px;
+    }
+    
+    .tour-color-slider::-webkit-slider-runnable-track {
+        height: 3px;
+    }
+    
+    .tour-color-slider::-webkit-slider-thumb {
+        width: 10px;
+        height: 10px;
+        margin-top: -3px;
+    }
+    
+    .tour-color-slider::-moz-range-track {
+        height: 3px;
+    }
+    
+    .tour-color-slider::-moz-range-thumb {
+        width: 10px;
+        height: 10px;
+    }
 }
-
-#lunar-selection-count:hover {
-    background: rgba(129, 199, 132, 0.35);
-}
-
-/**
- * Multi-select container for lunar mansions toolbar.
- * Subtle green background matching the theme.
- */
-.lunar-multi-select-container {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(129, 199, 132, 0.12);
-    padding: 4px 10px;
-    border-radius: 4px;
-}
-
-/* ============================================================
- * LUNAR TOUR TOOLBAR SPECIFIC STYLES
- * ============================================================ */
-
-/**
- * Special note box for lunar mansions information.
- */
-.lunar-info-note {
-    background: rgba(129, 199, 132, 0.08);
-    border-radius: 6px;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid rgba(129, 199, 132, 0.2);
-}
-
-.lunar-info-note .info-title {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #81C784;
-}
-
-/* ============================================================
- * STARS MULTI-SELECT MODE STYLES
- * ============================================================ */
-
-/* Selected star button style in multi-select mode */
-.pattern-btn.selected-star {
-    background: linear-gradient(#FDEBD0, #F5B041) !important;
-    border: 1px solid #D35400 !important;
-    color: #1A1A2E !important;
-    box-shadow: 0 0 6px rgba(245, 176, 65, 0.6);
-}
-
-.pattern-btn.selected-star:hover {
-    background: linear-gradient(#FEF9E7, #F39C12) !important;
-    transform: translateY(-1px);
-}
-
-/* Multi-select mode indicator for stars */
-#stars-multi-select-mode {
-    cursor: pointer;
-    width: 14px;
-    height: 14px;
-}
-
-#stars-multi-select-mode:checked {
-    accent-color: #F39C12;
-}
-
-/* Selection count badge for stars */
-#stars-selection-count {
-    font-family: monospace;
-    font-weight: bold;
-    background: rgba(243, 156, 18, 0.2);
-    color: #D35400;
-}
-

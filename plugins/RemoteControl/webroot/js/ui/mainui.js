@@ -260,6 +260,173 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 		});
 	}
 
+	// ============================================================
+	// COLOR PICKER CONTROLS FOR SKY CULTURE OPTIONS
+	// ============================================================
+	// Hook up color picker controls
+	function connectColorPickers() {
+			$('.color-picker-wrapper').each(function() {
+					var $wrapper = $(this);
+					var prop = $wrapper.data('prop');
+					if (!prop) {
+							console.error('Color picker missing data-prop attribute');
+							return;
+					}
+
+					var $swatch = $wrapper.find('.color-swatch');
+					var $rInput = $wrapper.find('.color-r');
+					var $gInput = $wrapper.find('.color-g');
+					var $bInput = $wrapper.find('.color-b');
+
+					$rInput.data('prop', prop);
+					$gInput.data('prop', prop);
+					$bInput.data('prop', prop);
+					$swatch.data('prop', prop);
+
+					function updateSwatch($wrapper2) {
+							var r = parseFloat($wrapper2.find('.color-r').val()) || 0;
+							var g = parseFloat($wrapper2.find('.color-g').val()) || 0;
+							var b = parseFloat($wrapper2.find('.color-b').val()) || 0;
+							
+							r = Math.max(0, Math.min(1, r));
+							g = Math.max(0, Math.min(1, g));
+							b = Math.max(0, Math.min(1, b));
+							
+							var rgb = 'rgb(' + Math.round(r * 255) + ',' + Math.round(g * 255) + ',' + Math.round(b * 255) + ')';
+							$wrapper2.find('.color-swatch').css('background-color', rgb);
+							
+							return [r, g, b];
+					}
+
+					function sendColor(prop2, r, g, b) {
+							r = Math.max(0, Math.min(1, r));
+							g = Math.max(0, Math.min(1, g));
+							b = Math.max(0, Math.min(1, b));
+							
+							var value = '[' + r.toFixed(2) + ', ' + g.toFixed(2) + ', ' + b.toFixed(2) + ']';
+							propApi.setStelProp(prop2, value);
+					}
+
+					// Listen for server changes
+					$(propApi).on('stelPropertyChanged:' + prop, function(evt, propData) {
+							var value = propData.value;
+							var colorArray = null;
+							
+							if (typeof value === 'string') {
+									try {
+											colorArray = JSON.parse(value);
+									} catch(e) {
+											var cleaned = value.replace(/[\[\]]/g, '').trim().split(',').map(function(v) {
+													return parseFloat(v.trim());
+											});
+											if (cleaned.length === 3 && !cleaned.some(isNaN)) {
+													colorArray = cleaned;
+											}
+									}
+							} else if (Array.isArray(value) && value.length === 3) {
+									colorArray = value;
+							}
+							
+							if (colorArray && colorArray.length === 3) {
+									var r = parseFloat(colorArray[0]) || 0;
+									var g = parseFloat(colorArray[1]) || 0;
+									var b = parseFloat(colorArray[2]) || 0;
+									
+									$rInput.val(r.toFixed(2));
+									$gInput.val(g.toFixed(2));
+									$bInput.val(b.toFixed(2));
+									
+									var rgb = 'rgb(' + Math.round(r * 255) + ',' + Math.round(g * 255) + ',' + Math.round(b * 255) + ')';
+									$swatch.css('background-color', rgb);
+							}
+					});
+
+					// Get initial value
+					var initialValue = propApi.getStelProp(prop);
+					if (initialValue !== undefined) {
+							var colorArray = null;
+							if (typeof initialValue === 'string') {
+									try {
+											colorArray = JSON.parse(initialValue);
+									} catch(e) {
+											var cleaned = initialValue.replace(/[\[\]]/g, '').trim().split(',').map(function(v) {
+													return parseFloat(v.trim());
+											});
+											if (cleaned.length === 3 && !cleaned.some(isNaN)) {
+													colorArray = cleaned;
+											}
+									}
+							} else if (Array.isArray(initialValue) && initialValue.length === 3) {
+									colorArray = initialValue;
+							}
+							
+							if (colorArray && colorArray.length === 3) {
+									var r = parseFloat(colorArray[0]) || 0;
+									var g = parseFloat(colorArray[1]) || 0;
+									var b = parseFloat(colorArray[2]) || 0;
+									$rInput.val(r.toFixed(2));
+									$gInput.val(g.toFixed(2));
+									$bInput.val(b.toFixed(2));
+									var rgb = 'rgb(' + Math.round(r * 255) + ',' + Math.round(g * 255) + ',' + Math.round(b * 255) + ')';
+									$swatch.css('background-color', rgb);
+							}
+					}
+
+					// Bind events
+					$rInput.off('input.colorPicker').on('input.colorPicker', function() {
+							var $wrapper2 = $(this).closest('.color-picker-wrapper');
+							var prop2 = $wrapper2.data('prop');
+							var colors = updateSwatch($wrapper2);
+							sendColor(prop2, colors[0], colors[1], colors[2]);
+					});
+
+					$gInput.off('input.colorPicker').on('input.colorPicker', function() {
+							var $wrapper2 = $(this).closest('.color-picker-wrapper');
+							var prop2 = $wrapper2.data('prop');
+							var colors = updateSwatch($wrapper2);
+							sendColor(prop2, colors[0], colors[1], colors[2]);
+					});
+
+					$bInput.off('input.colorPicker').on('input.colorPicker', function() {
+							var $wrapper2 = $(this).closest('.color-picker-wrapper');
+							var prop2 = $wrapper2.data('prop');
+							var colors = updateSwatch($wrapper2);
+							sendColor(prop2, colors[0], colors[1], colors[2]);
+					});
+
+					// Swatch click - open native color picker
+					$swatch.off('click.colorPicker').on('click.colorPicker', function() {
+							var $wrapper2 = $(this).closest('.color-picker-wrapper');
+							var r = parseFloat($wrapper2.find('.color-r').val()) || 0;
+							var g = parseFloat($wrapper2.find('.color-g').val()) || 0;
+							var b = parseFloat($wrapper2.find('.color-b').val()) || 0;
+							
+							var hex = '#' + 
+									Math.round(r * 255).toString(16).padStart(2, '0') +
+									Math.round(g * 255).toString(16).padStart(2, '0') +
+									Math.round(b * 255).toString(16).padStart(2, '0');
+							
+							var input = document.createElement('input');
+							input.type = 'color';
+							input.value = hex;
+							input.addEventListener('input', function() {
+									var hexVal = this.value;
+									var r2 = parseInt(hexVal.substring(1,3), 16) / 255;
+									var g2 = parseInt(hexVal.substring(3,5), 16) / 255;
+									var b2 = parseInt(hexVal.substring(5,7), 16) / 255;
+									var prop2 = $wrapper2.data('prop');
+									$wrapper2.find('.color-r').val(r2.toFixed(2));
+									$wrapper2.find('.color-g').val(g2.toFixed(2));
+									$wrapper2.find('.color-b').val(b2.toFixed(2));
+									var rgb = 'rgb(' + Math.round(r2 * 255) + ',' + Math.round(g2 * 255) + ',' + Math.round(b2 * 255) + ')';
+									$wrapper2.find('.color-swatch').css('background-color', rgb);
+									sendColor(prop2, r2, g2, b2);
+							});
+							input.click();
+					});
+			});
+	}
+
 	//DOM-ready
 	$(function() {
 		//preload the error images, otherwise they may be loaded when the connection is lost, which of course wont work
@@ -298,6 +465,9 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 		//create and connect automatic GUI elements defined in the DOM
 		createAutomaticGUIElements();
 		connectStelProperties();
+
+		// CONNECT COLOR PICKER CONTROLS
+		connectColorPickers();
 
 		//main tabs
 		//remember which tab was active after refresh by storing id in sessionstore

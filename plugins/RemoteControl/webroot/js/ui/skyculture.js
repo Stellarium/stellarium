@@ -3211,7 +3211,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
             $subTabs.tabs('option', 'active', 0);  // Script Editor is the first tab
         }
     }
-		
+
 		/**
 		 * Create the tour control toolbar for constellations inside the constellations tab.
 		 * Provides controls for generating dynamic/static scripts with full customization.
@@ -3222,32 +3222,36 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 		 */
 		function createConstellationsTourToolbar() {
 				console.log("[SkyCulture] createConstellationsTourToolbar() called");
-				
+
 				// Check if toolbar already exists
 				if ($('#const-tour-controls-container').length > 0) {
 						console.log("[SkyCulture] Constellations tour toolbar already exists, skipping");
 						return;
 				}
-				
+
 				// Find the constellations tab content
 				var $constellationsTab = $('#patterns-tab-constellations');
 				if (!$constellationsTab.length) {
 						console.warn("[SkyCulture] Constellations tab not found");
 						return;
 				}
-				
-				// Find the patterns-note element to insert after
-				var $patternsNote = $constellationsTab.find('.patterns-note');
-				
-				// Create toolbar container
-				var $toolbarContainer = $('<div id="const-tour-controls-container" class="tour-controls-container" style="margin: 10px 0; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.1);"></div>');
-				
-				// Add section title
-				var $sectionTitle = $('<div style="margin-bottom: 8px; font-size: 11px; font-weight: bold; color: #B4B7B0;">' + _tr("Constellations Tour Generator") + '</div>');
-				
-				// Create inner toolbar with multi-column grid layout
-				var $toolbar = $('<div class="tour-toolbar" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px; width:100%;"></div>');
-				
+
+				// Find the container where buttons are displayed
+				var $buttonsContainer = $constellationsTab.find('#constellations-buttons-container');
+				if (!$buttonsContainer.length) {
+						console.warn("[SkyCulture] Constellations buttons container not found");
+						return;
+				}
+
+				// Create toolbar container - NO inline styles
+				var $toolbarContainer = $('<div id="const-tour-controls-container" class="tour-controls-container"></div>');
+
+				// Add section title - NO inline styles
+				var $sectionTitle = $('<div class="tour-section-title">' + _tr("Constellations Tour Generator") + '</div>');
+
+				// Create inner toolbar with multi-column grid layout - NO inline styles
+				var $toolbar = $('<div class="tour-toolbar-grid"></div>');
+
 				// ============================================================
 				// HELPER FUNCTION: Update section header color
 				// ============================================================
@@ -3259,36 +3263,36 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 								$section.css('border-left-color', hexColor);
 						}
 				}
-				
+
 				// ============================================================
 				// HELPER FUNCTION: Create color group with live section header update
 				// ============================================================
-				function createColorGroup(label, idPrefix, sectionId, defaultR, defaultG, defaultB, defaultAccentColor) {
-						var $group = $('<div style="display:flex;flex-direction:column;gap:4px;padding:6px 8px;background:rgba(0,0,0,0.1);border-radius:4px;"></div>');
-						$group.append('<span style="font-size:10px;font-weight:bold;color:#DCDBDA;margin-bottom:2px;">' + label + '</span>');
-						
-						var $sliders = $('<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;"></div>');
-						
-						$sliders.append('<span style="font-size:9px;color:#F92672;">R</span>');
-						var $rSlider = $('<input type="range" id="' + idPrefix + '-r" min="0" max="100" value="' + (defaultR * 100) + '" step="1" style="width:55px;">');
+				function createColorGroup(label, idPrefix, sectionId, defaultR, defaultG, defaultB) {
+						var $group = $('<div class="tour-color-group"></div>');
+						$group.append('<span class="tour-color-group-label">' + label + '</span>');
+
+						var $sliders = $('<div class="tour-color-sliders"></div>');
+
+						$sliders.append('<span class="tour-color-channel tour-color-channel-r">R</span>');
+						var $rSlider = $('<input type="range" id="' + idPrefix + '-r" class="tour-color-slider" min="0" max="100" value="' + (defaultR * 100) + '" step="1">');
 						$sliders.append($rSlider);
-						
-						$sliders.append('<span style="font-size:9px;color:#A6E22E;">G</span>');
-						var $gSlider = $('<input type="range" id="' + idPrefix + '-g" min="0" max="100" value="' + (defaultG * 100) + '" step="1" style="width:55px;">');
+
+						$sliders.append('<span class="tour-color-channel tour-color-channel-g">G</span>');
+						var $gSlider = $('<input type="range" id="' + idPrefix + '-g" class="tour-color-slider" min="0" max="100" value="' + (defaultG * 100) + '" step="1">');
 						$sliders.append($gSlider);
-						
-						$sliders.append('<span style="font-size:9px;color:#66D9EF;">B</span>');
-						var $bSlider = $('<input type="range" id="' + idPrefix + '-b" min="0" max="100" value="' + (defaultB * 100) + '" step="1" style="width:55px;">');
+
+						$sliders.append('<span class="tour-color-channel tour-color-channel-b">B</span>');
+						var $bSlider = $('<input type="range" id="' + idPrefix + '-b" class="tour-color-slider" min="0" max="100" value="' + (defaultB * 100) + '" step="1">');
 						$sliders.append($bSlider);
-						
-						var $preview = $('<div id="' + idPrefix + '-preview" style="width:20px;height:20px;border-radius:3px;border:1px solid #2A2C2E;margin-left:4px;"></div>');
+
+						var $preview = $('<div id="' + idPrefix + '-preview" class="tour-color-preview"></div>');
 						$sliders.append($preview);
-						
-						var $valueDisplay = $('<span id="' + idPrefix + '-value" style="font-size:9px;color:#8A8C8E;font-family:monospace;margin-left:6px;min-width:65px;">' + defaultR.toFixed(2) + ', ' + defaultG.toFixed(2) + ', ' + defaultB.toFixed(2) + '</span>');
+
+						var $valueDisplay = $('<span id="' + idPrefix + '-value" class="tour-color-value">' + defaultR.toFixed(2) + ', ' + defaultG.toFixed(2) + ', ' + defaultB.toFixed(2) + '</span>');
 						$sliders.append($valueDisplay);
-						
+
 						$group.append($sliders);
-						
+
 						// Initialize preview with default color
 						var initR = defaultR;
 						var initG = defaultG;
@@ -3297,7 +3301,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 						var previewG = Math.floor(initG * 255);
 						var previewB = Math.floor(initB * 255);
 						$preview.css('background', 'rgb(' + previewR + ',' + previewG + ',' + previewB + ')');
-						
+
 						function updateFromSliders() {
 								var r = parseFloat($rSlider.val()) / 100;
 								var g = parseFloat($gSlider.val()) / 100;
@@ -3309,315 +3313,292 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 								$valueDisplay.text(r.toFixed(2) + ', ' + g.toFixed(2) + ', ' + b.toFixed(2));
 								updateSectionColor(sectionId, r, g, b);
 						}
-						
+
 						$rSlider.on('input', updateFromSliders);
 						$gSlider.on('input', updateFromSliders);
 						$bSlider.on('input', updateFromSliders);
-						
+
 						return $group;
 				}
-				
+
 				// ============================================================
 				// COLUMN 1: Script Generation + Timing Controls
 				// ============================================================
-				var $column1 = $('<div style="display:flex;flex-direction:column;gap:12px;"></div>');
-				
+				var $column1 = $('<div class="tour-column"></div>');
+
 				// Script Generation Buttons
-				var $genRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid rgba(180,183,176,0.2);"></div>');
-				$constTourGenerateDynamicBtn = $('<button id="btn-generate-const-dynamic" class="jquerybutton pattern-btn" style="background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:3px;padding:5px 10px;font-size:11px;font-weight:bold;color:#000;cursor:pointer;" title="' + _tr("Generates script using ConstellationMgr.getConstellationsEnglishNames() - works with any culture") + '">' + _tr("Generate Dynamic Constellation Tour Script") + '</button>');
+				var $genRow = $('<div class="tour-row-separator"></div>');
+				$constTourGenerateDynamicBtn = $('<button id="btn-generate-const-dynamic" class="jquerybutton pattern-btn tour-generate-btn" title="' + _tr("Generates script using ConstellationMgr.getConstellationsEnglishNames() - works with any culture") + '">' + _tr("Generate Dynamic Constellation Tour Script") + '</button>');
 				$genRow.append($constTourGenerateDynamicBtn);
-				
-				$constTourGenerateStaticBtn = $('<button id="btn-generate-const-static" class="jquerybutton pattern-btn" style="background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:3px;padding:5px 10px;font-size:11px;font-weight:bold;color:#000;cursor:pointer;" title="' + _tr("Generates script with embedded constellation name array - portable and self-contained") + '">' + _tr("Generate Static Arry Constellation Tour Script") + '</button>');
+
+				$constTourGenerateStaticBtn = $('<button id="btn-generate-const-static" class="jquerybutton pattern-btn tour-generate-btn" title="' + _tr("Generates script with embedded constellation name array - portable and self-contained") + '">' + _tr("Generate Static Array Constellation Tour Script") + '</button>');
 				$genRow.append($constTourGenerateStaticBtn);
-				
+
 				// Multi-Select Mode checkbox and counter
-        var $multiSelectWrapper = $('<div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#000;background:rgba(253,216,134,0.15);padding:4px 10px;border-radius:4px;margin-left:8px;"></div>');
-        $constMultiSelectMode = $('<input type="checkbox" id="const-multi-select-mode" style="margin:0;">');
-        $multiSelectWrapper.append($constMultiSelectMode);
-        $multiSelectWrapper.append('<label style="font-weight:bold;cursor:pointer;">' + _tr("Multi-Select") + '</label>');
-        $multiSelectWrapper.append('<span style="font-size:9px;color:#8A8C8E;">(' + _tr("Pick multiple") + ')</span>');
-        
-        // Selection count display
-        $constSelectionCount = $('<span id="const-selection-count" style="background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:12px;font-size:9px;margin-left:5px;">0 ' + _tr("selected") + '</span>');
-        $multiSelectWrapper.append($constSelectionCount);
-        
-        $genRow.append($multiSelectWrapper);
-				
+				var $multiSelectWrapper = $('<div class="tour-multiselect-gold"></div>');
+				$constMultiSelectMode = $('<input type="checkbox" id="const-multi-select-mode">');
+				$multiSelectWrapper.append($constMultiSelectMode);
+				$multiSelectWrapper.append('<label style="font-weight:bold;cursor:pointer;">' + _tr("Multi-Select") + '</label>');
+				$multiSelectWrapper.append('<span class="tour-multiselect-hint">(' + _tr("Pick multiple") + ')</span>');
+
+				$constSelectionCount = $('<span class="tour-selection-count">0 ' + _tr("selected") + '</span>');
+				$multiSelectWrapper.append($constSelectionCount);
+
+				$genRow.append($multiSelectWrapper);
+
 				$column1.append($genRow);
-				
-				// Timing Controls Row (Duration, Zoom, Overview)
-				var $timingRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:6px 0;"></div>');
-				
-				var $durationWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$durationWrapper.append('<label style="font-weight:bold;">' + _tr("Duration Per Const:") + '</label>');
-				$constTourDuration = $('<input type="number" id="const-tour-duration" value="4" min="1" max="15" step="0.5" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				// Timing Controls Row
+				var $timingRow = $('<div class="tour-row"></div>');
+
+				var $durationWrapper = $('<div class="tour-control-group"></div>');
+				$durationWrapper.append('<label class="tour-control-label-bold">' + _tr("Duration Per Const:") + '</label>');
+				$constTourDuration = $('<input type="number" id="const-tour-duration" class="tour-input-number" value="4" min="1" max="15" step="0.5">');
 				$durationWrapper.append($constTourDuration);
 				$durationWrapper.append('<span>' + _tr("sec") + '</span>');
 				$timingRow.append($durationWrapper);
-				
-				var $zoomWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$zoomWrapper.append('<label style="font-weight:bold;">' + _tr("Zoom Fov:") + '</label>');
-				$constTourZoomFov = $('<input type="number" id="const-zoom-fov" value="40" min="5" max="90" step="1" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $zoomWrapper = $('<div class="tour-control-group"></div>');
+				$zoomWrapper.append('<label class="tour-control-label-bold">' + _tr("Zoom FOV:") + '</label>');
+				$constTourZoomFov = $('<input type="number" id="const-zoom-fov" class="tour-input-number" value="40" min="5" max="90" step="1">');
 				$zoomWrapper.append($constTourZoomFov);
 				$zoomWrapper.append('<span>' + _tr("deg") + '</span>');
 				$timingRow.append($zoomWrapper);
-				
-				var $overviewWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$overviewWrapper.append('<label style="font-weight:bold;">' + _tr("Overview Fov:") + '</label>');
-				$constTourOverviewFov = $('<input type="number" id="const-overview-fov" value="90" min="20" max="120" step="1" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $overviewWrapper = $('<div class="tour-control-group"></div>');
+				$overviewWrapper.append('<label class="tour-control-label-bold">' + _tr("Overview FOV:") + '</label>');
+				$constTourOverviewFov = $('<input type="number" id="const-overview-fov" class="tour-input-number" value="90" min="20" max="120" step="1">');
 				$overviewWrapper.append($constTourOverviewFov);
 				$overviewWrapper.append('<span>' + _tr("deg") + '</span>');
 				$timingRow.append($overviewWrapper);
-				
+
 				$column1.append($timingRow);
-				
+
 				// Selection Mode Controls (Isolate + Pick Last Only)
-				var $selectionRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:6px 0;background:rgba(0,0,0,0.05);border-radius:4px;"></div>');
-				
-				var $isolateWrapper = $('<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#000;background:rgba(0,0,0,0.08);padding:4px 8px;border-radius:4px;"></div>');
-				$constTourIsolate = $('<input type="checkbox" id="const-tour-isolate" checked style="margin:0;">');
+				var $selectionRow = $('<div class="tour-row-subtle"></div>');
+
+				var $isolateWrapper = $('<div class="tour-control-group"></div>');
+				$constTourIsolate = $('<input type="checkbox" id="const-tour-isolate" checked>');
 				$isolateWrapper.append($constTourIsolate);
-				$isolateWrapper.append('<label style="font-weight:bold;">' + _tr("Isolate Selected") + '</label>');
+				$isolateWrapper.append('<label class="tour-control-label">' + _tr("Isolate Selected") + '</label>');
 				$selectionRow.append($isolateWrapper);
-				
-				var $pickLastWrapper = $('<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#000;background:rgba(0,0,0,0.08);padding:4px 8px;border-radius:4px;"></div>');
-				$constTourPickLastOnly = $('<input type="checkbox" id="const-tour-pick-last" style="margin:0;">');
+
+				var $pickLastWrapper = $('<div class="tour-control-group"></div>');
+				$constTourPickLastOnly = $('<input type="checkbox" id="const-tour-pick-last">');
 				$pickLastWrapper.append($constTourPickLastOnly);
-				$pickLastWrapper.append('<label style="font-weight:bold;">' + _tr("Select Last Only") + '</label>');
+				$pickLastWrapper.append('<label class="tour-control-label">' + _tr("Select Last Only") + '</label>');
 				$selectionRow.append($pickLastWrapper);
-				
+
 				$column1.append($selectionRow);
-				
+
 				// ============================================================
 				// COLUMN 2: Lines + Labels + Artwork
 				// ============================================================
-				var $column2 = $('<div style="display:flex;flex-direction:column;gap:12px;"></div>');
-				
+				var $column2 = $('<div class="tour-column"></div>');
+
 				// CONSTELLATION LINES Section
-				var $rowLines = $('<div id="const-lines-section" style="display:flex;flex-direction:column;gap:6px;padding:8px;background:rgba(0,0,0,0.05);border-radius:4px;border-left:3px solid #4DB2E6;"></div>');
-				$rowLines.append('<div id="const-lines-header" style="font-size:11px;font-weight:bold;color:#000000;">' + _tr("LINES") + '</div>');
-				
-				var $linesSubRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;"></div>');
-				
-				var $showLinesWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$constTourShowLines = $('<input type="checkbox" id="const-show-lines" checked style="margin:0;">');
+				var $rowLines = $('<div id="const-lines-section" class="tour-section-lines"></div>');
+				$rowLines.append('<div id="const-lines-header" class="tour-section-header">' + _tr("LINES") + '</div>');
+
+				var $linesSubRow = $('<div class="tour-row"></div>');
+
+				var $showLinesWrapper = $('<div class="tour-control-group"></div>');
+				$constTourShowLines = $('<input type="checkbox" id="const-show-lines" checked>');
 				$showLinesWrapper.append($constTourShowLines);
-				$showLinesWrapper.append('<label>' + _tr("Show") + '</label>');
+				$showLinesWrapper.append('<label class="tour-control-label">' + _tr("Show") + '</label>');
 				$linesSubRow.append($showLinesWrapper);
-				
-				var $lineThicknessWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$lineThicknessWrapper.append('<label>' + _tr("Thick:") + '</label>');
-				$constTourLineThickness = $('<input type="number" id="const-line-thickness" value="2" min="1" max="5" step="1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $lineThicknessWrapper = $('<div class="tour-control-group"></div>');
+				$lineThicknessWrapper.append('<label class="tour-control-label">' + _tr("Thick:") + '</label>');
+				$constTourLineThickness = $('<input type="number" id="const-line-thickness" class="tour-input-number" value="2" min="1" max="5" step="1">');
 				$lineThicknessWrapper.append($constTourLineThickness);
 				$lineThicknessWrapper.append('<span>' + _tr("px") + '</span>');
 				$linesSubRow.append($lineThicknessWrapper);
-				
-				var $linesFadeWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$linesFadeWrapper.append('<label>' + _tr("Fade:") + '</label>');
-				$constTourLinesFade = $('<input type="number" id="const-lines-fade" value="1.0" min="0" max="5" step="0.1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $linesFadeWrapper = $('<div class="tour-control-group"></div>');
+				$linesFadeWrapper.append('<label class="tour-control-label">' + _tr("Fade:") + '</label>');
+				$constTourLinesFade = $('<input type="number" id="const-lines-fade" class="tour-input-number" value="1.0" min="0" max="5" step="0.1">');
 				$linesFadeWrapper.append($constTourLinesFade);
 				$linesFadeWrapper.append('<span>' + _tr("sec") + '</span>');
 				$linesSubRow.append($linesFadeWrapper);
-				
+
 				$rowLines.append($linesSubRow);
-				var $linesColorGroup = createColorGroup(_tr("Lines Color"), "const-lines-color", "const-lines-section", 0.30, 0.60, 0.90, "#A6E22E");
+				var $linesColorGroup = createColorGroup(_tr("Lines Color"), "const-lines-color", "const-lines-section", 0.30, 0.60, 0.90);
 				$rowLines.append($linesColorGroup);
 				$column2.append($rowLines);
-				
+
 				// CONSTELLATION LABELS Section
-				var $rowLabels = $('<div id="const-labels-section" style="display:flex;flex-direction:column;gap:6px;padding:8px;background:rgba(0,0,0,0.05);border-radius:4px;border-left:3px solid #007F00;"></div>');
-				$rowLabels.append('<div id="const-labels-header" style="font-size:11px;font-weight:bold;color:#000000;">' + _tr("LABELS") + '</div>');
-				
-				var $labelsSubRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;"></div>');
-				
-				var $fontWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$fontWrapper.append('<label>' + _tr("Size:") + '</label>');
-				$constTourFontSize = $('<input type="number" id="const-font-size" value="16" min="10" max="30" step="1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+				var $rowLabels = $('<div id="const-labels-section" class="tour-section-labels"></div>');
+				$rowLabels.append('<div id="const-labels-header" class="tour-section-header">' + _tr("LABELS") + '</div>');
+
+				var $labelsSubRow = $('<div class="tour-row"></div>');
+
+				var $fontWrapper = $('<div class="tour-control-group"></div>');
+				$fontWrapper.append('<label class="tour-control-label">' + _tr("Size:") + '</label>');
+				$constTourFontSize = $('<input type="number" id="const-font-size" class="tour-input-number" value="16" min="10" max="30" step="1">');
 				$fontWrapper.append($constTourFontSize);
 				$fontWrapper.append('<span>' + _tr("px") + '</span>');
 				$labelsSubRow.append($fontWrapper);
-				
-				var $labelsFadeWrapper2 = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$labelsFadeWrapper2.append('<label>' + _tr("Fade:") + '</label>');
-				$constTourLabelsFade = $('<input type="number" id="const-labels-fade" value="1.0" min="0" max="5" step="0.1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $labelsFadeWrapper2 = $('<div class="tour-control-group"></div>');
+				$labelsFadeWrapper2.append('<label class="tour-control-label">' + _tr("Fade:") + '</label>');
+				$constTourLabelsFade = $('<input type="number" id="const-labels-fade" class="tour-input-number" value="1.0" min="0" max="5" step="0.1">');
 				$labelsFadeWrapper2.append($constTourLabelsFade);
 				$labelsFadeWrapper2.append('<span>' + _tr("sec") + '</span>');
 				$labelsSubRow.append($labelsFadeWrapper2);
-				
+
 				$rowLabels.append($labelsSubRow);
-				var $labelsColorGroup = createColorGroup(_tr("Labels Color"), "const-labels-color", "const-labels-section", 0.00, 0.50, 0.00, "#66D9EF");
+				var $labelsColorGroup = createColorGroup(_tr("Labels Color"), "const-labels-color", "const-labels-section", 0.00, 0.50, 0.00);
 				$rowLabels.append($labelsColorGroup);
 				$column2.append($rowLabels);
-				
+
 				// CONSTELLATION ARTWORK Section
-				var $rowArt = $('<div id="const-art-section" style="display:flex;flex-direction:column;gap:6px;padding:8px;background:rgba(0,0,0,0.05);border-radius:4px;"></div>');
-				$rowArt.append('<div id="const-art-header" style="font-size:11px;font-weight:bold;color:#000000;">' + _tr("ARTWORK") + '</div>');
-				
-				var $artSubRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;"></div>');
-				
-				var $artWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$constTourShowArt = $('<input type="checkbox" id="const-show-art" checked style="margin:0;">');
+				var $rowArt = $('<div id="const-art-section" class="tour-section-artwork"></div>');
+				$rowArt.append('<div id="const-art-header" class="tour-section-header">' + _tr("ARTWORK") + '</div>');
+
+				var $artSubRow = $('<div class="tour-row"></div>');
+
+				var $artWrapper = $('<div class="tour-control-group"></div>');
+				$constTourShowArt = $('<input type="checkbox" id="const-show-art" checked>');
 				$artWrapper.append($constTourShowArt);
-				$artWrapper.append('<label>' + _tr("Show") + '</label>');
+				$artWrapper.append('<label class="tour-control-label">' + _tr("Show") + '</label>');
 				$artSubRow.append($artWrapper);
-				
-				var $artIntensityWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$artIntensityWrapper.append('<label>' + _tr("Intensity:") + '</label>');
-				$constTourArtIntensity = $('<input type="range" id="const-art-intensity" min="0" max="100" value="80" step="1" style="width:70px;">');
+
+				var $artIntensityWrapper = $('<div class="tour-control-group"></div>');
+				$artIntensityWrapper.append('<label class="tour-control-label">' + _tr("Intensity:") + '</label>');
+				$constTourArtIntensity = $('<input type="range" id="const-art-intensity" class="tour-input-range" min="0" max="100" value="80" step="1">');
 				$artIntensityWrapper.append($constTourArtIntensity);
-				var $artIntensityValue = $('<span id="const-art-intensity-value" style="font-size:10px;color:#8A8C8E;min-width:30px;">0.80</span>');
+				var $artIntensityValue = $('<span id="const-art-intensity-value" class="tour-range-value">0.80</span>');
 				$artIntensityWrapper.append($artIntensityValue);
 				$artSubRow.append($artIntensityWrapper);
-				
-				var $artFadeWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$artFadeWrapper.append('<label>' + _tr("Fade:") + '</label>');
-				$constTourArtFade = $('<input type="number" id="const-art-fade" value="2.0" min="0" max="5" step="0.1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border-radius:3px;padding:3px 4px;">');
+
+				var $artFadeWrapper = $('<div class="tour-control-group"></div>');
+				$artFadeWrapper.append('<label class="tour-control-label">' + _tr("Fade:") + '</label>');
+				$constTourArtFade = $('<input type="number" id="const-art-fade" class="tour-input-number" value="2.0" min="0" max="5" step="0.1">');
 				$artFadeWrapper.append($constTourArtFade);
 				$artFadeWrapper.append('<span>' + _tr("sec") + '</span>');
 				$artSubRow.append($artFadeWrapper);
-				
+
 				$rowArt.append($artSubRow);
 				$column1.append($rowArt);
-				
+
 				// Update art intensity value display
 				$constTourArtIntensity.on('input', function() {
 						var val = (parseFloat($(this).val()) / 100).toFixed(2);
 						$artIntensityValue.text(val);
 				});
-				
+
 				// ============================================================
 				// COLUMN 3: Boundaries + Hulls
 				// ============================================================
-				var $column3 = $('<div style="display:flex;flex-direction:column;gap:12px;"></div>');
-				
+				var $column3 = $('<div class="tour-column"></div>');
+
 				// CONSTELLATION BOUNDARIES Section
-				var $rowBoundaries = $('<div id="const-boundaries-section" style="display:flex;flex-direction:column;gap:6px;padding:8px;background:rgba(0,0,0,0.05);border-radius:4px;border-left:3px solid #F92672;"></div>');
-				$rowBoundaries.append('<div id="const-boundaries-header" style="font-size:11px;font-weight:bold;color:#000000;">' + _tr("BOUNDARIES") + '</div>');
-				
-				var $boundariesSubRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;"></div>');
-				
-				var $boundariesWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$constTourShowBoundaries = $('<input type="checkbox" id="const-show-boundaries" style="margin:0;">');
+				var $rowBoundaries = $('<div id="const-boundaries-section" class="tour-section-boundaries"></div>');
+				$rowBoundaries.append('<div id="const-boundaries-header" class="tour-section-header">' + _tr("BOUNDARIES") + '</div>');
+
+				var $boundariesSubRow = $('<div class="tour-row"></div>');
+
+				var $boundariesWrapper = $('<div class="tour-control-group"></div>');
+				$constTourShowBoundaries = $('<input type="checkbox" id="const-show-boundaries">');
 				$boundariesWrapper.append($constTourShowBoundaries);
-				$boundariesWrapper.append('<label>' + _tr("Show") + '</label>');
+				$boundariesWrapper.append('<label class="tour-control-label">' + _tr("Show") + '</label>');
 				$boundariesSubRow.append($boundariesWrapper);
-				
-				var $boundariesThicknessWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$boundariesThicknessWrapper.append('<label>' + _tr("Thick:") + '</label>');
-				$constTourBoundariesThickness = $('<input type="number" id="const-boundaries-thickness" value="1" min="1" max="5" step="1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $boundariesThicknessWrapper = $('<div class="tour-control-group"></div>');
+				$boundariesThicknessWrapper.append('<label class="tour-control-label">' + _tr("Thick:") + '</label>');
+				$constTourBoundariesThickness = $('<input type="number" id="const-boundaries-thickness" class="tour-input-number" value="1" min="1" max="5" step="1">');
 				$boundariesThicknessWrapper.append($constTourBoundariesThickness);
 				$boundariesThicknessWrapper.append('<span>' + _tr("px") + '</span>');
 				$boundariesSubRow.append($boundariesThicknessWrapper);
-				
-				var $boundariesFadeWrapper2 = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$boundariesFadeWrapper2.append('<label>' + _tr("Fade:") + '</label>');
-				$constTourBoundariesFade = $('<input type="number" id="const-boundaries-fade" value="1.0" min="0" max="5" step="0.1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $boundariesFadeWrapper2 = $('<div class="tour-control-group"></div>');
+				$boundariesFadeWrapper2.append('<label class="tour-control-label">' + _tr("Fade:") + '</label>');
+				$constTourBoundariesFade = $('<input type="number" id="const-boundaries-fade" class="tour-input-number" value="1.0" min="0" max="5" step="0.1">');
 				$boundariesFadeWrapper2.append($constTourBoundariesFade);
 				$boundariesFadeWrapper2.append('<span>' + _tr("sec") + '</span>');
 				$boundariesSubRow.append($boundariesFadeWrapper2);
-				
+
 				$rowBoundaries.append($boundariesSubRow);
-				var $boundariesColorGroup = createColorGroup(_tr("Boundaries Color"), "const-boundaries-color", "const-boundaries-section", 0.80, 0.30, 0.30, "#F92672");
+				var $boundariesColorGroup = createColorGroup(_tr("Boundaries Color"), "const-boundaries-color", "const-boundaries-section", 0.80, 0.30, 0.30);
 				$rowBoundaries.append($boundariesColorGroup);
 				$column3.append($rowBoundaries);
-				
+
 				// CONSTELLATION HULLS Section
-				var $rowHulls = $('<div id="const-hulls-section" style="display:flex;flex-direction:column;gap:6px;padding:8px;background:rgba(0,0,0,0.05);border-radius:4px;border-left:3px solid #FFB268;"></div>');
-				$rowHulls.append('<div id="const-hulls-header" style="font-size:11px;font-weight:bold;color:#000000;">' + _tr("HULLS (Areas)") + '</div>');
-				
-				var $hullsSubRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;"></div>');
-				
-				var $hullsWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$constTourShowHulls = $('<input type="checkbox" id="const-show-hulls" style="margin:0;">');
+				var $rowHulls = $('<div id="const-hulls-section" class="tour-section-hulls"></div>');
+				$rowHulls.append('<div id="const-hulls-header" class="tour-section-header">' + _tr("HULLS (Areas)") + '</div>');
+
+				var $hullsSubRow = $('<div class="tour-row"></div>');
+
+				var $hullsWrapper = $('<div class="tour-control-group"></div>');
+				$constTourShowHulls = $('<input type="checkbox" id="const-show-hulls">');
 				$hullsWrapper.append($constTourShowHulls);
-				$hullsWrapper.append('<label>' + _tr("Show") + '</label>');
+				$hullsWrapper.append('<label class="tour-control-label">' + _tr("Show") + '</label>');
 				$hullsSubRow.append($hullsWrapper);
-				
-				var $hullsThicknessWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$hullsThicknessWrapper.append('<label>' + _tr("Thick:") + '</label>');
-				$constTourHullsThickness = $('<input type="number" id="const-hulls-thickness" value="1" min="1" max="5" step="1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $hullsThicknessWrapper = $('<div class="tour-control-group"></div>');
+				$hullsThicknessWrapper.append('<label class="tour-control-label">' + _tr("Thick:") + '</label>');
+				$constTourHullsThickness = $('<input type="number" id="const-hulls-thickness" class="tour-input-number" value="1" min="1" max="5" step="1">');
 				$hullsThicknessWrapper.append($constTourHullsThickness);
 				$hullsThicknessWrapper.append('<span>' + _tr("px") + '</span>');
 				$hullsSubRow.append($hullsThicknessWrapper);
-				
-				var $hullsFadeWrapper2 = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$hullsFadeWrapper2.append('<label>' + _tr("Fade:") + '</label>');
-				$constTourHullsFade = $('<input type="number" id="const-hulls-fade" value="1.0" min="0" max="5" step="0.1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $hullsFadeWrapper2 = $('<div class="tour-control-group"></div>');
+				$hullsFadeWrapper2.append('<label class="tour-control-label">' + _tr("Fade:") + '</label>');
+				$constTourHullsFade = $('<input type="number" id="const-hulls-fade" class="tour-input-number" value="1.0" min="0" max="5" step="0.1">');
 				$hullsFadeWrapper2.append($constTourHullsFade);
 				$hullsFadeWrapper2.append('<span>' + _tr("sec") + '</span>');
 				$hullsSubRow.append($hullsFadeWrapper2);
-				
+
 				$rowHulls.append($hullsSubRow);
-				var $hullsColorGroup = createColorGroup(_tr("Hulls Color"), "const-hulls-color", "const-hulls-section", 1.00, 0.70, 0.40, "#FFB268");
+				var $hullsColorGroup = createColorGroup(_tr("Hulls Color"), "const-hulls-color", "const-hulls-section", 1.00, 0.70, 0.40);
 				$rowHulls.append($hullsColorGroup);
 				$column3.append($rowHulls);
-				
+
 				// ============================================================
 				// ASSEMBLE ALL COLUMNS INTO TOOLBAR
 				// ============================================================
 				$toolbar.append($column1);
 				$toolbar.append($column2);
 				$toolbar.append($column3);
-				
+
 				$toolbarContainer.append($sectionTitle);
 				$toolbarContainer.append($toolbar);
-				
-				// Insert toolbar BEFORE the patterns-note (at the top of the tab)
-				if ($patternsNote.length) {
-						$patternsNote.before($toolbarContainer);
-				} else {
-						$constellationsTab.prepend($toolbarContainer);
-				}
-				
+
+				// Insert toolbar AFTER the buttons container (at the bottom of the tab)
+				$buttonsContainer.after($toolbarContainer);
+
 				// Bind events
 				$constTourGenerateDynamicBtn.on('click', generateConstellationsTourScriptDynamic);
 				$constTourGenerateStaticBtn.on('click', generateConstellationsTourScriptStatic);
-				
-        // Bind multi-select mode change event
-        if ($constMultiSelectMode) {
-            $constMultiSelectMode.on('change', function() {
-                isMultiSelectModeActive = $(this).is(':checked');
-                
-                if (isMultiSelectModeActive) {
-                    // Entering multi-select mode
-                    console.log("[SkyCulture] Entering multi-select mode");
-                    
-                    // Clear any active constellation highlight
-                    if (stelUtils && typeof stelUtils.clearConstellationHighlight === 'function') {
-                        stelUtils.clearConstellationHighlight();
-                    }
-                    
-                    // Clear any single selection state
-                    selectedPattern = null;
-                    selectedPatternId = null;
-                    
-                    // Clear previous multi-selections
-                    clearMultiSelection();
-                    
-                    // Update button behavior (this will re-render buttons without original handler)
-                    updateConstellationButtonsBehavior();
-                } else {
-                    // Exiting multi-select mode
-                    console.log("[SkyCulture] Exiting multi-select mode");
-                    
-                    // Clear all multi-selections
-                    clearMultiSelection();
-                    
-                    // Clear the selected set
-                    selectedConstellationIds.clear();
-                    
-                    // Update button behavior (this will re-render buttons with original handler)
-                    updateConstellationButtonsBehavior();
-                    
-                    // Update selection count display
-                    updateSelectionCount();
-                }
-            });
-        }
-				
+
+				// Bind multi-select mode change event
+				if ($constMultiSelectMode) {
+						$constMultiSelectMode.on('change', function() {
+								isMultiSelectModeActive = $(this).is(':checked');
+
+								if (isMultiSelectModeActive) {
+										console.log("[SkyCulture] Entering multi-select mode");
+										if (stelUtils && typeof stelUtils.clearConstellationHighlight === 'function') {
+												stelUtils.clearConstellationHighlight();
+										}
+										selectedPattern = null;
+										selectedPatternId = null;
+										clearMultiSelection();
+										updateConstellationButtonsBehavior();
+								} else {
+										console.log("[SkyCulture] Exiting multi-select mode");
+										clearMultiSelection();
+										selectedConstellationIds.clear();
+										updateConstellationButtonsBehavior();
+										updateSelectionCount();
+								}
+						});
+				}
+
 				console.log("[SkyCulture] Constellations tour toolbar created successfully with optimized multi-column layout");
 		}
-		
+	
     /**
      * Copy text to clipboard using the shared utility from scripteditor.
      * Falls back to local implementation if scripteditor is not available.
@@ -3793,302 +3774,266 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 				}
 		}
 		
-		 /**
-     * Create the tour control toolbar for asterisms inside the asterisms tab.
-     * Provides buttons for generating dynamic/static scripts and (optionally) starting tours.
-     * 
-     * @function createAsterismsTourToolbar
-     */
+		/**
+		 * Create the tour control toolbar for asterisms inside the asterisms tab.
+		 * Provides buttons for generating dynamic/static scripts and (optionally) starting tours.
+		 * 
+		 * @function createAsterismsTourToolbar
+		 */
 		function createAsterismsTourToolbar() {
 				console.log("[SkyCulture] createAsterismsTourToolbar() called");
-				
+
 				// Check if toolbar already exists
 				if ($('#aster-tour-controls-container').length > 0) {
 						console.log("[SkyCulture] Asterisms tour toolbar already exists, skipping");
 						return;
 				}
-				
+
 				// Find the asterisms tab content
 				var $asterismsTab = $('#patterns-tab-asterisms');
 				if (!$asterismsTab.length) {
 						console.warn("[SkyCulture] Asterisms tab not found");
 						return;
 				}
-				
-				// Find the patterns-note element to insert after
-				var $patternsNote = $asterismsTab.find('.patterns-note');
-				
-				// Create toolbar container
-				var $toolbarContainer = $('<div id="aster-tour-controls-container" class="tour-controls-container" style="margin: 10px 0; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.1);"></div>');
-				
-				// Add section title
-				var $sectionTitle = $('<div style="margin-bottom: 8px; font-size: 11px; font-weight: bold; color: #B4B7B0;">' + _tr("Asterisms Tour Generator") + '</div>');
-				
-				// Create inner toolbar with flex layout aligned left
-				var $toolbar = $('<div class="tour-toolbar" style="display:flex;flex-direction:column;gap:8px;width:100%;"></div>');
-				
+
+				// Find the container where buttons are displayed
+				var $buttonsContainer = $asterismsTab.find('#asterisms-buttons-container');
+				if (!$buttonsContainer.length) {
+						console.warn("[SkyCulture] Asterisms buttons container not found");
+						return;
+				}
+
+				// Create toolbar container - NO inline styles
+				var $toolbarContainer = $('<div id="aster-tour-controls-container" class="tour-controls-container"></div>');
+
+				// Add section title - NO inline styles
+				var $sectionTitle = $('<div class="tour-section-title">' + _tr("Asterisms Tour Generator") + '</div>');
+
+				// Create inner toolbar with flex layout - NO inline styles
+				var $toolbar = $('<div class="tour-toolbar-flex"></div>');
+
+				// ============================================================
+				// HELPER FUNCTION: Create color group with live preview
+				// ============================================================
+				function createAsterColorGroup(label, idPrefix, defaultR, defaultG, defaultB) {
+						var $group = $('<div class="tour-color-group"></div>');
+						$group.append('<span class="tour-color-group-label">' + label + '</span>');
+
+						var $sliders = $('<div class="tour-color-sliders"></div>');
+
+						$sliders.append('<span class="tour-color-channel tour-color-channel-r">R</span>');
+						var $rSlider = $('<input type="range" id="' + idPrefix + '-r" class="tour-color-slider" min="0" max="100" value="' + (defaultR * 100) + '" step="1">');
+						$sliders.append($rSlider);
+
+						$sliders.append('<span class="tour-color-channel tour-color-channel-g">G</span>');
+						var $gSlider = $('<input type="range" id="' + idPrefix + '-g" class="tour-color-slider" min="0" max="100" value="' + (defaultG * 100) + '" step="1">');
+						$sliders.append($gSlider);
+
+						$sliders.append('<span class="tour-color-channel tour-color-channel-b">B</span>');
+						var $bSlider = $('<input type="range" id="' + idPrefix + '-b" class="tour-color-slider" min="0" max="100" value="' + (defaultB * 100) + '" step="1">');
+						$sliders.append($bSlider);
+
+						var $preview = $('<div id="' + idPrefix + '-preview" class="tour-color-preview"></div>');
+						$sliders.append($preview);
+
+						var $valueDisplay = $('<span id="' + idPrefix + '-value" class="tour-color-value">' + defaultR.toFixed(2) + ', ' + defaultG.toFixed(2) + ', ' + defaultB.toFixed(2) + '</span>');
+						$sliders.append($valueDisplay);
+
+						$group.append($sliders);
+
+						function updateFromSliders() {
+								var r = parseFloat($rSlider.val()) / 100;
+								var g = parseFloat($gSlider.val()) / 100;
+								var b = parseFloat($bSlider.val()) / 100;
+								var previewR = Math.floor(r * 255);
+								var previewG = Math.floor(g * 255);
+								var previewB = Math.floor(b * 255);
+								$preview.css('background', 'rgb(' + previewR + ',' + previewG + ',' + previewB + ')');
+								$valueDisplay.text(r.toFixed(2) + ', ' + g.toFixed(2) + ', ' + b.toFixed(2));
+						}
+
+						$rSlider.on('input', updateFromSliders);
+						$gSlider.on('input', updateFromSliders);
+						$bSlider.on('input', updateFromSliders);
+
+						return $group;
+				}
+
 				// ============================================================
 				// FIRST ROW: Main buttons and basic controls
 				// ============================================================
-				var $firstRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:4px;"></div>');
-				
+				var $firstRow = $('<div class="tour-row"></div>');
+
 				// Generate Static Array Script button
-				$asterTourGenerateStaticBtn = $('<button id="btn-generate-aster-static" class="jquerybutton pattern-btn" style="background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:3px;padding:5px 12px;font-size:11px;font-weight:bold;color:#000;cursor:pointer;" title="' + _tr("Generates script with embedded asterism name array") + '">' + _tr("Generate Asterisms Script") + '</button>');
+				$asterTourGenerateStaticBtn = $('<button id="btn-generate-aster-static" class="jquerybutton pattern-btn tour-generate-btn" title="' + _tr("Generates script with embedded asterism name array") + '">' + _tr("Generate Asterisms Script") + '</button>');
 				$firstRow.append($asterTourGenerateStaticBtn);
-				
+
 				// ============================================================
 				// MULTI-SELECT MODE SECTION FOR ASTERISMS
 				// ============================================================
-				var $multiSelectWrapper = $('<div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#000;background:rgba(253,216,134,0.15);padding:4px 10px;border-radius:4px;"></div>');
-				$asterMultiSelectMode = $('<input type="checkbox" id="aster-multi-select-mode" style="margin:0;">');
+				var $multiSelectWrapper = $('<div class="tour-multiselect-purple"></div>');
+				$asterMultiSelectMode = $('<input type="checkbox" id="aster-multi-select-mode">');
 				$multiSelectWrapper.append($asterMultiSelectMode);
 				$multiSelectWrapper.append('<label style="font-weight:bold;cursor:pointer;">' + _tr("Multi-Select") + '</label>');
-				$multiSelectWrapper.append('<span style="font-size:9px;color:#8A8C8E;">(' + _tr("Pick multiple asterisms") + ')</span>');
-				
-				// Selection count display for asterisms
-				$asterSelectionCount = $('<span id="aster-selection-count" style="background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:12px;font-size:9px;margin-left:5px;">0 ' + _tr("selected") + '</span>');
+				$multiSelectWrapper.append('<span class="tour-multiselect-hint">(' + _tr("Pick multiple asterisms") + ')</span>');
+
+				$asterSelectionCount = $('<span class="tour-selection-count">0 ' + _tr("selected") + '</span>');
 				$multiSelectWrapper.append($asterSelectionCount);
-				
+
 				$firstRow.append($multiSelectWrapper);
 
-        
-        // Duration label and input
-        var $durationWrapper = $('<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#000;"></div>');
-        $durationWrapper.append('<label>' + _tr("Duration:") + '</label>');
-        $asterTourDuration = $('<input type="number" id="aster-tour-duration" value="3" min="1" max="10" step="0.5" style="width:55px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 5px;">');
-        $durationWrapper.append($asterTourDuration);
-        $durationWrapper.append('<span>' + _tr("sec") + '</span>');
-        $firstRow.append($durationWrapper);
-        
-        // Zoom FOV input
-        var $zoomWrapper = $('<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#000;"></div>');
-        $zoomWrapper.append('<label>' + _tr("Zoom FOV:") + '</label>');
-        var $zoomFov = $('<input type="number" id="aster-zoom-fov" value="25" min="5" max="60" step="1" style="width:55px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 5px;">');
-        $zoomWrapper.append($zoomFov);
-        $zoomWrapper.append('<span>' + _tr("deg") + '</span>');
-        $firstRow.append($zoomWrapper);
-				
-				var $overviewWrapper = $('<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#000;"></div>');
-        $overviewWrapper.append('<label>' + _tr("Overview FOV:") + '</label>');
-        var $overviewFov = $('<input type="number" id="aster-overview-fov" value="60" min="25" max="90" step="1" style="width:55px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 5px;">');
-        $overviewWrapper.append($overviewFov);
-        $overviewWrapper.append('<span>' + _tr("deg") + '</span>');
-        $firstRow.append($overviewWrapper);
-        
-        // Isolate checkbox
-        var $isolateWrapper = $('<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#000;"></div>');
-        $asterTourIsolate = $('<input type="checkbox" id="aster-tour-isolate" checked style="margin:0;">');
-        $isolateWrapper.append($asterTourIsolate);
-        $isolateWrapper.append('<label>' + _tr("Isolate Selected") + '</label>');
-        $firstRow.append($isolateWrapper);
-        
-        // Show Ray Helpers option
-        var $rayHelpersWrapper = $('<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#000;"></div>');
-        var $showRayHelpers = $('<input type="checkbox" id="aster-show-rayhelpers" checked style="margin:0;">');
-        $rayHelpersWrapper.append($showRayHelpers);
-        $rayHelpersWrapper.append('<label>' + _tr("Show Ray Helpers") + '</label>');
-        $firstRow.append($rayHelpersWrapper);
-        
-        // ============================================================
-        // SECOND ROW: Appearance controls (Font, Thickness)
-        // ============================================================
-        var $secondRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:4px;"></div>');
-        
-        // Font size input
-        var $fontWrapper = $('<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#000;"></div>');
-        $fontWrapper.append('<label>' + _tr("Font Size:") + '</label>');
-        var $fontSize = $('<input type="number" id="aster-font-size" value="16" min="10" max="30" step="1" style="width:55px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 5px;">');
-        $fontWrapper.append($fontSize);
-        $fontWrapper.append('<span>' + _tr("px") + '</span>');
-        $secondRow.append($fontWrapper);
-        
-        // Line thickness input (Asterism Lines)
-        var $lineThicknessWrapper = $('<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#000;background:rgba(0,0,0,0.15);padding:2px 6px;border-radius:3px;"></div>');
-        $lineThicknessWrapper.append('<label style="font-weight:bold;">' + _tr("Line Thick:") + '</label>');
-        var $lineThickness = $('<input type="number" id="aster-line-thickness" value="2" min="1" max="5" step="1" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 5px;">');
-        $lineThicknessWrapper.append($lineThickness);
-        $lineThicknessWrapper.append('<span>' + _tr("px") + '</span>');
-        $secondRow.append($lineThicknessWrapper);
-        
-        // Ray Helper thickness input
-        var $rayThicknessWrapper = $('<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#000;background:rgba(0,0,0,0.15);padding:2px 6px;border-radius:3px;"></div>');
-        $rayThicknessWrapper.append('<label style="font-weight:bold;">' + _tr("Ray Thick:") + '</label>');
-        var $rayHelperThickness = $('<input type="number" id="aster-rayhelper-thickness" value="1" min="1" max="5" step="1" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 5px;">');
-        $rayThicknessWrapper.append($rayHelperThickness);
-        $rayThicknessWrapper.append('<span>' + _tr("px") + '</span>');
-        $secondRow.append($rayThicknessWrapper);
-        
-        // ============================================================
-        // THIRD ROW: Color controls
-        // ============================================================
-        
-        // Helper function to create a color control group
-        function createColorGroup(label, idPrefix, defaultR, defaultG, defaultB) {
-            var $group = $('<div style="display:flex;flex-direction:column;gap:3px;padding:3px 8px;background:rgba(0,0,0,0.08);border-radius:4px;"></div>');
-            
-            // Label
-            $group.append('<span style="font-size:10px;font-weight:bold;color:#DCDBDA;">' + label + '</span>');
-            
-            // RGB sliders container
-            var $sliders = $('<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;"></div>');
-            
-            // R slider
-            $sliders.append('<span style="font-size:9px;color:#F92672;">R</span>');
-            var $rSlider = $('<input type="range" id="' + idPrefix + '-r" min="0" max="100" value="' + (defaultR * 100) + '" step="1" style="width:60px;">');
-            $sliders.append($rSlider);
-            
-            // G slider
-            $sliders.append('<span style="font-size:9px;color:#A6E22E;">G</span>');
-            var $gSlider = $('<input type="range" id="' + idPrefix + '-g" min="0" max="100" value="' + (defaultG * 100) + '" step="1" style="width:60px;">');
-            $sliders.append($gSlider);
-            
-            // B slider
-            $sliders.append('<span style="font-size:9px;color:#66D9EF;">B</span>');
-            var $bSlider = $('<input type="range" id="' + idPrefix + '-b" min="0" max="100" value="' + (defaultB * 100) + '" step="1" style="width:60px;">');
-            $sliders.append($bSlider);
-            
-            // Color preview box
-            var $preview = $('<div id="' + idPrefix + '-preview" style="width:22px;height:22px;border-radius:3px;border:1px solid #2A2C2E;margin-left:5px;"></div>');
-            $sliders.append($preview);
-            
-            // Value display
-            var $valueDisplay = $('<span id="' + idPrefix + '-value" style="font-size:9px;color:#8A8C8E;font-family:monospace;margin-left:6px;min-width:70px;">' + defaultR.toFixed(2) + ', ' + defaultG.toFixed(2) + ', ' + defaultB.toFixed(2) + '</span>');
-            $sliders.append($valueDisplay);
-            
-            $group.append($sliders);
-            
-            // Function to update preview and value display
-            function updateFromSliders() {
-                var r = parseFloat($rSlider.val()) / 100;
-                var g = parseFloat($gSlider.val()) / 100;
-                var b = parseFloat($bSlider.val()) / 100;
-                
-                // Update preview box color (convert 0-1 to 0-255 for CSS)
-                var previewR = Math.floor(r * 255);
-                var previewG = Math.floor(g * 255);
-                var previewB = Math.floor(b * 255);
-                $preview.css('background', 'rgb(' + previewR + ',' + previewG + ',' + previewB + ')');
-                
-                // Update value display
-                $valueDisplay.text(r.toFixed(2) + ', ' + g.toFixed(2) + ', ' + b.toFixed(2));
-            }
-            
-            // Attach event handlers
-            $rSlider.on('input', updateFromSliders);
-            $gSlider.on('input', updateFromSliders);
-            $bSlider.on('input', updateFromSliders);
-            
-            // Initial update
-            updateFromSliders();
-            
-            return $group;
-        }
-        
-        // Create color groups container
-        var $colorsContainer = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:4px;"></div>');
-        
-        // Create color groups
-        var $linesColorGroup = createColorGroup(_tr("Lines Color"), "aster-lines-color", 1.00, 0.00, 0.20);
-        var $labelsColorGroup = createColorGroup(_tr("Labels Color"), "aster-labels-color", 0.00, 1.00, 1.00);
-        var $rayHelpersColorGroup = createColorGroup(_tr("Ray Helpers Color"), "aster-rayhelpers-color", 0.50, 1.00, 0.50);
-        
-        $colorsContainer.append($linesColorGroup);
-        $colorsContainer.append($labelsColorGroup);
-        $colorsContainer.append($rayHelpersColorGroup);
-        
-        // ============================================================
-        // FOURTH ROW: Fade duration controls
-        // ============================================================
-        var $fourthRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:4px;"></div>');
-        
-        var $fadeContainer = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:3px 8px;background:rgba(0,0,0,0.08);border-radius:4px;"></div>');
-        $fadeContainer.append('<span style="font-size:10px;font-weight:bold;color:#DCDBDA;">' + _tr("Fade Duration:") + '</span>');
-        
-        var $linesFadeWrapper = $('<div style="display:flex;align-items:center;gap:3px;font-size:10px;"></div>');
-        $linesFadeWrapper.append('<label>' + _tr("Lines:") + '</label>');
-        var $linesFade = $('<input type="number" id="aster-lines-fade" value="1.0" min="0" max="5" step="0.1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:2px 3px;">');
-        $linesFadeWrapper.append($linesFade);
-        $linesFadeWrapper.append('<span>' + _tr("sec") + '</span>');
-        $fadeContainer.append($linesFadeWrapper);
-        
-        var $labelsFadeWrapper = $('<div style="display:flex;align-items:center;gap:3px;font-size:10px;"></div>');
-        $labelsFadeWrapper.append('<label>' + _tr("Labels:") + '</label>');
-        var $labelsFade = $('<input type="number" id="aster-labels-fade" value="1.0" min="0" max="5" step="0.1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:2px 3px;">');
-        $labelsFadeWrapper.append($labelsFade);
-        $labelsFadeWrapper.append('<span>' + _tr("sec") + '</span>');
-        $fadeContainer.append($labelsFadeWrapper);
-        
-        var $rayHelpersFadeWrapper = $('<div style="display:flex;align-items:center;gap:3px;font-size:10px;"></div>');
-        $rayHelpersFadeWrapper.append('<label>' + _tr("Ray Helpers:") + '</label>');
-        var $rayHelpersFade = $('<input type="number" id="aster-rayhelpers-fade" value="1.0" min="0" max="5" step="0.1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:2px 3px;">');
-        $rayHelpersFadeWrapper.append($rayHelpersFade);
-        $rayHelpersFadeWrapper.append('<span>' + _tr("sec") + '</span>');
-        $fadeContainer.append($rayHelpersFadeWrapper);
-        
-        $fourthRow.append($fadeContainer);
-        
+				// Duration label and input
+				var $durationWrapper = $('<div class="tour-control-group"></div>');
+				$durationWrapper.append('<label class="tour-control-label">' + _tr("Duration:") + '</label>');
+				$asterTourDuration = $('<input type="number" id="aster-tour-duration" class="tour-input-number" value="3" min="1" max="10" step="0.5">');
+				$durationWrapper.append($asterTourDuration);
+				$durationWrapper.append('<span>' + _tr("sec") + '</span>');
+				$firstRow.append($durationWrapper);
+
+				// Zoom FOV input
+				var $zoomWrapper = $('<div class="tour-control-group"></div>');
+				$zoomWrapper.append('<label class="tour-control-label">' + _tr("Zoom FOV:") + '</label>');
+				var $zoomFov = $('<input type="number" id="aster-zoom-fov" class="tour-input-number" value="25" min="5" max="60" step="1">');
+				$zoomWrapper.append($zoomFov);
+				$zoomWrapper.append('<span>' + _tr("deg") + '</span>');
+				$firstRow.append($zoomWrapper);
+
+				var $overviewWrapper = $('<div class="tour-control-group"></div>');
+				$overviewWrapper.append('<label class="tour-control-label">' + _tr("Overview FOV:") + '</label>');
+				var $overviewFov = $('<input type="number" id="aster-overview-fov" class="tour-input-number" value="60" min="25" max="90" step="1">');
+				$overviewWrapper.append($overviewFov);
+				$overviewWrapper.append('<span>' + _tr("deg") + '</span>');
+				$firstRow.append($overviewWrapper);
+
+				// Isolate checkbox
+				var $isolateWrapper = $('<div class="tour-control-group"></div>');
+				$asterTourIsolate = $('<input type="checkbox" id="aster-tour-isolate" checked>');
+				$isolateWrapper.append($asterTourIsolate);
+				$isolateWrapper.append('<label class="tour-control-label">' + _tr("Isolate Selected") + '</label>');
+				$firstRow.append($isolateWrapper);
+
+				// Show Ray Helpers option
+				var $rayHelpersWrapper = $('<div class="tour-control-group"></div>');
+				var $showRayHelpers = $('<input type="checkbox" id="aster-show-rayhelpers" checked>');
+				$rayHelpersWrapper.append($showRayHelpers);
+				$rayHelpersWrapper.append('<label class="tour-control-label">' + _tr("Show Ray Helpers") + '</label>');
+				$firstRow.append($rayHelpersWrapper);
+
+				// ============================================================
+				// SECOND ROW: Appearance controls (Font, Thickness)
+				// ============================================================
+				var $secondRow = $('<div class="tour-row"></div>');
+
+				// Font size input
+				var $fontWrapper = $('<div class="tour-control-group"></div>');
+				$fontWrapper.append('<label class="tour-control-label">' + _tr("Font Size:") + '</label>');
+				var $fontSize = $('<input type="number" id="aster-font-size" class="tour-input-number" value="16" min="10" max="30" step="1">');
+				$fontWrapper.append($fontSize);
+				$fontWrapper.append('<span>' + _tr("px") + '</span>');
+				$secondRow.append($fontWrapper);
+
+				// Line thickness input (Asterism Lines)
+				var $lineThicknessWrapper = $('<div class="tour-control-group tour-control-group-highlight"></div>');
+				$lineThicknessWrapper.append('<label class="tour-control-label-bold">' + _tr("Line Thick:") + '</label>');
+				var $lineThickness = $('<input type="number" id="aster-line-thickness" class="tour-input-number" value="2" min="1" max="5" step="1">');
+				$lineThicknessWrapper.append($lineThickness);
+				$lineThicknessWrapper.append('<span>' + _tr("px") + '</span>');
+				$secondRow.append($lineThicknessWrapper);
+
+				// Ray Helper thickness input
+				var $rayThicknessWrapper = $('<div class="tour-control-group tour-control-group-highlight"></div>');
+				$rayThicknessWrapper.append('<label class="tour-control-label-bold">' + _tr("Ray Thick:") + '</label>');
+				var $rayHelperThickness = $('<input type="number" id="aster-rayhelper-thickness" class="tour-input-number" value="1" min="1" max="5" step="1">');
+				$rayThicknessWrapper.append($rayHelperThickness);
+				$rayThicknessWrapper.append('<span>' + _tr("px") + '</span>');
+				$secondRow.append($rayThicknessWrapper);
+
+				// ============================================================
+				// THIRD ROW: Color controls
+				// ============================================================
+				var $colorsContainer = $('<div class="tour-row"></div>');
+
+				var $linesColorGroup = createAsterColorGroup(_tr("Lines Color"), "aster-lines-color", 1.00, 0.00, 0.20);
+				var $labelsColorGroup = createAsterColorGroup(_tr("Labels Color"), "aster-labels-color", 0.00, 1.00, 1.00);
+				var $rayHelpersColorGroup = createAsterColorGroup(_tr("Ray Helpers Color"), "aster-rayhelpers-color", 0.50, 1.00, 0.50);
+
+				$colorsContainer.append($linesColorGroup);
+				$colorsContainer.append($labelsColorGroup);
+				$colorsContainer.append($rayHelpersColorGroup);
+
+				// ============================================================
+				// FOURTH ROW: Fade duration controls
+				// ============================================================
+				var $fourthRow = $('<div class="tour-row"></div>');
+
+				var $fadeContainer = $('<div class="tour-control-group-highlight"></div>');
+				$fadeContainer.append('<span class="tour-control-label-bold">' + _tr("Fade Duration:") + '</span>');
+
+				var $linesFadeWrapper = $('<div class="tour-control-group"></div>');
+				$linesFadeWrapper.append('<label class="tour-control-label">' + _tr("Lines:") + '</label>');
+				var $linesFade = $('<input type="number" id="aster-lines-fade" class="tour-input-number" value="1.0" min="0" max="5" step="0.1">');
+				$linesFadeWrapper.append($linesFade);
+				$linesFadeWrapper.append('<span>' + _tr("sec") + '</span>');
+				$fadeContainer.append($linesFadeWrapper);
+
+				var $labelsFadeWrapper = $('<div class="tour-control-group"></div>');
+				$labelsFadeWrapper.append('<label class="tour-control-label">' + _tr("Labels:") + '</label>');
+				var $labelsFade = $('<input type="number" id="aster-labels-fade" class="tour-input-number" value="1.0" min="0" max="5" step="0.1">');
+				$labelsFadeWrapper.append($labelsFade);
+				$labelsFadeWrapper.append('<span>' + _tr("sec") + '</span>');
+				$fadeContainer.append($labelsFadeWrapper);
+
+				var $rayHelpersFadeWrapper = $('<div class="tour-control-group"></div>');
+				$rayHelpersFadeWrapper.append('<label class="tour-control-label">' + _tr("Ray Helpers:") + '</label>');
+				var $rayHelpersFade = $('<input type="number" id="aster-rayhelpers-fade" class="tour-input-number" value="1.0" min="0" max="5" step="0.1">');
+				$rayHelpersFadeWrapper.append($rayHelpersFade);
+				$rayHelpersFadeWrapper.append('<span>' + _tr("sec") + '</span>');
+				$fadeContainer.append($rayHelpersFadeWrapper);
+
+				$fourthRow.append($fadeContainer);
+
 				// ============================================================
 				// ASSEMBLE ALL ROWS
 				// ============================================================
 				$toolbar.append($firstRow);
-				$toolbar.append($secondRow);      // Existing second row
-				$toolbar.append($colorsContainer); // Existing colors container
-				$toolbar.append($fourthRow);      // Existing fourth row
-				
+				$toolbar.append($secondRow);
+				$toolbar.append($colorsContainer);
+				$toolbar.append($fourthRow);
+
 				$toolbarContainer.append($sectionTitle);
 				$toolbarContainer.append($toolbar);
-				
-				// Insert toolbar after the patterns-note
-				if ($patternsNote.length) {
-						$patternsNote.before($toolbarContainer);
-				} else {
-						$asterismsTab.prepend($toolbarContainer);
-				}
-				
+
+				// Insert toolbar AFTER the buttons container (at the bottom of the tab)
+				$buttonsContainer.after($toolbarContainer);
+
 				// ============================================================
 				// BIND EVENTS
 				// ============================================================
-				
-				// Bind generate button to the enhanced function
+
+				// Bind generate button
 				$asterTourGenerateStaticBtn.on('click', generateAsterismsTourScriptStatic);
-				
-				// Bind multi-select mode change event for asterisms
+
+				// Bind multi-select mode change event
 				if ($asterMultiSelectMode) {
 						$asterMultiSelectMode.on('change', function() {
 								isAsterMultiSelectModeActive = $(this).is(':checked');
-								
+
 								if (isAsterMultiSelectModeActive) {
-										// Entering multi-select mode
 										console.log("[SkyCulture] Entering multi-select mode for asterisms");
-										
-										// Clear any single selection state
 										selectedPattern = null;
 										selectedPatternId = null;
-										
-										// Clear previous multi-selections
 										clearAsterMultiSelection();
-										
-										// Update button behavior (this will re-render buttons without original handler)
 										updateAsterismButtonsBehavior();
 								} else {
-										// Exiting multi-select mode
 										console.log("[SkyCulture] Exiting multi-select mode for asterisms");
-										
-										// Clear all multi-selections
 										clearAsterMultiSelection();
-										
-										// Clear the selected set
 										selectedAsterismIds.clear();
-										
-										// Update button behavior (this will re-render buttons with original handler)
 										updateAsterismButtonsBehavior();
-										
-										// Update selection count display
 										updateAsterismSelectionCount();
 								}
 						});
 				}
-				
+
 				console.log("[SkyCulture] Asterisms tour toolbar created successfully with multi-select support");
 		}
 		
@@ -4910,82 +4855,86 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
     // LUNAR MANSIONS TOUR TOOLBAR CREATION
     // ========================================================================
 
-    /**
-     * Create the tour control toolbar for lunar mansions inside the lunar mansions tab.
-     * Provides controls for generating scripts with full customization.
-     * 
-     * Features:
-     * - Generate static script with embedded lunar mansion array
-     * - Multi-select mode for picking specific mansions
-     * - Duration, zoom, and overview controls
-     * - Color pickers for lines
-     * - Font size and line thickness controls
-     * 
-     * @function createLunarMansionsTourToolbar
-     */
+		/**
+		 * Create the tour control toolbar for lunar mansions inside the lunar mansions tab.
+		 * Provides controls for generating scripts with full customization.
+		 * 
+		 * Features:
+		 * - Generate static script with embedded lunar mansion array
+		 * - Multi-select mode for picking specific mansions
+		 * - Duration, zoom, and overview controls
+		 * - Color pickers for lines
+		 * - Font size and line thickness controls
+		 * 
+		 * @function createLunarMansionsTourToolbar
+		 */
 		function createLunarMansionsTourToolbar() {
 				console.log("[SkyCulture] createLunarMansionsTourToolbar() called");
-				
+
 				// Check if toolbar already exists
 				if ($('#lunar-tour-controls-container').length > 0) {
 						console.log("[SkyCulture] Lunar mansions tour toolbar already exists, skipping");
 						return;
 				}
-				
+
 				// Find the lunar mansions tab content
 				var $lunarTab = $('#patterns-tab-lunar');
 				if (!$lunarTab.length) {
 						console.warn("[SkyCulture] Lunar mansions tab not found");
 						return;
 				}
-				
-				// Find the patterns-note element to insert BEFORE
-				var $patternsNote = $lunarTab.find('.patterns-note');
-				
-				// Create toolbar container
-				var $toolbarContainer = $('<div id="lunar-tour-controls-container" class="tour-controls-container" style="margin: 10px 0; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.1);"></div>');
-				
-				// Add section title
-				var $sectionTitle = $('<div style="margin-bottom: 8px; font-size: 11px; font-weight: bold; color: #B4B7B0;">' + _tr("Lunar Mansions Tour Generator") + '</div>');
-				
-				// Create inner toolbar with multi-column grid layout
-				var $toolbar = $('<div class="tour-toolbar" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px; width:100%;"></div>');
-				
+
+				// Find the container where buttons are displayed
+				var $buttonsContainer = $lunarTab.find('#lunar-buttons-container');
+				if (!$buttonsContainer.length) {
+						console.warn("[SkyCulture] Lunar mansions buttons container not found");
+						return;
+				}
+
+				// Create toolbar container - NO inline styles
+				var $toolbarContainer = $('<div id="lunar-tour-controls-container" class="tour-controls-container"></div>');
+
+				// Add section title - NO inline styles
+				var $sectionTitle = $('<div class="tour-section-title">' + _tr("Lunar Mansions Tour Generator") + '</div>');
+
+				// Create inner toolbar with multi-column grid layout - NO inline styles
+				var $toolbar = $('<div class="tour-toolbar-grid"></div>');
+
 				// ============================================================
 				// HELPER FUNCTION: Create color group with live preview
 				// ============================================================
 				function createLunarColorGroup(label, idPrefix, defaultR, defaultG, defaultB) {
-						var $group = $('<div style="display:flex;flex-direction:column;gap:4px;padding:6px 8px;background:rgba(0,0,0,0.1);border-radius:4px;"></div>');
-						$group.append('<span style="font-size:10px;font-weight:bold;color:#DCDBDA;margin-bottom:2px;">' + label + '</span>');
-						
-						var $sliders = $('<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;"></div>');
-						
-						$sliders.append('<span style="font-size:9px;color:#F92672;">R</span>');
-						var $rSlider = $('<input type="range" id="' + idPrefix + '-r" min="0" max="100" value="' + (defaultR * 100) + '" step="1" style="width:55px;">');
+						var $group = $('<div class="tour-color-group"></div>');
+						$group.append('<span class="tour-color-group-label">' + label + '</span>');
+
+						var $sliders = $('<div class="tour-color-sliders"></div>');
+
+						$sliders.append('<span class="tour-color-channel tour-color-channel-r">R</span>');
+						var $rSlider = $('<input type="range" id="' + idPrefix + '-r" class="tour-color-slider" min="0" max="100" value="' + (defaultR * 100) + '" step="1">');
 						$sliders.append($rSlider);
-						
-						$sliders.append('<span style="font-size:9px;color:#A6E22E;">G</span>');
-						var $gSlider = $('<input type="range" id="' + idPrefix + '-g" min="0" max="100" value="' + (defaultG * 100) + '" step="1" style="width:55px;">');
+
+						$sliders.append('<span class="tour-color-channel tour-color-channel-g">G</span>');
+						var $gSlider = $('<input type="range" id="' + idPrefix + '-g" class="tour-color-slider" min="0" max="100" value="' + (defaultG * 100) + '" step="1">');
 						$sliders.append($gSlider);
-						
-						$sliders.append('<span style="font-size:9px;color:#66D9EF;">B</span>');
-						var $bSlider = $('<input type="range" id="' + idPrefix + '-b" min="0" max="100" value="' + (defaultB * 100) + '" step="1" style="width:55px;">');
+
+						$sliders.append('<span class="tour-color-channel tour-color-channel-b">B</span>');
+						var $bSlider = $('<input type="range" id="' + idPrefix + '-b" class="tour-color-slider" min="0" max="100" value="' + (defaultB * 100) + '" step="1">');
 						$sliders.append($bSlider);
-						
-						var $preview = $('<div id="' + idPrefix + '-preview" style="width:20px;height:20px;border-radius:3px;border:1px solid #2A2C2E;margin-left:4px;"></div>');
+
+						var $preview = $('<div id="' + idPrefix + '-preview" class="tour-color-preview"></div>');
 						$sliders.append($preview);
-						
-						var $valueDisplay = $('<span id="' + idPrefix + '-value" style="font-size:9px;color:#8A8C8E;font-family:monospace;margin-left:6px;min-width:65px;">' + defaultR.toFixed(2) + ', ' + defaultG.toFixed(2) + ', ' + defaultB.toFixed(2) + '</span>');
+
+						var $valueDisplay = $('<span id="' + idPrefix + '-value" class="tour-color-value">' + defaultR.toFixed(2) + ', ' + defaultG.toFixed(2) + ', ' + defaultB.toFixed(2) + '</span>');
 						$sliders.append($valueDisplay);
-						
+
 						$group.append($sliders);
-						
+
 						// Initialize preview
 						var previewR = Math.floor(defaultR * 255);
 						var previewG = Math.floor(defaultG * 255);
 						var previewB = Math.floor(defaultB * 255);
 						$preview.css('background', 'rgb(' + previewR + ',' + previewG + ',' + previewB + ')');
-						
+
 						function updateFromSliders() {
 								var r = parseFloat($rSlider.val()) / 100;
 								var g = parseFloat($gSlider.val()) / 100;
@@ -4998,123 +4947,123 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 								// Update section border-left color
 								$('#lunar-lines-section').css('border-left-color', 'rgb(' + previewR + ',' + previewG + ',' + previewB + ')');
 						}
-						
+
 						$rSlider.on('input', updateFromSliders);
 						$gSlider.on('input', updateFromSliders);
 						$bSlider.on('input', updateFromSliders);
-						
+
 						return $group;
 				}
-				
+
 				// ============================================================
 				// COLUMN 1: Script Generation + Timing Controls
 				// ============================================================
-				var $column1 = $('<div style="display:flex;flex-direction:column;gap:12px;"></div>');
-				
+				var $column1 = $('<div class="tour-column"></div>');
+
 				// Script Generation Row
-				var $genRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid rgba(180,183,176,0.2);"></div>');
-				$lunarTourGenerateStaticBtn = $('<button id="btn-generate-lunar-static" class="jquerybutton pattern-btn" style="background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:3px;padding:5px 10px;font-size:11px;font-weight:bold;color:#000;cursor:pointer;" title="' + _tr("Generates script with embedded lunar mansion name array") + '">' + _tr("Generate Lunar Mansions Tour Script") + '</button>');
+				var $genRow = $('<div class="tour-row-separator"></div>');
+				$lunarTourGenerateStaticBtn = $('<button id="btn-generate-lunar-static" class="jquerybutton pattern-btn tour-generate-btn" title="' + _tr("Generates script with embedded lunar mansion name array") + '">' + _tr("Generate Lunar Mansions Tour Script") + '</button>');
 				$genRow.append($lunarTourGenerateStaticBtn);
-				
+
 				// Multi-Select Mode checkbox and counter
-				var $multiSelectWrapper = $('<div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#000;background:rgba(129,199,132,0.15);padding:4px 10px;border-radius:4px;margin-left:8px;"></div>');
-				$lunarMultiSelectMode = $('<input type="checkbox" id="lunar-multi-select-mode" style="margin:0;">');
+				var $multiSelectWrapper = $('<div class="tour-multiselect-green"></div>');
+				$lunarMultiSelectMode = $('<input type="checkbox" id="lunar-multi-select-mode">');
 				$multiSelectWrapper.append($lunarMultiSelectMode);
 				$multiSelectWrapper.append('<label style="font-weight:bold;cursor:pointer;">' + _tr("Multi-Select") + '</label>');
-				$multiSelectWrapper.append('<span style="font-size:9px;color:#8A8C8E;">(' + _tr("Pick multiple mansions") + ')</span>');
-				
-				$lunarSelectionCount = $('<span id="lunar-selection-count" style="background:rgba(129,199,132,0.3);padding:2px 8px;border-radius:12px;font-size:9px;margin-left:5px;">0 ' + _tr("selected") + '</span>');
+				$multiSelectWrapper.append('<span class="tour-multiselect-hint">(' + _tr("Pick multiple mansions") + ')</span>');
+
+				$lunarSelectionCount = $('<span class="tour-selection-count">0 ' + _tr("selected") + '</span>');
 				$multiSelectWrapper.append($lunarSelectionCount);
-				
+
 				$genRow.append($multiSelectWrapper);
 				$column1.append($genRow);
-				
+
 				// Timing Controls Row
-				var $timingRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:6px 0;"></div>');
-				
-				var $durationWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$durationWrapper.append('<label style="font-weight:bold;">' + _tr("Duration Per Mansion:") + '</label>');
-				$lunarTourDuration = $('<input type="number" id="lunar-tour-duration" value="4" min="1" max="15" step="0.5" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+				var $timingRow = $('<div class="tour-row"></div>');
+
+				var $durationWrapper = $('<div class="tour-control-group"></div>');
+				$durationWrapper.append('<label class="tour-control-label-bold">' + _tr("Duration Per Mansion:") + '</label>');
+				$lunarTourDuration = $('<input type="number" id="lunar-tour-duration" class="tour-input-number" value="4" min="1" max="15" step="0.5">');
 				$durationWrapper.append($lunarTourDuration);
 				$durationWrapper.append('<span>' + _tr("sec") + '</span>');
 				$timingRow.append($durationWrapper);
-				
-				var $zoomWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$zoomWrapper.append('<label style="font-weight:bold;">' + _tr("Zoom FOV:") + '</label>');
-				$lunarTourZoomFov = $('<input type="number" id="lunar-zoom-fov" value="30" min="5" max="90" step="1" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $zoomWrapper = $('<div class="tour-control-group"></div>');
+				$zoomWrapper.append('<label class="tour-control-label-bold">' + _tr("Zoom FOV:") + '</label>');
+				$lunarTourZoomFov = $('<input type="number" id="lunar-zoom-fov" class="tour-input-number" value="30" min="5" max="90" step="1">');
 				$zoomWrapper.append($lunarTourZoomFov);
 				$zoomWrapper.append('<span>' + _tr("deg") + '</span>');
 				$timingRow.append($zoomWrapper);
-				
-				var $overviewWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$overviewWrapper.append('<label style="font-weight:bold;">' + _tr("Overview FOV:") + '</label>');
-				$lunarTourOverviewFov = $('<input type="number" id="lunar-overview-fov" value="90" min="20" max="120" step="1" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $overviewWrapper = $('<div class="tour-control-group"></div>');
+				$overviewWrapper.append('<label class="tour-control-label-bold">' + _tr("Overview FOV:") + '</label>');
+				$lunarTourOverviewFov = $('<input type="number" id="lunar-overview-fov" class="tour-input-number" value="90" min="20" max="120" step="1">');
 				$overviewWrapper.append($lunarTourOverviewFov);
 				$overviewWrapper.append('<span>' + _tr("deg") + '</span>');
 				$timingRow.append($overviewWrapper);
-				
+
 				$column1.append($timingRow);
-				
+
 				// ============================================================
 				// COLUMN 2: Lunar System Lines Controls
 				// ============================================================
-				var $column2 = $('<div style="display:flex;flex-direction:column;gap:12px;"></div>');
-				
+				var $column2 = $('<div class="tour-column"></div>');
+
 				// LABELS Section (Simplified - no color picker)
-				var $rowLabels = $('<div id="lunar-labels-section" style="display:flex;flex-direction:column;gap:6px;padding:8px;background:rgba(0,0,0,0.05);border-radius:4px;border-left:3px solid #66BB6A;"></div>');
-				$rowLabels.append('<div id="lunar-labels-header" style="font-size:11px;font-weight:bold;color:#000000;">' + _tr("SCREEN LABELS") + '</div>');
-				
-				var $labelsSubRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;"></div>');
-				
-				var $showLabelsWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$lunarTourShowLabels = $('<input type="checkbox" id="lunar-show-labels" checked style="margin:0;">');
+				var $rowLabels = $('<div id="lunar-labels-section" class="tour-section-lunar"></div>');
+				$rowLabels.append('<div id="lunar-labels-header" class="tour-section-header">' + _tr("SCREEN LABELS") + '</div>');
+
+				var $labelsSubRow = $('<div class="tour-row"></div>');
+
+				var $showLabelsWrapper = $('<div class="tour-control-group"></div>');
+				$lunarTourShowLabels = $('<input type="checkbox" id="lunar-show-labels" checked>');
 				$showLabelsWrapper.append($lunarTourShowLabels);
-				$showLabelsWrapper.append('<label>' + _tr("Show on Screen") + '</label>');
+				$showLabelsWrapper.append('<label class="tour-control-label">' + _tr("Show on Screen") + '</label>');
 				$labelsSubRow.append($showLabelsWrapper);
-				
-				var $fontWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$fontWrapper.append('<label>' + _tr("Font Size:") + '</label>');
-				$lunarTourFontSize = $('<input type="number" id="lunar-font-size" value="16" min="10" max="30" step="1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $fontWrapper = $('<div class="tour-control-group"></div>');
+				$fontWrapper.append('<label class="tour-control-label">' + _tr("Font Size:") + '</label>');
+				$lunarTourFontSize = $('<input type="number" id="lunar-font-size" class="tour-input-number" value="16" min="10" max="30" step="1">');
 				$fontWrapper.append($lunarTourFontSize);
 				$fontWrapper.append('<span>' + _tr("px") + '</span>');
 				$labelsSubRow.append($fontWrapper);
-				
+
 				$rowLabels.append($labelsSubRow);
-				$column2.append($rowLabels);				
-				
+				$column2.append($rowLabels);
+
 				// LUNAR SYSTEM LINES Section
-				var $rowLines = $('<div id="lunar-lines-section" style="display:flex;flex-direction:column;gap:6px;padding:8px;background:rgba(0,0,0,0.05);border-radius:4px;border-left:3px solid #81C784;"></div>');
-				$rowLines.append('<div id="lunar-lines-header" style="font-size:11px;font-weight:bold;color:#000000;">' + _tr("LUNAR SYSTEM LINES") + '</div>');
-				
-				var $linesSubRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;"></div>');
-				
-				var $showLinesWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$lunarTourShowLines = $('<input type="checkbox" id="lunar-show-lines" checked style="margin:0;">');
+				var $rowLines = $('<div id="lunar-lines-section" class="tour-section-lunar"></div>');
+				$rowLines.append('<div id="lunar-lines-header" class="tour-section-header">' + _tr("LUNAR SYSTEM LINES") + '</div>');
+
+				var $linesSubRow = $('<div class="tour-row"></div>');
+
+				var $showLinesWrapper = $('<div class="tour-control-group"></div>');
+				$lunarTourShowLines = $('<input type="checkbox" id="lunar-show-lines" checked>');
 				$showLinesWrapper.append($lunarTourShowLines);
-				$showLinesWrapper.append('<label>' + _tr("Show Lines") + '</label>');
+				$showLinesWrapper.append('<label class="tour-control-label">' + _tr("Show Lines") + '</label>');
 				$linesSubRow.append($showLinesWrapper);
-				
-				var $lineThicknessWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-				$lineThicknessWrapper.append('<label>' + _tr("Thickness:") + '</label>');
-				$lunarTourLineThickness = $('<input type="number" id="lunar-line-thickness" value="2" min="1" max="5" step="1" style="width:45px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
+
+				var $lineThicknessWrapper = $('<div class="tour-control-group"></div>');
+				$lineThicknessWrapper.append('<label class="tour-control-label">' + _tr("Thickness:") + '</label>');
+				$lunarTourLineThickness = $('<input type="number" id="lunar-line-thickness" class="tour-input-number" value="2" min="1" max="5" step="1">');
 				$lineThicknessWrapper.append($lunarTourLineThickness);
 				$lineThicknessWrapper.append('<span>' + _tr("px") + '</span>');
 				$linesSubRow.append($lineThicknessWrapper);
-				
+
 				$rowLines.append($linesSubRow);
 				var $linesColorGroup = createLunarColorGroup(_tr("Lines Color"), "lunar-lines-color", 0.00, 1.00, 0.50);
 				$rowLines.append($linesColorGroup);
 				$column2.append($rowLines);
-				
+
 				// ============================================================
 				// COLUMN 3: Info Note
 				// ============================================================
-				var $column3 = $('<div style="display:flex;flex-direction:column;gap:12px;"></div>');
-				
+				var $column3 = $('<div class="tour-column"></div>');
+
 				// Add info note about lunar mansions
-				var $infoNote = $('<div style="background:rgba(129,199,132,0.08);border-radius:6px;padding:10px;margin-top:10px;">' +
-						'<div style="font-size:10px;color:#8A8C8E;line-height:1.5;">' +
-						'<span style="display:block;font-weight:bold;margin-bottom:5px;color:#81C784;">' + _tr("About Lunar Mansions") + '</span>' +
+				var $infoNote = $('<div class="tour-info-note">' +
+						'<div class="info-title">' + _tr("About Lunar Mansions") + '</div>' +
+						'<div class="info-text">' +
 						_tr("Lunar mansions (also called lunar stations or lunar houses) are divisions of the Moon's path across the sky. Different cultures have different systems:") + '<br>' +
 						'• ' + _tr("Arabic: 28 mansions (Manazil al-Qamar)") + '<br>' +
 						'• ' + _tr("Chinese: 28 mansions (Xiu)") + '<br>' +
@@ -5122,34 +5071,30 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 						'<span style="color:#81C784;">' + _tr("Lines color can be customized above. Screen labels use a fixed color (#ffaa66) for readability.") + '</span>' +
 						'</div></div>');
 				$column3.append($infoNote);
-				
+
 				// ============================================================
 				// ASSEMBLE ALL COLUMNS INTO TOOLBAR
 				// ============================================================
 				$toolbar.append($column1);
 				$toolbar.append($column2);
 				$toolbar.append($column3);
-				
+
 				$toolbarContainer.append($sectionTitle);
 				$toolbarContainer.append($toolbar);
-				
-				// Insert toolbar BEFORE the patterns-note
-				if ($patternsNote.length) {
-						$patternsNote.before($toolbarContainer);
-				} else {
-						$lunarTab.prepend($toolbarContainer);
-				}
-				
+
+				// Insert toolbar AFTER the buttons container (at the bottom of the tab)
+				$buttonsContainer.after($toolbarContainer);
+
 				// ============================================================
 				// BIND EVENTS
 				// ============================================================
 				$lunarTourGenerateStaticBtn.on('click', generateLunarMansionsTourScriptStatic);
-				
+
 				// Bind multi-select mode change event
 				if ($lunarMultiSelectMode) {
 						$lunarMultiSelectMode.on('change', function() {
 								isLunarMultiSelectModeActive = $(this).is(':checked');
-								
+
 								if (isLunarMultiSelectModeActive) {
 										console.log("[SkyCulture] Entering multi-select mode for lunar mansions");
 										selectedPattern = null;
@@ -5165,7 +5110,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 								}
 						});
 				}
-				
+
 				console.log("[SkyCulture] Lunar mansions tour toolbar created successfully");
 		}
 
@@ -5556,365 +5501,338 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
     // STARS TOUR TOOLBAR CREATION
     // ========================================================================
 
-    /**
-     * Create the tour control toolbar for stars inside the stars tab.
-     * Provides controls for generating scripts with full customization.
-     * 
-     * Features:
-     * - Generate static script with embedded celestial objects array
-     * - Multi-select mode for picking specific stars/objects
-     * - Duration, zoom, and overview controls
-     * - Label customization (amount, additional names, HIP, double/variable stars)
-     * - Star appearance controls (absolute/relative scale, twinkle, spikes, halo)
-     * - Magnitude limit control
-     * - Color picker for labels
-     * 
-     * @function createStarsTourToolbar
-     */
-    function createStarsTourToolbar() {
-        console.log("[SkyCulture] createStarsTourToolbar() called");
-        
-        // Check if toolbar already exists
-        if ($('#stars-tour-controls-container').length > 0) {
-            console.log("[SkyCulture] Stars tour toolbar already exists, skipping");
-            return;
-        }
-        
-        // Find the stars tab content
-        var $starsTab = $('#patterns-tab-stars');
-        if (!$starsTab.length) {
-            console.warn("[SkyCulture] Stars tab not found");
-            return;
-        }
-        
-        // Find the patterns-note element to insert BEFORE
-        var $patternsNote = $starsTab.find('.patterns-note');
-        
-        // Create toolbar container
-        var $toolbarContainer = $('<div id="stars-tour-controls-container" class="tour-controls-container" style="margin: 10px 0; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.1);"></div>');
-        
-        // Add section title
-        var $sectionTitle = $('<div style="margin-bottom: 8px; font-size: 11px; font-weight: bold; color: #B4B7B0;">' + _tr("Stars Tour Generator") + '</div>');
-        
-        // Create inner toolbar with multi-column grid layout
-        var $toolbar = $('<div class="tour-toolbar" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px; width:100%;"></div>');
-                
-        // ============================================================
-        // COLUMN 1: Script Generation + Timing Controls
-        // ============================================================
-        var $column1 = $('<div style="display:flex;flex-direction:column;gap:12px;"></div>');
-        
-        // Script Generation Row
-        var $genRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid rgba(180,183,176,0.2);"></div>');
-        $starsTourGenerateStaticBtn = $('<button id="btn-generate-stars-static" class="jquerybutton pattern-btn" style="background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:3px;padding:5px 10px;font-size:11px;font-weight:bold;color:#000;cursor:pointer;" title="' + _tr("Generates script with embedded star/object array") + '">' + _tr("Generate Stars Tour Script") + '</button>');
-        $genRow.append($starsTourGenerateStaticBtn);
-        
-        // Multi-Select Mode checkbox and counter
-        var $multiSelectWrapper = $('<div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#000;background:rgba(253,216,134,0.15);padding:4px 10px;border-radius:4px;margin-left:8px;"></div>');
-        $starsMultiSelectMode = $('<input type="checkbox" id="stars-multi-select-mode" style="margin:0;">');
-        $multiSelectWrapper.append($starsMultiSelectMode);
-        $multiSelectWrapper.append('<label style="font-weight:bold;cursor:pointer;">' + _tr("Multi-Select") + '</label>');
-        $multiSelectWrapper.append('<span style="font-size:9px;color:#8A8C8E;">(' + _tr("Pick multiple stars/objects") + ')</span>');
-        
-        $starsSelectionCount = $('<span id="stars-selection-count" style="background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:12px;font-size:9px;margin-left:5px;">0 ' + _tr("selected") + '</span>');
-        $multiSelectWrapper.append($starsSelectionCount);
-        
-        $genRow.append($multiSelectWrapper);
-        $column1.append($genRow);
-        
-        // Timing Controls Row
-        var $timingRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:6px 0;"></div>');
-        
-        var $durationWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $durationWrapper.append('<label style="font-weight:bold;">' + _tr("Duration Per Object:") + '</label>');
-        $starsTourDuration = $('<input type="number" id="stars-tour-duration" value="3" min="1" max="15" step="0.5" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
-        $durationWrapper.append($starsTourDuration);
-        $durationWrapper.append('<span>' + _tr("sec") + '</span>');
-        $timingRow.append($durationWrapper);
-        
-        var $zoomWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $zoomWrapper.append('<label style="font-weight:bold;">' + _tr("Zoom FOV:") + '</label>');
-        $starsTourZoomFov = $('<input type="number" id="stars-zoom-fov" value="10" min="5" max="60" step="1" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
-        $zoomWrapper.append($starsTourZoomFov);
-        $zoomWrapper.append('<span>' + _tr("deg") + '</span>');
-        $timingRow.append($zoomWrapper);
-        
-        var $overviewWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $overviewWrapper.append('<label style="font-weight:bold;">' + _tr("Overview FOV:") + '</label>');
-        $starsTourOverviewFov = $('<input type="number" id="stars-overview-fov" value="60" min="20" max="120" step="1" style="width:50px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
-        $overviewWrapper.append($starsTourOverviewFov);
-        $overviewWrapper.append('<span>' + _tr("deg") + '</span>');
-        $timingRow.append($overviewWrapper);
-        
-        $column1.append($timingRow);
-        
-        // ============================================================
-        // COLUMN 2: Labels Controls
-        // ============================================================
-        var $column2 = $('<div style="display:flex;flex-direction:column;gap:12px;"></div>');
-        
-        // STAR LABELS Section
-        var $rowLabels = $('<div id="stars-labels-section" style="display:flex;flex-direction:column;gap:6px;padding:8px;background:rgba(0,0,0,0.05);border-radius:4px;"></div>');
-        $rowLabels.append('<div id="stars-labels-header" style="font-size:11px;font-weight:bold;color:#000000;">' + _tr("STAR LABELS") + '</div>');
-        
-        var $labelsSubRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;"></div>');
-        
-        var $showLabelsWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $starsTourShowLabels = $('<input type="checkbox" id="stars-show-labels" checked style="margin:0;">');
-        $showLabelsWrapper.append($starsTourShowLabels);
-        $showLabelsWrapper.append('<label>' + _tr("Show Labels") + '</label>');
-        $labelsSubRow.append($showLabelsWrapper);
-        
-        var $labelsAmountWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $labelsAmountWrapper.append('<label>' + _tr("Labels Amount:") + '</label>');
-        $starsTourLabelsAmount = $('<input type="range" id="stars-labels-amount" value="6" min="0" max="10" step="0.1" style="width:80px;">');
-        $labelsAmountWrapper.append($starsTourLabelsAmount);
-        var $labelsAmountValue = $('<span id="stars-labels-amount-value" style="font-size:10px;color:#8A8C8E;min-width:30px;">6.0</span>');
-        $labelsAmountWrapper.append($labelsAmountValue);
-        $labelsSubRow.append($labelsAmountWrapper);
-        
-        $rowLabels.append($labelsSubRow);
-        
-        // Label type checkboxes
-        var $labelTypesRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:5px;"></div>');
-        
-        var $additionalNamesWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $starsTourShowAdditionalNames = $('<input type="checkbox" id="stars-show-additional-names" checked style="margin:0;">');
-        $additionalNamesWrapper.append($starsTourShowAdditionalNames);
-        $additionalNamesWrapper.append('<label>' + _tr("Additional Names") + '</label>');
-        $labelTypesRow.append($additionalNamesWrapper);
-        
-        var $dblStarsWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $starsTourShowDblStars = $('<input type="checkbox" id="stars-show-dbl-stars" style="margin:0;">');
-        $dblStarsWrapper.append($starsTourShowDblStars);
-        $dblStarsWrapper.append('<label>' + _tr("Double Stars") + '</label>');
-        $labelTypesRow.append($dblStarsWrapper);
-        
-        var $varStarsWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $starsTourShowVarStars = $('<input type="checkbox" id="stars-show-var-stars" style="margin:0;">');
-        $varStarsWrapper.append($starsTourShowVarStars);
-        $varStarsWrapper.append('<label>' + _tr("Variable Stars") + '</label>');
-        $labelTypesRow.append($varStarsWrapper);
-        
-        var $hipNumbersWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $starsTourShowHIPNumbers = $('<input type="checkbox" id="stars-show-hip-numbers" style="margin:0;">');
-        $hipNumbersWrapper.append($starsTourShowHIPNumbers);
-        $hipNumbersWrapper.append('<label>' + _tr("HIP Numbers") + '</label>');
-        $labelTypesRow.append($hipNumbersWrapper);
-        
-        $rowLabels.append($labelTypesRow);
-        
-        // Font size and color
-        var $fontRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:5px;"></div>');
-        
-        var $fontWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $fontWrapper.append('<label>' + _tr("Font Size:") + '</label>');
-        $starsTourFontSize = $('<input type="number" id="stars-font-size" value="16" min="10" max="30" step="1" style="width:55px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;padding:3px 4px;">');
-        $fontWrapper.append($starsTourFontSize);
-        $fontWrapper.append('<span>' + _tr("px") + '</span>');
-        $fontRow.append($fontWrapper);
-        
-        $rowLabels.append($fontRow);
-        
+		/**
+		 * Create the tour control toolbar for stars inside the stars tab.
+		 * Provides controls for generating scripts with full customization.
+		 * 
+		 * Features:
+		 * - Generate static script with embedded celestial objects array
+		 * - Multi-select mode for picking specific stars/objects
+		 * - Duration, zoom, and overview controls
+		 * - Label customization (amount, additional names, HIP, double/variable stars)
+		 * - Star appearance controls (absolute/relative scale, twinkle, spikes, halo)
+		 * - Magnitude limit control
+		 * 
+		 * @function createStarsTourToolbar
+		 */
+		function createStarsTourToolbar() {
+				console.log("[SkyCulture] createStarsTourToolbar() called");
 
-        $column2.append($rowLabels);
-        
-        // ============================================================
-        // COLUMN 3: Star Appearance Controls
-        // ============================================================
-        var $column3 = $('<div style="display:flex;flex-direction:column;gap:12px;"></div>');
-        
-        // STAR APPEARANCE Section
-        var $rowAppearance = $('<div id="stars-appearance-section" style="display:flex;flex-direction:column;gap:6px;padding:8px;background:rgba(0,0,0,0.05);border-radius:4px;"></div>');
-        $rowAppearance.append('<div id="stars-appearance-header" style="font-size:11px;font-weight:bold;color:#000000;">' + _tr("STAR APPEARANCE") + '</div>');
-        
-        // Absolute/Relative scales
-        var $scaleRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:5px;"></div>');
-        
-        var $absScaleWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $absScaleWrapper.append('<label>' + _tr("Absolute Scale:") + '</label>');
-        $starsTourAbsoluteScale = $('<input type="range" id="stars-absolute-scale" value="1.0" min="0.3" max="3.0" step="0.01" style="width:100px;">');
-        $absScaleWrapper.append($starsTourAbsoluteScale);
-        var $absScaleValue = $('<span id="stars-absolute-scale-value" style="font-size:10px;color:#8A8C8E;min-width:35px;">1.00</span>');
-        $absScaleWrapper.append($absScaleValue);
-        $scaleRow.append($absScaleWrapper);
-        
-        var $relScaleWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $relScaleWrapper.append('<label>' + _tr("Relative Scale:") + '</label>');
-        $starsTourRelativeScale = $('<input type="range" id="stars-relative-scale" value="1.0" min="0.5" max="2.5" step="0.01" style="width:100px;">');
-        $relScaleWrapper.append($starsTourRelativeScale);
-        var $relScaleValue = $('<span id="stars-relative-scale-value" style="font-size:10px;color:#8A8C8E;min-width:35px;">1.00</span>');
-        $relScaleWrapper.append($relScaleValue);
-        $scaleRow.append($relScaleWrapper);
-        
-        $rowAppearance.append($scaleRow);
-        
-        // Twinkle controls
-        var $twinkleRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:5px;"></div>');
-        
-        var $showTwinkleWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $starsTourShowTwinkle = $('<input type="checkbox" id="stars-show-twinkle" checked style="margin:0;">');
-        $showTwinkleWrapper.append($starsTourShowTwinkle);
-        $showTwinkleWrapper.append('<label>' + _tr("Twinkle") + '</label>');
-        $twinkleRow.append($showTwinkleWrapper);
-        
-        var $twinkleAmountWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $twinkleAmountWrapper.append('<label>' + _tr("Twinkle Amount:") + '</label>');
-        $starsTourTwinkleAmount = $('<input type="range" id="stars-twinkle-amount" value="0.3" min="0" max="1.5" step="0.01" style="width:80px;">');
-        $twinkleAmountWrapper.append($starsTourTwinkleAmount);
-        var $twinkleAmountValue = $('<span id="stars-twinkle-amount-value" style="font-size:10px;color:#8A8C8E;min-width:35px;">0.30</span>');
-        $twinkleAmountWrapper.append($twinkleAmountValue);
-        $twinkleRow.append($twinkleAmountWrapper);
-        
-        $rowAppearance.append($twinkleRow);
-        
-        // Spiky stars and halo
-        var $effectRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:5px;"></div>');
-        
-        var $showSpikyWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $starsTourShowSpiky = $('<input type="checkbox" id="stars-show-spiky" style="margin:0;">');
-        $showSpikyWrapper.append($starsTourShowSpiky);
-        $showSpikyWrapper.append('<label>' + _tr("Spiky Stars") + '</label>');
-        $effectRow.append($showSpikyWrapper);
-        
-        var $showHaloWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $starsTourShowHalo = $('<input type="checkbox" id="stars-show-halo" checked style="margin:0;">');
-        $showHaloWrapper.append($starsTourShowHalo);
-        $showHaloWrapper.append('<label>' + _tr("Star Halos") + '</label>');
-        $effectRow.append($showHaloWrapper);
-        
-        $rowAppearance.append($effectRow);
-        
-        // Magnitude limit
-        var $magLimitRow = $('<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:5px;"></div>');
-        
-        var $useMagLimitWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $starsTourUseMagLimit = $('<input type="checkbox" id="stars-use-mag-limit" style="margin:0;">');
-        $useMagLimitWrapper.append($starsTourUseMagLimit);
-        $useMagLimitWrapper.append('<label>' + _tr("Use Magnitude Limit") + '</label>');
-        $magLimitRow.append($useMagLimitWrapper);
-        
-        var $magLimitValueWrapper = $('<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#000;"></div>');
-        $magLimitValueWrapper.append('<label>' + _tr("Limit:") + '</label>');
-        $starsTourMagLimit = $('<input type="range" id="stars-mag-limit" value="8.0" min="1" max="10" step="0.1" style="width:80px;">');
-        $magLimitValueWrapper.append($starsTourMagLimit);
-        var $magLimitValue = $('<span id="stars-mag-limit-value" style="font-size:10px;color:#8A8C8E;min-width:35px;">8.0</span>');
-        $magLimitValueWrapper.append($magLimitValue);
-        $magLimitRow.append($magLimitValueWrapper);
-        
-        $rowAppearance.append($magLimitRow);
-        
-        $column3.append($rowAppearance);
-        
-        // Add info note
-      /*  var $infoNote = $('<div style="background:rgba(0,0,0,0.08);border-radius:6px;padding:10px;margin-top:10px;">' +
-            '<div style="font-size:10px;color:#8A8C8E;line-height:1.5;">' +
-            '<span style="display:block;font-weight:bold;margin-bottom:5px;color:#F39C12;">' + _tr("About Stars Tour") + '</span>' +
-            _tr("This tour includes all culturally significant stars and celestial objects from the selected culture.") + '<br>' +
-            '• ' + _tr("Objects can include HIP stars, Messier objects (M), NGC/IC objects, and planets") + '<br>' +
-            '• ' + _tr("Star appearance can be fully customized (brightness, twinkle, spikes, halos)") + '<br>' +
-            '• ' + _tr("Labels can show additional names, HIP numbers, double/variable star designations") + '<br><br>' +
-            '<span style="color:#F39C12;">' + _tr("Use Multi-Select mode to create a custom tour of selected objects only.") + '</span>' +
-            '</div></div>');
-        $column3.append($infoNote);*/
-        
-        // ============================================================
-        // ASSEMBLE ALL COLUMNS INTO TOOLBAR
-        // ============================================================
-        $toolbar.append($column1);
-        $toolbar.append($column2);
-        $toolbar.append($column3);
-        
-        $toolbarContainer.append($sectionTitle);
-        $toolbarContainer.append($toolbar);
-        
-        // Insert toolbar BEFORE the patterns-note
-        if ($patternsNote.length) {
-            $patternsNote.before($toolbarContainer);
-        } else {
-            $starsTab.prepend($toolbarContainer);
-        }
-        
-        // ============================================================
-        // BIND UI EVENT HANDLERS
-        // ============================================================
-        
-        // Update value displays for sliders
-        $starsTourLabelsAmount.on('input', function() {
-            var val = parseFloat($(this).val()).toFixed(1);
-            $('#stars-labels-amount-value').text(val);
-        });
-        
-        $starsTourAbsoluteScale.on('input', function() {
-            var val = parseFloat($(this).val()).toFixed(2);
-            $('#stars-absolute-scale-value').text(val);
-        });
-        
-        $starsTourRelativeScale.on('input', function() {
-            var val = parseFloat($(this).val()).toFixed(2);
-            $('#stars-relative-scale-value').text(val);
-        });
-        
-        $starsTourTwinkleAmount.on('input', function() {
-            var val = parseFloat($(this).val()).toFixed(2);
-            $('#stars-twinkle-amount-value').text(val);
-        });
-        
-        $starsTourMagLimit.on('input', function() {
-            var val = parseFloat($(this).val()).toFixed(1);
-            $('#stars-mag-limit-value').text(val);
-        });
-        
-        // Bind generate button
-        $starsTourGenerateStaticBtn.on('click', generateStarsTourScriptStatic);
-        
-        // Enable/disable magnitude limit slider when checkbox toggles
-        $starsTourUseMagLimit.on('change', function() {
-            var isEnabled = $(this).is(':checked');
-            $starsTourMagLimit.prop('disabled', !isEnabled);
-            $('#stars-mag-limit-value').css('opacity', isEnabled ? 1 : 0.5);
-        });
-        
-        // Initialize magnitude limit slider state
-        $starsTourMagLimit.prop('disabled', !$starsTourUseMagLimit.is(':checked'));
-        
-        // Bind multi-select mode change event
-        if ($starsMultiSelectMode) {
-            $starsMultiSelectMode.on('change', function() {
-                isStarsMultiSelectModeActive = $(this).is(':checked');
-                
-                if (isStarsMultiSelectModeActive) {
-                    console.log("[SkyCulture] Entering multi-select mode for stars");
-                    
-                    // Clear any single selection state
-                    selectedPattern = null;
-                    selectedPatternId = null;
-                    
-                    // Clear previous multi-selections
-                    clearStarsMultiSelection();
-                    
-                    // Update button behavior
-                    updateStarsButtonsBehavior();
-                } else {
-                    console.log("[SkyCulture] Exiting multi-select mode for stars");
-                    
-                    // Clear all multi-selections
-                    clearStarsMultiSelection();
-                    
-                    // Clear the selected set
-                    selectedStarIds.clear();
-                    
-                    // Update button behavior
-                    updateStarsButtonsBehavior();
-                    
-                    // Update selection count display
-                    updateStarsSelectionCount();
-                }
-            });
-        }
-        
-        console.log("[SkyCulture] Stars tour toolbar created successfully");
-    }
+				// Check if toolbar already exists
+				if ($('#stars-tour-controls-container').length > 0) {
+						console.log("[SkyCulture] Stars tour toolbar already exists, skipping");
+						return;
+				}
+
+				// Find the stars tab content
+				var $starsTab = $('#patterns-tab-stars');
+				if (!$starsTab.length) {
+						console.warn("[SkyCulture] Stars tab not found");
+						return;
+				}
+
+				// Find the container where buttons are displayed
+				var $buttonsContainer = $starsTab.find('#stars-buttons-container');
+				if (!$buttonsContainer.length) {
+						console.warn("[SkyCulture] Stars buttons container not found");
+						return;
+				}
+
+				// Create toolbar container - NO inline styles
+				var $toolbarContainer = $('<div id="stars-tour-controls-container" class="tour-controls-container"></div>');
+
+				// Add section title - NO inline styles
+				var $sectionTitle = $('<div class="tour-section-title">' + _tr("Stars Tour Generator") + '</div>');
+
+				// Create inner toolbar with multi-column grid layout - NO inline styles
+				var $toolbar = $('<div class="tour-toolbar-grid"></div>');
+
+				// ============================================================
+				// COLUMN 1: Script Generation + Timing Controls
+				// ============================================================
+				var $column1 = $('<div class="tour-column"></div>');
+
+				// Script Generation Row
+				var $genRow = $('<div class="tour-row-separator"></div>');
+				$starsTourGenerateStaticBtn = $('<button id="btn-generate-stars-static" class="jquerybutton pattern-btn tour-generate-btn" title="' + _tr("Generates script with embedded star/object array") + '">' + _tr("Generate Stars Tour Script") + '</button>');
+				$genRow.append($starsTourGenerateStaticBtn);
+
+				// Multi-Select Mode checkbox and counter
+				var $multiSelectWrapper = $('<div class="tour-multiselect-orange"></div>');
+				$starsMultiSelectMode = $('<input type="checkbox" id="stars-multi-select-mode">');
+				$multiSelectWrapper.append($starsMultiSelectMode);
+				$multiSelectWrapper.append('<label style="font-weight:bold;cursor:pointer;">' + _tr("Multi-Select") + '</label>');
+				$multiSelectWrapper.append('<span class="tour-multiselect-hint">(' + _tr("Pick multiple stars/objects") + ')</span>');
+
+				$starsSelectionCount = $('<span class="tour-selection-count">0 ' + _tr("selected") + '</span>');
+				$multiSelectWrapper.append($starsSelectionCount);
+
+				$genRow.append($multiSelectWrapper);
+				$column1.append($genRow);
+
+				// Timing Controls Row
+				var $timingRow = $('<div class="tour-row"></div>');
+
+				var $durationWrapper = $('<div class="tour-control-group"></div>');
+				$durationWrapper.append('<label class="tour-control-label-bold">' + _tr("Duration Per Object:") + '</label>');
+				$starsTourDuration = $('<input type="number" id="stars-tour-duration" class="tour-input-number" value="3" min="1" max="15" step="0.5">');
+				$durationWrapper.append($starsTourDuration);
+				$durationWrapper.append('<span>' + _tr("sec") + '</span>');
+				$timingRow.append($durationWrapper);
+
+				var $zoomWrapper = $('<div class="tour-control-group"></div>');
+				$zoomWrapper.append('<label class="tour-control-label-bold">' + _tr("Zoom FOV:") + '</label>');
+				$starsTourZoomFov = $('<input type="number" id="stars-zoom-fov" class="tour-input-number" value="10" min="5" max="60" step="1">');
+				$zoomWrapper.append($starsTourZoomFov);
+				$zoomWrapper.append('<span>' + _tr("deg") + '</span>');
+				$timingRow.append($zoomWrapper);
+
+				var $overviewWrapper = $('<div class="tour-control-group"></div>');
+				$overviewWrapper.append('<label class="tour-control-label-bold">' + _tr("Overview FOV:") + '</label>');
+				$starsTourOverviewFov = $('<input type="number" id="stars-overview-fov" class="tour-input-number" value="60" min="20" max="120" step="1">');
+				$overviewWrapper.append($starsTourOverviewFov);
+				$overviewWrapper.append('<span>' + _tr("deg") + '</span>');
+				$timingRow.append($overviewWrapper);
+
+				$column1.append($timingRow);
+
+				// ============================================================
+				// COLUMN 2: Labels Controls
+				// ============================================================
+				var $column2 = $('<div class="tour-column"></div>');
+
+				// STAR LABELS Section
+				var $rowLabels = $('<div id="stars-labels-section" class="tour-section-artwork"></div>');
+				$rowLabels.append('<div id="stars-labels-header" class="tour-section-header">' + _tr("STAR LABELS") + '</div>');
+
+				var $labelsSubRow = $('<div class="tour-row"></div>');
+
+				var $showLabelsWrapper = $('<div class="tour-control-group"></div>');
+				$starsTourShowLabels = $('<input type="checkbox" id="stars-show-labels" checked>');
+				$showLabelsWrapper.append($starsTourShowLabels);
+				$showLabelsWrapper.append('<label class="tour-control-label">' + _tr("Show Labels") + '</label>');
+				$labelsSubRow.append($showLabelsWrapper);
+
+				var $labelsAmountWrapper = $('<div class="tour-control-group"></div>');
+				$labelsAmountWrapper.append('<label class="tour-control-label">' + _tr("Labels Amount:") + '</label>');
+				$starsTourLabelsAmount = $('<input type="range" id="stars-labels-amount" class="tour-input-range" value="6" min="0" max="10" step="0.1">');
+				$labelsAmountWrapper.append($starsTourLabelsAmount);
+				var $labelsAmountValue = $('<span id="stars-labels-amount-value" class="tour-range-value">6.0</span>');
+				$labelsAmountWrapper.append($labelsAmountValue);
+				$labelsSubRow.append($labelsAmountWrapper);
+
+				$rowLabels.append($labelsSubRow);
+
+				// Label type checkboxes
+				var $labelTypesRow = $('<div class="tour-row"></div>');
+
+				var $additionalNamesWrapper = $('<div class="tour-control-group"></div>');
+				$starsTourShowAdditionalNames = $('<input type="checkbox" id="stars-show-additional-names" checked>');
+				$additionalNamesWrapper.append($starsTourShowAdditionalNames);
+				$additionalNamesWrapper.append('<label class="tour-control-label">' + _tr("Additional Names") + '</label>');
+				$labelTypesRow.append($additionalNamesWrapper);
+
+				var $dblStarsWrapper = $('<div class="tour-control-group"></div>');
+				$starsTourShowDblStars = $('<input type="checkbox" id="stars-show-dbl-stars">');
+				$dblStarsWrapper.append($starsTourShowDblStars);
+				$dblStarsWrapper.append('<label class="tour-control-label">' + _tr("Double Stars") + '</label>');
+				$labelTypesRow.append($dblStarsWrapper);
+
+				var $varStarsWrapper = $('<div class="tour-control-group"></div>');
+				$starsTourShowVarStars = $('<input type="checkbox" id="stars-show-var-stars">');
+				$varStarsWrapper.append($starsTourShowVarStars);
+				$varStarsWrapper.append('<label class="tour-control-label">' + _tr("Variable Stars") + '</label>');
+				$labelTypesRow.append($varStarsWrapper);
+
+				var $hipNumbersWrapper = $('<div class="tour-control-group"></div>');
+				$starsTourShowHIPNumbers = $('<input type="checkbox" id="stars-show-hip-numbers">');
+				$hipNumbersWrapper.append($starsTourShowHIPNumbers);
+				$hipNumbersWrapper.append('<label class="tour-control-label">' + _tr("HIP Numbers") + '</label>');
+				$labelTypesRow.append($hipNumbersWrapper);
+
+				$rowLabels.append($labelTypesRow);
+
+				// Font size
+				var $fontRow = $('<div class="tour-row"></div>');
+
+				var $fontWrapper = $('<div class="tour-control-group"></div>');
+				$fontWrapper.append('<label class="tour-control-label">' + _tr("Font Size:") + '</label>');
+				$starsTourFontSize = $('<input type="number" id="stars-font-size" class="tour-input-number" value="16" min="10" max="30" step="1">');
+				$fontWrapper.append($starsTourFontSize);
+				$fontWrapper.append('<span>' + _tr("px") + '</span>');
+				$fontRow.append($fontWrapper);
+
+				$rowLabels.append($fontRow);
+
+				$column2.append($rowLabels);
+
+				// ============================================================
+				// COLUMN 3: Star Appearance Controls
+				// ============================================================
+				var $column3 = $('<div class="tour-column"></div>');
+
+				// STAR APPEARANCE Section
+				var $rowAppearance = $('<div id="stars-appearance-section" class="tour-section-artwork"></div>');
+				$rowAppearance.append('<div id="stars-appearance-header" class="tour-section-header">' + _tr("STAR APPEARANCE") + '</div>');
+
+				// Absolute/Relative scales
+				var $scaleRow = $('<div class="tour-row"></div>');
+
+				var $absScaleWrapper = $('<div class="tour-control-group"></div>');
+				$absScaleWrapper.append('<label class="tour-control-label">' + _tr("Absolute Scale:") + '</label>');
+				$starsTourAbsoluteScale = $('<input type="range" id="stars-absolute-scale" class="tour-input-range" value="1.0" min="0.3" max="3.0" step="0.01">');
+				$absScaleWrapper.append($starsTourAbsoluteScale);
+				var $absScaleValue = $('<span id="stars-absolute-scale-value" class="tour-range-value">1.00</span>');
+				$absScaleWrapper.append($absScaleValue);
+				$scaleRow.append($absScaleWrapper);
+
+				var $relScaleWrapper = $('<div class="tour-control-group"></div>');
+				$relScaleWrapper.append('<label class="tour-control-label">' + _tr("Relative Scale:") + '</label>');
+				$starsTourRelativeScale = $('<input type="range" id="stars-relative-scale" class="tour-input-range" value="1.0" min="0.5" max="2.5" step="0.01">');
+				$relScaleWrapper.append($starsTourRelativeScale);
+				var $relScaleValue = $('<span id="stars-relative-scale-value" class="tour-range-value">1.00</span>');
+				$relScaleWrapper.append($relScaleValue);
+				$scaleRow.append($relScaleWrapper);
+
+				$rowAppearance.append($scaleRow);
+
+				// Twinkle controls
+				var $twinkleRow = $('<div class="tour-row"></div>');
+
+				var $showTwinkleWrapper = $('<div class="tour-control-group"></div>');
+				$starsTourShowTwinkle = $('<input type="checkbox" id="stars-show-twinkle" checked>');
+				$showTwinkleWrapper.append($starsTourShowTwinkle);
+				$showTwinkleWrapper.append('<label class="tour-control-label">' + _tr("Twinkle") + '</label>');
+				$twinkleRow.append($showTwinkleWrapper);
+
+				var $twinkleAmountWrapper = $('<div class="tour-control-group"></div>');
+				$twinkleAmountWrapper.append('<label class="tour-control-label">' + _tr("Twinkle Amount:") + '</label>');
+				$starsTourTwinkleAmount = $('<input type="range" id="stars-twinkle-amount" class="tour-input-range" value="0.3" min="0" max="1.5" step="0.01">');
+				$twinkleAmountWrapper.append($starsTourTwinkleAmount);
+				var $twinkleAmountValue = $('<span id="stars-twinkle-amount-value" class="tour-range-value">0.30</span>');
+				$twinkleAmountWrapper.append($twinkleAmountValue);
+				$twinkleRow.append($twinkleAmountWrapper);
+
+				$rowAppearance.append($twinkleRow);
+
+				// Spiky stars and halo
+				var $effectRow = $('<div class="tour-row"></div>');
+
+				var $showSpikyWrapper = $('<div class="tour-control-group"></div>');
+				$starsTourShowSpiky = $('<input type="checkbox" id="stars-show-spiky">');
+				$showSpikyWrapper.append($starsTourShowSpiky);
+				$showSpikyWrapper.append('<label class="tour-control-label">' + _tr("Spiky Stars") + '</label>');
+				$effectRow.append($showSpikyWrapper);
+
+				var $showHaloWrapper = $('<div class="tour-control-group"></div>');
+				$starsTourShowHalo = $('<input type="checkbox" id="stars-show-halo" checked>');
+				$showHaloWrapper.append($starsTourShowHalo);
+				$showHaloWrapper.append('<label class="tour-control-label">' + _tr("Star Halos") + '</label>');
+				$effectRow.append($showHaloWrapper);
+
+				$rowAppearance.append($effectRow);
+
+				// Magnitude limit
+				var $magLimitRow = $('<div class="tour-row"></div>');
+
+				var $useMagLimitWrapper = $('<div class="tour-control-group"></div>');
+				$starsTourUseMagLimit = $('<input type="checkbox" id="stars-use-mag-limit">');
+				$useMagLimitWrapper.append($starsTourUseMagLimit);
+				$useMagLimitWrapper.append('<label class="tour-control-label">' + _tr("Use Magnitude Limit") + '</label>');
+				$magLimitRow.append($useMagLimitWrapper);
+
+				var $magLimitValueWrapper = $('<div class="tour-control-group"></div>');
+				$magLimitValueWrapper.append('<label class="tour-control-label">' + _tr("Limit:") + '</label>');
+				$starsTourMagLimit = $('<input type="range" id="stars-mag-limit" class="tour-input-range" value="8.0" min="1" max="10" step="0.1">');
+				$magLimitValueWrapper.append($starsTourMagLimit);
+				var $magLimitValue = $('<span id="stars-mag-limit-value" class="tour-range-value">8.0</span>');
+				$magLimitValueWrapper.append($magLimitValue);
+				$magLimitRow.append($magLimitValueWrapper);
+
+				$rowAppearance.append($magLimitRow);
+
+				$column3.append($rowAppearance);
+
+				// ============================================================
+				// ASSEMBLE ALL COLUMNS INTO TOOLBAR
+				// ============================================================
+				$toolbar.append($column1);
+				$toolbar.append($column2);
+				$toolbar.append($column3);
+
+				$toolbarContainer.append($sectionTitle);
+				$toolbarContainer.append($toolbar);
+
+				// Insert toolbar AFTER the buttons container (at the bottom of the tab)
+				$buttonsContainer.after($toolbarContainer);
+
+				// ============================================================
+				// BIND UI EVENT HANDLERS
+				// ============================================================
+
+				// Update value displays for sliders
+				$starsTourLabelsAmount.on('input', function() {
+						var val = parseFloat($(this).val()).toFixed(1);
+						$('#stars-labels-amount-value').text(val);
+				});
+
+				$starsTourAbsoluteScale.on('input', function() {
+						var val = parseFloat($(this).val()).toFixed(2);
+						$('#stars-absolute-scale-value').text(val);
+				});
+
+				$starsTourRelativeScale.on('input', function() {
+						var val = parseFloat($(this).val()).toFixed(2);
+						$('#stars-relative-scale-value').text(val);
+				});
+
+				$starsTourTwinkleAmount.on('input', function() {
+						var val = parseFloat($(this).val()).toFixed(2);
+						$('#stars-twinkle-amount-value').text(val);
+				});
+
+				$starsTourMagLimit.on('input', function() {
+						var val = parseFloat($(this).val()).toFixed(1);
+						$('#stars-mag-limit-value').text(val);
+				});
+
+				// Bind generate button
+				$starsTourGenerateStaticBtn.on('click', generateStarsTourScriptStatic);
+
+				// Enable/disable magnitude limit slider when checkbox toggles
+				$starsTourUseMagLimit.on('change', function() {
+						var isEnabled = $(this).is(':checked');
+						$starsTourMagLimit.prop('disabled', !isEnabled);
+						$('#stars-mag-limit-value').css('opacity', isEnabled ? 1 : 0.5);
+				});
+
+				// Initialize magnitude limit slider state
+				$starsTourMagLimit.prop('disabled', !$starsTourUseMagLimit.is(':checked'));
+
+				// Bind multi-select mode change event
+				if ($starsMultiSelectMode) {
+						$starsMultiSelectMode.on('change', function() {
+								isStarsMultiSelectModeActive = $(this).is(':checked');
+
+								if (isStarsMultiSelectModeActive) {
+										console.log("[SkyCulture] Entering multi-select mode for stars");
+										selectedPattern = null;
+										selectedPatternId = null;
+										clearStarsMultiSelection();
+										updateStarsButtonsBehavior();
+								} else {
+										console.log("[SkyCulture] Exiting multi-select mode for stars");
+										clearStarsMultiSelection();
+										selectedStarIds.clear();
+										updateStarsButtonsBehavior();
+										updateStarsSelectionCount();
+								}
+						});
+				}
+
+				console.log("[SkyCulture] Stars tour toolbar created successfully");
+		}
+
 		
     // ========================================================================
     // STARS MULTI-SELECT FUNCTIONS

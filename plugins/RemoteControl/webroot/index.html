@@ -807,162 +807,306 @@
 									
 							</div><!-- END .skyculture-panel -->
 							
-							<!-- FOOTER PANEL: Sky Culture Options -->
-							<div class="skyculture-options-panel">
+					<!-- FOOTER PANEL: Sky Culture Options -->
+					<div class="skyculture-options-panel">
+							
+							<h3><?= tr("Options")?></h3>
+							
+							<div class="options-grid">
 									
-									<h3><?= tr("Options")?></h3>
-									
-									<div class="options-grid">
-											
-											<!-- 1. Constellation Labels -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.namesDisplayed" />
-															<span><?= tr("Label constellations with font size")?></span>
-													</label>
-													<div class="option-controls">
+									<!-- ============================================================
+											 CONSTELLATION LABELS - Size + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.namesDisplayed" />
+													<span><?= tr("Label constellations with font size")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
 															<span class="stelproperty" data-prop="ConstellationMgr.fontSize" data-numberformat="n0"></span>
 															<div id="constellation-fontsize" class="slider stelproperty" 
 																	 data-prop="ConstellationMgr.fontSize" data-min="8" data-max="40" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.namesColor">
+																	<div class="color-swatch" style="background-color: rgb(255, 255, 255);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="1.0" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="1.0" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="1.0" />
+																	</div>
+															</div>
+													</div>
 											</div>
-											
-											<!-- 2. Constellation Lines -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.linesDisplayed" />
-															<span><?= tr("Show lines with thickness")?></span>
-													</label>
-													<div class="option-controls">
+									</div>
+									
+									<!-- ============================================================
+											 CONSTELLATION LINES - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.linesDisplayed" />
+													<span><?= tr("Show lines with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
 															<span class="stelproperty" data-prop="ConstellationMgr.constellationLineThickness" data-numberformat="n0"></span>
 															<div id="constellation-linethickness" class="slider stelproperty" 
 																	 data-prop="ConstellationMgr.constellationLineThickness" data-min="1" data-max="5" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
-											</div>
-											
-											<!-- 3. Asterism Labels -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="AsterismMgr.namesDisplayed" />
-															<span><?= tr("Label asterisms with font size")?></span>
-													</label>
-													<div class="option-controls">
-															<span class="stelproperty" data-prop="AsterismMgr.fontSize" data-numberformat="n0"></span>
-															<div id="asterism-fontsize" class="slider stelproperty" 
-																	 data-prop="AsterismMgr.fontSize" data-min="8" data-max="40" 
-																	 data-step="1" data-numberformat="n0"></div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.linesColor">
+																	<div class="color-swatch" style="background-color: rgb(128, 128, 128);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.5" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.5" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.5" />
+																	</div>
+															</div>
 													</div>
 											</div>
-											
-											<!-- 4. Asterism Lines -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="AsterismMgr.linesDisplayed" />
-															<span><?= tr("Show asterisms with thickness")?></span>
-													</label>
-													<div class="option-controls">
-															<span class="stelproperty" data-prop="AsterismMgr.asterismLineThickness" data-numberformat="n0"></span>
-															<div id="asterism-linethickness" class="slider stelproperty" 
-																	 data-prop="AsterismMgr.asterismLineThickness" data-min="1" data-max="5" 
+									</div>
+									
+									<!-- ============================================================
+											 CONSTELLATION BOUNDARIES - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.boundariesDisplayed" />
+													<span><?= tr("Show boundaries with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="ConstellationMgr.boundariesThickness" data-numberformat="n0"></span>
+															<div id="boundaries-thickness" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.boundariesThickness" data-min="1" data-max="5" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
-											</div>
-											
-											<!-- 5. Ray Helpers -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="AsterismMgr.rayHelpersDisplayed" />
-															<span><?= tr("Show ray helpers with thickness")?></span>
-													</label>
-													<div class="option-controls">
-															<span class="stelproperty" data-prop="AsterismMgr.rayHelperThickness" data-numberformat="n0"></span>
-															<div id="rayhelper-thickness" class="slider stelproperty" 
-																	 data-prop="AsterismMgr.rayHelperThickness" data-min="1" data-max="5" 
-																	 data-step="1" data-numberformat="n0"></div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.boundariesColor">
+																	<div class="color-swatch" style="background-color: rgb(200, 80, 80);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.3" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
+																	</div>
+															</div>
 													</div>
 											</div>
-											
-											<!-- 6. Constellation Art -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.artDisplayed" />
-															<span><?= tr("Show art in brightness")?></span>
-													</label>
-													<div class="option-controls">
+									</div>
+									
+									<!-- ============================================================
+											 CONSTELLATION HULLS - Thickness + Color (NEW)
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.hullsDisplayed" />
+													<span><?= tr("Show hulls with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="ConstellationMgr.hullsThickness" data-numberformat="n0"></span>
+															<div id="hulls-thickness" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.hullsThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.hullsColor">
+																	<div class="color-swatch" style="background-color: rgb(200, 150, 80);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.6" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div>
+									
+									<!-- ============================================================
+											 CONSTELLATION ART - Intensity Only (No Color)
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.artDisplayed" />
+													<span><?= tr("Show art in brightness")?></span>
+											</label>
+											<div class="option-group-controls single-control">
+													<div class="option-sub-control">
 															<span class="stelproperty" data-prop="ConstellationMgr.artIntensity" data-numberformat="n2"></span>
 															<div id="art-intensity" class="slider stelproperty" 
 																	 data-prop="ConstellationMgr.artIntensity" data-min="0" data-max="1" 
 																	 data-step="0.05" data-numberformat="n2"></div>
 													</div>
 											</div>
-											
-											<!-- 7. Constellation Boundaries -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.boundariesDisplayed" />
-															<span><?= tr("Show boundaries with thickness")?></span>
-													</label>
-													<div class="option-controls">
-															<span class="stelproperty" data-prop="ConstellationMgr.boundariesThickness" data-numberformat="n0"></span>
-															<div id="boundaries-thickness" class="slider stelproperty" 
-																	 data-prop="ConstellationMgr.boundariesThickness" data-min="1" data-max="5" 
+									</div>
+									
+									<!-- ============================================================
+											 ASTERISM LABELS - Size + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="AsterismMgr.namesDisplayed" />
+													<span><?= tr("Label asterisms with font size")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="AsterismMgr.fontSize" data-numberformat="n0"></span>
+															<div id="asterism-fontsize" class="slider stelproperty" 
+																	 data-prop="AsterismMgr.fontSize" data-min="8" data-max="40" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="AsterismMgr.namesColor">
+																	<div class="color-swatch" style="background-color: rgb(255, 255, 255);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="1.0" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="1.0" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="1.0" />
+																	</div>
+															</div>
+													</div>
 											</div>
-											
-											<!-- 8. Zodiac -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.zodiacDisplayed" />
-															<span><?= tr("Show zodiac with thickness")?></span>
-													</label>
-													<div class="option-controls">
+									</div>
+									
+									<!-- ============================================================
+											 ASTERISM LINES - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="AsterismMgr.linesDisplayed" />
+													<span><?= tr("Show asterisms with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="AsterismMgr.asterismLineThickness" data-numberformat="n0"></span>
+															<div id="asterism-linethickness" class="slider stelproperty" 
+																	 data-prop="AsterismMgr.asterismLineThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="AsterismMgr.linesColor">
+																	<div class="color-swatch" style="background-color: rgb(200, 50, 50);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.2" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.2" />
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div>
+									
+									<!-- ============================================================
+											 ASTERISM RAY HELPERS - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="AsterismMgr.rayHelpersDisplayed" />
+													<span><?= tr("Show ray helpers with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="AsterismMgr.rayHelperThickness" data-numberformat="n0"></span>
+															<div id="rayhelper-thickness" class="slider stelproperty" 
+																	 data-prop="AsterismMgr.rayHelperThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="AsterismMgr.rayHelpersColor">
+																	<div class="color-swatch" style="background-color: rgb(100, 200, 100);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.4" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.4" />
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div>
+									
+									<!-- ============================================================
+											 ZODIAC - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.zodiacDisplayed" />
+													<span><?= tr("Show zodiac with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
 															<span class="stelproperty" data-prop="ConstellationMgr.zodiacThickness" data-numberformat="n0"></span>
 															<div id="zodiac-thickness" class="slider stelproperty" 
 																	 data-prop="ConstellationMgr.zodiacThickness" data-min="1" data-max="5" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.zodiacColor">
+																	<div class="color-swatch" style="background-color: rgb(200, 100, 200);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.4" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.8" />
+																	</div>
+															</div>
+													</div>
 											</div>
-											
-											<!-- 9. Lunar System -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.lunarSystemDisplayed" />
-															<span><?= tr("Show lunar stations/mansions with thickness")?></span>
-													</label>
-													<div class="option-controls">
+									</div>
+									
+									<!-- ============================================================
+											 LUNAR SYSTEM - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.lunarSystemDisplayed" />
+													<span><?= tr("Show lunar stations/mansions with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
 															<span class="stelproperty" data-prop="ConstellationMgr.lunarSystemThickness" data-numberformat="n0"></span>
 															<div id="lunar-thickness" class="slider stelproperty" 
 																	 data-prop="ConstellationMgr.lunarSystemThickness" data-min="1" data-max="5" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.lunarSystemColor">
+																	<div class="color-swatch" style="background-color: rgb(80, 200, 80);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.3" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
+																	</div>
+															</div>
+													</div>
 											</div>
-											
-									</div><!-- END .options-grid -->
-									
-									<!-- Additional Options -->
-									<div class="skyculture-additional-options">
-											
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="StelSkyCultureMgr.flagUseAbbreviatedNames" />
-													<span><?= tr("Short labels")?></span>
-											</label>
-											
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.isolateSelected" />
-													<span><?= tr("Constellation selection isolated")?></span>
-											</label>
-											
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.flagConstellationPick" />
-													<span><?= tr("Only last selected")?></span>
-											</label>
-											
 									</div>
 									
-							</div><!-- END .skyculture-options-panel -->
+							</div><!-- END .options-grid -->
+							
+							<!-- Additional Options -->
+							<div class="skyculture-additional-options">
+									
+									<label class="option-label">
+											<input type="checkbox" class="stelproperty" name="StelSkyCultureMgr.flagUseAbbreviatedNames" />
+											<span><?= tr("Short labels")?></span>
+									</label>
+									
+									<label class="option-label">
+											<input type="checkbox" class="stelproperty" name="ConstellationMgr.isolateSelected" />
+											<span><?= tr("Constellation selection isolated")?></span>
+									</label>
+									
+									<label class="option-label">
+											<input type="checkbox" class="stelproperty" name="ConstellationMgr.flagConstellationPick" />
+											<span><?= tr("Only last selected")?></span>
+									</label>
+									
+							</div>
+							
+					</div><!-- END .skyculture-options-panel -->
 							
 					</div>
 			</div><!-- END #tab_skyculture -->
@@ -1053,7 +1197,7 @@
 															<button class="export-btn" id="export-constellations-json">JSON</button>
 													</div>
 											</div>
-											<p style="margin: 5px 0 10px 0; font-size: 10px; color: #8A8C8E;">
+											<p class="patterns-note">
 													<?= tr("Complete constellation definitions from index.json. Click any row to isolate and highlight in Stellarium.")?>
 											</p>
 											<div class="table-container">
@@ -1084,7 +1228,7 @@
 															<button class="export-btn" id="export-asterisms-json">JSON</button>
 													</div>
 											</div>
-											<p style="margin: 5px 0 10px 0; font-size: 10px; color: #8A8C8E;">
+											<p class="patterns-note">
 													<?= tr("All asterisms from index.json (ray helpers are excluded from this list). Click any row to center view.")?>
 											</p>
 											<div class="table-container">
@@ -1108,6 +1252,9 @@
 									
 									<!-- Zodiac Table -->
 									<div id="stats-tab-zodiac" class="tab-content">
+											<p class="patterns-note">
+													<?= tr("Zodiac signs defined in this culture. Click to center on the constellation.")?>
+											</p>									
 											<div class="table-container">
 													<table class="stats-table">
 															<thead>
@@ -1123,13 +1270,13 @@
 															<tbody id="zodiac-stats-body"></tbody>
 													</table>
 											</div>
-											<p style="margin: 10px 0 0 0; font-size: 10px; color: #8A8C8E;">
-													<?= tr("Zodiac signs defined in this culture. Click to center on the constellation.")?>
-											</p>
 									</div>
 									
 									<!-- Lunar Mansions Table -->
 									<div id="stats-tab-lunar" class="tab-content">
+											<p class="patterns-note">
+													<?= tr("Lunar mansions (stations) defined in this culture. Click to center view.")?>
+											</p>									
 											<div class="table-container">
 													<table class="stats-table">
 															<thead>
@@ -1145,9 +1292,6 @@
 															<tbody id="lunar-stats-body"></tbody>
 													</table>
 											</div>
-											<p style="margin: 10px 0 0 0; font-size: 10px; color: #8A8C8E;">
-													<?= tr("Lunar mansions (stations) defined in this culture. Click to center view.")?>
-											</p>
 									</div>
 									
 									<!-- Notable Stars & Objects Table -->
@@ -1159,7 +1303,7 @@
 															<button class="export-btn" id="export-stars-json">JSON</button>
 													</div>
 											</div>
-											<p style="margin: 5px 0 10px 0; font-size: 10px; color: #8A8C8E;">
+											<p class="patterns-note">
 													<?= tr("All named celestial objects (stars, planets, deep-sky) defined in this culture's common_names section.")?>
 											</p>
 											<div class="table-container">
