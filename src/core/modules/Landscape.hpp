@@ -20,6 +20,7 @@
 #ifndef LANDSCAPE_HPP
 #define LANDSCAPE_HPP
 
+#include "StelUtils.hpp"
 #include "VecMath.hpp"
 
 #include "StelFader.hpp"
