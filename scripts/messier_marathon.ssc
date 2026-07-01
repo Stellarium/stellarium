@@ -6,8 +6,9 @@
 //          Alexander Wolf (alex-w)
 //          Nicolas Martignoni (martignoni)
 // Description: Messier Marathon on March 20, 2020. The data for the script are taken from
-//              GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm (now defunct).
+//              GaoXing's observation log (now defunct): http://www.xjltp.com/2_huodong/2_030301.htm.
 //              Missing descriptions added by Nicolas Martignoni.
+
 // Change Log:
 // 2019-09-23   ultrapre@github.com
 //     * First version
@@ -193,7 +194,7 @@ var PasteText = [tr("Difficulty is 0"),
 		 tr("Too big, scattered, not easy to verify"), 
 		 tr("Bigger than M6"), 
 		 tr("Easy to locate and verify"),
-		 tr("Medium size, easy to verify"), tr("Small, difficult"),
+		 tr("Small, not easy to verify"), tr("Small, difficult"),
 		 tr("Faint, check the Y shape of the star pattern"),
 		 tr("Brighter than imagined, can be detected with 60 binos"), 
 		 tr("Darker than M97, long strips, look hard"), 
@@ -201,21 +202,6 @@ var PasteText = [tr("Difficulty is 0"),
 		 tr("Difficult to locate, bright, easy to verify"), 
 		 tr("In the morning light, it looks too hard, dark"),
 		 tr("Very dim, the most difficult object to get!")];
-var showtime = ["19:30","19:40","19:45","19:47","19:47","19:47","19:48",
-		"20:15","21:05","21:10","21:17","21:20","21:22","21:22",
-		"21:26","21:30","21:30","21:30","21:33","21:33","21:33",
-		"21:41","22:36","22:36","22:36","22:36","22:44","22:44",
-		"22:44","22:48","22:48","22:56","23:00","23:00","23:04",
-		"23:09","23:10","23:15","23:18","23:44","23:44","23:49",
-		"23:49","23:49","23:49","23:52","23:52","23:54","23:54",
-		"0:00","0:00","0:00","0:00","0:05","0:05","0:08","0:08",
-		"0:08","2:49","2:54","3:02","3:02","3:03","3:05","3:05",
-		"3:08","3:08","3:12","3:12","3:16","3:16","3:16","3:16",
-		"3:16","3:20","3:20","3:20","3:20","3:26","3:26","3:29",
-		"3:29","3:29","3:29","3:31","3:31","5:06","5:06","5:06",
-		"5:06","5:12","5:12","5:12","5:12","5:12","5:12","5:12",
-		"5:12","5:22","5:22","5:27","5:27","5:27","5:27","5:31",
-		"5:31","5:34","5:36","5:39","5:39"];
 
 StelMovementMgr.zoomTo(80,3);
 core.wait(3);
