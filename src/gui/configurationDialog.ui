@@ -2950,6 +2950,47 @@
            </widget>
           </item>
           <item>
+           <widget class="QGroupBox" name="groupBoxToolbarPosition">
+            <property name="title">
+             <string>Toolbar position</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayoutToolbarPosition">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="toolbarAtTopCheckBox">
+               <property name="toolTip">
+                <string>Dock the toolbar cluster to the top edge instead of the bottom</string>
+               </property>
+               <property name="text">
+                <string>Toolbar at top</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="toolbarAtRightCheckBox">
+               <property name="toolTip">
+                <string>Dock the toolbar cluster to the right edge instead of the left</string>
+               </property>
+               <property name="text">
+                <string>Toolbar at right</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer_2">
             <property name="orientation">
              <enum>Qt::Vertical</enum>

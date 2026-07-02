@@ -282,6 +282,9 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionAutoHideHorizontalButtonBar", miscGroup, N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
 	actionsMgr->addAction("actionAutoHideVerticalButtonBar", miscGroup, N_("Auto hide vertical button bar"), this, "autoHideVerticalButtonBar");
 
+	setToolbarAtTop(conf->value("gui/toolbar_at_top", false).toBool());
+	setToolbarAtRight(conf->value("gui/toolbar_at_right", false).toBool());
+
 	setGuiVisible(conf->value("gui/flag_show_gui", true).toBool());
 	actionsMgr->addAction("actionToggle_GuiHidden_Global", miscGroup, N_("Toggle visibility of GUI"), this, "visible", "Ctrl+T", "", true);
 
@@ -1401,6 +1404,38 @@ void StelGui::setAutoHideVerticalButtonBar(bool b)
 		skyGui->autoHideLeftBar=b;
 		StelApp::immediateSave("gui/auto_hide_vertical_toolbar", b);
 		emit autoHideVerticalButtonBarChanged(b);
+	}
+}
+
+bool StelGui::getToolbarAtTop() const
+{
+	return skyGui->toolbarAtTop;
+}
+
+void StelGui::setToolbarAtTop(bool b)
+{
+	if (skyGui->toolbarAtTop != b)
+	{
+		skyGui->toolbarAtTop = b;
+		StelApp::immediateSave("gui/toolbar_at_top", b);
+		skyGui->updateBarsPos();
+		emit toolbarAtTopChanged(b);
+	}
+}
+
+bool StelGui::getToolbarAtRight() const
+{
+	return skyGui->toolbarAtRight;
+}
+
+void StelGui::setToolbarAtRight(bool b)
+{
+	if (skyGui->toolbarAtRight != b)
+	{
+		skyGui->toolbarAtRight = b;
+		StelApp::immediateSave("gui/toolbar_at_right", b);
+		skyGui->updateBarsPos();
+		emit toolbarAtRightChanged(b);
 	}
 }
 

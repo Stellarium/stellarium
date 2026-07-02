@@ -424,6 +424,10 @@ void ConfigurationDialog::createDialogContent()
 	connect(mainView, SIGNAL(sizeChanged(const QSize&)), this, SLOT(updateDpiTooltip()));
 	updateDpiTooltip();
 
+	// Toolbar position
+	connectBoolProperty(ui->toolbarAtTopCheckBox, "StelGui.toolbarAtTop");
+	connectBoolProperty(ui->toolbarAtRightCheckBox, "StelGui.toolbarAtRight");
+
 	// script tab controls
 	#ifdef ENABLE_SCRIPTING
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
@@ -1399,6 +1403,9 @@ void ConfigurationDialog::saveAllSettings()
 	// toolbar auto-hide status
         conf->setValue("gui/auto_hide_horizontal_toolbar",              propMgr->getStelPropertyValue("StelGui.autoHideHorizontalButtonBar").toBool());
         conf->setValue("gui/auto_hide_vertical_toolbar",                propMgr->getStelPropertyValue("StelGui.autoHideVerticalButtonBar").toBool());
+        // toolbar positions
+        conf->setValue("gui/toolbar_at_top",                            propMgr->getStelPropertyValue("StelGui.toolbarAtTop").toBool());
+        conf->setValue("gui/toolbar_at_right",                          propMgr->getStelPropertyValue("StelGui.toolbarAtRight").toBool());
         conf->setValue("gui/flag_show_quit_button",                     propMgr->getStelPropertyValue("StelGui.flagShowQuitButton").toBool());
         conf->setValue("gui/flag_show_nebulae_background_button",       propMgr->getStelPropertyValue("StelGui.flagShowNebulaBackgroundButton").toBool());
         conf->setValue("gui/flag_show_dss_button",                      propMgr->getStelPropertyValue("StelGui.flagShowDSSButton").toBool());

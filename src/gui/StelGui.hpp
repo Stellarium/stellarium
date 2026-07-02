@@ -77,6 +77,8 @@ class StelGui : public QObject, public StelGuiBase
 	Q_PROPERTY(bool flagEnableFocusOnDaySpinner READ getFlagEnableFocusOnDaySpinner WRITE setFlagEnableFocusOnDaySpinner NOTIFY flagEnableFocusOnDaySpinnerChanged)
 	Q_PROPERTY(bool flagShowCardinalButton READ getFlagShowCardinalButton WRITE setFlagShowCardinalButton NOTIFY  flagShowCardinalButtonChanged)
 	Q_PROPERTY(bool flagShowCompassButton READ getFlagShowCompassButton WRITE setFlagShowCompassButton NOTIFY  flagShowCompassButtonChanged)
+	Q_PROPERTY(bool toolbarAtTop READ getToolbarAtTop WRITE setToolbarAtTop NOTIFY toolbarAtTopChanged)
+	Q_PROPERTY(bool toolbarAtRight READ getToolbarAtRight WRITE setToolbarAtRight NOTIFY toolbarAtRightChanged)
 
 public:
 	friend class ViewDialog;
@@ -297,6 +299,14 @@ public slots:
 	bool getAutoHideHorizontalButtonBar() const;
 	//! Get the auto-hide status of the vertical toolbar.
 	bool getAutoHideVerticalButtonBar() const;
+	//! Get whether the toolbars are docked to the top edge of the screen.
+	bool getToolbarAtTop() const;
+	//! Set whether the toolbars should be docked to the top edge of the screen.
+	void setToolbarAtTop(bool b);
+	//! Get whether the toolbars are docked to the right edge of the screen.
+	bool getToolbarAtRight() const;
+	//! Set whether the toolbars should be docked to the right edge of the screen.
+	void setToolbarAtRight(bool b);
 
 signals:
 	void visibleChanged(bool b);
@@ -323,6 +333,8 @@ signals:
 	void flagShowAsterismLabelsButtonChanged(bool b);
 	void flagShowCardinalButtonChanged(bool b);
 	void flagShowCompassButtonChanged(bool b);
+	void toolbarAtTopChanged(bool b);
+	void toolbarAtRightChanged(bool b);
 	void infoStringChanged();
 	void guiStyleChanged(const QString &style);
 	void htmlStyleChanged(const QString &style);
