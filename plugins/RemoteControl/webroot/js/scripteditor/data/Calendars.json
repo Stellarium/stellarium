@@ -6,7 +6,7 @@
         "type": "property",
         "access": "read-write",
         "description": "Enable or disable the Calendars plugin display overlay.",
-        "example": "// Enable calendars overlay\ncore.setStelProperty(\"Calendars.enabled\", true);\n\n// Check if enabled\nvar isEnabled = core.getStelProperty(\"Calendars.enabled\");\ncore.debug(\"Calendars enabled:\", isEnabled);"
+        "example": "// Enable calendars overlay\ncore.setStelProperty(\"Calendars.enabled\", true);\n\n// Check if enabled\nvar isEnabled = core.getStelProperty(\"Calendars.enabled\");\ncore.debug(\"Calendars enabled: \" + isEnabled);"
     },
     {
         "name": "flagTextColorOverride",

@@ -85,7 +85,7 @@
         "name": "setDate",
         "category": "Time & Date",
         "signature": "setDate(QString dateStr, QString spec, bool dateIsDT)",
-        "description": "Sets the simulation date and time using a text string or relative expression. Supports ISO 8601 format and relative expressions like 'now+2days'. This is the most flexible function for time manipulation.",
+        "description": "Sets the simulation date and time using a text string or relative expression. Supports ISO 8601 format and relative expressions like 'now+2days'. This is the most flexible function for time manipulation.\nSets Stellarium's date using an absolute or relative value.\n@param dateStr Defines the date or offset to use. Possible formats:\n- Date and time according to ISO 8601, without time zone, e.g.,\n'2008-03-24T13:21:01'\n- Use 'now' to set Stellarium's time to the system's (presumably) real time.\n- Specify an offset in the form <sign><value><unit> to set the date relative to its\ncurrent value. <unit> may be one of second, minute, hour, day, sol, week, month,\nyear, with a plural 's' optionally appended, e.g., '+3.25 days', ' - 1 year'.\n- Use 'now' followed by an offset to set the date relative to the system's\ncurrent value, e.g., 'now+1hour'.\n- You may append 'sidereal' to use units derived from the length of a sidereal day,e.g., 'now +2days sidereal'.\n@note When sidereal time is used, the length of time for each unit is dependent on\nthe current planet.  By contrast, when sidereal time is not specified (i.e., solar\ntime is used) the value is conventional so that 1 day means 1 Earth Solar day.\n@param spec May be 'local' or 'utc'. Only has an effect when\nan ISO format string is used. Defaults to 'utc'.\n @param dateIsDT set to  true indicates that the given date is formulated in\n Dynamical Time, i.e. with DeltaT added.\n@note For fully compatible behaviour of this function with versions 0.11.4\nor earlier you should call  core.setDeltaTAlgorithm('WithoutCorrection');\nbefore running  core.setDate(); for disabling DeltaT correction.\n @note Starting with version 0.13.2 all relative dates are set without DeltaT correction.\nStarting with version 0.14.0 the Boolean argument has a different meaning and default.",
         "parameters": [
             {
                 "name": "dateStr",
@@ -279,7 +279,7 @@
             {
                 "name": "algorithmName",
                 "type": "QString",
-                "description": "Algorithm name: 'EspenakMeeus', 'WithoutCorrection', 'JPLHorizons', 'MorrisonStephenson2004', 'ChaprontMeeus', etc.",
+                "description": "Algorithm name:  AstronomicalEphemeris, Banjevic, Borkowski, ChaprontMeeus, ChaprontTouze, Clemence, Custom, Espenak, EspenakMeeus, Henriksson2017, IAU, IslamSadiqQureshi, JPLHorizons, MeeusSimons, MontenbruckPfleger, MorrisonStephenson2004, MullerStephenson, Reijs, ReingoldDershowitz, SchmadelZech1979, SchmadelZech1988, Schoch, Stephenson1978, Stephenson1997, StephensonHoulden, StephensonMorrison1984, StephensonMorrison1995, TuckermanGoldstine, WithoutCorrection.",
                 "required": true
             }
         ],
@@ -2882,7 +2882,7 @@
             "minVersion": "0.12.0",
             "notes": "Works on all Stellarium versions"
         },
-        "example": "// Show star labels\ncore.setStelProperty(\"Stars.flagLabels\", true);\n\n// Change night sky color\ncore.setStelProperty(\"color.night_color\", \"#1a0a2e\");\n\n// Set star magnitude limit\ncore.setStelProperty(\"Stars.labelsAmount\", 5);\n\n// Show planet orbits\ncore.setStelProperty(\"SolarSystem.flagOrbits\", true);\n\n// Show atmosphere\ncore.setStelProperty(\"LandscapeMgr.flagAtmosphere\", true);\n\n// Get list of all properties\nvar allProps = core.getPropertyList();\ncore.debug(\"Total properties: \" + allProps.length);"
+        "example": "// Show star labels\ncore.setStelProperty(\"Stars.flagLabels\", true);\n\n// Change night sky color\ncore.setStelProperty(\"color.night_color\", \"#1a0a2e\");\n\n// Set star magnitude limit\ncore.setStelProperty(\"Stars.labelsAmount\", 5);\n\n// Show planet orbits\ncore.setStelProperty(\"SolarSystem.flagOrbits\", true);\n\n// Show atmosphere\ncore.setStelProperty(\"LandscapeMgr.setFlagAtmosphere\", true);\n\n// Get list of all properties\nvar allProps = core.getPropertyList();\ncore.debug(\"Total properties: \" + allProps.length);"
     },
     {
         "name": "getStelProperty",

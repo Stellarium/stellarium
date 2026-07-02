@@ -142,7 +142,7 @@
         "returnType": "QString",
         "returnDescription": "Complete HTML description of the sky culture",
         "type": "slot",
-        "example": "var fullDescription = StelSkyCultureMgr.getCurrentSkyCultureHtmlDescription();\ncore.debug('Full sky culture description retrieved');\n// Can be displayed in a dialog or info panel"
+        "example": "var fullDescription = StelSkyCultureMgr.getCurrentSkyCultureHtmlDescription();\ncore.debug('Full sky culture description retrieved : ' +  fullDescription);\n// Can be displayed in a dialog or info panel"
     },
     {
         "name": "getCurrentSkyCultureNarration",
