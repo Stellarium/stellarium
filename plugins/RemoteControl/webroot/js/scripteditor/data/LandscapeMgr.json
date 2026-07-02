@@ -1,0 +1,2102 @@
+[
+    {
+        "name": "getLuminance",
+        "category": "Landscape Manager - Core",
+        "signature": "float getLuminance()",
+        "description": "Returns the global landscape luminance value (0.0 to 1.0). Returns 1 if atmosphere drawing is on and no eclipse is underway, 0 if atmosphere is switched off. This value is used for eye adaptation calculations.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Luminance value (0.0 to 1.0)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var luminance = LandscapeMgr.getLuminance();\ncore.debug(\"Current landscape luminance: \" + luminance);\nif(luminance < 0.1) {\n    core.debug(\"Very dark conditions\");\n}"
+    },
+    {
+        "name": "getAtmosphereAverageLuminance",
+        "category": "Landscape Manager - Core",
+        "signature": "float getAtmosphereAverageLuminance()",
+        "description": "Returns the average luminance of the atmosphere in candela per square meter (cd/m²). Typical values: ~10 at sunset, ~6400 in daylight, >0 in dark night.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Average atmospheric luminance in cd/m²",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var avgLum = LandscapeMgr.getAtmosphereAverageLuminance();\ncore.debug(\"Atmosphere average luminance: \" + avgLum.toFixed(2) + \" cd/m²\");\n\nif(avgLum > 1000) {\n    core.debug(\"Daytime brightness\");\n} else if(avgLum > 10) {\n    core.debug(\"Twilight\");\n} else {\n    core.debug(\"Nighttime\");\n}"
+    },
+    {
+        "name": "setAtmosphereAverageLuminance",
+        "category": "Landscape Manager - Core",
+        "signature": "setAtmosphereAverageLuminance(float overrideLuminance)",
+        "description": "Overrides the auto-computed average luminance of the atmosphere. Useful for creating images of adjacent sky regions with the same brightness, or for simulating over/underexposure. Call with a negative value to unfreeze.",
+        "parameters": [
+            {
+                "name": "overrideLuminance",
+                "type": "float",
+                "description": "Luminance value in cd/m² to override (negative value to unfreeze)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Freeze atmosphere luminance at current value\nvar currentLum = LandscapeMgr.getAtmosphereAverageLuminance();\nLandscapeMgr.setAtmosphereAverageLuminance(currentLum);\ncore.debug(\"Atmosphere luminance frozen at \" + currentLum.toFixed(2));\n\n// ... do something ...\n\n// Unfreeze\nLandscapeMgr.setAtmosphereAverageLuminance(-1.0);\ncore.debug(\"Atmosphere luminance unfrozen\");"
+    },
+    {
+        "name": "getAllLandscapeNames",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "QStringList getAllLandscapeNames()",
+        "description": "Returns a list of display names for all available landscapes (from landscape.ini files).",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of landscape names",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var landscapes = LandscapeMgr.getAllLandscapeNames();\ncore.debug(\"Available landscapes: \" + landscapes.length);\nfor(var i = 0; i < landscapes.length; i++) {\n    core.debug((i+1) + \". \" + landscapes[i]);\n}"
+    },
+    {
+        "name": "getAllLandscapeIDs",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "QStringList getAllLandscapeIDs()",
+        "description": "Returns a list of unique identifiers (directory names) for all available landscapes.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of landscape IDs",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var ids = LandscapeMgr.getAllLandscapeIDs();\ncore.debug(\"Landscape IDs: \" + ids.join(\", \"));"
+    },
+    {
+        "name": "getUserLandscapeIDs",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "QStringList getUserLandscapeIDs()",
+        "description": "Returns a list of identifiers for user-installed landscapes (excluding those packaged with Stellarium).",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of user-installed landscape IDs",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var userLandscapes = LandscapeMgr.getUserLandscapeIDs();\ncore.debug(\"User-installed landscapes: \" + userLandscapes.length);\nif(userLandscapes.length > 0) {\n    core.debug(\"Your custom landscapes: \" + userLandscapes.join(\", \"));\n}"
+    },
+    {
+        "name": "getCurrentLandscapeID",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "QString getCurrentLandscapeID()",
+        "description": "Returns the unique identifier (directory name) of the currently loaded landscape.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Current landscape ID",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var landscapeId = LandscapeMgr.getCurrentLandscapeID();\ncore.debug(\"Current landscape ID: \" + landscapeId);"
+    },
+    {
+        "name": "setCurrentLandscapeID",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "bool setCurrentLandscapeID(QString id, double changeLocationDuration)",
+        "description": "Changes the current landscape to the landscape with the specified ID. If the landscape has location data and flagLandscapeSetsLocation is enabled, the observer location will also change.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Landscape ID (directory name, e.g., 'guereins', 'ocean', 'zero')",
+                "required": true
+            },
+            {
+                "name": "changeLocationDuration",
+                "type": "double",
+                "description": "Duration of the location transition animation in seconds",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if landscape was successfully loaded, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Switch to ocean landscape with 2-second transition\nLandscapeMgr.setCurrentLandscapeID(\"ocean\", 2.0);\n\n// Switch to zero landscape (simple ground plane)\nLandscapeMgr.setCurrentLandscapeID(\"zero\", 1.0);\n\n// Check if successful\nvar success = LandscapeMgr.setCurrentLandscapeID(\"guereins\");\nif(success) {\n    core.debug(\"Landscape changed successfully\");\n} else {\n    core.debug(\"Failed to change landscape\");\n}"
+    },
+    {
+        "name": "getCurrentLandscapeName",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "QString getCurrentLandscapeName()",
+        "description": "Returns the display name of the currently loaded landscape as defined in its landscape.ini file.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Current landscape name",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var landscapeName = LandscapeMgr.getCurrentLandscapeName();\ncore.debug(\"Current landscape: \" + landscapeName);"
+    },
+    {
+        "name": "setCurrentLandscapeName",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "bool setCurrentLandscapeName(QString name, double changeLocationDuration)",
+        "description": "Changes the current landscape by its display name (as shown in the GUI).",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "Landscape display name (e.g., 'Ocean', 'Guereins', 'Zero Horizon')",
+                "required": true
+            },
+            {
+                "name": "changeLocationDuration",
+                "type": "double",
+                "description": "Duration of the location transition animation in seconds",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if landscape was successfully loaded, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Switch to Ocean landscape by name\nLandscapeMgr.setCurrentLandscapeName(\"Ocean\", 2.0);\n\n// Switch to Guereins landscape\nLandscapeMgr.setCurrentLandscapeName(\"Guereins\");"
+    },
+    {
+        "name": "getCurrentLandscapeBrightness",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "float getCurrentLandscapeBrightness(bool light)",
+        "description": "Returns the current brightness value of the landscape (0.0 to 1.0). Can also retrieve the light layer brightness (illumination overlay).",
+        "parameters": [
+            {
+                "name": "light",
+                "type": "bool",
+                "description": "If true, retrieves the light layer brightness; if false, retrieves the landscape brightness",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "float",
+        "returnDescription": "Brightness value (0.0 to 1.0)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "var landscapeBrightness = LandscapeMgr.getCurrentLandscapeBrightness(false);\nvar lightBrightness = LandscapeMgr.getCurrentLandscapeBrightness(true);\ncore.debug(\"Landscape brightness: \" + landscapeBrightness.toFixed(3) + \", Light layer: \" + lightBrightness.toFixed(3));"
+    },
+    {
+        "name": "getDefaultLandscapeID",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "QString getDefaultLandscapeID()",
+        "description": "Returns the ID of the default landscape that loads when Stellarium starts.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Default landscape ID",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var defaultLandscape = LandscapeMgr.getDefaultLandscapeID();\ncore.debug(\"Default landscape: \" + defaultLandscape);"
+    },
+    {
+        "name": "setDefaultLandscapeID",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "bool setDefaultLandscapeID(QString id)",
+        "description": "Sets the default landscape that will load when Stellarium starts. The setting is saved to the configuration file.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Landscape ID to use as default",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if successfully set, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Set ocean as default landscape\nvar success = LandscapeMgr.setDefaultLandscapeID(\"ocean\");\nif(success) {\n    core.debug(\"Default landscape updated to ocean\");\n}"
+    },
+    {
+        "name": "getCurrentLandscapeHtmlDescription",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "QString getCurrentLandscapeHtmlDescription()",
+        "description": "Returns an HTML-formatted description of the current landscape including author, location, atmospheric conditions, and light pollution information.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "HTML formatted description string",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var description = LandscapeMgr.getCurrentLandscapeHtmlDescription();\ncore.debug(description);\n// Can be displayed in a UI element"
+    },
+    {
+        "name": "getDescription",
+        "category": "Landscape Manager - Landscape Management",
+        "signature": "QString getDescription()",
+        "description": "Returns the description text of the current landscape from either a localized description file or the landscape.ini file.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Landscape description text",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var desc = LandscapeMgr.getDescription();\ncore.debug(\"Landscape description: \" + desc);"
+    },
+    {
+        "name": "getCacheSize",
+        "category": "Landscape Manager - Cache Management",
+        "signature": "int getCacheSize()",
+        "description": "Returns the maximum size of the landscape cache in megabytes. The cache stores preloaded landscapes for faster switching.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Cache size in MB",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var cacheSize = LandscapeMgr.getCacheSize();\ncore.debug(\"Landscape cache size: \" + cacheSize + \" MB\");"
+    },
+    {
+        "name": "setCacheSize",
+        "category": "Landscape Manager - Cache Management",
+        "signature": "setCacheSize(int mb)",
+        "description": "Sets the maximum size of the landscape cache in megabytes. Larger cache allows more landscapes to be kept in memory for faster switching.",
+        "parameters": [
+            {
+                "name": "mb",
+                "type": "int",
+                "description": "Cache size in megabytes (default: 100, modern systems can use 500-1000)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Increase cache size to 500 MB for faster landscape switching\nLandscapeMgr.setCacheSize(500);\n\nvar newSize = LandscapeMgr.getCacheSize();\ncore.debug(\"New cache size: \" + newSize + \" MB\");"
+    },
+    {
+        "name": "getCacheFilledSize",
+        "category": "Landscape Manager - Cache Management",
+        "signature": "int getCacheFilledSize()",
+        "description": "Returns the current amount of memory used by the landscape cache in megabytes (approximate).",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Current cache usage in MB",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var usedCache = LandscapeMgr.getCacheFilledSize();\nvar maxCache = LandscapeMgr.getCacheSize();\nvar percent = (usedCache / maxCache * 100).toFixed(1);\ncore.debug(\"Cache usage: \" + usedCache + \" / \" + maxCache + \" MB (\" + percent + \"%)\");"
+    },
+    {
+        "name": "getCacheCount",
+        "category": "Landscape Manager - Cache Management",
+        "signature": "int getCacheCount()",
+        "description": "Returns the number of landscapes currently stored in the cache.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Number of landscapes in cache",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var cachedLandscapes = LandscapeMgr.getCacheCount();\ncore.debug(\"Landscapes in cache: \" + cachedLandscapes);"
+    },
+    {
+        "name": "precacheLandscape",
+        "category": "Landscape Manager - Cache Management",
+        "signature": "bool precacheLandscape(QString id, bool replace)",
+        "description": "Preloads a landscape into the cache for faster access later. Useful for smooth transitions between landscapes in presentations.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Landscape ID to preload",
+                "required": true
+            },
+            {
+                "name": "replace",
+                "type": "bool",
+                "description": "If true, replaces existing cached version; if false and already cached, does nothing",
+                "required": false,
+                "default": "true"
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if successfully cached, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Preload multiple landscapes for a presentation\nLandscapeMgr.precacheLandscape(\"guereins\");\nLandscapeMgr.precacheLandscape(\"ocean\");\nLandscapeMgr.precacheLandscape(\"zero\");\ncore.debug(\"Landscapes preloaded\");\n\n// Check cache status\nvar cacheCount = LandscapeMgr.getCacheCount();\ncore.debug(\"Cache now contains \" + cacheCount + \" landscapes\");"
+    },
+    {
+        "name": "removeCachedLandscape",
+        "category": "Landscape Manager - Cache Management",
+        "signature": "bool removeCachedLandscape(QString id)",
+        "description": "Removes a landscape from the cache to free memory.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Landscape ID to remove from cache",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if successfully removed, false if not found",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Remove ocean landscape from cache\nvar removed = LandscapeMgr.removeCachedLandscape(\"ocean\");\nif(removed) {\n    core.debug(\"Ocean landscape removed from cache\");\n}"
+    },
+    {
+        "name": "getFlagLandscape",
+        "category": "Landscape Manager - Display",
+        "signature": "bool getFlagLandscape()",
+        "description": "Returns whether the landscape (ground and scenery) is currently visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if landscape is visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "if(LandscapeMgr.getFlagLandscape()) {\n    core.debug(\"Landscape is visible\");\n} else {\n    LandscapeMgr.setFlagLandscape(true);\n    core.debug(\"Landscape enabled\");\n}"
+    },
+    {
+        "name": "setFlagLandscape",
+        "category": "Landscape Manager - Display",
+        "signature": "setFlagLandscape(bool displayed)",
+        "description": "Shows or hides the landscape (ground and scenery). Hiding the landscape makes the sky visible all the way down to the mathematical horizon.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show landscape, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Hide landscape to see the full sky\nLandscapeMgr.setFlagLandscape(false);\n\n// Show landscape again\nLandscapeMgr.setFlagLandscape(true);"
+    },
+    {
+        "name": "getIsLandscapeFullyVisible",
+        "category": "Landscape Manager - Display",
+        "signature": "bool getIsLandscapeFullyVisible()",
+        "description": "Returns whether the landscape is currently fully visible (opaque). Useful for determining if objects below the landscape should be rendered.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if landscape is fully visible, false if fading or hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(LandscapeMgr.getIsLandscapeFullyVisible()) {\n    core.debug(\"Landscape is fully visible (opaque)\");\n} else {\n    core.debug(\"Landscape is fading or hidden\");\n}"
+    },
+    {
+        "name": "getLandscapeSinMinAltitudeLimit",
+        "category": "Landscape Manager - Display",
+        "signature": "double getLandscapeSinMinAltitudeLimit()",
+        "description": "Returns the sine of the minimum altitude angle that the landscape covers. Can be used to construct bounding caps for culling stars below the horizon.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Sine of minimum landscape altitude (default: -0.035, i.e., sin(-2 degrees))",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var sinMinAlt = LandscapeMgr.getLandscapeSinMinAltitudeLimit();\nvar minAlt = Math.asin(sinMinAlt) * 180 / Math.PI;\ncore.debug(\"Landscape minimum altitude: \" + minAlt.toFixed(2) + \"°\");"
+    },
+    {
+        "name": "getFlagFog",
+        "category": "Landscape Manager - Display",
+        "signature": "bool getFlagFog()",
+        "description": "Returns whether the fog effect is visible on the horizon. Fog is only drawn when atmosphere is also enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if fog is visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "if(LandscapeMgr.getFlagFog()) {\n    core.debug(\"Fog is visible\");\n}"
+    },
+    {
+        "name": "setFlagFog",
+        "category": "Landscape Manager - Display",
+        "signature": "setFlagFog(bool displayed)",
+        "description": "Shows or hides the fog effect on the horizon. Adds realism to distant horizons.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show fog, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Enable fog for atmospheric depth\nLandscapeMgr.setFlagFog(true);\n\n// Disable fog for clearer horizon\nLandscapeMgr.setFlagFog(false);"
+    },
+    {
+        "name": "getFlagIllumination",
+        "category": "Landscape Manager - Display",
+        "signature": "bool getFlagIllumination()",
+        "description": "Returns whether the illumination layer (light pollution, city lights, windows) is visible on the landscape.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if illumination layer is visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "if(LandscapeMgr.getFlagIllumination()) {\n    core.debug(\"Illumination layer is visible\");\n}"
+    },
+    {
+        "name": "setFlagIllumination",
+        "category": "Landscape Manager - Display",
+        "signature": "setFlagIllumination(bool displayed)",
+        "description": "Shows or hides the illumination layer on the landscape (lights, light pollution, etc.). Creates a glowing cityscape effect at night.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show illumination layer, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "// Enable city lights effect\nLandscapeMgr.setFlagIllumination(true);\n\n// Disable for a darker night landscape\nLandscapeMgr.setFlagIllumination(false);"
+    },
+    {
+        "name": "getFlagLabels",
+        "category": "Landscape Manager - Display",
+        "signature": "bool getFlagLabels()",
+        "description": "Returns whether landscape feature labels (mountain names, landmarks, etc.) are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if landscape labels are visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(LandscapeMgr.getFlagLabels()) {\n    core.debug(\"Landscape labels are visible\");\n}"
+    },
+    {
+        "name": "setFlagLabels",
+        "category": "Landscape Manager - Display",
+        "signature": "setFlagLabels(bool displayed)",
+        "description": "Shows or hides landscape feature labels (mountain names, landmarks, etc.).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Show landscape labels\nLandscapeMgr.setFlagLabels(true);\n\n// Hide for a cleaner view\nLandscapeMgr.setFlagLabels(false);"
+    },
+    {
+        "name": "getLabelFontSize",
+        "category": "Landscape Manager - Display",
+        "signature": "int getLabelFontSize()",
+        "description": "Returns the font size of landscape feature labels in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Font size in pixels",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var fontSize = LandscapeMgr.getLabelFontSize();\ncore.debug(\"Label font size: \" + fontSize + \" px\");"
+    },
+    {
+        "name": "setLabelFontSize",
+        "category": "Landscape Manager - Display",
+        "signature": "setLabelFontSize(int size)",
+        "description": "Sets the font size of landscape feature labels in pixels.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "int",
+                "description": "Font size in pixels (recommended: 12-24)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Larger labels for better readability\nLandscapeMgr.setLabelFontSize(18);\n\n// Smaller labels for less clutter\nLandscapeMgr.setLabelFontSize(12);"
+    },
+    {
+        "name": "getLabelAngle",
+        "category": "Landscape Manager - Display",
+        "signature": "int getLabelAngle()",
+        "description": "Returns the rotation angle of landscape feature labels in degrees.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Label rotation angle in degrees",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var angle = LandscapeMgr.getLabelAngle();\ncore.debug(\"Label rotation angle: \" + angle + \"°\");"
+    },
+    {
+        "name": "setLabelAngle",
+        "category": "Landscape Manager - Display",
+        "signature": "setLabelAngle(int angleDeg)",
+        "description": "Sets the rotation angle of landscape feature labels in degrees. Positive values rotate counter-clockwise.",
+        "parameters": [
+            {
+                "name": "angleDeg",
+                "type": "int",
+                "description": "Rotation angle in degrees (recommended: 0 to 90)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Rotate labels for better readability on tilted labels\nLandscapeMgr.setLabelAngle(45);\n\n// No rotation\nLandscapeMgr.setLabelAngle(0);"
+    },
+    {
+        "name": "getLabelColor",
+        "category": "Landscape Manager - Display",
+        "signature": "Vec3f getLabelColor()",
+        "description": "Returns the color of landscape feature labels.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var color = LandscapeMgr.getLabelColor();\ncore.debug(\"Label color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setLabelColor",
+        "category": "Landscape Manager - Display",
+        "signature": "setLabelColor(Vec3f color)",
+        "description": "Sets the color of landscape feature labels.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Set labels to green\nvar green = core.vec3f(0.2, 0.8, 0.2);\nLandscapeMgr.setLabelColor(green);\n\n// Set labels to white\nvar white = core.vec3f(1.0, 1.0, 1.0);\nLandscapeMgr.setLabelColor(white);"
+    },
+    {
+        "name": "getLandscapeTransparency",
+        "category": "Landscape Manager - Display",
+        "signature": "double getLandscapeTransparency()",
+        "description": "Returns the transparency level of the landscape (0.0 = fully opaque, 1.0 = fully transparent).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Transparency value (0.0 to 1.0)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var transparency = LandscapeMgr.getLandscapeTransparency();\ncore.debug(\"Landscape transparency: \" + transparency);"
+    },
+    {
+        "name": "setLandscapeTransparency",
+        "category": "Landscape Manager - Display",
+        "signature": "setLandscapeTransparency(double transparency)",
+        "description": "Sets the transparency level of the landscape. Useful for seeing stars through the landscape or creating ghost effects.",
+        "parameters": [
+            {
+                "name": "transparency",
+                "type": "double",
+                "description": "Transparency value (0.0 = opaque, 0.5 = semi-transparent, 1.0 = fully transparent)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Make landscape semi-transparent to see stars through ground\nLandscapeMgr.setFlagLandscapeUseTransparency(true);\nLandscapeMgr.setLandscapeTransparency(0.5);\n\n// Make fully opaque\nLandscapeMgr.setLandscapeTransparency(0.0);"
+    },
+    {
+        "name": "getFlagLandscapeUseTransparency",
+        "category": "Landscape Manager - Display",
+        "signature": "bool getFlagLandscapeUseTransparency()",
+        "description": "Returns whether landscape transparency is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if transparency is enabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "if(LandscapeMgr.getFlagLandscapeUseTransparency()) {\n    core.debug(\"Landscape transparency is enabled\");\n}"
+    },
+    {
+        "name": "setFlagLandscapeUseTransparency",
+        "category": "Landscape Manager - Display",
+        "signature": "setFlagLandscapeUseTransparency(bool enable)",
+        "description": "Enables or disables landscape transparency. Must be enabled for setLandscapeTransparency to have effect.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable transparency, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Enable transparency mode\nLandscapeMgr.setFlagLandscapeUseTransparency(true);\nLandscapeMgr.setLandscapeTransparency(0.3);\n\n// Disable transparency\nLandscapeMgr.setFlagLandscapeUseTransparency(false);"
+    },
+    {
+        "name": "getFlagPolyLineOnlyDisplayed",
+        "category": "Landscape Manager - Horizon Line",
+        "signature": "bool getFlagPolyLineOnlyDisplayed()",
+        "description": "Returns whether only the polygonal horizon line is displayed (without the landscape texture). Useful for debugging or when only horizon line is needed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if only polyline is displayed",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(LandscapeMgr.getFlagPolyLineOnlyDisplayed()) {\n    core.debug(\"Only horizon polyline is visible\");\n}"
+    },
+    {
+        "name": "setFlagPolyLineOnlyDisplayed",
+        "category": "Landscape Manager - Horizon Line",
+        "signature": "setFlagPolyLineOnlyDisplayed(bool enable)",
+        "description": "Sets whether only the polygonal horizon line should be displayed (without the landscape texture).",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to show only the horizon line, false to show full landscape",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Show only the measured horizon line\nLandscapeMgr.setFlagPolyLineOnlyDisplayed(true);\n\n// Show full landscape texture\nLandscapeMgr.setFlagPolyLineOnlyDisplayed(false);"
+    },
+    {
+        "name": "getPolyLineThickness",
+        "category": "Landscape Manager - Horizon Line",
+        "signature": "int getPolyLineThickness()",
+        "description": "Returns the thickness of the polygonal horizon line in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Line thickness in pixels",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var thickness = LandscapeMgr.getPolyLineThickness();\ncore.debug(\"Horizon line thickness: \" + thickness + \" px\");"
+    },
+    {
+        "name": "setPolyLineThickness",
+        "category": "Landscape Manager - Horizon Line",
+        "signature": "setPolyLineThickness(int thickness)",
+        "description": "Sets the thickness of the polygonal horizon line in pixels.",
+        "parameters": [
+            {
+                "name": "thickness",
+                "type": "int",
+                "description": "Line thickness in pixels (1 to 5, default: 1)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Thicker horizon line for better visibility\nLandscapeMgr.setPolyLineThickness(2);\n\n// Thin line for precise measurement\nLandscapeMgr.setPolyLineThickness(1);"
+    },
+    {
+        "name": "getPolyLineColor",
+        "category": "Landscape Manager - Horizon Line",
+        "signature": "Vec3f getPolyLineColor()",
+        "description": "Returns the color of the polygonal horizon line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var color = LandscapeMgr.getPolyLineColor();\ncore.debug(\"Polyline color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setPolyLineColor",
+        "category": "Landscape Manager - Horizon Line",
+        "signature": "setPolyLineColor(Vec3f color)",
+        "description": "Sets the color of the polygonal horizon line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Set horizon line to bright red\nvar red = core.vec3f(1.0, 0.0, 0.0);\nLandscapeMgr.setPolyLineColor(red);\n\n// Set horizon line to cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nLandscapeMgr.setPolyLineColor(cyan);"
+    },
+    {
+        "name": "getFlagLandscapeUseMinimalBrightness",
+        "category": "Landscape Manager - Brightness",
+        "signature": "bool getFlagLandscapeUseMinimalBrightness()",
+        "description": "Returns whether minimal brightness is enforced to prevent the landscape from becoming too dark.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if minimal brightness is enforced",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(LandscapeMgr.getFlagLandscapeUseMinimalBrightness()) {\n    core.debug(\"Landscape will not go below minimal brightness\");\n}"
+    },
+    {
+        "name": "setFlagLandscapeUseMinimalBrightness",
+        "category": "Landscape Manager - Brightness",
+        "signature": "setFlagLandscapeUseMinimalBrightness(bool enable)",
+        "description": "Sets whether minimal brightness should be enforced to prevent the landscape from becoming too dark.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enforce minimal brightness, false to allow natural darkness",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Prevent landscape from becoming too dark\nLandscapeMgr.setFlagLandscapeUseMinimalBrightness(true);\n\n// Allow natural darkness\nLandscapeMgr.setFlagLandscapeUseMinimalBrightness(false);"
+    },
+    {
+        "name": "getFlagLandscapeSetsMinimalBrightness",
+        "category": "Landscape Manager - Brightness",
+        "signature": "bool getFlagLandscapeSetsMinimalBrightness()",
+        "description": "Returns whether the landscape's own minimal brightness value is used instead of the global default.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if landscape-specific minimal brightness is used",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(LandscapeMgr.getFlagLandscapeSetsMinimalBrightness()) {\n    core.debug(\"Using landscape-specific minimal brightness\");\n}"
+    },
+    {
+        "name": "setFlagLandscapeSetsMinimalBrightness",
+        "category": "Landscape Manager - Brightness",
+        "signature": "setFlagLandscapeSetsMinimalBrightness(bool enable)",
+        "description": "Sets whether to use the landscape's own minimal brightness value or the global default.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to use landscape value, false to use global default",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Use each landscape's own minimal brightness setting\nLandscapeMgr.setFlagLandscapeSetsMinimalBrightness(true);\n\n// Use global minimal brightness for all landscapes\nLandscapeMgr.setFlagLandscapeSetsMinimalBrightness(false);"
+    },
+    {
+        "name": "getDefaultMinimalBrightness",
+        "category": "Landscape Manager - Brightness",
+        "signature": "double getDefaultMinimalBrightness()",
+        "description": "Returns the global default minimal brightness value for landscapes (0.0 to 1.0).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Minimal brightness value",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var minBright = LandscapeMgr.getDefaultMinimalBrightness();\ncore.debug(\"Default minimal brightness: \" + minBright);"
+    },
+    {
+        "name": "setDefaultMinimalBrightness",
+        "category": "Landscape Manager - Brightness",
+        "signature": "setDefaultMinimalBrightness(double brightness)",
+        "description": "Sets the global default minimal brightness value for landscapes.",
+        "parameters": [
+            {
+                "name": "brightness",
+                "type": "double",
+                "description": "Minimal brightness value (0.0 to 1.0, default: 0.01)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Increase minimal brightness for better visibility\nLandscapeMgr.setDefaultMinimalBrightness(0.05);\n\n// Allow landscapes to get very dark\nLandscapeMgr.setDefaultMinimalBrightness(0.001);"
+    },
+    {
+        "name": "getFlagLandscapeSetsLocation",
+        "category": "Landscape Manager - Location",
+        "signature": "bool getFlagLandscapeSetsLocation()",
+        "description": "Returns whether changing the landscape automatically updates the observer location to the landscape's associated location.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if landscape changes location",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "if(LandscapeMgr.getFlagLandscapeSetsLocation()) {\n    core.debug(\"Changing landscape will move observer location\");\n}"
+    },
+    {
+        "name": "setFlagLandscapeSetsLocation",
+        "category": "Landscape Manager - Location",
+        "signature": "setFlagLandscapeSetsLocation(bool enable)",
+        "description": "Sets whether changing the landscape should automatically update the observer location.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable location change with landscape, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Disable automatic location change\nLandscapeMgr.setFlagLandscapeSetsLocation(false);\nLandscapeMgr.setCurrentLandscapeID(\"ocean\");\n\n// Enable to return to location-based switching\nLandscapeMgr.setFlagLandscapeSetsLocation(true);"
+    },
+    {
+        "name": "getFlagUseLightPollutionFromDatabase",
+        "category": "Landscape Manager - Light Pollution",
+        "signature": "bool getFlagUseLightPollutionFromDatabase()",
+        "description": "Returns whether light pollution data is taken from the location database rather than from the landscape or manual settings.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if using database light pollution data",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "if(LandscapeMgr.getFlagUseLightPollutionFromDatabase()) {\n    core.debug(\"Using light pollution data from location database\");\n}"
+    },
+    {
+        "name": "setFlagUseLightPollutionFromDatabase",
+        "category": "Landscape Manager - Light Pollution",
+        "signature": "setFlagUseLightPollutionFromDatabase(bool useDatabase)",
+        "description": "Sets whether to use light pollution data from the location database.",
+        "parameters": [
+            {
+                "name": "useDatabase",
+                "type": "bool",
+                "description": "true to use database values, false to use manual/landscape settings",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Use automatic light pollution from location\nLandscapeMgr.setFlagUseLightPollutionFromDatabase(true);\n\n// Manual control of light pollution\nLandscapeMgr.setFlagUseLightPollutionFromDatabase(false);"
+    },
+    {
+        "name": "increaseLightPollution",
+        "category": "Landscape Manager - Light Pollution",
+        "signature": "increaseLightPollution()",
+        "description": "Increases the light pollution level by moving one step up the Bortle scale (1-9). Useful for quick adjustments.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Increase light pollution for urban simulation\nLandscapeMgr.increaseLightPollution();\ncore.debug(\"Light pollution increased\");\n\n// Increase multiple steps\nfor(var i = 0; i < 3; i++) {\n    core.wait(0.5);\n    LandscapeMgr.increaseLightPollution();\n}"
+    },
+    {
+        "name": "reduceLightPollution",
+        "category": "Landscape Manager - Light Pollution",
+        "signature": "reduceLightPollution()",
+        "description": "Reduces the light pollution level by moving one step down the Bortle scale (1-9).",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Reduce light pollution for dark sky simulation\nLandscapeMgr.reduceLightPollution();\ncore.debug(\"Light pollution reduced\");"
+    },
+    {
+        "name": "cyclicChangeLightPollution",
+        "category": "Landscape Manager - Light Pollution",
+        "signature": "cyclicChangeLightPollution()",
+        "description": "Cycles through all light pollution levels (1 to 9 repeatedly). Useful for demonstrations.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Cycle through all light pollution levels\nLandscapeMgr.cyclicChangeLightPollution();\n\n// Use in a loop to demonstrate all levels\nfor(var i = 0; i < 9; i++) {\n    core.wait(1);\n    LandscapeMgr.cyclicChangeLightPollution();\n    core.debug(\"Cycled to next level\");\n}"
+    },
+    {
+        "name": "getFlagCardinalPoints",
+        "category": "Landscape Manager - Cardinals",
+        "signature": "bool getFlagCardinalPoints()",
+        "description": "Returns whether the cardinal points (N, S, E, W) are displayed on the horizon. These are the four main compass directions.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if cardinal points are visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "if(LandscapeMgr.getFlagCardinalPoints()) {\n    core.debug(\"Cardinal points (N,S,E,W) are visible\");\n}"
+    },
+    {
+        "name": "setFlagCardinalPoints",
+        "category": "Landscape Manager - Cardinals",
+        "signature": "setFlagCardinalPoints(bool displayed)",
+        "description": "Shows or hides the cardinal points (N, S, E, W) on the horizon.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show cardinal points, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Show cardinal points\nLandscapeMgr.setFlagCardinalPoints(true);\n\n// Hide cardinal points\nLandscapeMgr.setFlagCardinalPoints(false);"
+    },
+    {
+        "name": "getFlagOrdinalPoints",
+        "category": "Landscape Manager - Cardinals",
+        "signature": "bool getFlagOrdinalPoints()",
+        "description": "Returns whether the ordinal (intercardinal) points (NE, SE, SW, NW) are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if ordinal points are visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "if(LandscapeMgr.getFlagOrdinalPoints()) {\n    core.debug(\"Ordinal points (NE,SE,SW,NW) are visible\");\n}"
+    },
+    {
+        "name": "setFlagOrdinalPoints",
+        "category": "Landscape Manager - Cardinals",
+        "signature": "setFlagOrdinalPoints(bool displayed)",
+        "description": "Shows or hides the ordinal (intercardinal) points (NE, SE, SW, NW).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show ordinal points, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "LandscapeMgr.setFlagOrdinalPoints(true);"
+    },
+    {
+        "name": "getFlagOrdinal16WRPoints",
+        "category": "Landscape Manager - Cardinals",
+        "signature": "bool getFlagOrdinal16WRPoints()",
+        "description": "Returns whether the secondary intercardinal points (16-wind compass rose: NNE, ENE, ESE, SSE, SSW, WSW, WNW, NNW) are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if 16-wind points are visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(LandscapeMgr.getFlagOrdinal16WRPoints()) {\n    core.debug(\"16-wind compass points are visible\");\n}"
+    },
+    {
+        "name": "setFlagOrdinal16WRPoints",
+        "category": "Landscape Manager - Cardinals",
+        "signature": "setFlagOrdinal16WRPoints(bool displayed)",
+        "description": "Shows or hides the secondary intercardinal points (16-wind compass rose).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show 16-wind points, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "LandscapeMgr.setFlagOrdinal16WRPoints(true);"
+    },
+    {
+        "name": "getFlagOrdinal32WRPoints",
+        "category": "Landscape Manager - Cardinals",
+        "signature": "bool getFlagOrdinal32WRPoints()",
+        "description": "Returns whether the tertiary intercardinal points (32-wind compass rose with points like NbE, NEbN, etc.) are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if 32-wind points are visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(LandscapeMgr.getFlagOrdinal32WRPoints()) {\n    core.debug(\"32-wind compass points are visible\");\n}"
+    },
+    {
+        "name": "setFlagOrdinal32WRPoints",
+        "category": "Landscape Manager - Cardinals",
+        "signature": "setFlagOrdinal32WRPoints(bool displayed)",
+        "description": "Shows or hides the tertiary intercardinal points (32-wind compass rose).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show 32-wind points, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "LandscapeMgr.setFlagOrdinal32WRPoints(true);"
+    },
+    {
+        "name": "getColorCardinalPoints",
+        "category": "Landscape Manager - Cardinals",
+        "signature": "Vec3f getColorCardinalPoints()",
+        "description": "Returns the current color of the cardinal and ordinal point labels.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var color = LandscapeMgr.getColorCardinalPoints();\ncore.debug(\"Cardinal points color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setColorCardinalPoints",
+        "category": "Landscape Manager - Cardinals",
+        "signature": "setColorCardinalPoints(Vec3f color)",
+        "description": "Sets the color of the cardinal and ordinal point labels.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Set cardinal points to bright white\nvar white = core.vec3f(1.0, 1.0, 1.0);\nLandscapeMgr.setColorCardinalPoints(white);\n\n// Set to red for night mode\nvar red = core.vec3f(1.0, 0.2, 0.2);\nLandscapeMgr.setColorCardinalPoints(red);\n\n// Set to gold\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nLandscapeMgr.setColorCardinalPoints(gold);"
+    },
+    {
+        "name": "getFlagAtmosphere",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "bool getFlagAtmosphere()",
+        "description": "Returns whether atmosphere rendering is currently enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if atmosphere is visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "if(LandscapeMgr.getFlagAtmosphere()) {\n    core.debug(\"Atmosphere is visible\");\n} else {\n    LandscapeMgr.setFlagAtmosphere(true);\n}"
+    },
+    {
+        "name": "setFlagAtmosphere",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "setFlagAtmosphere(bool displayed)",
+        "description": "Shows or hides the atmosphere rendering. When disabled, the sky appears black (like in space) but atmospheric refraction and extinction may still be active.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show atmosphere, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Enable atmosphere for realistic sky\nLandscapeMgr.setFlagAtmosphere(true);\n\n// Disable atmosphere for space-like view\nLandscapeMgr.setFlagAtmosphere(false);\n\n// Toggle atmosphere\nvar current = LandscapeMgr.getFlagAtmosphere();\nLandscapeMgr.setFlagAtmosphere(!current);"
+    },
+    {
+        "name": "getAtmosphereModel",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "QString getAtmosphereModel()",
+        "description": "Returns the current atmosphere model name. Options: 'preetham' (default, fast) or 'showmysky' (physically based, more realistic).",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Atmosphere model name: 'preetham' or 'showmysky'",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "var model = LandscapeMgr.getAtmosphereModel();\ncore.debug(\"Current atmosphere model: \" + model);"
+    },
+    {
+        "name": "setAtmosphereModel",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "setAtmosphereModel(QString model)",
+        "description": "Sets the atmosphere model to use. 'preetham' is the classic fast model. 'showmysky' is a physically based model requiring Qt6 and data files.",
+        "parameters": [
+            {
+                "name": "model",
+                "type": "QString",
+                "description": "Model name: 'preetham' or 'showmysky'",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "// Switch to classic Preetham model\nLandscapeMgr.setAtmosphereModel(\"preetham\");\n\n// Switch to ShowMySky (physically based)\n// LandscapeMgr.setAtmosphereModel(\"showmysky\");"
+    },
+    {
+        "name": "getAtmosphereModelPath",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "QString getAtmosphereModelPath()",
+        "description": "Returns the file system path where atmosphere model data files are stored.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Path to atmosphere model data directory",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "var path = LandscapeMgr.getAtmosphereModelPath();\ncore.debug(\"Atmosphere data path: \" + path);"
+    },
+    {
+        "name": "setAtmosphereModelPath",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "setAtmosphereModelPath(QString path)",
+        "description": "Sets the file system path where atmosphere model data files are stored. Useful for custom ShowMySky installations.",
+        "parameters": [
+            {
+                "name": "path",
+                "type": "QString",
+                "description": "Directory path containing atmosphere model data",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "// Set custom path for ShowMySky data\n// LandscapeMgr.setAtmosphereModelPath(\"/path/to/showmysky/data\");"
+    },
+    {
+        "name": "getDefaultAtmosphereModelPath",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "QString getDefaultAtmosphereModelPath()",
+        "description": "Returns the default file system path for atmosphere model data files (inside Stellarium installation directory).",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Default atmosphere data path",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "var defaultPath = LandscapeMgr.getDefaultAtmosphereModelPath();\ncore.debug(\"Default atmosphere path: \" + defaultPath);"
+    },
+    {
+        "name": "getAtmosphereShowMySkyStoppedWithError",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "bool getAtmosphereShowMySkyStoppedWithError()",
+        "description": "Returns whether the ShowMySky atmosphere model has stopped due to an error (e.g., missing data files or incompatible hardware).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if ShowMySky encountered an error and stopped",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "if(LandscapeMgr.getAtmosphereShowMySkyStoppedWithError()) {\n    core.debug(\"ShowMySky failed, check console for details\");\n}"
+    },
+    {
+        "name": "getAtmosphereShowMySkyStatusText",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "QString getAtmosphereShowMySkyStatusText()",
+        "description": "Returns the current status text of the ShowMySky atmosphere model, showing loading progress or error messages.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Status text",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "var status = LandscapeMgr.getAtmosphereShowMySkyStatusText();\ncore.debug(\"ShowMySky status: \" + status);"
+    },
+    {
+        "name": "getFlagAtmosphereNoScatter",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "bool getFlagAtmosphereNoScatter()",
+        "description": "Returns whether atmospheric scattering (blue sky effect) is disabled while other effects (refraction, extinction) remain active. Useful for debugging or special visual effects.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if scattering is disabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var noScatter = LandscapeMgr.getFlagAtmosphereNoScatter();\ncore.debug(\"Atmosphere scattering disabled: \" + noScatter);"
+    },
+    {
+        "name": "setFlagAtmosphereNoScatter",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "setFlagAtmosphereNoScatter(bool displayed)",
+        "description": "Enables or disables atmospheric scattering (blue sky effect) while keeping refraction and extinction active.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to disable scattering, false to enable normal scattering",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Disable blue sky effect (useful for special shots)\nLandscapeMgr.setFlagAtmosphereNoScatter(true);\n\n// Re-enable normal atmosphere\nLandscapeMgr.setFlagAtmosphereNoScatter(false);"
+    },
+    {
+        "name": "getAtmosphereFadeIntensity",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "float getAtmosphereFadeIntensity()",
+        "description": "Returns the current fade intensity of the atmosphere (0.0 = fully faded out, 1.0 = fully visible). Used for smooth transitions.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Fade intensity (0.0 to 1.0)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var fade = LandscapeMgr.getAtmosphereFadeIntensity();\ncore.debug(\"Atmosphere fade: \" + fade);"
+    },
+    {
+        "name": "getAtmosphereFadeDuration",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "float getAtmosphereFadeDuration()",
+        "description": "Returns the fade duration of the atmosphere in seconds. Longer durations create smoother transitions when toggling atmosphere visibility.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Fade duration in seconds",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var duration = LandscapeMgr.getAtmosphereFadeDuration();\ncore.debug(\"Atmosphere fade duration: \" + duration + \" seconds\");"
+    },
+    {
+        "name": "setAtmosphereFadeDuration",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "setAtmosphereFadeDuration(float duration)",
+        "description": "Sets the fade duration of the atmosphere in seconds.",
+        "parameters": [
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Fade duration in seconds (recommended: 0.5 to 3.0)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Slow, dramatic fade\nLandscapeMgr.setAtmosphereFadeDuration(2.0);\nLandscapeMgr.setFlagAtmosphere(false);\n\n// Fast fade (default)\nLandscapeMgr.setAtmosphereFadeDuration(0.5);"
+    },
+    {
+        "name": "getAtmosphereEclipseSimulationQuality",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "int getAtmosphereEclipseSimulationQuality()",
+        "description": "Returns the quality level for eclipse simulation in the atmosphere. Higher quality gives more realistic eclipse appearance but may impact performance.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Quality level (0 = low, 1 = medium, 2 = high)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0"
+        },
+        "example": "var quality = LandscapeMgr.getAtmosphereEclipseSimulationQuality();\ncore.debug(\"Eclipse quality: \" + quality);"
+    },
+    {
+        "name": "setAtmosphereEclipseSimulationQuality",
+        "category": "Landscape Manager - Atmosphere",
+        "signature": "setAtmosphereEclipseSimulationQuality(int quality)",
+        "description": "Sets the quality level for eclipse simulation in the atmosphere.",
+        "parameters": [
+            {
+                "name": "quality",
+                "type": "int",
+                "description": "Quality level: 0 = low, 1 = medium, 2 = high",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0"
+        },
+        "example": "// Set high quality for eclipse observation\nLandscapeMgr.setAtmosphereEclipseSimulationQuality(2);\n\n// Use low quality for better performance\nLandscapeMgr.setAtmosphereEclipseSimulationQuality(0);"
+    },
+    {
+        "name": "getFlagAtmosphereZeroOrderScattering",
+        "category": "Landscape Manager - ShowMySky",
+        "signature": "bool getFlagAtmosphereZeroOrderScattering()",
+        "description": "[ShowMySky] Returns whether zero-order scattering (light that passes directly through atmosphere without scattering) is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if zero-order scattering is enabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": false,
+            "qt6": true,
+            "minVersion": "0.20.0"
+        },
+        "example": "if(LandscapeMgr.getFlagAtmosphereZeroOrderScattering()) {\n    core.debug(\"Zero-order scattering enabled\");\n}"
+    },
+    {
+        "name": "setFlagAtmosphereZeroOrderScattering",
+        "category": "Landscape Manager - ShowMySky",
+        "signature": "setFlagAtmosphereZeroOrderScattering(bool enable)",
+        "description": "[ShowMySky] Enables or disables zero-order scattering (light that passes directly through atmosphere without scattering).",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": false,
+            "qt6": true,
+            "minVersion": "0.20.0"
+        },
+        "example": "LandscapeMgr.setFlagAtmosphereZeroOrderScattering(true);"
+    },
+    {
+        "name": "getFlagAtmosphereSingleScattering",
+        "category": "Landscape Manager - ShowMySky",
+        "signature": "bool getFlagAtmosphereSingleScattering()",
+        "description": "[ShowMySky] Returns whether single-scattering (light scattered exactly once) is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if single-scattering is enabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": false,
+            "qt6": true,
+            "minVersion": "0.20.0"
+        },
+        "example": "var singleScatter = LandscapeMgr.getFlagAtmosphereSingleScattering();\ncore.debug(\"Single scattering: \" + singleScatter);"
+    },
+    {
+        "name": "setFlagAtmosphereSingleScattering",
+        "category": "Landscape Manager - ShowMySky",
+        "signature": "setFlagAtmosphereSingleScattering(bool enable)",
+        "description": "[ShowMySky] Enables or disables single-scattering (light scattered exactly once).",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": false,
+            "qt6": true,
+            "minVersion": "0.20.0"
+        },
+        "example": "LandscapeMgr.setFlagAtmosphereSingleScattering(true);"
+    },
+    {
+        "name": "getFlagAtmosphereMultipleScattering",
+        "category": "Landscape Manager - ShowMySky",
+        "signature": "bool getFlagAtmosphereMultipleScattering()",
+        "description": "[ShowMySky] Returns whether multiple-scattering (light scattered multiple times) is enabled. This feature improves realism but is computationally intensive.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if multiple-scattering is enabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": false,
+            "qt6": true,
+            "minVersion": "0.20.0"
+        },
+        "example": "var multiScatter = LandscapeMgr.getFlagAtmosphereMultipleScattering();\ncore.debug(\"Multiple scattering: \" + multiScatter);"
+    },
+    {
+        "name": "setFlagAtmosphereMultipleScattering",
+        "category": "Landscape Manager - ShowMySky",
+        "signature": "setFlagAtmosphereMultipleScattering(bool enable)",
+        "description": "[ShowMySky] Enables or disables multiple-scattering (light scattered multiple times).",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": false,
+            "qt6": true,
+            "minVersion": "0.20.0"
+        },
+        "example": "LandscapeMgr.setFlagAtmosphereMultipleScattering(true);"
+    },
+    {
+        "name": "getFlagAtmospherePseudoMirror",
+        "category": "Landscape Manager - ShowMySky",
+        "signature": "bool getFlagAtmospherePseudoMirror()",
+        "description": "[ShowMySky] Returns whether pseudo-mirror effect is enabled for the atmosphere rendering.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if pseudo-mirror is enabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": false,
+            "qt6": true,
+            "minVersion": "0.20.0"
+        },
+        "example": "var pseudoMirror = LandscapeMgr.getFlagAtmospherePseudoMirror();\ncore.debug(\"Pseudo mirror: \" + pseudoMirror);"
+    },
+    {
+        "name": "setFlagAtmospherePseudoMirror",
+        "category": "Landscape Manager - ShowMySky",
+        "signature": "setFlagAtmospherePseudoMirror(bool enable)",
+        "description": "[ShowMySky] Enables or disables pseudo-mirror effect for the atmosphere rendering.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": false,
+            "qt6": true,
+            "minVersion": "0.20.0"
+        },
+        "example": "LandscapeMgr.setFlagAtmospherePseudoMirror(true);"
+    },
+    {
+        "name": "getLandscapeOpacity",
+        "category": "Landscape Manager - Utility",
+        "signature": "float getLandscapeOpacity(Vec3d azalt)",
+        "description": "Returns the opacity of the landscape in a given direction (0 = fully transparent/sky, 1 = fully opaque/landscape). Useful for determining if a celestial object is above or below the true horizon.",
+        "parameters": [
+            {
+                "name": "azalt",
+                "type": "Vec3d",
+                "description": "Direction vector in Altitude/Azimuth coordinate frame (normalized)",
+                "required": true
+            }
+        ],
+        "returnType": "float",
+        "returnDescription": "Opacity value (0.0 to 1.0)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "// Get opacity at zenith (straight up)\nvar zenithDir = core.vec3d(0, 0, 1);\nvar opacity = LandscapeMgr.getLandscapeOpacity(zenithDir);\ncore.debug(\"Zenith opacity: \" + opacity);\n\n// Get opacity at 10 degrees altitude toward East\nvar az = 90 * Math.PI / 180;\nvar alt = 10 * Math.PI / 180;\nvar dir = core.vec3d(Math.cos(az) * Math.cos(alt), Math.sin(az) * Math.cos(alt), Math.sin(alt));\nvar horizonOpacity = LandscapeMgr.getLandscapeOpacity(dir);\ncore.debug(\"Horizon opacity: \" + horizonOpacity);"
+    },
+    {
+        "name": "getLandscapeOpacity",
+        "category": "Landscape Manager - Utility",
+        "signature": "float getLandscapeOpacity(float azimuth, float altitude)",
+        "description": "Returns the opacity of the landscape at a specific azimuth and altitude (both in degrees).",
+        "parameters": [
+            {
+                "name": "azimuth",
+                "type": "float",
+                "description": "Azimuth angle in degrees (0° = North, 90° = East, 180° = South, 270° = West)",
+                "required": true
+            },
+            {
+                "name": "altitude",
+                "type": "float",
+                "description": "Altitude angle in degrees (0° = horizon, 90° = zenith)",
+                "required": true
+            }
+        ],
+        "returnType": "float",
+        "returnDescription": "Opacity value (0.0 to 1.0)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "// Check opacity at due east on the horizon\nvar eastOpacity = LandscapeMgr.getLandscapeOpacity(90, 0);\ncore.debug(\"East horizon opacity: \" + eastOpacity);\n\n// Check opacity at north celestial pole direction\nvar northOpacity = LandscapeMgr.getLandscapeOpacity(0, 45);\n\n// Use for sunrise calculation\nfor(var alt = -2; alt <= 2; alt += 0.5) {\n    var op = LandscapeMgr.getLandscapeOpacity(90, alt);\n    core.debug(\"East at alt=\" + alt + \"°: opacity=\" + op);\n}"
+    },
+    {
+        "name": "setLandscapeTint",
+        "category": "Landscape Manager - Utility",
+        "signature": "setLandscapeTint(Vec3f color)",
+        "description": "Sets a color tint for the landscape. Useful for simulating sunrise/sunset colors (red/orange hues) or special lighting effects.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector (R, G, B) with values between 0.0 and 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Apply a warm sunset tint\nvar sunsetTint = core.vec3f(1.0, 0.6, 0.3);\nLandscapeMgr.setLandscapeTint(sunsetTint);\n\n// Reset to normal (white)\nvar white = core.vec3f(1.0, 1.0, 1.0);\nLandscapeMgr.setLandscapeTint(white);"
+    },
+    {
+        "name": "getLandscapeTint",
+        "category": "Landscape Manager - Utility",
+        "signature": "Vec3f getLandscapeTint()",
+        "description": "Returns the current color tint applied to the landscape.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var tint = LandscapeMgr.getLandscapeTint();\ncore.debug(\"Landscape tint: RGB(\" + tint[0] + \", \" + tint[1] + \", \" + tint[2] + \")\");"
+    },
+    {
+        "name": "getFlagLandscapeAutoSelection",
+        "category": "Landscape Manager - Utility",
+        "signature": "bool getFlagLandscapeAutoSelection()",
+        "description": "Returns whether landscape auto-selection is enabled. When enabled, Stellarium automatically selects an appropriate landscape when moving to a different planet.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if auto-selection is enabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "if(LandscapeMgr.getFlagLandscapeAutoSelection()) {\n    core.debug(\"Landscape auto-selection is ON\");\n} else {\n    core.debug(\"Landscape auto-selection is OFF\");\n}"
+    },
+    {
+        "name": "setFlagLandscapeAutoSelection",
+        "category": "Landscape Manager - Utility",
+        "signature": "setFlagLandscapeAutoSelection(bool enableAutoSelect)",
+        "description": "Enables or disables landscape auto-selection. When enabled, Stellarium automatically selects an appropriate landscape when moving to a different planet.",
+        "parameters": [
+            {
+                "name": "enableAutoSelect",
+                "type": "bool",
+                "description": "true to enable auto-selection, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "// Enable automatic landscape selection\nLandscapeMgr.setFlagLandscapeAutoSelection(true);\n\n// Disable manual control\nLandscapeMgr.setFlagLandscapeAutoSelection(false);"
+    },
+    {
+        "name": "getFlagEnvironmentAutoEnable",
+        "category": "Landscape Manager - Utility",
+        "signature": "bool getFlagEnvironmentAutoEnable()",
+        "description": "Returns whether environment auto-enable is active. When enabled, atmosphere and landscape settings automatically adjust when moving between planets.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if auto-enable is active",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "if(LandscapeMgr.getFlagEnvironmentAutoEnable()) {\n    core.debug(\"Environment auto-enable is ON\");\n}"
+    },
+    {
+        "name": "setFlagEnvironmentAutoEnable",
+        "category": "Landscape Manager - Utility",
+        "signature": "setFlagEnvironmentAutoEnable(bool enable)",
+        "description": "Enables or disables environment auto-enable. When enabled, atmosphere and landscape settings automatically adjust when moving between planets.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable auto-enable, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "LandscapeMgr.setFlagEnvironmentAutoEnable(true);"
+    },
+    {
+        "name": "setZRotation",
+        "category": "Landscape Manager - Utility",
+        "signature": "setZRotation(float degrees)",
+        "description": "Sets an additional rotation of the landscape about the Z-axis (azimuth). Useful for special cases where the landscape may change orientation over time, such as on a rotating ship or vehicle.",
+        "parameters": [
+            {
+                "name": "degrees",
+                "type": "float",
+                "description": "Rotation angle in degrees (added to the base rotation from landscape.ini)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "// Rotate the landscape by 45 degrees\nLandscapeMgr.setZRotation(45.0);\n\n// Reset to original orientation\nLandscapeMgr.setZRotation(0.0);"
+    },
+    {
+        "name": "installLandscapeFromArchive",
+        "category": "Landscape Manager - Installation",
+        "signature": "QString installLandscapeFromArchive(QString sourceFilePath, bool display, bool forAllUsers)",
+        "description": "Installs a new landscape from a ZIP archive. The archive should contain a landscape.ini file and all required textures. Returns the installed landscape ID on success.",
+        "parameters": [
+            {
+                "name": "sourceFilePath",
+                "type": "QString",
+                "description": "Path to the ZIP archive containing the landscape",
+                "required": true
+            },
+            {
+                "name": "display",
+                "type": "bool",
+                "description": "If true, switches to the newly installed landscape",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "forAllUsers",
+                "type": "bool",
+                "description": "If true, installs for all users (may require admin rights) - NOT FULLY IMPLEMENTED",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Installed landscape ID, or empty string on failure",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Install a landscape from a ZIP file\nvar landscapeId = LandscapeMgr.installLandscapeFromArchive(\"/path/to/my_landscape.zip\", true);\nif(landscapeId) {\n    core.debug(\"Landscape installed: \" + landscapeId);\n} else {\n    core.debug(\"Installation failed\");\n}"
+    },
+    {
+        "name": "removeLandscape",
+        "category": "Landscape Manager - Installation",
+        "signature": "bool removeLandscape(QString landscapeID)",
+        "description": "Removes a user-installed landscape permanently. Packaged landscapes cannot be removed.",
+        "parameters": [
+            {
+                "name": "landscapeID",
+                "type": "QString",
+                "description": "ID of the landscape to remove (directory name)",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if successfully removed, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Remove a previously installed landscape\nvar removed = LandscapeMgr.removeLandscape(\"my_custom_landscape\");\nif(removed) {\n    core.debug(\"Landscape removed successfully\");\n} else {\n    core.debug(\"Failed to remove landscape\");\n}"
+    },
+    {
+        "name": "loadLandscapeName",
+        "category": "Landscape Manager - Installation",
+        "signature": "QString loadLandscapeName(QString landscapeID)",
+        "description": "Loads and returns the display name of a landscape from its landscape.ini file without loading the entire landscape.",
+        "parameters": [
+            {
+                "name": "landscapeID",
+                "type": "QString",
+                "description": "Landscape ID to query",
+                "required": true
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Landscape display name, or empty string if not found",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var name = LandscapeMgr.loadLandscapeName(\"ocean\");\ncore.debug(\"Ocean landscape name: \" + name);"
+    },
+    {
+        "name": "loadLandscapeSize",
+        "category": "Landscape Manager - Installation",
+        "signature": "quint64 loadLandscapeSize(QString landscapeID)",
+        "description": "Returns the total file size of a landscape on disk in bytes.",
+        "parameters": [
+            {
+                "name": "landscapeID",
+                "type": "QString",
+                "description": "Landscape ID to check",
+                "required": true
+            }
+        ],
+        "returnType": "quint64",
+        "returnDescription": "Total size in bytes",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var sizeBytes = LandscapeMgr.loadLandscapeSize(\"guereins\");\nvar sizeMB = sizeBytes / (1024 * 1024);\ncore.debug(\"Landscape size: \" + sizeMB.toFixed(2) + \" MB\");"
+    },
+    {
+        "name": "showMessage",
+        "category": "Landscape Manager - Messages",
+        "signature": "showMessage(QString message)",
+        "description": "Displays a temporary message on the screen (red text at the bottom). Useful for providing feedback in scripts.",
+        "parameters": [
+            {
+                "name": "message",
+                "type": "QString",
+                "description": "Message text to display",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "LandscapeMgr.showMessage(\"Landscape changed to Ocean\");\ncore.wait(3);\nLandscapeMgr.clearMessage();"
+    },
+    {
+        "name": "clearMessage",
+        "category": "Landscape Manager - Messages",
+        "signature": "clearMessage()",
+        "description": "Clears any temporary message currently displayed on the screen.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "LandscapeMgr.clearMessage();"
+    }
+]
