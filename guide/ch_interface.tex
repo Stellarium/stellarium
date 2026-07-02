@@ -408,6 +408,15 @@ from touch-enabled devices like smartphones.
   By default Stellarium use black color.
 \end{description}
 
+\subsubsection{Toolbar position} \newFeature{26.3}
+The two checkboxes under \emph{Toolbar position} let you move the toolbars
+(both the horizontal button bar and the vertical window buttons) to any of the four corners of the screen:
+\begin{description}
+\item[Toolbar at top] When enabled, the horizontal button bar moves to the top edge of the screen instead of the bottom. The status text row (location, FOV, date/time) is placed at the bottom of the bar so it remains visible when the bar is partially hidden.
+\item[Toolbar at right] When enabled, the vertical window-button bar moves to the right edge of the screen instead of the left. The horizontal bar follows accordingly.
+\end{description}
+Both settings are saved as \key{toolbar\_at\_top} and \key{toolbar\_at\_right} in the \texttt{[gui]} section.
+
 \paragraph{Multithreading} \label{sec:gui:configuration:tools:threads} 
 For every frame, the positions of all planets and minor bodies of the Solar system are computed. 
 Most of the other time between frame updates is needed for the actual frame drawing, 

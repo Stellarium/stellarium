@@ -162,7 +162,7 @@ void SkyGui::init(StelGui* astelGui)
 {
 	stelGui = astelGui;
 
-	// Create the 2 auto-hide buttons placed in the active toolbar corner
+	// Create the 2 auto hide buttons placed in the active toolbar corner
 	autoHidebts = new CornerButtons(this);
 	QPixmap pxmapOn = QPixmap(":/graphicGui/miscHorAutoHide-on.png");
 	QPixmap pxmapOff = QPixmap(":/graphicGui/miscHorAutoHide-off.png");
@@ -342,9 +342,8 @@ qreal SkyGui::getLeftBarWidth() const
 //! Update the position of the button bars in the main window
 void SkyGui::updateBarsPos()
 {
-	// Guard: auto-hide buttons are created in init(); bail out if called before that.
-	if (!autoHidebts)
-		return;
+	// auto-hide buttons are created in init(), so return if called before that
+	if (!autoHidebts) return;
 
 	const int ww = getSkyGuiWidth();  // actually: window width
 	const int hh = getSkyGuiHeight(); // actually: window height
