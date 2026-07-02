@@ -40,6 +40,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QMouseEvent>
 #include <QPixmap>
 
@@ -389,6 +390,15 @@ void SkyCultureMaker::setNewSkyCulture()
 	currentSkyCulture = new scm::ScmSkyCulture();
 }
 
+void SkyCultureMaker::setSkyCulture(scm::ScmSkyCulture *skyCulture)
+{
+	if (currentSkyCulture != nullptr)
+	{
+		delete currentSkyCulture;
+	}
+	currentSkyCulture = skyCulture;
+}
+
 scm::ScmSkyCulture *SkyCultureMaker::getCurrentSkyCulture()
 {
 	return currentSkyCulture;
@@ -415,6 +425,13 @@ void SkyCultureMaker::updateSkyCultureDialog()
 	}
 	static_cast<ScmSkyCultureDialog *>(dialogMap[scm::DialogID::SkyCultureDialog])
 		->setConstellations(currentSkyCulture->getConstellations());
+}
+
+void SkyCultureMaker::populateSkyCultureDialog()
+{
+	if (!isValidDialog(scm::DialogID::SkyCultureDialog) || currentSkyCulture == nullptr) return;
+	static_cast<ScmSkyCultureDialog *>(dialogMap[scm::DialogID::SkyCultureDialog])
+		->populateFromSkyCulture(currentSkyCulture);
 }
 
 void SkyCultureMaker::setSkyCultureDescription(const scm::Description &description)

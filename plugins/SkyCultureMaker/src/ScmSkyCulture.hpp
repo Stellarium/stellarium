@@ -138,6 +138,36 @@ public:
 	*/
 	void mergeLocations();
 
+	/**
+	 * @brief Returns the description of the sky culture.
+	 */
+	const scm::Description &getDescription() const;
+
+	/**
+	 * @brief Returns the cultural names map of the sky culture.
+	 */
+	const QMap<QString, QList<ScmCulturalName>> &getCulturalNames() const;
+
+	/**
+	 * @brief Returns the geographic locations of the sky culture.
+	 */
+	const QList<CulturePolygon> &getLocations() const;
+
+	/**
+	 * @brief Returns the earliest year associated with the sky culture's territory.
+	 */
+	int getBeginTime() const;
+
+	/**
+	 * @brief Returns the latest year associated with the sky culture's territory.
+	 */
+	int getEndTime() const;
+
+	/**
+	 * @brief Returns whether to fall back to international names when culture-specific names are absent.
+	 */
+	bool getFallbackToInternationalNames() const;
+
 private:
 	/// Sky culture identifier
 	QString id;

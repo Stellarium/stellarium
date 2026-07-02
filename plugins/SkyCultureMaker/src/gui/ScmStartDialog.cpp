@@ -22,6 +22,8 @@
  */
 
 #include "ScmStartDialog.hpp"
+#include "ScmSCLoader.hpp"
+#include "StelFileMgr.hpp"
 #include "ui_scmStartDialog.h"
 #include <cassert>
 #include <QDebug>
@@ -76,7 +78,7 @@ void ScmStartDialog::createDialogContent()
 	connect(ui->scmStartCreatepushButton, &QPushButton::clicked, this,
 	        &ScmStartDialog::startScmCreationProcess); // Create
 	connect(ui->scmStartEditpushButton, &QPushButton::clicked, this,
-	        &ScmStartDialog::close); // Edit - TODO: add logic (currently closing the window)
+	        &ScmStartDialog::startScmEditingProcess); // Edit
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmStartDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
@@ -115,15 +117,32 @@ void ScmStartDialog::handleFontChanged()
 
 void ScmStartDialog::startScmCreationProcess()
 {
-	// Close the dialog before starting the editor
-	maker->setDialogVisibility(scm::DialogID::StartDialog, false);
-	// Start the editor dialog for creating a new Sky Culture
-	maker->setDialogVisibility(scm::DialogID::SkyCultureDialog, true);
 	maker->setNewSkyCulture();
+	maker->setDialogVisibility(scm::DialogID::StartDialog, false);
+	maker->setDialogVisibility(scm::DialogID::SkyCultureDialog, true);
 
-	// GZ: Unclear why those dialogs are called at plugin start.
-	//SkyCultureMaker::setActionToggle("actionShow_DateTime_Window_Global", true);
-	//SkyCultureMaker::setActionToggle("actionShow_Location_Window_Global", true);
+	SkyCultureMaker::setActionToggle("actionShow_Ground", false);
+	SkyCultureMaker::setActionToggle("actionShow_Atmosphere", false);
+	SkyCultureMaker::setActionToggle("actionShow_MeteorShowers", false);
+	SkyCultureMaker::setActionToggle("actionShow_Satellite_Hints", false);
+}
+
+void ScmStartDialog::startScmEditingProcess()
+{
+	const QString defaultPath = StelFileMgr::getUserDir() + "/skycultures";
+	QString errorMsg;
+	scm::ScmSkyCulture *sc = ScmSCLoader::selectAndLoad(nullptr, defaultPath, &errorMsg);
+	if (sc == nullptr)
+	{
+		if (!errorMsg.isEmpty())
+			maker->showUserErrorMessage(dialog, q_("Edit Sky Culture"), errorMsg);
+		return; // user cancelled or load failed
+	}
+	maker->setSkyCulture(sc);
+	maker->setDialogVisibility(scm::DialogID::StartDialog, false);
+	maker->setDialogVisibility(scm::DialogID::SkyCultureDialog, true);
+	maker->populateSkyCultureDialog();
+
 	SkyCultureMaker::setActionToggle("actionShow_Ground", false);
 	SkyCultureMaker::setActionToggle("actionShow_Atmosphere", false);
 	SkyCultureMaker::setActionToggle("actionShow_MeteorShowers", false);

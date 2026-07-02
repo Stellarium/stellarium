@@ -68,7 +68,15 @@ public:
 	 */
 	void resetDialog();
 
-	/**
+	/**	
+	 * @brief Populates all UI fields from a loaded sky culture.
+	 *        Call this after setSkyCulture() when entering edit mode.
+	 *
+	 * @param sc The sky culture to populate from (must not be nullptr).
+	 */
+	void populateFromSkyCulture(scm::ScmSkyCulture *sc);
+
+	/**	
 	 * @brief Updates the add constellation button state.
 	 *
 	 * @param enabled Whether the button should be enabled or disabled.
@@ -194,6 +202,34 @@ private:
 	 * @return The description from the text edit.
 	 */
 	scm::Description getDescriptionFromTextEdit() const;
+
+	/**
+	 * @brief Populates the overview/description tab fields from a Description.
+	 * 
+	 * @param desc The Description to populate from.
+	 */
+	void populateDescriptionTab(const scm::Description &desc);
+
+	/**
+	 * @brief Populates the references list from a serialised references string.
+	 * 
+	 * @param references The references string to populate from.
+	 */
+	void populateReferences(const QString &references);
+
+	/**
+	 * @brief Populates the common names table from the sky culture.
+	 * 
+	 * @param sc The sky culture to populate from.
+	 */
+	void populateCommonNames(const QMap<QString, QList<scm::ScmCulturalName>> &culturalNames);
+
+	/**
+	 * @brief Populates the geographical locations tab from the sky culture.
+	 * 
+	 * @param sc The sky culture to populate from.
+	 */
+	void populateLocationsTab(scm::ScmSkyCulture *sc);
 
 	/**
 	 * @brief Compiles the References section from all the references in the list.
