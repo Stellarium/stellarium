@@ -757,13 +757,13 @@ void ScmSkyCultureDialog::populateReferences(const QString &references)
 {
 	resetReferences();
 	// matches lines like: " - [#1]: Reference text"
-	static const QRegularExpression refRx(R"(^\s*-\s*\[#\d+\]:\s*(.+)$)");
+	// the original reference number is preserved
+	static const QRegularExpression refRx(R"(^\s*-\s*\[(#\d+)\]:\s*(.+)$)");
 	for (const QString &line : references.split('\n'))
 	{
 		const auto m = refRx.match(line.trimmed());
 		if (!m.hasMatch()) continue;
-		const int num = ui->referencesList->topLevelItemCount() + 1;
-		auto *item    = new QTreeWidgetItem({QString("#%1").arg(num), m.captured(1).trimmed()});
+		auto *item = new QTreeWidgetItem({m.captured(1).trimmed(), m.captured(2).trimmed()});
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
 		ui->referencesList->addTopLevelItem(item);
 	}

@@ -127,21 +127,16 @@ void ScmSCLoader::parseIndexJsonBasicFields(const QJsonObject &root, const QDir 
 	sc->setEndTime(root["endTime"].toInt());
 	sc->setFallbackToInternationalNames(root["fallback_to_international_names"].toBool(false));
 
-	const QJsonArray classArr = root["classification"].toArray();
-	if (classArr.isEmpty()) return;
-
-	const QString classStr            = classArr[0].toString().toLower().trimmed();
-	scm::ClassificationType classType = scm::ClassificationType::NONE;
+	scm::Description desc;
+	const QString classStr = root["classification"].toArray().first().toString().toLower().trimmed();
 	for (const auto &cl : scm::CLASSIFICATIONS)
 	{
 		if (cl.second.name.toLower() == classStr)
 		{
-			classType = cl.first;
+			desc.classification = cl.first;
 			break;
 		}
 	}
-	scm::Description desc;
-	desc.classification = classType;
 
 	const QString regionStr = root["region"].isArray() ? root["region"].toArray().first().toString()
 	                                                   : root["region"].toString();
@@ -281,6 +276,8 @@ bool ScmSCLoader::parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc)
 		const QJsonObject feature    = fv.toObject();
 		const QJsonObject properties = feature["properties"].toObject();
 		const QJsonObject geometry   = feature["geometry"].toObject();
+
+		if (geometry["type"].toString() != "Polygon") continue;
 
 		const int id        = properties["id"].toInt();
 		const int beginTime = properties["beginTime"].toInt();
