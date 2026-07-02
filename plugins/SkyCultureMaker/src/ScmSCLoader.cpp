@@ -344,6 +344,7 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 		License
 	};
 
+	// official sections of an SCM-created description
 	auto sectionOf = [](const QString &heading) -> Section
 	{
 		const QString h = heading.toLower().trimmed();
@@ -369,32 +370,33 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 	QString name;
 
 	// scans for markdown headings with depth 1-6
-	static QRegularExpression headingRe("^(#{1,6})\\s+(.+)$");
+	static QRegularExpression headingRe("^#{1,6}\\s+(.+)$");
 
 	for (const QString &rawLine : text.split('\n'))
 	{
 		const QRegularExpressionMatch m = headingRe.match(rawLine);
 		if (m.hasMatch())
 		{
-			const QString heading = m.captured(2).trimmed();
+			const QString heading = m.captured(1).trimmed();
 			const Section s       = sectionOf(heading);
-			// heading matches a known section
+
 			if (s != Section::None)
 			{
+				// Known section heading -> switch to that section
 				current = s;
+				continue;
 			}
-			// heading does not match a known section and we haven't found the SC name yet
-			// -> becomes SC name
-			else if (name.isEmpty())
+			if (name.isEmpty())
 			{
+				// Heuristic: first unrecognized heading becomes the sky culture name
 				name    = heading;
 				current = Section::None;
+				continue;
 			}
-			else
-			{
-				current = Section::None;
-			}
-			continue;
+			// Any other unrecognized heading: route its line and all
+			// subsequent content into Description until a known section
+			// heading is encountered.
+			current = Section::Description;
 		}
 		if (current != Section::None) sectionContent[current] += rawLine + "\n";
 	}
