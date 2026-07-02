@@ -322,46 +322,6 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 	const QString text = in.readAll();
 	file.close();
 
-	enum class Section
-	{
-		None,
-		Introduction,
-		Description,
-		Sky,
-		MoonAndSun,
-		Planets,
-		Zodiac,
-		MilkyWay,
-		OtherObjects,
-		Constellations,
-		References,
-		Authors,
-		About,
-		Acknowledgements,
-		License
-	};
-
-	// official sections of an SCM-created description
-	auto sectionOf = [](const QString &heading) -> Section
-	{
-		const QString h = heading.toLower().trimmed();
-		if (h == "introduction") return Section::Introduction;
-		if (h == "description") return Section::Description;
-		if (h == "sky") return Section::Sky;
-		if (h == "moon and sun") return Section::MoonAndSun;
-		if (h == "planets") return Section::Planets;
-		if (h == "zodiac") return Section::Zodiac;
-		if (h == "milky way") return Section::MilkyWay;
-		if (h == "other celestial objects") return Section::OtherObjects;
-		if (h == "constellations") return Section::Constellations;
-		if (h == "references") return Section::References;
-		if (h == "authors") return Section::Authors;
-		if (h == "about") return Section::About;
-		if (h == "acknowledgements") return Section::Acknowledgements;
-		if (h == "license") return Section::License;
-		return Section::None;
-	};
-
 	Section current = Section::None;
 	QMap<Section, QString> sectionContent;
 	QString name;

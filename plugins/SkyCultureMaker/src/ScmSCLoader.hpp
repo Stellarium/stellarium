@@ -60,6 +60,45 @@ public:
 	                                         QString *errorMsg = nullptr);
 
 private:
+	enum class Section
+	{
+		None,
+		Introduction,
+		Description,
+		Sky,
+		MoonAndSun,
+		Planets,
+		Zodiac,
+		MilkyWay,
+		OtherObjects,
+		Constellations,
+		References,
+		Authors,
+		About,
+		Acknowledgements,
+		License
+	};
+
+	static inline Section sectionOf(const QString &heading)
+	{
+		const QString h = heading.toLower().trimmed();
+		if (h == "introduction") return Section::Introduction;
+		if (h == "description") return Section::Description;
+		if (h == "sky") return Section::Sky;
+		if (h == "moon and sun") return Section::MoonAndSun;
+		if (h == "planets") return Section::Planets;
+		if (h == "zodiac") return Section::Zodiac;
+		if (h == "milky way") return Section::MilkyWay;
+		if (h == "other celestial objects") return Section::OtherObjects;
+		if (h == "constellations") return Section::Constellations;
+		if (h == "references") return Section::References;
+		if (h == "authors") return Section::Authors;
+		if (h == "about") return Section::About;
+		if (h == "acknowledgements") return Section::Acknowledgements;
+		if (h == "license") return Section::License;
+		return Section::None;
+	}
+
 	static bool parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QString *errorMsg);
 	static void parseIndexJsonBasicFields(const QJsonObject &root, const QDir &dir, scm::ScmSkyCulture *sc);
 	static void parseIndexJsonConstellations(const QJsonArray &constellationsArr, const QDir &dir, scm::ScmSkyCulture *sc);
