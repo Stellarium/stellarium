@@ -27,6 +27,7 @@
 
 #include <QNetworkReply>
 #include <QSettings>
+#include <QSignalBlocker>
 #include <QTimer>
 
 Q_LOGGING_CATEGORY(HiPS,"stel.HiPS", QtInfoMsg)
@@ -48,6 +49,7 @@ HipsMgr::~HipsMgr()
 		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->beginGroup("hips");
 		conf->setValue("show", getFlagShow());
+		conf->setValue("show_atmospheric_extinction", getFlagShowAtmosphericExtinction());
 
 		// remove 0.18.0 scheme
 		conf->remove("visible");
@@ -75,6 +77,23 @@ HipsMgr::~HipsMgr()
 			}
 			conf->endArray();
 		}
+
+		conf->remove("surveySettings");
+		int settingsIndex = 0;
+		conf->beginWriteArray("surveySettings");
+		for (auto &survey: surveys)
+		{
+			if (survey->isPlanetarySurvey() || survey->hasDefaultDisplaySettings())
+				continue;
+			conf->setArrayIndex(settingsIndex++);
+			conf->setValue("url", survey->getUrl());
+			conf->setValue("gamma", survey->getGamma());
+			conf->setValue("saturation", survey->getSaturation());
+			conf->setValue("brightness", survey->getBrightness());
+			conf->setValue("opacity", survey->getOpacity());
+			conf->setValue("colorChannel", survey->getColorChannel());
+		}
+		conf->endArray();
 
 		conf->endGroup();
 		conf->sync();
@@ -120,6 +139,8 @@ void HipsMgr::loadSources()
 			for (HipsSurveyP &survey: newSurveys)
 			{
 				connect(survey.data(), SIGNAL(propertiesChanged()), this, SIGNAL(surveysChanged()));
+				connect(survey.data(), &HipsSurvey::visibleChanged, this, &HipsMgr::updateActiveSurveys);
+				connect(survey.data(), &HipsSurvey::displaySettingsChanged, this, &HipsMgr::saveSurveySettings);
 				emit gotNewSurvey(survey);
 			}
 			surveys += newSurveys;
@@ -140,6 +161,7 @@ void HipsMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("hips");
 	setFlagShow(conf->value("show", false).toBool());
+	flagShowAtmosphericExtinction = conf->value("show_atmospheric_extinction", false).toBool();
 	int size = conf->beginReadArray("surveys");
 	conf->endArray();	
 	conf->endGroup();
@@ -188,6 +210,47 @@ void HipsMgr::restoreVisibleSurveys()
 		}
 	}
 	conf->endArray();
+
+	size = conf->beginReadArray("surveySettings");
+	for (int i = 0; i < size; i++)
+	{
+		conf->setArrayIndex(i);
+		const QString url = conf->value("url").toString();
+		HipsSurveyP survey = getSurveyByUrl(url);
+		if (survey && !survey->isPlanetarySurvey())
+		{
+			const QSignalBlocker blocker(survey.data());
+			survey->setDisplaySettings(conf->value("gamma", 1.).toFloat(),
+			                           conf->value("saturation", 1.).toFloat(),
+			                           conf->value("brightness", 1.).toFloat(),
+			                           conf->value("opacity", 1.).toFloat(),
+			                           conf->value("colorChannel", HipsSurvey::ColorChannelRgb).toInt());
+		}
+	}
+	conf->endArray();
+	conf->endGroup();
+}
+
+void HipsMgr::saveSurveySettings() const
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("hips");
+	conf->remove("surveySettings");
+	int settingsIndex = 0;
+	conf->beginWriteArray("surveySettings");
+	for (auto &survey: surveys)
+	{
+		if (survey->isPlanetarySurvey() || survey->hasDefaultDisplaySettings())
+			continue;
+		conf->setArrayIndex(settingsIndex++);
+		conf->setValue("url", survey->getUrl());
+		conf->setValue("gamma", survey->getGamma());
+		conf->setValue("saturation", survey->getSaturation());
+		conf->setValue("brightness", survey->getBrightness());
+		conf->setValue("opacity", survey->getOpacity());
+		conf->setValue("colorChannel", survey->getColorChannel());
+	}
+	conf->endArray();
 	conf->endGroup();
 }
 
@@ -199,20 +262,25 @@ void HipsMgr::draw(StelCore* core)
 {
 	if (!visible) return;
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	for (auto &survey: surveys)
+	for (auto &survey: activeSurveys)
 	{
-		if (survey->isVisible() && survey->planet.isEmpty())
+		if (survey->fader.getInterstate() > 0.f && survey->planet.isEmpty())
 		{
-			survey->draw(&sPainter);
+			survey->draw(&sPainter, 2.0 * M_PI, Q_NULLPTR, flagShowAtmosphericExtinction);
 		}
 	}
 }
 
 void HipsMgr::update(double deltaTime)
 {
-	for (auto &survey: surveys)
+	for (auto it = activeSurveys.begin(); it != activeSurveys.end();)
 	{
+		const auto &survey = *it;
 		survey->fader.update(static_cast<int>(deltaTime * 1000));
+		if (!survey->isVisible() && survey->fader.getInterstate() == 0.f)
+			it = activeSurveys.erase(it);
+		else
+			++it;
 	}
 }
 
@@ -251,5 +319,24 @@ void HipsMgr::setFlagShow(bool b)
 			if (survey->isVisible())
 				survey->hideProgressBar();
 		}
+	}
+}
+
+void HipsMgr::setFlagShowAtmosphericExtinction(bool b)
+{
+	if (flagShowAtmosphericExtinction == b)
+		return;
+	flagShowAtmosphericExtinction = b;
+	StelApp::immediateSave("hips/show_atmospheric_extinction", b);
+	emit flagShowAtmosphericExtinctionChanged(b);
+}
+
+void HipsMgr::updateActiveSurveys()
+{
+	activeSurveys.clear();
+	for (auto &survey: surveys)
+	{
+		if (survey->isVisible() || survey->fader.getInterstate() > 0.f)
+			activeSurveys << survey;
 	}
 }

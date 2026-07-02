@@ -58,6 +58,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QSettings>
+#include <QSignalBlocker>
 #include <QTimer>
 #include <QDialog>
 #include <QStringList>
@@ -745,9 +746,23 @@ void ViewDialog::createDialogContent()
 	connect(ui->surveyTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
 	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHipsText, Qt::QueuedConnection);
+	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHipsControls, Qt::QueuedConnection);
 	connect(ui->surveysTreeWidget, &QTreeWidget::itemChanged, this, &ViewDialog::hipsListItemChanged);
 	connect(ui->surveysFilter, &QLineEdit::textChanged, this, &ViewDialog::filterSurveys);
 	connect(ui->listOnlyEnabledSurveys, &QCheckBox::toggled, this, &ViewDialog::filterSurveys);
+	connect(ui->hipsGammaDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	        this, &ViewDialog::hipsDisplaySettingsChanged);
+	connect(ui->hipsSaturationDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	        this, &ViewDialog::hipsDisplaySettingsChanged);
+	connect(ui->hipsBrightnessDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	        this, &ViewDialog::hipsDisplaySettingsChanged);
+	connect(ui->hipsOpacityDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	        this, &ViewDialog::hipsDisplaySettingsChanged);
+	connect(ui->hipsColorChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+	        this, &ViewDialog::hipsDisplaySettingsChanged);
+	connect(ui->hipsResetPushButton, &QPushButton::clicked, this, &ViewDialog::resetSelectedHipsDisplaySettings);
+	connect(ui->hipsResetAllPushButton, &QPushButton::clicked, this, &ViewDialog::resetAllHipsDisplaySettings);
+	connectBoolProperty(ui->hipsAtmosphericExtinctionCheckBox, "HipsMgr.flagShowAtmosphericExtinction");
 	updateHips();
 
 	updateTabBarListWidgetWidth();
@@ -894,12 +909,103 @@ void ViewDialog::updateHipsText()
 	ui->surveysTextBrowser->setHtml(html);
 }
 
+HipsSurveyP ViewDialog::currentSkyHips() const
+{
+	const auto currentItem = ui->surveysTreeWidget->currentItem();
+	if (!currentItem || currentItem->data(0, HipsRole::ItemType).toInt() != HipsItemType::Survey)
+		return HipsSurveyP(Q_NULLPTR);
+
+	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
+	const auto hips = hipsmgr->getSurveyByUrl(currentItem->data(0, HipsRole::URL).toString());
+	if (!hips || hips->isPlanetarySurvey())
+		return HipsSurveyP(Q_NULLPTR);
+	return hips;
+}
+
+void ViewDialog::updateHipsControls()
+{
+	const auto hips = currentSkyHips();
+	bool hasSkySurvey = false;
+	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
+	const QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
+	for (auto &survey: hipslist)
+	{
+		if (!survey->isPlanetarySurvey())
+		{
+			hasSkySurvey = true;
+			break;
+		}
+	}
+
+	const QSignalBlocker gammaBlocker(ui->hipsGammaDoubleSpinBox);
+	const QSignalBlocker saturationBlocker(ui->hipsSaturationDoubleSpinBox);
+	const QSignalBlocker brightnessBlocker(ui->hipsBrightnessDoubleSpinBox);
+	const QSignalBlocker opacityBlocker(ui->hipsOpacityDoubleSpinBox);
+	const QSignalBlocker colorChannelBlocker(ui->hipsColorChannelComboBox);
+
+	ui->hipsGammaDoubleSpinBox->setValue(hips ? hips->getGamma() : 1.);
+	ui->hipsSaturationDoubleSpinBox->setValue(hips ? hips->getSaturation() : 1.);
+	ui->hipsBrightnessDoubleSpinBox->setValue(hips ? hips->getBrightness() : 1.);
+	ui->hipsOpacityDoubleSpinBox->setValue(hips ? hips->getOpacity() : 1.);
+	ui->hipsColorChannelComboBox->setCurrentIndex(hips ? hips->getColorChannel() : HipsSurvey::ColorChannelRgb);
+
+	const bool enableSelectedControls = static_cast<bool>(hips);
+	ui->hipsSettingsGroupBox->setEnabled(enableSelectedControls || hasSkySurvey);
+	ui->hipsGammaLabel->setEnabled(enableSelectedControls);
+	ui->hipsGammaDoubleSpinBox->setEnabled(enableSelectedControls);
+	ui->hipsSaturationLabel->setEnabled(enableSelectedControls);
+	ui->hipsSaturationDoubleSpinBox->setEnabled(enableSelectedControls);
+	ui->hipsBrightnessLabel->setEnabled(enableSelectedControls);
+	ui->hipsBrightnessDoubleSpinBox->setEnabled(enableSelectedControls);
+	ui->hipsOpacityLabel->setEnabled(enableSelectedControls);
+	ui->hipsOpacityDoubleSpinBox->setEnabled(enableSelectedControls);
+	ui->hipsColorChannelLabel->setEnabled(enableSelectedControls);
+	ui->hipsColorChannelComboBox->setEnabled(enableSelectedControls);
+	ui->hipsResetPushButton->setEnabled(enableSelectedControls);
+	ui->hipsResetAllPushButton->setEnabled(hasSkySurvey);
+}
+
+void ViewDialog::hipsDisplaySettingsChanged()
+{
+	const auto hips = currentSkyHips();
+	if (!hips)
+		return;
+
+	hips->setDisplaySettings(static_cast<float>(ui->hipsGammaDoubleSpinBox->value()),
+	                         static_cast<float>(ui->hipsSaturationDoubleSpinBox->value()),
+	                         static_cast<float>(ui->hipsBrightnessDoubleSpinBox->value()),
+	                         static_cast<float>(ui->hipsOpacityDoubleSpinBox->value()),
+	                         ui->hipsColorChannelComboBox->currentIndex());
+}
+
+void ViewDialog::resetSelectedHipsDisplaySettings()
+{
+	const auto hips = currentSkyHips();
+	if (!hips)
+		return;
+	hips->resetDisplaySettings();
+	updateHipsControls();
+}
+
+void ViewDialog::resetAllHipsDisplaySettings()
+{
+	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
+	const QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
+	for (auto &hips: hipslist)
+	{
+		if (!hips->isPlanetarySurvey())
+			hips->resetDisplaySettings();
+	}
+	updateHipsControls();
+}
+
 void ViewDialog::clearHips()
 {
 	ui->surveysTreeWidget->clear();
 	planetarySurveys.clear();
 	surveysInTheList.clear();
 	selectedSurveyType.clear();
+	updateHipsControls();
 }
 
 void ViewDialog::updateHips()
@@ -1049,6 +1155,7 @@ void ViewDialog::updateHips()
 
 	l->blockSignals(false);
 	filterSurveys();
+	updateHipsControls();
 }
 
 void ViewDialog::populateHipsGroups()

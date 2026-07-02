@@ -21,8 +21,12 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "Planet.hpp"
+#include "RefractionExtinction.hpp"
+#include "LandscapeMgr.hpp"
 #include "StelPainter.hpp"
+#include "StelSkyDrawer.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelToneReproducer.hpp"
 #include "StelUtils.hpp"
 #include "StelProgressController.hpp"
 #include "StelHealpix.hpp"
@@ -165,6 +169,99 @@ void HipsSurvey::setVisible(bool value)
 	emit visibleChanged(value);
 }
 
+void HipsSurvey::setGamma(float value)
+{
+	value = qBound(0.1f, value, 5.f);
+	if (qFuzzyCompare(gamma, value)) return;
+	gamma = value;
+	emit displaySettingsChanged();
+}
+
+void HipsSurvey::setSaturation(float value)
+{
+	value = qBound(0.f, value, 3.f);
+	if (qFuzzyCompare(saturation, value)) return;
+	saturation = value;
+	emit displaySettingsChanged();
+}
+
+void HipsSurvey::setBrightness(float value)
+{
+	value = qBound(0.f, value, 5.f);
+	if (qFuzzyCompare(brightness, value)) return;
+	brightness = value;
+	emit displaySettingsChanged();
+}
+
+void HipsSurvey::setOpacity(float value)
+{
+	value = qBound(0.f, value, 1.f);
+	if (qFuzzyCompare(opacity, value)) return;
+	opacity = value;
+	emit displaySettingsChanged();
+}
+
+void HipsSurvey::setColorChannel(int value)
+{
+	value = qBound(static_cast<int>(ColorChannelRgb), value, static_cast<int>(ColorChannelBlue));
+	if (colorChannel == value) return;
+	colorChannel = value;
+	emit displaySettingsChanged();
+}
+
+void HipsSurvey::setDisplaySettings(float gamma, float saturation, float brightness, float opacity,
+                                    int colorChannel)
+{
+	bool changed = false;
+	gamma = qBound(0.1f, gamma, 5.f);
+	saturation = qBound(0.f, saturation, 3.f);
+	brightness = qBound(0.f, brightness, 5.f);
+	opacity = qBound(0.f, opacity, 1.f);
+	colorChannel = qBound(static_cast<int>(ColorChannelRgb), colorChannel, static_cast<int>(ColorChannelBlue));
+
+	if (!qFuzzyCompare(this->gamma, gamma))
+	{
+		this->gamma = gamma;
+		changed = true;
+	}
+	if (!qFuzzyCompare(this->saturation, saturation))
+	{
+		this->saturation = saturation;
+		changed = true;
+	}
+	if (!qFuzzyCompare(this->brightness, brightness))
+	{
+		this->brightness = brightness;
+		changed = true;
+	}
+	if (!qFuzzyCompare(this->opacity, opacity))
+	{
+		this->opacity = opacity;
+		changed = true;
+	}
+	if (this->colorChannel != colorChannel)
+	{
+		this->colorChannel = colorChannel;
+		changed = true;
+	}
+	if (changed)
+		emit displaySettingsChanged();
+}
+
+void HipsSurvey::resetDisplaySettings()
+{
+	setDisplaySettings(1.f, 1.f, 1.f, 1.f, ColorChannelRgb);
+}
+
+bool HipsSurvey::hasDefaultDisplaySettings() const
+{
+	return qFuzzyCompare(gamma, 1.f) &&
+	       qFuzzyCompare(saturation, 1.f) &&
+	       qFuzzyCompare(brightness, 1.f) &&
+	       qFuzzyCompare(opacity, 1.f) &&
+	       colorChannel == ColorChannelRgb;
+}
+
 void HipsSurvey::hideProgressBar()
 {
 	if (progressBar)
@@ -266,7 +363,7 @@ void HipsSurvey::setHorizonsSurvey(const HipsSurveyP& horizons)
 	if (!horizons) tiles.clear();
 }
 
-void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
+void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback, bool withAtmosphericExtinction)
 {
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
@@ -277,10 +374,38 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	if (horizons) gotAllsky &= horizons->getAllsky();
 	if (!gotAllsky) return;
 	if (fader.getInterstate() == 0.0f) return;
-	sPainter->setColor(1, 1, 1, fader.getInterstate());
 
 	// Set the projection.
 	StelCore* core = StelApp::getInstance().getCore();
+	StelSkyDrawer* drawer = core->getSkyDrawer();
+	withAtmosphericExtinction = withAtmosphericExtinction && !planetarySurvey &&
+	                            drawer->getFlagHasAtmosphere() &&
+	                            drawer->getExtinction().getExtinctionCoefficient() >= 0.01f;
+
+	Vec3f extinctionColor(1.0f);
+	if (withAtmosphericExtinction)
+	{
+		const float lum = drawer->surfaceBrightnessToLuminance(12.f);
+		StelToneReproducer* eye = core->getToneReproducer();
+		float aLum = eye->adaptLuminanceScaled(lum);
+		Q_ASSERT(aLum > 0.f);
+		aLum = qMin(1.0f, aLum * 2.f);
+		extinctionColor.set(aLum, aLum, aLum);
+
+		const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
+		const float atmFactor = qMax(0.35f, 50.0f * (0.02f - atmLum));
+		extinctionColor *= atmFactor * atmFactor;
+	}
+
+	const float displayOpacity = planetarySurvey ? 1.f : opacity;
+	sPainter->setColor(1, 1, 1, fader.getInterstate() * displayOpacity);
+	if (!planetarySurvey)
+	{
+		sPainter->setTextureDisplayAdjustment(gamma, saturation, brightness,
+		                                      colorChannel, colorChannel != ColorChannelRgb,
+		                                      fader.getInterstate() * displayOpacity);
+	}
+
 	StelCore::FrameType frame = StelCore::FrameUninitialized;
 	if (hipsFrame == "galactic")
 		frame = StelCore::FrameGalactic;
@@ -367,9 +492,12 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
 	for (int i = 0; i < 12; i++)
 	{
-		drawTile(0, i, drawOrder, splitOrder, outside, viewportRegion, sPainter, obsVelocity, callback);
+		drawTile(0, i, drawOrder, splitOrder, outside, viewportRegion, sPainter, obsVelocity,
+		         callback, withAtmosphericExtinction, extinctionColor);
 	}
 
+	if (!planetarySurvey)
+		sPainter->resetTextureDisplayAdjustment();
 	updateProgressBar(nbLoadedTiles, nbVisibleTiles);
 }
 
@@ -522,7 +650,8 @@ bool HipsSurvey::bindTextures(HipsTile& tile, const int orderMin, Vec2f& texCoor
 
 void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
                           const SphericalCap& viewportShape, StelPainter* sPainter,
-                          Vec3d observerVelocity, DrawCallback callback)
+                          Vec3d observerVelocity, DrawCallback callback,
+                          bool withAtmosphericExtinction, const Vec3f& extinctionColor)
 {
 	Vec3d pos;
 	Mat3d mat3;
@@ -534,6 +663,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	QVector<Vec3d> vertsArray;
 	QVector<Vec2f> texArray;
+	QVector<Vec4f> colorArray;
 	QVector<uint16_t> indicesArray;
 	int nb;
 	Vec4f color = sPainter->getColor();
@@ -599,7 +729,12 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 
 	// Actually draw the tile, as a single quad.
 	alpha = color[3];
-	if (alpha < 1.0f)
+	if (!planetarySurvey && colorChannel != ColorChannelRgb)
+	{
+		sPainter->setBlending(true, GL_ONE, GL_ONE);
+		sPainter->setColor(color[0], color[1], color[2], alpha);
+	}
+	else if (alpha < 1.0f)
 	{
 		sPainter->setBlending(true);
 		sPainter->setColor(color[0], color[1], color[2], alpha);
@@ -611,9 +746,13 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	}
 	sPainter->setCullFace(true);
 	nb = fillArrays(order, pix, drawOrder, splitOrder, outside, sPainter, observerVelocity,
-	                texCoordShift, texCoordScale, vertsArray, texArray, indicesArray);
+	                texCoordShift, texCoordScale, vertsArray, texArray, colorArray, indicesArray,
+	                withAtmosphericExtinction, extinctionColor);
 	if (!callback) {
-		sPainter->setArrays(vertsArray.constData(), texArray.constData());
+		if (withAtmosphericExtinction)
+			sPainter->setArrays(vertsArray.constData(), texArray.constData(), colorArray.constData());
+		else
+			sPainter->setArrays(vertsArray.constData(), texArray.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, nb, 0, true, indicesArray.constData());
 	} else {
 		callback(vertsArray, texArray, indicesArray);
@@ -626,7 +765,8 @@ skip_render:
 		for (int i = 0; i < 4; i++)
 		{
 			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, outside,
-			         viewportShape, sPainter, observerVelocity, callback);
+			         viewportShape, sPainter, observerVelocity, callback,
+			         withAtmosphericExtinction, extinctionColor);
 		}
 	}
 	// Restore the painter color.
@@ -636,12 +776,21 @@ skip_render:
 int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
                            bool outside, StelPainter* sPainter, Vec3d observerVelocity,
                            const Vec2f& texCoordShift, const float texCoordScale,
-                           QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
+                           QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<Vec4f>& colors,
+                           QVector<uint16_t>& indices, bool withAtmosphericExtinction,
+                           const Vec3f& extinctionColor)
 {
 	Q_UNUSED(sPainter)
 	Mat3d mat3;
 	Vec3d pos;
 	Vec2f texPos;
+	StelCore* core = Q_NULLPTR;
+	const Extinction* extinction = Q_NULLPTR;
+	if (withAtmosphericExtinction)
+	{
+		core = StelApp::getInstance().getCore();
+		extinction = &core->getSkyDrawer()->getExtinction();
+	}
 	// First of all, min() limits gridSize to <256, because otherwise squaring it will overflow index type, uint16_t.
 	// But in practice 32 points per side seems already good enough, and getting to 128 points noticeably affects
 	// performance, so the upper limit is lower.
@@ -671,6 +820,24 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 
 			verts << pos;
 			tex << texPos * texCoordScale + texCoordShift;
+			if (withAtmosphericExtinction)
+			{
+				Vec3d altAzPos;
+				if (hipsFrame == "galactic")
+					altAzPos = core->j2000ToAltAz(core->galacticToJ2000(pos), StelCore::RefractionOn);
+				else if (hipsFrame == "equatorial")
+					altAzPos = core->j2000ToAltAz(pos, StelCore::RefractionOn);
+				else
+					altAzPos = core->heliocentricEclipticToAltAz(pos, StelCore::RefractionOn);
+				Q_ASSERT(fabs(altAzPos.normSquared() - 1.0) < 0.001);
+
+				float oneMag = 0.0f;
+				extinction->forward(altAzPos, &oneMag);
+				const float extinctionFactor = std::pow(0.7f, oneMag);
+				colors << Vec4f(extinctionColor[0] * extinctionFactor,
+				                extinctionColor[1] * extinctionFactor,
+				                extinctionColor[2] * extinctionFactor, 1.f);
+			}
 		}
 	}
 	for (uint16_t i = 0; i < gridSize; i++)

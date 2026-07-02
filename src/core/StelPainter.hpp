@@ -286,6 +286,12 @@ public:
 	//! Sets the color saturation effect value, from 0 (grayscale) to 1 (no effect).
 	void setSaturation(float v) { saturation = v; }
 
+	//! Sets texture color adjustment for subsequent simple textured draws.
+	void setTextureDisplayAdjustment(float gamma, float saturation, float brightness,
+	                                 int colorChannel, bool premultiplyAlpha, float alpha = 1.f);
+	//! Restores neutral texture color adjustment for subsequent simple textured draws.
+	void resetTextureDisplayAdjustment();
+
 	//! Create the OpenGL shaders programs used by the StelPainter.
 	//! This method needs to be called once at init.
 	static void initGLShaders();
@@ -324,6 +330,7 @@ public:
 	//! convenience method that enable and set all the given arrays.
 	//! It is equivalent to calling enableClientStates() and set the array pointer for each array.
 	void setArrays(const Vec3d* vertices, const Vec2f* texCoords=Q_NULLPTR, const Vec3f* colorArray=Q_NULLPTR, const Vec3f* normalArray=Q_NULLPTR);
+	void setArrays(const Vec3d* vertices, const Vec2f* texCoords, const Vec4f* colorArray, const Vec3f* normalArray=Q_NULLPTR);
 	void setArrays(const Vec3f* vertices, const Vec2f* texCoords=Q_NULLPTR, const Vec3f* colorArray=Q_NULLPTR, const Vec3f* normalArray=Q_NULLPTR);
 
 	//! Draws primitives using vertices from the arrays specified by setArrays() or enabled via enableClientStates().
@@ -436,6 +443,13 @@ private:
 	Vec4f currentColor;
 	//! Saturation effect adjustment.
 	float saturation = 1.f;
+	float textureGamma = 1.f;
+	float textureSaturation = 1.f;
+	float textureBrightness = 1.f;
+	int textureColorChannel = 0;
+	bool texturePremultiplyAlpha = false;
+	float textureAlpha = 1.f;
+	bool hasTextureDisplayAdjustment() const;
 
 	static QOpenGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {
@@ -465,8 +479,15 @@ private:
 		int vertex;
 		int texColor;
 		int texture;
+		int gamma;
+		int saturation;
+		int brightness;
+		int colorChannel;
+		int premultiplyAlpha;
 	};
 	static TexturesShaderVars texturesShaderVars;
+	static QOpenGLShaderProgram* adjustedTexturesShaderProgram;
+	static TexturesShaderVars adjustedTexturesShaderVars;
 	static QOpenGLShaderProgram* texturesColorShaderProgram;
 	struct TexturesColorShaderVars {
 		int projectionMatrix;
@@ -475,6 +496,11 @@ private:
 		int color;
 		int texture;
 		int saturation;
+		int gamma;
+		int brightness;
+		int colorChannel;
+		int premultiplyAlpha;
+		int alpha;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
 
@@ -511,4 +537,3 @@ private:
 };
 
 #endif // STELPAINTER_HPP
-
