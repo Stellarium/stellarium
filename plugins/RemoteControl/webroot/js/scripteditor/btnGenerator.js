@@ -443,7 +443,7 @@ define([
                 $btn.data('ischecked', boolVal2);
                 $btn.toggleClass('active', boolVal2);
                 $btn.find('.action-state-icon').text(boolVal2 ? '✓' : '✗');
-            $icon.removeClass('checked unchecked').addClass(boolVal2 ? 'checked' : 'unchecked');								
+            //$icon.removeClass('checked unchecked').addClass(boolVal2 ? 'checked' : 'unchecked');
             });
         }
         
