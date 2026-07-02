@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>objectVisibilityDialog</class>
+ <widget class="QWidget" name="objectVisibilityDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>820</width>
+    <height>620</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Object Visibility Configuration</string>
+  </property>
+  <layout class="QVBoxLayout" name="rootLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title">
+      <string>Object Visibility plug-in</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabs">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="visibilityTab">
+      <attribute name="title">
+       <string>Visibility</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="visibilityTabLayout">
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <property name="leftMargin">
+        <number>8</number>
+       </property>
+       <property name="topMargin">
+        <number>8</number>
+       </property>
+       <property name="rightMargin">
+        <number>8</number>
+       </property>
+       <property name="bottomMargin">
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="titleLabel">
+         <property name="text">
+          <string>Select a star or DSO, then click Calculate.</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-weight: bold; font-size: 14px;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ObjectVisibilityMapWidget" name="mapWidget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>1</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>200</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+
+       <!-- Legend -->
+       <item>
+        <widget class="QGroupBox" name="legendGroupBox">
+         <property name="title">
+          <string>Key of stars visibility</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox#legendGroupBox { background-color: white; color: black; } QGroupBox#legendGroupBox QLabel { background-color: transparent; color: black; }</string>
+         </property>
+         <layout class="QGridLayout" name="legendGridLayout">
+          <property name="leftMargin">
+           <number>8</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>8</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>12</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>4</number>
+          </property>
+
+          <item row="0" column="0">
+           <widget class="QLabel" name="legendSwatchSolid">
+            <property name="alignment">
+             <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0,60,220); font-weight: bold; font-family: monospace; background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string notr="true">────</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="legendTextSolid">
+            <property name="text">
+             <string>Limit of visibility</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <spacer name="legendRightSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QLabel" name="legendSwatchDashed">
+            <property name="alignment">
+             <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0,60,220); font-weight: bold; font-family: monospace; background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string notr="true">- - -</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="legendTextDashed">
+            <property name="text">
+             <string>Good visibility (default 5° above the horizon)</string>
+            </property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QLabel" name="legendSwatchPlus">
+            <property name="alignment">
+             <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0,60,220); font-weight: bold; font-family: monospace; background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string notr="true">+++++</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="legendTextPlus">
+            <property name="text">
+             <string>Passes zenith</string>
+            </property>
+           </widget>
+          </item>
+
+          <item row="3" column="0">
+           <widget class="QLabel" name="legendSwatchTriUp">
+            <property name="alignment">
+             <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0,60,220); font-weight: bold; background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string notr="true">▲▲▲▲▲</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="legendTextTriUp">
+            <property name="text">
+             <string>Circumpolar limit (northern hemisphere)</string>
+            </property>
+           </widget>
+          </item>
+
+          <item row="4" column="0">
+           <widget class="QLabel" name="legendSwatchTriDown">
+            <property name="alignment">
+             <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0,60,220); font-weight: bold; background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string notr="true">▼▼▼▼▼</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="legendTextTriDown">
+            <property name="text">
+             <string>Circumpolar limit (southern hemisphere)</string>
+            </property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Controls row -->
+       <item>
+        <layout class="QHBoxLayout" name="controlsLayout">
+         <property name="spacing">
+          <number>8</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="calculatePushButton">
+           <property name="text">
+            <string>Calculate</string>
+           </property>
+           <property name="toolTip">
+            <string>Compute visibility for the selected object.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="ctrlSep1">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="goodVisibilityLabel">
+           <property name="text">
+            <string>Good visibility above the horizon:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="goodVisibilityLimitSpinBox">
+           <property name="suffix">
+            <string>°</string>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>89</number>
+           </property>
+           <property name="value">
+            <number>5</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="ctrlSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>10</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="setLocationByClickCheckBox">
+           <property name="text">
+            <string>Set location by clicking on the map</string>
+           </property>
+           <property name="toolTip">
+            <string>Enable to move the observer by clicking on the map.  Stays active until you uncheck it — you can pick as many locations as you like.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="resetSettingsPushButton">
+           <property name="text">
+            <string>Reset settings</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="aboutTab">
+      <attribute name="title">
+       <string>About</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="aboutTabLayout">
+       <item>
+        <widget class="QTextBrowser" name="aboutTextBrowser">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TitleBar</class>
+   <extends>QWidget</extends>
+   <header>Dialog.hpp</header>
+   <container>0</container>
+  </customwidget>
+  <customwidget>
+   <class>ObjectVisibilityMapWidget</class>
+   <extends>QWidget</extends>
+   <header>ObjectVisibilityMapWidget.hpp</header>
+   <container>0</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

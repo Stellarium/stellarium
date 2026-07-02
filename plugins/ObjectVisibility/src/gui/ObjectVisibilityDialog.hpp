@@ -1,0 +1,113 @@
+/*
+ * Object Visibility plug-in for Stellarium
+ *
+ * Copyright (C) 2026 Atque
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
+ */
+
+#ifndef OBJECTVISIBILITYDIALOG_HPP
+#define OBJECTVISIBILITYDIALOG_HPP
+
+#include "StelDialog.hpp"
+#include <QString>
+
+class Ui_objectVisibilityDialog;
+class ObjectVisibility;
+class StelCore;
+
+//! Main window of the Object Visibility plug-in.
+//! @ingroup objectVisibility
+class ObjectVisibilityDialog : public StelDialog
+{
+	Q_OBJECT
+
+public:
+	ObjectVisibilityDialog();
+	~ObjectVisibilityDialog() override;
+
+public slots:
+	void retranslate() override;
+
+protected:
+	void createDialogContent() override;
+
+private slots:
+	//! User pressed "Calculate".  Reads the current selection from
+	//! StelObjectMgr, computes the declination at the current epoch
+	//! and feeds it to the map widget.
+	void calculate();
+
+	//! Called whenever the user's selection in Stellarium changes; we
+	//! use it only to enable/disable the Calculate button so the user
+	//! gets immediate feedback that planets etc. are not supported.
+	void onSelectedObjectChanged();
+
+	//! Toggle "click on map to set location" mode on the map widget.
+	void onSetLocationByClickToggled(bool on);
+
+	//! The user clicked the map while in click-to-set mode.
+	void onLocationPicked(double longitude, double latitude,
+	                      const QColor &color);
+
+	//! Spinbox value changed.
+	void onGoodVisibilityLimitChanged(int degrees);
+
+	//! Reset settings button.
+	void onResetSettings();
+
+	//! Re-sync the location marker AND the planet texture from
+	//! StelCore's current observer.  Called on startup and whenever
+	//! StelCore reports a location change.
+	void syncMarkerToObserver();
+
+private:
+	Ui_objectVisibilityDialog* ui;
+	ObjectVisibility*          plugin;
+
+	//! The object that was selected when Calculate was clicked.  We
+	//! keep a reference so the title label can be refreshed (e.g. on
+	//! retranslate) without re-running the geometry.  We hold it as
+	//! a type + ID (which is more stable than the English name
+	//! across releases).
+	QString  lockedObjectId;
+	QString  lockedObjectType;        // "Star" or "Nebula"
+	QString  lockedObjectNameI18n;    // for label
+
+	//! Cached english name of the planet whose texture is currently
+	//! displayed in the map widget.  We compare against this to avoid
+	//! reloading the same texture when the observer just changes
+	//! geographic position on the same planet.
+	QString  cachedPlanetName;
+
+	void setAboutHtml();
+	void refreshTitleLabel();
+	void updateCalculateButtonEnabled();
+
+	//! Compute the year label in astronomical convention from the
+	//! StelCore's current JD.  E.g. 2026, or -10000 for 10001 BCE.
+	static int currentYear(StelCore* core);
+
+	//! True iff the given StelObject type is a star or a DSO (nebula).
+	static bool isAcceptableType(const QString& type);
+
+	//! True iff the given (English) planet name is in our supported
+	//! list.  We restrict to bodies whose rotation-pole orientation is
+	//! reliably known in Stellarium: Earth, Moon, the eight planets,
+	//! Pluto, and the four Galilean moons.
+	static bool isSupportedPlanet(const QString& englishName);
+};
+
+#endif // OBJECTVISIBILITYDIALOG_HPP
