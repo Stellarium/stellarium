@@ -2132,6 +2132,7 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
+	     
              <item row="7" column="1">
               <layout class="QHBoxLayout" name="mouseTimeoutLayout">
                <item>
@@ -2181,6 +2182,7 @@
                </item>
               </layout>
              </item>
+	     
              <item row="1" column="1">
               <widget class="QCheckBox" name="diskViewportCheckbox">
                <property name="toolTip">
@@ -2191,6 +2193,7 @@
                </property>
               </widget>
              </item>
+	     
              <item row="6" column="3">
               <widget class="QCheckBox" name="kineticScrollingCheckBox">
                <property name="toolTip">
@@ -2201,6 +2204,7 @@
                </property>
               </widget>
              </item>
+	     
              <item row="9" column="3">
               <layout class="QHBoxLayout" name="horizontalLayout_14">
                <item>
@@ -2219,16 +2223,8 @@
                </item>
               </layout>
              </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
-               <property name="toolTip">
-                <string>Allow mouse to pan (drag)</string>
-               </property>
-               <property name="text">
-                <string>Enable mouse navigation</string>
-               </property>
-              </widget>
-             </item>
+	     
+	     
              <item row="0" column="3" rowspan="2">
               <layout class="QGridLayout" name="gridLayoutInclude">
                <item row="2" column="1">
@@ -2325,6 +2321,7 @@
                  </property>
                 </widget>
                </item>
+	       
                <item row="1" column="2">
                 <widget class="QCheckBox" name="nutationCheckBox">
                  <property name="toolTip">
@@ -2335,6 +2332,7 @@
                  </property>
                 </widget>
                </item>
+	       
                <item row="1" column="1">
                 <widget class="QCheckBox" name="topocentricCheckBox">
                  <property name="toolTip">
@@ -2347,6 +2345,7 @@
                </item>
               </layout>
              </item>
+	     
              <item row="3" column="3">
               <layout class="QHBoxLayout" name="horizontalLayout_fps">
                <item>
@@ -2528,16 +2527,8 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="enableMouseZoomingCheckBox">
-               <property name="toolTip">
-                <string>Allow mouse to zoom (mousewheel)</string>
-               </property>
-               <property name="text">
-                <string>Enable mouse zooming</string>
-               </property>
-              </widget>
-             </item>
+	     
+	     
              <item row="2" column="3">
               <widget class="QCheckBox" name="indicationMountModeCheckBox">
                <property name="toolTip">
@@ -2756,6 +2747,44 @@
                </item>
               </layout>
              </item>
+	     
+             <item row="5" column="1">
+			  <layout class="QHBoxLayout" name="horizontalLayout_mouseNav">
+			  <item>
+              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
+               <property name="toolTip">
+                <string>Allow mouse to pan (drag)</string>
+               </property>
+               <property name="text">
+                <string>Mouse navigation</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="enableMouseZoomingCheckBox">
+               <property name="toolTip">
+                <string>Allow mouse to zoom (mousewheel)</string>
+               </property>
+               <property name="text">
+                <string>Mouse zooming</string>
+               </property>
+              </widget>
+             </item>
+			 </layout>
+			 </item>
+			 
+			 
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="pushScreenEdgeCheckBox">
+               <property name="toolTip">
+                <string>Allow mouse to move view when at screen edge (Fullscreen only)</string>
+               </property>
+               <property name="text">
+                <string>Mouse push screen edge</string>
+               </property>
+              </widget>
+             </item>
+	     	     
             </layout>
            </widget>
           </item>
