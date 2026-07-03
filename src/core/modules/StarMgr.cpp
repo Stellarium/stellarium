@@ -528,9 +528,9 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 		useMmap = true;
 #endif
 
-		bool useDyn = StelApp::getInstance().getSettings()->value("astro/flag_dynamic_star_loading", false).toBool();
+		bool useCompactStorage = StelApp::getInstance().getSettings()->value("astro/flag_compact_star_storage", false).toBool();
 
-		ZoneArray* z = ZoneArray::create(catalogFilePath, useMmap, useDyn);
+		ZoneArray* z = ZoneArray::create(catalogFilePath, useMmap, useCompactStorage);
 		if (z)
 		{
 			if (z->level<gridLevels.size())

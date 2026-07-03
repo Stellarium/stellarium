@@ -30,11 +30,12 @@ struct LogEntry
 	int zonesChecked;
 };
 
-static DynamicZoneArray<Star2>* loadCat(const QString& path)
+static SpecialZoneArray<Star2>* loadCat(const QString& path, bool useCompact)
 {
-	auto* za = ZoneArray::create(path, true, true);
-	return dynamic_cast<DynamicZoneArray<Star2>*>(za);
+	auto* za = ZoneArray::create(path, true, useCompact);
+	return dynamic_cast<SpecialZoneArray<Star2>*>(za);
 }
+
 
 static void computeSampling(unsigned int totalStars, int sampleCount,
 			    uint64_t& stride, uint64_t& maxTest)
@@ -46,7 +47,7 @@ static void computeSampling(unsigned int totalStars, int sampleCount,
 }
 
 //! Phase 1: search the zone containing the HEALPix pixel center and the global zone.
-static bool runPhase1(DynamicZoneArray<Star2>* cat, StelGeodesicGrid* grid,
+static bool runPhase1(SpecialZoneArray<Star2>* cat, StelGeodesicGrid* grid,
 		      int level, StarId gid)
 {
 	int hp = static_cast<int>(gid / 34359738368ULL);
@@ -60,7 +61,7 @@ static bool runPhase1(DynamicZoneArray<Star2>* cat, StelGeodesicGrid* grid,
 }
 
 //! Search for a Gaia ID in the inside and border zones of a geodesic search result.
-static bool searchGaiaInZones(DynamicZoneArray<Star2>* cat, StarId gid,
+static bool searchGaiaInZones(SpecialZoneArray<Star2>* cat, StarId gid,
 			      const GeodesicSearchResult* result, int level,
 			      int& zonesChecked)
 {
@@ -82,7 +83,7 @@ static bool searchGaiaInZones(DynamicZoneArray<Star2>* cat, StarId gid,
 }
 
 //! Phase 2: search a small square around the HEALPix pixel center.
-static int runPhase2(DynamicZoneArray<Star2>* cat, StelGeodesicGrid* grid,
+static int runPhase2(SpecialZoneArray<Star2>* cat, StelGeodesicGrid* grid,
 		     int level, int maxSearchLevel, StarId gid)
 {
 	int hp = static_cast<int>(gid / 34359738368ULL);
@@ -132,11 +133,18 @@ int main(int argc, char** argv)
 	QCoreApplication app(argc, argv);
 	if (argc < 2)
 	{
-		printf("Usage: testGaiaSearch <cat_file> [sample_count]\n");
+		printf("Usage: testGaiaSearch <cat_file> [sample_count] [--compact]\n");
 		return 1;
 	}
 
-	auto* cat = loadCat(argv[1]);
+	bool useCompact = false;
+	for (int i = 2; i < argc; ++i)
+	{
+		if (strcmp(argv[i], "--compact") == 0)
+			useCompact = true;
+	}
+
+	auto* cat = loadCat(argv[1], useCompact);
 	if (!cat)
 	{
 		printf("ERROR: failed to load catalog\n");
@@ -144,11 +152,11 @@ int main(int argc, char** argv)
 	}
 
 	const int level = cat->level;
-	const unsigned int nz = cat->getNrOfZones();
 	const unsigned int totalStars = cat->getNrOfStars();
-	printf("Loaded level %d: %u stars, %u zones\n", level, totalStars, nz);
+	const unsigned int nrOfZones = 20 * (1U << (level * 2)) + 1;
+	printf("Loaded level %d: %u stars (compact=%s)\n", level, totalStars, useCompact ? "yes" : "no");
 
-	const int sampleCount = (argc >= 3) ? atoi(argv[2]) : 1000000;
+	const int sampleCount = (argc >= 3 && argv[2][0] != '-') ? atoi(argv[2]) : 1000000;
 	uint64_t stride = 0, maxTest = 0;
 	computeSampling(totalStars, sampleCount, stride, maxTest);
 	printf("Sampling %llu stars (stride=%llu)\n",
@@ -164,9 +172,10 @@ int main(int argc, char** argv)
 	timer.start();
 
 	uint64_t globalStarIdx = 0;
-	for (unsigned int z = 0; z < nz && stats.tested < maxTest; ++z)
+	for (unsigned int z = 0; z < nrOfZones && stats.tested < maxTest; ++z)
 	{
-		const uint32_t cnt = cat->zoneStarCount(z);
+		const auto zoneAccess = cat->getZone(static_cast<int>(z));
+		const uint32_t cnt = zoneAccess.size;
 		if (cnt == 0) continue;
 		const uint64_t firstInZone = globalStarIdx;
 		globalStarIdx += cnt;
@@ -178,9 +187,7 @@ int main(int argc, char** argv)
 		}
 		if (!need) continue;
 
-		const auto* stars = cat->loadZoneSync(static_cast<int>(z));
-		if (!stars) continue;
-
+		const Star2* stars = zoneAccess.stars;
 		for (uint32_t i = 0; i < cnt && stats.tested < maxTest; ++i)
 		{
 			if ((firstInZone + i) % stride != 0) continue;
