@@ -16,17 +16,17 @@
 # xilentura <vdevelopment@posteo.de>, 2026
 # cardinot <mcardinot@gmail.com>, 2026
 # Luca-Philipp Grumbach, 2026
-# Georg Zotti <Georg.Zotti@univie.ac.at>, 2026
 # Latein Lebt, 2026
+# Georg Zotti <Georg.Zotti@univie.ac.at>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-06-25 01:49+0700\n"
+"POT-Creation-Date: 2026-06-26 20:40+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Latein Lebt, 2026\n"
+"Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2026\n"
 "Language-Team: German (https://app.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,11 +80,11 @@ msgstr "Asterismus"
 #: src/core/modules/GridLinesMgr.cpp:2048
 #: src/core/modules/SpecialMarkersMgr.cpp:314
 #: src/core/modules/LandscapeMgr.cpp:894
-#: src/core/modules/NomenclatureMgr.cpp:90 src/core/modules/NebulaMgr.cpp:469
+#: src/core/modules/NomenclatureMgr.cpp:94 src/core/modules/NebulaMgr.cpp:469
 #: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:386
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
 #: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:158
-#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:719
+#: src/core/modules/HipsMgr.cpp:159 src/core/StelApp.cpp:721
 #: src/core/StelCore.cpp:312 src/core/StelSkyLayerMgr.cpp:83
 #: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:983
 msgid "Display Options"
@@ -2214,35 +2214,35 @@ msgstr "Ausgedehnte Ebene."
 msgid "A streak or stripe of color."
 msgstr "Farbstreifen."
 
-#: src/core/modules/NomenclatureMgr.cpp:91
+#: src/core/modules/NomenclatureMgr.cpp:95
 msgid "Nomenclature labels"
 msgstr "Beschriftungen für Oberflächenstrukturen"
 
-#: src/core/modules/NomenclatureMgr.cpp:92
+#: src/core/modules/NomenclatureMgr.cpp:96
 msgid "Special nomenclature points only"
 msgstr "Nur geometriebasierte Spezialpunkte"
 
-#: src/core/modules/NomenclatureMgr.cpp:111
+#: src/core/modules/NomenclatureMgr.cpp:115
 msgid "North Pole"
 msgstr "Nordpol"
 
-#: src/core/modules/NomenclatureMgr.cpp:115
+#: src/core/modules/NomenclatureMgr.cpp:119
 msgid "South Pole"
 msgstr "Südpol"
 
-#: src/core/modules/NomenclatureMgr.cpp:120
+#: src/core/modules/NomenclatureMgr.cpp:124
 msgid "East"
 msgstr "Ostpunkt"
 
-#: src/core/modules/NomenclatureMgr.cpp:125
+#: src/core/modules/NomenclatureMgr.cpp:129
 msgid "West"
 msgstr "Westpunkt"
 
-#: src/core/modules/NomenclatureMgr.cpp:130
+#: src/core/modules/NomenclatureMgr.cpp:134
 msgid "Centre"
 msgstr "Mitte"
 
-#: src/core/modules/NomenclatureMgr.cpp:135
+#: src/core/modules/NomenclatureMgr.cpp:139
 msgid "Subsolar"
 msgstr "Subsolarpunkt"
 
@@ -4189,7 +4189,7 @@ msgstr ""
 "Der Gasschweif wird auf %1 Millionen Kilometer geschätzt, oder %2 Grad am "
 "Kimmel"
 
-#: src/core/modules/Comet.cpp:599 src/core/StelProjectorClasses.cpp:873
+#: src/core/modules/Comet.cpp:600 src/core/StelProjectorClasses.cpp:873
 msgid "Orthographic"
 msgstr "Orthografisch"
 
@@ -4528,147 +4528,147 @@ msgstr "Dezember-Sonnenwende im nächsten Jahr"
 msgid "December solstice at previous year"
 msgstr "Dezember-Sonnenwende im vorigen Jahr"
 
-#: src/core/StelApp.cpp:494
+#: src/core/StelApp.cpp:496
 msgid "Initializing textures..."
 msgstr "Initialisiere Texturen..."
 
-#: src/core/StelApp.cpp:498
+#: src/core/StelApp.cpp:500
 msgid "Initializing network access..."
 msgstr "Initialisiere Netzwerkzugang..."
 
-#: src/core/StelApp.cpp:501
+#: src/core/StelApp.cpp:503
 msgid "Initializing network disk cache..."
 msgstr "Initialisiere Netzwerkcache..."
 
-#: src/core/StelApp.cpp:515
+#: src/core/StelApp.cpp:517
 msgid "Initializing network proxy..."
 msgstr "Initialisiere Netzwerkproxy..."
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:533
 msgid "Initializing Object Database..."
 msgstr "Initialisiere Objektdatenbank..."
 
-#: src/core/StelApp.cpp:537
+#: src/core/StelApp.cpp:539
 msgid "Initializing HiPS survey..."
 msgstr "Initialisiere HiPS-Gesamtbilder..."
 
-#: src/core/StelApp.cpp:543
+#: src/core/StelApp.cpp:545
 msgid "Initializing Solar System objects..."
 msgstr "Initialisiere Sonnensystemobjekte..."
 
-#: src/core/StelApp.cpp:549
+#: src/core/StelApp.cpp:551
 msgid "Initializing planetary nomenclature..."
 msgstr "Initialisiere Planeten-Topographiebezeichnungen..."
 
-#: src/core/StelApp.cpp:555
+#: src/core/StelApp.cpp:557
 msgid "Initializing stars..."
 msgstr "Initialisiere Sterne..."
 
-#: src/core/StelApp.cpp:560
+#: src/core/StelApp.cpp:562
 msgid "Initializing core..."
 msgstr "Initialisiere Kern..."
 
-#: src/core/StelApp.cpp:564
+#: src/core/StelApp.cpp:566
 msgid "Initializing deep-sky objects..."
 msgstr "Initialisiere Deep-Sky-Objekte..."
 
-#: src/core/StelApp.cpp:570
+#: src/core/StelApp.cpp:572
 msgid "Initializing Milky Way..."
 msgstr "Initialisiere Milchstraße..."
 
-#: src/core/StelApp.cpp:576
+#: src/core/StelApp.cpp:578
 msgid "Initializing zodiacal light..."
 msgstr "Initialisiere Zodiakallicht..."
 
-#: src/core/StelApp.cpp:582
+#: src/core/StelApp.cpp:584
 msgid "Initializing sky image layer..."
 msgstr "Initialisiere Sky Image Layer..."
 
-#: src/core/StelApp.cpp:588
+#: src/core/StelApp.cpp:590
 msgid "Initializing TOAST surveys..."
 msgstr "Initialisiere TOAST-Gesamtbild..."
 
-#: src/core/StelApp.cpp:602
+#: src/core/StelApp.cpp:604
 msgid "Initializing audio..."
 msgstr "Initialisiere Audio..."
 
-#: src/core/StelApp.cpp:610
+#: src/core/StelApp.cpp:612
 msgid "Initializing video..."
 msgstr "Initialisiere Video..."
 
-#: src/core/StelApp.cpp:618
+#: src/core/StelApp.cpp:620
 msgid "Initializing speech output..."
 msgstr "Initialisiere Sprachausgabe..."
 
-#: src/core/StelApp.cpp:625
+#: src/core/StelApp.cpp:627
 msgid "Initializing constellations..."
 msgstr "Initialisiere Sternbilder..."
 
-#: src/core/StelApp.cpp:631
+#: src/core/StelApp.cpp:633
 msgid "Initializing asterisms..."
 msgstr "Initialisiere Asterismen..."
 
-#: src/core/StelApp.cpp:637
+#: src/core/StelApp.cpp:639
 msgid "Initializing landscape..."
 msgstr "Initialisiere Landschaft..."
 
-#: src/core/StelApp.cpp:650
+#: src/core/StelApp.cpp:652
 msgid "Initializing grid lines..."
 msgstr "Initialisiere Koordinatenlinien..."
 
-#: src/core/StelApp.cpp:655
+#: src/core/StelApp.cpp:657
 msgid "Initializing special markers..."
 msgstr "Initialisiere Sondermarkierungen..."
 
-#: src/core/StelApp.cpp:661
+#: src/core/StelApp.cpp:663
 msgid "Initializing sporadic meteors..."
 msgstr "Initialisiere sporadische Meteore..."
 
-#: src/core/StelApp.cpp:667
+#: src/core/StelApp.cpp:669
 msgid "Initializing user labels..."
 msgstr "Initialisiere benutzerdefinierte Bezeichner..."
 
-#: src/core/StelApp.cpp:672
+#: src/core/StelApp.cpp:674
 msgid "Initializing sky cultures..."
 msgstr "Initialisiere Sternbildkulturen..."
 
-#: src/core/StelApp.cpp:676
+#: src/core/StelApp.cpp:678
 msgid "Initializing user markers..."
 msgstr "Initialisiere benutzerdefinierte Markierungen..."
 
-#: src/core/StelApp.cpp:682
+#: src/core/StelApp.cpp:684
 msgid "Initializing custom objects..."
 msgstr "Initialisiere benutzerdefinierte Objekte..."
 
-#: src/core/StelApp.cpp:688
+#: src/core/StelApp.cpp:690
 msgid "Initializing highlights..."
 msgstr "Initialisiere Highlights..."
 
-#: src/core/StelApp.cpp:694
+#: src/core/StelApp.cpp:696
 msgid "Initializing specific time..."
 msgstr "Initialisiere bestimmte Zeiten..."
 
-#: src/core/StelApp.cpp:702
+#: src/core/StelApp.cpp:704
 msgid "Initializing scripting..."
 msgstr "Initialisiere Skript-System..."
 
-#: src/core/StelApp.cpp:707
+#: src/core/StelApp.cpp:709
 msgid "Initializing color scheme..."
 msgstr "Initialisiere Farbschema..."
 
-#: src/core/StelApp.cpp:719 src/ui_configurationDialog.h:2658
+#: src/core/StelApp.cpp:721 src/ui_configurationDialog.h:2658
 msgid "Night mode"
 msgstr "Nachtmodus"
 
-#: src/core/StelApp.cpp:754
+#: src/core/StelApp.cpp:756
 msgid "Initializing SPOUT sender..."
 msgstr "Initialisiere SPOUT-Sender..."
 
-#: src/core/StelApp.cpp:764
+#: src/core/StelApp.cpp:766
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Spout-Sender nicht möglich. Details im Logfile."
 
-#: src/core/StelApp.cpp:791
+#: src/core/StelApp.cpp:793
 msgid "Loading plugin"
 msgstr "Lade Plugin"
 
@@ -6636,62 +6636,86 @@ msgctxt "short month name"
 msgid "Nov"
 msgstr "Nov"
 
-#: src/core/StelLocaleMgr.cpp:421 plugins/Calendars/src/JulianCalendar.cpp:56
+#: src/core/StelLocaleMgr.cpp:421
+#: plugins/Calendars/src/ByzantineCalendar.cpp:48
+#: plugins/Calendars/src/JulianCalendar.cpp:56
 msgctxt "long month name"
 msgid "December"
 msgstr "Dezember"
 
-#: src/core/StelLocaleMgr.cpp:422 plugins/Calendars/src/JulianCalendar.cpp:45
+#: src/core/StelLocaleMgr.cpp:422
+#: plugins/Calendars/src/ByzantineCalendar.cpp:49
+#: plugins/Calendars/src/JulianCalendar.cpp:45
 msgctxt "long month name"
 msgid "January"
 msgstr "Januar"
 
-#: src/core/StelLocaleMgr.cpp:423 plugins/Calendars/src/JulianCalendar.cpp:46
+#: src/core/StelLocaleMgr.cpp:423
+#: plugins/Calendars/src/ByzantineCalendar.cpp:50
+#: plugins/Calendars/src/JulianCalendar.cpp:46
 msgctxt "long month name"
 msgid "February"
 msgstr "Februar"
 
-#: src/core/StelLocaleMgr.cpp:424 plugins/Calendars/src/JulianCalendar.cpp:47
+#: src/core/StelLocaleMgr.cpp:424
+#: plugins/Calendars/src/ByzantineCalendar.cpp:51
+#: plugins/Calendars/src/JulianCalendar.cpp:47
 msgctxt "long month name"
 msgid "March"
 msgstr "März"
 
-#: src/core/StelLocaleMgr.cpp:425 plugins/Calendars/src/JulianCalendar.cpp:48
+#: src/core/StelLocaleMgr.cpp:425
+#: plugins/Calendars/src/ByzantineCalendar.cpp:52
+#: plugins/Calendars/src/JulianCalendar.cpp:48
 msgctxt "long month name"
 msgid "April"
 msgstr "April"
 
-#: src/core/StelLocaleMgr.cpp:426 plugins/Calendars/src/JulianCalendar.cpp:49
+#: src/core/StelLocaleMgr.cpp:426
+#: plugins/Calendars/src/ByzantineCalendar.cpp:53
+#: plugins/Calendars/src/JulianCalendar.cpp:49
 msgctxt "long month name"
 msgid "May"
 msgstr "Mai"
 
-#: src/core/StelLocaleMgr.cpp:427 plugins/Calendars/src/JulianCalendar.cpp:50
+#: src/core/StelLocaleMgr.cpp:427
+#: plugins/Calendars/src/ByzantineCalendar.cpp:54
+#: plugins/Calendars/src/JulianCalendar.cpp:50
 msgctxt "long month name"
 msgid "June"
 msgstr "Juni"
 
-#: src/core/StelLocaleMgr.cpp:428 plugins/Calendars/src/JulianCalendar.cpp:51
+#: src/core/StelLocaleMgr.cpp:428
+#: plugins/Calendars/src/ByzantineCalendar.cpp:55
+#: plugins/Calendars/src/JulianCalendar.cpp:51
 msgctxt "long month name"
 msgid "July"
 msgstr "Juli"
 
-#: src/core/StelLocaleMgr.cpp:429 plugins/Calendars/src/JulianCalendar.cpp:52
+#: src/core/StelLocaleMgr.cpp:429
+#: plugins/Calendars/src/ByzantineCalendar.cpp:56
+#: plugins/Calendars/src/JulianCalendar.cpp:52
 msgctxt "long month name"
 msgid "August"
 msgstr "August"
 
-#: src/core/StelLocaleMgr.cpp:430 plugins/Calendars/src/JulianCalendar.cpp:53
+#: src/core/StelLocaleMgr.cpp:430
+#: plugins/Calendars/src/ByzantineCalendar.cpp:45
+#: plugins/Calendars/src/JulianCalendar.cpp:53
 msgctxt "long month name"
 msgid "September"
 msgstr "September"
 
-#: src/core/StelLocaleMgr.cpp:431 plugins/Calendars/src/JulianCalendar.cpp:54
+#: src/core/StelLocaleMgr.cpp:431
+#: plugins/Calendars/src/ByzantineCalendar.cpp:46
+#: plugins/Calendars/src/JulianCalendar.cpp:54
 msgctxt "long month name"
 msgid "October"
 msgstr "Oktober"
 
-#: src/core/StelLocaleMgr.cpp:432 plugins/Calendars/src/JulianCalendar.cpp:55
+#: src/core/StelLocaleMgr.cpp:432
+#: plugins/Calendars/src/ByzantineCalendar.cpp:47
+#: plugins/Calendars/src/JulianCalendar.cpp:55
 msgctxt "long month name"
 msgid "November"
 msgstr "November"
@@ -18606,6 +18630,8 @@ msgid "Month"
 msgstr "Monat"
 
 #: src/ui_astroCalcDialog.h:2419 src/ui_astroCalcExtraEphemerisDialog.h:268
+#: plugins/Calendars/src/AstroHinduLunarCalendar.cpp:84
+#: plugins/Calendars/src/NewHinduLunarCalendar.cpp:104
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:98
 #: plugins/Calendars/src/ui_calendarsDialog.h:1009
 msgid "Day"
@@ -21035,7 +21061,7 @@ msgstr "Textfarbe"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1466
 msgid "Color for reticle and crosshair"
-msgstr "Fadenkreuz- und Zielpunktfarbe"
+msgstr "Farbe für Strichgitter und Fadenkreuz"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1469
 msgid "Reticle Color"
@@ -34319,6 +34345,30 @@ msgstr "(aweleach)"
 msgid "Armenian Era"
 msgstr "Armenische Ära"
 
+#: plugins/Calendars/src/AstroHinduLunarCalendar.cpp:78
+#: plugins/Calendars/src/NewHinduLunarCalendar.cpp:98
+msgctxt "Hindu Calendar element"
+msgid "Tithi"
+msgstr "Tithi"
+
+#: plugins/Calendars/src/AstroHinduLunarCalendar.cpp:79
+#: plugins/Calendars/src/NewHinduLunarCalendar.cpp:99
+msgctxt "Hindu Calendar element"
+msgid "Nakṣatra"
+msgstr "Nakṣatra"
+
+#: plugins/Calendars/src/AstroHinduLunarCalendar.cpp:80
+#: plugins/Calendars/src/NewHinduLunarCalendar.cpp:100
+msgctxt "Hindu Calendar element"
+msgid "Yoga"
+msgstr "Yoga"
+
+#: plugins/Calendars/src/AstroHinduLunarCalendar.cpp:81
+#: plugins/Calendars/src/NewHinduLunarCalendar.cpp:101
+msgctxt "Hindu Calendar element"
+msgid "Karana"
+msgstr "Karana"
+
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:39
 msgctxt "Aztec Tonalpohualli name"
 msgid "Cipactli (Alligator)"
@@ -34513,6 +34563,231 @@ msgstr "Tititl (Sturm)"
 msgctxt "Aztec Xihuitl month name"
 msgid "Nemontemi (Full in vain)"
 msgstr "Nemontemi (unnütz)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:40
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:50
+msgctxt "Bahai day/month name"
+msgid "Jalāl (Glory)"
+msgstr "Jalāl (Ruhm)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:41
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:51
+msgctxt "Bahai day/month name"
+msgid "Jamāl (Beauty)"
+msgstr "Jamāl (Schönheit)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:42
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:56
+msgctxt "Bahai day/month name"
+msgid "Kamāl (Perfection)"
+msgstr "Kamāl (Perfektion)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:43
+msgctxt "Bahai day name"
+msgid "Fiḍāl (Grace)"
+msgstr "Fiḍāl (Gnade)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:44
+msgctxt "Bahai day name"
+msgid "‘Idāl (Justice)"
+msgstr "‘Idāl (Gerechtigkeit)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:45
+msgctxt "Bahai day name"
+msgid "Istijlāl (Majesty)"
+msgstr "Istijlāl (Majestät)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:46
+msgctxt "Bahai day name"
+msgid "Istiqlāl (Independence)"
+msgstr "Istiqlāl (Unabhängigkeit)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:48
+msgctxt "Bahai day/month name"
+msgid "Ayyām-i-Hā (Days of God)"
+msgstr "Ayyām-i-Hā (Gottestage)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:49
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:77
+msgctxt "Bahai day/month and year-cycle (Vahid) name"
+msgid "Bahā’ (Splendor)"
+msgstr "Bahā’ (Pracht)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:52
+msgctxt "Bahai day/month name"
+msgid "‘Aẓamat (Grandeur)"
+msgstr "‘Aẓamat (Herrlichkeit)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:53
+msgctxt "Bahai day/month name"
+msgid "Nūr (Light)"
+msgstr "Nūr (Licht)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:54
+msgctxt "Bahai day/month name"
+msgid "Raḥmat (Mercy)"
+msgstr "Raḥmat (Barmherzigkeit)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:55
+msgctxt "Bahai day/month name"
+msgid "Kalimāt (Words)"
+msgstr "Kalimāt (Worte)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:57
+msgctxt "Bahai day/month name"
+msgid "Asmā’ (Names)"
+msgstr "Asmā’ (Namen)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:58
+msgctxt "Bahai day/month name"
+msgid "‘Izzat (Might)"
+msgstr "‘Izzat (Macht)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:59
+msgctxt "Bahai day/month name"
+msgid "Mashīyyat (Will)"
+msgstr "Mashīyyat (Wille)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:60
+msgctxt "Bahai day/month name"
+msgid "‘Ilm (Knowledge)"
+msgstr "‘Ilm (Wissen)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:61
+msgctxt "Bahai day/month name"
+msgid "Qudrat (Power)"
+msgstr "Qudrat (Stärke)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:62
+msgctxt "Bahai day/month name"
+msgid "Qawl (Speech)"
+msgstr "Qawl (Sprache)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:63
+msgctxt "Bahai day/month name"
+msgid "Masā’il (Questions)"
+msgstr "Masā’il (Fragen)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:64
+msgctxt "Bahai day/month name"
+msgid "Sharaf (Honor)"
+msgstr "Sharaf (Ehre)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:65
+msgctxt "Bahai day/month name"
+msgid "Sulṭān (Sovereignty)"
+msgstr "Sulṭān (Hoheit)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:66
+msgctxt "Bahai day/month name"
+msgid "Mulk (Dominion)"
+msgstr "Mulk (Herrschaft)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:67
+msgctxt "Bahai day/month name"
+msgid "‘Alā’ (Loftiness)"
+msgstr "‘Alā’ (Erhabenheit)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:69
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Alif (letter A)"
+msgstr "Alif (Buchstabe A)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:70
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Bā’ (letter B)"
+msgstr "Bā’ (Buchstabe B)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:71
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Ab (Father)"
+msgstr "Ab (Vater)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:72
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Dāl (letter D)"
+msgstr "Dāl (Buchstabe D)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:73
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Bāb (Gate)"
+msgstr "Bāb (Tor)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:74
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Vāv (letter V)"
+msgstr "Vāv (Buchstabe V)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:75
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Abad (Eternity)"
+msgstr "Abad (Ewigkeit)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:76
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Jād (Generosity)"
+msgstr "Jād (Großzügigkeit)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:78
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Ḥubb (Love)"
+msgstr "Ḥubb (Liebe)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:79
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Bahhāj (Delightful)"
+msgstr "Bahhāj (Entzückend)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:80
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Javāb (Answer)"
+msgstr "Javāb (Antwort)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:81
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Aḥad (Single)"
+msgstr "Aḥad (Alleine)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:82
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Vahhāb (Bountiful)"
+msgstr "Vahhāb (Großzügig)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:83
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Vidād (Affection)"
+msgstr "Vidād (Zuneigung)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:84
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Badī’ (Beginning)"
+msgstr "Badī’ (Anfang)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:85
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Bahī (Luminous)"
+msgstr "Bahī (Leuchtend)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:86
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Abhā (Most Luminous)"
+msgstr "Abhā (Hellstleuchtend)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:87
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Vāḥid (Unity)"
+msgstr "Vāḥid (Einheit)"
+
+#. TRANSLATORS: Bahai Calendar output string
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:144
+#, qt-format
+msgctxt "Bahai calendar output"
+msgid ""
+"%1, day of %2 (%3) of the month of %4 (%5), <br/>of the year %6 (%7), of "
+"Vāḥid %8, of Kull-i-shay %9 of the Bahá’í Era"
+msgstr ""
+"%1, Tag %2 (%3) des Monats %4 (%5), <br/>des Jahres %6 (%7) in Vāḥid %8, des"
+" Kull-i-shay %9 der Bahá’í-Ära"
 
 #: plugins/Calendars/src/BalinesePawukonCalendar.cpp:187
 msgctxt "Balinese Pawukon date name"
@@ -34931,6 +35206,455 @@ msgctxt "Balinese Pawukon date name"
 msgid "Watugunung"
 msgstr "Watugunung"
 
+#: plugins/Calendars/src/ByzantineCalendar.cpp:37
+msgctxt "long day name"
+msgid "Day of the Lord"
+msgstr "Tag des Herrn"
+
+#: plugins/Calendars/src/ByzantineCalendar.cpp:38
+msgctxt "long day name"
+msgid "Second day"
+msgstr "Zweiter Tag"
+
+#: plugins/Calendars/src/ByzantineCalendar.cpp:39
+msgctxt "long day name"
+msgid "Third day"
+msgstr "Dritter Tag"
+
+#: plugins/Calendars/src/ByzantineCalendar.cpp:40
+msgctxt "long day name"
+msgid "Fourth day"
+msgstr "Vierter Tag"
+
+#: plugins/Calendars/src/ByzantineCalendar.cpp:41
+msgctxt "long day name"
+msgid "Fifth day"
+msgstr "Fünfter Tag"
+
+#: plugins/Calendars/src/ByzantineCalendar.cpp:42
+msgctxt "long day name"
+msgid "Day of Preparation"
+msgstr "Rüsttag"
+
+#: plugins/Calendars/src/ByzantineCalendar.cpp:43
+msgctxt "long day name"
+msgid "Sabbaton"
+msgstr "Sabbaton"
+
+#: plugins/Calendars/src/ByzantineCalendar.cpp:77
+msgctxt "Annus Mundi"
+msgid "A.M."
+msgstr "A.M."
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:43
+msgctxt "Chinese calendar major Solar term"
+msgid "Yŭshuĭ (Rain Water)"
+msgstr "Yŭshuĭ (Regen)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:44
+msgctxt "Chinese calendar major Solar term"
+msgid "Chūnfēn (Spring Equinox)"
+msgstr "Chūnfēn (Frühlingsäquinox)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:45
+msgctxt "Chinese calendar major Solar term"
+msgid "Gŭyŭ (Grain Rain)"
+msgstr "Gŭyŭ (Regen auf die Saat)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:46
+msgctxt "Chinese calendar major Solar term"
+msgid "Xiăomăn (Grain Full)"
+msgstr "Xiăomăn (Kleine Fülle/Ährenbildung)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:47
+msgctxt "Chinese calendar major Solar term"
+msgid "Xiàzhì (Summer Solstice)"
+msgstr "Xiàzhì (Sommersonnwende)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:48
+msgctxt "Chinese calendar major Solar term"
+msgid "Dàshŭ (Great Heat)"
+msgstr "Dàshŭ (Große Hitze)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:49
+msgctxt "Chinese calendar major Solar term"
+msgid "Chŭshŭ (Limit of Heat)"
+msgstr "Chŭshŭ (Ende der Hitze)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:50
+msgctxt "Chinese calendar major Solar term"
+msgid "Qiūfēn (Autumnal Equinox)"
+msgstr "Qiūfēn (Herbstäquinox)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:51
+msgctxt "Chinese calendar major Solar term"
+msgid "Shuāngjiàng (Descent of Frost)"
+msgstr "Shuāngjiàng (Reif)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:52
+msgctxt "Chinese calendar major Solar term"
+msgid "Xiăoxuĕ (Slight Snow)"
+msgstr "Xiăoxuĕ (Mäßiger Schnee)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:53
+msgctxt "Chinese calendar major Solar term"
+msgid "Dōngzhì (Winter Solstice)"
+msgstr "Dōngzhì (Wintersonnwende)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:54
+msgctxt "Chinese calendar major Solar term"
+msgid "Dàhán (Great Cold)"
+msgstr "Dàhán (Große Kälte)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:56
+msgctxt "Chinese calendar minor Solar term"
+msgid "Lìchūn (Beginning of Spring)"
+msgstr "Lìchūn (Frühlingsanfang)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:57
+msgctxt "Chinese calendar minor Solar term"
+msgid "Jīngzhé (Waking of Insects)"
+msgstr "Jīngzhé (Erwachen der Insekten)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:58
+msgctxt "Chinese calendar minor Solar term"
+msgid "Qīngmíng (Pure Brightness)"
+msgstr "Qīngmíng (Klar und hell)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:59
+msgctxt "Chinese calendar minor Solar term"
+msgid "Lìxià (Beginning of Summer)"
+msgstr "Lìxià (Sommeranfang)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:60
+msgctxt "Chinese calendar minor Solar term"
+msgid "Mángzhòng (Grain in Ear)"
+msgstr "Mángzhòng (Körner mit Grannen/Ährenzeit)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:61
+msgctxt "Chinese calendar minor Solar term"
+msgid "Xiăoshŭ (Slight Heat)"
+msgstr "Xiăoshŭ (Mäßige Hitze)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:62
+msgctxt "Chinese calendar minor Solar term"
+msgid "Lìqiū (Beginning of Autumn)"
+msgstr "Lìqiū (Herbstanfang)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:63
+msgctxt "Chinese calendar minor Solar term"
+msgid "Báilù (White Dew)"
+msgstr "Báilù (Weißer Tau)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:64
+msgctxt "Chinese calendar minor Solar term"
+msgid "Hánlù (Cold Dew)"
+msgstr "Hánlù (Kalter Tau)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:65
+msgctxt "Chinese calendar minor Solar term"
+msgid "Lìdōng (Beginning of Winter)"
+msgstr "Lìdōng (Winteranfang)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:66
+msgctxt "Chinese calendar minor Solar term"
+msgid "Dàxuĕ (Great Snow)"
+msgstr "Dàxuĕ (Großer Schnee)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:67
+msgctxt "Chinese calendar minor Solar term"
+msgid "Xiăohán (Slight Cold)"
+msgstr "Xiăohán (Mäßige Kälte)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:69
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Jiă"
+msgstr "Jiă"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:70
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Yĭ"
+msgstr "Yĭ"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:71
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Bĭng"
+msgstr "Bĭng"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:72
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Dīng"
+msgstr "Dīng"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:73
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Wù"
+msgstr "Wù"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:74
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Jĭ"
+msgstr "Jĭ"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:75
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Gēng"
+msgstr "Gēng"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:76
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Xīn"
+msgstr "Xīn"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:77
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Rén"
+msgstr "Rén"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:78
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Guĭ"
+msgstr "Guĭ"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:80
+#: plugins/Calendars/src/KoreanCalendar.cpp:81
+#: plugins/Calendars/src/VietnameseCalendar.cpp:94
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Tree, male"
+msgstr "Baum, männlich"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:81
+#: plugins/Calendars/src/KoreanCalendar.cpp:82
+#: plugins/Calendars/src/VietnameseCalendar.cpp:95
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Tree, female"
+msgstr "Baum, weiblich"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:82
+#: plugins/Calendars/src/KoreanCalendar.cpp:83
+#: plugins/Calendars/src/VietnameseCalendar.cpp:96
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Fire, male"
+msgstr "Feuer, männlich"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:83
+#: plugins/Calendars/src/KoreanCalendar.cpp:84
+#: plugins/Calendars/src/VietnameseCalendar.cpp:97
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Fire, female"
+msgstr "Feuer, weiblich"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:84
+#: plugins/Calendars/src/KoreanCalendar.cpp:85
+#: plugins/Calendars/src/VietnameseCalendar.cpp:98
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Earth, male"
+msgstr "Erde, männlich"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:85
+#: plugins/Calendars/src/KoreanCalendar.cpp:86
+#: plugins/Calendars/src/VietnameseCalendar.cpp:99
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Earth, female"
+msgstr "Erde, weiblich"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:86
+#: plugins/Calendars/src/KoreanCalendar.cpp:87
+#: plugins/Calendars/src/VietnameseCalendar.cpp:100
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Metal, male"
+msgstr "Metall, männlich"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:87
+#: plugins/Calendars/src/KoreanCalendar.cpp:88
+#: plugins/Calendars/src/VietnameseCalendar.cpp:101
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Metal, female"
+msgstr "Metall, weiblich"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:88
+#: plugins/Calendars/src/KoreanCalendar.cpp:89
+#: plugins/Calendars/src/VietnameseCalendar.cpp:102
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Water, male"
+msgstr "Wasser, männlich"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:89
+#: plugins/Calendars/src/KoreanCalendar.cpp:90
+#: plugins/Calendars/src/VietnameseCalendar.cpp:103
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Water, female"
+msgstr "Wasser, weiblich"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:91
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Zĭ"
+msgstr "Zĭ"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:92
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Chŏu"
+msgstr "Chŏu"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:93
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Yín"
+msgstr "Yín"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:94
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Măo"
+msgstr "Măo"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:95
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Chén"
+msgstr "Chén"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:96
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Sì"
+msgstr "Sì"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:97
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Wŭ"
+msgstr "Wŭ"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:98
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Wèi"
+msgstr "Wèi"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:99
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Shēn"
+msgstr "Shēn"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:100
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Yŏu"
+msgstr "Yŏu"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:101
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Xū"
+msgstr "Xū"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:102
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Hài"
+msgstr "Hài"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:104
+#: plugins/Calendars/src/KoreanCalendar.cpp:106
+#: plugins/Calendars/src/VietnameseCalendar.cpp:119
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Rat"
+msgstr "Ratte"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:105
+#: plugins/Calendars/src/KoreanCalendar.cpp:107
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Ox"
+msgstr "Ochse"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:106
+#: plugins/Calendars/src/KoreanCalendar.cpp:108
+#: plugins/Calendars/src/VietnameseCalendar.cpp:121
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Tiger"
+msgstr "Tiger"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:107
+#: plugins/Calendars/src/KoreanCalendar.cpp:109
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Hare"
+msgstr "Kaninchen"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:108
+#: plugins/Calendars/src/KoreanCalendar.cpp:110
+#: plugins/Calendars/src/VietnameseCalendar.cpp:123
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Dragon"
+msgstr "Drache"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:109
+#: plugins/Calendars/src/KoreanCalendar.cpp:111
+#: plugins/Calendars/src/VietnameseCalendar.cpp:124
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Snake"
+msgstr "Schlange"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:110
+#: plugins/Calendars/src/KoreanCalendar.cpp:112
+#: plugins/Calendars/src/VietnameseCalendar.cpp:125
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Horse"
+msgstr "Pferd"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:111
+#: plugins/Calendars/src/KoreanCalendar.cpp:113
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Sheep"
+msgstr "Schaf"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:112
+#: plugins/Calendars/src/KoreanCalendar.cpp:114
+#: plugins/Calendars/src/VietnameseCalendar.cpp:127
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Monkey"
+msgstr "Affe"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:113
+#: plugins/Calendars/src/KoreanCalendar.cpp:115
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Fowl"
+msgstr "Huhn"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:114
+#: plugins/Calendars/src/KoreanCalendar.cpp:116
+#: plugins/Calendars/src/VietnameseCalendar.cpp:129
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Dog"
+msgstr "Hund"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:115
+#: plugins/Calendars/src/KoreanCalendar.cpp:117
+#: plugins/Calendars/src/VietnameseCalendar.cpp:130
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Pig"
+msgstr "Schwein"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:146
+#: plugins/Calendars/src/JapaneseCalendar.cpp:94
+#: plugins/Calendars/src/KoreanCalendar.cpp:148
+#: plugins/Calendars/src/TibetanCalendar.cpp:177
+#: plugins/Calendars/src/TibetanCalendar.cpp:179
+#: plugins/Calendars/src/VietnameseCalendar.cpp:162
+msgctxt "calendar term like leap year or leap day"
+msgid "leap"
+msgstr "geschaltet"
+
+#. TRANSLATORS: Chinese Calendar output string
+#: plugins/Calendars/src/ChineseCalendar.cpp:159
+#, qt-format
+msgctxt "Chinese calendar output"
+msgid ""
+"Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Year %6: %7 (%8) in cycle %9"
+msgstr ""
+"Tag %1 (%2) - Monat %3<sub>%4</sub> (%5) <br/>Jahr %6: %7 (%8) im Zyklus %9"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:185
+msgctxt "Chinese calendar: Major Solar Term"
+msgid "Major"
+msgstr "Hauptstation (zhōngqì)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:185
+msgctxt "Chinese calendar: Minor Solar Term"
+msgid "Minor"
+msgstr " Nebenstation (jiéqì)"
+
 #: plugins/Calendars/src/CopticCalendar.cpp:42
 msgctxt "Coptic month name"
 msgid "Thoouth"
@@ -35207,685 +35931,6 @@ msgstr "Kidāmmē"
 #: plugins/Calendars/src/EthiopicCalendar.cpp:100
 msgid "Ethiopic Era of Mercy"
 msgstr "Äthiopisches Jahr der Gnade"
-
-#: plugins/Calendars/src/ISOCalendar.cpp:79
-msgid "Week"
-msgstr "Woche"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:76
-msgctxt "Icelandic calendar"
-msgid "summer"
-msgstr "Sommer"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:77
-msgctxt "Icelandic calendar"
-msgid "winter"
-msgstr "Winter"
-
-#. TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of
-#. [summer|winter] (Month [number]: [name]) - [year]"
-#: plugins/Calendars/src/IcelandicCalendar.cpp:100
-#, qt-format
-msgid "%1 of week %2 of %3 (Month %4: %5) - %6"
-msgstr "%1 der Woche %2 im %3 (Monat %4: %5) - %6"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:172
-msgctxt "Icelandic day name"
-msgid "Sunnudagur"
-msgstr "Sunnudagur"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:173
-msgctxt "Icelandic day name"
-msgid "Mánudagur"
-msgstr "Mánudagur"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:174
-msgctxt "Icelandic day name"
-msgid "Þriðjudagur"
-msgstr "Þriðjudagur"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:175
-msgctxt "Icelandic day name"
-msgid "Miðvikudagur"
-msgstr "Miðvikudagur"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:176
-msgctxt "Icelandic day name"
-msgid "Fimmtudagur"
-msgstr "Fimmtudagur"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:177
-msgctxt "Icelandic day name"
-msgid "Föstudagur"
-msgstr "Föstudagur"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:178
-msgctxt "Icelandic day name"
-msgid "Laugardagur"
-msgstr "Laugardagur"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:180
-msgctxt "Icelandic month name"
-msgid "unnamed"
-msgstr "namenlos"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:181
-msgctxt "Icelandic month name"
-msgid "Harpa"
-msgstr "Harpa"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:182
-msgctxt "Icelandic month name"
-msgid "Skerpla"
-msgstr "Skerpla"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:183
-msgctxt "Icelandic month name"
-msgid "Sólmánuður"
-msgstr "Sólmánuður"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:184
-msgctxt "Icelandic month name"
-msgid "Heyannir"
-msgstr "Heyannir"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:185
-msgctxt "Icelandic month name"
-msgid "Tvímánuður"
-msgstr "Tvímánuður"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:186
-msgctxt "Icelandic month name"
-msgid "Haustmánuður"
-msgstr "Haustmánuður"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:187
-msgctxt "Icelandic month name"
-msgid "Gormánuður"
-msgstr "Gormánuður"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:188
-msgctxt "Icelandic month name"
-msgid "Ýlir"
-msgstr "Ýlir"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:189
-msgctxt "Icelandic month name"
-msgid "Mörsugur"
-msgstr "Mörsugur"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:190
-msgctxt "Icelandic month name"
-msgid "Þorri"
-msgstr "Þorri"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:191
-msgctxt "Icelandic month name"
-msgid "Góa"
-msgstr "Góa"
-
-#: plugins/Calendars/src/IcelandicCalendar.cpp:192
-msgctxt "Icelandic month name"
-msgid "Einmánuður"
-msgstr "Einmánuður"
-
-#: plugins/Calendars/src/JulianCalendar.cpp:76
-msgid "A.D."
-msgstr "n.Chr."
-
-#: plugins/Calendars/src/JulianCalendar.cpp:76
-msgid "B.C."
-msgstr "v.Chr."
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:40
-msgctxt "Maya Haab month name"
-msgid "Pop"
-msgstr "Pop"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:41
-msgctxt "Maya Haab month name"
-msgid "Uo"
-msgstr "Uo"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:42
-msgctxt "Maya Haab month name"
-msgid "Zip"
-msgstr "Zip"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:43
-msgctxt "Maya Haab month name"
-msgid "Zotz"
-msgstr "Zotz"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:44
-msgctxt "Maya Haab month name"
-msgid "Tzec"
-msgstr "Tzec"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:45
-msgctxt "Maya Haab month name"
-msgid "Xul"
-msgstr "Xul"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:46
-msgctxt "Maya Haab month name"
-msgid "Yaxkin"
-msgstr "Yaxkin"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:47
-msgctxt "Maya Haab month name"
-msgid "Mol"
-msgstr "Mol"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:48
-msgctxt "Maya Haab month name"
-msgid "Chen"
-msgstr "Chen"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:49
-msgctxt "Maya Haab month name"
-msgid "Yax"
-msgstr "Yax"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:50
-msgctxt "Maya Haab month name"
-msgid "Zac"
-msgstr "Zac"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:51
-msgctxt "Maya Haab month name"
-msgid "Ceh"
-msgstr "Ceh"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:52
-msgctxt "Maya Haab month name"
-msgid "Mac"
-msgstr "Mac"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:53
-msgctxt "Maya Haab month name"
-msgid "Kankin"
-msgstr "Kankin"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:54
-msgctxt "Maya Haab month name"
-msgid "Muan"
-msgstr "Muan"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:55
-msgctxt "Maya Haab month name"
-msgid "Pax"
-msgstr "Pax"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:56
-msgctxt "Maya Haab month name"
-msgid "Kayab"
-msgstr "Kayab"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:57
-msgctxt "Maya Haab month name"
-msgid "Cumku"
-msgstr "Cumku"
-
-#: plugins/Calendars/src/MayaHaabCalendar.cpp:58
-msgctxt "Maya Haab month name"
-msgid "Uayeb"
-msgstr "Uayeb"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:39
-msgctxt "Maya Tzolkin name"
-msgid "Imix"
-msgstr "Imix"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:40
-msgctxt "Maya Tzolkin name"
-msgid "Ik"
-msgstr "Ik"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:41
-msgctxt "Maya Tzolkin name"
-msgid "Akbal"
-msgstr "Akbal"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:42
-msgctxt "Maya Tzolkin name"
-msgid "Kan"
-msgstr "Kan"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:43
-msgctxt "Maya Tzolkin name"
-msgid "Chicchan"
-msgstr "Chicchan"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:44
-msgctxt "Maya Tzolkin name"
-msgid "Cimi"
-msgstr "Cimi"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:45
-msgctxt "Maya Tzolkin name"
-msgid "Manik"
-msgstr "Manik"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:46
-msgctxt "Maya Tzolkin name"
-msgid "Lamat"
-msgstr "Lamat"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:47
-msgctxt "Maya Tzolkin name"
-msgid "Muluc"
-msgstr "Muluc"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:48
-msgctxt "Maya Tzolkin name"
-msgid "Oc"
-msgstr "Oc"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:49
-msgctxt "Maya Tzolkin name"
-msgid "Chuen"
-msgstr "Chuen"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:50
-msgctxt "Maya Tzolkin name"
-msgid "Eb"
-msgstr "Eb"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:51
-msgctxt "Maya Tzolkin name"
-msgid "Ben"
-msgstr "Ben"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:52
-msgctxt "Maya Tzolkin name"
-msgid "Ix"
-msgstr "Ix"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:53
-msgctxt "Maya Tzolkin name"
-msgid "Men"
-msgstr "Men"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:54
-msgctxt "Maya Tzolkin name"
-msgid "Cib"
-msgstr "Cib"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:55
-msgctxt "Maya Tzolkin name"
-msgid "Caban"
-msgstr "Caban"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:56
-msgctxt "Maya Tzolkin name"
-msgid "Eznab"
-msgstr "Eznab"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:57
-msgctxt "Maya Tzolkin name"
-msgid "Cauac"
-msgstr "Cauac"
-
-#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:58
-msgctxt "Maya Tzolkin name"
-msgid "Ahau"
-msgstr "Ahau"
-
-#: plugins/Calendars/src/OlympicCalendar.cpp:61
-#, qt-format
-msgid "Day %1, month %2 in the year %3 of the %4th Olympiad"
-msgstr "Tag %1, Monat %2 im Jahr %3 der %4. Olympiade"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:36
-msgctxt "Roman month name (genitive)"
-msgid "Ianuarii"
-msgstr "Ianuarii"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:37
-msgctxt "Roman month name (genitive)"
-msgid "Februarii"
-msgstr "Februarii"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:38
-msgctxt "Roman month name (genitive)"
-msgid "Martiae"
-msgstr "Martiae"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:39
-msgctxt "Roman month name (genitive)"
-msgid "Aprilis"
-msgstr "Aprilis"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:40
-msgctxt "Roman month name (genitive)"
-msgid "Maii"
-msgstr "Maii"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:41
-msgctxt "Roman month name (genitive)"
-msgid "Iunii"
-msgstr "Iunii"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:42
-msgctxt "Roman month name (genitive)"
-msgid "Iulii"
-msgstr "Iulii"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:43
-msgctxt "Roman month name (genitive)"
-msgid "Augusti"
-msgstr "Augusti"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:44
-msgctxt "Roman month name (genitive)"
-msgid "Septembris"
-msgstr "Septembris"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:45
-msgctxt "Roman month name (genitive)"
-msgid "Octobris"
-msgstr "Octobris"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:46
-msgctxt "Roman month name (genitive)"
-msgid "Novembris"
-msgstr "Novembris"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:47
-msgctxt "Roman month name (genitive)"
-msgid "Decembris"
-msgstr "Decembris"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:65
-msgctxt "Roman calendar term"
-msgid "Kalendae"
-msgstr "Kalendae"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:66
-msgctxt "Roman calendar term"
-msgid "Nonae"
-msgstr "Nonae"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:67
-msgctxt "Roman calendar term"
-msgid "Idus"
-msgstr "Idus"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:68
-msgctxt "Roman calendar term"
-msgid "Kal."
-msgstr "Kal."
-
-#: plugins/Calendars/src/RomanCalendar.cpp:69
-msgctxt "Roman calendar term"
-msgid "Non."
-msgstr "Non."
-
-#: plugins/Calendars/src/RomanCalendar.cpp:70
-msgctxt "Roman calendar term"
-msgid "Id."
-msgstr "Id."
-
-#: plugins/Calendars/src/RomanCalendar.cpp:86
-msgctxt "Roman calendar term"
-msgid "pridie"
-msgstr "pridie"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:88
-msgctxt "Roman calendar term"
-msgid "bis"
-msgstr "bis"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:89
-msgctxt "Roman calendar term"
-msgid "ante diem"
-msgstr "ante diem"
-
-#: plugins/Calendars/src/RomanCalendar.cpp:105
-msgctxt "ab urbe condita"
-msgid "A.U.C."
-msgstr "A.U.C."
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:42
-msgctxt "Zoroastrian month name"
-msgid "Ferverdīn"
-msgstr "Ferverdīn"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:43
-msgctxt "Zoroastrian month name"
-msgid "Ardebehesht"
-msgstr "Ardebehesht"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:44
-msgctxt "Zoroastrian month name"
-msgid "Khordād"
-msgstr "Khordād"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:45
-msgctxt "Zoroastrian month name"
-msgid "Tīr"
-msgstr "Tīr"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:46
-msgctxt "Zoroastrian month name"
-msgid "Mordād"
-msgstr "Mordād"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:47
-msgctxt "Zoroastrian month name"
-msgid "Sharīr"
-msgstr "Sharīr"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:48
-msgctxt "Zoroastrian month name"
-msgid "Mihr"
-msgstr "Mihr"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:49
-msgctxt "Zoroastrian month name"
-msgid "Abān"
-msgstr "Abān"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:50
-msgctxt "Zoroastrian month name"
-msgid "Āder"
-msgstr "Āder"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:51
-msgctxt "Zoroastrian month name"
-msgid "Deï"
-msgstr "Deï"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:52
-msgctxt "Zoroastrian month name"
-msgid "Bahmen"
-msgstr "Bahmen"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:53
-msgctxt "Zoroastrian month name"
-msgid "Asfendārmed"
-msgstr "Asfendārmed"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:54
-msgctxt "Zoroastrian month name"
-msgid "(epagomenae)"
-msgstr "(epagomenae)"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:56
-msgctxt "Zoroastrian day name"
-msgid "Hormuz"
-msgstr "Hormuz"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:57
-msgctxt "Zoroastrian day name"
-msgid "Bahman"
-msgstr "Bahman"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:58
-msgctxt "Zoroastrian day name"
-msgid "Ordībehesht"
-msgstr "Ordībehesht"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:59
-msgctxt "Zoroastrian day name"
-msgid "Shahrīvar"
-msgstr "Shahrīvar"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:60
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:89
-msgctxt "Zoroastrian day name"
-msgid "Esfandārmud"
-msgstr "Esfandārmud"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:61
-msgctxt "Zoroastrian day name"
-msgid "Xordād"
-msgstr "Xordād"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:62
-msgctxt "Zoroastrian day name"
-msgid "Mordād"
-msgstr "Mordād"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:63
-msgctxt "Zoroastrian day name"
-msgid "Diy be Āzar"
-msgstr "Diy be Āzar"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:64
-msgctxt "Zoroastrian day name"
-msgid "Āzar"
-msgstr "Āzar"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:65
-msgctxt "Zoroastrian day name"
-msgid "Ābān"
-msgstr "Ābān"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:66
-msgctxt "Zoroastrian day name"
-msgid "Xor"
-msgstr "Xor"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:67
-msgctxt "Zoroastrian day name"
-msgid "Māh"
-msgstr "Māh"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:68
-msgctxt "Zoroastrian day name"
-msgid "Tīr"
-msgstr "Tīr"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:69
-msgctxt "Zoroastrian day name"
-msgid "Goosh"
-msgstr "Goosh"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:70
-msgctxt "Zoroastrian day name"
-msgid "Diy be Mehr"
-msgstr "Diy be Mehr"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:71
-msgctxt "Zoroastrian day name"
-msgid "Mehr"
-msgstr "Mehr"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:72
-msgctxt "Zoroastrian day name"
-msgid "Sorūsh"
-msgstr "Sorūsh"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:73
-msgctxt "Zoroastrian day name"
-msgid "Rashn"
-msgstr "Rashn"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:74
-msgctxt "Zoroastrian day name"
-msgid "Farvardīn"
-msgstr "Farvardīn"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:75
-msgctxt "Zoroastrian day name"
-msgid "Bahrām"
-msgstr "Bahrām"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:76
-msgctxt "Zoroastrian day name"
-msgid "Rām"
-msgstr "Rām"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:77
-msgctxt "Zoroastrian day name"
-msgid "Bād"
-msgstr "Bād"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:78
-msgctxt "Zoroastrian day name"
-msgid "Diy be Dīn"
-msgstr "Diy be Dīn"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:79
-msgctxt "Zoroastrian day name"
-msgid "Dīn"
-msgstr "Dīn"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:80
-msgctxt "Zoroastrian day name"
-msgid "Ard"
-msgstr "Ard"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:81
-msgctxt "Zoroastrian day name"
-msgid "Ashtād"
-msgstr "Ashtād"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:82
-msgctxt "Zoroastrian day name"
-msgid "Asmān"
-msgstr "Asmān"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:83
-msgctxt "Zoroastrian day name"
-msgid "Zāmyād"
-msgstr "Zāmyād"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:84
-msgctxt "Zoroastrian day name"
-msgid "Māresfand"
-msgstr "Māresfand"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:85
-msgctxt "Zoroastrian day name"
-msgid "Anīrān"
-msgstr "Anīrān"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:87
-msgctxt "Zoroastrian day name"
-msgid "Ahnad"
-msgstr "Ahnad"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:88
-msgctxt "Zoroastrian day name"
-msgid "Ashnad"
-msgstr "Ashnad"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:90
-msgctxt "Zoroastrian day name"
-msgid "Axshatar"
-msgstr "Axshatar"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:91
-msgctxt "Zoroastrian day name"
-msgid "Behesht"
-msgstr "Behesht"
-
-#: plugins/Calendars/src/ZoroastrianCalendar.cpp:132
-msgid "Jezdegerd Era"
-msgstr "Yazdegerd-Ära"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:41
 msgctxt "French Revolution Calendar day name"
@@ -36172,6 +36217,127 @@ msgctxt "Hebrew month name"
 msgid "Adar"
 msgstr "Adar"
 
+#: plugins/Calendars/src/ISOCalendar.cpp:79
+msgid "Week"
+msgstr "Woche"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:76
+msgctxt "Icelandic calendar"
+msgid "summer"
+msgstr "Sommer"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:77
+msgctxt "Icelandic calendar"
+msgid "winter"
+msgstr "Winter"
+
+#. TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of
+#. [summer|winter] (Month [number]: [name]) - [year]"
+#: plugins/Calendars/src/IcelandicCalendar.cpp:100
+#, qt-format
+msgid "%1 of week %2 of %3 (Month %4: %5) - %6"
+msgstr "%1 der Woche %2 im %3 (Monat %4: %5) - %6"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:172
+msgctxt "Icelandic day name"
+msgid "Sunnudagur"
+msgstr "Sunnudagur"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:173
+msgctxt "Icelandic day name"
+msgid "Mánudagur"
+msgstr "Mánudagur"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:174
+msgctxt "Icelandic day name"
+msgid "Þriðjudagur"
+msgstr "Þriðjudagur"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:175
+msgctxt "Icelandic day name"
+msgid "Miðvikudagur"
+msgstr "Miðvikudagur"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:176
+msgctxt "Icelandic day name"
+msgid "Fimmtudagur"
+msgstr "Fimmtudagur"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:177
+msgctxt "Icelandic day name"
+msgid "Föstudagur"
+msgstr "Föstudagur"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:178
+msgctxt "Icelandic day name"
+msgid "Laugardagur"
+msgstr "Laugardagur"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:180
+msgctxt "Icelandic month name"
+msgid "unnamed"
+msgstr "namenlos"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:181
+msgctxt "Icelandic month name"
+msgid "Harpa"
+msgstr "Harpa"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:182
+msgctxt "Icelandic month name"
+msgid "Skerpla"
+msgstr "Skerpla"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:183
+msgctxt "Icelandic month name"
+msgid "Sólmánuður"
+msgstr "Sólmánuður"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:184
+msgctxt "Icelandic month name"
+msgid "Heyannir"
+msgstr "Heyannir"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:185
+msgctxt "Icelandic month name"
+msgid "Tvímánuður"
+msgstr "Tvímánuður"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:186
+msgctxt "Icelandic month name"
+msgid "Haustmánuður"
+msgstr "Haustmánuður"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:187
+msgctxt "Icelandic month name"
+msgid "Gormánuður"
+msgstr "Gormánuður"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:188
+msgctxt "Icelandic month name"
+msgid "Ýlir"
+msgstr "Ýlir"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:189
+msgctxt "Icelandic month name"
+msgid "Mörsugur"
+msgstr "Mörsugur"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:190
+msgctxt "Icelandic month name"
+msgid "Þorri"
+msgstr "Þorri"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:191
+msgctxt "Icelandic month name"
+msgid "Góa"
+msgstr "Góa"
+
+#: plugins/Calendars/src/IcelandicCalendar.cpp:192
+msgctxt "Icelandic month name"
+msgid "Einmánuður"
+msgstr "Einmánuður"
+
 #: plugins/Calendars/src/IslamicCalendar.cpp:39
 msgctxt "Islamic day name"
 msgid "yaum al-aḥad (first day)"
@@ -36274,6 +36440,940 @@ msgstr "Dhu al-Ḥijja"
 msgctxt "epoch"
 msgid "A.H."
 msgstr "A.H."
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:43
+msgctxt "Japanese calendar major Solar term"
+msgid "Usui (Rain Water)"
+msgstr "Usui (Regen)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:44
+msgctxt "Japanese calendar major Solar term"
+msgid "Shunbun (Spring Equinox)"
+msgstr "Shunbun (Frühlingsäquinox)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:45
+msgctxt "Japanese calendar major Solar term"
+msgid "Kokuu (Grain Rain)"
+msgstr "Kokuu (Regen auf die Saat)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:46
+msgctxt "Japanese calendar major Solar term"
+msgid "Shōman (Grain Full)"
+msgstr "Shōman (Kleine Fülle/Ährenbildung)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:47
+msgctxt "Japanese calendar major Solar term"
+msgid "Geshi (Summer Solstice)"
+msgstr "Geshi (Sommersonnwende)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:48
+msgctxt "Japanese calendar major Solar term"
+msgid "Taisho (Great Heat)"
+msgstr "Taisho (Große Hitze)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:49
+msgctxt "Japanese calendar major Solar term"
+msgid "Shosho (Limit of Heat)"
+msgstr "Shosho (Ende der Hitze)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:50
+msgctxt "Japanese calendar major Solar term"
+msgid "Shūbun (Autumnal Equinox)"
+msgstr "Shūbun (Herbstäquinox)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:51
+msgctxt "Japanese calendar major Solar term"
+msgid "Sōkō (Descent of Frost)"
+msgstr "Sōkō (Reif)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:52
+msgctxt "Japanese calendar major Solar term"
+msgid "Shōsetsu (Slight Snow)"
+msgstr "Shōsetsu (Mäßiger Schnee)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:53
+msgctxt "Japanese calendar major Solar term"
+msgid "Tōji (Winter Solstice)"
+msgstr "Tōji (Wintersonnwende)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:54
+msgctxt "Japanese calendar major Solar term"
+msgid "Taikan (Great Cold)"
+msgstr "Taikan (Große Kälte)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:56
+msgctxt "Japanese calendar minor Solar term"
+msgid "Risshun (Beginning of Spring)"
+msgstr "Risshun (Frühlingsanfang)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:57
+msgctxt "Japanese calendar minor Solar term"
+msgid "Keichitsu (Waking of Insects)"
+msgstr "Keichitsu (Erwachen der Insekten)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:58
+msgctxt "Japanese calendar minor Solar term"
+msgid "Seimei (Pure Brightness)"
+msgstr "Seimei (Klar und hell)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:59
+msgctxt "Japanese calendar minor Solar term"
+msgid "Rikka (Beginning of Summer)"
+msgstr "Rikka (Sommeranfang)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:60
+msgctxt "Japanese calendar minor Solar term"
+msgid "Bōshu (Grain in Ear)"
+msgstr "Bōshu (Körner mit Grannen/Ährenzeit)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:61
+msgctxt "Japanese calendar minor Solar term"
+msgid "Shōsho (Slight Heat)"
+msgstr "Shōsho (Mäßige Hitze)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:62
+msgctxt "Japanese calendar minor Solar term"
+msgid "Risshū (Beginning of Autumn)"
+msgstr "Risshū (Herbstanfang)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:63
+msgctxt "Japanese calendar minor Solar term"
+msgid "Hakuro (White Dew)"
+msgstr "Hakuro (Weißer Tau)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:64
+msgctxt "Japanese calendar minor Solar term"
+msgid "Kanro (Cold Dew)"
+msgstr "Kanro (Kalter Tau)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:65
+msgctxt "Japanese calendar minor Solar term"
+msgid "Rittō (Beginning of Winter)"
+msgstr "Rittō (Winteranfang)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:66
+msgctxt "Japanese calendar minor Solar term"
+msgid "Taisetsu (Great Snow)"
+msgstr "Taisetsu (Großer Schnee)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:67
+msgctxt "Japanese calendar minor Solar term"
+msgid "Shōkan (Slight Cold)"
+msgstr "Shōkan (Mäßige Kälte)"
+
+#. TRANSLATORS: Japanese Calendar output string
+#: plugins/Calendars/src/JapaneseCalendar.cpp:108
+#, qt-format
+msgctxt "Japanese Calendar output"
+msgid "Day %1 - Month %2<sub>%3</sub> - year %4 (kigen)"
+msgstr "Tag %1 - Monat %2<sub>%3</sub> - Jahr %4 (kigen)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:129
+msgctxt "Japanese calendar: Major Solar Term"
+msgid "Major"
+msgstr "Hauptstation"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:129
+msgctxt "Japanese calendar: Minor Solar Term"
+msgid "Minor"
+msgstr "Nebenstation"
+
+#: plugins/Calendars/src/JulianCalendar.cpp:76
+msgid "A.D."
+msgstr "n.Chr."
+
+#: plugins/Calendars/src/JulianCalendar.cpp:76
+msgid "B.C."
+msgstr "v.Chr."
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:43
+msgctxt "Korean calendar major Solar term"
+msgid "Woo-Soo (Rain Water)"
+msgstr "Woo-Soo (Regen)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:44
+msgctxt "Korean calendar major Solar term"
+msgid "Chun-Bun (Spring Equinox)"
+msgstr "Chun-Bun (Frühlingsäquinox)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:45
+msgctxt "Korean calendar major Solar term"
+msgid "Gok-Woo (Grain Rain)"
+msgstr "Gok-Woo (Regen auf die Saat)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:46
+msgctxt "Korean calendar major Solar term"
+msgid "So-Man (Grain Full)"
+msgstr "So-Man (Kleine Fülle/Ährenbildung)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:47
+msgctxt "Korean calendar major Solar term"
+msgid "Ha-Ji (Summer Solstice)"
+msgstr "Ha-Ji (Sommersonnwende)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:48
+msgctxt "Korean calendar major Solar term"
+msgid "Dae-Suh (Great Heat)"
+msgstr "Dae-Suh (Große Hitze)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:49
+msgctxt "Korean calendar major Solar term"
+msgid "Chu-Suh (Limit of Heat)"
+msgstr "Chu-Suh (Ende der Hitze)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:50
+msgctxt "Korean calendar major Solar term"
+msgid "Chu-Bun (Autumnal Equinox)"
+msgstr "Chu-Bun (Herbstäquinox)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:51
+msgctxt "Korean calendar major Solar term"
+msgid "Sang-Kang (Descent of Frost)"
+msgstr "Sang-Kang (Reif)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:52
+msgctxt "Korean calendar major Solar term"
+msgid "So-Sul (Slight Snow)"
+msgstr "So-Sul (Mäßiger Schnee"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:53
+msgctxt "Korean calendar major Solar term"
+msgid "Dong-Ji (Winter Solstice)"
+msgstr "Dong-Ji (Wintersonnwende)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:54
+msgctxt "Korean calendar major Solar term"
+msgid "Dae-Han (Great Cold)"
+msgstr "Dae-Han (Große Kälte)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:56
+msgctxt "Korean calendar minor Solar term"
+msgid "Ip-Chun (Beginning of Spring)"
+msgstr "Ip-Chun (Frühlingsanfang)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:57
+msgctxt "Korean calendar minor Solar term"
+msgid "Kyung-Chip (Waking of Insects)"
+msgstr "Kyung-Chip (Erwachen der Insekten)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:58
+msgctxt "Korean calendar minor Solar term"
+msgid "Chyng-Myung (Pure Brightness)"
+msgstr "Chyng-Myung (Klar und hell)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:59
+msgctxt "Korean calendar minor Solar term"
+msgid "Ip-Ha (Beginning of Summer)"
+msgstr "Ip-Ha (Sommeranfang)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:60
+msgctxt "Korean calendar minor Solar term"
+msgid "Mang-Jong (Grain in Ear)"
+msgstr "Mang-Jong (Körner mit Grannen/Ährenzeit)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:61
+msgctxt "Korean calendar minor Solar term"
+msgid "So-Suh (Slight Heat)"
+msgstr "So-Suh (Mäßige Hitze)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:62
+msgctxt "Korean calendar minor Solar term"
+msgid "Ip-Choo (Beginning of Autumn)"
+msgstr "Ip-Choo (Herbstanfang)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:63
+msgctxt "Korean calendar minor Solar term"
+msgid "Bak-Roo (White Dew)"
+msgstr "Bak-Roo (Weißer Tau)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:64
+msgctxt "Korean calendar minor Solar term"
+msgid "Han-Roo (Cold Dew)"
+msgstr "Han-Roo (Kalter Tau)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:65
+msgctxt "Korean calendar minor Solar term"
+msgid "Ip-Dong (Beginning of Winter)"
+msgstr "Ip-Dong (Winteranfang)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:66
+msgctxt "Korean calendar minor Solar term"
+msgid "Dae-Sul (Great Snow)"
+msgstr "Dae-Sul (Großer Schnee)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:67
+msgctxt "Korean calendar minor Solar term"
+msgid "So-Han (Slight Cold)"
+msgstr "So-Han (Mäßige Kälte)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:69
+msgctxt "Korean calendar, celestial stem name"
+msgid "Kap"
+msgstr "Kap"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:70
+msgctxt "Korean calendar, celestial stem name"
+msgid "El"
+msgstr "El"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:71
+msgctxt "Korean calendar, celestial stem name"
+msgid "Byung"
+msgstr "Byung"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:72
+msgctxt "Korean calendar, celestial stem name"
+msgid "Jung"
+msgstr "Jung"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:73
+msgctxt "Korean calendar, celestial stem name"
+msgid "Mu"
+msgstr "Mu"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:74
+msgctxt "Korean calendar, celestial stem name"
+msgid "Ki"
+msgstr "Ki"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:75
+msgctxt "Korean calendar, celestial stem name"
+msgid "Kyung"
+msgstr "Kyung"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:76
+msgctxt "Korean calendar, celestial stem name"
+msgid "Shin"
+msgstr "Shin"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:77
+msgctxt "Korean calendar, celestial stem name"
+msgid "Im"
+msgstr "Im"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:78
+msgctxt "Korean calendar, celestial stem name"
+msgid "Gye"
+msgstr "Gye"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:92
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Ja"
+msgstr "Ja"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:93
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Chuk"
+msgstr "Chuk"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:94
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "In"
+msgstr "In"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:95
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Myo"
+msgstr "Myo"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:96
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Jin"
+msgstr "Jin"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:97
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Sa"
+msgstr "Sa"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:98
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Oh"
+msgstr "Oh"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:99
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Mi"
+msgstr "Mi"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:100
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Shin"
+msgstr "Shin"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:101
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Yoo"
+msgstr "Yoo"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:102
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Sool"
+msgstr "Sool"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:103
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Hae"
+msgstr "Hae"
+
+#. TRANSLATORS: Korean Calendar output string
+#: plugins/Calendars/src/KoreanCalendar.cpp:161
+#, qt-format
+msgctxt "Korean Calendar output"
+msgid "Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Danki Year %6 (%7)"
+msgstr "Tag %1 (%2) - Monat %3<sub>%4</sub> (%5) <br/>Danki Jahr %6 (%7)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:185
+msgctxt "Korean calendar: Major Solar Term"
+msgid "Major"
+msgstr "Hauptstation"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:185
+msgctxt "Korean calendar: Minor Solar Term"
+msgid "Minor"
+msgstr "Nebenstation"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:40
+msgctxt "Maya Haab month name"
+msgid "Pop"
+msgstr "Pop"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:41
+msgctxt "Maya Haab month name"
+msgid "Uo"
+msgstr "Uo"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:42
+msgctxt "Maya Haab month name"
+msgid "Zip"
+msgstr "Zip"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:43
+msgctxt "Maya Haab month name"
+msgid "Zotz"
+msgstr "Zotz"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:44
+msgctxt "Maya Haab month name"
+msgid "Tzec"
+msgstr "Tzec"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:45
+msgctxt "Maya Haab month name"
+msgid "Xul"
+msgstr "Xul"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:46
+msgctxt "Maya Haab month name"
+msgid "Yaxkin"
+msgstr "Yaxkin"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:47
+msgctxt "Maya Haab month name"
+msgid "Mol"
+msgstr "Mol"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:48
+msgctxt "Maya Haab month name"
+msgid "Chen"
+msgstr "Chen"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:49
+msgctxt "Maya Haab month name"
+msgid "Yax"
+msgstr "Yax"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:50
+msgctxt "Maya Haab month name"
+msgid "Zac"
+msgstr "Zac"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:51
+msgctxt "Maya Haab month name"
+msgid "Ceh"
+msgstr "Ceh"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:52
+msgctxt "Maya Haab month name"
+msgid "Mac"
+msgstr "Mac"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:53
+msgctxt "Maya Haab month name"
+msgid "Kankin"
+msgstr "Kankin"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:54
+msgctxt "Maya Haab month name"
+msgid "Muan"
+msgstr "Muan"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:55
+msgctxt "Maya Haab month name"
+msgid "Pax"
+msgstr "Pax"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:56
+msgctxt "Maya Haab month name"
+msgid "Kayab"
+msgstr "Kayab"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:57
+msgctxt "Maya Haab month name"
+msgid "Cumku"
+msgstr "Cumku"
+
+#: plugins/Calendars/src/MayaHaabCalendar.cpp:58
+msgctxt "Maya Haab month name"
+msgid "Uayeb"
+msgstr "Uayeb"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:39
+msgctxt "Maya Tzolkin name"
+msgid "Imix"
+msgstr "Imix"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:40
+msgctxt "Maya Tzolkin name"
+msgid "Ik"
+msgstr "Ik"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:41
+msgctxt "Maya Tzolkin name"
+msgid "Akbal"
+msgstr "Akbal"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:42
+msgctxt "Maya Tzolkin name"
+msgid "Kan"
+msgstr "Kan"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:43
+msgctxt "Maya Tzolkin name"
+msgid "Chicchan"
+msgstr "Chicchan"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:44
+msgctxt "Maya Tzolkin name"
+msgid "Cimi"
+msgstr "Cimi"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:45
+msgctxt "Maya Tzolkin name"
+msgid "Manik"
+msgstr "Manik"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:46
+msgctxt "Maya Tzolkin name"
+msgid "Lamat"
+msgstr "Lamat"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:47
+msgctxt "Maya Tzolkin name"
+msgid "Muluc"
+msgstr "Muluc"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:48
+msgctxt "Maya Tzolkin name"
+msgid "Oc"
+msgstr "Oc"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:49
+msgctxt "Maya Tzolkin name"
+msgid "Chuen"
+msgstr "Chuen"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:50
+msgctxt "Maya Tzolkin name"
+msgid "Eb"
+msgstr "Eb"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:51
+msgctxt "Maya Tzolkin name"
+msgid "Ben"
+msgstr "Ben"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:52
+msgctxt "Maya Tzolkin name"
+msgid "Ix"
+msgstr "Ix"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:53
+msgctxt "Maya Tzolkin name"
+msgid "Men"
+msgstr "Men"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:54
+msgctxt "Maya Tzolkin name"
+msgid "Cib"
+msgstr "Cib"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:55
+msgctxt "Maya Tzolkin name"
+msgid "Caban"
+msgstr "Caban"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:56
+msgctxt "Maya Tzolkin name"
+msgid "Eznab"
+msgstr "Eznab"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:57
+msgctxt "Maya Tzolkin name"
+msgid "Cauac"
+msgstr "Cauac"
+
+#: plugins/Calendars/src/MayaTzolkinCalendar.cpp:58
+msgctxt "Maya Tzolkin name"
+msgid "Ahau"
+msgstr "Ahau"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:45
+msgctxt "Hindu Lunar Station name"
+msgid "Aśvinī"
+msgstr "Aśvinī"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:46
+msgctxt "Hindu Lunar Station name"
+msgid "Bharaṇī"
+msgstr "Bharaṇī"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:47
+msgctxt "Hindu Lunar Station name"
+msgid "Kṛttikā"
+msgstr "Kṛttikā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:48
+msgctxt "Hindu Lunar Station name"
+msgid "Rohiṇī"
+msgstr "Rohiṇī"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:49
+msgctxt "Hindu Lunar Station name"
+msgid "Mṛigaśiras"
+msgstr "Mṛigaśiras"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:50
+msgctxt "Hindu Lunar Station name"
+msgid "Ārdrā"
+msgstr "Ārdrā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:51
+msgctxt "Hindu Lunar Station name"
+msgid "Punarvasu"
+msgstr "Punarvasu"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:52
+msgctxt "Hindu Lunar Station name"
+msgid "Puṣya"
+msgstr "Puṣya"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:53
+msgctxt "Hindu Lunar Station name"
+msgid "Āśleṣā"
+msgstr "Āśleṣā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:54
+msgctxt "Hindu Lunar Station name"
+msgid "Maghā"
+msgstr "Maghā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:55
+msgctxt "Hindu Lunar Station name"
+msgid "Pūrva-Phalgunī"
+msgstr "Pūrva-Phalgunī"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:56
+msgctxt "Hindu Lunar Station name"
+msgid "Uttara-Phalgunī"
+msgstr "Uttara-Phalgunī"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:57
+msgctxt "Hindu Lunar Station name"
+msgid "Hasta"
+msgstr "Hasta"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:58
+msgctxt "Hindu Lunar Station name"
+msgid "Citrā"
+msgstr "Citrā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:59
+msgctxt "Hindu Lunar Station name"
+msgid "Svāti"
+msgstr "Svāti"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:60
+msgctxt "Hindu Lunar Station name"
+msgid "Viśākhā"
+msgstr "Viśākhā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:61
+msgctxt "Hindu Lunar Station name"
+msgid "Anřādhā"
+msgstr "Anřādhā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:62
+msgctxt "Hindu Lunar Station name"
+msgid "Jyeṣṭhā"
+msgstr "Jyeṣṭhā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:63
+msgctxt "Hindu Lunar Station name"
+msgid "Mūla"
+msgstr "Mūla"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:64
+msgctxt "Hindu Lunar Station name"
+msgid "Pūrva-Āṣāḍhā"
+msgstr "Pūrva-Āṣāḍhā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:65
+msgctxt "Hindu Lunar Station name"
+msgid "Uttara-Āṣāḍhā"
+msgstr "Uttara-Āṣāḍhā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:66
+msgctxt "Hindu Lunar Station name"
+msgid "Abhijit"
+msgstr "Abhijit"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:67
+msgctxt "Hindu Lunar Station name"
+msgid "Śravaṇā"
+msgstr "Śravaṇā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:68
+msgctxt "Hindu Lunar Station name"
+msgid "Dhaniṣṭhā"
+msgstr "Dhaniṣṭhā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:69
+msgctxt "Hindu Lunar Station name"
+msgid "Śatatārakā"
+msgstr "Śatatārakā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:70
+msgctxt "Hindu Lunar Station name"
+msgid "Pūrva-Bhādrapadā"
+msgstr "Pūrva-Bhādrapadā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:71
+msgctxt "Hindu Lunar Station name"
+msgid "Uttara-Bhādrapadā"
+msgstr "Uttara-Bhādrapadā"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:72
+msgctxt "Hindu Lunar Station name"
+msgid "Revatī"
+msgstr "Revatī"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:75
+msgctxt "Hindu yoga name"
+msgid "Viṣkambha"
+msgstr "Viṣkambha"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:76
+msgctxt "Hindu yoga name"
+msgid "Prīti"
+msgstr "Prīti"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:77
+msgctxt "Hindu yoga name"
+msgid "Ayuṣmān"
+msgstr "Ayuṣmān"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:78
+msgctxt "Hindu yoga name"
+msgid "Saubhāgya"
+msgstr "Saubhāgya"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:79
+msgctxt "Hindu yoga name"
+msgid "Śobhana"
+msgstr "Śobhana"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:80
+msgctxt "Hindu yoga name"
+msgid "Atigaṇda"
+msgstr "Atigaṇda"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:81
+msgctxt "Hindu yoga name"
+msgid "Sukarman"
+msgstr "Sukarman"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:82
+msgctxt "Hindu yoga name"
+msgid "Dhṛti"
+msgstr "Dhṛti"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:83
+msgctxt "Hindu yoga name"
+msgid "Śūla"
+msgstr "Śūla"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:84
+msgctxt "Hindu yoga name"
+msgid "Gaṇda"
+msgstr "Gaṇda"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:85
+msgctxt "Hindu yoga name"
+msgid "Vṛddhi"
+msgstr "Vṛddhi"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:86
+msgctxt "Hindu yoga name"
+msgid "Dhruva"
+msgstr "Dhruva"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:87
+msgctxt "Hindu yoga name"
+msgid "Vyāghāta"
+msgstr "Vyāghāta"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:88
+msgctxt "Hindu yoga name"
+msgid "Harṣaṇa"
+msgstr "Harṣaṇa"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:89
+msgctxt "Hindu yoga name"
+msgid "Vajra"
+msgstr "Vajra"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:90
+msgctxt "Hindu yoga name"
+msgid "Siddhi"
+msgstr "Siddhi"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:91
+msgctxt "Hindu yoga name"
+msgid "Vyatīpāta"
+msgstr "Vyatīpāta"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:92
+msgctxt "Hindu yoga name"
+msgid "Varīyas"
+msgstr "Varīyas"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:93
+msgctxt "Hindu yoga name"
+msgid "Parigha"
+msgstr "Parigha"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:94
+msgctxt "Hindu yoga name"
+msgid "Śiva"
+msgstr "Śiva"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:95
+msgctxt "Hindu yoga name"
+msgid "Siddha"
+msgstr "Siddha"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:96
+msgctxt "Hindu yoga name"
+msgid "Sādhya"
+msgstr "Sādhya"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:97
+msgctxt "Hindu yoga name"
+msgid "Śubha"
+msgstr "Śubha"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:98
+msgctxt "Hindu yoga name"
+msgid "Śukla"
+msgstr "Śukla"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:99
+msgctxt "Hindu yoga name"
+msgid "Brahman"
+msgstr "Brahman"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:100
+msgctxt "Hindu yoga name"
+msgid "Indra"
+msgstr "Indra"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:101
+msgctxt "Hindu yoga name"
+msgid "Vaidhṛti"
+msgstr "Vaidhṛti"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:104
+msgctxt "Hindu karana name"
+msgid "Kiṃstughna"
+msgstr "Kiṃstughna"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:105
+msgctxt "Hindu karana name"
+msgid "Bava"
+msgstr "Bava"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:106
+msgctxt "Hindu karana name"
+msgid "Vālava"
+msgstr "Vālava"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:107
+msgctxt "Hindu karana name"
+msgid "Kaulava"
+msgstr "Kaulava"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:108
+msgctxt "Hindu karana name"
+msgid "Taitila"
+msgstr "Taitila"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:109
+msgctxt "Hindu karana name"
+msgid "Gara"
+msgstr "Gara"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:110
+msgctxt "Hindu karana name"
+msgid "Vaṇija"
+msgstr "Vaṇija"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:111
+msgctxt "Hindu karana name"
+msgid "Viṣṭi"
+msgstr "Viṣṭi"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:112
+msgctxt "Hindu karana name"
+msgid "Śakuni"
+msgstr "Śakuni"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:113
+msgctxt "Hindu karana name"
+msgid "Catuṣpada"
+msgstr "Catuṣpada"
+
+#: plugins/Calendars/src/NewHinduCalendar.cpp:114
+msgctxt "Hindu karana name"
+msgid "Nāga"
+msgstr "Nāga"
+
+#. TRANSLATORS: S.E. stands for Saka Era
+#: plugins/Calendars/src/NewHinduCalendar.cpp:165
+msgctxt "calendar epoch"
+msgid "S.E."
+msgstr "S.E."
+
+#. TRANSLATORS: V.E. stands for Vikrama Era
+#: plugins/Calendars/src/NewHinduLunarCalendar.cpp:64
+msgctxt "calendar epoch"
+msgid "V.E."
+msgstr "V.E."
+
+#: plugins/Calendars/src/NewHinduLunarCalendar.cpp:65
+msgctxt "Hindu leap month/day"
+msgid "adhika"
+msgstr "adhika"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:38
 msgctxt "Hindu Lunar month name"
@@ -36888,6 +37988,11 @@ msgstr "Kṣaya"
 msgid "%1, %2 - %3 (%4) - %5 K.Y. (Jovian %6:%7)"
 msgstr "%1, %2 - %3 (%4) - %5 K.Y. (Jupiterzyklus %6:%7)"
 
+#: plugins/Calendars/src/OlympicCalendar.cpp:61
+#, qt-format
+msgid "Day %1, month %2 in the year %3 of the %4th Olympiad"
+msgstr "Tag %1, Monat %2 im Jahr %3 der %4. Olympiade"
+
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:40
 msgctxt "Persian weekday name"
 msgid "Yek-shanbēh"
@@ -36989,1021 +38094,635 @@ msgctxt "epoch"
 msgid "A.P."
 msgstr "A.P."
 
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:40
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:50
-msgctxt "Bahai day/month name"
-msgid "Jalāl (Glory)"
-msgstr "Jalāl (Ruhm)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:41
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:51
-msgctxt "Bahai day/month name"
-msgid "Jamāl (Beauty)"
-msgstr "Jamāl (Schönheit)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:42
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:56
-msgctxt "Bahai day/month name"
-msgid "Kamāl (Perfection)"
-msgstr "Kamāl (Perfektion)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:43
-msgctxt "Bahai day name"
-msgid "Fiḍāl (Grace)"
-msgstr "Fiḍāl (Gnade)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:44
-msgctxt "Bahai day name"
-msgid "‘Idāl (Justice)"
-msgstr "‘Idāl (Gerechtigkeit)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:45
-msgctxt "Bahai day name"
-msgid "Istijlāl (Majesty)"
-msgstr "Istijlāl (Majestät)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:46
-msgctxt "Bahai day name"
-msgid "Istiqlāl (Independence)"
-msgstr "Istiqlāl (Unabhängigkeit)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:48
-msgctxt "Bahai day/month name"
-msgid "Ayyām-i-Hā (Days of God)"
-msgstr "Ayyām-i-Hā (Gottestage)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:49
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:77
-msgctxt "Bahai day/month and year-cycle (Vahid) name"
-msgid "Bahā’ (Splendor)"
-msgstr "Bahā’ (Pracht)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:52
-msgctxt "Bahai day/month name"
-msgid "‘Aẓamat (Grandeur)"
-msgstr "‘Aẓamat (Herrlichkeit)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:53
-msgctxt "Bahai day/month name"
-msgid "Nūr (Light)"
-msgstr "Nūr (Licht)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:54
-msgctxt "Bahai day/month name"
-msgid "Raḥmat (Mercy)"
-msgstr "Raḥmat (Barmherzigkeit)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:55
-msgctxt "Bahai day/month name"
-msgid "Kalimāt (Words)"
-msgstr "Kalimāt (Worte)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:57
-msgctxt "Bahai day/month name"
-msgid "Asmā’ (Names)"
-msgstr "Asmā’ (Namen)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:58
-msgctxt "Bahai day/month name"
-msgid "‘Izzat (Might)"
-msgstr "‘Izzat (Macht)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:59
-msgctxt "Bahai day/month name"
-msgid "Mashīyyat (Will)"
-msgstr "Mashīyyat (Wille)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:60
-msgctxt "Bahai day/month name"
-msgid "‘Ilm (Knowledge)"
-msgstr "‘Ilm (Wissen)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:61
-msgctxt "Bahai day/month name"
-msgid "Qudrat (Power)"
-msgstr "Qudrat (Stärke)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:62
-msgctxt "Bahai day/month name"
-msgid "Qawl (Speech)"
-msgstr "Qawl (Sprache)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:63
-msgctxt "Bahai day/month name"
-msgid "Masā’il (Questions)"
-msgstr "Masā’il (Fragen)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:64
-msgctxt "Bahai day/month name"
-msgid "Sharaf (Honor)"
-msgstr "Sharaf (Ehre)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:65
-msgctxt "Bahai day/month name"
-msgid "Sulṭān (Sovereignty)"
-msgstr "Sulṭān (Hoheit)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:66
-msgctxt "Bahai day/month name"
-msgid "Mulk (Dominion)"
-msgstr "Mulk (Herrschaft)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:67
-msgctxt "Bahai day/month name"
-msgid "‘Alā’ (Loftiness)"
-msgstr "‘Alā’ (Erhabenheit)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:69
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Alif (letter A)"
-msgstr "Alif (Buchstabe A)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:70
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Bā’ (letter B)"
-msgstr "Bā’ (Buchstabe B)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:71
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Ab (Father)"
-msgstr "Ab (Vater)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:72
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Dāl (letter D)"
-msgstr "Dāl (Buchstabe D)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:73
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Bāb (Gate)"
-msgstr "Bāb (Tor)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:74
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Vāv (letter V)"
-msgstr "Vāv (Buchstabe V)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:75
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Abad (Eternity)"
-msgstr "Abad (Ewigkeit)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:76
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Jād (Generosity)"
-msgstr "Jād (Großzügigkeit)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:78
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Ḥubb (Love)"
-msgstr "Ḥubb (Liebe)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:79
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Bahhāj (Delightful)"
-msgstr "Bahhāj (Entzückend)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:80
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Javāb (Answer)"
-msgstr "Javāb (Antwort)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:81
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Aḥad (Single)"
-msgstr "Aḥad (Alleine)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:82
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Vahhāb (Bountiful)"
-msgstr "Vahhāb (Großzügig)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:83
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Vidād (Affection)"
-msgstr "Vidād (Zuneigung)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:84
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Badī’ (Beginning)"
-msgstr "Badī’ (Anfang)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:85
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Bahī (Luminous)"
-msgstr "Bahī (Leuchtend)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:86
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Abhā (Most Luminous)"
-msgstr "Abhā (Hellstleuchtend)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:87
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Vāḥid (Unity)"
-msgstr "Vāḥid (Einheit)"
-
-#. TRANSLATORS: Bahai Calendar output string
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:144
-#, qt-format
-msgctxt "Bahai calendar output"
-msgid ""
-"%1, day of %2 (%3) of the month of %4 (%5), <br/>of the year %6 (%7), of "
-"Vāḥid %8, of Kull-i-shay %9 of the Bahá’í Era"
-msgstr ""
-"%1, Tag %2 (%3) des Monats %4 (%5), <br/>des Jahres %6 (%7) in Vāḥid %8, des"
-" Kull-i-shay %9 der Bahá’í-Ära"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:43
-msgctxt "Chinese calendar major Solar term"
-msgid "Yŭshuĭ (Rain Water)"
-msgstr "Yŭshuĭ (Regen)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:44
-msgctxt "Chinese calendar major Solar term"
-msgid "Chūnfēn (Spring Equinox)"
-msgstr "Chūnfēn (Frühlingsäquinox)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:45
-msgctxt "Chinese calendar major Solar term"
-msgid "Gŭyŭ (Grain Rain)"
-msgstr "Gŭyŭ (Regen auf die Saat)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:46
-msgctxt "Chinese calendar major Solar term"
-msgid "Xiăomăn (Grain Full)"
-msgstr "Xiăomăn (Kleine Fülle/Ährenbildung)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:47
-msgctxt "Chinese calendar major Solar term"
-msgid "Xiàzhì (Summer Solstice)"
-msgstr "Xiàzhì (Sommersonnwende)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:48
-msgctxt "Chinese calendar major Solar term"
-msgid "Dàshŭ (Great Heat)"
-msgstr "Dàshŭ (Große Hitze)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:49
-msgctxt "Chinese calendar major Solar term"
-msgid "Chŭshŭ (Limit of Heat)"
-msgstr "Chŭshŭ (Ende der Hitze)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:50
-msgctxt "Chinese calendar major Solar term"
-msgid "Qiūfēn (Autumnal Equinox)"
-msgstr "Qiūfēn (Herbstäquinox)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:51
-msgctxt "Chinese calendar major Solar term"
-msgid "Shuāngjiàng (Descent of Frost)"
-msgstr "Shuāngjiàng (Reif)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:52
-msgctxt "Chinese calendar major Solar term"
-msgid "Xiăoxuĕ (Slight Snow)"
-msgstr "Xiăoxuĕ (Mäßiger Schnee)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:53
-msgctxt "Chinese calendar major Solar term"
-msgid "Dōngzhì (Winter Solstice)"
-msgstr "Dōngzhì (Wintersonnwende)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:54
-msgctxt "Chinese calendar major Solar term"
-msgid "Dàhán (Great Cold)"
-msgstr "Dàhán (Große Kälte)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:56
-msgctxt "Chinese calendar minor Solar term"
-msgid "Lìchūn (Beginning of Spring)"
-msgstr "Lìchūn (Frühlingsanfang)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:57
-msgctxt "Chinese calendar minor Solar term"
-msgid "Jīngzhé (Waking of Insects)"
-msgstr "Jīngzhé (Erwachen der Insekten)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:58
-msgctxt "Chinese calendar minor Solar term"
-msgid "Qīngmíng (Pure Brightness)"
-msgstr "Qīngmíng (Klar und hell)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:59
-msgctxt "Chinese calendar minor Solar term"
-msgid "Lìxià (Beginning of Summer)"
-msgstr "Lìxià (Sommeranfang)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:60
-msgctxt "Chinese calendar minor Solar term"
-msgid "Mángzhòng (Grain in Ear)"
-msgstr "Mángzhòng (Körner mit Grannen/Ährenzeit)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:61
-msgctxt "Chinese calendar minor Solar term"
-msgid "Xiăoshŭ (Slight Heat)"
-msgstr "Xiăoshŭ (Mäßige Hitze)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:62
-msgctxt "Chinese calendar minor Solar term"
-msgid "Lìqiū (Beginning of Autumn)"
-msgstr "Lìqiū (Herbstanfang)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:63
-msgctxt "Chinese calendar minor Solar term"
-msgid "Báilù (White Dew)"
-msgstr "Báilù (Weißer Tau)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:64
-msgctxt "Chinese calendar minor Solar term"
-msgid "Hánlù (Cold Dew)"
-msgstr "Hánlù (Kalter Tau)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:65
-msgctxt "Chinese calendar minor Solar term"
-msgid "Lìdōng (Beginning of Winter)"
-msgstr "Lìdōng (Winteranfang)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:66
-msgctxt "Chinese calendar minor Solar term"
-msgid "Dàxuĕ (Great Snow)"
-msgstr "Dàxuĕ (Großer Schnee)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:67
-msgctxt "Chinese calendar minor Solar term"
-msgid "Xiăohán (Slight Cold)"
-msgstr "Xiăohán (Mäßige Kälte)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:69
-msgctxt "Chinese calendar, celestial stem name"
-msgid "Jiă"
-msgstr "Jiă"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:70
-msgctxt "Chinese calendar, celestial stem name"
-msgid "Yĭ"
-msgstr "Yĭ"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:71
-msgctxt "Chinese calendar, celestial stem name"
-msgid "Bĭng"
-msgstr "Bĭng"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:72
-msgctxt "Chinese calendar, celestial stem name"
-msgid "Dīng"
-msgstr "Dīng"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:73
-msgctxt "Chinese calendar, celestial stem name"
-msgid "Wù"
-msgstr "Wù"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:74
-msgctxt "Chinese calendar, celestial stem name"
-msgid "Jĭ"
-msgstr "Jĭ"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:75
-msgctxt "Chinese calendar, celestial stem name"
-msgid "Gēng"
-msgstr "Gēng"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:76
-msgctxt "Chinese calendar, celestial stem name"
-msgid "Xīn"
-msgstr "Xīn"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:77
-msgctxt "Chinese calendar, celestial stem name"
-msgid "Rén"
-msgstr "Rén"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:78
-msgctxt "Chinese calendar, celestial stem name"
-msgid "Guĭ"
-msgstr "Guĭ"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:80
-#: plugins/Calendars/src/KoreanCalendar.cpp:81
-#: plugins/Calendars/src/VietnameseCalendar.cpp:94
-msgctxt "Chinese calendar, celestial stem element"
-msgid "Tree, male"
-msgstr "Baum, männlich"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:81
-#: plugins/Calendars/src/KoreanCalendar.cpp:82
-#: plugins/Calendars/src/VietnameseCalendar.cpp:95
-msgctxt "Chinese calendar, celestial stem element"
-msgid "Tree, female"
-msgstr "Baum, weiblich"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:82
-#: plugins/Calendars/src/KoreanCalendar.cpp:83
-#: plugins/Calendars/src/VietnameseCalendar.cpp:96
-msgctxt "Chinese calendar, celestial stem element"
-msgid "Fire, male"
-msgstr "Feuer, männlich"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:83
-#: plugins/Calendars/src/KoreanCalendar.cpp:84
-#: plugins/Calendars/src/VietnameseCalendar.cpp:97
-msgctxt "Chinese calendar, celestial stem element"
-msgid "Fire, female"
-msgstr "Feuer, weiblich"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:84
-#: plugins/Calendars/src/KoreanCalendar.cpp:85
-#: plugins/Calendars/src/VietnameseCalendar.cpp:98
-msgctxt "Chinese calendar, celestial stem element"
-msgid "Earth, male"
-msgstr "Erde, männlich"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:85
-#: plugins/Calendars/src/KoreanCalendar.cpp:86
-#: plugins/Calendars/src/VietnameseCalendar.cpp:99
-msgctxt "Chinese calendar, celestial stem element"
-msgid "Earth, female"
-msgstr "Erde, weiblich"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:86
-#: plugins/Calendars/src/KoreanCalendar.cpp:87
-#: plugins/Calendars/src/VietnameseCalendar.cpp:100
-msgctxt "Chinese calendar, celestial stem element"
-msgid "Metal, male"
-msgstr "Metall, männlich"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:87
-#: plugins/Calendars/src/KoreanCalendar.cpp:88
-#: plugins/Calendars/src/VietnameseCalendar.cpp:101
-msgctxt "Chinese calendar, celestial stem element"
-msgid "Metal, female"
-msgstr "Metall, weiblich"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:88
-#: plugins/Calendars/src/KoreanCalendar.cpp:89
-#: plugins/Calendars/src/VietnameseCalendar.cpp:102
-msgctxt "Chinese calendar, celestial stem element"
-msgid "Water, male"
-msgstr "Wasser, männlich"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:89
-#: plugins/Calendars/src/KoreanCalendar.cpp:90
-#: plugins/Calendars/src/VietnameseCalendar.cpp:103
-msgctxt "Chinese calendar, celestial stem element"
-msgid "Water, female"
-msgstr "Wasser, weiblich"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:91
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Zĭ"
-msgstr "Zĭ"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:92
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Chŏu"
-msgstr "Chŏu"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:93
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Yín"
-msgstr "Yín"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:94
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Măo"
-msgstr "Măo"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:95
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Chén"
-msgstr "Chén"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:96
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Sì"
-msgstr "Sì"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:97
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Wŭ"
-msgstr "Wŭ"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:98
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Wèi"
-msgstr "Wèi"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:99
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Shēn"
-msgstr "Shēn"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:100
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Yŏu"
-msgstr "Yŏu"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:101
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Xū"
-msgstr "Xū"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:102
-msgctxt "Chinese calendar, terrestrial branch name"
-msgid "Hài"
-msgstr "Hài"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:104
-#: plugins/Calendars/src/KoreanCalendar.cpp:106
-#: plugins/Calendars/src/VietnameseCalendar.cpp:119
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Rat"
-msgstr "Ratte"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:105
-#: plugins/Calendars/src/KoreanCalendar.cpp:107
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Ox"
-msgstr "Ochse"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:106
-#: plugins/Calendars/src/KoreanCalendar.cpp:108
-#: plugins/Calendars/src/VietnameseCalendar.cpp:121
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Tiger"
-msgstr "Tiger"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:107
-#: plugins/Calendars/src/KoreanCalendar.cpp:109
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Hare"
-msgstr "Kaninchen"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:108
-#: plugins/Calendars/src/KoreanCalendar.cpp:110
-#: plugins/Calendars/src/VietnameseCalendar.cpp:123
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Dragon"
-msgstr "Drache"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:109
-#: plugins/Calendars/src/KoreanCalendar.cpp:111
-#: plugins/Calendars/src/VietnameseCalendar.cpp:124
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Snake"
-msgstr "Schlange"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:110
-#: plugins/Calendars/src/KoreanCalendar.cpp:112
-#: plugins/Calendars/src/VietnameseCalendar.cpp:125
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Horse"
-msgstr "Pferd"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:111
-#: plugins/Calendars/src/KoreanCalendar.cpp:113
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Sheep"
-msgstr "Schaf"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:112
-#: plugins/Calendars/src/KoreanCalendar.cpp:114
-#: plugins/Calendars/src/VietnameseCalendar.cpp:127
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Monkey"
-msgstr "Affe"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:113
-#: plugins/Calendars/src/KoreanCalendar.cpp:115
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Fowl"
-msgstr "Huhn"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:114
-#: plugins/Calendars/src/KoreanCalendar.cpp:116
-#: plugins/Calendars/src/VietnameseCalendar.cpp:129
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Dog"
-msgstr "Hund"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:115
-#: plugins/Calendars/src/KoreanCalendar.cpp:117
-#: plugins/Calendars/src/VietnameseCalendar.cpp:130
-msgctxt "Chinese calendar, terrestrial branch animal totem"
-msgid "Pig"
-msgstr "Schwein"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:146
-#: plugins/Calendars/src/JapaneseCalendar.cpp:94
-#: plugins/Calendars/src/KoreanCalendar.cpp:148
-#: plugins/Calendars/src/VietnameseCalendar.cpp:162
-msgctxt "calendar term like leap year or leap day"
-msgid "leap"
-msgstr "geschaltet"
-
-#. TRANSLATORS: Chinese Calendar output string
-#: plugins/Calendars/src/ChineseCalendar.cpp:159
-#, qt-format
-msgctxt "Chinese calendar output"
-msgid ""
-"Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Year %6: %7 (%8) in cycle %9"
-msgstr ""
-"Tag %1 (%2) - Monat %3<sub>%4</sub> (%5) <br/>Jahr %6: %7 (%8) im Zyklus %9"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:185
-msgctxt "Chinese calendar: Major Solar Term"
-msgid "Major"
-msgstr "Hauptstation (zhōngqì)"
-
-#: plugins/Calendars/src/ChineseCalendar.cpp:185
-msgctxt "Chinese calendar: Minor Solar Term"
-msgid "Minor"
-msgstr " Nebenstation (jiéqì)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:43
-msgctxt "Japanese calendar major Solar term"
-msgid "Usui (Rain Water)"
-msgstr "Usui (Regen)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:44
-msgctxt "Japanese calendar major Solar term"
-msgid "Shunbun (Spring Equinox)"
-msgstr "Shunbun (Frühlingsäquinox)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:45
-msgctxt "Japanese calendar major Solar term"
-msgid "Kokuu (Grain Rain)"
-msgstr "Kokuu (Regen auf die Saat)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:46
-msgctxt "Japanese calendar major Solar term"
-msgid "Shōman (Grain Full)"
-msgstr "Shōman (Kleine Fülle/Ährenbildung)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:47
-msgctxt "Japanese calendar major Solar term"
-msgid "Geshi (Summer Solstice)"
-msgstr "Geshi (Sommersonnwende)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:48
-msgctxt "Japanese calendar major Solar term"
-msgid "Taisho (Great Heat)"
-msgstr "Taisho (Große Hitze)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:49
-msgctxt "Japanese calendar major Solar term"
-msgid "Shosho (Limit of Heat)"
-msgstr "Shosho (Ende der Hitze)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:50
-msgctxt "Japanese calendar major Solar term"
-msgid "Shūbun (Autumnal Equinox)"
-msgstr "Shūbun (Herbstäquinox)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:51
-msgctxt "Japanese calendar major Solar term"
-msgid "Sōkō (Descent of Frost)"
-msgstr "Sōkō (Reif)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:52
-msgctxt "Japanese calendar major Solar term"
-msgid "Shōsetsu (Slight Snow)"
-msgstr "Shōsetsu (Mäßiger Schnee)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:53
-msgctxt "Japanese calendar major Solar term"
-msgid "Tōji (Winter Solstice)"
-msgstr "Tōji (Wintersonnwende)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:54
-msgctxt "Japanese calendar major Solar term"
-msgid "Taikan (Great Cold)"
-msgstr "Taikan (Große Kälte)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:56
-msgctxt "Japanese calendar minor Solar term"
-msgid "Risshun (Beginning of Spring)"
-msgstr "Risshun (Frühlingsanfang)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:57
-msgctxt "Japanese calendar minor Solar term"
-msgid "Keichitsu (Waking of Insects)"
-msgstr "Keichitsu (Erwachen der Insekten)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:58
-msgctxt "Japanese calendar minor Solar term"
-msgid "Seimei (Pure Brightness)"
-msgstr "Seimei (Klar und hell)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:59
-msgctxt "Japanese calendar minor Solar term"
-msgid "Rikka (Beginning of Summer)"
-msgstr "Rikka (Sommeranfang)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:60
-msgctxt "Japanese calendar minor Solar term"
-msgid "Bōshu (Grain in Ear)"
-msgstr "Bōshu (Körner mit Grannen/Ährenzeit)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:61
-msgctxt "Japanese calendar minor Solar term"
-msgid "Shōsho (Slight Heat)"
-msgstr "Shōsho (Mäßige Hitze)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:62
-msgctxt "Japanese calendar minor Solar term"
-msgid "Risshū (Beginning of Autumn)"
-msgstr "Risshū (Herbstanfang)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:63
-msgctxt "Japanese calendar minor Solar term"
-msgid "Hakuro (White Dew)"
-msgstr "Hakuro (Weißer Tau)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:64
-msgctxt "Japanese calendar minor Solar term"
-msgid "Kanro (Cold Dew)"
-msgstr "Kanro (Kalter Tau)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:65
-msgctxt "Japanese calendar minor Solar term"
-msgid "Rittō (Beginning of Winter)"
-msgstr "Rittō (Winteranfang)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:66
-msgctxt "Japanese calendar minor Solar term"
-msgid "Taisetsu (Great Snow)"
-msgstr "Taisetsu (Großer Schnee)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:67
-msgctxt "Japanese calendar minor Solar term"
-msgid "Shōkan (Slight Cold)"
-msgstr "Shōkan (Mäßige Kälte)"
-
-#. TRANSLATORS: Japanese Calendar output string
-#: plugins/Calendars/src/JapaneseCalendar.cpp:108
-#, qt-format
-msgctxt "Japanese Calendar output"
-msgid "Day %1 - Month %2<sub>%3</sub> - year %4 (kigen)"
-msgstr "Tag %1 - Monat %2<sub>%3</sub> - Jahr %4 (kigen)"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:129
-msgctxt "Japanese calendar: Major Solar Term"
-msgid "Major"
-msgstr "Hauptstation"
-
-#: plugins/Calendars/src/JapaneseCalendar.cpp:129
-msgctxt "Japanese calendar: Minor Solar Term"
-msgid "Minor"
-msgstr "Nebenstation"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:43
-msgctxt "Korean calendar major Solar term"
-msgid "Woo-Soo (Rain Water)"
-msgstr "Woo-Soo (Regen)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:44
-msgctxt "Korean calendar major Solar term"
-msgid "Chun-Bun (Spring Equinox)"
-msgstr "Chun-Bun (Frühlingsäquinox)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:45
-msgctxt "Korean calendar major Solar term"
-msgid "Gok-Woo (Grain Rain)"
-msgstr "Gok-Woo (Regen auf die Saat)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:46
-msgctxt "Korean calendar major Solar term"
-msgid "So-Man (Grain Full)"
-msgstr "So-Man (Kleine Fülle/Ährenbildung)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:47
-msgctxt "Korean calendar major Solar term"
-msgid "Ha-Ji (Summer Solstice)"
-msgstr "Ha-Ji (Sommersonnwende)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:48
-msgctxt "Korean calendar major Solar term"
-msgid "Dae-Suh (Great Heat)"
-msgstr "Dae-Suh (Große Hitze)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:49
-msgctxt "Korean calendar major Solar term"
-msgid "Chu-Suh (Limit of Heat)"
-msgstr "Chu-Suh (Ende der Hitze)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:50
-msgctxt "Korean calendar major Solar term"
-msgid "Chu-Bun (Autumnal Equinox)"
-msgstr "Chu-Bun (Herbstäquinox)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:51
-msgctxt "Korean calendar major Solar term"
-msgid "Sang-Kang (Descent of Frost)"
-msgstr "Sang-Kang (Reif)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:52
-msgctxt "Korean calendar major Solar term"
-msgid "So-Sul (Slight Snow)"
-msgstr "So-Sul (Mäßiger Schnee"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:53
-msgctxt "Korean calendar major Solar term"
-msgid "Dong-Ji (Winter Solstice)"
-msgstr "Dong-Ji (Wintersonnwende)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:54
-msgctxt "Korean calendar major Solar term"
-msgid "Dae-Han (Great Cold)"
-msgstr "Dae-Han (Große Kälte)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:56
-msgctxt "Korean calendar minor Solar term"
-msgid "Ip-Chun (Beginning of Spring)"
-msgstr "Ip-Chun (Frühlingsanfang)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:57
-msgctxt "Korean calendar minor Solar term"
-msgid "Kyung-Chip (Waking of Insects)"
-msgstr "Kyung-Chip (Erwachen der Insekten)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:58
-msgctxt "Korean calendar minor Solar term"
-msgid "Chyng-Myung (Pure Brightness)"
-msgstr "Chyng-Myung (Klar und hell)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:59
-msgctxt "Korean calendar minor Solar term"
-msgid "Ip-Ha (Beginning of Summer)"
-msgstr "Ip-Ha (Sommeranfang)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:60
-msgctxt "Korean calendar minor Solar term"
-msgid "Mang-Jong (Grain in Ear)"
-msgstr "Mang-Jong (Körner mit Grannen/Ährenzeit)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:61
-msgctxt "Korean calendar minor Solar term"
-msgid "So-Suh (Slight Heat)"
-msgstr "So-Suh (Mäßige Hitze)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:62
-msgctxt "Korean calendar minor Solar term"
-msgid "Ip-Choo (Beginning of Autumn)"
-msgstr "Ip-Choo (Herbstanfang)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:63
-msgctxt "Korean calendar minor Solar term"
-msgid "Bak-Roo (White Dew)"
-msgstr "Bak-Roo (Weißer Tau)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:64
-msgctxt "Korean calendar minor Solar term"
-msgid "Han-Roo (Cold Dew)"
-msgstr "Han-Roo (Kalter Tau)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:65
-msgctxt "Korean calendar minor Solar term"
-msgid "Ip-Dong (Beginning of Winter)"
-msgstr "Ip-Dong (Winteranfang)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:66
-msgctxt "Korean calendar minor Solar term"
-msgid "Dae-Sul (Great Snow)"
-msgstr "Dae-Sul (Großer Schnee)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:67
-msgctxt "Korean calendar minor Solar term"
-msgid "So-Han (Slight Cold)"
-msgstr "So-Han (Mäßige Kälte)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:69
-msgctxt "Korean calendar, celestial stem name"
-msgid "Kap"
-msgstr "Kap"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:70
-msgctxt "Korean calendar, celestial stem name"
-msgid "El"
-msgstr "El"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:71
-msgctxt "Korean calendar, celestial stem name"
-msgid "Byung"
-msgstr "Byung"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:72
-msgctxt "Korean calendar, celestial stem name"
-msgid "Jung"
-msgstr "Jung"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:73
-msgctxt "Korean calendar, celestial stem name"
-msgid "Mu"
-msgstr "Mu"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:74
-msgctxt "Korean calendar, celestial stem name"
-msgid "Ki"
-msgstr "Ki"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:75
-msgctxt "Korean calendar, celestial stem name"
-msgid "Kyung"
-msgstr "Kyung"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:76
-msgctxt "Korean calendar, celestial stem name"
-msgid "Shin"
-msgstr "Shin"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:77
-msgctxt "Korean calendar, celestial stem name"
-msgid "Im"
-msgstr "Im"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:78
-msgctxt "Korean calendar, celestial stem name"
-msgid "Gye"
-msgstr "Gye"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:92
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Ja"
-msgstr "Ja"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:93
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Chuk"
-msgstr "Chuk"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:94
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "In"
-msgstr "In"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:95
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Myo"
-msgstr "Myo"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:96
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Jin"
-msgstr "Jin"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:97
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Sa"
-msgstr "Sa"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:98
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Oh"
-msgstr "Oh"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:99
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Mi"
-msgstr "Mi"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:100
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Shin"
-msgstr "Shin"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:101
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Yoo"
-msgstr "Yoo"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:102
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Sool"
-msgstr "Sool"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:103
-msgctxt "Korean calendar, terrestrial branch name"
-msgid "Hae"
-msgstr "Hae"
-
-#. TRANSLATORS: Korean Calendar output string
-#: plugins/Calendars/src/KoreanCalendar.cpp:161
-#, qt-format
-msgctxt "Korean Calendar output"
-msgid "Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Danki Year %6 (%7)"
-msgstr "Tag %1 (%2) - Monat %3<sub>%4</sub> (%5) <br/>Danki Jahr %6 (%7)"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:185
-msgctxt "Korean calendar: Major Solar Term"
-msgid "Major"
-msgstr "Hauptstation"
-
-#: plugins/Calendars/src/KoreanCalendar.cpp:185
-msgctxt "Korean calendar: Minor Solar Term"
-msgid "Minor"
-msgstr "Nebenstation"
+#: plugins/Calendars/src/RomanCalendar.cpp:36
+msgctxt "Roman month name (genitive)"
+msgid "Ianuarii"
+msgstr "Ianuarii"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:37
+msgctxt "Roman month name (genitive)"
+msgid "Februarii"
+msgstr "Februarii"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:38
+msgctxt "Roman month name (genitive)"
+msgid "Martiae"
+msgstr "Martiae"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:39
+msgctxt "Roman month name (genitive)"
+msgid "Aprilis"
+msgstr "Aprilis"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:40
+msgctxt "Roman month name (genitive)"
+msgid "Maii"
+msgstr "Maii"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:41
+msgctxt "Roman month name (genitive)"
+msgid "Iunii"
+msgstr "Iunii"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:42
+msgctxt "Roman month name (genitive)"
+msgid "Iulii"
+msgstr "Iulii"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:43
+msgctxt "Roman month name (genitive)"
+msgid "Augusti"
+msgstr "Augusti"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:44
+msgctxt "Roman month name (genitive)"
+msgid "Septembris"
+msgstr "Septembris"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:45
+msgctxt "Roman month name (genitive)"
+msgid "Octobris"
+msgstr "Octobris"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:46
+msgctxt "Roman month name (genitive)"
+msgid "Novembris"
+msgstr "Novembris"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:47
+msgctxt "Roman month name (genitive)"
+msgid "Decembris"
+msgstr "Decembris"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:65
+msgctxt "Roman calendar term"
+msgid "Kalendae"
+msgstr "Kalendae"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:66
+msgctxt "Roman calendar term"
+msgid "Nonae"
+msgstr "Nonae"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:67
+msgctxt "Roman calendar term"
+msgid "Idus"
+msgstr "Idus"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:68
+msgctxt "Roman calendar term"
+msgid "Kal."
+msgstr "Kal."
+
+#: plugins/Calendars/src/RomanCalendar.cpp:69
+msgctxt "Roman calendar term"
+msgid "Non."
+msgstr "Non."
+
+#: plugins/Calendars/src/RomanCalendar.cpp:70
+msgctxt "Roman calendar term"
+msgid "Id."
+msgstr "Id."
+
+#: plugins/Calendars/src/RomanCalendar.cpp:86
+msgctxt "Roman calendar term"
+msgid "pridie"
+msgstr "pridie"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:88
+msgctxt "Roman calendar term"
+msgid "bis"
+msgstr "bis"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:89
+msgctxt "Roman calendar term"
+msgid "ante diem"
+msgstr "ante diem"
+
+#: plugins/Calendars/src/RomanCalendar.cpp:105
+msgctxt "ab urbe condita"
+msgid "A.U.C."
+msgstr "A.U.C."
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:44
+msgctxt "Tibetan day name"
+msgid "gza'nyi ma"
+msgstr "gza'nyi ma"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:45
+msgctxt "Tibetan day name"
+msgid "gza'zla ba"
+msgstr "gza'zla ba"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:46
+msgctxt "Tibetan day name"
+msgid "gza'mig dmar"
+msgstr "gza'mig dmar"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:47
+msgctxt "Tibetan day name"
+msgid "gza'lhag pa"
+msgstr "gza'lhag pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:48
+msgctxt "Tibetan day name"
+msgid "gza'phur bu"
+msgstr "gza'phur bu"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:49
+msgctxt "Tibetan day name"
+msgid "gza'pa sangs"
+msgstr "gza'pa sangs"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:50
+msgctxt "Tibetan day name"
+msgid "gza'spen pa"
+msgstr "gza'spen pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:52
+msgctxt "Tibetan month name"
+msgid "dbo"
+msgstr "dbo"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:53
+msgctxt "Tibetan month name"
+msgid "nag pa"
+msgstr "nag pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:54
+msgctxt "Tibetan month name"
+msgid "sa ga"
+msgstr "sa ga"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:55
+msgctxt "Tibetan month name"
+msgid "snron"
+msgstr "snron"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:56
+msgctxt "Tibetan month name"
+msgid "chu stod"
+msgstr "chu stod"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:57
+msgctxt "Tibetan month name"
+msgid "gro bzhin"
+msgstr "gro bzhin"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:58
+msgctxt "Tibetan month name"
+msgid "khrums"
+msgstr "khrums"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:59
+msgctxt "Tibetan month name"
+msgid "tha skar"
+msgstr "tha skar"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:60
+msgctxt "Tibetan month name"
+msgid "smin drug"
+msgstr "smin drug"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:61
+msgctxt "Tibetan month name"
+msgid "mgo"
+msgstr "mgo"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:62
+msgctxt "Tibetan month name"
+msgid "rgyal"
+msgstr "rgyal"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:63
+msgctxt "Tibetan month name"
+msgid "mchu"
+msgstr "mchu"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:65
+msgctxt "Tibetan animal totems"
+msgid "byi ba (Mouse)"
+msgstr "byi ba (Maus)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:66
+msgctxt "Tibetan animal totems"
+msgid "glang (Ox)"
+msgstr "glang (Ochse)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:67
+msgctxt "Tibetan animal totems"
+msgid "stag (Tiger)"
+msgstr "stag (Tiger)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:68
+msgctxt "Tibetan animal totems"
+msgid "yos (Hare)"
+msgstr "yos (Hase)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:69
+msgctxt "Tibetan animal totems"
+msgid "'brug (Dragon)"
+msgstr "'brug (Drache)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:70
+msgctxt "Tibetan animal totems"
+msgid "sbrul (Snake)"
+msgstr "sbrul (Schlange)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:71
+msgctxt "Tibetan animal totems"
+msgid "rta (Horse)"
+msgstr "rta (Pferd)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:72
+msgctxt "Tibetan animal totems"
+msgid "lug (Sheep)"
+msgstr "lug (Schaf)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:73
+msgctxt "Tibetan animal totems"
+msgid "spre'u (Monkey)"
+msgstr "spre'u (Affe)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:74
+msgctxt "Tibetan animal totems"
+msgid "bya (Bird)"
+msgstr "bya (Vogel)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:75
+msgctxt "Tibetan animal totems"
+msgid "khyi (Dog)"
+msgstr "khyi (Hund)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:76
+msgctxt "Tibetan animal totems"
+msgid "phag (Pig)"
+msgstr "phag (Schwein)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:78
+msgctxt "Tibetan calendar element"
+msgid "shing (Wood, Green)"
+msgstr "shing (Holz, grün)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:79
+msgctxt "Tibetan calendar element"
+msgid "me (Fire, Red)"
+msgstr "me (Feuer, rot)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:80
+msgctxt "Tibetan calendar element"
+msgid "sa (Earth, Yellow)"
+msgstr "sa (Erde, gelb)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:81
+msgctxt "Tibetan calendar element"
+msgid "lcags (Iron, White)"
+msgstr "lcags (Eisen, Weiß)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:82
+msgctxt "Tibetan calendar element"
+msgid "chu (Water, Blue)"
+msgstr "chu (Wasser, blau)"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:84
+msgctxt "Tibetan yoga"
+msgid "sel ba"
+msgstr "sel ba"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:85
+msgctxt "Tibetan yoga"
+msgid "mdza’ ba"
+msgstr "mdza’ ba"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:86
+msgctxt "Tibetan yoga"
+msgid "tshe dang ldan pa"
+msgstr "tshe dang ldan pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:87
+msgctxt "Tibetan yoga"
+msgid "skal bzang"
+msgstr "skal bzang"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:88
+msgctxt "Tibetan yoga"
+msgid "bzang po"
+msgstr "bzang po"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:89
+msgctxt "Tibetan yoga"
+msgid "shin tu skrang"
+msgstr "shin tu skrang"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:90
+msgctxt "Tibetan yoga"
+msgid "las bzang"
+msgstr "las bzang"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:91
+msgctxt "Tibetan yoga"
+msgid "’dzin pa"
+msgstr "’dzin pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:92
+msgctxt "Tibetan yoga"
+msgid "zug rngu"
+msgstr "zug rngu"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:93
+msgctxt "Tibetan yoga"
+msgid "skrang"
+msgstr "skrang"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:94
+msgctxt "Tibetan yoga"
+msgid "’phel ba"
+msgstr "’phel ba"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:95
+msgctxt "Tibetan yoga"
+msgid "nges pa"
+msgstr "nges pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:96
+msgctxt "Tibetan yoga"
+msgid "kun ’joms"
+msgstr "kun ’joms"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:97
+msgctxt "Tibetan yoga"
+msgid "dga’ ba"
+msgstr "dga’ ba"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:98
+msgctxt "Tibetan yoga"
+msgid "rdo rje"
+msgstr "rdo rje"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:99
+#: plugins/Calendars/src/TibetanCalendar.cpp:104
+msgctxt "Tibetan yoga"
+msgid "grub pa"
+msgstr "grub pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:100
+msgctxt "Tibetan yoga"
+msgid "shin tu lhung"
+msgstr "shin tu lhung"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:101
+msgctxt "Tibetan yoga"
+msgid "mchog can"
+msgstr "mchog can"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:102
+msgctxt "Tibetan yoga"
+msgid "yongs ’joms"
+msgstr "yongs ’joms"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:103
+msgctxt "Tibetan yoga"
+msgid "zhi ba"
+msgstr "zhi ba"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:105
+msgctxt "Tibetan yoga"
+msgid "bsgrub bya"
+msgstr "bsgrub bya"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:106
+msgctxt "Tibetan yoga"
+msgid "dge ba"
+msgstr "dge ba"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:107
+msgctxt "Tibetan yoga"
+msgid "dkar po"
+msgstr "dkar po"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:108
+msgctxt "Tibetan yoga"
+msgid "tshangs pa"
+msgstr "tshangs pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:109
+msgctxt "Tibetan yoga"
+msgid "dbang po"
+msgstr "dbang po"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:110
+msgctxt "Tibetan yoga"
+msgid "khon ’dzin"
+msgstr "khon ’dzin"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:112
+msgctxt "Tibetan nakshatra"
+msgid "tha skar"
+msgstr "tha skar"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:113
+msgctxt "Tibetan nakshatra"
+msgid "bra nye"
+msgstr "bra nye"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:114
+msgctxt "Tibetan nakshatra"
+msgid "smin drug"
+msgstr "smin drug"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:115
+msgctxt "Tibetan nakshatra"
+msgid "snar ma"
+msgstr "snar ma"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:116
+msgctxt "Tibetan nakshatra"
+msgid "mgo"
+msgstr "mgo"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:117
+msgctxt "Tibetan nakshatra"
+msgid "lag"
+msgstr "lag"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:118
+msgctxt "Tibetan nakshatra"
+msgid "nabs so"
+msgstr "nabs so"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:119
+msgctxt "Tibetan nakshatra"
+msgid "rgyal"
+msgstr "rgyal"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:120
+msgctxt "Tibetan nakshatra"
+msgid "skag"
+msgstr "skag"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:121
+msgctxt "Tibetan nakshatra"
+msgid "mchu"
+msgstr "mchu"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:122
+msgctxt "Tibetan nakshatra"
+msgid "gre"
+msgstr "gre"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:123
+msgctxt "Tibetan nakshatra"
+msgid "dbo"
+msgstr "dbo"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:124
+msgctxt "Tibetan nakshatra"
+msgid "me bzhi"
+msgstr "me bzhi"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:125
+msgctxt "Tibetan nakshatra"
+msgid "nag pa"
+msgstr "nag pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:126
+msgctxt "Tibetan nakshatra"
+msgid "sa ri"
+msgstr "sa ri"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:127
+msgctxt "Tibetan nakshatra"
+msgid "sa ga"
+msgstr "sa ga"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:128
+msgctxt "Tibetan nakshatra"
+msgid "lha mtshams"
+msgstr "lha mtshams"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:129
+msgctxt "Tibetan nakshatra"
+msgid "snron"
+msgstr "snron"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:130
+msgctxt "Tibetan nakshatra"
+msgid "snrubs"
+msgstr "snrubs"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:131
+msgctxt "Tibetan nakshatra"
+msgid "chu stod"
+msgstr "chu stod"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:132
+msgctxt "Tibetan nakshatra"
+msgid "chu smad"
+msgstr "chu smad"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:133
+msgctxt "Tibetan nakshatra"
+msgid "gro bzhin"
+msgstr "gro bzhin"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:134
+msgctxt "Tibetan nakshatra"
+msgid "byi bzhin"
+msgstr "byi bzhin"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:135
+msgctxt "Tibetan nakshatra"
+msgid "mon gre"
+msgstr "mon gre"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:136
+msgctxt "Tibetan nakshatra"
+msgid "mon gru"
+msgstr "mon gru"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:137
+msgctxt "Tibetan nakshatra"
+msgid "khrums stod"
+msgstr "khrums stod"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:138
+msgctxt "Tibetan nakshatra"
+msgid "khrums smad"
+msgstr "khrums smad"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:139
+msgctxt "Tibetan nakshatra"
+msgid "nam gru"
+msgstr "nam gru"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:141
+msgctxt "Tibetan karana"
+msgid "mi sdug pa"
+msgstr "mi sdug pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:142
+msgctxt "Tibetan karana"
+msgid "gdab pa"
+msgstr "gdab pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:143
+msgctxt "Tibetan karana"
+msgid "byis pa"
+msgstr "byis pa"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:144
+msgctxt "Tibetan karana"
+msgid "rigs can"
+msgstr "rigs can"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:145
+msgctxt "Tibetan karana"
+msgid "til rdung"
+msgstr "til rdung"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:146
+msgctxt "Tibetan karana"
+msgid "khyim skyes"
+msgstr "khyim skyes"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:147
+msgctxt "Tibetan karana"
+msgid "tshong ba"
+msgstr "tshong ba"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:148
+msgctxt "Tibetan karana"
+msgid "vishti"
+msgstr "vishti"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:149
+msgctxt "Tibetan karana"
+msgid "bkra shis"
+msgstr "bkra shis"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:150
+msgctxt "Tibetan karana"
+msgid "rkang bzhi"
+msgstr "rkang bzhi"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:151
+msgctxt "Tibetan karana"
+msgid "klu"
+msgstr "klu"
+
+#. TRANSLATORS: A.T. stands for "anno Tibetorum".
+#: plugins/Calendars/src/TibetanCalendar.cpp:190
+msgctxt "epoch"
+msgid "A.T."
+msgstr "A.T."
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:380
+msgid "male"
+msgstr "männlich"
+
+#: plugins/Calendars/src/TibetanCalendar.cpp:380
+msgid "female"
+msgstr "weiblich"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:43
 msgctxt "Vietnamese calendar, month name"
@@ -38331,6 +39050,246 @@ msgstr "Hauptstation"
 msgctxt "Vietnamese calendar: Minor Solar Term"
 msgid "Minor"
 msgstr "Nebenstation"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:42
+msgctxt "Zoroastrian month name"
+msgid "Ferverdīn"
+msgstr "Ferverdīn"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:43
+msgctxt "Zoroastrian month name"
+msgid "Ardebehesht"
+msgstr "Ardebehesht"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:44
+msgctxt "Zoroastrian month name"
+msgid "Khordād"
+msgstr "Khordād"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:45
+msgctxt "Zoroastrian month name"
+msgid "Tīr"
+msgstr "Tīr"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:46
+msgctxt "Zoroastrian month name"
+msgid "Mordād"
+msgstr "Mordād"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:47
+msgctxt "Zoroastrian month name"
+msgid "Sharīr"
+msgstr "Sharīr"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:48
+msgctxt "Zoroastrian month name"
+msgid "Mihr"
+msgstr "Mihr"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:49
+msgctxt "Zoroastrian month name"
+msgid "Abān"
+msgstr "Abān"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:50
+msgctxt "Zoroastrian month name"
+msgid "Āder"
+msgstr "Āder"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:51
+msgctxt "Zoroastrian month name"
+msgid "Deï"
+msgstr "Deï"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:52
+msgctxt "Zoroastrian month name"
+msgid "Bahmen"
+msgstr "Bahmen"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:53
+msgctxt "Zoroastrian month name"
+msgid "Asfendārmed"
+msgstr "Asfendārmed"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:54
+msgctxt "Zoroastrian month name"
+msgid "(epagomenae)"
+msgstr "(epagomenae)"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:56
+msgctxt "Zoroastrian day name"
+msgid "Hormuz"
+msgstr "Hormuz"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:57
+msgctxt "Zoroastrian day name"
+msgid "Bahman"
+msgstr "Bahman"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:58
+msgctxt "Zoroastrian day name"
+msgid "Ordībehesht"
+msgstr "Ordībehesht"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:59
+msgctxt "Zoroastrian day name"
+msgid "Shahrīvar"
+msgstr "Shahrīvar"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:60
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:89
+msgctxt "Zoroastrian day name"
+msgid "Esfandārmud"
+msgstr "Esfandārmud"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:61
+msgctxt "Zoroastrian day name"
+msgid "Xordād"
+msgstr "Xordād"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:62
+msgctxt "Zoroastrian day name"
+msgid "Mordād"
+msgstr "Mordād"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:63
+msgctxt "Zoroastrian day name"
+msgid "Diy be Āzar"
+msgstr "Diy be Āzar"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:64
+msgctxt "Zoroastrian day name"
+msgid "Āzar"
+msgstr "Āzar"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:65
+msgctxt "Zoroastrian day name"
+msgid "Ābān"
+msgstr "Ābān"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:66
+msgctxt "Zoroastrian day name"
+msgid "Xor"
+msgstr "Xor"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:67
+msgctxt "Zoroastrian day name"
+msgid "Māh"
+msgstr "Māh"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:68
+msgctxt "Zoroastrian day name"
+msgid "Tīr"
+msgstr "Tīr"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:69
+msgctxt "Zoroastrian day name"
+msgid "Goosh"
+msgstr "Goosh"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:70
+msgctxt "Zoroastrian day name"
+msgid "Diy be Mehr"
+msgstr "Diy be Mehr"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:71
+msgctxt "Zoroastrian day name"
+msgid "Mehr"
+msgstr "Mehr"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:72
+msgctxt "Zoroastrian day name"
+msgid "Sorūsh"
+msgstr "Sorūsh"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:73
+msgctxt "Zoroastrian day name"
+msgid "Rashn"
+msgstr "Rashn"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:74
+msgctxt "Zoroastrian day name"
+msgid "Farvardīn"
+msgstr "Farvardīn"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:75
+msgctxt "Zoroastrian day name"
+msgid "Bahrām"
+msgstr "Bahrām"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:76
+msgctxt "Zoroastrian day name"
+msgid "Rām"
+msgstr "Rām"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:77
+msgctxt "Zoroastrian day name"
+msgid "Bād"
+msgstr "Bād"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:78
+msgctxt "Zoroastrian day name"
+msgid "Diy be Dīn"
+msgstr "Diy be Dīn"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:79
+msgctxt "Zoroastrian day name"
+msgid "Dīn"
+msgstr "Dīn"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:80
+msgctxt "Zoroastrian day name"
+msgid "Ard"
+msgstr "Ard"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:81
+msgctxt "Zoroastrian day name"
+msgid "Ashtād"
+msgstr "Ashtād"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:82
+msgctxt "Zoroastrian day name"
+msgid "Asmān"
+msgstr "Asmān"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:83
+msgctxt "Zoroastrian day name"
+msgid "Zāmyād"
+msgstr "Zāmyād"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:84
+msgctxt "Zoroastrian day name"
+msgid "Māresfand"
+msgstr "Māresfand"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:85
+msgctxt "Zoroastrian day name"
+msgid "Anīrān"
+msgstr "Anīrān"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:87
+msgctxt "Zoroastrian day name"
+msgid "Ahnad"
+msgstr "Ahnad"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:88
+msgctxt "Zoroastrian day name"
+msgid "Ashnad"
+msgstr "Ashnad"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:90
+msgctxt "Zoroastrian day name"
+msgid "Axshatar"
+msgstr "Axshatar"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:91
+msgctxt "Zoroastrian day name"
+msgid "Behesht"
+msgstr "Behesht"
+
+#: plugins/Calendars/src/ZoroastrianCalendar.cpp:132
+msgid "Jezdegerd Era"
+msgstr "Yazdegerd-Ära"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:190
 msgid "Calendars Plug-in"

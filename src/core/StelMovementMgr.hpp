@@ -419,9 +419,13 @@ public slots:
 	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn southern horizon to screen bottom.
 	void lookSouth(bool zero=false);
 	//! Look immediately towards Zenith, turning southern horizon to screen bottom.
-	void lookZenith(void);
+	//! @param azi south-centered azimuth. (default 180=South, 90=East, etc.)
+	//! @note custom azi only valid for alt-azimuthal mount mode
+	void lookZenith(double azi=180.);
 	//! Look immediately towards Nadir, turning southern horizon to screen top.
-	void lookNadir(void);
+	//! @param azi south-centered azimuth. (default 180=South, 90=East, etc.)
+	//! @note custom azi only valid for alt-azimuthal mount mode
+	void lookNadir(double azi=180.);
 	//! Look immediately towards North Celestial pole.
 	void lookTowardsNCP(void);
 	//! Look immediately towards South Celestial pole.
