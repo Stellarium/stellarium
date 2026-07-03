@@ -264,7 +264,7 @@ void HipsMgr::draw(StelCore* core)
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	for (auto &survey: activeSurveys)
 	{
-		if (survey->fader.getInterstate() > 0.f && survey->planet.isEmpty())
+		if (survey->isVisible() && survey->planet.isEmpty())
 		{
 			survey->draw(&sPainter, 2.0 * M_PI, Q_NULLPTR, flagShowAtmosphericExtinction);
 		}

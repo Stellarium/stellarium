@@ -504,7 +504,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 
 void HipsSurvey::updateProgressBar(int nb, int total)
 {
-	if (nb == total)
+	if (!isVisible() || nb == total)
 	{
 		hideProgressBar();
 		return;
