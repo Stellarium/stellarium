@@ -203,7 +203,21 @@ void SkyGui::init(StelGui* astelGui)
 void SkyGui::updateInfoPanelPos()
 {
 	const auto factor = StelApp::getInstance().screenFontSizeRatio();
-	infoPanel->setPos(8 * factor, 8 * factor);
+	const qreal margin = 8 * factor;
+	qreal infoX = margin;
+	if (toolbarAtTop && !toolbarAtRight)
+	{
+		const qreal barRight = leftBar->pos().x() + leftBar->boundingRectNoHelpLabel().width();
+		infoX = qMax(margin, barRight + margin);
+	}
+	qreal infoY = margin;
+	if (toolbarAtTop)
+	{
+		const qreal barBottom = bottomBar->pos().y() + bottomBar->boundingRectNoHelpLabel().height();
+		infoY = qMax(margin, barBottom + margin);
+	}
+
+	infoPanel->setPos(infoX, infoY);
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -457,6 +471,7 @@ void SkyGui::updateBarsPos()
 	autoHidebts->setOpacity(qMax(0.01, opacity));	// Work around a qt bug
 
 	// Update the screen as soon as possible.
+	updateInfoPanelPos();
 	StelMainView::getInstance().thereWasAnEvent();
 }
 

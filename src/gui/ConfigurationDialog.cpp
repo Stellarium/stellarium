@@ -424,9 +424,17 @@ void ConfigurationDialog::createDialogContent()
 	connect(mainView, SIGNAL(sizeChanged(const QSize&)), this, SLOT(updateDpiTooltip()));
 	updateDpiTooltip();
 
-	// Toolbar position
-	connectBoolProperty(ui->toolbarAtTopCheckBox, "StelGui.toolbarAtTop");
-	connectBoolProperty(ui->toolbarAtRightCheckBox, "StelGui.toolbarAtRight");
+	// Toolbar position comboboxes
+	StelPropertyMgr* pm = StelApp::getInstance().getStelPropertyManager();
+	ui->toolButtonsEdgeComboBox->addItem(q_("Bottom edge"));
+	ui->toolButtonsEdgeComboBox->addItem(q_("Top edge"));
+	ui->toolButtonsEdgeComboBox->setCurrentIndex(pm->getStelPropertyValue("StelGui.toolbarAtTop").toBool() ? 1 : 0);
+	connect(ui->toolButtonsEdgeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setToolButtonsEdge(int)));
+
+	ui->dialogButtonsEdgeComboBox->addItem(q_("Left edge"));
+	ui->dialogButtonsEdgeComboBox->addItem(q_("Right edge"));
+	ui->dialogButtonsEdgeComboBox->setCurrentIndex(pm->getStelPropertyValue("StelGui.toolbarAtRight").toBool() ? 1 : 0);
+	connect(ui->dialogButtonsEdgeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDialogButtonsEdge(int)));
 
 	// script tab controls
 	#ifdef ENABLE_SCRIPTING
@@ -530,6 +538,16 @@ void ConfigurationDialog::updateDateTimeDisplayFormat()
 	QString dateFormat = localeManager.getQtDateFormatStr();
 	ui->todayTimeSpinBox->setDisplayFormat(timeFormat);
 	ui->fixedDateTimeEdit->setDisplayFormat(QString("%1 %2").arg(dateFormat, timeFormat));
+}
+
+void ConfigurationDialog::setToolButtonsEdge(int idx)
+{
+	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("StelGui.toolbarAtTop", idx == 1);
+}
+
+void ConfigurationDialog::setDialogButtonsEdge(int idx)
+{
+	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("StelGui.toolbarAtRight", idx == 1);
 }
 
 void ConfigurationDialog::setKeyNavigationState(bool state)
