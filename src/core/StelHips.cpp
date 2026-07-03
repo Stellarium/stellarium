@@ -209,8 +209,15 @@ void HipsSurvey::setColorChannel(int value)
 	emit displaySettingsChanged();
 }
 
+void HipsSurvey::setInvertedColors(bool value)
+{
+	if (invertedColors == value) return;
+	invertedColors = value;
+	emit displaySettingsChanged();
+}
+
 void HipsSurvey::setDisplaySettings(float gamma, float saturation, float brightness, float opacity,
-                                    int colorChannel)
+                                    int colorChannel, bool invertedColors)
 {
 	bool changed = false;
 	gamma = qBound(0.1f, gamma, 5.f);
@@ -244,13 +251,18 @@ void HipsSurvey::setDisplaySettings(float gamma, float saturation, float brightn
 		this->colorChannel = colorChannel;
 		changed = true;
 	}
+	if (this->invertedColors != invertedColors)
+	{
+		this->invertedColors = invertedColors;
+		changed = true;
+	}
 	if (changed)
 		emit displaySettingsChanged();
 }
 
 void HipsSurvey::resetDisplaySettings()
 {
-	setDisplaySettings(1.f, 1.f, 1.f, 1.f, ColorChannelRgb);
+	setDisplaySettings(1.f, 1.f, 1.f, 1.f, ColorChannelRgb, false);
 }
 
 bool HipsSurvey::hasDefaultDisplaySettings() const
@@ -259,7 +271,8 @@ bool HipsSurvey::hasDefaultDisplaySettings() const
 	       qFuzzyCompare(saturation, 1.f) &&
 	       qFuzzyCompare(brightness, 1.f) &&
 	       qFuzzyCompare(opacity, 1.f) &&
-	       colorChannel == ColorChannelRgb;
+	       colorChannel == ColorChannelRgb &&
+	       !invertedColors;
 }
 
 void HipsSurvey::hideProgressBar()
@@ -403,7 +416,8 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	if (!planetarySurvey)
 	{
 		sPainter->setTextureDisplayAdjustment(gamma, saturation, brightness,
-		                                      colorChannel, colorChannel != ColorChannelRgb,
+		                                      colorChannel, invertedColors,
+		                                      colorChannel != ColorChannelRgb,
 		                                      fader.getInterstate() * displayOpacity);
 	}
 

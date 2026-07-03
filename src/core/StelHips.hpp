@@ -57,6 +57,7 @@ class HipsSurvey : public QObject
 	Q_PROPERTY(float brightness READ getBrightness WRITE setBrightness NOTIFY displaySettingsChanged)
 	Q_PROPERTY(float opacity READ getOpacity WRITE setOpacity NOTIFY displaySettingsChanged)
 	Q_PROPERTY(int colorChannel READ getColorChannel WRITE setColorChannel NOTIFY displaySettingsChanged)
+	Q_PROPERTY(bool invertedColors READ getInvertedColors WRITE setInvertedColors NOTIFY displaySettingsChanged)
 	//! The name of the planet the survey is attached to, or empty if this is a skysurvey.
 	Q_PROPERTY(QString planet MEMBER planet)
 
@@ -132,8 +133,10 @@ public:
 	void setOpacity(float value);
 	int getColorChannel() const { return colorChannel; }
 	void setColorChannel(int value);
+	bool getInvertedColors() const { return invertedColors; }
+	void setInvertedColors(bool value);
 	void setDisplaySettings(float gamma, float saturation, float brightness, float opacity,
-	                        int colorChannel);
+	                        int colorChannel, bool invertedColors);
 	void resetDisplaySettings();
 	bool hasDefaultDisplaySettings() const;
 
@@ -165,6 +168,7 @@ private:
 	float brightness = 1.f;
 	float opacity = 1.f;
 	int colorChannel = ColorChannelRgb;
+	bool invertedColors = false;
 	bool planetarySurvey;
 	QCache<long int, HipsTile> tiles;
 	// reply to the initial download of the properties file and to the

@@ -760,6 +760,7 @@ void ViewDialog::createDialogContent()
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
 	connect(ui->hipsColorChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
+	connect(ui->hipsInvertedColorsCheckBox, &QCheckBox::toggled, this, &ViewDialog::hipsDisplaySettingsChanged);
 	connect(ui->hipsResetPushButton, &QPushButton::clicked, this, &ViewDialog::resetSelectedHipsDisplaySettings);
 	connect(ui->hipsResetAllPushButton, &QPushButton::clicked, this, &ViewDialog::resetAllHipsDisplaySettings);
 	connectBoolProperty(ui->hipsAtmosphericExtinctionCheckBox, "HipsMgr.flagShowAtmosphericExtinction");
@@ -942,12 +943,14 @@ void ViewDialog::updateHipsControls()
 	const QSignalBlocker brightnessBlocker(ui->hipsBrightnessDoubleSpinBox);
 	const QSignalBlocker opacityBlocker(ui->hipsOpacityDoubleSpinBox);
 	const QSignalBlocker colorChannelBlocker(ui->hipsColorChannelComboBox);
+	const QSignalBlocker invertedColorsBlocker(ui->hipsInvertedColorsCheckBox);
 
 	ui->hipsGammaDoubleSpinBox->setValue(hips ? hips->getGamma() : 1.);
 	ui->hipsSaturationDoubleSpinBox->setValue(hips ? hips->getSaturation() : 1.);
 	ui->hipsBrightnessDoubleSpinBox->setValue(hips ? hips->getBrightness() : 1.);
 	ui->hipsOpacityDoubleSpinBox->setValue(hips ? hips->getOpacity() : 1.);
 	ui->hipsColorChannelComboBox->setCurrentIndex(hips ? hips->getColorChannel() : HipsSurvey::ColorChannelRgb);
+	ui->hipsInvertedColorsCheckBox->setChecked(hips ? hips->getInvertedColors() : false);
 
 	const bool enableSelectedControls = static_cast<bool>(hips);
 	ui->hipsSettingsGroupBox->setEnabled(enableSelectedControls || hasSkySurvey);
@@ -961,6 +964,7 @@ void ViewDialog::updateHipsControls()
 	ui->hipsOpacityDoubleSpinBox->setEnabled(enableSelectedControls);
 	ui->hipsColorChannelLabel->setEnabled(enableSelectedControls);
 	ui->hipsColorChannelComboBox->setEnabled(enableSelectedControls);
+	ui->hipsInvertedColorsCheckBox->setEnabled(enableSelectedControls);
 	ui->hipsResetPushButton->setEnabled(enableSelectedControls);
 	ui->hipsResetAllPushButton->setEnabled(hasSkySurvey);
 }
@@ -975,7 +979,8 @@ void ViewDialog::hipsDisplaySettingsChanged()
 	                         static_cast<float>(ui->hipsSaturationDoubleSpinBox->value()),
 	                         static_cast<float>(ui->hipsBrightnessDoubleSpinBox->value()),
 	                         static_cast<float>(ui->hipsOpacityDoubleSpinBox->value()),
-	                         ui->hipsColorChannelComboBox->currentIndex());
+	                         ui->hipsColorChannelComboBox->currentIndex(),
+	                         ui->hipsInvertedColorsCheckBox->isChecked());
 }
 
 void ViewDialog::resetSelectedHipsDisplaySettings()
