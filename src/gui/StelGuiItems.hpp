@@ -371,7 +371,7 @@ class StelBarsFrame : public QGraphicsPathItem
 	public:
 		StelBarsFrame(QGraphicsItem* parent);
 		//! defines a line around the two button bars
-		void updatePath(BottomStelBar* bottom, LeftStelBar* left, bool barOnTop=false, bool barOnRight=false);
+		void updatePath(BottomStelBar* bottom, LeftStelBar* left, bool barOnTop, bool barOnRight);
 		//! return radius of corner arc
 		double getRoundSize() const {return roundSize;}
 		void setBackgroundOpacity(double opacity);
