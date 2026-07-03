@@ -392,7 +392,8 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 		aLum = qMin(1.0f, aLum * 2.f);
 		extinctionColor.set(aLum, aLum, aLum);
 
-		const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
+		const auto landscapeMgr = qobject_cast<LandscapeMgr*>(StelApp::getInstance().getModule("LandscapeMgr"));
+		const float atmLum = landscapeMgr ? landscapeMgr->getAtmosphereAverageLuminance() : 0.f;
 		const float atmFactor = qMax(0.35f, 50.0f * (0.02f - atmLum));
 		extinctionColor *= atmFactor * atmFactor;
 	}
