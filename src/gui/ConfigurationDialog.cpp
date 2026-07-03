@@ -131,6 +131,8 @@ void ConfigurationDialog::retranslate()
 
 		populateDitherList();
 
+		populateToolbarCornerComboBox();
+
 		//Plug-in information
 		populatePluginsList();
 
@@ -424,17 +426,9 @@ void ConfigurationDialog::createDialogContent()
 	connect(mainView, SIGNAL(sizeChanged(const QSize&)), this, SLOT(updateDpiTooltip()));
 	updateDpiTooltip();
 
-	// Toolbar position comboboxes
-	StelPropertyMgr* pm = StelApp::getInstance().getStelPropertyManager();
-	ui->toolButtonsEdgeComboBox->addItem(q_("Bottom edge"));
-	ui->toolButtonsEdgeComboBox->addItem(q_("Top edge"));
-	ui->toolButtonsEdgeComboBox->setCurrentIndex(pm->getStelPropertyValue("StelGui.toolbarAtTop").toBool() ? 1 : 0);
-	connect(ui->toolButtonsEdgeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setToolButtonsEdge(int)));
-
-	ui->dialogButtonsEdgeComboBox->addItem(q_("Left edge"));
-	ui->dialogButtonsEdgeComboBox->addItem(q_("Right edge"));
-	ui->dialogButtonsEdgeComboBox->setCurrentIndex(pm->getStelPropertyValue("StelGui.toolbarAtRight").toBool() ? 1 : 0);
-	connect(ui->dialogButtonsEdgeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDialogButtonsEdge(int)));
+	// Toolbar corner combobox (0=BL, 1=BR, 2=TL, 3=TR)
+	populateToolbarCornerComboBox();
+	connect(ui->toolbarCornerComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setToolbarCorner(int)));
 
 	// script tab controls
 	#ifdef ENABLE_SCRIPTING
@@ -540,14 +534,27 @@ void ConfigurationDialog::updateDateTimeDisplayFormat()
 	ui->fixedDateTimeEdit->setDisplayFormat(QString("%1 %2").arg(dateFormat, timeFormat));
 }
 
-void ConfigurationDialog::setToolButtonsEdge(int idx)
+void ConfigurationDialog::populateToolbarCornerComboBox()
 {
-	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("StelGui.toolbarAtTop", idx == 1);
+	QComboBox* cb = ui->toolbarCornerComboBox;
+	const int cur = cb->count() > 0 ? cb->currentIndex()
+	                                : StelApp::getInstance()
+	                                          .getStelPropertyManager()
+	                                          ->getStelPropertyValue("StelGui.toolbarCorner")
+	                                          .toInt();
+	cb->blockSignals(true);
+	cb->clear();
+	cb->addItem(q_("Bottom-left"));
+	cb->addItem(q_("Bottom-right"));
+	cb->addItem(q_("Top-left"));
+	cb->addItem(q_("Top-right"));
+	cb->setCurrentIndex(qBound(0, cur, 3));
+	cb->blockSignals(false);
 }
 
-void ConfigurationDialog::setDialogButtonsEdge(int idx)
+void ConfigurationDialog::setToolbarCorner(int idx)
 {
-	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("StelGui.toolbarAtRight", idx == 1);
+	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("StelGui.toolbarCorner", idx);
 }
 
 void ConfigurationDialog::setKeyNavigationState(bool state)
@@ -1422,8 +1429,7 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("gui/auto_hide_horizontal_toolbar",              propMgr->getStelPropertyValue("StelGui.autoHideHorizontalButtonBar").toBool());
         conf->setValue("gui/auto_hide_vertical_toolbar",                propMgr->getStelPropertyValue("StelGui.autoHideVerticalButtonBar").toBool());
         // toolbar positions
-        conf->setValue("gui/toolbar_at_top",                            propMgr->getStelPropertyValue("StelGui.toolbarAtTop").toBool());
-        conf->setValue("gui/toolbar_at_right",                          propMgr->getStelPropertyValue("StelGui.toolbarAtRight").toBool());
+        conf->setValue("gui/toolbar_corner",                            propMgr->getStelPropertyValue("StelGui.toolbarCorner").toInt());
         conf->setValue("gui/flag_show_quit_button",                     propMgr->getStelPropertyValue("StelGui.flagShowQuitButton").toBool());
         conf->setValue("gui/flag_show_nebulae_background_button",       propMgr->getStelPropertyValue("StelGui.flagShowNebulaBackgroundButton").toBool());
         conf->setValue("gui/flag_show_dss_button",                      propMgr->getStelPropertyValue("StelGui.flagShowDSSButton").toBool());

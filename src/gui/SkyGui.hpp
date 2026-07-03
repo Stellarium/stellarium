@@ -113,9 +113,9 @@ private:
 	bool autoHideBottomBar;
 	bool autoHideLeftBar;
 
-	//! Determines whether the toolbars are docked to the top edge of the screen instead of the bottom.
+	//! If true, the tool bar and dialog bar are docked to the top edge instead of the bottom.
 	bool toolbarAtTop;
-	//! Determines whether the toolbars are docked to the right edge of the screen instead of the left.
+	//! If true, the tool bar and dialog bar are docked to the right edge instead of the left.
 	bool toolbarAtRight;
 	
 	StelGui* stelGui;

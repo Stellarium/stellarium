@@ -409,13 +409,17 @@ from touch-enabled devices like smartphones.
 \end{description}
 
 \subsubsection{Toolbar position} \newFeature{26.3}
-The two checkboxes under \emph{Toolbar position} let you move the toolbars
-(both the horizontal button bar and the vertical window buttons) to any of the four corners of the screen:
+The \emph{Toolbar location} drop-down in the Planetarium options section of the Tools tab lets you
+dock both toolbars to any of the four screen corners:
 \begin{description}
-\item[Toolbar at top] When enabled, the horizontal button bar moves to the top edge of the screen instead of the bottom. The status text row (location, FOV, date/time) is placed at the bottom of the bar so it remains visible when the bar is partially hidden.
-\item[Toolbar at right] When enabled, the vertical window-button bar moves to the right edge of the screen instead of the left. The horizontal bar follows accordingly.
+\item[Bottom-left] Default position: tool button bar at the bottom, dialog button bar on the left.
+\item[Bottom-right] Tool button bar at the bottom, dialog button bar on the right.
+\item[Top-left] Tool button bar at the top, dialog button bar on the left. When the tool button bar is at the top,
+  the status row (location, FOV, date/time) moves below the buttons so it remains visible when
+  the bar is partially hidden.
+\item[Top-right] Tool button bar at the top, dialog button bar on the right.
 \end{description}
-Both settings are saved as \key{toolbar\_at\_top} and \key{toolbar\_at\_right} in the \texttt{[gui]} section.
+The selection is saved as \key{toolbar\_corner} (integer 0--3) in the \texttt{[gui]} section.
 
 \paragraph{Multithreading} \label{sec:gui:configuration:tools:threads} 
 For every frame, the positions of all planets and minor bodies of the Solar system are computed. 
