@@ -218,6 +218,9 @@ public:
 	QRectF boundingRectNoHelpLabel() const;
 	//! Set the color for all the sub elements
 	void setColor(const QColor& c);
+	//! Set whether the bar is at the right edge of the screen.
+	//! This is used to decide whether the help label is displayed to the left or right of the buttons.
+	void setBarAtRight(bool b) { barAtRight = b; }
 private slots:
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
@@ -230,6 +233,7 @@ private slots:
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
+	bool barAtRight = false;
 };
 
 // The button bar on the bottom containing actions toggle buttons

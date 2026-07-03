@@ -365,6 +365,7 @@ void SkyGui::updateBarsPos()
 
 	// Update the layout of the horizontal bar (text above or below buttons)
 	bottomBar->setBarAtTop(toolbarAtTop);
+	leftBar->setBarAtRight(toolbarAtRight);
 
 	const qreal leftBarW   = leftBar->boundingRectNoHelpLabel().width();
 	const qreal leftBarH   = leftBar->boundingRectNoHelpLabel().height();

@@ -490,7 +490,15 @@ void LeftStelBar::buttonHoverChanged(bool b)
 				tip += "  [" + shortcut + "]";
 			}
 			helpLabel->setText(tip);
-			helpLabel->setPos(qRound(boundingRectNoHelpLabel().width()+15.5),qRound(button->pos().y()+button->getButtonPixmapHeight()/2-8));
+			const qreal labelY = qRound(button->pos().y()+button->getButtonPixmapHeight()/2-8);
+			if (barAtRight)
+			{
+				helpLabel->setPos(-helpLabel->boundingRect().width()-15.5, labelY);
+			}
+			else
+			{
+				helpLabel->setPos(qRound(boundingRectNoHelpLabel().width()+15.5), labelY);
+			}
 		}
 	}
 	else
@@ -1060,7 +1068,7 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 		int locationWidth= fontMetrics.boundingRect(location->text() + "MMM").width();
 
 		// When the toolbar is at top, the text row should be below the buttons, so it's visible when half of the bar is hidden.
-		const double textY = barAtTop ? (getButtonsBoundingRect().height() + gap) : 0.;
+		const double textY = barAtTop ? (getButtonsBoundingRect().height() + fontMetrics.leading() + gap) : 0.;
 		location->setPos(0, textY);
 
 		QRectF rectCh = getButtonsBoundingRect();
