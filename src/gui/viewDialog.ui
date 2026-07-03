@@ -6696,14 +6696,14 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="0" column="2">
               <widget class="QLabel" name="hipsBrightnessLabel">
                <property name="text">
                 <string>Brightness:</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="0" column="3">
               <widget class="QDoubleSpinBox" name="hipsBrightnessDoubleSpinBox">
                <property name="decimals">
                 <number>2</number>
@@ -6722,14 +6722,14 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
+             <item row="1" column="2">
               <widget class="QLabel" name="hipsOpacityLabel">
                <property name="text">
                 <string>Opacity:</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
+             <item row="1" column="3">
               <widget class="QDoubleSpinBox" name="hipsOpacityDoubleSpinBox">
                <property name="decimals">
                 <number>2</number>
@@ -6748,14 +6748,14 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="2" column="0">
               <widget class="QLabel" name="hipsColorChannelLabel">
                <property name="text">
                 <string>Color channel:</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="2" column="1">
               <widget class="QComboBox" name="hipsColorChannelComboBox">
                <item>
                 <property name="text">
@@ -6779,21 +6779,21 @@
                </item>
               </widget>
              </item>
-             <item row="5" column="0" colspan="2">
+             <item row="2" column="2" colspan="2">
               <widget class="QCheckBox" name="hipsAtmosphericExtinctionCheckBox">
                <property name="text">
                 <string>Show atmospheric extinction</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
+             <item row="3" column="0" colspan="2">
               <widget class="QPushButton" name="hipsResetPushButton">
                <property name="text">
                 <string>Reset</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="1">
+             <item row="3" column="2" colspan="2">
               <widget class="QPushButton" name="hipsResetAllPushButton">
                <property name="text">
                 <string>Reset all</string>
