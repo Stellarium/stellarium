@@ -288,7 +288,7 @@ public:
 
 	//! Sets texture color adjustment for subsequent simple textured draws.
 	void setTextureDisplayAdjustment(float gamma, float saturation, float brightness,
-	                                 int colorChannel, bool invertedColors,
+	                                 float contrast, int colorChannel, bool invertedColors,
 	                                 bool premultiplyAlpha, float alpha = 1.f);
 	//! Restores neutral texture color adjustment for subsequent simple textured draws.
 	void resetTextureDisplayAdjustment();
@@ -447,6 +447,7 @@ private:
 	float textureGamma = 1.f;
 	float textureSaturation = 1.f;
 	float textureBrightness = 1.f;
+	float textureContrast = 1.f;
 	int textureColorChannel = 0;
 	bool textureInvertedColors = false;
 	bool texturePremultiplyAlpha = false;
@@ -484,6 +485,7 @@ private:
 		int gamma;
 		int saturation;
 		int brightness;
+		int contrast;
 		int colorChannel;
 		int invertedColors;
 		int premultiplyAlpha;
@@ -501,6 +503,7 @@ private:
 		int saturation;
 		int gamma;
 		int brightness;
+		int contrast;
 		int colorChannel;
 		int invertedColors;
 		int premultiplyAlpha;

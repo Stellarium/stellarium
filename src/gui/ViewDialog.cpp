@@ -756,6 +756,8 @@ void ViewDialog::createDialogContent()
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
 	connect(ui->hipsBrightnessDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
+	connect(ui->hipsContrastDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	        this, &ViewDialog::hipsDisplaySettingsChanged);
 	connect(ui->hipsOpacityDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
 	connect(ui->hipsColorChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -941,6 +943,7 @@ void ViewDialog::updateHipsControls()
 	const QSignalBlocker gammaBlocker(ui->hipsGammaDoubleSpinBox);
 	const QSignalBlocker saturationBlocker(ui->hipsSaturationDoubleSpinBox);
 	const QSignalBlocker brightnessBlocker(ui->hipsBrightnessDoubleSpinBox);
+	const QSignalBlocker contrastBlocker(ui->hipsContrastDoubleSpinBox);
 	const QSignalBlocker opacityBlocker(ui->hipsOpacityDoubleSpinBox);
 	const QSignalBlocker colorChannelBlocker(ui->hipsColorChannelComboBox);
 	const QSignalBlocker invertedColorsBlocker(ui->hipsInvertedColorsCheckBox);
@@ -948,6 +951,7 @@ void ViewDialog::updateHipsControls()
 	ui->hipsGammaDoubleSpinBox->setValue(hips ? hips->getGamma() : 1.);
 	ui->hipsSaturationDoubleSpinBox->setValue(hips ? hips->getSaturation() : 1.);
 	ui->hipsBrightnessDoubleSpinBox->setValue(hips ? hips->getBrightness() : 1.);
+	ui->hipsContrastDoubleSpinBox->setValue(hips ? hips->getContrast() : 1.);
 	ui->hipsOpacityDoubleSpinBox->setValue(hips ? hips->getOpacity() : 1.);
 	ui->hipsColorChannelComboBox->setCurrentIndex(hips ? hips->getColorChannel() : HipsSurvey::ColorChannelRgb);
 	ui->hipsInvertedColorsCheckBox->setChecked(hips ? hips->getInvertedColors() : false);
@@ -960,6 +964,8 @@ void ViewDialog::updateHipsControls()
 	ui->hipsSaturationDoubleSpinBox->setEnabled(enableSelectedControls);
 	ui->hipsBrightnessLabel->setEnabled(enableSelectedControls);
 	ui->hipsBrightnessDoubleSpinBox->setEnabled(enableSelectedControls);
+	ui->hipsContrastLabel->setEnabled(enableSelectedControls);
+	ui->hipsContrastDoubleSpinBox->setEnabled(enableSelectedControls);
 	ui->hipsOpacityLabel->setEnabled(enableSelectedControls);
 	ui->hipsOpacityDoubleSpinBox->setEnabled(enableSelectedControls);
 	ui->hipsColorChannelLabel->setEnabled(enableSelectedControls);
@@ -978,6 +984,7 @@ void ViewDialog::hipsDisplaySettingsChanged()
 	hips->setDisplaySettings(static_cast<float>(ui->hipsGammaDoubleSpinBox->value()),
 	                         static_cast<float>(ui->hipsSaturationDoubleSpinBox->value()),
 	                         static_cast<float>(ui->hipsBrightnessDoubleSpinBox->value()),
+	                         static_cast<float>(ui->hipsContrastDoubleSpinBox->value()),
 	                         static_cast<float>(ui->hipsOpacityDoubleSpinBox->value()),
 	                         ui->hipsColorChannelComboBox->currentIndex(),
 	                         ui->hipsInvertedColorsCheckBox->isChecked());

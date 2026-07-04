@@ -90,6 +90,7 @@ HipsMgr::~HipsMgr()
 			conf->setValue("gamma", survey->getGamma());
 			conf->setValue("saturation", survey->getSaturation());
 			conf->setValue("brightness", survey->getBrightness());
+			conf->setValue("contrast", survey->getContrast());
 			conf->setValue("opacity", survey->getOpacity());
 			conf->setValue("colorChannel", survey->getColorChannel());
 			conf->setValue("invertedColors", survey->getInvertedColors());
@@ -224,6 +225,7 @@ void HipsMgr::restoreVisibleSurveys()
 			survey->setDisplaySettings(conf->value("gamma", 1.).toFloat(),
 			                           conf->value("saturation", 1.).toFloat(),
 			                           conf->value("brightness", 1.).toFloat(),
+			                           conf->value("contrast", 1.).toFloat(),
 			                           conf->value("opacity", 1.).toFloat(),
 			                           conf->value("colorChannel", HipsSurvey::ColorChannelRgb).toInt(),
 			                           conf->value("invertedColors", false).toBool());
@@ -249,6 +251,7 @@ void HipsMgr::saveSurveySettings() const
 		conf->setValue("gamma", survey->getGamma());
 		conf->setValue("saturation", survey->getSaturation());
 		conf->setValue("brightness", survey->getBrightness());
+		conf->setValue("contrast", survey->getContrast());
 		conf->setValue("opacity", survey->getOpacity());
 		conf->setValue("colorChannel", survey->getColorChannel());
 		conf->setValue("invertedColors", survey->getInvertedColors());

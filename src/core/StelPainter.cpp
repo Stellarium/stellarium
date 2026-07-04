@@ -125,12 +125,13 @@ void StelPainter::GLState::reset()
 }
 
 void StelPainter::setTextureDisplayAdjustment(float gamma, float saturation, float brightness,
-                                              int colorChannel, bool invertedColors,
+                                              float contrast, int colorChannel, bool invertedColors,
                                               bool premultiplyAlpha, float alpha)
 {
 	textureGamma = qBound(0.1f, gamma, 5.f);
 	textureSaturation = qBound(0.f, saturation, 3.f);
 	textureBrightness = qBound(0.f, brightness, 5.f);
+	textureContrast = qBound(0.f, contrast, 5.f);
 	textureColorChannel = qBound(0, colorChannel, 3);
 	textureInvertedColors = invertedColors;
 	texturePremultiplyAlpha = premultiplyAlpha;
@@ -139,7 +140,7 @@ void StelPainter::setTextureDisplayAdjustment(float gamma, float saturation, flo
 
 void StelPainter::resetTextureDisplayAdjustment()
 {
-	setTextureDisplayAdjustment(1.f, 1.f, 1.f, 0, false, false);
+	setTextureDisplayAdjustment(1.f, 1.f, 1.f, 1.f, 0, false, false);
 }
 
 bool StelPainter::hasTextureDisplayAdjustment() const
@@ -147,6 +148,7 @@ bool StelPainter::hasTextureDisplayAdjustment() const
 	return !qFuzzyCompare(textureGamma, 1.f) ||
 	       !qFuzzyCompare(textureSaturation, 1.f) ||
 	       !qFuzzyCompare(textureBrightness, 1.f) ||
+	       !qFuzzyCompare(textureContrast, 1.f) ||
 	       textureColorChannel != 0 ||
 	       textureInvertedColors ||
 	       texturePremultiplyAlpha;
@@ -2367,6 +2369,7 @@ void main()
 		"uniform mediump float gamma;\n"
 		"uniform mediump float saturation;\n"
 		"uniform mediump float brightness;\n"
+		"uniform mediump float contrast;\n"
 		"uniform int colorChannel;\n"
 		"uniform int invertedColors;\n"
 		"uniform int premultiplyAlpha;\n"
@@ -2374,6 +2377,8 @@ void main()
 		"{\n"
 		"    mediump vec4 color = texture2D(tex, texc)*texColor;\n"
 		"    color.rgb = max(color.rgb * brightness, vec3(0.0));\n"
+		"    if (contrast != 1.0)\n"
+		"        color.rgb = clamp((color.rgb - vec3(0.5)) * contrast + vec3(0.5), vec3(0.0), vec3(1.0));\n"
 		"    if (saturation != 1.0)\n"
 		"        color.rgb = saturate(color.rgb, saturation);\n"
 		"    if (gamma != 1.0)\n"
@@ -2413,6 +2418,7 @@ void main()
 	adjustedTexturesShaderVars.gamma = adjustedTexturesShaderProgram->uniformLocation("gamma");
 	adjustedTexturesShaderVars.saturation = adjustedTexturesShaderProgram->uniformLocation("saturation");
 	adjustedTexturesShaderVars.brightness = adjustedTexturesShaderProgram->uniformLocation("brightness");
+	adjustedTexturesShaderVars.contrast = adjustedTexturesShaderProgram->uniformLocation("contrast");
 	adjustedTexturesShaderVars.colorChannel = adjustedTexturesShaderProgram->uniformLocation("colorChannel");
 	adjustedTexturesShaderVars.invertedColors = adjustedTexturesShaderProgram->uniformLocation("invertedColors");
 	adjustedTexturesShaderVars.premultiplyAlpha = adjustedTexturesShaderProgram->uniformLocation("premultiplyAlpha");
@@ -2444,19 +2450,22 @@ void main()
 		"VARYING mediump vec2 texc;\n"
 		"VARYING mediump vec4 outColor;\n"
 		"uniform sampler2D tex;\n"
-		"uniform lowp float saturation;\n"
-		"uniform mediump float gamma;\n"
-		"uniform mediump float brightness;\n"
-		"uniform int colorChannel;\n"
+	"uniform lowp float saturation;\n"
+	"uniform mediump float gamma;\n"
+	"uniform mediump float brightness;\n"
+	"uniform mediump float contrast;\n"
+	"uniform int colorChannel;\n"
 		"uniform int invertedColors;\n"
 		"uniform int premultiplyAlpha;\n"
 		"uniform mediump float alpha;\n"
 		"void main(void)\n"
 		"{\n"
 		"    mediump vec4 color = texture2D(tex, texc)*outColor;\n"
-		"    color.a *= alpha;\n"
-		"    color.rgb = max(color.rgb * brightness, vec3(0.0));\n"
-		"    if (saturation != 1.0)\n"
+	"    color.a *= alpha;\n"
+	"    color.rgb = max(color.rgb * brightness, vec3(0.0));\n"
+	"    if (contrast != 1.0)\n"
+	"        color.rgb = clamp((color.rgb - vec3(0.5)) * contrast + vec3(0.5), vec3(0.0), vec3(1.0));\n"
+	"    if (saturation != 1.0)\n"
 		"        color.rgb = saturate(color.rgb, saturation);\n"
 		"    if (gamma != 1.0)\n"
 		"        color.rgb = pow(color.rgb, vec3(1.0 / max(gamma, 0.001)));\n"
@@ -2495,6 +2504,7 @@ void main()
 	texturesColorShaderVars.saturation = texturesColorShaderProgram->uniformLocation("saturation");
 	texturesColorShaderVars.gamma = texturesColorShaderProgram->uniformLocation("gamma");
 	texturesColorShaderVars.brightness = texturesColorShaderProgram->uniformLocation("brightness");
+	texturesColorShaderVars.contrast = texturesColorShaderProgram->uniformLocation("contrast");
 	texturesColorShaderVars.colorChannel = texturesColorShaderProgram->uniformLocation("colorChannel");
 	texturesColorShaderVars.invertedColors = texturesColorShaderProgram->uniformLocation("invertedColors");
 	texturesColorShaderVars.premultiplyAlpha = texturesColorShaderProgram->uniformLocation("premultiplyAlpha");
@@ -2979,6 +2989,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			pr->setUniformValue(shaderVars.gamma, textureGamma);
 			pr->setUniformValue(shaderVars.saturation, textureSaturation);
 			pr->setUniformValue(shaderVars.brightness, textureBrightness);
+			pr->setUniformValue(shaderVars.contrast, textureContrast);
 			pr->setUniformValue(shaderVars.colorChannel, textureColorChannel);
 			pr->setUniformValue(shaderVars.invertedColors, textureInvertedColors ? 1 : 0);
 			pr->setUniformValue(shaderVars.premultiplyAlpha, texturePremultiplyAlpha ? 1 : 0);
@@ -3016,6 +3027,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setUniformValue(texturesColorShaderVars.saturation, saturation * textureSaturation);
 		pr->setUniformValue(texturesColorShaderVars.gamma, textureGamma);
 		pr->setUniformValue(texturesColorShaderVars.brightness, textureBrightness);
+		pr->setUniformValue(texturesColorShaderVars.contrast, textureContrast);
 		pr->setUniformValue(texturesColorShaderVars.colorChannel, textureColorChannel);
 		pr->setUniformValue(texturesColorShaderVars.invertedColors, textureInvertedColors ? 1 : 0);
 		pr->setUniformValue(texturesColorShaderVars.premultiplyAlpha, texturePremultiplyAlpha ? 1 : 0);

@@ -55,6 +55,7 @@ class HipsSurvey : public QObject
 	Q_PROPERTY(float gamma READ getGamma WRITE setGamma NOTIFY displaySettingsChanged)
 	Q_PROPERTY(float saturation READ getSaturation WRITE setSaturation NOTIFY displaySettingsChanged)
 	Q_PROPERTY(float brightness READ getBrightness WRITE setBrightness NOTIFY displaySettingsChanged)
+	Q_PROPERTY(float contrast READ getContrast WRITE setContrast NOTIFY displaySettingsChanged)
 	Q_PROPERTY(float opacity READ getOpacity WRITE setOpacity NOTIFY displaySettingsChanged)
 	Q_PROPERTY(int colorChannel READ getColorChannel WRITE setColorChannel NOTIFY displaySettingsChanged)
 	Q_PROPERTY(bool invertedColors READ getInvertedColors WRITE setInvertedColors NOTIFY displaySettingsChanged)
@@ -129,14 +130,16 @@ public:
 	void setSaturation(float value);
 	float getBrightness() const { return brightness; }
 	void setBrightness(float value);
+	float getContrast() const { return contrast; }
+	void setContrast(float value);
 	float getOpacity() const { return opacity; }
 	void setOpacity(float value);
 	int getColorChannel() const { return colorChannel; }
 	void setColorChannel(int value);
 	bool getInvertedColors() const { return invertedColors; }
 	void setInvertedColors(bool value);
-	void setDisplaySettings(float gamma, float saturation, float brightness, float opacity,
-	                        int colorChannel, bool invertedColors);
+	void setDisplaySettings(float gamma, float saturation, float brightness, float contrast,
+	                        float opacity, int colorChannel, bool invertedColors);
 	void resetDisplaySettings();
 	bool hasDefaultDisplaySettings() const;
 
@@ -166,6 +169,7 @@ private:
 	float gamma = 1.f;
 	float saturation = 1.f;
 	float brightness = 1.f;
+	float contrast = 1.f;
 	float opacity = 1.f;
 	int colorChannel = ColorChannelRgb;
 	bool invertedColors = false;

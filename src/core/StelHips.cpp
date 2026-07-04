@@ -193,6 +193,14 @@ void HipsSurvey::setBrightness(float value)
 	emit displaySettingsChanged();
 }
 
+void HipsSurvey::setContrast(float value)
+{
+	value = qBound(0.f, value, 5.f);
+	if (qFuzzyCompare(contrast, value)) return;
+	contrast = value;
+	emit displaySettingsChanged();
+}
+
 void HipsSurvey::setOpacity(float value)
 {
 	value = qBound(0.f, value, 1.f);
@@ -216,13 +224,14 @@ void HipsSurvey::setInvertedColors(bool value)
 	emit displaySettingsChanged();
 }
 
-void HipsSurvey::setDisplaySettings(float gamma, float saturation, float brightness, float opacity,
-                                    int colorChannel, bool invertedColors)
+void HipsSurvey::setDisplaySettings(float gamma, float saturation, float brightness, float contrast,
+                                    float opacity, int colorChannel, bool invertedColors)
 {
 	bool changed = false;
 	gamma = qBound(0.1f, gamma, 5.f);
 	saturation = qBound(0.f, saturation, 3.f);
 	brightness = qBound(0.f, brightness, 5.f);
+	contrast = qBound(0.f, contrast, 5.f);
 	opacity = qBound(0.f, opacity, 1.f);
 	colorChannel = qBound(static_cast<int>(ColorChannelRgb), colorChannel, static_cast<int>(ColorChannelBlue));
 
@@ -239,6 +248,11 @@ void HipsSurvey::setDisplaySettings(float gamma, float saturation, float brightn
 	if (!qFuzzyCompare(this->brightness, brightness))
 	{
 		this->brightness = brightness;
+		changed = true;
+	}
+	if (!qFuzzyCompare(this->contrast, contrast))
+	{
+		this->contrast = contrast;
 		changed = true;
 	}
 	if (!qFuzzyCompare(this->opacity, opacity))
@@ -262,7 +276,7 @@ void HipsSurvey::setDisplaySettings(float gamma, float saturation, float brightn
 
 void HipsSurvey::resetDisplaySettings()
 {
-	setDisplaySettings(1.f, 1.f, 1.f, 1.f, ColorChannelRgb, false);
+	setDisplaySettings(1.f, 1.f, 1.f, 1.f, 1.f, ColorChannelRgb, false);
 }
 
 bool HipsSurvey::hasDefaultDisplaySettings() const
@@ -270,6 +284,7 @@ bool HipsSurvey::hasDefaultDisplaySettings() const
 	return qFuzzyCompare(gamma, 1.f) &&
 	       qFuzzyCompare(saturation, 1.f) &&
 	       qFuzzyCompare(brightness, 1.f) &&
+	       qFuzzyCompare(contrast, 1.f) &&
 	       qFuzzyCompare(opacity, 1.f) &&
 	       colorChannel == ColorChannelRgb &&
 	       !invertedColors;
@@ -416,7 +431,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	if (!planetarySurvey)
 	{
 		sPainter->setTextureDisplayAdjustment(gamma, saturation, brightness,
-		                                      colorChannel, invertedColors,
+		                                      contrast, colorChannel, invertedColors,
 		                                      colorChannel != ColorChannelRgb,
 		                                      fader.getInterstate() * displayOpacity);
 	}

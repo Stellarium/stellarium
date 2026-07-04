@@ -6749,13 +6749,39 @@
               </widget>
              </item>
              <item row="2" column="0">
+              <widget class="QLabel" name="hipsContrastLabel">
+               <property name="text">
+                <string>Contrast:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QDoubleSpinBox" name="hipsContrastDoubleSpinBox">
+               <property name="decimals">
+                <number>2</number>
+               </property>
+               <property name="minimum">
+                <double>0.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>5.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.100000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
               <widget class="QLabel" name="hipsColorChannelLabel">
                <property name="text">
                 <string>Color channel:</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="2" column="3">
               <widget class="QComboBox" name="hipsColorChannelComboBox">
                <item>
                 <property name="text">
@@ -6779,7 +6805,7 @@
                </item>
               </widget>
              </item>
-             <item row="2" column="2" colspan="2">
+             <item row="3" column="0" colspan="2">
               <widget class="QCheckBox" name="hipsInvertedColorsCheckBox">
                <property name="text">
                 <string>Invert colors</string>
