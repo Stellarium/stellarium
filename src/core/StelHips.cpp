@@ -413,17 +413,38 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	Vec3f extinctionColor(1.0f);
 	if (withAtmosphericExtinction)
 	{
+		const auto landscapeMgr = qobject_cast<LandscapeMgr*>(StelApp::getInstance().getModule("LandscapeMgr"));
+		const float lightPollutionLum = static_cast<float>(drawer->getLightPollutionLuminance());
+
 		const float lum = drawer->surfaceBrightnessToLuminance(12.f);
 		StelToneReproducer* eye = core->getToneReproducer();
+		const float savedInputScale = eye->getInputScale();
+		const float savedWorldLum = eye->getWorldAdaptationLuminance();
+		float skyDrawerInputScale = 2.45f;
+		if (drawer->getFlagHasAtmosphere() && core->getJD() > 2387627.5)
+		{
+			const float nelm = StelCore::luminanceToNELM(lightPollutionLum);
+			skyDrawerInputScale = 3.3541f * std::exp(-0.404f * (16.5f - 2.f * nelm));
+		}
+		const float neutralInputScale = savedInputScale * (2.45f / qMax(0.0001f, skyDrawerInputScale));
+		eye->setInputScale(neutralInputScale);
+		eye->setWorldAdaptationLuminance(qMax(0.0001f, savedWorldLum - lightPollutionLum));
+
 		float aLum = eye->adaptLuminanceScaled(lum);
+		eye->setWorldAdaptationLuminance(savedWorldLum);
+		eye->setInputScale(savedInputScale);
+
 		Q_ASSERT(aLum > 0.f);
 		aLum = qMin(1.0f, aLum * 2.f);
 		extinctionColor.set(aLum, aLum, aLum);
 
-		const auto landscapeMgr = qobject_cast<LandscapeMgr*>(StelApp::getInstance().getModule("LandscapeMgr"));
-		const float atmLum = landscapeMgr ? landscapeMgr->getAtmosphereAverageLuminance() : 0.f;
-		const float atmFactor = qMax(0.35f, 50.0f * (0.02f - atmLum));
-		extinctionColor *= atmFactor * atmFactor;
+		if (landscapeMgr)
+		{
+			const float atmLum = qMax(0.f, landscapeMgr->getAtmosphereAverageLuminance() - lightPollutionLum);
+			const float modelFactor = landscapeMgr->getAtmosphereModel() == "showmysky" ? 0.2f : 1.f;
+			const float atmFactor = qMax(0.35f, 50.0f * (0.02f - modelFactor * atmLum));
+			extinctionColor *= atmFactor * atmFactor;
+		}
 	}
 
 	const float displayOpacity = planetarySurvey ? 1.f : opacity;
