@@ -7,6 +7,8 @@ It also contains sample server classes (dummy, Meade LX200).
 Author and Copyright of this file and of the stellarium telescope library:
 Johannes Gajdosik, 2006
 
+TCP transport support added by Rumen Bogdanovski, 2026.
+
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -31,7 +33,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <cmath>
 
 
-Lx200Connection::Lx200Connection(Server &server, const char *serial_device) : SerialPort(server, serial_device)
+template <class Transport>
+void Lx200ConnectionImpl<Transport>::initTiming(void)
 {
 	time_between_commands = 0;
 	next_send_time = GetNow();
@@ -42,16 +45,17 @@ Lx200Connection::Lx200Connection(Server &server, const char *serial_device) : Se
 //! Resets the connection.
 //! Removes all commands in the queue without executing them and
 //! cleans both the read and the write buffers.
-void Lx200Connection::resetCommunication(void)
+template <class Transport>
+void Lx200ConnectionImpl<Transport>::resetCommunication(void)
 {
 	while (!command_list.empty())
 	{
 		delete command_list.front();
 		command_list.pop_front();
 	}
-	
-	read_buff_end = read_buff;
-	write_buff_end = write_buff;
+
+	this->read_buff_end = this->read_buff;
+	this->write_buff_end = this->write_buff;
 	#ifdef DEBUG4
 	*log_file << Now() << "Lx200Connection::resetCommunication" << StelUtils::getEndLineChar();
 	#endif
@@ -60,13 +64,14 @@ void Lx200Connection::resetCommunication(void)
 	next_send_time = GetNow() + 10000000;
 	read_timeout_endtime = 0x7FFFFFFFFFFFFFFFLL;
 	goto_commands_queued = 0;
-	static_cast<TelescopeClientDirectLx200&>(server).communicationResetReceived();
+	static_cast<TelescopeClientDirectLx200&>(this->server).communicationResetReceived();
 }
 
 //! Commands the telescope to slew to the given right ascension and declination.
 //! Converts the coordinates and queues the necessary sequence of Lx200Command
 //! objects to perform the slew.
-void Lx200Connection::sendGoto(unsigned int ra_int, int dec_int)
+template <class Transport>
+void Lx200ConnectionImpl<Transport>::sendGoto(unsigned int ra_int, int dec_int)
 {
 	if (goto_commands_queued <= 1)
 	{
@@ -84,10 +89,10 @@ void Lx200Connection::sendGoto(unsigned int ra_int, int dec_int)
 		int ra = static_cast<int>(std::floor(0.5 + ra_int * (86400.0/4294967296.0)));
 		if (ra >= 86400)
 			ra -= 86400;
-		sendCommand(new Lx200CommandStopSlew(server));
-		sendCommand(new Lx200CommandSetSelectedRa(server, ra));
-		sendCommand(new Lx200CommandSetSelectedDec(server, dec));
-		sendCommand(new Lx200CommandGotoSelected(server));
+		sendCommand(new Lx200CommandStopSlew(this->server));
+		sendCommand(new Lx200CommandSetSelectedRa(this->server, ra));
+		sendCommand(new Lx200CommandSetSelectedDec(this->server, dec));
+		sendCommand(new Lx200CommandGotoSelected(this->server));
 		goto_commands_queued++;
 	}
 	else
@@ -98,7 +103,8 @@ void Lx200Connection::sendGoto(unsigned int ra_int, int dec_int)
 	}
 }
 
-void Lx200Connection::sendSync(unsigned int ra_int, int dec_int)
+template <class Transport>
+void Lx200ConnectionImpl<Transport>::sendSync(unsigned int ra_int, int dec_int)
 {
 	if (goto_commands_queued <= 1)
 	{
@@ -116,10 +122,10 @@ void Lx200Connection::sendSync(unsigned int ra_int, int dec_int)
 		int ra = static_cast<int>(std::floor(0.5 + ra_int * (86400.0/4294967296.0)));
 		if (ra >= 86400)
 			ra -= 86400;
-		sendCommand(new Lx200CommandStopSlew(server));
-		sendCommand(new Lx200CommandSetSelectedRa(server, ra));
-		sendCommand(new Lx200CommandSetSelectedDec(server, dec));
-		sendCommand(new Lx200CommandSyncSelected(server));
+		sendCommand(new Lx200CommandStopSlew(this->server));
+		sendCommand(new Lx200CommandSetSelectedRa(this->server, ra));
+		sendCommand(new Lx200CommandSetSelectedDec(this->server, dec));
+		sendCommand(new Lx200CommandSyncSelected(this->server));
 		goto_commands_queued++;
 	}
 	else
@@ -131,15 +137,16 @@ void Lx200Connection::sendSync(unsigned int ra_int, int dec_int)
 }
 
 
-bool Lx200Connection::writeFrontCommandToBuffer(void)
+template <class Transport>
+bool Lx200ConnectionImpl<Transport>::writeFrontCommandToBuffer(void)
 {
 	if(command_list.empty())
 	{
 		return false;
 	}
-	
+
 	const long long int now = GetNow();
-	if (now < next_send_time) 
+	if (now < next_send_time)
 	{
 #ifdef DEBUG4
 		/*
@@ -150,8 +157,8 @@ bool Lx200Connection::writeFrontCommandToBuffer(void)
 #endif
 		return false;
 	}
-	
-	const bool rval = command_list.front()->writeCommandToBuffer(write_buff_end, write_buff+sizeof(write_buff));
+
+	const bool rval = command_list.front()->writeCommandToBuffer(this->write_buff_end, this->write_buff+sizeof(this->write_buff));
 	if (rval)
 	{
 		next_send_time = now;
@@ -181,13 +188,14 @@ bool Lx200Connection::writeFrontCommandToBuffer(void)
 			  << StelUtils::getEndLineChar();
 		#endif
 	}
-	
+
 	return rval;
 }
 
-void Lx200Connection::dataReceived(const char *&p, const char *read_buff_end)
+template <class Transport>
+void Lx200ConnectionImpl<Transport>::dataReceived(const char *&p, const char *read_buff_end)
 {
-	if (isClosed())
+	if (this->isClosed())
 	{
 		*log_file << Now() << "Lx200Connection::dataReceived: strange: fd is closed" << StelUtils::getEndLineChar();
 	}
@@ -260,9 +268,10 @@ void Lx200Connection::dataReceived(const char *&p, const char *read_buff_end)
 	}
 }
 
-void Lx200Connection::prepareSelectFds(fd_set &read_fds,
-                                       fd_set &write_fds,
-                                       int &fd_max)
+template <class Transport>
+void Lx200ConnectionImpl<Transport>::prepareSelectFds(fd_set &read_fds,
+                                                      fd_set &write_fds,
+                                                      int &fd_max)
 {
 	// if some telegram is delayed try to queue it now:
 	flushCommandList();
@@ -292,10 +301,11 @@ void Lx200Connection::prepareSelectFds(fd_set &read_fds,
 			resetCommunication();
 		}
 	}
-	SerialPort::prepareSelectFds(read_fds, write_fds, fd_max);
+	Transport::prepareSelectFds(read_fds, write_fds, fd_max);
 }
 
-void Lx200Connection::flushCommandList(void)
+template <class Transport>
+void Lx200ConnectionImpl<Transport>::flushCommandList(void)
 {
 	if (!command_list.empty())
 	{
@@ -332,7 +342,8 @@ void Lx200Connection::flushCommandList(void)
 	}
 }
 
-void Lx200Connection::sendCommand(Lx200Command *command)
+template <class Transport>
+void Lx200ConnectionImpl<Transport>::sendCommand(Lx200Command *command)
 {
 	if (command)
 	{
@@ -350,7 +361,8 @@ void Lx200Connection::sendCommand(Lx200Command *command)
 	}
 }
 
-void Lx200Connection::sendAbort()
+template <class Transport>
+void Lx200ConnectionImpl<Transport>::sendAbort()
 {
 #ifdef DEBUG4
 	*log_file << Now()
@@ -364,10 +376,14 @@ void Lx200Connection::sendAbort()
 		command_list.pop_front();
 	}
 
-	read_buff_end = read_buff;
-	write_buff_end = write_buff;
-	command_list.push_back(new Lx200CommandStopSlew(server));
+	this->read_buff_end = this->read_buff;
+	this->write_buff_end = this->write_buff;
+	command_list.push_back(new Lx200CommandStopSlew(this->server));
 	flushCommandList();
 	//*log_file << Now() << "Lx200Connection::sendAbort() end"
 	//          << StelUtils::getEndLineChar();
 }
+
+// Explicitly instantiate the two transports we support: serial and TCP/IP.
+template class Lx200ConnectionImpl<SerialPort>;
+template class Lx200ConnectionImpl<TcpConnection>;

@@ -607,8 +607,13 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 			long_format = false;
 			dec *= 60;
 			break;
-		
+
+		// High-precision declination is "sDD*MM'SS#": the canonical Meade
+		// LX200 separator between arcminutes and arcseconds is an apostrophe
+		// (as sent by real mounts and by INDIGO's LX200 emulation). Some
+		// implementations use a colon instead, so accept both.
 		case ':':
+		case '\'':
 			if (end-buff < 10)
 				return 0;
 			dec *=  6; dec += ((*p++) - '0');
@@ -622,11 +627,11 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 				return -1;
 			}
 			break;
-		
+
 		default:
 			*log_file << Now()
 			          << "Lx200CommandGetDec::readAnswerFromBuffer: "
-			             "error: '#' or ':' expected"
+			             "error: '#', ':' or ''' expected"
 				  << StelUtils::getEndLineChar();
 			return -1;
 	}
