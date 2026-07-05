@@ -52,10 +52,26 @@ class HipsSurvey : public QObject
 	Q_PROPERTY(QJsonObject properties MEMBER properties NOTIFY propertiesChanged)
 	Q_PROPERTY(bool isLoading READ isLoading NOTIFY statusChanged)
 	Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
+	Q_PROPERTY(float gamma READ getGamma WRITE setGamma NOTIFY displaySettingsChanged)
+	Q_PROPERTY(float saturation READ getSaturation WRITE setSaturation NOTIFY displaySettingsChanged)
+	Q_PROPERTY(float brightness READ getBrightness WRITE setBrightness NOTIFY displaySettingsChanged)
+	Q_PROPERTY(float contrast READ getContrast WRITE setContrast NOTIFY displaySettingsChanged)
+	Q_PROPERTY(float opacity READ getOpacity WRITE setOpacity NOTIFY displaySettingsChanged)
+	Q_PROPERTY(int colorChannel READ getColorChannel WRITE setColorChannel NOTIFY displaySettingsChanged)
+	Q_PROPERTY(bool invertedColors READ getInvertedColors WRITE setInvertedColors NOTIFY displaySettingsChanged)
 	//! The name of the planet the survey is attached to, or empty if this is a skysurvey.
 	Q_PROPERTY(QString planet MEMBER planet)
 
 public:
+	enum ColorChannel
+	{
+		ColorChannelRgb = 0,
+		ColorChannelRed = 1,
+		ColorChannelGreen = 2,
+		ColorChannelBlue = 3,
+	};
+	Q_ENUM(ColorChannel)
+
 	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex,
 	                           const QVector<uint16_t>& indices)> DrawCallback;
 	//! Create a new HipsSurvey from its url.
@@ -85,7 +101,8 @@ public:
 	//!         surveys.  Should be set to 2 pi for sky surveys.
 	//! @param callback if set this will be called for each visible tile, and the callback should do it rendering
 	//!         itself.  If set to Q_NULLPTR, the function will draw the tiles using the default shader.
-	void draw(StelPainter* sPainter, double angle = 2.0 * M_PI, DrawCallback callback = Q_NULLPTR);
+	void draw(StelPainter* sPainter, double angle = 2.0 * M_PI, DrawCallback callback = Q_NULLPTR,
+	          bool withAtmosphericExtinction = false);
 
 	//! Return the source URL of the survey.
 	const QString& getUrl() const {return url;}
@@ -107,6 +124,25 @@ public:
 	void setNormalsSurvey(const HipsSurveyP& normals);
 	void setHorizonsSurvey(const HipsSurveyP& horizons);
 
+	float getGamma() const { return gamma; }
+	void setGamma(float value);
+	float getSaturation() const { return saturation; }
+	void setSaturation(float value);
+	float getBrightness() const { return brightness; }
+	void setBrightness(float value);
+	float getContrast() const { return contrast; }
+	void setContrast(float value);
+	float getOpacity() const { return opacity; }
+	void setOpacity(float value);
+	int getColorChannel() const { return colorChannel; }
+	void setColorChannel(int value);
+	bool getInvertedColors() const { return invertedColors; }
+	void setInvertedColors(bool value);
+	void setDisplaySettings(float gamma, float saturation, float brightness, float contrast,
+	                        float opacity, int colorChannel, bool invertedColors);
+	void resetDisplaySettings();
+	bool hasDefaultDisplaySettings() const;
+
 	//! Parse a hipslist file into a list of surveys.
 	static QList<HipsSurveyP> parseHipslist(const QString& hipslistURL, const QString& data);
 
@@ -114,6 +150,7 @@ signals:
 	void propertiesChanged(void);
 	void statusChanged(void);
 	void visibleChanged(bool);
+	void displaySettingsChanged(void);
 
 private:
 	void checkForPlanetarySurvey();
@@ -129,6 +166,13 @@ private:
 	HipsSurveyP horizons;
 	double releaseDate; // As UTC Julian day.
 	int order = -1;
+	float gamma = 1.f;
+	float saturation = 1.f;
+	float brightness = 1.f;
+	float contrast = 1.f;
+	float opacity = 1.f;
+	int colorChannel = ColorChannelRgb;
+	bool invertedColors = false;
 	bool planetarySurvey;
 	QCache<long int, HipsTile> tiles;
 	// reply to the initial download of the properties file and to the
@@ -175,13 +219,15 @@ private:
 	bool bindTextures(HipsTile& tile, int orderMin, Vec2f& texCoordShift, float& texCoordScale, bool& tileIsLoaded);
 	// draw a single tile. observerVelocity (in the correct hipsFrame) is necessary for aberration correction. Set to 0 for no aberration correction.
 	void drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-	              const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback);
+	              const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity,
+	              DrawCallback callback, bool withAtmosphericExtinction, const Vec3f& extinctionColor);
 
 	// Fill the array for a given tile.
 	int fillArrays(int order, int pix, int drawOrder, int splitOrder,
 	               bool outside, StelPainter* sPainter, Vec3d observerVelocity,
 	               const Vec2f& texCoordShift, const float texCoordScale,
-	               QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices);
+	               QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<Vec4f>& colors,
+	               QVector<uint16_t>& indices, bool withAtmosphericExtinction, const Vec3f& extinctionColor);
 
 	void updateProgressBar(int nb, int total);
 };
