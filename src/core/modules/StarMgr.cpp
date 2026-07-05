@@ -1657,22 +1657,21 @@ StelObjectP StarMgr::searchGaia(StarId source_id) const
 	return searchGaiaPhase2(source_id, v, matched, maxSearchLevel);
 }
 
-// Phase 2: HEALPix center zone missed the star (occurs at high geodesic levels
-// where the pixel center falls in a different zone than the star's actual position).
-// Search all zones intersecting a small region around the HEALPix pixel center.
-// Phase 2 trigger rates:
-//   Level 8 : 4.5%
-//   Level 9 : 9.0%
-//   Level 10: 17.4%
 StelObjectP StarMgr::searchGaiaPhase2(StarId source_id, const Vec3d& v, int& matched, int maxSearchLevel) const
 {
 	StelObjectP so;
-	// HEALPix Level 12 pixel radius is approximately 0.0102 degree on sky.
-	// We search a square region on the sphere centered at the pixel center.
-	// The square has vertices at arc-distance f from the center and an
-	// inscribed circle of radius healpixSearchRadius = arctan(tan(f) / 1.4142136).
-	// Set to 1.25x pixel radius (0.25 margin) to guarantee coverage at pixel boundaries.
-	constexpr double healpixSearchRadius = 0.0102 * 1.25;
+	// Phase 2: HEALPix center zone missed the star (occurs at high geodesic levels
+	// where the pixel center falls in a different zone than the star's actual position).
+	// Search all zones intersecting a small region around the HEALPix pixel center.
+	// Phase 2 trigger rates:
+	//   Level 8 : 4.5%
+	//   Level 9 : 9.0%
+	//   Level 10: 17.4%
+	// HEALPix Level 12 pixel center-to-corner distance is about 50" on sky.
+	// Search a square region inscribed in a circle of 60" radius so that stars
+	// anywhere inside the pixel (and a small margin across pixel boundaries)
+	// are guaranteed to be found.
+	constexpr double healpixSearchRadius = 60.0 / 3600.0; // 60 arcsec in degrees
 	SphericalConvexPolygon c = getSphericalSearchSquare(v, healpixSearchRadius);
 
 	const auto* geodesic_result =
