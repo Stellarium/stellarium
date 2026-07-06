@@ -1681,7 +1681,7 @@ void ViewDialog::populateLists()
 		SeparatorListWidgetItem* targetSeparator = nullptr;
 		for (int i = 0; i < l->count(); ++i)
 		{
-			SeparatorListWidgetItem* sep = qobject_cast<SeparatorListWidgetItem*>(l->item(i));
+			SeparatorListWidgetItem* sep = dynamic_cast<SeparatorListWidgetItem*>(l->item(i));
 			if (sep && sep->regionKey() == cultureRegionIt.value())
 			{
 				targetSeparator = sep;
@@ -1693,7 +1693,7 @@ void ViewDialog::populateLists()
 			// Fallback: look for "Other" separator
 			for (int i = 0; i < l->count(); ++i)
 			{
-				SeparatorListWidgetItem* sep = qobject_cast<SeparatorListWidgetItem*>(l->item(i));
+				SeparatorListWidgetItem* sep = dynamic_cast<SeparatorListWidgetItem*>(l->item(i));
 				if (sep && sep->regionKey() == "Other")
 				{
 					targetSeparator = sep;
