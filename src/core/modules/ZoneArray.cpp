@@ -306,12 +306,18 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 
 template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mmap,
-					 int level, int mag_min, bool use_compact_storage)
+				 int level, int mag_min, bool use_compact_storage)
 		: ZoneArray(file->fileName(), file, level, mag_min),
 		  stars(Q_NULLPTR), mmap_start(Q_NULLPTR), use_compact_storage_(use_compact_storage)
 {
 	if (!use_mmap)
 	{
+		use_compact_storage_ = false;
+	}
+	else if (use_compact_storage_ && level < COMPACT_STORAGE_MIN_LEVEL)
+	{
+		// Compact storage is intended for high-level (faint, numerous) catalogs.
+		// Lower levels keep the normal per-zone layout.
 		use_compact_storage_ = false;
 	}
 	if (nr_of_zones > 0)
@@ -793,9 +799,6 @@ void SpecialZoneArray<Star>::searchGaiaIDepochPos(const StarId source_id,
    }
 }
 
-// Explicit instantiations so that member functions used from other
-// translation units (e.g. testGaiaSearch calling getZone()) are available
-// even when the compiler inlines them in Release builds.
 template class SpecialZoneArray<Star1>;
 template class SpecialZoneArray<Star2>;
 template class SpecialZoneArray<Star3>;

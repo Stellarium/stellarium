@@ -265,7 +265,9 @@ int main(int argc, char** argv)
 	const int level = cat->level;
 	const unsigned int totalStars = cat->getNrOfStars();
 	const unsigned int nrOfZones = 20 * (1U << (level * 2)) + 1;
-	printf("Loaded level %d: %u stars (compact=%s)\n", level, totalStars, useCompact ? "yes" : "no");
+	// Compact storage is only applied for levels >= 9 inside SpecialZoneArray.
+	const bool effectiveCompact = useCompact && level >= 9;
+	printf("Loaded level %d: %u stars (compact=%s)\n", level, totalStars, effectiveCompact ? "yes" : "no");
 
 	const int sampleCount = (argc >= 3 && argv[2][0] != '-') ? atoi(argv[2]) : 1000000;
 	uint64_t stride = 0, maxTest = 0;

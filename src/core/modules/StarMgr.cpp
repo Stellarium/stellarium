@@ -528,7 +528,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 		useMmap = true;
 #endif
 
-		bool useCompactStorage = StelApp::getInstance().getSettings()->value("astro/flag_compact_star_storage", false).toBool();
+		bool useCompactStorage = StelApp::getInstance().getSettings()->value("stars/flag_compact_star_storage", false).toBool();
 
 		ZoneArray* z = ZoneArray::create(catalogFilePath, useMmap, useCompactStorage);
 		if (z)
@@ -543,6 +543,10 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 			Q_ASSERT(z->level==gridLevels.size());
 			++maxGeodesicGridLevel;
 			gridLevels.append(z);
+			// Compact storage is only applied for levels >= 9 inside SpecialZoneArray.
+			const bool effectiveCompact = useCompactStorage && z->level >= 9;
+			qInfo().noquote() << "Loaded star catalog level" << z->level
+			                  << "with compact storage" << (effectiveCompact ? "enabled" : "disabled");
 		}
 		return true;
 	}

@@ -167,6 +167,7 @@ public:
 	//! @param mag_min lower bound of magnitudes
 	//! @param use_compact_storage if true, do not keep a per-zone
 	//!        SpecialZoneData array; only zone counts and star data are stored.
+	//!        Compact storage is only applied for levels >= COMPACT_STORAGE_MIN_LEVEL.
 	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min,bool use_compact_storage = false);
 	~SpecialZoneArray(void) override;
 	//! Get an array of all SpecialZoneData objects in this catalog.
@@ -228,6 +229,9 @@ private:
 
 	// Compact-storage data (used only when use_compact_storage_ is true).
 	static constexpr int COMPACT_BLOCK_SIZE = 128;
+	// Minimum catalog level for which compact storage may be used.
+	// Levels below this always use the normal per-zone SpecialZoneData layout.
+	static constexpr int COMPACT_STORAGE_MIN_LEVEL = 9;
 	std::vector<uint64_t> block_offsets_;
 
 	uint64_t getZoneStarOffset(int index) const;
