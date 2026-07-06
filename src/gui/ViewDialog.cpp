@@ -893,26 +893,19 @@ void ViewDialog::updateHipsText()
 		return;
 	}
 	QJsonObject props = hips->property("properties").toJsonObject();
-	QString html = QString("<h1>%1</h1>
-").arg(props["obs_title"].toString());
+	QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
 	if (props.contains("obs_copyright") && props.contains("obs_copyright_url"))
 	{
-		html += QString("<p>Copyright <a href='%2'>%1</a></p>
-")
+		html += QString("<p>Copyright <a href='%2'>%1</a></p>\n")
 				.arg(props["obs_copyright"].toString(), props["obs_copyright_url"].toString());
 	}
-	html += QString("<p>%1</p>
-").arg(props["obs_description"].toString());
-	html += "<h2>" + q_("properties") + "</h2>
-<ul>
-";
+	html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
+	html += "<h2>" + q_("properties") + "</h2>\n<ul>\n";
 	for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
 	{
-		html += QString("<li><b>%1</b> %2</li>
-").arg(iter.key(), iter.value().toString());
+		html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key(), iter.value().toString());
 	}
-	html += "</ul>
-";
+	html += "</ul>\n";
 	const auto gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 		ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
