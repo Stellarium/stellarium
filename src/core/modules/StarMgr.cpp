@@ -1364,7 +1364,12 @@ void StarMgr::draw(StelCore* core)
 		// Saemundsson's inversion formula for atmospheric refraction is not exact, so need some padding in terms of arcseconds
 		margin = 30000. * MAS2RAD * prj->getPixelPerRadAtCenter();  // 0.5 arcmin
 	}
-	
+	// Add a fixed 60" angular margin so that stars whose catalog zone differs from their
+	// apparent-position zone (zone/HEALPix mismatch near geodesic boundaries) are still
+	// found. The 60" size matches searchGaiaPhase2(); this constant is in radians.
+	constexpr double zoneBoundaryMargin = 60000. * MAS2RAD;  // 60 arcsec
+	margin += zoneBoundaryMargin * prj->getPixelPerRadAtCenter();
+
 	QVector<SphericalCap> viewportCaps = prj->getViewportConvexPolygon(margin, margin)->getBoundingSphericalCaps();
 	viewportCaps.append(core->getVisibleSkyArea());
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(viewportCaps,maxSearchLevel);
@@ -1467,7 +1472,13 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	v.normalize();
 
 	SphericalConvexPolygon c = getSphericalSearchSquare(v, limFov);
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingSphericalCaps(),lastMaxSearchLevel);
+	// Stars stored near geodesic zone boundaries may have an apparent position that
+	// has crossed into an adjacent zone.  Enlarge the zone search by a fixed
+	// angular margin so the catalog zone is still found; the per-star angular test
+	// below still uses the original limFov.
+	constexpr double zoneBoundaryMarginDeg = 60.0 / 3600.0;  // 60 arcsec in degrees
+	SphericalConvexPolygon searchPoly = getSphericalSearchSquare(v, limFov + zoneBoundaryMarginDeg);
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(searchPoly.getBoundingSphericalCaps(),lastMaxSearchLevel);
 
 	double withParallax = core->getUseParallax() * core->getParallaxFactor();
 	Vec3d diffPos(0., 0., 0.);
