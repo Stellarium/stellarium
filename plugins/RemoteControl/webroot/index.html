@@ -1115,27 +1115,27 @@
 			<div id="tab_skyculture_stats">
 					<div class="flex flex-wrap" style="gap: 20px;">
 							
-							<!-- Info Bar - What is this section? -->
-							<div class="stats-bar stats-info-bar" style="width: 100%;">
-									<div class="stat-item" style="flex: 1; background: rgba(0, 0, 0, 0.15);">
-											<span class="stat-label" style="display: block; margin-bottom: 8px; color: #DCDBDA; font-size: 13px;"><?= tr("Culture Data Inspector")?></span>
-											<span class="stat-description" style="color: #B4B7B0; font-size: 11px; line-height: 1.6;">
-													<?= tr("This inspector displays the complete, unfiltered dataset extracted directly from the culture's")?> 
-													<code style="background: #2A2C2E; padding: 2px 5px; border-radius: 3px;">index.json</code> 
-													<?= tr("file. Use this view to:")?>
-													<ul style="margin: 8px 0 0 20px; padding: 0; color: #B4B7B0; font-size: 11px;">
-															<li><?= tr("Verify exact constellation and asterism counts (including ray helpers)")?></li>
-															<li><?= tr("Inspect raw IDs, native names, pronunciations, and IPA values")?></li>
-															<li><?= tr("Cross-reference star IDs (HIP, NGC, etc.) with their cultural names")?></li>
-															<li><?= tr("Export complete datasets to CSV/JSON for external analysis")?></li>
-															<li><?= tr("Search across all fields to quickly locate specific entries")?></li>
-													</ul>
-													<span style="display: block; margin-top: 8px; color: #8A8C8E; font-style: italic;">
-															<?= tr("Each row is interactive — click to select and navigate to the object in Stellarium.")?>
-													</span>
-											</span>
-									</div>
-							</div>
+						<!-- Info Bar - What is this section? -->
+						<div class="stats-bar stats-info-bar" style="width: 100%;">
+								<div class="stat-item">
+										<span class="stat-label"><?= tr("Culture Data Inspector")?></span>
+										<span class="stat-description">
+												<?= tr("This inspector displays the complete, unfiltered dataset extracted directly from the culture's")?> 
+												<code>index.json</code> 
+												<?= tr("file. Use this view to:")?>
+												<ul>
+														<li><?= tr("Verify exact constellation and asterism counts (including ray helpers)")?></li>
+														<li><?= tr("Inspect raw IDs, native names, pronunciations, and IPA values")?></li>
+														<li><?= tr("Cross-reference star IDs (HIP, NGC, etc.) with their cultural names")?></li>
+														<li><?= tr("Export complete datasets to CSV/JSON for external analysis")?></li>
+														<li><?= tr("Search across all fields to quickly locate specific entries")?></li>
+												</ul>
+												<span class="note-italic">
+														<?= tr("Each row is interactive — click to select and navigate to the object in Stellarium.")?>
+												</span>
+										</span>
+								</div>
+						</div>
 
 							<!-- Culture Selector Panel -->
 							<div class="culture-selector-panel" style="width: 100%;">
@@ -1399,7 +1399,6 @@
 																		<span class="toggle-text"><?= tr("Auto Validation")?></span>
 																</label>
 																    <div class="line-counter-badge pattern-btn" title="<?= tr("Total lines in editor")?>">
-																		<span class="line-counter-icon">📄</span>
 																		<span id="editor-line-count" class="line-count-number">0</span>
 																		<span class="line-count-label"><?= tr("lines")?></span>
 																</div>
@@ -1898,7 +1897,7 @@
 																		<div class="api-service-mini-card">
 																				<span class="service-badge">M</span>
 																				<strong>Main Service</strong>
-																				<small>Core functions: time, view, focus, movement, status</small>
+																				<small>Core functions: time, view, focus, movement, status, window</small>
 																		</div>
 																		<div class="api-service-mini-card">
 																				<span class="service-badge">O</span>

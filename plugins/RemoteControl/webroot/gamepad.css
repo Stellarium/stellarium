@@ -187,7 +187,7 @@
 }
 
 .calibration-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000000;
     border: 1px solid #2A2C2E;
     padding: 5px 12px;
@@ -488,7 +488,7 @@
 
 /* Test Vibration Button */
 .test-vibration-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000000;
     border: 1px solid #2A2C3E;
     padding: 5px 12px;
@@ -521,7 +521,7 @@
     flex: 2;
     min-width: 100px;
     max-width: calc(80% - 100px);
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(10, 10, 10, 0.15);
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 15px;
@@ -553,7 +553,7 @@
 .no-device-message {
     padding: 30px;
     text-align: center;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(150, 150, 150, 0.2);
     border-radius: 6px;
     border: 1px dashed #B4B7B0;
 }
@@ -576,7 +576,7 @@
 
 /* Individual Button Group */
 .button-group {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(150, 150, 150, 0.2);
     border-radius: 6px;
     padding: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -685,42 +685,42 @@
 }
 
 .action-btn.reset {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000000;
 }
 
 .action-btn.reset:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
+    background: linear-gradient(#8C8C8C, #505050);
     border-color: #B4B7B0;
 }
 
 .action-btn.save {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000000;
 }
 
 .action-btn.save:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
+    background: linear-gradient(#8C8C8C, #505050);
     border-color: #B4B7B0;
 }
 
 .action-btn.export {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000000;
 }
 
 .action-btn.export:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
+    background: linear-gradient(#8C8C8C, #505050);
     border-color: #B4B7B0;
 }
 
 .action-btn.import {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000000;
 }
 
 .action-btn.import:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
+    background: linear-gradient(#8C8C8C, #505050);
     border-color: #B4B7B0;
 }
 
@@ -730,7 +730,7 @@
  * ======================================================================== */
 
 #gp-connect {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000000;
     border: 1px solid #2A2C2E;
     padding: 5px 10px;
@@ -762,7 +762,7 @@
 /* Scanning animation */
 #gp-connect.scanning {
     position: relative;
-    background: linear-gradient(#3A6B3A, #2A4A2A);
+    background: linear-gradient(#8C8C8C, #505050);
 }
 
 #gp-connect.scanning::before {
@@ -888,15 +888,12 @@
         max-width: 380px;
     }
     
-    .button-select {
-        font-size: 10px;
-        padding: 4px;
-    }
-    
     .button-name {
         min-width: 85px;
         font-size: 10px;
         color: #000000;
+        width: 100%;
+        margin-bottom: 4px;
     }
     
     .button-item {
@@ -907,13 +904,10 @@
         margin-left: 0;
         margin-top: 4px;
         width: 100%;
+        font-size: 10px;
+        padding: 4px;
     }
-    
-    .button-name {
-        width: 100%;
-        margin-bottom: 4px;
-    }
-    
+      
     .slider-label {
         min-width: 85px;
         font-size: 11px;
@@ -1424,7 +1418,7 @@
 }
 
 .live-input-header {
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(150, 150, 150, 0.15);
     padding: 10px 15px;
     border-bottom: 1px solid rgba(180, 183, 176, 0.3);
 }
@@ -1440,7 +1434,7 @@
 .live-input-header p {
     margin: 4px 0 0 0;
     font-size: 10px;
-    color: #8A8C8E;
+    color: #000;
 }
 
 .live-input-content {
@@ -1457,7 +1451,7 @@
 .live-input-column {
     flex: 1;
     min-width: 200px;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(150, 150, 150, 0.15);
     border-radius: 6px;
     padding: 10px;
 }
@@ -1465,7 +1459,7 @@
 .live-input-column h5 {
     margin: 0 0 8px 0;
     padding-bottom: 5px;
-    color: #000000;
+    color: #000;
     font-size: 10px;
     font-weight: bold;
     border-bottom: 1px solid rgba(180, 183, 176, 0.3);
@@ -1497,14 +1491,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 4px 6px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(150, 150, 150, 0.25);
     border-radius: 4px;
     font-size: 8px;
     transition: background 0.1s ease;
 }
 
 .live-input-button .label {
-    color: #B4B7B0;
+    color: #000;
     font-family: 'DejaVuSans', sans-serif;
     white-space: nowrap;
     overflow: hidden;
@@ -1512,14 +1506,14 @@
 }
 
 .live-input-button .label .raw-id {
-    font-size: 7px;
-    color: #6A6C6E;
+    font-size: 9px;
+    color: #000;
     margin-left: 4px;
 }
 
 .live-input-button .value {
     font-family: 'DejaVuSansMono', monospace;
-    font-weight: bold;
+    /*font-weight: bold;*/
     padding: 2px 4px;
     border-radius: 3px;
     background: #2A2C2E;
@@ -1540,20 +1534,20 @@
     align-items: center;
     gap: 8px;
     padding: 5px 8px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(150, 150, 150, 0.25);
     border-radius: 4px;
 }
 
 .live-input-axis .label {
     min-width: 70px;
-    color: #B4B7B0;
+    color: #000;
     font-size: 9px;
     font-family: 'DejaVuSans', sans-serif;
 }
 
 .live-input-axis .label .raw-id {
     font-size: 7px;
-    color: #6A6C6E;
+    color: #000;
     margin-left: 4px;
 }
 
@@ -1642,7 +1636,7 @@
     background: rgba(180, 183, 176, 0.08);
     padding: 8px 10px;
     font-size: 9px;
-    color: #8A8C8E;
+    color: #000;
     border-radius: 4px;
     margin-top: 10px;
     line-height: 1.4;

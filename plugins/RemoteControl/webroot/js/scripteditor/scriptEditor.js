@@ -3555,7 +3555,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				// Prepare dialog content with new options
 				var dialogHtml = '<div id="collect-examples-dialog" title="Select Modules">' +
 						'<p>Choose which modules to load examples from:</p>' +
-						'<div style="max-height: 300px; overflow-y: auto; border:1px solid #ccc; padding:8px;">' +
+						'<div style="max-height: 300px; overflow-y: auto; border:1px solid #ccc; padding:8px; background: linear-gradient(#8C8C8C, #505050);">' +
 						'<label><input type="checkbox" id="select-all-modules"> Select All</label><br>' +
 						'<hr style="margin: 5px 0;">';
 				

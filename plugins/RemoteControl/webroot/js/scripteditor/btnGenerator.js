@@ -1235,8 +1235,8 @@ define([
                 if (info) {
                     if (info.isWritable === false) {
                         var msg = tr("This property is read-only and cannot be modified.");
-                        $previewContainer.html('<div class="btn-gen-placeholder" style="color: #F92672;">' + msg + '</div>');
-                        $codeContainer.html('<div class="btn-gen-placeholder" style="color: #F92672;">' + msg + '</div>');
+                        $previewContainer.html('<div class="btn-gen-placeholder" >' + msg + '</div>');
+                        $codeContainer.html('<div class="btn-gen-placeholder">' + msg + '</div>');
                         showPropertyInfo(val, info);
                         updateStatus("Read-only property selected", true);
                         return;
@@ -1471,7 +1471,7 @@ define([
         var html = '<div class="btn-gen-property-info ' + writableClass + '">';
         html += '<h4>' + tr("Property Information") + '</h4>';
         html += '<table class="btn-gen-info-table">';
-        html += '<tr><td>' + tr("Name") + ':</td><td><code>' + escapeHtml(propName) + '</code></td></tr>';
+        html += '<tr><td>' + tr("Name") + ':</td><td><strong>' + escapeHtml(propName) + '</strong></td></tr>';
         html += '<tr><td>' + tr("Type") + ':</td><td><strong>' + escapeHtml(type) + '</strong> (enum: ' + typeEnum + ')</td></tr>';
         html += '<tr><td>' + tr("Current Value") + ':</td><td><code>' + escapeHtml(formatValue(value)) + '</code></td></tr>';
         html += '<tr><td>' + tr("Writable") + ':</td><td><strong>' + writable + '</strong></td></tr>';
@@ -1588,7 +1588,7 @@ define([
 
         if (!isWritable) {
             var msg = tr("This property is read-only.");
-            $previewContainer.html('<div class="btn-gen-placeholder" style="color: #F92672;">' + msg + '</div>');
+            $previewContainer.html('<div class="btn-gen-placeholder" >' + msg + '</div>');
             return;
         }
 
@@ -1681,14 +1681,11 @@ define([
 						html += '    <label>' + escapeHtml(label) + '</label>';
 						html += '    <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap;">';
 						html += '        <input type="text" class="stelproperty-text" name="' + escapeAttr(propName) + '" ';
-						html += '            value="' + escapeAttr(currentTextValue) + '" ';
-						html += '            style="flex:1; min-width:120px; padding:4px 8px; background:#2A2C2E; color:#DCDBDA; border:1px solid #5D5F62; border-radius:3px;" />';
-						html += '        <button class="btn-gen-text-apply" data-prop="' + escapeAttr(propName) + '" ';
-						html += '            style="padding:4px 12px; background:linear-gradient(#5D5F62, #3A3C3E); border:1px solid #2A2C2E; border-radius:3px; color:#000; font-weight:bold; cursor:pointer;">';
+						html += '            value="' + escapeAttr(currentTextValue) + '" />';
+						html += '        <button class="btn-gen-text-apply" data-prop="' + escapeAttr(propName) + '">';
 						html += '            ' + tr("Apply") + '';
 						html += '        </button>';
-						html += '        <button class="btn-gen-text-reset" data-prop="' + escapeAttr(propName) + '" ';
-						html += '            style="padding:4px 12px; background:#2A2C2E; border:1px solid #5D5F62; border-radius:3px; color:#DCDBDA; cursor:pointer;">';
+						html += '        <button class="btn-gen-text-reset" data-prop="' + escapeAttr(propName) + '">';
 						html += '            ↺';
 						html += '        </button>';
 						html += '    </div>';
@@ -2674,10 +2671,8 @@ define([
 						html += '    <label>' + escapeHtml(label) + '</label>';
 						html += '    <div style="display:flex; gap:4px; flex:1; flex-wrap:wrap;">';
 						html += '        <input type="text" class="stelproperty-text" name="' + escapeAttr(id) + '" ';
-						html += '            value="' + escapeAttr(currentTextValue) + '" ';
-						html += '            style="flex:1; min-width:80px; padding:3px 6px; background:#2A2C2E; color:#DCDBDA; border:1px solid #5D5F62; border-radius:3px; font-size:10px;" />';
-						html += '        <button class="btn-gen-custom-text-apply" data-prop="' + escapeAttr(id) + '" ';
-						html += '            style="padding:2px 10px; background:linear-gradient(#5D5F62, #3A3C3E); border:1px solid #2A2C2E; border-radius:3px; color:#000; font-weight:bold; cursor:pointer; font-size:10px;">';
+						html += '            value="' + escapeAttr(currentTextValue) + '"/>';
+						html += '        <button class="btn-gen-custom-text-apply" data-prop="' + escapeAttr(id) + '">';
 						html += '            ' + tr("Apply") + '';
 						html += '        </button>';
 						html += '    </div>';

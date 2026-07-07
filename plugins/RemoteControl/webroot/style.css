@@ -611,8 +611,8 @@ button.button32:active {
 	padding: 1px 0;
 	min-height: 12em;
 	min-width: 200px;
-	margin-left: auto;
-	margin-right: auto; 
+	/*margin-left: auto;*/
+	/*margin-right: auto;*/ 
 	box-sizing: border-box;
 	display: block;
 }
@@ -1069,7 +1069,7 @@ button.button32:active {
     flex: 2 1 400px;         /* Grow more, shrink, base width */
     min-width: 100%;
     max-width: 100%;
-    background: rgba(149, 150, 152, 0.2);
+    background: rgba(180, 180, 185, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-style: inset;
     border-radius: 10px;
@@ -1114,7 +1114,7 @@ button.button32:active {
     border-radius: 6px;
     justify-content: flex-start;
     align-items: center;
-    max-height: 500px;        /* Scrollable if many cultures */
+    max-height: 500px; /* Scrollable if many cultures */
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -1124,13 +1124,14 @@ button.button32:active {
  * white-space: nowrap prevents text wrapping inside buttons.
  */
 .skyculture-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #000000;
-    border: 1px solid #2A2C2E;
+    background: linear-gradient(#8C8C8C, #505050);
+    color: #000;
+    border: 1.5px solid #2A2C2E;
     border-radius: clamp(3px, 0.5vw, 4px);
-    padding: clamp(3px, 0.8vw, 5px) clamp(8px, 1.5vw, 12px);
+    padding: clamp(3px, 0.8vw, 5px) clamp(7px, 1.5vw, 10px);
     font-size: clamp(9px, 1.4vw, 11px);
     font-weight: bold;
+		font-style: italic;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
@@ -1150,8 +1151,8 @@ button.button32:active {
 
 .skyculture-btn.active {
     background: linear-gradient(#DCDBDA, #FFE0C6);
-    border-color: #000000;
-    color: #000000;
+    border-color: #000;
+    color: #000;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -1225,7 +1226,7 @@ button.button32:active {
  */
 .pattern-btn,
 .constellation-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000000;
     border: 1px solid #2A2C2E;
     border-radius: clamp(3px, 0.5vw, 4px);
@@ -1264,7 +1265,7 @@ button.button32:active {
  * ======================================================================== */
 
 .patterns-note {
-    font-size: clamp(9px, 1.2vw, 11px);
+    font-size: clamp(9px, 1.2vw, 13px);
     color: #FFE0C6;
     margin: 0 0 10px 0;
     padding: clamp(4px, 0.8vw, 5px) clamp(8px, 1.2vw, 10px);
@@ -1332,7 +1333,7 @@ button.button32:active {
 
 .options-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 100%), 1fr));
     gap: clamp(8px, 1.5vw, 15px);
     padding: 5px;
     width: 100%;
@@ -1460,7 +1461,7 @@ button.button32:active {
     gap: 6px 12px;
     flex-wrap: wrap;
     padding: 6px 12px;
-    min-height: 44px;
+    min-height: auto;
     background: rgba(0, 0, 0, 0.06);
     border-radius: clamp(4px, 0.6vw, 6px);
     border: 1px solid rgba(0, 0, 0, 0.04);
@@ -1556,7 +1557,7 @@ button.button32:active {
     flex-wrap: nowrap;
     width: 100%;
     height: 28px;
-    min-height: 26px;
+    min-height: auto;
 }
 
 .option-item.option-group .color-swatch {
@@ -1646,7 +1647,7 @@ button.button32:active {
     }
     
     .option-item.option-group {
-        min-height: 48px;
+        min-height: auto;
         padding: 6px 16px;
         gap: 8px 16px;
     }
@@ -1673,7 +1674,7 @@ button.button32:active {
     
     .option-item.option-group .color-picker-wrapper {
         height: 30px;
-        min-height: 28px;
+        min-height: auto;
         padding: 1px 8px;
     }
     
@@ -1701,7 +1702,7 @@ button.button32:active {
     }
     
     .option-item.option-group {
-        min-height: 44px;
+        min-height: auto;
         padding: 5px 12px;
         gap: 6px 12px;
     }
@@ -1728,7 +1729,7 @@ button.button32:active {
     
     .option-item.option-group .color-picker-wrapper {
         height: 26px;
-        min-height: 24px;
+        min-height: auto;
         padding: 1px 6px;
     }
     
@@ -1772,7 +1773,7 @@ button.button32:active {
     }
     
     .option-item.option-group {
-        min-height: 42px;
+        min-height: auto;
         padding: 4px 10px;
         gap: 5px 10px;
     }
@@ -1800,7 +1801,7 @@ button.button32:active {
     
     .option-item.option-group .color-picker-wrapper {
         height: 24px;
-        min-height: 22px;
+        min-height: auto;
         padding: 1px 5px;
     }
     
@@ -1836,7 +1837,7 @@ button.button32:active {
     }
     
     .options-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 10px;
     }
     
@@ -1927,7 +1928,7 @@ button.button32:active {
     
     .option-item.option-group .color-picker-wrapper {
         height: 24px;
-        min-height: 22px;
+        min-height: auto;
         padding: 1px 5px;
     }
     
@@ -2071,7 +2072,7 @@ button.button32:active {
     
     .option-item.option-group .color-picker-wrapper {
         height: 22px;
-        min-height: 20px;
+        min-height: auto;
         padding: 1px 4px;
     }
     
@@ -2219,15 +2220,15 @@ button.button32:active {
  * ANIMATIONS
  * ======================================================================== */
 
-@keyframes fadeIn {
+/*@keyframes fadeIn {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
-}
+}*/
 
-.skyculture-panel,
+/*.skyculture-panel,
 .skyculture-options-panel {
     animation: fadeIn 0.3s ease-out;
-}
+}*/
 
 /* ========================================================================
  * PRINT STYLES
@@ -2265,7 +2266,7 @@ button.button32:active {
     margin-top: 20px;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 6px;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(200, 200, 200, 0.05);
     overflow: hidden;
 }
 
@@ -2920,16 +2921,17 @@ button.button32:active {
 }
 
 .stats-table tr:hover {
-    background: rgba(180, 183, 176, 0.1);
+  /*  background: rgba(180, 183, 176, 0.1);*/
 }
 
 .stats-table .clickable-row {
     cursor: pointer;
     transition: background 0.15s ease;
+		background: rgb(120, 120, 120);
 }
 
 .stats-table .clickable-row:hover {
-    background: rgba(180, 183, 176, 0.2);
+    background: rgb(160, 160, 160);
 }
 
 .stats-table .row-number {
@@ -2942,7 +2944,8 @@ button.button32:active {
 .stats-table .id-cell {
     font-family: 'DejaVuSansMono', monospace;
     font-size: 11px;
-    color: #1a1a2e;
+    color: #00000A;
+		min-width: 10px;
 }
 
 .stats-table .native-name {
@@ -2951,7 +2954,7 @@ button.button32:active {
 }
 
 .stats-table .pronounce {
-    color: #1a1a2e;
+    color: #00000A;
     font-size: 10px;
     font-style: italic;
     font-weight: 500;
@@ -2967,7 +2970,7 @@ button.button32:active {
 .stats-table .ids-display {
     max-width: 300px;
     font-size: 10px;
-    color: #2A2C2E;
+    color: #141618;
     line-height: 1.5;
 }
 
@@ -3075,13 +3078,63 @@ button.button32:active {
     overflow-x: auto;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 6px;
-    background: rgba(100, 100, 100, 0.01);
+    background: rgba(220, 220, 220, 0.01);
 }
 
 .no-data {
     text-align: center;
     padding: 20px;
     color: #FFE0C6;
+}
+
+/* ========================================================================
+ * STATS INFO BAR - Culture Data Inspector
+ * ======================================================================== */
+
+.stats-bar.stats-info-bar {
+    width: 100%;
+}
+
+.stats-bar.stats-info-bar .stat-item {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.stats-bar.stats-info-bar .stat-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #DCDBDA;
+    font-size: 13px;
+}
+
+.stats-bar.stats-info-bar .stat-description {
+    color: #B4B7B0;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.stats-bar.stats-info-bar .stat-description code {
+    background: #2A2C2E;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.stats-bar.stats-info-bar .stat-description ul {
+    margin: 8px 0 0 20px;
+    padding: 0;
+    color: #B4B7B0;
+    font-size: 11px;
+}
+
+.stats-bar.stats-info-bar .stat-description ul li {
+    /*inherited from origin */
+}
+
+.stats-bar.stats-info-bar .stat-description .note-italic {
+    display: block;
+    margin-top: 8px;
+    color: #8A8C8E;
+    font-style: italic;
 }
 
 /* ========================================================================
@@ -3125,6 +3178,7 @@ button.button32:active {
     border-radius: 6px;
     background: rgba(0, 0, 0, 0.05);
 }
+
 /* ========================================================================
  * TOUR CONTROLS - Complete Styles for All Tour Generators
  * ========================================================================
@@ -3280,6 +3334,18 @@ button.button32:active {
 }
 
 /**
+ * Fade duration control group (inline-flex for compact layout).
+ * Used by: .tour-fade-group
+ */
+.tour-fade-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #000000;
+}
+
+/**
  * Bold label inside control group.
  * Used by: .tour-control-label-bold
  */
@@ -3402,7 +3468,7 @@ button.button32:active {
  * Used by: .tour-generate-btn (applied to buttons with class)
  */
 .tour-generate-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     border: 1px solid #2A2C2E;
     border-radius: 3px;
     padding: 5px 10px;

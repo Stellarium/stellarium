@@ -1885,7 +1885,7 @@
 
 .generator-progress-steps .step-label {
     font-size: 9px;
-    color: rgb(150, 150, 150);
+    color: rgb(200, 200, 200);
     text-align: center;
     white-space: nowrap;
 }
@@ -1950,8 +1950,8 @@
 }
 
 .category-card .category-desc {
-    color: rgb(150, 150, 150);
-    font-size: 9px;
+    color: rgb(200, 200, 200);
+    font-size: 11px;
     line-height: 1.4;
 }
 
@@ -2016,9 +2016,10 @@
 
 .actions-list .action-card .action-desc {
     color: rgb(0, 0, 0);
-    font-size: 9px;
+    font-size: 11px;
     flex: 1 1 100%;
     margin-top: 2px;
+		margin-left: 5px;
 }
 
 /* Params Form */
@@ -2062,8 +2063,8 @@
 .params-form .param-badge.optional { background: var(--stel-bg-darker); color: rgb(150, 150, 150); }
 
 .params-form .param-desc {
-    color: rgb(150, 150, 150);
-    font-size: 9px;
+    color: rgb(185, 185, 185);
+    font-size: 11px;
     margin-bottom: 6px;
     word-break: break-word;
 }
@@ -2772,7 +2773,7 @@
     flex-direction: column;
     gap: 3px;
     padding: 10px 12px;
-    background: var(--stel-bg-dark);
+    background: var(--stel-bg-panel);
     border: 1px solid var(--stel-border);
     border-radius: var(--stel-radius-md);
     transition: background var(--stel-transition-fast);
@@ -2783,13 +2784,14 @@
 }
 
 .api-service-mini-card strong {
-    font-size: 11px;
+    font-size: 14px;
     color: var(--stel-text-dark);
 }
 
 .api-service-mini-card small {
-    font-size: 9px;
-    color: var(--stel-text-dark);
+    font-size: 10px;
+    /*color: var(--stel-text-dark);*/
+		color: rgb(200, 200, 200);
     line-height: 1.4;
 }
 
@@ -2861,7 +2863,9 @@
     font-family: var(--stel-font-mono);
     color: var(--stel-text-primary);
     cursor: pointer;
-    transition: background var(--stel-transition-fast);
+    background: #2A2C2E;
+    /*color: #DCDBDA;*/
+		transition: background var(--stel-transition-fast);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2885,13 +2889,15 @@
     gap: 6px;
     margin-top: 8px;
     padding: 6px 14px !important;
-    background: linear-gradient(#5D5F62, #3A3C3E) !important;
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000000 !important;
     border: 1px solid #2A2C2E !important;
     border-radius: 4px !important;
     font-size: 11px !important;
     font-weight: bold !important;
     cursor: pointer !important;
+		touch-action: manipulation;  /* Improve touch response */
+    user-select: none;
     transition: all 0.2s ease !important;
     white-space: nowrap;
 }
@@ -3229,7 +3235,7 @@
 
 /*  Similar to Sky Culture style for buttons  */
 .action-btn-item {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000000;
     border: 1px solid #2A2C2E;
     border-radius: clamp(3px, 0.5vw, 4px);
@@ -3262,7 +3268,7 @@
 
 /* Active button style (checked = true) */
 .action-btn-item.active {
-    background: linear-gradient(#DCDBDA, #8A8C8E);
+    background: linear-gradient(#DCDCDC, #969696);
     border-color: #000000;
     color: #000000;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -3527,9 +3533,9 @@
     font-size: 11px;
     color: #A6E22E;
     padding: 4px 8px;
-    background: var(--stel-bg-darker);
+    background: linear-gradient(#5D5F62, #3A3C3E);
     border-radius: var(--stel-radius-md);
-    border: 1px solid var(--stel-border);
+    /*border: 1px solid var(--stel-border);*/
     transition: all 0.2s ease;
 }
 
@@ -3594,10 +3600,10 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 4px 10px;
+    padding: 8px 8px;
     background: linear-gradient(#5D5F62, #3A3C3E);
-    border: 1px solid #2A2C2E;
-    border-radius: 20px;
+    /*border: 1px solid var(--stel-border);*/
+    var(--stel-radius-md);
     font-size: 11px;
     font-weight: bold;
     color: #DCDBDA;
@@ -3673,8 +3679,9 @@
 }
 
 .btn-gen-status {
-    font-size: 11px;
+    font-size: 12px;
     color: #8A8C8E;
+		margin-left: 20px;
 }
 
 /* ============================================================
@@ -3792,7 +3799,7 @@
 
 .btn-gen-count {
     font-size: 11px;
-    color: #8A8C8E;
+    color: #FFFFFF;
     white-space: nowrap;
     min-width: 60px;
 }
@@ -3868,12 +3875,29 @@
     flex-wrap: wrap;
 }
 
+.btn-gen-preview-content .btn-gen-text-wrap .text-input-row {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.btn-gen-preview-content .btn-gen-text-wrap .text-input-row input[type="text"] {
+    flex: 1;
+    min-width: 120px;
+    padding: 4px 8px;
+    background: #2A2C2E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+}
+
 /* ============================================================
  * TOGGLE BUTTONS 
  * ============================================================ */
 
 .btn-gen-preview-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     border: 1px solid #2A2C2E;
     border-radius: 4px;
     padding: 6px 16px;
@@ -3940,6 +3964,7 @@
     background: rgba(0, 0, 0, 0.3);
     padding: 2px 10px;
     border-radius: 10px;
+		color: #C8D2AA;
 }
 
 .btn-gen-preview-id {
@@ -3948,7 +3973,7 @@
 
 .btn-gen-preview-state,
 .btn-gen-preview-value {
-    color: #DCDBDA;
+    color: #A6E22E;
 }
 
 /* ============================================================
@@ -4085,7 +4110,7 @@
 
 .btn-gen-prop-name {
     font-size: 10px;
-    color: #8A8C8E;
+    color: #AAB4B4;
     font-family: 'DejaVuSansMono', monospace;
 }
 
@@ -4093,6 +4118,7 @@
  * TEXT INPUT
  * ============================================================ */
 
+/* Text input wrapper - used in preview and custom sections */
 .btn-gen-text-wrap {
     display: flex;
     align-items: center;
@@ -4108,7 +4134,7 @@
     min-width: 80px;
 }
 
-.btn-gen-text-wrap input {
+.btn-gen-text-wrap input[type="text"] {
     flex: 1;
     min-width: 80px;
     padding: 4px 8px;
@@ -4116,6 +4142,53 @@
     color: #DCDBDA;
     border: 1px solid #5D5F62;
     border-radius: 3px;
+}
+
+/* Text input with flex container - used in preview */
+.btn-gen-text-wrap .text-input-row {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.btn-gen-text-wrap .text-input-row input[type="text"] {
+    flex: 1;
+    min-width: 120px;
+    padding: 4px 8px;
+    background: #2A2C2E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+}
+
+/* Apply button for text properties */
+.btn-gen-text-apply {
+    padding: 4px 12px;
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    border: 1px solid #2A2C2E;
+    border-radius: 3px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-gen-text-apply:hover {
+    background: linear-gradient(#6E7073, #4A4C4E);
+}
+
+/* Reset button for text properties */
+.btn-gen-text-reset {
+    padding: 4px 12px;
+    background: #2A2C2E;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    color: #DCDBDA;
+    cursor: pointer;
+}
+
+.btn-gen-text-reset:hover {
+    background: #3A3C3E;
 }
 
 /* ============================================================
@@ -4457,9 +4530,9 @@
 }
 
 .btn-gen-custom-type {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
-    color: #8A8C8E;
+    color: #C8D2AA;
     min-width: 20px;
 }
 
@@ -4468,7 +4541,7 @@
  * ============================================================ */
 
 .btn-gen-custom-toggle-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
+    background: linear-gradient(#8C8C8C, #505050);
     border: 1px solid #2A2C2E;
     border-radius: 4px;
     padding: 5px 14px;
@@ -4591,13 +4664,14 @@
 }
 
 /* ============================================================
- * CUSTOM COLOR PICKER
+ * CUSTOM COLOR PICKER (for custom buttons section)
  * ============================================================ */
 
 .btn-gen-custom-color {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+    width: 100%;
 }
 
 .btn-gen-custom-color .btn-gen-color-swatch {
@@ -4612,6 +4686,43 @@
 
 .btn-gen-custom-color .btn-gen-color-swatch:hover {
     transform: scale(1.05);
+}
+
+.btn-gen-custom-color .btn-gen-color-picker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-gen-custom-color .btn-gen-color-inputs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.btn-gen-custom-color .btn-gen-color-inputs label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #DCDBDA;
+}
+
+.btn-gen-custom-color .btn-gen-color-inputs input[type="number"] {
+    width: 55px;
+    padding: 3px 5px;
+    background: #2A2C2E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    font-size: 10px;
+}
+
+.btn-gen-custom-color .btn-gen-color-inputs input[type="number"]:focus {
+    outline: none;
+    border-color: #FD971F;
 }
 
 .btn-gen-custom-color span {
@@ -4636,7 +4747,7 @@
     min-width: 60px;
 }
 
-.btn-gen-custom-text input {
+.btn-gen-custom-text input[type="text"] {
     flex: 1;
     min-width: 80px;
     padding: 3px 6px;
@@ -4645,6 +4756,40 @@
     border: 1px solid #5D5F62;
     border-radius: 3px;
     font-size: 10px;
+}
+
+.btn-gen-custom-text .text-input-flex {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.btn-gen-custom-text .text-input-flex input[type="text"] {
+    flex: 1;
+    min-width: 80px;
+    padding: 3px 6px;
+    background: #2A2C2E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    font-size: 10px;
+}
+
+/* Apply button for custom text properties */
+.btn-gen-custom-text-apply {
+    padding: 2px 10px;
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    border: 1px solid #2A2C2E;
+    border-radius: 3px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.btn-gen-custom-text-apply:hover {
+    background: linear-gradient(#6E7073, #4A4C4E);
 }
 
 /* ============================================================
@@ -4771,6 +4916,29 @@
         flex-direction: column;
         align-items: flex-start;
     }
+
+    .btn-gen-text-wrap .text-input-row {
+        flex-direction: column;
+    }
+    
+    .btn-gen-text-wrap .text-input-row input[type="text"] {
+        min-width: 100%;
+    }
+    
+    .btn-gen-custom-text .text-input-flex {
+        flex-direction: column;
+    }
+    
+    .btn-gen-custom-text .text-input-flex input[type="text"] {
+        min-width: 100%;
+    }
+    
+    .btn-gen-text-apply,
+    .btn-gen-text-reset,
+    .btn-gen-custom-text-apply {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 /* ============================================================
@@ -4892,4 +5060,41 @@
         font-size: 9px;
         padding: 6px 12px;
     }
+}
+
+.btn-gen-numeric-controls {
+    width: 100%;
+}
+
+.btn-gen-slider-controls {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.btn-gen-control-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-gen-control-group label {
+    font-size: 9px;
+    color: #8A8C8E;
+}
+
+.btn-gen-control-group input[type="number"] {
+    width: 55px;
+    padding: 3px 5px;
+    background: #2A2C2E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    font-size: 10px;
+}
+
+.btn-gen-control-group input[type="number"]:focus {
+    outline: none;
+    border-color: #FD971F;
 }
