@@ -2480,11 +2480,12 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
             stelUtils.showNotification(message);
         } else {
             // Fallback: create temporary notification div
+						var escapedMessage = escapeHtml(message);
             var $notification = $(
                 '<div class="tour-notification" style="position:fixed;bottom:20px;right:20px;' +
                 'background:linear-gradient(#5D5F62, #3A3C3E);color:#DCDBDA;padding:8px 15px;' +
                 'border-radius:4px;z-index:10000;font-size:11px;border:1px solid #2A2C2E;box-shadow:0 2px 8px rgba(0,0,0,0.2);">' + 
-                message + '</div>'
+                escapedMessage + '</div>'
             );
             $('body').append($notification);
             setTimeout(function() {
