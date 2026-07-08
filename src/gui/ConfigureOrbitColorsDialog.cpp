@@ -45,9 +45,9 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ConfigureOrbitColorsDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ConfigureOrbitColorsDialog::handleMovedTo);
 
 	QString activeColorStyle = StelApp::getInstance().getModule("SolarSystem")->property("orbitColorStyle").toString();
 
@@ -59,10 +59,10 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 		ui->majorPlanetsAndMinorTypeRadioButton->setChecked(true);
 	else
 		ui->oneColorRadioButton->setChecked(true);
-	connect(ui->oneColorRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
-	connect(ui->groupsRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
-	connect(ui->majorPlanetsRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
-	connect(ui->majorPlanetsAndMinorTypeRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
+	connect(ui->oneColorRadioButton,     &QRadioButton::clicked, this, &ConfigureOrbitColorsDialog::setColorStyle);
+	connect(ui->groupsRadioButton,       &QRadioButton::clicked, this, &ConfigureOrbitColorsDialog::setColorStyle);
+	connect(ui->majorPlanetsRadioButton, &QRadioButton::clicked, this, &ConfigureOrbitColorsDialog::setColorStyle);
+	connect(ui->majorPlanetsAndMinorTypeRadioButton, &QRadioButton::clicked, this, &ConfigureOrbitColorsDialog::setColorStyle);
 
 	ui->colorGenericOrbits           ->setup("SolarSystem.orbitsColor",                     "color/sso_orbits_color");
 	ui->colorGroupsMajorPlanetsOrbits->setup("SolarSystem.majorPlanetsOrbitsColor",         "color/major_planet_orbits_color");

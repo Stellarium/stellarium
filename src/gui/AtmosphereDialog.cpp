@@ -63,9 +63,9 @@ void AtmosphereDialog::createDialogContent()
 	dialog->installEventFilter(this);
 	
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &AtmosphereDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo,      this, &AtmosphereDialog::handleMovedTo);
 
 	connectDoubleProperty(ui->pressureDoubleSpinBox,"StelSkyDrawer.atmospherePressure");
 	connectDoubleProperty(ui->temperatureDoubleSpinBox,"StelSkyDrawer.atmosphereTemperature");
@@ -75,7 +75,7 @@ void AtmosphereDialog::createDialogContent()
 	connect(StelApp::getInstance().getStelPropertyManager()->getProperty(ERROR_PROPERTY),
 			&StelProperty::changed, this, [this](const QVariant& v){ onErrorStateChanged(v.toBool()); });
 
-	connect(ui->standardAtmosphereButton, SIGNAL(clicked()), this, SLOT(setStandardAtmosphere()));
+	connect(ui->standardAtmosphereButton, &QPushButton::clicked, this, &AtmosphereDialog::setStandardAtmosphere);
 
 	// Experimental settings, protected by Skylight.flagGuiPublic
 	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
@@ -89,8 +89,8 @@ void AtmosphereDialog::createDialogContent()
 			double T=25.*(propMgr->getProperty("StelSkyDrawer.extinctionCoefficient")->getValue().toDouble()-0.16)+1.;
 			ui->doubleSpinBox_T->setValue(T);
 		}
-		connect(ui->checkBox_TfromK, SIGNAL(toggled(bool)), ui->doubleSpinBox_T, SLOT(setDisabled(bool)));
-		connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(setTfromK(double)));
+		connect(ui->checkBox_TfromK, &QCheckBox::toggled, ui->doubleSpinBox_T, &QDoubleSpinBox::setDisabled);
+		connect(ui->extinctionDoubleSpinBox, &QDoubleSpinBox::valueChanged, this, &AtmosphereDialog::setTfromK);
 		connectDoubleProperty(ui->doubleSpinBox_T, "StelSkyDrawer.turbidity");
 
 		connectBoolProperty(ui->checkBox_noScatter, "LandscapeMgr.atmosphereNoScatter");
