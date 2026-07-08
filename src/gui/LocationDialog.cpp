@@ -88,8 +88,8 @@ void LocationDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(app, SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
+	connect(app, &StelApp::languageChanged, this, &LocationDialog::retranslate);
+	connect(app, &StelApp::flagShowDecimalDegreesChanged, this, &LocationDialog::setDisplayFormatForSpins);
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &LocationDialog::populatePlanetList);
 	// Init the SpinBox entries
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
@@ -106,7 +106,7 @@ void LocationDialog::createDialogContent()
 	allModel = new QStringListModel(this);
 	pickedModel = new QStringListModel(this);
 	StelLocationMgr *locMgr=&(StelApp::getInstance().getLocationMgr());
-	connect(locMgr, SIGNAL(locationListChanged()), this, SLOT(reloadLocations()));
+	connect(locMgr, &StelLocationMgr::locationListChanged, this, &LocationDialog::reloadLocations);
 	reloadLocations();
 	proxyModel = new QSortFilterProxyModel(ui->citiesListView);
 	proxyModel->setSourceModel(allModel);
@@ -120,28 +120,27 @@ void LocationDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &LocationDialog::enableKineticScrolling);
 	}
 
 	populatePlanetList();	
 	populateTimeZonesList();
 
-	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
-	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)),
-		this, SLOT(setLocationFromList(const QModelIndex&)));
+	connect(ui->citySearchLineEdit, &QLineEdit::textChanged, proxyModel, &QSortFilterProxyModel::setFilterWildcard);
+	connect(ui->citiesListView, &QListView::clicked, this, &LocationDialog::setLocationFromList);
 
 	// Connect all the QT signals
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)), Qt::UniqueConnection);
+	connect(ui->titleBar, &TitleBar::movedTo, this, &LocationDialog::handleMovedTo);
+	connect(ui->mapWidget, &MapWidget::positionChanged, this, &LocationDialog::setLocationFromMap, Qt::UniqueConnection);
 
-	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
-	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
-	connect(ui->resetListPushButton, SIGNAL(clicked()), this, SLOT(resetLocationList()));
+	connect(ui->addLocationToListPushButton, &QPushButton::clicked, this, &LocationDialog::addCurrentLocationToList);
+	connect(ui->deleteLocationFromListPushButton, &QPushButton::clicked, this, &LocationDialog::deleteCurrentLocationFromList);
+	connect(ui->resetListPushButton, &QPushButton::clicked, this, &LocationDialog::resetLocationList);
 #if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
-	connect(ui->regionNameComboBox, SIGNAL(textActivated(const QString &)), this, SLOT(filterSitesByRegion()));
+	connect(ui->regionNameComboBox, &QComboBox::textActivated, this, &LocationDialog::filterSitesByRegion);
 #else
-	connect(ui->regionNameComboBox, SIGNAL(activated(const QString &)), this, SLOT(filterSitesByRegion()));
+	connect(ui->regionNameComboBox, &QPushButton::activated, this, &LocationDialog::filterSitesByRegion);
 #endif
 
 	StelCore* core = StelApp::getInstance().getCore();
@@ -174,21 +173,21 @@ void LocationDialog::createDialogContent()
 #else
 	ui->gpsToolButton->setText(q_("Get location from GPS"));
 #endif
-	connect(ui->gpsToolButton, SIGNAL(toggled(bool)), this, SLOT(gpsEnableQueryLocation(bool)));
-	connect(locMgr, SIGNAL(gpsQueryFinished(bool)), this, SLOT(gpsReturn(bool)));
+	connect(ui->gpsToolButton, &QToolButton::toggled, this, &LocationDialog::gpsEnableQueryLocation);
+	connect(locMgr, &StelLocationMgr::gpsQueryFinished, this, &LocationDialog::gpsReturn);
 #else
 	ui->gpsToolButton->setEnabled(false);
 	ui->gpsToolButton->hide();
 #endif
-	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
-	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
-	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), this, SLOT(resetLocationList()));
+	connect(ui->useIpQueryCheckBox, &QCheckBox::clicked, this, &LocationDialog::ipQueryLocation);
+	connect(ui->useAsDefaultLocationCheckBox, &QCheckBox::clicked, this, &LocationDialog::setDefaultLocation);
+	connect(ui->pushButtonReturnToDefault, &QPushButton::clicked, this, &LocationDialog::resetLocationList);
 	connectBoolProperty(ui->dstCheckBox, "StelCore.flagUseDST");
 	connectBoolProperty(ui->useCustomTimeZoneCheckBox, "StelCore.flagUseCTZ");
-	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(toggled(bool)), ui->timeZoneNameComboBox, SLOT(setEnabled(bool)));
+	connect(ui->useCustomTimeZoneCheckBox, &QCheckBox::toggled, ui->timeZoneNameComboBox, &QComboBox::setEnabled);
 	ui->timeZoneNameComboBox->setEnabled(core->getUseCustomTimeZone());
-	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateTimeZoneControls(bool)));
-	connect(core, SIGNAL(currentTimeZoneChanged(QString)), this, SLOT(setTimezone(QString)));
+	connect(ui->useCustomTimeZoneCheckBox, &QCheckBox::clicked, this, &LocationDialog::updateTimeZoneControls);
+	connect(core, &StelCore::currentTimeZoneChanged, this, &LocationDialog::setTimezone);
 	connectBoolProperty(ui->autoEnableEnvironmentCheckBox, "LandscapeMgr.flagEnvironmentAutoEnabling");
 	connectBoolProperty(ui->autoChangeLandscapesCheckBox,  "LandscapeMgr.flagLandscapeAutoSelection");
 
@@ -273,24 +272,30 @@ void LocationDialog::updateFromProgram(const StelLocation& newLocation)
 
 void LocationDialog::disconnectEditSignals()
 {
+	// TODO: Convert these.
 	disconnect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	disconnect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
-	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setLocationFromCoords(int)));
-	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(moveToAnotherPlanet()));
-	disconnect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(reportEdit()));
-	disconnect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(saveTimeZone()));
-	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
+	//disconnect(ui->longitudeSpinBox,     &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	//disconnect(ui->latitudeSpinBox,      &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	disconnect(ui->altitudeSpinBox,      &QSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	disconnect(ui->planetNameComboBox,   &QComboBox::currentIndexChanged, this, &LocationDialog::moveToAnotherPlanet);
+	disconnect(ui->regionNameComboBox,   &QComboBox::currentIndexChanged, this, &LocationDialog::reportEdit);
+	disconnect(ui->timeZoneNameComboBox, &QComboBox::currentIndexChanged, this, &LocationDialog::saveTimeZone);
+	disconnect(ui->cityNameLineEdit,     &QLineEdit::textEdited, this, &LocationDialog::reportEdit);
 }
 
 void LocationDialog::connectEditSignals()
 {
+	// TODO: Convert these.
 	connect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	connect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
-	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setLocationFromCoords(int)));
-	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(moveToAnotherPlanet()));
-	connect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(reportEdit()));
-	connect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(saveTimeZone()));
-	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
+	//connect(ui->longitudeSpinBox,     &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	//connect(ui->latitudeSpinBox,      &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	connect(ui->altitudeSpinBox,      &QSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	connect(ui->planetNameComboBox,   &QComboBox::currentIndexChanged, this, &LocationDialog::moveToAnotherPlanet);
+	connect(ui->regionNameComboBox,   &QComboBox::currentIndexChanged, this, &LocationDialog::reportEdit);
+	connect(ui->timeZoneNameComboBox, &QComboBox::currentIndexChanged, this, &LocationDialog::saveTimeZone);
+	connect(ui->cityNameLineEdit,     &QLineEdit::textEdited, this, &LocationDialog::reportEdit);
 }
 
 void LocationDialog::setLocationUIvisible(bool visible)
@@ -304,11 +309,11 @@ void LocationDialog::setLocationUIvisible(bool visible)
 	ui->mapWidget->setMarkerVisible(visible);
 	if(visible)
 	{
-		connect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)), Qt::UniqueConnection);
+		connect(ui->mapWidget, &MapWidget::positionChanged, this, &LocationDialog::setLocationFromMap, Qt::UniqueConnection);
 	}
 	else
 	{
-		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)));
+		disconnect(ui->mapWidget, &MapWidget::positionChanged, this, &LocationDialog::setLocationFromMap);
 	}
 	ui->addLocationToListPushButton->setVisible(visible);
 	ui->deleteLocationFromListPushButton->setVisible(visible);
