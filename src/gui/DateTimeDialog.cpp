@@ -48,7 +48,7 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
 {
 	ui = new Ui_dateTimeDialogForm;
 	updateTimer=new QTimer(this); // parenting will auto-delete timer on destruction!
-	connect (updateTimer, SIGNAL(timeout()), this, SLOT(onTimerTimeout()));
+	connect (updateTimer, &QTimer::timeout, this, &DateTimeDialog::onTimerTimeout);
 	updateTimer->start(20); // must be short enough to allow fast scroll-through.
 	core = StelApp::getInstance().getCore();
 }
@@ -64,9 +64,9 @@ void DateTimeDialog::createDialogContent()
 	ui->setupUi(dialog);
 	setDateTime(core->getJD());
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &DateTimeDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo,      this, &DateTimeDialog::handleMovedTo);
 
 	connectSpinnerEvents();
 
@@ -79,7 +79,7 @@ void DateTimeDialog::createDialogContent()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
-		connect(gui, SIGNAL(flagEnableFocusOnDaySpinnerChanged(bool)), this, SLOT(setFlagEnableFocus(bool)));
+		connect(gui, &StelGui::flagEnableFocusOnDaySpinnerChanged, this, &DateTimeDialog::setFlagEnableFocus);
 		setFlagEnableFocus(gui->getFlagEnableFocusOnDaySpinner());
 	}
 }
@@ -98,26 +98,26 @@ void DateTimeDialog::setFlagEnableFocus(bool b)
 
 void DateTimeDialog::connectSpinnerEvents() const
 {
-	connect(ui->spinner_year, SIGNAL(valueChanged(int)), this, SLOT(yearChanged(int)));
-	connect(ui->spinner_month, SIGNAL(valueChanged(int)), this, SLOT(monthChanged(int)));
-	connect(ui->spinner_day, SIGNAL(valueChanged(int)), this, SLOT(dayChanged(int)));
-	connect(ui->spinner_hour, SIGNAL(valueChanged(int)), this, SLOT(hourChanged(int)));
-	connect(ui->spinner_minute, SIGNAL(valueChanged(int)), this, SLOT(minuteChanged(int)));
-	connect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));
-	connect(ui->spinner_jd, SIGNAL(valueChanged(double)), this, SLOT(jdChanged(double)));
-	connect(ui->spinner_mjd, SIGNAL(valueChanged(double)), this, SLOT(mjdChanged(double)));
+	connect(ui->spinner_year,   &QSpinBox::valueChanged,            this, &DateTimeDialog::yearChanged);
+	connect(ui->spinner_month,  &ExternalStepSpinBox::valueChanged, this, &DateTimeDialog::monthChanged);
+	connect(ui->spinner_day,    &ExternalStepSpinBox::valueChanged, this, &DateTimeDialog::dayChanged);
+	connect(ui->spinner_hour,   &ExternalStepSpinBox::valueChanged, this, &DateTimeDialog::hourChanged);
+	connect(ui->spinner_minute, &ExternalStepSpinBox::valueChanged, this, &DateTimeDialog::minuteChanged);
+	connect(ui->spinner_second, &ExternalStepSpinBox::valueChanged, this, &DateTimeDialog::secondChanged);
+	connect(ui->spinner_jd,     &QDoubleSpinBox::valueChanged,      this, &DateTimeDialog::jdChanged);
+	connect(ui->spinner_mjd,    &QDoubleSpinBox::valueChanged,      this, &DateTimeDialog::mjdChanged);
 }
 
 void DateTimeDialog::disconnectSpinnerEvents()const
 {
-	disconnect(ui->spinner_year, SIGNAL(valueChanged(int)), this, SLOT(yearChanged(int)));
-	disconnect(ui->spinner_month, SIGNAL(valueChanged(int)), this, SLOT(monthChanged(int)));
-	disconnect(ui->spinner_day, SIGNAL(valueChanged(int)), this, SLOT(dayChanged(int)));
-	disconnect(ui->spinner_hour, SIGNAL(valueChanged(int)), this, SLOT(hourChanged(int)));
-	disconnect(ui->spinner_minute, SIGNAL(valueChanged(int)), this, SLOT(minuteChanged(int)));
-	disconnect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));
-	disconnect(ui->spinner_jd, SIGNAL(valueChanged(double)), this, SLOT(jdChanged(double)));
-	disconnect(ui->spinner_mjd, SIGNAL(valueChanged(double)), this, SLOT(mjdChanged(double)));
+	disconnect(ui->spinner_year,   &QSpinBox::valueChanged,            this, &DateTimeDialog::yearChanged);
+	disconnect(ui->spinner_month,  &ExternalStepSpinBox::valueChanged, this, &DateTimeDialog::monthChanged);
+	disconnect(ui->spinner_day,    &ExternalStepSpinBox::valueChanged, this, &DateTimeDialog::dayChanged);
+	disconnect(ui->spinner_hour,   &ExternalStepSpinBox::valueChanged, this, &DateTimeDialog::hourChanged);
+	disconnect(ui->spinner_minute, &ExternalStepSpinBox::valueChanged, this, &DateTimeDialog::minuteChanged);
+	disconnect(ui->spinner_second, &ExternalStepSpinBox::valueChanged, this, &DateTimeDialog::secondChanged);
+	disconnect(ui->spinner_jd,     &QDoubleSpinBox::valueChanged,      this, &DateTimeDialog::jdChanged);
+	disconnect(ui->spinner_mjd,    &QDoubleSpinBox::valueChanged,      this, &DateTimeDialog::mjdChanged);
 }
 
 
