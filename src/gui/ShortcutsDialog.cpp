@@ -292,7 +292,7 @@ void ShortcutsDialog::switchToEditors(const QModelIndex& index)
 void ShortcutsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ShortcutsDialog::handleMovedTo);
 
 	resetModel();
 	filterModel->setSourceModel(mainModel);
@@ -310,28 +310,25 @@ void ShortcutsDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &ShortcutsDialog::enableKineticScrolling);
 	}
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->shortcutsTreeView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-		this, SLOT(initEditors()));
-	connect(ui->shortcutsTreeView, SIGNAL(activated(QModelIndex)),
-		this, SLOT(switchToEditors(QModelIndex)));
-	connect(ui->lineEditSearch, SIGNAL(textChanged(QString)),
-	        filterModel, SLOT(setFilterFixedString(QString)));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ShortcutsDialog::retranslate);
+	connect(ui->shortcutsTreeView->selectionModel(), &QItemSelectionModel::currentChanged, this, &ShortcutsDialog::initEditors);
+	connect(ui->shortcutsTreeView, &QTreeView::activated, this, &ShortcutsDialog::switchToEditors);
+	connect(ui->lineEditSearch, &QLineEdit::textChanged, filterModel, &ShortcutsFilterModel::setFilterFixedString);
 	
 	// apply button logic
-	connect(ui->applyButton, SIGNAL(clicked()), this, SLOT(applyChanges()));
+	connect(ui->applyButton, &QPushButton::clicked, this, &ShortcutsDialog::applyChanges);
 	// restore defaults button logic
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaultShortcuts()));
-	connect(ui->restoreAllDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreAllDefaultShortcuts()));
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &ShortcutsDialog::restoreDefaultShortcuts);
+	connect(ui->restoreAllDefaultsButton, &QPushButton::clicked, this, &ShortcutsDialog::restoreAllDefaultShortcuts);
 	// we need to disable all shortcut actions, so we can enter shortcuts without activating any actions
-	connect(ui->primaryShortcutEdit, SIGNAL(focusChanged(bool)), actionMgr, SLOT(setAllActionsEnabled(bool)));
-	connect(ui->altShortcutEdit, SIGNAL(focusChanged(bool)), actionMgr, SLOT(setAllActionsEnabled(bool)));
+	connect(ui->primaryShortcutEdit, &ShortcutLineEdit::focusChanged, actionMgr, &StelActionMgr::setAllActionsEnabled);
+	connect(ui->altShortcutEdit, &ShortcutLineEdit::focusChanged, actionMgr, &StelActionMgr::setAllActionsEnabled);
 	// handling changes in editors
-	connect(ui->primaryShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
-	connect(ui->altShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
+	connect(ui->primaryShortcutEdit, &ShortcutLineEdit::contentsChanged, this, &ShortcutsDialog::handleChanges);
+	connect(ui->altShortcutEdit, &ShortcutLineEdit::contentsChanged, this, &ShortcutsDialog::handleChanges);
 
 	QString backspaceChar;
 	backspaceChar.append(QChar(0x232B)); // Erase left
