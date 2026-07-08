@@ -367,7 +367,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "</li>";
 	helpPage += "<li>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += q_("<b>local, Stellarium</b> means a DIRECT connection to the telescope (see {above});").replace(a_rx, "<a href=\"#usingthisplugin\">\\1</a>");
+	helpPage += q_("<b>direct, Stellarium</b> means a DIRECT connection to the telescope (see {above});").replace(a_rx, "<a href=\"#usingthisplugin\">\\1</a>");
 	helpPage += "</li>";
 	helpPage += "<li>" + q_("<b>local, external</b> means an INDIRECT connection to a program running on the same computer;") + "</li>";
 	helpPage += "<li>" + q_("<b>remote, unknown</b> means an INDIRECT connection over a network to a remote machine.") + "</li></ul></li></ul>";
@@ -382,7 +382,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += q_("The topmost field represents the choice between the two types of connections (see {above}):").replace(a_rx, "<a href=\"#usingthisplugin\">\\1</a>");
 	helpPage += "</p>";
 	helpPage += "<p><b>" + q_("Telescope controlled by:") + "</b></p><ul>";
-	helpPage += "<li>" + q_("<b>Stellarium, directly through a serial port</b> is the DIRECT case. LX200-compatible mounts can alternatively be connected directly over a TCP/IP network (see {Device settings}).").replace(a_rx, "<a href=\"#device_settings\">\\1</a>") + "</li>";
+	helpPage += "<li>" + q_("<b>Stellarium, directly (serial port or network)</b> is the DIRECT case. LX200-compatible mounts can be connected either through a serial port or over a TCP/IP network (see {Device settings}).").replace(a_rx, "<a href=\"#device_settings\">\\1</a>") + "</li>";
 	helpPage += "<li>" + q_("<b>External software or a remote computer</b> is the INDIRECT case") + "</li>";
 	helpPage += "<li>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
@@ -576,7 +576,7 @@ QString TelescopeDialog::getTypeLabel(TelescopeControl::ConnectionType type)
 {
 	static const QMap<TelescopeControl::ConnectionType, QString>map={
 		// TRANSLATORS: Telescope connection type
-		{ TelescopeControl::ConnectionInternal, N_("local, Stellarium")},
+		{ TelescopeControl::ConnectionInternal, N_("direct, Stellarium")},
 		// TRANSLATORS: Telescope connection type
 		{ TelescopeControl::ConnectionLocal, N_("local, external")},
 		// TRANSLATORS: Telescope connection type
