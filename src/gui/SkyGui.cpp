@@ -139,19 +139,19 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
 	progressBarMgr = new StelProgressBarMgr(this);
-	connect(&StelApp::getInstance(), SIGNAL(progressBarAdded(const StelProgressController*)), progressBarMgr, SLOT(addProgressBar(const StelProgressController*)));
-	connect(&StelApp::getInstance(), SIGNAL(progressBarRemoved(const StelProgressController*)), progressBarMgr, SLOT(removeProgressBar(const StelProgressController*)));
+	connect(&StelApp::getInstance(), &StelApp::progressBarAdded,   progressBarMgr, &StelProgressBarMgr::addProgressBar);
+	connect(&StelApp::getInstance(), &StelApp::progressBarRemoved, progressBarMgr, &StelProgressBarMgr::removeProgressBar);
 
 	// The path drawn around the button bars
 	buttonBarsFrame = new StelBarsFrame(this);
 
 	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
-	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
+	connect(animLeftBarTimeLine, &QTimeLine::valueChanged, this, &SkyGui::updateBarsPos);
 
 	animBottomBarTimeLine = new QTimeLine(200, this);
 	animBottomBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
-	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
+	connect(animBottomBarTimeLine, &QTimeLine::valueChanged, this, &SkyGui::updateBarsPos);
 
 	setAcceptHoverEvents(true);
 }
@@ -190,9 +190,9 @@ void SkyGui::init(StelGui* astelGui)
 
 	buttonBarsFrame->setZValue(-0.1);
 	updateBarsPos();
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	connect(&StelApp::getInstance(), &StelApp::colorSchemeChanged, this, &SkyGui::setStelStyle);
 	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &SkyGui::updateInfoPanelPos);
-	connect(bottomBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
+	connect(bottomBar, &BottomStelBar::sizeChanged, this, &SkyGui::updateBarsPos);
 	// The first draw of path may show overshooting date line if there are too few buttons in the bottom bar.
 	// Correct this by a redraw 1/2s after startup
 	QTimer::singleShot(500, this, [=](){buttonBarsFrame->updatePath(bottomBar, leftBar);});
