@@ -3739,9 +3739,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 						double altitudeFirstcontact = 0.;
 						double altitudeLastcontact = 0.;
 						double JD1 = JD;
-						double JD2 = JD;
 						double JDmax = JD;
-						double JD3 = JD;
 						double JD4 = JD;
 						// First contact
 						iteration = 0;
@@ -3794,7 +3792,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 									JD1 = JD; // time of first contact at Sunrise
 									JDmax = JD; // time of maximum eclipse
 									magLocal = eclipseData.magnitude;
-									magStr = QString::number(eclipseData.magnitude, 'f', 3);
+									magStr = QString::number(magLocal, 'f', 3);
 								}
 							}
 
@@ -3819,13 +3817,13 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 										JD4 = JD; // time of last contact at Sunset
 										JDmax = JD; // time of maximum eclipse
 										magLocal = eclipseData.magnitude;
-										magStr = QString::number(eclipseData.magnitude, 'f', 3);
+										magStr = QString::number(magLocal, 'f', 3);
 									}
 							}
 
 							// 2nd contact - start of totality/annularity
 							iteration = 0;
-							JD2 = JD;
+							double JD2 = JD;
 							eclipseData = localSolarEclipse(JD2,-1,true);
 							dt = eclipseData.dt;
 							while (abs(dt) > 0.000001 && (iteration < 20))
@@ -3838,7 +3836,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							double C2altitude = eclipseData.altitude;
 							// 3rd contact - end of totality/annularity
 							iteration = 0;
-							JD3 = JD;
+							double JD3 = JD;
 							eclipseData = localSolarEclipse(JD3,1,true);
 							dt = eclipseData.dt;
 							while (abs(dt) > 0.000001 && (iteration < 20))
@@ -4624,7 +4622,6 @@ void AstroCalcDialog::generateTransits()
 					{
 						double dt = 1.;
 						int iteration = 0;
-						double JDMid = JD;
 						double az, altitudeMidtransit = -1.;
 						double altitudeContact1 = -1., altitudeContact2 = -1., altitudeContact3 = -1., altitudeContact4 = -1.;
 						double JD1 = 0., JD2 = 0., JD3 = 0., JD4 = 0., JDc1 = 0., JDc4 = 0.;
@@ -4639,7 +4636,7 @@ void AstroCalcDialog::generateTransits()
 							JD += dt / 24.;
 							++iteration;
 						}
-						JDMid = JD;
+						const double JDMid = JD;
 						transitMagnitude = transitData.magnitude;
 						core->setJD(JDMid);
 						core->update(0);
