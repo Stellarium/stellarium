@@ -106,28 +106,28 @@ void ObsListDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ObsListDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 
 	// Standard mode buttons: NewList/EditList/DeleteList
-	connect(ui->newListButton,        SIGNAL(clicked()), this, SLOT(   newListButtonPressed()));
-	connect(ui->editListButton,       SIGNAL(clicked()), this, SLOT(  editListButtonPressed()));
-	connect(ui->deleteListButton,     SIGNAL(clicked()), this, SLOT(deleteListButtonPressed()));
-	connect(ui->importListButton,     SIGNAL(clicked()), this, SLOT(importListButtonPressed()));
-	connect(ui->exportListButton,     SIGNAL(clicked()), this, SLOT(exportListButtonPressed()));
+	connect(ui->newListButton,        &QPushButton::clicked, this, &ObsListDialog::   newListButtonPressed);
+	connect(ui->editListButton,       &QPushButton::clicked, this, &ObsListDialog::  editListButtonPressed);
+	connect(ui->deleteListButton,     &QPushButton::clicked, this, &ObsListDialog::deleteListButtonPressed);
+	connect(ui->importListButton,     &QPushButton::clicked, this, &ObsListDialog::importListButtonPressed);
+	connect(ui->exportListButton,     &QPushButton::clicked, this, &ObsListDialog::exportListButtonPressed);
 	// Mark all objects of currentList in the sky
-	connect(ui->highlightAllButton,   SIGNAL(clicked()), this, SLOT(highlightAll()));
-	connect(ui->clearHighlightButton, SIGNAL(clicked()), this, SLOT(clearHighlights()));
+	connect(ui->highlightAllButton,   &QPushButton::clicked, this, &ObsListDialog::highlightAll);
+	connect(ui->clearHighlightButton, &QPushButton::clicked, this, &ObsListDialog::clearHighlights);
 	// Edits
-	connect(ui->addObjectButton,      SIGNAL(clicked()), this, SLOT(   addObjectButtonPressed()));
-	connect(ui->removeObjectButton,   SIGNAL(clicked()), this, SLOT(removeObjectButtonPressed()));
-	connect(ui->saveButton,           SIGNAL(clicked()), this, SLOT(  saveButtonPressed()));
-	connect(ui->cancelButton,         SIGNAL(clicked()), this, SLOT(cancelButtonPressed()));
+	connect(ui->addObjectButton,      &QPushButton::clicked, this, &ObsListDialog::   addObjectButtonPressed);
+	connect(ui->removeObjectButton,   &QPushButton::clicked, this, &ObsListDialog::removeObjectButtonPressed);
+	connect(ui->saveButton,           &QPushButton::clicked, this, &ObsListDialog::  saveButtonPressed);
+	connect(ui->cancelButton,         &QPushButton::clicked, this, &ObsListDialog::cancelButtonPressed);
 
-	connect(ui->defaultListCheckBox, SIGNAL(clicked(bool)), this, SLOT(defaultClicked(bool)));
+	connect(ui->defaultListCheckBox, &QCheckBox::clicked, this, &ObsListDialog::defaultClicked);
 
 	// Allow loading one list entry
-	connect(ui->treeView,           SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectAndGoToObject(QModelIndex)));
+	connect(ui->treeView,           &QTreeView::doubleClicked, this, &ObsListDialog::selectAndGoToObject);
 
 	switchEditMode(false, false); // start with view mode
 
@@ -137,12 +137,12 @@ void ObsListDialog::createDialogContent()
 	connectBoolProperty(ui->fovCheckBox,       "ObsListDialog.flagUseFov");
 
 	ui->obsListDirEdit->setText(StelFileMgr::getObsListDir());
-	connect(ui->obsListDirEdit, SIGNAL(editingFinished()), this, SLOT(selectObsListDir()));
-	connect(ui->obsListBrowseButton, SIGNAL(clicked()), this, SLOT(browseForObsListDir()));
+	connect(ui->obsListDirEdit, &QLineEdit::editingFinished, this, &ObsListDialog::selectObsListDir);
+	connect(ui->obsListBrowseButton, &QPushButton::clicked, this, &ObsListDialog::browseForObsListDir);
 
 
 	//obsListCombo settings: A change in the combobox loads the list.
-	connect(ui->obsListComboBox, SIGNAL(activated(int)), this, SLOT(loadSelectedObservingList(int)));
+	connect(ui->obsListComboBox, &QComboBox::activated, this, &ObsListDialog::loadSelectedObservingList);
 
 	auto *proxy = new ObsListDialogSortFilterProxyModel;
 	proxy->setSourceModel(itemModel);
@@ -154,7 +154,7 @@ void ObsListDialog::createDialogContent()
 	ui->treeView->header()->setStretchLastSection(true);
 	//Enable the sort for columns
 	ui->treeView->setSortingEnabled(true);
-	connect(ui->treeView->header(), SIGNAL(sectionClicked(int)), this, SLOT(headerClicked(int)));
+	connect(ui->treeView->header(), &QHeaderView::sectionClicked, this, &ObsListDialog::headerClicked);
 
 	// Load all observing lists from JSON.
 	// We need to load the global list only once!
