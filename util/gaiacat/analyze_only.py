@@ -15,10 +15,9 @@ def parse_line(line):
                 f"only in {m.group(7)}")
     return None
 
-def main(path, mag_lo=None, mag_hi=None, margin=0.05):
-    only_a = {}   # gaia_id -> (zone, ra, dec, vmag, bv)
+def read_cmpcat_output(path):
+    only_a = {}
     only_b = []
-
     with open(path, 'r') as f:
         for line in f:
             r = parse_line(line)
@@ -29,11 +28,12 @@ def main(path, mag_lo=None, mag_hi=None, margin=0.05):
                 only_a[gaia] = (zone, ra, dec, vmag, bv)
             elif tag == 'only in B':
                 only_b.append((gaia, zone, ra, dec, vmag, bv))
+    return only_a, only_b
 
+
+def match_cross_zone(only_a, only_b):
     cross = []
-    unmatched_a = []
     unmatched_b = []
-
     for gaia, zb, ra, dec, vb, bvb in only_b:
         a = only_a.pop(gaia, None)
         if a is not None:
@@ -41,51 +41,78 @@ def main(path, mag_lo=None, mag_hi=None, margin=0.05):
             cross.append((gaia, za, zb, va, vb, bva, bvb))
         else:
             unmatched_b.append((gaia, zb, ra, dec, vb, bvb))
+    unmatched_a = [(gaia, zone, ra, dec, vmag, bv)
+                   for gaia, (zone, ra, dec, vmag, bv) in only_a.items()]
+    return cross, unmatched_a, unmatched_b
 
-    for gaia, (zone, ra, dec, vmag, bv) in only_a.items():
-        unmatched_a.append((gaia, zone, ra, dec, vmag, bv))
+
+def split_boundary(items, mag_lo, mag_hi, margin):
+    boundary, other = [], []
+    for g, z, ra, dec, v, bv in items:
+        if abs(v - mag_lo) <= margin or abs(v - mag_hi) <= margin:
+            boundary.append((g, z, ra, dec, v, bv))
+        else:
+            other.append((g, z, ra, dec, v, bv))
+    return boundary, other
+
+
+def report_boundary_counts(unmatched_a, unmatched_b, mag_lo, mag_hi, margin):
+    a_boundary, a_other = split_boundary(unmatched_a, mag_lo, mag_hi, margin)
+    b_boundary, b_other = split_boundary(unmatched_b, mag_lo, mag_hi, margin)
+    print(f"\nWithin {margin} mag of boundary {mag_lo} or {mag_hi}:")
+    print(f"  only in A: {len(a_boundary)} / {len(unmatched_a)}")
+    print(f"  only in B: {len(b_boundary)} / {len(unmatched_b)}")
+    print(f"Out of boundary:")
+    print(f"  only in A: {len(a_other)}")
+    print(f"  only in B: {len(b_other)}")
+    return a_boundary, a_other, b_boundary, b_other
+
+
+def print_sample_list(title, items):
+    if not items:
+        return
+    print(f"\n{title}:")
+    for g, z, ra, dec, v, bv in items[:10]:
+        print(f"  {g}  z={z}  RA={ra:.6f} DEC={dec:+.6f} V={v:.3f} BV={bv:.3f}")
+
+
+def print_cross_zone_samples(cross):
+    if not cross:
+        return
+    print(f"\nSample cross-zone (first 10):")
+    for g, za, zb, va, vb, _, _ in cross[:10]:
+        print(f"  {g}  A:z={za} V={va:.3f}  B:z={zb} V={vb:.3f}  dV={va-vb:.4f}")
+
+
+def count_bv_zero(items):
+    return sum(1 for _, _, _, _, _, bv in items if bv == 0.0)
+
+
+def print_bv0_summary(unmatched_a, unmatched_b):
+    bv0_a = count_bv_zero(unmatched_a)
+    bv0_b = count_bv_zero(unmatched_b)
+    print(f"  of which BV=0:")
+    print(f"    only in A: {bv0_a}")
+    print(f"    only in B: {bv0_b}")
+
+
+def main(path, mag_lo=None, mag_hi=None, margin=0.05):
+    only_a, only_b = read_cmpcat_output(path)
+    cross, unmatched_a, unmatched_b = match_cross_zone(only_a, only_b)
 
     print(f"Cross-zone matches:   {len(cross)}")
     print(f"Unmatched only in A:  {len(unmatched_a)}")
     print(f"Unmatched only in B:  {len(unmatched_b)}")
 
-    # BV=0 stats (missing BP/RP proxy for C++ pipeline)
-    bv0_a = sum(1 for _, _, _, _, _, bv in unmatched_a if bv == 0.0)
-    bv0_b = sum(1 for _, _, _, _, _, bv in unmatched_b if bv == 0.0)
-    print(f"  of which BV=0:")
-    print(f"    only in A: {bv0_a}")
-    print(f"    only in B: {bv0_b}")
+    print_bv0_summary(unmatched_a, unmatched_b)
 
     if mag_lo is not None and mag_hi is not None:
-        a_boundary, a_other = [], []
-        for g, z, ra, dec, v, bv in unmatched_a:
-            (a_boundary if abs(v - mag_lo) <= margin or abs(v - mag_hi) <= margin else a_other).append((g, z, ra, dec, v, bv))
+        a_boundary, a_other, b_boundary, b_other = report_boundary_counts(
+            unmatched_a, unmatched_b, mag_lo, mag_hi, margin)
+        print_sample_list("Sample only-in-B outside boundary", b_other)
+        print_sample_list("Sample only-in-B at boundary", b_boundary)
 
-        b_boundary, b_other = [], []
-        for g, z, ra, dec, v, bv in unmatched_b:
-            (b_boundary if abs(v - mag_lo) <= margin or abs(v - mag_hi) <= margin else b_other).append((g, z, ra, dec, v, bv))
-
-        print(f"\nWithin {margin} mag of boundary {mag_lo} or {mag_hi}:")
-        print(f"  only in A: {len(a_boundary)} / {len(unmatched_a)}")
-        print(f"  only in B: {len(b_boundary)} / {len(unmatched_b)}")
-        print(f"Out of boundary:")
-        print(f"  only in A: {len(a_other)}")
-        print(f"  only in B: {len(b_other)}")
-
-        if b_other:
-            print(f"\nSample only-in-B outside boundary (first 10):")
-            for g, z, ra, dec, v, bv in b_other[:10]:
-                print(f"  {g}  z={z}  RA={ra:.6f} DEC={dec:+.6f} V={v:.3f} BV={bv:.3f}")
-
-        if b_boundary:
-            print(f"\nSample only-in-B at boundary (first 10):")
-            for g, z, ra, dec, v, bv in b_boundary[:10]:
-                print(f"  {g}  z={z}  RA={ra:.6f} DEC={dec:+.6f} V={v:.3f} BV={bv:.3f}")
-
-    if cross:
-        print(f"\nSample cross-zone (first 10):")
-        for g, za, zb, va, vb, _, _ in cross[:10]:
-            print(f"  {g}  A:z={za} V={va:.3f}  B:z={zb} V={vb:.3f}  dV={va-vb:.4f}")
+    print_cross_zone_samples(cross)
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:

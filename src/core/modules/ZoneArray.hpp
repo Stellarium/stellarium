@@ -178,7 +178,6 @@ public:
 	}
 
 protected:
-
 	//! Draw stars and their names onto the viewport.
 	//! @param sPainter the painter to use 
 	//! @param index zone index to draw

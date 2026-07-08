@@ -228,6 +228,124 @@ static void printSummary(const TestStats& stats, double elapsedSec,
 	}
 }
 
+static void analyzeOneStar(SpecialZoneArray<Star2>* cat, StelGeodesicGrid* grid,
+			   int level, int maxSearchLevel,
+			   const Star2& star, unsigned int z, uint32_t i, StarId gid,
+			   const QHash<StarId, long long>& apMap, bool haveAstropy,
+			   TestStats& stats, LogEntry logBuf[10], int& loggedCount,
+			   QTextStream& dumpOut)
+{
+	// Compute offset from HEALPix pixel center (as encoded in Gaia ID) to
+	// the star's actual catalog position. Also check whether the position
+	// maps back to the same HEALPix pixel.
+	{
+		int hpFromId = static_cast<int>(gid / 34359738368ULL);
+		Vec3d hpCenter;
+		healpix_pix2vec(static_cast<int>(std::pow(2., 12.)), hpFromId, hpCenter.v);
+		Vec3d starDir;
+		StelUtils::spheToRect(star.getX0(), star.getX1(), starDir);
+		const double offRad = std::acos(std::min(1.0, std::max(-1.0, hpCenter.dot(starDir))));
+		const double offArcsec = offRad * 206264.80624709636;
+		if (offArcsec > stats.maxPixelOffsetArcsec)
+		{
+			stats.maxPixelOffsetArcsec = offArcsec;
+			stats.maxPixelOffsetStar = gid;
+			stats.maxPixelOffsetZone = z;
+			stats.maxPixelOffsetIdx = i;
+		}
+		// HEALPix Level 12 pixel center-to-corner distance is about 50".
+		// Use 55" as the "inside pixel" threshold to allow a small margin.
+		if (offArcsec > 55.0)
+			stats.outOfPixel++;
+
+		// Reverse check: does the star's position map back to the same pixel?
+		const double starTheta = std::acos(std::min(1.0, std::max(-1.0, starDir[2])));
+		const double starPhi = std::atan2(starDir[1], starDir[0]);
+		const long long hpFromPos = healpix_ang2pix_nest(4096, starTheta, starPhi);
+		if (hpFromPos != hpFromId)
+			stats.hpMismatch++;
+
+		if (haveAstropy)
+		{
+			auto it = apMap.find(gid);
+			if (it != apMap.end())
+				updateThreeWay(stats, hpFromId, hpFromPos, it.value());
+		}
+	}
+
+	if (dumpOut.device() != nullptr)
+	{
+		dumpOut << static_cast<qint64>(gid) << ','
+		        << star.getX0() << ','
+		        << star.getX1() << '\n';
+	}
+
+	if (runPhase1(cat, grid, level, gid))
+	{
+		stats.phase1Hits++;
+		return;
+	}
+
+	const int zonesChecked = runPhase2(cat, grid, level, maxSearchLevel, gid);
+	const bool matched = zonesChecked > 0;
+	const int absZones = std::abs(zonesChecked);
+	stats.phase2Needed++;
+	stats.phase2Zones += absZones;
+	if (absZones > stats.phase2Max) stats.phase2Max = absZones;
+
+	const float mag = star.getMag() * 0.001f;
+	if (matched && loggedCount < 10 && mag >= 17.0f && mag <= 17.5f)
+	{
+		logBuf[loggedCount] = { gid, z, i, mag, absZones };
+		++loggedCount;
+	}
+	if (!matched)
+	{
+		printf("BUG: star %llu in zone %u not found!\n",
+		       static_cast<unsigned long long>(gid), z);
+	}
+}
+
+static void runSampling(SpecialZoneArray<Star2>* cat, StelGeodesicGrid* grid,
+			int level, int maxSearchLevel, unsigned int nrOfZones,
+			uint64_t stride, uint64_t maxTest,
+			const QHash<StarId, long long>& apMap, bool haveAstropy,
+			QTextStream& dumpOut,
+			TestStats& stats, LogEntry logBuf[10], int& loggedCount)
+{
+	uint64_t globalStarIdx = 0;
+	for (unsigned int z = 0; z < nrOfZones && stats.tested < maxTest; ++z)
+	{
+		const auto zoneAccess = cat->getZone(static_cast<int>(z));
+		const uint32_t cnt = zoneAccess.size;
+		if (cnt == 0) continue;
+		const uint64_t firstInZone = globalStarIdx;
+		globalStarIdx += cnt;
+
+		bool need = false;
+		for (uint64_t s = firstInZone; s < globalStarIdx; ++s)
+		{
+			if (s % stride == 0) { need = true; break; }
+		}
+		if (!need) continue;
+
+		const Star2* stars = zoneAccess.stars;
+		for (uint32_t i = 0; i < cnt && stats.tested < maxTest; ++i)
+		{
+			if ((firstInZone + i) % stride != 0) continue;
+			stats.tested++;
+			const StarId gid = stars[i].getGaia();
+			if (gid == 0) continue;
+
+			analyzeOneStar(cat, grid, level, maxSearchLevel, stars[i], z, i, gid,
+			               apMap, haveAstropy, stats, logBuf, loggedCount, dumpOut);
+
+			if (stats.tested % 50000 == 0)
+				printProgress(stats, maxTest);
+		}
+	}
+}
+
 int main(int argc, char** argv)
 {
 	QCoreApplication app(argc, argv);
@@ -294,104 +412,8 @@ int main(int argc, char** argv)
 		dumpOut << "gaiaId,ra,dec\n";
 	}
 
-	uint64_t globalStarIdx = 0;
-	for (unsigned int z = 0; z < nrOfZones && stats.tested < maxTest; ++z)
-	{
-		const auto zoneAccess = cat->getZone(static_cast<int>(z));
-		const uint32_t cnt = zoneAccess.size;
-		if (cnt == 0) continue;
-		const uint64_t firstInZone = globalStarIdx;
-		globalStarIdx += cnt;
-
-		bool need = false;
-		for (uint64_t s = firstInZone; s < globalStarIdx; ++s)
-		{
-			if (s % stride == 0) { need = true; break; }
-		}
-		if (!need) continue;
-
-		const Star2* stars = zoneAccess.stars;
-		for (uint32_t i = 0; i < cnt && stats.tested < maxTest; ++i)
-		{
-			if ((firstInZone + i) % stride != 0) continue;
-			stats.tested++;
-			const StarId gid = stars[i].getGaia();
-			if (gid == 0) continue;
-
-			// Compute offset from HEALPix pixel center (as encoded in Gaia ID) to
-			// the star's actual catalog position. Also check whether the position
-			// maps back to the same HEALPix pixel.
-			{
-				int hpFromId = static_cast<int>(gid / 34359738368ULL);
-				Vec3d hpCenter;
-				healpix_pix2vec(static_cast<int>(std::pow(2., 12.)), hpFromId, hpCenter.v);
-				Vec3d starDir;
-				StelUtils::spheToRect(stars[i].getX0(), stars[i].getX1(), starDir);
-				const double offRad = std::acos(std::min(1.0, std::max(-1.0, hpCenter.dot(starDir))));
-				const double offArcsec = offRad * 206264.80624709636;
-				if (offArcsec > stats.maxPixelOffsetArcsec)
-				{
-					stats.maxPixelOffsetArcsec = offArcsec;
-					stats.maxPixelOffsetStar = gid;
-					stats.maxPixelOffsetZone = z;
-					stats.maxPixelOffsetIdx = i;
-				}
-				// HEALPix Level 12 pixel center-to-corner distance is about 50".
-				// Use 55" as the "inside pixel" threshold to allow a small margin.
-				if (offArcsec > 55.0)
-					stats.outOfPixel++;
-
-				// Reverse check: does the star's position map back to the same pixel?
-				const double starTheta = std::acos(std::min(1.0, std::max(-1.0, starDir[2])));
-				const double starPhi = std::atan2(starDir[1], starDir[0]);
-				const long long hpFromPos = healpix_ang2pix_nest(4096, starTheta, starPhi);
-				if (hpFromPos != hpFromId)
-					stats.hpMismatch++;
-
-				if (haveAstropy)
-				{
-					auto it = apMap.find(gid);
-					if (it != apMap.end())
-						updateThreeWay(stats, hpFromId, hpFromPos, it.value());
-				}
-			}
-
-			if (!dumpSamplePath.isEmpty())
-			{
-				dumpOut << static_cast<qint64>(gid) << ','
-				      << stars[i].getX0() << ','
-				      << stars[i].getX1() << '\n';
-			}
-
-			if (runPhase1(cat, grid, level, gid))
-			{
-				stats.phase1Hits++;
-				continue;
-			}
-
-			const int zonesChecked = runPhase2(cat, grid, level, maxSearchLevel, gid);
-			const bool matched = zonesChecked > 0;
-			const int absZones = std::abs(zonesChecked);
-			stats.phase2Needed++;
-			stats.phase2Zones += absZones;
-			if (absZones > stats.phase2Max) stats.phase2Max = absZones;
-
-			const float mag = stars[i].getMag() * 0.001f;
-			if (matched && loggedCount < 10 && mag >= 17.0f && mag <= 17.5f)
-			{
-				logBuf[loggedCount] = { gid, z, i, mag, absZones };
-				++loggedCount;
-			}
-			if (!matched)
-			{
-				printf("BUG: star %llu in zone %u not found!\n",
-				       static_cast<unsigned long long>(gid), z);
-			}
-
-			if (stats.tested % 50000 == 0)
-				printProgress(stats, maxTest);
-		}
-	}
+	runSampling(cat, grid, level, maxSearchLevel, nrOfZones, stride, maxTest,
+	            apMap, haveAstropy, dumpOut, stats, logBuf, loggedCount);
 
 	printSummary(stats, timer.elapsed() / 1000.0, loggedCount, logBuf);
 	delete grid;
