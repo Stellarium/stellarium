@@ -96,29 +96,29 @@ void ScriptConsole::populateQuickRunList()
 void ScriptConsole::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ScriptConsole::retranslate);
 
 	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
 	ui->includeEdit->setText(StelFileMgr::getInstallationDir() + "/scripts");
 
 	populateQuickRunList();
 
-	connect(ui->scriptEdit, SIGNAL(cursorPositionChanged()), this, SLOT(rowColumnChanged()));
-	connect(ui->scriptEdit, SIGNAL(textChanged()), this, SLOT(setDirty()));
+	connect(ui->scriptEdit, &QPlainTextEdit::cursorPositionChanged, this, &ScriptConsole::rowColumnChanged);
+	connect(ui->scriptEdit, &QPlainTextEdit::textChanged, this, &ScriptConsole::setDirty);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadScript()));
-	connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(saveScript()));
-	connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clearButtonPressed()));
-	connect(ui->preprocessSSCButton, SIGNAL(clicked()), this, SLOT(preprocessScript()));
-	connect(ui->runButton, SIGNAL(clicked()), this, SLOT(runScript()));
-	connect(ui->stopButton, SIGNAL(clicked()), &StelApp::getInstance().getScriptMgr(), SLOT(stopScript()));
-	connect(ui->includeBrowseButton, SIGNAL(clicked()), this, SLOT(includeBrowse()));
-	connect(ui->quickrunCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(quickRun(int)));
-	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
-	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptStopped()), this, SLOT(scriptEnded()));
-	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
-	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptOutput(const QString&)), this, SLOT(appendOutputLine(const QString&)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ScriptConsole::handleMovedTo);
+	connect(ui->loadButton, &QToolButton::clicked, this, &ScriptConsole::loadScript);
+	connect(ui->saveButton, &QToolButton::clicked, this, &ScriptConsole::saveScript);
+	connect(ui->clearButton, &QToolButton::clicked, this, &ScriptConsole::clearButtonPressed);
+	connect(ui->preprocessSSCButton, &QPushButton::clicked, this, &ScriptConsole::preprocessScript);
+	connect(ui->runButton, &QToolButton::clicked, this, &ScriptConsole::runScript);
+	connect(ui->stopButton, &QToolButton::clicked, &StelApp::getInstance().getScriptMgr(), &StelScriptMgr::stopScript);
+	connect(ui->includeBrowseButton, &QToolButton::clicked, this, &ScriptConsole::includeBrowse);
+	connect(ui->quickrunCombo, &QComboBox::currentIndexChanged, this, &ScriptConsole::quickRun);
+	connect(&StelApp::getInstance().getScriptMgr(), &StelScriptMgr::scriptRunning, this, &ScriptConsole::scriptStarted);
+	connect(&StelApp::getInstance().getScriptMgr(), &StelScriptMgr::scriptStopped, this, &ScriptConsole::scriptEnded);
+	connect(&StelApp::getInstance().getScriptMgr(), &StelScriptMgr::scriptDebug, this, &ScriptConsole::appendLogLine);
+	connect(&StelApp::getInstance().getScriptMgr(), &StelScriptMgr::scriptOutput, this, &ScriptConsole::appendOutputLine);
 	ui->tabs->setCurrentIndex(0);
 
 	// get decent indentation
@@ -135,18 +135,18 @@ void ScriptConsole::createDialogContent()
 	ui->closeWindowAtScriptRunCheckbox->setChecked(hideWindowAtScriptRun);
 	clearOutput = conf->value("gui/flag_scripts_clear_output", false).toBool();
 	ui->clearOutputCheckbox->setChecked(clearOutput);
-	connect(ui->useUserDirCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagUserDir(bool)));
-	connect(ui->closeWindowAtScriptRunCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagHideWindow(bool)));
-	connect(ui->clearOutputCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagClearOutput(bool)));
+	connect(ui->useUserDirCheckBox, &QCheckBox::toggled, this, &ScriptConsole::setFlagUserDir);
+	connect(ui->closeWindowAtScriptRunCheckbox, &QCheckBox::toggled, this, &ScriptConsole::setFlagHideWindow);
+	connect(ui->clearOutputCheckbox, &QCheckBox::toggled, this, &ScriptConsole::setFlagClearOutput);
 
 	ui->allowScreenshotDirCheckBox->setChecked(StelApp::getInstance().getScriptMgr().getFlagAllowExternalScreenshotDir());
-	connect(ui->allowScreenshotDirCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagAllowExternalScreenshotDir(bool)));
+	connect(ui->allowScreenshotDirCheckBox, &QCheckBox::clicked, &StelApp::getInstance().getScriptMgr(), &StelScriptMgr::setFlagAllowExternalScreenshotDir);
 
 	ui->allowStoreAbsoluteCheckBox->setChecked(StelApp::getInstance().getScriptMgr().getFlagAllowWriteAbsolutePaths());
-	connect(ui->allowStoreAbsoluteCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagAllowWriteAbsolutePaths(bool)));
+	connect(ui->allowStoreAbsoluteCheckBox, &QCheckBox::clicked, &StelApp::getInstance().getScriptMgr(), &StelScriptMgr::setFlagAllowWriteAbsolutePaths);
 
 	ui->showWaitMessageCheckBox->setChecked(StelApp::getInstance().getScriptMgr().getFlagShowContinueMessage());
-	connect(ui->showWaitMessageCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagShowContinueMessage(bool)));
+	connect(ui->showWaitMessageCheckBox, &QCheckBox::clicked, &StelApp::getInstance().getScriptMgr(), &StelScriptMgr::setFlagShowContinueMessage);
 
 	dirty = false;
 }
