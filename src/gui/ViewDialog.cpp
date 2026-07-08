@@ -1636,12 +1636,12 @@ void ViewDialog::populateLists()
 	// add regions to list as custom QListWidgetItem
 	for (const auto &region : sortedOccuringRegions)
 	{
-		l->addItem(new SeparatorListWidgetItem(q_(region)));
+		l->addItem(new SeparatorListWidgetItem(q_(region), region));
 	}
 	// oops... the list of regions has unknown region - let's add "other" region for these sky cultures
 	if (occuringRegions.size() > sortedOccuringRegions.size())
 	{
-		l->addItem(new SeparatorListWidgetItem(q_("Other")));
+		l->addItem(new SeparatorListWidgetItem(q_("Other"), "Other"));
 	}
 
 	// find the earliest beginTime of all cultures (needed in initSkyCultureTime)
@@ -1668,8 +1668,41 @@ void ViewDialog::populateLists()
 
 		// When region is unknown (non UN-geoscheme), insert item under "other" separator,
 		// otherwise insert item under respective region separator
-		QString itemName = (l->findItems(q_(cultureRegionIt.value()), Qt::MatchContains).empty()) ? q_("Other") : q_(cultureRegionIt.value());
-		l->insertItem(l->row(l->findItems(itemName, Qt::MatchContains).first()) + 1, item);
+		// When region is unknown (non UN-geoscheme), insert item under "other" separator,
+		// otherwise insert item under respective region separator
+		// Use regionKey() for matching instead of translated text to avoid CJK substring issues
+		SeparatorListWidgetItem* targetSeparator = nullptr;
+		for (int i = 0; i < l->count(); ++i)
+		{
+			SeparatorListWidgetItem* sep = dynamic_cast<SeparatorListWidgetItem*>(l->item(i));
+			if (sep && sep->regionKey() == cultureRegionIt.value())
+			{
+				targetSeparator = sep;
+				break;
+			}
+		}
+		if (!targetSeparator)
+		{
+			// Fallback: look for "Other" separator
+			for (int i = 0; i < l->count(); ++i)
+			{
+				SeparatorListWidgetItem* sep = dynamic_cast<SeparatorListWidgetItem*>(l->item(i));
+				if (sep && sep->regionKey() == "Other")
+				{
+					targetSeparator = sep;
+					break;
+				}
+			}
+		}
+		if (targetSeparator)
+		{
+			l->insertItem(l->row(targetSeparator) + 1, item);
+		}
+		else
+		{
+			// Fallback: append to end if no separator found
+			l->addItem(item);
+		}
 	}
 
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalBeginTime);
