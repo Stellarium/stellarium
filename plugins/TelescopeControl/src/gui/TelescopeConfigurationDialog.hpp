@@ -62,6 +62,8 @@ private:
 	QStringList* listSerialPorts();
 	void initConfigurationDialog();
 	void populateToolTips();
+	bool currentDeviceModelSupportsNetwork() const;
+	void updateDeviceConnectionMediumState();
 	
 private slots:
 	void buttonSavePressed();
@@ -79,6 +81,9 @@ private slots:
 	#endif
 	
 	void deviceModelSelected(int modelIndex);
+
+	//! Toggle between a serial and a network (TCP/IP) connection.
+	void toggleDeviceConnectionMedium(bool networkChecked);
 
 
 signals:

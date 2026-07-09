@@ -21,6 +21,8 @@ add_library(TelescopeControl_common STATIC
     Connection.cpp
     SerialPort.hpp
     SerialPort.cpp
+    TcpConnection.hpp
+    TcpConnection.cpp
     InterpolatedPosition.hpp
     InterpolatedPosition.cpp
     ${TelescopeControl_ASCOM_common_SRC}
