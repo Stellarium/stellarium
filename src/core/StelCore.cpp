@@ -1809,7 +1809,7 @@ void StelCore::setInitTodayTime(const QTime& time)
 	initTodayTime=time;
 }
 
-void StelCore::setPresetSkyTime(QDateTime dateTime)
+void StelCore::setPresetSkyDateTime(QDateTime dateTime)
 {
 	setPresetSkyTime(StelUtils::qDateTimeToJd(dateTime));
 }
