@@ -23,7 +23,6 @@
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelScriptMgr.hpp"
-#include "StelMainScriptAPI.hpp"
 
 #include <QtWidgets>
 #include <QColor>
