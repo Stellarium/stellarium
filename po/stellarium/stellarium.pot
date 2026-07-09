@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-07-09 18:52+0700\n"
+"POT-Creation-Date: 2026-07-09 21:10+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:386
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
 #: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:182
-#: src/core/modules/HipsMgr.cpp:183 src/core/StelApp.cpp:721
+#: src/core/modules/HipsMgr.cpp:183 src/core/StelApp.cpp:725
 #: src/core/StelCore.cpp:312 src/core/StelSkyLayerMgr.cpp:83
 #: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:983
 msgid "Display Options"
@@ -1287,6 +1287,7 @@ msgstr ""
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1752
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:304
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:485
 msgid "Author"
 msgstr ""
 
@@ -4449,147 +4450,147 @@ msgstr ""
 msgid "December solstice at previous year"
 msgstr ""
 
-#: src/core/StelApp.cpp:496
+#: src/core/StelApp.cpp:500
 msgid "Initializing textures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:500
+#: src/core/StelApp.cpp:504
 msgid "Initializing network access..."
 msgstr ""
 
-#: src/core/StelApp.cpp:503
+#: src/core/StelApp.cpp:507
 msgid "Initializing network disk cache..."
 msgstr ""
 
-#: src/core/StelApp.cpp:517
+#: src/core/StelApp.cpp:521
 msgid "Initializing network proxy..."
 msgstr ""
 
-#: src/core/StelApp.cpp:533
+#: src/core/StelApp.cpp:537
 msgid "Initializing Object Database..."
 msgstr ""
 
-#: src/core/StelApp.cpp:539
+#: src/core/StelApp.cpp:543
 msgid "Initializing HiPS survey..."
 msgstr ""
 
-#: src/core/StelApp.cpp:545
+#: src/core/StelApp.cpp:549
 msgid "Initializing Solar System objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:551
+#: src/core/StelApp.cpp:555
 msgid "Initializing planetary nomenclature..."
 msgstr ""
 
-#: src/core/StelApp.cpp:557
+#: src/core/StelApp.cpp:561
 msgid "Initializing stars..."
 msgstr ""
 
-#: src/core/StelApp.cpp:562
+#: src/core/StelApp.cpp:566
 msgid "Initializing core..."
 msgstr ""
 
-#: src/core/StelApp.cpp:566
+#: src/core/StelApp.cpp:570
 msgid "Initializing deep-sky objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:572
+#: src/core/StelApp.cpp:576
 msgid "Initializing Milky Way..."
 msgstr ""
 
-#: src/core/StelApp.cpp:578
+#: src/core/StelApp.cpp:582
 msgid "Initializing zodiacal light..."
 msgstr ""
 
-#: src/core/StelApp.cpp:584
+#: src/core/StelApp.cpp:588
 msgid "Initializing sky image layer..."
 msgstr ""
 
-#: src/core/StelApp.cpp:590
+#: src/core/StelApp.cpp:594
 msgid "Initializing TOAST surveys..."
 msgstr ""
 
-#: src/core/StelApp.cpp:604
+#: src/core/StelApp.cpp:608
 msgid "Initializing audio..."
 msgstr ""
 
-#: src/core/StelApp.cpp:612
+#: src/core/StelApp.cpp:616
 msgid "Initializing video..."
 msgstr ""
 
-#: src/core/StelApp.cpp:620
+#: src/core/StelApp.cpp:624
 msgid "Initializing speech output..."
 msgstr ""
 
-#: src/core/StelApp.cpp:627
+#: src/core/StelApp.cpp:631
 msgid "Initializing constellations..."
 msgstr ""
 
-#: src/core/StelApp.cpp:633
+#: src/core/StelApp.cpp:637
 msgid "Initializing asterisms..."
 msgstr ""
 
-#: src/core/StelApp.cpp:639
+#: src/core/StelApp.cpp:643
 msgid "Initializing landscape..."
 msgstr ""
 
-#: src/core/StelApp.cpp:652
+#: src/core/StelApp.cpp:656
 msgid "Initializing grid lines..."
 msgstr ""
 
-#: src/core/StelApp.cpp:657
+#: src/core/StelApp.cpp:661
 msgid "Initializing special markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:663
+#: src/core/StelApp.cpp:667
 msgid "Initializing sporadic meteors..."
 msgstr ""
 
-#: src/core/StelApp.cpp:669
+#: src/core/StelApp.cpp:673
 msgid "Initializing user labels..."
 msgstr ""
 
-#: src/core/StelApp.cpp:674
+#: src/core/StelApp.cpp:678
 msgid "Initializing sky cultures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:678
+#: src/core/StelApp.cpp:682
 msgid "Initializing user markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:684
+#: src/core/StelApp.cpp:688
 msgid "Initializing custom objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:690
+#: src/core/StelApp.cpp:694
 msgid "Initializing highlights..."
 msgstr ""
 
-#: src/core/StelApp.cpp:696
+#: src/core/StelApp.cpp:700
 msgid "Initializing specific time..."
 msgstr ""
 
-#: src/core/StelApp.cpp:704
+#: src/core/StelApp.cpp:708
 msgid "Initializing scripting..."
 msgstr ""
 
-#: src/core/StelApp.cpp:709
+#: src/core/StelApp.cpp:713
 msgid "Initializing color scheme..."
 msgstr ""
 
-#: src/core/StelApp.cpp:721 src/ui_configurationDialog.h:2658
+#: src/core/StelApp.cpp:725 src/ui_configurationDialog.h:2658
 msgid "Night mode"
 msgstr ""
 
-#: src/core/StelApp.cpp:756
+#: src/core/StelApp.cpp:760
 msgid "Initializing SPOUT sender..."
 msgstr ""
 
-#: src/core/StelApp.cpp:766
+#: src/core/StelApp.cpp:770
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelApp.cpp:793
+#: src/core/StelApp.cpp:797
 msgid "Loading plugin"
 msgstr ""
 
@@ -6058,6 +6059,7 @@ msgstr ""
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:303
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:270
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:483
 msgid "License"
 msgstr ""
 
@@ -6895,6 +6897,7 @@ msgstr ""
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:302
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:269
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:481
 msgid "Version"
 msgstr ""
 
@@ -14324,6 +14327,7 @@ msgstr ""
 #: src/ui_helpDialogGui.h:242
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:200
 #: plugins/Planes/src/ui_planesDialog.h:276
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:279
 msgid "About"
 msgstr ""
 
@@ -17750,6 +17754,7 @@ msgid "Export data..."
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:2439
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:267
 msgid "Calculate"
 msgstr ""
 
@@ -38727,4 +38732,234 @@ msgstr ""
 
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:395
 msgid "Earth"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:258
+msgid "Object Visibility Configuration"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:259
+msgid "Object Visibility plug-in"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:260
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:400
+msgid "Select a star or DSO, then click Calculate."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:261
+msgid "Key of stars visibility"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:262
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:495
+msgid "Limit of visibility"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:263
+msgid "Good visibility (default 5° above the horizon)"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:264
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:506
+msgid "Passes zenith"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:265
+msgid "Circumpolar limit (northern hemisphere)"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:266
+msgid "Circumpolar limit (southern hemisphere)"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:269
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:198
+msgid "Compute visibility for the selected object."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:271
+msgid "Good visibility above the horizon:"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:272
+msgid "°"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:273
+msgid "Set location by clicking on the map"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:275
+msgid ""
+"Enable to move the observer by clicking on the map.  Stays active until you "
+"uncheck it — you can pick as many locations as you like."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:277
+msgid "Reset settings"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:278
+msgid "Visibility"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:191
+msgid "Only stars and DSOs may be used in this plugin!"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:193
+#, qt-format
+msgid ""
+"This plug-in supports observation from Earth, the Moon, the eight planets, "
+"Pluto and the four Galilean moons.  The current observing body (%1) is not "
+"supported."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:410
+#, qt-format
+msgid "%1 is selected. Click Calculate."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:424
+msgid "a planet, moon or the Sun"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:426
+msgid "a comet"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:428
+msgid "a minor planet"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:430
+msgid "an artificial satellite"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:432
+msgid "a surface feature"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:434
+msgid "a meteor"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:436
+msgid "not a star or deep-sky object"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:442
+#, qt-format
+msgid "%1 is %2. This plug-in only supports stars and deep-sky objects."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:462
+#, qt-format
+msgid "Visibility of %1 in %2"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:468
+#, qt-format
+msgid "Visibility of %1 from %3 in %2"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:479
+msgid "Object Visibility Plug-in"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:488
+msgid ""
+"This plug-in shows on a planet map where on the observer's planet a selected "
+"star or deep-sky object is visible.  Given an object with declination "
+"&delta; at the current epoch (precession and proper motion taken into "
+"account), five lines are drawn at fixed geographic latitudes:"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:496
+msgid ""
+"&phi; = &delta; &plusmn; 90&deg;.  The object never rises above the horizon "
+"at latitudes outside this band."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:499
+msgid "Extinction free / good visibility"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:500
+msgid ""
+"&phi; = &delta; &plusmn; (90&deg; &minus; h).  At latitudes inside this band "
+"the object reaches at least altitude h at upper culmination.  The default h "
+"is 5&deg;; you may increase it if you observe from a mountainous site or "
+"want a larger safety margin."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:507
+msgid ""
+"&phi; = &delta;.  At this latitude the object passes through the zenith."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:510
+msgid "Circumpolar limit, northern hemisphere"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:511
+msgid ""
+"&phi; = 90&deg; &minus; &delta;.  North of this latitude the object never "
+"sets."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:514
+msgid "Circumpolar limit, southern hemisphere"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:515
+msgid ""
+"&phi; = &minus;90&deg; &minus; &delta;.  South of this latitude the object "
+"never sets."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:520
+msgid ""
+"Planets, moons, asteroids, comets and artificial satellites are "
+"intentionally not supported as the selected <em>target</em>: their rapid "
+"daily motion (and, for some, parallax) would make a single snapshot "
+"misleading."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:527
+msgid ""
+"The plug-in does support observation from any of the following bodies: "
+"Earth, the Moon, the eight planets (Mercury through Neptune), Pluto, and the "
+"four Galilean moons of Jupiter (Io, Europa, Ganymede, Callisto).  Change "
+"observer body via Stellarium's Location dialog; the map updates "
+"automatically."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:536
+msgid ""
+"Because stellar positions change over time through precession and proper "
+"motion, the lines are always computed for the date currently shown in the "
+"planetarium.  To see Sirius's visibility in 10&thinsp;000 BCE, set the "
+"planetarium's date first, then press Calculate."
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:544
+msgid "Credits"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:545
+msgid ""
+"The whole concept of these visibility lines on a world map – and in "
+"particular the choice of the five line types and their visual style – comes "
+"from Astro-Geo-GIS, in the article <em>The 49 brightest stars in the night "
+"sky – when and where can we see them?</em>"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:554
+msgid "Read the original article"
+msgstr ""
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:557
+msgid "Astro-Geo-GIS website"
 msgstr ""
