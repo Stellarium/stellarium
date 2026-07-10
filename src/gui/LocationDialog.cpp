@@ -140,7 +140,7 @@ void LocationDialog::createDialogContent()
 #if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
 	connect(ui->regionNameComboBox, &QComboBox::textActivated, this, &LocationDialog::filterSitesByRegion);
 #else
-	connect(ui->regionNameComboBox, QOverload<int>::of(&QComboBox::activated), this, &LocationDialog::filterSitesByRegion);
+	connect(ui->regionNameComboBox, qOverload<int>(&QComboBox::activated), this, &LocationDialog::filterSitesByRegion);
 #endif
 
 	StelCore* core = StelApp::getInstance().getCore();
@@ -272,30 +272,24 @@ void LocationDialog::updateFromProgram(const StelLocation& newLocation)
 
 void LocationDialog::disconnectEditSignals()
 {
-	// TODO: Convert these.
-	disconnect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
-	disconnect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
-	//disconnect(ui->longitudeSpinBox,     &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
-	//disconnect(ui->latitudeSpinBox,      &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
-	disconnect(ui->altitudeSpinBox,      QOverload<int>::of(&QSpinBox::valueChanged), this, &LocationDialog::setLocationFromCoords);
-	disconnect(ui->planetNameComboBox,   QOverload<int>::of(&QComboBox::currentIndexChanged), this, &LocationDialog::moveToAnotherPlanet);
-	disconnect(ui->regionNameComboBox,   QOverload<int>::of(&QComboBox::currentIndexChanged), this, &LocationDialog::reportEdit);
-	disconnect(ui->timeZoneNameComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &LocationDialog::saveTimeZone);
-	disconnect(ui->cityNameLineEdit,     &QLineEdit::textEdited, this, &LocationDialog::reportEdit);
+	disconnect(ui->longitudeSpinBox, &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	disconnect(ui->latitudeSpinBox, &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	disconnect(ui->altitudeSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &LocationDialog::setLocationFromCoords);
+	disconnect(ui->planetNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::moveToAnotherPlanet);
+	disconnect(ui->regionNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::reportEdit);
+	disconnect(ui->timeZoneNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::saveTimeZone);
+	disconnect(ui->cityNameLineEdit, &QLineEdit::textEdited, this, &LocationDialog::reportEdit);
 }
 
 void LocationDialog::connectEditSignals()
 {
-	// TODO: Convert these.
-	connect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
-	connect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
-	//connect(ui->longitudeSpinBox,     &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
-	//connect(ui->latitudeSpinBox,      &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
-	connect(ui->altitudeSpinBox,      QOverload<int>::of(&QSpinBox::valueChanged), this, &LocationDialog::setLocationFromCoords);
-	connect(ui->planetNameComboBox,   QOverload<int>::of(&QComboBox::currentIndexChanged), this, &LocationDialog::moveToAnotherPlanet);
-	connect(ui->regionNameComboBox,   QOverload<int>::of(&QComboBox::currentIndexChanged), this, &LocationDialog::reportEdit);
-	connect(ui->timeZoneNameComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &LocationDialog::saveTimeZone);
-	connect(ui->cityNameLineEdit,     &QLineEdit::textEdited, this, &LocationDialog::reportEdit);
+	connect(ui->longitudeSpinBox, &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	connect(ui->latitudeSpinBox, &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	connect(ui->altitudeSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &LocationDialog::setLocationFromCoords);
+	connect(ui->planetNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::moveToAnotherPlanet);
+	connect(ui->regionNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::reportEdit);
+	connect(ui->timeZoneNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::saveTimeZone);
+	connect(ui->cityNameLineEdit, &QLineEdit::textEdited, this, &LocationDialog::reportEdit);
 }
 
 void LocationDialog::setLocationUIvisible(bool visible)
@@ -734,9 +728,8 @@ void LocationDialog::moveToAnotherPlanet()
 	// NOTE: I think it also makes sense in the other cases. --BM
 }
 
-void LocationDialog::setLocationFromCoords(int i)
+void LocationDialog::setLocationFromCoords()
 {
-	Q_UNUSED(i)
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.); // No landscape update: This may be used for finetuning within a landscape
