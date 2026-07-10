@@ -76,7 +76,7 @@ LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
 	}
 	if(ready)
 	{
-		connect(&timer, SIGNAL(timeout()), this, SLOT(query()));
+		connect(&timer, &QTimer::timeout, this, &LibGPSLookupHelper::query);
 	}
 	else
 		qCWarning(GPS)<<"libGPS lookup not ready, GPSD probably not running.";
@@ -299,12 +299,12 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 	{
 		nmea->setDevice(serial);
 		qDebug() << "Query GPS NMEA device at port " << serial->portName();
-		connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
+		connect(nmea, &QNmeaPositionInfoSource::positionUpdated,this, &NMEALookupHelper::nmeaUpdated);
 		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		connect(nmea, SIGNAL(errorOccurred(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
+		connect(nmea, &QNmeaPositionInfoSource::errorOccurred, this, &NMEALookupHelper::nmeaError);
 		#else
-		connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
-		connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
+		connect(nmea, &QNmeaPositionInfoSource::error, this, &NMEALookupHelper::nmeaError);
+		connect(nmea, &QNmeaPositionInfoSource::updateTimeout, this, &NMEALookupHelper::nmeaTimeout);
 		#endif
 	}
 	else qWarning() << "Cannot open serial port to NMEA device at port " << serial->portName();
@@ -494,13 +494,12 @@ StelLocationMgr::StelLocationMgr()
 
 	planetName="Earth";
 	planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
-	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(changePlanetMapForLocation(StelLocation)));
+	connect(StelApp::getInstance().getCore(), &StelCore::locationChanged, this, &StelLocationMgr::changePlanetMapForLocation);
 
 	// configure the QGeoPositionInfoSource which can be queried from OS
 	qGeoPositionInfoSource = QGeoPositionInfoSource::createDefaultSource(this);
 	if (qGeoPositionInfoSource && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
-		connect(qGeoPositionInfoSource, SIGNAL(positionUpdated(QGeoPositionInfo)),
-			this, SLOT(positionUpdatedFromOS(QGeoPositionInfo)));
+		connect(qGeoPositionInfoSource, &QGeoPositionInfoSource::positionUpdated, this, &StelLocationMgr::positionUpdatedFromOS);
 	else
 	{
 		qWarning() << "No valid QPositionInfoSource. Old IP queries should still work.";
@@ -990,7 +989,7 @@ void StelLocationMgr::locationFromIP()
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
-		connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromNetworkLookup()));
+		connect(networkReply, &QNetworkReply::finished, this, &StelLocationMgr::changeLocationFromNetworkLookup);
 #ifdef Q_OS_WIN
 	}
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
@@ -1045,8 +1044,8 @@ void StelLocationMgr::locationFromGPS(int interval)
 	if(!libGpsHelper)
 	{
 		libGpsHelper = new LibGPSLookupHelper(this);
-		connect(libGpsHelper, SIGNAL(queryFinished(StelLocation)), this, SLOT(changeLocationFromGPSQuery(StelLocation)));
-		connect(libGpsHelper, SIGNAL(queryError(QString)), this, SLOT(gpsQueryError(QString)));
+		connect(libGpsHelper, &LibGPSLookupHelper::queryFinished, this, &StelLocationMgr::changeLocationFromGPSQuery);
+		connect(libGpsHelper, &LibGPSLookupHelper::queryError, this, &StelLocationMgr::gpsQueryError);
 	}
 	if(libGpsHelper->isReady())
 	{
@@ -1087,8 +1086,8 @@ void StelLocationMgr::locationFromGPS(int interval)
 	}
 	if(nmeaHelper && nmeaHelper->isReady())
 	{
-		connect(nmeaHelper, SIGNAL(queryFinished(StelLocation)), this, SLOT(changeLocationFromGPSQuery(StelLocation)));
-		connect(nmeaHelper, SIGNAL(queryError(QString)), this, SLOT(gpsQueryError(QString)));
+		connect(nmeaHelper, &NMEALookupHelper::queryFinished, this, &StelLocationMgr::changeLocationFromGPSQuery);
+		connect(nmeaHelper, &NMEALookupHelper::queryError, this, &StelLocationMgr::gpsQueryError);
 		if (interval<0)
 			nmeaHelper->query();
 		else
@@ -1128,7 +1127,7 @@ void StelLocationMgr::locationFromGPS(int interval)
 			qCDebug(GPS) << "Setting up new positionSource...";
 			qCDebug(GPS) << positionSource->supportedPositioningMethods();
 			positionSource->setUpdateInterval(interval);
-			connect(positionSource, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(positionUpdated(QGeoPositionInfo)));
+			connect(positionSource, &QGeoPositionInfoSource::positionUpdated, this, &StelLocationMgr::positionUpdated);
 			positionSource->startUpdates();
 			qCDebug(GPS) << "Setting up new positionSource...done";
 		}

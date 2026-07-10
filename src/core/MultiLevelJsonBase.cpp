@@ -53,7 +53,7 @@ QNetworkAccessManager& MultiLevelJsonBase::getNetworkAccessManager()
 // 		QString cachePath = StelApp::getInstance().getCacheDir();
 // 		cache->setCacheDirectory(cachePath+"/JSONCache");
 // 		networkAccessManager->setCache(cache);
-		connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), &StelApp::getInstance(), SLOT(reportFileDownloadFinished(QNetworkReply*)));
+		connect(networkAccessManager, &QNetworkAccessManager::finished, &StelApp::getInstance(), &StelApp::reportFileDownloadFinished);
 	}
 	return *networkAccessManager;
 }
@@ -172,9 +172,9 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		//qDebug() << "Started downloading " << httpReply->request().url().path();
 		Q_ASSERT(httpReply->error()==QNetworkReply::NoError);
 		//qDebug() << httpReply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
-		connect(httpReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-		//connect(httpReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
-		//connect(httpReply, SIGNAL(destroyed()), this, SLOT(replyDestroyed()));
+		connect(httpReply, &QNetworkReply::finished, this, &MultiLevelJsonBase::downloadFinished);
+		//connect(httpReply, &QNetworkReply::error, this, &MultiLevelJsonBase::downloadError);
+		//connect(httpReply, &QNetworkReply::destroyed, this, &MultiLevelJsonBase::replyDestroyed);
 		downloading = true;
 		QString turl = qurl.toString();
 		baseUrl = turl.left(turl.lastIndexOf('/')+1);
@@ -220,7 +220,7 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 	if (loadThread && loadThread->isRunning())
 	{
 		//qDebug() << "--> Abort thread " << contructorUrl;
-		disconnect(loadThread, SIGNAL(finished()), this, SLOT(jsonLoadFinished()));
+		disconnect(loadThread, &JsonLoadThread::finished, this, &MultiLevelJsonBase::jsonLoadFinished);
 		// The thread is currently running, it needs to be properly stopped
 		if (loadThread->wait(1)==false)
 		{
@@ -320,7 +320,7 @@ void MultiLevelJsonBase::downloadFinished()
 
 	Q_ASSERT(loadThread==Q_NULLPTR);
 	loadThread = new JsonLoadThread(this, content, qZcompressed, gzCompressed);
-	connect(loadThread, SIGNAL(finished()), this, SLOT(jsonLoadFinished()));
+	connect(loadThread, &JsonLoadThread::finished, this, &MultiLevelJsonBase::jsonLoadFinished);
 	loadThread->start(QThread::LowestPriority);
 }
 

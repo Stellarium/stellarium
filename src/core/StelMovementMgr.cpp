@@ -152,9 +152,8 @@ void StelMovementMgr::init()
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(conf);
 	Q_ASSERT(objectMgr);
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
-		this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(bindingFOVActions()));
+	connect(objectMgr, &StelObjectMgr::selectedObjectChanged,   this, &StelMovementMgr::selectedObjectChange);
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &StelMovementMgr::bindingFOVActions);
 
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
@@ -214,7 +213,7 @@ void StelMovementMgr::init()
 
 	viewportOffsetTimeline=new QTimeLine(1000, this);
 	viewportOffsetTimeline->setFrameRange(0, 100);
-	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
+	connect(viewportOffsetTimeline, &QTimeLine::valueChanged, this, &StelMovementMgr::handleViewportOffsetMovement);
 	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
 }
 
