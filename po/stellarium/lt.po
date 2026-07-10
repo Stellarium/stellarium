@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-07-05 19:27+0700\n"
+"POT-Creation-Date: 2026-07-09 21:10+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Gediminas Tauras, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
@@ -44,11 +44,11 @@ msgstr "pasirinktinis objektas"
 #: src/core/modules/StarWrapper.cpp:738 src/core/modules/StarWrapper.cpp:740
 #: src/gui/AstroCalcDialog.cpp:957 src/gui/AstroCalcDialog.cpp:2694
 #: src/gui/AstroCalcDialog.cpp:3286 src/gui/AstroCalcDialog.cpp:3318
-#: src/gui/AstroCalcDialog.cpp:3642 src/gui/AstroCalcDialog.cpp:7935
+#: src/gui/AstroCalcDialog.cpp:3642 src/gui/AstroCalcDialog.cpp:7932
 #: src/gui/ObsListDialog.cpp:296 src/ui_configurationDialog.h:2517
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:538
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:192
 #: plugins/Pulsars/src/Pulsar.cpp:194 plugins/Exoplanets/src/Exoplanet.cpp:320
@@ -74,7 +74,7 @@ msgstr "asterizmas"
 #: src/core/modules/NebulaMgr.cpp:470 src/core/modules/SolarSystem.cpp:386
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
 #: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:182
-#: src/core/modules/HipsMgr.cpp:183 src/core/StelApp.cpp:721
+#: src/core/modules/HipsMgr.cpp:183 src/core/StelApp.cpp:725
 #: src/core/StelCore.cpp:312 src/core/StelSkyLayerMgr.cpp:83
 #: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:983
 msgid "Display Options"
@@ -799,7 +799,7 @@ msgstr "Antapeksas"
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1634 src/core/modules/Planet.cpp:813
 #: src/core/modules/Planet.cpp:1231 src/core/modules/StarWrapper.cpp:282
-#: src/gui/AstroCalcDialog.cpp:8818 plugins/Satellites/src/Satellite.cpp:363
+#: src/gui/AstroCalcDialog.cpp:8815 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/Satellite.cpp:406
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgctxt "speed"
@@ -1296,6 +1296,7 @@ msgstr "Cikliškas šviesos taršos kitimas"
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1752
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:304
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:485
 msgid "Author"
 msgstr "Autorius"
 
@@ -1405,8 +1406,8 @@ msgstr "Skersmuo"
 #: src/core/modules/Planet.cpp:785 src/core/modules/Planet.cpp:909
 #: src/core/modules/Planet.cpp:1558 src/core/modules/Comet.cpp:229
 #: src/core/modules/Comet.cpp:239 src/gui/StelGuiItems.cpp:978
-#: src/gui/AstroCalcDialog.cpp:3437 src/gui/AstroCalcDialog.cpp:3985
-#: src/gui/AstroCalcDialog.cpp:8753 plugins/Satellites/src/Satellites.cpp:3440
+#: src/gui/AstroCalcDialog.cpp:3437 src/gui/AstroCalcDialog.cpp:3983
+#: src/gui/AstroCalcDialog.cpp:8750 plugins/Satellites/src/Satellites.cpp:3440
 #: plugins/Satellites/src/Satellite.cpp:359
 #: plugins/Satellites/src/Satellite.cpp:402
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1198
@@ -3087,7 +3088,7 @@ msgid "a region of the sky"
 msgstr "dangaus regionas"
 
 #: src/core/modules/NebulaMgr.cpp:469 src/gui/AstroCalcDialog.cpp:1059
-#: src/gui/AstroCalcDialog.cpp:7783
+#: src/gui/AstroCalcDialog.cpp:7780
 msgid "Deep-sky objects"
 msgstr "Tolimojo kosmoso objektai"
 
@@ -3254,7 +3255,7 @@ msgstr "link"
 #: src/core/modules/Planet.cpp:753 src/gui/AstroCalcDialog.cpp:938
 #: src/gui/AstroCalcDialog.cpp:1251 src/gui/AstroCalcDialog.cpp:1549
 #: src/gui/AstroCalcDialog.cpp:1825 src/gui/AstroCalcDialog.cpp:1990
-#: src/gui/AstroCalcDialog.cpp:8778 src/gui/AstroCalcChart.cpp:431
+#: src/gui/AstroCalcDialog.cpp:8775 src/gui/AstroCalcChart.cpp:431
 #: src/gui/AstroCalcChart.cpp:435 src/gui/AstroCalcChart.cpp:450
 #: src/gui/AstroCalcChart.cpp:457 src/gui/AstroCalcChart.cpp:461
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
@@ -3272,7 +3273,7 @@ msgstr "Šviesos sklidimo laikas"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:771 src/core/modules/Planet.cpp:792
-#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:8755
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:8752
 msgctxt "distance"
 msgid "M km"
 msgstr "M km"
@@ -3353,7 +3354,7 @@ msgstr "Apšviestas"
 msgid "Elong. in Ecl.Long."
 msgstr "Pailg. Ekl. ilgumoje"
 
-#: src/core/modules/Planet.cpp:1038 src/gui/AstroCalcDialog.cpp:8988
+#: src/core/modules/Planet.cpp:1038 src/gui/AstroCalcDialog.cpp:8985
 #: src/gui/AstroCalcChart.cpp:476
 msgid "Angular distance"
 msgstr "Kampinis atstumas"
@@ -3384,7 +3385,7 @@ msgstr "Kampinis atstumas nuo %1-ojo yra %2"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:1105 src/core/StelUtils.cpp:169
-#: src/gui/AstroCalcDialog.cpp:8789 src/gui/AstroCalcAlmanacWidget.cpp:256
+#: src/gui/AstroCalcDialog.cpp:8786 src/gui/AstroCalcAlmanacWidget.cpp:256
 msgctxt "duration"
 msgid "days"
 msgstr "dienos"
@@ -4180,8 +4181,8 @@ msgid "Orthographic"
 msgstr "Ortografinė"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:387 src/gui/AstroCalcDialog.cpp:5402
-#: src/gui/AstroCalcDialog.cpp:7754 src/translations.h:37
+#: src/core/modules/SolarSystem.cpp:387 src/gui/AstroCalcDialog.cpp:5399
+#: src/gui/AstroCalcDialog.cpp:7751 src/translations.h:37
 msgid "Planets"
 msgstr "Planetos"
 
@@ -4336,7 +4337,7 @@ msgstr " Hierarchinių progresyvinių apklausų perjungimas"
 msgid "Toggle HiPS dialog"
 msgstr "Perjungti HiPS dialogo langą"
 
-#: src/core/SolarEclipseComputer.cpp:2032 src/gui/AstroCalcDialog.cpp:4274
+#: src/core/SolarEclipseComputer.cpp:2032 src/gui/AstroCalcDialog.cpp:4272
 msgid "Solar Eclipse"
 msgstr "Saulės užtemimas"
 
@@ -4344,7 +4345,7 @@ msgstr "Saulės užtemimas"
 msgid "Created by Stellarium"
 msgstr "Sukurta Stellarium"
 
-#: src/core/SolarEclipseComputer.cpp:2044 src/gui/AstroCalcDialog.cpp:4086
+#: src/core/SolarEclipseComputer.cpp:2044 src/gui/AstroCalcDialog.cpp:4084
 msgid "Greatest eclipse"
 msgstr "Didžiausias užtemimas"
 
@@ -4512,154 +4513,154 @@ msgstr "Kitų metų žiemos saulėgrįža"
 msgid "December solstice at previous year"
 msgstr "Praeitų metų žiemos saulėgrįža"
 
-#: src/core/StelApp.cpp:496
+#: src/core/StelApp.cpp:500
 msgid "Initializing textures..."
 msgstr "Inicializuojamos tekstūros..."
 
-#: src/core/StelApp.cpp:500
+#: src/core/StelApp.cpp:504
 msgid "Initializing network access..."
 msgstr "Inicijuojamas tinklo prieigos užklausimas..."
 
-#: src/core/StelApp.cpp:503
+#: src/core/StelApp.cpp:507
 msgid "Initializing network disk cache..."
 msgstr "Inicijuojamas tinklo disko kešavimas..."
 
-#: src/core/StelApp.cpp:517
+#: src/core/StelApp.cpp:521
 msgid "Initializing network proxy..."
 msgstr "Inicijuojama tarpinė tinklo sąsaja ..."
 
-#: src/core/StelApp.cpp:533
+#: src/core/StelApp.cpp:537
 msgid "Initializing Object Database..."
 msgstr "Inicializuojama objektų duomenų bazė..."
 
-#: src/core/StelApp.cpp:539
+#: src/core/StelApp.cpp:543
 msgid "Initializing HiPS survey..."
 msgstr "Pradedama HiPS apklausa..."
 
-#: src/core/StelApp.cpp:545
+#: src/core/StelApp.cpp:549
 msgid "Initializing Solar System objects..."
 msgstr "Inicializuojami Saulės sistemos objektai..."
 
-#: src/core/StelApp.cpp:551
+#: src/core/StelApp.cpp:555
 msgid "Initializing planetary nomenclature..."
 msgstr "Inicializuojama planetų pavadinimų sistema..."
 
-#: src/core/StelApp.cpp:557
+#: src/core/StelApp.cpp:561
 msgid "Initializing stars..."
 msgstr "Inicijuojamos žvaigždės..."
 
-#: src/core/StelApp.cpp:562
+#: src/core/StelApp.cpp:566
 msgid "Initializing core..."
 msgstr "Sistemos branduolio inicijavimas..."
 
-#: src/core/StelApp.cpp:566
+#: src/core/StelApp.cpp:570
 msgid "Initializing deep-sky objects..."
 msgstr "Inicializuojami giliojo kosmoso objektai..."
 
-#: src/core/StelApp.cpp:572
+#: src/core/StelApp.cpp:576
 msgid "Initializing Milky Way..."
 msgstr "Inicializuojama Paukščių takas..."
 
-#: src/core/StelApp.cpp:578
+#: src/core/StelApp.cpp:582
 msgid "Initializing zodiacal light..."
 msgstr "Inicijuojama zodiako šviesa..."
 
-#: src/core/StelApp.cpp:584
+#: src/core/StelApp.cpp:588
 msgid "Initializing sky image layer..."
 msgstr "Inicializuojamas dangaus vaizdo sluoksnis..."
 
-#: src/core/StelApp.cpp:590
+#: src/core/StelApp.cpp:594
 msgid "Initializing TOAST surveys..."
 msgstr "Inicializuojama TOAST apklausa..."
 
-#: src/core/StelApp.cpp:604
+#: src/core/StelApp.cpp:608
 msgid "Initializing audio..."
 msgstr "Garso inicijavimas..."
 
-#: src/core/StelApp.cpp:612
+#: src/core/StelApp.cpp:616
 msgid "Initializing video..."
 msgstr "Vaizdo inicijavimas..."
 
-#: src/core/StelApp.cpp:620
+#: src/core/StelApp.cpp:624
 msgid "Initializing speech output..."
 msgstr "Inicijuojama balso išvestis..."
 
-#: src/core/StelApp.cpp:627
+#: src/core/StelApp.cpp:631
 msgid "Initializing constellations..."
 msgstr "Inicijuojama žvaigždynai..."
 
-#: src/core/StelApp.cpp:633
+#: src/core/StelApp.cpp:637
 msgid "Initializing asterisms..."
 msgstr "Inicijuojami asterizmai..."
 
-#: src/core/StelApp.cpp:639
+#: src/core/StelApp.cpp:643
 msgid "Initializing landscape..."
 msgstr "Inicijuojamas kraštovaizdis..."
 
-#: src/core/StelApp.cpp:652
+#: src/core/StelApp.cpp:656
 msgid "Initializing grid lines..."
 msgstr "Tinklelio linijų inicijavimas..."
 
-#: src/core/StelApp.cpp:657
+#: src/core/StelApp.cpp:661
 msgid "Initializing special markers..."
 msgstr "Inicializuojami specialūs žymekliai..."
 
-#: src/core/StelApp.cpp:663
+#: src/core/StelApp.cpp:667
 msgid "Initializing sporadic meteors..."
 msgstr "Inicializuojami sporadiniai meteorai..."
 
-#: src/core/StelApp.cpp:669
+#: src/core/StelApp.cpp:673
 msgid "Initializing user labels..."
 msgstr "Vartotojo žymės inicijuojamos..."
 
-#: src/core/StelApp.cpp:674
+#: src/core/StelApp.cpp:678
 msgid "Initializing sky cultures..."
 msgstr "Inicijuojamos dangaus kultūros..."
 
-#: src/core/StelApp.cpp:678
+#: src/core/StelApp.cpp:682
 msgid "Initializing user markers..."
 msgstr "Inicijuojami vartotojo žymekliai ..."
 
-#: src/core/StelApp.cpp:684
+#: src/core/StelApp.cpp:688
 msgid "Initializing custom objects..."
 msgstr "Inicijuojami pasirinktiniai objektai..."
 
-#: src/core/StelApp.cpp:690
+#: src/core/StelApp.cpp:694
 msgid "Initializing highlights..."
 msgstr "Inicijuojami šviesos akcentai..."
 
-#: src/core/StelApp.cpp:696
+#: src/core/StelApp.cpp:700
 msgid "Initializing specific time..."
 msgstr "Inicializuojamas konkretus laikas..."
 
-#: src/core/StelApp.cpp:704
+#: src/core/StelApp.cpp:708
 msgid "Initializing scripting..."
 msgstr "Inicializuojamas scenarijus..."
 
-#: src/core/StelApp.cpp:709
+#: src/core/StelApp.cpp:713
 msgid "Initializing color scheme..."
 msgstr "Inicijuojama spalvų schema..."
 
-#: src/core/StelApp.cpp:721 src/ui_configurationDialog.h:2658
+#: src/core/StelApp.cpp:725 src/ui_configurationDialog.h:2658
 msgid "Night mode"
 msgstr "Nakties režimas"
 
-#: src/core/StelApp.cpp:756
+#: src/core/StelApp.cpp:760
 msgid "Initializing SPOUT sender..."
 msgstr "Inicializuojamas SPOUT siuntimas..."
 
-#: src/core/StelApp.cpp:766
+#: src/core/StelApp.cpp:770
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Negalima sukurti Spout siuntėjo. Žr. žurnalą papild. informacijai."
 
-#: src/core/StelApp.cpp:793
+#: src/core/StelApp.cpp:797
 msgid "Loading plugin"
 msgstr "Įkeliamas įskiepis"
 
 #: src/core/StelCore.cpp:310 src/gui/AstroCalcDialog.cpp:1797
 #: src/gui/AstroCalcDialog.cpp:2692 src/gui/AstroCalcDialog.cpp:2716
 #: src/gui/AstroCalcDialog.cpp:3284 src/gui/AstroCalcDialog.cpp:3313
-#: src/gui/AstroCalcDialog.cpp:6070 src/ui_dateTimeDialogGui.h:321
+#: src/gui/AstroCalcDialog.cpp:6067 src/ui_dateTimeDialogGui.h:321
 #: src/ui_dateTimeDialogGui.h:323
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "Date and Time"
@@ -5705,19 +5706,19 @@ msgstr "Matomas žvaigždžių laikas"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:866 src/gui/AstroCalcDialog.cpp:951
-#: src/gui/AstroCalcDialog.cpp:2442 src/gui/AstroCalcDialog.cpp:7919
+#: src/gui/AstroCalcDialog.cpp:2442 src/gui/AstroCalcDialog.cpp:7916
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Tranzitas"
 
 #: src/core/StelObject.cpp:867 src/gui/AstroCalcDialog.cpp:2441
-#: src/gui/AstroCalcDialog.cpp:7918
+#: src/gui/AstroCalcDialog.cpp:7915
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Teka"
 
 #: src/core/StelObject.cpp:868 src/gui/AstroCalcDialog.cpp:2443
-#: src/gui/AstroCalcDialog.cpp:7922
+#: src/gui/AstroCalcDialog.cpp:7919
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Leidžiasi"
@@ -5790,7 +5791,7 @@ msgid "Parallactic Angle"
 msgstr "Paralaktinis kampas"
 
 #: src/core/StelObject.cpp:1081 src/core/StelObject.cpp:1617
-#: src/gui/AstroCalcDialog.cpp:8017
+#: src/gui/AstroCalcDialog.cpp:8014
 msgid "IAU Constellation"
 msgstr " Žvaigždynas pagal TAS"
 
@@ -6321,6 +6322,7 @@ msgstr ""
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:303
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:270
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:483
 msgid "License"
 msgstr "Licencija"
 
@@ -7166,6 +7168,7 @@ msgstr "Susisiekite"
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:302
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:269
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:481
 msgid "Version"
 msgstr "Versija"
 
@@ -8169,106 +8172,105 @@ msgctxt "pixels"
 msgid "px"
 msgstr "px"
 
-#: src/gui/ViewDialog.cpp:1644 src/gui/ViewDialog.cpp:1671
-#: src/ui_viewDialog.h:4730
+#: src/gui/ViewDialog.cpp:1644 src/ui_viewDialog.h:4730
 msgid "Other"
 msgstr "Kita"
 
-#: src/gui/ViewDialog.cpp:1812
+#: src/gui/ViewDialog.cpp:1845
 msgctxt "cultural style"
 msgid "native"
 msgstr "vietinis"
 
-#: src/gui/ViewDialog.cpp:1813
+#: src/gui/ViewDialog.cpp:1846
 msgctxt "cultural style"
 msgid "transliteration"
 msgstr "transliteracija"
 
-#: src/gui/ViewDialog.cpp:1814
+#: src/gui/ViewDialog.cpp:1847
 msgctxt "cultural style"
 msgid "sci. translit."
 msgstr "mksl. translit."
 
-#: src/gui/ViewDialog.cpp:1815
+#: src/gui/ViewDialog.cpp:1848
 msgctxt "cultural style"
 msgid "translated"
 msgstr "vertimas"
 
-#: src/gui/ViewDialog.cpp:1970
+#: src/gui/ViewDialog.cpp:2003
 msgid "No shooting stars"
 msgstr "Be krintančių žvaigždžių"
 
-#: src/gui/ViewDialog.cpp:1972
+#: src/gui/ViewDialog.cpp:2005
 msgid "Normal rate"
 msgstr "Normalus dažnis"
 
-#: src/gui/ViewDialog.cpp:1974
+#: src/gui/ViewDialog.cpp:2007
 msgid "Standard Orionids rate"
 msgstr "Standartinis Orionidų dažnis"
 
-#: src/gui/ViewDialog.cpp:1976
+#: src/gui/ViewDialog.cpp:2009
 msgid "Standard Perseids rate"
 msgstr "Standartinis Perseidų"
 
-#: src/gui/ViewDialog.cpp:1978
+#: src/gui/ViewDialog.cpp:2011
 msgid "Standard Geminids rate"
 msgstr "Standartinis Geminidų dažnis"
 
-#: src/gui/ViewDialog.cpp:1980
+#: src/gui/ViewDialog.cpp:2013
 msgid "Exceptional Perseid rate"
 msgstr "Ypač geras Perseidų dažnis"
 
-#: src/gui/ViewDialog.cpp:1982
+#: src/gui/ViewDialog.cpp:2015
 msgid "Meteor storm rate"
 msgstr "Meteorų audros dažnis"
 
-#: src/gui/ViewDialog.cpp:1984
+#: src/gui/ViewDialog.cpp:2017
 msgid "Exceptional Draconid rate"
 msgstr "Ypač geras Drakonidų dažnis"
 
-#: src/gui/ViewDialog.cpp:1986
+#: src/gui/ViewDialog.cpp:2019
 msgid "Exceptional Leonid rate"
 msgstr "Ypač geras Leonidų"
 
-#: src/gui/ViewDialog.cpp:1988
+#: src/gui/ViewDialog.cpp:2021
 msgid "Very high rate (1966 Leonids)"
 msgstr "Labai aukštas dažnis (1966 Leonidai)"
 
-#: src/gui/ViewDialog.cpp:1990
+#: src/gui/ViewDialog.cpp:2023
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Aukščiausias pasiektas dažnis (1833 Leonidai)"
 
-#: src/gui/ViewDialog.cpp:2249
+#: src/gui/ViewDialog.cpp:2282
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "G. Müller (1893)"
 
-#: src/gui/ViewDialog.cpp:2250
+#: src/gui/ViewDialog.cpp:2283
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "Astronominis Almanachas (1984)"
 
-#: src/gui/ViewDialog.cpp:2251
+#: src/gui/ViewDialog.cpp:2284
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Aiškinamasis priedas (1992)"
 
-#: src/gui/ViewDialog.cpp:2252
+#: src/gui/ViewDialog.cpp:2285
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Aiškinamasis priedas (2013)"
 
-#: src/gui/ViewDialog.cpp:2253
+#: src/gui/ViewDialog.cpp:2286
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "Mallama & Hilton (2018)"
 
-#: src/gui/ViewDialog.cpp:2254
+#: src/gui/ViewDialog.cpp:2287
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Bendras"
 
-#: src/gui/ViewDialog.cpp:2277
+#: src/gui/ViewDialog.cpp:2310
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -8276,7 +8278,7 @@ msgstr ""
 "Algoritmas buvo naudojamas <em>Astronominiam Almanache</em> (1984 ir vėliau)"
 " ir suteikia V (instrumentiniu) dydžius (tariamai iš D.L. Harris)."
 
-#: src/gui/ViewDialog.cpp:2278
+#: src/gui/ViewDialog.cpp:2311
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
@@ -8286,7 +8288,7 @@ msgstr ""
 "metais ir vis dar buvo išleistas <em>Astronominė Efemerija aiškinamajame "
 "priede</em> (1961)."
 
-#: src/gui/ViewDialog.cpp:2279
+#: src/gui/ViewDialog.cpp:2312
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
@@ -8294,7 +8296,7 @@ msgstr ""
 "Algoritmas buvo paskelbtas <em>Astronominio Almanacho aiškinamąjame "
 "priede</em> (1992), antroje leidimo versijoje."
 
-#: src/gui/ViewDialog.cpp:2280
+#: src/gui/ViewDialog.cpp:2313
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -8302,7 +8304,7 @@ msgstr ""
 "Algoritmas buvo paskelbtas <em>Astronominio Almanacho aiškinamąjame "
 "priede</em> (2013), trečioje leidimo versijoje."
 
-#: src/gui/ViewDialog.cpp:2281
+#: src/gui/ViewDialog.cpp:2314
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
@@ -8312,7 +8314,7 @@ msgstr ""
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 
-#: src/gui/ViewDialog.cpp:2284
+#: src/gui/ViewDialog.cpp:2317
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vizualinis ryškis pagal fazinį kampą ir albedą."
 
@@ -8747,8 +8749,8 @@ msgstr ""
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:881 src/gui/AstroCalcDialog.cpp:985
 #: src/gui/AstroCalcDialog.cpp:1796 src/gui/AstroCalcDialog.cpp:2440
-#: src/gui/AstroCalcDialog.cpp:7907 src/ui_configurationDialog.h:2441
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:532
+#: src/gui/AstroCalcDialog.cpp:7904 src/ui_configurationDialog.h:2441
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:539
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:103
 #: plugins/Exoplanets/src/Exoplanet.cpp:360
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:183
@@ -8771,13 +8773,13 @@ msgid "Dec (J2000)"
 msgstr "Dec (J2000)"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:907 src/gui/AstroCalcDialog.cpp:7916
+#: src/gui/AstroCalcDialog.cpp:907 src/gui/AstroCalcDialog.cpp:7913
 msgid "Opac."
 msgstr "Skaidr."
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:912 src/gui/AstroCalcDialog.cpp:1821
-#: src/gui/AstroCalcDialog.cpp:2447 src/gui/AstroCalcDialog.cpp:7911
+#: src/gui/AstroCalcDialog.cpp:2447 src/gui/AstroCalcDialog.cpp:7908
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Mag."
 msgstr "Ršk."
@@ -8790,7 +8792,7 @@ msgstr "K.D."
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:928 src/gui/AstroCalcDialog.cpp:7926
+#: src/gui/AstroCalcDialog.cpp:928 src/gui/AstroCalcDialog.cpp:7923
 msgid "Sep."
 msgstr "Atsk."
 
@@ -8825,7 +8827,7 @@ msgid "S.B."
 msgstr "P.R."
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:7921
+#: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:7918
 msgid "Elev."
 msgstr "Aukšt."
 
@@ -8846,7 +8848,7 @@ msgstr "Saulės sistemos objektai"
 msgid "Solar system objects: comets"
 msgstr "Saulės sistemos objektai: kometos"
 
-#: src/gui/AstroCalcDialog.cpp:1062 src/gui/AstroCalcDialog.cpp:5414
+#: src/gui/AstroCalcDialog.cpp:1062 src/gui/AstroCalcDialog.cpp:5411
 msgid "Solar system objects: minor bodies"
 msgstr "Saulės sistemos objektai: mažieji kūnai"
 
@@ -8952,11 +8954,11 @@ msgstr "Išsaugoti apskaičiuotą efemeridę kaip..."
 msgid "Ephemeris"
 msgstr "Efemeridė"
 
-#: src/gui/AstroCalcDialog.cpp:2448 src/gui/AstroCalcDialog.cpp:6079
+#: src/gui/AstroCalcDialog.cpp:2448 src/gui/AstroCalcDialog.cpp:6076
 msgid "Solar Elongation"
 msgstr "Saulės elongacija"
 
-#: src/gui/AstroCalcDialog.cpp:2449 src/gui/AstroCalcDialog.cpp:6080
+#: src/gui/AstroCalcDialog.cpp:2449 src/gui/AstroCalcDialog.cpp:6077
 #: src/gui/AstroCalcChart.cpp:113 src/ui_astroCalcDialog.h:2529
 msgid "Lunar Elongation"
 msgstr "Mėnulio elongacija"
@@ -9029,15 +9031,15 @@ msgid "Axis Distance"
 msgstr "Ašinis atstumas"
 
 #: src/gui/AstroCalcDialog.cpp:2938 src/gui/AstroCalcDialog.cpp:3482
-#: src/gui/AstroCalcDialog.cpp:3504 src/gui/AstroCalcDialog.cpp:3859
-#: src/gui/AstroCalcDialog.cpp:4125 src/gui/AstroCalcDialog.cpp:4154
+#: src/gui/AstroCalcDialog.cpp:3504 src/gui/AstroCalcDialog.cpp:3857
+#: src/gui/AstroCalcDialog.cpp:4123 src/gui/AstroCalcDialog.cpp:4152
 msgctxt "eclipse type"
 msgid "Total"
 msgstr "Visiškas"
 
 #: src/gui/AstroCalcDialog.cpp:2944 src/gui/AstroCalcDialog.cpp:3494
-#: src/gui/AstroCalcDialog.cpp:3873 src/gui/AstroCalcDialog.cpp:4114
-#: src/gui/AstroCalcDialog.cpp:4133
+#: src/gui/AstroCalcDialog.cpp:3871 src/gui/AstroCalcDialog.cpp:4112
+#: src/gui/AstroCalcDialog.cpp:4131
 msgctxt "eclipse type"
 msgid "Partial"
 msgstr "Dalinis"
@@ -9176,7 +9178,7 @@ msgid "Lunar Eclipses"
 msgstr "Visiški Mėnulio užtemimai"
 
 #: src/gui/AstroCalcDialog.cpp:3269 src/gui/AstroCalcDialog.cpp:3278
-#: src/gui/AstroCalcDialog.cpp:4343 src/ui_astroCalcDialog.h:2582
+#: src/gui/AstroCalcDialog.cpp:4341 src/ui_astroCalcDialog.h:2582
 msgid ""
 "Note: Local circumstances for eclipses during thousands of years in the past"
 " and future are not reliable due to uncertainty in ΔT which is caused by "
@@ -9231,8 +9233,8 @@ msgid "Central Duration"
 msgstr "Centrinė trukmė"
 
 #: src/gui/AstroCalcDialog.cpp:3488 src/gui/AstroCalcDialog.cpp:3510
-#: src/gui/AstroCalcDialog.cpp:3524 src/gui/AstroCalcDialog.cpp:3866
-#: src/gui/AstroCalcDialog.cpp:4129 src/gui/AstroCalcDialog.cpp:4156
+#: src/gui/AstroCalcDialog.cpp:3524 src/gui/AstroCalcDialog.cpp:3864
+#: src/gui/AstroCalcDialog.cpp:4127 src/gui/AstroCalcDialog.cpp:4154
 msgctxt "eclipse type"
 msgid "Annular"
 msgstr "Žiedinė"
@@ -9296,84 +9298,84 @@ msgstr "Dalinis užtemimas baigiasi"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:3656 src/gui/AstroCalcDialog.cpp:4365
+#: src/gui/AstroCalcDialog.cpp:3656 src/gui/AstroCalcDialog.cpp:4363
 msgctxt "column name"
 msgid "Duration"
 msgstr "Trukmė"
 
-#: src/gui/AstroCalcDialog.cpp:3904
+#: src/gui/AstroCalcDialog.cpp:3902
 msgid "The time of first contact"
 msgstr "Pirmojo kontakto laikas"
 
-#: src/gui/AstroCalcDialog.cpp:3910
+#: src/gui/AstroCalcDialog.cpp:3908
 msgid "The time of second contact"
 msgstr "Antrojo kontakto laikas"
 
-#: src/gui/AstroCalcDialog.cpp:3912
+#: src/gui/AstroCalcDialog.cpp:3910
 msgid "The time of greatest eclipse"
 msgstr "Didžiausio užtemimo laikas"
 
-#: src/gui/AstroCalcDialog.cpp:3918
+#: src/gui/AstroCalcDialog.cpp:3916
 msgid "The time of third contact"
 msgstr "Trečiojo kontakto laikas"
 
-#: src/gui/AstroCalcDialog.cpp:3922
+#: src/gui/AstroCalcDialog.cpp:3920
 msgid "The time of fourth contact"
 msgstr "Ketvirtojo kontakto laikas"
 
-#: src/gui/AstroCalcDialog.cpp:3927
+#: src/gui/AstroCalcDialog.cpp:3925
 msgid "Duration of total or annular eclipse"
 msgstr "Pilno arba žiedinio užtemimo trukmė"
 
-#: src/gui/AstroCalcDialog.cpp:4078
+#: src/gui/AstroCalcDialog.cpp:4076
 msgid "Eclipse begins; first contact with Earth"
 msgstr "Užtemimas prasideda; pirmasis kontaktas su Žeme"
 
-#: src/gui/AstroCalcDialog.cpp:4082
+#: src/gui/AstroCalcDialog.cpp:4080
 msgid "Beginning of center line; central eclipse begins"
 msgstr " Centro linijos pradžia; prasideda centrinis užtemimas"
 
-#: src/gui/AstroCalcDialog.cpp:4090
+#: src/gui/AstroCalcDialog.cpp:4088
 msgid "End of center line; central eclipse ends"
 msgstr "Centrinės linijos pabaiga; baigiasi centrinis užtemimas"
 
-#: src/gui/AstroCalcDialog.cpp:4094
+#: src/gui/AstroCalcDialog.cpp:4092
 msgid "Eclipse ends; last contact with Earth"
 msgstr "Užtemimas baigiasi; paskutinis kontaktas su Žeme"
 
-#: src/gui/AstroCalcDialog.cpp:4103
+#: src/gui/AstroCalcDialog.cpp:4101
 msgid "Geographic latitude of contact point"
 msgstr "Kontaktinio taško geografinė platuma"
 
-#: src/gui/AstroCalcDialog.cpp:4106
+#: src/gui/AstroCalcDialog.cpp:4104
 msgid "Geographic longitude of contact point"
 msgstr "Kontaktinio taško geografinė ilguma"
 
-#: src/gui/AstroCalcDialog.cpp:4163
+#: src/gui/AstroCalcDialog.cpp:4161
 msgid "Width of the path of totality or annularity"
 msgstr "Visumos kelio arba žiedo plotis"
 
-#: src/gui/AstroCalcDialog.cpp:4165
+#: src/gui/AstroCalcDialog.cpp:4163
 msgid "Duration of total or annular phase"
 msgstr "Pilnos arba žiedinės fazės trukmė"
 
-#: src/gui/AstroCalcDialog.cpp:4199 src/gui/AstroCalcDialog.cpp:4231
+#: src/gui/AstroCalcDialog.cpp:4197 src/gui/AstroCalcDialog.cpp:4229
 msgid "Greatest eclipse’s point"
 msgstr "Didžiausias užtemimo taškas"
 
-#: src/gui/AstroCalcDialog.cpp:4199
+#: src/gui/AstroCalcDialog.cpp:4197
 msgid "Eclipse’s contact point"
 msgstr "Užtemimo kontaktinis taškas"
 
-#: src/gui/AstroCalcDialog.cpp:4209 src/gui/AstroCalcDialog.cpp:4339
+#: src/gui/AstroCalcDialog.cpp:4207 src/gui/AstroCalcDialog.cpp:4337
 msgid "Save calculated solar eclipses as..."
 msgstr "Išsaugoti apskaičiuotus saulės užtemimus kaip..."
 
-#: src/gui/AstroCalcDialog.cpp:4213 src/gui/AstroCalcDialog.cpp:4343
+#: src/gui/AstroCalcDialog.cpp:4211 src/gui/AstroCalcDialog.cpp:4341
 msgid "Solar Eclipses"
 msgstr "Saulės užtemimai"
 
-#: src/gui/AstroCalcDialog.cpp:4213 src/gui/AstroCalcDialog.cpp:4222
+#: src/gui/AstroCalcDialog.cpp:4211 src/gui/AstroCalcDialog.cpp:4220
 msgid ""
 "Note: Path of eclipses during thousands of years in the past and future are "
 "not reliable due to uncertainty in ΔT which is caused by fluctuations in "
@@ -9382,105 +9384,105 @@ msgstr ""
 "Pastabos: Užtemimų keliai per tūkstančius metų praeityje ir ateityje nėra "
 "patikimi dėl ΔT neapibrėžtumo, kurį sukelia Žemės rotacijos svyravimai."
 
-#: src/gui/AstroCalcDialog.cpp:4218
+#: src/gui/AstroCalcDialog.cpp:4216
 msgid "Save solar eclipse circumstances as..."
 msgstr "Išsaugoti saulės užtemimo aplinkybes kaip..."
 
-#: src/gui/AstroCalcDialog.cpp:4222
+#: src/gui/AstroCalcDialog.cpp:4220
 msgid "Circumstances of Solar Eclipse"
 msgstr "Saulės užtemimo aplinkybės"
 
-#: src/gui/AstroCalcDialog.cpp:4277
+#: src/gui/AstroCalcDialog.cpp:4275
 msgid "Save map as..."
 msgstr "Išsaugoti žemėlapį kaip..."
 
-#: src/gui/AstroCalcDialog.cpp:4279
+#: src/gui/AstroCalcDialog.cpp:4277
 msgid "KML map (*.kml);;PNG equirectangular map (*.png)"
 msgstr "KML žemėlapis (*.kml);;PNG lygiakraštis žemėlapis (*.png)"
 
-#: src/gui/AstroCalcDialog.cpp:4288
+#: src/gui/AstroCalcDialog.cpp:4286
 msgid "Failed to open output file"
 msgstr "Nepavyko atverti išvesties failo"
 
-#: src/gui/AstroCalcDialog.cpp:4289
+#: src/gui/AstroCalcDialog.cpp:4287
 #, qt-format
 msgid "Failed to open output KML file: %1"
 msgstr "Nepavyko atidaryti išvesties KML failo: %1"
 
-#: src/gui/AstroCalcDialog.cpp:4305
+#: src/gui/AstroCalcDialog.cpp:4303
 msgid "Failed to save image"
 msgstr "Vaizdo išsaugoti nepavyko"
 
-#: src/gui/AstroCalcDialog.cpp:4306
+#: src/gui/AstroCalcDialog.cpp:4304
 msgid "Failed to save PNG map image"
 msgstr "Nepavyko išsaugoti PNG žemėlapio vaizdo"
 
-#: src/gui/AstroCalcDialog.cpp:4349
+#: src/gui/AstroCalcDialog.cpp:4347
 msgctxt "column name"
 msgid "Date of mid-transit"
 msgstr "Vidinio tranzito data"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4351
+#: src/gui/AstroCalcDialog.cpp:4349
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1071
 msgid "Planet"
 msgstr "Planeta"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4353
+#: src/gui/AstroCalcDialog.cpp:4351
 msgctxt "column name"
 msgid "Exterior Ingress"
 msgstr "Išorinis ingresas"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4355
+#: src/gui/AstroCalcDialog.cpp:4353
 msgctxt "column name"
 msgid "Interior Ingress"
 msgstr "Vidinis ingresas"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4357
+#: src/gui/AstroCalcDialog.cpp:4355
 msgctxt "column name"
 msgid "Mid-transit"
 msgstr "Tranzito vidurys"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4359
+#: src/gui/AstroCalcDialog.cpp:4357
 msgctxt "column name"
 msgid "Angular Distance"
 msgstr "Kampinis atstumas"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4361
+#: src/gui/AstroCalcDialog.cpp:4359
 msgctxt "column name"
 msgid "Interior Egress"
 msgstr "Vidinis išėjimas"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4363
+#: src/gui/AstroCalcDialog.cpp:4361
 msgctxt "column name"
 msgid "Exterior Egress"
 msgstr "Išorinis išėjimas"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4367
+#: src/gui/AstroCalcDialog.cpp:4365
 msgctxt "column name"
 msgid "Observable Duration"
 msgstr "Stebėjimo trukmės laikotarpis"
 
-#: src/gui/AstroCalcDialog.cpp:4581
+#: src/gui/AstroCalcDialog.cpp:4579
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1482
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:355
 msgid "Mercury"
 msgstr "Merkurijus"
 
-#: src/gui/AstroCalcDialog.cpp:4586
+#: src/gui/AstroCalcDialog.cpp:4584
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1485
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:361
 msgid "Venus"
 msgstr "Venera"
 
-#: src/gui/AstroCalcDialog.cpp:4808
+#: src/gui/AstroCalcDialog.cpp:4805
 msgid ""
 "The time of first contact, the instant when the planet's disk is externally "
 "tangent to the Sun (transit begins)"
@@ -9488,22 +9490,22 @@ msgstr ""
 "Pirmojo kontakto laikas - akimirka, kai planetos diskas išoriškai liečiasi "
 "prie Saulės (tranzito pradžia)."
 
-#: src/gui/AstroCalcDialog.cpp:4823
+#: src/gui/AstroCalcDialog.cpp:4820
 msgid ""
 "The time of second contact, the entire disk of the planet is internally "
 "tangent to the Sun"
 msgstr ""
 "Antrojo kontakto metu visas planetos diskas yra vidinėje liestinėje į Saulę."
 
-#: src/gui/AstroCalcDialog.cpp:4841
+#: src/gui/AstroCalcDialog.cpp:4838
 msgid "The time of minimum angular distance of planet to Sun's center"
 msgstr "Planetos mažiausio kampinio atstumo iki Saulės centro laikas"
 
-#: src/gui/AstroCalcDialog.cpp:4858
+#: src/gui/AstroCalcDialog.cpp:4855
 msgid "Minimum angular distance of planet to Sun's center"
 msgstr "Mažiausias kampinis planetos atstumas iki Saulės centro"
 
-#: src/gui/AstroCalcDialog.cpp:4873
+#: src/gui/AstroCalcDialog.cpp:4870
 msgid ""
 "The time of third contact, the planet reaches the opposite limb and is once "
 "again internally tangent to the Sun"
@@ -9511,7 +9513,7 @@ msgstr ""
 "Trečiojo kontakto metu planeta pasiekia priešingą kraštinę ir vėl atsiduria "
 "vidinėje liestinėje prie Saulės."
 
-#: src/gui/AstroCalcDialog.cpp:4891
+#: src/gui/AstroCalcDialog.cpp:4888
 msgid ""
 "The time of fourth contact, the planet's disk is externally tangent to the "
 "Sun (transit ends)"
@@ -9519,23 +9521,23 @@ msgstr ""
 "Ketvirtojo kontakto metu planetos diskas išoriškai liečiasi prie Saulės "
 "(tranzito pabaiga)."
 
-#: src/gui/AstroCalcDialog.cpp:4902
+#: src/gui/AstroCalcDialog.cpp:4899
 msgid "Total duration of transit"
 msgstr "Visa tranzito trukmė"
 
-#: src/gui/AstroCalcDialog.cpp:4953
+#: src/gui/AstroCalcDialog.cpp:4950
 msgid "Observable duration of transit"
 msgstr "Stebimo tranzito trukmė"
 
-#: src/gui/AstroCalcDialog.cpp:5016
+#: src/gui/AstroCalcDialog.cpp:5013
 msgid "Save calculated transits as..."
 msgstr "Išsaugoti apskaičiuotus tranzitus kaip..."
 
-#: src/gui/AstroCalcDialog.cpp:5020
+#: src/gui/AstroCalcDialog.cpp:5017
 msgid "Transits across the Sun"
 msgstr "Tranzitai per Saulę"
 
-#: src/gui/AstroCalcDialog.cpp:5020 src/ui_astroCalcDialog.h:2590
+#: src/gui/AstroCalcDialog.cpp:5017 src/ui_astroCalcDialog.h:2590
 msgid ""
 "Notes: Time in parentheses means the contact is invisible at current "
 "location. Transit times during thousands of years in the past and future are"
@@ -9547,427 +9549,427 @@ msgstr ""
 " ateityje nėra patikimas dėl ΔT neapibrėžtumo, kurį lemia Žemės sukimosi "
 "svyravimai."
 
-#: src/gui/AstroCalcDialog.cpp:5208
+#: src/gui/AstroCalcDialog.cpp:5205
 msgid "1 minute"
 msgstr "1 minutė"
 
-#: src/gui/AstroCalcDialog.cpp:5208
+#: src/gui/AstroCalcDialog.cpp:5205
 msgid "10 minutes"
 msgstr "10 minučių"
 
-#: src/gui/AstroCalcDialog.cpp:5208
+#: src/gui/AstroCalcDialog.cpp:5205
 msgid "30 minutes"
 msgstr "30 minučių"
 
-#: src/gui/AstroCalcDialog.cpp:5208
+#: src/gui/AstroCalcDialog.cpp:5205
 msgid "1 hour"
 msgstr "1 valanda"
 
-#: src/gui/AstroCalcDialog.cpp:5208
+#: src/gui/AstroCalcDialog.cpp:5205
 msgid "6 hours"
 msgstr "6 valandos"
 
-#: src/gui/AstroCalcDialog.cpp:5208
+#: src/gui/AstroCalcDialog.cpp:5205
 msgid "12 hours"
 msgstr "12 valandų"
 
-#: src/gui/AstroCalcDialog.cpp:5209
+#: src/gui/AstroCalcDialog.cpp:5206
 msgid "1 solar day"
 msgstr "1 saulės diena"
 
-#: src/gui/AstroCalcDialog.cpp:5209
+#: src/gui/AstroCalcDialog.cpp:5206
 msgid "3 solar days"
 msgstr "3 saulės dienos"
 
-#: src/gui/AstroCalcDialog.cpp:5209
+#: src/gui/AstroCalcDialog.cpp:5206
 msgid "5 solar days"
 msgstr "5 saulės dienos"
 
-#: src/gui/AstroCalcDialog.cpp:5209
+#: src/gui/AstroCalcDialog.cpp:5206
 msgid "10 solar days"
 msgstr "10 saulės dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5209
+#: src/gui/AstroCalcDialog.cpp:5206
 msgid "15 solar days"
 msgstr "15 saulės dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5210
+#: src/gui/AstroCalcDialog.cpp:5207
 msgid "30 solar days"
 msgstr "30 saulės dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5210
+#: src/gui/AstroCalcDialog.cpp:5207
 msgid "60 solar days"
 msgstr "60 saulės dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5210
+#: src/gui/AstroCalcDialog.cpp:5207
 msgid "100 solar days"
 msgstr "100 saulės dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5210
+#: src/gui/AstroCalcDialog.cpp:5207
 msgid "500 solar days"
 msgstr "500 saulės dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5210
+#: src/gui/AstroCalcDialog.cpp:5207
 msgid "1 sidereal day"
 msgstr "1 žvaigždinė diena"
 
-#: src/gui/AstroCalcDialog.cpp:5211
+#: src/gui/AstroCalcDialog.cpp:5208
 msgid "3 sidereal days"
 msgstr "3 žvaigždinės dienos"
 
-#: src/gui/AstroCalcDialog.cpp:5211
+#: src/gui/AstroCalcDialog.cpp:5208
 msgid "5 sidereal days"
 msgstr "5 žvaigždinės dienos"
 
-#: src/gui/AstroCalcDialog.cpp:5211
+#: src/gui/AstroCalcDialog.cpp:5208
 msgid "10 sidereal days"
 msgstr "10 žvaigždinių dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5211
+#: src/gui/AstroCalcDialog.cpp:5208
 msgid "15 sidereal days"
 msgstr "15 žvaigždinių dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5212
+#: src/gui/AstroCalcDialog.cpp:5209
 msgid "30 sidereal days"
 msgstr "30 žvaigždinių dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5212
+#: src/gui/AstroCalcDialog.cpp:5209
 msgid "60 sidereal days"
 msgstr "60 žvaigždinių dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5212
+#: src/gui/AstroCalcDialog.cpp:5209
 msgid "100 sidereal days"
 msgstr "100 žvaigždinių dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5212
+#: src/gui/AstroCalcDialog.cpp:5209
 msgid "500 sidereal days"
 msgstr "500 žvaigždinių dienų"
 
-#: src/gui/AstroCalcDialog.cpp:5213
+#: src/gui/AstroCalcDialog.cpp:5210
 msgid "1 sidereal year"
 msgstr "1 žvaigždiniai metai"
 
-#: src/gui/AstroCalcDialog.cpp:5213
+#: src/gui/AstroCalcDialog.cpp:5210
 msgid "1 Julian day"
 msgstr "1  diena pagal Julijų"
 
-#: src/gui/AstroCalcDialog.cpp:5213
+#: src/gui/AstroCalcDialog.cpp:5210
 msgid "5 Julian days"
 msgstr "5 dienos pagal Julijų"
 
-#: src/gui/AstroCalcDialog.cpp:5213
+#: src/gui/AstroCalcDialog.cpp:5210
 msgid "10 Julian days"
 msgstr "10 dienų pagal Julijų"
 
-#: src/gui/AstroCalcDialog.cpp:5213
+#: src/gui/AstroCalcDialog.cpp:5210
 msgid "15 Julian days"
 msgstr "15 dienų pagal Julijų"
 
-#: src/gui/AstroCalcDialog.cpp:5214
+#: src/gui/AstroCalcDialog.cpp:5211
 msgid "30 Julian days"
 msgstr "30 dienų pagal Julijų"
 
-#: src/gui/AstroCalcDialog.cpp:5214
+#: src/gui/AstroCalcDialog.cpp:5211
 msgid "60 Julian days"
 msgstr "60 dienų pagal Julijų"
 
-#: src/gui/AstroCalcDialog.cpp:5214
+#: src/gui/AstroCalcDialog.cpp:5211
 msgid "100 Julian days"
 msgstr "100 dienų pagal Julijų"
 
-#: src/gui/AstroCalcDialog.cpp:5214
+#: src/gui/AstroCalcDialog.cpp:5211
 msgid "1 Julian year"
 msgstr "1 Metai pagal Julijų"
 
-#: src/gui/AstroCalcDialog.cpp:5215
+#: src/gui/AstroCalcDialog.cpp:5212
 msgid "1 Gaussian year"
 msgstr "1 Metai pagal Gausą"
 
-#: src/gui/AstroCalcDialog.cpp:5215
+#: src/gui/AstroCalcDialog.cpp:5212
 msgid "1 synodic month"
 msgstr "1 Sinodinis mėnuo"
 
-#: src/gui/AstroCalcDialog.cpp:5215
+#: src/gui/AstroCalcDialog.cpp:5212
 msgid "1 draconic month"
 msgstr "1 drakoniškasis mėnuo"
 
-#: src/gui/AstroCalcDialog.cpp:5215
+#: src/gui/AstroCalcDialog.cpp:5212
 msgid "1 mean tropical month"
 msgstr "1 Vidutinis atogrąžinis mėnuo"
 
-#: src/gui/AstroCalcDialog.cpp:5216
+#: src/gui/AstroCalcDialog.cpp:5213
 msgid "1 anomalistic month"
 msgstr "1 anomalusis mėnuo"
 
-#: src/gui/AstroCalcDialog.cpp:5216
+#: src/gui/AstroCalcDialog.cpp:5213
 msgid "1 anomalistic year"
 msgstr "1 anomalistiniai metai"
 
-#: src/gui/AstroCalcDialog.cpp:5216
+#: src/gui/AstroCalcDialog.cpp:5213
 msgid "1 tritos"
 msgstr "1 tritas"
 
-#: src/gui/AstroCalcDialog.cpp:5216
+#: src/gui/AstroCalcDialog.cpp:5213
 msgid "1 saros"
 msgstr "1 sarosas"
 
-#: src/gui/AstroCalcDialog.cpp:5216
+#: src/gui/AstroCalcDialog.cpp:5213
 msgid "1 Metonic cycle"
 msgstr "1 Metoninis ciklas"
 
-#: src/gui/AstroCalcDialog.cpp:5217
+#: src/gui/AstroCalcDialog.cpp:5214
 msgid "1  inex"
 msgstr " 1 ineksas"
 
-#: src/gui/AstroCalcDialog.cpp:5217
+#: src/gui/AstroCalcDialog.cpp:5214
 msgid "custom interval"
 msgstr "pasirinktinis intervalas"
 
-#: src/gui/AstroCalcDialog.cpp:5217 src/ui_astroCalcCustomStepsDialog.h:212
+#: src/gui/AstroCalcDialog.cpp:5214 src/ui_astroCalcCustomStepsDialog.h:212
 msgid "Sun at preset altitude"
 msgstr "Saulė nustatytoje altitudėje"
 
-#: src/gui/AstroCalcDialog.cpp:5217 src/ui_astroCalcCustomStepsDialog.h:215
+#: src/gui/AstroCalcDialog.cpp:5214 src/ui_astroCalcCustomStepsDialog.h:215
 msgid "Opposition of planet"
 msgstr "Planetos opozicija"
 
-#: src/gui/AstroCalcDialog.cpp:5253
+#: src/gui/AstroCalcDialog.cpp:5250
 msgctxt "time unit measurement"
 msgid "minutes"
 msgstr "minutės"
 
-#: src/gui/AstroCalcDialog.cpp:5253
+#: src/gui/AstroCalcDialog.cpp:5250
 msgctxt "time unit measurement"
 msgid "hours"
 msgstr "valandos"
 
-#: src/gui/AstroCalcDialog.cpp:5254
+#: src/gui/AstroCalcDialog.cpp:5251
 msgctxt "time unit measurement"
 msgid "days"
 msgstr "dienos"
 
-#: src/gui/AstroCalcDialog.cpp:5254
+#: src/gui/AstroCalcDialog.cpp:5251
 msgctxt "time unit measurement"
 msgid "weeks"
 msgstr "savaitės"
 
-#: src/gui/AstroCalcDialog.cpp:5255
+#: src/gui/AstroCalcDialog.cpp:5252
 msgctxt "time unit measurement"
 msgid "months"
 msgstr "mėnesiai"
 
-#: src/gui/AstroCalcDialog.cpp:5255
+#: src/gui/AstroCalcDialog.cpp:5252
 msgctxt "time unit measurement"
 msgid "years"
 msgstr "metai"
 
-#: src/gui/AstroCalcDialog.cpp:5402
+#: src/gui/AstroCalcDialog.cpp:5399
 msgid "Latest selected object"
 msgstr "Paskutinis pasirinktas objektas"
 
-#: src/gui/AstroCalcDialog.cpp:5402
+#: src/gui/AstroCalcDialog.cpp:5399
 msgid "Solar system"
 msgstr "Saulės sistema"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5403 src/gui/AstroCalcDialog.cpp:7760
+#: src/gui/AstroCalcDialog.cpp:5400 src/gui/AstroCalcDialog.cpp:7757
 #: src/translations.h:41
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:480
 msgid "Asteroids"
 msgstr "Asteroidai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5403 src/gui/AstroCalcDialog.cpp:7762
+#: src/gui/AstroCalcDialog.cpp:5400 src/gui/AstroCalcDialog.cpp:7759
 #: src/translations.h:45
 msgid "Plutinos"
 msgstr "Plutinai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5403 src/gui/AstroCalcDialog.cpp:7761
+#: src/gui/AstroCalcDialog.cpp:5400 src/gui/AstroCalcDialog.cpp:7758
 #: src/translations.h:39
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:481
 msgid "Comets"
 msgstr "Kometos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5403 src/gui/AstroCalcDialog.cpp:7763
+#: src/gui/AstroCalcDialog.cpp:5400 src/gui/AstroCalcDialog.cpp:7760
 #: src/translations.h:47
 msgid "Dwarf planets"
 msgstr "Nykštukinės planetos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5404 src/gui/AstroCalcDialog.cpp:7764
+#: src/gui/AstroCalcDialog.cpp:5401 src/gui/AstroCalcDialog.cpp:7761
 #: src/translations.h:49
 msgid "Cubewanos"
 msgstr "Kubevanai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5404 src/gui/AstroCalcDialog.cpp:7765
+#: src/gui/AstroCalcDialog.cpp:5401 src/gui/AstroCalcDialog.cpp:7762
 #: src/translations.h:51
 msgid "Scattered disc objects"
 msgstr "išsklaidyto disko formos objektai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5404 src/gui/AstroCalcDialog.cpp:7766
+#: src/gui/AstroCalcDialog.cpp:5401 src/gui/AstroCalcDialog.cpp:7763
 #: src/translations.h:53
 msgid "Oort cloud objects"
 msgstr "Orto debesies objektai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5405 src/gui/AstroCalcDialog.cpp:7767
+#: src/gui/AstroCalcDialog.cpp:5402 src/gui/AstroCalcDialog.cpp:7764
 #: src/translations.h:55
 msgid "Sednoids"
 msgstr "Sednoidai"
 
-#: src/gui/AstroCalcDialog.cpp:5405
+#: src/gui/AstroCalcDialog.cpp:5402
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "Ryškios žvaigždės (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:5406
+#: src/gui/AstroCalcDialog.cpp:5403
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr "Ryškios dvigubos žvaigždės (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:5407
+#: src/gui/AstroCalcDialog.cpp:5404
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr "Ryškios kintamosios žvaigždės (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:5408
+#: src/gui/AstroCalcDialog.cpp:5405
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "Ryškūs žvaigždždžių spiečiai (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:5408
+#: src/gui/AstroCalcDialog.cpp:5405
 #, qt-format
 msgid "Planetary nebulae (<%1 mag)"
 msgstr "Planetiškieji ūkai (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:5409
+#: src/gui/AstroCalcDialog.cpp:5406
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "Ryškūs ūkai (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5409 src/gui/AstroCalcDialog.cpp:7757
+#: src/gui/AstroCalcDialog.cpp:5406 src/gui/AstroCalcDialog.cpp:7754
 #: src/translations.h:292 src/ui_viewDialog.h:4723
 #: src/ui_dsoColorsDialog.h:603
 msgid "Dark nebulae"
 msgstr "Tamsieji ūkai"
 
-#: src/gui/AstroCalcDialog.cpp:5410
+#: src/gui/AstroCalcDialog.cpp:5407
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "Ryškios galaktikos (<%1 mag)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5410 src/gui/AstroCalcDialog.cpp:7772
+#: src/gui/AstroCalcDialog.cpp:5407 src/gui/AstroCalcDialog.cpp:7769
 #: src/translations.h:342 src/ui_dsoColorsDialog.h:636
 msgid "Symbiotic stars"
 msgstr "Simbiotinės žvaigždės"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5411 src/gui/AstroCalcDialog.cpp:7773
+#: src/gui/AstroCalcDialog.cpp:5408 src/gui/AstroCalcDialog.cpp:7770
 #: src/translations.h:344 src/ui_dsoColorsDialog.h:615
 msgid "Emission-line stars"
 msgstr "Žvaigždės su emisijos linija"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5411 src/gui/AstroCalcDialog.cpp:7778
+#: src/gui/AstroCalcDialog.cpp:5408 src/gui/AstroCalcDialog.cpp:7775
 #: src/translations.h:57
 msgid "Interstellar objects"
 msgstr "Tarpžvaigždiniai objektai"
 
-#: src/gui/AstroCalcDialog.cpp:5412
+#: src/gui/AstroCalcDialog.cpp:5409
 msgid "Planets and Sun"
 msgstr "Planetos ir Saulė"
 
-#: src/gui/AstroCalcDialog.cpp:5412
+#: src/gui/AstroCalcDialog.cpp:5409
 msgid "Sun, planets and moons of observer's planet"
 msgstr "Saulė, planetos ir  stebėtojo planetos mėnuliai"
 
-#: src/gui/AstroCalcDialog.cpp:5413
+#: src/gui/AstroCalcDialog.cpp:5410
 #, qt-format
 msgid "Bright Solar system objects (<%1 mag)"
 msgstr "Ryškūs Saulės sistemos objektai (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:5414
+#: src/gui/AstroCalcDialog.cpp:5411
 msgid "Moons of first body"
 msgstr "Pirmojo kūno mėnuliai"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5415 src/gui/AstroCalcDialog.cpp:7790
+#: src/gui/AstroCalcDialog.cpp:5412 src/gui/AstroCalcDialog.cpp:7787
 #: src/translations.h:429
 msgid "Bright carbon stars"
 msgstr "Ryškios anglies žvaigždės"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5415 src/gui/AstroCalcDialog.cpp:7791
+#: src/gui/AstroCalcDialog.cpp:5412 src/gui/AstroCalcDialog.cpp:7788
 #: src/translations.h:431
 msgid "Bright barium stars"
 msgstr "Ryškios bario žvaigždės"
 
-#: src/gui/AstroCalcDialog.cpp:5416
+#: src/gui/AstroCalcDialog.cpp:5413
 msgid "Sun, planets and moons of first body and observer's planet"
 msgstr "Saulė, planetos ir pirmojo kūno mėnuliai bei stebėtojo planeta"
 
-#: src/gui/AstroCalcDialog.cpp:5635
+#: src/gui/AstroCalcDialog.cpp:5632
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr ""
 "Prašome pasirinkti objektą, kad būtų galima nubraižyti jo grafiką „Altitudė "
 "per Laiką“."
 
-#: src/gui/AstroCalcDialog.cpp:5866 src/gui/AstroCalcDialog.cpp:5880
+#: src/gui/AstroCalcDialog.cpp:5863 src/gui/AstroCalcDialog.cpp:5877
 msgid "Magnitude vs. Time"
 msgstr "Ryškis per laiką"
 
-#: src/gui/AstroCalcDialog.cpp:5867 src/gui/AstroCalcDialog.cpp:5881
+#: src/gui/AstroCalcDialog.cpp:5864 src/gui/AstroCalcDialog.cpp:5878
 msgid "Phase vs. Time"
 msgstr "Fazė per laiką"
 
-#: src/gui/AstroCalcDialog.cpp:5868 src/gui/AstroCalcDialog.cpp:5882
+#: src/gui/AstroCalcDialog.cpp:5865 src/gui/AstroCalcDialog.cpp:5879
 msgid "Distance vs. Time"
 msgstr "Atstumas per laiką"
 
-#: src/gui/AstroCalcDialog.cpp:5869 src/gui/AstroCalcDialog.cpp:5883
+#: src/gui/AstroCalcDialog.cpp:5866 src/gui/AstroCalcDialog.cpp:5880
 msgid "Elongation vs. Time"
 msgstr "Elongacija laike"
 
-#: src/gui/AstroCalcDialog.cpp:5870 src/gui/AstroCalcDialog.cpp:5884
+#: src/gui/AstroCalcDialog.cpp:5867 src/gui/AstroCalcDialog.cpp:5881
 msgid "Angular size vs. Time"
 msgstr "Kampinis dydis laike"
 
-#: src/gui/AstroCalcDialog.cpp:5871 src/gui/AstroCalcDialog.cpp:5885
+#: src/gui/AstroCalcDialog.cpp:5868 src/gui/AstroCalcDialog.cpp:5882
 msgid "Phase angle vs. Time"
 msgstr "Fazinis kampas per laiką"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:5873 src/gui/AstroCalcDialog.cpp:5887
+#: src/gui/AstroCalcDialog.cpp:5870 src/gui/AstroCalcDialog.cpp:5884
 msgid "Heliocentric distance vs. Time"
 msgstr "Heliocentrinis atstumas per laiką"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:5875 src/gui/AstroCalcDialog.cpp:5889
+#: src/gui/AstroCalcDialog.cpp:5872 src/gui/AstroCalcDialog.cpp:5886
 msgid "Transit altitude vs. Time"
 msgstr "Tranzito altitudė per laiką"
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:5877 src/gui/AstroCalcDialog.cpp:5891
+#: src/gui/AstroCalcDialog.cpp:5874 src/gui/AstroCalcDialog.cpp:5888
 msgid "Right ascension vs. Time"
 msgstr "Rektascensija per laiką"
 
-#: src/gui/AstroCalcDialog.cpp:5878 src/gui/AstroCalcDialog.cpp:5892
+#: src/gui/AstroCalcDialog.cpp:5875 src/gui/AstroCalcDialog.cpp:5889
 msgid "Declination vs. Time"
 msgstr "Deklinacija per laiką"
 
 #. TRANSLATORS: hours.
 #. TRANSLATORS: duration in hours
 #. TRANSLATORS: hours.
-#: src/gui/AstroCalcDialog.cpp:5934 src/gui/AstroCalcChart.cpp:446
+#: src/gui/AstroCalcDialog.cpp:5931 src/gui/AstroCalcChart.cpp:446
 #: src/gui/AstroCalcChart.cpp:472
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:903
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1196
@@ -9980,7 +9982,7 @@ msgctxt "time"
 msgid "h"
 msgstr "val."
 
-#: src/gui/AstroCalcDialog.cpp:6030
+#: src/gui/AstroCalcDialog.cpp:6027
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
@@ -9988,81 +9990,81 @@ msgstr ""
 "Pasirinkite objektą norėdami nubraižyti jo \"Mėnesio pakilimo\" grafiką "
 "einamaisiais metais pasirinktu laiku."
 
-#: src/gui/AstroCalcDialog.cpp:6069
+#: src/gui/AstroCalcDialog.cpp:6066
 msgid "Phenomenon"
 msgstr "Reiškinys"
 
-#: src/gui/AstroCalcDialog.cpp:6071
+#: src/gui/AstroCalcDialog.cpp:6068
 msgid "Object 1"
 msgstr "Objektas 1"
 
 #. TRANSLATORS: Magnitude of object 1
-#: src/gui/AstroCalcDialog.cpp:6073
+#: src/gui/AstroCalcDialog.cpp:6070
 msgid "Mag. 1"
 msgstr "Ršk. 1"
 
-#: src/gui/AstroCalcDialog.cpp:6074
+#: src/gui/AstroCalcDialog.cpp:6071
 msgid "Object 2"
 msgstr "Objektas 2"
 
 #. TRANSLATORS: Magnitude of object 2
-#: src/gui/AstroCalcDialog.cpp:6076
+#: src/gui/AstroCalcDialog.cpp:6073
 msgid "Mag. 2"
 msgstr "Ršk. 2"
 
-#: src/gui/AstroCalcDialog.cpp:6077
+#: src/gui/AstroCalcDialog.cpp:6074
 msgid "Separation"
 msgstr "Atskyrimas"
 
-#: src/gui/AstroCalcDialog.cpp:6078
+#: src/gui/AstroCalcDialog.cpp:6075
 msgid "Elevation"
 msgstr "Aukštis"
 
-#: src/gui/AstroCalcDialog.cpp:6438
+#: src/gui/AstroCalcDialog.cpp:6435
 msgid "Save calculated phenomena as..."
 msgstr "Išsaugoti apskaičiuotą reiškinį kaip..."
 
-#: src/gui/AstroCalcDialog.cpp:6442 src/ui_astroCalcDialog.h:2291
+#: src/gui/AstroCalcDialog.cpp:6439 src/ui_astroCalcDialog.h:2291
 msgid "Phenomena"
 msgstr "Reiškiniai"
 
-#: src/gui/AstroCalcDialog.cpp:6459
+#: src/gui/AstroCalcDialog.cpp:6456
 msgid "Magnitude of first object"
 msgstr "Pirmojo objekto dydis"
 
-#: src/gui/AstroCalcDialog.cpp:6462
+#: src/gui/AstroCalcDialog.cpp:6459
 msgid "Magnitude of second object"
 msgstr "Antrojo objekto dydis"
 
-#: src/gui/AstroCalcDialog.cpp:6468
+#: src/gui/AstroCalcDialog.cpp:6465
 msgid "Elevation of first object at moment of phenomena"
 msgstr "Pirmojo objekto aukštis reiškinio metu"
 
-#: src/gui/AstroCalcDialog.cpp:6470 src/gui/AstroCalcDialog.cpp:6617
+#: src/gui/AstroCalcDialog.cpp:6467 src/gui/AstroCalcDialog.cpp:6614
 msgid "Angular distance from the Sun"
 msgstr "Kampinis atstumas nuo Saulės "
 
-#: src/gui/AstroCalcDialog.cpp:6473 src/gui/AstroCalcDialog.cpp:6618
+#: src/gui/AstroCalcDialog.cpp:6470 src/gui/AstroCalcDialog.cpp:6615
 msgid "Angular distance from the Moon"
 msgstr "Kampinis atstumas nuo Mėnulio"
 
-#: src/gui/AstroCalcDialog.cpp:6491 src/gui/AstroCalcDialog.cpp:6670
-#: src/gui/AstroCalcDialog.cpp:6745
+#: src/gui/AstroCalcDialog.cpp:6488 src/gui/AstroCalcDialog.cpp:6667
+#: src/gui/AstroCalcDialog.cpp:6742
 msgid "Conjunction"
 msgstr "Konjunkcija"
 
-#: src/gui/AstroCalcDialog.cpp:6500
+#: src/gui/AstroCalcDialog.cpp:6497
 msgid "Shadow transit"
 msgstr "Šešėlio tranzitas"
 
-#: src/gui/AstroCalcDialog.cpp:6503 src/gui/AstroCalcDialog.cpp:6510
-#: src/gui/AstroCalcDialog.cpp:6566 src/gui/AstroCalcDialog.cpp:6572
-#: src/gui/AstroCalcDialog.cpp:6757 src/gui/AstroCalcDialog.cpp:6773
-#: src/gui/AstroCalcDialog.cpp:6779
+#: src/gui/AstroCalcDialog.cpp:6500 src/gui/AstroCalcDialog.cpp:6507
+#: src/gui/AstroCalcDialog.cpp:6563 src/gui/AstroCalcDialog.cpp:6569
+#: src/gui/AstroCalcDialog.cpp:6754 src/gui/AstroCalcDialog.cpp:6770
+#: src/gui/AstroCalcDialog.cpp:6776
 msgid "Eclipse"
 msgstr "Užtemimas"
 
-#: src/gui/AstroCalcDialog.cpp:6507 src/gui/AstroCalcDialog.cpp:6754
+#: src/gui/AstroCalcDialog.cpp:6504 src/gui/AstroCalcDialog.cpp:6751
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:368
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:372
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:376
@@ -10071,58 +10073,58 @@ msgstr "Užtemimas"
 msgid "Opposition"
 msgstr "Opozicija"
 
-#: src/gui/AstroCalcDialog.cpp:6519
+#: src/gui/AstroCalcDialog.cpp:6516
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:358
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:364
 msgid "Greatest eastern elongation"
 msgstr "Didžiausia rytinė elongacija"
 
-#: src/gui/AstroCalcDialog.cpp:6522
+#: src/gui/AstroCalcDialog.cpp:6519
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:359
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:365
 msgid "Greatest western elongation"
 msgstr "Didžiausia vakarinė elongacija"
 
-#: src/gui/AstroCalcDialog.cpp:6529
+#: src/gui/AstroCalcDialog.cpp:6526
 msgid "Eastern quadrature"
 msgstr "Rytinė kvadratūra"
 
-#: src/gui/AstroCalcDialog.cpp:6532
+#: src/gui/AstroCalcDialog.cpp:6529
 msgid "Western quadrature"
 msgstr "Vakarinė kvadratūra"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:6539
+#: src/gui/AstroCalcDialog.cpp:6536
 msgid "Stationary (begin retrograde motion)"
 msgstr "Stacionarus (pradeda retrogradinį judėjimą)"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:6544
+#: src/gui/AstroCalcDialog.cpp:6541
 msgid "Stationary (begin prograde motion)"
 msgstr "Stacionarus ( pradeda judėti progreso kryptimi)"
 
-#: src/gui/AstroCalcDialog.cpp:6550
+#: src/gui/AstroCalcDialog.cpp:6547
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:396
 msgid "Perihelion"
 msgstr "Perihelis"
 
-#: src/gui/AstroCalcDialog.cpp:6552
+#: src/gui/AstroCalcDialog.cpp:6549
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:397
 msgid "Aphelion"
 msgstr "Afelis"
 
-#: src/gui/AstroCalcDialog.cpp:6559 src/gui/AstroCalcDialog.cpp:6766
+#: src/gui/AstroCalcDialog.cpp:6556 src/gui/AstroCalcDialog.cpp:6763
 msgctxt "passage of a celestial body in front of another"
 msgid "Transit"
 msgstr "Tranzitas"
 
-#: src/gui/AstroCalcDialog.cpp:6562 src/gui/AstroCalcDialog.cpp:6675
-#: src/gui/AstroCalcDialog.cpp:6769
+#: src/gui/AstroCalcDialog.cpp:6559 src/gui/AstroCalcDialog.cpp:6672
+#: src/gui/AstroCalcDialog.cpp:6766
 msgid "Occultation"
 msgstr "Okultacija, visiškas saulės užtemimas"
 
-#: src/gui/AstroCalcDialog.cpp:6582 src/gui/AstroCalcDialog.cpp:6584
-#: src/gui/AstroCalcDialog.cpp:6792 src/gui/AstroCalcDialog.cpp:6794
+#: src/gui/AstroCalcDialog.cpp:6579 src/gui/AstroCalcDialog.cpp:6581
+#: src/gui/AstroCalcDialog.cpp:6789 src/gui/AstroCalcDialog.cpp:6791
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:357
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:363
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:369
@@ -10133,263 +10135,263 @@ msgstr "Okultacija, visiškas saulės užtemimas"
 msgid "Superior conjunction"
 msgstr "Išorinė konjunkcija"
 
-#: src/gui/AstroCalcDialog.cpp:6582 src/gui/AstroCalcDialog.cpp:6584
-#: src/gui/AstroCalcDialog.cpp:6792 src/gui/AstroCalcDialog.cpp:6794
+#: src/gui/AstroCalcDialog.cpp:6579 src/gui/AstroCalcDialog.cpp:6581
+#: src/gui/AstroCalcDialog.cpp:6789 src/gui/AstroCalcDialog.cpp:6791
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:356
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:362
 msgid "Inferior conjunction"
 msgstr "Vidinė konjunkcija"
 
-#: src/gui/AstroCalcDialog.cpp:6621
+#: src/gui/AstroCalcDialog.cpp:6618
 msgid "Angular distance from the Sun for second object"
 msgstr "Antrojo objekto kampinis atstumas nuo Saulės"
 
-#: src/gui/AstroCalcDialog.cpp:6622
+#: src/gui/AstroCalcDialog.cpp:6619
 msgid "Angular distance from the Moon for second object"
 msgstr "Antrojo objekto kampinis atstumas iki Mėnulio"
 
-#: src/gui/AstroCalcDialog.cpp:7633 src/gui/AstroCalcDialog.cpp:7638
+#: src/gui/AstroCalcDialog.cpp:7630 src/gui/AstroCalcDialog.cpp:7635
 #: src/ui_astroCalcDialog.h:2600
 msgid "Table of solar eclipses"
 msgstr "Saulės užtemimų lentelė"
 
-#: src/gui/AstroCalcDialog.cpp:7634
+#: src/gui/AstroCalcDialog.cpp:7631
 msgid "Table of solar eclipses visible in current location"
 msgstr "Saulės užtemimų, matomų dabartinėje vietoje lentelė "
 
-#: src/gui/AstroCalcDialog.cpp:7635
+#: src/gui/AstroCalcDialog.cpp:7632
 msgid "Table of lunar eclipses"
 msgstr "Mėnulio užtemimų lentelė"
 
-#: src/gui/AstroCalcDialog.cpp:7636
+#: src/gui/AstroCalcDialog.cpp:7633
 msgid "Transits of Mercury and Venus across the Sun"
 msgstr " Merkurijaus ir Veneros tranzitai per Saulę."
 
-#: src/gui/AstroCalcDialog.cpp:7732
+#: src/gui/AstroCalcDialog.cpp:7729
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "Vakare"
 
-#: src/gui/AstroCalcDialog.cpp:7733
+#: src/gui/AstroCalcDialog.cpp:7730
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "Ryte"
 
-#: src/gui/AstroCalcDialog.cpp:7734
+#: src/gui/AstroCalcDialog.cpp:7731
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "Apie vidurnaktį"
 
-#: src/gui/AstroCalcDialog.cpp:7735
+#: src/gui/AstroCalcDialog.cpp:7732
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "Bet kada naktį"
 
-#: src/gui/AstroCalcDialog.cpp:7755
+#: src/gui/AstroCalcDialog.cpp:7752
 msgid "Bright stars"
 msgstr "Ryškios žvaigždės"
 
-#: src/gui/AstroCalcDialog.cpp:7756 src/ui_viewDialog.h:4722
+#: src/gui/AstroCalcDialog.cpp:7753 src/ui_viewDialog.h:4722
 msgid "Bright nebulae"
 msgstr "Ryškūs ūkai"
 
-#: src/gui/AstroCalcDialog.cpp:7758 src/ui_viewDialog.h:4726
+#: src/gui/AstroCalcDialog.cpp:7755 src/ui_viewDialog.h:4726
 #: src/ui_dsoColorsDialog.h:543
 msgid "Galaxies"
 msgstr "Galaktikos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7759 src/translations.h:284
+#: src/gui/AstroCalcDialog.cpp:7756 src/translations.h:284
 #: src/ui_viewDialog.h:4729 src/ui_dsoColorsDialog.h:547
 msgid "Open star clusters"
 msgstr "Padrikieji žvaigždžių spiečiai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7768 src/translations.h:290
+#: src/gui/AstroCalcDialog.cpp:7765 src/translations.h:290
 #: src/ui_viewDialog.h:4721 src/ui_dsoColorsDialog.h:536
 msgid "Planetary nebulae"
 msgstr "Planetiškieji ūkai"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7769 src/translations.h:419
+#: src/gui/AstroCalcDialog.cpp:7766 src/translations.h:419
 msgid "Bright double stars"
 msgstr "Ryškios dvigubos žvaigždės"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7770 src/translations.h:421
+#: src/gui/AstroCalcDialog.cpp:7767 src/translations.h:421
 msgid "Bright variable stars"
 msgstr "Ryškios kintančiosios žvaigždės"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7771 src/translations.h:423
+#: src/gui/AstroCalcDialog.cpp:7768 src/translations.h:423
 msgid "Bright stars with high proper motion"
 msgstr "Ryškios žvaigždės su dideliu tikruoju judesiu"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7774 src/translations.h:320
+#: src/gui/AstroCalcDialog.cpp:7771 src/translations.h:320
 #: src/ui_dsoColorsDialog.h:584
 msgid "Supernova candidates"
 msgstr "Supernovos kandidatės"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7775 src/translations.h:322
+#: src/gui/AstroCalcDialog.cpp:7772 src/translations.h:322
 #: src/ui_dsoColorsDialog.h:622
 msgid "Supernova remnant candidates"
 msgstr "Supernovos liekanų kandidatės"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7776 src/translations.h:318
+#: src/gui/AstroCalcDialog.cpp:7773 src/translations.h:318
 #: src/ui_viewDialog.h:4728 src/ui_dsoColorsDialog.h:529
 msgid "Supernova remnants"
 msgstr "Supernovos liekanos"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7777 src/translations.h:346
+#: src/gui/AstroCalcDialog.cpp:7774 src/translations.h:346
 #: src/ui_viewDialog.h:4725 src/ui_dsoColorsDialog.h:635
 msgid "Clusters of galaxies"
 msgstr "Galaktikų spiečius"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7779 src/translations.h:286
+#: src/gui/AstroCalcDialog.cpp:7776 src/translations.h:286
 #: src/ui_viewDialog.h:4731 src/ui_dsoColorsDialog.h:522
 msgid "Globular star clusters"
 msgstr "Kamuoliniai žvaigždžių spiečiai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7780 src/translations.h:348
+#: src/gui/AstroCalcDialog.cpp:7777 src/translations.h:348
 #: src/ui_dsoColorsDialog.h:648
 msgid "Regions of the sky"
 msgstr "Dangaus sritys"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7781 src/translations.h:300
+#: src/gui/AstroCalcDialog.cpp:7778 src/translations.h:300
 #: src/ui_viewDialog.h:4720 src/ui_dsoColorsDialog.h:513
 msgid "Active galaxies"
 msgstr "Aktyvios galaktikos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7782 src/translations.h:304
+#: src/gui/AstroCalcDialog.cpp:7779 src/translations.h:304
 #: src/ui_viewDialog.h:4727 src/ui_dsoColorsDialog.h:594
 msgid "Interacting galaxies"
 msgstr "Sąveikaujančios galaktikos"
 
-#: src/gui/AstroCalcDialog.cpp:7784
+#: src/gui/AstroCalcDialog.cpp:7781
 msgid "Messier objects"
 msgstr "Messier objektai"
 
-#: src/gui/AstroCalcDialog.cpp:7785
+#: src/gui/AstroCalcDialog.cpp:7782
 msgid "NGC/IC objects"
 msgstr "NGC/IC objektai"
 
-#: src/gui/AstroCalcDialog.cpp:7786
+#: src/gui/AstroCalcDialog.cpp:7783
 msgid "Caldwell objects"
 msgstr "Caldwell objektai"
 
-#: src/gui/AstroCalcDialog.cpp:7787
+#: src/gui/AstroCalcDialog.cpp:7784
 msgid "Herschel 400 objects"
 msgstr "Herschel 400 objektai"
 
-#: src/gui/AstroCalcDialog.cpp:7788
+#: src/gui/AstroCalcDialog.cpp:7785
 msgid "Algol-type eclipsing systems"
 msgstr "Algolo tipo užtemdomos sistemos"
 
-#: src/gui/AstroCalcDialog.cpp:7789
+#: src/gui/AstroCalcDialog.cpp:7786
 msgid "The classical cepheids"
 msgstr "Klasikinės cefeidės"
 
-#: src/gui/AstroCalcDialog.cpp:7793
+#: src/gui/AstroCalcDialog.cpp:7790
 msgid "Bright nova stars"
 msgstr "Šviesios nova žvaigždės"
 
-#: src/gui/AstroCalcDialog.cpp:7795
+#: src/gui/AstroCalcDialog.cpp:7792
 msgid "Bright supernova stars"
 msgstr "Šviesios supernovos žvaigždės"
 
-#: src/gui/AstroCalcDialog.cpp:7798 plugins/Pulsars/src/Pulsars.cpp:73
+#: src/gui/AstroCalcDialog.cpp:7795 plugins/Pulsars/src/Pulsars.cpp:73
 #: plugins/Pulsars/src/Pulsars.cpp:175
 msgid "Pulsars"
 msgstr "Pulsarai"
 
-#: src/gui/AstroCalcDialog.cpp:7801
+#: src/gui/AstroCalcDialog.cpp:7798
 msgid "Exoplanetary systems"
 msgstr "Egzoplanetinės sistemos"
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:7931
+#: src/gui/AstroCalcDialog.cpp:7928
 msgid "Ang. Size"
 msgstr "Kamp. Dydis"
 
 #. TRANSLATORS: IAU Constellation
-#: src/gui/AstroCalcDialog.cpp:7934
+#: src/gui/AstroCalcDialog.cpp:7931
 msgctxt "IAU Constellation"
 msgid "Const."
 msgstr "Žvgždn."
 
-#: src/gui/AstroCalcDialog.cpp:8051 src/ui_viewDialog.h:4760
+#: src/gui/AstroCalcDialog.cpp:8048 src/ui_viewDialog.h:4760
 #: src/ui_astroCalcDialog.h:2541
 msgid "Limit angular size:"
 msgstr "Kamp. dydžio ribos:"
 
-#: src/gui/AstroCalcDialog.cpp:8052 src/ui_astroCalcDialog.h:2539
+#: src/gui/AstroCalcDialog.cpp:8049 src/ui_astroCalcDialog.h:2539
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "Nustatyti ribas matomų dangaus objektų kampiniam dydžiui"
 
-#: src/gui/AstroCalcDialog.cpp:8053 src/ui_astroCalcDialog.h:2533
+#: src/gui/AstroCalcDialog.cpp:8050 src/ui_astroCalcDialog.h:2533
 msgid "Minimal angular size for visible celestial objects"
 msgstr "Minimalus kampinis dydis matomiems dangaus objektams"
 
-#: src/gui/AstroCalcDialog.cpp:8054 src/ui_astroCalcDialog.h:2536
+#: src/gui/AstroCalcDialog.cpp:8051 src/ui_astroCalcDialog.h:2536
 msgid "Maximum angular size for visible celestial objects"
 msgstr "Maksimalus kampinis dydis matomiems dangaus objektams"
 
-#: src/gui/AstroCalcDialog.cpp:8326
+#: src/gui/AstroCalcDialog.cpp:8323
 msgid "Limit angular separation:"
 msgstr "Ribinis kampinis atskyrimas:"
 
-#: src/gui/AstroCalcDialog.cpp:8327
+#: src/gui/AstroCalcDialog.cpp:8324
 msgid "Set limits for angular separation for visible double stars"
 msgstr "Nustatyti matomų dvigubų žvaigždžių kampinio atskyrimo ribas"
 
-#: src/gui/AstroCalcDialog.cpp:8328
+#: src/gui/AstroCalcDialog.cpp:8325
 msgid "Minimal angular separation for visible double stars"
 msgstr "Minimalus matomų dvigubų žvaigždžių kampinis atskyrimas"
 
-#: src/gui/AstroCalcDialog.cpp:8329
+#: src/gui/AstroCalcDialog.cpp:8326
 msgid "Maximum angular separation for visible double stars"
 msgstr "Didžiausias matomų dvigubų žvaigždžių kampinis atstumas"
 
-#: src/gui/AstroCalcDialog.cpp:8703
+#: src/gui/AstroCalcDialog.cpp:8700
 msgid "Save list of objects as..."
 msgstr "Išsaugoti objektų sąrašą kaip..."
 
-#: src/gui/AstroCalcDialog.cpp:8709 src/ui_astroCalcDialog.h:2297
+#: src/gui/AstroCalcDialog.cpp:8706 src/ui_astroCalcDialog.h:2297
 msgid "What's Up Tonight"
 msgstr "Kas vyksta šįvakar "
 
 #. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
-#: src/gui/AstroCalcDialog.cpp:8787
+#: src/gui/AstroCalcDialog.cpp:8784
 msgctxt "mean motion"
 msgid "day"
 msgstr "dieną"
 
-#: src/gui/AstroCalcDialog.cpp:8851
+#: src/gui/AstroCalcDialog.cpp:8848
 msgid "Linear and angular distances between selected objects"
 msgstr "Linijiniai ir kampiniai atstumai tarp pasirinktų objektų"
 
-#: src/gui/AstroCalcDialog.cpp:8921
+#: src/gui/AstroCalcDialog.cpp:8918
 msgid "Angular distance between the Moon and selected object"
 msgstr "Kampinis atstumas tarp Mėnulio ir pasirinkto objekto"
 
-#: src/gui/AstroCalcDialog.cpp:8987
+#: src/gui/AstroCalcDialog.cpp:8984
 msgid "Angular distance between the Moon and celestial object"
 msgstr "Kampinis atstumas tarp Mėnulio ir dangaus objekto"
 
-#: src/gui/AstroCalcDialog.cpp:9138
+#: src/gui/AstroCalcDialog.cpp:9135
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1619
 msgid "CSV (Comma delimited)"
 msgstr "CSV (Kableliais atskirtas)"
 
-#: src/gui/AstroCalcDialog.cpp:9141
+#: src/gui/AstroCalcDialog.cpp:9138
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1620
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Microsoft Excel Open XML Lentelė"
@@ -13440,7 +13442,7 @@ msgstr "&Pasirinkti"
 
 #: src/translations.h:847 src/ui_configurationDialog.h:2581
 #: src/ui_obsListDialog.h:365
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:692
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:396
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
@@ -15087,6 +15089,7 @@ msgstr "Pagalba"
 #: src/ui_helpDialogGui.h:242
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:200
 #: plugins/Planes/src/ui_planesDialog.h:276
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:279
 msgid "About"
 msgstr "Apie"
 
@@ -15265,7 +15268,7 @@ msgid "Max. results "
 msgstr "Maks. rezultatų"
 
 #: src/ui_searchDialogGui.h:857
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:564
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:634
 msgid "Coordinate system:"
 msgstr "Koordinačių sistema:"
 
@@ -16742,7 +16745,7 @@ msgstr "Skaityti tekstą"
 
 #: src/ui_viewDialog.h:5321 src/ui_viewDialog.h:5370
 #: src/ui_configurationDialog.h:2844
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1011
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1018
 msgid "Stop"
 msgstr "Stabdyti"
 
@@ -18658,6 +18661,7 @@ msgid "Export data..."
 msgstr "Eksportuoti duomenis..."
 
 #: src/ui_astroCalcDialog.h:2439
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:267
 msgid "Calculate"
 msgstr "Apskaičiuoti"
 
@@ -21267,7 +21271,7 @@ msgstr "Binoklis"
 #: plugins/Oculars/src/ui_ocularDialog.h:1575
 #: plugins/Oculars/src/ui_ocularDialog.h:1590
 #: plugins/Satellites/src/ui_satellitesDialog.h:1295
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:629
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
 msgstr "Pavadinimas:"
@@ -23650,7 +23654,7 @@ msgstr ""
 "yra pasenusi."
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1821
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1851
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar "
 "controller."
@@ -23659,13 +23663,13 @@ msgstr ""
 "valdikliu."
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1823
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1853
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr ""
 "Bet koks teleskopas ar teleskopo laikiklis, suderinamas su Meade LX200."
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1825
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1855
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable"
 " Set."
@@ -23673,18 +23677,18 @@ msgstr ""
 "Meade's ETX70 su #494 Autostar valdikliu ir #506 jungties kabelių rinkiniu."
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1827
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1857
 msgid "Losmandy's G-11 telescope mount."
 msgstr "Losmandy's G-11 teleskopo laikiklis."
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1829
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1859
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr "Wildcard Innovations' Argo Navis DTC Meade LX200 emuliacijos režimu."
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1831
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1861
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
 "Bet koks teleskopas ar teleskopo laikiklis, suderinamas su Celestron "
@@ -23692,7 +23696,7 @@ msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1833
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1863
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
@@ -23701,7 +23705,7 @@ msgstr ""
 "rankinį valdiklį."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1835
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1865
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
@@ -23737,18 +23741,19 @@ msgid "INDI Settings"
 msgstr "INDI Nustatymai"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:127
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:579
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:663
 msgid "TCP port:"
 msgstr "TCP prievadas:"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:129
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:577
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:661
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr "Teleskopų serverio pavadinimas arba IPv4 adresas"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:131
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:575
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:649
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:659
 msgid "Host:"
 msgstr "Serveris:"
 
@@ -23816,7 +23821,7 @@ msgstr ""
 msgid "Use Stellarium settings"
 msgstr "Naudokite Stellarium nustatymus"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:190
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:193
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium. Increase this value if the reticle is skipping."
@@ -23824,7 +23829,7 @@ msgstr ""
 "Apytiksliai tai užtrunka laiko, kol signalai iš teleskopo pasiekia "
 "Stellarium. Padidinkite šią vertę, jei taikinys praleidžiamas."
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:194
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:197
 msgid ""
 "Refresh rate of the RTS2 telescope. Delay before sending next telescope "
 "status request. The default value of 0.5 second works fine with most setups."
@@ -23833,11 +23838,11 @@ msgstr ""
 " būsenos užklausą. Numatytoji reikšmė 0,5 sekundės veikia gerai su dauguma "
 "nustatymų."
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:268
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:271
 msgid "Add New Telescope"
 msgstr "Pridėti naują teleskopą"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:278
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:281
 msgid "Configure Telescope"
 msgstr "Konfigūruokite Teleskopą"
 
@@ -23895,7 +23900,11 @@ msgstr "RTS2 palaikymas"
 msgid "INDI Telescope Client"
 msgstr "INDI Teleskopo Klientas"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
+msgid "LX200 telescope control over TCP/IP"
+msgstr "LX200 teleskopo valdymas per TCP/IP"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
@@ -23903,7 +23912,7 @@ msgstr ""
 "Šis įskiepis yra pagrįstas ir perpanaudoja daugybę kodo pagal GNU General "
 "Public License:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 msgid ""
 "the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in "
 "Stellarium's code (the client side of Stellarium's original telescope "
@@ -23912,11 +23921,11 @@ msgstr ""
 "Teleskope, TelescopeDummy, TelescopeTcp ir TelescopeMgr klasės Stellarium "
 "kodo (Stellarium pradinio teleskopo valdymo funkcijos kliento pusėje);"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
 msgid "the telescope server core code (licensed under the LGPL)"
 msgstr "teleskopo serverio pagrindinės kodo dalies (licencijuota pagal LGPL)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
@@ -23924,7 +23933,7 @@ msgstr ""
 "TelescopeServerLx200 teleskopų serverio pagrindinis kodas (pradinė licencija"
 " - LGPL)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 msgid ""
 "Author of all of the above - the client, the server core, and the LX200 "
 "server, along with the Stellarium telescope control network protocol (over "
@@ -23934,7 +23943,7 @@ msgstr ""
 "LX200 serveris, kartu su Stellarium teleskopų valdymo tinklo protokolu (per "
 "TCP/IP), yra  <b>Johanas Gajdosikas</b>."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
@@ -23943,12 +23952,12 @@ msgstr ""
 "licencija - LGPL, pagrįstas TelescopeServerLx200), sukūrė <b>Michael "
 "Heinz</b>."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
 msgid "INDI by <b>Alessandro Siniscalchi</b>."
 msgstr "INDI, sukurtas <b>Alessandro Siniscalchi</b>."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "in the Stellarium User Guide."
@@ -23956,83 +23965,83 @@ msgstr ""
 " Išsamesnę ir naujausią šio papildinio dokumentaciją rasite „Stellarium“ "
 "naudotojo vadove."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 msgid "Contents"
 msgstr "Turinys"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid "Abilities and limitations"
 msgstr "Galimybės ir apribojimai"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
 msgid "The original telescope control feature"
 msgstr "Originalus teleskopo valdymo funkcionalumas"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
 msgid "Using this plug-in"
 msgstr "Naudodami šį įskiepį"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:352
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
 msgid "Main window ('Telescopes')"
 msgstr "Pagrindinis langas ('Teleskopai')"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:377
 msgid "Telescope configuration window"
 msgstr "Teleskopo konfigūracijos langas"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
 msgid "Connection type"
 msgstr "Ryšio tipas"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:558
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:628
 msgid "Telescope properties"
 msgstr "Teleskopo savybės"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:571
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:641
 msgid "Device settings"
 msgstr "Įrenginio nustatymai"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:574
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:425
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:658
 msgid "Connection settings"
 msgstr "Ryšio nustatymai"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:442
 msgid "Field of view indicators"
 msgstr "Regos lauko indikatoriai"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:447
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid "'Slew telescope to' window"
 msgstr "'Nukreipti teleskopą į' langą"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid "Telescope commands"
 msgstr "Teleskopo komandos"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:478
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
 msgid "Supported devices"
 msgstr "Palaikomi įrenginiai"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:507
 msgid "Virtual telescope"
 msgstr "Virtualus teleskopas"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "This plug-in allows Stellarium to send only '<b>slew</b>' ('go to') commands"
 " to the device and to receive its current position. It cannot issue any "
@@ -24046,7 +24055,7 @@ msgstr ""
 " montavimo kolizijomis ir panašiomis situacijomis. (Norėdami nutraukti "
 "nukreipimą galite pradėti kitą į saugią poziciją.)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
@@ -24054,7 +24063,7 @@ msgstr ""
 "Pagal dabartinę versiją, šis įskiepis neleidžia palydovų stebėjimo ir nėra "
 "labai tinkamas mėnulio ar planetų stebėjimui."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:320
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
@@ -24062,7 +24071,7 @@ msgstr ""
 "ĮSPĖJIMAS: Stellarium NEĮGALINA apsaugoti jūsų teleskopą nuo nukreipimo į "
 "Saulę."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:320
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
 msgid ""
 "Never point your telescope at the Sun without a proper solar filter "
 "installed. The powerful light amplified by the telescope WILL cause "
@@ -24072,7 +24081,7 @@ msgstr ""
 "Teleskopu sustiprintas šviesos srautas gali sukelti negrįžtamą žalą jūsų "
 "akims ir/arba įrangai."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid ""
 "Even if you don't do it deliberately, a slew during daylight hours may cause"
 " your telescope to point at the sun on its way to the given destination, so "
@@ -24084,23 +24093,23 @@ msgstr ""
 "rekomenduojama iki saulėlydžio vengti naudoti teleskopo valdymo funkciją be "
 "tinkamos apsaugos."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:460
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:498
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:510
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:375
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:482
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:505
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:517
 msgid "Back to top"
 msgstr "Grįžti į viršų"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid ""
 "As of Stellarium 0.10.5, the original telescope control feature has been "
 "removed. There is no longer a way to control a telescope with Stellarium "
@@ -24110,7 +24119,7 @@ msgstr ""
 "funkcija buvo pašalinta. Stellarium daugiau neleidžia valdyti teleskopo be "
 "šio įskiepio."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
@@ -24118,12 +24127,12 @@ msgstr ""
 "Čia yra du bendri būdai valdyti įrenginį su šiuo įskiepiu, priklausomai nuo "
 "situacijos:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
 msgid "DIRECT CONNECTION"
 msgstr "TIESIOGINIS RYŠYS"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:334
 msgid ""
 "A {device supported by the plug-in} is connected with a cable to the "
 "computer running Stellarium;"
@@ -24131,12 +24140,12 @@ msgstr ""
 "Prie kompiuterio, kuriame veikia Stellarium, prijungtas {įskiepio palaikomas"
 " įrenginys} kabeliu;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid "INDIRECT CONNECTION"
 msgstr "NETIESIOGINIS RYŠYS"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
 msgid ""
 "A device is connected to the same computer but it is driven by a stand-alone"
 " telescope server program"
@@ -24145,13 +24154,13 @@ msgstr ""
 "teleskopo serverio programa."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "or a third-party application <b>that can 'talk' to Stellarium</b>;"
 msgstr ""
 " arba trečiosios šalies programa, <b>galinti „susikalbėti“ su "
 "„Stellarium“</b>;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 msgid ""
 "A device is connected to a remote computer and the software that drives it "
 "can 'talk' to Stellarium <i>over the network</i>; this software can be "
@@ -24164,7 +24173,7 @@ msgstr ""
 "trečiosios šalies programos viena iš jų."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
 msgid ""
 "Most older telescopes use cables that connect to a {serial port} (RS-232), "
 "the newer ones use USB (Universal Serial Bus)."
@@ -24172,7 +24181,7 @@ msgstr ""
 "Dauguma senesnių teleskopų naudoja kabelius, kurie jungiasi prie {serial "
 "port} (RS-232), naujesni naudoja USB (Universal Serial Bus)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "On Linux and Mac OS X both cases are handled identically by the plug-in. On "
 "Windows, a USB connection may require a 'virtual serial port' software, if "
@@ -24182,7 +24191,7 @@ msgstr ""
 "atveju, jei USB ryšiui nėra pridėtas 'virtualus nuoseklusis prievadas' "
 "programinė įranga kartu su kabeliu ar teleskopu, gali prireikti jos."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
@@ -24190,7 +24199,7 @@ msgstr ""
 "Tokio programinė įranga sukuria virtualų ('fake') COM prievadą, kuris "
 "atitinka tikrąjį USB prievadą, todėl jį galima naudoti įskiepyje."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
 msgid ""
 "On all three platforms, if the computer has no 'classic' serial ports and "
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
@@ -24200,7 +24209,7 @@ msgstr ""
 "prievadų ir teleskopas gali prisijungti tik prie nuosekliojo prievado, gali "
 "prireikti serialinio-USB (RS-232-USB) adapterio."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
@@ -24208,11 +24217,11 @@ msgstr ""
 "Teleskopas turi būti sukonfigūruotas (nustatant geografines koordinates, "
 "atliekant lygiavimą ir kt.) prieš prijungiant teleskopą prie Stellarium."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
 msgid "The plug-in's main window can be opened:"
 msgstr "Pagrindinis įskiepio langas gali būti atidarytas:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 msgid ""
 "By pressing the 'configure' button for the plug-in in the 'Plugins' tab of "
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
@@ -24223,7 +24232,7 @@ msgstr ""
 "arba atitinkamą mygtuką kairėje įrankių juostoje)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 #, qt-format
 msgid ""
 "By pressing the 'Configure telescopes...' button in the {'Slew to' window} "
@@ -24234,14 +24243,14 @@ msgstr ""
 "(atidaromas paspaudus<b> %1+0</b> arba atitinkamą mygtuką apatinėje įrankių "
 "juostoje)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
 msgstr ""
 "Kortelėje <b>Teleskopai</b> rodomas nustatytų teleskopų jungčių sąrašas:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
 #, qt-format
 msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
@@ -24250,7 +24259,7 @@ msgstr ""
 "Stulpelyje „Numeris“ (<b>#</b>) nurodomas numeris, naudojamas šiam "
 "teleskopui valdyti. Pavyzdžiui, teleskopo Nr. 2 trumpinys yra %1+2."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
 msgid ""
 "The <b>Status</b> column indicates if this connection is currently active or"
 " not. Unfortunately, there are some cases in which 'Connected' is displayed "
@@ -24260,25 +24269,25 @@ msgstr ""
 "Deja, pasitaiko atvejų, kai rodoma \"Connected\", nors jokio veikiančio "
 "ryšio nėra."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
 msgstr "Lauke <b>Tipas</b> nurodoma, koks tai ryšys:"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:365
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:366
 msgid "<b>virtual</b> means a {virtual telescope};"
 msgstr "<b>virtualus</b> reiškia {virtualus teleskopas};"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
 msgid ""
-"<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
+"<b>direct, Stellarium</b> means a DIRECT connection to the telescope (see "
 "{above});"
 msgstr ""
-"<b>vietinis, Stellarium</b> reiškia TIESIOGINĮ ryšį su teleskopu (žr. "
+"<b>tiesioginis, Stellarium </b> reiškia TIESIOGINĮ ryšį su teleskopu (žr. "
 "{aukščiau});"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
@@ -24286,7 +24295,7 @@ msgstr ""
 "<b>vietinis, išorinis</b> reiškia NE TIESIOGINĮ ryšį su programa, veikiančia"
 " tame  kompiuteryje;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
@@ -24294,7 +24303,7 @@ msgstr ""
 "<b>nuotolinis, nežinomas</b> reiškia NETIESIOGINĮ ryšį per tinklą su "
 "nuotoliniu kompiuteriu."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
 msgid ""
 "To set up a new telescope connection, press the <b>Add</b> button. To modify"
 " the configuration of an existing connection, select it in the list and "
@@ -24307,7 +24316,7 @@ msgstr ""
 "konfigūracijos langas."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
 msgid ""
 "The topmost field represents the choice between the two types of connections"
 " (see {above}):"
@@ -24315,25 +24324,29 @@ msgstr ""
 "Aukščiausias laukas leidžia pasirinkimą tarp dviejų ryšio tipų (žr. "
 "{aukščiau}):"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:544
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:614
 msgid "Telescope controlled by:"
 msgstr "Teleskopas valdomas:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
-msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
-msgstr ""
-"<b>Stellarium, tiesiogiai per nuoseklųjį prievadą</b> yra TIESIOGINIS "
-"atvejis."
-
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
+msgid ""
+"<b>Stellarium, directly (serial port or network)</b> is the DIRECT case. "
+"LX200-compatible mounts can be connected either through a serial port or "
+"over a TCP/IP network (see {Device settings})."
+msgstr ""
+"<b>Stellarium, tiesiogiai (nuoseklusis prievadas arba tinklas)</b> yra "
+"TIESIOGINIS atvejis. Su LX200 suderinamus laikiklius galima prijungti per "
+"nuoseklųjį prievadą arba per TCP/IP tinklą (žr. {Prietaiso nustatymai})."
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
 msgstr ""
 "<b>Išorinė programa arba nuotolinis kompiuteris</b> yra NETIESIOGINIS "
 "atvejis"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
 msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a {virtual "
 "telescope} (no connection)"
@@ -24341,14 +24354,14 @@ msgstr ""
 "<b>Nieko, tiesiog simuliuokite vieną (judantį taikiklį) </b>yra {virtualus "
 "teleskopas} (be ryšio)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr ""
 "<b>Vardas</b> yra žymė, kuri bus rodoma ekrane šalia teleskopo taikiklio."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
@@ -24356,7 +24369,7 @@ msgstr ""
 "<b>Ryšio delsa</b> : Jei teleskopo tinklelio judėjimas ekrane yra netolygus,"
 " galite pabandyti padidinti arba sumažinti šią reikšmę."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
 msgid ""
 "<b>Coordinate system</b>: Some Celestron telescopes have had their firmware "
 "updated and now interpret the coordinates they receive as coordinates that "
@@ -24368,7 +24381,7 @@ msgstr ""
 "koordinates, naudojančias datos ekvinokciją (EOD, taip pat žinomą kaip "
 "JNow), todėl reikalingas šis perrašymas."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to"
 " attempt to connect to the telescope immediately after it starts."
@@ -24376,7 +24389,7 @@ msgstr ""
 "<b>Pradėti/prijungti paleidžiant</b>: Pažymėkite šią parinktį, jei norite, "
 "kad Stellarium bandytų iš karto prisijungti prie teleskopo po paleidimo."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
@@ -24385,25 +24398,41 @@ msgstr ""
 "langą, pasirinkti tą teleskopą ir paspausti mygtuką „Pradėti / Prisijungti“."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
 msgid "This section is active only for DIRECT connections (see {above})."
 msgstr "Ši sekcija yra aktyvi tik tiesioginiams ryšiams (žr. {aukščiau})."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
+msgid ""
+"<b>Connection</b> selects how Stellarium reaches the telescope. Choose "
+"<b>Serial port</b> for a device attached through a serial or USB cable. For "
+"LX200-compatible mounts you can instead choose <b>Network (TCP)</b> to talk "
+"to the telescope over TCP/IP - for example a Wi-Fi/Ethernet adapter or a "
+"software bridge that exposes the Meade LX200 protocol on a network port."
+msgstr ""
+"<b>Ryšys</b> parenka, kaip „Stellarium“ pasiekia teleskopą. Pasirinkite "
+"<b>Nuoseklųjį prievadą</b>, jei įrenginys prijungtas nuosekliojo ryšio arba "
+"USB kabeliu. LX200 suderinamiems stovams galite rinktis <b>Tinklas "
+"(TCP)</b>, kad užmegztumėte ryšį su teleskopu per TCP/IP – pavyzdžiui, Wi-Fi"
+" / Ethernet adapterį arba programinės įrangos tiltą, kuris atveria Meade "
+"LX200 protokolą tinklo prievade."
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr ""
 "<b>Nuoseklusis prievadas</b> nustato teleskopui naudojamą nuoseklųjį "
 "prievadą."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
 msgid "There is a pop-up box that suggests some default values:"
 msgstr "Yra iššokantis langas, siūlantis keletą numatytų reikšmių:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
 msgid "On Windows, serial ports COM1 to COM10;"
 msgstr "Windows, nuosekliųjų portų COM1 iki COM10;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:413
 msgid ""
 "On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 "
 "to /dev/ttyUSB3;"
@@ -24411,13 +24440,13 @@ msgstr ""
 "Linux, serijinius prievadus /dev/ttyS0 iki /dev/ttyS3 ir USB prievadus "
 "/dev/ttyUSB0 iki /dev/ttyUSB3;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:409
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:414
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
 msgstr ""
 "Mac OS X, sąrašas yra tuščias, nes jis pavadina savo prievadus keistu būdu."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
 msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
@@ -24425,14 +24454,14 @@ msgstr ""
 "Jei naudojate USB kabelį, jūsų teleskopo numatytasis serijinis prievadas "
 "tikriausiai nėra pasiūlymų sąraše."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:416
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr ""
 "Visi galimi tinkami serijinio prievado pavadinimai „Mac OS X“ gali būti "
 "matomi atidarius terminalą ir įvedus šią komandą:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
@@ -24441,17 +24470,32 @@ msgstr ""
 "turėtų būti kažkur sąraše (pavyzdžiui, '/dev/cu.usbserial-FTDFZVMK')."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
 msgid "<b>Device model</b>: see {Supported devices} below."
 msgstr "<b>Įrenginio modelis</b>: žr. {Palaikomi įrenginiai} žemiau."
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
+msgid ""
+"When <b>Network (TCP)</b> is selected, the <b>Serial port</b> field is "
+"replaced by <b>Host</b> and <b>Port</b> fields: enter the host name or IP "
+"address of the telescope (or of the computer running the LX200 network "
+"bridge) and the TCP port it is listening on. The <b>Network (TCP)</b> option"
+" is available only for LX200-compatible device models."
+msgstr ""
+"Pasirinkus <b>Tinklas (TCP)</b>, laukelis <b>Nuoseklusis prievadas</b> "
+"pakeičiamas laukeliais <b>Pagrindinis kompiuteris</b> ir <b>Prievadas</b>: "
+"įveskite teleskopo (arba kompiuterio, kuriame veikia LX200 tinklo tiltas) "
+"pagrindinio kompiuterio pavadinimą arba IP adresą ir TCP prievadą, kuriame "
+"jis klausosi. Parinktis <b>Tinklas (TCP)</b> galima tik su LX200 suderinamų "
+"įrenginių modeliuose."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 msgid "Both fields here refer to communication over a network ({TCP/IP})."
 msgstr "Abu laukai čia nurodo ryšį per tinklą ({TCP/IP})."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid ""
 "Doing something with them is necessary only for INDIRECT connections (see "
 "{above})."
@@ -24460,7 +24504,7 @@ msgstr ""
 "{aukščiau})."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
 msgid ""
 "<b>Host</b> can be either a host name or an {IPv4} address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
@@ -24468,7 +24512,7 @@ msgstr ""
 "<b>Įrenginys</b>gali būti tiek prietaiso pavadinimas, tiek {IPv4} adresas, "
 "pvz., '127.0.0.1'. Numatytoji reikšmė 'localhost' reiškia 'šis kompiuteris'."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
 msgid ""
 "<b>Port</b> refers to the TCP port used for communication. The default value"
 " depends on the telescope number and ranges between 10001 and 10009."
@@ -24476,11 +24520,11 @@ msgstr ""
 "<b>Prievadas</b> nurodo TCP prievadą, naudojamą ryšiui. Numatytoji reikšmė "
 "priklauso nuo teleskopo ir svyruoja nuo 10001 iki 10009."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
 msgid "Both values are ignored for DIRECT connections."
 msgstr "Abi vertės yra ignoruojamos tiesioginiams ryšiams."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:432
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
 msgid ""
 "For INDIRECT connections, modifying the default host name value makes sense "
 "only if you are attempting a remote connection over a network."
@@ -24488,7 +24532,7 @@ msgstr ""
 "Netiesioginiams ryšiams keisti numatytąją Įrenginio reikšmę turi prasmę tik "
 "tada, jei bandote atlikti nuotolinį ryšį per tinklą."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:433
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:439
 msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
@@ -24496,7 +24540,7 @@ msgstr ""
 "Šiuo atveju tai turėtų būti kompiuterio pavadinimas ar IP adresas, kuris "
 "vykdo programą,valdančią teleskopą."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:443
 msgid ""
 "A series of circles representing different fields of view can be added "
 "around the telescope marker. This is a relic from the times before the "
@@ -24506,13 +24550,13 @@ msgstr ""
 "aplink teleskopo žymeklį. Tai yra palikimas iš laikų, kai nebuvo "
 "<strong>Okuliarai</strong> įskiepio."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:444
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr ""
 "Teleskopo konfigūracijos lange spustelėkite „Vartotojo sąsajos nustatymai“."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:439
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
@@ -24520,12 +24564,12 @@ msgstr ""
 "Pažymėkite parinktį „Naudoti matymo lauko indikatorius“, tada įveskite "
 "reikšmių sąrašą, atskirtą kableliais, žemiau esančiame lauke."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
 msgid "The values are interpreted as degrees of arc."
 msgstr "Reikšmės interpretuojamos kaip kampo laipsniai."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:443
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid ""
 "This can be used in combination with a {virtual telescope} to display a "
 "moving reticle with the Telrad circles."
@@ -24533,7 +24577,7 @@ msgstr ""
 "Tai gali būti naudojama kartu su {virtualiu teleskopu}, kad būtų rodomas "
 "judantis taikiklis su Telrad apskritimais."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
 #, qt-format
 msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>%1+0</b> or the "
@@ -24542,7 +24586,7 @@ msgstr ""
 "Langą „Pasukti teleskopą į“ galima atidaryti paspaudus <b>%1+0</b> arba "
 "atitinkamą mygtuką apatinėje įrankių juostoje."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:455
 msgid ""
 "It contains two fields for entering celestial coordinates, selectors for the"
 " preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or "
@@ -24552,12 +24596,12 @@ msgstr ""
 "formatui (valandos-minutės-sekundės, laipsniai-minutės-sekundės arba "
 "dešimtainiai laipsniai), išskleidžiamasis sąrašas ir du mygtukai."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:456
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
 msgstr "Pridėjimo sąraše yra šiuo metu prijungtų įrenginių pavadinimai."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:457
 msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
@@ -24565,7 +24609,7 @@ msgstr ""
 "Jei nėra prijungtų įrenginių, tai liks tuščia, o mygtukas „Nukreipti“ bus "
 "išjungtas."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
@@ -24574,7 +24618,7 @@ msgstr ""
 "pasirinktą koordinačių rinkinį."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:460
 msgid ""
 "See the section about {keyboard commands} below for other ways of "
 "controlling the device."
@@ -24583,7 +24627,7 @@ msgstr ""
 "valdyti įrenginį."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
 msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the {main window} "
 "of the plug-in."
@@ -24591,11 +24635,11 @@ msgstr ""
 "Spaudžiant mygtuką <b>Konfigūruoti teleskopus...</b> atsidaro įskiepio "
 "{pagrindinis langas}."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
 msgid "Sending commands"
 msgstr "Siunčiant komandas"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:463
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
 msgid ""
 "Once a telescope is successfully started/connected, Stellarium displays a "
 "telescope reticle labelled with the telescope's name on its current position"
@@ -24604,7 +24648,7 @@ msgstr ""
 "Kai teleskopas sėkmingai pradėtas/prijungtas, Stellarium rodo teleskopo "
 "taikiklį, pažymėtą teleskopo pavadinimu, jo dabartine padėtimi danguje."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
 msgid ""
 "The reticle is an object like every other in Stellarium - it can be selected"
 " with the mouse, it can be tracked and it appears as an object in the "
@@ -24614,7 +24658,7 @@ msgstr ""
 "jį galima pasirinkti pele, jį galima stebėti ir jis rodomas kaip objektas "
 "\"Paieškos\" lange."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:465
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
 #, qt-format
 msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
@@ -24623,17 +24667,17 @@ msgstr ""
 "<b>Įrenginio nukreipimui į objektą:</b> Pasirinkite objektą (pvz. žvaigždę),"
 " ir paspauskite prietaiso numerį, laikydami nuspaustą <b>%1</b> klavišą."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:472
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:475
 #, qt-format
 msgid "For example, %1+1 for telescope #1."
 msgstr "Pavyzdžiui, %1+1 - teleskopas Nr. 1."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:473
 msgid "This will move the telescope to the selected object."
 msgstr "Tai pasuks teleskopą į pasirinktą objektą."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
 #, qt-format
 msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
@@ -24642,12 +24686,12 @@ msgstr ""
 "<b>Įrenginio nukreipimui į vaizdo centrą:</b> Paspauskite prietaiso numerį, "
 "laikydami nuspaustą klavišą <b>%1</b>."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
 msgid ""
 "This will slew the device to the point in the center of the current view."
 msgstr "Tai nukreips įrenginį į tašką, esantį dabartinio vaizdo centre."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
 msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
@@ -24656,7 +24700,7 @@ msgstr ""
 "pateiksite kitą komandą."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:480
 #, qt-format
 msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' "
@@ -24666,7 +24710,7 @@ msgstr ""
 " \"Nukreipti į\"} (paspauskite <b>%1+0</b>)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:481
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:487
 msgid ""
 "All devices listed in the {'Device model' list} are convenience definitions "
 "using one of the two built-in interfaces: the Meade LX200 (the Meade "
@@ -24676,15 +24720,25 @@ msgstr ""
 "funkcijų aprašai, naudojami vienoje iš dviejų integruotų sąsajų: \"Meade "
 "LX200\" (\"Meade Autostar\" valdiklis) ir \"Celestron NexStar\" sąsaja."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:483
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:489
+msgid ""
+"Devices using the Meade LX200 interface can be connected either through a "
+"serial/USB port or over a TCP/IP network. Devices using the Celestron "
+"NexStar interface are connected through a serial/USB port only."
+msgstr ""
+"Prietaisus, kuriuose naudojama Meade LX200 sąsaja, galima prijungti per "
+"nuoseklųjį / USB prievadą arba per TCP/IP tinklą. Įrenginiai, naudojantys "
+"Celestron NexStar sąsają, jungiami tik per nuoseklųjį / USB prievadą."
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:490
 msgid "The device list contains the following:"
 msgstr "Įrenginių sąrašas apima šiuos elementus:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
 msgid "Any device using the NexStar interface."
 msgstr "Bet koks įrenginys, naudojantis NexStar sąsają."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:492
 msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
@@ -24692,12 +24746,12 @@ msgstr ""
 "Kompiuterizuotas teleskopo laikiklis, pagamintas Losmandy (Meade "
 "LX-200/Autostar sąsaja)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:498
 msgid "Any device using the LX-200/Autostar interface."
 msgstr "Bet koks įrenginys, naudojantis LX-200/Autostar sąsają."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:487
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
 msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
@@ -24705,7 +24759,7 @@ msgstr ""
 "Meade's ETX-70 su #494 Autostar valdikliu ir #506 jungties kabelių rinkiniu."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:489
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:496
 #, qt-format
 msgid ""
 "According to the tester, it is a bit slow, so its default setting of "
@@ -24714,14 +24768,14 @@ msgstr ""
 "Pagal testuotojo tai yra šiek tiek lėtoka, todėl numatytoji %1'Prisijungimo "
 "delsa'%2 yra 1,5 sekundės, o ne 0,5 sekundės."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:492
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:499
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr ""
 "Sky-Watcher SynScan AZ GOTO laikiklis, naudojamas keliuose teleskopų "
 "modeliuose."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
 msgid ""
 "<b>SynScan</b> is also the name of the hand controller used in other Sky-"
 "Watcher GoTo mounts, and it seems that any mount that uses a SynScan "
@@ -24733,12 +24787,12 @@ msgstr ""
 "naudojantis SynScan valdiklio 3.0 ar naujesnės versijos, yra palaikomas šiuo"
 " įskiepiu, nes jis naudoja NexStar protokolą."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:501
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr ""
 "Argo Navis yra „Wildcard Innovations“ „Skaitmeninis Teleskopo Kompiuteris“."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:495
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:502
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses"
@@ -24749,7 +24803,7 @@ msgstr ""
 "naudoja kompiuterį norint rasti tikslus ir žmogaus jėgą norint judinti patį "
 "teleskopą)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:496
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:503
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B"
@@ -24757,7 +24811,7 @@ msgstr ""
 "Tik nepamirškite nustatyti jį Meade suderinamumo režimu ir nustatyti "
 "perdavimo greitį į 9600B."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:501
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:508
 msgid ""
 "If you want to test this plug-in without an actual device connected to the "
 "computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the"
@@ -24772,7 +24826,7 @@ msgstr ""
 "taikiklis."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:504
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:511
 msgid ""
 "See the section above about {field of view indicators} for a possible "
 "practical application (emulating 'Telrad' circles)."
@@ -24781,7 +24835,7 @@ msgstr ""
 "taikymą (imituojant „Telrad“ apskritimus)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:508
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:515
 msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "Stellarium's original telescope control feature (~2006)."
@@ -24790,18 +24844,18 @@ msgstr ""
 "„Stellarium“ teleskopų valdymo funkcija (~2006 m.)."
 
 #. TRANSLATORS: Symbol for "number"
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:528
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:535
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:102
 msgctxt "numero sign"
 msgid "#"
 msgstr "#"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:530
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:537
 #: plugins/Planes/src/ui_planesDialog.h:272
 msgid "Status"
 msgstr "Būsena"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:549
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:556
 #, qt-format
 msgid ""
 "To slew a connected telescope to an object (for example, a star), select "
@@ -24817,7 +24871,7 @@ msgstr ""
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually
 #. see this text. :)
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:556
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:563
 msgid ""
 "No device model descriptions are available. Stellarium will not be able to "
 "control a telescope on its own, but it is still possible to do it through an"
@@ -24829,75 +24883,75 @@ msgstr ""
 
 #. TRANSLATORS: The translated name of the Add button is automatically
 #. inserted.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:561
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:568
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr "Paspauskite mygtuką \"%1\", kad nustatytumėte naują teleskopo ryšį."
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:572
-msgid "local, Stellarium"
-msgstr "vietinis, Stellarium"
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:579
+msgid "direct, Stellarium"
+msgstr "tiesiogiai, „Stellarium“"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:574
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:581
 msgid "local, external"
 msgstr "vietinis, išorinis"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:576
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:583
 msgid "remote, unknown"
 msgstr "nuotolinis, nežinomas"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:578
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:585
 msgid "virtual"
 msgstr "virtualus"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:580
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:587
 msgid "remote, RTS2"
 msgstr "nuotolinis, RTS2"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:582
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:589
 msgid "remote, INDI/INDIGO"
 msgstr "nuotolinis, INDI/INDIGO"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:584
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:591
 msgid "local, ASCOM"
 msgstr "vietinis, ASCOM"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1004
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1011
 msgid "Start"
 msgstr "Pradėti"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1006
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1013
 msgid "Start the selected local telescope"
 msgstr "Įjunkite pasirinktą vietinį teleskopą."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1013
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1020
 msgid "Stop the selected local telescope"
 msgstr "Sustabdykite pasirinktą vietinį teleskopą."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1018
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1025
 msgid "Connect"
 msgstr "Prisijungti"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1020
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1027
 msgid "Connect to the selected telescope"
 msgstr "Prisijungti prie pasirinkto teleskopo"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1025
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1032
 msgid "Disconnect"
 msgstr "Atjungti"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1027
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1034
 msgid "Disconnect from the selected telescope"
 msgstr "Atsijungti nuo pasirinkto teleskopo"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1042
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1049
 msgid "Select a directory"
 msgstr "Pasirinkite katalogą"
 
@@ -25017,11 +25071,11 @@ msgstr "Nutraukti pasukimą"
 msgid "Configure &telescopes..."
 msgstr "Konfigūruokite &teleskopus..."
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:543
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:613
 msgid "Telescope Configuration"
 msgstr "Teleskopų konfigūracija"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:546
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:616
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
@@ -25029,11 +25083,11 @@ msgstr ""
 "Teleskopas, prijungtas prie šio kompiuterio per nuoseklųjį prievadą ir "
 "tiesiogiai valdomas Stellarium."
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:548
-msgid "Stellarium, directly through a serial port"
-msgstr "Stellarium, tiesiogiai per nuoseklųjį prievadą"
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:618
+msgid "Stellarium, directly (serial port or network)"
+msgstr "Stellarium, tiesiogiai (nuoseklusis prievadas arba tinklas)"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:550
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:620
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
@@ -25041,35 +25095,35 @@ msgstr ""
 "Teleskopas, kurį valdo išorinė programa, arba šiame kompiuteryje, arba "
 "nuotoliniame įrenginyje."
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:552
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:622
 msgid "External software or a remote computer"
 msgstr "Išorinė programa arba nuotolinis kompiuteris"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:554
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:624
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
 msgstr "Teleskopas, kuris yra pasiekiamas per RTS2(.org) JSON API"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:556
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:626
 msgid "RTS2 telescope"
 msgstr "RTS2 teleskopas"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:557
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:627
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr "Nieko, tiesiog simuliuoti vieną (judantį taikiklį)"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:560
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:630
 msgid "Connection delay:"
 msgstr "Prisijungimo delsa:"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:565
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:635
 msgid "J2000 (default)"
 msgstr "J2000 (numatytasis)"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:566
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:636
 msgid "Equinox of the date (JNow)"
 msgstr "Lygiadienio data (JNow)"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:568
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:638
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
@@ -25077,71 +25131,101 @@ msgstr ""
 "Automatiškai bandyti paleisti teleskopą arba nustatyti ryšį, kai Stellarium "
 "pasileidžia."
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:570
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:640
 msgid "Start/connect at startup"
 msgstr "Pradėti/prijungti paleidžiant"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:572
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:642
+msgid "Connection:"
+msgstr "Jungtis:"
+
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:643
+msgid "Serial port"
+msgstr "Nuoseklusis prievadas"
+
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:645
+msgid ""
+"Communicate with the telescope using the LX200 protocol over a TCP/IP "
+"network connection"
+msgstr "Valdyti teleskopą naudojant LX200 protokolą per TCP/IP tinklo ryšį"
+
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:647
+msgid "Network (TCP)"
+msgstr "Tinklas (TCP)"
+
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:648
 msgid "Serial port:"
 msgstr "Nuoseklusis prievadas:"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:573
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:651
+msgid "Host name or IP address of the telescope"
+msgstr "Teleskopo mazgo pavadinimas arba IP adresas"
+
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:653
+msgid "Port:"
+msgstr "Prievadas:"
+
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:655
+msgid "TCP port the telescope is listening on"
+msgstr "TCP prievadas, kuriame veikia teleskopas"
+
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:657
 msgid "Device model:"
 msgstr "Įrenginio modelis:"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:580
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:664
 msgid "RTS2 telescope settings"
 msgstr "RTS2 teleskopo nustatymai"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:581
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:665
 msgid "URL:"
 msgstr "URL:"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:582
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:666
 msgid "Username:"
 msgstr "Vartotojo vardas:"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:583
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:667
 msgid "Password:"
 msgstr "Slaptažodis:"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:585
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:669
 msgid "RTS2 username"
 msgstr "RTS2 naudotojo vardas"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:588
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:672
 msgid "RTS2 password"
 msgstr "RTS2 slaptažodis"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:591
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:675
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
 msgstr "URL mašinos, kurioje talpinamas RTS2 JSON (httpd) serveris"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:593
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:677
 msgid "Refresh every:"
 msgstr "Atnaujinti kas:"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:597
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:681
 msgid "User interface settings"
 msgstr "Vartotojo sąsajos nustatymai"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:599
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:683
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr "Rodyti apie teleskopo taikiklį fiksuoto kampo dydžio apskritimus"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:601
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:685
 msgid "Use field of view indicators"
 msgstr "Naudoti regos lauko indikatorius"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:602
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:686
 msgid "Circle size(s):"
 msgstr "Apskritimo dydis(-iai):"
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:604
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:688
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr "Iki dešimties dešimtainių laipsnių verčių, atskirtų kableliais."
 
-#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:607
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:691
 msgid "OK"
 msgstr "Gerai"
 
@@ -27520,7 +27604,7 @@ msgid ""
 msgstr ""
 "Planetinė pusiausvyros temperatūra yra teorinė temperatūra (°C), kurioje "
 "planeta būtų, jei ją laikytume tik juoduoju kūnu, kurį šildo tik jos tėvinė "
-"žvaigždė (priimant 0,3 bondo albedą). Pavyzdžiui, Žemės planetinė "
+"žvaigždė (priimant 0,3 sąsajos albedą). Pavyzdžiui, Žemės planetinė "
 "pusiausvyros temperatūra yra -18,15°C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:327
@@ -41414,3 +41498,272 @@ msgstr "Delčia"
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:395
 msgid "Earth"
 msgstr "Žemė"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:258
+msgid "Object Visibility Configuration"
+msgstr "Objekto matomumo konfigūracija"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:259
+msgid "Object Visibility plug-in"
+msgstr "Objektų matomumo įskiepis"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:260
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:400
+msgid "Select a star or DSO, then click Calculate."
+msgstr "Pasirinkite žvaigždę arba GKO, tada spustelėkite Apskaičiuoti."
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:261
+msgid "Key of stars visibility"
+msgstr "Žvaigždžių matomumo raktas"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:262
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:495
+msgid "Limit of visibility"
+msgstr "Matomumo riba"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:263
+msgid "Good visibility (default 5° above the horizon)"
+msgstr "Geras matomumas (numatytasis 5° virš horizonto)"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:264
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:506
+msgid "Passes zenith"
+msgstr "Praeina zenitą"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:265
+msgid "Circumpolar limit (northern hemisphere)"
+msgstr "Cirkumpoliarinė riba (Šiaurės pusrutulis)"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:266
+msgid "Circumpolar limit (southern hemisphere)"
+msgstr "Cirkumpoliarinė riba (Pietų pusrutulis)"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:269
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:198
+msgid "Compute visibility for the selected object."
+msgstr "Apskaičiuoti pasirinkto objekto matomumą."
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:271
+msgid "Good visibility above the horizon:"
+msgstr "Geras matomumas virš horizonto:"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:272
+msgid "°"
+msgstr "°"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:273
+msgid "Set location by clicking on the map"
+msgstr "Nustatykite vietą spustelėdami žemėlapį"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:275
+msgid ""
+"Enable to move the observer by clicking on the map.  Stays active until you "
+"uncheck it — you can pick as many locations as you like."
+msgstr ""
+"Pažymėkite, kad galėtumėte perkelti stebėtoją spustelėdami žemėlapį. Išlieka"
+" aktyvu, kol panaikinsite žymėjimą – galite pasirinkti tiek vietų, kiek "
+"norite."
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:277
+msgid "Reset settings"
+msgstr "Iš naujo nustatyti nustatymus"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:278
+msgid "Visibility"
+msgstr "Matomumas"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:191
+msgid "Only stars and DSOs may be used in this plugin!"
+msgstr "Šiame įskiepyje galima naudoti tik žvaigždes ir GKO !"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:193
+#, qt-format
+msgid ""
+"This plug-in supports observation from Earth, the Moon, the eight planets, "
+"Pluto and the four Galilean moons.  The current observing body (%1) is not "
+"supported."
+msgstr ""
+"Šis įskiepis palaiko stebėjimą iš Žemės, Mėnulio, aštuonių planetų, Plutono "
+"ir keturių Galilėjaus palydovų. Dabartinis stebėjimo objektas (%1) "
+"nepalaikomas."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:410
+#, qt-format
+msgid "%1 is selected. Click Calculate."
+msgstr "Pasirinkta %1. Spustelėkite „Apskaičiuoti“."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:424
+msgid "a planet, moon or the Sun"
+msgstr "planeta, Mėnulis arba Saulė"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:426
+msgid "a comet"
+msgstr "kometa"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:428
+msgid "a minor planet"
+msgstr "mažoji planeta"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:430
+msgid "an artificial satellite"
+msgstr "dirbtinis palydovas"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:432
+msgid "a surface feature"
+msgstr "paviršiaus elementas"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:434
+msgid "a meteor"
+msgstr "meteoras"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:436
+msgid "not a star or deep-sky object"
+msgstr "ne žvaigždė ir ne giliojo kosmoso objektas"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:442
+#, qt-format
+msgid "%1 is %2. This plug-in only supports stars and deep-sky objects."
+msgstr ""
+"%1 yra %2. Šis įskiepis palaiko tik žvaigždes ir tolimojo kosmoso objektus."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:462
+#, qt-format
+msgid "Visibility of %1 in %2"
+msgstr "%1 matomumas %2"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:468
+#, qt-format
+msgid "Visibility of %1 from %3 in %2"
+msgstr "%1 matomumas iš %3 %2"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:479
+msgid "Object Visibility Plug-in"
+msgstr "Objektų matomumo įskiepis"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:488
+msgid ""
+"This plug-in shows on a planet map where on the observer's planet a selected"
+" star or deep-sky object is visible.  Given an object with declination "
+"&delta; at the current epoch (precession and proper motion taken into "
+"account), five lines are drawn at fixed geographic latitudes:"
+msgstr ""
+"Šis įskiepis planetos žemėlapyje rodo, kur stebėtojo planetoje matoma "
+"pasirinkta žvaigždė arba giliojo kosmoso objektas. Atsižvelgiant į objektą "
+"su deklinacija &delta; dabartinėje epochoje (atsižvelgiant į precesiją ir "
+"tikrąjį judėjimą), nubrėžiamos penkios linijos fiksuotose geografinėse "
+"platumose:"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:496
+msgid ""
+"&phi; = &delta; &plusmn; 90&deg;.  The object never rises above the horizon "
+"at latitudes outside this band."
+msgstr ""
+"&phi; = &delta; &plusmn; 90&deg;. Objektas niekada nepakyla virš horizonto "
+"platumose, esančiose už šios juostos ribų."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:499
+msgid "Extinction free / good visibility"
+msgstr "Be trukdžių/ geras matomumas"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:500
+msgid ""
+"&phi; = &delta; &plusmn; (90&deg; &minus; h).  At latitudes inside this band"
+" the object reaches at least altitude h at upper culmination.  The default h"
+" is 5&deg;; you may increase it if you observe from a mountainous site or "
+"want a larger safety margin."
+msgstr ""
+"&phi; = &delta; &plusmn; (90&deg; &minus; h). Šios juostos platumose "
+"objektas pasiekia bent h aukštį viršutiniame kulminacijos taške. Numatytasis"
+" h yra 5&deg;; galite jį padidinti, jei stebite iš kalnuotos vietos arba "
+"norite didesnės saugos ribos."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:507
+msgid ""
+"&phi; = &delta;.  At this latitude the object passes through the zenith."
+msgstr "&phi; = &delta;. Šioje platumoje objektas pereina per zenitą."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:510
+msgid "Circumpolar limit, northern hemisphere"
+msgstr "Cirkumpoliarinė riba, šiaurės pusrutulis"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:511
+msgid ""
+"&phi; = 90&deg; &minus; &delta;.  North of this latitude the object never "
+"sets."
+msgstr ""
+"&phi; = 90&deg; &minus; &delta;. Į šiaurę nuo šios platumos objektas niekada"
+" nenusileidžia."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:514
+msgid "Circumpolar limit, southern hemisphere"
+msgstr "Cirkumpoliarinė riba, pietų pusrutulis"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:515
+msgid ""
+"&phi; = &minus;90&deg; &minus; &delta;.  South of this latitude the object "
+"never sets."
+msgstr ""
+"&phi; = &minus;90&deg; &minus; &delta;. Į pietus nuo šios platumos objektas "
+"niekada nenusileidžia."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:520
+msgid ""
+"Planets, moons, asteroids, comets and artificial satellites are "
+"intentionally not supported as the selected <em>target</em>: their rapid "
+"daily motion (and, for some, parallax) would make a single snapshot "
+"misleading."
+msgstr ""
+"Planetos, palydovai, asteroidai, kometos ir dirbtiniai palydovai sąmoningai "
+"nėra palaikomi kaip pasirinktas <em>taikinys</em>: dėl jų greito kasdienio "
+"judėjimo (o kai kurių – ir paralakso) vienintelė momentinė nuotrauka būtų "
+"klaidinanti."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:527
+msgid ""
+"The plug-in does support observation from any of the following bodies: "
+"Earth, the Moon, the eight planets (Mercury through Neptune), Pluto, and the"
+" four Galilean moons of Jupiter (Io, Europa, Ganymede, Callisto).  Change "
+"observer body via Stellarium's Location dialog; the map updates "
+"automatically."
+msgstr ""
+"Įskiepis palaiko stebėjimą iš bet kurio iš šių kosminių kūnų: Žemės, "
+"Mėnulio, aštuonių planetų (nuo Merkurijaus iki Neptūno), Plutono ir keturių "
+"Galilėjaus palydovų (Ijo, Europos, Ganimedo, Kalistos). Pakeiskite stebėtojo"
+" objektą „Stellarium“ dialogo lange „Vieta“; žemėlapis atsinaujins "
+"automatiškai."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:536
+msgid ""
+"Because stellar positions change over time through precession and proper "
+"motion, the lines are always computed for the date currently shown in the "
+"planetarium.  To see Sirius's visibility in 10&thinsp;000 BCE, set the "
+"planetarium's date first, then press Calculate."
+msgstr ""
+"Kadangi žvaigždžių padėtis laikui bėgant keičiasi dėl precesijos ir savojo "
+"judėjimo, linijos visada apskaičiuojamos pagal planetariume tuo metu rodomą "
+"datą. Norėdami pamatyti Sirijaus matomumą 10&thinsp;000 m. pr. Kr., "
+"pirmiausia nustatykite planetariumo datą, tada paspauskite Skaičiuoti."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:544
+msgid "Credits"
+msgstr "Kreditai"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:545
+msgid ""
+"The whole concept of these visibility lines on a world map – and in "
+"particular the choice of the five line types and their visual style – comes "
+"from Astro-Geo-GIS, in the article <em>The 49 brightest stars in the night "
+"sky – when and where can we see them?</em>"
+msgstr ""
+"Visa šių matomumo linijų pasaulio žemėlapyje koncepcija – ypač penkių linijų"
+" tipų pasirinkimas ir jų vizualinis stilius – yra paimta iš „Astro-Geo-GIS“ "
+"straipsnio <em>„49 ryškiausios naktinio dangaus žvaigždės – kada ir kur jas "
+"galima pamatyti?“</em>"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:554
+msgid "Read the original article"
+msgstr "Skaityti originalų straipsnį"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:557
+msgid "Astro-Geo-GIS website"
+msgstr "Astro-Geo-GIS svetainė"
