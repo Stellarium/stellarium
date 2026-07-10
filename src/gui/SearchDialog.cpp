@@ -409,19 +409,19 @@ void SearchDialog::setCoordinateSystem(int csID)
 void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(populateCoordinateAxis()));
-	connect(&StelApp::getInstance(), SIGNAL(flagUsePolarDistanceChanged(bool)), this, SLOT(populateCoordinateData()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &SearchDialog::retranslate);
+	connect(&StelApp::getInstance(), &StelApp::flagShowDecimalDegreesChanged, this, &SearchDialog::populateCoordinateAxis);
+	connect(&StelApp::getInstance(), &StelApp::flagUsePolarDistanceChanged,   this, &SearchDialog::populateCoordinateData);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onSearchTextChanged(const QString&)));
-	connect(ui->simbadCooQueryButton, SIGNAL(clicked()), this, SLOT(lookupCoordinates()));
-	connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(clearSimbadText(StelModule::StelModuleSelectAction)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &SearchDialog::handleMovedTo);
+	connect(ui->lineEditSearchSkyObject, &QLineEdit::textChanged, this, &SearchDialog::onSearchTextChanged);
+	connect(ui->simbadCooQueryButton, &QPushButton::clicked, this, &SearchDialog::lookupCoordinates);
+	connect(GETSTELMODULE(StelObjectMgr), &StelObjectMgr::selectedObjectChanged, this, &SearchDialog::clearSimbadText);
 	connect(ui->pushButtonGotoSearchSkyObject, &QPushButton::clicked, this, qOverload<>(&SearchDialog::gotoObject));
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, &QLineEdit::returnPressed, this, qOverload<>(&SearchDialog::gotoObject));
-	connect(ui->lineEditSearchSkyObject, SIGNAL(selectionChanged()), this, SLOT(setHasSelectedFlag()));
-	connect(ui->lineEditSearchSkyObject, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
+	connect(ui->lineEditSearchSkyObject, &QLineEdit::selectionChanged, this, &SearchDialog::setHasSelectedFlag);
+	connect(ui->lineEditSearchSkyObject, &QLineEdit::customContextMenuRequested, this, &SearchDialog::showContextMenu);
 
 	ui->lineEditSearchSkyObject->installEventFilter(this);	
 
@@ -431,7 +431,7 @@ void SearchDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &SearchDialog::enableKineticScrolling);
 	}
 
 	populateCoordinateSystemsList();
@@ -440,38 +440,38 @@ void SearchDialog::createDialogContent()
 	if (idx==-1) // Use equatorialJ2000 as default
 		idx = ui->coordinateSystemComboBox->findData(QVariant("equatorialJ2000"), Qt::UserRole, Qt::MatchCaseSensitive);
 	ui->coordinateSystemComboBox->setCurrentIndex(idx);
-	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
-	connect(ui->AxisXSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
-	connect(ui->AxisYSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
-	connect(ui->goPushButton, SIGNAL(clicked(bool)), this, SLOT(manualPositionChanged()));
+	connect(ui->coordinateSystemComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &SearchDialog::setCoordinateSystem);
+	connect(ui->AxisXSpinBox, &AngleSpinBox::valueChanged, this, &SearchDialog::manualPositionChanged);
+	connect(ui->AxisYSpinBox, &AngleSpinBox::valueChanged, this, &SearchDialog::manualPositionChanged);
+	connect(ui->goPushButton, &QToolButton::clicked, this, &SearchDialog::manualPositionChanged);
 	// following the current direction of FOV
 	connect(GETSTELMODULE(StelMovementMgr), &StelMovementMgr::currentDirectionChanged, this, &SearchDialog::setCenterOfScreenCoordinates);
 	setCenterOfScreenCoordinates();
 	
-	connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->betaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->gammaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->deltaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->epsilonPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->zetaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->etaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->thetaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->iotaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->kappaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->lambdaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->muPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->nuPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->xiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->omicronPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->piPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->rhoPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->sigmaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->tauPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->upsilonPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->phiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->chiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->alphaPushButton,   &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->betaPushButton,    &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->gammaPushButton,   &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->deltaPushButton,   &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->epsilonPushButton, &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->zetaPushButton,    &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->etaPushButton,     &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->thetaPushButton,   &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->iotaPushButton,    &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->kappaPushButton,   &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->lambdaPushButton,  &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->muPushButton,      &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->nuPushButton,      &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->xiPushButton,      &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->omicronPushButton, &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->piPushButton,      &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->rhoPushButton,     &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->sigmaPushButton,   &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->tauPushButton,     &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->upsilonPushButton, &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->phiPushButton,     &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->chiPushButton,     &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->psiPushButton,     &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
+	connect(ui->omegaPushButton,   &QPushButton::clicked, this, &SearchDialog::greekLetterClicked);
 
         connectBoolProperty(ui->simbadGroupBox,        "SearchDialog.useSimbad");
 	connectIntProperty(ui->searchRadiusSpinBox,    "SearchDialog.simbadDist");
@@ -487,20 +487,20 @@ void SearchDialog::createDialogContent()
 	if (idx==-1) // Use University of Strasbourg as default
 		idx = ui->serverListComboBox->findData(QVariant(DEF_SIMBAD_URL), Qt::UserRole, Qt::MatchCaseSensitive);
 	ui->serverListComboBox->setCurrentIndex(idx);
-	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(selectSimbadServer(int)));
+	connect(ui->serverListComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &SearchDialog::selectSimbadServer);
 
-	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
+	connect(ui->checkBoxUseStartOfWords, &QCheckBox::clicked, this, &SearchDialog::enableStartOfWordsAutofill);
 	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
-	connect(ui->checkBoxUseSortingByLength, SIGNAL(clicked(bool)), this, SLOT(enableSortingByLength(bool)));
+	connect(ui->checkBoxUseSortingByLength, &QCheckBox::clicked, this, &SearchDialog::enableSortingByLength);
 	ui->checkBoxUseSortingByLength->setChecked(useLengthSorting);
 
-	connect(ui->checkBoxFOVCenterMarker, SIGNAL(clicked(bool)), this, SLOT(enableFOVCenterMarker(bool)));
+	connect(ui->checkBoxFOVCenterMarker, &QCheckBox::clicked, this, &SearchDialog::enableFOVCenterMarker);
 	ui->checkBoxFOVCenterMarker->setChecked(useFOVCenterMarker);
 
-	connect(ui->checkBoxLockPosition, SIGNAL(clicked(bool)), this, SLOT(enableLockPosition(bool)));
+	connect(ui->checkBoxLockPosition, &QCheckBox::clicked, this, &SearchDialog::enableLockPosition);
 	ui->checkBoxLockPosition->setChecked(useLockPosition);
 
-        connect(ui->checkBoxAutoClosing, SIGNAL(clicked(bool)), this, SLOT(enableAutoClosing(bool)));
+        connect(ui->checkBoxAutoClosing, &QCheckBox::clicked, this, &SearchDialog::enableAutoClosing);
         ui->checkBoxAutoClosing->setChecked(useAutoClosing);
 
 	// list views initialization
@@ -511,17 +511,17 @@ void SearchDialog::createDialogContent()
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->objectsListView->setModel(proxyModel);
 
-	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListView(int)));
-	connect(ui->searchInListLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
-	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
+	connect(ui->objectTypeComboBox, qOverload<int>(&QComboBox::activated), this, &SearchDialog::updateListView);
+	connect(ui->searchInListLineEdit, &QLineEdit::textChanged, proxyModel, &QSortFilterProxyModel::setFilterWildcard);
+	connect(ui->searchInEnglishCheckBox, &QCheckBox::toggled, this, &SearchDialog::updateListTab);
 	QAction *clearAction = ui->searchInListLineEdit->addAction(QIcon(":/graphicGui/uieBackspaceInputButton.png"), QLineEdit::ActionPosition::TrailingPosition);
-	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchListClear()));
+	connect(clearAction, &QAction::triggered, this, &SearchDialog::searchListClear);
 	updateListTab();
 
-	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(changeTab(int)));
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshFocus(bool)));
-	connect(StelApp::getInstance().getCore(), SIGNAL(updateSearchLists()), this, SLOT(updateListTab()));
-	connect(GETSTELMODULE(NomenclatureMgr), SIGNAL(flagShowNomenclatureChanged(bool)), this, SLOT(updateListTab()));
+	connect(ui->tabWidget, &QTabWidget::currentChanged, this, &SearchDialog::changeTab);
+	connect(this, &SearchDialog::visibleChanged, this, &SearchDialog::refreshFocus);
+	connect(StelApp::getInstance().getCore(), &StelCore::updateSearchLists, this, &SearchDialog::updateListTab);
+	connect(GETSTELMODULE(NomenclatureMgr), &NomenclatureMgr::flagShowNomenclatureChanged, this, &SearchDialog::updateListTab);
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &SearchDialog::updateListTab);
 
 	// Get data from previous session
@@ -536,9 +536,9 @@ void SearchDialog::createDialogContent()
 	setPushButtonGotoSearch();
 
 	// Update max size of "recent object searches"
-	connect(ui->recentSearchSizeSpinBox, SIGNAL(editingFinished()), this, SLOT(recentSearchSizeEditingFinished()));
+	connect(ui->recentSearchSizeSpinBox, &QSpinBox::editingFinished, this, &SearchDialog::recentSearchSizeEditingFinished);
 	// Clear data from recent search object
-	connect(ui->recentSearchClearDataPushButton, SIGNAL(clicked()), this, SLOT(recentSearchClearDataClicked()));
+	connect(ui->recentSearchClearDataPushButton, &QToolButton::clicked, this, &SearchDialog::recentSearchClearDataClicked);
 	populateRecentSearch();
 }
 
@@ -927,7 +927,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 	{
 		if (simbadReply)
 		{
-			disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+			disconnect(simbadReply, &SimbadLookupReply::statusChanged, this, &SearchDialog::onSimbadStatusChanged);
 			delete simbadReply;
 			simbadReply=nullptr;
 		}
@@ -956,7 +956,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		{
 			simbadReply = simbadSearcher->lookup(simbadServerUrl, trimmedText, 4);
 			onSimbadStatusChanged();
-			connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+			connect(simbadReply, &SimbadLookupReply::statusChanged, this, &SearchDialog::onSimbadStatusChanged);
 		}
 
 		// Get possible objects
@@ -1296,7 +1296,7 @@ void SearchDialog::lookupCoordinates()
 						   getSimbadQueryDist(), getSimbadGetsIds(), getSimbadGetsTypes(),
 						   getSimbadGetsSpec(), getSimbadGetsMorpho(), getSimbadGetsDims());
 	onSimbadStatusChanged();
-	connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+	connect(simbadReply, &SimbadLookupReply::statusChanged, this, &SearchDialog::onSimbadStatusChanged);
 }
 
 void SearchDialog::clearSimbadText(StelModule::StelModuleSelectAction)
@@ -1347,7 +1347,7 @@ void SearchDialog::onSimbadStatusChanged()
 
 	if (simbadReply->getCurrentStatus()!=SimbadLookupReply::SimbadLookupQuerying)
 	{
-		disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+		disconnect(simbadReply, &SimbadLookupReply::statusChanged, this, &SearchDialog::onSimbadStatusChanged);
 		delete simbadReply;
 		simbadReply=nullptr;
 
@@ -1667,7 +1667,7 @@ void SearchDialog::showContextMenu(const QPoint &pt)
 		clipText = "\t(" + clipText + ")";
 	}
 
-	menu->addAction(q_("Paste and Search") + clipText, this, SLOT(pasteAndGo()));
+	menu->addAction(q_("Paste and Search") + clipText, this, &SearchDialog::pasteAndGo);
 	menu->exec(ui->lineEditSearchSkyObject->mapToGlobal(pt));
 	delete menu;
 }

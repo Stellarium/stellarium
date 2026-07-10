@@ -37,7 +37,7 @@ AngleSpinBox::AngleSpinBox(QWidget* parent, DisplayFormat format, PrefixType pre
 	  minRad(-std::numeric_limits<double>::max()),
 	  maxRad( std::numeric_limits<double>::max())
 {
-	connect(this, SIGNAL(editingFinished()), this, SLOT(updateValue()));
+	connect(this, &AngleSpinBox::editingFinished, this, &AngleSpinBox::updateValue);
 	formatText();
 	setWrapping(false); // but should be set true for longitudinal cycling
 }

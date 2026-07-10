@@ -41,9 +41,9 @@ void SkylightDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &SkylightDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo,      this, &SkylightDialog::handleMovedTo);
 
 	connectBoolProperty(ui->checkBox_Schaefer, "Skylight.flagSchaefer");
 
@@ -53,7 +53,7 @@ void SkylightDialog::createDialogContent()
 	ui->comboBox_skylightDecimals->addItem("0.001", .001);
 	ui->comboBox_skylightDecimals->addItem("0.0001", .0001);
 	ui->comboBox_skylightDecimals->addItem("0.00001", .00001);
-	connect(ui->comboBox_skylightDecimals, SIGNAL(currentIndexChanged(int)), this, SLOT(setIncrements(int)));
+	connect(ui->comboBox_skylightDecimals, qOverload<int>(&QComboBox::currentIndexChanged), this, &SkylightDialog::setIncrements);
 	ui->comboBox_skylightDecimals->setCurrentIndex(2); // start with 0.01 increment
 
 	connectBoolProperty(ui->checkBox_earlySunHalo, "StelSkyDrawer.flagEarlySunHalo");
@@ -115,18 +115,18 @@ void SkylightDialog::createDialogContent()
 	connectDoubleProperty(ui->doubleSpinBox_Dy , "Skylight.Dyc");
 	connectDoubleProperty(ui->doubleSpinBox_Ey , "Skylight.Eyc");
 
-	connect(ui->pushButton_ResetDistYPreetham, SIGNAL(released()), this, SLOT(resetYPreet()));
-	connect(ui->pushButton_ResetDistxPreetham, SIGNAL(released()), this, SLOT(resetxPreet()));
-	connect(ui->pushButton_ResetDistyPreetham, SIGNAL(released()), this, SLOT(resetyPreet()));
-	connect(ui->pushButton_ResetDistYStel    , SIGNAL(released()), this, SLOT(resetYStel()));
-	connect(ui->pushButton_ResetDistxStel    , SIGNAL(released()), this, SLOT(resetxStel()));
-	connect(ui->pushButton_ResetDistyStel    , SIGNAL(released()), this, SLOT(resetyStel()));
-	connect(ui->pushButton_ResetZXpreetham, SIGNAL(released()), this, SLOT(resetZxPreet()));
-	connect(ui->pushButton_ResetZYpreetham, SIGNAL(released()), this, SLOT(resetZyPreet()));
-	connect(ui->pushButton_ResetZXstel,     SIGNAL(released()), this, SLOT(resetZxStel()));
-	connect(ui->pushButton_ResetZYstel,     SIGNAL(released()), this, SLOT(resetZyStel()));
-	connect(ui->resetPreetPushButton,     SIGNAL(released()), this, SLOT(resetPreet()));
-	connect(ui->resetStellPushButton,     SIGNAL(released()), this, SLOT(resetStel()));
+	connect(ui->pushButton_ResetDistYPreetham, &QPushButton::released, this, &SkylightDialog::resetYPreet);
+	connect(ui->pushButton_ResetDistxPreetham, &QPushButton::released, this, &SkylightDialog::resetxPreet);
+	connect(ui->pushButton_ResetDistyPreetham, &QPushButton::released, this, &SkylightDialog::resetyPreet);
+	connect(ui->pushButton_ResetDistYStel    , &QPushButton::released, this, &SkylightDialog::resetYStel);
+	connect(ui->pushButton_ResetDistxStel    , &QPushButton::released, this, &SkylightDialog::resetxStel);
+	connect(ui->pushButton_ResetDistyStel    , &QPushButton::released, this, &SkylightDialog::resetyStel);
+	connect(ui->pushButton_ResetZXpreetham   , &QPushButton::released, this, &SkylightDialog::resetZxPreet);
+	connect(ui->pushButton_ResetZYpreetham   , &QPushButton::released, this, &SkylightDialog::resetZyPreet);
+	connect(ui->pushButton_ResetZXstel       , &QPushButton::released, this, &SkylightDialog::resetZxStel);
+	connect(ui->pushButton_ResetZYstel       , &QPushButton::released, this, &SkylightDialog::resetZyStel);
+	connect(ui->resetPreetPushButton         , &QPushButton::released, this, &SkylightDialog::resetPreet);
+	connect(ui->resetStellPushButton         , &QPushButton::released, this, &SkylightDialog::resetStel);
 }
 
 void SkylightDialog::setIncrements(int idx)

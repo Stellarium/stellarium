@@ -48,9 +48,9 @@ void ConfigureScreenshotsDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ConfigureScreenshotsDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ConfigureScreenshotsDialog::handleMovedTo);
 
 	connectBoolProperty(ui->useDateTimeFileMask, "MainView.flagScreenshotDateFileName");
 	connectStringProperty(ui->maskLineEdit, "MainView.screenShotFileMask");

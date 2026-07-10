@@ -50,9 +50,9 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ConfigureDSOColorsDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ConfigureDSOColorsDialog::handleMovedTo);
 
 	ui->colorDSOLabels                    ->setup("NebulaMgr.labelsColor",                     "color/dso_label_color");
 	ui->colorDSOMarkers                   ->setup("NebulaMgr.circlesColor",                    "color/dso_circle_color");

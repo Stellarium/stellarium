@@ -154,7 +154,7 @@ void ConfigurationDialog::createDialogContent()
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ConfigurationDialog::retranslate);
 
 	// Set the main tab activated by default
 	ui->configurationStackedWidget->setCurrentIndex(0);
@@ -166,11 +166,11 @@ void ConfigurationDialog::createDialogContent()
 	if (appGui)
 	{
 		enableKineticScrolling(appGui->getFlagUseKineticScrolling());
-		connect(appGui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(appGui, &StelGui::flagUseKineticScrollingChanged, this, &ConfigurationDialog::enableKineticScrolling);
 	}
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo,      this, &ConfigurationDialog::handleMovedTo);
 
 	// Main tab
 	#ifdef ENABLE_NLS
@@ -180,23 +180,23 @@ void ConfigurationDialog::createDialogContent()
 	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
 	cb->model()->sort(0);
 	updateCurrentLanguage();
-	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
-	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectLanguage(const int)));
+	connect(cb->lineEdit(), &QLineEdit::editingFinished, this, &ConfigurationDialog::updateCurrentLanguage);
+	connect(cb, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::selectLanguage);
 	// Language properties are potentially delicate. Accidentally immediate storing may cause obvious problems.
-	connect(ui->languageSaveToolButton, SIGNAL(clicked()), this, SLOT(storeLanguageSettings()));
+	connect(ui->languageSaveToolButton, &QToolButton::clicked, this, &ConfigurationDialog::storeLanguageSettings);
 	#else
 	ui->groupBox_LanguageSettings->hide();
 	#endif
 
-	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
-	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
-	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
+	connect(ui->getStarsButton, &QCommandLinkButton::clicked, this, &ConfigurationDialog::downloadStars);
+	connect(ui->downloadCancelButton, &QPushButton::clicked,  this, &ConfigurationDialog::cancelDownload);
+	connect(ui->downloadRetryButton,  &QPushButton::clicked,  this, &ConfigurationDialog::downloadStars);
 	resetStarCatalogControls();
 
-	connect(ui->de430checkBox, SIGNAL(clicked()), this, SLOT(de430ButtonClicked()));
-	connect(ui->de431checkBox, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
-	connect(ui->de440checkBox, SIGNAL(clicked()), this, SLOT(de440ButtonClicked()));
-	connect(ui->de441checkBox, SIGNAL(clicked()), this, SLOT(de441ButtonClicked()));
+	connect(ui->de430checkBox, &QCheckBox::clicked, this, &ConfigurationDialog::de430ButtonClicked);
+	connect(ui->de431checkBox, &QCheckBox::clicked, this, &ConfigurationDialog::de431ButtonClicked);
+	connect(ui->de440checkBox, &QCheckBox::clicked, this, &ConfigurationDialog::de440ButtonClicked);
+	connect(ui->de441checkBox, &QCheckBox::clicked, this, &ConfigurationDialog::de441ButtonClicked);
 	resetEphemControls();
 
 	connectBoolProperty(ui->nutationCheckBox,    "StelCore.flagUseNutation");
@@ -221,17 +221,17 @@ void ConfigurationDialog::createDialogContent()
 
 	// Selected object info
 	updateSelectedInfoGui();
-	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
-	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
-	connect(ui->defaultSelectedInfoRadio, SIGNAL(released()), this, SLOT(setDefaultSelectedInfo()));
-	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
-	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
-	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedInfoFromCheckBoxes()));
+	connect(ui->noSelectedInfoRadio,      &QRadioButton::released, this, &ConfigurationDialog::setNoSelectedInfo);
+	connect(ui->allSelectedInfoRadio,     &QRadioButton::released, this, &ConfigurationDialog::setAllSelectedInfo);
+	connect(ui->defaultSelectedInfoRadio, &QRadioButton::released, this, &ConfigurationDialog::setDefaultSelectedInfo);
+	connect(ui->briefSelectedInfoRadio,   &QRadioButton::released, this, &ConfigurationDialog::setBriefSelectedInfo);
+	connect(ui->customSelectedInfoRadio,  &QRadioButton::released, this, &ConfigurationDialog::setCustomSelectedInfo);
+	connect(ui->buttonGroupDisplayedFields, qOverload<QAbstractButton*>(&QButtonGroup::buttonClicked), this, &ConfigurationDialog::setSelectedInfoFromCheckBoxes);
 #ifdef ENABLE_SPEECH
-	connect(ui->buttonGroupNarrateFields,   SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedNarrationFromCheckBoxes()));
+	connect(ui->buttonGroupNarrateFields,   &QButtonGroup::buttonClicked, this, &ConfigurationDialog::setSelectedNarrationFromCheckBoxes);
 #endif
 	if (appGui)
-		connect(appGui, SIGNAL(infoStringChanged()), this, SLOT(updateSelectedInfoGui()));
+		connect(appGui, &StelGui::infoStringChanged, this, &ConfigurationDialog::updateSelectedInfoGui);
 	
 	// Navigation tab
 	// Startup time
@@ -241,25 +241,25 @@ void ConfigurationDialog::createDialogContent()
 		ui->todayRadio->setChecked(true);
 	else
 		ui->fixedTimeRadio->setChecked(true);
-	connect(ui->systemTimeRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
-	connect(ui->todayRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
-	connect(ui->fixedTimeRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
+	connect(ui->systemTimeRadio, &QRadioButton::clicked, this, &ConfigurationDialog::setStartupTimeMode);
+	connect(ui->todayRadio,      &QRadioButton::clicked, this, &ConfigurationDialog::setStartupTimeMode);
+	connect(ui->fixedTimeRadio,  &QRadioButton::clicked, this, &ConfigurationDialog::setStartupTimeMode);
 
 	ui->todayTimeSpinBox->setTime(core->getInitTodayTime());
-	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), core, SLOT(setInitTodayTime(QTime)));
+	connect(ui->todayTimeSpinBox, &QTimeEdit::timeChanged, core, &StelCore::setInitTodayTime);
 	ui->fixedDateTimeEdit->setMinimumDate(QDate(100,1,1));
 	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(core->getPresetSkyTime(), Qt::LocalTime));
-	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), core, SLOT(setPresetSkyTime(QDateTime)));
+	connect(ui->fixedDateTimeEdit, &QDateTimeEdit::dateTimeChanged, core, &StelCore::setPresetSkyDateTime);
 
 	bool state = (mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
 	ui->enableKeysNavigationCheckBox->setChecked(state);
 	ui->editShortcutsPushButton->setEnabled(state);
-	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), this, SLOT(setKeyNavigationState(bool)));
-	connectBoolProperty(ui->enableMouseNavigationCheckBox,  "StelMovementMgr.flagEnableMouseNavigation");
-	connectBoolProperty(ui->enableMouseZoomingCheckBox,  "StelMovementMgr.flagEnableMouseZooming");
+	connect(ui->enableKeysNavigationCheckBox, &QCheckBox::toggled, this, &ConfigurationDialog::setKeyNavigationState);
+	connectBoolProperty(ui->enableMouseNavigationCheckBox, "StelMovementMgr.flagEnableMouseNavigation");
+	connectBoolProperty(ui->enableMouseZoomingCheckBox,    "StelMovementMgr.flagEnableMouseZooming");
 
-	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
-	connect(ui->editShortcutsPushButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
+	connect(ui->fixedDateTimeCurrentButton, &QPushButton::clicked, this, &ConfigurationDialog::setFixedDateTimeToCurrent);
+	connect(ui->editShortcutsPushButton,    &QPushButton::clicked, this, &ConfigurationDialog::showShortcutsWindow);
 
 	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
 	// Display formats of date
@@ -271,7 +271,7 @@ void ConfigurationDialog::createDialogContent()
 		idx = ui->dateFormatsComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->dateFormatsComboBox->setCurrentIndex(idx);
-	connect(ui->dateFormatsComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(setDateFormat()));
+	connect(ui->dateFormatsComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDateFormat);
 	connectBoolProperty(ui->startupTimeStopCheckBox, "StelCore.startupTimeStop");
 
 	// Display formats of time
@@ -283,13 +283,13 @@ void ConfigurationDialog::createDialogContent()
 		idx = ui->timeFormatsComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->timeFormatsComboBox->setCurrentIndex(idx);
-	connect(ui->timeFormatsComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(setTimeFormat()));
+	connect(ui->timeFormatsComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setTimeFormat);
 	if (StelApp::getInstance().getSettings()->value("gui/flag_time_jd", false).toBool())
 		ui->jdRadioButton->setChecked(true);
 	else
 		ui->dtRadioButton->setChecked(true);
-	connect(ui->jdRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
-	connect(ui->dtRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
+	connect(ui->jdRadioButton, &QRadioButton::clicked, this, &ConfigurationDialog::setButtonBarDTFormat);
+	connect(ui->dtRadioButton, &QRadioButton::clicked, this, &ConfigurationDialog::setButtonBarDTFormat);
 
 	// Important: updating display format for date and time after settings these formats
 	updateDateTimeDisplayFormat();
@@ -303,18 +303,18 @@ void ConfigurationDialog::createDialogContent()
 		idx = ui->deltaTAlgorithmComboBox->findData(QVariant("EspenakMeeusModified"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
-	connect(ui->deltaTAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDeltaTAlgorithm(int)));
-	connect(ui->pushButtonCustomDeltaTEquationDialog, SIGNAL(clicked()), this, SLOT(showCustomDeltaTEquationDialog()));
+	connect(ui->deltaTAlgorithmComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDeltaTAlgorithm);
+	connect(ui->pushButtonCustomDeltaTEquationDialog, &QToolButton::clicked, this, &ConfigurationDialog::showCustomDeltaTEquationDialog);
 	if (core->getCurrentDeltaTAlgorithm()==StelCore::Custom)
 		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
 
 	// Tools tab
 	ui->sphericMirrorCheckbox->setChecked(StelApp::getInstance().getViewportEffect() == "sphericMirrorDistorter");
-	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
+	connect(ui->sphericMirrorCheckbox, &QCheckBox::toggled, this, &ConfigurationDialog::setSphericMirror);
 	connectBoolProperty(ui->gravityLabelCheckbox, "StelCore.flagGravityLabels");
 
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
-	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
+	connect(ui->diskViewportCheckbox, &QCheckBox::toggled, this, &ConfigurationDialog::setDiskViewport);
 	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox,    "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
 	connectBoolProperty(ui->showQuitButtonCheckBox,             "StelGui.flagShowQuitButton");
@@ -364,12 +364,12 @@ void ConfigurationDialog::createDialogContent()
 	if (StelApp::getInstance().getSettings()->value("gui/flag_font_selection", true).toBool())
 	{
 		populateFontWritingSystemCombo();
-		connect(ui->fontWritingSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(handleFontBoxWritingSystem(int)));
+		connect(ui->fontWritingSystemComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::handleFontBoxWritingSystem);
 
 		ui->fontComboBox->setWritingSystem(QFontDatabase::Any);
 		ui->fontComboBox->setFontFilters(QFontComboBox::ScalableFonts | QFontComboBox::ProportionalFonts);
 		ui->fontComboBox->setCurrentFont(QGuiApplication::font());
-		connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), &StelApp::getInstance(), SLOT(setAppFont(QFont)));
+		connect(ui->fontComboBox, &QFontComboBox::currentFontChanged, &StelApp::getInstance(), &StelApp::setAppFont);
 	}
 	else
 	{
@@ -377,15 +377,15 @@ void ConfigurationDialog::createDialogContent()
 		ui->fontComboBox->hide();
 	}
 	// Font properties are potentially delicate. Immediate storing may cause problems with other script systems etc.
-	connect(ui->fontSaveToolButton, SIGNAL(clicked()), this, SLOT(storeFontSettings()));
+	connect(ui->fontSaveToolButton, &QToolButton::clicked, this, &ConfigurationDialog::storeFontSettings);
 
 	// Dithering
 	populateDitherList();
-	connect(ui->ditheringComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(setDitherFormat()));
+	connect(ui->ditheringComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDitherFormat);
 
 	// General Option Save
-	connect(ui->saveViewDirAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewDirSettings()));
-	connect(ui->saveSettingsAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveAllSettings()));
+	connect(ui->saveViewDirAsDefaultPushButton,  &QPushButton::clicked, this, &ConfigurationDialog::saveCurrentViewDirSettings);
+	connect(ui->saveSettingsAsDefaultPushButton, &QPushButton::clicked, this, &ConfigurationDialog::saveAllSettings);
 	connectBoolProperty(ui->immediateSaveCheckBox, "StelApp.flagImmediateSave");
 	// Disable "save settings" button in case of immediate-store mode
 	if (StelApp::getInstance().getFlagImmediateSave())
@@ -399,15 +399,15 @@ void ConfigurationDialog::createDialogContent()
 			ui->saveSettingsAsDefaultPushButton->setDisabled(false);
 	});
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(setDefaultViewOptions()));
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &ConfigurationDialog::setDefaultViewOptions);
 
 	// Screenshots
 	populateScreenshotFileformatsCombo();
-	connect(ui->pushButtonConfigureScreenshotsDialog, SIGNAL(clicked()), this, SLOT(showConfigureScreenshotsDialog()));
+	connect(ui->pushButtonConfigureScreenshotsDialog, &QPushButton::clicked, this, &ConfigurationDialog::showConfigureScreenshotsDialog);
 	connectStringProperty(ui->screenshotFileFormatComboBox,  "MainView.screenShotFormat");
 	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
-	connect(ui->screenshotDirEdit, SIGNAL(editingFinished()), this, SLOT(selectScreenshotDir()));
-	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
+	connect(ui->screenshotDirEdit, &QLineEdit::editingFinished, this, &ConfigurationDialog::selectScreenshotDir);
+	connect(ui->screenshotBrowseButton, &QPushButton::clicked, this, &ConfigurationDialog::browseForScreenshotDir);
 	connectBoolProperty(ui->invertScreenShotColorsCheckBox,  "MainView.flagInvertScreenShotColors");
 	connectBoolProperty(ui->useCustomScreenshotSizeCheckBox, "MainView.flagUseCustomScreenshotSize");
 	ui->customScreenshotWidthLineEdit->setValidator(new MinMaxIntValidator(128, 16384, this));
@@ -416,29 +416,29 @@ void ConfigurationDialog::createDialogContent()
 	connectIntProperty(ui->customScreenshotHeightLineEdit,   "MainView.customScreenshotHeight");
 	connectIntProperty(ui->dpiSpinBox,                       "MainView.screenshotDpi");
 	StelMainView *mainView=static_cast<StelMainView *>(StelApp::getInstance().parent());
-	connect(mainView, SIGNAL(screenshotDpiChanged(int)), this, SLOT(updateDpiTooltip()));
-	connect(mainView, SIGNAL(flagUseCustomScreenshotSizeChanged(bool)), this, SLOT(updateDpiTooltip()));
-	connect(mainView, SIGNAL(customScreenshotWidthChanged(int)), this, SLOT(updateDpiTooltip()));
-	connect(mainView, SIGNAL(customScreenshotHeightChanged(int)), this, SLOT(updateDpiTooltip()));
-	connect(mainView, SIGNAL(customScreenshotHeightChanged(int)), this, SLOT(updateDpiTooltip()));
-	connect(mainView, SIGNAL(sizeChanged(const QSize&)), this, SLOT(updateDpiTooltip()));
+	connect(mainView, &StelMainView::screenshotDpiChanged,               this, &ConfigurationDialog::updateDpiTooltip);
+	connect(mainView, &StelMainView::flagUseCustomScreenshotSizeChanged, this, &ConfigurationDialog::updateDpiTooltip);
+	connect(mainView, &StelMainView::customScreenshotWidthChanged,       this, &ConfigurationDialog::updateDpiTooltip);
+	connect(mainView, &StelMainView::customScreenshotHeightChanged,      this, &ConfigurationDialog::updateDpiTooltip);
+	connect(mainView, &StelMainView::customScreenshotHeightChanged,      this, &ConfigurationDialog::updateDpiTooltip);
+	connect(mainView, &StelMainView::sizeChanged,                        this, &ConfigurationDialog::updateDpiTooltip);
 	updateDpiTooltip();
 
 	// script tab controls
 	#ifdef ENABLE_SCRIPTING
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
-	connect(ui->scriptListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(scriptSelectionChanged(const QString&)));
-	connect(ui->runScriptButton, SIGNAL(clicked()), this, SLOT(runScriptClicked()));
-	connect(ui->stopScriptButton, SIGNAL(clicked()), this, SLOT(stopScriptClicked()));
+	connect(ui->scriptListWidget, &QListWidget::currentTextChanged, this, &ConfigurationDialog::scriptSelectionChanged);
+	connect(ui->runScriptButton,  &QPushButton::clicked, this, &ConfigurationDialog::runScriptClicked);
+	connect(ui->stopScriptButton, &QPushButton::clicked, this, &ConfigurationDialog::stopScriptClicked);
 	if (scriptMgr.scriptIsRunning())
 		aScriptIsRunning();
 	else
 		aScriptHasStopped();
-	connect(&scriptMgr, SIGNAL(scriptRunning()), this, SLOT(aScriptIsRunning()));
-	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(aScriptHasStopped()));
+	connect(&scriptMgr, &StelScriptMgr::scriptRunning, this, &ConfigurationDialog::aScriptIsRunning);
+	connect(&scriptMgr, &StelScriptMgr::scriptStopped, this, &ConfigurationDialog::aScriptHasStopped);
 	ui->scriptListWidget->setSortingEnabled(true);
 	populateScriptsList();
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
+	connect(this, &ConfigurationDialog::visibleChanged, this, &ConfigurationDialog::populateScriptsList);
 	#else
 	ui->configurationStackedWidget->removeWidget(ui->page_Scripts); // only hide, no delete!
 	QListWidgetItem *item = ui->stackListWidget->takeItem(6); // take out from its place.
@@ -498,14 +498,14 @@ void ConfigurationDialog::createDialogContent()
 	}
 
 	// plugins control
-	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*, QListWidgetItem*)));
+	connect(ui->pluginsListWidget, &QListWidget::currentItemChanged, this, &ConfigurationDialog::pluginsSelectionChanged);
 #if (QT_VERSION<QT_VERSION_CHECK(6,7,0))
-	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
+	connect(ui->pluginLoadAtStartupCheckBox, &QCheckBox::stateChanged, this, &ConfigurationDialog::loadAtStartupChanged);
 #else
-	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(loadAtStartupChanged(Qt::CheckState)));
+	connect(ui->pluginLoadAtStartupCheckBox, &QCheckBox::checkStateChanged, this, &ConfigurationDialog::loadAtStartupChanged);
 #endif
-	connect(ui->pluginsListWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(pluginConfigureCurrentSelection()));
-	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
+	connect(ui->pluginsListWidget, &QListWidget::doubleClicked, this, &ConfigurationDialog::pluginConfigureCurrentSelection);
+	connect(ui->pluginConfigureButton, &QPushButton::clicked, this, &ConfigurationDialog::pluginConfigureCurrentSelection);
 	populatePluginsList();
 
 	updateConfigLabels();
@@ -575,7 +575,7 @@ void ConfigurationDialog::setStartupTimeMode()
 		core->setStartupTimeMode("preset");
 
 	core->setInitTodayTime(ui->todayTimeSpinBox->time());
-	core->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
+	core->setPresetSkyDateTime(ui->fixedDateTimeEdit->dateTime());
 }
 
 void ConfigurationDialog::setButtonBarDTFormat()
@@ -1882,12 +1882,12 @@ void ConfigurationDialog::downloadStars()
 	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);	
-	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
-	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+	connect(starCatalogDownloadReply, &QNetworkReply::readyRead, this, &ConfigurationDialog::newStarCatalogData);
+	connect(starCatalogDownloadReply, &QNetworkReply::finished,  this, &ConfigurationDialog::downloadFinished);
 	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	connect(starCatalogDownloadReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+	connect(starCatalogDownloadReply, &QNetworkReply::errorOccurred, this, &ConfigurationDialog::downloadError);
 	#else
-	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+	connect(starCatalogDownloadReply, qOverload<QNetworkReply::NetworkError>(&QNetworkReply::error), this, &ConfigurationDialog::downloadError);
 	#endif
 
 	progressBar = StelApp::getInstance().addProgressBar();
@@ -1941,9 +1941,13 @@ void ConfigurationDialog::downloadFinished()
 		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
-		connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
-		connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-		connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+		connect(starCatalogDownloadReply, &QNetworkReply::readyRead, this, &ConfigurationDialog::newStarCatalogData);
+		connect(starCatalogDownloadReply, &QNetworkReply::finished,  this, &ConfigurationDialog::downloadFinished);
+#if (QT_VERSION<QT_VERSION_CHECK(5,15,0))
+		connect(starCatalogDownloadReply, qOverload<QNetworkReply::NetworkError>(&QNetworkReply::error), this, &ConfigurationDialog::downloadError);
+#else
+		connect(starCatalogDownloadReply, &QNetworkReply::errorOccurred,     this, &ConfigurationDialog::downloadError);
+#endif
 		return;
 	}
 
