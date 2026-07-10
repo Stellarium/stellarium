@@ -272,24 +272,24 @@ void LocationDialog::updateFromProgram(const StelLocation& newLocation)
 
 void LocationDialog::disconnectEditSignals()
 {
-	disconnect(ui->longitudeSpinBox, &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
-	disconnect(ui->latitudeSpinBox, &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
-	disconnect(ui->altitudeSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &LocationDialog::setLocationFromCoords);
-	disconnect(ui->planetNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::moveToAnotherPlanet);
-	disconnect(ui->regionNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::reportEdit);
+	disconnect(ui->longitudeSpinBox,     &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	disconnect(ui->latitudeSpinBox,      &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	disconnect(ui->altitudeSpinBox,      qOverload<int>(&QSpinBox::valueChanged), this, &LocationDialog::setLocationFromCoords);
+	disconnect(ui->planetNameComboBox,   qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::moveToAnotherPlanet);
+	disconnect(ui->regionNameComboBox,   qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::reportEdit);
 	disconnect(ui->timeZoneNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::saveTimeZone);
-	disconnect(ui->cityNameLineEdit, &QLineEdit::textEdited, this, &LocationDialog::reportEdit);
+	disconnect(ui->cityNameLineEdit,     &QLineEdit::textEdited, this, &LocationDialog::reportEdit);
 }
 
 void LocationDialog::connectEditSignals()
 {
-	connect(ui->longitudeSpinBox, &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
-	connect(ui->latitudeSpinBox, &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
-	connect(ui->altitudeSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &LocationDialog::setLocationFromCoords);
-	connect(ui->planetNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::moveToAnotherPlanet);
-	connect(ui->regionNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::reportEdit);
+	connect(ui->longitudeSpinBox,     &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	connect(ui->latitudeSpinBox,      &AngleSpinBox::valueChanged, this, &LocationDialog::setLocationFromCoords);
+	connect(ui->altitudeSpinBox,      qOverload<int>(&QSpinBox::valueChanged), this, &LocationDialog::setLocationFromCoords);
+	connect(ui->planetNameComboBox,   qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::moveToAnotherPlanet);
+	connect(ui->regionNameComboBox,   qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::reportEdit);
 	connect(ui->timeZoneNameComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &LocationDialog::saveTimeZone);
-	connect(ui->cityNameLineEdit, &QLineEdit::textEdited, this, &LocationDialog::reportEdit);
+	connect(ui->cityNameLineEdit,     &QLineEdit::textEdited, this, &LocationDialog::reportEdit);
 }
 
 void LocationDialog::setLocationUIvisible(bool visible)
@@ -922,7 +922,7 @@ void LocationDialog::gpsEnableQueryLocation(bool running)
 		// (edit signals restored by gpsReturn())
 		StelApp::getInstance().getLocationMgr().locationFromGPS(0);
 		ui->gpsToolButton->setText(q_("GPS disconnecting..."));
-		QTimer::singleShot(1500, this, SLOT(resetGPSbuttonLabel()));
+		QTimer::singleShot(1500, this, &LocationDialog::resetGPSbuttonLabel);
 	}
 }
 
@@ -960,7 +960,7 @@ void LocationDialog::gpsReturn(bool success)
 		ui->gpsToolButton->setText(q_("GPS:FAILED"));
 		ui->gpsToolButton->setStyleSheet(QString("QToolButton{ background: red; }"));
 		// Use QTimer to reset the labels after 2 seconds.
-		QTimer::singleShot(2000, this, SLOT(resetGPSbuttonLabel()));
+		QTimer::singleShot(2000, this, &LocationDialog::resetGPSbuttonLabel);
 	}
 	connectEditSignals();
 	ui->citySearchLineEdit->setFocus();
