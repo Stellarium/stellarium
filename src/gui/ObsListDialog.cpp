@@ -142,7 +142,7 @@ void ObsListDialog::createDialogContent()
 
 
 	//obsListCombo settings: A change in the combobox loads the list.
-	connect(ui->obsListComboBox, QOverload<int>::of(&QComboBox::activated), this, &ObsListDialog::loadSelectedObservingList);
+	connect(ui->obsListComboBox, qOverload<int>(&QComboBox::activated), this, &ObsListDialog::loadSelectedObservingList);
 
 	auto *proxy = new ObsListDialogSortFilterProxyModel;
 	proxy->setSourceModel(itemModel);

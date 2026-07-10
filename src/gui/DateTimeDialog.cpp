@@ -97,26 +97,26 @@ void DateTimeDialog::setFlagEnableFocus(bool b)
 
 void DateTimeDialog::connectSpinnerEvents() const
 {
-	connect(ui->spinner_year,    QOverload<int>::of(&QSpinBox::valueChanged),            this, &DateTimeDialog::yearChanged);
-	connect(ui->spinner_month,   QOverload<int>::of(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::monthChanged);
-	connect(ui->spinner_day,     QOverload<int>::of(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::dayChanged);
-	connect(ui->spinner_hour,    QOverload<int>::of(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::hourChanged);
-	connect(ui->spinner_minute,  QOverload<int>::of(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::minuteChanged);
-	connect(ui->spinner_second,  QOverload<int>::of(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::secondChanged);
-	connect(ui->spinner_jd,      QOverload<double>::of(&QDoubleSpinBox::valueChanged),   this, &DateTimeDialog::jdChanged);
-	connect(ui->spinner_mjd,     QOverload<double>::of(&QDoubleSpinBox::valueChanged),   this, &DateTimeDialog::mjdChanged);
+	connect(ui->spinner_year,    qOverload<int>(&QSpinBox::valueChanged),            this, &DateTimeDialog::yearChanged);
+	connect(ui->spinner_month,   qOverload<int>(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::monthChanged);
+	connect(ui->spinner_day,     qOverload<int>(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::dayChanged);
+	connect(ui->spinner_hour,    qOverload<int>(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::hourChanged);
+	connect(ui->spinner_minute,  qOverload<int>(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::minuteChanged);
+	connect(ui->spinner_second,  qOverload<int>(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::secondChanged);
+	connect(ui->spinner_jd,      qOverload<double>(&QDoubleSpinBox::valueChanged),   this, &DateTimeDialog::jdChanged);
+	connect(ui->spinner_mjd,     qOverload<double>(&QDoubleSpinBox::valueChanged),   this, &DateTimeDialog::mjdChanged);
 }
 
 void DateTimeDialog::disconnectSpinnerEvents()const
 {
-	disconnect(ui->spinner_year,   QOverload<int>::of(&QSpinBox::valueChanged),            this, &DateTimeDialog::yearChanged);
-	disconnect(ui->spinner_month,  QOverload<int>::of(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::monthChanged);
-	disconnect(ui->spinner_day,    QOverload<int>::of(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::dayChanged);
-	disconnect(ui->spinner_hour,   QOverload<int>::of(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::hourChanged);
-	disconnect(ui->spinner_minute, QOverload<int>::of(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::minuteChanged);
-	disconnect(ui->spinner_second, QOverload<int>::of(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::secondChanged);
-	disconnect(ui->spinner_jd,     QOverload<double>::of(&QDoubleSpinBox::valueChanged),   this, &DateTimeDialog::jdChanged);
-	disconnect(ui->spinner_mjd,    QOverload<double>::of(&QDoubleSpinBox::valueChanged),   this, &DateTimeDialog::mjdChanged);
+	disconnect(ui->spinner_year,   qOverload<int>(&QSpinBox::valueChanged),            this, &DateTimeDialog::yearChanged);
+	disconnect(ui->spinner_month,  qOverload<int>(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::monthChanged);
+	disconnect(ui->spinner_day,    qOverload<int>(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::dayChanged);
+	disconnect(ui->spinner_hour,   qOverload<int>(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::hourChanged);
+	disconnect(ui->spinner_minute, qOverload<int>(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::minuteChanged);
+	disconnect(ui->spinner_second, qOverload<int>(&ExternalStepSpinBox::valueChanged), this, &DateTimeDialog::secondChanged);
+	disconnect(ui->spinner_jd,     qOverload<double>(&QDoubleSpinBox::valueChanged),   this, &DateTimeDialog::jdChanged);
+	disconnect(ui->spinner_mjd,    qOverload<double>(&QDoubleSpinBox::valueChanged),   this, &DateTimeDialog::mjdChanged);
 }
 
 

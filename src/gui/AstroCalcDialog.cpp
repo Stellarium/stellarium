@@ -266,7 +266,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->celestialPositionsTreeWidget, &QTreeWidget::currentItemChanged, ui->celestialPositionsTreeWidget, qOverload<>(&QTreeWidget::repaint));
 
 	ui->celestialMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/celestial_magnitude_limit", 6.0).toDouble());
-	connect(ui->celestialMagnitudeDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,  &AstroCalcDialog::saveCelestialPositionsMagnitudeLimit);
+	connect(ui->celestialMagnitudeDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged), this,  &AstroCalcDialog::saveCelestialPositionsMagnitudeLimit);
 
 	ui->horizontalCoordinatesCheckBox->setChecked(conf->value("astrocalc/flag_horizontal_coordinates", false).toBool());
 	connect(ui->horizontalCoordinatesCheckBox, &QCheckBox::toggled, this, &AstroCalcDialog::saveCelestialPositionsHorizontalCoordinatesFlag);
@@ -274,7 +274,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->celestialPositionsTreeWidget,   &QTreeWidget::doubleClicked,     this, &AstroCalcDialog::selectCurrentCelestialPosition);
 	connect(ui->celestialPositionsUpdateButton, &QPushButton::clicked,           this, &AstroCalcDialog::currentCelestialPositions);
 	connect(ui->celestialPositionsSaveButton,   &QPushButton::clicked,           this, &AstroCalcDialog::saveCelestialPositions);
-	connect(ui->celestialCategoryComboBox,      QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveCelestialPositionsCategory);
+	connect(ui->celestialCategoryComboBox,      qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveCelestialPositionsCategory);
 	connect(dsoMgr, &NebulaMgr::catalogFiltersChanged,      this, &AstroCalcDialog::populateCelestialCategoryList);
 	connect(dsoMgr, &NebulaMgr::catalogFiltersChanged,      this, &AstroCalcDialog::currentCelestialPositions);
 	connect(dsoMgr, &NebulaMgr::flagSizeLimitsUsageChanged, this, &AstroCalcDialog::currentCelestialPositions);
@@ -290,7 +290,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->hecBrightCometsCheckBox, &QCheckBox::toggled, this, &AstroCalcDialog::saveHECFlagBrightComets);
 	ui->hecMagnitudeLimitSpinBox->setValue(conf->value("astrocalc/hec_magnitude_limit", 9.0).toDouble());
 	ui->hecMagnitudeLimitSpinBox->setEnabled(brightCometsState);
-	connect(ui->hecMagnitudeLimitSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,  &AstroCalcDialog::saveHECBrightCometMagnitudeLimit);
+	connect(ui->hecMagnitudeLimitSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged), this,  &AstroCalcDialog::saveHECBrightCometMagnitudeLimit);
 	connect(ui->hecPositionsTreeWidget,   &QTreeWidget::doubleClicked,   this, &AstroCalcDialog::selectCurrentHECPosition);
 	connect(ui->hecPositionsTreeWidget,   &QTreeWidget::clicked,         this, &AstroCalcDialog::markCurrentHECPosition);
 	connect(ui->hecPositionsUpdateButton, &QPushButton::clicked,         this, &AstroCalcDialog::currentHECPositions);
@@ -314,15 +314,15 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->ephemerisSaveButton,    &QPushButton::clicked, this, &AstroCalcDialog::saveEphemeris);
 	connect(ui->ephemerisTreeWidget,    &QTreeWidget::doubleClicked,        this, &AstroCalcDialog::selectCurrentEphemeride);
 	connect(ui->ephemerisTreeWidget,    &QTreeWidget::itemSelectionChanged, this, &AstroCalcDialog::onChangedEphemerisPosition);
-	connect(ui->ephemerisStepComboBox,  QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisTimeStep);
-	connect(ui->dateToUnitsComboBox,    QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisTimeUnit);
-	connect(ui->celestialBodyComboBox,  QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisCelestialBody);
-	connect(ui->secondaryCelestialBodyComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisSecondaryCelestialBody);
+	connect(ui->ephemerisStepComboBox,  qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisTimeStep);
+	connect(ui->dateToUnitsComboBox,    qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisTimeUnit);
+	connect(ui->celestialBodyComboBox,  qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisCelestialBody);
+	connect(ui->secondaryCelestialBodyComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisSecondaryCelestialBody);
 	connect(ui->pushButtonNow, &QToolButton::clicked, this, &AstroCalcDialog::setDateTimeNow);
-	connect(ui->dateFromYearSpinBox,  QOverload<int>::of(&QSpinBox::valueChanged), this, &AstroCalcDialog::setMonthDuration);
-	connect(ui->dateFromMonthSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &AstroCalcDialog::setMonthDuration);
+	connect(ui->dateFromYearSpinBox,  qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::setMonthDuration);
+	connect(ui->dateFromMonthSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::setMonthDuration);
 	ui->dateToDurationSpinBox->setValue(conf->value("astrocalc/ephemeris_time_duration", 1).toInt());
-	connect(ui->dateToDurationSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveEphemerisTimeDuration);
+	connect(ui->dateToDurationSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveEphemerisTimeDuration);
 	connect(core, &StelCore::flagUseAberrationChanged, this, &AstroCalcDialog::updateGeneratedEphemeris);
 	connect(core, &StelCore::aberrationFactorChanged,  this, &AstroCalcDialog::updateGeneratedEphemeris);
 
@@ -346,7 +346,7 @@ void AstroCalcDialog::createDialogContent()
 
 	// Tab: Eclipses
 	ui->eclipseYearsSpinBox->setValue(conf->value("astrocalc/eclipse_future_years", 10).toInt());
-	connect(ui->eclipseYearsSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=](int val){conf->setValue("astrocalc/eclipse_future_years", val);}); // Make that a permanent decision.
+	connect(ui->eclipseYearsSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, [=](int val){conf->setValue("astrocalc/eclipse_future_years", val);}); // Make that a permanent decision.
 	initListLunarEclipse();
 	enableLunarEclipsesButtons(buttonState);
 	connect(ui->lunareclipsesCalculateButton, &QPushButton::clicked, this, &AstroCalcDialog::generateLunarEclipses);
@@ -413,8 +413,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaCleanupButton, &QPushButton::clicked, this, &AstroCalcDialog::cleanupPhenomena);
 	connect(ui->phenomenaTreeWidget,    &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectCurrentPhenomen);
 	connect(ui->phenomenaSaveButton,    &QPushButton::clicked, this, &AstroCalcDialog::savePhenomena);
-	connect(ui->object1ComboBox,        QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::savePhenomenaCelestialBody);
-	connect(ui->object2ComboBox,        QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::savePhenomenaCelestialGroup);
+	connect(ui->object1ComboBox,        qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::savePhenomenaCelestialBody);
+	connect(ui->object2ComboBox,        qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::savePhenomenaCelestialGroup);
 	connect(ui->selectObjectButton,     &QPushButton::clicked, this, &AstroCalcDialog::selectStoredObject);
 	connect(objectMgr, &StelObjectMgr::selectedObjectChanged, this, &AstroCalcDialog::populateSelectedObject);
 
@@ -429,7 +429,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->sunAltitudeCheckBox,          &QCheckBox::toggled,     this, &AstroCalcDialog::saveAltVsTimeSunFlag);
 	connect(ui->moonAltitudeCheckBox,         &QCheckBox::toggled,     this, &AstroCalcDialog::saveAltVsTimeMoonFlag);
 	connect(ui->positiveAltitudeOnlyCheckBox, &QCheckBox::toggled,     this, &AstroCalcDialog::saveAltVsTimePositiveFlag);
-	connect(ui->positiveAltitudeLimitSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveAltVsTimePositiveLimit);
+	connect(ui->positiveAltitudeLimitSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveAltVsTimePositiveLimit);
 	connect(objectMgr, &StelObjectMgr::selectedObjectChanged, this, &AstroCalcDialog::drawAltVsTimeDiagram);
 	connect(objectMgr, &StelObjectMgr::selectedObjectChanged, this, &AstroCalcDialog::drawAziVsTimeDiagram);
 	connect(core, &StelCore::dateChanged,             this, &AstroCalcDialog::drawCurrentTimeDiagram);
@@ -446,24 +446,24 @@ void AstroCalcDialog::createDialogContent()
 	syncMonthlyElevationTime();
 	connect(ui->monthlyElevationTime,                 &QSlider::valueChanged,  this, &AstroCalcDialog::updateMonthlyElevationTime);
 	connect(ui->monthlyElevationPositiveCheckBox,     &QCheckBox::toggled,     this, &AstroCalcDialog::saveMonthlyElevationPositiveFlag);
-	connect(ui->monthlyElevationPositiveLimitSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveMonthlyElevationPositiveLimit);
+	connect(ui->monthlyElevationPositiveLimitSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveMonthlyElevationPositiveLimit);
 	connect(objectMgr, &StelObjectMgr::selectedObjectChanged, this, &AstroCalcDialog::drawMonthlyElevationGraph);
 	connect(core, &StelCore::dateChangedByYear,               this, &AstroCalcDialog::drawMonthlyElevationGraph);
 
-	connect(ui->graphsCelestialBodyComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveGraphsCelestialBody);
-	connect(ui->graphsFirstComboBox,         QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveGraphsFirstId);
-	connect(ui->graphsSecondComboBox,        QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveGraphsSecondId);
+	connect(ui->graphsCelestialBodyComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveGraphsCelestialBody);
+	connect(ui->graphsFirstComboBox,         qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveGraphsFirstId);
+	connect(ui->graphsSecondComboBox,        qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveGraphsSecondId);
 	graphsDuration = qBound(1, conf->value("astrocalc/graphs_duration",1).toInt(), 600);
 	ui->graphsDurationSpinBox->setValue(graphsDuration);
-	connect(ui->graphsDurationSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &AstroCalcDialog::updateGraphsDuration);
+	connect(ui->graphsDurationSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::updateGraphsDuration);
 	graphsStep = qBound(1, conf->value("astrocalc/graphs_step",1).toInt(), 240);
 	ui->graphsHourStepsSpinBox->setValue(graphsStep);
-	connect(ui->graphsHourStepsSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &AstroCalcDialog::updateGraphsStep);
+	connect(ui->graphsHourStepsSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::updateGraphsStep);
 	connect(ui->drawGraphsPushButton,   &QPushButton::clicked,   this, &AstroCalcDialog::drawXVsTimeGraphs);
 	connect(objectMgr, &StelObjectMgr::selectedObjectChanged,    this, &AstroCalcDialog::updateXVsTimeGraphs);
 
 	ui->lunarElongationLimitSpinBox->setValue(conf->value("astrocalc/angular_distance_limit", 40).toInt());
-	connect(ui->lunarElongationLimitSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveLunarElongationLimit);
+	connect(ui->lunarElongationLimitSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveLunarElongationLimit);
 	connect(objectMgr, &StelObjectMgr::selectedObjectChanged,         this, &AstroCalcDialog::drawLunarElongationGraph);
 	connect(core, &StelCore::dateChanged,                             this, &AstroCalcDialog::drawLunarElongationGraph);
 
@@ -507,8 +507,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->wutAltitudeMinSpinBox,         &AngleSpinBox::valueChanged, this, &AstroCalcDialog::saveWutMinAltitude);
 
 	ui->wutMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/wut_magnitude_limit", 10.0).toDouble());
-	connect(ui->wutMagnitudeDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &AstroCalcDialog::saveWutMagnitudeLimit);
-	connect(ui->wutComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveWutTimeInterval);
+	connect(ui->wutMagnitudeDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &AstroCalcDialog::saveWutMagnitudeLimit);
+	connect(ui->wutComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveWutTimeInterval);
 	connect(ui->wutCategoryListWidget, &QListWidget::currentRowChanged, this, &AstroCalcDialog::calculateWutObjects);
 	//connect(ui->wutMatchingObjectsTreeWidget->selectionModel() , SIGNAL(currentRowChanged(const QModelIndex&, const QModelIndex&)),
 	//	this, &AstroCalcDialog::selectWutObject(const QModelIndex&)));
@@ -557,8 +557,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(currentTimeLine, &QTimer::timeout, this, &AstroCalcDialog::computePlanetaryData);
 	currentTimeLine->start(1000); // Update 'now' line position every second
 
-	connect(ui->firstCelestialBodyComboBox,  QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveFirstCelestialBody);
-	connect(ui->secondCelestialBodyComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveSecondCelestialBody);
+	connect(ui->firstCelestialBodyComboBox,  qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveFirstCelestialBody);
+	connect(ui->secondCelestialBodyComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveSecondCelestialBody);
 	connect(core, &StelCore::dateChanged, this, &AstroCalcDialog::drawDistanceGraph);
 
 	connect(solarSystem, &SolarSystem::solarSystemDataReloaded, this, &AstroCalcDialog::updateSolarSystemData);

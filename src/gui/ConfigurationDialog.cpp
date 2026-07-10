@@ -181,7 +181,7 @@ void ConfigurationDialog::createDialogContent()
 	cb->model()->sort(0);
 	updateCurrentLanguage();
 	connect(cb->lineEdit(), &QLineEdit::editingFinished, this, &ConfigurationDialog::updateCurrentLanguage);
-	connect(cb, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::selectLanguage);
+	connect(cb, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::selectLanguage);
 	// Language properties are potentially delicate. Accidentally immediate storing may cause obvious problems.
 	connect(ui->languageSaveToolButton, &QToolButton::clicked, this, &ConfigurationDialog::storeLanguageSettings);
 	#else
@@ -226,7 +226,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->defaultSelectedInfoRadio, &QRadioButton::released, this, &ConfigurationDialog::setDefaultSelectedInfo);
 	connect(ui->briefSelectedInfoRadio,   &QRadioButton::released, this, &ConfigurationDialog::setBriefSelectedInfo);
 	connect(ui->customSelectedInfoRadio,  &QRadioButton::released, this, &ConfigurationDialog::setCustomSelectedInfo);
-	connect(ui->buttonGroupDisplayedFields, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), this, &ConfigurationDialog::setSelectedInfoFromCheckBoxes);
+	connect(ui->buttonGroupDisplayedFields, qOverload<QAbstractButton*>(&QButtonGroup::buttonClicked), this, &ConfigurationDialog::setSelectedInfoFromCheckBoxes);
 #ifdef ENABLE_SPEECH
 	connect(ui->buttonGroupNarrateFields,   &QButtonGroup::buttonClicked, this, &ConfigurationDialog::setSelectedNarrationFromCheckBoxes);
 #endif
@@ -271,7 +271,7 @@ void ConfigurationDialog::createDialogContent()
 		idx = ui->dateFormatsComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->dateFormatsComboBox->setCurrentIndex(idx);
-	connect(ui->dateFormatsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDateFormat);
+	connect(ui->dateFormatsComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDateFormat);
 	connectBoolProperty(ui->startupTimeStopCheckBox, "StelCore.startupTimeStop");
 
 	// Display formats of time
@@ -283,7 +283,7 @@ void ConfigurationDialog::createDialogContent()
 		idx = ui->timeFormatsComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->timeFormatsComboBox->setCurrentIndex(idx);
-	connect(ui->timeFormatsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setTimeFormat);
+	connect(ui->timeFormatsComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setTimeFormat);
 	if (StelApp::getInstance().getSettings()->value("gui/flag_time_jd", false).toBool())
 		ui->jdRadioButton->setChecked(true);
 	else
@@ -303,7 +303,7 @@ void ConfigurationDialog::createDialogContent()
 		idx = ui->deltaTAlgorithmComboBox->findData(QVariant("EspenakMeeusModified"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
-	connect(ui->deltaTAlgorithmComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDeltaTAlgorithm);
+	connect(ui->deltaTAlgorithmComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDeltaTAlgorithm);
 	connect(ui->pushButtonCustomDeltaTEquationDialog, &QToolButton::clicked, this, &ConfigurationDialog::showCustomDeltaTEquationDialog);
 	if (core->getCurrentDeltaTAlgorithm()==StelCore::Custom)
 		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
@@ -364,7 +364,7 @@ void ConfigurationDialog::createDialogContent()
 	if (StelApp::getInstance().getSettings()->value("gui/flag_font_selection", true).toBool())
 	{
 		populateFontWritingSystemCombo();
-		connect(ui->fontWritingSystemComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::handleFontBoxWritingSystem);
+		connect(ui->fontWritingSystemComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::handleFontBoxWritingSystem);
 
 		ui->fontComboBox->setWritingSystem(QFontDatabase::Any);
 		ui->fontComboBox->setFontFilters(QFontComboBox::ScalableFonts | QFontComboBox::ProportionalFonts);
@@ -381,7 +381,7 @@ void ConfigurationDialog::createDialogContent()
 
 	// Dithering
 	populateDitherList();
-	connect(ui->ditheringComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDitherFormat);
+	connect(ui->ditheringComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDitherFormat);
 
 	// General Option Save
 	connect(ui->saveViewDirAsDefaultPushButton,  &QPushButton::clicked, this, &ConfigurationDialog::saveCurrentViewDirSettings);
@@ -1887,7 +1887,7 @@ void ConfigurationDialog::downloadStars()
 	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	connect(starCatalogDownloadReply, &QNetworkReply::errorOccurred, this, &ConfigurationDialog::downloadError);
 	#else
-	connect(starCatalogDownloadReply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), this, &ConfigurationDialog::downloadError);
+	connect(starCatalogDownloadReply, qOverload<QNetworkReply::NetworkError>(&QNetworkReply::error), this, &ConfigurationDialog::downloadError);
 	#endif
 
 	progressBar = StelApp::getInstance().addProgressBar();
@@ -1944,7 +1944,7 @@ void ConfigurationDialog::downloadFinished()
 		connect(starCatalogDownloadReply, &QNetworkReply::readyRead, this, &ConfigurationDialog::newStarCatalogData);
 		connect(starCatalogDownloadReply, &QNetworkReply::finished,  this, &ConfigurationDialog::downloadFinished);
 #if (QT_VERSION<QT_VERSION_CHECK(5,15,0))
-		connect(starCatalogDownloadReply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), this, &ConfigurationDialog::downloadError);
+		connect(starCatalogDownloadReply, qOverload<QNetworkReply::NetworkError>(&QNetworkReply::error), this, &ConfigurationDialog::downloadError);
 #else
 		connect(starCatalogDownloadReply, &QNetworkReply::errorOccurred,     this, &ConfigurationDialog::downloadError);
 #endif

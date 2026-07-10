@@ -114,7 +114,7 @@ void ScriptConsole::createDialogContent()
 	connect(ui->runButton, &QToolButton::clicked, this, &ScriptConsole::runScript);
 	connect(ui->stopButton, &QToolButton::clicked, &StelApp::getInstance().getScriptMgr(), &StelScriptMgr::stopScript);
 	connect(ui->includeBrowseButton, &QToolButton::clicked, this, &ScriptConsole::includeBrowse);
-	connect(ui->quickrunCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScriptConsole::quickRun);
+	connect(ui->quickrunCombo, qOverload<int>(&QComboBox::currentIndexChanged), this, &ScriptConsole::quickRun);
 	connect(&StelApp::getInstance().getScriptMgr(), &StelScriptMgr::scriptRunning, this, &ScriptConsole::scriptStarted);
 	connect(&StelApp::getInstance().getScriptMgr(), &StelScriptMgr::scriptStopped, this, &ScriptConsole::scriptEnded);
 	connect(&StelApp::getInstance().getScriptMgr(), &StelScriptMgr::scriptDebug, this, &ScriptConsole::appendLogLine);

@@ -306,10 +306,10 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->moonScaleMaxFovSpinBox, "SolarSystem.moonScaleMaxFov");
 
 	// Keep minFov strictly below maxFov by updating each spinbox's limit when the other changes.
-	connect(ui->moonScaleMinFovSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [this](double val) {
+	connect(ui->moonScaleMinFovSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged), this, [this](double val) {
 		ui->moonScaleMaxFovSpinBox->setMinimum(val + 1.0);
 	});
-	connect(ui->moonScaleMaxFovSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [this](double val) {
+	connect(ui->moonScaleMaxFovSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged), this, [this](double val) {
 		ui->moonScaleMinFovSpinBox->setMaximum(val - 1.0);
 	});
 
@@ -371,7 +371,7 @@ void ViewDialog::createDialogContent()
 		idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::MallamaHilton_2018, Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->planetMagnitudeAlgorithmComboBox->setCurrentIndex(idx);
-	connect(ui->planetMagnitudeAlgorithmComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ViewDialog::setPlanetMagnitudeAlgorithm);
+	connect(ui->planetMagnitudeAlgorithmComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ViewDialog::setPlanetMagnitudeAlgorithm);
 	populatePlanetMagnitudeAlgorithmDescription();
 
 	// GreatRedSpot (Jupiter)
@@ -401,10 +401,10 @@ void ViewDialog::createDialogContent()
 	connect(ui->selectPreferredCatalogs, &QPushButton::clicked, nmgr, &NebulaMgr::loadCatalogFilters);
 	connect(ui->storePreferredCatalogs,  &QPushButton::clicked, nmgr, &NebulaMgr::storeCatalogFilters);
 	connect(ui->selectNoneCatalogs,      &QPushButton::clicked, nmgr, &NebulaMgr::selectNoneCatalogs);
-	connect(ui->buttonGroupDisplayedDSOCatalogs, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), this, &ViewDialog::setSelectedCatalogsFromCheckBoxes);
+	connect(ui->buttonGroupDisplayedDSOCatalogs, qOverload<QAbstractButton*>(&QButtonGroup::buttonClicked), this, &ViewDialog::setSelectedCatalogsFromCheckBoxes);
 	updateSelectedTypesCheckBoxes();
 	connect(nmgr, &NebulaMgr::typeFiltersChanged, this, &ViewDialog::updateSelectedTypesCheckBoxes);
-	connect(ui->buttonGroupDisplayedDSOTypes, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), this, &ViewDialog::setSelectedTypesFromCheckBoxes);
+	connect(ui->buttonGroupDisplayedDSOTypes, qOverload<QAbstractButton*>(&QButtonGroup::buttonClicked), this, &ViewDialog::setSelectedTypesFromCheckBoxes);
 	connectGroupBox(ui->groupBoxDSOTypeFilters,"actionSet_Nebula_TypeFilterUsage");
 	// DSO Labels section
 	connectGroupBox(ui->groupBoxDSOLabelsAndMarkers, "actionShow_Nebulas");
@@ -460,7 +460,7 @@ void ViewDialog::createDialogContent()
 	connect(lmgr, &LandscapeMgr::landscapesChanged, this, &ViewDialog::populateLists);
 	connect(ui->pushButtonAddRemoveLandscapes, &QPushButton::clicked, this, &ViewDialog::showAddRemoveLandscapesDialog);
 	// Connect grid spacing combo box
-	connect(ui->gridSpacingComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ViewDialog::gridSpacingChanged);
+	connect(ui->gridSpacingComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ViewDialog::gridSpacingChanged);
 	updateGridSpacingComboBox();
 
 	// Grid and lines
@@ -633,11 +633,11 @@ void ViewDialog::createDialogContent()
 	initSkyCultureTime();
 
 	connect(ui->skyCultureTimeSlider, &QSlider::valueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
-	connect(ui->skyCultureCurrentTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &ViewDialog::updateSkyCultureTimeValue);
+	connect(ui->skyCultureCurrentTimeSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &ViewDialog::updateSkyCultureTimeValue);
 	connect(ui->skyCultureMapGraphicsView, &SkyCultureMapGraphicsView::timeValueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
 
-	connect(ui->skyCultureMinTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &ViewDialog::changeMinTime);
-	connect(ui->skyCultureMaxTimeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &ViewDialog::changeMaxTime);
+	connect(ui->skyCultureMinTimeSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &ViewDialog::changeMinTime);
+	connect(ui->skyCultureMaxTimeSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &ViewDialog::changeMaxTime);
 
 	connect(ui->applyTimeOnListCheckBox, &QCheckBox::toggled, this, &ViewDialog::filterSkyCultures);
 	connect(ui->useLocationForRotationCheckBox, &QCheckBox::toggled, this, &ViewDialog::initiateSkyCultureMapRotation);
@@ -726,8 +726,8 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->zodiacFadeDurationDoubleSpinBox,      "ConstellationMgr.zodiacFadeDuration");
 	connectDoubleProperty(ui->lunarSystemFadeDurationDoubleSpinBox, "ConstellationMgr.lunarSystemFadeDuration");
 
-	connect(ui->zodiacLabelComboBox,      QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ViewDialog::setZodiacLabelStyle);
-	connect(ui->lunarSystemLabelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ViewDialog::setLunarSystemLabelStyle);
+	connect(ui->zodiacLabelComboBox,      qOverload<int>(&QComboBox::currentIndexChanged), this, &ViewDialog::setZodiacLabelStyle);
+	connect(ui->lunarSystemLabelComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ViewDialog::setLunarSystemLabelStyle);
 
 	// Font selection
 	connectIntProperty(ui->constellationsFontSizeSpinBox, "ConstellationMgr.fontSize");
@@ -745,24 +745,24 @@ void ViewDialog::createDialogContent()
 	connect(qobject_cast<HipsMgr*>(hipsmgr), &HipsMgr::surveysChanged, this,
 	        [this]{ if(!hipsUpdateTimer.isActive()) hipsUpdateTimer.start(); });
 
-	connect(ui->surveyTypeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ViewDialog::updateHips);
+	connect(ui->surveyTypeComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ViewDialog::updateHips);
 	connect(ui->stackListWidget, &QListWidget::currentItemChanged, this, &ViewDialog::updateHips);
 	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHipsText, Qt::QueuedConnection);
 	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHipsControls, Qt::QueuedConnection);
 	connect(ui->surveysTreeWidget, &QTreeWidget::itemChanged, this, &ViewDialog::hipsListItemChanged);
 	connect(ui->surveysFilter, &QLineEdit::textChanged, this, &ViewDialog::filterSurveys);
 	connect(ui->listOnlyEnabledSurveys, &QCheckBox::toggled, this, &ViewDialog::filterSurveys);
-	connect(ui->hipsGammaDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	connect(ui->hipsGammaDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged),
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
-	connect(ui->hipsSaturationDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	connect(ui->hipsSaturationDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged),
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
-	connect(ui->hipsBrightnessDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	connect(ui->hipsBrightnessDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged),
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
-	connect(ui->hipsContrastDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	connect(ui->hipsContrastDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged),
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
-	connect(ui->hipsOpacityDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	connect(ui->hipsOpacityDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged),
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
-	connect(ui->hipsColorChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+	connect(ui->hipsColorChannelComboBox, qOverload<int>(&QComboBox::currentIndexChanged),
 	        this, &ViewDialog::hipsDisplaySettingsChanged);
 	connect(ui->hipsInvertedColorsCheckBox, &QCheckBox::toggled, this, &ViewDialog::hipsDisplaySettingsChanged);
 	connect(ui->hipsResetPushButton, &QPushButton::clicked, this, &ViewDialog::resetSelectedHipsDisplaySettings);
