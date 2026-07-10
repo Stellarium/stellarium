@@ -89,13 +89,13 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, computePositionsAlgorithm(conf->value("devel/compute_positions_algorithm", 2).toInt())
 {
 	fontSize = StelApp::getInstance().getScreenFontSize();
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &SolarSystem::setFontSize);
 	setObjectName("SolarSystem");
-	connect(this, SIGNAL(flagOrbitsChanged(bool)),            this, SLOT(reconfigureOrbits()));
-	connect(this, SIGNAL(flagPlanetsOrbitsChanged(bool)),     this, SLOT(reconfigureOrbits()));
-	connect(this, SIGNAL(flagPlanetsOrbitsOnlyChanged(bool)), this, SLOT(reconfigureOrbits()));
-	connect(this, SIGNAL(flagIsolatedOrbitsChanged(bool)),    this, SLOT(reconfigureOrbits()));
-	connect(this, SIGNAL(flagOrbitsWithMoonsChanged(bool)),   this, SLOT(reconfigureOrbits()));
+	connect(this, &SolarSystem::flagOrbitsChanged,            this, &SolarSystem::reconfigureOrbits);
+	connect(this, &SolarSystem::flagPlanetsOrbitsChanged,     this, &SolarSystem::reconfigureOrbits);
+	connect(this, &SolarSystem::flagPlanetsOrbitsOnlyChanged, this, &SolarSystem::reconfigureOrbits);
+	connect(this, &SolarSystem::flagIsolatedOrbitsChanged,    this, &SolarSystem::reconfigureOrbits);
+	connect(this, &SolarSystem::flagOrbitsWithMoonsChanged,   this, &SolarSystem::reconfigureOrbits);
 
 	markerArray=new MarkerVertex[maxMarkers*6];
 	textureCoordArray = new unsigned char[maxMarkers*6*2];
@@ -300,8 +300,7 @@ void SolarSystem::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
-	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
-		this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+	connect(objectManager, &StelObjectMgr::selectedObjectChanged, this, &SolarSystem::selectedObjectChange);
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
 	texEphemerisMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/disk.png");
@@ -310,11 +309,11 @@ void SolarSystem::init()
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
 	markerCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-marker.png");
 
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, &StelApp::languageChanged, this, &SolarSystem::updateI18n);
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &SolarSystem::updateSkyCulture);
-	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(recreateTrails()));
-	connect(core, SIGNAL(dateChangedForTrails()), this, SLOT(recreateTrails()));
+	connect(&StelMainView::getInstance(), &StelMainView::reloadShadersRequested, this, &SolarSystem::reloadShaders);
+	connect(core, &StelCore::locationChanged, this, &SolarSystem::recreateTrails);
+	connect(core, &StelCore::dateChangedForTrails, this, &SolarSystem::recreateTrails);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
@@ -333,18 +332,18 @@ void SolarSystem::init()
 
 #ifndef NO_GUI
 	// Fill ephemeris dates
-	connect(this, SIGNAL(requestEphemerisVisualization()),        this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisDataStepChanged(int)),          this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSkipDataChanged(bool)),         this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSkipMarkersChanged(bool)),      this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSmartDatesChanged(bool)),       this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelYearChanged(bool)),        this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelMonthChanged(bool)),       this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelDayChanged(bool)),         this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelHourChanged(bool)),        this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelMinuteChanged(bool)),      this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelSecondChanged(bool)),      this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisFirstOfMonthOnlyChanged(bool)), this, SLOT(fillEphemerisDates()));
+	connect(this, &SolarSystem::requestEphemerisVisualization,    this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisDataStepChanged,         this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisSkipDataChanged,         this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisSkipMarkersChanged,      this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisSmartDatesChanged,       this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelYearChanged,        this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelMonthChanged,       this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelDayChanged,         this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelHourChanged,        this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelMinuteChanged,      this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelSecondChanged,      this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisFirstOfMonthOnlyChanged, this, &SolarSystem::fillEphemerisDates);
 #endif
 
 	// Create shader program for mass drawing of asteroid markers
