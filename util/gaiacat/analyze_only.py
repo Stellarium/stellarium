@@ -84,16 +84,18 @@ def print_cross_zone_samples(cross):
         print(f"  {g}  A:z={za} V={va:.3f}  B:z={zb} V={vb:.3f}  dV={va-vb:.4f}")
 
 
-def count_bv_zero(items):
-    return sum(1 for _, _, _, _, _, bv in items if bv == 0.0)
+def count_no_bv(items):
+    # Star2: missing BP-RP is encoded as 32767 (B-V = 32.767 in printed output).
+    sentinel = 32767 / 1000.0
+    return sum(1 for _, _, _, _, _, bv in items if abs(bv - sentinel) < 1e-6)
 
 
-def print_bv0_summary(unmatched_a, unmatched_b):
-    bv0_a = count_bv_zero(unmatched_a)
-    bv0_b = count_bv_zero(unmatched_b)
-    print(f"  of which BV=0:")
-    print(f"    only in A: {bv0_a}")
-    print(f"    only in B: {bv0_b}")
+def print_no_bv_summary(unmatched_a, unmatched_b):
+    no_bv_a = count_no_bv(unmatched_a)
+    no_bv_b = count_no_bv(unmatched_b)
+    print(f"  of which no BV:")
+    print(f"    only in A: {no_bv_a}")
+    print(f"    only in B: {no_bv_b}")
 
 
 def main(path, mag_lo=None, mag_hi=None, margin=0.05):
@@ -104,7 +106,7 @@ def main(path, mag_lo=None, mag_hi=None, margin=0.05):
     print(f"Unmatched only in A:  {len(unmatched_a)}")
     print(f"Unmatched only in B:  {len(unmatched_b)}")
 
-    print_bv0_summary(unmatched_a, unmatched_b)
+    print_no_bv_summary(unmatched_a, unmatched_b)
 
     if mag_lo is not None and mag_hi is not None:
         a_boundary, a_other, b_boundary, b_other = report_boundary_counts(

@@ -354,6 +354,12 @@ void StarMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+	// Default B-V value used when a catalog star has no BP/RP color (sentinel value).
+	const float missingBVMag = conf->value("stars/missing_bv_value", 0.0f).toFloat();
+	Star1::missingBVMag = missingBVMag;
+	Star2::missingBVMag = missingBVMag;
+	Star3::missingBVMag = missingBVMag;
+
 	starConfigFileFullPath = StelFileMgr::findFile("stars/hip_gaia3/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
 	if (starConfigFileFullPath.isEmpty())
 	{

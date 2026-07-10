@@ -13,6 +13,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cmath>
+#include <limits>
 #include <string>
 #include <vector>
 #include <thread>
@@ -129,7 +130,9 @@ static void process_star_file(
 				BucketRecord brec{};
 				brec.zone    = static_cast<uint32_t>(zone);
 				brec.vmag    = static_cast<int16_t>(std::round(v * 1000.0));
-				brec.bv      = static_cast<int16_t>(std::round(bv * 1000.0));
+				brec.bv      = std::isnan(star.bp_rp)
+				? std::numeric_limits<int16_t>::max()   // +32767 sentinel: missing BP-RP
+				: static_cast<int16_t>(std::round(bv * 1000.0));
 				brec.ra_i    = static_cast<int32_t>(std::round(star.ra_deg * 3600000.0));
 				brec.dec_i   = static_cast<int32_t>(std::round(star.dec_deg * 3600000.0));
 				brec.gaia_id = star.gaia_id;

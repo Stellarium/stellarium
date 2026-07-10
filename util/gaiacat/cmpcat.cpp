@@ -50,6 +50,12 @@ static bool near(uint16_t a, uint16_t b)
 	return d <= 3;
 }
 
+static inline bool isNoBV(int16_t bv)
+{
+	// Star2: missing BP-RP is encoded as the int16_t maximum value.
+	return bv == 32767;
+}
+
 struct CatFile
 {
 	FILE* f   = nullptr;
@@ -158,7 +164,7 @@ static void recordOnlyB(const RawStar2& s, int zone, CompareResult& result,
                         const std::string& out_path, std::ofstream& out_file)
 {
 	result.only_b++;
-	if (s.bv == 0) result.only_b_no_bv++;
+	if (isNoBV(s.bv)) result.only_b_no_bv++;
 	if (!out_path.empty() && out_file.is_open())
 	{
 		char line[128];
@@ -214,7 +220,7 @@ static void writeOnlyA(const std::unordered_map<uint64_t, RawStar2>& map_a,
 	for (auto& [gid, s] : map_a)
 	{
 		result.only_a++;
-		if (s.bv == 0) result.only_a_no_bv++;
+		if (isNoBV(s.bv)) result.only_a_no_bv++;
 		if (out_path.empty()) continue;
 		char line[128];
 		int n = std::snprintf(line, sizeof(line),
@@ -228,9 +234,9 @@ static void writeOnlyA(const std::unordered_map<uint64_t, RawStar2>& map_a,
 static void printSummary(const CompareResult& result)
 {
 	std::cout << "\nOnly in A:        " << result.only_a << "\n";
-	std::cout << "  (BV=0):          " << result.only_a_no_bv << "\n";
+	std::cout << "  (no BV):         " << result.only_a_no_bv << "\n";
 	std::cout << "Only in B:        " << result.only_b << "\n";
-	std::cout << "  (BV=0):          " << result.only_b_no_bv << "\n";
+	std::cout << "  (no BV):         " << result.only_b_no_bv << "\n";
 	std::cout << "Matched (near):   " << result.matched << "\n";
 	std::cout << "Mismatched:       " << result.mismatched << "\n";
 	if (result.mismatched > 0)
