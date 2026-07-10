@@ -1667,7 +1667,7 @@ void SearchDialog::showContextMenu(const QPoint &pt)
 		clipText = "\t(" + clipText + ")";
 	}
 
-	menu->addAction(q_("Paste and Search") + clipText, this, SLOT(pasteAndGo()));
+	menu->addAction(q_("Paste and Search") + clipText, this, &SearchDialog::pasteAndGo);
 	menu->exec(ui->lineEditSearchSkyObject->mapToGlobal(pt));
 	delete menu;
 }

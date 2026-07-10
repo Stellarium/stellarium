@@ -263,7 +263,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->dateFromMinuteSpinBox->setValue(minute);
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
-	connect(ui->celestialPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), ui->celestialPositionsTreeWidget, SLOT(repaint()));
+	connect(ui->celestialPositionsTreeWidget, &QTreeWidget::currentItemChanged, ui->celestialPositionsTreeWidget, qOverload<>(&QTreeWidget::repaint));
 
 	ui->celestialMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/celestial_magnitude_limit", 6.0).toDouble());
 	connect(ui->celestialMagnitudeDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,  &AstroCalcDialog::saveCelestialPositionsMagnitudeLimit);
@@ -514,7 +514,7 @@ void AstroCalcDialog::createDialogContent()
 	//	this, &AstroCalcDialog::selectWutObject(const QModelIndex&)));
 	connect(ui->wutMatchingObjectsTreeWidget, &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectWutObject);
 	connect(ui->saveObjectsButton, &QPushButton::clicked, this, &AstroCalcDialog::saveWutObjects);
-	//connect(ui->wutMatchingObjectsLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
+	//connect(ui->wutMatchingObjectsLineEdit, &QLineEdit::textChanged, proxyModel, &QSortFilterProxyModel::setFilterWildcard);
 	ui->wutMatchingObjectsLineEdit->setVisible(false);
 	connect(dsoMgr, &NebulaMgr::catalogFiltersChanged,      this, &AstroCalcDialog::calculateWutObjects);
 	connect(dsoMgr, &NebulaMgr::typeFiltersChanged,         this, &AstroCalcDialog::calculateWutObjects);

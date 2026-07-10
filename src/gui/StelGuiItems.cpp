@@ -153,9 +153,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 		if (action->isCheckable())
 		{
 			setChecked(action->isChecked());
-			connect(action, SIGNAL(toggled(bool)), this, SLOT(setChecked(bool)));
-			// TODO: Convert to something like:
-			//connect(action, &StelAction::toggled, this, &StelButton::setChecked);
+			connect(action, qOverload<bool>(&StelAction::toggled), this, qOverload<bool>(&StelButton::setChecked));
 			connect(this, &StelButton::toggled, action, &StelAction::setChecked);
 		}
 		else
