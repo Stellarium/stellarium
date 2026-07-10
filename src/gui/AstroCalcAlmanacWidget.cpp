@@ -70,15 +70,15 @@ void AstroCalcAlmanacWidget::setup()
 	int customMinutes = conf->value("astro/custom_minutes", 60).toInt();
 	minutesJD = customMinutes / (24.*60.);
 	ui->spinBoxMinutes->setValue(customMinutes);
-	connect(ui->spinBoxMinutes, &QSpinBox::valueChanged, this, &AstroCalcAlmanacWidget::saveMinutes);
+	connect(ui->spinBoxMinutes, QOverload<int>::of(&QSpinBox::valueChanged), this, &AstroCalcAlmanacWidget::saveMinutes);
 
 	customSunAltitude = conf->value("astro/custom_sun_altitude", -7.0).toDouble();
 	ui->spinBoxCustomSunAltitude->setValue(customSunAltitude);
-	connect(ui->spinBoxCustomSunAltitude, &QDoubleSpinBox::valueChanged, this, &AstroCalcAlmanacWidget::saveCustomSunAltitue);
+	connect(ui->spinBoxCustomSunAltitude, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &AstroCalcAlmanacWidget::saveCustomSunAltitue);
 
 	customMoonAltitude = conf->value("astro/custom_moon_altitude", 18.0).toDouble();
 	ui->spinBoxCustomMoonAltitude->setValue(customMoonAltitude);
-	connect(ui->spinBoxCustomMoonAltitude, &QDoubleSpinBox::valueChanged, this, &AstroCalcAlmanacWidget::saveCustomMoonAltitue);
+	connect(ui->spinBoxCustomMoonAltitude, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &AstroCalcAlmanacWidget::saveCustomMoonAltitue);
 
 	populateData();
 

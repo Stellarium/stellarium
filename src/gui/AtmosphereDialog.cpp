@@ -90,7 +90,7 @@ void AtmosphereDialog::createDialogContent()
 			ui->doubleSpinBox_T->setValue(T);
 		}
 		connect(ui->checkBox_TfromK, &QCheckBox::toggled, ui->doubleSpinBox_T, &QDoubleSpinBox::setDisabled);
-		connect(ui->extinctionDoubleSpinBox, &QDoubleSpinBox::valueChanged, this, &AtmosphereDialog::setTfromK);
+		connect(ui->extinctionDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &AtmosphereDialog::setTfromK);
 		connectDoubleProperty(ui->doubleSpinBox_T, "StelSkyDrawer.turbidity");
 
 		connectBoolProperty(ui->checkBox_noScatter, "LandscapeMgr.atmosphereNoScatter");

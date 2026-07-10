@@ -25,6 +25,7 @@
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelProgressController.hpp"
 #include <QGraphicsView>
 #include <QDebug>
 #include <QTimeLine>

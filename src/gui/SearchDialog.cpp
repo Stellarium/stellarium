@@ -440,7 +440,7 @@ void SearchDialog::createDialogContent()
 	if (idx==-1) // Use equatorialJ2000 as default
 		idx = ui->coordinateSystemComboBox->findData(QVariant("equatorialJ2000"), Qt::UserRole, Qt::MatchCaseSensitive);
 	ui->coordinateSystemComboBox->setCurrentIndex(idx);
-	connect(ui->coordinateSystemComboBox, &QComboBox::currentIndexChanged, this, &SearchDialog::setCoordinateSystem);
+	connect(ui->coordinateSystemComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SearchDialog::setCoordinateSystem);
 	connect(ui->AxisXSpinBox, &AngleSpinBox::valueChanged, this, &SearchDialog::manualPositionChanged);
 	connect(ui->AxisYSpinBox, &AngleSpinBox::valueChanged, this, &SearchDialog::manualPositionChanged);
 	connect(ui->goPushButton, &QToolButton::clicked, this, &SearchDialog::manualPositionChanged);
@@ -487,7 +487,7 @@ void SearchDialog::createDialogContent()
 	if (idx==-1) // Use University of Strasbourg as default
 		idx = ui->serverListComboBox->findData(QVariant(DEF_SIMBAD_URL), Qt::UserRole, Qt::MatchCaseSensitive);
 	ui->serverListComboBox->setCurrentIndex(idx);
-	connect(ui->serverListComboBox, &QComboBox::currentIndexChanged, this, &SearchDialog::selectSimbadServer);
+	connect(ui->serverListComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SearchDialog::selectSimbadServer);
 
 	connect(ui->checkBoxUseStartOfWords, &QCheckBox::clicked, this, &SearchDialog::enableStartOfWordsAutofill);
 	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
@@ -511,7 +511,7 @@ void SearchDialog::createDialogContent()
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->objectsListView->setModel(proxyModel);
 
-	connect(ui->objectTypeComboBox, &QComboBox::activated, this, &SearchDialog::updateListView);
+	connect(ui->objectTypeComboBox, QOverload<int>::of(&QComboBox::activated), this, &SearchDialog::updateListView);
 	connect(ui->searchInListLineEdit, &QLineEdit::textChanged, proxyModel, &QSortFilterProxyModel::setFilterWildcard);
 	connect(ui->searchInEnglishCheckBox, &QCheckBox::toggled, this, &SearchDialog::updateListTab);
 	QAction *clearAction = ui->searchInListLineEdit->addAction(QIcon(":/graphicGui/uieBackspaceInputButton.png"), QLineEdit::ActionPosition::TrailingPosition);
