@@ -140,7 +140,7 @@ void HipsMgr::loadSources()
 			QList<HipsSurveyP> newSurveys = HipsSurvey::parseHipslist(source.toString(), data);
 			for (HipsSurveyP &survey: newSurveys)
 			{
-				connect(survey.data(), SIGNAL(propertiesChanged()), this, SIGNAL(surveysChanged()));
+				connect(survey.data(), &HipsSurvey::propertiesChanged, this, &HipsMgr::surveysChanged);
 				connect(survey.data(), &HipsSurvey::visibleChanged, this, &HipsMgr::updateActiveSurveys);
 				connect(survey.data(), &HipsSurvey::displaySettingsChanged, this, &HipsMgr::saveSurveySettings);
 				emit gotNewSurvey(survey);
