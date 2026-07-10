@@ -468,7 +468,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
 	qScriptRegisterSequenceMetaType<QVector<int>>(engine); // no longer needed with QJSEngine!
 #endif
-	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
+	connect(&StelApp::getInstance(), &StelApp::aboutToQuit, this, &StelScriptMgr::stopScript, Qt::DirectConnection);
 
 	// Scripting images
 	ScreenImageMgr* scriptImages = new ScreenImageMgr();
