@@ -136,18 +136,18 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	connect(videoObjects[id]->player, &QMediaPlayer::sourceChanged, this, &StelVideoMgr::handleSourceChanged);
 	#else
 	connect(videoObjects[id]->player, &QMediaPlayer::bufferStatusChanged, this, &StelVideoMgr::handleBufferStatusChanged);
-	connect(videoObjects[id]->player, &QMediaPlayer::error, this, &StelVideoMgr::handleError);
+	connect(videoObjects[id]->player, qOverload<QMediaPlayer::Error>(&QMediaPlayer::error), this, &StelVideoMgr::handleError);
 	connect(videoObjects[id]->player, &QMediaPlayer::stateChanged, this, &StelVideoMgr::handleStateChanged);
 	connect(videoObjects[id]->player, &QMediaPlayer::videoAvailableChanged, this, &StelVideoMgr::handleVideoAvailableChanged);
 	connect(videoObjects[id]->player, &QMediaPlayer::audioAvailableChanged, this, &StelVideoMgr::handleAudioAvailableChanged);
 	connect(videoObjects[id]->player, &QMediaPlayer::mutedChanged, this, &StelVideoMgr::handleMutedChanged);
 	connect(videoObjects[id]->player, &QMediaPlayer::volumeChanged, this, &StelVideoMgr::handleVolumeChanged);
-	connect(videoObjects[id]->player, &QMediaPlayer::availabilityChanged, this, &StelVideoMgr::handleAvailabilityChanged);
-	connect(videoObjects[id]->player, &QMediaPlayer::availabilityChanged, this, &StelVideoMgr::handleAvailabilityChanged);
+	connect(videoObjects[id]->player, qOverload<bool>(&QMediaPlayer::availabilityChanged), this, qOverload<bool>(&StelVideoMgr::handleAvailabilityChanged));
+	connect(videoObjects[id]->player, qOverload<QMultimedia::AvailabilityStatus>(&QMediaPlayer::availabilityChanged), this, qOverload<QMultimedia::AvailabilityStatus>(&StelVideoMgr::handleAvailabilityChanged));
 	#endif
 
 	// Only this is triggered also on Windows. Lets us read resolution etc. (CRITICALLY IMPORTANT!)
-	connect(videoObjects[id]->player, &QMediaPlayer::metaDataChanged, this, &StelVideoMgr::handleMetaDataChanged);
+	connect(videoObjects[id]->player, qOverload<>(&QMediaPlayer::metaDataChanged), this, &StelVideoMgr::handleMetaDataChanged);
 
 	// We need an absolute pathname here.
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))

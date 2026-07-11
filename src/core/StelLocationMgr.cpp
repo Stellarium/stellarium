@@ -303,7 +303,7 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 		connect(nmea, &QNmeaPositionInfoSource::errorOccurred, this, &NMEALookupHelper::nmeaError);
 		#else
-		connect(nmea, &QNmeaPositionInfoSource::error, this, &NMEALookupHelper::nmeaError);
+		connect(nmea, qOverload<QGeoPositionInfoSource::Error>(&QGeoPositionInfoSource::error), this, &NMEALookupHelper::nmeaError);
 		connect(nmea, &QNmeaPositionInfoSource::updateTimeout, this, &NMEALookupHelper::nmeaTimeout);
 		#endif
 	}
