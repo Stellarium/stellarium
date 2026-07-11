@@ -112,36 +112,32 @@
     {
       "id": "AST tibetan L21",
       "common_name": {"native": "གྲོ་བཞིན།", "transliteration": "gro bzhin", "pronounce": "cho xin", "IPA": "ʈ͡ʂʰo˥˥.ɕĩ˩˨", "english": "LM21", "translators_comments": "Tibetan Lunar Mansion 21"},
-      "lines": [[100064, 100345, 101027, 101123, 100881, 100345, 100310]]
+      "common_name_of_next_mansion": {"native": "བྱི་བཞིན།", "transliteration": "byi bzhin", "pronounce": "qi xin", "IPA": "t͡ɕʰi˥˥.ɕĩ˩˨", "english": "LM22", "translators_comments": "Tibetan Lunar Mansion 22"},
+      "lines": [[100064, 100345, 101027, 101123, 100881, 100345, 100310], [102618, 103045, 103005, 102624]]
     },
     {
       "id": "AST tibetan L22",
-      "common_name": {"native": "བྱི་བཞིན།", "transliteration": "byi bzhin", "pronounce": "qi xin", "IPA": "t͡ɕʰi˥˥.ɕĩ˩˨", "english": "LM22", "translators_comments": "Tibetan Lunar Mansion 22"},
-      "lines": [[102618, 103045, 103005, 102624]]
-    },
-    {
-      "id": "AST tibetan L23",
-      "common_name": {"native": "མོན་གྲེ།", "transliteration": "mon gre", "pronounce": "moin zhê", "IPA": "mø̃˥˥.ʈ͡ʂe˩˨", "english": "LM23", "translators_comments": "Tibetan Lunar Mansion 22"},
+      "common_name": {"native": "མོན་གྲེ།", "transliteration": "mon gre", "pronounce": "moin zhê", "IPA": "mø̃˥˥.ʈ͡ʂe˩˨", "english": "LM22", "translators_comments": "Tibetan Lunar Mansion 22"},
       "lines": [[104987, 106278]]
     },
     {
-      "id": "AST tibetan L24",
-      "common_name": {"native": "མོན་གྲུ།", "transliteration": "mon gru", "pronounce": "moin zhu", "IPA": "mø̃˥˥.ʈ͡ʂu˩˨", "english": "LM24", "translators_comments": "Tibetan Lunar Mansion 23"},
+      "id": "AST tibetan L23",
+      "common_name": {"native": "མོན་གྲུ།", "transliteration": "mon gru", "pronounce": "moin zhu", "IPA": "mø̃˥˥.ʈ͡ʂu˩˨", "english": "LM23", "translators_comments": "Tibetan Lunar Mansion 23"},
       "lines": [[109427, 107315, 107348]]
     },
     {
-      "id": "AST tibetan L25",
-      "common_name": {"native": "ཁྲུམས་སྟོད།", "transliteration": "khrums stod", "pronounce": "chum doi", "IPA": "ʈ͡ʂʰũ˥˩.tø˥˩", "english": "LM25", "translators_comments": "Tibetan Lunar Mansion 24"},
+      "id": "AST tibetan L24",
+      "common_name": {"native": "ཁྲུམས་སྟོད།", "transliteration": "khrums stod", "pronounce": "chum doi", "IPA": "ʈ͡ʂʰũ˥˩.tø˥˩", "english": "LM24", "translators_comments": "Tibetan Lunar Mansion 24"},
       "lines": [[113881, 113963]]
     },
     {
-      "id": "AST tibetan L26",
-      "common_name": {"native": "ཁྲུམས་སྨད།", "transliteration": "khrums smad", "pronounce": "chum mai", "IPA": "ʈ͡ʂʰũ˥˩.mɛː˩˨", "english": "LM26", "translators_comments": "Tibetan Lunar Mansion 25"},
+      "id": "AST tibetan L25",
+      "common_name": {"native": "ཁྲུམས་སྨད།", "transliteration": "khrums smad", "pronounce": "chum mai", "IPA": "ʈ͡ʂʰũ˥˩.mɛː˩˨", "english": "LM25", "translators_comments": "Tibetan Lunar Mansion 25"},
       "lines": [[677, 1067]]
     },
     {
-      "id": "AST tibetan L27",
-      "common_name": {"native": "ནམ་གྲུ།", "transliteration": "nam gru", "pronounce": "nam zhu", "IPA": "nãː˥˥.ʈ͡ʂʰu˩˨", "english": "LM27", "translators_comments": "Tibetan Lunar Mansion 26"},
+      "id": "AST tibetan L26",
+      "common_name": {"native": "ནམ་གྲུ།", "transliteration": "nam gru", "pronounce": "nam zhu", "IPA": "nãː˥˥.ʈ͡ʂʰu˩˨", "english": "LM26", "translators_comments": "Tibetan Lunar Mansion 26"},
       "lines": [[5571, 5131, 3693, 3885, 3092, 4889, 2912, 4185], [5571, 5742, 4510, 5544, 4552, 5447, 4436, 4185]]
     }
   ],
@@ -371,9 +367,9 @@
   "lunar_system": { "name": {"native": "རྒྱུ་སྐར", "transliteration": "rgyu skar", "pronounce": "gyu gar", "english": "Tib. Nakshatras"},
                     "context": "tibetan lunar mansion",
                     "comment" : "Shaped after the Indian nakshatras. Please enhance by Tibetan names and fix if needed!",
-                    "partitions": [28],
+                    "partitions": [27],
                     "extent": 5,
-                    "link": {"star": 65474, "offset": 173.572},
+                    "link": {"star": 65474, "offset": 180},
                     "names": [
                       {"symbol": "0", "native": "ཐ་སྐར།", "transliteration": "tha skar", "pronounce": "ta gar", "IPA": "tʰa˥˥.ka˥˩"},
                       {"symbol": "1", "native": "བྲ་ཉེ།", "transliteration": "bra nye", "pronounce": "cha nyê", "IPA": "ʈ͡ʂʰa˥˥.ȵe˩˨"},
@@ -397,12 +393,12 @@
                       {"symbol": "19", "native": "ཆུ་སྟོད།", "transliteration": "chu stod", "pronounce": "qu doi", "IPA": "t͡ɕʰu˥˥.tø˥˩"},
                       {"symbol": "20", "native": "ཆུ་སྨད།", "transliteration": "chu smad", "pronounce": "qu mai", "IPA": "t͡ɕʰu˥˥.mɛː˩˨"},
                       {"symbol": "21", "native": "གྲོ་བཞིན།", "transliteration": "gro bzhin", "pronounce": "cho xin", "IPA": "ʈ͡ʂʰo˥˥.ɕĩ˩˨"},
-                      {"symbol": "22", "native": "བྱི་བཞིན།", "transliteration": "byi bzhin", "pronounce": "qi xin", "IPA": "t͡ɕʰi˥˥.ɕĩ˩˨"},
-                      {"symbol": "23", "native": "མོན་གྲེ།", "transliteration": "mon gre", "pronounce": "moin zhê", "IPA": "mø̃˥˥.ʈ͡ʂe˩˨"},
-                      {"symbol": "24", "native": "མོན་གྲུ།", "transliteration": "mon gru", "pronounce": "moin zhu", "IPA": "mø̃˥˥.ʈ͡ʂu˩˨"},
-                      {"symbol": "25", "native": "ཁྲུམས་སྟོད།", "transliteration": "khrums stod", "pronounce": "chum doi", "IPA": "ʈ͡ʂʰũ˥˩.tø˥˩"},
-                      {"symbol": "26", "native": "ཁྲུམས་སྨད།", "transliteration": "khrums smad", "pronounce": "chum mai", "IPA": "ʈ͡ʂʰũ˥˩.mɛː˩˨"},
-                      {"symbol": "27", "native": "ནམ་གྲུ།", "transliteration": "nam gru", "pronounce": "nam zhu", "IPA": "nãː˥˥.ʈ͡ʂʰu˩˨"}
+                      {"symbol": "22", "native": "མོན་གྲེ།", "transliteration": "mon gre", "pronounce": "moin zhê", "IPA": "mø̃˥˥.ʈ͡ʂe˩˨"},
+                      {"symbol": "23", "native": "མོན་གྲུ།", "transliteration": "mon gru", "pronounce": "moin zhu", "IPA": "mø̃˥˥.ʈ͡ʂu˩˨"},
+                      {"symbol": "24", "native": "ཁྲུམས་སྟོད།", "transliteration": "khrums stod", "pronounce": "chum doi", "IPA": "ʈ͡ʂʰũ˥˩.tø˥˩"},
+                      {"symbol": "25", "native": "ཁྲུམས་སྨད།", "transliteration": "khrums smad", "pronounce": "chum mai", "IPA": "ʈ͡ʂʰũ˥˩.mɛː˩˨"},
+                      {"symbol": "26", "native": "ནམ་གྲུ།", "transliteration": "nam gru", "pronounce": "nam zhu", "IPA": "nãː˥˥.ʈ͡ʂʰu˩˨"},
+                      {"native": "བྱི་བཞིན། (Unused)", "transliteration": "byi bzhin", "pronounce": "qi xin", "IPA": "t͡ɕʰi˥˥.ɕĩ˩˨"}
                     ]
                   }
 }
