@@ -2503,174 +2503,8 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 
 		/**
 		 * Display file browser with common files and illustrations
-		 * using jQuery UI icons.
-		 */
-		function showFileBrowser(commonFiles, illustrations, cultureId) {
-				var $responseArea = $('#explorer-response-area');
-				
-				var cacheBuster = '?t=' + new Date().getTime();
-				var cultureCacheKey = 'culture_' + cultureId + '_' + new Date().getTime();
-				
-				var html = '<div style="padding:10px;" data-culture="' + escapeAttr(cultureId) + '" data-cache-key="' + escapeAttr(cultureCacheKey) + '">';
-				
-				// Culture info
-				html += '<div style="background:rgba(102,217,239,0.1);padding:10px;border-radius:4px;margin-bottom:15px;border-left:3px solid #66D9EF;">';
-				html += '<span class="ui-icon ui-icon-folder-open" style="float:left;margin-right:8px;"></span>';
-				html += '<strong style="color:#66D9EF;">Current Sky Culture:</strong> ';
-				html += '<span style="color:#B4B7B0;font-weight:bold;">' + escapeHtml(cultureId) + '</span>';
-				html += ' <span style="color:#8A8C8E;font-size:10px;">(' + commonFiles.length + ' common files, ' + illustrations.length + ' illustrations)</span>';
-				html += '<span style="display:block;font-size:9px;color:#8A8C8E;margin-top:4px;">' + 
-								'Loaded: ' + new Date().toLocaleString() + ' (cache-busting enabled)</span>';
-				html += '</div>';
-				
-				// Common files section
-				if (commonFiles.length > 0) {
-						html += '<h4 style="color:#FD971F;margin:10px 0 8px 0;font-size:12px;">';
-						html += '<span class="ui-icon ui-icon-document" style="float:left;margin-right:6px;"></span>';
-						html += 'Common Files';
-						html += '</h4>';
-						html += '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:15px;">';
-						commonFiles.forEach(function(filename) {
-								html += '<button class="file-btn jquerybutton" data-file="' + escapeAttr(filename) + '" style="font-size:10px;padding:4px 10px;">';
-								html += '<span class="ui-icon ui-icon-document" style="display:inline-block;vertical-align:middle;margin-right:4px;"></span>';
-								html += escapeHtml(filename);
-								html += '</button>';
-						});
-						html += '</div>';
-				}
-				
-				// Illustrations section
-				if (illustrations.length > 0) {
-						html += '<h4 style="color:#A6E22E;margin:10px 0 8px 0;font-size:12px;">';
-						html += '<span class="ui-icon ui-icon-image" style="float:left;margin-right:6px;"></span>';
-						html += 'Illustrations (' + illustrations.length + ')';
-						html += '</h4>';
-						html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;" data-culture="' + escapeAttr(cultureId) + '">';
-						
-						illustrations.forEach(function(item) {
-								var imageUrl = '/api/view/skyculturedescription/' + item.path + cacheBuster;
-								
-								html += '<div class="illustration-thumb" data-path="' + escapeAttr(item.path) + 
-												'" data-culture="' + escapeAttr(cultureId) + '" style="' +
-												'border:1px solid rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;cursor:pointer;' +
-												'transition:all 0.2s ease;background:rgba(0,0,0,0.2);' +
-												'" onmouseover="this.style.borderColor=\'#FD971F\'" ' +
-												'onmouseout="this.style.borderColor=\'rgba(255,255,255,0.1)\'">';
-								html += '<div style="height:100px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);position:relative;">';
-								html += '<img src="' + escapeHtml(imageUrl) + '" alt="' + escapeAttr(item.name) + '" ' +
-												'loading="lazy" ' +
-												'style="max-width:100%;max-height:100px;object-fit:contain;" ' +
-												'data-culture="' + escapeAttr(cultureId) + '" ' +
-												'onerror="this.style.display=\'none\';this.parentElement.querySelector(\'.thumb-error\').style.display=\'flex\';">';
-								html += '<div class="thumb-error" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;align-items:center;justify-content:center;color:#666;font-size:10px;background:rgba(0,0,0,0.2);">';
-								html += '<span class="ui-icon ui-icon-alert" style="display:inline-block;margin-right:4px;"></span> No image';
-								html += '</div>';
-								html += '</div>';
-								html += '<div style="padding:4px 6px;font-size:8px;color:#B4B7B0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">';
-								html += '<span style="color:#66D9EF;font-size:7px;">' + item.type + '</span> ';
-								html += escapeHtml(item.name);
-								html += '</div>';
-								html += '</div>';
-						});
-						
-						html += '</div>';
-				}
-				
-				// Manual file input
-				html += '<div style="margin-top:15px;padding:10px;background:rgba(0,0,0,0.15);border-radius:4px;">';
-				html += '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">';
-				html += '<label style="font-size:11px;color:#B4B7B0;">';
-				html += '<span class="ui-icon ui-icon-folder-open" style="display:inline-block;vertical-align:middle;margin-right:4px;"></span>';
-				html += 'Enter file path:';
-				html += '</label>';
-				html += '<input type="text" id="file-path-input" placeholder="e.g., index.json, illustrations/andromeda.png" style="' +
-								'flex:1;min-width:200px;padding:6px 10px;background:rgba(0,0,0,0.3);color:#DCDBDA;border:1px solid #3A3C3E;border-radius:4px;font-size:11px;">';
-				html += '<button id="btn-load-file" class="jquerybutton" style="font-size:10px;padding:6px 14px;">';
-				html += '<span class="ui-icon ui-icon-document" style="display:inline-block;vertical-align:middle;margin-right:4px;"></span> Load File';
-				html += '</button>';
-				html += '</div>';
-				html += '</div>';
-				
-				html += '</div>';
-				
-				currentRawResponse = 'Sky culture file browser: ' + cultureId;
-				currentFormattedHtml = html;
-				currentDisplayMode = 'formatted';
-				
-				$responseArea.html(
-						'<div class="response-toolbar">' +
-						'<div class="response-toolbar-left">' +
-						'<span class="response-type-badge">' +
-						'<span class="ui-icon ui-icon-folder-open" style="display:inline-block;vertical-align:middle;margin-right:4px;"></span>' +
-						'FILE BROWSER</span>' +
-						'<span style="color:#8A8C8E;font-size:10px;">' + escapeHtml(cultureId) + '</span>' +
-						'<span style="color:#8A8C8E;font-size:9px;margin-left:8px;">🔒 cache-busting enabled</span>' +
-						'</div>' +
-						'<div class="response-toolbar-right">' +
-						'<button class="copy-btn jquerybutton" id="copy-file-list">' +
-						'<span class="ui-icon ui-icon-copy" style="display:inline-block;vertical-align:middle;margin-right:4px;"></span> Copy List' +
-						'</button>' +
-						'<button class="copy-btn jquerybutton" id="refresh-culture-files" style="margin-left:4px;">' +
-						'<span class="ui-icon ui-icon-refresh" style="display:inline-block;vertical-align:middle;margin-right:4px;"></span> Refresh' +
-						'</button>' +
-						'</div>' +
-						'</div>' +
-						'<div class="response-content-wrapper" style="direction:ltr;max-height:70vh;overflow-y:auto;">' +
-						html +
-						'</div>'
-				);
-				
-				// Bind events
-				$('.file-btn').off('click').on('click', function() {
-						var filename = $(this).data('file');
-						loadSkyCultureFile(filename, cultureId);
-				});
-				
-				$('.illustration-thumb').off('click').on('click', function() {
-						var path = $(this).data('path');
-						loadSkyCultureFile(path, cultureId);
-				});
-				
-				$('#btn-load-file').off('click').on('click', function() {
-						var path = $('#file-path-input').val().trim();
-						if (path) {
-								loadSkyCultureFile(path, cultureId);
-						}
-				});
-				
-				$('#file-path-input').off('keydown').on('keydown', function(e) {
-						if (e.key === 'Enter') {
-								var path = $(this).val().trim();
-								if (path) {
-										loadSkyCultureFile(path, cultureId);
-								}
-						}
-				});
-				
-				$('#refresh-culture-files').off('click').on('click', function() {
-						browseSkyCultureFiles();
-				});
-				
-				$('#copy-file-list').off('click').on('click', function() {
-						var list = 'Sky Culture: ' + cultureId + '\n';
-						list += 'Loaded: ' + new Date().toLocaleString() + '\n';
-						list += 'Common Files: ' + commonFiles.join(', ') + '\n';
-						list += 'Illustrations:\n';
-						illustrations.forEach(function(item) {
-								list += '  - ' + item.path + ' (' + item.name + ')\n';
-						});
-						navigator.clipboard.writeText(list).then(function() {
-								var $btn = $('#copy-file-list');
-								var originalText = $btn.html();
-								$btn.html('Copied!');
-								setTimeout(function() { $btn.html(originalText); }, 2000);
-						});
-				});
-		}
-
-		/**
-		 * Display file browser with common files and illustrations
 		 * with proper cache-busting for images.
+		 * FIXED: All user input is escaped before HTML insertion.
 		 */
 		function showFileBrowser(commonFiles, illustrations, cultureId) {
 				var $responseArea = $('#explorer-response-area');
@@ -2678,6 +2512,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				// ============================================================
 				// CRITICAL: Use culture ID to prevent cross-culture contamination
 				// ============================================================
+				// SAFE: Use escapeAttr() for attribute values
 				var cacheBuster = '?t=' + new Date().getTime();
 				var cultureCacheKey = 'culture_' + cultureId + '_' + new Date().getTime();
 				
@@ -2697,6 +2532,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 						html += '<h4 style="color:#FD971F;margin:10px 0 8px 0;font-size:12px;">Common Files</h4>';
 						html += '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:15px;">';
 						commonFiles.forEach(function(filename) {
+								// SAFE: Escape filename
 								html += '<button class="file-btn jquerybutton" data-file="' + escapeAttr(filename) + '" style="font-size:10px;padding:4px 10px;">';
 								html += ' ' + escapeHtml(filename);
 								html += '</button>';
@@ -2716,6 +2552,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 								// ============================================================
 								var imageUrl = '/api/view/skyculturedescription/' + item.path + cacheBuster;
 								
+								// SAFE: Escape all user-controlled data
 								html += '<div class="illustration-thumb" data-path="' + escapeAttr(item.path) + 
 												'" data-culture="' + escapeAttr(cultureId) + '" style="' +
 												'border:1px solid rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;cursor:pointer;' +
@@ -2723,7 +2560,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 												'" onmouseover="this.style.borderColor=\'#FD971F\'" ' +
 												'onmouseout="this.style.borderColor=\'rgba(255,255,255,0.1)\'">';
 								html += '<div style="height:100px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);position:relative;">';
-								html += '<img src="' + escapeHtml(imageUrl) + '" alt="' + escapeAttr(item.name) + '" ' +
+								html += '<img src="' + escapeAttr(imageUrl) + '" alt="' + escapeAttr(item.name) + '" ' +
 												'loading="lazy" ' +
 												'style="max-width:100%;max-height:100px;object-fit:contain;" ' +
 												'data-culture="' + escapeAttr(cultureId) + '" ' +
@@ -2731,7 +2568,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 								html += '<div class="thumb-error" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;align-items:center;justify-content:center;color:#666;font-size:10px;background:rgba(0,0,0,0.2);">' + _tr("No image") + '</div>';
 								html += '</div>';
 								html += '<div style="padding:4px 6px;font-size:8px;color:#B4B7B0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">';
-								html += '<span style="color:#66D9EF;font-size:7px;">' + item.type + '</span> ';
+								html += '<span style="color:#66D9EF;font-size:7px;">' + escapeHtml(item.type) + '</span> ';
 								html += escapeHtml(item.name);
 								html += '</div>';
 								html += '</div>';
@@ -2740,7 +2577,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 						html += '</div>';
 				}
 				
-				// Manual file input
+				// Manual file input - this part is safe as it uses HTML elements with no user input
 				html += '<div style="margin-top:15px;padding:10px;background:rgba(0,0,0,0.15);border-radius:4px;">';
 				html += '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">';
 				html += '<label style="font-size:11px;color:#B4B7B0;">🔍 Enter file path:</label>';
@@ -2778,9 +2615,9 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				// ============================================================
 				
 				// Common file buttons
+				// Bind events
 				$('.file-btn').off('click').on('click', function() {
 						var filename = $(this).data('file');
-						// Pass culture ID to ensure correct context
 						loadSkyCultureFile(filename, cultureId);
 				});
 				
@@ -2834,6 +2671,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 
 		/**
 		 * Display loaded file content with culture context using jQuery UI icons.
+		 * FIXED: All user input is escaped using escapeHtml() before HTML insertion.
 		 */
 		function displayFileContent(filePath, url, type, content, cultureId) {
 				var $responseArea = $('#explorer-response-area');
@@ -2847,16 +2685,17 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				var html = '';
 				
 				if (type === 'image') {
+						// SAFE: All user input is escaped with escapeHtml()
 						html = '<div style="text-align:center;padding:20px;" data-culture="' + escapeAttr(cultureId) + '">';
 						html += '<div style="margin-bottom:10px;font-size:12px;color:#FD971F;">';
 						html += '<span class="ui-icon ui-icon-image" style="display:inline-block;vertical-align:middle;margin-right:6px;"></span>';
 						html += escapeHtml(filePath);
 						html += ' <span style="font-size:9px;color:#8A8C8E;">(' + escapeHtml(cultureId) + ')</span>';
 						html += '</div>';
-						html += '<img src="' + url + '" alt="' + escapeHtml(filePath) + '" ' +
+						html += '<img src="' + escapeAttr(url) + '" alt="' + escapeAttr(filePath) + '" ' +
 										'style="max-width:100%;max-height:70vh;border:1px solid rgba(255,255,255,0.1);border-radius:4px;" ' +
 										'data-culture="' + escapeAttr(cultureId) + '" ' +
-										'onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'<div style=\\\'color:#888;padding:20px;\\\'><span class=\\\'ui-icon ui-icon-alert\\\' style=\\\'display:inline-block;vertical-align:middle;margin-right:6px;\\\'></span><strong>Image not available</strong><br>Could not load: ' + escapeHtml(filePath) + '<br>Culture: ' + escapeHtml(cultureId) + '</div>\';">';
+										'onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'<div style=\\\'color:#888;padding:20px;\\\'><span class=\\\'ui-icon ui-icon-alert\\\' style=\\\'display:inline-block;vertical-align:middle;margin-right:6px;\\\'></span><strong>Image not available</strong><br>Could not load: ' + escapeAttr(filePath) + '<br>Culture: ' + escapeAttr(cultureId) + '</div>\';">';
 						html += '<div style="margin-top:10px;font-size:10px;color:#8A8C8E;">';
 						html += '<span class="ui-icon ui-icon-link" style="display:inline-block;vertical-align:middle;margin-right:4px;"></span>';
 						html += 'URL: <code style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:3px;word-break:break-all;">' + escapeHtml(url) + '</code>';
@@ -2870,17 +2709,20 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				} else if (type === 'text') {
 						try {
 								var jsonData = JSON.parse(content);
+								// SAFE: Use escapeHtml() for all user-controlled data
 								html = '<div style="padding:10px;" data-culture="' + escapeAttr(cultureId) + '">';
 								html += '<div style="font-size:10px;color:#8A8C8E;margin-bottom:8px;">';
 								html += '<span class="ui-icon ui-icon-document" style="display:inline-block;vertical-align:middle;margin-right:4px;"></span>';
 								html += escapeHtml(filePath) + ' (' + (content ? content.length : 0) + ' chars) - Culture: ' + escapeHtml(cultureId);
 								html += '</div>';
 								html += '<pre style="background:rgba(0,0,0,0.3);padding:15px;border-radius:4px;font-family:monospace;font-size:10px;color:#A6E22E;white-space:pre-wrap;word-break:break-word;max-height:60vh;overflow-y:auto;margin:0;">';
+								// CRITICAL: Escape JSON content before rendering
 								html += escapeHtml(JSON.stringify(jsonData, null, 2));
 								html += '</pre>';
 								html += '</div>';
 								$statusEl.html('<span class="response-status success">JSON loaded: ' + escapeHtml(filePath) + ' (' + escapeHtml(cultureId) + ')</span>');
 						} catch(e) {
+								// SAFE: Escape content before rendering
 								html = '<div style="padding:10px;" data-culture="' + escapeAttr(cultureId) + '">';
 								html += '<div style="font-size:10px;color:#8A8C8E;margin-bottom:8px;">';
 								html += '<span class="ui-icon ui-icon-document" style="display:inline-block;vertical-align:middle;margin-right:4px;"></span>';
@@ -2894,6 +2736,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 						}
 						
 				} else {
+						// SAFE: Error message is escaped
 						html = '<div style="padding:20px;text-align:center;color:#F92672;" data-culture="' + escapeAttr(cultureId) + '">';
 						html += '<div style="font-size:24px;margin-bottom:10px;">';
 						html += '<span class="ui-icon ui-icon-alert" style="display:inline-block;vertical-align:middle;margin-right:8px;font-size:24px;"></span>';
@@ -2936,6 +2779,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 						'</div>'
 				);
 				
+				// Bind events (same as before)
 				$('#toggle-display-btn').off('click').on('click', function() { toggleResponseDisplay(); });
 				$('#toggle-dir-btn').off('click').on('click', function() { toggleResponseDirection(); });
 				
@@ -3057,93 +2901,98 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
         }
     }
 
-    /**
-     * Recursively format a JSON value with syntax highlighting.
-     * 
-     * @param {*} value - The JSON value to format
-     * @param {number} depth - Current nesting depth (for indentation)
-     * @returns {string} Formatted HTML string
-     */
-    function formatJsonValue(value, depth) {
-        var indent = '  '.repeat(depth);
-        var nextIndent = '  '.repeat(depth + 1);
-        
-        if (value === null) {
-            return '<span class="json-null">null</span>';
-        }
-        
-        if (typeof value === 'boolean') {
-            return '<span class="json-boolean">' + value + '</span>';
-        }
-        
-        if (typeof value === 'number') {
-            return '<span class="json-number">' + value + '</span>';
-        }
-        
-        if (typeof value === 'string') {
-            // Check if the string contains HTML
-            if (value.trim().startsWith('<') && value.includes('>')) {
-                return '<span class="json-string html-content" title="HTML content">"' + escapeHtml(value) + '"</span>';
-            }
-            return '<span class="json-string">"' + escapeHtml(value) + '"</span>';
-        }
-        
-        if (Array.isArray(value)) {
-            if (value.length === 0) {
-                return '<span class="json-array-empty">[]</span>';
-            }
-            
-            var arrayHtml = '<span class="json-array-bracket">[</span>\n';
-            for (var i = 0; i < value.length; i++) {
-                arrayHtml += nextIndent + formatJsonValue(value[i], depth + 1);
-                if (i < value.length - 1) {
-                    arrayHtml += '<span class="json-comma">,</span>';
-                }
-                arrayHtml += '\n';
-            }
-            arrayHtml += indent + '<span class="json-array-bracket">]</span>';
-            
-            // For small arrays (less than 5 items), display inline for better readability
-            if (value.length <= 5 && depth === 0) {
-                var inlineArray = '<span class="json-array-bracket">[</span> ';
-                for (var j = 0; j < value.length; j++) {
-                    inlineArray += formatJsonValue(value[j], depth);
-                    if (j < value.length - 1) {
-                        inlineArray += '<span class="json-comma">, </span>';
-                    }
-                }
-                inlineArray += ' <span class="json-array-bracket">]</span>';
-                return inlineArray;
-            }
-            
-            return arrayHtml;
-        }
-        
-        if (typeof value === 'object') {
-            var keys = Object.keys(value);
-            if (keys.length === 0) {
-                return '<span class="json-object-empty">{}</span>';
-            }
-            
-            var objectHtml = '<span class="json-object-brace">{</span>\n';
-            for (var k = 0; k < keys.length; k++) {
-                var key = keys[k];
-                var keyValue = value[key];
-                
-                objectHtml += nextIndent + '<span class="json-key">"' + escapeHtml(key) + '"</span>';
-                objectHtml += '<span class="json-colon">: </span>';
-                objectHtml += formatJsonValue(keyValue, depth + 1);
-                if (k < keys.length - 1) {
-                    objectHtml += '<span class="json-comma">,</span>';
-                }
-                objectHtml += '\n';
-            }
-            objectHtml += indent + '<span class="json-object-brace">}</span>';
-            return objectHtml;
-        }
-        
-        return escapeHtml(String(value));
-    }
+		/**
+		 * Recursively format a JSON value with syntax highlighting.
+		 * FIXED: All string values are escaped before HTML insertion.
+		 * 
+		 * @param {*} value - The JSON value to format
+		 * @param {number} depth - Current nesting depth (for indentation)
+		 * @returns {string} Formatted HTML string
+		 */
+		function formatJsonValue(value, depth) {
+				var indent = '  '.repeat(depth);
+				var nextIndent = '  '.repeat(depth + 1);
+				
+				if (value === null) {
+						return '<span class="json-null">null</span>';
+				}
+				
+				if (typeof value === 'boolean') {
+						return '<span class="json-boolean">' + value + '</span>';
+				}
+				
+				if (typeof value === 'number') {
+						return '<span class="json-number">' + value + '</span>';
+				}
+				
+				if (typeof value === 'string') {
+						// SAFE: Escape the string value before inserting into HTML
+						var escaped = escapeHtml(value);
+						// Check if the string contains HTML
+						if (value.trim().startsWith('<') && value.includes('>')) {
+								return '<span class="json-string html-content" title="HTML content">"' + escaped + '"</span>';
+						}
+						return '<span class="json-string">"' + escaped + '"</span>';
+				}
+				
+				if (Array.isArray(value)) {
+						if (value.length === 0) {
+								return '<span class="json-array-empty">[]</span>';
+						}
+						
+						var arrayHtml = '<span class="json-array-bracket">[</span>\n';
+						for (var i = 0; i < value.length; i++) {
+								arrayHtml += nextIndent + formatJsonValue(value[i], depth + 1);
+								if (i < value.length - 1) {
+										arrayHtml += '<span class="json-comma">,</span>';
+								}
+								arrayHtml += '\n';
+						}
+						arrayHtml += indent + '<span class="json-array-bracket">]</span>';
+						
+						// For small arrays (less than 5 items), display inline for better readability
+						if (value.length <= 5 && depth === 0) {
+								var inlineArray = '<span class="json-array-bracket">[</span> ';
+								for (var j = 0; j < value.length; j++) {
+										inlineArray += formatJsonValue(value[j], depth);
+										if (j < value.length - 1) {
+												inlineArray += '<span class="json-comma">, </span>';
+										}
+								}
+								inlineArray += ' <span class="json-array-bracket">]</span>';
+								return inlineArray;
+						}
+						
+						return arrayHtml;
+				}
+				
+				if (typeof value === 'object') {
+						var keys = Object.keys(value);
+						if (keys.length === 0) {
+								return '<span class="json-object-empty">{}</span>';
+						}
+						
+						var objectHtml = '<span class="json-object-brace">{</span>\n';
+						for (var k = 0; k < keys.length; k++) {
+								var key = keys[k];
+								var keyValue = value[key];
+								
+								// SAFE: Escape the key name
+								objectHtml += nextIndent + '<span class="json-key">"' + escapeHtml(key) + '"</span>';
+								objectHtml += '<span class="json-colon">: </span>';
+								objectHtml += formatJsonValue(keyValue, depth + 1);
+								if (k < keys.length - 1) {
+										objectHtml += '<span class="json-comma">,</span>';
+								}
+								objectHtml += '\n';
+						}
+						objectHtml += indent + '<span class="json-object-brace">}</span>';
+						return objectHtml;
+				}
+				
+				// SAFE: Fallback - escape any other value
+				return escapeHtml(String(value));
+		}
 
     /**
      * Format an array response in a table format for better readability.

@@ -1241,7 +1241,7 @@ define(["jquery", "api/remotecontrol"],
 														},
 														'actionShow_Ground': {
 																module: 'LandscapeMgr',
-																method: 'setFlagGround',
+																method: 'setFlagLandscape',
 																args: 'true/false'
 														},
 														'actionShow_Fog': {
@@ -1250,13 +1250,13 @@ define(["jquery", "api/remotecontrol"],
 																args: 'true/false'
 														},
 														'actionShow_Night_Mode': {
-																module: 'StelApp',
+																module: 'core',
 																method: 'setNightMode',
 																args: 'true/false'
 														},
 														'actionShow_Equatorial_Grid': {
 																module: 'GridLinesMgr',
-																method: 'setFlagEquatorialGrid',
+																method: 'setFlagEquatorGrid',
 																args: 'true/false'
 														},
 														'actionShow_Azimuthal_Grid': {
@@ -1291,12 +1291,7 @@ define(["jquery", "api/remotecontrol"],
 														},
 														'actionShow_MilkyWay': {
 																module: 'MilkyWay',
-																method: 'setFlagDisplayed',
-																args: 'true/false'
-														},
-														'actionSet_Full_Screen_Global': {
-																module: 'StelMainView',
-																method: 'setFullScreen',
+																method: 'setFlagShow',
 																args: 'true/false'
 														},
 														'actionGo_Home_Global': {
