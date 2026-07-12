@@ -678,7 +678,7 @@ IF(MACOS)
      ENDIF()
      # macOS deployment targets
      IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
-	      IF(${QT_VERSION_MAJOR} EQUAL 6)
+          IF(${QT_VERSION_MAJOR} EQUAL 6)
                # Qt6 is allows building universal binary (x86_64 + arm64)
                # Qt 6.5: minimal operating system is macOS Big Sur (macOS 11)
                # Qt 6.8: minimal operating system is macOS Monterey (macOS 12)
@@ -741,8 +741,8 @@ IF(ENABLE_SHOWMYSKY)
                INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)
           ELSE()
                INSTALL(TARGETS ShowMySky
-		    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-		    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+                       LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+                       RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
           ENDIF()
           # We used EXCLUDE_FROM_ALL in CPMFindPackage to avoid building
           # irrelevant binaries of CalcMySky. But we still need to build
