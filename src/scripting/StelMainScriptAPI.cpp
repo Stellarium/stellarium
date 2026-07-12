@@ -81,8 +81,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
 	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
 	{
-		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType, bool)),
-                        smgr, SLOT(         loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType, bool)));
+		connect(this, &StelMainScriptAPI::requestLoadSkyImage, smgr, [smgr](const auto&... args) { smgr->loadSkyImage(args...); });
 		connect(this, &StelMainScriptAPI::requestRemoveSkyImage, smgr, qOverload<const QString&>(&StelSkyLayerMgr::removeSkyLayer));
 	}
 
