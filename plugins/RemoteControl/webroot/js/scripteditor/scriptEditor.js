@@ -2750,39 +2750,62 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 														currentNamespace: null
 												};
 										},
-										
+
 										token: function(stream, state) {
 												// Update builtins reference
 												currentBuiltinsMap = builtinsMap;
 												
-												// Block comments /* ... */
-												if (state.inBlockComment) {
-														if (stream.match('*/')) {
-																state.inBlockComment = false;
-																return 'comment';
-														}
-														stream.skipToEnd();
-														return 'comment';
-												}
-												
-												if (stream.match('/*')) {
-														state.inBlockComment = true;
-														return 'comment';
-												}
-												
-												// Line comments //
+												// ============================================================
+												// LINE COMMENTS (// ...)
+												// ============================================================
 												if (stream.match('//')) {
 														stream.skipToEnd();
 														return 'comment';
 												}
 												
-												// Strings
+												// ============================================================
+												// BLOCK COMMENTS (/* ... */) - Enhanced with whitespace handling
+												// ============================================================
+												
+												// Check for start of block comment
+												if (stream.match(/\/\*/)) {
+														state.inBlockComment = true;
+														return 'comment';
+												}
+												
+												// Handle block comment content and closing tag
+												if (state.inBlockComment) {
+														// IMPORTANT: Skip whitespace before checking for closing tag
+														// This fixes the issue where `*/` with indentation wasn't being recognized
+														var spaces = stream.eatWhile(/\s/);
+														
+														// Check for closing tag `*/` (with or without preceding whitespace)
+														if (stream.match(/\*\//)) {
+																state.inBlockComment = false;
+																return 'comment';
+														}
+														
+														// If we consumed spaces but didn't find `*/`, we need to backtrack
+														// because we might have consumed spaces that are part of the comment content
+														if (spaces) {
+																// Go back to where we started eating spaces
+																stream.backUp(spaces);
+														}
+														
+														// No closing tag found, consume rest of the line as comment
+														stream.skipToEnd();
+														return 'comment';
+												}
+												
+												// ============================================================
+												// STRINGS - Single and Double Quotes
+												// ============================================================
 												if (stream.match('"') || stream.match("'")) {
 														var quote = stream.current();
 														while (!stream.eol()) {
 																var next = stream.next();
 																if (next === '\\') {
-																		stream.next();
+																		stream.next(); // Skip escaped character
 																		continue;
 																}
 																if (next === quote) {
@@ -2792,17 +2815,23 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 														return 'string';
 												}
 												
-												// Numbers
+												// ============================================================
+												// NUMBERS
+												// ============================================================
 												if (stream.match(/^-?\d+(\.\d+)?([eE][+-]?\d+)?/)) {
 														return 'number';
 												}
 												
-												// Operators
+												// ============================================================
+												// OPERATORS
+												// ============================================================
 												if (stream.match(/^[+\-*/%=<>!&|^~?:]+/)) {
 														return 'operator';
 												}
 												
-												// Brackets and Parentheses
+												// ============================================================
+												// BRACKETS AND PARENTHESES
+												// ============================================================
 												if (stream.match(/^[{}()\[\]]/)) {
 														var bracket = stream.current();
 														if (bracket === ')' || bracket === ']' || bracket === '}') {
@@ -2811,16 +2840,18 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 														return 'bracket';
 												}
 												
-												// Dot token - track for namespace.function pattern
+												// ============================================================
+												// DOT TOKEN - Track for namespace.function pattern
+												// ============================================================
 												if (stream.peek() === '.') {
 														state.lastToken = 'dot';
 														stream.next();
 														return null;
 												}
 												
-												// =================================================================
+												// ============================================================
 												// IDENTIFIERS - Core tokenization with case preservation
-												// =================================================================
+												// ============================================================
 												if (stream.match(/^[a-zA-Z_$][a-zA-Z0-9_$]*/)) {
 														var word = stream.current();  // Preserves original case!
 														
@@ -2846,6 +2877,9 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 														return 'variable';
 												}
 												
+												// ============================================================
+												// FALLBACK - Consume any other character
+												// ============================================================
 												stream.next();
 												state.lastToken = null;
 												return null;
