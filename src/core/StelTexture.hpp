@@ -208,6 +208,10 @@ private:
 
 	//! Size in GL memory
 	unsigned int glSize = 0;
+
+	//! Set to true when async decode finished and GL upload is pending.
+	//! Used by StelTextureMgr to track how many textures are waiting for GPU upload.
+	bool uploadPending = false;
 };
 
 
