@@ -312,9 +312,338 @@
           </widget>
          </item>
          <item>
+          <widget class="Line" name="ctrlSep2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="placeLabelsCheckBox">
+           <property name="text">
+            <string>Show place labels</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="placeLabelsPopulationLabel">
+           <property name="text">
+            <string>Minimum population:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="placeLabelsPopulationComboBox"/>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="placeLabelsNearLinesOnlyCheckBox">
+           <property name="text">
+            <string>Near lines only</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="resetSettingsPushButton">
            <property name="text">
             <string>Reset settings</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+     </layout>
+     </widget>
+     <widget class="QWidget" name="twilightLimitsTab">
+      <attribute name="title">
+       <string>Twilight limits</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="twilightLimitsTabLayout">
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <property name="leftMargin">
+        <number>8</number>
+       </property>
+       <property name="topMargin">
+        <number>8</number>
+       </property>
+       <property name="rightMargin">
+        <number>8</number>
+       </property>
+       <property name="bottomMargin">
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="twilightTitleLabel">
+         <property name="text">
+          <string>Solstice twilight limits on Earth</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-weight: bold; font-size: 14px;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ObjectVisibilityMapWidget" name="twilightMapWidget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>1</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>200</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="twilightLegendGroupBox">
+         <property name="title">
+          <string>Key of solstice twilight limits</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox#twilightLegendGroupBox { background-color: white; color: black; } QGroupBox#twilightLegendGroupBox QLabel { background-color: transparent; color: black; }</string>
+         </property>
+         <layout class="QGridLayout" name="twilightLegendGridLayout">
+          <property name="leftMargin">
+           <number>8</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>8</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>12</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>4</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="twilightLegendSwatchEquator">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(35,35,35); font-weight: bold; font-family: monospace;</string>
+            </property>
+            <property name="text">
+             <string notr="true">────</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="twilightLegendTextEquator">
+            <property name="text">
+             <string>Equator</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="twilightLegendSwatchTropic">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(220,155,30); font-weight: bold; font-family: monospace;</string>
+            </property>
+            <property name="text">
+             <string notr="true">────</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="twilightLegendTextTropic">
+            <property name="text">
+             <string>Tropics</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLabel" name="twilightLegendSwatchPolar">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0,150,170); font-weight: bold; font-family: monospace;</string>
+            </property>
+            <property name="text">
+             <string notr="true">────</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLabel" name="twilightLegendTextPolar">
+            <property name="text">
+             <string>Polar circles</string>
+            </property>
+           </widget>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QLabel" name="twilightLegendSwatchCivilMin">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(245,110,45); font-weight: bold; font-family: monospace;</string>
+            </property>
+            <property name="text">
+             <string notr="true">────</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QLabel" name="twilightLegendTextCivilMin">
+            <property name="text">
+             <string>Lowest Sun altitude at solstice: -6° (civil twilight)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="twilightLegendSwatchCivilMax">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(205,60,60); font-weight: bold; font-family: monospace;</string>
+            </property>
+            <property name="text">
+             <string notr="true">- - -</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4" colspan="2">
+           <widget class="QLabel" name="twilightLegendTextCivilMax">
+            <property name="text">
+             <string>Highest Sun altitude at solstice: -6° (civil twilight)</string>
+            </property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QLabel" name="twilightLegendSwatchNautMin">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(160,90,210); font-weight: bold; font-family: monospace;</string>
+            </property>
+            <property name="text">
+             <string notr="true">────</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2">
+           <widget class="QLabel" name="twilightLegendTextNautMin">
+            <property name="text">
+             <string>Lowest Sun altitude at solstice: -12° (nautical twilight)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="twilightLegendSwatchNautMax">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(120,65,175); font-weight: bold; font-family: monospace;</string>
+            </property>
+            <property name="text">
+             <string notr="true">- - -</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4" colspan="2">
+           <widget class="QLabel" name="twilightLegendTextNautMax">
+            <property name="text">
+             <string>Highest Sun altitude at solstice: -12° (nautical twilight)</string>
+            </property>
+           </widget>
+          </item>
+
+          <item row="3" column="0">
+           <widget class="QLabel" name="twilightLegendSwatchAstroMin">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(60,105,220); font-weight: bold; font-family: monospace;</string>
+            </property>
+            <property name="text">
+             <string notr="true">────</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QLabel" name="twilightLegendTextAstroMin">
+            <property name="text">
+             <string>Lowest Sun altitude at solstice: -18° (astronomical twilight)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLabel" name="twilightLegendSwatchAstroMax">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(35,70,160); font-weight: bold; font-family: monospace;</string>
+            </property>
+            <property name="text">
+             <string notr="true">- - -</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4" colspan="2">
+           <widget class="QLabel" name="twilightLegendTextAstroMax">
+            <property name="text">
+             <string>Highest Sun altitude at solstice: -18° (astronomical twilight)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="twilightControlsLayout">
+         <property name="spacing">
+          <number>8</number>
+         </property>
+         <item>
+          <spacer name="twilightCtrlSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>10</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="twilightSetLocationByClickCheckBox">
+           <property name="text">
+            <string>Set location by clicking on the map</string>
+           </property>
+           <property name="toolTip">
+            <string>Enable to move the observer by clicking on the map. Available on Earth only.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="twilightCtrlSep1">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="twilightPlaceLabelsCheckBox">
+           <property name="text">
+            <string>Show place labels</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="twilightPlaceLabelsPopulationLabel">
+           <property name="text">
+            <string>Minimum population:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="twilightPlaceLabelsPopulationComboBox"/>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="twilightPlaceLabelsNearLinesOnlyCheckBox">
+           <property name="text">
+            <string>Near lines only</string>
            </property>
           </widget>
          </item>

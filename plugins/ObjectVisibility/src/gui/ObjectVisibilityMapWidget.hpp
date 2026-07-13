@@ -23,12 +23,17 @@
 
 #include "MapWidget.hpp"
 
+#include <QString>
+#include <QVector>
+
 //! A MapWidget subclass that:
 //!  1. Optionally gates emission of positionChanged() through a "click
 //!     to set location" mode.  Outside of that mode, the user can pan
 //!     and zoom freely without ever moving the observer.
 //!  2. Overlays "visibility lines" on top of the map, computed from
 //!     the declination of a star/DSO.
+//!  3. Optionally overlays Earth-only twilight/solstice latitude
+//!     limits, computed from Earth's obliquity of date.
 //!
 //! All five line types are simply parallels of geographic latitude:
 //!   - limit-of-visibility:   phi = dec +/- 90
@@ -46,6 +51,29 @@ class ObjectVisibilityMapWidget : public MapWidget
 
 public:
 	explicit ObjectVisibilityMapWidget(QWidget *parent = nullptr);
+
+	enum OverlayMode
+	{
+		VisibilityOverlay,
+		TwilightLimitsOverlay
+	};
+
+	void setOverlayMode(OverlayMode mode);
+	OverlayMode overlayMode() const { return currentOverlayMode; }
+
+	struct PlaceLabel
+	{
+		QString name;
+		double longitude = 0.0;
+		double latitude = 0.0;
+		int population = 0;
+		QChar role;
+	};
+
+	void setPlaceLabels(const QVector<PlaceLabel>& labels);
+	void setPlaceLabelsVisible(bool visible);
+	void setPlaceLabelMinimumPopulation(int population);
+	void setPlaceLabelsNearLinesOnly(bool nearLinesOnly);
 
 	//! Enable/disable "click on map to set observer location" mode.
 	//! In normal mode, clicks on the map do nothing (panning/zooming
@@ -65,6 +93,13 @@ public:
 	//! Hide all visibility lines (e.g. when no object is selected).
 	void clearVisibility();
 
+	//! Set Earth obliquity of date (degrees) and draw the twilight
+	//! solstice limits. Pass a value outside (0, 90) to clear.
+	void setTwilightObliquity(double obliquityDeg);
+
+	//! Hide all twilight/solstice limit lines.
+	void clearTwilightLimits();
+
 signals:
 	//! Forwarded to the dialog when the user clicked on the map and we
 	//! were in click-to-set mode.  Mirrors MapWidget::positionChanged.
@@ -79,14 +114,29 @@ private slots:
 private:
 	void drawLatitudeLine(QPainter& painter, double latitudeDeg,
 	                      const QPen& pen) const;
+	void drawLatitudeLineCopies(QPainter& painter, double latitudeDeg,
+	                            const QPen& pen) const;
 	void drawLatitudeMarkers(QPainter& painter, double latitudeDeg,
 	                         const QChar& marker, const QColor& color) const;
+	void drawVisibilityOverlay(QPainter& painter) const;
+	void drawTwilightLimitsOverlay(QPainter& painter) const;
+	void drawPlaceLabels(QPainter& painter) const;
+	QVector<double> currentOverlayLatitudes() const;
 
+	OverlayMode currentOverlayMode = VisibilityOverlay;
 	bool   clickToSetMode = false;
 
 	bool   hasDeclination = false;
 	double declinationDeg = 0.0;
 	int    goodVisibilityDeg = 5;
+
+	bool   hasTwilightObliquity = false;
+	double twilightObliquityDeg = 0.0;
+
+	QVector<PlaceLabel> placeLabels;
+	bool showPlaceLabels = false;
+	int placeLabelMinimumPopulation = 1000000;
+	bool placeLabelsNearLinesOnly = true;
 };
 
 #endif // OBJECTVISIBILITYMAPWIDGET_HPP

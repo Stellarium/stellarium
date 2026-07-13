@@ -60,7 +60,9 @@ StelPluginInfo ObjectVisibilityStelPluginInterface::getPluginInfo() const
 	info.description = N_("Shows on a planet map where a selected star or "
 	                      "deep-sky object is visible.  Supports observation "
 	                      "from Earth, the Moon, the eight planets, Pluto, "
-	                      "and the four Galilean moons.  Based on the "
+	                      "and the four Galilean moons.  Also shows "
+	                      "Earth-only solstice twilight latitude limits "
+	                      "computed from obliquity of date.  Based on the "
 	                      "geometric criteria of the Astro-Geo-GIS article "
 	                      "\"The 49 brightest stars in the night sky – when "
 	                      "and where can we see them?\"");

@@ -58,6 +58,9 @@ private slots:
 	//! Toggle "click on map to set location" mode on the map widget.
 	void onSetLocationByClickToggled(bool on);
 
+	//! Toggle "click on map to set location" mode on the twilight map.
+	void onTwilightSetLocationByClickToggled(bool on);
+
 	//! The user clicked the map while in click-to-set mode.
 	void onLocationPicked(double longitude, double latitude,
 	                      const QColor &color);
@@ -68,10 +71,21 @@ private slots:
 	//! Reset settings button.
 	void onResetSettings();
 
+	void onPlaceLabelsToggled(bool on);
+	void onTwilightPlaceLabelsToggled(bool on);
+	void onPlaceLabelsPopulationChanged(int index);
+	void onTwilightPlaceLabelsPopulationChanged(int index);
+	void onPlaceLabelsNearLinesOnlyToggled(bool on);
+	void onTwilightPlaceLabelsNearLinesOnlyToggled(bool on);
+
 	//! Re-sync the location marker AND the planet texture from
 	//! StelCore's current observer.  Called on startup and whenever
 	//! StelCore reports a location change.
 	void syncMarkerToObserver();
+
+	//! Recompute Earth-only solstice/twilight limits for the current
+	//! epoch and update the twilight tab.
+	void refreshTwilightLimits();
 
 private:
 	Ui_objectVisibilityDialog* ui;
@@ -92,9 +106,16 @@ private:
 	//! geographic position on the same planet.
 	QString  cachedPlanetName;
 
+	bool placeLabelsVisible = false;
+	int  placeLabelsMinimumPopulation = 1000000;
+	bool placeLabelsNearLinesOnly = true;
+
 	void setAboutHtml();
 	void refreshTitleLabel();
 	void updateCalculateButtonEnabled();
+	void configurePlaceLabelControls();
+	void syncPlaceLabelControls();
+	void updatePlaceLabels();
 
 	//! Compute the year label in astronomical convention from the
 	//! StelCore's current JD.  E.g. 2026, or -10000 for 10001 BCE.
