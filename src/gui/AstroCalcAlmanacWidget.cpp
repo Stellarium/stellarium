@@ -70,15 +70,15 @@ void AstroCalcAlmanacWidget::setup()
 	int customMinutes = conf->value("astro/custom_minutes", 60).toInt();
 	minutesJD = customMinutes / (24.*60.);
 	ui->spinBoxMinutes->setValue(customMinutes);
-	connect(ui->spinBoxMinutes, SIGNAL(valueChanged(int)), this, SLOT(saveMinutes(int)));
+	connect(ui->spinBoxMinutes, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcAlmanacWidget::saveMinutes);
 
 	customSunAltitude = conf->value("astro/custom_sun_altitude", -7.0).toDouble();
 	ui->spinBoxCustomSunAltitude->setValue(customSunAltitude);
-	connect(ui->spinBoxCustomSunAltitude, SIGNAL(valueChanged(double)), this, SLOT(saveCustomSunAltitue(double)));
+	connect(ui->spinBoxCustomSunAltitude, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &AstroCalcAlmanacWidget::saveCustomSunAltitue);
 
 	customMoonAltitude = conf->value("astro/custom_moon_altitude", 18.0).toDouble();
 	ui->spinBoxCustomMoonAltitude->setValue(customMoonAltitude);
-	connect(ui->spinBoxCustomMoonAltitude, SIGNAL(valueChanged(double)), this, SLOT(saveCustomMoonAltitue(double)));
+	connect(ui->spinBoxCustomMoonAltitude, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &AstroCalcAlmanacWidget::saveCustomMoonAltitue);
 
 	populateData();
 
@@ -88,8 +88,8 @@ void AstroCalcAlmanacWidget::setup()
 	connect(core, &StelCore::dateChanged, this, [=](){ setSeasonTimes(); setTodayTimes(); });
 	// update the data when time rate is changed - it's hook for GH: #4906
 	connect(core, &StelCore::timeRateChanged, this, [=](){ setSeasonTimes(); setTodayTimes(); });
-	connect(specMgr, SIGNAL(eventYearChanged()), this, SLOT(setSeasonTimes()));
-	connect(specMgr, SIGNAL(eventYearChanged()), this, SLOT(setTodayTimes()));
+	connect(specMgr, &SpecificTimeMgr::eventYearChanged, this, &AstroCalcAlmanacWidget::setSeasonTimes);
+	connect(specMgr, &SpecificTimeMgr::eventYearChanged, this, &AstroCalcAlmanacWidget::setTodayTimes);
 
 	connect(ui->buttonMarchEquinoxCurrent, &QPushButton::clicked, this, [=](){specMgr->currentMarchEquinox();});
 	connect(ui->buttonMarchEquinoxNext, &QPushButton::clicked, this, [=](){specMgr->nextMarchEquinox();});

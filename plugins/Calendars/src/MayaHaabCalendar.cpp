@@ -24,7 +24,13 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-const int MayaHaabCalendar::mayanHaabEpoch=MayaLongCountCalendar::mayanEpoch-MayaHaabCalendar::mayanHaabOrdinal({18, 8});
+// Default solution. Make sure to wire up some reset mechanism if MayaLongCountCalendar::mayanEpoch ever loses const-ness!
+int MayaHaabCalendar::mayanHaabEpoch=MayaLongCountCalendar::mayanEpoch-MayaHaabCalendar::mayanHaabOrdinal({18, 8});
+
+void MayaHaabCalendar::updateFromMayaEpoch()
+{
+	MayaHaabCalendar::mayanHaabEpoch=MayaLongCountCalendar::mayanEpoch-MayaHaabCalendar::mayanHaabOrdinal({18, 8});
+}
 
 MayaHaabCalendar::MayaHaabCalendar(double jd): Calendar(jd)
 {

@@ -83,17 +83,17 @@ void StelDialogSeparate::setVisible(bool v)
 		else
 		{
 			dialog = new CustomDialog(&StelMainView::getInstance(), Qt::Tool | Qt::FramelessWindowHint);
-			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
+			connect(static_cast<CustomDialog*>(dialog), &CustomDialog::rejected, this, &StelDialogSeparate::close);
 			createDialogContent();
 			if (gui)
 				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 			// Ensure that tooltip get rendered in red in night mode.
-			connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
+			connect(&StelApp::getInstance(), &StelApp::visionNightModeChanged, this, &StelDialogSeparate::updateNightModeProperty);
 			updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 
 			reinterpret_cast<CustomDialog*>(dialog)->setSizeGripEnabled(true);
 			QSizeF size = dialog->size();
-			connect(reinterpret_cast<CustomDialog*>(dialog), SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
+			connect(reinterpret_cast<CustomDialog*>(dialog), &CustomDialog::sizeChanged, this, &StelDialogSeparate::handleDialogSizeChanged);
 
 			int newX, newY;
 			// Retrieve panel locations from config.ini, but shift if required to a visible position.

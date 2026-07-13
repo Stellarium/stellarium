@@ -19,6 +19,7 @@
 #ifndef STELTONEREPRODUCER_HPP
 #define STELTONEREPRODUCER_HPP
 
+#include "StelUtils.hpp"
 #include <cmath>
 #include <QObject>
 

@@ -1211,9 +1211,9 @@ private:
 	static unsigned char BvToColorIndex(double bV);
 
 	//! Used to count how many planets actually need shadow information
-	int shadowPlanetCount;
+	int shadowPlanetCount = 0;
 	//! Used to track whether earth shadow enlargement shall be computed after Danjon (1951)
-	bool earthShadowEnlargementDanjon;
+	bool earthShadowEnlargementDanjon = false;
 	PlanetP sun;
 	PlanetP moon;
 	PlanetP earth;
@@ -1231,25 +1231,25 @@ private:
 
 	// Allow enlargements of the planets. May be useful to highlight the planets in in overview plots
 	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
-	bool flagMoonScale;
-	double moonScale;
-	bool flagDynamicMoonScale;   //!< If true, Moon scale is computed dynamically from FOV instead of using a fixed multiplier.
-	double moonScaleMinFov;      //!< FOV (degrees) at and below which dynamic Moon scale equals 1× (natural size).
-	double moonScaleMaxFov;      //!< FOV (degrees) at and above which dynamic Moon scale equals moonScale.
-	bool flagMinorBodyScale;
-	double minorBodyScale;
-	bool flagPlanetScale;
-	double planetScale;
-	bool flagSunScale;
-	double sunScale;
+	bool flagMoonScale = false;
+	double moonScale = 1;
+	bool flagDynamicMoonScale = false;   //!< If true, Moon scale is computed dynamically from FOV instead of using a fixed multiplier.
+	double moonScaleMinFov = 10.0;      //!< FOV (degrees) at and below which dynamic Moon scale equals 1× (natural size).
+	double moonScaleMaxFov = 90.0;      //!< FOV (degrees) at and above which dynamic Moon scale equals moonScale.
+	bool flagMinorBodyScale = false;
+	double minorBodyScale = 1.0;
+	bool flagPlanetScale = false;
+	double planetScale = 1.0;
+	bool flagSunScale = false;
+	double sunScale = 1.0;
 
 	int fontSize;
 
 	//! The amount of planet labels (between 0 and 10).
-	double labelsAmount;
+	double labelsAmount = 0;
 
 	// Flag to follow the state of drawing of solar corona
-	bool flagPermanentSolarCorona;
+	bool flagPermanentSolarCorona = true;
 
 	//! List of all the bodies of the solar system.
 	QList<PlanetP> systemPlanets;
@@ -1263,10 +1263,10 @@ private:
 	QVector<QVector<PlanetP>> systemPlanetsByLevel;
 
 	// Master settings
-	bool flagOrbits;
-	bool flagLightTravelTime;
-	bool flagUseObjModels;
-	bool flagShowObjSelfShadows;
+	bool flagOrbits = false;
+	bool flagLightTravelTime = true;
+	bool flagUseObjModels = false;
+	bool flagShowObjSelfShadows = true;
 
 	//! The selection pointer texture.
 	StelTextureSP texPointer;
@@ -1274,53 +1274,53 @@ private:
 	StelTextureSP texEphemerisCometMarker;
 	StelTextureSP texEphemerisNowMarker;
 
-	bool flagShow;
-	bool flagPointer;                           // show red cross selection pointer?
-	bool flagIsolatedTrails;
-	int numberIsolatedTrails;
-	int maxTrailPoints;                         // limit trails to a manageable size.
-	int maxTrailTimeExtent;                     // max age of trail points, years
-	int trailsThickness;
-	bool flagIsolatedOrbits;
-	bool flagPlanetsOrbits;				// Show orbits of the major planets, regardless of other orbit settings
-	bool flagPlanetsOrbitsOnly;			// show orbits of the major planets only (no minor bodies in any case)
-	bool flagOrbitsWithMoons;			// Show moon systems if planet orbits are displayed
-	bool ephemerisMarkersDisplayed;
-	bool ephemerisDatesDisplayed;
-	bool ephemerisMagnitudesDisplayed;
-	bool ephemerisHorizontalCoordinates;
-	bool ephemerisLineDisplayed;
-	bool ephemerisAlwaysOn;
-	bool ephemerisNow;
-	int ephemerisLineThickness;
-	bool ephemerisSkipDataDisplayed;
-	bool ephemerisSkipMarkersDisplayed;
-	int ephemerisDataStep;				// How many days skip for dates near ephemeris markers (and the markers if it enabled)
-	int ephemerisDataLimit;				// Number of celestial bodies in ephemeris data (how many celestial bodies was in computing of ephemeris)
-	bool ephemerisSmartDatesDisplayed;
-	bool ephemerisScaleMarkersDisplayed;
+	bool flagShow = false;
+	bool flagPointer = false;                   // show red cross selection pointer?
+	bool flagIsolatedTrails = true;
+	int numberIsolatedTrails = 0;
+	int maxTrailPoints = 5000;                  // limit trails to a manageable size.
+	int maxTrailTimeExtent = 1;                 // max age of trail points, years
+	int trailsThickness = 1;
+	bool flagIsolatedOrbits = true;
+	bool flagPlanetsOrbits = false;             // Show orbits of the major planets, regardless of other orbit settings
+	bool flagPlanetsOrbitsOnly = false;         // show orbits of the major planets only (no minor bodies in any case)
+	bool flagOrbitsWithMoons = false;           // Show moon systems if planet orbits are displayed
+	bool ephemerisMarkersDisplayed = true;
+	bool ephemerisDatesDisplayed = false;
+	bool ephemerisMagnitudesDisplayed = false;
+	bool ephemerisHorizontalCoordinates = false;
+	bool ephemerisLineDisplayed = false;
+	bool ephemerisAlwaysOn = false;
+	bool ephemerisNow = false;
+	int ephemerisLineThickness = 1;
+	bool ephemerisSkipDataDisplayed = false;
+	bool ephemerisSkipMarkersDisplayed = false;
+	int ephemerisDataStep = 1;                  // How many days skip for dates near ephemeris markers (and the markers if it enabled)
+	int ephemerisDataLimit = 1;                 // Number of celestial bodies in ephemeris data (how many celestial bodies was in computing of ephemeris)
+	bool ephemerisSmartDatesDisplayed = true;
+	bool ephemerisScaleMarkersDisplayed = false;
 	// Ephemeris label component flags
-	bool ephemerisLabelYear;
-	bool ephemerisLabelMonth;
-	bool ephemerisLabelDay;
-	bool ephemerisLabelHour;
-	bool ephemerisLabelMinute;
-	bool ephemerisLabelSecond;
-	bool ephemerisFirstOfMonthOnly;
-	bool ephemerisLabelAntiClutter;
-	int ephemerisLabelAntiClutterPx;
-	Vec3f ephemerisGenericMarkerColor;
-	Vec3f ephemerisSecondaryMarkerColor;
-	Vec3f ephemerisSelectedMarkerColor;
-	Vec3f ephemerisMercuryMarkerColor;
-	Vec3f ephemerisVenusMarkerColor;
-	Vec3f ephemerisMarsMarkerColor;
-	Vec3f ephemerisJupiterMarkerColor;
-	Vec3f ephemerisSaturnMarkerColor;
-	Vec3f ephemerisUranusMarkerColor;
-	Vec3f ephemerisNeptuneMarkerColor;
+	bool ephemerisLabelYear = true;
+	bool ephemerisLabelMonth = true;
+	bool ephemerisLabelDay = true;
+	bool ephemerisLabelHour = false;
+	bool ephemerisLabelMinute = false;
+	bool ephemerisLabelSecond = false;
+	bool ephemerisFirstOfMonthOnly = false;
+	bool ephemerisLabelAntiClutter = false;
+	int ephemerisLabelAntiClutterPx = 20;
+	Vec3f ephemerisGenericMarkerColor = {1.0f, 1.0f, 0.0f};
+	Vec3f ephemerisSecondaryMarkerColor = {0.7f, 0.7f, 1.0f};
+	Vec3f ephemerisSelectedMarkerColor = {1.0f, 0.7f, 0.0f};
+	Vec3f ephemerisMercuryMarkerColor = {1.0f, 1.0f, 0.0f};
+	Vec3f ephemerisVenusMarkerColor = {1.0f, 1.0f, 1.0f};
+	Vec3f ephemerisMarsMarkerColor = {1.0f, 0.0f, 0.0f};
+	Vec3f ephemerisJupiterMarkerColor = {0.3f, 1.0f, 1.0f};
+	Vec3f ephemerisSaturnMarkerColor = {0.0f, 1.0f, 0.0f};
+	Vec3f ephemerisUranusMarkerColor = {0.2f, 0.5f, 0.3f};
+	Vec3f ephemerisNeptuneMarkerColor = {0.2f, 0.3f, 0.5f};
 
-	class TrailGroup* allTrails;
+	class TrailGroup* allTrails = nullptr;
 	QSettings* conf;
 	LinearFader trailFader;
 	Vec3f trailsColor;                           // Generic trail color for non-planets
@@ -1340,7 +1340,7 @@ private:
 	QList<Orbit*> orbits;           // Pointers on created elliptical orbits. 0.16pre: WHY DO WE NEED THIS???
 
 	//! Number of additional threads. This could be automatically derived, but for now we can experiment.
-	int extraThreads;
+	int extraThreads = 0;
 
 	// BEGIN OF BLOCK RELATED TO MASS MARKER DISPLAY
 	// Variables used for GL optimization when displaying little markers for the minor bodies.
@@ -1370,7 +1370,7 @@ private:
 	MarkerShaderVars markerShaderVars;
 
 	//! Current number of sources stored in the buffer (still to display)
-	unsigned int nbMarkers;
+	unsigned int nbMarkers = 0;
 	std::unique_ptr<QOpenGLVertexArrayObject> vao;
 	std::unique_ptr<QOpenGLBuffer> vbo;
 	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
@@ -1394,7 +1394,7 @@ public:
 
 private:
 	//! absolute value of the dimmest SSO drawn by drawAsteroidMarker()
-	double markerMagThreshold;
+	double markerMagThreshold = 15.0;
 	//! Preliminary experimental select-per-config.ini.
 	//! 0: original single-threaded 3 loops
 	//! 1: blockingMap

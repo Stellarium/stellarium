@@ -960,32 +960,42 @@ void StelMovementMgr::lookSouth(bool zero)
 	}
 }
 
-void StelMovementMgr::lookZenith(void)
+// Look immediately towards Zenith, turning selected azimuth horizon to screen bottom.
+// @param azi bottom azimuth. (default 180=South, 90=East, etc.)
+void StelMovementMgr::lookZenith(double azi)
 {
-	Vec3f dir;
-	StelUtils::spheToRect(M_PIf, M_PI_2f, dir);
+	Vec3d dir;
+	StelUtils::spheToRect(-azi*M_PI_180, M_PI_2, dir);
 	//qDebug() << "lookZenith: Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
-	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionJ2000(core->altAzToJ2000(dir, StelCore::RefractionOff));
 	//qDebug() << "lookZenith: View is " << viewDirectionMountFrame[0] << "/" << viewDirectionMountFrame[1] << "/" << viewDirectionMountFrame[2];
 	if (mountMode==MountAltAzimuthal)
 	{	// ensure a stable up vector that makes the bottom of the screen point south.
-		upVectorMountFrame.set(-1., 0., 0.);
+		upVectorMountFrame.set(cos(-azi*M_PI_180), sin(-azi*M_PI_180), 0.);
 		//qDebug() << "lookZenith: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
+	else
+		if (azi != 180.0)
+			qWarning() << "StelMovementMgr::lookZenith() in Equatorial mount mode cannot set custom azimuth" << azi;
 }
 
-void StelMovementMgr::lookNadir(void)
+// Look immediately towards Nadir, turning selected horizon azimuth to screen top.
+// @param azi top azimuth. (default 180=South, 90=East, etc.)
+void StelMovementMgr::lookNadir(double azi)
 {
-	Vec3f dir;
-	StelUtils::spheToRect(M_PIf, -M_PI_2f, dir);
+	Vec3d dir;
+	StelUtils::spheToRect(M_PI-azi*M_PI_180, -M_PI_2, dir);
 	//qDebug() << "lookNadir: Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
-	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionJ2000(core->altAzToJ2000(dir, StelCore::RefractionOff));
 	//qDebug() << "lookNadir: View is " << viewDirectionMountFrame[0] << "/" << viewDirectionMountFrame[1] << "/" << viewDirectionMountFrame[2];
 	if (mountMode==MountAltAzimuthal)
 	{	// ensure a stable up vector that makes the top of the screen point south.
-		upVectorMountFrame.set(-1., 0., 0.);
+		upVectorMountFrame.set(cos(M_PI-azi*M_PI_180), sin(M_PI-azi*M_PI_180), 0.);
 		//qDebug() << "lookNadir: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
+	else
+		if (azi != 180.0)
+			qWarning() << "StelMovementMgr::lookNadir() in Equatorial mount mode cannot set custom azimuth" << azi;
 }
 
 void StelMovementMgr::lookTowardsNCP(void)

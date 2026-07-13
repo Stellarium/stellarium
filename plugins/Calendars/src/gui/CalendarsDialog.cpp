@@ -143,6 +143,8 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->overrideTextColorCheckBox,  "Calendars.flagTextColorOverride");
 	ui->textcolorToolButton->setup("Calendars.textColor", "Calendars/text_color");
 
+	connect(cal, &Calendars::mayaCorrelationJDChanged, this,  [=](){ui->mayaCorrelationDisplayLabel->setText(QString("0.0.0.0.0 = JD %1").arg(QString::number(cal->getMayaCorrelationJD())));});
+
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,        qOverload<int>(&QSpinBox::valueChanged), this, &CalendarsDialog::julianChanged);
 	connect(ui->julianMonthSpinBox,       qOverload<int>(&QSpinBox::valueChanged), this, &CalendarsDialog::julianChanged);
@@ -179,6 +181,7 @@ void CalendarsDialog::createDialogContent()
 	connect(ui->nextXihuitlButton,           &QPushButton::clicked, this, [=](){ core->addSolarDays(365.);});
 	connect(ui->previousTonalpohualliButton, &QPushButton::clicked, this, [=](){ core->addSolarDays(-260.);});
 	connect(ui->nextTonalpohualliButton,     &QPushButton::clicked, this, [=](){ core->addSolarDays(260.);});
+	connectIntProperty(ui->mayaCorrelationSpinBox, "Calendars.mayaCorrelationJD");
 }
 
 void CalendarsDialog::setAboutHtml(void)

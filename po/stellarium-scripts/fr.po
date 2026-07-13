@@ -8,16 +8,16 @@
 # Bruno Averty <bruno.averty@gmail.com>, 2022
 # Jean-Marc Saredi <mythrill1227@gmail.com>, 2022
 # Ascor8522, 2022
-# Nicolas Martignoni, 2024
+# Nicolas Martignoni, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-01 14:32+0700\n"
+"POT-Creation-Date: 2026-07-03 12:42+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Nicolas Martignoni, 2024\n"
+"Last-Translator: Nicolas Martignoni, 2026\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1332,391 +1332,425 @@ msgstr "Jour solaire"
 msgid "Uranian analemma"
 msgstr "Analemme uranienne"
 
-#: scripts/messier_marathon.ssc:18
+#: scripts/messier_marathon.ssc:32
 msgid "Messier Marathon"
 msgstr "Marathon de Messier"
 
-#: scripts/messier_marathon.ssc:85
+#: scripts/messier_marathon.ssc:99
 msgid "Difficulty is 0"
 msgstr "Aucune difficulté"
 
-#: scripts/messier_marathon.ssc:86
+#: scripts/messier_marathon.ssc:100
 msgid "Very diffuse, very dark, very difficult"
 msgstr "Très diffus, très sombre, très difficile"
 
-#: scripts/messier_marathon.ssc:87
+#: scripts/messier_marathon.ssc:101
 msgid "Easier than M74, small"
 msgstr "Petit, plus facile que M74"
 
-#: scripts/messier_marathon.ssc:88
+#: scripts/messier_marathon.ssc:102
 msgid "Visible to the naked eye, no difficulty"
 msgstr "Visible à l'œil nu, aucune difficulté"
 
-#: scripts/messier_marathon.ssc:89
+#: scripts/messier_marathon.ssc:103
 msgid "More difficult than M110 to verify, small"
 msgstr "Petit, plus difficile que M110"
 
-#: scripts/messier_marathon.ssc:90
+#: scripts/messier_marathon.ssc:104
 msgid "In the west of M31, it is easy to detect"
 msgstr "À l'ouest de M31, facile à détecter"
 
-#: scripts/messier_marathon.ssc:91
+#: scripts/messier_marathon.ssc:105
 msgid "Diffuse, great, brighter"
 msgstr "Diffus, grand, brillant"
 
-#: scripts/messier_marathon.ssc:92
+#: scripts/messier_marathon.ssc:106
 msgid "Small, easy to locate, not as horror as imagined"
 msgstr "Petit, facile à trouver, pas aussi difficile qu'imaginé"
 
-#: scripts/messier_marathon.ssc:93
+#: scripts/messier_marathon.ssc:107
 msgid "Difficult to locate, easy to detect and verify"
 msgstr "Difficile à trouver, facile à détecter et à vérifier"
 
-#: scripts/messier_marathon.ssc:94
+#: scripts/messier_marathon.ssc:108
 msgid "Small, easy to locate, don't confuse with NGC663"
 msgstr "Petit, facile à trouver, à ne pas confondre avec NGC663"
 
-#: scripts/messier_marathon.ssc:95
+#: scripts/messier_marathon.ssc:109
 msgid "Large, scattered, easy"
 msgstr "Grand, épars, facile"
 
-#: scripts/messier_marathon.ssc:96
+#: scripts/messier_marathon.ssc:110
 msgid "Fuzzy, easy to find, accompanied by a small star"
 msgstr "Diffus, facile à trouver, contient une petite étoile"
 
-#: scripts/messier_marathon.ssc:97
+#: scripts/messier_marathon.ssc:111
 msgid "Visible to the naked eye, better than M31"
 msgstr "Visible à l’œil nu, plus facile que M31"
 
-#: scripts/messier_marathon.ssc:98
+#: scripts/messier_marathon.ssc:112
 msgid "Very close to M42, not easy to see the fuzzy"
 msgstr "Très proche de M42, pas facile de distinguer la nébulosité"
 
-#: scripts/messier_marathon.ssc:99
+#: scripts/messier_marathon.ssc:113
 msgid "Small, dark, few stars around"
 msgstr "Petit, sombre, quelques étoiles aux alentours"
 
-#: scripts/messier_marathon.ssc:100
+#: scripts/messier_marathon.ssc:114
 msgid "Easy to locate, easy to detect in a good transparency."
 msgstr "Facile à trouver, facile à détecter en cas de bonne transparence"
 
-#: scripts/messier_marathon.ssc:101
+#: scripts/messier_marathon.ssc:115
 msgid "Visible to the naked eye, easier"
 msgstr "Visible à l’œil nu, assez facile"
 
-#: scripts/messier_marathon.ssc:102 scripts/messier_marathon.ssc:154
-#: scripts/messier_marathon.ssc:175
+#: scripts/messier_marathon.ssc:116 scripts/messier_marathon.ssc:168
+#: scripts/messier_marathon.ssc:194
 msgid "Easy to locate and verify"
 msgstr "Facile à trouver et à vérifier"
 
-#: scripts/messier_marathon.ssc:103 scripts/messier_marathon.ssc:104
+#: scripts/messier_marathon.ssc:117 scripts/messier_marathon.ssc:118
 msgid "Large, scattered"
 msgstr "Grand, épars"
 
-#: scripts/messier_marathon.ssc:105
+#: scripts/messier_marathon.ssc:119
 msgid "Bright, easy to verify, difficult to locate"
 msgstr "Lumineux, difficile à trouver, facile à vérifier"
 
-#: scripts/messier_marathon.ssc:106
+#: scripts/messier_marathon.ssc:120
 msgid "Large, difficult to locate, easy to confuse with NGC2506"
 msgstr "Grand, difficile à trouver, souvent confondu avec NGC2506"
 
-#: scripts/messier_marathon.ssc:107
+#: scripts/messier_marathon.ssc:121
 msgid "Easy, more scattered"
 msgstr "Facile, plutôt épars"
 
-#: scripts/messier_marathon.ssc:108
+#: scripts/messier_marathon.ssc:122
 msgid "Easy, fuzzy"
 msgstr "Facile à observer, diffus"
 
-#: scripts/messier_marathon.ssc:109
+#: scripts/messier_marathon.ssc:123
 msgid "Easy, scattered"
 msgstr "Facile, épars"
 
-#: scripts/messier_marathon.ssc:110
+#: scripts/messier_marathon.ssc:124
 msgid "Easy, large, scattered"
 msgstr "Facile, grand, épars"
 
-#: scripts/messier_marathon.ssc:111
+#: scripts/messier_marathon.ssc:125
 msgid "Very close to M96 and M105"
 msgstr "Très proche de M96 et M105"
 
-#: scripts/messier_marathon.ssc:112
+#: scripts/messier_marathon.ssc:126
 msgid "Easy to locate and verify, assist to verify M95 and M105"
 msgstr ""
 "Facile à trouver et à vérifier, facilite la vérification de M95 et de M105"
 
-#: scripts/messier_marathon.ssc:113
+#: scripts/messier_marathon.ssc:127
 msgid "Dark"
 msgstr "Sombre"
 
-#: scripts/messier_marathon.ssc:114
+#: scripts/messier_marathon.ssc:128
 msgid "Very close, it’s like M81 and M82"
 msgstr "Très proche de M66, un peu comme M81 et M82"
 
-#: scripts/messier_marathon.ssc:115
+#: scripts/messier_marathon.ssc:129
 msgid "There is NGC3628 nearby, don't think you have found a new comet"
 msgstr ""
 "NGC3628 est aux alentours, donc ne pas penser avoir découvert une nouvelle "
 "comète"
 
-#: scripts/messier_marathon.ssc:116
+#: scripts/messier_marathon.ssc:130
 msgid "Like the darkened M33, require a high sky conditions"
 msgstr "Comme une M33 en plus sombre, nécessite un ciel d'excellente qualité"
 
-#: scripts/messier_marathon.ssc:117
+#: scripts/messier_marathon.ssc:131
 msgid "Difficult to locate, 4 stars of the inverted 7 shape beside"
 msgstr "Difficile à trouver, à côté de 4 étoiles formant un 7 inversé"
 
-#: scripts/messier_marathon.ssc:118
+#: scripts/messier_marathon.ssc:132
 msgid "Easy, you can see the companion galaxy"
 msgstr "Facile, la galaxie compagnon peut être observée"
 
-#: scripts/messier_marathon.ssc:119
+#: scripts/messier_marathon.ssc:133
 msgid "Easy to verify"
 msgstr "Facile à vérifier"
 
-#: scripts/messier_marathon.ssc:120
+#: scripts/messier_marathon.ssc:134
 msgid "Not easy to locate, small, slightly dark"
 msgstr "Pas facile à trouver, petit, un peu sombre"
 
-#: scripts/messier_marathon.ssc:121
+#: scripts/messier_marathon.ssc:135
 msgid "Not easy to locate, bright"
 msgstr "Pas facile à trouver, lumineux"
 
-#: scripts/messier_marathon.ssc:122
+#: scripts/messier_marathon.ssc:136
 msgid "Not easy to locate, no bright stars nearby"
 msgstr "Difficile à trouver, pas d'étoile brillante à proximité"
 
-#: scripts/messier_marathon.ssc:123
+#: scripts/messier_marathon.ssc:137
 msgid "Easy to locate"
 msgstr "Facile à trouver"
 
-#: scripts/messier_marathon.ssc:124
+#: scripts/messier_marathon.ssc:138
 msgid "Beside M60, it is easy to verify"
 msgstr "À côté de M60, facile à vérifier"
 
-#: scripts/messier_marathon.ssc:125
+#: scripts/messier_marathon.ssc:139
 msgid "It’s an easier one"
 msgstr "Observation facile"
 
-#: scripts/messier_marathon.ssc:126
+#: scripts/messier_marathon.ssc:140
 msgid "As bright as M85, easy to verify"
 msgstr "Aussi lumineux que M85, facile à vérifier"
 
-#: scripts/messier_marathon.ssc:127
+#: scripts/messier_marathon.ssc:141
 msgid "Dark, hard to look"
 msgstr "Sombre, difficile à à observer"
 
-#: scripts/messier_marathon.ssc:128
+#: scripts/messier_marathon.ssc:142
 msgid "Easy to detect than M89, easy to locate"
 msgstr "Plus facile à détecter que M89, facile à trouver"
 
-#: scripts/messier_marathon.ssc:129
+#: scripts/messier_marathon.ssc:143
 msgid "Easy to locate, detect once"
 msgstr "Facile à trouver après détection"
 
-#: scripts/messier_marathon.ssc:130
+#: scripts/messier_marathon.ssc:144
 msgid "There is an NGC4438 near M84 and M86, don't make a mistake"
 msgstr "Ne pas confondre avec NGC4438, qui est proche de M84 et M86"
 
-#: scripts/messier_marathon.ssc:131
+#: scripts/messier_marathon.ssc:145
 msgid "M84 are together, closer to NGC4438"
 msgstr "Proche de M84 et de NGC4438"
 
-#: scripts/messier_marathon.ssc:132
+#: scripts/messier_marathon.ssc:146
 msgid "Just above M90, almost like M90"
 msgstr "Juste au-dessus et presque identique à M90"
 
-#: scripts/messier_marathon.ssc:133
+#: scripts/messier_marathon.ssc:147
 msgid "Look hard"
 msgstr "Difficile à observer"
 
-#: scripts/messier_marathon.ssc:134
+#: scripts/messier_marathon.ssc:148
 msgid "This bunch of things in the Virgo Cluster is not easy"
 msgstr "Ensemble d'objets pas facile dans l'amas de la Vierge"
 
-#: scripts/messier_marathon.ssc:135
+#: scripts/messier_marathon.ssc:149
 msgid "M99 is easier to verify than M98"
 msgstr "Plus facile à vérifier que M98"
 
-#: scripts/messier_marathon.ssc:136
+#: scripts/messier_marathon.ssc:150
 msgid "First find M100 and then find M98 and M99"
 msgstr "Trouver d'abord M100, ensuite M98 et M99"
 
-#: scripts/messier_marathon.ssc:137
+#: scripts/messier_marathon.ssc:151
 msgid "Far away, but very bright, easy to find"
 msgstr "Lointain, mais très lumineux et facile à trouver"
 
-#: scripts/messier_marathon.ssc:138
+#: scripts/messier_marathon.ssc:152
 msgid "Small, not easy to locate, a little difficult"
 msgstr "Petit, plutôt difficile à trouver"
 
-#: scripts/messier_marathon.ssc:139
+#: scripts/messier_marathon.ssc:153
 msgid "Not easy to locate, easy to verify"
 msgstr "Pas facile à trouver, facile à vérifier"
 
-#: scripts/messier_marathon.ssc:140
+#: scripts/messier_marathon.ssc:154
 msgid "Easy to locate and verify, small"
 msgstr "Facile à trouver et vérifier, petit"
 
-#: scripts/messier_marathon.ssc:141
+#: scripts/messier_marathon.ssc:155
 msgid "Easy to verify, a star 5 magnitude nearby"
 msgstr "Facile à vérifier, proche d'une étoile de magnitude 5"
 
-#: scripts/messier_marathon.ssc:142
+#: scripts/messier_marathon.ssc:156
 msgid "Visible to the naked eye, big, bright"
 msgstr "Visible à l’œil nu, grand, lumineux"
 
-#: scripts/messier_marathon.ssc:143
+#: scripts/messier_marathon.ssc:157
 msgid "Bright and big in the galaxies, not hard to find"
 msgstr "Galaxie étendue et lumineuse, pas difficile à trouver"
 
-#: scripts/messier_marathon.ssc:144
+#: scripts/messier_marathon.ssc:158
 msgid "Bright, easy to verify"
 msgstr "Lumineux, facile à vérifier"
 
-#: scripts/messier_marathon.ssc:145
+#: scripts/messier_marathon.ssc:159
 msgid "Easy to verify in a right location"
 msgstr "Facile à vérifier à partir d'un emplacement adéquat"
 
-#: scripts/messier_marathon.ssc:146
+#: scripts/messier_marathon.ssc:160
 msgid "Famous, like the shoulder pole star"
 msgstr "Célèbre amas globulaire, facile"
 
-#: scripts/messier_marathon.ssc:147
+#: scripts/messier_marathon.ssc:161
 msgid "It may be easier to locate from the Dragon"
 msgstr "Plus facile à trouver en partant du Dragon"
 
-#: scripts/messier_marathon.ssc:148
+#: scripts/messier_marathon.ssc:162
 msgid "Small, 20 times or more is still easy to detect"
 msgstr "Petite, facile à détecter à partir d'un grossissement de x20"
 
-#: scripts/messier_marathon.ssc:149
+#: scripts/messier_marathon.ssc:163
 msgid "More difficult than M57, not easy to locate, very small"
 msgstr "Plus difficile que M57, pas facile à trouver, très petit"
 
-#: scripts/messier_marathon.ssc:150
+#: scripts/messier_marathon.ssc:164
 msgid "Easy, small, looks like a cluster of stars 7-8 magnitude"
 msgstr "Facile, petit, ressemble à un amas d'étoiles de magnitude 7-8"
 
-#: scripts/messier_marathon.ssc:151
+#: scripts/messier_marathon.ssc:165
 msgid "Larger than imagined, very scattered, not easy to locate"
 msgstr "Plus grand qu'on ne l'imagine, très épars, pas facile à trouver"
 
-#: scripts/messier_marathon.ssc:152
+#: scripts/messier_marathon.ssc:166
 msgid "Find M71 first, then find M27, and will be easier to locate"
 msgstr "Trouver d'abord M71, puis M27, et elle sera plus facile à trouver"
 
-#: scripts/messier_marathon.ssc:153
+#: scripts/messier_marathon.ssc:167
 msgid "Easy to locate, easy to verify in 50 binos"
 msgstr "Facile à trouver, facile à vérifier avec des jumelles x50"
 
-#: scripts/messier_marathon.ssc:155
+#: scripts/messier_marathon.ssc:169
 msgid "Bright, like M13, easy to find"
 msgstr "Lumineux, comme M13, facile à trouver"
 
-#: scripts/messier_marathon.ssc:156
+#: scripts/messier_marathon.ssc:170
 msgid "Detect it with M12, brighter than M12"
 msgstr "À trouver avec M12, plus lumineuse que M12"
 
-#: scripts/messier_marathon.ssc:157
+#: scripts/messier_marathon.ssc:171
 msgid "Difficult to locate, easy to verify"
 msgstr "Difficile à trouver, facile à vérifier"
 
-#: scripts/messier_marathon.ssc:158
+#: scripts/messier_marathon.ssc:172 scripts/messier_marathon.ssc:195
 msgid "Small, not easy to verify"
 msgstr "Petit, pas facile à vérifier"
 
-#: scripts/messier_marathon.ssc:159
+#: scripts/messier_marathon.ssc:173
 msgid "Bright, big, don't forget to detect NGC6144 nearby"
 msgstr "Lumineux, étendu, ne pas oublier d'observer NGC6144 tout proche"
 
-#: scripts/messier_marathon.ssc:160
+#: scripts/messier_marathon.ssc:174
 msgid "Not easy to verify at low power, easy at high power"
 msgstr ""
 "Pas facile à vérifier à faible grossissement, facile à fort grossissement"
 
-#: scripts/messier_marathon.ssc:161
+#: scripts/messier_marathon.ssc:175
 msgid "Follow the line of M4 and Antares, easy to verify"
 msgstr "Suivre la ligne menant de M4 à Antarès, facile à vérifier"
 
-#: scripts/messier_marathon.ssc:162
+#: scripts/messier_marathon.ssc:176
 msgid "Looking down from M19, darker than M19, but easy to verify"
 msgstr "Située plus bas que M19, plus sombre que M19, mais facile à vérifier"
 
-#: scripts/messier_marathon.ssc:163
+#: scripts/messier_marathon.ssc:177
 msgid "Easy to locate, bright, and almost like M13"
 msgstr "Facile à trouver, lumineux, presque comme M13"
 
-#: scripts/messier_marathon.ssc:164
+#: scripts/messier_marathon.ssc:178
 msgid "Easy to locate M26 by M11"
 msgstr "Facile à trouver à partir de M11"
 
-#: scripts/messier_marathon.ssc:165
+#: scripts/messier_marathon.ssc:179
 msgid "Easy"
 msgstr "Facile"
 
-#: scripts/messier_marathon.ssc:166 scripts/messier_marathon.ssc:179
+#: scripts/messier_marathon.ssc:180
+msgid "Rather large, Milky Way star patch with open cluster NGC6603"
+msgstr ""
+"Plutôt grand, une étendue d'étoiles dans la Voie lactée, avec l'amas ouvert "
+"NGC6603"
+
+#: scripts/messier_marathon.ssc:181 scripts/messier_marathon.ssc:200
 msgid "Difficult to locate, bright, easy to verify"
 msgstr "Difficile à trouver, lumineux, facile à vérifier"
 
-#: scripts/messier_marathon.ssc:167
+#: scripts/messier_marathon.ssc:182
 msgid "Beside M81, vertical to each other"
 msgstr "À coté de M81, à la verticale l'une de l'autre"
 
-#: scripts/messier_marathon.ssc:168
+#: scripts/messier_marathon.ssc:183
 msgid "Large, a little fuzzy"
 msgstr "Étendu, un peu diffus"
 
-#: scripts/messier_marathon.ssc:168
+#: scripts/messier_marathon.ssc:183
 msgid "Beside M20"
 msgstr "À coté de M20"
 
-#: scripts/messier_marathon.ssc:169
+#: scripts/messier_marathon.ssc:184
 msgid "It’s not hard to see the diffuse nebula"
 msgstr "La nébulosité est assez facile à observer"
 
-#: scripts/messier_marathon.ssc:170
+#: scripts/messier_marathon.ssc:185
 msgid "Visible to the naked eye, extremely easy"
 msgstr "Visible à l’œil nu, très facile"
 
-#: scripts/messier_marathon.ssc:171
+#: scripts/messier_marathon.ssc:186
 msgid "Big, easy"
 msgstr "Étendu, facile"
 
-#: scripts/messier_marathon.ssc:171
+#: scripts/messier_marathon.ssc:186
 msgid "Easy to locate and verify, bright"
 msgstr "Facile à trouver et à vérifier, lumineux"
 
-#: scripts/messier_marathon.ssc:172
+#: scripts/messier_marathon.ssc:187
 msgid "M13 second"
-msgstr "Jumelle de M13"
+msgstr "Semblable à M13"
 
-#: scripts/messier_marathon.ssc:173
+#: scripts/messier_marathon.ssc:187 scripts/messier_marathon.ssc:191
+msgid "Small and dim, difficult"
+msgstr "Petit et peu lumineux, difficile"
+
+#: scripts/messier_marathon.ssc:188
+msgid "A bit smaller and brighter than M69"
+msgstr "Un peu plus petit, mais plus brillant que M69"
+
+#: scripts/messier_marathon.ssc:189
+msgid "Very small and fuzzy, difficult"
+msgstr "Très petit et flou, difficile"
+
+#: scripts/messier_marathon.ssc:190
+msgid "Pretty large, faint, yet still clear"
+msgstr "Assez large, peu lumineux, mais tout de même clair"
+
+#: scripts/messier_marathon.ssc:192
 msgid "Too big, scattered, not easy to verify"
 msgstr "Trop étendu, épars, pas facile à vérifier"
 
-#: scripts/messier_marathon.ssc:174
+#: scripts/messier_marathon.ssc:193
 msgid "Bigger than M6"
 msgstr "Plus étendu que M6"
 
-#: scripts/messier_marathon.ssc:176
+#: scripts/messier_marathon.ssc:195
+msgid "Small, difficult"
+msgstr "Petit, difficile"
+
+#: scripts/messier_marathon.ssc:196
+msgid "Faint, check the Y shape of the star pattern"
+msgstr "Peu visible, observer la forme en Y des étoiles"
+
+#: scripts/messier_marathon.ssc:197
 msgid "Brighter than imagined, can be detected with 60 binos"
 msgstr "Plus lumineux qu'imaginé, peut être détecté avec les jumelles x60"
 
-#: scripts/messier_marathon.ssc:177
+#: scripts/messier_marathon.ssc:198
 msgid "Darker than M97, long strips, look hard"
 msgstr "Plus sombre que M97, présence de longues bandes, difficile à observer"
 
-#: scripts/messier_marathon.ssc:178
+#: scripts/messier_marathon.ssc:199
 msgid "Easy to verify with more than 20 times binos"
 msgstr "Facile à vérifier avec des jumelles x20"
 
-#: scripts/messier_marathon.ssc:180
+#: scripts/messier_marathon.ssc:201
 msgid "In the morning light, it looks too hard, dark"
 msgstr "Dans la lumière du matin, très difficile à observer, sombre"
 
-#: scripts/messier_marathon.ssc:289
+#: scripts/messier_marathon.ssc:202
+msgid "Very dim, the most difficult object to get!"
+msgstr "Très peu lumineux, le plus difficile objet de Messier à observer !"
+
+#: scripts/messier_marathon.ssc:296
 msgid "cannot be seen now"
 msgstr "n'est pas visible maintenant"
