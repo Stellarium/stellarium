@@ -8397,7 +8397,7 @@ msgstr ""
 
 #: src/gui/LocationDialog.cpp:919
 msgid "GPS listening..."
-msgstr "GPS escutando..."
+msgstr "GPS aguardando conexão..."
 
 #: src/gui/LocationDialog.cpp:926
 msgid "GPS disconnecting..."
@@ -27117,7 +27117,7 @@ msgstr "Se você usar este complemento em suas publicações, cite:"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:206
 #, qt-format
 msgid "Listening on %1, IP: "
-msgstr "Ouvindo em %1, IP:"
+msgstr "Aguardando conexões em %1, IP:"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:211
 msgid "Not active."
@@ -27187,7 +27187,8 @@ msgstr "Ativar automaticamente ao iniciar"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:244
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
-msgstr "Servidor desativado - ou Servidor escutando no IP: aaa.bbb.ccc.ddd"
+msgstr ""
+"Servidor desativado - ou Servidor aguardando conexões no IP: aaa.bbb.ccc.ddd"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:53
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:439
