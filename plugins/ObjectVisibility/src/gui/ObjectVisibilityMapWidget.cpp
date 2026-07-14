@@ -158,9 +158,9 @@ const QColor DASHED_COLOR   = QColor(0,  60, 220, 220);
 const QColor ZENITH_COLOR   = QColor(0,  60, 220, 240);
 const QColor TRIANGLE_COLOR = QColor(0,  60, 220, 255);
 
-const QColor EQUATOR_COLOR  = QColor(35, 35, 35, 235);
+const QColor EQUATOR_COLOR  = QColor(235, 235, 235, 245);
 const QColor TROPIC_COLOR   = QColor(220, 155, 30, 245);
-const QColor POLAR_COLOR    = QColor(0, 150, 170, 245);
+const QColor POLAR_COLOR    = QColor(0, 120, 145, 245);
 
 const QColor CIVIL_MIN_COLOR = QColor(245, 110, 45, 245);
 const QColor NAUT_MIN_COLOR  = QColor(160, 90, 210, 245);
@@ -311,14 +311,16 @@ void ObjectVisibilityMapWidget::drawVisibilityOverlay(QPainter& painter) const
 void ObjectVisibilityMapWidget::drawTwilightLimitsOverlay(QPainter& painter) const
 {
 	const double ratio = devicePixelRatioF();
-	const double penW = std::max(1.0, 1.5 * ratio);
+	const double penW = std::max(1.0, 1.35 * ratio);
 	const double eps = twilightObliquityDeg;
 	const double polar = 90.0 - eps;
 
-	auto penFor = [penW](const QColor& color, Qt::PenStyle style = Qt::SolidLine)
+	auto penFor = [penW](const QColor& color,
+	                     Qt::PenStyle style = Qt::SolidLine,
+	                     double width = 0.0)
 	{
 		QPen pen(color);
-		pen.setWidthF(penW);
+		pen.setWidthF(width > 0.0 ? width : penW);
 		pen.setCapStyle(Qt::FlatCap);
 		pen.setStyle(style);
 		if (style == Qt::CustomDashLine)
@@ -333,9 +335,13 @@ void ObjectVisibilityMapWidget::drawTwilightLimitsOverlay(QPainter& painter) con
 			drawLatitudeLineCopies(painter, -latitude, pen);
 	};
 
-	drawLatitudeLineCopies(painter, 0.0, penFor(EQUATOR_COLOR));
+	drawLatitudeLineCopies(painter, 0.0, penFor(EQUATOR_COLOR,
+	                                            Qt::SolidLine,
+	                                            std::max(1.0, 1.8 * ratio)));
 	drawSymmetric(eps, penFor(TROPIC_COLOR));
-	drawSymmetric(polar, penFor(POLAR_COLOR));
+	drawSymmetric(polar, penFor(POLAR_COLOR,
+	                            Qt::DotLine,
+	                            std::max(1.0, 1.9 * ratio)));
 
 	// At solstice the Sun's declination is +/-eps.  For the
 	// summer-solstice midnight Sun, h_min = phi + eps - 90, giving

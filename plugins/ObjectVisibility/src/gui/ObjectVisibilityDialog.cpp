@@ -494,9 +494,8 @@ void ObjectVisibilityDialog::refreshTwilightLimits()
 	ui->twilightMapWidget->setMarkerVisible(true);
 	ui->twilightSetLocationByClickCheckBox->setEnabled(true);
 	ui->twilightSetLocationByClickCheckBox->setToolTip(
-		q_("Enable to move the observer by clicking on the map.  Stays "
-		   "active until you uncheck it — you can pick as many locations "
-		   "as you like."));
+		q_("Enable to move the observer by clicking on the map. "
+		   "Stays active until you uncheck it."));
 
 	const double obliquityDeg = earth->getRotObliquity(core->getJDE()) * 180.0 / M_PI;
 	ui->twilightMapWidget->setTwilightObliquity(obliquityDeg);
