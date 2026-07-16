@@ -45,10 +45,36 @@ struct alignas(1) CatRecord {
 #pragma pack(pop)
 static_assert(sizeof(CatRecord) == 32, "CatRecord must be 32 bytes");
 
+// Star3 .cat record (16 bytes) — matches Star3::Data in Star.hpp
+// No proper motion or parallax; coarser quantization for faint stars.
+#pragma pack(push, 1)
+struct alignas(1) CatRecord3 {
+	int64_t  gaia_id;       // 8 bytes
+	uint8_t  x0[3];         // 3 bytes, RA in 0.1 arcsecond (24-bit little-endian)
+	uint8_t  x1[3];         // 3 bytes, DEC in 0.1 arcsecond, offset +90 deg (24-bit LE)
+	uint8_t  b_v;           // 1 byte, B-V: raw = (B-V + 1.0) / 0.025; 255 = missing
+	uint8_t  vmag;          // 1 byte, Vmag: raw = (V - 16.0 mag) / 0.02 mag
+};
+#pragma pack(pop)
+static_assert(sizeof(CatRecord3) == 16, "CatRecord3 must be 16 bytes");
+
 // .cat file header constants
-inline constexpr uint32_t  FILE_MAGIC     = 0x835F040A;
-inline constexpr uint32_t  CATALOG_TYPE   = 1;          // Star2
-inline constexpr uint32_t  CATALOG_MAJOR  = 0;
-inline constexpr uint32_t  CATALOG_MINOR  = 1;
-inline constexpr double    CATALOG_EPOCH  = 2457389.0;  // STELLAR_CATALOG_JDEPOCH = J2016.0
+inline constexpr uint32_t  FILE_MAGIC         = 0x835F040A;
+inline constexpr uint32_t  CATALOG_TYPE_STAR2 = 1;      // Star2
+inline constexpr uint32_t  CATALOG_TYPE_STAR3 = 2;      // Star3
+inline constexpr uint32_t  CATALOG_MAJOR      = 0;
+inline constexpr uint32_t  CATALOG_MINOR      = 1;
+inline constexpr double    CATALOG_EPOCH      = 2457389.0;  // STELLAR_CATALOG_JDEPOCH = J2016.0
+
+// Missing-BP-RP sentinels in raw on-disk representation
+inline constexpr int16_t  STAR2_BV_MISSING = 32767;     // std::numeric_limits<int16_t>::max()
+inline constexpr uint8_t  STAR3_BV_MISSING = 255;       // std::numeric_limits<uint8_t>::max()
+
+// On-disk record size for a given catalog type (0 = unknown)
+inline constexpr size_t catalog_record_size(uint32_t type)
+{
+	return type == CATALOG_TYPE_STAR2 ? sizeof(CatRecord)
+	     : type == CATALOG_TYPE_STAR3 ? sizeof(CatRecord3)
+	     : 0;
+}
 

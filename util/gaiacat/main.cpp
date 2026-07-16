@@ -1,6 +1,6 @@
 // Gaia DR3 .bin → Stellarium .cat converter.
 // Usage:
-//   skychart2cat --gaia-bin <dir> --out-dir <dir> [--workers <n>] [--dry-run]
+//   skychart2cat --gaia-bin <dir> --out-dir <dir> [--workers <n>] [--dry-run] [--star3-from <level>]
 
 #include "types.hpp"
 #include "convert.hpp"
@@ -34,6 +34,7 @@ struct LevelConfig {
 	double      mag_lo;
 	double      mag_hi;
 	int         n_buckets;
+	uint32_t    cat_type;   // CATALOG_TYPE_STAR2 or CATALOG_TYPE_STAR3
 };
 
 using ZoneCounts = std::vector<std::vector<uint32_t>>;
@@ -75,6 +76,12 @@ static bool pass1_complete(const std::string& work_dir, const std::vector<LevelC
 	return true;
 }
 
+// Catalog file naming: stars_<level>_<type>v<major>_<minor>.cat (matches ZoneArray debug string)
+static std::string cat_filename(const LevelConfig& lv) {
+	return lv.name + "_" + std::to_string(lv.cat_type) + "v"
+	     + std::to_string(CATALOG_MAJOR) + "_" + std::to_string(CATALOG_MINOR) + ".cat";
+}
+
 static void cleanup_incomplete(const std::string& work_dir, const std::vector<LevelConfig>& levels) {
 	for (const auto& lv : levels) {
 		std::string bucket_dir = work_dir + "/" + lv.name + "_buckets";
@@ -85,7 +92,7 @@ static void cleanup_incomplete(const std::string& work_dir, const std::vector<Le
 
 static void cleanup_pass2(const std::string& out_dir, const std::vector<LevelConfig>& levels) {
 	for (const auto& lv : levels) {
-		std::string cat_path = out_dir + "/" + lv.name + "_1v0_1.cat";
+		std::string cat_path = out_dir + "/" + cat_filename(lv);
 		std::error_code ec;
 		fs::remove(cat_path, ec);
 	}
@@ -152,23 +159,25 @@ int main(int argc, char** argv) {
 	std::string input_dir;
 	std::string out_dir;
 	std::string work_dir;
-	int    n_workers = std::thread::hardware_concurrency();
-	bool   dry_run   = false;
+	int    n_workers   = std::thread::hardware_concurrency();
+	bool   dry_run     = false;
+	int    star3_from  = 8;   // levels >= this use Star3 (V >= 16.0 required; matches official split)
 
 	for (int i = 1; i < argc; ++i) {
 		std::string arg = argv[i];
-		if      (arg == "--gaia-bin" && i+1 < argc) { input_dir = argv[++i]; }
-		else if (arg == "--out-dir"  && i+1 < argc) { out_dir   = argv[++i]; }
-		else if (arg == "--work-dir" && i+1 < argc) { work_dir  = argv[++i]; }
-		else if (arg == "--workers"  && i+1 < argc) { n_workers = std::stoi(argv[++i]); }
-		else if (arg == "--dry-run")                 { dry_run   = true; }
+		if      (arg == "--gaia-bin"    && i+1 < argc) { input_dir  = argv[++i]; }
+		else if (arg == "--out-dir"     && i+1 < argc) { out_dir    = argv[++i]; }
+		else if (arg == "--work-dir"    && i+1 < argc) { work_dir   = argv[++i]; }
+		else if (arg == "--workers"     && i+1 < argc) { n_workers  = std::stoi(argv[++i]); }
+		else if (arg == "--star3-from"  && i+1 < argc) { star3_from = std::stoi(argv[++i]); }
+		else if (arg == "--dry-run")                    { dry_run    = true; }
 		else {
-			std::cerr << "Usage: skychart2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--workers <n>] [--dry-run]\n";
+			std::cerr << "Usage: skychart2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--workers <n>] [--star3-from <level>] [--dry-run]\n";
 			return 1;
 		}
 	}
 	if (input_dir.empty() || out_dir.empty()) {
-		std::cerr << "Usage: skychart2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--workers <n>] [--dry-run]\n";
+		std::cerr << "Usage: skychart2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--workers <n>] [--star3-from <level>] [--dry-run]\n";
 		return 1;
 	}
 	if (work_dir.empty()) work_dir = out_dir;
@@ -178,12 +187,19 @@ int main(int argc, char** argv) {
 		fs::create_directories(work_dir);
 	}
 
-	std::vector<LevelConfig> levels = {
-		{"stars_7",  7, 15.50, 16.75, 256},
-		{"stars_8",  8, 16.75, 18.50, 256},
-		{"stars_9",  9, 18.50, 20.25, 256},
-		{"stars_10", 10, 20.25, 23.00, 256},
+	auto type_for = [star3_from](int level) {
+		return level >= star3_from ? CATALOG_TYPE_STAR3 : CATALOG_TYPE_STAR2;
 	};
+	std::vector<LevelConfig> levels = {
+		{"stars_7",  7, 15.50, 16.75, 256, type_for(7)},
+		{"stars_8",  8, 16.75, 18.50, 256, type_for(8)},
+		{"stars_9",  9, 18.50, 20.25, 256, type_for(9)},
+		{"stars_10", 10, 20.25, 23.00, 256, type_for(10)},
+	};
+	for (const auto& lv : levels) {
+		std::cout << "  " << lv.name << ": V [" << lv.mag_lo << ", " << lv.mag_hi << ")  "
+		          << (lv.cat_type == CATALOG_TYPE_STAR3 ? "Star3" : "Star2") << "\n";
+	}
 
 	// Discover input files
 	std::vector<std::string> input_files;
@@ -318,9 +334,9 @@ int main(int argc, char** argv) {
 		}
 
 		int mag_min = static_cast<int>(lv.mag_lo * 1000.0);
-		std::string out_path = out_dir + "/" + lv.name + "_1v0_1.cat";
+		std::string out_path = out_dir + "/" + cat_filename(lv);
 
-		write_cat(bpaths, all_counts[li], lv.level, mag_min, out_path, n_workers);
+		write_cat(bpaths, all_counts[li], lv.level, mag_min, lv.cat_type, out_path, n_workers);
 
 		for (const auto& p : bpaths) fs::remove(p);
 	}
