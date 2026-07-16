@@ -1,5 +1,4 @@
-// Star data providers: abstract SkyChart .dat vs Gaia .bin reading.
-// Both deliver the same units so the conversion pipeline is identical.
+// Gaia .bin reader: delivers star data in a common format for the conversion pipeline.
 
 #pragma once
 
@@ -22,50 +21,6 @@ struct StarData {
 	double  pmdec   = 0;    // mas/yr
 	double  parallax= 0;    // mas
 };
-
-// ---------- SkyChart .dat reader ----------
-
-class DatReader {
-public:
-	bool open(const std::string& path) {
-		f_ = std::fopen(path.c_str(), "rb");
-		return f_ != nullptr;
-	}
-	bool next(StarData& out) {
-		if (!f_ || feof(f_)) return false;
-		uint8_t buf[38];
-		if (std::fread(buf, 38, 1, f_) != 1) return false;
-
-		SkyChartRecord r;
-		std::memcpy(&r, buf, 38);
-
-		out.gaia_id  = r.gaia_id;
-		out.ra_deg   = r.ra_raw  / 3600000.0;
-		out.dec_deg  = r.dec_raw / 3600000.0 - 90.0;
-		out.G_mag    = r.g_mag / 1000.0;
-
-		bool have_color = (std::abs(r.bp_mag) < 30000 && std::abs(r.rp_mag) < 30000);
-		if (have_color) {
-			double bp = r.bp_mag / 1000.0;
-			double rp = r.rp_mag / 1000.0;
-			out.bp_rp = bp - rp;
-		} else {
-			out.bp_rp = NAN;
-		}
-
-		// SkyChart stores pmra/pmdec in arcsec/yr, parallax in arcsec
-		out.pmra     = r.pmra * 1000.0;   // as/yr → mas/yr
-		out.pmdec    = r.pmdec * 1000.0;
-		out.parallax = r.plx  * 1000.0;   // as → mas
-		return true;
-	}
-	void close() { if (f_) { std::fclose(f_); f_ = nullptr; } }
-
-private:
-	FILE* f_ = nullptr;
-};
-
-// ---------- Gaia .bin reader ----------
 
 class BinReader {
 public:

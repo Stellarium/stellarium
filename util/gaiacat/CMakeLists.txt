@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_definitions(-D_FILE_OFFSET_BITS=64)
 
+# Gaia DR3 .bin → Stellarium .cat converter
 add_executable(skychart2cat
 	main.cpp
 	convert.cpp

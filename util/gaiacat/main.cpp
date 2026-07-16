@@ -1,6 +1,5 @@
-// Stellarium .cat converter — supports SkyChart .dat and Gaia .bin inputs.
+// Gaia DR3 .bin → Stellarium .cat converter.
 // Usage:
-//   skychart2cat --skychart <dir> --out-dir <dir> [--workers <n>] [--dry-run]
 //   skychart2cat --gaia-bin <dir> --out-dir <dir> [--workers <n>] [--dry-run]
 
 #include "types.hpp"
@@ -155,23 +154,21 @@ int main(int argc, char** argv) {
 	std::string work_dir;
 	int    n_workers = std::thread::hardware_concurrency();
 	bool   dry_run   = false;
-	bool   use_bin   = false;   // true → Gaia .bin, false → SkyChart .dat
 
 	for (int i = 1; i < argc; ++i) {
 		std::string arg = argv[i];
-		if      (arg == "--skychart" && i+1 < argc) { input_dir = argv[++i]; use_bin = false; }
-		else if (arg == "--gaia-bin" && i+1 < argc) { input_dir = argv[++i]; use_bin = true;  }
+		if      (arg == "--gaia-bin" && i+1 < argc) { input_dir = argv[++i]; }
 		else if (arg == "--out-dir"  && i+1 < argc) { out_dir   = argv[++i]; }
 		else if (arg == "--work-dir" && i+1 < argc) { work_dir  = argv[++i]; }
 		else if (arg == "--workers"  && i+1 < argc) { n_workers = std::stoi(argv[++i]); }
 		else if (arg == "--dry-run")                 { dry_run   = true; }
 		else {
-			std::cerr << "Usage: skychart2cat --skychart <dir>|--gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--workers <n>] [--dry-run]\n";
+			std::cerr << "Usage: skychart2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--workers <n>] [--dry-run]\n";
 			return 1;
 		}
 	}
 	if (input_dir.empty() || out_dir.empty()) {
-		std::cerr << "Usage: skychart2cat --skychart <dir>|--gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--workers <n>] [--dry-run]\n";
+		std::cerr << "Usage: skychart2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--workers <n>] [--dry-run]\n";
 		return 1;
 	}
 	if (work_dir.empty()) work_dir = out_dir;
@@ -190,24 +187,12 @@ int main(int argc, char** argv) {
 
 	// Discover input files
 	std::vector<std::string> input_files;
-	if (use_bin) {
-		for (const auto& entry : fs::directory_iterator(input_dir)) {
-			if (entry.path().extension() == ".bin")
-				input_files.push_back(entry.path().string());
-		}
-	} else {
-		for (const auto& sub : {"gaia1", "gaia2", "gaia3", "gaia4"}) {
-			auto subdir = fs::path(input_dir) / sub;
-			if (!fs::is_directory(subdir)) continue;
-			for (const auto& entry : fs::recursive_directory_iterator(subdir)) {
-				if (entry.path().extension() == ".dat")
-					input_files.push_back(entry.path().string());
-			}
-		}
+	for (const auto& entry : fs::directory_iterator(input_dir)) {
+		if (entry.path().extension() == ".bin")
+			input_files.push_back(entry.path().string());
 	}
 	std::sort(input_files.begin(), input_files.end());
-	std::cout << "Found " << input_files.size() << " "
-	          << (use_bin ? ".bin" : ".dat") << " files\n";
+	std::cout << "Found " << input_files.size() << " .bin files\n";
 
 	if (input_files.empty()) return 1;
 
@@ -264,11 +249,8 @@ int main(int argc, char** argv) {
 					int fi = next_file.fetch_add(1);
 					if (fi >= static_cast<int>(input_files.size())) break;
 
-					if (use_bin)
-						process_star_file<BinReader>(input_files[fi], levels, bucket_writers, worker_counts[worker_id], dry_run);
-					else
-						process_star_file<DatReader>(input_files[fi], levels, bucket_writers, worker_counts[worker_id], dry_run);
-					completed.fetch_add(1);
+				process_star_file<BinReader>(input_files[fi], levels, bucket_writers, worker_counts[worker_id], dry_run);
+				completed.fetch_add(1);
 				}
 			});
 		}
