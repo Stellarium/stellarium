@@ -173,14 +173,24 @@ static Tolerances tolerances_for(const CatFile& a, const CatFile& b)
 	return t;
 }
 
+// Circular RA difference in degrees, folded into (-180, 180]
+static inline double ra_diff_deg(double a, double b)
+{
+	double d = a - b;
+	if (d > 180.0)  d -= 360.0;
+	if (d < -180.0) d += 360.0;
+	return d;
+}
+
 static void record_mismatch(const PhysStar& a, const PhysStar& b, int zone,
                             const Tolerances& tol, CompareResult& r, std::ofstream* file)
 {
 	r.mismatched++;
-	double dra  = (a.ra_deg - b.ra_deg) * 3600000.0;    // mas
+	double dra_deg = ra_diff_deg(a.ra_deg, b.ra_deg);
+	double dra  = dra_deg * 3600000.0;    // mas
 	double dde  = (a.dec_deg - b.dec_deg) * 3600000.0;
 	double dvm  = a.vmag - b.vmag;
-	if (std::fabs(a.ra_deg - b.ra_deg) > tol.pos_deg)   { r.bad_x0++; r.sum_x0 += std::fabs(dra); }
+	if (std::fabs(dra_deg) > tol.pos_deg)             { r.bad_x0++; r.sum_x0 += std::fabs(dra); }
 	if (std::fabs(a.dec_deg - b.dec_deg) > tol.pos_deg) { r.bad_x1++; r.sum_x1 += std::fabs(dde); }
 	if (std::fabs(dvm) > tol.vmag)                      { r.bad_vmag++; r.sum_vmag += std::fabs(dvm); }
 
@@ -257,7 +267,7 @@ static void matchOrRecordB(std::unordered_map<uint64_t, PhysStar>& map_a,
 		return;
 	}
 	const auto& sa = it->second;
-	bool ok = std::fabs(sa.ra_deg - s.ra_deg) <= tol.pos_deg &&
+	bool ok = std::fabs(ra_diff_deg(sa.ra_deg, s.ra_deg)) <= tol.pos_deg &&
 	          std::fabs(sa.dec_deg - s.dec_deg) <= tol.pos_deg &&
 	          std::fabs(sa.vmag - s.vmag) <= tol.vmag;
 	if (ok && sa.has_pm_plx && s.has_pm_plx)
