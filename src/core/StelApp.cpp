@@ -514,8 +514,8 @@ void StelApp::init(QSettings* conf)
 
 	qInfo().noquote() << "Cache directory:" << QDir::toNativeSeparators(cachePath);
 	cache->setCacheDirectory(cachePath);
-	networkAccessManager->setCache(cache);	
-	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
+	networkAccessManager->setCache(cache);
+	connect(networkAccessManager, &QNetworkAccessManager::finished, this, &StelApp::reportFileDownloadFinished);
 
 	// Proxy Initialisation
 	SplashScreen::showMessage(q_("Initializing network proxy..."));

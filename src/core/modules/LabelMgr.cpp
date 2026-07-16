@@ -530,8 +530,8 @@ void LabelMgr::messageTimeout1()
 	{
 		if (l->timer == obj)
 		{
-			disconnect(l->timer, SIGNAL(timeout()), this, SLOT(messageTimeout1()));
-			connect(l->timer, SIGNAL(timeout()), this, SLOT(messageTimeout2()));
+			disconnect(l->timer, &QTimer::timeout, this, &LabelMgr::messageTimeout1);
+			connect(l->timer, &QTimer::timeout, this, &LabelMgr::messageTimeout2);
 			l->setFlagShow(false);
 			l->timer->setInterval(l->labelFader.getDuration()*1000);
 			l->timer->start();
@@ -548,7 +548,7 @@ int LabelMgr::appendLabel(StelLabel* l, int autoDeleteTimeoutMs)
 		l->timer = timer;
 		timer->setSingleShot(true);
 		timer->setInterval(autoDeleteTimeoutMs);
-		connect(timer, SIGNAL(timeout()), this, SLOT(messageTimeout1()));
+		connect(timer, &QTimer::timeout, this, &LabelMgr::messageTimeout1);
 		timer->start();
 	}
 

@@ -35,7 +35,7 @@ Q_LOGGING_CATEGORY(HiPS,"stel.HiPS", QtInfoMsg)
 HipsMgr::HipsMgr()
 {
 	setObjectName("HipsMgr");
-	connect(this, SIGNAL(surveysChanged()), this, SLOT(restoreVisibleSurveys()));
+	connect(this, &HipsMgr::surveysChanged, this, &HipsMgr::restoreVisibleSurveys);
 }
 
 HipsMgr::~HipsMgr()
@@ -140,7 +140,7 @@ void HipsMgr::loadSources()
 			QList<HipsSurveyP> newSurveys = HipsSurvey::parseHipslist(source.toString(), data);
 			for (HipsSurveyP &survey: newSurveys)
 			{
-				connect(survey.data(), SIGNAL(propertiesChanged()), this, SIGNAL(surveysChanged()));
+				connect(survey.data(), &HipsSurvey::propertiesChanged, this, &HipsMgr::surveysChanged);
 				connect(survey.data(), &HipsSurvey::visibleChanged, this, &HipsMgr::updateActiveSurveys);
 				connect(survey.data(), &HipsSurvey::displaySettingsChanged, this, &HipsMgr::saveSurveySettings);
 				emit gotNewSurvey(survey);
@@ -187,7 +187,7 @@ void HipsMgr::init()
 	// better not to do it until the user open the survey ui so that we
 	// don't make a systematic request to the hipslist files!
 	if (hasVisibleSurvey)
-		QTimer::singleShot(0, this, SLOT(loadSources()));
+		QTimer::singleShot(0, this, &HipsMgr::loadSources);
 }
 
 

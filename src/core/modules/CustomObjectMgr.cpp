@@ -43,7 +43,7 @@ CustomObjectMgr::CustomObjectMgr()
 	conf = StelApp::getInstance().getSettings();
 	echoToLogfile=conf->value("devel/markers_to_logfile", false).toBool();
 	setFontSize(StelApp::getInstance().getScreenFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &CustomObjectMgr::setFontSize);
 }
 
 CustomObjectMgr::~CustomObjectMgr()

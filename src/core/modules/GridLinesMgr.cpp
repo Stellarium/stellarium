@@ -1826,7 +1826,7 @@ GridLinesMgr::GridLinesMgr()
 	apexPoints = new SkyPoint(SkyPoint::APEX);	
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
-	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectSolarSystem()));
+	connect(GETSTELMODULE(SolarSystem), &SolarSystem::solarSystemDataReloaded, this, &GridLinesMgr::connectSolarSystem);
 
 	// Whenever year changes we must recompute the labels for the ecliptic when dates are shown.
 	connect(StelApp::getInstance().getCore(), &StelCore::dateChangedByYear, this, [=](const int year){ SkyLine::computeEclipticDatePartitions(year);});
