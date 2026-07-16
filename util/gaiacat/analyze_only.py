@@ -85,9 +85,10 @@ def print_cross_zone_samples(cross):
 
 
 def count_no_bv(items):
-    # Star2: missing BP-RP is encoded as 32767 (B-V = 32.767 in printed output).
-    sentinel = 32767 / 1000.0
-    return sum(1 for _, _, _, _, _, bv in items if abs(bv - sentinel) < 1e-6)
+    # Missing BP-RP sentinel in printed output:
+    #   Star2: 32767 millimag → BV=32.767;  Star3: raw 255 → BV=0.025*255-1=5.375
+    return sum(1 for _, _, _, _, _, bv in items
+               if abs(bv - 32.767) < 1e-6 or abs(bv - 5.375) < 1e-6)
 
 
 def print_no_bv_summary(unmatched_a, unmatched_b):
