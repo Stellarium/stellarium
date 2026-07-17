@@ -510,8 +510,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->wutMagnitudeDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &AstroCalcDialog::saveWutMagnitudeLimit);
 	connect(ui->wutComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveWutTimeInterval);
 	connect(ui->wutCategoryListWidget, &QListWidget::currentRowChanged, this, &AstroCalcDialog::calculateWutObjects);
-	//connect(ui->wutMatchingObjectsTreeWidget->selectionModel() , SIGNAL(currentRowChanged(const QModelIndex&, const QModelIndex&)),
-	//	this, &AstroCalcDialog::selectWutObject(const QModelIndex&)));
+	//connect(ui->wutMatchingObjectsTreeWidget->selectionModel() , &QItemSelectionModel::currentRowChanged, this, &AstroCalcDialog::selectWutObject);
 	connect(ui->wutMatchingObjectsTreeWidget, &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectWutObject);
 	connect(ui->saveObjectsButton, &QPushButton::clicked, this, &AstroCalcDialog::saveWutObjects);
 	//connect(ui->wutMatchingObjectsLineEdit, &QLineEdit::textChanged, proxyModel, &QSortFilterProxyModel::setFilterWildcard);
