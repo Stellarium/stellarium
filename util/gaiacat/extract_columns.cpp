@@ -267,24 +267,37 @@ struct BufPool {
 	std::pair<std::unique_ptr<char[]>, size_t> acquire(size_t sz)
 	{
 		std::unique_lock<std::mutex> lk(m);
-		cv.wait(lk, [&] {
-			if (total < max_total) return true;
-			for (const auto& b : free) if (b.cap >= sz) return true;
-			return false;
-		});
-		// Prefer the smallest fitting recycled buffer
-		int best = -1;
-		for (size_t i = 0; i < free.size(); ++i)
-			if (free[i].cap >= sz && (best < 0 || free[i].cap < free[best].cap))
-				best = static_cast<int>(i);
-		if (best >= 0) {
-			auto b = std::move(free[best]);
-			free.erase(free.begin() + best);
-			return {std::move(b.ptr), b.cap};
+		for (;;) {
+			// 1. Best-fitting recycled buffer
+			int best = -1;
+			for (size_t i = 0; i < free.size(); ++i)
+				if (free[i].cap >= sz && (best < 0 || free[i].cap < free[best].cap))
+					best = static_cast<int>(i);
+			if (best >= 0) {
+				auto b = std::move(free[best]);
+				free.erase(free.begin() + best);
+				return {std::move(b.ptr), b.cap};
+			}
+			// 2. Below the cap: allocate a new buffer
+			if (total < max_total) {
+				++total;
+				lk.unlock();
+				return {std::unique_ptr<char[]>(new char[sz]), sz};
+			}
+			// 3. Pool exhausted but idle buffers exist: destroy the smallest idle
+			//    one and allocate a right-sized replacement. Without this, a file
+			//    larger than every pooled buffer deadlocks the reader forever.
+			if (!free.empty()) {
+				size_t smallest = 0;
+				for (size_t i = 1; i < free.size(); ++i)
+					if (free[i].cap < free[smallest].cap) smallest = i;
+				free.erase(free.begin() + smallest);   // destroys the buffer
+				lk.unlock();
+				return {std::unique_ptr<char[]>(new char[sz]), sz};   // total unchanged
+			}
+			// 4. All buffers in flight: wait for a release, then retry
+			cv.wait(lk);
 		}
-		++total;
-		lk.unlock();
-		return {std::unique_ptr<char[]>(new char[sz]), sz};
 	}
 
 	void release(std::unique_ptr<char[]> p, size_t cap)
