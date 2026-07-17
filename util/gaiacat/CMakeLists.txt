@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(skychart2cat LANGUAGES CXX)
+project(skychart2cat LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -23,6 +23,19 @@ add_executable(dedupcat
 add_executable(cmpcat
 	cmpcat.cpp
 )
+
+# CSV.gz -> .bin extractor (uses bundled zlib for gzip reading)
+set(GAIA_ZLIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../src/external/zlib)
+add_executable(extract_columns
+	extract_columns.cpp
+	${GAIA_ZLIB_DIR}/inflate.c
+	${GAIA_ZLIB_DIR}/inftrees.c
+	${GAIA_ZLIB_DIR}/inffast.c
+	${GAIA_ZLIB_DIR}/adler32.c
+	${GAIA_ZLIB_DIR}/crc32.c
+	${GAIA_ZLIB_DIR}/zutil.c
+)
+target_include_directories(extract_columns PRIVATE ${GAIA_ZLIB_DIR})
 
 # Link pthread on Linux
 if(UNIX AND NOT APPLE)
