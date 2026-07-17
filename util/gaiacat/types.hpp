@@ -13,7 +13,7 @@
 #include <cstddef>
 #include <cstdio>
 
-// Intermediate bucket record (40 bytes, one star encoded for one level)
+// Intermediate bucket record (44 bytes, one star encoded for one level)
 #pragma pack(push, 1)
 struct alignas(1) BucketRecord {
 	uint32_t zone;          // geodesic zone index
@@ -26,9 +26,28 @@ struct alignas(1) BucketRecord {
 	int32_t  pmdec_i;       // pmdec × 1000 (int)
 	int32_t  plx_i;         // parallax × 100 (int)
 	int32_t  plx_err_i;     // parallax error × 100 (int)
+	int32_t  rv_i;          // radial velocity × 10 (int, 0.1 km/s)
 };
 #pragma pack(pop)
-static_assert(sizeof(BucketRecord) == 40, "BucketRecord must be 40 bytes");
+static_assert(sizeof(BucketRecord) == 44, "BucketRecord must be 44 bytes");
+
+// Star1 .cat record (48 bytes) — matches Star1::Data in Star.hpp
+#pragma pack(push, 1)
+struct alignas(1) CatRecord1 {
+	int64_t  gaia_id;       // 8 bytes
+	int32_t  x0, x1, x2;    // 12 bytes, position unit vector × 2e9
+	int32_t  dx0, dx1, dx2; // 12 bytes, 3D proper-motion vector in uas/yr
+	int16_t  b_v;           // 2 bytes, B-V × 1000 (32767 = missing)
+	int16_t  vmag;          // 2 bytes, V × 1000 (millimag)
+	uint16_t plx;           // 2 bytes, parallax in 20 uas
+	uint16_t plx_err;       // 2 bytes, parallax error in 10 uas
+	int16_t  rv;            // 2 bytes, radial velocity in 0.1 km/s
+	uint16_t spInt;         // 2 bytes, spectral type index (0 = no information)
+	uint8_t  objtype;       // 1 byte, object type index (0 = no information)
+	uint8_t  hip[3];        // 3 bytes, HIP number (17 bit) + component ID (5 bit)
+};
+#pragma pack(pop)
+static_assert(sizeof(CatRecord1) == 48, "CatRecord1 must be 48 bytes");
 
 // Star2 .cat record (32 bytes) — matches Star2::Data in Star.hpp
 #pragma pack(push, 1)
@@ -61,6 +80,7 @@ static_assert(sizeof(CatRecord3) == 16, "CatRecord3 must be 16 bytes");
 
 // .cat file header constants
 inline constexpr uint32_t  FILE_MAGIC         = 0x835F040A;
+inline constexpr uint32_t  CATALOG_TYPE_STAR1 = 0;      // Star1
 inline constexpr uint32_t  CATALOG_TYPE_STAR2 = 1;      // Star2
 inline constexpr uint32_t  CATALOG_TYPE_STAR3 = 2;      // Star3
 inline constexpr uint32_t  CATALOG_MAJOR      = 0;
@@ -71,10 +91,11 @@ inline constexpr double    CATALOG_EPOCH      = 2457389.0;  // STELLAR_CATALOG_J
 inline constexpr int16_t  STAR2_BV_MISSING = 32767;     // std::numeric_limits<int16_t>::max()
 inline constexpr uint8_t  STAR3_BV_MISSING = 255;       // std::numeric_limits<uint8_t>::max()
 
-// On-disk record size for a given catalog type (0 = unknown)
+// On-disk record size for a given catalog type
 inline constexpr size_t catalog_record_size(uint32_t type)
 {
-	return type == CATALOG_TYPE_STAR2 ? sizeof(CatRecord)
+	return type == CATALOG_TYPE_STAR1 ? sizeof(CatRecord1)
+	     : type == CATALOG_TYPE_STAR2 ? sizeof(CatRecord)
 	     : type == CATALOG_TYPE_STAR3 ? sizeof(CatRecord3)
 	     : 0;
 }

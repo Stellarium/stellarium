@@ -21,6 +21,42 @@ static inline void store_u24le(uint8_t out[3], uint32_t v)
 	out[2] = static_cast<uint8_t>(v >> 16);
 }
 
+// Convert a BucketRecord to Star1 on-disk form.
+// Position becomes a 3D unit vector × 2e9; proper motion becomes the 3D vector
+// in the local triad (p = east, q = north) in uas/yr. Bucket pmra is stored
+// without the cos(dec) factor, so it is restored here before projection.
+static CatRecord1 to_cat_record1(const BucketRecord& r)
+{
+	CatRecord1 cr{};
+	cr.gaia_id = r.gaia_id;
+
+	const double ra   = (r.ra_i  / 3600000.0) * M_PI / 180.0;
+	const double dec  = (r.dec_i / 3600000.0) * M_PI / 180.0;
+	const double sra  = std::sin(ra),  cra  = std::cos(ra);
+	const double sdec = std::sin(dec), cdec = std::cos(dec);
+
+	cr.x0 = static_cast<int32_t>(std::lround(cdec * cra * 2e9));
+	cr.x1 = static_cast<int32_t>(std::lround(cdec * sra * 2e9));
+	cr.x2 = static_cast<int32_t>(std::lround(sdec        * 2e9));
+
+	const double pmra  = (r.pmra_i / 1000.0) * cdec;   // mas/yr, Gaia-native (with cos(dec))
+	const double pmdec =  r.pmdec_i / 1000.0;          // mas/yr
+	cr.dx0 = static_cast<int32_t>(std::lround((pmra * -sra + pmdec * -sdec * cra) * 1000.0));
+	cr.dx1 = static_cast<int32_t>(std::lround((pmra *  cra + pmdec * -sdec * sra) * 1000.0));
+	cr.dx2 = static_cast<int32_t>(std::lround((               pmdec *  cdec      ) * 1000.0));
+
+	cr.b_v  = r.bv;
+	cr.vmag = r.vmag;
+	// Star1 parallax unit is 20 uas (bucket carries 10 uas units)
+	cr.plx     = static_cast<uint16_t>(std::max(0, std::min((r.plx_i + 1) / 2, 65535)));
+	cr.plx_err = static_cast<uint16_t>(std::max(0, std::min(r.plx_err_i, 65535)));
+	cr.rv      = static_cast<int16_t>(std::max(-32768, std::min(r.rv_i, 32767)));
+	cr.spInt   = 0;   // spectral type requires SIMBAD data, not available from Gaia bin
+	cr.objtype = 0;
+	cr.hip[0] = cr.hip[1] = cr.hip[2] = 0;
+	return cr;
+}
+
 // Convert a BucketRecord to Star3 on-disk form.
 // BucketRecord carries mas/millimag units; Star3 uses 0.1 arcsec, 0.02 mag, 0.025 mag.
 static CatRecord3 to_cat_record3(const BucketRecord& r)
@@ -138,7 +174,10 @@ static void sort_and_write_bucket(
 		fseeko(fcat, static_cast<off_t>(offsets[zone]), SEEK_SET);
 		for (size_t k = ri; k < rj; ++k) {
 			const auto& r = records[k];
-			if (cat_type == CATALOG_TYPE_STAR3) {
+			if (cat_type == CATALOG_TYPE_STAR1) {
+				CatRecord1 cr = to_cat_record1(r);
+				std::fwrite(&cr, sizeof(CatRecord1), 1, fcat);
+			} else if (cat_type == CATALOG_TYPE_STAR3) {
 				CatRecord3 cr = to_cat_record3(r);
 				std::fwrite(&cr, sizeof(CatRecord3), 1, fcat);
 			} else {
@@ -237,7 +276,8 @@ void write_cat(const std::vector<std::string>& bucket_paths,
 	int n_buckets = static_cast<int>(bucket_paths.size());
 	int n_threads = std::min(n_sort_threads, n_buckets);
 	std::cout << "\nPASS 2: Sorting " << n_buckets << " buckets (" << n_threads << " threads)"
-		  << (cat_type == CATALOG_TYPE_STAR3 ? " [Star3]" : " [Star2]") << "\n";
+		  << (cat_type == CATALOG_TYPE_STAR1 ? " [Star1]"
+		     : cat_type == CATALOG_TYPE_STAR3 ? " [Star3]" : " [Star2]") << "\n";
 
 	// Process buckets in parallel using thread pool
 	std::vector<std::thread> threads;

@@ -21,6 +21,8 @@ struct StarData {
 	double  pmdec   = 0;    // mas/yr
 	double  parallax= 0;    // mas
 	double  plx_err = 0;    // mas
+	double  rv      = NAN;  // km/s (NaN if unavailable)
+	double  rv_err  = NAN;  // km/s
 };
 
 class BinReader {
@@ -31,11 +33,12 @@ public:
 	}
 	bool next(StarData& out) {
 		if (!f_ || feof(f_)) return false;
-		// Record layout: q d d d f d d f f = 60 bytes (packed, no padding)
+		// Record layout: q d d d f d d f f f f = 68 bytes (packed, no padding)
 		#pragma pack(push, 1)
-		struct { int64_t sid; double ra,dec,parallax; float plx_err; double pmra,pmdec; float G,bp_rp; } rec;
+		struct { int64_t sid; double ra,dec,parallax; float plx_err; double pmra,pmdec; float G,bp_rp; float rv,rv_err; } rec;
 		#pragma pack(pop)
-		if (std::fread(&rec, 60, 1, f_) != 1) return false;
+		static_assert(sizeof(rec) == 68, "bin record must be 68 bytes");
+		if (std::fread(&rec, 68, 1, f_) != 1) return false;
 
 		out.gaia_id  = rec.sid;
 		out.ra_deg   = rec.ra;
@@ -46,6 +49,8 @@ public:
 		out.pmdec    = rec.pmdec;
 		out.parallax = rec.parallax;
 		out.plx_err  = rec.plx_err;
+		out.rv       = rec.rv;
+		out.rv_err   = rec.rv_err;
 		return true;
 	}
 	void close() { if (f_) { std::fclose(f_); f_ = nullptr; } }
