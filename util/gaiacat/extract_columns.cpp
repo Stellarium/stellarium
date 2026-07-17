@@ -212,6 +212,7 @@ struct LineSink {
 static std::atomic<uint64_t> g_stars{0};
 static std::atomic<int>      g_files_done{0};
 static std::atomic<int>      g_errors{0};
+static std::chrono::steady_clock::time_point g_t0;
 
 static bool inflate_and_parse(const char* raw, size_t raw_size, LineSink& sink)
 {
@@ -225,11 +226,18 @@ static bool inflate_and_parse(const char* raw, size_t raw_size, LineSink& sink)
 		zs.next_out  = reinterpret_cast<Bytef*>(chunk.data());
 		zs.avail_out = static_cast<uInt>(chunk.size());
 		ret = inflate(&zs, Z_NO_FLUSH);
-		if (ret != Z_OK && ret != Z_STREAM_END && ret != Z_BUF_ERROR) {
+		// Z_BUF_ERROR here means "cannot progress" (input exhausted mid-stream,
+		// i.e. truncated/corrupt .gz) — bail out instead of spinning forever.
+		if (ret != Z_OK && ret != Z_STREAM_END) {
 			inflateEnd(&zs);
 			return false;
 		}
-		sink.feed(chunk.data(), chunk.size() - zs.avail_out);
+		size_t produced = chunk.size() - zs.avail_out;
+		sink.feed(chunk.data(), produced);
+		if (produced == 0 && zs.avail_in == 0 && ret != Z_STREAM_END) {
+			inflateEnd(&zs);
+			return false;
+		}
 	} while (ret != Z_STREAM_END);
 	inflateEnd(&zs);
 	sink.finish();
@@ -307,6 +315,13 @@ static bool write_job_output(const Job& job, const std::string& out_dir, LineSin
 	std::fwrite(sink.out.data(), 1, sink.out.size(), of);
 	std::fclose(of);
 	g_stars.fetch_add(sink.out.size() / sizeof(Rec));
+	{
+		static std::mutex log_mtx;
+		double el = std::chrono::duration<double>(std::chrono::steady_clock::now() - g_t0).count();
+		std::lock_guard<std::mutex> lk(log_mtx);
+		std::cout << "  wrote " << out_name << " (" << (sink.out.size() / sizeof(Rec))
+			  << " stars, t=" << el << "s)\n";
+	}
 	return true;
 }
 
@@ -344,6 +359,7 @@ int main(int argc, char** argv)
 	fs::create_directories(out_dir);
 
 	auto t0 = std::chrono::steady_clock::now();
+	g_t0 = t0;
 
 	// Bounded queue: reader keeps at most QUEUE_CAP files in memory
 	constexpr size_t QUEUE_CAP = 3;
