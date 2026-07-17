@@ -151,7 +151,7 @@ static void sort_and_write_bucket(
 				cr.b_v     = r.bv;
 				cr.vmag    = r.vmag;
 				cr.plx     = static_cast<uint16_t>(std::max(0, std::min(r.plx_i, 65535)));
-				cr.plx_err = 0;
+				cr.plx_err = static_cast<uint16_t>(std::max(0, std::min(r.plx_err_i, 65535)));
 				std::fwrite(&cr, sizeof(CatRecord), 1, fcat);
 			}
 		}

@@ -13,7 +13,7 @@
 #include <cstddef>
 #include <cstdio>
 
-// Intermediate bucket record (36 bytes, one star encoded for one level)
+// Intermediate bucket record (40 bytes, one star encoded for one level)
 #pragma pack(push, 1)
 struct alignas(1) BucketRecord {
 	uint32_t zone;          // geodesic zone index
@@ -25,9 +25,10 @@ struct alignas(1) BucketRecord {
 	int32_t  pmra_i;        // pmra × 1000 (int)
 	int32_t  pmdec_i;       // pmdec × 1000 (int)
 	int32_t  plx_i;         // parallax × 100 (int)
+	int32_t  plx_err_i;     // parallax error × 100 (int)
 };
 #pragma pack(pop)
-static_assert(sizeof(BucketRecord) == 36, "BucketRecord must be 36 bytes");
+static_assert(sizeof(BucketRecord) == 40, "BucketRecord must be 40 bytes");
 
 // Star2 .cat record (32 bytes) — matches Star2::Data in Star.hpp
 #pragma pack(push, 1)
@@ -40,7 +41,7 @@ struct alignas(1) CatRecord {
 	int16_t  b_v;           // 2 bytes, B-V × 1000
 	int16_t  vmag;          // 2 bytes, Vmag × 1000 (millimag)
 	uint16_t plx;           // 2 bytes, parallax in 10 uas
-	uint16_t plx_err;       // 2 bytes, parallax error (set to 0)
+	uint16_t plx_err;       // 2 bytes, parallax error in 10 uas
 };
 #pragma pack(pop)
 static_assert(sizeof(CatRecord) == 32, "CatRecord must be 32 bytes");

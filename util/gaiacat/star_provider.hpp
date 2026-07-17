@@ -20,6 +20,7 @@ struct StarData {
 	double  pmra    = 0;    // mas/yr (Gaia: includes cosδ factor)
 	double  pmdec   = 0;    // mas/yr
 	double  parallax= 0;    // mas
+	double  plx_err = 0;    // mas
 };
 
 class BinReader {
@@ -44,6 +45,7 @@ public:
 		out.pmra     = rec.pmra;
 		out.pmdec    = rec.pmdec;
 		out.parallax = rec.parallax;
+		out.plx_err  = rec.plx_err;
 		return true;
 	}
 	void close() { if (f_) { std::fclose(f_); f_ = nullptr; } }

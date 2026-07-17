@@ -146,6 +146,7 @@ static void process_star_file(
 				brec.pmra_i  = std::isnan(star.pmra)  ? 0 : static_cast<int32_t>(std::round(star.pmra  * 1000.0 / std::max(0.00001, cos_dec)));
 				brec.pmdec_i = std::isnan(star.pmdec) ? 0 : static_cast<int32_t>(std::round(star.pmdec * 1000.0));
 				brec.plx_i   = std::isnan(star.parallax) ? 0 : static_cast<int32_t>(std::round(star.parallax * 100.0));
+			brec.plx_err_i = std::isnan(star.plx_err) ? 0 : static_cast<int32_t>(std::round(star.plx_err * 100.0));
 
 				bucket_writers[li]->push(brec);
 			}
