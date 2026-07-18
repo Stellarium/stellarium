@@ -5041,10 +5041,10 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
-"Esta fórmula é baseada num estudo das observações do Sol, da Lua e dos "
-"planetas, realizada após 1650 por Spencer Jones (%1), sendo empregada por "
-"Jean Meeus em <em>Astronomical Formulae for Calculators</em>. Ela também foi"
-" adotada no programa para computador SunTracker Pro."
+"Esta fórmula baseia-se em um estudo de observações do Sol, da Lua e dos "
+"planetas após 1650, realizado por Spencer Jones (%1), e foi usada por Jean "
+"Meeus em <em>Astronomical Formulae for Calculators</em>. Também foi adotada "
+"no programa para PC SunTracker Pro."
 
 #: src/core/StelCore.cpp:2771
 msgid ""
@@ -5231,9 +5231,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
 " for the recent past."
 msgstr ""
-"A quarta edição do <em>Astronomy on the Personal Computer</em> (2000), de O."
-" Montenbruck e T. Pfleger, oferece adaptações de informações polinomiais de "
-"terceira ordem simples para o passado recente."
+"A quarta edição do livro <em>Astronomy on the Personal Computer</em> (2000),"
+" de O. Montenbruck e T. Pfleger, fornece ajustes polinomiais simples de 3ª "
+"ordem para dados do passado recente. "
 
 #: src/core/StelCore.cpp:2827
 msgid ""
@@ -11987,7 +11987,7 @@ msgstr "Ocultação da Terra e de Júpiter em 2048"
 #. TRANSLATORS: Name of script
 #: src/translations.h:500
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr "Três trânsitos e dois eclipses de Deimos em 2027"
+msgstr "3 Trânsitos e 2 Eclipses vistos de Deimos em 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:502
@@ -16995,7 +16995,7 @@ msgstr "Cor das linhas do asterismo"
 
 #: src/ui_viewDialog.h:5421
 msgid "Color of constellation area (convex hull) boundaries"
-msgstr "Cor dos limites da área da constelação"
+msgstr "Cor dos contornos das áreas (envoltórias convexas) das constelações"
 
 #: src/ui_viewDialog.h:5425
 msgid "Only one at a time"
@@ -22559,8 +22559,8 @@ msgstr ""
 msgid ""
 "The value of perigee and apogee altitudes compute for mean Earth radius."
 msgstr ""
-"O valor das altitudes do perigeu e apogeu é calculado para o raio médio da "
-"Terra."
+"Os valores das altitudes de perigeu e apogeu são calculados com base no raio"
+" médio da Terra."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:797
 msgid ""
@@ -26888,7 +26888,7 @@ msgstr "Distância baseada na associação com outro objeto"
 #: plugins/Pulsars/src/Pulsar.cpp:288
 #, no-c-format
 msgid "Profile width at 50% of peak"
-msgstr "Largura à meia altura"
+msgstr "Largura do perfil a 50% do pico"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
 #: plugins/Pulsars/src/Pulsar.cpp:291
@@ -27909,8 +27909,8 @@ msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
-"Orbitar (em inglês) é uma palavra inventada que presta homenagem ao "
-"lançamento espacial e às operações orbitais da NASA."
+"\"Orbitar\" é uma palavra criada em homenagem aos lançamentos espaciais e às"
+" operações orbitais da NASA."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:352
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
@@ -30564,9 +30564,9 @@ msgid ""
 "of observable epochs (see below)."
 msgstr ""
 "Qualquer objeto celeste será considerado visível quando o Sol estiver abaixo"
-" dessa altura. A altura ao crepúsculo astronômico varia, geralmente, entre "
-"–12 e –18 graus. Esse parâmetro é utilizado apenas para a estimativa da "
-"faixa de épocas observáveis (veja abaixo)."
+" desta altitude. A altitude no crepúsculo astronômico geralmente varia entre"
+" -12 e -18 graus. Este parâmetro é usado apenas para a estimativa do "
+"intervalo de épocas observáveis (veja abaixo)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:157
 msgid "Horizon altitude:"
@@ -30591,10 +30591,10 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
-"Autoexplicativo. O programa mostrará os horários de nascimento, ocaso e de "
-"trânsito. Os horários exatos para essas efemérides são apresentados de duas "
-"formas: como intervalos de tempo (referentes ao horário atual) e como horas "
-"do relógio (no horário local)."
+"Autoexplicativo. O programa mostrará os horários de nascer, ocaso e "
+"culminação (trânsito). Os horários exatos dessas efemérides são fornecidos "
+"de duas maneiras: como intervalos de tempo (em relação ao horário atual) e "
+"como horários do relógio (no horário local)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:160
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
