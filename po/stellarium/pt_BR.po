@@ -1261,7 +1261,7 @@ msgstr "Pontos cardeais"
 
 #: src/core/modules/LandscapeMgr.cpp:898
 msgid "Ordinal (Intercardinal) points"
-msgstr "Pontos colaterais"
+msgstr "Pontos ordinais (colaterais)"
 
 #: src/core/modules/LandscapeMgr.cpp:899
 msgid "Secondary Intercardinal points"
@@ -3229,7 +3229,7 @@ msgstr "Magnitude Absoluta"
 
 #: src/core/modules/Planet.cpp:609
 msgid "Mean Opposition Magnitude"
-msgstr "Magnitude em Oposição Média"
+msgstr "Magnitude Média na Oposição"
 
 #: src/core/modules/Planet.cpp:622
 #, qt-format
@@ -4771,7 +4771,7 @@ msgstr "Retroceder 7 dias solares"
 #: src/core/StelCore.cpp:331
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1050
 msgid "Add 1 sidereal day"
-msgstr "Avançar um dia sideral"
+msgstr "Avançar 1 dia sideral"
 
 #: src/core/StelCore.cpp:332
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1057
@@ -4781,15 +4781,15 @@ msgstr "Avançar 7 dias siderais"
 #: src/core/StelCore.cpp:333
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1115
 msgid "Add 1 sidereal year"
-msgstr "Avançar um ano sideral"
+msgstr "Avançar 1 ano sideral"
 
 #: src/core/StelCore.cpp:334
 msgid "Add 100 sidereal years"
-msgstr "Avançar cem anos siderais"
+msgstr "Avançar 100 anos siderais"
 
 #: src/core/StelCore.cpp:335
 msgid "Add 1 synodic month"
-msgstr "Avançar um mês sinódico"
+msgstr "Avançar 1 mês sinódico"
 
 #: src/core/StelCore.cpp:336
 msgid "Add 1 Metonic cycle"
@@ -4809,31 +4809,31 @@ msgstr "Adicionar 1 Tritos"
 
 #: src/core/StelCore.cpp:340
 msgid "Add 1 draconic month"
-msgstr "Avançar um mês draconiano"
+msgstr "Avançar 1 mês dracônico"
 
 #: src/core/StelCore.cpp:341
 msgid "Add 1 draconic year"
-msgstr "Avançar um ano draconiano"
+msgstr "Avançar 1 ano dracônico"
 
 #: src/core/StelCore.cpp:342
 msgid "Add 1 anomalistic month"
-msgstr "Avançar um mês anomalístico"
+msgstr "Avançar 1 mês anomalístico"
 
 #: src/core/StelCore.cpp:343
 msgid "Add 1 anomalistic year"
-msgstr "Avançar um ano anomalístico"
+msgstr "Avançar 1 ano anomalístico"
 
 #: src/core/StelCore.cpp:344
 msgid "Add 100 anomalistic years"
-msgstr "Avançar cem anos anomalísticos"
+msgstr "Avançar 100 anos anomalísticos"
 
 #: src/core/StelCore.cpp:345
 msgid "Add 1 mean tropical month"
-msgstr "Avançar um mês trópico médio"
+msgstr "Avançar 1 mês trópico médio"
 
 #: src/core/StelCore.cpp:346
 msgid "Add 1 mean tropical year"
-msgstr "Avançar um ano trópico médio"
+msgstr "Avançar 1 ano trópico médio"
 
 #: src/core/StelCore.cpp:347
 msgid "Add 100 mean tropical years"
@@ -5265,11 +5265,11 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
-"A partir da duração do dia (DDD; conforme determinado por Stephenson e "
-"Morrison (%2)), Victor Reijs derivou uma fórmula de %1T utilizando uma "
-"otimização simples com um cosseno e uma função quadrática. Ela é "
-"fundamentada numa possível periodicidade descrita por Stephenson (%2). "
-"Informações adicionais podem ser obtidas %3aqui%4."
+"Com base na Duração do Dia (LOD; conforme determinada por Stephenson e "
+"Morrison (%2)), Victor Reijs derivou uma fórmula de %1T usando uma "
+"otimização Simplex com uma função cosseno e quadrática. Isso se baseia em "
+"uma possível periodicidade descrita por Stephenson (%2). Veja mais "
+"informações %3 aqui%4."
 
 #: src/core/StelCore.cpp:2836
 #, qt-format
