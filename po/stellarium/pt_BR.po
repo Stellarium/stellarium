@@ -5064,9 +5064,9 @@ msgid ""
 "(1973)."
 msgstr ""
 "As tabelas de Tuckerman (1962, 1964) listam as posições do Sol, da Lua e dos"
-" planetas em intervalos de cinco e de dez dias, de 601 a.C. a 1649 d.C. A "
-"mesma relação também foi tacitamente adotada nas tabelas de conjunção de "
-"Goldstine (1973)."
+" planetas em intervalos de 5 e 10 dias de 601 AEC a 1649 EC. A mesma relação"
+" também foi adotada implicitamente nas tabelas de sizígias de Goldstine "
+"(1973)."
 
 #: src/core/StelCore.cpp:2779
 #, qt-format
@@ -5151,7 +5151,7 @@ msgid ""
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 "Esta fórmula foi obtida por K. M. Borkowski (%1) a partir de uma análise dos"
-" registros de 31 eclipses solares, datados entre 2137 a.C. e 1715 d.C."
+" registros de 31 eclipses solares, datados entre 2137 AEC e 1715 EC."
 
 #: src/core/StelCore.cpp:2803
 #, qt-format
@@ -5640,7 +5640,7 @@ msgstr "&alfa;/&delta;"
 #: src/core/StelObject.cpp:460
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
-msgstr "AR/DEC"
+msgstr "AR/Dec"
 
 #. TRANSLATORS: Designations for Hour angle/Polar distance
 #: src/core/StelObject.cpp:551
@@ -7112,9 +7112,9 @@ msgid ""
 "realistic sky in 3D, just like what you see with the naked eye, binoculars "
 "or a telescope."
 msgstr ""
-"O Stellarium é um planetário de código aberto gratuito para o seu "
-"computador. Ele mostra um céu realista em três dimensões, da forma como você"
-" o vê a olho nu, com um binóculo ou com um telescópio."
+"O Stellarium é um planetário gratuito e de código aberto para o seu "
+"computador. Ele mostra um céu realista em 3D, igual ao que você vê a olho "
+"nu, com binóculos ou com um telescópio."
 
 #: src/gui/ConfigurationDialog.cpp:457
 msgid "Data can now be delivered with speech output."
@@ -28704,7 +28704,7 @@ msgid ""
 "mid-fifteenth century BC."
 msgstr ""
 "Alasia é o primeiro nome historicamente registrado de Chipre, datando de "
-"meados do século XV a.C."
+"meados do século XV a.C.."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:447
 msgid ""
@@ -28713,8 +28713,8 @@ msgid ""
 " considered as the oldest legal contract found in the world."
 msgstr ""
 "Onasilos é o médico historicamente registrado mais antigo de Chipre, "
-"inscrito na Tábua de Idálio do século V a.C. Também conhecida como Placa de "
-"Onasilos, ela é considerada o contrato jurídico mais antigo encontrado no "
+"inscrito na Tábua de Idálio do século V a.C.. Também conhecida como Placa de"
+" Onasilos, ela é considerada o contrato jurídico mais antigo encontrado no "
 "mundo."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:448
@@ -29027,7 +29027,7 @@ msgid ""
 "justice."
 msgstr ""
 "Kaveh é um dos heróis do Shahnameh, o poema épico composto pelo poeta persa "
-"Ferdowsi entre 977 e 1010 d.C. Kaveh é um ferreiro que simboliza a justiça."
+"Ferdowsi entre 977 e 1010 EC. Kaveh é um ferreiro que simboliza a justiça."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:489
 msgid ""
@@ -29608,7 +29608,7 @@ msgid ""
 "hunter who led the resistance against Roman invaders during 2nd century B.C."
 msgstr ""
 "Viriato foi um líder lendário do povo lusitano, um pastor e caçador que "
-"liderou a resistência contra os invasores romanos durante o século II a.C."
+"liderou a resistência contra os invasores romanos durante o século II a.C.."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:562
 msgid ""
@@ -29831,8 +29831,8 @@ msgid ""
 "clay tablets."
 msgstr ""
 "Ugarit foi uma cidade onde seus escribas criaram o alfabeto ugarítico por "
-"volta de 1400 a.C. O alfabeto era composto por trinta letras e era inscrito "
-"em tábuas de argila."
+"volta de 1400 a.C.. O alfabeto era composto por trinta letras e era inscrito"
+" em tábuas de argila."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:592
 msgid ""
@@ -29930,7 +29930,7 @@ msgid ""
 "means sky."
 msgstr ""
 "Göktürk refere-se à origem histórica do povo turco, pois foi o primeiro "
-"estado estabelecido na Turquia no século V d.C. É também o nome de um "
+"estado estabelecido na Turquia no século V d.C.. É também o nome de um "
 "satélite turco e é a combinação de duas palavras, das quais Gök significa "
 "\"céu\"."
 
@@ -36747,11 +36747,11 @@ msgstr "Menor"
 
 #: plugins/Calendars/src/JulianCalendar.cpp:76
 msgid "A.D."
-msgstr "D.C."
+msgstr "d.C."
 
 #: plugins/Calendars/src/JulianCalendar.cpp:76
 msgid "B.C."
-msgstr "A.C."
+msgstr "a.C."
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:43
 msgctxt "Korean calendar major Solar term"
@@ -39699,7 +39699,7 @@ msgstr "Bizantino"
 #: plugins/Calendars/src/ui_calendarsDialog.h:1055
 msgctxt "calendar"
 msgid "Negative years here mark years B.C."
-msgstr "Os anos negativos aqui marcam os anos A.C."
+msgstr "Os anos negativos aqui marcam os anos a.C."
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:1057
 msgid "Lunisolar"
@@ -42001,7 +42001,7 @@ msgstr ""
 "Como as posições estelares mudam ao longo do tempo devido à precessão e ao "
 "movimento próprio, as linhas são sempre calculadas para a data exibida "
 "atualmente no planetário. Para ver a visibilidade de Sirius em 10&thinsp;000"
-" a.C., defina primeiro a data do planetário e, em seguida, clique em "
+" AEC, defina primeiro a data do planetário e, em seguida, clique em "
 "Calcular."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:544
