@@ -5108,9 +5108,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
-"Este algoritmo foi adotado no <em>Planetary Programs and Tables from −4000 "
-"to +2800</em> (1986) de P. Bretagnon e L. Simon (1986) e no programa de "
-"planetário para computador RedShift."
+"Este algoritmo foi adotado no <em>Planetary Programs and Tables from -4000 "
+"to +2800</em> (1986), de P. Bretagnon e L. Simon, e no programa de "
+"planetário para PC RedShift."
 
 #: src/core/StelCore.cpp:2791
 #, qt-format
@@ -5120,7 +5120,7 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 "Esta fórmula foi publicada por F. R. Stephenson e L. V. Morrison no artigo "
-"<em>Long-term changes in the rotation of the earth −700 B.C. to A.D. "
+"<em>Long-term changes in the rotation of the earth -700 B.C. to A.D. "
 "1980</em> (%1)."
 
 #: src/core/StelCore.cpp:2794
@@ -15643,7 +15643,7 @@ msgstr "Projeção"
 
 #: src/ui_viewDialog.h:4460
 msgid "Current FoV"
-msgstr "Campo de visão (CDV) atual"
+msgstr "FoV atual"
 
 #: src/ui_viewDialog.h:4461
 msgid "Vertical viewport offset"
@@ -15905,9 +15905,9 @@ msgid ""
 "minimum FOV and the configured scale factor at the maximum FOV. Outside "
 "those bounds the scale is held constant."
 msgstr ""
-"Quando ativado, o tamanho da Lua varia de forma contínua entre 1x (tamanho "
-"natural) no campo de visão (FOV) mínimo e o fator de escala configurado no "
-"FOV máximo. Fora desses limites, a escala permanece constante."
+"Quando ativado, a Lua é dimensionada suavemente entre 1× (tamanho natural) "
+"no FOV mínimo e o fator de escala configurado no FOV máximo. Fora desses "
+"limites, a escala é mantida constante."
 
 #: src/ui_viewDialog.h:4590
 msgid "Dynamic (FOV-based) Moon size"
@@ -16442,7 +16442,7 @@ msgstr "Exibir marcador circular do campo de visão (CDV)"
 
 #: src/ui_viewDialog.h:5016
 msgid "Circular FOV"
-msgstr "Campo de visão (CDV) Circular"
+msgstr "FOV circular"
 
 #: src/ui_viewDialog.h:5018
 msgid "Rotation angle of rectangle, in degrees"
@@ -16643,7 +16643,8 @@ msgstr "Rótulos para os pontos cardeais (rosa dos ventos de 4 rumos)."
 msgid ""
 "Labels for the intercardinal (or ordinal) directions (8-wind compass rose)."
 msgstr ""
-"Rótulos para os pontos colaterais ou ordinais (rosa dos ventos de 8 rumos)."
+"Rótulos para as direções intercardinais (ou ordinais) (rosa dos ventos de 8 "
+"direções)."
 
 #: src/ui_viewDialog.h:5192
 msgid ""
@@ -20748,7 +20749,7 @@ msgstr "Índice de Bishop"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
 msgctxt "field of view"
 msgid "FOV"
-msgstr "CDV"
+msgstr "FOV"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:877
 msgid "Rayleigh criterion"
@@ -29821,8 +29822,8 @@ msgid ""
 "Ebla was one of the earliest kingdoms in Syria, and served as a prominent "
 "region in the 2nd and 3rd millennia B.C."
 msgstr ""
-"Ebla foi um dos primeiros reinos na Síria e serviu como uma região "
-"proeminente nos milênios III e II a.C."
+"Ebla foi um dos reinos mais antigos da Síria e foi uma região de destaque "
+"durante o 2º e o 3º milênios a.C."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:591
 msgid ""
