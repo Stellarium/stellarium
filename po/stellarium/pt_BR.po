@@ -8071,7 +8071,7 @@ msgstr "Fuso horário"
 
 #: src/gui/StelGuiItems.cpp:877 src/gui/LocationDialog.cpp:554
 msgid "Local Mean Solar Time"
-msgstr "Hora Solar Média Local"
+msgstr "Tempo Solar Médio Local"
 
 #: src/gui/StelGuiItems.cpp:880 src/gui/LocationDialog.cpp:555
 msgid "Local True Solar Time"
@@ -9374,7 +9374,7 @@ msgstr "Duração do eclipse total ou anular"
 
 #: src/gui/AstroCalcDialog.cpp:4075
 msgid "Eclipse begins; first contact with Earth"
-msgstr "Eclipse começa; primeiro contato com a Terra"
+msgstr "Início do eclipse; primeiro contato com a Terra"
 
 #: src/gui/AstroCalcDialog.cpp:4079
 msgid "Beginning of center line; central eclipse begins"
@@ -9386,7 +9386,7 @@ msgstr "Fim da linha central; eclipse termina"
 
 #: src/gui/AstroCalcDialog.cpp:4091
 msgid "Eclipse ends; last contact with Earth"
-msgstr "Eclipse terminar; ultimo contato com a Terra"
+msgstr "Fim do eclipse; último contato com a Terra"
 
 #: src/gui/AstroCalcDialog.cpp:4100
 msgid "Geographic latitude of contact point"
@@ -9742,7 +9742,7 @@ msgstr "1 mês draconiano"
 
 #: src/gui/AstroCalcDialog.cpp:5211
 msgid "1 mean tropical month"
-msgstr "1 mês tropical médio"
+msgstr "1 mês trópico médio"
 
 #: src/gui/AstroCalcDialog.cpp:5212
 msgid "1 anomalistic month"
@@ -17011,7 +17011,7 @@ msgstr "Cor dos auxiliares de raio"
 
 #: src/ui_viewDialog.h:5436
 msgid "Show areas (convex hulls) of constellations"
-msgstr "Exibir áreas das constelações"
+msgstr "Mostrar áreas (envoltórias convexas) das constelações"
 
 #: src/ui_viewDialog.h:5438
 msgid "Constellation areas"
@@ -31658,11 +31658,10 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the"
 " share of faint meteors is larger than usual."
 msgstr ""
-"O índice de população indica a distribuição de magnitude das chuvas de "
-"meteoros. Os valores abaixo de 2,5 correspondem a distribuições em que "
-"meteoros mais luminosos são mais frequentes do que a média, ao passo que "
-"valores acima de 3,0 significam que a parcela de meteoros fracos é maior do "
-"que o normal."
+"O índice populacional indica a distribuição de magnitudes em uma chuva de "
+"meteoros. Valores abaixo de 2,5 correspondem a distribuições em que meteoros"
+" brilhantes são mais frequentes do que a média, enquanto valores acima de "
+"3,0 significam que a proporção de meteoros fracos é maior do que o normal."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:291
 msgid "Solar longitude"
@@ -31675,8 +31674,8 @@ msgid ""
 "date."
 msgstr ""
 "A longitude solar (equinócio J2000) fornece a posição da Terra em sua "
-"órbita. É uma informação mais apropriada sobre uma chuva de meteoros do que "
-"a data."
+"órbita. É uma informação mais apropriada para caracterizar uma chuva de "
+"meteoros do que a data."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:296
 msgid ""
@@ -32223,7 +32222,7 @@ msgstr "Scenery3d: Paisagens em 3D"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:345
 msgid "Toggle 3D landscape"
-msgstr "Alternar as paisagens tridimensionais"
+msgstr "Alternar paisagem 3D"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:348
 msgid "Show viewpoint dialog"
@@ -32536,10 +32535,10 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
-"<b>Sombreador de geometria</b> utiliza um moderno recurso da GPU para "
-"renderizar todos os seis lados do cubo de uma só vez. Esse pode ser o método"
-" mais rápido, dependendo da cena e do seu equipamento da GPU. Caso não seja "
-"suportado, ele não pode ser selecionado."
+"O <b>shader de geometria</b> usa um recurso moderno da GPU para renderizar "
+"as 6 faces do cubo de uma só vez. Dependendo da cena e do hardware da sua "
+"GPU, esse pode ser o método mais rápido. Se não houver suporte a esse "
+"recurso, esta opção não poderá ser selecionada"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:284
 msgid "Calculates shadows for each cubemap face separately."
