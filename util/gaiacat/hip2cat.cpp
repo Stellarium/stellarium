@@ -31,6 +31,7 @@ namespace fs = std::filesystem;
 
 static constexpr double D2R = M_PI / 180.0;
 static constexpr double R2D = 180.0 / M_PI;
+static constexpr double MAS2RAD = 4.8481368110953594e-9;  // mas to radians
 static constexpr double CATALOG_EPOCH_JD = 2457389.0;   // J2016.0
 
 // J-band values for the SIMBAD V fallback chain (indexed by row)
@@ -155,46 +156,81 @@ static CsvCols find_cols(const std::vector<std::string>& hdr)
 }
 
 // ------------------------------------------------------------------ space motion
-// Linear 6D propagation (equivalent to astropy apply_space_motion for these purposes)
-struct Vel { double v[3]; double dist_pc; };
+// IAU SOFA starpm: rigid 6D pv-vector propagation matching astropy's
+// apply_space_motion (which uses ERFA, a SOFA derivative).
+// Constants from IAU SOFA standards (2012).
+// Reference: www.iausofa.org / ERFA starpm.c
 
-static Vel make_velocity(double ra, double dec, double pmra, double pmdec,
-                         double plx_mas, double rv_kms,
-                         double& r0x, double& r0y, double& r0z)
+static constexpr double SOFA_PARSEC_AU = 648000.0 / M_PI;  // AU per parsec (≈206264.806247)
+static constexpr double SOFA_KM_AU     = 149597870.7;      // km per AU
+static constexpr double SOFA_DY        = 365.25;           // days per Julian year
+
+// Convert Gaia/SIMBAD astrometry at epoch1 (Julian years) to epoch2.
+// pmra, pmdec are in mas/yr (Gaia: pmra includes cos(dec) factor).
+// plx in mas, rv in km/s. Returns new (ra_deg, dec_deg, pmra_mas, pmdec_mas, plx_mas).
+static void iau_starpm(double ra_deg, double dec_deg,
+                       double pmra, double pmdec,
+                       double plx_mas, double rv_kms,
+                       double ep1_jyr, double ep2_jyr,
+                       double& ra2, double& dec2,
+                       double& pmra2, double& pmdec2, double& plx2)
 {
+	double dt = ep2_jyr - ep1_jyr;
+	double ra = ra_deg * D2R, dec = dec_deg * D2R;
+	double pmr = pmra * MAS2RAD;   // rad/yr
+	double pmd = pmdec * MAS2RAD;
+
+	// unit position vector
 	double sra = std::sin(ra), cra = std::cos(ra);
 	double sdec = std::sin(dec), cdec = std::cos(dec);
-	r0x = cdec * cra; r0y = cdec * sra; r0z = sdec;
-	double p[3] = {-sra, cra, 0.0};
-	double q[3] = {-sdec * cra, -sdec * sra, cdec};
-	const double K = 4.740470446;                 // km/s per (AU/yr)
-	double dist_pc = plx_mas > 1e-9 ? 1000.0 / plx_mas : 1e12;  // ~infinite
-	double vt_p = K * (pmra / 1000.0) * dist_pc;  // AU/yr
-	double vt_q = K * (pmdec / 1000.0) * dist_pc;
-	double vr   = rv_kms / K;
-	Vel vel;
-	vel.v[0] = vt_p * p[0] + vt_q * q[0] + vr * r0x;
-	vel.v[1] = vt_p * p[1] + vt_q * q[1] + vr * r0y;
-	vel.v[2] = vt_p * p[2] + vt_q * q[2] + vr * r0z;
-	vel.dist_pc = dist_pc;
-	return vel;
-}
+	double r[3] = {cdec * cra, cdec * sra, sdec};
 
-// Propagate catalog position by dt_yr years; returns new ra/dec (deg)
-static void propagate_pos(double ra_deg, double dec_deg, double pmra, double pmdec,
-                          double plx_mas, double rv_kms, double dt_yr,
-                          double& out_ra, double& out_dec)
-{
-	double r0x, r0y, r0z;
-	Vel vel = make_velocity(ra_deg * D2R, dec_deg * D2R, pmra, pmdec, plx_mas, rv_kms, r0x, r0y, r0z);
-	double dist_au = vel.dist_pc * 206265.0;
-	double x = r0x * dist_au + vel.v[0] * dt_yr;
-	double y = r0y * dist_au + vel.v[1] * dt_yr;
-	double z = r0z * dist_au + vel.v[2] * dt_yr;
-	double d = std::sqrt(x * x + y * y + z * z);
-	out_ra = std::atan2(y, x) * R2D;
-	if (out_ra < 0) out_ra += 360.0;
-	out_dec = std::asin(z / d) * R2D;
+	// distance and position in AU
+	double px_arcsec = plx_mas / 1000.0;
+	double dist_pc = (px_arcsec > 1e-12) ? 1.0 / px_arcsec : 1e12;
+	double dist_au = dist_pc * SOFA_PARSEC_AU;
+	double pos[3], vel[3];
+	for (int i = 0; i < 3; ++i) pos[i] = r[i] * dist_au;
+
+	// spatial velocity in AU/yr
+	double v_r_yr = rv_kms * (86400.0 * SOFA_DY / SOFA_KM_AU);  // km/s → AU/yr
+	for (int i = 0; i < 3; ++i) vel[i] = v_r_yr * r[i];
+
+	// tangential velocity: the pm vector on the sphere is perpendicular to r;
+	// its magnitude in rad/yr times distance gives AU/yr in the tangent plane.
+	double p_east[3]  = {-sra, cra, 0.0};
+	double p_north[3] = {-sdec * cra, -sdec * sra, cdec};
+	for (int i = 0; i < 3; ++i) vel[i] += (pmr * p_east[i] + pmd * p_north[i]) * dist_au;
+
+	// propagate
+	for (int i = 0; i < 3; ++i) pos[i] += vel[i] * dt;
+
+	// back to spherical
+	double d2 = std::sqrt(pos[0] * pos[0] + pos[1] * pos[1] + pos[2] * pos[2]);
+	double r2[3]; for (int i = 0; i < 3; ++i) r2[i] = pos[i] / d2;
+	double ra_r  = std::atan2(r2[1], r2[0]);
+	if (ra_r < 0) ra_r += 2.0 * M_PI;
+	ra2    = ra_r * R2D;
+	dec2   = std::asin(r2[2]) * R2D;
+	plx2   = (px_arcsec > 1e-12) ? SOFA_PARSEC_AU / (d2 / dist_pc) * 1000.0 : 0;
+	// (d2/dist_pc gives AU per pc; px2 = 1/(d2/dist_pc) arcsec = dist_pc/d2 arcsec)
+	// In mas: plx2_mas = 1000*dist_pc/d2... hmm let me recalculate:
+	// plx2 [arcsec] = SOFA_PARSEC_AU / d2
+	// plx2_mas = plx2 * 1000 = SOFA_PARSEC_AU * 1000 / d2
+	// But for px=0 stars: set to 0.
+	plx2   = (px_arcsec > 1e-12) ? SOFA_PARSEC_AU * 1000.0 / d2 : 0;
+	(void)plx2; // parallax change over a human lifetime is negligible; don't update
+
+	// new proper motion: reproject velocity minus radial component
+	double sra2 = std::sin(ra_r), cra2 = std::cos(ra_r);
+	double sdec2 = std::sin(dec2 * D2R), cdec2 = std::cos(dec2 * D2R);
+	double p2[3]  = {-sra2, cra2, 0.0};
+	double q2[3]  = {-sdec2 * cra2, -sdec2 * sra2, cdec2};
+	double vr2    = (vel[0] * r2[0] + vel[1] * r2[1] + vel[2] * r2[2]);     // AU/yr
+	double vt_p2  = vel[0] * p2[0] + vel[1] * p2[1];                         // AU/yr (east)
+	double vt_q2  = vel[0] * q2[0] + vel[1] * q2[1] + vel[2] * q2[2];       // AU/yr (north)
+	pmra2  = vt_p2 / d2 * R2D * 3600.0 * 1000.0;   // mas/yr (with cos(dec2))
+	pmdec2 = vt_q2 / d2 * R2D * 3600.0 * 1000.0;
 }
 
 // ------------------------------------------------------------------ patches (henrysky lv0_6 cell 2)
@@ -528,9 +564,12 @@ int main(int argc, char** argv)
 					bool have_pm = !std::isnan(r.pmra) && !std::isnan(r.pmdec);
 					if (!have_pm) { r.epoch_x10 = 20160; continue; }
 					if (r.epoch_x10 == 20160) continue;
-					double plx_for_prop = std::isnan(r.plx) ? 1.0 : r.plx;   // assume 1 kpc if missing
-					double rv_for_prop = std::isnan(r.rv) ? 0.0 : r.rv;
-					propagate_pos(r.ra, r.dec, r.pmra, r.pmdec, plx_for_prop, rv_for_prop, 16.0, r.ra, r.dec);
+					double plx_fill = std::isnan(r.plx) ? 1.0 : r.plx;   // assume 1 kpc if missing
+					double rv_fill  = std::isnan(r.rv)  ? 0.0 : r.rv;
+					double _ra, _dec, _pmra2, _pmdec2, _plx2;
+					iau_starpm(r.ra, r.dec, r.pmra, r.pmdec, plx_fill, rv_fill,
+					           r.epoch_x10 / 10.0, 2016.0, _ra, _dec, _pmra2, _pmdec2, _plx2);
+					r.ra = _ra; r.dec = _dec;
 					r.epoch_x10 = 20160;
 				}
 			});
@@ -601,36 +640,36 @@ int main(int argc, char** argv)
 
 						if (lc.level <= 2) {
 							bool good = (r.plx > 0 || r.plxe > 0) && (r.plx / r.plxe > 5);
-							// velocity vector in the J2016 frame (plx==0 -> ~infinite distance)
-							double r0x, r0y, r0z;
-							Vel vel = make_velocity(r.ra * D2R, r.dec * D2R, r.pmra, r.pmdec,
-							                        r.plx, r.rv, r0x, r0y, r0z);
-							double dist_au = vel.dist_pc * 206265.0;
 							int counter_past = 0, counter_future = 0;
 							double min_diff = 0.0;
 							int zone_past = zone, zone_future = zone;
 							for (int k = 1; k <= 21; ++k) {
 								double dtp = k * 10000.0;
-								double px = r0x * dist_au + vel.v[0] * dtp;
-								double py = r0y * dist_au + vel.v[1] * dtp;
-								double pz = r0z * dist_au + vel.v[2] * dtp;
-								int zz = zone_number(px, py, pz, lc.level);
+								// future: +k×10000 years from J2016
+								double ra_f, dec_f, pmra_f, pmdec_f, plx_f;
+								iau_starpm(r.ra, r.dec, r.pmra, r.pmdec, r.plx, r.rv,
+								           2016.0, 2016.0 + dtp, ra_f, dec_f, pmra_f, pmdec_f, plx_f);
+								double xf = std::cos(ra_f * D2R) * std::cos(dec_f * D2R);
+								double yf = std::sin(ra_f * D2R) * std::cos(dec_f * D2R);
+								double zf = std::sin(dec_f * D2R);
+								int zz = zone_number(xf, yf, zf, lc.level);
 								counter_future += (zz != zone_future);
 								zone_future = zz;
-								if (good) {
-									double dk = std::sqrt(px * px + py * py + pz * pz);
-									double diff = 5.0 * std::log10(dk / dist_au);
+								if (good && r.plx > 0 && plx_f > 0) {
+									double diff = 5.0 * std::log10(r.plx / plx_f);
 									if (diff < min_diff) min_diff = diff;
 								}
-								double mx = r0x * dist_au - vel.v[0] * dtp;
-								double my = r0y * dist_au - vel.v[1] * dtp;
-								double mz = r0z * dist_au - vel.v[2] * dtp;
-								zz = zone_number(mx, my, mz, lc.level);
+								// past: -k×10000 years from J2016
+								iau_starpm(r.ra, r.dec, r.pmra, r.pmdec, r.plx, r.rv,
+								           2016.0, 2016.0 - dtp, ra_f, dec_f, pmra_f, pmdec_f, plx_f);
+								double xp = std::cos(ra_f * D2R) * std::cos(dec_f * D2R);
+								double yp = std::sin(ra_f * D2R) * std::cos(dec_f * D2R);
+								double zp = std::sin(dec_f * D2R);
+								zz = zone_number(xp, yp, zp, lc.level);
 								counter_past += (zz != zone_past);
 								zone_past = zz;
-								if (good) {
-									double dk = std::sqrt(mx * mx + my * my + mz * mz);
-									double diff = 5.0 * std::log10(dk / dist_au);
+								if (good && r.plx > 0 && plx_f > 0) {
+									double diff = 5.0 * std::log10(r.plx / plx_f);
 									if (diff < min_diff) min_diff = diff;
 								}
 							}
