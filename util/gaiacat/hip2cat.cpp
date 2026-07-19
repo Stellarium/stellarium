@@ -351,6 +351,7 @@ int main(int argc, char** argv)
 	int n_workers = (int)std::min(4u, std::thread::hardware_concurrency());
 	long max_files = -1;
 	std::string erfa_python;
+	int level_lo = 0, level_hi = 3;   // default: lv0-3 (Star1), hip2cat's primary purpose
 	for (int i = 1; i < argc; ++i) {
 		std::string a = argv[i];
 		if      (a == "--simbad"    && i + 1 < argc) simbad_path = argv[++i];
@@ -361,15 +362,28 @@ int main(int argc, char** argv)
 		else if (a == "--workers"   && i + 1 < argc) n_workers = std::atoi(argv[++i]);
 		else if (a == "--max-files" && i + 1 < argc) max_files = std::atol(argv[++i]);
 		else if (a == "--erfa-python" && i + 1 < argc) erfa_python = argv[++i];
+		else if (a == "--levels"    && i + 1 < argc) {
+			std::string spec = argv[++i];
+			if (std::sscanf(spec.c_str(), "%d-%d", &level_lo, &level_hi) < 2) {
+				if (std::sscanf(spec.c_str(), "%d", &level_lo) != 1) {
+					std::cerr << "ERROR: bad --levels spec\n"; return 1;
+				}
+				level_hi = level_lo;
+			}
+		}
 		else {
 			std::cerr << "Usage: hip2cat --simbad <dat> --gaia-bin <dir> --out-dir <dir> --otype <dat>"
-				" [--sp-table f] [--workers n] [--max-files n] [--erfa-python <venv python>]\n";
+				" [--sp-table f] [--workers n] [--levels 0-3] [--max-files n] [--erfa-python <path>]\n";
 			return 1;
 		}
 	}
 	if (simbad_path.empty() || bin_dir.empty() || out_dir.empty() || otype_path.empty()) {
-		std::cerr << "Usage: hip2cat --simbad <dat> --gaia-bin <dir> --out-dir <dir> --otype <dat> [--sp-table f] [--workers n] [--max-files n]\n";
+		std::cerr << "Usage: hip2cat --simbad <dat> --gaia-bin <dir> --out-dir <dir> --otype <dat>"
+			" [--sp-table f] [--workers n] [--levels 0-3] [--max-files n] [--erfa-python <path>]\n";
 		return 1;
+	}
+	if (level_lo < 0 || level_hi > 6 || level_lo > level_hi) {
+		std::cerr << "ERROR: --levels must satisfy 0 <= lo <= hi <= 6\n"; return 1;
 	}
 	fs::create_directories(out_dir);
 
@@ -612,6 +626,7 @@ int main(int argc, char** argv)
 	};
 
 	for (const auto& lc : lvcs) {
+		if (lc.level < level_lo || lc.level > level_hi) continue;
 		// selection (henrysky inequalities: vmag > lo && vmag <= hi)
 		std::vector<const StarRow*> sel;
 		for (const auto& r : rows) {
