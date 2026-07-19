@@ -8565,7 +8565,7 @@ msgstr "Weet u zeker dat u het script wilt wissen ?"
 
 #: src/gui/ScriptConsole.cpp:371
 msgid "Select Script Include Directory"
-msgstr "Scriptmap selecteren"
+msgstr "Selecteer Script Include-map"
 
 #. TRANSLATORS: The first letter of word "Row"
 #: src/gui/ScriptConsole.cpp:405
@@ -8581,7 +8581,7 @@ msgstr "C"
 
 #: src/gui/ScriptConsole.cpp:425
 msgid "Include File"
-msgstr "Bestand bijvoegen"
+msgstr "Inclusief bestand "
 
 #: src/gui/SearchDialog.cpp:304
 msgctxt "coordinate system"
@@ -18240,11 +18240,11 @@ msgstr "Visueel model"
 
 #: src/ui_atmosphereDialog.h:358
 msgid "Choose &model:"
-msgstr "Kies &model"
+msgstr "Kies &model:"
 
 #: src/ui_atmosphereDialog.h:361
 msgid "Path to &data:"
-msgstr "Pad naar &data"
+msgstr "Pad naar &data:"
 
 #: src/ui_atmosphereDialog.h:363
 msgid "Eclipse simulation &quality:"
@@ -18268,7 +18268,7 @@ msgstr "Meervoudige verstrooiing weergeven"
 
 #: src/ui_atmosphereDialog.h:368
 msgid "Mirror the sky under the horizon"
-msgstr "Spiegel de lucht onder de horizon "
+msgstr "Spiegel de lucht onder de horizon"
 
 #: src/ui_atmosphereDialog.h:369
 msgid "Refraction Settings"
@@ -18327,7 +18327,7 @@ msgstr "T=25(k-0.16)+1 -- of T="
 
 #: src/ui_atmosphereDialog.h:389
 msgid "T=2/5(default)/6 at k=0.16/0.32/0.36. "
-msgstr "T=2/5(standaard)/6 bij k=0.16/0.32/0.36."
+msgstr "T=2/5(standaard)/6 bij k=0.16/0.32/0.36. "
 
 #: src/ui_greatRedSpotDialog.h:134
 msgid "Great Red Spot Details"
@@ -18351,7 +18351,7 @@ msgstr "Jovigrafische lengte van de Grote Rode Vlek (Systeem II)"
 
 #: src/ui_greatRedSpotDialog.h:141
 msgid "Longitude of GRS:"
-msgstr "Longitude GRS"
+msgstr "Longitude GRS:"
 
 #: src/ui_greatRedSpotDialog.h:148
 msgid "Date and Time (UTC):"
@@ -18831,7 +18831,7 @@ msgstr "Duur:"
 #: src/ui_astroCalcDialog.h:2514
 msgctxt "duration"
 msgid "months"
-msgstr "Maanden"
+msgstr "maanden"
 
 #: src/ui_astroCalcDialog.h:2515
 msgid "Step:"
@@ -19122,7 +19122,7 @@ msgstr "Aangepast interval"
 
 #: src/ui_astroCalcCustomStepsDialog.h:211
 msgid "Unit of measurement:"
-msgstr "Unit van metingen"
+msgstr "Meeteenheid:"
 
 #: src/ui_astroCalcCustomStepsDialog.h:213
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1210
@@ -19886,7 +19886,7 @@ msgstr ""
 
 #: src/ui_skylightDialog.h:1166
 msgid "Reset all xy (Preetham)"
-msgstr "herstel xy waarden (Preetham)"
+msgstr "Herstel xy waarden (Preetham)"
 
 #: src/ui_skylightDialog.h:1168
 msgid ""
@@ -20206,7 +20206,7 @@ msgid ""
 "mouse button pans and selects as usual"
 msgstr ""
 "Indien ingesteld, wordt alleen de rechtermuisknop gebruikt om hoeken te "
-"meten, de linkermuisknop schuift en selecteert zoals gewoonlijk."
+"meten, de linkermuisknop schuift en selecteert zoals gewoonlijk"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:313
 msgid "Allow snap to selected object"
@@ -21228,7 +21228,7 @@ msgstr "Autozoom inschakelen wanneer CCD wordt ingeschakeld"
 msgid ""
 "Show maximum exposure time for Solar system objects to avoid movement streak"
 msgstr ""
-"toon voor zonnestelselobjecten de maximale belichtingstijd zonder risico op "
+"Toon voor zonnestelselobjecten de maximale belichtingstijd zonder risico op "
 "strepen door beweging"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1522
@@ -21261,7 +21261,7 @@ msgstr "Toon de overlay van de focuser"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1532
 msgid "Use horizontal coordinates instead equatorial coordinates"
-msgstr "Gebruik horizontale ipv equatoriale coördinaten."
+msgstr "Gebruik horizontale ipv equatoriale coördinaten"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid "Show angular limits of the off-axis guide"
@@ -21686,7 +21686,7 @@ msgstr "QZSS"
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
 #: plugins/Satellites/src/Satellites.cpp:3796
 msgid "cosmos"
-msgstr "Kosmos"
+msgstr "kosmos"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
 #: plugins/Satellites/src/Satellites.cpp:3798
