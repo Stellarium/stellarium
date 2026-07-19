@@ -24,6 +24,12 @@ add_executable(cmpcat
 	cmpcat.cpp
 )
 
+add_executable(hip2cat
+	hip2cat.cpp
+	geodesic.cpp
+)
+target_include_directories(hip2cat PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
 # CSV.gz -> .bin extractor (uses bundled zlib for gzip reading)
 set(GAIA_ZLIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../src/external/zlib)
 add_executable(extract_columns

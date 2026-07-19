@@ -26,17 +26,65 @@ static int nr_of_zones(int level)
 struct PhysStar
 {
 	int64_t gaia_id = 0;
+	int64_t match_key = 0;            // gaia_id, or HIP<<5|component composite when gaia_id==0
 	double  ra_deg  = 0;
 	double  dec_deg = 0;
 	double  vmag    = 0;              // mag
-	double  bv      = 0;              // mag; sentinel decodes to 32.767 (Star2) / 5.375 (Star3)
+	double  bv      = 0;              // mag; sentinel decodes to 32.767 (Star1/2) / 5.375 (Star3)
 	bool    has_pm_plx = false;       // false for Star3
 	double  pmra_masyr = 0, pmdec_masyr = 0, plx_mas = 0;
+	bool    has_rv = false;           // Star1 only
+	double  rv_kms = 0;
 };
 
 static inline uint32_t load_u24le(const uint8_t* p)
 {
 	return p[0] | (p[1] << 8) | (p[2] << 16);
+}
+
+// Star1 (48 bytes): 3D position vector x2e9, 3D pm vector in uas/yr, plx in 20 uas
+static PhysStar decode_star1(const uint8_t* buf)
+{
+	PhysStar s;
+	int32_t x0, x1, x2, dx0, dx1, dx2;
+	int16_t bv, vmag, rv;
+	uint16_t plx;
+	std::memcpy(&s.gaia_id, buf, 8);
+	std::memcpy(&x0,  buf + 8,  4);
+	std::memcpy(&x1,  buf + 12, 4);
+	std::memcpy(&x2,  buf + 16, 4);
+	std::memcpy(&dx0, buf + 20, 4);
+	std::memcpy(&dx1, buf + 24, 4);
+	std::memcpy(&dx2, buf + 28, 4);
+	std::memcpy(&bv,  buf + 32, 2);
+	std::memcpy(&vmag, buf + 34, 2);
+	std::memcpy(&plx, buf + 36, 2);
+	// plx_err at buf+38 (10 uas) not compared
+	std::memcpy(&rv,  buf + 40, 2);
+
+	double nx = x0 / 2e9, ny = x1 / 2e9, nz = x2 / 2e9;
+	s.ra_deg  = std::atan2(ny, nx) * 180.0 / M_PI;
+	if (s.ra_deg < 0) s.ra_deg += 360.0;
+	double r = std::sqrt(nx * nx + ny * ny + nz * nz);
+	s.dec_deg = r > 0 ? std::asin(nz / r) * 180.0 / M_PI : 0;
+
+	// project pm vector back to the local triad (p = east, q = north)
+	double ra = s.ra_deg * M_PI / 180.0, dec = s.dec_deg * M_PI / 180.0;
+	double p0 = -std::sin(ra), p1 = std::cos(ra);
+	double q0 = -std::sin(dec) * std::cos(ra), q1 = -std::sin(dec) * std::sin(ra), q2 = std::cos(dec);
+	s.pmra_masyr  = (dx0 * p0 + dx1 * p1) / 1000.0;
+	s.pmdec_masyr = (dx0 * q0 + dx1 * q1 + dx2 * q2) / 1000.0;
+	s.vmag = vmag / 1000.0;
+	s.bv   = bv / 1000.0;
+	s.plx_mas = plx / 50.0;           // 20 uas units
+	s.has_pm_plx = true;
+	s.has_rv = true;
+	s.rv_kms = rv / 10.0;
+
+	// match key: HIP<<5|component for stars without a Gaia id
+	uint32_t comb = buf[44] | (buf[45] << 8) | (buf[46] << 16);
+	s.match_key = s.gaia_id > 0 ? s.gaia_id : ((int64_t)1 << 62) | comb;
+	return s;
 }
 
 static PhysStar decode_star2(const uint8_t* buf)
@@ -61,6 +109,7 @@ static PhysStar decode_star2(const uint8_t* buf)
 	s.pmra_masyr  = dx0 / 1000.0;
 	s.pmdec_masyr = dx1 / 1000.0;
 	s.plx_mas     = plx / 100.0;
+	s.match_key = s.gaia_id;
 	return s;
 }
 
@@ -73,14 +122,21 @@ static PhysStar decode_star3(const uint8_t* buf)
 	s.bv      = 0.025 * buf[14] - 1.0;   // 255 → 5.375 marks missing BP-RP
 	s.vmag    = 16.0 + 0.02 * buf[15];
 	s.has_pm_plx = false;
+	s.match_key = s.gaia_id;
 	return s;
 }
 
 static inline bool isNoBV(double bv)
 {
 	// Missing BP-RP decodes to the format-specific sentinel value
-	return bv > 5.0;   // 32.767 (Star2) or 5.375 (Star3); real B-V < 5.0
+	return bv > 5.0;   // 32.767 (Star1/2) or 5.375 (Star3); real B-V < 5.0
 }
+
+// --compare-bv: report B-V differences as dBV without affecting match verdicts.
+// Off by default because pipelines legitimately differ (synthetic photometry
+// vs BP-RP polynomial).
+static bool   g_compare_bv = false;
+static double g_bv_tol     = 0.05;   // mag
 
 struct CatFile
 {
@@ -107,8 +163,9 @@ struct CatFile
 		std::fread(&ep, sizeof(float), 1, f);
 		cat_type = hdr[1];
 		level    = static_cast<int>(hdr[4]);
-		if (cat_type == 1)      rec_size = 32;
-		else if (cat_type == 2) rec_size = 16;
+		if (cat_type == 0)      rec_size = 48;   // Star1
+		else if (cat_type == 1) rec_size = 32;   // Star2
+		else if (cat_type == 2) rec_size = 16;   // Star3
 		else
 		{
 			std::cerr << "ERROR: " << path << " has unsupported catalog type " << cat_type << "\n";
@@ -128,7 +185,8 @@ struct CatFile
 	}
 	PhysStar decode(const uint8_t* buf) const
 	{
-		return cat_type == 2 ? decode_star3(buf) : decode_star2(buf);
+		return cat_type == 0 ? decode_star1(buf)
+		     : cat_type == 2 ? decode_star3(buf) : decode_star2(buf);
 	}
 	void close()
 	{
@@ -147,9 +205,9 @@ struct CompareResult
 	uint64_t matched    = 0;
 	uint64_t mismatched = 0;
 	uint64_t bad_x0 = 0, bad_x1 = 0, bad_dx0 = 0, bad_dx1 = 0;
-	uint64_t bad_vmag = 0, bad_plx = 0;
+	uint64_t bad_vmag = 0, bad_plx = 0, bad_rv = 0, bad_bv = 0;
 	double sum_x0 = 0, sum_x1 = 0, sum_dx0 = 0, sum_dx1 = 0;
-	double sum_vmag = 0, sum_plx = 0;
+	double sum_vmag = 0, sum_plx = 0, sum_rv = 0, sum_bv = 0;
 };
 
 // Type-aware tolerances (physical units)
@@ -159,17 +217,20 @@ struct Tolerances
 	double vmag;       // mag
 	double pm_masyr;   // proper motion (only when both have it)
 	double plx_mas;    // parallax (only when both have it)
+	double rv_kms;     // radial velocity (only when both are Star1)
 };
 
 static Tolerances tolerances_for(const CatFile& a, const CatFile& b)
 {
 	Tolerances t;
 	bool coarse = (a.cat_type == 2 || b.cat_type == 2);
+	bool star1  = (a.cat_type == 0 || b.cat_type == 0);
 	// Star2 legacy: ±3 mas / ±3 mmag. Star3 quantization: 0.1 arcsec / 0.02 mag.
-	t.pos_deg  = coarse ? 0.15 / 3600.0 : 3.0 / 3600000.0;
-	t.vmag     = coarse ? 0.030 : 0.003;
-	t.pm_masyr = 0.003;   // 3 uas/yr
-	t.plx_mas  = 0.03;    // 30 uas
+	t.pos_deg  = coarse ? 0.15 / 3600.0 : star1 ? 2.0 / 3600000.0 : 3.0 / 3600000.0;
+	t.vmag     = coarse ? 0.030 : star1 ? 0.005 : 0.003;
+	t.pm_masyr = star1 ? 0.02 : 0.003;   // Star1 pm vector: 1 uas/yr quantization, model diffs
+	t.plx_mas  = star1 ? 0.05 : 0.03;    // Star1 plx: 20 uas units
+	t.rv_kms   = 0.5;
 	return t;
 }
 
@@ -195,7 +256,7 @@ static void record_mismatch(const PhysStar& a, const PhysStar& b, int zone,
 	if (std::fabs(dvm) > tol.vmag)                      { r.bad_vmag++; r.sum_vmag += std::fabs(dvm); }
 
 	bool astrom = a.has_pm_plx && b.has_pm_plx;
-	double dpmra = 0, dpmde = 0, dplx = 0;
+	double dpmra = 0, dpmde = 0, dplx = 0, drv = 0;
 	if (astrom)
 	{
 		dpmra = a.pmra_masyr - b.pmra_masyr;
@@ -205,10 +266,23 @@ static void record_mismatch(const PhysStar& a, const PhysStar& b, int zone,
 		if (std::fabs(dpmde) > tol.pm_masyr) { r.bad_dx1++; r.sum_dx1 += std::fabs(dpmde); }
 		if (std::fabs(dplx) > tol.plx_mas)   { r.bad_plx++; r.sum_plx += std::fabs(dplx); }
 	}
+	bool rv_ok = a.has_rv && b.has_rv;
+	if (rv_ok)
+	{
+		drv = a.rv_kms - b.rv_kms;
+		if (std::fabs(drv) > tol.rv_kms) { r.bad_rv++; r.sum_rv += std::fabs(drv); }
+	}
+	double dbv = 0;
+	bool bv_line = g_compare_bv && !isNoBV(a.bv) && !isNoBV(b.bv);
+	if (bv_line) dbv = a.bv - b.bv;
 
-	char line[256];
+	char line[320];
 	int n;
-	if (astrom)
+	if (rv_ok || bv_line)
+		n = std::snprintf(line, sizeof(line),
+		                  "%llu z=%d  dRA=%.3fmas dDE=%.3fmas dpmra=%.3f dpmde=%.3f dV=%.3fmag dPlx=%.3fmas dRV=%.2fkm/s dBV=%.3fmag\n",
+		                  (unsigned long long)a.gaia_id, zone, dra, dde, dpmra, dpmde, dvm, dplx, drv, dbv);
+	else if (astrom)
 		n = std::snprintf(line, sizeof(line),
 		                  "%llu z=%d  dRA=%.3fmas dDE=%.3fmas dpmra=%.3f dpmde=%.3f dV=%.3fmag dPlx=%.3fmas\n",
 		                  (unsigned long long)a.gaia_id, zone, dra, dde, dpmra, dpmde, dvm, dplx);
@@ -234,7 +308,7 @@ static std::unordered_map<uint64_t, PhysStar> loadZoneMap(CatFile& cf, int z, in
 	{
 		std::fread(buf.data(), cf.rec_size, 1, cf.f);
 		auto s = cf.decode(buf.data());
-		map[s.gaia_id] = s;
+		map[s.match_key] = s;
 	}
 	return map;
 }
@@ -260,13 +334,18 @@ static void matchOrRecordB(std::unordered_map<uint64_t, PhysStar>& map_a,
                             CompareResult& result,
                             const std::string& out_path, std::ofstream& out_file)
 {
-	auto it = map_a.find(s.gaia_id);
+	auto it = map_a.find(s.match_key);
 	if (it == map_a.end())
 	{
 		recordOnlyB(s, zone, result, out_path, out_file);
 		return;
 	}
 	const auto& sa = it->second;
+	// --compare-bv: track B-V differences for every compared pair (report-only)
+	if (g_compare_bv && !isNoBV(sa.bv) && !isNoBV(s.bv)) {
+		double dbv = sa.bv - s.bv;
+		if (std::fabs(dbv) > g_bv_tol) { result.bad_bv++; result.sum_bv += std::fabs(dbv); }
+	}
 	bool ok = std::fabs(ra_diff_deg(sa.ra_deg, s.ra_deg)) <= tol.pos_deg &&
 	          std::fabs(sa.dec_deg - s.dec_deg) <= tol.pos_deg &&
 	          std::fabs(sa.vmag - s.vmag) <= tol.vmag;
@@ -274,6 +353,8 @@ static void matchOrRecordB(std::unordered_map<uint64_t, PhysStar>& map_a,
 		ok = std::fabs(sa.pmra_masyr - s.pmra_masyr) <= tol.pm_masyr &&
 		     std::fabs(sa.pmdec_masyr - s.pmdec_masyr) <= tol.pm_masyr &&
 		     std::fabs(sa.plx_mas - s.plx_mas) <= tol.plx_mas;
+	if (ok && sa.has_rv && s.has_rv)
+		ok = std::fabs(sa.rv_kms - s.rv_kms) <= tol.rv_kms;
 	if (ok)
 		result.matched++;
 	else
@@ -338,6 +419,12 @@ static void printSummary(const CompareResult& result)
 			  << "  avg|Δ|=" << avg(result.bad_vmag, result.sum_vmag) << " mag\n";
 		std::cout << "  dPlx:  n=" << result.bad_plx
 			  << "  avg|Δ|=" << avg(result.bad_plx, result.sum_plx) << " mas\n";
+		if (result.bad_rv > 0)
+			std::cout << "  dRV:   n=" << result.bad_rv
+				  << "  avg|Δ|=" << avg(result.bad_rv, result.sum_rv) << " km/s\n";
+		if (g_compare_bv)
+			std::cout << "  dBV:   n=" << result.bad_bv
+				  << "  avg|Δ|=" << avg(result.bad_bv, result.sum_bv) << " mag (report-only)\n";
 	}
 	if (result.only_a == 0 && result.only_b == 0 && result.mismatched == 0)
 		std::cout << "\nFiles are IDENTICAL.\n";
@@ -406,7 +493,11 @@ int main(int argc, char** argv)
 	for (int i = 1; i < argc; ++i)
 	{
 		std::string arg = argv[i];
-		if (a.empty())
+		if (arg == "--compare-bv")
+			g_compare_bv = true;
+		else if (arg == "--bv-tol" && i + 1 < argc)
+			g_bv_tol = std::atof(argv[++i]);
+		else if (a.empty())
 			a = arg;
 		else if (b.empty())
 			b = arg;
@@ -415,7 +506,7 @@ int main(int argc, char** argv)
 	}
 	if (a.empty() || b.empty())
 	{
-		std::cerr << "Usage: cmpcat <fileA.cat> <fileB.cat> [output.txt]\n";
+		std::cerr << "Usage: cmpcat <fileA.cat> <fileB.cat> [output.txt] [--compare-bv] [--bv-tol mag]\n";
 		return 1;
 	}
 	compare(a, b, out);
