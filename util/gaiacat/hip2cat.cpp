@@ -664,8 +664,8 @@ int main(int argc, char** argv)
 					uint32_t n = (uint32_t)sel.size();
 					std::fwrite(&n, 4, 1, ef);
 					for (const auto* sr : sel) {
-						double d[6] = {sr->ra, sr->dec, sr->pmra, sr->pmdec, sr->plx, sr->rv};
-						std::fwrite(d, 8, 6, ef);
+						double d[7] = {sr->ra, sr->dec, sr->pmra, sr->pmdec, sr->plx, sr->rv, sr->plxe};
+						std::fwrite(d, 8, 7, ef);
 					}
 					std::fclose(ef);
 				}
