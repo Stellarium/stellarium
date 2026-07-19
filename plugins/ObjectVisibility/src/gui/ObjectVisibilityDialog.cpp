@@ -28,6 +28,7 @@
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelLocation.hpp"
+#include "StelLocationMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
@@ -36,6 +37,7 @@
 #include "modules/SolarSystem.hpp"
 
 #include <QDebug>
+#include <QComboBox>
 #include <QSpinBox>
 #include <QCheckBox>
 #include <QPushButton>
@@ -60,8 +62,11 @@ void ObjectVisibilityDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		configurePlaceLabelControls();
 		setAboutHtml();
 		refreshTitleLabel();
+		refreshTwilightLimits();
+		updatePlaceLabels();
 	}
 }
 
@@ -107,17 +112,39 @@ void ObjectVisibilityDialog::createDialogContent()
 	// Push the same value back into the map widget at startup so the
 	// dashed line uses the correct altitude limit straight away.
 	ui->mapWidget->setGoodVisibilityAltitude(plugin->getGoodVisibilityLimit());
+	ui->twilightMapWidget->setOverlayMode(ObjectVisibilityMapWidget::TwilightLimitsOverlay);
+	ui->twilightMapWidget->setMarkerVisible(true);
+	ui->twilightMapWidget->setMap(QPixmap(":/graphicGui/miscWorldMap.jpg"));
+	configurePlaceLabelControls();
 
 	// Buttons.
 	connect(ui->calculatePushButton, &QPushButton::clicked,
 	        this, &ObjectVisibilityDialog::calculate);
 	connect(ui->setLocationByClickCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onSetLocationByClickToggled);
+	connect(ui->twilightSetLocationByClickCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onTwilightSetLocationByClickToggled);
 	connect(ui->resetSettingsPushButton, &QPushButton::clicked,
 	        this, &ObjectVisibilityDialog::onResetSettings);
+	connect(ui->placeLabelsCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onPlaceLabelsToggled);
+	connect(ui->twilightPlaceLabelsCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onTwilightPlaceLabelsToggled);
+	connect(ui->placeLabelsPopulationComboBox,
+	        QOverload<int>::of(&QComboBox::currentIndexChanged),
+	        this, &ObjectVisibilityDialog::onPlaceLabelsPopulationChanged);
+	connect(ui->twilightPlaceLabelsPopulationComboBox,
+	        QOverload<int>::of(&QComboBox::currentIndexChanged),
+	        this, &ObjectVisibilityDialog::onTwilightPlaceLabelsPopulationChanged);
+	connect(ui->placeLabelsNearLinesOnlyCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onPlaceLabelsNearLinesOnlyToggled);
+	connect(ui->twilightPlaceLabelsNearLinesOnlyCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onTwilightPlaceLabelsNearLinesOnlyToggled);
 
 	// Map clicks while in "set location" mode.
 	connect(ui->mapWidget, &ObjectVisibilityMapWidget::locationPicked,
+	        this, &ObjectVisibilityDialog::onLocationPicked);
+	connect(ui->twilightMapWidget, &ObjectVisibilityMapWidget::locationPicked,
 	        this, &ObjectVisibilityDialog::onLocationPicked);
 
 	// Track Stellarium's selection so we can enable/disable Calculate
@@ -138,10 +165,14 @@ void ObjectVisibilityDialog::createDialogContent()
 	StelCore* core = StelApp::getInstance().getCore();
 	connect(core, &StelCore::locationChanged,
 	        this, &ObjectVisibilityDialog::syncMarkerToObserver);
+	connect(core, &StelCore::dateChanged,
+	        this, &ObjectVisibilityDialog::refreshTwilightLimits);
 	syncMarkerToObserver();
 
 	setAboutHtml();
 	refreshTitleLabel();
+	refreshTwilightLimits();
+	updatePlaceLabels();
 	updateCalculateButtonEnabled();
 }
 
@@ -244,6 +275,36 @@ void ObjectVisibilityDialog::onGoodVisibilityLimitChanged(int degrees)
 void ObjectVisibilityDialog::onSetLocationByClickToggled(bool on)
 {
 	ui->mapWidget->setClickSetsLocationMode(on);
+
+	if (ui->twilightSetLocationByClickCheckBox->isEnabled())
+	{
+		QSignalBlocker blocker(ui->twilightSetLocationByClickCheckBox);
+		ui->twilightSetLocationByClickCheckBox->setChecked(on);
+		ui->twilightMapWidget->setClickSetsLocationMode(on);
+	}
+}
+
+void ObjectVisibilityDialog::onTwilightSetLocationByClickToggled(bool on)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	const bool earth = core &&
+	                   core->getCurrentLocation().planetName == QStringLiteral("Earth");
+
+	if (on && !earth)
+	{
+		QSignalBlocker blocker(ui->twilightSetLocationByClickCheckBox);
+		ui->twilightSetLocationByClickCheckBox->setChecked(false);
+		ui->twilightMapWidget->setClickSetsLocationMode(false);
+		return;
+	}
+
+	ui->twilightMapWidget->setClickSetsLocationMode(on);
+
+	{
+		QSignalBlocker blocker(ui->setLocationByClickCheckBox);
+		ui->setLocationByClickCheckBox->setChecked(on);
+	}
+	ui->mapWidget->setClickSetsLocationMode(on);
 }
 
 void ObjectVisibilityDialog::onLocationPicked(double longitude,
@@ -271,6 +332,7 @@ void ObjectVisibilityDialog::onLocationPicked(double longitude,
 	// StelCore::locationChanged to arrive — that signal is emitted
 	// after the (async) move completes, which would feel laggy.
 	ui->mapWidget->setMarkerPos(longitude, latitude);
+	ui->twilightMapWidget->setMarkerPos(longitude, latitude);
 }
 
 void ObjectVisibilityDialog::onResetSettings()
@@ -282,6 +344,52 @@ void ObjectVisibilityDialog::onResetSettings()
 	const int g = plugin->getGoodVisibilityLimit();
 	ui->goodVisibilityLimitSpinBox->setValue(g);
 	ui->mapWidget->setGoodVisibilityAltitude(g);
+}
+
+void ObjectVisibilityDialog::onPlaceLabelsToggled(bool on)
+{
+	placeLabelsVisible = on;
+	syncPlaceLabelControls();
+	updatePlaceLabels();
+}
+
+void ObjectVisibilityDialog::onTwilightPlaceLabelsToggled(bool on)
+{
+	placeLabelsVisible = on;
+	syncPlaceLabelControls();
+	updatePlaceLabels();
+}
+
+void ObjectVisibilityDialog::onPlaceLabelsPopulationChanged(int index)
+{
+	const QVariant value = ui->placeLabelsPopulationComboBox->itemData(index);
+	if (!value.isValid()) return;
+	placeLabelsMinimumPopulation = value.toInt();
+	syncPlaceLabelControls();
+	updatePlaceLabels();
+}
+
+void ObjectVisibilityDialog::onTwilightPlaceLabelsPopulationChanged(int index)
+{
+	const QVariant value = ui->twilightPlaceLabelsPopulationComboBox->itemData(index);
+	if (!value.isValid()) return;
+	placeLabelsMinimumPopulation = value.toInt();
+	syncPlaceLabelControls();
+	updatePlaceLabels();
+}
+
+void ObjectVisibilityDialog::onPlaceLabelsNearLinesOnlyToggled(bool on)
+{
+	placeLabelsNearLinesOnly = on;
+	syncPlaceLabelControls();
+	updatePlaceLabels();
+}
+
+void ObjectVisibilityDialog::onTwilightPlaceLabelsNearLinesOnlyToggled(bool on)
+{
+	placeLabelsNearLinesOnly = on;
+	syncPlaceLabelControls();
+	updatePlaceLabels();
 }
 
 void ObjectVisibilityDialog::syncMarkerToObserver()
@@ -331,11 +439,178 @@ void ObjectVisibilityDialog::syncMarkerToObserver()
 	const float lon = loc.getLongitude(true);
 	ui->mapWidget->setMarkerPos(static_cast<double>(lon),
 	                            static_cast<double>(lat));
+	ui->twilightMapWidget->setMarkerPos(static_cast<double>(lon),
+	                                    static_cast<double>(lat));
 
 	// (3) Refresh the Calculate-enabled state and title label, since
 	// both depend on whether the current planet is supported.
 	updateCalculateButtonEnabled();
 	refreshTitleLabel();
+	refreshTwilightLimits();
+	updatePlaceLabels();
+}
+
+void ObjectVisibilityDialog::refreshTwilightLimits()
+{
+	if (!ui || !ui->twilightMapWidget) return;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	if (!core) return;
+
+	const QString planet = core->getCurrentLocation().planetName;
+	if (planet != QStringLiteral("Earth"))
+	{
+		ui->twilightMapWidget->clearTwilightLimits();
+		ui->twilightMapWidget->setMarkerVisible(false);
+		ui->twilightMapWidget->setClickSetsLocationMode(false);
+		ui->twilightSetLocationByClickCheckBox->setEnabled(false);
+		ui->twilightSetLocationByClickCheckBox->setToolTip(
+			q_("Setting the observer location from the twilight map is "
+			   "available on Earth only."));
+		{
+			QSignalBlocker blocker(ui->twilightSetLocationByClickCheckBox);
+			ui->twilightSetLocationByClickCheckBox->setChecked(false);
+		}
+		ui->twilightTitleLabel->setText(
+			QString(q_("Solstice twilight limits are available for Earth only. "
+			           "Current observing body: %1"))
+			.arg(q_(planet.toUtf8().constData())));
+		return;
+	}
+
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+	PlanetP earth = ssm ? ssm->getEarth() : PlanetP();
+	if (!earth)
+	{
+		ui->twilightMapWidget->clearTwilightLimits();
+		ui->twilightMapWidget->setMarkerVisible(false);
+		ui->twilightMapWidget->setClickSetsLocationMode(false);
+		ui->twilightSetLocationByClickCheckBox->setEnabled(false);
+		ui->twilightTitleLabel->setText(
+			q_("Solstice twilight limits on Earth are unavailable."));
+		return;
+	}
+
+	ui->twilightMapWidget->setMarkerVisible(true);
+	ui->twilightSetLocationByClickCheckBox->setEnabled(true);
+	ui->twilightSetLocationByClickCheckBox->setToolTip(
+		q_("Enable to move the observer by clicking on the map. "
+		   "Stays active until you uncheck it."));
+
+	const double obliquityDeg = earth->getRotObliquity(core->getJDE()) * 180.0 / M_PI;
+	ui->twilightMapWidget->setTwilightObliquity(obliquityDeg);
+
+	const int year = currentYear(core);
+	ui->twilightTitleLabel->setText(
+		QString(q_("Solstice twilight limits on Earth in %1 "
+		           "(obliquity %2°)"))
+		.arg(year)
+		.arg(obliquityDeg, 0, 'f', 2));
+}
+
+void ObjectVisibilityDialog::configurePlaceLabelControls()
+{
+	QSignalBlocker b1(ui->placeLabelsPopulationComboBox);
+	QSignalBlocker b2(ui->twilightPlaceLabelsPopulationComboBox);
+
+	auto configureCombo = [](QComboBox* combo)
+	{
+		combo->clear();
+		combo->addItem(q_("100,000"), 100000);
+		combo->addItem(q_("500,000"), 500000);
+		combo->addItem(q_("1,000,000"), 1000000);
+		combo->addItem(q_("5,000,000"), 5000000);
+	};
+
+	configureCombo(ui->placeLabelsPopulationComboBox);
+	configureCombo(ui->twilightPlaceLabelsPopulationComboBox);
+	syncPlaceLabelControls();
+}
+
+void ObjectVisibilityDialog::syncPlaceLabelControls()
+{
+	QSignalBlocker b1(ui->placeLabelsCheckBox);
+	QSignalBlocker b2(ui->twilightPlaceLabelsCheckBox);
+	QSignalBlocker b3(ui->placeLabelsPopulationComboBox);
+	QSignalBlocker b4(ui->twilightPlaceLabelsPopulationComboBox);
+	QSignalBlocker b5(ui->placeLabelsNearLinesOnlyCheckBox);
+	QSignalBlocker b6(ui->twilightPlaceLabelsNearLinesOnlyCheckBox);
+
+	ui->placeLabelsCheckBox->setChecked(placeLabelsVisible);
+	ui->twilightPlaceLabelsCheckBox->setChecked(placeLabelsVisible);
+	ui->placeLabelsNearLinesOnlyCheckBox->setChecked(placeLabelsNearLinesOnly);
+	ui->twilightPlaceLabelsNearLinesOnlyCheckBox->setChecked(placeLabelsNearLinesOnly);
+
+	auto selectPopulation = [this](QComboBox* combo)
+	{
+		const int index = combo->findData(placeLabelsMinimumPopulation);
+		if (index >= 0)
+			combo->setCurrentIndex(index);
+	};
+	selectPopulation(ui->placeLabelsPopulationComboBox);
+	selectPopulation(ui->twilightPlaceLabelsPopulationComboBox);
+}
+
+void ObjectVisibilityDialog::updatePlaceLabels()
+{
+	if (!ui || !ui->mapWidget || !ui->twilightMapWidget) return;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	const bool earth = core &&
+	                   core->getCurrentLocation().planetName == QStringLiteral("Earth");
+
+	auto setControlsEnabled = [earth](QCheckBox* showCheckBox,
+	                                  QLabel* populationLabel,
+	                                  QComboBox* populationComboBox,
+	                                  QCheckBox* nearLinesOnlyCheckBox)
+	{
+		showCheckBox->setEnabled(earth);
+		populationLabel->setEnabled(earth);
+		populationComboBox->setEnabled(earth);
+		nearLinesOnlyCheckBox->setEnabled(earth);
+	};
+
+	setControlsEnabled(ui->placeLabelsCheckBox,
+	                   ui->placeLabelsPopulationLabel,
+	                   ui->placeLabelsPopulationComboBox,
+	                   ui->placeLabelsNearLinesOnlyCheckBox);
+	setControlsEnabled(ui->twilightPlaceLabelsCheckBox,
+	                   ui->twilightPlaceLabelsPopulationLabel,
+	                   ui->twilightPlaceLabelsPopulationComboBox,
+	                   ui->twilightPlaceLabelsNearLinesOnlyCheckBox);
+
+	if (!earth || !placeLabelsVisible)
+	{
+		ui->mapWidget->setPlaceLabelsVisible(false);
+		ui->twilightMapWidget->setPlaceLabelsVisible(false);
+		return;
+	}
+
+	QVector<ObjectVisibilityMapWidget::PlaceLabel> labels;
+	const LocationList locations = StelApp::getInstance().getLocationMgr().getAll();
+	labels.reserve(locations.size());
+	for (const StelLocation& loc : locations)
+	{
+		if (loc.planetName != QStringLiteral("Earth")) continue;
+		if (loc.name.isEmpty()) continue;
+
+		ObjectVisibilityMapWidget::PlaceLabel label;
+		label.name = loc.name;
+		label.longitude = loc.getLongitude(true);
+		label.latitude = loc.getLatitude(true);
+		label.population = loc.population;
+		label.role = loc.role;
+		labels.append(label);
+	}
+
+	ui->mapWidget->setPlaceLabels(labels);
+	ui->twilightMapWidget->setPlaceLabels(labels);
+	ui->mapWidget->setPlaceLabelMinimumPopulation(placeLabelsMinimumPopulation);
+	ui->twilightMapWidget->setPlaceLabelMinimumPopulation(placeLabelsMinimumPopulation);
+	ui->mapWidget->setPlaceLabelsNearLinesOnly(placeLabelsNearLinesOnly);
+	ui->twilightMapWidget->setPlaceLabelsNearLinesOnly(placeLabelsNearLinesOnly);
+	ui->mapWidget->setPlaceLabelsVisible(true);
+	ui->twilightMapWidget->setPlaceLabelsVisible(true);
 }
 
 bool ObjectVisibilityDialog::isSupportedPlanet(const QString& englishName)
@@ -539,6 +814,17 @@ void ObjectVisibilityDialog::setAboutHtml()
 	                   "planetarium.  To see Sirius's visibility in "
 	                   "10&thinsp;000 BCE, set the planetarium's date "
 	                   "first, then press Calculate.")
+	        + "</p>";
+
+	html += "<p>" + q_("The Twilight limits tab is Earth-only.  It draws the "
+	                   "equator, tropics, polar circles, and solstice "
+	                   "latitudes where the Sun's lowest or highest altitude "
+	                   "is -6&deg;, -12&deg;, or -18&deg;.  These lines use "
+	                   "Earth's obliquity at the current epoch, so they shift "
+	                   "when you change the planetarium date.  They are not "
+	                   "shown for other observing bodies because civil, "
+	                   "nautical, and astronomical twilight depend on Earth's "
+	                   "atmosphere.")
 	        + "</p>";
 
 	html += "<h3>" + q_("Credits") + "</h3>";
