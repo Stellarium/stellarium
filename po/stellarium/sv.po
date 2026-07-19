@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-07-17 13:58+0700\n"
+"POT-Creation-Date: 2026-07-19 20:02+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
@@ -635,6 +635,7 @@ msgid "Equator of J2000.0"
 msgstr "Ekvator för J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:719
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:596
 msgid "Equator"
 msgstr "Ekvatorn"
 
@@ -1298,7 +1299,7 @@ msgstr "Rullande förändring av ljusförorening"
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1752
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:304
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:485
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:760
 msgid "Author"
 msgstr "Upphovsman"
 
@@ -6306,7 +6307,7 @@ msgstr "Free Art License ger rätten att fritt kopiera, sprida och omvandla."
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:303
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:270
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:483
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:758
 msgid "License"
 msgstr "Licens"
 
@@ -7152,7 +7153,7 @@ msgstr "Kontakt"
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:302
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:269
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:481
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:756
 msgid "Version"
 msgstr "Version"
 
@@ -15076,7 +15077,7 @@ msgstr "Hjälp"
 #: src/ui_helpDialogGui.h:242
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:200
 #: plugins/Planes/src/ui_planesDialog.h:276
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:279
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:613
 msgid "About"
 msgstr "Om"
 
@@ -17102,6 +17103,7 @@ msgstr "Visa atmosfärsextinktion"
 
 #: src/ui_viewDialog.h:5548 src/ui_tonemappingDialog.h:153
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:530
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:582
 msgid "Reset"
 msgstr "Återställ"
 
@@ -18636,7 +18638,7 @@ msgid "Export data..."
 msgstr "Exportera data..."
 
 #: src/ui_astroCalcDialog.h:2439
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:267
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:576
 msgid "Calculate"
 msgstr "Beräkna"
 
@@ -41452,7 +41454,7 @@ msgid "Earth"
 msgstr "Jorden"
 
 #: plugins/ObjectVisibility/src/ObjectVisibility.cpp:57
-#: plugins/ObjectVisibility/src/ObjectVisibility.cpp:132
+#: plugins/ObjectVisibility/src/ObjectVisibility.cpp:134
 msgid "Object Visibility"
 msgstr "Objektsynbarhet"
 
@@ -41460,99 +41462,168 @@ msgstr "Objektsynbarhet"
 msgid ""
 "Shows on a planet map where a selected star or deep-sky object is visible.  "
 "Supports observation from Earth, the Moon, the eight planets, Pluto, and the"
-" four Galilean moons.  Based on the geometric criteria of the Astro-Geo-GIS "
-"article \"The 49 brightest stars in the night sky – when and where can we "
-"see them?\""
+" four Galilean moons.  Also shows Earth-only solstice twilight latitude "
+"limits computed from obliquity of date.  Based on the geometric criteria of "
+"the Astro-Geo-GIS article \"The 49 brightest stars in the night sky – when "
+"and where can we see them?\""
 msgstr ""
-"Visar en planetkarta där en vald stjärna eller djuprymdsobjekt är synligt. "
-"Stöd finns för observation från jorden, månen, de åtta övriga planeterna, "
-"Pluto och de fyra galileiska månarna. Baserat på geometriska kriterier från "
-"Astro-Geo-GIS-artikeln \"The 49 brightest stars in the night sky – when and "
-"where can we see them?\""
+"Visar på en planetkarta var en vald stjärna ett djuprymdsobjekt är synligt. "
+"Stödjer observation från jorden, månen, de åtta övriga planeterna, Pluto och"
+" de fyra galileiska månarna. Visar också (endast för jorden) "
+"skymningsgränser för sommar- och vintersolstånd, beräknat från axellutningen"
+" för givet datum. Baserat på geometriska kriterier från Astro-Geo-GIS-"
+"artikeln \"The 49 brightest stars in the night sky – when and where can we "
+"see them?\""
 
-#: plugins/ObjectVisibility/src/ObjectVisibility.cpp:139
+#: plugins/ObjectVisibility/src/ObjectVisibility.cpp:141
 msgid "Object Visibility plug-in dialog"
 msgstr "Dialog för insticksprogrammet Objektsynbarhet"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:258
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:567
 msgid "Object Visibility Configuration"
 msgstr "Inställningar för Objektsynbarhet"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:259
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:568
 msgid "Object Visibility plug-in"
 msgstr "Insticksprogrammet Objektsynbarhet"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:260
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:400
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:569
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:675
 msgid "Select a star or DSO, then click Calculate."
 msgstr "Välj en stjärna eller djuprymdsobjekt och klicka på Beräkna."
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:261
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:570
 msgid "Key of stars visibility"
 msgstr "Teckenförklaring"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:262
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:495
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:571
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:770
 msgid "Limit of visibility"
 msgstr "Gräns för synbarhet"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:263
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:572
 msgid "Good visibility (default 5° above the horizon)"
 msgstr "God synbarhet (standard är 5° över horisonten)"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:264
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:506
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:573
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:781
 msgid "Passes zenith"
 msgstr "Passerar zenit"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:265
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:574
 msgid "Circumpolar limit (northern hemisphere)"
 msgstr "Gräns för cirkumpolaritet (norra halvklotet)"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:266
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:575
 msgid "Circumpolar limit (southern hemisphere)"
 msgstr "Gräns för cirkumpolaritet (södra halvklotet)"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:269
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:198
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:578
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:229
 msgid "Compute visibility for the selected object."
 msgstr "Beräkna synbarhet för valt objekt."
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:271
-msgid "Good visibility above the horizon:"
-msgstr "God synbarhet över horisonten:"
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:580
+msgid "Good visibility:"
+msgstr "God synbarhet:"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:272
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:581
 msgid "°"
 msgstr "°"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:273
-msgid "Set location by clicking on the map"
-msgstr "Ställ in plats genom att klicka i kartan"
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:583
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:605
+msgid "Set location by map click"
+msgstr "Byt plats med klick i kartan"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:275
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:585
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:497
 msgid ""
-"Enable to move the observer by clicking on the map.  Stays active until you "
-"uncheck it — you can pick as many locations as you like."
+"Enable to move the observer by clicking on the map. Stays active until you "
+"uncheck it."
 msgstr ""
-"Slå på detta för att flytta observatörsplatsen genom att klicka i kartan. Är"
-" aktiv tills du klickar ur rutan. Du kan välja plats hur många gånger du "
-"vill."
+"Ger möjlighet att byta plats genom att klicka i kartan. Är aktivt tills du "
+"stänger av det."
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:277
-msgid "Reset settings"
-msgstr "Återställ inställningar"
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:587
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:609
+msgid "Places"
+msgstr "Platser"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:278
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:588
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:610
+msgid "Min. population:"
+msgstr "Minsta befolkn.:"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:589
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:611
+msgid "Near lines"
+msgstr "Nära linjer"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:590
 msgid "Visibility"
 msgstr "Synlighet"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:191
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:591
+msgid "Solstice twilight limits on Earth"
+msgstr "Skymningsgräns vid solstånd på jorden"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:592
+msgid "Solstice twilight limits"
+msgstr "Skymningsgräns vid solstånd"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:593
+msgid "Reference lines"
+msgstr "Referenslinjer"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:594
+msgid "Lowest Sun"
+msgstr "Lägsta solhöjd"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:595
+msgid "Highest Sun"
+msgstr "Högsta solhöjd"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:597
+msgid "Tropics"
+msgstr "Vändkretsar"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:598
+msgid "Polar circles"
+msgstr "Polcirklar"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:599
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:600
+msgid "-6° civil"
+msgstr "-6° (borgerlig)"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:601
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:602
+msgid "-12° nautical"
+msgstr "-12° (nautisk)"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:603
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:604
+msgid "-18° astronomical"
+msgstr "-18° (astronomisk)"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:607
+msgid ""
+"Enable to move the observer by clicking on the map. Available on Earth only."
+msgstr ""
+"Slå på för att flytta observatören genom att klicka i kartan. Endast "
+"tillgängligt på jorden."
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:612
+msgid "Twilight limits"
+msgstr "Skymningsgränser"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:222
 msgid "Only stars and DSOs may be used in this plugin!"
 msgstr ""
 "Endast stjärnor och djuprymdsobjekt kan användas i detta insticksprogram!"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:193
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:224
 #, qt-format
 msgid ""
 "This plug-in supports observation from Earth, the Moon, the eight planets, "
@@ -41563,60 +41634,102 @@ msgstr ""
 " planeterna, Pluto och de fyra galileiska månarna. Nuvarande himlakropp (%1)"
 " stöds inte."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:410
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:468
+msgid ""
+"Setting the observer location from the twilight map is available on Earth "
+"only."
+msgstr ""
+"Att ställa in observationsplats genom att klicka i kartan är endast "
+"tillgängligt på jorden."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:475
+#, qt-format
+msgid ""
+"Solstice twilight limits are available for Earth only. Current observing "
+"body: %1"
+msgstr ""
+"Skymningsgränser vid solstånd är bara tillgängligt för jorden. Nuvarande "
+"observationskropp: %1"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:490
+msgid "Solstice twilight limits on Earth are unavailable."
+msgstr "Skymningsgränser vid solstånd på jorden är otillgängligt."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:505
+#, qt-format
+msgid "Solstice twilight limits on Earth in %1 (obliquity %2°)"
+msgstr "Skymningsgränser vid solstånd på jorden år %1 (axellutning %2°)"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:519
+msgid "100,000"
+msgstr "100 000"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:520
+msgid "500,000"
+msgstr "500 000"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:521
+msgid "1,000,000"
+msgstr "1 000 000"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:522
+msgid "5,000,000"
+msgstr "5 000 000"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:685
 #, qt-format
 msgid "%1 is selected. Click Calculate."
 msgstr "%1 är vald. Klicka på Beräkna."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:424
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:699
 msgid "a planet, moon or the Sun"
 msgstr "en planet, månen eller solen"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:426
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:701
 msgid "a comet"
 msgstr "en komet"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:428
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:703
 msgid "a minor planet"
 msgstr "ett mindre objekt"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:430
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:705
 msgid "an artificial satellite"
 msgstr "en artificiell satellit"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:432
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:707
 msgid "a surface feature"
 msgstr "ett ytkännetecken"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:434
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:709
 msgid "a meteor"
 msgstr "en meteor"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:436
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:711
 msgid "not a star or deep-sky object"
 msgstr "inte en stjärna eller ett djuprymdsobjekt"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:442
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:717
 #, qt-format
 msgid "%1 is %2. This plug-in only supports stars and deep-sky objects."
 msgstr ""
 "%1 är %2. Detta insticksprogram stödjer endast stjärnor och djuprymdsobjekt."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:462
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:737
 #, qt-format
 msgid "Visibility of %1 in %2"
 msgstr "Synbarhet för %1 år %2"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:468
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:743
 #, qt-format
 msgid "Visibility of %1 from %3 in %2"
 msgstr "Synbarhet för %1 från %3 år %2"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:479
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:754
 msgid "Object Visibility Plug-in"
 msgstr "Insticksprogrammet Objektsynbarhet"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:488
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:763
 msgid ""
 "This plug-in shows on a planet map where on the observer's planet a selected"
 " star or deep-sky object is visible.  Given an object with declination "
@@ -41628,7 +41741,7 @@ msgstr ""
 "nuvarande epok (där precession och egenrörelse räknas in) ritas fem linjer "
 "ut vid fixa geografiska latituder:"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:496
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:771
 msgid ""
 "&phi; = &delta; &plusmn; 90&deg;.  The object never rises above the horizon "
 "at latitudes outside this band."
@@ -41636,11 +41749,11 @@ msgstr ""
 "&phi; = &delta; &plusmn; 90&deg;.  Objektet går aldrig över horisonten vid "
 "latituder utanför detta band."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:499
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:774
 msgid "Extinction free / good visibility"
 msgstr "Fritt från extinktion / god synbarhet"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:500
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:775
 msgid ""
 "&phi; = &delta; &plusmn; (90&deg; &minus; h).  At latitudes inside this band"
 " the object reaches at least altitude h at upper culmination.  The default h"
@@ -41652,16 +41765,16 @@ msgstr ""
 "är 5&deg;; du kan vilja öka detta om du observerar från ett bergigt område "
 "eller önskar bättre säkerhetsmarginal."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:507
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:782
 msgid ""
 "&phi; = &delta;.  At this latitude the object passes through the zenith."
 msgstr "&phi; = &delta;.  Vid denna latitud passerar objektet genom zenit."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:510
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:785
 msgid "Circumpolar limit, northern hemisphere"
 msgstr "Cirkumpolär gräns, norra halvklotet"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:511
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:786
 msgid ""
 "&phi; = 90&deg; &minus; &delta;.  North of this latitude the object never "
 "sets."
@@ -41669,11 +41782,11 @@ msgstr ""
 "&phi; = 90&deg; &minus; &delta;.  Norr om denna latitud går objektet aldrig "
 "ned."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:514
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:789
 msgid "Circumpolar limit, southern hemisphere"
 msgstr "Cirkumpolär gräns, södra halvklotet"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:515
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:790
 msgid ""
 "&phi; = &minus;90&deg; &minus; &delta;.  South of this latitude the object "
 "never sets."
@@ -41681,7 +41794,7 @@ msgstr ""
 "&phi; = 90&deg; &minus; &delta;.  Söder om denna latitud går objektet aldrig"
 " ned."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:520
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:795
 msgid ""
 "Planets, moons, asteroids, comets and artificial satellites are "
 "intentionally not supported as the selected <em>target</em>: their rapid "
@@ -41692,7 +41805,7 @@ msgstr ""
 "avsiktligt avskilda från valt <em>objekt</em>: deras hastiga dagliga rörelse"
 " (och, för några, parallax) gör en ögonblicksbild missledande."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:527
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:802
 msgid ""
 "The plug-in does support observation from any of the following bodies: "
 "Earth, the Moon, the eight planets (Mercury through Neptune), Pluto, and the"
@@ -41706,7 +41819,7 @@ msgstr ""
 "Callisto). Ändra observationshimlakropp via Stellariums platsdialog; kartan "
 "uppdateras automatiskt."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:536
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:811
 msgid ""
 "Because stellar positions change over time through precession and proper "
 "motion, the lines are always computed for the date currently shown in the "
@@ -41718,11 +41831,27 @@ msgstr ""
 "visas i planetariet. För att se Sirius synbarhet år 10 000 f.Kr., ställ "
 "först in tiden till det året, och klicka därefter på Beräkna."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:544
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:819
+msgid ""
+"The Twilight limits tab is Earth-only.  It draws the equator, tropics, polar"
+" circles, and solstice latitudes where the Sun's lowest or highest altitude "
+"is -6&deg;, -12&deg;, or -18&deg;.  These lines use Earth's obliquity at the"
+" current epoch, so they shift when you change the planetarium date.  They "
+"are not shown for other observing bodies because civil, nautical, and "
+"astronomical twilight depend on Earth's atmosphere."
+msgstr ""
+"Fliken för skymningsgränser finns endast tillgänglig för jorden.  Den ritar "
+"ut ekvatorn, vändkretsarna, polcirklarna samt latituder där solens lägsta "
+"höjd är -6&deg;, -12&deg;, eller -18&deg; vid solstånd. Dessa linjer "
+"använder jordens axellutning för nuvarande epok, så de förskjuts när du "
+"ändras datum i planetariet.  De visas inte för övriga himlakroppar, då "
+"borgerlig, nautisk och astronomisk skymning beror på jordens atmosfär."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:830
 msgid "Credits"
 msgstr "Tack till"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:545
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:831
 msgid ""
 "The whole concept of these visibility lines on a world map – and in "
 "particular the choice of the five line types and their visual style – comes "
@@ -41734,10 +41863,10 @@ msgstr ""
 "artikeln <em>The 49 brightest stars in the night sky – when and where can we"
 " see them?</em>"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:554
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:840
 msgid "Read the original article"
 msgstr "Läs originalartikeln"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:557
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:843
 msgid "Astro-Geo-GIS website"
 msgstr "Hemsidan Astro-Geo-GIS"
