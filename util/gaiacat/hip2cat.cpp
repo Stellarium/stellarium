@@ -15,6 +15,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <string>
+#include <string>
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
@@ -349,6 +350,7 @@ int main(int argc, char** argv)
 	std::string simbad_path, bin_dir, out_dir, otype_path, sp_path;
 	int n_workers = (int)std::min(4u, std::thread::hardware_concurrency());
 	long max_files = -1;
+	std::string erfa_python;
 	for (int i = 1; i < argc; ++i) {
 		std::string a = argv[i];
 		if      (a == "--simbad"    && i + 1 < argc) simbad_path = argv[++i];
@@ -358,8 +360,10 @@ int main(int argc, char** argv)
 		else if (a == "--sp-table"  && i + 1 < argc) sp_path = argv[++i];
 		else if (a == "--workers"   && i + 1 < argc) n_workers = std::atoi(argv[++i]);
 		else if (a == "--max-files" && i + 1 < argc) max_files = std::atol(argv[++i]);
+		else if (a == "--erfa-python" && i + 1 < argc) erfa_python = argv[++i];
 		else {
-			std::cerr << "Usage: hip2cat --simbad <dat> --gaia-bin <dir> --out-dir <dir> --otype <dat> [--sp-table f] [--workers n] [--max-files n]\n";
+			std::cerr << "Usage: hip2cat --simbad <dat> --gaia-bin <dir> --out-dir <dir> --otype <dat>"
+				" [--sp-table f] [--workers n] [--max-files n] [--erfa-python <venv python>]\n";
 			return 1;
 		}
 	}
@@ -581,6 +585,7 @@ int main(int argc, char** argv)
 	apply_final_patches(rows);
 	for (auto& g : gaia_only) rows.insert(rows.end(), g.begin(), g.end());
 	gaia_only.clear();
+	gaia_only.shrink_to_fit();   // give memory back before per-level allocations
 
 	// fillna defaults
 	for (auto& r : rows) {
@@ -623,71 +628,50 @@ int main(int argc, char** argv)
 		// zone assignment (+ past/future global-zone analysis for lv0-2)
 		std::vector<uint32_t> zones(sel.size(), 0);
 		int global_zone = 20 * (1 << (lc.level * 2));
-		{
-			std::atomic<size_t> idx{0};
-			std::atomic<uint64_t> n_global{0};
-			std::vector<std::thread> pool;
-			for (int t = 0; t < n_workers; ++t) {
-				pool.emplace_back([&]() {
-					while (true) {
-						size_t i = idx.fetch_add(1);
-						if (i >= sel.size()) break;
-						const StarRow& r = *sel[i];
-						double x = std::cos(r.ra * D2R) * std::cos(r.dec * D2R);
-						double y = std::sin(r.ra * D2R) * std::cos(r.dec * D2R);
-						double z = std::sin(r.dec * D2R);
-						uint32_t zone = (uint32_t)zone_number(x, y, z, lc.level);
 
-						if (lc.level <= 2) {
-							bool good = (r.plx > 0 || r.plxe > 0) && (r.plx / r.plxe > 5);
-							int counter_past = 0, counter_future = 0;
-							double min_diff = 0.0;
-							int zone_past = zone, zone_future = zone;
-							for (int k = 1; k <= 21; ++k) {
-								double dtp = k * 10000.0;
-								// future: +k×10000 years from J2016
-								double ra_f, dec_f, pmra_f, pmdec_f, plx_f;
-								iau_starpm(r.ra, r.dec, r.pmra, r.pmdec, r.plx, r.rv,
-								           2016.0, 2016.0 + dtp, ra_f, dec_f, pmra_f, pmdec_f, plx_f);
-								double xf = std::cos(ra_f * D2R) * std::cos(dec_f * D2R);
-								double yf = std::sin(ra_f * D2R) * std::cos(dec_f * D2R);
-								double zf = std::sin(dec_f * D2R);
-								int zz = zone_number(xf, yf, zf, lc.level);
-								counter_future += (zz != zone_future);
-								zone_future = zz;
-								if (good && r.plx > 0 && plx_f > 0) {
-									double diff = 5.0 * std::log10(r.plx / plx_f);
-									if (diff < min_diff) min_diff = diff;
-								}
-								// past: -k×10000 years from J2016
-								iau_starpm(r.ra, r.dec, r.pmra, r.pmdec, r.plx, r.rv,
-								           2016.0, 2016.0 - dtp, ra_f, dec_f, pmra_f, pmdec_f, plx_f);
-								double xp = std::cos(ra_f * D2R) * std::cos(dec_f * D2R);
-								double yp = std::sin(ra_f * D2R) * std::cos(dec_f * D2R);
-								double zp = std::sin(dec_f * D2R);
-								zz = zone_number(xp, yp, zp, lc.level);
-								counter_past += (zz != zone_past);
-								zone_past = zz;
-								if (good && r.plx > 0 && plx_f > 0) {
-									double diff = 5.0 * std::log10(r.plx / plx_f);
-									if (diff < min_diff) min_diff = diff;
-								}
-							}
-							bool go_global;
-							if (lc.level == 0)
-								go_global = (counter_past + counter_future > 0) && good;
-							else
-								go_global = (counter_past > 1 || counter_future > 1) ||
-								            (good && min_diff < -0.3);
-							if (go_global) { zone = (uint32_t)global_zone; n_global++; }
-						}
-						zones[i] = zone;
+		// Basic zone computation (direction only, fast)
+		for (size_t i = 0; i < sel.size(); ++i) {
+			const StarRow& r = *sel[i];
+			double x = std::cos(r.ra * D2R) * std::cos(r.dec * D2R);
+			double y = std::sin(r.ra * D2R) * std::cos(r.dec * D2R);
+			double z = std::sin(r.dec * D2R);
+			zones[i] = (uint32_t)zone_number(x, y, z, lc.level);
+		}
+
+		if (lc.level <= 2) {
+			if (!erfa_python.empty()) {
+				// ERFA zone analysis via Python (astropy, exact match to official pipeline)
+				std::string script = (fs::path(argv[0]).parent_path() / ".." / "erfa_zone.py").string();
+				std::string tmp_in = out_dir + "/erfa_lv" + std::to_string(lc.level) + "_in.bin";
+				std::string tmp_out = out_dir + "/erfa_lv" + std::to_string(lc.level) + "_out.bin";
+				{
+					FILE* ef = std::fopen(tmp_in.c_str(), "wb");
+					uint32_t n = (uint32_t)sel.size();
+					std::fwrite(&n, 4, 1, ef);
+					for (const auto* sr : sel) {
+						double d[6] = {sr->ra, sr->dec, sr->pmra, sr->pmdec, sr->plx, sr->rv};
+						std::fwrite(d, 8, 6, ef);
 					}
-				});
+					std::fclose(ef);
+				}
+				std::string cmd = erfa_python + " " + script + " " + tmp_in + " " + tmp_out + " " + std::to_string(lc.level);
+				int rc = std::system(cmd.c_str());
+				if (rc == 0) {
+					FILE* rf = std::fopen(tmp_out.c_str(), "rb");
+					if (rf) {
+						uint64_t n_global = 0;
+						for (size_t i = 0; i < sel.size(); ++i) {
+							uint8_t flag; std::fread(&flag, 1, 1, rf);
+							if (flag) { zones[i] = (uint32_t)global_zone; n_global++; }
+						}
+						std::fclose(rf);
+						std::cout << "  lv" << lc.level << " (ERFA): " << n_global << " global\n";
+					}
+				} else {
+					std::cerr << "WARNING: erfa_zone.py failed (rc=" << rc << "), zones not updated\n";
+				}
+				std::remove(tmp_in.c_str()); std::remove(tmp_out.c_str());
 			}
-			for (auto& th : pool) th.join();
-			if (lc.level <= 2)
-				std::cout << "  lv" << lc.level << ": " << n_global.load() << " stars to global zone\n";
 		}
 
 		// sort by (zone, vmag)
