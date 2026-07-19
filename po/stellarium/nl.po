@@ -1506,12 +1506,12 @@ msgstr "is een %1 op %2"
 #, qt-format
 msgctxt "object narration"
 msgid "Its diameter is %1 kilometers"
-msgstr "Het heeft een diameter van %1 kilometers."
+msgstr "Het heeft een diameter van %1 kilometers"
 
 #: src/core/modules/NomenclatureItem.cpp:366
 #, qt-format
 msgid "It extends over %1 kilometers"
-msgstr "Het strekt zich uit over %1 kilometers."
+msgstr "Het strekt zich uit over %1 kilometers"
 
 #: src/core/modules/NomenclatureItem.cpp:373
 msgctxt "object narration"
@@ -1851,7 +1851,7 @@ msgstr "scopulus"
 #: src/core/modules/NomenclatureItem.cpp:815
 msgctxt "landform"
 msgid "serpens"
-msgstr "Slang"
+msgstr "slang"
 
 #. TRANSLATORS: Subparallel furrows and ridges
 #: src/core/modules/NomenclatureItem.cpp:817
@@ -2432,7 +2432,7 @@ msgstr "Luchtmassa's"
 #: src/core/modules/Nebula.cpp:280 src/core/modules/Planet.cpp:647
 #: src/core/modules/StarWrapper.cpp:220
 msgid "Additional names: "
-msgstr "Bijkomende namen:"
+msgstr "Bijkomende namen: "
 
 #: src/core/modules/Nebula.cpp:286 src/core/modules/Planet.cpp:654
 #: src/core/modules/StarWrapper.cpp:226 src/core/modules/StarWrapper.cpp:411
@@ -3005,7 +3005,7 @@ msgstr "een sterrenhoop geassocieerd met neveligheid"
 #: src/core/modules/Nebula.cpp:1894
 msgctxt "Nebula narration"
 msgid "H two region"
-msgstr " H-II-gebied"
+msgstr "H-II-gebied"
 
 #: src/core/modules/Nebula.cpp:1895 src/translations.h:1001
 msgctxt "Nebula narration"
@@ -3363,7 +3363,7 @@ msgstr "Verlicht"
 #: src/core/modules/Planet.cpp:1023
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:355
 msgid "Elong. in Ecl.Long."
-msgstr "Elongatie in Ecl. lengte"
+msgstr "Elongatie in Ecl. lengte."
 
 #: src/core/modules/Planet.cpp:1038 src/gui/AstroCalcDialog.cpp:8984
 #: src/gui/AstroCalcChart.cpp:476
@@ -3796,7 +3796,7 @@ msgstr "in systeem drie"
 #: src/core/modules/Planet.cpp:1808
 #, qt-format
 msgid "The position Angle of the rotation axis is at %1"
-msgstr "De hoek van de rotatieas staat op %1."
+msgstr "De hoek van de rotatieas staat op %1"
 
 #: src/core/modules/Planet.cpp:1810
 #, qt-format
@@ -5442,7 +5442,7 @@ msgstr "Geldige gebruiksinterval: tussen jaar %1 en %2."
 
 #: src/core/StelProjector.cpp:179
 msgid "Maximum FOV: "
-msgstr "Maximaal zichtveld:"
+msgstr "Maximaal zichtveld: "
 
 #: src/core/StelProjectorClasses.cpp:29
 msgid "Perspective"
@@ -5612,7 +5612,7 @@ msgstr "De visuele magnitude van het object is"
 #, qt-format
 msgctxt "object narration"
 msgid "Its B minus V Color Index is %1"
-msgstr "De B minus V-kleurindex is %1."
+msgstr "De B minus V-kleurindex is %1"
 
 #: src/core/StelObject.cpp:408 src/core/StelObject.cpp:1140
 msgid "(apparent)"
@@ -5790,7 +5790,7 @@ msgstr "Az"
 #: src/core/StelObject.cpp:1001
 msgctxt "celestial coordinate system"
 msgid "Az."
-msgstr "Az"
+msgstr "Az."
 
 #: src/core/StelObject.cpp:1003
 msgctxt "celestial coordinate system"
@@ -5966,7 +5966,7 @@ msgstr "Duur van de Dag"
 #: src/core/StelObject.cpp:1524
 msgctxt "object narration"
 msgid "It is Polar night"
-msgstr "Het is Poolnacht."
+msgstr "Het is Poolnacht"
 
 #: src/core/StelObject.cpp:1531
 msgid "It is Polar day"
@@ -5974,7 +5974,7 @@ msgstr "Het is Pooldag"
 
 #: src/core/StelObject.cpp:1533
 msgid "This object is circumpolar and so never sets"
-msgstr "Dit object is circumpolair en gaat dus nooit onder."
+msgstr "Dit object is circumpolair en gaat dus nooit onder"
 
 #: src/core/StelObject.cpp:1567
 #, qt-format
@@ -6002,7 +6002,7 @@ msgstr "Zon A/h"
 #: src/core/StelObject.cpp:2037
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
-msgstr "Zon az./alt."
+msgstr "Zon Az./Alt."
 
 #. TRANSLATORS: Azimuth/Altitude
 #: src/core/StelObject.cpp:2055
@@ -6013,7 +6013,7 @@ msgstr "Maan A/h"
 #: src/core/StelObject.cpp:2055
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
-msgstr "Maan az./alt."
+msgstr "Maan Az./Alt."
 
 #: src/core/StelObject.cpp:2093
 #, qt-format
@@ -7735,7 +7735,7 @@ msgstr "Bereken"
 
 #: src/gui/HelpDialog.cpp:443
 msgid "Calculate lunar eclipses"
-msgstr "Bereken maansverduisteringen "
+msgstr "Bereken maansverduisteringen"
 
 #: src/gui/HelpDialog.cpp:445 src/ui_astroCalcDialog.h:2593
 msgid "Calculate transits"
@@ -7917,7 +7917,7 @@ msgid ""
 "following acknowledgment would be appreciated:"
 msgstr ""
 "Als het Stellarium planetarium nuttig is geweest voor uw onderzoek, zou de "
-"volgende erkenning op prijs worden gesteld: "
+"volgende erkenning op prijs worden gesteld:"
 
 #: src/gui/HelpDialog.cpp:596
 msgid "This research has made use of the Stellarium planetarium"
@@ -9757,7 +9757,7 @@ msgstr "1  inex"
 
 #: src/gui/AstroCalcDialog.cpp:5213
 msgid "custom interval"
-msgstr "Aangepaste interval"
+msgstr "aangepaste interval"
 
 #: src/gui/AstroCalcDialog.cpp:5213 src/ui_astroCalcCustomStepsDialog.h:212
 msgid "Sun at preset altitude"
@@ -10710,7 +10710,7 @@ msgstr "De duur van de sterrenkundige nacht"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:402
 msgid "The duration of morning and evening twilights"
-msgstr "De duur van de ochtend- en avondschemeringen."
+msgstr "De duur van de ochtend- en avondschemeringen"
 
 #. TRANSLATORS: duration in minutes
 #: src/gui/AstroCalcAlmanacWidget.cpp:408
@@ -10725,7 +10725,7 @@ msgstr "Vandaag"
 
 #: src/gui/ObsListDialog.cpp:84 src/gui/ObsListDialog.cpp:1139
 msgid "Cannot open observingLists.json to write"
-msgstr "Kan observingLists.json niet openen om te bewerken."
+msgstr "Kan observingLists.json niet openen om te bewerken"
 
 #: src/gui/ObsListDialog.cpp:185
 msgctxt "default name for observing list if none is available"
@@ -13530,7 +13530,7 @@ msgstr "Opslaan"
 
 #: src/translations.h:856
 msgid "Save As:"
-msgstr "Opslaan als"
+msgstr "Opslaan als:"
 
 #: src/translations.h:857
 msgid "Tags:"
@@ -13688,7 +13688,7 @@ msgstr "Zoeken"
 #: src/translations.h:1000
 msgctxt "Nebula narration"
 msgid "an H two region"
-msgstr " een H-II-gebied"
+msgstr "een H-II-gebied"
 
 #: src/translations.h:1015
 msgctxt "Nebula narration"
