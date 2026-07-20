@@ -1109,10 +1109,19 @@ ENDIF()
 
 include("cmake/Check-from_chars.cmake")
 IF(NOT FROM_CHARS_WORKS)
-     CPMFindPackage(NAME FastFloat
-          GIT_REPOSITORY https://github.com/fastfloat/fast_float
-          VERSION 6.1.0
-          EXCLUDE_FROM_ALL yes)
+#     CPMFindPackage(NAME FastFloat
+#          URL https://github.com/fastfloat/fast_float/archive/refs/tags/v6.1.0.tar.gz
+#          URL_HASH SHA256=5a629e1f18f037ad0016c41ead630ea471cccbcdf60239ed3466c491d8e7c908
+#          EXCLUDE_FROM_ALL yes)
+     FIND_PACKAGE(FastFloat QUIET)
+     IF(FastFloat_FOUND)
+          MESSAGE(STATUS "Using system-provided FastFloat ${FastFloat_VERSION}")
+     ELSE()
+          CPMAddPackage(NAME FastFloat
+               GIT_REPOSITORY https://github.com/fastfloat/fast_float
+               VERSION 6.1.0
+               EXCLUDE_FROM_ALL yes)
+     ENDIF()
      GET_TARGET_PROPERTY(FastFloat_INCLUDE_DIRECTORIES
           FastFloat::fast_float INTERFACE_INCLUDE_DIRECTORIES)
      INCLUDE_DIRECTORIES(${FastFloat_INCLUDE_DIRECTORIES})
