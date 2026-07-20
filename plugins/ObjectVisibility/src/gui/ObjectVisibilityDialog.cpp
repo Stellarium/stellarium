@@ -84,6 +84,10 @@ void ObjectVisibilityDialog::createDialogContent()
 	plugin = GETSTELMODULE(ObjectVisibility);
 	Q_ASSERT(plugin);
 	ui->setupUi(dialog);
+	placeLabelsVisible = plugin->getPlaceLabelsVisible();
+	placeLabelsMinimumPopulation = plugin->getPlaceLabelsMinimumPopulation();
+	placeLabelsNearLinesOnly = plugin->getPlaceLabelsNearLinesOnly();
+	syncMaps = plugin->getSyncMaps();
 
 	// Standard kinetic scrolling for the About browser.
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -416,11 +420,19 @@ void ObjectVisibilityDialog::onResetSettings()
 	const int g = plugin->getGoodVisibilityLimit();
 	ui->goodVisibilityLimitSpinBox->setValue(g);
 	ui->mapWidget->setGoodVisibilityAltitude(g);
+	placeLabelsVisible = plugin->getPlaceLabelsVisible();
+	placeLabelsMinimumPopulation = plugin->getPlaceLabelsMinimumPopulation();
+	placeLabelsNearLinesOnly = plugin->getPlaceLabelsNearLinesOnly();
+	syncMaps = plugin->getSyncMaps();
+	syncPlaceLabelControls();
+	syncMapControls();
+	updatePlaceLabels();
 }
 
 void ObjectVisibilityDialog::onPlaceLabelsToggled(bool on)
 {
 	placeLabelsVisible = on;
+	plugin->setPlaceLabelsVisible(on);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -428,6 +440,7 @@ void ObjectVisibilityDialog::onPlaceLabelsToggled(bool on)
 void ObjectVisibilityDialog::onTwilightPlaceLabelsToggled(bool on)
 {
 	placeLabelsVisible = on;
+	plugin->setPlaceLabelsVisible(on);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -435,6 +448,7 @@ void ObjectVisibilityDialog::onTwilightPlaceLabelsToggled(bool on)
 void ObjectVisibilityDialog::onLiveTwilightPlaceLabelsToggled(bool on)
 {
 	placeLabelsVisible = on;
+	plugin->setPlaceLabelsVisible(on);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -444,6 +458,7 @@ void ObjectVisibilityDialog::onPlaceLabelsPopulationChanged(int index)
 	const QVariant value = ui->placeLabelsPopulationComboBox->itemData(index);
 	if (!value.isValid()) return;
 	placeLabelsMinimumPopulation = value.toInt();
+	plugin->setPlaceLabelsMinimumPopulation(placeLabelsMinimumPopulation);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -453,6 +468,7 @@ void ObjectVisibilityDialog::onTwilightPlaceLabelsPopulationChanged(int index)
 	const QVariant value = ui->twilightPlaceLabelsPopulationComboBox->itemData(index);
 	if (!value.isValid()) return;
 	placeLabelsMinimumPopulation = value.toInt();
+	plugin->setPlaceLabelsMinimumPopulation(placeLabelsMinimumPopulation);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -462,6 +478,7 @@ void ObjectVisibilityDialog::onLiveTwilightPlaceLabelsPopulationChanged(int inde
 	const QVariant value = ui->twilightMapPlaceLabelsPopulationComboBox->itemData(index);
 	if (!value.isValid()) return;
 	placeLabelsMinimumPopulation = value.toInt();
+	plugin->setPlaceLabelsMinimumPopulation(placeLabelsMinimumPopulation);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -469,6 +486,7 @@ void ObjectVisibilityDialog::onLiveTwilightPlaceLabelsPopulationChanged(int inde
 void ObjectVisibilityDialog::onPlaceLabelsNearLinesOnlyToggled(bool on)
 {
 	placeLabelsNearLinesOnly = on;
+	plugin->setPlaceLabelsNearLinesOnly(on);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -476,6 +494,7 @@ void ObjectVisibilityDialog::onPlaceLabelsNearLinesOnlyToggled(bool on)
 void ObjectVisibilityDialog::onTwilightPlaceLabelsNearLinesOnlyToggled(bool on)
 {
 	placeLabelsNearLinesOnly = on;
+	plugin->setPlaceLabelsNearLinesOnly(on);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -483,6 +502,7 @@ void ObjectVisibilityDialog::onTwilightPlaceLabelsNearLinesOnlyToggled(bool on)
 void ObjectVisibilityDialog::onLiveTwilightPlaceLabelsNearLinesOnlyToggled(bool on)
 {
 	placeLabelsNearLinesOnly = on;
+	plugin->setPlaceLabelsNearLinesOnly(on);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -490,6 +510,7 @@ void ObjectVisibilityDialog::onLiveTwilightPlaceLabelsNearLinesOnlyToggled(bool 
 void ObjectVisibilityDialog::onSyncMapsToggled(bool on)
 {
 	syncMaps = on;
+	plugin->setSyncMaps(on);
 	syncMapControls();
 	if (!syncMaps) return;
 

@@ -100,15 +100,27 @@ public:
 	void loadSettings();
 
 	int getGoodVisibilityLimit() const { return goodVisibilityLimit; }
+	bool getPlaceLabelsVisible() const { return placeLabelsVisible; }
+	int getPlaceLabelsMinimumPopulation() const { return placeLabelsMinimumPopulation; }
+	bool getPlaceLabelsNearLinesOnly() const { return placeLabelsNearLinesOnly; }
+	bool getSyncMaps() const { return syncMaps; }
 
 signals:
 	void goodVisibilityLimitChanged(int degrees);
 
 public slots:
 	void setGoodVisibilityLimit(int degrees);
+	void setPlaceLabelsVisible(bool visible);
+	void setPlaceLabelsMinimumPopulation(int population);
+	void setPlaceLabelsNearLinesOnly(bool nearLinesOnly);
+	void setSyncMaps(bool enabled);
 
 private:
 	int goodVisibilityLimit;          //!< degrees, range [1, 89]
+	bool placeLabelsVisible;
+	int placeLabelsMinimumPopulation;
+	bool placeLabelsNearLinesOnly;
+	bool syncMaps;
 	QSettings* conf;
 
 #ifndef NO_GUI
