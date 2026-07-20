@@ -86,6 +86,39 @@ struct StarRow {
 	std::string sp, otype = "*";
 };
 
+// Slim row for Gaia-only stars (no HIP/component/epoch/sp/otype: always
+// 0/0/J2016/""/"*"). fillna defaults are applied at collection time.
+// 64 bytes vs ~160 for StarRow; ~40M of these dominate the memory footprint.
+struct GaiaRow {
+	int64_t source_id;
+	double  ra, dec, pmra, pmdec;     // doubles: mas/uas output precision needed
+	float   plx, plxe, rv, vmag, bv;
+};
+
+// Reference into either container, used by the per-level selection.
+struct RowRef { const StarRow* s; const GaiaRow* g; };
+static inline double ref_vmag(const RowRef& r) { return r.s ? r.s->vmag : r.g->vmag; }
+
+// Uniform field view materialized on stack where full access is needed.
+struct RowView {
+	int64_t source_id; int hip, comp;
+	double ra, dec, pmra, pmdec, plx, plxe, rv, vmag, bv;
+	const std::string* sp;            // nullptr = empty
+	const std::string* otype;
+};
+static const std::string GAIA_ONLY_OTYPE = "*";
+static RowView load_view(const RowRef& r)
+{
+	if (r.s) {
+		const StarRow& s = *r.s;
+		return {s.source_id, s.hip, s.comp, s.ra, s.dec, s.pmra, s.pmdec,
+		        s.plx, s.plxe, s.rv, s.vmag, s.bv, &s.sp, &s.otype};
+	}
+	const GaiaRow& g = *r.g;
+	return {g.source_id, 0, 0, g.ra, g.dec, g.pmra, g.pmdec,
+	        g.plx, g.plxe, g.rv, g.vmag, g.bv, nullptr, &GAIA_ONLY_OTYPE};
+}
+
 // ------------------------------------------------------------------ CSV parsing (pandas-style, quote aware)
 static std::vector<std::string> csv_split(const std::string& line)
 {
@@ -255,6 +288,18 @@ static void apply_pre_fusion_patches(std::vector<StarRow>& rows)
 	// add HIP 36850 B
 	if (!has_sid(892348694913501952))
 		rows.push_back({892348694913501952, 36850, 2, 0, 0, 0, 0, 66.356, 0.041, 0, NAN, NAN, 20000, "", "*"});
+	// HD 183559B (formerly "HIP 95759B" in the official-era SIMBAD snapshot):
+	// SIMBAD dropped the HIP alias for this component, and its Gaia DR3 source
+	// has no G-band photometry (close-double blend), so neither the SIMBAD path
+	// (renamed away) nor the Gaia-only path (requires G) can reach it. Re-add
+	// manually: astrometry from Gaia DR3, photometry from the official record.
+	if (!has_sid(2051732716553182336))
+		rows.push_back({2051732716553182336, 95759, 2,
+		                292.15690538984126, 37.18856842370232,
+		                4.491698373297273, -21.449247959590082,
+		                4.0750884647101415, 0.08124616742134094,
+		                NAN, 9.620, 0.340, 20160, "", "*"});
+
 	// HIP 84345: existing single becomes B component; add A component manually
 	for (auto& r : rows)
 		if (r.hip == 84345 && (r.comp == 0 || r.comp == 1)) r.comp = 2;
@@ -387,8 +432,38 @@ int main(int argc, char** argv)
 	}
 	fs::create_directories(out_dir);
 
+	// ---- level table
+	struct LvCfg { int level; double lo, hi; uint32_t type; uint32_t minor; };
+	const LvCfg lvcs[7] = {
+		{0, -2.0, 6.0,  0, 21},
+		{1,  6.0, 7.5,  0, 16},
+		{2,  7.5, 9.0,  0, 17},
+		{3,  9.0, 10.5, 0, 10},
+		{4, 10.5, 12.0, 1, 6},
+		{5, 12.0, 13.75,1, 6},
+		{6, 13.75,15.5, 1, 4},
+	};
+	// Gaia-only stars are only collected up to the brightest hi of the requested
+	// levels (default lv0-3: 10.5, not the ADQL 15.5) — this is what keeps the
+	// memory footprint small (~0.4M rows for lv0-3 instead of ~40M).
+	double collect_hi = 0;
+	for (const auto& lc : lvcs)
+		if (lc.level >= level_lo && lc.level <= level_hi)
+			collect_hi = std::max(collect_hi, lc.hi);
+	collect_hi += 1e-4;   // guard against double->float vmag rounding at the boundary
+	if (level_lo <= 2 && erfa_python.empty())
+		std::cerr << "WARNING: --erfa-python not given: lv0-2 will use direction-only zones"
+		          " and will NOT match the official catalogs' global zone.\n";
+
 	// ---- object type table (line index = objtype, line 0 = "")
+	// Entries in the official table are whitespace-padded (e.g. "*  ", "PN "):
+	// trim for lookup or every padded type would be re-appended at the end.
+	auto trim = [](std::string& s) {
+		size_t e = s.find_last_not_of(" \t");
+		if (e != std::string::npos) s.resize(e + 1);
+	};
 	std::vector<std::string> otype_ls = read_text_lines(otype_path);
+	for (auto& s : otype_ls) trim(s);
 	std::unordered_map<std::string, int> otype_idx;
 	for (size_t i = 0; i < otype_ls.size(); ++i) otype_idx[otype_ls[i]] = (int)i;
 	std::cout << "otype table: " << otype_ls.size() << " entries\n";
@@ -398,6 +473,7 @@ int main(int argc, char** argv)
 	bool sp_reuse = false;
 	if (!sp_path.empty() && fs::exists(sp_path)) {
 		sp_ls = read_text_lines(sp_path);
+		for (auto& s : sp_ls) trim(s);
 		sp_reuse = true;
 		std::cout << "sp table (reused): " << sp_ls.size() << " entries\n";
 	} else {
@@ -460,7 +536,8 @@ int main(int argc, char** argv)
 
 	struct GaiaHit { double ra, dec, plx, plxe, pmra, pmdec, g, bprp, rv; };
 	std::vector<std::unordered_map<int64_t, GaiaHit>> hits(n_workers);
-	std::vector<std::vector<StarRow>> gaia_only(n_workers);
+	std::vector<std::vector<GaiaRow>> gaia_only(n_workers);
+	std::cout << "Gaia-only collection cut: V <= " << collect_hi << "\n";
 
 	{
 		std::atomic<size_t> next{0};
@@ -479,27 +556,38 @@ int main(int argc, char** argv)
 						if (rec.sid == 0 || std::isnan(rec.g)) continue;
 						double bprp = std::isnan(rec.bprp) ? NAN : (double)rec.bprp;
 						double v = g_to_v(rec.g, bprp);
+						// ADQL selection applies to every row: (bp_rp NOT NULL AND v<=15.5)
+						// OR (bp_rp NULL AND G<=15.5). Stars beyond 15.5 have no Gaia row in
+						// henrysky's table, so they must not be fused either (a SIMBAD xmatch
+						// may point at a faint/wrong neighbour, e.g. 8 Peg).
+						bool sel = std::isnan(bprp) ? (rec.g <= 15.5) : (v <= 15.5);
 						if (simbad_ids.count(rec.sid)) {
+							if (!sel) continue;
 							GaiaHit h{rec.ra, rec.dec, rec.plx, (double)rec.plxe,
 							          rec.pmra, rec.pmdec, (double)rec.g, bprp, (double)rec.rv};
 							hits[t][rec.sid] = h;
 							continue;
 						}
-						// ADQL selection: (bp_rp NOT NULL AND v<=15.5) OR (bp_rp NULL AND G<=15.5)
-						bool sel = std::isnan(bprp) ? (rec.g <= 15.5) : (v <= 15.5);
 						if (!sel) continue;
-						StarRow r;
-						r.source_id = rec.sid;
-						r.ra = rec.ra; r.dec = rec.dec;
-						r.plx = std::isnan(rec.plx) ? NAN : rec.plx;
-						r.plxe = std::isnan(rec.plxe) ? NAN : (double)rec.plxe;
-						r.pmra = rec.pmra; r.pmdec = rec.pmdec;
-						r.rv = std::isnan(rec.rv) ? NAN : (double)rec.rv;
+						// Only collect up to the brightest requested level's hi
+						// (v == final vmag for Gaia-only rows). Exception: Ross 248
+						// (V=12.4) is forced into lv0-2 by henrysky with a fake HIP,
+						// so it must survive even the lv0-3 collection cut.
+						if (v > collect_hi && rec.sid != 1926461164913660160) continue;
+						GaiaRow gr;
+						gr.source_id = rec.sid;
+						gr.ra = rec.ra; gr.dec = rec.dec;
+						gr.pmra = std::isnan(rec.pmra) ? 0.0 : rec.pmra;
+						gr.pmdec = std::isnan(rec.pmdec) ? 0.0 : rec.pmdec;
+						double plx = std::isnan(rec.plx) ? 0.0 : rec.plx;
+						double plxe = std::isnan(rec.plxe) ? 0.0 : (double)rec.plxe;
+						if (plx < 0) { plx = 0; plxe = 0; }
+						gr.plx = (float)plx; gr.plxe = (float)plxe;
+						gr.rv = std::isnan(rec.rv) ? 0.0f : rec.rv;
 						double vv, bv;
 						gbprp_to_bv(rec.g, bprp, vv, bv);
-						r.vmag = vv; r.bv = bv;
-						r.epoch_x10 = 20160;
-						gaia_only[t].push_back(r);
+						gr.vmag = (float)vv; gr.bv = (float)bv;
+						gaia_only[t].push_back(gr);
 					}
 					std::fclose(f);
 					done++;
@@ -595,11 +683,88 @@ int main(int argc, char** argv)
 		for (auto& th : pool) th.join();
 	}
 
-	// ---- merge Gaia-only stars
+	// ---- Gaia-only stars stay in their own slim container (no merge into rows):
+	// per-level selection iterates both containers via RowRef.
 	apply_final_patches(rows);
-	for (auto& g : gaia_only) rows.insert(rows.end(), g.begin(), g.end());
-	gaia_only.clear();
-	gaia_only.shrink_to_fit();   // give memory back before per-level allocations
+
+	// Ross 248 has no HIP number, so it normally arrives via the Gaia-only
+	// container rather than the SIMBAD rows. Move it into rows so the
+	// apply_final_patches renaming (fake HIP 9999999) and the lv2 all-HIP
+	// inclusion rule apply to it.
+	{
+		bool in_rows = false;
+		for (const auto& r : rows) if (r.source_id == 1926461164913660160) { in_rows = true; break; }
+		if (!in_rows) {
+			for (auto& w : gaia_only) {
+				auto it = std::find_if(w.begin(), w.end(), [](const GaiaRow& g) {
+					return g.source_id == 1926461164913660160;
+				});
+				if (it == w.end()) continue;
+				StarRow r;
+				r.source_id = it->source_id;
+				r.ra = it->ra; r.dec = it->dec;
+				r.pmra = it->pmra; r.pmdec = it->pmdec;
+				r.plx = it->plx; r.plxe = it->plxe;
+				r.rv = it->rv; r.vmag = it->vmag; r.bv = it->bv;
+				r.epoch_x10 = 20160;
+				r.hip = 9999999; r.otype = "BY*"; r.sp = "M5.0V";
+				rows.push_back(r);
+				w.erase(it);
+				n_gaia_only--;
+				std::cout << "Ross 248: moved from Gaia-only to rows (fake HIP)\n";
+				break;
+			}
+		}
+	}
+
+	// Gaia star 3683687763520080256: no 5-parameter astrometry in DR3 (2-param
+	// solution), and it is not a SIMBAD row either, so it arrives via gaia_only.
+	// henrysky patches it on the combined table; replicate by moving it into
+	// rows with the same patched values (also carries its spectral type).
+	{
+		bool in_rows = false;
+		for (const auto& r : rows) if (r.source_id == 3683687763520080256) { in_rows = true; break; }
+		if (!in_rows) {
+			for (auto& w : gaia_only) {
+				auto it = std::find_if(w.begin(), w.end(), [](const GaiaRow& g) {
+					return g.source_id == 3683687763520080256;
+				});
+				if (it == w.end()) continue;
+				StarRow r;
+				r.source_id = it->source_id;
+				r.ra = it->ra; r.dec = it->dec;
+				r.plx = 78.5233; r.plxe = 1.3879;
+				r.pmra = -534.318; r.pmdec = -64.270;
+				r.rv = -19.8;
+				r.vmag = it->vmag; r.bv = 3.85 - 3.49;
+				r.sp = "F0mF2V";
+				r.epoch_x10 = 20160;
+				rows.push_back(r);
+				w.erase(it);
+				n_gaia_only--;
+				std::cout << "Gaia 3683687763520080256: moved from Gaia-only to rows (astrometry patch)\n";
+				break;
+			}
+		}
+	}
+
+	// ---- drop Gaia-only duplicates of SIMBAD rows that received their source_id
+	// only after the scan (post-fusion patches, e.g. HIP 81693A): the scan had
+	// already collected the genuine Gaia star, so it would appear twice.
+	{
+		std::unordered_set<int64_t> final_sids;
+		for (const auto& r : rows) if (r.source_id > 0) final_sids.insert(r.source_id);
+		size_t dropped = 0;
+		for (auto& w : gaia_only) {
+			auto it = std::remove_if(w.begin(), w.end(), [&](const GaiaRow& g) {
+				return final_sids.count(g.source_id) != 0;
+			});
+			dropped += (size_t)(w.end() - it);
+			w.erase(it, w.end());
+		}
+		n_gaia_only -= dropped;
+		if (dropped) std::cout << "dropped " << dropped << " Gaia-only duplicates of patched SIMBAD rows\n";
+	}
 
 	// fillna defaults
 	for (auto& r : rows) {
@@ -611,24 +776,14 @@ int main(int argc, char** argv)
 		if (std::isnan(r.rv)) r.rv = 0;
 		if (r.plx < 0) { r.plx = 0; r.plxe = 0; }
 	}
-	std::cout << "combined rows: " << rows.size() << "\n";
-
-	// ---- levels
-	struct LvCfg { int level; double lo, hi; uint32_t type; uint32_t minor; };
-	const LvCfg lvcs[7] = {
-		{0, -2.0, 6.0,  0, 21},
-		{1,  6.0, 7.5,  0, 16},
-		{2,  7.5, 9.0,  0, 17},
-		{3,  9.0, 10.5, 0, 10},
-		{4, 10.5, 12.0, 1, 6},
-		{5, 12.0, 13.75,1, 6},
-		{6, 13.75,15.5, 1, 4},
-	};
+	std::cout << "SIMBAD rows: " << rows.size() << ", Gaia-only rows: " << n_gaia_only << "\n";
 
 	for (const auto& lc : lvcs) {
 		if (lc.level < level_lo || lc.level > level_hi) continue;
 		// selection (henrysky inequalities: vmag > lo && vmag <= hi)
-		std::vector<const StarRow*> sel;
+		// Gaia-only rows have hip == 0, so their condition reduces to the plain
+		// magnitude range for every level (the lv2 hip>0 clause never matches).
+		std::vector<RowRef> sel;
 		for (const auto& r : rows) {
 			bool in;
 			if (lc.level == 2)
@@ -637,8 +792,11 @@ int main(int argc, char** argv)
 				in = (r.vmag > lc.lo && r.vmag <= lc.hi);
 			else
 				in = (r.vmag > lc.lo && r.vmag <= lc.hi && r.hip == 0);
-			if (in) sel.push_back(&r);
+			if (in) sel.push_back({&r, nullptr});
 		}
+		for (const auto& w : gaia_only)
+			for (const auto& g : w)
+				if (g.vmag > lc.lo && g.vmag <= lc.hi) sel.push_back({nullptr, &g});
 
 		// zone assignment (+ past/future global-zone analysis for lv0-2)
 		std::vector<uint32_t> zones(sel.size(), 0);
@@ -646,10 +804,11 @@ int main(int argc, char** argv)
 
 		// Basic zone computation (direction only, fast)
 		for (size_t i = 0; i < sel.size(); ++i) {
-			const StarRow& r = *sel[i];
-			double x = std::cos(r.ra * D2R) * std::cos(r.dec * D2R);
-			double y = std::sin(r.ra * D2R) * std::cos(r.dec * D2R);
-			double z = std::sin(r.dec * D2R);
+			double ra = sel[i].s ? sel[i].s->ra : sel[i].g->ra;
+			double dec = sel[i].s ? sel[i].s->dec : sel[i].g->dec;
+			double x = std::cos(ra * D2R) * std::cos(dec * D2R);
+			double y = std::sin(ra * D2R) * std::cos(dec * D2R);
+			double z = std::sin(dec * D2R);
 			zones[i] = (uint32_t)zone_number(x, y, z, lc.level);
 		}
 
@@ -663,8 +822,9 @@ int main(int argc, char** argv)
 					FILE* ef = std::fopen(tmp_in.c_str(), "wb");
 					uint32_t n = (uint32_t)sel.size();
 					std::fwrite(&n, 4, 1, ef);
-					for (const auto* sr : sel) {
-						double d[7] = {sr->ra, sr->dec, sr->pmra, sr->pmdec, sr->plx, sr->rv, sr->plxe};
+					for (const auto& rf : sel) {
+						RowView v = load_view(rf);
+						double d[7] = {v.ra, v.dec, v.pmra, v.pmdec, v.plx, v.rv, v.plxe};
 						std::fwrite(d, 8, 7, ef);
 					}
 					std::fclose(ef);
@@ -686,6 +846,10 @@ int main(int argc, char** argv)
 					std::cerr << "WARNING: erfa_zone.py failed (rc=" << rc << "), zones not updated\n";
 				}
 				std::remove(tmp_in.c_str()); std::remove(tmp_out.c_str());
+			} else {
+				std::cerr << "WARNING: lv" << lc.level << " written WITHOUT --erfa-python:"
+				          " no past/future global-zone analysis, zones will NOT match the"
+				          " official catalog (direction-only).\n";
 			}
 		}
 
@@ -694,7 +858,7 @@ int main(int argc, char** argv)
 		for (size_t i = 0; i < sel.size(); ++i) order[i] = i;
 		std::sort(order.begin(), order.end(), [&](size_t a, size_t b) {
 			if (zones[a] != zones[b]) return zones[a] < zones[b];
-			return sel[a]->vmag < sel[b]->vmag;
+			return ref_vmag(sel[a]) < ref_vmag(sel[b]);
 		});
 
 		// zone counts
@@ -716,7 +880,7 @@ int main(int argc, char** argv)
 		std::fwrite(counts.data(), 4, n_zones, f);
 
 		for (size_t oi : order) {
-			const StarRow& r = *sel[oi];
+			RowView r = load_view(sel[oi]);
 			if (lc.type == 0) {
 				CatRecord1 cr{};
 				cr.gaia_id = r.source_id;
@@ -737,27 +901,29 @@ int main(int argc, char** argv)
 				cr.rv = (int16_t)std::max(-32768, std::min((int)std::lround(r.rv * 10.0), 32767));
 				// spectral type index
 				int sp_i = 0;
-				if (!r.sp.empty()) {
-					auto it = sp_idx.find(r.sp);
+				if (r.sp && !r.sp->empty()) {
+					const std::string& sp = *r.sp;
+					auto it = sp_idx.find(sp);
 					if (it != sp_idx.end()) {
 						sp_i = it->second;
 					} else if (!sp_reuse) {
 						sp_i = (int)sp_ls.size();
-						sp_idx[r.sp] = sp_i;
-						sp_ls.push_back(r.sp);
+						sp_idx[sp] = sp_i;
+						sp_ls.push_back(sp);
 					} else {
 						sp_i = 0;
 					}
 				}
 				cr.spInt = (uint16_t)sp_i;
 				int ot_i = 0;
-				auto oit = otype_idx.find(r.otype);
+				const std::string& ot = *r.otype;
+				auto oit = otype_idx.find(ot);
 				if (oit != otype_idx.end()) ot_i = oit->second;
 				else {
 					ot_i = (int)otype_ls.size();
-					otype_idx[r.otype] = ot_i;
-					otype_ls.push_back(r.otype);
-					std::cout << "  NOTE: appended otype '" << r.otype << "' at index " << ot_i << "\n";
+					otype_idx[ot] = ot_i;
+					otype_ls.push_back(ot);
+					std::cout << "  NOTE: appended otype '" << ot << "' at index " << ot_i << "\n";
 				}
 				cr.objtype = (uint8_t)ot_i;
 				int hip_pack = (r.hip == 9999999) ? 0 : r.hip;

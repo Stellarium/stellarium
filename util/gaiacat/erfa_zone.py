@@ -3,10 +3,10 @@
 ERFA zone helper for hip2cat: performs the +/-210 kyr past/future global-zone
 analysis using astropy, exactly matching the official Stellarium pipeline.
 
-Input:  binary file (arg1) — uint32 n_stars, then n_stars x 7 doubles:
+Input:  binary file (arg1) 鈥?uint32 n_stars, then n_stars x 7 doubles:
          ra(deg), dec(deg), pmra(mas/yr), pmdec(mas/yr), plx(mas), rv(km/s), plxe(mas)
 
-Output: binary file (arg2) — n_stars x uint8  global_zone_flag (0/1).
+Output: binary file (arg2) 鈥?n_stars x uint8  global_zone_flag (0/1).
 """
 
 import sys, struct, os
@@ -39,10 +39,16 @@ for i in range(n):
         se = plxe[i] if plxe[i] > 1e-12 else 1e-12
         good[i] = (plx[i] / se) > 5.0
 
+# distance fallback for zero/NaN parallax: np.inf, matching henrysky's
+# 1/parallax division. A finite cap (e.g. 1e12 pc) makes ERFA override the
+# distance and kills the global-zone crossing detection for plx=0 stars.
+with np.errstate(divide="ignore"):
+    dist_fallback = np.inf
+
 # ---- initial zone ----
 g = GeodesicGrid(level=_level)
 c_now = SkyCoord(ra=ra * u.deg, dec=dec * u.deg,
-                 distance=(np.where(plx > 1e-12, 1000.0 / plx, 1e12)) * u.pc,
+                 distance=(np.where(plx > 1e-12, 1000.0 / plx, dist_fallback)) * u.pc,
                  pm_ra_cosdec=pmra * u.mas / u.yr,
                  pm_dec=pmdec * u.mas / u.yr,
                  radial_velocity=np.nan_to_num(rv, nan=0) * u.km / u.s,
@@ -58,7 +64,7 @@ max_vmag_diff  = np.zeros(n)  # init 0: any negative = brighter
 for iyr in range(10000, 210000, 10000):
     # past  (backward: iyr -> 0)
     cp = SkyCoord(ra=ra * u.deg, dec=dec * u.deg,
-                  distance=(np.where(plx > 1e-12, 1000.0 / plx, 1e12)) * u.pc,
+                  distance=(np.where(plx > 1e-12, 1000.0 / plx, dist_fallback)) * u.pc,
                   pm_ra_cosdec=pmra * u.mas / u.yr,
                   pm_dec=pmdec * u.mas / u.yr,
                   radial_velocity=np.nan_to_num(rv, nan=0) * u.km / u.s,
@@ -74,7 +80,7 @@ for iyr in range(10000, 210000, 10000):
 
     # future (forward: 0 -> iyr)
     cf = SkyCoord(ra=ra * u.deg, dec=dec * u.deg,
-                  distance=(np.where(plx > 1e-12, 1000.0 / plx, 1e12)) * u.pc,
+                  distance=(np.where(plx > 1e-12, 1000.0 / plx, dist_fallback)) * u.pc,
                   pm_ra_cosdec=pmra * u.mas / u.yr,
                   pm_dec=pmdec * u.mas / u.yr,
                   radial_velocity=np.nan_to_num(rv, nan=0) * u.km / u.s,

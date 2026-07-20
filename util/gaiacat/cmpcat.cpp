@@ -81,8 +81,8 @@ static PhysStar decode_star1(const uint8_t* buf)
 	s.has_rv = true;
 	s.rv_kms = rv / 10.0;
 
-	// match key: HIP<<5|component for stars without a Gaia id
-	uint32_t comb = buf[44] | (buf[45] << 8) | (buf[46] << 16);
+	// match key: HIP<<5|component for stars without a Gaia id (hip[3] at bytes 45-47)
+	uint32_t comb = buf[45] | (buf[46] << 8) | (buf[47] << 16);
 	s.match_key = s.gaia_id > 0 ? s.gaia_id : ((int64_t)1 << 62) | comb;
 	return s;
 }
@@ -324,7 +324,7 @@ static void recordOnlyB(const PhysStar& s, int zone, CompareResult& result,
 		int n = std::snprintf(
 			line, sizeof(line),
 			"%llu z=%d RA=%.6f DEC=%+.6f V=%.3f BV=%.3f [only in B]\n",
-			(unsigned long long)s.gaia_id, zone, s.ra_deg, s.dec_deg, s.vmag, s.bv);
+ 			(unsigned long long)s.match_key, zone, s.ra_deg, s.dec_deg, s.vmag, s.bv);
 		if (n > 0) out_file.write(line, n);
 	}
 }
