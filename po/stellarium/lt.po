@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-07-17 13:58+0700\n"
+"POT-Creation-Date: 2026-07-19 20:02+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Gediminas Tauras, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
@@ -631,6 +631,7 @@ msgid "Equator of J2000.0"
 msgstr "J2000.0 pusiaujas"
 
 #: src/core/modules/GridLinesMgr.cpp:719
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:596
 msgid "Equator"
 msgstr "Pusiaujas"
 
@@ -1296,7 +1297,7 @@ msgstr "Cikliškas šviesos taršos kitimas"
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1752
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:304
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:485
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:760
 msgid "Author"
 msgstr "Autorius"
 
@@ -6322,7 +6323,7 @@ msgstr ""
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:303
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:270
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:483
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:758
 msgid "License"
 msgstr "Licencija"
 
@@ -7168,7 +7169,7 @@ msgstr "Susisiekite"
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:302
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:269
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:481
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:756
 msgid "Version"
 msgstr "Versija"
 
@@ -15089,7 +15090,7 @@ msgstr "Pagalba"
 #: src/ui_helpDialogGui.h:242
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:200
 #: plugins/Planes/src/ui_planesDialog.h:276
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:279
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:613
 msgid "About"
 msgstr "Apie"
 
@@ -17126,6 +17127,7 @@ msgstr "Rodyti atmosferos ekstinkciją"
 
 #: src/ui_viewDialog.h:5548 src/ui_tonemappingDialog.h:153
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:530
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:582
 msgid "Reset"
 msgstr "Atstatyti"
 
@@ -18661,7 +18663,7 @@ msgid "Export data..."
 msgstr "Eksportuoti duomenis..."
 
 #: src/ui_astroCalcDialog.h:2439
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:267
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:576
 msgid "Calculate"
 msgstr "Apskaičiuoti"
 
@@ -41500,7 +41502,7 @@ msgid "Earth"
 msgstr "Žemė"
 
 #: plugins/ObjectVisibility/src/ObjectVisibility.cpp:57
-#: plugins/ObjectVisibility/src/ObjectVisibility.cpp:132
+#: plugins/ObjectVisibility/src/ObjectVisibility.cpp:134
 msgid "Object Visibility"
 msgstr "Objekto matomumas"
 
@@ -41508,98 +41510,166 @@ msgstr "Objekto matomumas"
 msgid ""
 "Shows on a planet map where a selected star or deep-sky object is visible.  "
 "Supports observation from Earth, the Moon, the eight planets, Pluto, and the"
-" four Galilean moons.  Based on the geometric criteria of the Astro-Geo-GIS "
-"article \"The 49 brightest stars in the night sky – when and where can we "
-"see them?\""
+" four Galilean moons.  Also shows Earth-only solstice twilight latitude "
+"limits computed from obliquity of date.  Based on the geometric criteria of "
+"the Astro-Geo-GIS article \"The 49 brightest stars in the night sky – when "
+"and where can we see them?\""
 msgstr ""
 "Planetų žemėlapyje rodo, kur matoma pasirinkta žvaigždė ar giliojo kosmoso "
 "objektas. Palaiko stebėjimus iš Žemės, Mėnulio, aštuonių planetų, Plutono ir"
-" keturių Galilėjo palydovų. Remiantis „Astro-Geo-GIS“ straipsnio „49 "
-"ryškiausios naktinio dangaus žvaigždės – kada ir kur jas galima pamatyti?“ "
-"geometriniais kriterijais."
+" keturių Galilėjaus palydovų. Taip pat rodo tik Žemėje galiojančias "
+"saulėgrįžos prieblandos platumos ribas, apskaičiuotas remiantis nuokrypiu "
+"esamai datai. Naudojamasi „Astro-Geo-GIS“ straipsnio „49 ryškiausios "
+"naktinio dangaus žvaigždės – kada ir kur jas galima pamatyti?“ geometriniais"
+" kriterijais."
 
-#: plugins/ObjectVisibility/src/ObjectVisibility.cpp:139
+#: plugins/ObjectVisibility/src/ObjectVisibility.cpp:141
 msgid "Object Visibility plug-in dialog"
 msgstr "Įskiepio „Objekto matomumas“ dialogo langas"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:258
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:567
 msgid "Object Visibility Configuration"
 msgstr "Objekto matomumo konfigūracija"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:259
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:568
 msgid "Object Visibility plug-in"
 msgstr "Objektų matomumo įskiepis"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:260
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:400
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:569
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:675
 msgid "Select a star or DSO, then click Calculate."
 msgstr "Pasirinkite žvaigždę arba GKO, tada spustelėkite Apskaičiuoti."
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:261
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:570
 msgid "Key of stars visibility"
 msgstr "Žvaigždžių matomumo raktas"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:262
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:495
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:571
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:770
 msgid "Limit of visibility"
 msgstr "Matomumo riba"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:263
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:572
 msgid "Good visibility (default 5° above the horizon)"
 msgstr "Geras matomumas (numatytasis 5° virš horizonto)"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:264
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:506
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:573
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:781
 msgid "Passes zenith"
 msgstr "Praeina zenitą"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:265
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:574
 msgid "Circumpolar limit (northern hemisphere)"
 msgstr "Cirkumpoliarinė riba (Šiaurės pusrutulis)"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:266
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:575
 msgid "Circumpolar limit (southern hemisphere)"
 msgstr "Cirkumpoliarinė riba (Pietų pusrutulis)"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:269
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:198
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:578
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:229
 msgid "Compute visibility for the selected object."
 msgstr "Apskaičiuoti pasirinkto objekto matomumą."
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:271
-msgid "Good visibility above the horizon:"
-msgstr "Geras matomumas virš horizonto:"
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:580
+msgid "Good visibility:"
+msgstr "Geras matomumas:"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:272
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:581
 msgid "°"
 msgstr "°"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:273
-msgid "Set location by clicking on the map"
-msgstr "Nustatykite vietą spustelėdami žemėlapį"
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:583
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:605
+msgid "Set location by map click"
+msgstr "Nustatyti vietovę spustelėjus žemėlapyje"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:275
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:585
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:497
 msgid ""
-"Enable to move the observer by clicking on the map.  Stays active until you "
-"uncheck it — you can pick as many locations as you like."
+"Enable to move the observer by clicking on the map. Stays active until you "
+"uncheck it."
 msgstr ""
-"Pažymėkite, kad galėtumėte perkelti stebėtoją spustelėdami žemėlapį. Išlieka"
-" aktyvu, kol panaikinsite žymėjimą – galite pasirinkti tiek vietų, kiek "
-"norite."
+"Įjungti galimybę perkelti stebėtoją spustelėjus žemėlapį. Ši funkcija lieka "
+"aktyvi, kol jos neišjungsite."
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:277
-msgid "Reset settings"
-msgstr "Iš naujo nustatyti nustatymus"
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:587
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:609
+msgid "Places"
+msgstr "Vietovės"
 
-#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:278
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:588
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:610
+msgid "Min. population:"
+msgstr "Min. populiacija:"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:589
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:611
+msgid "Near lines"
+msgstr "Artimiausios eilutės"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:590
 msgid "Visibility"
 msgstr "Matomumas"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:191
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:591
+msgid "Solstice twilight limits on Earth"
+msgstr "Saulėgrįžos sutemų ribos Žemėje"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:592
+msgid "Solstice twilight limits"
+msgstr "Saulėgrįžos sutemų ribos"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:593
+msgid "Reference lines"
+msgstr "Atskaitos linijos"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:594
+msgid "Lowest Sun"
+msgstr "Saulė žemiausiai "
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:595
+msgid "Highest Sun"
+msgstr "Saulė aukščiausiai "
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:597
+msgid "Tropics"
+msgstr "Tropikai"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:598
+msgid "Polar circles"
+msgstr "Poliariniai ratai"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:599
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:600
+msgid "-6° civil"
+msgstr "-6° civilinės"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:601
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:602
+msgid "-12° nautical"
+msgstr "-12° jūrinės"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:603
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:604
+msgid "-18° astronomical"
+msgstr "-18° astronominės"
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:607
+msgid ""
+"Enable to move the observer by clicking on the map. Available on Earth only."
+msgstr ""
+"Leidžia perkelti stebėtoją spustelėjus žemėlapį. Galima naudoti tik Žemėje."
+
+#: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:612
+msgid "Twilight limits"
+msgstr "Prieblandos ribos"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:222
 msgid "Only stars and DSOs may be used in this plugin!"
 msgstr "Šiame įskiepyje galima naudoti tik žvaigždes ir GKO !"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:193
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:224
 #, qt-format
 msgid ""
 "This plug-in supports observation from Earth, the Moon, the eight planets, "
@@ -41610,60 +41680,101 @@ msgstr ""
 "ir keturių Galilėjaus palydovų. Dabartinis stebėjimo objektas (%1) "
 "nepalaikomas."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:410
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:468
+msgid ""
+"Setting the observer location from the twilight map is available on Earth "
+"only."
+msgstr ""
+"Stebėtojo vietos nustatymas pagal prieblandų žemėlapį galimas tik Žemėje."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:475
+#, qt-format
+msgid ""
+"Solstice twilight limits are available for Earth only. Current observing "
+"body: %1"
+msgstr ""
+"Saulėgrįžos prieblandos ribos gali būti taikomos tik Žemėje. Dabartinis "
+"stebimas dangaus kūnas: %1"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:490
+msgid "Solstice twilight limits on Earth are unavailable."
+msgstr "Žemėje nėra duomenų apie saulėgrįžos prieblandos ribas."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:505
+#, qt-format
+msgid "Solstice twilight limits on Earth in %1 (obliquity %2°)"
+msgstr "Saulėgrįžos prieblandos ribos Žemėje, išreikštos %1 (pasvirimas %2°)"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:519
+msgid "100,000"
+msgstr "100,000"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:520
+msgid "500,000"
+msgstr "500,000"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:521
+msgid "1,000,000"
+msgstr "1,000,000"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:522
+msgid "5,000,000"
+msgstr "5,000,000"
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:685
 #, qt-format
 msgid "%1 is selected. Click Calculate."
 msgstr "Pasirinkta %1. Spustelėkite „Apskaičiuoti“."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:424
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:699
 msgid "a planet, moon or the Sun"
 msgstr "planeta, Mėnulis arba Saulė"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:426
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:701
 msgid "a comet"
 msgstr "kometa"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:428
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:703
 msgid "a minor planet"
 msgstr "mažoji planeta"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:430
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:705
 msgid "an artificial satellite"
 msgstr "dirbtinis palydovas"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:432
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:707
 msgid "a surface feature"
 msgstr "paviršiaus elementas"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:434
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:709
 msgid "a meteor"
 msgstr "meteoras"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:436
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:711
 msgid "not a star or deep-sky object"
 msgstr "ne žvaigždė ir ne giliojo kosmoso objektas"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:442
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:717
 #, qt-format
 msgid "%1 is %2. This plug-in only supports stars and deep-sky objects."
 msgstr ""
 "%1 yra %2. Šis įskiepis palaiko tik žvaigždes ir tolimojo kosmoso objektus."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:462
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:737
 #, qt-format
 msgid "Visibility of %1 in %2"
 msgstr "%1 matomumas %2"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:468
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:743
 #, qt-format
 msgid "Visibility of %1 from %3 in %2"
 msgstr "%1 matomumas iš %3 %2"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:479
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:754
 msgid "Object Visibility Plug-in"
 msgstr "Objektų matomumo įskiepis"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:488
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:763
 msgid ""
 "This plug-in shows on a planet map where on the observer's planet a selected"
 " star or deep-sky object is visible.  Given an object with declination "
@@ -41676,7 +41787,7 @@ msgstr ""
 "tikrąjį judėjimą), nubrėžiamos penkios linijos fiksuotose geografinėse "
 "platumose:"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:496
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:771
 msgid ""
 "&phi; = &delta; &plusmn; 90&deg;.  The object never rises above the horizon "
 "at latitudes outside this band."
@@ -41684,11 +41795,11 @@ msgstr ""
 "&phi; = &delta; &plusmn; 90&deg;. Objektas niekada nepakyla virš horizonto "
 "platumose, esančiose už šios juostos ribų."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:499
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:774
 msgid "Extinction free / good visibility"
 msgstr "Be trukdžių/ geras matomumas"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:500
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:775
 msgid ""
 "&phi; = &delta; &plusmn; (90&deg; &minus; h).  At latitudes inside this band"
 " the object reaches at least altitude h at upper culmination.  The default h"
@@ -41700,16 +41811,16 @@ msgstr ""
 " h yra 5&deg;; galite jį padidinti, jei stebite iš kalnuotos vietos arba "
 "norite didesnės saugos ribos."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:507
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:782
 msgid ""
 "&phi; = &delta;.  At this latitude the object passes through the zenith."
 msgstr "&phi; = &delta;. Šioje platumoje objektas pereina per zenitą."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:510
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:785
 msgid "Circumpolar limit, northern hemisphere"
 msgstr "Cirkumpoliarinė riba, šiaurės pusrutulis"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:511
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:786
 msgid ""
 "&phi; = 90&deg; &minus; &delta;.  North of this latitude the object never "
 "sets."
@@ -41717,11 +41828,11 @@ msgstr ""
 "&phi; = 90&deg; &minus; &delta;. Į šiaurę nuo šios platumos objektas niekada"
 " nenusileidžia."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:514
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:789
 msgid "Circumpolar limit, southern hemisphere"
 msgstr "Cirkumpoliarinė riba, pietų pusrutulis"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:515
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:790
 msgid ""
 "&phi; = &minus;90&deg; &minus; &delta;.  South of this latitude the object "
 "never sets."
@@ -41729,7 +41840,7 @@ msgstr ""
 "&phi; = &minus;90&deg; &minus; &delta;. Į pietus nuo šios platumos objektas "
 "niekada nenusileidžia."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:520
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:795
 msgid ""
 "Planets, moons, asteroids, comets and artificial satellites are "
 "intentionally not supported as the selected <em>target</em>: their rapid "
@@ -41741,7 +41852,7 @@ msgstr ""
 "judėjimo (o kai kurių – ir paralakso) vienintelė momentinė nuotrauka būtų "
 "klaidinanti."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:527
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:802
 msgid ""
 "The plug-in does support observation from any of the following bodies: "
 "Earth, the Moon, the eight planets (Mercury through Neptune), Pluto, and the"
@@ -41755,7 +41866,7 @@ msgstr ""
 " objektą „Stellarium“ dialogo lange „Vieta“; žemėlapis atsinaujins "
 "automatiškai."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:536
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:811
 msgid ""
 "Because stellar positions change over time through precession and proper "
 "motion, the lines are always computed for the date currently shown in the "
@@ -41767,11 +41878,28 @@ msgstr ""
 "datą. Norėdami pamatyti Sirijaus matomumą 10&thinsp;000 m. pr. Kr., "
 "pirmiausia nustatykite planetariumo datą, tada paspauskite Skaičiuoti."
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:544
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:819
+msgid ""
+"The Twilight limits tab is Earth-only.  It draws the equator, tropics, polar"
+" circles, and solstice latitudes where the Sun's lowest or highest altitude "
+"is -6&deg;, -12&deg;, or -18&deg;.  These lines use Earth's obliquity at the"
+" current epoch, so they shift when you change the planetarium date.  They "
+"are not shown for other observing bodies because civil, nautical, and "
+"astronomical twilight depend on Earth's atmosphere."
+msgstr ""
+"Skirtukas „Prieblandos ribos“ skirtas tik Žemei. Jame pavaizduojamas "
+"pusiaujas, tropikai, poliariniai apskritimai ir saulėgrįžos platumos, "
+"kuriose mažiausias arba didžiausias Saulės aukštis yra -6°, -12° arba -18°. "
+"Šios linijos nubrėžiamos remiantis Žemės ašies pasvirimu dabartinėje "
+"epochoje, todėl jos pasislenka, kai pakeičiate planetariumo datą. Jos "
+"nerodomos kitų stebimų dangaus kūnų atveju, nes civilinės, jūrinės ir "
+"astronominės prieblandos priklauso nuo Žemės atmosferos."
+
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:830
 msgid "Credits"
 msgstr "Kreditai"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:545
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:831
 msgid ""
 "The whole concept of these visibility lines on a world map – and in "
 "particular the choice of the five line types and their visual style – comes "
@@ -41783,10 +41911,10 @@ msgstr ""
 "straipsnio <em>„49 ryškiausios naktinio dangaus žvaigždės – kada ir kur jas "
 "galima pamatyti?“</em>"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:554
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:840
 msgid "Read the original article"
 msgstr "Skaityti originalų straipsnį"
 
-#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:557
+#: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:843
 msgid "Astro-Geo-GIS website"
 msgstr "Astro-Geo-GIS svetainė"
