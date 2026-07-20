@@ -1379,7 +1379,7 @@ double StelMainScriptAPI::getViewDecJ2000Angle()
 	return dec*180/M_PI; // convert to degrees from radians
 }
 
-void StelMainScriptAPI::moveToObject(const QString& name, float duration)
+void StelMainScriptAPI::moveToObject(const QString& name, float duration, float shift)
 {
 	if (name.isEmpty())
 		return;
@@ -1389,7 +1389,37 @@ void StelMainScriptAPI::moveToObject(const QString& name, float duration)
 	StelObjectP obj = omgr->searchByName(name);
 
 	if (!obj.isNull())
-		mvmgr->moveToObject(obj, duration);
+	{
+		if (qFuzzyCompare(shift, 0.f))
+			mvmgr->moveToObject(obj, duration);
+		else
+		{
+			// The dome mode:
+			// The center of FOV in the dome is located in zenith and this is not very good for viewers, so, let's shift object from "zenith".
+			StelCore* core = StelApp::getInstance().getCore();
+
+			double sLat, sLon;
+			StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+			if (mountMode==StelMovementMgr::MountEquinoxEquatorial)
+			{
+				StelUtils::rectToSphe(&sLon,&sLat,obj->getEquinoxEquatorialPosAuto(core));
+				sLat += shift*M_PI_180;
+
+				moveToRaDec(StelUtils::radToDecDegStr(sLon, 6), StelUtils::radToDecDegStr(sLat, 6), duration);
+			}
+			else
+			{
+				StelUtils::rectToSphe(&sLon,&sLat,obj->getAltAzPosAuto(core));
+				const double direction = StelApp::getInstance().getFlagSouthAzimuthUsage() ? 2. : 3.; // N is zero, E is 90 degrees
+				sLon = direction*M_PI - sLon;
+				if (sLon > M_PI*2)
+					sLon -= M_PI*2;
+				sLat += shift*M_PI_180;
+
+				moveToAltAzi(StelUtils::radToDecDegStr(sLat, 6), StelUtils::radToDecDegStr(sLon, 6), duration);
+			}
+		}
+	}
 }
 
 void StelMainScriptAPI::moveToSelectedObject(float duration)
