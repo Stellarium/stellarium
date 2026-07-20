@@ -438,7 +438,8 @@ public slots:
 	//! Move the current viewing direction to some object.
 	//! @param name is the English name of the object
 	//! @param duration the duration of the movement in seconds
-	static void moveToObject(const QString& name, float duration=1.);
+	//! @param shift the shift of object from center of FOV in degrees (for domes)
+	static void moveToObject(const QString& name, float duration=1.f, float shift=0.f);
 
 	//! Move the current viewing direction to selected object.
 	//! @param duration the duration of the movement in seconds
