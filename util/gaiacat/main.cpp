@@ -165,7 +165,7 @@ int main(int argc, char** argv) {
 	int    n_workers   = std::thread::hardware_concurrency();
 	bool   dry_run     = false;
 	int    star3_from  = 8;   // levels >= this use Star3 (V >= 16.0 required; matches official split)
-	int    level_lo    = 7;   // default: generate levels 7-10 only
+	int    level_lo    = 4;   // default: generate levels 4-10 (lv4 overlaps lv3 by 0.25 mag for dedup)
 	int    level_hi    = 10;
 
 	for (int i = 1; i < argc; ++i) {
@@ -214,14 +214,16 @@ int main(int argc, char** argv) {
 		if (level <= 3) return CATALOG_TYPE_STAR1;
 		return level >= star3_from ? CATALOG_TYPE_STAR3 : CATALOG_TYPE_STAR2;
 	};
-	// Official magnitude split (matches henrysky's lv0-6 pipeline and default catalogs)
+	// Official magnitude split (matches henrysky's lv0-6 pipeline and default catalogs).
+	// stars_4 starts at 10.25 instead of 10.5: a deliberate 0.25 mag overlap with
+	// stars_3 so that dedupcat can remove boundary duplicates without losing stars.
 	struct LevelDef { const char* name; int level; double mag_lo, mag_hi; };
 	static const LevelDef kAllLevels[] = {
 		{"stars_0",   0, -2.00,  6.00},
 		{"stars_1",   1,  6.00,  7.50},
 		{"stars_2",   2,  7.50,  9.00},
 		{"stars_3",   3,  9.00, 10.50},
-		{"stars_4",   4, 10.50, 12.00},
+		{"stars_4",   4, 10.25, 12.00},
 		{"stars_5",   5, 12.00, 13.75},
 		{"stars_6",   6, 13.75, 15.50},
 		{"stars_7",   7, 15.50, 16.75},
