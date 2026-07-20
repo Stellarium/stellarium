@@ -539,16 +539,15 @@ void ObjectVisibilityMapWidget::drawTwilightContour(QPainter& painter,
 		for (int i = 1; i < points.size(); ++i)
 			path.lineTo(points.at(i));
 
-		for (double dx = 0.0; dx < logicalWidth + mapWidth; dx += mapWidth)
+		const QRectF bounds = path.boundingRect();
+		const int firstCopy = static_cast<int>(
+			std::floor((0.0 - bounds.right()) / mapWidth)) - 1;
+		const int lastCopy = static_cast<int>(
+			std::ceil((logicalWidth - bounds.left()) / mapWidth)) + 1;
+		for (int k = firstCopy; k <= lastCopy; ++k)
 		{
 			QPainterPath shifted = path;
-			shifted.translate(dx, 0.0);
-			painter.drawPath(shifted);
-		}
-		for (double dx = -mapWidth; dx > -logicalWidth - mapWidth; dx -= mapWidth)
-		{
-			QPainterPath shifted = path;
-			shifted.translate(dx, 0.0);
+			shifted.translate(k * mapWidth, 0.0);
 			painter.drawPath(shifted);
 		}
 	};
