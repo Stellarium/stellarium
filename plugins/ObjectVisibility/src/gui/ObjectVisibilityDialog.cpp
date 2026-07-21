@@ -40,7 +40,6 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QCheckBox>
-#include <QLabel>
 #include <QPair>
 #include <QPushButton>
 #include <QSignalBlocker>
@@ -825,26 +824,21 @@ void ObjectVisibilityDialog::updatePlaceLabels()
 	                   core->getCurrentLocation().planetName == QStringLiteral("Earth");
 
 	auto setControlsEnabled = [earth](QCheckBox* showCheckBox,
-	                                  QLabel* populationLabel,
 	                                  QComboBox* populationComboBox,
 	                                  QCheckBox* nearLinesOnlyCheckBox)
 	{
 		showCheckBox->setEnabled(earth);
-		populationLabel->setEnabled(earth);
 		populationComboBox->setEnabled(earth);
 		nearLinesOnlyCheckBox->setEnabled(earth);
 	};
 
 	setControlsEnabled(ui->placeLabelsCheckBox,
-	                   ui->placeLabelsPopulationLabel,
 	                   ui->placeLabelsPopulationComboBox,
 	                   ui->placeLabelsNearLinesOnlyCheckBox);
 	setControlsEnabled(ui->twilightPlaceLabelsCheckBox,
-	                   ui->twilightPlaceLabelsPopulationLabel,
 	                   ui->twilightPlaceLabelsPopulationComboBox,
 	                   ui->twilightPlaceLabelsNearLinesOnlyCheckBox);
 	setControlsEnabled(ui->twilightMapPlaceLabelsCheckBox,
-	                   ui->twilightMapPlaceLabelsPopulationLabel,
 	                   ui->twilightMapPlaceLabelsPopulationComboBox,
 	                   ui->twilightMapPlaceLabelsNearLinesOnlyCheckBox);
 

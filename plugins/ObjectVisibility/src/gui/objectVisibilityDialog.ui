@@ -357,14 +357,7 @@
            <item>
             <widget class="QCheckBox" name="placeLabelsCheckBox">
              <property name="text">
-              <string>Places</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="placeLabelsPopulationLabel">
-             <property name="text">
-              <string>Min. population:</string>
+              <string>Places, min. population:</string>
              </property>
             </widget>
            </item>
@@ -748,14 +741,7 @@
            <item>
             <widget class="QCheckBox" name="twilightPlaceLabelsCheckBox">
              <property name="text">
-              <string>Places</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="twilightPlaceLabelsPopulationLabel">
-             <property name="text">
-              <string>Min. population:</string>
+              <string>Places, min. population:</string>
              </property>
             </widget>
            </item>
@@ -943,7 +929,7 @@
             <item row="4" column="1">
              <widget class="QLabel" name="twilightMapLegendTextAstronomical">
               <property name="text">
-               <string>-18° astro.</string>
+               <string>-18° astronomical</string>
               </property>
              </widget>
             </item>
@@ -1118,14 +1104,7 @@
            <item>
             <widget class="QCheckBox" name="twilightMapPlaceLabelsCheckBox">
              <property name="text">
-              <string>Places</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="twilightMapPlaceLabelsPopulationLabel">
-             <property name="text">
-              <string>Min. population:</string>
+              <string>Places, min. population:</string>
              </property>
             </widget>
            </item>

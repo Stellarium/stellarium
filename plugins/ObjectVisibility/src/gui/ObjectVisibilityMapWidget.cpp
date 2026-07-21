@@ -163,7 +163,8 @@ void ObjectVisibilityMapWidget::setTwilightMapData(double sunLongitudeDeg,
 	twilightSunLatitudeDeg = sunLatitudeDeg;
 	twilightMoonLongitudeDeg = moonLongitudeDeg;
 	twilightMoonLatitudeDeg = moonLatitudeDeg;
-	rebuildTwilightMapCache();
+	const QSize imageSize = twilightShadeImageSizeForCurrentView();
+	rebuildTwilightMapCache(imageSize.width(), imageSize.height());
 	update();
 }
 
@@ -173,7 +174,8 @@ void ObjectVisibilityMapWidget::setTwilightMapFullTwilight(bool enabled)
 	twilightMapFullTwilight = enabled;
 	if (hasTwilightMap)
 	{
-		rebuildTwilightMapCache();
+		const QSize imageSize = twilightShadeImageSizeForCurrentView();
+		rebuildTwilightMapCache(imageSize.width(), imageSize.height());
 		update();
 	}
 }
@@ -247,6 +249,27 @@ double normalizeLongitudeDeg(double longitude)
 double longitudeDifferenceDeg(double a, double b)
 {
 	return std::abs(normalizeLongitudeDeg(a - b));
+}
+
+QRgb blendColor(QRgb a, QRgb b, double t)
+{
+	t = std::max(0.0, std::min(1.0, t));
+	const double u = 1.0 - t;
+	return qRgba(static_cast<int>(std::round(qRed(a)   * u + qRed(b)   * t)),
+	             static_cast<int>(std::round(qGreen(a) * u + qGreen(b) * t)),
+	             static_cast<int>(std::round(qBlue(a)  * u + qBlue(b)  * t)),
+	             static_cast<int>(std::round(qAlpha(a) * u + qAlpha(b) * t)));
+}
+
+QRgb blendAcrossThreshold(double value, double higherLimit, double lowerLimit,
+                          QRgb higherColor, QRgb lowerColor)
+{
+	if (value >= higherLimit)
+		return higherColor;
+	if (value <= lowerLimit)
+		return lowerColor;
+	const double t = (value - lowerLimit) / (higherLimit - lowerLimit);
+	return blendColor(lowerColor, higherColor, t);
 }
 } // namespace
 
@@ -435,49 +458,138 @@ void ObjectVisibilityMapWidget::drawTwilightLimitsOverlay(QPainter& painter) con
 	drawSymmetric(polar + 18.0, penFor(ASTRO_MAX_COLOR, Qt::CustomDashLine));
 }
 
-void ObjectVisibilityMapWidget::rebuildTwilightMapCache()
+QSize ObjectVisibilityMapWidget::twilightShadeImageSizeForCurrentView() const
 {
-	constexpr int shadeWidth = 720;
-	constexpr int shadeHeight = 360;
+	const auto leftEdge = lonLatToMapPoint(-180.0, 0.0);
+	const auto rightEdge = lonLatToMapPoint(180.0, 0.0);
+	const double mapWidth = rightEdge.x - leftEdge.x;
+	constexpr int minWidth = 720;
+	constexpr int maxWidth = 1440;
+	int imageWidth = minWidth;
+	if (mapWidth > 0.0)
+	{
+		imageWidth = std::max(minWidth,
+		                      std::min(maxWidth,
+		                               static_cast<int>(std::ceil(mapWidth * 1.25))));
+	}
+	if (imageWidth % 2 != 0)
+		++imageWidth;
+	return QSize(imageWidth, imageWidth / 2);
+}
 
-	QImage image(shadeWidth, shadeHeight, QImage::Format_ARGB32);
+void ObjectVisibilityMapWidget::rebuildTwilightShadeLookups(int imageWidth,
+                                                            int imageHeight)
+{
+	const QSize size(imageWidth, imageHeight);
+	if (twilightShadeLookupSize == size &&
+	    twilightShadeSinLat.size() == imageHeight &&
+	    twilightShadeCosLat.size() == imageHeight &&
+	    twilightShadeSinLon.size() == imageWidth &&
+	    twilightShadeCosLon.size() == imageWidth)
+		return;
+
+	twilightShadeLookupSize = size;
+	twilightShadeSinLat.resize(imageHeight);
+	twilightShadeCosLat.resize(imageHeight);
+	twilightShadeSinLon.resize(imageWidth);
+	twilightShadeCosLon.resize(imageWidth);
+
+	for (int y = 0; y < imageHeight; ++y)
+	{
+		const double latDeg = 90.0 - (static_cast<double>(y) + 0.5) *
+		                      180.0 / static_cast<double>(imageHeight);
+		const double latRad = latDeg * DEG_TO_RAD;
+		twilightShadeSinLat[y] = std::sin(latRad);
+		twilightShadeCosLat[y] = std::cos(latRad);
+	}
+
+	for (int x = 0; x < imageWidth; ++x)
+	{
+		const double lonDeg = -180.0 + (static_cast<double>(x) + 0.5) *
+		                      360.0 / static_cast<double>(imageWidth);
+		const double lonRad = lonDeg * DEG_TO_RAD;
+		twilightShadeSinLon[x] = std::sin(lonRad);
+		twilightShadeCosLon[x] = std::cos(lonRad);
+	}
+}
+
+void ObjectVisibilityMapWidget::rebuildTwilightMapCache(int imageWidth,
+                                                        int imageHeight)
+{
+	if (imageWidth < 2) imageWidth = 2;
+	if (imageHeight < 1) imageHeight = 1;
+	rebuildTwilightShadeLookups(imageWidth, imageHeight);
+
+	QImage image(imageWidth, imageHeight, QImage::Format_ARGB32);
 	image.fill(Qt::transparent);
 
 	const double sunLatRad = twilightSunLatitudeDeg * DEG_TO_RAD;
 	const double sinSunLat = std::sin(sunLatRad);
 	const double cosSunLat = std::cos(sunLatRad);
-	const double horizonAltitudeDeg = twilightHorizonAltitudeDeg();
-
-	for (int y = 0; y < shadeHeight; ++y)
+	const double antiAliasDeg = std::max(0.04, 180.0 / imageHeight);
+	const double sunLonRad = twilightSunLongitudeDeg * DEG_TO_RAD;
+	const double sinSunLon = std::sin(sunLonRad);
+	const double cosSunLon = std::cos(sunLonRad);
+	const auto sinAlt = [](double altitudeDeg)
 	{
-		const double latDeg = 90.0 - (static_cast<double>(y) + 0.5) *
-		                      180.0 / static_cast<double>(shadeHeight);
-		const double latRad = latDeg * DEG_TO_RAD;
-		const double sinLat = std::sin(latRad);
-		const double cosLat = std::cos(latRad);
+		return std::sin(altitudeDeg * DEG_TO_RAD);
+	};
+	const double horizonAltitudeDeg = twilightHorizonAltitudeDeg();
+	const double horizonHigh = sinAlt(horizonAltitudeDeg + antiAliasDeg);
+	const double horizonLow = sinAlt(horizonAltitudeDeg - antiAliasDeg);
+	const double civilHigh = sinAlt(-6.0 + antiAliasDeg);
+	const double civilLow = sinAlt(-6.0 - antiAliasDeg);
+	const double nauticalHigh = sinAlt(-12.0 + antiAliasDeg);
+	const double nauticalLow = sinAlt(-12.0 - antiAliasDeg);
+	const double astroHigh = sinAlt(-18.0 + antiAliasDeg);
+	const double astroLow = sinAlt(-18.0 - antiAliasDeg);
+	const QRgb dayColor = qRgba(0, 0, 0, 0);
+	const QRgb civilColor = qRgba(95, 155, 255, 58);
+	const QRgb nauticalColor = qRgba(55, 105, 225, 88);
+	const QRgb astronomicalColor = qRgba(30, 60, 165, 118);
+	const QRgb earthNightColor = qRgba(5, 18, 58, 148);
+	const QRgb otherNightColor = qRgba(0, 0, 0, 128);
+	const double* sinLatData = twilightShadeSinLat.constData();
+	const double* cosLatData = twilightShadeCosLat.constData();
+	const double* sinLonData = twilightShadeSinLon.constData();
+	const double* cosLonData = twilightShadeCosLon.constData();
+
+	for (int y = 0; y < imageHeight; ++y)
+	{
+		const double sinLat = sinLatData[y];
+		const double cosLat = cosLatData[y];
 		QRgb* line = reinterpret_cast<QRgb*>(image.scanLine(y));
 
-		for (int x = 0; x < shadeWidth; ++x)
+		for (int x = 0; x < imageWidth; ++x)
 		{
-			const double lonDeg = -180.0 + (static_cast<double>(x) + 0.5) *
-			                      360.0 / static_cast<double>(shadeWidth);
-			const double hourAngle = (lonDeg - twilightSunLongitudeDeg) * DEG_TO_RAD;
-			const double sinAlt = sinLat * sinSunLat +
-			                      cosLat * cosSunLat * std::cos(hourAngle);
-			const double altDeg = std::asin(clampUnit(sinAlt)) * RAD_TO_DEG;
+			const double cosHourAngle =
+				cosLonData[x] * cosSunLon +
+				sinLonData[x] * sinSunLon;
+			const double altitudeSin = sinLat * sinSunLat +
+			                           cosLat * cosSunLat * cosHourAngle;
 
-			if (altDeg >= horizonAltitudeDeg)
-				line[x] = qRgba(0, 0, 0, 0);
-			else if (!twilightMapFullTwilight)
-				line[x] = qRgba(0, 0, 0, 128);
-			else if (altDeg >= -6.0)
-				line[x] = qRgba(95, 155, 255, 58);
-			else if (altDeg >= -12.0)
-				line[x] = qRgba(55, 105, 225, 88);
-			else if (altDeg >= -18.0)
-				line[x] = qRgba(30, 60, 165, 118);
+			if (!twilightMapFullTwilight)
+				line[x] = blendAcrossThreshold(altitudeSin,
+				                               horizonHigh, horizonLow,
+				                               dayColor, otherNightColor);
+			else if (altitudeSin >= horizonLow)
+				line[x] = blendAcrossThreshold(altitudeSin,
+				                               horizonHigh, horizonLow,
+				                               dayColor, civilColor);
+			else if (altitudeSin >= civilLow)
+				line[x] = blendAcrossThreshold(altitudeSin,
+				                               civilHigh, civilLow,
+				                               civilColor, nauticalColor);
+			else if (altitudeSin >= nauticalLow)
+				line[x] = blendAcrossThreshold(altitudeSin,
+				                               nauticalHigh, nauticalLow,
+				                               nauticalColor, astronomicalColor);
+			else if (altitudeSin >= astroLow)
+				line[x] = blendAcrossThreshold(altitudeSin,
+				                               astroHigh, astroLow,
+				                               astronomicalColor, earthNightColor);
 			else
-				line[x] = qRgba(5, 18, 58, 148);
+				line[x] = earthNightColor;
 		}
 	}
 
@@ -647,8 +759,12 @@ void ObjectVisibilityMapWidget::drawSubPointSymbol(QPainter& painter,
 		drawOne(x);
 }
 
-void ObjectVisibilityMapWidget::drawTwilightMapOverlay(QPainter& painter) const
+void ObjectVisibilityMapWidget::drawTwilightMapOverlay(QPainter& painter)
 {
+	const QSize imageSize = twilightShadeImageSizeForCurrentView();
+	if (twilightShadeImage.size() != imageSize)
+		rebuildTwilightMapCache(imageSize.width(), imageSize.height());
+
 	drawMapImageCopies(painter, twilightShadeImage);
 
 	const double ratio = devicePixelRatioF();

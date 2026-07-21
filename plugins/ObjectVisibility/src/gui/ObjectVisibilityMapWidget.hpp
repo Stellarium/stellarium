@@ -26,6 +26,7 @@
 #include <QColor>
 #include <QImage>
 #include <QPointF>
+#include <QSize>
 #include <QString>
 #include <QVector>
 
@@ -136,7 +137,7 @@ private:
 	                         const QChar& marker, const QColor& color) const;
 	void drawVisibilityOverlay(QPainter& painter) const;
 	void drawTwilightLimitsOverlay(QPainter& painter) const;
-	void drawTwilightMapOverlay(QPainter& painter) const;
+	void drawTwilightMapOverlay(QPainter& painter);
 	void drawMapImageCopies(QPainter& painter, const QImage& image,
 	                        double opacity = 1.0) const;
 	void drawTwilightContour(QPainter& painter, double altitudeDeg,
@@ -144,7 +145,9 @@ private:
 	void drawSubPointSymbol(QPainter& painter, double longitudeDeg,
 	                        double latitudeDeg, bool sun) const;
 	void drawPlaceLabels(QPainter& painter) const;
-	void rebuildTwilightMapCache();
+	QSize twilightShadeImageSizeForCurrentView() const;
+	void rebuildTwilightShadeLookups(int imageWidth, int imageHeight);
+	void rebuildTwilightMapCache(int imageWidth, int imageHeight);
 	double twilightHorizonAltitudeDeg() const;
 	double sunAltitudeDegAt(double longitudeDeg, double latitudeDeg) const;
 	bool isPlaceLabelNearOverlay(const PlaceLabel& label,
@@ -169,6 +172,11 @@ private:
 	double twilightMoonLatitudeDeg = 0.0;
 	bool   twilightMapFullTwilight = true;
 	QImage twilightShadeImage;
+	QSize twilightShadeLookupSize;
+	QVector<double> twilightShadeSinLat;
+	QVector<double> twilightShadeCosLat;
+	QVector<double> twilightShadeSinLon;
+	QVector<double> twilightShadeCosLon;
 
 	QVector<PlaceLabel> placeLabels;
 	bool showPlaceLabels = false;
