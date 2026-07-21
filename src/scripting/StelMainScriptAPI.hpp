@@ -443,7 +443,8 @@ public slots:
 
 	//! Move the current viewing direction to selected object.
 	//! @param duration the duration of the movement in seconds
-	static void moveToSelectedObject(float duration=1.);
+	//! @param shift the shift of object from center of FOV in degrees (for domes)
+	static void moveToSelectedObject(float duration=1.f, float shift=0.f);
 
 	//! move the current viewing direction to some specified altitude and azimuth.
 	//! The move will run in AltAz coordinates. This will look different from moveToRaDec() when timelapse is fast.
