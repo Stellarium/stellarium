@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-# field_diff.py — exhaustive star-by-star field comparison of two Star1 catalog
-# sets (official vs hip2cat output), levels 0-3. Matches globally by gaia_id
-# (HIP<<5|comp when gaia_id==0), classifies every differing star by cause.
-# Output: Markdown report with per-star tables (no differing star omitted).
-
+"""Exhaustive star-by-star field comparison of two Star1 catalog sets
+(official vs hip2cat output), levels 0-3. Matches globally by gaia_id
+(HIP<<5|comp when gaia_id==0); classifies every differing star by cause.
+Output: a Markdown report with per-star tables (no differing star omitted)
+and a TSV file for B-V only differences (method difference, not matching
+criterion).
+"""
 import struct, sys, math, os
 from collections import defaultdict
+import pandas as pd
 
 OFFICIAL = r"C:\Users\13308\CLionProjects\stellarium\stars\hip_gaia3"
 OURS     = r"F:\hip2cat_out"
@@ -15,9 +18,9 @@ BV_TSV   = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_bv_diff.t
 
 LEVELS = [
     (0, "stars_0_0v0_21.cat", -2.0, 6.0),
-    (1, "stars_1_0v0_16.cat", 6.0, 7.5),
-    (2, "stars_2_0v0_17.cat", 7.5, 9.0),
-    (3, "stars_3_0v0_10.cat", 9.0, 10.5),
+    (1, "stars_1_0v0_16.cat",  6.0, 7.5),
+    (2, "stars_2_0v0_17.cat",  7.5, 9.0),
+    (3, "stars_3_0v0_10.cat",  9.0, 10.5),
 ]
 
 # Star1 tolerances (same as cmpcat)
@@ -27,20 +30,35 @@ TOL_PM      = 0.02      # mas/yr
 TOL_PLX     = 0.05      # mas
 TOL_RV      = 0.5       # km/s
 
+
 def load_table(path):
     with open(path, "r", encoding="utf-8", errors="replace") as f:
         return [l.rstrip("\n").rstrip("\r") for l in f]
 
+
 SP_TABLE = load_table(os.path.join(OFFICIAL, "stars_hip_sp_0v0_6.cat"))
 OT_TABLE = load_table(os.path.join(OFFICIAL, "object_types_v0_1.cat"))
 
-def sp_name(i):
-    return SP_TABLE[i] if 0 <= i < len(SP_TABLE) else f"?{i}"
+our_sp_path = os.path.join(OURS, "stars_hip_sp_0v0_6.cat")
+OUR_SP_TABLE = load_table(our_sp_path) if os.path.exists(our_sp_path) else SP_TABLE
+our_ot_path = os.path.join(OURS, "object_types_v0_1.cat")
+OUR_OT_TABLE = load_table(our_ot_path) if os.path.exists(our_ot_path) else OT_TABLE
 
-def ot_name(i):
-    return OT_TABLE[i] if 0 <= i < len(OT_TABLE) else f"NEW({i})"
+
+def sp_name(i, side="A"):
+    """Decode spectral type index using the appropriate table (A=official, B=ours)."""
+    t = SP_TABLE if side == "A" else OUR_SP_TABLE
+    return t[i] if 0 <= i < len(t) else f"?{i}"
+
+
+def ot_name(i, side="A"):
+    """Decode object type index using the appropriate table (A=official, B=ours)."""
+    t = OT_TABLE if side == "A" else OUR_OT_TABLE
+    return t[i] if 0 <= i < len(t) else f"NEW({i})"
+
 
 R2D = 180.0 / math.pi
+
 
 def decode_star1(buf, zone):
     (gaia_id, x0, x1, x2, dx0, dx1, dx2, bv, vmag, plx, plxe, rv, sp, otype,
@@ -63,6 +81,7 @@ def decode_star1(buf, zone):
                 rv=rv/10.0, sp=sp, otype=otype, hip=hip, comp=comp, zone=zone,
                 raw=(x0, x1, x2, dx0, dx1, dx2, bv, vmag, plx, plxe, rv, sp, otype, comb))
 
+
 def read_cat(path):
     with open(path, "rb") as f:
         hdr = struct.unpack("<6I", f.read(24))
@@ -81,6 +100,7 @@ def read_cat(path):
                 stars[s["key"]] = s
         return stars, dups
 
+
 def read_star2_keys(path):
     """gaia_id -> (vmag, zone) for a Star2 catalog (lv4-6 cross-reference)."""
     out = {}
@@ -97,33 +117,35 @@ def read_star2_keys(path):
                 out[gaia_id] = (vmag / 1000.0, z)
     return out
 
+
 def read_simbad(path):
-    """hip -> dict(V, B, rv, sp, sid, comp) for cause attribution."""
+    """hip → dict(V, B, rv, sp, sid, comp, prov) for cause attribution."""
     out = {}
-    with open(path, "r", encoding="utf-8", errors="replace") as f:
-        hdr = f.readline().rstrip("\n").split(",")
-        idx = {h: i for i, h in enumerate(hdr)}
-        def col(name): return idx.get(name, -1)
-        c_hip, c_comp, c_sid = col("hip"), col("componentid"), col("source_id")
-        c_V, c_B, c_rv, c_sp = col("V"), col("B"), col("rvz_radvel"), col("sp_type")
-        for line in f:
-            line = line.rstrip("\n")
-            if not line: continue
-            fld = line.split(",")
-            try: hip = int(fld[c_hip])
-            except: continue
-            def flt(i):
-                if i < 0 or i >= len(fld) or fld[i] == "": return float("nan")
-                try: return float(fld[i])
-                except: return float("nan")
-            comp = 0
-            if c_comp >= 0 and c_comp < len(fld) and fld[c_comp]:
-                try: comp = int(float(fld[c_comp]))
-                except: comp = 0
-            out[(hip, comp)] = dict(sid=fld[c_sid] if c_sid >= 0 else "",
-                                    V=flt(c_V), B=flt(c_B), rv=flt(c_rv),
-                                    sp=fld[c_sp] if c_sp >= 0 else "")
+    if not os.path.exists(path):
+        return out
+    df = pd.read_csv(path, low_memory=False)
+    for _, r in df.iterrows():
+        if pd.isna(r["hip"]): continue
+        hip = int(r["hip"])
+        comp = 0
+        if "componentid" in df.columns and not pd.isna(r["componentid"]):
+            comp = int(float(r["componentid"]))
+        sid = int(float(r["source_id"])) if not pd.isna(r["source_id"]) else 0
+        sid_str = str(sid) if sid > 0 else ""
+        def flt(col):
+            if col not in df.columns or pd.isna(r[col]):
+                return float("nan")
+            try: return float(r[col])
+            except: return float("nan")
+        prov = ""
+        if "source_id_provenance" in df.columns and not pd.isna(r["source_id_provenance"]):
+            prov = str(r["source_id_provenance"])
+        out[(hip, comp)] = dict(sid=sid_str,
+                                V=flt("V"), B=flt("B"), rv=flt("rvz_radvel"),
+                                sp=str(r["sp_type"]) if "sp_type" in df.columns and not pd.isna(r["sp_type"]) else "",
+                                prov=prov)
     return out
+
 
 def ang_diff_mas(a, b):
     dra = (a["ra"] - b["ra"])
@@ -132,15 +154,17 @@ def ang_diff_mas(a, b):
     cosd = math.cos((a["dec"] + b["dec"]) / 2 / R2D)
     return dra * 3600000.0 * cosd, (a["dec"] - b["dec"]) * 3600000.0
 
+
 def fmt_key(s):
     if s["gaia_id"] > 0:
         base = f"Gaia {s['gaia_id']}"
     else:
         base = "(no Gaia id)"
     if s["hip"] > 0:
-        comp = " ABCD"[s["comp"]] if 0 < s["comp"] <= 4 else (f"c{s['comp']}" if s["comp"] else "")
-        base += f" / HIP {s['hip']}{comp}"
+        comp_label = " ABCD"[s["comp"]] if 0 < s["comp"] <= 4 else (f"c{s['comp']}" if s["comp"] else "")
+        base += f" / HIP {s['hip']}{comp_label}"
     return base
+
 
 # ---------------------------------------------------------------- load
 print("loading catalogs...")
@@ -149,17 +173,17 @@ dup_notes = []
 for lv, fn, _, _ in LEVELS:
     off[lv], d1 = read_cat(os.path.join(OFFICIAL, fn))
     our[lv], d2 = read_cat(os.path.join(OURS, fn))
-    for k in d1: dup_notes.append(f"官方 lv{lv} 匹配键重复: {k}")
-    for k in d2: dup_notes.append(f"我方 lv{lv} 匹配键重复: {k}")
+    for k in d1: dup_notes.append(f"Official lv{lv} duplicate match key: {k}")
+    for k in d2: dup_notes.append(f"Our lv{lv} duplicate match key: {k}")
 simbad = read_simbad(SIMBAD)
 print("loading official lv4 for cross-reference...")
 off_lv4 = read_star2_keys(os.path.join(OFFICIAL, "stars_4_1v0_6.cat"))
 print("loading done")
 
-# global index: key -> (side, lv, star)
-glob = {}
+# global index: key → (side, lv, star)
+glob_a = {}
 for lv, _, _, _ in LEVELS:
-    for k, s in off[lv].items(): glob[k] = ("A", lv, s)
+    for k, s in off[lv].items(): glob_a[k] = ("A", lv, s)
 our_glob = {}
 for lv, _, _, _ in LEVELS:
     for k, s in our[lv].items(): our_glob[k] = (lv, s)
@@ -167,93 +191,108 @@ for lv, _, _, _ in LEVELS:
 lines = []
 def w(s=""): lines.append(s)
 
-w("# lv0-3 逐星字段对比报告:官方目录 vs hip2cat 输出")
+w("# lv0-3 Star-by-Star Field Comparison: Official Catalog vs hip2cat Output")
 w()
-w("- A = 官方目录 `stars/hip_gaia3/`")
-w("- B = hip2cat 输出 `F:/hip2cat_out/`")
-w("- 匹配键:gaia_id;gaia_id==0 时用 HIP<<5|component(与 cmpcat 一致)")
-w("- 全局匹配(跨 zone),zone 不同单独归类,不会像 cmpcat 那样计为 only-in")
-w("- 容差(Star1,同 cmpcat):pos ±2 mas/轴,V ±5 mmag,pm ±0.02 mas/yr,plx ±0.05 mas,rv ±0.5 km/s")
-w("- B-V 差异(已知方法差异:BP-RP 多项式 vs 官方合成测光)不在本文列出,全量见 lv03_bv_diff.tsv")
+w("- **A** = official catalog `stars/hip_gaia3/`")
+w("- **B** = hip2cat output `F:/hip2cat_out/`")
+w("- **Match key**: `gaia_id`; for gaia_id==0 uses `HIP<<5|component` (same as cmpcat)")
+w("- **Global matching** (across zones): zone differences are classified separately, not counted as only-in (unlike cmpcat's per-zone matching)")
+w("- **Tolerances** (Star1, same as cmpcat): position ±2 mas/axis, V ±5 mmag, pm ±0.02 mas/yr, plx ±0.05 mas, rv ±0.5 km/s")
+w("- **B–V differences** (known method difference: BP‑RP polynomial vs official synthetic photometry) are excluded from this report; full listing in `lv03_bv_diff.tsv`")
 w()
-w("## 类别成因图例")
+w("All tables below are sorted by match key (gaia_id, or HIP composite for no-Gaia-id stars).  "
+   "Stars within each category table appear in ascending key order.")
 w()
-w("| 标签 | 含义 | 主要成因 |")
-w("|---|---|---|")
-w("| ZONE | 同一颗星 zone 编号不同 | ERFA 过去/未来 global-zone 判定边界(官方 ±210 kyr 分析的时代差异) |")
-w("| POS/PM/PLX | 位置/自行/视差超容差 | SIMBAD→Gaia cross-match 在不同时代解析到不同源,或双星分量处理差异 |")
-w("| V | V 星等超容差 | SIMBAD 测光随时代修订 |")
-w("| RV | 径向速度超容差 | SIMBAD rvz_radvel 随时代修订(最大类) |")
-w("| SP | 光谱型索引不同 | SIMBAD sp_type 随时代修订 |")
-w("| OTYPE | 天体类型索引不同 | SIMBAD otype 随时代修订(如 * ↔ V* ↔ RG*) |")
-w("| HIP | HIP 号/分量不同 | 双星分量归属处理差异 |")
+w("## Category legend")
 w()
+w("| Label | Meaning | Primary cause |")
+w("|-------|---------|---------------|")
+w("| ZONE  | Same star, different zone index | ERFA past/future global-zone boundary (era difference on the ±210 kyr analysis) |")
+w("| POS   | Position exceeds tolerance | SIMBAD→Gaia cross‑match resolved to a different source in a different era, or binary component handling difference |")
+w("| PM    | Proper motion exceeds tolerance | same as POS / binary-resolution era difference |")
+w("| PLX   | Parallax or its error exceeds tolerance | same as POS |")
+w("| V     | V magnitude exceeds tolerance | SIMBAD photometry revised between eras |")
+w("| RV    | Radial velocity exceeds tolerance | SIMBAD `rvz_radvel` revised between eras (largest class) |")
+w("| SP    | Spectral-type table index differs | SIMBAD `sp_type` revised between eras |")
+w("| OTYPE | Object-type table index differs | SIMBAD `otype` re‑classified between eras (e.g. `*` ↔ `V*` ↔ `RG*`) |")
+w("| HIP   | HIP number / component differs | Binary component assignment difference between eras |")
+w()
+
 if dup_notes:
-    w("## 匹配键重复警告")
+    w("## Duplicate match-key warnings")
     w()
     for n in dup_notes: w(f"- {n}")
     w()
 
 bv_rows = ["level\tkey\tgaia_id\thip\tcomp\tzoneA\tzoneB\tdBV_mag\tdV_mag\tvmagA\tvmagB"]
 
-grand_tables = defaultdict(list)   # category -> list of row strings
-only_rows = []
+
+def prov_note(hip, comp):
+    """Look up the source-id provenance for a (hip,comp) pair in the SIMBAD dat."""
+    si = simbad.get((hip, comp))
+    if not si and comp > 0:
+        si = simbad.get((hip, 0))   # manually patched component: original dat row is comp=0
+    if si and si.get("prov"):
+        return " " + si["prov"]
+    return ""
+
 
 for lv, fn, lo, hi in LEVELS:
     A, B = off[lv], our[lv]
-    w(f"## level {lv}({fn},V ∈ ({lo}, {hi}],A {len(A)} 颗 / B {len(B)} 颗)")
+    w(f"## Level {lv}  ({fn}, V ∈ ({lo}, {hi}],  A {len(A)} stars / B {len(B)} stars)")
     w()
-    keys_a = set(A); keys_b = set(B)
-    both = keys_a & keys_b
+    keys_a, keys_b = set(A), set(B)
+    both   = keys_a & keys_b
     only_a = keys_a - keys_b
     only_b = keys_b - keys_a
 
     # ---- matched: classify field differences
-    cats = defaultdict(list)   # category -> rows
-    n_ident_raw = 0
+    cats = defaultdict(list)       # category → rows
+    n_ident_raw  = 0
     n_within_tol = 0
-    n_bv = 0
+    n_bv         = 0
     within_tol_rows = []
     for k in sorted(both):
         a, b = A[k], B[k]
         if a["raw"] == b["raw"] and a["zone"] == b["zone"]:
             n_ident_raw += 1
             continue
-        dra, dde = ang_diff_mas(a, b)
-        dpmra = a["pmra"] - b["pmra"]
-        dpmde = a["pmdec"] - b["pmdec"]
-        dv  = a["vmag"] - b["vmag"]
-        dbv = a["bv"] - b["bv"]
-        dplx = a["plx"] - b["plx"]
-        dplxe = a["plxe"] - b["plxe"]
-        drv = a["rv"] - b["rv"]
-        bad_pos  = abs(dra) > TOL_POS_MAS or abs(dde) > TOL_POS_MAS
-        bad_pm   = abs(dpmra) > TOL_PM or abs(dpmde) > TOL_PM
-        bad_v    = abs(dv) > TOL_VMAG
-        bad_plx  = abs(dplx) > TOL_PLX
-        bad_rv   = abs(drv) > TOL_RV
-        bad_bv   = abs(dbv) > 0.05
-        bad_zone = a["zone"] != b["zone"]
-        bad_plxe = abs(dplxe) > 0.05
-        bad_sp   = a["sp"] != b["sp"]
-        bad_ot   = a["otype"] != b["otype"]
-        bad_hip  = (a["hip"], a["comp"]) != (b["hip"], b["comp"])
+        dra, dde   = ang_diff_mas(a, b)
+        dpmra, dpmde = a["pmra"] - b["pmra"], a["pmdec"] - b["pmdec"]
+        dv, dbv     = a["vmag"] - b["vmag"], a["bv"] - b["bv"]
+        dplx, dplxe = a["plx"] - b["plx"], a["plxe"] - b["plxe"]
+        drv         = a["rv"] - b["rv"]
+
+        bad_pos   = abs(dra) > TOL_POS_MAS or abs(dde) > TOL_POS_MAS
+        bad_pm    = abs(dpmra) > TOL_PM or abs(dpmde) > TOL_PM
+        bad_v     = abs(dv) > TOL_VMAG
+        bad_plx   = abs(dplx) > TOL_PLX
+        bad_rv    = abs(drv) > TOL_RV
+        bad_bv    = abs(dbv) > 0.05
+        bad_zone  = a["zone"] != b["zone"]
+        bad_plxe  = abs(dplxe) > 0.05
+        bad_sp    = a["sp"] != b["sp"]
+        bad_ot    = a["otype"] != b["otype"]
+        bad_hip   = (a["hip"], a["comp"]) != (b["hip"], b["comp"])
+
         if not any([bad_pos, bad_pm, bad_v, bad_plx, bad_rv, bad_bv, bad_zone,
                     bad_plxe, bad_sp, bad_ot, bad_hip]):
             # raw differs but every physical field within tolerance
             if a["raw"][:6] == b["raw"][:6] and a["raw"][7:] == b["raw"][7:]:
-                # only the B-V millimag differs: known method difference -> TSV
+                # only the B‑V millimag differs: known method difference → TSV
                 bv_rows.append(f"{lv}\t{k}\t{a['gaia_id']}\t{a['hip']}\t{a['comp']}\t"
                                f"{a['zone']}\t{b['zone']}\t{dbv:+.3f}\t{dv:+.3f}\t"
                                f"{a['vmag']:.3f}\t{b['vmag']:.3f}")
                 n_bv += 1
                 continue
             n_within_tol += 1
-            within_tol_rows.append(
+            pn = prov_note(b["hip"], b["comp"]) if b["hip"] > 0 else "gaia-only"
+            within_tol_rows.append((b["hip"], b["comp"],
                 f"| {fmt_key(a)} | z{a['zone']} | dRA {dra:+.3f} dDE {dde:+.3f} mas | "
-                f"dpm {dpmra:+.3f}/{dpmde:+.3f} | dV {dv*1000:+.0f}mmag dBV {dbv*1000:+.0f}mmag | "
-                f"dplx {dplx*1000:+.0f}uas dplxe {dplxe*1000:+.0f}uas | drv {drv:+.2f} |")
+                f"dpm {dpmra:+.3f}/{dpmde:+.3f} | dV {dv*1000:+.0f} mmag  dBV {dbv*1000:+.0f} mmag | "
+                f"dplx {dplx*1000:+.0f} μas  dplxe {dplxe*1000:+.0f} μas | drv {drv:+.2f} | {pn} |"))
             continue
+
         labels = []
         if bad_zone: labels.append("ZONE")
         if bad_pos:  labels.append("POS")
@@ -265,9 +304,10 @@ for lv, fn, lo, hi in LEVELS:
         if bad_sp:   labels.append("SP")
         if bad_ot:   labels.append("OTYPE")
         if bad_hip:  labels.append("HIP")
+
         row = (k, a, b, labels, dict(dra=dra, dde=dde, dpmra=dpmra, dpmde=dpmde,
                                      dv=dv, dbv=dbv, dplx=dplx, dplxe=dplxe, drv=drv))
-        # primary category for grouping (first significant); BV-only rows go to TSV
+        # Primary category = first significant label; BV-only rows go to TSV
         pri = labels[0]
         if pri == "BV":
             bv_rows.append(f"{lv}\t{k}\t{a['gaia_id']}\t{a['hip']}\t{a['comp']}\t"
@@ -276,143 +316,168 @@ for lv, fn, lo, hi in LEVELS:
             n_bv += 1
             continue
         cats[pri].append(row)
-        grand_tables[pri].append((lv, row))
 
-    w(f"- 完全一致(raw 逐字节 + zone 相同):**{n_ident_raw}**")
-    w(f"- B-V 差异(已知方法差异,见 lv03_bv_diff.tsv):**{n_bv}**")
-    w(f"- 其他字段有差异但全部在容差内(量化舍入):**{n_within_tol}**")
-    w(f"- 超出容差/有语义差异:**{sum(len(v) for v in cats.values())}**")
-    w(f"- only in A(全局匹配后):**{len(only_a)}**,only in B:**{len(only_b)}**")
+    w(f"- Byte-identical (raw + zone): **{n_ident_raw}**")
+    w(f"- B‑V method difference (known; see `lv03_bv_diff.tsv`): **{n_bv}**")
+    w(f"- Other fields differ but all within tolerance (quantisation): **{n_within_tol}**")
+    w(f"- Beyond-tolerance / semantic differences: **{sum(len(v) for v in cats.values())}**")
+    w(f"- Only in A (global match): **{len(only_a)}**,  only in B: **{len(only_b)}**")
     w()
 
-    # ---- only-in analysis: cross-level + positional pairing
-    w(f"### level {lv}:only-in 逐星分析")
+    # ---- only-in analysis
+    w(f"### Level {lv} — only‑in analysis")
     w()
-    w("侧别:仅A = 官方有我无;仅B = 我方有官方无。位置/V/zone 列取该侧的记录值。")
+    w("**Side**:  A‑only = official has it, we do not;  B‑only = we have it, official does not.")
+    w("The position / V / zone column reflects the record from that side.")
+    w("The Provenance column shows how the Gaia source_id was obtained in our SIMBAD input"
+      " (`source_id_provenance` column of `hip_processed_with_binary.dat`).")
     w()
+
     pairs_used_b = set()
-    rows_oa = []
+    paired_to_a  = {}   # B‑key → (A star info dict, distance)
+    rows_oa      = []
     for k in sorted(only_a):
         a = A[k]
-        # same key in other level of B?
         if k in our_glob:
             blv, bs = our_glob[k]
             dv = a["vmag"] - bs["vmag"]
             if a["hip"] > 0 and bs["hip"] == 0:
-                verdict = (f"HIP 分量移除时代差(官方 hip={a['hip']}/{a['comp']},"
-                           f"我方为 Gaia-only 按星等归 lv{blv})")
+                verdict = (f"HIP component removed (official hip={a['hip']}/{a['comp']}, "
+                           f"we have Gaia‑only → lv{blv})")
             elif a["hip"] == 0 and bs["hip"] > 0:
-                verdict = (f"HIP 分量新增时代差(我方 hip={bs['hip']}/{bs['comp']},"
-                           f"lv{blv} all-HIP 规则;官方 Gaia-only 在本层)")
+                verdict = (f"HIP component added (our hip={bs['hip']}/{bs['comp']}, "
+                           f"lv{blv} all‑HIP rule; official Gaia‑only at this level)")
                 if abs(dv) > TOL_VMAG:
-                    verdict += f";另有 V 差异 {dv:+.3f}"
+                    verdict += f"; also V diff {dv:+.3f}"
             else:
-                verdict = f"跨层移动(V 差异 {dv:+.3f})"
-            rows_oa.append(("仅A", a, f"在 B 的 lv{blv}(z{bs['zone']},V={bs['vmag']:.3f},hip={bs['hip']})",
-                            verdict))
+                verdict = f"Level shift (V diff {dv:+.3f})"
+            rows_oa.append(("A‑only", a,
+                f"In our lv{blv} (z{bs['zone']}, V={bs['vmag']:.3f}, hip={bs['hip']})",
+                verdict + prov_note(bs["hip"], bs["comp"])))
             continue
         # positional pair among only_b?
         best, bestd = None, 1e9
         for k2 in only_b:
             if k2 in pairs_used_b: continue
             bs = B[k2]
-            dra, dde = ang_diff_mas(a, bs)
-            d = math.hypot(dra, dde)
+            dra_, dde_ = ang_diff_mas(a, bs)
+            d = math.hypot(dra_, dde_)
             if d < bestd: best, bestd = (k2, bs), d
-        if best and bestd < 3600000.0:  # within 1 deg
+        if best and bestd < 3600000.0:  # within 1°
             k2, bs = best
             pairs_used_b.add(k2)
+            paired_to_a[k2] = (a, bestd)
             why = []
             if a["gaia_id"] != bs["gaia_id"]:
-                why.append(f"gaia_id 不同 A={a['gaia_id']} B={bs['gaia_id']}")
+                why.append(f"gaia_id differs A={a['gaia_id']}  B={bs['gaia_id']}")
             if (a["hip"], a["comp"]) != (bs["hip"], bs["comp"]):
-                why.append(f"HIP/comp 不同 A={a['hip']}/{a['comp']} B={bs['hip']}/{bs['comp']}")
+                why.append(f"HIP/comp differs A={a['hip']}/{a['comp']}  B={bs['hip']}/{bs['comp']}")
             if bestd > TOL_POS_MAS:
-                why.append(f"位置差 {bestd/1000:.3f} arcsec")
-            rows_oa.append(("仅A", a, f"配对 B 键 ({fmt_key(bs)},z{bs['zone']},V={bs['vmag']:.3f})",
-                            "匹配键不同:" + ";".join(why)))
+                why.append(f"position offset {bestd/1000:.3f} arcsec")
+            rows_oa.append(("A‑only", a,
+                f"Paired with B key ({fmt_key(bs)}, z{bs['zone']}, V={bs['vmag']:.3f})",
+                "Match key differs: " + "; ".join(why) + prov_note(bs["hip"], bs["comp"])))
             continue
-        # nowhere in B at any level: look at SIMBAD input
+        # nowhere in our lv0‑3 — check SIMB input
         si = simbad.get((a["hip"], a["comp"]))
-        note = "B 的 lv0-3 产物中无(未查 bin/lv4+)"
+        note = "Not in our lv0‑3 output (bin / lv4+ not searched)"
         if si:
-            note += f";我方 SIMBAD 输入 V={si['V']}"
+            note += f"; our SIMBAD input V={si['V']}"
+            if si.get("prov"):
+                note += f" [prov: {si['prov']}]"
             if si["V"] == si["V"] and si["V"] > hi:
-                note += f"(>{hi},应落到更暗层)"
+                note += f" (>{hi}, would fall to a fainter level)"
         else:
-            note += ";我方 SIMBAD 输入中无此 HIP/comp"
-        rows_oa.append(("仅A", a, "未配对", note))
-    for k in sorted(only_b - pairs_used_b):
+            note += "; this HIP/comp not in our SIMBAD input"
+        rows_oa.append(("A‑only", a, "Unpaired", note))
+
+    for k in sorted(only_b):
         b = B[k]
-        if k in glob:
-            aside, alv, astar = glob[k]
+        if k in paired_to_a:
+            a_p, dist = paired_to_a[k]
+            rows_oa.append(("B‑only", b,
+                f"Paired with A key ({fmt_key(a_p)}, z{a_p['zone']}, V={a_p['vmag']:.3f}, dist {dist/1000:.3f} ″)",
+                "Match key differs (positional pair, see the corresponding A‑only row)" + prov_note(b["hip"], b["comp"])))
+            continue
+        if k in pairs_used_b: continue
+        if k in glob_a:
+            aside, alv, astar = glob_a[k]
             dv = b["vmag"] - astar["vmag"]
             if b["hip"] > 0 and astar["hip"] == 0:
-                verdict = (f"HIP 分量新增时代差(我方 hip={b['hip']}/{b['comp']},"
-                           f"lv2 all-HIP 规则(V>7.5 必收);官方 Gaia-only 按星等归 lv{alv})")
+                verdict = (f"HIP component added (our hip={b['hip']}/{b['comp']}, "
+                           f"lv2 all‑HIP rule; official Gaia‑only → lv{alv})")
                 if abs(dv) > TOL_VMAG:
-                    verdict += f";另有 V 差异 {dv:+.3f}"
+                    verdict += f"; also V diff {dv:+.3f}"
             else:
-                verdict = f"跨层移动(V 差异 {dv:+.3f})"
-            rows_oa.append(("仅B", b, f"在 A 的 lv{alv}(z{astar['zone']},V={astar['vmag']:.3f},hip={astar['hip']})",
-                            verdict))
+                verdict = f"Level shift (V diff {dv:+.3f})"
+            rows_oa.append(("B‑only", b,
+                f"In official lv{alv} (z{astar['zone']}, V={astar['vmag']:.3f}, hip={astar['hip']})",
+                verdict + prov_note(b["hip"], b["comp"])))
         elif b["gaia_id"] > 0 and b["gaia_id"] in off_lv4:
             v4, z4 = off_lv4[b["gaia_id"]]
-            rows_oa.append(("仅B", b, f"在 A 的 lv4(z{z4},V={v4:.3f})",
-                            "跨层移动(官方 V>10.5 落入 lv4)"))
+            rows_oa.append(("B‑only", b,
+                f"In official lv4 (z{z4}, V={v4:.3f})",
+                "Level shift (official V > 10.5 → lv4)" + prov_note(b["hip"], b["comp"])))
         else:
             si = simbad.get((b["hip"], b["comp"]))
-            note = "A 的 lv0-4 均无(已查官方 lv0-3 + lv4)"
+            note = "Official lv0‑4 all empty (lv0‑3 + lv4 checked)"
+            if si and si.get("prov"):
+                note += f" [prov: {si['prov']}]"
             if b["gaia_id"] == 0 and si:
-                note += f";SIMBAD sid={si['sid']}"
-            rows_oa.append(("仅B", b, "未配对", note))
+                note += f"; SIMBAD sid={si['sid']}"
+            rows_oa.append(("B‑only", b, "Unpaired", note))
+
     if rows_oa:
-        w("| 侧别 | 星 | 位置/V/zone | 对侧情况 | 判定 |")
-        w("|---|---|---|---|---|")
+        w("| Side | Star | Position / V / zone | Other‑side info | Verdict |")
+        w("|------|------|----------------------|-----------------|---------|")
         for side, a, bside, verdict in rows_oa:
-            w(f"| {side} | {fmt_key(a)} | RA {a['ra']:.5f} Dec {a['dec']:+.5f} V={a['vmag']:.3f} z{a['zone']} | {bside} | {verdict} |")
+            w(f"| {side} | {fmt_key(a)} | RA {a['ra']:.5f}  Dec {a['dec']:+.5f}  V={a['vmag']:.3f}  z{a['zone']} | {bside} | {verdict} |")
         w()
     else:
-        w("无。")
+        w("(none)")
         w()
 
     # ---- category tables for this level
-    w(f"### level {lv}:匹配但字段有语义差异的星(分类)")
+    w(f"### Level {lv} — matched stars with semantic differences (by category)")
+    w("Stars are sorted by match key (gaia_id).  Each star appears only once, under the"
+      " highest-priority category it triggers (priority order: ZONE > POS > PM > PLX > V > BV > RV > SP > OTYPE > HIP).")
     w()
     if not cats:
-        w("无。")
+        w("(none)")
         w()
     for pri in ["ZONE", "POS", "PM", "PLX", "V", "BV", "RV", "SP", "OTYPE", "HIP"]:
         rows = cats.get(pri)
         if not rows: continue
-        w(f"#### 主类别 {pri}({len(rows)} 颗)")
+        w(f"#### Primary category **{pri}** ({len(rows)} stars)")
         w()
-        w("| 星 | zone A→B | dRA/dDE (mas) | dpm (mas/yr) | dV | dBV | dplx/dplxe (mas) | drv (km/s) | 其他字段 | 标签 |")
-        w("|---|---|---|---|---|---|---|---|---|---|")
+        w("| Star | zone A→B | dRA/dDE (mas) | dpm (mas/yr) | dV | dBV | dplx/dplxe (mas) | drv (km/s) | Other fields | Labels | Provenance |")
+        w("|------|----------|-------------|----------|----|-----|---------------|--------|--------------|--------|------------|")
         for k, a, b, labels, d in rows:
             other = []
             if a["sp"] != b["sp"]:
-                other.append(f"sp {sp_name(a['sp'])}→{sp_name(b['sp'])}")
+                other.append(f"sp {sp_name(a['sp'], 'A')}→{sp_name(b['sp'], 'B')}")
             if a["otype"] != b["otype"]:
-                other.append(f"ot {ot_name(a['otype'])}→{ot_name(b['otype'])}")
+                other.append(f"ot {ot_name(a['otype'], 'A')}→{ot_name(b['otype'], 'B')}")
             if (a["hip"], a["comp"]) != (b["hip"], b["comp"]):
                 other.append(f"hip {a['hip']}/{a['comp']}→{b['hip']}/{b['comp']}")
+            pn = prov_note(b["hip"], b["comp"]) if b["hip"] > 0 else "gaia-only"
             w(f"| {fmt_key(a)} | {a['zone']}→{b['zone']} | {d['dra']:+.3f}/{d['dde']:+.3f} | "
               f"{d['dpmra']:+.3f}/{d['dpmde']:+.3f} | {d['dv']:+.3f} | {d['dbv']:+.3f} | "
               f"{d['dplx']:+.3f}/{d['dplxe']:+.3f} | {d['drv']:+.2f} | "
-              f"{' '.join(other)} | {','.join(labels)} |")
+              f"{' '.join(other)} | {','.join(labels)} | {pn} |")
         w()
 
     if within_tol_rows:
-        w(f"<details><summary>level {lv}:容差内的 raw 差异({len(within_tol_rows)} 颗,舍入/量化)</summary>")
+        w(f"<details><summary>Level {lv} — within-tolerance raw differences ({len(within_tol_rows)} stars, quantisation)</summary>")
         w()
-        w("| 星 | zone | 位置 | pm | V/BV | plx | rv |")
-        w("|---|---|---|---|---|---|---|")
-        for r in within_tol_rows:
+        w("| Star | zone | Position | pm | V/BV | plx | rv | Provenance |")
+        w("|------|------|----------|----|------|-----|----|------------|")
+        for hip, comp, r in within_tol_rows:
             w(r)
         w()
         w("</details>")
         w()
+
 
 with open(BV_TSV, "w", encoding="utf-8") as f:
     f.write("\n".join(bv_rows) + "\n")
