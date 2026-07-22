@@ -368,7 +368,7 @@
             "minVersion": "0.12.0",
             "notes": "Introduced in Stellarium 0.12.0"
         },
-        "example": "var color = Exoplanets.getMarkerColor();\ncore.debug(\"Exoplanet marker color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+        "example": "var exocolor = Exoplanets.getMarkerColor();\nvar color = getcolor(exocolor);\ncore.debug(\"Exoplanet marker color: RGB(\" + color.r + \", \" + color.g + \", \" + color.b + \")\");"
     },
     {
         "name": "setMarkerColor",
@@ -395,24 +395,6 @@
         "example": "// Set exoplanet markers to cyan\nvar cyan = core.vec3f(0.2, 0.8, 0.9);\nExoplanets.setMarkerColor(cyan);\n\n// Set to yellow-orange\nvar orange = core.vec3f(1.0, 0.7, 0.2);\nExoplanets.setMarkerColor(orange);"
     },
     {
-        "name": "markerColor",
-        "category": "Exoplanets - Properties",
-        "signature": "Vec3f markerColor",
-        "description": "⚠️ Property that returns the exoplanet marker color. For reading, use core.getStelProperty(). For writing, use Exoplanets.setMarkerColor().",
-        "parameters": [],
-        "returnType": "Vec3f",
-        "returnDescription": "RGB color vector",
-        "type": "property",
-        "alternative": "Exoplanets.getMarkerColor() / Exoplanets.setMarkerColor()",
-        "compatibility": {
-            "qt5": true,
-            "qt6": true,
-            "minVersion": "0.12.0",
-            "notes": "Q_PROPERTY exposed to scripting (read via core.getStelProperty, write via method)"
-        },
-        "example": "// Read color using property\nvar colorStr = core.getStelProperty('Exoplanets.markerColor');\nvar parts = colorStr.split(',');\nvar r = parseFloat(parts[0]);\nvar g = parseFloat(parts[1]);\nvar b = parseFloat(parts[2]);\n\n// Write using method\nvar newColor = core.vec3f(0.2, 0.8, 0.9);\nExoplanets.setMarkerColor(newColor);"
-    },
-    {
         "name": "getHabitableColor",
         "category": "Exoplanets - Appearance",
         "signature": "Vec3f getHabitableColor()",
@@ -427,7 +409,7 @@
             "minVersion": "0.12.0",
             "notes": "Introduced in Stellarium 0.12.0"
         },
-        "example": "var color = Exoplanets.getHabitableColor();\ncore.debug(\"Habitable exoplanet color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+        "example": "var exohacolor = Exoplanets.getHabitableColor();\nvar color = getcolor(exohacolor);\ncore.debug(\"Habitable exoplanet color: RGB(\" + color.r + \", \" + color.g + \", \" + color.b + \")\");"
     },
     {
         "name": "setHabitableColor",

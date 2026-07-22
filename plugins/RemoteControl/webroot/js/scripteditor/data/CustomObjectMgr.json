@@ -208,7 +208,7 @@
         "returnType": "Vec3f",
         "returnDescription": "RGB color array [R, G, B] where each component ranges 0.0-1.0",
         "type": "slot",
-        "example": "var color = CustomObjectMgr.getMarkersColor();\ncore.debug('Current marker color - R: ' + color[0] + ', G: ' + color[1] + ', B: ' + color[2]);"
+        "example": "var markercolor = CustomObjectMgr.getMarkersColor();\nvar color = getcolor(markercolor);\ncore.debug('Current marker color - R: ' + color.r + ', G: ' + color.g + ', B: ' + color.b);"
     },
     {
         "name": "setMarkersSize",

@@ -1682,7 +1682,7 @@
             "minVersion": "0.10.0",
             "notes": "Works on all Stellarium versions"
         },
-        "example": "// Change window size to 1024x768\nvar newSize = core.setWindowSize(1024, 768);\ncore.debug(\"New size: \" + newSize[0] + \"x\" + newSize[1]);\n\n// Change to full screen mode\nvar screenWidth = core.getScreenWidth();\nvar screenHeight = core.getScreenHeight();\ncore.setWindowSize(screenWidth, screenHeight);"
+        "example": "// Change window size to 1024x768\nvar newSize = core.setWindowSize(1024, 768);\ncore.debug(\"New size: \" + newSize);\n\n// Change to full screen mode\nvar screenWidth = core.getScreenWidth();\nvar screenHeight = core.getScreenHeight();\ncore.setWindowSize(screenWidth, screenHeight);"
     },
     {
         "name": "goHome",
