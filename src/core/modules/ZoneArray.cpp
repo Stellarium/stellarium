@@ -495,6 +495,11 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
 			v.set(u[0], u[1], u[2]);
 		}
+		// take variable star brightness delta into account
+		double variable_magoffset = 0.0;
+		s->getVarStarOffset(core->getJDE(), variable_magoffset);
+		starMag += variable_magoffset;
+
 		// recompute magIndex with the new magnitude
 		magIndex = static_cast<int>((starMag - (mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
 
