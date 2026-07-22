@@ -2858,8 +2858,6 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 														// After dot - this is a FUNCTION name (case-sensitive!)
 														if (state.lastToken === 'dot') {
 																state.lastToken = null;
-																// Store the function name for later validation
-																// The color will be set by validateSingleFunction
 																return 'function-pending';
 														}
 														
