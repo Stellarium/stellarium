@@ -1,0 +1,1003 @@
+[
+    {
+        "name": "getFlagShowExoplanets",
+        "category": "Exoplanets - Core",
+        "signature": "bool getFlagShowExoplanets()",
+        "description": "Returns whether exoplanetary systems are displayed on the sky as markers.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if exoplanet systems are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Exoplanets.getFlagShowExoplanets()) {\n    core.debug(\"Exoplanet systems are visible\");\n} else {\n    Exoplanets.setFlagShowExoplanets(true);\n}"
+    },
+    {
+        "name": "setFlagShowExoplanets",
+        "category": "Exoplanets - Core",
+        "signature": "void setFlagShowExoplanets(bool visible)",
+        "description": "Shows or hides exoplanetary systems on the sky. Systems are displayed as markers around host stars.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show exoplanet systems, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show exoplanet systems\nExoplanets.setFlagShowExoplanets(true);\n\n// Hide exoplanet systems\nExoplanets.setFlagShowExoplanets(false);"
+    },
+    {
+        "name": "showExoplanets",
+        "category": "Exoplanets - Properties",
+        "signature": "bool showExoplanets",
+        "description": "Property that controls whether exoplanet systems are displayed. This is the recommended way to read/write this setting.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if exoplanet systems are visible, false if hidden",
+        "type": "property",
+        "alternative": "Exoplanets.getFlagShowExoplanets() / Exoplanets.setFlagShowExoplanets()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "// Read using property\nvar visible = core.getStelProperty('Exoplanets.showExoplanets');\n\n// Write using property\ncore.setStelProperty('Exoplanets.showExoplanets', true);"
+    },
+    {
+        "name": "getFlagShowExoplanetsDesignations",
+        "category": "Exoplanets - Display",
+        "signature": "bool getFlagShowExoplanetsDesignations()",
+        "description": "Returns whether designations of exoplanetary systems are displayed as labels.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if designations are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Exoplanets.getFlagShowExoplanetsDesignations()) {\n    core.debug(\"Exoplanet designations are visible\");\n}"
+    },
+    {
+        "name": "setFlagShowExoplanetsDesignations",
+        "category": "Exoplanets - Display",
+        "signature": "void setFlagShowExoplanetsDesignations(bool visible)",
+        "description": "Shows or hides designations of exoplanetary systems (e.g., 'HD 209458', 'Kepler-10').",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show designations, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show exoplanet system designations\nExoplanets.setFlagShowExoplanetsDesignations(true);\n\n// Hide designations\nExoplanets.setFlagShowExoplanetsDesignations(false);"
+    },
+    {
+        "name": "flagShowExoplanetsDesignations",
+        "category": "Exoplanets - Properties",
+        "signature": "bool flagShowExoplanetsDesignations",
+        "description": "Property that controls whether exoplanet system designations are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if designations are visible",
+        "type": "property",
+        "alternative": "Exoplanets.getFlagShowExoplanetsDesignations() / Exoplanets.setFlagShowExoplanetsDesignations()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Exoplanets.flagShowExoplanetsDesignations', true);"
+    },
+    {
+        "name": "getFlagShowExoplanetsNumbers",
+        "category": "Exoplanets - Display",
+        "signature": "bool getFlagShowExoplanetsNumbers()",
+        "description": "Returns whether the number of exoplanets in each system is displayed next to the marker.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if planet numbers are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Exoplanets.getFlagShowExoplanetsNumbers()) {\n    core.debug(\"Exoplanet counts are shown\");\n}"
+    },
+    {
+        "name": "setFlagShowExoplanetsNumbers",
+        "category": "Exoplanets - Display",
+        "signature": "void setFlagShowExoplanetsNumbers(bool visible)",
+        "description": "Shows or hides the number of exoplanets in each system next to the marker.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show planet numbers, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show how many exoplanets each system has\nExoplanets.setFlagShowExoplanetsNumbers(true);\n\n// Hide planet counts\nExoplanets.setFlagShowExoplanetsNumbers(false);"
+    },
+    {
+        "name": "flagShowExoplanetsNumbers",
+        "category": "Exoplanets - Properties",
+        "signature": "bool flagShowExoplanetsNumbers",
+        "description": "Property that controls whether exoplanet counts are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if planet numbers are visible",
+        "type": "property",
+        "alternative": "Exoplanets.getFlagShowExoplanetsNumbers() / Exoplanets.setFlagShowExoplanetsNumbers()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Exoplanets.flagShowExoplanetsNumbers', true);"
+    },
+    {
+        "name": "getDisplayMode",
+        "category": "Exoplanets - Display Mode",
+        "signature": "bool getDisplayMode()",
+        "description": "Returns whether distribution mode is enabled for exoplanets (showing density distribution rather than individual markers).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if distribution mode is enabled, false if not",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Exoplanets.getDisplayMode()) {\n    core.debug(\"Exoplanet distribution mode is enabled\");\n}"
+    },
+    {
+        "name": "setDisplayMode",
+        "category": "Exoplanets - Display Mode",
+        "signature": "void setDisplayMode(bool enabled)",
+        "description": "Enables or disables distribution mode for exoplanets (showing density distribution rather than individual markers).",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable distribution mode, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show exoplanet distribution density\nExoplanets.setDisplayMode(true);\n\n// Show individual system markers\nExoplanets.setDisplayMode(false);"
+    },
+    {
+        "name": "flagDisplayMode",
+        "category": "Exoplanets - Properties",
+        "signature": "bool flagDisplayMode",
+        "description": "Property that controls whether exoplanet distribution mode is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if distribution mode is enabled",
+        "type": "property",
+        "alternative": "Exoplanets.getDisplayMode() / Exoplanets.setDisplayMode()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Exoplanets.flagDisplayMode', true);"
+    },
+    {
+        "name": "getTimelineMode",
+        "category": "Exoplanets - Discovery Timeline",
+        "signature": "bool getTimelineMode()",
+        "description": "Returns whether timeline mode is enabled (showing only exoplanets discovered by the current simulation date).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if timeline mode is enabled, false if all systems shown",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Shows exoplanets as they were discovered historically"
+        },
+        "example": "if (Exoplanets.getTimelineMode()) {\n    core.debug(\"Only exoplanets discovered by current date are shown\");\n}"
+    },
+    {
+        "name": "setTimelineMode",
+        "category": "Exoplanets - Discovery Timeline",
+        "signature": "void setTimelineMode(bool enabled)",
+        "description": "Enables or disables timeline mode, showing only exoplanets that were discovered by the current simulation date.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable timeline mode, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Great for historical astronomy presentations"
+        },
+        "example": "// Show only exoplanets discovered by current date\nExoplanets.setTimelineMode(true);\n\n// Show all known exoplanets\nExoplanets.setTimelineMode(false);\n\n// Set date to 1995 to see first exoplanets\ncore.setDate(\"1995-12-01T00:00:00\");\nExoplanets.setTimelineMode(true);"
+    },
+    {
+        "name": "flagTimelineMode",
+        "category": "Exoplanets - Properties",
+        "signature": "bool flagTimelineMode",
+        "description": "Property that controls whether timeline mode is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if timeline mode is enabled",
+        "type": "property",
+        "alternative": "Exoplanets.getTimelineMode() / Exoplanets.setTimelineMode()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Exoplanets.flagTimelineMode', true);"
+    },
+    {
+        "name": "getHabitableMode",
+        "category": "Exoplanets - Habitable Zone",
+        "signature": "bool getHabitableMode()",
+        "description": "Returns whether habitable mode is enabled (showing only exoplanetary systems with potentially habitable exoplanets).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if only habitable systems are shown, false if all systems shown",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Based on data from the Habitable Exoplanets Catalog (PHL)"
+        },
+        "example": "if (Exoplanets.getHabitableMode()) {\n    core.debug(\"Only systems with potentially habitable planets are shown\");\n}"
+    },
+    {
+        "name": "setHabitableMode",
+        "category": "Exoplanets - Habitable Zone",
+        "signature": "void setHabitableMode(bool enabled)",
+        "description": "Filters exoplanet systems to show only those with potentially habitable exoplanets.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show only habitable systems, false to show all",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show only potentially habitable exoplanets\nExoplanets.setHabitableMode(true);\n\n// Show all exoplanets\nExoplanets.setHabitableMode(false);"
+    },
+    {
+        "name": "flagHabitableMode",
+        "category": "Exoplanets - Properties",
+        "signature": "bool flagHabitableMode",
+        "description": "Property that controls whether only habitable exoplanet systems are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if only habitable systems are shown",
+        "type": "property",
+        "alternative": "Exoplanets.getHabitableMode() / Exoplanets.setHabitableMode()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Exoplanets.flagHabitableMode', true);"
+    },
+    {
+        "name": "getMarkerColor",
+        "category": "Exoplanets - Appearance",
+        "signature": "Vec3f getMarkerColor()",
+        "description": "Returns the color used for exoplanetary system markers. Default is light green (0.4, 0.9, 0.5).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector with values from 0.0 to 1.0",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var color = Exoplanets.getMarkerColor();\ncore.debug(\"Exoplanet marker color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setMarkerColor",
+        "category": "Exoplanets - Appearance",
+        "signature": "void setMarkerColor(Vec3f color)",
+        "description": "Sets the color for exoplanetary system markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Set exoplanet markers to cyan\nvar cyan = core.vec3f(0.2, 0.8, 0.9);\nExoplanets.setMarkerColor(cyan);\n\n// Set to yellow-orange\nvar orange = core.vec3f(1.0, 0.7, 0.2);\nExoplanets.setMarkerColor(orange);"
+    },
+    {
+        "name": "markerColor",
+        "category": "Exoplanets - Properties",
+        "signature": "Vec3f markerColor",
+        "description": "⚠️ Property that returns the exoplanet marker color. For reading, use core.getStelProperty(). For writing, use Exoplanets.setMarkerColor().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "property",
+        "alternative": "Exoplanets.getMarkerColor() / Exoplanets.setMarkerColor()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting (read via core.getStelProperty, write via method)"
+        },
+        "example": "// Read color using property\nvar colorStr = core.getStelProperty('Exoplanets.markerColor');\nvar parts = colorStr.split(',');\nvar r = parseFloat(parts[0]);\nvar g = parseFloat(parts[1]);\nvar b = parseFloat(parts[2]);\n\n// Write using method\nvar newColor = core.vec3f(0.2, 0.8, 0.9);\nExoplanets.setMarkerColor(newColor);"
+    },
+    {
+        "name": "getHabitableColor",
+        "category": "Exoplanets - Appearance",
+        "signature": "Vec3f getHabitableColor()",
+        "description": "Returns the color used for potentially habitable exoplanet systems (when habitable mode is enabled). Default is orange (1.0, 0.5, 0.0).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector with values from 0.0 to 1.0",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var color = Exoplanets.getHabitableColor();\ncore.debug(\"Habitable exoplanet color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setHabitableColor",
+        "category": "Exoplanets - Appearance",
+        "signature": "void setHabitableColor(Vec3f color)",
+        "description": "Sets the color for potentially habitable exoplanet systems.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Set habitable exoplanets to bright green\nvar brightGreen = core.vec3f(0.2, 0.9, 0.2);\nExoplanets.setHabitableColor(brightGreen);\n\n// Set to gold\nvar gold = core.vec3f(1.0, 0.8, 0.2);\nExoplanets.setHabitableColor(gold);"
+    },
+    {
+        "name": "habitableColor",
+        "category": "Exoplanets - Properties",
+        "signature": "Vec3f habitableColor",
+        "description": "⚠️ Property that returns the habitable exoplanet marker color. For reading, use core.getStelProperty(). For writing, use Exoplanets.setHabitableColor().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "property",
+        "alternative": "Exoplanets.getHabitableColor() / Exoplanets.setHabitableColor()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting (read via core.getStelProperty, write via method)"
+        },
+        "example": "var colorStr = core.getStelProperty('Exoplanets.habitableColor');"
+    },
+    {
+        "name": "getCountPlanetarySystems",
+        "category": "Exoplanets - Information",
+        "signature": "int getCountPlanetarySystems()",
+        "description": "Returns the number of planetary systems (stars with exoplanets) currently loaded in the catalog.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Number of planetary systems",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Updated via internet updates"
+        },
+        "example": "var systems = Exoplanets.getCountPlanetarySystems();\ncore.debug(\"Planetary systems: \" + systems);"
+    },
+    {
+        "name": "getCountAllExoplanets",
+        "category": "Exoplanets - Information",
+        "signature": "int getCountAllExoplanets()",
+        "description": "Returns the total number of confirmed exoplanets currently loaded in the catalog.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Total number of confirmed exoplanets",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Updated via internet updates"
+        },
+        "example": "var count = Exoplanets.getCountAllExoplanets();\ncore.debug(\"Total confirmed exoplanets: \" + count);"
+    },
+    {
+        "name": "getCountHabitableExoplanets",
+        "category": "Exoplanets - Information",
+        "signature": "int getCountHabitableExoplanets()",
+        "description": "Returns the number of potentially habitable exoplanets currently loaded in the catalog.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Number of potentially habitable exoplanets",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Based on PHL's Habitable Exoplanets Catalog"
+        },
+        "example": "var habitable = Exoplanets.getCountHabitableExoplanets();\ncore.debug(\"Potentially habitable exoplanets: \" + habitable);"
+    },
+    {
+        "name": "getUpdatesEnabled",
+        "category": "Exoplanets - Updates",
+        "signature": "bool getUpdatesEnabled()",
+        "description": "Returns whether automatic updates of the exoplanet catalog from the internet are enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if automatic updates are enabled, false if disabled",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Requires internet connection for updates"
+        },
+        "example": "if (Exoplanets.getUpdatesEnabled()) {\n    core.debug(\"Automatic exoplanet catalog updates are enabled\");\n}"
+    },
+    {
+        "name": "setUpdatesEnabled",
+        "category": "Exoplanets - Updates",
+        "signature": "void setUpdatesEnabled(bool enabled)",
+        "description": "Enables or disables automatic updates of the exoplanet catalog from the internet.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable automatic updates, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Enable automatic catalog updates\nExoplanets.setUpdatesEnabled(true);\n\n// Disable automatic updates\nExoplanets.setUpdatesEnabled(false);"
+    },
+    {
+        "name": "updateJSON",
+        "category": "Exoplanets - Updates",
+        "signature": "void updateJSON()",
+        "description": "Manually triggers an immediate update of the exoplanet catalog JSON file from the configured online source (default: https://www.stellarium.org/json/exoplanets.json).",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Requires internet connection"
+        },
+        "example": "// Manually update exoplanet catalog\nExoplanets.updateJSON();\ncore.debug(\"Exoplanet catalog update started...\");\n\n// Wait for update to complete\ncore.wait(30);\ncore.debug(\"Exoplanet catalog updated\");"
+    },
+    {
+        "name": "getLastUpdate",
+        "category": "Exoplanets - Updates",
+        "signature": "QDateTime getLastUpdate()",
+        "description": "Returns the date and time of the last successful exoplanet catalog update.",
+        "parameters": [],
+        "returnType": "QDateTime",
+        "returnDescription": "Date and time of last catalog update",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var lastUpdate = Exoplanets.getLastUpdate();\ncore.debug(\"Last exoplanet catalog update: \" + lastUpdate.toString());"
+    },
+    {
+        "name": "getUpdateFrequencyHours",
+        "category": "Exoplanets - Updates",
+        "signature": "int getUpdateFrequencyHours()",
+        "description": "Returns the frequency of automatic catalog updates in hours. Default is 72 hours (3 days).",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Update frequency in hours",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var freq = Exoplanets.getUpdateFrequencyHours();\ncore.debug(\"Update frequency: \" + freq + \" hours\");"
+    },
+    {
+        "name": "setUpdateFrequencyHours",
+        "category": "Exoplanets - Updates",
+        "signature": "void setUpdateFrequencyHours(int hours)",
+        "description": "Sets the frequency of automatic catalog updates in hours.",
+        "parameters": [
+            {
+                "name": "hours",
+                "type": "int",
+                "description": "Update frequency in hours (recommended: 24-168)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Update daily\nExoplanets.setUpdateFrequencyHours(24);\n\n// Update weekly\nExoplanets.setUpdateFrequencyHours(168);"
+    },
+    {
+        "name": "getSecondsToUpdate",
+        "category": "Exoplanets - Updates",
+        "signature": "int getSecondsToUpdate()",
+        "description": "Returns the number of seconds until the next scheduled automatic catalog update.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Seconds until next update",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var secs = Exoplanets.getSecondsToUpdate();\ncore.debug(\"Next update in: \" + secs + \" seconds\");"
+    },
+    {
+        "name": "getUpdateState",
+        "category": "Exoplanets - Updates",
+        "signature": "UpdateState getUpdateState()",
+        "description": "Returns the current update state. Values: 0=Updating, 1=CompleteNoUpdates, 2=CompleteUpdates, 3=DownloadError, 4=OtherError.",
+        "parameters": [],
+        "returnType": "UpdateState",
+        "returnDescription": "Update state (0-4)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var state = Exoplanets.getUpdateState();\nif (state === 0) core.debug(\"Updating catalog...\");\nelse if (state === 1) core.debug(\"No updates needed\");\nelse if (state === 2) core.debug(\"Catalog updated successfully\");\nelse if (state === 3) core.debug(\"Download error occurred\");"
+    },
+    {
+        "name": "getEnableAtStartup",
+        "category": "Exoplanets - Configuration",
+        "signature": "bool getEnableAtStartup()",
+        "description": "Returns whether the Exoplanets plugin should be enabled automatically when Stellarium starts.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if enabled at startup, false otherwise",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Exoplanets.getEnableAtStartup()) {\n    core.debug(\"Exoplanets will load on next startup\");\n}"
+    },
+    {
+        "name": "setEnableAtStartup",
+        "category": "Exoplanets - Configuration",
+        "signature": "void setEnableAtStartup(bool enable)",
+        "description": "Sets whether the Exoplanets plugin should be enabled automatically when Stellarium starts.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable at startup, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Enable Exoplanets on next startup\nExoplanets.setEnableAtStartup(true);\n\n// Disable Exoplanets on next startup\nExoplanets.setEnableAtStartup(false);"
+    },
+    {
+        "name": "getFlagShowExoplanetsButton",
+        "category": "Exoplanets - GUI",
+        "signature": "bool getFlagShowExoplanetsButton()",
+        "description": "Returns whether the Exoplanets plugin toolbar button is visible in the Stellarium GUI.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if button is visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Exoplanets.getFlagShowExoplanetsButton()) {\n    core.debug(\"Exoplanets toolbar button is visible\");\n}"
+    },
+    {
+        "name": "setFlagShowExoplanetsButton",
+        "category": "Exoplanets - GUI",
+        "signature": "void setFlagShowExoplanetsButton(bool visible)",
+        "description": "Shows or hides the Exoplanets plugin toolbar button in the Stellarium GUI.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show button, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show Exoplanets button on toolbar\nExoplanets.setFlagShowExoplanetsButton(true);\n\n// Hide Exoplanets button\nExoplanets.setFlagShowExoplanetsButton(false);"
+    },
+    {
+        "name": "restoreDefaults",
+        "category": "Exoplanets - Configuration",
+        "signature": "void restoreDefaults()",
+        "description": "Restores all Exoplanets plugin settings and catalog to their default values. This will reset visibility, colors, filter settings, and replace the catalog file.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Reset all Exoplanets plugin settings to defaults\nExoplanets.restoreDefaults();\ncore.debug(\"Exoplanets settings restored to defaults\");"
+    },
+    {
+        "name": "getByID",
+        "category": "Exoplanets - Information",
+        "signature": "ExoplanetP getByID(QString id)",
+        "description": "Returns an exoplanetary system object by its designation (e.g., 'Kepler-10', 'HD 209458', 'TRAPPIST-1').",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Exoplanet system designation",
+                "required": true
+            }
+        ],
+        "returnType": "ExoplanetP",
+        "returnDescription": "Exoplanet system object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Returns an ExoplanetP object with methods like getEnglishName(), getExoplanetsCount(), getHabitableCount(), etc."
+        },
+        "example": "// Get TRAPPIST-1 system (7 exoplanets, 3 in habitable zone)\nvar trappist = Exoplanets.getByID(\"TRAPPIST-1\");\nif (trappist) {\n    core.debug(\"Found: \" + trappist.getEnglishName());\n    core.debug(\"Exoplanets in system: \" + trappist.getCountExoplanets());\n    core.debug(\"Potentially habitable: \" + trappist.getCountHabitableExoplanets());\n    core.moveToObject(trappist.getEnglishName(), 3);\n} else {\n    core.debug(\"System not found in catalog\");\n}"
+    },
+    {
+        "name": "getAllExoplanetarySystems",
+        "category": "Exoplanets - Information",
+        "signature": "QList<ExoplanetP> getAllExoplanetarySystems()",
+        "description": "Returns the list of all exoplanetary system objects currently loaded in the catalog.",
+        "parameters": [],
+        "returnType": "QList<ExoplanetP>",
+        "returnDescription": "List of all exoplanetary systems",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var allSystems = Exoplanets.getAllExoplanetarySystems();\ncore.debug(\"Total planetary systems: \" + allSystems.length);\n\n// Print first 10 system names\nfor (var i = 0; i < Math.min(10, allSystems.length); i++) {\n    core.debug(allSystems[i].getEnglishName());\n}"
+    },
+    {
+        "name": "searchByID",
+        "category": "Exoplanets - Search",
+        "signature": "StelObjectP searchByID(QString id)",
+        "description": "Searches for an exoplanetary system by its designation. Returns a StelObjectP that can be used with core.moveToObject() and other object functions.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Exoplanet system designation (e.g., 'Kepler-10', 'TRAPPIST-1')",
+                "required": true
+            }
+        ],
+        "returnType": "StelObjectP",
+        "returnDescription": "Exoplanet system as StelObject, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Alternative to getByID() that returns StelObjectP"
+        },
+        "example": "var system = Exoplanets.searchByID(\"TRAPPIST-1\");\nif (system) {\n    core.debug(\"Moving to TRAPPIST-1 system\");\n    core.moveToObject(system.getEnglishName(), 3);\n}"
+    },
+    {
+        "name": "searchByName",
+        "category": "Exoplanets - Search",
+        "signature": "StelObjectP searchByName(QString name)",
+        "description": "Searches for an exoplanetary system by its English name or designation.",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "Exoplanet system name or designation (e.g., 'TRAPPIST-1', 'Kepler-10', 'HD 209458')",
+                "required": true
+            }
+        ],
+        "returnType": "StelObjectP",
+        "returnDescription": "Exoplanet system object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Case-insensitive search"
+        },
+        "example": "var system = Exoplanets.searchByName(\"TRAPPIST-1\");\nif (system) {\n    core.debug(\"Found TRAPPIST-1 system\");\n    core.debug(\"Distance: \" + system.getDistance() + \" pc\");\n    core.moveToObject(system.getEnglishName(), 3);\n}"
+    },
+    {
+        "name": "listAllObjects",
+        "category": "Exoplanets - Information",
+        "signature": "QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish)",
+        "description": "Returns a list of all exoplanet system objects with their names. This can be used for auto-completion and search.",
+        "parameters": [
+            {
+                "name": "inEnglish",
+                "type": "bool",
+                "description": "true to list English names, false for translated names",
+                "required": true
+            }
+        ],
+        "returnType": "QVector<QPair<QString,StelObjectP>>",
+        "returnDescription": "List of (name, object) pairs",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var objects = Exoplanets.listAllObjects(false);\ncore.debug(\"Total exoplanet systems in catalog: \" + objects.length);"
+    },
+    {
+        "name": "getName",
+        "category": "Exoplanets - Information",
+        "signature": "QString getName()",
+        "description": "Returns the display name of the Exoplanets plugin module.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Module name ('Exoplanets')",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var name = Exoplanets.getName();\ncore.debug(\"Module: \" + name);"
+    },
+    {
+        "name": "getStelObjectType",
+        "category": "Exoplanets - Information",
+        "signature": "QString getStelObjectType()",
+        "description": "Returns the object type identifier for exoplanet systems. Used by StelObjectMgr to identify objects from this module.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Object type ('Exoplanet')",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var objType = Exoplanets.getStelObjectType();\ncore.debug(\"Object type: \" + objType); // Returns 'Exoplanet'"
+    },
+    {
+        "name": "setCurrentTemperatureScale",
+        "category": "Exoplanets - Appearance",
+        "signature": "void setCurrentTemperatureScale(int scale)",
+        "description": "Sets the temperature scale for displaying exoplanet temperatures. Values: 0=Kelvin, 1=Celsius, 2=Fahrenheit.",
+        "parameters": [
+            {
+                "name": "scale",
+                "type": "int",
+                "description": "0=Kelvin, 1=Celsius, 2=Fahrenheit",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Use Celsius for exoplanet temperatures\nExoplanets.setCurrentTemperatureScale(1);\n\n// Use Fahrenheit\nExoplanets.setCurrentTemperatureScale(2);\n\n// Use Kelvin (scientific)\nExoplanets.setCurrentTemperatureScale(0);"
+    },
+    {
+        "name": "getCurrentTemperatureScale",
+        "category": "Exoplanets - Appearance",
+        "signature": "int getCurrentTemperatureScale()",
+        "description": "Returns the current temperature scale for exoplanet display. 0=Kelvin, 1=Celsius, 2=Fahrenheit.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Temperature scale (0=Kelvin, 1=Celsius, 2=Fahrenheit)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var scale = Exoplanets.getCurrentTemperatureScale();\nvar scaleName = scale === 0 ? \"Kelvin\" : (scale === 1 ? \"Celsius\" : \"Fahrenheit\");\ncore.debug(\"Temperature scale: \" + scaleName);"
+    },
+    {
+        "name": "getCurrentTemperatureScaleKey",
+        "category": "Exoplanets - Appearance",
+        "signature": "QString getCurrentTemperatureScaleKey()",
+        "description": "Returns the key name of the current temperature scale ('Kelvin', 'Celsius', or 'Fahrenheit').",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Temperature scale key",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var scaleKey = Exoplanets.getCurrentTemperatureScaleKey();\ncore.debug(\"Temperature scale: \" + scaleKey);"
+    },
+    {
+        "name": "setCurrentTemperatureScaleKey",
+        "category": "Exoplanets - Appearance",
+        "signature": "void setCurrentTemperatureScaleKey(QString key)",
+        "description": "Sets the temperature scale by its key name ('Kelvin', 'Celsius', or 'Fahrenheit').",
+        "parameters": [
+            {
+                "name": "key",
+                "type": "QString",
+                "description": "Temperature scale key ('Kelvin', 'Celsius', or 'Fahrenheit')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "Exoplanets.setCurrentTemperatureScaleKey(\"Celsius\");"
+    }
+]

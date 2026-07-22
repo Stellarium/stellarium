@@ -8,6 +8,20 @@
   <link type="text/css" rel="stylesheet" href="/external/jquery-ui.css"/>
   <link type="text/css" rel="stylesheet" href="style.css" />
 	<link type="text/css" rel="stylesheet" href="gamepad.css" />
+	<link type="text/css" rel="stylesheet" href="/js/scripteditor/css/scriptEditor.css" />
+	
+	<!-- CodeMirror - Local Code Editor with Syntax Highlighting -->
+	<link rel="stylesheet" href="/js/scripteditor/codemirror/css/codemirror.min.css"/>
+	<link rel="stylesheet" href="/js/scripteditor/codemirror/css/dialog.min.css"/>
+	<script src="/js/scripteditor/codemirror/js/codemirror.min.js"></script>
+	<script src="/js/scripteditor/codemirror/js/show-hint.min.js"></script>
+	<script src="/js/scripteditor/codemirror/js/closebrackets.min.js"></script>
+	<script src="/js/scripteditor/codemirror/js/matchbrackets.min.js"></script>
+	<script src="/js/scripteditor/codemirror/js/search.min.js"></script>
+	<script src="/js/scripteditor/codemirror/js/searchcursor.min.js"></script>
+	<script src="/js/scripteditor/codemirror/js/dialog.min.js"></script>
+	<script src="/js/scripteditor/codemirror/js/active-line.min.js"></script>
+	
   <!-- Stellarium uses require.js to provide a controlled module environment -->
   <script data-main="js/main" src="js/require.js" type="text/javascript"></script>
 </head>
@@ -733,6 +747,7 @@
 													<li><a href="#patterns-tab-lunar"><?= tr("Lunar Mansions")?> <span id="lunar-count" class="pattern-count"></span></a></li>
 													<li><a href="#patterns-tab-stars"><?= tr("Notable Stars")?> <span id="stars-count" class="pattern-count"></span></a></li>
 													<li><a href="#patterns-tab-description"><?= tr("Description")?></a></li>
+													<li><a href="#patterns-tab-artwork"><?= tr("Artwork")?> <span id="artwork-count" class="pattern-count"></span></a></li>
 											</ul>
 											
 											<!-- Constellations Tab -->
@@ -780,166 +795,318 @@
 													<iframe id="vo_skycultureinfo" class="skyculture-info-frame" src="/api/view/skyculturedescription/"></iframe>
 											</div>
 											
+											<!-- Artwork Tab -->
+											<div id="patterns-tab-artwork" class="patterns-tab-content">
+													<p class="patterns-note"><?= tr("Constellation illustrations from the current sky culture. Click an image to locate the constellation in the sky.")?></p>
+													<div id="artwork-container" class="artwork-container">
+															<div class="loading-placeholder"><?= tr("No artwork available for this culture")?></div>
+													</div>
+											</div>
+											
 									</div><!-- END #skyculture-patterns-tabs -->
 									
 							</div><!-- END .skyculture-panel -->
 							
-							<!-- RIGHT PANEL: Sky Culture Options -->
-							<div class="skyculture-options-panel">
+					<!-- FOOTER PANEL: Sky Culture Options -->
+					<div class="skyculture-options-panel">
+							
+							<h3><?= tr("Options")?></h3>
+							
+							<div class="options-grid">
 									
-									<h3><?= tr("Options")?></h3>
-									
-									<div class="options-grid">
-											
-											<!-- 1. Constellation Labels -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.namesDisplayed" />
-															<span><?= tr("Label constellations with font size")?></span>
-													</label>
-													<div class="option-controls">
+									<!-- ============================================================
+											 CONSTELLATION LABELS - Size + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.namesDisplayed" />
+													<span><?= tr("Label constellations with font size")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
 															<span class="stelproperty" data-prop="ConstellationMgr.fontSize" data-numberformat="n0"></span>
 															<div id="constellation-fontsize" class="slider stelproperty" 
 																	 data-prop="ConstellationMgr.fontSize" data-min="8" data-max="40" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.namesColor">
+																	<div class="color-swatch" style="background-color: rgb(255, 255, 255);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="1.0" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="1.0" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="1.0" />
+																	</div>
+															</div>
+													</div>
 											</div>
-											
-											<!-- 2. Constellation Lines -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.linesDisplayed" />
-															<span><?= tr("Show lines with thickness")?></span>
-													</label>
-													<div class="option-controls">
+									</div>
+									
+									<!-- ============================================================
+											 CONSTELLATION LINES - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.linesDisplayed" />
+													<span><?= tr("Show lines with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
 															<span class="stelproperty" data-prop="ConstellationMgr.constellationLineThickness" data-numberformat="n0"></span>
 															<div id="constellation-linethickness" class="slider stelproperty" 
 																	 data-prop="ConstellationMgr.constellationLineThickness" data-min="1" data-max="5" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
-											</div>
-											
-											<!-- 3. Asterism Labels -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="AsterismMgr.namesDisplayed" />
-															<span><?= tr("Label asterisms with font size")?></span>
-													</label>
-													<div class="option-controls">
-															<span class="stelproperty" data-prop="AsterismMgr.fontSize" data-numberformat="n0"></span>
-															<div id="asterism-fontsize" class="slider stelproperty" 
-																	 data-prop="AsterismMgr.fontSize" data-min="8" data-max="40" 
-																	 data-step="1" data-numberformat="n0"></div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.linesColor">
+																	<div class="color-swatch" style="background-color: rgb(128, 128, 128);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.5" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.5" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.5" />
+																	</div>
+															</div>
 													</div>
 											</div>
-											
-											<!-- 4. Asterism Lines -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="AsterismMgr.linesDisplayed" />
-															<span><?= tr("Show asterisms with thickness")?></span>
-													</label>
-													<div class="option-controls">
-															<span class="stelproperty" data-prop="AsterismMgr.asterismLineThickness" data-numberformat="n0"></span>
-															<div id="asterism-linethickness" class="slider stelproperty" 
-																	 data-prop="AsterismMgr.asterismLineThickness" data-min="1" data-max="5" 
+									</div>
+									
+									<!-- ============================================================
+											 CONSTELLATION BOUNDARIES - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.boundariesDisplayed" />
+													<span><?= tr("Show boundaries with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="ConstellationMgr.boundariesThickness" data-numberformat="n0"></span>
+															<div id="boundaries-thickness" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.boundariesThickness" data-min="1" data-max="5" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
-											</div>
-											
-											<!-- 5. Ray Helpers -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="AsterismMgr.rayHelpersDisplayed" />
-															<span><?= tr("Show ray helpers with thickness")?></span>
-													</label>
-													<div class="option-controls">
-															<span class="stelproperty" data-prop="AsterismMgr.rayHelperThickness" data-numberformat="n0"></span>
-															<div id="rayhelper-thickness" class="slider stelproperty" 
-																	 data-prop="AsterismMgr.rayHelperThickness" data-min="1" data-max="5" 
-																	 data-step="1" data-numberformat="n0"></div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.boundariesColor">
+																	<div class="color-swatch" style="background-color: rgb(200, 80, 80);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.3" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
+																	</div>
+															</div>
 													</div>
 											</div>
-											
-											<!-- 6. Constellation Art -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.artDisplayed" />
-															<span><?= tr("Show art in brightness")?></span>
-													</label>
-													<div class="option-controls">
+									</div>
+									
+									<!-- ============================================================
+											 CONSTELLATION HULLS - Thickness + Color (NEW)
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.hullsDisplayed" />
+													<span><?= tr("Show hulls with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="ConstellationMgr.hullsThickness" data-numberformat="n0"></span>
+															<div id="hulls-thickness" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.hullsThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.hullsColor">
+																	<div class="color-swatch" style="background-color: rgb(200, 150, 80);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.6" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div>
+									
+									<!-- ============================================================
+											 CONSTELLATION ART - Intensity Only (No Color)
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.artDisplayed" />
+													<span><?= tr("Show art in brightness")?></span>
+											</label>
+											<div class="option-group-controls single-control">
+													<div class="option-sub-control">
 															<span class="stelproperty" data-prop="ConstellationMgr.artIntensity" data-numberformat="n2"></span>
 															<div id="art-intensity" class="slider stelproperty" 
 																	 data-prop="ConstellationMgr.artIntensity" data-min="0" data-max="1" 
 																	 data-step="0.05" data-numberformat="n2"></div>
 													</div>
 											</div>
-											
-											<!-- 7. Constellation Boundaries -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.boundariesDisplayed" />
-															<span><?= tr("Show boundaries with thickness")?></span>
-													</label>
-													<div class="option-controls">
-															<span class="stelproperty" data-prop="ConstellationMgr.boundariesThickness" data-numberformat="n0"></span>
-															<div id="boundaries-thickness" class="slider stelproperty" 
-																	 data-prop="ConstellationMgr.boundariesThickness" data-min="1" data-max="5" 
+									</div>
+									
+									<!-- ============================================================
+											 ASTERISM LABELS - Size + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="AsterismMgr.namesDisplayed" />
+													<span><?= tr("Label asterisms with font size")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="AsterismMgr.fontSize" data-numberformat="n0"></span>
+															<div id="asterism-fontsize" class="slider stelproperty" 
+																	 data-prop="AsterismMgr.fontSize" data-min="8" data-max="40" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="AsterismMgr.namesColor">
+																	<div class="color-swatch" style="background-color: rgb(255, 255, 255);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="1.0" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="1.0" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="1.0" />
+																	</div>
+															</div>
+													</div>
 											</div>
-											
-											<!-- 8. Zodiac -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.zodiacDisplayed" />
-															<span><?= tr("Show zodiac with thickness")?></span>
-													</label>
-													<div class="option-controls">
+									</div>
+									
+									<!-- ============================================================
+											 ASTERISM LINES - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="AsterismMgr.linesDisplayed" />
+													<span><?= tr("Show asterisms with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="AsterismMgr.asterismLineThickness" data-numberformat="n0"></span>
+															<div id="asterism-linethickness" class="slider stelproperty" 
+																	 data-prop="AsterismMgr.asterismLineThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="AsterismMgr.linesColor">
+																	<div class="color-swatch" style="background-color: rgb(200, 50, 50);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.2" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.2" />
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div>
+									
+									<!-- ============================================================
+											 ASTERISM RAY HELPERS - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="AsterismMgr.rayHelpersDisplayed" />
+													<span><?= tr("Show ray helpers with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="AsterismMgr.rayHelperThickness" data-numberformat="n0"></span>
+															<div id="rayhelper-thickness" class="slider stelproperty" 
+																	 data-prop="AsterismMgr.rayHelperThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="AsterismMgr.rayHelpersColor">
+																	<div class="color-swatch" style="background-color: rgb(100, 200, 100);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.4" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.4" />
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div>
+									
+									<!-- ============================================================
+											 ZODIAC - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.zodiacDisplayed" />
+													<span><?= tr("Show zodiac with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
 															<span class="stelproperty" data-prop="ConstellationMgr.zodiacThickness" data-numberformat="n0"></span>
 															<div id="zodiac-thickness" class="slider stelproperty" 
 																	 data-prop="ConstellationMgr.zodiacThickness" data-min="1" data-max="5" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.zodiacColor">
+																	<div class="color-swatch" style="background-color: rgb(200, 100, 200);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.4" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.8" />
+																	</div>
+															</div>
+													</div>
 											</div>
-											
-											<!-- 9. Lunar System -->
-											<div class="option-item">
-													<label class="option-label">
-															<input type="checkbox" class="stelproperty" name="ConstellationMgr.lunarSystemDisplayed" />
-															<span><?= tr("Show lunar stations/mansions with thickness")?></span>
-													</label>
-													<div class="option-controls">
+									</div>
+									
+									<!-- ============================================================
+											 LUNAR SYSTEM - Thickness + Color
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.lunarSystemDisplayed" />
+													<span><?= tr("Show lunar stations/mansions with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
 															<span class="stelproperty" data-prop="ConstellationMgr.lunarSystemThickness" data-numberformat="n0"></span>
 															<div id="lunar-thickness" class="slider stelproperty" 
 																	 data-prop="ConstellationMgr.lunarSystemThickness" data-min="1" data-max="5" 
 																	 data-step="1" data-numberformat="n0"></div>
 													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.lunarSystemColor">
+																	<div class="color-swatch" style="background-color: rgb(80, 200, 80);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.3" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
+																	</div>
+															</div>
+													</div>
 											</div>
-											
-									</div><!-- END .options-grid -->
-									
-									<!-- Additional Options -->
-									<div class="skyculture-additional-options">
-											
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="StelSkyCultureMgr.flagUseAbbreviatedNames" />
-													<span><?= tr("Short labels")?></span>
-											</label>
-											
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.isolateSelected" />
-													<span><?= tr("Constellation selection isolated")?></span>
-											</label>
-											
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.flagConstellationPick" />
-													<span><?= tr("Only last selected")?></span>
-											</label>
-											
 									</div>
 									
-							</div><!-- END .skyculture-options-panel -->
+							</div><!-- END .options-grid -->
+							
+							<!-- Additional Options -->
+							<div class="skyculture-additional-options">
+									
+									<label class="option-label">
+											<input type="checkbox" class="stelproperty" name="StelSkyCultureMgr.flagUseAbbreviatedNames" />
+											<span><?= tr("Short labels")?></span>
+									</label>
+									
+									<label class="option-label">
+											<input type="checkbox" class="stelproperty" name="ConstellationMgr.isolateSelected" />
+											<span><?= tr("Constellation selection isolated")?></span>
+									</label>
+									
+									<label class="option-label">
+											<input type="checkbox" class="stelproperty" name="ConstellationMgr.flagConstellationPick" />
+											<span><?= tr("Only last selected")?></span>
+									</label>
+									
+							</div>
+							
+					</div><!-- END .skyculture-options-panel -->
 							
 					</div>
 			</div><!-- END #tab_skyculture -->
@@ -948,27 +1115,27 @@
 			<div id="tab_skyculture_stats">
 					<div class="flex flex-wrap" style="gap: 20px;">
 							
-							<!-- Info Bar - What is this section? -->
-							<div class="stats-bar stats-info-bar" style="width: 100%;">
-									<div class="stat-item" style="flex: 1; background: rgba(0, 0, 0, 0.15);">
-											<span class="stat-label" style="display: block; margin-bottom: 8px; color: #DCDBDA; font-size: 13px;"><?= tr("Culture Data Inspector")?></span>
-											<span class="stat-description" style="color: #B4B7B0; font-size: 11px; line-height: 1.6;">
-													<?= tr("This inspector displays the complete, unfiltered dataset extracted directly from the culture's")?> 
-													<code style="background: #2A2C2E; padding: 2px 5px; border-radius: 3px;">index.json</code> 
-													<?= tr("file. Use this view to:")?>
-													<ul style="margin: 8px 0 0 20px; padding: 0; color: #B4B7B0; font-size: 11px;">
-															<li><?= tr("Verify exact constellation and asterism counts (including ray helpers)")?></li>
-															<li><?= tr("Inspect raw IDs, native names, pronunciations, and IPA values")?></li>
-															<li><?= tr("Cross-reference star IDs (HIP, NGC, etc.) with their cultural names")?></li>
-															<li><?= tr("Export complete datasets to CSV/JSON for external analysis")?></li>
-															<li><?= tr("Search across all fields to quickly locate specific entries")?></li>
-													</ul>
-													<span style="display: block; margin-top: 8px; color: #8A8C8E; font-style: italic;">
-															<?= tr("Each row is interactive — click to select and navigate to the object in Stellarium.")?>
-													</span>
-											</span>
-									</div>
-							</div>
+						<!-- Info Bar - What is this section? -->
+						<div class="stats-bar stats-info-bar" style="width: 100%;">
+								<div class="stat-item">
+										<span class="stat-label"><?= tr("Culture Data Inspector")?></span>
+										<span class="stat-description">
+												<?= tr("This inspector displays the complete, unfiltered dataset extracted directly from the culture's")?> 
+												<code>index.json</code> 
+												<?= tr("file. Use this view to:")?>
+												<ul>
+														<li><?= tr("Verify exact constellation and asterism counts (including ray helpers)")?></li>
+														<li><?= tr("Inspect raw IDs, native names, pronunciations, and IPA values")?></li>
+														<li><?= tr("Cross-reference star IDs (HIP, NGC, etc.) with their cultural names")?></li>
+														<li><?= tr("Export complete datasets to CSV/JSON for external analysis")?></li>
+														<li><?= tr("Search across all fields to quickly locate specific entries")?></li>
+												</ul>
+												<span class="note-italic">
+														<?= tr("Each row is interactive — click to select and navigate to the object in Stellarium.")?>
+												</span>
+										</span>
+								</div>
+						</div>
 
 							<!-- Culture Selector Panel -->
 							<div class="culture-selector-panel" style="width: 100%;">
@@ -1030,7 +1197,7 @@
 															<button class="export-btn" id="export-constellations-json">JSON</button>
 													</div>
 											</div>
-											<p style="margin: 5px 0 10px 0; font-size: 10px; color: #8A8C8E;">
+											<p class="patterns-note">
 													<?= tr("Complete constellation definitions from index.json. Click any row to isolate and highlight in Stellarium.")?>
 											</p>
 											<div class="table-container">
@@ -1061,7 +1228,7 @@
 															<button class="export-btn" id="export-asterisms-json">JSON</button>
 													</div>
 											</div>
-											<p style="margin: 5px 0 10px 0; font-size: 10px; color: #8A8C8E;">
+											<p class="patterns-note">
 													<?= tr("All asterisms from index.json (ray helpers are excluded from this list). Click any row to center view.")?>
 											</p>
 											<div class="table-container">
@@ -1085,6 +1252,9 @@
 									
 									<!-- Zodiac Table -->
 									<div id="stats-tab-zodiac" class="tab-content">
+											<p class="patterns-note">
+													<?= tr("Zodiac signs defined in this culture. Click to center on the constellation.")?>
+											</p>									
 											<div class="table-container">
 													<table class="stats-table">
 															<thead>
@@ -1100,13 +1270,13 @@
 															<tbody id="zodiac-stats-body"></tbody>
 													</table>
 											</div>
-											<p style="margin: 10px 0 0 0; font-size: 10px; color: #8A8C8E;">
-													<?= tr("Zodiac signs defined in this culture. Click to center on the constellation.")?>
-											</p>
 									</div>
 									
 									<!-- Lunar Mansions Table -->
 									<div id="stats-tab-lunar" class="tab-content">
+											<p class="patterns-note">
+													<?= tr("Lunar mansions (stations) defined in this culture. Click to center view.")?>
+											</p>									
 											<div class="table-container">
 													<table class="stats-table">
 															<thead>
@@ -1122,9 +1292,6 @@
 															<tbody id="lunar-stats-body"></tbody>
 													</table>
 											</div>
-											<p style="margin: 10px 0 0 0; font-size: 10px; color: #8A8C8E;">
-													<?= tr("Lunar mansions (stations) defined in this culture. Click to center view.")?>
-											</p>
 									</div>
 									
 									<!-- Notable Stars & Objects Table -->
@@ -1136,7 +1303,7 @@
 															<button class="export-btn" id="export-stars-json">JSON</button>
 													</div>
 											</div>
-											<p style="margin: 5px 0 10px 0; font-size: 10px; color: #8A8C8E;">
+											<p class="patterns-note">
 													<?= tr("All named celestial objects (stars, planets, deep-sky) defined in this culture's common_names section.")?>
 											</p>
 											<div class="table-container">
@@ -1168,45 +1335,643 @@
 					</div>
 			</div><!-- END #tab_skyculture_stats -->
 
-			<!-- handled by ui/actions.js -->
-      <div id="tab_actions">
-        <div class="flex flex-wrap">
-				
-					<!-- SCRIPTS SECTION - Enhanced with Visual Indicators, Icons, and Reset View	-->
-					<section id="scripts" class="block flex flex-expand">
-							<header><h2><?= tr("Scripts")?></h2></header>
-							<div class="flex flex-column">
-									<!-- Script Selection List -->
-									<select id="scriptlist" class="scrollselect flex-expand" size="10"></select>
-									
-									<!-- Active Script Display -->
-									<div class="active-script-display">
-											<?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span>
-									</div>
-									
-									<!-- Script Control Buttons with Icons -->
-									<div class="script-controls">
-											<button id="bt_runscript" class="script-control-btn icon32" disabled="disabled" title="<?= tr("Run selected script")?>"></button>
-											<button id="bt_stopscript" class="script-control-btn icon32" disabled="disabled" title="<?= tr("Stop current script")?>"></button>
-											<button id="bt_script_resetview" class="script-control-btn icon32" title="<?= tr("Reset to natural sky appearance (South, 40°, FOV 90°)")?>"></button>
+			<!-- handled by ui/actions.js + scripteditor/apiExplorer.js codeGenerator.js scriptEditor.js scriptReference.js  -->
+			<div id="tab_actions">
+					<!-- Horizontal subTabs -->
+					<div id="actions-sub-tabs" class="stel-sub-tabs">
+							<ul>
+									<li><a href="#sub-tab-scripts-editor"><?= tr("Script Editor")?></a></li>
+									<li><a href="#sub-tab-actions-legacy"><?= tr("Actions")?></a></li>
+									<li><a href="#sub-tab-scripts-legacy"><?= tr("Scripts")?></a></li>
+									<li><a href="#sub-tab-code-generator"><?= tr("Code Generator")?></a></li>
+									<li><a href="#btn-gen-container"><?= tr("Button Generator")?></a></li>
+									<li><a href="#sub-tab-api-explorer"><?= tr("API Explorer")?></a></li>
+							</ul>
+							
+							<!-- ========================================== -->
+							<!-- Tab 1 : (Script Editor)    -->
+							<!-- ========================================== -->
+							<div id="sub-tab-scripts-editor">
+									<div class="flex flex-wrap">
+											<!-- SCRIPTS SECTION - Enhanced with Visual Indicators, Icons, and Reset View	-->											
+											<!-- Script Editor subtab -->
+											<section id="script-editor-section" class="block flex flex-column flex-expand" style="min-width: 400px;">
+													<header><h2><?= tr("Script Editor")?></h2></header>
+													
+													<!-- Tool Bar -->
+													<div id="script-editor-toolbar" class="script-editor-toolbar">
+															<div class="toolbar-group">
+																	<button id="btn-editor-open" class="skyculture-btn pattern-btn" title="Open script from file (Ctrl+O)">
+																			<span class="ui-icon ui-icon-folder-open"></span> <?= tr("Open")?>
+																	</button>
+																	<button id="btn-editor-save" class="skyculture-btn pattern-btn" title="Save script to file (Ctrl+S)">
+																			<span class="ui-icon ui-icon-disk"></span> <?= tr("Save")?>
+																	</button>
+																	<button id="btn-editor-clear" class="skyculture-btn pattern-btn" title="Clear editor">
+																			<span class="ui-icon ui-icon-trash"></span> <?= tr("Clear")?>
+																	</button>
+																	<button id="btn-editor-copy" class="skyculture-btn pattern-btn" title="Copy entire script to clipboard">
+																		<span class="ui-icon ui-icon-copy"></span> <?= tr("Copy")?>
+																	</button>																	
+															</div>
+															<div class="toolbar-group">
+																	<button id="btn-editor-run" class="skyculture-btn pattern-btn" title="Run script (Ctrl+Enter)">
+																			<span class="ui-icon ui-icon-play"></span> <?= tr("Run")?>
+																	</button>
+																	<button id="btn-editor-run-selection" class="skyculture-btn pattern-btn" title="Run selected code (Ctrl+Shift+Enter)">
+																			<span class="ui-icon ui-icon-play"></span> <?= tr("Run Selection")?>
+																	</button>
+																	<button id="btn-editor-stop" class="skyculture-btn pattern-btn" title="Stop script" disabled>
+																			<span class="ui-icon ui-icon-stop"></span> <?= tr("Stop")?>
+																	</button>
+																	<span id="script-status-indicator" class="script-status">
+																			<span id="script-status-text"><?= tr("No script running")?></span>
+																	</span>																	
+															</div>
+															<!-- Auto Validation Toggle -->
+															<div class="toolbar-group">																	
+															    <button id="btn-editor-revalidate" class="skyculture-btn pattern-btn" title="Revalidate all functions (refresh colors)">
+																			<span class="ui-icon ui-icon-refresh"></span> <?= tr("Revalidate")?>
+																	</button>																	
+																<label id="auto-validation-toggle" class="auto-validation-label pattern-btn" title="Automatically validate functions while typing">
+																		<input type="checkbox" id="auto-validation-checkbox" checked>
+																		<span class="toggle-slider"></span>
+																		<span class="toggle-text"><?= tr("Auto Validation")?></span>
+																</label>
+																    <div class="line-counter-badge pattern-btn" title="<?= tr("Total lines in editor")?>">
+																		<span id="editor-line-count" class="line-count-number">0</span>
+																		<span class="line-count-label"><?= tr("lines")?></span>
+																</div>
+														</div>														
+														<div class="toolbar-group">
+															<button id="btn-collect-examples" class="skyculture-btn pattern-btn" title="Load examples from module JSON files">
+																	<span class="ui-icon ui-icon-copy"></span>Load Examples
+															</button>
+															<button id="btn-editor-gotoline" class="skyculture-btn pattern-btn" title="Go to line (Ctrl+G)">
+																	<span class="ui-icon ui-icon-arrowstop-1-s"></span> <?= tr("Go to Line")?>
+															</button>
+															<button id="btn-editor-metadata" class="skyculture-btn pattern-btn" title="Add script header/metadata">
+																	<span class="ui-icon ui-icon-document"></span> <?= tr("Header")?>
+															</button>
+													</div>
+													</div>
+													
+													<!-- Code Editor region - CodeMirror -->
+													<div id="script-editor-container" class="script-editor-container">
+															<textarea id="script-editor"></textarea>
+													</div>
+																										
+													<!-- Keyboard Shortcuts Panel -->
+													<div id="script-editor-shortcuts" class="script-editor-shortcuts">
+															<span class="shortcuts-label"><?= tr("Shortcuts:")?></span>
+															
+															<!-- Group 1: Execution -->
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> <?= tr("Run")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd> <?= tr("Run Selection")?></span>
+															
+															<!-- Group 2: Basic Editing -->
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Space</kbd> <?= tr("Autocomplete")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>/</kbd> <?= tr("Toggle Comment")?></span>
+															<span class="shortcut-item"><kbd>Tab</kbd> <?= tr("Indent")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>]</kbd> <?= tr("Indent More")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>[</kbd> <?= tr("Indent Less")?></span>
+															
+															<!-- Group 3: Line Operations -->
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>D</kbd> <?= tr("Delete Line")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>K</kbd> <?= tr("Kill to Line End")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>C</kbd> <?= tr("Copy Curret Line")?></span>
+															<span class="shortcut-item"><kbd>Alt</kbd>+<kbd>↑</kbd> <?= tr("Move Line Up")?></span>
+															<span class="shortcut-item"><kbd>Alt</kbd>+<kbd>↓</kbd> <?= tr("Move Line Down")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>↑</kbd> <?= tr("Copy Line Up")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>↓</kbd> <?= tr("Copy Line Down")?></span>
+															
+															<!-- Group 4: File Operations -->
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>S</kbd> <?= tr("Save")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>O</kbd> <?= tr("Open")?></span>
+															
+															<!-- Group 5: Search & Navigation -->
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>F</kbd> <?= tr("Find")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>H</kbd> <?= tr("Replace")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>G</kbd> <?= tr("Go to Line")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>L</kbd> <?= tr("Go to Line")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>Home</kbd> <?= tr("Go to Start")?></span>
+															<span class="shortcut-item"><kbd>Ctrl</kbd>+<kbd>End</kbd> <?= tr("Go to End")?></span>
+															
+															<!-- Button to show all shortcuts -->
+															<button id="btn-show-all-shortcuts" class="jquerybutton" style="margin-left: auto; padding: 2px 8px; font-size: 10px;" title="<?= tr("Show all keyboard shortcuts")?>">
+																	<?= tr("All Shortcuts")?>
+															</button>
+													</div>
+													
+													<!-- output region -->
+													<div id="script-output-container" class="script-output-container">
+															<div class="output-header">
+																	<span><?= tr("Output")?></span>
+																	<button id="btn-editor-clear-output" class="jquerybutton" title="<?= tr("Clear output")?>"><?= tr("Clear")?></button>
+															</div>
+															<div id="script-output" class="script-output-content">
+																	<span class="output-placeholder"><?= tr("Output will appear here after running scripts...")?></span>
+															</div>
+													</div>
+											</section>
+											
+											<!-- Side bar: Quick Reference + Installed Scripts -->
+											<aside id="script-editor-sidebar" class="script-editor-sidebar">											
+													<!-- Quick Reference -->
+													<div class="sidebar-section">
+															<header>
+																	<h3><?= tr("Quick Reference")?></h3>
+															</header>
+															<input type="text" id="quick-reference-search" class="script-filter-input" placeholder="<?= tr("Search functions...")?>">
+															<div id="quick-reference" class="quick-reference">
+																	<div class="ref-category">
+																			<div class="ref-cat-header" data-cat="snippets">Snippets</div>
+																			<div class="ref-cat-items" id="ref-snippets"></div>
+																	</div>
+															</div>
+													</div>
+													
+													<!-- Installed Scripts -->
+													<div class="sidebar-section">
+															<header>
+																	<h3><?= tr("Installed Scripts")?></h3>
+																	<button id="btn-refresh-scripts-list" class="jquerybutton" title="<?= tr("Refresh")?>">↻</button>
+															</header>
+															<input type="text" id="scripts-filter-input" placeholder="<?= tr("Filter scripts...")?>" class="script-filter-input">
+															<div id="installed-scripts-list" class="installed-scripts-list">
+																	<div class="loading-placeholder"><?= tr("Loading scripts...")?></div>
+															</div>
+													</div>
+											</aside>
+													
+													<!-- Execution History -->
+													<div class="sidebar-section">
+															<header>
+																	<h3><?= tr("Execution History")?></h3>
+															</header>
+															<div id="execution-history" class="execution-history">
+																	<span class="output-placeholder"><?= tr("No execution history yet")?></span>
+															</div>
+													</div>
+
 									</div>
 							</div>
 							
-							<!-- Script Information IFrame - Gets pulsing border when script is running -->
-							<iframe id="scriptinfo" class="flex-expand"></iframe>
-					</section>
+							<!-- ========================================== -->
+							<!-- Tab 2: Actions & Scripts (Legacy Actions List)   -->
+							<!-- ========================================== -->
+							<div id="sub-tab-actions-legacy">
+									<div class="flex flex-wrap">
+											<!-- ACTIONS SECTION - NEW DESIGN WITH CATEGORIZED BUTTONS -->
+											<section id="stelaction-categorized" class="block flex flex-column flex-expand">
+													<header><h2><?= tr("Actions")?></h2></header>
+													
+													<!-- ========================================== -->
+													<!-- PART 1: CATEGORIZED BUTTONS (actionsCategorized.js) -->
+													<!-- ========================================== -->
+													<div id="actions-category-tabs" class="skyculture-patterns-tabs" style="margin-bottom: 10px;">
+															<ul id="actions-category-tab-list">
+																	<!-- Populated dynamically -->
+															</ul>
+															<div id="actions-category-panels">
+																	<!-- Populated dynamically -->
+															</div>
+													</div>
+													
+													<!-- Search for categorized buttons ONLY -->
+													<div class="action-search-container" style="margin-top: 8px;">
+															<input type="text" id="categorized-action-search" class="action-search-input" placeholder="<?= tr("Search categorized actions...")?>">
+															<span id="categorized-action-count" class="pattern-count" style="margin-left: 10px;"></span>
+													</div>
+													</section>
+													<!-- Visual separator -->
+													<div style="margin: 16px 0; border-top: 1px solid rgba(255,255,255,0.1);"></div>
+													
+													<!-- ========================================== -->
+													<!-- PART 2: LEGACY DROPDOWN LIST (actions.js) -->
+													<!-- ========================================== -->
+													<section id="stelaction" class="block flex flex-column">
+													<header><h2><?= tr("Actions")?></h2></header>
+													<div class="action-search-container" style="display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
+														<input type="text" id="action-search-input" class="action-search-input" placeholder='<?= tr("Search actions...") ?>' style="flex: 1; min-width: 150px;" />
+														<button id="bt_doaction" disabled="disabled"><?= tr("Run/toggle action")?></button>
+													</div>
+													<select id="actionlist" class="scrollselect flex-expand" size="10">
+													</select>
+									</div>
+							</div>
+							<div id="sub-tab-scripts-legacy">
+									<div class="flex flex-wrap">
+											<!-- SCRIPTS SECTION -->
+											<section id="scripts" class="block flex flex-expand">
+													<header><h2><?= tr("Scripts")?></h2></header>
+													<div class="flex flex-column">
+															<!-- Script Selection List -->
+															<select id="scriptlist" class="scrollselect flex-expand" size="10"></select>
+															<!-- Active Script Display -->															
+															<div class="active-script-display">
+																	<?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span>
+															</div>
+															<!-- Script Control Buttons with Icons -->
+															<div class="script-controls">
+																	<button id="bt_runscript" class="script-control-btn icon32 btScriptRun" disabled="disabled" title="<?= tr("Run selected script")?>"></button>
+																	<button id="bt_stopscript" class="script-control-btn icon32" disabled="disabled" title="<?= tr("Stop current script")?>"></button>
+																	<button id="bt_script_resetview" class="script-control-btn icon32" title="<?= tr("Reset to natural sky appearance (South, 40°, FOV 90°)")?>"></button>
+															</div>
+													</div>
+													<!-- Script Information IFrame - Gets pulsing border when script is running -->
+													<iframe id="scriptinfo" class="flex-expand"></iframe>
+											</section>
 
-					<section id="stelaction" class="block flex flex-column">
-							<header><h2><?= tr("Actions")?></h2></header>
-							<div class="action-search-container" style="display: flex; gap: 10px; margin-bottom: 10px;">
-									<input type="text" id="action-search-input" class="action-search-input" placeholder="Search actions..." style="flex: 1;" />
-									<button id="bt_doaction" disabled="disabled"><?= tr("Run/toggle action")?></button>
+									</div>
+							</div>
+							
+							<!-- ========================================== -->
+							<!-- Tab 3: Code Generator                      -->
+							<!-- ========================================== -->
+							<div id="sub-tab-code-generator">
+									<div class="flex flex-wrap">
+											<!-- code generator -->
+											<div id="code-generator-main" class="block flex-expand">
+													<header><h2><?= tr("Code Generator")?></h2></header>
+													
+													<!-- Progress Bar -->
+													<div id="generator-progress" class="generator-progress-steps">
+															<div class="progress-step active" data-step="1">
+																	<span class="step-number">1</span>
+																	<span class="step-label"><?= tr("Category")?></span>
+															</div>
+															<div class="progress-line"></div>
+															<div class="progress-step" data-step="2">
+																	<span class="step-number">2</span>
+																	<span class="step-label"><?= tr("Action")?></span>
+															</div>
+															<div class="progress-line"></div>
+															<div class="progress-step" data-step="3">
+																	<span class="step-number">3</span>
+																	<span class="step-label"><?= tr("Parameters")?></span>
+															</div>
+															<div class="progress-line"></div>
+															<div class="progress-step" data-step="4">
+																	<span class="step-number">4</span>
+																	<span class="step-label"><?= tr("Generate")?></span>
+															</div>
+													</div>
+													
+													<!-- Step 1: Pick category -->
+													<div id="gen-step-1" class="generator-step">
+															<h3><?= tr("What do you want to do?")?></h3>
+															<div id="category-grid" class="category-grid"></div>
+													</div>
+													
+													<!-- Step 2: Select Action -->
+													<div id="gen-step-2" class="generator-step" style="display:none;">
+															<h3 id="gen-step-2-title"><?= tr("Select action")?></h3>
+															<button class="back-btn jquerybutton" data-back="1">← <?= tr("Back")?></button>
+															<div id="gen-actions-list" class="actions-list"></div>
+													</div>
+													
+													<!-- Step 3: Enter parameter -->
+													<div id="gen-step-3" class="generator-step" style="display:none;">
+															<h3 id="gen-step-3-title"><?= tr("Enter parameters")?></h3>
+															<button class="back-btn jquerybutton" data-back="2">← <?= tr("Back")?></button>
+															<div id="gen-params-form" class="params-form"></div>
+															<button id="btn-generate-code" class="jquerybutton"><?= tr("Generate Code")?></button>
+													</div>
+													
+													<!-- Step 4: Generate code -->
+													<div id="gen-step-4" class="generator-step" style="display:none;">
+															<h3><?= tr("Generated Code")?></h3>
+															<button class="back-btn jquerybutton" data-back="3">← <?= tr("Back")?></button>
+															
+															<!-- Format tabs -->
+															<div id="gen-format-tabs" class="gen-format-tabs">
+																	<button class="gen-tab active" data-format="curl">cURL</button>
+																	<button class="gen-tab" data-format="ssc">Stellarium Script (.ssc)</button>
+																	<button class="gen-tab" data-format="python">Python</button>
+																	<button class="gen-tab" data-format="javascript">JavaScript</button>
+															</div>
+															
+															<div class="generated-code-container">
+																	<div class="generated-code-actions">
+																			<button id="btn-copy-generated" class="jquerybutton"><?= tr("Copy")?></button>
+																			<button id="btn-send-generated" class="jquerybutton"><?= tr("Send to Stellarium")?></button>
+																			<button id="btn-insert-editor" class="jquerybutton"><?= tr("Insert in Editor")?></button>
+																	</div>
+																	<pre id="generated-code-display" class="generated-code"></pre>
+															</div>
+															
+															<div id="generated-explanation" class="generated-explanation"></div>
+													</div>
+											</div>
+											
+											<!-- Quick Examples -->
+											<aside id="code-generator-sidebar" class="code-generator-sidebar">
+													<div class="sidebar-section">
+															<header><h3><?= tr("Quick Examples")?></h3></header>
+															<div id="quick-examples" class="quick-examples-list">
+															<div class="quick-example" data-example="moon-tonight"><?= tr("View the Moon")?></div>
+															<div class="quick-example" data-example="observe-from-cairo"><?= tr("Observe from Cairo, Egypt")?></div>
+															<div class="quick-example" data-example="view-jupiter"><?= tr("Center View on Jupiter")?></div>
+															<div class="quick-example" data-example="speed-up-time"><?= tr("Speed Up Time (1h/sec)")?></div>
+															<div class="quick-example" data-example="toggle-equatorial-grid"><?= tr("Toggle Equatorial Grid")?></div>
+															<div class="quick-example" data-example="capture-screenshot"><?= tr("Capture Screenshot")?></div>
+															<div class="quick-example" data-example="toggle-atmosphere"><?= tr("Toggle Atmosphere")?></div>
+															<div class="quick-example" data-example="toggle-constellation-lines"><?= tr("Toggle Constellation Lines")?></div>
+															<div class="quick-example" data-example="zoom-to-andromeda"><?= tr("Zoom to Andromeda Galaxy")?></div>
+													</div>
+													</div>
+											</aside>													
+													<div class="sidebar-section">
+															<header><h3><?= tr("Recent Codes")?></h3></header>
+															<div id="recent-codes" class="recent-codes-list">
+																	<span class="output-placeholder"><?= tr("No codes generated yet")?></span>
+															</div>
+													</div>
+									</div>
 							</div>
-							<select id="actionlist" class="scrollselect flex-expand" size="10">
-							</select>
-					</section>
-        </div>
-      </div>
+							<!-- ========================================== -->
+							<!-- Tab 5: Button Generator Two Columns Layout -->
+							<!-- ========================================== -->
+							<div id="btn-gen-container">
+									<div id="btn-gen-main" class="block">
+											<header>
+													<h2>Button Generator</h2>
+													<span id="btn-gen-status" class="btn-gen-status"></span>
+											</header>
+
+											<!-- Two Columns Layout -->
+											<div class="btn-gen-two-columns">
+													<!-- LEFT COLUMN -->
+													<div class="btn-gen-left-column">
+															<!-- Step 1: Select Type -->
+															<div class="btn-gen-step">
+																	<h3>1. Select Type</h3>
+																	<select id="btn-gen-category" class="btn-gen-select">
+																			<option value="">-- Select type --</option>
+																			<option value="action">Action (StelAction)</option>
+																			<option value="property">Property (StelProperty)</option>
+																	</select>
+																	<div class="btn-gen-search-wrap">
+																			<input id="btn-gen-search" class="btn-gen-search" type="text" placeholder="Search... (ESC to clear)" />
+																			<span id="btn-gen-count" class="btn-gen-count"></span>
+																	</div>
+															</div>
+
+															<!-- Step 2: Select Action -->
+															<div id="btn-gen-action-step" class="btn-gen-step" style="display:none;">
+																	<h3>2. Select an Action</h3>
+																	<select id="btn-gen-action-list" class="btn-gen-list" size="10"></select>
+															</div>
+
+															<!-- Step 2: Select Property -->
+															<div id="btn-gen-property-step" class="btn-gen-step" style="display:none;">
+																	<h3>2. Select a Property</h3>
+																	<select id="btn-gen-property-list" class="btn-gen-list" size="10"></select>
+																	
+																	<div class="btn-gen-label-wrap">
+																			<label for="btn-gen-custom-label">Custom Label:</label>
+																			<input id="btn-gen-custom-label" class="btn-gen-label-input" type="text" placeholder="Enter display name" />
+																	</div>
+																	
+																	<div id="btn-gen-property-info" class="btn-gen-property-info" style="display:none;"></div>
+															</div>
+													</div>
+
+													<!-- RIGHT COLUMN -->
+													<div class="btn-gen-right-column">
+															<!-- Preview -->
+															<div class="btn-gen-step">
+																	<h3>Preview</h3>
+																	<div id="btn-gen-preview" class="btn-gen-preview">
+																			<div class="btn-gen-placeholder">Select a category and item to see preview</div>
+																	</div>
+															</div>
+
+															<!-- Generated HTML Code -->
+															<div class="btn-gen-step">
+																	<h3>Generated HTML Code</h3>
+																	<button id="btn-gen-copy-html" class="btn-gen-copy-btn">Copy HTML</button>
+																	<div id="btn-gen-code" class="btn-gen-code-wrap">										
+																			<div class="btn-gen-code-header">
+																					<span>HTML Code</span>
+																			</div>
+																			<div class="btn-gen-code">Select an item to generate HTML</div>
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div>
+															<!-- Add Buttons -->
+															<div class="btn-gen-add-wrap">
+																	<button id="btn-gen-add-btn" class="btn-gen-add-btn">[+] Add to My Buttons</button>
+																	<button id="btn-gen-add-all-actions" class="btn-gen-add-all-btn">[A] Add All Actions</button>
+																	<button id="btn-gen-add-all-properties" class="btn-gen-add-all-btn">[P] Add All Properties</button>
+															</div>
+
+															<!-- Add Category Section -->
+															<div class="btn-gen-category-add-wrap">
+																	<select id="btn-gen-category-actions-select" class="btn-gen-select"></select>
+																	<button id="btn-gen-add-category-actions" class="btn-gen-add-all-btn">[A] Add Category Actions</button>
+																	<select id="btn-gen-category-properties-select" class="btn-gen-select"></select>
+																	<button id="btn-gen-add-category-properties" class="btn-gen-add-all-btn">[P] Add Category Properties</button>
+															</div> 									
+											<!-- Full Width: Custom Buttons Container -->
+											<div class="btn-gen-custom-section">
+													<header>
+															<h3>My Custom Buttons</h3>
+															<span id="btn-gen-custom-count" class="btn-gen-custom-count">0</span>
+													</header>
+													
+													<div id="btn-gen-custom-container" class="btn-gen-custom-container">
+															<div class="btn-gen-empty-state">No custom buttons yet. Add some from the generator above.</div>
+													</div>
+
+													<div class="btn-gen-custom-footer">
+															<button id="btn-gen-export" class="btn-gen-export-btn">[↓] Export JSON</button>
+															<button id="btn-gen-import" class="btn-gen-import-btn">[↑] Import JSON</button>
+															<button id="btn-gen-clear" class="btn-gen-clear-btn">[X] Clear All</button>
+													</div>
+										 </div>
+							</div>	
+
+							<!-- ========================================== -->
+							<!-- Tab 6: API Explorer                        -->
+							<!-- ========================================== -->
+							<div id="sub-tab-api-explorer">
+									<div class="flex flex-wrap">
+											<!-- services -->
+											<aside id="api-explorer-sidebar" class="api-explorer-sidebar">
+													<header>
+															<h3><?= tr("Services & Actions")?></h3>
+															<input type="text" id="api-service-filter" placeholder="<?= tr("Filter...")?>" class="script-filter-input">
+													</header>
+													<div id="api-service-tree" class="api-service-tree">
+															<div class="loading-placeholder"><?= tr("Loading services...")?></div>
+													</div>
+											</aside>
+											
+											<!-- Test section -->
+											<section id="api-explorer-main" class="block flex-expand">
+													<header><h2><?= tr("API Explorer")?></h2></header>
+													<div id="api-welcome-message" class="api-welcome-content">
+														<div class="api-welcome-header">
+																<h2>API Explorer</h2>
+																<p class="api-welcome-subtitle"><?= tr("Interactive Testing Environment for Stellarium Remote Control API")?></p>
+														</div>
+														
+														<div class="api-welcome-section">
+																<h3><?= tr("What is the API Explorer?")?></h3>
+																<p>
+																		The API Explorer is a built-in testing tool that allows you to interact directly with 
+																		Stellarium's HTTP API without writing any code. Every service and operation available 
+																		through the Remote Control plugin is listed here and can be tested with a single click.
+																</p>
+																<p>
+																		This is the same API that powers the entire Remote Control interface. By exploring it here,
+																		you can understand how each panel communicates with Stellarium and learn to build your own 
+																		integrations, scripts, or external applications.
+																</p>
+														</div>
+														
+														<div class="api-welcome-section">
+																<h3>How to Use</h3>
+																<ol class="api-welcome-steps">
+																		<li>
+																				<strong>Select a service</strong> from the sidebar on the left. 
+																				Each service represents a category of operations (e.g., Main Service for core functions, 
+																				Object Service for celestial object searches, Script Service for script management).
+																		</li>
+																		<li>
+																				<strong>Click on an operation</strong> within the expanded service. 
+																				The operation panel will open on the right showing the endpoint path, HTTP method, 
+																				description, and all available parameters.
+																		</li>
+																		<li>
+																				<strong>Fill in the required parameters</strong> (marked with a red asterisk). 
+																				Optional parameters can be left empty - the API will use default values when available.
+																				Hover over parameter descriptions for hints about expected values and formats.
+																		</li>
+																		<li>
+																				<strong>Click "Execute Request"</strong> to send the request to Stellarium 
+																				and view the raw response. The HTTP status code and response body are displayed 
+																				immediately in the response area below.
+																		</li>
+																		<li>
+																				<strong>Use "Generate cURL"</strong> to get a copy-paste ready command line 
+																				equivalent. This is invaluable for scripting, automation, or debugging from a terminal.
+																		</li>
+																</ol>
+														</div>
+														
+														<div class="api-welcome-section">
+																<h3>Key Features</h3>
+																<ul class="api-welcome-features">
+																		<li>
+																				<strong>Live Request Execution:</strong> Every request is sent directly to your 
+																				running Stellarium instance. Changes made here are real and immediate.
+																		</li>
+																		<li>
+																				<strong>Response Inspection:</strong> View raw HTTP responses including status codes, 
+																				headers, and body content. JSON responses are automatically formatted for readability.
+																		</li>
+																		<li>
+																				<strong>cURL Export:</strong> Any request can be exported as a cURL command, making 
+																				it easy to integrate into shell scripts, cron jobs, or external automation tools.
+																		</li>
+																		<li>
+																				<strong>Service Filtering:</strong> Use the filter box at the top of the sidebar to 
+																				quickly find services or operations by name. This is especially useful when working 
+																				with the full set of available endpoints.
+																		</li>
+																		<li>
+																				<strong>Copy to Clipboard:</strong> Both response data and cURL commands can be 
+																				copied with a single click for use in other applications.
+																		</li>
+																</ul>
+														</div>
+														
+														<div class="api-welcome-section">
+																<h3>Available Services</h3>
+																<div class="api-welcome-services-grid">
+																		<div class="api-service-mini-card">
+																				<span class="service-badge">M</span>
+																				<strong>Main Service</strong>
+																				<small>Core functions: time, view, focus, movement, status, window</small>
+																		</div>
+																		<div class="api-service-mini-card">
+																				<span class="service-badge">O</span>
+																				<strong>Object Service</strong>
+																				<small>Search and retrieve celestial object data</small>
+																		</div>
+																		<div class="api-service-mini-card">
+																				<span class="service-badge">L</span>
+																				<strong>Location Service</strong>
+																				<small>Set observer location, search locations, manage planets</small>
+																		</div>
+																		<div class="api-service-mini-card">
+																				<span class="service-badge">R</span>
+																				<strong>Script Service</strong>
+																				<small>Run, stop, and manage Stellarium scripts</small>
+																		</div>
+																		<div class="api-service-mini-card">
+																				<span class="service-badge">A</span>
+																				<strong>StelAction Service</strong>
+																				<small>Execute and toggle Stellarium actions</small>
+																		</div>
+																		<div class="api-service-mini-card">
+																				<span class="service-badge">P</span>
+																				<strong>StelProperty Service</strong>
+																				<small>Read and modify Stellarium properties</small>
+																		</div>
+																		<div class="api-service-mini-card">
+																				<span class="service-badge">S</span>
+																				<strong>Location Search</strong>
+																				<small>Search location database by name or coordinates</small>
+																		</div>
+																		<div class="api-service-mini-card">
+																				<span class="service-badge">W</span>
+																				<strong>SIMBAD Service</strong>
+																				<small>Query the online SIMBAD astronomical database</small>
+																		</div>
+																		<div class="api-service-mini-card">
+																				<span class="service-badge">V</span>
+																				<strong>View Service</strong>
+																				<small>List landscapes, sky cultures, and projections</small>
+																		</div>
+																</div>
+														</div>
+														
+														<div class="api-welcome-section">
+																<h3>Common Use Cases</h3>
+																<ul class="api-welcome-features">
+																		<li><strong>Debugging:</strong> Verify that Stellarium is responding correctly before writing scripts or integrating with other tools.</li>
+																		<li><strong>Learning the API:</strong> Understand the structure of API requests and responses by experimenting with different parameters and observing the results.</li>
+																		<li><strong>Integration Development:</strong> Test API calls before implementing them in your own applications, web services, or automation scripts.</li>
+																		<li><strong>Quick Actions:</strong> Execute one-off commands without navigating through the full interface panels.</li>
+																		<li><strong>Script Development:</strong> Test individual API operations to understand their behavior before combining them into complex scripts.</li>
+																</ul>
+														</div>
+														
+														<div class="api-welcome-section api-welcome-tip">
+																<h3>Pro Tip</h3>
+																<p>
+																		Combine the API Explorer with the <strong>Code Generator</strong> tab. Once you find the 
+																		right API operation and parameters here, switch to the Code Generator to produce ready-to-use 
+																		code in cURL, Python, JavaScript, or Stellarium Script format. You can then insert that code 
+																		directly into the <strong>Script Editor</strong> for further customization.
+																</p>
+														</div>
+												</div>
+													<div id="api-operation-panel" style="display:none;">
+															<!-- Dynamicaly generated -->
+													</div>
+											</section>
+									</div>
+							</div>
+							
+					</div><!-- End #actions-sub-tabs -->
+			</div><!-- End #tab_actions -->
 			
       <!-- handled by ui/location.js -->
       <div id="tab_location">

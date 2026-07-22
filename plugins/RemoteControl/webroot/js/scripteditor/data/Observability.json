@@ -1,0 +1,282 @@
+[
+    {
+        "name": "setEnabled",
+        "category": "Observability - Core",
+        "signature": "void setEnabled(bool enabled)",
+        "description": "Enables or disables the Observability report display on the screen.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show the report, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "Observability.setEnabled(true);\nObservability.setEnabled(false);"
+    },
+    {
+        "name": "flagEnabled",
+        "category": "Observability - Properties",
+        "signature": "bool flagEnabled",
+        "description": "Property that controls whether the observability report is displayed. Read via core.getStelProperty() or write via Observability.setEnabled().",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "var enabled = core.getStelProperty('Observability.flagEnabled');\nObservability.setEnabled(!enabled);"
+    },
+    {
+        "name": "setFontColor",
+        "category": "Observability - Appearance",
+        "signature": "void setFontColor(Vec3f color)",
+        "description": "Sets the text color of the observability report. The Vec3f components must be between 0.0 and 1.0.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector (0.0–1.0)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "var green = core.vec3f(0.0, 1.0, 0.0);\nObservability.setFontColor(green);"
+    },
+    {
+        "name": "setFontSize",
+        "category": "Observability - Appearance",
+        "signature": "void setFontSize(int size)",
+        "description": "Sets the font size of the observability report text in pixels.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "int",
+                "description": "Font size in pixels",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "Observability.setFontSize(18);"
+    },
+    {
+        "name": "setTwilightAltitude",
+        "category": "Observability - Configuration",
+        "signature": "void setTwilightAltitude(int altitude)",
+        "description": "Sets the angular altitude of the Sun below the horizon that defines twilight (negative values).",
+        "parameters": [
+            {
+                "name": "altitude",
+                "type": "int",
+                "description": "Twilight altitude in degrees (e.g., -12 for nautical twilight)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "Observability.setTwilightAltitude(-18);  // Astronomical twilight"
+    },
+    {
+        "name": "setHorizonAltitude",
+        "category": "Observability - Configuration",
+        "signature": "void setHorizonAltitude(int altitude)",
+        "description": "Sets the angular altitude of the visual horizon for rise/set calculations.",
+        "parameters": [
+            {
+                "name": "altitude",
+                "type": "int",
+                "description": "Horizon altitude in degrees",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "Observability.setHorizonAltitude(5);  // For mountainous horizon"
+    },
+    {
+        "name": "enableTodayField",
+        "category": "Observability - Report Fields",
+        "signature": "void enableTodayField(bool enabled)",
+        "description": "Shows or hides today's rise, set, and transit times in the report.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "Observability.enableTodayField(true);"
+    },
+    {
+        "name": "enableAcroCosField",
+        "category": "Observability - Report Fields",
+        "signature": "void enableAcroCosField(bool enabled)",
+        "description": "Shows or hides acronychal (setting at sunrise) and cosmical (rising at sunset) dates.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "Observability.enableAcroCosField(true);"
+    },
+    {
+        "name": "enableGoodNightsField",
+        "category": "Observability - Report Fields",
+        "signature": "void enableGoodNightsField(bool enabled)",
+        "description": "Shows or hides the range of nights when the object is above the horizon during darkness.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "Observability.enableGoodNightsField(true);"
+    },
+    {
+        "name": "enableOppositionField",
+        "category": "Observability - Report Fields",
+        "signature": "void enableOppositionField(bool enabled)",
+        "description": "Shows or hides the opposition date for outer planets.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "Observability.enableOppositionField(true);"
+    },
+    {
+        "name": "enableFullMoonField",
+        "category": "Observability - Report Fields",
+        "signature": "void enableFullMoonField(bool enabled)",
+        "description": "Shows or hides the dates of previous and next full moons when the Moon is selected.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "StelObjectMgr.findAndSelect(\"Moon\", \"Planet\");\nObservability.enableFullMoonField(true);"
+    },
+    {
+        "name": "resetConfiguration",
+        "category": "Observability - Configuration",
+        "signature": "void resetConfiguration()",
+        "description": "Resets all Observability settings to their default values.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "Observability.resetConfiguration();"
+    },
+    {
+        "name": "saveConfiguration",
+        "category": "Observability - Configuration",
+        "signature": "void saveConfiguration()",
+        "description": "Saves the current Observability settings to the configuration file.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "Observability.saveConfiguration();"
+    },
+    {
+        "name": "getReportAsJson",
+        "category": "Observability - Data Export",
+        "signature": "QString getReportAsJson()",
+        "description": "Returns the current observability report as a JSON string.",
+        "parameters": [],
+        "returnType": "QString",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "var report = Observability.getReportAsJson();\ncore.debug(report);"
+    }
+]

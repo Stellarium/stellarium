@@ -1,0 +1,3420 @@
+[
+    {
+        "name": "setJDay",
+        "category": "Time & Date",
+        "signature": "setJDay(double JD)",
+        "description": "Sets the current date using Julian Day number. Julian Day is the number of days since noon on January 1, 4713 BC. This system is used in astronomy for precise time difference calculations.",
+        "parameters": [
+            {
+                "name": "JD",
+                "type": "double",
+                "description": "Julian Day number (example: 2458849.5 for noon on January 1, 2020)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Set date to January 1, 2020\ncore.setJDay(2458849.5);\n\n// Set date to midnight of June 15, 2023\ncore.setJDay(2460110.5);\n\n// Get current Julian Day and add one day\nvar today = core.getJDay();\ncore.setJDay(today + 1);"
+    },
+    {
+        "name": "getJDay",
+        "category": "Time & Date",
+        "signature": "double getJDay()",
+        "description": "Returns the current date as a Julian Day number. Used for precise time difference calculations and astronomical computations.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Current Julian Day number",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Get current Julian Day\nvar jd = core.getJDay();\ncore.debug(\"Current Julian Day: \" + jd);\n\n// Calculate days between two dates\nvar jdStart = core.getJDay();\ncore.setDate(\"now+5days\");\nvar jdEnd = core.getJDay();\ncore.debug(\"Time difference: \" + (jdEnd - jdStart) + \" days\");"
+    },
+    {
+        "name": "setMJDay",
+        "category": "Time & Date",
+        "signature": "setMJDay(double MJD)",
+        "description": "Sets the current date using Modified Julian Day number. MJD = JD - 2400000.5, which is more convenient for modern calculations.",
+        "parameters": [
+            {
+                "name": "MJD",
+                "type": "double",
+                "description": "Modified Julian Day number",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Set date using MJD\ncore.setMJDay(58849.0); // Equivalent to January 1, 2020\n\nvar mjd = core.getMJDay();\ncore.debug(\"Current MJD: \" + mjd);"
+    },
+    {
+        "name": "getMJDay",
+        "category": "Time & Date",
+        "signature": "double getMJDay()",
+        "description": "Returns the current date as a Modified Julian Day number (MJD = JD - 2400000.5).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Current Modified Julian Day number",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var mjd = core.getMJDay();\ncore.debug(\"MJD: \" + mjd);\n\n// Convert MJD to JD\nvar jd = mjd + 2400000.5;"
+    },
+    {
+        "name": "setDate",
+        "category": "Time & Date",
+        "signature": "setDate(QString dateStr, QString spec, bool dateIsDT)",
+        "description": "Sets the simulation date and time using a text string or relative expression. Supports ISO 8601 format and relative expressions like 'now+2days'. This is the most flexible function for time manipulation.\nSets Stellarium's date using an absolute or relative value.\n@param dateStr Defines the date or offset to use. Possible formats:\n- Date and time according to ISO 8601, without time zone, e.g.,\n'2008-03-24T13:21:01'\n- Use 'now' to set Stellarium's time to the system's (presumably) real time.\n- Specify an offset in the form <sign><value><unit> to set the date relative to its\ncurrent value. <unit> may be one of second, minute, hour, day, sol, week, month,\nyear, with a plural 's' optionally appended, e.g., '+3.25 days', ' - 1 year'.\n- Use 'now' followed by an offset to set the date relative to the system's\ncurrent value, e.g., 'now+1hour'.\n- You may append 'sidereal' to use units derived from the length of a sidereal day,e.g., 'now +2days sidereal'.\n@note When sidereal time is used, the length of time for each unit is dependent on\nthe current planet.  By contrast, when sidereal time is not specified (i.e., solar\ntime is used) the value is conventional so that 1 day means 1 Earth Solar day.\n@param spec May be 'local' or 'utc'. Only has an effect when\nan ISO format string is used. Defaults to 'utc'.\n @param dateIsDT set to  true indicates that the given date is formulated in\n Dynamical Time, i.e. with DeltaT added.\n@note For fully compatible behaviour of this function with versions 0.11.4\nor earlier you should call  core.setDeltaTAlgorithm('WithoutCorrection');\nbefore running  core.setDate(); for disabling DeltaT correction.\n @note Starting with version 0.13.2 all relative dates are set without DeltaT correction.\nStarting with version 0.14.0 the Boolean argument has a different meaning and default.",
+        "parameters": [
+            {
+                "name": "dateStr",
+                "type": "QString",
+                "description": "Date in ISO 8601 format (e.g., '2008-03-24T13:21:01') or 'now' or 'now+2hours' or '-1day'",
+                "required": true
+            },
+            {
+                "name": "spec",
+                "type": "QString",
+                "description": "'utc' (default) or 'local' - UTC or local time",
+                "required": false,
+                "default": "'utc'"
+            },
+            {
+                "name": "dateIsDT",
+                "type": "bool",
+                "description": "true if the date is in Dynamical Time format (with DeltaT added)",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.11.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Set specific date in ISO format\ncore.setDate(\"2024-06-21T12:00:00\");\n\n// Set to system real time\ncore.setDate(\"now\");\n\n// Add 3 days from current time\ncore.setDate(\"now+3days\");\n\n// Subtract 2 hours\ncore.setDate(\"now-2hours\");\n\n// Use local time\ncore.setDate(\"2024-12-25T00:00:00\", \"local\");\n\n// Add a sidereal year\ncore.setDate(\"now+1year sidereal\");\n\n// Remove one week\ncore.setDate(\"-1week\");\n\n// Add a lunar month\ncore.setDate(\"now+1month sidereal\");"
+    },
+    {
+        "name": "getDate",
+        "category": "Time & Date",
+        "signature": "QString getDate(QString spec)",
+        "description": "Returns the current simulation date and time as an ISO 8601 string. Can return UTC or local time.",
+        "parameters": [
+            {
+                "name": "spec",
+                "type": "QString",
+                "description": "'utc' (default) or 'local'",
+                "required": false,
+                "default": "'utc'"
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Date in ISO 8601 format like '2024-06-15T14:30:00'",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Get date in UTC format\nvar utcDate = core.getDate();\ncore.debug(\"UTC: \" + utcDate);\n\n// Get date in local format\nvar localDate = core.getDate(\"local\");\ncore.debug(\"Local: \" + localDate);\n\n// Extract date components\nvar parts = localDate.split('T');\ncore.debug(\"Date: \" + parts[0]);\ncore.debug(\"Time: \" + parts[1]);"
+    },
+    {
+        "name": "setTimeRate",
+        "category": "Time & Date",
+        "signature": "setTimeRate(double ts)",
+        "description": "Sets the simulation time speed. 1 = real time, 2 = twice as fast, 0 = freeze time. Negative values reverse time direction.",
+        "parameters": [
+            {
+                "name": "ts",
+                "type": "double",
+                "description": "Time speed multiplier (range: -1000 to 1000)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Speed up time 10x to watch planet motion\ncore.setTimeRate(10);\n\n// Freeze time to analyze a specific position\ncore.setTimeRate(0);\n\n// Return to real time\ncore.setTimeRate(1);\n\n// Reverse time (go backwards)\ncore.setTimeRate(-2);\n\n// Very fast for watching thousands of years\ncore.setTimeRate(1000);"
+    },
+    {
+        "name": "getTimeRate",
+        "category": "Time & Date",
+        "signature": "double getTimeRate()",
+        "description": "Returns the current simulation time speed multiplier.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Current time speed multiplier",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var speed = core.getTimeRate();\nif(speed == 1) {\n    core.debug(\"Time is running normally\");\n} else if(speed > 1) {\n    core.debug(\"Time is \" + speed + \"x faster\");\n} else if(speed == 0) {\n    core.debug(\"Time is frozen\");\n} else if(speed < 0) {\n    core.debug(\"Time is running backwards at \" + Math.abs(speed) + \"x\");\n}"
+    },
+    {
+        "name": "isRealTime",
+        "category": "Time & Date",
+        "signature": "bool isRealTime()",
+        "description": "Checks whether the simulation is in real-time mode (speed = 1 and time synchronized with system).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if time is real, false if accelerated or frozen",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(core.isRealTime()) {\n    core.debug(\"Simulation is in real time\");\n} else {\n    core.debug(\"Simulation is not in real time\");\n    core.setRealTime(); // Return to real mode\n}"
+    },
+    {
+        "name": "setRealTime",
+        "category": "Time & Date",
+        "signature": "setRealTime()",
+        "description": "Sets simulation time to system real time and speed to 1. Used to synchronize simulation with actual time.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Synchronize simulation with real time\ncore.setRealTime();\ncore.debug(\"Synchronized with real time\");\n\n// After time acceleration, return to normal\ncore.setTimeRate(100);\ncore.wait(5);\ncore.setRealTime();"
+    },
+    {
+        "name": "getDeltaT",
+        "category": "Time & Date",
+        "signature": "QString getDeltaT()",
+        "description": "Returns the DeltaT value (difference between Dynamical Time and Universal Time) for the current date in HMS format. DeltaT is essential for precise astronomical calculations of eclipses.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "DeltaT value in HMS format like '0h1m68.2s'",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.11.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var delta = core.getDeltaT();\ncore.debug(\"DeltaT: \" + delta);\n\n// Get value in seconds\nvar deltaSec = core.getDeltaTsec();\ncore.debug(\"DeltaT in seconds: \" + deltaSec);"
+    },
+    {
+        "name": "getDeltaTsec",
+        "category": "Time & Date",
+        "signature": "double getDeltaTsec()",
+        "description": "Returns the DeltaT value in seconds (difference between Dynamical Time and Universal Time).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "DeltaT value in seconds",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.11.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var deltaSec = core.getDeltaTsec();\ncore.debug(\"DeltaT: \" + deltaSec + \" seconds\");\n\nif(deltaSec > 68) {\n    core.debug(\"DeltaT is relatively large for this era\");\n}"
+    },
+    {
+        "name": "getDeltaTAlgorithm",
+        "category": "Time & Date",
+        "signature": "QString getDeltaTAlgorithm()",
+        "description": "Returns the name of the algorithm used for DeltaT calculation.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "DeltaT algorithm name (e.g., 'EspenakMeeus' or 'JPLHorizons')",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var algo = core.getDeltaTAlgorithm();\ncore.debug(\"Current DeltaT algorithm: \" + algo);"
+    },
+    {
+        "name": "setDeltaTAlgorithm",
+        "category": "Time & Date",
+        "signature": "setDeltaTAlgorithm(QString algorithmName)",
+        "description": "Sets the DeltaT calculation algorithm used in the simulation. Different algorithms give different DeltaT values for historical periods.",
+        "parameters": [
+            {
+                "name": "algorithmName",
+                "type": "QString",
+                "description": "Algorithm name:  AstronomicalEphemeris, Banjevic, Borkowski, ChaprontMeeus, ChaprontTouze, Clemence, Custom, Espenak, EspenakMeeus, Henriksson2017, IAU, IslamSadiqQureshi, JPLHorizons, MeeusSimons, MontenbruckPfleger, MorrisonStephenson2004, MullerStephenson, Reijs, ReingoldDershowitz, SchmadelZech1979, SchmadelZech1988, Schoch, Stephenson1978, Stephenson1997, StephensonHoulden, StephensonMorrison1984, StephensonMorrison1995, TuckermanGoldstine, WithoutCorrection.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Disable DeltaT correction (compatible with older Stellarium versions)\ncore.setDeltaTAlgorithm(\"WithoutCorrection\");\n\n// Use Espenak & Meeus algorithm (accurate for 2000-2050)\ncore.setDeltaTAlgorithm(\"EspenakMeeus\");\n\n// Use JPL Horizons data\ncore.setDeltaTAlgorithm(\"JPLHorizons\");\n\n// Morrison & Stephenson 2004 algorithm (for ancient historical periods)\ncore.setDeltaTAlgorithm(\"MorrisonStephenson2004\");"
+    },
+    {
+        "name": "isPlanetocentricCalculations",
+        "category": "Time & Date",
+        "signature": "bool isPlanetocentricCalculations()",
+        "description": "Checks whether calculations are performed in planetocentric system (from planet center). On Earth, this means geocentric calculations.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true for planetocentric (geocentric on Earth), false for topocentric",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(core.isPlanetocentricCalculations()) {\n    core.debug(\"Calculations from planet center\");\n} else {\n    core.debug(\"Calculations from surface (considering altitude)\");\n}"
+    },
+    {
+        "name": "setPlanetocentricCalculations",
+        "category": "Time & Date",
+        "signature": "setPlanetocentricCalculations(bool f)",
+        "description": "Sets the calculation type: planetocentric (from planet center) or topocentric (from observer surface position).",
+        "parameters": [
+            {
+                "name": "f",
+                "type": "bool",
+                "description": "true for planetocentric calculations (from planet center), false for topocentric (from observer location)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Enable geocentric calculations (from Earth's center)\ncore.setPlanetocentricCalculations(true);\n\n// Enable topocentric calculations (from Earth's surface considering altitude)\ncore.setPlanetocentricCalculations(false);"
+    },
+    {
+        "name": "jdFromDateString",
+        "category": "Time & Date",
+        "signature": "double jdFromDateString(QString dt, QString spec)",
+        "description": "Converts a date string to a Julian Day number. Used internally by setDate and waitFor.",
+        "parameters": [
+            {
+                "name": "dt",
+                "type": "QString",
+                "description": "Date string (e.g., '2024-01-01' or 'now+2days')",
+                "required": true
+            },
+            {
+                "name": "spec",
+                "type": "QString",
+                "description": "'utc' or 'local'",
+                "required": false,
+                "default": "'utc'"
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Julian Day number",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var jd = core.jdFromDateString(\"2024-12-25T00:00:00\");\ncore.debug(\"JD for Christmas: \" + jd);\n\nvar jdNow = core.jdFromDateString(\"now\");\nvar jdTomorrow = core.jdFromDateString(\"now+1day\");\ncore.debug(\"One day difference: \" + (jdTomorrow - jdNow));"
+    },
+    {
+        "name": "setObserverLocation",
+        "category": "Location",
+        "signature": "setObserverLocation(double longitude, double latitude, double altitude, double duration, QString name, QString planet)",
+        "description": "Sets the observer location on Earth or other planets with high precision. Can travel between different planets.",
+        "parameters": [
+            {
+                "name": "longitude",
+                "type": "double",
+                "description": "Longitude in degrees (east positive, -180 to 180)",
+                "required": true
+            },
+            {
+                "name": "latitude",
+                "type": "double",
+                "description": "Latitude in degrees (north positive, -90 to 90)",
+                "required": true
+            },
+            {
+                "name": "altitude",
+                "type": "double",
+                "description": "Altitude above sea level in meters (-1000 to ignore)",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "double",
+                "description": "Transition duration to new location in seconds",
+                "required": false,
+                "default": "1.0"
+            },
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "Location name (e.g., 'Cairo, Egypt')",
+                "required": false,
+                "default": "\"\""
+            },
+            {
+                "name": "planet",
+                "type": "QString",
+                "description": "Planet English name (e.g., 'Mars', 'Jupiter', 'Moon')",
+                "required": false,
+                "default": "\"\""
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Travel to Cairo\ncore.setObserverLocation(31.2357, 30.0444, 100, 2, \"Cairo, Egypt\");\n\n// Travel to Mars - on Martian equator\ncore.setObserverLocation(0, 0, 0, 5, \"Mars Equator\", \"Mars\");\n\n// Travel to Mount Everest summit\ncore.setObserverLocation(86.9226, 27.9865, 8848, 3, \"Mount Everest\");\n\n// Travel to the Moon - Sea of Tranquility\ncore.setObserverLocation(0, 0, 0, 8, \"Mare Tranquillitatis\", \"Moon\");\n\n// Travel to Jupiter\ncore.setObserverLocation(0, 0, 0, 10, \"Jupiter\", \"Jupiter\");"
+    },
+    {
+        "name": "setObserverLocationById",
+        "category": "Location",
+        "signature": "setObserverLocation(QString id, double duration)",
+        "description": "Sets the observer location using a location ID from Stellarium's built-in location database.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Location ID (e.g., 'Paris, France' or 'Tokyo, Japan' or 'Greenwich, UnitedKingdom')",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "double",
+                "description": "Transition duration in seconds",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Travel to Paris\ncore.setObserverLocation(\"Paris, France\", 2);\n\n// Travel to Tokyo\ncore.setObserverLocation(\"Tokyo, Japan\");\n\n// Travel to Greenwich Observatory\ncore.setObserverLocation(\"Greenwich, UnitedKingdom\", 3);\n\n// Travel to Keck Observatory in Hawaii\ncore.setObserverLocation(\"Mauna Kea, Hawaii\");\n\n// Travel to South Pole\ncore.setObserverLocation(\"Amundsen-Scott, Antarctica\", 4);"
+    },
+    {
+        "name": "getObserverLocation",
+        "category": "Location",
+        "signature": "QString getObserverLocation()",
+        "description": "Returns the current observer location ID.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Location ID (e.g., 'Cairo, Egypt')",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var location = core.getObserverLocation();\ncore.debug(\"Current location: \" + location);\n\n// Save current location to return later\nvar savedLocation = core.getObserverLocation();\n// ... change location ...\ncore.setObserverLocation(savedLocation, 2);"
+    },
+    {
+        "name": "getObserverLocationInfo",
+        "category": "Location",
+        "signature": "QVariantMap getObserverLocationInfo()",
+        "description": "Returns detailed information about the current observer location including coordinates, planet, local sidereal time, and more.",
+        "parameters": [],
+        "returnType": "QVariantMap",
+        "returnDescription": "Map containing location information",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var info = core.getObserverLocationInfo();\n\n// Print all information\ncore.output(core.mapToString(info));\n\n// Access specific information\nvar lat = info[\"latitude\"];\nvar lon = info[\"longitude\"];\nvar planet = info[\"planet\"];\nvar altitude = info[\"altitude\"];\nvar location = info[\"location\"];\nvar siderealYear = info[\"sidereal-year\"];\nvar siderealDay = info[\"sidereal-day\"];\nvar solarDay = info[\"solar-day\"];\nvar lst = info[\"local-sidereal-time\"];\nvar lstHms = info[\"local-sidereal-time-hms\"];\nvar timezone = info[\"timezone\"];\nvar locationTimezone = info[\"location-timezone\"];\n\ncore.debug(\"Latitude: \" + lat + \"°\");\ncore.debug(\"Longitude: \" + lon + \"°\");\ncore.debug(\"Planet: \" + planet);\ncore.debug(\"Altitude: \" + altitude + \" m\");\ncore.debug(\"Sidereal year: \" + siderealYear + \" Earth days\");\ncore.debug(\"Sidereal day: \" + siderealDay + \" hours\");\ncore.debug(\"Solar day: \" + solarDay + \" hours\");\ncore.debug(\"Local sidereal time: \" + lstHms);"
+    },
+    {
+        "name": "setTimezone",
+        "category": "Location",
+        "signature": "setTimezone(QString tz, int markAsCustom)",
+        "description": "Sets the timezone used for displaying times. Can use IANA timezone names or 'LMST' for local mean solar time.",
+        "parameters": [
+            {
+                "name": "tz",
+                "type": "QString",
+                "description": "Timezone name (e.g., 'Africa/Cairo', 'America/New_York') or 'LMST' (Local Mean Solar Time) or 'LTST' (Local True Solar Time)",
+                "required": true
+            },
+            {
+                "name": "markAsCustom",
+                "type": "int",
+                "description": "0=disable custom timezone, 1=enable, -1=no change (default)",
+                "required": false,
+                "default": "-1"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.18.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Set Cairo timezone\ncore.setTimezone(\"Africa/Cairo\", 1);\n\n// Use local mean solar time\ncore.setTimezone(\"LMST\");\n\n// Use local true solar time\ncore.setTimezone(\"LTST\");\n\n// Get list of all available timezones\nvar timezones = core.getAllTimezoneNames();\ncore.debug(\"Total timezones: \" + timezones.length);\nfor(var i=0; i<Math.min(10, timezones.length); i++) {\n    core.debug(timezones[i]);\n}"
+    },
+    {
+        "name": "getAllTimezoneNames",
+        "category": "Location",
+        "signature": "QStringList getAllTimezoneNames()",
+        "description": "Returns a list of all available timezone names in the system.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of all timezone names",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.18.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var timezones = core.getAllTimezoneNames();\ncore.debug(\"Total timezones: \" + timezones.length);\n\n// Search for specific timezones\nvar cairoZones = timezones.filter(tz => tz.includes(\"Cairo\"));\ncore.debug(\"Cairo zones: \" + cairoZones);"
+    },
+    {
+        "name": "geo2utm",
+        "category": "Location",
+        "signature": "QList<double> geo2utm(double longitude, double latitude, int zone)",
+        "description": "Converts geographic coordinates (longitude, latitude) to UTM (Universal Transverse Mercator) coordinate system.",
+        "parameters": [
+            {
+                "name": "longitude",
+                "type": "double",
+                "description": "Geographic longitude in degrees (Greenwich)",
+                "required": true
+            },
+            {
+                "name": "latitude",
+                "type": "double",
+                "description": "Geographic latitude in degrees (equator)",
+                "required": true
+            },
+            {
+                "name": "zone",
+                "type": "int",
+                "description": "UTM zone (1-60). If 0, the appropriate zone is calculated automatically",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "QList<double>",
+        "returnDescription": "[Easting(m), Northing(m), zone, gamma(deg), k] - UTM coordinates",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Convert Cairo coordinates to UTM\nvar utm = core.geo2utm(31.2357, 30.0444, 36);\ncore.debug(\"Easting: \" + utm[0] + \" m\");\ncore.debug(\"Northing: \" + utm[1] + \" m\");\ncore.debug(\"Zone: \" + utm[2]);\ncore.debug(\"Gamma: \" + utm[3] + \"°\");\ncore.debug(\"Scale factor: \" + utm[4]);"
+    },
+    {
+        "name": "utm2geo",
+        "category": "Location",
+        "signature": "QList<double> utm2geo(double easting, double northing, int zone, bool north)",
+        "description": "Converts coordinates from UTM (Universal Transverse Mercator) system to geographic coordinates (longitude, latitude).",
+        "parameters": [
+            {
+                "name": "easting",
+                "type": "double",
+                "description": "Easting coordinate in meters (false easting = 500000)",
+                "required": true
+            },
+            {
+                "name": "northing",
+                "type": "double",
+                "description": "Northing coordinate in meters (in southern hemisphere, equator = 10000000)",
+                "required": true
+            },
+            {
+                "name": "zone",
+                "type": "int",
+                "description": "UTM zone (1-60)",
+                "required": true
+            },
+            {
+                "name": "north",
+                "type": "bool",
+                "description": "true for northern hemisphere, false for southern",
+                "required": true
+            }
+        ],
+        "returnType": "QList<double>",
+        "returnDescription": "[longitude(deg), latitude(deg), refLong(deg), gamma(deg), k]",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Convert UTM coordinates to geographic (a location in Egypt)\nvar geo = core.utm2geo(300000, 3325000, 36, true);\ncore.debug(\"Longitude: \" + geo[0] + \"°\");\ncore.debug(\"Latitude: \" + geo[1] + \"°\");\ncore.debug(\"Reference longitude: \" + geo[2] + \"°\");"
+    },
+    {
+        "name": "moveToObject",
+        "category": "View & Movement",
+        "signature": "moveToObject(QString name, float duration)",
+        "description": "Moves the view center toward a specific celestial object (star, planet, galaxy, comet, asteroid, etc.).",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "English name of the object (e.g., 'Sirius', 'Mars', 'Andromeda Galaxy', 'Halley')",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Movement duration in seconds (longer duration = slower and smoother movement)",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Move slowly toward Mars\ncore.moveToObject(\"Mars\", 3);\n\n// Move toward Sirius\ncore.moveToObject(\"Sirius\", 1);\n\n// Move toward Andromeda Galaxy\ncore.moveToObject(\"Andromeda Galaxy\", 2);\n\n// Move toward Halley's Comet (when in solar system)\ncore.moveToObject(\"Halley\", 2);\n\n// Move toward International Space Station\ncore.moveToObject(\"ISS\", 1.5);"
+    },
+    {
+        "name": "moveToSelectedObject",
+        "category": "View & Movement",
+        "signature": "moveToSelectedObject(float duration)",
+        "description": "Moves the view center toward the currently selected object.",
+        "parameters": [
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Movement duration in seconds",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Select Jupiter then move toward it\ncore.selectObjectByName(\"Jupiter\", true);\ncore.moveToSelectedObject(2);\n\ncore.selectObjectByName(\"Moon\");\ncore.moveToSelectedObject(1);"
+    },
+    {
+        "name": "moveToAltAzi",
+        "category": "View & Movement",
+        "signature": "moveToAltAzi(QString alt, QString azi, float duration)",
+        "description": "Moves the view toward specified coordinates in Altitude/Azimuth system. Suitable for telescopes that use this system.",
+        "parameters": [
+            {
+                "name": "alt",
+                "type": "QString",
+                "description": "Altitude angle in degrees (0°=horizon, 90°=zenith). Can use '45°', '30d', '0.5rad'",
+                "required": true
+            },
+            {
+                "name": "azi",
+                "type": "QString",
+                "description": "Azimuth angle in degrees (0°=North, 90°=East, 180°=South, 270°=West)",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Movement duration in seconds",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Move toward eastern horizon\ncore.moveToAltAzi(\"0°\", \"90°\", 2);\n\n// Move toward zenith (directly overhead)\ncore.moveToAltAzi(\"90°\", \"0°\", 1.5);\n\n// Move toward south at 45 degrees altitude\ncore.moveToAltAzi(\"45d\", \"180d\", 2);\n\n// Use decimal format\ncore.moveToAltAzi(\"30.5\", \"135.2\", 1);\n\n// Move toward western horizon\ncore.moveToAltAzi(\"0\", \"270\", 2);"
+    },
+    {
+        "name": "moveToRaDec",
+        "category": "View & Movement",
+        "signature": "moveToRaDec(QString ra, QString dec, float duration)",
+        "description": "Moves the view toward specified coordinates in Right Ascension/Declination system for the current date. This is the equatorial system used in star charts.",
+        "parameters": [
+            {
+                "name": "ra",
+                "type": "QString",
+                "description": "Right Ascension like '5h 30m' or '82.5°'",
+                "required": true
+            },
+            {
+                "name": "dec",
+                "type": "QString",
+                "description": "Declination like '+30°' or '-45°'",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Movement duration in seconds",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Move toward Polaris (North Star)\ncore.moveToRaDec(\"2h 31m 49s\", \"+89° 15′ 51″\", 2);\n\n// Move toward Vega\ncore.moveToRaDec(\"18h 36m 56s\", \"+38° 47′ 01″\", 1.5);\n\n// Use decimal degrees\ncore.moveToRaDec(\"279.2°\", \"+38.8°\", 1);\n\n// Move toward Orion Nebula\ncore.moveToRaDec(\"5h 35m 17.3s\", \"-5° 23′ 28″\", 2);"
+    },
+    {
+        "name": "moveToRaDecJ2000",
+        "category": "View & Movement",
+        "signature": "moveToRaDecJ2000(QString ra, QString dec, float duration)",
+        "description": "Moves the view toward specified coordinates in Right Ascension/Declination system for the J2000.0 reference frame (epoch of year 2000).",
+        "parameters": [
+            {
+                "name": "ra",
+                "type": "QString",
+                "description": "Right Ascension in J2000 frame",
+                "required": true
+            },
+            {
+                "name": "dec",
+                "type": "QString",
+                "description": "Declination in J2000 frame",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Movement duration in seconds",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Move toward J2000 coordinates of Sirius\ncore.moveToRaDecJ2000(\"6h 45m 8.9s\", \"-16° 42′ 58″\", 2);\n\n// Move toward J2000 coordinates of galactic center\ncore.moveToRaDecJ2000(\"17h 45m 40.04s\", \"-29° 00′ 28.1″\", 2);"
+    },
+    {
+        "name": "moveToGalLongLat",
+        "category": "View & Movement",
+        "signature": "moveToGalLongLat(QString lon, QString lat, float duration)",
+        "description": "Moves the view toward specified coordinates in Galactic Coordinates system.",
+        "parameters": [
+            {
+                "name": "lon",
+                "type": "QString",
+                "description": "Galactic Longitude in degrees",
+                "required": true
+            },
+            {
+                "name": "lat",
+                "type": "QString",
+                "description": "Galactic Latitude in degrees",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Movement duration in seconds",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Move toward galactic center\ncore.moveToGalLongLat(\"0°\", \"0°\", 2);\n\n// Move toward north galactic pole\ncore.moveToGalLongLat(\"0°\", \"90°\", 2);\n\n// Move toward galactic rotation direction\ncore.moveToGalLongLat(\"90°\", \"0°\", 1.5);"
+    },
+    {
+        "name": "getViewAltitudeAngle",
+        "category": "View & Movement",
+        "signature": "double getViewAltitudeAngle()",
+        "description": "Returns the current altitude angle of the view center. 0=horizon, 90=zenith (overhead), 180=nadir (underfoot), -90=sub-nadir.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Altitude angle in degrees (range: -90 to 180)",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var alt = core.getViewAltitudeAngle();\nif(alt < 0) {\n    core.debug(\"Looking below horizon: \" + alt + \"°\");\n} else if(alt > 80) {\n    core.debug(\"Looking toward zenith (near overhead)\");\n} else if(alt < 10) {\n    core.debug(\"Looking near horizon\");\n} else {\n    core.debug(\"Altitude: \" + alt + \"°\");\n}"
+    },
+    {
+        "name": "getViewAzimuthAngle",
+        "category": "View & Movement",
+        "signature": "double getViewAzimuthAngle()",
+        "description": "Returns the current azimuth angle of the view center as a compass bearing (0=North, 90=East, 180=South, 270=West).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Azimuth angle in degrees (range: 0 to 359.9)",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var azi = core.getViewAzimuthAngle();\nvar direction = \"\";\nif(azi >= 337.5 || azi < 22.5) direction = \"North\";\nelse if(azi >= 22.5 && azi < 67.5) direction = \"Northeast\";\nelse if(azi >= 67.5 && azi < 112.5) direction = \"East\";\nelse if(azi >= 112.5 && azi < 157.5) direction = \"Southeast\";\nelse if(azi >= 157.5 && azi < 202.5) direction = \"South\";\nelse if(azi >= 202.5 && azi < 247.5) direction = \"Southwest\";\nelse if(azi >= 247.5 && azi < 292.5) direction = \"West\";\nelse if(azi >= 292.5 && azi < 337.5) direction = \"Northwest\";\ncore.debug(\"Direction: \" + direction + \" (\" + azi.toFixed(1) + \"°)\");"
+    },
+    {
+        "name": "getViewRaAngle",
+        "category": "View & Movement",
+        "signature": "double getViewRaAngle()",
+        "description": "Returns the Right Ascension angle of the view center in the current date reference frame.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Right Ascension in degrees (range: 0 to 360)",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var ra = core.getViewRaAngle();\ncore.debug(\"Current Right Ascension: \" + ra + \"°\");\n\n// Convert degrees to hours (15° = 1 hour)\nvar raHours = ra / 15;\ncore.debug(\"Right Ascension in hours: \" + raHours.toFixed(2) + \"h\");"
+    },
+    {
+        "name": "getViewDecAngle",
+        "category": "View & Movement",
+        "signature": "double getViewDecAngle()",
+        "description": "Returns the Declination angle of the view center in the current date reference frame.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Declination in degrees (range: -90 to 90)",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var dec = core.getViewDecAngle();\nvar hemisphere = dec >= 0 ? \"North\" : \"South\";\ncore.debug(\"Current Declination: \" + Math.abs(dec).toFixed(2) + \"° \" + hemisphere);"
+    },
+    {
+        "name": "getViewRaJ2000Angle",
+        "category": "View & Movement",
+        "signature": "double getViewRaJ2000Angle()",
+        "description": "Returns the Right Ascension angle of the view center in the J2000.0 reference frame.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "J2000 Right Ascension in degrees",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var raJ2000 = core.getViewRaJ2000Angle();\nvar raCurrent = core.getViewRaAngle();\ncore.debug(\"RA J2000: \" + raJ2000 + \"°\");\ncore.debug(\"Current RA: \" + raCurrent + \"°\");\ncore.debug(\"Difference (due to precession): \" + (raJ2000 - raCurrent).toFixed(2) + \"°\");"
+    },
+    {
+        "name": "getViewDecJ2000Angle",
+        "category": "View & Movement",
+        "signature": "double getViewDecJ2000Angle()",
+        "description": "Returns the Declination angle of the view center in the J2000.0 reference frame.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "J2000 Declination in degrees",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var decJ2000 = core.getViewDecJ2000Angle();\ncore.debug(\"Dec J2000: \" + decJ2000 + \"°\");"
+    },
+    {
+        "name": "setMountMode",
+        "category": "View & Movement",
+        "signature": "setMountMode(QString mode)",
+        "description": "Sets the mount mode for sky movement. Equatorial makes the sky rotate around the pole, while Alt-Azimuth keeps the sky fixed relative to the horizon.",
+        "parameters": [
+            {
+                "name": "mode",
+                "type": "QString",
+                "description": "'equatorial' or 'azimuthal'",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Equatorial mode - follows Earth's rotation (suitable for astrophotography)\ncore.setMountMode(\"equatorial\");\n\n// Alt-Azimuth mode - fixed relative to horizon (like regular telescopes)\ncore.setMountMode(\"azimuthal\");\n\n// Get current mode\nvar mode = core.getMountMode();\ncore.debug(\"Current mode: \" + mode);"
+    },
+    {
+        "name": "getMountMode",
+        "category": "View & Movement",
+        "signature": "QString getMountMode()",
+        "description": "Returns the current mount mode ('equatorial' or 'azimuthal').",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Current mount mode",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var mode = core.getMountMode();\nif(mode === \"equatorial\") {\n    core.debug(\"Mount is in equatorial mode\");\n} else {\n    core.debug(\"Mount is in alt-azimuth mode\");\n}"
+    },
+    {
+        "name": "setProjectionMode",
+        "category": "View & Movement",
+        "signature": "setProjectionMode(QString id)",
+        "description": "Sets the map projection type for sky display. Each projection gives a different perspective of the sky.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Projection type: 'ProjectionPerspective', 'ProjectionFisheye', 'ProjectionMercator', 'ProjectionHammer', 'ProjectionMollweide', 'ProjectionCylinder', 'ProjectionOrthographic', 'ProjectionStereographic', 'ProjectionEqualArea', 'ProjectionMiller', 'ProjectionSinusoidal'",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Fisheye projection (360-degree panoramic view)\ncore.setProjectionMode(\"ProjectionFisheye\");\n\n// Perspective projection (default, closest to what the eye sees)\ncore.setProjectionMode(\"ProjectionPerspective\");\n\n// Mercator projection for maps (distorts polar regions)\ncore.setProjectionMode(\"ProjectionMercator\");\n\n// Hammer projection (like a flattened sky map)\ncore.setProjectionMode(\"ProjectionHammer\");\n\n// Mollweide projection (equal area)\ncore.setProjectionMode(\"ProjectionMollweide\");\n\n// Cylindrical projection\ncore.setProjectionMode(\"ProjectionCylinder\");\n\n// Get current projection\nvar current = core.getProjectionMode();\ncore.debug(\"Current projection: \" + current);"
+    },
+    {
+        "name": "getProjectionMode",
+        "category": "View & Movement",
+        "signature": "QString getProjectionMode()",
+        "description": "Returns the current map projection type.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Current projection identifier",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var projection = core.getProjectionMode();\ncore.debug(\"Current map projection: \" + projection);"
+    },
+    {
+        "name": "setDiskViewport",
+        "category": "View & Movement",
+        "signature": "setDiskViewport(bool b)",
+        "description": "Enables or disables circular disk viewport mode (instead of rectangle). Useful for planetarium domes.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to enable circular display, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Enable circular display (for planetarium domes)\ncore.setDiskViewport(true);\n\n// Return to rectangular display\ncore.setDiskViewport(false);\n\nvar isDisk = core.getDiskViewport();\ncore.debug(\"Circular display enabled: \" + isDisk);"
+    },
+    {
+        "name": "getDiskViewport",
+        "category": "View & Movement",
+        "signature": "bool getDiskViewport()",
+        "description": "Returns whether circular disk viewport mode is active.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if circular display is active, false if rectangular",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(core.getDiskViewport()) {\n    core.debug(\"Sky is displayed in circular mode\");\n}"
+    },
+    {
+        "name": "setSphericMirror",
+        "category": "View & Movement",
+        "signature": "setSphericMirror(bool b)",
+        "description": "Enables spherical mirror distortion effect for displaying the sky on spherical screens.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to enable spherical mirror distortion",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Enable spherical mirror distortion for domes\ncore.setSphericMirror(true);\n\n// Disable distortion\ncore.setSphericMirror(false);"
+    },
+    {
+        "name": "setViewportStretch",
+        "category": "View & Movement",
+        "signature": "setViewportStretch(float stretch)",
+        "description": "Sets the horizontal stretch factor for the viewport. Experimental, used to adjust display on very wide screens.",
+        "parameters": [
+            {
+                "name": "stretch",
+                "type": "float",
+                "description": "Stretch factor (1.0 = normal, >1 = horizontal stretch)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Experimental function - may change in future versions"
+        },
+        "example": "// Stretch display by 20%\ncore.setViewportStretch(1.2);\n\n// Return to normal\ncore.setViewportStretch(1.0);"
+    },
+    {
+        "name": "setFlipHorz",
+        "category": "View & Movement",
+        "signature": "setFlipHorz(bool b)",
+        "description": "Flips the display horizontally (mirror reflection).",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true for horizontal flip",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.setFlipHorz(true);\ncore.wait(2);\ncore.setFlipHorz(false);"
+    },
+    {
+        "name": "getFlipHorz",
+        "category": "View & Movement",
+        "signature": "bool getFlipHorz()",
+        "description": "Returns the horizontal flip state.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if horizontally flipped",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(core.getFlipHorz()) {\n    core.debug(\"Display is horizontally flipped\");\n}"
+    },
+    {
+        "name": "setFlipVert",
+        "category": "View & Movement",
+        "signature": "setFlipVert(bool b)",
+        "description": "Flips the display vertically (mirror reflection).",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true for vertical flip",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.setFlipVert(true);\ncore.wait(2);\ncore.setFlipVert(false);"
+    },
+    {
+        "name": "getFlipVert",
+        "category": "View & Movement",
+        "signature": "bool getFlipVert()",
+        "description": "Returns the vertical flip state.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if vertically flipped",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(core.getFlipVert()) {\n    core.debug(\"Display is vertically flipped\");\n}"
+    },
+    {
+        "name": "setFlagGravityLabels",
+        "category": "View & Movement",
+        "signature": "setFlagGravityLabels(bool b)",
+        "description": "Enables gravity labels - makes text point outward from the screen center.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to enable gravity labels",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.setFlagGravityLabels(true); // Text points outward\ncore.setFlagGravityLabels(false); // Normal text"
+    },
+    {
+        "name": "getFlagGravityLabels",
+        "category": "View & Movement",
+        "signature": "bool getFlagGravityLabels()",
+        "description": "Returns the gravity labels state.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if gravity labels are enabled",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(core.getFlagGravityLabels()) {\n    core.debug(\"Gravity labels are enabled\");\n}"
+    },
+    {
+        "name": "selectObjectByName",
+        "category": "Object Selection",
+        "signature": "selectObjectByName(QString name, bool pointer)",
+        "description": "Selects a celestial object by its name. Can select stars, planets, deep-sky objects, asteroids, comets, or lunar surface features.",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "English name of the object (empty to deselect). For satellites: 'ISS', 'Hubble'",
+                "required": true
+            },
+            {
+                "name": "pointer",
+                "type": "bool",
+                "description": "Show selection pointer (arrow or circle around object)",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Select Mars with pointer enabled\ncore.selectObjectByName(\"Mars\", true);\n\n// Select Sirius\ncore.selectObjectByName(\"Sirius\");\n\n// Select a crater on the Moon\nNomenclatureMgr.setFlagShowNomenclature(true);\ncore.selectObjectByName(\"Copernicus (crater, Moon)\", true);\n\n// Select Andromeda Galaxy\ncore.selectObjectByName(\"Andromeda Galaxy\");\n\n// Select International Space Station\ncore.selectObjectByName(\"ISS\", true);\n\n// Deselect\ncore.selectObjectByName(\"\");"
+    },
+    {
+        "name": "selectConstellationByName",
+        "category": "Object Selection",
+        "signature": "selectConstellationByName(QString name)",
+        "description": "Selects a constellation by its name.",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "English name of the constellation (e.g., 'Orion', 'Ursa Major', 'Leo')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Select Orion constellation\ncore.selectConstellationByName(\"Orion\");\ncore.moveToSelectedObject(2);\n\n// Select Ursa Major\ncore.selectConstellationByName(\"Ursa Major\");\n\n// Select Leo\ncore.selectConstellationByName(\"Leo\");"
+    },
+    {
+        "name": "getSelectedObjectInfo",
+        "category": "Object Selection",
+        "signature": "QVariantMap getSelectedObjectInfo()",
+        "description": "Returns detailed information about the currently selected object. Includes coordinates, brightness, distance, size, velocity, and more.",
+        "parameters": [],
+        "returnType": "QVariantMap",
+        "returnDescription": "Map containing comprehensive information about the selected object",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.selectObjectByName(\"Mars\", true);\nvar info = core.getSelectedObjectInfo();\n\n// Print basic information\ncore.output(\"===== Mars Information =====\");\ncore.output(\"Name: \" + info[\"localized-name\"]);\ncore.output(\"Altitude: \" + info[\"altitude\"] + \"°\");\ncore.output(\"Azimuth: \" + info[\"azimuth\"] + \"°\");\ncore.output(\"Apparent magnitude: \" + info[\"vmag\"]);\ncore.output(\"Distance: \" + info[\"distance-km\"] + \" km\");\n\nif(info[\"phase\"] !== undefined) {\n    core.output(\"Phase: \" + (info[\"phase\"] * 100).toFixed(1) + \"%\");\n}\n\n// Print all information in formatted way\ncore.output(core.mapToString(info));"
+    },
+    {
+        "name": "getObjectInfo",
+        "category": "Object Selection",
+        "signature": "QVariantMap getObjectInfo(QString name)",
+        "description": "Returns detailed information about a specific object without needing to select it. Useful for querying multiple objects.",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "English name of the object to query",
+                "required": true
+            }
+        ],
+        "returnType": "QVariantMap",
+        "returnDescription": "Map containing comprehensive object information",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Get information about the Sun\nvar sunInfo = core.getObjectInfo(\"Sun\");\ncore.debug(\"Sun illumination: \" + sunInfo[\"illumination\"] + \"%\");\n\n// Get information about the Moon\nvar moonInfo = core.getObjectInfo(\"Moon\");\ncore.debug(\"Moon phase: \" + (moonInfo[\"phase\"] * 100).toFixed(1) + \"%\");\ncore.debug(\"Moon age: \" + moonInfo[\"age\"] + \" days\");\n\n// Information about Jupiter\nvar jupiterInfo = core.getObjectInfo(\"Jupiter\");\ncore.debug(\"Orbital velocity: \" + jupiterInfo[\"velocity-kms\"] + \" km/s\");\ncore.debug(\"Number of moons: \" + (jupiterInfo[\"moons\"] || \"N/A\"));\n\n// Information about Sirius\nvar siriusInfo = core.getObjectInfo(\"Sirius\");\ncore.debug(\"Radial velocity: \" + (siriusInfo[\"radial-velocity\"] || \"N/A\"));"
+    },
+    {
+        "name": "addToSelectedObjectInfoString",
+        "category": "Object Selection",
+        "signature": "addToSelectedObjectInfoString(QString str, bool replace)",
+        "description": "Adds custom text to the selected object's information display. Useful for adding notes or additional data.",
+        "parameters": [
+            {
+                "name": "str",
+                "type": "QString",
+                "description": "Text to add to object information",
+                "required": true
+            },
+            {
+                "name": "replace",
+                "type": "bool",
+                "description": "true to replace existing text, false to append",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.selectObjectByName(\"Mars\");\ncore.addToSelectedObjectInfoString(\"Note: Mars is in opposition\", false);\n\n// Replace text\ncore.addToSelectedObjectInfoString(\"Updated: Mars is close to Earth\", true);"
+    },
+    {
+        "name": "getRTS",
+        "category": "Object Selection",
+        "signature": "QVariantMap getRTS(QString objectName, double altitude)",
+        "description": "Returns the rise, transit, and set times for a celestial object on the current day. Can specify a different altitude for twilight calculations.",
+        "parameters": [
+            {
+                "name": "objectName",
+                "type": "QString",
+                "description": "Object name (e.g., 'Sun', 'Moon', 'Sirius', 'Venus')",
+                "required": true
+            },
+            {
+                "name": "altitude",
+                "type": "double",
+                "description": "Required altitude to consider as rise/set in degrees (0 for horizon). Negative values for twilight.",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "QVariantMap",
+        "returnDescription": "Map containing: rise, transit, set, status-code, status",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Sunrise and sunset\nvar sunRTS = core.getRTS(\"Sun\", 0);\ncore.debug(\"Sunrise: \" + sunRTS[\"rise\"]);\ncore.debug(\"Solar transit (noon): \" + sunRTS[\"transit\"]);\ncore.debug(\"Sunset: \" + sunRTS[\"set\"]);\n\n// Twilight times\nvar civilTwilight = core.getRTS(\"Sun\", -6);\nvar nauticalTwilight = core.getRTS(\"Sun\", -12);\nvar astroTwilight = core.getRTS(\"Sun\", -18);\n\ncore.debug(\"=== Twilight Times ===\");\ncore.debug(\"Civil twilight: \" + civilTwilight[\"rise\"] + \" - \" + civilTwilight[\"set\"]);\ncore.debug(\"Nautical twilight: \" + nauticalTwilight[\"rise\"] + \" - \" + nauticalTwilight[\"set\"]);\ncore.debug(\"Astronomical twilight: \" + astroTwilight[\"rise\"] + \" - \" + astroTwilight[\"set\"]);\n\n// Moonrise and moonset\nvar moonRTS = core.getRTS(\"Moon\");\ncore.debug(\"Moonrise: \" + moonRTS[\"rise\"]);\ncore.debug(\"Moonset: \" + moonRTS[\"set\"]);\n\n// Venus rise (morning/evening star)\nvar venusRTS = core.getRTS(\"Venus\");\ncore.debug(\"Venus rise: \" + venusRTS[\"rise\"]);\n\n// Check status\nif(sunRTS[\"status-code\"] == 100) {\n    core.debug(\"Sun is circumpolar (does not set)\");\n} else if(sunRTS[\"status-code\"] == -100) {\n    core.debug(\"Sun does not rise today\");\n}"
+    },
+    {
+        "name": "setGuiVisible",
+        "category": "GUI & Display",
+        "signature": "setGuiVisible(bool b)",
+        "description": "Shows or hides the entire user interface (toolbars, menus, buttons). Very useful for creating clean presentations or tutorial videos.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show UI, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Hide UI for a clean full-sky view\ncore.setGuiVisible(false);\ncore.debug(\"UI hidden - full view\");\ncore.wait(5);\n\n// Show UI again\ncore.setGuiVisible(true);\ncore.debug(\"UI visible\");\n\n// Use in a presentation\ncore.setGuiVisible(false);\ncore.moveToObject(\"Andromeda Galaxy\", 3);\ncore.wait(4);\ncore.setGuiVisible(true);"
+    },
+    {
+        "name": "setSelectedObjectMarkerVisible",
+        "category": "GUI & Display",
+        "signature": "setSelectedObjectMarkerVisible(bool b)",
+        "description": "Shows or hides the arrow or circle marker around the selected object. Makes tracking selected objects easier.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show marker, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.selectObjectByName(\"Mars\", true);\ncore.setSelectedObjectMarkerVisible(true);\ncore.wait(3);\ncore.setSelectedObjectMarkerVisible(false);"
+    },
+    {
+        "name": "setNightMode",
+        "category": "GUI & Display",
+        "signature": "setNightMode(bool b)",
+        "description": "Enables or disables night mode - changes UI colors to red to preserve night vision during field observations.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to enable night mode, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Enable night mode for observation\ncore.setNightMode(true);\ncore.debug(\"Night mode enabled - red colors\");\n\nvar isNight = core.getNightMode();\nif(isNight) {\n    core.debug(\"Eyes are adapting to darkness\");\n}\n\n// Return to normal mode when done\ncore.setNightMode(false);"
+    },
+    {
+        "name": "getNightMode",
+        "category": "GUI & Display",
+        "signature": "bool getNightMode()",
+        "description": "Returns the current night mode state.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if night mode is enabled",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(core.getNightMode()) {\n    core.debug(\"Stellarium is in night mode\");\n}"
+    },
+    {
+        "name": "setGuiStyle",
+        "category": "GUI & Display",
+        "signature": "setGuiStyle(QString cssStyle)",
+        "description": "Changes the UI appearance using a custom CSS file. Allows full customization of the program's look.",
+        "parameters": [
+            {
+                "name": "cssStyle",
+                "type": "QString",
+                "description": "CSS file name (without .css extension) or 'default' for default settings",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Reset interface to default\ncore.setGuiStyle(\"default\");\n\n// Use custom CSS file\n// Place myDarkTheme.css in user data directory\ncore.setGuiStyle(\"myDarkTheme\");"
+    },
+    {
+        "name": "screenshot",
+        "category": "GUI & Display",
+        "signature": "screenshot(QString prefix, bool invert, QString dir, bool overwrite, QString format)",
+        "description": "Captures a screenshot and saves it as an image file. Supports multiple formats and color inversion.",
+        "parameters": [
+            {
+                "name": "prefix",
+                "type": "QString",
+                "description": "File name prefix (usually gets a sequence number)",
+                "required": true
+            },
+            {
+                "name": "invert",
+                "type": "bool",
+                "description": "Invert colors (produces a negative image)",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "dir",
+                "type": "QString",
+                "description": "Save directory path (empty for default)",
+                "required": false,
+                "default": "\"\""
+            },
+            {
+                "name": "overwrite",
+                "type": "bool",
+                "description": "Overwrite existing files with the same name",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "format",
+                "type": "QString",
+                "description": "File format: 'png', 'jpg', 'bmp', 'tiff', 'webp'",
+                "required": false,
+                "default": "\"\""
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Capture with automatic name\ncore.screenshot(\"my_screenshot\");\n\n// Capture with color inversion (for ink-saving printing)\ncore.screenshot(\"negative\", true);\n\n// Save as JPG with overwrite\ncore.screenshot(\"snapshot\", false, \"\", true, \"jpg\");\n\n// Save to specific folder as high-quality TIFF\ncore.screenshot(\"high_quality\", false, \"C:/Screenshots\", true, \"tiff\");\n\n// Sequential capture\nfor(var i=1; i<=10; i++) {\n    core.screenshot(\"frame_\" + i);\n    core.wait(0.5);\n}"
+    },
+    {
+        "name": "setMinFps",
+        "category": "GUI & Display",
+        "signature": "setMinFps(float m)",
+        "description": "Sets the minimum frames per second (FPS). Affects movement smoothness.",
+        "parameters": [
+            {
+                "name": "m",
+                "type": "float",
+                "description": "Minimum FPS",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Set minimum 30 frames per second\ncore.setMinFps(30);\n\n// Get current value\nvar minFps = core.getMinFps();\ncore.debug(\"Minimum FPS: \" + minFps);"
+    },
+    {
+        "name": "getMinFps",
+        "category": "GUI & Display",
+        "signature": "float getMinFps()",
+        "description": "Returns the current minimum frames per second setting.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Minimum FPS",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var minFps = core.getMinFps();\ncore.debug(\"Minimum: \" + minFps);"
+    },
+    {
+        "name": "setMaxFps",
+        "category": "GUI & Display",
+        "signature": "setMaxFps(float m)",
+        "description": "Sets the maximum frames per second. Helps save power on mobile devices.",
+        "parameters": [
+            {
+                "name": "m",
+                "type": "float",
+                "description": "Maximum FPS",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Set maximum 60 frames per second\ncore.setMaxFps(60);\n\n// Set maximum 30 (to save battery)\ncore.setMaxFps(30);"
+    },
+    {
+        "name": "getMaxFps",
+        "category": "GUI & Display",
+        "signature": "float getMaxFps()",
+        "description": "Returns the current maximum frames per second setting.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Maximum FPS",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var maxFps = core.getMaxFps();\ncore.debug(\"Maximum: \" + maxFps);"
+    },
+    {
+        "name": "getScreenWidth",
+        "category": "GUI & Display",
+        "signature": "int getScreenWidth()",
+        "description": "Returns the width of the main Stellarium window in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Window width in pixels",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var w = core.getScreenWidth();\nvar h = core.getScreenHeight();\ncore.debug(\"Window resolution: \" + w + \"x\" + h);\n\n// Position element in center of screen\nvar centerX = w / 2;\nvar centerY = h / 2;"
+    },
+    {
+        "name": "getScreenHeight",
+        "category": "GUI & Display",
+        "signature": "int getScreenHeight()",
+        "description": "Returns the height of the main Stellarium window in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Window height in pixels",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var h = core.getScreenHeight();\ncore.debug(\"Height: \" + h + \" pixels\");"
+    },
+    {
+        "name": "setWindowSize",
+        "category": "GUI & Display",
+        "signature": "Vec2d setWindowSize(int width, int height)",
+        "description": "Changes the size of the Stellarium window. Does not exceed actual screen size.",
+        "parameters": [
+            {
+                "name": "width",
+                "type": "int",
+                "description": "New width in pixels",
+                "required": true
+            },
+            {
+                "name": "height",
+                "type": "int",
+                "description": "New height in pixels",
+                "required": true
+            }
+        ],
+        "returnType": "Vec2d",
+        "returnDescription": "(actual width, actual height) after change",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Change window size to 1024x768\nvar newSize = core.setWindowSize(1024, 768);\ncore.debug(\"New size: \" + newSize[0] + \"x\" + newSize[1]);\n\n// Change to full screen mode\nvar screenWidth = core.getScreenWidth();\nvar screenHeight = core.getScreenHeight();\ncore.setWindowSize(screenWidth, screenHeight);"
+    },
+    {
+        "name": "goHome",
+        "category": "GUI & Display",
+        "signature": "goHome()",
+        "description": "Returns to the default home location and view direction.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Return to default settings\ncore.goHome();"
+    },
+    {
+        "name": "setSkyCulture",
+        "category": "Sky Culture",
+        "signature": "setSkyCulture(QString id)",
+        "description": "Changes the sky culture - changes constellations, stars, and artwork according to different cultures around the world.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Culture ID: 'western', 'chinese', 'egyptian', 'inuit', 'polynesian', 'maori', 'navajo', 'tukano'",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Western constellation culture (familiar)\ncore.setSkyCulture(\"western\");\ncore.wait(2);\n\n// Chinese constellation culture\ncore.setSkyCulture(\"chinese\");\ncore.wait(2);\n\n// Ancient Egyptian constellation culture\ncore.setSkyCulture(\"egyptian\");\n\n// Inuit culture (Arctic peoples)\ncore.setSkyCulture(\"inuit\");\n\n// Get list of all cultures\nvar cultures = core.getAllSkyCultureIDs();\ncore.debug(\"Available cultures: \" + cultures.join(\", \"));\n\n// Get current culture\nvar current = core.getSkyCulture();\nvar name = core.getSkyCultureName();\nvar nameI18n = core.getSkyCultureNameI18n();\ncore.debug(\"Current culture: \" + nameI18n);"
+    },
+    {
+        "name": "getSkyCulture",
+        "category": "Sky Culture",
+        "signature": "QString getSkyCulture()",
+        "description": "Returns the current sky culture identifier.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Culture ID (e.g., 'western')",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var culture = core.getSkyCulture();\ncore.debug(\"Culture ID: \" + culture);"
+    },
+    {
+        "name": "getSkyCultureName",
+        "category": "Sky Culture",
+        "signature": "QString getSkyCultureName()",
+        "description": "Returns the English name of the current sky culture.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "English name",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var cultureName = core.getSkyCultureName();\ncore.debug(\"English name: \" + cultureName);"
+    },
+    {
+        "name": "getSkyCultureNameI18n",
+        "category": "Sky Culture",
+        "signature": "QString getSkyCultureNameI18n()",
+        "description": "Returns the translated name of the current sky culture based on current UI language.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Translated name",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var cultureName = core.getSkyCultureNameI18n();\ncore.debug(\"Translated name: \" + cultureName);"
+    },
+    {
+        "name": "getAllSkyCultureIDs",
+        "category": "Sky Culture",
+        "signature": "QStringList getAllSkyCultureIDs()",
+        "description": "Returns a list of all available sky culture identifiers in the system.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of culture IDs",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var cultures = core.getAllSkyCultureIDs();\ncore.debug(\"Number of cultures: \" + cultures.length);\nfor(var i=0; i<cultures.length; i++) {\n    core.debug((i+1) + \". \" + cultures[i]);\n}"
+    },
+    {
+        "name": "loadSkyImage",
+        "category": "Multimedia",
+        "signature": "loadSkyImage(QString id, QString filename, double lon, double lat, double angSize, double rotation, double minRes, double maxBright, bool visible, QString frame, bool withAberration)",
+        "description": "Loads an image into the sky (like nebulae or astronomical images) and projects it onto the sky dome with various projection types.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier for the image",
+                "required": true
+            },
+            {
+                "name": "filename",
+                "type": "QString",
+                "description": "Image file name (placed in scripts/ folder)",
+                "required": true
+            },
+            {
+                "name": "lon",
+                "type": "double",
+                "description": "Longitude/Right Ascension of image center (in degrees)",
+                "required": true
+            },
+            {
+                "name": "lat",
+                "type": "double",
+                "description": "Latitude/Declination of image center (in degrees)",
+                "required": true
+            },
+            {
+                "name": "angSize",
+                "type": "double",
+                "description": "Image size in arcminutes",
+                "required": true
+            },
+            {
+                "name": "rotation",
+                "type": "double",
+                "description": "Rotation angle in degrees (counter-clockwise)",
+                "required": true
+            },
+            {
+                "name": "minRes",
+                "type": "double",
+                "description": "Minimum display resolution",
+                "required": false,
+                "default": "2.5"
+            },
+            {
+                "name": "maxBright",
+                "type": "double",
+                "description": "Maximum brightness (apparent magnitude per square minute)",
+                "required": false,
+                "default": "14"
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "Initial image visibility",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "frame",
+                "type": "QString",
+                "description": "Frame: 'EqJ2000', 'EqDate', 'AzAlt', 'Galactic', 'Supergalactic'",
+                "required": false,
+                "default": "'EqJ2000'"
+            },
+            {
+                "name": "withAberration",
+                "type": "bool",
+                "description": "Apply aberration effect",
+                "required": false,
+                "default": "true"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Load nebula image at specific position\ncore.loadSkyImage(\"myNebula\", \"nebula.png\", 83.5, -22.0, 30, 0);\n\n// Load high-resolution Moon image\ncore.loadSkyImage(\"moonMap\", \"moon_texture.jpg\", 0, 0, 30, 0);\n\n// Load image in Altitude/Azimuth system (fixed to horizon)\ncore.loadSkyImage(\"horizonImage\", \"horizon.jpg\", 0, 0, 180, 0, 2.5, 14, true, \"AzAlt\");\n\n// Load image in Galactic frame\ncore.loadSkyImage(\"galacticCenter\", \"milkyway.jpg\", 0, 0, 60, 0, 2.5, 14, true, \"Galactic\");\n\n// Remove the image\ncore.removeSkyImage(\"myNebula\");"
+    },
+    {
+        "name": "removeSkyImage",
+        "category": "Multimedia",
+        "signature": "removeSkyImage(QString id)",
+        "description": "Removes a previously loaded sky image and frees memory.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "ID of the image to remove",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.removeSkyImage(\"myNebula\");\ncore.removeSkyImage(\"galacticCenter\");"
+    },
+    {
+        "name": "loadSound",
+        "category": "Multimedia",
+        "signature": "loadSound(QString filename, QString id)",
+        "description": "Loads an audio file (MP3, WAV, OGG, FLAC) for playback in the script. Must free memory after use.",
+        "parameters": [
+            {
+                "name": "filename",
+                "type": "QString",
+                "description": "Sound file name (placed in scripts/ folder)",
+                "required": true
+            },
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier for the sound",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Load and play sound effect\ncore.loadSound(\"explosion.wav\", \"explode\");\ncore.playSound(\"explode\");\n\n// Load background music\ncore.loadSound(\"background.mp3\", \"bgMusic\");\ncore.playSound(\"bgMusic\");\n\n// Get sound duration\nvar duration = core.getSoundDuration(\"bgMusic\");\ncore.debug(\"Duration: \" + (duration/1000).toFixed(1) + \" seconds\");\n\n// Stop and unload sound\ncore.stopSound(\"explode\");\ncore.dropSound(\"explode\");\n\n// Loop playback\ncore.loadSound(\"loop.wav\", \"loop\");\nfor(var i=0; i<5; i++) {\n    core.playSound(\"loop\");\n    core.wait(2);\n}\ncore.dropSound(\"loop\");"
+    },
+    {
+        "name": "playSound",
+        "category": "Multimedia",
+        "signature": "playSound(QString id)",
+        "description": "Plays a previously loaded sound. If stopped, starts from beginning. If paused, resumes.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Sound ID used in loadSound",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.playSound(\"bgMusic\");"
+    },
+    {
+        "name": "pauseSound",
+        "category": "Multimedia",
+        "signature": "pauseSound(QString id)",
+        "description": "Pauses a playing sound. Can be resumed later with playSound.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Sound ID",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.pauseSound(\"bgMusic\");\ncore.debug(\"Music paused\");\ncore.wait(3);\ncore.playSound(\"bgMusic\"); // Resume"
+    },
+    {
+        "name": "stopSound",
+        "category": "Multimedia",
+        "signature": "stopSound(QString id)",
+        "description": "Stops sound playback completely and rewinds to the beginning.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Sound ID",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.stopSound(\"bgMusic\");"
+    },
+    {
+        "name": "dropSound",
+        "category": "Multimedia",
+        "signature": "dropSound(QString id)",
+        "description": "Unloads sound from memory and releases resources. Must be called when sound is no longer needed.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Sound ID",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.dropSound(\"bgMusic\");\ncore.dropSound(\"explode\");"
+    },
+    {
+        "name": "getSoundPosition",
+        "category": "Multimedia",
+        "signature": "qint64 getSoundPosition(QString id)",
+        "description": "Returns the current playback position of the sound in milliseconds.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Sound ID",
+                "required": true
+            }
+        ],
+        "returnType": "qint64",
+        "returnDescription": "Position in milliseconds (0 if stopped, -1 on error)",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var pos = core.getSoundPosition(\"bgMusic\");\ncore.debug(\"Position: \" + (pos/1000).toFixed(1) + \" seconds\");"
+    },
+    {
+        "name": "getSoundDuration",
+        "category": "Multimedia",
+        "signature": "qint64 getSoundDuration(QString id)",
+        "description": "Returns the total duration of the sound in milliseconds.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Sound ID",
+                "required": true
+            }
+        ],
+        "returnType": "qint64",
+        "returnDescription": "Duration in milliseconds (0 if unknown, -1 on error)",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var duration = core.getSoundDuration(\"bgMusic\");\ncore.debug(\"Duration: \" + (duration/1000).toFixed(1) + \" seconds\");"
+    },
+    {
+        "name": "loadVideo",
+        "category": "Multimedia",
+        "signature": "loadVideo(QString filename, QString id, float x, float y, bool show, float alpha)",
+        "description": "Loads a video file (MP4, WebM, AVI, MKV) for playback inside the Stellarium window.",
+        "parameters": [
+            {
+                "name": "filename",
+                "type": "QString",
+                "description": "Video file name (in scripts/ folder)",
+                "required": true
+            },
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier for the video",
+                "required": true
+            },
+            {
+                "name": "x",
+                "type": "float",
+                "description": "X coordinate of video (from left)",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "float",
+                "description": "Y coordinate of video (from top)",
+                "required": true
+            },
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "Show video after loading",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "alpha",
+                "type": "float",
+                "description": "Transparency level (0-1)",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Load video in center of screen\nvar w = core.getScreenWidth();\nvar h = core.getScreenHeight();\ncore.loadVideo(\"presentation.mp4\", \"vid\", w/2, h/2, true);\ncore.playVideo(\"vid\");\n\n// Small video in top-left corner\ncore.loadVideo(\"logo.webm\", \"logo\", 10, 10, true, 0.8);\n\n// Transparent background video\ncore.loadVideo(\"background.webm\", \"bg\", 0, 0, true, 0.5);\n\n// Video controls\ncore.pauseVideo(\"vid\");\ncore.seekVideo(\"vid\", 30000); // Jump to 30 seconds\ncore.playVideo(\"vid\");\n\n// Stop and unload\ncore.stopVideo(\"vid\");\ncore.dropVideo(\"vid\");"
+    },
+    {
+        "name": "playVideo",
+        "category": "Multimedia",
+        "signature": "playVideo(QString id, bool keepVisibleAtEnd)",
+        "description": "Plays a previously loaded video.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            },
+            {
+                "name": "keepVisibleAtEnd",
+                "type": "bool",
+                "description": "Keep video visible after completion (static frame)",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.playVideo(\"vid\", true); // Last frame remains after completion"
+    },
+    {
+        "name": "playVideoPopout",
+        "category": "Multimedia",
+        "signature": "playVideoPopout(QString id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition)",
+        "description": "Plays video with a popout effect - appears from a point, expands gradually, then returns.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            },
+            {
+                "name": "fromX",
+                "type": "float",
+                "description": "Start point X (ratio or pixel)",
+                "required": true
+            },
+            {
+                "name": "fromY",
+                "type": "float",
+                "description": "Start point Y (ratio or pixel)",
+                "required": true
+            },
+            {
+                "name": "atCenterX",
+                "type": "float",
+                "description": "Final center X position",
+                "required": true
+            },
+            {
+                "name": "atCenterY",
+                "type": "float",
+                "description": "Final center Y position",
+                "required": true
+            },
+            {
+                "name": "finalSizeX",
+                "type": "float",
+                "description": "Final X size",
+                "required": true
+            },
+            {
+                "name": "finalSizeY",
+                "type": "float",
+                "description": "Final Y size",
+                "required": true
+            },
+            {
+                "name": "popupDuration",
+                "type": "float",
+                "description": "Popup effect duration (seconds)",
+                "required": true
+            },
+            {
+                "name": "frozenInTransition",
+                "type": "bool",
+                "description": "Freeze video during transition",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Popout effect from bottom-left corner\ncore.playVideoPopout(\"vid\", 0, 1, 0.5, 0.5, 0.3, 0.3, 1.5, false);"
+    },
+    {
+        "name": "pauseVideo",
+        "category": "Multimedia",
+        "signature": "pauseVideo(QString id)",
+        "description": "Pauses video playback. Can be resumed later.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.pauseVideo(\"vid\");"
+    },
+    {
+        "name": "stopVideo",
+        "category": "Multimedia",
+        "signature": "stopVideo(QString id)",
+        "description": "Stops video playback and rewinds to the beginning.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.stopVideo(\"vid\");"
+    },
+    {
+        "name": "dropVideo",
+        "category": "Multimedia",
+        "signature": "dropVideo(QString id)",
+        "description": "Unloads video from memory and releases resources.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.dropVideo(\"vid\");"
+    },
+    {
+        "name": "seekVideo",
+        "category": "Multimedia",
+        "signature": "seekVideo(QString id, qint64 ms, bool pause)",
+        "description": "Jumps to a specific position in the video.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            },
+            {
+                "name": "ms",
+                "type": "qint64",
+                "description": "Position in milliseconds from start",
+                "required": true
+            },
+            {
+                "name": "pause",
+                "type": "bool",
+                "description": "true to pause after seeking, false to play",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.seekVideo(\"vid\", 60000, true); // Jump to 1 minute and pause"
+    },
+    {
+        "name": "setVideoXY",
+        "category": "Multimedia",
+        "signature": "setVideoXY(QString id, float x, float y, bool relative)",
+        "description": "Changes the position of the video frame on screen.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            },
+            {
+                "name": "x",
+                "type": "float",
+                "description": "New X coordinate",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "float",
+                "description": "New Y coordinate",
+                "required": true
+            },
+            {
+                "name": "relative",
+                "type": "bool",
+                "description": "true for relative offset, false for absolute coordinates",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.setVideoXY(\"vid\", 100, 100, false); // Move to (100,100)\ncore.setVideoXY(\"vid\", 10, 10, true); // Offset by 10 pixels"
+    },
+    {
+        "name": "setVideoAlpha",
+        "category": "Multimedia",
+        "signature": "setVideoAlpha(QString id, float alpha)",
+        "description": "Sets the transparency level of the video.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            },
+            {
+                "name": "alpha",
+                "type": "float",
+                "description": "Transparency level (0 = fully transparent, 1 = fully opaque)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.setVideoAlpha(\"vid\", 0.5); // Half transparent"
+    },
+    {
+        "name": "resizeVideo",
+        "category": "Multimedia",
+        "signature": "resizeVideo(QString id, float w, float h)",
+        "description": "Changes the size of the video frame.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            },
+            {
+                "name": "w",
+                "type": "float",
+                "description": "New width (if <1, treated as percentage of screen)",
+                "required": true
+            },
+            {
+                "name": "h",
+                "type": "float",
+                "description": "New height",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.resizeVideo(\"vid\", 0.5, 0.5); // Half screen size\ncore.resizeVideo(\"vid\", 640, 480); // Fixed size"
+    },
+    {
+        "name": "showVideo",
+        "category": "Multimedia",
+        "signature": "showVideo(QString id, bool show)",
+        "description": "Shows or hides the video.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            },
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.showVideo(\"vid\", false); // Hide\ncore.showVideo(\"vid\", true); // Show"
+    },
+    {
+        "name": "getVideoDuration",
+        "category": "Multimedia",
+        "signature": "qint64 getVideoDuration(QString id)",
+        "description": "Returns the total duration of the video in milliseconds.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            }
+        ],
+        "returnType": "qint64",
+        "returnDescription": "Duration in milliseconds, -1 on error",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var duration = core.getVideoDuration(\"vid\");\ncore.debug(\"Video duration: \" + (duration/1000).toFixed(1) + \" seconds\");"
+    },
+    {
+        "name": "getVideoPosition",
+        "category": "Multimedia",
+        "signature": "qint64 getVideoPosition(QString id)",
+        "description": "Returns the current playback position of the video in milliseconds.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Video ID",
+                "required": true
+            }
+        ],
+        "returnType": "qint64",
+        "returnDescription": "Position in milliseconds, -1 on error",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var pos = core.getVideoPosition(\"vid\");\ncore.debug(\"Position: \" + (pos/1000).toFixed(1) + \" seconds\");"
+    },
+    {
+        "name": "isMediaPlaybackSupported",
+        "category": "Multimedia",
+        "signature": "bool isMediaPlaybackSupported()",
+        "description": "Checks whether media playback is supported in this version of Stellarium.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if playback is supported",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(core.isMediaPlaybackSupported()) {\n    core.debug(\"Video and audio playback supported\");\n    core.loadVideo(\"test.mp4\", \"test\", 100, 100, true);\n} else {\n    core.debug(\"Media playback not supported in this version\");\n}"
+    },
+    {
+        "name": "wait",
+        "category": "Script Control",
+        "signature": "wait(double t)",
+        "description": "Pauses script execution for a specified duration. Useful for creating delays between commands.",
+        "parameters": [
+            {
+                "name": "t",
+                "type": "double",
+                "description": "Wait duration in seconds",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Create a simple delay\ncore.debug(\"Start\");\ncore.wait(3);\ncore.debug(\"After 3 seconds\");\n\n// Use wait in a loop for countdown\nfor(var i=5; i>=1; i--) {\n    core.debug(i + \"...\");\n    core.wait(1);\n}\ncore.debug(\"Go!\");\n\n// Variable delay\nvar delay = 2.5;\ncore.wait(delay);"
+    },
+    {
+        "name": "waitFor",
+        "category": "Script Control",
+        "signature": "waitFor(QString dt, QString spec)",
+        "description": "Waits until simulation time reaches a specific date/time. Handles time speed and direction.",
+        "parameters": [
+            {
+                "name": "dt",
+                "type": "QString",
+                "description": "Target date (e.g., '2024-12-25T00:00:00' or 'now+10minutes')",
+                "required": true
+            },
+            {
+                "name": "spec",
+                "type": "QString",
+                "description": "'utc' or 'local' - time type",
+                "required": false,
+                "default": "'utc'"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Wait until New Year\ncore.waitFor(\"2025-01-01T00:00:00\");\ncore.debug(\"Happy New Year!\");\n\n// Wait 10 minutes from now\ncore.waitFor(\"now+10minutes\");\ncore.debug(\"10 minutes have passed\");\n\n// Wait until specific local time\ncore.waitFor(\"2024-12-25T00:00:00\", \"local\");\ncore.debug(\"It's Christmas midnight!\");"
+    },
+    {
+        "name": "waitForKeypress",
+        "category": "Script Control",
+        "signature": "waitForKeypress()",
+        "description": "Pauses script execution until any key is pressed. Useful for creating interactive presentations.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Create an interactive pause\ncore.debug(\"Press any key to show the next planet...\");\ncore.waitForKeypress();\ncore.moveToObject(\"Mars\", 2);\n\ncore.debug(\"Press any key to end the presentation...\");\ncore.waitForKeypress();\ncore.debug(\"Thank you for watching!\");"
+    },
+    {
+        "name": "setScriptRate",
+        "category": "Script Control",
+        "signature": "setScriptRate(double r)",
+        "description": "Sets the script execution speed. Can accelerate or slow down command execution.",
+        "parameters": [
+            {
+                "name": "r",
+                "type": "double",
+                "description": "Speed multiplier (2 = twice as fast, 0.5 = half speed)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Speed up script\ncore.setScriptRate(2);\n\n// Slow down script for detailed display\ncore.setScriptRate(0.5);\n\n// Normal speed\ncore.setScriptRate(1);\n\nvar rate = core.getScriptRate();\ncore.debug(\"Current script rate: \" + rate);"
+    },
+    {
+        "name": "getScriptRate",
+        "category": "Script Control",
+        "signature": "double getScriptRate()",
+        "description": "Returns the current script execution speed.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Current speed multiplier",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var rate = core.getScriptRate();\ncore.debug(\"Script speed: \" + rate);"
+    },
+    {
+        "name": "pauseScript",
+        "category": "Script Control",
+        "signature": "pauseScript()",
+        "description": "Pauses script execution. Can be resumed from the UI (Ctrl+D, R).",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.debug(\"Script is running...\");\ncore.pauseScript();\ncore.debug(\"Resumed\");"
+    },
+    {
+        "name": "exit",
+        "category": "Script Control",
+        "signature": "exit()",
+        "description": "Stops the current script completely and exits.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(errorCondition) {\n    core.debug(\"Critical error occurred, exiting script\");\n    core.exit();\n}"
+    },
+    {
+        "name": "quitStellarium",
+        "category": "Script Control",
+        "signature": "quitStellarium()",
+        "description": "Closes the Stellarium application completely. Used at the end of automated presentations.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.debug(\"Presentation finished, closing program...\");\ncore.wait(2);\ncore.quitStellarium();"
+    },
+    {
+        "name": "debug",
+        "category": "Script Control",
+        "signature": "debug(QString s)",
+        "description": "Prints a debug message to the script console and log file. Useful for script execution tracking.",
+        "parameters": [
+            {
+                "name": "s",
+                "type": "QString",
+                "description": "Text to print",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var x = 42;\nvar name = \"Mars\";\ncore.debug(\"Variable value: \" + x);\ncore.debug(\"Selected planet: \" + name);\n\n// Script execution tracking\ncore.debug(\"=== Phase 1 Start ===\");\n// ... code ...\ncore.debug(\"=== Phase 1 End ===\");\n\n// Print system state\ncore.debug(\"Current time: \" + core.getDate());\ncore.debug(\"Location: \" + core.getObserverLocation());"
+    },
+    {
+        "name": "output",
+        "category": "Script Control",
+        "signature": "output(QString s)",
+        "description": "Writes text to the output.txt file. Useful for storing calculation and analysis results.",
+        "parameters": [
+            {
+                "name": "s",
+                "type": "QString",
+                "description": "Text to write",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Store observation results\ncore.output(\"=== Observation Report ===\");\ncore.output(\"Date: \" + core.getDate());\ncore.output(\"Location: \" + core.getObserverLocation());\n\n// Store object information\nvar planets = [\"Mercury\", \"Venus\", \"Mars\", \"Jupiter\", \"Saturn\"];\nfor(var i=0; i<planets.length; i++) {\n    var info = core.getObjectInfo(planets[i]);\n    core.output(planets[i] + \": Alt=\" + info[\"altitude\"] + \"°, Az=\" + info[\"azimuth\"] + \"°\");\n}\n\n// Save output to new file\ncore.saveOutputAs(\"observation_report.txt\");\ncore.resetOutput(); // Clear buffer"
+    },
+    {
+        "name": "resetOutput",
+        "category": "Script Control",
+        "signature": "resetOutput()",
+        "description": "Clears (empties) the output.txt file content.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.resetOutput();\ncore.output(\"Fresh start\");"
+    },
+    {
+        "name": "saveOutputAs",
+        "category": "Script Control",
+        "signature": "saveOutputAs(QString filename)",
+        "description": "Saves the current output content to a new file. Useful for saving reports without data loss.",
+        "parameters": [
+            {
+                "name": "filename",
+                "type": "QString",
+                "description": "New file name",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.output(\"Important data\");\ncore.saveOutputAs(\"data_\" + core.getDate().replace(/:/g, '-') + \".txt\");"
+    },
+    {
+        "name": "mapToString",
+        "category": "Script Control",
+        "signature": "QString mapToString(QVariantMap map)",
+        "description": "Converts a QVariantMap to formatted text for printing. Useful for displaying getObjectInfo and similar map contents.",
+        "parameters": [
+            {
+                "name": "map",
+                "type": "QVariantMap",
+                "description": "Map to convert",
+                "required": true
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Formatted text representing map contents",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var info = core.getObjectInfo(\"Mars\");\nvar text = core.mapToString(info);\ncore.output(text);\ncore.debug(text);"
+    },
+    {
+        "name": "clear",
+        "category": "Miscellaneous Advanced",
+        "signature": "clear(QString state)",
+        "description": "Resets all display settings to a predefined state. Provides ready-made modes for different presentations.",
+        "parameters": [
+            {
+                "name": "state",
+                "type": "QString",
+                "description": "State: 'natural', 'starchart', 'deepspace', 'galactic', 'supergalactic'",
+                "required": false,
+                "default": "'natural'"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Natural view with atmosphere and landscape\ncore.clear(\"natural\");\n\n// Star chart view (constellation lines, equatorial grid)\ncore.clear(\"starchart\");\n\n// Deep space view (no planets, suitable for distant objects)\ncore.clear(\"deepspace\");\n\n// Display in galactic coordinates\ncore.clear(\"galactic\");\n\n// Display in supergalactic coordinates\ncore.clear(\"supergalactic\");"
+    },
+    {
+        "name": "setStelProperty",
+        "category": "Miscellaneous Advanced",
+        "signature": "setStelProperty(QString propertyName, QVariant propertyValue)",
+        "description": "Sets the value of a general property in Stellarium. Covers almost all program settings, including plugin settings.",
+        "parameters": [
+            {
+                "name": "propertyName",
+                "type": "QString",
+                "description": "Property name (e.g., 'Stars.flagLabels', 'atmosphere.flagAtmosphere')",
+                "required": true
+            },
+            {
+                "name": "propertyValue",
+                "type": "QVariant",
+                "description": "New value (type compatible with the property)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Show star labels\ncore.setStelProperty(\"Stars.flagLabels\", true);\n\n// Change night sky color\ncore.setStelProperty(\"color.night_color\", \"#1a0a2e\");\n\n// Set star magnitude limit\ncore.setStelProperty(\"Stars.labelsAmount\", 5);\n\n// Show planet orbits\ncore.setStelProperty(\"SolarSystem.flagOrbits\", true);\n\n// Show atmosphere\ncore.setStelProperty(\"LandscapeMgr.setFlagAtmosphere\", true);\n\n// Get list of all properties\nvar allProps = core.getPropertyList();\ncore.debug(\"Total properties: \" + allProps.length);"
+    },
+    {
+        "name": "getStelProperty",
+        "category": "Miscellaneous Advanced",
+        "signature": "QVariant getStelProperty(QString propertyName)",
+        "description": "Returns the value of a general property in Stellarium.",
+        "parameters": [
+            {
+                "name": "propertyName",
+                "type": "QString",
+                "description": "Property name (e.g., 'Stars.flagLabels')",
+                "required": true
+            }
+        ],
+        "returnType": "QVariant",
+        "returnDescription": "Current property value",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var starsVisible = core.getStelProperty(\"Stars.flagStars\");\ncore.debug(\"Stars visible: \" + starsVisible);\n\nvar bortle = core.getStelProperty(\"BortleScaleIndex\");\ncore.debug(\"Bortle index: \" + bortle);"
+    },
+    {
+        "name": "getPropertyList",
+        "category": "Miscellaneous Advanced",
+        "signature": "QStringList getPropertyList()",
+        "description": "Returns a list of all available property names in the system.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of all properties",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var props = core.getPropertyList();\ncore.debug(\"Total properties: \" + props.length);\n\n// Search for specific properties\nvar starProps = props.filter(p => p.includes(\"Star\"));\ncore.debug(\"Star properties: \" + starProps.length);"
+    },
+    {
+        "name": "setBortleScaleIndex",
+        "category": "Miscellaneous Advanced",
+        "signature": "setBortleScaleIndex(int index)",
+        "description": "Sets the Bortle scale index to simulate light pollution. 1 = very dark sky, 9 = heavily polluted urban sky.",
+        "parameters": [
+            {
+                "name": "index",
+                "type": "int",
+                "description": "Value from 1 to 9 (1 = darkest sky, 9 = most polluted)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Dark rural sky\ncore.setBortleScaleIndex(3);\n\n// Large city sky\ncore.setBortleScaleIndex(8);\n\nvar bortle = core.getBortleScaleIndex();\ncore.debug(\"Current Bortle scale: \" + bortle);"
+    },
+    {
+        "name": "getBortleScaleIndex",
+        "category": "Miscellaneous Advanced",
+        "signature": "int getBortleScaleIndex()",
+        "description": "Returns the current Bortle scale index for light pollution simulation.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Value from 1 to 9",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var bortle = core.getBortleScaleIndex();\nvar desc = \"\";\nif(bortle <= 2) desc = \"Very dark sky - excellent for observation\";\nelse if(bortle <= 4) desc = \"Rural sky - good for observation\";\nelse if(bortle <= 6) desc = \"Suburban sky - limited observation\";\nelse desc = \"Urban sky - severe light pollution\";\ncore.debug(desc);"
+    },
+    {
+        "name": "refraction",
+        "category": "Miscellaneous Advanced",
+        "signature": "double refraction(double altitude, bool apparent)",
+        "description": "Applies atmospheric refraction correction to altitude angle. Calculates the atmosphere's effect on object positions.",
+        "parameters": [
+            {
+                "name": "altitude",
+                "type": "double",
+                "description": "Altitude angle in degrees",
+                "required": true
+            },
+            {
+                "name": "apparent",
+                "type": "bool",
+                "description": "true: remove refraction (apparent → true), false: add refraction (true → apparent)",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Altitude after refraction correction",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Calculate apparent altitude with refraction\nvar trueAlt = 10.0;\nvar apparentAlt = core.refraction(trueAlt, false);\ncore.debug(\"True altitude: \" + trueAlt + \"° → Apparent: \" + apparentAlt.toFixed(2) + \"°\");\n\n// Remove refraction effect (to calculate true position)\nvar observedAlt = 5.0;\nvar corrected = core.refraction(observedAlt, true);\ncore.debug(\"Observed altitude: \" + observedAlt + \"° → Corrected: \" + corrected.toFixed(2) + \"°\");"
+    },
+    {
+        "name": "getScreenXYFromAltAzi",
+        "category": "Miscellaneous Advanced",
+        "signature": "QVariantMap getScreenXYFromAltAzi(QString alt, QString azi)",
+        "description": "Converts Altitude/Azimuth coordinates to screen coordinates (pixels). Useful for placing UI elements over celestial objects.",
+        "parameters": [
+            {
+                "name": "alt",
+                "type": "QString",
+                "description": "Altitude angle (e.g., '45°')",
+                "required": true
+            },
+            {
+                "name": "azi",
+                "type": "QString",
+                "description": "Azimuth angle (e.g., '90°' for East)",
+                "required": true
+            }
+        ],
+        "returnType": "QVariantMap",
+        "returnDescription": "{x: X coordinate in pixels, y: Y coordinate in pixels}",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Find Sun's position on screen\nvar sunInfo = core.getObjectInfo(\"Sun\");\nvar screenPos = core.getScreenXYFromAltAzi(sunInfo[\"altitude\"], sunInfo[\"azimuth\"]);\ncore.debug(\"Sun position on screen: (\" + screenPos[\"x\"] + \", \" + screenPos[\"y\"] + \")\");"
+    },
+    {
+        "name": "getAppLanguage",
+        "category": "Miscellaneous Advanced",
+        "signature": "QString getAppLanguage()",
+        "description": "Returns the current UI language code.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Language code (e.g., 'en', 'ar', 'fr', 'de')",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var lang = core.getAppLanguage();\ncore.debug(\"Current language: \" + lang);\n\n// Change language\n// core.setAppLanguage(\"ar\"); // Arabic\n// core.setAppLanguage(\"fr\"); // French\n// core.setAppLanguage(\"de\"); // German"
+    },
+    {
+        "name": "setAppLanguage",
+        "category": "Miscellaneous Advanced",
+        "signature": "setAppLanguage(QString langCode)",
+        "description": "Sets the UI language.",
+        "parameters": [
+            {
+                "name": "langCode",
+                "type": "QString",
+                "description": "Language code (e.g., 'ar', 'en', 'fr')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.setAppLanguage(\"ar\");\ncore.debug(\"Language changed to Arabic\");"
+    },
+    {
+        "name": "translate",
+        "category": "Miscellaneous Advanced",
+        "signature": "QString translate(QString englishText)",
+        "description": "Translates English text to the current UI language. Useful for creating multilingual messages.",
+        "parameters": [
+            {
+                "name": "englishText",
+                "type": "QString",
+                "description": "English text to translate",
+                "required": true
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Translated text",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var hello = core.translate(\"Hello\");\nvar welcome = core.translate(\"Welcome to Stellarium\");\ncore.debug(welcome);"
+    },
+    {
+        "name": "isModuleLoaded",
+        "category": "Miscellaneous Advanced",
+        "signature": "bool isModuleLoaded(QString moduleID)",
+        "description": "Checks whether a module (like a plugin) is loaded. Useful for avoiding errors with missing properties.",
+        "parameters": [
+            {
+                "name": "moduleID",
+                "type": "QString",
+                "description": "Module ID (e.g., 'Satellites', 'TelescopeControl', 'Exoplanets')",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if module is loaded",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Check if Satellites plugin is available\nif(core.isModuleLoaded(\"Satellites\")) {\n    core.setStelProperty(\"Satellites.flagLabels\", true);\n    core.debug(\"Satellites plugin active\");\n} else {\n    core.debug(\"Satellites plugin not loaded - skipping\");\n}\n\n// Check Exoplanets plugin\nif(core.isModuleLoaded(\"Exoplanets\")) {\n    core.debug(\"Exoplanets plugin available\");\n}\n\n// Check operating system platform\nvar platform = core.getPlatformName();\ncore.debug(\"Operating system: \" + platform);"
+    },
+    {
+        "name": "getPlatformName",
+        "category": "Miscellaneous Advanced",
+        "signature": "QString getPlatformName()",
+        "description": "Returns the operating system name where Stellarium is running.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "'Windows', 'Linux', 'macOS', 'FreeBSD', etc.",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var os = core.getPlatformName();\ncore.debug(\"Operating system: \" + os);\nif(os === \"Windows\") {\n    // Windows-specific code\n} else if(os === \"Linux\") {\n    // Linux-specific code\n}"
+    },
+    {
+        "name": "getEnv",
+        "category": "Miscellaneous Advanced",
+        "signature": "QString getEnv(QString var)",
+        "description": "Returns the value of a system environment variable.",
+        "parameters": [
+            {
+                "name": "var",
+                "type": "QString",
+                "description": "Environment variable name (e.g., 'HOME', 'USERNAME')",
+                "required": true
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Variable value or empty string",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var username = core.getEnv(\"USERNAME\");\nvar home = core.getEnv(\"HOME\");\nvar path = core.getEnv(\"PATH\");\ncore.debug(\"User: \" + username);\ncore.debug(\"Home directory: \" + home);"
+    },
+    {
+        "name": "setSelectedObjectInfo",
+        "category": "Miscellaneous Advanced",
+        "signature": "setSelectedObjectInfo(QString level)",
+        "description": "Sets the amount of information displayed about the selected object.",
+        "parameters": [
+            {
+                "name": "level",
+                "type": "QString",
+                "description": "'AllInfo', 'DefaultInfo', 'ShortInfo', 'None', 'Custom'",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "core.setSelectedObjectInfo(\"AllInfo\"); // Show everything\ncore.setSelectedObjectInfo(\"ShortInfo\"); // Show brief\ncore.setSelectedObjectInfo(\"None\"); // Hide info"
+    },
+    {
+        "name": "say",
+        "category": "Miscellaneous Advanced",
+        "signature": "say(QString text)",
+        "description": "Speaks text using Text-to-Speech engine. Requires Qt 6.6 or later.",
+        "parameters": [
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Text to speak",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "non-static",
+        "compatibility": {
+            "qt5": false,
+            "qt6": true,
+            "minVersion": "6.6",
+            "notes": "Requires Qt 6.6+ with TTS support"
+        },
+        "example": "core.say(\"Welcome to Stellarium\");\ncore.say(\"Current time is \" + core.getDate(\"local\"));\n\n// Speak selected object coordinates\ncore.selectObjectByName(\"Mars\");\nvar info = core.getSelectedObjectInfo();\ncore.say(\"Mars is currently at \" + info[\"azimuth\"].toFixed(0) + \" degrees azimuth\");"
+    },
+    {
+        "name": "setDisplayMaxLuminance",
+        "category": "Miscellaneous Advanced (Experimental)",
+        "signature": "setDisplayMaxLuminance(double cdPerSqM)",
+        "description": "[Experimental] Sets the maximum display luminance in candela per square meter. Affects tone mapping processing.",
+        "parameters": [
+            {
+                "name": "cdPerSqM",
+                "type": "double",
+                "description": "Luminance value (default: 100), modern screens may reach 300-500",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Experimental - may change in future versions"
+        },
+        "example": "core.setDisplayMaxLuminance(200);\nvar lum = core.getDisplayMaxLuminance();\ncore.debug(\"Max luminance: \" + lum + \" cd/m²\");"
+    },
+    {
+        "name": "getDisplayMaxLuminance",
+        "category": "Miscellaneous Advanced (Experimental)",
+        "signature": "double getDisplayMaxLuminance()",
+        "description": "[Experimental] Returns the current maximum display luminance value.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Luminance in candela per square meter",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Experimental - may change in future versions"
+        },
+        "example": "var lum = core.getDisplayMaxLuminance();\ncore.debug(\"Max luminance: \" + lum);"
+    },
+    {
+        "name": "setDisplayAdaptationLuminance",
+        "category": "Miscellaneous Advanced (Experimental)",
+        "signature": "setDisplayAdaptationLuminance(double cdPerSqM)",
+        "description": "[Experimental] Sets the display adaptation luminance to simulate eye adaptation.",
+        "parameters": [
+            {
+                "name": "cdPerSqM",
+                "type": "double",
+                "description": "Adaptation luminance value (default: 50)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Experimental - may change in future versions"
+        },
+        "example": "core.setDisplayAdaptationLuminance(30);"
+    },
+    {
+        "name": "getDisplayAdaptationLuminance",
+        "category": "Miscellaneous Advanced (Experimental)",
+        "signature": "double getDisplayAdaptationLuminance()",
+        "description": "[Experimental] Returns the current display adaptation luminance value.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Adaptation luminance value",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Experimental - may change in future versions"
+        },
+        "example": "var adapt = core.getDisplayAdaptationLuminance();"
+    },
+    {
+        "name": "setDisplayGamma",
+        "category": "Miscellaneous Advanced (Experimental)",
+        "signature": "setDisplayGamma(double gamma)",
+        "description": "[Experimental] Sets the display gamma value. Affects color contrast and sky brightness.",
+        "parameters": [
+            {
+                "name": "gamma",
+                "type": "double",
+                "description": "Gamma value (default: 2.2222 for CRT screens), higher values make sky brighter",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+						            "notes": "Experimental - may change in future versions"
+        },
+        "example": "core.setDisplayGamma(2.4); // Higher contrast\nvar gamma = core.getDisplayGamma();\ncore.debug(\"Gamma: \" + gamma);"
+    },
+    {
+        "name": "getDisplayGamma",
+        "category": "Miscellaneous Advanced (Experimental)",
+        "signature": "double getDisplayGamma()",
+        "description": "[Experimental] Returns the current display gamma value.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Gamma value",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Experimental - may change in future versions"
+        },
+        "example": "var gamma = core.getDisplayGamma();"
+    },
+    {
+        "name": "vec3d",
+        "category": "Miscellaneous Advanced",
+        "signature": "Vec3d vec3d(double x, double y, double z)",
+        "description": "Creates a 3D vector object of type Double. Used in geometric and astronomical operations.",
+        "parameters": [
+            {
+                "name": "x",
+                "type": "double",
+                "description": "X coordinate",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "double",
+                "description": "Y coordinate",
+                "required": true
+            },
+            {
+                "name": "z",
+                "type": "double",
+                "description": "Z coordinate",
+                "required": true
+            }
+        ],
+        "returnType": "Vec3d",
+        "returnDescription": "3D vector object",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var direction = core.vec3d(0.5, 0.5, 0.707);\nvar position = core.vec3d(1, 2, 3);"
+    },
+    {
+        "name": "vec3f",
+        "category": "Miscellaneous Advanced",
+        "signature": "Vec3f vec3f(float x, float y, float z)",
+        "description": "Creates a 3D vector object of type Float.",
+        "parameters": [
+            {
+                "name": "x",
+                "type": "float",
+                "description": "X coordinate",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "float",
+                "description": "Y coordinate",
+                "required": true
+            },
+            {
+                "name": "z",
+                "type": "float",
+                "description": "Z coordinate",
+                "required": true
+            }
+        ],
+        "returnType": "Vec3f",
+        "returnDescription": "3D vector object",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var color = core.vec3f(1.0, 0.0, 0.0); // Red color"
+    },
+    {
+        "name": "useQtScript",
+        "category": "Miscellaneous Advanced",
+        "signature": "bool useQtScript()",
+        "description": "Checks whether the script is running on the old QtScript engine (Qt5).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if using QtScript, false if using QML",
+        "type": "static",
+        "compatibility": {
+            "qt5": true,
+            "qt6": false,
+            "minVersion": "0.10.0",
+            "notes": "Only relevant for Qt5 builds. Returns false on Qt6."
+        },
+        "example": "if(core.useQtScript()) {\n    core.debug(\"Running on QtScript\");\n} else {\n    core.debug(\"Running on QML\");\n}"
+    }
+]

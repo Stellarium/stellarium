@@ -43,32 +43,39 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
 	}
 
 	function convertStelProp(id,val) {
-		//try to determine if this is an numeric type needing to be parsed
-		//this is not necessarily needed, but may prevent some unnecessary refreshes if the type is converted server-side
-		if (typeof val === 'string' || val instanceof String)
-		{
-			var type = propData[id].typeEnum;
-			//boolean
-			if(type===1)
-				if(val)
-					return true;
-				else
-					return false;
+			//try to determine if this is an numeric type needing to be parsed
+			//this is not necessarily needed, but may prevent some unnecessary refreshes if the type is converted server-side
+			if (typeof val === 'string' || val instanceof String)
+			{
+					var type = propData[id].typeEnum;
+					//boolean
+					// FIXED (2026-06-28): Replaced generic truthy check "if(val)" with explicit
+					// string comparison. The old check treated the string "false" as truthy
+					// (since non-empty strings are truthy in JavaScript), causing boolean
+					// property toggles to always send "true" to the server. This caused a
+					// value rebounding effect where toggling a property off would immediately
+					// revert back to on. Now properly handles "true"/"false" and "1"/"0".
+					if(type===1) {
+							if (typeof val === 'string') {
+									return val.toLowerCase() === 'true' || val === '1';
+							}
+							return Boolean(val);
+					}
 
-			//integer types
-			if((type>=2 && type<=5) || (type>=32 && type<=37)){
-				return parseInt(val,10);
+					//integer types
+					if((type>=2 && type<=5) || (type>=32 && type<=37)){
+							return parseInt(val,10);
+					}
+					//floating types
+					if(type===6 || type===38){
+							return parseFloat(val);
+					}
 			}
-			//floating types
-			if(type===6 || type===38){
-				return parseFloat(val);
-			}
-		}
 
-		//either no conversion is needed, or we dont know how
-		//in this case just let the server deal with the conversion
-		//(this may result in another stelPropertyChanged event)
-		return val;
+			//either no conversion is needed, or we dont know how
+			//in this case just let the server deal with the conversion
+			//(this may result in another stelPropertyChanged event)
+			return val;
 	}
 
 	function setStelProp(id, val) {

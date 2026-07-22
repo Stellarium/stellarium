@@ -1,0 +1,580 @@
+[
+    {
+        "name": "getCurrentSkyCultureEnglishName",
+        "category": "Sky Culture - Information",
+        "signature": "QString getCurrentSkyCultureEnglishName()",
+        "description": "Returns the English name of the currently active sky culture. Sky cultures define how constellations, star names, and celestial artwork are presented based on different cultural traditions (e.g., 'Western', 'Chinese', 'Egyptian').",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "English name of the current sky culture",
+        "type": "slot",
+        "example": "var cultureName = StelSkyCultureMgr.getCurrentSkyCultureEnglishName();\ncore.debug('Current sky culture: ' + cultureName);"
+    },
+    {
+        "name": "getCurrentSkyCultureNameI18",
+        "category": "Sky Culture - Information",
+        "signature": "QString getCurrentSkyCultureNameI18()",
+        "description": "Returns the translated name of the currently active sky culture in the current UI language. This is the localized display name shown in the GUI.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Translated name of the current sky culture",
+        "type": "slot",
+        "example": "var localizedName = StelSkyCultureMgr.getCurrentSkyCultureNameI18();\ncore.debug('Localized culture name: ' + localizedName);"
+    },
+    {
+        "name": "setCurrentSkyCultureNameI18",
+        "category": "Sky Culture - Control",
+        "signature": "bool setCurrentSkyCultureNameI18(QString cultureName)",
+        "description": "Sets the current sky culture using its translated name (as displayed in the GUI). If the name matches a valid sky culture, it will be loaded and applied.",
+        "parameters": [
+            {
+                "name": "cultureName",
+                "type": "QString",
+                "description": "Translated name of the sky culture to activate (e.g., 'Western', 'Chinese', 'Egyptian')",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the sky culture was successfully changed, false otherwise",
+        "type": "slot",
+        "example": "var success = StelSkyCultureMgr.setCurrentSkyCultureNameI18('Chinese');\nif(success) {\n    core.debug('Changed to Chinese sky culture');\n} else {\n    core.debug('Failed to change sky culture');\n}"
+    },
+    {
+        "name": "getCurrentSkyCultureID",
+        "category": "Sky Culture - Information",
+        "signature": "QString getCurrentSkyCultureID()",
+        "description": "Returns the unique identifier (directory name) of the currently active sky culture. This ID corresponds to the folder name in the skycultures directory.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Sky culture ID (e.g., 'modern', 'chinese', 'egyptian')",
+        "type": "slot",
+        "example": "var cultureId = StelSkyCultureMgr.getCurrentSkyCultureID();\ncore.debug('Current culture ID: ' + cultureId);"
+    },
+    {
+        "name": "setCurrentSkyCultureID",
+        "category": "Sky Culture - Control",
+        "signature": "bool setCurrentSkyCultureID(QString id)",
+        "description": "Sets the current sky culture using its unique identifier (directory name). This is the programmatic way to change sky cultures, using IDs like 'modern', 'chinese', or 'egyptian'.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Sky culture identifier (e.g., 'modern', 'chinese', 'egyptian', 'hawaiian')",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the sky culture was successfully changed, false otherwise",
+        "type": "slot",
+        "example": "StelSkyCultureMgr.setCurrentSkyCultureID('egyptian');\ncore.debug('Egyptian sky culture activated');\n\nStelSkyCultureMgr.setCurrentSkyCultureID('modern');\ncore.debug('Modern IAU sky culture activated');"
+    },
+    {
+        "name": "reloadSkyCulture",
+        "category": "Sky Culture - Control",
+        "signature": "void reloadSkyCulture()",
+        "description": "Reloads the currently active sky culture from disk. Useful after making manual changes to sky culture definition files (index.json, description.md, constellation data, or artwork).",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "example": "core.debug('Reloading current sky culture...');\nStelSkyCultureMgr.reloadSkyCulture();\ncore.debug('Sky culture reloaded');"
+    },
+    {
+        "name": "getCurrentSkyCultureBoundariesType",
+        "category": "Sky Culture - Information",
+        "signature": "int getCurrentSkyCultureBoundariesType()",
+        "description": "Returns the type of constellation boundaries used in the current sky culture. Return values: -1=None (no boundaries), 0=IAU (official IAU boundaries), 1=Own (custom boundaries defined by the sky culture).",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Boundary type: -1=None, 0=IAU, 1=Own",
+        "type": "slot",
+        "example": "var boundaryType = StelSkyCultureMgr.getCurrentSkyCultureBoundariesType();\nif(boundaryType === -1) {\n    core.debug('No constellation boundaries defined');\n} else if(boundaryType === 0) {\n    core.debug('Using IAU constellation boundaries');\n} else {\n    core.debug('Using custom sky culture boundaries');\n}"
+    },
+    {
+        "name": "getCurrentSkyCultureClassificationIdx",
+        "category": "Sky Culture - Information",
+        "signature": "int getCurrentSkyCultureClassificationIdx()",
+        "description": "Returns the classification index of the current sky culture. Classifications indicate the nature and origin of the sky culture: 0=Incomplete, 1=Personal, 2=Traditional, 3=Ethnographic, 4=Historical, 5=Single source, 6=Comparative.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Classification index (0-6) as defined in the sky culture index.json",
+        "type": "slot",
+        "example": "var classification = StelSkyCultureMgr.getCurrentSkyCultureClassificationIdx();\nvar types = ['Incomplete', 'Personal', 'Traditional', 'Ethnographic', 'Historical', 'Single source', 'Comparative'];\ncore.debug('Sky culture classification: ' + types[classification]);"
+    },
+    {
+        "name": "getCurrentSkyCultureHtmlClassification",
+        "category": "Sky Culture - HTML Description",
+        "signature": "QString getCurrentSkyCultureHtmlClassification()",
+        "description": "Returns an HTML-formatted description of the current sky culture's classification, including the classification name, description, and a color-coded indicator.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "HTML string describing the sky culture classification",
+        "type": "slot",
+        "example": "var htmlDesc = StelSkyCultureMgr.getCurrentSkyCultureHtmlClassification();\ncore.debug('Classification HTML: ' + htmlDesc);\n// This can be displayed in a GUI dialog or info panel"
+    },
+    {
+        "name": "getCurrentSkyCultureHtmlLicense",
+        "category": "Sky Culture - HTML Description",
+        "signature": "QString getCurrentSkyCultureHtmlLicense()",
+        "description": "Returns an HTML-formatted description of the license information for the current sky culture, including license type, terms of use, and appropriate color coding (green for free licenses, yellow/red for restricted).",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "HTML string describing the license terms",
+        "type": "slot",
+        "example": "var licenseHtml = StelSkyCultureMgr.getCurrentSkyCultureHtmlLicense();\ncore.output('License information: ' + licenseHtml);"
+    },
+    {
+        "name": "getCurrentSkyCultureHtmlRegion",
+        "category": "Sky Culture - HTML Description",
+        "signature": "QString getCurrentSkyCultureHtmlRegion()",
+        "description": "Returns an HTML-formatted description of the geographical region of origin for the current sky culture. For the modern sky culture, returns 'World' as the region.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "HTML string describing the region of origin",
+        "type": "slot",
+        "example": "var regionHtml = StelSkyCultureMgr.getCurrentSkyCultureHtmlRegion();\ncore.debug('Region info: ' + regionHtml);"
+    },
+    {
+        "name": "getCurrentSkyCultureHtmlDescription",
+        "category": "Sky Culture - HTML Description",
+        "signature": "QString getCurrentSkyCultureHtmlDescription()",
+        "description": "Returns a complete HTML-formatted description of the current sky culture. This includes the culture name, introduction, description sections, constellation details (converted from Markdown), license information, classification, and region information.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Complete HTML description of the sky culture",
+        "type": "slot",
+        "example": "var fullDescription = StelSkyCultureMgr.getCurrentSkyCultureHtmlDescription();\ncore.debug('Full sky culture description retrieved : ' +  fullDescription);\n// Can be displayed in a dialog or info panel"
+    },
+    {
+        "name": "getCurrentSkyCultureNarration",
+        "category": "Sky Culture - Narration",
+        "signature": "QString getCurrentSkyCultureNarration()",
+        "description": "Returns a plain text narration of the current sky culture suitable for text-to-speech. This includes the culture name and introduction text (excluding constellation-specific sections, which are narrated individually).",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Plain text narration of the sky culture",
+        "type": "slot",
+        "example": "var narration = StelSkyCultureMgr.getCurrentSkyCultureNarration();\ncore.say(narration);\ncore.debug('Narration text: ' + narration);"
+    },
+    {
+        "name": "getDefaultSkyCultureID",
+        "category": "Sky Culture - Configuration",
+        "signature": "QString getDefaultSkyCultureID()",
+        "description": "Returns the default sky culture ID as configured in Stellarium's settings. This is the sky culture that will be loaded when the application starts.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Default sky culture ID (e.g., 'modern')",
+        "type": "slot",
+        "example": "var defaultId = StelSkyCultureMgr.getDefaultSkyCultureID();\ncore.debug('Default sky culture: ' + defaultId);"
+    },
+    {
+        "name": "setDefaultSkyCultureID",
+        "category": "Sky Culture - Configuration",
+        "signature": "bool setDefaultSkyCultureID(QString id)",
+        "description": "Sets the default sky culture ID that will be used when Stellarium starts. This setting is saved to the configuration file.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Sky culture identifier to set as default (e.g., 'modern', 'chinese', 'egyptian')",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the default was successfully set, false if the ID is invalid",
+        "type": "slot",
+        "example": "var success = StelSkyCultureMgr.setDefaultSkyCultureID('modern');\nif(success) {\n    core.debug('Default sky culture set to modern');\n    StelApp.immediateSave();\n}"
+    },
+    {
+        "name": "getSkyCultureListEnglish",
+        "category": "Sky Culture - Lists",
+        "signature": "QStringList getSkyCultureListEnglish()",
+        "description": "Returns a list of English names for all available sky cultures. These are the canonical English names used to identify each sky culture.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of sky culture names in English",
+        "type": "slot",
+        "example": "var cultures = StelSkyCultureMgr.getSkyCultureListEnglish();\ncore.debug('Available sky cultures: ' + cultures.join(', '));\ncore.debug('Total cultures: ' + cultures.length);"
+    },
+    {
+        "name": "getSkyCultureListI18",
+        "category": "Sky Culture - Lists",
+        "signature": "QStringList getSkyCultureListI18()",
+        "description": "Returns a list of translated names for all available sky cultures in the current UI language. These names are suitable for display in GUI menus and dialogs.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of translated sky culture names",
+        "type": "slot",
+        "example": "var i18nCultures = StelSkyCultureMgr.getSkyCultureListI18();\ncore.debug('Localized culture names: ' + i18nCultures.join(', '));\nfor(var i=0; i<i18nCultures.length; i++) {\n    core.debug((i+1) + ': ' + i18nCultures[i]);\n}"
+    },
+    {
+        "name": "getSkyCultureRegionMapI18",
+        "category": "Sky Culture - Lists",
+        "signature": "QMap getSkyCultureRegionMapI18()",
+        "description": "Returns a map (QMultiMap) where keys are translated sky culture names and values are their associated regions. A single culture may have multiple region entries.",
+        "parameters": [],
+        "returnType": "QMap",
+        "returnDescription": "Map of culture names to regions (multiple values per key possible)",
+        "type": "slot",
+        "example": "var regionMap = StelSkyCultureMgr.getSkyCultureRegionMapI18();\ncore.debug('Region map size: ' + Object.keys(regionMap).length);\n// This returns a JavaScript object with culture names as keys and regions as values"
+    },
+    {
+        "name": "getSkyCultureTimeLimitMapI18",
+        "category": "Sky Culture - Lists",
+        "signature": "QMap getSkyCultureTimeLimitMapI18()",
+        "description": "Returns a map where keys are translated sky culture names and values are pairs [beginYear, endYear] indicating the historical time period the sky culture represents. Used for historical sky cultures.",
+        "parameters": [],
+        "returnType": "QMap",
+        "returnDescription": "Map of culture names to [beginYear, endYear] time ranges",
+        "type": "slot",
+        "example": "var timeMap = StelSkyCultureMgr.getSkyCultureTimeLimitMapI18();\ncore.debug('Time limit map retrieved');\n// For historical cultures: beginTime and endTime years"
+    },
+    {
+        "name": "getSkyCultureListIDs",
+        "category": "Sky Culture - Lists",
+        "signature": "QStringList getSkyCultureListIDs()",
+        "description": "Returns a list of all available sky culture identifiers (directory names). These IDs can be used with setCurrentSkyCultureID() to change sky cultures programmatically.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of sky culture IDs (e.g., ['modern', 'chinese', 'egyptian', ...])",
+        "type": "slot",
+        "example": "var ids = StelSkyCultureMgr.getSkyCultureListIDs();\ncore.debug('Available culture IDs: ' + ids.join(', '));\nfor(var i=0; i<ids.length; i++) {\n    core.debug('ID ' + i + ': ' + ids[i]);\n}"
+    },
+    {
+        "name": "getDirToI18Map",
+        "category": "Sky Culture - Lists",
+        "signature": "QMap getDirToI18Map()",
+        "description": "Returns a map that associates sky culture IDs (directory names) with their translated names in the current UI language. Useful for populating selection dialogs.",
+        "parameters": [],
+        "returnType": "QMap",
+        "returnDescription": "Map of culture IDs to translated names",
+        "type": "slot",
+        "example": "var cultureMap = StelSkyCultureMgr.getDirToI18Map();\ncore.debug('Culture ID to name map retrieved');\n// Example: { 'modern': 'Western', 'chinese': 'Chinese', ... }"
+    },
+    {
+        "name": "getScreenLabelStyleString",
+        "category": "Sky Culture - Label Styles",
+        "signature": "QString getScreenLabelStyleString()",
+        "description": "Returns the current screen label style for celestial objects as a comma-separated string. Styles control how cultural names are displayed on screen (e.g., 'Native', 'Translated', 'IPA', 'Modern', or combinations like 'Native,Translated,IPA').",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Screen label style string (e.g., 'Translated', 'Native', 'Native,Translated,IPA')",
+        "type": "slot",
+        "example": "var style = StelSkyCultureMgr.getScreenLabelStyleString();\ncore.debug('Current screen label style: ' + style);\n// Returns values like 'Translated', 'Native', 'Native,Translated,IPA', etc."
+    },
+    {
+        "name": "setScreenLabelStyle",
+        "category": "Sky Culture - Label Styles",
+        "signature": "void setScreenLabelStyle(QString style)",
+        "description": "Sets the screen label style for celestial objects. Controls how cultural names (constellations, stars, planets) are displayed. Styles can be 'none', 'modern', 'byname', 'ipa', 'translated', 'translit', 'pronounce', 'native', or comma-separated combinations like 'Native,Translated,IPA'.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "QString",
+                "description": "Label style: 'none', 'modern', 'byname', 'ipa', 'translated', 'translit', 'pronounce', 'native', or combinations like 'Native,Translated,IPA'",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "StelSkyCultureMgr.setScreenLabelStyle('Native');\ncore.debug('Showing native names only');\n\nStelSkyCultureMgr.setScreenLabelStyle('Native,Translated,IPA');\ncore.debug('Showing native names with translations and pronunciation');\n\nStelSkyCultureMgr.setScreenLabelStyle('modern');\ncore.debug('Using modern (IAU) names');"
+    },
+    {
+        "name": "getInfoLabelStyleString",
+        "category": "Sky Culture - Label Styles",
+        "signature": "QString getInfoLabelStyleString()",
+        "description": "Returns the current info label style for celestial object information panels as a comma-separated string. This controls how cultural names are displayed in the object info dialog.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Info label style string",
+        "type": "slot",
+        "example": "var infoStyle = StelSkyCultureMgr.getInfoLabelStyleString();\ncore.debug('Info label style: ' + infoStyle);"
+    },
+    {
+        "name": "setInfoLabelStyle",
+        "category": "Sky Culture - Label Styles",
+        "signature": "void setInfoLabelStyle(QString style)",
+        "description": "Sets the info label style for celestial object information panels. Controls how cultural names are displayed in the object info dialog. Styles can be 'none', 'modern', 'byname', 'ipa', 'translated', 'translit', 'pronounce', 'native', or comma-separated combinations.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "QString",
+                "description": "Info label style: 'none', 'modern', 'byname', 'ipa', 'translated', 'translit', 'pronounce', 'native', or combinations",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "StelSkyCultureMgr.setInfoLabelStyle('Translated');\ncore.debug('Showing translated names in info panel');\n\nStelSkyCultureMgr.setInfoLabelStyle('Native,IPA');\ncore.debug('Showing native names with IPA pronunciation');"
+    },
+    {
+        "name": "getZodiacLabelStyleString",
+        "category": "Sky Culture - Label Styles (Cultural)",
+        "signature": "QString getZodiacLabelStyleString()",
+        "description": "Returns the current zodiac label style as a comma-separated string. This controls how zodiac sign names are displayed when the current sky culture defines a zodiac system.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Zodiac label style string",
+        "type": "slot",
+        "example": "if(ConstellationMgr.hasZodiac()) {\n    var zodiacStyle = StelSkyCultureMgr.getZodiacLabelStyleString();\n    core.debug('Zodiac label style: ' + zodiacStyle);\n}"
+    },
+    {
+        "name": "setZodiacLabelStyle",
+        "category": "Sky Culture - Label Styles (Cultural)",
+        "signature": "void setZodiacLabelStyle(QString style)",
+        "description": "Sets the zodiac label style for display. Controls how zodiac sign names are shown when the current sky culture defines a zodiac system. Styles can be 'none', 'modern', 'translated', 'native', 'ipa', 'pronounce', 'translit', 'byname', or combinations.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "QString",
+                "description": "Zodiac label style: 'none', 'modern', 'translated', 'native', 'ipa', 'pronounce', 'translit', 'byname', or combinations",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "if(ConstellationMgr.hasZodiac()) {\n    StelSkyCultureMgr.setZodiacLabelStyle('Translated');\n    ConstellationMgr.setFlagZodiac(true);\n    core.debug('Showing translated zodiac names');\n}"
+    },
+    {
+        "name": "getLunarSystemLabelStyleString",
+        "category": "Sky Culture - Label Styles (Cultural)",
+        "signature": "QString getLunarSystemLabelStyleString()",
+        "description": "Returns the current lunar system (lunar mansions/stations) label style as a comma-separated string. Controls how lunar mansion names are displayed when the current sky culture defines a lunar system.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Lunar system label style string",
+        "type": "slot",
+        "example": "if(ConstellationMgr.hasLunarSystem()) {\n    var lunarStyle = StelSkyCultureMgr.getLunarSystemLabelStyleString();\n    core.debug('Lunar system label style: ' + lunarStyle);\n}"
+    },
+    {
+        "name": "setLunarSystemLabelStyle",
+        "category": "Sky Culture - Label Styles (Cultural)",
+        "signature": "void setLunarSystemLabelStyle(QString style)",
+        "description": "Sets the lunar system (lunar mansions/stations) label style. Controls how lunar mansion names are shown when the current sky culture defines a lunar system. Styles can be 'none', 'modern', 'translated', 'native', 'ipa', 'pronounce', 'translit', 'byname', or combinations.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "QString",
+                "description": "Lunar system label style: 'none', 'modern', 'translated', 'native', 'ipa', 'pronounce', 'translit', 'byname', or combinations",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "if(ConstellationMgr.hasLunarSystem()) {\n    StelSkyCultureMgr.setLunarSystemLabelStyle('Native,Translated');\n    ConstellationMgr.setFlagLunarSystem(true);\n    core.debug('Showing lunar mansion names with translations');\n}"
+    },
+    {
+        "name": "getFlagOverrideUseCommonNames",
+        "category": "Sky Culture - Advanced Settings",
+        "signature": "bool getFlagOverrideUseCommonNames()",
+        "description": "Returns whether the sky culture manager is set to override the sky culture author's 'fallback_to_international_names' setting. When true, common (modern) names are always shown alongside cultural names.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if common names override is enabled, false otherwise",
+        "type": "slot",
+        "example": "if(StelSkyCultureMgr.getFlagOverrideUseCommonNames()) {\n    core.debug('Common names are always shown');\n} else {\n    core.debug('Respecting sky culture settings for common names');\n}"
+    },
+    {
+        "name": "setFlagOverrideUseCommonNames",
+        "category": "Sky Culture - Advanced Settings",
+        "signature": "void setFlagOverrideUseCommonNames(bool override)",
+        "description": "Sets whether to override the sky culture author's 'fallback_to_international_names' setting. When enabled (true), common (modern) names are always shown alongside cultural names regardless of the sky culture's preference.",
+        "parameters": [
+            {
+                "name": "override",
+                "type": "bool",
+                "description": "true to always show common names, false to respect sky culture settings",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "StelSkyCultureMgr.setFlagOverrideUseCommonNames(true);\ncore.debug('Common names will always be shown');\n\nStelSkyCultureMgr.setFlagOverrideUseCommonNames(false);\ncore.debug('Respecting sky culture settings');"
+    },
+    {
+        "name": "getFlagUseAbbreviatedNames",
+        "category": "Sky Culture - Advanced Settings",
+        "signature": "bool getFlagUseAbbreviatedNames()",
+        "description": "Returns whether abbreviated names are used for screen labels. When true, short names (constellation IDs or abbreviations) are displayed instead of full cultural names.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if abbreviated names are used, false otherwise",
+        "type": "slot",
+        "example": "if(StelSkyCultureMgr.getFlagUseAbbreviatedNames()) {\n    core.debug('Using abbreviated constellation names');\n} else {\n    core.debug('Using full cultural names');\n}"
+    },
+    {
+        "name": "setFlagUseAbbreviatedNames",
+        "category": "Sky Culture - Advanced Settings",
+        "signature": "void setFlagUseAbbreviatedNames(bool b)",
+        "description": "Sets whether to use abbreviated names for screen labels. When enabled (true), short names (e.g., 'Ori' instead of 'Orion') are displayed. This is useful for decluttered views.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to use abbreviated names, false to use full cultural names",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "StelSkyCultureMgr.setFlagUseAbbreviatedNames(true);\nConstellationMgr.setFlagLabels(true);\ncore.debug('Showing abbreviated constellation names');\n\nStelSkyCultureMgr.setFlagUseAbbreviatedNames(false);\ncore.debug('Showing full cultural names');"
+    },
+    {
+        "name": "currentSkycultureUsesCommonNames",
+        "category": "Sky Culture - Information",
+        "signature": "bool currentSkycultureUsesCommonNames()",
+        "description": "Checks whether the current sky culture is configured to incorporate (fall back to) common modern names for celestial objects when cultural names are not available.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if the sky culture uses common names as fallback, false otherwise",
+        "type": "slot",
+        "example": "if(StelSkyCultureMgr.currentSkycultureUsesCommonNames()) {\n    core.debug('This sky culture will show common names as fallback');\n}"
+    },
+
+    {
+        "name": "getInfoLabelStyle",
+        "category": "Sky Culture - Label Styles (Enum)",
+        "signature": "int getInfoLabelStyle()",
+        "description": "Returns the current info label style as an integer enum value. This controls how cultural names are displayed in the object info panel. The returned value is a bitmask of CulturalDisplayStyle flags.\n\nEnum values (can be combined):\n- 0 = NONE (use modern/common names only)\n- 1 = Modern (show modern/IAU names)\n- 2 = Byname (show alternative bynames)\n- 4 = IPA (show International Phonetic Alphabet pronunciation)\n- 8 = Translated (show translated names)\n- 16 = Translit (show transliteration)\n- 32 = Pronounce (show pronunciation guide)\n- 64 = Native (show native/indigenous names)\n\nCommon combinations:\n- 8 = Translated only\n- 64 = Native only\n- 72 = Native + Translated (64+8)\n- 76 = Native + Translated + IPA (64+8+4)\n- 37 = Pronounce + IPA + Modern (32+4+1) - default for many cultures",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Integer bitmask of CulturalDisplayStyle flags",
+        "type": "slot",
+        "example": "var style = StelSkyCultureMgr.getInfoLabelStyle();\ncore.debug('Current info label style code: ' + style);\n\n// Check if Native names are enabled\nif(style & 64) {\n    core.debug('Native names are shown in info panel');\n}\n\n// Check if IPA pronunciation is enabled\nif(style & 4) {\n    core.debug('IPA pronunciation is shown');\n}"
+    },
+    {
+        "name": "getScreenLabelStyle",
+        "category": "Sky Culture - Label Styles (Enum)",
+        "signature": "int getScreenLabelStyle()",
+        "description": "Returns the current screen label style as an integer enum value. This controls how cultural names are displayed on screen (constellations, stars, planets). The returned value is a bitmask of CulturalDisplayStyle flags.\n\nEnum values (can be combined):\n- 0 = NONE (use modern/common names only)\n- 1 = Modern (show modern/IAU names)\n- 2 = Byname (show alternative bynames)\n- 4 = IPA (show International Phonetic Alphabet pronunciation)\n- 8 = Translated (show translated names)\n- 16 = Translit (show transliteration)\n- 32 = Pronounce (show pronunciation guide)\n- 64 = Native (show native/indigenous names)",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Integer bitmask of CulturalDisplayStyle flags",
+        "type": "slot",
+        "example": "var style = StelSkyCultureMgr.getScreenLabelStyle();\ncore.debug('Current screen label style code: ' + style);\n\n// Set a different style later\nif(style !== 64) {\n    StelSkyCultureMgr.setScreenLabelStyle(64); // Show only native names\n    core.debug('Switched to native-only labels');\n}"
+    },
+    {
+        "name": "getZodiacLabelStyle",
+        "category": "Sky Culture - Label Styles (Enum)",
+        "signature": "int getZodiacLabelStyle()",
+        "description": "Returns the current zodiac label style as an integer enum value. Controls how zodiac sign names are displayed when the current sky culture defines a zodiac system. The returned value is a bitmask of CulturalDisplayStyle flags.\n\nNote: Not all sky cultures have a zodiac system. Use ConstellationMgr.hasZodiac() to check availability.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Integer bitmask of CulturalDisplayStyle flags",
+        "type": "slot",
+        "example": "if(ConstellationMgr.hasZodiac()) {\n    var zodiacStyle = StelSkyCultureMgr.getZodiacLabelStyle();\n    core.debug('Zodiac label style code: ' + zodiacStyle);\n    \n    // Switch to native zodiac names\n    StelSkyCultureMgr.setZodiacLabelStyle(64);\n    ConstellationMgr.setFlagZodiac(true);\n}"
+    },
+    {
+        "name": "getLunarSystemLabelStyle",
+        "category": "Sky Culture - Label Styles (Enum)",
+        "signature": "int getLunarSystemLabelStyle()",
+        "description": "Returns the current lunar system (lunar mansions/stations) label style as an integer enum value. Controls how lunar mansion names are displayed when the current sky culture defines a lunar system. The returned value is a bitmask of CulturalDisplayStyle flags.\n\nNote: Not all sky cultures have a lunar system. Use ConstellationMgr.hasLunarSystem() to check availability.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Integer bitmask of CulturalDisplayStyle flags",
+        "type": "slot",
+        "example": "if(ConstellationMgr.hasLunarSystem()) {\n    var lunarStyle = StelSkyCultureMgr.getLunarSystemLabelStyle();\n    core.debug('Lunar system label style code: ' + lunarStyle);\n    \n    // Show both native and translated names\n    StelSkyCultureMgr.setLunarSystemLabelStyle(72); // Native + Translated\n    ConstellationMgr.setFlagLunarSystem(true);\n}"
+    },
+    {
+        "name": "setScreenLabelStyleEnum",
+        "category": "Sky Culture - Label Styles (Enum)",
+        "signature": "void setScreenLabelStyle(int style)",
+        "description": "Sets the screen label style using an integer enum bitmask. Controls how cultural names (constellations, stars, planets) are displayed on screen.\n\nEnum values (can be combined with + or |):\n- 0 = NONE (modern/common names only)\n- 1 = Modern (show modern/IAU names)\n- 2 = Byname (show alternative bynames)\n- 4 = IPA (show International Phonetic Alphabet pronunciation)\n- 8 = Translated (show translated names)\n- 16 = Translit (show transliteration)\n- 32 = Pronounce (show pronunciation guide)\n- 64 = Native (show native/indigenous names)\n\nCommon combinations:\n- 8 = Translated only\n- 64 = Native only\n- 72 = Native + Translated\n- 76 = Native + Translated + IPA\n- 37 = Pronounce + IPA + Modern (default)",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "int",
+                "description": "Integer bitmask combining desired CulturalDisplayStyle flags",
+                "required": true            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show only native names\nStelSkyCultureMgr.setScreenLabelStyle(64);\n\n// Show native names with translations and IPA pronunciation\nStelSkyCultureMgr.setScreenLabelStyle(64 + 8 + 4); // or 76\n\n// Show only modern (IAU) names\nStelSkyCultureMgr.setScreenLabelStyle(1);\n\n// Get current style first, then modify\nvar current = StelSkyCultureMgr.getScreenLabelStyle();\nStelSkyCultureMgr.setScreenLabelStyle(current | 64); // Add native names to current style"
+    },
+    {
+        "name": "setInfoLabelStyleEnum",
+        "category": "Sky Culture - Label Styles (Enum)",
+        "signature": "void setInfoLabelStyle(int style)",
+        "description": "Sets the info panel label style using an integer enum bitmask. Controls how cultural names are displayed in the object information dialog.\n\nEnum values (can be combined with + or |):\n- 0 = NONE (modern/common names only)\n- 1 = Modern (show modern/IAU names)\n- 2 = Byname (show alternative bynames)\n- 4 = IPA (show International Phonetic Alphabet pronunciation)\n- 8 = Translated (show translated names)\n- 16 = Translit (show transliteration)\n- 32 = Pronounce (show pronunciation guide)\n- 64 = Native (show native/indigenous names)",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "int",
+                "description": "Integer bitmask combining desired CulturalDisplayStyle flags",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show translated names only in info panel\nStelSkyCultureMgr.setInfoLabelStyle(8);\n\n// Show native names with IPA pronunciation\nStelSkyCultureMgr.setInfoLabelStyle(64 + 4); // or 68\n\n// Show everything possible\nStelSkyCultureMgr.setInfoLabelStyle(64 + 32 + 16 + 8 + 4 + 2 + 1); // or 127"
+    },
+    {
+        "name": "setZodiacLabelStyleEnum",
+        "category": "Sky Culture - Label Styles (Enum)",
+        "signature": "void setZodiacLabelStyle(int style)",
+        "description": "Sets the zodiac label style using an integer enum bitmask. Controls how zodiac sign names are displayed when the current sky culture defines a zodiac system.\n\nEnum values (can be combined with + or |):\n- 0 = NONE (modern/common names only)\n- 1 = Modern (show modern/IAU names)\n- 2 = Byname (show alternative bynames)\n- 4 = IPA (show International Phonetic Alphabet pronunciation)\n- 8 = Translated (show translated names)\n- 16 = Translit (show transliteration)\n- 32 = Pronounce (show pronunciation guide)\n- 64 = Native (show native/indigenous names)\n\nNote: Use ConstellationMgr.hasZodiac() to check if current sky culture has a zodiac system.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "int",
+                "description": "Integer bitmask combining desired CulturalDisplayStyle flags",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "if(ConstellationMgr.hasZodiac()) {\n    // Show native zodiac names\n    StelSkyCultureMgr.setZodiacLabelStyle(64);\n    \n    // Show translated names only\n    StelSkyCultureMgr.setZodiacLabelStyle(8);\n    \n    // Show zodiac with zodiac artwork\n    ConstellationMgr.setFlagZodiac(true);\n}"
+    },
+    {
+        "name": "setLunarSystemLabelStyleEnum",
+        "category": "Sky Culture - Label Styles (Enum)",
+        "signature": "void setLunarSystemLabelStyle(int style)",
+        "description": "Sets the lunar system (lunar mansions/stations) label style using an integer enum bitmask. Controls how lunar mansion names are displayed when the current sky culture defines a lunar system.\n\nEnum values (can be combined with + or |):\n- 0 = NONE (modern/common names only)\n- 1 = Modern (show modern/IAU names)\n- 2 = Byname (show alternative bynames)\n- 4 = IPA (show International Phonetic Alphabet pronunciation)\n- 8 = Translated (show translated names)\n- 16 = Translit (show transliteration)\n- 32 = Pronounce (show pronunciation guide)\n- 64 = Native (show native/indigenous names)\n\nNote: Use ConstellationMgr.hasLunarSystem() to check if current sky culture has a lunar system.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "int",
+                "description": "Integer bitmask combining desired CulturalDisplayStyle flags",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "if(ConstellationMgr.hasLunarSystem()) {\n    // Show native lunar mansion names\n    StelSkyCultureMgr.setLunarSystemLabelStyle(64);\n    \n    // Show both native and translated\n    StelSkyCultureMgr.setLunarSystemLabelStyle(64 + 8); // or 72\n    \n    // Display lunar system\n    ConstellationMgr.setFlagLunarSystem(true);\n}"
+    },
+    {
+        "name": "convertCulturalDisplayStyleFromCSVstring",
+        "category": "Sky Culture - Utility",
+        "signature": "int convertCulturalDisplayStyleFromCSVstring(QString csv)",
+        "description": "Converts a comma-separated string of style names to an integer enum bitmask. This is useful for parsing user input or configuration strings.\n\nValid style names (case-insensitive): 'none', 'modern', 'byname', 'ipa', 'translated', 'translit', 'pronounce', 'native'\n\nExamples:\n- 'Translated' → 8\n- 'Native,Translated' → 72\n- 'Native,Translated,IPA' → 76\n- 'Pronounce,IPA,Modern' → 37",
+        "parameters": [
+            {
+                "name": "csv",
+                "type": "QString",
+                "description": "Comma-separated string of style names (e.g., 'Native,Translated,IPA')",
+                "required": true
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Integer bitmask of CulturalDisplayStyle flags",
+        "type": "slot",
+        "example": "var styleValue = StelSkyCultureMgr.convertCulturalDisplayStyleFromCSVstring('Native,Translated,IPA');\ncore.debug('Style bitmask: ' + styleValue); // Returns 76\n\n// Use the converted value directly\nStelSkyCultureMgr.setScreenLabelStyle(styleValue);"
+    },
+    {
+        "name": "convertCulturalDisplayStyleToCSVstring",
+        "category": "Sky Culture - Utility",
+        "signature": "QString convertCulturalDisplayStyleToCSVstring(int style)",
+        "description": "Converts an integer enum bitmask to a comma-separated string of style names. This is useful for displaying the current style in a human-readable format or saving to configuration.\n\nValid style names (case-insensitive): 'none', 'modern', 'byname', 'ipa', 'translated', 'translit', 'pronounce', 'native'\n\nExamples:\n- 8 → 'Translated'\n- 72 → 'Native,Translated'\n- 76 → 'Native,Translated,IPA'\n- 37 → 'Pronounce,IPA,Modern'",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "int",
+                "description": "Integer bitmask of CulturalDisplayStyle flags",
+                "required": true
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Comma-separated string of style names",
+        "type": "slot",
+        "example": "var currentStyle = StelSkyCultureMgr.getScreenLabelStyle();\nvar styleText = StelSkyCultureMgr.convertCulturalDisplayStyleToCSVstring(currentStyle);\ncore.debug('Current screen label style: ' + styleText);\n// Output example: 'Pronounce,IPA,Modern'"
+    }
+]

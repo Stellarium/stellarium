@@ -110,24 +110,41 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
     // HELPER FUNCTIONS
     // =====================================================================
 
+		/**
+		 * Escape HTML special characters to prevent XSS.
+		 * 
+		 * @param {string} str - String to escape
+		 * @returns {string} Escaped string safe for HTML insertion
+		 */
+		function escapeHtml(str) {
+				if (!str) return '';
+				return String(str)
+						.replace(/&/g, '&amp;')
+						.replace(/</g, '&lt;')
+						.replace(/>/g, '&gt;')
+						.replace(/"/g, '&quot;')
+						.replace(/'/g, '&#39;');
+		}
+
     /**
      * Shows a temporary notification message that auto-dismisses after 2 seconds.
      * Used for user feedback during navigation actions.
      * 
      * @param {string} message - Message to display
      */
-    function showNotification(message) {
-        var $notification = $(
-            '<div class="notification-message" style="position:fixed;top:20px;right:20px;' +
-            'padding:10px 15px;background:linear-gradient(#6B6E70, #3A3C3E);color:#fff;' +
-            'border-radius:5px;z-index:9999;box-shadow:0 2px 10px rgba(0,0,0,0.3);">' + 
-            message + '</div>'
-        );
-        $("body").append($notification);
-        setTimeout(function() {
-            $notification.fadeOut(function() { $notification.remove(); });
-        }, 2000);
-    }
+		function showNotification(message) {
+				var escapedMessage = escapeHtml(message);
+				var $notification = $(
+						'<div class="notification-message" style="position:fixed;top:20px;right:20px;' +
+						'padding:10px 15px;background:linear-gradient(#6B6E70, #3A3C3E);color:#fff;' +
+						'border-radius:5px;z-index:9999;box-shadow:0 2px 10px rgba(0,0,0,0.3);">' + 
+						escapedMessage + '</div>'
+				);
+				$("body").append($notification);
+				setTimeout(function() {
+						$notification.fadeOut(function() {$notification.remove(); });
+				}, 2000);
+		}
 
     /**
      * Clears any currently selected object to prevent view conflicts.
@@ -822,6 +839,30 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
         return currentIsolatedConstellation === searchTerm;
     }
+
+		/**
+		 * Toggle a boolean StelProperty
+		 * @param {string} prop - Property name
+		 */
+		function toggleBooleanProperty(prop) {
+				require(["api/properties"], function(p) {
+						var current = p.getStelProp(prop);
+						p.setStelProp(prop, !current);
+				});
+		}
+
+		/**
+		 * Set a color StelProperty from RGB values
+		 * @param {string} prop - Property name
+		 * @param {number} r - Red (0-1)
+		 * @param {number} g - Green (0-1)
+		 * @param {number} b - Blue (0-1)
+		 */
+		function setColorProperty(prop, r, g, b) {
+				require(["api/properties"], function(p) {
+						p.setStelProp(prop, "[" + r + ", " + g + ", " + b + "]");
+				});
+		}
 
     // =====================================================================
     // INITIALIZATION

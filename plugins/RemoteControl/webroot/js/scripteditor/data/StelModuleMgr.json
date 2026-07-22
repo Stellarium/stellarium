@@ -1,0 +1,258 @@
+[
+    {
+        "name": "getModule",
+        "category": "Module Query",
+        "signature": "StelModule* getModule(QString moduleID, bool noWarning=false)",
+        "description": "Returns a pointer to a registered StelModule by its ID (which is the module's class name by convention). If the module is not found, a warning is logged unless noWarning is set to true. This is the primary method for accessing any module in Stellarium from scripts. The convenience macro GETSTELMODULE(ModuleName) is the recommended way to call this.",
+        "parameters": [
+            {
+                "name": "moduleID",
+                "type": "QString",
+                "description": "The module's unique ID, by convention equal to the class name (e.g., 'ConstellationMgr', 'MilkyWay', 'LandscapeMgr')",
+                "required": true
+            },
+            {
+                "name": "noWarning",
+                "type": "bool",
+                "description": "If true, suppresses the warning message when the module is not found (useful for optional plugins)",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "StelModule*",
+        "returnDescription": "Pointer to the module instance, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions. The macro GETSTELMODULE(ModuleName) is the standard way to call this."
+        },
+        "example": "// Get a module by its ID\nvar module = StelModuleMgr.getModule(\"ConstellationMgr\");\nif(module) {\n    core.debug(\"ConstellationMgr module found\");\n    // Access module methods\n    module.setFlagLines(true);\n}\n\n// Use the macro (standard approach in scripts)\nvar constMgr = GETSTELMODULE(ConstellationMgr);\nif(constMgr) {\n    constMgr.setFlagLabels(true);\n}\n\n// Suppress warning for optional plugin\nvar plugin = StelModuleMgr.getModule(\"Oculars\", true);\nif(!plugin) {\n    core.debug(\"Oculars plugin is not loaded\");\n}\n\n// Using silent macro version\nvar oculars = GETSTELMODULE_SILENT(Oculars);"
+    },
+    {
+        "name": "getAllModules",
+        "category": "Module Query",
+        "signature": "QList<StelModule*> getAllModules()",
+        "description": "Returns a list of all currently registered StelModule instances, including both core modules and loaded plugins. Use this to enumerate all available modules and their capabilities at runtime.",
+        "parameters": [],
+        "returnType": "QList<StelModule*>",
+        "returnDescription": "List of all registered module pointers",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// List all loaded modules\nvar allModules = StelModuleMgr.getAllModules();\ncore.debug(\"Total loaded modules: \" + allModules.length);\n\n// Print first 15 module names\nfor(var i = 0; i < Math.min(15, allModules.length); i++) {\n    core.debug(\"Module #\" + (i+1) + \": \" + allModules[i].objectName);\n}\n\n// Find a specific module by name pattern\nfor(var j = 0; j < allModules.length; j++) {\n    var name = allModules[j].objectName;\n    if(name.indexOf(\"Star\") >= 0) {\n        core.debug(\"Star-related module found: \" + name);\n    }\n}"
+    },
+    {
+        "name": "getCallOrders",
+        "category": "Module Query",
+        "signature": "const QList<StelModule*>& getCallOrders(StelModule::StelModuleActionName action)",
+        "description": "Returns the ordered list of modules that will be called for a specific action type. Actions include drawing, updating, handling mouse clicks, mouse moves, and key presses. The order is determined by each module's getCallOrder() method.",
+        "parameters": [
+            {
+                "name": "action",
+                "type": "StelModule::StelModuleActionName",
+                "description": "The action type to query. Possible values: ActionDraw, ActionUpdate, ActionHandleMouseClicks, ActionHandleMouseMoves, ActionHandleKeys",
+                "required": true
+            }
+        ],
+        "returnType": "QList<StelModule*>",
+        "returnDescription": "Ordered list of module pointers for the specified action",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Primarily useful for debugging module execution order"
+        },
+        "example": "// Check the draw order of modules\n// Note: StelModule::ActionDraw = 0 in the enum\nvar drawOrder = StelModuleMgr.getCallOrders(0); // ActionDraw\ncore.debug(\"Modules in draw order:\");\nfor(var i = 0; i < Math.min(10, drawOrder.length); i++) {\n    core.debug(i + \": \" + drawOrder[i].objectName);\n}"
+    },
+    {
+        "name": "loadPlugin",
+        "category": "Plugin Management",
+        "signature": "StelModule* loadPlugin(QString moduleID)",
+        "description": "Dynamically loads a plugin by its module ID. The plugin must be installed in the modules directory. Returns the loaded StelModule instance which still needs to be initialized. If the plugin is not found, a warning is logged and null is returned.",
+        "parameters": [
+            {
+                "name": "moduleID",
+                "type": "QString",
+                "description": "The plugin's unique ID (matches the directory name and shared library name, e.g., 'Oculars', 'Satellites')",
+                "required": true
+            }
+        ],
+        "returnType": "StelModule*",
+        "returnDescription": "Pointer to the loaded module, or null if loading failed",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "The returned module still needs initialization"
+        },
+        "example": "// Load a plugin dynamically\nvar plugin = StelModuleMgr.loadPlugin(\"Oculars\");\nif(plugin) {\n    core.debug(\"Oculars plugin loaded: \" + plugin.objectName);\n} else {\n    core.debug(\"Failed to load Oculars plugin\");\n}\n\n// Check if loaded and then access it\nif(StelModuleMgr.isPluginLoaded(\"Oculars\")) {\n    var oculars = GETSTELMODULE(Oculars);\n    // Use oculars methods...\n}"
+    },
+    {
+        "name": "unloadAllPlugins",
+        "category": "Plugin Management",
+        "signature": "void unloadAllPlugins()",
+        "description": "Unloads all currently loaded plugins from memory. This calls unloadModule() for each loaded plugin and updates the calling lists to remove references to deleted plugin modules. Useful for cleaning up before loading a different set of plugins.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Unloads plugins in reverse load order to handle dependencies properly"
+        },
+        "example": "// Unload all plugins to start fresh\nStelModuleMgr.unloadAllPlugins();\ncore.debug(\"All plugins unloaded\");\n\n// Then load only specific plugins\nStelModuleMgr.loadPlugin(\"Oculars\");\ncore.debug(\"Only Oculars plugin is now loaded\");"
+    },
+    {
+        "name": "setPluginLoadAtStartup",
+        "category": "Plugin Configuration",
+        "signature": "void setPluginLoadAtStartup(QString key, bool b)",
+        "description": "Sets whether a plugin should be automatically loaded when Stellarium starts. The setting is saved to the application configuration file, so it persists across sessions. The key is the plugin's unique ID.",
+        "parameters": [
+            {
+                "name": "key",
+                "type": "QString",
+                "description": "The plugin's unique ID (same as moduleID, e.g., 'Oculars', 'Satellites')",
+                "required": true
+            },
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to enable loading at startup, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Setting is saved to QSettings and persists across sessions"
+        },
+        "example": "// Enable auto-loading of a plugin at startup\nStelModuleMgr.setPluginLoadAtStartup(\"Oculars\", true);\ncore.debug(\"Oculars plugin will load automatically on next startup\");\n\n// Disable auto-loading\nStelModuleMgr.setPluginLoadAtStartup(\"Satellites\", false);\ncore.debug(\"Satellites plugin will not load at startup\");\n\n// Check current plugins and their load status\nvar plugins = StelModuleMgr.getPluginsList();\nfor(var i = 0; i < plugins.length; i++) {\n    core.debug(plugins[i].info.id + \": loadAtStartup=\" + plugins[i].loadAtStartup + \", loaded=\" + plugins[i].loaded);\n}"
+    },
+    {
+        "name": "isPluginLoaded",
+        "category": "Plugin Query",
+        "signature": "bool isPluginLoaded(QString moduleID)",
+        "description": "Checks whether a specific plugin is currently loaded in memory. Returns true if the plugin has been loaded via loadPlugin() or was auto-loaded at startup.",
+        "parameters": [
+            {
+                "name": "moduleID",
+                "type": "QString",
+                "description": "The plugin's unique ID (e.g., 'Oculars', 'Satellites', 'RemoteControl')",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the plugin is loaded, false otherwise",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Check if a plugin is loaded before trying to access it\nif(StelModuleMgr.isPluginLoaded(\"Oculars\")) {\n    var oculars = GETSTELMODULE(Oculars);\n    core.debug(\"Oculars is loaded and ready\");\n} else {\n    core.debug(\"Oculars plugin is not loaded, loading now...\");\n    StelModuleMgr.loadPlugin(\"Oculars\");\n}\n\n// Check multiple plugins\nvar pluginList = [\"Oculars\", \"Satellites\", \"RemoteControl\", \"TelescopeControl\"];\nfor(var i = 0; i < pluginList.length; i++) {\n    var loaded = StelModuleMgr.isPluginLoaded(pluginList[i]);\n    core.debug(pluginList[i] + \": \" + (loaded ? \"loaded\" : \"not loaded\"));\n}"
+    },
+    {
+        "name": "getPluginsList",
+        "category": "Plugin Query",
+        "signature": "QList<PluginDescriptor> getPluginsList()",
+        "description": "Returns a list of all available plugins (both static and dynamic) found in the modules directories. Each PluginDescriptor contains information about the plugin (id, name, description, version) and its current state (loadAtStartup, loaded). This includes both loaded and unloaded plugins.",
+        "parameters": [],
+        "returnType": "QList<PluginDescriptor>",
+        "returnDescription": "List of all available plugin descriptors with metadata and state",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Scans modules/ directory for dynamic plugins and includes static plugins"
+        },
+        "example": "// List all available plugins with their status\nvar plugins = StelModuleMgr.getPluginsList();\ncore.debug(\"Available plugins: \" + plugins.length);\n\nfor(var i = 0; i < plugins.length; i++) {\n    var p = plugins[i];\n    var info = p.info;\n    core.debug(\"---\");\n    core.debug(\"ID: \" + info.id);\n    core.debug(\"Name: \" + info.name);\n    core.debug(\"Description: \" + info.description);\n    core.debug(\"Version: \" + info.version);\n    core.debug(\"Loaded: \" + p.loaded);\n    core.debug(\"Load at startup: \" + p.loadAtStartup);\n}\n\n// Find all unloaded plugins\nvar unloadedPlugins = [];\nfor(var j = 0; j < plugins.length; j++) {\n    if(!plugins[j].loaded) {\n        unloadedPlugins.push(plugins[j].info.id);\n    }\n}\ncore.debug(\"Unloaded plugins: \" + unloadedPlugins.join(\", \"));"
+    },
+    {
+        "name": "getExtensionList",
+        "category": "Extension Query",
+        "signature": "QObjectList getExtensionList()",
+        "description": "Returns a list of all currently registered extensions. Extensions are QObject instances provided by plugins that offer additional functionality beyond the main StelModule interface. If using this method, you should also listen to the extensionsAdded() signal to handle all possible initialization orders.",
+        "parameters": [],
+        "returnType": "QObjectList",
+        "returnDescription": "List of all registered extension objects",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Extensions are provided by plugins through StelPluginInterface::getExtensionList()"
+        },
+        "example": "// List all registered extensions\nvar extensions = StelModuleMgr.getExtensionList();\ncore.debug(\"Registered extensions: \" + extensions.length);\n\nfor(var i = 0; i < extensions.length; i++) {\n    core.debug(\"Extension #\" + i + \": \" + extensions[i].objectName);\n}"
+    },
+    {
+        "name": "loadExtensions",
+        "category": "Extension Management",
+        "signature": "QObjectList loadExtensions(QString moduleID)",
+        "description": "Loads all extensions provided by a specific plugin module. Extensions are additional QObject instances that plugins can provide beyond their main StelModule class. After loading, the extensions are added to the extension list and the extensionsAdded signal is emitted.",
+        "parameters": [
+            {
+                "name": "moduleID",
+                "type": "QString",
+                "description": "The plugin's unique ID to load extensions from",
+                "required": true
+            }
+        ],
+        "returnType": "QObjectList",
+        "returnDescription": "List of loaded extension objects, or empty list if plugin not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Emits extensionsAdded signal after loading"
+        },
+        "example": "// Load extensions for a specific plugin\nvar exts = StelModuleMgr.loadExtensions(\"RemoteControl\");\nif(exts.length > 0) {\n    core.debug(\"Loaded \" + exts.length + \" extensions for RemoteControl\");\n    for(var i = 0; i < exts.length; i++) {\n        core.debug(\"Extension: \" + exts[i].objectName);\n    }\n} else {\n    core.debug(\"No extensions found for RemoteControl\");\n}"
+    },
+    {
+        "name": "getStandardSupportLinksInfo",
+        "category": "Utilities",
+        "signature": "QString getStandardSupportLinksInfo(QString moduleName, bool furtherInfo=false)",
+        "description": "Returns a standardized HTML string containing support information and links for a module. Includes links to the Stellarium support forum, GitHub issues page, and optionally the developer documentation. The module name is used in the instructional text to help users identify which module they should mention in support requests.",
+        "parameters": [
+            {
+                "name": "moduleName",
+                "type": "QString",
+                "description": "The module name to include in the support information text",
+                "required": true
+            },
+            {
+                "name": "furtherInfo",
+                "type": "bool",
+                "description": "If true, includes a link to the developer documentation",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "HTML formatted string with support links and information",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Returns HTML string suitable for display in a QTextBrowser or similar widget"
+        },
+        "example": "// Get support info for a custom script\nvar supportInfo = StelModuleMgr.getStandardSupportLinksInfo(\"MyCustomScript\");\ncore.debug(\"Support info: \" + supportInfo);\n// Output includes links to:\n// - Google Groups forum\n// - GitHub issues page\n\n// Get extended info with developer documentation link\nvar extendedInfo = StelModuleMgr.getStandardSupportLinksInfo(\"MyPlugin\", true);\ncore.debug(\"Extended support info generated\");"
+    }
+]

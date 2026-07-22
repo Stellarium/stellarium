@@ -1,0 +1,321 @@
+[
+    {
+        "name": "searchByEnglishName",
+        "category": "Custom Objects - Search",
+        "signature": "CustomObjectP searchByEnglishName(QString customObjectEnglishName)",
+        "description": "Searches for a custom object by its English name and returns a pointer to it. Returns null if not found.",
+        "parameters": [
+            {
+                "name": "customObjectEnglishName",
+                "type": "QString",
+                "description": "The English name of the custom object to search for",
+                "required": true
+            }
+        ],
+        "returnType": "CustomObjectP",
+        "returnDescription": "Shared pointer to the custom object, or null if not found",
+        "type": "slot",
+        "example": "var obj = CustomObjectMgr.searchByEnglishName('My Marker');\nif(obj) {\n    core.debug('Found custom object: ' + obj.getEnglishName());\n} else {\n    core.debug('Custom object not found');\n}"
+    },
+    {
+        "name": "addCustomObject",
+        "category": "Custom Objects - Object Management",
+        "signature": "addCustomObject(QString designation, Vec3d coordinates, bool isVisible)",
+        "description": "Adds a custom object or marker at the specified J2000 equatorial coordinates (3D vector). Custom objects can be used to mark interesting locations on the celestial sphere.",
+        "parameters": [
+            {
+                "name": "designation",
+                "type": "QString",
+                "description": "Name or identifier for the custom object (e.g., 'My Star', 'Marker 1')",
+                "required": true
+            },
+            {
+                "name": "coordinates",
+                "type": "Vec3d",
+                "description": "J2000 equatorial coordinates as a normalized 3D vector (create with core.vec3d(x, y, z))",
+                "required": true
+            },
+            {
+                "name": "isVisible",
+                "type": "bool",
+                "description": "true to show as a marker (cross symbol), false to hide",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Add a marker at a specific J2000 position\nvar position = core.vec3d(0.5, 0.5, 0.707);\nCustomObjectMgr.addCustomObject('My Marker', position, true);\ncore.debug('Custom marker added at position');\n\n// Add an invisible custom object (for data storage)\nvar hiddenPos = core.vec3d(0.2, 0.3, 0.933);\nCustomObjectMgr.addCustomObject('Hidden Object', hiddenPos, false);\ncore.debug('Hidden custom object added');"
+    },
+    {
+        "name": "addCustomObject",
+        "category": "Custom Objects - Object Management",
+        "signature": "addCustomObject(QString designation, QString ra, QString dec, bool isVisible)",
+        "description": "Adds a custom object or marker at the specified J2000 equatorial coordinates using right ascension and declination strings. This is the most convenient way to add custom objects from script.",
+        "parameters": [
+            {
+                "name": "designation",
+                "type": "QString",
+                "description": "Name or identifier for the custom object",
+                "required": true
+            },
+            {
+                "name": "ra",
+                "type": "QString",
+                "description": "Right Ascension in J2000 frame (e.g., '5h 35m 17.3s' or '83.822°')",
+                "required": true
+            },
+            {
+                "name": "dec",
+                "type": "QString",
+                "description": "Declination in J2000 frame (e.g., '-5° 23′ 28″' or '-5.391°')",
+                "required": true
+            },
+            {
+                "name": "isVisible",
+                "type": "bool",
+                "description": "true to show as a marker (cross symbol), false to hide",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Add a marker at Orion Nebula position\nCustomObjectMgr.addCustomObject('Orion Nebula', '5h 35m 17.3s', '-5° 23′ 28″', true);\ncore.debug('Added Orion Nebula marker');\n\n// Add a marker at Sirius position\nCustomObjectMgr.addCustomObject('Sirius', '6h 45m 8.9s', '-16° 42′ 58″', true);\ncore.debug('Added Sirius marker');\n\n// Add a marker using decimal degrees\nCustomObjectMgr.addCustomObject('Galactic Center', '17h 45m 40s', '-29° 00′ 28″', true);\ncore.debug('Added Galactic Center marker');\n\n// Verify marker count\nvar obj = CustomObjectMgr.searchByEnglishName('Orion Nebula');\nif(obj) core.debug('Marker exists and can be found');"
+    },
+    {
+        "name": "addCustomObjectRaDec",
+        "category": "Custom Objects - Object Management",
+        "signature": "addCustomObjectRaDec(QString designation, QString ra, QString dec, bool isVisible)",
+        "description": "Adds a custom object or marker at the specified equatorial coordinates using the current date's Right Ascension/Declination (not J2000). The coordinates are automatically converted to J2000.",
+        "parameters": [
+            {
+                "name": "designation",
+                "type": "QString",
+                "description": "Name or identifier for the custom object",
+                "required": true
+            },
+            {
+                "name": "ra",
+                "type": "QString",
+                "description": "Right Ascension for the current date (e.g., '5h 35m 17.3s')",
+                "required": true
+            },
+            {
+                "name": "dec",
+                "type": "QString",
+                "description": "Declination for the current date (e.g., '-5° 23′ 28″')",
+                "required": true
+            },
+            {
+                "name": "isVisible",
+                "type": "bool",
+                "description": "true to show as a marker, false to hide",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Add a marker using current date coordinates\nCustomObjectMgr.addCustomObjectRaDec('Current Position', '2h 10m 15s', '60d 01m 15s', true);\ncore.debug('Added marker at current date coordinates');\n\n// Add a marker at the Sun's current position\nvar sunInfo = core.getObjectInfo('Sun');\nCustomObjectMgr.addCustomObjectRaDec('Sun Now', sunInfo['ra'], sunInfo['dec'], true);\ncore.debug('Added marker at Sun\\'s current position');"
+    },
+    {
+        "name": "addCustomObjectAltAzi",
+        "category": "Custom Objects - Object Management",
+        "signature": "addCustomObjectAltAzi(QString designation, QString alt, QString azi, bool isVisible)",
+        "description": "Adds a custom object or marker at the specified Altitude/Azimuth coordinates. The coordinates are automatically converted to J2000 equatorial coordinates.",
+        "parameters": [
+            {
+                "name": "designation",
+                "type": "QString",
+                "description": "Name or identifier for the custom object",
+                "required": true
+            },
+            {
+                "name": "alt",
+                "type": "QString",
+                "description": "Altitude angle (e.g., '45°', '30d', '0.5rad')",
+                "required": true
+            },
+            {
+                "name": "azi",
+                "type": "QString",
+                "description": "Azimuth angle (e.g., '90°' for East, '180°' for South)",
+                "required": true
+            },
+            {
+                "name": "isVisible",
+                "type": "bool",
+                "description": "true to show as a marker, false to hide",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Add a marker at zenith (directly overhead)\nCustomObjectMgr.addCustomObjectAltAzi('Zenith', '90°', '0°', true);\ncore.debug('Added marker at zenith');\n\n// Add a marker on the eastern horizon\nCustomObjectMgr.addCustomObjectAltAzi('East Point', '0°', '90°', true);\ncore.debug('Added marker on eastern horizon');\n\n// Add a marker at a specific point in the sky\nCustomObjectMgr.addCustomObjectAltAzi('My Point', '45d', '135d', true);\ncore.debug('Added marker at 45° altitude, 135° azimuth');"
+    },
+    {
+        "name": "removeCustomObjects",
+        "category": "Custom Objects - Object Management",
+        "signature": "removeCustomObjects()",
+        "description": "Removes all temporary custom objects (markers) from the sky. Persistent objects remain unaffected.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Clear all temporary markers\nCustomObjectMgr.removeCustomObjects();\ncore.debug('All custom markers removed');\n\n// Add some markers then clear them\nCustomObjectMgr.addCustomObject('Marker 1', '2h', '30d', true);\nCustomObjectMgr.addCustomObject('Marker 2', '4h', '45d', true);\ncore.debug('Added two markers');\ncore.wait(3);\nCustomObjectMgr.removeCustomObjects();\ncore.debug('Markers cleared');"
+    },
+    {
+        "name": "removeCustomObject",
+        "category": "Custom Objects - Object Management",
+        "signature": "removeCustomObject(QString englishName)",
+        "description": "Removes a specific custom object by its English name.",
+        "parameters": [
+            {
+                "name": "englishName",
+                "type": "QString",
+                "description": "The English name of the custom object to remove",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Remove a specific marker by name\nCustomObjectMgr.removeCustomObject('My Marker');\ncore.debug('Removed My Marker');\n\n// Check if exists before removing\nvar obj = CustomObjectMgr.searchByEnglishName('Orion Nebula');\nif(obj) {\n    CustomObjectMgr.removeCustomObject('Orion Nebula');\n    core.debug('Removed Orion Nebula marker');\n} else {\n    core.debug('Marker not found');\n}"
+    },
+    {
+        "name": "setMarkersColor",
+        "category": "Custom Objects - Appearance",
+        "signature": "setMarkersColor(Vec3f color)",
+        "description": "Sets the color of custom object markers (the cross symbols displayed on screen).",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color created with core.vec3f(r, g, b) where r,g,b range 0.0-1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Set markers to bright red\nvar red = core.vec3f(1.0, 0.0, 0.0);\nCustomObjectMgr.setMarkersColor(red);\ncore.debug('Marker color changed to red');\n\n// Set markers to cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nCustomObjectMgr.setMarkersColor(cyan);\ncore.debug('Marker color changed to cyan');\n\n// Set markers to yellow\nvar yellow = core.vec3f(1.0, 1.0, 0.0);\nCustomObjectMgr.setMarkersColor(yellow);\ncore.debug('Marker color changed to yellow');"
+    },
+    {
+        "name": "getMarkersColor",
+        "category": "Custom Objects - Appearance",
+        "signature": "Vec3f getMarkersColor()",
+        "description": "Returns the current color of custom object markers as an RGB array [R, G, B].",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color array [R, G, B] where each component ranges 0.0-1.0",
+        "type": "slot",
+        "example": "var color = CustomObjectMgr.getMarkersColor();\ncore.debug('Current marker color - R: ' + color[0] + ', G: ' + color[1] + ', B: ' + color[2]);"
+    },
+    {
+        "name": "setMarkersSize",
+        "category": "Custom Objects - Appearance",
+        "signature": "setMarkersSize(float size)",
+        "description": "Sets the size of custom object markers (the cross symbols) in pixels.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "float",
+                "description": "Marker size in pixels (default: 5.0, typical range: 1-20)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Small markers for minimal visual impact\nCustomObjectMgr.setMarkersSize(3.0);\ncore.debug('Marker size set to 3 pixels');\n\n// Large, visible markers for presentations\nCustomObjectMgr.setMarkersSize(8.0);\ncore.debug('Marker size set to 8 pixels');\n\n// Default size\nCustomObjectMgr.setMarkersSize(5.0);\ncore.debug('Marker size reset to default (5 pixels)');"
+    },
+    {
+        "name": "getMarkersSize",
+        "category": "Custom Objects - Appearance",
+        "signature": "float getMarkersSize()",
+        "description": "Returns the current size of custom object markers in pixels.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Marker size in pixels",
+        "type": "slot",
+        "example": "var size = CustomObjectMgr.getMarkersSize();\ncore.debug('Current marker size: ' + size + ' pixels');"
+    },
+    {
+        "name": "setSelectPriority",
+        "category": "Custom Objects - Advanced Settings",
+        "signature": "setSelectPriority(float priority)",
+        "description": "Sets the selection priority for custom objects. Higher priority values make custom objects easier to select when multiple objects are near each other.",
+        "parameters": [
+            {
+                "name": "priority",
+                "type": "float",
+                "description": "Selection priority (default: -2.0, higher = more selectable)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Increase selection priority to make markers easily selectable\nCustomObjectMgr.setSelectPriority(5.0);\ncore.debug('Custom object selection priority increased to 5.0');\n\n// Lower priority (harder to select)\nCustomObjectMgr.setSelectPriority(-10.0);\ncore.debug('Custom object selection priority lowered to -10.0');\n\n// Default priority\nCustomObjectMgr.setSelectPriority(-2.0);\ncore.debug('Custom object selection priority reset to default (-2.0)');"
+    },
+    {
+        "name": "getSelectPriority",
+        "category": "Custom Objects - Advanced Settings",
+        "signature": "float getSelectPriority()",
+        "description": "Returns the current selection priority for custom objects.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Selection priority value",
+        "type": "slot",
+        "example": "var priority = CustomObjectMgr.getSelectPriority();\ncore.debug('Current custom object select priority: ' + priority);\n\nif(priority > 0) {\n    core.debug('Custom objects have high selection priority');\n} else if(priority < -5) {\n    core.debug('Custom objects are difficult to select');\n}"
+    },
+    {
+        "name": "addPersistentObject",
+        "category": "Custom Objects - Persistent Objects",
+        "signature": "addPersistentObject(QString designation, Vec3d coordinates, QString objectType)",
+        "description": "Adds a persistent custom object that is saved to disk and will reappear when Stellarium is restarted. These objects are stored in persistentCustomObjects.json in the user data directory.",
+        "parameters": [
+            {
+                "name": "designation",
+                "type": "QString",
+                "description": "Name or identifier for the persistent object (must be unique)",
+                "required": true
+            },
+            {
+                "name": "coordinates",
+                "type": "Vec3d",
+                "description": "J2000 equatorial coordinates as a normalized 3D vector",
+                "required": true
+            },
+            {
+                "name": "objectType",
+                "type": "QString",
+                "description": "Type description for the object (e.g., 'star', 'nebula', 'custom object')",
+                "required": false,
+                "default": "\"custom object\""
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Public method, not a slot, but callable from scripts"
+        },
+        "example": "// Add a persistent star marker\nvar position = core.vec3d(0.5, 0.5, 0.707);\nCustomObjectMgr.addPersistentObject('My Favorite Star', position, 'star');\ncore.debug('Added persistent star (saved to disk)');\n\n// Add a persistent custom object\nvar nebulaPos = core.vec3d(0.2, 0.8, 0.566);\nCustomObjectMgr.addPersistentObject('Discovered Nebula', nebulaPos, 'nebula');\ncore.debug('Added persistent nebula marker');\n\n// Verify it was saved\nvar obj = CustomObjectMgr.searchByEnglishName('My Favorite Star');\nif(obj) core.debug('Persistent object can be found in search');"
+    },
+    {
+        "name": "removePersistentObjects",
+        "category": "Custom Objects - Persistent Objects",
+        "signature": "removePersistentObjects()",
+        "description": "Removes all persistent custom objects from the sky and deletes them from the persistent storage file.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Public method, not a slot, but callable from scripts"
+        },
+        "example": "// Remove all saved persistent objects\nCustomObjectMgr.removePersistentObjects();\ncore.debug('All persistent objects removed from storage');\n\n// Add and then remove a persistent object\nvar pos = core.vec3d(0.1, 0.2, 0.974);\nCustomObjectMgr.addPersistentObject('Temp Marker', pos, 'marker');\ncore.debug('Temporary persistent object added');\ncore.wait(2);\nCustomObjectMgr.removePersistentObjects();\ncore.debug('All persistent objects cleared');"
+    }
+]
