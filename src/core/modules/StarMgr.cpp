@@ -354,6 +354,12 @@ void StarMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+	// Default B-V value used when a catalog star has no BP/RP color (sentinel value).
+	const float missingBVMag = conf->value("stars/missing_bv_value", 0.0f).toFloat();
+	Star1::missingBVMag = missingBVMag;
+	Star2::missingBVMag = missingBVMag;
+	Star3::missingBVMag = missingBVMag;
+
 	starConfigFileFullPath = StelFileMgr::findFile("stars/hip_gaia3/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
 	if (starConfigFileFullPath.isEmpty())
 	{
@@ -500,9 +506,9 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 			else
 			{
 #if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
-				md5Hash.addData(QByteArrayView(reinterpret_cast<const char*>(cat), static_cast<int>(cat_sz)));
+				md5Hash.addData(QByteArrayView(reinterpret_cast<const char*>(cat), static_cast<qsizetype>(cat_sz)));
 #else
-				md5Hash.addData(reinterpret_cast<const char*>(cat), static_cast<int>(cat_sz));
+				md5Hash.addData(reinterpret_cast<const char*>(cat), static_cast<qsizetype>(cat_sz));
 #endif
 				file.unmap(cat);
 			}
@@ -528,7 +534,9 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 		useMmap = true;
 #endif
 
-		ZoneArray* z = ZoneArray::create(catalogFilePath, useMmap);
+		bool useCompactStorage = StelApp::getInstance().getSettings()->value("stars/flag_compact_star_storage", false).toBool();
+
+		ZoneArray* z = ZoneArray::create(catalogFilePath, useMmap, useCompactStorage);
 		if (z)
 		{
 			if (z->level<gridLevels.size())
@@ -541,6 +549,10 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 			Q_ASSERT(z->level==gridLevels.size());
 			++maxGeodesicGridLevel;
 			gridLevels.append(z);
+			// Compact storage is only applied for levels >= 9 inside SpecialZoneArray.
+			const bool effectiveCompact = useCompactStorage && z->level >= 9;
+			qInfo().noquote() << "Loaded star catalog level" << z->level
+			                  << "with compact storage" << (effectiveCompact ? "enabled" : "disabled");
 		}
 		return true;
 	}
@@ -1358,7 +1370,12 @@ void StarMgr::draw(StelCore* core)
 		// Saemundsson's inversion formula for atmospheric refraction is not exact, so need some padding in terms of arcseconds
 		margin = 30000. * MAS2RAD * prj->getPixelPerRadAtCenter();  // 0.5 arcmin
 	}
-	
+	// Add a fixed 60" angular margin so that stars whose catalog zone differs from their
+	// apparent-position zone (zone/HEALPix mismatch near geodesic boundaries) are still
+	// found. The 60" size matches searchGaiaPhase2(); this constant is in radians.
+	constexpr double zoneBoundaryMargin = 60000. * MAS2RAD;  // 60 arcsec
+	margin += zoneBoundaryMargin * prj->getPixelPerRadAtCenter();
+
 	QVector<SphericalCap> viewportCaps = prj->getViewportConvexPolygon(margin, margin)->getBoundingSphericalCaps();
 	viewportCaps.append(core->getVisibleSkyArea());
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(viewportCaps,maxSearchLevel);
@@ -1460,46 +1477,14 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	Vec3d v(vv);
 	v.normalize();
 
-	// find any vectors h0 and h1 (length 1), so that h0*v=h1*v=h0*h1=0
-	int i;
-	{
-		const double a0 = fabs(v[0]);
-		const double a1 = fabs(v[1]);
-		const double a2 = fabs(v[2]);
-		if (a0 <= a1)
-		{
-			if (a0 <= a2) i = 0;
-			else i = 2;
-		} else
-		{
-			if (a1 <= a2) i = 1;
-			else i = 2;
-		}
-	}
-	Vec3d h0(0.0,0.0,0.0);
-	h0[i] = 1.0;
-	Vec3d h1 = h0 ^ v;
-	h1.normalize();
-	h0 = h1 ^ v;
-	h0.normalize();
-
-	// Now we have h0*v=h1*v=h0*h1=0.
-	// Construct a region with 4 corners e0,e1,e2,e3 inside which all desired stars must be:
-	double f = 1.4142136 * tan(limFov * M_PI_180);
-	h0 *= f;
-	h1 *= f;
-	Vec3d e0 = v + h0;
-	Vec3d e1 = v + h1;
-	Vec3d e2 = v - h0;
-	Vec3d e3 = v - h1;
-	f = 1.0/e0.norm();
-	e0 *= f;
-	e1 *= f;
-	e2 *= f;
-	e3 *= f;
-	// Search the triangles
-	SphericalConvexPolygon c(e3, e2, e2, e0);
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingSphericalCaps(),lastMaxSearchLevel);
+	SphericalConvexPolygon c = getSphericalSearchSquare(v, limFov);
+	// Stars stored near geodesic zone boundaries may have an apparent position that
+	// has crossed into an adjacent zone.  Enlarge the zone search by a fixed
+	// angular margin so the catalog zone is still found; the per-star angular test
+	// below still uses the original limFov.
+	constexpr double zoneBoundaryMarginDeg = 60.0 / 3600.0;  // 60 arcsec in degrees
+	SphericalConvexPolygon searchPoly = getSphericalSearchSquare(v, limFov + zoneBoundaryMarginDeg);
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(searchPoly.getBoundingSphericalCaps(),lastMaxSearchLevel);
 
 	double withParallax = core->getUseParallax() * core->getParallaxFactor();
 	Vec3d diffPos(0., 0., 0.);
@@ -1507,8 +1492,8 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 		diffPos = core->getParallaxDiff(core->getJDE());
 	}
 
-	// Iterate over the stars inside the triangles
-	f = cos(limFov * M_PI/180.);
+	// Iterate over the stars inside the region.
+	double f = cos(limFov * M_PI/180.);
 	for (auto* z : gridLevels)
 	{
 		//qDebug() << "search inside(" << it->first << "):";
@@ -1669,9 +1654,8 @@ StelObjectP StarMgr::searchHP(int hp) const
 // Search the star by Gaia source_id
 StelObjectP StarMgr::searchGaia(StarId source_id) const
 {
-	int maxSearchLevel = getMaxSearchLevel();
+	const int maxSearchLevel = maxGeodesicGridLevel;
 	int matched = 0;
-	int index = 0;
 	// get the level 12 HEALPix index of the source
 	int lv12_pix = source_id / 34359738368;
 	Vec3d v;
@@ -1679,18 +1663,58 @@ StelObjectP StarMgr::searchGaia(StarId source_id) const
 	healpix_pix2vec(int(pow(2., 12.)), lv12_pix, v.v);  // search which pixel the source is in and turn to coordinates
 	Vec3f vf = v.toVec3f();
 
+	// Phase 1: search the zone containing the HEALPix pixel center (fast, O(1) per level)
 	for (const auto* z : gridLevels)
 	{
-		// search the zone where the source is in
-		index = StelApp::getInstance().getCore()->getGeodesicGrid(maxSearchLevel)->getZoneNumberForPoint(vf, z->level);
+		const int index = StelApp::getInstance().getCore()->getGeodesicGrid(maxSearchLevel)
+			->getZoneNumberForPoint(vf, z->level);
 		so = z->searchGaiaID(index, source_id, matched);
-		if (matched)
-			return so;
-		
-		// then search the global zone 
+		if (matched) return so;
+
 		so = z->searchGaiaID((20<<(z->level<<1)), source_id, matched);
-		if (matched)
-			return so;
+		if (matched) return so;
+	}
+
+	return searchGaiaPhase2(source_id, v, matched, maxSearchLevel);
+}
+
+StelObjectP StarMgr::searchGaiaPhase2(StarId source_id, const Vec3d& v, int& matched, int maxSearchLevel) const
+{
+	StelObjectP so;
+	// Phase 2: HEALPix center zone missed the star (occurs at high geodesic levels
+	// where the pixel center falls in a different zone than the star's actual position).
+	// Search all zones intersecting a small region around the HEALPix pixel center.
+	// Phase 2 trigger rates:
+	//   Level 8 : 4.5%
+	//   Level 9 : 9.0%
+	//   Level 10: 17.4%
+	// HEALPix Level 12 pixel center-to-corner distance is about 50" on sky.
+	// Search a square region inscribed in a circle of 60" radius so that stars
+	// anywhere inside the pixel (and a small margin across pixel boundaries)
+	// are guaranteed to be found.
+	constexpr double healpixSearchRadius = 60.0 / 3600.0; // 60 arcsec in degrees
+	SphericalConvexPolygon c = getSphericalSearchSquare(v, healpixSearchRadius);
+
+	const auto* geodesic_result =
+		StelApp::getInstance().getCore()->getGeodesicGrid(maxSearchLevel)
+			->search(c.getBoundingSphericalCaps(), maxSearchLevel);
+
+	for (const auto* z : gridLevels)
+	{
+		if (z->level > maxSearchLevel) continue;
+		int zone;
+		for (GeodesicSearchInsideIterator it(*geodesic_result, z->level);
+		     (zone = it.next()) >= 0; )
+		{
+			so = z->searchGaiaID(zone, source_id, matched);
+			if (matched) return so;
+		}
+		for (GeodesicSearchBorderIterator it(*geodesic_result, z->level);
+		     (zone = it.next()) >= 0; )
+		{
+			so = z->searchGaiaID(zone, source_id, matched);
+			if (matched) return so;
+		}
 	}
 	return StelObjectP();
 }

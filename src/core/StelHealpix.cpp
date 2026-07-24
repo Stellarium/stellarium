@@ -26,47 +26,6 @@ static const int FACES[12][2] = {{1,  0}, {3,  0}, {5,  0}, {7,  0},
 				 {0, -1}, {2, -1}, {4, -1}, {6, -1},
 				 {1, -2}, {3, -2}, {5, -2}, {7, -2}};
 
-// Position for poles
-double healpix_sigma(double z)
-{
-    if (z < 0)
-    {
-        return -healpix_sigma(-z);
-    }
-    else
-    {
-        return 2 - sqrt(3 * (1 - z));
-    }
-}
-
-double healpix_clip(double Z, double A, double B)
-{
-    if (Z < A)
-    {
-        return A;
-    }
-    else if (Z > B)
-    {
-        return B;
-    }
-    else
-    {
-        return Z;
-    }
-}
-
-double healpix_wrap(double A, double B)
-{
-    if (A < 0)
-    {
-        return B - fmod(-A, B);
-    }
-    else
-    {
-        return fmod(A, B);
-    }
-}
-
 int healpix_xyf2nest(int nside, int ix, int iy, int face_num)
 {
   return (face_num*nside*nside) +
@@ -157,81 +116,60 @@ void healpix_pix2ang(int nside, int pix, double *theta, double *phi)
     healpix_xy2ang(xy, theta, phi);
 }
 
-// HEALPix spherical projection
-void za2tu(double z, double a, double *t, double *u)
-{
-    if (fabs(z) <= 2. / 3.)
-    // equator
-    {
-        *t = a;
-        *u = 3 * (M_PI / 8.) * z;
-    }
-    else
-    // north/south poles
-    {
-        double sigma_z;
-        sigma_z = healpix_sigma(z);
-        *t = a - (fabs(sigma_z) - 1) * (fmod(a, M_PI / 2.) - (M_PI / 4.));
-        *u = (M_PI / 4.) * sigma_z;
-    }
-}
-
-// spherical projection to base pixel index
-// f: base pixel index
-// p: coord in north east axis of base pixel
-// q: coord in north west axis of base pixel
-void tu2fpq(double t, double u, long long int *f, double *p, double *q)
-{
-    t /= (M_PI / 4.);
-    u /= (M_PI / 4.);
-    t = healpix_wrap(t, 8.);
-    t += -4.;
-    u += 5.;
-    const double pp = healpix_clip((u + t) / 2., 0., 5.);
-    const int PP = floor(pp);
-    const double qq = healpix_clip((u - t) / 2., 3. - PP, 6. - PP);
-    const int QQ = floor(qq);
-    const int V = 5 - (PP + QQ);
-    if (V < 0)
-    { // clip
-        *f = 0;
-        *p = 1.;
-        *q = 1.;
-    }
-    else
-    {
-        *f = 4 * V + fmod(((PP - QQ + 4) >> 1), 4.);
-        *p = fmod(pp, 1);
-        *q = fmod(qq, 1);
-    }
-}
-
-void tu2fxy(int nside, double t, double u, long long int *f, long long int *x, long long int *y)
-{
-    double p;
-    double q;
-    tu2fpq(t, u, f, &p, &q);
-    *x = healpix_clip(floor(nside * p), 0, nside - 1);
-    *y = healpix_clip(floor(nside * q), 0, nside - 1);
-}
-
-long long int za2pix_nest(int nside, double z, double a)
-{
-    double t;
-    double u;
-    long long int f;
-    long long int x;
-    long long int y;
-    za2tu(z, a, &t, &u);
-    tu2fxy(nside, t, u, &f, &x, &y);
-    return healpix_xyf2nest(nside, x, y, f);
-}
-
 long long int healpix_ang2pix_nest(int nside, double theta, double phi)
 {
-    double z;
-    // normalize coords
-    z = cos(theta);
+	const double z = cos(theta);
+	const double za = fabs(z);
+	double tt = phi * 2.0 / M_PI;
+	tt -= std::floor(tt / 4.0) * 4.0; // normalize to [0, 4)
 
-    return za2pix_nest(nside, z, phi);
+	int ix, iy, face_num;
+
+	if (za <= 2.0 / 3.0)
+	{
+		// Equatorial region
+		const double temp1 = nside * (0.5 + tt);
+		const double temp2 = nside * (z * 0.75);
+		const int jp = static_cast<int>(std::floor(temp1 - temp2));
+		const int jm = static_cast<int>(std::floor(temp1 + temp2));
+		const int ifp = jp / nside;
+		const int ifm = jm / nside;
+
+		if (ifp == ifm)
+			face_num = ifp | 4;
+		else if (ifp < ifm)
+			face_num = ifp;
+		else
+			face_num = ifm + 8;
+
+		ix = jm & (nside - 1);
+		iy = nside - (jp & (nside - 1)) - 1;
+	}
+	else
+	{
+		// Polar region
+		const int ntt = static_cast<int>(tt);
+		const double tp = tt - ntt;
+		const double tmp = nside * sqrt(3.0 * (1.0 - za));
+		int jp = static_cast<int>(std::floor(tp * tmp));
+		int jm = static_cast<int>(std::floor((1.0 - tp) * tmp));
+
+		if (jp > nside - 1) jp = nside - 1;
+		if (jm > nside - 1) jm = nside - 1;
+
+		if (z >= 0.0)
+		{
+			ix = nside - jm - 1;
+			iy = nside - jp - 1;
+			face_num = ntt;
+		}
+		else
+		{
+			ix = jp;
+			iy = jm;
+			face_num = ntt + 8;
+		}
+	}
+
+	return static_cast<long long int>(healpix_xyf2nest(nside, ix, iy, face_num));
 }

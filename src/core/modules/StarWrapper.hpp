@@ -67,6 +67,7 @@ protected:
 	//! @return a QString containing an HTML encoded description of the StarWrapperBase.
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	virtual float getBV(void) const = 0;
+	virtual bool  hasBV(void) const = 0;
 };
 
 template <class Star> class StarWrapper : public StarWrapperBase
@@ -119,6 +120,7 @@ protected:
 		return s->getMag() / 1000.f;
 	}
 	float getBV(void) const override final {return s->getBV();}
+	bool  hasBV(void) const override final {return s->hasBV();}
 	//QString getEnglishName(void) const override {return QString();}
 	QString getNameI18n(void) const override final {return s->getNameI18n();}
 
@@ -457,7 +459,7 @@ protected:
 			{N_("star")                     , "no"}};
 		map.insert("variable-star", varmap.value(objectType, "no"));
 
-		map.insert("bV", getBV());
+		map.insert("bV", hasBV() ? getBV() : std::numeric_limits<float>::quiet_NaN());
 
 		if (s->getPlx())
 		{
