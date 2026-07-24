@@ -20,6 +20,7 @@
 #ifndef STELGUIITEMS_HPP
 #define STELGUIITEMS_HPP
 
+#include <QGraphicsProxyWidget>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsWidget>
 #include <QDebug>
@@ -29,8 +30,32 @@ class QGraphicsSceneMouseEvent;
 class QTimeLine;
 class QGraphicsTextItem;
 class QTimer;
+class QLabel;
 class StelProgressController;
 class QProgressBar;
+
+class StelToolTip : public QGraphicsProxyWidget
+{
+	Q_OBJECT
+public:
+	StelToolTip(QGraphicsItem* parent);
+	void showToolTip(const QPoint& scenePos, const QString& text);
+
+signals:
+	void timeout();
+
+private slots:
+	void hideToolTip();
+
+protected:
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+
+private:
+	void setFontSizeFromApp(int size);
+
+	QLabel* label = nullptr;
+	QTimer* toolTipTimeoutTimer = nullptr;
+};
 
 // Progress bars in the lower right corner
 class StelProgressBarMgr : public QGraphicsWidget
@@ -64,6 +89,7 @@ private:
 //! A Button Graphicsitem for use in Stellarium's graphic widgets
 class StelButton : public QObject, public QGraphicsPixmapItem
 {
+	friend class StelGui;
 	friend class BottomStelBar;
 	friend class LeftStelBar;
 	Q_OBJECT
@@ -106,8 +132,9 @@ public:
 		   const QPixmap& pixHover,
 		   const QString& actionId=QString(),
 		   bool noBackground=false,
-		   bool isTristate=true);
-	
+		   bool isTristate=true,
+		   const QString& otherActionId="");
+
 	//! Button states
 	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
 
@@ -187,6 +214,7 @@ private:
 	QPixmap scaledCurrentPixmap;
 
 	int checked;
+	bool secondState;
 	bool flagChangeFocus;
 
 	QTimeLine* timeLine;
