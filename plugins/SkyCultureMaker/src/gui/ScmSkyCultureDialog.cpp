@@ -29,11 +29,13 @@
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
 #include <QCheckBox>
+#include <QDateTime>
 #include <QDebug>
 #include <QHeaderView>
 #include <QMap>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QRegularExpression>
 #include <QStyledItemDelegate>
 #include <QTableWidgetItem>
 
@@ -455,8 +457,8 @@ void ScmSkyCultureDialog::openConstellationDialog(const QString &constellationId
 	scm::ScmConstellation *constellation = skyCulture->getConstellation(constellationId);
 	if (constellation != nullptr)
 	{
-		maker->loadDialogFromConstellation(constellation);
 		maker->setDialogVisibility(scm::DialogID::ConstellationDialog, true);
+		maker->loadDialogFromConstellation(constellation);
 		maker->setIsLineDrawEnabled(true);
 		updateAddConstellationButtons(false);
 	}
@@ -695,6 +697,125 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	}*/
 
 	return desc;
+}
+
+void ScmSkyCultureDialog::populateDescriptionTab(const scm::Description &desc)
+{
+	// Name
+	// block textChanged so the signal doesnt overwrite the loaded ID
+	ui->skyCultureNameLE->blockSignals(true);
+	ui->skyCultureNameLE->setText(desc.name);
+	ui->skyCultureNameLE->blockSignals(false);
+	name = desc.name;
+	ui->ExportSkyCultureBtn->setEnabled(!desc.name.isEmpty());
+
+	// Description text fields
+	ui->introTE->setPlainText(desc.introduction);
+	ui->cultureDescriptionTE->setPlainText(desc.cultureDescription);
+	ui->skyTE->setPlainText(desc.sky);
+	ui->moonSunTE->setPlainText(desc.moonAndSun);
+	ui->planetsTE->setPlainText(desc.planets);
+	ui->zodiacTE->setPlainText(desc.zodiac);
+	ui->milkyWayTE->setPlainText(desc.milkyWay);
+	ui->otherObjectsTE->setPlainText(desc.otherObjects);
+	ui->authorsTE->setPlainText(desc.authors);
+	ui->aboutTE->setPlainText(desc.about);
+	ui->acknowledgementsTE->setPlainText(desc.acknowledgements);
+
+	// License combo
+	for (int i = 0; i < ui->licenseCB->count(); ++i)
+	{
+		if (ui->licenseCB->itemData(i).value<scm::LicenseType>() == desc.license)
+		{
+			ui->licenseCB->setCurrentIndex(i);
+			break;
+		}
+	}
+
+	// Classification combo
+	for (int i = 0; i < ui->classificationCB->count(); ++i)
+	{
+		if (ui->classificationCB->itemData(i).value<scm::ClassificationType>() == desc.classification)
+		{
+			ui->classificationCB->setCurrentIndex(i);
+			break;
+		}
+	}
+
+	// Region combo
+	for (int i = 0; i < ui->regionCB->count(); ++i)
+	{
+		if (ui->regionCB->itemData(i).value<scm::RegionType>() == desc.region)
+		{
+			ui->regionCB->setCurrentIndex(i);
+			break;
+		}
+	}
+}
+
+void ScmSkyCultureDialog::populateReferences(const QString &references)
+{
+	resetReferences();
+	// matches lines like: " - [#1]: Reference text"
+	// the original reference number is preserved
+	static const QRegularExpression refRx(R"(^\s*-\s*\[(#\d+)\]:\s*(.+)$)");
+	for (const QString &line : references.split('\n'))
+	{
+		const auto m = refRx.match(line.trimmed());
+		if (!m.hasMatch()) continue;
+		auto *item = new QTreeWidgetItem({m.captured(1).trimmed(), m.captured(2).trimmed()});
+		item->setFlags(item->flags() | Qt::ItemIsEditable);
+		ui->referencesList->addTopLevelItem(item);
+	}
+	updateReferencesButtons();
+}
+
+void ScmSkyCultureDialog::populateCommonNames(const QMap<QString, QList<scm::ScmCulturalName>> &culturalNames)
+{
+	cnEntries.clear();
+	for (auto it = culturalNames.constBegin(); it != culturalNames.constEnd(); ++it)
+	{
+		for (const auto &cn : it.value())
+			cnEntries.append({it.key(), cn});
+	}
+	cnEditingRow = -1;
+	cnRefreshTable();
+}
+
+void ScmSkyCultureDialog::populateLocationsTab(scm::ScmSkyCulture *sc)
+{
+	ui->polygonInfoTreeWidget->clear();
+	ui->scmGeoLocGraphicsView->reset();
+	for (const auto &poly : sc->getLocations())
+	{
+		ui->scmGeoLocGraphicsView->addExistingPolygon(poly);
+		QString endTimeStr = QString::number(poly.endTime);
+		if (poly.endTime >= ui->skyCultureCurrentTimeSpinBox->maximum()) endTimeStr = "∞";
+		ui->polygonInfoTreeWidget->addTopLevelItem(
+			new ScmPolygonInfoTreeItem(poly.id, poly.beginTime, endTimeStr, poly.polygon.size()));
+	}
+	ui->polygonCountValueLabel->setText(QString::number(sc->getLocations().size()));
+}
+
+void ScmSkyCultureDialog::populateFromSkyCulture(scm::ScmSkyCulture *sc)
+{
+	if (!sc || !ui || !dialog) return;
+
+	const scm::Description &desc = sc->getDescription();
+	populateDescriptionTab(desc);
+	populateReferences(desc.references);
+
+	setConstellations(sc->getConstellations());
+	updateAddConstellationButtons(true);
+
+	populateCommonNames(sc->getCulturalNames());
+	populateLocationsTab(sc);
+
+	// Set the time slider to the sky culture's end year
+	int displayYear   = sc->getEndTime();
+	const int maxYear = QDateTime::currentDateTime().date().year();
+	if (displayYear <= 0 || displayYear > maxYear) displayYear = maxYear;
+	updateSkyCultureTimeValue(displayYear);
 }
 
 void ScmSkyCultureDialog::resetDialog()

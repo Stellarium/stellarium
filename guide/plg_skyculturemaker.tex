@@ -38,12 +38,7 @@ This button is also an indicator of whether the SCM is currently open: pressing 
 
 The \textit{Create} button opens the main dialog where you can build a new sky culture.
 If the Sky Culture Converter was enabled at build time, a \textit{Convert} button also appears (see section~\ref{sec:plugins:SCM:Converting} for details).
-The \textit{Edit} button may be present already, but it is disabled because the SCM currently does not support editing existing sky cultures.
-This feature is planned for a future release.
-
-\noindent\textbf{Saving partial results:} Since editing an existing sky culture is not yet supported, the following workaround is needed to save partial work and resume later.
-Ensure all metadata is complete so the SCM allows you to export.
-When resuming, create a new temporary sky culture, continue your work there, and then manually merge the two exported JSON files by copying the relevant entries.
+The \textit{Edit} button opens a file chooser where you can select an existing sky culture. It will be loaded into the SCM for editing.
 
 \subsection{Converting an Existing Sky Culture}
 \label{sec:plugins:SCM:Converting}

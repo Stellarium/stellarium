@@ -276,6 +276,36 @@ const QString &scm::ScmSkyCulture::getId() const
 	return id;
 }
 
+const scm::Description &scm::ScmSkyCulture::getDescription() const
+{
+	return description;
+}
+
+const QMap<QString, QList<scm::ScmCulturalName>> &scm::ScmSkyCulture::getCulturalNames() const
+{
+	return culturalNames;
+}
+
+const QList<scm::CulturePolygon> &scm::ScmSkyCulture::getLocations() const
+{
+	return locations;
+}
+
+int scm::ScmSkyCulture::getBeginTime() const
+{
+	return beginTime;
+}
+
+int scm::ScmSkyCulture::getEndTime() const
+{
+	return endTime;
+}
+
+bool scm::ScmSkyCulture::getFallbackToInternationalNames() const
+{
+	return fallbackToInternationalNames;
+}
+
 void scm::ScmSkyCulture::mergeLocations()
 {
 	for (int currentLocationIdx = 0; currentLocationIdx < (locations.size() - 1); currentLocationIdx++)

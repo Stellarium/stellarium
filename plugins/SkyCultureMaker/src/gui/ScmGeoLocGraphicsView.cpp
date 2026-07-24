@@ -29,6 +29,20 @@
 #include <QJsonDocument>
 #include <cmath> // for M_PI
 
+namespace
+{
+// Earth's equatorial circumference in metres (2π * WGS84 semi-major axis).
+constexpr double MERCATOR_CIRCUMFERENCE = 40075014.1343236863613128;
+// Half circumference: the x-extent of the map in Mercator metres.
+constexpr double MERCATOR_HALF_WIDTH = 20037507.0671618431806564;
+// Semi-major axis * π, used by the standard Mercator Lon/Lat formula.
+constexpr double MERCATOR_HALF_WIDTH_PROJ = 20037508.3427892439067363739014;
+// Height of this particular SVG map in Mercator metres (y points downward).
+constexpr double MAP_HEIGHT_M = 37274855.60442495346069336;
+// Mercator Y at the top edge of the SVG map (map y = 0).
+constexpr double MAP_TOP_M = 18418386.3090785145759583;
+} // namespace
+
 ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
 	, viewScrolling(false)
@@ -381,16 +395,16 @@ QPolygonF ScmGeoLocGraphicsView::convertViewToWGS84(const QPolygonF &viewCoordin
 	// convert view coordinates to native coordinate system of the current map (EPSG: 3857)
 	for (const auto &point : viewCoordinatePolygon)
 	{
-		qreal xInMeter = ((point.x() / defaultRect.width()) * 40075014.1343236863613128) - 20037507.0671618431806564;
-		qreal yInMeter = ((point.y() / defaultRect.height()) * -37274855.60442495346069336) + 18418386.3090785145759583;
+		qreal xInMeter = ((point.x() / defaultRect.width()) * MERCATOR_CIRCUMFERENCE) - MERCATOR_HALF_WIDTH;
+		qreal yInMeter = ((point.y() / defaultRect.height()) * -MAP_HEIGHT_M) + MAP_TOP_M;
 		result.append(QPointF(xInMeter, yInMeter));
 	}
 
 	// convert map coordinates to Lat/Lon coordinates (EPSG: 4326)
 	for (auto &point : result)
 	{
-		qreal xInLon= (point.x() * 180.0) / 20037508.3427892439067363739014;
-		qreal yInLat = (std::atan(std::exp(((point.y() * 180.0) / 20037508.3427892439067363739014) * (M_PI / 180.0))) * (360.0 / M_PI)) - 90.0;
+		qreal xInLon = (point.x() * 180.0) / MERCATOR_HALF_WIDTH_PROJ;
+		qreal yInLat = (std::atan(std::exp(((point.y() * 180.0) / MERCATOR_HALF_WIDTH_PROJ) * (M_PI / 180.0))) * (360.0 / M_PI)) - 90.0;
 
 		point.setX(xInLon);
 		point.setY(yInLat);
@@ -399,4 +413,30 @@ QPolygonF ScmGeoLocGraphicsView::convertViewToWGS84(const QPolygonF &viewCoordin
 	return result;
 }
 
+QPolygonF ScmGeoLocGraphicsView::convertWGS84ToView(const QPolygonF &wgs84Polygon)
+{
+	QPolygonF result;
 
+	for (const auto &pt : wgs84Polygon)
+	{
+		// Step 1: Lon/Lat (EPSG:4326) to Mercator metres (EPSG:3857)
+		double xInMeter = pt.x() * MERCATOR_HALF_WIDTH_PROJ / 180.0;
+		double yInMeter = std::log(std::tan((pt.y() + 90.0) * M_PI / 360.0)) * MERCATOR_HALF_WIDTH_PROJ / M_PI;
+
+		// Step 2: Mercator metres to view coordinates
+		double x = (xInMeter + MERCATOR_HALF_WIDTH) / MERCATOR_CIRCUMFERENCE * defaultRect.width();
+		double y = (yInMeter - MAP_TOP_M) / (-MAP_HEIGHT_M) * defaultRect.height();
+		result.append(QPointF(x, y));
+	}
+
+	return result;
+}
+
+void ScmGeoLocGraphicsView::addExistingPolygon(const scm::CulturePolygon &polygon)
+{
+	ScmPreviewPolygonItem *poly = new ScmPreviewPolygonItem(polygon.beginTime, polygon.endTime,
+	                                                        convertWGS84ToView(polygon.polygon));
+	scene()->addItem(poly);
+	polygonIdentifierMap.insert(polygon.id, poly);
+	updateCultureVisibility();
+}

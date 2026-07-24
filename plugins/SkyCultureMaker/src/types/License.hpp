@@ -53,7 +53,9 @@ enum class LicenseType
 	CC_BY,
 	CC_BY_NC,
 	CC_BY_ND,
-	CC_BY_NC_ND
+	CC_BY_NC_ND,
+	CC_BY_SA,
+	GNU_GPL_V2
 };
 
 //! Map of license types to their corresponding name and description
@@ -70,9 +72,13 @@ const std::map<LicenseType, License> LICENSES = {
 	{LicenseType::CC_BY_NC, License("CC BY-NC 4.0", 
 		"This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 License.")},
 	{LicenseType::CC_BY_ND, License("CC BY-ND 4.0", 
-		"This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 License.")},
+		"This work is licensed under the Creative Commons Attribution-NoDerivatives 4.0 License.")},
 	{LicenseType::CC_BY_NC_ND, License("CC BY-NC-ND 4.0", 
-		"This work is licensed under the Creative Commons Attribution-NoDerivatives 4.0 License.")}
+		"This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License.")},
+	{LicenseType::CC_BY_SA, License("CC BY-SA 4.0", 
+		"This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 License.")},
+	{LicenseType::GNU_GPL_V2, License("GNU GPL v2.0",
+		"This work is licensed under the GNU General Public License version 2.0.")},
 };
 
 } // namespace scm
