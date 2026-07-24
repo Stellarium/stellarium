@@ -79,7 +79,7 @@ public:
 	//! Return a search result matching the given spatial region
 	//! The result is cached, meaning that it is very fast to search the same region consecutively
 	//! @return a GeodesicSearchResult instance which must be used with GeodesicSearchBorderIterator and GeodesicSearchInsideIterator
-	const GeodesicSearchResult* search(const QVector<SphericalCap>& convex, int maxSearchLevel) const;
+	const GeodesicSearchResult* search(const QVector<SphericalCap>& convex, int maxSearchLevel, const Vec3d vel) const;
 
 private:
 	friend class GeodesicSearchResult;
@@ -100,7 +100,7 @@ private:
 	//! In order to restrict search depth set maxSearchLevel < maxLevel,
 	//! for full search depth set maxSearchLevel = maxLevel,
 	void searchZones(const QVector<SphericalCap>& convex,
-					 int **inside,int **border,int maxSearchLevel) const;
+					 int **inside,int **border,int maxSearchLevel, const Vec3d vel) const;
 	
 	const Vec3f& getTriangleCorner(int lev, int index, int cornerNumber) const;
 	void initTriangle(int lev,int index,
@@ -121,7 +121,7 @@ private:
 	                 const bool *corner0_inside,
 	                 const bool *corner1_inside,
 	                 const bool *corner2_inside,
-	                 int **inside,int **border,int maxSearchLevel) const;
+	                 int **inside,int **border,int maxSearchLevel, const Vec3f vel) const;
 
 	const int maxLevel;
 	struct Triangle
@@ -149,7 +149,7 @@ private:
 	friend class GeodesicSearchBorderIterator;
 	friend class StelGeodesicGrid;
 	
-	void search(const QVector<SphericalCap>& convex, int maxSearchLevel);
+	void search(const QVector<SphericalCap>& convex, int maxSearchLeve, const Vec3d vel);
 	
 	const StelGeodesicGrid &grid;
 	int **const zones;
