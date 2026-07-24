@@ -40,8 +40,10 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QCheckBox>
+#include <QPair>
 #include <QPushButton>
 #include <QSignalBlocker>
+#include <QTimer>
 #include <cmath>
 
 ObjectVisibilityDialog::ObjectVisibilityDialog()
@@ -66,6 +68,8 @@ void ObjectVisibilityDialog::retranslate()
 		setAboutHtml();
 		refreshTitleLabel();
 		refreshTwilightLimits();
+		refreshTwilightMap();
+		syncMapControls();
 		updatePlaceLabels();
 	}
 }
@@ -79,6 +83,10 @@ void ObjectVisibilityDialog::createDialogContent()
 	plugin = GETSTELMODULE(ObjectVisibility);
 	Q_ASSERT(plugin);
 	ui->setupUi(dialog);
+	placeLabelsVisible = plugin->getPlaceLabelsVisible();
+	placeLabelsMinimumPopulation = plugin->getPlaceLabelsMinimumPopulation();
+	placeLabelsNearLinesOnly = plugin->getPlaceLabelsNearLinesOnly();
+	syncMaps = plugin->getSyncMaps();
 
 	// Standard kinetic scrolling for the About browser.
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -115,6 +123,9 @@ void ObjectVisibilityDialog::createDialogContent()
 	ui->twilightMapWidget->setOverlayMode(ObjectVisibilityMapWidget::TwilightLimitsOverlay);
 	ui->twilightMapWidget->setMarkerVisible(true);
 	ui->twilightMapWidget->setMap(QPixmap(":/graphicGui/miscWorldMap.jpg"));
+	ui->liveTwilightMapWidget->setOverlayMode(ObjectVisibilityMapWidget::LiveTwilightMapOverlay);
+	ui->liveTwilightMapWidget->setMarkerVisible(true);
+	ui->liveTwilightMapWidget->setMap(QPixmap(":/graphicGui/miscWorldMap.jpg"));
 	configurePlaceLabelControls();
 
 	// Buttons.
@@ -124,28 +135,51 @@ void ObjectVisibilityDialog::createDialogContent()
 	        this, &ObjectVisibilityDialog::onSetLocationByClickToggled);
 	connect(ui->twilightSetLocationByClickCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onTwilightSetLocationByClickToggled);
+	connect(ui->twilightMapSetLocationByClickCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onLiveTwilightSetLocationByClickToggled);
 	connect(ui->resetSettingsPushButton, &QPushButton::clicked,
 	        this, &ObjectVisibilityDialog::onResetSettings);
 	connect(ui->placeLabelsCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onPlaceLabelsToggled);
 	connect(ui->twilightPlaceLabelsCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onTwilightPlaceLabelsToggled);
+	connect(ui->twilightMapPlaceLabelsCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onLiveTwilightPlaceLabelsToggled);
 	connect(ui->placeLabelsPopulationComboBox,
 	        QOverload<int>::of(&QComboBox::currentIndexChanged),
 	        this, &ObjectVisibilityDialog::onPlaceLabelsPopulationChanged);
 	connect(ui->twilightPlaceLabelsPopulationComboBox,
 	        QOverload<int>::of(&QComboBox::currentIndexChanged),
 	        this, &ObjectVisibilityDialog::onTwilightPlaceLabelsPopulationChanged);
+	connect(ui->twilightMapPlaceLabelsPopulationComboBox,
+	        QOverload<int>::of(&QComboBox::currentIndexChanged),
+	        this, &ObjectVisibilityDialog::onLiveTwilightPlaceLabelsPopulationChanged);
 	connect(ui->placeLabelsNearLinesOnlyCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onPlaceLabelsNearLinesOnlyToggled);
 	connect(ui->twilightPlaceLabelsNearLinesOnlyCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onTwilightPlaceLabelsNearLinesOnlyToggled);
+	connect(ui->twilightMapPlaceLabelsNearLinesOnlyCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onLiveTwilightPlaceLabelsNearLinesOnlyToggled);
+	connect(ui->syncMapsCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onSyncMapsToggled);
+	connect(ui->twilightSyncMapsCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onSyncMapsToggled);
+	connect(ui->twilightMapSyncMapsCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onSyncMapsToggled);
 
 	// Map clicks while in "set location" mode.
 	connect(ui->mapWidget, &ObjectVisibilityMapWidget::locationPicked,
 	        this, &ObjectVisibilityDialog::onLocationPicked);
 	connect(ui->twilightMapWidget, &ObjectVisibilityMapWidget::locationPicked,
 	        this, &ObjectVisibilityDialog::onLocationPicked);
+	connect(ui->liveTwilightMapWidget, &ObjectVisibilityMapWidget::locationPicked,
+	        this, &ObjectVisibilityDialog::onLocationPicked);
+	connect(ui->mapWidget, &MapWidget::mapViewChanged,
+	        this, &ObjectVisibilityDialog::onMapViewChanged);
+	connect(ui->twilightMapWidget, &MapWidget::mapViewChanged,
+	        this, &ObjectVisibilityDialog::onMapViewChanged);
+	connect(ui->liveTwilightMapWidget, &MapWidget::mapViewChanged,
+	        this, &ObjectVisibilityDialog::onMapViewChanged);
 
 	// Track Stellarium's selection so we can enable/disable Calculate
 	// and update the prompt label.  The signal carries a
@@ -167,11 +201,20 @@ void ObjectVisibilityDialog::createDialogContent()
 	        this, &ObjectVisibilityDialog::syncMarkerToObserver);
 	connect(core, &StelCore::dateChanged,
 	        this, &ObjectVisibilityDialog::refreshTwilightLimits);
+	connect(core, &StelCore::dateChanged,
+	        this, &ObjectVisibilityDialog::refreshTwilightMap);
+	twilightMapTimer = new QTimer(this);
+	twilightMapTimer->setInterval(250);
+	connect(twilightMapTimer, &QTimer::timeout,
+	        this, &ObjectVisibilityDialog::refreshTwilightMap);
+	twilightMapTimer->start();
 	syncMarkerToObserver();
 
 	setAboutHtml();
 	refreshTitleLabel();
 	refreshTwilightLimits();
+	refreshTwilightMap();
+	syncMapControls();
 	updatePlaceLabels();
 	updateCalculateButtonEnabled();
 }
@@ -282,6 +325,13 @@ void ObjectVisibilityDialog::onSetLocationByClickToggled(bool on)
 		ui->twilightSetLocationByClickCheckBox->setChecked(on);
 		ui->twilightMapWidget->setClickSetsLocationMode(on);
 	}
+
+	if (ui->twilightMapSetLocationByClickCheckBox->isEnabled())
+	{
+		QSignalBlocker blocker(ui->twilightMapSetLocationByClickCheckBox);
+		ui->twilightMapSetLocationByClickCheckBox->setChecked(on);
+		ui->liveTwilightMapWidget->setClickSetsLocationMode(on);
+	}
 }
 
 void ObjectVisibilityDialog::onTwilightSetLocationByClickToggled(bool on)
@@ -299,6 +349,30 @@ void ObjectVisibilityDialog::onTwilightSetLocationByClickToggled(bool on)
 	}
 
 	ui->twilightMapWidget->setClickSetsLocationMode(on);
+	if (ui->twilightMapSetLocationByClickCheckBox->isEnabled())
+	{
+		QSignalBlocker blocker(ui->twilightMapSetLocationByClickCheckBox);
+		ui->twilightMapSetLocationByClickCheckBox->setChecked(on);
+		ui->liveTwilightMapWidget->setClickSetsLocationMode(on);
+	}
+
+	{
+		QSignalBlocker blocker(ui->setLocationByClickCheckBox);
+		ui->setLocationByClickCheckBox->setChecked(on);
+	}
+	ui->mapWidget->setClickSetsLocationMode(on);
+}
+
+void ObjectVisibilityDialog::onLiveTwilightSetLocationByClickToggled(bool on)
+{
+	ui->liveTwilightMapWidget->setClickSetsLocationMode(on);
+
+	if (ui->twilightSetLocationByClickCheckBox->isEnabled())
+	{
+		QSignalBlocker blocker(ui->twilightSetLocationByClickCheckBox);
+		ui->twilightSetLocationByClickCheckBox->setChecked(on);
+		ui->twilightMapWidget->setClickSetsLocationMode(on);
+	}
 
 	{
 		QSignalBlocker blocker(ui->setLocationByClickCheckBox);
@@ -333,6 +407,7 @@ void ObjectVisibilityDialog::onLocationPicked(double longitude,
 	// after the (async) move completes, which would feel laggy.
 	ui->mapWidget->setMarkerPos(longitude, latitude);
 	ui->twilightMapWidget->setMarkerPos(longitude, latitude);
+	ui->liveTwilightMapWidget->setMarkerPos(longitude, latitude);
 }
 
 void ObjectVisibilityDialog::onResetSettings()
@@ -344,11 +419,19 @@ void ObjectVisibilityDialog::onResetSettings()
 	const int g = plugin->getGoodVisibilityLimit();
 	ui->goodVisibilityLimitSpinBox->setValue(g);
 	ui->mapWidget->setGoodVisibilityAltitude(g);
+	placeLabelsVisible = plugin->getPlaceLabelsVisible();
+	placeLabelsMinimumPopulation = plugin->getPlaceLabelsMinimumPopulation();
+	placeLabelsNearLinesOnly = plugin->getPlaceLabelsNearLinesOnly();
+	syncMaps = plugin->getSyncMaps();
+	syncPlaceLabelControls();
+	syncMapControls();
+	updatePlaceLabels();
 }
 
 void ObjectVisibilityDialog::onPlaceLabelsToggled(bool on)
 {
 	placeLabelsVisible = on;
+	plugin->setPlaceLabelsVisible(on);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -356,6 +439,15 @@ void ObjectVisibilityDialog::onPlaceLabelsToggled(bool on)
 void ObjectVisibilityDialog::onTwilightPlaceLabelsToggled(bool on)
 {
 	placeLabelsVisible = on;
+	plugin->setPlaceLabelsVisible(on);
+	syncPlaceLabelControls();
+	updatePlaceLabels();
+}
+
+void ObjectVisibilityDialog::onLiveTwilightPlaceLabelsToggled(bool on)
+{
+	placeLabelsVisible = on;
+	plugin->setPlaceLabelsVisible(on);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -365,6 +457,7 @@ void ObjectVisibilityDialog::onPlaceLabelsPopulationChanged(int index)
 	const QVariant value = ui->placeLabelsPopulationComboBox->itemData(index);
 	if (!value.isValid()) return;
 	placeLabelsMinimumPopulation = value.toInt();
+	plugin->setPlaceLabelsMinimumPopulation(placeLabelsMinimumPopulation);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -374,6 +467,17 @@ void ObjectVisibilityDialog::onTwilightPlaceLabelsPopulationChanged(int index)
 	const QVariant value = ui->twilightPlaceLabelsPopulationComboBox->itemData(index);
 	if (!value.isValid()) return;
 	placeLabelsMinimumPopulation = value.toInt();
+	plugin->setPlaceLabelsMinimumPopulation(placeLabelsMinimumPopulation);
+	syncPlaceLabelControls();
+	updatePlaceLabels();
+}
+
+void ObjectVisibilityDialog::onLiveTwilightPlaceLabelsPopulationChanged(int index)
+{
+	const QVariant value = ui->twilightMapPlaceLabelsPopulationComboBox->itemData(index);
+	if (!value.isValid()) return;
+	placeLabelsMinimumPopulation = value.toInt();
+	plugin->setPlaceLabelsMinimumPopulation(placeLabelsMinimumPopulation);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -381,6 +485,7 @@ void ObjectVisibilityDialog::onTwilightPlaceLabelsPopulationChanged(int index)
 void ObjectVisibilityDialog::onPlaceLabelsNearLinesOnlyToggled(bool on)
 {
 	placeLabelsNearLinesOnly = on;
+	plugin->setPlaceLabelsNearLinesOnly(on);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
 }
@@ -388,8 +493,71 @@ void ObjectVisibilityDialog::onPlaceLabelsNearLinesOnlyToggled(bool on)
 void ObjectVisibilityDialog::onTwilightPlaceLabelsNearLinesOnlyToggled(bool on)
 {
 	placeLabelsNearLinesOnly = on;
+	plugin->setPlaceLabelsNearLinesOnly(on);
 	syncPlaceLabelControls();
 	updatePlaceLabels();
+}
+
+void ObjectVisibilityDialog::onLiveTwilightPlaceLabelsNearLinesOnlyToggled(bool on)
+{
+	placeLabelsNearLinesOnly = on;
+	plugin->setPlaceLabelsNearLinesOnly(on);
+	syncPlaceLabelControls();
+	updatePlaceLabels();
+}
+
+void ObjectVisibilityDialog::onSyncMapsToggled(bool on)
+{
+	syncMaps = on;
+	plugin->setSyncMaps(on);
+	syncMapControls();
+	if (!syncMaps) return;
+
+	ObjectVisibilityMapWidget* source = ui->mapWidget;
+	if (sender() == ui->twilightSyncMapsCheckBox)
+		source = ui->twilightMapWidget;
+	else if (sender() == ui->twilightMapSyncMapsCheckBox)
+		source = ui->liveTwilightMapWidget;
+
+	double centerLongitude = 0.0;
+	double centerLatitude = 0.0;
+	double zoom = 1.0;
+	source->getMapView(centerLongitude, centerLatitude, zoom);
+
+	applyingMapSync = true;
+	auto applyTo = [source, centerLongitude, centerLatitude, zoom]
+	               (ObjectVisibilityMapWidget* map)
+	{
+		if (map && map != source)
+			map->setMapView(centerLongitude, centerLatitude, zoom);
+	};
+	applyTo(ui->mapWidget);
+	applyTo(ui->twilightMapWidget);
+	applyTo(ui->liveTwilightMapWidget);
+	applyingMapSync = false;
+}
+
+void ObjectVisibilityDialog::onMapViewChanged(double centerLongitude,
+                                              double centerLatitude,
+                                              double zoom)
+{
+	if (!syncMaps || applyingMapSync) return;
+
+	ObjectVisibilityMapWidget* source =
+		qobject_cast<ObjectVisibilityMapWidget*>(sender());
+	if (!source) return;
+
+	applyingMapSync = true;
+	auto applyTo = [source, centerLongitude, centerLatitude, zoom]
+	               (ObjectVisibilityMapWidget* map)
+	{
+		if (map && map != source)
+			map->setMapView(centerLongitude, centerLatitude, zoom);
+	};
+	applyTo(ui->mapWidget);
+	applyTo(ui->twilightMapWidget);
+	applyTo(ui->liveTwilightMapWidget);
+	applyingMapSync = false;
 }
 
 void ObjectVisibilityDialog::syncMarkerToObserver()
@@ -427,7 +595,10 @@ void ObjectVisibilityDialog::syncMarkerToObserver()
 			}
 		}
 		if (!pixmap.isNull())
+		{
 			ui->mapWidget->setMap(pixmap);
+			ui->liveTwilightMapWidget->setMap(pixmap);
+		}
 		cachedPlanetName = loc.planetName;
 	}
 
@@ -441,12 +612,15 @@ void ObjectVisibilityDialog::syncMarkerToObserver()
 	                            static_cast<double>(lat));
 	ui->twilightMapWidget->setMarkerPos(static_cast<double>(lon),
 	                                    static_cast<double>(lat));
+	ui->liveTwilightMapWidget->setMarkerPos(static_cast<double>(lon),
+	                                        static_cast<double>(lat));
 
 	// (3) Refresh the Calculate-enabled state and title label, since
 	// both depend on whether the current planet is supported.
 	updateCalculateButtonEnabled();
 	refreshTitleLabel();
 	refreshTwilightLimits();
+	refreshTwilightMap();
 	updatePlaceLabels();
 }
 
@@ -508,10 +682,81 @@ void ObjectVisibilityDialog::refreshTwilightLimits()
 		.arg(obliquityDeg, 0, 'f', 2));
 }
 
+void ObjectVisibilityDialog::refreshTwilightMap()
+{
+	if (!ui || !ui->liveTwilightMapWidget) return;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	if (!core) return;
+
+	const StelLocation loc = core->getCurrentLocation();
+	const QString planet = loc.planetName;
+	const bool earth = planet == QStringLiteral("Earth");
+
+	const double jd = core->getJD();
+	if (lastTwilightMapJd > 0.0 &&
+	    planet == twilightMapCachedPlanet &&
+	    std::abs(jd - lastTwilightMapJd) < 0.20 / 86400.0)
+		return;
+	lastTwilightMapJd = jd;
+	twilightMapCachedPlanet = planet;
+
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+	PlanetP sun = ssm ? ssm->getSun() : PlanetP();
+	PlanetP moon = ssm ? ssm->getMoon() : PlanetP();
+	if (!sun || (earth && !moon))
+	{
+		ui->liveTwilightMapWidget->clearTwilightMap();
+		ui->liveTwilightMapWidget->setMarkerVisible(false);
+		ui->liveTwilightMapWidget->setClickSetsLocationMode(false);
+		ui->twilightMapSetLocationByClickCheckBox->setEnabled(false);
+		ui->twilightMapTitleLabel->setText(
+			q_("Twilight Map is unavailable."));
+		return;
+	}
+
+	ui->liveTwilightMapWidget->setMarkerVisible(true);
+	ui->twilightMapSetLocationByClickCheckBox->setEnabled(true);
+	ui->twilightMapSetLocationByClickCheckBox->setToolTip(
+		q_("Enable to move the observer by clicking on the map. "
+		   "Stays active until you uncheck it."));
+	ui->liveTwilightMapWidget->setTwilightMapFullTwilight(earth);
+	if (earth)
+		ui->twilightMapTitleLabel->setText(q_("Twilight Map on Earth"));
+	else
+		ui->twilightMapTitleLabel->setText(
+			QString(q_("Solar terminator on %1"))
+			.arg(q_(planet.toUtf8().constData())));
+
+	const double primeMeridianSiderealDeg =
+		core->getLocalSiderealTime() * 180.0 / M_PI -
+		static_cast<double>(loc.getLongitude(true));
+
+	auto subPoint = [core, primeMeridianSiderealDeg](const PlanetP& body)
+	{
+		double ra = 0.0;
+		double dec = 0.0;
+		StelUtils::rectToSphe(&ra, &dec,
+		                      body->getEquinoxEquatorialPos(core));
+		double lon = StelUtils::fmodpos(ra * 180.0 / M_PI -
+		                                primeMeridianSiderealDeg, 360.0);
+		if (lon > 180.0)
+			lon -= 360.0;
+		return QPair<double, double>(lon, dec * 180.0 / M_PI);
+	};
+
+	const QPair<double, double> sunPoint = subPoint(sun);
+	const QPair<double, double> moonPoint = moon ? subPoint(moon) : sunPoint;
+	ui->liveTwilightMapWidget->setTwilightMapData(
+		sunPoint.first, sunPoint.second,
+		moonPoint.first, moonPoint.second);
+}
+
 void ObjectVisibilityDialog::configurePlaceLabelControls()
 {
 	QSignalBlocker b1(ui->placeLabelsPopulationComboBox);
 	QSignalBlocker b2(ui->twilightPlaceLabelsPopulationComboBox);
+	QSignalBlocker b3(ui->twilightMapPlaceLabelsPopulationComboBox);
 
 	auto configureCombo = [](QComboBox* combo)
 	{
@@ -524,6 +769,7 @@ void ObjectVisibilityDialog::configurePlaceLabelControls()
 
 	configureCombo(ui->placeLabelsPopulationComboBox);
 	configureCombo(ui->twilightPlaceLabelsPopulationComboBox);
+	configureCombo(ui->twilightMapPlaceLabelsPopulationComboBox);
 	syncPlaceLabelControls();
 }
 
@@ -531,15 +777,20 @@ void ObjectVisibilityDialog::syncPlaceLabelControls()
 {
 	QSignalBlocker b1(ui->placeLabelsCheckBox);
 	QSignalBlocker b2(ui->twilightPlaceLabelsCheckBox);
-	QSignalBlocker b3(ui->placeLabelsPopulationComboBox);
-	QSignalBlocker b4(ui->twilightPlaceLabelsPopulationComboBox);
-	QSignalBlocker b5(ui->placeLabelsNearLinesOnlyCheckBox);
-	QSignalBlocker b6(ui->twilightPlaceLabelsNearLinesOnlyCheckBox);
+	QSignalBlocker b3(ui->twilightMapPlaceLabelsCheckBox);
+	QSignalBlocker b4(ui->placeLabelsPopulationComboBox);
+	QSignalBlocker b5(ui->twilightPlaceLabelsPopulationComboBox);
+	QSignalBlocker b6(ui->twilightMapPlaceLabelsPopulationComboBox);
+	QSignalBlocker b7(ui->placeLabelsNearLinesOnlyCheckBox);
+	QSignalBlocker b8(ui->twilightPlaceLabelsNearLinesOnlyCheckBox);
+	QSignalBlocker b9(ui->twilightMapPlaceLabelsNearLinesOnlyCheckBox);
 
 	ui->placeLabelsCheckBox->setChecked(placeLabelsVisible);
 	ui->twilightPlaceLabelsCheckBox->setChecked(placeLabelsVisible);
+	ui->twilightMapPlaceLabelsCheckBox->setChecked(placeLabelsVisible);
 	ui->placeLabelsNearLinesOnlyCheckBox->setChecked(placeLabelsNearLinesOnly);
 	ui->twilightPlaceLabelsNearLinesOnlyCheckBox->setChecked(placeLabelsNearLinesOnly);
+	ui->twilightMapPlaceLabelsNearLinesOnlyCheckBox->setChecked(placeLabelsNearLinesOnly);
 
 	auto selectPopulation = [this](QComboBox* combo)
 	{
@@ -549,40 +800,53 @@ void ObjectVisibilityDialog::syncPlaceLabelControls()
 	};
 	selectPopulation(ui->placeLabelsPopulationComboBox);
 	selectPopulation(ui->twilightPlaceLabelsPopulationComboBox);
+	selectPopulation(ui->twilightMapPlaceLabelsPopulationComboBox);
+}
+
+void ObjectVisibilityDialog::syncMapControls()
+{
+	if (!ui) return;
+	QSignalBlocker b1(ui->syncMapsCheckBox);
+	QSignalBlocker b2(ui->twilightSyncMapsCheckBox);
+	QSignalBlocker b3(ui->twilightMapSyncMapsCheckBox);
+	ui->syncMapsCheckBox->setChecked(syncMaps);
+	ui->twilightSyncMapsCheckBox->setChecked(syncMaps);
+	ui->twilightMapSyncMapsCheckBox->setChecked(syncMaps);
 }
 
 void ObjectVisibilityDialog::updatePlaceLabels()
 {
-	if (!ui || !ui->mapWidget || !ui->twilightMapWidget) return;
+	if (!ui || !ui->mapWidget || !ui->twilightMapWidget ||
+	    !ui->liveTwilightMapWidget) return;
 
 	StelCore* core = StelApp::getInstance().getCore();
 	const bool earth = core &&
 	                   core->getCurrentLocation().planetName == QStringLiteral("Earth");
 
 	auto setControlsEnabled = [earth](QCheckBox* showCheckBox,
-	                                  QLabel* populationLabel,
 	                                  QComboBox* populationComboBox,
 	                                  QCheckBox* nearLinesOnlyCheckBox)
 	{
 		showCheckBox->setEnabled(earth);
-		populationLabel->setEnabled(earth);
 		populationComboBox->setEnabled(earth);
 		nearLinesOnlyCheckBox->setEnabled(earth);
 	};
 
 	setControlsEnabled(ui->placeLabelsCheckBox,
-	                   ui->placeLabelsPopulationLabel,
 	                   ui->placeLabelsPopulationComboBox,
 	                   ui->placeLabelsNearLinesOnlyCheckBox);
 	setControlsEnabled(ui->twilightPlaceLabelsCheckBox,
-	                   ui->twilightPlaceLabelsPopulationLabel,
 	                   ui->twilightPlaceLabelsPopulationComboBox,
 	                   ui->twilightPlaceLabelsNearLinesOnlyCheckBox);
+	setControlsEnabled(ui->twilightMapPlaceLabelsCheckBox,
+	                   ui->twilightMapPlaceLabelsPopulationComboBox,
+	                   ui->twilightMapPlaceLabelsNearLinesOnlyCheckBox);
 
 	if (!earth || !placeLabelsVisible)
 	{
 		ui->mapWidget->setPlaceLabelsVisible(false);
 		ui->twilightMapWidget->setPlaceLabelsVisible(false);
+		ui->liveTwilightMapWidget->setPlaceLabelsVisible(false);
 		return;
 	}
 
@@ -605,12 +869,16 @@ void ObjectVisibilityDialog::updatePlaceLabels()
 
 	ui->mapWidget->setPlaceLabels(labels);
 	ui->twilightMapWidget->setPlaceLabels(labels);
+	ui->liveTwilightMapWidget->setPlaceLabels(labels);
 	ui->mapWidget->setPlaceLabelMinimumPopulation(placeLabelsMinimumPopulation);
 	ui->twilightMapWidget->setPlaceLabelMinimumPopulation(placeLabelsMinimumPopulation);
+	ui->liveTwilightMapWidget->setPlaceLabelMinimumPopulation(placeLabelsMinimumPopulation);
 	ui->mapWidget->setPlaceLabelsNearLinesOnly(placeLabelsNearLinesOnly);
 	ui->twilightMapWidget->setPlaceLabelsNearLinesOnly(placeLabelsNearLinesOnly);
+	ui->liveTwilightMapWidget->setPlaceLabelsNearLinesOnly(placeLabelsNearLinesOnly);
 	ui->mapWidget->setPlaceLabelsVisible(true);
 	ui->twilightMapWidget->setPlaceLabelsVisible(true);
+	ui->liveTwilightMapWidget->setPlaceLabelsVisible(true);
 }
 
 bool ObjectVisibilityDialog::isSupportedPlanet(const QString& englishName)
@@ -825,6 +1093,23 @@ void ObjectVisibilityDialog::setAboutHtml()
 	                   "shown for other observing bodies because civil, "
 	                   "nautical, and astronomical twilight depend on Earth's "
 	                   "atmosphere.")
+	        + "</p>";
+
+	html += "<p>" + q_("The Twilight Map tab follows the planetarium time. "
+	                   "On Earth it shades the current day, civil twilight, "
+	                   "nautical twilight, astronomical twilight, and night "
+	                   "zones, and marks the Sun and Moon zenith points.  On "
+	                   "other observing bodies it shows the solar terminator "
+	                   "from the Sun's centre, shades the night side, and "
+	                   "marks the Sun zenith point.")
+	        + "</p>";
+	html += "<p>" + q_("For Earth sunrise and sunset, the horizon line uses "
+	                   "the usual apparent upper-limb approximation: the "
+	                   "Sun's centre is about 50 arcminutes below the "
+	                   "geometric horizon, allowing for the solar radius and "
+	                   "standard atmospheric refraction.  The -6&deg;, "
+	                   "-12&deg;, and -18&deg; twilight boundaries use the "
+	                   "Sun's centre.")
 	        + "</p>";
 
 	html += "<h3>" + q_("Credits") + "</h3>";

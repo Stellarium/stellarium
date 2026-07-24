@@ -23,6 +23,10 @@
 
 #include "MapWidget.hpp"
 
+#include <QColor>
+#include <QImage>
+#include <QPointF>
+#include <QSize>
 #include <QString>
 #include <QVector>
 
@@ -55,7 +59,8 @@ public:
 	enum OverlayMode
 	{
 		VisibilityOverlay,
-		TwilightLimitsOverlay
+		TwilightLimitsOverlay,
+		LiveTwilightMapOverlay
 	};
 
 	void setOverlayMode(OverlayMode mode);
@@ -100,6 +105,18 @@ public:
 	//! Hide all twilight/solstice limit lines.
 	void clearTwilightLimits();
 
+	//! Set the current subsolar and sublunar points on Earth.
+	//! Longitudes and latitudes are in geographic degrees.
+	void setTwilightMapData(double sunLongitudeDeg, double sunLatitudeDeg,
+	                        double moonLongitudeDeg, double moonLatitudeDeg);
+
+	//! Enable full Earth twilight zones. Disable this for atmosphere-free
+	//! terminator-only maps on other bodies.
+	void setTwilightMapFullTwilight(bool enabled);
+
+	//! Hide all live twilight map shading and symbols.
+	void clearTwilightMap();
+
 signals:
 	//! Forwarded to the dialog when the user clicked on the map and we
 	//! were in click-to-set mode.  Mirrors MapWidget::positionChanged.
@@ -120,7 +137,22 @@ private:
 	                         const QChar& marker, const QColor& color) const;
 	void drawVisibilityOverlay(QPainter& painter) const;
 	void drawTwilightLimitsOverlay(QPainter& painter) const;
+	void drawTwilightMapOverlay(QPainter& painter);
+	void drawMapImageCopies(QPainter& painter, const QImage& image,
+	                        double opacity = 1.0) const;
+	void drawTwilightContour(QPainter& painter, double altitudeDeg,
+	                         const QPen& pen) const;
+	void drawSubPointSymbol(QPainter& painter, double longitudeDeg,
+	                        double latitudeDeg, bool sun) const;
 	void drawPlaceLabels(QPainter& painter) const;
+	QSize twilightShadeImageSizeForCurrentView() const;
+	void rebuildTwilightShadeLookups(int imageWidth, int imageHeight);
+	void rebuildTwilightMapCache(int imageWidth, int imageHeight);
+	double twilightHorizonAltitudeDeg() const;
+	double sunAltitudeDegAt(double longitudeDeg, double latitudeDeg) const;
+	bool isPlaceLabelNearOverlay(const PlaceLabel& label,
+	                             double toleranceDeg,
+	                             const QVector<double>& lineLatitudes) const;
 	QVector<double> currentOverlayLatitudes() const;
 
 	OverlayMode currentOverlayMode = VisibilityOverlay;
@@ -132,6 +164,19 @@ private:
 
 	bool   hasTwilightObliquity = false;
 	double twilightObliquityDeg = 0.0;
+
+	bool   hasTwilightMap = false;
+	double twilightSunLongitudeDeg = 0.0;
+	double twilightSunLatitudeDeg = 0.0;
+	double twilightMoonLongitudeDeg = 0.0;
+	double twilightMoonLatitudeDeg = 0.0;
+	bool   twilightMapFullTwilight = true;
+	QImage twilightShadeImage;
+	QSize twilightShadeLookupSize;
+	QVector<double> twilightShadeSinLat;
+	QVector<double> twilightShadeCosLat;
+	QVector<double> twilightShadeSinLon;
+	QVector<double> twilightShadeCosLon;
 
 	QVector<PlaceLabel> placeLabels;
 	bool showPlaceLabels = false;
