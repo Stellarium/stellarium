@@ -43,6 +43,8 @@ Q_LOGGING_CATEGORY(Tex,"stel.Texture", QtInfoMsg)
 
 // Let's try to keep 120 FPS even if textures are loaded every frame
 // (60 FPS if all the other computations take the same time per frame).
+// When many textures are pending upload, this budget is dynamically increased
+// so that planet textures (and others) become visible sooner after zooming in.
 constexpr double MAX_LOAD_NANOSEC_PER_FRAME = 1e9 / 120;
 
 QPointer<StelTextureMgr> StelTexture::textureMgr;
@@ -60,6 +62,13 @@ StelTexture::~StelTexture()
 	// manager has been deleted, because at this point we are shutting
 	// down, and the OpenGL context may have also been deleted.
 	if (!textureMgr) return;
+
+	// Decrement pending upload count if this texture was awaiting GL upload
+	if (uploadPending)
+	{
+		uploadPending = false;
+		textureMgr->pendingUploadCount--;
+	}
 
 	if (id != 0)
 	{
@@ -220,10 +229,22 @@ bool StelTexture::bind(uint slot)
 
 	if(load())
 	{
-		// Take advantage of time given by the desired frame rate (which may be lower than maximum),
-		// but don't give up too much if it's very high.
+		// Track this texture as pending GL upload
+		if (!uploadPending)
+		{
+			uploadPending = true;
+			textureMgr->pendingUploadCount++;
+		}
+
+		// Dynamically scale the per-frame GL upload budget based on how many
+		// textures are waiting. When zooming into a planet, several textures
+		// (surface, rings, moons) may finish decoding simultaneously. Without
+		// scaling, the fixed ~8.3ms budget spreads their upload across many
+		// frames, causing the planet to remain invisible for several seconds.
+		const int pending = textureMgr->getPendingUploadCount();
+		const double scaleFactor = 1.0 + std::min(pending * 0.5, 4.0); // up to 5x budget
 		const double maxTimeNS = std::max(1e9 / (2 * StelMainView::getInstance().getDesiredFps()),
-		                                  MAX_LOAD_NANOSEC_PER_FRAME);
+		                                  MAX_LOAD_NANOSEC_PER_FRAME) * scaleFactor;
 		if(textureMgr->getTotalLoadTimeTaken() > maxTimeNS)
 			return false;
 		gl = QOpenGLContext::currentContext()->functions();
@@ -234,6 +255,11 @@ bool StelTexture::bind(uint slot)
 		delete loader;
 		loader = Q_NULLPTR;
 		textureMgr->reportTextureLoadEnd();
+		if (uploadPending)
+		{
+			uploadPending = false;
+			textureMgr->pendingUploadCount--;
+		}
 		if (id != 0)
 		{
 			// The texture is already fully loaded, just bind and return true;

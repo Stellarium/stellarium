@@ -78,6 +78,9 @@ private:
 	void reportTextureLoadEnd();
 	//! Get total time taken by texture loads during current frame, in nanoseconds
 	quint64 getTotalLoadTimeTaken() const { return totalLoadTimeTaken; }
+	//! Get the number of textures that have finished decoding but are waiting for GL upload.
+	//! Used to dynamically scale the per-frame GL upload time budget.
+	int getPendingUploadCount() const { return pendingUploadCount; }
 
 private:
 	friend class StelTexture;
@@ -89,6 +92,7 @@ private:
 
 	QElapsedTimer textureLoadTimer;
 	quint64 totalLoadTimeTaken = 0; //!< Total time taken by texture loads during current frame
+	int pendingUploadCount = 0; //!< Number of textures decoded but not yet uploaded to GL
 
 	unsigned int glMemoryUsage;
 
