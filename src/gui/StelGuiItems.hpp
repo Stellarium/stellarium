@@ -47,7 +47,7 @@ private:
 	QMap<const StelProgressController*, QProgressBar*> allBars;
 };
 
-// Buttons in the bottom left corner
+// Auto-hide buttons placed in the active toolbar corner
 class CornerButtons : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
@@ -218,6 +218,9 @@ public:
 	QRectF boundingRectNoHelpLabel() const;
 	//! Set the color for all the sub elements
 	void setColor(const QColor& c);
+	//! Set whether the bar is at the right edge of the screen.
+	//! This is used to decide whether the help label is displayed to the left or right of the buttons.
+	void setBarAtRight(bool b) { barAtRight = b; }
 private slots:
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
@@ -230,6 +233,7 @@ private slots:
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
+	bool barAtRight = false;
 };
 
 // The button bar on the bottom containing actions toggle buttons
@@ -290,6 +294,13 @@ public:
 	//! @return height of vertical gap (pixels)
 	int getGap() const {return gap;}
 
+	//! Set whether the toolbar is at the top or the bottom of the screen.
+	//! This is used to decide whether the buttons are above or below the text row.
+	void setBarAtTop(bool b);
+	//! Get whether the toolbar is at the top or the bottom of the screen.
+	//! This is used to decide whether the buttons are above or below the text row.
+	bool getBarAtTop() const { return barAtTop; }
+
 	//! enable connection to StelCore::flagUseTopocentricCoordinatesChanged()
 	//! Recommended in operations that temporarily switch off and back on.
 	void enableTopoCentricUpdate(bool enable);
@@ -349,6 +360,7 @@ private:
 	bool flagFovDms;
 	bool flagTimeJd;
 	bool flagShowTZ;
+	bool barAtTop;
 	// Store these names. They can potentially be changed each frame, but lookup from SolarSystem is very costly.
 	QString planetNameEnglish;
 	QString planetNameI18n;
@@ -363,7 +375,7 @@ class StelBarsFrame : public QGraphicsPathItem
 	public:
 		StelBarsFrame(QGraphicsItem* parent);
 		//! defines a line around the two button bars
-		void updatePath(BottomStelBar* bottom, LeftStelBar* left);
+		void updatePath(BottomStelBar* bottom, LeftStelBar* left, bool barOnTop, bool barOnRight);
 		//! return radius of corner arc
 		double getRoundSize() const {return roundSize;}
 		void setBackgroundOpacity(double opacity);

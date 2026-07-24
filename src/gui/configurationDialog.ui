@@ -2713,6 +2713,24 @@
                </item>
               </layout>
              </item>
+             <item row="11" column="3">
+              <layout class="QHBoxLayout" name="horizontalLayout_toolbarCorner">
+               <item>
+                <widget class="QLabel" name="labelToolbarCorner">
+                 <property name="text">
+                  <string>Toolbar location:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="toolbarCornerComboBox">
+                 <property name="toolTip">
+                  <string>Corner of the screen where both toolbar bars are docked</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
              <item row="11" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_11">
                <item>

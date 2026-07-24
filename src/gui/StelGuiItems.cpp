@@ -490,7 +490,15 @@ void LeftStelBar::buttonHoverChanged(bool b)
 				tip += "  [" + shortcut + "]";
 			}
 			helpLabel->setText(tip);
-			helpLabel->setPos(qRound(boundingRectNoHelpLabel().width()+15.5),qRound(button->pos().y()+button->getButtonPixmapHeight()/2-8));
+			const qreal labelY = qRound(button->pos().y()+button->getButtonPixmapHeight()/2-8);
+			if (barAtRight)
+			{
+				helpLabel->setPos(-helpLabel->boundingRect().width()-15.5, labelY);
+			}
+			else
+			{
+				helpLabel->setPos(qRound(boundingRectNoHelpLabel().width()+15.5), labelY);
+			}
 		}
 	}
 	else
@@ -587,6 +595,16 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	setFlagTimeJd(confSettings->value("gui/flag_time_jd", false).toBool());
 	setFlagFovDms(confSettings->value("gui/flag_fov_dms", false).toBool());
 	setFlagShowTz(confSettings->value("gui/flag_show_tz", true).toBool());
+	barAtTop = false;
+}
+
+void BottomStelBar::setBarAtTop(bool b)
+{
+	if (barAtTop != b)
+	{
+		barAtTop = b;
+		updateButtonsGroups();
+	}
 }
 
 //! connect from StelApp to resize fonts on the fly.
@@ -762,7 +780,9 @@ void BottomStelBar::updateButtonsGroups()
 {
 	double x = 0;
 	QFontMetrics statusFM(datetime->font());
-	const double y = statusFM.lineSpacing()+gap; // Take natural font geometry into account
+	// When bar is at top: buttons come first (y=0), text below them.
+	// When bar is at bottom: text comes first (y=0), buttons below it.
+	const double y = barAtTop ? 0. : (statusFM.lineSpacing() + gap);
 	for (auto& group : buttonGroups)
 	{
 		QList<StelButton*>& buttons = group.elems;
@@ -1046,16 +1066,19 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 		int fpsShift     = qMax(fontMetrics.boundingRect(fps->text()+"MMM").width(), fontMetrics.boundingRect(qc_("FPS", "abbreviation")+"MM.M MMM").width());
 		int fovShift     = fontMetrics.boundingRect(fov->text()+"MMM").width() + fpsShift;
 		int locationWidth= fontMetrics.boundingRect(location->text() + "MMM").width();
-		location->setPos(0, 0);
+
+		// When the toolbar is at top, the text row should be below the buttons, so it's visible when half of the bar is hidden.
+		const double textY = barAtTop ? (getButtonsBoundingRect().height() + fontMetrics.leading() + gap) : 0.;
+		location->setPos(0, textY);
 
 		QRectF rectCh = getButtonsBoundingRect();
 		int dateTimePos = static_cast<int>(rectCh.right()-datetime->boundingRect().width())-5;
 		if ((dateTimePos%2) == 1) dateTimePos--; // make even pixel
 
 		const int rightPush=qMax(0, locationWidth-(dateTimePos-fovShift));
-		datetime->setPos(dateTimePos+rightPush, 0);
-		fov->setPos(datetime->x()-fovShift, 0);
-		fps->setPos(datetime->x()-fpsShift, 0);
+		datetime->setPos(dateTimePos+rightPush, textY);
+		fov->setPos(datetime->x()-fovShift, textY);
+		fps->setPos(datetime->x()-fpsShift, textY);
 		//emit sizeChanged(); // This causes max fps!
 	}
 }
@@ -1119,7 +1142,9 @@ void BottomStelBar::buttonHoverChanged(bool b)
 			}
 			helpLabel->setText(tip);
 			//helpLabel->setPos(button->pos().x()+button->pixmap().size().width()/2,-27);
-			helpLabel->setPos(20,-10-location->font().pixelSize()); // Set help text XY position. Y adjusted for font size!
+			const double helpY = barAtTop ? (boundingRectNoHelpLabel().height() + 10)
+			                              : (-10 - location->font().pixelSize());
+			helpLabel->setPos(20, helpY);
 		}
 	}
 	else
@@ -1150,22 +1175,62 @@ StelBarsFrame::StelBarsFrame(QGraphicsItem* parent) : QGraphicsPathItem(parent),
 	setPen(aPen);
 }
 
-void StelBarsFrame::updatePath(BottomStelBar* bottom, LeftStelBar* left)
+void StelBarsFrame::updatePath(BottomStelBar* bottom, LeftStelBar* left, bool barOnTop, bool barOnRight)
 {
 	const QPointF l = left->pos() + QPointF(-0.5,0.5);   // pos() is the top-left point in the parent's coordinate system.
 	const QRectF lB = left->boundingRectNoHelpLabel();
 	const QPointF b = bottom->pos() + QPointF(-0.5,0.5);
 	const QRectF bB = bottom->boundingRectNoHelpLabel();
 
-	QPainterPath path(QPointF(l.x()-roundSize, l.y()-roundSize));                                 // top left point
-	//path.lineTo(l.x()+lB.width()-roundSize,l.y()-roundSize);                                    // top edge. Not needed because the arc connects anyhow!
-	path.arcTo(l.x()+lB.width()-roundSize, l.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90); // top-right curve of left bar
-	path.lineTo(l.x()+lB.width()+roundSize, b.y()-roundSize);                                     // vertical to inside sharp edge
-	//path.lineTo(b.x()+bB.width(),b.y()-roundSize);                                              // Top edge of bottom bar. Not needed because the arc connects anyhow!
-	path.arcTo(b.x()+bB.width()-roundSize, b.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90); // top right curved edge of bottom bar (just connects.)
-	path.lineTo(b.x()+bB.width()+roundSize, b.y()+bB.height()+roundSize);
-	path.lineTo(l.x()-roundSize, b.y()+bB.height()+roundSize);                                    // bottom line (outside screen area!)
-	path.closeSubpath();                                                                          // vertical line up left outside screen
+	QPainterPath path;
+
+	if (!barOnTop && !barOnRight)
+	{
+		// Bottom-left corner with frame around top-right edges, open at bottom-left screen corner
+		path = QPainterPath(QPointF(l.x() - roundSize, l.y() - roundSize));
+		path.arcTo(l.x() + lB.width() - roundSize, l.y() - roundSize, 2. * roundSize, 2. * roundSize, 90, -90);
+		path.lineTo(l.x() + lB.width() + roundSize, b.y() - roundSize);
+		path.arcTo(b.x() + bB.width() - roundSize, b.y() - roundSize, 2. * roundSize, 2. * roundSize, 90, -90);
+		path.lineTo(b.x() + bB.width() + roundSize, b.y() + bB.height() + roundSize);
+		path.lineTo(l.x() - roundSize, b.y() + bB.height() + roundSize);
+		path.closeSubpath();
+	}
+	else if (barOnTop && !barOnRight)
+	{
+		// Top-left corner with frame around bottom-right edges, open at top-left screen corner
+		path = QPainterPath(QPointF(l.x() - roundSize, l.y() + lB.height() + roundSize));
+		path.arcTo(l.x() + lB.width() - roundSize, l.y() + lB.height() - roundSize, 2. * roundSize,
+		           2. * roundSize, 270, 90);
+		path.lineTo(l.x() + lB.width() + roundSize, b.y() + bB.height() + roundSize);
+		path.arcTo(b.x() + bB.width() - roundSize, b.y() + bB.height() - roundSize, 2. * roundSize,
+		           2. * roundSize, 270, 90);
+		path.lineTo(b.x() + bB.width() + roundSize, b.y() - roundSize);
+		path.lineTo(l.x() - roundSize, b.y() - roundSize);
+		path.closeSubpath();
+	}
+	else if (!barOnTop && barOnRight)
+	{
+		// Bottom-right corner with frame around top-left edges, open at bottom-right screen corner
+		path = QPainterPath(QPointF(l.x() + lB.width() + roundSize, l.y() - roundSize));
+		path.arcTo(l.x() - roundSize, l.y() - roundSize, 2. * roundSize, 2. * roundSize, 90, 90);
+		path.lineTo(l.x() - roundSize, b.y() - roundSize);
+		path.arcTo(b.x() - roundSize, b.y() - roundSize, 2. * roundSize, 2. * roundSize, 90, 90);
+		path.lineTo(b.x() - roundSize, b.y() + bB.height() + roundSize);
+		path.lineTo(l.x() + lB.width() + roundSize, b.y() + bB.height() + roundSize);
+		path.closeSubpath();
+	}
+	else // barOnTop && barOnRight
+	{
+		// Top-right corner with frame around bottom-left edges, open at top-right screen corner
+		path = QPainterPath(QPointF(l.x() + lB.width() + roundSize, l.y() + lB.height() + roundSize));
+		path.arcTo(l.x() - roundSize, l.y() + lB.height() - roundSize, 2. * roundSize, 2. * roundSize, 270, -90);
+		path.lineTo(l.x() - roundSize, b.y() + bB.height() + roundSize);
+		path.arcTo(b.x() - roundSize, b.y() + bB.height() - roundSize, 2. * roundSize, 2. * roundSize, 270, -90);
+		path.lineTo(b.x() - roundSize, b.y() - roundSize);
+		path.lineTo(l.x() + lB.width() + roundSize, b.y() - roundSize);
+		path.closeSubpath();
+	}
+
 	setPath(path);
 }
 
