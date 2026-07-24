@@ -56,6 +56,7 @@ private slots:
 	void testDeltaTStandardError();
 private:
 	QVariantList genericData;
+	QString de440FilePath;  // (SS) 2025-11-21 Added for JPL Horizons testing
 };
 
 #endif // _TESTDELTAT_HPP
