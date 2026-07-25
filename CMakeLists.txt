@@ -629,7 +629,7 @@ ENDIF()
 
 FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Concurrent Gui Network Widgets Charts Positioning REQUIRED)
 IF(Qt6_FOUND)
-     FIND_PACKAGE(Qt6 REQUIRED COMPONENTS SvgWidgets)
+     FIND_PACKAGE(Qt6 COMPONENTS SvgWidgets REQUIRED)
      # Qt 6.10 split off FooPrivate from Foo.
      # https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.10.0/release-note.md
      # > ad7b94e163a: User projects must now call find_package(Qt6 COMPONENTS FooPrivate) to make use of the Qt6::FooPrivate target.
@@ -638,7 +638,7 @@ IF(Qt6_FOUND)
           FIND_PACKAGE(Qt6 COMPONENTS GuiPrivate REQUIRED)
      ENDIF()
 ELSEIF(Qt5_FOUND)
-     FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Svg)
+     FIND_PACKAGE(Qt5 COMPONENTS Svg REQUIRED)
 ENDIF()
 SET(USE_BUNDLED_QTCOMPRESS 1 CACHE BOOL "Use bundled version of qtcompress")
 
@@ -775,8 +775,7 @@ ENDIF(ENABLE_SCRIPTING)
 
 IF(ENABLE_MEDIA)
      ADD_DEFINITIONS(-DENABLE_MEDIA)
-     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Multimedia REQUIRED)
-     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS MultimediaWidgets REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Multimedia MultimediaWidgets REQUIRED)
 ENDIF()
 
 IF(ENABLE_GPS)
