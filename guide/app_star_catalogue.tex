@@ -93,10 +93,6 @@ The file \file{binary\_orbitparam.cat} (see section~\ref{sec:StarCatalogues:Bina
 
 A given catalogue file models stars for one and only one level (i.e. for
 a fixed number of zones), which is recorded in the header of the file.
-Individual star records do not contain full positional coordinates,
-instead they contain coordinates relative to the central position of the
-zone they occupy. Thus, when parsing star catalogues, it is necessary to
-know about the zone model to be able to extract positional data.
 
 \noindent
 \begin{tabular}{ccrcrl}
@@ -1929,16 +1925,36 @@ plain text format (\ref{tab:StarCatalogues:BinaryOrbitalParameters:file}).
 \label{sec:StarCatalogues:Generating}
 
 This section describes how the \file{stars/hip\_gaia3} catalogues can be
-reproduced from public data (Gaia DR3 and SIMBAD) with the converter tools
-in \file{util/gaiacat/}. Once the input data has been downloaded, the whole
-pipeline runs offline; no network access is needed during generation.
+reproduced from public data (Gaia DR3 and SIMBAD). The pipeline spans two
+repositories:
 
-The level 0--3 workflow is a C++ re-implementation of the
-\texttt{Star\_Catalog\_lv0\_6.ipynb} notebook from Henry Leung's
-\emph{stellarium\_star\_catalogs} repository (University of Toronto,
-GPLv3\footnote{\url{https://github.com/henrysky/stellarium_star_catalogs}}).
-The two Python helper scripts referenced below were derived from the same
-repository and remain under the terms of its GPLv3 license.
+\begin{itemize}
+  \item \textbf{SIMBAD preparation} --- Python scripts from the companion
+        fork\footnote{Fork of \url{https://github.com/henrysky/stellarium_star_catalogs},
+        maintained at \url{https://github.com/SceneryMC/stellarium_star_catalogs}}
+        (GPLv3, by Henry Leung, University of Toronto). These query SIMBAD
+        online, resolve binary systems and cross-match every HIP entry to a
+        Gaia DR3 \texttt{source\_id}. They only prepare the data table
+        \file{hip\_processed\_with\_binary.dat} that \program{hip2cat}
+        consumes; they do \emph{not} produce any catalogue files.
+  \item \textbf{Catalogue generation} --- C++ tools in \file{util/gaiacat/}
+        (this repository) plus the \program{erfa\_zone.py} Python helper
+        that \program{hip2cat} calls for the level~0--2 global-zone analysis.
+        These are pure-offline once the Gaia \file{.bin} files and the
+        SIMBAD table have been prepared. They generate levels~0--3
+        (\program{hip2cat}) and 4--10 (\program{skychart2cat}) respectively.
+\end{itemize}
+
+The two parts also differ in scope:
+the SIMBAD preparation is only needed for levels~0--3 (which require
+Hipparcos cross-identifications); if you only need levels~4--10, the
+companion fork is not required at all.
+
+It is recommended to finish all online data acquisition before running
+the offline catalogue generation. All data-acquisition scripts are
+designed to resume safely after an interruption (each network result is
+cached individually), so an unstable connection causes at most a few
+lost minutes of network time.
 
 \subsection{Pipeline Overview}
 \label{sec:StarCatalogues:Generating:Overview}
@@ -1952,12 +1968,17 @@ The full pipeline looks like this:
   \item For levels 0--3 only: query SIMBAD for all HIP/SAO/HD/HR entries
         (\program{simbad\_query\_hipsaohdhr.py}) and clean/cross-match the
         result against Gaia DR3 (\program{parse\_hip\_catalog.py}).
+        These scripts live in the companion fork described above.
   \item Generate levels 0--3 (Star1 records) with \program{hip2cat},
         merging the SIMBAD table with the Gaia \file{.bin} files.
+        \program{hip2cat} calls \program{erfa\_zone.py} (Python) for the
+        $\pm$210\,kyr past/future global-zone analysis of levels~0--2.
   \item Generate levels 4--10 (Star2/Star3 records) from the Gaia
         \file{.bin} files with \program{skychart2cat}.
   \item Remove duplicated stars between adjacent levels with \program{dedupcat}.
-  \item Verify the output against a reference catalogue with \program{cmpcat}.
+  \item Verify the output with \program{field\_diff.py} (global,
+        per-field classification of every differing star) and
+        \program{cmpcat} (zone-by-zone comparison).
 \end{enumerate}
 
 \subsection{Obtaining the Input Data}
@@ -1992,8 +2013,8 @@ A progress line is printed every 5 seconds.
 \subsubsection{SIMBAD data for levels 0--3}
 
 Levels 0--3 additionally need Hipparcos cross-identifications and SIMBAD
-photometry, spectral types and radial velocities. Two scripts (derived from
-\emph{stellarium\_star\_catalogs}, see the license note above) produce them:
+photometry, spectral types and radial velocities. Two Python scripts in the
+companion fork (GPLv3, see the section introduction above) produce them:
 
 \begin{commands}
 python simbad_query_hipsaohdhr.py
@@ -2010,8 +2031,12 @@ retried automatically.
 \program{parse\_hip\_catalog.py} (converted from the
 \texttt{Parse\_HIP\_Catalog.ipynb} notebook) cleans the SIMBAD result,
 splits binary systems that Gaia resolved but Hipparcos did not into
-A/B components, and cross-matches every entry to a Gaia DR3
-\texttt{source\_id}. It writes two files into \file{simbad\_query\_results/}:
+A/B components, cross-matches every entry to a Gaia DR3
+\texttt{source\_id}, and records how each \texttt{source\_id} was
+obtained in the new \texttt{source\_id\_provenance} column
+(\texttt{dr3\_direct} / \texttt{dr2\_to\_dr3} / \texttt{cone\_search}
+/ \texttt{hierarchy\_child\_*} / \texttt{unresolved}). It writes two
+files into \file{simbad\_query\_results/}:
 
 \begin{itemize}
   \item \file{hip\_processed\_with\_binary.dat} --- the main SIMBAD table
@@ -2028,24 +2053,9 @@ online query on disk, so restarting it skips all completed work.
 \texttt{long} (32-bit on Windows) and raises
 \texttt{OverflowError: Python int too large to convert to C long} on
 64-bit columns such as SIMBAD's \texttt{object\_number\_id} or Gaia's
-\texttt{source\_id}. Drop the following file as
-\file{sitecustomize.py} into \file{venv\textbackslash Lib\textbackslash site-packages\textbackslash}
-of the Python environment to replace the affected parser with a pure-Python
-int64 version:
-
-\begin{configfile}
-import struct
-from astropy.io.votable import converters
-
-def _long_binparse_py(self, read):
-    data = read(8)
-    value = struct.unpack(">q", data)[0]
-    if self._fast_has_null and value == self._fast_null_param:
-        return value, True
-    return value, False
-
-converters.Long.binparse = _long_binparse_py
-\end{configfile}
+\texttt{source\_id}. Copy \file{patches/sitecustomize.py} from the
+companion fork into \file{venv\textbackslash Lib\textbackslash site-packages\textbackslash}
+of the Python environment after creating the virtual environment.
 
 \paragraph{Spectral and object type tables.} \program{hip2cat} needs the
 object-type table \file{otype.dat}; a copy of
@@ -2089,10 +2099,13 @@ hip2cat --simbad <hip_processed_with_binary.dat> --gaia-bin <dir>
   \item[\program{--max-files}] scan only the first $n$ \file{.bin} files
         (quick smoke test; joins and the Gaia-only subset will be incomplete).
   \item[\program{--erfa-python}] a Python interpreter with astropy
-        installed. If given, the $\pm$210 kyr past/future analysis that
+        installed. If given, the $\pm$210\,kyr past/future analysis that
         decides which high-proper-motion stars go into the global zone of
-        levels 0--2 is delegated to astropy/ERFA for exact parity with the
-        reference pipeline; otherwise a built-in IAU SOFA equivalent is used.
+        levels~0--2 is delegated to astropy/ERFA for exact parity with the
+        reference pipeline; if omitted, the global-zone analysis is
+        \emph{skipped} (only direction zones are used) and a prominent
+        warning is printed. Always supply this flag when the output is meant
+        to match the official catalogues.
 \end{description}
 
 What the tool does: it scans all \file{.bin} files once, attaches Gaia DR3
@@ -2157,6 +2170,46 @@ Apply it in the chain $3 \rightarrow 4$, $4 \rightarrow 5$, \dots,
 $9 \rightarrow 10$, replacing each fainter catalogue with its deduplicated
 version. Levels 0--3 must \emph{not} be deduplicated: level 2 deliberately
 contains all HIP stars regardless of magnitude.
+
+\subsection{Per-Star Field-Level Verification}
+\label{sec:StarCatalogues:Generating:fielddiff}
+
+For a deeper analysis, \program{field\_diff.py} (in
+\file{util/gaiacat/}) performs a global (cross-zone) match of two catalogue
+sets at levels~0--3 and classifies \emph{every} differing star by the
+physical field that exceeds tolerance:
+
+\begin{commands}
+python field_diff.py
+\end{commands}
+
+It produces:
+
+\begin{itemize}
+  \item \file{lv03\_field\_diff\_report.md} --- a Markdown report with
+        per-star tables organised by category (ZONE, POS, PM, PLX, V, RV,
+        SP, OTYPE, HIP). Each category table lists every star sorted by
+        Gaia \texttt{source\_id}. Stars that belong to multiple categories
+        appear only under the highest-priority one (ZONE $>$ POS $>$ PM
+        $>$ PLX $>$ V $>$ RV $>$ SP $>$ OTYPE $>$ HIP; their other
+        differing fields are still listed in the ``labels'' column).
+        Only-in stars are analysed individually with provenance
+        information (where the Gaia \texttt{source\_id} came from) and
+        cross-level lookup.
+  \item \file{lv03\_bv\_diff.tsv} --- full listing of B-V differences
+        (method difference: BP-RP polynomial vs.\ official synthetic
+        photometry, deliberately excluded from the main report).
+\end{itemize}
+
+Stars are matched by Gaia \texttt{source\_id} globally (not per zone
+like \program{cmpcat}), so zone-assignment differences become a
+dedicated ZONE category rather than inflating the only-in counts. The
+report draws its provenance information from the
+\texttt{source\_id\_provenance} column written by
+\program{parse\_hip\_catalog.py} and uses the two spectral- and
+object-type tables produced alongside the catalogues to decode
+\texttt{spInt} and \texttt{objtype} fields on both sides for readable
+comparison.
 
 \subsection{Verification with cmpcat}
 \label{sec:StarCatalogues:Generating:cmpcat}

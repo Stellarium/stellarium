@@ -355,7 +355,7 @@ void StarMgr::init()
 	Q_ASSERT(conf);
 
 	// Default B-V value used when a catalog star has no BP/RP color (sentinel value).
-	const float missingBVMag = conf->value("stars/missing_bv_value", 0.0f).toFloat();
+	const float missingBVMag = conf->value("stars/missing_bv_value", 1.0f).toFloat();
 	Star1::missingBVMag = missingBVMag;
 	Star2::missingBVMag = missingBVMag;
 	Star3::missingBVMag = missingBVMag;

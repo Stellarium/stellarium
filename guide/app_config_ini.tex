@@ -878,7 +878,9 @@ flag\_star\_halo         & bool        & \emph{false} to not draw a halo around 
 mag\_converter\_max\_fov & float       & maximum field of view for which the magnitude conversion routine is used. Typical value: \emph{90.0}.\\%\midrule
 mag\_converter\_min\_fov & float       & minimum field of view for which the magnitude conversion routine is used. Typical value: \emph{0.001}.\\%\midrule
 labels\_amount           & float       & amount of labels. Typical value: \emph{3.0}\\%\midrule
-init\_bortle\_scale      & int         & initial value of light pollution on the Bortle scale. Typical value: \emph{3}.\\\bottomrule
+init\_bortle\_scale      & int         & initial value of light pollution on the Bortle scale. Typical value: \emph{3}.\\%\midrule
+flag\_compact\_star\_storage & bool    & When \emph{true}, star catalogues at level~9 and above use a compact on-disk layout that omits the per-zone count metadata. Only effective with memory-mapped catalog loading; reduces memory pressure at high levels. Default: \emph{false}.\\%\midrule
+missing\_bv\_value & float & Default B-V colour index assigned to stars whose catalog entry has a missing or sentinel B-V value (e.g.\ 32.767 in Star2). Used in the star colour computation. Default: \emph{1.0}.\\\bottomrule
 \end{tabularx}
 
 \subsection{\big[tui\big]}

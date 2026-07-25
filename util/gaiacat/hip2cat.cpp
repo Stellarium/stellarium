@@ -471,6 +471,7 @@ int main(int argc, char** argv)
 	// ---- spectral type table: reuse if given, else build fresh
 	std::vector<std::string> sp_ls;
 	bool sp_reuse = false;
+	int sp_appended = 0;
 	if (!sp_path.empty() && fs::exists(sp_path)) {
 		sp_ls = read_text_lines(sp_path);
 		for (auto& s : sp_ls) trim(s);
@@ -899,19 +900,20 @@ int main(int argc, char** argv)
 				cr.plx = (uint16_t)std::max(0, std::min((int)std::lround(r.plx * 50.0), 65535));
 				cr.plx_err = (uint16_t)std::max(0, std::min((int)std::lround(r.plxe * 100.0), 65535));
 				cr.rv = (int16_t)std::max(-32768, std::min((int)std::lround(r.rv * 10.0), 32767));
-				// spectral type index
+				// spectral type index: unknown types are appended even when
+				// reusing the official table (SIMBAD revises sp strings over
+				// time, e.g. "M0" -> "M0.0III"); existing indices are unchanged.
 				int sp_i = 0;
 				if (r.sp && !r.sp->empty()) {
 					const std::string& sp = *r.sp;
 					auto it = sp_idx.find(sp);
 					if (it != sp_idx.end()) {
 						sp_i = it->second;
-					} else if (!sp_reuse) {
+					} else {
 						sp_i = (int)sp_ls.size();
 						sp_idx[sp] = sp_i;
 						sp_ls.push_back(sp);
-					} else {
-						sp_i = 0;
+						sp_appended++;
 					}
 				}
 				cr.spInt = (uint16_t)sp_i;
@@ -951,13 +953,14 @@ int main(int argc, char** argv)
 		std::cout << "  wrote " << fname << ": " << sel.size() << " stars\n";
 	}
 
-	// write spectral type table if we built it fresh
-	if (!sp_reuse) {
+	// write spectral type table if we built it fresh or appended new types
+	if (!sp_reuse || sp_appended > 0) {
 		std::string sp_out = out_dir + "/stars_hip_sp_0v0_6.cat";
 		std::ofstream f(sp_out, std::ios::binary);
 		f << "\n";
 		for (size_t i = 1; i < sp_ls.size(); ++i) f << sp_ls[i] << "\n";
-		std::cout << "wrote " << sp_out << " (" << (sp_ls.size() - 1) << " types)\n";
+		std::cout << "wrote " << sp_out << " (" << (sp_ls.size() - 1) << " types, "
+		          << sp_appended << " appended)\n";
 	}
 
 	std::cout << "Done.\n";
