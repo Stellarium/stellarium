@@ -51,15 +51,15 @@ void AstroCalcCustomStepsDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &AstroCalcCustomStepsDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo,      this, &AstroCalcCustomStepsDialog::handleMovedTo);
 
 	ui->timeStepDoubleSpinBox->setValue(conf->value("astrocalc/custom_time_step", 1.0).toDouble());
-	connect(ui->timeStepDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveTimeStep(double)));
+	connect(ui->timeStepDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &AstroCalcCustomStepsDialog::saveTimeStep);
 
 	populateUnitMeasurementsList();
-	connect(ui->unitMeasurementComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveUnitMeasurement(int)));
+	connect(ui->unitMeasurementComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcCustomStepsDialog::saveUnitMeasurement);
 
 	// Sun at altitude settings
 	const double savedAlt = conf->value("astrocalc/ephemeris_sun_altitude", -10.0).toDouble();
@@ -71,8 +71,8 @@ void AstroCalcCustomStepsDialog::createDialogContent()
 	const int savedCrossing = conf->value("astrocalc/ephemeris_sun_altitude_evening", 0).toInt();
 	ui->sunAltCrossingComboBox->setCurrentIndex(savedCrossing);
 	conf->setValue("astrocalc/ephemeris_sun_altitude_evening", savedCrossing);
-	connect(ui->sunAltitudeSpinBox,    SIGNAL(valueChanged(double)), this, SLOT(saveSunAltitude(double)));
-	connect(ui->sunAltCrossingComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveSunAltitudeCrossing(int)));
+	connect(ui->sunAltitudeSpinBox,    qOverload<double>(&QDoubleSpinBox::valueChanged), this, &AstroCalcCustomStepsDialog::saveSunAltitude);
+	connect(ui->sunAltCrossingComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcCustomStepsDialog::saveSunAltitudeCrossing);
 
 	// Opposition planet settings
 	ui->oppositionPlanetComboBox->addItem(q_("Mars"),    "Mars");
@@ -84,7 +84,7 @@ void AstroCalcCustomStepsDialog::createDialogContent()
 	int oppIdx = ui->oppositionPlanetComboBox->findData(savedOppPlanet);
 	if (oppIdx < 0) oppIdx = 0;
 	ui->oppositionPlanetComboBox->setCurrentIndex(oppIdx);
-	connect(ui->oppositionPlanetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveOppositionPlanet(int)));
+	connect(ui->oppositionPlanetComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcCustomStepsDialog::saveOppositionPlanet);
 
 	// Both conditional group boxes start hidden; caller must invoke setActiveTimeStep()
 	ui->sunAtAltitudeGroupBox->setVisible(false);

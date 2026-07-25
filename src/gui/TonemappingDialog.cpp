@@ -21,9 +21,6 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelUtils.hpp"
-#include "StelLocaleMgr.hpp"
 #include "TonemappingDialog.hpp"
 #include "StelToneReproducer.hpp"
 
@@ -51,9 +48,9 @@ void TonemappingDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &TonemappingDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo,      this, &TonemappingDialog::handleMovedTo);
 
 	connectDoubleProperty(ui->dalSpinBox,   "StelToneReproducer.displayAdaptationLuminance");
 	connectDoubleProperty(ui->dmSpinBox,    "StelToneReproducer.maxDisplayLuminance");
@@ -61,7 +58,7 @@ void TonemappingDialog::createDialogContent()
 	connectBoolProperty(ui->checkBox_extraGamma, "StelToneReproducer.flagUseTmGamma");
 	connectBoolProperty(ui->checkBox_sRGB,  "StelToneReproducer.flagSRGB");
 
-	connect(ui->resetPushButton, SIGNAL(clicked(bool)), this, SLOT(resetTonemapping()));
+	connect(ui->resetPushButton, &QPushButton::clicked, this, &TonemappingDialog::resetTonemapping);
 }
 
 void TonemappingDialog::resetTonemapping()

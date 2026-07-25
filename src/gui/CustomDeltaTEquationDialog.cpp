@@ -64,15 +64,15 @@ void CustomDeltaTEquationDialog::createDialogContent()
 	ui->lineEditNDot->setText(QString("%1").arg(ndot));
 
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &CustomDeltaTEquationDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo,      this, &CustomDeltaTEquationDialog::handleMovedTo);
 
-	connect(ui->lineEditNDot, SIGNAL(textEdited(const QString&)), this, SLOT(setNDot(const QString&)));
-	connect(ui->lineEditYear, SIGNAL(textEdited(const QString&)), this, SLOT(setYear(const QString&)));
-	connect(ui->lineEditCoefficientA, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffA(const QString&)));
-	connect(ui->lineEditCoefficientB, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffB(const QString&)));
-	connect(ui->lineEditCoefficientC, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffC(const QString&)));
+	connect(ui->lineEditNDot, &QLineEdit::textEdited, this, &CustomDeltaTEquationDialog::setNDot);
+	connect(ui->lineEditYear, &QLineEdit::textEdited, this, &CustomDeltaTEquationDialog::setYear);
+	connect(ui->lineEditCoefficientA, &QLineEdit::textEdited, this, &CustomDeltaTEquationDialog::setCoeffA);
+	connect(ui->lineEditCoefficientB, &QLineEdit::textEdited, this, &CustomDeltaTEquationDialog::setCoeffB);
+	connect(ui->lineEditCoefficientC, &QLineEdit::textEdited, this, &CustomDeltaTEquationDialog::setCoeffC);
 }
 
 void CustomDeltaTEquationDialog::saveSettings(void) const

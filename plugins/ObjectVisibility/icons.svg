@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Object Visibility plugin — toolbar icon source.
+
+  Mirrors the convention used in Stellarium's master data/gui/icons.svg
+  and other plug-ins (notably EquationOfTime):
+   - Three layers: documentation (notes), off (idle state), on (active state).
+   - "off" is a flat medium-grey icon (#6d6d6d), no halo.
+   - "on"  is a crisp white icon over a soft white outer glow (Inkscape's
+     "Drop Shadow with zero offset" recipe: feFlood + feComposite +
+     feGaussianBlur).
+   - Export each layer to a 160x160 PNG.  Stellarium uses
+     GUI_INPUT_PIXMAPS_SCALE = 5, so 160x160 is the right source
+     resolution for a logical ~32x32 toolbar button.
+
+  Rendering note: the &lt;filter&gt; chain uses feFlood + feComposite
+  to convert the icon's strokes into a solid white silhouette before
+  blurring.  Not all rasterisers support this fully (cairosvg in
+  particular silently drops it).  Use Inkscape or rsvg-convert to
+  regenerate the PNGs; both render the result faithfully:
+
+     rsvg-convert (width 160) (height 160) (export-id on) (export-id-only) \
+                  icons.svg (o bt_object_visibility_on.png)
+
+  (Replace parentheses with double-dash; double-dash is not legal
+   inside XML comments.)
+-->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   width="160"
+   height="160"
+   viewBox="0 0 32 32"
+   version="1.1">
+
+  <defs>
+    <!-- Outer glow filter for the "on" state.  This is the canonical
+         Inkscape "Drop Shadow with zero offset" recipe used by other
+         Stellarium plugins (e.g. EquationOfTime):
+           1. feFlood: fill the filter region with solid white.
+           2. feComposite operator="in": clip flood to source shape,
+              yielding a white silhouette of the icon.
+           3. feGaussianBlur: blur the silhouette outward.
+         The result is laid behind the crisp icon so the icon stays
+         sharp while a soft halo radiates around it. -->
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"
+            filterUnits="objectBoundingBox">
+      <feFlood     flood-color="#ffffff" flood-opacity="1" result="flood" />
+      <feComposite in="flood" in2="SourceGraphic" operator="in"
+                   result="silhouette" />
+      <feGaussianBlur in="silhouette" stdDeviation="2.0" />
+    </filter>
+
+    <!-- The base icon: outline globe with five latitude lines.
+         All coordinates inside a 32x32 viewBox.  Stroke widths chosen
+         so the rasterised 160x160 PNG, downscaled by Stellarium's GUI
+         scale of 5, gives crisp pixel-aligned lines at typical
+         100% DPI. -->
+    <g id="iconShape">
+      <!-- Globe outline -->
+      <circle cx="16" cy="16" r="12.5"
+              fill="none" stroke-width="1.6" stroke-linecap="round" />
+      <!-- Five latitude lines as chords across the circle.
+           y = 16 - 12.5 * sin(latRad); chord half-width = sqrt(r^2 - dy^2). -->
+      <!-- +60: y = 5.18, half = 6.25 -->
+      <line x1="9.75" y1="5.18"  x2="22.25" y2="5.18"
+            stroke-width="1.0" stroke-linecap="round" />
+      <!-- +30: y = 9.75, half = 10.83 -->
+      <line x1="5.17" y1="9.75"  x2="26.83" y2="9.75"
+            stroke-width="1.0" stroke-linecap="round" />
+      <!-- Equator: y = 16, half = 12.5; slightly thicker for emphasis. -->
+      <line x1="3.5"  y1="16"    x2="28.5"  y2="16"
+            stroke-width="1.4" stroke-linecap="round" />
+      <!-- -30: y = 22.25, half = 10.83 -->
+      <line x1="5.17" y1="22.25" x2="26.83" y2="22.25"
+            stroke-width="1.0" stroke-linecap="round" />
+      <!-- -60: y = 26.82, half = 6.25 -->
+      <line x1="9.75" y1="26.82" x2="22.25" y2="26.82"
+            stroke-width="1.0" stroke-linecap="round" />
+    </g>
+  </defs>
+
+  <!-- ===== Layer: documentation ===== -->
+  <g inkscape:groupmode="layer" inkscape:label="documentation"
+     sodipodi:insensitive="true" style="display:none">
+    <text x="2" y="3" font-size="1.2" font-family="sans-serif" fill="#888">
+      Object Visibility icon — follows EquationOfTime convention.
+    </text>
+    <text x="2" y="5" font-size="1.2" font-family="sans-serif" fill="#888">
+      "off" layer: flat medium grey (#6d6d6d), no halo.
+    </text>
+    <text x="2" y="6.6" font-size="1.2" font-family="sans-serif" fill="#888">
+      "on"  layer: crisp white icon over a soft white halo (Inkscape's
+    </text>
+    <text x="2" y="8.2" font-size="1.2" font-family="sans-serif" fill="#888">
+      "Drop Shadow with zero offset" recipe).
+    </text>
+    <text x="2" y="9.8" font-size="1.2" font-family="sans-serif" fill="#888">
+      Both layers stamp the &lt;g id="iconShape"/&gt; defined in &lt;defs&gt;.
+    </text>
+  </g>
+
+  <!-- ===== Layer: off (idle state) =====
+       Flat medium grey at moderate opacity.  Matches the visual
+       brightness of EquationOfTime's idle icon.  Encoded as a true
+       opacity rather than a darker colour so the icon reads consistently
+       across light and dark toolbar themes. -->
+  <g inkscape:groupmode="layer" inkscape:label="off"
+     id="off"
+     stroke="#6d6d6d" fill="none"
+     opacity="0.7">
+    <use href="#iconShape" />
+  </g>
+
+  <!-- ===== Layer: on (active state) =====
+       Following the EquationOfTime convention: a softened white
+       silhouette behind a crisp white icon on top.  The halo is
+       generated by the glow filter, which floods the icon shape to
+       white then blurs the result outward.  The icon goes from grey
+       (off) to bright white with a soft halo (on), matching the
+       look of Stellarium's other "selected" toolbar buttons. -->
+  <g inkscape:groupmode="layer" inkscape:label="on"
+     id="on">
+    <!-- Soft halo: same shape, passed through the glow filter. -->
+    <g stroke="#ffffff" fill="none" filter="url(#glow)">
+      <use href="#iconShape" />
+    </g>
+    <!-- Crisp white icon on top of the halo. -->
+    <g stroke="#ffffff" fill="none">
+      <use href="#iconShape" />
+    </g>
+  </g>
+</svg>

@@ -287,8 +287,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 #ifdef ENABLE_SCRIPTING
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
-	connect(scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
-	connect(scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
+	connect(scriptMgr, &StelScriptMgr::scriptRunning, this, &StelGui::scriptStarted);
+	connect(scriptMgr, &StelScriptMgr::scriptStopped, this, &StelGui::scriptStopped);
 #endif
 
         QString infoGroup = N_("Selected object information");
@@ -441,8 +441,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	updateI18n();
 
 	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	connect(app, &StelApp::languageChanged,    this, &StelGui::updateI18n);
+	connect(app, &StelApp::colorSchemeChanged, this, &StelGui::setStelStyle);
 	initDone = true;
 }
 

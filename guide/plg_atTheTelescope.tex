@@ -579,7 +579,7 @@ The plug-in's main window can be opened:
 \item The \emph{Type} field indicates what kind of connection this is:
   \begin{description}
   \item[virtual] means a virtual telescope (test mode).
-  \item[local, Stellarium] means a DIRECT connection to the telescope (see above).
+  \item[direct, Stellarium] means a DIRECT connection to the telescope (see above).
   \item[local, external] means an INDIRECT connection to a program running on the same computer.
   \item[local, ASCOM] means an INDIRECT connection to a ASCOM driver running on the same computer.
   \item[remote, unknown] means an INDIRECT connection over a network to a remote machine.
@@ -601,7 +601,9 @@ configuration window will open.
 The topmost field represents the choice between the types of connections (see section~\ref{sec:plugins:TelescopeControl:using}):
 Telescope controlled by:
 \begin{description}
-\item[Stellarium, directly through a serial port] is the DIRECT case
+\item[Stellarium, directly (serial or network)] is the DIRECT case.
+  LX200-compatible mounts can be connected either through a serial port or,
+  \newFeature{26.3} over a TCP/IP network (see \emph{Device settings}).
 \item[External software or a remote computer] is an INDIRECT case
 \item[RTS2 Telescope] is another INDIRECT case\newFeature{0.16.0}
 \item[INDI] is another INDIRECT case\newFeature{0.17.0}
@@ -634,7 +636,12 @@ Telescope controlled by:
 This section is active only for DIRECT connections (see above).
 
 \begin{description}
-\item[Serial port] sets the serial port used by the telescope.  
+\item[Connection]\newFeature{26.3} selects \emph{Serial port} or, for
+  LX200-compatible mounts, \emph{Network (TCP)} -- the LX200 protocol spoken
+  directly over TCP/IP. With \emph{Network (TCP)} the \emph{Serial port} field
+  is replaced by \emph{Host} and \emph{Port} (the telescope's network address
+  and TCP port).
+\item[Serial port] sets the serial port used by the telescope.
   A pop-up box suggests some default values:
   \begin{itemize}
   \item On Windows, serial ports \texttt{COM1} to \texttt{COM10}
