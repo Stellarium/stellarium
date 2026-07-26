@@ -27,6 +27,8 @@ SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release
 SET(ENABLE_QT6 1 CACHE BOOL "Whether to try building with Qt6. If Qt6 is not found, Qt5 will be used.")
 IF(ENABLE_QT6)
      FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
+     # Suppressing warning for GuiPrivate component (required since Qt 6.10+)
+     SET(QT_NO_PRIVATE_MODULE_WARNING ON)
 ENDIF()
 if (NOT Qt6_FOUND)
      FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core)
