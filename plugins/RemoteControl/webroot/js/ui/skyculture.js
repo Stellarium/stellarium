@@ -306,6 +306,80 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
     
     /** @type {boolean} Synchronization enabled flag (can be toggled for debugging) */
     var syncEnabled = true;
+		
+		// =====================================================================
+		// Constellation Controls Variables
+		// =====================================================================
+
+		/** @type {jQuery} Constellation filter visible checkbox */
+		var $constellationFilterVisible = null;
+
+		/** @type {jQuery} Constellation highlight without isolation checkbox */
+		var $highlightNoIsolation = null;
+
+		/** @type {jQuery} Constellation name display mode select */
+		var $constellationNameDisplay = null;
+
+		/** @type {string} Current constellation name display mode */
+		var currentConstellationNameMode = 'default';
+
+		/** @type {Array} Original unfiltered constellation patterns */
+		var originalConstellationPatterns = [];
+
+		/** @type {boolean} Flag to prevent multiple filter operations */
+		var isFilteringConstellations = false;
+		
+		// =====================================================================
+		// Stars Sorting Variables
+		// =====================================================================
+
+		/** @type {jQuery} Stars sort by select element */
+		var $starsSortBy = null;
+
+		/** @type {jQuery} Stars sort direction select element */
+		var $starsSortDirection = null;
+
+		/** @type {jQuery} Stars filter visible checkbox */
+		var $starsFilterVisible = null;
+
+		/** @type {jQuery} Stars apply sort button */
+		var $starsApplySort = null;
+
+		/** @type {jQuery} Stars sort status display */
+		var $starsSortStatus = null;
+
+		/** @type {Object} Cache for star info fetched from API */
+		var starInfoCache = {};
+
+		/** @type {Object} Current sort state */
+		var currentStarSortState = {
+				sortBy: 'name',
+				direction: 'asc',
+				filterVisible: false
+		};
+
+		/** @type {Array} Original unsorted star patterns */
+		var originalStarPatterns = [];
+
+		/** @type {boolean} Flag to prevent multiple simultaneous sort operations */
+		var isSortingStars = false;
+
+		/** @type {string|null} Currently selected group (constellation abbreviation) */
+		var currentStarGroup = null;
+		var currentGroupedData= null;
+		
+		// =====================================================================
+		// Stars Name Display Variables
+		// =====================================================================
+
+		/** @type {jQuery} Stars name display mode select element */
+		var $starsNameDisplay = null;
+
+		/** @type {string} Current name display mode: 'default', 'cultural', 'localized' */
+		var currentNameDisplayMode = 'default';
+
+		/** @type {Object} Cache for display names to avoid re-computation */
+		var displayNameCache = {};
 
     // ---------------------------------------------------------------------
     // Constellations Tour Toolbar Variables
@@ -632,18 +706,27 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
             .replace(/'/g, '&#39;');
     }
 
-    /**
-     * Update the pattern count badge displayed in tab headers.
-     * 
-     * @param {string} type - Pattern type (constellations, asterisms, zodiac, lunar, stars)
-     * @param {number} count - Number of items to display
-     */
-    function updatePatternCount(type, count) {
-        var $countElement = $("#" + type + "-count");
-        if ($countElement && $countElement.length) {
-            $countElement.text(count > 0 ? "(" + count + ")" : "");
-        }
-    }
+		/**
+		 * Update the pattern count badge displayed in tab headers.
+		 * 
+		 * @param {string} type - Pattern type (constellations, asterisms, zodiac, lunar, stars, artwork)
+		 * @param {number|string} count - Number of items to display (can be string like "45/88")
+		 */
+		function updatePatternCount(type, count) {
+				var $countElement = $("#" + type + "-count");
+				if ($countElement && $countElement.length) {
+						var displayText = '';
+						if (count === 0 || count === '0') {
+								displayText = "";
+						} else if (typeof count === 'string' && count.indexOf('/') !== -1) {
+								// For strings like "45/88", show as is
+								displayText = "(" + count + ")";
+						} else if (count > 0) {
+								displayText = "(" + count + ")";
+						}
+						$countElement.text(displayText);
+				}
+		}
 
 		/**
 		 * Clear active state from all pattern buttons across all containers.
@@ -918,59 +1001,61 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
      * @returns {Array} Constellation pattern objects with properties:
      *                  {id, name, searchName, type, englishName, nativeName}
      */
-    function loadConstellationsFromIndexJson(cultureData) {
-        var patterns = [];
-        
-        if (!cultureData || !cultureData.constellations || !Array.isArray(cultureData.constellations)) {
-            console.warn("[SkyCulture] No constellations array in culture data");
-            return patterns;
-        }
-        
-        var totalConstellations = cultureData.constellations.length;
-        
-        for (var i = 0; i < totalConstellations; i++) {
-            var con = cultureData.constellations[i];
-            var id = con.id;
-            
-            if (!id) {
-                console.warn("[SkyCulture] Constellation missing ID at index", i);
-                continue;
-            }
-            
-            // Extract name components
-            var englishName = (con.common_name && con.common_name.english) 
-                ? con.common_name.english.trim() 
-                : null;
-            var nativeName = (con.common_name && con.common_name.native) 
-                ? con.common_name.native.trim() 
-                : null;
-            
-            // Determine display name: English preferred, then native, then ID
-            var displayName = englishName || nativeName || id;
-            
-            // Search name: English preferred for reliable Stellarium lookup
-            var searchName = englishName || displayName;
-            
-            patterns.push({
-                id: id,
-                name: displayName,
-                searchName: searchName,
-                type: "constellation",
-                englishName: englishName,
-                nativeName: nativeName
-            });
-        }
-        
-        // Sort alphabetically by display name
-        patterns.sort(function(a, b) {
-            return a.name.localeCompare(b.name);
-        });
-        
-        console.log("[SkyCulture] Loaded " + patterns.length + " constellations from index.json " +
-            "(total in file: " + totalConstellations + ")");
-        
+function loadConstellationsFromIndexJson(cultureData) {
+    var patterns = [];
+    
+    if (!cultureData || !cultureData.constellations || !Array.isArray(cultureData.constellations)) {
+        console.warn("[SkyCulture] No constellations array in culture data");
         return patterns;
     }
+    
+    var totalConstellations = cultureData.constellations.length;
+    
+    for (var i = 0; i < totalConstellations; i++) {
+        var con = cultureData.constellations[i];
+        var id = con.id;
+        
+        if (!id) {
+            console.warn("[SkyCulture] Constellation missing ID at index", i);
+            continue;
+        }
+        
+        // Extract name components
+        var englishName = (con.common_name && con.common_name.english) 
+            ? con.common_name.english.trim() 
+            : null;
+        var nativeName = (con.common_name && con.common_name.native) 
+            ? con.common_name.native.trim() 
+            : null;
+        
+        // Determine display name: English preferred, then native, then ID
+        var displayName = englishName || nativeName || id;
+        
+        // ============================================================
+        // CRITICAL: searchName should be the English name for API queries
+        // ============================================================
+        var searchName = englishName || displayName;
+        
+        patterns.push({
+            id: id,
+            name: displayName,
+            searchName: searchName,  // This will be "Eagle" or "Aquila"
+            type: "constellation",
+            englishName: englishName,
+            nativeName: nativeName
+        });
+    }
+    
+    // Sort alphabetically by display name
+    patterns.sort(function(a, b) {
+        return a.name.localeCompare(b.name);
+    });
+    
+    console.log("[SkyCulture] Loaded " + patterns.length + " constellations from index.json " +
+        "(total in file: " + totalConstellations + ")");
+    
+    return patterns;
+}
 
     /**
      * Load asterisms directly from index.json data.
@@ -1264,6 +1349,1028 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 				return limitedPatterns;
 		}
 
+
+/**
+ * Fetch object information from the Stellarium API.
+ * Supports all catalog identifiers: HIP, NGC, M, IC, PGC, PK, SH2, ACO, NAME, etc.
+ * Uses caching to avoid repeated network requests.
+ * 
+ * @param {Object} item - Object containing {star, apiId}
+ * @param {string} cultureId - Current culture ID for cache invalidation
+ * @returns {Promise<Object|null>} Promise resolving to object info or null on error
+ */
+function fetchStarInfo(item, cultureId) {
+    var starName = item.apiId || item.star.searchName || item.star.name;
+    var cacheKey = cultureId + '|' + starName;
+    
+    return new Promise(function(resolve) {
+        // Check cache first
+        if (starInfoCache[cacheKey]) {
+            resolve(starInfoCache[cacheKey]);
+            return;
+        }
+        
+        // Clean the name for API query
+        var queryName = starName;
+        
+        // Remove any prefix that might cause issues
+        // For NAME objects, extract the actual name (e.g., "NAME Moon" -> "Moon")
+        if (queryName.indexOf('NAME ') === 0) {
+            queryName = queryName.substring(5).trim();
+        }
+        
+        // For bare HIP numbers, add HIP prefix
+        if (/^\d+$/.test(queryName) && queryName.length < 7) {
+            queryName = 'HIP ' + queryName;
+        }
+        
+        $.ajax({
+            url: "/api/objects/info",
+            data: { name: queryName, format: "json" },
+            dataType: "json",
+            timeout: 3000,
+            success: function(data) {
+                if (data && data.found) {
+                    // Store the full response in cache
+                    starInfoCache[cacheKey] = data;
+                    
+                    // Also cache by designations if available
+                    if (data.designations) {
+                        var designations = data.designations.split(' - ');
+                        for (var i = 0; i < designations.length; i++) {
+                            var altKey = cultureId + '|' + designations[i].trim();
+                            if (!starInfoCache[altKey]) {
+                                starInfoCache[altKey] = data;
+                            }
+                        }
+                    }
+                    
+                    resolve(data);
+                } else {
+                    // Try alternative query: remove spaces
+                    var altName = queryName.replace(/\s+/g, '');
+                    if (altName !== queryName) {
+                        $.ajax({
+                            url: "/api/objects/info",
+                            data: { name: altName, format: "json" },
+                            dataType: "json",
+                            timeout: 3000,
+                            success: function(altData) {
+                                if (altData && altData.found) {
+                                    starInfoCache[cacheKey] = altData;
+                                    resolve(altData);
+                                } else {
+                                    starInfoCache[cacheKey] = null;
+                                    resolve(null);
+                                }
+                            },
+                            error: function() {
+                                starInfoCache[cacheKey] = null;
+                                resolve(null);
+                            }
+                        });
+                    } else {
+                        starInfoCache[cacheKey] = null;
+                        resolve(null);
+                    }
+                }
+            },
+            error: function() {
+                starInfoCache[cacheKey] = null;
+                resolve(null);
+            }
+        });
+    });
+}
+
+/**
+ * Fetch star information for multiple stars with concurrency control.
+ * Limits concurrent requests to prevent server overload.
+ * 
+ * @param {Array} stars - Array of star pattern objects
+ * @param {string} cultureId - Current culture ID for cache invalidation
+ * @param {number} concurrency - Maximum concurrent requests (default: 8)
+ * @param {function} progressCallback - Optional progress callback (loaded, total)
+ * @returns {Promise<Array>} Promise resolving to enriched star data
+ */
+function fetchStarsInfoBatch(patternsWithId, cultureId, concurrency, progressCallback) {
+    concurrency = concurrency || 8;
+    var results = [];
+    var total = patternsWithId.length;
+    var completed = 0;
+    
+    return new Promise(function(resolve) {
+        if (total === 0) {
+            resolve([]);
+            return;
+        }
+        
+        function processBatch(startIndex) {
+            var endIndex = Math.min(startIndex + concurrency, total);
+            var batch = patternsWithId.slice(startIndex, endIndex);
+            var batchPromises = batch.map(function(item) {
+                return fetchStarInfo(item, cultureId);
+            });
+            
+            Promise.all(batchPromises).then(function(batchResults) {
+                for (var i = 0; i < batch.length; i++) {
+                    results.push({
+                        star: batch[i].star,
+                        info: batchResults[i] || {}
+                    });
+                }
+                
+                completed += batch.length;
+                
+                if (progressCallback) {
+                    progressCallback(completed, total);
+                }
+                
+                if (endIndex < total) {
+                    processBatch(endIndex);
+                } else {
+                    resolve(results);
+                }
+            }).catch(function(error) {
+                console.error("[SkyCulture] Error fetching object info batch:", error);
+                // Continue with what we have
+                resolve(results);
+            });
+        }
+        
+        processBatch(0);
+    });
+}
+
+function renderFlatStarsWithDisplayNames(patterns) {
+    if (!$starsContainer) return;
+    
+    updatePatternCount("stars", patterns.length);
+    currentPatternsData.stars = patterns;
+    
+    renderButtons($starsContainer, patterns, "stars", 
+        function(patternName, patternType, searchName, patternId) {
+            stelUtils.goToObject(patternId, DEFAULT_FOV.star, 'star', currentCultureRawData);
+            updateAllButtonStates();
+            stelUtils.emitObjectSelected(patternName, patternId, 'star');
+        });
+}
+
+/**
+ * Sort and group star patterns by constellation or object type.
+ * 
+ * @param {Array} patterns - Array of star pattern objects
+ * @param {string} sortBy - Sort criterion: 'name', 'constellation', 'magnitude', 'type'
+ * @param {string} direction - Sort direction: 'asc' or 'desc'
+ * @param {boolean} filterVisible - If true, only show stars above horizon
+ * @param {string} cultureId - Current culture ID for cache invalidation
+ * @param {function} callback - Callback function receiving sorted patterns and grouped data
+ */
+function sortAndGroupStarPatterns(patterns, sortBy, direction, filterVisible, cultureId, callback) {
+    // If sorting by name and no filter, but we might need display names
+    if (sortBy === 'name') {
+        var sorted = patterns.slice().sort(function(a, b) {
+            var nameA = (a.name || '').toLowerCase();
+            var nameB = (b.name || '').toLowerCase();
+            var result = nameA.localeCompare(nameB);
+            return direction === 'asc' ? result : -result;
+        });
+        
+        // ============================================================
+        // Check if we need display names (cultural or localized)
+        // ============================================================
+        var displayMode = currentNameDisplayMode || 'default';
+        var needDisplayNames = (displayMode === 'cultural' || displayMode === 'localized');
+        
+        // If filter is enabled OR we need display names, fetch data
+        if (filterVisible || needDisplayNames) {
+            var patternsWithId = sorted.map(function(star) {
+                var apiId = star.originalId || star.searchName || star.id;
+                if (typeof apiId === 'string' && apiId.indexOf('NAME ') === 0) {
+                    apiId = apiId.substring(5).trim();
+                }
+                if (typeof apiId === 'string' && /^\d+$/.test(apiId) && apiId.length < 7) {
+                    apiId = 'HIP ' + apiId;
+                }
+                return { star: star, apiId: apiId };
+            });
+            
+            if ($starsSortStatus && $starsSortStatus.length) {
+                $starsSortStatus.text(filterVisible ? 
+                    _tr("Filtering by visibility...") : 
+                    _tr("Loading display names..."));
+            }
+            
+            fetchStarsInfoBatch(patternsWithId, cultureId, 8, function(loaded, total) {
+                if ($starsSortStatus && $starsSortStatus.length) {
+                    $starsSortStatus.text(loaded + '/' + total + ' ' + 
+                        (filterVisible ? _tr("filtering...") : _tr("loading...")));
+                }
+            }).then(function(enrichedData) {
+                // Update display names
+                updateStarDisplayNames(sorted, enrichedData, displayMode, cultureId);
+                
+                // Filter by visibility if enabled
+                var filteredPatterns = sorted;
+                if (filterVisible) {
+                    var infoMap = {};
+                    for (var i = 0; i < enrichedData.length; i++) {
+                        var item = enrichedData[i];
+                        var starId = item.star.id || item.star.name;
+                        infoMap[starId] = item.info;
+                    }
+                    
+                    filteredPatterns = sorted.filter(function(star) {
+                        var starId = star.id || star.name;
+                        var info = infoMap[starId];
+                        if (!info || Object.keys(info).length === 0) {
+                            return true; // Keep if no data (fallback)
+                        }
+                        return info['above-horizon'] === true;
+                    });
+                    
+                    var count = filteredPatterns.length;
+                    var totalOriginal = sorted.length;
+                    updatePatternCount("stars", count + '/' + totalOriginal);
+                }
+                
+                if ($starsSortStatus && $starsSortStatus.length) {
+                    $starsSortStatus.text(filteredPatterns.length + ' ' + _tr("stars displayed"));
+                    setTimeout(function() {
+                        $starsSortStatus.text('');
+                    }, 2000);
+                }
+                
+                isSortingStars = false;
+                callback(filteredPatterns, null);
+                
+            }).catch(function(error) {
+                console.error("[SkyCulture] Error processing stars:", error);
+                if ($starsSortStatus && $starsSortStatus.length) {
+                    $starsSortStatus.text(_tr("Error loading data"));
+                    setTimeout(function() {
+                        $starsSortStatus.text('');
+                    }, 2000);
+                }
+                isSortingStars = false;
+                callback(sorted, null);
+            });
+            return;
+        }
+        
+        // No filter, no display names needed
+        isSortingStars = false;
+        callback(sorted, null);
+        return;
+    }
+    
+    if (!patterns || patterns.length === 0) {
+        callback([], null);
+        return;
+    }
+    
+    if (isSortingStars) {
+        console.log("[SkyCulture] Sort already in progress, skipping");
+        callback(patterns, null);
+        return;
+    }
+    
+    isSortingStars = true;
+    
+    if ($starsSortStatus && $starsSortStatus.length) {
+        $starsSortStatus.text(_tr("Loading object data..."));
+    }
+    
+    if ($starsApplySort && $starsApplySort.length) {
+        $starsApplySort.prop('disabled', true);
+    }
+    
+    // ============================================================
+    // Prepare items for API lookup with correct identifiers
+    // ============================================================
+    var patternsWithId = patterns.map(function(star) {
+        var apiId = star.originalId || star.searchName || star.id;
+        
+        if (typeof apiId === 'string' && apiId.indexOf('NAME ') === 0) {
+            apiId = apiId.substring(5).trim();
+        }
+        
+        if (typeof apiId === 'string' && /^\d+$/.test(apiId) && apiId.length < 7) {
+            apiId = 'HIP ' + apiId;
+        }
+        
+        return {
+            star: star,
+            apiId: apiId
+        };
+    });
+    
+    fetchStarsInfoBatch(patternsWithId, cultureId, 8, function(loaded, total) {
+        if ($starsSortStatus && $starsSortStatus.length) {
+            var percent = Math.round((loaded / total) * 100);
+            $starsSortStatus.text(loaded + '/' + total + ' (' + percent + '%) ' + _tr("loaded"));
+        }
+    }).then(function(enrichedData) {
+				// ============================================================
+        // NEW: Update display names for all stars based on current mode
+        // ============================================================
+        var displayMode = currentNameDisplayMode || 'default';
+        updateStarDisplayNames(patterns, enrichedData, displayMode, cultureId);
+
+        var processed = enrichedData;
+        
+        if (filterVisible) {
+            processed = processed.filter(function(item) {
+                if (!item.info || Object.keys(item.info).length === 0) {
+                    return true;
+                }
+                return item.info['above-horizon'] === true;
+            });
+        }
+        
+        // Sort the processed data
+        var sorted = processed.sort(function(a, b) {
+            var valA, valB;
+            
+            switch (sortBy) {
+                case 'constellation':
+                    valA = (a.info && a.info.iauConstellation) || 'Unknown';
+                    valB = (b.info && b.info.iauConstellation) || 'Unknown';
+                    break;
+                case 'magnitude':
+                    valA = (a.info && a.info.vmag !== undefined) ? a.info.vmag : 99;
+                    valB = (b.info && b.info.vmag !== undefined) ? b.info.vmag : 99;
+                    break;
+                case 'type':
+                    valA = (a.info && a.info['object-type']) || '';
+                    valB = (b.info && b.info['object-type']) || '';
+                    break;
+                default:
+                    valA = a.star.name || '';
+                    valB = b.star.name || '';
+                    break;
+            }
+            
+            if (typeof valA === 'string') {
+                var result = valA.localeCompare(valB);
+                return direction === 'asc' ? result : -result;
+            } else {
+                if (valA < valB) return direction === 'asc' ? -1 : 1;
+                if (valA > valB) return direction === 'asc' ? 1 : -1;
+                return 0;
+            }
+        });
+        
+        // When building sortedPatterns, preserve displayName
+        var sortedPatterns = sorted.map(function(item) {
+            var star = item.star;
+            // Ensure displayName is set
+            if (!star.displayName) {
+                star.displayName = getStarDisplayName(star, item.info, displayMode, cultureId);
+            }
+            return star;
+        });
+        
+        // ============================================================
+        // Build grouped data if sorting by constellation OR type
+        // ============================================================
+        var groupedData = null;
+        if (sortBy === 'constellation' || sortBy === 'type') {
+            groupedData = {};
+            sorted.forEach(function(item) {
+                var groupKey;
+                if (sortBy === 'constellation') {
+                    groupKey = (item.info && item.info.iauConstellation) || 'Unknown';
+                } else { // type
+                    groupKey = (item.info && item.info['object-type']) || 'Unknown';
+                }
+                
+                if (!groupedData[groupKey]) {
+                    groupedData[groupKey] = {
+                        name: groupKey,
+                        stars: [],
+                        designations: []
+                    };
+                }
+                groupedData[groupKey].stars.push(item.star);
+                if (item.info && item.info.designations) {
+                    groupedData[groupKey].designations.push(item.info.designations);
+                }
+            });
+            
+            // Sort groups alphabetically, with 'Unknown' at the end
+            var sortedKeys = Object.keys(groupedData).sort(function(a, b) {
+                if (a === 'Unknown') return 1;
+                if (b === 'Unknown') return -1;
+                return a.localeCompare(b);
+            });
+            var sortedGrouped = {};
+            sortedKeys.forEach(function(key) {
+                sortedGrouped[key] = groupedData[key];
+            });
+            groupedData = sortedGrouped;
+        }
+        
+        // Update status
+        if ($starsSortStatus && $starsSortStatus.length) {
+            var count = sortedPatterns.length;
+            var totalOriginal = patterns.length;
+            var message = count + ' ' + _tr("objects");
+            if (filterVisible && count < totalOriginal) {
+                message += ' (' + (totalOriginal - count) + ' ' + _tr("hidden") + ')';
+            }
+            if (sortBy === 'constellation' && groupedData) {
+                var numGroups = Object.keys(groupedData).length;
+                var unknownCount = groupedData['Unknown'] ? groupedData['Unknown'].stars.length : 0;
+                message += ' | ' + numGroups + ' ' + _tr("constellations");
+                if (unknownCount > 0) {
+                    message += ' (' + unknownCount + ' ' + _tr("unassigned") + ')';
+                }
+            } else if (sortBy === 'type' && groupedData) {
+                var numGroups = Object.keys(groupedData).length;
+                message += ' | ' + numGroups + ' ' + _tr("types");
+            }
+            $starsSortStatus.text(message);
+            setTimeout(function() {
+                $starsSortStatus.text('');
+            }, 10000);
+        }
+        
+        if ($starsApplySort && $starsApplySort.length) {
+            $starsApplySort.prop('disabled', false);
+        }
+        
+        isSortingStars = false;
+        callback(sortedPatterns, groupedData);
+        
+    }).catch(function(error) {
+        console.error("[SkyCulture] Error sorting objects:", error);
+        
+        if ($starsSortStatus && $starsSortStatus.length) {
+            $starsSortStatus.text(_tr("Error loading object data"));
+            setTimeout(function() {
+                $starsSortStatus.text('');
+            }, 10000);
+        }
+        
+        if ($starsApplySort && $starsApplySort.length) {
+            $starsApplySort.prop('disabled', false);
+        }
+        
+        isSortingStars = false;
+        callback(patterns, null);
+    });
+}
+
+
+/**
+ * Render stars as a flat list (no grouping).
+ * 
+ * @param {Array} patterns - Star pattern objects
+ */
+function renderFlatStars(patterns) {
+    if (!$starsContainer) return;
+    
+    updatePatternCount("stars", patterns.length);
+    currentPatternsData.stars = patterns;
+    
+    // ============================================================
+    // Use displayName for button text if available
+    // ============================================================
+    renderButtonsWithDisplayNames($starsContainer, patterns, "stars", 
+        function(patternName, patternType, searchName, patternId) {
+            stelUtils.goToObject(patternId, DEFAULT_FOV.star, 'star', currentCultureRawData);
+            updateAllButtonStates();
+            stelUtils.emitObjectSelected(patternName, patternId, 'star');
+        });
+}
+
+/**
+ * Render buttons with support for display names.
+ * Similar to renderButtons but uses displayName when available.
+ * 
+ * @param {jQuery} $container - Container element to populate
+ * @param {Array} patterns - Array of pattern objects with optional displayName
+ * @param {string} containerName - Name of container type
+ * @param {Function} onClickHandler - Click handler function
+ * @param {boolean} disableOriginalHandler - If true, skip attaching the original handler
+ */
+function renderButtonsWithDisplayNames($container, patterns, containerName, onClickHandler, disableOriginalHandler) {
+    if (!$container || !$container.length) return;
+    $container.empty();
+    
+    if (!patterns || patterns.length === 0) {
+        var placeholderText = _tr("No data available");
+        if (containerName === "stars") {
+            placeholderText = _tr("No star name data available for this culture");
+        }
+        $container.html('<div class="loading-placeholder">' + placeholderText + '</div>');
+        return;
+    }
+    
+    var buttonsHtml = '<div class="patterns-buttons-grid">';
+    for (var i = 0; i < patterns.length; i++) {
+        var pattern = patterns[i];
+        var isActive = (selectedPatternId === pattern.id);
+        // Use displayName if available, otherwise fallback to name
+        var buttonText = pattern.displayName || pattern.name;
+        var tooltip = pattern.type === "star" ? ' title="' + escapeHtml(pattern.id) + '"' : '';
+        
+        buttonsHtml += '<button type="button" class="pattern-btn' + (isActive ? ' active' : '') + 
+            '" data-pattern-id="' + escapeHtml(pattern.id) + 
+            '" data-pattern-name="' + escapeHtml(pattern.name) + 
+            '" data-pattern-type="' + escapeHtml(pattern.type) + 
+            '" data-search-name="' + escapeHtml(pattern.searchName || pattern.name) + 
+            '" data-display-name="' + escapeHtml(buttonText) + '"' + 
+            tooltip + '>' + 
+            escapeHtml(buttonText) + 
+            '</button>';
+    }
+    buttonsHtml += '</div>';
+    $container.html(buttonsHtml);
+    
+    if (!disableOriginalHandler) {
+        $container.find(".pattern-btn").on("click", function() {
+            var $btn = $(this);
+            var patternId = $btn.data("pattern-id");
+            var patternName = $btn.data("pattern-name");
+            var patternType = $btn.data("pattern-type");
+            var searchName = $btn.data("search-name");
+            
+            if ($btn.hasClass('active')) {
+                $container.find(".pattern-btn").removeClass("active");
+                selectedPattern = null;
+                selectedPatternId = null;
+                if (patternType === "constellation") {
+                    stelUtils.clearConstellationHighlight();
+                }
+            } else {
+                $container.find(".pattern-btn").removeClass("active");
+                $btn.addClass("active");
+                selectedPattern = patternName;
+                selectedPatternId = patternId;
+                if (patternName && onClickHandler) {
+                    onClickHandler(patternName, patternType, searchName, patternId);
+                }
+            }
+        });
+    }
+}
+
+/**
+ * Render stars grouped by constellation or object type.
+ * 
+ * Supports both normal mode (single selection) and multi-select mode.
+ * In multi-select mode, clicking buttons toggles selection state and
+ * "Select All" buttons appear for each group.
+ * 
+ * @param {Object} groupedData - Object mapping group name to {stars: [...]}
+ */
+function renderGroupedStars(groupedData) {
+    if (!$starsContainer) return;
+    
+    var html = '';
+    var totalStars = 0;
+    
+    var groupKeys = Object.keys(groupedData).sort(function(a, b) {
+        if (a === 'Unknown') return 1;
+        if (b === 'Unknown') return -1;
+        return a.localeCompare(b);
+    });
+    
+    for (var c = 0; c < groupKeys.length; c++) {
+        var groupName = groupKeys[c];
+        var group = groupedData[groupName];
+        var stars = group.stars || [];
+        
+        if (stars.length === 0) continue;
+        totalStars += stars.length;
+        
+        // ============================================================
+        // Group header
+        // ============================================================
+        html += '<div class="star-group-header" data-group="' + escapeHtml(groupName) + '">';
+        html += '<span class="star-group-name">' + escapeHtml(groupName) + '</span>';
+        html += '<span class="pattern-count">(' + stars.length + ' ' + _tr("objects") + ')</span>';
+        
+        // ============================================================
+        // NEW: "Select All" button in multi-select mode
+        // ============================================================
+        if (isStarsMultiSelectModeActive) {
+            html += '<button class="star-group-select-all jquerybutton" data-group="' + escapeHtml(groupName) + 
+                    '" style="margin-left:10px;padding:1px 10px;font-size:10px;background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:3px;color:#000;cursor:pointer;">' + 
+                    _tr("Select All") + '</button>';
+        }
+        
+        html += '</div>';
+        
+        // ============================================================
+        // Star buttons in this group
+        // ============================================================
+        html += '<div class="star-group-buttons" data-group="' + escapeHtml(groupName) + '">';
+        
+        for (var i = 0; i < stars.length; i++) {
+            var star = stars[i];
+            var isSelected = isStarsMultiSelectModeActive && selectedStarIds.has(star.id);
+            var buttonText = star.displayName || star.name;
+            var tooltip = star.id ? ' title="' + escapeHtml(star.id) + '"' : '';
+            
+            var classNames = 'pattern-btn';
+            var style = '';
+            
+            // Apply selected styling if in multi-select mode and selected
+            if (isSelected) {
+                classNames += ' selected-star';
+                style = ' style="background:linear-gradient(#DCDBDA, #8A8C8E);border-color:#000000;color:#000000;"';
+            }
+            
+            html += '<button type="button" class="' + classNames + '"' + 
+                ' data-pattern-id="' + escapeHtml(star.id) + 
+                '" data-pattern-name="' + escapeHtml(star.name) + 
+                '" data-pattern-type="star' + 
+                '" data-search-name="' + escapeHtml(star.searchName || star.name) + 
+                '" data-display-name="' + escapeHtml(buttonText) + 
+                '" data-group="' + escapeHtml(groupName) + '"' + 
+                style + tooltip + '>' + 
+                escapeHtml(buttonText) + 
+                '</button>';
+        }
+        
+        html += '</div>';
+    }
+    
+    $starsContainer.html(html);
+    
+    // ============================================================
+    // Attach click handlers based on mode
+    // ============================================================
+    if (isStarsMultiSelectModeActive) {
+        // ============================================================
+        // Multi-select mode: toggle selection on individual buttons
+        // ============================================================
+        $starsContainer.find('.pattern-btn').off('click.stars').on('click.stars', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            var $btn = $(this);
+            var patternId = $btn.data('pattern-id');
+            var patternName = $btn.data('pattern-name');
+            
+            if (!patternId) return false;
+            
+            if (selectedStarIds.has(patternId)) {
+                // Deselect
+                selectedStarIds.delete(patternId);
+                $btn.removeClass('selected-star');
+                $btn.css('background', '');
+                $btn.css('border-color', '');
+                $btn.css('color', '');
+                $btn.removeClass('active');
+                console.log("[SkyCulture] Star deselected:", patternName, "ID:", patternId);
+            } else {
+                // Select
+                selectedStarIds.add(patternId);
+                $btn.addClass('selected-star');
+                $btn.css('background', 'linear-gradient(#DCDBDA, #8A8C8E)');
+                $btn.css('border-color', '#000000');
+                $btn.css('color', '#000000');
+                console.log("[SkyCulture] Star selected:", patternName, "ID:", patternId);
+            }
+            
+            updateStarsSelectionCount();
+            return false;
+        });
+        
+        // ============================================================
+        // "Select All" button for each group
+        // ============================================================
+        $starsContainer.find('.star-group-select-all').off('click').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            var groupName = $(this).data('group');
+            var $groupButtons = $starsContainer.find('.star-group-buttons[data-group="' + groupName + '"] .pattern-btn');
+            
+            // Check if all buttons in this group are already selected
+            var allSelected = true;
+            $groupButtons.each(function() {
+                if (!selectedStarIds.has($(this).data('pattern-id'))) {
+                    allSelected = false;
+                    return false;
+                }
+            });
+            
+            var $btn = $(this);
+            
+            if (allSelected) {
+                // Deselect all in this group
+                $groupButtons.each(function() {
+                    var $btnItem = $(this);
+                    var patternId = $btnItem.data('pattern-id');
+                    selectedStarIds.delete(patternId);
+                    $btnItem.removeClass('selected-star');
+                    $btnItem.css('background', '');
+                    $btnItem.css('border-color', '');
+                    $btnItem.css('color', '');
+                    $btnItem.removeClass('active');
+                });
+                $btn.text(_tr("Select All"));
+                console.log("[SkyCulture] Deselected all in group:", groupName);
+            } else {
+                // Select all in this group
+                $groupButtons.each(function() {
+                    var $btnItem = $(this);
+                    var patternId = $btnItem.data('pattern-id');
+                    selectedStarIds.add(patternId);
+                    $btnItem.addClass('selected-star');
+                    $btnItem.css('background', 'linear-gradient(#DCDBDA, #8A8C8E)');
+                    $btnItem.css('border-color', '#000000');
+                    $btnItem.css('color', '#000000');
+                });
+                $btn.text(_tr("Deselect All"));
+                console.log("[SkyCulture] Selected all in group:", groupName);
+            }
+            
+            updateStarsSelectionCount();
+            return false;
+        });
+        
+        // ============================================================
+        // Update "Select All" button text when individual selections change
+        // ============================================================
+        // The buttons already update their text on click, but we need
+        // to ensure they reflect the state when selections change externally.
+        // This is handled by the click handlers above.
+        
+    } else {
+        // ============================================================
+        // Normal mode: single selection navigation
+        // ============================================================
+        $starsContainer.find('.pattern-btn').off('click.stars').on('click.stars', function() {
+            var $btn = $(this);
+            var patternId = $btn.data('pattern-id');
+            var patternName = $btn.data('pattern-name');
+            var searchName = $btn.data('search-name');
+            
+            if ($btn.hasClass('active')) {
+                // Deselect
+                $starsContainer.find('.pattern-btn').removeClass('active');
+                selectedPattern = null;
+                selectedPatternId = null;
+                stelUtils.clearSelection();
+                stelUtils.emitObjectSelected('', '', 'none');
+            } else {
+                // Select
+                $starsContainer.find('.pattern-btn').removeClass('active');
+                $btn.addClass('active');
+                selectedPattern = patternName;
+                selectedPatternId = patternId;
+                stelUtils.goToObject(patternId, DEFAULT_FOV.star, 'star', currentCultureRawData);
+                stelUtils.emitObjectSelected(patternName, patternId, 'star');
+            }
+        });
+    }
+    
+    // Update the counter
+    updatePatternCount("stars", totalStars);
+}
+
+// ========================================================================
+// STAR NAME DISPLAY FUNCTIONS
+// ========================================================================
+
+/**
+ * Clean a name string by removing control characters.
+ * Removes: LEFT-TO-RIGHT MARK (LRM), RIGHT-TO-LEFT MARK (RLM),
+ * ZERO WIDTH SPACE, ZERO WIDTH NON-JOINER, ZERO WIDTH JOINER,
+ * LEFT-TO-RIGHT EMBEDDING, POP DIRECTIONAL FORMATTING, etc.
+ * 
+ * @param {string} name - Raw name string
+ * @returns {string} Cleaned name safe for display
+ */
+function cleanNameString(name) {
+    if (!name) return '';
+    return String(name)
+        .replace(/[\u200B-\u200D\u2060\u2068\u2069\uFEFF\u202A-\u202E]/g, '')
+        .trim();
+}
+
+/**
+ * Extract cultural name from cultural-names array.
+ * The cultural-names array contains strings like:
+ * "⁨Matariki⁩​ (⁨‎‎ماتاريكي ‎‎‎⁩​)​"
+ * 
+ * @param {Array} culturalNames - Array of cultural name strings
+ * @returns {string|null} Extracted cultural name or null
+ */
+function extractCulturalName(culturalNames) {
+    if (!culturalNames || !Array.isArray(culturalNames) || culturalNames.length === 0) {
+        return null;
+    }
+    
+    var raw = culturalNames[0];
+    var cleaned = cleanNameString(raw);
+    
+    // Extract the first part before parentheses
+    // e.g., "Matariki (ماتاريكي)" -> "Matariki"
+    var parts = cleaned.split('(');
+    var name = parts[0].trim();
+    
+    return name || null;
+}
+
+/**
+ * Extract localized name from localized-name field.
+ * The localized-name field contains the translated name in the current language.
+ * e.g., "سهيل" (Canopus in Arabic)
+ * 
+ * @param {string} localizedName - Localized name string
+ * @returns {string|null} Cleaned localized name or null
+ */
+function extractLocalizedName(localizedName) {
+    if (!localizedName) return null;
+    var cleaned = cleanNameString(localizedName);
+    return cleaned || null;
+}
+
+/**
+ * Get the display name for a star based on the current display mode.
+ * Priority order:
+ * 1. Cultural name (when mode is 'cultural' and available)
+ * 2. Localized name (when mode is 'localized' and available)
+ * 3. Default name (star.name from index.json)
+ * 
+ * @param {Object} star - Star pattern object
+ * @param {Object} info - Star info from API (may be null)
+ * @param {string} displayMode - 'default', 'cultural', or 'localized'
+ * @param {string} cultureId - Current culture ID for cache invalidation
+ * @returns {string} Display name
+ */
+function getStarDisplayName(star, info, displayMode, cultureId) {
+    displayMode = displayMode || currentNameDisplayMode || 'default';
+    cultureId = cultureId || currentCultureId || 'unknown';
+    
+    // Build cache key
+    var cacheKey = cultureId + '|' + (star.id || star.name) + '|' + displayMode;
+    
+    // Check cache
+    if (displayNameCache[cacheKey]) {
+        return displayNameCache[cacheKey];
+    }
+    
+    var displayName = star.name;
+    
+    switch (displayMode) {
+        case 'cultural':
+            if (info && info['cultural-names']) {
+                var culturalName = extractCulturalName(info['cultural-names']);
+                if (culturalName) {
+                    displayName = culturalName;
+                    break;
+                }
+            }
+            // Fall through to default if no cultural name
+            displayName = star.name;
+            break;
+            
+        case 'localized':
+            if (info && info['localized-name']) {
+                var localizedName = extractLocalizedName(info['localized-name']);
+                if (localizedName) {
+                    displayName = localizedName;
+                    break;
+                }
+            }
+            // Fall through to default if no localized name
+            displayName = star.name;
+            break;
+            
+        default:
+            displayName = star.name;
+            break;
+    }
+    
+    // Cache the result
+    displayNameCache[cacheKey] = displayName;
+    
+    return displayName;
+}
+
+/**
+ * Update display names for a list of stars based on current mode.
+ * This function modifies the star objects in place by adding a displayName property.
+ * 
+ * @param {Array} stars - Array of star pattern objects
+ * @param {Array} enrichedData - Array of {star, info} objects from API
+ * @param {string} displayMode - 'default', 'cultural', or 'localized'
+ * @param {string} cultureId - Current culture ID
+ * @returns {Array} Array of stars with displayName property added
+ */
+function updateStarDisplayNames(stars, enrichedData, displayMode, cultureId) {
+    displayMode = displayMode || currentNameDisplayMode || 'default';
+    cultureId = cultureId || currentCultureId || 'unknown';
+    
+    // Build a map of star ID to info
+    var infoMap = {};
+    if (enrichedData) {
+        for (var i = 0; i < enrichedData.length; i++) {
+            var item = enrichedData[i];
+            var starId = item.star.id || item.star.name;
+            infoMap[starId] = item.info;
+        }
+    }
+    
+    // Update each star with display name
+    for (var i = 0; i < stars.length; i++) {
+        var star = stars[i];
+        var starId = star.id || star.name;
+        var info = infoMap[starId] || null;
+        
+        star.displayName = getStarDisplayName(star, info, displayMode, cultureId);
+    }
+    
+    return stars;
+}
+
+/**
+ * Apply the current sort settings to the star patterns.
+ * 
+ * When filtering by "Visible above horizon only", the cache is cleared
+ * to ensure fresh data from the API based on the current time in Stellarium.
+ * 
+ * @param {Array} patterns - Original star patterns
+ * @param {function} callback - Callback after sorting is applied
+ */
+function applyStarSort(patterns, callback) {
+    var sortBy = ($starsSortBy && $starsSortBy.length) ? $starsSortBy.val() : 'name';
+    var direction = ($starsSortDirection && $starsSortDirection.length) ? $starsSortDirection.val() : 'asc';
+    var filterVisible = ($starsFilterVisible && $starsFilterVisible.length) ? 
+        $starsFilterVisible.is(':checked') : false;
+    var displayMode = ($starsNameDisplay && $starsNameDisplay.length) ? 
+        $starsNameDisplay.val() : 'default';
+    
+    currentStarSortState.sortBy = sortBy;
+    currentStarSortState.direction = direction;
+    currentStarSortState.filterVisible = filterVisible;
+    currentNameDisplayMode = displayMode;
+    
+    displayNameCache = {};
+    
+    // Clear cache if filter is enabled (for fresh visibility data)
+    if (filterVisible) {
+        starInfoCache = {};
+        console.log("[SkyCulture] Cleared star info cache for fresh visibility data");
+    }
+    
+    // Store original patterns if not already stored
+    if (originalStarPatterns.length === 0 && patterns) {
+        originalStarPatterns = patterns.slice();
+    }
+    
+    var patternsToSort = originalStarPatterns.length > 0 ? originalStarPatterns : patterns;
+    var cultureId = currentCultureId || 'unknown';
+    
+    sortAndGroupStarPatterns(patternsToSort, sortBy, direction, filterVisible, cultureId, function(sortedPatterns, groupedData) {
+        currentPatternsData.stars = sortedPatterns;
+        
+        // Update count with filter info
+        var totalOriginal = patternsToSort.length;
+        var count = sortedPatterns.length;
+        
+        if (filterVisible && count < totalOriginal) {
+            updatePatternCount("stars", count + '/' + totalOriginal);
+        } else {
+            updatePatternCount("stars", count);
+        }
+        
+        if ((sortBy === 'constellation' || sortBy === 'type') && groupedData && Object.keys(groupedData).length > 0) {
+            renderGroupedStars(groupedData);
+        } else {
+            // ============================================================
+            // Even in flat view, renderFlatStarsWithDisplayNames to handle display names
+            // ============================================================
+            renderFlatStarsWithDisplayNames(sortedPatterns);
+        }
+        
+        // Restore selection state if in multi-select mode
+        if (isStarsMultiSelectModeActive && selectedStarIds.size > 0) {
+            $starsContainer.find('.pattern-btn').each(function() {
+                var $btn = $(this);
+                var patternId = $btn.data('pattern-id');
+                if (selectedStarIds.has(patternId)) {
+                    $btn.addClass('selected-star');
+                    $btn.css('background', 'linear-gradient(#DCDBDA, #8A8C8E)');
+                    $btn.css('border-color', '#000000');
+                    $btn.css('color', '#000000');
+                }
+            });
+            updateStarsSelectionCount();
+        }
+        
+        if (callback) callback(sortedPatterns);
+    });
+}
+
 		/**
 		 * Extract artwork data from culture data.
 		 * 
@@ -1365,35 +2472,381 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
     // 10. PANEL RENDERING FUNCTIONS
     // =====================================================================
 
-    /**
-     * Render the Constellations panel.
-     * 
-     * @param {Array} patterns - Constellation pattern objects
-     * @param {boolean} disableHandler - If true, skip attaching the original click handler
-     */
-    function renderConstellationsPanel(patterns, disableHandler) {
-        if (!patterns || !patterns.length) {
-            if ($constellationsContainer) {
-                $constellationsContainer.html('<div class="loading-placeholder">' + 
-                    _tr("No constellations available for this culture") + '</div>');
-            }
-            updatePatternCount("constellations", 0);
-            currentPatternsData.constellations = [];
+/**
+ * Render the Constellations panel.
+ * 
+ * Supports filtering by "Visible above horizon only" and name display modes.
+ * 
+ * @param {Array} patterns - Constellation pattern objects
+ * @param {boolean} disableHandler - If true, skip attaching the original click handler
+ */
+function renderConstellationsPanel(patterns, disableHandler) {
+    if (!$constellationsContainer) return;
+    
+    if (!patterns || !patterns.length) {
+        $constellationsContainer.html('<div class="loading-placeholder">' + 
+            _tr("No constellations available for this culture") + '</div>');
+        updatePatternCount("constellations", 0);
+        currentPatternsData.constellations = [];
+        return;
+    }
+    
+    // Store original patterns for filtering (only once)
+    if (originalConstellationPatterns.length === 0) {
+        originalConstellationPatterns = patterns.slice();
+    }
+    
+    // Get current filter state
+    var filterVisible = ($constellationFilterVisible && $constellationFilterVisible.length) ? 
+        $constellationFilterVisible.is(':checked') : false;
+    
+    var displayMode = currentConstellationNameMode || 'default';
+    
+    // ============================================================
+    // If display mode is 'default', reset all display names to original
+    // No API calls needed
+    // ============================================================
+    if (displayMode === 'default') {
+        // Reset display names to original names
+        for (var i = 0; i < patterns.length; i++) {
+            var con = patterns[i];
+            con._displayName = con.name;
+            con._aboveHorizon = null;
+        }
+        
+        // If no filter, render directly without API calls
+        if (!filterVisible) {
+            updatePatternCount("constellations", patterns.length);
+            currentPatternsData.constellations = patterns;
+            renderConstellationButtons(patterns, disableHandler);
             return;
         }
         
+        // If filter is active, we still need to fetch visibility data
+        // but display names remain the original (non-translated)
+        // Continue to fetch data below...
+    }
+    
+    // ============================================================
+    // If filter is disabled and display mode is not 'default'
+    // (i.e., 'localized'), we need to fetch data
+    // ============================================================
+    var needLocalizedNames = (displayMode === 'localized');
+    
+    if (!filterVisible && !needLocalizedNames) {
+        // This case is handled above (displayMode === 'default' && !filterVisible)
+        // But keep as fallback
         updatePatternCount("constellations", patterns.length);
         currentPatternsData.constellations = patterns;
         
-        renderButtons($constellationsContainer, patterns, "constellations", 
-            function(patternName, patternType, searchName, patternId) {
-                // IMPORTANT: Pass BOTH name and original ID
-                stelUtils.toggleConstellationHighlight(searchName || patternName, patternId);
-                updateAllButtonStates();
-            },
-            disableHandler === true
-        );
+        for (var i = 0; i < patterns.length; i++) {
+            var con = patterns[i];
+            con._displayName = con.name;
+            con._aboveHorizon = null;
+        }
+        
+        renderConstellationButtons(patterns, disableHandler);
+        return;
     }
+    
+    // ============================================================
+    // Need to fetch data: either for filtering or for localized names
+    // ============================================================
+    if (isFilteringConstellations) {
+        console.log("[SkyCulture] Filter already in progress, skipping");
+        return;
+    }
+    
+    isFilteringConstellations = true;
+    
+    // Show loading state
+    $constellationsContainer.html('<div class="loading-placeholder">' + 
+        (filterVisible ? _tr("Loading visibility data...") : _tr("Loading translated names...")) + '</div>');
+    
+    var cultureId = currentCultureId || 'unknown';
+    
+    // Clear constellation cache to force fresh data
+    var cacheKeys = Object.keys(starInfoCache);
+    for (var i = 0; i < cacheKeys.length; i++) {
+        if (cacheKeys[i].indexOf('|constellation|') !== -1) {
+            delete starInfoCache[cacheKeys[i]];
+        }
+    }
+    
+    fetchConstellationsInfoBatch(patterns, cultureId, 8, function(loaded, total) {
+        if ($constellationsContainer && $constellationsContainer.length) {
+            var percent = Math.round((loaded / total) * 100);
+            var statusText = filterVisible ? 
+                _tr("Loading visibility data...") : 
+                _tr("Loading translated names...");
+            $constellationsContainer.html('<div class="loading-placeholder">' + 
+                statusText + ' ' + loaded + '/' + total + ' (' + percent + '%)</div>');
+        }
+    }).then(function(enrichedData) {
+        var resultPatterns = [];
+        var total = patterns.length;
+        var visibleCount = 0;
+        
+        for (var i = 0; i < enrichedData.length; i++) {
+            var item = enrichedData[i];
+            var con = item.constellation;
+            var result = item.info;
+            
+            // Determine visibility
+            var isVisible = true;
+            if (filterVisible) {
+                if (result && result['above-horizon'] !== undefined) {
+                    isVisible = (result['above-horizon'] === true);
+                }
+                // If failed to fetch, keep visible (fallback)
+            }
+            
+            // ============================================================
+            // Set display name based on mode
+            // ============================================================
+            if (displayMode === 'localized') {
+                con._displayName = getConstellationDisplayName(con, result, displayMode);
+            } else {
+                // Default mode: use original name
+                con._displayName = con.name;
+            }
+            
+            con._aboveHorizon = isVisible;
+            
+            if (!filterVisible || isVisible) {
+                resultPatterns.push(con);
+                if (isVisible) visibleCount++;
+            }
+        }
+        
+        // Update counter
+        if (filterVisible) {
+            var displayCount = visibleCount + '/' + total;
+            updatePatternCount("constellations", displayCount);
+        } else {
+            updatePatternCount("constellations", resultPatterns.length);
+        }
+        
+        currentPatternsData.constellations = resultPatterns;
+        renderConstellationButtons(resultPatterns, disableHandler);
+        
+        console.log("[SkyCulture] Rendered constellations: " + resultPatterns.length + 
+            (filterVisible ? " (visible: " + visibleCount + "/" + total + ")" : "") +
+            (displayMode === 'localized' ? " (localized names)" : " (default names)"));
+        isFilteringConstellations = false;
+        
+    }).catch(function(error) {
+        console.error("[SkyCulture] Error fetching constellation data:", error);
+        // Fallback: render all patterns with default names
+        for (var i = 0; i < patterns.length; i++) {
+            patterns[i]._displayName = patterns[i].name;
+            patterns[i]._aboveHorizon = null;
+        }
+        updatePatternCount("constellations", patterns.length);
+        renderConstellationButtons(patterns, disableHandler);
+        isFilteringConstellations = false;
+    });
+}
+
+/**
+ * Render constellation buttons (helper function).
+ * 
+ * @param {Array} patterns - Constellation pattern objects
+ * @param {boolean} disableHandler - If true, skip attaching the original click handler
+ */
+function renderConstellationButtons(patterns, disableHandler) {
+    if (!$constellationsContainer) return;
+    
+    // Store current patterns
+    currentPatternsData.constellations = patterns;
+    
+    // Build button grid
+    var buttonsHtml = '<div class="patterns-buttons-grid">';
+    
+    for (var i = 0; i < patterns.length; i++) {
+        var con = patterns[i];
+        var isActive = (selectedPatternId === con.id);
+        var buttonText = con._displayName || con.name;
+        
+        buttonsHtml += '<button type="button" class="pattern-btn' + (isActive ? ' active' : '') + 
+            '" data-pattern-id="' + escapeHtml(con.id) + 
+            '" data-pattern-name="' + escapeHtml(con.name) + 
+            '" data-pattern-type="constellation' + 
+            '" data-search-name="' + escapeHtml(con.searchName || con.name) + 
+            '" data-display-name="' + escapeHtml(buttonText) + '">' + 
+            escapeHtml(buttonText) + 
+            '</button>';
+    }
+    
+    buttonsHtml += '</div>';
+    $constellationsContainer.html(buttonsHtml);
+    
+    // Attach click handlers - ONLY if not disabled (multi-select mode)
+    if (!disableHandler) {
+        $constellationsContainer.find(".pattern-btn").on("click", function() {
+            var $btn = $(this);
+            var patternId = $btn.data("pattern-id");
+            var patternName = $btn.data("pattern-name");
+            var patternType = $btn.data("pattern-type");
+            var searchName = $btn.data("search-name");
+            
+            if ($btn.hasClass('active')) {
+                // Toggle OFF: Deselect and clear highlight
+                $constellationsContainer.find(".pattern-btn").removeClass("active");
+                selectedPattern = null;
+                selectedPatternId = null;
+                if (patternType === "constellation") {
+                    stelUtils.clearConstellationHighlight();
+                }
+            } else {
+                // Toggle ON: Select and execute action
+                $constellationsContainer.find(".pattern-btn").removeClass("active");
+                $btn.addClass("active");
+                selectedPattern = patternName;
+                selectedPatternId = patternId;
+                if (patternName) {
+                    stelUtils.toggleConstellationHighlight(searchName || patternName, patternId);
+                }
+            }
+            updateAllButtonStates();
+        });
+    }
+}
+
+// ========================================================================
+// CONSTELLATION FILTER FUNCTIONS
+// ========================================================================
+
+/**
+ * Fetch constellation information from the Stellarium API.
+ * 
+ * @param {string} constellationName - Name of the constellation (e.g., "Charioteer")
+ * @param {string} cultureId - Current culture ID for cache invalidation
+ * @returns {Promise<Object|null>} Promise resolving to constellation info or null on error
+ */
+function fetchConstellationInfo(constellationName, cultureId) {
+    var cacheKey = cultureId + '|constellation|' + constellationName;
+    
+    return new Promise(function(resolve) {
+        // Check cache first
+        if (starInfoCache[cacheKey]) {
+            resolve(starInfoCache[cacheKey]);
+            return;
+        }
+        
+        $.ajax({
+            url: "/api/objects/info",
+            data: { name: constellationName, format: "json" },
+            dataType: "json",
+            timeout: 3000,
+            success: function(data) {
+                if (data && data.found) {
+                    starInfoCache[cacheKey] = data;
+                    resolve(data);
+                } else {
+                    starInfoCache[cacheKey] = null;
+                    resolve(null);
+                }
+            },
+            error: function() {
+                starInfoCache[cacheKey] = null;
+                resolve(null);
+            }
+        });
+    });
+}
+
+/**
+ * Fetch constellation information for multiple constellations with concurrency control.
+ * Limits concurrent requests to prevent server overload.
+ * 
+ * @param {Array} constellations - Array of constellation pattern objects
+ * @param {string} cultureId - Current culture ID for cache invalidation
+ * @param {number} concurrency - Maximum concurrent requests (default: 8)
+ * @param {function} progressCallback - Optional progress callback (loaded, total)
+ * @returns {Promise<Array>} Promise resolving to enriched constellation data
+ */
+function fetchConstellationsInfoBatch(constellations, cultureId, concurrency, progressCallback) {
+    concurrency = concurrency || 8;
+    var results = [];
+    var total = constellations.length;
+    var completed = 0;
+    
+    return new Promise(function(resolve) {
+        if (total === 0) {
+            resolve([]);
+            return;
+        }
+        
+        function processBatch(startIndex) {
+            var endIndex = Math.min(startIndex + concurrency, total);
+            var batch = constellations.slice(startIndex, endIndex);
+            var batchPromises = batch.map(function(con) {
+                var queryName = con.searchName || con.name;
+                return fetchConstellationInfo(queryName, cultureId);
+            });
+            
+            Promise.all(batchPromises).then(function(batchResults) {
+                for (var i = 0; i < batch.length; i++) {
+                    results.push({
+                        constellation: batch[i],
+                        info: batchResults[i] || {}
+                    });
+                }
+                
+                completed += batch.length;
+                
+                if (progressCallback) {
+                    progressCallback(completed, total);
+                }
+                
+                if (endIndex < total) {
+                    // Process next batch with a small delay to avoid overwhelming the server
+                    setTimeout(function() {
+                        processBatch(endIndex);
+                    }, 100);
+                } else {
+                    resolve(results);
+                }
+            }).catch(function(error) {
+                console.error("[SkyCulture] Error fetching constellation info batch:", error);
+                // Continue with what we have
+                resolve(results);
+            });
+        }
+        
+        processBatch(0);
+    });
+}
+
+/**
+ * Get the display name for a constellation based on current mode.
+ * 
+ * @param {Object} con - Constellation pattern object
+ * @param {Object} info - Constellation info from API
+ * @param {string} displayMode - 'default' or 'localized'
+ * @returns {string} Display name
+ */
+function getConstellationDisplayName(con, info, displayMode) {
+    if (displayMode === 'localized' && info && info['localized-name']) {
+        var localized = cleanLocalizedName(info['localized-name']);
+        if (localized) return localized;
+    }
+    return con.name;
+}
+
+/**
+ * Clean localized name by removing control characters.
+ * 
+ * @param {string} name - Raw localized name string
+ * @returns {string} Cleaned name
+ */
+function cleanLocalizedName(name) {
+    if (!name) return '';
+    return String(name)
+        .replace(/[\u2068\u2069\u200B\u200C\u200D\uFEFF]/g, '')
+        .trim();
+}
 
     /**
      * Render the Asterisms panel.
@@ -1477,31 +2930,76 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
             });
     }
 
-    /**
-     * Render the Notable Stars panel.
-     * 
-     * @param {Array} patterns - Star pattern objects
-     */
-    function renderStarsPanel(patterns) {
-        if (!patterns || !patterns.length) {
-            if ($starsContainer) {
-                $starsContainer.html('<div class="loading-placeholder">' + 
-                    _tr("No star names available for this culture") + '</div>');
-            }
-            updatePatternCount("stars", 0);
-            currentPatternsData.stars = [];
-            return;
+/**
+ * Render the Notable Stars panel.
+ * 
+ * @param {Array} patterns - Star pattern objects
+ */
+/*function renderStarsPanel(patterns) {
+    if (!patterns || !patterns.length) {
+        if ($starsContainer) {
+            $starsContainer.html('<div class="loading-placeholder">' + 
+                _tr("No star names available for this culture") + '</div>');
         }
-        
-        updatePatternCount("stars", patterns.length);
-        currentPatternsData.stars = patterns;
-        
-        renderButtons($starsContainer, patterns, "stars", 
-            function(patternName, patternType, searchName, patternId) {
-                stelUtils.goToObject(patternId, DEFAULT_FOV.star, 'star', currentCultureRawData);
-                updateAllButtonStates();
-            });
+        updatePatternCount("stars", 0);
+        currentPatternsData.stars = [];
+        return;
     }
+    
+    var sortBy = ($starsSortBy && $starsSortBy.length) ? $starsSortBy.val() : 'name';
+    var filterVisible = ($starsFilterVisible && $starsFilterVisible.length) ? 
+        $starsFilterVisible.is(':checked') : false;
+    
+    // If filter is enabled but no grouping needed (name sort), handle directly
+    if (sortBy === 'name' && filterVisible) {
+        // Apply sort with filter
+        applyStarSort(patterns);
+        return;
+    }
+    
+    // For other sort options, re-apply sort
+    if (sortBy === 'constellation' || sortBy === 'type') {
+        applyStarSort(patterns);
+    } else {
+        renderFlatStars(patterns);
+    }
+}
+*/
+function renderStarsPanel(patterns) {
+    if (!patterns || !patterns.length) {
+        if ($starsContainer) {
+            $starsContainer.html('<div class="loading-placeholder">' + 
+                _tr("No star names available for this culture") + '</div>');
+        }
+        updatePatternCount("stars", 0);
+        currentPatternsData.stars = [];
+        return;
+    }
+    
+    var sortBy = ($starsSortBy && $starsSortBy.length) ? $starsSortBy.val() : 'name';
+    var filterVisible = ($starsFilterVisible && $starsFilterVisible.length) ? 
+        $starsFilterVisible.is(':checked') : false;
+    var displayMode = ($starsNameDisplay && $starsNameDisplay.length) ? 
+        $starsNameDisplay.val() : 'default';
+    
+    // ============================================================
+    // If display mode is not 'default', we need to fetch data
+    // even when sorting by name without filter
+    // ============================================================
+    var needDisplayNames = (displayMode === 'cultural' || displayMode === 'localized');
+    
+    if (sortBy === 'name' && !filterVisible && !needDisplayNames) {
+        // Simple case: name sort, no filter, default names
+        renderFlatStars(patterns);
+        return;
+    }
+    
+    // ============================================================
+    // For all other cases, use applyStarSort which handles
+    // fetching data and updating display names
+    // ============================================================
+    applyStarSort(patterns);
+}
 
 		/**
 		 * Render the Artwork panel with constellation images.
@@ -1767,6 +3265,24 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 						$artworkContainer.html('<div class="loading-placeholder">' + 
 								_tr("Loading artwork...") + '</div>');
 				}
+				
+				    // Reset constellation controls state when culture changes
+				originalConstellationPatterns = [];
+				currentConstellationNameMode = 'default';
+				if ($constellationNameDisplay && $constellationNameDisplay.length) {
+						$constellationNameDisplay.val('default');
+				}
+				if ($constellationFilterVisible && $constellationFilterVisible.length) {
+						$constellationFilterVisible.prop('checked', false);
+				}
+				
+				// Reset star sorting state when culture changes
+				originalStarPatterns = [];
+				starInfoCache = {};
+				currentStarSortState.sortBy = 'name';
+				currentStarSortState.direction = 'asc';
+				currentStarSortState.filterVisible = false;
+				currentStarGroup = null;
         
         // Reset counters and clear active selections
         updatePatternCount("constellations", 0);
@@ -2218,6 +3734,28 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 										selectedArtworkId = null;
 								}
 						}
+						    // ============================================================
+								// SYNC WITH GROUPED STARS VIEW
+								// ============================================================
+								if (found && data.type === 'star' && data.id) {
+										if ($starsContainer && $starsContainer.length) {
+												// Check if we're in grouped view
+												var hasGroupHeaders = $starsContainer.find('.star-group-header').length > 0;
+												
+												if (hasGroupHeaders) {
+														$starsContainer.find('.pattern-btn').each(function() {
+																var $btn = $(this);
+																if ($btn.data('pattern-id') === data.id) {
+																		$starsContainer.find('.pattern-btn').removeClass('active');
+																		$btn.addClass('active');
+																		selectedPattern = $btn.data('pattern-name');
+																		selectedPatternId = data.id;
+																		console.log("[SkyCulture] Synced grouped star button:", selectedPattern);
+																}
+														});
+												}
+										}
+								}
 				});
 				
 				// ============================================================
@@ -2292,7 +3830,110 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 						$artworkContainer = $(patternsContainers.artwork || 
 								"#artwork-container");
 				}
-        
+				
+				// ============================================================
+				// Initialize constellation controls
+				// ============================================================
+				$constellationFilterVisible = $('#constellation-filter-visible');
+				$highlightNoIsolation = $('#highlight-no-isolation');
+				$constellationNameDisplay = $('#constellation-name-display');
+				
+				// Filter checkbox - re-render when toggled
+				if ($constellationFilterVisible && $constellationFilterVisible.length) {
+						$constellationFilterVisible.on('change', function() {
+								var currentPatterns = originalConstellationPatterns.length > 0 ? 
+										originalConstellationPatterns : 
+										currentPatternsData.constellations || [];
+								
+								if (currentPatterns.length > 0) {
+										renderConstellationsPanel(currentPatterns, isMultiSelectModeActive);
+								}
+						});
+				}
+				
+				// ============================================================
+				// Name display mode - re-render when changed (with loading state)
+				// ============================================================
+				if ($constellationNameDisplay && $constellationNameDisplay.length) {
+						$constellationNameDisplay.on('change', function() {
+								currentConstellationNameMode = $(this).val();
+								
+								var currentPatterns = originalConstellationPatterns.length > 0 ? 
+										originalConstellationPatterns : 
+										currentPatternsData.constellations || [];
+								
+								if (currentPatterns.length > 0) {
+										// Re-render with new display mode
+										renderConstellationsPanel(currentPatterns, isMultiSelectModeActive);
+								}
+						});
+				}
+				
+				// Initialize stars sort controls
+				$starsSortBy = $('#stars-sort-by');
+				$starsSortDirection = $('#stars-sort-direction');
+				$starsFilterVisible = $('#stars-filter-visible');
+				$starsApplySort = $('#stars-apply-sort');
+				$starsSortStatus = $('#stars-sort-status');
+				
+				// ============================================================
+				// NEW: Initialize stars name display mode
+				// ============================================================
+			// Initialize stars name display mode
+			$starsNameDisplay = $('#stars-name-display');
+			if ($starsNameDisplay && $starsNameDisplay.length) {
+					$starsNameDisplay.on('change', function() {
+							currentNameDisplayMode = $(this).val();
+							displayNameCache = {};
+							
+							var currentPatterns = currentPatternsData.stars || [];
+							if (currentPatterns.length > 0) {
+									// Always re-apply sort to fetch display names
+									applyStarSort(currentPatterns);
+							}
+					});
+			}
+				
+				if ($starsApplySort && $starsApplySort.length) {
+						$starsApplySort.on('click', function() {
+								var currentPatterns = currentPatternsData.stars || [];
+								if (currentPatterns.length === 0) {
+										showTourNotification(_tr("No stars to sort"));
+										return;
+								}
+								applyStarSort(currentPatterns);
+						});
+				}
+				
+				if ($starsFilterVisible && $starsFilterVisible.length) {
+						$starsFilterVisible.on('change', function() {
+								var currentPatterns = currentPatternsData.stars || [];
+								if (currentPatterns.length > 0) {
+										applyStarSort(currentPatterns);
+								}
+						});
+				}
+				
+				if ($starsApplySort && $starsApplySort.length) {
+						$starsApplySort.on('click', function() {
+								var currentPatterns = currentPatternsData.stars || [];
+								if (currentPatterns.length === 0) {
+										showTourNotification(_tr("No stars to sort"));
+										return;
+								}
+								applyStarSort(currentPatterns);
+						});
+				}
+				
+				if ($starsFilterVisible && $starsFilterVisible.length) {
+						$starsFilterVisible.on('change', function() {
+								var currentPatterns = currentPatternsData.stars || [];
+								if (currentPatterns.length > 0) {
+										applyStarSort(currentPatterns);
+								}
+						});
+				}
+		
         $infoFrame = $(iframeSelector || "#vo_skycultureinfo");
         
         if (!$cultureContainer || !$cultureContainer.length) {
@@ -2308,7 +3949,25 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         if ($("#skyculture-patterns-tabs").length) {
             $("#skyculture-patterns-tabs").tabs({ heightStyle: "content" });
         }
-        
+
+				// Initialize refresh visibility button
+				var $starsRefreshVisibility = $('#stars-refresh-visibility');
+				if ($starsRefreshVisibility && $starsRefreshVisibility.length) {
+						$starsRefreshVisibility.on('click', function() {
+								var currentPatterns = currentPatternsData.stars || [];
+								if (currentPatterns.length === 0) {
+										showTourNotification(_tr("No stars to refresh"));
+										return;
+								}
+								// Force refresh by clearing cache and re-applying sort
+								starInfoCache = {};
+								originalStarPatterns = [];
+								applyStarSort(currentPatterns, function(sorted) {
+										showTourNotification(_tr("Visibility updated"));
+								});
+						});
+				}
+
         loadSkyCultures(function(success) { 
             if (success) {
                 isInitialized = true;
@@ -3337,10 +4996,10 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 
 				// Multi-Select Mode checkbox and counter
 				var $multiSelectWrapper = $('<div class="tour-multiselect-gold"></div>');
-				$constMultiSelectMode = $('<input type="checkbox" id="const-multi-select-mode">');
+				$constMultiSelectMode = $('<input type="checkbox" id="const-multi-select-mode" title="' + _tr("Enable to select custom constellation array") + '">');
 				$multiSelectWrapper.append($constMultiSelectMode);
 				$multiSelectWrapper.append('<label style="font-weight:bold;cursor:pointer;">' + _tr("Multi-Select") + '</label>');
-				$multiSelectWrapper.append('<span class="tour-multiselect-hint">(' + _tr("Pick multiple") + ')</span>');
+				$multiSelectWrapper.append('<span class="tour-multiselect-hint">(' + _tr("Pick multiple Constellations") + ')</span>');
 
 				$constSelectionCount = $('<span class="tour-selection-count">0 ' + _tr("selected") + '</span>');
 				$multiSelectWrapper.append($constSelectionCount);
@@ -5898,79 +7557,104 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         return selected;
     }
 
-    /**
-     * Update star button behavior based on multi-select mode.
-     * 
-     * When multi-select mode is ON:
-     * - Re-renders buttons without the original click handler
-     * - Attaches custom click handler that toggles selection state
-     * - Selected buttons get special styling
-     * 
-     * When multi-select mode is OFF:
-     * - Re-renders buttons with original navigation handler
-     * - Clears any selection state
-     */
-    function updateStarsButtonsBehavior() {
-        if (!$starsContainer || !$starsContainer.length) return;
+/**
+ * Update star button behavior based on multi-select mode.
+ * 
+ * When multi-select mode is ON:
+ * - Re-renders buttons without the original click handler
+ * - Attaches custom click handler that toggles selection state
+ * - Selected buttons get special styling
+ * 
+ * When multi-select mode is OFF:
+ * - Re-renders buttons with original navigation handler
+ * - Clears any selection state
+ */
+function updateStarsButtonsBehavior() {
+    if (!$starsContainer || !$starsContainer.length) return;
+    
+    // Check if we're in grouped view (has group headers)
+    var hasGroupHeaders = $starsContainer.find('.star-group-header').length > 0;
+    var currentPatterns = currentPatternsData.stars || [];
+    
+    if (isStarsMultiSelectModeActive) {
+        console.log("[SkyCulture] Updating stars buttons for multi-select mode");
         
-        if (isStarsMultiSelectModeActive) {
-            // Get current patterns data
-            var currentPatterns = currentPatternsData.stars;
-            if (currentPatterns && currentPatterns.length) {
-                // Re-render with handler disabled
+        if (hasGroupHeaders) {
+            // ============================================================
+            // We're in grouped view - need to re-render grouped with multi-select
+            // ============================================================
+            // Re-apply sort to regenerate grouped data with multi-select support
+            var sortBy = ($starsSortBy && $starsSortBy.length) ? $starsSortBy.val() : 'name';
+            if (sortBy === 'constellation' || sortBy === 'type') {
+                // Re-apply sort to get fresh grouped data
+                applyStarSort(currentPatterns);
+            } else {
+                // Fallback to flat rendering if not grouped
                 renderButtons($starsContainer, currentPatterns, "stars", null, true);
-                
-                // Then attach multi-select behavior
-                $starsContainer.find('.pattern-btn').off('click.stars').on('click.stars', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    var $btn = $(this);
-                    var patternId = $btn.data('pattern-id');
-                    var patternName = $btn.data('pattern-name');
-                    
-                    if (!patternId) return false;
-                    
-                    if (selectedStarIds.has(patternId)) {
-                        // Deselect: remove from set and clear styling
-                        selectedStarIds.delete(patternId);
-                        $btn.removeClass('selected-star');
-                        $btn.css('background', '');
-                        $btn.css('border-color', '');
-                        $btn.css('color', '');
-                        $btn.removeClass('active');
-                        console.log("[SkyCulture] Star deselected:", patternName, "ID:", patternId);
-                    } else {
-                        // Select: add to set and apply selected styling
-                        selectedStarIds.add(patternId);
-                        $btn.addClass('selected-star');
-                        $btn.css('background', 'linear-gradient(#DCDBDA, #8A8C8E)');
-                        $btn.css('border-color', '#000000');
-                        $btn.css('color', '#000000');
-                        console.log("[SkyCulture] Star selected:", patternName, "ID:", patternId);
-                    }
-                    
-                    updateStarsSelectionCount();
-                    return false;
-                });
+                attachMultiSelectHandlers();
             }
         } else {
-            // Normal mode: re-render with original handler
-            var currentPatterns = currentPatternsData.stars;
-            if (currentPatterns && currentPatterns.length) {
-                renderButtons($starsContainer, currentPatterns, "stars", 
-                    function(patternName, patternType, searchName, patternId) {
-                        stelUtils.goToObject(patternId, DEFAULT_FOV.star, 'star', currentCultureRawData);
-                        updateAllButtonStates();
-                    },
-                    false  // Handler enabled
-                );
-            }
-            
-            // Clear any selected star highlight from previous multi-select
-            clearStarsMultiSelection();
+            // Flat view with multi-select
+            renderButtons($starsContainer, currentPatterns, "stars", null, true);
+            attachMultiSelectHandlers();
         }
+    } else {
+        console.log("[SkyCulture] Updating stars buttons for normal mode");
+        
+        // Normal mode: re-render with original handler
+        if (hasGroupHeaders) {
+            // Re-apply sort to restore grouped view with normal mode
+            var sortBy = ($starsSortBy && $starsSortBy.length) ? $starsSortBy.val() : 'name';
+            if (sortBy === 'constellation' || sortBy === 'type') {
+                applyStarSort(currentPatterns);
+            } else {
+                renderFlatStars(currentPatterns);
+            }
+        } else {
+            renderFlatStars(currentPatterns);
+        }
+        
+        // Clear any selected star highlight from previous multi-select
+        clearStarsMultiSelection();
     }
+}
+
+/**
+ * Attach multi-select click handlers to star buttons.
+ * Used when rendering flat view in multi-select mode.
+ */
+function attachMultiSelectHandlers() {
+    if (!$starsContainer) return;
+    
+    $starsContainer.find('.pattern-btn').off('click.stars').on('click.stars', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        var $btn = $(this);
+        var patternId = $btn.data('pattern-id');
+        var patternName = $btn.data('pattern-name');
+        
+        if (!patternId) return false;
+        
+        if (selectedStarIds.has(patternId)) {
+            selectedStarIds.delete(patternId);
+            $btn.removeClass('selected-star');
+            $btn.css('background', '');
+            $btn.css('border-color', '');
+            $btn.css('color', '');
+            $btn.removeClass('active');
+        } else {
+            selectedStarIds.add(patternId);
+            $btn.addClass('selected-star');
+            $btn.css('background', 'linear-gradient(#DCDBDA, #8A8C8E)');
+            $btn.css('border-color', '#000000');
+            $btn.css('color', '#000000');
+        }
+        
+        updateStarsSelectionCount();
+        return false;
+    });
+}
 
     // =====================================================================
     // 15. PUBLIC API

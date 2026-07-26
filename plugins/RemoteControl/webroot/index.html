@@ -7,8 +7,11 @@
   <title><?= tr("Stellarium remote control plugin")?></title>
   <link type="text/css" rel="stylesheet" href="/external/jquery-ui.css"/>
   <link type="text/css" rel="stylesheet" href="style.css" />
-	<link type="text/css" rel="stylesheet" href="gamepad.css" />
-	<link type="text/css" rel="stylesheet" href="/js/scripteditor/css/scriptEditor.css" />
+	<link type="text/css" rel="stylesheet" href="/css/skyculture.css" />
+	<link type="text/css" rel="stylesheet" href="/css/gamepad.css" />
+	<link type="text/css" rel="stylesheet" href="/css/tourgenerator.css" />
+	<link type="text/css" rel="stylesheet" href="/js/scripteditor/css/scripteditor.css" />	
+	<link type="text/css" rel="stylesheet" href="/js/scripteditor/css/btngenerator.css" />
 	
 	<!-- CodeMirror - Local Code Editor with Syntax Highlighting -->
 	<link rel="stylesheet" href="/js/scripteditor/codemirror/css/codemirror.min.css"/>
@@ -753,10 +756,35 @@
 											<!-- Constellations Tab -->
 											<div id="patterns-tab-constellations" class="patterns-tab-content">
 													<p class="patterns-note"><?= tr("Click on any constellation to highlight and isolate it")?></p>
+													<!-- Sort Controls -->
+													<div class="skyculture-constellation-controls">
+															<div class="constellation-filter-group">
+																	<label class="option-label">
+																			<input type="checkbox" id="constellation-filter-visible" title="<?= tr("Show only constellations currently above horizon")?>"/>
+																			<span><?= tr("Visible above horizon only")?></span>
+																	</label>																	
+															</div>
+															
+															<div class="constellation-navigation-group">
+																	<label class="option-label">
+																			<input type="checkbox" id="highlight-no-isolation" title="<?= tr("Navigate to constellation without isolation")?>"/>
+																			<span><?= tr("Navigate without Isolation")?></span>
+																	</label>
+															</div>
+															
+															<div class="constellation-name-display-group">
+																	<label for="constellation-name-display"><?= tr("Show names as:")?></label>
+																	<select id="constellation-name-display" class="stars-sort-select">
+																			<option value="default"><?= tr("Default")?></option>
+																			<option value="localized"><?= tr("Translated Names")?></option>
+																	</select>
+															</div>
+													</div>
 													<div id="constellations-buttons-container" class="patterns-buttons-container">
 															<div class="loading-placeholder"><?= tr("Select a sky culture to view constellations")?></div>
 													</div>
 											</div>
+
 											
 											<!-- Asterisms Tab -->
 											<div id="patterns-tab-asterisms" class="patterns-tab-content">
@@ -785,13 +813,66 @@
 											<!-- Notable Stars Tab -->
 											<div id="patterns-tab-stars" class="patterns-tab-content">
 													<p class="patterns-note"><?= tr("Named stars with cultural significance")?></p>
+													
+													<!-- Sort Controls -->
+													<div class="stars-sort-controls">
+															<div class="sort-group">
+																	<label for="stars-sort-by"><?= tr("Sort by:")?></label>
+																	<select id="stars-sort-by" class="stars-sort-select">
+																			<option value="name"><?= tr("Name (Alphabetical)")?></option>
+																			<option value="constellation">IAU <?= tr("Constellation")?></option>
+																			<option value="magnitude"><?= tr("Brightness (Magnitude)")?></option>
+																			<option value="type"><?= tr("Object Type")?></option>
+																	</select>
+															</div>
+															
+															<div class="sort-group">
+																	<label for="stars-sort-direction"><?= tr("Order:")?></label>
+																	<select id="stars-sort-direction" class="stars-sort-select">
+																			<option value="asc"><?= tr("Ascending")?></option>
+																			<option value="desc"><?= tr("Descending")?></option>
+																	</select>
+															</div>
+															
+															<div class="sort-group filter-group">
+																	<label class="option-label">
+																			<input type="checkbox" id="stars-filter-visible" title="<?= tr("Show only objects currently above horizon")?>"/>
+																			<span><?= tr("Visible above horizon only")?></span>
+																	</label>
+															</div>
+															
+															<!-- ============================================================ -->
+															<!-- NEW: Name Display Mode -->
+															<!-- ============================================================ -->
+															<div class="sort-group name-display-group">
+																	<label for="stars-name-display"><?= tr("Show names as:")?></label>
+																	<select id="stars-name-display" class="stars-sort-select">
+																			<option value="default"><?= tr("Default")?></option>
+																			<option value="cultural"><?= tr("Cultural Names")?></option>
+																			<option value="localized"><?= tr("Translated Names")?></option>
+																	</select>
+															</div>
+															
+															<button id="stars-apply-sort" class="jquerybutton pattern-btn">
+																	<?= tr("Apply")?>
+															</button>
+															
+															<span id="stars-sort-status" class="stars-sort-status"></span>
+													</div>
+													
 													<div id="stars-buttons-container" class="patterns-buttons-container">
 															<div class="loading-placeholder"><?= tr("No star name data available")?></div>
 													</div>
 											</div>
 											
-											<!-- Description Tab with iframe -->
+											<!-- Description Tab -->
 											<div id="patterns-tab-description" class="patterns-tab-content">
+													<div class="description-controls">
+															<button id="btn-toggle-description-direction" class="jquerybutton pattern-btn">
+																	↔ <?= tr("Switch to RTL")?>
+															</button>
+															<span id="description-direction-status" class="direction-status ltr">LTR</span>
+													</div>
 													<iframe id="vo_skycultureinfo" class="skyculture-info-frame" src="/api/view/skyculturedescription/"></iframe>
 											</div>
 											
@@ -818,6 +899,8 @@
 											 CONSTELLATION LABELS - Size + Color
 											 ============================================================ -->
 									<div class="option-item option-group">
+									<h4><?= tr("Constellations")?></h4>
+									<div class="option-item option-group">									
 											<label class="option-label">
 													<input type="checkbox" class="stelproperty" name="ConstellationMgr.namesDisplayed" />
 													<span><?= tr("Label constellations with font size")?></span>
@@ -839,6 +922,11 @@
 																	</div>
 															</div>
 													</div>
+											</div>
+											<!-- Spinner for StelProperty: ConstellationMgr.namesFadeDuration -->
+											<div class="option-sub-control">
+													<label><?= tr("Constellation name fade duration")?></label>
+													<input class="spinner stelproperty" name="ConstellationMgr.namesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
 											</div>
 									</div>
 									
@@ -868,6 +956,11 @@
 															</div>
 													</div>
 											</div>
+											<!-- Spinner for StelProperty: ConstellationMgr.linesFadeDuration -->
+											<div class="option-sub-control">
+													<label><?= tr("Condtellation line fade duration")?></label>
+													<input class="spinner stelproperty" name="ConstellationMgr.linesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+											</div>
 									</div>
 									
 									<!-- ============================================================
@@ -896,33 +989,10 @@
 															</div>
 													</div>
 											</div>
-									</div>
-									
-									<!-- ============================================================
-											 CONSTELLATION HULLS - Thickness + Color (NEW)
-											 ============================================================ -->
-									<div class="option-item option-group">
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.hullsDisplayed" />
-													<span><?= tr("Show hulls with thickness")?></span>
-											</label>
-											<div class="option-group-controls">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="ConstellationMgr.hullsThickness" data-numberformat="n0"></span>
-															<div id="hulls-thickness" class="slider stelproperty" 
-																	 data-prop="ConstellationMgr.hullsThickness" data-min="1" data-max="5" 
-																	 data-step="1" data-numberformat="n0"></div>
-													</div>
-													<div class="option-sub-control color-control">
-															<div class="color-picker-wrapper" data-prop="ConstellationMgr.hullsColor">
-																	<div class="color-swatch" style="background-color: rgb(200, 150, 80);"></div>
-																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.6" />
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
-																	</div>
-															</div>
-													</div>
+											<!-- Spinner for StelProperty: ConstellationMgr.boundariesFadeDuration -->
+											<div class="option-sub-control">
+													<label><?= tr("Boundaries fade duration")?></label>
+													<input class="spinner stelproperty" name="ConstellationMgr.boundariesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
 											</div>
 									</div>
 									
@@ -942,12 +1012,19 @@
 																	 data-step="0.05" data-numberformat="n2"></div>
 													</div>
 											</div>
+											<!-- Spinner for StelProperty: ConstellationMgr.artFadeDuration -->
+											<div class="option-sub-control">
+													<label><?= tr("Art fade duration")?></label>
+													<input class="spinner stelproperty" name="ConstellationMgr.artFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="2" />
+											</div>
 									</div>
-									
+									</div>
 									<!-- ============================================================
 											 ASTERISM LABELS - Size + Color
 											 ============================================================ -->
 									<div class="option-item option-group">
+									<h4><?= tr("Asterisms")?></h4>
+									<div class="option-item option-group">									
 											<label class="option-label">
 													<input type="checkbox" class="stelproperty" name="AsterismMgr.namesDisplayed" />
 													<span><?= tr("Label asterisms with font size")?></span>
@@ -963,12 +1040,17 @@
 															<div class="color-picker-wrapper" data-prop="AsterismMgr.namesColor">
 																	<div class="color-swatch" style="background-color: rgb(255, 255, 255);"></div>
 																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="1.0" />
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="1.0" />
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="1.0" />
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="1.0" data-numberformat="n2"/>
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="1.0" data-numberformat="n2"/>
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="1.0" data-numberformat="n2"/>
 																	</div>
 															</div>
 													</div>
+													<!-- Spinner for StelProperty: AsterismMgr.namesFadeDuration -->
+												<div class="option-sub-control">
+														<label><?= tr("Asterism name fade duration")?></label>
+														<input class="spinner stelproperty" name="AsterismMgr.namesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1"/>
+												</div>
 											</div>
 									</div>
 									
@@ -998,6 +1080,11 @@
 															</div>
 													</div>
 											</div>
+											<!-- Spinner for StelProperty: AsterismMgr.linesFadeDuration -->
+										<div class="option-sub-control">
+												<label><?= tr("Asterism line fade duration")?></label>
+												<input class="spinner stelproperty" name="AsterismMgr.linesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+										</div>
 									</div>
 									
 									<!-- ============================================================
@@ -1026,11 +1113,19 @@
 															</div>
 													</div>
 											</div>
+											<!-- Spinner for StelProperty: AsterismMgr.rayHelpersFadeDuration -->
+											<div class="option-sub-control">
+													<label><?= tr("Ray helper line fade duration")?></label>
+													<input class="spinner stelproperty" name="AsterismMgr.rayHelpersFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+											</div>
+									</div>
 									</div>
 									
 									<!-- ============================================================
 											 ZODIAC - Thickness + Color
 											 ============================================================ -->
+									<div class="option-item">
+									<h4><?= tr("Zodiac")?> & <?= tr("Lunar Stations")?> & <?= tr("Hulls")?></h4>
 									<div class="option-item option-group">
 											<label class="option-label">
 													<input type="checkbox" class="stelproperty" name="ConstellationMgr.zodiacDisplayed" />
@@ -1053,6 +1148,11 @@
 																	</div>
 															</div>
 													</div>
+											</div>
+											<!-- Spinner for StelProperty: ConstellationMgr.zodiacFadeDuration -->
+											<div class="option-sub-control">
+													<label><?= tr("Zodiac fade duration")?></label>
+													<input class="spinner stelproperty" name="ConstellationMgr.zodiacFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
 											</div>
 									</div>
 									
@@ -1082,8 +1182,47 @@
 															</div>
 													</div>
 											</div>
+											<!-- Spinner for StelProperty: ConstellationMgr.lunarSystemFadeDuration -->
+											<div class="option-sub-control">
+													<label><?= tr("Lunar station fade duration")?></label>
+													<input class="spinner stelproperty" name="ConstellationMgr.lunarSystemFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+											</div>
 									</div>
 									
+									<!-- ============================================================
+											 CONSTELLATION HULLS - Thickness + Color (NEW)
+											 ============================================================ -->
+									<div class="option-item option-group">
+											<label class="option-label">
+													<input type="checkbox" class="stelproperty" name="ConstellationMgr.hullsDisplayed" />
+													<span><?= tr("Show hulls with thickness")?></span>
+											</label>
+											<div class="option-group-controls">
+													<div class="option-sub-control">
+															<span class="stelproperty" data-prop="ConstellationMgr.hullsThickness" data-numberformat="n0"></span>
+															<div id="hulls-thickness" class="slider stelproperty" 
+																	 data-prop="ConstellationMgr.hullsThickness" data-min="1" data-max="5" 
+																	 data-step="1" data-numberformat="n0"></div>
+													</div>
+													<div class="option-sub-control color-control">
+															<div class="color-picker-wrapper" data-prop="ConstellationMgr.hullsColor">
+																	<div class="color-swatch" style="background-color: rgb(200, 150, 80);"></div>
+																	<div class="color-inputs">
+																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
+																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.6" />
+																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
+																	</div>
+															</div>
+													</div>
+											</div>
+											<!-- Spinner for StelProperty: ConstellationMgr.hullsFadeDuration -->
+											<div class="option-sub-control">
+													<label><?= tr("Hulls area fade duration")?></label>
+													<input class="spinner stelproperty" name="ConstellationMgr.hullsFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+											</div>
+									</div>
+									</div>
+																		
 							</div><!-- END .options-grid -->
 							
 							<!-- Additional Options -->
@@ -1529,7 +1668,7 @@
 													<!-- ========================================== -->
 													<!-- PART 1: CATEGORIZED BUTTONS (actionsCategorized.js) -->
 													<!-- ========================================== -->
-													<div id="actions-category-tabs" class="skyculture-patterns-tabs" style="margin-bottom: 10px;">
+													<div id="actions-category-tabs" class="skyculture-patterns-tabs">
 															<ul id="actions-category-tab-list">
 																	<!-- Populated dynamically -->
 															</ul>
