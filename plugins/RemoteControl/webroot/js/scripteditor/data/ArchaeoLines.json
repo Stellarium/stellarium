@@ -240,7 +240,7 @@
         "type": "property",
         "access": "read-write (via method)",
         "description": "Color of the Equinox line. To set: use ArchaeoLines.setEquinoxColor(). To read: use core.getStelProperty().",
-        "example": "// Change equinox color to cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nArchaeoLines.setEquinoxColor(cyan);\n\n// Read current color\nvar colorStr = core.getStelProperty(\"ArchaeoLines.equinoxColor\");\nconsole.log(\"Current equinox color:\", colorStr);"
+        "example": "// Change equinox color to cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nArchaeoLines.setEquinoxColor(cyan);\n\n// Read current color\nvar colorStr = core.getStelProperty(\"ArchaeoLines.equinoxColor\");\ncore.debug(\"Current equinox color:\" + colorStr);"
     },
     {
         "name": "solsticesColor",
@@ -258,7 +258,7 @@
         "type": "property",
         "access": "read-write (via method)",
         "description": "Color of the Sun's current declination line.",
-        "example": "// Change Sun's line color to yellow\nvar yellow = core.vec3f(1.0, 1.0, 0.0);\nArchaeoLines.setCurrentSunColor(yellow);"
+        "example": "// Get current sun's current declination line\nvar  prop = core.getStelProperty(\"ArchaeoLines.currentSunColor\");\ncore.debug(\"Sun's declination line color : \" + prop);\n\n// Change Sun's line color to yellow\nvar yellow = core.vec3f(1.0, 1.0, 0.0);\nArchaeoLines.setCurrentSunColor(yellow);"
     },
     {
         "name": "lineWidth",

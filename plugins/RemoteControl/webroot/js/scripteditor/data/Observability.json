@@ -1,42 +1,5 @@
 [
     {
-        "name": "setEnabled",
-        "category": "Observability - Core",
-        "signature": "void setEnabled(bool enabled)",
-        "description": "Enables or disables the Observability report display on the screen.",
-        "parameters": [
-            {
-                "name": "enabled",
-                "type": "bool",
-                "description": "true to show the report, false to hide",
-                "required": true
-            }
-        ],
-        "returnType": "void",
-        "type": "slot",
-        "compatibility": {
-            "qt5": true,
-            "qt6": true,
-            "minVersion": "0.12.0"
-        },
-        "example": "Observability.setEnabled(true);\nObservability.setEnabled(false);"
-    },
-    {
-        "name": "flagEnabled",
-        "category": "Observability - Properties",
-        "signature": "bool flagEnabled",
-        "description": "Property that controls whether the observability report is displayed. Read via core.getStelProperty() or write via Observability.setEnabled().",
-        "parameters": [],
-        "returnType": "bool",
-        "type": "property",
-        "compatibility": {
-            "qt5": true,
-            "qt6": true,
-            "minVersion": "0.12.0"
-        },
-        "example": "var enabled = core.getStelProperty('Observability.flagEnabled');\nObservability.setEnabled(!enabled);"
-    },
-    {
         "name": "setFontColor",
         "category": "Observability - Appearance",
         "signature": "void setFontColor(Vec3f color)",
@@ -232,7 +195,7 @@
             "qt6": true,
             "minVersion": "0.12.0"
         },
-        "example": "StelObjectMgr.findAndSelect(\"Moon\", \"Planet\");\nObservability.enableFullMoonField(true);"
+        "example": "Observability.enableFullMoonField(true);"
     },
     {
         "name": "resetConfiguration",
