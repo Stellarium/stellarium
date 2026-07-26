@@ -142,6 +142,7 @@ private:
 	                        double opacity = 1.0) const;
 	void drawTwilightContour(QPainter& painter, double altitudeDeg,
 	                         const QPen& pen) const;
+	QVector<QPointF> twilightContourPoints(double altitudeDeg) const;
 	void drawSubPointSymbol(QPainter& painter, double longitudeDeg,
 	                        double latitudeDeg, bool sun) const;
 	void drawPlaceLabels(QPainter& painter) const;

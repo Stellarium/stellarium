@@ -261,14 +261,14 @@ QRgb blendColor(QRgb a, QRgb b, double t)
 	             static_cast<int>(std::round(qAlpha(a) * u + qAlpha(b) * t)));
 }
 
-QRgb blendAcrossThreshold(double value, double higherLimit, double lowerLimit,
-                          QRgb higherColor, QRgb lowerColor)
+QRgb blendBelowThreshold(double value, double threshold, double lowerLimit,
+                         QRgb higherColor, QRgb lowerColor)
 {
-	if (value >= higherLimit)
+	if (value >= threshold)
 		return higherColor;
 	if (value <= lowerLimit)
 		return lowerColor;
-	const double t = (value - lowerLimit) / (higherLimit - lowerLimit);
+	const double t = (value - lowerLimit) / (threshold - lowerLimit);
 	return blendColor(lowerColor, higherColor, t);
 }
 } // namespace
@@ -464,13 +464,15 @@ QSize ObjectVisibilityMapWidget::twilightShadeImageSizeForCurrentView() const
 	const auto rightEdge = lonLatToMapPoint(180.0, 0.0);
 	const double mapWidth = rightEdge.x - leftEdge.x;
 	constexpr int minWidth = 720;
-	constexpr int maxWidth = 1440;
+	const int maxWidth = twilightMapFullTwilight ? 1440 : 2048;
 	int imageWidth = minWidth;
 	if (mapWidth > 0.0)
 	{
 		imageWidth = std::max(minWidth,
 		                      std::min(maxWidth,
-		                               static_cast<int>(std::ceil(mapWidth * 1.25))));
+		                               static_cast<int>(std::ceil(
+			                               mapWidth *
+			                               (twilightMapFullTwilight ? 1.25 : 1.75)))));
 	}
 	if (imageWidth % 2 != 0)
 		++imageWidth;
@@ -526,7 +528,9 @@ void ObjectVisibilityMapWidget::rebuildTwilightMapCache(int imageWidth,
 	const double sunLatRad = twilightSunLatitudeDeg * DEG_TO_RAD;
 	const double sinSunLat = std::sin(sunLatRad);
 	const double cosSunLat = std::cos(sunLatRad);
-	const double antiAliasDeg = std::max(0.04, 180.0 / imageHeight);
+	const double antiAliasDeg = twilightMapFullTwilight
+	                          ? std::max(0.04, 180.0 / imageHeight)
+	                          : std::max(0.015, 90.0 / imageHeight);
 	const double sunLonRad = twilightSunLongitudeDeg * DEG_TO_RAD;
 	const double sinSunLon = std::sin(sunLonRad);
 	const double cosSunLon = std::cos(sunLonRad);
@@ -535,13 +539,13 @@ void ObjectVisibilityMapWidget::rebuildTwilightMapCache(int imageWidth,
 		return std::sin(altitudeDeg * DEG_TO_RAD);
 	};
 	const double horizonAltitudeDeg = twilightHorizonAltitudeDeg();
-	const double horizonHigh = sinAlt(horizonAltitudeDeg + antiAliasDeg);
+	const double horizonThreshold = sinAlt(horizonAltitudeDeg);
 	const double horizonLow = sinAlt(horizonAltitudeDeg - antiAliasDeg);
-	const double civilHigh = sinAlt(-6.0 + antiAliasDeg);
+	const double civilThreshold = sinAlt(-6.0);
 	const double civilLow = sinAlt(-6.0 - antiAliasDeg);
-	const double nauticalHigh = sinAlt(-12.0 + antiAliasDeg);
+	const double nauticalThreshold = sinAlt(-12.0);
 	const double nauticalLow = sinAlt(-12.0 - antiAliasDeg);
-	const double astroHigh = sinAlt(-18.0 + antiAliasDeg);
+	const double astroThreshold = sinAlt(-18.0);
 	const double astroLow = sinAlt(-18.0 - antiAliasDeg);
 	const QRgb dayColor = qRgba(0, 0, 0, 0);
 	const QRgb civilColor = qRgba(95, 155, 255, 58);
@@ -569,25 +573,25 @@ void ObjectVisibilityMapWidget::rebuildTwilightMapCache(int imageWidth,
 			                           cosLat * cosSunLat * cosHourAngle;
 
 			if (!twilightMapFullTwilight)
-				line[x] = blendAcrossThreshold(altitudeSin,
-				                               horizonHigh, horizonLow,
-				                               dayColor, otherNightColor);
+				line[x] = altitudeSin < horizonThreshold
+				        ? otherNightColor
+				        : dayColor;
 			else if (altitudeSin >= horizonLow)
-				line[x] = blendAcrossThreshold(altitudeSin,
-				                               horizonHigh, horizonLow,
-				                               dayColor, civilColor);
+				line[x] = blendBelowThreshold(altitudeSin,
+				                              horizonThreshold, horizonLow,
+				                              dayColor, civilColor);
 			else if (altitudeSin >= civilLow)
-				line[x] = blendAcrossThreshold(altitudeSin,
-				                               civilHigh, civilLow,
-				                               civilColor, nauticalColor);
+				line[x] = blendBelowThreshold(altitudeSin,
+				                              civilThreshold, civilLow,
+				                              civilColor, nauticalColor);
 			else if (altitudeSin >= nauticalLow)
-				line[x] = blendAcrossThreshold(altitudeSin,
-				                               nauticalHigh, nauticalLow,
-				                               nauticalColor, astronomicalColor);
+				line[x] = blendBelowThreshold(altitudeSin,
+				                              nauticalThreshold, nauticalLow,
+				                              nauticalColor, astronomicalColor);
 			else if (altitudeSin >= astroLow)
-				line[x] = blendAcrossThreshold(altitudeSin,
-				                               astroHigh, astroLow,
-				                               astronomicalColor, earthNightColor);
+				line[x] = blendBelowThreshold(altitudeSin,
+				                              astroThreshold, astroLow,
+				                              astronomicalColor, earthNightColor);
 			else
 				line[x] = earthNightColor;
 		}
@@ -622,17 +626,14 @@ void ObjectVisibilityMapWidget::drawMapImageCopies(QPainter& painter,
 	painter.setOpacity(oldOpacity);
 }
 
-void ObjectVisibilityMapWidget::drawTwilightContour(QPainter& painter,
-                                                    double altitudeDeg,
-                                                    const QPen& pen) const
+QVector<QPointF> ObjectVisibilityMapWidget::twilightContourPoints(
+	double altitudeDeg) const
 {
 	const auto leftEdge = lonLatToMapPoint(-180.0, 0.0);
 	const auto rightEdge = lonLatToMapPoint(180.0, 0.0);
 	const double mapWidth = rightEdge.x - leftEdge.x;
-	if (mapWidth <= 0.0) return;
+	if (mapWidth <= 0.0) return {};
 
-	const double ratio = devicePixelRatioF();
-	const double logicalWidth = width() * ratio;
 	const double sunLatRad = twilightSunLatitudeDeg * DEG_TO_RAD;
 	const double sunLonRad = twilightSunLongitudeDeg * DEG_TO_RAD;
 	const double sinSunLat = std::sin(sunLatRad);
@@ -641,37 +642,17 @@ void ObjectVisibilityMapWidget::drawTwilightContour(QPainter& painter,
 	const double sinDistance = std::sin(angularDistance);
 	const double cosDistance = std::cos(angularDistance);
 
-	painter.setPen(pen);
-
-	auto drawPathCopies = [&painter, mapWidth, logicalWidth](const QVector<QPointF>& points)
-	{
-		if (points.size() < 2) return;
-
-		QPainterPath path(points.first());
-		for (int i = 1; i < points.size(); ++i)
-			path.lineTo(points.at(i));
-
-		const QRectF bounds = path.boundingRect();
-		const int firstCopy = static_cast<int>(
-			std::floor((0.0 - bounds.right()) / mapWidth)) - 1;
-		const int lastCopy = static_cast<int>(
-			std::ceil((logicalWidth - bounds.left()) / mapWidth)) + 1;
-		for (int k = firstCopy; k <= lastCopy; ++k)
-		{
-			QPainterPath shifted = path;
-			shifted.translate(k * mapWidth, 0.0);
-			painter.drawPath(shifted);
-		}
-	};
-
 	QVector<QPointF> points;
-	points.reserve(721);
+	constexpr int contourSteps = 1440;
+	points.reserve(contourSteps + 1);
 	double previousX = 0.0;
 	bool hasPrevious = false;
 
-	for (int i = 0; i <= 720; ++i)
+	for (int i = 0; i <= contourSteps; ++i)
 	{
-		const double bearing = static_cast<double>(i) * 0.5 * DEG_TO_RAD;
+		const double bearing = static_cast<double>(i) *
+		                       360.0 / static_cast<double>(contourSteps) *
+		                       DEG_TO_RAD;
 		const double latRad = std::asin(clampUnit(
 			sinSunLat * cosDistance +
 			cosSunLat * sinDistance * std::cos(bearing)));
@@ -695,7 +676,40 @@ void ObjectVisibilityMapWidget::drawTwilightContour(QPainter& painter,
 		hasPrevious = true;
 	}
 
-	drawPathCopies(points);
+	return points;
+}
+
+void ObjectVisibilityMapWidget::drawTwilightContour(QPainter& painter,
+                                                    double altitudeDeg,
+                                                    const QPen& pen) const
+{
+	const auto leftEdge = lonLatToMapPoint(-180.0, 0.0);
+	const auto rightEdge = lonLatToMapPoint(180.0, 0.0);
+	const double mapWidth = rightEdge.x - leftEdge.x;
+	if (mapWidth <= 0.0) return;
+
+	const QVector<QPointF> points = twilightContourPoints(altitudeDeg);
+	if (points.size() < 2) return;
+
+	QPainterPath path(points.first());
+	for (int i = 1; i < points.size(); ++i)
+		path.lineTo(points.at(i));
+
+	const double ratio = devicePixelRatioF();
+	const double logicalWidth = width() * ratio;
+	const QRectF bounds = path.boundingRect();
+	const int firstCopy = static_cast<int>(
+		std::floor((0.0 - bounds.right()) / mapWidth)) - 1;
+	const int lastCopy = static_cast<int>(
+		std::ceil((logicalWidth - bounds.left()) / mapWidth)) + 1;
+
+	painter.setPen(pen);
+	for (int k = firstCopy; k <= lastCopy; ++k)
+	{
+		QPainterPath shifted = path;
+		shifted.translate(k * mapWidth, 0.0);
+		painter.drawPath(shifted);
+	}
 }
 
 void ObjectVisibilityMapWidget::drawSubPointSymbol(QPainter& painter,
