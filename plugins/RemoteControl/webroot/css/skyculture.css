@@ -1757,7 +1757,7 @@
     padding: 0;
     margin: 0;
     background-color: transparent;
-    background-image: url("images/icons.png");
+    background-image: url("../images/icons.png");
     background-repeat: no-repeat;
     border: none;
     border-radius: 4px;
@@ -1767,7 +1767,7 @@
 }
 
 .script-controls .script-control-btn:hover {
-    background-image: url("images/icons-active.png");
+    background-image: url("../images/icons-active.png");
     transform: translateY(-1px);
 }
 
@@ -1779,7 +1779,7 @@
     opacity: 0.5;
     cursor: not-allowed;
     transform: none;
-    background-image: url("images/icons.png");
+    background-image: url("../images/icons.png");
 }
 
 /* Individual button icon positions */
