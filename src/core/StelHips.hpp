@@ -27,6 +27,8 @@
 #include <QImage>
 #include <QJsonObject>
 #include <QUrl>
+#include <QSet>
+#include <QHash>
 #include <functional>
 
 #include "StelTexture.hpp"
@@ -175,6 +177,9 @@ private:
 	bool invertedColors = false;
 	bool planetarySurvey;
 	QCache<qint64, HipsTile> tiles;
+	//! Used for iterating over #tiles during eviction of unfinished invisible tiles
+	QSet<qint64> cachedTiles;
+	QSet<qint64> visibleTiles;
 	// reply to the initial download of the properties file and to the
 	// allsky texture.
 	QNetworkReply *networkReply = Q_NULLPTR;
@@ -230,6 +235,7 @@ private:
 	               QVector<uint16_t>& indices, bool withAtmosphericExtinction, const Vec3f& extinctionColor);
 
 	void updateProgressBar(int nb, int total);
+	void dropUnfinishedInvisibleTiles();
 };
 
 #endif // STELHIPS_
