@@ -572,7 +572,7 @@ void HipsSurvey::updateProgressBar(int nb, int total)
 HipsTile* HipsSurvey::getTile(int order, int pix)
 {
 	int nside = 1 << order;
-	long int uid = pix + 4L * nside * nside;
+	const auto uid = pix + qint64(4) * nside * nside;
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	HipsTile* tile = tiles[uid];
 	if (!tile)
@@ -599,7 +599,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 			tile->allsky = texMgr.createTexture(image, texParams);
 		}
 		int tileWidth = getPropertyInt("hips_tile_width", 512);
-		tiles.insert(uid, tile, static_cast<long>(tileWidth) * tileWidth);
+		tiles.insert(uid, tile, static_cast<qint64>(tileWidth) * tileWidth);
 	}
 
 	if (tile && normals && !tile->normalTexture)

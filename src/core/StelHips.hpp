@@ -174,7 +174,7 @@ private:
 	int colorChannel = ColorChannelRgb;
 	bool invertedColors = false;
 	bool planetarySurvey;
-	QCache<long int, HipsTile> tiles;
+	QCache<qint64, HipsTile> tiles;
 	// reply to the initial download of the properties file and to the
 	// allsky texture.
 	QNetworkReply *networkReply = Q_NULLPTR;
