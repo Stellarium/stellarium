@@ -855,7 +855,7 @@
             <property name="verticalSpacing">
              <number>1</number>
             </property>
-            <item row="0" column="0" colspan="2">
+            <item row="0" column="0" colspan="3">
              <widget class="QLabel" name="twilightMapLegendAltitudeHeader">
               <property name="styleSheet">
                <string notr="true">font-weight: bold;</string>
@@ -876,9 +876,19 @@
              </widget>
             </item>
             <item row="1" column="1">
+             <widget class="QLabel" name="twilightMapLegendNumberSunset">
+              <property name="text">
+               <string notr="true">0°</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
              <widget class="QLabel" name="twilightMapLegendTextSunset">
               <property name="text">
-               <string>0° rise/set</string>
+               <string>rise/set</string>
               </property>
              </widget>
             </item>
@@ -893,9 +903,19 @@
              </widget>
             </item>
             <item row="2" column="1">
+             <widget class="QLabel" name="twilightMapLegendNumberCivil">
+              <property name="text">
+               <string notr="true">-6°</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
              <widget class="QLabel" name="twilightMapLegendTextCivil">
               <property name="text">
-               <string>-6° civil</string>
+               <string>civil</string>
               </property>
              </widget>
             </item>
@@ -910,9 +930,19 @@
              </widget>
             </item>
             <item row="3" column="1">
+             <widget class="QLabel" name="twilightMapLegendNumberNautical">
+              <property name="text">
+               <string notr="true">-12°</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
              <widget class="QLabel" name="twilightMapLegendTextNautical">
               <property name="text">
-               <string>-12° nautical</string>
+               <string>nautical</string>
               </property>
              </widget>
             </item>
@@ -927,9 +957,19 @@
              </widget>
             </item>
             <item row="4" column="1">
+             <widget class="QLabel" name="twilightMapLegendNumberAstronomical">
+              <property name="text">
+               <string notr="true">-18°</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
              <widget class="QLabel" name="twilightMapLegendTextAstronomical">
               <property name="text">
-               <string>-18° astronomical</string>
+               <string>astronomical</string>
               </property>
              </widget>
             </item>
@@ -947,9 +987,19 @@
              </widget>
             </item>
             <item row="5" column="1">
+             <widget class="QLabel" name="twilightMapLegendNumberNight">
+              <property name="text">
+               <string notr="true">&lt; -18°</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="2">
              <widget class="QLabel" name="twilightMapLegendTextNight">
               <property name="text">
-               <string>&lt; -18° night</string>
+               <string>night</string>
               </property>
              </widget>
             </item>
