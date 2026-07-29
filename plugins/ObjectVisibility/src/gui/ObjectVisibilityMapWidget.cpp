@@ -251,26 +251,6 @@ double longitudeDifferenceDeg(double a, double b)
 	return std::abs(normalizeLongitudeDeg(a - b));
 }
 
-QRgb blendColor(QRgb a, QRgb b, double t)
-{
-	t = std::max(0.0, std::min(1.0, t));
-	const double u = 1.0 - t;
-	return qRgba(static_cast<int>(std::round(qRed(a)   * u + qRed(b)   * t)),
-	             static_cast<int>(std::round(qGreen(a) * u + qGreen(b) * t)),
-	             static_cast<int>(std::round(qBlue(a)  * u + qBlue(b)  * t)),
-	             static_cast<int>(std::round(qAlpha(a) * u + qAlpha(b) * t)));
-}
-
-QRgb blendBelowThreshold(double value, double threshold, double lowerLimit,
-                         QRgb higherColor, QRgb lowerColor)
-{
-	if (value >= threshold)
-		return higherColor;
-	if (value <= lowerLimit)
-		return lowerColor;
-	const double t = (value - lowerLimit) / (threshold - lowerLimit);
-	return blendColor(lowerColor, higherColor, t);
-}
 } // namespace
 
 void ObjectVisibilityMapWidget::drawLatitudeLine(QPainter& painter,
@@ -528,9 +508,6 @@ void ObjectVisibilityMapWidget::rebuildTwilightMapCache(int imageWidth,
 	const double sunLatRad = twilightSunLatitudeDeg * DEG_TO_RAD;
 	const double sinSunLat = std::sin(sunLatRad);
 	const double cosSunLat = std::cos(sunLatRad);
-	const double antiAliasDeg = twilightMapFullTwilight
-	                          ? std::max(0.04, 180.0 / imageHeight)
-	                          : std::max(0.015, 90.0 / imageHeight);
 	const double sunLonRad = twilightSunLongitudeDeg * DEG_TO_RAD;
 	const double sinSunLon = std::sin(sunLonRad);
 	const double cosSunLon = std::cos(sunLonRad);
@@ -540,13 +517,9 @@ void ObjectVisibilityMapWidget::rebuildTwilightMapCache(int imageWidth,
 	};
 	const double horizonAltitudeDeg = twilightHorizonAltitudeDeg();
 	const double horizonThreshold = sinAlt(horizonAltitudeDeg);
-	const double horizonLow = sinAlt(horizonAltitudeDeg - antiAliasDeg);
 	const double civilThreshold = sinAlt(-6.0);
-	const double civilLow = sinAlt(-6.0 - antiAliasDeg);
 	const double nauticalThreshold = sinAlt(-12.0);
-	const double nauticalLow = sinAlt(-12.0 - antiAliasDeg);
 	const double astroThreshold = sinAlt(-18.0);
-	const double astroLow = sinAlt(-18.0 - antiAliasDeg);
 	const QRgb dayColor = qRgba(0, 0, 0, 0);
 	const QRgb civilColor = qRgba(95, 155, 255, 58);
 	const QRgb nauticalColor = qRgba(55, 105, 225, 88);
@@ -572,26 +545,16 @@ void ObjectVisibilityMapWidget::rebuildTwilightMapCache(int imageWidth,
 			const double altitudeSin = sinLat * sinSunLat +
 			                           cosLat * cosSunLat * cosHourAngle;
 
-			if (!twilightMapFullTwilight)
-				line[x] = altitudeSin < horizonThreshold
-				        ? otherNightColor
-				        : dayColor;
-			else if (altitudeSin >= horizonLow)
-				line[x] = blendBelowThreshold(altitudeSin,
-				                              horizonThreshold, horizonLow,
-				                              dayColor, civilColor);
-			else if (altitudeSin >= civilLow)
-				line[x] = blendBelowThreshold(altitudeSin,
-				                              civilThreshold, civilLow,
-				                              civilColor, nauticalColor);
-			else if (altitudeSin >= nauticalLow)
-				line[x] = blendBelowThreshold(altitudeSin,
-				                              nauticalThreshold, nauticalLow,
-				                              nauticalColor, astronomicalColor);
-			else if (altitudeSin >= astroLow)
-				line[x] = blendBelowThreshold(altitudeSin,
-				                              astroThreshold, astroLow,
-				                              astronomicalColor, earthNightColor);
+			if (altitudeSin >= horizonThreshold)
+				line[x] = dayColor;
+			else if (!twilightMapFullTwilight)
+				line[x] = otherNightColor;
+			else if (altitudeSin >= civilThreshold)
+				line[x] = civilColor;
+			else if (altitudeSin >= nauticalThreshold)
+				line[x] = nauticalColor;
+			else if (altitudeSin >= astroThreshold)
+				line[x] = astronomicalColor;
 			else
 				line[x] = earthNightColor;
 		}
