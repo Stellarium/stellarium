@@ -28,7 +28,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Astronomical calculations</string>
      </property>
     </widget>
@@ -36,10 +36,10 @@
    <item>
     <widget class="QFrame" name="viewContent">
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::Shape::StyledPanel</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
+      <enum>QFrame::Shadow::Plain</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_6">
       <property name="leftMargin">
@@ -60,31 +60,31 @@
       <item row="0" column="0">
        <widget class="QListWidget" name="stackListWidget">
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string/>
         </property>
         <property name="verticalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
+         <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
         </property>
         <property name="horizontalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
+         <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
         </property>
         <property name="movement">
-         <enum>QListView::Static</enum>
+         <enum>QListView::Movement::Static</enum>
         </property>
         <property name="flow">
-         <enum>QListView::LeftToRight</enum>
+         <enum>QListView::Flow::LeftToRight</enum>
         </property>
         <property name="isWrapping" stdset="0">
          <bool>false</bool>
         </property>
         <property name="resizeMode">
-         <enum>QListView::Adjust</enum>
+         <enum>QListView::ResizeMode::Adjust</enum>
         </property>
         <property name="viewMode">
-         <enum>QListView::IconMode</enum>
+         <enum>QListView::ViewMode::IconMode</enum>
         </property>
         <property name="selectionRectVisible">
          <bool>false</bool>
@@ -215,7 +215,7 @@
           <item row="1" column="0">
            <widget class="QTabWidget" name="tabWidgetPositions">
             <property name="tabPosition">
-             <enum>QTabWidget::South</enum>
+             <enum>QTabWidget::TabPosition::South</enum>
             </property>
             <property name="currentIndex">
              <number>0</number>
@@ -260,7 +260,7 @@
                 <item>
                  <spacer name="horizontalSpacer_2">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -276,7 +276,7 @@
                    <bool>true</bool>
                   </property>
                   <property name="insertPolicy">
-                   <enum>QComboBox::NoInsert</enum>
+                   <enum>QComboBox::InsertPolicy::NoInsert</enum>
                   </property>
                  </widget>
                 </item>
@@ -288,7 +288,7 @@
                  <string>List of objects above horizon</string>
                 </property>
                 <property name="editTriggers">
-                 <set>QAbstractItemView::NoEditTriggers</set>
+                 <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                 </property>
                 <property name="rootIsDecorated">
                  <bool>false</bool>
@@ -349,7 +349,6 @@
                <widget class="QLabel" name="hecPositionsHeaderLabel">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -357,7 +356,7 @@
                  <string>Heliocentric ecliptic positions of the major planets</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignCenter</set>
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -394,7 +393,7 @@
                 <item>
                  <widget class="QTreeWidget" name="hecPositionsTreeWidget">
                   <property name="editTriggers">
-                   <set>QAbstractItemView::NoEditTriggers</set>
+                   <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                   </property>
                   <property name="rootIsDecorated">
                    <bool>false</bool>
@@ -438,7 +437,7 @@
                   <item>
                    <widget class="QDoubleSpinBox" name="hecMagnitudeLimitSpinBox">
                     <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                     </property>
                     <property name="maximum">
                      <double>15.000000000000000</double>
@@ -451,7 +450,7 @@
                   <item>
                    <spacer name="horizontalSpacer_17">
                     <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
+                     <enum>Qt::Orientation::Horizontal</enum>
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
@@ -468,7 +467,7 @@
               <item row="1" column="1">
                <widget class="QChartView" name="hecPositionsChartView">
                 <property name="renderHints">
-                 <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+                 <set>QPainter::RenderHint::Antialiasing|QPainter::RenderHint::TextAntialiasing</set>
                 </property>
                </widget>
               </item>
@@ -511,7 +510,7 @@
           <item row="7" column="0" colspan="2">
            <widget class="QTreeWidget" name="ephemerisTreeWidget">
             <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
+             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
             </property>
             <property name="rootIsDecorated">
              <bool>false</bool>
@@ -557,7 +556,28 @@
                <number>-1</number>
               </property>
               <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
+               <enum>QComboBox::InsertPolicy::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="pushFindSelectedSSO">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Finding the selected solar system object in the list of celestial bodies.</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../data/gui/guiRes.qrc">
+                <normaloff>:/graphicGui/bbtSearch-off.png</normaloff>
+                <disabledoff>:/graphicGui/bbtSearch-off.png</disabledoff>:/graphicGui/bbtSearch-off.png</iconset>
               </property>
              </widget>
             </item>
@@ -577,7 +597,7 @@
                <bool>true</bool>
               </property>
               <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
+               <enum>QComboBox::InsertPolicy::NoInsert</enum>
               </property>
              </widget>
             </item>
@@ -601,7 +621,7 @@
             <item>
              <spacer name="horizontalSpacer_3">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -683,7 +703,7 @@
             <item>
              <spacer name="horizontalSpacer">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -716,7 +736,7 @@
             <item>
              <spacer name="horizontalSpacer_6">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -832,7 +852,7 @@
               <item>
                <widget class="QSpinBox" name="dateFromYearSpinBox">
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>-13000</number>
@@ -848,7 +868,7 @@
                  <string>Month</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -864,7 +884,7 @@
                  <string>Day</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -880,7 +900,7 @@
                  <string>Hours</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>0</number>
@@ -896,7 +916,7 @@
                  <string>Minutes</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="maximum">
                  <number>59</number>
@@ -932,7 +952,7 @@
               <item>
                <widget class="QSpinBox" name="dateToDurationSpinBox">
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -950,7 +970,7 @@
             <item>
              <spacer name="horizontalSpacer_8">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -975,7 +995,7 @@
                  <bool>true</bool>
                 </property>
                 <property name="insertPolicy">
-                 <enum>QComboBox::NoInsert</enum>
+                 <enum>QComboBox::InsertPolicy::NoInsert</enum>
                 </property>
                </widget>
               </item>
@@ -1080,7 +1100,6 @@
                 </property>
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -1103,7 +1122,7 @@
               <item>
                <widget class="QSpinBox" name="rtsFromYearSpinBox">
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>-13000</number>
@@ -1119,7 +1138,7 @@
                  <string>Month</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -1146,7 +1165,7 @@
                  <string>Duration in months</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -1171,7 +1190,6 @@
            <widget class="QLabel" name="rtsHeaderLabel">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -1179,7 +1197,7 @@
              <string>Table of approximate risings, transits, and settings for selected celestial object</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="wordWrap">
              <bool>true</bool>
@@ -1192,7 +1210,7 @@
              <string>Note: artificial satellites and unnamed stars are excluded from calculation</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="wordWrap">
              <bool>true</bool>
@@ -1218,7 +1236,7 @@
                <bool>true</bool>
               </property>
               <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
+               <enum>QComboBox::InsertPolicy::NoInsert</enum>
               </property>
              </widget>
             </item>
@@ -1234,7 +1252,7 @@
                <string>and</string>
               </property>
               <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <set>Qt::AlignmentFlag::AlignCenter</set>
               </property>
              </widget>
             </item>
@@ -1250,7 +1268,7 @@
                <bool>true</bool>
               </property>
               <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
+               <enum>QComboBox::InsertPolicy::NoInsert</enum>
               </property>
              </widget>
             </item>
@@ -1289,7 +1307,7 @@
                  </sizepolicy>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                </widget>
               </item>
@@ -1298,10 +1316,10 @@
             <item>
              <spacer name="horizontalSpacer_9">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeType">
-               <enum>QSizePolicy::MinimumExpanding</enum>
+               <enum>QSizePolicy::Policy::MinimumExpanding</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -1323,7 +1341,7 @@
               <item>
                <widget class="QSpinBox" name="phenomenFromYearSpinBox">
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>-13000</number>
@@ -1339,7 +1357,7 @@
                  <string>Month</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -1369,7 +1387,7 @@
                  <string>Duration in months</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -1421,7 +1439,7 @@
           <item row="5" column="0" colspan="2">
            <widget class="QTreeWidget" name="phenomenaTreeWidget">
             <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
+             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
             </property>
             <property name="rootIsDecorated">
              <bool>false</bool>
@@ -1476,7 +1494,7 @@
             <item>
              <spacer name="horizontalSpacer_4">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -1496,12 +1514,11 @@
            <widget class="QTabWidget" name="tabWidgetGraphs">
             <property name="font">
              <font>
-              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
             <property name="tabPosition">
-             <enum>QTabWidget::South</enum>
+             <enum>QTabWidget::TabPosition::South</enum>
             </property>
             <property name="currentIndex">
              <number>0</number>
@@ -1555,7 +1572,7 @@
                    <string>Altitude limit in degrees</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                   <property name="minimum">
                    <number>-85</number>
@@ -1568,7 +1585,7 @@
                 <item>
                  <spacer name="horizontalSpacer_18">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -1590,7 +1607,7 @@
               <item row="0" column="0" colspan="2">
                <widget class="QChartView" name="altVsTimeChartView">
                 <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
+                 <enum>Qt::FocusPolicy::NoFocus</enum>
                 </property>
                 <property name="acceptDrops">
                  <bool>false</bool>
@@ -1621,7 +1638,7 @@
                 <item>
                  <spacer name="aziVsTimeHorizontalSpacer">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -1683,7 +1700,7 @@
                    <string>Altitude limit in degrees</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                   <property name="maximum">
                    <number>85</number>
@@ -1708,7 +1725,7 @@
                    <number>1</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                 </item>
@@ -1718,14 +1735,14 @@
                    <string/>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_19">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -1777,10 +1794,10 @@
                    <bool>true</bool>
                   </property>
                   <property name="insertPolicy">
-                   <enum>QComboBox::NoInsert</enum>
+                   <enum>QComboBox::InsertPolicy::NoInsert</enum>
                   </property>
                   <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContents</enum>
+                   <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
                   </property>
                  </widget>
                 </item>
@@ -1802,7 +1819,7 @@
                      <string>How many months to display</string>
                     </property>
                     <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                     </property>
                     <property name="minimum">
                      <number>1</number>
@@ -1825,10 +1842,10 @@
                   <item>
                    <spacer name="horizontalSpacer_20">
                     <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
+                     <enum>Qt::Orientation::Horizontal</enum>
                     </property>
                     <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
+                     <enum>QSizePolicy::Policy::Fixed</enum>
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
@@ -1851,7 +1868,7 @@
                      <string>Step width for computation. Caution! Short steps cause slow graphs.</string>
                     </property>
                     <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                     </property>
                     <property name="suffix">
                      <string extracomment="hours">h</string>
@@ -1870,10 +1887,10 @@
                   <item>
                    <spacer name="horizontalSpacer_5">
                     <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
+                     <enum>Qt::Orientation::Horizontal</enum>
                     </property>
                     <property name="sizeType">
-                     <enum>QSizePolicy::MinimumExpanding</enum>
+                     <enum>QSizePolicy::Policy::MinimumExpanding</enum>
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
@@ -1891,7 +1908,7 @@
                    <string>Second graph:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -1907,10 +1924,10 @@
                    <bool>true</bool>
                   </property>
                   <property name="insertPolicy">
-                   <enum>QComboBox::NoInsert</enum>
+                   <enum>QComboBox::InsertPolicy::NoInsert</enum>
                   </property>
                   <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContents</enum>
+                   <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
                   </property>
                  </widget>
                 </item>
@@ -1920,7 +1937,7 @@
                    <string>First graph:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -1930,7 +1947,7 @@
                    <string>Notes: This tool works on Earth only! Short steps and long duration may cause a long delay!</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                   <property name="wordWrap">
                    <bool>true</bool>
@@ -1971,7 +1988,7 @@
                 <item>
                  <spacer name="horizontalSpacer_11">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -1993,14 +2010,14 @@
                    <bool>true</bool>
                   </property>
                   <property name="insertPolicy">
-                   <enum>QComboBox::NoInsert</enum>
+                   <enum>QComboBox::InsertPolicy::NoInsert</enum>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_12">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -2058,14 +2075,14 @@
                    <string>Important note: this tool works on Earth only!</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                 </item>
                 <item row="1" column="1">
                  <widget class="QSpinBox" name="lunarElongationLimitSpinBox">
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                   <property name="maximum">
                    <number>180</number>
@@ -2075,7 +2092,7 @@
                 <item row="1" column="2">
                  <spacer name="horizontalSpacer_16">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -2149,7 +2166,7 @@
                  <string>Minimal angular size for visible celestial objects</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                </widget>
               </item>
@@ -2162,14 +2179,14 @@
                  <string>Maximum angular size for visible celestial objects</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                </widget>
               </item>
               <item row="2" column="2">
                <widget class="AngleSpinBox" name="wutAltitudeMinSpinBox">
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                </widget>
               </item>
@@ -2211,7 +2228,7 @@
                 <item>
                  <spacer name="horizontalSpacer_10">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -2234,7 +2251,7 @@
                 <item>
                  <widget class="QDoubleSpinBox" name="wutMagnitudeDoubleSpinBox">
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                   <property name="minimum">
                    <double>-21.000000000000000</double>
@@ -2261,7 +2278,7 @@
             <item>
              <widget class="QTreeWidget" name="wutMatchingObjectsTreeWidget">
               <property name="editTriggers">
-               <set>QAbstractItemView::NoEditTriggers</set>
+               <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
               </property>
               <property name="rootIsDecorated">
                <bool>false</bool>
@@ -2301,7 +2318,7 @@
                <bool>true</bool>
               </property>
               <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
+               <enum>QComboBox::InsertPolicy::NoInsert</enum>
               </property>
              </widget>
             </item>
@@ -2311,7 +2328,7 @@
                <bool>true</bool>
               </property>
               <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
+               <enum>QComboBox::InsertPolicy::NoInsert</enum>
               </property>
              </widget>
             </item>
@@ -2334,7 +2351,7 @@
           <item row="1" column="0">
            <widget class="QTabWidget" name="tabWidgetPC">
             <property name="tabPosition">
-             <enum>QTabWidget::South</enum>
+             <enum>QTabWidget::TabPosition::South</enum>
             </property>
             <property name="currentIndex">
              <number>0</number>
@@ -2367,7 +2384,7 @@
                    <string>Synodic period:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -2387,7 +2404,7 @@
                    <string>Orbital velocity of first celestial body:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -2397,7 +2414,7 @@
                    <string>Angular distance:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -2410,7 +2427,7 @@
                    <string>Mean motion of second celestial body:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -2420,7 +2437,7 @@
                    <string>Mean motion of first celestial body:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -2436,7 +2453,7 @@
                    <string>Orbital velocity of second celestial body:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -2452,7 +2469,7 @@
                    <string>Orbital periods ratio:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -2462,7 +2479,7 @@
                    <string>Equatorial diameters ratio:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -2472,7 +2489,7 @@
                    <string>Linear distance:</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -2484,7 +2501,7 @@
               <item row="1" column="0">
                <spacer name="verticalSpacer">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -2521,7 +2538,7 @@
                 <item>
                  <spacer name="horizontalSpacer_15">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -2551,7 +2568,7 @@
           <item row="1" column="0">
            <widget class="QTabWidget" name="tabWidgetEclipses">
             <property name="tabPosition">
-             <enum>QTabWidget::South</enum>
+             <enum>QTabWidget::TabPosition::South</enum>
             </property>
             <property name="currentIndex">
              <number>0</number>
@@ -2638,7 +2655,7 @@
                 </attribute>
                </widget>
               </item>
-              <item row="3" column="0" alignment="Qt::AlignBottom">
+              <item row="3" column="0" alignment="Qt::AlignmentFlag::AlignBottom">
                <widget class="QTreeWidget" name="solareclipsecontactsTreeWidget">
                 <property name="rootIsDecorated">
                  <bool>false</bool>
@@ -2814,7 +2831,7 @@
                 </item>
                </layout>
               </item>
-              <item row="2" column="0" alignment="Qt::AlignBottom">
+              <item row="2" column="0" alignment="Qt::AlignmentFlag::AlignBottom">
                <widget class="QTreeWidget" name="lunareclipsecontactsTreeWidget">
                 <property name="rootIsDecorated">
                  <bool>false</bool>
@@ -2933,7 +2950,7 @@
                  <string>Duration in years</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -2967,7 +2984,6 @@
                 </property>
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -2975,7 +2991,7 @@
                  <string>Table of solar eclipses</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -2985,10 +3001,10 @@
               <item>
                <spacer name="horizontalSpacer_14">
                 <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                 <enum>Qt::Orientation::Horizontal</enum>
                 </property>
                 <property name="sizeType">
-                 <enum>QSizePolicy::Fixed</enum>
+                 <enum>QSizePolicy::Policy::Fixed</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -3008,7 +3024,7 @@
               <item>
                <widget class="QSpinBox" name="eclipseFromYearSpinBox">
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>-13000</number>
@@ -3044,7 +3060,7 @@
                <item>
                 <spacer name="eclipseFilterSpacer">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
