@@ -8835,7 +8835,7 @@ msgstr "Mag."
 #. TRANSLATORS: angular size, arc-minutes
 #: src/gui/AstroCalcDialog.cpp:917 src/gui/AstroCalcDialog.cpp:922
 msgid "A.S."
-msgstr "T.a."
+msgstr "D.a."
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
@@ -18595,7 +18595,7 @@ msgstr "Utiliser les coordonnées horizontales"
 #: src/ui_astroCalcDialog.h:2339 src/ui_astroCalcDialog.h:2407
 msgctxt "horizontal coordinates"
 msgid "hor. coord."
-msgstr "coord. hor."
+msgstr "Coord. hor."
 
 #: src/ui_astroCalcDialog.h:2341
 msgid "List of objects above horizon"
@@ -18711,8 +18711,8 @@ msgstr "Options supplémentaires de la visualisation des éphémérides"
 #: src/ui_astroCalcDialog.h:2401
 msgid "Allow results outside recommended time range of orbital elements"
 msgstr ""
-"Autoriser les résultats en dehors de la plage de temps recommandées dans les"
-" éléments orbitaux"
+"Autoriser les résultats en dehors de la plage de temps recommandée dans les "
+"éléments orbitaux"
 
 #: src/ui_astroCalcDialog.h:2403
 msgctxt "Ignore date test"
@@ -19149,19 +19149,19 @@ msgstr "Options supplémentaires"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:254
 msgid "Label each N steps, where N is"
-msgstr "Étiqueter chaque N étape, avec N égal à"
+msgstr "Étiqueter chaque N-ième étape, avec N égal à"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:255
 msgid "Only draw labelled markers"
-msgstr "Ne dessiner que les marqueurs avec nom"
+msgstr "Ne dessiner que des marqueurs étiquetés"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:256
 msgid "Show only labels for 1st of each month"
-msgstr "N'afficher les noms que le 1er de chaque mois"
+msgstr "N'étiqueter que la position du 1er de chaque mois"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:257
 msgid "Anti-clutter labels, min. distance"
-msgstr "Moins de noms, distance min."
+msgstr "Moins d'étiquettes, avec distance minimale"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:259
 msgid "Use small markers, when line is enabled"
