@@ -202,11 +202,11 @@ void ObjectVisibilityDialog::createDialogContent()
 	connect(core, &StelCore::dateChanged,
 	        this, &ObjectVisibilityDialog::refreshTwilightLimits);
 	connect(core, &StelCore::dateChanged,
-	        this, &ObjectVisibilityDialog::refreshTwilightMap);
+	        this, &ObjectVisibilityDialog::scheduleTwilightMapRefresh);
 	twilightMapTimer = new QTimer(this);
 	twilightMapTimer->setInterval(250);
 	connect(twilightMapTimer, &QTimer::timeout,
-	        this, &ObjectVisibilityDialog::refreshTwilightMap);
+	        this, [this](){ refreshTwilightMap(); });
 	twilightMapTimer->start();
 	syncMarkerToObserver();
 
@@ -620,7 +620,7 @@ void ObjectVisibilityDialog::syncMarkerToObserver()
 	updateCalculateButtonEnabled();
 	refreshTitleLabel();
 	refreshTwilightLimits();
-	refreshTwilightMap();
+	scheduleTwilightMapRefresh();
 	updatePlaceLabels();
 }
 
@@ -684,6 +684,30 @@ void ObjectVisibilityDialog::refreshTwilightLimits()
 
 void ObjectVisibilityDialog::refreshTwilightMap()
 {
+	refreshTwilightMap(false);
+}
+
+void ObjectVisibilityDialog::scheduleTwilightMapRefresh()
+{
+	if (twilightMapRefreshPending)
+		return;
+
+	twilightMapRefreshPending = true;
+	QTimer::singleShot(0, this, &ObjectVisibilityDialog::refreshTwilightMapNow);
+}
+
+void ObjectVisibilityDialog::refreshTwilightMapNow()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core)
+		core->update(0.0);
+
+	twilightMapRefreshPending = false;
+	refreshTwilightMap(true);
+}
+
+void ObjectVisibilityDialog::refreshTwilightMap(bool force)
+{
 	if (!ui || !ui->liveTwilightMapWidget) return;
 
 	StelCore* core = StelApp::getInstance().getCore();
@@ -694,7 +718,8 @@ void ObjectVisibilityDialog::refreshTwilightMap()
 	const bool earth = planet == QStringLiteral("Earth");
 
 	const double jd = core->getJD();
-	if (lastTwilightMapJd > 0.0 &&
+	if (!force &&
+	    lastTwilightMapJd > 0.0 &&
 	    planet == twilightMapCachedPlanet &&
 	    std::abs(jd - lastTwilightMapJd) < 0.20 / 86400.0)
 		return;

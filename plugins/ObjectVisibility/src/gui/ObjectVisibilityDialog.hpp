@@ -100,6 +100,13 @@ private slots:
 	//! Recompute the live Earth twilight map for Stellarium's current time.
 	void refreshTwilightMap();
 
+	//! Queue an immediate forced refresh after Stellarium has finished
+	//! handling the current time/location change.
+	void scheduleTwilightMapRefresh();
+
+	//! Run the queued forced refresh.
+	void refreshTwilightMapNow();
+
 private:
 	Ui_objectVisibilityDialog* ui;
 	ObjectVisibility*          plugin;
@@ -122,6 +129,7 @@ private:
 	QTimer* twilightMapTimer = nullptr;
 	double  lastTwilightMapJd = 0.0;
 	QString twilightMapCachedPlanet;
+	bool    twilightMapRefreshPending = false;
 
 	bool placeLabelsVisible = false;
 	int  placeLabelsMinimumPopulation = 1000000;
@@ -149,6 +157,10 @@ private:
 	//! reliably known in Stellarium: Earth, Moon, the eight planets,
 	//! Pluto, and the four Galilean moons.
 	static bool isSupportedPlanet(const QString& englishName);
+
+	//! Recompute the live twilight map.  Forced calls bypass the
+	//! short timer throttle used for ordinary live-time updates.
+	void refreshTwilightMap(bool force);
 };
 
 #endif // OBJECTVISIBILITYDIALOG_HPP
