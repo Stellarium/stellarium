@@ -206,7 +206,7 @@ void ObjectVisibilityDialog::createDialogContent()
 	twilightMapTimer = new QTimer(this);
 	twilightMapTimer->setInterval(250);
 	connect(twilightMapTimer, &QTimer::timeout,
-	        this, [this](){ refreshTwilightMap(); });
+	        this, qOverload<>(&ObjectVisibilityDialog::refreshTwilightMap));
 	twilightMapTimer->start();
 	syncMarkerToObserver();
 
