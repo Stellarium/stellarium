@@ -24,9 +24,8 @@
 #include "MapWidget.hpp"
 
 #include <QColor>
-#include <QImage>
+#include <QPainterPath>
 #include <QPointF>
-#include <QSize>
 #include <QString>
 #include <QVector>
 
@@ -138,17 +137,23 @@ private:
 	void drawVisibilityOverlay(QPainter& painter) const;
 	void drawTwilightLimitsOverlay(QPainter& painter) const;
 	void drawTwilightMapOverlay(QPainter& painter);
-	void drawMapImageCopies(QPainter& painter, const QImage& image,
-	                        double opacity = 1.0) const;
+	void drawTwilightShade(QPainter& painter) const;
 	void drawTwilightContour(QPainter& painter, double altitudeDeg,
 	                         const QPen& pen) const;
+	QPainterPath twilightBelowAltitudePath(double altitudeDeg,
+	                                       const QRectF& mapRect) const;
+	QPainterPath twilightCapPath(double centerLongitudeDeg,
+	                             double centerLatitudeDeg,
+	                             double angularDistanceDeg,
+	                             const QRectF& mapRect) const;
+	QVector<QPointF> twilightSmallCirclePoints(double centerLongitudeDeg,
+	                                           double centerLatitudeDeg,
+	                                           double angularDistanceDeg,
+	                                           double xShift = 0.0) const;
 	QVector<QPointF> twilightContourPoints(double altitudeDeg) const;
 	void drawSubPointSymbol(QPainter& painter, double longitudeDeg,
 	                        double latitudeDeg, bool sun) const;
 	void drawPlaceLabels(QPainter& painter) const;
-	QSize twilightShadeImageSizeForCurrentView() const;
-	void rebuildTwilightShadeLookups(int imageWidth, int imageHeight);
-	void rebuildTwilightMapCache(int imageWidth, int imageHeight);
 	double twilightHorizonAltitudeDeg() const;
 	double sunAltitudeDegAt(double longitudeDeg, double latitudeDeg) const;
 	bool isPlaceLabelNearOverlay(const PlaceLabel& label,
@@ -172,12 +177,6 @@ private:
 	double twilightMoonLongitudeDeg = 0.0;
 	double twilightMoonLatitudeDeg = 0.0;
 	bool   twilightMapFullTwilight = true;
-	QImage twilightShadeImage;
-	QSize twilightShadeLookupSize;
-	QVector<double> twilightShadeSinLat;
-	QVector<double> twilightShadeCosLat;
-	QVector<double> twilightShadeSinLon;
-	QVector<double> twilightShadeCosLon;
 
 	QVector<PlaceLabel> placeLabels;
 	bool showPlaceLabels = false;
