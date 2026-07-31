@@ -1,7 +1,7 @@
 // Gaia DR3 .bin → Stellarium .cat converter.
 // Usage:
-//   skychart2cat --gaia-bin <dir> --out-dir <dir> [--workers <n>] [--dry-run]
-//                [--star3-from <level>] [--levels <lo>[-<hi>]]
+//   gaia2cat --gaia-bin <dir> --out-dir <dir> [--workers <n>] [--dry-run]
+//            [--star3-from <level>] [--levels <lo>[-<hi>]]
 
 #include "types.hpp"
 #include "convert.hpp"
@@ -9,6 +9,7 @@
 #include "bucket.hpp"
 #include "cat_writer.hpp"
 #include "star_provider.hpp"
+#include "catalog_naming.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -78,9 +79,9 @@ static bool pass1_complete(const std::string& work_dir, const std::vector<LevelC
 }
 
 // Catalog file naming: stars_<level>_<type>v<major>_<minor>.cat (matches ZoneArray debug string)
-static std::string cat_filename(const LevelConfig& lv) {
-	return lv.name + "_" + std::to_string(lv.cat_type) + "v"
-	     + std::to_string(CATALOG_MAJOR) + "_" + std::to_string(CATALOG_MINOR) + ".cat";
+// Minor is the official minor from starsConfig.json + 1 (1 if no official entry).
+static std::string cat_filename(const LevelConfig& lv, const std::string& stars_config) {
+	return next_cat_filename(lv.level, lv.cat_type, official_cat_filename(stars_config, lv.level));
 }
 
 static void cleanup_incomplete(const std::string& work_dir, const std::vector<LevelConfig>& levels) {
@@ -91,9 +92,10 @@ static void cleanup_incomplete(const std::string& work_dir, const std::vector<Le
 	}
 }
 
-static void cleanup_pass2(const std::string& out_dir, const std::vector<LevelConfig>& levels) {
+static void cleanup_pass2(const std::string& out_dir, const std::vector<LevelConfig>& levels,
+                          const std::string& stars_config) {
 	for (const auto& lv : levels) {
-		std::string cat_path = out_dir + "/" + cat_filename(lv);
+		std::string cat_path = out_dir + "/" + cat_filename(lv, stars_config);
 		std::error_code ec;
 		fs::remove(cat_path, ec);
 	}
@@ -162,6 +164,7 @@ int main(int argc, char** argv) {
 	std::string input_dir;
 	std::string out_dir;
 	std::string work_dir;
+	std::string stars_config = default_stars_config_path();
 	int    n_workers   = std::thread::hardware_concurrency();
 	bool   dry_run     = false;
 	int    star3_from  = 8;   // levels >= this use Star3 (V >= 16.0 required; matches official split)
@@ -173,6 +176,7 @@ int main(int argc, char** argv) {
 		if      (arg == "--gaia-bin"    && i+1 < argc) { input_dir  = argv[++i]; }
 		else if (arg == "--out-dir"     && i+1 < argc) { out_dir    = argv[++i]; }
 		else if (arg == "--work-dir"    && i+1 < argc) { work_dir   = argv[++i]; }
+		else if (arg == "--stars-config" && i+1 < argc) { stars_config = argv[++i]; }
 		else if (arg == "--workers"     && i+1 < argc) { n_workers  = std::stoi(argv[++i]); }
 		else if (arg == "--star3-from"  && i+1 < argc) { star3_from = std::stoi(argv[++i]); }
 		else if (arg == "--levels"      && i+1 < argc) {
@@ -187,12 +191,12 @@ int main(int argc, char** argv) {
 		}
 		else if (arg == "--dry-run")                    { dry_run    = true; }
 		else {
-			std::cerr << "Usage: skychart2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--workers <n>] [--star3-from <level>] [--levels <lo>[-<hi>]] [--dry-run]\n";
+			std::cerr << "Usage: gaia2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--stars-config <json>] [--workers <n>] [--star3-from <level>] [--levels <lo>[-<hi>]] [--dry-run]\n";
 			return 1;
 		}
 	}
 	if (input_dir.empty() || out_dir.empty()) {
-		std::cerr << "Usage: skychart2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--workers <n>] [--star3-from <level>] [--levels <lo>[-<hi>]] [--dry-run]\n";
+		std::cerr << "Usage: gaia2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--stars-config <json>] [--workers <n>] [--star3-from <level>] [--levels <lo>[-<hi>]] [--dry-run]\n";
 		return 1;
 	}
 	if (level_lo < 0 || level_hi > 10 || level_lo > level_hi) {
@@ -203,6 +207,9 @@ int main(int argc, char** argv) {
 		std::cerr << "ERROR: --star3-from must be >= 8 (Star3 cannot represent V < 16.0)\n";
 		return 1;
 	}
+	if (!stars_config.empty() && !fs::exists(stars_config))
+		std::cerr << "WARNING: starsConfig.json not found at " << stars_config
+		          << " -- using default catalog naming\n";
 	if (work_dir.empty()) work_dir = out_dir;
 
 	if (!dry_run) {
@@ -361,7 +368,7 @@ int main(int argc, char** argv) {
 	}
 
 	// ── PASS 2: sort + write .cat ──
-	cleanup_pass2(out_dir, levels);
+	cleanup_pass2(out_dir, levels, stars_config);
 
 	for (size_t li = 0; li < levels.size(); ++li) {
 		const auto& lv = levels[li];
@@ -375,9 +382,14 @@ int main(int argc, char** argv) {
 		}
 
 		int mag_min = static_cast<int>(lv.mag_lo * 1000.0);
-		std::string out_path = out_dir + "/" + cat_filename(lv);
+		const std::string out_name = cat_filename(lv, stars_config);
+		std::string out_path = out_dir + "/" + out_name;
+		int h_type = -1, h_major = -1, h_minor = -1;
+		parse_cat_version(out_name, &h_type, &h_major, &h_minor);
+		const uint32_t major = (uint32_t)std::max(0, h_major);
+		const uint32_t minor = (uint32_t)std::max(0, h_minor);
 
-		write_cat(bpaths, all_counts[li], lv.level, mag_min, lv.cat_type, out_path, n_workers);
+		write_cat(bpaths, all_counts[li], lv.level, mag_min, lv.cat_type, major, minor, out_path, n_workers);
 
 		for (const auto& p : bpaths) fs::remove(p);
 	}

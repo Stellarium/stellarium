@@ -1,13 +1,14 @@
-// hip2cat: SIMBAD (hip_processed_with_binary.dat) + Gaia .bin -> Stellarium lv0-6 .cat
+// gaiahip2cat: SIMBAD (hip_processed_with_binary.dat) + Gaia .bin -> Stellarium lv0-6 .cat
 // Replicates henrysky's Star_Catalog_lv0_6.ipynb offline.
 // Usage:
-//   hip2cat --simbad <hip_processed_with_binary.dat> --gaia-bin <dir> --out-dir <dir>
+//   gaiahip2cat --simbad <hip_processed_with_binary.dat> --gaia-bin <dir> --out-dir <dir>
 //           --otype <otype.dat> [--sp-table <stars_hip_sp.cat>] [--workers n] [--max-files n]
 //
 // All inputs are local; no network access is needed.
 
 #include "types.hpp"
 #include "geodesic.hpp"
+#include "catalog_naming.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -457,10 +458,11 @@ static std::vector<std::string> read_text_lines(const std::string& path)
 int main(int argc, char** argv)
 {
 	std::string simbad_path, bin_dir, out_dir, otype_path, sp_path;
+	std::string stars_config = default_stars_config_path();
 	int n_workers = (int)std::min(4u, std::thread::hardware_concurrency());
 	long max_files = -1;
 	std::string erfa_python;
-	int level_lo = 0, level_hi = 3;   // default: lv0-3 (Star1), hip2cat's primary purpose
+	int level_lo = 0, level_hi = 3;   // default: lv0-3 (Star1), gaiahip2cat's primary purpose
 	for (int i = 1; i < argc; ++i) {
 		std::string a = argv[i];
 		if      (a == "--simbad"    && i + 1 < argc) simbad_path = argv[++i];
@@ -468,6 +470,7 @@ int main(int argc, char** argv)
 		else if (a == "--out-dir"   && i + 1 < argc) out_dir = argv[++i];
 		else if (a == "--otype"     && i + 1 < argc) otype_path = argv[++i];
 		else if (a == "--sp-table"  && i + 1 < argc) sp_path = argv[++i];
+		else if (a == "--stars-config" && i + 1 < argc) stars_config = argv[++i];
 		else if (a == "--workers"   && i + 1 < argc) n_workers = std::atoi(argv[++i]);
 		else if (a == "--max-files" && i + 1 < argc) max_files = std::atol(argv[++i]);
 		else if (a == "--erfa-python" && i + 1 < argc) erfa_python = argv[++i];
@@ -481,19 +484,22 @@ int main(int argc, char** argv)
 			}
 		}
 		else {
-			std::cerr << "Usage: hip2cat --simbad <dat> --gaia-bin <dir> --out-dir <dir> --otype <dat>"
+			std::cerr << "Usage: gaiahip2cat --simbad <dat> --gaia-bin <dir> --out-dir <dir> --otype <dat>"
 				" [--sp-table f] [--workers n] [--levels 0-3] [--max-files n] [--erfa-python <path>]\n";
 			return 1;
 		}
 	}
 	if (simbad_path.empty() || bin_dir.empty() || out_dir.empty() || otype_path.empty()) {
-		std::cerr << "Usage: hip2cat --simbad <dat> --gaia-bin <dir> --out-dir <dir> --otype <dat>"
+		std::cerr << "Usage: gaiahip2cat --simbad <dat> --gaia-bin <dir> --out-dir <dir> --otype <dat>"
 			" [--sp-table f] [--workers n] [--levels 0-3] [--max-files n] [--erfa-python <path>]\n";
 		return 1;
 	}
 	if (level_lo < 0 || level_hi > 6 || level_lo > level_hi) {
 		std::cerr << "ERROR: --levels must satisfy 0 <= lo <= hi <= 6\n"; return 1;
 	}
+	if (!stars_config.empty() && !fs::exists(stars_config))
+		std::cerr << "WARNING: starsConfig.json not found at " << stars_config
+		          << " -- using default catalog naming\n";
 	fs::create_directories(out_dir);
 
 	// ---- level table
@@ -933,13 +939,17 @@ int main(int argc, char** argv)
 		std::vector<uint32_t> counts(n_zones, 0);
 		for (size_t i = 0; i < sel.size(); ++i) counts[zones[i]]++;
 
-		// write .cat
-		char fname[64];
-		std::snprintf(fname, sizeof(fname), "stars_%d_%dv0_%d.cat", lc.level, lc.type, lc.minor);
+		// write .cat: name = official fileName from starsConfig.json, minor + 1
+		const std::string official = official_cat_filename(stars_config, lc.level);
+		const std::string fname = next_cat_filename(lc.level, lc.type, official);
+		int h_type = -1, h_major = -1, h_minor = -1;
+		parse_cat_version(fname, &h_type, &h_major, &h_minor);
+		const uint32_t major = (uint32_t)std::max(0, h_major);
+		const uint32_t minor = (uint32_t)std::max(0, h_minor);
 		std::string out_path = out_dir + "/" + fname;
 		FILE* f = std::fopen(out_path.c_str(), "wb");
 		if (!f) { std::cerr << "cannot write " << out_path << "\n"; return 1; }
-		uint32_t header[6] = {FILE_MAGIC, lc.type, 0, lc.minor, (uint32_t)lc.level,
+		uint32_t header[6] = {FILE_MAGIC, lc.type, major, minor, (uint32_t)lc.level,
 		                      (uint32_t)(int)std::lround(lc.lo * 1000.0)};
 		std::fwrite(header, 4, 6, f);
 		float epoch = (float)CATALOG_EPOCH_JD;
@@ -1021,7 +1031,8 @@ int main(int argc, char** argv)
 
 	// write spectral type table if we built it fresh or appended new types
 	if (!sp_reuse || sp_appended > 0) {
-		std::string sp_out = out_dir + "/stars_hip_sp_0v0_6.cat";
+		const std::string sp_name = next_sp_filename(official_sp_filename(stars_config));
+		std::string sp_out = out_dir + "/" + sp_name;
 		std::ofstream f(sp_out, std::ios::binary);
 		f << "\n";
 		for (size_t i = 1; i < sp_ls.size(); ++i) f << sp_ls[i] << "\n";

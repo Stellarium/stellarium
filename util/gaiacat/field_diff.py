@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Exhaustive star-by-star field comparison of two Star1 catalog sets
-(official vs hip2cat output), levels 0-3. Matches globally by gaia_id
+(official vs gaiahip2cat output), levels 0-3. Matches globally by gaia_id
 (HIP<<5|comp when gaia_id==0); classifies every differing star by cause.
 Output: a Markdown report with per-star tables (no differing star omitted)
 and a TSV file for B-V only differences (method difference, not matching
@@ -13,7 +13,7 @@ from collections import defaultdict
 import pandas as pd
 
 OFFICIAL = r"C:\Users\13308\CLionProjects\stellarium\stars\hip_gaia3"
-OURS = r"F:\hip2cat_out"
+OURS = r"F:\gaiahip2cat_out"
 SIMBAD = r"C:\Users\13308\CLionProjects\stellarium_star_catalogs\simbad_query_results\hip_processed_with_binary.dat"
 REPORT = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_field_diff_report.md"
 BV_TSV = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_bv_diff.tsv"
@@ -209,10 +209,10 @@ def w(s=""):
     lines.append(s)
 
 
-w("# lv0-3 Star-by-Star Field Comparison: Official Catalog vs hip2cat Output")
+w("# lv0-3 Star-by-Star Field Comparison: Official Catalog vs gaiahip2cat Output")
 w()
 w("- **A** = official catalog `stars/hip_gaia3/`")
-w("- **B** = hip2cat output `F:/hip2cat_out/`")
+w("- **B** = gaiahip2cat output `F:/gaiahip2cat_out/`")
 w("- **Match key**: `gaia_id`; for gaia_id==0 uses `HIP<<5|component` (same as cmpcat)")
 w("- **Global matching** (across zones): zone differences are classified separately, not counted as only-in (unlike cmpcat's per-zone matching)")
 w("- **Tolerances** (Star1, same as cmpcat): position ±2 mas/axis, V ±5 mmag, pm ±0.02 mas/yr, plx ±0.05 mas, rv ±0.5 km/s")

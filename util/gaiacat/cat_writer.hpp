@@ -12,10 +12,11 @@
 // level: geodesic level
 // mag_min: minimum V magnitude for this catalog (millimag)
 // cat_type: CATALOG_TYPE_STAR2 or CATALOG_TYPE_STAR3
+// major, minor: catalog version (written to the file header)
 // out_path: output .cat file path
 // n_sort_threads: number of parallel sort workers
 void write_cat(const std::vector<std::string>& bucket_paths,
 	       const std::vector<uint32_t>& counts,
-	       int level, int mag_min, uint32_t cat_type,
+	       int level, int mag_min, uint32_t cat_type, uint32_t major, uint32_t minor,
 	       const std::string& out_path,
 	       int n_sort_threads);

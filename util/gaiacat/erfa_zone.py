@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ERFA zone helper for hip2cat: performs the +/-210 kyr past/future global-zone
+ERFA zone helper for gaiahip2cat: performs the +/-210 kyr past/future global-zone
 analysis using astropy, exactly matching the official Stellarium pipeline.
 
 Input:  binary file (arg1) 鈥?uint32 n_stars, then n_stars x 7 doubles:

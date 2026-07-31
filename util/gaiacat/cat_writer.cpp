@@ -213,7 +213,7 @@ static void sort_and_write_bucket(
 
 void write_cat(const std::vector<std::string>& bucket_paths,
 	       const std::vector<uint32_t>& counts,
-	       int level, int mag_min, uint32_t cat_type,
+	       int level, int mag_min, uint32_t cat_type, uint32_t major, uint32_t minor,
 	       const std::string& out_path,
 	       int n_sort_threads)
 {
@@ -242,8 +242,8 @@ void write_cat(const std::vector<std::string>& bucket_paths,
 		uint32_t header[6];
 		header[0] = FILE_MAGIC;
 		header[1] = cat_type;
-		header[2] = CATALOG_MAJOR;
-		header[3] = CATALOG_MINOR;
+		header[2] = major;
+		header[3] = minor;
 		header[4] = static_cast<uint32_t>(level);
 		header[5] = static_cast<uint32_t>(mag_min);
 		std::fwrite(header, sizeof(uint32_t), 6, fcat);

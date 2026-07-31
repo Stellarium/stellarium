@@ -83,6 +83,8 @@ inline constexpr uint32_t  FILE_MAGIC         = 0x835F040A;
 inline constexpr uint32_t  CATALOG_TYPE_STAR1 = 0;      // Star1
 inline constexpr uint32_t  CATALOG_TYPE_STAR2 = 1;      // Star2
 inline constexpr uint32_t  CATALOG_TYPE_STAR3 = 2;      // Star3
+// Default catalog version (major/minor); the actual file name and header
+// version are derived from the official starsConfig.json entry (minor + 1).
 inline constexpr uint32_t  CATALOG_MAJOR      = 0;
 inline constexpr uint32_t  CATALOG_MINOR      = 1;
 inline constexpr double    CATALOG_EPOCH      = 2457389.0;  // STELLAR_CATALOG_JDEPOCH = J2016.0

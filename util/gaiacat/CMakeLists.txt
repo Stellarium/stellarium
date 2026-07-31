@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(skychart2cat LANGUAGES C CXX)
+project(gaia2cat LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -7,14 +7,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_definitions(-D_FILE_OFFSET_BITS=64)
 
 # Gaia DR3 .bin → Stellarium .cat converter
-add_executable(skychart2cat
+add_executable(gaia2cat
 	main.cpp
 	convert.cpp
 	geodesic.cpp
 	bucket.cpp
 	cat_writer.cpp
 )
-target_include_directories(skychart2cat PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(gaia2cat PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(dedupcat
 	dedup_cat.cpp
@@ -24,11 +24,11 @@ add_executable(cmpcat
 	cmpcat.cpp
 )
 
-add_executable(hip2cat
-	hip2cat.cpp
+add_executable(gaiahip2cat
+	gaiahip2cat.cpp
 	geodesic.cpp
 )
-target_include_directories(hip2cat PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(gaiahip2cat PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # CSV.gz -> .bin extractor (uses bundled zlib for gzip reading)
 set(GAIA_ZLIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../src/external/zlib)
@@ -45,10 +45,10 @@ target_include_directories(extract_columns PRIVATE ${GAIA_ZLIB_DIR})
 
 # Link pthread on Linux
 if(UNIX AND NOT APPLE)
-	target_link_libraries(skychart2cat PRIVATE pthread)
+	target_link_libraries(gaia2cat PRIVATE pthread)
 endif()
 
 # MSVC: use static runtime for portability
 if(MSVC)
-	set_property(TARGET skychart2cat PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+	set_property(TARGET gaia2cat PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
