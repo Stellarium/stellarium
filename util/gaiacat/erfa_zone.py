@@ -9,7 +9,8 @@ Input:  binary file (arg1) 鈥?uint32 n_stars, then n_stars x 7 doubles:
 Output: binary file (arg2) 鈥?n_stars x uint8  global_zone_flag (0/1).
 """
 
-import sys, struct, os
+import sys
+import struct
 import numpy as np
 import astropy.units as u
 from astropy.coordinates import SkyCoord
@@ -18,7 +19,7 @@ from astropy.time import Time
 _level = int(sys.argv[3]) if len(sys.argv) > 3 else 0
 
 sys.path.insert(0, r"C:\Users\13308\CLionProjects\stellarium_star_catalogs")
-from py.geodesic import GeodesicGrid, radec2xyz
+from py.geodesic import GeodesicGrid
 
 with open(sys.argv[1], 'rb') as f:
     n = struct.unpack('<I', f.read(4))[0]
@@ -28,8 +29,8 @@ with open(sys.argv[1], 'rb') as f:
 
 ra, dec = data[:, 0], data[:, 1]
 pmra, pmdec = data[:, 2], data[:, 3]
-plx, rv  = data[:, 4], data[:, 5]
-plxe     = data[:, 6]
+plx, rv = data[:, 4], data[:, 5]
+plxe = data[:, 6]
 
 # ---- good astrometry filter (matches henrysky: plx/plx_err > 5) ----
 good = np.zeros(n, dtype=bool)
@@ -53,12 +54,12 @@ c_now = SkyCoord(ra=ra * u.deg, dec=dec * u.deg,
                  pm_dec=pmdec * u.mas / u.yr,
                  radial_velocity=np.nan_to_num(rv, nan=0) * u.km / u.s,
                  obstime=Time(2016.0, format="jyear"), frame="icrs")
-zone_past  = np.asarray(g.search_zone(c_now.cartesian.xyz.T), dtype=np.int32)
+zone_past = np.asarray(g.search_zone(c_now.cartesian.xyz.T), dtype=np.int32)
 zone_future = zone_past.copy()
 
-counter_past   = np.zeros(n, dtype=np.int32)
+counter_past = np.zeros(n, dtype=np.int32)
 counter_future = np.zeros(n, dtype=np.int32)
-max_vmag_diff  = np.zeros(n)  # init 0: any negative = brighter
+max_vmag_diff = np.zeros(n)  # init 0: any negative = brighter
 
 # ---- propagation steps ----
 for iyr in range(10000, 210000, 10000):
@@ -106,4 +107,4 @@ global_zone[mask] = 1
 with open(sys.argv[2], 'wb') as f:
     f.write(global_zone.tobytes())
 
-print("  ERFA lv{}: {} global of {}".format(_level, int(global_zone.sum()), n))
+print(f"  ERFA lv{_level}: {int(global_zone.sum())} global of {n}")

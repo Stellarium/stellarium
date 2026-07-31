@@ -4,6 +4,7 @@
 import sys
 import re
 
+
 def parse_line(line):
     """Parse new cmpcat format: id z=N RA=x DEC=y V=x BV=x [tag]"""
     # [only in A/B]  lines: have RA= DEC=
@@ -14,6 +15,7 @@ def parse_line(line):
                 float(m.group(5)), float(m.group(6)),
                 f"only in {m.group(7)}")
     return None
+
 
 def read_cmpcat_output(path):
     only_a = {}
@@ -62,7 +64,7 @@ def report_boundary_counts(unmatched_a, unmatched_b, mag_lo, mag_hi, margin):
     print(f"\nWithin {margin} mag of boundary {mag_lo} or {mag_hi}:")
     print(f"  only in A: {len(a_boundary)} / {len(unmatched_a)}")
     print(f"  only in B: {len(b_boundary)} / {len(unmatched_b)}")
-    print(f"Out of boundary:")
+    print("Out of boundary:")
     print(f"  only in A: {len(a_other)}")
     print(f"  only in B: {len(b_other)}")
     return a_boundary, a_other, b_boundary, b_other
@@ -79,9 +81,9 @@ def print_sample_list(title, items):
 def print_cross_zone_samples(cross):
     if not cross:
         return
-    print(f"\nSample cross-zone (first 10):")
+    print("\nSample cross-zone (first 10):")
     for g, za, zb, va, vb, _, _ in cross[:10]:
-        print(f"  {g}  A:z={za} V={va:.3f}  B:z={zb} V={vb:.3f}  dV={va-vb:.4f}")
+        print(f"  {g}  A:z={za} V={va:.3f}  B:z={zb} V={vb:.3f}  dV={va - vb:.4f}")
 
 
 def count_no_bv(items):
@@ -94,7 +96,7 @@ def count_no_bv(items):
 def print_no_bv_summary(unmatched_a, unmatched_b):
     no_bv_a = count_no_bv(unmatched_a)
     no_bv_b = count_no_bv(unmatched_b)
-    print(f"  of which no BV:")
+    print("  of which no BV:")
     print(f"    only in A: {no_bv_a}")
     print(f"    only in B: {no_bv_b}")
 
@@ -116,6 +118,7 @@ def main(path, mag_lo=None, mag_hi=None, margin=0.05):
         print_sample_list("Sample only-in-B at boundary", b_boundary)
 
     print_cross_zone_samples(cross)
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:

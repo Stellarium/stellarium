@@ -46,6 +46,23 @@ static const double POW10[] = {
 	1e10, 1e11, 1e12, 1e13, 1e14, 1e15, 1e16, 1e17, 1e18, 1e19
 };
 
+// Apply an optional [eE][+-]dd exponent to v, advancing p past it.
+static inline double apply_exponent(double v, const char*& p, const char* end)
+{
+	if (p >= end || (*p != 'e' && *p != 'E'))
+		return v;
+	++p;
+	bool eneg = false;
+	if (p < end && *p == '-') { eneg = true; ++p; }
+	else if (p < end && *p == '+') { ++p; }
+	int e = 0;
+	while (p < end && (unsigned)(*p - '0') < 10) { e = e * 10 + (*p - '0'); ++p; }
+	if (e > 308) e = 308;
+	double m = 1.0, ten = 10.0;
+	while (e) { if (e & 1) m *= ten; ten *= ten; e >>= 1; }
+	return eneg ? v / m : v * m;
+}
+
 // Fast CSV float parser: [-]ddd[.ddd][e[-]dd]. Sets is_null for empty/non-numeric fields.
 static inline double fast_atod(const char* p, const char* end, bool& is_null)
 {
@@ -64,19 +81,7 @@ static inline double fast_atod(const char* p, const char* end, bool& is_null)
 		while (p < end && (unsigned)(*p - '0') < 10) { mant = mant * 10 + (*p - '0'); ++p; ++nfrac; }
 	}
 	double v = static_cast<double>(mant) / POW10[nfrac];
-
-	if (p < end && (*p == 'e' || *p == 'E')) {
-		++p;
-		bool eneg = false;
-		if (p < end && *p == '-') { eneg = true; ++p; }
-		else if (p < end && *p == '+') { ++p; }
-		int e = 0;
-		while (p < end && (unsigned)(*p - '0') < 10) { e = e * 10 + (*p - '0'); ++p; }
-		if (e > 308) e = 308;
-		double m = 1.0, ten = 10.0;
-		while (e) { if (e & 1) m *= ten; ten *= ten; e >>= 1; }
-		v = eneg ? v / m : v * m;
-	}
+	v = apply_exponent(v, p, end);
 	return neg ? -v : v;
 }
 

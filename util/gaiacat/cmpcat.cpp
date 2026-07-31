@@ -243,6 +243,33 @@ static inline double ra_diff_deg(double a, double b)
 	return d;
 }
 
+static void write_mismatch_line(uint64_t gaia_id, int zone,
+                                double dra, double dde, double dpmra, double dpmde,
+                                double dvm, double dplx, double drv, double dbv,
+                                bool astrom, bool rv_ok, bool bv_line,
+                                std::ofstream* file)
+{
+	char line[320];
+	int n;
+	if (rv_ok || bv_line)
+		n = std::snprintf(line, sizeof(line),
+		                  "%llu z=%d  dRA=%.3fmas dDE=%.3fmas dpmra=%.3f dpmde=%.3f dV=%.3fmag dPlx=%.3fmas dRV=%.2fkm/s dBV=%.3fmag\n",
+		                  (unsigned long long)gaia_id, zone, dra, dde, dpmra, dpmde, dvm, dplx, drv, dbv);
+	else if (astrom)
+		n = std::snprintf(line, sizeof(line),
+		                  "%llu z=%d  dRA=%.3fmas dDE=%.3fmas dpmra=%.3f dpmde=%.3f dV=%.3fmag dPlx=%.3fmas\n",
+		                  (unsigned long long)gaia_id, zone, dra, dde, dpmra, dpmde, dvm, dplx);
+	else
+		n = std::snprintf(line, sizeof(line),
+		                  "%llu z=%d  dRA=%.3fmas dDE=%.3fmas dV=%.3fmag [star3]\n",
+		                  (unsigned long long)gaia_id, zone, dra, dde, dvm);
+	if (n > 0)
+	{
+		std::cout.write(line, n);
+		if (file && file->is_open()) file->write(line, n);
+	}
+}
+
 static void record_mismatch(const PhysStar& a, const PhysStar& b, int zone,
                             const Tolerances& tol, CompareResult& r, std::ofstream* file)
 {
@@ -276,25 +303,8 @@ static void record_mismatch(const PhysStar& a, const PhysStar& b, int zone,
 	bool bv_line = g_compare_bv && !isNoBV(a.bv) && !isNoBV(b.bv);
 	if (bv_line) dbv = a.bv - b.bv;
 
-	char line[320];
-	int n;
-	if (rv_ok || bv_line)
-		n = std::snprintf(line, sizeof(line),
-		                  "%llu z=%d  dRA=%.3fmas dDE=%.3fmas dpmra=%.3f dpmde=%.3f dV=%.3fmag dPlx=%.3fmas dRV=%.2fkm/s dBV=%.3fmag\n",
-		                  (unsigned long long)a.gaia_id, zone, dra, dde, dpmra, dpmde, dvm, dplx, drv, dbv);
-	else if (astrom)
-		n = std::snprintf(line, sizeof(line),
-		                  "%llu z=%d  dRA=%.3fmas dDE=%.3fmas dpmra=%.3f dpmde=%.3f dV=%.3fmag dPlx=%.3fmas\n",
-		                  (unsigned long long)a.gaia_id, zone, dra, dde, dpmra, dpmde, dvm, dplx);
-	else
-		n = std::snprintf(line, sizeof(line),
-		                  "%llu z=%d  dRA=%.3fmas dDE=%.3fmas dV=%.3fmag [star3]\n",
-		                  (unsigned long long)a.gaia_id, zone, dra, dde, dvm);
-	if (n > 0)
-	{
-		std::cout.write(line, n);
-		if (file && file->is_open()) file->write(line, n);
-	}
+	write_mismatch_line(a.gaia_id, zone, dra, dde, dpmra, dpmde, dvm, dplx, drv, dbv,
+	                    astrom, rv_ok, bv_line, file);
 }
 
 static std::unordered_map<uint64_t, PhysStar> loadZoneMap(CatFile& cf, int z, int64_t off)

@@ -94,6 +94,34 @@ static CatRecord3 to_cat_record3(const BucketRecord& r)
 	return cr;
 }
 
+// Write the records of one zone run [ri, rj) at the given .cat file offset.
+static void write_zone_records(FILE* fcat, const std::vector<BucketRecord>& records,
+                               size_t ri, size_t rj, uint32_t cat_type)
+{
+	for (size_t k = ri; k < rj; ++k) {
+		const auto& r = records[k];
+		if (cat_type == CATALOG_TYPE_STAR1) {
+			CatRecord1 cr = to_cat_record1(r);
+			std::fwrite(&cr, sizeof(CatRecord1), 1, fcat);
+		} else if (cat_type == CATALOG_TYPE_STAR3) {
+			CatRecord3 cr = to_cat_record3(r);
+			std::fwrite(&cr, sizeof(CatRecord3), 1, fcat);
+		} else {
+			CatRecord cr{};
+			cr.gaia_id = r.gaia_id;
+			cr.x0      = r.ra_i;
+			cr.x1      = r.dec_i;
+			cr.dx0     = r.pmra_i;
+			cr.dx1     = r.pmdec_i;
+			cr.b_v     = r.bv;
+			cr.vmag    = r.vmag;
+			cr.plx     = static_cast<uint16_t>(std::max(0, std::min(r.plx_i, 65535)));
+			cr.plx_err = static_cast<uint16_t>(std::max(0, std::min(r.plx_err_i, 65535)));
+			std::fwrite(&cr, sizeof(CatRecord), 1, fcat);
+		}
+	}
+}
+
 // Sort one bucket and write its records into the .cat file.
 // Multiple buckets can process in parallel because they write to disjoint zone ranges.
 static void sort_and_write_bucket(
@@ -172,28 +200,7 @@ static void sort_and_write_bucket(
 
 		// Seek to zone position and write
 		fseeko(fcat, static_cast<off_t>(offsets[zone]), SEEK_SET);
-		for (size_t k = ri; k < rj; ++k) {
-			const auto& r = records[k];
-			if (cat_type == CATALOG_TYPE_STAR1) {
-				CatRecord1 cr = to_cat_record1(r);
-				std::fwrite(&cr, sizeof(CatRecord1), 1, fcat);
-			} else if (cat_type == CATALOG_TYPE_STAR3) {
-				CatRecord3 cr = to_cat_record3(r);
-				std::fwrite(&cr, sizeof(CatRecord3), 1, fcat);
-			} else {
-				CatRecord cr{};
-				cr.gaia_id = r.gaia_id;
-				cr.x0      = r.ra_i;
-				cr.x1      = r.dec_i;
-				cr.dx0     = r.pmra_i;
-				cr.dx1     = r.pmdec_i;
-				cr.b_v     = r.bv;
-				cr.vmag    = r.vmag;
-				cr.plx     = static_cast<uint16_t>(std::max(0, std::min(r.plx_i, 65535)));
-				cr.plx_err = static_cast<uint16_t>(std::max(0, std::min(r.plx_err_i, 65535)));
-				std::fwrite(&cr, sizeof(CatRecord), 1, fcat);
-			}
-		}
+		write_zone_records(fcat, records, ri, rj, cat_type);
 
 		zi++;
 		ri = rj;

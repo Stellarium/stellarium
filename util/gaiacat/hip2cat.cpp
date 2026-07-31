@@ -15,7 +15,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <string>
-#include <string>
+#include <utility>
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
@@ -27,6 +27,63 @@
 #include <chrono>
 #include <filesystem>
 #include <mutex>
+
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <sys/wait.h>
+#include <unistd.h>
+#endif
+
+// Run a command line without a shell (avoids CWE-78 shell injection).
+// Windows: CreateProcessA (no cmd.exe); POSIX: fork + execvp with quoted split.
+static std::string quote_arg(const std::string& s)
+{
+	if (s.find(' ') == std::string::npos && s.find('\t') == std::string::npos)
+		return s;
+	return "\"" + s + "\"";
+}
+
+static int run_command_line(const std::string& cmdline)
+{
+#ifdef _WIN32
+	STARTUPINFOA si{};
+	PROCESS_INFORMATION pi{};
+	si.cb = sizeof(si);
+	std::vector<char> buf(cmdline.begin(), cmdline.end());
+	buf.push_back('\0');
+	if (!CreateProcessA(nullptr, buf.data(), nullptr, nullptr, FALSE, 0,
+	                    nullptr, nullptr, &si, &pi))
+		return -1;
+	CloseHandle(pi.hThread);
+	WaitForSingleObject(pi.hProcess, INFINITE);
+	DWORD code = 1;
+	GetExitCodeProcess(pi.hProcess, &code);
+	CloseHandle(pi.hProcess);
+	return (int)code;
+#else
+	std::vector<std::string> parts;
+	std::string cur;
+	bool inq = false;
+	for (char ch : cmdline) {
+		if (ch == '"') inq = !inq;
+		else if (ch == ' ' && !inq) {
+			if (!cur.empty()) { parts.push_back(cur); cur.clear(); }
+		} else cur += ch;
+	}
+	if (!cur.empty()) parts.push_back(cur);
+	if (parts.empty()) return -1;
+	std::vector<char*> argv;
+	for (auto& p : parts) argv.push_back(&p[0]);
+	argv.push_back(nullptr);
+	pid_t pid = fork();
+	if (pid < 0) return -1;
+	if (pid == 0) { execvp(argv[0], argv.data()); _exit(127); } // flawfinder: ignore -- execvp without a shell; argv is passed directly
+	int st = 0;
+	waitpid(pid, &st, 0);
+	return WIFEXITED(st) ? WEXITSTATUS(st) : -1;
+#endif
+}
 
 namespace fs = std::filesystem;
 
@@ -166,25 +223,32 @@ struct CsvCols {
 
 static CsvCols find_cols(const std::vector<std::string>& hdr)
 {
+	static const std::pair<const char*, int CsvCols::*> kColMap[] = {
+		{"hip", &CsvCols::hip},
+		{"componentid", &CsvCols::comp},
+		{"source_id", &CsvCols::sid},
+		{"ra", &CsvCols::ra},
+		{"dec", &CsvCols::dec},
+		{"plx_value", &CsvCols::plx},
+		{"plx_err", &CsvCols::plxe},
+		{"pmra", &CsvCols::pmra},
+		{"pmdec", &CsvCols::pmdec},
+		{"B", &CsvCols::B},
+		{"V", &CsvCols::V},
+		{"J", &CsvCols::J},
+		{"sp_type", &CsvCols::sp},
+		{"otype", &CsvCols::otype},
+		{"rvz_radvel", &CsvCols::rv},
+		{"rvz_err", &CsvCols::rve},
+	};
 	CsvCols c;
 	for (size_t i = 0; i < hdr.size(); ++i) {
-		const std::string& h = hdr[i];
-		if      (h == "hip") c.hip = (int)i;
-		else if (h == "componentid") c.comp = (int)i;
-		else if (h == "source_id") c.sid = (int)i;
-		else if (h == "ra") c.ra = (int)i;
-		else if (h == "dec") c.dec = (int)i;
-		else if (h == "plx_value") c.plx = (int)i;
-		else if (h == "plx_err") c.plxe = (int)i;
-		else if (h == "pmra") c.pmra = (int)i;
-		else if (h == "pmdec") c.pmdec = (int)i;
-		else if (h == "B") c.B = (int)i;
-		else if (h == "V") c.V = (int)i;
-		else if (h == "J") c.J = (int)i;
-		else if (h == "sp_type") c.sp = (int)i;
-		else if (h == "otype") c.otype = (int)i;
-		else if (h == "rvz_radvel") c.rv = (int)i;
-		else if (h == "rvz_err") c.rve = (int)i;
+		for (const auto& kv : kColMap) {
+			if (hdr[i] == kv.first) {
+				c.*(kv.second) = (int)i;
+				break;
+			}
+		}
 	}
 	return c;
 }
@@ -830,8 +894,10 @@ int main(int argc, char** argv)
 					}
 					std::fclose(ef);
 				}
-				std::string cmd = erfa_python + " " + script + " " + tmp_in + " " + tmp_out + " " + std::to_string(lc.level);
-				int rc = std::system(cmd.c_str());
+				std::string cmd = quote_arg(erfa_python) + " " + quote_arg(script) + " "
+				                  + quote_arg(tmp_in) + " " + quote_arg(tmp_out) + " "
+				                  + std::to_string(lc.level);
+				int rc = run_command_line(cmd);
 				if (rc == 0) {
 					FILE* rf = std::fopen(tmp_out.c_str(), "rb");
 					if (rf) {

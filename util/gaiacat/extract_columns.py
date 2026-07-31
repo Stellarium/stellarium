@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """Extract 11 Gaia columns to compact binary (68B/star). Multiprocessing."""
 
-import sys, os, struct, gzip, math, glob
+import sys
+import os
+import struct
+import gzip
+import glob
 from multiprocessing import Pool
 
-COLS = ['source_id','ra','dec','parallax','parallax_error','pmra','pmdec','phot_g_mean_mag','bp_rp','radial_velocity','radial_velocity_error']
+COLS = ['source_id', 'ra', 'dec', 'parallax', 'parallax_error', 'pmra', 'pmdec',
+        'phot_g_mean_mag', 'bp_rp', 'radial_velocity', 'radial_velocity_error']
 REC_FMT = '<q d d d f d d f f f f'
 REC_SZ = 68
+
 
 def process_file(args):
     csv_path, out_dir = args
@@ -18,7 +24,8 @@ def process_file(args):
     idx = {}
     with gzip.open(csv_path, 'rt') as f:
         for line in f:
-            if line.startswith('#'): continue
+            if line.startswith('#'):
+                continue
             idx = {c: i for i, c in enumerate(line.strip().split(','))}
             break
         for c in COLS:
@@ -28,8 +35,10 @@ def process_file(args):
         buf = bytearray()
         count = 0
         for line in f:
-            if line.startswith('#'): continue
+            if line.startswith('#'):
+                continue
             row = line.strip().split(',')
+
             def fv(n):
                 v = row[idx[n]].strip()
                 return float(v) if v and v != 'null' else float('nan')
@@ -38,9 +47,9 @@ def process_file(args):
             except (ValueError, IndexError):
                 continue
             rec = struct.pack(REC_FMT, sid,
-                fv('ra'), fv('dec'), fv('parallax'), fv('parallax_error'),
-                fv('pmra'), fv('pmdec'), fv('phot_g_mean_mag'), fv('bp_rp'),
-                fv('radial_velocity'), fv('radial_velocity_error'))
+                              fv('ra'), fv('dec'), fv('parallax'), fv('parallax_error'),
+                              fv('pmra'), fv('pmdec'), fv('phot_g_mean_mag'), fv('bp_rp'),
+                              fv('radial_velocity'), fv('radial_velocity_error'))
             buf.extend(rec)
             count += 1
 
@@ -48,6 +57,7 @@ def process_file(args):
     with open(out_path, 'wb') as f:
         f.write(buf)
     return (csv_path, count, True)
+
 
 def main():
     if len(sys.argv) < 3:
@@ -72,16 +82,20 @@ def main():
 
     with Pool(workers) as pool:
         for r in pool.imap_unordered(process_file, [(f, out_dir) for f in files]):
-            if pbar: pbar.update(1)
+            if pbar:
+                pbar.update(1)
             if len(r) == 3:
                 total += r[1]
-                if r[2]: skipped += 1
+                if r[2]:
+                    skipped += 1
             else:
                 print(f"\n  ERROR: {r[0]}: {r[3]}")
                 errors += 1
 
-    if pbar: pbar.close()
+    if pbar:
+        pbar.close()
     print(f"Done: {total} stars, {skipped} skipped, {errors} errors")
+
 
 if __name__ == '__main__':
     main()

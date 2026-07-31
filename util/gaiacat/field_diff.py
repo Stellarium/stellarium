@@ -6,34 +6,36 @@ Output: a Markdown report with per-star tables (no differing star omitted)
 and a TSV file for B-V only differences (method difference, not matching
 criterion).
 """
-import struct, sys, math, os
+import struct
+import math
+import os
 from collections import defaultdict
 import pandas as pd
 
 OFFICIAL = r"C:\Users\13308\CLionProjects\stellarium\stars\hip_gaia3"
-OURS     = r"F:\hip2cat_out"
-SIMBAD   = r"C:\Users\13308\CLionProjects\stellarium_star_catalogs\simbad_query_results\hip_processed_with_binary.dat"
-REPORT   = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_field_diff_report.md"
-BV_TSV   = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_bv_diff.tsv"
+OURS = r"F:\hip2cat_out"
+SIMBAD = r"C:\Users\13308\CLionProjects\stellarium_star_catalogs\simbad_query_results\hip_processed_with_binary.dat"
+REPORT = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_field_diff_report.md"
+BV_TSV = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_bv_diff.tsv"
 
 LEVELS = [
     (0, "stars_0_0v0_21.cat", -2.0, 6.0),
-    (1, "stars_1_0v0_16.cat",  6.0, 7.5),
-    (2, "stars_2_0v0_17.cat",  7.5, 9.0),
-    (3, "stars_3_0v0_10.cat",  9.0, 10.5),
+    (1, "stars_1_0v0_16.cat", 6.0, 7.5),
+    (2, "stars_2_0v0_17.cat", 7.5, 9.0),
+    (3, "stars_3_0v0_10.cat", 9.0, 10.5),
 ]
 
 # Star1 tolerances (same as cmpcat)
 TOL_POS_MAS = 2.0
-TOL_VMAG    = 0.005
-TOL_PM      = 0.02      # mas/yr
-TOL_PLX     = 0.05      # mas
-TOL_RV      = 0.5       # km/s
+TOL_VMAG = 0.005
+TOL_PM = 0.02      # mas/yr
+TOL_PLX = 0.05      # mas
+TOL_RV = 0.5       # km/s
 
 
 def load_table(path):
     with open(path, "r", encoding="utf-8", errors="replace") as f:
-        return [l.rstrip("\n").rstrip("\r") for l in f]
+        return [line.rstrip("\n").rstrip("\r") for line in f]
 
 
 SP_TABLE = load_table(os.path.join(OFFICIAL, "stars_hip_sp_0v0_6.cat"))
@@ -65,20 +67,22 @@ def decode_star1(buf, zone):
      h0, h1, h2) = struct.unpack("<q6i2h2HhHB3B", buf)
     nx, ny, nz = x0 / 2e9, x1 / 2e9, x2 / 2e9
     ra = math.atan2(ny, nx) * R2D
-    if ra < 0: ra += 360.0
-    r = math.sqrt(nx*nx + ny*ny + nz*nz)
+    if ra < 0:
+        ra += 360.0
+    r = math.sqrt(nx * nx + ny * ny + nz * nz)
     dec = math.asin(nz / r) * R2D if r > 0 else 0.0
     rad, dcd = ra / R2D, dec / R2D
     p0, p1 = -math.sin(rad), math.cos(rad)
-    q0, q1, q2 = -math.sin(dcd)*math.cos(rad), -math.sin(dcd)*math.sin(rad), math.cos(dcd)
-    pmra  = (dx0*p0 + dx1*p1) / 1000.0
-    pmdec = (dx0*q0 + dx1*q1 + dx2*q2) / 1000.0
+    q0, q1, q2 = (-math.sin(dcd) * math.cos(rad), -math.sin(dcd) * math.sin(rad),
+                  math.cos(dcd))
+    pmra = (dx0 * p0 + dx1 * p1) / 1000.0
+    pmdec = (dx0 * q0 + dx1 * q1 + dx2 * q2) / 1000.0
     comb = h0 | (h1 << 8) | (h2 << 16)
     hip, comp = comb >> 5, comb & 31
     key = gaia_id if gaia_id > 0 else ((1 << 62) | comb)
     return dict(key=key, gaia_id=gaia_id, ra=ra, dec=dec, pmra=pmra, pmdec=pmdec,
-                vmag=vmag/1000.0, bv=bv/1000.0, plx=plx/50.0, plxe=plxe/100.0,
-                rv=rv/10.0, sp=sp, otype=otype, hip=hip, comp=comp, zone=zone,
+                vmag=vmag / 1000.0, bv=bv / 1000.0, plx=plx / 50.0, plxe=plxe / 100.0,
+                rv=rv / 10.0, sp=sp, otype=otype, hip=hip, comp=comp, zone=zone,
                 raw=(x0, x1, x2, dx0, dx1, dx2, bv, vmag, plx, plxe, rv, sp, otype, comb))
 
 
@@ -125,18 +129,22 @@ def read_simbad(path):
         return out
     df = pd.read_csv(path, low_memory=False)
     for _, r in df.iterrows():
-        if pd.isna(r["hip"]): continue
+        if pd.isna(r["hip"]):
+            continue
         hip = int(r["hip"])
         comp = 0
         if "componentid" in df.columns and not pd.isna(r["componentid"]):
             comp = int(float(r["componentid"]))
         sid = int(float(r["source_id"])) if not pd.isna(r["source_id"]) else 0
         sid_str = str(sid) if sid > 0 else ""
+
         def flt(col):
             if col not in df.columns or pd.isna(r[col]):
                 return float("nan")
-            try: return float(r[col])
-            except: return float("nan")
+            try:
+                return float(r[col])
+            except (ValueError, TypeError):
+                return float("nan")
         prov = ""
         if "source_id_provenance" in df.columns and not pd.isna(r["source_id_provenance"]):
             prov = str(r["source_id_provenance"])
@@ -149,8 +157,10 @@ def read_simbad(path):
 
 def ang_diff_mas(a, b):
     dra = (a["ra"] - b["ra"])
-    if dra > 180: dra -= 360
-    if dra < -180: dra += 360
+    if dra > 180:
+        dra -= 360
+    if dra < -180:
+        dra += 360
     cosd = math.cos((a["dec"] + b["dec"]) / 2 / R2D)
     return dra * 3600000.0 * cosd, (a["dec"] - b["dec"]) * 3600000.0
 
@@ -173,8 +183,10 @@ dup_notes = []
 for lv, fn, _, _ in LEVELS:
     off[lv], d1 = read_cat(os.path.join(OFFICIAL, fn))
     our[lv], d2 = read_cat(os.path.join(OURS, fn))
-    for k in d1: dup_notes.append(f"Official lv{lv} duplicate match key: {k}")
-    for k in d2: dup_notes.append(f"Our lv{lv} duplicate match key: {k}")
+    for k in d1:
+        dup_notes.append(f"Official lv{lv} duplicate match key: {k}")
+    for k in d2:
+        dup_notes.append(f"Our lv{lv} duplicate match key: {k}")
 simbad = read_simbad(SIMBAD)
 print("loading official lv4 for cross-reference...")
 off_lv4 = read_star2_keys(os.path.join(OFFICIAL, "stars_4_1v0_6.cat"))
@@ -183,13 +195,19 @@ print("loading done")
 # global index: key → (side, lv, star)
 glob_a = {}
 for lv, _, _, _ in LEVELS:
-    for k, s in off[lv].items(): glob_a[k] = ("A", lv, s)
+    for k, s in off[lv].items():
+        glob_a[k] = ("A", lv, s)
 our_glob = {}
 for lv, _, _, _ in LEVELS:
-    for k, s in our[lv].items(): our_glob[k] = (lv, s)
+    for k, s in our[lv].items():
+        our_glob[k] = (lv, s)
 
 lines = []
-def w(s=""): lines.append(s)
+
+
+def w(s=""):
+    lines.append(s)
+
 
 w("# lv0-3 Star-by-Star Field Comparison: Official Catalog vs hip2cat Output")
 w()
@@ -201,7 +219,7 @@ w("- **Tolerances** (Star1, same as cmpcat): position ±2 mas/axis, V ±5 mm
 w("- **B–V differences** (known method difference: BP‑RP polynomial vs official synthetic photometry) are excluded from this report; full listing in `lv03_bv_diff.tsv`")
 w()
 w("All tables below are sorted by match key (gaia_id, or HIP composite for no-Gaia-id stars).  "
-   "Stars within each category table appear in ascending key order.")
+  "Stars within each category table appear in ascending key order.")
 w()
 w("## Category legend")
 w()
@@ -221,7 +239,8 @@ w()
 if dup_notes:
     w("## Duplicate match-key warnings")
     w()
-    for n in dup_notes: w(f"- {n}")
+    for n in dup_notes:
+        w(f"- {n}")
     w()
 
 bv_rows = ["level\tkey\tgaia_id\thip\tcomp\tzoneA\tzoneB\tdBV_mag\tdV_mag\tvmagA\tvmagB"]
@@ -242,38 +261,38 @@ for lv, fn, lo, hi in LEVELS:
     w(f"## Level {lv}  ({fn}, V ∈ ({lo}, {hi}],  A {len(A)} stars / B {len(B)} stars)")
     w()
     keys_a, keys_b = set(A), set(B)
-    both   = keys_a & keys_b
+    both = keys_a & keys_b
     only_a = keys_a - keys_b
     only_b = keys_b - keys_a
 
     # ---- matched: classify field differences
     cats = defaultdict(list)       # category → rows
-    n_ident_raw  = 0
+    n_ident_raw = 0
     n_within_tol = 0
-    n_bv         = 0
+    n_bv = 0
     within_tol_rows = []
     for k in sorted(both):
         a, b = A[k], B[k]
         if a["raw"] == b["raw"] and a["zone"] == b["zone"]:
             n_ident_raw += 1
             continue
-        dra, dde   = ang_diff_mas(a, b)
+        dra, dde = ang_diff_mas(a, b)
         dpmra, dpmde = a["pmra"] - b["pmra"], a["pmdec"] - b["pmdec"]
-        dv, dbv     = a["vmag"] - b["vmag"], a["bv"] - b["bv"]
+        dv, dbv = a["vmag"] - b["vmag"], a["bv"] - b["bv"]
         dplx, dplxe = a["plx"] - b["plx"], a["plxe"] - b["plxe"]
-        drv         = a["rv"] - b["rv"]
+        drv = a["rv"] - b["rv"]
 
-        bad_pos   = abs(dra) > TOL_POS_MAS or abs(dde) > TOL_POS_MAS
-        bad_pm    = abs(dpmra) > TOL_PM or abs(dpmde) > TOL_PM
-        bad_v     = abs(dv) > TOL_VMAG
-        bad_plx   = abs(dplx) > TOL_PLX
-        bad_rv    = abs(drv) > TOL_RV
-        bad_bv    = abs(dbv) > 0.05
-        bad_zone  = a["zone"] != b["zone"]
-        bad_plxe  = abs(dplxe) > 0.05
-        bad_sp    = a["sp"] != b["sp"]
-        bad_ot    = a["otype"] != b["otype"]
-        bad_hip   = (a["hip"], a["comp"]) != (b["hip"], b["comp"])
+        bad_pos = abs(dra) > TOL_POS_MAS or abs(dde) > TOL_POS_MAS
+        bad_pm = abs(dpmra) > TOL_PM or abs(dpmde) > TOL_PM
+        bad_v = abs(dv) > TOL_VMAG
+        bad_plx = abs(dplx) > TOL_PLX
+        bad_rv = abs(drv) > TOL_RV
+        bad_bv = abs(dbv) > 0.05
+        bad_zone = a["zone"] != b["zone"]
+        bad_plxe = abs(dplxe) > 0.05
+        bad_sp = a["sp"] != b["sp"]
+        bad_ot = a["otype"] != b["otype"]
+        bad_hip = (a["hip"], a["comp"]) != (b["hip"], b["comp"])
 
         if not any([bad_pos, bad_pm, bad_v, bad_plx, bad_rv, bad_bv, bad_zone,
                     bad_plxe, bad_sp, bad_ot, bad_hip]):
@@ -281,29 +300,39 @@ for lv, fn, lo, hi in LEVELS:
             if a["raw"][:6] == b["raw"][:6] and a["raw"][7:] == b["raw"][7:]:
                 # only the B‑V millimag differs: known method difference → TSV
                 bv_rows.append(f"{lv}\t{k}\t{a['gaia_id']}\t{a['hip']}\t{a['comp']}\t"
-                               f"{a['zone']}\t{b['zone']}\t{dbv:+.3f}\t{dv:+.3f}\t"
-                               f"{a['vmag']:.3f}\t{b['vmag']:.3f}")
+                   f"{a['zone']}\t{b['zone']}\t{dbv:+.3f}\t{dv:+.3f}\t"
+                   f"{a['vmag']:.3f}\t{b['vmag']:.3f}")
                 n_bv += 1
                 continue
             n_within_tol += 1
             pn = prov_note(b["hip"], b["comp"]) if b["hip"] > 0 else "gaia-only"
             within_tol_rows.append((b["hip"], b["comp"],
-                f"| {fmt_key(a)} | z{a['zone']} | dRA {dra:+.3f} dDE {dde:+.3f} mas | "
-                f"dpm {dpmra:+.3f}/{dpmde:+.3f} | dV {dv*1000:+.0f} mmag  dBV {dbv*1000:+.0f} mmag | "
-                f"dplx {dplx*1000:+.0f} μas  dplxe {dplxe*1000:+.0f} μas | drv {drv:+.2f} | {pn} |"))
+                        f"| {fmt_key(a)} | z{a['zone']} | dRA {dra:+.3f} dDE {dde:+.3f} mas | "
+                        f"dpm {dpmra:+.3f}/{dpmde:+.3f} | dV {dv * 1000:+.0f} mmag  dBV {dbv * 1000:+.0f} mmag | "
+                        f"dplx {dplx * 1000:+.0f} μas  dplxe {dplxe * 1000:+.0f} μas | drv {drv:+.2f} | {pn} |"))
             continue
 
         labels = []
-        if bad_zone: labels.append("ZONE")
-        if bad_pos:  labels.append("POS")
-        if bad_pm:   labels.append("PM")
-        if bad_plx or bad_plxe: labels.append("PLX")
-        if bad_v:    labels.append("V")
-        if bad_bv:   labels.append("BV")
-        if bad_rv:   labels.append("RV")
-        if bad_sp:   labels.append("SP")
-        if bad_ot:   labels.append("OTYPE")
-        if bad_hip:  labels.append("HIP")
+        if bad_zone:
+            labels.append("ZONE")
+        if bad_pos:
+            labels.append("POS")
+        if bad_pm:
+            labels.append("PM")
+        if bad_plx or bad_plxe:
+            labels.append("PLX")
+        if bad_v:
+            labels.append("V")
+        if bad_bv:
+            labels.append("BV")
+        if bad_rv:
+            labels.append("RV")
+        if bad_sp:
+            labels.append("SP")
+        if bad_ot:
+            labels.append("OTYPE")
+        if bad_hip:
+            labels.append("HIP")
 
         row = (k, a, b, labels, dict(dra=dra, dde=dde, dpmra=dpmra, dpmde=dpmde,
                                      dv=dv, dbv=dbv, dplx=dplx, dplxe=dplxe, drv=drv))
@@ -334,8 +363,8 @@ for lv, fn, lo, hi in LEVELS:
     w()
 
     pairs_used_b = set()
-    paired_to_a  = {}   # B‑key → (A star info dict, distance)
-    rows_oa      = []
+    paired_to_a = {}   # B‑key → (A star info dict, distance)
+    rows_oa = []
     for k in sorted(only_a):
         a = A[k]
         if k in our_glob:
@@ -352,17 +381,19 @@ for lv, fn, lo, hi in LEVELS:
             else:
                 verdict = f"Level shift (V diff {dv:+.3f})"
             rows_oa.append(("A‑only", a,
-                f"In our lv{blv} (z{bs['zone']}, V={bs['vmag']:.3f}, hip={bs['hip']})",
-                verdict + prov_note(bs["hip"], bs["comp"])))
+                 f"In our lv{blv} (z{bs['zone']}, V={bs['vmag']:.3f}, hip={bs['hip']})",
+                             verdict + prov_note(bs["hip"], bs["comp"])))
             continue
         # positional pair among only_b?
         best, bestd = None, 1e9
         for k2 in only_b:
-            if k2 in pairs_used_b: continue
+            if k2 in pairs_used_b:
+                continue
             bs = B[k2]
             dra_, dde_ = ang_diff_mas(a, bs)
             d = math.hypot(dra_, dde_)
-            if d < bestd: best, bestd = (k2, bs), d
+            if d < bestd:
+                best, bestd = (k2, bs), d
         if best and bestd < 3600000.0:  # within 1°
             k2, bs = best
             pairs_used_b.add(k2)
@@ -373,10 +404,10 @@ for lv, fn, lo, hi in LEVELS:
             if (a["hip"], a["comp"]) != (bs["hip"], bs["comp"]):
                 why.append(f"HIP/comp differs A={a['hip']}/{a['comp']}  B={bs['hip']}/{bs['comp']}")
             if bestd > TOL_POS_MAS:
-                why.append(f"position offset {bestd/1000:.3f} arcsec")
+                why.append(f"position offset {bestd / 1000:.3f} arcsec")
             rows_oa.append(("A‑only", a,
-                f"Paired with B key ({fmt_key(bs)}, z{bs['zone']}, V={bs['vmag']:.3f})",
-                "Match key differs: " + "; ".join(why) + prov_note(bs["hip"], bs["comp"])))
+                 f"Paired with B key ({fmt_key(bs)}, z{bs['zone']}, V={bs['vmag']:.3f})",
+                             "Match key differs: " + "; ".join(why) + prov_note(bs["hip"], bs["comp"])))
             continue
         # nowhere in our lv0‑3 — check SIMB input
         si = simbad.get((a["hip"], a["comp"]))
@@ -396,10 +427,11 @@ for lv, fn, lo, hi in LEVELS:
         if k in paired_to_a:
             a_p, dist = paired_to_a[k]
             rows_oa.append(("B‑only", b,
-                f"Paired with A key ({fmt_key(a_p)}, z{a_p['zone']}, V={a_p['vmag']:.3f}, dist {dist/1000:.3f} ″)",
-                "Match key differs (positional pair, see the corresponding A‑only row)" + prov_note(b["hip"], b["comp"])))
+                 f"Paired with A key ({fmt_key(a_p)}, z{a_p['zone']}, V={a_p['vmag']:.3f}, dist {dist / 1000:.3f} ″)",
+                 "Match key differs (positional pair, see the corresponding A‑only row)" + prov_note(b["hip"], b["comp"])))
             continue
-        if k in pairs_used_b: continue
+        if k in pairs_used_b:
+            continue
         if k in glob_a:
             aside, alv, astar = glob_a[k]
             dv = b["vmag"] - astar["vmag"]
@@ -411,13 +443,13 @@ for lv, fn, lo, hi in LEVELS:
             else:
                 verdict = f"Level shift (V diff {dv:+.3f})"
             rows_oa.append(("B‑only", b,
-                f"In official lv{alv} (z{astar['zone']}, V={astar['vmag']:.3f}, hip={astar['hip']})",
-                verdict + prov_note(b["hip"], b["comp"])))
+                 f"In official lv{alv} (z{astar['zone']}, V={astar['vmag']:.3f}, hip={astar['hip']})",
+                             verdict + prov_note(b["hip"], b["comp"])))
         elif b["gaia_id"] > 0 and b["gaia_id"] in off_lv4:
             v4, z4 = off_lv4[b["gaia_id"]]
             rows_oa.append(("B‑only", b,
-                f"In official lv4 (z{z4}, V={v4:.3f})",
-                "Level shift (official V > 10.5 → lv4)" + prov_note(b["hip"], b["comp"])))
+                 f"In official lv4 (z{z4}, V={v4:.3f})",
+                 "Level shift (official V > 10.5 → lv4)" + prov_note(b["hip"], b["comp"])))
         else:
             si = simbad.get((b["hip"], b["comp"]))
             note = "Official lv0‑4 all empty (lv0‑3 + lv4 checked)"
@@ -447,7 +479,8 @@ for lv, fn, lo, hi in LEVELS:
         w()
     for pri in ["ZONE", "POS", "PM", "PLX", "V", "BV", "RV", "SP", "OTYPE", "HIP"]:
         rows = cats.get(pri)
-        if not rows: continue
+        if not rows:
+            continue
         w(f"#### Primary category **{pri}** ({len(rows)} stars)")
         w()
         w("| Star | zone A→B | dRA/dDE (mas) | dpm (mas/yr) | dV | dBV | dplx/dplxe (mas) | drv (km/s) | Other fields | Labels | Provenance |")
