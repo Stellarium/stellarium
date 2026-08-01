@@ -1974,12 +1974,25 @@ The full pipeline looks like this:
         \program{gaiahip2cat} calls \program{erfa\_zone.py} (Python) for the
         $\pm$210\,kyr past/future global-zone analysis of levels~0--2.
   \item Generate levels 4--10 (Star2/Star3 records) from the Gaia
-        \file{.bin} files with \program{gaia2cat}.
-  \item Remove duplicated stars between adjacent levels with \program{dedupcat}.
+        \file{.bin} files with \program{gaia2cat}, passing it the
+        level~0--3 catalogues just produced via \program{--exclude-lower}
+        so that the already-catalogued HIP stars are not duplicated in
+        levels~4--6 (levels~7--10 keep them, matching the official
+        catalogues).
+  \item Remove the level~3/4 boundary overlap with \program{dedupcat}
+        (level 4 intentionally starts 0.25 mag brighter than level 3 so
+        that no star is lost at the boundary).
   \item Verify the output with \program{field\_diff.py} (global,
         per-field classification of every differing star) and
         \program{cmpcat} (zone-by-zone comparison).
 \end{enumerate}
+
+All generated catalogue file names are derived from the Stellarium
+\file{starsConfig.json} (see
+section~\ref{sec:StarCatalogues:Generating:Naming}); the minor version of
+every output is the official one incremented by one, so the new catalogues
+can coexist with the official ones and are picked up by Stellarium only
+after the configuration has been updated.
 
 \subsection{Obtaining the Input Data}
 \label{sec:StarCatalogues:Generating:Data}
@@ -2069,6 +2082,41 @@ download). This step is deliberately skipped here; B-V is instead estimated
 from BP-RP with a polynomial. The difference is negligible except for very
 red stars and only affects the B-V field, never any other field.
 
+\subsection{Output File Naming}
+\label{sec:StarCatalogues:Generating:Naming}
+
+Catalogue file names follow the official pattern
+\file{stars\_<level>\_<type>v<major>\_<minor>.cat} (e.g.\
+\file{stars\_0\_0v0\_21.cat}), where \texttt{<type>} is the star record
+format (0 = Star1, 1 = Star2, 2 = Star3) and \texttt{<major>}/\texttt{<minor>}
+are catalogue versions. Both generators derive their output names from the
+Stellarium \file{starsConfig.json} --- the file Stellarium itself reads to
+decide which catalogues to load --- located in the user configuration
+directory (\texttt{\%APPDATA\%\textbackslash Stellarium\textbackslash stars\textbackslash hip\_gaia3\textbackslash starsConfig.json}
+on Windows, \texttt{\$HOME/.stellarium/...} elsewhere; a different file can
+be supplied with \program{--stars-config}):
+
+\begin{itemize}
+  \item the \emph{star format} is the generator's own choice
+        (\program{gaiahip2cat} always emits Star1 for levels~0--3;
+        \program{gaia2cat} emits Star2 or Star3 according to
+        \program{--star3-from}) and overrides whatever the configuration
+        says;
+  \item the \emph{major} version is taken from the official file name of
+        that level (0 in practice);
+  \item the \emph{minor} version is the official one \emph{incremented by
+        one}, so a level whose official catalogue is
+        \file{stars\_0\_0v0\_21.cat} is written as
+        \file{stars\_0\_0v0\_22.cat}; levels without an official entry
+        start at minor 1.
+\end{itemize}
+
+The spectral-type table follows the same rule applied to the
+\texttt{hipSpectralFile} entry: the official
+\file{stars\_hip\_sp\_0v0\_6.cat} becomes \file{stars\_hip\_sp\_0v0\_7.cat}.
+If \file{starsConfig.json} is missing, a warning is printed and the default
+names (minor 1) are used.
+
 \subsection{Generating Levels 0--3 (Star1)}
 \label{sec:StarCatalogues:Generating:lv03}
 
@@ -2077,6 +2125,7 @@ gaiahip2cat --simbad <hip_processed_with_binary.dat> --gaia-bin <dir>
         --out-dir <dir> --otype <otype.dat>
         [--sp-table <stars_hip_sp_0v0_6.cat>] [--workers 4]
         [--levels 0-3] [--max-files n] [--erfa-python <python.exe>]
+        [--stars-config <starsConfig.json>]
 \end{commands}
 
 \begin{description}
@@ -2089,8 +2138,10 @@ gaiahip2cat --simbad <hip_processed_with_binary.dat> --gaia-bin <dir>
   \item[\program{--sp-table}] spectral type table. If given (and it exists),
         \texttt{spInt} values follow it exactly, so use the official
         \file{stars\_hip\_sp\_0v0\_6.cat} for comparability with existing
-        catalogues. If omitted, a fresh table is built in first-encounter
-        order and written to \file{<out-dir>/stars\_hip\_sp\_0v0\_6.cat}.
+        catalogues. Spectral types that SIMBAD added since the official
+        table was released are \emph{appended} (their indices are new, the
+        existing ones are unchanged) and the extended table is written out.
+        If omitted, a fresh table is built in first-encounter order.
   \item[\program{--workers}] threads for the \file{.bin} scan
         (default: $\min(4, \mathrm{cores})$). The scan reads $\sim$112 GB
         and is disk-bound ($\sim$10 min on an HDD); more threads do not help.
@@ -2106,6 +2157,12 @@ gaiahip2cat --simbad <hip_processed_with_binary.dat> --gaia-bin <dir>
         \emph{skipped} (only direction zones are used) and a prominent
         warning is printed. Always supply this flag when the output is meant
         to match the official catalogues.
+  \item[\program{--stars-config}] path to the Stellarium
+        \file{starsConfig.json} used for output naming (see
+        section~\ref{sec:StarCatalogues:Generating:Naming}); defaults to the
+        user configuration directory
+        (\texttt{\%APPDATA\%\textbackslash Stellarium\textbackslash stars\textbackslash hip\_gaia3\textbackslash starsConfig.json}
+        on Windows, \texttt{\$HOME/.stellarium/...} elsewhere).
 \end{description}
 
 What the tool does: it scans all \file{.bin} files once, attaches Gaia DR3
@@ -2115,18 +2172,21 @@ wrongly cross-matched neighbour), selects Gaia-only stars down to
 $V \le 15.5$, applies the reference pipeline's manual per-star patches and
 photometry fallback chains, propagates SIMBAD-epoch stars from J2000.0 to
 J2016.0 with full 6D space motion, splits stars into levels
-(0: $[-2,6]$, 1: $[6,7.5]$, 2: $[7.5,9]$ \emph{plus every HIP star},
-3: $[9,10.5]$ non-HIP), performs the past/future global-zone analysis for
-levels 0--2, and writes \file{stars\_0\_0v0\_21.cat},
-\file{stars\_1\_0v0\_16.cat}, \file{stars\_2\_0v0\_17.cat} and
-\file{stars\_3\_0v0\_10.cat}.
+(0: $(-2,6]$, 1: $(6,7.5]$, 2: $(7.5,9]$ \emph{plus every HIP star},
+3: $(9,10.5]$ non-HIP), performs the past/future global-zone analysis for
+levels 0--2, and writes the spectral-type table
+\file{stars\_hip\_sp\_0v0\_7.cat} together with the four level catalogues
+(see section~\ref{sec:StarCatalogues:Generating:Naming} for the file
+names).
 
 \subsection{Generating Levels 4--10 (Star2/Star3)}
 \label{sec:StarCatalogues:Generating:lv410}
 
 \begin{commands}
 gaia2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>]
-             [--workers n] [--star3-from 8] [--levels 4-10] [--dry-run]
+             [--workers n] [--star3-from 8] [--levels 4-10]
+             [--exclude-lower <stars_0.cat> <stars_1.cat> <stars_2.cat> <stars_3.cat>]
+             [--stars-config <starsConfig.json>] [--dry-run]
 \end{commands}
 
 \begin{description}
@@ -2137,26 +2197,40 @@ gaia2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>]
         a different run.
   \item[\program{--star3-from}] levels $\ge$ this use 16-byte Star3 records
         (default 8; must be $\ge 8$ because Star3 cannot represent $V<16$).
+        Use \texttt{--star3-from 11} to force Star2 records (32 bytes) for
+        all of levels~4--10.
   \item[\program{--levels}] level range (default \texttt{4-10}).
-        Level 4 deliberately covers $V \in [10.25, 12.0)$ --- a 0.25 mag
+        Level 4 deliberately covers $V \in (10.25, 12.0]$ --- a 0.25 mag
         overlap with level 3, so that deduplication against level 3 (below)
         can remove the boundary duplicates without losing any star.
+  \item[\program{--exclude-lower}] one or more level~0--3 \file{.cat} files
+        (the output of \program{gaiahip2cat}). Every star whose Gaia
+        \texttt{source\_id} appears in them is dropped from levels~4--6.
+        This mirrors the official pipeline, where levels~4--6 contain only
+        Gaia-only stars (\texttt{hip == 0} after merging the SIMBAD table):
+        all HIP stars already live in the level~0--3 catalogues. Levels~7--10
+        keep HIP stars, exactly like the official level~7+ catalogues
+        (whose ADQL queries do not apply this filter). The level~0--3 files
+        are parsed on the fly, so no intermediate id list is needed.
+  \item[\program{--stars-config}] as for \program{gaiahip2cat}.
   \item[\program{--dry-run}] run pass 1 only (zone counts, no catalogues).
 \end{description}
 
 The tool runs a two-pass map-reduce: pass 1 scans all \file{.bin} files in
-parallel, assigns each star to its geodesic zone and magnitude level, and
-writes per-level bucket files; pass 2 sorts each bucket by (zone, V) and
-writes the \file{.cat} files with the 28-byte header described in
-section~\ref{sec:Catalogues:stars:sections}.
+parallel, assigns each star to its geodesic zone and magnitude level (the
+official half-open ranges $(lo, hi]$, i.e.\ a star with $V$ exactly equal
+to a level's upper bound belongs to the brighter level), and writes
+per-level bucket files; pass 2 sorts each bucket by (zone, V) and writes
+the \file{.cat} files with the 28-byte header described in
+section~\ref{sec:Catalogues:stars:sections}. On Windows the open-file limit
+is raised internally so that all bucket LRU caches fit.
 
-\subsection{Deduplication Between Adjacent Levels}
+\subsection{Deduplication Between Levels 3 and 4}
 \label{sec:StarCatalogues:Generating:dedup}
 
-Because the magnitude ranges of neighbouring levels may share boundary
-stars (level 4 intentionally overlaps level 3, and levels 7--10 partition a
-continuous flux range), run \program{dedupcat} against each adjacent pair
-after generation:
+The magnitude ranges of neighbouring levels do not overlap (each is
+$(lo, hi]$), except for the deliberate 0.25 mag overlap of level 4 with
+level 3. Run \program{dedupcat} once on that pair after generation:
 
 \begin{commands}
 dedupcat <level_n_ref.cat> <level_n+1.cat> <level_n+1_dedup.cat>
@@ -2165,11 +2239,11 @@ dedupcat <level_n_ref.cat> <level_n+1.cat> <level_n+1_dedup.cat>
 The first file is the \emph{brighter} reference level: every star in the
 second catalogue that also appears in the reference (matched by Gaia
 \texttt{source\_id}) is removed from the output. Star1/Star2/Star3 files
-can be mixed freely; the output keeps the second catalogue's record format.
-Apply it in the chain $3 \rightarrow 4$, $4 \rightarrow 5$, \dots,
-$9 \rightarrow 10$, replacing each fainter catalogue with its deduplicated
-version. Levels 0--3 must \emph{not} be deduplicated: level 2 deliberately
-contains all HIP stars regardless of magnitude.
+can be mixed freely (level 3 is Star1, level 4 is Star2); the output keeps
+the second catalogue's record format. Replace \file{stars\_4\_...\_dedup.cat}
+with the original \file{stars\_4} file afterwards. Levels 0--3 must
+\emph{not} be deduplicated: level 2 deliberately contains all HIP stars
+regardless of magnitude.
 
 \subsection{Per-Star Field-Level Verification}
 \label{sec:StarCatalogues:Generating:fielddiff}
@@ -2204,10 +2278,13 @@ It produces:
 Stars are matched by Gaia \texttt{source\_id} globally (not per zone
 like \program{cmpcat}), so zone-assignment differences become a
 dedicated ZONE category rather than inflating the only-in counts. The
-report draws its provenance information from the
-\texttt{source\_id\_provenance} column written by
-\program{parse\_hip\_catalog.py} and uses the two spectral- and
-object-type tables produced alongside the catalogues to decode
+script derives both file name sets from the same
+\file{starsConfig.json} as the generators: the official names for the
+reference side, the minor+1 names for the generated side (see
+section~\ref{sec:StarCatalogues:Generating:Naming}). It also draws its
+provenance information from the \texttt{source\_id\_provenance} column
+written by \program{parse\_hip\_catalog.py} and uses the two spectral-
+and object-type tables produced alongside the catalogues to decode
 \texttt{spInt} and \texttt{objtype} fields on both sides for readable
 comparison.
 
