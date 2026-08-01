@@ -1376,6 +1376,9 @@ void ViewDialog::hipsListItemChanged(QTreeWidgetItem* item)
 	}
 
 	l->blockSignals(false);
+
+	updateHipsText();
+	updateHipsControls();
 }
 
 void ViewDialog::updateTabBarListWidgetWidth()
