@@ -21,25 +21,33 @@ REPORT = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_field_diff_
 BV_TSV = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_bv_diff.tsv"
 
 
-def load_official_names():
-    """Official catalog file names per level from the Stellarium starsConfig.json."""
+def load_stars_config():
+    """Full starsConfig.json (catalogs + hipSpectralFile) or {} if not found."""
     candidates = [os.path.expandvars(r"%APPDATA%\Stellarium\stars\hip_gaia3\starsConfig.json"),
                   os.path.expanduser("~/.stellarium/stars/hip_gaia3/starsConfig.json")]
     for p in candidates:
         if os.path.exists(p):
             with open(p, encoding="utf-8") as f:
-                cfg = json.load(f)
-            return {int(c["id"][5:]): c["fileName"] for c in cfg["catalogs"]}
+                return json.load(f)
     return {}
 
 
+_CFG = load_stars_config()
+_OFFICIAL_NAMES = {int(c["id"][5:]): c["fileName"] for c in _CFG.get("catalogs", [])}
+_OFFICIAL_SP = _CFG.get("hipSpectralFile", "stars_hip_sp_0v0_6.cat")
+
+
 def next_cat_name(name):
-    """'stars_0_0v0_21.cat' -> 'stars_0_0v0_22.cat' (minor + 1)."""
-    m = re.match(r"^(stars_\d+_\d+v\d+_)(\d+)(\.cat)$", name)
-    return f"{m.group(1)}{int(m.group(2)) + 1}{m.group(3)}" if m else name
+    """'stars_0_0v0_21.cat' -> 'stars_0_0v0_22.cat',
+    'stars_hip_sp_0v0_6.cat' -> 'stars_hip_sp_0v0_7.cat' (minor + 1)."""
+    for pat in (r"^(stars_\d+_\d+v\d+_)(\d+)(\.cat)$",
+                r"^(stars_hip_sp_\d+v\d+_)(\d+)(\.cat)$"):
+        m = re.match(pat, name)
+        if m:
+            return f"{m.group(1)}{int(m.group(2)) + 1}{m.group(3)}"
+    return name
 
 
-_OFFICIAL_NAMES = load_official_names()
 LEVELS = []
 for _lv, _lo, _hi in [(0, -2.0, 6.0), (1, 6.0, 7.5), (2, 7.5, 9.0), (3, 9.0, 10.5)]:
     _oname = _OFFICIAL_NAMES.get(_lv, f"stars_{_lv}_0v0_1.cat")
@@ -58,10 +66,10 @@ def load_table(path):
         return [line.rstrip("\n").rstrip("\r") for line in f]
 
 
-SP_TABLE = load_table(os.path.join(OFFICIAL, "stars_hip_sp_0v0_6.cat"))
+SP_TABLE = load_table(os.path.join(OFFICIAL, _OFFICIAL_SP))
 OT_TABLE = load_table(os.path.join(OFFICIAL, "object_types_v0_1.cat"))
 
-our_sp_path = os.path.join(OURS, "stars_hip_sp_0v0_6.cat")
+our_sp_path = os.path.join(OURS, next_cat_name(_OFFICIAL_SP))
 OUR_SP_TABLE = load_table(our_sp_path) if os.path.exists(our_sp_path) else SP_TABLE
 our_ot_path = os.path.join(OURS, "object_types_v0_1.cat")
 OUR_OT_TABLE = load_table(our_ot_path) if os.path.exists(our_ot_path) else OT_TABLE
