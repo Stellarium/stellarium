@@ -19,6 +19,9 @@
 #include <vector>
 #include <thread>
 #include <atomic>
+#include <unordered_set>
+#include <memory>
+#include <fstream>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -102,12 +105,17 @@ static void cleanup_pass2(const std::string& out_dir, const std::vector<LevelCon
 }
 
 // Process one star file (template works with any Reader that has open/next/close)
+// exclude_ids: gaia_id set of stars already present in the lower (lv0-3)
+// catalogs; they are dropped from levels <= 6 (the official lv0-3 catalog
+// contains all HIP stars, lv4-6 are gaia-only). Levels >= 7 keep them, as
+// the official lv7+ catalogs do.
 template<typename Reader>
 static void process_star_file(
 	const std::string& path,
 	const std::vector<LevelConfig>& levels,
 	std::vector<BucketWriter*>& bucket_writers,
 	ZoneCounts& local_counts,
+	const std::unordered_set<int64_t>* exclude_ids,
 	bool dry_run)
 {
 	Reader reader;
@@ -117,13 +125,15 @@ static void process_star_file(
 	while (reader.next(star)) {
 		if (star.gaia_id == 0) continue;
 		if (std::isnan(star.G_mag)) continue;
+		const bool is_hip = exclude_ids && exclude_ids->count(star.gaia_id) > 0;
 
 		double v  = g_to_v(star.G_mag, star.bp_rp);
 		double bv = bp_rp_to_bv(star.bp_rp);
 
 		for (size_t li = 0; li < levels.size(); ++li) {
 			const auto& lv = levels[li];
-			if (v < lv.mag_lo || v >= lv.mag_hi) continue;
+			if (v <= lv.mag_lo || v > lv.mag_hi) continue;
+			if (is_hip && lv.level <= 6) continue;
 
 			double ra_rad  = star.ra_deg  * M_PI / 180.0;
 			double dec_rad = star.dec_deg * M_PI / 180.0;
@@ -160,11 +170,50 @@ static void process_star_file(
 	reader.close();
 }
 
+// Read all gaia_ids from a .cat file (auto-detects Star1/Star2/Star3 by header
+// type) into the given set. Used by --exclude-lower to collect the stars that
+// the lower-level catalogs (lv0-3, gaiahip2cat output) already contain.
+static void load_cat_gaia_ids(const std::string& path, std::unordered_set<int64_t>& out)
+{
+	FILE* f = std::fopen(path.c_str(), "rb");
+	if (!f) { std::cerr << "ERROR: cannot open " << path << "\n"; std::exit(1); }
+	uint32_t hdr[6];
+	if (std::fread(hdr, sizeof(uint32_t), 6, f) != 6) {
+		std::cerr << "ERROR: bad header in " << path << "\n"; std::exit(1);
+	}
+	size_t rec_size = hdr[1] == 0 ? 48 : hdr[1] == 1 ? 32 : 16;
+	const int level = static_cast<int>(hdr[4]);
+	const int nz = 20 * (1 << (level * 2)) + 1;
+	std::fseek(f, 28, SEEK_SET);
+	std::vector<uint32_t> counts(nz);
+	std::fread(counts.data(), sizeof(uint32_t), nz, f);
+	uint64_t off = 28 + static_cast<uint64_t>(nz) * 4;
+	std::vector<uint8_t> buf(rec_size);
+	for (int z = 0; z < nz; ++z) {
+		for (uint32_t i = 0; i < counts[z]; ++i) {
+			std::fseek(f, static_cast<long>(off), SEEK_SET);
+			std::fread(buf.data(), rec_size, 1, f);
+			int64_t gid;
+			std::memcpy(&gid, buf.data(), 8);
+			out.insert(gid);
+			off += rec_size;
+		}
+	}
+	std::fclose(f);
+	std::cout << "  loaded " << path << ": " << out.size() << " ids so far\n";
+}
+
 int main(int argc, char** argv) {
+#ifdef _WIN32
+	// Windows CRT defaults to 512 open stdio streams; the bucket LRU caches
+	// (MAX_OPEN=96 per level) exceed this when generating 7 levels at once.
+	_setmaxstdio(2048);
+#endif
 	std::string input_dir;
 	std::string out_dir;
 	std::string work_dir;
 	std::string stars_config = default_stars_config_path();
+	std::vector<std::string> exclude_lower_paths;
 	int    n_workers   = std::thread::hardware_concurrency();
 	bool   dry_run     = false;
 	int    star3_from  = 8;   // levels >= this use Star3 (V >= 16.0 required; matches official split)
@@ -177,6 +226,13 @@ int main(int argc, char** argv) {
 		else if (arg == "--out-dir"     && i+1 < argc) { out_dir    = argv[++i]; }
 		else if (arg == "--work-dir"    && i+1 < argc) { work_dir   = argv[++i]; }
 		else if (arg == "--stars-config" && i+1 < argc) { stars_config = argv[++i]; }
+		else if (arg == "--exclude-lower") {
+			while (i + 1 < argc && argv[i+1][0] != '-') exclude_lower_paths.push_back(argv[++i]);
+			if (exclude_lower_paths.empty()) {
+				std::cerr << "ERROR: --exclude-lower needs at least one .cat file\n";
+				return 1;
+			}
+		}
 		else if (arg == "--workers"     && i+1 < argc) { n_workers  = std::stoi(argv[++i]); }
 		else if (arg == "--star3-from"  && i+1 < argc) { star3_from = std::stoi(argv[++i]); }
 		else if (arg == "--levels"      && i+1 < argc) {
@@ -191,12 +247,12 @@ int main(int argc, char** argv) {
 		}
 		else if (arg == "--dry-run")                    { dry_run    = true; }
 		else {
-			std::cerr << "Usage: gaia2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--stars-config <json>] [--workers <n>] [--star3-from <level>] [--levels <lo>[-<hi>]] [--dry-run]\n";
+			std::cerr << "Usage: gaia2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--stars-config <json>] [--workers <n>] [--star3-from <level>] [--levels <lo>[-<hi>]] [--exclude-lower <lv0-3.cat>...] [--dry-run]\n";
 			return 1;
 		}
 	}
 	if (input_dir.empty() || out_dir.empty()) {
-		std::cerr << "Usage: gaia2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--stars-config <json>] [--workers <n>] [--star3-from <level>] [--levels <lo>[-<hi>]] [--dry-run]\n";
+		std::cerr << "Usage: gaia2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>] [--stars-config <json>] [--workers <n>] [--star3-from <level>] [--levels <lo>[-<hi>]] [--exclude-lower <lv0-3.cat>...] [--dry-run]\n";
 		return 1;
 	}
 	if (level_lo < 0 || level_hi > 10 || level_lo > level_hi) {
@@ -211,6 +267,21 @@ int main(int argc, char** argv) {
 		std::cerr << "WARNING: starsConfig.json not found at " << stars_config
 		          << " -- using default catalog naming\n";
 	if (work_dir.empty()) work_dir = out_dir;
+
+	// Load gaia_ids already present in the lower-level catalogs (lv0-3 output
+	// of gaiahip2cat) so that levels 4-6 exclude them, matching the official
+	// pipeline (lv0-3 contains all HIP stars, lv4-6 are gaia-only).
+	std::unique_ptr<std::unordered_set<int64_t>> exclude_ids;
+	for (const auto& p : exclude_lower_paths) {
+		if (!fs::exists(p)) {
+			std::cerr << "ERROR: --exclude-lower file not found: " << p << "\n";
+			return 1;
+		}
+		if (!exclude_ids) exclude_ids = std::make_unique<std::unordered_set<int64_t>>();
+		load_cat_gaia_ids(p, *exclude_ids);
+	}
+	if (exclude_ids)
+		std::cout << "Excluding " << exclude_ids->size() << " lower-level gaia_ids from levels 0-6\n";
 
 	if (!dry_run) {
 		fs::create_directories(out_dir);
@@ -313,7 +384,7 @@ int main(int argc, char** argv) {
 					int fi = next_file.fetch_add(1);
 					if (fi >= static_cast<int>(input_files.size())) break;
 
-				process_star_file<BinReader>(input_files[fi], levels, bucket_writers, worker_counts[worker_id], dry_run);
+				process_star_file<BinReader>(input_files[fi], levels, bucket_writers, worker_counts[worker_id], exclude_ids.get(), dry_run);
 				completed.fetch_add(1);
 				}
 			});

@@ -9,6 +9,8 @@ criterion).
 import struct
 import math
 import os
+import json
+import re
 from collections import defaultdict
 import pandas as pd
 
@@ -18,12 +20,29 @@ SIMBAD = r"C:\Users\13308\CLionProjects\stellarium_star_catalogs\simbad_query_re
 REPORT = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_field_diff_report.md"
 BV_TSV = r"C:\Users\13308\CLionProjects\stellarium\util\gaiacat\lv03_bv_diff.tsv"
 
-LEVELS = [
-    (0, "stars_0_0v0_21.cat", -2.0, 6.0),
-    (1, "stars_1_0v0_16.cat", 6.0, 7.5),
-    (2, "stars_2_0v0_17.cat", 7.5, 9.0),
-    (3, "stars_3_0v0_10.cat", 9.0, 10.5),
-]
+
+def load_official_names():
+    """Official catalog file names per level from the Stellarium starsConfig.json."""
+    candidates = [os.path.expandvars(r"%APPDATA%\Stellarium\stars\hip_gaia3\starsConfig.json"),
+                  os.path.expanduser("~/.stellarium/stars/hip_gaia3/starsConfig.json")]
+    for p in candidates:
+        if os.path.exists(p):
+            cfg = json.load(open(p, encoding="utf-8"))
+            return {int(c["id"][5:]): c["fileName"] for c in cfg["catalogs"]}
+    return {}
+
+
+def next_cat_name(name):
+    """'stars_0_0v0_21.cat' -> 'stars_0_0v0_22.cat' (minor + 1)."""
+    m = re.match(r"^(stars_\d+_\d+v\d+_)(\d+)(\.cat)$", name)
+    return f"{m.group(1)}{int(m.group(2)) + 1}{m.group(3)}" if m else name
+
+
+_OFFICIAL_NAMES = load_official_names()
+LEVELS = []
+for _lv, _lo, _hi in [(0, -2.0, 6.0), (1, 6.0, 7.5), (2, 7.5, 9.0), (3, 9.0, 10.5)]:
+    _oname = _OFFICIAL_NAMES.get(_lv, f"stars_{_lv}_0v0_1.cat")
+    LEVELS.append((_lv, _oname, next_cat_name(_oname), _lo, _hi))
 
 # Star1 tolerances (same as cmpcat)
 TOL_POS_MAS = 2.0
@@ -180,9 +199,9 @@ def fmt_key(s):
 print("loading catalogs...")
 off, our = {}, {}
 dup_notes = []
-for lv, fn, _, _ in LEVELS:
+for lv, fn, fn_ours, _, _ in LEVELS:
     off[lv], d1 = read_cat(os.path.join(OFFICIAL, fn))
-    our[lv], d2 = read_cat(os.path.join(OURS, fn))
+    our[lv], d2 = read_cat(os.path.join(OURS, fn_ours))
     for k in d1:
         dup_notes.append(f"Official lv{lv} duplicate match key: {k}")
     for k in d2:
@@ -194,11 +213,11 @@ print("loading done")
 
 # global index: key → (side, lv, star)
 glob_a = {}
-for lv, _, _, _ in LEVELS:
+for lv, _, _, _, _ in LEVELS:
     for k, s in off[lv].items():
         glob_a[k] = ("A", lv, s)
 our_glob = {}
-for lv, _, _, _ in LEVELS:
+for lv, _, _, _, _ in LEVELS:
     for k, s in our[lv].items():
         our_glob[k] = (lv, s)
 
@@ -256,9 +275,9 @@ def prov_note(hip, comp):
     return ""
 
 
-for lv, fn, lo, hi in LEVELS:
+for lv, fn, fn_ours, lo, hi in LEVELS:
     A, B = off[lv], our[lv]
-    w(f"## Level {lv}  ({fn}, V ∈ ({lo}, {hi}],  A {len(A)} stars / B {len(B)} stars)")
+    w(f"## Level {lv}  (official {fn}, ours {fn_ours}, V ∈ ({lo}, {hi}],  A {len(A)} stars / B {len(B)} stars)")
     w()
     keys_a, keys_b = set(A), set(B)
     both = keys_a & keys_b

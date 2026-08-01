@@ -1,6 +1,7 @@
 // Deduplicate a Stellarium .cat file against a reference catalog.
 // Stars whose Gaia ID appears in the reference are removed.
-// Auto-detects Star2 (type 1, 32 bytes) and Star3 (type 2, 16 bytes) from headers.
+// Auto-detects Star1 (type 0, 48 bytes), Star2 (type 1, 32 bytes) and
+// Star3 (type 2, 16 bytes) from headers.
 // Reference and input may have different record sizes; output preserves input format.
 // Single pass over input. Supports verbose duplicate printing and dry-run.
 
@@ -17,6 +18,11 @@
 
 static int nr_of_zones(int level) { return 20 * (1 << (level * 2)) + 1; }
 
+static const char* star_type_name(uint32_t cat_type)
+{
+	return cat_type == 0 ? "1" : cat_type == 2 ? "3" : "2";
+}
+
 // Read catalog type and level from a .cat header; returns record size (0 on error).
 static size_t read_header(FILE* f, uint32_t hdr[6], float& epoch, int& level, uint32_t& cat_type)
 {
@@ -24,6 +30,7 @@ static size_t read_header(FILE* f, uint32_t hdr[6], float& epoch, int& level, ui
 	std::fread(&epoch, sizeof(float), 1, f);
 	cat_type = hdr[1];
 	level    = static_cast<int>(hdr[4]);
+	if (cat_type == 0) return 48;
 	if (cat_type == 1) return 32;
 	if (cat_type == 2) return 16;
 	return 0;
@@ -45,6 +52,30 @@ struct StarInfo {
 			s.bv      = 0.025 * buf[14] - 1.0;
 			s.vmag    = 16.0 + 0.02 * buf[15];
 			s.has_pm_plx = false;
+		} else if (cat_type == 0) {
+			// Star1: 3D position/PM vectors scaled by 2e9 / 1000.
+			int32_t x0, x1, x2, dx0, dx1, dx2;
+			int16_t bv_i, vmag_i, rv_i;
+			uint16_t plx_u, plxe_u;
+			std::memcpy(&x0, buf+8, 4);   std::memcpy(&x1, buf+12, 4);  std::memcpy(&x2, buf+16, 4);
+			std::memcpy(&dx0, buf+20, 4); std::memcpy(&dx1, buf+24, 4); std::memcpy(&dx2, buf+28, 4);
+			std::memcpy(&bv_i, buf+32, 2);   std::memcpy(&vmag_i, buf+34, 2);
+			std::memcpy(&plx_u, buf+36, 2);  std::memcpy(&plxe_u, buf+38, 2);
+			std::memcpy(&rv_i, buf+40, 2);
+			double nx = x0 / 2e9, ny = x1 / 2e9, nz = x2 / 2e9;
+			double r = std::sqrt(nx*nx + ny*ny + nz*nz);
+			s.ra_deg = std::atan2(ny, nx) * 180.0 / M_PI;
+			if (s.ra_deg < 0) s.ra_deg += 360.0;
+			s.dec_deg = (r > 0 ? std::asin(nz / r) : 0.0) * 180.0 / M_PI;
+			s.bv = bv_i / 1000.0;  s.vmag = vmag_i / 1000.0;
+			s.plx_mas = plx_u / 50.0;
+			// dx* are PM components in the same 3D basis (mas/yr), without cos(dec).
+			double ra = s.ra_deg * M_PI / 180.0, dec = s.dec_deg * M_PI / 180.0;
+			s.pmra  = (dx0 * -std::sin(ra) + dx1 * std::cos(ra)) / 1000.0;
+			s.pmdec = (dx0 * -std::sin(dec) * std::cos(ra) + dx1 * -std::sin(dec) * std::sin(ra)
+			           + dx2 * std::cos(dec)) / 1000.0;
+			s.has_pm_plx = true;
+			(void)plxe_u; (void)rv_i;
 		} else {
 			int32_t x0, x1, dx0, dx1; int16_t bv_i, vmag_i; uint16_t plx_u;
 			std::memcpy(&x0,buf+8,4); std::memcpy(&x1,buf+12,4); std::memcpy(&dx0,buf+16,4); std::memcpy(&dx1,buf+20,4);
@@ -77,7 +108,7 @@ static void load_reference(const std::string& path, RefMap& ref_map, int& level_
 	auto counts = std::vector<uint32_t>(nz);
 	fseeko(f, 28, SEEK_SET); std::fread(counts.data(), sizeof(uint32_t), nz, f);
 	uint64_t total = 0; for (auto c : counts) total += c;
-	std::cout << "Reference: level=" << level_ref << " type=Star" << (cat_type_ref == 2 ? 3 : 2)
+	std::cout << "Reference: level=" << level_ref << " type=Star" << star_type_name(cat_type_ref)
 		  << ", " << total << " stars\n";
 
 	if (verbose) ref_map.reserve(static_cast<size_t>(total));
@@ -107,7 +138,7 @@ static void dedup_stream(FILE* fin, FILE* fout, int nz, int level_in, uint32_t c
 	auto in_counts = std::vector<uint32_t>(nz);
 	fseeko(fin, 28, SEEK_SET); std::fread(in_counts.data(), sizeof(uint32_t), nz, fin);
 	uint64_t total_in = 0; for (auto c : in_counts) total_in += c;
-	std::cout << "Input:    level=" << level_in << " type=Star" << (cat_type_in == 2 ? 3 : 2)
+	std::cout << "Input:    level=" << level_in << " type=Star" << star_type_name(cat_type_in)
 		  << ", " << total_in << " stars\n";
 
 	std::vector<uint32_t> out_counts; DedupResult r;
