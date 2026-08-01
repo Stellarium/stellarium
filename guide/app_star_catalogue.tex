@@ -2004,7 +2004,8 @@ gzip-compressed CSV files) from the ESA Gaia archive. Any recursive
 downloader works:
 
 \begin{commands}
-wget -r -nH -nd -l1 http://cdn.gea.esac.esa.int/Gaia/gdr3/gaia_source/
+wget -r -nH -nd -l1
+        http://cdn.gea.esac.esa.int/Gaia/gdr3/gaia_source/
 \end{commands}
 
 Convert the CSV files to the compact binary intermediate format used by all
@@ -2013,7 +2014,8 @@ parallax, parallax\_error, pmra, pmdec, G, BP-RP, radial\_velocity,
 radial\_velocity\_error):
 
 \begin{commands}
-extract_columns.exe <csv_dir> <bin_dir> [workers]
+extract_columns.exe <csv_dir> <bin_dir>
+        [workers]
 \end{commands}
 
 The extractor decompresses each \file{.csv.gz} in memory (no intermediate
@@ -2067,15 +2069,15 @@ online query on disk, so restarting it skips all completed work.
 \texttt{OverflowError: Python int too large to convert to C long} on
 64-bit columns such as SIMBAD's \texttt{object\_number\_id} or Gaia's
 \texttt{source\_id}. Copy \file{patches/sitecustomize.py} from the
-companion fork into \file{venv\textbackslash Lib\textbackslash site-packages\textbackslash}
-of the Python environment after creating the virtual environment.
+companion fork into \file{venv\textbackslash Lib\textbackslash}
+\file{site-packages\textbackslash} of the Python environment after
+creating the virtual environment.
 
 \paragraph{Spectral and object type tables.} \program{gaiahip2cat} needs the
 object-type table \file{otype.dat}; a copy of
-\file{stars/hip\_gaia3/object\_types\_v0\_1.cat} works as-is. The spectral
-type table \file{stars\_hip\_sp\_0v0\_6.cat} is optional input (see
-\program{--sp-table} below).
-
+\file{stars/hip\_gaia3/}\allowbreak\file{object\_types\_v0\_1.cat} works as-is. The
+spectral type table \file{stars\_hip\_sp\_0v0\_6.cat} is optional input
+(see \program{--sp-table} below).
 \paragraph{Synthetic photometry.} The reference pipeline computed B-V for
 many stars from Gaia XP low-resolution spectra with GaiaXPy (a $\sim$15 TB
 download). This step is deliberately skipped here; B-V is instead estimated
@@ -2124,13 +2126,14 @@ names (minor 1) are used.
 gaiahip2cat --simbad <hip_processed_with_binary.dat> --gaia-bin <dir>
         --out-dir <dir> --otype <otype.dat>
         [--sp-table <stars_hip_sp_0v0_6.cat>] [--workers 4]
-        [--levels 0-3] [--max-files n] [--erfa-python <python.exe>]
+        [--levels 0-3] [--max-files n]
+        [--erfa-python <python.exe>]
         [--stars-config <starsConfig.json>]
 \end{commands}
 
 \begin{description}
   \item[\program{--simbad}] the merged SIMBAD main table produced by
-        \program{parse\_hip\_catalog.py}.
+        \allowbreak\program{parse\_hip\_catalog.py}.
   \item[\program{--gaia-bin}] directory with the 68-byte \file{.bin} files.
   \item[\program{--out-dir}] output directory for \file{stars\_0}--\file{stars\_3}.
   \item[\program{--otype}] object type text table; record \texttt{objtype}
@@ -2161,7 +2164,8 @@ gaiahip2cat --simbad <hip_processed_with_binary.dat> --gaia-bin <dir>
         \file{starsConfig.json} used for output naming (see
         section~\ref{sec:StarCatalogues:Generating:Naming}); defaults to the
         user configuration directory
-        (\texttt{\%APPDATA\%\textbackslash Stellarium\textbackslash stars\textbackslash hip\_gaia3\textbackslash starsConfig.json}
+        (\texttt{\%APPDATA\%\textbackslash Stellarium\textbackslash}\allowbreak
+        \texttt{stars\textbackslash hip\_gaia3\textbackslash starsConfig.json}
         on Windows, \texttt{\$HOME/.stellarium/...} elsewhere).
 \end{description}
 
@@ -2185,7 +2189,8 @@ names).
 \begin{commands}
 gaia2cat --gaia-bin <dir> --out-dir <dir> [--work-dir <dir>]
              [--workers n] [--star3-from 8] [--levels 4-10]
-             [--exclude-lower <stars_0.cat> <stars_1.cat> <stars_2.cat> <stars_3.cat>]
+             [--exclude-lower <stars_0.cat> <stars_1.cat>
+             <stars_2.cat> <stars_3.cat>]
              [--stars-config <starsConfig.json>] [--dry-run]
 \end{commands}
 
@@ -2292,8 +2297,10 @@ comparison.
 \label{sec:StarCatalogues:Generating:cmpcat}
 
 \begin{commands}
-cmpcat <ref.cat> <new.cat> [output.txt] [--compare-bv] [--bv-tol mag]
-python analyze_only.py output.txt <mag_lo> <mag_hi> [margin]
+cmpcat <ref.cat> <new.cat> [output.txt]
+        [--compare-bv] [--bv-tol mag]
+python analyze_only.py output.txt <mag_lo>
+        <mag_hi> [margin]
 \end{commands}
 
 \program{cmpcat} auto-detects the record type of both files from the header
