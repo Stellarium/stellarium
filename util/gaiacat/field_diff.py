@@ -27,7 +27,8 @@ def load_official_names():
                   os.path.expanduser("~/.stellarium/stars/hip_gaia3/starsConfig.json")]
     for p in candidates:
         if os.path.exists(p):
-            cfg = json.load(open(p, encoding="utf-8"))
+            with open(p, encoding="utf-8") as f:
+                cfg = json.load(f)
             return {int(c["id"][5:]): c["fileName"] for c in cfg["catalogs"]}
     return {}
 
@@ -81,7 +82,8 @@ def ot_name(i, side="A"):
 R2D = 180.0 / math.pi
 
 
-def decode_star1(buf, zone):
+def decode_star1(buf, zone):  # 17-field unpack + derived values
+    # pylint: disable=too-many-locals
     (gaia_id, x0, x1, x2, dx0, dx1, dx2, bv, vmag, plx, plxe, rv, sp, otype,
      h0, h1, h2) = struct.unpack("<q6i2h2HhHB3B", buf)
     nx, ny, nz = x0 / 2e9, x1 / 2e9, x2 / 2e9
@@ -175,7 +177,7 @@ def read_simbad(path):
 
 
 def ang_diff_mas(a, b):
-    dra = (a["ra"] - b["ra"])
+    dra = a["ra"] - b["ra"]
     if dra > 180:
         dra -= 360
     if dra < -180:
