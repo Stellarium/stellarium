@@ -1976,7 +1976,7 @@ The full pipeline looks like this:
   \item Generate levels 4--10 (Star2/Star3 records) from the Gaia
         \file{.bin} files with \program{gaia2cat}, passing it the
         level~0--3 catalogues just produced via \program{--exclude-lower}
-        so that the already-catalogued HIP stars are not duplicated in
+        (or the official level~0--3 catalogues if none were generated) so that the already-catalogued HIP stars are not duplicated in
         levels~4--6.
   \item Verify the output with \program{field\_diff.py} (global,
         per-field classification of every differing star) and
