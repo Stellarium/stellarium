@@ -958,7 +958,7 @@ void ViewDialog::updateHipsControls()
 	ui->hipsColorChannelComboBox->setCurrentIndex(hips ? hips->getColorChannel() : HipsSurvey::ColorChannelRgb);
 	ui->hipsInvertedColorsCheckBox->setChecked(hips ? hips->getInvertedColors() : false);
 
-	const bool enableSelectedControls = static_cast<bool>(hips);
+	const bool enableSelectedControls = hips != nullptr;
 	ui->hipsSettingsGroupBox->setEnabled(enableSelectedControls || hasSkySurvey);
 	ui->hipsGammaLabel->setEnabled(enableSelectedControls);
 	ui->hipsGammaDoubleSpinBox->setEnabled(enableSelectedControls);
