@@ -28,7 +28,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Astronomical calculations</string>
      </property>
     </widget>
@@ -39,7 +39,7 @@
       <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
+      <enum>QFrame::Shadow::Plain</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_6">
       <property name="leftMargin">
@@ -288,7 +288,7 @@
                  <string>List of objects above horizon</string>
                 </property>
                 <property name="editTriggers">
-                 <set>QAbstractItemView::NoEditTriggers</set>
+                 <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                 </property>
                 <property name="rootIsDecorated">
                  <bool>false</bool>
@@ -349,7 +349,6 @@
                <widget class="QLabel" name="hecPositionsHeaderLabel">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -394,7 +393,7 @@
                 <item>
                  <widget class="QTreeWidget" name="hecPositionsTreeWidget">
                   <property name="editTriggers">
-                   <set>QAbstractItemView::NoEditTriggers</set>
+                   <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                   </property>
                   <property name="rootIsDecorated">
                    <bool>false</bool>
@@ -468,7 +467,7 @@
               <item row="1" column="1">
                <widget class="QChartView" name="hecPositionsChartView">
                 <property name="renderHints">
-                 <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+                 <set>QPainter::RenderHint::Antialiasing|QPainter::RenderHint::TextAntialiasing</set>
                 </property>
                </widget>
               </item>
@@ -511,7 +510,7 @@
           <item row="7" column="0" colspan="2">
            <widget class="QTreeWidget" name="ephemerisTreeWidget">
             <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
+             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
             </property>
             <property name="rootIsDecorated">
              <bool>false</bool>
@@ -558,6 +557,27 @@
               </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="pushFindSelectedSSO">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Finding the selected solar system object in the list of celestial bodies.</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../data/gui/guiRes.qrc">
+                <normaloff>:/graphicGui/bbtSearch-off.png</normaloff>
+                <disabledoff>:/graphicGui/bbtSearch-off.png</disabledoff>:/graphicGui/bbtSearch-off.png</iconset>
               </property>
              </widget>
             </item>
@@ -1080,7 +1100,6 @@
                 </property>
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -1171,7 +1190,6 @@
            <widget class="QLabel" name="rtsHeaderLabel">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -1421,7 +1439,7 @@
           <item row="5" column="0" colspan="2">
            <widget class="QTreeWidget" name="phenomenaTreeWidget">
             <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
+             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
             </property>
             <property name="rootIsDecorated">
              <bool>false</bool>
@@ -1496,7 +1514,6 @@
            <widget class="QTabWidget" name="tabWidgetGraphs">
             <property name="font">
              <font>
-              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -1780,7 +1797,7 @@
                    <enum>QComboBox::NoInsert</enum>
                   </property>
                   <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContents</enum>
+                   <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
                   </property>
                  </widget>
                 </item>
@@ -1910,7 +1927,7 @@
                    <enum>QComboBox::NoInsert</enum>
                   </property>
                   <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContents</enum>
+                   <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
                   </property>
                  </widget>
                 </item>
@@ -2261,7 +2278,7 @@
             <item>
              <widget class="QTreeWidget" name="wutMatchingObjectsTreeWidget">
               <property name="editTriggers">
-               <set>QAbstractItemView::NoEditTriggers</set>
+               <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
               </property>
               <property name="rootIsDecorated">
                <bool>false</bool>
@@ -2638,7 +2655,7 @@
                 </attribute>
                </widget>
               </item>
-              <item row="3" column="0" alignment="Qt::AlignBottom">
+              <item row="3" column="0" alignment="Qt::AlignmentFlag::AlignBottom">
                <widget class="QTreeWidget" name="solareclipsecontactsTreeWidget">
                 <property name="rootIsDecorated">
                  <bool>false</bool>
@@ -2814,7 +2831,7 @@
                 </item>
                </layout>
               </item>
-              <item row="2" column="0" alignment="Qt::AlignBottom">
+              <item row="2" column="0" alignment="Qt::AlignmentFlag::AlignBottom">
                <widget class="QTreeWidget" name="lunareclipsecontactsTreeWidget">
                 <property name="rootIsDecorated">
                  <bool>false</bool>
@@ -2967,7 +2984,6 @@
                 </property>
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
