@@ -39,6 +39,10 @@
 # define GL_TEXTURE_MAX_ANISOTROPY 0x84FE
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+# define Http2AllowedAttribute HTTP2AllowedAttribute
+#endif
+
 Q_LOGGING_CATEGORY(Tex,"stel.Texture", QtInfoMsg)
 
 // Let's try to keep 120 FPS even if textures are loaded every frame
