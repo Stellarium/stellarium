@@ -1978,6 +1978,10 @@ The full pipeline looks like this:
         level~0--3 catalogues just produced via \program{--exclude-lower}
         (or the official level~0--3 catalogues if none were generated) so that the already-catalogued HIP stars are not duplicated in
         levels~4--6.
+  \item [Optional] Align the B-V colours with the reference data: extract
+        the B-V field from the official catalogues with \program{bvextract}
+        and overlay it onto the generated catalogues with \program{apply\_bv}
+        (see the Synthetic photometry paragraph below).
   \item Verify the output with \program{field\_diff.py} (global,
         per-field classification of every differing star) and
         \program{cmpcat} (zone-by-zone comparison).
@@ -2077,6 +2081,31 @@ many stars from Gaia XP low-resolution spectra with GaiaXPy (a $\sim$15 TB
 download). This step is deliberately skipped here; B-V is instead estimated
 from BP-RP with a polynomial. The difference is negligible except for very
 red stars and only affects the B-V field, never any other field.
+
+\paragraph{Optional: overlaying the reference B-V.} If the official
+catalogues are available, their B-V values can be extracted into the
+pipeline's binary B-V store with \program{bvextract} and overlaid onto the
+generated catalogues with \program{apply\_bv}:
+
+\begin{itemize}
+  \item \program{bvextract <out\_dir> <cat>...} reads one or more official
+        \file{.cat} files (levels 0--3 and 4--7 in Star1/Star2, any
+        level~8 file in Star3; B-V missing-sentinels are skipped) and writes
+        bucketed store files \file{bv\_NN.bvbin} into \program{<out\_dir>}
+        (256 buckets by default, \program{--buckets}). Each bucket holds
+        10-byte records \texttt{(u64 source\_id, i16 B-V$\times$1000)}
+        sorted by source\_id; the bucket index is a splitmix64 hash of the
+        source\_id.
+  \item \program{apply\_bv <bv\_dir> <out\_dir> <cat>...} streams each
+        generated catalogue, replaces the B-V field of every star found in
+        the store (Star1/Star2 store milli-mags directly, Star3 re-quantises
+        to its 0.025\,mag encoding) and writes the result to
+        \program{<out\_dir>} under the same file name. Stars absent from
+        the store keep their polynomial value, so the step is safe to run
+        partially --- e.g.\ only levels 0--7, which is all the official
+        release data covers (level 8 data are only available from the older
+        \file{2v0\_3} file, levels 9--10 not at all).
+\end{itemize}
 
 \subsection{Output File Naming}
 \label{sec:StarCatalogues:Generating:Naming}

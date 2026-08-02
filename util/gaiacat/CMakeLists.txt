@@ -24,6 +24,16 @@ add_executable(cmpcat
 	cmpcat.cpp
 )
 
+add_executable(bvextract
+	bvextract.cpp
+)
+target_include_directories(bvextract PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(apply_bv
+	apply_bv.cpp
+)
+target_include_directories(apply_bv PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
 add_executable(gaiahip2cat
 	gaiahip2cat.cpp
 	geodesic.cpp
