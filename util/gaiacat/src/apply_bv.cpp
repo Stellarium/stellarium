@@ -8,6 +8,7 @@
 
 #include "bv_store.hpp"
 #include "cat_reader.hpp"
+#include "cat_record.hpp"
 #include "types.hpp"
 
 #include <algorithm>
@@ -31,26 +32,6 @@ struct FileStats
 	uint64_t hits    = 0;
 	uint64_t misses  = 0;
 };
-
-int16_t to_star3_raw(int16_t bv_milli)
-{
-	int raw = static_cast<int>(std::lround((bv_milli / 1000.0 + 1.0) * 40.0));
-	if (raw < 0)   raw = 0;
-	if (raw > 254) raw = 254;   // 255 = missing sentinel
-	return static_cast<int16_t>(raw);
-}
-
-// Overwrite the B-V field of one record in place, encoded per record type.
-void overwrite_bv_field(uint32_t type, uint8_t* buf, int16_t bv)
-{
-	if (type == CATALOG_TYPE_STAR1) {
-		std::memcpy(buf + 32, &bv, 2);
-	} else if (type == CATALOG_TYPE_STAR2) {
-		std::memcpy(buf + 24, &bv, 2);
-	} else {
-		buf[14] = static_cast<uint8_t>(to_star3_raw(bv));
-	}
-}
 
 // Copy one .cat file, replacing b_v from the store where present.
 void apply_cat(const char* in_path, const char* out_path, const BvStore& store, FileStats& st)

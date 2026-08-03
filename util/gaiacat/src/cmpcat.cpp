@@ -7,6 +7,7 @@
 // O(n) per zone (one hash-map build + one linear scan).
 
 #include "cat_reader.hpp"
+#include "cat_record.hpp"
 
 #include <cmath>
 #include <cstdint>
@@ -20,108 +21,7 @@
 #include <vector>
 
 // Decoded physical representation of one star from either format
-struct PhysStar
-{
-	int64_t gaia_id = 0;
-	int64_t match_key = 0;            // gaia_id, or HIP<<5|component composite when gaia_id==0
-	double  ra_deg  = 0;
-	double  dec_deg = 0;
-	double  vmag    = 0;              // mag
-	double  bv      = 0;              // mag; sentinel decodes to 32.767 (Star1/2) / 5.375 (Star3)
-	bool    has_pm_plx = false;       // false for Star3
-	double  pmra_masyr = 0, pmdec_masyr = 0, plx_mas = 0;
-	bool    has_rv = false;           // Star1 only
-	double  rv_kms = 0;
-};
-
-static inline uint32_t load_u24le(const uint8_t* p)
-{
-	return p[0] | (p[1] << 8) | (p[2] << 16);
-}
-
-// Star1 (48 bytes): 3D position vector x2e9, 3D pm vector in uas/yr, plx in 20 uas
-static PhysStar decode_star1(const uint8_t* buf)
-{
-	PhysStar s;
-	int32_t x0, x1, x2, dx0, dx1, dx2;
-	int16_t bv, vmag, rv;
-	uint16_t plx;
-	std::memcpy(&s.gaia_id, buf, 8);
-	std::memcpy(&x0,  buf + 8,  4);
-	std::memcpy(&x1,  buf + 12, 4);
-	std::memcpy(&x2,  buf + 16, 4);
-	std::memcpy(&dx0, buf + 20, 4);
-	std::memcpy(&dx1, buf + 24, 4);
-	std::memcpy(&dx2, buf + 28, 4);
-	std::memcpy(&bv,  buf + 32, 2);
-	std::memcpy(&vmag, buf + 34, 2);
-	std::memcpy(&plx, buf + 36, 2);
-	// plx_err at buf+38 (10 uas) not compared
-	std::memcpy(&rv,  buf + 40, 2);
-
-	double nx = x0 / 2e9, ny = x1 / 2e9, nz = x2 / 2e9;
-	s.ra_deg  = std::atan2(ny, nx) * 180.0 / M_PI;
-	if (s.ra_deg < 0) s.ra_deg += 360.0;
-	double r = std::sqrt(nx * nx + ny * ny + nz * nz);
-	s.dec_deg = r > 0 ? std::asin(nz / r) * 180.0 / M_PI : 0;
-
-	// project pm vector back to the local triad (p = east, q = north)
-	double ra = s.ra_deg * M_PI / 180.0, dec = s.dec_deg * M_PI / 180.0;
-	double p0 = -std::sin(ra), p1 = std::cos(ra);
-	double q0 = -std::sin(dec) * std::cos(ra), q1 = -std::sin(dec) * std::sin(ra), q2 = std::cos(dec);
-	s.pmra_masyr  = (dx0 * p0 + dx1 * p1) / 1000.0;
-	s.pmdec_masyr = (dx0 * q0 + dx1 * q1 + dx2 * q2) / 1000.0;
-	s.vmag = vmag / 1000.0;
-	s.bv   = bv / 1000.0;
-	s.plx_mas = plx / 50.0;           // 20 uas units
-	s.has_pm_plx = true;
-	s.has_rv = true;
-	s.rv_kms = rv / 10.0;
-
-	// match key: HIP<<5|component for stars without a Gaia id (hip[3] at bytes 45-47)
-	uint32_t comb = buf[45] | (buf[46] << 8) | (buf[47] << 16);
-	s.match_key = s.gaia_id > 0 ? s.gaia_id : ((int64_t)1 << 62) | comb;
-	return s;
-}
-
-static PhysStar decode_star2(const uint8_t* buf)
-{
-	PhysStar s;
-	int32_t x0, x1, dx0, dx1;
-	int16_t bv, vmag;
-	uint16_t plx;
-	std::memcpy(&s.gaia_id, buf, 8);
-	std::memcpy(&x0,   buf + 8,  4);
-	std::memcpy(&x1,   buf + 12, 4);
-	std::memcpy(&dx0,  buf + 16, 4);
-	std::memcpy(&dx1,  buf + 20, 4);
-	std::memcpy(&bv,   buf + 24, 2);
-	std::memcpy(&vmag, buf + 26, 2);
-	std::memcpy(&plx,  buf + 28, 2);
-	s.ra_deg  = x0 / 3600000.0;
-	s.dec_deg = x1 / 3600000.0;
-	s.vmag    = vmag / 1000.0;
-	s.bv      = bv / 1000.0;          // 32.767 marks missing BP-RP
-	s.has_pm_plx = true;
-	s.pmra_masyr  = dx0 / 1000.0;
-	s.pmdec_masyr = dx1 / 1000.0;
-	s.plx_mas     = plx / 100.0;
-	s.match_key = s.gaia_id;
-	return s;
-}
-
-static PhysStar decode_star3(const uint8_t* buf)
-{
-	PhysStar s;
-	std::memcpy(&s.gaia_id, buf, 8);
-	s.ra_deg  = load_u24le(buf + 8) / 36000.0;
-	s.dec_deg = load_u24le(buf + 11) / 36000.0 - 90.0;
-	s.bv      = 0.025 * buf[14] - 1.0;   // 255 �?5.375 marks missing BP-RP
-	s.vmag    = 16.0 + 0.02 * buf[15];
-	s.has_pm_plx = false;
-	s.match_key = s.gaia_id;
-	return s;
-}
+using PhysStar = DecodedStar;
 
 static inline bool isNoBV(double bv)
 {
@@ -137,8 +37,7 @@ static double g_bv_tol     = 0.05;   // mag
 
 static PhysStar decode(const CatReader& cf, const uint8_t* buf)
 {
-	return cf.cat_type == 0 ? decode_star1(buf)
-	     : cf.cat_type == 2 ? decode_star3(buf) : decode_star2(buf);
+	return decode_record(buf, cf.cat_type);
 }
 
 struct CompareResult
@@ -255,7 +154,7 @@ static std::unordered_map<uint64_t, PhysStar> loadZoneMap(CatReader& cf, int z, 
 	std::unordered_map<uint64_t, PhysStar> map;
 	uint32_t cnt = (z < cf.nzones) ? cf.counts[z] : 0;
 	if (cnt == 0) return map;
-	std::fseek(cf.f, off, SEEK_SET);
+	fseeko(cf.f, off, SEEK_SET);
 	std::vector<uint8_t> buf(cf.rec_size);
 	for (uint32_t i = 0; i < cnt; ++i)
 	{
@@ -331,7 +230,7 @@ static void processZoneB(std::unordered_map<uint64_t, PhysStar>& map_a, CatReade
 {
 	uint32_t cnt_b = (z < b.nzones) ? b.counts[z] : 0;
 	if (cnt_b == 0) return;
-	std::fseek(b.f, off_b, SEEK_SET);
+	fseeko(b.f, off_b, SEEK_SET);
 	std::vector<uint8_t> buf(b.rec_size);
 	for (uint32_t i = 0; i < cnt_b; ++i)
 	{

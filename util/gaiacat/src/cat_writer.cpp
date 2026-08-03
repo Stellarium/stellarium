@@ -1,4 +1,5 @@
 #include "cat_writer.hpp"
+#include "cat_record.hpp"
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
@@ -13,13 +14,6 @@
 static std::atomic<uint64_t> g_clamp_vmag_lo{0};   // V < 16.0 in Star3
 static std::atomic<uint64_t> g_clamp_vmag_hi{0};   // V > 21.1 in Star3
 static std::atomic<uint64_t> g_clamp_bv{0};        // B-V out of [-1.0, 5.35] in Star3
-
-static inline void store_u24le(uint8_t out[3], uint32_t v)
-{
-	out[0] = static_cast<uint8_t>(v);
-	out[1] = static_cast<uint8_t>(v >> 8);
-	out[2] = static_cast<uint8_t>(v >> 16);
-}
 
 // Convert a BucketRecord to Star1 on-disk form.
 // Position becomes a 3D unit vector × 2e9; proper motion becomes the 3D vector
@@ -79,10 +73,9 @@ static CatRecord3 to_cat_record3(const BucketRecord& r)
 	if (r.bv == STAR2_BV_MISSING) {
 		cr.b_v = STAR3_BV_MISSING;
 	} else {
-		int bvr = static_cast<int>(std::lround((r.bv / 1000.0 + 1.0) * 40.0));
-		if (bvr < 0)   { bvr = 0;   g_clamp_bv.fetch_add(1); }
-		if (bvr > 254) { bvr = 254; g_clamp_bv.fetch_add(1); }  // 255 = missing sentinel
-		cr.b_v = static_cast<uint8_t>(bvr);
+		bool clamped;
+		cr.b_v = bv_milli_to_star3_raw(r.bv, &clamped);
+		if (clamped) g_clamp_bv.fetch_add(1);
 	}
 
 	// Vmag: millimag → raw = (V - 16.0) / 0.02

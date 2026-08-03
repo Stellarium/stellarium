@@ -6,6 +6,7 @@
 // Single pass over input. Supports verbose duplicate printing and dry-run.
 
 #include "cat_reader.hpp"
+#include "cat_record.hpp"
 
 #include <cstdio>
 #include <cstdint>
@@ -23,63 +24,12 @@ static const char* star_type_name(uint32_t cat_type)
 	return cat_type == 0 ? "1" : cat_type == 2 ? "3" : "2";
 }
 
-struct StarInfo {
-	double ra_deg = 0, dec_deg = 0, vmag = 0, bv = 0, plx_mas = 0, pmra = 0, pmdec = 0;
-	int64_t gaia_id = 0;
-	bool has_pm_plx = false;
-
-	static StarInfo decode(const uint8_t* buf, uint32_t cat_type) {
-		StarInfo s;
-		std::memcpy(&s.gaia_id, buf, 8);
-		if (cat_type == 2) {
-			uint32_t x0 = buf[8] | (buf[9] << 8) | (buf[10] << 16);
-			uint32_t x1 = buf[11] | (buf[12] << 8) | (buf[13] << 16);
-			s.ra_deg  = x0 / 36000.0;
-			s.dec_deg = x1 / 36000.0 - 90.0;
-			s.bv      = 0.025 * buf[14] - 1.0;
-			s.vmag    = 16.0 + 0.02 * buf[15];
-			s.has_pm_plx = false;
-		} else if (cat_type == 0) {
-			// Star1: 3D position/PM vectors scaled by 2e9 / 1000.
-			int32_t x0, x1, x2, dx0, dx1, dx2;
-			int16_t bv_i, vmag_i, rv_i;
-			uint16_t plx_u, plxe_u;
-			std::memcpy(&x0, buf+8, 4);   std::memcpy(&x1, buf+12, 4);  std::memcpy(&x2, buf+16, 4);
-			std::memcpy(&dx0, buf+20, 4); std::memcpy(&dx1, buf+24, 4); std::memcpy(&dx2, buf+28, 4);
-			std::memcpy(&bv_i, buf+32, 2);   std::memcpy(&vmag_i, buf+34, 2);
-			std::memcpy(&plx_u, buf+36, 2);  std::memcpy(&plxe_u, buf+38, 2);
-			std::memcpy(&rv_i, buf+40, 2);
-			double nx = x0 / 2e9, ny = x1 / 2e9, nz = x2 / 2e9;
-			double r = std::sqrt(nx*nx + ny*ny + nz*nz);
-			s.ra_deg = std::atan2(ny, nx) * 180.0 / M_PI;
-			if (s.ra_deg < 0) s.ra_deg += 360.0;
-			s.dec_deg = (r > 0 ? std::asin(nz / r) : 0.0) * 180.0 / M_PI;
-			s.bv = bv_i / 1000.0;  s.vmag = vmag_i / 1000.0;
-			s.plx_mas = plx_u / 50.0;
-			// dx* are PM components in the same 3D basis (mas/yr), without cos(dec).
-			double ra = s.ra_deg * M_PI / 180.0, dec = s.dec_deg * M_PI / 180.0;
-			s.pmra  = (dx0 * -std::sin(ra) + dx1 * std::cos(ra)) / 1000.0;
-			s.pmdec = (dx0 * -std::sin(dec) * std::cos(ra) + dx1 * -std::sin(dec) * std::sin(ra)
-			           + dx2 * std::cos(dec)) / 1000.0;
-			s.has_pm_plx = true;
-			(void)plxe_u; (void)rv_i;
-		} else {
-			int32_t x0, x1, dx0, dx1; int16_t bv_i, vmag_i; uint16_t plx_u;
-			std::memcpy(&x0,buf+8,4); std::memcpy(&x1,buf+12,4); std::memcpy(&dx0,buf+16,4); std::memcpy(&dx1,buf+20,4);
-			std::memcpy(&bv_i,buf+24,2); std::memcpy(&vmag_i,buf+26,2); std::memcpy(&plx_u,buf+28,2);
-			s.ra_deg=x0/3600000.0; s.dec_deg=x1/3600000.0; s.vmag=vmag_i/1000.0;
-			s.bv=bv_i/1000.0; s.plx_mas=plx_u/100.0; s.pmra=dx0/1000.0; s.pmdec=dx1/1000.0;
-			s.has_pm_plx = true;
-		}
-		return s;
-	}
-	void print() const {
-		printf("Gaia %lld  RA=%.6f  DEC=%.6f  V=%.3f  B-V=%.3f",
-			(long long)gaia_id, ra_deg, dec_deg, vmag, bv);
-		if (has_pm_plx)
-			printf("  plx=%.2f mas  pm=(%.2f,%.2f) mas/yr", plx_mas, pmra, pmdec);
-	}
-};
+static void print_star(const DecodedStar& s) {
+	printf("Gaia %lld  RA=%.6f  DEC=%.6f  V=%.3f  B-V=%.3f",
+		(long long)s.gaia_id, s.ra_deg, s.dec_deg, s.vmag, s.bv);
+	if (s.has_pm_plx)
+		printf("  plx=%.2f mas  pm=(%.2f,%.2f) mas/yr", s.plx_mas, s.pmra_masyr, s.pmdec_masyr);
+}
 
 using RefMap = std::unordered_map<uint64_t, std::array<uint8_t, 32>>;
 
@@ -148,11 +98,11 @@ static void dedup_stream(CatReader& in, FILE* fout,
 			if (it != ref_map.end()) {
 				r.removed++;
 				if (verbose) {
-					auto in_info  = StarInfo::decode(buf.data(), cat_type_in);
-					auto ref_info = StarInfo::decode(it->second.data(), cat_type_ref);
+					auto in_info  = decode_record(buf.data(), cat_type_in);
+					auto ref_info = decode_record(it->second.data(), cat_type_ref);
 					printf("\n--- Duplicate #%llu (zone %d) ---\n", (unsigned long long)r.removed, z);
-					printf("Level %d (reference): ", level_ref); ref_info.print(); printf("\n");
-					printf("Level %d (input):     ", level_in);  in_info.print();  printf("\n");
+					printf("Level %d (reference): ", level_ref); print_star(ref_info); printf("\n");
+					printf("Level %d (input):     ", level_in);  print_star(in_info);  printf("\n");
 					printf("  Vmag diff=%.3f  B-V diff=%.4f  RA diff=%.6f deg  DEC diff=%.6f deg",
 						in_info.vmag - ref_info.vmag, in_info.bv - ref_info.bv,
 						in_info.ra_deg - ref_info.ra_deg, in_info.dec_deg - ref_info.dec_deg);

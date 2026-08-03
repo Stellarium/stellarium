@@ -12,6 +12,7 @@
 
 #include "bv_store.hpp"
 #include "cat_reader.hpp"
+#include "cat_record.hpp"
 #include "types.hpp"
 
 #include <algorithm>
@@ -45,26 +46,6 @@ void append_record(FILE* f, uint64_t sid, int16_t bv)
 	e.sid = sid;
 	e.bv  = bv;
 	std::fwrite(&e, sizeof(BvEntry), 1, f);
-}
-
-// Extract B-V from one .cat file, appending to the open bucket files.
-// Extract the B-V of one record; returns false when it is a missing sentinel.
-bool extract_record_bv(const uint8_t* buf, uint32_t type, uint64_t& sid, int16_t& bv)
-{
-	std::memcpy(&sid, buf, 8);
-	if (type == CATALOG_TYPE_STAR1) {
-		std::memcpy(&bv, buf + 32, 2);
-		return bv != STAR2_BV_MISSING;
-	}
-	if (type == CATALOG_TYPE_STAR2) {
-		std::memcpy(&bv, buf + 24, 2);
-		return bv != STAR2_BV_MISSING;
-	}
-	const uint8_t bvr = buf[14];
-	if (bvr == STAR3_BV_MISSING)
-		return false;
-	bv = static_cast<int16_t>(std::lround((bvr / 40.0 - 1.0) * 1000.0));
-	return true;
 }
 
 // Extract B-V from one .cat file, appending to the open bucket files.
