@@ -50,12 +50,14 @@ public:
 	struct StelTextureParams
 	{
 		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR,
-				  GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false, int decimateBy=1)
+				  GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false, int decimateBy=1,
+				  bool allowHttp2=true)
 			: generateMipmaps(qgenerateMipmaps)
 			, filterMipmaps(qfilterMipmaps)
 			, filtering(afiltering)
 			, wrapMode(awrapMode)
 			, decimation(decimateBy)
+			, allowHttp2(allowHttp2)
 		{
 		}
 		//! Define if mipmaps must be created.
@@ -70,6 +72,12 @@ public:
 		//! Allow a reduction of the size of the texture image (useful for very limited hardware)
 		//! The image size will be divided by this factor (e.g. 2, 3, 4, ...)
 		int decimation;
+		//! Allow the use of HTTP/2 when loading this texture. If set to \p false, HTTP/1.1 will
+		//! be used by Qt, limiting maximum concurrency of downloads to 6 and avoiding HTTP 420
+		//! error when we abort many downloads at once. The error is due to CVE-2023-44487, but
+		//! our use case is when a HiPS is downloading many tiles that then go out of the
+		//! viewport before the download is completed.
+		bool allowHttp2;
 	};
 
 	//! Destructor

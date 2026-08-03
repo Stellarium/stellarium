@@ -577,6 +577,7 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->pushButtonExtraEphemerisDialog, &QToolButton::clicked, this, &AstroCalcDialog::showExtraEphemerisDialog);
 	connect(ui->pushButtonCustomStepsDialog,    &QToolButton::clicked, this, &AstroCalcDialog::showCustomStepsDialog);
+	connect(ui->pushFindSelectedSSO,            &QToolButton::clicked, this, &AstroCalcDialog::findSelectedSSO);
 
 	// Tab: Almanac
 	ui->astroCalcAlmanac->setup();
@@ -5144,6 +5145,20 @@ void AstroCalcDialog::populateCelestialBodyList()
 	graphsp->blockSignals(false);
 	firstCB->blockSignals(false);
 	secondCB->blockSignals(false);
+}
+
+void AstroCalcDialog::findSelectedSSO()
+{
+	// select SSO only
+	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject("Planet");
+	if (!selectedObjects.isEmpty())
+	{
+		QString englishName = selectedObjects[0]->getEnglishName();
+		QComboBox* planets = ui->celestialBodyComboBox;
+		int indexP = planets->findData(englishName, Qt::UserRole, Qt::MatchCaseSensitive);
+		if (indexP > 0)
+			planets->setCurrentIndex(indexP);
+	}
 }
 
 void AstroCalcDialog::saveEphemerisCelestialBody(int index)

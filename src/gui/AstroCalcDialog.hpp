@@ -569,7 +569,7 @@ private:
 	//! The displayed names are localized in the current interface language.
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
-	void populateCelestialBodyList();	
+	void populateCelestialBodyList();
 	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
 	//! Populates the drop-down list of time units for Ephemeris tool.
@@ -587,6 +587,9 @@ private:
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();	
 	double computeGraphValue(const PlanetP &ssObj, const AstroCalcChart::Series graphType);
+
+	//! Find selected SSO in first celestial bodies list
+	void findSelectedSSO();
 
 	void populateFunctionsList();	
 	double computeMaxElevation(StelObjectP obj);
