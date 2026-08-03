@@ -489,7 +489,7 @@
 	            </property>
 	           </spacer>
 	          </item>
-	          <item row="0" column="3" colspan="2">
+	          <item row="0" column="3" colspan="3">
 		           <widget class="QLabel" name="twilightLegendHeaderLowest">
 	            <property name="styleSheet">
 	             <string notr="true">font-weight: bold;</string>
@@ -499,7 +499,7 @@
 	            </property>
 	           </widget>
 	          </item>
-	          <item row="0" column="5" rowspan="4">
+	          <item row="0" column="6" rowspan="4">
 	           <spacer name="twilightLegendSpacerLowestHighest">
 	            <property name="orientation">
 	             <enum>Qt::Horizontal</enum>
@@ -512,7 +512,7 @@
 	            </property>
 	           </spacer>
 	          </item>
-	          <item row="0" column="6" colspan="2">
+	          <item row="0" column="7" colspan="3">
 		           <widget class="QLabel" name="twilightLegendHeaderHighest">
 	            <property name="styleSheet">
 	             <string notr="true">font-weight: bold;</string>
@@ -585,13 +585,23 @@
 	           </widget>
 	          </item>
 	          <item row="1" column="4">
-	           <widget class="QLabel" name="twilightLegendTextCivilMin">
+	           <widget class="QLabel" name="twilightLegendNumberCivilMin">
+	            <property name="alignment">
+	             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	            </property>
 	            <property name="text">
-	             <string>-6° civil</string>
+	             <string notr="true">-6°</string>
 	            </property>
 	           </widget>
 	          </item>
-	          <item row="1" column="6">
+	          <item row="1" column="5">
+	           <widget class="QLabel" name="twilightLegendTextCivilMin">
+	            <property name="text">
+	             <string>civil</string>
+	            </property>
+	           </widget>
+	          </item>
+	          <item row="1" column="7">
 	           <widget class="QLabel" name="twilightLegendSwatchCivilMax">
 	            <property name="styleSheet">
 	             <string notr="true">color: rgb(205,60,60); font-weight: bold; font-family: monospace;</string>
@@ -601,10 +611,20 @@
 	            </property>
 	           </widget>
 	          </item>
-	          <item row="1" column="7">
+	          <item row="1" column="8">
+	           <widget class="QLabel" name="twilightLegendNumberCivilMax">
+	            <property name="alignment">
+	             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	            </property>
+	            <property name="text">
+	             <string notr="true">-6°</string>
+	            </property>
+	           </widget>
+	          </item>
+	          <item row="1" column="9">
 	           <widget class="QLabel" name="twilightLegendTextCivilMax">
 	            <property name="text">
-	             <string>-6° civil</string>
+	             <string>civil</string>
 	            </property>
 	           </widget>
 	          </item>
@@ -620,13 +640,23 @@
 	           </widget>
 	          </item>
 	          <item row="2" column="4">
-	           <widget class="QLabel" name="twilightLegendTextNautMin">
+	           <widget class="QLabel" name="twilightLegendNumberNautMin">
+	            <property name="alignment">
+	             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	            </property>
 	            <property name="text">
-	             <string>-12° nautical</string>
+	             <string notr="true">-12°</string>
 	            </property>
 	           </widget>
 	          </item>
-	          <item row="2" column="6">
+	          <item row="2" column="5">
+	           <widget class="QLabel" name="twilightLegendTextNautMin">
+	            <property name="text">
+	             <string>nautical</string>
+	            </property>
+	           </widget>
+	          </item>
+	          <item row="2" column="7">
 	           <widget class="QLabel" name="twilightLegendSwatchNautMax">
 	            <property name="styleSheet">
 	             <string notr="true">color: rgb(120,65,175); font-weight: bold; font-family: monospace;</string>
@@ -636,10 +666,20 @@
 	            </property>
 	           </widget>
 	          </item>
-	          <item row="2" column="7">
+	          <item row="2" column="8">
+	           <widget class="QLabel" name="twilightLegendNumberNautMax">
+	            <property name="alignment">
+	             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	            </property>
+	            <property name="text">
+	             <string notr="true">-12°</string>
+	            </property>
+	           </widget>
+	          </item>
+	          <item row="2" column="9">
 	           <widget class="QLabel" name="twilightLegendTextNautMax">
 	            <property name="text">
-	             <string>-12° nautical</string>
+	             <string>nautical</string>
 	            </property>
 	           </widget>
 	          </item>
@@ -655,13 +695,23 @@
 	           </widget>
 	          </item>
 	          <item row="3" column="4">
-	           <widget class="QLabel" name="twilightLegendTextAstroMin">
+	           <widget class="QLabel" name="twilightLegendNumberAstroMin">
+	            <property name="alignment">
+	             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	            </property>
 	            <property name="text">
-	             <string>-18° astronomical</string>
+	             <string notr="true">-18°</string>
 	            </property>
 	           </widget>
 	          </item>
-	          <item row="3" column="6">
+	          <item row="3" column="5">
+	           <widget class="QLabel" name="twilightLegendTextAstroMin">
+	            <property name="text">
+	             <string>astronomical</string>
+	            </property>
+	           </widget>
+	          </item>
+	          <item row="3" column="7">
 	           <widget class="QLabel" name="twilightLegendSwatchAstroMax">
 	            <property name="styleSheet">
 	             <string notr="true">color: rgb(35,70,160); font-weight: bold; font-family: monospace;</string>
@@ -671,10 +721,20 @@
 	            </property>
 	           </widget>
 	          </item>
-	          <item row="3" column="7">
+	          <item row="3" column="8">
+	           <widget class="QLabel" name="twilightLegendNumberAstroMax">
+	            <property name="alignment">
+	             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	            </property>
+	            <property name="text">
+	             <string notr="true">-18°</string>
+	            </property>
+	           </widget>
+	          </item>
+	          <item row="3" column="9">
 	           <widget class="QLabel" name="twilightLegendTextAstroMax">
 	            <property name="text">
-	             <string>-18° astronomical</string>
+	             <string>astronomical</string>
 	            </property>
 	           </widget>
 	          </item>
@@ -697,7 +757,7 @@
               <string>Set location by map click</string>
              </property>
              <property name="toolTip">
-              <string>Enable to move the observer by clicking on the map. Available on Earth only.</string>
+              <string>Enable to move the observer by clicking on the map. Stays active until you uncheck it.</string>
              </property>
             </widget>
            </item>
@@ -1110,7 +1170,7 @@
               <string>Set location by map click</string>
              </property>
              <property name="toolTip">
-              <string>Enable to move the observer by clicking on the map.</string>
+              <string>Enable to move the observer by clicking on the map. Stays active until you uncheck it.</string>
              </property>
             </widget>
            </item>

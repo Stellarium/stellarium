@@ -1044,7 +1044,7 @@ void ObjectVisibilityDialog::refreshTitleLabel()
 void ObjectVisibilityDialog::setAboutHtml()
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Object Visibility Plug-in") + "</h2>";
+	html += "<h2>" + q_("Object Visibility plug-in") + "</h2>";
 	html += "<table class='layout' width=\"90%\">";
 	html += "<tr><td><strong>" + q_("Version") + ":</strong></td><td>"
 	        + QString(OBJECTVISIBILITY_PLUGIN_VERSION) + "</td></tr>";
@@ -1075,11 +1075,11 @@ void ObjectVisibilityDialog::setAboutHtml()
 	        + q_("&phi; = &delta;.  At this latitude the object passes "
 	             "through the zenith.")
 	        + "</li>";
-	html += "<li><strong>" + q_("Circumpolar limit, northern hemisphere") + "</strong>: "
+	html += "<li><strong>" + q_("Circumpolar limit (northern hemisphere)") + "</strong>: "
 	        + q_("&phi; = 90&deg; &minus; &delta;.  North of this latitude "
 	             "the object never sets.")
 	        + "</li>";
-	html += "<li><strong>" + q_("Circumpolar limit, southern hemisphere") + "</strong>: "
+	html += "<li><strong>" + q_("Circumpolar limit (southern hemisphere)") + "</strong>: "
 	        + q_("&phi; = &minus;90&deg; &minus; &delta;.  South of this "
 	             "latitude the object never sets.")
 	        + "</li>";
