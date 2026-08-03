@@ -11,6 +11,7 @@
 // Usage: bvextract <out_dir> <cat1> [cat2 ...] [--buckets N]
 
 #include "bv_store.hpp"
+#include "cat_reader.hpp"
 #include "types.hpp"
 
 #include <algorithm>
@@ -69,47 +70,20 @@ bool extract_record_bv(const uint8_t* buf, uint32_t type, uint64_t& sid, int16_t
 // Extract B-V from one .cat file, appending to the open bucket files.
 void extract_cat(const char* path, std::vector<FILE*>& buckets, uint32_t n_buckets, Stats& st)
 {
-	FILE* f = std::fopen(path, "rb");
-	if (!f) {
-		std::fprintf(stderr, "ERROR: cannot open %s\n", path);
-		std::exit(1);
-	}
-
-	uint32_t hdr[6];
-	float epoch;
-	if (std::fread(hdr, sizeof(uint32_t), 6, f) != 6 || std::fread(&epoch, sizeof(float), 1, f) != 1) {
-		std::fprintf(stderr, "ERROR: %s too short\n", path);
-		std::fclose(f);
-		std::exit(1);
-	}
-	if (hdr[0] != FILE_MAGIC) {
-		std::fprintf(stderr, "WARNING: %s bad magic 0x%08X (skipping)\n", path, hdr[0]);
+	CatReader r;
+	std::string err;
+	if (!r.open(path, err, false)) {
+		std::fprintf(stderr, "WARNING: %s (skipping)\n", err.c_str());
 		st.skip_magic++;
-		std::fclose(f);
 		return;
 	}
 
-	const uint32_t type  = hdr[1];
-	const uint32_t level = hdr[4];
-	const size_t rec_size = catalog_record_size(type);
-	if (rec_size == 0) {
-		std::fprintf(stderr, "WARNING: %s unknown type %u (skipping)\n", path, type);
-		st.skip_magic++;
-		std::fclose(f);
-		return;
-	}
-
-	const uint64_t nzones = 20ull * (1ull << (2 * level)) + 1;
-	if (std::fseek(f, static_cast<long>(nzones) * 4, SEEK_CUR) != 0) {
-		std::fprintf(stderr, "ERROR: %s seek failed\n", path);
-		std::fclose(f);
-		std::exit(1);
-	}
-
+	const uint32_t type = r.cat_type;
+	const size_t rec_size = r.rec_size;
 	std::vector<uint8_t> buf(rec_size);
 	uint64_t n = 0;
 	for (;;) {
-		size_t got = std::fread(buf.data(), 1, rec_size, f);
+		size_t got = std::fread(buf.data(), 1, rec_size, r.f);
 		if (got == 0) break;
 		if (got != rec_size) {
 			std::fprintf(stderr, "WARNING: %s short read %zu/%zu at record %llu\n",
@@ -129,9 +103,9 @@ void extract_cat(const char* path, std::vector<FILE*>& buckets, uint32_t n_bucke
 		st.records++;
 	}
 
-	std::fclose(f);
+	std::fclose(r.f);
 	const char* tname = type == CATALOG_TYPE_STAR1 ? "Star1" : type == CATALOG_TYPE_STAR3 ? "Star3" : "Star2";
-	std::printf("  %s: %llu records (type %s, level %u)\n", path, (unsigned long long)n, tname, level);
+	std::printf("  %s: %llu records (type %s, level %d)\n", path, (unsigned long long)n, tname, r.level);
 }
 
 std::string bucket_path(const std::string& out_dir, uint32_t idx, const char* ext)

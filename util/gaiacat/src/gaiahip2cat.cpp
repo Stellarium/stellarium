@@ -7,6 +7,7 @@
 // All inputs are local; no network access is needed.
 
 #include "types.hpp"
+#include "convert.hpp"
 #include "geodesic.hpp"
 #include "catalog_naming.hpp"
 
@@ -97,12 +98,7 @@ static constexpr double CATALOG_EPOCH_JD = 2457389.0;   // J2016.0
 static std::vector<double> g_J;
 
 // ------------------------------------------------------------------ photometry
-// V from G and BP-RP (same polynomial as convert.cpp / henrysky's ADQL v_mag)
-static inline double g_to_v(double g, double c)
-{
-	if (std::isnan(c)) return g;
-	return g + 0.02704 - 0.01424 * c + 0.2156 * c * c - 0.01426 * c * c * c;
-}
+// g_to_v comes from convert.cpp (henrysky's ADQL v_mag polynomial)
 
 // henrysky py/gaia.py gbprp_to_bv(gmag, bprp, red_correction=True) -> (V, B-V)
 static inline void gbprp_to_bv(double g, double bprp, double& v, double& bv)
@@ -886,7 +882,7 @@ int main(int argc, char** argv)
 		if (lc.level <= 2) {
 			if (!erfa_python.empty()) {
 				// ERFA zone analysis via Python (astropy, exact match to official pipeline)
-				std::string script = (fs::path(argv[0]).parent_path() / ".." / "erfa_zone.py").string();
+				std::string script = (fs::path(argv[0]).parent_path() / ".." / "python" / "erfa_zone.py").string();
 				std::string tmp_in = out_dir + "/erfa_lv" + std::to_string(lc.level) + "_in.bin";
 				std::string tmp_out = out_dir + "/erfa_lv" + std::to_string(lc.level) + "_out.bin";
 				{

@@ -7,6 +7,7 @@
 // Usage: apply_bv <bv_dir> <out_dir> <cat1> [cat2 ...] [--buckets N]
 
 #include "bv_store.hpp"
+#include "cat_reader.hpp"
 #include "types.hpp"
 
 #include <algorithm>
@@ -52,53 +53,14 @@ void overwrite_bv_field(uint32_t type, uint8_t* buf, int16_t bv)
 }
 
 // Copy one .cat file, replacing b_v from the store where present.
-struct CatHandle
-{
-	FILE*      f;
-	uint32_t   type;
-	size_t     rec_size;
-	uint32_t   hdr[6];
-	float      epoch;
-	uint64_t   nzones;
-};
-
-// Open a .cat file, validate the header and read the zone table into
-// zonetab; the file is left positioned at the first record.
-CatHandle open_cat(const char* path, std::vector<uint8_t>& zonetab)
-{
-	CatHandle ch{};
-	ch.f = std::fopen(path, "rb");
-	if (!ch.f) {
-		std::fprintf(stderr, "ERROR: cannot open %s\n", path);
-		std::exit(1);
-	}
-	if (std::fread(ch.hdr, sizeof(uint32_t), 6, ch.f) != 6 || std::fread(&ch.epoch, sizeof(float), 1, ch.f) != 1) {
-		std::fprintf(stderr, "ERROR: %s too short\n", path);
-		std::exit(1);
-	}
-	if (ch.hdr[0] != FILE_MAGIC) {
-		std::fprintf(stderr, "ERROR: %s bad magic 0x%08X\n", path, ch.hdr[0]);
-		std::exit(1);
-	}
-	ch.type = ch.hdr[1];
-	ch.rec_size = catalog_record_size(ch.type);
-	if (ch.rec_size == 0) {
-		std::fprintf(stderr, "ERROR: %s unknown type %u\n", path, ch.type);
-		std::exit(1);
-	}
-	ch.nzones = 20ull * (1ull << (2 * ch.hdr[4])) + 1;
-	zonetab.resize(ch.nzones * 4);
-	if (std::fread(zonetab.data(), 1, zonetab.size(), ch.f) != zonetab.size()) {
-		std::fprintf(stderr, "ERROR: %s zone table truncated\n", path);
-		std::exit(1);
-	}
-	return ch;
-}
-
 void apply_cat(const char* in_path, const char* out_path, const BvStore& store, FileStats& st)
 {
-	std::vector<uint8_t> zonetab;
-	CatHandle ch = open_cat(in_path, zonetab);
+	CatReader ch;
+	std::string err;
+	if (!ch.open(in_path, err)) {
+		std::fprintf(stderr, "ERROR: %s\n", err.c_str());
+		std::exit(1);
+	}
 
 	FILE* fout = std::fopen(out_path, "wb");
 	if (!fout) {
@@ -107,7 +69,7 @@ void apply_cat(const char* in_path, const char* out_path, const BvStore& store, 
 	}
 	std::fwrite(ch.hdr, sizeof(uint32_t), 6, fout);
 	std::fwrite(&ch.epoch, sizeof(float), 1, fout);
-	std::fwrite(zonetab.data(), 1, zonetab.size(), fout);
+	std::fwrite(ch.counts.data(), sizeof(uint32_t), ch.counts.size(), fout);
 
 	std::vector<uint8_t> buf(ch.rec_size);
 	for (;;) {
@@ -126,7 +88,7 @@ void apply_cat(const char* in_path, const char* out_path, const BvStore& store, 
 
 		int16_t bv;
 		if (store.query(sid, bv)) {
-			overwrite_bv_field(ch.type, buf.data(), bv);
+			overwrite_bv_field(ch.cat_type, buf.data(), bv);
 			st.hits++;
 		} else {
 			st.misses++;
@@ -137,7 +99,7 @@ void apply_cat(const char* in_path, const char* out_path, const BvStore& store, 
 
 	std::fclose(ch.f);
 	std::fclose(fout);
-	const char* tname = ch.type == CATALOG_TYPE_STAR1 ? "Star1" : ch.type == CATALOG_TYPE_STAR3 ? "Star3" : "Star2";
+	const char* tname = ch.cat_type == CATALOG_TYPE_STAR1 ? "Star1" : ch.cat_type == CATALOG_TYPE_STAR3 ? "Star3" : "Star2";
 	std::printf("  %s -> %s : %llu records, %llu hit (%.2f%%), type %s, level %u\n",
 	            in_path, out_path, (unsigned long long)st.records,
 	            (unsigned long long)st.hits, st.records ? 100.0 * st.hits / st.records : 0.0,

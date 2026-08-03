@@ -6,44 +6,43 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_definitions(-D_FILE_OFFSET_BITS=64)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Gaia DR3 .bin → Stellarium .cat converter
 add_executable(gaia2cat
-	main.cpp
-	convert.cpp
-	geodesic.cpp
-	bucket.cpp
-	cat_writer.cpp
+	src/main.cpp
+	src/convert.cpp
+	src/geodesic.cpp
+	src/bucket.cpp
+	src/cat_writer.cpp
 )
-target_include_directories(gaia2cat PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(dedupcat
-	dedup_cat.cpp
+	src/dedup_cat.cpp
 )
 
 add_executable(cmpcat
-	cmpcat.cpp
+	src/cmpcat.cpp
 )
 
 add_executable(bvextract
-	bvextract.cpp
+	src/bvextract.cpp
 )
-target_include_directories(bvextract PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(apply_bv
-	apply_bv.cpp
+	src/apply_bv.cpp
 )
-target_include_directories(apply_bv PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(gaiahip2cat
-	gaiahip2cat.cpp
-	geodesic.cpp
+	src/gaiahip2cat.cpp
+	src/convert.cpp
+	src/geodesic.cpp
 )
-target_include_directories(gaiahip2cat PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # CSV.gz -> .bin extractor (uses bundled zlib for gzip reading)
 set(GAIA_ZLIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../src/external/zlib)
 add_executable(extract_columns
-	extract_columns.cpp
+	src/extract_columns.cpp
 	${GAIA_ZLIB_DIR}/inflate.c
 	${GAIA_ZLIB_DIR}/inftrees.c
 	${GAIA_ZLIB_DIR}/inffast.c

@@ -5,6 +5,8 @@
 // Reference and input may have different record sizes; output preserves input format.
 // Single pass over input. Supports verbose duplicate printing and dry-run.
 
+#include "cat_reader.hpp"
+
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
@@ -16,24 +18,9 @@
 #include <cmath>
 #include <array>
 
-static int nr_of_zones(int level) { return 20 * (1 << (level * 2)) + 1; }
-
 static const char* star_type_name(uint32_t cat_type)
 {
 	return cat_type == 0 ? "1" : cat_type == 2 ? "3" : "2";
-}
-
-// Read catalog type and level from a .cat header; returns record size (0 on error).
-static size_t read_header(FILE* f, uint32_t hdr[6], float& epoch, int& level, uint32_t& cat_type)
-{
-	std::fread(hdr, sizeof(uint32_t), 6, f);
-	std::fread(&epoch, sizeof(float), 1, f);
-	cat_type = hdr[1];
-	level    = static_cast<int>(hdr[4]);
-	if (cat_type == 0) return 48;
-	if (cat_type == 1) return 32;
-	if (cat_type == 2) return 16;
-	return 0;
 }
 
 struct StarInfo {
@@ -99,45 +86,46 @@ using RefMap = std::unordered_map<uint64_t, std::array<uint8_t, 32>>;
 static void load_reference(const std::string& path, RefMap& ref_map, int& level_ref,
 			   uint32_t& cat_type_ref, bool verbose)
 {
-	FILE* f = std::fopen(path.c_str(), "rb");
-	if (!f) { std::cerr << "ERROR: cannot open " << path << "\n"; std::exit(1); }
-	uint32_t hdr[6]; float ep;
-	size_t rec_size = read_header(f, hdr, ep, level_ref, cat_type_ref);
-	if (rec_size == 0) { std::cerr << "ERROR: " << path << " unsupported catalog type " << cat_type_ref << "\n"; std::exit(1); }
-	int nz = nr_of_zones(level_ref);
-	auto counts = std::vector<uint32_t>(nz);
-	fseeko(f, 28, SEEK_SET); std::fread(counts.data(), sizeof(uint32_t), nz, f);
-	uint64_t total = 0; for (auto c : counts) total += c;
+	CatReader rd;
+	std::string err;
+	if (!rd.open(path, err)) { std::cerr << "ERROR: " << err << "\n"; std::exit(1); }
+	level_ref = rd.level;
+	cat_type_ref = rd.cat_type;
+	const size_t rec_size = rd.rec_size;
+	const int nz = rd.nzones;
+	uint64_t total = rd.total_stars();
 	std::cout << "Reference: level=" << level_ref << " type=Star" << star_type_name(cat_type_ref)
 		  << ", " << total << " stars\n";
 
 	if (verbose) ref_map.reserve(static_cast<size_t>(total));
-	int64_t base = 28 + static_cast<int64_t>(nz) * 4, off = base;
+	int64_t off = rd.star_base;
 	std::vector<uint8_t> buf(rec_size);
 	for (int z = 0; z < nz; ++z) {
-		uint32_t cnt = counts[z]; if (cnt == 0) continue;
-		fseeko(f, off, SEEK_SET);
+		uint32_t cnt = rd.counts[z]; if (cnt == 0) continue;
+		fseeko(rd.f, off, SEEK_SET);
 		for (uint32_t i = 0; i < cnt; ++i) {
-			std::fread(buf.data(), rec_size, 1, f);
+			std::fread(buf.data(), rec_size, 1, rd.f);
 			uint64_t gid; std::memcpy(&gid, buf.data(), 8);
 			if (verbose) { std::array<uint8_t, 32> rec{}; std::memcpy(rec.data(), buf.data(), rec_size); ref_map[gid] = rec; }
 			else ref_map[gid] = {};
 		}
 		off += static_cast<int64_t>(cnt) * rec_size;
 	}
-	std::fclose(f);
+	std::fclose(rd.f);
 	std::cout << "  " << ref_map.size() << " unique IDs loaded\n";
 }
 
 struct DedupResult { uint64_t removed = 0, total_out = 0; };
 
-static void dedup_stream(FILE* fin, FILE* fout, int nz, int level_in, uint32_t cat_type_in, size_t rec_size,
+static void dedup_stream(CatReader& in, FILE* fout,
 			 int level_ref, uint32_t cat_type_ref,
 			 const RefMap& ref_map, bool verbose, bool dry_run)
 {
-	auto in_counts = std::vector<uint32_t>(nz);
-	fseeko(fin, 28, SEEK_SET); std::fread(in_counts.data(), sizeof(uint32_t), nz, fin);
-	uint64_t total_in = 0; for (auto c : in_counts) total_in += c;
+	const int nz = in.nzones;
+	const int level_in = in.level;
+	const uint32_t cat_type_in = in.cat_type;
+	const size_t rec_size = in.rec_size;
+	uint64_t total_in = in.total_stars();
 	std::cout << "Input:    level=" << level_in << " type=Star" << star_type_name(cat_type_in)
 		  << ", " << total_in << " stars\n";
 
@@ -147,14 +135,14 @@ static void dedup_stream(FILE* fin, FILE* fout, int nz, int level_in, uint32_t c
 		std::fwrite(out_counts.data(), sizeof(uint32_t), nz, fout);
 	}
 
-	int64_t in_base = 28 + static_cast<int64_t>(nz) * 4, in_off = in_base;
+	int64_t in_off = in.star_base;
 	std::vector<uint8_t> buf(rec_size);
 
 	for (int z = 0; z < nz; ++z) {
-		uint32_t cnt = in_counts[z]; if (cnt == 0) continue;
-		fseeko(fin, in_off, SEEK_SET);
+		uint32_t cnt = in.counts[z]; if (cnt == 0) continue;
+		fseeko(in.f, in_off, SEEK_SET);
 		for (uint32_t i = 0; i < cnt; ++i) {
-			std::fread(buf.data(), rec_size, 1, fin);
+			std::fread(buf.data(), rec_size, 1, in.f);
 			uint64_t gid; std::memcpy(&gid, buf.data(), 8);
 			auto it = ref_map.find(gid);
 			if (it != ref_map.end()) {
@@ -196,26 +184,21 @@ static void dedup(const std::string& ref_path, const std::string& in_path,
 	RefMap ref_map; int level_ref; uint32_t cat_type_ref;
 	load_reference(ref_path, ref_map, level_ref, cat_type_ref, verbose);
 
-	FILE* fin = std::fopen(in_path.c_str(), "rb");
-	if (!fin) { std::cerr << "ERROR: cannot open " << in_path << "\n"; return; }
-	uint32_t hdr[6]; float epoch; int level_in; uint32_t cat_type_in;
-	size_t rec_size = read_header(fin, hdr, epoch, level_in, cat_type_in);
-	if (rec_size == 0) { std::cerr << "ERROR: " << in_path << " unsupported catalog type " << cat_type_in << "\n"; std::fclose(fin); return; }
-	int nz = nr_of_zones(level_in);
+	CatReader in;
+	std::string err;
+	if (!in.open(in_path, err)) { std::cerr << "ERROR: " << err << "\n"; return; }
 
 	FILE* fout = nullptr;
 	if (!dry_run) {
 		fout = std::fopen(out_path.c_str(), "wb");
-		if (!fout) { std::cerr << "ERROR: cannot create " << out_path << "\n"; std::fclose(fin); return; }
-		std::fwrite(hdr, sizeof(uint32_t), 6, fout);
-		std::fwrite(&epoch, sizeof(float), 1, fout);
+		if (!fout) { std::cerr << "ERROR: cannot create " << out_path << "\n"; return; }
+		std::fwrite(in.hdr, sizeof(uint32_t), 6, fout);
+		std::fwrite(&in.epoch, sizeof(float), 1, fout);
 	}
 
-	dedup_stream(fin, fout, nz, level_in, cat_type_in, rec_size, level_ref, cat_type_ref,
-		     ref_map, verbose, dry_run);
+	dedup_stream(in, fout, level_ref, cat_type_ref, ref_map, verbose, dry_run);
 
 	if (fout) std::fclose(fout);
-	std::fclose(fin);
 }
 
 int main(int argc, char** argv) {

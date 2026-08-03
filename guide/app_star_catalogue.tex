@@ -1938,8 +1938,10 @@ repositories:
         \file{hip\_processed\_with\_binary.dat} that \program{gaiahip2cat}
         consumes; they do \emph{not} produce any catalogue files.
   \item \textbf{Catalogue generation} --- C++ tools in \file{util/gaiacat/}
-        (this repository) plus the \program{erfa\_zone.py} Python helper
-        that \program{gaiahip2cat} calls for the level~0--2 global-zone analysis.
+        (this repository; sources in \file{src/}, shared headers in
+        \file{include/}) plus the \program{erfa\_zone.py} Python helper
+        (in \file{python/}) that \program{gaiahip2cat} calls for the
+        level~0--2 global-zone analysis.
         These are pure-offline once the Gaia \file{.bin} files and the
         SIMBAD table have been prepared. They generate levels~0--3
         (\program{gaiahip2cat}) and 4--10 (\program{gaia2cat}) respectively.

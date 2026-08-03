@@ -7,6 +7,7 @@
 #include "convert.hpp"
 #include "geodesic.hpp"
 #include "bucket.hpp"
+#include "cat_reader.hpp"
 #include "cat_writer.hpp"
 #include "star_provider.hpp"
 #include "catalog_naming.hpp"
@@ -175,31 +176,21 @@ static void process_star_file(
 // the lower-level catalogs (lv0-3, gaiahip2cat output) already contain.
 static void load_cat_gaia_ids(const std::string& path, std::unordered_set<int64_t>& out)
 {
-	FILE* f = std::fopen(path.c_str(), "rb");
-	if (!f) { std::cerr << "ERROR: cannot open " << path << "\n"; std::exit(1); }
-	uint32_t hdr[6];
-	if (std::fread(hdr, sizeof(uint32_t), 6, f) != 6) {
-		std::cerr << "ERROR: bad header in " << path << "\n"; std::exit(1);
+	CatReader rd;
+	std::string err;
+	if (!rd.open(path, err)) {
+		std::cerr << "ERROR: " << err << "\n"; std::exit(1);
 	}
-	size_t rec_size = hdr[1] == 0 ? 48 : hdr[1] == 1 ? 32 : 16;
-	const int level = static_cast<int>(hdr[4]);
-	const int nz = 20 * (1 << (level * 2)) + 1;
-	std::fseek(f, 28, SEEK_SET);
-	std::vector<uint32_t> counts(nz);
-	std::fread(counts.data(), sizeof(uint32_t), nz, f);
-	uint64_t off = 28 + static_cast<uint64_t>(nz) * 4;
-	std::vector<uint8_t> buf(rec_size);
-	for (int z = 0; z < nz; ++z) {
-		for (uint32_t i = 0; i < counts[z]; ++i) {
-			std::fseek(f, static_cast<long>(off), SEEK_SET);
-			std::fread(buf.data(), rec_size, 1, f);
+	std::vector<uint8_t> buf(rd.rec_size);
+	for (int z = 0; z < rd.nzones; ++z) {
+		for (uint32_t i = 0; i < rd.counts[z]; ++i) {
+			std::fread(buf.data(), rd.rec_size, 1, rd.f);
 			int64_t gid;
 			std::memcpy(&gid, buf.data(), 8);
 			out.insert(gid);
-			off += rec_size;
 		}
 	}
-	std::fclose(f);
+	rd.close();
 	std::cout << "  loaded " << path << ": " << out.size() << " ids so far\n";
 }
 

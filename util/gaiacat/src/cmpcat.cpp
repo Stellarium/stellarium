@@ -1,10 +1,12 @@
-// Compare two Stellarium .cat files — streaming zone-by-zone.
+// Compare two Stellarium .cat files �?streaming zone-by-zone.
 // Auto-detects Star2 (type 1, 32 bytes) and Star3 (type 2, 16 bytes) from the header.
 // Matches by Gaia ID and compares decoded physical values with type-aware tolerances:
 //   - Star2↔Star2: ±3 mas position, ±3 mmag V, ±3 uas/yr pm, ±30 uas plx (same as before)
 //   - Star3 involved: ±0.15 arcsec position, ±30 mmag V (Star3 quantization is coarser)
 // B-V is never a match criterion (pipelines may convert it differently), only reported.
 // O(n) per zone (one hash-map build + one linear scan).
+
+#include "cat_reader.hpp"
 
 #include <cmath>
 #include <cstdint>
@@ -16,11 +18,6 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-
-static int nr_of_zones(int level)
-{
-	return 20 * (1 << (level * 2)) + 1;
-}
 
 // Decoded physical representation of one star from either format
 struct PhysStar
@@ -119,7 +116,7 @@ static PhysStar decode_star3(const uint8_t* buf)
 	std::memcpy(&s.gaia_id, buf, 8);
 	s.ra_deg  = load_u24le(buf + 8) / 36000.0;
 	s.dec_deg = load_u24le(buf + 11) / 36000.0 - 90.0;
-	s.bv      = 0.025 * buf[14] - 1.0;   // 255 → 5.375 marks missing BP-RP
+	s.bv      = 0.025 * buf[14] - 1.0;   // 255 �?5.375 marks missing BP-RP
 	s.vmag    = 16.0 + 0.02 * buf[15];
 	s.has_pm_plx = false;
 	s.match_key = s.gaia_id;
@@ -138,65 +135,11 @@ static inline bool isNoBV(double bv)
 static bool   g_compare_bv = false;
 static double g_bv_tol     = 0.05;   // mag
 
-struct CatFile
+static PhysStar decode(const CatReader& cf, const uint8_t* buf)
 {
-	FILE* f   = nullptr;
-	int level = 0;
-	int nz    = 0;
-	uint32_t cat_type = 0;   // 1 = Star2, 2 = Star3
-	size_t   rec_size = 0;
-	std::vector<uint32_t> counts;
-	int64_t star_base = 0;
-	uint64_t total    = 0;
-
-	bool open(const std::string& path)
-	{
-		f = std::fopen(path.c_str(), "rb");
-		if (!f)
-		{
-			std::cerr << "ERROR: cannot open " << path << "\n";
-			return false;
-		}
-		uint32_t hdr[6];
-		float ep;
-		std::fread(hdr, sizeof(uint32_t), 6, f);
-		std::fread(&ep, sizeof(float), 1, f);
-		cat_type = hdr[1];
-		level    = static_cast<int>(hdr[4]);
-		if (cat_type == 0)      rec_size = 48;   // Star1
-		else if (cat_type == 1) rec_size = 32;   // Star2
-		else if (cat_type == 2) rec_size = 16;   // Star3
-		else
-		{
-			std::cerr << "ERROR: " << path << " has unsupported catalog type " << cat_type << "\n";
-			std::fclose(f);
-			f = nullptr;
-			return false;
-		}
-		nz    = nr_of_zones(level);
-		counts.resize(nz);
-		std::fseek(f, 28, SEEK_SET);
-		std::fread(counts.data(), sizeof(uint32_t), nz, f);
-		total = 0;
-		for (auto c : counts)
-			total += c;
-		star_base = 28 + static_cast<int64_t>(nz) * sizeof(uint32_t);
-		return true;
-	}
-	PhysStar decode(const uint8_t* buf) const
-	{
-		return cat_type == 0 ? decode_star1(buf)
-		     : cat_type == 2 ? decode_star3(buf) : decode_star2(buf);
-	}
-	void close()
-	{
-		if (f)
-		{
-			std::fclose(f);
-			f = nullptr;
-		}
-	}
-};
+	return cf.cat_type == 0 ? decode_star1(buf)
+	     : cf.cat_type == 2 ? decode_star3(buf) : decode_star2(buf);
+}
 
 struct CompareResult
 {
@@ -220,7 +163,7 @@ struct Tolerances
 	double rv_kms;     // radial velocity (only when both are Star1)
 };
 
-static Tolerances tolerances_for(const CatFile& a, const CatFile& b)
+static Tolerances tolerances_for(const CatReader& a, const CatReader& b)
 {
 	Tolerances t;
 	bool coarse = (a.cat_type == 2 || b.cat_type == 2);
@@ -307,17 +250,17 @@ static void record_mismatch(const PhysStar& a, const PhysStar& b, int zone,
 	                    astrom, rv_ok, bv_line, file);
 }
 
-static std::unordered_map<uint64_t, PhysStar> loadZoneMap(CatFile& cf, int z, int64_t off)
+static std::unordered_map<uint64_t, PhysStar> loadZoneMap(CatReader& cf, int z, int64_t off)
 {
 	std::unordered_map<uint64_t, PhysStar> map;
-	uint32_t cnt = (z < cf.nz) ? cf.counts[z] : 0;
+	uint32_t cnt = (z < cf.nzones) ? cf.counts[z] : 0;
 	if (cnt == 0) return map;
 	std::fseek(cf.f, off, SEEK_SET);
 	std::vector<uint8_t> buf(cf.rec_size);
 	for (uint32_t i = 0; i < cnt; ++i)
 	{
 		std::fread(buf.data(), cf.rec_size, 1, cf.f);
-		auto s = cf.decode(buf.data());
+		auto s = decode(cf, buf.data());
 		map[s.match_key] = s;
 	}
 	return map;
@@ -339,6 +282,26 @@ static void recordOnlyB(const PhysStar& s, int zone, CompareResult& result,
 	}
 }
 
+static bool within_tolerances(const PhysStar& sa, const PhysStar& s, const Tolerances& tol)
+{
+	bool ok = std::fabs(ra_diff_deg(sa.ra_deg, s.ra_deg)) <= tol.pos_deg &&
+	          std::fabs(sa.dec_deg - s.dec_deg) <= tol.pos_deg &&
+	          std::fabs(sa.vmag - s.vmag) <= tol.vmag;
+	if (ok && sa.has_pm_plx && s.has_pm_plx)
+		ok = std::fabs(sa.pmra_masyr - s.pmra_masyr) <= tol.pm_masyr &&
+		     std::fabs(sa.pmdec_masyr - s.pmdec_masyr) <= tol.pm_masyr &&
+		     std::fabs(sa.plx_mas - s.plx_mas) <= tol.plx_mas;
+	if (ok && sa.has_rv && s.has_rv)
+		ok = std::fabs(sa.rv_kms - s.rv_kms) <= tol.rv_kms;
+	return ok;
+}
+
+static void track_bv_diff(const PhysStar& sa, const PhysStar& s, CompareResult& result)
+{
+	double dbv = sa.bv - s.bv;
+	if (std::fabs(dbv) > g_bv_tol) { result.bad_bv++; result.sum_bv += std::fabs(dbv); }
+}
+
 static void matchOrRecordB(std::unordered_map<uint64_t, PhysStar>& map_a,
                             const PhysStar& s, int zone, const Tolerances& tol,
                             CompareResult& result,
@@ -352,20 +315,9 @@ static void matchOrRecordB(std::unordered_map<uint64_t, PhysStar>& map_a,
 	}
 	const auto& sa = it->second;
 	// --compare-bv: track B-V differences for every compared pair (report-only)
-	if (g_compare_bv && !isNoBV(sa.bv) && !isNoBV(s.bv)) {
-		double dbv = sa.bv - s.bv;
-		if (std::fabs(dbv) > g_bv_tol) { result.bad_bv++; result.sum_bv += std::fabs(dbv); }
-	}
-	bool ok = std::fabs(ra_diff_deg(sa.ra_deg, s.ra_deg)) <= tol.pos_deg &&
-	          std::fabs(sa.dec_deg - s.dec_deg) <= tol.pos_deg &&
-	          std::fabs(sa.vmag - s.vmag) <= tol.vmag;
-	if (ok && sa.has_pm_plx && s.has_pm_plx)
-		ok = std::fabs(sa.pmra_masyr - s.pmra_masyr) <= tol.pm_masyr &&
-		     std::fabs(sa.pmdec_masyr - s.pmdec_masyr) <= tol.pm_masyr &&
-		     std::fabs(sa.plx_mas - s.plx_mas) <= tol.plx_mas;
-	if (ok && sa.has_rv && s.has_rv)
-		ok = std::fabs(sa.rv_kms - s.rv_kms) <= tol.rv_kms;
-	if (ok)
+	if (g_compare_bv && !isNoBV(sa.bv) && !isNoBV(s.bv))
+		track_bv_diff(sa, s, result);
+	if (within_tolerances(sa, s, tol))
 		result.matched++;
 	else
 		record_mismatch(sa, s, zone, tol, result,
@@ -373,18 +325,18 @@ static void matchOrRecordB(std::unordered_map<uint64_t, PhysStar>& map_a,
 	map_a.erase(it);
 }
 
-static void processZoneB(std::unordered_map<uint64_t, PhysStar>& map_a, CatFile& b,
+static void processZoneB(std::unordered_map<uint64_t, PhysStar>& map_a, CatReader& b,
                          int z, int64_t off_b, const Tolerances& tol, CompareResult& result,
                          const std::string& out_path, std::ofstream& out_file)
 {
-	uint32_t cnt_b = (z < b.nz) ? b.counts[z] : 0;
+	uint32_t cnt_b = (z < b.nzones) ? b.counts[z] : 0;
 	if (cnt_b == 0) return;
 	std::fseek(b.f, off_b, SEEK_SET);
 	std::vector<uint8_t> buf(b.rec_size);
 	for (uint32_t i = 0; i < cnt_b; ++i)
 	{
 		std::fread(buf.data(), b.rec_size, 1, b.f);
-		auto s = b.decode(buf.data());
+		auto s = decode(b, buf.data());
 		matchOrRecordB(map_a, s, z, tol, result, out_path, out_file);
 	}
 }
@@ -442,17 +394,17 @@ static void printSummary(const CompareResult& result)
 		std::cout << "\nID sets IDENTICAL (some stars in different zones).\n";
 }
 
-static void compareAllZones(CatFile& a, CatFile& b, CompareResult& result,
+static void compareAllZones(CatReader& a, CatReader& b, CompareResult& result,
                             const std::string& out_path, std::ofstream& out_file)
 {
-	int nz        = std::max(a.nz, b.nz);
+	int nz        = std::max(a.nzones, b.nzones);
 	int64_t off_a = a.star_base, off_b = b.star_base;
 	Tolerances tol = tolerances_for(a, b);
 
 	for (int z = 0; z < nz; ++z)
 	{
-		uint32_t cnt_a = (z < a.nz) ? a.counts[z] : 0;
-		uint32_t cnt_b = (z < b.nz) ? b.counts[z] : 0;
+		uint32_t cnt_a = (z < a.nzones) ? a.counts[z] : 0;
+		uint32_t cnt_b = (z < b.nzones) ? b.counts[z] : 0;
 
 		auto map_a = loadZoneMap(a, z, off_a);
 		processZoneB(map_a, b, z, off_b, tol, result, out_path, out_file);
@@ -465,15 +417,17 @@ static void compareAllZones(CatFile& a, CatFile& b, CompareResult& result,
 
 static void compare(const std::string& a_path, const std::string& b_path, const std::string& out_path)
 {
-	CatFile a, b;
-	if (!a.open(a_path)) return;
-	if (!b.open(b_path))
+	CatReader a, b;
+	std::string err;
+	if (!a.open(a_path, err)) { std::cerr << "ERROR: " << err << "\n"; return; }
+	if (!b.open(b_path, err))
 	{
+		std::cerr << "ERROR: " << err << "\n";
 		a.close();
 		return;
 	}
-	std::cout << "A: level=" << a.level << "  type=Star" << (a.cat_type == 2 ? 3 : 2) << "  stars=" << a.total << "\n";
-	std::cout << "B: level=" << b.level << "  type=Star" << (b.cat_type == 2 ? 3 : 2) << "  stars=" << b.total << "\n";
+	std::cout << "A: level=" << a.level << "  type=Star" << (a.cat_type == 2 ? 3 : 2) << "  stars=" << a.total_stars() << "\n";
+	std::cout << "B: level=" << b.level << "  type=Star" << (b.cat_type == 2 ? 3 : 2) << "  stars=" << b.total_stars() << "\n";
 	bool coarse = (a.cat_type == 2 || b.cat_type == 2);
 	if (coarse)
 		std::cout << "Tolerance: ±0.15 arcsec position, ±0.030 mag V (Star3 quantization)\n\n";
