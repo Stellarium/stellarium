@@ -10,6 +10,7 @@ Output: binary file (arg2) 鈥?n_stars x uint8  global_zone_flag (0/1).
 """
 
 import sys
+import os
 import struct
 import numpy as np
 import astropy.units as u
@@ -18,7 +19,10 @@ from astropy.time import Time
 
 _level = int(sys.argv[3]) if len(sys.argv) > 3 else 0
 
-sys.path.insert(0, r"C:\Users\13308\CLionProjects\stellarium_star_catalogs")
+# py.geodesic lives in the companion stellarium_star_catalogs repo; point
+# STELLARIUM_STAR_CATALOGS at a local checkout to override the default.
+sys.path.insert(0, os.environ.get("STELLARIUM_STAR_CATALOGS",
+                                  r"C:\Users\13308\CLionProjects\stellarium_star_catalogs"))
 from py.geodesic import GeodesicGrid
 
 with open(sys.argv[1], 'rb') as f:

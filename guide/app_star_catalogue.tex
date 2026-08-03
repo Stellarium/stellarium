@@ -1996,6 +1996,54 @@ every output is the official one incremented by one, so the new catalogues
 can coexist with the official ones and are picked up by Stellarium only
 after the configuration has been updated.
 
+\subsection{Building the Tools}
+\label{sec:StarCatalogues:Generating:Build}
+
+\paragraph{C++ tools.} The catalogue tools form a standalone CMake project
+in \file{util/gaiacat/}, independent of the main Stellarium build (C++17,
+no Qt dependency):
+
+\begin{commands}
+cd util/gaiacat
+cmake -B build -S .
+cmake --build build -j
+\end{commands}
+
+This produces seven executables in \file{build/}:
+\program{extract\_columns}, \program{gaiahip2cat}, \program{gaia2cat},
+\program{dedupcat}, \program{cmpcat}, \program{bvextract} and
+\program{apply\_bv}. Sources and shared headers live in
+\file{util/gaiacat/src/} and \file{util/gaiacat/include/} (record layouts
+in \file{types.hpp}, the \file{.cat} reader in \file{cat\_reader.hpp}, the
+record codec in \file{cat\_record.hpp}).
+\program{extract\_columns} compiles the zlib copy bundled with Stellarium
+(\file{src/external/zlib}), so no system zlib
+is required. The project is built with 64-bit file offsets; the tools
+handle catalogue files well beyond 4 GB (level~10 is $\sim$28 GB).
+
+\paragraph{Python scripts.} The helper scripts live in
+\file{util/gaiacat/python/} and need Python~3.10 or newer. Their package
+requirements differ per script:
+
+\begin{description}
+  \item[\program{extract\_columns.py}] standard library only. This is the
+        pure-Python fallback for the C++ extractor; it is about half as
+        fast and only useful if the C++ tool cannot be built.
+  \item[\program{analyze\_only.py}] standard library only.
+  \item[\program{field\_diff.py}] \texttt{pandas}.
+  \item[\program{erfa\_zone.py}] \texttt{numpy} and \texttt{astropy}, plus
+        the \file{py/geodesic.py} module from the companion fork (see the
+        section introduction). Set the
+        \texttt{STELLARIUM\_\allowbreak STAR\_\allowbreak CATALOGS}
+        environment variable to a local checkout of the fork. The script is not run by hand: \program{gaiahip2cat}
+        invokes it automatically when \program{--erfa-python} is given
+        (section~\ref{sec:StarCatalogues:Generating:lv03}).
+\end{description}
+
+\begin{commands}
+pip install numpy astropy pandas
+\end{commands}
+
 \subsection{Obtaining the Input Data}
 \label{sec:StarCatalogues:Generating:Data}
 
@@ -2179,7 +2227,9 @@ gaiahip2cat --simbad <hip_processed_with_binary.dat>
   \item[\program{--max-files}] scan only the first $n$ \file{.bin} files
         (quick smoke test; joins and the Gaia-only subset will be incomplete).
   \item[\program{--erfa-python}] a Python interpreter with astropy
-        installed. If given, the $\pm$210\,kyr past/future analysis that
+        installed (see section~\ref{sec:StarCatalogues:Generating:Build}
+        for the full requirements of the helper script). If given, the
+        $\pm$210\,kyr past/future analysis that
         decides which high-proper-motion stars go into the global zone of
         levels~0--2 is delegated to astropy/ERFA for exact parity with the
         reference pipeline; if omitted, the global-zone analysis is
@@ -2294,9 +2344,9 @@ deliberately contains all HIP stars regardless of magnitude.
 \label{sec:StarCatalogues:Generating:fielddiff}
 
 For a deeper analysis, \program{field\_diff.py} (in
-\file{util/gaiacat/}) performs a global (cross-zone) match of two catalogue
-sets at levels~0--3 and classifies \emph{every} differing star by the
-physical field that exceeds tolerance:
+\file{util/gaiacat/python/}) performs a global (cross-zone) match of two
+catalogue sets at levels~0--3 and classifies \emph{every} differing star
+by the physical field that exceeds tolerance:
 
 \begin{commands}
 python field_diff.py
