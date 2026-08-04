@@ -40,7 +40,7 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QCheckBox>
-#include <QPair>
+#include <QPointF>
 #include <QPushButton>
 #include <QSignalBlocker>
 #include <QTimer>
@@ -767,14 +767,14 @@ void ObjectVisibilityDialog::refreshTwilightMap(bool force)
 		                                primeMeridianSiderealDeg, 360.0);
 		if (lon > 180.0)
 			lon -= 360.0;
-		return QPair<double, double>(lon, dec * 180.0 / M_PI);
+		return QPointF(lon, dec * 180.0 / M_PI);
 	};
 
-	const QPair<double, double> sunPoint = subPoint(sun);
-	const QPair<double, double> moonPoint = moon ? subPoint(moon) : sunPoint;
+	const QPointF sunPoint = subPoint(sun);
+	const QPointF moonPoint = moon ? subPoint(moon) : sunPoint;
 	ui->liveTwilightMapWidget->setTwilightMapData(
-		sunPoint.first, sunPoint.second,
-		moonPoint.first, moonPoint.second);
+		sunPoint.x(), sunPoint.y(),
+		moonPoint.x(), moonPoint.y());
 }
 
 void ObjectVisibilityDialog::configurePlaceLabelControls()
