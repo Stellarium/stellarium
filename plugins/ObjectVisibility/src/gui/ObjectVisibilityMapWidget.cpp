@@ -1024,8 +1024,7 @@ void ObjectVisibilityMapWidget::drawPlaceLabels(QPainter& painter) const
 		std::max(minNearLineDegrees, nearLinePixels * ratio * degreesPerPixel);
 
 	QVector<const PlaceLabel*> candidates;
-	candidates.reserve(static_cast<int>(std::min<qint64>(
-		static_cast<qint64>(placeLabels.size()), 2048)));
+	candidates.reserve(std::min<qsizetype>(placeLabels.size(), 2048));
 	for (const PlaceLabel& label : placeLabels)
 	{
 		if (label.population < placeLabelMinimumPopulation)
