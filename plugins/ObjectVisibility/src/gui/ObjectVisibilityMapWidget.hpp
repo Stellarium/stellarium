@@ -24,6 +24,7 @@
 #include "MapWidget.hpp"
 
 #include <QColor>
+#include <QImage>
 #include <QPainterPath>
 #include <QPointF>
 #include <QString>
@@ -137,7 +138,9 @@ private:
 	void drawVisibilityOverlay(QPainter& painter) const;
 	void drawTwilightLimitsOverlay(QPainter& painter) const;
 	void drawTwilightMapOverlay(QPainter& painter);
-	void drawTwilightShade(QPainter& painter) const;
+	void drawTwilightShade(QPainter& painter);
+	void renderTwilightShadePaths(QPainter& painter) const;
+	void invalidateTwilightShadeCache();
 	void drawTwilightContour(QPainter& painter, double altitudeDeg,
 	                         const QPen& pen) const;
 	QPainterPath twilightBelowAltitudePath(double altitudeDeg,
@@ -177,6 +180,13 @@ private:
 	double twilightMoonLongitudeDeg = 0.0;
 	double twilightMoonLatitudeDeg = 0.0;
 	bool   twilightMapFullTwilight = true;
+	QImage twilightShadeCache;
+	QSize  twilightShadeCacheImageSize;
+	double twilightShadeCacheRatio = 0.0;
+	double twilightShadeCacheLeft = 0.0;
+	double twilightShadeCacheTop = 0.0;
+	double twilightShadeCacheMapWidth = 0.0;
+	double twilightShadeCacheMapHeight = 0.0;
 
 	QVector<PlaceLabel> placeLabels;
 	bool showPlaceLabels = false;

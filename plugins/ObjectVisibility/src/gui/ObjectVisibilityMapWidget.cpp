@@ -164,6 +164,7 @@ void ObjectVisibilityMapWidget::setTwilightMapData(double sunLongitudeDeg,
 	twilightSunLatitudeDeg = sunLatitudeDeg;
 	twilightMoonLongitudeDeg = moonLongitudeDeg;
 	twilightMoonLatitudeDeg = moonLatitudeDeg;
+	invalidateTwilightShadeCache();
 	update();
 }
 
@@ -172,13 +173,17 @@ void ObjectVisibilityMapWidget::setTwilightMapFullTwilight(bool enabled)
 	if (twilightMapFullTwilight == enabled) return;
 	twilightMapFullTwilight = enabled;
 	if (hasTwilightMap)
+	{
+		invalidateTwilightShadeCache();
 		update();
+	}
 }
 
 void ObjectVisibilityMapWidget::clearTwilightMap()
 {
 	if (!hasTwilightMap) return;
 	hasTwilightMap = false;
+	invalidateTwilightShadeCache();
 	update();
 }
 
@@ -651,7 +656,58 @@ QVector<QPointF> ObjectVisibilityMapWidget::twilightContourPoints(
 	                                 90.0 - altitudeDeg);
 }
 
-void ObjectVisibilityMapWidget::drawTwilightShade(QPainter& painter) const
+void ObjectVisibilityMapWidget::invalidateTwilightShadeCache()
+{
+	twilightShadeCache = QImage();
+	twilightShadeCacheImageSize = QSize();
+	twilightShadeCacheRatio = 0.0;
+	twilightShadeCacheLeft = 0.0;
+	twilightShadeCacheTop = 0.0;
+	twilightShadeCacheMapWidth = 0.0;
+	twilightShadeCacheMapHeight = 0.0;
+}
+
+void ObjectVisibilityMapWidget::drawTwilightShade(QPainter& painter)
+{
+	const double ratio = devicePixelRatioF();
+	const QSize imageSize(std::max(1, static_cast<int>(std::ceil(width() * ratio))),
+	                      std::max(1, static_cast<int>(std::ceil(height() * ratio))));
+	const auto topLeft = lonLatToMapPoint(-180.0, 90.0);
+	const auto bottomRight = lonLatToMapPoint(180.0, -90.0);
+	const double mapWidth = bottomRight.x - topLeft.x;
+	const double mapHeight = bottomRight.y - topLeft.y;
+	if (mapWidth <= 0.0 || mapHeight <= 0.0) return;
+
+	const bool cacheMatches =
+		!twilightShadeCache.isNull() &&
+		twilightShadeCacheImageSize == imageSize &&
+		qFuzzyCompare(twilightShadeCacheRatio, ratio) &&
+		qFuzzyCompare(twilightShadeCacheLeft, topLeft.x) &&
+		qFuzzyCompare(twilightShadeCacheTop, topLeft.y) &&
+		qFuzzyCompare(twilightShadeCacheMapWidth, mapWidth) &&
+		qFuzzyCompare(twilightShadeCacheMapHeight, mapHeight);
+
+	if (!cacheMatches)
+	{
+		twilightShadeCache = QImage(imageSize, QImage::Format_ARGB32_Premultiplied);
+		twilightShadeCache.fill(Qt::transparent);
+
+		QPainter cachePainter(&twilightShadeCache);
+		cachePainter.setRenderHint(QPainter::Antialiasing, true);
+		renderTwilightShadePaths(cachePainter);
+
+		twilightShadeCacheImageSize = imageSize;
+		twilightShadeCacheRatio = ratio;
+		twilightShadeCacheLeft = topLeft.x;
+		twilightShadeCacheTop = topLeft.y;
+		twilightShadeCacheMapWidth = mapWidth;
+		twilightShadeCacheMapHeight = mapHeight;
+	}
+
+	painter.drawImage(QPointF(0.0, 0.0), twilightShadeCache);
+}
+
+void ObjectVisibilityMapWidget::renderTwilightShadePaths(QPainter& painter) const
 {
 	const auto topLeft = lonLatToMapPoint(-180.0, 90.0);
 	const auto bottomRight = lonLatToMapPoint(180.0, -90.0);
