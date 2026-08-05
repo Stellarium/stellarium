@@ -39,8 +39,10 @@
 #include <QMap>
 #include <QMapIterator>
 #include <QDir>
+#include <QFile>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QJsonArray>
 #include <QRegularExpression>
 #include <QMetaEnum>
 
