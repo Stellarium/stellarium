@@ -23,6 +23,7 @@
 
 #include "ScmSkyCulture.hpp"
 #include "types/Classification.hpp"
+#include <algorithm>
 #include <utility>
 #include <QFile>
 #include <QTextStream>
@@ -35,16 +36,6 @@ void scm::ScmSkyCulture::setId(const QString &id)
 void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 {
 	ScmSkyCulture::fallbackToInternationalNames = fallback;
-}
-
-void scm::ScmSkyCulture::setBeginTime(int beginTime)
-{
-	ScmSkyCulture::beginTime = beginTime;
-}
-
-void scm::ScmSkyCulture::setEndTime(int endTime)
-{
-	ScmSkyCulture::endTime = endTime;
 }
 
 scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
@@ -103,6 +94,20 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 	}
 	scJsonObj["region"] = regionArray;*/
 
+	// The culture's overall time span is derived from its location polygons:
+	// the earliest begin time and the latest end time across all locations.
+	int beginTime = 0;
+	int endTime   = 0;
+	if (!locations.isEmpty())
+	{
+		beginTime = locations.first().beginTime;
+		endTime   = locations.first().endTime;
+		for (const auto &location : locations)
+		{
+			beginTime = std::min(beginTime, location.beginTime);
+			endTime   = std::max(endTime, location.endTime);
+		}
+	}
 	scJsonObj["beginTime"] = beginTime;
 	scJsonObj["endTime"] = endTime;
 
