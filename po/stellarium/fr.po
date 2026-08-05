@@ -18785,11 +18785,12 @@ msgstr "au prochain"
 
 #: src/ui_astroCalcDialog.h:2451 src/ui_astroCalcCustomStepsDialog.h:210
 msgid "Time step:"
-msgstr "Pas de temps :"
+msgstr "Intervalle :"
 
 #: src/ui_astroCalcDialog.h:2453 src/ui_astroCalcCustomStepsDialog.h:209
 msgid "Custom time step for ephemeris visualization"
-msgstr "Pas de temps personnalisé pour la visualisation de l'éphéméride"
+msgstr ""
+"Intervalle de temps personnalisé pour la visualisation de l'éphéméride"
 
 #: src/ui_astroCalcDialog.h:2455
 msgid ""
@@ -18927,7 +18928,7 @@ msgstr "mois"
 
 #: src/ui_astroCalcDialog.h:2534
 msgid "Step:"
-msgstr "Étape :"
+msgstr "Pas :"
 
 #: src/ui_astroCalcDialog.h:2536
 msgid "Step width for computation. Caution! Short steps cause slow graphs."
@@ -19149,7 +19150,7 @@ msgstr "Options supplémentaires"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:254
 msgid "Label each N steps, where N is"
-msgstr "Étiqueter chaque N-ième étape, avec N égal à"
+msgstr "Étiqueter chaque N-ième pas, avec N égal à"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:255
 msgid "Only draw labelled markers"
@@ -41694,7 +41695,7 @@ msgstr "Ajouter 1 saros (223 mois synodiques ≈ 18 ans 11 jours)"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1167
 msgid "Time Steps"
-msgstr "Pas de temps"
+msgstr "Intervalles de temps"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1168
 msgid "Selected object"
@@ -41803,7 +41804,7 @@ msgstr "Événements planétaires"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1272
 msgid "Select object at event"
-msgstr "Sélectionner un objet lors de l'événement"
+msgstr "Sélectionner l'objet lors de l'événement"
 
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1273
 msgid "Center view on object at event"
