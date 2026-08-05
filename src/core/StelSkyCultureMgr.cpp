@@ -163,6 +163,48 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 {
 }
 
+namespace
+{
+//! Derives the overall [begin, end] year span of a sky culture from the time properties of its
+//! territory.geojson polygon features. Returns false when no territory file with usable time data
+//! exists.
+bool deriveTimeSpanFromTerritory(const QString& cultureDir, int& beginTime, int& endTime)
+{
+	const QString filePath = StelFileMgr::findFile("skycultures/" + cultureDir + "/territory.geojson");
+	if (filePath.isEmpty()) return false;
+
+	QFile file(filePath);
+	if (!file.open(QFile::ReadOnly)) return false;
+
+	QJsonParseError error;
+	const auto jsonDoc = QJsonDocument::fromJson(file.readAll(), &error);
+	if (error.error != QJsonParseError::NoError || !jsonDoc.isObject()) return false;
+
+	const auto features = jsonDoc.object().value("features").toArray();
+	bool found          = false;
+	for (const auto& feature : features)
+	{
+		const auto props = feature.toObject().value("properties").toObject();
+		if (!props.contains("beginTime") || !props.contains("endTime")) continue;
+
+		const int featureBegin = props.value("beginTime").toInt();
+		const int featureEnd   = props.value("endTime").toInt();
+		if (!found)
+		{
+			beginTime = featureBegin;
+			endTime   = featureEnd;
+			found     = true;
+		}
+		else
+		{
+			beginTime = featureBegin < beginTime ? featureBegin : beginTime;
+			endTime   = featureEnd > endTime ? featureEnd : endTime;
+		}
+	}
+	return found;
+}
+} // anonymous namespace
+
 void StelSkyCultureMgr::makeCulturesList()
 {
 	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
@@ -221,8 +263,13 @@ void StelSkyCultureMgr::makeCulturesList()
 			culture.region = QJsonArray();
 			culture.region.append(data["region"]);
 		}
-		culture.beginTime = data["beginTime"].toInt();
-		culture.endTime = data["endTime"].toInt();
+		if (!deriveTimeSpanFromTerritory(dir, culture.beginTime, culture.endTime))
+		{
+			constexpr int earliestSliderYear = -40000;
+			constexpr int infiniteEndTime = 9146; // rendered as "∞" (up to present)
+			culture.beginTime = earliestSliderYear;
+			culture.endTime = infiniteEndTime;
+		}
 		if (data["constellations"].isArray())
 		{
 			culture.constellations = data["constellations"].toArray();

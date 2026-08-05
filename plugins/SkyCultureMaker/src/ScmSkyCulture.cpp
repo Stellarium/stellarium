@@ -23,7 +23,6 @@
 
 #include "ScmSkyCulture.hpp"
 #include "types/Classification.hpp"
-#include <algorithm>
 #include <utility>
 #include <QFile>
 #include <QTextStream>
@@ -93,23 +92,6 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 		regionArray.append(REGIONS.at(currentRegion).name);
 	}
 	scJsonObj["region"] = regionArray;*/
-
-	// The culture's overall time span is derived from its location polygons:
-	// the earliest begin time and the latest end time across all locations.
-	int beginTime = 0;
-	int endTime   = 0;
-	if (!locations.isEmpty())
-	{
-		beginTime = locations.first().beginTime;
-		endTime   = locations.first().endTime;
-		for (const auto &location : locations)
-		{
-			beginTime = std::min(beginTime, location.beginTime);
-			endTime   = std::max(endTime, location.endTime);
-		}
-	}
-	scJsonObj["beginTime"] = beginTime;
-	scJsonObj["endTime"] = endTime;
 
 	// for some reason, the classification is inside an array, eg. ["historical"]
 	QJsonArray classificationArray = QJsonArray::fromStringList(
