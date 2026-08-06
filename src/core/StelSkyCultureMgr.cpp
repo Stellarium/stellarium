@@ -168,7 +168,7 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 namespace
 {
 //! Derives the overall [begin, end] year span of a sky culture from the time properties of its
-//! territory.geojson polygon features. Returns false when no territory file with usable time data
+//! territory.geojson polygon features. Returns false when no territory file with polygon features
 //! exists.
 bool deriveTimeSpanFromTerritory(const QString& cultureDir, int& beginTime, int& endTime)
 {
@@ -187,10 +187,8 @@ bool deriveTimeSpanFromTerritory(const QString& cultureDir, int& beginTime, int&
 	for (const auto& feature : features)
 	{
 		const auto props = feature.toObject().value("properties").toObject();
-		if (!props.contains("beginTime") || !props.contains("endTime")) continue;
-
-		const int featureBegin = props.value("beginTime").toInt();
-		const int featureEnd   = props.value("endTime").toInt();
+		const int featureBegin = props.value("beginTime").toInt(StelSkyCulture::unknownBeginTime);
+		const int featureEnd   = props.value("endTime").toInt(StelSkyCulture::presentEndTime);
 		if (!found)
 		{
 			beginTime = featureBegin;
@@ -267,10 +265,8 @@ void StelSkyCultureMgr::makeCulturesList()
 		}
 		if (!deriveTimeSpanFromTerritory(dir, culture.beginTime, culture.endTime))
 		{
-			constexpr int earliestSliderYear = -40000;
-			constexpr int infiniteEndTime = 9146; // rendered as "∞" (up to present)
-			culture.beginTime = earliestSliderYear;
-			culture.endTime = infiniteEndTime;
+			culture.beginTime = StelSkyCulture::unknownBeginTime;
+			culture.endTime = StelSkyCulture::presentEndTime;
 		}
 		if (data["constellations"].isArray())
 		{

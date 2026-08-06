@@ -103,6 +103,10 @@ public:
 	//! The name of region following the United Nations geoscheme UN~M49 https://unstats.un.org/unsd/methodology/m49/
 	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "World".
 	QJsonArray region;
+	//! Sentinel begin year meaning "unknown/irrelevant" (earlier than any real historical date).
+	static constexpr int unknownBeginTime = -500000;
+	//! Sentinel end year meaning "up to the present", rendered as "∞" in the GUI.
+	static constexpr int presentEndTime = 9146;
 	//! Earliest available year
 	int beginTime;
 	//! Latest available year
