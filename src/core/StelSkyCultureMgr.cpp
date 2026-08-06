@@ -167,20 +167,23 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 
 namespace
 {
-//! Derives the overall [begin, end] year span of a sky culture from the time properties of its
-//! territory.geojson polygon features. Returns false when no territory file with polygon features
-//! exists.
-bool deriveTimeSpanFromTerritory(const QString& cultureDir, int& beginTime, int& endTime)
+//! Sets the overall [begin, end] year span of a sky culture from the time properties of its
+//! territory.geojson polygon features. When no territory file or usable feature exists, the span
+//! defaults to the "unknown/present" sentinels.
+void deriveTimeSpanFromTerritory(const QString& cultureDir, int& beginTime, int& endTime)
 {
+	beginTime = StelSkyCulture::unknownBeginTime;
+	endTime   = StelSkyCulture::presentEndTime;
+
 	const QString filePath = StelFileMgr::findFile("skycultures/" + cultureDir + "/territory.geojson");
-	if (filePath.isEmpty()) return false;
+	if (filePath.isEmpty()) return;
 
 	QFile file(filePath);
-	if (!file.open(QFile::ReadOnly)) return false;
+	if (!file.open(QFile::ReadOnly)) return;
 
 	QJsonParseError error;
 	const auto jsonDoc = QJsonDocument::fromJson(file.readAll(), &error);
-	if (error.error != QJsonParseError::NoError || !jsonDoc.isObject()) return false;
+	if (error.error != QJsonParseError::NoError || !jsonDoc.isObject()) return;
 
 	const auto features = jsonDoc.object().value("features").toArray();
 	bool found          = false;
@@ -201,7 +204,6 @@ bool deriveTimeSpanFromTerritory(const QString& cultureDir, int& beginTime, int&
 			endTime   = featureEnd > endTime ? featureEnd : endTime;
 		}
 	}
-	return found;
 }
 } // anonymous namespace
 
@@ -263,11 +265,9 @@ void StelSkyCultureMgr::makeCulturesList()
 			culture.region = QJsonArray();
 			culture.region.append(data["region"]);
 		}
-		if (!deriveTimeSpanFromTerritory(dir, culture.beginTime, culture.endTime))
-		{
-			culture.beginTime = StelSkyCulture::unknownBeginTime;
-			culture.endTime = StelSkyCulture::presentEndTime;
-		}
+		// The culture's time span is derived from its territory polygons (territory.geojson);
+		// any dates in index.json are intentionally ignored.
+		deriveTimeSpanFromTerritory(dir, culture.beginTime, culture.endTime);
 		if (data["constellations"].isArray())
 		{
 			culture.constellations = data["constellations"].toArray();
