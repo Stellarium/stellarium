@@ -860,7 +860,7 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 			// resizing the shadow together with the Moon would require considerable trickery.
 			// It seems better to just switch it off.
 			static SolarSystem *sSystem=GETSTELMODULE(SolarSystem);
-			if (sSystem->getFlagMoonScale()) return;
+			if (sSystem->getFlagMoonScale() && (sSystem->getMoon()->getSphereScale()!=1.0)) return;
 
 			// We compute the shadow circle attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
 			const Vec3d pos=earth->getEclipticPos();
@@ -1826,7 +1826,7 @@ GridLinesMgr::GridLinesMgr()
 	apexPoints = new SkyPoint(SkyPoint::APEX);	
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
-	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectSolarSystem()));
+	connect(GETSTELMODULE(SolarSystem), &SolarSystem::solarSystemDataReloaded, this, &GridLinesMgr::connectSolarSystem);
 
 	// Whenever year changes we must recompute the labels for the ecliptic when dates are shown.
 	connect(StelApp::getInstance().getCore(), &StelCore::dateChangedByYear, this, [=](const int year){ SkyLine::computeEclipticDatePartitions(year);});

@@ -49,21 +49,19 @@ struct sat {
 static struct sat SATS[4];
 
 
-static int elem2pv(double mu, const double elem[6], double xv[2][3])
+static int elem2pv(const double mu, const double elem[6], double xv[2][3])
 {
-    double k, h, q, p, a, al, an, ee, ce, se, de, dle, rsam1, asr, phi, psi,
-           x1, y1, vx1, vy1, f2, p2, q2, pq;
+    const double k  = elem[2];
+    const double h  = elem[3];
+    const double q  = elem[4];
+    const double p  = elem[5];
+    const double a  = elem[0];
+    const double al = elem[1];
 
-    k  = elem[2];
-    h  = elem[3];
-    q  = elem[4];
-    p  = elem[5];
-    a  = elem[0];
-    al = elem[1];
+    const double an = sqrt(mu / pow(a, 3.0));
+    double ee = al + k * sin(al) - h * cos(al);
 
-    an = sqrt(mu / pow(a, 3.0));
-    ee = al + k * sin(al) - h * cos(al);
-
+    double ce, se, de;
     do {
       ce = cos(ee);
       se = sin(ee);
@@ -73,19 +71,19 @@ static int elem2pv(double mu, const double elem[6], double xv[2][3])
 
     ce = cos(ee);
     se = sin(ee);
-    dle = h * ce - k * se;
-    rsam1 = -k * ce - h * se;
-    asr =1.0 / (1.0 + rsam1);
-    phi = sqrt(1.0 - k*k - h*h);
-    psi = 1.0 / (1.0 + phi);
-    x1 = a * (ce - k - psi * h * dle);
-    y1 = a * (se - h + psi * k * dle);
-    vx1 = an * asr * a * (-se - psi * h * rsam1);
-    vy1 = an * asr * a * ( ce + psi * k * rsam1);
-    f2 = 2.0 * sqrt(1.0 - q*q - p*p);
-    p2 = 1.0 -2.0 * p*p;
-    q2 = 1.0 -2.0 * q*q;
-    pq = 2.0 * p * q;
+    const double dle = h * ce - k * se;
+    const double rsam1 = -k * ce - h * se;
+    const double asr =1.0 / (1.0 + rsam1);
+    const double phi = sqrt(1.0 - k*k - h*h);
+    const double psi = 1.0 / (1.0 + phi);
+    const double x1 = a * (ce - k - psi * h * dle);
+    const double y1 = a * (se - h + psi * k * dle);
+    const double vx1 = an * asr * a * (-se - psi * h * rsam1);
+    const double vy1 = an * asr * a * ( ce + psi * k * rsam1);
+    const double f2 = 2.0 * sqrt(1.0 - q*q - p*p);
+    const double p2 = 1.0 -2.0 * p*p;
+    const double q2 = 1.0 -2.0 * q*q;
+    const double pq = 2.0 * p * q;
     xv[0][0] = x1 * p2 + y1 * pq;
     xv[0][1] = x1 * pq + y1 * q2;
     xv[0][2] = (q * y1 - x1 * p) * f2;
@@ -101,16 +99,16 @@ static const double L1toVsop87[9] = {
    1.339578739122566807e-02, 3.619798764705610479e-02, 9.992548516622136737e-01
 };
 
-void GetL12Coor(double jd, int ks, double p[3], double v[3])
+void GetL12Coor(const double jd, const int body, double p[3], double v[3])
 {
-    const struct sat *sat = &SATS[ks];
-    double t, arg, s, s1, s2;
+    const struct sat *sat = &SATS[body];
+    double arg, s, s1, s2;
     double elem[6];
     double val[5] = {0.0};
     double xv[2][3];
     int k;
 
-    t = jd - 2433282.5;
+    const double t = jd - 2433282.5;
     s = 0.0;
     for (k = 0; k < sat->a_len; k++) {
         arg = sat->a[k].phas + sat->a[k].freq * t;

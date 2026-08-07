@@ -389,8 +389,9 @@ void StarMgr::init()
 	populateDoubleStarsList();
 	populateVariableStarsList();
 
-	setFontSize(StelApp::getInstance().getScreenFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
+	StelApp *app = &StelApp::getInstance();
+	setFontSize(app->getScreenFontSize());
+	connect(app, &StelApp::screenFontSizeChanged, this, &StarMgr::setFontSize);
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -404,9 +405,8 @@ void StarMgr::init()
 	objectMgr->registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
 
-	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
-	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	app->getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
+	connect(app, &StelApp::languageChanged, this, &StarMgr::updateI18n);
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &StarMgr::updateSkyCulture);
 
 	QString displayGroup = N_("Display Options");
@@ -871,7 +871,7 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 				continue;
 		}
 
-		const StelObject::CulturalName cName {
+		StelObject::CulturalName cName {
 			entry["native"].toString(),
 			entry["pronounce"].toString(),
 			trans.qTranslateStarPronounce(entry["pronounce"].toString()),
@@ -883,6 +883,11 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 			QString(),
 			StelObject::CulturalNameSpecial::None
 		};
+		QString byname=entry["byname"].toString();
+		if (!byname.isEmpty())
+		{
+			cName.byname = byname;
+		}
 
 		//if (culturalNamesMap.contains(HIP))
 		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;

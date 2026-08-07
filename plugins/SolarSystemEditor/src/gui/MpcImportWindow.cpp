@@ -1058,8 +1058,8 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcMinorPlanets].insert("MPCAT: One-opposition objects (unperturbed solutions)",         "https://www.minorplanetcenter.net/iau/ECS/MPCAT/mp1.txt");
 
 	const int start = 0;
-	const int mpn = 89; // number of files for numbered minor planets
-	const int mpu = 60; // number of files for unnumbered minor planets
+	const int mpn = 90; // number of files for numbered minor planets
+	const int mpu = 62; // number of files for unnumbered minor planets
 	const int nsize = 6;
 	const QChar dash = QChar(0x2014);
 

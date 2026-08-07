@@ -83,86 +83,18 @@
 
 
 SolarSystem::SolarSystem() : StelObjectModule()
-	, shadowPlanetCount(0)
-	, earthShadowEnlargementDanjon(false)
-	, flagMoonScale(false)
-	, moonScale(1.0)
-	, flagDynamicMoonScale(false)
-	, moonScaleMinFov(10.0)
-	, moonScaleMaxFov(90.0)
-	, flagMinorBodyScale(false)
-	, minorBodyScale(1.0)
-	, flagPlanetScale(false)
-	, planetScale(1.0)
-	, flagSunScale(false)
-	, sunScale(1.0)
-	, labelsAmount(false)
-	, flagPermanentSolarCorona(true)
-	, flagOrbits(false)
-	, flagLightTravelTime(true)
-	, flagUseObjModels(false)
-	, flagShowObjSelfShadows(true)
-	, flagShow(false)
-	, flagPointer(false)
-	, flagIsolatedTrails(true)
-	, numberIsolatedTrails(0)
-	, maxTrailPoints(5000)
-	, maxTrailTimeExtent(1)
-	, trailsThickness(1)
-	, flagIsolatedOrbits(true)
-	, flagPlanetsOrbits(false)
-	, flagPlanetsOrbitsOnly(false)
-	, flagOrbitsWithMoons(false)
-	, ephemerisMarkersDisplayed(true)
-	, ephemerisDatesDisplayed(false)
-	, ephemerisMagnitudesDisplayed(false)
-	, ephemerisHorizontalCoordinates(false)
-	, ephemerisLineDisplayed(false)
-	, ephemerisAlwaysOn(false)
-	, ephemerisNow(false)
-	, ephemerisLineThickness(1)
-	, ephemerisSkipDataDisplayed(false)
-	, ephemerisSkipMarkersDisplayed(false)
-	, ephemerisDataStep(1)
-	, ephemerisDataLimit(1)
-	, ephemerisSmartDatesDisplayed(true)
-	, ephemerisScaleMarkersDisplayed(false)
-	, ephemerisLabelYear(true)
-	, ephemerisLabelMonth(true)
-	, ephemerisLabelDay(true)
-	, ephemerisLabelHour(false)
-	, ephemerisLabelMinute(false)
-	, ephemerisLabelSecond(false)
-	, ephemerisFirstOfMonthOnly(false)
-	, ephemerisLabelAntiClutter(false)
-	, ephemerisLabelAntiClutterPx(20)
-	, ephemerisGenericMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
-	, ephemerisSecondaryMarkerColor(Vec3f(0.7f, 0.7f, 1.0f))
-	, ephemerisSelectedMarkerColor(Vec3f(1.0f, 0.7f, 0.0f))
-	, ephemerisMercuryMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
-	, ephemerisVenusMarkerColor(Vec3f(1.0f, 1.0f, 1.0f))
-	, ephemerisMarsMarkerColor(Vec3f(1.0f, 0.0f, 0.0f))
-	, ephemerisJupiterMarkerColor(Vec3f(0.3f, 1.0f, 1.0f))
-	, ephemerisSaturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
-        , ephemerisUranusMarkerColor(Vec3f(0.2f, 0.5f, 0.3f))
-        , ephemerisNeptuneMarkerColor(Vec3f(0.2f, 0.3f, 0.5f))
-	, allTrails(Q_NULLPTR)
 	, conf(StelApp::getInstance().getSettings())
-	, extraThreads(0)
-	, nbMarkers(0)
 	, vao(new QOpenGLVertexArrayObject)
 	, vbo(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
-	, markerMagThreshold(15.)
-	, computePositionsAlgorithm(conf->value("devel/compute_positions_algorithm", 2).toInt())
 {
 	fontSize = StelApp::getInstance().getScreenFontSize();
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &SolarSystem::setFontSize);
 	setObjectName("SolarSystem");
-	connect(this, SIGNAL(flagOrbitsChanged(bool)),            this, SLOT(reconfigureOrbits()));
-	connect(this, SIGNAL(flagPlanetsOrbitsChanged(bool)),     this, SLOT(reconfigureOrbits()));
-	connect(this, SIGNAL(flagPlanetsOrbitsOnlyChanged(bool)), this, SLOT(reconfigureOrbits()));
-	connect(this, SIGNAL(flagIsolatedOrbitsChanged(bool)),    this, SLOT(reconfigureOrbits()));
-	connect(this, SIGNAL(flagOrbitsWithMoonsChanged(bool)),   this, SLOT(reconfigureOrbits()));
+	connect(this, &SolarSystem::flagOrbitsChanged,            this, &SolarSystem::reconfigureOrbits);
+	connect(this, &SolarSystem::flagPlanetsOrbitsChanged,     this, &SolarSystem::reconfigureOrbits);
+	connect(this, &SolarSystem::flagPlanetsOrbitsOnlyChanged, this, &SolarSystem::reconfigureOrbits);
+	connect(this, &SolarSystem::flagIsolatedOrbitsChanged,    this, &SolarSystem::reconfigureOrbits);
+	connect(this, &SolarSystem::flagOrbitsWithMoonsChanged,   this, &SolarSystem::reconfigureOrbits);
 
 	markerArray=new MarkerVertex[maxMarkers*6];
 	textureCoordArray = new unsigned char[maxMarkers*6*2];
@@ -243,6 +175,8 @@ void SolarSystem::init()
 	Q_ASSERT(conf);
 	StelApp *app = &StelApp::getInstance();
 	StelCore *core=app->getCore();
+
+	computePositionsAlgorithm = conf->value("devel/compute_positions_algorithm", computePositionsAlgorithm).toInt();
 
 	Planet::init();
 	loadPlanets();	// Load planets data
@@ -367,8 +301,7 @@ void SolarSystem::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
-	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
-		this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+	connect(objectManager, &StelObjectMgr::selectedObjectChanged, this, &SolarSystem::selectedObjectChange);
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
 	texEphemerisMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/disk.png");
@@ -377,11 +310,11 @@ void SolarSystem::init()
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
 	markerCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-marker.png");
 
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, &StelApp::languageChanged, this, &SolarSystem::updateI18n);
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &SolarSystem::updateSkyCulture);
-	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(recreateTrails()));
-	connect(core, SIGNAL(dateChangedForTrails()), this, SLOT(recreateTrails()));
+	connect(&StelMainView::getInstance(), &StelMainView::reloadShadersRequested, this, &SolarSystem::reloadShaders);
+	connect(core, &StelCore::locationChanged, this, &SolarSystem::recreateTrails);
+	connect(core, &StelCore::dateChangedForTrails, this, &SolarSystem::recreateTrails);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
@@ -400,18 +333,18 @@ void SolarSystem::init()
 
 #ifndef NO_GUI
 	// Fill ephemeris dates
-	connect(this, SIGNAL(requestEphemerisVisualization()),        this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisDataStepChanged(int)),          this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSkipDataChanged(bool)),         this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSkipMarkersChanged(bool)),      this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisSmartDatesChanged(bool)),       this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelYearChanged(bool)),        this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelMonthChanged(bool)),       this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelDayChanged(bool)),         this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelHourChanged(bool)),        this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelMinuteChanged(bool)),      this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisLabelSecondChanged(bool)),      this, SLOT(fillEphemerisDates()));
-	connect(this, SIGNAL(ephemerisFirstOfMonthOnlyChanged(bool)), this, SLOT(fillEphemerisDates()));
+	connect(this, &SolarSystem::requestEphemerisVisualization,    this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisDataStepChanged,         this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisSkipDataChanged,         this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisSkipMarkersChanged,      this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisSmartDatesChanged,       this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelYearChanged,        this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelMonthChanged,       this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelDayChanged,         this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelHourChanged,        this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelMinuteChanged,      this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisLabelSecondChanged,      this, &SolarSystem::fillEphemerisDates);
+	connect(this, &SolarSystem::ephemerisFirstOfMonthOnlyChanged, this, &SolarSystem::fillEphemerisDates);
 #endif
 
 	// Create shader program for mass drawing of asteroid markers
@@ -806,6 +739,33 @@ void SolarSystem::loadPlanets()
 	else
 		qInfo() << "ExtendedElements: asteroid_elements.json not found"
 		        << "— asteroids using standard single-epoch orbits.";
+
+	// Build the level-bucketed view of systemPlanets used by computePositions()
+	// to drive race-free parallelism (parent levels are processed before child
+	// levels; siblings within a level are processed in parallel).
+	rebuildDependencyLevels();
+}
+
+void SolarSystem::rebuildDependencyLevels()
+{
+	systemPlanetsByLevel.clear();
+	for (const auto& p : std::as_const(systemPlanets))
+	{
+		// Walk up the parent chain to determine this body's depth.  The Sun
+		// has parent == null and lives at level 0; planets are level 1;
+		// moons of planets are level 2; sub-moons (none in stock data, but
+		// the algorithm should not assume it) would be level 3; etc.
+		int level = 0;
+		PlanetP ancestor = p->parent;
+		while (!ancestor.isNull())
+		{
+			++level;
+			ancestor = ancestor->parent;
+		}
+		if (systemPlanetsByLevel.size() <= level)
+			systemPlanetsByLevel.resize(level + 1);
+		systemPlanetsByLevel[level].append(p);
+	}
 }
 
 unsigned char SolarSystem::BvToColorIndex(double bV)
@@ -1321,6 +1281,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const QString normalMapName = ( hidden ? "" : englishName.toLower().append("_normals.png")); // no normal maps for invisible objects!
 			const QString horizonMapName = ( hidden ? "" : englishName.toLower().append("_normals.png")); // no normal maps for invisible objects!
 
+			assert(dynamic_cast<KeplerOrbit*>(orbitPtr));
 			newP = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/radius", 0.0).toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -1378,6 +1339,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		else if (type == L1S("comet"))
 		{
 			minorBodies << englishName;
+			assert(dynamic_cast<KeplerOrbit*>(orbitPtr));
 			newP = PlanetP(new Comet(englishName,
 					      pd.value(secname+"/radius", 5.0).toDouble()/AU,
 					      pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -1443,7 +1405,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/horizon_map", englishName.toLower().append("_horizon.png")).toString(),
 					       pd.value(secname+"/model").toString(),
 					       posfunc,
-					       static_cast<KeplerOrbit*>(orbitPtr), // This remains Q_NULLPTR for the major planets, or has a KeplerOrbit for planet moons.
+					       orbitPtr, // This remains nullptr for the major planets, or has a KeplerOrbit for planet moons, or gimbalOrbit for observers.
 					       osculatingFunc,
 					       closeOrbit,
 					       pd.value(secname+"/hidden", false).toBool(),
@@ -1609,7 +1571,10 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 
 		switch (computePositionsAlgorithm)
 		{
-		case 3: // Ruslan's 1-loop solution. This would be faster, but has problems with moons when the respective planet has not been computed yet.
+		case 3: // Ruslan's 1-loop solution, made race-free by walking the
+			// dependency-level buckets in order and parallelising only across
+			// siblings of one level (so a child never reads a parent's
+			// heliocentric position concurrently with that parent's write).
 		{
 			// Position of this planet will be used in the subsequent computations
 			observerPlanet->computePosition(obs, dateJDE, Vec3d(0.));
@@ -1661,138 +1626,178 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				}
 			};
 
-			// This will be used for computation of transformation matrices
+			// This will be used for computation of transformation matrices.
+			// Process the observer planet first so its transMatrix and final
+			// position are valid before any other body might want to consult
+			// them.  It will be visited again by the level walk below, which
+			// is fine: processPlanet is idempotent on its input.
 			processPlanet(observerPlanet, Vec3d(0.));
 			observerPlanet->computeTransMatrix(dateJD, dateJDE);
 			const Vec3d observerPosFinal = observerPlanet->getHeliocentricEclipticPos();
 
-			// Threadable loop function for self-set number of additional worker threads
-			const auto loop = [&planets=std::as_const(systemPlanets),processPlanet,
-					  observerPosFinal](const int indexMin, const int indexMax)
+			// Defensive: rebuild the level cache if it has fallen out of sync
+			// with systemPlanets (e.g. the Solar System Editor plugin added or
+			// removed bodies without us being notified).
+			int cachedCount = 0;
+			for (const auto& lvl : std::as_const(systemPlanetsByLevel))
+				cachedCount += lvl.size();
+			if (cachedCount != systemPlanets.size())
+				rebuildDependencyLevels();
+
+			const int totalThreads = extraThreads + 1;
+			const int extras = extraThreads;
+
+			// Run `bodyOp` on every body of `level` in parallel and return
+			// only once all workers have finished.  The barrier is what makes
+			// the algorithm race-free: by the time we begin the next level,
+			// every parent at this level has been written exactly once, and
+			// the write is happens-before the children's reads.
+			const auto runLevelParallel = [totalThreads, extras]
+				(const QVector<PlanetP>& level, auto bodyOp)
 			{
-				for(int i = indexMin; i <= indexMax; ++i)
-					processPlanet(planets[i], observerPosFinal);
+				if (level.isEmpty()) return;
+				const auto stripe = [&level, totalThreads, &bodyOp](int offset)
+				{
+					for (int i = offset; i < level.size(); i += totalThreads)
+						bodyOp(level[i]);
+				};
+				QList<QFuture<void>> futures;
+				futures.reserve(extras);
+				for (int t = 0; t < extras; ++t)
+					futures.append(QtConcurrent::run(stripe, t));
+				stripe(extras);                            // main thread's share
+				for (auto& f : futures) f.waitForFinished();
 			};
 
-			QList<QFuture<void>> futures;
-			const int totalThreads = extraThreads+1;
-			const auto blockSize = systemPlanets.size() / totalThreads;
-			for(int threadN=0; threadN<totalThreads-1; ++threadN)
+			for (const auto& level : std::as_const(systemPlanetsByLevel))
 			{
-				const int indexMin = blockSize*threadN;
-				const int indexMax = blockSize*(threadN+1)-1;
-				futures.append(QtConcurrent::run(loop, indexMin,indexMax));
+				runLevelParallel(level, [&processPlanet, &observerPosFinal](const PlanetP& p)
+				{
+					processPlanet(p, observerPosFinal);
+				});
 			}
-			// and the last thread is the current one
-			loop(blockSize*(totalThreads-1), systemPlanets.size()-1);
-			for(auto& f : futures)
-
-				f.waitForFinished();
 		}
 		break;
 		case 2:
 		{
-			// Better 3-loop solution. This is still following the original solution:
-			// First, compute approximate positions at JDE.
-			// Then for each object, compute light time and repeat light-time corrected.
-			// Third, check new light time, and recompute once more if needed.
+			// Race-free 3-pass solution.  This is structurally still the
+			// original "first approx, then light-time correct, then refine"
+			// schedule -- the change is that within each pass we walk the
+			// systemPlanetsByLevel buckets in order and parallelise only
+			// across the siblings of one level, with a `waitForFinished()`
+			// barrier between levels.  That barrier is what makes the
+			// algorithm race-free: by the time we start processing a moon,
+			// its parent planet's write of `eclipticPos` is happens-before
+			// the moon's read of `Moon->getHeliocentricEclipticPos()` (which
+			// walks the parent chain).  The flat-striped version this
+			// replaces could put e.g. Earth on one worker and the Moon on
+			// another, leading to a concurrent read/write of Earth's state.
+			//
+			// Pass 1: positions at JDE (no light-time correction).
+			// Pass 2: light-time + aberration correction.
+			// Pass 3: one more refinement iteration; also updates rotation
+			//         element corrections for the major bodies that have
+			//         them.
 
-			// 1. First approximation.
-			QList<QFuture<void>> futures;
-			// This defines a function to be thrown onto a pool thread that computes every 'incr'th element.
-			auto plCompLoopZero = [=](int offset){
-				for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=(extraThreads+1))
+			// Defensive: rebuild the level cache if it has fallen out of
+			// sync with systemPlanets (the Solar System Editor plugin can
+			// mutate systemPlanets at runtime).
+			int cachedCount = 0;
+			for (const auto& lvl : std::as_const(systemPlanetsByLevel))
+				cachedCount += lvl.size();
+			if (cachedCount != systemPlanets.size())
+				rebuildDependencyLevels();
+
+			const int totalThreads = extraThreads + 1;
+			const int extras = extraThreads;
+
+			// Run `bodyOp` on every body of `level` in parallel and return
+			// only once all workers have finished.
+			const auto runLevelParallel = [totalThreads, extras]
+				(const QVector<PlanetP>& level, auto bodyOp)
+			{
+				if (level.isEmpty()) return;
+				const auto stripe = [&level, totalThreads, &bodyOp](int offset)
 				{
-					it->data()->computePosition(obs, dateJDE, Vec3d(0.));
-				}
+					for (int i = offset; i < level.size(); i += totalThreads)
+						bodyOp(level[i]);
+				};
+				QList<QFuture<void>> futures;
+				futures.reserve(extras);
+				for (int t = 0; t < extras; ++t)
+					futures.append(QtConcurrent::run(stripe, t));
+				stripe(extras);                            // main thread's share
+				for (auto& f : futures) f.waitForFinished();
 			};
 
-			// Move to external threads, but also run a part in the main thread. The index 'availableThreads' is just the last group of objects.
-			for (int stride=0; stride<extraThreads; stride++)
+			// ---- Pass 1: first approximation at dateJDE -----------------
+			for (const auto& level : std::as_const(systemPlanetsByLevel))
 			{
-				auto future=QtConcurrent::run(plCompLoopZero, stride);
-				futures.append(future);
-			}
-			plCompLoopZero(extraThreads);
-
-			// Now the list is being computed by other threads. we can just wait sequentially for completion.
-			for(auto f: futures)
-				f.waitForFinished();
-			futures.clear();
-
-			const Vec3d &obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
-
-			// 2.&3.: For higher accuracy, we now make two iterations of light time and aberration correction. In the final
-			// round, we also compute rotation data.  May fix sub-arcsecond inaccuracies, and optionally apply
-			// aberration in the way described in Explanatory Supplement (2013), 7.55.  For reasons unknown (See
-			// discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!  Presumably the
-			// used ephemerides already provide aberration-corrected positions for the Moon?
-			const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
-
-			auto plCompLoopOne = [=](int offset){
-				for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=extraThreads+1)
+				runLevelParallel(level, [obs, dateJDE](const PlanetP& p)
 				{
-					const auto planetPos = it->data()->getHeliocentricEclipticPos();
-					const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
-					Vec3d aberrationPush(0.);
-					if (withAberration && (!observerPlanetIsEarth || it->data() != getMoon()))
-						aberrationPush=lightTimeDays*aberrationPushSpeed;
-					it->data()->computePosition(obs, dateJDE-lightTimeDays, aberrationPush);
-				}
-			};
-			for (int stride=0; stride<extraThreads; stride++)
-			{
-				auto future=QtConcurrent::run(plCompLoopOne, stride);
-				futures.append(future);
+					p->computePosition(obs, dateJDE, Vec3d(0.));
+				});
 			}
-			plCompLoopOne(extraThreads); // main thread's share of the computation task
-			// Now the list is being computed by other threads. we can just wait sequentially for completion.
-			for(auto f: futures)
-				f.waitForFinished();
-			futures.clear();
 
-			// 3. Extra accuracy with another round. Not sure if useful. Maybe hide behind a new property flag?
-			auto plCompLoopTwo = [=](int offset){
-				for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=extraThreads+1)
-				{
-					const auto planetPos = it->data()->getHeliocentricEclipticPos();
-					const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
-					Vec3d aberrationPush(0.);
-					if (withAberration && (!observerPlanetIsEarth || it->data() != getMoon()))
-						aberrationPush=lightTimeDays*aberrationPushSpeed;
-					// The next call may already do nothing if the time difference to the previous round is not large enough.
-					it->data()->computePosition(obs, dateJDE-lightTimeDays, aberrationPush);
-					//it->data()->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
-					//							.arg(QString::number(lightTimeDays, 'f', 3))
-					//							.arg(QString::number(aberrationPushSpeed[0], 'f', 3))
-					//							.arg(QString::number(aberrationPushSpeed[1], 'f', 3))
-					//							.arg(QString::number(aberrationPushSpeed[2], 'f', 3)));
+			// Snapshot the observer's heliocentric state *by value* (NOT by
+			// reference, as the previous implementation did).  The observer
+			// planet is itself one of the bodies recomputed in passes 2 and
+			// 3, so a reference into its members would shift under our feet
+			// halfway through those passes.
+			const Vec3d obsPosJDE           = observerPlanet->getHeliocentricEclipticPos();
+			const Vec3d aberrationPushSpeed = observerPlanet->getHeliocentricEclipticVelocity()
+			                                  * core->getAberrationFactor();
 
-					const auto update = &RotationElements::updatePlanetCorrections;
-					if      (it->data()->englishName==L1S("Moon"))    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
-					else if (it->data()->englishName==L1S("Mars"))    update(dateJDE-lightTimeDays, RotationElements::Mars);
-					else if (it->data()->englishName==L1S("Jupiter")) update(dateJDE-lightTimeDays, RotationElements::Jupiter);
-					else if (it->data()->englishName==L1S("Saturn"))  update(dateJDE-lightTimeDays, RotationElements::Saturn);
-					else if (it->data()->englishName==L1S("Uranus"))  update(dateJDE-lightTimeDays, RotationElements::Uranus);
-					else if (it->data()->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
-				}
-			};
-			for (int stride=0; stride<extraThreads; stride++)
+			// For higher accuracy, we now make two iterations of light time
+			// and aberration correction.  May fix sub-arcsecond inaccuracies,
+			// and optionally apply aberration in the way described in
+			// Explanatory Supplement (2013), 7.55.  For reasons unknown (see
+			// discussion in GH:#1626) we do not add anything for the Moon
+			// when observed from Earth -- presumably the used ephemerides
+			// already provide aberration-corrected positions for the Moon.
+			const auto lightTimeStep =
+				[obs, dateJDE, obsPosJDE, aberrationPushSpeed,
+				 withAberration, observerPlanetIsEarth, this](const PlanetP& p)
 			{
-				auto future=QtConcurrent::run(plCompLoopTwo, stride);
-				futures.append(future);
-			}
-			// At this point all available threads from the global ThreadPool should be active:
-			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("Threads: Ideal: %1, Pool max %2/active %3, SolarSystem using %4<br/>").
-			//			   arg(QString::number(QThread::idealThreadCount()),
-			//			       QString::number(QThreadPool::globalInstance()->maxThreadCount()),
-			//			       QString::number(QThreadPool::globalInstance()->activeThreadCount()),
-			//			       QString::number(extraThreads)));
-			// and we still run the last stride in the main thread.
-			plCompLoopTwo(extraThreads);
-			// Now the list is being computed by other threads. we can just wait sequentially for completion.
-			for(auto f: futures)
-				f.waitForFinished();
+				const Vec3d planetPos      = p->getHeliocentricEclipticPos();
+				const double lightTimeDays = (planetPos - obsPosJDE).norm()
+				                             * (AU / (SPEED_OF_LIGHT * 86400.));
+				Vec3d aberrationPush(0.);
+				if (withAberration && (!observerPlanetIsEarth || p != getMoon()))
+					aberrationPush = lightTimeDays * aberrationPushSpeed;
+				p->computePosition(obs, dateJDE - lightTimeDays, aberrationPush);
+			};
+
+			// ---- Pass 2: light-time + aberration correction -------------
+			for (const auto& level : std::as_const(systemPlanetsByLevel))
+				runLevelParallel(level, lightTimeStep);
+
+			// ---- Pass 3: refinement (and rotation element corrections) --
+			// The next call may already do nothing if the time difference to
+			// the previous round is not large enough.
+			const auto lightTimeStepWithRotation =
+				[obs, dateJDE, obsPosJDE, aberrationPushSpeed,
+				 withAberration, observerPlanetIsEarth, this](const PlanetP& p)
+			{
+				const Vec3d planetPos      = p->getHeliocentricEclipticPos();
+				const double lightTimeDays = (planetPos - obsPosJDE).norm()
+				                             * (AU / (SPEED_OF_LIGHT * 86400.));
+				Vec3d aberrationPush(0.);
+				if (withAberration && (!observerPlanetIsEarth || p != getMoon()))
+					aberrationPush = lightTimeDays * aberrationPushSpeed;
+				p->computePosition(obs, dateJDE - lightTimeDays, aberrationPush);
+
+				const auto update = &RotationElements::updatePlanetCorrections;
+				if      (p->englishName==L1S("Moon"))    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+				else if (p->englishName==L1S("Mars"))    update(dateJDE-lightTimeDays, RotationElements::Mars);
+				else if (p->englishName==L1S("Jupiter")) update(dateJDE-lightTimeDays, RotationElements::Jupiter);
+				else if (p->englishName==L1S("Saturn"))  update(dateJDE-lightTimeDays, RotationElements::Saturn);
+				else if (p->englishName==L1S("Uranus"))  update(dateJDE-lightTimeDays, RotationElements::Uranus);
+				else if (p->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
+			};
+			for (const auto& level : std::as_const(systemPlanetsByLevel))
+				runLevelParallel(level, lightTimeStepWithRotation);
+
 			computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 		}
 		break;

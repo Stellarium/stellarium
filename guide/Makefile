@@ -18,9 +18,13 @@
 # Debian, Ubuntu: apt-get install make texlive-full gs pdftk. 
 # Others: make sure to install the abovementioned packages for your distribution.
 #
-# MAC OS X
-# ==========
-# * TODO: please add instructions here.
+# MACOS
+# =====
+# TeX Live: install it via MacTeX from: https://tug.org/mactex/mactex-download.html.
+#   Double-click on the package to install it, then follow the instructions to install
+#   Ghostscript, Ghostscript-Extras and TeX Live itself. If you only need TeX to build SUG,
+#   GUI Applications are not needed.
+# pdftk: install it via brew: `brew install pdftk-java`.
 
 
 
@@ -332,13 +336,17 @@ else
  ifeq ($(findstring Git, $(SHELL)),Git)
 	@echo INFO: We are in MinGW/git shell, right?
  else
-  ifeq ($(findstring Microsoft, $(shell cat /proc/version)), Microsoft)
+  ifeq ($(findstring Microsoft, $(shell cat /proc/version 2>/dev/null)), Microsoft)
 	@echo INFO: This looks like Ubuntu on Windows
   else
    ifeq ($(findstring CYGWIN, $(shell uname)),CYGWIN)
 	@echo INFO: We are on Cygwin, right?
    else
+    ifeq ($(findstring Darwin, $(shell uname)),Darwin)
+	@echo INFO: We are on macOS \(Darwin\), right?
+    else
 	@echo I assume $(shell uname) is a valid environment. Please enhance this line.
+    endif
    endif
   endif 
  endif 

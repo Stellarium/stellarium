@@ -808,7 +808,7 @@ void LandscapeMgr::createAtmosphere()
 	{
 		// We've failed to apply the setting, so reset to the fallback value
 		const auto conf=StelApp::getInstance().getSettings();
-		conf->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_PREETHAM);
+		conf->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_DEFAULT);
 	}
 
 	needToRecreateAtmosphere=false;
@@ -816,7 +816,7 @@ void LandscapeMgr::createAtmosphere()
 
 void LandscapeMgr::resetToFallbackAtmosphere()
 {
-	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_PREETHAM);
+	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_DEFAULT);
 	atmosphere.reset();
 	createAtmosphere();
 }
@@ -886,10 +886,10 @@ void LandscapeMgr::init()
 	StelSkyDrawer* drawer = app->getCore()->getSkyDrawer();
 	Q_ASSERT(drawer);
 	setAtmosphereLightPollutionLuminance(drawer->getLightPollutionLuminance());
-	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(onLocationChanged(StelLocation)));
-	connect(app->getCore(), SIGNAL(targetLocationChanged(const StelLocation&, const QString&)), this, SLOT(onTargetLocationChanged(const StelLocation&, const QString&)));
+	connect(app->getCore(), &StelCore::locationChanged, this, &LandscapeMgr::onLocationChanged);
+	connect(app->getCore(), &StelCore::targetLocationChanged, this, &LandscapeMgr::onTargetLocationChanged);
 	connect(drawer, &StelSkyDrawer::lightPollutionLuminanceChanged, this, &LandscapeMgr::setAtmosphereLightPollutionLuminance);
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, &StelApp::languageChanged, this, &LandscapeMgr::updateI18n);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Atmosphere", displayGroup, N_("Atmosphere"), "atmosphereDisplayed", "A");

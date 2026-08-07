@@ -116,7 +116,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. GET: list, countrylist, planetlist, planetimage");
+		response.writeRequestError("unsupported operation. GET: list, regionlist, planetlist, planetimage");
 	}
 }
 

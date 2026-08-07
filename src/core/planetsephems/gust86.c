@@ -92,7 +92,7 @@ const double phi[5] = {5.702313,
                        1.746237,
                        4.206896};
 
-void CalcGust86Elem(double t,double elem[5*6],void *user) {
+void CalcGust86Elem(const double t,double elem[5*6],void *user) {
   double an[5],ae[5],ai[5];
   int i;
   for (i=0;i<5;i++) {

@@ -285,7 +285,7 @@ void StelCore::init()
 	// Compute transform matrices between coordinates systems
 	updateTransformMatrices();
 	updateFixedEquatorialTransformMatrices();
-	connect(this, SIGNAL(locationChanged(const StelLocation&)), this, SLOT(updateFixedEquatorialTransformMatrices()));
+	connect(this, &StelCore::locationChanged, this, &StelCore::updateFixedEquatorialTransformMatrices);
 
 	movementMgr = new StelMovementMgr(this);
 	movementMgr->init();
@@ -1809,7 +1809,7 @@ void StelCore::setInitTodayTime(const QTime& time)
 	initTodayTime=time;
 }
 
-void StelCore::setPresetSkyTime(QDateTime dateTime)
+void StelCore::setPresetSkyDateTime(QDateTime dateTime)
 {
 	setPresetSkyTime(StelUtils::qDateTimeToJd(dateTime));
 }

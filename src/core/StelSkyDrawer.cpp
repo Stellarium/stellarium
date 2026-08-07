@@ -29,6 +29,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelMainView.hpp"
+#include "precession.h"
 
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -77,6 +78,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	nbPointSources(0),
 	maxLum(0.f),
 	oldLum(-1.f),
+	coronaMeshDim(5), // low odd number: 3/5/7
+	coronaTextureCoords(),
 	flagLuminanceAdaptation(false),
 	daylightLabelThreshold(250.0),
 	big3dModelHaloRadius(150.f)
@@ -135,6 +138,20 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	}
 	texImgHalo=QImage(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
 	texImgHaloSpiky=QImage(StelFileMgr::getInstallationDir()+"/textures/star16x16_rays.png");
+
+	// Tessellate texture into an equispaced 5x5 field. Vertices have to be computed per frame.
+	for (int j=0;j<coronaMeshDim-1;++j)
+	{
+		for (int i=0;i<coronaMeshDim-1;++i)
+		{
+			coronaTextureCoords << Vec2f((float(i))/(coronaMeshDim-1),     (float(j))/(coronaMeshDim-1));
+			coronaTextureCoords << Vec2f((float(i)+1.f)/(coronaMeshDim-1), (float(j))/(coronaMeshDim-1));
+			coronaTextureCoords << Vec2f((float(i))/(coronaMeshDim-1),     (float(j)+1.f)/(coronaMeshDim-1));
+			coronaTextureCoords << Vec2f((float(i)+1.f)/(coronaMeshDim-1), (float(j))/(coronaMeshDim-1));
+			coronaTextureCoords << Vec2f((float(i)+1.f)/(coronaMeshDim-1), (float(j)+1.f)/(coronaMeshDim-1));
+			coronaTextureCoords << Vec2f((float(i))/(coronaMeshDim-1),     (float(j)+1.f)/(coronaMeshDim-1));
+		}
+	}
 }
 
 StelSkyDrawer::~StelSkyDrawer()
@@ -432,12 +449,17 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 }
 
 // Finalize the drawing of point sources
-void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
+void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter, bool drawInCorona)
 {
 	Q_ASSERT(sPainter);
 
 	if (nbPointSources==0)
 		return;
+	if (drawInCorona)
+	{
+		// Test whether this call is misplaced. TODO: Cleanup in summer of 2026.
+		Q_ASSERT(0);
+	}
 	if (flagStarSpiky)
 		texHaloRayed->bind();
 	else
@@ -519,21 +541,72 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 }
 
 // Draw's the Sun's corona during a solar eclipse on Earth.
-void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color, const float alpha, const float angle)
+// painter: in FrameJ2000
+// posJ2000: solar position, J2000
+// radius: angular radius of the sun, radians
+// color: attenuated sunlight color (extinction may have reddened the sun)
+// alpha: transparency
+void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, double radius, const Vec3f& color, const float alpha)
 {
-	texSunCorona->bind();
-	painter->setBlending(true, GL_ONE, GL_ONE);
+	radius *= (512.f/193.f); // Texture size is 1024, solar radius within is 192 or 193. Increase radius to the width/height of actual image, in radians.
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, posJ2000);
 
-	Vec3f win;
-	painter->getProjector()->project(v, win);
+	// Define a rotation matrix around the sun that adjusts image rotation in the sky. We must unrotate from the original image orientation and adjust for the new angle of J2000 vs. ecliptic.
+	// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equatorial angle from that date of 15.43 degrees.
+	// https://en.wikipedia.org/wiki/Rotation_matrix
+	const double eclAngle=getPrecessionAngleVondrakCurrentEpsilonA()*cos(ra);
+	const double theta=(44.65-15.43)*M_PI_180 - eclAngle; // dynamical rotation angle!
+	const double cTh=cos(theta);
+	const double mcTh=1.-cTh;
+	const double sTh=sin(theta);
+	const Mat3d R3(posJ2000[0]*posJ2000[0]*mcTh+cTh,             posJ2000[0]*posJ2000[1]*mcTh-posJ2000[2]*sTh, posJ2000[0]*posJ2000[2]*mcTh+posJ2000[1]*sTh,
+	               posJ2000[0]*posJ2000[1]*mcTh+posJ2000[2]*sTh, posJ2000[1]*posJ2000[1]*mcTh+cTh,             posJ2000[1]*posJ2000[2]*mcTh-posJ2000[0]*sTh,
+	               posJ2000[0]*posJ2000[2]*mcTh-posJ2000[1]*sTh, posJ2000[1]*posJ2000[2]*mcTh+posJ2000[0]*sTh, posJ2000[2]*posJ2000[2]*mcTh+cTh);
+
+	static QVector<Vec3d> contour(coronaTextureCoords.size());
+	contour.clear();
+	const int centerPoint=coronaMeshDim/2; // point 5:2=2 is the point index in sun's center
+	for (int j=-centerPoint;j<coronaMeshDim-1-centerPoint;++j)
+	{
+		for (int i=-centerPoint;i<coronaMeshDim-1-centerPoint;++i)
+		{
+			const double decJ0=dec+j    *(2.0*radius/(coronaMeshDim-1));
+			const double decJ1=dec+(j+1)*(2.0*radius/(coronaMeshDim-1));
+			const double cDecJ0=1./cos(decJ0);
+			const double cDecJ1=1./cos(decJ1);
+			const double dRA0=i*(2.0*radius/(coronaMeshDim-1));
+			const double dRA1=(i+1)*(2.0*radius/(coronaMeshDim-1));
+
+			Vec3d vertex;
+			StelUtils::spheToRect(ra-dRA0*cDecJ0, decJ0, vertex);
+			contour << R3*vertex;
+			StelUtils::spheToRect(ra-dRA1*cDecJ0, decJ0, vertex);
+			contour << R3*vertex;
+			StelUtils::spheToRect(ra-dRA0*cDecJ1, decJ1, vertex);
+			contour << R3*vertex;
+			StelUtils::spheToRect(ra-dRA1*cDecJ0, decJ0, vertex);
+			contour << R3*vertex;
+			StelUtils::spheToRect(ra-dRA1*cDecJ1, decJ1, vertex);
+			contour << R3*vertex;
+			StelUtils::spheToRect(ra-dRA0*cDecJ1, decJ1, vertex);
+			contour << R3*vertex;
+		}
+	}
+	Q_ASSERT(contour.length()==coronaTextureCoords.length());
+
+	coronaMesh.vertex=contour;
+	coronaMesh.texCoords=coronaTextureCoords;
+	coronaMesh.primitiveType=StelVertexArray::Triangles;
+
+	texSunCorona->bind();
 	// For some reason we must mix color with the given alpha as well, else mixing does not work.
 	painter->setColor(color*alpha, alpha);
-	// pre-compensate the automatic scaling of sprite painting on HiDPI screens
-	radius /= static_cast<float>(painter->getProjector()->getDevicePixelsPerPixel());
-	// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equator angle from that date of 15.43 degrees.
-	painter->drawSprite2dMode(win[0], win[1], radius, -angle+44.65f-15.43f);
+	painter->setBlending(true, GL_ONE, GL_ONE);
+	painter->drawStelVertexArray(coronaMesh, false);
 
-	postDrawPointSource(painter);
+	// GZ: WHY DO WE NEED THIS?
+	postDrawPointSource(painter, true);
 }
 
 // Terminate drawing of a 3D model, draw the halo

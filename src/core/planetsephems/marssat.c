@@ -379,15 +379,15 @@ static const double J2000_to_VSOP87[9] = {
    4.403598133110236e-07, 9.174821370868568e-01, 3.977769829016507e-01,
   -1.909192461077750e-07,-3.977769829016049e-01, 9.174821370869625e-01};
 
-static const double ome0 = 47.68143;
-static const double inc0 = 37.1135;
-static const double dome = -0.1061;
-static const double dinc =  0.0609;
 
 static
 void GenerateMarsSatToVSOP87(double t,double mat_mars_sat_to_vsop87[9]) {
   t -= 6491.5;
   {
+    static const double ome0 = 47.68143;
+    static const double inc0 = 37.1135;
+    static const double dome = -0.1061;
+    static const double dinc =  0.0609;
     const double ome = (ome0 + dome * t / 36525.) * (M_PI/180.0);
     const double inc = (inc0 + dinc * t / 36525.) * (M_PI/180.0);
     const double co = cos(ome);
@@ -408,25 +408,26 @@ void GenerateMarsSatToVSOP87(double t,double mat_mars_sat_to_vsop87[9]) {
   }
 }
 
-static double t_0 = -1e100;
-static double t_1 = -1e100;
-static double t_2 = -1e100;
-static double marssat_elem_0[2*6];
-static double marssat_elem_1[2*6];
-static double marssat_elem_2[2*6];
+// Duplicate memory for thread safety
+static double t_0[MARS_SAT_COUNT] = {-1e100, -1e100};
+static double t_1[MARS_SAT_COUNT] = {-1e100, -1e100};
+static double t_2[MARS_SAT_COUNT] = {-1e100, -1e100};
+static double marssat_elem_0[MARS_SAT_COUNT][2*6];
+static double marssat_elem_1[MARS_SAT_COUNT][2*6];
+static double marssat_elem_2[MARS_SAT_COUNT][2*6];
 
 /* 1 day: */
 #define DELTA_T 1.0
 
-static double marssat_jd0 = -1e100;
-static double marssat_elem[2*6];
+static double marssat_jd0[MARS_SAT_COUNT] = {-1e100, -1e100};
+static double marssat_elem[MARS_SAT_COUNT][2*6];
 
 static void CalcAllMarsSatElem(double t,double elem[12], void *user) {
   CalcMarsSatElem(t,0,elem+(0*6));
   CalcMarsSatElem(t,1,elem+(1*6));
 }
 
-static double mars_sat_to_vsop87[9];
+static double mars_sat_to_vsop87[MARS_SAT_COUNT][9];
 
 void GetMarsSatCoor(double jd,int body,double *xyz, double *xyzdot) {
 	double xyz6[6];
@@ -438,37 +439,37 @@ void GetMarsSatCoor(double jd,int body,double *xyz, double *xyzdot) {
 void GetMarsSatOsculatingCoor(const double jd0,const double jd,
                               const int body,double *xyz) {
   double x[6];
-  if (jd0 != marssat_jd0) {
+  if (jd0 != marssat_jd0[body]) {
     const double t0 = jd0 - 2451545.0 + 6491.5;
-    marssat_jd0 = jd0;
-    CalcInterpolatedElements(t0,marssat_elem,12,
+    marssat_jd0[body] = jd0;
+    CalcInterpolatedElements(t0,marssat_elem[body],12,
                              &CalcAllMarsSatElem,DELTA_T,
-                             &t_0,marssat_elem_0,
-                             &t_1,marssat_elem_1,
-                             &t_2,marssat_elem_2,
+                             &t_0[body],marssat_elem_0[body],
+                             &t_1[body],marssat_elem_1[body],
+                             &t_2[body],marssat_elem_2[body],
                              NULL);
-    GenerateMarsSatToVSOP87(t0,mars_sat_to_vsop87);
+    GenerateMarsSatToVSOP87(t0,mars_sat_to_vsop87[body]);
   }
-  EllipticToRectangularA(mars_sat_bodies[body].mu,marssat_elem+(body*6),jd-jd0,x);
-  xyz[0] = mars_sat_to_vsop87[0]*x[0]
-         + mars_sat_to_vsop87[1]*x[1]
-         + mars_sat_to_vsop87[2]*x[2];
-  xyz[1] = mars_sat_to_vsop87[3]*x[0]
-         + mars_sat_to_vsop87[4]*x[1]
-         + mars_sat_to_vsop87[5]*x[2];
-  xyz[2] = mars_sat_to_vsop87[6]*x[0]
-         + mars_sat_to_vsop87[7]*x[1]
-         + mars_sat_to_vsop87[8]*x[2];
+  EllipticToRectangularA(mars_sat_bodies[body].mu,marssat_elem[body]+(body*6),jd-jd0,x);
+  xyz[0] = mars_sat_to_vsop87[body][0]*x[0]
+         + mars_sat_to_vsop87[body][1]*x[1]
+         + mars_sat_to_vsop87[body][2]*x[2];
+  xyz[1] = mars_sat_to_vsop87[body][3]*x[0]
+         + mars_sat_to_vsop87[body][4]*x[1]
+         + mars_sat_to_vsop87[body][5]*x[2];
+  xyz[2] = mars_sat_to_vsop87[body][6]*x[0]
+         + mars_sat_to_vsop87[body][7]*x[1]
+         + mars_sat_to_vsop87[body][8]*x[2];
   // GZ This is a guess, based on the structure of other operations...
-  xyz[3] = mars_sat_to_vsop87[0]*x[3]
-	 + mars_sat_to_vsop87[1]*x[4]
-	 + mars_sat_to_vsop87[2]*x[5];
-  xyz[4] = mars_sat_to_vsop87[3]*x[3]
-	 + mars_sat_to_vsop87[4]*x[4]
-	 + mars_sat_to_vsop87[5]*x[5];
-  xyz[5] = mars_sat_to_vsop87[6]*x[3]
-	 + mars_sat_to_vsop87[7]*x[4]
-	 + mars_sat_to_vsop87[8]*x[5];
+  xyz[3] = mars_sat_to_vsop87[body][0]*x[3]
+	 + mars_sat_to_vsop87[body][1]*x[4]
+	 + mars_sat_to_vsop87[body][2]*x[5];
+  xyz[4] = mars_sat_to_vsop87[body][3]*x[3]
+	 + mars_sat_to_vsop87[body][4]*x[4]
+	 + mars_sat_to_vsop87[body][5]*x[5];
+  xyz[5] = mars_sat_to_vsop87[body][6]*x[3]
+	 + mars_sat_to_vsop87[body][7]*x[4]
+	 + mars_sat_to_vsop87[body][8]*x[5];
 /*
   printf("%d %18.9lf %15.12lf %15.12lf %15.12lf\n",
          body,jd,xyz[0],xyz[1],xyz[2]);

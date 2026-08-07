@@ -45,6 +45,7 @@ class HipsMgr : public StelModule
 			MEMBER surveys
 			NOTIFY surveysChanged)
 	Q_PROPERTY(bool flagShow READ getFlagShow WRITE setFlagShow NOTIFY showChanged)
+	Q_PROPERTY(bool flagShowAtmosphericExtinction READ getFlagShowAtmosphericExtinction WRITE setFlagShowAtmosphericExtinction NOTIFY flagShowAtmosphericExtinctionChanged)
 	Q_PROPERTY(State state READ getState NOTIFY stateChanged)
 	Q_PROPERTY(bool loaded READ isLoaded NOTIFY stateChanged)
 
@@ -75,6 +76,7 @@ public:
 
 signals:
 	void showChanged(bool value) const;
+	void flagShowAtmosphericExtinctionChanged(bool value) const;
 	void surveysChanged() const;
 	void stateChanged(State value) const;
 	//! Emitted when a new survey has been loaded.
@@ -89,14 +91,20 @@ public slots:
 	bool getFlagShow(void) const;
 	//! Set whether the surveys are displayed.
 	void setFlagShow(bool b);
+	bool getFlagShowAtmosphericExtinction(void) const { return flagShowAtmosphericExtinction; }
+	void setFlagShowAtmosphericExtinction(bool b);
 
 private slots:
 	// after loading survey list from network, restore the visible surveys from config.ini.
 	void restoreVisibleSurveys();
+	void saveSurveySettings() const;
+	void updateActiveSurveys();
 
 private:
 	QList<HipsSurveyP> surveys;
+	QList<HipsSurveyP> activeSurveys;
 	bool visible = true;
+	bool flagShowAtmosphericExtinction = false;
 	State state = Created;
 	//! Used internally to keep track of the loading state.
 	int nbSourcesLoaded = 0;

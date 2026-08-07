@@ -143,27 +143,27 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	setAcceptHoverEvents(true);
 	timeLine = new QTimeLine(250, this);
 	timeLine->setEasingCurve(QEasingCurve(QEasingCurve::OutCurve));
-	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
-	connect(&StelMainView::getInstance(), SIGNAL(updateIconsRequested()), this, SLOT(updateIcon()));  // Not sure if this is ever called?
+	connect(timeLine, &QTimeLine::valueChanged, this, &StelButton::animValueChanged);
+	connect(&StelMainView::getInstance(), &StelMainView::updateIconsRequested, this, &StelButton::updateIcon);  // Not sure if this is ever called?
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	connect(gui, SIGNAL(flagUseButtonsBackgroundChanged(bool)), this, SLOT(updateIcon()));
+	connect(gui, &StelGui::flagUseButtonsBackgroundChanged, this, &StelButton::updateIcon);
 
 	if (action!=nullptr)
 	{
 		if (action->isCheckable())
 		{
 			setChecked(action->isChecked());
-			connect(action, SIGNAL(toggled(bool)), this, SLOT(setChecked(bool)));
-			connect(this, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
+			connect(action, qOverload<bool>(&StelAction::toggled), this, qOverload<bool>(&StelButton::setChecked));
+			connect(this, &StelButton::toggled, action, &StelAction::setChecked);
 		}
 		else
 		{
-			QObject::connect(this, SIGNAL(triggered()), action, SLOT(trigger()));
+			QObject::connect(this, &StelButton::triggered, action, &StelAction::trigger);
 		}
 	}
 	if (secondAction!=nullptr)
 	{
-			QObject::connect(this, SIGNAL(triggeredRight()), secondAction, SLOT(trigger()));
+			QObject::connect(this, &StelButton::triggeredRight, secondAction, &StelAction::trigger);
 	}
 	else {
 		setAcceptedMouseButtons(Qt::LeftButton);
@@ -431,7 +431,7 @@ void LeftStelBar::addButton(StelButton* button)
 	//button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
 	button->setPos(0., qRound(posY + 9.5 * StelButton::buttonSizeRatio()));
 
-	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
+	connect(button, &StelButton::hoverChanged, this, &LeftStelBar::buttonHoverChanged);
 }
 
 void LeftStelBar::updateButtonPositions()
@@ -672,7 +672,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 	button->setFocusOnSky(true);
 	updateButtonsGroups();
 
-	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
+	connect(button, &StelButton::hoverChanged, this, &BottomStelBar::buttonHoverChanged);
 	emit sizeChanged();
 }
 
@@ -1209,7 +1209,7 @@ void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 	allBars.insert(p, pb);
 	pb->setVisible(true);
 	
-	connect(p, SIGNAL(changed()), this, SLOT(oneBarChanged()));
+	connect(p, &StelProgressController::changed, this, &StelProgressBarMgr::oneBarChanged);
 }
 
 void StelProgressBarMgr::removeProgressBar(const StelProgressController *p)

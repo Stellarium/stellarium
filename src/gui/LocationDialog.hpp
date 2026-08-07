@@ -117,8 +117,7 @@ private slots:
 	void moveToAnotherPlanet();
 
 	//! Called when latitude/longitude/altitude is modified
-	//! The int argument is required by the Altitude spinbox signal connection, but unused.
-	void setLocationFromCoords(int i=0);
+	void setLocationFromCoords();
 
 	//! Called when the user clicks on the add to list button
 	void addCurrentLocationToList();

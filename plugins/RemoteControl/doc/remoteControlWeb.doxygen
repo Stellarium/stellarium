@@ -415,7 +415,7 @@ as its \p value property, in hexadecimal string format (for example `0x0004`)
 
 Module which connects to the LocationService and the LocationSearchService.
 It emits the following events whenever the specified field changed:
-\c planetChanged,\c nameChanged, \c countryChanged, \c altitudeChanged, \c latitudeChanged, \c longitudeChanged, \c positionChanged (emitted when either lat or lon changed)
+\c planetChanged,\c nameChanged, \c regionChanged, \c altitudeChanged, \c latitudeChanged, \c longitudeChanged, \c positionChanged (emitted when either lat or lon changed)
 
 It also has \c set methods for these fields.
 Furthermore, it provides \c performLocationSearch, which searches the predefined locations for a specific search string,
@@ -423,7 +423,7 @@ and \c performNearbySearch, which searches predefined locations near a given lat
 These methods take a callback parameter to notify the caller of the results.
 The \c setLocationById method can then be used to set the location to a result of these 2 methods.
 
-It also provides a \c loadCountryList and a \c loadPlanetList which load the specified lists and return the results with a callback.
+It also provides a \c loadRegionList and a \c loadPlanetList which load the specified lists and return the results with a callback.
 
 \subsubsection rcApiProperties api/properties
 

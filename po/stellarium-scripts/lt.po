@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-12-01 14:32+0700\n"
+"POT-Creation-Date: 2026-07-03 12:42+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Gediminas Tauras, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
@@ -1323,388 +1323,422 @@ msgstr "Saulės diena"
 msgid "Uranian analemma"
 msgstr "Urano analema"
 
-#: scripts/messier_marathon.ssc:18
+#: scripts/messier_marathon.ssc:32
 msgid "Messier Marathon"
 msgstr "Messier Maratono"
 
-#: scripts/messier_marathon.ssc:85
+#: scripts/messier_marathon.ssc:99
 msgid "Difficulty is 0"
 msgstr "Sunkumas yra 0"
 
-#: scripts/messier_marathon.ssc:86
+#: scripts/messier_marathon.ssc:100
 msgid "Very diffuse, very dark, very difficult"
 msgstr "Labai išsklaidytas, labai tamsus, labai sudėtingas"
 
-#: scripts/messier_marathon.ssc:87
+#: scripts/messier_marathon.ssc:101
 msgid "Easier than M74, small"
 msgstr "Paprastesnis nei M74, mažas"
 
-#: scripts/messier_marathon.ssc:88
+#: scripts/messier_marathon.ssc:102
 msgid "Visible to the naked eye, no difficulty"
 msgstr "Matoma plika akimi, jokių sunkumų nėra"
 
-#: scripts/messier_marathon.ssc:89
+#: scripts/messier_marathon.ssc:103
 msgid "More difficult than M110 to verify, small"
 msgstr "Sudėtingesnis nei M110 patikrinimui, mažas."
 
-#: scripts/messier_marathon.ssc:90
+#: scripts/messier_marathon.ssc:104
 msgid "In the west of M31, it is easy to detect"
 msgstr "Į vakarus nuo M31, lengva aptikti"
 
-#: scripts/messier_marathon.ssc:91
+#: scripts/messier_marathon.ssc:105
 msgid "Diffuse, great, brighter"
 msgstr "Diffuzinis, didelis, šviesesnis"
 
-#: scripts/messier_marathon.ssc:92
+#: scripts/messier_marathon.ssc:106
 msgid "Small, easy to locate, not as horror as imagined"
 msgstr "Mažas, lengvai aptinkamas, ne taip siaubinga, kaip įsivaizduojama"
 
-#: scripts/messier_marathon.ssc:93
+#: scripts/messier_marathon.ssc:107
 msgid "Difficult to locate, easy to detect and verify"
 msgstr "Sunku rasti, lengva aptikti ir patikrinti"
 
-#: scripts/messier_marathon.ssc:94
+#: scripts/messier_marathon.ssc:108
 msgid "Small, easy to locate, don't confuse with NGC663"
 msgstr "Mažas, lengvai aptinkamas, nesupainiokite su NGC663."
 
-#: scripts/messier_marathon.ssc:95
+#: scripts/messier_marathon.ssc:109
 msgid "Large, scattered, easy"
 msgstr "Didelis, išsibarstęs, lengvas"
 
-#: scripts/messier_marathon.ssc:96
+#: scripts/messier_marathon.ssc:110
 msgid "Fuzzy, easy to find, accompanied by a small star"
 msgstr "Neaiški, lengvai aptinkama, lydi maža žvaigždutė"
 
-#: scripts/messier_marathon.ssc:97
+#: scripts/messier_marathon.ssc:111
 msgid "Visible to the naked eye, better than M31"
 msgstr "Matoma plika akimi, geriau nei M31"
 
-#: scripts/messier_marathon.ssc:98
+#: scripts/messier_marathon.ssc:112
 msgid "Very close to M42, not easy to see the fuzzy"
 msgstr "Labai arti M42, sunku pamatyti miglą"
 
-#: scripts/messier_marathon.ssc:99
+#: scripts/messier_marathon.ssc:113
 msgid "Small, dark, few stars around"
 msgstr "Maža, tamsi, keletas žvaigždžių aplinkui"
 
-#: scripts/messier_marathon.ssc:100
+#: scripts/messier_marathon.ssc:114
 msgid "Easy to locate, easy to detect in a good transparency."
 msgstr "Lengva rasti, lengva aptikti gero matomumo sąlygomis."
 
-#: scripts/messier_marathon.ssc:101
+#: scripts/messier_marathon.ssc:115
 msgid "Visible to the naked eye, easier"
 msgstr "Matoma plika akimi, lengviau"
 
-#: scripts/messier_marathon.ssc:102 scripts/messier_marathon.ssc:154
-#: scripts/messier_marathon.ssc:175
+#: scripts/messier_marathon.ssc:116 scripts/messier_marathon.ssc:168
+#: scripts/messier_marathon.ssc:194
 msgid "Easy to locate and verify"
 msgstr "Lengva rasti ir patikrinti"
 
-#: scripts/messier_marathon.ssc:103 scripts/messier_marathon.ssc:104
+#: scripts/messier_marathon.ssc:117 scripts/messier_marathon.ssc:118
 msgid "Large, scattered"
 msgstr "Didelė, išsibarsčiusi"
 
-#: scripts/messier_marathon.ssc:105
+#: scripts/messier_marathon.ssc:119
 msgid "Bright, easy to verify, difficult to locate"
 msgstr "Ryški, lengvai patikrinama, sunkiai aptinkama"
 
-#: scripts/messier_marathon.ssc:106
+#: scripts/messier_marathon.ssc:120
 msgid "Large, difficult to locate, easy to confuse with NGC2506"
 msgstr "Didelė, sunkiai aptinkama, lengvai painiojama su NGC2506."
 
-#: scripts/messier_marathon.ssc:107
+#: scripts/messier_marathon.ssc:121
 msgid "Easy, more scattered"
 msgstr "Lengva, daugiau išsibarsčiusi"
 
-#: scripts/messier_marathon.ssc:108
+#: scripts/messier_marathon.ssc:122
 msgid "Easy, fuzzy"
 msgstr "Lengvas, miglotas"
 
-#: scripts/messier_marathon.ssc:109
+#: scripts/messier_marathon.ssc:123
 msgid "Easy, scattered"
 msgstr "Lengva, išbarstyta"
 
-#: scripts/messier_marathon.ssc:110
+#: scripts/messier_marathon.ssc:124
 msgid "Easy, large, scattered"
 msgstr "Lengva, didelė, išsibarsčiusi"
 
-#: scripts/messier_marathon.ssc:111
+#: scripts/messier_marathon.ssc:125
 msgid "Very close to M96 and M105"
 msgstr "Labai arti M96 ir M105"
 
-#: scripts/messier_marathon.ssc:112
+#: scripts/messier_marathon.ssc:126
 msgid "Easy to locate and verify, assist to verify M95 and M105"
 msgstr "Lengva rasti ir patikrinti, padeda patikrinti M95 ir M105"
 
-#: scripts/messier_marathon.ssc:113
+#: scripts/messier_marathon.ssc:127
 msgid "Dark"
 msgstr "Tamsus"
 
-#: scripts/messier_marathon.ssc:114
+#: scripts/messier_marathon.ssc:128
 msgid "Very close, it’s like M81 and M82"
 msgstr "Labai arti,  kaip M81 ir M82"
 
-#: scripts/messier_marathon.ssc:115
+#: scripts/messier_marathon.ssc:129
 msgid "There is NGC3628 nearby, don't think you have found a new comet"
 msgstr "Netoliese yra NGC3628, nemanykite, kad radote naują kometą."
 
-#: scripts/messier_marathon.ssc:116
+#: scripts/messier_marathon.ssc:130
 msgid "Like the darkened M33, require a high sky conditions"
 msgstr "Kaip ir tamsesnis M33, reikia gero matomumo"
 
-#: scripts/messier_marathon.ssc:117
+#: scripts/messier_marathon.ssc:131
 msgid "Difficult to locate, 4 stars of the inverted 7 shape beside"
 msgstr "Sunku rasti, 4 žvaigždės šalia apversto 7to formos "
 
-#: scripts/messier_marathon.ssc:118
+#: scripts/messier_marathon.ssc:132
 msgid "Easy, you can see the companion galaxy"
 msgstr "Lengva, galite pamatyti palydovę galaktiką"
 
-#: scripts/messier_marathon.ssc:119
+#: scripts/messier_marathon.ssc:133
 msgid "Easy to verify"
 msgstr "Lengva patikrinti"
 
-#: scripts/messier_marathon.ssc:120
+#: scripts/messier_marathon.ssc:134
 msgid "Not easy to locate, small, slightly dark"
 msgstr "Nelengva rasti, mažas, tamsokas"
 
-#: scripts/messier_marathon.ssc:121
+#: scripts/messier_marathon.ssc:135
 msgid "Not easy to locate, bright"
 msgstr "Nelengva rasti, šviesus"
 
-#: scripts/messier_marathon.ssc:122
+#: scripts/messier_marathon.ssc:136
 msgid "Not easy to locate, no bright stars nearby"
 msgstr "Nelengva rasti, netoli nėra ryškių žvaigždžių"
 
-#: scripts/messier_marathon.ssc:123
+#: scripts/messier_marathon.ssc:137
 msgid "Easy to locate"
 msgstr "Lengva rasti"
 
-#: scripts/messier_marathon.ssc:124
+#: scripts/messier_marathon.ssc:138
 msgid "Beside M60, it is easy to verify"
 msgstr "Prie M60, lengva patikrinti."
 
-#: scripts/messier_marathon.ssc:125
+#: scripts/messier_marathon.ssc:139
 msgid "It’s an easier one"
 msgstr "Tai yra lengvesnis ."
 
-#: scripts/messier_marathon.ssc:126
+#: scripts/messier_marathon.ssc:140
 msgid "As bright as M85, easy to verify"
 msgstr "Toks pat ryškus kaip M85, lengvai patikrinamas"
 
-#: scripts/messier_marathon.ssc:127
+#: scripts/messier_marathon.ssc:141
 msgid "Dark, hard to look"
 msgstr "Tamsi, sunku pamatyti"
 
-#: scripts/messier_marathon.ssc:128
+#: scripts/messier_marathon.ssc:142
 msgid "Easy to detect than M89, easy to locate"
 msgstr "Lengviau aptikti nei M89, lengviau rasti."
 
-#: scripts/messier_marathon.ssc:129
+#: scripts/messier_marathon.ssc:143
 msgid "Easy to locate, detect once"
 msgstr "Lengva rasti, aptikti kartą"
 
-#: scripts/messier_marathon.ssc:130
+#: scripts/messier_marathon.ssc:144
 msgid "There is an NGC4438 near M84 and M86, don't make a mistake"
 msgstr "Čia yra NGC4438 netoli M84 ir M86, nepadaryk klaidos."
 
-#: scripts/messier_marathon.ssc:131
+#: scripts/messier_marathon.ssc:145
 msgid "M84 are together, closer to NGC4438"
 msgstr "M84 yra kartu, arti NGC4438"
 
-#: scripts/messier_marathon.ssc:132
+#: scripts/messier_marathon.ssc:146
 msgid "Just above M90, almost like M90"
 msgstr "Šalia virš M90, beveik kaip M90"
 
-#: scripts/messier_marathon.ssc:133
+#: scripts/messier_marathon.ssc:147
 msgid "Look hard"
 msgstr "Žiūrėk įdėmiai"
 
-#: scripts/messier_marathon.ssc:134
+#: scripts/messier_marathon.ssc:148
 msgid "This bunch of things in the Virgo Cluster is not easy"
 msgstr "Ši daiktų puokštė Mergelės galaktikų spiečiuje nėra lengva."
 
-#: scripts/messier_marathon.ssc:135
+#: scripts/messier_marathon.ssc:149
 msgid "M99 is easier to verify than M98"
 msgstr "M99 yra lengviau patikrinti nei M98"
 
-#: scripts/messier_marathon.ssc:136
+#: scripts/messier_marathon.ssc:150
 msgid "First find M100 and then find M98 and M99"
 msgstr "Pirmiausia raskite M100, o po to raskite M98 ir M99"
 
-#: scripts/messier_marathon.ssc:137
+#: scripts/messier_marathon.ssc:151
 msgid "Far away, but very bright, easy to find"
 msgstr "Toli, bet labai šviesi, lengva rasti"
 
-#: scripts/messier_marathon.ssc:138
+#: scripts/messier_marathon.ssc:152
 msgid "Small, not easy to locate, a little difficult"
 msgstr "Mažas, sunkiai aptinkamas, šiek tiek sudėtinga."
 
-#: scripts/messier_marathon.ssc:139
+#: scripts/messier_marathon.ssc:153
 msgid "Not easy to locate, easy to verify"
 msgstr "Nelengva rasti, lengva patikrinti"
 
-#: scripts/messier_marathon.ssc:140
+#: scripts/messier_marathon.ssc:154
 msgid "Easy to locate and verify, small"
 msgstr "Lengva rasti ir patikrinti, maža"
 
-#: scripts/messier_marathon.ssc:141
+#: scripts/messier_marathon.ssc:155
 msgid "Easy to verify, a star 5 magnitude nearby"
 msgstr "Lengva patikrinti, šalia yra 5 ryškio žvaigždė"
 
-#: scripts/messier_marathon.ssc:142
+#: scripts/messier_marathon.ssc:156
 msgid "Visible to the naked eye, big, bright"
 msgstr "Matoma plika akimi, didelė, šviesi"
 
-#: scripts/messier_marathon.ssc:143
+#: scripts/messier_marathon.ssc:157
 msgid "Bright and big in the galaxies, not hard to find"
 msgstr "Ryškus ir didelis galaktikose, nesunku rasti."
 
-#: scripts/messier_marathon.ssc:144
+#: scripts/messier_marathon.ssc:158
 msgid "Bright, easy to verify"
 msgstr "Ryški, lengvai patikrinama"
 
-#: scripts/messier_marathon.ssc:145
+#: scripts/messier_marathon.ssc:159
 msgid "Easy to verify in a right location"
 msgstr "Lengva patikrinti tinkamoje vietoje"
 
-#: scripts/messier_marathon.ssc:146
+#: scripts/messier_marathon.ssc:160
 msgid "Famous, like the shoulder pole star"
 msgstr "Garsi, kaip striptizo žvaigždė"
 
-#: scripts/messier_marathon.ssc:147
+#: scripts/messier_marathon.ssc:161
 msgid "It may be easier to locate from the Dragon"
 msgstr "Gali būti lengviau rasti iš Slibino"
 
-#: scripts/messier_marathon.ssc:148
+#: scripts/messier_marathon.ssc:162
 msgid "Small, 20 times or more is still easy to detect"
 msgstr "Maža, 20 kartų ar daugiau, vis tiek lengva aptikti."
 
-#: scripts/messier_marathon.ssc:149
+#: scripts/messier_marathon.ssc:163
 msgid "More difficult than M57, not easy to locate, very small"
 msgstr "Sunkiau nei M57, nelengva rasti, labai mažas"
 
-#: scripts/messier_marathon.ssc:150
+#: scripts/messier_marathon.ssc:164
 msgid "Easy, small, looks like a cluster of stars 7-8 magnitude"
 msgstr "Lengvas, mažas, atrodo kaip 7-8 ryškio žvaigždžių spiečius ."
 
-#: scripts/messier_marathon.ssc:151
+#: scripts/messier_marathon.ssc:165
 msgid "Larger than imagined, very scattered, not easy to locate"
 msgstr "Didesnis nei įsivaizduota, labai išsibarstęs, nelengva rasti"
 
-#: scripts/messier_marathon.ssc:152
+#: scripts/messier_marathon.ssc:166
 msgid "Find M71 first, then find M27, and will be easier to locate"
 msgstr "Rasti M71 pirmiausia, tada rasti M27, ir bus lengviau rasti"
 
-#: scripts/messier_marathon.ssc:153
+#: scripts/messier_marathon.ssc:167
 msgid "Easy to locate, easy to verify in 50 binos"
 msgstr "Lengva rasti, lengva patikrinti 50ties  binokliu."
 
-#: scripts/messier_marathon.ssc:155
+#: scripts/messier_marathon.ssc:169
 msgid "Bright, like M13, easy to find"
 msgstr "Ryškus, kaip M13, lengvai surandamas"
 
-#: scripts/messier_marathon.ssc:156
+#: scripts/messier_marathon.ssc:170
 msgid "Detect it with M12, brighter than M12"
 msgstr "Aptikite tai su M12, šviesesnis nei M12"
 
-#: scripts/messier_marathon.ssc:157
+#: scripts/messier_marathon.ssc:171
 msgid "Difficult to locate, easy to verify"
 msgstr "Sunku rasti, lengva patikrinti"
 
-#: scripts/messier_marathon.ssc:158
+#: scripts/messier_marathon.ssc:172 scripts/messier_marathon.ssc:195
 msgid "Small, not easy to verify"
 msgstr "Mažas, sunku patikrinti"
 
-#: scripts/messier_marathon.ssc:159
+#: scripts/messier_marathon.ssc:173
 msgid "Bright, big, don't forget to detect NGC6144 nearby"
 msgstr "Ryškus, didelis, nepamirškite aptikti NGC6144 netoliese."
 
-#: scripts/messier_marathon.ssc:160
+#: scripts/messier_marathon.ssc:174
 msgid "Not easy to verify at low power, easy at high power"
 msgstr "Nelengva patikrinti mažu galingumu, lengva dideliu galingumu."
 
-#: scripts/messier_marathon.ssc:161
+#: scripts/messier_marathon.ssc:175
 msgid "Follow the line of M4 and Antares, easy to verify"
 msgstr "Sekite M4 ir Antario liniją, lengva patikrinti."
 
-#: scripts/messier_marathon.ssc:162
+#: scripts/messier_marathon.ssc:176
 msgid "Looking down from M19, darker than M19, but easy to verify"
 msgstr "Žiūrint iš M19, tamsesnis nei M19, bet lengvai patikrinamas"
 
-#: scripts/messier_marathon.ssc:163
+#: scripts/messier_marathon.ssc:177
 msgid "Easy to locate, bright, and almost like M13"
 msgstr "Lengva rasti, šviesi ir beveik kaip M13"
 
-#: scripts/messier_marathon.ssc:164
+#: scripts/messier_marathon.ssc:178
 msgid "Easy to locate M26 by M11"
 msgstr "Lengva rasti M26 pagal M11"
 
-#: scripts/messier_marathon.ssc:165
+#: scripts/messier_marathon.ssc:179
 msgid "Easy"
 msgstr "Lengva"
 
-#: scripts/messier_marathon.ssc:166 scripts/messier_marathon.ssc:179
+#: scripts/messier_marathon.ssc:180
+msgid "Rather large, Milky Way star patch with open cluster NGC6603"
+msgstr ""
+"Gana didelis Paukščių Tako žvaigždžių telkinys su padrikuoju spiečiumi "
+"NGC6603"
+
+#: scripts/messier_marathon.ssc:181 scripts/messier_marathon.ssc:200
 msgid "Difficult to locate, bright, easy to verify"
 msgstr "Sunku rasti, šviesi, lengva patikrinti"
 
-#: scripts/messier_marathon.ssc:167
+#: scripts/messier_marathon.ssc:182
 msgid "Beside M81, vertical to each other"
 msgstr "Prie M81, vertikaliai viena šalia kitos"
 
-#: scripts/messier_marathon.ssc:168
+#: scripts/messier_marathon.ssc:183
 msgid "Large, a little fuzzy"
 msgstr "Didelis, šiek tiek miglotas"
 
-#: scripts/messier_marathon.ssc:168
+#: scripts/messier_marathon.ssc:183
 msgid "Beside M20"
 msgstr "Prie M20"
 
-#: scripts/messier_marathon.ssc:169
+#: scripts/messier_marathon.ssc:184
 msgid "It’s not hard to see the diffuse nebula"
 msgstr "Nėra sunku pamatyti difuzinį ūką."
 
-#: scripts/messier_marathon.ssc:170
+#: scripts/messier_marathon.ssc:185
 msgid "Visible to the naked eye, extremely easy"
 msgstr "Matoma  plika akimi, labai lengva"
 
-#: scripts/messier_marathon.ssc:171
+#: scripts/messier_marathon.ssc:186
 msgid "Big, easy"
 msgstr "Didelis, lengvas"
 
-#: scripts/messier_marathon.ssc:171
+#: scripts/messier_marathon.ssc:186
 msgid "Easy to locate and verify, bright"
 msgstr "Lengva rasti ir patikrinti, šviesi"
 
-#: scripts/messier_marathon.ssc:172
+#: scripts/messier_marathon.ssc:187
 msgid "M13 second"
 msgstr "M13 antras"
 
-#: scripts/messier_marathon.ssc:173
+#: scripts/messier_marathon.ssc:187 scripts/messier_marathon.ssc:191
+msgid "Small and dim, difficult"
+msgstr "Mažas ir blankus, sunkus"
+
+#: scripts/messier_marathon.ssc:188
+msgid "A bit smaller and brighter than M69"
+msgstr "Šiek tiek mažesnio dydžio ir ryškesnis už M69"
+
+#: scripts/messier_marathon.ssc:189
+msgid "Very small and fuzzy, difficult"
+msgstr "Labai mažas ir neryškus, sunkus"
+
+#: scripts/messier_marathon.ssc:190
+msgid "Pretty large, faint, yet still clear"
+msgstr "Gana didelis, blankus, bet vis tiek aiškus"
+
+#: scripts/messier_marathon.ssc:192
 msgid "Too big, scattered, not easy to verify"
 msgstr "Per didelis, išsibarstęs, sunku patikrinti."
 
-#: scripts/messier_marathon.ssc:174
+#: scripts/messier_marathon.ssc:193
 msgid "Bigger than M6"
 msgstr "Didesnis nei M6"
 
-#: scripts/messier_marathon.ssc:176
+#: scripts/messier_marathon.ssc:195
+msgid "Small, difficult"
+msgstr "Mažas, sunkus"
+
+#: scripts/messier_marathon.ssc:196
+msgid "Faint, check the Y shape of the star pattern"
+msgstr "Silpnas, patikrinkite žvaigždžių Y formos struktūrą "
+
+#: scripts/messier_marathon.ssc:197
 msgid "Brighter than imagined, can be detected with 60 binos"
 msgstr ""
 "Ryškesnis nei įsivaizduojate, gali būti aptiktas naudojant 60-ies binoklį"
 
-#: scripts/messier_marathon.ssc:177
+#: scripts/messier_marathon.ssc:198
 msgid "Darker than M97, long strips, look hard"
 msgstr "Tamsesnis nei M97, ilgos juostos, žiūrėti įdėmiai."
 
-#: scripts/messier_marathon.ssc:178
+#: scripts/messier_marathon.ssc:199
 msgid "Easy to verify with more than 20 times binos"
 msgstr "Lengva patikrinti su daugiau nei 20 kartų didinimo binokliais."
 
-#: scripts/messier_marathon.ssc:180
+#: scripts/messier_marathon.ssc:201
 msgid "In the morning light, it looks too hard, dark"
 msgstr "Ryto šviesoje tai atrodo per sunku, tamsi."
 
-#: scripts/messier_marathon.ssc:289
+#: scripts/messier_marathon.ssc:202
+msgid "Very dim, the most difficult object to get!"
+msgstr "Labai blankus, sunkiausiai randamas objektas!"
+
+#: scripts/messier_marathon.ssc:296
 msgid "cannot be seen now"
 msgstr "nematoma dabar"

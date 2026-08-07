@@ -358,8 +358,8 @@ void MarkerMgr::markerVisibleTimeout()
 	{
 		if (m->timer == obj)
 		{
-			disconnect(m->timer, SIGNAL(timeout()), this, SLOT(markerVisibleTimeout()));
-			connect(m->timer, SIGNAL(timeout()), this, SLOT(markerDeleteTimeout()));
+			disconnect(m->timer, &QTimer::timeout, this, &MarkerMgr::markerVisibleTimeout);
+			connect(m->timer, &QTimer::timeout, this, &MarkerMgr::markerDeleteTimeout);
 			m->setFlagShow(false);
 			m->timer->setInterval(qRound(m->markerFader.getDuration()*1000.f));
 			m->timer->start();
@@ -376,7 +376,7 @@ int MarkerMgr::appendMarker(class StelMarker *m, int autoDeleteTimeoutMs)
 		m->timer = timer;
 		timer->setSingleShot(true);
 		timer->setInterval(autoDeleteTimeoutMs);
-		connect(timer, SIGNAL(timeout()), this, SLOT(markerVisibleTimeout()));
+		connect(timer, &QTimer::timeout, this, &MarkerMgr::markerVisibleTimeout);
 		timer->start();
 	}
 

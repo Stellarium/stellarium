@@ -3057,7 +3057,7 @@ static void CalcLon(double t,double lon[7])
 	}
 }
 
-static void CalcTass17Elem(double t,const double lon[7],int body,double elem[6])
+static void CalcTass17Elem(const double t, const double lon[7],const int body, double elem[6])
 {
 	const struct Tass17MultiTerm *tmt_begin,*tmt;
 	int i;
@@ -3143,24 +3143,23 @@ const double TASS17toJ2000[9] = {
 */
 
 #define TASS17_DIM (8*6)
-static double t_0 = -1e100;
-static double t_1 = -1e100;
-static double t_2 = -1e100;
-static double tass17_elem_0[TASS17_DIM];
-static double tass17_elem_1[TASS17_DIM];
-static double tass17_elem_2[TASS17_DIM];
+static double t_0[TASS17_NMOONS] = {-1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100};
+static double t_1[TASS17_NMOONS] = {-1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100};
+static double t_2[TASS17_NMOONS] = {-1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100};
+static double tass17_elem_0[TASS17_NMOONS][TASS17_DIM];
+static double tass17_elem_1[TASS17_NMOONS][TASS17_DIM];
+static double tass17_elem_2[TASS17_NMOONS][TASS17_DIM];
 /* 1 day: */
 #define DELTA_T 1.0
 
-static double tass17_jd0 = -1e100;
-static double tass17_elem[TASS17_DIM];
+static double tass17_jd0[TASS17_NMOONS] = {-1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100};
+static double tass17_elem[TASS17_NMOONS][TASS17_DIM];
 
 void CalcAllTass17Elem(const double t,double elem[TASS17_DIM], void *user)
 {
-	int body;
 	double lon[8];
 	CalcLon(t,lon);
-	for (body=0;body<=7;body++) CalcTass17Elem(t,lon,body,elem+(body*6));
+	for (int body=0;body<=7;body++) CalcTass17Elem(t,lon,body,elem+(body*6));
 }
 
 void GetTass17Coor(double jd,int body,double *xyz, double *xyzdot)
@@ -3174,25 +3173,25 @@ void GetTass17Coor(double jd,int body,double *xyz, double *xyzdot)
 void GetTass17OsculatingCoor(const double jd0,const double jd, const int body,double *xyz)
 {
 	double x[6];
-	if (jd0 != tass17_jd0)
+	if (jd0 != tass17_jd0[body])
 	{
 		const double t0 = jd0 - 2444240.0;
-		tass17_jd0 = jd0;
-		CalcInterpolatedElements(t0,tass17_elem,
+		tass17_jd0[body] = jd0;
+		CalcInterpolatedElements(t0,tass17_elem[body],
 					 TASS17_DIM,
 					 &CalcAllTass17Elem,DELTA_T,
-					 &t_0,tass17_elem_0,
-					 &t_1,tass17_elem_1,
-					 &t_2,tass17_elem_2,
+					 &t_0[body],tass17_elem_0[body],
+					 &t_1[body],tass17_elem_1[body],
+					 &t_2[body],tass17_elem_2[body],
 					 0);
 		/*
 		printf("GetTass17Coor(%d): %f %f  %f %f  %f %f\n",
 			body,
-			tass17_elem[body*6+0],tass17_elem[body*6+1],tass17_elem[body*6+2],
-			tass17_elem[body*6+3],tass17_elem[body*6+4],tass17_elem[body*6+5]);
+			tass17_elem[body][body*6+0],tass17_elem[body][body*6+1],tass17_elem[body][body*6+2],
+			tass17_elem[body][body*6+3],tass17_elem[body][body*6+4],tass17_elem[body][body*6+5]);
 		*/
 	}
-	EllipticToRectangularN(tass17bodies[body].mu,tass17_elem+(body*6),jd-jd0,x);
+	EllipticToRectangularN(tass17bodies[body].mu,tass17_elem[body]+(body*6),jd-jd0,x);
 	xyz[0] = TASS17toVSOP87[0]*x[0]+TASS17toVSOP87[1]*x[1]+TASS17toVSOP87[2]*x[2];
 	xyz[1] = TASS17toVSOP87[3]*x[0]+TASS17toVSOP87[4]*x[1]+TASS17toVSOP87[5]*x[2];
 	xyz[2] = TASS17toVSOP87[6]*x[0]+TASS17toVSOP87[7]*x[1]+TASS17toVSOP87[8]*x[2];

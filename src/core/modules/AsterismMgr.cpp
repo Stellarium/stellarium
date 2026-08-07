@@ -93,10 +93,9 @@ void AsterismMgr::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
-	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
-			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+	connect(objectManager, &StelObjectMgr::selectedObjectChanged, this, &AsterismMgr::selectedObjectChange);
 	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, &StelApp::languageChanged, this, &AsterismMgr::updateI18n);
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &AsterismMgr::updateSkyCulture);
 
 	QString displayGroup = N_("Display Options");
@@ -164,7 +163,7 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 					it.remove();
 				}
 			}
-			qInfo() << "Skyculture" << currentSkyCultureID << "configured to exclude asterisms referenced from" << excludeRefs;
+			qInfo() << "AsterismMgr: Skyculture" << currentSkyCultureID << "configured to exclude asterisms referenced from" << excludeRefs;
 		}
 
 		for (unsigned n = 0, m=0; n < asterisms.size(); ++n, ++m)

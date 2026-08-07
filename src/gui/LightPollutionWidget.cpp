@@ -33,13 +33,13 @@ void LightPollutionWidget::setup()
 
 	ui->manualSlider->setTracking(true);
 	connect(ui->manualSlider, &QSlider::valueChanged, this, &LightPollutionWidget::onSliderMoved);
-	connect(ui->fromSQMmag_SB, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	connect(ui->fromSQMmag_SB, qOverload<double>(&QDoubleSpinBox::valueChanged),
 		this, &LightPollutionWidget::onSpinboxEdited);
-	connect(ui->fromSQMcdm2_logSB, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+	connect(ui->fromSQMcdm2_logSB, qOverload<double>(&QDoubleSpinBox::valueChanged),
 		this, &LightPollutionWidget::onSpinboxEdited);
-	connect(ui->modeCB, QOverload<int>::of(&QComboBox::currentIndexChanged),
+	connect(ui->modeCB, qOverload<int>(&QComboBox::currentIndexChanged),
 		this, [this](const int index){ setMode(static_cast<Mode>(index)); });
-	connect(ui->unitCB, QOverload<int>::of(&QComboBox::currentIndexChanged),
+	connect(ui->unitCB, qOverload<int>(&QComboBox::currentIndexChanged),
 		this, [this](const int index){ setUnit(static_cast<Unit>(index)); });
 
 	const auto luminanceProp = StelApp::getInstance().getStelPropertyManager()->getProperty(PROPERTY_LUMINANCE);

@@ -132,6 +132,7 @@ Oculars::Oculars()
 	, flagGuiPanelEnabled(false)
 	, flagDMSDegrees(false)
 	, flagHorizontalCoordinates(false)
+	, flagShowCCDCenter(true)
 	, flagSemiTransparency(false)
 	, transparencyMask(85)
 	, flagHideGridsLines(false)
@@ -167,6 +168,7 @@ Oculars::Oculars()
 	, guiPanelFontSize(StelApp::getInstance().getScreenFontSize() * GUI_PANEL_FONT_SIZE_FACTOR)
 	, textColor(0.)
 	, lineColor(0.)
+	, reticleColor(0.)
 	, focuserColor(0.)
 	, selectedSSO(Q_NULLPTR)
 	, actualFOV(0.)
@@ -334,6 +336,7 @@ void Oculars::deinit()
 	settings->setValue("limit_stellar_magnitude_oculars", flagLimitStarsOculars);
 	settings->setValue("text_color", textColor.toStr());
 	settings->setValue("line_color", lineColor.toStr());
+	settings->setValue("reticle_color", reticleColor.toStr());
 	settings->setValue("focuser_color", focuserColor.toStr());
 	settings->sync();
 
@@ -635,6 +638,7 @@ void Oculars::init()
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
 		textColor=Vec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
 		lineColor=Vec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
+		reticleColor=Vec3f(settings->value("reticle_color", "1.00,0.00,0.00").toString());
 		telradFOV=Vec4f(settings->value("telrad_fov", "0.5,2.0,4.0,0.0").toString());
 		focuserColor=Vec3f(settings->value("focuser_color", "0.0,0.67,1.0").toString());
 
@@ -645,6 +649,7 @@ void Oculars::init()
 		// For historical reasons, name of .ini entry and description of checkbox (and therefore flag name) are reversed.
 		setFlagDMSDegrees( ! settings->value("use_decimal_degrees", false).toBool());
 		setFlagHorizontalCoordinates(settings->value("use_horizontal_coordinates", false).toBool());
+		setFlagShowCCDCenter(settings->value("show_ccd_center", true).toBool());
 		setFlagAutoLimitMagnitude(settings->value("autolimit_stellar_magnitude", true).toBool());
 		flagLimitStarsOculars=settings->value("limit_stellar_magnitude_oculars", false).toBool();
 		magLimitStarsOculars=settings->value("limit_stellar_magnitude_oculars_val", 12.).toDouble();
@@ -1958,14 +1963,17 @@ void Oculars::paintCCDBounds()
 		const double textRotationAngle = 180/M_PI * std::atan2(frameRightWinDir[1], frameRightWinDir[0]);
 		QTransform transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(textRotationAngle);
 		QPoint a, b;
-		// draw cross at center
-		const int cross = qRound(10 * params.devicePixelsPerPixel); // use permanent size of cross (10px)
-		a = transform.map(QPoint(-cross, -cross));
-		b = transform.map(QPoint(cross, cross));
-		painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
-		a = transform.map(QPoint(-cross, cross));
-		b = transform.map(QPoint(cross, -cross));
-		painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+		if (getFlagShowCCDCenter())
+		{
+			// draw cross at center
+			const int cross = qRound(10 * params.devicePixelsPerPixel); // use permanent size of cross (10px)
+			a = transform.map(QPoint(-cross, -cross));
+			b = transform.map(QPoint(cross, cross));
+			painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+			a = transform.map(QPoint(-cross, cross));
+			b = transform.map(QPoint(cross, -cross));
+			painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+		}
 		// calculate coordinates of the center and show it
 		Vec3d centerPosition;
 		equatProj->unProject(centerScreen[0], centerScreen[1], centerPosition);
@@ -2135,7 +2143,7 @@ void Oculars::paintCrosshairs()
 	}
 	// Draw the lines
 	StelPainter painter(projector);
-	painter.setColor(lineColor);
+	painter.setColor(reticleColor);
 	QPoint a, b;
 	int hw = qRound(length);
 	QTransform ch_transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-polarAngle);
@@ -2187,13 +2195,8 @@ void Oculars::paintOcularMask(const StelCore *core)
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
-		//painter.setColor(lineColor); // let's use original color
-		reticleTexture->bind();
-		/* Why it need?
-		int textureHeight;
-		int textureWidth;
-		reticleTexture->getDimensions(textureWidth, textureHeight);
-		*/
+		painter.setColor(reticleColor);
+		reticleTexture->bind();		
 		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], static_cast<float>(inner / params.devicePixelsPerPixel), static_cast<float>(reticleRotation));
 	}
 
@@ -2263,7 +2266,8 @@ void Oculars::paintOcularMask(const StelCore *core)
 		else
 			polarAngle -= 90.0;
 
-		//painter.setColor(lineColor); // let's use original color
+		// TODO: [v26.3] add ability to use user defined color of protractors
+		painter.setColor(1.f,0.f,0.f); // let's use red color for protractors
 		bool flipH = core->getFlipHorz();
 		bool flipV = core->getFlipVert();
 		if (flipH && flipV)
@@ -2875,6 +2879,19 @@ void Oculars::setFlagHorizontalCoordinates(const bool b)
 bool Oculars::getFlagHorizontalCoordinates() const
 {
 	return flagHorizontalCoordinates;
+}
+
+void Oculars::setFlagShowCCDCenter(const bool b)
+{
+	flagShowCCDCenter = b;
+	settings->setValue("show_ccd_center", b);
+	settings->sync();
+	emit flagShowCCDCenterChanged(b);
+}
+
+bool Oculars::getFlagShowCCDCenter() const
+{
+	return flagShowCCDCenter;
 }
 
 void Oculars::setFlagRequireSelection(const bool b)

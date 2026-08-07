@@ -23,9 +23,10 @@ skills in image processing.
 Version 25.1 introduces a completely new format for skyculture data.\newFeature{25.1} 
 If you are interested in the old format, please refer to the 24.4 edition of the User Guide.
 In case you have created your own skycultures in the old format, we have created a format converter  described in section~\ref{ch:SkyCultures:converter}.
+For new skycultures, a dedicated plugin assists you (\ref{sec:plugins:SCM}).
 
 
-If you add a new sky culture, please adhere to this description for an optimal result!
+If you add a new or extend an existing sky culture, please adhere to this description for an optimal result!
 Some features regarding translation and multilinguality have evolved
 over the years, and not all sky cultures currently included in
 Stellarium adhere to the standards described in the following
@@ -554,6 +555,8 @@ where
 		This is not translatable or adaptable to user language conventions, but may include extended diacritics. 
 		An example is Wylie for Tibetan, which is not meant to help in pronunciation.  
 	    \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
+	    \item[\jtag{context}] (optional) Short english explanation that helps to disambiguate terminology. Not displayed in the program.
+	    \item[\jtag{translators\_comments}] (optional) English explanations that help in translation on Transifex. Not displayed in the program.
 	\end{description}
 
 	These names are used in the sky culture name style settings (s.~\ref{sec:gui:view:skyculture}). 
@@ -730,7 +733,7 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 				 the short label is displayed when activating abbbreviated labels (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
 				 certain abbreviations from being displayed at all, let them start with a dot. 				 
 \item[\jtag{common\_name}] Another dict with entries \jtag{native} (as used in the source), \jtag{english} (the translatable english name), 
-                \jtag{pronounce}, \jtag{transliteration}, \jtag{IPA} and \jtag{byname} as defined for constellations,
+                \jtag{pronounce}, \jtag{transliteration}, \jtag{IPA}, \jtag{byname}, \jtag{context} and \jtag{translators\_comments} as defined for constellations,
 				and an optional array \jtag{references} which lists from which sources (from \ref{SC:references}) this asterism was taken. 
 
 				Collecting sources and giving such references is always a good idea. If you feel ther are more in the collection than you like, 
@@ -901,9 +904,10 @@ Names for stars, constellations, \newFeature{25.2}asterisms, planets and DSOs ca
     \item[\jtag{transliteration}] (optional) a scientific Latin-character based transliteration where applicable. Not translatable to user language, but may use extended diacritics.
 	The scheme may not be helpful as pronunciation aid. For example, Wylie for Tibetan.
     \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
-    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3} May be helpful to explain mythological figures. 
+    \item[\jtag{byname}] an optional explanatory addition to the name for constellations and stars only. \newFeature{25.3} May be helpful to explain mythological figures. 
 	This is translated to users' language, but is not included in search functions.
-    \item[\jtag{translator\_comments}] (optional):  comments to be shown to translators on Transifex.    
+    \item[\jtag{context}] (optional) Short english explanation that helps to disambiguate terminology. Not displayed in the program.
+    \item[\jtag{translators\_comments}] (optional):  comments to be shown to translators on Transifex.
     \item[\jtag{references}] (optional): array of integers, referring to the references list in \file{description.md}. 
 \end{description}
 
@@ -1001,8 +1005,9 @@ Known tags are
 \item[\jtag{english}] English meaning
 \item[\jtag{native}] (optional) Native name. May be in native glyphs when supported in UTF8.
 \item[\jtag{pronounce}] (optional) Native name in European glyphs, if needed. For Chinese, expect Pinyin here.
-%\item[\jtag{transliteration}] (optional) Scientific transliteration of the native name in European glyphs, if needed.
-%\item[\jtag{IPA}] (optional) International Phonetic Alphabet.
+\item[\jtag{transliteration}] (optional) Scientific transliteration of the native name in European glyphs, if needed.
+\item[\jtag{IPA}] (optional) International Phonetic Alphabet.
+\item[\jtag{context}] (optional) Short english explanation that helps to disambiguate terminology. Not displayed in the program.
 \item[\jtag{translators\_comments}] (optional) English explanations that help in translation. Not displayed in the program.
 \item[\jtag{references}]  (optional) the sources for these names where applicable
 \end{description}
@@ -1014,7 +1019,7 @@ The large number\newFeature{25.2} of label combinations requires storing them in
 \begin{description}
 \item{\texttt{Native}} to show the native name in native glyphs.
 \item{\texttt{Pronounce}} to show a Latin-character based transliteration usable as pronunciation aid.
-\item{\texttt{Translit}} to show a scienticic transliteration that is not necessarily aimed at pronunciation.
+\item{\texttt{Translit}} to show a scientific transliteration that is not necessarily aimed at pronunciation.
 \item{\texttt{Translated}} to show the meaning of the name translated to user language. 
 \item{\texttt{IPA}} to show the name in International Phonetic Alphabet.
 \item{\texttt{Modern}} to show the contemporary scientific object name.
