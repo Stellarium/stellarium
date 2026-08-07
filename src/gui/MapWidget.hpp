@@ -49,10 +49,15 @@ public:
 	void setLocationFilter(double longitude, double latitude, double searchRadius);
 
 	void setMap(const QPixmap &map);
+
+	void getMapView(double& centerLongitude, double& centerLatitude,
+	                double& zoom) const;
+	void setMapView(double centerLongitude, double centerLatitude, double zoom);
 	
 signals:
 	//! Signal emitted when we click on the map. It also delivers the color value at the clicked point.
 	void positionChanged(double longitude, double latitude, const QColor &color);
+	void mapViewChanged(double centerLongitude, double centerLatitude, double zoom);
 
 protected:
 	void mousePressEvent(QMouseEvent* event) override;
@@ -77,6 +82,7 @@ protected:
 private:
 	void makeSearchAreaOutline(int width, int height);
 	void updateScaledMapAndRect();
+	void emitMapViewChanged();
 
 private:
 	double markerLat=0, markerLon=0;

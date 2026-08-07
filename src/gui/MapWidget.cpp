@@ -99,6 +99,7 @@ void MapWidget::mouseMoveEvent(QMouseEvent* event)
 
 	currentDragShift = position(event, devicePixelRatioF()) - dragStart;
 	updateScaledMapAndRect();
+	emitMapViewChanged();
 }
 
 void MapWidget::mouseReleaseEvent(QMouseEvent* event)
@@ -113,6 +114,7 @@ void MapWidget::mouseReleaseEvent(QMouseEvent* event)
 	if (moved)
 	{
 		updateScaledMapAndRect();
+		emitMapViewChanged();
 		return;
 	}
 
@@ -149,6 +151,7 @@ void MapWidget::wheelEvent(QWheelEvent* event)
 	shift = (shift - offset) * zoomFactor + offset;
 
 	updateScaledMapAndRect();
+	emitMapViewChanged();
 }
 
 void MapWidget::setMap(const QPixmap &map)
@@ -156,6 +159,51 @@ void MapWidget::setMap(const QPixmap &map)
 	this->map = map;
 	scaledMap = {};
 	updateScaledMapAndRect();
+}
+
+void MapWidget::getMapView(double& centerLongitude,
+                           double& centerLatitude,
+                           double& currentZoom) const
+{
+	const double ratio = devicePixelRatioF();
+	const QPointF center(width() * ratio / 2.0,
+	                     height() * ratio / 2.0);
+	const auto view = mapPointToLonLat(center);
+	centerLongitude = view.longitude;
+	centerLatitude = view.latitude;
+	currentZoom = zoom;
+}
+
+void MapWidget::setMapView(double centerLongitude,
+                           double centerLatitude,
+                           double newZoom)
+{
+	if (newZoom < 1.0)
+		newZoom = 1.0;
+
+	const double ratio = devicePixelRatioF();
+	const QSizeF virtualSize(height() * 2.0 * ratio * newZoom,
+	                         height() * ratio * newZoom);
+	const QPointF widgetCenter(width() * ratio / 2.0,
+	                           height() * ratio / 2.0);
+	const QPointF mapRelative((centerLongitude + 180.0) / 360.0 * virtualSize.width(),
+	                          (centerLatitude - 90.0) / -180.0 * virtualSize.height());
+	const QPointF baseTopLeft(std::round((width() * ratio - virtualSize.width()) / 2.0),
+	                          std::round((height() * ratio - virtualSize.height()) / 2.0));
+
+	zoom = newZoom;
+	currentDragShift = QPointF(0, 0);
+	shift = widgetCenter - mapRelative - baseTopLeft;
+	updateScaledMapAndRect();
+}
+
+void MapWidget::emitMapViewChanged()
+{
+	double longitude = 0.0;
+	double latitude = 0.0;
+	double currentZoom = 1.0;
+	getMapView(longitude, latitude, currentZoom);
+	emit mapViewChanged(longitude, latitude, currentZoom);
 }
 
 void MapWidget::makeSearchAreaOutline(const int width, const int height)
