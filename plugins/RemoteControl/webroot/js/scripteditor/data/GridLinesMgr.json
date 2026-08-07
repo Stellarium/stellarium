@@ -1,0 +1,3328 @@
+[
+    {
+        "name": "setFlagGridlines",
+        "category": "Master Control",
+        "signature": "setFlagGridlines(bool displayed)",
+        "description": "Master switch to enable or disable ALL grids, lines, and points. When disabled (false), none of the celestial reference elements are displayed regardless of individual settings.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to enable all grid elements, false to disable all",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Enable all grids and lines\nGridLinesMgr.setFlagGridlines(true);\n\n// Disable all grids and lines\nGridLinesMgr.setFlagGridlines(false);\n\nvar isVisible = GridLinesMgr.getFlagGridlines();\ncore.debug(\"Grids enabled: \" + isVisible);"
+    },
+    {
+        "name": "getFlagGridlines",
+        "category": "Master Control",
+        "signature": "bool getFlagGridlines()",
+        "description": "Returns whether the master switch for grids and lines is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagGridlines()) {\n    core.debug(\"Grid elements are enabled\");\n} else {\n    core.debug(\"All grid elements are disabled\");\n}"
+    },
+    {
+        "name": "setFlagAllGrids",
+        "category": "Master Control",
+        "signature": "setFlagAllGrids(bool displayed)",
+        "description": "Master switch to enable or disable ALL coordinate grids (Azimuthal, Equatorial, Equatorial J2000, Ecliptic, Ecliptic J2000, Galactic, Supergalactic, Fixed Equatorial).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to enable all grids, false to disable all",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Enable all celestial coordinate grids\nGridLinesMgr.setFlagAllGrids(true);\n\n// Disable all grids\nGridLinesMgr.setFlagAllGrids(false);"
+    },
+    {
+        "name": "setFlagAllLines",
+        "category": "Master Control",
+        "signature": "setFlagAllLines(bool displayed)",
+        "description": "Master switch to enable or disable ALL great circle lines (Equator, Ecliptic, Meridian, Horizon, Colures, Precession Circles, etc.).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to enable all lines, false to disable all",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Enable all great circle lines\nGridLinesMgr.setFlagAllLines(true);\n\n// Disable all lines\nGridLinesMgr.setFlagAllLines(false);"
+    },
+    {
+        "name": "setFlagAllPoints",
+        "category": "Master Control",
+        "signature": "setFlagAllPoints(bool displayed)",
+        "description": "Master switch to enable or disable ALL reference points (Celestial Poles, Zenith/Nadir, Galactic Center, Equinoxes, Solstices, etc.).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to enable all points, false to disable all",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Enable all celestial reference points\nGridLinesMgr.setFlagAllPoints(true);\n\n// Disable all points\nGridLinesMgr.setFlagAllPoints(false);"
+    },
+    {
+        "name": "setFlagAzimuthalGrid",
+        "category": "Grids - Azimuthal",
+        "signature": "setFlagAzimuthalGrid(bool displayed)",
+        "description": "Shows or hides the Azimuthal Grid (Altitude/Azimuth coordinate system). This grid is fixed to the observer's horizon and is useful for telescope pointing.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show azimuthal grid, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show azimuthal (altitude/azimuth) grid\nGridLinesMgr.setFlagAzimuthalGrid(true);\n\n// Hide azimuthal grid\nGridLinesMgr.setFlagAzimuthalGrid(false);\n\nvar isVisible = GridLinesMgr.getFlagAzimuthalGrid();\ncore.debug(\"Azimuthal grid visible: \" + isVisible);"
+    },
+    {
+        "name": "getFlagAzimuthalGrid",
+        "category": "Grids - Azimuthal",
+        "signature": "bool getFlagAzimuthalGrid()",
+        "description": "Returns whether the Azimuthal Grid is currently visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagAzimuthalGrid()) {\n    core.debug(\"Azimuthal grid is visible\");\n}"
+    },
+    {
+        "name": "setColorAzimuthalGrid",
+        "category": "Colors - Azimuthal Grid",
+        "signature": "setColorAzimuthalGrid(Vec3f color)",
+        "description": "Sets the color of the Azimuthal Grid lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Set azimuthal grid to light blue\nvar lightBlue = core.vec3f(0.5, 0.7, 1.0);\nGridLinesMgr.setColorAzimuthalGrid(lightBlue);\n\nvar color = GridLinesMgr.getColorAzimuthalGrid();\ncore.debug(\"Color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "getColorAzimuthalGrid",
+        "category": "Colors - Azimuthal Grid",
+        "signature": "Vec3f getColorAzimuthalGrid()",
+        "description": "Returns the current color of the Azimuthal Grid.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorAzimuthalGrid();\ncore.debug(\"Color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setFlagEquatorGrid",
+        "category": "Grids - Equatorial",
+        "signature": "setFlagEquatorGrid(bool displayed)",
+        "description": "Shows or hides the Equatorial Grid (Right Ascension/Declination coordinate system for the current date).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show equatorial grid, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show equatorial grid\nGridLinesMgr.setFlagEquatorGrid(true);\n\n// Hide equatorial grid\nGridLinesMgr.setFlagEquatorGrid(false);"
+    },
+    {
+        "name": "getFlagEquatorGrid",
+        "category": "Grids - Equatorial",
+        "signature": "bool getFlagEquatorGrid()",
+        "description": "Returns whether the Equatorial Grid is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagEquatorGrid()) {\n    core.debug(\"Equatorial grid visible\");\n}"
+    },
+    {
+        "name": "setColorEquatorGrid",
+        "category": "Colors - Equatorial Grid",
+        "signature": "setColorEquatorGrid(Vec3f color)",
+        "description": "Sets the color of the Equatorial Grid lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var cyan = core.vec3f(0.0, 0.8, 0.9);\nGridLinesMgr.setColorEquatorGrid(cyan);"
+    },
+    {
+        "name": "getColorEquatorGrid",
+        "category": "Colors - Equatorial Grid",
+        "signature": "Vec3f getColorEquatorGrid()",
+        "description": "Returns the current color of the Equatorial Grid.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEquatorGrid();"
+    },
+    {
+        "name": "setFlagFixedEquatorGrid",
+        "category": "Grids - Fixed Equatorial",
+        "signature": "setFlagFixedEquatorGrid(bool displayed)",
+        "description": "Shows or hides the Fixed Equatorial Grid (Hour Angle/Declination coordinate system). This grid is fixed relative to the observer's location.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show fixed equatorial grid, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagFixedEquatorGrid(true);\nvar visible = GridLinesMgr.getFlagFixedEquatorGrid();"
+    },
+    {
+        "name": "getFlagFixedEquatorGrid",
+        "category": "Grids - Fixed Equatorial",
+        "signature": "bool getFlagFixedEquatorGrid()",
+        "description": "Returns whether the Fixed Equatorial Grid is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagFixedEquatorGrid()) {\n    core.debug(\"Fixed equatorial grid visible\");\n}"
+    },
+    {
+        "name": "setColorFixedEquatorGrid",
+        "category": "Colors - Fixed Equatorial Grid",
+        "signature": "setColorFixedEquatorGrid(Vec3f color)",
+        "description": "Sets the color of the Fixed Equatorial Grid lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var white = core.vec3f(1.0, 1.0, 1.0);\nGridLinesMgr.setColorFixedEquatorGrid(white);"
+    },
+    {
+        "name": "getColorFixedEquatorGrid",
+        "category": "Colors - Fixed Equatorial Grid",
+        "signature": "Vec3f getColorFixedEquatorGrid()",
+        "description": "Returns the current color of the Fixed Equatorial Grid.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorFixedEquatorGrid();"
+    },
+    {
+        "name": "setFlagEquatorJ2000Grid",
+        "category": "Grids - Equatorial J2000",
+        "signature": "setFlagEquatorJ2000Grid(bool displayed)",
+        "description": "Shows or hides the Equatorial Grid for the J2000.0 epoch. This grid is fixed to the celestial coordinate system of the year 2000.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show J2000 equatorial grid, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show equatorial grid for J2000 epoch\nGridLinesMgr.setFlagEquatorJ2000Grid(true);"
+    },
+    {
+        "name": "getFlagEquatorJ2000Grid",
+        "category": "Grids - Equatorial J2000",
+        "signature": "bool getFlagEquatorJ2000Grid()",
+        "description": "Returns whether the Equatorial J2000 Grid is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagEquatorJ2000Grid();"
+    },
+    {
+        "name": "setColorEquatorJ2000Grid",
+        "category": "Colors - Equatorial J2000 Grid",
+        "signature": "setColorEquatorJ2000Grid(Vec3f color)",
+        "description": "Sets the color of the Equatorial J2000 Grid lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var gray = core.vec3f(0.5, 0.5, 0.5);\nGridLinesMgr.setColorEquatorJ2000Grid(gray);"
+    },
+    {
+        "name": "getColorEquatorJ2000Grid",
+        "category": "Colors - Equatorial J2000 Grid",
+        "signature": "Vec3f getColorEquatorJ2000Grid()",
+        "description": "Returns the current color of the Equatorial J2000 Grid.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEquatorJ2000Grid();"
+    },
+    {
+        "name": "setFlagEclipticJ2000Grid",
+        "category": "Grids - Ecliptic J2000",
+        "signature": "setFlagEclipticJ2000Grid(bool displayed)",
+        "description": "Shows or hides the Ecliptic Grid for the J2000.0 epoch. The ecliptic is the apparent path of the Sun across the sky.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show J2000 ecliptic grid, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEclipticJ2000Grid(true);"
+    },
+    {
+        "name": "getFlagEclipticJ2000Grid",
+        "category": "Grids - Ecliptic J2000",
+        "signature": "bool getFlagEclipticJ2000Grid()",
+        "description": "Returns whether the Ecliptic J2000 Grid is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagEclipticJ2000Grid();"
+    },
+    {
+        "name": "setColorEclipticJ2000Grid",
+        "category": "Colors - Ecliptic J2000 Grid",
+        "signature": "setColorEclipticJ2000Grid(Vec3f color)",
+        "description": "Sets the color of the Ecliptic J2000 Grid lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var yellow = core.vec3f(1.0, 1.0, 0.0);\nGridLinesMgr.setColorEclipticJ2000Grid(yellow);"
+    },
+    {
+        "name": "getColorEclipticJ2000Grid",
+        "category": "Colors - Ecliptic J2000 Grid",
+        "signature": "Vec3f getColorEclipticJ2000Grid()",
+        "description": "Returns the current color of the Ecliptic J2000 Grid.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEclipticJ2000Grid();"
+    },
+    {
+        "name": "setFlagEclipticGrid",
+        "category": "Grids - Ecliptic",
+        "signature": "setFlagEclipticGrid(bool displayed)",
+        "description": "Shows or hides the Ecliptic Grid for the current date. The ecliptic grid updates with precession and nutation.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show ecliptic grid for current date, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEclipticGrid(true);"
+    },
+    {
+        "name": "getFlagEclipticGrid",
+        "category": "Grids - Ecliptic",
+        "signature": "bool getFlagEclipticGrid()",
+        "description": "Returns whether the Ecliptic Grid is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagEclipticGrid()) {\n    core.debug(\"Ecliptic grid visible\");\n}"
+    },
+    {
+        "name": "setColorEclipticGrid",
+        "category": "Colors - Ecliptic Grid",
+        "signature": "setColorEclipticGrid(Vec3f color)",
+        "description": "Sets the color of the Ecliptic Grid lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var gold = core.vec3f(1.0, 0.84, 0.0);\nGridLinesMgr.setColorEclipticGrid(gold);"
+    },
+    {
+        "name": "getColorEclipticGrid",
+        "category": "Colors - Ecliptic Grid",
+        "signature": "Vec3f getColorEclipticGrid()",
+        "description": "Returns the current color of the Ecliptic Grid.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEclipticGrid();"
+    },
+    {
+        "name": "setFlagGalacticGrid",
+        "category": "Grids - Galactic",
+        "signature": "setFlagGalacticGrid(bool displayed)",
+        "description": "Shows or hides the Galactic Grid (Galactic coordinate system based on the Milky Way's plane).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show galactic grid, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagGalacticGrid(true);"
+    },
+    {
+        "name": "getFlagGalacticGrid",
+        "category": "Grids - Galactic",
+        "signature": "bool getFlagGalacticGrid()",
+        "description": "Returns whether the Galactic Grid is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagGalacticGrid()) {\n    core.debug(\"Galactic grid visible\");\n}"
+    },
+    {
+        "name": "setColorGalacticGrid",
+        "category": "Colors - Galactic Grid",
+        "signature": "setColorGalacticGrid(Vec3f color)",
+        "description": "Sets the color of the Galactic Grid lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var magenta = core.vec3f(1.0, 0.0, 1.0);\nGridLinesMgr.setColorGalacticGrid(magenta);"
+    },
+    {
+        "name": "getColorGalacticGrid",
+        "category": "Colors - Galactic Grid",
+        "signature": "Vec3f getColorGalacticGrid()",
+        "description": "Returns the current color of the Galactic Grid.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorGalacticGrid();"
+    },
+    {
+        "name": "setFlagSupergalacticGrid",
+        "category": "Grids - Supergalactic",
+        "signature": "setFlagSupergalacticGrid(bool displayed)",
+        "description": "Shows or hides the Supergalactic Grid (coordinate system based on the local supercluster plane).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show supergalactic grid, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagSupergalacticGrid(true);"
+    },
+    {
+        "name": "getFlagSupergalacticGrid",
+        "category": "Grids - Supergalactic",
+        "signature": "bool getFlagSupergalacticGrid()",
+        "description": "Returns whether the Supergalactic Grid is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagSupergalacticGrid();"
+    },
+    {
+        "name": "setColorSupergalacticGrid",
+        "category": "Colors - Supergalactic Grid",
+        "signature": "setColorSupergalacticGrid(Vec3f color)",
+        "description": "Sets the color of the Supergalactic Grid lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var purple = core.vec3f(0.6, 0.2, 0.8);\nGridLinesMgr.setColorSupergalacticGrid(purple);"
+    },
+    {
+        "name": "getColorSupergalacticGrid",
+        "category": "Colors - Supergalactic Grid",
+        "signature": "Vec3f getColorSupergalacticGrid()",
+        "description": "Returns the current color of the Supergalactic Grid.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorSupergalacticGrid();"
+    },
+    {
+        "name": "setFlagEquatorLine",
+        "category": "Lines - Equator",
+        "signature": "setFlagEquatorLine(bool displayed)",
+        "description": "Shows or hides the Celestial Equator line (the projection of Earth's equator onto the celestial sphere for the current date).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show equator line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show celestial equator\nGridLinesMgr.setFlagEquatorLine(true);\n\n// Hide celestial equator\nGridLinesMgr.setFlagEquatorLine(false);"
+    },
+    {
+        "name": "getFlagEquatorLine",
+        "category": "Lines - Equator",
+        "signature": "bool getFlagEquatorLine()",
+        "description": "Returns whether the Celestial Equator line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagEquatorLine()) {\n    core.debug(\"Celestial equator visible\");\n}"
+    },
+    {
+        "name": "setFlagEquatorParts",
+        "category": "Lines - Equator",
+        "signature": "setFlagEquatorParts(bool displayed)",
+        "description": "Shows or hides partition marks (ticks) along the Celestial Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partition ticks, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEquatorParts(true);\nvar visible = GridLinesMgr.getFlagEquatorParts();"
+    },
+    {
+        "name": "getFlagEquatorParts",
+        "category": "Lines - Equator",
+        "signature": "bool getFlagEquatorParts()",
+        "description": "Returns whether partition marks on the Celestial Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagEquatorParts()) {\n    core.debug(\"Equator partitions visible\");\n}"
+    },
+    {
+        "name": "setFlagEquatorLabeled",
+        "category": "Lines - Equator",
+        "signature": "setFlagEquatorLabeled(bool displayed)",
+        "description": "Shows or hides labels (coordinate values) along the Celestial Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEquatorLabeled(true);"
+    },
+    {
+        "name": "getFlagEquatorLabeled",
+        "category": "Lines - Equator",
+        "signature": "bool getFlagEquatorLabeled()",
+        "description": "Returns whether labels on the Celestial Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagEquatorLabeled();"
+    },
+    {
+        "name": "setColorEquatorLine",
+        "category": "Colors - Equator Line",
+        "signature": "setColorEquatorLine(Vec3f color)",
+        "description": "Sets the color of the Celestial Equator line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var cyan = core.vec3f(0.0, 0.8, 0.9);\nGridLinesMgr.setColorEquatorLine(cyan);"
+    },
+    {
+        "name": "getColorEquatorLine",
+        "category": "Colors - Equator Line",
+        "signature": "Vec3f getColorEquatorLine()",
+        "description": "Returns the current color of the Celestial Equator line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEquatorLine();"
+    },
+    {
+        "name": "setFlagEquatorJ2000Line",
+        "category": "Lines - Equator J2000",
+        "signature": "setFlagEquatorJ2000Line(bool displayed)",
+        "description": "Shows or hides the Celestial Equator line for the J2000.0 epoch.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show J2000 equator line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEquatorJ2000Line(true);"
+    },
+    {
+        "name": "getFlagEquatorJ2000Line",
+        "category": "Lines - Equator J2000",
+        "signature": "bool getFlagEquatorJ2000Line()",
+        "description": "Returns whether the J2000 Celestial Equator line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagEquatorJ2000Line();"
+    },
+    {
+        "name": "setFlagEquatorJ2000Parts",
+        "category": "Lines - Equator J2000",
+        "signature": "setFlagEquatorJ2000Parts(bool displayed)",
+        "description": "Shows or hides partition marks on the J2000 Celestial Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEquatorJ2000Parts(true);"
+    },
+    {
+        "name": "getFlagEquatorJ2000Parts",
+        "category": "Lines - Equator J2000",
+        "signature": "bool getFlagEquatorJ2000Parts()",
+        "description": "Returns whether partition marks on the J2000 Celestial Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagEquatorJ2000Parts();"
+    },
+    {
+        "name": "setFlagEquatorJ2000Labeled",
+        "category": "Lines - Equator J2000",
+        "signature": "setFlagEquatorJ2000Labeled(bool displayed)",
+        "description": "Shows or hides labels on the J2000 Celestial Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEquatorJ2000Labeled(true);"
+    },
+    {
+        "name": "getFlagEquatorJ2000Labeled",
+        "category": "Lines - Equator J2000",
+        "signature": "bool getFlagEquatorJ2000Labeled()",
+        "description": "Returns whether labels on the J2000 Celestial Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagEquatorJ2000Labeled();"
+    },
+    {
+        "name": "setColorEquatorJ2000Line",
+        "category": "Colors - Equator J2000 Line",
+        "signature": "setColorEquatorJ2000Line(Vec3f color)",
+        "description": "Sets the color of the J2000 Celestial Equator line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var blue = core.vec3f(0.2, 0.4, 0.8);\nGridLinesMgr.setColorEquatorJ2000Line(blue);"
+    },
+    {
+        "name": "getColorEquatorJ2000Line",
+        "category": "Colors - Equator J2000 Line",
+        "signature": "Vec3f getColorEquatorJ2000Line()",
+        "description": "Returns the current color of the J2000 Celestial Equator line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEquatorJ2000Line();"
+    },
+    {
+        "name": "setFlagFixedEquatorLine",
+        "category": "Lines - Fixed Equator",
+        "signature": "setFlagFixedEquatorLine(bool displayed)",
+        "description": "Shows or hides the Fixed Equator line (Hour Angle/Declination reference).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show fixed equator line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagFixedEquatorLine(true);"
+    },
+    {
+        "name": "getFlagFixedEquatorLine",
+        "category": "Lines - Fixed Equator",
+        "signature": "bool getFlagFixedEquatorLine()",
+        "description": "Returns whether the Fixed Equator line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagFixedEquatorLine();"
+    },
+    {
+        "name": "setFlagFixedEquatorParts",
+        "category": "Lines - Fixed Equator",
+        "signature": "setFlagFixedEquatorParts(bool displayed)",
+        "description": "Shows or hides partition marks on the Fixed Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagFixedEquatorParts(true);"
+    },
+    {
+        "name": "getFlagFixedEquatorParts",
+        "category": "Lines - Fixed Equator",
+        "signature": "bool getFlagFixedEquatorParts()",
+        "description": "Returns whether partition marks on the Fixed Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagFixedEquatorParts();"
+    },
+    {
+        "name": "setFlagFixedEquatorLabeled",
+        "category": "Lines - Fixed Equator",
+        "signature": "setFlagFixedEquatorLabeled(bool displayed)",
+        "description": "Shows or hides labels on the Fixed Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagFixedEquatorLabeled(true);"
+    },
+    {
+        "name": "getFlagFixedEquatorLabeled",
+        "category": "Lines - Fixed Equator",
+        "signature": "bool getFlagFixedEquatorLabeled()",
+        "description": "Returns whether labels on the Fixed Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagFixedEquatorLabeled();"
+    },
+    {
+        "name": "setColorFixedEquatorLine",
+        "category": "Colors - Fixed Equator Line",
+        "signature": "setColorFixedEquatorLine(Vec3f color)",
+        "description": "Sets the color of the Fixed Equator line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var gray = core.vec3f(0.6, 0.6, 0.6);\nGridLinesMgr.setColorFixedEquatorLine(gray);"
+    },
+    {
+        "name": "getColorFixedEquatorLine",
+        "category": "Colors - Fixed Equator Line",
+        "signature": "Vec3f getColorFixedEquatorLine()",
+        "description": "Returns the current color of the Fixed Equator line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorFixedEquatorLine();"
+    },
+    {
+        "name": "setFlagEclipticLine",
+        "category": "Lines - Ecliptic",
+        "signature": "setFlagEclipticLine(bool displayed)",
+        "description": "Shows or hides the Ecliptic line (the apparent path of the Sun across the celestial sphere for the current date).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show ecliptic line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show ecliptic path\nGridLinesMgr.setFlagEclipticLine(true);\n\n// Hide ecliptic path\nGridLinesMgr.setFlagEclipticLine(false);"
+    },
+    {
+        "name": "getFlagEclipticLine",
+        "category": "Lines - Ecliptic",
+        "signature": "bool getFlagEclipticLine()",
+        "description": "Returns whether the Ecliptic line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagEclipticLine()) {\n    core.debug(\"Ecliptic path visible\");\n}"
+    },
+    {
+        "name": "setFlagEclipticParts",
+        "category": "Lines - Ecliptic",
+        "signature": "setFlagEclipticParts(bool displayed)",
+        "description": "Shows or hides partition marks along the Ecliptic line (usually every 10 degrees).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show ecliptic partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEclipticParts(true);\nvar visible = GridLinesMgr.getFlagEclipticParts();"
+    },
+    {
+        "name": "getFlagEclipticParts",
+        "category": "Lines - Ecliptic",
+        "signature": "bool getFlagEclipticParts()",
+        "description": "Returns whether partition marks on the Ecliptic are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagEclipticParts()) {\n    core.debug(\"Ecliptic partitions visible\");\n}"
+    },
+    {
+        "name": "setFlagEclipticLabeled",
+        "category": "Lines - Ecliptic",
+        "signature": "setFlagEclipticLabeled(bool displayed)",
+        "description": "Shows or hides labels (longitude values) along the Ecliptic line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show ecliptic labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEclipticLabeled(true);"
+    },
+    {
+        "name": "getFlagEclipticLabeled",
+        "category": "Lines - Ecliptic",
+        "signature": "bool getFlagEclipticLabeled()",
+        "description": "Returns whether labels on the Ecliptic are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagEclipticLabeled();"
+    },
+    {
+        "name": "setFlagEclipticDatesLabeled",
+        "category": "Lines - Ecliptic",
+        "signature": "setFlagEclipticDatesLabeled(bool displayed)",
+        "description": "Shows or hides date labels along the Ecliptic indicating the Sun's position throughout the current year.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show date labels on ecliptic, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show dates along the ecliptic (Sun's position)\nGridLinesMgr.setFlagEclipticDatesLabeled(true);\n\nvar visible = GridLinesMgr.getFlagEclipticDatesLabeled();\ncore.debug(\"Ecliptic date labels visible: \" + visible);"
+    },
+    {
+        "name": "getFlagEclipticDatesLabeled",
+        "category": "Lines - Ecliptic",
+        "signature": "bool getFlagEclipticDatesLabeled()",
+        "description": "Returns whether date labels on the Ecliptic are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagEclipticDatesLabeled()) {\n    core.debug(\"Ecliptic date labels are visible\");\n}"
+    },
+    {
+        "name": "setColorEclipticLine",
+        "category": "Colors - Ecliptic Line",
+        "signature": "setColorEclipticLine(Vec3f color)",
+        "description": "Sets the color of the Ecliptic line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var yellow = core.vec3f(1.0, 1.0, 0.0);\nGridLinesMgr.setColorEclipticLine(yellow);"
+    },
+    {
+        "name": "getColorEclipticLine",
+        "category": "Colors - Ecliptic Line",
+        "signature": "Vec3f getColorEclipticLine()",
+        "description": "Returns the current color of the Ecliptic line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEclipticLine();"
+    },
+    {
+        "name": "setFlagEclipticJ2000Line",
+        "category": "Lines - Ecliptic J2000",
+        "signature": "setFlagEclipticJ2000Line(bool displayed)",
+        "description": "Shows or hides the Ecliptic line for the J2000.0 epoch.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show J2000 ecliptic line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEclipticJ2000Line(true);"
+    },
+    {
+        "name": "getFlagEclipticJ2000Line",
+        "category": "Lines - Ecliptic J2000",
+        "signature": "bool getFlagEclipticJ2000Line()",
+        "description": "Returns whether the J2000 Ecliptic line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagEclipticJ2000Line();"
+    },
+    {
+        "name": "setFlagEclipticJ2000Parts",
+        "category": "Lines - Ecliptic J2000",
+        "signature": "setFlagEclipticJ2000Parts(bool displayed)",
+        "description": "Shows or hides partition marks on the J2000 Ecliptic line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEclipticJ2000Parts(true);"
+    },
+    {
+        "name": "getFlagEclipticJ2000Parts",
+        "category": "Lines - Ecliptic J2000",
+        "signature": "bool getFlagEclipticJ2000Parts()",
+        "description": "Returns whether partition marks on the J2000 Ecliptic are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagEclipticJ2000Parts();"
+    },
+    {
+        "name": "setFlagEclipticJ2000Labeled",
+        "category": "Lines - Ecliptic J2000",
+        "signature": "setFlagEclipticJ2000Labeled(bool displayed)",
+        "description": "Shows or hides labels on the J2000 Ecliptic line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEclipticJ2000Labeled(true);"
+    },
+    {
+        "name": "getFlagEclipticJ2000Labeled",
+        "category": "Lines - Ecliptic J2000",
+        "signature": "bool getFlagEclipticJ2000Labeled()",
+        "description": "Returns whether labels on the J2000 Ecliptic are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagEclipticJ2000Labeled();"
+    },
+    {
+        "name": "setColorEclipticJ2000Line",
+        "category": "Colors - Ecliptic J2000 Line",
+        "signature": "setColorEclipticJ2000Line(Vec3f color)",
+        "description": "Sets the color of the J2000 Ecliptic line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var orange = core.vec3f(1.0, 0.65, 0.0);\nGridLinesMgr.setColorEclipticJ2000Line(orange);"
+    },
+    {
+        "name": "getColorEclipticJ2000Line",
+        "category": "Colors - Ecliptic J2000 Line",
+        "signature": "Vec3f getColorEclipticJ2000Line()",
+        "description": "Returns the current color of the J2000 Ecliptic line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEclipticJ2000Line();"
+    },
+    {
+        "name": "setFlagInvariablePlaneLine",
+        "category": "Lines - Special Planes",
+        "signature": "setFlagInvariablePlaneLine(bool displayed)",
+        "description": "Shows or hides the Invariable Plane of the Solar System (the plane perpendicular to the total angular momentum vector of the solar system).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show invariable plane line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagInvariablePlaneLine(true);\nvar visible = GridLinesMgr.getFlagInvariablePlaneLine();"
+    },
+    {
+        "name": "getFlagInvariablePlaneLine",
+        "category": "Lines - Special Planes",
+        "signature": "bool getFlagInvariablePlaneLine()",
+        "description": "Returns whether the Invariable Plane line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagInvariablePlaneLine()) {\n    core.debug(\"Invariable plane visible\");\n}"
+    },
+    {
+        "name": "setColorInvariablePlaneLine",
+        "category": "Colors - Special Planes",
+        "signature": "setColorInvariablePlaneLine(Vec3f color)",
+        "description": "Sets the color of the Invariable Plane line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var lightGreen = core.vec3f(0.5, 0.8, 0.5);\nGridLinesMgr.setColorInvariablePlaneLine(lightGreen);"
+    },
+    {
+        "name": "getColorInvariablePlaneLine",
+        "category": "Colors - Special Planes",
+        "signature": "Vec3f getColorInvariablePlaneLine()",
+        "description": "Returns the current color of the Invariable Plane line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorInvariablePlaneLine();"
+    },
+    {
+        "name": "setFlagSolarEquatorLine",
+        "category": "Lines - Special Planes",
+        "signature": "setFlagSolarEquatorLine(bool displayed)",
+        "description": "Shows or hides the projected Solar Equator line (the Sun's equatorial plane projected onto the celestial sphere).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show solar equator line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagSolarEquatorLine(true);"
+    },
+    {
+        "name": "getFlagSolarEquatorLine",
+        "category": "Lines - Special Planes",
+        "signature": "bool getFlagSolarEquatorLine()",
+        "description": "Returns whether the Solar Equator line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagSolarEquatorLine();"
+    },
+    {
+        "name": "setFlagSolarEquatorParts",
+        "category": "Lines - Special Planes",
+        "signature": "setFlagSolarEquatorParts(bool displayed)",
+        "description": "Shows or hides partition marks on the Solar Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagSolarEquatorParts(true);"
+    },
+    {
+        "name": "getFlagSolarEquatorParts",
+        "category": "Lines - Special Planes",
+        "signature": "bool getFlagSolarEquatorParts()",
+        "description": "Returns whether partition marks on the Solar Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagSolarEquatorParts();"
+    },
+    {
+        "name": "setFlagSolarEquatorLabeled",
+        "category": "Lines - Special Planes",
+        "signature": "setFlagSolarEquatorLabeled(bool displayed)",
+        "description": "Shows or hides labels on the Solar Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagSolarEquatorLabeled(true);"
+    },
+    {
+        "name": "getFlagSolarEquatorLabeled",
+        "category": "Lines - Special Planes",
+        "signature": "bool getFlagSolarEquatorLabeled()",
+        "description": "Returns whether labels on the Solar Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagSolarEquatorLabeled();"
+    },
+    {
+        "name": "setColorSolarEquatorLine",
+        "category": "Colors - Special Planes",
+        "signature": "setColorSolarEquatorLine(Vec3f color)",
+        "description": "Sets the color of the Solar Equator line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var red = core.vec3f(1.0, 0.3, 0.3);\nGridLinesMgr.setColorSolarEquatorLine(red);"
+    },
+    {
+        "name": "getColorSolarEquatorLine",
+        "category": "Colors - Special Planes",
+        "signature": "Vec3f getColorSolarEquatorLine()",
+        "description": "Returns the current color of the Solar Equator line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorSolarEquatorLine();"
+    },
+    {
+        "name": "setFlagPrecessionCircles",
+        "category": "Lines - Precession",
+        "signature": "setFlagPrecessionCircles(bool displayed)",
+        "description": "Shows or hides the precession circles (paths traced by the celestial poles over thousands of years due to Earth's axial precession).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show precession circles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show the path of celestial pole precession\nGridLinesMgr.setFlagPrecessionCircles(true);\n\nvar visible = GridLinesMgr.getFlagPrecessionCircles();"
+    },
+    {
+        "name": "getFlagPrecessionCircles",
+        "category": "Lines - Precession",
+        "signature": "bool getFlagPrecessionCircles()",
+        "description": "Returns whether precession circles are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagPrecessionCircles()) {\n    core.debug(\"Precession circles visible\");\n}"
+    },
+    {
+        "name": "setFlagPrecessionParts",
+        "category": "Lines - Precession",
+        "signature": "setFlagPrecessionParts(bool displayed)",
+        "description": "Shows or hides partition marks (century ticks) on the precession circles.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show precession partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagPrecessionParts(true);\nvar visible = GridLinesMgr.getFlagPrecessionParts();"
+    },
+    {
+        "name": "getFlagPrecessionParts",
+        "category": "Lines - Precession",
+        "signature": "bool getFlagPrecessionParts()",
+        "description": "Returns whether partition marks on precession circles are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagPrecessionParts()) {\n    core.debug(\"Precession century marks visible\");\n}"
+    },
+    {
+        "name": "setFlagPrecessionLabeled",
+        "category": "Lines - Precession",
+        "signature": "setFlagPrecessionLabeled(bool displayed)",
+        "description": "Shows or hides year labels on the precession circles (showing which century the pole position corresponds to).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show precession labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagPrecessionLabeled(true);"
+    },
+    {
+        "name": "getFlagPrecessionLabeled",
+        "category": "Lines - Precession",
+        "signature": "bool getFlagPrecessionLabeled()",
+        "description": "Returns whether labels on precession circles are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagPrecessionLabeled();"
+    },
+    {
+        "name": "setColorPrecessionCircles",
+        "category": "Colors - Precession",
+        "signature": "setColorPrecessionCircles(Vec3f color)",
+        "description": "Sets the color of the precession circles.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var blue = core.vec3f(0.3, 0.5, 1.0);\nGridLinesMgr.setColorPrecessionCircles(blue);"
+    },
+    {
+        "name": "getColorPrecessionCircles",
+        "category": "Colors - Precession",
+        "signature": "Vec3f getColorPrecessionCircles()",
+        "description": "Returns the current color of the precession circles.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorPrecessionCircles();"
+    },
+    {
+        "name": "setFlagMeridianLine",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "setFlagMeridianLine(bool displayed)",
+        "description": "Shows or hides the Meridian line (the great circle passing through the celestial poles and the observer's zenith).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show meridian line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show the meridian (north-south line through zenith)\nGridLinesMgr.setFlagMeridianLine(true);\n\nvar visible = GridLinesMgr.getFlagMeridianLine();"
+    },
+    {
+        "name": "getFlagMeridianLine",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "bool getFlagMeridianLine()",
+        "description": "Returns whether the Meridian line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagMeridianLine()) {\n    core.debug(\"Meridian line visible\");\n}"
+    },
+    {
+        "name": "setFlagMeridianParts",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "setFlagMeridianParts(bool displayed)",
+        "description": "Shows or hides partition marks (altitude ticks) along the Meridian line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show meridian partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagMeridianParts(true);"
+    },
+    {
+        "name": "getFlagMeridianParts",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "bool getFlagMeridianParts()",
+        "description": "Returns whether partition marks on the Meridian are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagMeridianParts()) {\n    core.debug(\"Meridian altitude ticks visible\");\n}"
+    },
+    {
+        "name": "setFlagMeridianLabeled",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "setFlagMeridianLabeled(bool displayed)",
+        "description": "Shows or hides labels (altitude values) along the Meridian line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show meridian labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagMeridianLabeled(true);"
+    },
+    {
+        "name": "getFlagMeridianLabeled",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "bool getFlagMeridianLabeled()",
+        "description": "Returns whether labels on the Meridian are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagMeridianLabeled();"
+    },
+    {
+        "name": "setColorMeridianLine",
+        "category": "Colors - Meridian & Horizon",
+        "signature": "setColorMeridianLine(Vec3f color)",
+        "description": "Sets the color of the Meridian line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var white = core.vec3f(1.0, 1.0, 1.0);\nGridLinesMgr.setColorMeridianLine(white);"
+    },
+    {
+        "name": "getColorMeridianLine",
+        "category": "Colors - Meridian & Horizon",
+        "signature": "Vec3f getColorMeridianLine()",
+        "description": "Returns the current color of the Meridian line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorMeridianLine();"
+    },
+    {
+        "name": "setFlagHorizonLine",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "setFlagHorizonLine(bool displayed)",
+        "description": "Shows or hides the Horizon line (the circle where the sky meets the ground).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show horizon line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show the horizon circle\nGridLinesMgr.setFlagHorizonLine(true);\n\n// Hide the horizon circle\nGridLinesMgr.setFlagHorizonLine(false);"
+    },
+    {
+        "name": "getFlagHorizonLine",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "bool getFlagHorizonLine()",
+        "description": "Returns whether the Horizon line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagHorizonLine()) {\n    core.debug(\"Horizon line visible\");\n}"
+    },
+    {
+        "name": "setFlagHorizonParts",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "setFlagHorizonParts(bool displayed)",
+        "description": "Shows or hides partition marks (azimuth ticks) on the Horizon line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show horizon partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagHorizonParts(true);\nvar visible = GridLinesMgr.getFlagHorizonParts();"
+    },
+    {
+        "name": "getFlagHorizonParts",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "bool getFlagHorizonParts()",
+        "description": "Returns whether partition marks on the Horizon are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagHorizonParts()) {\n    core.debug(\"Azimuth ticks visible\");\n}"
+    },
+    {
+        "name": "setFlagHorizonLabeled",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "setFlagHorizonLabeled(bool displayed)",
+        "description": "Shows or hides labels (azimuth/direction labels) on the Horizon line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show horizon labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagHorizonLabeled(true);"
+    },
+    {
+        "name": "getFlagHorizonLabeled",
+        "category": "Lines - Meridian & Horizon",
+        "signature": "bool getFlagHorizonLabeled()",
+        "description": "Returns whether labels on the Horizon are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagHorizonLabeled();"
+    },
+    {
+        "name": "setColorHorizonLine",
+        "category": "Colors - Meridian & Horizon",
+        "signature": "setColorHorizonLine(Vec3f color)",
+        "description": "Sets the color of the Horizon line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var white = core.vec3f(1.0, 1.0, 1.0);\nGridLinesMgr.setColorHorizonLine(white);"
+    },
+    {
+        "name": "getColorHorizonLine",
+        "category": "Colors - Meridian & Horizon",
+        "signature": "Vec3f getColorHorizonLine()",
+        "description": "Returns the current color of the Horizon line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorHorizonLine();"
+    },
+    {
+        "name": "setFlagGalacticEquatorLine",
+        "category": "Lines - Galactic",
+        "signature": "setFlagGalacticEquatorLine(bool displayed)",
+        "description": "Shows or hides the Galactic Equator line (the plane of the Milky Way galaxy).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show galactic equator line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show the Milky Way's equatorial plane\nGridLinesMgr.setFlagGalacticEquatorLine(true);\n\nvar visible = GridLinesMgr.getFlagGalacticEquatorLine();"
+    },
+    {
+        "name": "getFlagGalacticEquatorLine",
+        "category": "Lines - Galactic",
+        "signature": "bool getFlagGalacticEquatorLine()",
+        "description": "Returns whether the Galactic Equator line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagGalacticEquatorLine()) {\n    core.debug(\"Galactic equator visible\");\n}"
+    },
+    {
+        "name": "setFlagGalacticEquatorParts",
+        "category": "Lines - Galactic",
+        "signature": "setFlagGalacticEquatorParts(bool displayed)",
+        "description": "Shows or hides partition marks on the Galactic Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagGalacticEquatorParts(true);"
+    },
+    {
+        "name": "getFlagGalacticEquatorParts",
+        "category": "Lines - Galactic",
+        "signature": "bool getFlagGalacticEquatorParts()",
+        "description": "Returns whether partition marks on the Galactic Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagGalacticEquatorParts();"
+    },
+    {
+        "name": "setFlagGalacticEquatorLabeled",
+        "category": "Lines - Galactic",
+        "signature": "setFlagGalacticEquatorLabeled(bool displayed)",
+        "description": "Shows or hides labels on the Galactic Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagGalacticEquatorLabeled(true);"
+    },
+    {
+        "name": "getFlagGalacticEquatorLabeled",
+        "category": "Lines - Galactic",
+        "signature": "bool getFlagGalacticEquatorLabeled()",
+        "description": "Returns whether labels on the Galactic Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagGalacticEquatorLabeled();"
+    },
+    {
+        "name": "setColorGalacticEquatorLine",
+        "category": "Colors - Galactic",
+        "signature": "setColorGalacticEquatorLine(Vec3f color)",
+        "description": "Sets the color of the Galactic Equator line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var magenta = core.vec3f(0.8, 0.4, 0.8);\nGridLinesMgr.setColorGalacticEquatorLine(magenta);"
+    },
+    {
+        "name": "getColorGalacticEquatorLine",
+        "category": "Colors - Galactic",
+        "signature": "Vec3f getColorGalacticEquatorLine()",
+        "description": "Returns the current color of the Galactic Equator line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorGalacticEquatorLine();"
+    },
+    {
+        "name": "setFlagSupergalacticEquatorLine",
+        "category": "Lines - Supergalactic",
+        "signature": "setFlagSupergalacticEquatorLine(bool displayed)",
+        "description": "Shows or hides the Supergalactic Equator line (the equatorial plane of the local supercluster of galaxies).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show supergalactic equator line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagSupergalacticEquatorLine(true);\nvar visible = GridLinesMgr.getFlagSupergalacticEquatorLine();"
+    },
+    {
+        "name": "getFlagSupergalacticEquatorLine",
+        "category": "Lines - Supergalactic",
+        "signature": "bool getFlagSupergalacticEquatorLine()",
+        "description": "Returns whether the Supergalactic Equator line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagSupergalacticEquatorLine()) {\n    core.debug(\"Supergalactic equator visible\");\n}"
+    },
+    {
+        "name": "setFlagSupergalacticEquatorParts",
+        "category": "Lines - Supergalactic",
+        "signature": "setFlagSupergalacticEquatorParts(bool displayed)",
+        "description": "Shows or hides partition marks on the Supergalactic Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagSupergalacticEquatorParts(true);"
+    },
+    {
+        "name": "getFlagSupergalacticEquatorParts",
+        "category": "Lines - Supergalactic",
+        "signature": "bool getFlagSupergalacticEquatorParts()",
+        "description": "Returns whether partition marks on the Supergalactic Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagSupergalacticEquatorParts();"
+    },
+    {
+        "name": "setFlagSupergalacticEquatorLabeled",
+        "category": "Lines - Supergalactic",
+        "signature": "setFlagSupergalacticEquatorLabeled(bool displayed)",
+        "description": "Shows or hides labels on the Supergalactic Equator line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagSupergalacticEquatorLabeled(true);"
+    },
+    {
+        "name": "getFlagSupergalacticEquatorLabeled",
+        "category": "Lines - Supergalactic",
+        "signature": "bool getFlagSupergalacticEquatorLabeled()",
+        "description": "Returns whether labels on the Supergalactic Equator are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagSupergalacticEquatorLabeled();"
+    },
+    {
+        "name": "setColorSupergalacticEquatorLine",
+        "category": "Colors - Supergalactic",
+        "signature": "setColorSupergalacticEquatorLine(Vec3f color)",
+        "description": "Sets the color of the Supergalactic Equator line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var cyan = core.vec3f(0.2, 0.7, 0.9);\nGridLinesMgr.setColorSupergalacticEquatorLine(cyan);"
+    },
+    {
+        "name": "getColorSupergalacticEquatorLine",
+        "category": "Colors - Supergalactic",
+        "signature": "Vec3f getColorSupergalacticEquatorLine()",
+        "description": "Returns the current color of the Supergalactic Equator line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorSupergalacticEquatorLine();"
+    },
+    {
+        "name": "setFlagPrimeVerticalLine",
+        "category": "Lines - Vertical Lines",
+        "signature": "setFlagPrimeVerticalLine(bool displayed)",
+        "description": "Shows or hides the Prime Vertical line (the great circle passing through the zenith, east point, nadir, and west point).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show prime vertical line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagPrimeVerticalLine(true);\nvar visible = GridLinesMgr.getFlagPrimeVerticalLine();"
+    },
+    {
+        "name": "getFlagPrimeVerticalLine",
+        "category": "Lines - Vertical Lines",
+        "signature": "bool getFlagPrimeVerticalLine()",
+        "description": "Returns whether the Prime Vertical line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagPrimeVerticalLine()) {\n    core.debug(\"Prime vertical line visible\");\n}"
+    },
+    {
+        "name": "setFlagPrimeVerticalParts",
+        "category": "Lines - Vertical Lines",
+        "signature": "setFlagPrimeVerticalParts(bool displayed)",
+        "description": "Shows or hides partition marks on the Prime Vertical line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagPrimeVerticalParts(true);"
+    },
+    {
+        "name": "getFlagPrimeVerticalParts",
+        "category": "Lines - Vertical Lines",
+        "signature": "bool getFlagPrimeVerticalParts()",
+        "description": "Returns whether partition marks on the Prime Vertical are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagPrimeVerticalParts();"
+    },
+    {
+        "name": "setFlagPrimeVerticalLabeled",
+        "category": "Lines - Vertical Lines",
+        "signature": "setFlagPrimeVerticalLabeled(bool displayed)",
+        "description": "Shows or hides labels on the Prime Vertical line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagPrimeVerticalLabeled(true);"
+    },
+    {
+        "name": "getFlagPrimeVerticalLabeled",
+        "category": "Lines - Vertical Lines",
+        "signature": "bool getFlagPrimeVerticalLabeled()",
+        "description": "Returns whether labels on the Prime Vertical are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagPrimeVerticalLabeled();"
+    },
+    {
+        "name": "setColorPrimeVerticalLine",
+        "category": "Colors - Vertical Lines",
+        "signature": "setColorPrimeVerticalLine(Vec3f color)",
+        "description": "Sets the color of the Prime Vertical line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var purple = core.vec3f(0.6, 0.4, 0.8);\nGridLinesMgr.setColorPrimeVerticalLine(purple);"
+    },
+    {
+        "name": "getColorPrimeVerticalLine",
+        "category": "Colors - Vertical Lines",
+        "signature": "Vec3f getColorPrimeVerticalLine()",
+        "description": "Returns the current color of the Prime Vertical line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorPrimeVerticalLine();"
+    },
+    {
+        "name": "setFlagCurrentVerticalLine",
+        "category": "Lines - Vertical Lines",
+        "signature": "setFlagCurrentVerticalLine(bool displayed)",
+        "description": "Shows or hides the Current Vertical line (the great circle passing through the zenith and the current view center direction).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show current vertical line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagCurrentVerticalLine(true);"
+    },
+    {
+        "name": "getFlagCurrentVerticalLine",
+        "category": "Lines - Vertical Lines",
+        "signature": "bool getFlagCurrentVerticalLine()",
+        "description": "Returns whether the Current Vertical line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagCurrentVerticalLine();"
+    },
+    {
+        "name": "setFlagCurrentVerticalParts",
+        "category": "Lines - Vertical Lines",
+        "signature": "setFlagCurrentVerticalParts(bool displayed)",
+        "description": "Shows or hides partition marks on the Current Vertical line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagCurrentVerticalParts(true);"
+    },
+    {
+        "name": "getFlagCurrentVerticalParts",
+        "category": "Lines - Vertical Lines",
+        "signature": "bool getFlagCurrentVerticalParts()",
+        "description": "Returns whether partition marks on the Current Vertical are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagCurrentVerticalParts();"
+    },
+    {
+        "name": "setFlagCurrentVerticalLabeled",
+        "category": "Lines - Vertical Lines",
+        "signature": "setFlagCurrentVerticalLabeled(bool displayed)",
+        "description": "Shows or hides labels on the Current Vertical line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagCurrentVerticalLabeled(true);"
+    },
+    {
+        "name": "getFlagCurrentVerticalLabeled",
+        "category": "Lines - Vertical Lines",
+        "signature": "bool getFlagCurrentVerticalLabeled()",
+        "description": "Returns whether labels on the Current Vertical are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagCurrentVerticalLabeled();"
+    },
+    {
+        "name": "setColorCurrentVerticalLine",
+        "category": "Colors - Vertical Lines",
+        "signature": "setColorCurrentVerticalLine(Vec3f color)",
+        "description": "Sets the color of the Current Vertical line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var orange = core.vec3f(1.0, 0.6, 0.2);\nGridLinesMgr.setColorCurrentVerticalLine(orange);"
+    },
+    {
+        "name": "getColorCurrentVerticalLine",
+        "category": "Colors - Vertical Lines",
+        "signature": "Vec3f getColorCurrentVerticalLine()",
+        "description": "Returns the current color of the Current Vertical line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorCurrentVerticalLine();"
+    },
+    {
+        "name": "setFlagColureLines",
+        "category": "Lines - Colures",
+        "signature": "setFlagColureLines(bool displayed)",
+        "description": "Shows or hides the Colure lines (the great circles passing through the celestial poles and the equinoxes/solstices).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show colure lines, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show the equinoctial and solstitial colures\nGridLinesMgr.setFlagColureLines(true);\n\nvar visible = GridLinesMgr.getFlagColureLines();"
+    },
+    {
+        "name": "getFlagColureLines",
+        "category": "Lines - Colures",
+        "signature": "bool getFlagColureLines()",
+        "description": "Returns whether the Colure lines are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagColureLines()) {\n    core.debug(\"Colure lines visible\");\n}"
+    },
+    {
+        "name": "setFlagColureParts",
+        "category": "Lines - Colures",
+        "signature": "setFlagColureParts(bool displayed)",
+        "description": "Shows or hides partition marks on the Colure lines.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagColureParts(true);"
+    },
+    {
+        "name": "getFlagColureParts",
+        "category": "Lines - Colures",
+        "signature": "bool getFlagColureParts()",
+        "description": "Returns whether partition marks on the Colures are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagColureParts();"
+    },
+    {
+        "name": "setFlagColureLabeled",
+        "category": "Lines - Colures",
+        "signature": "setFlagColureLabeled(bool displayed)",
+        "description": "Shows or hides labels on the Colure lines.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagColureLabeled(true);"
+    },
+    {
+        "name": "getFlagColureLabeled",
+        "category": "Lines - Colures",
+        "signature": "bool getFlagColureLabeled()",
+        "description": "Returns whether labels on the Colures are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagColureLabeled();"
+    },
+    {
+        "name": "setColorColureLines",
+        "category": "Colors - Colures",
+        "signature": "setColorColureLines(Vec3f color)",
+        "description": "Sets the color of the Colure lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var lightBlue = core.vec3f(0.5, 0.6, 0.9);\nGridLinesMgr.setColorColureLines(lightBlue);"
+    },
+    {
+        "name": "getColorColureLines",
+        "category": "Colors - Colures",
+        "signature": "Vec3f getColorColureLines()",
+        "description": "Returns the current color of the Colure lines.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorColureLines();"
+    },
+    {
+        "name": "setFlagLongitudeLine",
+        "category": "Lines - Opposition/Conjunction",
+        "signature": "setFlagLongitudeLine(bool displayed)",
+        "description": "Shows or hides the Opposition/Conjunction longitude line (great circle through the Sun and Earth's position, used to mark planetary alignments).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show opposition/conjunction line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show the opposition/conjunction longitude line\nGridLinesMgr.setFlagLongitudeLine(true);\n\nvar visible = GridLinesMgr.getFlagLongitudeLine();"
+    },
+    {
+        "name": "getFlagLongitudeLine",
+        "category": "Lines - Opposition/Conjunction",
+        "signature": "bool getFlagLongitudeLine()",
+        "description": "Returns whether the Opposition/Conjunction longitude line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagLongitudeLine()) {\n    core.debug(\"Opposition/conjunction line visible\");\n}"
+    },
+    {
+        "name": "setFlagLongitudeParts",
+        "category": "Lines - Opposition/Conjunction",
+        "signature": "setFlagLongitudeParts(bool displayed)",
+        "description": "Shows or hides partition marks on the Opposition/Conjunction longitude line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show partitions, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagLongitudeParts(true);"
+    },
+    {
+        "name": "getFlagLongitudeParts",
+        "category": "Lines - Opposition/Conjunction",
+        "signature": "bool getFlagLongitudeParts()",
+        "description": "Returns whether partition marks on the Opposition/Conjunction line are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagLongitudeParts();"
+    },
+    {
+        "name": "setFlagLongitudeLabeled",
+        "category": "Lines - Opposition/Conjunction",
+        "signature": "setFlagLongitudeLabeled(bool displayed)",
+        "description": "Shows or hides labels on the Opposition/Conjunction longitude line.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagLongitudeLabeled(true);"
+    },
+    {
+        "name": "getFlagLongitudeLabeled",
+        "category": "Lines - Opposition/Conjunction",
+        "signature": "bool getFlagLongitudeLabeled()",
+        "description": "Returns whether labels on the Opposition/Conjunction line are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var labeled = GridLinesMgr.getFlagLongitudeLabeled();"
+    },
+    {
+        "name": "setColorLongitudeLine",
+        "category": "Colors - Opposition/Conjunction",
+        "signature": "setColorLongitudeLine(Vec3f color)",
+        "description": "Sets the color of the Opposition/Conjunction longitude line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var yellow = core.vec3f(1.0, 1.0, 0.2);\nGridLinesMgr.setColorLongitudeLine(yellow);"
+    },
+    {
+        "name": "getColorLongitudeLine",
+        "category": "Colors - Opposition/Conjunction",
+        "signature": "Vec3f getColorLongitudeLine()",
+        "description": "Returns the current color of the Opposition/Conjunction longitude line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorLongitudeLine();"
+    },
+    {
+        "name": "setFlagQuadratureLine",
+        "category": "Lines - Quadrature",
+        "signature": "setFlagQuadratureLine(bool displayed)",
+        "description": "Shows or hides the Quadrature line (great circle perpendicular to the Sun-Earth line, marking positions 90 degrees from opposition/conjunction).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show quadrature line, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagQuadratureLine(true);\nvar visible = GridLinesMgr.getFlagQuadratureLine();"
+    },
+    {
+        "name": "getFlagQuadratureLine",
+        "category": "Lines - Quadrature",
+        "signature": "bool getFlagQuadratureLine()",
+        "description": "Returns whether the Quadrature line is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagQuadratureLine()) {\n    core.debug(\"Quadrature line visible\");\n}"
+    },
+    {
+        "name": "setColorQuadratureLine",
+        "category": "Colors - Quadrature",
+        "signature": "setColorQuadratureLine(Vec3f color)",
+        "description": "Sets the color of the Quadrature line.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var green = core.vec3f(0.2, 0.8, 0.4);\nGridLinesMgr.setColorQuadratureLine(green);"
+    },
+    {
+        "name": "getColorQuadratureLine",
+        "category": "Colors - Quadrature",
+        "signature": "Vec3f getColorQuadratureLine()",
+        "description": "Returns the current color of the Quadrature line.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorQuadratureLine();"
+    },
+    {
+        "name": "setFlagCircumpolarCircles",
+        "category": "Lines - Circumpolar",
+        "signature": "setFlagCircumpolarCircles(bool displayed)",
+        "description": "Shows or hides the Circumpolar Circles (the circles around the celestial poles within which stars never set or never rise).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show circumpolar circles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show the northern and southern circumpolar circles\nGridLinesMgr.setFlagCircumpolarCircles(true);\n\nvar visible = GridLinesMgr.getFlagCircumpolarCircles();"
+    },
+    {
+        "name": "getFlagCircumpolarCircles",
+        "category": "Lines - Circumpolar",
+        "signature": "bool getFlagCircumpolarCircles()",
+        "description": "Returns whether the Circumpolar Circles are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagCircumpolarCircles()) {\n    core.debug(\"Circumpolar circles visible\");\n}"
+    },
+    {
+        "name": "setColorCircumpolarCircles",
+        "category": "Colors - Circumpolar",
+        "signature": "setColorCircumpolarCircles(Vec3f color)",
+        "description": "Sets the color of the Circumpolar Circles.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var gray = core.vec3f(0.5, 0.5, 0.5);\nGridLinesMgr.setColorCircumpolarCircles(gray);"
+    },
+    {
+        "name": "getColorCircumpolarCircles",
+        "category": "Colors - Circumpolar",
+        "signature": "Vec3f getColorCircumpolarCircles()",
+        "description": "Returns the current color of the Circumpolar Circles.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorCircumpolarCircles();"
+    },
+    {
+        "name": "setFlagUmbraCircle",
+        "category": "Lines - Shadows",
+        "signature": "setFlagUmbraCircle(bool displayed)",
+        "description": "Shows or hides the Umbra circle (the dark inner shadow of Earth cast at the Moon's distance). Useful for predicting lunar eclipses.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show umbra circle, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show Earth's umbra circle (for eclipse prediction)\nGridLinesMgr.setFlagUmbraCircle(true);\n\nvar visible = GridLinesMgr.getFlagUmbraCircle();"
+    },
+    {
+        "name": "getFlagUmbraCircle",
+        "category": "Lines - Shadows",
+        "signature": "bool getFlagUmbraCircle()",
+        "description": "Returns whether the Umbra circle is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagUmbraCircle()) {\n    core.debug(\"Umbra circle visible\");\n}"
+    },
+    {
+        "name": "setColorUmbraCircle",
+        "category": "Colors - Shadows",
+        "signature": "setColorUmbraCircle(Vec3f color)",
+        "description": "Sets the color of the Umbra circle.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var darkRed = core.vec3f(0.5, 0.1, 0.1);\nGridLinesMgr.setColorUmbraCircle(darkRed);"
+    },
+    {
+        "name": "getColorUmbraCircle",
+        "category": "Colors - Shadows",
+        "signature": "Vec3f getColorUmbraCircle()",
+        "description": "Returns the current color of the Umbra circle.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorUmbraCircle();"
+    },
+    {
+        "name": "setFlagPenumbraCircle",
+        "category": "Lines - Shadows",
+        "signature": "setFlagPenumbraCircle(bool displayed)",
+        "description": "Shows or hides the Penumbra circle (the partial shadow of Earth cast at the Moon's distance).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show penumbra circle, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show Earth's penumbra circle\nGridLinesMgr.setFlagPenumbraCircle(true);\n\nvar visible = GridLinesMgr.getFlagPenumbraCircle();"
+    },
+    {
+        "name": "getFlagPenumbraCircle",
+        "category": "Lines - Shadows",
+        "signature": "bool getFlagPenumbraCircle()",
+        "description": "Returns whether the Penumbra circle is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagPenumbraCircle()) {\n    core.debug(\"Penumbra circle visible\");\n}"
+    },
+    {
+        "name": "setColorPenumbraCircle",
+        "category": "Colors - Shadows",
+        "signature": "setColorPenumbraCircle(Vec3f color)",
+        "description": "Sets the color of the Penumbra circle.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var darkGray = core.vec3f(0.3, 0.3, 0.4);\nGridLinesMgr.setColorPenumbraCircle(darkGray);"
+    },
+    {
+        "name": "getColorPenumbraCircle",
+        "category": "Colors - Shadows",
+        "signature": "Vec3f getColorPenumbraCircle()",
+        "description": "Returns the current color of the Penumbra circle.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorPenumbraCircle();"
+    },
+    {
+        "name": "setFlagCelestialJ2000Poles",
+        "category": "Points - Celestial Poles",
+        "signature": "setFlagCelestialJ2000Poles(bool displayed)",
+        "description": "Shows or hides the Celestial Poles (North and South) for the J2000.0 epoch.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show J2000 celestial poles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show the celestial poles (J2000 epoch)\nGridLinesMgr.setFlagCelestialJ2000Poles(true);\n\nvar visible = GridLinesMgr.getFlagCelestialJ2000Poles();"
+    },
+    {
+        "name": "getFlagCelestialJ2000Poles",
+        "category": "Points - Celestial Poles",
+        "signature": "bool getFlagCelestialJ2000Poles()",
+        "description": "Returns whether the J2000 Celestial Poles are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagCelestialJ2000Poles()) {\n    core.debug(\"J2000 celestial poles visible\");\n}"
+    },
+    {
+        "name": "setColorCelestialJ2000Poles",
+        "category": "Colors - Points",
+        "signature": "setColorCelestialJ2000Poles(Vec3f color)",
+        "description": "Sets the color of the J2000 Celestial Pole markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var yellow = core.vec3f(1.0, 1.0, 0.0);\nGridLinesMgr.setColorCelestialJ2000Poles(yellow);"
+    },
+    {
+        "name": "getColorCelestialJ2000Poles",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorCelestialJ2000Poles()",
+        "description": "Returns the current color of the J2000 Celestial Pole markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorCelestialJ2000Poles();"
+    },
+    {
+        "name": "setFlagCelestialPoles",
+        "category": "Points - Celestial Poles",
+        "signature": "setFlagCelestialPoles(bool displayed)",
+        "description": "Shows or hides the Celestial Poles (North and South) for the current date (taking precession into account).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show celestial poles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show the current celestial poles\nGridLinesMgr.setFlagCelestialPoles(true);\n\nvar visible = GridLinesMgr.getFlagCelestialPoles();"
+    },
+    {
+        "name": "getFlagCelestialPoles",
+        "category": "Points - Celestial Poles",
+        "signature": "bool getFlagCelestialPoles()",
+        "description": "Returns whether the current Celestial Poles are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagCelestialPoles()) {\n    core.debug(\"Celestial poles visible\");\n}"
+    },
+    {
+        "name": "setColorCelestialPoles",
+        "category": "Colors - Points",
+        "signature": "setColorCelestialPoles(Vec3f color)",
+        "description": "Sets the color of the Celestial Pole markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var white = core.vec3f(1.0, 1.0, 1.0);\nGridLinesMgr.setColorCelestialPoles(white);"
+    },
+    {
+        "name": "getColorCelestialPoles",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorCelestialPoles()",
+        "description": "Returns the current color of the Celestial Pole markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorCelestialPoles();"
+    },
+    {
+        "name": "setFlagZenithNadir",
+        "category": "Points - Zenith/Nadir",
+        "signature": "setFlagZenithNadir(bool displayed)",
+        "description": "Shows or hides the Zenith (point directly overhead) and Nadir (point directly below feet) markers.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show zenith and nadir, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show zenith and nadir points\nGridLinesMgr.setFlagZenithNadir(true);\n\nvar visible = GridLinesMgr.getFlagZenithNadir();"
+    },
+    {
+        "name": "getFlagZenithNadir",
+        "category": "Points - Zenith/Nadir",
+        "signature": "bool getFlagZenithNadir()",
+        "description": "Returns whether the Zenith and Nadir markers are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagZenithNadir()) {\n    core.debug(\"Zenith and nadir visible\");\n}"
+    },
+    {
+        "name": "setColorZenithNadir",
+        "category": "Colors - Points",
+        "signature": "setColorZenithNadir(Vec3f color)",
+        "description": "Sets the color of the Zenith and Nadir markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var lightBlue = core.vec3f(0.4, 0.7, 1.0);\nGridLinesMgr.setColorZenithNadir(lightBlue);"
+    },
+    {
+        "name": "getColorZenithNadir",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorZenithNadir()",
+        "description": "Returns the current color of the Zenith and Nadir markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorZenithNadir();"
+    },
+    {
+        "name": "setFlagEclipticJ2000Poles",
+        "category": "Points - Ecliptic Poles",
+        "signature": "setFlagEclipticJ2000Poles(bool displayed)",
+        "description": "Shows or hides the Ecliptic Poles (North and South) for the J2000.0 epoch.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show J2000 ecliptic poles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEclipticJ2000Poles(true);\nvar visible = GridLinesMgr.getFlagEclipticJ2000Poles();"
+    },
+    {
+        "name": "getFlagEclipticJ2000Poles",
+        "category": "Points - Ecliptic Poles",
+        "signature": "bool getFlagEclipticJ2000Poles()",
+        "description": "Returns whether the J2000 Ecliptic Poles are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagEclipticJ2000Poles()) {\n    core.debug(\"J2000 ecliptic poles visible\");\n}"
+    },
+    {
+        "name": "setColorEclipticJ2000Poles",
+        "category": "Colors - Points",
+        "signature": "setColorEclipticJ2000Poles(Vec3f color)",
+        "description": "Sets the color of the J2000 Ecliptic Pole markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var gold = core.vec3f(1.0, 0.84, 0.0);\nGridLinesMgr.setColorEclipticJ2000Poles(gold);"
+    },
+    {
+        "name": "getColorEclipticJ2000Poles",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorEclipticJ2000Poles()",
+        "description": "Returns the current color of the J2000 Ecliptic Pole markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEclipticJ2000Poles();"
+    },
+    {
+        "name": "setFlagEclipticPoles",
+        "category": "Points - Ecliptic Poles",
+        "signature": "setFlagEclipticPoles(bool displayed)",
+        "description": "Shows or hides the Ecliptic Poles (North and South) at the current date (taking precession into account).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show ecliptic poles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagEclipticPoles(true);"
+    },
+    {
+        "name": "getFlagEclipticPoles",
+        "category": "Points - Ecliptic Poles",
+        "signature": "bool getFlagEclipticPoles()",
+        "description": "Returns whether the current Ecliptic Poles are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagEclipticPoles()) {\n    core.debug(\"Ecliptic poles visible\");\n}"
+    },
+    {
+        "name": "setColorEclipticPoles",
+        "category": "Colors - Points",
+        "signature": "setColorEclipticPoles(Vec3f color)",
+        "description": "Sets the color of the Ecliptic Pole markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var yellow = core.vec3f(1.0, 1.0, 0.2);\nGridLinesMgr.setColorEclipticPoles(yellow);"
+    },
+    {
+        "name": "getColorEclipticPoles",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorEclipticPoles()",
+        "description": "Returns the current color of the Ecliptic Pole markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEclipticPoles();"
+    },
+    {
+        "name": "setFlagGalacticPoles",
+        "category": "Points - Galactic Poles",
+        "signature": "setFlagGalacticPoles(bool displayed)",
+        "description": "Shows or hides the Galactic Poles (North and South) of the Milky Way galaxy.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show galactic poles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagGalacticPoles(true);\nvar visible = GridLinesMgr.getFlagGalacticPoles();"
+    },
+    {
+        "name": "getFlagGalacticPoles",
+        "category": "Points - Galactic Poles",
+        "signature": "bool getFlagGalacticPoles()",
+        "description": "Returns whether the Galactic Poles are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagGalacticPoles()) {\n    core.debug(\"Galactic poles visible\");\n}"
+    },
+    {
+        "name": "setColorGalacticPoles",
+        "category": "Colors - Points",
+        "signature": "setColorGalacticPoles(Vec3f color)",
+        "description": "Sets the color of the Galactic Pole markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var purple = core.vec3f(0.7, 0.3, 0.8);\nGridLinesMgr.setColorGalacticPoles(purple);"
+    },
+    {
+        "name": "getColorGalacticPoles",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorGalacticPoles()",
+        "description": "Returns the current color of the Galactic Pole markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorGalacticPoles();"
+    },
+    {
+        "name": "setFlagGalacticCenter",
+        "category": "Points - Galactic Center",
+        "signature": "setFlagGalacticCenter(bool displayed)",
+        "description": "Shows or hides the Galactic Center and Galactic Anticenter markers.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show galactic center markers, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Mark the center of our galaxy\nGridLinesMgr.setFlagGalacticCenter(true);\n\nvar visible = GridLinesMgr.getFlagGalacticCenter();"
+    },
+    {
+        "name": "getFlagGalacticCenter",
+        "category": "Points - Galactic Center",
+        "signature": "bool getFlagGalacticCenter()",
+        "description": "Returns whether the Galactic Center markers are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagGalacticCenter()) {\n    core.debug(\"Galactic center marked\");\n}"
+    },
+    {
+        "name": "setColorGalacticCenter",
+        "category": "Colors - Points",
+        "signature": "setColorGalacticCenter(Vec3f color)",
+        "description": "Sets the color of the Galactic Center and Anticenter markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var orange = core.vec3f(1.0, 0.5, 0.0);\nGridLinesMgr.setColorGalacticCenter(orange);"
+    },
+    {
+        "name": "getColorGalacticCenter",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorGalacticCenter()",
+        "description": "Returns the current color of the Galactic Center markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorGalacticCenter();"
+    },
+    {
+        "name": "setFlagSupergalacticPoles",
+        "category": "Points - Supergalactic Poles",
+        "signature": "setFlagSupergalacticPoles(bool displayed)",
+        "description": "Shows or hides the Supergalactic Poles (North and South) of the local supercluster of galaxies.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show supergalactic poles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setFlagSupergalacticPoles(true);"
+    },
+    {
+        "name": "getFlagSupergalacticPoles",
+        "category": "Points - Supergalactic Poles",
+        "signature": "bool getFlagSupergalacticPoles()",
+        "description": "Returns whether the Supergalactic Poles are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagSupergalacticPoles()) {\n    core.debug(\"Supergalactic poles visible\");\n}"
+    },
+    {
+        "name": "setColorSupergalacticPoles",
+        "category": "Colors - Points",
+        "signature": "setColorSupergalacticPoles(Vec3f color)",
+        "description": "Sets the color of the Supergalactic Pole markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var cyan = core.vec3f(0.2, 0.8, 0.9);\nGridLinesMgr.setColorSupergalacticPoles(cyan);"
+    },
+    {
+        "name": "getColorSupergalacticPoles",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorSupergalacticPoles()",
+        "description": "Returns the current color of the Supergalactic Pole markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorSupergalacticPoles();"
+    },
+    {
+        "name": "setFlagEquinoxJ2000Points",
+        "category": "Points - Equinoxes",
+        "signature": "setFlagEquinoxJ2000Points(bool displayed)",
+        "description": "Shows or hides the Equinox points (Vernal and Autumnal) for the J2000.0 epoch.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show J2000 equinox points, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Mark the equinox positions (J2000)\nGridLinesMgr.setFlagEquinoxJ2000Points(true);"
+    },
+    {
+        "name": "getFlagEquinoxJ2000Points",
+        "category": "Points - Equinoxes",
+        "signature": "bool getFlagEquinoxJ2000Points()",
+        "description": "Returns whether the J2000 Equinox points are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagEquinoxJ2000Points();"
+    },
+    {
+        "name": "setColorEquinoxJ2000Points",
+        "category": "Colors - Points",
+        "signature": "setColorEquinoxJ2000Points(Vec3f color)",
+        "description": "Sets the color of the J2000 Equinox point markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var green = core.vec3f(0.3, 0.8, 0.3);\nGridLinesMgr.setColorEquinoxJ2000Points(green);"
+    },
+    {
+        "name": "getColorEquinoxJ2000Points",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorEquinoxJ2000Points()",
+        "description": "Returns the current color of the J2000 Equinox point markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEquinoxJ2000Points();"
+    },
+    {
+        "name": "setFlagEquinoxPoints",
+        "category": "Points - Equinoxes",
+        "signature": "setFlagEquinoxPoints(bool displayed)",
+        "description": "Shows or hides the Equinox points (Vernal and Autumnal) for the current date.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show equinox points, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Mark the current equinox positions\nGridLinesMgr.setFlagEquinoxPoints(true);"
+    },
+    {
+        "name": "getFlagEquinoxPoints",
+        "category": "Points - Equinoxes",
+        "signature": "bool getFlagEquinoxPoints()",
+        "description": "Returns whether the current Equinox points are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagEquinoxPoints()) {\n    core.debug(\"Equinox points visible\");\n}"
+    },
+    {
+        "name": "setColorEquinoxPoints",
+        "category": "Colors - Points",
+        "signature": "setColorEquinoxPoints(Vec3f color)",
+        "description": "Sets the color of the Equinox point markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var cyan = core.vec3f(0.2, 0.8, 0.8);\nGridLinesMgr.setColorEquinoxPoints(cyan);"
+    },
+    {
+        "name": "getColorEquinoxPoints",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorEquinoxPoints()",
+        "description": "Returns the current color of the Equinox point markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorEquinoxPoints();"
+    },
+    {
+        "name": "setFlagSolsticeJ2000Points",
+        "category": "Points - Solstices",
+        "signature": "setFlagSolsticeJ2000Points(bool displayed)",
+        "description": "Shows or hides the Solstice points (Summer and Winter) for the J2000.0 epoch.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show J2000 solstice points, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Mark the solstice positions (J2000)\nGridLinesMgr.setFlagSolsticeJ2000Points(true);"
+    },
+    {
+        "name": "getFlagSolsticeJ2000Points",
+        "category": "Points - Solstices",
+        "signature": "bool getFlagSolsticeJ2000Points()",
+        "description": "Returns whether the J2000 Solstice points are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "var visible = GridLinesMgr.getFlagSolsticeJ2000Points();"
+    },
+    {
+        "name": "setColorSolsticeJ2000Points",
+        "category": "Colors - Points",
+        "signature": "setColorSolsticeJ2000Points(Vec3f color)",
+        "description": "Sets the color of the J2000 Solstice point markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var orange = core.vec3f(1.0, 0.6, 0.2);\nGridLinesMgr.setColorSolsticeJ2000Points(orange);"
+    },
+    {
+        "name": "getColorSolsticeJ2000Points",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorSolsticeJ2000Points()",
+        "description": "Returns the current color of the J2000 Solstice point markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorSolsticeJ2000Points();"
+    },
+    {
+        "name": "setFlagSolsticePoints",
+        "category": "Points - Solstices",
+        "signature": "setFlagSolsticePoints(bool displayed)",
+        "description": "Shows or hides the Solstice points (Summer and Winter) for the current date.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show solstice points, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Mark the current solstice positions\nGridLinesMgr.setFlagSolsticePoints(true);"
+    },
+    {
+        "name": "getFlagSolsticePoints",
+        "category": "Points - Solstices",
+        "signature": "bool getFlagSolsticePoints()",
+        "description": "Returns whether the current Solstice points are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagSolsticePoints()) {\n    core.debug(\"Solstice points visible\");\n}"
+    },
+    {
+        "name": "setColorSolsticePoints",
+        "category": "Colors - Points",
+        "signature": "setColorSolsticePoints(Vec3f color)",
+        "description": "Sets the color of the Solstice point markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var red = core.vec3f(1.0, 0.3, 0.3);\nGridLinesMgr.setColorSolsticePoints(red);"
+    },
+    {
+        "name": "getColorSolsticePoints",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorSolsticePoints()",
+        "description": "Returns the current color of the Solstice point markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorSolsticePoints();"
+    },
+    {
+        "name": "setFlagAntisolarPoint",
+        "category": "Points - Antisolar",
+        "signature": "setFlagAntisolarPoint(bool displayed)",
+        "description": "Shows or hides the Antisolar Point (the point directly opposite the Sun in the sky).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show antisolar point, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Mark the point opposite the Sun\nGridLinesMgr.setFlagAntisolarPoint(true);\n\nvar visible = GridLinesMgr.getFlagAntisolarPoint();"
+    },
+    {
+        "name": "getFlagAntisolarPoint",
+        "category": "Points - Antisolar",
+        "signature": "bool getFlagAntisolarPoint()",
+        "description": "Returns whether the Antisolar Point is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagAntisolarPoint()) {\n    core.debug(\"Antisolar point visible\");\n}"
+    },
+    {
+        "name": "setColorAntisolarPoint",
+        "category": "Colors - Points",
+        "signature": "setColorAntisolarPoint(Vec3f color)",
+        "description": "Sets the color of the Antisolar Point marker.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var darkBlue = core.vec3f(0.2, 0.3, 0.6);\nGridLinesMgr.setColorAntisolarPoint(darkBlue);"
+    },
+    {
+        "name": "getColorAntisolarPoint",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorAntisolarPoint()",
+        "description": "Returns the current color of the Antisolar Point marker.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorAntisolarPoint();"
+    },
+    {
+        "name": "setFlagUmbraCenterPoint",
+        "category": "Points - Umbra Center",
+        "signature": "setFlagUmbraCenterPoint(bool displayed)",
+        "description": "Shows or hides the Center of Earth's Umbra point (the center of Earth's dark shadow projected at the Moon's distance).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show umbra center point, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Mark the center of Earth's umbra for eclipse prediction\nGridLinesMgr.setFlagUmbraCenterPoint(true);\n\nvar visible = GridLinesMgr.getFlagUmbraCenterPoint();"
+    },
+    {
+        "name": "getFlagUmbraCenterPoint",
+        "category": "Points - Umbra Center",
+        "signature": "bool getFlagUmbraCenterPoint()",
+        "description": "Returns whether the Center of Earth's Umbra point is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagUmbraCenterPoint()) {\n    core.debug(\"Umbra center visible\");\n}"
+    },
+    {
+        "name": "setFlagApexPoints",
+        "category": "Points - Apex",
+        "signature": "setFlagApexPoints(bool displayed)",
+        "description": "Shows or hides the Apex and Antapex points (the direction of the observer planet's motion and the opposite direction).",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show apex points, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Show the direction of Earth's motion through space\nGridLinesMgr.setFlagApexPoints(true);\n\nvar visible = GridLinesMgr.getFlagApexPoints();"
+    },
+    {
+        "name": "getFlagApexPoints",
+        "category": "Points - Apex",
+        "signature": "bool getFlagApexPoints()",
+        "description": "Returns whether the Apex and Antapex points are visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "example": "if(GridLinesMgr.getFlagApexPoints()) {\n    core.debug(\"Apex and antapex points visible\");\n}"
+    },
+    {
+        "name": "setColorApexPoints",
+        "category": "Colors - Points",
+        "signature": "setColorApexPoints(Vec3f color)",
+        "description": "Sets the color of the Apex and Antapex point markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var lightPurple = core.vec3f(0.7, 0.5, 0.9);\nGridLinesMgr.setColorApexPoints(lightPurple);"
+    },
+    {
+        "name": "getColorApexPoints",
+        "category": "Colors - Points",
+        "signature": "Vec3f getColorApexPoints()",
+        "description": "Returns the current color of the Apex and Antapex point markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "example": "var color = GridLinesMgr.getColorApexPoints();"
+    },
+    {
+        "name": "setLineThickness",
+        "category": "Appearance",
+        "signature": "setLineThickness(float thickness)",
+        "description": "Sets the thickness of all grid lines and great circles in pixels.",
+        "parameters": [
+            {
+                "name": "thickness",
+                "type": "float",
+                "description": "Line thickness in pixels (recommended: 1-5, default: 1)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Thick lines for better visibility\nGridLinesMgr.setLineThickness(2.0);\n\n// Thin, elegant lines\nGridLinesMgr.setLineThickness(1.0);\n\nvar thickness = GridLinesMgr.getLineThickness();\ncore.debug(\"Line thickness: \" + thickness);"
+    },
+    {
+        "name": "getLineThickness",
+        "category": "Appearance",
+        "signature": "float getLineThickness()",
+        "description": "Returns the current thickness of grid lines and great circles in pixels.",
+        "parameters": [],
+        "returnType": "float",
+        "type": "slot",
+        "example": "var thickness = GridLinesMgr.getLineThickness();\ncore.debug(\"Line thickness: \" + thickness);"
+    },
+    {
+        "name": "setPartThickness",
+        "category": "Appearance",
+        "signature": "setPartThickness(float thickness)",
+        "description": "Sets the thickness of partition (tick) lines on great circles.",
+        "parameters": [
+            {
+                "name": "thickness",
+                "type": "float",
+                "description": "Partition thickness in pixels (recommended: 1-3)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "GridLinesMgr.setPartThickness(1.0);\nvar thickness = GridLinesMgr.getPartThickness();"
+    },
+    {
+        "name": "getPartThickness",
+        "category": "Appearance",
+        "signature": "float getPartThickness()",
+        "description": "Returns the current thickness of partition (tick) lines.",
+        "parameters": [],
+        "returnType": "float",
+        "type": "slot",
+        "example": "var thickness = GridLinesMgr.getPartThickness();"
+    },
+    {
+        "name": "setPointSize",
+        "category": "Appearance",
+        "signature": "setPointSize(float size)",
+        "description": "Sets the size of reference point markers (poles, zenith, etc.) in pixels.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "float",
+                "description": "Point size in pixels (recommended: 5-15, default: 5)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Larger points for better visibility\nGridLinesMgr.setPointSize(8.0);\n\n// Smaller points\nGridLinesMgr.setPointSize(5.0);\n\nvar size = GridLinesMgr.getPointSize();\ncore.debug(\"Point size: \" + size);"
+    },
+    {
+        "name": "getPointSize",
+        "category": "Appearance",
+        "signature": "float getPointSize()",
+        "description": "Returns the current size of reference point markers in pixels.",
+        "parameters": [],
+        "returnType": "float",
+        "type": "slot",
+        "example": "var size = GridLinesMgr.getPointSize();\ncore.debug(\"Point marker size: \" + size);"
+    },
+    {
+        "name": "setGridSpacingMultiplier",
+        "category": "Appearance",
+        "signature": "setGridSpacingMultiplier(double multiplier)",
+        "description": "Sets the grid spacing multiplier. Values less than 1 make grids sparser, values greater than 1 make grids denser.",
+        "parameters": [
+            {
+                "name": "multiplier",
+                "type": "double",
+                "description": "Spacing multiplier (0.5 = coarse grid, 1.0 = normal, 2.0 = fine grid)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "minVersion": "0.19.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Coarse grid (fewer lines)\nGridLinesMgr.setGridSpacingMultiplier(0.5);\n\n// Fine grid (more lines)\nGridLinesMgr.setGridSpacingMultiplier(2.0);\n\n// Normal grid spacing\nGridLinesMgr.setGridSpacingMultiplier(1.0);\n\nvar multiplier = GridLinesMgr.getGridSpacingMultiplier();\ncore.debug(\"Grid spacing multiplier: \" + multiplier);"
+    },
+    {
+        "name": "getGridSpacingMultiplier",
+        "category": "Appearance",
+        "signature": "double getGridSpacingMultiplier()",
+        "description": "Returns the current grid spacing multiplier.",
+        "parameters": [],
+        "returnType": "double",
+        "type": "method",
+        "compatibility": {
+            "minVersion": "0.19.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "var multiplier = GridLinesMgr.getGridSpacingMultiplier();\ncore.debug(\"Grid spacing: \" + multiplier);"
+    }
+]

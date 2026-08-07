@@ -1,0 +1,1019 @@
+[
+    {
+        "name": "getRelativeStarScale",
+        "category": "Sky Drawer - Star Appearance",
+        "signature": "double getRelativeStarScale()",
+        "description": "Returns the relative star scale factor. Higher values make brighter stars appear much larger than fainter ones.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Relative star scale factor.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var scale = StelSkyDrawer.getRelativeStarScale();\ncore.debug(\"Relative star scale: \" + scale);"
+    },
+    {
+        "name": "setRelativeStarScale",
+        "category": "Sky Drawer - Star Appearance",
+        "signature": "setRelativeStarScale(double scale)",
+        "description": "Sets the relative star scale factor. Controls how much larger bright stars appear compared to faint stars. Default is 1.0.",
+        "parameters": [
+            {
+                "name": "scale",
+                "type": "double",
+                "description": "Relative scale factor (0.5 = less contrast, 2.0 = more contrast between bright and faint stars).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Make bright stars stand out more\nStelSkyDrawer.setRelativeStarScale(1.5);\n\n// Back to default\nStelSkyDrawer.setRelativeStarScale(1.0);"
+    },
+    {
+        "name": "getAbsoluteStarScale",
+        "category": "Sky Drawer - Star Appearance",
+        "signature": "double getAbsoluteStarScale()",
+        "description": "Returns the absolute star brightness scale factor. Affects the overall brightness of all stars.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Absolute star scale factor.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var absScale = StelSkyDrawer.getAbsoluteStarScale();\ncore.debug(\"Absolute star scale: \" + absScale);"
+    },
+    {
+        "name": "setAbsoluteStarScale",
+        "category": "Sky Drawer - Star Appearance",
+        "signature": "setAbsoluteStarScale(double scale)",
+        "description": "Sets the absolute star brightness scale factor. Affects the overall brightness of all stars.",
+        "parameters": [
+            {
+                "name": "scale",
+                "type": "double",
+                "description": "Absolute scale factor (0.5 = dimmer stars, 2.0 = brighter stars).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Make all stars brighter\nStelSkyDrawer.setAbsoluteStarScale(1.3);\n\n// Make all stars dimmer\nStelSkyDrawer.setAbsoluteStarScale(0.7);"
+    },
+    {
+        "name": "getTwinkleAmount",
+        "category": "Sky Drawer - Star Twinkling",
+        "signature": "double getTwinkleAmount()",
+        "description": "Returns the amount of star twinkling (scintillation) effect. Higher values cause more pronounced twinkling.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Twinkle amount (0.0 to 1.0).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var twinkle = StelSkyDrawer.getTwinkleAmount();\ncore.debug(\"Twinkle amount: \" + twinkle);"
+    },
+    {
+        "name": "setTwinkleAmount",
+        "category": "Sky Drawer - Star Twinkling",
+        "signature": "setTwinkleAmount(double amount)",
+        "description": "Sets the amount of star twinkling (scintillation) effect. 0 = no twinkling, 1 = maximum twinkling.",
+        "parameters": [
+            {
+                "name": "amount",
+                "type": "double",
+                "description": "Twinkle amount (0.0 to 1.0, default: 0.3).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Strong twinkling effect\nStelSkyDrawer.setTwinkleAmount(0.8);\n\n// No twinkling (steady stars)\nStelSkyDrawer.setTwinkleAmount(0.0);"
+    },
+    {
+        "name": "getFlagTwinkle",
+        "category": "Sky Drawer - Star Twinkling",
+        "signature": "bool getFlagTwinkle()",
+        "description": "Returns whether star twinkling (scintillation) is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if twinkling is enabled.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyDrawer.getFlagTwinkle()) {\n    core.debug(\"Star twinkling is enabled\");\n}"
+    },
+    {
+        "name": "setFlagTwinkle",
+        "category": "Sky Drawer - Star Twinkling",
+        "signature": "setFlagTwinkle(bool enabled)",
+        "description": "Enables or disables star twinkling (scintillation) effect.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable twinkling, `false` to disable.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Enable atmospheric twinkling\nStelSkyDrawer.setFlagTwinkle(true);\n\n// Disable for steady stars\nStelSkyDrawer.setFlagTwinkle(false);"
+    },
+    {
+        "name": "getFlagForcedTwinkle",
+        "category": "Sky Drawer - Star Twinkling",
+        "signature": "bool getFlagForcedTwinkle()",
+        "description": "Returns whether forced twinkling is enabled (twinkling even when the atmosphere is disabled). Useful for planetarium shows.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if forced twinkling is enabled.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyDrawer.getFlagForcedTwinkle()) {\n    core.debug(\"Forced twinkling is enabled\");\n}"
+    },
+    {
+        "name": "setFlagForcedTwinkle",
+        "category": "Sky Drawer - Star Twinkling",
+        "signature": "setFlagForcedTwinkle(bool enabled)",
+        "description": "Enables or disables forced twinkling (twinkling even when the atmosphere is turned off).",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable forced twinkling.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Force twinkling even without atmosphere\nStelSkyDrawer.setFlagForcedTwinkle(true);"
+    },
+    {
+        "name": "getLightPollutionLuminance",
+        "category": "Sky Drawer - Light Pollution",
+        "signature": "double getLightPollutionLuminance()",
+        "description": "Returns the current light pollution luminance in cd/m². Higher values simulate more light pollution, showing fewer stars.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Light pollution luminance (cd/m²).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var lum = StelSkyDrawer.getLightPollutionLuminance();\ncore.debug(\"Light pollution: \" + lum + \" cd/m²\");"
+    },
+    {
+        "name": "setLightPollutionLuminance",
+        "category": "Sky Drawer - Light Pollution",
+        "signature": "setLightPollutionLuminance(double luminance)",
+        "description": "Sets the light pollution luminance. Higher values simulate urban skies with fewer visible stars. Values typically range from 0.0001 (pristine dark sky) to 0.01 (urban).",
+        "parameters": [
+            {
+                "name": "luminance",
+                "type": "double",
+                "description": "Light pollution luminance in cd/m².",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Dark rural sky\nStelSkyDrawer.setLightPollutionLuminance(0.0002);\n\n// Urban sky\nStelSkyDrawer.setLightPollutionLuminance(0.005);"
+    },
+    {
+        "name": "getBortleScaleIndex",
+        "category": "Sky Drawer - Light Pollution",
+        "signature": "int getBortleScaleIndex()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nReturns the Bortle Dark-Sky Scale index (1 to 9) based on the current light pollution luminance. 1 = excellent dark sky, 9 = inner-city sky.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Bortle scale index (1-9).",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// var bortle = StelSkyDrawer.getBortleScaleIndex();"
+    },
+    {
+        "name": "getFlagDrawBigStarHalo",
+        "category": "Sky Drawer - Star Appearance",
+        "signature": "bool getFlagDrawBigStarHalo()",
+        "description": "Returns whether a large halo is drawn around very bright stars.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if big star halo is enabled.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyDrawer.getFlagDrawBigStarHalo()) {\n    core.debug(\"Big star halo enabled\");\n}"
+    },
+    {
+        "name": "setFlagDrawBigStarHalo",
+        "category": "Sky Drawer - Star Appearance",
+        "signature": "setFlagDrawBigStarHalo(bool enabled)",
+        "description": "Enables or disables large halos around very bright stars (like Sirius, Vega, etc.).",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to draw big star halos.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Show halos around bright stars\nStelSkyDrawer.setFlagDrawBigStarHalo(true);\n\n// Disable for cleaner appearance\nStelSkyDrawer.setFlagDrawBigStarHalo(false);"
+    },
+    {
+        "name": "getFlagStarSpiky",
+        "category": "Sky Drawer - Star Appearance",
+        "signature": "bool getFlagStarSpiky()",
+        "description": "Returns whether stars are drawn with diffraction spikes (rays).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if stars have spikes.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyDrawer.getFlagStarSpiky()) {\n    core.debug(\"Stars have diffraction spikes\");\n}"
+    },
+    {
+        "name": "setFlagStarSpiky",
+        "category": "Sky Drawer - Star Appearance",
+        "signature": "setFlagStarSpiky(bool spiky)",
+        "description": "Enables or disables diffraction spikes (rays) on bright stars.",
+        "parameters": [
+            {
+                "name": "spiky",
+                "type": "bool",
+                "description": "`true` to enable star spikes.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Add diffraction spikes to stars\nStelSkyDrawer.setFlagStarSpiky(true);\n\n// Round stars\nStelSkyDrawer.setFlagStarSpiky(false);"
+    },
+    {
+        "name": "getLimitMagnitude",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "float getLimitMagnitude()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nReturns the current limiting magnitude for point sources (stars). Stars fainter than this are not drawn.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Limit magnitude (V mag).",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// var limit = StelSkyDrawer.getLimitMagnitude();"
+    },
+    {
+        "name": "getFlagStarMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "bool getFlagStarMagnitudeLimit()",
+        "description": "Returns whether the user-defined star magnitude limit is active. Use `core.getStelProperty('StelSkyDrawer.flagStarMagnitudeLimit')` as an alternative.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if star magnitude limit is active.",
+        "type": "slot",
+        "alternative": "core.getStelProperty('StelSkyDrawer.flagStarMagnitudeLimit')",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Read using property (recommended)\nvar isActive = core.getStelProperty('StelSkyDrawer.flagStarMagnitudeLimit');\n\n// Direct call (also works)\nif (StelSkyDrawer.getFlagStarMagnitudeLimit()) {\n    core.debug(\"Star magnitude limit is active\");\n}"
+    },
+    {
+        "name": "setFlagStarMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "setFlagStarMagnitudeLimit(bool enabled)",
+        "description": "Enables or disables the user-defined star magnitude limit. When enabled, stars fainter than `customStarMagLimit` are not drawn.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable star magnitude limit.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Show only stars brighter than magnitude 4\nStelSkyDrawer.setFlagStarMagnitudeLimit(true);\nStelSkyDrawer.setCustomStarMagnitudeLimit(4.0);\n\n// Show all stars based on sky conditions\nStelSkyDrawer.setFlagStarMagnitudeLimit(false);"
+    },
+    {
+        "name": "getFlagNebulaMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "bool getFlagNebulaMagnitudeLimit()",
+        "description": "Returns whether the user-defined deep-sky object magnitude limit is active. Use `core.getStelProperty('StelSkyDrawer.flagNebulaMagnitudeLimit')` as an alternative.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if nebula magnitude limit is active.",
+        "type": "slot",
+        "alternative": "core.getStelProperty('StelSkyDrawer.flagNebulaMagnitudeLimit')",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyDrawer.getFlagNebulaMagnitudeLimit()) {\n    core.debug(\"Nebula magnitude limit is active\");\n}"
+    },
+    {
+        "name": "setFlagNebulaMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "setFlagNebulaMagnitudeLimit(bool enabled)",
+        "description": "Enables or disables the user-defined deep-sky object magnitude limit.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable nebula magnitude limit.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Show only bright DSOs\nStelSkyDrawer.setFlagNebulaMagnitudeLimit(true);\nStelSkyDrawer.setCustomNebulaMagnitudeLimit(6.0);\n\n// Show all DSOs\nStelSkyDrawer.setFlagNebulaMagnitudeLimit(false);"
+    },
+    {
+        "name": "getFlagPlanetMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "bool getFlagPlanetMagnitudeLimit()",
+        "description": "Returns whether the user-defined solar system object magnitude limit is active. Use `core.getStelProperty('StelSkyDrawer.flagPlanetMagnitudeLimit')` as an alternative.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if planet magnitude limit is active.",
+        "type": "slot",
+        "alternative": "core.getStelProperty('StelSkyDrawer.flagPlanetMagnitudeLimit')",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyDrawer.getFlagPlanetMagnitudeLimit()) {\n    core.debug(\"Planet magnitude limit is active\");\n}"
+    },
+    {
+        "name": "setFlagPlanetMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "setFlagPlanetMagnitudeLimit(bool enabled)",
+        "description": "Enables or disables the user-defined solar system object magnitude limit.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable planet magnitude limit.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Show only bright planets\nStelSkyDrawer.setFlagPlanetMagnitudeLimit(true);\nStelSkyDrawer.setCustomPlanetMagnitudeLimit(5.0);\n\n// Show all planets\nStelSkyDrawer.setFlagPlanetMagnitudeLimit(false);"
+    },
+    {
+        "name": "getCustomStarMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "double getCustomStarMagnitudeLimit()",
+        "description": "Returns the user-defined star magnitude limit value. Use `core.getStelProperty('StelSkyDrawer.customStarMagLimit')` as an alternative.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Star magnitude limit.",
+        "type": "slot",
+        "alternative": "core.getStelProperty('StelSkyDrawer.customStarMagLimit')",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var starLimit = StelSkyDrawer.getCustomStarMagnitudeLimit();\ncore.debug(\"Star limit: \" + starLimit);"
+    },
+    {
+        "name": "setCustomStarMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "setCustomStarMagnitudeLimit(double limit)",
+        "description": "Sets the user-defined star magnitude limit. Stars fainter than this value will not be shown when `flagStarMagnitudeLimit` is enabled.",
+        "parameters": [
+            {
+                "name": "limit",
+                "type": "double",
+                "description": "Magnitude limit (e.g., 6.0 for naked-eye limit).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Show only stars visible to the naked eye\nStelSkyDrawer.setCustomStarMagnitudeLimit(6.0);\nStelSkyDrawer.setFlagStarMagnitudeLimit(true);\n\n// Show telescopic stars\nStelSkyDrawer.setCustomStarMagnitudeLimit(12.0);"
+    },
+    {
+        "name": "getCustomNebulaMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "double getCustomNebulaMagnitudeLimit()",
+        "description": "Returns the user-defined deep-sky object magnitude limit value. Use `core.getStelProperty('StelSkyDrawer.customNebulaMagLimit')` as an alternative.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Nebula magnitude limit.",
+        "type": "slot",
+        "alternative": "core.getStelProperty('StelSkyDrawer.customNebulaMagLimit')",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var nebulaLimit = StelSkyDrawer.getCustomNebulaMagnitudeLimit();\ncore.debug(\"Nebula limit: \" + nebulaLimit);"
+    },
+    {
+        "name": "setCustomNebulaMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "setCustomNebulaMagnitudeLimit(double limit)",
+        "description": "Sets the user-defined deep-sky object magnitude limit.",
+        "parameters": [
+            {
+                "name": "limit",
+                "type": "double",
+                "description": "Magnitude limit.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelSkyDrawer.setCustomNebulaMagnitudeLimit(8.5);"
+    },
+    {
+        "name": "getCustomPlanetMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "double getCustomPlanetMagnitudeLimit()",
+        "description": "Returns the user-defined solar system object magnitude limit value. Use `core.getStelProperty('StelSkyDrawer.customPlanetMagLimit')` as an alternative.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Planet magnitude limit.",
+        "type": "slot",
+        "alternative": "core.getStelProperty('StelSkyDrawer.customPlanetMagLimit')",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var planetLimit = StelSkyDrawer.getCustomPlanetMagnitudeLimit();\ncore.debug(\"Planet limit: \" + planetLimit);"
+    },
+    {
+        "name": "setCustomPlanetMagnitudeLimit",
+        "category": "Sky Drawer - Magnitude Limits",
+        "signature": "setCustomPlanetMagnitudeLimit(double limit)",
+        "description": "Sets the user-defined solar system object magnitude limit.",
+        "parameters": [
+            {
+                "name": "limit",
+                "type": "double",
+                "description": "Magnitude limit.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelSkyDrawer.setCustomPlanetMagnitudeLimit(6.5);"
+    },
+    {
+        "name": "getLimitLuminance",
+        "category": "Sky Drawer - Luminance",
+        "signature": "float getLimitLuminance()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nReturns the luminance threshold for the faintest visible object.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Limit luminance in cd/m².",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// var limLum = StelSkyDrawer.getLimitLuminance();"
+    },
+    {
+        "name": "getFlagLuminanceAdaptation",
+        "category": "Sky Drawer - Adaptation",
+        "signature": "bool getFlagLuminanceAdaptation()",
+        "description": "Returns whether luminance adaptation (eye adaptation to brightness) is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if luminance adaptation is enabled.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyDrawer.getFlagLuminanceAdaptation()) {\n    core.debug(\"Eye adaptation is active\");\n}"
+    },
+    {
+        "name": "setFlagLuminanceAdaptation",
+        "category": "Sky Drawer - Adaptation",
+        "signature": "setFlagLuminanceAdaptation(bool enabled)",
+        "description": "Enables or disables luminance adaptation (simulating human eye adaptation to different brightness levels).",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable eye adaptation.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Enable realistic eye adaptation\nStelSkyDrawer.setFlagLuminanceAdaptation(true);\n\n// Disable for consistent brightness\nStelSkyDrawer.setFlagLuminanceAdaptation(false);"
+    },
+    {
+        "name": "getDaylightLabelThreshold",
+        "category": "Sky Drawer - Labels",
+        "signature": "double getDaylightLabelThreshold()",
+        "description": "Returns the sky brightness threshold for switching text labels to a dark color.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Brightness threshold in cd/m².",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var threshold = StelSkyDrawer.getDaylightLabelThreshold();\ncore.debug(\"Label threshold: \" + threshold);"
+    },
+    {
+        "name": "setDaylightLabelThreshold",
+        "category": "Sky Drawer - Labels",
+        "signature": "setDaylightLabelThreshold(double threshold)",
+        "description": "Sets the sky brightness threshold for switching text labels to a dark color. When the sky is brighter than this, labels become black for better visibility.",
+        "parameters": [
+            {
+                "name": "threshold",
+                "type": "double",
+                "description": "Brightness threshold in cd/m² (default: 250.0).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Lower threshold for earlier black labels\nStelSkyDrawer.setDaylightLabelThreshold(200.0);\n\n// Higher threshold\nStelSkyDrawer.setDaylightLabelThreshold(300.0);"
+    },
+    {
+        "name": "getWorldAdaptationLuminance",
+        "category": "Sky Drawer - Adaptation",
+        "signature": "double getWorldAdaptationLuminance()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nReturns the current world adaptation luminance value, representing how bright the scene appears to the simulated eye.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "World adaptation luminance in cd/m².",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// var adaptLum = StelSkyDrawer.getWorldAdaptationLuminance();"
+    },
+    {
+        "name": "getExtinctionCoefficient",
+        "category": "Sky Drawer - Atmospheric Extinction",
+        "signature": "double getExtinctionCoefficient()",
+        "description": "Returns the atmospheric extinction coefficient (mag/airmass). Higher values cause stars to dim faster near the horizon.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Extinction coefficient (mag/airmass).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var extCoeff = StelSkyDrawer.getExtinctionCoefficient();\ncore.debug(\"Extinction coefficient: \" + extCoeff);"
+    },
+    {
+        "name": "setExtinctionCoefficient",
+        "category": "Sky Drawer - Atmospheric Extinction",
+        "signature": "setExtinctionCoefficient(double coeff)",
+        "description": "Sets the atmospheric extinction coefficient. Higher values simulate more atmospheric haze, dimming stars near the horizon.",
+        "parameters": [
+            {
+                "name": "coeff",
+                "type": "double",
+                "description": "Extinction coefficient (typical: 0.1 to 0.3, default: 0.13).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Clear, dry air\nStelSkyDrawer.setExtinctionCoefficient(0.10);\n\n// Humid, hazy conditions\nStelSkyDrawer.setExtinctionCoefficient(0.25);"
+    },
+    {
+        "name": "getAtmosphereTemperature",
+        "category": "Sky Drawer - Atmospheric Refraction",
+        "signature": "double getAtmosphereTemperature()",
+        "description": "Returns the atmospheric temperature used for refraction calculations (°Celsius).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Temperature in degrees Celsius.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var temp = StelSkyDrawer.getAtmosphereTemperature();\ncore.debug(\"Atmospheric temperature: \" + temp + \"°C\");"
+    },
+    {
+        "name": "setAtmosphereTemperature",
+        "category": "Sky Drawer - Atmospheric Refraction",
+        "signature": "setAtmosphereTemperature(double celsius)",
+        "description": "Sets the atmospheric temperature used for refraction calculations. Affects how much stars appear displaced near the horizon.",
+        "parameters": [
+            {
+                "name": "celsius",
+                "type": "double",
+                "description": "Temperature in degrees Celsius (typical: -20 to 40).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Cold winter night\nStelSkyDrawer.setAtmosphereTemperature(-10.0);\n\n// Warm summer night\nStelSkyDrawer.setAtmosphereTemperature(25.0);"
+    },
+    {
+        "name": "getAtmospherePressure",
+        "category": "Sky Drawer - Atmospheric Refraction",
+        "signature": "double getAtmospherePressure()",
+        "description": "Returns the atmospheric pressure used for refraction calculations (millibars).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Pressure in millibars (hPa).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var pressure = StelSkyDrawer.getAtmospherePressure();\ncore.debug(\"Atmospheric pressure: \" + pressure + \" mbar\");"
+    },
+    {
+        "name": "setAtmospherePressure",
+        "category": "Sky Drawer - Atmospheric Refraction",
+        "signature": "setAtmospherePressure(double mbar)",
+        "description": "Sets the atmospheric pressure used for refraction calculations. Higher pressure causes more refraction near the horizon.",
+        "parameters": [
+            {
+                "name": "mbar",
+                "type": "double",
+                "description": "Pressure in millibars (typical: 980 to 1040, standard: 1013.25).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// High pressure system\nStelSkyDrawer.setAtmospherePressure(1030.0);\n\n// Low pressure\nStelSkyDrawer.setAtmospherePressure(990.0);"
+    },
+    {
+        "name": "getFlagDrawSunAfterAtmosphere",
+        "category": "Sky Drawer - Sun Rendering",
+        "signature": "bool getFlagDrawSunAfterAtmosphere()",
+        "description": "Returns whether the Sun is drawn after the atmosphere layer. Affects how the Sun appears through atmospheric scattering.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if Sun drawn after atmosphere.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyDrawer.getFlagDrawSunAfterAtmosphere()) {\n    core.debug(\"Sun drawn after atmosphere\");\n}"
+    },
+    {
+        "name": "setFlagDrawSunAfterAtmosphere",
+        "category": "Sky Drawer - Sun Rendering",
+        "signature": "setFlagDrawSunAfterAtmosphere(bool after)",
+        "description": "Sets whether the Sun is drawn after the atmosphere layer. Can affect the Sun's color and appearance at sunrise/sunset.",
+        "parameters": [
+            {
+                "name": "after",
+                "type": "bool",
+                "description": "`true` to draw Sun after atmosphere.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelSkyDrawer.setFlagDrawSunAfterAtmosphere(true);"
+    },
+    {
+        "name": "getFlagEarlySunHalo",
+        "category": "Sky Drawer - Sun Rendering",
+        "signature": "bool getFlagEarlySunHalo()",
+        "description": "Returns whether the Sun's halo is drawn before the Sun's 3D sphere.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` for early Sun halo.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyDrawer.getFlagEarlySunHalo()) {\n    core.debug(\"Sun halo drawn early\");\n}"
+    },
+    {
+        "name": "setFlagEarlySunHalo",
+        "category": "Sky Drawer - Sun Rendering",
+        "signature": "setFlagEarlySunHalo(bool early)",
+        "description": "Sets whether the Sun's halo is drawn before the Sun's 3D sphere.",
+        "parameters": [
+            {
+                "name": "early",
+                "type": "bool",
+                "description": "`true` for early halo rendering.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelSkyDrawer.setFlagEarlySunHalo(true);"
+    },
+    {
+        "name": "getFlagTfromK",
+        "category": "Sky Drawer - Advanced",
+        "signature": "bool getFlagTfromK()",
+        "description": "Returns whether turbidity (T) is computed from the extinction coefficient (k).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if T is computed from k.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.18.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyDrawer.getFlagTfromK()) {\n    core.debug(\"Turbidity derived from extinction\");\n}"
+    },
+    {
+        "name": "setFlagTfromK",
+        "category": "Sky Drawer - Advanced",
+        "signature": "setFlagTfromK(bool fromK)",
+        "description": "Sets whether turbidity (T) is computed from the extinction coefficient.",
+        "parameters": [
+            {
+                "name": "fromK",
+                "type": "bool",
+                "description": "`true` to compute T from k.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.18.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelSkyDrawer.setFlagTfromK(true);"
+    },
+    {
+        "name": "getT",
+        "category": "Sky Drawer - Advanced",
+        "signature": "double getT()",
+        "description": "Returns the atmospheric turbidity value (Preetham sky model parameter). Higher values indicate more haze or pollution.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Turbidity value (2 to 6 typical, 5 is average).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.18.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var t = StelSkyDrawer.getT();\ncore.debug(\"Turbidity: \" + t);"
+    },
+    {
+        "name": "setT",
+        "category": "Sky Drawer - Advanced",
+        "signature": "setT(double turbidity)",
+        "description": "Sets the atmospheric turbidity value. Higher values simulate more atmospheric haze and pollution, affecting sky color.",
+        "parameters": [
+            {
+                "name": "turbidity",
+                "type": "double",
+                "description": "Turbidity value (2 = clear, 5 = average, 6 = hazy).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.18.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Very clear sky\nStelSkyDrawer.setT(2.0);\n\n// Hazy sky\nStelSkyDrawer.setT(6.0);"
+    }
+]

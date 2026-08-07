@@ -110,24 +110,41 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
     // HELPER FUNCTIONS
     // =====================================================================
 
+		/**
+		 * Escape HTML special characters to prevent XSS.
+		 * 
+		 * @param {string} str - String to escape
+		 * @returns {string} Escaped string safe for HTML insertion
+		 */
+		function escapeHtml(str) {
+				if (!str) return '';
+				return String(str)
+						.replace(/&/g, '&amp;')
+						.replace(/</g, '&lt;')
+						.replace(/>/g, '&gt;')
+						.replace(/"/g, '&quot;')
+						.replace(/'/g, '&#39;');
+		}
+
     /**
      * Shows a temporary notification message that auto-dismisses after 2 seconds.
      * Used for user feedback during navigation actions.
      * 
      * @param {string} message - Message to display
      */
-    function showNotification(message) {
-        var $notification = $(
-            '<div class="notification-message" style="position:fixed;top:20px;right:20px;' +
-            'padding:10px 15px;background:linear-gradient(#6B6E70, #3A3C3E);color:#fff;' +
-            'border-radius:5px;z-index:9999;box-shadow:0 2px 10px rgba(0,0,0,0.3);">' + 
-            message + '</div>'
-        );
-        $("body").append($notification);
-        setTimeout(function() {
-            $notification.fadeOut(function() { $notification.remove(); });
-        }, 2000);
-    }
+		function showNotification(message) {
+				var escapedMessage = escapeHtml(message);
+				var $notification = $(
+						'<div class="notification-message" style="position:fixed;top:20px;right:20px;' +
+						'padding:10px 15px;background:linear-gradient(#6B6E70, #3A3C3E);color:#fff;' +
+						'border-radius:5px;z-index:9999;box-shadow:0 2px 10px rgba(0,0,0,0.3);">' + 
+						escapedMessage + '</div>'
+				);
+				$("body").append($notification);
+				setTimeout(function() {
+						$notification.fadeOut(function() {$notification.remove(); });
+				}, 2000);
+		}
 
     /**
      * Clears any currently selected object to prevent view conflicts.
@@ -721,69 +738,89 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
     // CONSTELLATION HIGHLIGHT/ISOLATION (Core Logic)
     // =====================================================================
 
-    /**
-     * Toggles constellation highlighting/isolation.
-     * 
-     * First press: clears any existing selection, saves current state,
-     *              enables all constellation displays, isolates and centers
-     *              on the constellation with 60° FOV.
-     * Second press: restores previous state and clears isolation.
-     * Emits objectSelected event for bidirectional sync.
-     * 
-     * @param {string} constellationName - Name of the constellation
-     * @param {string} constellationId - Optional ID of the constellation (from index.json)
-     * @returns {boolean} True if constellation was highlighted, false if cleared
-     */
-    function toggleConstellationHighlight(constellationName, constellationId) {
-        var searchTerm = constellationName.replace(/_/g, ' ');
-        searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
-        
-        var isCurrentlyHighlighted = (currentIsolatedConstellation === searchTerm);
-        
-        if (isCurrentlyHighlighted) {
-            console.log("[StelUtils] Toggle OFF - Clearing highlight:", searchTerm);
-            
-            propApi.setStelProp("ConstellationMgr.isolateSelected", false);
-            propApi.setStelProp("ConstellationMgr.flagConstellationPick", false);
-            clearSelection();
-            restoreConstellationDisplayStates();
-            currentIsolatedConstellation = null;
-            
-            showNotification(_tr("Cleared highlight: ") + searchTerm);
-            emitObjectSelected("", "", "none");
-            return false;
-        } else {
-            console.log("[StelUtils] Toggle ON - Isolating constellation:", searchTerm);
-            
-            clearSelection();
-            
-            if (!hasSavedState) {
-                saveConstellationDisplayStates();
-            }
-            
-            enableAllConstellationDisplays();
-            
-            setTimeout(function() {
-                propApi.setStelProp("ConstellationMgr.flagConstellationPick", true);
-                propApi.setStelProp("ConstellationMgr.isolateSelected", true);
-                rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
-                currentIsolatedConstellation = searchTerm;
-                
-                setTimeout(function() {
-                    rc.postCmd("/api/scripts/direct", {
-                        code: "core.moveToObject(\"" + searchTerm + "\", 2); StelMovementMgr.zoomTo(60, 2);",
-                        useIncludes: false
-                    });
-                    // Use constellationId if provided, otherwise use searchTerm
-                    var emitId = constellationId || searchTerm;
-                    emitObjectSelected(searchTerm, emitId, "constellation");
-                    showNotification(_tr("Isolating constellation: ") + searchTerm);
-                }, 150);
-            }, 100);
-            
-            return true;
-        }
-    }
+		/**
+		 * Toggles constellation highlighting/isolation.
+		 * 
+		 * First press: clears any existing selection, saves current state,
+		 *              enables all constellation displays, isolates and centers
+		 *              on the constellation with 60° FOV.
+		 * Second press: restores previous state and clears isolation.
+		 * 
+		 * If "Highlight without Isolation" is checked, only centers on the constellation
+		 * without changing isolation settings.
+		 * 
+		 * @param {string} constellationName - Name of the constellation
+		 * @param {string} constellationId - Optional ID of the constellation (from index.json)
+		 * @returns {boolean} True if constellation was highlighted, false if cleared
+		 */
+		function toggleConstellationHighlight(constellationName, constellationId) {
+				var searchTerm = constellationName.replace(/_/g, ' ');
+				searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+				
+				var isCurrentlyHighlighted = (currentIsolatedConstellation === searchTerm);
+				
+				// ============================================================
+				// NEW: Check if user wants navigation without isolation
+				// ============================================================
+				var noIsolation = $('#highlight-no-isolation').is(':checked');
+				
+				if (isCurrentlyHighlighted) {
+						console.log("[StelUtils] Toggle OFF - Clearing highlight:", searchTerm);
+						
+						propApi.setStelProp("ConstellationMgr.isolateSelected", false);
+						propApi.setStelProp("ConstellationMgr.flagConstellationPick", false);
+						clearSelection();
+						restoreConstellationDisplayStates();
+						currentIsolatedConstellation = null;
+						
+						showNotification(_tr("Cleared highlight: ") + searchTerm);
+						emitObjectSelected("", "", "none");
+						return false;
+				} else {
+						console.log("[StelUtils] Toggle ON - Isolating constellation:", searchTerm);
+						
+						clearSelection();
+						
+						// ============================================================
+						// Only save and enable displays if we're actually isolating
+						// ============================================================
+						if (!noIsolation) {
+								if (!hasSavedState) {
+										saveConstellationDisplayStates();
+								}
+								enableAllConstellationDisplays();
+						}
+						
+						setTimeout(function() {
+								// ============================================================
+								// Only set isolation properties if not in "no isolation" mode
+								// ============================================================
+								if (!noIsolation) {
+										propApi.setStelProp("ConstellationMgr.flagConstellationPick", true);
+										propApi.setStelProp("ConstellationMgr.isolateSelected", true);
+								}
+								
+								rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
+								currentIsolatedConstellation = searchTerm;
+								
+								setTimeout(function() {
+										rc.postCmd("/api/scripts/direct", {
+												code: "core.moveToObject(\"" + searchTerm + "\", 2); StelMovementMgr.zoomTo(60, 2);",
+												useIncludes: false
+										});
+										var emitId = constellationId || searchTerm;
+										emitObjectSelected(searchTerm, emitId, "constellation");
+										
+										// Show appropriate notification
+										var message = noIsolation ? 
+												_tr("Navigating to constellation: ") + searchTerm :
+												_tr("Isolating constellation: ") + searchTerm;
+										showNotification(message);
+								}, 150);
+						}, 100);
+						return true;
+				}
+		}
 
     /**
      * Clears all constellation highlighting and restores previous state.
@@ -822,6 +859,30 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
         return currentIsolatedConstellation === searchTerm;
     }
+
+		/**
+		 * Toggle a boolean StelProperty
+		 * @param {string} prop - Property name
+		 */
+		function toggleBooleanProperty(prop) {
+				require(["api/properties"], function(p) {
+						var current = p.getStelProp(prop);
+						p.setStelProp(prop, !current);
+				});
+		}
+
+		/**
+		 * Set a color StelProperty from RGB values
+		 * @param {string} prop - Property name
+		 * @param {number} r - Red (0-1)
+		 * @param {number} g - Green (0-1)
+		 * @param {number} b - Blue (0-1)
+		 */
+		function setColorProperty(prop, r, g, b) {
+				require(["api/properties"], function(p) {
+						p.setStelProp(prop, "[" + r + ", " + g + ", " + b + "]");
+				});
+		}
 
     // =====================================================================
     // INITIALIZATION

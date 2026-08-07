@@ -71,23 +71,32 @@ define(["jquery", "./remotecontrol"], function($, rc) {
             data: {
                 id: actionName
             },
-            success: function(resp) {
-                if (resp === "ok") {
-                    //non-checkable action, dont fire an event
-                } else if (resp === "true") {
-                    if (!actionData[actionName].isChecked) {
-                        actionData[actionName].isChecked = true;
-                        fireActionChanged(actionName);
-                    }
-                } else if (resp === "false") {
-                    if (actionData[actionName].isChecked) {
-                        actionData[actionName].isChecked = false;
-                        fireActionChanged(actionName);
-                    }
-                } else {
-                    alert(rc.tr("Action '%1' not accepted by server: ", actionName) + "\n" + resp);
-                }
-            },
+						success: function(resp) {
+								if (resp === "ok") {
+										// IMPROVED: For checkable actions, fire an event even with "ok" response
+										// This ensures UI updates even when the server doesn't send a separate notification
+										if (actionData[actionName] && actionData[actionName].isCheckable) {
+												// Toggle the state optimistically and fire the event
+												actionData[actionName].isChecked = !actionData[actionName].isChecked;
+												fireActionChanged(actionName);
+												
+												console.log("stelActionChanged (optimistic from 'ok'): " + actionName + 
+																		", " + actionData[actionName].isChecked);
+										}
+								} else if (resp === "true") {
+										if (!actionData[actionName].isChecked) {
+												actionData[actionName].isChecked = true;
+												fireActionChanged(actionName);
+										}
+								} else if (resp === "false") {
+										if (actionData[actionName].isChecked) {
+												actionData[actionName].isChecked = false;
+												fireActionChanged(actionName);
+										}
+								} else {
+										alert(rc.tr("Action '%1' not accepted by server: ", actionName) + "\n" + resp);
+								}
+						},
             error: function(xhr, status, errorThrown) {
                 console.log("Error posting action " + actionName);
                 console.log("Error: " + errorThrown.message);

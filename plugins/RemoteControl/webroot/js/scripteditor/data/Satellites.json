@@ -1,0 +1,911 @@
+[
+    {
+        "name": "getFlagHintsVisible",
+        "category": "Satellites - Display",
+        "signature": "bool getFlagHintsVisible()",
+        "description": "Returns whether satellite position hints are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if satellite hints are visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "if (Satellites.getFlagHintsVisible()) {\n    core.debug(\"Satellite hints are visible\");\n}"
+    },
+    {
+        "name": "setFlagHintsVisible",
+        "category": "Satellites - Display",
+        "signature": "void setFlagHintsVisible(bool visible)",
+        "description": "Shows or hides satellite position hints.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show satellite hints",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "Satellites.setFlagHintsVisible(true);"
+    },
+    {
+        "name": "flagHintsVisible",
+        "category": "Satellites - Properties",
+        "signature": "bool flagHintsVisible",
+        "description": "Property that controls whether satellite hints are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if hints are visible",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "var visible = core.getStelProperty('Satellites.flagHintsVisible');\ncore.setStelProperty('Satellites.flagHintsVisible', true);"
+    },
+    {
+        "name": "getFlagLabelsVisible",
+        "category": "Satellites - Display",
+        "signature": "bool getFlagLabelsVisible()",
+        "description": "Returns whether text labels are displayed next to satellite hints.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if satellite labels are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "if (Satellites.getFlagLabelsVisible()) {\n    core.debug(\"Satellite labels are visible\");\n}"
+    },
+    {
+        "name": "setFlagLabelsVisible",
+        "category": "Satellites - Display",
+        "signature": "void setFlagLabelsVisible(bool visible)",
+        "description": "Shows or hides text labels next to satellite hints.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "// Show satellite labels\nSatellites.setFlagLabelsVisible(true);\n\n// Hide satellite labels\nSatellites.setFlagLabelsVisible(false);"
+    },
+    {
+        "name": "flagLabelsVisible",
+        "category": "Satellites - Properties",
+        "signature": "bool flagLabelsVisible",
+        "description": "Property that controls whether satellite labels are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if labels are visible, false if hidden",
+        "type": "property",
+        "alternative": "Satellites.getFlagLabelsVisible() / Satellites.setFlagLabelsVisible()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Satellites.flagLabelsVisible', true);"
+    },
+    {
+        "name": "getLabelFontSize",
+        "category": "Satellites - Appearance",
+        "signature": "int getLabelFontSize()",
+        "description": "Returns the font size used for satellite labels in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Font size in pixels (default: 10)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var fontSize = Satellites.getLabelFontSize();\ncore.debug(\"Label font size: \" + fontSize + \"px\");"
+    },
+    {
+        "name": "setLabelFontSize",
+        "category": "Satellites - Appearance",
+        "signature": "void setLabelFontSize(int size)",
+        "description": "Sets the font size for satellite labels in pixels.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "int",
+                "description": "Font size in pixels (recommended: 8-24)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "// Increase label size for better readability\nSatellites.setLabelFontSize(14);\n\n// Reset to default\nSatellites.setLabelFontSize(10);"
+    },
+    {
+        "name": "labelFontSize",
+        "category": "Satellites - Properties",
+        "signature": "int labelFontSize",
+        "description": "Property that controls the font size of satellite labels in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Font size in pixels",
+        "type": "property",
+        "alternative": "Satellites.getLabelFontSize() / Satellites.setLabelFontSize()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Satellites.labelFontSize', 12);"
+    },
+    {
+        "name": "getFlagOrbitLines",
+        "category": "Satellites - Orbits",
+        "signature": "bool getFlagOrbitLines()",
+        "description": "Returns whether satellite orbit lines are drawn on the sky.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if orbit lines are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "if (Satellites.getFlagOrbitLines()) {\n    core.debug(\"Satellite orbit lines are visible\");\n}"
+    },
+    {
+        "name": "setFlagOrbitLines",
+        "category": "Satellites - Orbits",
+        "signature": "void setFlagOrbitLines(bool visible)",
+        "description": "Shows or hides satellite orbit lines on the sky.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show orbit lines, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "// Show satellite orbits\nSatellites.setFlagOrbitLines(true);\n\n// Hide orbits for cleaner view\nSatellites.setFlagOrbitLines(false);"
+    },
+    {
+        "name": "flagOrbitLines",
+        "category": "Satellites - Properties",
+        "signature": "bool flagOrbitLines",
+        "description": "Property that controls whether satellite orbit lines are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if orbit lines are visible",
+        "type": "property",
+        "alternative": "Satellites.getFlagOrbitLines() / Satellites.setFlagOrbitLines()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Satellites.flagOrbitLines', true);"
+    },
+    {
+        "name": "getFlagIconicMode",
+        "category": "Satellites - Display",
+        "signature": "bool getFlagIconicMode()",
+        "description": "Returns whether iconic mode is enabled (simplified satellite icons instead of realistic representations).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if iconic mode is enabled, false if using standard icons",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "if (Satellites.getFlagIconicMode()) {\n    core.debug(\"Iconic mode is active\");\n}"
+    },
+    {
+        "name": "setFlagIconicMode",
+        "category": "Satellites - Display",
+        "signature": "void setFlagIconicMode(bool enabled)",
+        "description": "Enables or disables iconic mode (simplified satellite icons).",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable iconic mode, false for standard icons",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "// Use simplified icons for better performance\nSatellites.setFlagIconicMode(true);\n\n// Use standard satellite icons\nSatellites.setFlagIconicMode(false);"
+    },
+    {
+        "name": "flagIconicMode",
+        "category": "Satellites - Properties",
+        "signature": "bool flagIconicMode",
+        "description": "Property that controls whether iconic mode is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if iconic mode is enabled",
+        "type": "property",
+        "alternative": "Satellites.getFlagIconicMode() / Satellites.setFlagIconicMode()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Satellites.flagIconicMode', true);"
+    },
+    {
+        "name": "getFlagHideInvisible",
+        "category": "Satellites - Filtering",
+        "signature": "bool getFlagHideInvisible()",
+        "description": "Returns whether satellites that are not currently visible (below horizon or in Earth's shadow) are hidden.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if invisible satellites are hidden, false if shown",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "if (Satellites.getFlagHideInvisible()) {\n    core.debug(\"Only visible satellites are shown\");\n}"
+    },
+    {
+        "name": "setFlagHideInvisible",
+        "category": "Satellites - Filtering",
+        "signature": "void setFlagHideInvisible(bool hide)",
+        "description": "Sets whether satellites that are not currently visible should be hidden.",
+        "parameters": [
+            {
+                "name": "hide",
+                "type": "bool",
+                "description": "true to hide invisible satellites, false to show them",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "// Show only satellites above horizon\nSatellites.setFlagHideInvisible(true);\n\n// Show all satellites regardless of visibility\nSatellites.setFlagHideInvisible(false);"
+    },
+    {
+        "name": "flagHideInvisible",
+        "category": "Satellites - Properties",
+        "signature": "bool flagHideInvisible",
+        "description": "Property that controls whether invisible satellites are hidden.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if invisible satellites are hidden",
+        "type": "property",
+        "alternative": "Satellites.getFlagHideInvisible() / Satellites.setFlagHideInvisible()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Satellites.flagHideInvisible', true);"
+    },
+    {
+        "name": "getFlagColoredInvisible",
+        "category": "Satellites - Appearance",
+        "signature": "bool getFlagColoredInvisible()",
+        "description": "Returns whether invisible satellites are drawn with a special color (darker) instead of being hidden.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if invisible satellites are colored, false if hidden or normal",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "if (Satellites.getFlagColoredInvisible()) {\n    core.debug(\"Invisible satellites have special color\");\n}"
+    },
+    {
+        "name": "setFlagColoredInvisible",
+        "category": "Satellites - Appearance",
+        "signature": "void setFlagColoredInvisible(bool colored)",
+        "description": "Sets whether invisible satellites should be drawn with a special color.",
+        "parameters": [
+            {
+                "name": "colored",
+                "type": "bool",
+                "description": "true to color invisible satellites, false to use normal color",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "// Mark invisible satellites with darker color\nSatellites.setFlagColoredInvisible(true);\n\n// Use same color for all satellites\nSatellites.setFlagColoredInvisible(false);"
+    },
+    {
+        "name": "flagColoredInvisible",
+        "category": "Satellites - Properties",
+        "signature": "bool flagColoredInvisible",
+        "description": "Property that controls whether invisible satellites have a special color.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if invisible satellites are colored differently",
+        "type": "property",
+        "alternative": "Satellites.getFlagColoredInvisible() / Satellites.setFlagColoredInvisible()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Satellites.flagColoredInvisible', true);"
+    },
+    {
+        "name": "getInvisibleSatelliteColor",
+        "category": "Satellites - Appearance",
+        "signature": "Vec3f getInvisibleSatelliteColor()",
+        "description": "Returns the color used for invisible satellites (when colored mode is enabled). Default is dark gray (0.2, 0.2, 0.2).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector with values from 0.0 to 1.0",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var color = Satellites.getInvisibleSatelliteColor();\ncore.debug(\"Invisible satellite color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setInvisibleSatelliteColor",
+        "category": "Satellites - Appearance",
+        "signature": "void setInvisibleSatelliteColor(Vec3f color)",
+        "description": "Sets the color used for invisible satellites.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector created via core.vec3f(r, g, b)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var darkRed = core.vec3f(0.3, 0.05, 0.05);\nSatellites.setInvisibleSatelliteColor(darkRed);"
+    },
+    {
+        "name": "invisibleSatelliteColor",
+        "category": "Satellites - Properties",
+        "signature": "Vec3f invisibleSatelliteColor",
+        "description": "⚠️ Property that returns the color for invisible satellites as a string. For reading, use core.getStelProperty(). For writing, use Satellites.setInvisibleSatelliteColor().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color as string (comma-separated values)",
+        "type": "property",
+        "alternative": "Satellites.getInvisibleSatelliteColor() / Satellites.setInvisibleSatelliteColor()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "// Read color using property\nvar colorStr = core.getStelProperty('Satellites.invisibleSatelliteColor');\nvar parts = colorStr.split(',');\nvar r = parseFloat(parts[0]);\nvar g = parseFloat(parts[1]);\nvar b = parseFloat(parts[2]);\ncore.debug(\"Invisible color: RGB(\" + r + \", \" + g + \", \" + b + \")\");\n\n// Write using method\nvar newColor = core.vec3f(0.3, 0.05, 0.05);\nSatellites.setInvisibleSatelliteColor(newColor);"
+    },
+    {
+        "name": "getTransitSatelliteColor",
+        "category": "Satellites - Appearance",
+        "signature": "Vec3f getTransitSatelliteColor()",
+        "description": "Returns the color used for satellites in transit through the Sun or the Moon (color of markers). Default is black (0.0, 0.0, 0.0).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector with values from 0.0 to 1.0",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var color = Satellites.getTransitSatelliteColor();\ncore.debug(\"Transit satellite color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setTransitSatelliteColor",
+        "category": "Satellites - Appearance",
+        "signature": "void setTransitSatelliteColor(Vec3f color)",
+        "description": "Sets the color used for satellites in transit through the Sun or the Moon.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var brightRed = core.vec3f(1.0, 0.2, 0.2);\nSatellites.setTransitSatelliteColor(brightRed);"
+    },
+    {
+        "name": "transitSatelliteColor",
+        "category": "Satellites - Properties",
+        "signature": "Vec3f transitSatelliteColor",
+        "description": "⚠️ Property that returns the color for transit satellites as a string. For reading, use core.getStelProperty(). For writing, use Satellites.setTransitSatelliteColor().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color as string",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "var colorStr = core.getStelProperty('Satellites.transitSatelliteColor');\nvar parts = colorStr.split(',');"
+    },
+    {
+        "name": "getUpdatesEnabled",
+        "category": "Satellites - Updates",
+        "signature": "bool getUpdatesEnabled()",
+        "description": "Returns whether automatic TLE (Two-Line Element) updates from the internet are enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if automatic updates are enabled, false if disabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Requires internet connection for updates"
+        },
+        "example": "if (Satellites.getUpdatesEnabled()) {\n    core.debug(\"Automatic satellite TLE updates are enabled\");\n}"
+    },
+    {
+        "name": "setUpdatesEnabled",
+        "category": "Satellites - Updates",
+        "signature": "void setUpdatesEnabled(bool enabled)",
+        "description": "Enables or disables automatic TLE (Two-Line Element) updates from the internet.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable automatic updates, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Requires internet connection when enabled"
+        },
+        "example": "// Enable automatic satellite data updates\nSatellites.setUpdatesEnabled(true);\n\n// Disable automatic updates (use offline data only)\nSatellites.setUpdatesEnabled(false);"
+    },
+    {
+        "name": "updatesEnabled",
+        "category": "Satellites - Properties",
+        "signature": "bool updatesEnabled",
+        "description": "Property that controls whether automatic TLE updates are enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if automatic updates are enabled",
+        "type": "property",
+        "alternative": "Satellites.getUpdatesEnabled() / Satellites.setUpdatesEnabled()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Satellites.updatesEnabled', true);"
+    },
+    {
+        "name": "getUpdateFrequencyHours",
+        "category": "Satellites - Updates",
+        "signature": "int getUpdateFrequencyHours()",
+        "description": "Returns the frequency of automatic TLE updates in hours. Default is 72 hours (3 days).",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Update frequency in hours",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var freq = Satellites.getUpdateFrequencyHours();\ncore.debug(\"Update frequency: \" + freq + \" hours\");"
+    },
+    {
+        "name": "setUpdateFrequencyHours",
+        "category": "Satellites - Updates",
+        "signature": "void setUpdateFrequencyHours(int hours)",
+        "description": "Sets the frequency of automatic TLE updates in hours.",
+        "parameters": [
+            {
+                "name": "hours",
+                "type": "int",
+                "description": "Update frequency in hours (recommended: 24-168)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "// Update daily\nSatellites.setUpdateFrequencyHours(24);\n\n// Update weekly\nSatellites.setUpdateFrequencyHours(168);"
+    },
+    {
+        "name": "updateFrequencyHours",
+        "category": "Satellites - Properties",
+        "signature": "int updateFrequencyHours",
+        "description": "Property that controls the automatic update frequency in hours.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Update frequency in hours",
+        "type": "property",
+        "alternative": "Satellites.getUpdateFrequencyHours() / Satellites.setUpdateFrequencyHours()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Satellites.updateFrequencyHours', 48);"
+    },
+    {
+        "name": "updateFromOnlineSources",
+        "category": "Satellites - Updates",
+        "signature": "void updateFromOnlineSources()",
+        "description": "Manually triggers an immediate update of satellite TLE data from configured online sources (Celestrak, AMSAT, etc.).",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Requires internet connection"
+        },
+        "example": "// Manually update satellite orbital data\nSatellites.updateFromOnlineSources();\ncore.debug(\"Satellite update started...\");\n\n// Wait for update to complete\ncore.wait(30);\ncore.debug(\"Satellite update completed\");"
+    },
+    {
+        "name": "saveCatalog",
+        "category": "Satellites - Data Management",
+        "signature": "void saveCatalog(QString path)",
+        "description": "Saves the current satellite catalog (including custom visibility settings) to a JSON file.",
+        "parameters": [
+            {
+                "name": "path",
+                "type": "QString",
+                "description": "File path to save the catalog. If empty, saves to default location.",
+                "required": false,
+                "default": ""
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "// Save to default location\nSatellites.saveCatalog();\n\n// Save to custom location\nSatellites.saveCatalog(\"/home/user/satellites_backup.json\");\ncore.debug(\"Satellite catalog saved\");"
+    },
+    {
+        "name": "getById",
+        "category": "Satellites - Information",
+        "signature": "SatelliteP getById(QString id)",
+        "description": "Returns a satellite object by its NORAD catalog number.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "NORAD catalog number",
+                "required": true
+            }
+        ],
+        "returnType": "SatelliteP",
+        "returnDescription": "Satellite object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var iss = Satellites.getById(\"25544\");\nif (iss) {\n    core.debug(\"Found ISS\");\n    core.moveToObject(iss.getEnglishName(), 3);\n}"
+    },
+    {
+        "name": "getSatellites",
+        "category": "Satellites - Information",
+        "signature": "QHash<QString,QString> getSatellites(QString group, int status)",
+        "description": "Returns a hash of satellites filtered by group and visibility status. Status values: 0=Visible, 1=NotVisible, 2=Both, 3=NewlyAdded, 4=OrbitError.",
+        "parameters": [
+            {
+                "name": "group",
+                "type": "QString",
+                "description": "Group name (e.g., 'visual', 'starlink', 'iss'), empty for all",
+                "required": false,
+                "default": ""
+            },
+            {
+                "name": "status",
+                "type": "int",
+                "description": "Status filter: 0=Visible, 1=NotVisible, 2=Both, 3=NewlyAdded, 4=OrbitError",
+                "required": false,
+                "default": "2"
+            }
+        ],
+        "returnType": "QHash<QString,QString>",
+        "returnDescription": "Hash mapping satellite ID to satellite name",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "// Get all visible satellites\nvar sats = Satellites.getSatellites(\"\", 0);\ncore.debug(\"Visible satellites: \" + sats.keys().length);\n\n// Get all Starlink satellites\nvar starlink = Satellites.getSatellites(\"starlink\", 2);\nfor (var id in starlink) {\n    core.debug(starlink[id] + \" (NORAD: \" + id + \")\");\n}"
+    },
+    {
+        "name": "getGroups",
+        "category": "Satellites - Information",
+        "signature": "QSet<QString> getGroups()",
+        "description": "Returns the set of all satellite group names available in the current catalog (e.g., 'visual', 'starlink', 'iss', 'gps', 'communications').",
+        "parameters": [],
+        "returnType": "QSet<QString>",
+        "returnDescription": "Set of group names",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var groups = Satellites.getGroups();\ncore.debug(\"Available satellite groups: \" + groups.values().join(\", \"));\n\n// Check if a group exists\nif (groups.contains(\"starlink\")) {\n    core.debug(\"Starlink satellites are available\");\n}"
+    },
+    {
+        "name": "getGroupIdList",
+        "category": "Satellites - Information",
+        "signature": "QStringList getGroupIdList()",
+        "description": "Returns a sorted list of all satellite group names available in the current catalog.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "Sorted list of group names",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var groupList = Satellites.getGroupIdList();\ncore.debug(\"Groups: \" + groupList.join(\", \"));"
+    },
+    {
+        "name": "listAllIds",
+        "category": "Satellites - Information",
+        "signature": "QStringList listAllIds()",
+        "description": "Returns a list of all NORAD catalog numbers for satellites in the current catalog.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of satellite IDs (NORAD numbers)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var allIds = Satellites.listAllIds();\ncore.debug(\"Total satellites in catalog: \" + allIds.length);\n\n// Check if a specific satellite exists\nif (allIds.indexOf(\"25544\") >= 0) {\n    core.debug(\"ISS is in the catalog\");\n}"
+    },
+    {
+        "name": "listAllObjects",
+        "category": "Satellites - Search",
+        "signature": "QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish)",
+        "description": "Returns a list of all satellite objects with their names. This can be used for auto-completion and search.",
+        "parameters": [
+            {
+                "name": "inEnglish",
+                "type": "bool",
+                "description": "true to list English names, false for translated names",
+                "required": true
+            }
+        ],
+        "returnType": "QVector<QPair<QString,StelObjectP>>",
+        "returnDescription": "List of (name, object) pairs",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var objects = Satellites.listAllObjects(false);\ncore.debug(\"Total satellites: \" + objects.length);\n\n// Print first 10 satellite names\nfor (var i = 0; i < Math.min(10, objects.length); i++) {\n    core.debug(objects[i].first);\n}"
+    },
+    {
+        "name": "searchByName",
+        "category": "Satellites - Search",
+        "signature": "StelObjectP searchByName(QString name)",
+        "description": "Searches for a satellite by its English name, NORAD number, or international designator.",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "Satellite name (e.g., 'ISS', 'HST', 'NORAD 25544', '1998-067A')",
+                "required": true
+            }
+        ],
+        "returnType": "StelObjectP",
+        "returnDescription": "Satellite object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Case-insensitive search"
+        },
+        "example": "// Search by name\nvar iss = Satellites.searchByName(\"ISS\");\nif (iss) {\n    core.debug(\"Found: \" + iss.getEnglishName());\n    core.moveToObject(iss.getEnglishName(), 2);\n}\n\n// Search by NORAD number\nvar hst = Satellites.searchByName(\"NORAD 20580\");\nif (hst) {\n    core.debug(\"Found Hubble Space Telescope\");\n}"
+    },
+    {
+        "name": "searchByNameI18n",
+        "category": "Satellites - Search",
+        "signature": "StelObjectP searchByNameI18n(QString nameI18n)",
+        "description": "Searches for a satellite by its translated (localized) name.",
+        "parameters": [
+            {
+                "name": "nameI18n",
+                "type": "QString",
+                "description": "Localized satellite name",
+                "required": true
+            }
+        ],
+        "returnType": "StelObjectP",
+        "returnDescription": "Satellite object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Depends on current UI language"
+        },
+        "example": "// Search with current language name\nvar sat = Satellites.searchByNameI18n(\"محطة الفضاء الدولية\");\nif (sat) {\n    core.debug(\"Found satellite\");\n}"
+    },
+    {
+        "name": "searchByID",
+        "category": "Satellites - Search",
+        "signature": "StelObjectP searchByID(QString id)",
+        "description": "Searches for a satellite by its unique identifier (NORAD catalog number).",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "NORAD catalog number (e.g., '25544' for ISS)",
+                "required": true
+            }
+        ],
+        "returnType": "StelObjectP",
+        "returnDescription": "Satellite object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Alternative to getById()"
+        },
+        "example": "var iss = Satellites.searchByID(\"25544\");\nif (iss) {\n    core.debug(\"ISS found!\");\n    core.moveToObject(iss.getEnglishName(), 3);\n}"
+    },
+    {
+        "name": "getLastSelectedSatelliteID",
+        "category": "Satellites - Information",
+        "signature": "QString getLastSelectedSatelliteID()",
+        "description": "Returns the NORAD ID of the last selected satellite in the GUI.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "NORAD catalog number of the last selected satellite",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Introduced in Stellarium 0.14.0"
+        },
+        "example": "var lastId = Satellites.getLastSelectedSatelliteID();\nif (lastId) {\n    var sat = Satellites.getById(lastId);\n    if (sat) {\n        core.debug(\"Last selected: \" + sat.getEnglishName());\n    }\n}"
+    }
+]

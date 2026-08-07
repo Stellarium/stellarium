@@ -1,0 +1,167 @@
+[
+    {
+        "name": "setFlagShow",
+        "category": "Milky Way - Core",
+        "signature": "void setFlagShow(bool visible)",
+        "description": "Shows or hides the Milky Way galaxy rendering. When enabled, the band of our galaxy appears across the sky.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show the Milky Way, `false` to hide it.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "alternative": "Use `core.getStelProperty('MilkyWay.flagMilkyWayDisplayed')` to read the current state.",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Enable Milky Way rendering\nMilkyWay.setFlagShow(true);\n\n// Disable Milky Way rendering\nMilkyWay.setFlagShow(false);\n\n// Read current state (alternative method)\nvar visible = core.getStelProperty('MilkyWay.flagMilkyWayDisplayed');"
+    },
+    {
+        "name": "getFlagShow",
+        "category": "Milky Way - Core",
+        "signature": "bool getFlagShow()",
+        "description": "Returns whether the Milky Way galaxy is currently displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if the Milky Way is visible, `false` otherwise.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (MilkyWay.getFlagShow()) {\n    core.debug(\"Milky Way is visible\");\n}"
+    },
+    {
+        "name": "setIntensity",
+        "category": "Milky Way - Appearance",
+        "signature": "void setIntensity(double intensity)",
+        "description": "Sets the intensity (brightness) of the Milky Way rendering. Values above 1.0 make it appear brighter, below 1.0 dimmer.",
+        "parameters": [
+            {
+                "name": "intensity",
+                "type": "double",
+                "description": "Intensity value (recommended: 0.0 to 2.0, default: 1.0).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Make the Milky Way brighter\nMilkyWay.setIntensity(1.5);\n\n// Make the Milky Way dimmer\nMilkyWay.setIntensity(0.5);\n\n// Reset to default\nMilkyWay.setIntensity(1.0);"
+    },
+    {
+        "name": "getIntensity",
+        "category": "Milky Way - Appearance",
+        "signature": "double getIntensity()",
+        "description": "Returns the current intensity (brightness) of the Milky Way rendering.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Intensity value (default: 1.0).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var intensity = MilkyWay.getIntensity();\ncore.debug(\"Milky Way intensity: \" + intensity);"
+    },
+    {
+        "name": "setSaturation",
+        "category": "Milky Way - Appearance",
+        "signature": "void setSaturation(double saturation)",
+        "description": "Sets the color saturation of the Milky Way rendering. `0.0` = grayscale, `1.0` = natural colors, >1.0 = more vivid colors.",
+        "parameters": [
+            {
+                "name": "saturation",
+                "type": "double",
+                "description": "Saturation value (0.0 to 2.0, default: 1.0).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Make Milky Way colors more vivid\nMilkyWay.setSaturation(1.3);\n\n// Make Milky Way black and white\nMilkyWay.setSaturation(0.0);\n\n// Reset to natural colors\nMilkyWay.setSaturation(1.0);"
+    },
+    {
+        "name": "getSaturation",
+        "category": "Milky Way - Appearance",
+        "signature": "double getSaturation()",
+        "description": "Returns the color saturation of the Milky Way rendering.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Saturation value (default: 1.0).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var saturation = MilkyWay.getSaturation();\ncore.debug(\"Milky Way saturation: \" + saturation);"
+    },
+    {
+        "name": "setColor",
+        "category": "Milky Way - Appearance",
+        "signature": "void setColor(Vec3f color)",
+        "description": "Sets the color tint for the Milky Way rendering. White `(1, 1, 1)` gives natural colors; other values create color casts.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Set Milky Way to natural white\nvar white = core.vec3f(1.0, 1.0, 1.0);\nMilkyWay.setColor(white);\n\n// Set a subtle warm tint\nvar warm = core.vec3f(1.0, 0.95, 0.9);\nMilkyWay.setColor(warm);\n\n// Set a bluish tint\nvar blueish = core.vec3f(0.85, 0.9, 1.0);\nMilkyWay.setColor(blueish);"
+    },
+    {
+        "name": "getColor",
+        "category": "Milky Way - Appearance",
+        "signature": "Vec3f getColor()",
+        "description": "Returns the current color tint applied to the Milky Way rendering.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var color = MilkyWay.getColor();\ncore.debug(\"Milky Way color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    }
+]
