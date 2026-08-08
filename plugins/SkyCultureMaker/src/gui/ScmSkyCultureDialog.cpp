@@ -879,10 +879,6 @@ void ScmSkyCultureDialog::removeLocation()
 
 		ui->cultureBeginTimeValueLabel->setText(QString::number(beginTime));
 		ui->cultureEndTimeValueLabel->setText(endTime);
-
-		// update the beginTime / endTime of the skyCulture
-		maker->setSkyCultureBeginTime(ui->cultureBeginTimeValueLabel->text().toInt());
-		maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text() == "∞" ? 9146 : ui->cultureEndTimeValueLabel->text().toInt());
 	}
 	else
 	{
@@ -958,10 +954,6 @@ void ScmSkyCultureDialog::confirmAddPolygon()
 			ui->cultureEndTimeValueLabel->setText(endTime);
 		}
 	}
-
-	// update the beginTime / endTime of the skyCulture
-	maker->setSkyCultureBeginTime(ui->cultureBeginTimeValueLabel->text().toInt());
-	maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text() == "∞" ? 9146 : ui->cultureEndTimeValueLabel->text().toInt());
 
 	// add the current polygon to the map with beginTime and endTime as time limits
 	ui->scmGeoLocGraphicsView->addCurrentPoly(beginTime, ui->endTimeSpinBox->value());

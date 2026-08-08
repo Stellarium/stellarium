@@ -56,12 +56,6 @@ public:
 	 */
 	const QString &getId() const;
 
-	/// Sets the start time of the sky culture
-	void setBeginTime(int beginTime);
-
-	/// Sets the end time of the sky culture
-	void setEndTime(int endTime);
-
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
 
@@ -157,12 +151,6 @@ private:
 
 	/// The geographical location (as polygons) of the sky culture
 	QList<CulturePolygon> locations;
-
-	/// The earliest year associated with a territory of the sky culture
-	int beginTime;
-
-	/// The latest year associated with a territory of the sky culture
-	int endTime;
 
 	/**
 	 * @brief Evaluates which action shoud be taken after a merge operation and updates the respective location.
