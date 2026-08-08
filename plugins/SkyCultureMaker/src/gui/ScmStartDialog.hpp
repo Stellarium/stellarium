@@ -64,6 +64,7 @@ protected slots:
 
 private slots:
 	void startScmCreationProcess();
+	void startScmEditingProcess();
 
 private:
 	Ui_scmStartDialog *ui  = nullptr;
