@@ -131,6 +131,8 @@ void ConfigurationDialog::retranslate()
 
 		populateDitherList();
 
+		populateToolbarCornerComboBox();
+
 		//Plug-in information
 		populatePluginsList();
 
@@ -424,6 +426,10 @@ void ConfigurationDialog::createDialogContent()
 	connect(mainView, &StelMainView::sizeChanged,                        this, &ConfigurationDialog::updateDpiTooltip);
 	updateDpiTooltip();
 
+	// Toolbar corner combobox (0=BL, 1=BR, 2=TL, 3=TR)
+	populateToolbarCornerComboBox();
+	connect(ui->toolbarCornerComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setToolbarCorner(int)));
+
 	// script tab controls
 	#ifdef ENABLE_SCRIPTING
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
@@ -526,6 +532,29 @@ void ConfigurationDialog::updateDateTimeDisplayFormat()
 	QString dateFormat = localeManager.getQtDateFormatStr();
 	ui->todayTimeSpinBox->setDisplayFormat(timeFormat);
 	ui->fixedDateTimeEdit->setDisplayFormat(QString("%1 %2").arg(dateFormat, timeFormat));
+}
+
+void ConfigurationDialog::populateToolbarCornerComboBox()
+{
+	QComboBox* cb = ui->toolbarCornerComboBox;
+	const int cur = cb->count() > 0 ? cb->currentIndex()
+	                                : StelApp::getInstance()
+	                                          .getStelPropertyManager()
+	                                          ->getStelPropertyValue("StelGui.toolbarCorner")
+	                                          .toInt();
+	cb->blockSignals(true);
+	cb->clear();
+	cb->addItem(q_("Bottom-left"));
+	cb->addItem(q_("Bottom-right"));
+	cb->addItem(q_("Top-left"));
+	cb->addItem(q_("Top-right"));
+	cb->setCurrentIndex(qBound(0, cur, 3));
+	cb->blockSignals(false);
+}
+
+void ConfigurationDialog::setToolbarCorner(int idx)
+{
+	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("StelGui.toolbarCorner", idx);
 }
 
 void ConfigurationDialog::setKeyNavigationState(bool state)
@@ -1399,6 +1428,8 @@ void ConfigurationDialog::saveAllSettings()
 	// toolbar auto-hide status
         conf->setValue("gui/auto_hide_horizontal_toolbar",              propMgr->getStelPropertyValue("StelGui.autoHideHorizontalButtonBar").toBool());
         conf->setValue("gui/auto_hide_vertical_toolbar",                propMgr->getStelPropertyValue("StelGui.autoHideVerticalButtonBar").toBool());
+        // toolbar positions
+        conf->setValue("gui/toolbar_corner",                            propMgr->getStelPropertyValue("StelGui.toolbarCorner").toInt());
         conf->setValue("gui/flag_show_quit_button",                     propMgr->getStelPropertyValue("StelGui.flagShowQuitButton").toBool());
         conf->setValue("gui/flag_show_nebulae_background_button",       propMgr->getStelPropertyValue("StelGui.flagShowNebulaBackgroundButton").toBool());
         conf->setValue("gui/flag_show_dss_button",                      propMgr->getStelPropertyValue("StelGui.flagShowDSSButton").toBool());

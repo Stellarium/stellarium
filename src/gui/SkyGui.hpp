@@ -112,6 +112,11 @@ private:
 
 	bool autoHideBottomBar;
 	bool autoHideLeftBar;
+
+	//! If true, the tool bar and dialog bar are docked to the top edge instead of the bottom.
+	bool toolbarAtTop;
+	//! If true, the tool bar and dialog bar are docked to the right edge instead of the left.
+	bool toolbarAtRight;
 	
 	StelGui* stelGui;
 };
