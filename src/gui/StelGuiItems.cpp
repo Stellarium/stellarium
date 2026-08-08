@@ -924,10 +924,15 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 		else
 			deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
-		// the corrective ndot to be displayed could be set according to the currently used DeltaT algorithm.
-		//float ndot=core->getDeltaTnDot();
-		// or just to the used ephemeris. This has to be read as "Selected DeltaT formula used, but with the ephemeris's nDot applied it corrects DeltaT to..."
-		const double ndot=( (EphemWrapper::use_de430(jd) || EphemWrapper::use_de431(jd) || EphemWrapper::use_de440(jd) || EphemWrapper::use_de441(jd)) ? -25.8 : -23.8946 );
+		// (SS) 2025-11-27: update ndot values according to DE430/431 and DE440/441 values provided by JPL:
+		double ndot;
+
+		if (EphemWrapper::use_de430(jd) || EphemWrapper::use_de431(jd))
+			ndot = -25.82;
+		else if (EphemWrapper::use_de440(jd) || EphemWrapper::use_de441(jd))
+			ndot = -25.936;
+		else
+			ndot = -23.8946;
 
 		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7<br>%9</p>").arg(QChar(0x0394), deltaTInfo, QString::number(ndot, 'f', 4), QChar(0x00B2), sigmaInfo, newDateAppx, currTZ, QChar(0x2032), timeRateInfo));
 	}
