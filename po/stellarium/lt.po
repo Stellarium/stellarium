@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-07-29 15:06+0700\n"
+"POT-Creation-Date: 2026-08-07 19:22+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Gediminas Tauras, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
@@ -1279,7 +1279,7 @@ msgstr "Cikliškas šviesos taršos kitimas"
 
 #: src/core/modules/LandscapeMgr.cpp:1538 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:630
+#: plugins/Oculars/src/gui/OcularDialog.cpp:631
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:257
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -6299,7 +6299,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:540 src/gui/ConfigurationDialog.cpp:1610
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
-#: plugins/Oculars/src/gui/OcularDialog.cpp:629
+#: plugins/Oculars/src/gui/OcularDialog.cpp:630
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:256
@@ -7098,8 +7098,8 @@ msgid "Select screenshot directory"
 msgstr "Nurodykite katalogą ekrano nuotraukoms"
 
 #: src/gui/ConfigurationDialog.cpp:1036
-#: plugins/Oculars/src/gui/OcularDialog.cpp:594
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/gui/OcularDialog.cpp:595
+#: plugins/Oculars/src/gui/OcularDialog.cpp:601
 msgctxt "millimeters"
 msgid "mm"
 msgstr "mm"
@@ -7145,7 +7145,7 @@ msgstr "Susisiekite"
 #: src/gui/ConfigurationDialog.cpp:1609 src/gui/HelpDialog.cpp:537
 #: src/scripting/StelScriptMgr.cpp:657
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
-#: plugins/Oculars/src/gui/OcularDialog.cpp:628
+#: plugins/Oculars/src/gui/OcularDialog.cpp:629
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
@@ -7835,7 +7835,7 @@ msgstr "Nuolatinė integracija: %1"
 
 #: src/gui/HelpDialog.cpp:588
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:631
+#: plugins/Oculars/src/gui/OcularDialog.cpp:632
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:258
@@ -8139,7 +8139,7 @@ msgstr "Žemėlapis be albedo"
 msgid "This group of surveys doesn't have an albedo map. Can't display it."
 msgstr "Ši tyrimo grupė neturi albedo žemėlapio. Negalima jo rodyti."
 
-#: src/gui/ViewDialog.cpp:1585
+#: src/gui/ViewDialog.cpp:1588
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -8148,7 +8148,7 @@ msgstr ""
 "objektams (mažiems mėnuliams, asteroidams, kometoms) vietoje sferinės "
 "aproksimacijos."
 
-#: src/gui/ViewDialog.cpp:1586
+#: src/gui/ViewDialog.cpp:1589
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -8158,120 +8158,120 @@ msgstr ""
 "būti prastesnė."
 
 #. TRANSLATORS: duration in seconds
-#: src/gui/ViewDialog.cpp:1595
+#: src/gui/ViewDialog.cpp:1598
 msgctxt "duration, suffix"
 msgid "s"
 msgstr "s"
 
-#: src/gui/ViewDialog.cpp:1607 src/ui_astroCalcExtraEphemerisDialog.h:258
+#: src/gui/ViewDialog.cpp:1610 src/ui_astroCalcExtraEphemerisDialog.h:258
 #: src/ui_astroCalcExtraEphemerisDialog.h:263
-#: plugins/Oculars/src/Oculars.cpp:2064
-#: plugins/Oculars/src/gui/OcularDialog.cpp:601
+#: plugins/Oculars/src/Oculars.cpp:2069
+#: plugins/Oculars/src/gui/OcularDialog.cpp:602
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1199
 #: plugins/Satellites/src/ui_satellitesDialog.h:1255
 msgctxt "pixels"
 msgid "px"
 msgstr "px"
 
-#: src/gui/ViewDialog.cpp:1646 src/ui_viewDialog.h:4730
+#: src/gui/ViewDialog.cpp:1649 src/ui_viewDialog.h:4730
 msgid "Other"
 msgstr "Kita"
 
-#: src/gui/ViewDialog.cpp:1847
+#: src/gui/ViewDialog.cpp:1850
 msgctxt "cultural style"
 msgid "native"
 msgstr "vietinis"
 
-#: src/gui/ViewDialog.cpp:1848
+#: src/gui/ViewDialog.cpp:1851
 msgctxt "cultural style"
 msgid "transliteration"
 msgstr "transliteracija"
 
-#: src/gui/ViewDialog.cpp:1849
+#: src/gui/ViewDialog.cpp:1852
 msgctxt "cultural style"
 msgid "sci. translit."
 msgstr "mksl. translit."
 
-#: src/gui/ViewDialog.cpp:1850
+#: src/gui/ViewDialog.cpp:1853
 msgctxt "cultural style"
 msgid "translated"
 msgstr "vertimas"
 
-#: src/gui/ViewDialog.cpp:2005
+#: src/gui/ViewDialog.cpp:2008
 msgid "No shooting stars"
 msgstr "Be krintančių žvaigždžių"
 
-#: src/gui/ViewDialog.cpp:2007
+#: src/gui/ViewDialog.cpp:2010
 msgid "Normal rate"
 msgstr "Normalus dažnis"
 
-#: src/gui/ViewDialog.cpp:2009
+#: src/gui/ViewDialog.cpp:2012
 msgid "Standard Orionids rate"
 msgstr "Standartinis Orionidų dažnis"
 
-#: src/gui/ViewDialog.cpp:2011
+#: src/gui/ViewDialog.cpp:2014
 msgid "Standard Perseids rate"
 msgstr "Standartinis Perseidų"
 
-#: src/gui/ViewDialog.cpp:2013
+#: src/gui/ViewDialog.cpp:2016
 msgid "Standard Geminids rate"
 msgstr "Standartinis Geminidų dažnis"
 
-#: src/gui/ViewDialog.cpp:2015
+#: src/gui/ViewDialog.cpp:2018
 msgid "Exceptional Perseid rate"
 msgstr "Ypač geras Perseidų dažnis"
 
-#: src/gui/ViewDialog.cpp:2017
+#: src/gui/ViewDialog.cpp:2020
 msgid "Meteor storm rate"
 msgstr "Meteorų audros dažnis"
 
-#: src/gui/ViewDialog.cpp:2019
+#: src/gui/ViewDialog.cpp:2022
 msgid "Exceptional Draconid rate"
 msgstr "Ypač geras Drakonidų dažnis"
 
-#: src/gui/ViewDialog.cpp:2021
+#: src/gui/ViewDialog.cpp:2024
 msgid "Exceptional Leonid rate"
 msgstr "Ypač geras Leonidų"
 
-#: src/gui/ViewDialog.cpp:2023
+#: src/gui/ViewDialog.cpp:2026
 msgid "Very high rate (1966 Leonids)"
 msgstr "Labai aukštas dažnis (1966 Leonidai)"
 
-#: src/gui/ViewDialog.cpp:2025
+#: src/gui/ViewDialog.cpp:2028
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Aukščiausias pasiektas dažnis (1833 Leonidai)"
 
-#: src/gui/ViewDialog.cpp:2284
+#: src/gui/ViewDialog.cpp:2287
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "G. Müller (1893)"
 
-#: src/gui/ViewDialog.cpp:2285
+#: src/gui/ViewDialog.cpp:2288
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "Astronominis Almanachas (1984)"
 
-#: src/gui/ViewDialog.cpp:2286
+#: src/gui/ViewDialog.cpp:2289
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Aiškinamasis priedas (1992)"
 
-#: src/gui/ViewDialog.cpp:2287
+#: src/gui/ViewDialog.cpp:2290
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Aiškinamasis priedas (2013)"
 
-#: src/gui/ViewDialog.cpp:2288
+#: src/gui/ViewDialog.cpp:2291
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "Mallama & Hilton (2018)"
 
-#: src/gui/ViewDialog.cpp:2289
+#: src/gui/ViewDialog.cpp:2292
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Bendras"
 
-#: src/gui/ViewDialog.cpp:2312
+#: src/gui/ViewDialog.cpp:2315
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -8279,7 +8279,7 @@ msgstr ""
 "Algoritmas buvo naudojamas <em>Astronominiam Almanache</em> (1984 ir vėliau)"
 " ir suteikia V (instrumentiniu) dydžius (tariamai iš D.L. Harris)."
 
-#: src/gui/ViewDialog.cpp:2313
+#: src/gui/ViewDialog.cpp:2316
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
@@ -8289,7 +8289,7 @@ msgstr ""
 "metais ir vis dar buvo išleistas <em>Astronominė Efemerija aiškinamajame "
 "priede</em> (1961)."
 
-#: src/gui/ViewDialog.cpp:2314
+#: src/gui/ViewDialog.cpp:2317
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
@@ -8297,7 +8297,7 @@ msgstr ""
 "Algoritmas buvo paskelbtas <em>Astronominio Almanacho aiškinamąjame "
 "priede</em> (1992), antroje leidimo versijoje."
 
-#: src/gui/ViewDialog.cpp:2315
+#: src/gui/ViewDialog.cpp:2318
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -8305,7 +8305,7 @@ msgstr ""
 "Algoritmas buvo paskelbtas <em>Astronominio Almanacho aiškinamąjame "
 "priede</em> (2013), trečioje leidimo versijoje."
 
-#: src/gui/ViewDialog.cpp:2316
+#: src/gui/ViewDialog.cpp:2319
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
@@ -8315,7 +8315,7 @@ msgstr ""
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 
-#: src/gui/ViewDialog.cpp:2319
+#: src/gui/ViewDialog.cpp:2322
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vizualinis ryškis pagal fazinį kampą ir albedą."
 
@@ -13414,10 +13414,10 @@ msgstr "&Kopijuoti"
 msgid "&Paste"
 msgstr "&Įklijuoti"
 
-#: src/translations.h:841 plugins/Oculars/src/ui_ocularDialog.h:1555
-#: plugins/Oculars/src/ui_ocularDialog.h:1564
-#: plugins/Oculars/src/ui_ocularDialog.h:1570
-#: plugins/Oculars/src/ui_ocularDialog.h:1589
+#: src/translations.h:841 plugins/Oculars/src/ui_ocularDialog.h:1562
+#: plugins/Oculars/src/ui_ocularDialog.h:1571
+#: plugins/Oculars/src/ui_ocularDialog.h:1577
+#: plugins/Oculars/src/ui_ocularDialog.h:1596
 msgid "Delete"
 msgstr "Pašalinti"
 
@@ -20160,7 +20160,7 @@ msgid "Allow snap to selected object"
 msgstr "Leisti pririšti prie pasirinkto objekto"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
-#: plugins/Oculars/src/ui_ocularDialog.h:1597
+#: plugins/Oculars/src/ui_ocularDialog.h:1604
 #: plugins/Satellites/src/ui_satellitesDialog.h:1384
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:240
@@ -20186,8 +20186,8 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Apie"
 
-#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1554
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
+#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1556
+#: plugins/Oculars/src/ui_ocularDialog.h:1438
 msgid "Oculars"
 msgstr "Okuliarai"
 
@@ -20201,59 +20201,59 @@ msgstr ""
 " didinimas ir regėjimo laukas). Taip pat gali rodyti sensoriaus rėmelį ir "
 "Telrad ieškiklį."
 
-#: plugins/Oculars/src/Oculars.cpp:1032
+#: plugins/Oculars/src/Oculars.cpp:1034
 msgid "Please select an object before switching to ocular view."
 msgstr "Prašome pasirinkti objektą prieš perjungiant į okuliaro rodinį."
 
-#: plugins/Oculars/src/Oculars.cpp:1140
+#: plugins/Oculars/src/Oculars.cpp:1142
 msgid "&Previous ocular"
 msgstr "Ankstesnis okuliaras"
 
-#: plugins/Oculars/src/Oculars.cpp:1141
+#: plugins/Oculars/src/Oculars.cpp:1143
 msgid "&Next ocular"
 msgstr "Kitas okuliaras"
 
-#: plugins/Oculars/src/Oculars.cpp:1142
+#: plugins/Oculars/src/Oculars.cpp:1144
 msgid "Select &ocular"
 msgstr "Pasirinkite &okuliarą"
 
-#: plugins/Oculars/src/Oculars.cpp:1185
+#: plugins/Oculars/src/Oculars.cpp:1187
 msgid "Toggle &crosshair"
 msgstr "Perjungti &kryžminį taikiklį"
 
-#: plugins/Oculars/src/Oculars.cpp:1197
+#: plugins/Oculars/src/Oculars.cpp:1199
 msgid "Configure &Oculars"
 msgstr "Konfigūruokite &Okuliarus"
 
-#: plugins/Oculars/src/Oculars.cpp:1206
+#: plugins/Oculars/src/Oculars.cpp:1208
 msgid "Toggle &CCD"
 msgstr "Perjungti &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1214
+#: plugins/Oculars/src/Oculars.cpp:1216
 msgid "Toggle &Telrad"
 msgstr "Perjungti &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1224
+#: plugins/Oculars/src/Oculars.cpp:1226
 msgid "&Previous CCD"
 msgstr "&Ankstesnis CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1225
+#: plugins/Oculars/src/Oculars.cpp:1227
 msgid "&Next CCD"
 msgstr "&Kitas CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1226
+#: plugins/Oculars/src/Oculars.cpp:1228
 msgid "&Select CCD"
 msgstr "&Pasirinkti CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1247
+#: plugins/Oculars/src/Oculars.cpp:1249
 msgid "&Rotate CCD"
 msgstr "&Pasukti CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1259
+#: plugins/Oculars/src/Oculars.cpp:1261
 msgid "&Reset rotation"
 msgstr "&Atstatyti sukimosi kampą"
 
-#: plugins/Oculars/src/Oculars.cpp:1423
+#: plugins/Oculars/src/Oculars.cpp:1425
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:135
 #: plugins/Oculars/src/gui/OcularDialog.cpp:152
@@ -20262,35 +20262,35 @@ msgstr "&Atstatyti sukimosi kampą"
 msgid "Warning!"
 msgstr "Dėmesio!"
 
-#: plugins/Oculars/src/Oculars.cpp:1423
+#: plugins/Oculars/src/Oculars.cpp:1425
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr ""
 "Nepavyksta rodyti jutiklio ribos: Nėra apibrėžti jokie jutikliai ar "
 "teleskopai."
 
-#: plugins/Oculars/src/Oculars.cpp:1555
-#: plugins/Oculars/src/ui_ocularDialog.h:1471
+#: plugins/Oculars/src/Oculars.cpp:1557
+#: plugins/Oculars/src/ui_ocularDialog.h:1477
 msgid "Ocular view"
 msgstr "Okuliaro vaizdas"
 
-#: plugins/Oculars/src/Oculars.cpp:1556
+#: plugins/Oculars/src/Oculars.cpp:1558
 msgid "Oculars popup menu"
 msgstr "Iššokantis okuliarų meniu"
 
-#: plugins/Oculars/src/Oculars.cpp:1557
+#: plugins/Oculars/src/Oculars.cpp:1559
 msgid "Show crosshairs"
 msgstr "Rodyti taikiklio kryželį"
 
-#: plugins/Oculars/src/Oculars.cpp:1558
+#: plugins/Oculars/src/Oculars.cpp:1560
 msgid "Image sensor frame"
 msgstr "Vaizdo jutiklio kadras"
 
-#: plugins/Oculars/src/Oculars.cpp:1559
+#: plugins/Oculars/src/Oculars.cpp:1561
 msgid "Telrad sight"
 msgstr "Telrad taikiklis"
 
-#: plugins/Oculars/src/Oculars.cpp:1561
+#: plugins/Oculars/src/Oculars.cpp:1563
 #: plugins/Satellites/src/Satellites.cpp:463
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:202
 #: plugins/NavStars/src/NavStars.cpp:125 plugins/Quasars/src/Quasars.cpp:179
@@ -20308,92 +20308,92 @@ msgstr "Telrad taikiklis"
 msgid "Show settings dialog"
 msgstr "Rodyti nustatymų dialogą"
 
-#: plugins/Oculars/src/Oculars.cpp:1563
+#: plugins/Oculars/src/Oculars.cpp:1565
 msgid "Toggle Oculars button bar"
 msgstr "Perjungti okuliarų mygtukų juostą"
 
-#: plugins/Oculars/src/Oculars.cpp:1565
+#: plugins/Oculars/src/Oculars.cpp:1567
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Select next telescope"
 msgstr "Pasirinkti kitą teleskopą"
 
-#: plugins/Oculars/src/Oculars.cpp:1567
+#: plugins/Oculars/src/Oculars.cpp:1569
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
 msgid "Select previous telescope"
 msgstr "Pasirinkti ankstesnį teleskopą"
 
-#: plugins/Oculars/src/Oculars.cpp:1569
+#: plugins/Oculars/src/Oculars.cpp:1571
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
 msgid "Select next eyepiece"
 msgstr "Pasirinkti kitą okuliarą"
 
-#: plugins/Oculars/src/Oculars.cpp:1571
+#: plugins/Oculars/src/Oculars.cpp:1573
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Select previous eyepiece"
 msgstr "Pasirinkti ankstesnį okuliarą"
 
-#: plugins/Oculars/src/Oculars.cpp:1573
+#: plugins/Oculars/src/Oculars.cpp:1575
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Select next lens"
 msgstr "Pasirinkti kitą objektyvą."
 
-#: plugins/Oculars/src/Oculars.cpp:1575
+#: plugins/Oculars/src/Oculars.cpp:1577
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Select previous lens"
 msgstr "Pasirinkti ankstesnį objektyvą."
 
-#: plugins/Oculars/src/Oculars.cpp:1577
+#: plugins/Oculars/src/Oculars.cpp:1579
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Select next CCD frame"
 msgstr "Pasirinkti kitą CCD kadrą."
 
-#: plugins/Oculars/src/Oculars.cpp:1579
+#: plugins/Oculars/src/Oculars.cpp:1581
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Select previous CCD frame"
 msgstr "Pasirinkti ankstesnį CCD kadrą"
 
-#: plugins/Oculars/src/Oculars.cpp:1580
+#: plugins/Oculars/src/Oculars.cpp:1582
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr " Pasukti okuliaro tinklelio raštą pagal laikrodžio rodyklę"
 
-#: plugins/Oculars/src/Oculars.cpp:1581
+#: plugins/Oculars/src/Oculars.cpp:1583
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr " Pasukti okuliaro tinklelio raštą prieš laikrodžio rodyklę"
 
-#: plugins/Oculars/src/Oculars.cpp:1582
+#: plugins/Oculars/src/Oculars.cpp:1584
 msgid "Toggle sensor crop overlay"
 msgstr " Jutiklio perdangos perjungimas"
 
-#: plugins/Oculars/src/Oculars.cpp:1583
+#: plugins/Oculars/src/Oculars.cpp:1585
 msgid "Toggle sensor pixel grid"
 msgstr " Jutiklio taškų tinklelio perjungimas"
 
-#: plugins/Oculars/src/Oculars.cpp:1584
+#: plugins/Oculars/src/Oculars.cpp:1586
 msgid "Toggle focuser overlay"
 msgstr " Fokusatoriaus perdangos perjungimas"
 
-#: plugins/Oculars/src/Oculars.cpp:1587
+#: plugins/Oculars/src/Oculars.cpp:1589
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1289
 msgid "Reset the sensor frame rotation"
 msgstr "Atstatyti jutiklio rėmo pasukimą"
 
-#: plugins/Oculars/src/Oculars.cpp:1588
+#: plugins/Oculars/src/Oculars.cpp:1590
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1292
 msgid "Reset the prism rotation"
 msgstr "Atstatyti prizmės pasukimą."
 
-#: plugins/Oculars/src/Oculars.cpp:1981
+#: plugins/Oculars/src/Oculars.cpp:1986
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt of cross"
 msgstr "Kryžiaus Az/Alt"
 
-#: plugins/Oculars/src/Oculars.cpp:2001
+#: plugins/Oculars/src/Oculars.cpp:2006
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "Kryžiaus RA/Dec (J2000.0)"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:2045
+#: plugins/Oculars/src/Oculars.cpp:2050
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:562
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
 msgid "\"/px"
@@ -20401,7 +20401,7 @@ msgstr "\"/tšk"
 
 #. TRANSLATORS: "Max exposure" is short version of phrase "Max time of
 #. exposure"
-#: plugins/Oculars/src/Oculars.cpp:2082
+#: plugins/Oculars/src/Oculars.cpp:2087
 msgid "Max exposure"
 msgstr "Ilgiausia ekspozicija"
 
@@ -20409,7 +20409,7 @@ msgstr "Ilgiausia ekspozicija"
 #. TRANSLATORS: seconds.
 #. TRANSLATORS: Unit of measure for time - seconds
 #. TRANSLATORS: duration in seconds
-#: plugins/Oculars/src/Oculars.cpp:2082
+#: plugins/Oculars/src/Oculars.cpp:2087
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1193
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:245
 #: plugins/Planes/src/AircraftObject.cpp:213
@@ -20418,125 +20418,125 @@ msgctxt "time"
 msgid "s"
 msgstr "s"
 
-#: plugins/Oculars/src/Oculars.cpp:2325
+#: plugins/Oculars/src/Oculars.cpp:2330
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:352
 msgid "Binocular"
 msgstr "Binoklis"
 
-#: plugins/Oculars/src/Oculars.cpp:2325
+#: plugins/Oculars/src/Oculars.cpp:2330
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:350
 msgid "Ocular"
 msgstr "Okuliaras"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2345
+#: plugins/Oculars/src/Oculars.cpp:2350
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:395
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Okuliaro židinio nuotolis: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2352
+#: plugins/Oculars/src/Oculars.cpp:2357
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:404
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Okuliaro  aRL: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2363
+#: plugins/Oculars/src/Oculars.cpp:2368
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:434
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lęšis #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2367
+#: plugins/Oculars/src/Oculars.cpp:2372
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:438
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lęšis #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2372
+#: plugins/Oculars/src/Oculars.cpp:2377
 msgid "Lens: none"
 msgstr "Lęšis: nenurodytas"
 
-#: plugins/Oculars/src/Oculars.cpp:2387 plugins/Oculars/src/Oculars.cpp:2448
+#: plugins/Oculars/src/Oculars.cpp:2392 plugins/Oculars/src/Oculars.cpp:2453
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskopas #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2396
+#: plugins/Oculars/src/Oculars.cpp:2401
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Didinimas: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2403
+#: plugins/Oculars/src/Oculars.cpp:2408
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Išėjimo vyzdys: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2410
+#: plugins/Oculars/src/Oculars.cpp:2415
 #, qt-format
 msgid "FOV: %1"
 msgstr "Matymo laukas: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2431
+#: plugins/Oculars/src/Oculars.cpp:2436
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Matmenys: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2432
+#: plugins/Oculars/src/Oculars.cpp:2437
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 msgid "Binning"
 msgstr "Suskirstymas"
 
-#: plugins/Oculars/src/Oculars.cpp:2436
+#: plugins/Oculars/src/Oculars.cpp:2441
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:510
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensorius #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2440
+#: plugins/Oculars/src/Oculars.cpp:2445
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:514
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensorius #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2453
+#: plugins/Oculars/src/Oculars.cpp:2458
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskopas #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2796
+#: plugins/Oculars/src/Oculars.cpp:2801
 msgid "&Lens"
 msgstr "&Lęšiai"
 
-#: plugins/Oculars/src/Oculars.cpp:2797
+#: plugins/Oculars/src/Oculars.cpp:2802
 msgid "&Previous lens"
 msgstr "&Ankstesnis lęšis"
 
-#: plugins/Oculars/src/Oculars.cpp:2798
+#: plugins/Oculars/src/Oculars.cpp:2803
 msgid "&Next lens"
 msgstr "&Kitas lęšis"
 
-#: plugins/Oculars/src/Oculars.cpp:2800
+#: plugins/Oculars/src/Oculars.cpp:2805
 msgid "None"
 msgstr "Nieko"
 
-#: plugins/Oculars/src/Oculars.cpp:2827
+#: plugins/Oculars/src/Oculars.cpp:2832
 msgid "&Telescope"
 msgstr "&Teleskopas"
 
-#: plugins/Oculars/src/Oculars.cpp:2828
+#: plugins/Oculars/src/Oculars.cpp:2833
 msgid "&Previous telescope"
 msgstr "&Ankstesnis teleskopas"
 
-#: plugins/Oculars/src/Oculars.cpp:2829
+#: plugins/Oculars/src/Oculars.cpp:2834
 msgid "&Next telescope"
 msgstr "&Kitas teleskopas"
 
@@ -20804,60 +20804,60 @@ msgid "Cannot delete the last telescope."
 msgstr "Negalima ištrinti paskutinio teleskopo."
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:583
+#: plugins/Oculars/src/gui/OcularDialog.cpp:584
 msgid "tFOV:"
 msgstr "tRL:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:585
+#: plugins/Oculars/src/gui/OcularDialog.cpp:586
 msgid "Magnification factor:"
 msgstr "Padidinimo faktorius: "
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:586
-#: plugins/Oculars/src/ui_ocularDialog.h:1594
+#: plugins/Oculars/src/gui/OcularDialog.cpp:587
+#: plugins/Oculars/src/ui_ocularDialog.h:1601
 msgid "Diameter:"
 msgstr "Skersmuo:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:591
-#: plugins/Oculars/src/ui_ocularDialog.h:1559
+#: plugins/Oculars/src/gui/OcularDialog.cpp:592
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 msgid "aFOV:"
 msgstr "aRL:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:592
-#: plugins/Oculars/src/ui_ocularDialog.h:1560
-#: plugins/Oculars/src/ui_ocularDialog.h:1595
+#: plugins/Oculars/src/gui/OcularDialog.cpp:593
+#: plugins/Oculars/src/ui_ocularDialog.h:1567
+#: plugins/Oculars/src/ui_ocularDialog.h:1602
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:770
 msgid "Focal length:"
 msgstr "Fokalinis nuotolis:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:593
-#: plugins/Oculars/src/ui_ocularDialog.h:1556
+#: plugins/Oculars/src/gui/OcularDialog.cpp:594
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
 msgid "Field stop:"
 msgstr "Lauko diafragma:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:627
+#: plugins/Oculars/src/gui/OcularDialog.cpp:628
 msgid "Oculars Plug-in"
 msgstr "Okuliarų įskiepis"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:635
+#: plugins/Oculars/src/gui/OcularDialog.cpp:636
 msgid "Barlow lens feature"
 msgstr "Barlow lęšių funkcija"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:636
+#: plugins/Oculars/src/gui/OcularDialog.cpp:637
 msgid "Sensor crop overlay feature"
 msgstr "Jutiklio apkarpymo funkcija"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:637
+#: plugins/Oculars/src/gui/OcularDialog.cpp:638
 msgid "Pixel grid feature"
 msgstr " Taškų tinklelio funkcija"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:641
+#: plugins/Oculars/src/gui/OcularDialog.cpp:642
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1023
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "Apžvalga"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:643
+#: plugins/Oculars/src/gui/OcularDialog.cpp:644
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -20869,11 +20869,11 @@ msgstr ""
 "ištrinti okuliarus ir teleskopus, taip pat CCD jutiklius. Pirmą kartą "
 "paleidus programą, bus užpildyti keli pavyzdžiai, kad galėtumėte pradėti."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:644
+#: plugins/Oculars/src/gui/OcularDialog.cpp:645
 msgid "You can choose to scale the image you see on the screen."
 msgstr "Galite pasirinkti keisti ekrane matomo paveikslo mastelį."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:645
+#: plugins/Oculars/src/gui/OcularDialog.cpp:646
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -20881,7 +20881,7 @@ msgstr ""
 "Tai skirta parodyti jums geresnį palyginimą, kaip viena okuliaro/teleskopo "
 "kombinacija yra palyginama su kita."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:646
+#: plugins/Oculars/src/gui/OcularDialog.cpp:647
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -20889,7 +20889,7 @@ msgstr ""
 "Toks pats okuliaras dviejuose skirtingų fokusavimo nuotolio teleskopuose "
 "sukurs du skirtingus išėjimo vyzdžio dydžius, keičiant šiek tiek vaizdą ."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:647
+#: plugins/Oculars/src/gui/OcularDialog.cpp:648
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -20897,18 +20897,18 @@ msgstr ""
 " Tai reiškia, kad, sumažinus vaizdą, didelė ekrano dalis gali būti "
 "nepanaudota."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:648
+#: plugins/Oculars/src/gui/OcularDialog.cpp:649
 msgid ""
 "Therefore we recommend that you leave it off, unless you feel you have a "
 "need for it."
 msgstr ""
 "Todėl rekomenduojame jo nenaudoti, nebent manote, kad jis jums reikalingas."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:649
+#: plugins/Oculars/src/gui/OcularDialog.cpp:650
 msgid "You can toggle a crosshair in the view."
 msgstr "Jūs galite perjungti kryžminį taikiklį vaizde."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:650
+#: plugins/Oculars/src/gui/OcularDialog.cpp:651
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder. This feature draws three concentric circles "
@@ -20919,7 +20919,7 @@ msgstr ""
 "koncentrinius 0,5 %1, 2,0 %1 ir 4,0 %1 apskritimus, padedančius matyti tai, "
 "ką tikitės pamatyti plika akimi per \"Telrad\" (ar panašų) ieškiklį."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:651
+#: plugins/Oculars/src/gui/OcularDialog.cpp:652
 msgid ""
 "You can adjust the diameters or even add a fourth circle if you have a "
 "different finder, or revert to the Telrad standard sizes."
@@ -20927,16 +20927,16 @@ msgstr ""
 "Jei turite kitokį ieškiklį, galite koreguoti skersmenis ar net pridėti "
 "ketvirtą apskritimą arba grįžti prie \"Telrad\" standartinių dydžių."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:652
+#: plugins/Oculars/src/gui/OcularDialog.cpp:653
 msgid "If you find any issues, please let me know. Enjoy!"
 msgstr "Jei pastebėsite kokių nors klaidų, praneškite man. Mėgaukitės!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:655
+#: plugins/Oculars/src/gui/OcularDialog.cpp:656
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
 msgid "Hot Keys"
 msgstr "Karštieji klavišai"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:656
+#: plugins/Oculars/src/gui/OcularDialog.cpp:657
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
@@ -20944,14 +20944,14 @@ msgstr ""
 " Įskiepio klavišų susiejimą galima redaguoti klaviatūros nuorodų "
 "redaktoriuje (F7)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:659
+#: plugins/Oculars/src/gui/OcularDialog.cpp:660
 #: plugins/Pulsars/src/Pulsar.cpp:311
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:616
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Notes"
 msgstr "Pastabos"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:660
+#: plugins/Oculars/src/gui/OcularDialog.cpp:661
 msgid ""
 "The sensor view has a feature to show a sensor crop overlay with information"
 " about the crop size. The size of this rectangle may be adjusted when "
@@ -20963,7 +20963,7 @@ msgstr ""
 "būti koreguojamas, kai veikia suskirstymas (pvz., 100 px apkarpymo dydis bus"
 " pakoreguotas iki 99 px, kai bus taikomas suskirstymas 3)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:661
+#: plugins/Oculars/src/gui/OcularDialog.cpp:662
 #, qt-format
 msgid ""
 "In this case, information about crop size overlay will be marked by %1."
@@ -20971,14 +20971,14 @@ msgstr ""
 " Šiuo atveju informacija apie apkarpyto ploto dydžio perdangą bus pažymėta "
 "%1."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:662
+#: plugins/Oculars/src/gui/OcularDialog.cpp:663
 msgid ""
 "This mark is also displayed if the crop size is larger than the sensor size."
 msgstr ""
 " Šis ženklas taip pat rodomas, jei apkarpymo dydis yra didesnis už jutiklio "
 "dydį."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:663
+#: plugins/Oculars/src/gui/OcularDialog.cpp:664
 msgid ""
 "The sensor view has also a feature to show a max time of exposure for "
 "selected solar system objects (the mount has sidereal speed enabled) to "
@@ -20988,15 +20988,15 @@ msgstr ""
 "Saulės sistemos objektų ekspozicijos laiką (įrenginyje įjungtas siderinis "
 "greitis), kad būtų išvengta didesnio nei 1 taško pločio poslinkio."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1433
+#: plugins/Oculars/src/ui_ocularDialog.h:1439
 msgid "Interface"
 msgstr "Sąsaja"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1437
+#: plugins/Oculars/src/ui_ocularDialog.h:1443
 msgid "Arrow button scale (requires restart)"
 msgstr " Rodyklės mygtuko mastelis (reikia paleisti iš naujo)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1445
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
@@ -21004,28 +21004,28 @@ msgstr ""
 " Pažymėti, jei norite, kad RL vertė būtų tokia pati kaip paleidžiant "
 "„Stellarium“."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1447
 msgid "Restore FOV to initial values"
 msgstr "Atkurti RL į pradines vertes"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1442
+#: plugins/Oculars/src/ui_ocularDialog.h:1448
 msgid "Show resolution criteria"
 msgstr " Rodyti skiriamosios gebos kriterijus"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1443
+#: plugins/Oculars/src/ui_ocularDialog.h:1449
 msgid "On-screen control panel"
 msgstr "Valdymo skydelis ekrane"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1445
-#: plugins/Oculars/src/ui_ocularDialog.h:1449
+#: plugins/Oculars/src/ui_ocularDialog.h:1451
+#: plugins/Oculars/src/ui_ocularDialog.h:1455
 msgid "Font size of text on on-screen control panel"
 msgstr "Teksto šrifto dydis valdymo skydelio ekrane "
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1447
+#: plugins/Oculars/src/ui_ocularDialog.h:1453
 msgid "...font size"
 msgstr "...šrifto dydis"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1458
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
@@ -21033,162 +21033,105 @@ msgstr ""
 "Pažymėkite jį, jei norite, kad krypties reikšmė būtų tokia pati kaip "
 "paleidžiant „Stellarium“."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1454
+#: plugins/Oculars/src/ui_ocularDialog.h:1460
 msgid "Restore direction to initial values"
 msgstr " Atstatyti kryptį į pradines vertes"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1456
+#: plugins/Oculars/src/ui_ocularDialog.h:1462
 msgid "Color for ocular circles and sensor frames"
 msgstr "Spalva okuliarų apskritimams ir jutiklio rėmeliams"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1459
+#: plugins/Oculars/src/ui_ocularDialog.h:1465
 msgid "Line Color"
 msgstr "Linijos spalva"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1461
+#: plugins/Oculars/src/ui_ocularDialog.h:1467
 msgid "Color for text which is shown only when GUI is switched off"
 msgstr "Teksto spalva, rodoma tik tada, kai GVS yra išjungta"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1464
+#: plugins/Oculars/src/ui_ocularDialog.h:1470
 msgid "Text Color"
 msgstr "Teksto spalva"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1466
+#: plugins/Oculars/src/ui_ocularDialog.h:1472
 msgid "Color for reticle and crosshair"
 msgstr "Tikrinimo tinklelio ir kryželio spalva"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1469
+#: plugins/Oculars/src/ui_ocularDialog.h:1475
 msgid "Reticle Color"
 msgstr "Tikrinimo tinklelio spalva"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1470
+#: plugins/Oculars/src/ui_ocularDialog.h:1476
 msgid "Show oculars button on toolbar"
 msgstr "Rodyti okuliarų mygtuką įrankių juostoje"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1473
+#: plugins/Oculars/src/ui_ocularDialog.h:1479
 msgid ""
 "Show FOV circles relative to the apparent FOV of the widest-angle ocular"
 msgstr ""
 "Rodyti RL apskritimus atsižvelgiant į plačiausio kampo okuliaro matomą RL."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1475
+#: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Scale image circle"
 msgstr " Masteliuoto vaizdo apskritimas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1476
+#: plugins/Oculars/src/ui_ocularDialog.h:1482
 msgid "Hide grids and lines when enabled"
 msgstr "Slėpti tinklelius ir linijas, kai įjungta"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1477
+#: plugins/Oculars/src/ui_ocularDialog.h:1483
 msgid "Enable only if an object is selected"
 msgstr "Įjungti tik tada, jei yra pasirinktas objektas."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1479
+#: plugins/Oculars/src/ui_ocularDialog.h:1485
 msgid "Show border circle"
 msgstr "Rodyti ribos apskritimą"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1487
 msgid "Show FOV outline"
 msgstr "Rodyti RL kontūrą"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1489
 msgid "Apply limit for stellar magnitude based on telescope aperture"
 msgstr "Taikyti žvaigždės ryškio ribą pagal teleskopo apertūrą"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1485
+#: plugins/Oculars/src/ui_ocularDialog.h:1491
 msgid "Auto-limit stellar magnitude"
 msgstr "Automatinė žvaigždės ryškio riba"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1487
+#: plugins/Oculars/src/ui_ocularDialog.h:1493
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr "Rodyti kryptis ekvatorialinėje koordinačių sistemoje"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1489
+#: plugins/Oculars/src/ui_ocularDialog.h:1495
 msgid "Show compass rose"
 msgstr "Rodyti kompaso rožę"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1491
+#: plugins/Oculars/src/ui_ocularDialog.h:1497
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "Sulygiuoti kryžminį taikiklį ekvatorinėje koordinačių sistemoje"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1493
+#: plugins/Oculars/src/ui_ocularDialog.h:1499
 msgid "Align crosshair"
 msgstr "Lyguoti kryžminį taikiklį"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1495
+#: plugins/Oculars/src/ui_ocularDialog.h:1501
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "Okuliaro režimo metu leiskite tam tikrą matomumą už okuliaro ratelio."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1497
+#: plugins/Oculars/src/ui_ocularDialog.h:1503
 msgid "Use semi-transparent mask"
 msgstr "Naudoti pusiau permatomą kaukę"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1499
+#: plugins/Oculars/src/ui_ocularDialog.h:1505
 msgid "Opacity of semi-transparent mask"
 msgstr "Pusiau permatomo kaukės skaidrumas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1501
+#: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "Sensor view"
 msgstr "Jutiklio vaizdas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1502
-msgid "Use size of focuser:"
-msgstr "Naudoti fokusatoriaus dydį:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1504
-msgid ""
-"Enable a rectangular overlay showing the effective size of a number of "
-"pixels."
-msgstr ""
-"Įjungti stačiakampio formos perdangą, rodančią naudingųjų taškų skaičiaus "
-"dydį."
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1506
-msgid "Show sensor crop overlay"
-msgstr " Rodyti jutiklio apkarpymo perdangą"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1507
-msgid "Overlay size (px)"
-msgstr "Perdangos dydis (px)"
-
 #: plugins/Oculars/src/ui_ocularDialog.h:1509
-msgid "Horizontal size (width)"
-msgstr "Horizontalus dydis (plotis)"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1512
-msgid "Vertical size (height)"
-msgstr "Vertikalus dydis (aukštis)"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1515
-msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
-msgstr ""
-" Įjungti jutiklio suskirstytų taškų tinklelį jutiklio apkarpyto vaizdo "
-"sluoksnyje."
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1517
-msgid "Show pixel grid"
-msgstr "Rodyti taškų tinklelį"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1518
-msgid "Enable autozoom when switching CCD"
-msgstr " Įjungti automatinį priartinimą perjungiant CCD"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1520
-msgid ""
-"Show maximum exposure time for Solar system objects to avoid movement streak"
-msgstr ""
-" Rodyti maksimalų Saulės sistemos objektų ekspozicijos laiką, kad būtų "
-"išvengta judėjimo dryžių"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1522
-msgid "Show max exposure time for moving objects"
-msgstr " Rodyti maksimalų ekspozicijos laiką judantiems objektams"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1523
-msgid "Use degrees and minutes for FOV of CCD"
-msgstr "Naudokite laipsnius ir minutes CCD RL."
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1525
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -21196,9 +21139,47 @@ msgstr ""
 "Įjunkite automatinį montavimo tipo perjungimą iš teleskopo nustatymų "
 "horizontaliai CCD kadro orientacijai."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1527
+#: plugins/Oculars/src/ui_ocularDialog.h:1511
 msgid "Enable automatic switch of mount type"
 msgstr "Įgalinti automatinį montuotės tipo perjungimą"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1513
+msgid ""
+"Enable a rectangular overlay showing the effective size of a number of "
+"pixels."
+msgstr ""
+"Įjungti stačiakampio formos perdangą, rodančią naudingųjų taškų skaičiaus "
+"dydį."
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1515
+msgid "Show sensor crop overlay"
+msgstr " Rodyti jutiklio apkarpymo perdangą"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1516
+msgid "Use horizontal coordinates instead equatorial coordinates"
+msgstr "Naudokite horizontalias koordinates vietoj ekvatorinių koordinačių"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1517
+msgid "Overlay size (px)"
+msgstr "Perdangos dydis (px)"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1519
+msgid "Horizontal size (width)"
+msgstr "Horizontalus dydis (plotis)"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1522
+msgid "Vertical size (height)"
+msgstr "Vertikalus dydis (aukštis)"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1525
+msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
+msgstr ""
+" Įjungti jutiklio suskirstytų taškų tinklelį jutiklio apkarpyto vaizdo "
+"sluoksnyje."
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
+msgid "Show pixel grid"
+msgstr "Rodyti taškų tinklelį"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1529
 msgid "Color for focuser overlay line"
@@ -21208,86 +21189,109 @@ msgstr "Fokusatoriaus perdangos linijos spalva"
 msgid "Show focuser overlay"
 msgstr "Rodyti fokusatoriaus perdangą"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1532
-msgid "Use horizontal coordinates instead equatorial coordinates"
-msgstr "Naudokite horizontalias koordinates vietoj ekvatorinių koordinačių"
-
 #: plugins/Oculars/src/ui_ocularDialog.h:1533
+msgid ""
+"Show maximum exposure time for Solar system objects to avoid movement streak"
+msgstr ""
+" Rodyti maksimalų Saulės sistemos objektų ekspozicijos laiką, kad būtų "
+"išvengta judėjimo dryžių"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1535
+msgid "Show max exposure time for moving objects"
+msgstr " Rodyti maksimalų ekspozicijos laiką judantiems objektams"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1536
+msgid "Enable autozoom when switching CCD"
+msgstr " Įjungti automatinį priartinimą perjungiant CCD"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1537
 msgid "Show angular limits of the off-axis guide"
 msgstr "Rodyti neašinio vedlio kampinius ribinius dydžius"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1534
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
+msgid "Use size of focuser:"
+msgstr "Naudoti fokusatoriaus dydį:"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1539
+msgid "Use degrees and minutes for FOV of CCD"
+msgstr "Naudokite laipsnius ir minutes CCD RL."
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1540
+msgid "Show center of CCD"
+msgstr "Rodyti CCD centrą"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1541
 msgid "Telrad view"
 msgstr "Telrad peržiūra"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/ui_ocularDialog.h:1545
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr "RL:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1547
 msgid "FOV for circle 1"
 msgstr "RL apskritimui 1"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1543
+#: plugins/Oculars/src/ui_ocularDialog.h:1550
 msgid "FOV for circle 2"
 msgstr "RL apskritimui 2"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1546
+#: plugins/Oculars/src/ui_ocularDialog.h:1553
 msgid "FOV for circle 3"
 msgstr "RL apskritimui 3"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1549
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "FOV for circle 4"
 msgstr "RL apskritimui 4"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1551
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Restore original Telrad FOV"
 msgstr "Atkurti originalų Telrad RL"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1552
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "Enable autozoom when switching Telrad"
 msgstr "Įjungti automatinį priartinimą, kai perjungiama į Telrad."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1553
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:228
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:401
 #: plugins/Planes/src/ui_planesDialog.h:256
 msgid "General"
 msgstr "Bendras"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1554
-#: plugins/Oculars/src/ui_ocularDialog.h:1563
-#: plugins/Oculars/src/ui_ocularDialog.h:1569
-#: plugins/Oculars/src/ui_ocularDialog.h:1588
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
+#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: plugins/Oculars/src/ui_ocularDialog.h:1576
+#: plugins/Oculars/src/ui_ocularDialog.h:1595
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1048
 msgid "Add"
 msgstr "Pridėti"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1557
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
 msgid "Has permanent cross-hairs"
 msgstr "Turi nuolatinį kryžminį tinklelį"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1558
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
 msgid "Binoculars"
 msgstr "Binoklis"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1561
-#: plugins/Oculars/src/ui_ocularDialog.h:1565
-#: plugins/Oculars/src/ui_ocularDialog.h:1575
-#: plugins/Oculars/src/ui_ocularDialog.h:1590
+#: plugins/Oculars/src/ui_ocularDialog.h:1568
+#: plugins/Oculars/src/ui_ocularDialog.h:1572
+#: plugins/Oculars/src/ui_ocularDialog.h:1582
+#: plugins/Oculars/src/ui_ocularDialog.h:1597
 #: plugins/Satellites/src/ui_satellitesDialog.h:1295
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:629
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
 msgstr "Pavadinimas:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1562
+#: plugins/Oculars/src/ui_ocularDialog.h:1569
 msgid "Eyepieces"
 msgstr "Okuliarai"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1566
+#: plugins/Oculars/src/ui_ocularDialog.h:1573
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -21295,85 +21299,85 @@ msgstr ""
 "Daugiau nei 1 daugiklio vertė išplečia fokusavimo nuotolį (Barlou lęšis). "
 "Mažesnė nei 1 daugiklio vertė sumažina fokusavimo nuotolį (Šaplėjaus lęšis)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1567
+#: plugins/Oculars/src/ui_ocularDialog.h:1574
 msgid "Multiplier:"
 msgstr "Daugiklis:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1568
+#: plugins/Oculars/src/ui_ocularDialog.h:1575
 msgid "Lenses"
 msgstr "Lęšiai"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1571
+#: plugins/Oculars/src/ui_ocularDialog.h:1578
 msgid "Off-Axis guider"
 msgstr "Off-Axis taikiklis"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1572
+#: plugins/Oculars/src/ui_ocularDialog.h:1579
 msgid "Resolution y:"
 msgstr "Raiška y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1573
+#: plugins/Oculars/src/ui_ocularDialog.h:1580
 msgid "Binning x:"
 msgstr " Suskirstymas x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1574
+#: plugins/Oculars/src/ui_ocularDialog.h:1581
 msgid "Resolution x:"
 msgstr "Raiška x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1576
+#: plugins/Oculars/src/ui_ocularDialog.h:1583
 msgid "Prism/CCD height:"
 msgstr "Prizmės/CCD aukštis:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1578
+#: plugins/Oculars/src/ui_ocularDialog.h:1585
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the center of "
 "the Prism"
 msgstr "Tai yra atstumas nuo vaizdo jutiklio centro iki prizmės centro."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1580
+#: plugins/Oculars/src/ui_ocularDialog.h:1587
 msgid "Prism/CCD distance:"
 msgstr "Prizmės/CCD atstumas:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1581
+#: plugins/Oculars/src/ui_ocularDialog.h:1588
 msgid "Rotation Angle:"
 msgstr "Pasukimo kampas:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1582
+#: plugins/Oculars/src/ui_ocularDialog.h:1589
 msgid "Binning y:"
 msgstr " Suskirstymas y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1583
+#: plugins/Oculars/src/ui_ocularDialog.h:1590
 msgid "Prism/CCD width:"
 msgstr "Prizmės/CCD plotis:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1584
+#: plugins/Oculars/src/ui_ocularDialog.h:1591
 msgid "Chip height:"
 msgstr "Lusto aukštis:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1585
+#: plugins/Oculars/src/ui_ocularDialog.h:1592
 msgid "Chip width:"
 msgstr "Lusto plotis:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1586
+#: plugins/Oculars/src/ui_ocularDialog.h:1593
 msgid "Position angle:"
 msgstr "Pozicijos kampas:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1587
+#: plugins/Oculars/src/ui_ocularDialog.h:1594
 msgid "Sensors"
 msgstr "Jutikliai"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1591
+#: plugins/Oculars/src/ui_ocularDialog.h:1598
 msgid "Horizontal flip"
 msgstr "Horizontalus apvertimas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1592
+#: plugins/Oculars/src/ui_ocularDialog.h:1599
 msgid "Vertical flip"
 msgstr "Vertikalus pasukimas"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1593
+#: plugins/Oculars/src/ui_ocularDialog.h:1600
 msgid "Equatorial Mount"
 msgstr "Ekvatorinė montuotė"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1596
+#: plugins/Oculars/src/ui_ocularDialog.h:1603
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:395
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes"
