@@ -33,50 +33,9 @@ environment:
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.9\msvc2022_64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
+    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=OFF
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
-    scConverterEnabled: true
-  - BUILD_NAME: Win64 Qt5.12
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    VSPATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\SDK\ScopeCppSDK\VC\bin
-    QT_VERSION_MAJOR: 5
-    QT_BASEDIR: C:\Qt\5.12\msvc2017_64
-    CMAKE_GENERATOR: Visual Studio 15 2017
-    CMAKE_ARGS: -A x64 -DENABLE_XLSX=Off
-    cmakeURL: https://github.com/Kitware/CMake/releases/download/v3.18.6/cmake-3.18.6-win64-x64.zip
-    cmakeBaseName: cmake-3.18.6-win64-x64
-    exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc64.zip
-    exiv2baseName: exiv2-0.28.0-2017msvc64
-    scConverterEnabled: false
-    # The Qt5.15 CI has issues around memory use in translation tools. 
-#  - BUILD_NAME: Win64 Qt5.15
-#    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-#    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
-#    QT_VERSION_MAJOR: 5
-#    QT_BASEDIR: C:\Qt\5.15\msvc2019_64
-#    CMAKE_GENERATOR: Visual Studio 17 2022
-#    CMAKE_ARGS: -A x64
-#    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
-#    exiv2baseName: exiv2-0.28.0-2019msvc64
-#    scConverterEnabled: false
-    # TODO: This is not yet properly supported, or some config switch is missing. We postpone Qt6.9-based AppVeyor builds for Win/Arm64 to post-26.1.
-#  - BUILD_NAME: Arm64 Qt6.9
-#    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-#    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
-#    QT_VERSION_MAJOR: 6
-#    QT_BASEDIR: C:\Qt\6.9\msvc2022_arm64
-#    CMAKE_GENERATOR: Visual Studio 17 2022
-#    # While tesing appveyor, disable all plugins and extras to minimize build time..
-#    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.9/msvc2022_64 -DQt6LinguistTools_DIR=C:/Qt/6.9/msvc2022_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DQT_ENABLE_VERBOSE_DEPLOYMENT=ON -DQMAKESPEC=C:/Qt/6.9/msvc2022_arm64/mkspecs -DUSE_PLUGIN_ANGLEMEASURE=OFF -DUSE_PLUGIN_ARCHAEOLINES=OFF -DUSE_PLUGIN_EQUATIONOFTIME=OFF -DUSE_PLUGIN_CALENDARS=OFF -DUSE_PLUGIN_EXOPLANETS=OFF -DUSE_PLUGIN_METEORSHOWERS=OFF -DUSE_PLUGIN_MOSAICCAMERA=OFF -DUSE_PLUGIN_NAVSTARS=OFF -DUSE_PLUGIN_NOVAE=OFF -DUSE_PLUGIN_NEBULATEXTURES=OFF -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=OFF -DUSE_PLUGIN_SOLARSYSTEMEDITOR=OFF -DUSE_PLUGIN_OBSERVABILITY=OFF -DUSE_PLUGIN_OCULARS=OFF -DUSE_PLUGIN_ONLINEQUERIES=OFF -DUSE_PLUGIN_POINTERCOORDINATES=OFF -DUSE_PLUGIN_PULSARS=OFF -DUSE_PLUGIN_QUASARS=OFF -DUSE_PLUGIN_REMOTECONTROL=OFF -DUSE_PLUGIN_REMOTESYNC=OFF -DUSE_PLUGIN_SATELLITES=OFF -DUSE_PLUGIN_SCENERY3D=OFF -DUSE_PLUGIN_SKYCULTUREMAKER=OFF -DUSE_PLUGIN_SUPERNOVAE=OFF -DUSE_PLUGIN_TELESCOPECONTROL=OFF -DUSE_PLUGIN_TEXTUSERINTERFACE=OFF -DENABLE_SHOWMYSKY=OFF -DENABLE_SPEECH=OFF -DENABLE_TESTING=OFF -DENABLE_SCRIPT_CONSOLE=OFF -DENABLE_SPOUT=OFF -DENABLE_XLSX=OFF -DENABLE_NLS=OFF
-#    scConverterEnabled: false
-    # Qt6.5 for Win/Arm64 is missing QtWebEngine. (Introduced in Qt6.10 only).
-  - BUILD_NAME: Arm64 Qt6.5
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-    QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
-    CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.5/msvc2019_64 -DQt6LinguistTools_DIR=C:/Qt/6.5/msvc2019_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
     scConverterEnabled: false
 
 before_build:
@@ -220,7 +179,6 @@ after_test:
   # - ps: if($env:QT_BASEDIR.contains('arm64')) { C:\Qt\6.9\msvc2022_64\bin\windeployqt.exe --no-translations --compiler-runtime --verbose 2 --qtpaths C:\Qt\6.9\msvc2022_arm64\bin\qtpaths.bat --dir c:\stellarium-package\qtstuff\ c:\stellarium-package\bin\stellarium.exe}
   #- echo "The qtstuff directory should include Qt6 dll libraries, not just the dummy file "
   #- dir /s c:\stellarium-package\qtstuff\
-  - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-installer
   - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-patch-installer
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
   - if [%PUBLISH_BINARY%]==[true] for %%i in (*.exe) do appveyor PushArtifact %%i
