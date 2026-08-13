@@ -29,6 +29,7 @@
 #include "AtmosphereDialog.hpp"
 #include "SkylightDialog.hpp"
 #include "TonemappingDialog.hpp"
+#include "PsfStarsDialog.hpp"
 #include "GreatRedSpotDialog.hpp"
 #include "ConfigureDSOColorsDialog.hpp"
 #include "ConfigureOrbitColorsDialog.hpp"
@@ -41,6 +42,7 @@
 #include "ConstellationMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
+#include "StelSkyDrawer.hpp"
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
@@ -62,7 +64,7 @@
 #include <QSettings>
 #include <QSignalBlocker>
 #include <QTimer>
-#include <QDialog>
+#include <QPushButton>
 #include <QStringList>
 #include <QJsonArray>
 
@@ -108,6 +110,7 @@ ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, atmosphereDialog(nullptr)
 	, skylightDialog(nullptr)
 	, tonemappingDialog(nullptr)
+	, psfStarsDialog(nullptr)
 	, greatRedSpotDialog(nullptr)
 	, configureDSOColorsDialog(nullptr)
 	, configureOrbitColorsDialog(nullptr)
@@ -131,6 +134,8 @@ ViewDialog::~ViewDialog()
 	skylightDialog = nullptr;
 	delete tonemappingDialog;
 	tonemappingDialog = nullptr;
+	delete psfStarsDialog;
+	psfStarsDialog = nullptr;
 	delete greatRedSpotDialog;
 	greatRedSpotDialog = nullptr;
 	delete configureDSOColorsDialog;
@@ -246,6 +251,10 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->starLimitMagnitudeCheckBox,"StelSkyDrawer.flagStarMagnitudeLimit");
 	connectDoubleProperty(ui->starLimitMagnitudeDoubleSpinBox, "StelSkyDrawer.customStarMagLimit");
 	connectBoolProperty(ui->spikyStarsCheckBox, "StelSkyDrawer.flagStarSpiky");
+	connectBoolProperty(ui->psfStarsCheckBox, "StelSkyDrawer.flagPsfStars");
+	ui->psfStarsPropertiesButton->setEnabled(ui->psfStarsCheckBox->isChecked());
+	connect(ui->psfStarsCheckBox, &QCheckBox::toggled, ui->psfStarsPropertiesButton, &QPushButton::setEnabled);
+	connect(ui->psfStarsPropertiesButton, &QPushButton::clicked, this, &ViewDialog::showPsfStarsDialog);
 	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
 	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"StarMgr.labelsAmount",0.0,10.0);
 	connectBoolProperty(ui->checkBoxAdditionalNamesStars, "StarMgr.flagAdditionalNamesDisplayed");
@@ -1975,6 +1984,14 @@ void ViewDialog::showTonemappingDialog()
 	tonemappingDialog = new TonemappingDialog();
 
     tonemappingDialog->setVisible(true);
+}
+
+void ViewDialog::showPsfStarsDialog()
+{
+	if(psfStarsDialog == nullptr)
+		psfStarsDialog = new PsfStarsDialog();
+
+	psfStarsDialog->setVisible(true);
 }
 
 void ViewDialog::showGreatRedSpotDialog()

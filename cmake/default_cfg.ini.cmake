@@ -67,6 +67,12 @@ relative_scale                      = 1.0
 absolute_scale                      = 1.0
 star_twinkle_amount                 = 0.2
 flag_star_twinkle                   = true
+flag_psf_stars                      = false
+psf_star_point_radius               = 1.5
+psf_star_optimization               = 0.1
+psf_star_max_irradiance             = 500.0
+psf_star_exposure                   = 20.0
+psf_star_dim_clip_factor            = 10.0
 
 #Johannes:
 #I recommend setting mag_converter_max_fov to 180, so that the sky gets not so
