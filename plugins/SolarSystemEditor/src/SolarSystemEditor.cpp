@@ -629,7 +629,7 @@ bool SolarSystemEditor::removeSsoWithName(const QString &name)
 	//Remove the section
 	for (const QString &group : settings.childGroups())
 	{
-		if (settings.value(group + "/name").toString() == name)
+		if (settings.value(group + "/name").toString() == name || settings.value(group + "/iau_designation").toString() == name)
 		{
 			settings.remove(group);
 			settings.sync();
