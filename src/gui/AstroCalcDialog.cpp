@@ -297,6 +297,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->hecPositionsUpdateButton, &QPushButton::clicked,         this, &AstroCalcDialog::currentHECPositions);
 	connect(ui->hecPositionsSaveButton,   &QPushButton::clicked,         this, &AstroCalcDialog::saveHECPositions);
 	connect(ui->tabWidgetPositions,       &QTabWidget::currentChanged,   this, &AstroCalcDialog::changePositionsTab);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesCoordsChanged, this, &AstroCalcDialog::currentHECPositions);
 
 	connectBoolProperty(ui->ephemerisShowLineCheckBox,              "SolarSystem.ephemerisLineDisplayed");
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox,           "SolarSystem.ephemerisMarkersDisplayed");
@@ -522,6 +523,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, &NebulaMgr::minSizeLimitChanged,        this, &AstroCalcDialog::calculateWutObjects);
 	connect(dsoMgr, &NebulaMgr::maxSizeLimitChanged,        this, &AstroCalcDialog::calculateWutObjects);
 	connect(core,   &StelCore::dateChanged,                 this, &AstroCalcDialog::calculateWutObjects);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesOtherChanged, this, &AstroCalcDialog::calculateWutObjects);
 
 	QAction *clearAction = ui->wutMatchingObjectsLineEdit->addAction(QIcon(":/graphicGui/uieBackspaceInputButton.png"), QLineEdit::ActionPosition::TrailingPosition);
 	connect(clearAction, &QAction::triggered, this, &AstroCalcDialog::searchWutClear);
