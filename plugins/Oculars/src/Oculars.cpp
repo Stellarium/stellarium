@@ -1979,7 +1979,7 @@ void Oculars::paintCCDBounds()
 		equatProj->unProject(centerScreen[0], centerScreen[1], centerPosition);
 		double cx, cy;
 		QString cxt, cyt, coords;
-		bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 		if (getFlagHorizontalCoordinates())
 		{
 			bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();

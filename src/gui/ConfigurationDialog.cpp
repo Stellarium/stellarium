@@ -339,7 +339,8 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->showAsterismLinesButtonCheckBox,     "StelGui.flagShowAsterismLinesButton");
 	connectBoolProperty(ui->showAsterismLabelsButtonCheckBox,    "StelGui.flagShowAsterismLabelsButton");
 
-	connectBoolProperty(ui->checkBoxDecimalDegrees,              "StelApp.flagShowDecimalDegrees");
+	connectBoolProperty(ui->checkBoxDecimalDegreesCoords,        "StelApp.flagUseDecDegreesCoords");
+	connectBoolProperty(ui->checkBoxDecimalDegreesOther,         "StelApp.flagUseDecDegreesOther");
 	connectBoolProperty(ui->checkBoxAzimuthFromSouth,            "StelApp.flagUseAzimuthFromSouth");
 	connectBoolProperty(ui->checkBoxNegativeHourAngles,          "StelApp.flagUseNegativeHourAngles");
 	connectBoolProperty(ui->checkBoxPolarDistance,               "StelApp.flagUsePolarDistance");
@@ -1416,7 +1417,8 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("gui/flag_show_constellation_arts_button",       propMgr->getStelPropertyValue("StelGui.flagShowConstellationArtsButton").toBool());
         conf->setValue("gui/flag_show_asterism_lines_button",           propMgr->getStelPropertyValue("StelGui.flagShowAsterismLinesButton").toBool());
         conf->setValue("gui/flag_show_asterism_labels_button",          propMgr->getStelPropertyValue("StelGui.flagShowAsterismLabelsButton").toBool());
-        conf->setValue("gui/flag_show_decimal_degrees",                 propMgr->getStelPropertyValue("StelApp.flagShowDecimalDegrees").toBool());
+        conf->setValue("gui/flag_use_decimal_degrees_coords",           propMgr->getStelPropertyValue("StelApp.flagUseDecDegreesCoords").toBool());
+        conf->setValue("gui/flag_use_decimal_degrees_other",            propMgr->getStelPropertyValue("StelApp.flagUseDecDegreesOther").toBool());
         conf->setValue("gui/flag_use_azimuth_from_south",               propMgr->getStelPropertyValue("StelApp.flagUseAzimuthFromSouth").toBool());
         conf->setValue("gui/flag_use_polar_distance",                   propMgr->getStelPropertyValue("StelApp.flagUsePolarDistance").toBool());
         conf->setValue("gui/flag_use_formatting_output",                propMgr->getStelPropertyValue("StelApp.flagUseFormattingOutput").toBool());

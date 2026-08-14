@@ -302,7 +302,8 @@ StelApp::StelApp(StelMainView *parent)
 	, renderBuffer(nullptr)
 	, viewportEffect(nullptr)
 	, gl(nullptr)
-	, flagShowDecimalDegrees(false)
+	, flagUseDecDegreesCoords(false)
+	, flagUseDecDegreesOther(false)
 	, flagUseAzimuthFromSouth(false)
 	, flagUseNegativeHourAngles(false)
 	, flagUsePolarDistance(false)
@@ -724,7 +725,10 @@ void StelApp::init(QSettings* conf)
 	// Init actions.
 	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode", "Ctrl+N");
 
-	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
+	// for backward compatibility
+	const bool backwardDecimalDegrees = confSettings->value("gui/flag_show_decimal_degrees", false).toBool();
+	setFlagUseDecDegreesCoords(confSettings->value("gui/flag_use_decimal_degrees_coords", backwardDecimalDegrees).toBool());
+	setFlagUseDecDegreesOther(confSettings->value("gui/flag_use_decimal_degrees_other", backwardDecimalDegrees).toBool());
 	setFlagSouthAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
 	setFlagUseNegativeHourAngles(confSettings->value("gui/flag_use_negative_hour_angles", false).toBool());
 	setFlagPolarDistanceUsage(confSettings->value("gui/flag_use_polar_distance", false).toBool());
@@ -1306,13 +1310,23 @@ void StelApp::setFlagOverwriteInfoColor(bool b)
 	}
 }
 
-void StelApp::setFlagShowDecimalDegrees(bool b)
+void StelApp::setFlagUseDecDegreesCoords(bool b)
 {
-	if (flagShowDecimalDegrees!=b)
+	if (flagUseDecDegreesCoords!=b)
 	{
-		flagShowDecimalDegrees = b;
-		StelApp::immediateSave("gui/flag_show_decimal_degrees", b);
-		emit flagShowDecimalDegreesChanged(b);
+		flagUseDecDegreesCoords = b;
+		StelApp::immediateSave("gui/flag_use_decimal_degrees_coords", b);
+		emit flagUseDecDegreesCoordsChanged(b);
+	}
+}
+
+void StelApp::setFlagUseDecDegreesOther(bool b)
+{
+	if (flagUseDecDegreesOther!=b)
+	{
+		flagUseDecDegreesOther = b;
+		StelApp::immediateSave("gui/flag_use_decimal_degrees_other", b);
+		emit flagUseDecDegreesOtherChanged(b);
 	}
 }
 

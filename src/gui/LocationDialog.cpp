@@ -89,7 +89,7 @@ void LocationDialog::createDialogContent()
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, &StelApp::languageChanged, this, &LocationDialog::retranslate);
-	connect(app, &StelApp::flagShowDecimalDegreesChanged, this, &LocationDialog::setDisplayFormatForSpins);
+	connect(app, &StelApp::flagUseDecDegreesCoordsChanged, this, &LocationDialog::setDisplayFormatForSpins);
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &LocationDialog::populatePlanetList);
 	// Init the SpinBox entries
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
@@ -100,7 +100,7 @@ void LocationDialog::createDialogContent()
 	ui->latitudeSpinBox->setMinimum(-90.0, true);
 	ui->latitudeSpinBox->setMaximum( 90.0, true);
 	ui->latitudeSpinBox->setWrapping(false);
-	setDisplayFormatForSpins(app->getFlagShowDecimalDegrees());
+	setDisplayFormatForSpins(app->getFlagUseDecDegreesCoords());
 
 	//initialize list model
 	allModel = new QStringListModel(this);

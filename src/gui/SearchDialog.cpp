@@ -323,7 +323,7 @@ void SearchDialog::populateCoordinateData()
 
 void SearchDialog::populateCoordinateAxis()
 {
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 	bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 	bool xnormal = true;
 	QPair<double, double> minMaxLimits = usePolarDistance ? qMakePair(0., 180.) : qMakePair(-90., 90.);
@@ -410,7 +410,7 @@ void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &SearchDialog::retranslate);
-	connect(&StelApp::getInstance(), &StelApp::flagShowDecimalDegreesChanged, this, &SearchDialog::populateCoordinateAxis);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesCoordsChanged, this, &SearchDialog::populateCoordinateAxis);
 	connect(&StelApp::getInstance(), &StelApp::flagUsePolarDistanceChanged,   this, &SearchDialog::populateCoordinateData);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 	connect(ui->titleBar, &TitleBar::movedTo, this, &SearchDialog::handleMovedTo);

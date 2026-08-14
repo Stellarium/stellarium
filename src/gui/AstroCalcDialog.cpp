@@ -280,7 +280,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, &NebulaMgr::flagSizeLimitsUsageChanged, this, &AstroCalcDialog::currentCelestialPositions);
 	connect(dsoMgr, &NebulaMgr::minSizeLimitChanged,        this, &AstroCalcDialog::currentCelestialPositions);
 	connect(dsoMgr, &NebulaMgr::maxSizeLimitChanged,        this, &AstroCalcDialog::currentCelestialPositions);
-	connect(&StelApp::getInstance(), &StelApp::flagShowDecimalDegreesChanged, this, &AstroCalcDialog::currentCelestialPositions);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesCoordsChanged, this, &AstroCalcDialog::currentCelestialPositions);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesOtherChanged, this, &AstroCalcDialog::currentCelestialPositions);
 	
 	ui->hecSelectedMinorPlanetsCheckBox->setChecked(conf->value("astrocalc/flag_hec_minor_planets", false).toBool());
 	connect(ui->hecSelectedMinorPlanetsCheckBox, &QCheckBox::toggled, this, &AstroCalcDialog::saveHECFlagMinorPlanets);
@@ -1141,7 +1142,8 @@ void AstroCalcDialog::currentCelestialPositions()
 	const double mag = ui->celestialMagnitudeDoubleSpinBox->value();
 	const bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegreeCoords = StelApp::getInstance().getFlagUseDecDegreesCoords();
+	const bool withDecimalDegreeOther = StelApp::getInstance().getFlagUseDecDegreesOther();
 
 	const double JD = core->getJD();
 	const double utcOffsetHrs = core->getUTCOffset(JD);
@@ -1199,7 +1201,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 			if (obj->objectInDisplayedCatalog() && obj->objectInAllowedSizeRangeLimits() && passByBrightness && obj->isAboveRealHorizon(core))
 			{
-				coordStrings = getStringCoordinates(horizon ? obj->getAltAzPosAuto(core) : obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+				coordStrings = getStringCoordinates(horizon ? obj->getAltAzPosAuto(core) : obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 
 				QString celObjName = obj->getNameI18n();
 				QString celObjId = obj->getDSODesignation();
@@ -1227,14 +1229,14 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[3]!=20)
 				{
 					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
-					if (withDecimalDegree)
+					if (withDecimalDegreeOther)
 						sMaxElevation = StelUtils::radToDecDegStr(computeMaxElevation(qSharedPointerCast<StelObject>(obj)), 5, false, true);
 					else
 						sMaxElevation = StelUtils::radToDmsPStr(computeMaxElevation(qSharedPointerCast<StelObject>(obj)), 2);
 				}
 
 				angularDistance = obj->getJ2000EquatorialPos(core).angle(sun->getJ2000EquatorialPos(core));
-				if (withDecimalDegree)
+				if (withDecimalDegreeOther)
 					elongStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
 				else
 					elongStr = StelUtils::radToDmsStr(angularDistance, true);
@@ -1309,9 +1311,9 @@ void AstroCalcDialog::currentCelestialPositions()
 				Vec3d pos = planet->getJ2000EquatorialPos(core);
 
 				if (horizon)
-					coordStrings = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+					coordStrings = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 				else
-					coordStrings = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+					coordStrings = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 
 				QString extra = QString::number(pos.norm(), 'f', 5); // A.U.
 
@@ -1328,7 +1330,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[3]!=20)
 				{
 					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
-					if (withDecimalDegree)
+					if (withDecimalDegreeOther)
 						sMaxElevation = StelUtils::radToDecDegStr(computeMaxElevation(qSharedPointerCast<StelObject>(planet)), 5, false, true);
 					else
 						sMaxElevation = StelUtils::radToDmsPStr(computeMaxElevation(qSharedPointerCast<StelObject>(planet)), 2);
@@ -1337,7 +1339,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (planet!=sun)
 				{
 					angularDistance = planet->getElongation(core->getObserverHeliocentricEclipticPos());
-					if (withDecimalDegree)
+					if (withDecimalDegreeOther)
 						elongStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
 					else
 						elongStr = StelUtils::radToDmsStr(angularDistance, true);
@@ -1388,9 +1390,9 @@ void AstroCalcDialog::currentCelestialPositions()
 			if (static_cast<double>(obj->getVMagnitudeWithExtinction(core)) <= mag && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
-					coordStrings = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+					coordStrings = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 				else
-					coordStrings = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+					coordStrings = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 
 				if (celTypeId == 170) // double stars
 				{
@@ -1414,14 +1416,14 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.)
 				{
 					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
-					if (withDecimalDegree)
+					if (withDecimalDegreeOther)
 						sMaxElevation = StelUtils::radToDecDegStr(computeMaxElevation(obj), 5, false, true);
 					else
 						sMaxElevation = StelUtils::radToDmsPStr(computeMaxElevation(obj), 2);
 				}
 
 				angularDistance = obj->getJ2000EquatorialPos(core).angle(sun->getJ2000EquatorialPos(core));
-				if (withDecimalDegree)
+				if (withDecimalDegreeOther)
 					elongStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
 				else
 					elongStr = StelUtils::radToDmsStr(angularDistance, true);
@@ -1576,7 +1578,7 @@ void AstroCalcDialog::currentHECPositions()
 	QPair<QString, QString> coordStrings;
 	hecObjects.clear();
 	initListHECPositions();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 	const bool minorPlanets = ui->hecSelectedMinorPlanetsCheckBox->isChecked();
 	const bool brightComets = ui->hecBrightCometsCheckBox->isChecked();
 	const double magLimit = ui->hecMagnitudeLimitSpinBox->value();
@@ -1992,7 +1994,8 @@ void AstroCalcDialog::generateEphemeris()
 	const bool useHorizontalCoords = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
 	const bool ignoreDateTest = ui->ephemerisIgnoreDateTestCheckBox->isChecked();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegreeCoords = StelApp::getInstance().getFlagUseDecDegreesCoords();
+	const bool withDecimalDegreeOther = StelApp::getInstance().getFlagUseDecDegreesOther();
 
 	DisplayedPositionIndex = -1; // deselect an ephemeris marker
 	initListEphemeris();
@@ -2169,7 +2172,7 @@ void AstroCalcDialog::generateEphemeris()
 				pos = obj->getJ2000EquatorialPos(core);
 				sunPos = sun->getJ2000EquatorialPos(core);
 			}
-			QPair<QString, QString> coordStrings = getStringCoordinates(pos, useHorizontalCoords, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+			QPair<QString, QString> coordStrings = getStringCoordinates(pos, useHorizontalCoords, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 
 			Ephemeris item;
 			item.coord = pos;
@@ -2187,7 +2190,7 @@ void AstroCalcDialog::generateEphemeris()
 
 			if (elongStr != dash)
 			{
-				if (withDecimalDegree)
+				if (withDecimalDegreeOther)
 					elongStr = StelUtils::radToDecDegStr(obj->getElongation(observerHelioPos), 5, false, true);
 				else
 					elongStr = StelUtils::radToDmsStr(obj->getElongation(observerHelioPos), true);
@@ -2485,7 +2488,7 @@ void AstroCalcDialog::generateRTS()
 
 		if (!name.isEmpty()) // OK, let's calculate!
 		{
-			const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+			const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 
 			initListRTS();
 
@@ -3119,7 +3122,8 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	PlanetP moon = ssystem->getMoon();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegreeCoords = StelApp::getInstance().getFlagUseDecDegreesCoords();
+	const bool withDecimalDegreeOther = StelApp::getInstance().getFlagUseDecDegreesOther();
 	const double JDMid = modelIndex.sibling(modelIndex.row(), LunarEclipseDate).data(Qt::UserRole).toDouble();
 	const double uMag = modelIndex.sibling(modelIndex.row(), LunarEclipseUMag).data(Qt::UserRole).toDouble();
 
@@ -3194,15 +3198,15 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 			core->update(0);
 			double az, alt;
 			StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
-			QPair<QString, QString> coordStrings = getStringCoordinates(moon->getAltAzPosAuto(core), true, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+			QPair<QString, QString> coordStrings = getStringCoordinates(moon->getAltAzPosAuto(core), true, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 			QString azimuthStr = coordStrings.first;
 			QString altitudeStr = coordStrings.second;
 			treeItem->setText(LunarEclipseContactAltitude, altitudeStr);
 			treeItem->setData(LunarEclipseContactAltitude, Qt::UserRole, alt);
 			treeItem->setText(LunarEclipseContactAzimuth, azimuthStr);
 			treeItem->setData(LunarEclipseContactAzimuth, Qt::UserRole, az);
-			QString latitudeStr = StelUtils::decDegToLatitudeStr(latitude, !withDecimalDegree);
-			QString longitudeStr = StelUtils::decDegToLongitudeStr(longitude, true, false, !withDecimalDegree);
+			QString latitudeStr = StelUtils::decDegToLatitudeStr(latitude, !withDecimalDegreeCoords);
+			QString longitudeStr = StelUtils::decDegToLongitudeStr(longitude, true, false, !withDecimalDegreeCoords);
 			treeItem->setText(LunarEclipseContactLatitude, latitudeStr);
 			treeItem->setData(LunarEclipseContactLatitude, Qt::UserRole, latitude);
 			treeItem->setToolTip(LunarEclipseContactLatitude, q_("Geographic latitude where the Moon appears in the zenith"));
@@ -3210,7 +3214,7 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 			treeItem->setData(LunarEclipseContactLatitude, Qt::UserRole, longitude);
 			treeItem->setToolTip(LunarEclipseContactLongitude, q_("Geographic longitude where the Moon appears in the zenith"));
 			QString positionAngleStr, distanceStr;
-			if (withDecimalDegree)
+			if (withDecimalDegreeOther)
 			{
 				positionAngleStr = StelUtils::radToDecDegStr(positionAngle, 3, false, true);
 				distanceStr = StelUtils::radToDecDegStr(axisDistance, 5, false, true);
@@ -3440,7 +3444,7 @@ void AstroCalcDialog::generateSolarEclipses()
 		const double approxJD = 2451550.09765;
 		const double synodicMonth = 29.530588853;
 		int elements = static_cast<int>((stopJD - startJD) / synodicMonth);
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegreeCoords = StelApp::getInstance().getFlagUseDecDegreesCoords();
 
 		// Find approximate JD of New Moon = Geocentric conjunction in longitude
 		// Source: Astronomical Algorithms (1991), Jean Meeus
@@ -3582,8 +3586,8 @@ void AstroCalcDialog::generateSolarEclipses()
 								durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute), QString::number(durationSecond));
 						}
 
-						latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, !withDecimalDegree);
-						longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true, false, !withDecimalDegree);
+						latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, !withDecimalDegreeCoords);
+						longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true, false, !withDecimalDegreeCoords);
 
 						ACSolarEclipseTreeWidgetItem* treeItem = new ACSolarEclipseTreeWidgetItem(ui->solareclipseTreeWidget);
 						const double utcOffsetHrs = core->getUTCOffset(JD);
@@ -3977,7 +3981,7 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 	initListSolarEclipseContact();
 	const bool saveTopocentric = core->getUseTopocentricCoordinates();
 	const double currentJD = core->getJD();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 	QPair<QString, QString> coordStrings;
 	QString pathWidthStr, durationStr, eclipseTypeStr;
 	const QString km = qc_("km", "distance");
@@ -4531,7 +4535,7 @@ void AstroCalcDialog::generateTransits()
 		initListTransit();
 		const double currentJD = core->getJD(); // save current JD
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 		for (int p = 0; p < 2; p++)
 		{
 			double startyear = ui->eclipseFromYearSpinBox->value();
@@ -6492,7 +6496,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	PlanetP moon = solarSystem->getMoon();
 	PlanetP earth = solarSystem->getEarth();
 	PlanetP planet = core->getCurrentPlanet();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	double az, alt;
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
@@ -6671,7 +6675,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	PlanetP moon = solarSystem->getMoon();
 	PlanetP earth = solarSystem->getEarth();
 	PlanetP planet = core->getCurrentPlanet();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	double az, alt;
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
@@ -6746,7 +6750,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	PlanetP moon = solarSystem->getMoon();
 	PlanetP earth = solarSystem->getEarth();
 	PlanetP planet = core->getCurrentPlanet();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	double az, alt;
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
@@ -8048,7 +8052,7 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
 		const Nebula::TypeGroup tflags = static_cast<Nebula::TypeGroup>(dsoMgr->getTypeFilters());
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 		const bool angularSizeLimit = ui->wutAngularSizeLimitCheckBox->isChecked();
 		bool enableAngular = true;
 		const double angularSizeLimitMin = ui->wutAngularSizeLimitMinSpinBox->valueDegrees();
