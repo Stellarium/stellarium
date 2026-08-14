@@ -44,6 +44,7 @@
 #include <QPushButton>
 #include <QSignalBlocker>
 #include <QTimer>
+#include <QTabWidget>
 #include <cmath>
 
 ObjectVisibilityDialog::ObjectVisibilityDialog()
@@ -72,6 +73,14 @@ void ObjectVisibilityDialog::retranslate()
 		syncMapControls();
 		updatePlaceLabels();
 	}
+}
+
+void ObjectVisibilityDialog::setVisible(bool visible)
+{
+	StelDialog::setVisible(visible);
+	updateTwilightMapTimerState();
+	if (visible && isLiveTwilightMapTabActive())
+		scheduleTwilightMapRefresh();
 }
 
 //
@@ -166,6 +175,8 @@ void ObjectVisibilityDialog::createDialogContent()
 	        this, &ObjectVisibilityDialog::onSyncMapsToggled);
 	connect(ui->twilightMapSyncMapsCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onSyncMapsToggled);
+	connect(ui->tabs, &QTabWidget::currentChanged,
+	        this, &ObjectVisibilityDialog::onTabChanged);
 
 	// Map clicks while in "set location" mode.
 	connect(ui->mapWidget, &ObjectVisibilityMapWidget::locationPicked,
@@ -204,10 +215,10 @@ void ObjectVisibilityDialog::createDialogContent()
 	connect(core, &StelCore::dateChanged,
 	        this, &ObjectVisibilityDialog::scheduleTwilightMapRefresh);
 	twilightMapTimer = new QTimer(this);
-	twilightMapTimer->setInterval(250);
+	twilightMapTimer->setInterval(1000);
 	connect(twilightMapTimer, &QTimer::timeout,
 	        this, qOverload<>(&ObjectVisibilityDialog::refreshTwilightMap));
-	twilightMapTimer->start();
+	updateTwilightMapTimerState();
 	syncMarkerToObserver();
 
 	setAboutHtml();
@@ -560,6 +571,14 @@ void ObjectVisibilityDialog::onMapViewChanged(double centerLongitude,
 	applyingMapSync = false;
 }
 
+void ObjectVisibilityDialog::onTabChanged(int index)
+{
+	Q_UNUSED(index);
+	updateTwilightMapTimerState();
+	if (isLiveTwilightMapTabActive())
+		scheduleTwilightMapRefresh();
+}
+
 void ObjectVisibilityDialog::syncMarkerToObserver()
 {
 	if (!ui || !ui->mapWidget) return;
@@ -689,6 +708,12 @@ void ObjectVisibilityDialog::refreshTwilightMap()
 
 void ObjectVisibilityDialog::scheduleTwilightMapRefresh()
 {
+	if (!isLiveTwilightMapTabActive())
+	{
+		twilightMapRefreshPending = false;
+		return;
+	}
+
 	if (twilightMapRefreshPending)
 		return;
 
@@ -698,6 +723,12 @@ void ObjectVisibilityDialog::scheduleTwilightMapRefresh()
 
 void ObjectVisibilityDialog::refreshTwilightMapNow()
 {
+	if (!isLiveTwilightMapTabActive())
+	{
+		twilightMapRefreshPending = false;
+		return;
+	}
+
 	StelCore* core = StelApp::getInstance().getCore();
 	if (core)
 		core->update(0.0);
@@ -709,6 +740,8 @@ void ObjectVisibilityDialog::refreshTwilightMapNow()
 void ObjectVisibilityDialog::refreshTwilightMap(bool force)
 {
 	if (!ui || !ui->liveTwilightMapWidget) return;
+	if (!force && !isLiveTwilightMapTabActive()) return;
+
 
 	StelCore* core = StelApp::getInstance().getCore();
 	if (!core) return;
@@ -837,6 +870,27 @@ void ObjectVisibilityDialog::syncMapControls()
 	ui->syncMapsCheckBox->setChecked(syncMaps);
 	ui->twilightSyncMapsCheckBox->setChecked(syncMaps);
 	ui->twilightMapSyncMapsCheckBox->setChecked(syncMaps);
+}
+
+bool ObjectVisibilityDialog::isLiveTwilightMapTabActive() const
+{
+	return dialog && ui && twilightMapTimer && visible() &&
+	       ui->tabs->currentWidget() == ui->twilightMapTab;
+}
+
+void ObjectVisibilityDialog::updateTwilightMapTimerState()
+{
+	if (!twilightMapTimer) return;
+
+	if (isLiveTwilightMapTabActive())
+	{
+		if (!twilightMapTimer->isActive())
+			twilightMapTimer->start();
+	}
+	else
+	{
+		twilightMapTimer->stop();
+	}
 }
 
 void ObjectVisibilityDialog::updatePlaceLabels()

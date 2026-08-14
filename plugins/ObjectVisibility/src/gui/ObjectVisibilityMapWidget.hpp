@@ -141,6 +141,8 @@ private:
 	void drawTwilightShade(QPainter& painter);
 	void renderTwilightShadePaths(QPainter& painter) const;
 	void invalidateTwilightShadeCache();
+	void renderTwilightMapOverlay(QPainter& painter);
+	void invalidateTwilightOverlayCache();
 	void drawTwilightContour(QPainter& painter, double altitudeDeg,
 	                         const QPen& pen) const;
 	QPainterPath twilightBelowAltitudePath(double altitudeDeg,
@@ -187,6 +189,13 @@ private:
 	double twilightShadeCacheTop = 0.0;
 	double twilightShadeCacheMapWidth = 0.0;
 	double twilightShadeCacheMapHeight = 0.0;
+	QImage twilightOverlayCache;
+	QSize  twilightOverlayCacheImageSize;
+	double twilightOverlayCacheRatio = 0.0;
+	double twilightOverlayCacheLeft = 0.0;
+	double twilightOverlayCacheTop = 0.0;
+	double twilightOverlayCacheMapWidth = 0.0;
+	double twilightOverlayCacheMapHeight = 0.0;
 
 	QVector<PlaceLabel> placeLabels;
 	bool showPlaceLabels = false;

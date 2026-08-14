@@ -164,7 +164,7 @@ void ObjectVisibilityMapWidget::setTwilightMapData(double sunLongitudeDeg,
 	twilightSunLatitudeDeg = sunLatitudeDeg;
 	twilightMoonLongitudeDeg = moonLongitudeDeg;
 	twilightMoonLatitudeDeg = moonLatitudeDeg;
-	invalidateTwilightShadeCache();
+	invalidateTwilightOverlayCache();
 	update();
 }
 
@@ -174,7 +174,7 @@ void ObjectVisibilityMapWidget::setTwilightMapFullTwilight(bool enabled)
 	twilightMapFullTwilight = enabled;
 	if (hasTwilightMap)
 	{
-		invalidateTwilightShadeCache();
+		invalidateTwilightOverlayCache();
 		update();
 	}
 }
@@ -183,7 +183,7 @@ void ObjectVisibilityMapWidget::clearTwilightMap()
 {
 	if (!hasTwilightMap) return;
 	hasTwilightMap = false;
-	invalidateTwilightShadeCache();
+	invalidateTwilightOverlayCache();
 	update();
 }
 
@@ -463,7 +463,8 @@ QVector<QPointF> ObjectVisibilityMapWidget::twilightSmallCirclePoints(
 	const double cosDistance = std::cos(angularDistance);
 
 	QVector<QPointF> points;
-	constexpr int contourSteps = 1440;
+	const int contourSteps = static_cast<int>(std::clamp(
+		std::ceil(mapWidth / 4.0), 180.0, 720.0));
 	points.reserve(contourSteps + 1);
 	double previousX = 0.0;
 	bool hasPrevious = false;
@@ -536,7 +537,8 @@ QPainterPath ObjectVisibilityMapWidget::twilightCapPath(
 		const double sinCenterLat = std::sin(centerLatRad);
 		const double cosCenterLat = std::cos(centerLatRad);
 		const double cosDistance = std::cos(angularDistanceDeg * DEG_TO_RAD);
-		const int steps = 1440;
+		const int steps = static_cast<int>(std::clamp(
+			std::ceil(mapWidth / 4.0), 180.0, 720.0));
 		QVector<QPointF> boundary;
 		boundary.reserve(steps + 1);
 
@@ -665,6 +667,18 @@ void ObjectVisibilityMapWidget::invalidateTwilightShadeCache()
 	twilightShadeCacheTop = 0.0;
 	twilightShadeCacheMapWidth = 0.0;
 	twilightShadeCacheMapHeight = 0.0;
+}
+
+void ObjectVisibilityMapWidget::invalidateTwilightOverlayCache()
+{
+	invalidateTwilightShadeCache();
+	twilightOverlayCache = QImage();
+	twilightOverlayCacheImageSize = QSize();
+	twilightOverlayCacheRatio = 0.0;
+	twilightOverlayCacheLeft = 0.0;
+	twilightOverlayCacheTop = 0.0;
+	twilightOverlayCacheMapWidth = 0.0;
+	twilightOverlayCacheMapHeight = 0.0;
 }
 
 void ObjectVisibilityMapWidget::drawTwilightShade(QPainter& painter)
@@ -873,6 +887,46 @@ void ObjectVisibilityMapWidget::drawSubPointSymbol(QPainter& painter,
 }
 
 void ObjectVisibilityMapWidget::drawTwilightMapOverlay(QPainter& painter)
+{
+	const double ratio = devicePixelRatioF();
+	const QSize imageSize(std::max(1, static_cast<int>(std::ceil(width() * ratio))),
+	                      std::max(1, static_cast<int>(std::ceil(height() * ratio))));
+	const auto topLeft = lonLatToMapPoint(-180.0, 90.0);
+	const auto bottomRight = lonLatToMapPoint(180.0, -90.0);
+	const double mapWidth = bottomRight.x - topLeft.x;
+	const double mapHeight = bottomRight.y - topLeft.y;
+	if (mapWidth <= 0.0 || mapHeight <= 0.0) return;
+
+	const bool cacheMatches =
+		!twilightOverlayCache.isNull() &&
+		twilightOverlayCacheImageSize == imageSize &&
+		qFuzzyCompare(twilightOverlayCacheRatio, ratio) &&
+		qFuzzyCompare(twilightOverlayCacheLeft, topLeft.x) &&
+		qFuzzyCompare(twilightOverlayCacheTop, topLeft.y) &&
+		qFuzzyCompare(twilightOverlayCacheMapWidth, mapWidth) &&
+		qFuzzyCompare(twilightOverlayCacheMapHeight, mapHeight);
+
+	if (!cacheMatches)
+	{
+		twilightOverlayCache = QImage(imageSize, QImage::Format_ARGB32_Premultiplied);
+		twilightOverlayCache.fill(Qt::transparent);
+
+		QPainter cachePainter(&twilightOverlayCache);
+		cachePainter.setRenderHint(QPainter::Antialiasing, true);
+		renderTwilightMapOverlay(cachePainter);
+
+		twilightOverlayCacheImageSize = imageSize;
+		twilightOverlayCacheRatio = ratio;
+		twilightOverlayCacheLeft = topLeft.x;
+		twilightOverlayCacheTop = topLeft.y;
+		twilightOverlayCacheMapWidth = mapWidth;
+		twilightOverlayCacheMapHeight = mapHeight;
+	}
+
+	painter.drawImage(QPointF(0.0, 0.0), twilightOverlayCache);
+}
+
+void ObjectVisibilityMapWidget::renderTwilightMapOverlay(QPainter& painter)
 {
 	drawTwilightShade(painter);
 

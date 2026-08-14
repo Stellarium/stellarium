@@ -41,6 +41,7 @@ public:
 
 public slots:
 	void retranslate() override;
+	void setVisible(bool visible) override;
 
 protected:
 	void createDialogContent() override;
@@ -87,6 +88,7 @@ private slots:
 	void onSyncMapsToggled(bool on);
 	void onMapViewChanged(double centerLongitude, double centerLatitude,
 	                      double zoom);
+	void onTabChanged(int index);
 
 	//! Re-sync the location marker AND the planet texture from
 	//! StelCore's current observer.  Called on startup and whenever
@@ -144,6 +146,8 @@ private:
 	void syncPlaceLabelControls();
 	void updatePlaceLabels();
 	void syncMapControls();
+	bool isLiveTwilightMapTabActive() const;
+	void updateTwilightMapTimerState();
 
 	//! Compute the year label in astronomical convention from the
 	//! StelCore's current JD.  E.g. 2026, or -10000 for 10001 BCE.
