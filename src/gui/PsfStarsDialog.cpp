@@ -39,9 +39,7 @@ void PsfStarsDialog::createDialogContent()
 	connect(ui->titleBar, &TitleBar::movedTo,      this, &PsfStarsDialog::handleMovedTo);
 
 	connectDoubleProperty(ui->pointRadiusDoubleSpinBox, "StelSkyDrawer.psfStarPointRadius");
-	connectDoubleProperty(ui->optimizationDoubleSpinBox, "StelSkyDrawer.psfStarOptimization");
-	connectDoubleProperty(ui->maxIrradianceDoubleSpinBox, "StelSkyDrawer.psfStarMaxIrradiance");
-	connectDoubleProperty(ui->exposureDoubleSpinBox, "StelSkyDrawer.psfStarExposure");
-	connectDoubleProperty(ui->dimClipFactorDoubleSpinBox, "StelSkyDrawer.psfStarDimClipFactor");
+	connectDoubleProperty(ui->flareDecayDoubleSpinBox, "StelSkyDrawer.psfStarFlareDecay");
+	connectDoubleProperty(ui->flareStrengthDoubleSpinBox, "StelSkyDrawer.psfStarFlareStrength");
 	connectBoolProperty(ui->projectionCorrectionCheckBox, "StelSkyDrawer.flagPsfStarProjectionCorrection");
 }

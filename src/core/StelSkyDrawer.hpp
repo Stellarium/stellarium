@@ -68,10 +68,8 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(bool flagPsfStars READ getFlagPsfStars WRITE setFlagPsfStars NOTIFY flagPsfStarsChanged)
 	Q_PROPERTY(bool flagPsfStarProjectionCorrection READ getFlagPsfStarProjectionCorrection WRITE setFlagPsfStarProjectionCorrection NOTIFY flagPsfStarProjectionCorrectionChanged)
 	Q_PROPERTY(double psfStarPointRadius READ getPsfStarPointRadius WRITE setPsfStarPointRadius NOTIFY psfStarPointRadiusChanged)
-	Q_PROPERTY(double psfStarOptimization READ getPsfStarOptimization WRITE setPsfStarOptimization NOTIFY psfStarOptimizationChanged)
-	Q_PROPERTY(double psfStarMaxIrradiance READ getPsfStarMaxIrradiance WRITE setPsfStarMaxIrradiance NOTIFY psfStarMaxIrradianceChanged)
-	Q_PROPERTY(double psfStarExposure READ getPsfStarExposure WRITE setPsfStarExposure NOTIFY psfStarExposureChanged)
-	Q_PROPERTY(double psfStarDimClipFactor READ getPsfStarDimClipFactor WRITE setPsfStarDimClipFactor NOTIFY psfStarDimClipFactorChanged)
+	Q_PROPERTY(double psfStarFlareDecay READ getPsfStarFlareDecay WRITE setPsfStarFlareDecay NOTIFY psfStarFlareDecayChanged)
+	Q_PROPERTY(double psfStarFlareStrength READ getPsfStarFlareStrength WRITE setPsfStarFlareStrength NOTIFY psfStarFlareStrengthChanged)
 
 	Q_PROPERTY(bool flagStarMagnitudeLimit READ getFlagStarMagnitudeLimit WRITE setFlagStarMagnitudeLimit NOTIFY flagStarMagnitudeLimitChanged)
 	Q_PROPERTY(bool flagNebulaMagnitudeLimit READ getFlagNebulaMagnitudeLimit WRITE setFlagNebulaMagnitudeLimit NOTIFY flagNebulaMagnitudeLimitChanged)
@@ -245,14 +243,10 @@ public slots:
 	bool getFlagPsfStarProjectionCorrection() const {return flagPsfStarProjectionCorrection;}
 	void setPsfStarPointRadius(double r);
 	double getPsfStarPointRadius() const {return psfStarPointRadius;}
-	void setPsfStarOptimization(double opt);
-	double getPsfStarOptimization() const {return psfStarOptimization;}
-	void setPsfStarMaxIrradiance(double maxIrradiance);
-	double getPsfStarMaxIrradiance() const {return psfStarMaxIrradiance;}
-	void setPsfStarExposure(double exposure);
-	double getPsfStarExposure() const {return psfStarExposure;}
-	void setPsfStarDimClipFactor(double factor);
-	double getPsfStarDimClipFactor() const {return psfStarDimClipFactor;}
+	void setPsfStarFlareDecay(double decay);
+	double getPsfStarFlareDecay() const {return psfStarFlareDecay;}
+	void setPsfStarFlareStrength(double strength);
+	double getPsfStarFlareStrength() const {return psfStarFlareStrength;}
 
 	//! Get the magnitude of the currently faintest visible point source
 	//! It depends on the zoom level, on the eye adaptation and on the point source rendering parameters
@@ -375,10 +369,8 @@ signals:
 	void flagPsfStarsChanged(bool b);
 	void flagPsfStarProjectionCorrectionChanged(bool b);
 	void psfStarPointRadiusChanged(double r);
-	void psfStarOptimizationChanged(double opt);
-	void psfStarMaxIrradianceChanged(double maxIrradiance);
-	void psfStarExposureChanged(double exposure);
-	void psfStarDimClipFactorChanged(double factor);
+	void psfStarFlareDecayChanged(double decay);
+	void psfStarFlareStrengthChanged(double strength);
 
 	//! Emitted whenever the star magnitude limit flag is toggled
 	void flagStarMagnitudeLimitChanged(bool b);
@@ -510,10 +502,8 @@ private:
 	bool flagPsfStars;
 	bool flagPsfStarProjectionCorrection;
 	float psfStarPointRadius;
-	float psfStarOptimization;
-	float psfStarMaxIrradiance;
-	float psfStarExposure;
-	float psfStarDimClipFactor;
+	float psfStarFlareDecay;
+	float psfStarFlareStrength;
 
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
@@ -602,6 +592,7 @@ private:
 		int pixelPerRad;
 		int psfA;
 		int psfB;
+		int flareStrength;
 	};
 	PsfStarShaderVars psfPointShaderVars;
 	PsfStarShaderVars psfGlowShaderVars;

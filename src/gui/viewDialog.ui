@@ -831,7 +831,7 @@
                  </item>
                 </layout>
                </item>
-               <item row="4" column="0" colspan="3">
+               <item row="4" column="0">
                 <widget class="QCheckBox" name="spikyStarsCheckBox">
                  <property name="toolTip">
                   <string>Show stars with pointed rays</string>
@@ -841,10 +841,16 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="0" colspan="3">
-                <layout class="QVBoxLayout" name="verticalLayoutPsfStars">
+               <item row="4" column="1" colspan="2">
+                <layout class="QHBoxLayout" name="horizontalLayoutPsfStars">
                  <item>
                   <widget class="QCheckBox" name="psfStarsCheckBox">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="toolTip">
                     <string>Render catalogue stars with a point spread function profile</string>
                    </property>
@@ -854,34 +860,22 @@
                   </widget>
                  </item>
                  <item>
-                  <layout class="QHBoxLayout" name="horizontalLayoutPsfStarProperties">
-                   <property name="leftMargin">
-                    <number>22</number>
+                  <widget class="QToolButton" name="psfStarsPropertiesButton">
+                   <property name="enabled">
+                    <bool>false</bool>
                    </property>
-                   <item>
-                    <widget class="QPushButton" name="psfStarsPropertiesButton">
-                     <property name="enabled">
-                      <bool>false</bool>
-                     </property>
-                     <property name="text">
-                      <string>Properties</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacerPsfStars">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                  </layout>
+                   <property name="toolTip">
+                    <string>PSF star settings</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>

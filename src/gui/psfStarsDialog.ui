@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
-    <height>220</height>
+          <width>320</width>
+          <height>180</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -42,7 +42,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="pointRadiusLabel">
         <property name="text">
-         <string>Point radius:</string>
+         <string>Core size:</string>
         </property>
        </widget>
       </item>
@@ -55,74 +55,25 @@
          <number>2</number>
         </property>
         <property name="minimum">
-         <double>1.000000000000000</double>
+         <double>0.500000000000000</double>
         </property>
         <property name="maximum">
-         <double>10.000000000000000</double>
+         <double>5.000000000000000</double>
         </property>
         <property name="singleStep">
-         <double>0.100000000000000</double>
+         <double>0.050000000000000</double>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="optimizationLabel">
+       <widget class="QLabel" name="flareDecayLabel">
         <property name="text">
-         <string>Optimization:</string>
+         <string>Flare decay:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QDoubleSpinBox" name="optimizationDoubleSpinBox">
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="decimals">
-         <number>2</number>
-        </property>
-        <property name="minimum">
-         <double>0.050000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>1.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.010000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="maxIrradianceLabel">
-        <property name="text">
-         <string>Max irradiance:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QDoubleSpinBox" name="maxIrradianceDoubleSpinBox">
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="decimals">
-         <number>2</number>
-        </property>
-        <property name="maximum">
-         <double>1000000.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>10.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="exposureLabel">
-        <property name="text">
-         <string>Exposure:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QDoubleSpinBox" name="exposureDoubleSpinBox">
+       <widget class="QDoubleSpinBox" name="flareDecayDoubleSpinBox">
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
@@ -130,25 +81,25 @@
          <number>3</number>
         </property>
         <property name="minimum">
-         <double>0.001000000000000</double>
+         <double>0.010000000000000</double>
         </property>
         <property name="maximum">
-         <double>1000000.000000000000000</double>
-        </property>
-        <property name="singleStep">
          <double>1.000000000000000</double>
         </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="dimClipFactorLabel">
-        <property name="text">
-         <string>Dim clip factor:</string>
+        <property name="singleStep">
+         <double>0.005000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QDoubleSpinBox" name="dimClipFactorDoubleSpinBox">
+      <item row="2" column="0">
+       <widget class="QLabel" name="flareStrengthLabel">
+        <property name="text">
+         <string>Flare strength:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QDoubleSpinBox" name="flareStrengthDoubleSpinBox">
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
@@ -156,24 +107,24 @@
          <number>2</number>
         </property>
         <property name="minimum">
-         <double>1.000000000000000</double>
+         <double>0.000000000000000</double>
         </property>
         <property name="maximum">
-         <double>100.000000000000000</double>
+         <double>20.000000000000000</double>
         </property>
         <property name="singleStep">
-         <double>1.000000000000000</double>
+         <double>0.250000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="5" column="0" colspan="2">
+      <item row="3" column="0" colspan="2">
        <widget class="QCheckBox" name="projectionCorrectionCheckBox">
         <property name="text">
-         <string>Jacobian projection correction</string>
+         <string>Projection correction</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0" colspan="2">
+      <item row="4" column="0" colspan="2">
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -201,10 +152,8 @@
  </customwidgets>
  <tabstops>
   <tabstop>pointRadiusDoubleSpinBox</tabstop>
-  <tabstop>optimizationDoubleSpinBox</tabstop>
-  <tabstop>maxIrradianceDoubleSpinBox</tabstop>
-  <tabstop>exposureDoubleSpinBox</tabstop>
-  <tabstop>dimClipFactorDoubleSpinBox</tabstop>
+  <tabstop>flareDecayDoubleSpinBox</tabstop>
+  <tabstop>flareStrengthDoubleSpinBox</tabstop>
   <tabstop>projectionCorrectionCheckBox</tabstop>
  </tabstops>
  <resources/>

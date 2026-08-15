@@ -50,6 +50,12 @@
 #define EYE_RESOLUTION (0.25f)
 #define MAX_LINEAR_RADIUS 8.f
 
+static float psfSmoothStep(float edge0, float edge1, float x)
+{
+	const float t = qBound(0.f, (x - edge0) / (edge1 - edge0), 1.f);
+	return t * t * (3.f - 2.f * t);
+}
+
 StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	core(acore),
 	eye(acore->getToneReproducer()),
@@ -67,10 +73,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	flagPsfStars(false),
 	flagPsfStarProjectionCorrection(true),
 	psfStarPointRadius(1.5f),
-	psfStarOptimization(0.1f),
-	psfStarMaxIrradiance(500.f),
-	psfStarExposure(20.f),
-	psfStarDimClipFactor(10.f),
+	psfStarFlareDecay(0.1f),
+	psfStarFlareStrength(1.f),
 	flagStarMagnitudeLimit(false),
 	flagNebulaMagnitudeLimit(false),
 	flagPlanetMagnitudeLimit(false),
@@ -114,10 +118,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagPsfStars(conf->value("stars/flag_psf_stars", false).toBool());
 	setFlagPsfStarProjectionCorrection(conf->value("stars/flag_psf_projection_correction", true).toBool());
 	setPsfStarPointRadius(conf->value("stars/psf_star_point_radius", 1.5).toDouble());
-	setPsfStarOptimization(conf->value("stars/psf_star_optimization", 0.1).toDouble());
-	setPsfStarMaxIrradiance(conf->value("stars/psf_star_max_irradiance", 500.0).toDouble());
-	setPsfStarExposure(conf->value("stars/psf_star_exposure", 20.0).toDouble());
-	setPsfStarDimClipFactor(conf->value("stars/psf_star_dim_clip_factor", 10.0).toDouble());
+	setPsfStarFlareDecay(conf->value("stars/psf_star_flare_decay", conf->value("stars/psf_star_optimization", 0.1)).toDouble());
+	setPsfStarFlareStrength(conf->value("stars/psf_star_flare_strength", 1.0).toDouble());
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
@@ -276,12 +278,15 @@ void StelSkyDrawer::init()
 		"void main(void)\n"
 		"{\n"
 		"    highp float px = length(vCorner) * pointRadius;\n"
-		"    highp float falloff = clamp(1.0 - px / pointRadius, 0.0, 1.0);\n"
+		"    highp float x = clamp(px / pointRadius, 0.0, 1.0);\n"
+		"    highp float falloff = 1.0 - x * x;\n"
+		"    falloff *= falloff;\n"
 		"    FRAG_COLOR = vec4(outColor * (falloff * outPeakRadiance), 1.0);\n"
 		"}\n";
 	const char *psfGlowFsrc =
 		"uniform highp float psfA;\n"
 		"uniform highp float psfB;\n"
+		"uniform highp float flareStrength;\n"
 		"VARYING highp vec2 vCorner;\n"
 		"VARYING mediump vec3 outColor;\n"
 		"VARYING highp float outPeakRadiance;\n"
@@ -294,7 +299,7 @@ void StelSkyDrawer::init()
 		"    highp float p04 = pow(outPeakRadiance, 0.4);\n"
 		"    highp float s = max((p04 / px - psfA) * psfB, 0.0);\n"
 		"    highp float val = min(s * s * sqrt(s), outPeakRadiance);\n"
-		"    FRAG_COLOR = vec4(outColor * val, 1.0);\n"
+		"    FRAG_COLOR = vec4(outColor * val * flareStrength, 1.0);\n"
 		"}\n";
 
 	auto createPsfProgram = [this, psfVsrc](const char* fsrc, const char* name, PsfStarShaderVars& vars)
@@ -320,6 +325,7 @@ void StelSkyDrawer::init()
 		vars.pointScale = program->uniformLocation("pointScale");
 		vars.psfA = program->uniformLocation("psfA");
 		vars.psfB = program->uniformLocation("psfB");
+		vars.flareStrength = program->uniformLocation("flareStrength");
 		return program;
 	};
 	psfPointShaderProgram = createPsfProgram(psfPointFsrc, "psfStarPointShader", psfPointShaderVars);
@@ -684,12 +690,18 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 {
 	const float r = qMax(psfStarPointRadius, 1.0e-3f);
-	const float luminance = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), 1.f);
-	if (!std::isfinite(luminance) || luminance <= 0.f)
+	RCMag legacyRCMag;
+	if (!computeRCMag(mag, &legacyRCMag))
 		return false;
 
-	float peak = qMax(psfStarExposure, 1.0e-6f) * 3.f * luminance / (M_PIf * r * r);
-	const float dimGate = (1.f / (255.f * 12.92f)) * psfStarDimClipFactor;
+	const float screenScale = qMax(StelApp::getInstance().getScreenScale(), 1.0e-3f);
+	const float legacyRadius = legacyRCMag.radius / screenScale;
+	const float legacyFlux = legacyRCMag.luminance * legacyRadius * legacyRadius;
+	if (!std::isfinite(legacyFlux) || legacyFlux <= 0.f)
+		return false;
+
+	float peak = 3.f * legacyFlux / (M_PIf * r * r);
+	const float dimGate = 1.f / (255.f * 12.92f);
 	if (peak <= dimGate)
 		return false;
 
@@ -701,8 +713,8 @@ bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 float StelSkyDrawer::computePsfGlowRadius(float peakRadiance, float alpha) const
 {
 	const float r = qMax(psfStarPointRadius, 1.0e-3f);
-	const float a = psfStarOptimization / r;
-	if (a <= 0.f || peakRadiance <= 1.f)
+	const float a = psfStarFlareDecay / r;
+	if (a <= 0.f || peakRadiance <= 0.f || alpha <= 0.f)
 		return 0.f;
 
 	const float denom = M_PIf / r - a;
@@ -900,15 +912,14 @@ void StelSkyDrawer::drawPsfPointSource(StelPainter* sPainter, const Vec3d& direc
 
 	addPsfStarVertices(psfPointVertices, sPainter, direction, win, linearStarColor, peakRadianceColor, psfStarPointRadius);
 
-	if (peakRadianceColor > 1.f && psfStarOptimization > 0.f)
+	const float flareOnset = psfSmoothStep(0.5f, 2.5f, peakRadianceColor);
+	const float effectiveFlareStrength = psfStarFlareStrength * flareOnset;
+	if (effectiveFlareStrength > 0.f && psfStarFlareDecay > 0.f)
 	{
-		float glowPeak = peakRadianceColor;
-		if (psfStarMaxIrradiance > 0.f)
-			glowPeak = (1.f - 1.f / (peakRadianceColor / psfStarMaxIrradiance + 1.f)) * psfStarMaxIrradiance;
-
-		const float glowRadius = computePsfGlowRadius(glowPeak, 1.f);
+		const float glowPeak = peakRadianceColor;
+		const float glowRadius = computePsfGlowRadius(glowPeak, effectiveFlareStrength);
 		if (glowRadius > psfStarPointRadius)
-			addPsfStarVertices(psfGlowVertices, sPainter, direction, win, linearStarColor, glowPeak, glowRadius);
+			addPsfStarVertices(psfGlowVertices, sPainter, direction, win, linearStarColor * flareOnset, glowPeak, glowRadius);
 	}
 
 	if (psfPointVertices.size() >= static_cast<int>(maxPointSources*6) ||
@@ -992,7 +1003,9 @@ void main(void)
 	highp float px = psfDistancePx();
 	if (px < 0.0 || px > pointRadius)
 		discard;
-	highp float falloff = clamp(1.0 - px / pointRadius, 0.0, 1.0);
+	highp float x = clamp(px / pointRadius, 0.0, 1.0);
+	highp float falloff = 1.0 - x * x;
+	falloff *= falloff;
 	FRAG_COLOR = vec4(outColor * (falloff * outPeakRadiance), 1.0);
 }
 )";
@@ -1001,6 +1014,7 @@ void main(void)
 			R"(
 uniform highp float psfA;
 uniform highp float psfB;
+uniform highp float flareStrength;
 void main(void)
 {
 	highp float px = psfDistancePx();
@@ -1009,7 +1023,7 @@ void main(void)
 	highp float p04 = pow(outPeakRadiance, 0.4);
 	highp float s = max((p04 / px - psfA) * psfB, 0.0);
 	highp float val = min(s * s * sqrt(s), outPeakRadiance);
-	FRAG_COLOR = vec4(outColor * val, 1.0);
+	FRAG_COLOR = vec4(outColor * val * flareStrength, 1.0);
 }
 )";
 		auto createPsfProgram = [this, psfVsrc](const QByteArray& fsrc, const char* name, PsfStarShaderVars& vars)
@@ -1038,6 +1052,7 @@ void main(void)
 			vars.pixelPerRad = program->uniformLocation("psfPixelPerRad");
 			vars.psfA = program->uniformLocation("psfA");
 			vars.psfB = program->uniformLocation("psfB");
+			vars.flareStrength = program->uniformLocation("flareStrength");
 			return program;
 		};
 		psfPointShaderProgram = createPsfProgram(psfPointFsrc, "psfStarPointShader", psfPointShaderVars);
@@ -1066,10 +1081,11 @@ void main(void)
 		if (glow)
 		{
 			const float r = qMax(psfStarPointRadius, 1.0e-3f);
-			const float a = psfStarOptimization / r;
+			const float a = psfStarFlareDecay / r;
 			const float b = 1.f / (M_PIf / r - a);
 			program->setUniformValue(vars.psfA, a);
 			program->setUniformValue(vars.psfB, b);
+			program->setUniformValue(vars.flareStrength, psfStarFlareStrength);
 		}
 
 		if (psfVao->isCreated())
@@ -1419,7 +1435,7 @@ void StelSkyDrawer::setFlagPsfStarProjectionCorrection(bool b)
 
 void StelSkyDrawer::setPsfStarPointRadius(double r)
 {
-	const float value = qBound(1.f, static_cast<float>(r), 10.f);
+	const float value = qBound(0.5f, static_cast<float>(r), 5.f);
 	if (qFuzzyCompare(psfStarPointRadius, value))
 		return;
 	psfStarPointRadius = value;
@@ -1428,52 +1444,26 @@ void StelSkyDrawer::setPsfStarPointRadius(double r)
 	emit psfStarPointRadiusChanged(psfStarPointRadius);
 }
 
-void StelSkyDrawer::setPsfStarOptimization(double opt)
+void StelSkyDrawer::setPsfStarFlareDecay(double decay)
 {
-	const float value = qBound(0.05f, static_cast<float>(opt), 1.f);
-	if (qFuzzyCompare(psfStarOptimization, value))
+	const float value = qBound(0.01f, static_cast<float>(decay), 1.f);
+	if (qFuzzyCompare(psfStarFlareDecay, value))
 		return;
-	psfStarOptimization = value;
-	StelApp::immediateSave("stars/psf_star_optimization", psfStarOptimization);
+	psfStarFlareDecay = value;
+	StelApp::immediateSave("stars/psf_star_flare_decay", psfStarFlareDecay);
 	update(0);
-	emit psfStarOptimizationChanged(psfStarOptimization);
+	emit psfStarFlareDecayChanged(psfStarFlareDecay);
 }
 
-void StelSkyDrawer::setPsfStarMaxIrradiance(double maxIrradiance)
+void StelSkyDrawer::setPsfStarFlareStrength(double strength)
 {
-	float value = static_cast<float>(maxIrradiance);
-	if (value < 0.f)
-		value = 0.f;
-	else if (value > 0.f)
-		value = qBound(1.f, value, 1.0e6f);
-	if (qFuzzyCompare(psfStarMaxIrradiance, value))
+	const float value = qBound(0.f, static_cast<float>(strength), 20.f);
+	if (qFuzzyCompare(psfStarFlareStrength, value))
 		return;
-	psfStarMaxIrradiance = value;
-	StelApp::immediateSave("stars/psf_star_max_irradiance", psfStarMaxIrradiance);
+	psfStarFlareStrength = value;
+	StelApp::immediateSave("stars/psf_star_flare_strength", psfStarFlareStrength);
 	update(0);
-	emit psfStarMaxIrradianceChanged(psfStarMaxIrradiance);
-}
-
-void StelSkyDrawer::setPsfStarExposure(double exposure)
-{
-	const float value = qBound(1.0e-3f, static_cast<float>(exposure), 1.0e6f);
-	if (qFuzzyCompare(psfStarExposure, value))
-		return;
-	psfStarExposure = value;
-	StelApp::immediateSave("stars/psf_star_exposure", psfStarExposure);
-	update(0);
-	emit psfStarExposureChanged(psfStarExposure);
-}
-
-void StelSkyDrawer::setPsfStarDimClipFactor(double factor)
-{
-	const float value = qBound(1.f, static_cast<float>(factor), 100.f);
-	if (qFuzzyCompare(psfStarDimClipFactor, value))
-		return;
-	psfStarDimClipFactor = value;
-	StelApp::immediateSave("stars/psf_star_dim_clip_factor", psfStarDimClipFactor);
-	update(0);
-	emit psfStarDimClipFactorChanged(psfStarDimClipFactor);
+	emit psfStarFlareStrengthChanged(psfStarFlareStrength);
 }
 
 // colors for B-V display
