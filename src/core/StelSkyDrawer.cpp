@@ -710,6 +710,8 @@ bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 	return true;
 }
 
+// The PSF glow approximation and its optimization parameter are adapted from
+// Askaniy Anpilogov's Python prototype for point source rendering.
 float StelSkyDrawer::computePsfGlowRadius(float peakRadiance, float alpha) const
 {
 	const float r = qMax(psfStarPointRadius, 1.0e-3f);
