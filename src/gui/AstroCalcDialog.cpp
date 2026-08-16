@@ -5637,8 +5637,20 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		drawCurrentTimeDiagram();
 
 		// Transit line
-		QPair<double, double>transit=altVsTimeChart->findYMax(AstroCalcChart::AltVsTime);
-		altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, transit.first);
+		if (isSatellite)
+		{
+			// approx. time of max. transit
+			QPair<double, double>transit=altVsTimeChart->findYMax(AstroCalcChart::AltVsTime);
+			altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, transit.first);
+		}
+		else
+		{
+			Vec4d rts = selectedObject->getRTSTime(core);
+			double transitJD = rts[1];
+			if (transitJD > noon + 1.0)
+				transitJD -= 1.0; // approx. transit time
+			altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, qreal(StelUtils::jdToQDateTime(transitJD, Qt::UTC).toMSecsSinceEpoch()));
+		}
 	}
 	else
 	{
