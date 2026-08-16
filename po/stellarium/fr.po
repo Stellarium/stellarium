@@ -5153,9 +5153,9 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 "Cette équation polynomiale du 12e ordre a été publiée par L. D. Schmadel et "
-"G. Zech dans l'article <em>Polynomial approximations for the correction "
-"delta T E.T.-U.T. in the period 1800-1988</em> (%1) après ajustement à "
-"l'aide de valeurs données par Stephenson & Morrison (1984)."
+"G. Zech dans l'article <em>Empirical Transformations from U.T. to E.T. for "
+"the Period 1800-1988</em> (%1) après ajustement à l'aide de valeurs données "
+"par Stephenson & Morrison (1984)."
 
 #: src/core/StelCore.cpp:2806
 msgid ""
@@ -5276,7 +5276,7 @@ msgstr ""
 "Cette solution faite par F. Espenak et J. Meeus, basée sur Morrison & "
 "Stephenson (2004) et un ajustement polynomial à travers des valeurs tabulées"
 " pour 1600-2000, est utilisée pour le %1NASA Eclipse Web Site%2, dans leur "
-"<em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006) et "
+"<em>Five Millennium Canon of Solar Eclipses: –1900 to +3000</em> (2006) et "
 "<em>Thousand Year Canon of Solar Eclipses 1501 to 2500</em> (2014). Cette "
 "formule est aussi utilisée dans le programme solaire, lunaire et des "
 "éphémérides planétaires SOLEX."
@@ -15231,8 +15231,8 @@ msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
-"Vous pouvez saisir des valeurs en degrés décimaux ou sexagésimaux (degrés, "
-"minutes, secondes), p. ex. : +46d 47m 21s"
+"Vous pouvez saisir des valeurs en degrés décimaux ou sexagésimaux, p. ex. : "
+"+46d 47m 21s"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Use current location as default"
@@ -17325,7 +17325,7 @@ msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
-"DE431 fournit les données de position pour les années -13000 à +17000. "
+"DE431 fournit les données de position pour les années –13000 à +17000. "
 "Destiné uniquement à des utilisations spéciales."
 
 #: src/ui_configurationDialog.h:2392
@@ -17337,7 +17337,7 @@ msgid ""
 "DE441 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
-"DE441 fournit les données de position pour les années entre -13000 et "
+"DE441 fournit les données de position pour les années entre –13000 et "
 "+17000. Destiné uniquement à des utilisations spéciales."
 
 #: src/ui_configurationDialog.h:2397
@@ -17711,7 +17711,7 @@ msgstr "Distance polaire au lieu de déclinaison"
 msgid "Hour angles usually run 0...24h. This counts -12h...12h."
 msgstr ""
 "Les angles horaires sont habituellement dans l'intervalle 0...24h. Cette "
-"option les place dans l'intervalle -12h...12h."
+"option les place dans l'intervalle –12h...12h."
 
 #: src/ui_configurationDialog.h:2608
 msgid "Allow negative hour angles "
@@ -27847,7 +27847,7 @@ msgstr ""
 "La température d'équilibre d'une planète est la température théorique (en "
 "°C) que la planète aurait si on la considère comme un corps noir uniquement "
 "chauffé par son étoile hôte (en supposant un albédo de 0.3). Par exemple, la"
-" température d'équilibre de la Terre est de -18.15 °C (255 K)."
+" température d'équilibre de la Terre est de –18.15 °C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:327
 msgid ""
@@ -28038,7 +28038,7 @@ msgid ""
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
-"Nicolaus Copernicus (1473-1543) était un astronome polonais qui proposa un "
+"Nicolaus Copernicus (1473–1543) était un astronome polonais qui proposa un "
 "modèle héliocentrique du système solaire dans son ouvrage <em>De "
 "revolutionibus orbium coelestium</em>."
 
@@ -42079,7 +42079,7 @@ msgstr "lever/coucher"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:978
 msgid "night"
-msgstr "njuit"
+msgstr "nuit"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:979
 msgid "Zenith point"
@@ -42350,7 +42350,7 @@ msgstr ""
 "l'approximation usuelle du limbe supérieur apparent : le centre du Soleil "
 "est environ 50 minutes d'arc au-dessous de l'horizon géométrique, ce qui "
 "permet de tenir compte du rayon solaire et de la réfraction atmosphérique "
-"standard. Les limites des crépuscules de -6&deg;, -12&deg;, ez -18&deg; "
+"standard. Les limites des crépuscules de –6&deg;, –12&deg;, et –18&deg; "
 "utilisent le centre du Soleil."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1194
