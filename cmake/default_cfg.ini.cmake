@@ -71,6 +71,7 @@ flag_psf_stars                      = false
 psf_star_point_radius               = 1.5
 psf_star_flare_decay                = 0.1
 psf_star_flare_strength             = 1.0
+psf_star_bright_source_mag_limit    = -8.5
 
 #Johannes:
 #I recommend setting mag_converter_max_fov to 180, so that the sky gets not so

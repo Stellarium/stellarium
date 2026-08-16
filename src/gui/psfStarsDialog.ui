@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
           <width>320</width>
-          <height>180</height>
+          <height>210</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -117,14 +117,46 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0" colspan="2">
+      <item row="3" column="0">
+       <widget class="QLabel" name="brightSourceMagLimitLabel">
+        <property name="text">
+         <string>Bright source cap:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QDoubleSpinBox" name="brightSourceMagLimitDoubleSpinBox">
+        <property name="toolTip">
+         <string>Lower values allow brighter PSF halos for very bright point sources.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="decimals">
+         <number>1</number>
+        </property>
+        <property name="minimum">
+         <double>-13.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>-1.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.500000000000000</double>
+        </property>
+        <property name="suffix">
+         <string> mag</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
        <widget class="QCheckBox" name="projectionCorrectionCheckBox">
         <property name="text">
          <string>Projection correction</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="2">
+      <item row="5" column="0" colspan="2">
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -154,6 +186,7 @@
   <tabstop>pointRadiusDoubleSpinBox</tabstop>
   <tabstop>flareDecayDoubleSpinBox</tabstop>
   <tabstop>flareStrengthDoubleSpinBox</tabstop>
+  <tabstop>brightSourceMagLimitDoubleSpinBox</tabstop>
   <tabstop>projectionCorrectionCheckBox</tabstop>
  </tabstops>
  <resources/>

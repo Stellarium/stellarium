@@ -70,6 +70,7 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double psfStarPointRadius READ getPsfStarPointRadius WRITE setPsfStarPointRadius NOTIFY psfStarPointRadiusChanged)
 	Q_PROPERTY(double psfStarFlareDecay READ getPsfStarFlareDecay WRITE setPsfStarFlareDecay NOTIFY psfStarFlareDecayChanged)
 	Q_PROPERTY(double psfStarFlareStrength READ getPsfStarFlareStrength WRITE setPsfStarFlareStrength NOTIFY psfStarFlareStrengthChanged)
+	Q_PROPERTY(double psfStarBrightSourceMagLimit READ getPsfStarBrightSourceMagLimit WRITE setPsfStarBrightSourceMagLimit NOTIFY psfStarBrightSourceMagLimitChanged)
 
 	Q_PROPERTY(bool flagStarMagnitudeLimit READ getFlagStarMagnitudeLimit WRITE setFlagStarMagnitudeLimit NOTIFY flagStarMagnitudeLimitChanged)
 	Q_PROPERTY(bool flagNebulaMagnitudeLimit READ getFlagNebulaMagnitudeLimit WRITE setFlagNebulaMagnitudeLimit NOTIFY flagNebulaMagnitudeLimitChanged)
@@ -247,6 +248,8 @@ public slots:
 	double getPsfStarFlareDecay() const {return psfStarFlareDecay;}
 	void setPsfStarFlareStrength(double strength);
 	double getPsfStarFlareStrength() const {return psfStarFlareStrength;}
+	void setPsfStarBrightSourceMagLimit(double magLimit);
+	double getPsfStarBrightSourceMagLimit() const {return psfStarBrightSourceMagLimit;}
 
 	//! Get the magnitude of the currently faintest visible point source
 	//! It depends on the zoom level, on the eye adaptation and on the point source rendering parameters
@@ -371,6 +374,7 @@ signals:
 	void psfStarPointRadiusChanged(double r);
 	void psfStarFlareDecayChanged(double decay);
 	void psfStarFlareStrengthChanged(double strength);
+	void psfStarBrightSourceMagLimitChanged(double magLimit);
 
 	//! Emitted whenever the star magnitude limit flag is toggled
 	void flagStarMagnitudeLimitChanged(bool b);
@@ -504,6 +508,7 @@ private:
 	float psfStarPointRadius;
 	float psfStarFlareDecay;
 	float psfStarFlareStrength;
+	float psfStarBrightSourceMagLimit;
 
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.

@@ -49,6 +49,10 @@
 // The 0.025 corresponds to the maximum eye resolution in degree
 #define EYE_RESOLUTION (0.25f)
 #define MAX_LINEAR_RADIUS 8.f
+// Keep very bright point-source PSF halos under control. This preserves contrast
+// for objects such as Venus and bright supernovae while letting the full Moon
+// stand out without using its full integrated magnitude.
+#define DEFAULT_PSF_BRIGHT_SOURCE_MAG_LIMIT (-8.5f)
 
 static float psfSmoothStep(float edge0, float edge1, float x)
 {
@@ -75,6 +79,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	psfStarPointRadius(1.5f),
 	psfStarFlareDecay(0.1f),
 	psfStarFlareStrength(1.f),
+	psfStarBrightSourceMagLimit(DEFAULT_PSF_BRIGHT_SOURCE_MAG_LIMIT),
 	flagStarMagnitudeLimit(false),
 	flagNebulaMagnitudeLimit(false),
 	flagPlanetMagnitudeLimit(false),
@@ -120,6 +125,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setPsfStarPointRadius(conf->value("stars/psf_star_point_radius", 1.5).toDouble());
 	setPsfStarFlareDecay(conf->value("stars/psf_star_flare_decay", conf->value("stars/psf_star_optimization", 0.1)).toDouble());
 	setPsfStarFlareStrength(conf->value("stars/psf_star_flare_strength", 1.0).toDouble());
+	setPsfStarBrightSourceMagLimit(conf->value("stars/psf_star_bright_source_mag_limit", DEFAULT_PSF_BRIGHT_SOURCE_MAG_LIMIT).toDouble());
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
@@ -696,9 +702,18 @@ bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 
 	const float screenScale = qMax(StelApp::getInstance().getScreenScale(), 1.0e-3f);
 	const float legacyRadius = legacyRCMag.radius / screenScale;
-	const float legacyFlux = legacyRCMag.luminance * legacyRadius * legacyRadius;
+	float legacyFlux = legacyRCMag.luminance * legacyRadius * legacyRadius;
 	if (!std::isfinite(legacyFlux) || legacyFlux <= 0.f)
 		return false;
+
+	if (mag < -1.f)
+	{
+		const float cappedMag = qMax(mag, psfStarBrightSourceMagLimit);
+		const float rawRadius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(cappedMag), static_cast<float>(starRelativeScale)*1.40f*0.5f) * starLinearScale;
+		const float rawFlux = rawRadius * rawRadius;
+		if (std::isfinite(rawFlux) && rawFlux > legacyFlux)
+			legacyFlux = rawFlux;
+	}
 
 	float peak = 3.f * legacyFlux / (M_PIf * r * r);
 	const float dimGate = 1.f / (255.f * 12.92f);
@@ -1466,6 +1481,17 @@ void StelSkyDrawer::setPsfStarFlareStrength(double strength)
 	StelApp::immediateSave("stars/psf_star_flare_strength", psfStarFlareStrength);
 	update(0);
 	emit psfStarFlareStrengthChanged(psfStarFlareStrength);
+}
+
+void StelSkyDrawer::setPsfStarBrightSourceMagLimit(double magLimit)
+{
+	const float value = qBound(-13.f, static_cast<float>(magLimit), -1.f);
+	if (qFuzzyCompare(psfStarBrightSourceMagLimit, value))
+		return;
+	psfStarBrightSourceMagLimit = value;
+	StelApp::immediateSave("stars/psf_star_bright_source_mag_limit", psfStarBrightSourceMagLimit);
+	update(0);
+	emit psfStarBrightSourceMagLimitChanged(psfStarBrightSourceMagLimit);
 }
 
 // colors for B-V display
