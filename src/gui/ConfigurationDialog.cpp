@@ -1094,6 +1094,12 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("stars/flag_star_twinkle",                       propMgr->getStelPropertyValue("StelSkyDrawer.flagStarTwinkle").toBool());
         conf->setValue("stars/star_twinkle_amount",                     QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.twinkleAmount").toDouble(), 'f', 2));
         conf->setValue("stars/flag_star_spiky",                         propMgr->getStelPropertyValue("StelSkyDrawer.flagStarSpiky").toBool());
+        conf->setValue("stars/flag_psf_stars",                          propMgr->getStelPropertyValue("StelSkyDrawer.flagPsfStars").toBool());
+        conf->setValue("stars/flag_psf_projection_correction",           propMgr->getStelPropertyValue("StelSkyDrawer.flagPsfStarProjectionCorrection").toBool());
+        conf->setValue("stars/psf_star_point_radius",                    QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.psfStarPointRadius").toDouble(), 'f', 2));
+        conf->setValue("stars/psf_star_flare_decay",                     QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.psfStarFlareDecay").toDouble(), 'f', 3));
+        conf->setValue("stars/psf_star_flare_strength",                  QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.psfStarFlareStrength").toDouble(), 'f', 2));
+        conf->setValue("stars/psf_star_bright_source_mag_limit",         QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.psfStarBrightSourceMagLimit").toDouble(), 'f', 1));
         conf->setValue("astro/twilight_altitude",                       propMgr->getStelPropertyValue("SpecificTimeMgr.twilightAltitude").toDouble());
         conf->setValue("astro/flag_star_magnitude_limit",               propMgr->getStelPropertyValue("StelSkyDrawer.flagStarMagnitudeLimit").toBool());
         conf->setValue("astro/star_magnitude_limit",                    QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.customStarMagLimit").toDouble(), 'f', 2));

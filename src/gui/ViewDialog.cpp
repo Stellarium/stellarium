@@ -253,7 +253,9 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->spikyStarsCheckBox, "StelSkyDrawer.flagStarSpiky");
 	connectBoolProperty(ui->psfStarsCheckBox, "StelSkyDrawer.flagPsfStars");
 	ui->psfStarsPropertiesButton->setEnabled(ui->psfStarsCheckBox->isChecked());
+	ui->spikyStarsCheckBox->setEnabled(!ui->psfStarsCheckBox->isChecked());
 	connect(ui->psfStarsCheckBox, &QCheckBox::toggled, ui->psfStarsPropertiesButton, &QPushButton::setEnabled);
+	connect(ui->psfStarsCheckBox, &QCheckBox::toggled, ui->spikyStarsCheckBox, [this](bool checked) { ui->spikyStarsCheckBox->setEnabled(!checked); });
 	connect(ui->psfStarsPropertiesButton, &QPushButton::clicked, this, &ViewDialog::showPsfStarsDialog);
 	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
 	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"StarMgr.labelsAmount",0.0,10.0);
