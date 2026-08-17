@@ -685,12 +685,12 @@ void Oculars::init()
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
-		psfStarSettingsOculars.projectionCorrection=settings->value("psf_star_projection_correction", true).toBool();
+		psfStarSettingsOculars.projectionCorrection=settings->value("psf_star_projection_correction", false).toBool();
 		psfStarSettingsOculars.pointRadius=settings->value("psf_star_point_radius", 1.5).toDouble();
 		psfStarSettingsOculars.flareDecay=settings->value("psf_star_flare_decay", 0.1).toDouble();
 		psfStarSettingsOculars.flareStrength=settings->value("psf_star_flare_strength", 1.0).toDouble();
 		psfStarSettingsOculars.brightSourceMagLimit=settings->value("psf_star_bright_source_mag_limit", -8.5).toDouble();
-		psfStarSettingsCCD.projectionCorrection=settings->value("psf_star_projection_correction_ccd", true).toBool();
+		psfStarSettingsCCD.projectionCorrection=settings->value("psf_star_projection_correction_ccd", false).toBool();
 		psfStarSettingsCCD.pointRadius=settings->value("psf_star_point_radius_ccd", 1.5).toDouble();
 		psfStarSettingsCCD.flareDecay=settings->value("psf_star_flare_decay_ccd", 0.1).toDouble();
 		psfStarSettingsCCD.flareStrength=settings->value("psf_star_flare_strength_ccd", 1.0).toDouble();

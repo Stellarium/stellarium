@@ -121,7 +121,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagDrawBigStarHalo(conf->value("stars/flag_star_halo",true).toBool());
 	flagStarSpiky=(conf->value("stars/flag_star_spiky", false).toBool()); // too early to use the set method here!
 	setFlagPsfStars(conf->value("stars/flag_psf_stars", false).toBool());
-	setFlagPsfStarProjectionCorrection(conf->value("stars/flag_psf_projection_correction", true).toBool());
+	setFlagPsfStarProjectionCorrection(conf->value("stars/flag_psf_projection_correction", false).toBool());
 	setPsfStarPointRadius(conf->value("stars/psf_star_point_radius", 1.5).toDouble());
 	setPsfStarFlareDecay(conf->value("stars/psf_star_flare_decay", conf->value("stars/psf_star_optimization", 0.1)).toDouble());
 	setPsfStarFlareStrength(conf->value("stars/psf_star_flare_strength", 1.0).toDouble());

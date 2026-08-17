@@ -401,7 +401,7 @@ private slots:
 private:
 	struct PsfStarSettings
 	{
-		bool projectionCorrection = true;
+		bool projectionCorrection = false;
 		double pointRadius = 1.5;
 		double flareDecay = 0.1;
 		double flareStrength = 1.0;
