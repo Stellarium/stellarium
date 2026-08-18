@@ -27,6 +27,7 @@
 #include "StelCore.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
 #include "gui/ScmConstellationDialog.hpp"
@@ -139,6 +140,38 @@ void SkyCultureMaker::setActionToggle(const QString &id, bool toggle)
 	{
 		qDebug() << "SkyCultureMaker: Could not find action: " << id;
 	}
+}
+
+// Core constellation-display actions hidden while the editor draws its own sky culture.
+static const QStringList coreConstellationActions = {
+	"actionShow_Constellation_Lines",
+	"actionShow_Constellation_Art",
+	"actionShow_Constellation_Labels",
+	"actionShow_Constellation_Boundaries",
+};
+
+void SkyCultureMaker::hideCoreConstellationDisplay()
+{
+	StelActionMgr *actionMgr = StelApp::getInstance().getStelActionManager();
+	savedConstellationActionStates.clear();
+	for (const QString &id : coreConstellationActions)
+	{
+		auto action = actionMgr->findAction(id);
+		if (action)
+		{
+			savedConstellationActionStates.insert(id, action->isChecked());
+			action->setChecked(false);
+		}
+	}
+}
+
+void SkyCultureMaker::restoreCoreConstellationDisplay()
+{
+	for (auto it = savedConstellationActionStates.constBegin(); it != savedConstellationActionStates.constEnd(); ++it)
+	{
+		setActionToggle(it.key(), it.value());
+	}
+	savedConstellationActionStates.clear();
 }
 
 /*************************************************************************
@@ -265,6 +298,9 @@ void SkyCultureMaker::stopScm()
 	resetScmDialogs();
 	// Create a new empty sky culture
 	setNewSkyCulture();
+
+	// Restore the core constellation display that was hidden while editing
+	restoreCoreConstellationDisplay();
 
 	isScmEnabled = false;
 	emit eventIsScmEnabled(false);
@@ -524,25 +560,33 @@ void SkyCultureMaker::initSetting(QSettings *conf, const QString key, const QVar
 	}
 }
 
-void SkyCultureMaker::showUserInfoMessage(QWidget *parent, const QString &dialogName, const QString &message)
+void SkyCultureMaker::showUserInfoMessage(const QString &dialogName, const QString &message)
 {
 	const QString level = q_("INFO");
 	const QString title = dialogName.isEmpty() ? level : dialogName + ": " + level;
-	QMessageBox::information(parent, title, message);
+	QMessageBox::information(&StelMainView::getInstance(), title, message);
 }
 
-void SkyCultureMaker::showUserWarningMessage(QWidget *parent, const QString &dialogName, const QString &message)
+void SkyCultureMaker::showUserWarningMessage(const QString &dialogName, const QString &message)
 {
 	const QString level = q_("WARNING");
 	const QString title = dialogName.isEmpty() ? level : dialogName + ": " + level;
-	QMessageBox::warning(parent, title, message);
+	QMessageBox::warning(&StelMainView::getInstance(), title, message);
 }
 
-void SkyCultureMaker::showUserErrorMessage(QWidget *parent, const QString &dialogName, const QString &message)
+void SkyCultureMaker::showUserErrorMessage(const QString &dialogName, const QString &message)
 {
 	const QString level = q_("ERROR");
 	const QString title = dialogName.isEmpty() ? level : dialogName + ": " + level;
-	QMessageBox::critical(parent, title, message);
+	QMessageBox::critical(&StelMainView::getInstance(), title, message);
+}
+
+bool SkyCultureMaker::showUserConfirmMessage(const QString &dialogName, const QString &message)
+{
+	const QString level = q_("CONFIRM");
+	const QString title = dialogName.isEmpty() ? level : dialogName + ": " + level;
+	return QMessageBox::question(&StelMainView::getInstance(), title, message, QMessageBox::Yes | QMessageBox::No,
+	                             QMessageBox::No) == QMessageBox::Yes;
 }
 
 bool SkyCultureMaker::isValidDialog(scm::DialogID dialogId) const

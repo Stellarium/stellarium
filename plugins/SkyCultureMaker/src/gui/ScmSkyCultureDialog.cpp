@@ -346,7 +346,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	// check if license is set
 	if (desc.license == scm::LicenseType::NONE)
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please select a license for the sky culture."));
+		maker->showUserWarningMessage(ui->titleBar->title(), q_("Please select a license for the sky culture."));
 		return;
 	}
 	// check if description is complete
@@ -356,7 +356,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 		auto msg = q_("The sky culture description is not complete. The following fields are not filled correctly:\n");
 		for (const auto& field : incompFieldsList)
 			msg += QString(" \u2022 ") + field + "\n";
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), msg);
+		maker->showUserWarningMessage(ui->titleBar->title(), msg);
 		return;
 	}
 
@@ -373,7 +373,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	// check wether at least 1 polygon was digitized
 	if (ui->polygonInfoTreeWidget->topLevelItemCount() < 1)
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The sky culture territory is not complete. Please digitize at least one polygon in geographical location tab."));
+		maker->showUserWarningMessage(ui->titleBar->title(), q_("The sky culture territory is not complete. Please digitize at least one polygon in geographical location tab."));
 		return;
 	}
 
@@ -1265,7 +1265,7 @@ bool ScmSkyCultureDialog::cnValidateForm(QString &outKey, scm::ScmCulturalName &
 	if (id.isEmpty())
 	{
 		maker->showUserWarningMessage(
-			dialog, ui->titleBar->title(),
+			ui->titleBar->title(),
 			qc_("Please enter an object identifier.",
 		            "Prompt for missing celestial object identifier (e.g. HIP number, Gaia DR3 ID, or"
 		            "planet name, DSO catalog designation)"));
@@ -1285,7 +1285,7 @@ bool ScmSkyCultureDialog::cnValidateForm(QString &outKey, scm::ScmCulturalName &
 			if (!ok)
 			{
 				maker->showUserWarningMessage(
-					dialog, ui->titleBar->title(),
+					ui->titleBar->title(),
 					q_("The star identifier must be a HIP number (e.g. 1234 or HIP 1234 A) "
 				           "or a Gaia DR3 ID (e.g. Gaia DR3 1234567890)."));
 				return false;
@@ -1296,7 +1296,7 @@ bool ScmSkyCultureDialog::cnValidateForm(QString &outKey, scm::ScmCulturalName &
 	outName = cnReadForm();
 	if (outName.translated.isEmpty())
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The \"English\" field is required."));
+		maker->showUserWarningMessage(ui->titleBar->title(), q_("The \"English\" field is required."));
 		return false;
 	}
 
@@ -1355,7 +1355,7 @@ void ScmSkyCultureDialog::cnAddNew()
 
 	if (cnIsDuplicate(key, name.special))
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		maker->showUserWarningMessage(ui->titleBar->title(),
 		                              q_("An entry for this object already exists."));
 		return;
 	}
@@ -1377,7 +1377,7 @@ void ScmSkyCultureDialog::cnSaveChanges()
 
 	if (cnIsDuplicate(key, name.special, cnEditingRow))
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		maker->showUserWarningMessage(ui->titleBar->title(),
 		                              q_("An entry for this object already exists."));
 		return;
 	}
@@ -1417,7 +1417,7 @@ void ScmSkyCultureDialog::cnUseSelectedObject()
 	const QList<StelObjectP> &selected = objMgr->getSelectedObject();
 	if (selected.isEmpty())
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		maker->showUserWarningMessage(ui->titleBar->title(),
 		                              q_("No object is currently selected in Stellarium."));
 		return;
 	}

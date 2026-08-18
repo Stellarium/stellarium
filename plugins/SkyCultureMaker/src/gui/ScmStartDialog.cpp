@@ -121,6 +121,7 @@ void ScmStartDialog::startScmCreationProcess()
 	maker->setDialogVisibility(scm::DialogID::StartDialog, false);
 	maker->setDialogVisibility(scm::DialogID::SkyCultureDialog, true);
 
+	maker->hideCoreConstellationDisplay();
 	SkyCultureMaker::setActionToggle("actionShow_Ground", false);
 	SkyCultureMaker::setActionToggle("actionShow_Atmosphere", false);
 	SkyCultureMaker::setActionToggle("actionShow_MeteorShowers", false);
@@ -130,12 +131,13 @@ void ScmStartDialog::startScmCreationProcess()
 void ScmStartDialog::startScmEditingProcess()
 {
 	const QString defaultPath = StelFileMgr::getUserDir() + "/skycultures";
+	QDir().mkpath(defaultPath);
 	QString errorMsg;
 	scm::ScmSkyCulture *sc = ScmSCLoader::selectAndLoad(nullptr, defaultPath, &errorMsg);
 	if (sc == nullptr)
 	{
 		if (!errorMsg.isEmpty())
-			maker->showUserErrorMessage(dialog, q_("Edit Sky Culture"), errorMsg);
+			maker->showUserErrorMessage(q_("Edit Sky Culture"), errorMsg);
 		return; // user cancelled or load failed
 	}
 	maker->setSkyCulture(sc);
@@ -143,6 +145,7 @@ void ScmStartDialog::startScmEditingProcess()
 	maker->setDialogVisibility(scm::DialogID::SkyCultureDialog, true);
 	maker->populateSkyCultureDialog();
 
+	maker->hideCoreConstellationDisplay();
 	SkyCultureMaker::setActionToggle("actionShow_Ground", false);
 	SkyCultureMaker::setActionToggle("actionShow_Atmosphere", false);
 	SkyCultureMaker::setActionToggle("actionShow_MeteorShowers", false);
