@@ -642,6 +642,30 @@ bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 	return true;
 }
 
+float StelSkyDrawer::getPsfPointSourceLabelOffset(const RCMag& rcMag, float appMag, const Vec3f& color, float baseOffset, float psfOffsetScale) const
+{
+	if (!flagPsfStars || !std::isfinite(appMag) || rcMag.luminance <= 0.f)
+		return baseOffset;
+
+	float peakRadiance = 0.f;
+	if (!computePsfPeakRadiance(appMag, &peakRadiance))
+		return baseOffset;
+	peakRadiance *= rcMag.luminance;
+
+	float greenScale = 1.f;
+	psfGreenNormalization(color, 0.1f, greenScale);
+	const float peakRadianceColor = peakRadiance * greenScale;
+	float radius = psfStarPointRadius;
+	const float flareOnset = psfSmoothStep(0.5f, 2.5f, peakRadianceColor);
+	const float effectiveFlareStrength = psfStarFlareStrength * flareOnset;
+	if (effectiveFlareStrength > 0.f && psfStarFlareDecay > 0.f)
+		radius = qMax(radius, computePsfGlowRadius(peakRadianceColor, effectiveFlareStrength));
+
+	const float scale = StelApp::getInstance().getScreenScale();
+	const float psfOffset = qMin((radius * 0.45f + 6.f) * scale * psfOffsetScale, 96.f * scale);
+	return qMax(baseOffset, psfOffset);
+}
+
 // The PSF glow approximation and its optimization parameter are adapted from
 // Askaniy Anpilogov's Python prototype for point source rendering.
 float StelSkyDrawer::computePsfGlowRadius(float peakRadiance, float alpha) const
