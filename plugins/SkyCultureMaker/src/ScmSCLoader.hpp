@@ -21,6 +21,7 @@
 #define SCMSCLOADER_HPP
 
 #include "ScmSkyCulture.hpp"
+#include "StelUtils.hpp"
 #include <QDir>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -82,20 +83,20 @@ private:
 	static inline Section sectionOf(const QString &heading)
 	{
 		const QString h = heading.toLower().trimmed();
-		if (h == "introduction") return Section::Introduction;
-		if (h == "description") return Section::Description;
-		if (h == "sky") return Section::Sky;
-		if (h == "moon and sun") return Section::MoonAndSun;
-		if (h == "planets") return Section::Planets;
-		if (h == "zodiac") return Section::Zodiac;
-		if (h == "milky way") return Section::MilkyWay;
-		if (h == "other celestial objects") return Section::OtherObjects;
-		if (h == "constellations") return Section::Constellations;
-		if (h == "references") return Section::References;
-		if (h == "authors") return Section::Authors;
-		if (h == "about") return Section::About;
-		if (h == "acknowledgements") return Section::Acknowledgements;
-		if (h == "license") return Section::License;
+		if (h == L1S("introduction")) return Section::Introduction;
+		if (h == L1S("description")) return Section::Description;
+		if (h == L1S("sky")) return Section::Sky;
+		if (h == L1S("moon and sun")) return Section::MoonAndSun;
+		if (h == L1S("planets")) return Section::Planets;
+		if (h == L1S("zodiac")) return Section::Zodiac;
+		if (h == L1S("milky way")) return Section::MilkyWay;
+		if (h == L1S("other celestial objects")) return Section::OtherObjects;
+		if (h == L1S("constellations")) return Section::Constellations;
+		if (h == L1S("references")) return Section::References;
+		if (h == L1S("authors")) return Section::Authors;
+		if (h == L1S("about")) return Section::About;
+		if (h == L1S("acknowledgements")) return Section::Acknowledgements;
+		if (h == L1S("license")) return Section::License;
 		return Section::None;
 	}
 
