@@ -19,7 +19,9 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include "Oculars.hpp"
 #include "OcularsGuiPanel.hpp"
+#include "SkyGui.hpp"
 #include "StelApp.hpp"
+#include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
@@ -240,6 +242,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));
 	setColorScheme(stelApp.getCurrentStelStyle());
+
+
+	StelGui *gui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	connect(gui, SIGNAL(toolbarCornerChanged(int)), this, SLOT(updatePosition()));
 }
 
 OcularsGuiPanel::~OcularsGuiPanel()
@@ -311,6 +317,7 @@ void OcularsGuiPanel::foldGui()
 
 void OcularsGuiPanel::updatePosition()
 {
+	const double cornerRadius = 12.0;
 	updateGeometry();
 	/*qDebug() << "Widget:" << size()
 		<< "Buttonbar:" << buttonBar->size()
@@ -320,11 +327,17 @@ void OcularsGuiPanel::updatePosition()
 		<< "Layout" << mainLayout->geometry();*/
 	qreal xPos = parentWidget->size().width() - size().width();
 	qreal yPos = 0;
+	const int buttonBarCorner=StelApp::getInstance().getStelPropertyManager()
+		->getStelPropertyValue("StelGui.toolbarCorner").toInt(); // (0=BL, 1=BR, 2=TL, 3=TR)
+	if (buttonBarCorner == 3)
+	{
+		yPos += (cornerRadius + static_cast<SkyGui*>(parentWidget)->getBottomBarHeight());
+		xPos -= (cornerRadius + static_cast<SkyGui*>(parentWidget)->getLeftBarWidth());
+	}
 	setPos(xPos, yPos);
 
 	//Update border/shading
 	QPainterPath newBorderPath;
-	double cornerRadius = 12.0;
 	QPointF verticalBorderStart = geometry().topLeft() + QPointF(-0.5,0.5);
 	QPointF horizontalBorderEnd = geometry().bottomRight() + QPointF(-0.5,0.5);
 	QPointF cornerArcStart(verticalBorderStart.x(),
@@ -334,6 +347,7 @@ void OcularsGuiPanel::updatePosition()
 	newBorderPath.arcTo(cornerArcStart.x(), cornerArcStart.y(), cornerRadius, cornerRadius, 180, 90);
 	newBorderPath.lineTo(horizontalBorderEnd);
 	newBorderPath.lineTo(horizontalBorderEnd.x(), verticalBorderStart.y());
+	newBorderPath.closeSubpath();
 	borderPath->setPath(newBorderPath);
 }
 
