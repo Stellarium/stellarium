@@ -142,12 +142,16 @@ void SkyCultureMaker::setActionToggle(const QString &id, bool toggle)
 	}
 }
 
-// Core constellation-display actions hidden while the editor draws its own sky culture.
+// Core constellation/asterism display actions hidden while the editor draws its own sky culture.
 static const QStringList coreConstellationActions = {
 	"actionShow_Constellation_Lines",
 	"actionShow_Constellation_Art",
 	"actionShow_Constellation_Labels",
 	"actionShow_Constellation_Boundaries",
+	"actionShow_Constellation_Hulls",
+	"actionShow_Asterism_Lines",
+	"actionShow_Asterism_Labels",
+	"actionShow_Ray_Helpers",
 };
 
 void SkyCultureMaker::hideCoreConstellationDisplay()
