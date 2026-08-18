@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2015-2022 Alexander Wolf
+ * Copyright (C) 2015-2026 Alexander Wolf
  * Copyright (C) 2016 Nick Fedoseev (visualization of ephemeris)
  * Copyright (C) 2022 Georg Zotti
  * Copyright (C) 2022 Worachate Boonplod (Eclipses)
