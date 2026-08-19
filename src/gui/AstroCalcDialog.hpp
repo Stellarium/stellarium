@@ -1172,6 +1172,28 @@ private:
 
 		if (column == AstroCalcDialog::WUTObjectName)
 		{
+			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
+			QRegularExpressionMatch mpMatch=mp.match(text(column));
+			QRegularExpressionMatch mpOtherMatch=mp.match(other.text(column));
+			int a = 0, b = 0;
+			bool isMP = false;
+			if (mpMatch.hasMatch())
+			{
+				a = mpMatch.captured(1).toInt();
+				isMP = true;
+			}
+			if (mpOtherMatch.hasMatch())
+			{
+				b = mpOtherMatch.captured(1).toInt();
+				isMP = true;
+			}
+
+			if (isMP) // minor planets
+				return a < b; // compare by MPC numbers
+			else
+				return text(column).toLower() < other.text(column).toLower();
+
+			/*
 			static const QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
 			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 			QRegularExpressionMatch dsoMatch=dso.match(text(column));
@@ -1191,6 +1213,7 @@ private:
 				return a < b;
 			else
 				return text(column).toLower() < other.text(column).toLower();
+			*/
 		}
 		else if (column == AstroCalcDialog::WUTMagnitude)
 		{
