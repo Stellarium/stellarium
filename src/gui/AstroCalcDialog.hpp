@@ -1180,26 +1180,14 @@ private:
 			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 			QRegularExpressionMatch mpMatch=mp.match(text(column));
 			QRegularExpressionMatch mpOtherMatch=mp.match(other.text(column));
-
-			int a = 0, b = 0;
-			bool isMP = false;
-
-			// minor planets
-			if (mpMatch.hasMatch())
+			if (mpMatch.hasMatch() && mpOtherMatch.hasMatch())
 			{
-				a = mpMatch.captured(1).toInt();
-				isMP = true;
-			}
-			if (mpOtherMatch.hasMatch())
-			{
-				b = mpOtherMatch.captured(1).toInt();
-				isMP = true;
+				int a = mpMatch.captured(1).toInt();
+				int b = mpOtherMatch.captured(1).toInt();
+				return a < b;
 			}
 
-			if (isMP) // minor planets
-				return a < b; // compare by MPC numbers
-			else
-				return StelUtils::naturalLessThan(text(column).toLower(), other.text(column).toLower());
+			return StelUtils::naturalLessThan(text(column).toLower(), other.text(column).toLower());
 
 			/*
 			static const QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
