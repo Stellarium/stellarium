@@ -1183,6 +1183,26 @@ private:
 				return a < b;
 			}
 
+			// deep-sky objects
+			static const QRegularExpression dso("^(\\w+)\\s*([\\d\\-\\+\\.]+)\\s*(.*)$");
+			static const QRegularExpression rx("[\\-\\+\\.]+");
+			QRegularExpressionMatch dsoMatch=dso.match(text(column));
+			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
+			if (dsoMatch.hasMatch() && dsoOtherMatch.hasMatch())
+			{
+				QString ap = dsoMatch.captured(1).toLower();
+				QString an = dsoMatch.captured(2);
+				an.replace(rx, "0");
+				an = an.rightJustified(10, '0');
+
+				QString bp = dsoOtherMatch.captured(1).toLower();
+				QString bn = dsoOtherMatch.captured(2);
+				bn.replace(rx, "0");
+				bn = bn.rightJustified(10, '0');
+
+				return QString("%1 %2").arg(ap, an) < QString("%1 %2").arg(bp, bn);
+			}
+
 			return StelUtils::naturalLessThan(text(column).toLower(), other.text(column).toLower());
 
 			/*
