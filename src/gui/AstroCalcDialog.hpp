@@ -1203,6 +1203,21 @@ private:
 				return QString("%1 %2").arg(ap, an) < QString("%1 %2").arg(bp, bn);
 			}
 
+			// HIP-like stars (standard modern designation: CAT XXXXX)
+			static const QRegularExpression hip("^(\\w+)\\s(\\d+)\\s*\\w*$");
+			QRegularExpressionMatch hipMatch=hip.match(text(column));
+			QRegularExpressionMatch hipOtherMatch=hip.match(other.text(column));
+			if (hipMatch.hasMatch() && hipOtherMatch.hasMatch())
+			{
+				QString asx = hipMatch.captured(1);
+				QString asn = hipMatch.captured(2).rightJustified(7, '0');
+
+				QString bsx = hipOtherMatch.captured(1);
+				QString bsn = hipOtherMatch.captured(2).rightJustified(7, '0');
+
+				return QString("%1 %2").arg(asx, asn) < QString("%1 %2").arg(bsx, bsn);
+			}
+
 			return StelUtils::naturalLessThan(text(column).toLower(), other.text(column).toLower());
 		}
 		else if (column == AstroCalcDialog::WUTMagnitude)
