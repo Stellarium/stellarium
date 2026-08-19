@@ -1204,28 +1204,6 @@ private:
 			}
 
 			return StelUtils::naturalLessThan(text(column).toLower(), other.text(column).toLower());
-
-			/*
-			static const QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
-			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
-			QRegularExpressionMatch dsoMatch=dso.match(text(column));
-			QRegularExpressionMatch mpMatch=mp.match(text(column));
-			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
-			QRegularExpressionMatch mpOtherMatch=mp.match(other.text(column));
-			int a = 0, b = 0;
-			if (dsoMatch.hasMatch())
-				a = dsoMatch.captured(2).toInt();
-			if (a==0 && mpMatch.hasMatch())
-				a = mpMatch.captured(1).toInt();
-			if (dsoOtherMatch.hasMatch())
-				b = dsoOtherMatch.captured(2).toInt();
-			if (b==0 && mpOtherMatch.hasMatch())
-				b = mpOtherMatch.captured(1).toInt();
-			if (a>0 && b>0)
-				return a < b;
-			else
-				return text(column).toLower() < other.text(column).toLower();
-			*/
 		}
 		else if (column == AstroCalcDialog::WUTMagnitude)
 		{
