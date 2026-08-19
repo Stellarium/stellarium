@@ -47,7 +47,7 @@ scm::ScmSkyCulture *ScmSCLoader::loadFromDirectory(const QDir &dir, QString *err
 {
 	if (!dir.exists())
 	{
-		if (errorMsg) *errorMsg = QObject::tr("Directory does not exist: %1").arg(dir.absolutePath());
+		if (errorMsg) *errorMsg = q_("Directory does not exist: %1").arg(dir.absolutePath());
 		qWarning() << "SkyCultureMaker: directory does not exist:" << dir.absolutePath();
 		return nullptr;
 	}
@@ -68,7 +68,7 @@ scm::ScmSkyCulture *ScmSCLoader::loadFromDirectory(const QDir &dir, QString *err
 
 scm::ScmSkyCulture *ScmSCLoader::selectAndLoad(QWidget *parent, const QString &defaultPath, QString *errorMsg)
 {
-	const QString chosen = QFileDialog::getExistingDirectory(parent, QObject::tr("Select Sky Culture Directory"),
+	const QString chosen = QFileDialog::getExistingDirectory(parent, q_("Select Sky Culture Directory"),
 	                                                         defaultPath.isEmpty() ? QDir::homePath() : defaultPath);
 
 	if (chosen.isEmpty()) return nullptr;
@@ -81,7 +81,7 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 	QFile file(filePath);
 	if (!file.open(QIODevice::ReadOnly))
 	{
-		if (errorMsg) *errorMsg = QObject::tr("Cannot open index.json: %1").arg(file.errorString());
+		if (errorMsg) *errorMsg = q_("Cannot open index.json: %1").arg(file.errorString());
 		qWarning() << "SkyCultureMaker: cannot open" << filePath << ":" << file.errorString();
 		return false;
 	}
@@ -92,13 +92,13 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 
 	if (parseError.error != QJsonParseError::NoError)
 	{
-		if (errorMsg) *errorMsg = QObject::tr("Failed to parse index.json: %1").arg(parseError.errorString());
+		if (errorMsg) *errorMsg = q_("Failed to parse index.json: %1").arg(parseError.errorString());
 		qWarning() << "SkyCultureMaker: JSON parse error in" << filePath << ":" << parseError.errorString();
 		return false;
 	}
 	if (!doc.isObject())
 	{
-		if (errorMsg) *errorMsg = QObject::tr("index.json does not contain a JSON object.");
+		if (errorMsg) *errorMsg = q_("index.json does not contain a JSON object.");
 		return false;
 	}
 
