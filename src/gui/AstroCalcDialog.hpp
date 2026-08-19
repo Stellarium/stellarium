@@ -1176,11 +1176,15 @@ private:
 
 		if (column == AstroCalcDialog::WUTObjectName)
 		{
+			// minor planets
 			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 			QRegularExpressionMatch mpMatch=mp.match(text(column));
 			QRegularExpressionMatch mpOtherMatch=mp.match(other.text(column));
+
 			int a = 0, b = 0;
 			bool isMP = false;
+
+			// minor planets
 			if (mpMatch.hasMatch())
 			{
 				a = mpMatch.captured(1).toInt();
@@ -1195,7 +1199,7 @@ private:
 			if (isMP) // minor planets
 				return a < b; // compare by MPC numbers
 			else
-				return text(column).toLower() < other.text(column).toLower();
+				return StelUtils::naturalLessThan(text(column).toLower(), other.text(column).toLower());
 
 			/*
 			static const QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
