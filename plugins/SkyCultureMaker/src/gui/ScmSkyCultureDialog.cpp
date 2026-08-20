@@ -785,8 +785,14 @@ void ScmSkyCultureDialog::populateReferences(const QString &references)
 	static const QRegularExpression refRx(R"(^\s*-\s*\[(#\d+)\]:\s*(.+)$)");
 	for (const QString &line : references.split('\n'))
 	{
-		const auto m = refRx.match(line.trimmed());
-		if (!m.hasMatch()) continue;
+		const QString trimmed = line.trimmed();
+		const auto m          = refRx.match(trimmed);
+		if (!m.hasMatch())
+		{
+			if (!trimmed.isEmpty())
+				qWarning() << "SkyCultureMaker: could not parse reference line, it will be lost:" << trimmed;
+			continue;
+		}
 		auto *item = new QTreeWidgetItem({m.captured(1).trimmed(), m.captured(2).trimmed()});
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
 		ui->referencesList->addTopLevelItem(item);

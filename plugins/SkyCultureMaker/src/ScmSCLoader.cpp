@@ -330,14 +330,15 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc, QS
 	QString name;
 
 	// scans for markdown headings with depth 1-6
-	static QRegularExpression headingRe("^#{1,6}\\s+(.+)$");
+	static QRegularExpression headingRe("^(#{1,6})\\s+(.+)$");
 
 	for (const QString &rawLine : text.split('\n'))
 	{
 		const QRegularExpressionMatch m = headingRe.match(rawLine);
 		if (m.hasMatch())
 		{
-			const QString heading = m.captured(1).trimmed();
+			const int level       = m.captured(1).length();
+			const QString heading = m.captured(2).trimmed();
 			const Section s       = sectionOf(heading);
 
 			if (s != Section::None)
@@ -347,9 +348,9 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc, QS
 				currentConstellation = nullptr;
 				continue;
 			}
-			if (name.isEmpty())
+			if (level == 1 && name.isEmpty())
 			{
-				// Heuristic: first unrecognized heading becomes the sky culture name
+				// The first level-1 heading is the sky culture name/title
 				name                 = heading;
 				current              = Section::None;
 				currentConstellation = nullptr;
@@ -367,10 +368,13 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc, QS
 					continue;
 				}
 			}
-			// Truly unrecognized heading: record it for a warning and append its
-			// heading and content to the sky culture description.
-			if (unrecognizedHeadings != nullptr) unrecognizedHeadings->append(heading);
-			current              = Section::Description;
+			// Unknown level-2 heading: warn and route into the description as a
+			// catch-all. Unknown deeper headings are left in the enclosing section.
+			if (level == 2)
+			{
+				if (unrecognizedHeadings != nullptr) unrecognizedHeadings->append(heading);
+				current = Section::Description;
+			}
 			currentConstellation = nullptr;
 		}
 

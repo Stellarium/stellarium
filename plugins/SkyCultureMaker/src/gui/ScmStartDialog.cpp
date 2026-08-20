@@ -144,9 +144,9 @@ void ScmStartDialog::startScmEditingProcess()
 
 	if (!unrecognizedHeadings.isEmpty())
 	{
-		const QString msg = q_("The following headings in description.md were not recognized as a known "
-		                       "section or a constellation and have been appended to the sky culture "
-		                       "description:\n\n%1")
+		const QString msg = q_("The following top-level sections in description.md were not recognized and "
+		                       "have been merged into the description. Please review and move their content "
+		                       "to a suitable section:\n\n%1")
 		                            .arg(unrecognizedHeadings.join("\n"));
 		maker->showUserWarningMessage(q_("Edit Sky Culture"), msg);
 	}
