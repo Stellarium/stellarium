@@ -734,7 +734,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
 	{
 		Vec4d properMotion = getHourlyProperMotion(core);
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();	
+		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 		oss << QString("%1: %2 %3 %4%5<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(properMotion[0]) : StelUtils::radToDmsStr(properMotion[0]), qc_("towards", "into the direction of"), QString::number(properMotion[1]*M_180_PI, 'f', 1), QChar(0x00B0));
 		oss << QString("%1: d&alpha;=%2 d&delta;=%3<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(properMotion[2]) : StelUtils::radToDmsStr(properMotion[2]), withDecimalDegree ? StelUtils::radToDecDegStr(properMotion[3]) : StelUtils::radToDmsStr(properMotion[3]));
 	}
@@ -847,7 +847,7 @@ QString Planet::getInfoStringSize(const StelCore *core, const InfoStringGroup& f
 {
 	StelApp& app = StelApp::getInstance();
 	const bool withTables = app.getFlagUseFormattingOutput();
-	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = app.getFlagUseDecDegreesOther();
 
 	QString str;
 	QTextStream oss(&str);
@@ -916,7 +916,7 @@ QString Planet::getInfoStringSize(const StelCore *core, const InfoStringGroup& f
 QString Planet::getNarrationSize(const StelCore *core, const InfoStringGroup& flags) const
 {
 	static StelApp& app = StelApp::getInstance();
-	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = app.getFlagUseDecDegreesOther();
 
 	QString str;
 	QTextStream oss(&str);
@@ -984,7 +984,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 	if ((flags&Elongation) && englishName!=L1S("Sun") && core->getCurrentPlanet()->englishName!=L1S("Sun"))
 	{
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
 		double elongAlongEcliptic = getElongationDLambda();
@@ -1047,7 +1047,7 @@ QString Planet::getNarrationEloPhase(const StelCore *core, const InfoStringGroup
 	QTextStream oss(&str);
 	if ((flags&Elongation) && englishName!=L1S("Sun") && core->getCurrentPlanet()->englishName!=L1S("Sun"))
 	{
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
 		double elongAlongEcliptic = getElongationDLambda();
@@ -1198,7 +1198,8 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 	if (flags&Extra)
 	{
 		const bool withTables = app.getFlagUseFormattingOutput();
-		const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+		const bool withDecimalDegreeCoords = app.getFlagUseDecDegreesCoords();
+		const bool withDecimalDegreeOther = app.getFlagUseDecDegreesOther();
 		const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
 		const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
 		const double siderealDay = getSiderealDay(); // =re.period
@@ -1330,7 +1331,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			}
 			const double chi=atan2(cos(deSun)*sin(raSun-ra_equ), sin(deSun)*cos(dec_equ)-cos(deSun)*sin(dec_equ)*cos(raSun-ra_equ));
 			QString chiStr;
-			if (withDecimalDegree)
+			if (withDecimalDegreeOther)
 				chiStr=StelUtils::radToDecDegStr(StelUtils::fmodpos(chi, M_PI*2.0), 1);
 			else
 				chiStr=StelUtils::radToDmsStr(chi, false);
@@ -1379,13 +1380,24 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			if (totalLibr>7.*M_PI_180)
 				limbStr.append("!");
 			QString paAxisStr, libLStr, libBStr, subsolarLStr, subsolarBStr, colongitudeStr, totalLibrationStr, librationAngleStr;
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
-				paAxisStr=StelUtils::radToDecDegStr(ssop.first[3], 1);
 				libLStr=StelUtils::radToDecDegStr(Le, 1);
 				libBStr=StelUtils::radToDecDegStr(Be, 1);
 				subsolarLStr=StelUtils::radToDecDegStr(Ls, 1);
 				subsolarBStr=StelUtils::radToDecDegStr(Bs, 1);
+			}
+			else
+			{
+				libLStr=StelUtils::radToDmsStr(Le);
+				libBStr=StelUtils::radToDmsStr(Be);
+				subsolarLStr=StelUtils::radToDmsStr(Ls);
+				subsolarBStr=StelUtils::radToDmsStr(Bs);
+			}
+
+			if (withDecimalDegreeOther)
+			{
+				paAxisStr=StelUtils::radToDecDegStr(ssop.first[3], 1);
 				colongitudeStr=StelUtils::radToDecDegStr(StelUtils::fmodpos(450.0*M_PI_180-Ls, M_PI*2.0), 1);
 				totalLibrationStr=StelUtils::radToDecDegStr(totalLibr, 1);
 				librationAngleStr=StelUtils::radToDecDegStr(librAngle, 1);
@@ -1393,10 +1405,6 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			else
 			{
 				paAxisStr=StelUtils::radToDmsStr(ssop.first[3]);
-				libLStr=StelUtils::radToDmsStr(Le);
-				libBStr=StelUtils::radToDmsStr(Be);
-				subsolarLStr=StelUtils::radToDmsStr(Ls);
-				subsolarBStr=StelUtils::radToDmsStr(Bs);
 				colongitudeStr=StelUtils::radToDmsStr(StelUtils::fmodpos(450.0*M_PI_180-Ls, M_PI*2.0));
 				totalLibrationStr=StelUtils::radToDmsStr(totalLibr);
 				librationAngleStr=StelUtils::radToDmsStr(librAngle);
@@ -1430,9 +1438,8 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 
 			QString paAxisStr, subearthLStr, subearthBStr, subsolarLStr, subsolarBStr;
 			const QString lngSystem = englishName==L1S("Jupiter") ? "II" : (englishName==L1S("Saturn") ? "III" : "");
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
-				paAxisStr=StelUtils::radToDecDegStr(ssop.first[3], 1);
 				subearthLStr=StelUtils::radToDecDegStr(Le, 1);
 				subearthBStr=StelUtils::radToDecDegStr(ssop.first[1], 1);
 				subsolarLStr=StelUtils::radToDecDegStr(Ls, 1);
@@ -1440,12 +1447,12 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			}
 			else
 			{
-				paAxisStr=StelUtils::radToDmsStr(ssop.first[3]);
 				subearthLStr=StelUtils::radToDmsStr(Le);
 				subearthBStr=StelUtils::radToDmsStr(ssop.first[1]);
 				subsolarLStr=StelUtils::radToDmsStr(Ls);
 				subsolarBStr=StelUtils::radToDmsStr(ssop.second[1]);
 			}
+			paAxisStr = withDecimalDegreeOther ? StelUtils::radToDecDegStr(ssop.first[3], 1) : StelUtils::radToDmsStr(ssop.first[3]);
 			if (withTables)
 			{
 				oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
@@ -1536,7 +1543,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 								 QString::number(durationSecond),
 								 q_("s"));
 						QString info = q_("Center of solar eclipse (Lat./Long.)");
-						if (withDecimalDegree)
+						if (withDecimalDegreeCoords)
 							oss << QString("%1: %2°/%3°<br />").arg(info).arg(latDeg, 5, 'f', 4).arg(lngDeg, 5, 'f', 4);
 						else
 							oss << QString("%1: %2/%3<br />").arg(info, StelUtils::decDegToDmsStr(latDeg), StelUtils::decDegToDmsStr(lngDeg));
@@ -1597,7 +1604,8 @@ QString Planet::getNarrationExtra(const StelCore *core, const InfoStringGroup& f
 	{
 		QTextStream oss(&str);
 		static StelApp &app = StelApp::getInstance();
-		const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+		const bool withDecimalDegreeCoords = app.getFlagUseDecDegreesCoords();
+		const bool withDecimalDegreeOther = app.getFlagUseDecDegreesOther();
 		const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
 		const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
 		const double siderealDay = getSiderealDay(); // =re.period
@@ -1704,7 +1712,7 @@ QString Planet::getNarrationExtra(const StelCore *core, const InfoStringGroup& f
 			}
 			const double chi=atan2(cos(deSun)*sin(raSun-ra_equ), sin(deSun)*cos(dec_equ)-cos(deSun)*sin(dec_equ)*cos(raSun-ra_equ));
 			QString chiStr;
-			if (withDecimalDegree)
+			if (withDecimalDegreeOther)
 				chiStr=StelUtils::radToDecDegNarration(StelUtils::fmodpos(chi, M_PI*2.0), 1);
 			else
 				chiStr=StelUtils::radToDmsNarration(chi, false);
@@ -1749,13 +1757,23 @@ QString Planet::getNarrationExtra(const StelCore *core, const InfoStringGroup& f
 			if (totalLibr>7.*M_PI_180)
 				emph=qc_("extremely", "object narration: emphasis stage 3/3");
 			QString paAxisStr, libLStr, libBStr, subsolarLStr, subsolarBStr, colongitudeStr, totalLibrationStr, librationAngleStr;
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
-				paAxisStr=StelUtils::radToDecDegNarration(ssop.first[3], 1);
 				libLStr=StelUtils::radToDecDegNarration(Le, 1);
 				libBStr=StelUtils::radToDecDegNarration(Be, 1);
 				subsolarLStr=StelUtils::radToDecDegNarration(Ls, 1);
 				subsolarBStr=StelUtils::radToDecDegNarration(Bs, 1);
+			}
+			else
+			{
+				libLStr=StelUtils::radToDmsNarration(Le);
+				libBStr=StelUtils::radToDmsNarration(Be);
+				subsolarLStr=StelUtils::radToDmsNarration(Ls);
+				subsolarBStr=StelUtils::radToDmsNarration(Bs);
+			}
+			if (withDecimalDegreeOther)
+			{
+				paAxisStr=StelUtils::radToDecDegNarration(ssop.first[3], 1);
 				colongitudeStr=StelUtils::radToDecDegNarration(StelUtils::fmodpos(450.0*M_PI_180-Ls, M_PI*2.0), 1);
 				totalLibrationStr=StelUtils::radToDecDegNarration(totalLibr, 1);
 				librationAngleStr=StelUtils::radToDecDegNarration(librAngle, 1);
@@ -1763,10 +1781,6 @@ QString Planet::getNarrationExtra(const StelCore *core, const InfoStringGroup& f
 			else
 			{
 				paAxisStr=StelUtils::radToDmsNarration(ssop.first[3]);
-				libLStr=StelUtils::radToDmsNarration(Le);
-				libBStr=StelUtils::radToDmsNarration(Be);
-				subsolarLStr=StelUtils::radToDmsNarration(Ls);
-				subsolarBStr=StelUtils::radToDmsNarration(Bs);
 				colongitudeStr=StelUtils::radToDmsNarration(StelUtils::fmodpos(450.0*M_PI_180-Ls, M_PI*2.0));
 				totalLibrationStr=StelUtils::radToDmsNarration(totalLibr);
 				librationAngleStr=StelUtils::radToDmsNarration(librAngle);
@@ -1789,9 +1803,8 @@ QString Planet::getNarrationExtra(const StelCore *core, const InfoStringGroup& f
 			QString paAxisStr, subearthLStr, subearthBStr, subsolarLStr, subsolarBStr;
 			const QString lngSystem = englishName==L1S("Jupiter") ? qc_("in system two", "Jupiter longitude system II, narration") :
 										(englishName==L1S("Saturn") ? qc_("in system three", "Saturn longitude system III, narration") : "");
-			if (withDecimalDegree)
-			{
-				paAxisStr=StelUtils::radToDecDegNarration(ssop.first[3], 1);
+			if (withDecimalDegreeOther)
+			{	
 				subearthLStr=StelUtils::radToDecDegNarration(Le, 1);
 				subearthBStr=StelUtils::radToDecDegNarration(ssop.first[1], 1);
 				subsolarLStr=StelUtils::radToDecDegNarration(Ls, 1);
@@ -1799,12 +1812,12 @@ QString Planet::getNarrationExtra(const StelCore *core, const InfoStringGroup& f
 			}
 			else
 			{
-				paAxisStr=StelUtils::radToDmsNarration(ssop.first[3]);
 				subearthLStr=StelUtils::radToDmsNarration(Le);
 				subearthBStr=StelUtils::radToDmsNarration(ssop.first[1]);
 				subsolarLStr=StelUtils::radToDmsNarration(Ls);
 				subsolarBStr=StelUtils::radToDmsNarration(ssop.second[1]);
 			}
+			paAxisStr = withDecimalDegreeCoords ? StelUtils::radToDecDegNarration(ssop.first[3], 1) : StelUtils::radToDmsNarration(ssop.first[3]);
 			oss << QString(q_("The position Angle of the rotation axis is at %1")).arg(paAxisStr) << ". ";
 			// Translators: The Center point [optional: in system II] has longitude L and latitude B
 			oss << QString(qc_("The Center point %1 has longitude %2 and latitude %3", "planet narration")).arg(lngSystem, subearthLStr, subearthBStr) << ". ";
@@ -1879,7 +1892,7 @@ QString Planet::getNarrationExtra(const StelCore *core, const InfoStringGroup& f
 						}
 						oss << QString(qc_("The duration of the Central eclipse is %1 minutes and %2 seconds", "planet narration"))
 						       .arg(QString::number(durationMinute), QString::number(durationSecond)) << ". ";
-						if (withDecimalDegree)
+						if (withDecimalDegreeCoords)
 							oss << QString(qc_("The center of the solar eclipse is at latitude %1 degrees and longitude %2 degrees", "planet narration"))
 							       .arg(StelUtils::narrateDecimal(latDeg, 4), StelUtils::narrateDecimal(lngDeg, 4)) << ". ";
 						else
@@ -2261,7 +2274,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
 	{
 		Vec4d properMotion = getHourlyProperMotion(core);
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 		oss << QString(qc_("In one hour, %1 moves %2 towards %3 degrees, or %4 in right ascension and %5 in declination", "planet narration"))
 		       .arg(getNameI18n(), withDecimalDegree ? StelUtils::radToDecDegNarration(properMotion[0]) : StelUtils::narrateDecimal(properMotion[0]*M_180_PI, 1),
 			    StelUtils::narrateDecimal(properMotion[1]*M_180_PI, 1),
@@ -4607,7 +4620,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			allowDrawHalo = false;
 	}
 
-	if (isMoon && (!drawMoonHalo||eclipseFactor<0.1))
+	if (isMoon && (!drawMoonHalo||eclipseFactor<0.1)) // don't spoil the total eclipse 'hole in the sky' with a lunar halo!
 		allowDrawHalo = false;
 
 	// Draw the halo if enabled in the ssystem_*.ini files (+ special case for backward compatible for the Sun)

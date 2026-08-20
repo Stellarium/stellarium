@@ -56,20 +56,20 @@ void AddRemoveLandscapesDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &AddRemoveLandscapesDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &AddRemoveLandscapesDialog::handleMovedTo);
 
-	connect(ui->pushButtonBrowseForArchive, SIGNAL(clicked()), this, SLOT(browseForArchiveClicked()));
-	connect(ui->listWidgetUserLandscapes, SIGNAL(currentRowChanged(int)), this, SLOT(updateSidePane(int)));
-	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeClicked()));
-	connect(ui->pushButtonMessageOK, SIGNAL(clicked()), this, SLOT(messageAcknowledged()));
+	connect(ui->pushButtonBrowseForArchive, &QPushButton::clicked, this, &AddRemoveLandscapesDialog::browseForArchiveClicked);
+	connect(ui->listWidgetUserLandscapes, &QListWidget::currentRowChanged, this, &AddRemoveLandscapesDialog::updateSidePane);
+	connect(ui->pushButtonRemove,    &QPushButton::clicked, this, &AddRemoveLandscapesDialog::removeClicked);
+	connect(ui->pushButtonMessageOK, &QPushButton::clicked, this, &AddRemoveLandscapesDialog::messageAcknowledged);
 
-	connect(landscapeManager, SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
-	connect(landscapeManager, SIGNAL(errorUnableToOpen(QString)), this, SLOT(messageUnableToOpen(QString)));
-	connect(landscapeManager, SIGNAL(errorNotArchive()), this, SLOT(messageNotArchive()));
-	connect(landscapeManager, SIGNAL(errorNotUnique(QString)), this, SLOT(messageNotUnique(QString)));
-	connect(landscapeManager, SIGNAL(errorRemoveManually(QString)), this, SLOT(messageRemoveManually(QString)));
+	connect(landscapeManager, &LandscapeMgr::landscapesChanged, this, &AddRemoveLandscapesDialog::populateLists);
+	connect(landscapeManager, &LandscapeMgr::errorUnableToOpen, this, &AddRemoveLandscapesDialog::messageUnableToOpen);
+	connect(landscapeManager, &LandscapeMgr::errorNotArchive, this, &AddRemoveLandscapesDialog::messageNotArchive);
+	connect(landscapeManager, &LandscapeMgr::errorNotUnique, this, &AddRemoveLandscapesDialog::messageNotUnique);
+	connect(landscapeManager, &LandscapeMgr::errorRemoveManually, this, &AddRemoveLandscapesDialog::messageRemoveManually);
 
 	ui->groupBoxMessage->setVisible(false);
 

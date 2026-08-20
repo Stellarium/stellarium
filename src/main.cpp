@@ -188,6 +188,7 @@ int main(int argc, char **argv)
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
+	QGuiApplication::setDesktopFileName("org.stellarium.Stellarium");
 
 	QCoreApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents);
 	// Support high DPI pixmaps and fonts

@@ -533,7 +533,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 {
 	QString str, designation = getDesignation();
 	QTextStream oss(&str);
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 
 	const QMap<MeteorShower::Status, QString>mstMap={
 		{ ACTIVE_GENERIC, q_("generic data")},

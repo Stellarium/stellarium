@@ -1306,7 +1306,7 @@ Basket for Mulberry Leaves (Korean: 부광, Hanja: 扶筐, Romanization: Bugwang
 
 ##### Dongou
 
-*Dong'ou* (Korean: 동구, Hanja: 東甌, Romanization: Donggu) consists of 5 stars south of the Wings.
+*Dong'ou* (Korean: 동구, Hanja: 東甌, Romanization: Donggu) consists of 5 stars south of the *Wings*.
 
 ##### Chariot
 

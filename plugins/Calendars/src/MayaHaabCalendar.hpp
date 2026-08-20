@@ -61,9 +61,12 @@ public slots:
 	inline static int mayanHaabOrdinal(const QVector<int> &haab) {return (haab.at(0)-1)*20+haab.at(1);}
 	static int mayanHaabOnOrBefore(const QVector<int> &haab, int rd);
 	static QVector<int> mayanHaabFromFixed(int rd);
+
+	//! Handle a change of Maya Epoch. Connect this in Calendars init.
+	void updateFromMayaEpoch();
 private:
 	static QMap<int, QString> monthNames;
-	static const int mayanHaabEpoch;
+	static int mayanHaabEpoch;
 };
 
 #endif

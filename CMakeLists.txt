@@ -27,6 +27,8 @@ SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release
 SET(ENABLE_QT6 1 CACHE BOOL "Whether to try building with Qt6. If Qt6 is not found, Qt5 will be used.")
 IF(ENABLE_QT6)
      FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
+     # Suppressing warning for GuiPrivate component (required since Qt 6.10+)
+     SET(QT_NO_PRIVATE_MODULE_WARNING ON)
 ENDIF()
 if (NOT Qt6_FOUND)
      FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core)
@@ -64,8 +66,7 @@ SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(STELLARIUM_SERIES "${STELLARIUM_MAJOR}.0")
 SET(STELLARIUM_PUBLIC_VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}")
 SET(PACKAGE stellarium)
-STRING(TIMESTAMP CURRENTYEAR "%Y")
-SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
+SET(COPYRIGHT_YEARS "2000-20${STELLARIUM_MAJOR}")
 
 SET(STELLARIUM_URL "https://stellarium.org/")
 ADD_DEFINITIONS(-DSTELLARIUM_URL="${STELLARIUM_URL}")
@@ -126,6 +127,7 @@ ENDIF()
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 INCLUDE(CPM)
+INCLUDE(StellariumPlatform)
 
 # Show platform info
 MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
@@ -152,57 +154,6 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
                     DEPENDENCIES buildTests
                )
           ENDIF()
-     ENDIF()
-ENDIF()
-
-IF(STELLARIUM_RELEASE_BUILD)
-     SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
-     SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}")
-ELSE()
-     SET(STELLARIUM_SERIES "head")
-     FIND_PACKAGE(Git QUIET)
-     IF(Git_FOUND)
-          MESSAGE(STATUS "Found Git ${GIT_VERSION_STRING}")
-          # get the name of current branch
-          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-          # get the hash of latest commit
-          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log -1 --pretty=format:%h WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-          # get the name of latest annotated tag
-          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_TAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-	  IF(GIT_REVISION)
-               # Let's use short hash in all cases
-               STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
-	       ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
-               ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
-	  ENDIF()
-     ELSE()
-          STRING(TIMESTAMP TODAY "%j%H%M")
-          SET(REVISION "${TODAY}")
-	  ADD_DEFINITIONS(-DGIT_REVISION="${TODAY}")
-          ADD_DEFINITIONS(-DGIT_BRANCH="tarball")
-     ENDIF()
-     SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${REVISION}")
-     SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}+")
-ENDIF()
-MESSAGE(STATUS "Building ${PROJECT_NAME} ${STELLARIUM_BUIDING_VERSION} (v${PACKAGE_VERSION}; Mode: ${CMAKE_BUILD_TYPE})")
-ADD_DEFINITIONS(-DSTELLARIUM_BUIDING_VERSION="${STELLARIUM_BUIDING_VERSION}")
-
-# Write version and series of Stellarium to Stellarium User Guide
-CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
-
-SET(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
-IF(OPENGL_DEBUG_LOGGING)
-     ADD_DEFINITIONS(-DOPENGL_DEBUG_LOGGING)
-     # This enables logging of QOpenGLFunctions through forced glGetError after each call
-     ADD_DEFINITIONS(-DQ_ENABLE_OPENGL_FUNCTIONS_DEBUG)
-ENDIF()
-
-# Use ccache if possible
-IF(NOT WIN32 AND ENABLE_CCACHE)
-     FIND_PROGRAM(CCACHE_PROGRAM ccache)
-     IF(CCACHE_PROGRAM)
-          MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
-          SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
      ENDIF()
 ENDIF()
 
@@ -252,7 +203,69 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Fuzzer")
      ENDIF()
 ENDIF()
 
+IF(STELLARIUM_RELEASE_BUILD)
+     SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
+     SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}")
+ELSE()
+     SET(STELLARIUM_SERIES "head")
+     FIND_PACKAGE(Git QUIET)
+     IF(Git_FOUND)
+          MESSAGE(STATUS "Found Git ${GIT_VERSION_STRING}")
+          # get the name of current branch
+          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          # get the hash of latest commit
+          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log -1 --pretty=format:%h WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          # get the name of latest annotated tag
+          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_TAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          IF(GIT_REVISION)
+               # Let's use short hash in all cases
+               STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
+               ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
+               ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
+          ENDIF()
+     ELSE()
+          STRING(TIMESTAMP TODAY "%j%H%M")
+          SET(REVISION "${TODAY}")
+          ADD_DEFINITIONS(-DGIT_REVISION="${TODAY}")
+          ADD_DEFINITIONS(-DGIT_BRANCH="tarball")
+     ENDIF()
+     SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${REVISION}")
+     SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}+")
+ENDIF()
+MESSAGE(STATUS "Building ${PROJECT_NAME} ${STELLARIUM_BUIDING_VERSION} (v${PACKAGE_VERSION}; Mode: ${CMAKE_BUILD_TYPE})")
+ADD_DEFINITIONS(-DSTELLARIUM_BUIDING_VERSION="${STELLARIUM_BUIDING_VERSION}")
+
+# Write version and series of Stellarium to Stellarium User Guide
+CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
+
+# Use ccache if possible
+IF(NOT WIN32 AND ENABLE_CCACHE)
+     FIND_PROGRAM(CCACHE_PROGRAM ccache)
+     IF(CCACHE_PROGRAM)
+          MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
+          SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+     ENDIF()
+ENDIF()
+
+SET(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
+IF(OPENGL_DEBUG_LOGGING)
+     ADD_DEFINITIONS(-DOPENGL_DEBUG_LOGGING)
+     # This enables logging of QOpenGLFunctions through forced glGetError after each call
+     ADD_DEFINITIONS(-DQ_ENABLE_OPENGL_FUNCTIONS_DEBUG)
+ENDIF()
+
 IF(APPLE)
+     # Let's use own definition for macOS platform to avoid pkgsrc issues
+     IF(DEFINED ENV{PKGSRC_PREFIX} OR CMAKE_INSTALL_PREFIX MATCHES "pkg" OR EXISTS "/usr/pkg")
+          SET(MACOS 0)
+          ADD_DEFINITIONS(-DPKGSRC)
+     ELSE()
+          SET(MACOS 1)
+          ADD_DEFINITIONS(-DMACOS)
+     ENDIF()
+ENDIF()
+
+IF(MACOS)
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
      # share data location:
      SET(SDATALOC "Resources")
@@ -373,11 +386,11 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
      # The cosmetic fix for Clang 3.5+
      IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.4)
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-string-plus-int")
-	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-string-plus-int")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-string-plus-int")
      ENDIF()
-     IF(APPLE)
-	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter -Wno-string-plus-int")
-	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option -Wno-string-plus-int")
+     IF(MACOS)
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter -Wno-string-plus-int")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option -Wno-string-plus-int")
      ENDIF()
 ENDIF()
 
@@ -393,13 +406,13 @@ ENDIF()
 # LTO fails a test for unknown reasons on Linux/GCC and on Windows/MSVC.
 IF(ENABLE_LTO)
      IF(WIN32 AND MSVC)
-	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /GL")
-	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GL")
-	  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG")
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /GL")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GL")
+          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG")
      ELSE()
-	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -flto")
-	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
-	  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${CMAKE_CXX_FLAGS}")
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -flto")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
+          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${CMAKE_CXX_FLAGS}")
      ENDIF()
 ENDIF()
 
@@ -432,10 +445,7 @@ SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmospher
 # Activate support for XLSX (Excel) files
 SET(ENABLE_XLSX 1 CACHE BOOL "Define whether to support XLSX (Excel) files")
 IF(ENABLE_XLSX)
-     ADD_DEFINITIONS(-DENABLE_XLSX)
-     IF(Qt6_VERSION VERSION_GREATER_EQUAL 6.10)
-          FIND_PACKAGE(Qt6 REQUIRED COMPONENTS Gui GuiPrivate)
-     ENDIF()
+     ADD_DEFINITIONS(-DENABLE_XLSX)     
 ENDIF()
 
 # Activate support for INDI client in Telescope Control plugin
@@ -592,8 +602,8 @@ IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
      ADD_PLUGIN(SkyCultureMaker 1)
      ADD_PLUGIN(SolarSystemEditor 1)
      ADD_PLUGIN(TimeNavigator 1)
+     ADD_PLUGIN(ObjectVisibility 1)
 ENDIF()
-
 ADD_PLUGIN(Vts 0)
 
 ########## Static plugins need to define includes and libraries
@@ -618,23 +628,26 @@ IF(${QT_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
 ELSE()
      MESSAGE(STATUS "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found suitable version ${QT_VERSION})")
 ENDIF()
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Concurrent Gui Network Widgets Charts Positioning)
+
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Concurrent Gui Network Widgets Charts Positioning REQUIRED)
 IF(Qt6_FOUND)
-     FIND_PACKAGE(Qt6 REQUIRED COMPONENTS SvgWidgets)
+     FIND_PACKAGE(Qt6 COMPONENTS SvgWidgets REQUIRED)
+     # Qt 6.10 split off FooPrivate from Foo.
+     # https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.10.0/release-note.md
+     # > ad7b94e163a: User projects must now call find_package(Qt6 COMPONENTS FooPrivate) to make use of the Qt6::FooPrivate target.
+     # For the case of Qt5 this condition evaluates to false.
+     IF(Qt6_VERSION VERSION_GREATER_EQUAL 6.10)
+          FIND_PACKAGE(Qt6 COMPONENTS GuiPrivate REQUIRED)
+     ENDIF()
 ELSEIF(Qt5_FOUND)
-     FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Svg)
+     FIND_PACKAGE(Qt5 COMPONENTS Svg REQUIRED)
 ENDIF()
 SET(USE_BUNDLED_QTCOMPRESS 1 CACHE BOOL "Use bundled version of qtcompress")
-# Qt 6.10 split off FooPrivate from Foo.
-# https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.10.0/release-note.md
-# > ad7b94e163a: User projects must now call find_package(Qt6 COMPONENTS FooPrivate) to make use of the Qt6::FooPrivate target.
-# For the case of Qt5 this condition evaluates to false.
-IF(Qt6_VERSION VERSION_GREATER_EQUAL 6.10 AND NOT USE_BUNDLED_QTCOMPRESS)
-     FIND_PACKAGE(Qt6 REQUIRED COMPONENTS Gui GuiPrivate)
-ENDIF()
+
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS SerialPort REQUIRED)
 ENDIF()
+
 IF(WIN32)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Svg REQUIRED)
      IF(${QT_VERSION_MAJOR} EQUAL 5)
@@ -642,40 +655,40 @@ IF(WIN32)
      ENDIF()
 
      IF(STELLARIUM_BUILD_ARM64 AND ${QT_VERSION} VERSION_LESS "6.5.0")
-       MESSAGE(FATAL_ERROR "Qt 6.5.0 or later is required for Windows on ARM builds.")
+          MESSAGE(FATAL_ERROR "Qt 6.5.0 or later is required for Windows on ARM builds.")
      ENDIF()
 ENDIF()
 
-IF(APPLE)
+IF(MACOS)
      IF(${QT_VERSION_MAJOR} EQUAL 6)
-	  FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS DBus REQUIRED)
+          FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS DBus REQUIRED)
      ENDIF()
      # macOS architectures: x86_64 or arm64
      IF(NOT CMAKE_OSX_ARCHITECTURES)
-	  # Find 'lipo' utility
-	  FIND_PROGRAM(LIPO_COMMAND lipo)
-	  IF(LIPO_COMMAND)
-	       MESSAGE(STATUS "Found lipo: ${LIPO_COMMAND}")
-	       # Get architecture of Qt
-	       EXECUTE_PROCESS(COMMAND ${LIPO_COMMAND} -archs ${QMAKE_LOCATION} TIMEOUT 30 OUTPUT_VARIABLE QT_ARCHS OUTPUT_STRIP_TRAILING_WHITESPACE)
-	       STRING(REPLACE " " ";" QT_ARCHS ${QT_ARCHS})
-	       SET(CMAKE_OSX_ARCHITECTURES "${QT_ARCHS}" CACHE STRING "macOS architectures" FORCE)
-	  ELSE()
-	       # If we can't find architecture of Qt, use that of the host system's CPU
-	       SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
-	  ENDIF()
+          # Find 'lipo' utility
+          FIND_PROGRAM(LIPO_COMMAND lipo)
+          IF(LIPO_COMMAND)
+               MESSAGE(STATUS "Found lipo: ${LIPO_COMMAND}")
+               # Get architecture of Qt
+               EXECUTE_PROCESS(COMMAND ${LIPO_COMMAND} -archs ${QMAKE_LOCATION} TIMEOUT 30 OUTPUT_VARIABLE QT_ARCHS OUTPUT_STRIP_TRAILING_WHITESPACE)
+               STRING(REPLACE " " ";" QT_ARCHS ${QT_ARCHS})
+               SET(CMAKE_OSX_ARCHITECTURES "${QT_ARCHS}" CACHE STRING "macOS architectures" FORCE)
+          ELSE()
+               # If we can't find architecture of Qt, use that of the host system's CPU
+               SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
+          ENDIF()
      ENDIF()
      # macOS deployment targets
      IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
-	  IF(${QT_VERSION_MAJOR} EQUAL 6)
-	       # Qt6 is allows building universal binary (x86_64 + arm64)
-	       # Qt 6.5: minimal operating system is macOS Big Sur (macOS 11)
-	       # Qt 6.8: minimal operating system is macOS Monterey (macOS 12)
-	       # AGL framework is deprecated in macOS Tahoe (macOS 26) and Qt 6.9 (target platform is macOS 12 or higher) is required to building here
-	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "12.0" CACHE STRING "Minimum macOS deployment version" FORCE)
-	  ELSE()
+          IF(${QT_VERSION_MAJOR} EQUAL 6)
+               # Qt6 is allows building universal binary (x86_64 + arm64)
+               # Qt 6.5: minimal operating system is macOS Big Sur (macOS 11)
+               # Qt 6.8: minimal operating system is macOS Monterey (macOS 12)
+               # AGL framework is deprecated in macOS Tahoe (macOS 26) and Qt 6.9 (target platform is macOS 12 or higher) is required to building here
+               SET(CMAKE_OSX_DEPLOYMENT_TARGET "12.0" CACHE STRING "Minimum macOS deployment version" FORCE)
+          ELSE()
                SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum macOS deployment version" FORCE)
-	  ENDIF()
+          ENDIF()
      ENDIF()
 ENDIF()
 
@@ -694,10 +707,10 @@ IF(${QT_VERSION_MAJOR} EQUAL 5)
      # Check if we have a GLES-only build
      # On dynamic builds, this property is also "GL"
      IF(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
-	  MESSAGE(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
-	  SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
+          MESSAGE(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
+          SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
      ELSE()
-	  MESSAGE(STATUS "Building an OpenGL build")
+          MESSAGE(STATUS "Building an OpenGL build")
      ENDIF()
 ELSE()
      # See https://doc.qt.io/qt-6/qopenglcontext.html#details + https://doc.qt.io/qt-6/qtgui-overview.html#opengl-and-opengl-es-integration
@@ -726,12 +739,12 @@ IF(ENABLE_SHOWMYSKY)
           SET(ShowMySky_LIBRARY $<TARGET_FILE:ShowMySky::ShowMySky>)
           MESSAGE(STATUS "Will build ShowMySky library")
           INCLUDE(GNUInstallDirs)
-          IF(APPLE)
+          IF(MACOS)
                INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)
           ELSE()
                INSTALL(TARGETS ShowMySky
-		    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-		    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+                       LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+                       RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
           ENDIF()
           # We used EXCLUDE_FROM_ALL in CPMFindPackage to avoid building
           # irrelevant binaries of CalcMySky. But we still need to build
@@ -764,8 +777,7 @@ ENDIF(ENABLE_SCRIPTING)
 
 IF(ENABLE_MEDIA)
      ADD_DEFINITIONS(-DENABLE_MEDIA)
-     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Multimedia REQUIRED)
-     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS MultimediaWidgets REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Multimedia MultimediaWidgets REQUIRED)
 ENDIF()
 
 IF(ENABLE_GPS)
@@ -786,10 +798,10 @@ IF(ENABLE_GPS)
                     ADD_DEFINITIONS(-DENABLE_LIBGPS)
                     MESSAGE(STATUS "GPS: using GPS library at ${GPS_LIBRARY} (found suitable GPSD API version: ${GPS_VERSION_STRING})")
                ENDIF()
-	  ELSE()
+          ELSE()
                SET(ENABLE_LIBGPS 0)
                MESSAGE(STATUS "GPS: could not find GPS library - GPSD query disabled!")
-	  ENDIF()
+          ENDIF()
      ENDIF()
 ELSE()
      SET(ENABLE_LIBGPS 0)
@@ -870,7 +882,7 @@ ENDIF()
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
-     IF(APPLE)
+     IF(MACOS)
           SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
      ELSE()
           ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/${SDATALOC}")
@@ -1010,10 +1022,10 @@ IF(GENERATE_PACKAGE_TARGET)
      SET(CPACK_PACKAGE_VERSION_PATCH "${STELLARIUM_PATCH}")
      SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
      IF(STELLARIUM_RELEASE_BUILD)
-	  SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${STELLARIUM_PUBLIC_VERSION}")
+          SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${STELLARIUM_PUBLIC_VERSION}")
           SET(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/data/icons/512x512/stellarium.png")
      ELSE()
-	  SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${STELLARIUM_PUBLIC_VERSION}-${GIT_REVISION}")
+          SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${STELLARIUM_PUBLIC_VERSION}-${GIT_REVISION}")
           SET(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/data/icons/512x512/stellarium-gray.png")
      ENDIF()
      SET(CPACK_SOURCE_GENERATOR "TBZ2;TXZ;TGZ;ZIP")
@@ -1035,7 +1047,7 @@ IF(GENERATE_PACKAGE_TARGET)
 ENDIF()
 
 ########### macOS Bundling ###############
-IF(APPLE)
+IF(MACOS)
      MESSAGE(STATUS "macOS deployment target: ${CMAKE_OSX_DEPLOYMENT_TARGET} (${CMAKE_OSX_ARCHITECTURES})")
      SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
      ADD_DEFINITIONS(-DPACKAGE_OSX_TARGET)
@@ -1045,9 +1057,9 @@ IF(APPLE)
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(MACDEPLOYQT_COMMAND macdeployqt HINTS "${_qt_bin_dir}")
      IF(MACDEPLOYQT_COMMAND)
-	  MESSAGE(STATUS "Found macdeployqt: ${MACDEPLOYQT_COMMAND}")
+          MESSAGE(STATUS "Found macdeployqt: ${MACDEPLOYQT_COMMAND}")
      ELSE()
-	  MESSAGE(STATUS "Could NOT find macdeployqt")
+          MESSAGE(STATUS "Could NOT find macdeployqt")
      ENDIF()
 ENDIF()
 
@@ -1098,10 +1110,16 @@ ENDIF()
 
 include("cmake/Check-from_chars.cmake")
 IF(NOT FROM_CHARS_WORKS)
-     CPMFindPackage(NAME FastFloat
-          GIT_REPOSITORY https://github.com/fastfloat/fast_float
-          VERSION 6.1.0
-          EXCLUDE_FROM_ALL yes)
+     # Required FastFloat v6.1.0 or later
+     FIND_PACKAGE(FastFloat QUIET)
+     IF(FastFloat_FOUND AND FastFloat_VERSION VERSION_GREATER_EQUAL 6.1.0)
+          MESSAGE(STATUS "Using system-provided FastFloat ${FastFloat_VERSION}")
+     ELSE()
+          CPMAddPackage(NAME FastFloat
+               GIT_REPOSITORY https://github.com/fastfloat/fast_float
+               VERSION 8.2.0
+               EXCLUDE_FROM_ALL yes)
+     ENDIF()
      GET_TARGET_PROPERTY(FastFloat_INCLUDE_DIRECTORIES
           FastFloat::fast_float INTERFACE_INCLUDE_DIRECTORIES)
      INCLUDE_DIRECTORIES(${FastFloat_INCLUDE_DIRECTORIES})

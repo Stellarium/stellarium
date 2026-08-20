@@ -96,11 +96,11 @@ void HelpDialog::styleChanged(const QString &style)
 void HelpDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &HelpDialog::retranslate);
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &HelpDialog::handleMovedTo);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;
@@ -108,7 +108,7 @@ void HelpDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &HelpDialog::enableKineticScrolling);
 	}
 
 
@@ -116,30 +116,30 @@ void HelpDialog::createDialogContent()
 	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	updateHelpText();
 	setKeyButtonState(mmgr->getFlagEnableMoveKeys());
-	connect(ui->editShortcutsButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
-	connect(StelApp::getInstance().getStelActionManager(), SIGNAL(shortcutsChanged()), this, SLOT(updateHelpText()));
-	connect(mmgr, SIGNAL(flagEnableMoveKeysChanged(bool)), this, SLOT(setKeyButtonState(bool)));
+	connect(ui->editShortcutsButton, &QPushButton::clicked, this, &HelpDialog::showShortcutsWindow);
+	connect(StelApp::getInstance().getStelActionManager(), &StelActionMgr::shortcutsChanged, this, &HelpDialog::updateHelpText);
+	connect(mmgr, &StelMovementMgr::flagEnableMoveKeysChanged, this, &HelpDialog::setKeyButtonState);
 
 	// About page
 	updateAboutText();
 
 	// Log page	
 	ui->logPathLabel->setText(QString("%1:").arg(StelLogger::getLogFileName()));
-	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
-	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
+	connect(ui->stackedWidget, &QStackedWidget::currentChanged, this, &HelpDialog::updateLog);
+	connect(ui->refreshButton, &QPushButton::clicked, this, &HelpDialog::refreshLog);
 
 	// Config page
 	ui->configPathLabel->setText(QString("%1:").arg(StelApp::getInstance().getSettings()->fileName()));
-	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateConfig(int)));
-	connect(ui->refreshConfigButton, SIGNAL(clicked()), this, SLOT(refreshConfig()));
+	connect(ui->stackedWidget, &QStackedWidget::currentChanged, this, &HelpDialog::updateConfig);
+	connect(ui->refreshConfigButton,&QPushButton::clicked, this, &HelpDialog::refreshConfig);
 
 	// Set up download manager for checker of updates
 	networkManager = StelApp::getInstance().getNetworkAccessManager();
 	updateState = CompleteNoUpdates;
-	connect(ui->checkUpdatesButton, SIGNAL(clicked()), this, SLOT(checkUpdates()));
-	connect(this, SIGNAL(checkUpdatesComplete(void)), this, SLOT(updateAboutText()));
+	connect(ui->checkUpdatesButton, &QPushButton::clicked, this, &HelpDialog::checkUpdates);
+	connect(this, &HelpDialog::checkUpdatesComplete, this, &HelpDialog::updateAboutText);
 
-	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+	connect(ui->stackListWidget, &QListWidget::currentItemChanged, this, &HelpDialog::changePage);
 	updateTabBarListWidgetWidth();
 
 	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), &StelGui::htmlStyleChanged, this, [=](const QString &style){
@@ -169,7 +169,7 @@ void HelpDialog::checkUpdates()
 		}
 
 		QUrl API("https://api.github.com/repos/Stellarium/stellarium/releases/latest");
-		connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+		connect(networkManager, &QNetworkAccessManager::finished, this, &HelpDialog::downloadComplete);
 		QNetworkRequest request;
 		request.setUrl(API);
 		request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
@@ -187,7 +187,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	if (reply == nullptr)
 		return;
 
-	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	disconnect(networkManager, &QNetworkAccessManager::finished, this, &HelpDialog::downloadComplete);
 
 	if (reply->error() || reply->bytesAvailable()==0)
 	{

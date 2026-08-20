@@ -59,7 +59,7 @@ Patrem is keris (indigenous dagger). A royal spy code or women use this kind of 
 
 ##### A Plough
 
-Těnggala is a plough. Betelgeuse is the red pain of the farmer. Bellatrix is the farmer's eye. Orion's belt is the plough. Rigel and other stars to the west are the animals (cow).
+Těnggala is a plough. Betelgeuse is the red plain of the farmer. Bellatrix is the farmer's eye. Orion's belt is the plough. Rigel and other stars to the west are the animals (cow).
 
 <img width="255" src="illustrations/descr_pics/Ra_Wa.jpg"/>
 
@@ -89,13 +89,13 @@ Pědati Suung is an empty horse cart.
 
 ##### Horse
 
-Kuda is a horse. In Bali, horses are closely related to the possessions of high-caste people. because horses are considered a luxury item that not everyone can have.
+Kuda is a horse. In Bali, horses are closely related to the possessions of high-caste people, because horses are considered a luxury item that not everyone can have.
 
 <img width="255" src="illustrations/descr_pics/A_U.png"/>
 
 ##### Freshwater Crab
 
-Yuyu is freshwater crab. In Bali, yuyu can be found in rice fields. However, yuyu are considered pests in rice fields because they often make holes in the ground. In addition, sometimes Balinese people make cetik using yuyu. Cetik is a traditional Balinese poison that has been legendary for hundreds of years.
+Yuyu is a freshwater crab. In Bali, yuyu can be found in rice fields. However, yuyu are considered pests in rice fields because they often make holes in the ground. In addition, sometimes Balinese people make cetik using yuyu. Cetik is a traditional Balinese poison that has been legendary for hundreds of years.
 
 <img width="255" src="illustrations/descr_pics/A_Pa.png"/>
 
@@ -131,13 +131,13 @@ Gajahmina is an elephantfish. A sea-creature that has elephant head and fish bod
 
 ##### Granary (Paddy Storage)
 
-Lumbung is granary or paddy storage. Lumbung is considered sacred by the Balinese people because it is related to the success of the harvest and the presence of Dewi Sri, the goddess of rice or the goddess of fertility.
+Lumbung is a granary or paddy storage. Lumbung is considered sacred by the Balinese people because it is related to the success of the harvest and the presence of Dewi Sri, the goddess of rice or the goddess of fertility.
 
 <img width="255" src="illustrations/descr_pics/Bu_Po.png"/>
 
 ##### Star
 
-Kartika is a star and also refering to Vedic Nakṣatra Kṛttika (Krittika).
+Kartika is a star and also referring to Vedic Nakṣatra Kṛttika (Krittika).
 
 <img width="255" src="illustrations/descr_pics/Bu_Wa.png"/>
 
@@ -161,7 +161,7 @@ Salah Ukur is an error measurement. The man with keris tries to fight a big anim
 
 ##### Funeral Bier
 
-Bade is funeral bier. The name for corpse tower in Hindu Bali rituals. Bade has different levels depending on the caste and size of the event.
+Bade is a funeral bier. The name for corpse tower in Hindu Bali rituals. Bade has different levels depending on the caste and size of the event.
 
 <img width="255" src="illustrations/descr_pics/Wra_Po.png"/>
 
@@ -173,7 +173,7 @@ Kumba is an earthen vessel. This vessel contains holy water. Kumba is used in th
 
 ##### A Dragon
 
-Naga is a dragon. Naga are mystical creatures with special powers. The famous Naga Basuki, in particular, is the one that connected to the Bali Strait. 
+Naga is a dragon. Naga are mystical creatures with special powers. The famous Naga Basuki, in particular, is the one that is connected to the Bali Strait. 
 
 <img width="255" src="illustrations/descr_pics/Wra_Kli.png"/>
 
@@ -215,7 +215,7 @@ Ru is an arrow, but basically bow and arrow.
 
 ##### Battling Quails
 
-Puwuh Atarung is a battling quails.
+Puwuh Atarung is a battling quail.
 
 <img width="255" src="illustrations/descr_pics/Sa_Wa.png"/>
 

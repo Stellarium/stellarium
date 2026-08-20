@@ -136,7 +136,7 @@ void PointerCoordinates::draw(StelCore *core)
 
 	Vec3d mousePosition = core->getMouseJ2000Pos();
 
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();

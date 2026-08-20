@@ -23,7 +23,13 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-const int MayaTzolkinCalendar::mayanTzolkinEpoch=MayaLongCountCalendar::mayanEpoch-MayaTzolkinCalendar::mayanTzolkinOrdinal({4,20});
+// Default solution. Make sure to wire up some reset mechanism if MayaLongCountCalendar::mayanEpoch ever loses const-ness!
+int MayaTzolkinCalendar::mayanTzolkinEpoch=MayaLongCountCalendar::mayanEpoch-MayaTzolkinCalendar::mayanTzolkinOrdinal({4,20});
+
+void MayaTzolkinCalendar::updateFromMayaEpoch()
+{
+	MayaTzolkinCalendar::mayanTzolkinEpoch=MayaLongCountCalendar::mayanEpoch-MayaTzolkinCalendar::mayanTzolkinOrdinal({4,20});
+}
 
 MayaTzolkinCalendar::MayaTzolkinCalendar(double jd): Calendar(jd)
 {

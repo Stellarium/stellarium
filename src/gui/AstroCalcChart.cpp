@@ -242,7 +242,7 @@ void AstroCalcChart::show(Series s)
 		qDebug() << "series" << s << "already shown.";
 
 	// Set up tooltips on hover for all series
-	connect(map.value(s), SIGNAL(hovered(const QPointF &, bool)), this, SLOT(showToolTip(const QPointF &, bool)));
+	connect(map.value(s), &QLineSeries::hovered, this, &AstroCalcChart::showToolTip);
 }
 
 void AstroCalcChart::showToolTip(const QPointF &point, const bool show)

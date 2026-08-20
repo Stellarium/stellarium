@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2015-2022 Alexander Wolf
+ * Copyright (C) 2015-2026 Alexander Wolf
  * Copyright (C) 2016 Nick Fedoseev (visualization of ephemeris)
  * Copyright (C) 2022 Georg Zotti
  * Copyright (C) 2022 Worachate Boonplod (Eclipses)
@@ -198,19 +198,19 @@ void AstroCalcDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &AstroCalcDialog::enableKineticScrolling);
 	}
 
 	flagPolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 
 	// Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance(), SIGNAL(flagUsePolarDistanceChanged(bool)), this, SLOT(updateEquatorialData()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &AstroCalcDialog::retranslate);
+	connect(&StelApp::getInstance(), &StelApp::flagUsePolarDistanceChanged, this, &AstroCalcDialog::updateEquatorialData);
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &AstroCalcDialog::populateCelestialNames);
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &AstroCalcDialog::handleMovedTo);
 
 	initListCelestialPositions();
 	initListHECPositions();
@@ -263,133 +263,135 @@ void AstroCalcDialog::createDialogContent()
 	ui->dateFromMinuteSpinBox->setValue(minute);
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
-	connect(ui->celestialPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), ui->celestialPositionsTreeWidget, SLOT(repaint()));
+	connect(ui->celestialPositionsTreeWidget, &QTreeWidget::currentItemChanged, ui->celestialPositionsTreeWidget, qOverload<>(&QTreeWidget::repaint));
 
 	ui->celestialMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/celestial_magnitude_limit", 6.0).toDouble());
-	connect(ui->celestialMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this,  SLOT(saveCelestialPositionsMagnitudeLimit(double)));
+	connect(ui->celestialMagnitudeDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged), this,  &AstroCalcDialog::saveCelestialPositionsMagnitudeLimit);
 
 	ui->horizontalCoordinatesCheckBox->setChecked(conf->value("astrocalc/flag_horizontal_coordinates", false).toBool());
-	connect(ui->horizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveCelestialPositionsHorizontalCoordinatesFlag(bool)));
+	connect(ui->horizontalCoordinatesCheckBox, &QCheckBox::toggled, this, &AstroCalcDialog::saveCelestialPositionsHorizontalCoordinatesFlag);
 
-	connect(ui->celestialPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentCelestialPosition(QModelIndex)));
-	connect(ui->celestialPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentCelestialPositions()));
-	connect(ui->celestialPositionsSaveButton, SIGNAL(clicked()), this, SLOT(saveCelestialPositions()));
-	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));
-	connect(dsoMgr, SIGNAL(catalogFiltersChanged(int)), this, SLOT(populateCelestialCategoryList()));
-	connect(dsoMgr, SIGNAL(catalogFiltersChanged(int)), this, SLOT(currentCelestialPositions()));
-	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(currentCelestialPositions()));
-	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
-	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
-	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(currentCelestialPositions()));
+	connect(ui->celestialPositionsTreeWidget,   &QTreeWidget::doubleClicked,     this, &AstroCalcDialog::selectCurrentCelestialPosition);
+	connect(ui->celestialPositionsUpdateButton, &QPushButton::clicked,           this, &AstroCalcDialog::currentCelestialPositions);
+	connect(ui->celestialPositionsSaveButton,   &QPushButton::clicked,           this, &AstroCalcDialog::saveCelestialPositions);
+	connect(ui->celestialCategoryComboBox,      qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveCelestialPositionsCategory);
+	connect(dsoMgr, &NebulaMgr::catalogFiltersChanged,      this, &AstroCalcDialog::populateCelestialCategoryList);
+	connect(dsoMgr, &NebulaMgr::catalogFiltersChanged,      this, &AstroCalcDialog::currentCelestialPositions);
+	connect(dsoMgr, &NebulaMgr::flagSizeLimitsUsageChanged, this, &AstroCalcDialog::currentCelestialPositions);
+	connect(dsoMgr, &NebulaMgr::minSizeLimitChanged,        this, &AstroCalcDialog::currentCelestialPositions);
+	connect(dsoMgr, &NebulaMgr::maxSizeLimitChanged,        this, &AstroCalcDialog::currentCelestialPositions);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesCoordsChanged, this, &AstroCalcDialog::currentCelestialPositions);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesOtherChanged, this, &AstroCalcDialog::currentCelestialPositions);
 	
 	ui->hecSelectedMinorPlanetsCheckBox->setChecked(conf->value("astrocalc/flag_hec_minor_planets", false).toBool());
-	connect(ui->hecSelectedMinorPlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveHECFlagMinorPlanets(bool)));
+	connect(ui->hecSelectedMinorPlanetsCheckBox, &QCheckBox::toggled, this, &AstroCalcDialog::saveHECFlagMinorPlanets);
 
 	const bool brightCometsState = conf->value("astrocalc/flag_hec_bright_comets", false).toBool();
 	ui->hecBrightCometsCheckBox->setChecked(brightCometsState);
-	connect(ui->hecBrightCometsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveHECFlagBrightComets(bool)));
+	connect(ui->hecBrightCometsCheckBox, &QCheckBox::toggled, this, &AstroCalcDialog::saveHECFlagBrightComets);
 	ui->hecMagnitudeLimitSpinBox->setValue(conf->value("astrocalc/hec_magnitude_limit", 9.0).toDouble());
 	ui->hecMagnitudeLimitSpinBox->setEnabled(brightCometsState);
-	connect(ui->hecMagnitudeLimitSpinBox, SIGNAL(valueChanged(double)), this,  SLOT(saveHECBrightCometMagnitudeLimit(double)));
-	connect(ui->hecPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentHECPosition(QModelIndex)));
-	connect(ui->hecPositionsTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(markCurrentHECPosition(QModelIndex)));
-	connect(ui->hecPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentHECPositions()));
-	connect(ui->hecPositionsSaveButton, SIGNAL(clicked()), this, SLOT(saveHECPositions()));
-	connect(ui->tabWidgetPositions, SIGNAL(currentChanged(int)), this, SLOT(changePositionsTab(int)));
+	connect(ui->hecMagnitudeLimitSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged), this,  &AstroCalcDialog::saveHECBrightCometMagnitudeLimit);
+	connect(ui->hecPositionsTreeWidget,   &QTreeWidget::doubleClicked,   this, &AstroCalcDialog::selectCurrentHECPosition);
+	connect(ui->hecPositionsTreeWidget,   &QTreeWidget::clicked,         this, &AstroCalcDialog::markCurrentHECPosition);
+	connect(ui->hecPositionsUpdateButton, &QPushButton::clicked,         this, &AstroCalcDialog::currentHECPositions);
+	connect(ui->hecPositionsSaveButton,   &QPushButton::clicked,         this, &AstroCalcDialog::saveHECPositions);
+	connect(ui->tabWidgetPositions,       &QTabWidget::currentChanged,   this, &AstroCalcDialog::changePositionsTab);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesCoordsChanged, this, &AstroCalcDialog::currentHECPositions);
 
-	connectBoolProperty(ui->ephemerisShowLineCheckBox, "SolarSystem.ephemerisLineDisplayed");
-	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
-	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
-	connectBoolProperty(ui->ephemerisShowMagnitudesCheckBox, "SolarSystem.ephemerisMagnitudesDisplayed");
+	connectBoolProperty(ui->ephemerisShowLineCheckBox,              "SolarSystem.ephemerisLineDisplayed");
+	connectBoolProperty(ui->ephemerisShowMarkersCheckBox,           "SolarSystem.ephemerisMarkersDisplayed");
+	connectBoolProperty(ui->ephemerisShowDatesCheckBox,             "SolarSystem.ephemerisDatesDisplayed");
+	connectBoolProperty(ui->ephemerisShowMagnitudesCheckBox,        "SolarSystem.ephemerisMagnitudesDisplayed");
 	connectBoolProperty(ui->ephemerisHorizontalCoordinatesCheckBox, "SolarSystem.ephemerisHorizontalCoordinates");
 	initListEphemeris();
 	initEphemerisFlagNakedEyePlanets();
 	enableEphemerisButtons(buttonState);
 	ui->ephemerisIgnoreDateTestCheckBox->setChecked(conf->value("astrocalc/flag_ephemeris_ignore_date_test", true).toBool());
-	connect(ui->ephemerisIgnoreDateTestCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveIgnoreDateTestFlag(bool)));
-	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGeneratedEphemeris()));
-	connect(ui->allNakedEyePlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveEphemerisFlagNakedEyePlanets(bool)));
-	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
-	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
-	connect(ui->ephemerisSaveButton, SIGNAL(clicked()), this, SLOT(saveEphemeris()));
-	connect(ui->ephemerisTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentEphemeride(QModelIndex)));	
-	connect(ui->ephemerisTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(onChangedEphemerisPosition()));
-	connect(ui->ephemerisStepComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisTimeStep(int)));
-	connect(ui->dateToUnitsComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisTimeUnit(int)));
-	connect(ui->celestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisCelestialBody(int)));
-	connect(ui->secondaryCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisSecondaryCelestialBody(int)));
-	connect(ui->pushButtonNow, SIGNAL(clicked()), this, SLOT(setDateTimeNow()));
-	connect(ui->dateFromYearSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setMonthDuration()));
-	connect(ui->dateFromMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setMonthDuration()));
+	connect(ui->ephemerisIgnoreDateTestCheckBox,        &QCheckBox::toggled, this, &AstroCalcDialog::saveIgnoreDateTestFlag);
+	connect(ui->ephemerisHorizontalCoordinatesCheckBox, &QCheckBox::toggled, this, &AstroCalcDialog::updateGeneratedEphemeris);
+	connect(ui->allNakedEyePlanetsCheckBox,             &QCheckBox::toggled, this, &AstroCalcDialog::saveEphemerisFlagNakedEyePlanets);
+	connect(ui->ephemerisPushButton,    &QPushButton::clicked, this, &AstroCalcDialog::generateEphemeris);
+	connect(ui->ephemerisCleanupButton, &QPushButton::clicked, this, &AstroCalcDialog::cleanupEphemeris);
+	connect(ui->ephemerisSaveButton,    &QPushButton::clicked, this, &AstroCalcDialog::saveEphemeris);
+	connect(ui->ephemerisTreeWidget,    &QTreeWidget::doubleClicked,        this, &AstroCalcDialog::selectCurrentEphemeride);
+	connect(ui->ephemerisTreeWidget,    &QTreeWidget::itemSelectionChanged, this, &AstroCalcDialog::onChangedEphemerisPosition);
+	connect(ui->ephemerisStepComboBox,  qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisTimeStep);
+	connect(ui->dateToUnitsComboBox,    qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisTimeUnit);
+	connect(ui->celestialBodyComboBox,  qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisCelestialBody);
+	connect(ui->secondaryCelestialBodyComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveEphemerisSecondaryCelestialBody);
+	connect(ui->pushButtonNow, &QToolButton::clicked, this, &AstroCalcDialog::setDateTimeNow);
+	connect(ui->dateFromYearSpinBox,  qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::setMonthDuration);
+	connect(ui->dateFromMonthSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::setMonthDuration);
 	ui->dateToDurationSpinBox->setValue(conf->value("astrocalc/ephemeris_time_duration", 1).toInt());
-	connect(ui->dateToDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveEphemerisTimeDuration(int)));
-	connect(core, SIGNAL(flagUseAberrationChanged(bool)), this, SLOT(updateGeneratedEphemeris()));
-	connect(core, SIGNAL(aberrationFactorChanged(double)), this, SLOT(updateGeneratedEphemeris()));
+	connect(ui->dateToDurationSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveEphemerisTimeDuration);
+	connect(core, &StelCore::flagUseAberrationChanged, this, &AstroCalcDialog::updateGeneratedEphemeris);
+	connect(core, &StelCore::aberrationFactorChanged,  this, &AstroCalcDialog::updateGeneratedEphemeris);
 
-	ui->genericMarkerColor->setup("SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
+	ui->genericMarkerColor->setup(  "SolarSystem.ephemerisGenericMarkerColor",   "color/ephemeris_generic_marker_color");
 	ui->secondaryMarkerColor->setup("SolarSystem.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
-	ui->selectedMarkerColor->setup("SolarSystem.ephemerisSelectedMarkerColor", "color/ephemeris_selected_marker_color");
-	ui->mercuryMarkerColor->setup("SolarSystem.ephemerisMercuryMarkerColor", "color/ephemeris_mercury_marker_color");
-	ui->venusMarkerColor->setup("SolarSystem.ephemerisVenusMarkerColor", "color/ephemeris_venus_marker_color");
-	ui->marsMarkerColor->setup("SolarSystem.ephemerisMarsMarkerColor", "color/ephemeris_mars_marker_color");
-	ui->jupiterMarkerColor->setup("SolarSystem.ephemerisJupiterMarkerColor", "color/ephemeris_jupiter_marker_color");
-	ui->saturnMarkerColor->setup("SolarSystem.ephemerisSaturnMarkerColor", "color/ephemeris_saturn_marker_color");
+	ui->selectedMarkerColor->setup( "SolarSystem.ephemerisSelectedMarkerColor",  "color/ephemeris_selected_marker_color");
+	ui->mercuryMarkerColor->setup(  "SolarSystem.ephemerisMercuryMarkerColor",   "color/ephemeris_mercury_marker_color");
+	ui->venusMarkerColor->setup(    "SolarSystem.ephemerisVenusMarkerColor",     "color/ephemeris_venus_marker_color");
+	ui->marsMarkerColor->setup(     "SolarSystem.ephemerisMarsMarkerColor",      "color/ephemeris_mars_marker_color");
+	ui->jupiterMarkerColor->setup(  "SolarSystem.ephemerisJupiterMarkerColor",   "color/ephemeris_jupiter_marker_color");
+	ui->saturnMarkerColor->setup(   "SolarSystem.ephemerisSaturnMarkerColor",    "color/ephemeris_saturn_marker_color");
 
 	// Tab: Rises/Transits/Sets
 	initListRTS();
 	enableRTSButtons(buttonState);
-	connect(ui->rtsCalculateButton, SIGNAL(clicked()), this, SLOT(generateRTS()));
-	connect(ui->rtsCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupRTS()));
-	connect(ui->rtsSaveButton, SIGNAL(clicked()), this, SLOT(saveRTS()));
-	connect(ui->rtsTreeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(selectCurrentRTS(QTreeWidgetItem*,int)));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(setRTSCelestialBodyName()));
+	connect(ui->rtsCalculateButton, &QPushButton::clicked, this, &AstroCalcDialog::generateRTS);
+	connect(ui->rtsCleanupButton,   &QPushButton::clicked, this, &AstroCalcDialog::cleanupRTS);
+	connect(ui->rtsSaveButton,      &QPushButton::clicked, this, &AstroCalcDialog::saveRTS);
+	connect(ui->rtsTreeWidget, &QTreeWidget::itemDoubleClicked, this, &AstroCalcDialog::selectCurrentRTS);
+	connect(objectMgr, &StelObjectMgr::selectedObjectChanged, this, &AstroCalcDialog::setRTSCelestialBodyName);
 
 	// Tab: Eclipses
 	ui->eclipseYearsSpinBox->setValue(conf->value("astrocalc/eclipse_future_years", 10).toInt());
-	connect(ui->eclipseYearsSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=](int val){conf->setValue("astrocalc/eclipse_future_years", val);}); // Make that a permanent decision.
+	connect(ui->eclipseYearsSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, [=](int val){conf->setValue("astrocalc/eclipse_future_years", val);}); // Make that a permanent decision.
 	initListLunarEclipse();
 	enableLunarEclipsesButtons(buttonState);
-	connect(ui->lunareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateLunarEclipses()));
-	connect(ui->lunareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupLunarEclipses()));
-	connect(ui->lunareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipses()));
+	connect(ui->lunareclipsesCalculateButton, &QPushButton::clicked, this, &AstroCalcDialog::generateLunarEclipses);
+	connect(ui->lunareclipsesCleanupButton, &QPushButton::clicked, this, &AstroCalcDialog::cleanupLunarEclipses);
+	connect(ui->lunareclipsesSaveButton, &QPushButton::clicked, this, &AstroCalcDialog::saveLunarEclipses);
 	initListLunarEclipseContact();
 	enableLunarEclipsesCircumstancesButtons(buttonState);
-	connect(ui->lunareclipsescontactsSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipseCircumstances()));
-	connect(ui->lunareclipseTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipse(QModelIndex)));
-	connect(ui->lunareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipseDate(QModelIndex)));
-	connect(ui->lunareclipsecontactsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipseContact(QModelIndex)));
+	connect(ui->lunareclipsescontactsSaveButton, &QPushButton::clicked, this, &AstroCalcDialog::saveLunarEclipseCircumstances);
+	connect(ui->lunareclipseTreeWidget,          &QTreeWidget::clicked, this, &AstroCalcDialog::selectCurrentLunarEclipse);
+	connect(ui->lunareclipseTreeWidget,          &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectCurrentLunarEclipseDate);
+	connect(ui->lunareclipsecontactsTreeWidget,  &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectCurrentLunarEclipseContact);
 	initListSolarEclipse();
 	enableSolarEclipsesButtons(buttonState);
-	connect(ui->solareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateSolarEclipses()));
-	connect(ui->solareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupSolarEclipses()));
-	connect(ui->solareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipses()));
+	connect(ui->solareclipsesCalculateButton, &QPushButton::clicked, this, &AstroCalcDialog::generateSolarEclipses);
+	connect(ui->solareclipsesCleanupButton,   &QPushButton::clicked, this, &AstroCalcDialog::cleanupSolarEclipses);
+	connect(ui->solareclipsesSaveButton,      &QPushButton::clicked, this, &AstroCalcDialog::saveSolarEclipses);
 	initListSolarEclipseContact();
 	enableSolarEclipsesCircumstancesButtons(buttonState);
-	connect(ui->solareclipsescontactsSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipseCircumstances()));
-	connect(ui->solareclipsesMapSaveButton, &QPushButton::clicked, this, [this]{saveSolarEclipseMap(false);});
+	connect(ui->solareclipsescontactsSaveButton, &QPushButton::clicked, this, &AstroCalcDialog::saveSolarEclipseCircumstances);
+	connect(ui->solareclipsesMapSaveButton,      &QPushButton::clicked, this, [this]{saveSolarEclipseMap(false);});
 	connect(ui->solareclipseslocalMapSaveButton, &QPushButton::clicked, this, [this]{saveSolarEclipseMap(true);});
-	connect(ui->solareclipseTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipse(QModelIndex)));
-	connect(ui->solareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseDate(QModelIndex)));
-	connect(ui->solareclipsecontactsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseContact(QModelIndex)));
+	connect(ui->solareclipseTreeWidget,          &QTreeWidget::clicked, this, &AstroCalcDialog::selectCurrentSolarEclipse);
+	connect(ui->solareclipseTreeWidget,          &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectCurrentSolarEclipseDate);
+	connect(ui->solareclipsecontactsTreeWidget,  &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectCurrentSolarEclipseContact);
 	initListSolarEclipseLocal();
 	enableSolarEclipsesLocalButtons(buttonState);
 	enableSolarEclipsesLocalSingleEclipseButtons(buttonState);
-	connect(ui->solareclipseslocalCalculateButton, SIGNAL(clicked()), this, SLOT(generateSolarEclipsesLocal()));
-	connect(ui->solareclipseslocalCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupSolarEclipsesLocal()));
-	connect(ui->solareclipseslocalSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipsesLocal()));
-	connect(ui->solareclipselocalTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseLocal(QModelIndex)));
-	connect(ui->solareclipselocalTreeWidget, &QTreeWidget::clicked, this, [this]{ enableSolarEclipsesLocalSingleEclipseButtons(true); });
+	connect(ui->solareclipseslocalCalculateButton, &QPushButton::clicked, this, &AstroCalcDialog::generateSolarEclipsesLocal);
+	connect(ui->solareclipseslocalCleanupButton,   &QPushButton::clicked, this, &AstroCalcDialog::cleanupSolarEclipsesLocal);
+	connect(ui->solareclipseslocalSaveButton,      &QPushButton::clicked, this, &AstroCalcDialog::saveSolarEclipsesLocal);
+	connect(ui->solareclipselocalTreeWidget,       &QTreeWidget::clicked, this, [this]{ enableSolarEclipsesLocalSingleEclipseButtons(true); });
+	connect(ui->solareclipselocalTreeWidget,       &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectCurrentSolarEclipseLocal);
 	initListTransit();
 	enableTransitsButtons(buttonState);
-	connect(ui->transitsCalculateButton, SIGNAL(clicked()), this, SLOT(generateTransits()));
-	connect(ui->transitsCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupTransits()));
-	connect(ui->transitsSaveButton, SIGNAL(clicked()), this, SLOT(saveTransits()));
-	connect(ui->transitTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentTransit(QModelIndex)));
+	connect(ui->transitsCalculateButton, &QPushButton::clicked, this, &AstroCalcDialog::generateTransits);
+	connect(ui->transitsCleanupButton,   &QPushButton::clicked, this, &AstroCalcDialog::cleanupTransits);
+	connect(ui->transitsSaveButton,      &QPushButton::clicked, this, &AstroCalcDialog::saveTransits);
+	connect(ui->transitTreeWidget,       &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectCurrentTransit);
 
-	connect(ui->eclipseFilterTotal, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
-	connect(ui->eclipseFilterHybrid, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
-	connect(ui->eclipseFilterAnnular, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
-	connect(ui->eclipseFilterPartial, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+	connect(ui->eclipseFilterTotal,     &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+	connect(ui->eclipseFilterHybrid,    &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+	connect(ui->eclipseFilterAnnular,   &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+	connect(ui->eclipseFilterPartial,   &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
 	connect(ui->eclipseFilterPenumbral, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
 
 	// Let's use DMS and decimal degrees as acceptable values for "Maximum allowed separation" input box
@@ -401,22 +403,22 @@ void AstroCalcDialog::createDialogContent()
 	enablePhenomenaButtons(buttonState);
 
 	ui->phenomenaOppositionCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_opposition", false).toBool());
-	connect(ui->phenomenaOppositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaOppositionFlag(bool)));
+	connect(ui->phenomenaOppositionCheckBox, &QCheckBox::toggled, this, &AstroCalcDialog::savePhenomenaOppositionFlag);
 	ui->phenomenaPerihelionAphelionCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_perihelion", false).toBool());
-	connect(ui->phenomenaPerihelionAphelionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaPerihelionAphelionFlag(bool)));
+	connect(ui->phenomenaPerihelionAphelionCheckBox, &QCheckBox::toggled, this, &AstroCalcDialog::savePhenomenaPerihelionAphelionFlag);
 	ui->phenomenaElongationQuadratureCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_quadratures", false).toBool());
-	connect(ui->phenomenaElongationQuadratureCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaElongationsQuadraturesFlag(bool)));
+	connect(ui->phenomenaElongationQuadratureCheckBox, &QCheckBox::toggled, this, &AstroCalcDialog::savePhenomenaElongationsQuadraturesFlag);
 	ui->allowedSeparationSpinBox->setDegrees(conf->value("astrocalc/phenomena_angular_separation", 1.0).toDouble());
-	connect(ui->allowedSeparationSpinBox, SIGNAL(valueChanged()), this, SLOT(savePhenomenaAngularSeparation()));
+	connect(ui->allowedSeparationSpinBox, &AngleSpinBox::valueChanged, this, &AstroCalcDialog::savePhenomenaAngularSeparation);
 
-	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
-	connect(ui->phenomenaCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupPhenomena()));
-	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
-	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
-	connect(ui->object1ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialBody(int)));
-	connect(ui->object2ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialGroup(int)));
-	connect(ui->selectObjectButton, SIGNAL(clicked()), this, SLOT(selectStoredObject()));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(populateSelectedObject()));
+	connect(ui->phenomenaPushButton,    &QPushButton::clicked, this, &AstroCalcDialog::calculatePhenomena);
+	connect(ui->phenomenaCleanupButton, &QPushButton::clicked, this, &AstroCalcDialog::cleanupPhenomena);
+	connect(ui->phenomenaTreeWidget,    &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectCurrentPhenomen);
+	connect(ui->phenomenaSaveButton,    &QPushButton::clicked, this, &AstroCalcDialog::savePhenomena);
+	connect(ui->object1ComboBox,        qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::savePhenomenaCelestialBody);
+	connect(ui->object2ComboBox,        qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::savePhenomenaCelestialGroup);
+	connect(ui->selectObjectButton,     &QPushButton::clicked, this, &AstroCalcDialog::selectStoredObject);
+	connect(objectMgr, &StelObjectMgr::selectedObjectChanged, this, &AstroCalcDialog::populateSelectedObject);
 
 	plotAltVsTimeSun = conf->value("astrocalc/altvstime_sun", false).toBool();
 	plotAltVsTimeMoon = conf->value("astrocalc/altvstime_moon", false).toBool();
@@ -426,16 +428,16 @@ void AstroCalcDialog::createDialogContent()
 	ui->moonAltitudeCheckBox->setChecked(plotAltVsTimeMoon);
 	ui->positiveAltitudeOnlyCheckBox->setChecked(plotAltVsTimePositive);
 	ui->positiveAltitudeLimitSpinBox->setValue(conf->value("astrocalc/altvstime_positive_limit", 0).toInt());
-	connect(ui->sunAltitudeCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimeSunFlag(bool)));
-	connect(ui->moonAltitudeCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimeMoonFlag(bool)));
-	connect(ui->positiveAltitudeOnlyCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimePositiveFlag(bool)));
-	connect(ui->positiveAltitudeLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveAltVsTimePositiveLimit(int)));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAziVsTimeDiagram()));
-	connect(core, SIGNAL(dateChanged()), this, SLOT(drawCurrentTimeDiagram()));
-	connect(this, SIGNAL(graphDayChanged()), this, SLOT(drawAltVsTimeDiagram()));
-	connect(this, SIGNAL(graphDayChanged()), this, SLOT(drawAziVsTimeDiagram()));
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
+	connect(ui->sunAltitudeCheckBox,          &QCheckBox::toggled,     this, &AstroCalcDialog::saveAltVsTimeSunFlag);
+	connect(ui->moonAltitudeCheckBox,         &QCheckBox::toggled,     this, &AstroCalcDialog::saveAltVsTimeMoonFlag);
+	connect(ui->positiveAltitudeOnlyCheckBox, &QCheckBox::toggled,     this, &AstroCalcDialog::saveAltVsTimePositiveFlag);
+	connect(ui->positiveAltitudeLimitSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveAltVsTimePositiveLimit);
+	connect(objectMgr, &StelObjectMgr::selectedObjectChanged, this, &AstroCalcDialog::drawAltVsTimeDiagram);
+	connect(objectMgr, &StelObjectMgr::selectedObjectChanged, this, &AstroCalcDialog::drawAziVsTimeDiagram);
+	connect(core, &StelCore::dateChanged,             this, &AstroCalcDialog::drawCurrentTimeDiagram);
+	connect(this, &AstroCalcDialog::graphDayChanged,  this, &AstroCalcDialog::drawAltVsTimeDiagram);
+	connect(this, &AstroCalcDialog::graphDayChanged,  this, &AstroCalcDialog::drawAziVsTimeDiagram);
+	connect(this, &AstroCalcDialog::visibleChanged,   this, &AstroCalcDialog::handleVisibleEnabled);
 
 	// Monthly Elevation
 	plotMonthlyElevationPositive = conf->value("astrocalc/me_positive_only", false).toBool();
@@ -444,30 +446,30 @@ void AstroCalcDialog::createDialogContent()
 	ui->monthlyElevationPositiveLimitSpinBox->setValue(monthlyElevationPositiveLimit);
 	ui->monthlyElevationTime->setValue(conf->value("astrocalc/me_time", 0).toInt());
 	syncMonthlyElevationTime();
-	connect(ui->monthlyElevationTime, SIGNAL(valueChanged(int)), this, SLOT(updateMonthlyElevationTime()));
-	connect(ui->monthlyElevationPositiveCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMonthlyElevationPositiveFlag(bool)));
-	connect(ui->monthlyElevationPositiveLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveMonthlyElevationPositiveLimit(int)));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawMonthlyElevationGraph()));
-	connect(core, SIGNAL(dateChangedByYear(const int)), this, SLOT(drawMonthlyElevationGraph()));
+	connect(ui->monthlyElevationTime,                 &QSlider::valueChanged,  this, &AstroCalcDialog::updateMonthlyElevationTime);
+	connect(ui->monthlyElevationPositiveCheckBox,     &QCheckBox::toggled,     this, &AstroCalcDialog::saveMonthlyElevationPositiveFlag);
+	connect(ui->monthlyElevationPositiveLimitSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveMonthlyElevationPositiveLimit);
+	connect(objectMgr, &StelObjectMgr::selectedObjectChanged, this, &AstroCalcDialog::drawMonthlyElevationGraph);
+	connect(core, &StelCore::dateChangedByYear,               this, &AstroCalcDialog::drawMonthlyElevationGraph);
 
-	connect(ui->graphsCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsCelestialBody(int)));
-	connect(ui->graphsFirstComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsFirstId(int)));
-	connect(ui->graphsSecondComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsSecondId(int)));
+	connect(ui->graphsCelestialBodyComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveGraphsCelestialBody);
+	connect(ui->graphsFirstComboBox,         qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveGraphsFirstId);
+	connect(ui->graphsSecondComboBox,        qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveGraphsSecondId);
 	graphsDuration = qBound(1, conf->value("astrocalc/graphs_duration",1).toInt(), 600);
 	ui->graphsDurationSpinBox->setValue(graphsDuration);
-	connect(ui->graphsDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateGraphsDuration(int)));
+	connect(ui->graphsDurationSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::updateGraphsDuration);
 	graphsStep = qBound(1, conf->value("astrocalc/graphs_step",1).toInt(), 240);
 	ui->graphsHourStepsSpinBox->setValue(graphsStep);
-	connect(ui->graphsHourStepsSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateGraphsStep(int)));
-	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateXVsTimeGraphs()));	
+	connect(ui->graphsHourStepsSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::updateGraphsStep);
+	connect(ui->drawGraphsPushButton,   &QPushButton::clicked,   this, &AstroCalcDialog::drawXVsTimeGraphs);
+	connect(objectMgr, &StelObjectMgr::selectedObjectChanged,    this, &AstroCalcDialog::updateXVsTimeGraphs);
 
 	ui->lunarElongationLimitSpinBox->setValue(conf->value("astrocalc/angular_distance_limit", 40).toInt());
-	connect(ui->lunarElongationLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveLunarElongationLimit(int)));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawLunarElongationGraph()));
-	connect(core, SIGNAL(dateChanged()), this, SLOT(drawLunarElongationGraph()));
+	connect(ui->lunarElongationLimitSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcDialog::saveLunarElongationLimit);
+	connect(objectMgr, &StelObjectMgr::selectedObjectChanged,         this, &AstroCalcDialog::drawLunarElongationGraph);
+	connect(core, &StelCore::dateChanged,                             this, &AstroCalcDialog::drawLunarElongationGraph);
 
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
+	connect(this, &AstroCalcDialog::visibleChanged, this, &AstroCalcDialog::handleVisibleEnabled);
 
 	/*
 	wutModel = new QStringListModel(this);
@@ -501,87 +503,88 @@ void AstroCalcDialog::createDialogContent()
 	ui->wutAngularSizeLimitMinSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_min", 10.0).toDouble()/60.0);
 	ui->wutAngularSizeLimitMaxSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_max", 600.0).toDouble()/60.0);
 	ui->wutAltitudeMinSpinBox->setDegrees(conf->value("astrocalc/wut_altitude_min", 0.0).toDouble());
-	connect(ui->wutAngularSizeLimitCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveWutAngularSizeFlag(bool)));
-	connect(ui->wutAngularSizeLimitMinSpinBox, SIGNAL(valueChanged()), this, SLOT(saveWutMinAngularSizeLimit()));
-	connect(ui->wutAngularSizeLimitMaxSpinBox, SIGNAL(valueChanged()), this, SLOT(saveWutMaxAngularSizeLimit()));
-	connect(ui->wutAltitudeMinSpinBox, SIGNAL(valueChanged()), this, SLOT(saveWutMinAltitude()));
+	connect(ui->wutAngularSizeLimitCheckBox,   &QCheckBox::toggled,         this, &AstroCalcDialog::saveWutAngularSizeFlag);
+	connect(ui->wutAngularSizeLimitMinSpinBox, &AngleSpinBox::valueChanged, this, &AstroCalcDialog::saveWutMinAngularSizeLimit);
+	connect(ui->wutAngularSizeLimitMaxSpinBox, &AngleSpinBox::valueChanged, this, &AstroCalcDialog::saveWutMaxAngularSizeLimit);
+	connect(ui->wutAltitudeMinSpinBox,         &AngleSpinBox::valueChanged, this, &AstroCalcDialog::saveWutMinAltitude);
 
 	ui->wutMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/wut_magnitude_limit", 10.0).toDouble());
-	connect(ui->wutMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveWutMagnitudeLimit(double)));
-	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveWutTimeInterval(int)));
-	connect(ui->wutCategoryListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(calculateWutObjects()));
-	//connect(ui->wutMatchingObjectsTreeWidget->selectionModel() , SIGNAL(currentRowChanged(const QModelIndex&, const QModelIndex&)),
-	//	this, SLOT(selectWutObject(const QModelIndex&)));
-	connect(ui->wutMatchingObjectsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectWutObject(QModelIndex)));
-	connect(ui->saveObjectsButton, SIGNAL(clicked()), this, SLOT(saveWutObjects()));
-	//connect(ui->wutMatchingObjectsLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
+	connect(ui->wutMagnitudeDoubleSpinBox, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &AstroCalcDialog::saveWutMagnitudeLimit);
+	connect(ui->wutComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveWutTimeInterval);
+	connect(ui->wutCategoryListWidget, &QListWidget::currentRowChanged, this, &AstroCalcDialog::calculateWutObjects);
+	//connect(ui->wutMatchingObjectsTreeWidget->selectionModel() , &QItemSelectionModel::currentRowChanged, this, &AstroCalcDialog::selectWutObject);
+	connect(ui->wutMatchingObjectsTreeWidget, &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectWutObject);
+	connect(ui->saveObjectsButton, &QPushButton::clicked, this, &AstroCalcDialog::saveWutObjects);
+	//connect(ui->wutMatchingObjectsLineEdit, &QLineEdit::textChanged, proxyModel, &QSortFilterProxyModel::setFilterWildcard);
 	ui->wutMatchingObjectsLineEdit->setVisible(false);
-	connect(dsoMgr, SIGNAL(catalogFiltersChanged(int)), this, SLOT(calculateWutObjects()));
-	connect(dsoMgr, SIGNAL(typeFiltersChanged(int)), this, SLOT(calculateWutObjects()));
-	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(calculateWutObjects()));
-	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
-	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
-	connect(core, SIGNAL(dateChanged()), this, SLOT(calculateWutObjects()));
+	connect(dsoMgr, &NebulaMgr::catalogFiltersChanged,      this, &AstroCalcDialog::calculateWutObjects);
+	connect(dsoMgr, &NebulaMgr::typeFiltersChanged,         this, &AstroCalcDialog::calculateWutObjects);
+	connect(dsoMgr, &NebulaMgr::flagSizeLimitsUsageChanged, this, &AstroCalcDialog::calculateWutObjects);
+	connect(dsoMgr, &NebulaMgr::minSizeLimitChanged,        this, &AstroCalcDialog::calculateWutObjects);
+	connect(dsoMgr, &NebulaMgr::maxSizeLimitChanged,        this, &AstroCalcDialog::calculateWutObjects);
+	connect(core,   &StelCore::dateChanged,                 this, &AstroCalcDialog::calculateWutObjects);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesOtherChanged, this, &AstroCalcDialog::calculateWutObjects);
 
 	QAction *clearAction = ui->wutMatchingObjectsLineEdit->addAction(QIcon(":/graphicGui/uieBackspaceInputButton.png"), QLineEdit::ActionPosition::TrailingPosition);
-	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchWutClear()));
+	connect(clearAction, &QAction::triggered, this, &AstroCalcDialog::searchWutClear);
 	StelModuleMgr& moduleMgr = StelApp::getInstance().getModuleMgr();
 	if (moduleMgr.isPluginLoaded("Quasars"))
 	{
 		#ifdef USE_STATIC_PLUGIN_QUASARS
 		Quasars* qsoMgr = GETSTELMODULE(Quasars);
-		connect(qsoMgr, SIGNAL(flagQuasarsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+		connect(qsoMgr, &Quasars::flagQuasarsVisibilityChanged, this, &AstroCalcDialog::calculateWutObjects);
 		#endif
 	}
 	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{
 		#ifdef USE_STATIC_PLUGIN_PULSARS
 		Pulsars* psrMgr = GETSTELMODULE(Pulsars);
-		connect(psrMgr, SIGNAL(flagPulsarsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
-		//connect(psrMgr, SIGNAL(flagPulsarsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+		connect(psrMgr, &Pulsars::flagPulsarsVisibilityChanged, this, &AstroCalcDialog::populateWutGroups);
+		//connect(psrMgr, &Pulsars::flagPulsarsVisibilityChanged, this, &AstroCalcDialog::calculateWutObjects);
 		#endif
 	}
 	if (moduleMgr.isPluginLoaded("Exoplanets"))
 	{
 		#ifdef USE_STATIC_PLUGIN_EXOPLANETS
 		Exoplanets* epMgr = GETSTELMODULE(Exoplanets);
-		connect(epMgr, SIGNAL(flagExoplanetsVisibilityChanged(bool)), this, SLOT(populateWutGroups()));
-		//connect(epMgr, SIGNAL(flagExoplanetsVisibilityChanged(bool)), this, SLOT(calculateWutObjects()));
+		connect(epMgr, &Exoplanets::flagExoplanetsVisibilityChanged, this, &AstroCalcDialog::populateWutGroups);
+		//connect(epMgr, &Exoplanets::flagExoplanetsVisibilityChanged, this, &AstroCalcDialog::calculateWutObjects);
 		#endif
 	}
 
 	currentCelestialPositions();
 
 	currentTimeLine = new QTimer(this);
-	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
-	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(computePlanetaryData()));
+	connect(currentTimeLine, &QTimer::timeout, this, &AstroCalcDialog::drawCurrentTimeDiagram);
+	connect(currentTimeLine, &QTimer::timeout, this, &AstroCalcDialog::computePlanetaryData);
 	currentTimeLine->start(1000); // Update 'now' line position every second
 
-	connect(ui->firstCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveFirstCelestialBody(int)));
-	connect(ui->secondCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveSecondCelestialBody(int)));
-	connect(core, SIGNAL(dateChanged()), this, SLOT(drawDistanceGraph()));
+	connect(ui->firstCelestialBodyComboBox,  qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveFirstCelestialBody);
+	connect(ui->secondCelestialBodyComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &AstroCalcDialog::saveSecondCelestialBody);
+	connect(core, &StelCore::dateChanged, this, &AstroCalcDialog::drawDistanceGraph);
 
-	connect(solarSystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateSolarSystemData()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAstroCalcData()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawMonthlyElevationGraph()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawDistanceGraph()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawLunarElongationGraph()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(initEphemerisFlagNakedEyePlanets()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(generateRTS()));
+	connect(solarSystem, &SolarSystem::solarSystemDataReloaded, this, &AstroCalcDialog::updateSolarSystemData);
+	connect(core, &StelCore::locationChanged, this, &AstroCalcDialog::updateAstroCalcData);
+	connect(core, &StelCore::locationChanged, this, &AstroCalcDialog::drawAltVsTimeDiagram);
+	connect(core, &StelCore::locationChanged, this, &AstroCalcDialog::drawMonthlyElevationGraph);
+	connect(core, &StelCore::locationChanged, this, &AstroCalcDialog::drawDistanceGraph);
+	connect(core, &StelCore::locationChanged, this, &AstroCalcDialog::drawLunarElongationGraph);
+	connect(core, &StelCore::locationChanged, this, &AstroCalcDialog::initEphemerisFlagNakedEyePlanets);
+	connect(core, &StelCore::locationChanged, this, &AstroCalcDialog::generateRTS);
 
-	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
-	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
-	connect(ui->tabWidgetPC, SIGNAL(currentChanged(int)), this, SLOT(changePCTab(int)));
-	connect(ui->tabWidgetEclipses, SIGNAL(currentChanged(int)), this, SLOT(changeEclipsesTab(int)));
+	connect(ui->stackListWidget,   &QListWidget::currentItemChanged, this, &AstroCalcDialog::changePage);
+	connect(ui->tabWidgetGraphs,   &QTabWidget::currentChanged,      this, &AstroCalcDialog::changeGraphsTab);
+	connect(ui->tabWidgetPC,       &QTabWidget::currentChanged,      this, &AstroCalcDialog::changePCTab);
+	connect(ui->tabWidgetEclipses, &QTabWidget::currentChanged,      this, &AstroCalcDialog::changeEclipsesTab);
 	changeEclipsesTab(ui->tabWidgetEclipses->currentIndex());
 
-	connect(ui->pushButtonExtraEphemerisDialog, SIGNAL(clicked()), this, SLOT(showExtraEphemerisDialog()));
-	connect(ui->pushButtonCustomStepsDialog, SIGNAL(clicked()), this, SLOT(showCustomStepsDialog()));
+	connect(ui->pushButtonExtraEphemerisDialog, &QToolButton::clicked, this, &AstroCalcDialog::showExtraEphemerisDialog);
+	connect(ui->pushButtonCustomStepsDialog,    &QToolButton::clicked, this, &AstroCalcDialog::showCustomStepsDialog);
+	connect(ui->pushFindSelectedSSO,            &QToolButton::clicked, this, &AstroCalcDialog::findSelectedSSO);
 
 	// Tab: Almanac
 	ui->astroCalcAlmanac->setup();
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAlmanacWidgetVisibility()));
+	connect(core, &StelCore::locationChanged, this, &AstroCalcDialog::updateAlmanacWidgetVisibility);
 	updateAlmanacWidgetVisibility();
 
 	updateTabBarListWidgetWidth();
@@ -598,15 +601,15 @@ void AstroCalcDialog::createDialogContent()
 	ui->drawGraphsPushButton->setShortcut(QKeySequence("Shift+F10"));
 
 	// chartview exports:
-	connect(ui->hecPositionsExportButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->hecPositionsChartView); });
-	connect(ui->exportAltVsTimePushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->altVsTimeChartView); });
-	connect(ui->exportAziVsTimePushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->aziVsTimeChartView); });
+	connect(ui->hecPositionsExportButton,         &QPushButton::clicked, this, [=]{ saveGraph(ui->hecPositionsChartView); });
+	connect(ui->exportAltVsTimePushButton,        &QPushButton::clicked, this, [=]{ saveGraph(ui->altVsTimeChartView); });
+	connect(ui->exportAziVsTimePushButton,        &QPushButton::clicked, this, [=]{ saveGraph(ui->aziVsTimeChartView); });
 	connect(ui->exportMonthlyElevationPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->monthlyElevationChartView); });
-	connect(ui->exportGraphsPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->twoGraphsChartView); });
-	connect(ui->exportLunarElongationPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->lunarElongationChartView); });
-	connect(ui->exportPCPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->pcChartView); });
+	connect(ui->exportGraphsPushButton,           &QPushButton::clicked, this, [=]{ saveGraph(ui->twoGraphsChartView); });
+	connect(ui->exportLunarElongationPushButton,  &QPushButton::clicked, this, [=]{ saveGraph(ui->lunarElongationChartView); });
+	connect(ui->exportPCPushButton,               &QPushButton::clicked, this, [=]{ saveGraph(ui->pcChartView); });
 
-	connect(core, SIGNAL(ephemAlgorithmChanged()), this, SLOT(updateMinMaxDateRange()));
+	connect(core, &StelCore::ephemAlgorithmChanged, this, &AstroCalcDialog::updateMinMaxDateRange);
 
 	// NOTE: populating tooltips should be doing after initialization and setting the values for all spinboxes
 	populateToolTips();
@@ -1141,7 +1144,8 @@ void AstroCalcDialog::currentCelestialPositions()
 	const double mag = ui->celestialMagnitudeDoubleSpinBox->value();
 	const bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegreeCoords = StelApp::getInstance().getFlagUseDecDegreesCoords();
+	const bool withDecimalDegreeOther = StelApp::getInstance().getFlagUseDecDegreesOther();
 
 	const double JD = core->getJD();
 	const double utcOffsetHrs = core->getUTCOffset(JD);
@@ -1199,7 +1203,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 			if (obj->objectInDisplayedCatalog() && obj->objectInAllowedSizeRangeLimits() && passByBrightness && obj->isAboveRealHorizon(core))
 			{
-				coordStrings = getStringCoordinates(horizon ? obj->getAltAzPosAuto(core) : obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+				coordStrings = getStringCoordinates(horizon ? obj->getAltAzPosAuto(core) : obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 
 				QString celObjName = obj->getNameI18n();
 				QString celObjId = obj->getDSODesignation();
@@ -1227,14 +1231,14 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[3]!=20)
 				{
 					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
-					if (withDecimalDegree)
+					if (withDecimalDegreeOther)
 						sMaxElevation = StelUtils::radToDecDegStr(computeMaxElevation(qSharedPointerCast<StelObject>(obj)), 5, false, true);
 					else
 						sMaxElevation = StelUtils::radToDmsPStr(computeMaxElevation(qSharedPointerCast<StelObject>(obj)), 2);
 				}
 
 				angularDistance = obj->getJ2000EquatorialPos(core).angle(sun->getJ2000EquatorialPos(core));
-				if (withDecimalDegree)
+				if (withDecimalDegreeOther)
 					elongStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
 				else
 					elongStr = StelUtils::radToDmsStr(angularDistance, true);
@@ -1309,9 +1313,9 @@ void AstroCalcDialog::currentCelestialPositions()
 				Vec3d pos = planet->getJ2000EquatorialPos(core);
 
 				if (horizon)
-					coordStrings = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+					coordStrings = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 				else
-					coordStrings = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+					coordStrings = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 
 				QString extra = QString::number(pos.norm(), 'f', 5); // A.U.
 
@@ -1328,7 +1332,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[3]!=20)
 				{
 					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
-					if (withDecimalDegree)
+					if (withDecimalDegreeOther)
 						sMaxElevation = StelUtils::radToDecDegStr(computeMaxElevation(qSharedPointerCast<StelObject>(planet)), 5, false, true);
 					else
 						sMaxElevation = StelUtils::radToDmsPStr(computeMaxElevation(qSharedPointerCast<StelObject>(planet)), 2);
@@ -1337,7 +1341,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (planet!=sun)
 				{
 					angularDistance = planet->getElongation(core->getObserverHeliocentricEclipticPos());
-					if (withDecimalDegree)
+					if (withDecimalDegreeOther)
 						elongStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
 					else
 						elongStr = StelUtils::radToDmsStr(angularDistance, true);
@@ -1388,9 +1392,9 @@ void AstroCalcDialog::currentCelestialPositions()
 			if (static_cast<double>(obj->getVMagnitudeWithExtinction(core)) <= mag && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
-					coordStrings = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+					coordStrings = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 				else
-					coordStrings = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+					coordStrings = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 
 				if (celTypeId == 170) // double stars
 				{
@@ -1414,14 +1418,14 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.)
 				{
 					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
-					if (withDecimalDegree)
+					if (withDecimalDegreeOther)
 						sMaxElevation = StelUtils::radToDecDegStr(computeMaxElevation(obj), 5, false, true);
 					else
 						sMaxElevation = StelUtils::radToDmsPStr(computeMaxElevation(obj), 2);
 				}
 
 				angularDistance = obj->getJ2000EquatorialPos(core).angle(sun->getJ2000EquatorialPos(core));
-				if (withDecimalDegree)
+				if (withDecimalDegreeOther)
 					elongStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
 				else
 					elongStr = StelUtils::radToDmsStr(angularDistance, true);
@@ -1576,7 +1580,7 @@ void AstroCalcDialog::currentHECPositions()
 	QPair<QString, QString> coordStrings;
 	hecObjects.clear();
 	initListHECPositions();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 	const bool minorPlanets = ui->hecSelectedMinorPlanetsCheckBox->isChecked();
 	const bool brightComets = ui->hecBrightCometsCheckBox->isChecked();
 	const double magLimit = ui->hecMagnitudeLimitSpinBox->value();
@@ -1992,7 +1996,8 @@ void AstroCalcDialog::generateEphemeris()
 	const bool useHorizontalCoords = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
 	const bool ignoreDateTest = ui->ephemerisIgnoreDateTestCheckBox->isChecked();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegreeCoords = StelApp::getInstance().getFlagUseDecDegreesCoords();
+	const bool withDecimalDegreeOther = StelApp::getInstance().getFlagUseDecDegreesOther();
 
 	DisplayedPositionIndex = -1; // deselect an ephemeris marker
 	initListEphemeris();
@@ -2169,7 +2174,7 @@ void AstroCalcDialog::generateEphemeris()
 				pos = obj->getJ2000EquatorialPos(core);
 				sunPos = sun->getJ2000EquatorialPos(core);
 			}
-			QPair<QString, QString> coordStrings = getStringCoordinates(pos, useHorizontalCoords, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+			QPair<QString, QString> coordStrings = getStringCoordinates(pos, useHorizontalCoords, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 
 			Ephemeris item;
 			item.coord = pos;
@@ -2187,7 +2192,7 @@ void AstroCalcDialog::generateEphemeris()
 
 			if (elongStr != dash)
 			{
-				if (withDecimalDegree)
+				if (withDecimalDegreeOther)
 					elongStr = StelUtils::radToDecDegStr(obj->getElongation(observerHelioPos), 5, false, true);
 				else
 					elongStr = StelUtils::radToDmsStr(obj->getElongation(observerHelioPos), true);
@@ -2485,7 +2490,7 @@ void AstroCalcDialog::generateRTS()
 
 		if (!name.isEmpty()) // OK, let's calculate!
 		{
-			const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+			const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 
 			initListRTS();
 
@@ -3119,7 +3124,8 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	PlanetP moon = ssystem->getMoon();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegreeCoords = StelApp::getInstance().getFlagUseDecDegreesCoords();
+	const bool withDecimalDegreeOther = StelApp::getInstance().getFlagUseDecDegreesOther();
 	const double JDMid = modelIndex.sibling(modelIndex.row(), LunarEclipseDate).data(Qt::UserRole).toDouble();
 	const double uMag = modelIndex.sibling(modelIndex.row(), LunarEclipseUMag).data(Qt::UserRole).toDouble();
 
@@ -3194,15 +3200,15 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 			core->update(0);
 			double az, alt;
 			StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
-			QPair<QString, QString> coordStrings = getStringCoordinates(moon->getAltAzPosAuto(core), true, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
+			QPair<QString, QString> coordStrings = getStringCoordinates(moon->getAltAzPosAuto(core), true, useSouthAzimuth, withDecimalDegreeCoords, flagPolarDistance);
 			QString azimuthStr = coordStrings.first;
 			QString altitudeStr = coordStrings.second;
 			treeItem->setText(LunarEclipseContactAltitude, altitudeStr);
 			treeItem->setData(LunarEclipseContactAltitude, Qt::UserRole, alt);
 			treeItem->setText(LunarEclipseContactAzimuth, azimuthStr);
 			treeItem->setData(LunarEclipseContactAzimuth, Qt::UserRole, az);
-			QString latitudeStr = StelUtils::decDegToLatitudeStr(latitude, !withDecimalDegree);
-			QString longitudeStr = StelUtils::decDegToLongitudeStr(longitude, true, false, !withDecimalDegree);
+			QString latitudeStr = StelUtils::decDegToLatitudeStr(latitude, !withDecimalDegreeCoords);
+			QString longitudeStr = StelUtils::decDegToLongitudeStr(longitude, true, false, !withDecimalDegreeCoords);
 			treeItem->setText(LunarEclipseContactLatitude, latitudeStr);
 			treeItem->setData(LunarEclipseContactLatitude, Qt::UserRole, latitude);
 			treeItem->setToolTip(LunarEclipseContactLatitude, q_("Geographic latitude where the Moon appears in the zenith"));
@@ -3210,7 +3216,7 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 			treeItem->setData(LunarEclipseContactLatitude, Qt::UserRole, longitude);
 			treeItem->setToolTip(LunarEclipseContactLongitude, q_("Geographic longitude where the Moon appears in the zenith"));
 			QString positionAngleStr, distanceStr;
-			if (withDecimalDegree)
+			if (withDecimalDegreeOther)
 			{
 				positionAngleStr = StelUtils::radToDecDegStr(positionAngle, 3, false, true);
 				distanceStr = StelUtils::radToDecDegStr(axisDistance, 5, false, true);
@@ -3440,7 +3446,7 @@ void AstroCalcDialog::generateSolarEclipses()
 		const double approxJD = 2451550.09765;
 		const double synodicMonth = 29.530588853;
 		int elements = static_cast<int>((stopJD - startJD) / synodicMonth);
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegreeCoords = StelApp::getInstance().getFlagUseDecDegreesCoords();
 
 		// Find approximate JD of New Moon = Geocentric conjunction in longitude
 		// Source: Astronomical Algorithms (1991), Jean Meeus
@@ -3582,8 +3588,8 @@ void AstroCalcDialog::generateSolarEclipses()
 								durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute), QString::number(durationSecond));
 						}
 
-						latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, !withDecimalDegree);
-						longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true, false, !withDecimalDegree);
+						latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, !withDecimalDegreeCoords);
+						longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true, false, !withDecimalDegreeCoords);
 
 						ACSolarEclipseTreeWidgetItem* treeItem = new ACSolarEclipseTreeWidgetItem(ui->solareclipseTreeWidget);
 						const double utcOffsetHrs = core->getUTCOffset(JD);
@@ -3739,9 +3745,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 						double altitudeFirstcontact = 0.;
 						double altitudeLastcontact = 0.;
 						double JD1 = JD;
-						double JD2 = JD;
 						double JDmax = JD;
-						double JD3 = JD;
 						double JD4 = JD;
 						// First contact
 						iteration = 0;
@@ -3794,7 +3798,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 									JD1 = JD; // time of first contact at Sunrise
 									JDmax = JD; // time of maximum eclipse
 									magLocal = eclipseData.magnitude;
-									magStr = QString::number(eclipseData.magnitude, 'f', 3);
+									magStr = QString::number(magLocal, 'f', 3);
 								}
 							}
 
@@ -3819,13 +3823,13 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 										JD4 = JD; // time of last contact at Sunset
 										JDmax = JD; // time of maximum eclipse
 										magLocal = eclipseData.magnitude;
-										magStr = QString::number(eclipseData.magnitude, 'f', 3);
+										magStr = QString::number(magLocal, 'f', 3);
 									}
 							}
 
 							// 2nd contact - start of totality/annularity
 							iteration = 0;
-							JD2 = JD;
+							double JD2 = JD;
 							eclipseData = localSolarEclipse(JD2,-1,true);
 							dt = eclipseData.dt;
 							while (abs(dt) > 0.000001 && (iteration < 20))
@@ -3838,7 +3842,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							double C2altitude = eclipseData.altitude;
 							// 3rd contact - end of totality/annularity
 							iteration = 0;
-							JD3 = JD;
+							double JD3 = JD;
 							eclipseData = localSolarEclipse(JD3,1,true);
 							dt = eclipseData.dt;
 							while (abs(dt) > 0.000001 && (iteration < 20))
@@ -3979,7 +3983,7 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 	initListSolarEclipseContact();
 	const bool saveTopocentric = core->getUseTopocentricCoordinates();
 	const double currentJD = core->getJD();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 	QPair<QString, QString> coordStrings;
 	QString pathWidthStr, durationStr, eclipseTypeStr;
 	const QString km = qc_("km", "distance");
@@ -4533,7 +4537,7 @@ void AstroCalcDialog::generateTransits()
 		initListTransit();
 		const double currentJD = core->getJD(); // save current JD
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 		for (int p = 0; p < 2; p++)
 		{
 			double startyear = ui->eclipseFromYearSpinBox->value();
@@ -4624,7 +4628,6 @@ void AstroCalcDialog::generateTransits()
 					{
 						double dt = 1.;
 						int iteration = 0;
-						double JDMid = JD;
 						double az, altitudeMidtransit = -1.;
 						double altitudeContact1 = -1., altitudeContact2 = -1., altitudeContact3 = -1., altitudeContact4 = -1.;
 						double JD1 = 0., JD2 = 0., JD3 = 0., JD4 = 0., JDc1 = 0., JDc4 = 0.;
@@ -4639,7 +4642,7 @@ void AstroCalcDialog::generateTransits()
 							JD += dt / 24.;
 							++iteration;
 						}
-						JDMid = JD;
+						const double JDMid = JD;
 						transitMagnitude = transitData.magnitude;
 						core->setJD(JDMid);
 						core->update(0);
@@ -5150,6 +5153,20 @@ void AstroCalcDialog::populateCelestialBodyList()
 	secondCB->blockSignals(false);
 }
 
+void AstroCalcDialog::findSelectedSSO()
+{
+	// select SSO only
+	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject("Planet");
+	if (!selectedObjects.isEmpty())
+	{
+		QString englishName = selectedObjects[0]->getEnglishName();
+		QComboBox* planets = ui->celestialBodyComboBox;
+		int indexP = planets->findData(englishName, Qt::UserRole, Qt::MatchCaseSensitive);
+		if (indexP > 0)
+			planets->setCurrentIndex(indexP);
+	}
+}
+
 void AstroCalcDialog::saveEphemerisCelestialBody(int index)
 {
 	Q_ASSERT(ui->celestialBodyComboBox);
@@ -5620,8 +5637,20 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		drawCurrentTimeDiagram();
 
 		// Transit line
-		QPair<double, double>transit=altVsTimeChart->findYMax(AstroCalcChart::AltVsTime);
-		altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, transit.first);
+		if (isSatellite)
+		{
+			// approx. time of max. transit
+			QPair<double, double>transit=altVsTimeChart->findYMax(AstroCalcChart::AltVsTime);
+			altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, transit.first);
+		}
+		else
+		{
+			Vec4d rts = selectedObject->getRTSTime(core);
+			double transitJD = rts[1];
+			if (transitJD > noon + 1.0)
+				transitJD -= 1.0; // approx. transit time
+			altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, qreal(StelUtils::jdToQDateTime(transitJD, Qt::UTC).toMSecsSinceEpoch()));
+		}
 	}
 	else
 	{
@@ -6481,7 +6510,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	PlanetP moon = solarSystem->getMoon();
 	PlanetP earth = solarSystem->getEarth();
 	PlanetP planet = core->getCurrentPlanet();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	double az, alt;
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
@@ -6660,7 +6689,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	PlanetP moon = solarSystem->getMoon();
 	PlanetP earth = solarSystem->getEarth();
 	PlanetP planet = core->getCurrentPlanet();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	double az, alt;
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
@@ -6735,7 +6764,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	PlanetP moon = solarSystem->getMoon();
 	PlanetP earth = solarSystem->getEarth();
 	PlanetP planet = core->getCurrentPlanet();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	double az, alt;
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
@@ -8037,7 +8066,7 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
 		const Nebula::TypeGroup tflags = static_cast<Nebula::TypeGroup>(dsoMgr->getTypeFilters());
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 		const bool angularSizeLimit = ui->wutAngularSizeLimitCheckBox->isChecked();
 		bool enableAngular = true;
 		const double angularSizeLimitMin = ui->wutAngularSizeLimitMinSpinBox->valueDegrees();

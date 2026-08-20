@@ -654,11 +654,11 @@ StelMainView::StelMainView(QSettings* settings)
 	fpsTimer = new QTimer(this);
 	fpsTimer->setTimerType(Qt::PreciseTimer);
 	fpsTimer->setInterval(qRound(1000.f/minfps));
-	connect(fpsTimer,SIGNAL(timeout()),this,SLOT(fpsTimerUpdate()));
+	connect(fpsTimer, &QTimer::timeout, this, &StelMainView::fpsTimerUpdate);
 
 	cursorTimeoutTimer = new QTimer(this);
 	cursorTimeoutTimer->setSingleShot(true);
-	connect(cursorTimeoutTimer, SIGNAL(timeout()), this, SLOT(hideCursor()));
+	connect(cursorTimeoutTimer, &QTimer::timeout, this, &StelMainView::hideCursor);
 
 	// Can't create 2 StelMainView instances
 	Q_ASSERT(!singleton);
@@ -676,7 +676,7 @@ StelMainView::StelMainView(QSettings* settings)
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	//because we only want child elements to have focus, we turn it off here
 	setFocusPolicy(Qt::NoFocus);
-	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
+	connect(this, &StelMainView::screenshotRequested, this, &StelMainView::doScreenshot);
 
 #ifdef OPENGL_DEBUG_LOGGING
 	if (QApplication::testAttribute(Qt::AA_UseOpenGLES))
@@ -689,7 +689,7 @@ StelMainView::StelMainView(QSettings* settings)
 	else
 	{
 		glLogger = new QOpenGLDebugLogger(this);
-		connect(glLogger, SIGNAL(messageLogged(QOpenGLDebugMessage)), this, SLOT(logGLMessage(QOpenGLDebugMessage)));
+		connect(glLogger, &QOpenGLDebugLogger::messageLogged, this, &StelMainView::logGLMessage);
 	}
 #endif
 
@@ -875,7 +875,7 @@ void StelMainView::init()
 		else
 			qWarning()<<"Failed to initialize OpenGL debug logger";
 
-		connect(QOpenGLContext::currentContext(),SIGNAL(aboutToBeDestroyed()),this,SLOT(contextDestroyed()));
+		connect(QOpenGLContext::currentContext(), &QOpenGLContext::aboutToBeDestroyed, this, &StelMainView::contextDestroyed);
 		//for easier debugging, print the address of the main GL context
 		qDebug()<<"CurCtxPtr:"<<QOpenGLContext::currentContext();
 	}
@@ -963,7 +963,7 @@ void StelMainView::init()
 	stelApp->setGui(gui);
 	stelApp->init(configuration);
 	//this makes sure the app knows how large the window is
-	connect(stelScene,SIGNAL(sceneRectChanged(QRectF)),stelApp,SLOT(glWindowHasBeenResized(QRectF)));
+	connect(stelScene, &StelGraphicsScene::sceneRectChanged, stelApp, &StelApp::glWindowHasBeenResized);
 #ifdef ENABLE_SPOUT
 	QObject::connect(stelScene, &StelGraphicsScene::sceneRectChanged, [&](const QRectF& rect)
 	{
@@ -1020,7 +1020,7 @@ void StelMainView::init()
 	StelGui* sgui = dynamic_cast<StelGui*>(stelApp->getGui());
 	if (sgui!=Q_NULLPTR)
 		setStyleSheet(sgui->getStelStyle().qtStyleSheet);
-	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
+	connect(stelApp, &StelApp::visionNightModeChanged, this, &StelMainView::updateNightModeProperty);
 #endif
 
 	// I doubt this will have any effect on framerate, but may cause problems elsewhere?
@@ -1585,7 +1585,7 @@ void StelMainView::fpsTimerUpdate()
 	if(!updateQueued)
 	{
 		updateQueued = true;
-		QTimer::singleShot(0, glWidget, SLOT(update()));
+		QTimer::singleShot(0, glWidget, qOverload<>(&StelGLWidget::update));
 	}
 }
 

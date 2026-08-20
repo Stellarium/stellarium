@@ -56,7 +56,7 @@ StelDialog::StelDialog(const QString &dialogName, QObject* parent)
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &StelDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &StelDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::colorSchemeChanged, this, &StelDialog::handleColorSchemeChanged);
-	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), SIGNAL(guiStyleChanged(const QString &)), this, SLOT(styleChanged(const QString &)));
+	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), &StelGui::guiStyleChanged, this, &StelDialog::styleChanged);
 }
 
 StelDialog::~StelDialog()
@@ -112,19 +112,19 @@ void StelDialog::setVisible(bool v)
 			dialog = new QDialog(nullptr);
 			// dialog->setParent(parent);
 			//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
-			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
+			connect(static_cast<QDialog*>(dialog), &QDialog::rejected, this, &StelDialog::close);
 			createDialogContent();
 			if (gui)
 				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 			// Ensure that tooltip get rendered in red in night mode.
-			connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
+			connect(&StelApp::getInstance(), &StelApp::visionNightModeChanged, this, &StelDialog::updateNightModeProperty);
 			updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 
 			proxy = new CustomProxy(parent, Qt::Tool);
 			proxy->setWidget(dialog);
 			QSizeF size = proxy->size();
 
-			connect(proxy, SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
+			connect(proxy, &CustomProxy::sizeChanged, this, &StelDialog::handleDialogSizeChanged);
 
 			int newX, newY;
 			// Retrieve panel locations from config.ini, but shift if required to a visible position.
@@ -232,8 +232,8 @@ void StelDialog::connectCheckBox(QAbstractButton *checkBox, StelAction *action)
 {
 	Q_ASSERT(action);
 	checkBox->setChecked(action->isChecked());
-	connect(action, SIGNAL(toggled(bool)), checkBox, SLOT(setChecked(bool)));
-	connect(checkBox, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
+	connect(action,   &StelAction::toggled,      checkBox, &QAbstractButton::setChecked);
+	connect(checkBox, &QAbstractButton::toggled, action,   &StelAction::setChecked);
 }
 
 void StelDialog::connectIntProperty(QLineEdit* lineEdit, const QString& propName)
@@ -569,7 +569,7 @@ QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelPro
 	dRange = maxValue - minValue;
 	QSliderStelPropertyConnectionHelper::onPropertyChanged(val);
 
-	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
+	connect(slider,&QSlider::valueChanged,this,&QSliderStelPropertyConnectionHelper::sliderIntValueChanged);
 }
 
 QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelProperty *pr, int minValue, int maxValue, QSlider *slider)
@@ -583,7 +583,7 @@ QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelPro
 	dRange = maxValue - minValue;
 	QSliderStelPropertyConnectionHelper::onPropertyChanged(val);
 
-	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
+	connect(slider,&QSlider::valueChanged,this,&QSliderStelPropertyConnectionHelper::sliderIntValueChanged);
 }
 void QSliderStelPropertyConnectionHelper::sliderIntValueChanged(int val)
 {
