@@ -544,10 +544,10 @@ void ConfigurationDialog::populateToolbarCornerComboBox()
 	                                          .toInt();
 	cb->blockSignals(true);
 	cb->clear();
-	cb->addItem(q_("Bottom-left"));
-	cb->addItem(q_("Bottom-right"));
-	cb->addItem(q_("Top-left"));
-	cb->addItem(q_("Top-right"));
+	cb->addItem(qc_("Bottom-left", "GUI alignment"));
+	cb->addItem(qc_("Bottom-right", "GUI alignment"));
+	cb->addItem(qc_("Top-left", "GUI alignment"));
+	cb->addItem(qc_("Top-right", "GUI alignment"));
 	cb->setCurrentIndex(qBound(0, cur, 3));
 	cb->blockSignals(false);
 }

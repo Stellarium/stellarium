@@ -243,7 +243,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));
 	setColorScheme(stelApp.getCurrentStelStyle());
 
-
 	StelGui *gui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	connect(gui, SIGNAL(toolbarCornerChanged(int)), this, SLOT(updatePosition()));
 }
