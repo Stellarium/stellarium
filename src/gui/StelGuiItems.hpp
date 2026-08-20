@@ -221,6 +221,9 @@ public:
 	//! Set whether the bar is at the right edge of the screen.
 	//! This is used to decide whether the help label is displayed to the left or right of the buttons.
 	void setBarAtRight(bool b) { barAtRight = b; }
+	//! Set whether the bar is docked at the top edge of the screen.
+	//! This is used to compute the gap to the outer horizontal edge of the bar.
+	void setBarAtTop(bool b);
 private slots:
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
@@ -234,6 +237,7 @@ private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
 	bool barAtRight = false;
+	bool barAtTop = false;
 };
 
 // The button bar on the bottom containing actions toggle buttons

@@ -417,6 +417,15 @@ LeftStelBar::~LeftStelBar()
 {
 }
 
+void LeftStelBar::setBarAtTop(bool b)
+{
+	if (barAtTop != b)
+	{
+		barAtTop = b;
+		updateButtonPositions();
+	}
+}
+
 void LeftStelBar::addButton(StelButton* button)
 {
 	prepareGeometryChange();
@@ -428,7 +437,7 @@ void LeftStelBar::addButton(StelButton* button)
 
 void LeftStelBar::updateButtonPositions()
 {
-	double posY = 0;
+	double posY = std::round((barAtTop ? -9.5 : 9.5) * StelButton::buttonSizeRatio());
 	for (const auto button : childItems())
 	{
 		if (button == helpLabel) // The help label is placed on hover; keep it out of the button stack.
