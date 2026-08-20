@@ -405,7 +405,7 @@ QPolygonF ScmGeoLocGraphicsView::convertViewToWGS84(const QPolygonF &viewCoordin
 	for (auto &point : result)
 	{
 		qreal xInLon = point.x() * 180.0 / MERCATOR_HALF_WIDTH_PROJ;
-		qreal yInLat = std::atan(std::exp(point.y() * 180.0 / MERCATOR_HALF_WIDTH_PROJ * M_PI_180)) * 2 * M_180_PI - 90.0;
+		qreal yInLat = std::atan(std::exp(point.y() * M_PI / MERCATOR_HALF_WIDTH_PROJ)) * 2 * M_180_PI - 90.0;
 
 		point.setX(xInLon);
 		point.setY(yInLat);
