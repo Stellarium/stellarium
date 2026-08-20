@@ -22,6 +22,7 @@
 #define OBJECTVISIBILITYDIALOG_HPP
 
 #include "StelDialog.hpp"
+#include "StelObjectType.hpp"
 #include <QString>
 
 class Ui_objectVisibilityDialog;
@@ -85,7 +86,9 @@ private slots:
 	void onPlaceLabelsNearLinesOnlyToggled(bool on);
 	void onTwilightPlaceLabelsNearLinesOnlyToggled(bool on);
 	void onLiveTwilightPlaceLabelsNearLinesOnlyToggled(bool on);
+	void onVisibilityAutoComputeToggled(bool on);
 	void onSyncMapsToggled(bool on);
+	void onTwilightComputeDailyToggled(bool on);
 	void onMapViewChanged(double centerLongitude, double centerLatitude,
 	                      double zoom);
 	void onTabChanged(int index);
@@ -108,6 +111,11 @@ private slots:
 
 	//! Run the queued forced refresh.
 	void refreshTwilightMapNow();
+	void onTwilightTimerTimeout();
+
+	//! Recompute first-tab visibility from the current selection when
+	//! automatic mode is active.
+	void refreshVisibility();
 
 private:
 	Ui_objectVisibilityDialog* ui;
@@ -129,6 +137,9 @@ private:
 	QString  cachedPlanetName;
 
 	QTimer* twilightMapTimer = nullptr;
+	double  lastTwilightLimitsJd = 0.0;
+	QString twilightLimitsCachedPlanet;
+	bool    twilightLimitsCachedDaily = false;
 	double  lastTwilightMapJd = 0.0;
 	QString twilightMapCachedPlanet;
 	bool    twilightMapRefreshPending = false;
@@ -146,8 +157,12 @@ private:
 	void syncPlaceLabelControls();
 	void updatePlaceLabels();
 	void syncMapControls();
+	bool isAutoVisibilityTabActive() const;
 	bool isLiveTwilightMapTabActive() const;
+	bool isDailyTwilightLimitsTabActive() const;
 	void updateTwilightMapTimerState();
+	bool calculateObject(const StelObjectP& object);
+	StelObjectP currentSelectedVisibilityObject() const;
 
 	//! Compute the year label in astronomical convention from the
 	//! StelCore's current JD.  E.g. 2026, or -10000 for 10001 BCE.

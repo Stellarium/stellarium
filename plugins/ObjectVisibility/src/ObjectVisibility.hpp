@@ -103,6 +103,7 @@ public:
 	bool getPlaceLabelsVisible() const { return placeLabelsVisible; }
 	int getPlaceLabelsMinimumPopulation() const { return placeLabelsMinimumPopulation; }
 	bool getPlaceLabelsNearLinesOnly() const { return placeLabelsNearLinesOnly; }
+	bool getVisibilityAutoCompute() const { return visibilityAutoCompute; }
 	bool getSyncMaps() const { return syncMaps; }
 
 signals:
@@ -113,6 +114,7 @@ public slots:
 	void setPlaceLabelsVisible(bool visible);
 	void setPlaceLabelsMinimumPopulation(int population);
 	void setPlaceLabelsNearLinesOnly(bool nearLinesOnly);
+	void setVisibilityAutoCompute(bool enabled);
 	void setSyncMaps(bool enabled);
 
 private:
@@ -120,6 +122,7 @@ private:
 	bool placeLabelsVisible;
 	int placeLabelsMinimumPopulation;
 	bool placeLabelsNearLinesOnly;
+	bool visibilityAutoCompute;
 	bool syncMaps;
 	QSettings* conf;
 
