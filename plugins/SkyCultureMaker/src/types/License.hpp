@@ -55,7 +55,7 @@ enum class LicenseType
 	CC_BY_ND,
 	CC_BY_NC_ND,
 	CC_BY_SA,
-	GNU_GPL_V2
+	GNU_GPL_V2,
 };
 
 //! Map of license types to their corresponding name and description

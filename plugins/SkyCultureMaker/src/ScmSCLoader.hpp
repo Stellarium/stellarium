@@ -26,6 +26,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QString>
+#include <QStringList>
 
 class QWidget;
 
@@ -41,24 +42,32 @@ public:
 	 * The directory must contain at least an index.json file.
 	 * The files territory.geojson and description.md are loaded when present.
 	 *
-	 * @param dir       Sky culture directory to load.
-	 * @param errorMsg  If non-null, receives a human-readable error description
-	 *                  on failure.
+	 * @param dir                   Sky culture directory to load.
+	 * @param errorMsg              If non-null, receives a human-readable error
+	 *                              description on failure.
+	 * @param unrecognizedHeadings  If non-null, receives the list of headings in
+	 *                              description.md that could not be mapped to a
+	 *                              known section or constellation.
 	 * @return Newly heap-allocated ScmSkyCulture on success, nullptr on failure.
 	 */
-	static scm::ScmSkyCulture *loadFromDirectory(const QDir &dir, QString *errorMsg = nullptr);
+	static scm::ScmSkyCulture *loadFromDirectory(const QDir &dir, QString *errorMsg = nullptr,
+	                                             QStringList *unrecognizedHeadings = nullptr);
 
 	/**
 	 * @brief Opens a directory picker and loads the selected sky culture.
 	 *
-	 * @param parent       Parent widget for the file dialog (may be nullptr).
-	 * @param defaultPath  Initial directory shown in the picker.
-	 * @param errorMsg     If non-null, receives a human-readable error on failure.
+	 * @param parent                Parent widget for the file dialog (may be nullptr).
+	 * @param defaultPath           Initial directory shown in the picker.
+	 * @param errorMsg              If non-null, receives a human-readable error on failure.
+	 * @param unrecognizedHeadings  If non-null, receives the list of headings in
+	 *                              description.md that could not be mapped to a
+	 *                              known section or constellation.
 	 * @return Newly heap-allocated ScmSkyCulture, or nullptr if the user
 	 *         cancelled or loading failed.
 	 */
 	static scm::ScmSkyCulture *selectAndLoad(QWidget *parent = nullptr, const QString &defaultPath = {},
-	                                         QString *errorMsg = nullptr);
+	                                         QString *errorMsg                 = nullptr,
+	                                         QStringList *unrecognizedHeadings = nullptr);
 
 private:
 	enum class Section
@@ -102,10 +111,12 @@ private:
 
 	static bool parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QString *errorMsg);
 	static void parseIndexJsonBasicFields(const QJsonObject &root, const QDir &dir, scm::ScmSkyCulture *sc);
-	static void parseIndexJsonConstellations(const QJsonArray &constellationsArr, const QDir &dir, scm::ScmSkyCulture *sc);
+	static void parseIndexJsonConstellations(const QJsonArray &constellationsArr, const QDir &dir,
+	                                         scm::ScmSkyCulture *sc);
 	static void parseIndexJsonCommonNames(const QJsonObject &commonNamesObj, scm::ScmSkyCulture *sc);
 	static bool parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc);
-	static bool parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc);
+	static bool parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc,
+	                               QStringList *unrecognizedHeadings = nullptr);
 };
 
 #endif // SCMSCLOADER_HPP

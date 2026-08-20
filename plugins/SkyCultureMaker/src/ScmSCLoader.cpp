@@ -43,7 +43,7 @@
 #include <QTextStream>
 #include <QWidget>
 
-scm::ScmSkyCulture *ScmSCLoader::loadFromDirectory(const QDir &dir, QString *errorMsg)
+scm::ScmSkyCulture *ScmSCLoader::loadFromDirectory(const QDir &dir, QString *errorMsg, QStringList *unrecognizedHeadings)
 {
 	if (!dir.exists())
 	{
@@ -61,18 +61,19 @@ scm::ScmSkyCulture *ScmSCLoader::loadFromDirectory(const QDir &dir, QString *err
 	}
 
 	parseTerritoryGeoJson(dir, sc);
-	parseDescriptionMd(dir, sc);
+	parseDescriptionMd(dir, sc, unrecognizedHeadings);
 
 	return sc;
 }
 
-scm::ScmSkyCulture *ScmSCLoader::selectAndLoad(QWidget *parent, const QString &defaultPath, QString *errorMsg)
+scm::ScmSkyCulture *ScmSCLoader::selectAndLoad(QWidget *parent, const QString &defaultPath, QString *errorMsg,
+                                               QStringList *unrecognizedHeadings)
 {
 	const QString chosen = QFileDialog::getExistingDirectory(parent, q_("Select Sky Culture Directory"),
 	                                                         defaultPath.isEmpty() ? QDir::homePath() : defaultPath);
 
 	if (chosen.isEmpty()) return nullptr;
-	return loadFromDirectory(QDir(chosen), errorMsg);
+	return loadFromDirectory(QDir(chosen), errorMsg, unrecognizedHeadings);
 }
 
 bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QString *errorMsg)
@@ -306,7 +307,7 @@ bool ScmSCLoader::parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc)
 	return true;
 }
 
-bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
+bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc, QStringList *unrecognizedHeadings)
 {
 	const QString filePath = dir.absoluteFilePath("description.md");
 	if (!QFile::exists(filePath)) return true;
@@ -324,6 +325,8 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 
 	Section current = Section::None;
 	QMap<Section, QString> sectionContent;
+	scm::ScmConstellation *currentConstellation = nullptr;
+	QMap<scm::ScmConstellation *, QString> constellationContent;
 	QString name;
 
 	// scans for markdown headings with depth 1-6
@@ -340,22 +343,50 @@ bool ScmSCLoader::parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc)
 			if (s != Section::None)
 			{
 				// Known section heading -> switch to that section
-				current = s;
+				current              = s;
+				currentConstellation = nullptr;
 				continue;
 			}
 			if (name.isEmpty())
 			{
 				// Heuristic: first unrecognized heading becomes the sky culture name
-				name    = heading;
-				current = Section::None;
+				name                 = heading;
+				current              = Section::None;
+				currentConstellation = nullptr;
 				continue;
 			}
-			// Any other unrecognized heading: route its line and all
-			// subsequent content into Description until a known section
-			// heading is encountered.
-			current = Section::Description;
+			// Within the Constellations section an unrecognized heading may name
+			// a constellation of the sky culture. If so, route the following
+			// content into that constellation's description.
+			if (current == Section::Constellations)
+			{
+				scm::ScmConstellation *match = sc->getConstellationByEnglishName(heading);
+				if (match != nullptr)
+				{
+					currentConstellation = match;
+					continue;
+				}
+			}
+			// Truly unrecognized heading: record it for a warning and append its
+			// heading and content to the sky culture description.
+			if (unrecognizedHeadings != nullptr) unrecognizedHeadings->append(heading);
+			current              = Section::Description;
+			currentConstellation = nullptr;
 		}
-		if (current != Section::None) sectionContent[current] += rawLine + "\n";
+
+		if (currentConstellation != nullptr)
+		{
+			constellationContent[currentConstellation] += rawLine + "\n";
+		}
+		else if (current != Section::None)
+		{
+			sectionContent[current] += rawLine + "\n";
+		}
+	}
+
+	for (auto it = constellationContent.constBegin(); it != constellationContent.constEnd(); ++it)
+	{
+		it.key()->setDescription(it.value().trimmed());
 	}
 
 	auto trimContent = [&sectionContent](Section s) { return sectionContent.value(s).trimmed(); };

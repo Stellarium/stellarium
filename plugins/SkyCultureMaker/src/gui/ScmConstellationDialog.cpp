@@ -84,7 +84,7 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	ui->pronounceLE->setText(constellationCulturalName.pronounce);
 	ui->translitLE->setText(constellationCulturalName.transliteration);
 	ui->ipaLE->setText(constellationCulturalName.IPA);
-	ui->description->setText(constellationDescription);
+	ui->description->setPlainText(constellationDescription);
 
 	// Hide the original constellation while editing
 	constellation->isHidden = true;

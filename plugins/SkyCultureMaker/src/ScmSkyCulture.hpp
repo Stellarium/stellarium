@@ -82,6 +82,18 @@ public:
 	/// Gets a constellation from the sky culture by its ID
 	ScmConstellation *getConstellation(const QString &id);
 
+	/**
+	 * @brief Gets a constellation from the sky culture by its English (translated) name.
+	 *
+	 * The comparison is case-insensitive and ignores non-alphanumeric symbols
+	 * (e.g. apostrophes, punctuation) so that e.g. "Orion's Belt" matches
+	 * "Orions Belt".
+	 *
+	 * @param englishName The English name to match.
+	 * @return Pointer to the matching constellation, or nullptr if none matches.
+	 */
+	ScmConstellation *getConstellationByEnglishName(const QString &englishName);
+
 	/// Returns a pointer to the constellations of the sky culture
 	/// Constellations are held as unique pointers, so the addresses
 	/// of the constellation objects remain valid even if the vector is modified.

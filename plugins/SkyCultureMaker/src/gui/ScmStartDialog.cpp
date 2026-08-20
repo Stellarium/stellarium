@@ -133,13 +133,24 @@ void ScmStartDialog::startScmEditingProcess()
 	const QString defaultPath = StelFileMgr::getUserDir() + "/skycultures";
 	QDir().mkpath(defaultPath);
 	QString errorMsg;
-	scm::ScmSkyCulture *sc = ScmSCLoader::selectAndLoad(nullptr, defaultPath, &errorMsg);
+	QStringList unrecognizedHeadings;
+	scm::ScmSkyCulture *sc = ScmSCLoader::selectAndLoad(nullptr, defaultPath, &errorMsg, &unrecognizedHeadings);
 	if (sc == nullptr)
 	{
 		if (!errorMsg.isEmpty())
 			maker->showUserErrorMessage(q_("Edit Sky Culture"), errorMsg);
 		return; // user cancelled or load failed
 	}
+
+	if (!unrecognizedHeadings.isEmpty())
+	{
+		const QString msg = q_("The following headings in description.md were not recognized as a known "
+		                       "section or a constellation and have been appended to the sky culture "
+		                       "description:\n\n%1")
+		                            .arg(unrecognizedHeadings.join("\n"));
+		maker->showUserWarningMessage(q_("Edit Sky Culture"), msg);
+	}
+
 	maker->setSkyCulture(sc);
 	maker->setDialogVisibility(scm::DialogID::StartDialog, false);
 	maker->setDialogVisibility(scm::DialogID::SkyCultureDialog, true);

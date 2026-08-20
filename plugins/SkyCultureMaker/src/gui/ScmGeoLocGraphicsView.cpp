@@ -18,6 +18,7 @@
  */
 
 #include "ScmGeoLocGraphicsView.hpp"
+#include "StelUtils.hpp" // for M_PI_180 and M_180_PI
 #include <qevent.h>
 #include <qguiapplication.h>
 #include <qjsonarray.h>
@@ -395,16 +396,16 @@ QPolygonF ScmGeoLocGraphicsView::convertViewToWGS84(const QPolygonF &viewCoordin
 	// convert view coordinates to native coordinate system of the current map (EPSG: 3857)
 	for (const auto &point : viewCoordinatePolygon)
 	{
-		qreal xInMeter = ((point.x() / defaultRect.width()) * MERCATOR_CIRCUMFERENCE) - MERCATOR_HALF_WIDTH;
-		qreal yInMeter = ((point.y() / defaultRect.height()) * -MAP_HEIGHT_M) + MAP_TOP_M;
+		qreal xInMeter = point.x() / defaultRect.width() * MERCATOR_CIRCUMFERENCE - MERCATOR_HALF_WIDTH;
+		qreal yInMeter = point.y() / defaultRect.height() * -MAP_HEIGHT_M + MAP_TOP_M;
 		result.append(QPointF(xInMeter, yInMeter));
 	}
 
 	// convert map coordinates to Lat/Lon coordinates (EPSG: 4326)
 	for (auto &point : result)
 	{
-		qreal xInLon = (point.x() * 180.0) / MERCATOR_HALF_WIDTH_PROJ;
-		qreal yInLat = (std::atan(std::exp(((point.y() * 180.0) / MERCATOR_HALF_WIDTH_PROJ) * (M_PI / 180.0))) * (360.0 / M_PI)) - 90.0;
+		qreal xInLon = point.x() * 180.0 / MERCATOR_HALF_WIDTH_PROJ;
+		qreal yInLat = std::atan(std::exp(point.y() * 180.0 / MERCATOR_HALF_WIDTH_PROJ * M_PI_180)) * 2 * M_180_PI - 90.0;
 
 		point.setX(xInLon);
 		point.setY(yInLat);
@@ -421,11 +422,11 @@ QPolygonF ScmGeoLocGraphicsView::convertWGS84ToView(const QPolygonF &wgs84Polygo
 	{
 		// Step 1: Lon/Lat (EPSG:4326) to Mercator metres (EPSG:3857)
 		double xInMeter = pt.x() * MERCATOR_HALF_WIDTH_PROJ / 180.0;
-		double yInMeter = std::log(std::tan((pt.y() + 90.0) * M_PI / 360.0)) * MERCATOR_HALF_WIDTH_PROJ / M_PI;
+		double yInMeter = std::log(std::tan((pt.y() + 90.0) * M_PI_180 / 2)) * MERCATOR_HALF_WIDTH_PROJ / M_PI;
 
 		// Step 2: Mercator metres to view coordinates
 		double x = (xInMeter + MERCATOR_HALF_WIDTH) / MERCATOR_CIRCUMFERENCE * defaultRect.width();
-		double y = (yInMeter - MAP_TOP_M) / (-MAP_HEIGHT_M) * defaultRect.height();
+		double y = (yInMeter - MAP_TOP_M) / -MAP_HEIGHT_M * defaultRect.height();
 		result.append(QPointF(x, y));
 	}
 
