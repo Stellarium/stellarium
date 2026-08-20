@@ -76,6 +76,10 @@ public:
 	qreal getBottomBarHeight() const;
 	//! return width of left Bar when fully shown
 	qreal getLeftBarWidth() const;
+	//! return the bounding rectangle of the bottom Bar in SkyGui coordinates (without help label)
+	QRectF getBottomBarRect() const;
+	//! return the bounding rectangle of the left Bar in SkyGui coordinates (without help label)
+	QRectF getLeftBarRect() const;
 	
 protected:
 	void resizeEvent(QGraphicsSceneResizeEvent* event) override;

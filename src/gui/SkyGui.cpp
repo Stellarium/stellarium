@@ -353,6 +353,16 @@ qreal SkyGui::getLeftBarWidth() const
 	return leftBar->boundingRect().width();
 }
 
+QRectF SkyGui::getBottomBarRect() const
+{
+	return bottomBar->boundingRectNoHelpLabel().translated(bottomBar->pos());
+}
+
+QRectF SkyGui::getLeftBarRect() const
+{
+	return leftBar->boundingRectNoHelpLabel().translated(leftBar->pos());
+}
+
 //! Update the position of the button bars in the main window
 void SkyGui::updateBarsPos()
 {

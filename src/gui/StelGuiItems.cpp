@@ -783,6 +783,13 @@ void BottomStelBar::updateButtonsGroups()
 	// When bar is at top: buttons come first (y=0), text below them.
 	// When bar is at bottom: text comes first (y=0), buttons below it.
 	const double y = barAtTop ? 0. : (statusFM.lineSpacing() + gap);
+	// flip background pixmaps if bar is at top
+	auto orientBackground = [this](const QPixmap& p) -> QPixmap {
+		if (!barAtTop || p.isNull()) return p;
+		QPixmap flipped = p.transformed(QTransform().scale(1., -1.));
+		flipped.setDevicePixelRatio(p.devicePixelRatio());
+		return flipped;
+	};
 	for (auto& group : buttonGroups)
 	{
 		QList<StelButton*>& buttons = group.elems;
@@ -799,16 +806,16 @@ void BottomStelBar::updateButtonsGroups()
 				if (buttons.size() == 1)
 				{
 					if (group.pixBackgroundSingle == nullptr)
-						b->setBackgroundPixmap(pixBackgroundSingle);
+						b->setBackgroundPixmap(orientBackground(pixBackgroundSingle));
 					else
-						b->setBackgroundPixmap(*group.pixBackgroundSingle);
+						b->setBackgroundPixmap(orientBackground(*group.pixBackgroundSingle));
 				}
 				else
 				{
 					if (group.pixBackgroundLeft == nullptr)
-						b->setBackgroundPixmap(pixBackgroundLeft);
+						b->setBackgroundPixmap(orientBackground(pixBackgroundLeft));
 					else
-						b->setBackgroundPixmap(*group.pixBackgroundLeft);
+						b->setBackgroundPixmap(orientBackground(*group.pixBackgroundLeft));
 				}
 			}
 			else if (n == buttons.size()-1)
@@ -816,21 +823,21 @@ void BottomStelBar::updateButtonsGroups()
 				if (buttons.size() != 1)
 				{
 					if (group.pixBackgroundSingle == nullptr)
-						b->setBackgroundPixmap(pixBackgroundSingle);
+						b->setBackgroundPixmap(orientBackground(pixBackgroundSingle));
 					else
-						b->setBackgroundPixmap(*group.pixBackgroundSingle);
+						b->setBackgroundPixmap(orientBackground(*group.pixBackgroundSingle));
 				}
 				if (group.pixBackgroundRight == nullptr)
-					b->setBackgroundPixmap(pixBackgroundRight);
+					b->setBackgroundPixmap(orientBackground(pixBackgroundRight));
 				else
-					b->setBackgroundPixmap(*group.pixBackgroundRight);
+					b->setBackgroundPixmap(orientBackground(*group.pixBackgroundRight));
 			}
 			else
 			{
 				if (group.pixBackgroundMiddle == nullptr)
-					b->setBackgroundPixmap(pixBackgroundMiddle);
+					b->setBackgroundPixmap(orientBackground(pixBackgroundMiddle));
 				else
-					b->setBackgroundPixmap(*group.pixBackgroundMiddle);
+					b->setBackgroundPixmap(orientBackground(*group.pixBackgroundMiddle));
 			}
 			// Update the button pixmap
 			b->animValueChanged(0.);

@@ -328,10 +328,19 @@ void OcularsGuiPanel::updatePosition()
 	qreal yPos = 0;
 	const int buttonBarCorner=StelApp::getInstance().getStelPropertyManager()
 		->getStelPropertyValue("StelGui.toolbarCorner").toInt(); // (0=BL, 1=BR, 2=TL, 3=TR)
-	if (buttonBarCorner == 3)
+	if (buttonBarCorner == 2)
 	{
-		yPos += (cornerRadius + static_cast<SkyGui*>(parentWidget)->getBottomBarHeight());
-		xPos -= (cornerRadius + static_cast<SkyGui*>(parentWidget)->getLeftBarWidth());
+		SkyGui* skyGui = static_cast<SkyGui*>(parentWidget);
+		// Only push the panel below the toolbar if it would otherwise overlap it horizontally.
+		const QRectF barRect = skyGui->getBottomBarRect();
+		if (xPos < barRect.right() && (xPos + size().width()) > barRect.left())
+			yPos += (cornerRadius + skyGui->getBottomBarHeight());
+	}
+	else if (buttonBarCorner == 3)
+	{
+		SkyGui* skyGui = static_cast<SkyGui*>(parentWidget);
+		xPos -= (cornerRadius + skyGui->getLeftBarWidth());
+		yPos += (cornerRadius + skyGui->getBottomBarHeight());
 	}
 	setPos(xPos, yPos);
 
