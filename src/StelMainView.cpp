@@ -718,16 +718,6 @@ StelMainView::StelMainView(QSettings* settings)
 
 void StelMainView::resizeEvent(QResizeEvent* event)
 {
-	qreal devicePixelRatio=1.0;
-	// We use the glWidget instead of the event, as we want the screen that shows most of the widget.
-	QWindow* win = glWidget->windowHandle();
-	if(win)
-	{
-		devicePixelRatio=win->devicePixelRatio();
-	}
-	else
-		qCritical() << "resizeEvent: CANNOT GET WINDOW HANDLE! --> CANNOT SET devicePixelRatio";
-
 	if(scene())
 	{
 		const QSize& sz = event->size();
@@ -737,9 +727,9 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 			guiItem->setGeometry(QRectF(0.0,0.0,sz.width(),sz.height()));
 		if (StelApp::isInitialized()  && !isFullScreen())
 		{
-			qDebug() << "saving size with devicePixelRatio=" << devicePixelRatio;
-			StelApp::immediateSave("video/screen_w", sz.width() *devicePixelRatio);
-			StelApp::immediateSave("video/screen_h", sz.height()*devicePixelRatio);
+			qDebug() << "saving size with devicePixelRatio=" << devicePixelRatio();
+			StelApp::immediateSave("video/screen_w", int(std::lround(sz.width() *devicePixelRatio())));
+			StelApp::immediateSave("video/screen_h", int(std::lround(sz.height()*devicePixelRatio())));
 		}
 		emit sizeChanged(sz);
 	}
@@ -1631,25 +1621,24 @@ bool StelMainView::needsMaxFPS() const
 
 void StelMainView::moveEvent(QMoveEvent * event)
 {
-	const QPoint &pos=event->pos();
-	qreal devicePixelRatio=1.0;
+	//const QPoint &pos=event->pos(); // top-left of drawing area
+	const QPoint &pos=frameGeometry().topLeft(); // including frame!
 
 	// We use the glWidget instead of the event, as we want the screen that shows most of the widget.
 	QWindow* win = glWidget->windowHandle();
 	if(win)
 	{
-		devicePixelRatio=win->devicePixelRatio();
-		stelApp->setDevicePixelsPerPixel(devicePixelRatio);
+		stelApp->setDevicePixelsPerPixel(win->devicePixelRatio());
 	}
 	else
-		qCritical() << "moveEvent: CANNOT GET WINDOW HANDLE! --> CANNOT SET devicePixelRatio";
+		qWarning() << "Cannot get window handle (to set device pixel ratio). (uncritical)";
 
 	if (StelApp::isInitialized())
 	{
-		qDebug() << "saving position with devicePixelRatio=" << devicePixelRatio;
+		qDebug() << "saving position with devicePixelRatio=" << devicePixelRatio();
 
-		StelApp::immediateSave("video/screen_x", pos.x()*devicePixelRatio);
-		StelApp::immediateSave("video/screen_y", pos.y()*devicePixelRatio);
+		StelApp::immediateSave("video/screen_x", int(std::lround(pos.x()*devicePixelRatio())));
+		StelApp::immediateSave("video/screen_y", int(std::lround(pos.y()*devicePixelRatio())));
 	}
 }
 
