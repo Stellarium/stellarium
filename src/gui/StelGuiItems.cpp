@@ -420,18 +420,10 @@ LeftStelBar::~LeftStelBar()
 void LeftStelBar::addButton(StelButton* button)
 {
 	prepareGeometryChange();
-	double posY = 0;
-	if (QGraphicsItem::childItems().size()!=0)
-	{
-		const QRectF& r = childrenBoundingRect();
-		posY += r.bottom();
-	}
 	button->setParentItem(this);
 	button->setFocusOnSky(false);
-	//button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
-	button->setPos(0., qRound(posY + 9.5 * StelButton::buttonSizeRatio()));
-
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
+	updateButtonPositions();
 }
 
 void LeftStelBar::updateButtonPositions()
@@ -439,6 +431,8 @@ void LeftStelBar::updateButtonPositions()
 	double posY = 0;
 	for (const auto button : childItems())
 	{
+		if (button == helpLabel) // The help label is placed on hover; keep it out of the button stack.
+			continue;
 		if (const auto b = dynamic_cast<StelButton*>(button))
 			b->animValueChanged(0.); // update button pixmap
 		button->setPos(0., posY);

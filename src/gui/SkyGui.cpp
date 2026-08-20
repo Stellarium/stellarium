@@ -66,7 +66,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	setFont(font);
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &QGraphicsTextItem::setFont);
-	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int size){
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [this](){
 		QFont font=QGuiApplication::font();
 		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 		setFont(font);
