@@ -79,8 +79,12 @@ void ObjectVisibilityDialog::setVisible(bool visible)
 {
 	StelDialog::setVisible(visible);
 	updateTwilightMapTimerState();
+	if (visible && isAutoVisibilityTabActive())
+		refreshVisibility();
 	if (visible && isLiveTwilightMapTabActive())
 		scheduleTwilightMapRefresh();
+	if (visible && isDailyTwilightLimitsTabActive())
+		refreshTwilightLimits();
 }
 
 //
@@ -96,6 +100,8 @@ void ObjectVisibilityDialog::createDialogContent()
 	placeLabelsMinimumPopulation = plugin->getPlaceLabelsMinimumPopulation();
 	placeLabelsNearLinesOnly = plugin->getPlaceLabelsNearLinesOnly();
 	syncMaps = plugin->getSyncMaps();
+	ui->visibilityAutoComputeCheckBox->setChecked(
+		plugin->getVisibilityAutoCompute());
 
 	// Standard kinetic scrolling for the About browser.
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -169,12 +175,16 @@ void ObjectVisibilityDialog::createDialogContent()
 	        this, &ObjectVisibilityDialog::onTwilightPlaceLabelsNearLinesOnlyToggled);
 	connect(ui->twilightMapPlaceLabelsNearLinesOnlyCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onLiveTwilightPlaceLabelsNearLinesOnlyToggled);
+	connect(ui->visibilityAutoComputeCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onVisibilityAutoComputeToggled);
 	connect(ui->syncMapsCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onSyncMapsToggled);
 	connect(ui->twilightSyncMapsCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onSyncMapsToggled);
 	connect(ui->twilightMapSyncMapsCheckBox, &QCheckBox::toggled,
 	        this, &ObjectVisibilityDialog::onSyncMapsToggled);
+	connect(ui->twilightComputeDailyCheckBox, &QCheckBox::toggled,
+	        this, &ObjectVisibilityDialog::onTwilightComputeDailyToggled);
 	connect(ui->tabs, &QTabWidget::currentChanged,
 	        this, &ObjectVisibilityDialog::onTabChanged);
 
@@ -211,13 +221,15 @@ void ObjectVisibilityDialog::createDialogContent()
 	connect(core, &StelCore::locationChanged,
 	        this, &ObjectVisibilityDialog::syncMarkerToObserver);
 	connect(core, &StelCore::dateChanged,
+	        this, &ObjectVisibilityDialog::refreshVisibility);
+	connect(core, &StelCore::dateChanged,
 	        this, &ObjectVisibilityDialog::refreshTwilightLimits);
 	connect(core, &StelCore::dateChanged,
 	        this, &ObjectVisibilityDialog::scheduleTwilightMapRefresh);
 	twilightMapTimer = new QTimer(this);
 	twilightMapTimer->setInterval(1000);
 	connect(twilightMapTimer, &QTimer::timeout,
-	        this, qOverload<>(&ObjectVisibilityDialog::refreshTwilightMap));
+	        this, &ObjectVisibilityDialog::onTwilightTimerTimeout);
 	updateTwilightMapTimerState();
 	syncMarkerToObserver();
 
@@ -246,6 +258,11 @@ bool ObjectVisibilityDialog::isAcceptableType(const QString& type)
 void ObjectVisibilityDialog::onSelectedObjectChanged()
 {
 	updateCalculateButtonEnabled();
+	if (isAutoVisibilityTabActive())
+	{
+		refreshVisibility();
+		return;
+	}
 	// In the pre-Calculate state, the label depends on what's
 	// selected — refresh it so the user gets immediate feedback
 	// about whether the new selection is acceptable.  Once
@@ -267,9 +284,10 @@ void ObjectVisibilityDialog::updateCalculateButtonEnabled()
 	StelCore* core = StelApp::getInstance().getCore();
 	const QString planet = core->getCurrentLocation().planetName;
 	const bool planetOk = isSupportedPlanet(planet);
+	const bool autoCalculate = ui->visibilityAutoComputeCheckBox->isChecked();
 
 	const bool acceptable = typeOk && planetOk;
-	ui->calculatePushButton->setEnabled(acceptable);
+	ui->calculatePushButton->setEnabled(acceptable && !autoCalculate);
 
 	QString tip;
 	if (!typeOk)
@@ -279,20 +297,26 @@ void ObjectVisibilityDialog::updateCalculateButtonEnabled()
 		         "Moon, the eight planets, Pluto and the four Galilean "
 		         "moons.  The current observing body (%1) is not "
 		         "supported.").arg(planet);
+	else if (autoCalculate)
+		tip = q_("Turn off Calculate automatically to use this button.");
 	else
-		tip = q_("Compute visibility for the selected object.");
+		tip = q_("Calculate visibility for the selected object.");
 	ui->calculatePushButton->setToolTip(tip);
 }
 
 void ObjectVisibilityDialog::calculate()
 {
-	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
-	if (!objMgr || objMgr->getSelectedObject().isEmpty())
-		return;
+	calculateObject(currentSelectedVisibilityObject());
+}
 
-	const StelObjectP sel = objMgr->getSelectedObject().first();
-	if (!isAcceptableType(sel->getType()))
-		return;
+bool ObjectVisibilityDialog::calculateObject(const StelObjectP& sel)
+{
+	if (!sel || !isAcceptableType(sel->getType()))
+		return false;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	if (!core || !isSupportedPlanet(core->getCurrentLocation().planetName))
+		return false;
 
 	// Remember which object we computed for, so the title label can
 	// be refreshed on retranslate without re-running the geometry.
@@ -306,7 +330,6 @@ void ObjectVisibilityDialog::calculate()
 	if (lockedObjectNameI18n.isEmpty())
 		lockedObjectNameI18n = lockedObjectId;
 
-	StelCore* core = StelApp::getInstance().getCore();
 	// getEquinoxEquatorialPos() returns the equatorial coordinates at
 	// the *current* equinox (date), which is exactly what the spec requires:
 	// precession and (where applicable) proper motion are folded in,
@@ -318,6 +341,19 @@ void ObjectVisibilityDialog::calculate()
 
 	ui->mapWidget->setDeclination(decDeg);
 	refreshTitleLabel();
+	return true;
+}
+
+StelObjectP ObjectVisibilityDialog::currentSelectedVisibilityObject() const
+{
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	if (!objMgr || objMgr->getSelectedObject().isEmpty())
+		return StelObjectP();
+
+	const StelObjectP sel = objMgr->getSelectedObject().first();
+	if (!sel || !isAcceptableType(sel->getType()))
+		return StelObjectP();
+	return sel;
 }
 
 void ObjectVisibilityDialog::onGoodVisibilityLimitChanged(int degrees)
@@ -434,6 +470,8 @@ void ObjectVisibilityDialog::onResetSettings()
 	placeLabelsMinimumPopulation = plugin->getPlaceLabelsMinimumPopulation();
 	placeLabelsNearLinesOnly = plugin->getPlaceLabelsNearLinesOnly();
 	syncMaps = plugin->getSyncMaps();
+	ui->visibilityAutoComputeCheckBox->setChecked(
+		plugin->getVisibilityAutoCompute());
 	syncPlaceLabelControls();
 	syncMapControls();
 	updatePlaceLabels();
@@ -517,6 +555,15 @@ void ObjectVisibilityDialog::onLiveTwilightPlaceLabelsNearLinesOnlyToggled(bool 
 	updatePlaceLabels();
 }
 
+void ObjectVisibilityDialog::onVisibilityAutoComputeToggled(bool on)
+{
+	plugin->setVisibilityAutoCompute(on);
+	if (on)
+		refreshVisibility();
+	updateCalculateButtonEnabled();
+	updateTwilightMapTimerState();
+}
+
 void ObjectVisibilityDialog::onSyncMapsToggled(bool on)
 {
 	syncMaps = on;
@@ -548,6 +595,14 @@ void ObjectVisibilityDialog::onSyncMapsToggled(bool on)
 	applyingMapSync = false;
 }
 
+void ObjectVisibilityDialog::onTwilightComputeDailyToggled(bool on)
+{
+	Q_UNUSED(on);
+	lastTwilightLimitsJd = 0.0;
+	refreshTwilightLimits();
+	updateTwilightMapTimerState();
+}
+
 void ObjectVisibilityDialog::onMapViewChanged(double centerLongitude,
                                               double centerLatitude,
                                               double zoom)
@@ -575,8 +630,12 @@ void ObjectVisibilityDialog::onTabChanged(int index)
 {
 	Q_UNUSED(index);
 	updateTwilightMapTimerState();
+	if (isAutoVisibilityTabActive())
+		refreshVisibility();
 	if (isLiveTwilightMapTabActive())
 		scheduleTwilightMapRefresh();
+	if (isDailyTwilightLimitsTabActive())
+		refreshTwilightLimits();
 }
 
 void ObjectVisibilityDialog::syncMarkerToObserver()
@@ -673,16 +732,31 @@ void ObjectVisibilityDialog::refreshTwilightLimits()
 
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	PlanetP earth = ssm ? ssm->getEarth() : PlanetP();
-	if (!earth)
+	PlanetP sun = ssm ? ssm->getSun() : PlanetP();
+	const bool computeDaily = ui->twilightComputeDailyCheckBox->isChecked();
+	if (computeDaily && !isDailyTwilightLimitsTabActive())
+		return;
+	if (!earth || (computeDaily && !sun))
 	{
 		ui->twilightMapWidget->clearTwilightLimits();
 		ui->twilightMapWidget->setMarkerVisible(false);
 		ui->twilightMapWidget->setClickSetsLocationMode(false);
 		ui->twilightSetLocationByClickCheckBox->setEnabled(false);
 		ui->twilightTitleLabel->setText(
-			q_("Solstice twilight limits on Earth are unavailable."));
+			q_("Twilight limits on Earth are unavailable."));
 		return;
 	}
+
+	const double jd = core->getJD();
+	if (computeDaily &&
+	    lastTwilightLimitsJd > 0.0 &&
+	    twilightLimitsCachedPlanet == planet &&
+	    twilightLimitsCachedDaily == computeDaily &&
+	    std::abs(jd - lastTwilightLimitsJd) < 0.20 / 86400.0)
+		return;
+	lastTwilightLimitsJd = jd;
+	twilightLimitsCachedPlanet = planet;
+	twilightLimitsCachedDaily = computeDaily;
 
 	ui->twilightMapWidget->setMarkerVisible(true);
 	ui->twilightSetLocationByClickCheckBox->setEnabled(true);
@@ -691,14 +765,34 @@ void ObjectVisibilityDialog::refreshTwilightLimits()
 		   "Stays active until you uncheck it."));
 
 	const double obliquityDeg = earth->getRotObliquity(core->getJDE()) * 180.0 / M_PI;
-	ui->twilightMapWidget->setTwilightObliquity(obliquityDeg);
-
 	const int year = currentYear(core);
-	ui->twilightTitleLabel->setText(
-		QString(q_("Solstice twilight limits on Earth in %1 "
-		           "(obliquity %2°)"))
-		.arg(year)
-		.arg(obliquityDeg, 0, 'f', 2));
+	if (computeDaily)
+	{
+		double ra = 0.0;
+		double dec = 0.0;
+		StelUtils::rectToSphe(&ra, &dec, sun->getEquinoxEquatorialPos(core));
+		Q_UNUSED(ra);
+		const double sunDeclinationDeg = dec * 180.0 / M_PI;
+		ui->twilightMapWidget->setTwilightLimits(
+			obliquityDeg, sunDeclinationDeg, true);
+		ui->twilightLegendGroupBox->setTitle(q_("Daily twilight limits"));
+		ui->twilightTitleLabel->setText(
+			QString(q_("Daily twilight limits on Earth in %1 "
+			           "(solar declination %2°, obliquity %3°)"))
+			.arg(year)
+			.arg(sunDeclinationDeg, 0, 'f', 2)
+			.arg(obliquityDeg, 0, 'f', 2));
+	}
+	else
+	{
+		ui->twilightMapWidget->setTwilightObliquity(obliquityDeg);
+		ui->twilightLegendGroupBox->setTitle(q_("Solstice twilight limits"));
+		ui->twilightTitleLabel->setText(
+			QString(q_("Solstice twilight limits on Earth in %1 "
+			           "(obliquity %2°)"))
+			.arg(year)
+			.arg(obliquityDeg, 0, 'f', 2));
+	}
 }
 
 void ObjectVisibilityDialog::refreshTwilightMap()
@@ -735,6 +829,31 @@ void ObjectVisibilityDialog::refreshTwilightMapNow()
 
 	twilightMapRefreshPending = false;
 	refreshTwilightMap(true);
+}
+
+void ObjectVisibilityDialog::onTwilightTimerTimeout()
+{
+	if (isAutoVisibilityTabActive())
+		refreshVisibility();
+	if (isDailyTwilightLimitsTabActive())
+		refreshTwilightLimits();
+	refreshTwilightMap();
+}
+
+void ObjectVisibilityDialog::refreshVisibility()
+{
+	if (!isAutoVisibilityTabActive())
+		return;
+
+	const StelObjectP sel = currentSelectedVisibilityObject();
+	if (calculateObject(sel))
+		return;
+
+	lockedObjectId.clear();
+	lockedObjectType.clear();
+	lockedObjectNameI18n.clear();
+	ui->mapWidget->clearVisibility();
+	refreshTitleLabel();
 }
 
 void ObjectVisibilityDialog::refreshTwilightMap(bool force)
@@ -878,11 +997,27 @@ bool ObjectVisibilityDialog::isLiveTwilightMapTabActive() const
 	       ui->tabs->currentWidget() == ui->twilightMapTab;
 }
 
+bool ObjectVisibilityDialog::isAutoVisibilityTabActive() const
+{
+	return dialog && ui && twilightMapTimer && visible() &&
+	       ui->tabs->currentWidget() == ui->visibilityTab &&
+	       ui->visibilityAutoComputeCheckBox->isChecked();
+}
+
+bool ObjectVisibilityDialog::isDailyTwilightLimitsTabActive() const
+{
+	return dialog && ui && twilightMapTimer && visible() &&
+	       ui->tabs->currentWidget() == ui->twilightLimitsTab &&
+	       ui->twilightComputeDailyCheckBox->isChecked();
+}
+
 void ObjectVisibilityDialog::updateTwilightMapTimerState()
 {
 	if (!twilightMapTimer) return;
 
-	if (isLiveTwilightMapTabActive())
+	if (isAutoVisibilityTabActive() ||
+	    isLiveTwilightMapTabActive() ||
+	    isDailyTwilightLimitsTabActive())
 	{
 		if (!twilightMapTimer->isActive())
 			twilightMapTimer->start();

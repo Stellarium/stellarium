@@ -125,13 +125,37 @@ void ObjectVisibilityMapWidget::clearVisibility()
 
 void ObjectVisibilityMapWidget::setTwilightObliquity(double obliquityDeg)
 {
+	setTwilightLimits(obliquityDeg, 0.0, false);
+}
+
+void ObjectVisibilityMapWidget::setTwilightLimits(double obliquityDeg,
+                                                  double sunDeclinationDeg,
+                                                  bool computeDaily)
+{
 	if (obliquityDeg <= 0.0 || obliquityDeg >= 90.0)
 	{
 		clearTwilightLimits();
 		return;
 	}
+	if (computeDaily &&
+	    (sunDeclinationDeg < -90.0 || sunDeclinationDeg > 90.0))
+	{
+		clearTwilightLimits();
+		return;
+	}
+
+	const bool unchanged = hasTwilightObliquity &&
+		qFuzzyCompare(twilightObliquityDeg, obliquityDeg) &&
+		twilightLimitsComputeDaily == computeDaily &&
+		(!computeDaily ||
+		 qFuzzyCompare(twilightSunDeclinationDeg, sunDeclinationDeg));
+	if (unchanged)
+		return;
+
 	hasTwilightObliquity = true;
 	twilightObliquityDeg = obliquityDeg;
+	twilightSunDeclinationDeg = sunDeclinationDeg;
+	twilightLimitsComputeDaily = computeDaily;
 	update();
 }
 
@@ -139,6 +163,8 @@ void ObjectVisibilityMapWidget::clearTwilightLimits()
 {
 	if (!hasTwilightObliquity) return;
 	hasTwilightObliquity = false;
+	twilightSunDeclinationDeg = 0.0;
+	twilightLimitsComputeDaily = false;
 	update();
 }
 
@@ -429,6 +455,36 @@ void ObjectVisibilityMapWidget::drawTwilightLimitsOverlay(QPainter& painter) con
 	drawSymmetric(polar, penFor(POLAR_COLOR,
 	                            Qt::DotLine,
 	                            std::max(1.0, 1.9 * ratio)));
+
+	if (twilightLimitsComputeDaily)
+	{
+		const double dec = twilightSunDeclinationDeg;
+		auto drawLowest = [this, &painter, &penFor, dec]
+		                  (double altitudeDeg, const QColor& color)
+		{
+			const double distance = 90.0 + altitudeDeg;
+			const QPen pen = penFor(color);
+			drawLatitudeLineCopies(painter, -dec + distance, pen);
+			drawLatitudeLineCopies(painter, -dec - distance, pen);
+		};
+		auto drawHighest = [this, &painter, &penFor, dec]
+		                   (double altitudeDeg, const QColor& color)
+		{
+			const double distance = 90.0 - altitudeDeg;
+			const QPen pen = penFor(color, Qt::CustomDashLine);
+			drawLatitudeLineCopies(painter, dec + distance, pen);
+			drawLatitudeLineCopies(painter, dec - distance, pen);
+		};
+
+		drawLowest(-6.0,  CIVIL_MIN_COLOR);
+		drawLowest(-12.0, NAUT_MIN_COLOR);
+		drawLowest(-18.0, ASTRO_MIN_COLOR);
+
+		drawHighest(-6.0,  CIVIL_MAX_COLOR);
+		drawHighest(-12.0, NAUT_MAX_COLOR);
+		drawHighest(-18.0, ASTRO_MAX_COLOR);
+		return;
+	}
 
 	// At solstice the Sun's declination is +/-eps.  For the
 	// summer-solstice midnight Sun, h_min = phi + eps - 90, giving
@@ -1042,12 +1098,37 @@ QVector<double> ObjectVisibilityMapWidget::currentOverlayLatitudes() const
 		addLatitude(0.0);
 		addSymmetric(eps);
 		addSymmetric(polar);
-		addSymmetric(polar - 6.0);
-		addSymmetric(polar - 12.0);
-		addSymmetric(polar - 18.0);
-		addSymmetric(polar + 6.0);
-		addSymmetric(polar + 12.0);
-		addSymmetric(polar + 18.0);
+		if (twilightLimitsComputeDaily)
+		{
+			const double dec = twilightSunDeclinationDeg;
+			auto addLowest = [&addLatitude, dec](double altitudeDeg)
+			{
+				const double distance = 90.0 + altitudeDeg;
+				addLatitude(-dec + distance);
+				addLatitude(-dec - distance);
+			};
+			auto addHighest = [&addLatitude, dec](double altitudeDeg)
+			{
+				const double distance = 90.0 - altitudeDeg;
+				addLatitude(dec + distance);
+				addLatitude(dec - distance);
+			};
+			addLowest(-6.0);
+			addLowest(-12.0);
+			addLowest(-18.0);
+			addHighest(-6.0);
+			addHighest(-12.0);
+			addHighest(-18.0);
+		}
+		else
+		{
+			addSymmetric(polar - 6.0);
+			addSymmetric(polar - 12.0);
+			addSymmetric(polar - 18.0);
+			addSymmetric(polar + 6.0);
+			addSymmetric(polar + 12.0);
+			addSymmetric(polar + 18.0);
+		}
 	}
 
 	return latitudes;

@@ -102,6 +102,12 @@ public:
 	//! solstice limits. Pass a value outside (0, 90) to clear.
 	void setTwilightObliquity(double obliquityDeg);
 
+	//! Set Earth obliquity and optional current solar declination for
+	//! twilight limits. When computeDaily is true, twilight altitude
+	//! lines use sunDeclinationDeg instead of the solstice extrema.
+	void setTwilightLimits(double obliquityDeg, double sunDeclinationDeg,
+	                       bool computeDaily);
+
 	//! Hide all twilight/solstice limit lines.
 	void clearTwilightLimits();
 
@@ -175,6 +181,8 @@ private:
 
 	bool   hasTwilightObliquity = false;
 	double twilightObliquityDeg = 0.0;
+	double twilightSunDeclinationDeg = 0.0;
+	bool   twilightLimitsComputeDaily = false;
 
 	bool   hasTwilightMap = false;
 	double twilightSunLongitudeDeg = 0.0;

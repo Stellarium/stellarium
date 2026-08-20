@@ -259,7 +259,17 @@
               <string>Calculate</string>
              </property>
              <property name="toolTip">
-              <string>Compute visibility for the selected object.</string>
+              <string>Calculate visibility for the selected object.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="visibilityAutoComputeCheckBox">
+             <property name="toolTip">
+              <string>Automatically calculate visibility for the selected star or deep-sky object and keep it updated while this tab is open.</string>
+             </property>
+             <property name="text">
+              <string>Calculate automatically</string>
              </property>
             </widget>
            </item>
@@ -772,6 +782,23 @@
              </property>
              <property name="text">
               <string>Sync maps</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="twilightCtrlSepComputeDaily">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="twilightComputeDailyCheckBox">
+             <property name="toolTip">
+              <string>Compute twilight limits from the Sun's current position instead of the solstice extrema.</string>
+             </property>
+             <property name="text">
+              <string>Compute daily</string>
              </property>
             </widget>
            </item>

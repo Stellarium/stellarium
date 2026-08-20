@@ -101,6 +101,7 @@ ObjectVisibility::ObjectVisibility()
 	, placeLabelsVisible(false)
 	, placeLabelsMinimumPopulation(1000000)
 	, placeLabelsNearLinesOnly(true)
+	, visibilityAutoCompute(false)
 	, syncMaps(false)
 	, conf(nullptr)
 #ifndef NO_GUI
@@ -206,12 +207,15 @@ void ObjectVisibility::loadSettings()
 		conf->value("place_labels_minimum_population", 1000000).toInt());
 	const bool labelsNearLinesOnly =
 		conf->value("place_labels_near_lines_only", true).toBool();
+	const bool autoCompute =
+		conf->value("visibility_auto_compute", false).toBool();
 	const bool mapsSynced = conf->value("sync_maps", false).toBool();
 	conf->endGroup();
 	setGoodVisibilityLimit(std::clamp(v, 1, 89));
 	setPlaceLabelsVisible(labelsVisible);
 	setPlaceLabelsMinimumPopulation(minPopulation);
 	setPlaceLabelsNearLinesOnly(labelsNearLinesOnly);
+	setVisibilityAutoCompute(autoCompute);
 	setSyncMaps(mapsSynced);
 }
 
@@ -224,6 +228,7 @@ void ObjectVisibility::restoreDefaultSettings()
 	conf->setValue("place_labels_visible", false);
 	conf->setValue("place_labels_minimum_population", 1000000);
 	conf->setValue("place_labels_near_lines_only", true);
+	conf->setValue("visibility_auto_compute", false);
 	conf->setValue("sync_maps", false);
 	conf->endGroup();
 	loadSettings();
@@ -286,6 +291,20 @@ void ObjectVisibility::setPlaceLabelsNearLinesOnly(bool nearLinesOnly)
 		conf->beginGroup("ObjectVisibility");
 		conf->setValue("place_labels_near_lines_only",
 		               placeLabelsNearLinesOnly);
+		conf->endGroup();
+	}
+}
+
+void ObjectVisibility::setVisibilityAutoCompute(bool enabled)
+{
+	if (enabled == visibilityAutoCompute)
+		return;
+	visibilityAutoCompute = enabled;
+
+	if (conf)
+	{
+		conf->beginGroup("ObjectVisibility");
+		conf->setValue("visibility_auto_compute", visibilityAutoCompute);
 		conf->endGroup();
 	}
 }
