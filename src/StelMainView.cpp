@@ -1624,21 +1624,14 @@ void StelMainView::moveEvent(QMoveEvent * event)
 	//const QPoint &pos=event->pos(); // top-left of drawing area
 	const QPoint &pos=frameGeometry().topLeft(); // including frame!
 
-	// We use the glWidget instead of the event, as we want the screen that shows most of the widget.
-	QWindow* win = glWidget->windowHandle();
-	if(win)
-	{
-		stelApp->setDevicePixelsPerPixel(win->devicePixelRatio());
-	}
-	else
-		qWarning() << "Cannot get window handle (to set device pixel ratio). (uncritical)";
-
 	if (StelApp::isInitialized())
 	{
-		qDebug() << "saving position with devicePixelRatio=" << devicePixelRatio();
+		const qreal dpp = devicePixelRatio();
+		stelApp->setDevicePixelsPerPixel(dpp);
+		qDebug() << "saving position with devicePixelRatio =" << dpp;
 
-		StelApp::immediateSave("video/screen_x", int(std::lround(pos.x()*devicePixelRatio())));
-		StelApp::immediateSave("video/screen_y", int(std::lround(pos.y()*devicePixelRatio())));
+		StelApp::immediateSave("video/screen_x", int(std::lround(pos.x()*dpp)));
+		StelApp::immediateSave("video/screen_y", int(std::lround(pos.y()*dpp)));
 	}
 }
 
