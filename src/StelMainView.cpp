@@ -727,7 +727,6 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 			guiItem->setGeometry(QRectF(0.0,0.0,sz.width(),sz.height()));
 		if (StelApp::isInitialized()  && !isFullScreen())
 		{
-			qDebug() << "saving size with devicePixelRatio=" << devicePixelRatio();
 			StelApp::immediateSave("video/screen_w", int(std::lround(sz.width() *devicePixelRatio())));
 			StelApp::immediateSave("video/screen_h", int(std::lround(sz.height()*devicePixelRatio())));
 		}
@@ -1621,14 +1620,12 @@ bool StelMainView::needsMaxFPS() const
 
 void StelMainView::moveEvent(QMoveEvent * event)
 {
-	//const QPoint &pos=event->pos(); // top-left of drawing area
-	const QPoint &pos=frameGeometry().topLeft(); // including frame!
+	const QPoint &pos=frameGeometry().topLeft(); // including frame! (Original event->pos() returns top-left of drawing area)
 
 	if (StelApp::isInitialized())
 	{
 		const qreal dpp = devicePixelRatio();
 		stelApp->setDevicePixelsPerPixel(dpp);
-		qDebug() << "saving position with devicePixelRatio =" << dpp;
 
 		StelApp::immediateSave("video/screen_x", int(std::lround(pos.x()*dpp)));
 		StelApp::immediateSave("video/screen_y", int(std::lround(pos.y()*dpp)));
