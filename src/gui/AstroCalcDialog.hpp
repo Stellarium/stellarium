@@ -1187,6 +1187,17 @@ private:
 				return a < b;
 			}
 
+			// periodic comets
+			static const QRegularExpression periodic("^(\\d+)P/([\\w\\-]+)\\s[(](\\d+)[)]$");
+			QRegularExpressionMatch periodicMatch=periodic.match(text(column));
+			QRegularExpressionMatch periodicOtherMatch=periodic.match(other.text(column));
+			if (periodicMatch.hasMatch() && periodicOtherMatch.hasMatch())
+			{
+				int apc = periodicMatch.captured(1).toInt();
+				int bpc = periodicOtherMatch.captured(1).toInt();
+				return apc < bpc;
+			}
+
 			// deep-sky objects
 			static const QRegularExpression dso("^(\\w+)\\s*([\\d\\-\\+\\.]+)\\s*(.*)$");
 			static const QRegularExpression rx("[\\-\\+\\.]+");
