@@ -478,14 +478,14 @@ int main(int argc, char **argv)
 
 	const auto virtSize = QSize(confSettings->value("video/screen_w", screenGeom.width()).toInt(),
 								confSettings->value("video/screen_h", screenGeom.height()).toInt());
-#ifdef Q_OS_WIN
-	const auto size = QSize(std::lround(virtSize.width()),
-				    std::lround(virtSize.height()));
-#else
+//#ifdef Q_OS_WIN
+//	const auto size = QSize(std::lround(virtSize.width()),
+//				    std::lround(virtSize.height()));
+//#else
 	const auto pixelRatio = qscreen->devicePixelRatio();
 	const auto size = QSize(std::lround(virtSize.width()/pixelRatio),
 				    std::lround(virtSize.height()/pixelRatio));
-#endif
+//#endif
 	mainWin.resize(size);
 
 	const bool fullscreen = confSettings->value("video/fullscreen", true).toBool();
@@ -503,13 +503,13 @@ int main(int argc, char **argv)
 	{
 		const int x = confSettings->value("video/screen_x", 0).toInt();
 		const int y = confSettings->value("video/screen_y", 0).toInt();
-#ifdef Q_OS_WIN
-		mainWin.move(screenGeom.x() + x,
-			     screenGeom.y() + y);
-#else
+//#ifdef Q_OS_WIN
+//		mainWin.move(screenGeom.x() + x,
+//			     screenGeom.y() + y);
+//#else
 		mainWin.move(screenGeom.x() + x/pixelRatio,
 			     screenGeom.y() + y/pixelRatio);
-#endif
+//#endif
 	}
 
 	mainWin.show();

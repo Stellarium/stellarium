@@ -718,6 +718,16 @@ StelMainView::StelMainView(QSettings* settings)
 
 void StelMainView::resizeEvent(QResizeEvent* event)
 {
+	qreal devicePixelRatio=1.0;
+	// We use the glWidget instead of the event, as we want the screen that shows most of the widget.
+	QWindow* win = glWidget->windowHandle();
+	if(win)
+	{
+		devicePixelRatio=win->devicePixelRatio();
+	}
+	else
+		qCritical() << "resizeEvent: CANNOT GET WINDOW HANDLE! --> CANNOT SET devicePixelRatio";
+
 	if(scene())
 	{
 		const QSize& sz = event->size();
@@ -727,8 +737,9 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 			guiItem->setGeometry(QRectF(0.0,0.0,sz.width(),sz.height()));
 		if (StelApp::isInitialized()  && !isFullScreen())
 		{
-			StelApp::immediateSave("video/screen_w", sz.width());
-			StelApp::immediateSave("video/screen_h", sz.height());
+			qDebug() << "saving size with devicePixelRatio=" << devicePixelRatio;
+			StelApp::immediateSave("video/screen_w", sz.width() *devicePixelRatio);
+			StelApp::immediateSave("video/screen_h", sz.height()*devicePixelRatio);
 		}
 		emit sizeChanged(sz);
 	}
@@ -1621,18 +1632,24 @@ bool StelMainView::needsMaxFPS() const
 void StelMainView::moveEvent(QMoveEvent * event)
 {
 	const QPoint &pos=event->pos();
+	qreal devicePixelRatio=1.0;
 
 	// We use the glWidget instead of the event, as we want the screen that shows most of the widget.
 	QWindow* win = glWidget->windowHandle();
 	if(win)
 	{
-		stelApp->setDevicePixelsPerPixel(win->devicePixelRatio());
+		devicePixelRatio=win->devicePixelRatio();
+		stelApp->setDevicePixelsPerPixel(devicePixelRatio);
 	}
+	else
+		qCritical() << "moveEvent: CANNOT GET WINDOW HANDLE! --> CANNOT SET devicePixelRatio";
 
 	if (StelApp::isInitialized())
 	{
-		StelApp::immediateSave("video/screen_x", pos.x());
-		StelApp::immediateSave("video/screen_y", pos.y());
+		qDebug() << "saving position with devicePixelRatio=" << devicePixelRatio;
+
+		StelApp::immediateSave("video/screen_x", pos.x()*devicePixelRatio);
+		StelApp::immediateSave("video/screen_y", pos.y()*devicePixelRatio);
 	}
 }
 
