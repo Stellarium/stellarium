@@ -1172,14 +1172,17 @@ private:
 
 		if (column == AstroCalcDialog::WUTObjectName)
 		{
+			int a, b;
+			QString an, ax, bn, bx;
+
 			// minor planets
 			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 			QRegularExpressionMatch mpMatch=mp.match(text(column));
 			QRegularExpressionMatch mpOtherMatch=mp.match(other.text(column));
 			if (mpMatch.hasMatch() && mpOtherMatch.hasMatch())
 			{
-				int a = mpMatch.captured(1).toInt();
-				int b = mpOtherMatch.captured(1).toInt();
+				a = mpMatch.captured(1).toInt();
+				b = mpOtherMatch.captured(1).toInt();
 				return a < b;
 			}
 
@@ -1189,9 +1192,9 @@ private:
 			QRegularExpressionMatch periodicOtherMatch=periodic.match(other.text(column));
 			if (periodicMatch.hasMatch() && periodicOtherMatch.hasMatch())
 			{
-				int apc = periodicMatch.captured(1).toInt();
-				int bpc = periodicOtherMatch.captured(1).toInt();
-				return apc < bpc;
+				a = periodicMatch.captured(1).toInt();
+				b = periodicOtherMatch.captured(1).toInt();
+				return a < b;
 			}
 
 			// deep-sky objects
@@ -1201,17 +1204,17 @@ private:
 			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
 			if (dsoMatch.hasMatch() && dsoOtherMatch.hasMatch())
 			{
-				QString ap = dsoMatch.captured(1).toLower();
-				QString an = dsoMatch.captured(2);
+				ax = dsoMatch.captured(1).toLower();
+				an = dsoMatch.captured(2);
 				an.replace(rx, "0");
 				an = an.rightJustified(10, '0');
 
-				QString bp = dsoOtherMatch.captured(1).toLower();
-				QString bn = dsoOtherMatch.captured(2);
+				bx = dsoOtherMatch.captured(1).toLower();
+				bn = dsoOtherMatch.captured(2);
 				bn.replace(rx, "0");
 				bn = bn.rightJustified(10, '0');
 
-				return QString("%1 %2").arg(ap, an) < QString("%1 %2").arg(bp, bn);
+				return QString("%1 %2").arg(ax, an) < QString("%1 %2").arg(bx, bn);
 			}
 
 			// HIP-like stars (standard modern designation: CAT XXXXX)
@@ -1220,13 +1223,13 @@ private:
 			QRegularExpressionMatch hipOtherMatch=hip.match(other.text(column));
 			if (hipMatch.hasMatch() && hipOtherMatch.hasMatch())
 			{
-				QString asx = hipMatch.captured(1);
-				QString asn = hipMatch.captured(2).rightJustified(7, '0');
+				ax = hipMatch.captured(1);
+				an = hipMatch.captured(2).rightJustified(7, '0');
 
-				QString bsx = hipOtherMatch.captured(1);
-				QString bsn = hipOtherMatch.captured(2).rightJustified(7, '0');
+				bx = hipOtherMatch.captured(1);
+				bn = hipOtherMatch.captured(2).rightJustified(7, '0');
 
-				return QString("%1 %2").arg(asx, asn) < QString("%1 %2").arg(bsx, bsn);
+				return QString("%1 %2").arg(ax, an) < QString("%1 %2").arg(bx, bn);
 			}
 
 			return StelUtils::naturalLessThan(text(column).toLower(), other.text(column).toLower());
