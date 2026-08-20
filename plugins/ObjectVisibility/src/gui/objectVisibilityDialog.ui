@@ -259,17 +259,17 @@
               <string>Calculate</string>
              </property>
              <property name="toolTip">
-              <string>Compute visibility for the selected object.</string>
+              <string>Calculate visibility for the selected object.</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QCheckBox" name="visibilityAutoComputeCheckBox">
              <property name="toolTip">
-              <string>Automatically compute visibility for the selected star or deep-sky object and keep it updated while this tab is open.</string>
+              <string>Automatically calculate visibility for the selected star or deep-sky object and keep it updated while this tab is open.</string>
              </property>
              <property name="text">
-              <string>Compute automatically</string>
+              <string>Calculate automatically</string>
              </property>
             </widget>
            </item>

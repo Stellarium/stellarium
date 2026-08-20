@@ -284,9 +284,10 @@ void ObjectVisibilityDialog::updateCalculateButtonEnabled()
 	StelCore* core = StelApp::getInstance().getCore();
 	const QString planet = core->getCurrentLocation().planetName;
 	const bool planetOk = isSupportedPlanet(planet);
+	const bool autoCalculate = ui->visibilityAutoComputeCheckBox->isChecked();
 
 	const bool acceptable = typeOk && planetOk;
-	ui->calculatePushButton->setEnabled(acceptable);
+	ui->calculatePushButton->setEnabled(acceptable && !autoCalculate);
 
 	QString tip;
 	if (!typeOk)
@@ -296,8 +297,10 @@ void ObjectVisibilityDialog::updateCalculateButtonEnabled()
 		         "Moon, the eight planets, Pluto and the four Galilean "
 		         "moons.  The current observing body (%1) is not "
 		         "supported.").arg(planet);
+	else if (autoCalculate)
+		tip = q_("Turn off Calculate automatically to use this button.");
 	else
-		tip = q_("Compute visibility for the selected object.");
+		tip = q_("Calculate visibility for the selected object.");
 	ui->calculatePushButton->setToolTip(tip);
 }
 
