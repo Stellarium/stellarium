@@ -25,6 +25,7 @@
 #include "NebulaMgr.hpp"
 #include "ScmPolygonInfoTreeItem.hpp"
 #include "StarMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
@@ -164,6 +165,9 @@ void ScmSkyCultureDialog::createDialogContent()
 	        &ScmSkyCultureDialog::removeSelectedConstellation);
 	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,
 	        &ScmSkyCultureDialog::updateRemoveConstellationButton);
+
+	connect(ui->constellationsList, &QListWidget::itemDoubleClicked, this,
+	        &ScmSkyCultureDialog::centerViewOnConstellation);
 
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmSkyCultureDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmSkyCultureDialog::handleFontChanged);
@@ -403,6 +407,26 @@ void ScmSkyCultureDialog::editSelectedConstellation()
 		}
 
 		openConstellationDialog(selectedConstellationId);
+	}
+}
+
+void ScmSkyCultureDialog::centerViewOnConstellation(QListWidgetItem *item)
+{
+	if (item == nullptr || constellations == nullptr)
+	{
+		return;
+	}
+
+	const QString displayName = item->text();
+	for (const auto &constellation : *constellations)
+	{
+		if (displayName == getDisplayNameFromConstellation(*constellation))
+		{
+			StelMovementMgr *mvmgr = GETSTELMODULE(StelMovementMgr);
+			mvmgr->moveToJ2000(constellation->getCenterPosition(),
+			                   mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
+			break;
+		}
 	}
 }
 

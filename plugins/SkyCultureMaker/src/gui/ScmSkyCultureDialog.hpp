@@ -40,6 +40,7 @@
 
 class Ui_scmSkyCultureDialog;
 class ScmAddPolygonDialog;
+class QListWidgetItem;
 
 class ScmSkyCultureDialog : public StelDialogSeparate
 {
@@ -100,6 +101,7 @@ private slots:
 	void removeSelectedConstellation();
 	void updateEditConstellationButton();
 	void updateRemoveConstellationButton();
+	void centerViewOnConstellation(QListWidgetItem *item);
 	void updateRemovePolygonButton();
 	void saveLicense();
 	void updateSkyCultureTimeValue(int year);
