@@ -57,6 +57,12 @@ Given a star with declination @f$\delta@f$ at the current epoch
 The plugin does **not** handle planets, the Sun, the Moon, asteroids,
 comets or artificial satellites: their motion across the sky is too
 fast for a single static snapshot to be useful.
+
+The Twilight limits tab is Earth-only. It draws the equator, tropics,
+polar circles, and solstice latitudes where the Sun's lowest or highest
+altitude is -6°, -12°, or -18°. These latitudes are computed from
+Earth's obliquity of date, so they remain valid for historical and
+future epochs supported by Stellarium.
 @}
 */
 
@@ -94,15 +100,30 @@ public:
 	void loadSettings();
 
 	int getGoodVisibilityLimit() const { return goodVisibilityLimit; }
+	bool getPlaceLabelsVisible() const { return placeLabelsVisible; }
+	int getPlaceLabelsMinimumPopulation() const { return placeLabelsMinimumPopulation; }
+	bool getPlaceLabelsNearLinesOnly() const { return placeLabelsNearLinesOnly; }
+	bool getVisibilityAutoCompute() const { return visibilityAutoCompute; }
+	bool getSyncMaps() const { return syncMaps; }
 
 signals:
 	void goodVisibilityLimitChanged(int degrees);
 
 public slots:
 	void setGoodVisibilityLimit(int degrees);
+	void setPlaceLabelsVisible(bool visible);
+	void setPlaceLabelsMinimumPopulation(int population);
+	void setPlaceLabelsNearLinesOnly(bool nearLinesOnly);
+	void setVisibilityAutoCompute(bool enabled);
+	void setSyncMaps(bool enabled);
 
 private:
 	int goodVisibilityLimit;          //!< degrees, range [1, 89]
+	bool placeLabelsVisible;
+	int placeLabelsMinimumPopulation;
+	bool placeLabelsNearLinesOnly;
+	bool visibilityAutoCompute;
+	bool syncMaps;
 	QSettings* conf;
 
 #ifndef NO_GUI

@@ -188,7 +188,7 @@ public:
 
 	//! Removes an object from the user Solar System configuration file.
 	//! Reloads the Solar System on successful removal.
-	//! \arg name true name of the object ("name" parameter in the configuration file)
+	//! \arg name true name or IAU designation of the object ("name" or "iau_designation" parameter in the configuration file)
 	//! \returns true if the entry has been removed successfully or there is
 	//! no such entry
 	//! \returns false if there was an error

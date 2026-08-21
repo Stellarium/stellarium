@@ -178,7 +178,7 @@ void SolarSystemManagerWindow::populateSolarSystemList()
 	for (const auto& object : GETSTELMODULE(SolarSystem)->getAllMinorBodies())
 	{
 		// GZ new for 0.16: only insert objects which are minor bodies.
-		unlocalizedNames.insert(object->getNameI18n(), object->getEnglishName());
+		unlocalizedNames.insert(object->getNameI18n(), object->getID());
 	}
 
 	ui->listWidgetObjects->clear();
@@ -197,10 +197,10 @@ void SolarSystemManagerWindow::removeObjects()
 		for (auto* item : ui->listWidgetObjects->selectedItems())
 		{
 			QString ssoI18nName = item->text();
-			QString ssoEnglishName = unlocalizedNames.value(ssoI18nName);
+			QString ssoId = unlocalizedNames.value(ssoI18nName);
 			//qDebug() << ssoId;
 			//TODO: Ask for confirmation first?
-			ssEditor->removeSsoWithName(ssoEnglishName);
+			ssEditor->removeSsoWithName(ssoId);
 		}
 		connect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
 		populateSolarSystemList();

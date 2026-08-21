@@ -83,7 +83,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/viewcontrol", "api/pr
             $scriptlist.empty();
 
             //sort it and insert
-            $.each(data.sort(), function(idx, elem) {
+            $.each(data.sort(function(a, b) { return a.toLowerCase().localeCompare(b.toLowerCase());}), function(idx, elem) {
                 $("<option/>").text(elem).val(elem).appendTo($scriptlist);
             });
             

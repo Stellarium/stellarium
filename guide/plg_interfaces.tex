@@ -239,6 +239,85 @@ and perihelion. Clicking any of these buttons sets the time to that of the event
  
 \newpage
 
+\section{Object Visibility Plugin}
+\label{sec:plugins:ObjectVisibility}
+
+\noindent The Object Visibility plugin provides map-based tools which help to
+answer the question where selected objects can be seen from, and how
+the solar twilight zones are distributed on Earth or on other supported
+Solar System bodies. If enabled (see
+section~\ref{sec:Plugins:EnablingPlugins}), click on the plugin button
+\guibutton[0.09]{0.6}{bt_object_visibility_off.png} on the bottom
+toolbar to open the plugin window.
+
+\begin{figure}[th]\centering
+\includegraphics[width=.82\textwidth]{object_visibility_visibility.png}
+\caption{The Visibility tab of the Object Visibility plugin.}
+\label{fig:ObjectVisibility:Visibility}
+\end{figure}
+
+\noindent The first tab, \menu{Visibility}, works with the currently selected
+star or deep-sky object. Press \button{Calculate} to draw the visibility
+limits for the selected object on a world map. The solid curve shows
+where the object just reaches the horizon, while the dashed curve marks
+where it reaches the user-defined
+``good visibility'' altitude. Additional symbols indicate where the
+object can pass through the zenith and where it becomes circumpolar in
+the northern or southern hemisphere.
+
+The map marker follows the observer's current location. Activate
+\menu{Set location by map click} to move the observer by clicking on
+the map. The \menu{Sync maps} option keeps pan and zoom synchronised
+between all map tabs. The place labels can be enabled with a minimum
+population threshold, and can optionally be restricted to labels near
+the plotted lines.
+
+\begin{figure}[th]\centering
+\includegraphics[width=.82\textwidth]{object_visibility_twilight_limits.png}
+\caption{The Twilight limits tab of the Object Visibility plugin.}
+\label{fig:ObjectVisibility:TwilightLimits}
+\end{figure}
+
+The second tab, \menu{Twilight limits}, is Earth-only. It shows the
+latitude limits related to the solstices for the current epoch,
+including the equator, tropics, polar circles, and the limits at which
+the Sun's lowest or highest altitude is $-6\degree$, $-12\degree$ or
+$-18\degree$. These correspond to the conventional limits for civil,
+nautical and astronomical twilight. The calculation follows the
+obliquity valid for the current simulation date.
+
+\begin{figure}[th]\centering
+\includegraphics[width=.82\textwidth]{object_visibility_twilight_map_earth.png}
+\caption{The Twilight Map tab on Earth, showing sunrise and sunset,
+civil, nautical and astronomical twilight, night, and the subsolar and
+sublunar points.}
+\label{fig:ObjectVisibility:TwilightMapEarth}
+\end{figure}
+
+The third tab, \menu{Twilight Map}, follows the planetarium time in
+real time. On Earth it shades the map according to the apparent solar
+altitude. The boundary between day and night uses the upper limb of the
+Sun with an allowance for atmospheric refraction, while the additional
+contours mark civil, nautical and astronomical twilight. The Sun and
+Moon symbols show the locations where these bodies are in the zenith.
+
+\begin{figure}[th]\centering
+\includegraphics[width=.82\textwidth]{object_visibility_twilight_map_moon.png}
+\caption{The Twilight Map tab used from the Moon. On bodies other than
+Earth, the plugin shows the geometric solar terminator and shades the
+night side.}
+\label{fig:ObjectVisibility:TwilightMapMoon}
+\end{figure}
+
+When the observer is located on another supported Solar System body,
+the \menu{Twilight Map} tab switches to a simpler terminator view. In
+this mode the plugin uses the Sun's centre and the geometric horizon,
+and shades the night side of the current body. This is useful for
+planning observations or surface views from the Moon, planets, Pluto,
+or the Galilean satellites supported by Stellarium's location system.
+
+\clearpage
+
 \section{Text User Interface Plugin}
 \label{sec:plugins:TextUserInterface}
 
@@ -1024,4 +1103,3 @@ Instructions for adding manual textures (e.g., sketches, paintings). The process
 %%% mode: latex
 %%% TeX-master: "guide"
 %%% End: 
-

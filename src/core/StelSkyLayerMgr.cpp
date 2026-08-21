@@ -135,8 +135,8 @@ QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHi
 		key+=suffix;
 	}
 	allSkyLayers.insert(key,bEl);
-	connect(bEl->layer.data(), SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
-	connect(bEl->layer.data(), SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
+	connect(bEl->layer.data(), &StelSkyLayer::loadingStateChanged, this, &StelSkyLayerMgr::loadingStateChanged);
+	connect(bEl->layer.data(), &StelSkyLayer::percentLoadedChanged, this, &StelSkyLayerMgr::percentLoadedChanged);
 	return key;
 }
 
@@ -171,8 +171,8 @@ void StelSkyLayerMgr::removeSkyLayer(const QString& key)
 	if (allSkyLayers.contains(key))
 	{
 		SkyLayerElem* bEl = allSkyLayers[key];
-		disconnect(bEl->layer.data(), SIGNAL(loadingStateChanged(bool)), this, SLOT(loadingStateChanged(bool)));
-		disconnect(bEl->layer.data(), SIGNAL(percentLoadedChanged(int)), this, SLOT(percentLoadedChanged(int)));
+		disconnect(bEl->layer.data(), &StelSkyLayer::loadingStateChanged, this, &StelSkyLayerMgr::loadingStateChanged);
+		disconnect(bEl->layer.data(), &StelSkyLayer::percentLoadedChanged, this, &StelSkyLayerMgr::percentLoadedChanged);
 		delete bEl;
 		allSkyLayers.remove(key);
 	}

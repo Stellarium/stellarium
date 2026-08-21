@@ -131,6 +131,8 @@ void ConfigurationDialog::retranslate()
 
 		populateDitherList();
 
+		populateToolbarCornerComboBox();
+
 		//Plug-in information
 		populatePluginsList();
 
@@ -339,7 +341,8 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->showAsterismLinesButtonCheckBox,     "StelGui.flagShowAsterismLinesButton");
 	connectBoolProperty(ui->showAsterismLabelsButtonCheckBox,    "StelGui.flagShowAsterismLabelsButton");
 
-	connectBoolProperty(ui->checkBoxDecimalDegrees,              "StelApp.flagShowDecimalDegrees");
+	connectBoolProperty(ui->checkBoxDecimalDegreesCoords,        "StelApp.flagUseDecDegreesCoords");
+	connectBoolProperty(ui->checkBoxDecimalDegreesOther,         "StelApp.flagUseDecDegreesOther");
 	connectBoolProperty(ui->checkBoxAzimuthFromSouth,            "StelApp.flagUseAzimuthFromSouth");
 	connectBoolProperty(ui->checkBoxNegativeHourAngles,          "StelApp.flagUseNegativeHourAngles");
 	connectBoolProperty(ui->checkBoxPolarDistance,               "StelApp.flagUsePolarDistance");
@@ -423,6 +426,10 @@ void ConfigurationDialog::createDialogContent()
 	connect(mainView, &StelMainView::customScreenshotHeightChanged,      this, &ConfigurationDialog::updateDpiTooltip);
 	connect(mainView, &StelMainView::sizeChanged,                        this, &ConfigurationDialog::updateDpiTooltip);
 	updateDpiTooltip();
+
+	// Toolbar corner combobox (0=BL, 1=BR, 2=TL, 3=TR)
+	populateToolbarCornerComboBox();
+	connect(ui->toolbarCornerComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setToolbarCorner(int)));
 
 	// script tab controls
 	#ifdef ENABLE_SCRIPTING
@@ -526,6 +533,29 @@ void ConfigurationDialog::updateDateTimeDisplayFormat()
 	QString dateFormat = localeManager.getQtDateFormatStr();
 	ui->todayTimeSpinBox->setDisplayFormat(timeFormat);
 	ui->fixedDateTimeEdit->setDisplayFormat(QString("%1 %2").arg(dateFormat, timeFormat));
+}
+
+void ConfigurationDialog::populateToolbarCornerComboBox()
+{
+	QComboBox* cb = ui->toolbarCornerComboBox;
+	const int cur = cb->count() > 0 ? cb->currentIndex()
+	                                : StelApp::getInstance()
+	                                          .getStelPropertyManager()
+	                                          ->getStelPropertyValue("StelGui.toolbarCorner")
+	                                          .toInt();
+	cb->blockSignals(true);
+	cb->clear();
+	cb->addItem(qc_("Bottom-left", "GUI alignment"));
+	cb->addItem(qc_("Bottom-right", "GUI alignment"));
+	cb->addItem(qc_("Top-left", "GUI alignment"));
+	cb->addItem(qc_("Top-right", "GUI alignment"));
+	cb->setCurrentIndex(qBound(0, cur, 3));
+	cb->blockSignals(false);
+}
+
+void ConfigurationDialog::setToolbarCorner(int idx)
+{
+	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("StelGui.toolbarCorner", idx);
 }
 
 void ConfigurationDialog::setKeyNavigationState(bool state)
@@ -1399,6 +1429,8 @@ void ConfigurationDialog::saveAllSettings()
 	// toolbar auto-hide status
         conf->setValue("gui/auto_hide_horizontal_toolbar",              propMgr->getStelPropertyValue("StelGui.autoHideHorizontalButtonBar").toBool());
         conf->setValue("gui/auto_hide_vertical_toolbar",                propMgr->getStelPropertyValue("StelGui.autoHideVerticalButtonBar").toBool());
+        // toolbar positions
+        conf->setValue("gui/toolbar_corner",                            propMgr->getStelPropertyValue("StelGui.toolbarCorner").toInt());
         conf->setValue("gui/flag_show_quit_button",                     propMgr->getStelPropertyValue("StelGui.flagShowQuitButton").toBool());
         conf->setValue("gui/flag_show_nebulae_background_button",       propMgr->getStelPropertyValue("StelGui.flagShowNebulaBackgroundButton").toBool());
         conf->setValue("gui/flag_show_dss_button",                      propMgr->getStelPropertyValue("StelGui.flagShowDSSButton").toBool());
@@ -1416,7 +1448,8 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("gui/flag_show_constellation_arts_button",       propMgr->getStelPropertyValue("StelGui.flagShowConstellationArtsButton").toBool());
         conf->setValue("gui/flag_show_asterism_lines_button",           propMgr->getStelPropertyValue("StelGui.flagShowAsterismLinesButton").toBool());
         conf->setValue("gui/flag_show_asterism_labels_button",          propMgr->getStelPropertyValue("StelGui.flagShowAsterismLabelsButton").toBool());
-        conf->setValue("gui/flag_show_decimal_degrees",                 propMgr->getStelPropertyValue("StelApp.flagShowDecimalDegrees").toBool());
+        conf->setValue("gui/flag_use_decimal_degrees_coords",           propMgr->getStelPropertyValue("StelApp.flagUseDecDegreesCoords").toBool());
+        conf->setValue("gui/flag_use_decimal_degrees_other",            propMgr->getStelPropertyValue("StelApp.flagUseDecDegreesOther").toBool());
         conf->setValue("gui/flag_use_azimuth_from_south",               propMgr->getStelPropertyValue("StelApp.flagUseAzimuthFromSouth").toBool());
         conf->setValue("gui/flag_use_polar_distance",                   propMgr->getStelPropertyValue("StelApp.flagUsePolarDistance").toBool());
         conf->setValue("gui/flag_use_formatting_output",                propMgr->getStelPropertyValue("StelApp.flagUseFormattingOutput").toBool());

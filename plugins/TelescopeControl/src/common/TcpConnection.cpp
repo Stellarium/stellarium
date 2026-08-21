@@ -29,6 +29,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #ifdef Q_OS_WIN
   #include <ws2tcpip.h> // getaddrinfo, freeaddrinfo
 #else
+  #include <sys/types.h>
+  #include <sys/socket.h>
   #include <netdb.h>    // getaddrinfo, freeaddrinfo
 #endif
 

@@ -36,7 +36,28 @@
 #include <QPixmap>
 #include <QSettings>
 #include <algorithm>
+#include <cstdlib>
 #include <stdexcept>
+
+namespace
+{
+int normalizePlaceLabelsMinimumPopulation(int population)
+{
+	static const int values[] = {100000, 500000, 1000000, 5000000};
+	int best = values[0];
+	int bestDistance = std::abs(population - best);
+	for (int value : values)
+	{
+		const int distance = std::abs(population - value);
+		if (distance < bestDistance)
+		{
+			best = value;
+			bestDistance = distance;
+		}
+	}
+	return best;
+}
+}
 
 //
 // =================== Plug-in interface (Qt plug-in system) ===================
@@ -60,7 +81,9 @@ StelPluginInfo ObjectVisibilityStelPluginInterface::getPluginInfo() const
 	info.description = N_("Shows on a planet map where a selected star or "
 	                      "deep-sky object is visible.  Supports observation "
 	                      "from Earth, the Moon, the eight planets, Pluto, "
-	                      "and the four Galilean moons.  Based on the "
+	                      "and the four Galilean moons.  Also shows "
+	                      "Earth-only solstice twilight latitude limits "
+	                      "computed from obliquity of date.  Based on the "
 	                      "geometric criteria of the Astro-Geo-GIS article "
 	                      "\"The 49 brightest stars in the night sky – when "
 	                      "and where can we see them?\"");
@@ -75,6 +98,11 @@ StelPluginInfo ObjectVisibilityStelPluginInterface::getPluginInfo() const
 
 ObjectVisibility::ObjectVisibility()
 	: goodVisibilityLimit(5)
+	, placeLabelsVisible(false)
+	, placeLabelsMinimumPopulation(1000000)
+	, placeLabelsNearLinesOnly(true)
+	, visibilityAutoCompute(false)
+	, syncMaps(false)
 	, conf(nullptr)
 #ifndef NO_GUI
 	, configDialog(nullptr)
@@ -173,8 +201,22 @@ void ObjectVisibility::loadSettings()
 	Q_ASSERT(conf);
 	conf->beginGroup("ObjectVisibility");
 	const int v = conf->value("good_visibility_limit", 5).toInt();
+	const bool labelsVisible =
+		conf->value("place_labels_visible", false).toBool();
+	const int minPopulation = normalizePlaceLabelsMinimumPopulation(
+		conf->value("place_labels_minimum_population", 1000000).toInt());
+	const bool labelsNearLinesOnly =
+		conf->value("place_labels_near_lines_only", true).toBool();
+	const bool autoCompute =
+		conf->value("visibility_auto_compute", false).toBool();
+	const bool mapsSynced = conf->value("sync_maps", false).toBool();
 	conf->endGroup();
 	setGoodVisibilityLimit(std::clamp(v, 1, 89));
+	setPlaceLabelsVisible(labelsVisible);
+	setPlaceLabelsMinimumPopulation(minPopulation);
+	setPlaceLabelsNearLinesOnly(labelsNearLinesOnly);
+	setVisibilityAutoCompute(autoCompute);
+	setSyncMaps(mapsSynced);
 }
 
 void ObjectVisibility::restoreDefaultSettings()
@@ -183,6 +225,11 @@ void ObjectVisibility::restoreDefaultSettings()
 	conf->beginGroup("ObjectVisibility");
 	conf->remove("");      // wipe section
 	conf->setValue("good_visibility_limit", 5);
+	conf->setValue("place_labels_visible", false);
+	conf->setValue("place_labels_minimum_population", 1000000);
+	conf->setValue("place_labels_near_lines_only", true);
+	conf->setValue("visibility_auto_compute", false);
+	conf->setValue("sync_maps", false);
 	conf->endGroup();
 	loadSettings();
 }
@@ -201,4 +248,77 @@ void ObjectVisibility::setGoodVisibilityLimit(int degrees)
 		conf->endGroup();
 	}
 	emit goodVisibilityLimitChanged(goodVisibilityLimit);
+}
+
+void ObjectVisibility::setPlaceLabelsVisible(bool visible)
+{
+	if (visible == placeLabelsVisible)
+		return;
+	placeLabelsVisible = visible;
+
+	if (conf)
+	{
+		conf->beginGroup("ObjectVisibility");
+		conf->setValue("place_labels_visible", placeLabelsVisible);
+		conf->endGroup();
+	}
+}
+
+void ObjectVisibility::setPlaceLabelsMinimumPopulation(int population)
+{
+	population = normalizePlaceLabelsMinimumPopulation(population);
+	if (population == placeLabelsMinimumPopulation)
+		return;
+	placeLabelsMinimumPopulation = population;
+
+	if (conf)
+	{
+		conf->beginGroup("ObjectVisibility");
+		conf->setValue("place_labels_minimum_population",
+		               placeLabelsMinimumPopulation);
+		conf->endGroup();
+	}
+}
+
+void ObjectVisibility::setPlaceLabelsNearLinesOnly(bool nearLinesOnly)
+{
+	if (nearLinesOnly == placeLabelsNearLinesOnly)
+		return;
+	placeLabelsNearLinesOnly = nearLinesOnly;
+
+	if (conf)
+	{
+		conf->beginGroup("ObjectVisibility");
+		conf->setValue("place_labels_near_lines_only",
+		               placeLabelsNearLinesOnly);
+		conf->endGroup();
+	}
+}
+
+void ObjectVisibility::setVisibilityAutoCompute(bool enabled)
+{
+	if (enabled == visibilityAutoCompute)
+		return;
+	visibilityAutoCompute = enabled;
+
+	if (conf)
+	{
+		conf->beginGroup("ObjectVisibility");
+		conf->setValue("visibility_auto_compute", visibilityAutoCompute);
+		conf->endGroup();
+	}
+}
+
+void ObjectVisibility::setSyncMaps(bool enabled)
+{
+	if (enabled == syncMaps)
+		return;
+	syncMaps = enabled;
+
+	if (conf)
+	{
+		conf->beginGroup("ObjectVisibility");
+		conf->setValue("sync_maps", syncMaps);
+		conf->endGroup();
+	}
 }

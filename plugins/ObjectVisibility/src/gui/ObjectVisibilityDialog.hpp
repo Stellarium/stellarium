@@ -22,11 +22,13 @@
 #define OBJECTVISIBILITYDIALOG_HPP
 
 #include "StelDialog.hpp"
+#include "StelObjectType.hpp"
 #include <QString>
 
 class Ui_objectVisibilityDialog;
 class ObjectVisibility;
 class StelCore;
+class QTimer;
 
 //! Main window of the Object Visibility plug-in.
 //! @ingroup objectVisibility
@@ -40,6 +42,7 @@ public:
 
 public slots:
 	void retranslate() override;
+	void setVisible(bool visible) override;
 
 protected:
 	void createDialogContent() override;
@@ -58,6 +61,12 @@ private slots:
 	//! Toggle "click on map to set location" mode on the map widget.
 	void onSetLocationByClickToggled(bool on);
 
+	//! Toggle "click on map to set location" mode on the twilight map.
+	void onTwilightSetLocationByClickToggled(bool on);
+
+	//! Toggle "click on map to set location" mode on the live twilight map.
+	void onLiveTwilightSetLocationByClickToggled(bool on);
+
 	//! The user clicked the map while in click-to-set mode.
 	void onLocationPicked(double longitude, double latitude,
 	                      const QColor &color);
@@ -68,10 +77,45 @@ private slots:
 	//! Reset settings button.
 	void onResetSettings();
 
+	void onPlaceLabelsToggled(bool on);
+	void onTwilightPlaceLabelsToggled(bool on);
+	void onLiveTwilightPlaceLabelsToggled(bool on);
+	void onPlaceLabelsPopulationChanged(int index);
+	void onTwilightPlaceLabelsPopulationChanged(int index);
+	void onLiveTwilightPlaceLabelsPopulationChanged(int index);
+	void onPlaceLabelsNearLinesOnlyToggled(bool on);
+	void onTwilightPlaceLabelsNearLinesOnlyToggled(bool on);
+	void onLiveTwilightPlaceLabelsNearLinesOnlyToggled(bool on);
+	void onVisibilityAutoComputeToggled(bool on);
+	void onSyncMapsToggled(bool on);
+	void onTwilightComputeDailyToggled(bool on);
+	void onMapViewChanged(double centerLongitude, double centerLatitude,
+	                      double zoom);
+	void onTabChanged(int index);
+
 	//! Re-sync the location marker AND the planet texture from
 	//! StelCore's current observer.  Called on startup and whenever
 	//! StelCore reports a location change.
 	void syncMarkerToObserver();
+
+	//! Recompute Earth-only solstice/twilight limits for the current
+	//! epoch and update the twilight tab.
+	void refreshTwilightLimits();
+
+	//! Recompute the live Earth twilight map for Stellarium's current time.
+	void refreshTwilightMap();
+
+	//! Queue an immediate forced refresh after Stellarium has finished
+	//! handling the current time/location change.
+	void scheduleTwilightMapRefresh();
+
+	//! Run the queued forced refresh.
+	void refreshTwilightMapNow();
+	void onTwilightTimerTimeout();
+
+	//! Recompute first-tab visibility from the current selection when
+	//! automatic mode is active.
+	void refreshVisibility();
 
 private:
 	Ui_objectVisibilityDialog* ui;
@@ -92,9 +136,33 @@ private:
 	//! geographic position on the same planet.
 	QString  cachedPlanetName;
 
+	QTimer* twilightMapTimer = nullptr;
+	double  lastTwilightLimitsJd = 0.0;
+	QString twilightLimitsCachedPlanet;
+	bool    twilightLimitsCachedDaily = false;
+	double  lastTwilightMapJd = 0.0;
+	QString twilightMapCachedPlanet;
+	bool    twilightMapRefreshPending = false;
+
+	bool placeLabelsVisible = false;
+	int  placeLabelsMinimumPopulation = 1000000;
+	bool placeLabelsNearLinesOnly = true;
+	bool syncMaps = false;
+	bool applyingMapSync = false;
+
 	void setAboutHtml();
 	void refreshTitleLabel();
 	void updateCalculateButtonEnabled();
+	void configurePlaceLabelControls();
+	void syncPlaceLabelControls();
+	void updatePlaceLabels();
+	void syncMapControls();
+	bool isAutoVisibilityTabActive() const;
+	bool isLiveTwilightMapTabActive() const;
+	bool isDailyTwilightLimitsTabActive() const;
+	void updateTwilightMapTimerState();
+	bool calculateObject(const StelObjectP& object);
+	StelObjectP currentSelectedVisibilityObject() const;
 
 	//! Compute the year label in astronomical convention from the
 	//! StelCore's current JD.  E.g. 2026, or -10000 for 10001 BCE.
@@ -108,6 +176,10 @@ private:
 	//! reliably known in Stellarium: Earth, Moon, the eight planets,
 	//! Pluto, and the four Galilean moons.
 	static bool isSupportedPlanet(const QString& englishName);
+
+	//! Recompute the live twilight map.  Forced calls bypass the
+	//! short timer throttle used for ordinary live-time updates.
+	void refreshTwilightMap(bool force);
 };
 
 #endif // OBJECTVISIBILITYDIALOG_HPP

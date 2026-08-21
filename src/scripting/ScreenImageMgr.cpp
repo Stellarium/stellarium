@@ -64,7 +64,7 @@ ScreenImage::ScreenImage(const QString& filename, qreal x, qreal y, bool show, q
 	fadeTimer = new QTimeLine();
 	fadeTimer->setEasingCurve(QEasingCurve(QEasingCurve::Linear));
 	ScreenImage::setFadeDuration(fadeDuration);
-	connect(fadeTimer, SIGNAL(valueChanged(qreal)), this, SLOT(setOpacity(qreal)));
+	connect(fadeTimer, &QTimeLine::valueChanged, this, &ScreenImage::setOpacity);
 
 	// set initial displayed state
 	if (show)
