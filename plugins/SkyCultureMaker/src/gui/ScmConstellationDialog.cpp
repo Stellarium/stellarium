@@ -484,6 +484,7 @@ void ScmConstellationDialog::saveConstellation()
 		if (constellationBeingEdited != nullptr)
 		{
 			culture->removeConstellation(constellationBeingEdited->getId());
+			constellationBeingEdited = nullptr; // avoid a use-after-free in close()
 		}
 
 		scm::ScmConstellation &constellation = culture->addConstellation(id, lines,
