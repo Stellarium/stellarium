@@ -623,13 +623,14 @@ bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 	if (!std::isfinite(legacyFlux) || legacyFlux <= 0.f)
 		return false;
 
-	if (mag < -1.f)
+	const float brightSourceBlend = psfSmoothStep(0.5f, 4.f, -mag);
+	if (brightSourceBlend > 0.f)
 	{
 		const float cappedMag = qMax(mag, psfStarBrightSourceMagLimit);
 		const float rawRadius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(cappedMag), static_cast<float>(starRelativeScale)*1.40f*0.5f) * starLinearScale;
 		const float rawFlux = rawRadius * rawRadius;
 		if (std::isfinite(rawFlux) && rawFlux > legacyFlux)
-			legacyFlux = rawFlux;
+			legacyFlux += (rawFlux - legacyFlux) * brightSourceBlend;
 	}
 
 	float peak = 3.f * legacyFlux / (M_PIf * r * r);
