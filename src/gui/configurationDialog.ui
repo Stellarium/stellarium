@@ -2462,7 +2462,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QPushButton" name="editShortcutsPushButton">
+                <widget class="QToolButton" name="editShortcutsToolButton">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -2818,7 +2818,7 @@
                 <widget class="QLineEdit" name="screenshotDirEdit"/>
                </item>
                <item>
-                <widget class="QPushButton" name="screenshotBrowseButton">
+                <widget class="QToolButton" name="screenshotBrowseButton">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -2836,7 +2836,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButtonConfigureScreenshotsDialog">
+                <widget class="QToolButton" name="toolButtonConfigureScreenshotsDialog">
                  <property name="toolTip">
                   <string>Rules for screenshot file naming</string>
                  </property>
@@ -3494,7 +3494,7 @@
   <tabstop>gravityLabelCheckbox</tabstop>
   <tabstop>autoZoomResetsDirectionCheckbox</tabstop>
   <tabstop>enableKeysNavigationCheckBox</tabstop>
-  <tabstop>editShortcutsPushButton</tabstop>
+  <tabstop>editShortcutsToolButton</tabstop>
   <tabstop>enableMouseNavigationCheckBox</tabstop>
   <tabstop>enableMouseZoomingCheckBox</tabstop>
   <tabstop>mouseTimeoutCheckbox</tabstop>
@@ -3520,7 +3520,7 @@
   <tabstop>fontSaveToolButton</tabstop>
   <tabstop>screenshotDirEdit</tabstop>
   <tabstop>screenshotBrowseButton</tabstop>
-  <tabstop>pushButtonConfigureScreenshotsDialog</tabstop>
+  <tabstop>toolButtonConfigureScreenshotsDialog</tabstop>
   <tabstop>screenshotFileFormatComboBox</tabstop>
   <tabstop>invertScreenShotColorsCheckBox</tabstop>
   <tabstop>useCustomScreenshotSizeCheckBox</tabstop>

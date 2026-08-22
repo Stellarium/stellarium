@@ -255,13 +255,13 @@ void ConfigurationDialog::createDialogContent()
 
 	bool state = (mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
 	ui->enableKeysNavigationCheckBox->setChecked(state);
-	ui->editShortcutsPushButton->setEnabled(state);
+	ui->editShortcutsToolButton->setEnabled(state);
 	connect(ui->enableKeysNavigationCheckBox, &QCheckBox::toggled, this, &ConfigurationDialog::setKeyNavigationState);
 	connectBoolProperty(ui->enableMouseNavigationCheckBox, "StelMovementMgr.flagEnableMouseNavigation");
 	connectBoolProperty(ui->enableMouseZoomingCheckBox,    "StelMovementMgr.flagEnableMouseZooming");
 
 	connect(ui->fixedDateTimeCurrentButton, &QPushButton::clicked, this, &ConfigurationDialog::setFixedDateTimeToCurrent);
-	connect(ui->editShortcutsPushButton,    &QPushButton::clicked, this, &ConfigurationDialog::showShortcutsWindow);
+	connect(ui->editShortcutsToolButton,    &QToolButton::clicked, this, &ConfigurationDialog::showShortcutsWindow);
 
 	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
 	// Display formats of date
@@ -406,11 +406,11 @@ void ConfigurationDialog::createDialogContent()
 
 	// Screenshots
 	populateScreenshotFileformatsCombo();
-	connect(ui->pushButtonConfigureScreenshotsDialog, &QPushButton::clicked, this, &ConfigurationDialog::showConfigureScreenshotsDialog);
+	connect(ui->toolButtonConfigureScreenshotsDialog, &QToolButton::clicked, this, &ConfigurationDialog::showConfigureScreenshotsDialog);
 	connectStringProperty(ui->screenshotFileFormatComboBox,  "MainView.screenShotFormat");
 	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
 	connect(ui->screenshotDirEdit, &QLineEdit::editingFinished, this, &ConfigurationDialog::selectScreenshotDir);
-	connect(ui->screenshotBrowseButton, &QPushButton::clicked, this, &ConfigurationDialog::browseForScreenshotDir);
+	connect(ui->screenshotBrowseButton, &QToolButton::clicked, this, &ConfigurationDialog::browseForScreenshotDir);
 	connectBoolProperty(ui->invertScreenShotColorsCheckBox,  "MainView.flagInvertScreenShotColors");
 	connectBoolProperty(ui->useCustomScreenshotSizeCheckBox, "MainView.flagUseCustomScreenshotSize");
 	ui->customScreenshotWidthLineEdit->setValidator(new MinMaxIntValidator(128, 16384, this));
@@ -563,7 +563,7 @@ void ConfigurationDialog::setKeyNavigationState(bool state)
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	mvmgr->setFlagEnableMoveKeys(state);
 	mvmgr->setFlagEnableZoomKeys(state);
-	ui->editShortcutsPushButton->setEnabled(state);
+	ui->editShortcutsToolButton->setEnabled(state);
 }
 
 void ConfigurationDialog::updateCurrentLanguage()
