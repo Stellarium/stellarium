@@ -52,3 +52,23 @@ table.nomenclature {
 table.nomenclature tr td, table.nomenclature tr th {
         padding: 3px;
 }
+
+table {
+    border-collapse: collapse;
+    width: auto;
+    margin: 1em auto;
+    font-size: 0.95em;
+}
+
+table th,
+table td {
+    border: 1px solid #333;
+    padding: 0.4rem 0.8rem;
+    text-align: auto;
+    vertical-align: middle;
+}
+
+table th {
+    background-color: #808282;
+    font-weight: bold;
+}

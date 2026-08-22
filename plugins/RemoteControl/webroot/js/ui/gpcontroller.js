@@ -733,7 +733,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
          */
         function handleEducationalAction(action) {
             // View directions with smooth transition using core.moveToAltAzi
-            // Duration set to 0.5 seconds for smooth but responsive movement
+            // Duration set to 3 seconds for smooth but responsive movement
             if (action === "view_north") {
                 // North = azimuth 180° (π radians), altitude 0°
                 rc.postCmd("/api/scripts/direct", { 
@@ -1435,7 +1435,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     
                     updateDeviceSelector();
                     updateConnectionStatus(true, device);
-                    populateButtonCustomization();
                 }
             });
 
