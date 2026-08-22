@@ -30,6 +30,9 @@ namespace scm
 
 struct ScmCulturalName : public StelObject::CulturalName
 {
+	ScmCulturalName() = default;
+	explicit ScmCulturalName(const StelObject::CulturalName &base) : StelObject::CulturalName(base) {}
+
 	//! Integers that refer to the references list in description.md.
 	QList<int> references;
 
@@ -93,6 +96,29 @@ struct ScmCulturalName : public StelObject::CulturalName
 		}
 
 		return json;
+	}
+
+	//! Constructs a ScmCulturalName from a JSON object.
+	static ScmCulturalName fromJson(const QJsonObject &json)
+	{
+		ScmCulturalName cn;
+		cn.translated      = json["english"].toString().trimmed();
+		cn.native          = json["native"].toString().trimmed();
+		cn.pronounce       = json["pronounce"].toString().trimmed();
+		cn.transliteration = json["transliteration"].toString().trimmed();
+		cn.IPA             = json["IPA"].toString().trimmed();
+		cn.byname          = json["byname"].toString().trimmed();
+
+		const QString visible = json["visible"].toString();
+		if (visible == "morning")
+			cn.special = StelObject::CulturalNameSpecial::Morning;
+		else if (visible == "evening")
+			cn.special = StelObject::CulturalNameSpecial::Evening;
+
+		for (const QJsonValue &ref : json["references"].toArray())
+			cn.references.append(ref.toInt());
+
+		return cn;
 	}
 
 	//! Returns a trimmed version of the cultural name, i.e. with all fields trimmed.
