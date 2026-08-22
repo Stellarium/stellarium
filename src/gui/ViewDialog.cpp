@@ -1649,9 +1649,13 @@ void ViewDialog::populateLists()
 		l->addItem(new SeparatorListWidgetItem(q_("Other"), "Other"));
 	}
 
-	// find the earliest beginTime of all cultures (needed in initSkyCultureTime)
-	// ---> evaluate it here so we don't need to iterate over all cultures multiple times
-	int globalBeginTime = QDateTime::currentDateTime().date().year();
+	// find the slider limits across all cultures (needed in initSkyCultureTime)
+	// ---> evaluate it here so we don't need to iterate over all cultures multiple times.
+	// The "unknown" begin sentinel and the "present/∞" end sentinel are ignored so that cultures
+	// with no defined time range do not stretch the slider to its extremes.
+	const int currentYear = QDateTime::currentDateTime().date().year();
+	int globalBeginTime = currentYear;
+	int globalEndTime = currentYear;
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	QMultiMapIterator<QString, QString> cultureRegionIt(cultureRegionMap);
 #else
@@ -1663,12 +1667,20 @@ void ViewDialog::populateLists()
 		cultureRegionIt.previous();
 
 		QListWidgetItem* item = new QListWidgetItem(cultureRegionIt.key());
-		item->setData(Qt::UserRole, cultureTimeLimitMap.value(cultureRegionIt.key()).first); // beginTime
-		item->setData(Qt::UserRole + 1, cultureTimeLimitMap.value(cultureRegionIt.key()).second); // endTime
+		const int cultureBeginTime = cultureTimeLimitMap.value(cultureRegionIt.key()).first;
+		const int cultureEndTime = cultureTimeLimitMap.value(cultureRegionIt.key()).second;
+		item->setData(Qt::UserRole, cultureBeginTime); // beginTime
+		item->setData(Qt::UserRole + 1, cultureEndTime); // endTime
 
-		if (cultureTimeLimitMap.value(cultureRegionIt.key()).first < globalBeginTime)
+		// Find the earliest real begin year across all cultures
+		if (cultureBeginTime > StelSkyCulture::unknownBeginTime && cultureBeginTime < globalBeginTime)
 		{
-			globalBeginTime = cultureTimeLimitMap.value(cultureRegionIt.key()).first;
+			globalBeginTime = cultureBeginTime;
+		}
+		// Find the latest real end year across all cultures
+		if (cultureEndTime < StelSkyCulture::presentEndTime && cultureEndTime > globalEndTime)
+		{
+			globalEndTime = cultureEndTime;
 		}
 
 		// When region is unknown (non UN-geoscheme), insert item under "other" separator,
@@ -1711,6 +1723,7 @@ void ViewDialog::populateLists()
 	}
 
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalBeginTime);
+	ui->skyCultureCurrentTimeSpinBox->setMaximum(globalEndTime);
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));    
 	l->blockSignals(false);
 
@@ -2045,9 +2058,11 @@ void ViewDialog::setCurrentCultureAsDefault(void)
 void ViewDialog::updateDefaultSkyCulture()
 {
 	// set Labels to the Min / Max time of the current selected culture (UserRole == beginTime, UserRole + 1 == endTime)
-	QString endTimeString = ui->culturesListWidget->currentItem()->data(Qt::UserRole + 1).toString();
-	ui->selectedCultureMinTimeValueLabel->setText(ui->culturesListWidget->currentItem()->data(Qt::UserRole).toString());
-	ui->selectedCultureMaxTimeValueLabel->setText(endTimeString == "9146" ? "∞" : endTimeString);
+	// The "unknown" begin sentinel is shown as text, the "present" end sentinel as ∞, instead of raw numbers.
+	const int beginTime = ui->culturesListWidget->currentItem()->data(Qt::UserRole).toInt();
+	const int endTime = ui->culturesListWidget->currentItem()->data(Qt::UserRole + 1).toInt();
+	ui->selectedCultureMinTimeValueLabel->setText(beginTime == StelSkyCulture::unknownBeginTime ? q_("Unknown") : QString::number(beginTime));
+	ui->selectedCultureMaxTimeValueLabel->setText(endTime == StelSkyCulture::presentEndTime ? "∞" : QString::number(endTime));
 
 	// Check that the useAsDefaultSkyCultureCheckBox needs to be updated
 	bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
@@ -2086,8 +2101,9 @@ void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 void ViewDialog::initSkyCultureTime()
 {
 	int minYear = ui->skyCultureCurrentTimeSpinBox->minimum();
-	int maxYear = QDateTime::currentDateTime().date().year();
-	int currentYear = maxYear;
+	int maxYear = ui->skyCultureCurrentTimeSpinBox->maximum();
+	int currentYear = QDateTime::currentDateTime().date().year();
+	if (currentYear > maxYear) currentYear = maxYear;
 
 	// set properties of involved components
 	ui->skyCultureMinTimeSpinBox->setMinimum(minYear);
@@ -2268,10 +2284,15 @@ void ViewDialog::updateSkyCultureGUI()
 	populateLists();
 
 	int minYear = ui->skyCultureCurrentTimeSpinBox->minimum();
+	int maxYear = ui->skyCultureCurrentTimeSpinBox->maximum();
 	ui->skyCultureMinTimeSpinBox->setMinimum(minYear);
+	ui->skyCultureMinTimeSpinBox->setMaximum(maxYear);
 	ui->skyCultureMinTimeSpinBox->setValue(minYear);
 	ui->skyCultureMaxTimeSpinBox->setMinimum(minYear);
+	ui->skyCultureMaxTimeSpinBox->setMaximum(maxYear);
+	ui->skyCultureMaxTimeSpinBox->setValue(maxYear);
 	ui->skyCultureTimeSlider->setMinimum(minYear);
+	ui->skyCultureTimeSlider->setMaximum(maxYear);
 }
 
 void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
