@@ -623,7 +623,7 @@ bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 	if (!std::isfinite(legacyFlux) || legacyFlux <= 0.f)
 		return false;
 
-	const float brightSourceBlend = psfSmoothStep(0.5f, 4.f, -mag);
+	const float brightSourceBlend = psfSmoothStep(0.f, 13.f, -mag);
 	if (brightSourceBlend > 0.f)
 	{
 		const float cappedMag = qMax(mag, psfStarBrightSourceMagLimit);
