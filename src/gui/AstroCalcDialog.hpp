@@ -1172,25 +1172,67 @@ private:
 
 		if (column == AstroCalcDialog::WUTObjectName)
 		{
-			static const QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			int a, b;
+			QString an, ax, bn, bx;
+
+			// minor planets
 			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
-			QRegularExpressionMatch dsoMatch=dso.match(text(column));
 			QRegularExpressionMatch mpMatch=mp.match(text(column));
-			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
 			QRegularExpressionMatch mpOtherMatch=mp.match(other.text(column));
-			int a = 0, b = 0;
-			if (dsoMatch.hasMatch())
-				a = dsoMatch.captured(2).toInt();
-			if (a==0 && mpMatch.hasMatch())
+			if (mpMatch.hasMatch() && mpOtherMatch.hasMatch())
+			{
 				a = mpMatch.captured(1).toInt();
-			if (dsoOtherMatch.hasMatch())
-				b = dsoOtherMatch.captured(2).toInt();
-			if (b==0 && mpOtherMatch.hasMatch())
 				b = mpOtherMatch.captured(1).toInt();
-			if (a>0 && b>0)
 				return a < b;
-			else
-				return text(column).toLower() < other.text(column).toLower();
+			}
+
+			// periodic comets
+			static const QRegularExpression periodic("^(\\d+)P/([\\w\\-]+)\\s[(](\\d+)[)]$");
+			QRegularExpressionMatch periodicMatch=periodic.match(text(column));
+			QRegularExpressionMatch periodicOtherMatch=periodic.match(other.text(column));
+			if (periodicMatch.hasMatch() && periodicOtherMatch.hasMatch())
+			{
+				a = periodicMatch.captured(1).toInt();
+				b = periodicOtherMatch.captured(1).toInt();
+				return a < b;
+			}
+
+			// deep-sky objects
+			static const QRegularExpression dso("^(\\w+)\\s*([\\d\\-\\+\\.]+)\\s*(.*)$");
+			static const QRegularExpression rx("[\\-\\+\\.]+");
+			QRegularExpressionMatch dsoMatch=dso.match(text(column));
+			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
+			if (dsoMatch.hasMatch() && dsoOtherMatch.hasMatch())
+			{
+				ax = dsoMatch.captured(1).toLower();
+				an = dsoMatch.captured(2);
+				an.replace(rx, "0");
+				an = an.rightJustified(10, '0');
+
+				bx = dsoOtherMatch.captured(1).toLower();
+				bn = dsoOtherMatch.captured(2);
+				bn.replace(rx, "0");
+				bn = bn.rightJustified(10, '0');
+
+				return QString("%1 %2").arg(ax, an) < QString("%1 %2").arg(bx, bn);
+			}
+
+			// HIP-like stars (standard modern designation: CAT XXXXX)
+			static const QRegularExpression hip("^(\\w+)\\s(\\d+)\\s*\\w*$");
+			QRegularExpressionMatch hipMatch=hip.match(text(column));
+			QRegularExpressionMatch hipOtherMatch=hip.match(other.text(column));
+			if (hipMatch.hasMatch() && hipOtherMatch.hasMatch())
+			{
+				ax = hipMatch.captured(1);
+				an = hipMatch.captured(2).rightJustified(7, '0');
+
+				bx = hipOtherMatch.captured(1);
+				bn = hipOtherMatch.captured(2).rightJustified(7, '0');
+
+				return QString("%1 %2").arg(ax, an) < QString("%1 %2").arg(bx, bn);
+			}
+
+			return StelUtils::naturalLessThan(text(column).toLower(), other.text(column).toLower());
 		}
 		else if (column == AstroCalcDialog::WUTMagnitude)
 		{

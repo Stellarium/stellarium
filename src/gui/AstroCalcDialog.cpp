@@ -8105,6 +8105,7 @@ void AstroCalcDialog::calculateWutObjects()
 		}
 
 		initListWUT();
+		ui->wutMatchingObjectsTreeWidget->setSortingEnabled(false);
 		ui->wutMatchingObjectsTreeWidget->showColumn(WUTMagnitude);
 		ui->wutMatchingObjectsTreeWidget->showColumn(WUTAngularSize);		
 		objectsList.clear();
@@ -8693,6 +8694,8 @@ void AstroCalcDialog::calculateWutObjects()
 		enableAngularLimits(enableAngular);
 		core->setJD(JD);
 		adjustWUTColumns();
+		ui->wutMatchingObjectsTreeWidget->setSortingEnabled(true);
+		ui->wutMatchingObjectsTreeWidget->sortByColumn(WUTObjectName, Qt::AscendingOrder);
 		if (!objectsList.isEmpty())
 			ui->saveObjectsButton->setEnabled(true);
 		else
