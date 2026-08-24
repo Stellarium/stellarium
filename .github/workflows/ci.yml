@@ -259,14 +259,15 @@ jobs:
         arch: 'win64_msvc2022_64'
         modules: 'qtcharts qtimageformats qtlocation qtmultimedia qtpositioning qtscxml qtsensors qtserialbus qtserialport qtvirtualkeyboard qtwebchannel qtwebengine qtwebsockets qtwebview debug_info qt5compat qtquicktimeline qtshadertools qtspeech'
 
+    - name: Set up MSVC environment
+      uses: ilammy/msvc-dev-cmd@v1
+
     # Packages should be automatically downloaded using vcpkg through the toolchain
     - name: Configure CMake
       env:
         CMAKE_PREFIX_PATH: ${{env.QT_ROOT_DIR}}
-      # Choose CMakeLists.text from a specific source directory with -S.
-      # Configure CMake in a 'build' subdirectory.
       run: |
-        cmake -B build -S "${{ github.workspace }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=Off -DCMAKE_INSTALL_PREFIX=stellarium-bin -DSCM_SHOULD_ENABLE_CONVERTER=OFF -G "Visual Studio 17 2022" -A x64
+        cmake -B build -S "${{ github.workspace }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=Off -DCMAKE_INSTALL_PREFIX=stellarium-bin -DSCM_SHOULD_ENABLE_CONVERTER=OFF -G "Ninja"
 
     - name: Build
       # Build your program with the given configuration
