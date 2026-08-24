@@ -101,9 +101,9 @@ jobs:
           $checksum = Get-Content -LiteralPath "$($archive.FullName).sha256" `
             -Raw
           $expectedHash = ([regex]::Match(
-            $checksum, '^([0-9a-fA-F]{64})')).Groups[1].Value
+            $checksum, '^([0-9a-fA-F]{64})')).Groups[1].Value.ToLowerInvariant()
           $actualHash = (Get-FileHash -Algorithm SHA256 `
-            -LiteralPath $archive.FullName).Hash
+            -LiteralPath $archive.FullName).Hash.ToLowerInvariant()
           if ($actualHash -cne $expectedHash) {
             throw 'SDK archive checksum mismatch'
           }
