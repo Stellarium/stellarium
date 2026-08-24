@@ -264,17 +264,18 @@ jobs:
       env:
         CMAKE_PREFIX_PATH: ${{env.QT_ROOT_DIR}}
       # Choose CMakeLists.text from a specific source directory with -S.
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      # Configure CMake in a 'build' subdirectory.
       run: |
-        cmake -B build -S "${{ github.workspace }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On -DCMAKE_INSTALL_PREFIX=stellarium-bin -DSCM_SHOULD_ENABLE_CONVERTER=OFF -G "Visual Studio 18 2026" -A x64
+        cmake -B build -S "${{ github.workspace }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=Off -DCMAKE_INSTALL_PREFIX=stellarium-bin -DSCM_SHOULD_ENABLE_CONVERTER=OFF -G "Visual Studio 17 2022" -A x64
 
     - name: Build
       # Build your program with the given configuration
       run: |
         cmake --build build --config RelWithDebInfo -j ${{env.parallel_processes}} --target install
 
-#    - name: Run unit tests
-#      run: |
-#        cd ${{ github.workspace }}\build
-#        ctest --output-on-failure -C RelWithDebInfo
+    - name: Upload Windows Executable Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: stellarium-windows-atlante
+        path: stellarium-bin/
+
