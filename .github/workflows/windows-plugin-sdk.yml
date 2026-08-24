@@ -81,7 +81,8 @@ jobs:
       - name: Build Stellarium and the SDK archive
         run: |
           cmake --build $env:BUILD_DIR --config Release --parallel 4 `
-            --target stellarium stellarium-plugin-sdk-archive
+            --target fake-show-my-sky-client stellarium `
+              stellarium-plugin-sdk-archive
           if ($LASTEXITCODE -ne 0) { throw 'Stellarium or SDK build failed' }
           cmake --install $env:BUILD_DIR --config Release
           if ($LASTEXITCODE -ne 0) { throw 'Stellarium install failed' }
