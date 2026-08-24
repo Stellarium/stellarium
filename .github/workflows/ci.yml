@@ -278,5 +278,10 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: stellarium-windows-atlante
-        path: stellarium-bin/
+        path: |
+          stellarium-bin
+          build/src
+          build/bin
+        if-no-files-found: warn
+
 
