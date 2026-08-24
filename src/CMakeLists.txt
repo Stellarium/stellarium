@@ -10,6 +10,8 @@ IF(ENABLE_SPOUT)
 ENDIF()
 
 SET(stellarium_lib_SRCS
+     core/atlante/AtlanteCosmology.hpp
+     core/atlante/AtlanteCosmology.cpp
      core/BlueNoiseTriangleRemapped.hpp
      core/StelSRGB.hpp
      core/StelSRGB.cpp

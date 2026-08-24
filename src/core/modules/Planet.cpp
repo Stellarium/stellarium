@@ -28,6 +28,7 @@
 #include "SolarSystem.hpp"
 #include "LandscapeMgr.hpp"
 #include "Planet.hpp"
+#include "atlante/AtlanteCosmology.hpp"
 #include "Orbit.hpp"
 #include "planetsephems/precession.h"
 #ifndef NDEBUG
@@ -2945,6 +2946,15 @@ Vec3d Planet::getHeliocentricEclipticPos(double dateJDE) const
 		}
 	}
 	return pos;
+}
+
+Vec3d Planet::getAtlantePos() const
+{
+	if (AtlanteCosmology::getInstance()->isAtlanteGeocentric())
+	{
+		return AtlanteCosmology::getAtlantePos(this);
+	}
+	return getHeliocentricEclipticPos();
 }
 
 Vec3d Planet::getBarycentricEclipticPos(double dateJDE) const

@@ -28,6 +28,9 @@
 #include "ui_configurationDialog.h"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
+#include "atlante/AtlanteCosmology.hpp"
+#include <QGroupBox>
+#include <QRadioButton>
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
@@ -524,6 +527,42 @@ void ConfigurationDialog::createDialogContent()
 		ui->scriptInfoBrowser->document()->setDefaultStyleSheet(style);
 		ui->deltaTAlgorithmDescription->document()->setDefaultStyleSheet(style);
 	});
+
+	// --- Section Modèle Cosmologique Atlante ---
+	QGroupBox* cosmoGroupBox = new QGroupBox(q_("Modèle Cosmologique"), dialog);
+	QVBoxLayout* cosmoLayout = new QVBoxLayout(cosmoGroupBox);
+	QRadioButton* stdRadio = new QRadioButton(q_("Astronomique (Standard)"), cosmoGroupBox);
+	QRadioButton* atlanteRadio = new QRadioButton(q_("Atlante géocentrique"), cosmoGroupBox);
+	cosmoLayout->addWidget(stdRadio);
+	cosmoLayout->addWidget(atlanteRadio);
+
+	CosmologyMode currentCosmoMode = AtlanteCosmology::getInstance()->getMode();
+	if (currentCosmoMode == CosmologyMode::AtlanteGeocentric)
+		atlanteRadio->setChecked(true);
+	else
+		stdRadio->setChecked(true);
+
+	connect(stdRadio, &QRadioButton::toggled, this, [](bool checked) {
+		if (checked) {
+			AtlanteCosmology::getInstance()->setMode(CosmologyMode::Standard);
+		}
+	});
+	connect(atlanteRadio, &QRadioButton::toggled, this, [](bool checked) {
+		if (checked) {
+			AtlanteCosmology::getInstance()->setMode(CosmologyMode::AtlanteGeocentric);
+		}
+	});
+
+	connect(AtlanteCosmology::getInstance(), &AtlanteCosmology::modeChanged, this, [stdRadio, atlanteRadio](CosmologyMode mode) {
+		QSignalBlocker b1(stdRadio);
+		QSignalBlocker b2(atlanteRadio);
+		if (mode == CosmologyMode::AtlanteGeocentric)
+			atlanteRadio->setChecked(true);
+		else
+			stdRadio->setChecked(true);
+	});
+
+	ui->verticalLayout_5->addWidget(cosmoGroupBox);
 }
 
 void ConfigurationDialog::updateDateTimeDisplayFormat()

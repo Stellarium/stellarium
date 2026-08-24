@@ -101,6 +101,7 @@
 #include <QRegularExpression>
 #include <QRandomGenerator>
 #include <QFontDatabase>
+#include "atlante/AtlanteCosmology.hpp"
 #if !QT_CONFIG(opengles2)
 # include <QOpenGLFunctions_3_3_Core>
 #endif
@@ -737,6 +738,15 @@ void StelApp::init(QSettings* conf)
 	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());	
 	setOverwriteInfoColor(Vec3f(confSettings->value("color/info_text_color", "1.0,1.0,1.0").toString()));
 	setDaylightInfoColor(Vec3f(confSettings->value("color/daylight_text_color", "0.0,0.0,0.0").toString()));
+
+	// Initialiser le mode cosmologique Atlante
+	int cosmoMode = confSettings->value("main/cosmology_mode", 0).toInt();
+	AtlanteCosmology::getInstance()->setModeFromInt(cosmoMode);
+	connect(AtlanteCosmology::getInstance(), &AtlanteCosmology::modeChanged, this, [this](CosmologyMode mode) {
+		if (confSettings) {
+			confSettings->setValue("main/cosmology_mode", static_cast<int>(mode));
+		}
+	});
 
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.).toDouble();

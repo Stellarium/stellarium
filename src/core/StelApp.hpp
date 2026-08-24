@@ -60,6 +60,7 @@ class StelScriptMgr;
 class StelActionMgr;
 class StelPropertyMgr;
 class StelProgressController;
+class AtlanteCosmology;
 
 #ifdef 	ENABLE_SPOUT
 class SpoutSender;

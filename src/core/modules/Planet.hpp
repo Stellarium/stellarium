@@ -510,6 +510,8 @@ public:
 	//! Return the heliocentric ecliptical position
 	Vec3d getHeliocentricEclipticPos() const {return getHeliocentricPos(eclipticPos);}
 	Vec3d getHeliocentricEclipticPos(double dateJDE) const;
+	//! Return position depending on active CosmologyMode (Standard vs AtlanteGeocentric)
+	Vec3d getAtlantePos() const;
 
 	//! Return the barycentric ecliptical position
 	Vec3d getBarycentricEclipticPos(double dateJDE) const;

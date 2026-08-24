@@ -21,6 +21,7 @@
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
+#include "atlante/AtlanteCosmology.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
@@ -194,7 +195,7 @@ const QSharedPointer<Planet> StelObserver::getHomePlanet(void) const
 
 Vec3d StelObserver::getCenterVsop87Pos(void) const
 {
-	return getHomePlanet()->getHeliocentricEclipticPos();
+	return getHomePlanet()->getAtlantePos();
 }
 
 // Used to approximate solution with assuming a spherical planet.
