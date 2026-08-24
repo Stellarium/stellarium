@@ -60,6 +60,11 @@ static float psfSmoothStep(float edge0, float edge1, float x)
 	return t * t * (3.f - 2.f * t);
 }
 
+static float psfDisplayToLinear(float x, float gamma)
+{
+	return x <= 0.f ? 0.f : std::pow(x, gamma);
+}
+
 StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	core(acore),
 	eye(acore->getToneReproducer()),
@@ -691,9 +696,10 @@ float StelSkyDrawer::computePsfGlowRadius(float peakRadiance, float alpha) const
 
 Vec3f StelSkyDrawer::psfGreenNormalization(const Vec3f& c, float saturationLimit, float& greenScale) const
 {
-	float r = c[0];
-	float g = c[1];
-	float b = c[2];
+	const float gamma = qMax(eye->getDisplayGamma(), 1.0e-3f);
+	float r = psfDisplayToLinear(c[0], gamma);
+	float g = psfDisplayToLinear(c[1], gamma);
+	float b = psfDisplayToLinear(c[2], gamma);
 	const float mx = std::max({r, g, b});
 	if (mx <= 0.f)
 	{
