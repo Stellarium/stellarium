@@ -619,10 +619,14 @@ IF(GENERATE_STELMAINLIB)
           SET(STELLARIUM_PLUGIN_SDK_COMPONENT PluginSDK)
           INSTALL(TARGETS stelMain
                RUNTIME DESTINATION bin
+                    CONFIGURATIONS Release
+                    COMPONENT ${STELLARIUM_PLUGIN_SDK_COMPONENT}
                LIBRARY DESTINATION lib
+                    CONFIGURATIONS Release
+                    COMPONENT ${STELLARIUM_PLUGIN_SDK_COMPONENT}
                ARCHIVE DESTINATION lib
-               CONFIGURATIONS Release
-               COMPONENT ${STELLARIUM_PLUGIN_SDK_COMPONENT})
+                    CONFIGURATIONS Release
+                    COMPONENT ${STELLARIUM_PLUGIN_SDK_COMPONENT})
           INCLUDE("${PROJECT_SOURCE_DIR}/cmake/InstallPluginSDK.cmake")
      ELSE()
           INSTALL(TARGETS stelMain DESTINATION bin)
