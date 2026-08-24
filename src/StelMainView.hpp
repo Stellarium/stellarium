@@ -25,6 +25,7 @@
 #include <QEventLoop>
 #include <QOpenGLContext>
 #include <QTimer>
+#include "StelMainExport.hpp"
 #ifdef OPENGL_DEBUG_LOGGING
 class QOpenGLDebugLogger;
 class QOpenGLDebugMessage;
@@ -43,7 +44,7 @@ class QSettings;
 //! @class StelMainView
 //! Reimplement a QGraphicsView for Stellarium.
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
-class StelMainView : public QGraphicsView
+class STELMAIN_EXPORT StelMainView : public QGraphicsView
 {
 	friend class StelGuiItem;
 	friend class StelRootItem;

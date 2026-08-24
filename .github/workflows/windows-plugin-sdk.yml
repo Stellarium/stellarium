@@ -1,0 +1,232 @@
+name: Windows plug-in SDK
+
+on:
+  push:
+    paths:
+      - '.github/workflows/windows-plugin-sdk.yml'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'doc/plugIns.doxygen'
+      - 'src/**'
+      - 'tests/plugin-sdk/**'
+  pull_request:
+    branches: [master]
+    paths:
+      - '.github/workflows/windows-plugin-sdk.yml'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'doc/plugIns.doxygen'
+      - 'src/**'
+      - 'tests/plugin-sdk/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  BUILD_DIR: build-plugin-sdk
+  INSTALL_DIR: stellarium-plugin-sdk-install
+  PLUGIN_BUILD_DIR: external-plugin-build
+  CMAKE_BUILD_PARALLEL_LEVEL: 4
+
+jobs:
+  qt6-msvc-x64:
+    name: Qt 6.9.3 / MSVC 2022 / x64 / Release
+    runs-on: windows-2022
+    timeout-minutes: 180
+
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: Check out Stellarium
+        uses: actions/checkout@v6
+
+      - name: Install Qt 6.9.3
+        uses: jurplel/install-qt-action@v4
+        with:
+          aqtversion: '==3.3.*'
+          version: '6.9.3'
+          host: windows
+          target: desktop
+          arch: win64_msvc2022_64
+          cache: true
+          modules: >-
+            qt5compat qtcharts qtimageformats qtlocation qtmultimedia
+            qtpositioning qtquicktimeline qtscxml qtsensors qtserialbus
+            qtserialport qtshadertools qtspeech qtvirtualkeyboard
+            qtwebchannel qtwebengine qtwebsockets qtwebview
+
+      - name: Configure the shared library build
+        run: |
+          $installPrefix = Join-Path $env:GITHUB_WORKSPACE $env:INSTALL_DIR
+          $buildId = 'github-actions-{0}-{1}' -f `
+            $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT
+          cmake -S . -B $env:BUILD_DIR `
+            -G 'Visual Studio 17 2022' -A x64 `
+            "-DCMAKE_PREFIX_PATH=$env:QT_ROOT_DIR" `
+            "-DCMAKE_INSTALL_PREFIX=$installPrefix" `
+            "-DSTELLARIUM_PLUGIN_SDK_SOURCE_REVISION=$env:GITHUB_SHA" `
+            "-DSTELLARIUM_PLUGIN_SDK_BUILD_ID=$buildId" `
+            -DGENERATE_STELMAINLIB=ON `
+            -DGENERATE_PACKAGE_TARGET=OFF `
+            -DSTELLARIUM_RELEASE_BUILD=ON `
+            -DSCM_SHOULD_ENABLE_CONVERTER=OFF `
+            -DENABLE_TESTING=OFF `
+            -DENABLE_NLS=OFF `
+            -DENABLE_PODIR=OFF
+          if ($LASTEXITCODE -ne 0) { throw 'Stellarium configure failed' }
+
+      - name: Build Stellarium and the SDK archive
+        run: |
+          cmake --build $env:BUILD_DIR --config Release --parallel 4 `
+            --target stellarium stellarium-plugin-sdk-archive
+          if ($LASTEXITCODE -ne 0) { throw 'Stellarium or SDK build failed' }
+          cmake --install $env:BUILD_DIR --config Release
+          if ($LASTEXITCODE -ne 0) { throw 'Stellarium install failed' }
+
+      - name: Validate and extract the SDK
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $packages = Join-Path $env:GITHUB_WORKSPACE `
+            "$env:BUILD_DIR/packages"
+          $archives = @(Get-ChildItem -LiteralPath $packages `
+            -Filter '*.zip' -File)
+          if ($archives.Count -ne 1) {
+            throw "Expected one SDK archive; found $($archives.Count)"
+          }
+          $archive = $archives[0]
+          $checksum = Get-Content -LiteralPath "$($archive.FullName).sha256" `
+            -Raw
+          $expectedHash = ([regex]::Match(
+            $checksum, '^([0-9a-fA-F]{64})')).Groups[1].Value
+          $actualHash = (Get-FileHash -Algorithm SHA256 `
+            -LiteralPath $archive.FullName).Hash
+          if ($actualHash -cne $expectedHash) {
+            throw 'SDK archive checksum mismatch'
+          }
+
+          $extractParent = Join-Path $env:RUNNER_TEMP `
+            'Relocated Stellarium Plugin SDK'
+          Expand-Archive -LiteralPath $archive.FullName `
+            -DestinationPath $extractParent
+          $sdkRoots = @(Get-ChildItem -LiteralPath $extractParent -Directory)
+          if ($sdkRoots.Count -ne 1) {
+            throw 'The SDK archive must have one top-level directory'
+          }
+          $sdkRoot = $sdkRoots[0].FullName
+          $requiredFiles = @(
+            'COPYING',
+            'MANIFEST.sha256',
+            'README.md',
+            'bin/stelMain.dll',
+            'include/stellarium/StelMainExport.hpp',
+            'include/stellarium/core/StelModule.hpp',
+            'include/stellarium/core/StelPluginInterface.hpp',
+            'lib/cmake/Stellarium/StellariumConfig.cmake',
+            'lib/cmake/Stellarium/StellariumConfigVersion.cmake',
+            'lib/stelMain.lib',
+            'share/stellarium/plugin-sdk/StellariumPluginBuildInfo.json'
+          )
+          foreach ($relativePath in $requiredFiles) {
+            $path = Join-Path $sdkRoot $relativePath
+            if (-not (Test-Path -LiteralPath $path -PathType Leaf) -or
+                (Get-Item -LiteralPath $path).Length -eq 0) {
+              throw "Missing SDK payload: $relativePath"
+            }
+          }
+          $buildInfo = Get-Content -LiteralPath (Join-Path $sdkRoot `
+            'share/stellarium/plugin-sdk/StellariumPluginBuildInfo.json') `
+            -Raw | ConvertFrom-Json
+          $expectedBuildId = 'github-actions-{0}-{1}' -f `
+            $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT
+          if ($buildInfo.source_revision -ne $env:GITHUB_SHA -or
+              $buildInfo.package_build_id -ne $expectedBuildId -or
+              $buildInfo.architecture -ne 'x64' -or
+              $buildInfo.compiler_id -ne 'MSVC' -or
+              $buildInfo.msvc_toolset_version -ne '143' -or
+              $buildInfo.qt_version -ne '6.9.3' -or
+              $buildInfo.build_configuration -ne 'Release' -or
+              $buildInfo.msvc_runtime -ne 'MultiThreadedDLL') {
+            throw 'Unexpected SDK compatibility metadata'
+          }
+          "STELLARIUM_SDK_ROOT=$sdkRoot" | Out-File `
+            -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Build and load the external plug-in
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $fixtureSource = Join-Path $env:RUNNER_TEMP `
+            'stellarium-external-plugin-source'
+          New-Item -ItemType Directory -Path $fixtureSource | Out-Null
+          Copy-Item -Path (Join-Path $env:GITHUB_WORKSPACE `
+            'tests/plugin-sdk/*') -Destination $fixtureSource -Recurse
+          $stellariumDir = Join-Path $env:STELLARIUM_SDK_ROOT `
+            'lib/cmake/Stellarium'
+          cmake -S $fixtureSource -B $env:PLUGIN_BUILD_DIR `
+            -G 'Visual Studio 17 2022' -A x64 `
+            "-DStellarium_DIR=$stellariumDir" `
+            "-DCMAKE_PREFIX_PATH=$env:QT_ROOT_DIR"
+          if ($LASTEXITCODE -ne 0) { throw 'External plug-in configure failed' }
+          cmake --build $env:PLUGIN_BUILD_DIR --config Release --parallel 4
+          if ($LASTEXITCODE -ne 0) { throw 'External plug-in build failed' }
+
+          $probeBin = Join-Path $env:GITHUB_WORKSPACE `
+            "$env:PLUGIN_BUILD_DIR/bin"
+          $plugin = Join-Path $probeBin 'libDynamicPluginProbe.dll'
+          $loader = Join-Path $probeBin 'StellariumPluginProbeLoader.exe'
+          $spoutDir = Join-Path $env:GITHUB_WORKSPACE 'util/spout2/x64'
+          $sdkBin = Join-Path $env:STELLARIUM_SDK_ROOT 'bin'
+          $env:PATH = "$sdkBin;$env:QT_ROOT_DIR\bin;$spoutDir;$env:PATH"
+          & $loader $plugin
+          if ($LASTEXITCODE -ne 0) { throw 'External plug-in load failed' }
+
+      - name: Verify Stellarium discovers the plug-in
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $installRoot = Join-Path $env:GITHUB_WORKSPACE $env:INSTALL_DIR
+          $runtimeRoot = Join-Path $env:RUNNER_TEMP 'stellarium-runtime'
+          $userDir = Join-Path $env:RUNNER_TEMP 'stellarium-plugin-user'
+          $pluginDir = Join-Path $userDir 'modules/DynamicPluginProbe'
+          New-Item -ItemType Directory -Path $runtimeRoot, $pluginDir | Out-Null
+          Copy-Item -Path (Join-Path $installRoot 'bin/*') `
+            -Destination $runtimeRoot -Recurse
+          Copy-Item -Path (Join-Path $installRoot 'qtstuff/*') `
+            -Destination $runtimeRoot -Recurse
+          Copy-Item -Path (Join-Path $installRoot 'share/stellarium/*') `
+            -Destination $runtimeRoot -Recurse
+          Copy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE `
+            'data/qt.conf') -Destination $runtimeRoot
+          Copy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE `
+            'util/spout2/x64/SpoutLibrary.dll') -Destination $runtimeRoot
+          Copy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE `
+            "$env:PLUGIN_BUILD_DIR/bin/libDynamicPluginProbe.dll") `
+            -Destination $pluginDir
+
+          $sentinel = Join-Path $userDir 'dynamic-plugin-probe.txt'
+          $log = Join-Path $userDir 'stellarium.log'
+          $env:STELLARIUM_DATA_ROOT = $runtimeRoot
+          $env:STELLARIUM_PLUGIN_PROBE_SENTINEL = $sentinel
+          $env:QT_QPA_PLATFORM_PLUGIN_PATH = Join-Path $runtimeRoot 'platforms'
+          $env:PATH = "$runtimeRoot;$env:PATH"
+          $process = Start-Process -FilePath (Join-Path $runtimeRoot `
+            'stellarium.exe') -ArgumentList @(
+              '--user-dir', $userDir,
+              '--log-file', $log,
+              '--full-screen', 'no',
+              '--no-audio',
+              '--low-graphics') -WorkingDirectory $runtimeRoot `
+            -WindowStyle Hidden -PassThru
+          if (-not $process.WaitForExit(120000)) {
+            Stop-Process -Id $process.Id -Force
+            throw 'Stellarium did not exit within 120 seconds'
+          }
+          if ($process.ExitCode -ne 0 -or
+              -not (Test-Path -LiteralPath $sentinel -PathType Leaf)) {
+            throw 'Stellarium did not initialize the external plug-in'
+          }
+          $sentinelText = Get-Content -LiteralPath $sentinel -Raw
+          if ($sentinelText -notmatch '^DynamicPluginProbe\s+\S+') {
+            throw 'The external plug-in wrote an invalid sentinel'
+          }
