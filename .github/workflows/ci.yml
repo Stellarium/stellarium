@@ -274,9 +274,10 @@ jobs:
       run: |
         cmake --build build --config RelWithDebInfo -j ${{env.parallel_processes}} --target install
 
-    - name: Deploy Qt & OpenGL DLLs (windeployqt)
+    - name: Deploy Qt, OpenGL & Spout DLLs
       shell: cmd
       run: |
+        if exist util\spout2\x64\SpoutLibrary.dll copy util\spout2\x64\SpoutLibrary.dll stellarium-bin\bin\
         windeployqt --compiler-runtime --no-translations stellarium-bin/bin/stellarium.exe
 
     - name: Upload Windows Executable Artifact
