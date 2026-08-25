@@ -1,0 +1,586 @@
+#
+# Data of Comets: designations and discovery circumstances for periodic comets
+#
+# Sources: 
+# - Gary W. Kronk. Cometography: A Catalog of Comets. Vol. 1-6
+# - Comet Catalog in order of Number of Periodic Comets: http://www.aerith.net/comet/catalog/index-periodic.html
+# - Comet Catalog in order of Designation: http://www.aerith.net/comet/catalog/index-code.html
+# - Small-Body Database Lookup at NASA JPL: https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html
+# - Small Bodies Data Ferret: https://sbnapps.psi.edu/ferret/SimpleSearch/form.action
+# - Periodic Comet Numbers: https://minorplanetcenter.net/iau/lists/PeriodicCodes.html
+# - Central Bureau for Astronomical Telegrams: http://www.cbat.eps.harvard.edu
+# - Всехсвятский, С.К. - Физические характеристики комет (1958) = Vsekhsvjatskij, S.K. - Fizicheskie kharakteristiki komet (1958)
+# - Всехсвятский, С.К. - Физические характеристики комет 1954-1960 гг (1966) = Vsekhsvjatskijj, S.K. - Fizicheskie kharakteristiki komet 1954-1960 gg (1966)
+# - Всехсвятский, С.К. - Кометы в 1961-65 гг (1967) = Vsekhsvjatskijj, S.K. - Komety v 1961-65 gg (1967)
+# - Всехсвятский, С.К. - Физические характеристики комет 1965-1970 гг (1974) = Vsekhsvjatskijj, S.K. - Fizicheskie kharakteristiki komet 1965-1970 gg (1974)
+# - Всехсвятский, С.К. - Физические характеристики комет 1971-1975 гг (1979) = Vsekhsvjatskijj, S.K. - Fizicheskie kharakteristiki komet 1971-1975 gg (1979)
+# - Андриенко, Д.А. - Физические характеристики комет 1976-1980 гг (1987) = Andrienko, D.A. - Fizicheskie kharakteristiki komet 1976-1980 gg (1987)
+# - The Journal of the Astronomical Society in South Africa
+# - Publications of the Astronomical Society of the Pacific
+# - How many comets were discovered by Jean-Louis Pons? - https://www.comethunter.de/pons.html
+#
+# Columns:
+# - IAU designation
+# - Date designation
+# - Perihelion designation (COMET PERIHELION NUMBER)
+# - Discovery designation (COMET PROVISIONAL NUMBER)
+# - Date of discovery
+# - Discoverer (a person)
+#
+# Delimiter: |
+#
+# the first "predicted" comet! - Viva Edmund Halley
+          1P|P/1682    Q1|1682       |      |1682-08-24|A. Storer
+            |P/1835    P1|1835    III|      |1835-08-05|
+          2P|P/1805    U1|1805       |      |1805-10-20|J.L. Pons
+            |P/1818    W1|1819      I|      |1818-11-26|J.L. Pons
+# This is first predicted peearance of this comet
+            |P/1822    L1|1822     II|      |1822-06-02|C.K.L. Rümker
+          3D|D/1805    V1|1806      I|      |1806-11-10|J.L. Pons
+            |D/1826    D1|1826      I| 1826a|1826-02-27|W. von Biela
+            |D/1832    S1|1832    III|      |1833-09-24|M.C.T. Damoiseau, G. Santini
+          4P|P/1843    W1|1843    III| 1843c|1843-11-23|H. Faye
+            |P/1850    W1|1851      I|      |1850-11-28|J. Challis
+          5D|D/1846    D2|1846    III| 1846c|1846-02-26|T. Brorsen
+            |D/1857    F1|1857     II|      |1857-03-18|K.C. Bruhns
+          6P|P/1851    M1|1851     II| 1851a|1851-06-28|H.L. d'Arrest
+          7P|P/1819    L1|1819    III|      |1819-06-12|J.L. Pons
+# Pons discovered this comet on 1819 June 12. Winnecke accidentally rediscovered this
+# comet on 1858 March 9.06.
+            |P/1858    E1|1858     II|      |1858-03-09|J.L. Pons, F.A.Th. Winnecke
+            |P/1869    G1|1869      I| 1869a|1869-04-09|F.A.Th. Winnecke
+# P.F.A. Méchain discovered this comet in the evening sky near Omicron Piscium on 1790
+# January 9.75. H.P. Tuttle discovered this comet on 1858 January 5.01. Ch. W. Tuttle
+# used three positions obtained between January 5 and 13, and computed a parabolic orbit
+# with a perihelion date of 1858 February 20.48 and a perihelion distance of 1.070 AU.
+# He noted "so strong a resemblance to [the orbit] of the second comet of 1790, that
+# there would seem to be small reason for doubt of the identity of the comet."
+          8P|P/1858    A1|1858      I|      |1858-01-05|H.P. Tuttle
+            |P/1871    T1|1871    III| 1871d|1871-10-13|A.L.N. Borrelly
+          9P|P/1867    G1|1867     II| 1867b|1867-04-03|E.W.L. Tempel
+            |P/1873    G1|1873      I| 1873a|1873-04-04|H. Seelinger, F.E. von Asten
+         10P|P/1873    N1|1873     II| 1873b|1873-07-03|E.W.L. Tempel
+            |P/1878    O1|1878    III| 1878b|1878-07-19|E.W.L. Tempel
+         11P|P/1869    W1|1869    III| 1859c|1869-11-27|E.W.L. Tempel
+# W. Tempel discovered this comet on 1869 November 27 in Pegasus. L. Swift discovered
+# a diffuse, circular comet in Pegasus on 1880 October 11. By mid-November, astronomers
+# realized Swift's comet was a return of Tempel's 1869 comet.
+            |P/1880    T1|1880     IV| 1880e|1880-10-11|L. Swift
+         12P|P/1812    O1|1812       |      |1812-07-21|J.L. Pons, W.R. Brooks
+         13P|P/1815    E1|1815       |      |1815-03-06|H.W.M. Olbers
+         14P|P/1884    S1|1884    III| 1884c|1884-09-17|M. Wolf
+         15P|P/1886    S1|1886    VII| 1886e|1886-09-26|W.H. Finlay
+         16P|P/1889    N1|1889      V| 1889d|1889-07-07|W.R. Brooks
+         17P|P/1892    V1|1892    III| 1892f|1892-11-07|E. Holmes
+         18D|D/1896    X1|1896    VII| 1896g|1896-12-09|Ch.D. Perrine
+         19P|P/1904    Y2|1905     II| 1904e|1904-12-28|A. Borrelly
+         20D|D/1852    O1|1852     IV| 1852c|1852-07-24|J.G. Westphal
+         21P|P/1900    Y1|1900    III| 1900c|1900-12-20|M. Giacobini
+         22P|P/1906    Q1|1906     IV| 1906e|1906-08-22|A. Kopff
+         23P|P/1847    O1|1847      V| 1847d|1847-07-20|T. Brorsen
+         24P|P/1911    X1|1911    VII| 1911h|1911-12-01|M.A. Schaumasse
+         25D|D/1916    D1|1916     II| 1916a|1916-02-24|G.N. Neujmin
+         26P|P/1808    C1|1808    III|      |1808-02-06|J.L. Pons
+# The comet was discovered in 1902 by John Grigg of New Zealand, and rediscovered in its
+# next appearance in 1922 by John Francis Skjellerup, an Australian then living and
+# working for about two decades in South Africa where he was a founder member of the
+# Astronomical Society of Southern Africa.
+            |P/1922    K1|1922      I| 1922b|1902-07-23|J. Grigg, J.F. Skjellerup
+         27P|P/1818    D1|1818      I|      |1818-02-23|J.L. Pons
+            |P/1873    V1|1873    VII| 1873g|1873-11-10|J.E. Coggia
+# Comet Crommelin, is a periodic comet with an orbital period of almost 28 years. It fits
+# the classical definition of a Halley-type comet with (20 years < period < 200 years).
+# It is named after the British astronomer A.C.D. Crommelin who calculated its orbit in 1930.
+            |P/1928    W1|1928    III| 1928b|1818-02-23|J.L. Pons
+         28P|P/1913    R2|1913    III| 1913c|1913-09-04|G.N. Neujmin
+         29P|P/1927    V1|1925     II| 1927i|1927-11-15|A. Schwassmann, A.A. Wachmann
+         30P|P/1928    D1|1928      I| 1928a|1928-02-22|K. Reinmuth
+         31P|P/1929    B1|1929      I| 1929a|1929-01-17|A. Schwassmann, A.A. Wachmann
+         32P|P/1926    V1|1927    III| 1926f|1926-11-06|J. Comas Solà
+         33P|P/1909    X1|1909     IV| 1909e|1909-12-07|Z. Daniel
+         34D|D/1927    L1|1927     VI| 1927f|1927-06-07|W.F. Gale
+         35P|P/1939    O1|1939     VI| 1939h|1939-07-28|R. Rigollet
+         36P|P/1933    U1|1933     IV| 1933f|1933-10-15|F.L. Whipple
+         37P|P/1929    P1|1929     II| 1929c|1929-08-01|A.F.I. Forbes
+         38P|P/1867    B1|1867      I|      |1867-01-22|J.E. Coggia
+            |P/1942    V1|1942     IX| 1942f|1942-11-06|L. Oterma
+         39P|P/1943    G1|1942    VII| 1943a|1943-03-27|L. Oterma
+         40P|P/1939    CB|1939     IV| 1939b|1939-02-08|Y. Väisälä
+         41P|P/1858    J1|1858    III|      |1858-05-03|H.P. Tuttle
+            |P/1951    H1|1951     IV| 1951f|1951-04-24|L. Kresak
+         42P|P/1929    P2|1929    III| 1929b|1929-08-02|G.N. Neujmin
+         43P|P/1924    Y1|1924     IV| 1924d|1924-12-22|M. Wolf
+         44P|P/1947    R1|1947    VII| 1947j|1947-09-10|K. Reinmuth
+         45P|P/1948    X1|1948    XII| 1948n|1948-12-03|M. Honda, L. Pajdusakova, A. Mrkos
+         46P|P/1948    A1|1947   XIII| 1948b|1948-01-17|C.A. Wirtanen
+         47P|P/1948    Q1|1948     IX| 1948i|1948-08-26|J. Ashbrook, C.V. Jackson
+         48P|P/1949    Q1|1949     II| 1949d|1949-08-15|E.L. Johnson
+         49P|P/1951    C2|1950    VII| 1951b|1951-02-05|S.J.V. Arend, F. Rigaux
+         50P|P/1951    T1|1951      X| 1951j|1951-10-04|S.J.V. Arend
+         51P|P/1953    P1|1953     VI| 1953e|1953-08-14|R.G. Harrington
+         52P|P/1955    F1|1954   XIII| 1955a|1955-03-22|R.G. Harrington, G.O. Abell
+         53P|P/1954    R1|1954     IV| 1954i|1954-08-01|G. van Biesbroeck
+         54P|P/1844    Q1|1844      I| 1844b|1844-08-22|F. de Vico
+         55P|P/1865    Y1|1866      I| 1865f|1865-12-19|E.W.L. Tempel, H.P. Tuttle
+         56P|P/1959    B1|1958     VI| 1959a|1958-12-10|C.D. Slaughter, R. Burnham Jr.
+         57P|P/1941    O1|1941    VII| 1941e|1941-07-17|D. du Toit, G.N. Neujmin, E.J. Delporte
+         58P|P/1936    S1|1936     IV| 1936c|1936-09-15|C.V. Jackson, G.N. Neujmin
+         59P|P/1963    Q1|1963   VIII| 1963d|1963-08-17|C.E. Kearns, K.K. Kwee
+         60P|P/1965    A2|1965     II| 1965c|1965-01-11|
+         61P|P/1949    S1|1949     VI| 1949e|1949-08-29|P.F. Shajn, R.D. Schaldach
+         62P|P/1965    A1|1965      I| 1965b|1965-01-01|L.A. Swift, T. Gehrels
+         63P|P/1960    G1|1960      I| 1960b|1960-03-26|P. Wild
+         64P|P/1889    W1|1889     VI| 1889f|1889-11-16|L. Swift
+         65P|P/1970    U2|1969     II| 1970p|1970-10-27|J.E. Gunn
+         66P|P/1944    K1|1944    III| 1944c|1944-05-17|D. du Toit
+         67P|P/1969    R1|1969     IV| 1969h|1969-09-20|K.I. Churyumov, S.I. Gerasimenko
+         68P|P/1965    U1|1965     VI| 1965j|1965-11-02|A.R. Klemola
+         69P|P/1915    W1|1916      I| 1915e|1915-11-24|C.J. Taylor
+         70P|P/1970    Y1|1970    XII| 1970r|1970-12-27|N. Kojima
+         71P|P/1973    L1|1973      V| 1973i|1973-06-09|M. Clark
+         72P|P/1881    T1|1881      V| 1881f|1881-10-04|W.F. Denning
+         73P|P/1930    J1|1930     VI| 1930d|1930-05-02|A. Schwassmann, A.A. Wachmann
+         74P|P/1975    E2|1975    VII| 1975e|1975-03-04|T.M. Smirnova, N.S. Chernykh
+         75D|D/1975    C1|1975    III| 1975c|1975-02-09|L. Kohoutek
+         76P|P/1975    D1|1975     IV| 1975b|1975-01-24|R.M. West, L. Kohoutek, T. Ikemura
+         77P|P/1975    L1|1974    XIV| 1975g|1975-06-10|A.J. Longmore
+         78P|P/1973    S1|1973     XI| 1973n|1973-09-29|T. Gehrels
+         79P|P/1945    G1|1945     II| 1945c|1945-04-09|D. du Toit
+         80P|P/1846    M1|1846     VI|      |1846-06-26|C.H.F. Peters
+            |P/1982    N1|1982    III| 1982h|1846-06-26|C.H.F. Peters
+         81P|P/1978    A2|1978     XI| 1978b|1978-01-06|P. Wild
+         82P|P/1975    U1|1977    VII| 1975o|1975-10-27|T. Gehrels
+         83D|D/1979    M2|1979      V| 1979d|1979-06-16|K.S. Russell
+         84P|P/1978    R2|1978   XXII| 1978k|1978-09-08|H.L. Giclas
+         85D|D/1975    A1|1975      I| 1975a|1975-01-04|L. Boethin
+         86P|P/1980    G1|1980    VII| 1980d|1980-05-11|P. Wild
+         87P|P/1981    E1|1981     XI| 1981b|1981-03-02|S.J. Bus
+         88P|P/1981    Q1|1981      X| 1981k|1981-08-29|E. Howell
+         89P|P/1980    S1|1980    III| 1980o|1980-09-28|K.S. Russell
+         90P|P/1972    T1|1973      I| 1972k|1972-10-11|T. Gehrels
+         91P|P/1983    L1|1982     IX| 1983i|1983-06-14|K.S. Russell
+         92P|P/1977    T2|1977    XII| 1977p|1977-10-15|J.G. Sanguin
+         93P|P/1980    X1|1980      V| 1980s|1980-12-05|M. Lovas
+         94P|P/1984    E1|1984      I| 1984d|1984-03-07|K.S. Russell
+         96P|P/1986    J2|1986   VIII| 1986e|1986-05-12|D.E. Machholz
+         97P|P/1906    V2|1906     VI| 1906h|1906-11-15|J.H. Metcalf
+         98P|P/1984    O1|1984    VII| 1984j|1984-07-30|K. Takamizawa
+         99P|P/1977    H2|1977    III| 1977f|1977-04-24|Ch.T. Kowal
+        100P|P/1985    L1|1985    VII| 1985f|1985-06-13|M. Hartley
+        101P|P/1977    Q1|1978     IV| 1977l|1977-08-19|N.S. Chernykh
+        102P|P/1984    S2|1984    XVI| 1984q|1984-09-27|C.S. Shoemaker, E.M. Shoemaker
+        103P|P/1986    E2|1985      V| 1986c|1986-03-15|M. Hartley
+        104P|P/1979    B1|1979     II| 1979a|1979-01-27|Ch.T. Kowal
+        105P|P/1986    J1|1986     XI| 1986d|1986-05-03|S.C. Singer-Brewster
+        106P|P/1977    T1|1978      I| 1977o|1977-10-09|H.-E. Schuster
+        107P|P/1949    W1|1949    III| 1949g|1949-11-19|A.G. Wilson, R.G. Harrington
+        108P|P/1985    V1|1985    XVI| 1985p|1985-11-08|J. Ciffréo, J.-L. Heudier
+        109P|P/1862    O1|1862    III| 1862b|1862-07-16|L. Swift
+        110P|P/1988    D1|1987    XII| 1988d|1988-02-19|M. Hartley
+        111P|P/1989    A2|1988   XIII| 1989b|1989-01-02|E.F. Helin et al.
+        112P|P/1986    UD|1986    XVI| 1986o|1986-10-30|T. Urata, T. Niijima
+        113P|P/1890    W1|1890    VII| 1890f|1890-11-17|R. Spitaler
+        114P|P/1986    Y1|1986     XV| 1987b|1986-12-28|J. Wiseman, B.A. Skiff
+        115P|P/1985    Q1|1985     VI| 1985k|1985-08-16|A.J. Maury
+        116P|P/1990    B1|1990      X| 1990a|1990-01-21|P. Wild
+        117P|P/1989    T2|1989 XXXVII| 1989w|1989-10-02|E.F. Helin, B.P. Roman, J.T. Alu
+        118P|P/1991    C2|1990    XII| 1991f|1991-02-09|C.S. Shoemaker, E.M. Shoemaker, D.H. Levy
+        119P|P/1989    E1|1987  XXXVI| 1989i|1989-03-02|M. Hartley, Q.A. Parker
+        120P|P/1987    U2|1987   XXXI|1987a1|1987-10-18|J.E. Mueller
+        121P|P/1989    E2|1988     XI| 1989j|1989-03-09|C.S. Shoemaker, E.M. Shoemaker, H.E. Holt
+        122P|P/1846    D1|1846     IV| 1846b|1846-02-20|F. de Vico
+        123P|P/1989    E3|1988    XVI| 1989k|1989-03-14|R.M. West, M. Hartley
+        124P|P/1991    F1|1991     IV| 1991k|1991-03-16|A. Mrkos
+        125P|P/1991    R2|1990   XXIX| 1991x|1991-09-08|T. Gehrels
+        126P|P/1983    M1|1983    XIV| 1983j|1983-06-28|J. Davies
+        127P|P/1990    R2|1990  XVIII| 1990k|1990-09-14|H.E. Holt, C.M. Olmstead
+        128P|P/1987    U1|1988    VII| 1987z|1987-10-18|C.S. Shoemaker, E.M. Shoemaker, H.E. Holt
+        129P|P/1991    C1|1990  XXVII| 1991e|1991-02-07|C.S. Shoemaker, E.M. Shoemaker, D.H. Levy
+        130P|P/1991    S1|1991     IX| 1991y|1991-09-30|R.H. McNaught, S.M. Hughes
+        131P|P/1990    R1|1990   XXIV| 1990j|1990-09-15|J.E. Mueller
+        132P|P/1989    U1|1989    XVI| 1989y|1989-10-26|E.F. Helin, B.P. Roman, J.T. Alu
+        134P|P/1983    J3|1983    III| 1983t|1983-05-08|C.T. Kowal, Z. Vávrová
+        135P|P/1992    G2|1992     XV| 1992f|1992-03-30|C.S. Shoemaker, E.M. Shoemaker, D.H. Levy
+        136P|P/1990    S1|1990   XIII| 1990l|1990-09-24|J.E. Mueller
+        137P|P/1990   UL3|1990    XVI| 1990p|1990-10-25|C.S. Shoemaker, E.M. Shoemaker, D.H. Levy
+        138P|P/1991    V2|1991    XIX|1991d1|1991-11-13|C.S. Shoemaker, E.M. Shoemaker, D.H. Levy
+        139P|P/1939    TN|           |      |1939-10-07|Y. Väisälä, L. Oterma
+        140P|P/1983    C1|1983     II| 1983c|1983-02-11|E.L.G. Bowell, B.A. Skiff
+        141P|P/1994    P1|1994   XXVI| 1994o|1994-08-13|D. Machholz
+        142P|P/1988    V1|1988   VIII| 1988o|1988-11-04|Y.-L. Ge, Q. Wang
+        143P|P/1984    H1|1984      X| 1984n|1984-05-02|A. Mrkos, C.T. Kowal
+        144P|P/1994    A1|1993     XX| 1994a|1994-01-08|Y. Kushida
+        145P|P/1991    T1|1991   XXII| 1991z|1991-10-02|C.S. Shoemaker, E.M. Shoemaker, D.H. Levy
+        146P|P/1984    W1|1984  XVIII| 1984u|1984-11-21|C.S. Shoemaker, E.M. Shoemaker
+        147P|P/1993    X1|1993    XIX| 1993t|1993-12-08|Y. Kushida, O. Muramatsu
+        148P|P/1963    W1|1963     IX|      |1963-11-22|W.J. Luyten, J.H. Anderson
+        149P|P/1992    G3|1992     IV| 1992g|1992-04-09|J.E. Mueller
+        150P|P/2000 WT168|           |      |2000-11-25|
+        151P|P/1987    Q3|1987   XVII| 1987w|1987-08-24|E.F. Helin
+        152P|P/1993    K2|1993     XI| 1993l|1993-05-17|E.F. Helin, K.J. Lawrence
+        153P|P/2002    C1|           |      |2002-02-01|K. Ikeya, D. Zhang, P.M. Raymundo
+        154P|P/1992    Q1|1992    XIV| 1992p|1992-08-28|H.J. Brewington
+        155P|P/1986    A1|1985  XVIII| 1986a|1986-01-10|C.S. Shoemaker, E.M. Shoemaker
+        156P|P/2000 QD181|           |      |2000-08-31|
+        157P|P/1978    C2|1977   XIII| 1978d|1978-02-11|K. Tritton
+        158P|P/2001 RG100|           |      |2001-09-12|
+        159P|P/2003  UD16|           |      |2003-10-16|
+        160P|P/2004  NL21|           |      |2004-07-15|
+        161P|P/1983    V1|1984    III| 1983v|1983-11-04|M. Hartley, J. Davies, S.F. Green
+        162P|P/2004  TU12|           |      |2004-10-10|
+        163P|P/2004    V4|           |      |2004-11-05|
+        164P|P/2004    Y1|           |      |2004-12-21|E.J. Christensen
+        165P|P/2000    B4|           |      |2000-01-29|
+        166P|P/2001    T4|           |      |2001-10-15|
+        167P|P/2004  PY42|           |      |2004-08-10|
+        168P|P/1998    W2|           |      |1998-11-22|C.W. Hergenrother
+        169P|P/2002  EX12|           |      |2002-03-15|
+        170P|P/2005    M1|           |      |2005-06-17|E. Christensen
+        171P|P/1998    W1|           |      |1998-11-16|T.B. Spahr
+        172P|P/2002    BV|           |      |2002-01-21|W.K. Yeung
+        173P|P/1993    W1|1994    XXV| 1993s|1993-11-20|J.E. Mueller
+        175P|P/2000    C1|           |      |2000-02-04|C. Hergenrother
+        177P|P/1889    M1|1889    III| 1889c|1889-06-24|E.E. Barnard
+        178P|P/1999    X1|           |      |1999-12-10|G. Hug, G.E. Bell
+        179P|P/1995    A1|           |      |1995-01-09|R. Jedicke
+        180P|P/2001    K1|           |      |2001-05-20|
+        181P|P/1991    V1|1991  XVIII|1991b1|1991-11-07|C.S. Shoemaker, E.M. Shoemaker, D.H. Levy
+        182P|P/2001   WF2|           |      |2001-11-17|
+        183P|P/1999   DN3|           |      |1999-02-18|K. Korlevic, M. Juric
+        184P|P/1986    W1|1986   XIII| 1986p|1986-11-28|M. Lovas
+        185P|P/2001    Q2|           |      |2001-08-18|V.A. Petriew
+        186P|P/2007    B3|           |      |2007-01-25|G.J. Garradd
+        187P|P/1999    J5|           |      |1999-05   |
+        188P|P/1998    S1|           |      |1998-09-26|J. Mueller
+        189P|P/2002    O5|           |      |2002-07-30|
+        190P|P/1998    U2|           |      |1998-10-21|J. Mueller
+        191P|P/2007    N1|           |      |2007-07-10|R.H. McNaught
+        192P|P/1990    V1|1990     XV| 1990o|1990-11-15|C.S. Shoemaker, E.M. Shoemaker, D.H. Levy
+        193P|P/2001    Q5|           |      |2001-08-17|
+        194P|P/2000    B3|           |      |2000-01-27|
+        195P|P/2006    W4|           |      |2006-11-22|R.E. Hill
+        196P|P/2000    U6|           |      |2000-10-23|M. Tichy
+        197P|P/2003   KV2|           |      |2003-05-23|
+        198P|P/1998    X1|           |      |1998-12-15|
+        199P|P/1994    J3|1994 XXVIII| 1994k|1994-05-14|C.S. Shoemaker, E.M. Shoemaker
+        200P|P/1997    V1|           |      |1997-11   |J.A. Larsen
+        201P|P/2001    R1|           |      |2001-09-10|
+        202P|P/2001    X2|           |      |2001-12-14|J.V. Scotti
+        203P|P/1999   WJ7|           |      |1999-11-28|K. Korlevic
+        204P|P/2001  TU80|           |      |2001-10-13|
+        205P|P/1896    R2|1896      V| 1896d|1896-09-04|M. Giacobini
+# This comet marked the beginning of a new era in cometary astronomy, as it was the first
+# to be discovered by photography.
+        206P|P/1892    T1|1892      V| 1892e|1892-10-13|E.E. Barnard
+        207P|P/2001    J1|           |      |2001-05-11|
+        208P|P/2008    U1|           |      |2008-10-19|R.S. McMillan
+        209P|P/2004    CB|           |      |2004-02-03|
+        210P|P/2003    K2|           |      |2003-05-26|X.-m. Zhou, E. Christensen
+        211P|P/2008    X1|           |      |2008-12-04|R.E. Hill
+        212P|P/2000  YN30|           |      |2000-12   |
+        213P|P/2005    R2|           |      |2005-09   |M.E. Van Ness
+        214P|P/2002 CW134|           |      |2002-02   |
+        215P|P/2002    O8|           |      |2002-07   |
+        216P|P/2001   CV8|           |      |2001-02-01|
+        217P|P/2001   MD7|           |      |2001-06-21|
+        218P|P/2003    H4|           |      |2003-04   |
+        219P|P/2002  LZ11|           |      |2002-06-05|
+        220P|P/2004    K2|           |      |2004-05-20|R.H. McNaught
+        221P|P/2002  JN16|           |      |2002-05-09|
+        222P|P/2004    X1|           |      |2004-12-07|
+        223P|P/2002    S1|           |      |2002-09-17|B. Skiff
+        224P|P/2003  XD10|           |      |2003-12-04|
+        225P|P/2002    T1|           |      |2002-10-03|
+        226P|P/2003    A1|           |      |2003-01-05|
+        227P|P/2004  EW38|           |      |2004-03-14|
+        228P|P/2001 YX127|           |      |2001-12-17|
+        229P|P/2009    S1|           |      |2009-09-20|A.R. Gibbs
+        230P|P/2009    U6|           |      |2009-10-27|
+        231P|P/2003   CP7|           |      |2003-03-01|
+        232P|P/2009    W1|           |      |2009-11-18|R.E. Hill
+        233P|P/2009  WJ50|           |      |2009-11-19|
+        234P|P/2002 CF140|           |      |2002-02-08|
+        235P|P/2002   FA9|           |      |2002-03-16|
+        236P|P/2003 UY275|           |      |2003-10-29|
+        237P|P/2002  LN13|           |      |2002-06-06|
+        238P|P/2005    U1|           |      |2005-10-24|M.T. Read
+        239P|P/1999  XB69|           |      |1999-12-07|
+        240P|P/2002    X2|           |      |2002-12-07|
+        241P|P/1999    U3|           |      |1999-10-30|
+        242P|P/1998    U4|           |      |1998-10-27|T.B. Spahr
+        243P|P/2003    S2|           |      |2003-09-24|
+        244P|P/2000    Y3|           |      |2000-12-30|J.V. Scotti
+        245P|P/2010    L1|           |      |2010-06-02|
+        246P|P/2004    F3|           |      |2004-03-28|
+        247P|P/2002  VP94|           |      |2002-11-05|
+        248P|P/2010    W1|           |      |2010-11-27|A.R. Gibbs
+        249P|P/2006    U1|           |      |2006-10-19|
+        250P|P/2011    A1|           |      |2011-01-10|S.M. Larson
+        251P|P/2004  HC18|           |      |2004-04-17|
+        252P|P/2000    G1|           |      |2000-04-07|
+        253P|P/2011    R2|           |      |2011-09-04|
+        254P|P/2010    T1|           |      |2010-10-04|R.H. McNaught
+        255P|P/2006    T1|           |      |2006-10-02|D.H. Levy
+        256P|P/2003  HT15|           |      |2003-04-26|
+        257P|P/2005 JY126|           |      |2005-05-12|
+        258P|P/2012    H1|           |      |2012-04-27|
+        259P|P/2008    R1|           |      |2008-09-02|G.J. Garradd
+        260P|P/2005    K3|           |      |2005-05-20|R.H. McNaught
+        261P|P/2005    N3|           |      |2005-07-05|S. Larson
+        262P|P/1994    X1|1994   XXIV| 1994u|1994-12-12|R.H. McNaught, K.S. Russell
+        263P|P/2006    Y2|           |      |2006-12-26|A.R. Gibbs
+        264P|P/2004    H3|           |      |2004-04-22|J.A. Larsen
+        265P|P/2003    O2|           |      |2003-07-29|
+        266P|P/2006    U5|           |      |2006-10-27|E.J. Christensen
+        267P|P/2006    Q2|           |      |2006-09-29|
+        268P|P/2005    V1|           |      |2005-11-01|F. Bernardi
+        269P|P/1996    A1|           |      |1996-01-14|V. Jedicke, R. Jedicke
+        270P|P/1997    C1|           |      |1997-02-01|T. Gehrels
+        271P|P/1960    S1|1961      X|      |1966      |C.J. van Houten, I. van Houten-Groeneveld
+        272P|P/2004    F1|           |      |2004-03-18|
+        273P|P/1827    M1|1827     II| 1827a|1827-06-21|J.L. Pons, J.F.A. Gambart
+        274P|P/2012  WX32|           |      |2012-11-27|M. Schwartz, P.R. Holvorcem
+        275P|P/1999    D1|           |      |1999-02-20|S.M. Hermann
+        276P|P/2012    T7|           |      |2012-10-15|T. Vorobjov
+        277P|P/2005 YQ127|           |      |2005-12-28|
+        278P|P/2006    K2|           |      |2006-05-22|R.H. McNaught
+        279P|P/2009  QG31|           |      |2009-08-19|
+        280P|P/2004    H2|           |      |2004-04-19|J.A. Larsen
+        281P|P/2013  CE31|           |      |2013-02-05|C. Rinner
+        283P|P/2013   EV9|           |      |2013-03-02|T.H. Bressi
+        284P|P/2007    H1|           |      |2007-04-17|R.H. McNaught
+        285P|P/2003    U2|           |      |2003-10-19|
+        286P|P/2005    L4|           |      |2005-06-13|E. Christensen
+        287P|P/2006    R2|           |      |2006-09-14|E.J. Christensen
+        289P|P/1819    W1|1819     IV| 1819d|1819-11-28|J.J. Blanpain
+        290P|P/1998    U3|           |      |1998-10-23|M. Jager
+        291P|P/2003    S1|           |      |2003-09-23|
+        292P|P/1998    Y2|           |      |1998-12-26|W.-d. Li
+        293P|P/2006  XG16|           |      |2006-12-10|
+        294P|P/2008    A2|           |      |2008-01-13|
+        295P|P/2002   AR2|           |      |2002-01-06|
+        296P|P/2007    H3|           |      |2007-04-22|G.J. Garradd
+        297P|P/2008    J2|           |      |2008-05-06|E. Beshore
+        298P|P/2007    C1|           |      |2007-02-09|E.J. Christensen
+        299P|P/2014    D2|           |      |2014-02-27|R.E. Hill
+        300P|P/2005   JQ5|           |      |2005-05-06|
+        301P|P/2001  BB50|           |      |2001-01-21|
+        302P|P/2007 RJ236|           |      |2007-09-13|E.C. Beshore
+        303P|P/2003    U3|           |      |2003-10-22|
+        304P|P/2008    Q2|           |      |2008-08-27|M. Ory
+        305P|P/2004    V1|           |      |2004-11-04|B. Skiff
+        306P|P/2003    O3|           |      |2003-07-30|
+        307P|P/2000  QJ46|           |      |2000-08-24|
+        308P|P/1997    T3|           |      |1997-10-05|C.-I. Lagerkvist
+        309P|P/2005    Q4|           |      |2005-08-31|
+        310P|P/2006    S6|           |      |2006-09-28|R.E. Hill
+        311P|P/2013    P5|           |      |2013-08-15|
+        312P|P/2001   Q11|           |      |2001-08-18|M. Meyer
+        313P|P/2014    S4|           |      |2014-09-24|A.R. Gibbs
+        314P|P/1997    G1|           |      |1997-04-09|J. Montani
+        315P|P/2004   VR8|           |      |2004-11-03|
+        316P|P/2005  RV25|           |      |2005-09-11|E. Christensen
+        317P|P/2010    K2|           |      |2010-05-27|
+        318P|P/1994    N2|1994   XXXI| 1994n|1994-07-05|R.H. McNaught, M. Hartley
+        319P|P/2008    S1|           |      |2008-09-17|A. Boattini, R.H. McNaught
+        320P|P/2004    R1|           |      |2004-09-02|R.H. McNaught
+        321P|P/2001    D1|           |      |2001-02-18|R. Kracht
+        322P|P/1999    R1|           |      |1999-09-05|T. Lovejoy
+        323P|P/1999    X3|           |      |1999-12-12|R. Kracht
+        324P|P/2010    R2|           |      |2010-09-14|J. Nomen
+        325P|P/2009    L2|           |      |2009-06-15|R. Yang, X. Gao
+        326P|P/2007    V2|           |      |2007-11-09|R.E. Hill
+        327P|P/2002    Q1|           |      |2002-08-17|M.E. Van Ness
+        328P|P/1998  QP54|           |      |1998-08-27|R.A. Tucker
+        329P|P/2003   WC7|           |      |2003-11-18|
+        330P|P/1999    V1|           |      |1999-11-05|C.W. Hergenrother
+        331P|P/2012    F5|           |      |2012-03-22|A.R. Gibbs
+        332P|P/2010    V1|           |      |2010-11-02|K. Ikeya, Sh. Murakami
+        333P|P/2007  VA85|           |      |2007-11-04|
+        334P|P/2001    F1|           |      |2001-03-24|
+        335P|P/2008    Y2|           |      |2008-12-31|A.R. Gibbs
+        336P|P/2006    G1|           |      |2006-04-05|R.H. McNaught
+        337P|P/2010    N1|           |      |2010-07-05|
+        338P|P/2008    J3|           |      |2008-05-10|R.H. McNaught
+        339P|P/2009    K1|           |      |2009-05-16|A.R. Gibbs
+        340P|P/2008    T1|           |      |2008-10-01|A. Boattini
+        341P|P/2007    R3|           |      |2007-09-14|A.R. Gibbs
+        342P|P/2000    O3|           |      |2000-07-30|R. Kracht
+        343P|P/2003 SQ215|           |      |2003-09-24|
+        344P|P/2005    S3|           |      |2005-09-30|M.T. Read
+        345P|P/2008 SH164|           |      |2008-09-28|
+        346P|P/2007    T6|           |      |2007-10-13|
+        347P|P/2016    SV|           |      |2016-09-21|
+        348P|P/2017    A2|           |      |2017-01-02|
+        349P|P/2010  EY90|           |      |2010-03-14|R.A. Kowalski
+        350P|P/2010    J5|           |      |2010-05-12|R.H. McNaught
+        351P|P/2016    P2|           |      |2016-08-08|
+        352P|P/2000    S1|           |      |2000-09-24|B.A. Skiff 
+        353P|P/2009    S2|           |      |2009-09-20|R.H. McNaught
+        354P|P/2010    A2|           |      |2010-01-06|
+        355P|P/2004    T1|           |      |2004-10-05|
+        356P|P/2010    D1|           |      |2010-02-17|
+        357P|P/2008    T4|           |      |2008-10-08|R.E. Hill
+        358P|P/2012    T1|           |      |2012-10-06|
+        359P|P/2007  RS41|           |      |2007-09-09|
+        360P|P/2010    P4|           |      |2010-08-06|
+        361P|P/2006 UR111|           |      |2006-10-19|J.V. Scotti
+        363P|P/2011   VJ5|           |      |2011-11-03|R. Kowalski
+        364P|P/2013 CU129|           |      |2013-02-13|
+        365P|P/2011 WG113|           |      |2011-11-24|
+        366P|P/2005    JN|           |      |2005-05-03|
+        367P|P/2011  CR42|           |      |2011-02-10|A. Boattini
+        368P|P/2005    R1|           |      |2005-09-02|
+        369P|P/2010    A1|           |      |2010-01-06|R.E. Hill
+        370P|P/2001    T3|           |      |2001-10-14|
+        371P|P/2001    R6|           |      |2001-09-11|B.A. Skiff
+        372P|P/2008    O2|           |      |2008-07-28|R.H. McNaught
+        373P|P/2011    W2|           |      |2011-11-28|C. Rinner
+        374P|P/2007    V1|           |      |2007-11-08|S.M. Larson
+        375P|P/2006    D1|           |      |2006-02-22|R. Hill
+        376P|P/2005   GF8|           |      |2005-04-02|
+        377P|P/2003    L1|           |      |2003-06-04|J.V. Scotti
+        378P|P/2005    Y2|           |      |2005-12-30|R.H. McNaught
+        379P|P/2006    F4|           |      |2006-03-26|
+        380P|P/2019    G1|           |      |2019-04-03|
+        381P|P/2000    S4|           |      |2000-10-02|T. Gehrels
+        382P|P/2007    R1|           |      |2007-09-04|S. Larson
+        383P|P/2006    S1|           |      |2006-09-16|E.J. Christensen
+        384P|P/2014    U2|           |      |2014-10-18|R.A. Kowalski
+        385P|P/2010    U2|           |      |2010-10-17|R.E. Hill
+        386P|P/2011    U1|           |      |2011-09-23|
+        387P|P/2008    Y1|           |      |2008-12-22|A. Boattini
+        388P|P/2007    T4|           |      |2007-10-12|A.R. Gibbs
+        389P|P/2006    R1|           |      |2006-09-01|
+        390P|P/2006    W1|           |      |2006-11-16|A.R. Gibbs
+        391P|P/2006    F1|           |      |2006-03-21|R.A. Kowalski
+        392P|P/2004   WR9|           |      |2004-11-22|
+        393P|P/2009 SK280|           |      |2009-09-25|R.E. Hill
+        394P|P/2020    F4|           |      |2020-03-24|
+        395P|P/2020    H1|           |      |2020-04-26|E. Schwab, D. Abreu
+        396P|P/2020    F1|           |      |2020-03-16|G.J. Leonard
+        397P|P/2012   SB6|           |      |2012-09-17|R.A. Kowalski
+        398P|P/2009    Q4|           |      |2009-08-26|A. Boattini
+        399P|P/2013    O2|           |      |2013-07-16|
+        400P|P/2020    R1|           |      |2020-09-09|
+        401P|P/2006    H1|           |      |2006-04-29|R.H. McNaught
+        402P|P/2002    T5|           |      |2002-10-05|
+        403P|P/2007  VQ11|           |      |2007-11-03|
+        404P|P/2011    U2|           |      |2011-09-24|T.H. Bressi
+        405P|P/2013 TL117|           |      |2013-10-04|J.A. Johnson
+        406P|P/2007    R2|           |      |2007-09-10|A.R. Gibbs
+        407P|P/2013    J4|           |      |2013-05-05|
+        408P|P/2011    R3|           |      |2011-09-07|A.O. Novichonok, V.V. Gerke
+        409P|P/2005  XA54|           |      |2005-12-04|R. Hill
+        410P|P/2005  CR16|           |      |2005-02-02|
+        411P|P/2007    B1|           |      |2007-01-17|E.J. Christensen
+        412P|P/2010    B2|           |      |2010-01-22|
+        413P|P/2014    E1|           |      |2014-03-10|S.M. Larson
+        414P|P/2016    J3|           |      |2016-05-11|S. Ferguson
+        415P|P/2013  EW90|           |      |2013-03-03|M. Schwartz, P.R. Holvorcem
+        416P|P/2013    A2|           |      |2013-01-06|J.V. Scotti
+        417P|P/2015    J3|           |      |2015-05-15|
+        418P|P/2010    A5|           |      |2010-01-14|
+        419P|P/2015    F1|           |      |2015-03-21|
+        420P|P/2009    Q1|           |      |2009-08-27|R.E. Hill
+        421P|P/2009    U4|           |      |2009-10-23|R.H. McNaught
+        422P|P/2006    S4|           |      |2006-09-22|E.J. Christensen
+        423P|P/2008  CL94|           |      |2008-02-08|
+        424P|P/2012    S2|           |      |2012-09-23|
+        425P|P/2005    W3|           |      |2005-11-25|R. Kowalski
+        426P|P/2019    A7|           |      |2018-12-08|
+        427P|P/2017    S5|           |      |2017-09-27|
+        428P|P/2014   W12|           |      |2014-11-30|A.R. Gibbs
+        429P|P/2008  QP20|           |      |2008-08-25|R.E. Hill
+        430P|P/2011    A2|           |      |2011-01-11|J.V. Scotti
+        431P|P/2015    Q1|           |      |2015-08-18|J.V. Scotti
+        432P|P/2021    N4|           |      |2021-07-08|
+        434P|P/2012   TK8|           |      |2012-10-06|M. Schwartz, P.R. Holvorcem
+        435P|P/2021    T3|           |      |2021-10-02|
+        436P|P/2007    R4|           |      |2007-09-14|G.J. Garradd
+        437P|P/2021    V3|           |      |2021-11-01|
+        438P|P/2005    T2|           |      |2005-10-07|E. Christensen
+        439P|P/2008  WZ96|           |      |2009-11-30|
+        440P|P/1997    B1|           |      |1997-01-30|T. Kobayashi
+        441P|P/2017    R1|           |      |2017-09-14|
+        442P|P/2011    Q3|           |      |2011-08-29|R.H. McNaught
+        443P|P/2022    E1|           |      |2022-03-02|E.J. Christensen
+        444P|P/2016   PM1|           |      |2016-08-01|
+        445P|P/2014    R5|           |      |2014-09-14|
+        446P|P/2012    O3|           |      |2012-07-23|R.H. McNaught
+        447P|P/2021    R9|           |      |2021-09-05|S.S. Sheppard, D.J. Tholen
+        448P|P/2015    X1|           |      |2015-12-01|
+        449P|P/2020    S6|           |      |2020-09-29|G.J. Leonard
+        450P|P/2004    A1|           |      |2004-01-13|B. Skiff
+        451P|P/2007    A2|           |      |2007-01-10|E.J. Christensen
+        452P|P/2003  CC22|           |      |2003-03-02|S. Sheppard, D. Jewitt
+        453P|P/2010 BN109|           |      |2010-01-28|
+            |P/2022    V1|           |      |2022-11-01|
+        454P|P/2022    U5|           |      |2022-10-28|
+        455P|P/2017    S9|           |      |2017-09-30|
+        456P|P/2021    L4|           |      |2021-06-09|
+        457P|P/2020    O1|           |      |2020-07-19|K.W. Wierzchos
+        458P|P/2023    C1|           |      |2023-02-14|J. Jahn
+        459P|P/2010  VH95|           |      |2010-11-07|
+        460P|P/2016  BA14|           |      |2016-01-22|
+        461P|P/2010 OE101|           |      |2010-07-25|
+        462P|P/2000  OZ21|           |      |2000-07-29|
+        463P|P/2018   HT3|           |      |2018-04-22|
+        464P|P/2014 OL465|           |      |2014-07-25|
+        465P|P/2008    L2|           |      |2008-06-12|R.E. Hill
+            |P/2023    L1|           |      |2023-06-01|R. Kresken, F. Ocana, M. Micheli, L. Conversi
+        466P|P/2015    T3|           |      |2015-10-13|
+        467P|P/2010  TO20|           |      |2010-10-01|A.D. Grauer
+            |P/2023    H6|           |      |2023-04-20|M. Micheli, C. Schambeau
+        466P|P/2023    M3|           |      |2023-06-26|J.B. Fazekas
+        468P|P/2004    V3|           |      |2004-11-03|
+            |P/2023    O1|           |      |2023-07-18|M. Masek
+        469P|P/2015 XG422|           |      |2015-12-13|
+        470P|P/2014    W1|           |      |2014-11-17|
+            |P/2023    O2|           |      |2023-07-30|J. Maikner
+        471P|P/2023   KF3|           |      |2023-05-24|
+        472P|P/2002    T6|           |      |2002-10-04|
+            |P/2023  RL75|           |      |2023-09-09|E. Schwab
+        473P|P/2001    Q6|           |      |2001-08-28|
+            |P/2023    W1|           |      |2023-11-29|H. Sato
+        474P|P/2023    X5|           |      |2023-12-15|J.K. Hogan
+        475P|P/2004  DO29|           |      |2004-02-17|A.E. Gleason
+            |P/2023    V7|           |      |2023-11-11|M. Micheli, F. Ocana, M. Jaeger
+        476P|P/2015  HG16|           |      |2015-04-20|
+            |P/2023    W2|           |      |2023-11-19|J. Maikner
+        477P|P/2018    P3|           |      |2018-08-08|
+            |P/2023    V8|           |      |2023-11-15|T. Oribe
+        478P|P/2023    Y3|           |      |2023-12-18|
+        479P|P/2011   NO1|           |      |2011-07-07|L. Elenin, I. Molotov
+            |P/2023  WM26|           |      |2023-11-18|
+        480P|P/2014    A3|           |      |2014-01-09|
+            |P/2023    X6|           |      |2023-12-09|
+        481P|P/2012  WA34|           |      |2012-11-26|A. Boattini
+            |P/2024    C5|           |      |2024-02-12|E. Schwab
+        482P|P/2014  VF40|           |      |2014-11-10|
+        483P|P/2016    J1|           |      |2016-05-05|
+        486P|P/2024    H1|           |      |2024-04-18|E. Schwab
+        487P|P/2024    N5|           |      |2024-07-05|M. Masek
+        488P|P/2024    N6|           |      |2024-07-09|
+        490P|P/2024    C6|           |      |2024-02-04|
+        491P|P/2024    K2|           |      |2024-05-30|
+        492P|P/2024    O3|           |      |2024-07-18|
+        493P|P/2024    Q2|           |      |2024-08-30|M. Masek, M.S.P. Kelley
+        494P|P/2024    N2|           |      |2024-07-03|
+        495P|P/2024 RU145|           |      |2024-09-08|P. VanWylen, J. Maikner
+        496P|P/2024    S3|           |      |2024-09-26|
+        497P|P/2024    T4|           |      |2024-10-05|J.K. Hogan
+        499P|P/2025    A5|           |      |2025-01-07|E. Prosperi, M. Jaeger
+        500P|P/2025    B3|           |      |2025-01-24|T. Kobayashi, M. Jaeger, G. Rhemann, E. Prosperi
+        501P|P/2024    L4|           |      |2024-06-15|D. Rankin
+        502P|P/2025    H1|           |      |2025-04-25|S. Deen, G.J. Leonard
+        503P|P/2025    F3|           |      |2025-03-31|T. Prystavski
+        508P|P/2025    O1|           |      |2025-07-29|A. Maury, F. Signoret 
+        509P|P/2024    T6|           |      |2024-10-03|T. Kobayashi
+        510P|P/2025    M4|           |      |2025-07-24|T. Oribe
+        511P|P/2025    Q2|           |      |2025-08-23|
+        512P|P/2025    O3|           |      |2025-08-17|
+        513P|P/2025    S1|           |      |2025-09-24|G.J. Leonard
+        514P|P/2025    S4|           |      |2025-09-19|J. Maikner
+        515P|P/2026  AH19|           |      |2026-01-14|K. Wierzchos
+        516P|P/2026    B1|           |      |2026-01-17|
