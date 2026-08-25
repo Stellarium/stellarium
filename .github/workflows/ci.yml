@@ -280,12 +280,22 @@ jobs:
         if exist util\spout2\x64\SpoutLibrary.dll copy util\spout2\x64\SpoutLibrary.dll stellarium-bin\bin\
         windeployqt --compiler-runtime --no-translations stellarium-bin/bin/stellarium.exe
 
+    - name: Bundle data files next to the executable
+      # On Windows INSTALL_DATADIR="." so stellarium.exe reads its data from its own
+      # folder. The install tree puts data under share/stellarium (incl. the CMake-generated
+      # default_cfg.ini), so copy it beside the exe to make the artifact self-contained.
+      # No guard: fail the build if the data was not installed rather than ship a broken package.
+      shell: cmd
+      run: |
+        xcopy /E /I /Y stellarium-bin\share\stellarium stellarium-bin\bin
+        if not exist stellarium-bin\bin\data\default_cfg.ini exit /b 1
+
     - name: Upload Windows Executable Artifact
       uses: actions/upload-artifact@v4
       with:
         name: stellarium-windows-atlante
         path: stellarium-bin/bin/
-        if-no-files-found: warn
+        if-no-files-found: error
 
 
 
