@@ -7,6 +7,7 @@
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "StelApp.hpp"
+#include "StelModuleMgr.hpp"
 #include <QDebug>
 
 AtlanteCosmology* AtlanteCosmology::instance = nullptr;

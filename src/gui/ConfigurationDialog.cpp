@@ -31,6 +31,7 @@
 #include "atlante/AtlanteCosmology.hpp"
 #include <QGroupBox>
 #include <QRadioButton>
+#include <QVBoxLayout>
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
