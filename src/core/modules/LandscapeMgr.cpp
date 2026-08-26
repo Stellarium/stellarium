@@ -66,7 +66,7 @@ constexpr char ATMOSPHERE_ECLIPSE_SIM_QUALITY_CONFIG_KEY[]="landscape/atmosphere
 constexpr char ATMOSPHERE_MODEL_CONF_VAL_PREETHAM[]="preetham";
 constexpr char ATMOSPHERE_MODEL_CONF_VAL_SHOWMYSKY[]="showmysky";
 constexpr char ATMOSPHERE_MODEL_CONF_VAL_LIGHTWEIGHT[]="lightweight";
-constexpr char ATMOSPHERE_MODEL_CONF_VAL_DEFAULT[]="preetham";
+constexpr char ATMOSPHERE_MODEL_CONF_VAL_DEFAULT[]="lightweight";
 }
 
 Cardinals::Cardinals()
