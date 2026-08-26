@@ -366,71 +366,40 @@ int Lx200CommandSyncSelected::readAnswerFromBuffer(const char *&buff,
 		p++;
 	}
 
-	switch (first_byte)
+	// Unlike ":MS#" (goto), the Meade ":CM#" (sync) command does not return a
+	// numeric status. On success it replies with a '#'-terminated string - the
+	// name of the object the telescope was synchronised to (e.g. "M31#"), a
+	// message such as "Coordinates matched.#", or simply "OK#" as sent by
+	// INDIGO's LX200 emulation. Accept any '#'-terminated response as success
+	// and consume it. A bare '0' (used by some controllers) is still accepted
+	// as a single-byte answer.
+	if (first_byte == '0')
 	{
-		case '0':
-			#ifdef DEBUG4
-			*log_file << Now()
-				  << "Lx200CommandSyncSelected::readAnswerFromBuffer: "
-				     "sync ok"
-				  << StelUtils::getEndLineChar();
-			#endif
-			buff++;
-			return 1;
-
-		case '1':
-		case '2':
-		{
-			if (p == end)
-			{
-				// the AutoStar 494 returns just '1', nothing else
-				#ifdef DEBUG4
-				*log_file << Now()
-					  << "Lx200CommandSyncSelected::readAnswerFromBuffer: "
-					     "sync failed ("
-					  << (static_cast<char>(first_byte))
-					  << "), "
-					     "but no complete answer yet"
-					  << StelUtils::getEndLineChar();
-				#endif
-				buff++;
-				return 0;
-			}
-
-			for (;;p++)
-			{
-				if (p >= end)
-				{
-					return 0;
-				}
-				if (*p == '#')
-					break;
-			}
-			#ifdef DEBUG4
-			*log_file << Now()
-			<< "Lx200CommandSyncSelected::readAnswerFromBuffer: "
-			   "sync failed ("
-			<< (static_cast<char>(first_byte))
-			<< "): '"
-			<< QByteArray(buff + 1, static_cast<int>(p - buff - 1))
-			<< '\''
-			<< StelUtils::getEndLineChar();
-			#endif
-			buff = p+1;
-			return 1;
-		}
-
-		default:
-			#ifdef DEBUG4
-			*log_file << Now()
-				  << "Lx200CommandSyncSelected::readAnswerFromBuffer: "
-				     "sync returns something weird"
-				  << StelUtils::getEndLineChar();
-			#endif
-			break;
+		#ifdef DEBUG4
+		*log_file << Now()
+			  << "Lx200CommandSyncSelected::readAnswerFromBuffer: sync ok"
+			  << StelUtils::getEndLineChar();
+		#endif
+		buff++;
+		return 1;
 	}
 
-	return -1;
+	for (;;p++)
+	{
+		if (p >= end)
+			return 0; // wait for the rest of the answer
+		if (*p == '#')
+			break;
+	}
+	#ifdef DEBUG4
+	*log_file << Now()
+	<< "Lx200CommandSyncSelected::readAnswerFromBuffer: sync acknowledged: '"
+	<< QByteArray(buff, static_cast<int>(p - buff))
+	<< '\''
+	<< StelUtils::getEndLineChar();
+	#endif
+	buff = p+1;
+	return 1;
 }
 
 void Lx200CommandSyncSelected::print(QTextStream &o) const
@@ -607,8 +576,13 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 			long_format = false;
 			dec *= 60;
 			break;
-		
+
+		// High-precision declination is "sDD*MM'SS#": the canonical Meade
+		// LX200 separator between arcminutes and arcseconds is an apostrophe
+		// (as sent by real mounts and by INDIGO's LX200 emulation). Some
+		// implementations use a colon instead, so accept both.
 		case ':':
+		case '\'':
 			if (end-buff < 10)
 				return 0;
 			dec *=  6; dec += ((*p++) - '0');
@@ -622,11 +596,11 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 				return -1;
 			}
 			break;
-		
+
 		default:
 			*log_file << Now()
 			          << "Lx200CommandGetDec::readAnswerFromBuffer: "
-			             "error: '#' or ':' expected"
+			             "error: '#', ':' or ''' expected"
 				  << StelUtils::getEndLineChar();
 			return -1;
 	}

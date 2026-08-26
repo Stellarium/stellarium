@@ -25,6 +25,7 @@
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelProgressController.hpp"
 #include <QGraphicsView>
 #include <QDebug>
 #include <QTimeLine>
@@ -66,7 +67,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	setFont(font);
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &QGraphicsTextItem::setFont);
-	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int size){
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [this](){
 		QFont font=QGuiApplication::font();
 		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 		setFont(font);
@@ -123,6 +124,8 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 	, autoHidebts(nullptr)
 	, autoHideBottomBar(true)
 	, autoHideLeftBar(true)
+	, toolbarAtTop(false)
+	, toolbarAtRight(false)
 	, stelGui(nullptr)
 {
 	setObjectName("StelSkyGui");
@@ -139,19 +142,19 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
 	progressBarMgr = new StelProgressBarMgr(this);
-	connect(&StelApp::getInstance(), SIGNAL(progressBarAdded(const StelProgressController*)), progressBarMgr, SLOT(addProgressBar(const StelProgressController*)));
-	connect(&StelApp::getInstance(), SIGNAL(progressBarRemoved(const StelProgressController*)), progressBarMgr, SLOT(removeProgressBar(const StelProgressController*)));
+	connect(&StelApp::getInstance(), &StelApp::progressBarAdded,   progressBarMgr, &StelProgressBarMgr::addProgressBar);
+	connect(&StelApp::getInstance(), &StelApp::progressBarRemoved, progressBarMgr, &StelProgressBarMgr::removeProgressBar);
 
 	// The path drawn around the button bars
 	buttonBarsFrame = new StelBarsFrame(this);
 
 	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
-	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
+	connect(animLeftBarTimeLine, &QTimeLine::valueChanged, this, &SkyGui::updateBarsPos);
 
 	animBottomBarTimeLine = new QTimeLine(200, this);
 	animBottomBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
-	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
+	connect(animBottomBarTimeLine, &QTimeLine::valueChanged, this, &SkyGui::updateBarsPos);
 
 	setAcceptHoverEvents(true);
 }
@@ -160,7 +163,7 @@ void SkyGui::init(StelGui* astelGui)
 {
 	stelGui = astelGui;
 
-	// Create the 2 auto hide buttons in the bottom left corner
+	// Create the 2 auto hide buttons placed in the active toolbar corner
 	autoHidebts = new CornerButtons(this);
 	QPixmap pxmapOn = QPixmap(":/graphicGui/miscHorAutoHide-on.png");
 	QPixmap pxmapOff = QPixmap(":/graphicGui/miscHorAutoHide-off.png");
@@ -190,18 +193,32 @@ void SkyGui::init(StelGui* astelGui)
 
 	buttonBarsFrame->setZValue(-0.1);
 	updateBarsPos();
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	connect(&StelApp::getInstance(), &StelApp::colorSchemeChanged, this, &SkyGui::setStelStyle);
 	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &SkyGui::updateInfoPanelPos);
-	connect(bottomBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
+	connect(bottomBar, &BottomStelBar::sizeChanged, this, &SkyGui::updateBarsPos);
 	// The first draw of path may show overshooting date line if there are too few buttons in the bottom bar.
 	// Correct this by a redraw 1/2s after startup
-	QTimer::singleShot(500, this, [=](){buttonBarsFrame->updatePath(bottomBar, leftBar);});
+	QTimer::singleShot(500, this, [=](){buttonBarsFrame->updatePath(bottomBar, leftBar, toolbarAtTop, toolbarAtRight);});
 }
 
 void SkyGui::updateInfoPanelPos()
 {
 	const auto factor = StelApp::getInstance().screenFontSizeRatio();
-	infoPanel->setPos(8 * factor, 8 * factor);
+	const qreal margin = 8 * factor;
+	qreal infoX = margin;
+	if (toolbarAtTop && !toolbarAtRight)
+	{
+		const qreal barRight = leftBar->pos().x() + leftBar->boundingRectNoHelpLabel().width();
+		infoX = qMax(margin, barRight + margin);
+	}
+	qreal infoY = margin;
+	if (toolbarAtTop)
+	{
+		const qreal barBottom = bottomBar->pos().y() + bottomBar->boundingRectNoHelpLabel().height();
+		infoY = qMax(margin, barBottom + margin);
+	}
+
+	infoPanel->setPos(infoX, infoY);
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -212,33 +229,96 @@ void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
 
 void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
 {
+	const int ww = getSkyGuiWidth();
 	const int hh = getSkyGuiHeight();
 
 	const double x = event->pos().x();
 	const double y = event->pos().y();
-	double maxX = leftBar->boundingRect().width()+2.*buttonBarsFrame->getRoundSize();
-	double maxY = hh-(leftBar->boundingRect().height()+bottomBar->boundingRect().height()+2.*buttonBarsFrame->getRoundSize());
-	const double minX = 0;
+	const double rs = buttonBarsFrame->getRoundSize();
+	const double leftBarW = leftBar->boundingRect().width();
+	const double leftBarH = leftBar->boundingRect().height();
+	const double bottomBarW = bottomBar->boundingRect().width();
+	const double bottomBarH = bottomBar->boundingRect().height();
 
-	if (x<=maxX && y>=maxY && animLeftBarTimeLine->state()==QTimeLine::NotRunning && leftBar->pos().x()<minX)
+	// vertical bar hover trigger
+	bool inLeftBarZone, outOfLeftBarZone;
+	if (toolbarAtRight)
+	{
+		const double edgeX = ww - leftBarW - 2.*rs;
+		if (toolbarAtTop)
+		{
+			inLeftBarZone    = (x >= edgeX) && (y <= leftBarH + bottomBarH + 2.*rs);
+			outOfLeftBarZone = (x < edgeX - 30) || (y > leftBarH + bottomBarH + 2.*rs + 30);
+		}
+		else
+		{
+			inLeftBarZone    = (x >= edgeX) && (y >= hh - leftBarH - bottomBarH - 2.*rs);
+			outOfLeftBarZone = (x < edgeX - 30) || (y < hh - leftBarH - bottomBarH - 2.*rs - 30);
+		}
+	}
+	else
+	{
+		const double edgeX = leftBarW + 2.*rs;
+		if (toolbarAtTop)
+		{
+			inLeftBarZone    = (x <= edgeX) && (y <= leftBarH + bottomBarH + 2.*rs);
+			outOfLeftBarZone = (x > edgeX + 30) || (y > leftBarH + bottomBarH + 2.*rs + 30);
+		}
+		else
+		{
+			inLeftBarZone    = (x <= edgeX) && (y >= hh - leftBarH - bottomBarH - 2.*rs);
+			outOfLeftBarZone = (x > edgeX + 30) || (y < hh - leftBarH - bottomBarH - 2.*rs - 30);
+		}
+	}
+
+	if (inLeftBarZone && animLeftBarTimeLine->state()==QTimeLine::NotRunning && animLeftBarTimeLine->currentValue()<1.)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
 		animLeftBarTimeLine->start();
 	}
-	if (autoHideLeftBar && (x>maxX+30 || y<maxY-30) && animLeftBarTimeLine->state()==QTimeLine::NotRunning && leftBar->pos().x()>=minX)
+	if (autoHideLeftBar && outOfLeftBarZone && animLeftBarTimeLine->state()==QTimeLine::NotRunning && animLeftBarTimeLine->currentValue()>=0.9999999)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Backward);
 		animLeftBarTimeLine->start();
 	}
 
-	maxX = leftBar->boundingRect().width()+bottomBar->boundingRect().width()+2.*buttonBarsFrame->getRoundSize();
-	maxY = hh-bottomBar->boundingRect().height()+2.*buttonBarsFrame->getRoundSize();
-	if (x<=maxX && y>=maxY && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()<1.)
+	// horizontal bar hover trigger
+	bool inBottomBarZone, outOfBottomBarZone;
+	if (toolbarAtRight)
+	{
+		const double edgeX = ww - leftBarW - bottomBarW - 2.*rs;
+		if (toolbarAtTop)
+		{
+			inBottomBarZone    = (x >= edgeX) && (y <= bottomBarH + 2.*rs);
+			outOfBottomBarZone = (x < edgeX - 30) || (y > bottomBarH + 2.*rs + 30);
+		}
+		else
+		{
+			inBottomBarZone    = (x >= edgeX) && (y >= hh - bottomBarH + 2.*rs);
+			outOfBottomBarZone = (x < edgeX - 30) || (y < hh - bottomBarH + 2.*rs - 30);
+		}
+	}
+	else
+	{
+		const double edgeX = leftBarW + bottomBarW + 2.*rs;
+		if (toolbarAtTop)
+		{
+			inBottomBarZone    = (x <= edgeX) && (y <= bottomBarH + 2.*rs);
+			outOfBottomBarZone = (x > edgeX + 30) || (y > bottomBarH + 2.*rs + 30);
+		}
+		else
+		{
+			inBottomBarZone    = (x <= edgeX) && (y >= hh - bottomBarH + 2.*rs);
+			outOfBottomBarZone = (x > edgeX + 30) || (y < hh - bottomBarH + 2.*rs - 30);
+		}
+	}
+
+	if (inBottomBarZone && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()<1.)
 	{
 		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
 		animBottomBarTimeLine->start();
 	}
-	if (autoHideBottomBar && (x>maxX+30 || y<maxY-30) && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
+	if (autoHideBottomBar && outOfBottomBarZone && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
 	{
 		animBottomBarTimeLine->setDirection(QTimeLine::Backward);
 		animBottomBarTimeLine->start();
@@ -274,26 +354,87 @@ qreal SkyGui::getLeftBarWidth() const
 	return leftBar->boundingRect().width();
 }
 
+QRectF SkyGui::getBottomBarRect() const
+{
+	return bottomBar->boundingRectNoHelpLabel().translated(bottomBar->pos());
+}
+
+QRectF SkyGui::getLeftBarRect() const
+{
+	return leftBar->boundingRectNoHelpLabel().translated(leftBar->pos());
+}
+
 //! Update the position of the button bars in the main window
 void SkyGui::updateBarsPos()
 {
+	// auto-hide buttons are created in init(), so return if called before that
+	if (!autoHidebts) return;
+
 	const int ww = getSkyGuiWidth();  // actually: window width
 	const int hh = getSkyGuiHeight(); // actually: window height
 	bool updatePath = false;
 
-	// Use a position cache to avoid useless redraw triggered by the position set if the bars don't move
-	const double rangeX = leftBar->boundingRectNoHelpLabel().width()+2.*buttonBarsFrame->getRoundSize()+1.;
-	const qreal newLeftBarX = buttonBarsFrame->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5;
-	const qreal newLeftBarY = hh-leftBar->boundingRectNoHelpLabel().height()-bottomBar->boundingRectNoHelpLabel().height()-20;
+	// Update the layout of the horizontal bar (text above or below buttons)
+	bottomBar->setBarAtTop(toolbarAtTop);
+	leftBar->setBarAtRight(toolbarAtRight);
+	leftBar->setBarAtTop(toolbarAtTop);
+
+	const qreal leftBarW   = leftBar->boundingRectNoHelpLabel().width();
+	const qreal leftBarH   = leftBar->boundingRectNoHelpLabel().height();
+	const qreal bottomBarH = bottomBar->boundingRectNoHelpLabel().height();
+	const qreal rs         = buttonBarsFrame->getRoundSize();
+
+	// vertical bar position
+	const double rangeX = leftBarW + 2. * rs + 1.;
+	qreal newLeftBarX, newLeftBarY;
+
+	const double hiddenOffsetX = (1. - animLeftBarTimeLine->currentValue()) * rangeX;
+	if (toolbarAtRight)
+	{
+		newLeftBarX = ww - leftBarW - rs + hiddenOffsetX + 0.5;
+	}
+	else
+	{
+		newLeftBarX = rs - hiddenOffsetX - 0.5;
+	}
+
+	if (toolbarAtTop)
+	{
+		newLeftBarY = bottomBarH + 20;
+	}
+	else
+	{
+		newLeftBarY = hh - leftBarH - bottomBarH - 20;
+	}
+
 	if (!qFuzzyCompare(leftBar->pos().x(), newLeftBarX) || !qFuzzyCompare(leftBar->pos().y(), newLeftBarY))
 	{
 		leftBar->setPos(qRound(newLeftBarX), qRound(newLeftBarY));
 		updatePath = true;
 	}
 
-	const double rangeY = bottomBar->getButtonsBoundingRect().height()+1.5+bottomBar->getGap();
-	const qreal newBottomBarX = leftBar->boundingRectNoHelpLabel().right()+buttonBarsFrame->getRoundSize();
-	const qreal newBottomBarY = hh-bottomBar->boundingRectNoHelpLabel().height()+bottomBar->getGap()-buttonBarsFrame->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
+	// horizontal bar position
+	const double rangeY = bottomBar->getButtonsBoundingRect().height() + 1.5 + bottomBar->getGap();
+	qreal newBottomBarX, newBottomBarY;
+
+	const double hiddenOffsetY = (1. - animBottomBarTimeLine->currentValue()) * rangeY;
+	if (toolbarAtRight)
+	{
+		newBottomBarX = ww - bottomBar->boundingRectNoHelpLabel().width() - leftBarW - rs;
+	}
+	else
+	{
+		newBottomBarX = leftBarW + rs;
+	}
+
+	if (toolbarAtTop)
+	{
+		newBottomBarY = rs - bottomBar->getGap() - 0.5 - hiddenOffsetY;
+	}
+	else
+	{
+		newBottomBarY = hh - bottomBar->boundingRectNoHelpLabel().height() + bottomBar->getGap() - rs + 0.5 + hiddenOffsetY;
+	}
 
 	if (!qFuzzyCompare(bottomBar->pos().x(), newBottomBarX) || !qFuzzyCompare(bottomBar->pos().y(), newBottomBarY))
 	{
@@ -308,20 +449,42 @@ void SkyGui::updateBarsPos()
 	}
 
 	if (updatePath)
-		buttonBarsFrame->updatePath(bottomBar, leftBar);
+		buttonBarsFrame->updatePath(bottomBar, leftBar, toolbarAtTop, toolbarAtRight);
 
 	const qreal newProgressBarX = ww-progressBarMgr->boundingRect().width()-20;
 	const qreal newProgressBarY = hh-progressBarMgr->boundingRect().height()+7;	
 	progressBarMgr->setPos(newProgressBarX, newProgressBarY);
-	progressBarMgr->setZValue(400);	
+	progressBarMgr->setZValue(400);
+
+	// Update position of the auto-hide buttons.
+	const int vW = btVertAutoHide->getButtonPixmapWidth();
+	const int vH = btVertAutoHide->getButtonPixmapHeight();
+	const int hW = btHorizAutoHide->getButtonPixmapWidth();
+	const int hH = btHorizAutoHide->getButtonPixmapHeight();
+
+	// Mirror the button pixmaps to keep the angled edge facing the correct corner.
+	const QTransform t = QTransform::fromScale(toolbarAtRight ? -1. : 1., toolbarAtTop ? -1. : 1.);
+	btVertAutoHide->setTransform(t);
+	btHorizAutoHide->setTransform(t);
+
+	// Desired content origin in autoHidebts coords (before flip-transform offset is applied).
+	const int vDesX = toolbarAtRight ? (hW - 1) : 0;
+	const int hDesX = toolbarAtRight ? (vW - 2) : 1;
+	const int hDesY = toolbarAtTop ? 0 : (vH - hH + 1);
 
 	// Update position of the auto-hide buttons
-	btHorizAutoHide->setPos(1,btVertAutoHide->getButtonPixmapHeight()-btHorizAutoHide->getButtonPixmapHeight()+1);
-	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);
+	btVertAutoHide->setPos(vDesX + (toolbarAtRight ? vW : 0), toolbarAtTop ? vH : 0);
+	btHorizAutoHide->setPos(hDesX + (toolbarAtRight ? hW : 0), hDesY + (toolbarAtTop ? hH : 0));
+
+	// Position the autoHidebts widget so its content touches the active screen corner.
+	autoHidebts->setPos(toolbarAtRight ? (ww - autoHidebts->childrenBoundingRect().right()) : 0,
+	                    toolbarAtTop ? 0 : (hh - autoHidebts->childrenBoundingRect().bottom() + 1));
+
 	double opacity = qMax(animLeftBarTimeLine->currentValue(), animBottomBarTimeLine->currentValue());
 	autoHidebts->setOpacity(qMax(0.01, opacity));	// Work around a qt bug
 
 	// Update the screen as soon as possible.
+	updateInfoPanelPos();
 	StelMainView::getInstance().thereWasAnEvent();
 }
 

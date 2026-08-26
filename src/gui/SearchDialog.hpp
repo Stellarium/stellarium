@@ -311,24 +311,24 @@ private:
 	//! Used when substituting text with a Greek letter.
 	bool flagHasSelectedText;
 
-	bool useStartOfWords;
-	bool useLengthSorting;
-	bool useLockPosition;
-	bool useSimbad;
-	bool useFOVCenterMarker;
+	bool useStartOfWords = false;
+	bool useLengthSorting = false;
+	bool useLockPosition = true;
+	bool useSimbad = true;
+	bool useFOVCenterMarker = true;
 	bool fovCenterMarkerState;
-        bool useAutoClosing;
+	bool useAutoClosing = true;
 	//! URL of the server used for SIMBAD queries.
 	QString simbadServerUrl;
 
 	//! Properties for SIMBAD position query
-	int  simbadDist;      //!< Distance from queried coordinates
-	int  simbadCount;     //!< At max, retrieve so many results
-	bool simbadGetIds;    //!< get all IDs for object
-	bool simbadGetSpec;   //!< get spectral data
-	bool simbadGetMorpho; //!< get morphological description
-	bool simbadGetTypes;  //!< get object types
-	bool simbadGetDims;   //!< get dimensions
+	int  simbadDist = 30;      //!< Distance from queried coordinates
+	int  simbadCount = 3;     //!< At max, retrieve so many results
+	bool simbadGetIds = true;    //!< get all IDs for object
+	bool simbadGetSpec = false;   //!< get spectral data
+	bool simbadGetMorpho = false; //!< get morphological description
+	bool simbadGetTypes = false;  //!< get object types
+	bool simbadGetDims = false;   //!< get dimensions
 
 	bool shiftPressed;   //!< follow Shift button status
 

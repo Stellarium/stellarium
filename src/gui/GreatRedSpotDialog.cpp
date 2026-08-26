@@ -50,9 +50,9 @@ void GreatRedSpotDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &GreatRedSpotDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &GreatRedSpotDialog::handleMovedTo);
 
 	SolarSystem* ss = GETSTELMODULE(SolarSystem);
 	connectIntProperty(ui->longitudeSpinBox, "SolarSystem.grsLongitude");
@@ -62,9 +62,9 @@ void GreatRedSpotDialog::createDialogContent()
 	QString fmt = QString("%1 hh:mm").arg(locmgr.getQtDateFormatStr());
 	ui->jdDateTimeEdit->setDisplayFormat(fmt);
 	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getGrsJD(), Qt::UTC));
-	connect(ui->jdDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(setGrsJD(QDateTime)));
+	connect(ui->jdDateTimeEdit, &QDateTimeEdit::dateTimeChanged, this, &GreatRedSpotDialog::setGrsJD);
 
-	connect(ui->recentGrsMeasurementPushButton, SIGNAL(clicked(bool)), this, SLOT(openRecentGrsMeasurement()));
+	connect(ui->recentGrsMeasurementPushButton, &QPushButton::clicked, this, &GreatRedSpotDialog::openRecentGrsMeasurement);
 }
 
 void GreatRedSpotDialog::setGrsJD(QDateTime dt)

@@ -628,7 +628,7 @@ public slots:
 	//! set the initial "today time" from the config file
 	void setInitTodayTime(const QTime& time);
 	//! Set the preset sky time from a QDateTime
-	void setPresetSkyTime(QDateTime dateTime);
+	void setPresetSkyDateTime(QDateTime dateTime);
 
 	//! Add one [Earth, solar] minute to the current simulation time.
 	void addMinute();

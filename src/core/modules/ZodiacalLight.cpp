@@ -116,7 +116,7 @@ void ZodiacalLight::init()
 	addAction("actionShow_ZodiacalLight", displayGroup, N_("Zodiacal Light"), "flagZodiacalLightDisplayed", "Ctrl+Shift+Z");
 
 	StelCore* core=StelApp::getInstance().getCore();
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(handleLocationChanged(StelLocation)));
+	connect(core, &StelCore::locationChanged, this, &ZodiacalLight::handleLocationChanged);
 }
 
 void ZodiacalLight::setupCurrentVAO()

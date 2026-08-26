@@ -121,33 +121,33 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	videoObjects[id]->lastPos=-1;
 
 	// A few connections are not really needed, they are signals we don't use. TBD: Remove or keep commented out?
-	connect(videoObjects[id]->player, SIGNAL(durationChanged(qint64)), this, SLOT(handleDurationChanged(qint64))); // (CRITICALLY IMPORTANT!)
-	connect(videoObjects[id]->player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(handleMediaStatusChanged(QMediaPlayer::MediaStatus)));
-	//connect(videoObjects[id]->player, SIGNAL(positionChanged(qint64)), this, SLOT(handlePositionChanged(qint64)));
+	connect(videoObjects[id]->player, &QMediaPlayer::durationChanged, this, &StelVideoMgr::handleDurationChanged); // (CRITICALLY IMPORTANT!)
+	connect(videoObjects[id]->player, &QMediaPlayer::mediaStatusChanged, this, &StelVideoMgr::handleMediaStatusChanged);
+	//connect(videoObjects[id]->player, &QMediaPlayer::positionChanged, this, &StelVideoMgr::handlePositionChanged);
 	// we test isSeekable() where needed, so only debug log entry. --> And we may use the signal however now during blocking load below!
-	connect(videoObjects[id]->player, SIGNAL(seekableChanged(bool)), this, SLOT(handleSeekableChanged(bool)));
+	connect(videoObjects[id]->player, &QMediaPlayer::seekableChanged, this, &StelVideoMgr::handleSeekableChanged);
 	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	connect(videoObjects[id]->player, SIGNAL(bufferProgressChanged(float)), this, SLOT(handleBufferProgressChanged(float)));
-	connect(videoObjects[id]->player, SIGNAL(errorOccurred(QMediaPlayer::Error, const QString &)), this, SLOT(handleErrorMsg(QMediaPlayer::Error, const QString &)));
-	connect(videoObjects[id]->player, SIGNAL(playbackStateChanged(QMediaPlayer::PlaybackState)), this, SLOT(handleStateChanged(QMediaPlayer::PlaybackState)));
-	connect(videoObjects[id]->player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(handleMediaStatusChanged(QMediaPlayer::MediaStatus)));
-	connect(videoObjects[id]->player, SIGNAL(hasVideoChanged(bool)), this, SLOT(handleVideoAvailableChanged(bool)));
-	connect(videoObjects[id]->player, SIGNAL(hasAudioChanged(bool)), this, SLOT(handleAudioAvailableChanged(bool)));
-	connect(videoObjects[id]->player, SIGNAL(sourceChanged(const QUrl &)), this, SLOT(handleSourceChanged(const QUrl &)));
+	connect(videoObjects[id]->player, &QMediaPlayer::bufferProgressChanged, this, &StelVideoMgr::handleBufferProgressChanged);
+	connect(videoObjects[id]->player, &QMediaPlayer::errorOccurred, this, &StelVideoMgr::handleErrorMsg);
+	connect(videoObjects[id]->player, &QMediaPlayer::playbackStateChanged, this, &StelVideoMgr::handleStateChanged);
+	connect(videoObjects[id]->player, &QMediaPlayer::mediaStatusChanged, this, &StelVideoMgr::handleMediaStatusChanged);
+	connect(videoObjects[id]->player, &QMediaPlayer::hasVideoChanged, this, &StelVideoMgr::handleVideoAvailableChanged);
+	connect(videoObjects[id]->player, &QMediaPlayer::hasAudioChanged, this, &StelVideoMgr::handleAudioAvailableChanged);
+	connect(videoObjects[id]->player, &QMediaPlayer::sourceChanged, this, &StelVideoMgr::handleSourceChanged);
 	#else
-	connect(videoObjects[id]->player, SIGNAL(bufferStatusChanged(int)), this, SLOT(handleBufferStatusChanged(int)));
-	connect(videoObjects[id]->player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(handleError(QMediaPlayer::Error)));
-	connect(videoObjects[id]->player, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(handleStateChanged(QMediaPlayer::State)));
-	connect(videoObjects[id]->player, SIGNAL(videoAvailableChanged(bool)), this, SLOT(handleVideoAvailableChanged(bool)));
-	connect(videoObjects[id]->player, SIGNAL(audioAvailableChanged(bool)), this, SLOT(handleAudioAvailableChanged(bool)));
-	connect(videoObjects[id]->player, SIGNAL(mutedChanged(bool)), this, SLOT(handleMutedChanged(bool)));
-	connect(videoObjects[id]->player, SIGNAL(volumeChanged(int)), this, SLOT(handleVolumeChanged(int)));
-	connect(videoObjects[id]->player, SIGNAL(availabilityChanged(bool)), this, SLOT(handleAvailabilityChanged(bool)));
-	connect(videoObjects[id]->player, SIGNAL(availabilityChanged(QMultimedia::AvailabilityStatus)), this, SLOT(handleAvailabilityChanged(QMultimedia::AvailabilityStatus)));
+	connect(videoObjects[id]->player, &QMediaPlayer::bufferStatusChanged, this, &StelVideoMgr::handleBufferStatusChanged);
+	connect(videoObjects[id]->player, qOverload<QMediaPlayer::Error>(&QMediaPlayer::error), this, &StelVideoMgr::handleError);
+	connect(videoObjects[id]->player, &QMediaPlayer::stateChanged, this, &StelVideoMgr::handleStateChanged);
+	connect(videoObjects[id]->player, &QMediaPlayer::videoAvailableChanged, this, &StelVideoMgr::handleVideoAvailableChanged);
+	connect(videoObjects[id]->player, &QMediaPlayer::audioAvailableChanged, this, &StelVideoMgr::handleAudioAvailableChanged);
+	connect(videoObjects[id]->player, &QMediaPlayer::mutedChanged, this, &StelVideoMgr::handleMutedChanged);
+	connect(videoObjects[id]->player, &QMediaPlayer::volumeChanged, this, &StelVideoMgr::handleVolumeChanged);
+	connect(videoObjects[id]->player, qOverload<bool>(&QMediaPlayer::availabilityChanged), this, qOverload<bool>(&StelVideoMgr::handleAvailabilityChanged));
+	connect(videoObjects[id]->player, qOverload<QMultimedia::AvailabilityStatus>(&QMediaPlayer::availabilityChanged), this, qOverload<QMultimedia::AvailabilityStatus>(&StelVideoMgr::handleAvailabilityChanged));
 	#endif
 
 	// Only this is triggered also on Windows. Lets us read resolution etc. (CRITICALLY IMPORTANT!)
-	connect(videoObjects[id]->player, SIGNAL(metaDataChanged()), this, SLOT(handleMetaDataChanged()));
+	connect(videoObjects[id]->player, qOverload<>(&QMediaPlayer::metaDataChanged), this, &StelVideoMgr::handleMetaDataChanged);
 
 	// We need an absolute pathname here.
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
@@ -193,8 +193,8 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 //		timer.setSingleShot(true);
 //		timer.setInterval(5000); // 5 seconds, may be too long?
 //		qCDebug(Media) << "Not Seekable: connect...";
-//		loop.connect(&timer, SIGNAL (timeout()), &loop, SLOT (quit()) );
-//		loop.connect(videoObjects[id]->player, SIGNAL (seekableChanged(bool)), &loop, SLOT (quit()));
+//		loop.connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+//		loop.connect(videoObjects[id]->player, &QMediaPlayer::seekableChanged, &loop, &QEventLoop::quit);
 //		qCDebug(Media) << "Not Seekable: loop...";
 //		loop.exec();
 //		qCDebug(Media) << "Blocking load finished, should be seekable now or 5s are over.";

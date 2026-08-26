@@ -258,6 +258,7 @@ star catalogs and also allows to hide or show additional buttons in
 the lower button bar. 
 
 \subsubsection{Customization of information displays}
+\label{sec:gui:configuration:extras:infoformat}
 The information display can be tweaked a bit with the options found in the GUI section ``Additional information settings''.
 
 \begin{description}
@@ -273,6 +274,7 @@ The information display can be tweaked a bit with the options found in the GUI s
 
 
 \subsubsection{Customization of button visibility on bottom toolbar}
+\label{sec:gui:configuration:extras:buttons}
 If your screen is too narrow to show all buttons
 or you simply don't need them because you prefer the keyboard shortcuts,
 you can choose your optimal setup. The selection of buttons is stored immediately. 
@@ -407,6 +409,19 @@ from touch-enabled devices like smartphones.
   text color for the info panel at daylight to increase the contrast of the text. 
   By default Stellarium use black color.
 \end{description}
+
+\subsubsection{Toolbar position} \newFeature{26.3}
+The \emph{Toolbar location} drop-down in the Planetarium options section of the Tools tab lets you
+dock both toolbars to any of the four screen corners:
+\begin{description}
+\item[Bottom-left] Default position: tool button bar at the bottom, dialog button bar on the left.
+\item[Bottom-right] Tool button bar at the bottom, dialog button bar on the right.
+\item[Top-left] Tool button bar at the top, dialog button bar on the left. When the tool button bar is at the top,
+  the status row (location, FOV, date/time) moves below the buttons so it remains visible when
+  the bar is partially hidden.
+\item[Top-right] Tool button bar at the top, dialog button bar on the right.
+\end{description}
+The selection is saved as \key{toolbar\_corner} (integer 0--3) in the \texttt{[gui]} section.
 
 \paragraph{Multithreading} \label{sec:gui:configuration:tools:threads} 
 For every frame, the positions of all planets and minor bodies of the Solar system are computed. 

@@ -138,10 +138,9 @@ void ConstellationMgr::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
-	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
-			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+	connect(objectManager, &StelObjectMgr::selectedObjectChanged, this, &ConstellationMgr::selectedObjectChange);
 	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, &StelApp::languageChanged, this, &ConstellationMgr::updateI18n);
 	// Loading is a ping-pong. First we set the new skyculture, this triggers loading of constellation descriptions, but then we feed the constellation narration texts.
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &ConstellationMgr::updateSkyCulture);
 	connect(this, &ConstellationMgr::hasUpdatedSkyCulture, &app->getSkyCultureMgr(), &StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription);

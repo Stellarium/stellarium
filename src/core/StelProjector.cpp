@@ -169,7 +169,7 @@ void StelProjector::init(const StelProjectorParams& params)
 	flipHorz = params.flipHorz ? -1.f : 1.f;
 	flipVert = params.flipVert ? -1.f : 1.f;
 	viewportFovDiameter = params.viewportFovDiameter * devicePixelsPerPixel;
-	pixelPerRad = 0.5f * static_cast<float>(viewportFovDiameter) / fovToViewScalingFactor(params.fov*(static_cast<float>(M_PI/360.)));
+	pixelPerRad = 0.5f * static_cast<float>(viewportFovDiameter) / fovToViewScalingFactor(M_PIf/360.f * params.fov);
 	widthStretch = params.widthStretch;
 	computeBoundingCap();
 }
@@ -317,7 +317,7 @@ float StelProjector::getScreenScale() const
 
 //! Get the current FOV diameter in degrees
 float StelProjector::getFov() const {
-	return 360.f/static_cast<float>(M_PI)*viewScalingFactorToFov(0.5f*static_cast<float>(viewportFovDiameter)/pixelPerRad);
+	return 360.f/M_PIf*viewScalingFactorToFov(0.5f*static_cast<float>(viewportFovDiameter)/pixelPerRad);
 }
 
 //! Get whether front faces need to be oriented in the clockwise direction

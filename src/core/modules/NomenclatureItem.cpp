@@ -214,7 +214,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 {
 	QString str;
 	QTextStream oss(&str);
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 
 	if (flags&Name)
 	{
@@ -302,7 +302,7 @@ QString NomenclatureItem::getNarration(const StelCore* core, const InfoStringGro
 {
 	QString str;
 	QTextStream oss(&str);
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 
 	if (flags&Name)
 	{

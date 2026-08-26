@@ -229,7 +229,7 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 	QString km = qc_("km", "distance");
 	// TRANSLATORS: Unit of measure for distance - milliones kilometers
 	QString Mkm = qc_("M km", "distance");
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	QString str;
 	QTextStream oss(&str);
 
@@ -270,7 +270,7 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 
 QString Comet::getNarrationSize(const StelCore *core, const InfoStringGroup &flags) const
 {
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	QString str;
 	QTextStream oss(&str);
 
@@ -457,7 +457,8 @@ void Comet::update(int deltaTime)
 
 
 	// To make comet more apparent in overviews, take field of view into account:
-	const float fov=core->getProjection(core->getAltAzModelViewTransform())->getFov();
+	static StelMovementMgr* mMgr=GETSTELMODULE(StelMovementMgr);
+	const float fov = mMgr->getCurrentFov();
 	if (fov>20)
 		aLum*= (fov/20.0f);
 

@@ -19,7 +19,9 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include "Oculars.hpp"
 #include "OcularsGuiPanel.hpp"
+#include "SkyGui.hpp"
 #include "StelApp.hpp"
+#include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
@@ -227,19 +229,23 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	updateLayout();
 
 	updatePosition();
-	connect (parentWidget, SIGNAL(geometryChanged()),	 this, SLOT(updatePosition()));
+	connect(parentWidget, &QGraphicsWidget::geometryChanged, this, &OcularsGuiPanel::updatePosition);
 
 	//Connecting other slots
-	connect(ocularsPlugin, SIGNAL(selectedOcularChanged(int)),    this, SLOT(updateOcularControls()));
-	connect(ocularsPlugin, SIGNAL(selectedCCDChanged(int)),       this, SLOT(updateCcdControls()));
-	connect(ocularsPlugin, SIGNAL(selectedTelescopeChanged(int)), this, SLOT(updateTelescopeControls()));
-	connect(ocularsPlugin, SIGNAL(selectedLensChanged(int)),      this, SLOT(updateTelescopeControls()));
-	connect(ocularsPlugin, SIGNAL(selectedCCDRotationAngleChanged(double)),      this, SLOT(updateCcdControls()));
-	connect(ocularsPlugin, SIGNAL(selectedCCDPrismPositionAngleChanged(double)), this, SLOT(updateCcdControls()));
+	connect(ocularsPlugin, &Oculars::selectedOcularChanged, this, &OcularsGuiPanel::updateOcularControls);
+	connect(ocularsPlugin, &Oculars::selectedCCDChanged, this, &OcularsGuiPanel::updateCcdControls);
+	connect(ocularsPlugin, &Oculars::selectedTelescopeChanged, this, &OcularsGuiPanel::updateTelescopeControls);
+	connect(ocularsPlugin, &Oculars::selectedLensChanged, this, &OcularsGuiPanel::updateTelescopeControls);
+	connect(ocularsPlugin, &Oculars::selectedCCDRotationAngleChanged, this, &OcularsGuiPanel::updateCcdControls);
+	connect(ocularsPlugin, &Oculars::selectedCCDPrismPositionAngleChanged, this,
+	        &OcularsGuiPanel::updateCcdControls);
 
 	//Night mode
-	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));
+	connect(&stelApp, &StelApp::colorSchemeChanged, this, &OcularsGuiPanel::setColorScheme);
 	setColorScheme(stelApp.getCurrentStelStyle());
+
+	StelGui *gui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	connect(gui, &StelGui::toolbarCornerChanged, this, &OcularsGuiPanel::updatePosition);
 }
 
 OcularsGuiPanel::~OcularsGuiPanel()
@@ -311,6 +317,7 @@ void OcularsGuiPanel::foldGui()
 
 void OcularsGuiPanel::updatePosition()
 {
+	const double cornerRadius = 12.0;
 	updateGeometry();
 	/*qDebug() << "Widget:" << size()
 		<< "Buttonbar:" << buttonBar->size()
@@ -320,11 +327,26 @@ void OcularsGuiPanel::updatePosition()
 		<< "Layout" << mainLayout->geometry();*/
 	qreal xPos = parentWidget->size().width() - size().width();
 	qreal yPos = 0;
+	const int buttonBarCorner=StelApp::getInstance().getStelPropertyManager()
+		->getStelPropertyValue("StelGui.toolbarCorner").toInt(); // (0=BL, 1=BR, 2=TL, 3=TR)
+	if (buttonBarCorner == 2)
+	{
+		SkyGui* skyGui = static_cast<SkyGui*>(parentWidget);
+		// Only push the panel below the toolbar if it would otherwise overlap it horizontally.
+		const QRectF barRect = skyGui->getBottomBarRect();
+		if (xPos < barRect.right() && (xPos + size().width()) > barRect.left())
+			yPos += (cornerRadius + skyGui->getBottomBarHeight());
+	}
+	else if (buttonBarCorner == 3)
+	{
+		SkyGui* skyGui = static_cast<SkyGui*>(parentWidget);
+		xPos -= (cornerRadius + skyGui->getLeftBarWidth());
+		yPos += (cornerRadius + skyGui->getBottomBarHeight());
+	}
 	setPos(xPos, yPos);
 
 	//Update border/shading
 	QPainterPath newBorderPath;
-	double cornerRadius = 12.0;
 	QPointF verticalBorderStart = geometry().topLeft() + QPointF(-0.5,0.5);
 	QPointF horizontalBorderEnd = geometry().bottomRight() + QPointF(-0.5,0.5);
 	QPointF cornerArcStart(verticalBorderStart.x(),
@@ -334,6 +356,7 @@ void OcularsGuiPanel::updatePosition()
 	newBorderPath.arcTo(cornerArcStart.x(), cornerArcStart.y(), cornerRadius, cornerRadius, 180, 90);
 	newBorderPath.lineTo(horizontalBorderEnd);
 	newBorderPath.lineTo(horizontalBorderEnd.x(), verticalBorderStart.y());
+	newBorderPath.closeSubpath();
 	borderPath->setPath(newBorderPath);
 }
 
