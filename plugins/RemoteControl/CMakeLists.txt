@@ -34,7 +34,7 @@ INSTALL(DIRECTORY ${REMOTECONTROL_WEBROOT_PATH} DESTINATION ${SDATALOC}/webroot 
      PATTERN "*.gif"
      PATTERN "*.html"
      PATTERN "*.js"
-     PATTERN "*.json"
+     PATTERN "*.yaml"
      PATTERN "*.css"
      PATTERN "*.eot"
      PATTERN "*.svg"

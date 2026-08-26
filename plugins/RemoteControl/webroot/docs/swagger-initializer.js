@@ -2,7 +2,7 @@ window.onload = function() {
   //<editor-fold desc="Changeable Configuration Block">
 
   window.ui = SwaggerUIBundle({
-    url: "./stelOpenAPI.json",
+    url: "./stelOpenAPI.yaml",
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [

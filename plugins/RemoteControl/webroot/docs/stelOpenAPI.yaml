@@ -1,0 +1,394 @@
+openapi: 3.0.3
+info:
+  title: Stellarium RemoteControl API
+  version: 1.1.4
+  description: |
+    Comprehensive interactive specification mapping the HTTP-based interface for the 
+    Stellarium Astronomy Software RemoteControl plug-in.
+    
+    ### Interface Capabilities:
+    * **Poll application state** with conditional modification parameter IDs.
+    * **Manipulate the field of view** and look-at orientation vector coordinates.
+    * **Search catalogs** and command embedded script playback.
+servers:
+  - url: http://localhost:8090/api
+    description: Local Stellarium Instance
+paths:
+  /main/status:
+    get:
+      tags:
+        - Main Service
+      summary: Get Stellarium Application Status
+      description: |
+        Returns a comprehensive overview of the program's dynamic state. This operation can be polled every few moments to find out if some primary Stellarium state changed. It returns a JSON object with the following format:
+        
+                {
+                    //current location information, see StelLocation
+                    location : {
+                        name,
+                        role,
+                        planet,
+                        latitude,
+                        longitude,
+                        altitude,
+                        country,
+                        state,
+                        landscapeKey
+                    },
+                    //current time information
+                    time : {
+                        jday,       //current Julian day
+                        deltaT,     //current deltaT as determined by the current dT algorithm
+                        gmtShift,   //the timezone shift to GMT
+                        timeZone,   //the timezone name
+                        utc,        //the time in UTC time zone as ISO8601 time string
+                        local,      //the time in local time zone as ISO8601 time string
+                        isTimeNow,  //if true, the Stellarium time equals the current real-world time
+                        timerate    //the current time rate (in secs)
+                    },
+                    selectioninfo, //string that contains the information of the currently selected object, as returned by StelObject::getInfoString
+                    view : {
+                        fov     //current FOV
+                    },
+                 
+                    //the following is only inserted if an actionId parameter was given
+                    //see below for more info
+                    actionChanges : {
+                        id, //currently valid action id, the interface should update its own id to this value
+                        changes : {
+                                //a list of boolean actions that changed since the actionId parameter
+                                <actionName> : <actionValue>
+                        }
+                    },
+                    //the following is only inserted if an propId parameter was given
+                    //see below for more info
+                    propertyChanges : {
+                        id, //currently valid prop id, the interface should update its own id to this value
+                        changes : {
+                                //a list of properties that changed since the propId parameter
+                                <propName> : <propValue>
+                        }
+                    }
+                }
+
+        The actionChanges and propertyChanges sections allow a remote interface to track boolean StelAction and/or StelProperty changes. 
+        On the initial poll, you should pass -2 as propId and actionId. 
+        This indicates to the service that you want a full list of properties/actions and their current values. 
+        When receiving the answer, you should set your local propId /actionId to the id contained in actionChanges and propertyChanges, and re-send it with the next request as parameter again. 
+        This allows the MainService to find out which changes must be sent to you (it maintains a queue of action/property changes internally, 
+        incrementing the ID with each change), and you only have to process the differences instead of everything.
+        
+        To prevent heavy payload tracking, optional synchronization array filters can be passed 
+        so the payload contains information changes only relative to your last known state.
+      parameters:
+        - name: actionId
+          in: query
+          required: false
+          description: |
+            Pass an integer tracking index sequence identifier. 
+            If provided, the system returns execution status changes only since this reference ID.
+          schema:
+            type: integer
+        - name: propId
+          in: query
+          required: false
+          description: |
+            Pass an integer property state sync reference value.
+            Filters the `stelproperties` block to only expose keys modified since that operation index.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful state summary JSON payload representation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /main/plugins:
+    get:
+      tags:
+        - Main Service
+      summary: Retrieve list of installed plugins
+      description: |
+        Returns the list of all known plugins, as a JSON object of format:
+        
+                {
+                    //list of known plugins, in format:
+                    <pluginName> : {
+                        loadAtStartup,  //if to load the plugin at startup
+                        loaded,     //if the plugin is currently loaded
+                        //corresponds to the StelPluginInfo of the plugin
+                        info : {
+                                authors,
+                                contact,
+                                description,
+                                displayedName,
+                                startByDefault,
+                                version
+                        }
+                    }
+                }
+
+      responses:
+        '200':
+          description: Dictionary map indexing installed plugins
+
+
+
+  /main/view:
+    get:
+      tags:
+        - Main Service
+      summary: Get Current View Coordinates (AltAz / RA-Dec)
+      description: |
+        Returns the 3D view direction vector.
+        Includes azimuthal coordinates, right ascension, declination.
+        {
+          //list of view directions, in format:
+          "j2000" : "[x,y,z]",
+          "jNow"  : "[x,y,z]",
+          "altAz" : "[x,y,z]"
+        }
+
+        Without the optional coord, all versions are returned. The returned values are 3D vectors.
+        
+        |                   |
+        |-------------------|
+        | x  = cos(δ)*cos(α)|
+        | y  = cos(δ)*sin(α)|
+        | z  = sin(δ)       |
+        
+        For the vector in altAz system, the actually returned values are based on an azimuth Az' counted from South (x=1) towards East (y=1), Az'=180-Az.
+        
+        |                      |
+        |----------------------|
+        | x = cos(alt)*cos(Az')|
+        | y = cos(alt)*sin(Az')|
+        | z = sin(alt)         |
+        
+
+      parameters:
+        - name: coord
+          in: query
+          required: false
+          description: Limit answer to requested. One of "j2000", "jNow", "altAz"
+          schema:
+            type: string
+        - name: ref
+          in: query
+          required: false
+          description: |
+            governs refraction setting (applies to the jNow output only!). 
+            "On" applies refraction, "off" does not apply, and "auto" (or any other value) applies it when atmosphere setting is active.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Looking vectors coordinates returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags:
+        - Main Service
+      summary: Update View Angle or Target Focus
+      description: |
+        Directly alters the viewer focus vectors or focal lengths.
+        Parameters can target coordinate locations or field-of-view (FOV) scopes.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                fov:
+                  type: number
+                  description: Field of view targeting parameter value measured in degrees.
+                j2000:
+                  type: array
+                  description: Coordinate position sequence matching Right Ascension/Declination target array.
+                  items:
+                    type: number
+                  maxItems: 2
+                  minItems: 2
+      responses:
+        '200':
+          description: Camera matrix adjusted safely
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+
+  /main/time:
+    post:
+      tags:
+        - Main Service
+      summary: Modify Application Simulation Time
+      description: Changes the simulation time or clock speed inside the engine.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                time:
+                  type: number
+                  description: Julian day number [float] (J2000.0 = 2451545.0).
+                timerate:
+                  type: number
+                  description: Rate multiplier step value, [days/second] (1.15740740740740740740e-5 for real-time speed; 0 stops, negative reverses).
+      responses:
+        '200':
+          description: Simulation clock updated
+
+  /objects/find:
+    get:
+      tags:
+        - Object Service
+      summary: Query and Match Sky Objects
+      description: Queries Stellarium's target naming catalogs for partial string indexes.
+      parameters:
+        - name: str
+          in: query
+          required: true
+          description: Search term identifier parameter (e.g., 'Mars', 'M45').
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array listing found exact catalog title identifiers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /objects/info:
+    get:
+      tags:
+        - Object Service
+      summary: Get Selected Object Metadata Details
+      description: Exposes absolute angular size, position, distance, coordinates, and classification arrays for the item currently locked in center focus.
+      responses:
+        '200':
+          description: Object metadata profile data map layout structure
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /view/listlandscape:
+    get:
+      tags:
+        - View Service
+      summary: Retrieve Landscapes Collection List
+      description: Returns all scenery landscape environment profiles registered inside this build instance.
+      responses:
+        '200':
+          description: Dictionary map indexing landscape parameters
+
+  /view/listskyculture:
+    get:
+      tags:
+        - View Service
+      summary: Retrieve Sky Cultures Collection List
+      description: Returns historical constellation profiles installed.
+      responses:
+        '200':
+          description: Array mapping active historical sky culture keys
+
+  /location/search:
+    get:
+      tags:
+        - Location Service
+      summary: Query Available City and Observation Locations
+      description: Scans the integrated city coordinate directory databases.
+      parameters:
+        - name: str
+          in: query
+          required: true
+          description: City title keyword context string
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Location name collection
+
+  /scripts/list:
+    get:
+      tags:
+        - Script Service
+      summary: List Available Embedded Automation Scripts
+      description: Scans the internal scripts folders and lists runable script items.
+      responses:
+        '200':
+          description: List of script filenames
+
+  /scripts/run:
+    post:
+      tags:
+        - Script Service
+      summary: Execute Named Macro Script Instance
+      description: Dispatches an automation task processing runner instance matching the file criteria name key.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Exact filename (e.g., sky_tours.ssc).
+      responses:
+        '200':
+          description: Script pipeline initialization successful
+
+  /stelaction/do:
+    post:
+      tags:
+        - Action Service
+      summary: Trigger a Built-in Key Action (StelAction)
+      description: Triggers standard hotkey macro shortcuts mapped to internal UI toggles.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: System toggle shortcut name string reference key (e.g., 'actionShow_Atmosphere').
+      responses:
+        '200':
+          description: Shortcut method fired
+
+  /stelproperty/set:
+    post:
+      tags:
+        - Property Service
+      summary: Modify Global Framework Properties (StelProperty)
+      description: Directly manipulates system engine states, toggling specific viewing configuration parameters.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Property state layout parameter string identifier key.
+                value:
+                  type: string
+                  description: String representation target configuration state value.
+      responses:
+        '200':
+          description: Variable state overwritten cleanly
