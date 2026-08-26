@@ -1,0 +1,361 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Stellarium RemoteControl API",
+    "description": "Comprehensive interactive documentation mapping the HTTP-based interface for the Stellarium Astronomy Software RemoteControl plug-in.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8090/api",
+      "description": "Local Stellarium Instance"
+    }
+  ],
+  "paths": {
+    "/main/status": {
+      "get": {
+        "tags": ["Main Service"],
+        "summary": "Get Stellarium Application Status",
+        "description": "Returns a comprehensive update regarding the application state, including active times, position, current view, and plug-in status flags.",
+        "responses": {
+          "200": {
+            "description": "Successful state data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/main/time": {
+      "post": {
+        "tags": ["Main Service"],
+        "summary": "Modify Application Simulation Time",
+        "description": "Changes the core target time or tracking configurations inside the Stellarium engine.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "time": {
+                    "type": "number",
+                    "description": "Julian day number [float] (J2000.0 = 2451545.0)"
+                  },
+                  "timerate": {
+                    "type": "number",
+                    "description": "Rate multiplier step value, [days/second] (1.15740740740740740740e-5 for real-time speed)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operation validated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/main/plugins": {
+      "get": {
+        "tags": ["Main Service"],
+        "summary": "List Active Core Plug-ins",
+        "responses": {
+          "200": {
+            "description": "Array list detailing currently integrated operational dependencies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                    }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/objects/find": {
+      "get": {
+        "tags": ["Object Service"],
+        "summary": "Query and Match Sky Objects",
+        "description": "Queries Stellarium's localized dynamic indexing catalog datasets for a search string matching localized name titles.",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "query",
+            "required": true,
+            "description": "The search query string (e.g., 'Jupiter', 'M31', 'Moon').",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array list profiling closest valid object labels identified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/objects/info": {
+      "get": {
+        "tags": ["Object Service"],
+        "summary": "Get Selected Object Metadata Details",
+        "description": "Returns raw geometric position data properties, magnitude configurations, and properties regarding the current selected coordinate.",
+        "responses": {
+          "200": {
+            "description": "Detailed payload matching targeted structure tracking rules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/view/listlandscape": {
+      "get": {
+        "tags": ["View Service"],
+        "summary": "Retrieve Landscapes Collection List",
+        "responses": {
+          "200": {
+            "description": "Dict mapping available landscapeIDs and names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/view/listskyculture": {
+      "get": {
+        "tags": ["View Service"],
+        "summary": "Retrieve Sky Cultures Collection List",
+        "responses": {
+          "200": {
+            "description": "Array listing available skyculture names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/location/search": {
+      "get": {
+        "tags": ["Location Service"],
+        "summary": "Query Available City and Observation Locations",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "query",
+            "required": true,
+            "description": "Target string matching geographical tracking targets",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array identifying registered location match indices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/location/setlocationfields": {
+      "post": {
+        "tags": ["Location Service"],
+        "summary": "Manually Set Geographic Position State Coordinates",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Target identity matching standard database names directly"
+                  },
+                  "latitude": {
+                    "type": "number",
+                    "description": "Decimal representation of coordinate point"
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "description": "Decimal representation of coordinate point"
+                  },
+                  "altitude": {
+                    "type": "integer",
+                    "description": "Elevation position index measurement units in meters"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Coordinates updated successfully"
+          }
+        }
+      }
+    },
+    "/scripts/list": {
+      "get": {
+        "tags": ["Script Service"],
+        "summary": "List Available Embedded Automation Scripts",
+        "responses": {
+          "200": {
+            "description": "Array profiling verified system script file tags",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scripts/run": {
+      "post": {
+        "tags": ["Script Service"],
+        "summary": "Execute Named Macro Script Instance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Filename tag matching asset catalog exactly (e.g., 'constellations.ssc')"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trigger executed successfully"
+          }
+        }
+      }
+    },
+    "/stelaction/do": {
+      "post": {
+        "tags": ["Action Service"],
+        "summary": "Trigger a Built-in Key Action Action (StelAction)",
+        "description": "Triggers internal action shortcuts mapped directly to native layout execution pipelines (e.g., toggling atmospheric models).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The exact identifier action string (e.g., 'actionShow_Atmosphere')."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Action executed successfully"
+          }
+        }
+      }
+    },
+    "/stelproperty/set": {
+      "post": {
+        "tags": ["Property Service"],
+        "summary": "Modify Global Framework Properties (StelProperty)",
+        "description": "Sets internal program variable parameters directly via standard string keys.",
+        "requestBody": {
+		  "required": true,
+		  "content": {
+			"application/x-www-form-urlencoded": {
+			  "schema": {
+				"type": "object",
+				"properties": {
+				  "id": {
+					"type": "string",
+					"description": "The exact system state tag property name (e.g., 'StelSkyDrawer.absoluteScale')."},
+				  "value": {
+					"type": "string",
+					"description": "The custom serialized variant assignment target string representation (true/false, number values, labels)."}
+				}
+			  }
+			}
+		  }
+		},
+		"responses": {
+		  "200": {
+			"description": "Property value updated successfully"
+			}
+		}
+	  }
+	}
+  }
+}
