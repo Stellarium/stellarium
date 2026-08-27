@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-06-09 22:17+0700\n"
+"POT-Creation-Date: 2026-08-24 18:46+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -42,8 +42,8 @@ msgid "Error performing search"
 msgstr "Chyba při hledání"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
-msgid "Could not retrieve country list"
-msgstr "Nelze načíst seznam zemí"
+msgid "Could not retrieve region list"
+msgstr "Nepodařilo se načíst seznam oblastí"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
@@ -205,7 +205,7 @@ msgstr "100 kalendářních roků"
 
 #: index.html:102 tablet7in.html:202
 msgid "Sidereal century"
-msgstr "Hvězdné (siderické) století"
+msgstr "Siderické století"
 
 #: index.html:111 tablet7in.html:211
 msgid "Anomalistic century"
@@ -490,7 +490,7 @@ msgstr "Významné hvězdy"
 
 #: index.html:740 tablet7in.html:806
 msgid "Click on any constellation to highlight and isolate it"
-msgstr ""
+msgstr "Kliknutím na libovolné souhvězdí jej zvýrazníte a izolujete"
 
 #: index.html:742 tablet7in.html:808
 msgid "Select a sky culture to view constellations"
@@ -498,35 +498,35 @@ msgstr "Vyberte nebeskou kulturu pro zobrazení souhvězdí"
 
 #: index.html:748 tablet7in.html:814
 msgid "Traditional star patterns within constellations"
-msgstr ""
+msgstr "Tradiční hvězdné obrazce v souhvězdích"
 
 #: index.html:750 tablet7in.html:816
 msgid "No asterisms available"
-msgstr ""
+msgstr "Žádné asterismy nejsou k dispozici"
 
 #: index.html:756 tablet7in.html:822
 msgid "The 12 signs of the zodiac"
-msgstr ""
+msgstr "12 znamení zvěrokruhu"
 
 #: index.html:758 tablet7in.html:824
 msgid "No zodiac data available"
-msgstr ""
+msgstr "Nejsou k dispozici žádné údaje o zvěrokruhu"
 
 #: index.html:764 tablet7in.html:830
 msgid "Traditional lunar stations (mansions)"
-msgstr ""
+msgstr "Tradiční lunární domy (stanice)"
 
 #: index.html:766 tablet7in.html:832
 msgid "No lunar mansions data available"
-msgstr ""
+msgstr "Nejsou k dispozici žádná data o lunárních domech"
 
 #: index.html:772 tablet7in.html:838
 msgid "Named stars with cultural significance"
-msgstr ""
+msgstr "Pojmenované hvězdy s kulturním významem"
 
 #: index.html:774 tablet7in.html:840
 msgid "No star name data available"
-msgstr ""
+msgstr "Nejsou k dispozici žádné údaje o jménech hvězd"
 
 #: index.html:798 tablet7in.html:864
 msgid "Label constellations with font size"
@@ -578,43 +578,53 @@ msgstr "Pouze poslední vybraný"
 
 #: index.html:954 tablet7in.html:1019
 msgid "Culture Data Inspector"
-msgstr ""
+msgstr "Inspektor dat kultur"
 
 #: index.html:956 tablet7in.html:1021
 msgid ""
 "This inspector displays the complete, unfiltered dataset extracted directly "
 "from the culture's"
 msgstr ""
+"Tento inspektor zobrazuje kompletní, nefiltrovanou datovou sadu extrahovanou"
+" přímo ze souboru kultury."
 
 #: index.html:958 tablet7in.html:1023
 msgid "file. Use this view to:"
-msgstr ""
+msgstr "Toto zobrazení použijte k:"
 
 #: index.html:960 tablet7in.html:1025
 msgid "Verify exact constellation and asterism counts (including ray helpers)"
 msgstr ""
+"Ověření přesného počtu souhvězdí a asterismů (včetně pomocných paprsků)"
 
 #: index.html:961 tablet7in.html:1026
 msgid "Inspect raw IDs, native names, pronunciations, and IPA values"
 msgstr ""
+"Prozkoumání prvotních identifikátorů, původních názvů, výslovností a hodnot "
+"IPA"
 
 #: index.html:962 tablet7in.html:1027
 msgid "Cross-reference star IDs (HIP, NGC, etc.) with their cultural names"
 msgstr ""
+"Křížových odkazů mezi identifikátory hvězd (HIP, NGC atd.) a jejich názvy v "
+"kultuře"
 
 #: index.html:963 tablet7in.html:1028
 msgid "Export complete datasets to CSV/JSON for external analysis"
 msgstr ""
+"Exportu kompletních datových sad do formátu CSV/JSON pro externí analýzu"
 
 #: index.html:964 tablet7in.html:1029
 msgid "Search across all fields to quickly locate specific entries"
-msgstr ""
+msgstr "Vyhledávání ve všech polích pro rychlé nalezení konkrétních záznamů"
 
 #: index.html:967 tablet7in.html:1032
 msgid ""
 "Each row is interactive — click to select and navigate to the object in "
 "Stellarium."
 msgstr ""
+"Každý řádek je interaktivní – kliknutím vyberete objekt a přejdete na něj ve"
+" Stellariu."
 
 #: index.html:976 tablet7in.html:1041
 msgid "Select Sky Culture"
@@ -626,11 +636,11 @@ msgstr "Pomocné paprsky"
 
 #: index.html:1006 tablet7in.html:1071
 msgid "Named Objects"
-msgstr ""
+msgstr "Pojmenované objekty"
 
 #: index.html:1020 tablet7in.html:1085
 msgid "Notable Stars & Objects"
-msgstr ""
+msgstr "Významné hvězdy a objekty"
 
 #: index.html:1027 tablet7in.html:1092
 msgid ""
@@ -971,8 +981,7 @@ msgstr "Server neodpovídá"
 #: index.html:1553 tablet7in.html:1621
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
-"Už %s sekund nebyla obdržena žádná odpověď od serveru. Je Stellarium pořád "
-"spuštěné?"
+"Žádná odpověď od serveru po dobu %1 sekund. Je Stellarium stále spuštěno?"
 
 #: tablet7in.html:35
 msgid "Time Jump"
