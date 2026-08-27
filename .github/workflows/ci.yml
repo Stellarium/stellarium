@@ -290,7 +290,7 @@ jobs:
       uses: actions/checkout@v7
 
     - name: Build and run unit tests in Haiku
-      uses: vmactions/haikubsd-vm@v1
+      uses: vmactions/haiku-vm@v1
       id: haiku-qt6
       with:
         # Use sh shell
