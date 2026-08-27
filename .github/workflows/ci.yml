@@ -305,6 +305,6 @@ jobs:
           set -e -x
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_INDI=Off -DENABLE_XLSX=Off -DENABLE_QTWEBENGINE=Off ..
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_INDI=Off -DENABLE_XLSX=Off -DENABLE_QTWEBENGINE=Off -DENABLE_NLS=Off ..
           make -j 4
           ctest --output-on-failure
