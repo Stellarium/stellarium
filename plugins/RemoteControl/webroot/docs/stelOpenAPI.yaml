@@ -144,12 +144,13 @@ paths:
       description: |
         Returns the 3D view direction vector.
         Includes azimuthal coordinates, right ascension, declination.
-        {
-          //list of view directions, in format:
-          "j2000" : "[x,y,z]",
-          "jNow"  : "[x,y,z]",
-          "altAz" : "[x,y,z]"
-        }
+        
+            {
+              //list of view directions, in format:
+              "j2000" : "[x,y,z]",
+              "jNow"  : "[x,y,z]",
+              "altAz" : "[x,y,z]"
+            }
 
         Without the optional coord, all versions are returned. The returned values are 3D vectors.
         
@@ -193,10 +194,80 @@ paths:
     post:
       tags:
         - Main Service
-      summary: Update View Angle or Target Focus
+      summary: Update View direction (3D vector)
       description: |
-        Directly alters the viewer focus vectors or focal lengths.
-        Parameters can target coordinate locations or field-of-view (FOV) scopes.
+        Directly alters the view direction. Use one of j2000, jNow or altAz. jNow can have a ref parameter.
+        For efficiency, the calling program is required to prepare 3D vectors, not just provide angles.
+        Alternatively, alt and az can be given directly (and should then provide both!).
+                
+        |                   |
+        |-------------------|
+        | x  = cos(δ)*cos(α)|
+        | y  = cos(δ)*sin(α)|
+        | z  = sin(δ)       |
+        
+        For the vector in altAz system, the values are based on an azimuth Az' counted from South (x=1) towards East (y=1), Az'=180-Az:
+        
+        |                      |
+        |----------------------|
+        | x = cos(alt)*cos(Az')|
+        | y = cos(alt)*sin(Az')|
+        | z = sin(alt)         |
+        
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                ref: 
+                  type: string
+                  description: provided jNow coordinates to be understood as including refraction. 'on'/'off'/'auto' (or anything else; default.)
+                j2000:
+                  type: array
+                  description: 3D view vector [x, y, z] in J2000 frame.
+                  items:
+                    type: number
+                  maxItems: 3
+                  minItems: 3
+                jNow:
+                  type: array
+                  description: 3D view vector [x, y, z] in JNow frame.
+                  items:
+                    type: number
+                  maxItems: 3
+                  minItems: 3
+                altAz:
+                  type: array
+                  description: 3D view vector in [x, y, z] alt/azimuthal frame.
+                  items:
+                    type: number
+                  maxItems: 3
+                  minItems: 3
+                az: 
+                  type: number
+                  description: azimuth, degrees.
+                alt: 
+                  type: number
+                  description: altitude above mathematical horizon, degrees.
+      responses:
+        '200':
+          description: Camera matrix adjusted safely
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+
+  /main/fov:
+    post:
+      tags:
+        - Main Service
+      summary: Update field of view
+      description: |
+        Directly alters the field of view.
+        Parameters can control smooth zooming.
       requestBody:
         required: true
         content:
@@ -206,17 +277,76 @@ paths:
               properties:
                 fov:
                   type: number
-                  description: Field of view targeting parameter value measured in degrees.
-                j2000:
-                  type: array
-                  description: Coordinate position sequence matching Right Ascension/Declination target array.
-                  items:
-                    type: number
-                  maxItems: 2
-                  minItems: 2
+                  description: Vertical field of view measured in degrees.
       responses:
         '200':
-          description: Camera matrix adjusted safely
+          description: Field of view adjusted.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+
+  /main/window:
+    post:
+      tags:
+        - Main Service
+      summary: Update window size
+      description: |
+        Modifies window size (if not fullscreen).
+        This can be useful e.g. when Stellarium provides image background inserts via spout.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                w:
+                  type: integer
+                  description: Width, horizontal window size in pixels.
+                h:
+                  type: integer
+                  description: Height, vertical window size in pixels.
+      responses:
+        '200':
+          description: Window size adjusted.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+
+  /main/move:
+    post:
+      tags:
+        - Main Service
+      summary: Update view direction
+      description: |
+        Interface for interactive moves.
+        Allows viewport movement, like using the arrow keys in the main program. 
+        This allows interfaces to create a "virtual joystick" to move the view manually. 
+        This operation defines the intended move direction. 
+        x and y define the intended move speed in azimuth and altitude (i.e. a negative x means left). Values of +-1.0 correspond to the same speed as used for the arrow keys. 
+        This operation works in conjunction with the update() method - until the movement is stopped 
+        (i.e. x and y are zero), or no move command has been received for a specified time 
+        (about a second), the movement is performed in the given directions.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                x:
+                  type: number
+                  description: Movement speed in horizontal direction. Negative turns left.
+                y:
+                  type: number
+                  description: Movement speed in vertical direction. Negative turns down.
+      responses:
+        '200':
+          description: View direction changed.
           content:
             text/plain:
               schema:
@@ -245,6 +375,59 @@ paths:
       responses:
         '200':
           description: Simulation clock updated
+
+
+  /main/focus:
+    post:
+      tags:
+        - Main Service
+      summary: Set current app focus/selection
+      description: |
+        If no parameters are given, the current selection is cleared. 
+        If the target parameter was given, the object to be selected is 
+        looked up by name (first the localized name is tried, then the english name). 
+        If the optional mode parameter is given, it determines how to change the view:
+        
+        - The default is 'center' which selects the object and moves it into the view's center. 
+        - If it is set to 'zoom', it automatically zooms in on the object (StelMovementMgr::autoZoomIn) 
+          on selection and automatically zooms out when the selection is cleared. 
+        - If it is set to 'mark', the selection is just marked, but no view adjustment is done. 
+        
+        If the position parameter is used, it is interpreted as a coordinate in the J2000 frame, 
+        and focused using StelMovementMgr::moveToJ2000. The mode parameter has no effect here. 
+                        
+        |                   |
+        |-------------------|
+        | x  = cos(δ)*cos(α)|
+        | y  = cos(δ)*sin(α)|
+        | z  = sin(δ)       |
+         
+        The target parameter takes precedence over the position parameter, if both are given.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                target:
+                  type: string
+                  description: Name of a celestial object inside Stellarium.
+                mode:
+                  type: string
+                  description: Only valid when target is given. One of center|zoom|mark
+                position:
+                  type: array
+                  description: 3D vector [x, y, z] in J2000 frame.
+                  items:
+                    type: number
+                  maxItems: 3
+                  minItems: 3
+      responses:
+        '200':
+          description: Focus/selection changed
+
+
 
   /objects/find:
     get:
