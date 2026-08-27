@@ -8,8 +8,10 @@ info:
     
     ### Interface Capabilities:
     * **Poll application state** with conditional modification parameter IDs.
-    * **Manipulate the field of view** and look-at orientation vector coordinates.
-    * **Search catalogs** and command embedded script playback.
+    * **Search catalogs** and 
+    * **Manipulate the field of view** and view orientation vector coordinates.
+    * **Manipulate all internal settings (StelProperties) and trigger StelActions**
+    * **Command embedded script playback**.
 servers:
   - url: http://localhost:8090/api
     description: Local Stellarium Instance
@@ -31,7 +33,7 @@ paths:
                         latitude,
                         longitude,
                         altitude,
-                        country,
+                        region,
                         state,
                         landscapeKey
                     },
@@ -76,10 +78,7 @@ paths:
         This indicates to the service that you want a full list of properties/actions and their current values. 
         When receiving the answer, you should set your local propId /actionId to the id contained in actionChanges and propertyChanges, and re-send it with the next request as parameter again. 
         This allows the MainService to find out which changes must be sent to you (it maintains a queue of action/property changes internally, 
-        incrementing the ID with each change), and you only have to process the differences instead of everything.
-        
-        To prevent heavy payload tracking, optional synchronization array filters can be passed 
-        so the payload contains information changes only relative to your last known state.
+        incrementing the ID with each change), and you only have to process the differences instead of everything.        
       parameters:
         - name: actionId
           in: query
@@ -94,7 +93,7 @@ paths:
           required: false
           description: |
             Pass an integer property state sync reference value.
-            Filters the `stelproperties` block to only expose keys modified since that operation index.
+            Filters the `propertyChanges` block to only expose keys modified since that operation index.
           schema:
             type: integer
       responses:
@@ -267,7 +266,6 @@ paths:
       summary: Update field of view
       description: |
         Directly alters the field of view.
-        Parameters can control smooth zooming.
       requestBody:
         required: true
         content:
@@ -483,6 +481,8 @@ paths:
             application/json:
               schema:
                 type: object
+            HTML/text:
+
 
   /objects/listobjecttypes:
     get:
@@ -590,7 +590,7 @@ paths:
             }
       responses:
         '200':
-          description: Dictionary of landscape parameters
+          description: Dictionary of landscapes
 
   /view/landscapedescription/:
     get:
@@ -624,9 +624,9 @@ paths:
             }
       responses:
         '200':
-          description: Array mapping active historical sky culture keys
+          description: Dictionary of sky cultures
 
-  /view/ skyculturedescription/:
+  /view/skyculturedescription/:
     get:
       tags:
         - View Service
