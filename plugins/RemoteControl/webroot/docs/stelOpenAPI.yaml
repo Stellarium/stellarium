@@ -545,20 +545,96 @@ paths:
       tags:
         - View Service
       summary: Retrieve Landscapes Collection List
-      description: Returns all scenery landscape environment profiles registered inside this build instance.
+      description: |
+        Lists the installed landscapes as a JSON object of format
+        
+            {
+                <landscapeId> : <landscapeName>, //maps the landscape id to the translated landscape name
+                ...
+            }
       responses:
         '200':
-          description: Dictionary map indexing landscape parameters
+          description: Dictionary of landscape parameters
+
+  /view/landscapedescription/:
+    get:
+      tags:
+        - View Service
+      summary: Provides virtual filesystem access to the current landscape directory.
+      description: |
+        **Note that the slash at the end is mandatory!**
+        Provides virtual filesystem access to the current landscape directory. 
+        The operation can take a longer path in the URL. 
+        The remainder is used to access files in the landscape directory. 
+        If no longer path is given, the current HTML landscape description 
+        (as per LandscapeMgr::getCurrentLandscapeHtmlDescription) is returned. 
+        An example: landscapedescription/image.png returns image.png from the current landscape directory.
+
+        This operation allows to set up an HTML iframe or similar for the landscape description, 
+        including all images, etc. embedded in the HTML description.
+
 
   /view/listskyculture:
     get:
       tags:
         - View Service
       summary: Retrieve Sky Cultures Collection List
-      description: Returns historical constellation profiles installed.
+      description: |
+        Lists the installed sky cultures as a JSON object of format
+        
+            {
+                <skycultureId> : <skycultureName>, //maps the id to the translated name
+                ...
+            }
       responses:
         '200':
           description: Array mapping active historical sky culture keys
+
+  /view/ skyculturedescription/:
+    get:
+      tags:
+        - View Service
+      summary: Provides virtual filesystem access to the current skyculture directory.
+      description: |
+        **Note that the slash at the end is mandatory!**
+        Provides virtual filesystem access to the current skyculture directory. 
+        The operation can take a longer path in the URL. 
+        The remainder is used to access files in the skyculture directory. 
+        If no longer path is given, the current HTML skyculture description 
+        (as per StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription) is returned. 
+        An example: landscapedescription/image.png returns image.png from the current skyculture directory.
+
+        This operation allows to set up an HTML iframe or similar for the skyculture description, 
+        including all images, etc. embedded in the HTML description.
+
+  /view/listprojection:
+    get:
+      tags:
+        - View Service
+      summary: Retrieve dict of projections
+      description: |
+        Lists the available projection types as a JSON object of format
+        
+            {
+                <projectionTypeKey> : <projectionName>, //maps the id to the translated name
+                ...
+            }
+      responses:
+        '200':
+          description: Array mapping available projections
+
+  /view/projectiondescription:
+    get:
+      tags:
+        - View Service
+      summary: Returns the HTML description of the current projection
+      description: |
+        Returns the HTML description of the current projection (StelProjector::getHtmlSummary) 
+      responses:
+        '200':
+          description: HTML description delivered.
+
+
 
   /location/search:
     get:
