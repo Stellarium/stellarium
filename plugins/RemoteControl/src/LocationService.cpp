@@ -58,7 +58,9 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 	{
 		const StelTranslator& trans = *StelTranslator::globalTranslator;
 
-		QStringList allRegions = StelApp::getInstance().getLocationMgr().getRegionNames();
+		// Read and use the planet parameter
+		QString planet = parameters.value("planet ",  "");
+		QStringList allRegions = StelApp::getInstance().getLocationMgr().getRegionNames(planet);
 		QJsonArray list;
 		for (const auto &str : std::as_const(allRegions))
 		{
