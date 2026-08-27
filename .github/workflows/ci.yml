@@ -34,7 +34,7 @@ jobs:
                             libnlopt-cxx-dev libmd4c-dev libmd4c-html0-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       shell: bash
@@ -79,7 +79,7 @@ jobs:
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       shell: bash
@@ -124,7 +124,7 @@ jobs:
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       shell: bash
@@ -172,7 +172,7 @@ jobs:
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       shell: bash
@@ -213,7 +213,7 @@ jobs:
         brew install qt@6 nlopt exiv2 tidy-html5
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       shell: bash
@@ -246,7 +246,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
@@ -278,3 +278,33 @@ jobs:
 #      run: |
 #        cd ${{ github.workspace }}\build
 #        ctest --output-on-failure -C RelWithDebInfo
+
+ # CI on Haiku (Qt6)
+  ci-haiku-qt6:
+    name: "Haiku (amd64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v7
+
+    - name: Build and run unit tests in Haiku
+      uses: vmactions/haiku-vm@v1
+      id: haiku-qt6
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        sync: rsync
+        copyback: false
+        prepare: |
+          pkgman install -y nlopt_devel md4c_devel exiv2_devel qxlsx_qt6_devel cmake qt6_tools_devel qt6_charts_devel qt6_base_devel qt6_multimedia_devel qt6_positioning_devel qt6_serialport_devel qt6_svg_devel qt6_speech_devel qt6_imageformats_devel qt6_declarative_devel
+
+        run: |
+          set -e -x
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_INDI=Off -DENABLE_XLSX=Off -DENABLE_QTWEBENGINE=Off -DENABLE_NLS=Off ..
+          make -j 4
+          ctest --output-on-failure
