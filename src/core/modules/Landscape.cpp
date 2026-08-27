@@ -797,7 +797,7 @@ void main()
 )";
 		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
 		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n"
+			qWarning().noquote() << "LandscapeOldStyle: Warnings while compiling vertex shader:\n"
 					     << renderProgram->log();
 		if(!ok) return;
 
@@ -991,14 +991,14 @@ void main(void)
 )";
 		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
 		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling fragment shader:\n"
+			qWarning().noquote() << "LandscapeOldStyle: Warnings while compiling fragment shader:\n"
 					     << renderProgram->log();
 
 		if(!ok) return;
 
 		renderProgram->bindAttributeLocation("vertex", SKY_VERTEX_ATTRIB_INDEX);
 
-		if(!StelPainter::linkProg(renderProgram.get(), "Spherical landscape render program"))
+		if(!StelPainter::linkProg(renderProgram.get(), "Old-style landscape render program"))
 			return;
 
 		renderProgram->bind();
@@ -1664,7 +1664,7 @@ void main()
 )";
 		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
 		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n"
+			qWarning().noquote() << "LandscapeFisheye: Warnings while compiling vertex shader:\n"
 					     << renderProgram->log();
 		if(!ok) return;
 
@@ -1707,13 +1707,13 @@ void main(void)
 )";
 		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
 		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling fragment shader:\n" << renderProgram->log();
+			qWarning().noquote() << "LandscapeFisheye: Warnings while compiling fragment shader:\n" << renderProgram->log();
 
 		if(!ok) return;
 
 		renderProgram->bindAttributeLocation("vertex", SKY_VERTEX_ATTRIB_INDEX);
 
-		if(!StelPainter::linkProg(renderProgram.get(), "Spherical landscape render program"))
+		if(!StelPainter::linkProg(renderProgram.get(), "Fisheye landscape render program"))
 			return;
 
 		renderProgram->bind();
