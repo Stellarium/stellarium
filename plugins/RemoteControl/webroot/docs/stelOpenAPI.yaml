@@ -434,7 +434,9 @@ paths:
       tags:
         - Object Service
       summary: Query and Match Sky Objects
-      description: Queries Stellarium's target naming catalogs for partial string indexes.
+      description: |
+        Finds objects which match the search string str, which may contain greek/unicode characters 
+        like in the SearchDialog. Returns a JSON String array of search matches.
       parameters:
         - name: str
           in: query
@@ -444,7 +446,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Array listing found exact catalog title identifiers
+          description: JSON Array listing catalog identifiers
           content:
             application/json:
               schema:
@@ -456,15 +458,87 @@ paths:
     get:
       tags:
         - Object Service
-      summary: Get Selected Object Metadata Details
-      description: Exposes absolute angular size, position, distance, coordinates, and classification arrays for the item currently locked in center focus.
+      summary: Get Selected Object Data
+      description: |
+        Exposes names, magnitudes, absolute angular size, position, distance, coordinates, 
+        and classification arrays for the item currently selected (if called without parameters) or 
+        the object with given name.
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: Search term identifier parameter (e.g., 'Mars', 'M45').
+          schema:
+            type: string
+        - name: format
+          in: query
+          required: false
+          description: one of 'json' or 'map' to provide JSON, any other or none for a HTML table.
+          schema:
+            type: string
       responses:
         '200':
-          description: Object metadata profile data map layout structure
+          description: Object data map (JSON or HTML as requested).
           content:
             application/json:
               schema:
                 type: object
+
+  /objects/listobjecttypes:
+    get:
+      tags:
+        - Object Service
+      summary: List all available object types.
+      description: |
+        Returns all object types available in the internal catalogs as a JSON array of objects of format
+
+            {
+                key,    //the internal key for the object type
+                name,   //the english name of the type
+                name_i18n //the type name in the current language
+            }
+      responses:
+        '200':
+          description: Object data map (JSON or HTML as requested).
+          content:
+            application/json:
+              schema:
+                type: object
+
+
+  /objects/listobjectsbytype:
+    get:
+      tags:
+        - Object Service
+      summary: Get Object Data of specified type.
+      description: |
+        Returns all objects of the specified type. 
+        If english is given and it evaluates to a "true" value, the english names will be returned,
+        otherwise the localized names will be returned. Returns a JSON string array.
+
+      parameters:
+        - name: type
+          in: query
+          required: true
+          description: |
+            Type identifier as listed in the 'key' entry in the 
+            list retrieved by /objects/listobjecttypes, e.g. "SolarSystem:comet" or "NebulaMgr:11".
+          schema:
+            type: string
+        - name: english
+          in: query
+          required: false
+          description: Returns english names if true, otherwise localized names.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List has been delivered.
+          content:
+            application/json:
+              schema:
+                type: object
+
 
   /view/listlandscape:
     get:
