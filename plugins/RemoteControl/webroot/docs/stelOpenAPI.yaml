@@ -801,7 +801,7 @@ paths:
     get:
       tags:
         - LocationSearch Service
-      summary: Search a location
+      summary: Search locations near given coordinates
       description: |
         Searches the term in the list of predefined locations of the StelLocationMgr, 
         and returns a JSON string array of the results.
@@ -851,20 +851,20 @@ paths:
     get:
       tags:
         - Script Service
-      summary: Execute Named Macro Script Instance
+      summary: Retrieve information about a script
       description: |
         Returns information about the script identified by id. If the optional parameter html is present (its value is ignored), 
         the info is formatted using StelScriptMgr::getHtmlDescription and suitable for inclusion into an iframe element, 
         otherwise this operation returns a JSON object of format: 
         
             {
-                id, //the script ID
-                name,   //the english name of the script
-                name_localized, //the localized name of the script
-                description,    //the english description of the script
+                id,                     //the script ID
+                name,                   //the english name of the script
+                name_localized,         //the localized name of the script
+                description,            //the english description of the script
                 description_localized,  //the localized description of the script
-                author, //the author(s) of the script
-                license //the license of the script
+                author,                 //the author(s) of the script
+                license                 //the license of the script
             }
       parameters:
         - name: id
@@ -888,7 +888,7 @@ paths:
     get:
       tags:
         - Script Service
-      summary: Execute Named Macro Script Instance
+      summary: Return script status
       description: |
         Returns the current script status as a JSON object of format:
         
@@ -903,8 +903,6 @@ paths:
       responses:
         '200':
           description: Script pipeline initialization successful
-
-
 
   /scripts/run:
     post:
@@ -935,7 +933,7 @@ paths:
     post:
       tags:
         - Script Service
-      summary: Execute Named Macro Script Instance
+      summary: Execute Script Code
       description: |
         Directly executes the given script code. 
         If useIncludes is given and evaluates to true, the standard include folder will be used. 
