@@ -540,6 +540,42 @@ paths:
                 type: object
 
 
+  /simbad/lookup:
+    get:
+      tags:
+        - Simbad Service 
+      summary: Perform SIMBAD lookup
+      description: |
+        Performs a SIMBAD lookup for the string str using the Stellarium-configured server and returns the results as a JSON object of format
+
+            {
+                status,      // the status of the lookup: either "empty" when nothing was found, "found" when at least 1 result was returned, and "error" if the lookup caused an error
+                status_i18n, // a localized status message for display
+                errorString, // if the status is "error", this contains more information about it
+                results: {
+                    names : [
+                            //an array of object names
+                    ],
+                    positions : [
+                            //an array of object positions (i.e. first one corresponds to first name, etc.)
+                            //format is an array of 3 numbers for each entry, i.e.:
+                            [1,2,3],...
+                    ]
+                }
+            }
+      parameters:
+        - name: str
+          in: query
+          required: true
+          description: |
+            Name to be searched 
+          schema:
+            type: string
+      responses:
+        '200':
+          description: SIMBAD result
+
+
   /view/listlandscape:
     get:
       tags:
@@ -635,15 +671,121 @@ paths:
           description: HTML description delivered.
 
 
-
-  /location/search:
+  /location/list:
     get:
       tags:
         - Location Service
-      summary: Query Available City and Observation Locations
-      description: Scans the integrated city coordinate directory databases.
+      summary: Retrieve known locations
+      description: Returns the list of all stored location IDs (keys of StelLocationMgr::getAllMap) as JSON string array
+      responses:
+        '200':
+          description: Location name collection
+
+  /location/regionlist:
+    get:
+      tags:
+        - Location Service
+      summary: Retrieve known regions
+      description: |
+        Returns the list of all known regions (StelLocationMgr::getRegionNames), 
+        as a JSON array of objects of format
+        
+          {
+              name,     //the english region name
+              name_i18n //the localized region name (current language)
+          }
+      responses:
+        '200':
+          description: Location name collection
+
+  /location/planetlist:
+    get:
+      tags:
+        - Location Service
+      summary: Retrieve known planets
+      description: |
+        Returns the list of all solar system planet names (SolarSystem::getAllPlanetEnglishNames), 
+        as a JSON array of objects of format
+        
+          {
+              name,     //the english planet name
+              name_i18n //the localized planet name (current language)
+          }
+      responses:
+        '200':
+          description: Location name collection
+
+  /location/planetimage:
+    get:
+      tags:
+        - Location Service
+      summary: Retrieve planet texture image
+      description: |
+        Returns the planet texture image for the planet (english name)
       parameters:
-        - name: str
+        - name: planet
+          in: query
+          required: true
+          description: english name of planet
+          schema:
+            type: string
+      responses:
+        '200':
+          description: image retrieved
+        '404':
+          description: not found
+
+  /location/setlocationfields:
+    post:
+      tags:
+        - Location Service
+      summary: change current location
+      description: Directly manipulates view location. If 'id' is given, all other parameters are ignored.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Known location ID.
+                latitude:
+                  type: number
+                  description: geographical latitude, degrees.
+                longitude:
+                  type: number
+                  description: geographical longitude, degrees.
+                altitude:
+                  type: number
+                  description: altitude above WGS84 ellipsoid, metres.
+                name:
+                  type: string
+                  description: location name.
+                region:
+                  type: string
+                  description: region name.
+                planet:
+                  type: string
+                  description: planet name.
+      responses:
+        '200':
+          description: location set.
+        '400':
+          description: invalid location id.
+
+
+  /locationsearch/search:
+    get:
+      tags:
+        - LocationSearch Service
+      summary: Search a location
+      description: |
+        Searches the term in the list of predefined locations of the StelLocationMgr, 
+        and returns a JSON string array of the results.
+      parameters:
+        - name: term
           in: query
           required: true
           description: City title keyword context string
@@ -652,23 +794,129 @@ paths:
       responses:
         '200':
           description: Location name collection
+        '400':
+          description: empty term
+
+  /locationsearch/nearby:
+    get:
+      tags:
+        - LocationSearch Service
+      summary: Search a location
+      description: |
+        Searches the term in the list of predefined locations of the StelLocationMgr, 
+        and returns a JSON string array of the results.
+      parameters:
+        - name: planet
+          in: query
+          required: true
+          description: english planet name, e.g. Earth (case sensitive)
+          value: Earth
+          schema:
+            type: string
+        - name: latitude
+          in: query
+          required: true
+          description: search center location latitude, degrees
+          schema:
+            type: number
+        - name: longitude
+          in: query
+          required: true
+          description: search center location longitude, degrees
+          schema:
+            type: number
+        - name: radius
+          in: query
+          required: true
+          description: search radius, degrees
+          value: 3
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Location name collection (May be empty)
+
 
   /scripts/list:
     get:
       tags:
         - Script Service
-      summary: List Available Embedded Automation Scripts
-      description: Scans the internal scripts folders and lists runable script items.
+      summary: Lists all known script files, as a JSON string array.
+      description: Lists all known script files, as a JSON string array.
       responses:
         '200':
           description: List of script filenames
+
+  /scripts/info:
+    get:
+      tags:
+        - Script Service
+      summary: Execute Named Macro Script Instance
+      description: |
+        Returns information about the script identified by id. If the optional parameter html is present (its value is ignored), 
+        the info is formatted using StelScriptMgr::getHtmlDescription and suitable for inclusion into an iframe element, 
+        otherwise this operation returns a JSON object of format: 
+        
+            {
+                id, //the script ID
+                name,   //the english name of the script
+                name_localized, //the localized name of the script
+                description,    //the english description of the script
+                description_localized,  //the localized description of the script
+                author, //the author(s) of the script
+                license //the license of the script
+            }
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: Script ID
+          schema:
+            type: string
+        - name: html
+          in: query
+          required: true
+          description: if given (any value), answer is HTML formatted.
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: Script pipeline initialization successful
+
+  /scripts/status:
+    get:
+      tags:
+        - Script Service
+      summary: Execute Named Macro Script Instance
+      description: |
+        Returns the current script status as a JSON object of format:
+        
+            {
+                scriptIsRunning,    //true if a script is running
+                runningScriptId     //the currently running script ID
+            }
+            
+        ### Note
+        
+        The StelScriptMgr also provides a StelProperty StelScriptMgr.runningScriptId that can be used to find out the active script.
+      responses:
+        '200':
+          description: Script pipeline initialization successful
+
+
 
   /scripts/run:
     post:
       tags:
         - Script Service
-      summary: Execute Named Macro Script Instance
-      description: Dispatches an automation task processing runner instance matching the file criteria name key.
+      summary: Execute Named Script
+      description: |
+        Runs the script with the given id. 
+      
+        ### Note
+      
+        Will silently fail if a script is currently running.
       requestBody:
         required: true
         content:
@@ -683,12 +931,80 @@ paths:
         '200':
           description: Script pipeline initialization successful
 
+  /scripts/direct:
+    post:
+      tags:
+        - Script Service
+      summary: Execute Named Macro Script Instance
+      description: |
+        Directly executes the given script code. 
+        If useIncludes is given and evaluates to true, the standard include folder will be used. 
+        
+        ### Note
+        
+        Script execution will fail if a script is already running.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: Script code. (Usually a short ad-hoc script.) 
+                useIncludes:
+                  type: bool
+                  description: use standard include folder
+      responses:
+        '200':
+          description: Script pipeline initialization successful
+
+  /scripts/stop:
+    post:
+      tags:
+        - Script Service
+      summary: Stops running script.
+      description: Stops the execution of a running script.
+      requestBody:
+        required: false
+      responses:
+        '200':
+          description: Script pipeline initialization successful
+
+
+  /stelaction/list:
+    get:
+      tags:
+        - StelAction Service
+      summary: List all StelActions
+      description: |
+        Lists all registered StelActions, in the format
+
+            {
+                //translated StelAction group name
+                <groupName> : [
+                    //all StelActions in the group <groupName>
+                    <actionName> : {
+                            id,             // the ID of the action
+                            isCheckable,    // true if the action represents a boolean value
+                            isChecked,      // if "isCheckable" is true, shows the current boolean state
+                            text            // the translated description of the action
+                    }
+                ]
+            }
+      responses:
+        '200':
+          description: Action name collection
+
   /stelaction/do:
     post:
       tags:
-        - Action Service
-      summary: Trigger a Built-in Key Action (StelAction)
-      description: Triggers standard hotkey macro shortcuts mapped to internal UI toggles.
+        - StelAction Service
+      summary: Trigger a StelAction
+      description: |
+        Triggers or toggles the StelAction specified by id. 
+        If it was a boolean action, returns the new state of the action (strings "true"/"false").
       requestBody:
         required: true
         content:
@@ -698,17 +1014,44 @@ paths:
               properties:
                 id:
                   type: string
-                  description: System toggle shortcut name string reference key (e.g., 'actionShow_Atmosphere').
+                  description: System toggle shortcut name (e.g., 'actionShow_Atmosphere').
       responses:
         '200':
-          description: Shortcut method fired
+          description: Shortcut method fired (true/false results for toggle actions)
+
+  /stelproperty/list:
+    get:
+      tags:
+        - StelProperty Service
+      summary: List all StelProperties
+      description: |
+        Lists all registered StelProperties, in the format
+
+            {
+              <propId> : {
+                  value, //the current value of the StelProperty
+                  variantType, //the type string of the "value", as determined by QVariant::typeName
+                  typeString,  //the type string of the StelProperty, as determined by QMetaProperty::typeName (may not be equal to "variantType")
+                  typeEnum,    //the enum value of the type of the StelProperty, as determined by StelProperty::getType
+              }
+            }
+        
+        ### Note ###
+        
+        The generic type conversions are done by QJsonValue::fromVariant
+
+      responses:
+        '200':
+          description: Property collection
 
   /stelproperty/set:
     post:
       tags:
-        - Property Service
-      summary: Modify Global Framework Properties (StelProperty)
-      description: Directly manipulates system engine states, toggling specific viewing configuration parameters.
+        - StelProperty Service
+      summary: Modify module properties (StelProperty)
+      description: |
+        Sets the StelProperty identified by 'id' to the value 'value'. 
+        The value is converted to the StelProperty type using QVariant logic, an error is returned if this is somehow not possible.
       requestBody:
         required: true
         content:
@@ -718,10 +1061,10 @@ paths:
               properties:
                 id:
                   type: string
-                  description: Property state layout parameter string identifier key.
+                  description: Property name. This is usually ModuleName.PropertyName.
                 value:
                   type: string
-                  description: String representation target configuration state value.
+                  description: String representation of new value.
       responses:
         '200':
-          description: Variable state overwritten cleanly
+          description: Property set, or see error message in case of problems. 
