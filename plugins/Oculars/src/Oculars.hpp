@@ -406,6 +406,8 @@ private:
 		double flareDecay = 0.1;
 		double flareStrength = 1.0;
 		double brightSourceMagLimit = -8.5;
+		double moonGlareReduction = 0.85;
+		bool moonHaloTexture = true;
 	};
 
 	//! Compute the limiting magnitude for a telescope
