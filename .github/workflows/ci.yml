@@ -399,11 +399,10 @@ jobs:
         sync: rsync
         copyback: false
         prepare: |
-          export PATH=/usr/X11R7/lib/:$PATH
           /usr/sbin/pkg_add -u pkgin
           pkgin update
           pkgin upgrade
-          pkgin install cmake exiv2 nlopt QXlsx qt6-qtbase qt6-qttools qt6-qtpositioning qt6-qtcharts qt6-qtmultimedia qt6-qtserialport gettext-lib fast_float indi md4c
+          pkgin install modular-xorg-server cmake exiv2 nlopt QXlsx qt6-qtbase qt6-qttools qt6-qtpositioning qt6-qtcharts qt6-qtmultimedia qt6-qtserialport gettext-lib fast_float indi md4c
 
         run: |
           set -e -x
