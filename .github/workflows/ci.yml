@@ -399,6 +399,7 @@ jobs:
         sync: rsync
         copyback: false
         prepare: |
+          export PATH=/usr/X11R7/lib/:$PATH
           /usr/sbin/pkg_add -u pkgin
           pkgin update
           pkgin upgrade
