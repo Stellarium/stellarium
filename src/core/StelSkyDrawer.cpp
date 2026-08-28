@@ -54,6 +54,11 @@
 // stand out without using its full integrated magnitude.
 #define DEFAULT_PSF_BRIGHT_SOURCE_MAG_LIMIT (-8.5f)
 #define DEFAULT_PSF_MOON_GLARE_REDUCTION (0.85f)
+#define DEFAULT_PSF_STAR_POINT_RADIUS (1.5f)
+#define DEFAULT_PSF_STAR_FLARE_DECAY (0.1f)
+#define DEFAULT_PSF_STAR_FLARE_STRENGTH (1.f)
+#define DEFAULT_PSF_STAR_PROJECTION_CORRECTION false
+#define DEFAULT_PSF_MOON_HALO_TEXTURE true
 #define PSF_MOON_GLARE_MAG_LIMIT (-4.5f)
 #define PSF_FULL_MOON_MAG (-12.7f)
 #define PSF_TEXTURED_MOON_HALO_RADIUS_FACTOR (1.45f)
@@ -85,13 +90,13 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	flagDrawBigStarHalo(true),
 	flagStarSpiky(false),
 	flagPsfStars(false),
-	flagPsfStarProjectionCorrection(true),
-	psfStarPointRadius(1.5f),
-	psfStarFlareDecay(0.1f),
-	psfStarFlareStrength(1.f),
+	flagPsfStarProjectionCorrection(DEFAULT_PSF_STAR_PROJECTION_CORRECTION),
+	psfStarPointRadius(DEFAULT_PSF_STAR_POINT_RADIUS),
+	psfStarFlareDecay(DEFAULT_PSF_STAR_FLARE_DECAY),
+	psfStarFlareStrength(DEFAULT_PSF_STAR_FLARE_STRENGTH),
 	psfStarBrightSourceMagLimit(DEFAULT_PSF_BRIGHT_SOURCE_MAG_LIMIT),
 	psfMoonGlareReduction(DEFAULT_PSF_MOON_GLARE_REDUCTION),
-	flagPsfMoonHaloTexture(true),
+	flagPsfMoonHaloTexture(DEFAULT_PSF_MOON_HALO_TEXTURE),
 	flagStarMagnitudeLimit(false),
 	flagNebulaMagnitudeLimit(false),
 	flagPlanetMagnitudeLimit(false),
@@ -133,13 +138,13 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagDrawBigStarHalo(conf->value("stars/flag_star_halo",true).toBool());
 	flagStarSpiky=(conf->value("stars/flag_star_spiky", false).toBool()); // too early to use the set method here!
 	setFlagPsfStars(conf->value("stars/flag_psf_stars", false).toBool());
-	setFlagPsfStarProjectionCorrection(conf->value("stars/flag_psf_projection_correction", false).toBool());
-	setPsfStarPointRadius(conf->value("stars/psf_star_point_radius", 1.5).toDouble());
-	setPsfStarFlareDecay(conf->value("stars/psf_star_flare_decay", conf->value("stars/psf_star_optimization", 0.1)).toDouble());
-	setPsfStarFlareStrength(conf->value("stars/psf_star_flare_strength", 1.0).toDouble());
+	setFlagPsfStarProjectionCorrection(conf->value("stars/flag_psf_projection_correction", DEFAULT_PSF_STAR_PROJECTION_CORRECTION).toBool());
+	setPsfStarPointRadius(conf->value("stars/psf_star_point_radius", DEFAULT_PSF_STAR_POINT_RADIUS).toDouble());
+	setPsfStarFlareDecay(conf->value("stars/psf_star_flare_decay", conf->value("stars/psf_star_optimization", DEFAULT_PSF_STAR_FLARE_DECAY)).toDouble());
+	setPsfStarFlareStrength(conf->value("stars/psf_star_flare_strength", DEFAULT_PSF_STAR_FLARE_STRENGTH).toDouble());
 	setPsfStarBrightSourceMagLimit(conf->value("stars/psf_star_bright_source_mag_limit", DEFAULT_PSF_BRIGHT_SOURCE_MAG_LIMIT).toDouble());
 	setPsfMoonGlareReduction(conf->value("stars/psf_moon_glare_reduction", DEFAULT_PSF_MOON_GLARE_REDUCTION).toDouble());
-	setFlagPsfMoonHaloTexture(conf->value("stars/flag_psf_moon_halo_texture", true).toBool());
+	setFlagPsfMoonHaloTexture(conf->value("stars/flag_psf_moon_halo_texture", DEFAULT_PSF_MOON_HALO_TEXTURE).toBool());
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
@@ -1569,6 +1574,17 @@ void StelSkyDrawer::setFlagPsfMoonHaloTexture(bool b)
 		update(0);
 		emit flagPsfMoonHaloTextureChanged(flagPsfMoonHaloTexture);
 	}
+}
+
+void StelSkyDrawer::resetPsfStarSettingsToDefaults()
+{
+	setFlagPsfStarProjectionCorrection(DEFAULT_PSF_STAR_PROJECTION_CORRECTION);
+	setPsfStarPointRadius(DEFAULT_PSF_STAR_POINT_RADIUS);
+	setPsfStarFlareDecay(DEFAULT_PSF_STAR_FLARE_DECAY);
+	setPsfStarFlareStrength(DEFAULT_PSF_STAR_FLARE_STRENGTH);
+	setPsfStarBrightSourceMagLimit(DEFAULT_PSF_BRIGHT_SOURCE_MAG_LIMIT);
+	setPsfMoonGlareReduction(DEFAULT_PSF_MOON_GLARE_REDUCTION);
+	setFlagPsfMoonHaloTexture(DEFAULT_PSF_MOON_HALO_TEXTURE);
 }
 
 // colors for B-V display

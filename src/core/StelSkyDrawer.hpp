@@ -259,6 +259,7 @@ public slots:
 	double getPsfMoonGlareReduction() const {return psfMoonGlareReduction;}
 	void setFlagPsfMoonHaloTexture(bool b);
 	bool getFlagPsfMoonHaloTexture() const {return flagPsfMoonHaloTexture;}
+	void resetPsfStarSettingsToDefaults();
 
 	//! Get the magnitude of the currently faintest visible point source
 	//! It depends on the zoom level, on the eye adaptation and on the point source rendering parameters

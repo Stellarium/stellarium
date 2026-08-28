@@ -10,6 +10,8 @@
 #include "PsfStarsDialog.hpp"
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "StelSkyDrawer.hpp"
 #include "ui_psfStarsDialog.h"
 
 PsfStarsDialog::PsfStarsDialog()
@@ -45,4 +47,8 @@ void PsfStarsDialog::createDialogContent()
 	connectDoubleProperty(ui->moonGlareReductionDoubleSpinBox, "StelSkyDrawer.psfMoonGlareReduction");
 	connectBoolProperty(ui->moonHaloTextureCheckBox, "StelSkyDrawer.flagPsfMoonHaloTexture");
 	connectBoolProperty(ui->projectionCorrectionCheckBox, "StelSkyDrawer.flagPsfStarProjectionCorrection");
+	connect(ui->resetDefaultsButton, &QPushButton::clicked, this, []()
+	{
+		StelApp::getInstance().getCore()->getSkyDrawer()->resetPsfStarSettingsToDefaults();
+	});
 }
