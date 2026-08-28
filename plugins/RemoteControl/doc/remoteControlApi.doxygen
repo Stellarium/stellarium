@@ -300,13 +300,14 @@ suitable for inclusion into an \c iframe element,
 otherwise this operation returns a JSON object of format:
 @code{.js}
 {
-    id,	//the script ID
-    name,	//the english name of the script
-    name_localized,	//the localized name of the script
-    description,	//the english description of the script
-    description_localized,	//the localized description of the script
-    author,	//the author(s) of the script
-    license	//the license of the script
+    id,	                   // script ID
+    name,                  // english name of the script
+    name_localized,	       // localized name of the script
+    description,           // english description of the script
+    description_localized, // localized description of the script
+    author,	               // author(s) of the script
+    license,               // license of the script
+	version                // version of the script
 }
 @endcode
 
@@ -387,7 +388,8 @@ Implemented by StelActionService::postImpl
 
 \paragraph rcStelActionServiceDo do
 Parameters: <tt>id (String)</tt>\n
-Triggers or toggles the StelAction specified by \p id. If it was a boolean action, returns the new state of the action (strings "true"/"false").
+Triggers or toggles the StelAction specified by \p id. If it was a boolean action, returns the new state of the action (strings "true"/"false"), else "ok".
+Special-case behavior for actionQuit_Global / actionShow_Remote_Control: these trigger asynchronously and the response body becomes "error: Stellarium or remote control closing!"
 
 \subsection rcStelPropertyService StelProperty operations (/api/stelproperty/)
 \subsubsection rcStelPropertyServiceGET GET operations
@@ -398,11 +400,13 @@ Lists all registered StelProperties, in the format
 @code{.js}
 {
     <propId> : {
-        value, //the current value of the StelProperty
-        variantType, //the type string of the "value", as determined by QVariant::typeName
-        typeString, //the type string of the StelProperty, as determined by QMetaProperty::typeName (may not be equal to "variantType")
-        typeEnum, //the enum value of the type of the StelProperty, as determined by StelProperty::getType
-    }
+        value,       // current value of the StelProperty
+        variantType, // type string of the "value", as determined by QVariant::typeName
+        typeString,  // type string of the StelProperty, as determined by QMetaProperty::typeName (may not be equal to "variantType")
+        typeEnum,    // enum value of the type of the StelProperty, as determined by StelProperty::getType
+        canNotify,   // should be true
+        isWritable   // should be true almost everywhere
+     }
 }
 @endcode
 @note The generic type conversions are done by QJsonValue::fromVariant
@@ -432,11 +436,11 @@ Returns the list of all known regions (StelLocationMgr::getRegionNames), as a JS
 @endcode
 
 \paragraph rcLocationServicePlanetlist planetlist
-Returns the list of all solar system planet names (SolarSystem::getAllPlanetEnglishNames), as a JSON array of objects of format
+Returns the list of all solar system planet names as a JSON array of objects of format
 @code
 {
-    name, //the english planet
-    name_i18n //the localized planet name (current language)
+    name,     // english planet name
+    name_i18n // localized planet name (current language)
 }
 @endcode
 
