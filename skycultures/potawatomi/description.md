@@ -27,19 +27,13 @@ Several Potawatomi constellations can be represented by different figures and na
 
 #### Note on Dates and Historical Representation
 
-The date associated with the Traditional Potawatomi Homelands map should not be interpreted as the origin date of Potawatomi people or Potawatomi astronomical knowledge. 1667 is used as a documentary anchor: surviving seventeenth-century European records clearly identify Potawatomi people within the Great Lakes region represented by this map. The Jesuit Relation for 1666–1667 includes a section devoted to the Pouteouatamiouec (Potawatomi), describes their country in relation to Lake Michigan, and provides the earliest presently identified written evidence connecting Potawatomi people in this region with astronomical knowledge represented in this sky culture.
+The date associated with the Traditional Potawatomi Homelands map should not be interpreted as the origin date of Potawatomi people or Potawatomi astronomical knowledge. 1667 is used as a documentary anchor: surviving seventeenth-century European records clearly identify Potawatomi people within the Great Lakes region represented by this map. The Jesuit Relation for 1666–1667 includes a section devoted to the Pouteouatamiouec (Potawatomi), describes their country in relation to Lake Michigan, and provides the earliest presently identified written evidence connecting Potawatomi people in this region with astronomical knowledge represented in this sky culture.[#5]
 
 This date reflects the requirements of Stellarium's historical geographic visualization, which associates sky cultures with particular places and periods. It does not indicate that Potawatomi history or astronomical knowledge began in 1667. Potawatomi star knowledge belongs to a living intellectual and cultural tradition transmitted across generations through oral tradition, language, ceremony, material practice, story, song, landscape relationships, and other systems of knowledge transmission that do not depend upon written documentation.
 
-The surviving written record is itself fragmentary. Potawatomi celestial vocabulary is documented by at least 1797, when Benjamin Smith Barton recorded anung for "star," a historical form related to modern Potawatomi negos or nengos. Joseph N. Bourassa's 1843 vocabulary records nug for "star," while Joseph N. Nicollet's 1836–1837 journals include descriptions of Potawatomi constellations identified as the Great Bear and Fisher (pp. 35-36). Additional nineteenth- and early twentieth-century linguistic, ethnographic, and community sources record knowledge concerning stars, the Sun and Moon, celestial beings, stories, ceremony, and seasonal relationships. These sources document Potawatomi astronomical knowledge at particular historical moments; they do not establish when those traditions originated.
+The surviving written record is itself fragmentary. Potawatomi celestial vocabulary is documented by at least 1797, when Benjamin Smith Barton recorded anung for "star," a historical form related to modern Potawatomi negos or nengos.[#2] Joseph N. Bourassa's 1843 vocabulary records nug for "star,"[#3] while Joseph N. Nicollet's 1836–1837 journals include descriptions of Potawatomi constellations identified as the Great Bear and Fisher (pp. 35-36)[#4]. Additional nineteenth- and early twentieth-century linguistic, ethnographic, and community sources record knowledge concerning stars, the Sun and Moon, celestial beings, stories, ceremony, and seasonal relationships. These sources document Potawatomi astronomical knowledge at particular historical moments; they do not establish when those traditions originated.
 
 Written accounts produced by missionaries, linguists, ethnographers, and other outsiders are therefore one form of historical evidence, but they are neither the only nor necessarily the best standard for establishing the existence, continuity, or antiquity of Indigenous knowledge. The Potawatomi Star Knowledge Project distinguishes between the date of surviving written documentation and the much greater antiquity of the knowledge itself. Accordingly, the 1667–present date range should be understood as a transparent curatorial accommodation to Stellarium's mapping requirements, not as a chronological boundary on Potawatomi knowledge. This sky culture represents a living knowledge tradition informed by Potawatomi community knowledge, oral histories, language, historical sources, and the guidance of the project’s Potawatomi cultural advisory board.
-
-Sources Cited
-- Barton, Benjamin Smith. 1797. New Views of the Origin of the Tribes and Nations of America. Philadelphia: Printed for the author by John Bioren.
-- Bourassa, Joseph N. 1843. A Vocabulary of the Po-da-wahd-mih Language. Manuscript. Original dated 1843; surviving Smithsonian copy transcribed ca. 1890. Smithsonian Institution.
-- Nicollet, Joseph N. 1970. The Journals of Joseph N. Nicollet: A Scientist on the Mississippi Headwaters, with Notes on Indian Life, 1836–37. Edited by Martha Coleman Bray and translated by André Fertey. St. Paul: Minnesota Historical Society.
-- Thwaites, Reuben Gold, ed. 1899. The Jesuit Relations and Allied Documents: Travels and Explorations of the Jesuit Missionaries in New France, 1610–1791. Vol. 51, Ottawas, Lower Canada, Iroquois, 1666–1668. Cleveland: Burrows Brothers. See “Relation of 1666–67,” especially Chapter IX, “Of the Mission to the Pouteouatamiouec.”
 
 
 ## Constellations
@@ -242,9 +236,16 @@ Corresponding Western Constellation: Ursa Major
 | Bné ona gizes ([pr](https://wiwkwebthegen.com/dictionary-word/bn%C3%A9-ona-gizes-mi))                 | Smoked turkey moon                  | November                         |
 | Ktthë mko gizes ([pr](https://wiwkwebthegen.com/dictionary-word/ktthe-mko-gizes-mi))                  | Big bear moon                       | December                         |
 
-This list derives from Daniel Bourassa (1843)[^1] who was educated at Carey Mission in Niles, and later in New York and Oklahoma. Different Potawatomi communities (and different families) may have other names for these months.
+This list derives from Daniel Bourassa (1843)[#1] who was educated at Carey Mission in Niles, and later in New York and Oklahoma. Different Potawatomi communities (and different families) may have other names for these months.
 
-[^1]: “A Vocabulary of the Po-Da-Wahd-Mih Language for Project 6697 | Smithsonian Digital Volunteers,” accessed February 17, 2026, https://transcription.si.edu/project/6697.
+
+## References
+
+ - [#1]: “A Vocabulary of the Po-Da-Wahd-Mih Language for Project 6697 | Smithsonian Digital Volunteers,” accessed February 17, 2026, https://transcription.si.edu/project/6697.
+ - [#2]: Barton, Benjamin Smith. 1797. New Views of the Origin of the Tribes and Nations of America. Philadelphia: Printed for the author by John Bioren.
+ - [#3]: Bourassa, Joseph N. 1843. A Vocabulary of the Po-da-wahd-mih Language. Manuscript. Original dated 1843; surviving Smithsonian copy transcribed ca. 1890. Smithsonian Institution.
+ - [#4]: Nicollet, Joseph N. 1970. The Journals of Joseph N. Nicollet: A Scientist on the Mississippi Headwaters, with Notes on Indian Life, 1836–37. Edited by Martha Coleman Bray and translated by André Fertey. St. Paul: Minnesota Historical Society.
+ - [#5]: Thwaites, Reuben Gold, ed. 1899. The Jesuit Relations and Allied Documents: Travels and Explorations of the Jesuit Missionaries in New France, 1610–1791. Vol. 51, Ottawas, Lower Canada, Iroquois, 1666–1668. Cleveland: Burrows Brothers. See “Relation of 1666–67,” especially Chapter IX, “Of the Mission to the Pouteouatamiouec.”
 
 
 ## Authors
