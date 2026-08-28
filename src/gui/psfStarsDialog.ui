@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
           <width>320</width>
-          <height>265</height>
+	          <height>300</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -195,10 +195,17 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="0" colspan="2">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+	      <item row="7" column="0" colspan="2">
+	       <widget class="QPushButton" name="resetDefaultsButton">
+	        <property name="text">
+	         <string>Reset to default</string>
+	        </property>
+	       </widget>
+	      </item>
+	      <item row="8" column="0" colspan="2">
+	       <spacer name="verticalSpacer">
+	        <property name="orientation">
+	         <enum>Qt::Vertical</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -226,10 +233,11 @@
   <tabstop>flareDecayDoubleSpinBox</tabstop>
   <tabstop>flareStrengthDoubleSpinBox</tabstop>
   <tabstop>brightSourceMagLimitDoubleSpinBox</tabstop>
-  <tabstop>moonGlareReductionDoubleSpinBox</tabstop>
-  <tabstop>moonHaloTextureCheckBox</tabstop>
-  <tabstop>projectionCorrectionCheckBox</tabstop>
- </tabstops>
+	  <tabstop>moonGlareReductionDoubleSpinBox</tabstop>
+	  <tabstop>moonHaloTextureCheckBox</tabstop>
+	  <tabstop>projectionCorrectionCheckBox</tabstop>
+	  <tabstop>resetDefaultsButton</tabstop>
+	 </tabstops>
  <resources/>
  <connections/>
 </ui>
