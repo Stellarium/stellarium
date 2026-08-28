@@ -196,7 +196,8 @@ public:
 	//! Defines the number and the order of the columns in the lunar eclipse contact table
 	//! @enum LunarEclipseContactColumns
 	enum LunarEclipseContactColumns {
-		LunarEclipseContact,		//! circumstance of lunar eclipse
+		LunarEclipseContactPhase,	//! timing or eclipse phase
+		LunarEclipseContactInfo,	//! circumstance of lunar eclipse
 		LunarEclipseContactDate,	//! date and time of circumstance
 		LunarEclipseContactAltitude,	//! altitude of the Moon
 		LunarEclipseContactAzimuth,	//! azimuth of the Moon
@@ -226,7 +227,8 @@ public:
 	//! Defines the number and the order of the columns in the global solar eclipse contact table
 	//! @enum SolarEclipseContactColumns
 	enum SolarEclipseContactColumns {
-		SolarEclipseContact,		//! circumstance of solar eclipse
+		SolarEclipseContactPhase,	//! timing or eclipse phase
+		SolarEclipseContactInfo,	//! circumstance of solar eclipse
 		SolarEclipseContactDate,	//! date and time of circumstance
 		SolarEclipseContactLatitude,	//! latitude at contact time
 		SolarEclipseContactLongitude,	//! longitude at contact time

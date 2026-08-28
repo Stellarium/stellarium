@@ -2716,6 +2716,8 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 void AstroCalcDialog::setLunarEclipseContactsHeaderNames()
 {
 	lunareclipsecontactsHeader = QStringList({
+		// The first column is without header name
+		"",
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 		qc_("Circumstances", "column name"),
 		q_("Date and Time"),
@@ -3136,22 +3138,29 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 		double x,y,L1,L2,L3,latitude,longitude, positionAngle=0, axisDistance=0;
 		bool event = false;
 		double JD = JDMid;
+		QString phase, info;
 		if (i==0)
 		{
 			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,true,0);
 			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
+			phase = "P1";
+			info  = q_("Moon enters penumbra");
 			event = true;
 		}
 		else if (i==1 && uMag>0.)
 		{
 			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,true,1);
 			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
+			phase = "U1";
+			info  = q_("Moon enters umbra");
 			event = true;
 		}
 		else if (i==2 && uMag>=1.)
 		{
 			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,true,2);
 			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
+			phase = "U2";
+			info  = q_("Total eclipse begins");
 			event = true;
 		}
 		else if (i==3)
@@ -3160,38 +3169,40 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 			positionAngle = eclipseData.positionAngle;
 			axisDistance = eclipseData.axisDistance;
+			phase = "G";
+			info  = q_("Maximum eclipse");
 			event = true;
 		}
 		else if (i==4 && uMag>=1.)
 		{
 			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,false,2);
 			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
+			phase = "U3";
+			info  = q_("Total eclipse ends");
 			event = true;
 		}
 		else if (i==5 && uMag>0.)
 		{
 			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,false,1);
 			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
+			phase = "U4";
+			info  = q_("Moon leaves umbra");
 			event = true;
 		}
 		else if (i==6)
 		{
 			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,false,0);
 			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
+			phase = "P4";
+			info  = q_("Moon leaves penumbra");
 			event = true;
 		}
 		if (event)
 		{
 			ACLunarEclipseContactsTreeWidgetItem* treeItem = new ACLunarEclipseContactsTreeWidgetItem(ui->lunareclipsecontactsTreeWidget);
-			QStringList events={
-				q_("Moon enters penumbra"),
-				q_("Moon enters umbra"),
-				q_("Total eclipse begins"),
-				q_("Maximum eclipse"),
-				q_("Total eclipse ends"),
-				q_("Moon leaves umbra"),
-				q_("Moon leaves penumbra")};
-			treeItem->setText(LunarEclipseContact, events.at(i));
+			treeItem->setText(LunarEclipseContactPhase, phase);
+			treeItem->setToolTip(LunarEclipseContactPhase, q_("Timing or eclipse phase"));
+			treeItem->setText(LunarEclipseContactInfo, info);
 			const double utcOffsetHrs = core->getUTCOffset(JD);
 			treeItem->setText(LunarEclipseContactDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD, utcOffsetHrs), localeMgr->getPrintableTimeLocal(JD, utcOffsetHrs)));
 			treeItem->setData(LunarEclipseContactDate, Qt::UserRole, JD);
@@ -3232,18 +3243,19 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 			treeItem->setText(LunarEclipseContactDistance, distanceStr);
 			treeItem->setData(LunarEclipseContactDistance, Qt::UserRole, axisDistance);
 			treeItem->setToolTip(LunarEclipseContactDistance, q_("Geocentric angular distance of center of the Moon from the axis or center of the Earth's shadow"));
-			treeItem->setTextAlignment(LunarEclipseContactDate, Qt::AlignRight);
 			if (alt<0.)
 			{
-				for (auto column : {LunarEclipseContact,         LunarEclipseContactDate,      LunarEclipseContactAltitude, LunarEclipseContactAzimuth,
-						    LunarEclipseContactLatitude, LunarEclipseContactLongitude, LunarEclipseContactPA,       LunarEclipseContactDistance})
+				for (auto column : {LunarEclipseContactPhase,     LunarEclipseContactInfo,     LunarEclipseContactDate,
+				                    LunarEclipseContactAltitude,  LunarEclipseContactAzimuth,  LunarEclipseContactLatitude,
+				                    LunarEclipseContactLongitude, LunarEclipseContactPA,       LunarEclipseContactDistance})
 #if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 					treeItem->setForeground(column, Qt::gray);
 #else
 					treeItem->setTextColor(column, Qt::gray);
 #endif
 			}
-			treeItem->setTextAlignment(LunarEclipseContact, Qt::AlignLeft);
+			treeItem->setTextAlignment(LunarEclipseContactPhase, Qt::AlignLeft);
+			treeItem->setTextAlignment(LunarEclipseContactInfo, Qt::AlignLeft);
 			for (auto column : {LunarEclipseContactDate, LunarEclipseContactAltitude, LunarEclipseContactAzimuth, LunarEclipseContactLatitude,
 					    LunarEclipseContactLongitude, LunarEclipseContactPA, LunarEclipseContactDistance})
 				treeItem->setTextAlignment(column, Qt::AlignRight);
@@ -3315,6 +3327,8 @@ void AstroCalcDialog::setSolarEclipseHeaderNames()
 void AstroCalcDialog::setSolarEclipseContactsHeaderNames()
 {
 	solareclipsecontactsHeader = QStringList({
+		// The first column is without header name
+		"",
 		qc_("Circumstances", "column name"),
 		q_("Date and Time"),
 		q_("Latitude"),
@@ -4079,27 +4093,33 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			switch (i)
 			{
 				case 0:
-					treeItem->setText(SolarEclipseContact, QString(q_("Eclipse begins; first contact with Earth")));
-					treeItem->setData(SolarEclipseContact, Qt::UserRole, false);
+					treeItem->setText(SolarEclipseContactPhase, "P1");
+					treeItem->setText(SolarEclipseContactInfo, q_("Eclipse begins; first contact with Earth"));
+					treeItem->setData(SolarEclipseContactInfo, Qt::UserRole, false);
 					break;
 				case 1:
-					treeItem->setText(SolarEclipseContact, QString(q_("Beginning of center line; central eclipse begins")));
-					treeItem->setData(SolarEclipseContact, Qt::UserRole, false);
+					treeItem->setText(SolarEclipseContactPhase, "U1");
+					treeItem->setText(SolarEclipseContactInfo, q_("Beginning of center line; central eclipse begins"));
+					treeItem->setData(SolarEclipseContactInfo, Qt::UserRole, false);
 					break;
 				case 2:
-					treeItem->setText(SolarEclipseContact, QString(q_("Greatest eclipse")));
-					treeItem->setData(SolarEclipseContact, Qt::UserRole, true);
+					treeItem->setText(SolarEclipseContactPhase, "G");
+					treeItem->setText(SolarEclipseContactInfo, q_("Greatest eclipse"));
+					treeItem->setData(SolarEclipseContactInfo, Qt::UserRole, true);
 					break;
 				case 3:
-					treeItem->setText(SolarEclipseContact, QString(q_("End of center line; central eclipse ends")));
-					treeItem->setData(SolarEclipseContact, Qt::UserRole, false);
+					treeItem->setText(SolarEclipseContactPhase, "U4");
+					treeItem->setText(SolarEclipseContactInfo, q_("End of center line; central eclipse ends"));
+					treeItem->setData(SolarEclipseContactInfo, Qt::UserRole, false);
 					break;
 				case 4:
-					treeItem->setText(SolarEclipseContact, QString(q_("Eclipse ends; last contact with Earth")));
-					treeItem->setData(SolarEclipseContact, Qt::UserRole, false);
+					treeItem->setText(SolarEclipseContactPhase, "P4");
+					treeItem->setText(SolarEclipseContactInfo, q_("Eclipse ends; last contact with Earth"));
+					treeItem->setData(SolarEclipseContactInfo, Qt::UserRole, false);
 					break;
 			}
 			const double utcOffsetHrs = core->getUTCOffset(JD);
+			treeItem->setToolTip(SolarEclipseContactPhase, q_("Timing or eclipse phase"));
 			treeItem->setText(SolarEclipseContactDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD, utcOffsetHrs), localeMgr->getPrintableTimeLocal(JD, utcOffsetHrs)));
 			treeItem->setData(SolarEclipseContactDate, Qt::UserRole, JD);
 			treeItem->setText(SolarEclipseContactLatitude, StelUtils::decDegToLatitudeStr(latDeg, !withDecimalDegree));
@@ -4167,8 +4187,9 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			treeItem->setToolTip(SolarEclipseContactPathwidth, q_("Width of the path of totality or annularity"));
 			treeItem->setText(SolarEclipseContactDuration, durationStr);
 			treeItem->setToolTip(SolarEclipseContactDuration, q_("Duration of total or annular phase"));
-			treeItem->setText(SolarEclipseContactType, eclipseTypeStr);			
-			treeItem->setTextAlignment(SolarEclipseContact, Qt::AlignLeft);
+			treeItem->setText(SolarEclipseContactType, eclipseTypeStr);
+			treeItem->setTextAlignment(SolarEclipseContactPhase, Qt::AlignLeft);
+			treeItem->setTextAlignment(SolarEclipseContactInfo, Qt::AlignLeft);
 			treeItem->setTextAlignment(SolarEclipseContactDate, Qt::AlignRight);
 			treeItem->setTextAlignment(SolarEclipseContactLatitude, Qt::AlignRight);
 			treeItem->setTextAlignment(SolarEclipseContactLongitude, Qt::AlignRight);
@@ -4198,7 +4219,7 @@ void AstroCalcDialog::selectCurrentSolarEclipseContact(const QModelIndex& modelI
 	const double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseContactDate).data(Qt::UserRole).toDouble();
 	const float lat = modelIndex.sibling(modelIndex.row(), SolarEclipseContactLatitude).data(Qt::UserRole).toFloat();
 	const float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseContactLongitude).data(Qt::UserRole).toFloat();
-	const bool greatest = modelIndex.sibling(modelIndex.row(), SolarEclipseContact).data(Qt::UserRole).toBool();
+	const bool greatest = modelIndex.sibling(modelIndex.row(), SolarEclipseContactInfo).data(Qt::UserRole).toBool();
 
 	StelLocation contactLoc(greatest ? q_("Greatest eclipse’s point") : q_("Eclipse’s contact point"), "", "", lon, lat, 10, 0, "LMST", 1, 'X');
 	// Find landscape color at the spot
