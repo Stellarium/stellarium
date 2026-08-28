@@ -933,7 +933,8 @@ paths:
                   description: Exact filename (e.g., sky_tours.ssc).
       responses:
         '200':
-          description: Script running successfully, or 'error: a script is already running'
+          description: |
+            Script running successfully, or 'error: a script is already running'
 
   /scripts/direct:
     post:
@@ -962,7 +963,8 @@ paths:
                   description: use standard include folder
       responses:
         '200':
-          description: Script running successfully, or 'error: a script is already running'
+          description: |
+            Script running successfully, or 'error: a script is already running'
 
   /scripts/stop:
     post:
