@@ -8,9 +8,9 @@ info:
     
     ### Interface Capabilities:
     * **Poll application state** with conditional modification parameter IDs.
-    * **Search catalogs** and 
+    * **Search catalogs**.
     * **Manipulate the field of view** and view orientation vector coordinates.
-    * **Manipulate all internal settings (StelProperties) and trigger StelActions**
+    * **Manipulate all internal settings (StelProperties) and trigger StelActions**.
     * **Command embedded script playback**.
 servers:
   - url: http://localhost:8090/api
@@ -224,26 +224,14 @@ paths:
                   type: string
                   description: provided jNow coordinates to be understood as including refraction. 'on'/'off'/'auto' (or anything else; default.)
                 j2000:
-                  type: array
-                  description: 3D view vector [x, y, z] in J2000 frame.
-                  items:
-                    type: number
-                  maxItems: 3
-                  minItems: 3
+                  type: string
+                  description: JSON-encoded 3D view vector "[x, y, z]" in J2000 frame.
                 jNow:
-                  type: array
-                  description: 3D view vector [x, y, z] in JNow frame.
-                  items:
-                    type: number
-                  maxItems: 3
-                  minItems: 3
+                  type: string
+                  description: JSON-encoded 3D view vector "[x, y, z]" in JNow frame.
                 altAz:
-                  type: array
-                  description: 3D view vector in [x, y, z] alt/azimuthal frame.
-                  items:
-                    type: number
-                  maxItems: 3
-                  minItems: 3
+                  type: string
+                  description: JSON-encoded 3D view vector in "[x, y, z]" alt/azimuthal frame.
                 az: 
                   type: number
                   description: azimuth, degrees.
@@ -415,12 +403,8 @@ paths:
                   type: string
                   description: Only valid when target is given. One of center|zoom|mark
                 position:
-                  type: array
-                  description: 3D vector [x, y, z] in J2000 frame.
-                  items:
-                    type: number
-                  maxItems: 3
-                  minItems: 3
+                  type: string
+                  description: JSON-encoded 3D vector "[x, y, z]" in J2000 frame.
       responses:
         '200':
           description: Focus/selection changed
@@ -481,7 +465,9 @@ paths:
             application/json:
               schema:
                 type: object
-            HTML/text:
+            text/html:
+              schema:
+                type: string
 
 
   /objects/listobjecttypes:
@@ -638,7 +624,7 @@ paths:
         The remainder is used to access files in the skyculture directory. 
         If no longer path is given, the current HTML skyculture description 
         (as per StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription) is returned. 
-        An example: landscapedescription/image.png returns image.png from the current skyculture directory.
+        An example: skyculturedescription/image.png returns image.png from the current skyculture directory.
 
         This operation allows to set up an HTML iframe or similar for the skyculture description, 
         including all images, etc. embedded in the HTML description.
@@ -704,8 +690,7 @@ paths:
         - Location Service
       summary: Retrieve known planets
       description: |
-        Returns the list of all solar system planet names (SolarSystem::getAllPlanetEnglishNames), 
-        as a JSON array of objects of format
+        Returns the list of all solar system planet names, as a JSON array of dicts of format
         
           {
               name,     //the english planet name
@@ -803,14 +788,14 @@ paths:
         - LocationSearch Service
       summary: Search locations near given coordinates
       description: |
-        Searches the term in the list of predefined locations of the StelLocationMgr, 
+        Searches for known locations on the given planet within 'radius' degrees of the given coordinates.
         and returns a JSON string array of the results.
       parameters:
         - name: planet
           in: query
           required: true
           description: english planet name, e.g. Earth (case sensitive)
-          value: Earth
+          example: Earth
           schema:
             type: string
         - name: latitude
@@ -829,7 +814,7 @@ paths:
           in: query
           required: true
           description: search radius, degrees
-          value: 3
+          example: 3
           schema:
             type: number
       responses:
@@ -858,13 +843,14 @@ paths:
         otherwise this operation returns a JSON object of format: 
         
             {
-                id,                     //the script ID
-                name,                   //the english name of the script
-                name_localized,         //the localized name of the script
-                description,            //the english description of the script
-                description_localized,  //the localized description of the script
-                author,                 //the author(s) of the script
-                license                 //the license of the script
+                id,                     // script ID
+                name,                   // english name of the script
+                name_localized,         // localized name of the script
+                description,            // english description of the script
+                description_localized,  // localized description of the script
+                author,                 // author(s) of the script
+                license,                // license of the script
+                version                 // version of the script
             }
       parameters:
         - name: id
@@ -875,14 +861,14 @@ paths:
             type: string
         - name: html
           in: query
-          required: true
+          required: false
           description: if given (any value), answer is HTML formatted.
           schema:
             type: string
 
       responses:
         '200':
-          description: Script pipeline initialization successful
+          description: script metadata JSON or HTML
 
   /scripts/status:
     get:
@@ -890,7 +876,7 @@ paths:
         - Script Service
       summary: Return script status
       description: |
-        Returns the current script status as a JSON object of format:
+        Returns the current script status as a JSON dict of format:
         
             {
                 scriptIsRunning,    //true if a script is running
@@ -902,7 +888,7 @@ paths:
         The StelScriptMgr also provides a StelProperty StelScriptMgr.runningScriptId that can be used to find out the active script.
       responses:
         '200':
-          description: Script pipeline initialization successful
+          description: Script status dict
 
   /scripts/run:
     post:
@@ -952,7 +938,7 @@ paths:
                   type: string
                   description: Script code. (Usually a short ad-hoc script.) 
                 useIncludes:
-                  type: bool
+                  type: boolean
                   description: use standard include folder
       responses:
         '200':
@@ -1015,7 +1001,11 @@ paths:
                   description: System toggle shortcut name (e.g., 'actionShow_Atmosphere').
       responses:
         '200':
-          description: Shortcut method fired (true/false results for toggle actions)
+          description: |
+            Shortcut method fired (ok, or true/false results for toggle actions).
+            
+            When actions 'actionQuit_Global' or 'actionShow_Remote_Control' are given, 
+            these trigger asynchronously and the response body becomes "error: Stellarium or remote control closing!" instead 
 
   /stelproperty/list:
     get:
@@ -1026,11 +1016,13 @@ paths:
         Lists all registered StelProperties, in the format
 
             {
-              <propId> : {
-                  value, //the current value of the StelProperty
-                  variantType, //the type string of the "value", as determined by QVariant::typeName
-                  typeString,  //the type string of the StelProperty, as determined by QMetaProperty::typeName (may not be equal to "variantType")
-                  typeEnum,    //the enum value of the type of the StelProperty, as determined by StelProperty::getType
+              <propId> : {     // Usually "ModuleName.PropertyName"
+                  value,       // the current value of the StelProperty
+                  variantType, // the type string of the "value", as determined by QVariant::typeName
+                  typeString,  // the type string of the StelProperty, as determined by QMetaProperty::typeName (may not be equal to "variantType")
+                  typeEnum,    // the enum value of the type of the StelProperty, as determined by StelProperty::getType
+                  canNotify,   // should be true
+                  isWritable   // should be true almost everywhere
               }
             }
         
