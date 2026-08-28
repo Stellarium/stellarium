@@ -42,5 +42,7 @@ void PsfStarsDialog::createDialogContent()
 	connectDoubleProperty(ui->flareDecayDoubleSpinBox, "StelSkyDrawer.psfStarFlareDecay");
 	connectDoubleProperty(ui->flareStrengthDoubleSpinBox, "StelSkyDrawer.psfStarFlareStrength");
 	connectDoubleProperty(ui->brightSourceMagLimitDoubleSpinBox, "StelSkyDrawer.psfStarBrightSourceMagLimit");
+	connectDoubleProperty(ui->moonGlareReductionDoubleSpinBox, "StelSkyDrawer.psfMoonGlareReduction");
+	connectBoolProperty(ui->moonHaloTextureCheckBox, "StelSkyDrawer.flagPsfMoonHaloTexture");
 	connectBoolProperty(ui->projectionCorrectionCheckBox, "StelSkyDrawer.flagPsfStarProjectionCorrection");
 }

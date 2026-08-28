@@ -53,6 +53,11 @@
 // for objects such as Venus and bright supernovae while letting the full Moon
 // stand out without using its full integrated magnitude.
 #define DEFAULT_PSF_BRIGHT_SOURCE_MAG_LIMIT (-8.5f)
+#define DEFAULT_PSF_MOON_GLARE_REDUCTION (0.85f)
+#define PSF_MOON_GLARE_MAG_LIMIT (-4.5f)
+#define PSF_FULL_MOON_MAG (-12.7f)
+#define PSF_TEXTURED_MOON_HALO_RADIUS_FACTOR (1.45f)
+#define PSF_TEXTURED_MOON_HALO_SOURCE_RADIUS_FACTOR (5.5f)
 
 static float psfSmoothStep(float edge0, float edge1, float x)
 {
@@ -85,6 +90,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	psfStarFlareDecay(0.1f),
 	psfStarFlareStrength(1.f),
 	psfStarBrightSourceMagLimit(DEFAULT_PSF_BRIGHT_SOURCE_MAG_LIMIT),
+	psfMoonGlareReduction(DEFAULT_PSF_MOON_GLARE_REDUCTION),
+	flagPsfMoonHaloTexture(true),
 	flagStarMagnitudeLimit(false),
 	flagNebulaMagnitudeLimit(false),
 	flagPlanetMagnitudeLimit(false),
@@ -131,6 +138,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setPsfStarFlareDecay(conf->value("stars/psf_star_flare_decay", conf->value("stars/psf_star_optimization", 0.1)).toDouble());
 	setPsfStarFlareStrength(conf->value("stars/psf_star_flare_strength", 1.0).toDouble());
 	setPsfStarBrightSourceMagLimit(conf->value("stars/psf_star_bright_source_mag_limit", DEFAULT_PSF_BRIGHT_SOURCE_MAG_LIMIT).toDouble());
+	setPsfMoonGlareReduction(conf->value("stars/psf_moon_glare_reduction", DEFAULT_PSF_MOON_GLARE_REDUCTION).toDouble());
+	setFlagPsfMoonHaloTexture(conf->value("stars/flag_psf_moon_halo_texture", true).toBool());
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
@@ -672,6 +681,43 @@ float StelSkyDrawer::getPsfPointSourceLabelOffset(const RCMag& rcMag, float appM
 	return qMax(baseOffset, psfOffset);
 }
 
+float StelSkyDrawer::getPsfMoonHaloLabelOffset(float appMag, const Vec3f& color, float sourceRadius, float baseOffset, float psfOffsetScale) const
+{
+	if (!flagPsfStars || !std::isfinite(appMag) || sourceRadius <= 0.f)
+		return baseOffset;
+
+	const float scale = StelApp::getInstance().getScreenScale();
+	const float moonMagLimit = psfStarBrightSourceMagLimit
+		+ (qMax(psfStarBrightSourceMagLimit, PSF_MOON_GLARE_MAG_LIMIT) - psfStarBrightSourceMagLimit) * psfMoonGlareReduction;
+	const float haloMag = qMax(appMag, moonMagLimit);
+
+	if (!flagPsfMoonHaloTexture)
+	{
+		RCMag rcm;
+		if (!computeRCMag(haloMag, &rcm))
+			return baseOffset;
+
+		const float tStart = 1.5f * scale;
+		const float tStop = 3.f * scale;
+		if (sourceRadius >= tStop)
+			rcm.luminance = 0.f;
+		else if (sourceRadius > tStart)
+			rcm.luminance *= (tStop - sourceRadius) / (tStop - tStart);
+
+		return getPsfPointSourceLabelOffset(rcm, haloMag, color, baseOffset, psfOffsetScale);
+	}
+
+	const float phaseGlow = psfSmoothStep(-PSF_MOON_GLARE_MAG_LIMIT, -PSF_FULL_MOON_MAG, -appMag);
+	const float phaseStrength = 0.2f + 0.8f * phaseGlow;
+	const float phaseRadius = 0.6f + 0.4f * phaseGlow;
+	const float glare = 1.f - 0.65f * psfMoonGlareReduction;
+	const float radius = qMax(big3dModelHaloRadius * scale * PSF_TEXTURED_MOON_HALO_RADIUS_FACTOR * phaseRadius,
+	                          sourceRadius * PSF_TEXTURED_MOON_HALO_SOURCE_RADIUS_FACTOR * phaseRadius);
+	const float visibleRadius = radius * (0.05f + 0.10f * std::sqrt(qMax(0.f, glare * phaseStrength)));
+	const float psfOffset = qMin(visibleRadius + 6.f * scale, 96.f * scale);
+	return qMax(baseOffset, psfOffset);
+}
+
 // The PSF glow approximation and its optimization parameter are adapted from
 // Askaniy Anpilogov's Python prototype for point source rendering.
 float StelSkyDrawer::computePsfGlowRadius(float peakRadiance, float alpha) const
@@ -726,7 +772,7 @@ Vec3f StelSkyDrawer::psfGreenNormalization(const Vec3f& c, float saturationLimit
 	return Vec3f(r, g, b);
 }
 
-void StelSkyDrawer::addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPainter* sPainter, const Vec3d& direction, const Vec3f& center, const Vec3f& color, float peakRadiance, float radius)
+void StelSkyDrawer::addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPainter* sPainter, const Vec3d& direction, const Vec3f& center, const Vec3f& color, float peakRadiance, float radius, float sourceRadius)
 {
 	static const Vec2f corners[] = {
 		Vec2f(-1.f, -1.f), Vec2f( 1.f, -1.f), Vec2f( 1.f,  1.f),
@@ -854,12 +900,13 @@ void StelSkyDrawer::addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPai
 		vx.angularMode = useAngularPsf ? 1.f : 0.f;
 		vx.peakRadiance = peakRadiance;
 		vx.psfRadius = radius;
+		vx.sourceRadius = sourceRadius;
 		std::memcpy(vx.color, starColor, 4);
 		vertices.append(vx);
 	}
 }
 
-void StelSkyDrawer::drawPsfPointSource(StelPainter* sPainter, const Vec3d& direction, const Vec3f& win, float appMag, const Vec3f& color, float twinkleFactor, float luminanceScale)
+void StelSkyDrawer::drawPsfPointSource(StelPainter* sPainter, const Vec3d& direction, const Vec3f& win, float appMag, const Vec3f& color, float twinkleFactor, float luminanceScale, float sourceRadius)
 {
 	Q_UNUSED(twinkleFactor)
 
@@ -875,7 +922,7 @@ void StelSkyDrawer::drawPsfPointSource(StelPainter* sPainter, const Vec3d& direc
 	const Vec3f linearStarColor = psfGreenNormalization(color, 0.1f, greenScale);
 	const float peakRadianceColor = peakRadiance * greenScale;
 
-	addPsfStarVertices(psfPointVertices, sPainter, direction, win, linearStarColor, peakRadianceColor, psfStarPointRadius);
+	addPsfStarVertices(psfPointVertices, sPainter, direction, win, linearStarColor, peakRadianceColor, psfStarPointRadius, sourceRadius);
 
 	const float flareOnset = psfSmoothStep(0.5f, 2.5f, peakRadianceColor);
 	const float effectiveFlareStrength = psfStarFlareStrength * flareOnset;
@@ -884,7 +931,7 @@ void StelSkyDrawer::drawPsfPointSource(StelPainter* sPainter, const Vec3d& direc
 		const float glowPeak = peakRadianceColor;
 		const float glowRadius = computePsfGlowRadius(glowPeak, effectiveFlareStrength);
 		if (glowRadius > psfStarPointRadius)
-			addPsfStarVertices(psfGlowVertices, sPainter, direction, win, linearStarColor * flareOnset, glowPeak, glowRadius);
+			addPsfStarVertices(psfGlowVertices, sPainter, direction, win, linearStarColor * flareOnset, glowPeak, glowRadius, sourceRadius);
 	}
 
 	if (psfPointVertices.size() >= static_cast<int>(maxPointSources*6) ||
@@ -916,6 +963,7 @@ void StelSkyDrawer::flushPsfPointSources(StelPainter* sPainter)
 			"ATTRIBUTE mediump vec3 color;\n"
 			"ATTRIBUTE highp float peakRadiance;\n"
 			"ATTRIBUTE highp float psfRadius;\n"
+			"ATTRIBUTE highp float sourceRadius;\n"
 			"uniform highp mat4 projectionMatrix;\n"
 			"VARYING highp vec2 vCorner;\n"
 			"VARYING highp vec3 outDirection;\n"
@@ -923,6 +971,7 @@ void StelSkyDrawer::flushPsfPointSources(StelPainter* sPainter)
 			"VARYING mediump vec3 outColor;\n"
 			"VARYING highp float outPeakRadiance;\n"
 			"VARYING highp float outPsfRadius;\n"
+			"VARYING highp float outSourceRadius;\n"
 			"void main(void)\n"
 			"{\n"
 			"    gl_Position = projectionMatrix * vec4(center, 0.0, 1.0);\n"
@@ -932,6 +981,7 @@ void StelSkyDrawer::flushPsfPointSources(StelPainter* sPainter)
 			"    outColor = color;\n"
 			"    outPeakRadiance = peakRadiance;\n"
 			"    outPsfRadius = psfRadius;\n"
+			"    outSourceRadius = sourceRadius;\n"
 			"}\n";
 
 		const QByteArray psfDistanceFsrc =
@@ -945,6 +995,7 @@ VARYING highp float outAngularMode;
 VARYING mediump vec3 outColor;
 VARYING highp float outPeakRadiance;
 VARYING highp float outPsfRadius;
+VARYING highp float outSourceRadius;
 highp float psfDistancePx()
 {
 	if (outAngularMode < 0.5)
@@ -958,11 +1009,20 @@ highp float psfDistancePx()
 	highp float angle = sqrt(max(0.0, 2.0 * (1.0 - c)));
 	return angle * psfPixelPerRad / max(pointScale, 0.001);
 }
+highp float psfMoonGlareMask(highp float px, highp float pointRadius, highp float glareReduction)
+{
+	if (outSourceRadius <= 0.0 || glareReduction <= 0.0)
+		return 1.0;
+	highp float reduction = glareReduction * smoothstep(0.0, max(pointRadius, 0.001), outSourceRadius);
+	highp float rim = smoothstep(max(0.0, outSourceRadius - pointRadius * 1.5), outSourceRadius + pointRadius * 2.0, px);
+	return mix(1.0, rim, reduction);
+}
 )";
 		const QByteArray psfPointFsrc =
 			psfDistanceFsrc +
 			R"(
 uniform highp float pointRadius;
+uniform highp float psfMoonGlareReduction;
 void main(void)
 {
 	highp float px = psfDistancePx();
@@ -971,15 +1031,17 @@ void main(void)
 	highp float x = clamp(px / pointRadius, 0.0, 1.0);
 	highp float falloff = 1.0 - x * x;
 	falloff *= falloff;
-	FRAG_COLOR = vec4(outColor * (falloff * outPeakRadiance), 1.0);
+	FRAG_COLOR = vec4(outColor * (falloff * outPeakRadiance * psfMoonGlareMask(px, pointRadius, psfMoonGlareReduction)), 1.0);
 }
 )";
 		const QByteArray psfGlowFsrc =
 			psfDistanceFsrc +
 			R"(
+uniform highp float pointRadius;
 uniform highp float psfA;
 uniform highp float psfB;
 uniform highp float flareStrength;
+uniform highp float psfMoonGlareReduction;
 void main(void)
 {
 	highp float px = psfDistancePx();
@@ -988,7 +1050,7 @@ void main(void)
 	highp float p04 = pow(outPeakRadiance, 0.4);
 	highp float s = max((p04 / px - psfA) * psfB, 0.0);
 	highp float val = min(s * s * sqrt(s), outPeakRadiance);
-	FRAG_COLOR = vec4(outColor * val * flareStrength, 1.0);
+	FRAG_COLOR = vec4(outColor * val * flareStrength * psfMoonGlareMask(px, pointRadius, psfMoonGlareReduction), 1.0);
 }
 )";
 		auto createPsfProgram = [this, psfVsrc](const QByteArray& fsrc, const char* name, PsfStarShaderVars& vars)
@@ -1012,12 +1074,14 @@ void main(void)
 			vars.color = program->attributeLocation("color");
 			vars.peakRadiance = program->attributeLocation("peakRadiance");
 			vars.psfRadius = program->attributeLocation("psfRadius");
+			vars.sourceRadius = program->attributeLocation("sourceRadius");
 			vars.pointRadius = program->uniformLocation("pointRadius");
 			vars.pointScale = program->uniformLocation("pointScale");
 			vars.pixelPerRad = program->uniformLocation("psfPixelPerRad");
 			vars.psfA = program->uniformLocation("psfA");
 			vars.psfB = program->uniformLocation("psfB");
 			vars.flareStrength = program->uniformLocation("flareStrength");
+			vars.moonGlareReduction = program->uniformLocation("psfMoonGlareReduction");
 			return program;
 		};
 		psfPointShaderProgram = createPsfProgram(psfPointFsrc, "psfStarPointShader", psfPointShaderVars);
@@ -1042,6 +1106,7 @@ void main(void)
 		program->setUniformValue(vars.pointRadius, psfStarPointRadius);
 		program->setUniformValue(vars.pointScale, StelApp::getInstance().getScreenScale());
 		program->setUniformValue(vars.pixelPerRad, projector->getPixelPerRadAtCenter());
+		program->setUniformValue(vars.moonGlareReduction, psfMoonGlareReduction);
 		projector->setUnProjectUniforms(*program);
 		if (glow)
 		{
@@ -1067,6 +1132,7 @@ void main(void)
 		setAttributeBuffer(vars.angularMode, GL_FLOAT, offsetof(PsfStarVertex, angularMode), 1);
 		setAttributeBuffer(vars.peakRadiance, GL_FLOAT, offsetof(PsfStarVertex, peakRadiance), 1);
 		setAttributeBuffer(vars.psfRadius, GL_FLOAT, offsetof(PsfStarVertex, psfRadius), 1);
+		setAttributeBuffer(vars.sourceRadius, GL_FLOAT, offsetof(PsfStarVertex, sourceRadius), 1);
 		setAttributeBuffer(vars.color, GL_UNSIGNED_BYTE, offsetof(PsfStarVertex, color), 3);
 		vbo->release();
 		auto enableAttributeArray = [program](int location)
@@ -1081,6 +1147,7 @@ void main(void)
 		enableAttributeArray(vars.color);
 		enableAttributeArray(vars.peakRadiance);
 		enableAttributeArray(vars.psfRadius);
+		enableAttributeArray(vars.sourceRadius);
 
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
@@ -1102,6 +1169,7 @@ void main(void)
 			disableAttributeArray(vars.color);
 			disableAttributeArray(vars.peakRadiance);
 			disableAttributeArray(vars.psfRadius);
+			disableAttributeArray(vars.sourceRadius);
 		}
 		program->release();
 	};
@@ -1182,7 +1250,7 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3d& posJ2000, d
 }
 
 // Terminate drawing of a 3D model, draw the halo
-void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color, const bool isSun)
+void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color, const bool isSun, float sourceRadius)
 {
 	const float scale = StelApp::getInstance().getScreenScale();
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
@@ -1218,16 +1286,24 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 	else
 		flagStarSpiky = saveSpiky;
 
+	const bool psfExtendedSource = flagPsfStars && sourceRadius > 0.f;
+	const float moonMagLimit = psfStarBrightSourceMagLimit
+		+ (qMax(psfStarBrightSourceMagLimit, PSF_MOON_GLARE_MAG_LIMIT) - psfStarBrightSourceMagLimit) * psfMoonGlareReduction;
+	const float haloMag = psfExtendedSource
+		? qMax(mag, moonMagLimit)
+		: mag;
+
 	RCMag rcm;
-	computeRCMag(mag, &rcm);
+	computeRCMag(haloMag, &rcm);
 
 	// We now have the radius and luminosity of the small halo
 	// If the disk of the planet is big enough to be visible, we should adjust the eye adaptation luminance
 	// so that the radius of the halo is small enough to be not visible (so that we see the disk)
 
 	// TODO: Change drawing halo to more realistic view of stars and planets
-	const float tStart = (flagPsfStars ? 1.5f : 3.f)*scale; // Was 2.f: planet's halo is too dim. Atque 2020-11-12: No need to change these anymore. It appears that this has to do with halo size vs FOV (?).
-	const float tStop = (flagPsfStars ? 3.f : 6.f)*scale;
+	const bool psfTexturedMoonHalo = psfExtendedSource && flagPsfMoonHaloTexture;
+	const float tStart = (psfTexturedMoonHalo ? 4.f : (flagPsfStars ? 1.5f : 3.f))*scale; // Was 2.f: planet's halo is too dim. Atque 2020-11-12: No need to change these anymore. It appears that this has to do with halo size vs FOV (?).
+	const float tStop = (psfTexturedMoonHalo ? 12.f : (flagPsfStars ? 3.f : 6.f))*scale;
 	bool truncated=false;
 
 	float maxHaloRadius = qMax(tStart*6.f, pixRadius*3.f); //Atque 2020-11-12: Careful, if tStart*6.f is too big (tStart*10.f or something), the Moon gets a ridiculously big halo.
@@ -1250,7 +1326,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 
 	if (truncated && flagLuminanceAdaptation)
 	{
-		float wl = findWorldLumForMag(mag, rcm.radius);
+		float wl = findWorldLumForMag(haloMag, rcm.radius);
 		if (wl>0)
 		{
 			const float fov = static_cast<float>(core->getMovementMgr()->getCurrentFov());
@@ -1268,7 +1344,38 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 	if (!noStarHalo)
 	{
 		preDrawPointSource(painter);
-		drawPointSource(painter, v, rcm, color, false, 1.f, mag);
+		if (psfTexturedMoonHalo && std::isfinite(haloMag))
+		{
+			Vec3d win;
+			if (painter->getProjector()->project(v, win) && rcm.luminance > 0.f)
+			{
+				const float phaseGlow = psfSmoothStep(-PSF_MOON_GLARE_MAG_LIMIT, -PSF_FULL_MOON_MAG, -mag);
+				const float phaseStrength = 0.2f + 0.8f * phaseGlow;
+				const float phaseRadius = 0.6f + 0.4f * phaseGlow;
+				const float glare = 1.f - 0.65f * psfMoonGlareReduction;
+				const float cmag = qMin(1.f, rcm.luminance) * glare * phaseStrength;
+				if (cmag > 0.001f)
+				{
+					const float radius = qMax(big3dModelHaloRadius * scale * PSF_TEXTURED_MOON_HALO_RADIUS_FACTOR * phaseRadius,
+					                          sourceRadius * PSF_TEXTURED_MOON_HALO_SOURCE_RADIUS_FACTOR * phaseRadius);
+					texBigHalo->bind();
+					painter->setBlending(true, GL_ONE, GL_ONE);
+					painter->setColor(color * cmag);
+					painter->drawSprite2dModeNoDeviceScale(win[0], win[1], radius);
+				}
+			}
+		}
+		else if (psfExtendedSource && std::isfinite(haloMag))
+		{
+			Vec3d win;
+			if (painter->getProjector()->project(v, win) && rcm.luminance > 0.f)
+			{
+				const float scale = qMax(StelApp::getInstance().getScreenScale(), 1.0e-3f);
+				drawPsfPointSource(painter, v, Vec3f(static_cast<float>(win[0]), static_cast<float>(win[1]), static_cast<float>(win[2])), haloMag, color, 1.f, rcm.luminance, sourceRadius / scale);
+			}
+		}
+		else
+			drawPointSource(painter, v, rcm, color, false, 1.f, haloMag);
 		postDrawPointSource(painter);
 	}
 	flagStarTwinkle=saveTwinkle;
@@ -1440,6 +1547,28 @@ void StelSkyDrawer::setPsfStarBrightSourceMagLimit(double magLimit)
 	StelApp::immediateSave("stars/psf_star_bright_source_mag_limit", psfStarBrightSourceMagLimit);
 	update(0);
 	emit psfStarBrightSourceMagLimitChanged(psfStarBrightSourceMagLimit);
+}
+
+void StelSkyDrawer::setPsfMoonGlareReduction(double reduction)
+{
+	const float value = qBound(0.f, static_cast<float>(reduction), 1.f);
+	if (qFuzzyCompare(psfMoonGlareReduction, value))
+		return;
+	psfMoonGlareReduction = value;
+	StelApp::immediateSave("stars/psf_moon_glare_reduction", psfMoonGlareReduction);
+	update(0);
+	emit psfMoonGlareReductionChanged(psfMoonGlareReduction);
+}
+
+void StelSkyDrawer::setFlagPsfMoonHaloTexture(bool b)
+{
+	if (b!=flagPsfMoonHaloTexture)
+	{
+		flagPsfMoonHaloTexture=b;
+		StelApp::immediateSave("stars/flag_psf_moon_halo_texture", b);
+		update(0);
+		emit flagPsfMoonHaloTextureChanged(flagPsfMoonHaloTexture);
+	}
 }
 
 // colors for B-V display

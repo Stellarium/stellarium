@@ -342,11 +342,15 @@ void Oculars::deinit()
 	settings->setValue("psf_star_flare_decay", QString::number(psfStarSettingsOculars.flareDecay, 'f', 3));
 	settings->setValue("psf_star_flare_strength", QString::number(psfStarSettingsOculars.flareStrength, 'f', 2));
 	settings->setValue("psf_star_bright_source_mag_limit", QString::number(psfStarSettingsOculars.brightSourceMagLimit, 'f', 1));
+	settings->setValue("psf_moon_glare_reduction", QString::number(psfStarSettingsOculars.moonGlareReduction, 'f', 2));
+	settings->setValue("flag_psf_moon_halo_texture", psfStarSettingsOculars.moonHaloTexture);
 	settings->setValue("psf_star_projection_correction_ccd", psfStarSettingsCCD.projectionCorrection);
 	settings->setValue("psf_star_point_radius_ccd", QString::number(psfStarSettingsCCD.pointRadius, 'f', 2));
 	settings->setValue("psf_star_flare_decay_ccd", QString::number(psfStarSettingsCCD.flareDecay, 'f', 3));
 	settings->setValue("psf_star_flare_strength_ccd", QString::number(psfStarSettingsCCD.flareStrength, 'f', 2));
 	settings->setValue("psf_star_bright_source_mag_limit_ccd", QString::number(psfStarSettingsCCD.brightSourceMagLimit, 'f', 1));
+	settings->setValue("psf_moon_glare_reduction_ccd", QString::number(psfStarSettingsCCD.moonGlareReduction, 'f', 2));
+	settings->setValue("flag_psf_moon_halo_texture_ccd", psfStarSettingsCCD.moonHaloTexture);
 	settings->setValue("limit_stellar_magnitude_oculars_val", QString::number(magLimitStarsOculars, 'f', 2));
 	settings->setValue("limit_stellar_magnitude_oculars", flagLimitStarsOculars);
 	settings->setValue("text_color", textColor.toStr());
@@ -690,11 +694,15 @@ void Oculars::init()
 		psfStarSettingsOculars.flareDecay=settings->value("psf_star_flare_decay", 0.1).toDouble();
 		psfStarSettingsOculars.flareStrength=settings->value("psf_star_flare_strength", 1.0).toDouble();
 		psfStarSettingsOculars.brightSourceMagLimit=settings->value("psf_star_bright_source_mag_limit", -8.5).toDouble();
+		psfStarSettingsOculars.moonGlareReduction=settings->value("psf_moon_glare_reduction", 0.85).toDouble();
+		psfStarSettingsOculars.moonHaloTexture=settings->value("flag_psf_moon_halo_texture", true).toBool();
 		psfStarSettingsCCD.projectionCorrection=settings->value("psf_star_projection_correction_ccd", false).toBool();
 		psfStarSettingsCCD.pointRadius=settings->value("psf_star_point_radius_ccd", 1.5).toDouble();
 		psfStarSettingsCCD.flareDecay=settings->value("psf_star_flare_decay_ccd", 0.1).toDouble();
 		psfStarSettingsCCD.flareStrength=settings->value("psf_star_flare_strength_ccd", 1.0).toDouble();
 		psfStarSettingsCCD.brightSourceMagLimit=settings->value("psf_star_bright_source_mag_limit_ccd", -8.5).toDouble();
+		psfStarSettingsCCD.moonGlareReduction=settings->value("psf_moon_glare_reduction_ccd", 0.85).toDouble();
+		psfStarSettingsCCD.moonHaloTexture=settings->value("flag_psf_moon_halo_texture_ccd", true).toBool();
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
 		setFlagShowCcdCropOverlayPixelGrid(settings-> value("ccd_crop_overlay_pixel_grid",false).toBool());
 		setCcdCropOverlayHSize(settings->value("ccd_crop_overlay_hsize", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
@@ -3405,6 +3413,8 @@ Oculars::PsfStarSettings Oculars::getPsfStarSettings(const StelSkyDrawer* skyDra
 	settings.flareDecay = skyDrawer->getPsfStarFlareDecay();
 	settings.flareStrength = skyDrawer->getPsfStarFlareStrength();
 	settings.brightSourceMagLimit = skyDrawer->getPsfStarBrightSourceMagLimit();
+	settings.moonGlareReduction = skyDrawer->getPsfMoonGlareReduction();
+	settings.moonHaloTexture = skyDrawer->getFlagPsfMoonHaloTexture();
 	return settings;
 }
 
@@ -3415,6 +3425,8 @@ void Oculars::applyPsfStarSettings(StelSkyDrawer* skyDrawer, const PsfStarSettin
 	skyDrawer->setPsfStarFlareDecay(settings.flareDecay);
 	skyDrawer->setPsfStarFlareStrength(settings.flareStrength);
 	skyDrawer->setPsfStarBrightSourceMagLimit(settings.brightSourceMagLimit);
+	skyDrawer->setPsfMoonGlareReduction(settings.moonGlareReduction);
+	skyDrawer->setFlagPsfMoonHaloTexture(settings.moonHaloTexture);
 }
 
 double Oculars::computeLimitMagnitude(Ocular *ocular, Telescope *telescope)
